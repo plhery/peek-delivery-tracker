@@ -4,9 +4,10 @@ import { Seal } from '../../components/Seal';
 import { PeekMark } from '../../components/PeekMark';
 import { useI18n, type MessageKey } from '../../i18n';
 import { DEMO_PATH } from '../../lib/experience';
+import { usePublicConfiguration } from '../../lib/publicConfiguration';
 import { usePeekSession } from '../session';
 import { LandingIcon } from './glyphs';
-import { followDemoLink, followInPlace, IOS_APP_URL } from './links';
+import { followDemoLink, followInPlace } from './links';
 import { lazyPicture, useNear, useRise } from './useLive';
 import './More.css';
 
@@ -40,6 +41,7 @@ export function More({ onSignIn, landed }: {
   landed: boolean;
 }) {
   const { t, languageTag } = useI18n();
+  const { iosAppUrl } = usePublicConfiguration();
   const { deliveryEmails, account, openDeliveries } = usePeekSession();
   // Someone signed in already has what the section offers: it leads to their deliveries.
   const mine = account === 'signed-in' && openDeliveries;
@@ -95,7 +97,7 @@ export function More({ onSignIn, landed }: {
             <span>{t('arrival.signInTitle')}{' '}<span className="sr-only">{t('landing.more.signInFor')}</span></span>
           </button>}
         <a className="button button--secondary" href={DEMO_PATH} onClick={followDemoLink}>{t('landing.more.demo')}</a>
-        {IOS_APP_URL && <a className="button button--secondary" href={IOS_APP_URL} target="_blank" rel="noopener noreferrer"><LandingIcon name="iphone" />{t('landing.more.app')}</a>}
+        {iosAppUrl && <a className="button button--secondary" href={iosAppUrl} target="_blank" rel="noopener noreferrer"><LandingIcon name="iphone" />{t('landing.more.app')}</a>}
       </div>
     </div>
   </section>;

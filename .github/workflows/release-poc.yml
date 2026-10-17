@@ -1,0 +1,33 @@
+name: Release POC validation
+
+on:
+  pull_request:
+    paths:
+      - desktop/**
+      - scripts/release/**
+      - scripts/server-package*.mjs
+      - scripts/test-server-package.sh
+      - scripts/test-public-configuration.mjs
+      - packaging/server/**
+      - .github/workflows/*release*.yml
+      - .github/workflows/nightly.yml
+      - package.json
+      - package-lock.json
+      - Dockerfile
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: release-validation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    # No inherited secrets, write permissions, production deploy or publishing.
+    uses: ./.github/workflows/release-build.yml
+    with:
+      channel: nightly
+      publish: false

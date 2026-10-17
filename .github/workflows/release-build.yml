@@ -1,0 +1,397 @@
+name: Build release candidates
+
+on:
+  workflow_call:
+    inputs:
+      channel:
+        type: string
+        required: true
+      version:
+        type: string
+        default: ''
+      source_sha:
+        type: string
+        default: ''
+      publish:
+        type: boolean
+        default: false
+    outputs:
+      skip:
+        value: ${{ jobs.plan.outputs.skip }}
+
+# This reusable workflow must stay callable by read-only fork PR workflows.
+permissions:
+  contents: read
+  actions: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      skip: ${{ steps.plan.outputs.skip }}
+      source_sha: ${{ steps.plan.outputs.source_sha }}
+      version: ${{ steps.plan.outputs.version }}
+      build_number: ${{ steps.plan.outputs.build_number }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PEEK_CHANNEL: ${{ inputs.channel }}
+          PEEK_STABLE_VERSION: ${{ inputs.version }}
+          PEEK_SOURCE_SHA: ${{ inputs.source_sha }}
+          PEEK_PUBLISH: ${{ inputs.publish }}
+          PEEK_PUBLISH_ENABLED: ${{ vars.PEEK_RELEASE_PUBLISH_ENABLED }}
+          PEEK_IMAGE_REPOSITORY: ${{ vars.PEEK_RELEASE_IMAGE_REPOSITORY }}
+        run: node scripts/release/plan.mjs
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: release-plan
+          path: release-plan.json
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 14
+
+  validation:
+    needs: plan
+    if: needs.plan.outputs.skip != 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test:scripts
+      - run: npm run test:release
+      - run: npm run test:server-package
+      - run: npm run test:contract
+      - run: npm run test:dev
+      - run: npm run test:coverage
+      - run: npm run test:coverage:server
+      - run: npm run build
+      - run: node scripts/test-public-configuration.mjs
+      - run: npm run test:deployment
+      - run: npm run test:pwa
+      - run: npm audit --omit=dev
+
+  migrations:
+    needs: plan
+    if: needs.plan.outputs.skip != 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
+        env:
+          POSTGRES_DB: delivery_test
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: --health-cmd "pg_isready -U postgres -d delivery_test" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          persist-credentials: false
+      - run: scripts/test-migrations.sh
+        env:
+          TEST_DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/delivery_test
+
+  browser:
+    needs: plan
+    if: needs.plan.outputs.skip != 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
+          cache: npm
+      - run: npm ci
+      - run: npm run test:e2e -- --shard=${{ matrix.shard }}/8
+
+  scan:
+    needs: plan
+    if: needs.plan.outputs.skip != 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  desktop:
+    needs: [plan, validation, migrations, browser, scan]
+    if: needs.plan.outputs.skip != 'true'
+    runs-on: ${{ matrix.runner }}
+    environment: ${{ inputs.publish && 'peek-release' || 'peek-release-validation' }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { runner: macos-15, platform: mac, arch: arm64 }
+          - { runner: macos-15-intel, platform: mac, arch: x64 }
+          - { runner: windows-2025, platform: win, arch: x64 }
+          - { runner: ubuntu-24.04, platform: linux, arch: x64 }
+    env:
+      PEEK_RELEASE_VERSION: ${{ needs.plan.outputs.version }}
+      PEEK_RELEASE_CHANNEL: ${{ inputs.channel }}
+      PEEK_RELEASE_SHA: ${{ needs.plan.outputs.source_sha }}
+      PEEK_BUILD_NUMBER: ${{ needs.plan.outputs.build_number }}
+      PEEK_PUBLISH: ${{ inputs.publish }}
+      CSC_IDENTITY_AUTO_DISCOVERY: ${{ inputs.publish && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - run: npm ci --ignore-scripts
+      - run: npm --prefix desktop ci
+      - run: npm --prefix desktop run lint
+      - run: npm --prefix desktop run typecheck
+      - run: npm --prefix desktop test
+      - name: Install Linux display libraries
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libgtk-3-0 libnss3 libasound2t64 libgbm1 libxss1 libfuse2t64 xvfb
+      - name: Exercise the Electron client
+        run: |
+          if [ "$RUNNER_OS" = Linux ]; then
+            xvfb-run --auto-servernum npm --prefix desktop run test:smoke
+          else
+            npm --prefix desktop run test:smoke
+          fi
+      - name: Prepare notarization key
+        if: inputs.publish && runner.os == 'macOS'
+        env:
+          APPLE_API_KEY_CONTENT: ${{ secrets.APPLE_API_KEY_CONTENT }}
+        run: |
+          test -n "$APPLE_API_KEY_CONTENT"
+          key_path="$RUNNER_TEMP/AuthKey.p8"
+          printf '%s' "$APPLE_API_KEY_CONTENT" > "$key_path"
+          chmod 600 "$key_path"
+          echo "APPLE_API_KEY=$key_path" >> "$GITHUB_ENV"
+      - name: Package and verify signing policy
+        env:
+          CSC_LINK: ${{ inputs.publish && secrets.CSC_LINK || '' }}
+          CSC_KEY_PASSWORD: ${{ inputs.publish && secrets.CSC_KEY_PASSWORD || '' }}
+          WIN_CSC_LINK: ${{ inputs.publish && secrets.WIN_CSC_LINK || '' }}
+          WIN_CSC_KEY_PASSWORD: ${{ inputs.publish && secrets.WIN_CSC_KEY_PASSWORD || '' }}
+          APPLE_API_KEY_ID: ${{ inputs.publish && secrets.APPLE_API_KEY_ID || '' }}
+          APPLE_API_ISSUER: ${{ inputs.publish && secrets.APPLE_API_ISSUER || '' }}
+        run: |
+          node scripts/release/check-signing.mjs credentials
+          npm --prefix desktop run package -- --${{ matrix.platform }} --${{ matrix.arch }}
+      - name: Remove notarization key
+        if: always() && runner.os == 'macOS'
+        run: rm -f "$RUNNER_TEMP/AuthKey.p8"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: desktop-${{ matrix.platform }}-${{ matrix.arch }}-${{ inputs.publish && 'SIGNED' || 'UNSIGNED' }}
+          path: |
+            desktop/dist/*.dmg
+            desktop/dist/*.exe
+            desktop/dist/*.deb
+            desktop/dist/*.AppImage
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 14
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: desktop-${{ matrix.platform }}-${{ matrix.arch }}-${{ inputs.publish && 'SIGNED' || 'UNSIGNED' }}
+          path: desktop/downloaded
+      - name: Verify final downloaded installer signing
+        env:
+          PEEK_ARTIFACT_DIR: desktop/downloaded
+        run: node scripts/release/check-signing.mjs verify
+
+  image:
+    needs: [plan, validation, migrations, browser, scan]
+    if: needs.plan.outputs.skip != 'true'
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { runner: ubuntu-24.04, arch: amd64 }
+          - { runner: ubuntu-24.04-arm, arch: arm64 }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          persist-credentials: false
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          platforms: linux/${{ matrix.arch }}
+          load: true
+          push: false
+          provenance: false
+          tags: peek-release:${{ matrix.arch }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ needs.plan.outputs.source_sha }}
+            org.opencontainers.image.version=${{ needs.plan.outputs.version }}
+          build-args: |
+            IMAGE_COMMIT=${{ needs.plan.outputs.source_sha }}
+            NEXT_PUBLIC_SUPABASE_URL=https://supabase.invalid
+            NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_ci
+            NEXT_PUBLIC_USE_API=true
+      - name: Exercise each native image and retain it
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          set -euo pipefail
+          docker run -d --name release-test -p 127.0.0.1:3000:3000 \
+            -e SUPABASE_URL=http://supabase.invalid -e SUPABASE_PUBLISHABLE_KEY=test-public-key \
+            -e SUPABASE_SERVICE_ROLE_KEY=test-service-key "peek-release:$ARCH"
+          trap 'docker logs release-test; docker rm -f release-test' EXIT
+          for _ in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:3000/health/live >/dev/null && break
+            sleep 1
+          done
+          SMOKE_EXPECT_READY=false scripts/smoke-url.sh http://127.0.0.1:3000
+          docker exec -i release-test node --input-type=module - < scripts/test-tracking-runtime.mjs
+          docker save "peek-release:$ARCH" --output "image-$ARCH.tar"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: image-${{ matrix.arch }}
+          path: image-${{ matrix.arch }}.tar
+          if-no-files-found: error
+          compression-level: 0
+          overwrite: true
+          retention-days: 7
+
+  server:
+    needs: [plan, validation, migrations, browser, scan]
+    if: needs.plan.outputs.skip != 'true'
+    runs-on: ubuntu-24.04
+    environment: ${{ inputs.publish && 'peek-release' || 'peek-release-validation' }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        format: [deb, apk]
+    env:
+      PEEK_RELEASE_VERSION: ${{ needs.plan.outputs.version }}
+      PEEK_RELEASE_CHANNEL: ${{ inputs.channel }}
+      PEEK_RELEASE_SHA: ${{ needs.plan.outputs.source_sha }}
+      PEEK_BUILD_NUMBER: ${{ needs.plan.outputs.build_number }}
+      PEEK_PUBLISH: ${{ inputs.publish }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.plan.outputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
+      - name: Build a standalone payload using the target distribution
+        run: bash scripts/release/native-server.sh build ${{ matrix.format }}
+      - name: Prepare owner or ephemeral validation APK signing key
+        if: matrix.format == 'apk'
+        env:
+          APK_SIGNING_KEY_CONTENT: ${{ inputs.publish && secrets.APK_SIGNING_KEY_CONTENT || '' }}
+          APK_SIGNING_PUBLIC_KEY_CONTENT: ${{ inputs.publish && secrets.APK_SIGNING_PUBLIC_KEY_CONTENT || '' }}
+        run: node scripts/release/apk-key.mjs
+      - name: Package the native server
+        run: bash scripts/release/native-server.sh package ${{ matrix.format }}
+      - name: Remove APK private key
+        if: always() && matrix.format == 'apk'
+        run: node scripts/release/apk-key.mjs clean
+      - name: Install, exercise, reinstall and remove on a fresh distribution
+        run: bash scripts/release/native-server.sh smoke ${{ matrix.format }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: server-${{ matrix.format }}-${{ inputs.publish && 'OWNER-RELEASE' || 'VALIDATION-ONLY' }}
+          path: |
+            server-dist/*.deb
+            server-dist/*.apk
+            server-dist/*.rsa.pub
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 14
+
+  collect:
+    needs: [plan, desktop, image, server]
+    if: needs.plan.outputs.skip != 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: release-plan
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          pattern: desktop-*
+          path: release-assets
+          merge-multiple: true
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          pattern: image-*
+          path: release-assets
+          merge-multiple: true
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          pattern: server-*
+          path: release-assets
+          merge-multiple: true
+      - run: node scripts/release/collect.mjs
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: ${{ inputs.publish && 'signed-release-candidates' || 'UNSIGNED-validation-only' }}
+          path: release-assets
+          if-no-files-found: error
+          compression-level: 0
+          overwrite: true
+          retention-days: 7

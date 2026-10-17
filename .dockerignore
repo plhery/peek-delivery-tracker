@@ -4,8 +4,14 @@
 .next
 coverage
 dist
+server-dist
 ios
 node_modules
+desktop/node_modules
+desktop/build
+desktop/dist
+desktop/test-results
+desktop/playwright-report
 playwright-report
 test-results
 *.tsbuildinfo

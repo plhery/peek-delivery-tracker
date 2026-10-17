@@ -10,6 +10,7 @@ import { canonicalOrigin, siteHosts } from './src/server/siteHosts';
 import { turnstileSettings } from './src/server/lookupVerification';
 import { nativeAttestSettings } from './src/server/nativeVerification';
 import { appleSignInConfiguration } from './src/server/appleSignIn';
+import { publicConfiguration } from './src/server/publicConfiguration';
 
 // A malformed host setting must stop the deployment, not send visitors elsewhere.
 siteHosts();
@@ -18,6 +19,9 @@ emailSettings();
 turnstileSettings();
 nativeAttestSettings();
 appleSignInConfiguration();
+// Native packages read browser auth settings at runtime too. Invalid or private
+// public credentials must stop startup before the server can appear healthy.
+publicConfiguration();
 // Invalid server-side credentials are a deployment failure. Let initialization
 // fail so an orchestrator cannot mark a process healthy while tracking and
 // notification work is silently disabled.

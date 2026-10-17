@@ -18,6 +18,7 @@ dist/
 *.har
 .DS_Store
 coverage/
+server-dist/
 playwright-report/
 test-results/
 public/sw.js

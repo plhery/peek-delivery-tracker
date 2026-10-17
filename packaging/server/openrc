@@ -1,0 +1,24 @@
+#!/sbin/openrc-run
+name="@PACKAGE_NAME@"
+description="Peek server"
+command="/sbin/tini"
+command_args="-s -- /usr/bin/node /usr/lib/@PACKAGE_NAME@/launcher.mjs"
+command_user="@PACKAGE_NAME@:@PACKAGE_NAME@"
+directory="/usr/lib/@PACKAGE_NAME@/app"
+supervisor="supervise-daemon"
+respawn_delay=5
+respawn_max=5
+respawn_period=60
+stopsig=TERM
+retry="TERM/30/KILL/5"
+output_log="/var/log/@PACKAGE_NAME@/server.log"
+error_log="/var/log/@PACKAGE_NAME@/server.log"
+
+depend() {
+  need net
+  after firewall
+}
+
+start_pre() {
+  /sbin/start-stop-daemon --start --quiet --user "@PACKAGE_NAME@:@PACKAGE_NAME@" --exec /usr/bin/node -- /usr/lib/@PACKAGE_NAME@/launcher.mjs --check-environment
+}

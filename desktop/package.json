@@ -1,0 +1,42 @@
+{
+  "name": "peek-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Peek desktop client for your Peek server",
+  "author": {
+    "name": "Paul-Louis HERY",
+    "email": "paullouis.hery@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/plhery/peek-delivery-tracker",
+  "type": "module",
+  "main": "build/main.cjs",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "npm run build && node scripts/start.mjs",
+    "package": "npm run build && electron-builder --config electron-builder.mjs --publish never",
+    "test": "node --test src/*.test.ts",
+    "test:smoke": "npm run prepare:electron && npm run build && playwright test",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0",
+    "prepare:electron": "install-electron"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2",
+    "electron": "44.8.0",
+    "electron-builder": "26.15.3",
+    "esbuild": "0.28.2",
+    "eslint": "10.12.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.2",
+    "zod": "4.6.7"
+  },
+  "overrides": {
+    "global-agent": "4.1.3"
+  }
+}

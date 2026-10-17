@@ -7,6 +7,9 @@ processes with Tini. Update the image and deploy it to change the browser runtim
 The official instance runs at
 `https://peektracker.com`, behind Cloudflare.
 
+The release POC also provides [native Debian and Alpine server packages](SERVER_PACKAGES.md)
+that run the same standalone server without Docker.
+
 ## Requirements
 
 - A Supabase stack and a tested backup/restore path.
@@ -55,7 +58,7 @@ Follow [AUTHENTICATION.md](AUTHENTICATION.md). In short:
 
 ## 3. Build and run
 
-Public Supabase values are build arguments:
+The Dockerfile accepts public Supabase values for its build validation:
 
 ```bash
 docker build \
@@ -66,7 +69,7 @@ docker build \
 
 The build fails early unless API mode is on and at least one sign-in method is enabled.
 
-`NEXT_PUBLIC_IOS_APP_URL` is an optional build argument: the https address of the iPhone
+`NEXT_PUBLIC_IOS_APP_URL` is an optional runtime setting: the HTTPS address of the iPhone
 app's page. The landing shows "Get the iPhone app" only when it is set.
 
 `IMAGE_COMMIT` is an optional build argument too: the full commit the image is built from.
@@ -92,7 +95,12 @@ docker run -d --name delivery-tracker --restart unless-stopped \
   --env-file .env -p 3000:3000 delivery-tracker
 ```
 
-The public Supabase values must be the same at build time and at runtime.
+The server reads browser auth settings at request time. Set `SUPABASE_PUBLIC_URL` when
+the browser-facing Supabase origin differs from `SUPABASE_URL`; the legacy runtime
+`NEXT_PUBLIC_SUPABASE_URL` is also supported. Set `SUPABASE_PUBLISHABLE_KEY` and the
+`NEXT_PUBLIC_AUTH_*` settings at runtime. Only the explicit public configuration is
+passed to the browser. Changing instance settings does not require rebuilding, but
+API/demo mode remains a build choice.
 
 **Links that open in the iPhone app.** `/.well-known/apple-app-site-association` lets iOS
 open parcel links and invitations (`/p/…`, `/i/…`, `/invite`) in the app. It names the app

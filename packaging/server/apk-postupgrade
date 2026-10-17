@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+name='@PACKAGE_NAME@'
+@POSTINSTALL@
+if [ -f "/run/$name.was-running" ]; then
+  rm "/run/$name.was-running"
+  rc-service "$name" start
+fi

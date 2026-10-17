@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+name='@PACKAGE_NAME@'
+if rc-service "$name" status >/dev/null 2>&1; then
+  touch "/run/$name.was-running"
+  rc-service "$name" stop
+fi

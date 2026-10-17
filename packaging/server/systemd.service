@@ -1,0 +1,25 @@
+[Unit]
+Description=Peek server (@PACKAGE_NAME@)
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/etc/@PACKAGE_NAME@/server.env
+
+[Service]
+Type=simple
+User=@PACKAGE_NAME@
+Group=@PACKAGE_NAME@
+WorkingDirectory=/usr/lib/@PACKAGE_NAME@/app
+ExecStart=/usr/bin/tini -s -- /usr/lib/@PACKAGE_NAME@/runtime/bin/node /usr/lib/@PACKAGE_NAME@/launcher.mjs
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+KillMode=control-group
+UMask=0027
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/@PACKAGE_NAME@ /var/cache/@PACKAGE_NAME@ /var/log/@PACKAGE_NAME@
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

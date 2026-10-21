@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+name='@PACKAGE_NAME@'
+if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then
+  if [ "${1:-}" = upgrade ] && systemctl is-active --quiet "$name.service"; then
+    touch "/run/$name.was-running"
+  fi
+  systemctl stop "$name.service"
+  if [ "${1:-}" = remove ]; then systemctl disable "$name.service"; fi
+fi

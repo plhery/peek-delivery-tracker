@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import '../src/styles.css';
-import { authConfigFromEnvironment } from '../src/auth/authConfig';
+import { PublicConfigurationProvider } from '../src/lib/publicConfiguration';
 import { APPEARANCE_BOOTSTRAP } from '../src/lib/appearanceConfig';
 import { ENTRY_HINT_BOOTSTRAP } from '../src/lib/entryHintConfig';
 import { ERROR_REPORTS_META } from '../src/lib/errorReportsConfig';
 import { documentLanguage, manifestPath } from '../src/lib/locale';
 import { browserErrorReporting } from '../src/server/browserErrors';
+import { publicConfiguration } from '../src/server/publicConfiguration';
 import { requestLocale } from '../src/server/requestLocale';
 import { requestOrigin } from '../src/server/requestOrigin';
 import { PREVIEW_LOCALES, sitePicture, siteTitle, wordsIn } from '../src/server/sitePreview';
@@ -52,26 +53,22 @@ export const viewport: Viewport = {
   themeColor: '#F4F5F1',
 };
 
-// A returning account refreshes its sign-in there first; open the connection while the page loads.
-const authOrigin = authConfigFromEnvironment({
-  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  supabasePublishableKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
-})?.url;
-
 export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const locale = await requestLocale();
+  const configuration = publicConfiguration();
   // Where the page's scripts report their errors. A page keeps it with the scripts it loaded, so
   // a page open across a deploy still names the release its scripts belong to.
   const errorReports = browserErrorReporting();
   return (
-    <html lang={documentLanguage(await requestLocale())} suppressHydrationWarning>
+    <html lang={documentLanguage(locale)} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: APPEARANCE_BOOTSTRAP }} />
         {/* Tells the stylesheet, before anything is painted, who is about to see the landing. */}
         <script dangerouslySetInnerHTML={{ __html: ENTRY_HINT_BOOTSTRAP }} />
-        {authOrigin && <link rel="preconnect" href={authOrigin} crossOrigin="anonymous" />}
+        {configuration.auth && <link rel="preconnect" href={configuration.auth.url} crossOrigin="anonymous" />}
         {errorReports && <meta name={ERROR_REPORTS_META} content={JSON.stringify(errorReports)} />}
       </head>
-      <body>{children}</body>
+      <body><PublicConfigurationProvider value={configuration}>{children}</PublicConfigurationProvider></body>
     </html>
   );
 }

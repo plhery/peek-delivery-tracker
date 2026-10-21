@@ -45,7 +45,9 @@
     "lint": "eslint . --max-warnings=0",
     "lint:frontend": "npm run lint",
     "typecheck": "tsc --noEmit",
-    "validate:production-config": "node scripts/validate-production-config.mjs"
+    "validate:production-config": "node scripts/validate-production-config.mjs",
+    "test:release": "node --test scripts/release/*.test.mjs",
+    "test:server-package": "node --test scripts/server-package.test.mjs"
   },
   "dependencies": {
     "@prometheus-io/client": "^0.16.1",
@@ -91,6 +93,8 @@
     "jsdom": "^30.1.2",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite": "^8.3.3",
-    "vitest": "^5.0.3"
+    "vitest": "^5.0.3",
+    "yaml": "2.9.1",
+    "zod": "4.6.7"
   }
 }

@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+name='@PACKAGE_NAME@'
+if rc-service "$name" status >/dev/null 2>&1; then rc-service "$name" stop; fi
+if rc-update show default | awk -v service="$name" '$1 == service { found = 1 } END { exit !found }'; then rc-update del "$name" default; fi

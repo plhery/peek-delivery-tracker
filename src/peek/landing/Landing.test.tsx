@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { I18nProvider, loadMessages } from '../../i18n';
+import { PublicConfigurationProvider } from '../../lib/publicConfiguration';
 import { scroll, stubIntersections } from '../../test/intersections';
 import { PeekSessionProvider } from '../session';
 import { Landing } from './Landing';
@@ -96,7 +97,7 @@ describe('Landing', () => {
     window.removeEventListener('popstate', arrived);
   });
 
-  it('offers the iPhone app only to a build that names its page', async () => {
+  it('offers the iPhone app only when the running server names its page', async () => {
     render(<Landing onSignIn={onSignIn} />);
     expect(screen.queryByRole('link', { name: 'Get the iPhone app' })).not.toBeInTheDocument();
     const { publicLink } = await import('./links');
@@ -105,10 +106,7 @@ describe('Landing', () => {
     // Nothing but a secure address becomes a link.
     for (const value of [undefined, '', 'http://apps.example.test/peek', 'javascript:alert(1)', 'apps.example.test']) expect(publicLink(value)).toBeNull();
 
-    vi.resetModules();
-    vi.stubEnv('NEXT_PUBLIC_IOS_APP_URL', 'https://apps.example.test/peek');
-    const fresh = await import('./More');
-    render(<fresh.More onSignIn={onSignIn} landed={false} />);
+    render(<PublicConfigurationProvider value={{ auth: null, iosAppUrl: 'https://apps.example.test/peek' }}><Landing onSignIn={onSignIn} /></PublicConfigurationProvider>);
     expect(screen.getByRole('link', { name: 'Get the iPhone app' })).toHaveAttribute('href', 'https://apps.example.test/peek');
   });
 

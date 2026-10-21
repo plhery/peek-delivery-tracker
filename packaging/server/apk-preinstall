@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+name='@PACKAGE_NAME@'
+if ! getent group "$name" >/dev/null; then addgroup -S "$name"; fi
+if ! getent passwd "$name" >/dev/null; then adduser -S -D -H -h "/var/lib/$name" -s /sbin/nologin -G "$name" "$name"; fi

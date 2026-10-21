@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+name='@PACKAGE_NAME@'
+install -d -o "$name" -g "$name" -m 0750 "/var/lib/$name" "/var/log/$name"
+install -d -o root -g root -m 0755 "/var/cache/$name"
+for directory in "/var/cache/$name/next" "/var/cache/$name/browser"; do
+  if [ -L "$directory" ]; then
+    echo "Refusing a symlink at $directory" >&2
+    exit 1
+  fi
+  install -d -o "$name" -g "$name" -m 0750 "$directory"
+done
+chown root:"$name" "/etc/$name/server.env"
+chmod 0640 "/etc/$name/server.env"

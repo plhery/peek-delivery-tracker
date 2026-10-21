@@ -1,0 +1,31 @@
+:root { color-scheme: light; font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif; color: #24271f; background: #fffaf0; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+header { height: 76px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; border-block-end: 1px solid #e5dfd2; background: #fffaf0; }
+.brand, .connection { display: flex; align-items: center; gap: 12px; }
+.brand strong { font-size: 23px; letter-spacing: -.8px; }
+#channel { font-size: 12px; text-transform: capitalize; }
+#server-label { font-size: 12px; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+main { width: min(540px, calc(100% - 64px)); margin: clamp(40px, 9vh, 100px) auto 80px; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; color: #5a644b; }
+h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1.08; letter-spacing: -2px; margin-block: 20px; font-weight: 650; }
+p { font-size: 16px; line-height: 1.6; color: #555c4b; }
+form { margin-block-start: 38px; }
+label { display: block; font-size: 15px; font-weight: 650; }
+#server-help { font-size: 13px; margin-block: 8px 16px; max-width: 420px; }
+input { width: 100%; padding: 15px 16px; border: 1px solid #a29f90; border-radius: 7px; background: #fffdf7; color: #24271f; font: inherit; font-size: 16px; }
+input[aria-invalid="true"] { border-color: #a33121; }
+button { min-height: 44px; padding: 10px 15px; border: 1px solid #a29f90; border-radius: 6px; background: transparent; color: #303627; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+button:hover { background: #f0eadb; }
+button:disabled { cursor: wait; opacity: .65; }
+.primary { background: #f3cf48; border-color: #ceb03d; min-height: 48px; padding-inline: 20px; font-size: 15px; }
+.primary:hover { background: #e8c33b; }
+#connect { display: flex; width: 100%; align-items: center; justify-content: space-between; }
+:focus-visible { outline: 3px solid #526f35; outline-offset: 3px; }
+.error { color: #9b3023; min-height: 22px; font-size: 13px; margin-block: 6px 10px; }
+.privacy { font-size: 12px; margin-block-start: 22px; }
+.actions { display: flex; gap: 12px; margin-block-start: 28px; }
+footer { position: fixed; inset-block-end: 16px; inset-inline: 28px; color: #626957; font-size: 11px; overflow-wrap: anywhere; }
+body[data-mode="connected"] footer { display: none; }
+@media (max-width: 700px) { header { padding-inline: 18px; } #server-label { display: none; } h1 { letter-spacing: -1px; } main { margin-block-start: 42px; } }

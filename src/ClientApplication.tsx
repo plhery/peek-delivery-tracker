@@ -6,7 +6,7 @@ import { useEffect, useMemo } from 'react';
 import { accountCode } from './accountCode';
 import { ApiApplication } from './ApiApplication';
 import { AuthProvider } from './auth/AuthContext';
-import { authConfigFromEnvironment } from './auth/authConfig';
+import { usePublicConfiguration } from './lib/publicConfiguration';
 import { I18nProvider, useI18n, type Locale, type Messages } from './i18n';
 import { isDemoBuild } from './lib/buildMode';
 import { useFollowLanguage } from './lib/followLanguage';
@@ -27,16 +27,6 @@ import { useVisitorSession } from './peek/visitor';
 import type { ParcelRepo } from './types';
 
 export { shouldUseDemoRepository } from './lib/buildMode';
-
-const authConfig = authConfigFromEnvironment({
-  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  supabasePublishableKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
-  googleEnabled: process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED,
-  appleEnabled: process.env.NEXT_PUBLIC_AUTH_APPLE_ENABLED,
-  emailOtpEnabled: process.env.NEXT_PUBLIC_AUTH_EMAIL_OTP_ENABLED,
-  oidcProvider: process.env.NEXT_PUBLIC_AUTH_OIDC_PROVIDER,
-  oidcName: process.env.NEXT_PUBLIC_AUTH_OIDC_NAME,
-});
 
 interface ApplicationProps {
   invitationRoute?: boolean;
@@ -61,6 +51,7 @@ export function ClientApplication({ movedTo, ...props }: ApplicationProps & {
 }
 
 function Application({ invitationRoute = false, parcelLinkId = null, demoRoute = false, landingRoute = false, deliveryEmails = false, initialLocale, initialMessages }: ApplicationProps) {
+  const { auth } = usePublicConfiguration();
   // A browser that will open on the account's screens, or on its own parcels, comes alive with their code in hand.
   accountCode.useEarly();
   parcelCode.useEarly();
@@ -93,7 +84,7 @@ function Application({ invitationRoute = false, parcelLinkId = null, demoRoute =
       <AlertLanguage />
       <AppearanceProvider>
       {demoRepo ? <DemoApplication repo={demoRepo} invitationRoute={invitationRoute} parcelLinkId={parcelLinkId} demoRoute={demoRoute} landingRoute={landingRoute} /> : (
-        <AuthProvider config={authConfig}>
+        <AuthProvider config={auth}>
           <ApiApplication invitationRoute={invitationRoute} parcelLinkId={parcelLinkId} demoRoute={demoRoute} landingRoute={landingRoute} deliveryEmails={deliveryEmails} />
         </AuthProvider>
       )}

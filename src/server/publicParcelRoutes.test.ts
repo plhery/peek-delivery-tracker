@@ -160,6 +160,7 @@ beforeEach(() => {
   wake = vi.spyOn(background, 'wakeSyncWorker').mockImplementation(() => undefined);
   vi.spyOn(SupabaseServiceClient.prototype, 'updatePackage').mockResolvedValue(undefined);
   enqueue = vi.spyOn(SupabaseServiceClient.prototype, 'enqueueSyncJob').mockResolvedValue({ row: { id: 'job' }, queued: true });
+  vi.spyOn(SupabaseServiceClient.prototype, 'ignoreTypedTrackingSupportCases').mockResolvedValue(0);
 });
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllEnvs(); });
 
@@ -203,6 +204,9 @@ describe('looking up a parcel without an account', () => {
     expect(wake).toHaveBeenCalledOnce();
     expect(counted).toHaveBeenCalledExactlyOnceWith('created');
     expect(authenticate).not.toHaveBeenCalled();
+    // Cases detection opened on the start of the number, as it was typed, close.
+    expect(SupabaseServiceClient.prototype.ignoreTypedTrackingSupportCases)
+      .toHaveBeenCalledExactlyOnceWith(trackingNumber, expect.any(Date), expect.any(String), expect.any(String));
   });
 
   it('saves a trusted visitor country only for a newly created lookup', async () => {

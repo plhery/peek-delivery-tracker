@@ -4,6 +4,7 @@ import { apiRoute, clientIp, HttpError, json, readJsonBody, requireService, type
 import { wakeSyncWorker } from '../../../../src/server/background';
 import { lookupCountry, rememberLookupCountry } from '../../../../src/server/lookupCountry';
 import { recordPublicLookup, type PublicLookupOutcome } from '../../../../src/server/metrics';
+import { settleTypedSupportCases } from '../../../../src/server/reviewQueues';
 import { logOperationalEvent } from '../../../../src/server/observability';
 import {
   claimLookup,
@@ -59,6 +60,7 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage }): Pr
   const key = newOwnerKey();
   const created = await service.createOneOffParcel(values, ownerKeyHash(key)!);
   if (created.created) await rememberLookupCountry(service, created.package, context.request, body.lookupCountryHint);
+  await settleTypedSupportCases(service, values.trackingNumber);
   recordLookup(created.created ? 'created' : 'reused', context.requestId);
   try {
     await service.enqueueSyncJob({ packageId: String(created.package.id), reason: 'added' });

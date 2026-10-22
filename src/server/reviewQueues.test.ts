@@ -8,9 +8,10 @@ import {
   replayReviewQueues,
   replaySupportCase,
   ReviewQueueReplay,
+  settleTypedSupportCases,
   statusMapClosings,
 } from './reviewQueues';
-import { SupabaseError, type SupabaseServiceClient } from './supabase';
+import { SupabaseError, SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
 
 const scraper = `universal-parcel-scraper@${manifest.dependencies['universal-parcel-scraper']}`;
@@ -69,6 +70,22 @@ const SUMMARY = {
 afterEach(() => {
   vi.useRealTimers();
   vi.restoreAllMocks();
+});
+
+describe('cases on the start of a number just saved', () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it('closes those only detection saw within the hour, and logs a failure without the number', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const ignore = vi.spyOn(client, 'ignoreTypedTrackingSupportCases').mockResolvedValueOnce(1).mockRejectedValueOnce(new Error('timeout'));
+    const log = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const now = new Date('2026-10-22T12:00:00Z');
+    await settleTypedSupportCases(client, 'ZZ00123456', now);
+    expect(ignore).toHaveBeenCalledExactlyOnceWith('ZZ00123456', new Date('2026-10-22T11:00:00Z'), deployedVersion(), expect.stringContaining('typed'));
+    await settleTypedSupportCases(client, 'ZZ00123456', now);
+    expect(log).toHaveBeenCalledOnce();
+    expect(String(log.mock.calls[0][0])).not.toContain('ZZ00123456');
+  });
 });
 
 describe('review queue replay', () => {

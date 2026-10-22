@@ -908,6 +908,21 @@ describe('notification reads', () => {
     expect(page.get('limit')).toBe('1');
   });
 
+  it('marks ignored the open cases on the start of a number that only detection saw lately', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValue([{ id: 'case' }]);
+    await expect(client.ignoreTypedTrackingSupportCases('ZZ00123', new Date('2026-10-22T11:00:00Z'), 'version', 'note')).resolves.toBe(1);
+    const page = new URL(`https://database.example${String(request.mock.calls[0]![0])}`).searchParams;
+    expect(page.get('tracking_number')).toBe('in.("ZZ00","ZZ001","ZZ0012")');
+    expect(page.get('fix_status')).toBe('eq.open');
+    expect(page.get('last_outcome')).toBe('in.(detection_unknown,detection_choice)');
+    expect(page.get('last_seen')).toBe('gte.2026-10-22T11:00:00.000Z');
+    expect(request.mock.calls[0]![1]).toMatchObject({ method: 'PATCH', body: { fix_status: 'ignored', fix_reference: 'version', notes: 'note' } });
+    // A number of four characters starts no shorter one a case could hold.
+    await expect(client.ignoreTypedTrackingSupportCases('ZZ00', new Date(), 'version', 'note')).resolves.toBe(0);
+    expect(request).toHaveBeenCalledOnce();
+  });
+
   it('reads the unarchived parcels of accounts, with what tells which legs may be merged', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue([

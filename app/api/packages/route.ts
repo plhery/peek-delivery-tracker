@@ -15,6 +15,7 @@ import { SupabaseError } from '../../../src/server/supabase';
 import { wakeSyncWorker } from '../../../src/server/background';
 import { lookupCountry, rememberLookupCountry } from '../../../src/server/lookupCountry';
 import { checkAccountRequest } from '../../../src/server/nativeVerification';
+import { settleTypedSupportCases } from '../../../src/server/reviewQueues';
 import { newPackageValues } from '../../../src/server/validation';
 
 export const dynamic = 'force-dynamic';
@@ -72,6 +73,7 @@ export const POST = apiRoute(async (context) => {
   if (!parcel) throw new SupabaseError('The new package could not be reloaded');
 
   await rememberLookupCountry(service, parcel, context.request, body.lookupCountryHint);
+  await settleTypedSupportCases(service, values.trackingNumber);
   const jobIds: string[] = [];
   try {
     const job = await service.enqueueSyncJob({

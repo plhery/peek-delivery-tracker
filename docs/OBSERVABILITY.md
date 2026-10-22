@@ -172,8 +172,10 @@ Invalid, refused and cancelled checks do not create observations, and neither do
 start of a longer number the same person saved, which is most likely that number typed
 again: the server looks for one among the account's parcels, and the front door and the
 iPhone without an account flag one their device follows (`prefixOfSaved`). When the
-account check fails, the case opens. A failed backlog write does not change the detection
-answer. `carrier_detection_support` logs the number and
+account check fails, the case opens. The other way round, saving a number closes the open
+cases on its start that only detection saw within the hour before: a case has no owner,
+so the hour stands in for the same person. A failed backlog write does not change the
+detection answer. `carrier_detection_support` logs the number and
 the carriers asked, unanswered or offered as choices.
 
 Recognition asks some carriers, FedEx among them, only through a browser, and skips them

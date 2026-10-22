@@ -1383,6 +1383,25 @@ export class SupabaseServiceClient extends SupabaseClient {
     return ignored;
   }
 
+  /**
+   * Marks ignored the open cases on the start of this number that only detection saw, since
+   * `since`: that number being typed before it was saved. Answers how many.
+   */
+  async ignoreTypedTrackingSupportCases(trackingNumber: string, since: Date, version: string, note: string): Promise<number> {
+    const starts = Array.from({ length: Math.max(0, trackingNumber.length - 4) }, (_, index) => trackingNumber.slice(0, index + 4));
+    if (!starts.length) return 0;
+    const params = query([
+      ['tracking_number', `in.(${starts.map((start) => `"${start}"`).join(',')})`],
+      ['fix_status', 'eq.open'],
+      ['last_outcome', 'in.(detection_unknown,detection_choice)'],
+      ['last_seen', `gte.${since.toISOString()}`],
+    ]);
+    return rows(await this.request(`/rest/v1/tracking_support_cases?${params}`, {
+      method: 'PATCH', prefer: 'return=representation', timeoutMs: 2_000,
+      body: { fix_status: 'ignored', fix_reference: version.slice(0, 500), notes: note.slice(0, 4000) },
+    })).length;
+  }
+
   /** Marks fixed the replayed cases still open with the same configured carrier; answers how many. */
   async fixReplayedTrackingSupportCases(
     version: string,

@@ -579,7 +579,11 @@ export class TrackingRouter {
       // A provider's "not found" holds for a day. A carrier often doesn't know a
       // label before its first scan, so its own "not found" is asked again within hours.
       const daily = kind === 'not_found' && universalSource;
-      const base = daily ? DAY : ['verification', 'schema', 'invalid_input', 'not_found'].includes(kind) ? HOUR : 15 * 60_000;
+      // A carrier's bot check comes and goes, as a lost connection does: its own adapter is asked again
+      // as soon, and the wait still doubles while every read meets one. A provider's refusal holds an hour.
+      const hourly = ['verification', 'schema', 'invalid_input', 'not_found'].includes(kind)
+        && !(kind === 'verification' && !universalSource && carrierErrorKind(error) === 'challenge');
+      const base = daily ? DAY : hourly ? HOUR : 15 * 60_000;
       const userError = trackingFailureCode(error);
       const failure = { count, kind, ...(userError ? { user_error: userError } : {}), retry_at: iso(now().getTime() + Math.max(retryAfterMs, Math.min(daily ? DAY : 6 * HOUR, base * 2 ** (count - 1)))) };
       state.failures[provider] = failure;

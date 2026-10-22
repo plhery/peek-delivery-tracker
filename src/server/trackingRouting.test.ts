@@ -621,6 +621,28 @@ describe('persistent tracking routing', () => {
     await next.router.fetch(parcel({ carrier: 'australia-post', carrier_data: { routing } }), false).catch(() => null);
     expect(next.direct).not.toHaveBeenCalled();
   });
+  it('asks a carrier whose read met a bot check again as after a lost connection, a provider after an hour', async () => {
+    fixedPlan('Ship24');
+    const challenged = (now?: Date) => {
+      const checked = setup(now);
+      checked.direct.mockRejectedValue(new ChallengeError('FedEx'));
+      checked.universal.mockRejectedValue(new ChallengeError('Ship24'));
+      return checked;
+    };
+    const first = challenged();
+    const deferred = await first.router.fetch(parcel({ carrier: 'fedex' }), false).catch((error: unknown) => error);
+    const routing = (deferred as RoutingDeferred).routing;
+    expect(routing.failures).toEqual({
+      fedex: { kind: 'verification', count: 1, user_error: 'carrier:challenge', retry_at: '2026-09-10T12:15:00.000Z' },
+      Ship24: { kind: 'verification', count: 1, user_error: 'carrier:challenge', retry_at: '2026-09-10T13:00:00.000Z' },
+    });
+    // While every read meets one, the wait doubles.
+    const next = challenged(new Date('2026-09-10T12:15:00Z'));
+    const again = await next.router.fetch(parcel({ carrier: 'fedex', carrier_data: { routing } }), false).catch((error: unknown) => error);
+    expect(next.direct).toHaveBeenCalledOnce();
+    expect((again as RoutingDeferred).routing.failures.fedex).toEqual({ kind: 'verification', count: 2,
+      user_error: 'carrier:challenge', retry_at: '2026-09-10T12:45:00.000Z' });
+  });
   it('uses a universal carrier hint only after a matching direct lookup succeeds', async () => {
     const { router, direct } = setup();
     const result = await router.fetch(parcel({ carrier_data: { routing: state({ discovered_carrier: 'ups' }) } }), false);

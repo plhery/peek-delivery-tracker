@@ -10,6 +10,8 @@ export interface HealthSample extends JsonObject {
   subject: string;
   healthy: boolean;
   details: JsonObject;
+  /** A failure its lookup answered past, through a retry or another step: still counted, never a refresh's evidence. */
+  recovered?: boolean;
 }
 const observations = new AsyncLocalStorage<Map<string, HealthSample>>();
 /**
@@ -60,9 +62,13 @@ function save(kind: 'provider' | 'direct', record: StepRecord | LookupRecord): v
   if (!store) return;
   const key = `${kind}:${record.carrier}`;
   const previous = store.get(key);
-  // A retry cannot count as another lookup or erase the original failed direct attempt.
-  if (previous && !previous.healthy) return;
   const outcome = category(record);
+  // A retry cannot count as another lookup or erase the original failed direct attempt: one
+  // that answered only marks it recovered.
+  if (previous && !previous.healthy) {
+    if (answered.has(outcome)) previous.recovered = true;
+    return;
+  }
   store.set(key, { kind, subject: record.carrier.slice(0, 100), healthy: answered.has(outcome), details: details(record, outcome) });
 }
 export const healthStepRecorder = {
@@ -72,6 +78,9 @@ export const healthStepRecorder = {
     // carrier whose one step is another (dpd-fr's browser) keeps a direct sample it recorded.
     if (record.stepsAvailable === 1 && record.finalStep === 'direct') observations.getStore()?.delete(`direct:${record.carrier}`);
     save('provider', record);
+    // The lookup answered after its direct step failed: a later step, such as a retry, recovered it.
+    const direct = observations.getStore()?.get(`direct:${record.carrier}`);
+    if (direct && !direct.healthy && observations.getStore()?.get(`provider:${record.carrier}`)?.healthy) direct.recovered = true;
   },
 };
 export function observeTrackingHealth<T>(samples: Map<string, HealthSample>, operation: () => Promise<T>): Promise<T> {

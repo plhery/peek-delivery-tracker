@@ -178,6 +178,36 @@ it('keeps the failing tier as refresh evidence when the attempt only reports a d
       details: expect.objectContaining({ error_type: 'UpstreamNetworkError' }) })]));
 });
 
+it('leaves a direct failure its lookup recovered from out of the refresh evidence', async () => {
+  const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),
+    recordTrackingHealth: vi.fn().mockResolvedValue([]), ackTrackingHealth: vi.fn() };
+  const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+    'synthetic-package', 'TEST1234', 'unknown', 'in_transit', { trigger: 'scheduled' });
+  await audit.observeFetch(async () => {
+    // The direct step's network error, then a retry the carrier answers without history.
+    healthStepRecorder.step({ ...step, carrier: 'happy-post' });
+    healthStepRecorder.step({ ...step, carrier: 'happy-post', step: 'retry', attempt: 2, outcome: 'not_found', errorType: 'NoHistoryError' });
+    healthStepRecorder.lookup({ carrier: 'happy-post', finalStep: 'retry', outcome: 'not_found', errorType: 'NoHistoryError', durationMs: 300, attempts: 2 });
+  });
+  const deferred = Object.assign(new Error('every provider failed'), { name: 'RoutingDeferredError' });
+  await audit.finish({ outcome: 'error', error: deferred, providerFailures: { 'happy-post': { kind: 'no_history' } } });
+  const samples = client.recordTrackingHealth.mock.lastCall![2] as JsonObject[];
+  // The direct step still counts as failed for its own incident.
+  expect(samples).toContainEqual(expect.objectContaining({ kind: 'direct', subject: 'happy-post', healthy: false, recovered: true }));
+  expect(samples.find((sample) => sample.kind === 'refresh')).toMatchObject({ healthy: false,
+    details: { error_type: 'RoutingDeferredError', provider_failures: 'happy-post:no_history' } });
+  expect((samples.find((sample) => sample.kind === 'refresh')!.details as JsonObject).step).toBeUndefined();
+});
+
+it('marks a failed lookup recovered once a retry of it answers', async () => {
+  const samples = new Map<string, HealthSample>();
+  await observeTrackingHealth(samples, async () => {
+    healthStepRecorder.lookup({ carrier: 'ups', finalStep: 'direct', outcome: 'transport', errorType: 'UpstreamNetworkError', durationMs: 1, attempts: 1 });
+    healthStepRecorder.lookup({ carrier: 'ups', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
+  });
+  expect(samples.get('provider:ups')).toMatchObject({ healthy: false, recovered: true });
+});
+
 it('gives a failed refresh the anomaly and each provider\'s failure kind as evidence', async () => {
   const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),
     recordTrackingHealth: vi.fn().mockResolvedValue([]), ackTrackingHealth: vi.fn() };

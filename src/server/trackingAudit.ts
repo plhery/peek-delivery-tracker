@@ -381,10 +381,11 @@ export class TrackingSyncAudit {
       const healthy = refused || (completion.outcome !== 'error' && !failedFetch);
       const samples: JsonObject[] = [...this.#healthSamples.values(), {
         kind: 'refresh', subject: this.configuredCarrier, healthy,
-        // The failing tier's own error class is better evidence than the attempt's summary.
+        // The failing tier's own error class is better evidence than the attempt's summary, unless
+        // its lookup recovered from it.
         details: refused ? { category: 'input_required', ...refreshEvidence(completion) }
           : { ...(values.error_type ? { error_type: values.error_type } : {}),
-            ...[...this.#healthSamples.values()].reverse().find(sample => !sample.healthy)?.details,
+            ...[...this.#healthSamples.values()].reverse().find(sample => !sample.healthy && !sample.recovered)?.details,
             ...(healthy ? {} : refreshEvidence(completion)) },
       }];
       await this.writeAudit('evaluate_health', async () => {

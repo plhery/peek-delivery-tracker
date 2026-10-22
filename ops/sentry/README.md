@@ -8,7 +8,9 @@ hold only provider ids, outcome categories, HTTP statuses and opaque ids. A samp
 own, such as not-found, has none. A failed refresh's sample also names the check's anomaly
 codes (`progress_disappeared` when an answer lost the saved progress without an error) and
 routing's failure kind for each provider and carrier (`provider_failures`), which become a
-refresh incident's evidence.
+refresh incident's evidence, with the error of the last tier that failed. A tier its lookup
+answered past, a direct step whose retry or browser step answered, is still counted against
+its own transport but is never a refresh's evidence.
 
 Individual attempts, retries and fallbacks go to logs, metrics and Prometheus instead. A
 failure that recovers never opens an issue. See [OBSERVABILITY.md](../../docs/OBSERVABILITY.md).

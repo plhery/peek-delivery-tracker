@@ -19,7 +19,7 @@ export const REDETECTION_WINDOW_MS = 30 * 24 * 60 * 60 * 1_000;
 export const RELEASE_REASK_MS = 12 * 60 * 60 * 1_000;
 
 /**
- * The carrier the catalog's current rules point an open parcel to, when the
+ * The carrier the catalog's current rules point a parcel to, when the
  * parcel was last routed with other rules and has not asked that carrier yet:
  * one added or last checked before a scraper release brought a detection rule,
  * a carrier name or an adapter, which nobody may check any more (a lookup
@@ -34,7 +34,9 @@ export const RELEASE_REASK_MS = 12 * 60 * 60 * 1_000;
  * can open a browser waits until the parcel has gone RELEASE_REASK_MS without a
  * check, unless the answer it gave, set aside as older than the parcel or on
  * local clocks, would now be taken. Null otherwise. Only parcels filed under no carrier, or showing a
- * universal provider's history, are looked at. Nothing is sent: the check
+ * universal provider's history, are looked at; a delivered or returned one only when it is
+ * filed under no carrier, for a carrier with an adapter of its own that a provider named
+ * and it never asked. Nothing is sent: the check
  * queued for the parcel asks the carrier. Carriers in `refused` are passed
  * over (rerouteAskable).
  */
@@ -62,8 +64,8 @@ function rerouteLead(parcel: JsonObject, rules: string, now: number, refused: Re
   const number = String(parcel.tracking_number ?? '');
   const unfiled = filed === 'unknown' || filed === 'intl-post';
   const provider = typeof data.tracking_provider === 'string';
-  if (routing.rules === rules || data.original_carrier || (!unfiled && !provider)
-    || ['delivered', 'returned'].includes(String(parcel.current_stage))) return null;
+  const finished = ['delivered', 'returned'].includes(String(parcel.current_stage));
+  if (routing.rules === rules || data.original_carrier || (!unfiled && !provider) || (finished && !unfiled)) return null;
   // A carrier that refused the number under an older release counts as not asked:
   // this release's adapter may take it (rerouteAskable checks).
   const refusedBefore = (carrier: string) => routing.failures[carrier]?.user_error === 'carrier:invalid_input';
@@ -89,15 +91,21 @@ function rerouteLead(parcel: JsonObject, rules: string, now: number, refused: Re
       : unfiled ? carrier !== routing.confirmed_carrier && !waiting(carrier) : !asked(carrier));
   const lead = (carrier: string, rank: 0 | 1 | 2 = asked(carrier) ? 2 : 1): RerouteLead =>
     ({ carrier, rank: refusedBefore(carrier) ? 0 : rank });
+  // The names a provider gave, read with today's aliases and number rules.
+  const names = Array.isArray(data.reported_carriers)
+    ? data.reported_carriers.filter((name): name is string => typeof name === 'string') : [];
+  const named = names.length ? universalCarrierHints(names, number).discovered_carrier : undefined;
+  // A delivered or returned parcel has no next check to ask the carrier its provider names.
+  // A release checks it for such a carrier with an adapter of its own that it never asked,
+  // such as one the release added, whose answer files the parcel there.
+  if (finished) {
+    return leads(named) && directCarrier(named) && !asked(named) && !routing.failures[named] ? lead(named, 1) : null;
+  }
   const taken = Object.keys(routing.set_aside ?? {}).find((carrier) => fits(carrier) && carrier !== filed
     && !refused.has(carrier) && AUTOMATIC_CARRIER_IDS.has(carrier) && directCarrier(carrier));
   if (taken) return lead(taken, 0);
   const detected = detectCarrierMatch(number);
   if (detected.confidence === 'high' && leads(detected.carrier)) return lead(detected.carrier);
-  // The names a provider gave, read with today's aliases and number rules.
-  const names = Array.isArray(data.reported_carriers)
-    ? data.reported_carriers.filter((name): name is string => typeof name === 'string') : [];
-  const named = names.length ? universalCarrierHints(names, number).discovered_carrier : undefined;
   if (leads(named) && (named !== routing.discovered_carrier || refusedBefore(named))) return lead(named);
   if (unfiled) {
     // A carrier that recognizes the number under this release and did not under the one

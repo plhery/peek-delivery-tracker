@@ -466,7 +466,11 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   new catalog and did not under the one that last routed it: each of its checks notes the
   carriers recognition can ask about the number (`routing.recognizers`). Asking again a
   carrier it already asked is left to its schedule, and for a lookup that left the schedule,
-  to opening its link: after a release it rarely finds more. A carrier whose adapter
+  to opening its link: after a release it rarely finds more. A delivered or returned parcel
+  filed under no carrier has no next check, so it is read again too, and queued only for a
+  carrier with an adapter of its own that a provider's saved carrier names now read as and
+  that it never asked, such as one the release added: that carrier's answer files the
+  parcel under it. A carrier whose adapter
   refuses the number by its own check, which sends nothing, is passed over until a release
   whose adapter takes it. One that refused the number under an older release counts as not
   asked, the filed carrier and a provider's name the parcel already holds included. One whose

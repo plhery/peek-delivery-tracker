@@ -1045,18 +1045,19 @@ export class SupabaseServiceClient extends SupabaseClient {
 
   /**
    * The open, unarchived parcels added since `addedSince`, with or without an
-   * account, that were last routed with other catalog rules than `rules`, the
-   * newest first: what redetection.ts reads, without their events. A page holds
+   * account, that were last routed with other catalog rules than `rules`, and the
+   * delivered or returned ones filed under no carrier, the newest first: what
+   * redetection.ts reads, without their events. A page holds
    * {@link REDETECTION_PAGE} of them; the next one starts `before` the last one's `created_at`.
    */
   async listRedetectionCandidates(addedSince: Date, rules: string, before?: string): Promise<JsonObject[]> {
     const params = query([
       ['select', 'id,user_id,tracking_number,carrier,current_stage,last_synced_at,sync_status,sync_error,carrier_data,created_at'],
       ['archived_at', 'is.null'],
-      ['current_stage', 'not.in.(delivered,returned)'],
       ['created_at', `gte.${addedSince.toISOString()}`],
       ...(before ? [['created_at', `lt.${before}`] as [string, string]] : []),
-      ['or', `(carrier_data->routing->>rules.is.null,carrier_data->routing->>rules.neq.${rules})`],
+      ['and', '(or(current_stage.not.in.(delivered,returned),carrier.in.(unknown,intl-post)),'
+        + `or(carrier_data->routing->>rules.is.null,carrier_data->routing->>rules.neq.${rules}))`],
       ['order', 'created_at.desc'],
       ['limit', String(REDETECTION_PAGE)],
     ]);

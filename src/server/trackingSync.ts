@@ -979,8 +979,9 @@ export class TrackingSyncService {
    * Once per scraper release: one check of each open parcel the catalog's rules point to a
    * carrier its routing never asked, such as a lookup added before a scraper release
    * brought the number's detection rule, the name a provider gives or the carrier's
-   * adapter, whose link nobody opens any more, and of each unfiled one the release
-   * taught a carrier to recognize (redetection.ts). The checks
+   * adapter, whose link nobody opens any more, of each unfiled one the release
+   * taught a carrier to recognize, and of each delivered or returned unfiled one for a
+   * carrier a provider named that it never asked (redetection.ts). The checks
    * most likely to change the parcel's answer go first, 50 at a time: the next batch
    * waits until the last one's checks are done. A parcel still in its cooldown is queued by the first run after it ends.
    * Returns how many checks were queued; they wait behind every other job, a lookup's

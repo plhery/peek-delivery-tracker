@@ -1043,6 +1043,27 @@ describe('TrackingSyncService', () => {
     expect(saved.carrier_data).not.toHaveProperty('auto_changed_from');
   });
 
+  it('files a delivered unknown parcel under the carrier a provider named once a release\'s check confirms it', async () => {
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined) };
+    const delivered = { status: 'delivered', current_stage: 'delivered', last_update: '2026-09-08T10:00:00Z',
+      events: [{ time: '2026-09-07T09:00:00Z', description: 'In transit', stage: 'in_transit' },
+        { time: '2026-09-08T10:00:00Z', description: 'Delivered', stage: 'delivered' }] };
+    const adapter = { fetch: vi.fn().mockResolvedValue(delivered),
+      fetchUniversal: vi.fn().mockResolvedValue({ ...delivered, discovered_carrier: 'dhl-express', reported_carriers: ['DHL Express'] }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null,
+      () => new Date('2026-09-10T12:00:00Z'));
+    await service.syncPackage({ id: 'delivered', carrier: 'unknown', tracking_number: '1234567891', current_stage: 'delivered',
+      created_at: '2026-09-06T08:00:00Z', last_synced_at: '2026-09-08T11:00:00Z',
+      carrier_data: { tracking_provider: 'ParcelsApp', reported_carriers: ['DHL Express'],
+        routing: { version: 1, configured_carrier: 'unknown', failures: {}, probe_cursor: 0, discovery_cursor: 0, rules: 'older',
+          preferred_provider: 'ParcelsApp', last_event_at: '2026-09-08T10:00:00.000Z' } } }, { trigger: 'release' });
+    expect(adapter.fetch.mock.calls.map(([carrier]) => carrier)).toEqual(['dhl-express']);
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ carrier: 'dhl-express',
+      carrier_data: { routing: { configured_carrier: 'dhl-express', confirmed_carrier: 'dhl-express' } } });
+  });
+
   it('files an unknown parcel under the carrier a provider names even when its copy looks older', async () => {
     const sync = async (savedProvider: string) => {
       const client = { ...fakeClient(),
@@ -2170,12 +2191,17 @@ describe('TrackingSyncService', () => {
         parcel('never-asked', '1Z999AA10123456784', '2026-09-09T09:00:15Z'),
         // A carrier whose recognition the release brought to the number, and the same carriers as before.
         parcel('taught', waybill, '2026-09-08T12:00:15Z', { ...asked('dhl-express'), recognizers: ['dhl-express'] }),
-        parcel('same', waybill, '2026-09-08T12:00:15Z', { ...asked('dhl-express'), recognizers: recognizers(waybill) })]),
+        parcel('same', waybill, '2026-09-08T12:00:15Z', { ...asked('dhl-express'), recognizers: recognizers(waybill) }),
+        // Delivered, with UPS named by its provider and never asked, then asked.
+        ...[{}, asked('ups')].map((routing, index) => {
+          const finished = parcel(index ? 'delivered-asked' : 'delivered', 'ABCD0000000001CN', '2026-09-02T09:00:15Z', routing);
+          return { ...finished, current_stage: 'delivered', carrier_data: { ...finished.carrier_data, tracking_provider: 'ParcelsApp', reported_carriers: ['UPS'] } };
+        })]),
       enqueueSyncJob: vi.fn().mockResolvedValue({ id: 'job' }) };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn() }, null,
       () => new Date('2026-09-09T10:00:00Z'));
-    await expect(service.queueRedetections()).resolves.toBe(2);
-    expect(client.enqueueSyncJob.mock.calls.map(([job]) => job.packageId)).toEqual(['never-asked', 'taught']);
+    await expect(service.queueRedetections()).resolves.toBe(3);
+    expect(client.enqueueSyncJob.mock.calls.map(([job]) => job.packageId)).toEqual(['never-asked', 'taught', 'delivered']);
   });
 
   it('lists every page of the parcels the catalog may point elsewhere', async () => {

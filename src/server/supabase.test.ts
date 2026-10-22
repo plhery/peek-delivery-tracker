@@ -151,16 +151,16 @@ describe('one-off parcels and their links', () => {
       order: 'completed_at.desc', limit: '1' });
   });
 
-  it('lists the recent open parcels last routed with other catalog rules, without their events', async () => {
+  it('lists the recent open parcels last routed with other catalog rules, and finished ones filed under no carrier, without their events', async () => {
     const client = service();
     const request = vi.spyOn(client, 'request').mockResolvedValue([{ id: 'parcel' }]);
     await expect(client.listRedetectionCandidates(new Date('2026-09-16T10:00:00Z'), 'rules-1')).resolves.toEqual([{ id: 'parcel' }]);
     const sent = params(request.mock.calls[0][0]);
     expect(sent.get('select')).toBe('id,user_id,tracking_number,carrier,current_stage,last_synced_at,sync_status,sync_error,carrier_data,created_at');
     expect(sent.get('archived_at')).toBe('is.null');
-    expect(sent.get('current_stage')).toBe('not.in.(delivered,returned)');
     expect(sent.get('created_at')).toBe('gte.2026-09-16T10:00:00.000Z');
-    expect(sent.get('or')).toBe('(carrier_data->routing->>rules.is.null,carrier_data->routing->>rules.neq.rules-1)');
+    expect(sent.get('and')).toBe('(or(current_stage.not.in.(delivered,returned),carrier.in.(unknown,intl-post)),'
+      + 'or(carrier_data->routing->>rules.is.null,carrier_data->routing->>rules.neq.rules-1))');
     expect(sent.get('limit')).toBe('500');
     // The next page starts before the last parcel of this one.
     await client.listRedetectionCandidates(new Date('2026-09-16T10:00:00Z'), 'rules-1', '2026-09-20T08:00:00.123456+00:00');

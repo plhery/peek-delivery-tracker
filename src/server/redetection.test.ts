@@ -28,6 +28,25 @@ it('points an unknown parcel to a carrier a provider named, read with the curren
     { reported_carriers: ['UPS'], routing: { discovered_carrier: 'ups' } }))).toBeNull();
 });
 
+it('points a delivered parcel filed under no carrier to the carrier a provider named only while it never asked it', async () => {
+  const finished = (stage: string, data: JsonObject = {}, values: JsonObject = {}) =>
+    parcel({ tracking_number: UNCLAIMED, current_stage: stage, ...values }, { reported_carriers: ['UPS'], ...data });
+  const takes = async () => false;
+  await expect(rerouteAskable(finished('delivered'), 'newer', Date.now(), takes)).resolves.toEqual({ carrier: 'ups', rank: 1 });
+  expect(rerouteCarrier(finished('returned'))).toBe('ups');
+  // It has no next check to ask a carrier it already holds as a hint.
+  expect(rerouteCarrier(finished('delivered', { routing: { discovered_carrier: 'ups' } }))).toBe('ups');
+  // Asked already, even if it refused the number.
+  expect(rerouteCarrier(finished('delivered', { routing: { failures: { ups: { kind: 'not_found' } } } }))).toBeNull();
+  expect(rerouteCarrier(finished('delivered', { routing: { failures: { ups: { kind: 'invalid_input', user_error: 'carrier:invalid_input' } } } })))
+    .toBeNull();
+  // Nothing else is asked about it: its detected carrier, a carrier without an adapter, or one filed under a carrier.
+  expect(rerouteCarrier(parcel({ current_stage: 'delivered' }))).toBeNull();
+  expect(rerouteCarrier(finished('delivered', { reported_carriers: ['J&T Express Mexico'] }, { tracking_number: 'JMX000000000001' })))
+    .toBeNull();
+  expect(rerouteCarrier(finished('delivered', {}, { carrier: 'dhl' }))).toBeNull();
+});
+
 it('points a parcel filed under no carrier to a carrier without an adapter of its own', () => {
   expect(rerouteCarrier(parcel({ tracking_number: 'JMX000000000001' }, { reported_carriers: ['J&T Express Mexico', 'Estafeta'] })))
     .toBe('j-and-t-mx');

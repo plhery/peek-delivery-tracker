@@ -508,7 +508,9 @@ runs the app, so moving the app to another application means changing that label
 service's `alloy/config.alloy`; until then Loki receives nothing. Query the logs in
 Grafana through the "Loki (delivery tracker logs)" data source.
 Lines carry `app`, `container`, `event` and `level` labels, for example
-`{app="delivery-tracker", event="tracking_scrape"} | json | outcome = "error"`.
+`{app="delivery-tracker", event="tracking_scrape"} | json | outcome = "error"`. The TRAWL
+browser service's lines come as the app `delivery-tracker-trawl`, with the same labels, in
+logfmt: `{app="delivery-tracker-trawl", event="tier.failure"} | logfmt`.
 
 Key JSON events:
 

@@ -246,6 +246,12 @@ describe('input edge cases', () => {
     expect(run([pasted('302-4571983-2294617')]).job).toBeNull();
   });
 
+  it('holds a Shein order number back, and says it is Shein’s', () => {
+    const state = run([pasted('GSH0A1B2C3D4E5F'), track]);
+    expect(survey(state)).toMatchObject({ order: 'shein', match: null, need: 'order', nothing: false });
+    expect(state.job).toBeNull();
+  });
+
   it('holds a Temu order number back, and says it is Temu’s', () => {
     const state = run([pasted('PO-000-00000000000000000'), track]);
     expect(survey(state)).toMatchObject({ order: 'temu', match: null, need: 'order', nothing: false });

@@ -215,6 +215,8 @@
   "door.opening": "Dein Paket wird geöffnet …",
   "door.order.amazon.body": "Amazon-Lieferungen verfolgst du meist unter „Meine Bestellungen“. Steht in der Versandmail eine Sendungsnummer, füge stattdessen diese ein.",
   "door.order.amazon.title": "Das sieht nach einer Amazon-Bestellnummer aus",
+  "door.order.shein.body": "Tippe unter „Meine Bestellungen“ neben der Bestellung auf „Verfolgen“: Dort zeigt Shein für jedes Paket den Paketdienst und eine Sendungsnummer. Füge stattdessen diese ein.",
+  "door.order.shein.title": "Das sieht nach einer Shein-Bestellnummer aus",
   "door.order.temu.body": "Tippe unter „Deine Bestellungen“ neben der Bestellung auf „Verfolgen“: Dort zeigt Temu für jedes Paket eine Sendungsnummer. Füge stattdessen diese ein.",
   "door.order.temu.title": "Das sieht nach einer Temu-Bestellnummer aus",
   "door.paste.blocked.keys": "Dieser Browser hat Peek nicht auf die Zwischenablage zugreifen lassen. Klicke ins Feld und füge dort ein.",

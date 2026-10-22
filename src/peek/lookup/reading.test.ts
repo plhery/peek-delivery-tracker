@@ -54,6 +54,15 @@ describe('reading the field', () => {
     expect(readText('Order 302-4571983-2294617, tracking 1ZDEMO202600000001')).toMatchObject({ order: null, match: { carrier: 'ups' } });
   });
 
+  it('tells a Shein order number from a tracking number', () => {
+    for (const text of ['GSH0A1B2C3D4E5F', 'gsh0a1b2c3d4e5f', 'Your Shein order GSH0A1B2C3D4E5F has shipped']) {
+      expect(readText(text).order, text).toBe('shein');
+    }
+    // A character too many or too few is no Shein order number.
+    expect(readText('GSH0A1B2C3D4E5F6').order).toBeNull();
+    expect(readText('GSH0A1B2C3D4E5').order).toBeNull();
+  });
+
   it('tells a Temu order number from a tracking number, however it is typed', () => {
     for (const text of ['PO-000-00000000000000000', 'PO00000000000000000000', 'po-000-00000000000000000', 'PO 000 00000000000000000',
       'Your Temu order confirmation (#PO-000-12345678901234567)', 'Order PO-000-12345678901234567\nThanks for shopping with us']) {

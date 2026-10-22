@@ -215,6 +215,8 @@
   "door.opening": "Opening your parcel…",
   "door.order.amazon.body": "Amazon deliveries are usually tracked in Your Orders. If the shipping email has a tracking number, paste that instead.",
   "door.order.amazon.title": "That looks like an Amazon order number",
+  "door.order.shein.body": "In My orders, tap Track on the order: Shein shows the carrier and a tracking number for each package. Paste that instead.",
+  "door.order.shein.title": "That looks like a Shein order number",
   "door.order.temu.body": "In Your orders, tap Track next to the order: Temu shows a tracking number for each package. Paste that instead.",
   "door.order.temu.title": "That looks like a Temu order number",
   "door.paste.blocked.keys": "This browser didn’t let Peek read the clipboard. Click the field and paste there.",

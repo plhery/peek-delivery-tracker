@@ -105,6 +105,10 @@ describe('the number checker in a guide', () => {
     await user.type(field, 'po00000000000000000000');
     expect(await within(result).findByText(en['door.order.temu.title'])).toBeVisible();
     expect(result).toHaveTextContent(en['door.order.temu.body']);
+    await user.clear(field);
+    await user.type(field, 'GSH0A1B2C3D4E5F');
+    expect(await within(result).findByText(en['door.order.shein.title'])).toBeVisible();
+    expect(result).toHaveTextContent(en['door.order.shein.body']);
   });
 
   it('names Temu’s order number in the guide’s language', async () => {

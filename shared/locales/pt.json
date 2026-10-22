@@ -215,6 +215,8 @@
   "door.opening": "A abrir a tua encomenda…",
   "door.order.amazon.body": "As entregas da Amazon são geralmente acompanhadas na página «Os meus pedidos». Se o e-mail de envio tiver um número de seguimento, cola esse.",
   "door.order.amazon.title": "Parece um número de pedido da Amazon",
+  "door.order.shein.body": "Em «Meus pedidos», toca em «Rastrear» na encomenda: a Shein mostra a transportadora e um número de seguimento por volume. Cola esse.",
+  "door.order.shein.title": "Parece um número de encomenda da Shein",
   "door.order.temu.body": "Em «As suas encomendas», toca em «Rastrear» ao lado da encomenda: a Temu mostra um número de seguimento por volume. Cola esse.",
   "door.order.temu.title": "Parece um número de encomenda da Temu",
   "door.paste.blocked.keys": "Este navegador não deixou o Peek ler a área de transferência. Clica no campo e cola aí.",

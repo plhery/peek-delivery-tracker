@@ -25,12 +25,14 @@ export interface Reading {
 }
 
 /** A shop whose order numbers the door tells from tracking numbers. */
-export type OrderShop = 'amazon' | 'temu';
+export type OrderShop = 'amazon' | 'shein' | 'temu';
 
 const LINK = /https?:\/\/[^\s<>"']+/gi;
 const ORDER_NUMBERS: Record<OrderShop, RegExp> = {
   /** 3-7-7 digits, or D01-… for digital orders. */
   amazon: /(?:^|[^\w-])(?:\d{3}|D\d{2})-\d{7}-\d{7}(?![\w-])/i,
+  /** GSH and 12 letters or digits: GSH000000000000. */
+  shein: /(?:^|[^\w-])GSH[A-Z0-9]{12}(?![\w-])/i,
   /** PO, 3 digits and 17: PO-000-00000000000000000, often typed without the hyphens. */
   temu: /(?:^|[^\w-])PO[- ]?\d{3}[- ]?\d{17}(?![\w-])/i,
 };

@@ -215,6 +215,8 @@
   "door.opening": "Abriendo tu paquete…",
   "door.order.amazon.body": "Las entregas de Amazon suelen seguirse desde Mis pedidos. Si el correo de envío trae un número de seguimiento, pega ese.",
   "door.order.amazon.title": "Parece un número de pedido de Amazon",
+  "door.order.shein.body": "En «Mis pedidos», pulsa «Seguimiento» en el pedido: Shein muestra la empresa de transporte y un número de seguimiento por paquete. Pega ese.",
+  "door.order.shein.title": "Parece un número de pedido de Shein",
   "door.order.temu.body": "En «Tus pedidos», pulsa «Rastrear» junto al pedido: Temu muestra un número de seguimiento por paquete. Pega ese.",
   "door.order.temu.title": "Parece un número de pedido de Temu",
   "door.paste.blocked.keys": "Este navegador no ha dejado a Peek leer el portapapeles. Haz clic en el campo y pega ahí.",

@@ -190,7 +190,8 @@ checks take it alone, at the carrier's cadence, for up to 6 h. A provider that
 adds scans or a different stage stays the source, as does one whose copy the parcel didn't
 keep, and the carrier is asked again 6 h later, not on every check. While no provider has
 progress for the parcel, the carrier's answer serves it if it moved, and the carrier is asked
-first on the next check. When detection names that carrier for an unknown parcel's number and
+first on the next check; so it is while its answer hasn't moved either, so that its first scan
+serves a new parcel without waiting 6 h behind a provider's pending summary. When detection names that carrier for an unknown parcel's number and
 its answer shows movement, a provider's progress in the same check files the parcel under
 it, as one added with that carrier would be, even when the provider also names the platform
 the parcel went through (MailAmericas with Cainiao) or a carrier the catalog cannot place.

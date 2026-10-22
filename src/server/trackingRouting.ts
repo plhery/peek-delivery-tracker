@@ -1349,7 +1349,11 @@ export class TrackingRouter {
       if (localDirectFallback && answer && copied && !again) {
         state.provider_copy = { carrier: localDirectFallback.carrier, number, ...answer, provider: chosen, checked_at: now().toISOString() };
       } else if (!copied) delete state.provider_copy;
-      if (partialDirect || (copied && !again)) state.direct_retry_at = undefined;
+      // Neither the carrier's answer nor this provider's shows the parcel moving: the carrier
+      // stays first on every check, so its first scan serves the parcel without waiting 6 h
+      // behind the provider's pending summary.
+      const unmoved = localDirectFallback && !hasRoutingProgress(localDirectFallback.value.result) && !hasRoutingProgress(value.result);
+      if (partialDirect || (copied && !again) || unmoved) state.direct_retry_at = undefined;
       else if (localDirectFallback || !state.direct_retry_at) state.direct_retry_at = iso(now().getTime() + 6 * HOUR);
       delete state.partial_checked_at;
       state.last_probe_at ??= now().toISOString();

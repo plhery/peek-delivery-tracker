@@ -1971,14 +1971,28 @@ describe('persistent tracking routing', () => {
         direct_retry_at: '2026-09-10T18:30:00.000Z' });
     });
 
-    it('keeps no copy of a pending answer', async () => {
+    it('keeps no copy of a pending answer, and keeps the carrier first until the parcel moves', async () => {
       fixedPlan('Ship24', '17TRACK');
       const { router, direct, universal } = setup();
       direct.mockResolvedValue(local(1, 'pending'));
       universal.mockResolvedValue(dated(1, 'pending'));
-      const result = await router.fetch(filed(state({ configured_carrier: 'yamato' })), true);
+      const pending = (routing: JsonObject) => ({ ...filed(routing), current_stage: 'pending' });
+      const result = await router.fetch(pending(state({ configured_carrier: 'yamato' })), true);
+      expect(result.result).toMatchObject({ tracking_provider: 'Ship24', carrier_answered: true });
       expect(result.result.routing).not.toHaveProperty('provider_copy');
-      expect(result.result.routing).toMatchObject({ direct_retry_at: '2026-09-10T18:00:00.000Z' });
+      expect((result.result.routing as JsonObject).direct_retry_at).toBeUndefined();
+      // A new parcel's next check, 16 min later: the carrier's first scan serves it.
+      const later = setup(new Date('2026-09-10T12:16:00Z'));
+      later.direct.mockResolvedValue(local());
+      later.universal.mockResolvedValue(dated(1, 'pending'));
+      const moved = await later.router.fetch(pending(result.result.routing as JsonObject), true);
+      expect(later.direct).toHaveBeenCalledExactlyOnceWith(expect.anything(), 'yamato');
+      expect(moved).toMatchObject({ sourceCarrierId: 'yamato', result: { direct_local_fallback: true, current_stage: 'in_transit' } });
+      // A provider dating movement holds the carrier to its 6 h, as before.
+      const dates = setup(new Date('2026-09-10T12:32:00Z'));
+      dates.direct.mockResolvedValue(local(1, 'pending'));
+      const served = await dates.router.fetch(pending(result.result.routing as JsonObject), true);
+      expect(served.result).toMatchObject({ tracking_provider: 'Ship24', routing: { direct_retry_at: '2026-09-10T18:32:00.000Z' } });
     });
 
     it('forgets the copy when the carrier fails and a provider holds more', async () => {

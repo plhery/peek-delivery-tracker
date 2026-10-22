@@ -171,7 +171,9 @@ An adapter whose answer has only local clocks or an undated status summary keeps
 evidence while a universal provider dates the timeline (`direct_local_history`, up to 100
 scans). A scan kept there on its wall clock alone goes once an answer dates it: the same
 wording, place, provider code and leg, at an instant showing that wall clock, one to one
-([`directLocalHistory.ts`](../src/server/directLocalHistory.ts)). The adapter's answer
+([`directLocalHistory.ts`](../src/server/directLocalHistory.ts)). A code keeps the group the
+carrier files it under (SEUR's `provider_group`), so a code seen only there can be mapped; the
+next answer's copy of a scan kept without one takes its place. The adapter's answer
 confirms the filed carrier, so a provider naming that carrier doesn't ask it before its
 own retry time. A
 provider whose history holds just the carrier's number of scans and stage only dates them:

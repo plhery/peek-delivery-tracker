@@ -54,9 +54,14 @@ export function hasUnresolvedDirectCurrent(carrier: string, result: CarrierResul
     && !instant(result.last_update);
 }
 
+/**
+ * A bounded copy of the carrier's scans. A code comes with the carrier's group for it (SEUR's `provider_group`), so a
+ * code seen only here can still be mapped. The group is no part of a scan's key: the copy kept before it was stored
+ * gives way to the next answer's.
+ */
 export function captureDirectLocalHistory(carrier: string, number: string, result: CarrierResult): JsonObject {
   const events = (result.events ?? []).slice(0, 100).map((event) => Object.fromEntries(
-    ['time', 'local_time', 'provider_time_text', 'description', 'location', 'stage', 'provider_code', 'provider_leg', 'summary_snapshot'].flatMap((key): Array<[string, string | true]> => {
+    ['time', 'local_time', 'provider_time_text', 'description', 'location', 'stage', 'provider_code', 'provider_group', 'provider_leg', 'summary_snapshot'].flatMap((key): Array<[string, string | true]> => {
       const value = event[key];
       if (key === 'summary_snapshot' && value === true) return [[key, true]];
       return typeof value === 'string' ? [[key, value.slice(0, key === 'description' ? 500 : 200)]] : [];

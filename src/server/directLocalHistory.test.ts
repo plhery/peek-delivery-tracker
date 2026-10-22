@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 
-import { directLocalHistory } from './directLocalHistory';
+import { captureDirectLocalHistory, directLocalHistory } from './directLocalHistory';
 import type { JsonObject } from './types';
 
 const NUMBER = 'GL000000001';
@@ -41,4 +41,13 @@ it('keeps copies two scans could be, or two copies of one scan', () => {
   // The same words an hour later: either scan shows 09:12 in some zone.
   const twoScans = [dated, { ...dated, time: '2026-10-14T09:12:00+01:00' }, undated];
   expect(directLocalHistory(parcel(twoScans), {})?.events).toEqual(twoScans);
+});
+
+it('keeps the carrier\'s group beside its code, and takes it from the next answer for a scan kept without one', () => {
+  const collected = { description: 'Collected at the sender', location: 'Madrid', provider_code: 'GO002', local_time: '2026-10-14T09:12:00' };
+  const captured = captureDirectLocalHistory('seur', 'SEUR0000000001', { events: [{ ...collected, provider_group: 'RECOGIDA', point: { latitude: 0, longitude: 0 } }] });
+  expect(captured.events).toEqual([{ ...collected, provider_group: 'RECOGIDA' }]);
+  const kept = { tracking_number: 'SEUR0000000001', carrier: 'seur',
+    carrier_data: { direct_local_history: { carrier: 'seur', number: 'SEUR0000000001', events: [collected] } } };
+  expect(directLocalHistory(kept, { direct_local_history: captured })?.events).toEqual([{ ...collected, provider_group: 'RECOGIDA' }]);
 });

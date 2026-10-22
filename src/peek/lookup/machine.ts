@@ -3,6 +3,7 @@ import { isAmazonTrackingNumber, requiresAmazonAccount } from '../../lib/amazon'
 import { canAskCarrier, carrierCheck, type CarrierCheck } from '../../lib/carrierPicker';
 import {
   carrierRequirements,
+  isPickupCode,
   normalizeTrackingNumber,
   requirementSatisfied,
   type CarrierInputField,
@@ -122,6 +123,8 @@ export interface Survey {
   order: OrderShop | null;
   /** Ask about the check digit. */
   typo: CheckDigitTrouble | null;
+  /** Say that six digits are a pickup code, and ask for the parcel's tracking number. */
+  pickup: boolean;
   onDevice: DeviceParcel | null;
   amazon: boolean;
   /** An Amazon number: still being checked, tracked in the Amazon account only, or the check gave no answer. */
@@ -146,7 +149,7 @@ export interface Survey {
   /** The number whose carriers should be asked now. */
   ask: string | null;
   /** The first thing the visitor has to settle before a lookup can go. */
-  need: 'number' | 'order' | 'typo' | 'carrier' | 'account' | 'input' | 'wait' | null;
+  need: 'number' | 'order' | 'typo' | 'code' | 'carrier' | 'account' | 'input' | 'wait' | null;
 }
 
 const offer = (carrier: CarrierId, normalized: string) => `${carrier}:${normalized}`;
@@ -170,6 +173,9 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   // A number the device follows was accepted once already; nobody is asked about its check digit again.
   const flaw = match && !picked && !onDevice && state.asTyped !== normalized ? checkDigitTrouble(normalized) : null;
   const typo = flaw && (state.raised || checkDigitTrouble(settledNumber)) ? flaw : null;
+  // Six digits are a pickup code unless a carrier picked by hand takes them as its number. The start of a longer
+  // number is still being typed: its notice waits for the text to rest.
+  const code = Boolean(match) && !onDevice && state.carrier === 'auto' && isPickupCode(normalized);
 
   const amazon = Boolean(match) && isAmazonTrackingNumber(normalized);
   const answer = match && state.answer?.trackingNumber === normalized ? state.answer : undefined;
@@ -212,14 +218,15 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   const missing = requirements.find((requirement) => !requirementSatisfied(requirement, input(requirement.field))) ?? null;
 
   const ask = match && !onDevice && !state.job && settledForAsking && !answer && (amazon || (recognizable && state.carrier === 'auto')) ? normalized : null;
-  const need: Survey['need'] = order ? 'order' : !match ? 'number' : typo ? 'typo' : onDevice ? null
+  const need: Survey['need'] = order ? 'order' : !match ? 'number' : typo ? 'typo' : onDevice ? null : code ? 'code'
     : account === 'checking' || check.status === 'asking' ? 'wait'
       : account ? 'account'
         : check.status === 'several' && state.carrier === 'auto' ? 'carrier'
           : missing ? 'input' : null;
 
   return {
-    reading, several, match, normalized, nothing, order: order && (state.raised || calm.order) ? order : null, typo, onDevice, amazon, account,
+    reading, several, match, normalized, nothing, order: order && (state.raised || calm.order) ? order : null, typo,
+    pickup: code && (state.raised || settledNumber === normalized), onDevice, amazon, account,
     check, carrier, source, certain, fields, missing, input, remembered, ask, need,
   };
 }
@@ -249,7 +256,7 @@ function advance(state: LookupState, device: readonly DeviceParcel[], postcodes:
   // Several numbers, or several carriers, are the visitor's choice: a paste never makes it for them.
   if (found.several.length && !track) return stop();
   if (found.need === 'wait') return state;
-  if (found.need === 'account' || found.need === 'carrier') return stop();
+  if (found.need === 'code' || found.need === 'account' || found.need === 'carrier') return stop();
   if (found.fields.length || found.missing) {
     const offered = offer(found.carrier, found.normalized);
     if (!track) return stop({ offered });

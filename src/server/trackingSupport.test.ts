@@ -45,6 +45,13 @@ describe('detection support retention', () => {
     expect(retain).toHaveBeenCalledTimes(3);
   });
 
+  it('skips a pickup code', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const retain = vi.spyOn(client, 'recordTrackingSupportObservation').mockResolvedValue(undefined);
+    await retainDetectionSupport(client, { trackingNumber: '204617', carrier: 'unknown' });
+    expect(retain).not.toHaveBeenCalled();
+  });
+
   it('logs the submitted number and the actual recognition candidates privately', async () => {
     const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
@@ -95,6 +102,13 @@ describe('tracking support context', () => {
       detection_carrier: 'unknown', detection_confidence: 'none',
       detection_candidates: [], reasons: ['unknown_shape'],
     });
+  });
+
+  it('gives six digits filed under no carrier no reason: a pickup code, not a shape detection misses', () => {
+    expect(trackingSupportContext('204 617', 'unknown')).toMatchObject({ detection_carrier: 'unknown', reasons: [] });
+    // A carrier picked by hand takes them as its number.
+    expect(trackingSupportContext('204617', 'pannon-xp').reasons).toContain('unknown_shape');
+    expect(trackingSupportContext('2046170', 'unknown').reasons).not.toEqual([]);
   });
 
   it('records ambiguous numbers without treating a plausible selected carrier as a mismatch', () => {

@@ -20,6 +20,7 @@ const EXPRESS = '0000000046'; // Ten digits: DHL Express shares this shape with 
 const SHAPELESS = 'DEMO4471203'; // No carrier's shape: nobody can be asked.
 const AMAZON = 'TBA123456789012';
 const TYPO = 'LX1234567B5DE';
+const PICKUP = '204617'; // Six digits: a locker's or a pickup point's code.
 
 function run(
   events: LookupEvent[],
@@ -249,6 +250,21 @@ describe('input edge cases', () => {
     const state = run([pasted('PO-000-00000000000000000'), track]);
     expect(survey(state)).toMatchObject({ order: 'temu', match: null, need: 'order', nothing: false });
     expect(state.job).toBeNull();
+  });
+
+  it('holds a pickup code back, unless a carrier is picked by hand', () => {
+    const typing = run([typed(PICKUP)]);
+    // Six digits may be the start of a longer number: the notice waits for the text to rest.
+    expect(survey(typing)).toMatchObject({ pickup: false, need: 'code', ask: null });
+    expect(survey(run([rested(PICKUP)], [], typing)).pickup).toBe(true);
+    expect(survey(run([typed(`${PICKUP}78901`), rested(`${PICKUP}78901`)])).pickup).toBe(false);
+    const pressed = run([track], [], typing);
+    expect(survey(pressed)).toMatchObject({ pickup: true, nothing: false });
+    expect(pressed.job).toBeNull();
+    expect(run([pasted('204 617')]).job).toBeNull();
+    const chosen = run([{ type: 'choose', carrier: 'pannon-xp' }, track], [], typing);
+    expect(survey(chosen).pickup).toBe(false);
+    expect(chosen.job).toEqual({ type: 'lookup', carrier: 'pannon-xp', input: { trackingNumber: PICKUP, carrier: 'pannon-xp' } });
   });
 });
 

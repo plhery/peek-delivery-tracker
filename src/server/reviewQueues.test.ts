@@ -123,6 +123,21 @@ describe('review queue replay', () => {
     }]);
   });
 
+  it('ignores a pickup code filed under no carrier instead of fixing it', async () => {
+    const client = fakeClient();
+    client.listOpenTrackingSupportCases.mockResolvedValue([
+      { id: 'case-pickup', tracking_number: '204617', configured_carrier: 'unknown', reasons: ['unknown_shape'] },
+      // A carrier picked by hand takes six digits as its number.
+      { id: 'case-picked', tracking_number: '204618', configured_carrier: 'pannon-xp', reasons: ['unknown_shape'] },
+    ]);
+    await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1'))
+      .resolves.toMatchObject({ cases_replayed: 2, cases_fixed: 0, cases_ignored: 1 });
+    expect(client.fixReplayedTrackingSupportCases).not.toHaveBeenCalled();
+    expect(client.trackingNumberParcels).not.toHaveBeenCalled();
+    expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [{ id: 'case-pickup',
+      note: 'Six digits filed under no carrier: a pickup code, not a tracking number. The apps ask for the parcel’s tracking number instead.' }]);
+  });
+
   it('ignores a case only its carrier could confirm once every parcel with the number has finished', async () => {
     const client = fakeClient();
     client.listOpenTrackingSupportCases.mockResolvedValue([

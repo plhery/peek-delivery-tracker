@@ -336,6 +336,19 @@ describe('FrontDoor', () => {
     expect(mocks.detect).not.toHaveBeenCalled();
   });
 
+  it('takes six digits for a pickup code and asks for the parcel’s tracking number', async () => {
+    const { user, field } = door();
+    await user.click(field);
+    await user.paste('204617');
+    const note = screen.getByRole('note');
+    expect(note).toHaveTextContent('That looks like a pickup code');
+    expect(note).toHaveTextContent('Enter the parcel’s tracking number instead');
+    await user.type(field, '{Enter}');
+    expect(screen.getByRole('alert')).toHaveTextContent('That looks like a pickup code');
+    expect(mocks.lookup).not.toHaveBeenCalled();
+    expect(mocks.detect).not.toHaveBeenCalled();
+  });
+
   it('checks an Amazon number before looking it up, and sends account-only parcels to Amazon', async () => {
     mocks.detect.mockResolvedValueOnce({ trackingNumber: 'TBA123456789012', carrier: 'amazon-logistics', amazonShippingStatus: 'not-found' });
     const { user, field } = door();

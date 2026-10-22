@@ -39,6 +39,8 @@
   "add.optional": "Opcional",
   "add.paste": "Pegar",
   "add.pasteFailed": "No se ha podido pegar. Copia el número de seguimiento e inténtalo de nuevo.",
+  "add.pickupCode.body": "Un código de 6 cifras suele abrir una taquilla o servir para recoger un paquete en un punto de recogida. Introduce mejor el número de seguimiento del paquete: viene en el correo de envío.",
+  "add.pickupCode.title": "Parece un código de recogida",
   "add.requirement.dpdPostcode": "Código postal de entrega",
   "add.requirement.dpdPostcodeHelp": "El transportista necesita el código postal de entrega para mostrar el seguimiento.",
   "add.requirement.dpdPostcodeOptionalHelp": "Con el código postal, {{carrier}} también muestra los escaneos verificados y la franja horaria de entrega.",

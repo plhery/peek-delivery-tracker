@@ -9,6 +9,7 @@ import {
   carrierRequirements,
   carrierTrackingHintKey,
   formatTrackingNumber,
+  isPickupCode,
   normalizeTrackingNumber,
   parseTrackingInput,
   requirementSatisfied,
@@ -187,6 +188,10 @@ export function AddParcelSheet({
     : recognizedCarrier ?? parsedTracking.carrier;
   const resolvedCarrier = amazonNumber ? shippingConfirmed ? 'amazon-shipping' : 'amazon-logistics'
     : selectedCarrier === 'auto' ? detectedCarrier : selectedCarrier;
+  // Six digits are a pickup code unless a carrier picked by hand takes them as its number. The start of a
+  // longer number is still being typed: its notice waits for a pause.
+  const pickupCode = selectedCarrier === 'auto' && isPickupCode(normalizedNumber);
+  const pickupNotice = pickupCode && normalizeTrackingNumber(settledTrackingNumber) === normalizedNumber;
   useEffect(() => {
     if (!shouldLookup || !apiAuth) return;
     const controller = new AbortController();
@@ -315,7 +320,7 @@ export function AddParcelSheet({
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (accountRequired || !trackingNumber.trim() || lookingUp || requiresCarrierConfirmation || !requirementsSatisfied || saving) return;
+    if (accountRequired || pickupCode || !trackingNumber.trim() || lookingUp || requiresCarrierConfirmation || !requirementsSatisfied || saving) return;
     setSaving(true);
     setError(null);
     setExistingParcelId(null);
@@ -422,6 +427,11 @@ export function AddParcelSheet({
               {trackingNotFound && (
                 <div className="add-parcel-notice">
                   <p role="status">{t('add.notFound')}</p>
+                </div>
+              )}
+              {pickupNotice && (
+                <div className="add-parcel-notice">
+                  <p role="status"><strong>{t('add.pickupCode.title')}</strong><br />{t('add.pickupCode.body')}</p>
                 </div>
               )}
               {parsedTracking.source !== 'number' && trackingNumber && (
@@ -584,7 +594,7 @@ export function AddParcelSheet({
               className="button button--primary"
               disabled={
                 !trackingNumber
-                || accountRequired || lookingUp || requiresCarrierConfirmation
+                || accountRequired || pickupCode || lookingUp || requiresCarrierConfirmation
                 || !requirementsSatisfied
                 || saving
               }

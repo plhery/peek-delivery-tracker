@@ -291,6 +291,16 @@ struct AddParcelView: View {
                     .foregroundStyle(Brand.warning)
                     .fixedSize(horizontal: false, vertical: true)
             }
+            // The start of a longer number is still being typed: the notice waits for the number to settle.
+            if pickupCode && recognition.settledNumber == normalizedNumber {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(localizer.text("add.pickupCode.title")).font(.caption.weight(.semibold))
+                    Text(localizer.text("add.pickupCode.body")).font(.caption)
+                }
+                .foregroundStyle(Brand.warning)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityElement(children: .combine)
+            }
         }
         .foregroundStyle(Brand.ink)
     }
@@ -631,6 +641,9 @@ struct AddParcelView: View {
 
     private var amazonNumber: Bool { catalog.isAmazonTrackingNumber(parsed.trackingNumber) }
 
+    /// Six digits are a pickup code unless a carrier picked by hand takes them as its number.
+    private var pickupCode: Bool { carrierOverride == nil && CarrierCatalog.isPickupCode(normalizedNumber) }
+
     private var currentVerification: CarrierDetectionResponse? {
         verifiedCarrier?.trackingNumber == normalizedNumber ? verifiedCarrier : nil
     }
@@ -802,7 +815,7 @@ struct AddParcelView: View {
     }
 
     private var canSave: Bool {
-        guard !accountRequired, !parsed.trackingNumber.isEmpty else { return false }
+        guard !accountRequired, !pickupCode, !parsed.trackingNumber.isEmpty else { return false }
         if let number = lookupTrackingNumber, verifiedCarrier?.trackingNumber != number { return false }
         for requirement in requirements {
             switch requirement.field {

@@ -4,7 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { CARRIER_DEFINITIONS, recognitionCandidates, type CarrierId, type CarrierResult } from 'universal-parcel-scraper';
 import { latestResultTime } from 'universal-parcel-scraper/app';
 import type { ApiCarrierDetectionResponse, ApiCarrierId } from '../generated/apiContract';
-import { detectCarrierMatch } from '../lib/carriers';
+import { detectCarrierMatch, isPickupCode } from '../lib/carriers';
 import { directHistoryNumber } from './directLocalHistory';
 import { captureOperationalError, errorType, logOperationalEvent } from './observability';
 import type { SupabaseServiceClient } from './supabase';
@@ -27,8 +27,11 @@ export function trackingSupportContext(trackingNumber: string, configuredCarrier
   const offered = (carrier: string) => detection.candidates.some((candidate) => candidate === (DETECTED_AS[carrier] ?? carrier));
   if (detection.carrier === 'unknown') {
     // A shape several carriers issue leaves no gap once the filed one, among them, tracked the number.
-    if (!detection.candidates.length) reasons.push('unknown_shape');
-    else if (answeredBy !== configuredCarrier || !offered(configuredCarrier)) reasons.push('ambiguous_shape');
+    // Six digits filed under no carrier are a pickup code, not a shape detection misses: the apps ask for the
+    // parcel's tracking number instead.
+    if (!detection.candidates.length) {
+      if (configuredCarrier !== 'unknown' || !isPickupCode(number)) reasons.push('unknown_shape');
+    } else if (answeredBy !== configuredCarrier || !offered(configuredCarrier)) reasons.push('ambiguous_shape');
   } else if (detection.carrier === 'intl-post') {
     reasons.push('generic_postal');
   }
@@ -62,7 +65,7 @@ export async function retainDetectionSupport(
   answer: ApiCarrierDetectionResponse,
   userId?: string,
 ): Promise<void> {
-  if (answer.carrier !== 'unknown') return;
+  if (answer.carrier !== 'unknown' || isPickupCode(answer.trackingNumber)) return;
   // The start of a number the account saved is that number still being typed, not a case.
   // When the check fails, the case opens as before.
   if (userId && await client.savedLongerTrackingNumber(userId, answer.trackingNumber).catch(() => false)) return;

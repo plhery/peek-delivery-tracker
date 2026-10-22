@@ -205,7 +205,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   const choosingCarrier = Boolean(found.match) && !found.typo && !found.several.length && found.check.status === 'several';
   const note = Boolean(state.paste) || (state.trouble !== null && state.trouble.kind !== 'validation');
   // Pip keeps the plain moments company; a question or a note takes its place.
-  const panel = note || found.nothing || found.order || Boolean(found.typo) || found.several.length > 0 || choosingCarrier
+  const panel = note || found.nothing || found.order || found.pickup || Boolean(found.typo) || found.several.length > 0 || choosingCarrier
     || found.fields.length > 0 || found.account === 'required' || found.account === 'unavailable';
   const pip = !panel && (written || firstVisit);
   const waiting = state.trouble?.kind === 'burst';
@@ -215,7 +215,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
         : choosingCarrier && state.carrier !== 'auto' ? t('door.ambiguous.track', { carrier: carrier.name })
           : state.trouble?.kind === 'server' || state.trouble?.kind === 'offline' ? t('app.tryAgain') : t('peek.track');
   // On a phone the button stands at the foot of the screen once there is something to track.
-  const idle = !written || busy || found.need === 'number' || found.need === 'order' || found.need === 'account';
+  const idle = !written || busy || found.need === 'number' || found.need === 'order' || found.need === 'code' || found.need === 'account';
   const invalid = found.nothing || Boolean(found.typo) || (state.trouble?.kind === 'validation' && !found.fields.length);
   const canPaste = !ready || (typeof navigator !== 'undefined' && typeof navigator.clipboard?.readText === 'function');
   const pasteFirst = firstVisit && !written && canPaste;

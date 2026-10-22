@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AddParcelSheet } from './AddParcelSheet';
 
@@ -11,6 +11,7 @@ function renderSheet() {
 }
 
 const notFound = /couldn’t find a tracking number/i;
+const pickup = 'That looks like a pickup code';
 
 describe('Add parcel feedback while typing', () => {
   it('waits for a pause before saying that typed text has no tracking number', () => {
@@ -47,5 +48,25 @@ describe('Add parcel feedback while typing', () => {
 
     fireEvent.click(line);
     expect(screen.getByRole('dialog', { name: 'Carrier' })).toBeInTheDocument();
+  });
+
+  it('takes six digits for a pickup code, and adds them only under a carrier picked by hand', () => {
+    const tracking = renderSheet();
+    const add = screen.getByRole('button', { name: 'Add parcel' });
+
+    fireEvent.change(tracking, { target: { value: '204617' } });
+    expect(add).toBeDisabled();
+    // The start of a longer number is still being typed.
+    expect(screen.queryByText(pickup)).not.toBeInTheDocument();
+
+    act(() => vi.advanceTimersByTime(800));
+    expect(screen.getByText(pickup)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /^Detect automatically/ }));
+    const picker = screen.getByRole('dialog', { name: 'Carrier' });
+    fireEvent.change(within(picker).getByRole('combobox', { name: 'Search carriers' }), { target: { value: 'Pannon' } });
+    fireEvent.click(within(picker).getByRole('option', { name: /^Pannon/ }));
+    expect(screen.queryByText(pickup)).not.toBeInTheDocument();
+    expect(add).toBeEnabled();
   });
 });

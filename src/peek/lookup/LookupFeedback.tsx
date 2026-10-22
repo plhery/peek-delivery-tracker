@@ -68,7 +68,7 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
             : check.status === 'several' ? { mark: detect(), strong: t('door.line.several.many', { count: check.carriers.length }), detail: t('door.line.chooseYours'), attention: true }
               : refused ? { mark: truck, strong: carrier.name, detail: t('add.line.refused'), attention: true }
                 : found.source !== 'none' ? { mark: truck, strong: carrier.name, detail: t(found.source === 'chosen' ? 'add.line.chosen' : found.source === 'found' ? 'add.line.found' : 'add.detectedCarrier') }
-                  : rested ? { mark: detect(), strong: t('add.carrier'), detail: t(check.status === 'none' ? 'add.line.none' : 'door.line.later') }
+                  : rested ? { mark: detect(), strong: t('add.carrier'), detail: found.pickup ? '' : t(check.status === 'none' ? 'add.line.none' : 'door.line.later') }
                     : null;
     // The way to the picker stays put while the carriers are asked: leaving the field starts the asking, and a
     // button that left with it would take the click along.
@@ -199,6 +199,10 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
       {/* Temu documents no address for its orders page: the note says where to tap instead. */}
       {found.order === 'amazon'
         && <a className="door-note__action" href={amazonOrdersUrl('')} target="_blank" rel="noopener noreferrer">{t('add.openAmazonOrders')}<Icon name="arrow" /></a>}
+    </DoorNote>}
+
+    {found.pickup && <DoorNote icon="lock" tone="warm" title={t('add.pickupCode.title')} urgent={state.raised}>
+      <p>{t('add.pickupCode.body')}</p>
     </DoorNote>}
 
     {found.nothing && <section className="door-shapes" aria-labelledby="door-shapes-title">

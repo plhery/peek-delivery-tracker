@@ -39,6 +39,8 @@
   "add.optional": "Optional",
   "add.paste": "Einfügen",
   "add.pasteFailed": "Einfügen fehlgeschlagen. Kopiere die Sendungsnummer und versuche es erneut.",
+  "add.pickupCode.body": "Ein 6-stelliger Code öffnet meist eine Paketstation oder gilt für die Abholung an einer Abholstelle. Gib stattdessen die Sendungsnummer des Pakets ein: Sie steht in der Versandmail.",
+  "add.pickupCode.title": "Das sieht nach einem Abholcode aus",
   "add.requirement.dpdPostcode": "Postleitzahl der Lieferadresse",
   "add.requirement.dpdPostcodeHelp": "Der Paketdienst benötigt die Zustell-PLZ, um deine Sendung anzuzeigen.",
   "add.requirement.dpdPostcodeOptionalHelp": "Damit zeigt {{carrier}} auch bestätigte Scans und das Zustellzeitfenster.",

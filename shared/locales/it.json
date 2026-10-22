@@ -39,6 +39,8 @@
   "add.optional": "Facoltativo",
   "add.paste": "Incolla",
   "add.pasteFailed": "Impossibile incollare. Copia il numero di tracciamento e riprova.",
+  "add.pickupCode.body": "Un codice di 6 cifre di solito apre un armadietto o serve a ritirare un pacco in un punto di ritiro. Inserisci invece il numero di tracciamento del pacco: è nell’e-mail di spedizione.",
+  "add.pickupCode.title": "Sembra un codice di ritiro",
   "add.requirement.dpdPostcode": "Codice postale di consegna",
   "add.requirement.dpdPostcodeHelp": "Il corriere richiede il CAP di consegna per mostrare gli aggiornamenti.",
   "add.requirement.dpdPostcodeOptionalHelp": "Con il CAP, {{carrier}} mostra anche le scansioni verificate e la fascia oraria di consegna.",

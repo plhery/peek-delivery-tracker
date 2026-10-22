@@ -325,6 +325,14 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertNil(CarrierRecognition(settledNumber: "").request(for: "", applies: true))
     }
 
+    func testSixDigitsAreAPickupCodeNobodyIsAskedAbout() {
+        XCTAssertTrue(CarrierCatalog.isPickupCode(CarrierCatalog.normalize("204 617")))
+        XCTAssertFalse(CarrierCatalog.isPickupCode("20461"))
+        XCTAssertFalse(CarrierCatalog.isPickupCode("2046170"))
+        XCTAssertFalse(CarrierCatalog.isPickupCode("ZZ4617"))
+        XCTAssertFalse(CarrierRecognition.applies(to: catalog.parse("204617"), amazon: false, demo: false))
+    }
+
     @MainActor func testARefusalIsAskedOnceForACarrierAndANumberTheServerTakes() async throws {
         XCTAssertNil(NumberRefusals.question(carrier: nil, trackingNumber: "SYNTH12345", demo: false))
         XCTAssertNil(NumberRefusals.question(carrier: .unknown, trackingNumber: "SYNTH12345", demo: false))

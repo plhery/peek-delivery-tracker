@@ -39,6 +39,8 @@
   "add.optional": "Opcional",
   "add.paste": "Colar",
   "add.pasteFailed": "Não foi possível colar. Copia o número de seguimento e tenta novamente.",
+  "add.pickupCode.body": "Um código de 6 dígitos costuma abrir um cacifo ou servir para levantar uma encomenda num ponto de levantamento. Introduz antes o número de seguimento da encomenda: está no e-mail de envio.",
+  "add.pickupCode.title": "Parece um código de levantamento",
   "add.requirement.dpdPostcode": "Código postal de entrega",
   "add.requirement.dpdPostcodeHelp": "A transportadora precisa do código postal de entrega para mostrar o seguimento.",
   "add.requirement.dpdPostcodeOptionalHelp": "Com o código postal, {{carrier}} também mostra os registos verificados e o intervalo horário de entrega.",

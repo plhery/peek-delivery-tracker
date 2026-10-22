@@ -972,6 +972,12 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         return matches(compact, pattern: "^\\(00\\)[0-9]{18}$") ? "00" + compact.dropFirst(4) : compact
     }
 
+    /// Six digits and nothing else, normalized: the code that opens a parcel locker or collects a parcel at a
+    /// pickup point, which no carrier's detection claims. Only a carrier picked by hand takes one as its number.
+    static func isPickupCode(_ normalized: String) -> Bool {
+        matches(normalized, pattern: "^[0-9]{6}$")
+    }
+
     static func format(_ raw: String, carrier: CarrierID? = nil) -> String {
         let value = normalize(raw)
         if carrier == .postlogistics {

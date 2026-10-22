@@ -39,6 +39,8 @@
   "add.optional": "Facultatif",
   "add.paste": "Coller",
   "add.pasteFailed": "Le collage a échoué. Copie le numéro de suivi et réessaie.",
+  "add.pickupCode.body": "Un code à 6 chiffres ouvre généralement une consigne ou sert à retirer un colis en point de retrait. Saisis plutôt le numéro de suivi du colis : il figure dans l’e-mail d’expédition.",
+  "add.pickupCode.title": "On dirait un code de retrait",
   "add.requirement.dpdPostcode": "Code postal de livraison",
   "add.requirement.dpdPostcodeHelp": "Le transporteur a besoin du code postal de livraison pour afficher le suivi.",
   "add.requirement.dpdPostcodeOptionalHelp": "Avec ce code, {{carrier}} affiche aussi les scans vérifiés et le créneau de livraison.",

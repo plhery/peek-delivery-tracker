@@ -39,6 +39,8 @@
   "add.optional": "Opcjonalnie",
   "add.paste": "Wklej",
   "add.pasteFailed": "Nie udało się wkleić. Skopiuj numer śledzenia i spróbuj ponownie.",
+  "add.pickupCode.body": "6-cyfrowy kod zwykle otwiera automat paczkowy albo służy do odbioru paczki w punkcie odbioru. Wpisz zamiast niego numer śledzenia paczki: znajdziesz go w e-mailu o wysyłce.",
+  "add.pickupCode.title": "To wygląda na kod odbioru",
   "add.requirement.dpdPostcode": "Kod pocztowy odbiorcy",
   "add.requirement.dpdPostcodeHelp": "Przewoźnik potrzebuje kodu pocztowego odbiorcy, aby pokazać aktualizacje.",
   "add.requirement.dpdPostcodeOptionalHelp": "Dzięki niemu {{carrier}} pokaże też zweryfikowane skany i przedział czasowy doręczenia.",

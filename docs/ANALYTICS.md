@@ -49,10 +49,10 @@ are virtual names, never real URLs.
 - **Parcels**: add, rename, change carrier, archive, restore, delete, mute, refresh, copy,
   open carrier link, paste, scan, share-in.
 - **Front door**: each notice or question that stops a lookup, once as it appears: no
-  number found, an order number, a check digit, several numbers or carriers to choose
-  from, a carrier asking for a postcode or link, an Amazon account, a refused input, a
-  lookup limit, offline, a server error or a failed verification. A paste that fails is a
-  paste with outcome `error`. Never the text.
+  number found, an order number, a pickup code, a check digit, several numbers or
+  carriers to choose from, a carrier asking for a postcode or link, an Amazon account, a
+  refused input, a lookup limit, offline, a server error or a failed verification. A paste
+  that fails is a paste with outcome `error`. Never the text.
 - **Parcel links**: lookup without an account, share or copy the link, change what the
   link shows, stop sharing, open "Notify me", turn a browser's alerts on or off, add the
   delivery to a calendar, sign in (and apart from it, sign in for the email), keep in the

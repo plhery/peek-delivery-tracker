@@ -104,6 +104,15 @@ export {
   validTrackingNumber,
 } from 'universal-parcel-scraper';
 
+/**
+ * Six digits and nothing else, normalized: no carrier's detection claims one, and those looked up turned out to be
+ * the codes that open a parcel locker or collect a parcel at a pickup point. Nobody is asked about one, and only a
+ * carrier picked by hand takes it as a tracking number.
+ */
+export function isPickupCode(normalized: string): boolean {
+  return /^\d{6}$/.test(normalized);
+}
+
 /** What the followed carrier says about who delivers: a catalog carrier, and the number it gave the parcel. */
 interface NamedDelivery {
   deliveryCarrier?: CarrierId;

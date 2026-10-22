@@ -1193,7 +1193,7 @@ describe('App', () => {
 
     await user.click(screen.getByRole('button', { name: /add a parcel/i }));
     const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
-    await user.type(within(sheet).getByLabelText(/tracking number/i), '123456');
+    await user.type(within(sheet).getByLabelText(/tracking number/i), 'ZZ123456');
     await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
 
     expect(await within(sheet).findByRole('alert')).toHaveTextContent("Couldn’t add this parcel. Check the details and try again.");

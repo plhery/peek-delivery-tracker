@@ -28,6 +28,7 @@ describe('what stops the door', () => {
     expect(stops(run([pasted('Thanks for your order!')]))).toEqual(['door-no-number']);
     expect(stops(run([pasted('302-4571983-2294617')]))).toEqual(['door-order-number']);
     expect(stops(run([pasted('PO-000-00000000000000000')]))).toEqual(['door-order-number']);
+    expect(stops(run([pasted('204617')]))).toEqual(['door-pickup-code']);
     expect(stops(run([pasted(TYPO)]))).toEqual(['door-check-digit']);
     expect(stops(run([pasted(`UPS ${UPS}\nUPS 1ZDEMO202600000029`)]))).toEqual(['door-several-numbers']);
     const several = run([pasted(SHARED), { type: 'answer', answer: { trackingNumber: SHARED, carrier: 'unknown', recognized: ['dpd', 'seur'], asked: ['dpd', 'seur'] } }]);

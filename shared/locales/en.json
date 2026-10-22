@@ -39,6 +39,8 @@
   "add.optional": "Optional",
   "add.paste": "Paste",
   "add.pasteFailed": "Couldn’t paste. Copy the tracking number and try again.",
+  "add.pickupCode.body": "A 6-digit code usually opens a parcel locker or collects a parcel at a pickup point. Enter the parcel’s tracking number instead: it’s in the shipping email.",
+  "add.pickupCode.title": "That looks like a pickup code",
   "add.requirement.dpdPostcode": "Delivery postcode",
   "add.requirement.dpdPostcodeHelp": "The carrier needs the delivery postcode to show your parcel’s updates.",
   "add.requirement.dpdPostcodeOptionalHelp": "With it, {{carrier}} also shows verified scans and the delivery window.",

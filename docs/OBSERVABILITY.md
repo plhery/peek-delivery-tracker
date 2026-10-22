@@ -166,6 +166,11 @@ number again stops the clock (`unfollowed_at`). Repeating an audit write does no
 same check twice. Cases retain sightings, fallback counts, detection candidates, the last
 outcome and direct verification evidence.
 
+Six digits filed under no carrier are a pickup code, the one that opens a parcel locker or
+collects a parcel at a pickup point, not a tracking number: neither their checks nor their
+detection opens a case, and the apps ask for the parcel's tracking number instead. Under a
+carrier picked by hand, six digits are that carrier's number and count like any other.
+
 Unresolved detection requests also retain their normalized number in this backlog,
 including cached answers and choices between carriers, before any parcel is saved.
 Invalid, refused and cancelled checks do not create observations, and neither does the
@@ -208,7 +213,8 @@ that number is delivered or returned: finished parcels are not checked again, so
 is left to confirm it. So is a case whose saved parcels are all one-off lookups that left
 the schedule before any carrier or provider answered for the number
 ([`unseenLookup.ts`](../src/server/unseenLookup.ts)), or whose parcels are all gone and
-whose last check got no answer (`waiting`): no check is left to update it. A case only the
+whose last check got no answer (`waiting`): no check is left to update it. So is a case on
+a pickup code filed under no carrier, which was never a tracking number. A case only the
 Add sheet's recognition saw stays open, since detection could still learn its shape.
 `tracking_review_runs` keeps one row per version, so restarts and other servers do not
 replay it again; another server takes over a replay left unfinished for ten minutes.

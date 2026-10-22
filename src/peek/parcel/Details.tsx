@@ -78,13 +78,18 @@ export function NumberSection({ view, links, onVisit }: {
     </a>;
   });
 
+  /** Each carrier names its own number once there are several; the one the carrier tracks the parcel by says so. */
+  const several = numbers.filter((entry) => !entry.tracksAs).length > 1;
+  const label = (carrier: CarrierInfo['id'], tracksAs?: boolean) => tracksAs ? t('detail.tracksAs', { carrier: carrierInfo(carrier, locale).name })
+    : several ? carrierInfo(carrier, locale).name : t('detail.trackingNumber');
+
   if (!numbers.length && !numberHint && !links.length) return null;
   return <section className="peekp-number">
-    {numbers.map(({ carrier, number, links: own }) => <Fragment key={number}>
+    {numbers.map(({ carrier, number, tracksAs, links: own }) => <Fragment key={number}>
       <div className="peekp-number__row">
-        <div><span>{numbers.length > 1 ? carrierInfo(carrier, locale).name : t('detail.trackingNumber')}</span><strong>{formatTrackingNumber(number, carrier)}</strong></div>
+        <div><span>{label(carrier, tracksAs)}</span><strong>{formatTrackingNumber(number, carrier)}</strong></div>
         <button type="button" onClick={() => void copy(number, carrier)}
-          aria-label={numbers.length > 1 ? `${t('detail.copyTracking')} — ${carrierInfo(carrier, locale).name}` : t('detail.copyTracking')}>
+          aria-label={numbers.length > 1 ? `${t('detail.copyTracking')} — ${label(carrier, tracksAs)}` : t('detail.copyTracking')}>
           <Icon name={copied === number ? 'check' : 'copy'} />
           <span className="sr-only" aria-live="polite">{copied === number ? t('detail.copied') : ''}</span>
         </button>

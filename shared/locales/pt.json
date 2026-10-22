@@ -193,6 +193,7 @@
   "detail.sourceWaiting": "Ainda indisponível",
   "detail.titleAria": "Nome da encomenda",
   "detail.trackingNumber": "Número de seguimento",
+  "detail.tracksAs": "{{carrier}} segue a encomenda com o número",
   "detail.trackingUnavailable": "A última atualização está indisponível. O Peek volta a tentar automaticamente. Também podes consultar o site da transportadora.",
   "detail.unmute": "Ativar notificações da encomenda",
   "door.ambiguous.hint": "As transportadoras reutilizam os números ao fim de algum tempo. Escolhe a que a tua mensagem de envio indica.",

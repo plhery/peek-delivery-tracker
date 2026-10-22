@@ -237,6 +237,36 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(named.trackingNumbers.map(\.number), ["01234567890123", "XY123456789FR"])
     }
 
+    @MainActor
+    func testTheNumberTheCarrierTracksTheParcelByComesLast() {
+        // A reference the carrier's search resolved to a parcel: its own number follows the one typed, its page doesn't.
+        var reference = Parcel(
+            id: UUID(), trackingNumber: "00000000000001", label: "Shoes",
+            carrier: .hermesDe, createdAt: "2026-09-10T07:00:00Z", syncStatus: .ok,
+            carrierData: CarrierData(canonicalTrackingNumber: "H0000000000001"), notificationsMuted: false
+        )
+        XCTAssertEqual(reference.trackingNumbers.map(\.number), ["00000000000001", "H0000000000001"])
+        XCTAssertEqual(reference.trackingNumbers.map(\.tracksAs), [false, true])
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        XCTAssertEqual(reference.trackingNumbers.map { reference.trackingNumberLabel($0, localizer: localizer) },
+            ["Tracking number", "Hermes Germany tracks this as"])
+        let pages = ParcelTrackingLink.byNumber(catalog.trackingLinks(for: reference, language: .en), numbers: reference.trackingNumbers)
+        XCTAssertEqual(pages.own.map(\.count), [1, 0])
+
+        // The same number written differently is not repeated, and a parcel link brings it too.
+        reference.carrierData?.canonicalTrackingNumber = "0000 0000 0000 01"
+        XCTAssertEqual(reference.trackingNumbers.count, 1)
+        let shared = Parcel(shared: PublicPackage(
+            id: reference.id, trackingNumber: reference.trackingNumber, label: "", carrier: .hermesDe, createdAt: reference.createdAt,
+            syncStatus: .ok, carrierData: PublicPackageCarrierData(canonicalTrackingNumber: "H0000000000001"), notificationsMuted: false,
+            trackingEvents: []
+        ))
+        XCTAssertEqual(shared.trackingNumbers.map(\.number), ["00000000000001", "H0000000000001"])
+    }
+
     func testDHLEcommerceDetection() {
         XCTAssertEqual(catalog.detect("33870000000000001").confidence, .low)
         XCTAssertEqual(catalog.detect("GM1234567890123456").carrier.rawValue, "dhl-ecommerce")

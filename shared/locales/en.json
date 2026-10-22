@@ -193,6 +193,7 @@
   "detail.sourceWaiting": "Not ready yet",
   "detail.titleAria": "Parcel name",
   "detail.trackingNumber": "Tracking number",
+  "detail.tracksAs": "{{carrier}} tracks this as",
   "detail.trackingUnavailable": "The carrier’s latest update is unavailable. Peek will try again automatically; you can also check its website.",
   "detail.unmute": "Turn on parcel notifications",
   "door.ambiguous.hint": "Carriers reuse numbers after a while. Choose the one your shipping message names.",

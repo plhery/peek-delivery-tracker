@@ -142,6 +142,10 @@ export function ParcelDetail({
   const completionDate = localizedParcelCompletionDate(parcel, languageTag, t);
   const estimate = parcelDeliveryEstimate(parcel);
   const { numbers: trackingNumbers, loose: looseLinks } = trackingLinksByNumber(parcelTrackingNumbers(parcel), parcelTrackingLinks(parcel, locale));
+  // Each carrier names its own number once there are several; the one the carrier tracks the parcel by says so.
+  const severalNumbers = trackingNumbers.filter((entry) => !entry.tracksAs).length > 1;
+  const numberLabel = (numberCarrier: CarrierId, tracksAs?: boolean) => tracksAs ? t('detail.tracksAs', { carrier: carrierInfo(numberCarrier, locale).name })
+    : severalNumbers ? carrierInfo(numberCarrier, locale).name : t('detail.trackingNumber');
   const lastChecked = parcel.lastSyncedAt
     ? localizedRelativeTime(parcel.lastSyncedAt, t, languageTag)
     : null;
@@ -597,15 +601,15 @@ export function ParcelDetail({
           </dl>
         )}
         <div className="detail__shipment">
-          {trackingNumbers.map(({ carrier: numberCarrier, number, links }) => <Fragment key={number}>
+          {trackingNumbers.map(({ carrier: numberCarrier, number, tracksAs, links }) => <Fragment key={number}>
             <div className="detail__tracking-ticket">
-              <span className="detail__tracking-label">{trackingNumbers.length > 1 ? carrierInfo(numberCarrier, locale).name : t('detail.trackingNumber')}</span>
+              <span className="detail__tracking-label">{numberLabel(numberCarrier, tracksAs)}</span>
               <strong>{formatTrackingNumber(number, numberCarrier)}</strong>
               <button
                 type="button"
                 className="detail__tracking-copy"
                 onClick={() => void copyTrackingNumber(number, numberCarrier)}
-                aria-label={trackingNumbers.length > 1 ? `${t('detail.copyTracking')} — ${carrierInfo(numberCarrier, locale).name}` : t('detail.copyTracking')}
+                aria-label={trackingNumbers.length > 1 ? `${t('detail.copyTracking')} — ${numberLabel(numberCarrier, tracksAs)}` : t('detail.copyTracking')}
               >
                 <svg aria-hidden="true" viewBox="0 0 24 24"><path d={copyStatus === 'copied' && copiedNumber === number ? 'm5 12 4 4L19 6' : 'M9 9h11v12H9V9ZM5 15H3V3h12v2'} /></svg>
                 <span className="sr-only" aria-live="polite">{copyStatus === 'copied' && copiedNumber === number ? t('detail.copied') : ''}</span>

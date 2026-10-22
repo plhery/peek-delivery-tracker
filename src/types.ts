@@ -59,6 +59,8 @@ export interface Parcel {
   /** The carrier the followed one names as delivering, before that carrier is followed, and the number it gave. */
   deliveryCarrier?: CarrierId;
   deliveryTrackingNumber?: string;
+  /** The number the answering carrier tracks the parcel by, when it names one: a reference resolves to its barcode. */
+  canonicalTrackingNumber?: string;
   /** Whether Swiss Post has announced a Swiss-issued inbound shipment. */
   swissPostReady?: boolean;
   archivedAt?: string;

@@ -797,9 +797,7 @@ private struct SharedParcelNumber: View {
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(Array(numbers.enumerated()), id: \.element.number) { index, entry in
                     HStack(alignment: .center, spacing: 8) {
-                        row(title: numbers.count > 1
-                                ? catalog.info(for: entry.carrier, language: localizer.language).displayName
-                                : localizer.text("detail.trackingNumber"),
+                        row(title: parcel.trackingNumberLabel(entry, localizer: localizer),
                             number: CarrierCatalog.format(entry.number, carrier: entry.carrier))
                             .textSelection(.enabled)
                         Spacer(minLength: 0)
@@ -810,7 +808,7 @@ private struct SharedParcelNumber: View {
                         }
                         .buttonStyle(.plain).foregroundStyle(.secondary)
                         .accessibilityLabel(localizer.text(copiedNumber == entry.number ? "detail.copied" : "detail.copyTracking")
-                            + (numbers.count > 1 ? " — " + catalog.info(for: entry.carrier, language: localizer.language).displayName : ""))
+                            + (numbers.count > 1 ? " — " + parcel.trackingNumberLabel(entry, localizer: localizer) : ""))
                     }
                     carrierLinks(pages.own[index], own: true)
                 }

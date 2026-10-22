@@ -193,6 +193,7 @@
   "detail.sourceWaiting": "Pas encore disponible",
   "detail.titleAria": "Nom du colis",
   "detail.trackingNumber": "Numéro de suivi",
+  "detail.tracksAs": "{{carrier}} le suit sous le numéro",
   "detail.trackingUnavailable": "La dernière mise à jour est indisponible. Peek réessaiera automatiquement. Tu peux aussi consulter le site du transporteur.",
   "detail.unmute": "Réactiver les notifications de ce colis",
   "door.ambiguous.hint": "Les transporteurs réutilisent les numéros au bout d’un moment. Choisis celui que nomme ton message d’expédition.",

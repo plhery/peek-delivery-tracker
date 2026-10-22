@@ -5,6 +5,7 @@ import {
   type CarrierId,
   type CarrierInputField as ScraperInputField,
   type CarrierInputRequirement as ScraperInputRequirement,
+  normalizeTrackingNumber,
 } from 'universal-parcel-scraper';
 import {
   activeTrackingCarrierId,
@@ -44,7 +45,7 @@ export function trackingLinksByNumber(numbers: ReturnType<typeof parcelTrackingN
   const rows = numbers.map((entry) => ({ ...entry, links: [] as ParcelTrackingLink[] }));
   const loose: ParcelTrackingLink[] = [];
   for (const link of links) {
-    const row = link.role === 'active' ? rows[0] : rows.slice(1).find((entry) => entry.carrier === link.carrier.id);
+    const row = link.role === 'active' ? rows[0] : rows.slice(1).find((entry) => !entry.tracksAs && entry.carrier === link.carrier.id);
     (row?.links ?? loose).push(link);
   }
   return { numbers: rows, loose };
@@ -136,11 +137,19 @@ export function deliveringCarrierId(parcel: Parameters<typeof namedDelivery>[0])
   return active !== displayedCarrierId(parcel) ? active : namedDelivery(parcel)?.carrier ?? null;
 }
 
-/** Distinct numbers, the followed one first, and then the named delivering carrier's own. */
-export function parcelTrackingNumbers(parcel: Parameters<typeof scraperTrackingNumbers>[0] & NamedDelivery) {
-  const numbers = scraperTrackingNumbers(parcel);
+/**
+ * Distinct numbers, the followed one first, then the named delivering carrier's own, and last the number the followed
+ * carrier tracks the parcel by when it is none of them. That one is `tracksAs`: a reference the carrier's search
+ * resolved to a parcel, or a number typed with more or less than the carrier's own, shown so the reader can tell
+ * which parcel the carrier answered for.
+ */
+export function parcelTrackingNumbers(parcel: Parameters<typeof scraperTrackingNumbers>[0] & NamedDelivery & { canonicalTrackingNumber?: string }) {
   const named = namedDelivery(parcel);
-  return named?.number ? [...numbers, { carrier: named.carrier, number: named.number }] : numbers;
+  const numbers: { carrier: CarrierId; number: string; tracksAs?: true }[] = named?.number
+    ? [...scraperTrackingNumbers(parcel), { carrier: named.carrier, number: named.number }] : scraperTrackingNumbers(parcel);
+  const canonical = parcel.canonicalTrackingNumber;
+  if (!canonical || numbers.some(({ number }) => normalizeTrackingNumber(number) === normalizeTrackingNumber(canonical))) return numbers;
+  return [...numbers, { carrier: numbers[0]!.carrier, number: canonical, tracksAs: true as const }];
 }
 
 /** The followed carrier's page first, and then the named delivering carrier's, for its own number. */

@@ -2446,6 +2446,7 @@ struct CarrierData: Codable, Equatable, Hashable, Sendable {
     var activeTrackingNumber: String? = nil
     var deliveryCarrier: CarrierID? = nil
     var deliveryTrackingNumber: String? = nil
+    var canonicalTrackingNumber: String? = nil
     var originalPackageID: UUID? = nil
     var originalCarrier: CarrierID? = nil
     var originalTrackingNumber: String? = nil
@@ -2471,6 +2472,7 @@ struct CarrierData: Codable, Equatable, Hashable, Sendable {
         case activeTrackingNumber
         case deliveryCarrier
         case deliveryTrackingNumber
+        case canonicalTrackingNumber
         case originalPackageID = "originalPackageId"
         case originalCarrier
         case originalTrackingNumber
@@ -2534,6 +2536,7 @@ struct PublicPackageCarrierData: Codable, Equatable, Hashable, Sendable {
     var originalTrackingNumber: String? = nil
     var deliveryCarrier: CarrierID? = nil
     var deliveryTrackingNumber: String? = nil
+    var canonicalTrackingNumber: String? = nil
     var trackingProvider: String? = nil
     var carrierAnswered: Bool? = nil
     var autoChangedFrom: CarrierID? = nil

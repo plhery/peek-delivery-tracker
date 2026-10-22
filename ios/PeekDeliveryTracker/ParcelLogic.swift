@@ -200,13 +200,26 @@ extension Parcel {
     var isReturned: Bool { currentStage == .returned }
     var isActive: Bool { !isArchived && !(currentStage?.isFinal ?? false) }
 
-    /// Distinct numbers, the followed one first, and then the named delivering carrier's own.
-    var trackingNumbers: [(carrier: CarrierID, number: String)] {
-        let delivery = (carrier: activeTrackingCarrier, number: carrierData?.activeTrackingNumber?.nonEmpty ?? trackingNumber)
-        let original = (carrier: carrierData?.originalCarrier ?? carrier, number: carrierData?.originalTrackingNumber?.nonEmpty ?? trackingNumber)
-        let numbers = delivery.number == original.number ? [delivery] : [delivery, original]
-        guard let named = namedDelivery, let number = named.number else { return numbers }
-        return numbers + [(carrier: named.carrier, number: number)]
+    /// Distinct numbers, the followed one first, then the named delivering carrier's own, and last the number the
+    /// followed carrier tracks the parcel by when it is none of them. That one is `tracksAs`: a reference the carrier's
+    /// search resolved to a parcel, or a number typed with more or less than the carrier's own, shown so the reader can
+    /// tell which parcel the carrier answered for.
+    var trackingNumbers: [(carrier: CarrierID, number: String, tracksAs: Bool)] {
+        let delivery = (carrier: activeTrackingCarrier, number: carrierData?.activeTrackingNumber?.nonEmpty ?? trackingNumber, tracksAs: false)
+        let original = (carrier: carrierData?.originalCarrier ?? carrier, number: carrierData?.originalTrackingNumber?.nonEmpty ?? trackingNumber, tracksAs: false)
+        var numbers = delivery.number == original.number ? [delivery] : [delivery, original]
+        if let named = namedDelivery, let number = named.number { numbers.append((carrier: named.carrier, number: number, tracksAs: false)) }
+        guard let canonical = carrierData?.canonicalTrackingNumber?.nonEmpty,
+              !numbers.contains(where: { CarrierCatalog.normalize($0.number) == CarrierCatalog.normalize(canonical) }) else { return numbers }
+        return numbers + [(carrier: delivery.carrier, number: canonical, tracksAs: true)]
+    }
+
+    /// What a number is called beside it: the carrier's name once there are several, and what the carrier tracks the
+    /// parcel as for the number it resolved the typed one to.
+    @MainActor func trackingNumberLabel(_ entry: (carrier: CarrierID, number: String, tracksAs: Bool), localizer: Localizer) -> String {
+        let name = CarrierCatalog.shared.info(for: entry.carrier, language: localizer.language).displayName
+        if entry.tracksAs { return localizer.text("detail.tracksAs", ["carrier": name]) }
+        return trackingNumbers.filter { !$0.tracksAs }.count > 1 ? name : localizer.text("detail.trackingNumber")
     }
 
     var displayedCarrier: CarrierID { carrierData?.originalCarrier ?? activeTrackingCarrier }

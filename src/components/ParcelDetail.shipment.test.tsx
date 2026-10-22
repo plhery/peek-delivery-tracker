@@ -56,6 +56,15 @@ describe('shipment details', () => {
     expect(screen.queryByText('Not ready yet')).not.toBeInTheDocument();
   });
 
+  it('shows the number the carrier tracks the parcel by under the one typed', () => {
+    show({ carrier: 'hermes-de', trackingNumber: '00000000000001', canonicalTrackingNumber: 'H0000000000001' });
+    expect([...document.querySelectorAll('.detail__tracking-label')].map(label => label.textContent))
+      .toEqual(['Tracking number', 'Hermes Germany tracks this as']);
+    expect(screen.getByRole('button', { name: 'Copy tracking number — Hermes Germany tracks this as' })).toBeVisible();
+    expect(screen.getAllByRole('link', { name: /^Open the .+ website$/ })[0].closest('.detail__carrier-links')!.previousElementSibling!
+      .querySelector('.detail__tracking-label')!.textContent).toBe('Tracking number');
+  });
+
   it('says the sender still has the parcel once its only scan, the label, is a day old', () => {
     const label = (hoursAgo: number) => [{ id: 'label', parcelId: 'parcel', stage: 'registered' as const, description: 'Label created', occurredAt: new Date(Date.now() - hoursAgo * 3_600_000).toISOString() }];
     const note = 'The sender has created the label but hasn’t handed the parcel to Chronopost yet. Tracking starts when they do.';

@@ -644,6 +644,12 @@ missing clock or partial answer sent the result elsewhere, the result is marked
 `carrier_answered` and the link stays with the carrier. Postal Ninja and UPU link to their public forms. No deep links are
 guessed.
 
+A carrier can answer for a number with one of its own (`canonical_tracking_number`): a
+reference its search resolved to a parcel (Hermes Germany's), or a number typed with more or
+less than the carrier's. When it is none of the numbers shown, the app, the iPhone app and
+parcel links show it last, as "<carrier> tracks this as", so whoever typed the number can tell
+which parcel the carrier answered for. A link shows it only where it shows the parcel's number.
+
 ## Shared provider protection
 
 `tracking_provider_health` (service role only) coordinates workers:

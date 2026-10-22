@@ -193,6 +193,7 @@
   "detail.sourceWaiting": "Non ancora disponibile",
   "detail.titleAria": "Nome del pacco",
   "detail.trackingNumber": "Numero di tracciamento",
+  "detail.tracksAs": "{{carrier}} lo traccia con il numero",
   "detail.trackingUnavailable": "L’ultimo aggiornamento del corriere non è disponibile. Peek riproverà automaticamente; puoi anche consultare il sito del corriere.",
   "detail.unmute": "Riattiva le notifiche del pacco",
   "door.ambiguous.hint": "I corrieri riutilizzano i numeri dopo un po’. Scegli quello indicato nel messaggio di spedizione.",

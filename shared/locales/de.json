@@ -193,6 +193,7 @@
   "detail.sourceWaiting": "Noch nicht verfügbar",
   "detail.titleAria": "Paketname",
   "detail.trackingNumber": "Sendungsnummer",
+  "detail.tracksAs": "{{carrier}} führt die Sendung unter",
   "detail.trackingUnavailable": "Das neueste Update des Paketdienstes ist nicht verfügbar. Peek versucht es automatisch erneut. Du kannst auch auf seiner Website nachsehen.",
   "detail.unmute": "Mitteilungen für dieses Paket einschalten",
   "door.ambiguous.hint": "Paketdienste vergeben Nummern nach einiger Zeit neu. Wähle den, den deine Versandnachricht nennt.",

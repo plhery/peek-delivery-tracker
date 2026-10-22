@@ -31642,6 +31642,7 @@ export interface ApiPackageRow {
   "active_tracking_number"?: string | null;
   "delivery_carrier"?: ApiCarrierId | null;
   "delivery_tracking_number"?: string | null;
+  "canonical_tracking_number"?: string | null;
   "original_package_id"?: string | null;
   "original_carrier"?: ApiCarrierId | null;
   "original_tracking_number"?: string | null;
@@ -32000,6 +32001,7 @@ export interface ApiPublicPackage {
   "original_tracking_number"?: string;
   "delivery_carrier"?: ApiCarrierId;
   "delivery_tracking_number"?: string;
+  "canonical_tracking_number"?: string;
   "tracking_provider"?: string;
   "carrier_answered"?: boolean;
   "auto_changed_from"?: ApiCarrierId;

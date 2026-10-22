@@ -193,6 +193,7 @@
   "detail.sourceWaiting": "Jeszcze niedostępne",
   "detail.titleAria": "Nazwa przesyłki",
   "detail.trackingNumber": "Numer śledzenia",
+  "detail.tracksAs": "{{carrier}} śledzi przesyłkę pod numerem",
   "detail.trackingUnavailable": "Najnowsza aktualizacja jest niedostępna. Peek spróbuje ponownie automatycznie. Możesz też sprawdzić stronę przewoźnika.",
   "detail.unmute": "Włącz powiadomienia o przesyłce",
   "door.ambiguous.hint": "Przewoźnicy po pewnym czasie używają numerów ponownie. Wybierz tego, którego podaje wiadomość o wysyłce.",

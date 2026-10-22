@@ -375,6 +375,14 @@ describe('ParcelPage stages and troubles', () => {
     ]);
   });
 
+  it('shows the number the carrier tracks the parcel by under the one typed', async () => {
+    await shown(view(journey, { carrier: 'hermes-de', trackingNumber: '00000000000001', canonicalTrackingNumber: 'H0000000000001' }));
+    expect([...document.querySelectorAll('.peekp-number__row > div > span')].map((label) => label.textContent))
+      .toEqual(['Tracking number', 'Hermes Germany tracks this as']);
+    expect(screen.getByText('H0000000000001')).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Copy tracking number — Hermes Germany tracks this as' })).toBeVisible();
+  });
+
   it('keeps a single mark for a parcel one carrier carries', async () => {
     await shown(view(journey));
     expect(card().querySelectorAll('.carrier-mark')).toHaveLength(1);

@@ -579,9 +579,7 @@ struct ParcelDetailView: View {
             ForEach(Array(numbers.enumerated()), id: \.element.number) { index, entry in
                 row {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(numbers.count > 1
-                            ? catalog.info(for: entry.carrier, language: localizer.language).displayName
-                            : localizer.text("detail.trackingNumber"))
+                        Text(parcel.trackingNumberLabel(entry, localizer: localizer))
                             .font(.caption2).foregroundStyle(.secondary)
                         Text(CarrierCatalog.format(entry.number, carrier: entry.carrier))
                             .font(.system(.caption, design: .monospaced))
@@ -604,7 +602,7 @@ struct ParcelDetailView: View {
                     }
                     .buttonStyle(.plain).foregroundStyle(.secondary)
                     .accessibilityLabel(localizer.text(copiedNumber == entry.number ? "detail.copied" : "detail.copyTracking")
-                        + (numbers.count > 1 ? " — " + catalog.info(for: entry.carrier, language: localizer.language).displayName : ""))
+                        + (numbers.count > 1 ? " — " + parcel.trackingNumberLabel(entry, localizer: localizer) : ""))
                 }
                 carrierLinks(pages.own[index], own: true, tint: tint)
             }

@@ -229,11 +229,12 @@ const SHOWN_CARRIER_DATA: Record<string, (value: unknown) => boolean> = {
   weight_kg: amount,
   destination_country: text,
 };
-/** The other leg's number is a tracking number too: shown only where the parcel's own is. */
+/** The other leg's number, and the one the carrier tracks the parcel by, are tracking numbers too: shown only where the parcel's own is. */
 const SHOWN_WITH_NUMBER: Record<string, (value: unknown) => boolean> = {
   active_tracking_number: text,
   original_tracking_number: text,
   delivery_tracking_number: text,
+  canonical_tracking_number: text,
 };
 
 /**

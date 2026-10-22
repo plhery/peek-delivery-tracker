@@ -18,6 +18,7 @@ import {
   parseTrackingInput,
   requirementSatisfied,
   supportsSwissPostHandoff,
+  trackingLinksByNumber,
   tracksAutomatically,
 } from './carriers';
 import { DEFAULT_CARRIER_COLOR } from './carrierBrand';
@@ -2111,6 +2112,18 @@ describe('parcelTrackingNumbers', () => {
     // Named without a number of its own, or with the followed one: no second number.
     expect(parcelTrackingNumbers({ ...named, deliveryTrackingNumber: undefined })).toHaveLength(1);
     expect(parcelTrackingLinks({ ...named, deliveryTrackingNumber: 'XY123456789FR' }, 'en')).toHaveLength(1);
+  });
+  it('adds the number the carrier tracks the parcel by last, when it is none of the others', () => {
+    const reference = { carrier: 'hermes-de', trackingNumber: '00000000000001', canonicalTrackingNumber: 'H0000000000001' } as const;
+    const numbers = parcelTrackingNumbers(reference);
+    expect(numbers).toEqual([{ carrier: 'hermes-de', number: '00000000000001' }, { carrier: 'hermes-de', number: 'H0000000000001', tracksAs: true }]);
+    // The carrier's page stays under the number that was typed.
+    expect(trackingLinksByNumber(numbers, parcelTrackingLinks(reference, 'en')).numbers.map(({ links }) => links.length)).toEqual([1, 0]);
+    // The same number written differently, or one already listed, is not repeated.
+    expect(parcelTrackingNumbers({ ...reference, canonicalTrackingNumber: '0000 0000 0000 01' })).toHaveLength(1);
+    const handed = { carrier: 'gls-de', trackingNumber: '123456789011', originalCarrier: 'gls-de', originalTrackingNumber: '123456789011',
+      trackingSource: 'swiss-post', activeTrackingNumber: '990000000000000001', canonicalTrackingNumber: '990000000000000001' } as const;
+    expect(parcelTrackingNumbers(handed)).toHaveLength(2);
   });
 });
 

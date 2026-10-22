@@ -36,7 +36,7 @@ import {
 import type { JsonObject } from './types';
 import * as observability from './observability';
 import * as metrics from './metrics';
-import { catalogRules, routingFailure, TrackingRouter } from './trackingRouting';
+import { catalogRules, recognizers, routingFailure, TrackingRouter } from './trackingRouting';
 import { WorkerShutdown } from './trackingAudit';
 import { UniversalTrackingError } from 'universal-parcel-scraper/node';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
@@ -2128,8 +2128,8 @@ describe('TrackingSyncService', () => {
       current_stage: 'in_transit', carrier_data: { tracking_provider: 'ParcelsApp', routing: { version: 1, configured_carrier: 'unknown',
         failures: {}, probe_cursor: 0, discovery_cursor: 0, rules: 'older', ...routing } } });
     const failure = (kind: string, values: JsonObject = {}) => ({ failures: { ups: { kind, count: 1, retry_at: '2026-09-09T09:00:00Z', ...values } } });
-    // Listed newest first: UPS asked again after a rate limit, a parcel in its cooldown, 51 that never asked
-    // UPS, and the oldest, whose number UPS refused under an older release.
+    // Listed newest first: UPS asked again after a rate limit, which its schedule does, a parcel in its
+    // cooldown, 51 that never asked UPS, and the oldest, whose number UPS refused under an older release.
     const candidates = [parcel('retry', failure('rate_limited')), parcel('deferred', { next_check_at: '2026-09-09T10:30:00Z' }),
       ...Array.from({ length: 51 }, (_, index) => parcel(`due-${index}`)),
       parcel('refused', failure('schema', { user_error: 'carrier:invalid_input' }))];
@@ -2141,35 +2141,41 @@ describe('TrackingSyncService', () => {
     const queued = () => client.enqueueSyncJob.mock.calls.map(([job]) => job.packageId);
     await expect(service.queueRedetections()).resolves.toBe(50);
     expect(queued()).toEqual(['refused', ...Array.from({ length: 49 }, (_, index) => `due-${index}`)]);
-    expect(logged).toHaveBeenCalledWith('tracking_redetections_queued', { queued: 50, waiting: 4 });
+    expect(logged).toHaveBeenCalledWith('tracking_redetections_queued', { queued: 50, waiting: 3 });
     // The rest wait until that batch's checks are done.
     now = new Date('2026-09-09T10:30:00Z');
     await expect(service.queueRedetections()).resolves.toBe(0);
     expect(client.packageSyncJobsPending).toHaveBeenLastCalledWith(queued());
     client.packageSyncJobsPending.mockResolvedValue(false);
-    await expect(service.queueRedetections()).resolves.toBe(4);
-    expect(queued().slice(50)).toEqual(['deferred', 'due-49', 'due-50', 'retry']);
+    await expect(service.queueRedetections()).resolves.toBe(3);
+    expect(queued().slice(50)).toEqual(['deferred', 'due-49', 'due-50']);
     await expect(service.queueRedetections()).resolves.toBe(0);
     expect(client.listRedetectionCandidates).toHaveBeenCalledOnce();
   });
 
-  it('asks a number nobody has seen again after a release on its own cadence, unless it points to a carrier never asked', async () => {
-    const parcel = (id: string, last: string, routing: JsonObject = {}) => ({ id, user_id: 'a', carrier: 'unknown',
-      tracking_number: '1Z999AA10123456784', current_stage: 'pending', created_at: '2026-09-01T09:00:00Z', last_synced_at: last,
+  it('checks a parcel filed under no carrier after a release only for a carrier it never asked, or one the release taught its number', async () => {
+    const parcel = (id: string, number: string, last: string, routing: JsonObject = {}) => ({ id, user_id: 'a', carrier: 'unknown',
+      tracking_number: number, current_stage: 'pending', created_at: '2026-09-01T09:00:00Z', last_synced_at: last,
       sync_status: 'waiting', carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {}, probe_cursor: 0,
         discovery_cursor: 0, rules: 'older', ...routing } } });
-    const asked = { candidate_probes: { ups: { count: 6, retry_at: '2026-09-09T09:00:00Z' } } };
+    const asked = (carrier: string) => ({ candidate_probes: { [carrier]: { count: 6, retry_at: '2026-09-09T09:00:00Z' } } });
+    // A ten-digit DHL Express waybill, whose recognition asks DHL Express first, then other carriers.
+    const waybill = '1234567891';
     const client = { ...fakeClient(), packageSyncJobsPending: vi.fn().mockResolvedValue(false),
       listRedetectionCandidates: vi.fn().mockResolvedValue([
-        // Added eight days ago and UPS asked already: weekly.
-        parcel('checked-yesterday', '2026-09-08T12:00:15Z', asked), parcel('checked-last-week', '2026-09-02T09:00:15Z', asked),
-        // UPS never asked: the release may have taught it the number.
-        parcel('never-asked', '2026-09-09T09:00:15Z')]),
+        // UPS asked already, a day or a week ago: their own cadence asks it again.
+        parcel('checked-yesterday', '1Z999AA10123456784', '2026-09-08T12:00:15Z', asked('ups')),
+        parcel('checked-last-week', '1Z999AA10123456784', '2026-09-02T09:00:15Z', asked('ups')),
+        // UPS never asked.
+        parcel('never-asked', '1Z999AA10123456784', '2026-09-09T09:00:15Z'),
+        // A carrier whose recognition the release brought to the number, and the same carriers as before.
+        parcel('taught', waybill, '2026-09-08T12:00:15Z', { ...asked('dhl-express'), recognizers: ['dhl-express'] }),
+        parcel('same', waybill, '2026-09-08T12:00:15Z', { ...asked('dhl-express'), recognizers: recognizers(waybill) })]),
       enqueueSyncJob: vi.fn().mockResolvedValue({ id: 'job' }) };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn() }, null,
       () => new Date('2026-09-09T10:00:00Z'));
     await expect(service.queueRedetections()).resolves.toBe(2);
-    expect(client.enqueueSyncJob.mock.calls.map(([job]) => job.packageId)).toEqual(['never-asked', 'checked-last-week']);
+    expect(client.enqueueSyncJob.mock.calls.map(([job]) => job.packageId)).toEqual(['never-asked', 'taught']);
   });
 
   it('lists every page of the parcels the catalog may point elsewhere', async () => {

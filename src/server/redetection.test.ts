@@ -1,7 +1,7 @@
 import { recognitionCandidates } from 'universal-parcel-scraper';
 import { describe, expect, it } from 'vitest';
 import { rerouteAskable, rerouteCarrier } from './redetection';
-import { catalogRules, opensBrowser } from './trackingRouting';
+import { catalogRules, opensBrowser, recognizers } from './trackingRouting';
 import type { JsonObject } from './types';
 
 const routing = { version: 1, configured_carrier: 'unknown', failures: {}, probe_cursor: 0, discovery_cursor: 0, rules: 'older' };
@@ -178,6 +178,22 @@ it('ranks the checks most likely to change the answer first', async () => {
     .toEqual({ carrier: 'ups', rank: 2 });
   expect(await lead({ tracking_number: '1234567891', current_stage: 'pending' }, { tracking_provider: undefined }))
     .toEqual({ carrier: 'dhl-express', rank: 2 });
+});
+
+it('points a parcel filed under no carrier to a carrier the release taught to recognize its number', async () => {
+  const now = Date.parse('2026-09-10T12:00:00Z');
+  const asked = { 'dhl-express': { count: 3, retry_at: '2026-09-10T11:00:00Z' } };
+  const unfiled = (routing: JsonObject) => parcel({ tracking_number: '1234567891', current_stage: 'pending' },
+    { tracking_provider: undefined, routing: { candidate_probes: asked, ...routing } });
+  const lead = (item: JsonObject, refusing: string[] = []) => rerouteAskable(item, 'newer', now, async (carrier) => refusing.includes(carrier));
+  // The older release's recognition did not list the next carrier.
+  const before = recognizers('1234567891').filter((carrier) => carrier !== NEXT);
+  expect(await lead(unfiled({ recognizers: before }))).toEqual({ carrier: NEXT, rank: 1 });
+  // Unless its adapter refuses the number.
+  expect(await lead(unfiled({ recognizers: before }), [NEXT])).toEqual({ carrier: 'dhl-express', rank: 2 });
+  // The same carriers, or a check that noted none: recognition's first guess, asked again.
+  expect(await lead(unfiled({ recognizers: recognizers('1234567891') }))).toEqual({ carrier: 'dhl-express', rank: 2 });
+  expect(await lead(unfiled({}))).toEqual({ carrier: 'dhl-express', rank: 2 });
 });
 
 it('asks a carrier the parcel already asked that can open a browser again only once the parcel has gone half a day without a check', () => {

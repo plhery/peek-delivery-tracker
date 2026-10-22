@@ -5,7 +5,7 @@ import { detectCarrierMatch } from '../lib/carriers';
 import { AUTOMATIC_CARRIER_IDS } from './carriers';
 import { localClockCarrier } from './directLocalHistory';
 import { refusesNumber } from './numberRefusal';
-import { asNewAs, catalogRules, directCarrier, opensBrowser, releaseLapses, routingState } from './trackingRouting';
+import { asNewAs, catalogRules, directCarrier, opensBrowser, recognizers, releaseLapses, routingState } from './trackingRouting';
 import { isRecord, type JsonObject } from './types';
 
 /** Only parcels added this recently are looked at again, as carrier recognition only asks for them. */
@@ -27,10 +27,10 @@ export const RELEASE_REASK_MS = 12 * 60 * 60 * 1_000;
  * recognition asked before, or one whose filed carrier answered on local
  * clocks that the catalog now dates, or that the release may date, once the
  * parcel has gone RELEASE_REASK_MS without a check. A parcel filed under no carrier gets its detected
- * or named carrier, or else the first carrier its check's recognition would
- * ask, asked before or not, once that carrier's wait is over: a release may
- * have taught it the number, and its last answer may have been a passing
- * failure such as a rate limit. A carrier the parcel already asked whose lookup
+ * or named carrier, else a carrier that recognizes its number under this release
+ * and did not under the one that last routed it, or else the first carrier its
+ * check's recognition would ask, asked before or not, once that carrier's wait
+ * is over. A carrier the parcel already asked whose lookup
  * can open a browser waits until the parcel has gone RELEASE_REASK_MS without a
  * check, unless the answer it gave, set aside as older than the parcel or on
  * local clocks, would now be taken. Null otherwise. Only parcels filed under no carrier, or showing a
@@ -47,9 +47,11 @@ export function rerouteCarrier(parcel: JsonObject, rules = catalogRules(), now =
  * The carrier a release's check would ask, and how likely that check is to change the
  * parcel's answer, the most likely first: 0, the carrier's own answer is now dated, it
  * refused the number under an older release, or the answer it gave that was set aside would
- * now be taken; 1, a carrier the parcel never asked; 2, one a parcel filed under no carrier
+ * now be taken; 1, a carrier the parcel never asked, or one the release taught to recognize
+ * the number of a parcel filed under no carrier; 2, one a parcel filed under no carrier
  * asks again, the first its recognition would ask, or the filed carrier whose answer on
- * local clocks the release may date.
+ * local clocks the release may date. A release queues no check of a parcel filed under no
+ * carrier at 2: its own schedule asks those again (queueRedetections).
  */
 export interface RerouteLead { carrier: string; rank: 0 | 1 | 2 }
 
@@ -98,6 +100,10 @@ function rerouteLead(parcel: JsonObject, rules: string, now: number, refused: Re
   const named = names.length ? universalCarrierHints(names, number).discovered_carrier : undefined;
   if (leads(named) && (named !== routing.discovered_carrier || refusedBefore(named))) return lead(named);
   if (unfiled) {
+    // A carrier that recognizes the number under this release and did not under the one
+    // that last routed it: the release taught it the number's shape.
+    const taught = recognizers(number).find((carrier) => routing.recognizers?.includes(carrier) === false && !refused.has(carrier));
+    if (taught) return lead(taught, 1);
     const [first] = recognitionCandidates(number, { hint: routing.discovered_carrier,
       skip: (carrier) => waiting(carrier) || refused.has(carrier) });
     if (first) return lead(first.carrier, 2);

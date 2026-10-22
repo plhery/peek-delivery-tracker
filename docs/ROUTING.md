@@ -453,11 +453,11 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   its scans: its own answer can now serve the parcel. A carrier the catalog still gives as
   answering on local clocks is asked again once the parcel has gone 12 hours without a
   check: the release may date its scans. A parcel
-  filed under no carrier is also queued when its detected or named carrier, or else a
-  carrier its recognition would ask, has no wait left, asked before or not: a release can
-  teach an adapter a number, and a rate limit or outage passes. A number no carrier or
-  provider has seen is queued only once its cadence has come round, unless the release
-  points it to a carrier it never asked. A carrier whose adapter
+  filed under no carrier is also queued for a carrier that recognizes its number under the
+  new catalog and did not under the one that last routed it: each of its checks notes the
+  carriers recognition can ask about the number (`routing.recognizers`). Asking again a
+  carrier it already asked is left to its schedule, and for a lookup that left the schedule,
+  to opening its link: after a release it rarely finds more. A carrier whose adapter
   refuses the number by its own check, which sends nothing, is passed over until a release
   whose adapter takes it. One that refused the number under an older release counts as not
   asked, the filed carrier and a provider's name the parcel already holds included. One whose
@@ -468,7 +468,7 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   come back to, or one on local clocks the catalog now dates, doesn't wait. The checks most
   likely to change the answer go first (a carrier's answer the catalog now dates, a number it
   refused under an older release, or a set-aside answer that would now be taken, then a
-  carrier never asked, then one asked again), 50 at a time: the next batch goes once the last
+  carrier never asked or newly recognizing the number, then one asked again), 50 at a time: the next batch goes once the last
   one's checks are done. One still in its cooldown is queued by the first scheduled run after
   the cooldown ends. These checks wait behind every other job, a lookup's own check too, and
   keep the scheduled cadence; they are recorded with the `release` trigger. Asking for the

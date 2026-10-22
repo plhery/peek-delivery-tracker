@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { freshnessWindow, recheckSources, RoutingDeferred, routingState, suggestedInput, TrackingRouter, type RoutedResult } from './trackingRouting';
+import { freshnessWindow, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, type RoutedResult } from './trackingRouting';
 import { refusesNumber } from './numberRefusal';
 import type { JsonObject } from './types';
 import type { CarrierResult, UniversalSource } from 'universal-parcel-scraper';
@@ -1647,6 +1647,17 @@ describe('persistent tracking routing', () => {
     await failed.router.fetch(filed(state({ configured_carrier: 'yamato', preferred_provider: 'Ship24', rules: 'older',
       failures: { yamato: { kind: 'transport', count: 1, retry_at: '2026-09-10T13:00:00.000Z' } } })), true);
     expect(failed.direct).not.toHaveBeenCalled();
+  });
+
+  it('notes the carriers that recognize the number of a parcel filed under no carrier, for a release that adds one', async () => {
+    // A ten-digit DHL Express waybill, which other carriers' recognition is asked about too.
+    expect(recognizers('1234567891')).toContain('dhl-express');
+    const unfiled = await setup().router.fetch(parcel({ tracking_number: '1234567891' }), true);
+    expect(unfiled.result.routing).toMatchObject({ recognizers: recognizers('1234567891') });
+    // A parcel filed under a carrier keeps none.
+    const filed = await setup().router.fetch(parcel({ carrier: 'yamato', tracking_number: '123456789012',
+      carrier_data: { routing: state({ configured_carrier: 'yamato', recognizers: ['dhl-express'] }) } }), true);
+    expect(filed.result.routing).not.toHaveProperty('recognizers');
   });
 
   it('confirms the filed carrier from its local-clock answer, so a provider naming it does not ask it again', async () => {

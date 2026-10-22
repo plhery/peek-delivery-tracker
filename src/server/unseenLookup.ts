@@ -75,7 +75,8 @@ export function unseenRecheckDue(parcel: JsonObject, now: Date): number | null |
 
 /**
  * A one-off lookup that left the schedule before any carrier or provider answered for
- * its number. Only opening its link, or the re-check after a scraper release, checks it again.
+ * its number. Only opening its link, or a scraper release that teaches a carrier to recognize
+ * its number, checks it again.
  */
 export function leftScheduleUnseen(parcel: JsonObject, now: Date): boolean {
   const unseen = parcel.one_off === true ? unseenFor(parcel, now) : null;

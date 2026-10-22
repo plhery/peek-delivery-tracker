@@ -98,6 +98,11 @@ export interface RoutingState extends JsonObject {
   failures: Record<string, Failure>;
   /** The scraper release and catalog rules that last routed the parcel (`catalogRules`). */
   rules?: string;
+  /**
+   * For a parcel filed under no carrier, the carriers recognition could ask about its number
+   * under those rules (`recognizers`): a release that adds one checks it again (redetection.ts).
+   */
+  recognizers?: string[];
   /** The last check that ran a lookup opened a browser: its own or the browser service. */
   browser_check?: true;
   /**
@@ -131,6 +136,12 @@ export function catalogRules(): string {
 const BROWSER_CARRIERS = new Set(Object.entries(CARRIER_DEFINITIONS).filter(([, carrier]) => carrier.tracking.browser).map(([id]) => id));
 export function opensBrowser(carrier: string): boolean {
   return BROWSER_CARRIERS.has(carrier);
+}
+
+/** The carriers recognition can ask about a number, over HTTP or in a browser. */
+export function recognizers(number: string): string[] {
+  return [...new Set([...recognitionCandidates(number), ...recognitionCandidates(number, { phase: 'browser' })]
+    .map(({ carrier }) => carrier))];
 }
 
 /**
@@ -480,6 +491,8 @@ export class TrackingRouter {
     const previousFailures = state.consecutive_failures;
     const declared = String(parcel.carrier);
     const number = String(parcel.tracking_number ?? '');
+    if (declared === 'unknown' || declared === 'intl-post') state.recognizers = recognizers(number);
+    else delete state.recognizers;
     const metadata = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
     const countryHint = normalizedLookupCountry(metadata.lookup_country_hint);
     const suggested = suggestedInput(parcel, state);

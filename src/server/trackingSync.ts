@@ -965,9 +965,8 @@ export class TrackingSyncService {
    * Once per scraper release: one check of each open parcel the catalog's rules point to a
    * carrier its routing never asked, such as a lookup added before a scraper release
    * brought the number's detection rule, the name a provider gives or the carrier's
-   * adapter, whose link nobody opens any more, and of each unfiled one with a carrier
-   * to recognize it (redetection.ts): a number nobody has seen only once its own cadence
-   * has come round, unless the catalog points it to a carrier it never asked. The checks
+   * adapter, whose link nobody opens any more, and of each unfiled one the release
+   * taught a carrier to recognize (redetection.ts). The checks
    * most likely to change the parcel's answer go first, 50 at a time: the next batch
    * waits until the last one's checks are done. A parcel still in its cooldown is queued by the first run after it ends.
    * Returns how many checks were queued; they wait behind every other job, a lookup's
@@ -978,8 +977,7 @@ export class TrackingSyncService {
     if (this.#redetections?.rules !== rules) this.#redetections = { rules, listed: false, waiting: [], batch: [] };
     const redetections = this.#redetections;
     if (redetections.listed && !redetections.waiting.length) return 0;
-    const date = this.now();
-    const now = date.getTime();
+    const now = this.now().getTime();
     let queued = 0;
     try {
       if (!redetections.listed) {
@@ -990,9 +988,10 @@ export class TrackingSyncService {
           for (const parcel of candidates) {
             const lead = await rerouteAskable(parcel, rules, now);
             if (!lead) continue;
-            // A number nobody has seen is asked again only once its own cadence has come
-            // round, unless the release points it to a carrier it never asked.
-            if (lead.rank === 2 && unseenFor(parcel, date) !== null && !isScheduledTrackingSyncDue(parcel, date)) continue;
+            // A parcel filed under no carrier is checked for a carrier it never asked, or one the
+            // release taught its number's shape. Asking again the carriers it asked rarely finds
+            // more: its schedule does that, and opening the link of a lookup that left it.
+            if (lead.rank === 2 && ['unknown', 'intl-post'].includes(String(parcel.carrier))) continue;
             const dueAt = trackingSyncDueAt(parcel);
             if (dueAt === Infinity) continue;
             leads.push({ packageId: String(parcel.id), userId: typeof parcel.user_id === 'string' ? parcel.user_id : null, dueAt, rank: lead.rank });

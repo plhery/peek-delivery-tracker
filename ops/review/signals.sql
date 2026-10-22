@@ -2,7 +2,8 @@
 -- carrier and provider, each with the lane that acts on it: carriers (number formats,
 -- detection, the catalog), adapters (no adapter, a failing one, unmapped wording), captcha
 -- (a verification page stops an adapter) or delivery-tracker (the app's routing). Numbers
--- appear only as their shape. Read-only; see docs/OBSERVABILITY.md.
+-- appear only as their shape, and free text with its rare words, which can name a place, a
+-- shop or a person, masked. Read-only; see docs/OBSERVABILITY.md.
 --
 --   psql "$DATABASE_URL" -v hours=1 -f ops/review/signals.sql
 \set ON_ERROR_STOP on
@@ -37,14 +38,32 @@ where a.started_at >= :since
 group by 1, 2, 3, 4
 order by checks desc, carrier, anomaly;
 
-\echo '== Unmapped wording: first seen in the window'
--- Wording can quote another number: runs of eight letters and digits or more with a digit are masked.
-select carrier, coalesce(provider_code, '-') as code,
-       left(regexp_replace(description_normalized, '\m(?=[[:alnum:]]*[0-9])[[:alnum:]]{8,}\M', '<number>', 'g'), 80) as wording,
-       chosen_stage as read_as, 'adapters' as lane, count as sightings
-from public.tracking_status_observations
-where reviewed_at is null and first_seen >= :since
-order by count desc, carrier, wording
+\echo '== Unmapped wording: first seen in the window (… masks a rare word; look the wording up by id)'
+-- Wording can quote a number or name a place, a shop or a person: its digits are masked, and so
+-- is each word fewer than five stored wordings share once their digits are masked, so that
+-- wordings differing only by a date or a time count once.
+with templates as (
+  select id, carrier, provider_code, chosen_stage, count, first_seen, reviewed_at,
+         regexp_replace(description_normalized, '[0-9]+', '#', 'g') as template
+  from public.tracking_status_observations
+),
+common as (
+  select word
+  from (select distinct template from templates) as t cross join regexp_split_to_table(t.template, '[^[:alpha:]]+') as word
+  where word <> ''
+  group by word
+  having count(*) >= 5
+)
+select t.id, t.carrier, coalesce(t.provider_code, '-') as code,
+       left(regexp_replace(string_agg(case when common.word is null and token.part[1] ~ '[[:alpha:]]' then '…' else token.part[1] end,
+         '' order by token.n), '…([^[:alpha:]]*…)+', '…', 'g'), 80) as wording,
+       t.chosen_stage as read_as, 'adapters' as lane, t.count as sightings
+from templates as t
+cross join regexp_matches(t.template, '[[:alpha:]]+|[^[:alpha:]]+', 'g') with ordinality as token(part, n)
+left join common on common.word = token.part[1]
+where t.reviewed_at is null and t.first_seen >= :since
+group by t.id, t.carrier, t.provider_code, t.chosen_stage, t.count
+order by sightings desc, carrier, wording
 limit 50;
 
 \echo '== Support cases: opened in the window, or held until then, and still open'
@@ -97,13 +116,13 @@ select format('%s right, %s wrong, %s found elsewhere', count(*) filter (where a
 from public.parcel_feedback
 where created_at >= :since \gset feedback_
 \echo '   answers given in the window:' :feedback_counts
--- A reader's words can quote a number or name a person: a note is only counted, a carrier's
--- name has its runs of eight letters and digits or more with a digit masked, and a tracking
--- page shows its host alone.
+-- A reader's words can quote a number or name a person or a shop: a note is only counted, a
+-- carrier's name shows its first three words with digits masked, and a tracking page shows its
+-- host alone.
 select f.id, to_char(f.created_at, 'YYYY-MM-DD HH24:MI') as given, f.carrier, f.answer,
        coalesce(nullif(array_to_string(f.reasons, ','), ''), '-') as reasons,
        case when f.note is null then 'no' else 'yes' end as note,
-       coalesce(left(regexp_replace(f.carrier_name, '\m(?=[[:alnum:]]*[0-9])[[:alnum:]]{8,}\M', '<number>', 'g'), 60),
+       coalesce(left(substring(regexp_replace(f.carrier_name, '[0-9]+', '#', 'g') from '^\s*([^[:space:]]+(?:\s+[^[:space:]]+){0,2})'), 40),
          lower(substring(f.tracking_page
            from '^(?:[[:alpha:]][[:alnum:]+.-]*://)?(?:[^/?#@[:space:]]*@)?([[:alnum:]-]+(?:\.[[:alnum:]-]+)+)(?:[:/?#]|$)')),
          case when f.tracking_page is not null then '<page>' end, '-') as named,

@@ -394,7 +394,10 @@ anomalies, new unmapped wording, new open support cases, health incidents notifi
 failing, the unfinished parcels a provider tracks, grouped by type, carrier and
 provider, with `why` they stay with it, and readers' answers that something is off. It
 only reads, and shows a number as its shape (`MY + 10 digits + US`, from
-`private.tracking_number_pattern`):
+`private.tracking_number_pattern`). Free text can name a place, a shop or a person, so
+wording shows `…` for each word fewer than five stored wordings share and `#` for digits,
+with the row's id to look it up by, and a carrier's name a reader gave shows its first
+three words:
 
 ```sh
 psql "$DATABASE_URL" -v hours=1 -f ops/review/signals.sql

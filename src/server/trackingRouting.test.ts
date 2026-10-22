@@ -456,6 +456,17 @@ describe('persistent tracking routing', () => {
     expect(again.result.routing).toMatchObject({ set_aside: { ups: { reason: 'behind_final', count: 2 } } });
     expect(direct).toHaveBeenCalledTimes(2);
   });
+  it('takes a named carrier\'s delivery that only its status declares, behind the provider\'s delivered stage', async () => {
+    const { router, direct, universal } = setup();
+    universal.mockResolvedValue({ ...history(), discovered_carrier: 'ups', current_stage: 'delivered', status: 'delivered' });
+    direct.mockResolvedValue({ ...directValue(), result: { status: 'delivered', last_update: '2026-09-10T11:30:00Z',
+      events: [{ time: '2026-09-10T11:30:00Z', description: 'Delivered', stage: 'delivered' }] } });
+    const result = await router.fetch(parcel(), false);
+    expect(result.sourceCarrierId).toBe('ups');
+    expect(result.result.tracking_provider).toBeUndefined();
+    expect(result.result.routing).not.toHaveProperty('set_aside');
+    expect(result.result.routing).toMatchObject({ confirmed_carrier: 'ups' });
+  });
   describe('a named carrier older than the parcel\'s newest scan', () => {
     // The provider's copies of the carrier's scans, read hours late, set the watermark.
     const named = (routing: JsonObject = {}) => parcel({ current_stage: 'in_transit', carrier_data: { routing: state({

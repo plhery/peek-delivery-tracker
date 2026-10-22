@@ -823,7 +823,7 @@ export class TrackingRouter {
         }
         // The provider's delivered or returned answer stands.
         if (terminalStage && ['delivered', 'returned'].includes(terminalStage)
-          && value.result.current_stage !== terminalStage) {
+          && resultStage(value.result) !== terminalStage) {
           setAsideAs('behind_final');
           return null;
         }
@@ -1194,7 +1194,7 @@ export class TrackingRouter {
           probe = filled ? { ...probe, result: filled } : null;
         }
         if (probe && (!hasRoutingProgress(value.result) || hasRoutingProgress(probe.result)) && latest(probe) > latest(value) && latest(probe) >= millis(state.last_event_at)
-          && !['delivered', 'returned'].includes(String(value.result.current_stage))) {
+          && !['delivered', 'returned'].includes(String(resultStage(value.result)))) {
           value = probe; chosen = alternative;
           report('fresher_provider_found', chosen);
         }
@@ -1239,7 +1239,7 @@ export class TrackingRouter {
           && millis(state.direct_retry_at) > now().getTime();
         state.last_event_at = withoutProgress ? watermark : iso(Math.max(millis(watermark), latest(value)));
         const direct = later ? null : await tryDirect(state.discovered_carrier, state.discovered_carrier !== declared,
-          value.result.current_stage ?? value.result.status, false, value.result).catch((error: unknown) => {
+          resultStage(value.result) ?? undefined, false, value.result).catch((error: unknown) => {
           if (!(error instanceof RoutingDeferred)) throw error;
           return null;
         });

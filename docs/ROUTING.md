@@ -228,7 +228,7 @@ parcels followed without an account that nobody watches (below).
 
 | Parcels | Daytime |
 | --- | --- |
-| Out for delivery (direct adapter) | every 2 min; every 5 min while its lookups open a browser |
+| Out for delivery (direct adapter) | every 2 min; every 5 min while its lookups open a browser; 15 min after a failed check |
 | Out for delivery, until 30 min before its delivery window opens | every 10 min |
 | Other stages (direct adapter) | every 10 min |
 | Served by a universal provider, out for delivery too | every 15 min |
@@ -275,6 +275,15 @@ says which (`browser_check` in its routing). A universal provider has quotas, co
 parcels keep the regular cadence, and the 15 minutes routing waits after each of its
 answers, even while someone is looking. A parcel counts as served by a universal provider
 while the summary it shows came from one (`tracking_provider` in `carrier_data`).
+
+**A failed check** out for delivery, whose carrier lookup met a bot check, failed or
+answered without the parcel's progress, holds the next one back for 15 minutes: the carrier
+rarely answers sooner, and asking every 2 minutes draws more bot checks. When the router falls
+back from the carrier, its own wait does this (`next_check_at`), and the carrier rests until
+its failure's retry time (When a source fails, above). Otherwise the error the check saved
+(`sync_status`) holds back the schedule and link reads, as for Amazon Shipping, whose lookups
+run outside routing; a refresh by hand still checks the parcel. The carrier's next answer
+brings the 2-minute checks back.
 
 **A delivery window** the carrier announces, such as `2026-10-08 13:00–15:00`, holds the
 2-minute checks back: until 30 minutes before it opens, the regular cadence still catches a

@@ -2265,6 +2265,14 @@ describe('TrackingSyncService', () => {
     { carrier: 'swiss-post', browser: true, stage: 'out_for_delivery', time: '10:04:59', checked: 0 },
     { carrier: 'swiss-post', browser: true, stage: 'out_for_delivery', time: '10:05:00', checked: 1 },
     { carrier: 'swiss-post', browser: true, stage: 'in_transit', time: '10:05:00', checked: 0 },
+    // After a failed check, 15 minutes, browser or not.
+    { carrier: 'swiss-post', failed: true, stage: 'out_for_delivery', time: '10:02:00', checked: 0 },
+    { carrier: 'swiss-post', failed: true, stage: 'out_for_delivery', time: '10:15:14', checked: 0 },
+    { carrier: 'swiss-post', failed: true, stage: 'out_for_delivery', time: '10:15:15', checked: 1 },
+    { carrier: 'swiss-post', failed: true, browser: true, stage: 'out_for_delivery', time: '10:05:00', checked: 0 },
+    { carrier: 'swiss-post', failed: true, browser: true, stage: 'out_for_delivery', time: '10:15:15', checked: 1 },
+    // Other stages keep their cadence.
+    { carrier: 'swiss-post', failed: true, stage: 'in_transit', time: '10:10:00', checked: 1 },
     // A universal provider answering: like any other stage.
     { carrier: 'swiss-post', provider: 'ParcelsApp', stage: 'out_for_delivery', time: '10:02:00', checked: 0 },
     { carrier: 'swiss-post', provider: 'ParcelsApp', stage: 'out_for_delivery', time: '10:09:59', checked: 0 },
@@ -2286,10 +2294,10 @@ describe('TrackingSyncService', () => {
     { carrier: 'swiss-post', stage: 'customs', time: '10:02:00', checked: 0 },
     { carrier: 'swiss-post', stage: 'registered', time: '10:10:00', checked: 1 },
     { carrier: 'gls-de', stage: 'in_transit', time: '10:02:00', checked: 0 },
-  ])('schedules $carrier at $stage at $time (provider: $provider, browser: $browser): $checked checks', async ({ carrier, provider, browser, stage, time, checked }) => {
+  ])('schedules $carrier at $stage at $time (provider: $provider, browser: $browser, failed: $failed): $checked checks', async ({ carrier, provider, browser, failed, stage, time, checked }) => {
     const parcel = {
       id: 'scheduled', carrier, current_stage: stage, tracking_number: 'TEST1234',
-      last_synced_at: '2026-09-09T10:00:15Z', sync_status: 'ok',
+      last_synced_at: '2026-09-09T10:00:15Z', sync_status: failed ? 'error' : 'ok',
       ...(provider ? { carrier_data: { tracking_provider: provider } } : {}),
       ...(browser ? { carrier_data: { routing: { version: 1, configured_carrier: carrier, browser_check: true } } } : {}),
     };
@@ -2299,6 +2307,55 @@ describe('TrackingSyncService', () => {
       adapter, null, () => new Date(`2026-09-09T${time}Z`));
     await expect(service.sync()).resolves.toMatchObject({ checked });
     expect(adapter.fetch).toHaveBeenCalledTimes(checked);
+  });
+
+  const challenged = () => Promise.reject(new ChallengeError('Carrier'));
+  const lastMileScan = (time: string): CarrierResult => ({ status: 'out_for_delivery', current_stage: 'out_for_delivery',
+    last_status_text: 'Out for delivery', last_update: `2026-09-10T${time}Z`,
+    events: [{ time: `2026-09-10T${time}Z`, description: 'Out for delivery', stage: 'out_for_delivery' }] });
+  it.each([
+    // Routing waits 15 minutes after the carrier's lookup fails, whoever answers instead.
+    { outcome: 'a provider shows a newer scan', direct: challenged, universal: async () => lastMileScan('09:50:00'), refresh: false },
+    { outcome: 'a provider copies the carrier\'s scans', direct: challenged, universal: async () => lastMileScan('09:30:00'), refresh: false },
+    { outcome: 'no provider answers', direct: challenged, universal: () => Promise.reject(new Error('Provider unavailable')), refresh: false },
+    // The error the check saved holds the others back as long, but not a refresh by hand.
+    { outcome: 'the lookup runs outside routing', carrier: 'amazon-shipping', number: 'UK0000000001', direct: challenged, refresh: true },
+    { outcome: 'the carrier answers without the parcel\'s progress', direct: async (): Promise<CarrierResult> => ({ status: 'pending', current_stage: 'registered' }), refresh: true },
+  ])('holds the last mile back for 15 minutes after a failed carrier lookup when $outcome', async ({ carrier = 'swiss-post', number = 'TEST1234', direct, universal, refresh }) => {
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T10:02:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const adapter = { fetch: vi.fn(direct), fetchUniversal: vi.fn(universal ?? (async () => lastMileScan('09:30:00'))) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T10:02:00Z'));
+    const parcel = { id: 'delivering', carrier, tracking_number: number, current_stage: 'out_for_delivery',
+      last_synced_at: '2026-09-10T10:00:15Z', sync_status: 'ok', carrier_data: { last_status_text: 'Out for delivery',
+        routing: { version: 1, configured_carrier: carrier, last_event_at: '2026-09-10T09:30:00Z' } } };
+    await service.syncPackage(parcel);
+    const checked = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+    const at = (time: string) => new Date(`2026-09-10T${time}Z`);
+    expect(isOpenedParcelSyncDue(checked, at('10:04:00'))).toBe(false);
+    expect(isOpenedParcelSyncDue(checked, at('10:16:59'))).toBe(false);
+    expect(isOpenedParcelSyncDue(checked, at('10:17:00'))).toBe(true);
+    expect(isTrackingSyncDue(checked, at('10:04:00'))).toBe(refresh);
+  });
+
+  it('checks the last mile every 2 minutes again once the carrier answers after a failed check', async () => {
+    const client = fakeClient();
+    const adapter = { fetch: vi.fn().mockRejectedValueOnce(new ChallengeError('Amazon Shipping')).mockResolvedValue(lastMileScan('10:10:00')) };
+    let now = new Date('2026-09-10T10:02:00Z');
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    const parcel = { id: 'delivering', carrier: 'amazon-shipping', tracking_number: 'UK0000000001', current_stage: 'out_for_delivery',
+      last_synced_at: '2026-09-10T10:00:15Z', sync_status: 'ok', carrier_data: { last_status_text: 'Out for delivery' } };
+    await service.syncPackage(parcel);
+    const failed = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+    expect(failed.sync_status).toBe('error');
+    now = new Date('2026-09-10T10:17:00Z');
+    await service.syncPackage(failed);
+    const answered = { ...failed, ...client.updatePackage.mock.calls.at(-1)![1] };
+    expect(answered.sync_status).toBe('ok');
+    expect(isOpenedParcelSyncDue(answered, new Date('2026-09-10T10:17:59Z'))).toBe(false);
+    expect(isOpenedParcelSyncDue(answered, new Date('2026-09-10T10:18:00Z'))).toBe(true);
   });
 
   it.each([

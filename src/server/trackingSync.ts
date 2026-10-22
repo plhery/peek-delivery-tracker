@@ -84,6 +84,13 @@ const LAST_MILE_MINUTES = 2;
  * browser service or a local Chromium, so it is not asked every 2 minutes.
  */
 const BROWSER_LAST_MILE_MINUTES = 5;
+/**
+ * After a check on the last mile fails, the next waits this long: a carrier that refused a
+ * lookup with a bot check, was down or answered without the parcel's progress rarely answers
+ * 2 minutes later, and asking that often draws more bot checks. Routing waits as long after
+ * a carrier lookup it falls back from (the providers' 15 minutes by day).
+ */
+const LAST_MILE_BACKOFF_MS = 15 * 60_000;
 /** How long a carrier a provider named and the check did not ask keeps the parcel due at every run. */
 const NAMED_CARRIER_DUE_MS = 15 * 60_000;
 /**
@@ -331,8 +338,14 @@ function isScheduledTrackingSyncDue(
   const activity = lastActivity(parcel);
   const idleAfter = NOT_YET_MOVING.has(String(parcel.current_stage)) ? EARLY_IDLE_AFTER_MS : IDLE_AFTER_MS;
   const idle = unwatched || (activity !== null && now.getTime() - activity >= idleAfter);
+  const byTheMinute = !idle && local.hour >= 8 && local.hour < 22;
+  // After a failed check, the last mile waits LAST_MILE_BACKOFF_MS. Routing already holds a parcel
+  // that long when its carrier's lookup fails; the error the check saved holds the others, a lookup
+  // outside routing (Amazon Shipping) or the carrier's answer without the parcel's progress. The
+  // carrier's next answer clears the error, and the 2-minute checks resume.
+  if (byTheMinute && lastMile && parcel.sync_status === 'error' && now.getTime() - lastChecked < LAST_MILE_BACKOFF_MS) return false;
   // Compare schedule windows so request duration does not skip the next tick.
-  const windowStart = !idle && local.hour >= 8 && local.hour < 22
+  const windowStart = byTheMinute
     ? local.startOf('minute').minus({ minutes: local.minute % intervalMinutes })
     : hourStart;
   return lastChecked < windowStart.toMillis();

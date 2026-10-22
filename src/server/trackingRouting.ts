@@ -261,9 +261,10 @@ export function plausibleInputRequest(number: string, carriers: readonly (string
 /**
  * The carrier to offer the owner of a parcel filed under no carrier that no carrier or
  * provider has answered for yet: the first carrier detection lists for its number that
- * serves the country the parcel was looked up from and needs the delivery postcode, and
- * only it, for numbers of this shape, so recognition cannot ask it (Mondial Relay's
- * 8-digit shipments). Nothing says that carrier has the parcel.
+ * serves the country the parcel was looked up from, takes the delivery postcode and nothing
+ * else for numbers of this shape, and that recognition cannot ask about it without it
+ * (Mondial Relay's 8-digit shipments, and Paack's SHEIN numbers, whose postcode is optional
+ * because other sources are asked without it). Nothing says that carrier has the parcel.
  */
 export function suggestedInput(parcel: JsonObject, state: RoutingState): RoutingState['input_suggested'] {
   const metadata = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
@@ -278,7 +279,7 @@ export function suggestedInput(parcel: JsonObject, state: RoutingState): Routing
     ...recognitionCandidates(number, { countryHint: country, phase: 'browser' })].map(({ carrier }) => carrier));
   const carrier = detected.candidates.find((candidate) => AUTOMATIC_CARRIER_IDS.has(candidate) && !askable.has(candidate)
     && (CARRIER_DEFINITIONS[candidate]?.countries ?? []).includes(country)
-    && requiredRequirements(candidate, number).map(({ field }) => field).join() === 'postcode');
+    && activeRequirements(candidate, number).map(({ field }) => field).join() === 'postcode');
   return carrier ? { carrier, field: 'dpdPostcode' } : undefined;
 }
 /**

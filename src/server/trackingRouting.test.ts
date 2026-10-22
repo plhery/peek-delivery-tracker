@@ -904,6 +904,10 @@ describe('persistent tracking routing', () => {
       expect(suggestedInput({ ...lookup, carrier_data: {} }, routing)).toBeUndefined();
       expect(suggestedInput({ ...lookup, tracking_number: '12345678901' }, routing)).toBeUndefined();
       expect(suggestedInput({ ...lookup, current_stage: 'delivered' }, routing)).toBeUndefined();
+      // Paack's postcode is optional, yet recognition cannot ask it about a SHEIN number without it.
+      const shein = { ...lookup, tracking_number: 'E25010100000001', carrier_data: { lookup_country_hint: 'ES' } };
+      expect(suggestedInput(shein, routing)).toEqual({ carrier: 'paack', field: 'dpdPostcode' });
+      expect(suggestedInput({ ...shein, carrier_data: { lookup_country_hint: 'CR' } }, routing)).toBeUndefined();
     });
     it.each([
       ['a delivered parcel', 'asendia', swissDpd, notFound('Asendia'), { current_stage: 'delivered' }],

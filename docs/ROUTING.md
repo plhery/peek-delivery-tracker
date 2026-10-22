@@ -435,8 +435,9 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   `routing.input_needed`, and the parcel asks the user for it.
   A parcel filed under no carrier that no carrier or provider has answered for yet is offered
   the first carrier detection lists for its number that serves the country it was looked up
-  from and needs only the delivery postcode for numbers of its shape, which recognition
-  cannot ask without it (Mondial Relay's 8-digit shipments): `routing.input_suggested`, set
+  from and takes only the delivery postcode for numbers of its shape, which recognition
+  cannot ask without it (Mondial Relay's 8-digit shipments, and Paack's SHEIN numbers, whose
+  postcode is optional because other sources are asked without it): `routing.input_suggested`, set
   at each check. The prompt says the carrier may have the parcel; the owner adding the postcode
   files it there. Lookups without an account show no prompt.
   A transient failure of a matching carrier and failures of an already confirmed carrier

@@ -288,8 +288,9 @@ while the summary it shows came from one (`tracking_provider` in `carrier_data`)
 
 **A round from an earlier day** is over: when the carrier's newest scan, timed or dated
 alone (`last_update_local`), is from an earlier day on its clock, the parcel keeps the
-regular cadence until the carrier scans it again. Its clock is the zone the delivery window
-below is read in; a parcel without a dated scan counts as today's.
+regular cadence until the carrier scans it again. Its clock is the offset the newest scan
+states, else the zone the delivery window below is read in (a zero offset is a UTC instant,
+not a stated clock); a parcel without a dated scan counts as today's.
 
 **A failed check** out for delivery, whose carrier lookup met a bot check, failed or
 answered without the parcel's progress, holds the next one back for 15 minutes: the carrier

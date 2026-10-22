@@ -253,7 +253,11 @@ function deliveryWindowOpens(parcel: JsonObject): number | null {
  */
 function deliveringToday(parcel: JsonObject, now: Date): boolean {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  const zone = resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
+  // A scan that states its own offset ("…T07:00:00+10:00") was read on that clock; a zero
+  // offset is a UTC instant, and the catalog's zone stays the clock.
+  const stated = /T[\d:.]+[+-](?!00:?00$)\d{2}:?\d{2}$/.test(String(data.last_update ?? ''))
+    ? DateTime.fromISO(String(data.last_update), { setZone: true }) : null;
+  const zone = stated?.isValid ? stated.zone : resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
   const days = [routingState(parcel).last_event_at, data.last_update]
     .map((value) => Date.parse(String(value ?? ''))).filter(Number.isFinite)
     .map((time) => DateTime.fromMillis(time, { zone }).toISODate()!);

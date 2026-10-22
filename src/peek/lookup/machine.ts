@@ -28,6 +28,11 @@ export interface DeviceParcel {
   carrier: CarrierId;
 }
 
+/** Whether a number is the start of a longer one the device follows: most likely that number typed again. */
+export function startsDeviceParcel(number: string, device: readonly DeviceParcel[]): boolean {
+  return device.some((parcel) => parcel.number.length > number.length && parcel.number.startsWith(number));
+}
+
 export type LookupTrouble =
   /** Too many lookups in a minute; `until` is when the next one may go. */
   | { kind: 'burst'; until: number }

@@ -40,6 +40,7 @@ beforeEach(() => {
   vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
   vi.spyOn(SupabaseServiceClient.prototype, 'claimAccountTracking').mockResolvedValue({ allowed: true, scope: null, overallUsed: 0 });
   vi.spyOn(SupabaseServiceClient.prototype, 'recordTrackingSupportObservation').mockResolvedValue(undefined);
+  vi.spyOn(SupabaseServiceClient.prototype, 'savedLongerTrackingNumber').mockResolvedValue(false);
   vi.spyOn(console, 'log').mockImplementation(() => undefined);
   recognize.mockReset().mockImplementation(knows());
   vi.spyOn(SupabaseAuthenticator.prototype, 'validate').mockResolvedValue({
@@ -145,6 +146,26 @@ it('retains an unresolved signed-in submission without creating a parcel', async
     '0000000041', expect.objectContaining({ reasons: ['ambiguous_shape', 'recognition_unknown'] }),
     { outcome: 'detection_unknown' }, expect.any(Date), expect.stringMatching(/^detection:/),
   );
+});
+
+it('does not retain the start of a number the account saved', async () => {
+  const saved = vi.mocked(SupabaseServiceClient.prototype.savedLongerTrackingNumber).mockResolvedValue(true);
+  const response = await request('0000000046');
+  expect(response.status).toBe(200);
+  expect(await response.json()).toMatchObject({ trackingNumber: '0000000046', carrier: 'unknown' });
+  expect(saved).toHaveBeenCalledExactlyOnceWith('10000000-0000-0000-0000-000000000002', '0000000046');
+  expect(SupabaseServiceClient.prototype.recordTrackingSupportObservation).not.toHaveBeenCalled();
+});
+
+it('does not retain a number the client says starts one the device follows', async () => {
+  vi.spyOn(SupabaseServiceClient.prototype, 'claimPublicAllowance').mockResolvedValue({ allowed: true, scope: null, overallUsed: 1 });
+  const response = await detectWithoutAccount(new NextRequest('https://delivery.example/api/public/detect', {
+    method: 'POST', headers: { 'content-type': 'application/json', 'x-real-ip': '198.51.100.72' },
+    body: JSON.stringify({ trackingNumber: '0000000047', prefixOfSaved: true }),
+  }), { params: Promise.resolve({}) });
+  expect(response.status).toBe(200);
+  expect(await response.json()).toMatchObject({ trackingNumber: '0000000047', carrier: 'unknown' });
+  expect(SupabaseServiceClient.prototype.recordTrackingSupportObservation).not.toHaveBeenCalled();
 });
 
 it('retains unresolved public submissions even when the detection answer is cached', async () => {

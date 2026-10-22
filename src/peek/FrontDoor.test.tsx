@@ -153,13 +153,21 @@ describe('FrontDoor', () => {
     expect(onTracked).toHaveBeenCalledOnce();
   });
 
+  it('tells the carrier check when the number is the start of one this device follows', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView({ parcel: { trackingNumber: `${SHARED}45` } }), now: Date.now() });
+    const { user, field } = door();
+    await user.click(field);
+    await user.paste(SHARED);
+    expect(mocks.detect).toHaveBeenCalledWith(SHARED, expect.any(AbortSignal), true);
+  });
+
   it('asks the carriers about a pasted number of a shared shape, and goes on when one has it', async () => {
     let answer: (value: unknown) => void = () => undefined;
     mocks.detect.mockReturnValueOnce(new Promise((resolve) => { answer = resolve; }));
     const { user, field } = door();
     await user.click(field);
     await user.paste(`Good news, your order has shipped!\nTracking number: ${SHARED}`);
-    expect(mocks.detect).toHaveBeenCalledWith(SHARED, expect.any(AbortSignal));
+    expect(mocks.detect).toHaveBeenCalledWith(SHARED, expect.any(AbortSignal), false);
     const line = document.querySelector('.door-line')!;
     expect(line).toHaveAttribute('aria-live', 'polite');
     expect(line).toHaveAttribute('aria-busy', 'true');

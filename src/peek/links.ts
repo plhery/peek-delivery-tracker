@@ -1,4 +1,5 @@
 import type {
+  ApiCarrierDetectionRequest,
   ApiCarrierDetectionResponse,
   ApiClaimParcelsRequest,
   ApiClaimParcelsResponse,
@@ -130,9 +131,10 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
   return {
     mode: 'api',
 
-    async detectCarrierPublic(number, signal) {
+    async detectCarrierPublic(number, signal, prefixOfSaved) {
       const trackingNumber = normalizeTrackingNumber(number);
-      const response = await protectedPost('/api/public/detect', { trackingNumber }, signal);
+      const body: ApiCarrierDetectionRequest = { trackingNumber, ...(prefixOfSaved ? { prefixOfSaved } : {}) };
+      const response = await protectedPost('/api/public/detect', body, signal);
       if (!response.ok) throw await failure(response);
       const result = await answer<ApiCarrierDetectionResponse>(response);
       if (result.trackingNumber !== trackingNumber || !Object.hasOwn(CARRIERS, result.carrier)
@@ -274,8 +276,8 @@ export const parcelLinksMode = client.mode;
 export const demoAccountShare: ParcelShareClient | null = demo?.accountShare ?? null;
 
 /** Which carrier a number belongs to, asked before anyone signs in. */
-export function detectCarrierPublic(trackingNumber: string, signal?: AbortSignal): Promise<CarrierAnswer> {
-  return client.detectCarrierPublic(trackingNumber, signal);
+export function detectCarrierPublic(trackingNumber: string, signal?: AbortSignal, prefixOfSaved?: boolean): Promise<CarrierAnswer> {
+  return client.detectCarrierPublic(trackingNumber, signal, prefixOfSaved);
 }
 
 /** Follows one parcel without an account. The owner key in the answer is given this once. */

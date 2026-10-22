@@ -344,6 +344,12 @@ describe('the API backend', () => {
     expect(request).toHaveBeenCalledTimes(4);
   });
 
+  it('says when the number asked about is the start of one the device follows', async () => {
+    const { links, request } = api(json({ trackingNumber: '12345678', carrier: 'unknown' }));
+    expect(await links.detectCarrierPublic('1234 5678', undefined, true)).toEqual({ trackingNumber: '12345678', carrier: 'unknown' });
+    expect(JSON.parse(String(request.mock.calls[0][1]!.body))).toEqual({ trackingNumber: '12345678', prefixOfSaved: true });
+  });
+
   it('asks which carrier a number belongs to, and distrusts an answer about another number', async () => {
     const { links, request } = api(
       json({ trackingNumber: '1234567899', carrier: 'dhl', asked: ['dhl'] }),

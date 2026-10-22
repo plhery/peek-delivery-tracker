@@ -60,8 +60,12 @@ function recognizedOverHttp(carrier: string): boolean {
 export async function retainDetectionSupport(
   client: SupabaseServiceClient,
   answer: ApiCarrierDetectionResponse,
+  userId?: string,
 ): Promise<void> {
   if (answer.carrier !== 'unknown') return;
+  // The start of a number the account saved is that number still being typed, not a case.
+  // When the check fails, the case opens as before.
+  if (userId && await client.savedLongerTrackingNumber(userId, answer.trackingNumber).catch(() => false)) return;
   const choice = (answer.recognized?.length ?? 0) > 1;
   const context = trackingSupportContext(answer.trackingNumber, answer.carrier);
   context.reasons = [...context.reasons as string[], choice ? 'recognition_choice' : 'recognition_unknown'];

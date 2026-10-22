@@ -1342,6 +1342,18 @@ export class SupabaseServiceClient extends SupabaseClient {
     return stages;
   }
 
+  /** Whether the account saved a longer number that starts with this one: the user is still typing it. */
+  async savedLongerTrackingNumber(userId: string, trackingNumber: string): Promise<boolean> {
+    const params = query([
+      ['select', 'id'],
+      ['user_id', `eq.${userId}`],
+      ['tracking_number', `like.${trackingNumber}*`],
+      ['tracking_number', `neq.${trackingNumber}`],
+      ['limit', '1'],
+    ]);
+    return rows(await this.request(`/rest/v1/packages?${params}`, { timeoutMs: 2_000 })).length > 0;
+  }
+
   /** The saved parcels with these numbers, by number, as far as unseenLookup.ts reads them. */
   async trackingNumberParcels(numbers: string[]): Promise<Map<string, JsonObject[]>> {
     const parcels = new Map<string, JsonObject[]>();

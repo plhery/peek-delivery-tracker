@@ -27,6 +27,24 @@ describe('detection support retention', () => {
     );
   });
 
+  it('skips the start of a number the account saved, and records it when the check fails', async () => {
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const retain = vi.spyOn(client, 'recordTrackingSupportObservation').mockResolvedValue(undefined);
+    const saved = vi.spyOn(client, 'savedLongerTrackingNumber').mockResolvedValueOnce(true);
+    const typing = { trackingNumber: 'ZZ001234', carrier: 'unknown' } as const;
+    await retainDetectionSupport(client, typing, 'owner');
+    expect(saved).toHaveBeenCalledExactlyOnceWith('owner', 'ZZ001234');
+    expect(retain).not.toHaveBeenCalled();
+    saved.mockResolvedValueOnce(false).mockRejectedValueOnce(new Error('database unavailable'));
+    await retainDetectionSupport(client, typing, 'owner');
+    await retainDetectionSupport(client, typing, 'owner');
+    // Without an account there is nothing to check.
+    await retainDetectionSupport(client, typing);
+    expect(saved).toHaveBeenCalledTimes(3);
+    expect(retain).toHaveBeenCalledTimes(3);
+  });
+
   it('logs the submitted number and the actual recognition candidates privately', async () => {
     const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const client = new SupabaseServiceClient('https://database.example', 'service-key');

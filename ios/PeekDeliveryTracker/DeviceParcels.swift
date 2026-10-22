@@ -63,7 +63,8 @@ struct DeviceParcelClient: Sendable {
     var forget: @Sendable (_ linkID: String, _ key: String) async throws -> Void
     /// Changes what the link shows to others, or stops and resumes its sharing.
     var update: @Sendable (_ linkID: String, _ key: String, UpdateParcelLinkRequest) async throws -> PublicParcelResponse
-    var detect: @Sendable (_ trackingNumber: String) async throws -> CarrierDetectionResponse
+    /// `prefixOfSaved`: the number is the start of a longer one this iPhone follows, most likely that number typed again.
+    var detect: @Sendable (_ trackingNumber: String, _ prefixOfSaved: Bool) async throws -> CarrierDetectionResponse
     /// What a reader says of the parcel behind a link. The owner key goes along when this iPhone holds it.
     var feedback: @Sendable (_ linkID: String, _ key: String?, ParcelFeedbackRequest) async throws -> Void = { _, _, _ in }
 
@@ -123,9 +124,9 @@ struct DeviceParcelClient: Sendable {
                 guard response.statusCode == 200 else { throw failure(data, response) }
                 return try decode(PublicParcelResponse.self, data)
             },
-            detect: { trackingNumber in
+            detect: { trackingNumber, prefixOfSaved in
                 let body = try JSONEncoder.deliveryTracker.encode(CarrierDetectionRequest(
-                    trackingNumber: trackingNumber, lookupCountryHint: ParcelLookupCountry.hint()
+                    trackingNumber: trackingNumber, lookupCountryHint: ParcelLookupCountry.hint(), prefixOfSaved: prefixOfSaved ? true : nil
                 ))
                 let (data, response) = try await send("api/public/detect", method: "POST", body: body)
                 guard response.statusCode == 200 else { throw failure(data, response) }
@@ -217,7 +218,10 @@ final class DeviceParcels {
 
     func detect(trackingNumber: String) async throws -> CarrierDetectionResponse {
         guard let client else { throw DeliveryAPIError.serviceFailed(503) }
-        return try await client.detect(trackingNumber)
+        let prefixOfSaved = entries.contains {
+            $0.parcel.trackingNumber.count > trackingNumber.count && $0.parcel.trackingNumber.hasPrefix(trackingNumber)
+        }
+        return try await client.detect(trackingNumber, prefixOfSaved)
     }
 
     func add(_ request: CreatePackageRequest) async throws -> Parcel {

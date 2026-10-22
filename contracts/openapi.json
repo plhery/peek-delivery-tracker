@@ -33103,6 +33103,10 @@
             "type": "string",
             "pattern": "^[A-Z]{2}$",
             "description": "Optional ISO country code from the device region. A weak lookup-order hint, never a delivery destination."
+          },
+          "prefixOfSaved": {
+            "type": "boolean",
+            "description": "True when the number is the start of a longer one this device follows: most likely that number being typed again. A number nobody knows then opens no support case."
           }
         }
       },

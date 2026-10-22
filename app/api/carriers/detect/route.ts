@@ -13,7 +13,7 @@ export const POST = apiRoute(
     return json(await detectCarrier(body, async () => {
       await checkAccountRequest(context.request, requireService(context), raw, 'account_detection');
       await claimAccountTracking(requireService(context), requireUser(context).id, 'detection');
-    }, context.request.signal, requireService(context), lookupCountry(context.request, body.lookupCountryHint)));
+    }, context.request.signal, requireService(context), lookupCountry(context.request, body.lookupCountryHint), context.user?.id));
   },
   { serviceRequired: true },
 );

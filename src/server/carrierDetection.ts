@@ -103,6 +103,8 @@ export async function detectCarrier(
   signal?: AbortSignal,
   supportClient?: SupabaseServiceClient,
   countryHint?: string | null,
+  /** The signed-in account, whose saved numbers tell a number still being typed. */
+  userId?: string,
 ): Promise<ApiCarrierDetectionResponse> {
   if (signal?.aborted) throw new HttpError(499, 'Carrier check cancelled');
   if (typeof body.trackingNumber !== 'string' || body.trackingNumber.length > 80) {
@@ -127,6 +129,7 @@ export async function detectCarrier(
     })
     : { trackingNumber, carrier: detected.carrier } satisfies ApiCarrierDetectionResponse;
   recordDetection(answer.carrier !== 'unknown' ? 'high' : detected.confidence);
-  if (supportClient && !signal?.aborted) await retainDetectionSupport(supportClient, answer);
+  // The start of a number the device follows is most likely that number typed again: no case for it.
+  if (supportClient && !signal?.aborted && body.prefixOfSaved !== true) await retainDetectionSupport(supportClient, answer, userId);
   return answer;
 }

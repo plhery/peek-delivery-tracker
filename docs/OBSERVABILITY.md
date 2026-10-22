@@ -168,8 +168,12 @@ outcome and direct verification evidence.
 
 Unresolved detection requests also retain their normalized number in this backlog,
 including cached answers and choices between carriers, before any parcel is saved.
-Invalid, refused and cancelled checks do not create observations. A failed backlog write
-does not change the detection answer. `carrier_detection_support` logs the number and
+Invalid, refused and cancelled checks do not create observations, and neither does the
+start of a longer number the same person saved, which is most likely that number typed
+again: the server looks for one among the account's parcels, and the front door and the
+iPhone without an account flag one their device follows (`prefixOfSaved`). When the
+account check fails, the case opens. A failed backlog write does not change the detection
+answer. `carrier_detection_support` logs the number and
 the carriers asked, unanswered or offered as choices.
 
 Recognition asks some carriers, FedEx among them, only through a browser, and skips them

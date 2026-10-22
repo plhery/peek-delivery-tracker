@@ -68,7 +68,10 @@ final class DeviceParcelTests: XCTestCase {
                                             package: PublicPackage(id: UUID(), label: "", carrier: .dhl, createdAt: "2026-10-01T08:00:00Z", syncStatus: .ok,
                                                                    carrierData: PublicPackageCarrierData(), notificationsMuted: false, trackingEvents: []))
             },
-            detect: { number in calls.add("detect \(number)"); throw DeliveryAPIError.serviceFailed(503) }
+            detect: { number, prefixOfSaved in
+                calls.add("detect \(number)\(prefixOfSaved ? " prefix" : "")")
+                throw DeliveryAPIError.serviceFailed(503)
+            }
         )
     }
 
@@ -227,6 +230,18 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(try body(CarrierDetectionRequest(trackingNumber: "SYNTHETIC", lookupCountryHint: "CH"))["lookupCountryHint"], "CH")
         XCTAssertEqual(try body(CreatePackageRequest(trackingNumber: "SYNTHETIC", lookupCountryHint: "US"))["lookupCountryHint"], "US")
         XCTAssertEqual(try body(PublicLookupRequest(trackingNumber: "SYNTHETIC", lookupCountryHint: "GB"))["lookupCountryHint"], "GB")
+    }
+
+    func testTheStartOfANumberThisIPhoneFollowsSaysSoWhenAsked() async throws {
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls, lookup: PublicLookupResponse(link: link("22222222222A"), key: key, package: package(UUID()))), storage: Memory())
+        _ = try await device.add(CreatePackageRequest(trackingNumber: "TESTPARCEL123789", carrier: .dhl))
+
+        _ = try? await device.detect(trackingNumber: "TESTPARCEL12")
+        _ = try? await device.detect(trackingNumber: "TESTPARCEL123789")
+        _ = try? await device.detect(trackingNumber: "OTHERPARCEL1")
+
+        XCTAssertEqual(calls.all, ["lookup TESTPARCEL123789 dhl", "detect TESTPARCEL12 prefix", "detect TESTPARCEL123789", "detect OTHERPARCEL1"])
     }
 
     func testTheSameNumberIsNotLookedUpTwice() async throws {

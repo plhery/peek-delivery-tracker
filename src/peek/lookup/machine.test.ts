@@ -4,6 +4,7 @@ import {
   initialLookup,
   lookupStep,
   secondsLeft,
+  startsDeviceParcel,
   survey,
   unanswered,
   type DeviceParcel,
@@ -349,6 +350,13 @@ describe('a number this device already follows', () => {
     const known: DeviceParcel[] = [{ id: 'm3Np8sVz4KcY', number: TYPO, carrier: 'unknown' }];
     expect(survey(run([typed(TYPO), rested(TYPO)], known), known)).toMatchObject({ typo: null, source: 'device' });
     expect(run([pasted(TYPO)], known).job).toEqual({ type: 'open', id: 'm3Np8sVz4KcY' });
+  });
+
+  it('tells the start of a number it follows, which is most likely that number typed again', () => {
+    expect(startsDeviceParcel(UPS.slice(0, 8), device)).toBe(true);
+    expect(startsDeviceParcel(UPS, device)).toBe(false);
+    expect(startsDeviceParcel(SHARED, device)).toBe(false);
+    expect(startsDeviceParcel(UPS.slice(0, 8), [])).toBe(false);
   });
 
   it('needs no carrier to open a number nobody recognises', () => {

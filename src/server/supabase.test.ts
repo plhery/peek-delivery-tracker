@@ -896,6 +896,18 @@ describe('notification reads', () => {
     expect(request).toHaveBeenCalledOnce();
   });
 
+  it('finds a longer number an account saved that starts with the one given', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ id: 'saved' }]).mockResolvedValueOnce([]);
+    await expect(client.savedLongerTrackingNumber('owner', 'ZZ0012')).resolves.toBe(true);
+    await expect(client.savedLongerTrackingNumber('owner', 'ZZ0013')).resolves.toBe(false);
+    const page = new URL(`https://database.example${String(request.mock.calls[0]![0])}`).searchParams;
+    expect(String(request.mock.calls[0]![0])).toMatch(/^\/rest\/v1\/packages\?/);
+    expect(page.get('user_id')).toBe('eq.owner');
+    expect(page.getAll('tracking_number')).toEqual(['like.ZZ0012*', 'neq.ZZ0012']);
+    expect(page.get('limit')).toBe('1');
+  });
+
   it('reads the unarchived parcels of accounts, with what tells which legs may be merged', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue([

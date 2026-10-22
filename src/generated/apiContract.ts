@@ -30704,6 +30704,7 @@ export interface ApiNumberRefusalResponse {
 export interface ApiCarrierDetectionRequest {
   "trackingNumber": string;
   "lookupCountryHint"?: string;
+  "prefixOfSaved"?: boolean;
 }
 
 export interface ApiCarrierDetectionResponse {

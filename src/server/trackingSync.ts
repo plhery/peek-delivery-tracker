@@ -47,7 +47,7 @@ import {
 import { isRecord, type JsonObject } from './types';
 import { UniversalTracker } from 'universal-parcel-scraper/node';
 import type { UniversalSource } from 'universal-parcel-scraper';
-import { answeredWithoutHistory, catalogRules, detectionExpects, directCarrier, freshnessWindow, hasRoutingProgress, RoutingDeferred, routingFailure, routingState, TrackingRouter, type RoutedResult } from './trackingRouting';
+import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, freshnessWindow, hasRoutingProgress, RoutingDeferred, routingFailure, routingState, TrackingRouter, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
@@ -1824,13 +1824,7 @@ export class TrackingSyncService {
       // local-clock answer could not replace the saved summary: routing would stop filing it
       // any other way, and the database files a parcel a provider names only while none is.
       // What was confirmed stays apart (`cleared_confirmation`): confirming it again is no news.
-      if (!values.carrier && carrierId === 'unknown' && routing) {
-        if (typeof routing.confirmed_carrier === 'string' && typeof routing.confirmed_number === 'string') {
-          routing.cleared_confirmation = { carrier: routing.confirmed_carrier, number: routing.confirmed_number };
-        }
-        delete routing.confirmed_carrier; delete routing.confirmed_number;
-        delete routing.confirmed_tracking_url; delete routing.confirmed_postcode;
-      }
+      if (!values.carrier && carrierId === 'unknown' && routing) clearConfirmation(routing);
       // A scan already stored is rewritten in place, which is no news.
       const storedIds = new Set(stored.map((event) => String(event.provider_event_id)));
       const eventsNew = persistedEvents.filter((event) => !storedIds.has(String(event.provider_event_id))).length;

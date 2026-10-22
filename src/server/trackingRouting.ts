@@ -63,9 +63,9 @@ export interface RoutingState extends JsonObject {
   confirmed_tracking_url?: string | null;
   confirmed_postcode?: string | null;
   /**
-   * The carrier and number last confirmed, kept when the sync clears the confirmation of a
-   * parcel it leaves under unknown. That confirmation was reported and counted: confirming
-   * them again is no news. It files nothing, and the next confirmation takes its place.
+   * The carrier and number last confirmed, kept when the confirmation of a parcel left under
+   * unknown is cleared (clearConfirmation). That confirmation was reported and counted:
+   * confirming them again is no news. It files nothing, and the next confirmation takes its place.
    */
   cleared_confirmation?: { carrier: string; number: string };
   discovered_carrier?: string;
@@ -160,6 +160,20 @@ export function routingState(parcel: JsonObject): RoutingState {
     last_success_at: typeof state.last_success_at === 'string' ? state.last_success_at
       : parcel.sync_status === 'ok' && typeof parcel.last_synced_at === 'string' ? parcel.last_synced_at : undefined,
   };
+}
+
+/**
+ * Drops the carrier confirmed for a parcel left under unknown, whichever check leaves it there:
+ * one the sync completes, or one deferred after that carrier answered not found or without
+ * history. A confirmed carrier would stop routing from filing the parcel any other way. The
+ * carrier and number it had confirmed stay apart (`cleared_confirmation`).
+ */
+export function clearConfirmation(routing: JsonObject): void {
+  if (typeof routing.confirmed_carrier === 'string' && typeof routing.confirmed_number === 'string') {
+    routing.cleared_confirmation = { carrier: routing.confirmed_carrier, number: routing.confirmed_number };
+  }
+  delete routing.confirmed_carrier; delete routing.confirmed_number;
+  delete routing.confirmed_tracking_url; delete routing.confirmed_postcode;
 }
 
 export function freshnessWindow(now: Date): number {
@@ -657,6 +671,8 @@ export class TrackingRouter {
       } };
     };
     const attemptedDirect = new Set<string>();
+    // Carriers whose own lookup answered not found or without history for the number in this check.
+    const emptyDirect = new Set<string>();
     let attempts = 0;
     // Probes are this parcel's own guesses: they are no evidence of provider health.
     let probeContacts = 0;
@@ -810,6 +826,7 @@ export class TrackingRouter {
       } catch (error) {
         signal?.throwIfAborted();
         const failure = fail(carrier, error);
+        if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
         // The carrier does not issue this number (a failed check digit): a
         // provider's name for it, saved by an older check, stops being asked.
         if (carrierErrorKind(error) === 'invalid_input' && state.discovered_carrier === carrier) delete state.discovered_carrier;
@@ -1264,6 +1281,14 @@ export class TrackingRouter {
     if (localDirectFallback) return keepLocal(localDirectFallback);
     const own = ownLocalAnswer();
     if (own) return own;
+    // The carrier confirmed for an unknown parcel's number answered not found or without history,
+    // and no other source answered: the confirmation goes, as when the sync leaves the parcel
+    // unknown, so the next check routes it afresh (recognition, a provider naming its carrier). A
+    // passing failure of that carrier says nothing about the number and keeps it. So does a parcel
+    // filed under the carrier, which is asked first anyway: there the confirmation keeps a brief
+    // "not found" from sending the parcel to other carriers.
+    if (declared === 'unknown' && state.confirmed_carrier && state.confirmed_number === number
+      && emptyDirect.has(state.confirmed_carrier)) clearConfirmation(state);
     state.discovery_cursor = (offset + Math.max(1, [...attemptedUniversal].filter((source) => rotation.includes(source)).length)) % Math.max(1, rotation.length);
     const deadlines = Object.entries(state.failures).filter(([provider]) => !awaitsInput(provider))
       .map(([, failure]) => millis(failure.retry_at)).filter((time) => time > now().getTime());

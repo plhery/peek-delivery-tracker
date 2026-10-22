@@ -200,10 +200,14 @@ offset count, and a carrier the catalog lists in UTC has no zone to read its sca
 Otherwise the parcel stays unknown: a local-clock answer can't be ordered against its newest
 scan, and number shapes overlap between carriers. A parcel the sync leaves unknown keeps no
 carrier confirmed for it, so a filing the sync turned down, such as a local-clock answer over a
-saved summary, doesn't keep a later check from filing it. The carrier and number it had confirmed
-stay apart (`routing.cleared_confirmation`) and file nothing: a later check confirming them again
-reports no `…_confirmed` decision and adds nothing to `carrier_checksum_rejection_total`
-([OBSERVABILITY.md](OBSERVABILITY.md)).
+saved summary, doesn't keep a later check from filing it. A deferred check drops the confirmation
+too when the confirmed carrier answered not found or without history and no other source
+answered, so the next check routes the parcel afresh. A passing failure of that carrier (a
+transport error, a challenge, a rate limit, a timeout) keeps it, and so does a parcel filed under
+the carrier, so that a brief not-found doesn't send it to other carriers. The carrier and number
+it had confirmed stay apart (`routing.cleared_confirmation`) and file nothing: a later check
+confirming them again reports no `…_confirmed` decision and adds nothing to
+`carrier_checksum_rejection_total` ([OBSERVABILITY.md](OBSERVABILITY.md)).
 
 The filed carrier's partial answer, its status without scans or only its newest scans
 (`summary_only`, `history_truncated`), stands unless a provider holds a fuller history that is

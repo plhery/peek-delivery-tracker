@@ -1263,6 +1263,33 @@ describe('TrackingSyncService', () => {
       ['carrier_mismatch_confirmed', expect.objectContaining({ carrier: 'unknown', provider: 'fedex' })]]);
   });
 
+  it('saves an unknown parcel without its confirmation when the confirmed carrier answers without history and the check is deferred', async () => {
+    vi.spyOn(scraper, 'universalPlan').mockReturnValue({ sources: ['ParcelsApp'], carrier: null, tier: () => 'unknown', rank: () => 0 });
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined) };
+    const adapter = { fetch: vi.fn().mockRejectedValue(new NoHistoryError('Happy-Post')),
+      fetchUniversal: vi.fn().mockRejectedValue(new NotFoundError('ParcelsApp')) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null,
+      () => new Date('2026-09-10T12:00:00Z'));
+    // A synthetic number an earlier check confirmed for Happy-Post, whose summary a provider gave
+    // and which already missed a check.
+    const number = 'TEST1234';
+    await expect(service.syncPackage({ id: 'deferred-confirmation', carrier: 'unknown', tracking_number: number,
+      current_stage: 'in_transit', carrier_data: { tracking_provider: 'ParcelsApp', routing: { version: 1,
+        configured_carrier: 'unknown', confirmed_carrier: 'happy-post', confirmed_number: number, confirmed_tracking_url: null,
+        confirmed_postcode: null, last_success_at: '2026-09-09T12:00:00.000Z', consecutive_failures: 1 } } }))
+      .resolves.toMatchObject({ errors: 1 });
+    expect(adapter.fetch.mock.calls.map(([carrier]) => carrier)).toEqual(['happy-post']);
+    const saved = client.updatePackage.mock.calls.at(-1)![1];
+    expect(saved).toMatchObject({ sync_status: 'error', carrier_data: { tracking_provider: 'ParcelsApp', routing: {
+      configured_carrier: 'unknown', cleared_confirmation: { carrier: 'happy-post', number },
+      failures: { 'happy-post': { kind: 'no_history' }, ParcelsApp: { kind: 'not_found' } } } } });
+    for (const key of ['confirmed_carrier', 'confirmed_number', 'confirmed_tracking_url', 'confirmed_postcode']) {
+      expect(saved.carrier_data.routing).not.toHaveProperty(key);
+    }
+  });
+
   it('persists routing for a universal-only carrier and respects it on the next manual check', async () => {
     const client = { ...fakeClient(),
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),

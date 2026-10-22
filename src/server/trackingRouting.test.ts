@@ -7,7 +7,7 @@ import type { CarrierResult, UniversalSource } from 'universal-parcel-scraper';
 import * as monitoring from './observability';
 import * as metrics from './metrics';
 import { universalCarrierHints } from 'universal-parcel-scraper/app';
-import { IndeterminateError, InputRequiredError, InvalidInputError, NotFoundError } from 'universal-parcel-scraper';
+import { BudgetExceededError, ChallengeError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, RateLimitedError, TransportError } from 'universal-parcel-scraper';
 import * as scraper from 'universal-parcel-scraper';
 import { recognitionAskedCarriers } from '../lib/carriers';
 
@@ -870,7 +870,8 @@ describe('persistent tracking routing', () => {
       expect(result.result.routing).toMatchObject({ input_needed: { carrier: 'gls-de', field: 'dpdPostcode' } });
       expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('carrier_input_needed', expect.objectContaining({ provider: 'gls-de' }));
       // Once the user files it under GLS with the postcode and it tracks, nothing is left to ask.
-      const next = setup(new Date('2026-09-10T13:30:00Z'));
+      // Once the providers' day of rest after their "not found" is over.
+      const next = setup(new Date('2026-09-11T12:30:00Z'));
       next.direct.mockResolvedValue(directValue('gls-de'));
       const tracked = await next.router.fetch(parcel({ carrier: 'gls-de', dpd_postcode: '10115', tracking_number: '12345678901',
         carrier_data: result.result }), false);
@@ -1513,6 +1514,75 @@ describe('persistent tracking routing', () => {
         routing: { confirmed_carrier: 'happy-post', confirmed_number: '12345678' } } });
       expect(result.result.routing).not.toHaveProperty(['failures', 'happy-post']);
       expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('foreign_history_rejected', expect.anything());
+    });
+  });
+  describe('a confirmed carrier asked while no provider has the parcel', () => {
+    // A shape detection is unsure of, which recognition asks other carriers about. An earlier
+    // check confirmed Happy-Post for it, and a day has passed since anything answered.
+    const confirmed = (carrier: string, routing: JsonObject = {}) => parcel({ carrier, current_stage: 'in_transit',
+      carrier_data: { routing: state({ configured_carrier: carrier, confirmed_carrier: 'happy-post', confirmed_number: 'TEST1234',
+        confirmed_tracking_url: null, confirmed_postcode: null, last_success_at: '2026-09-09T12:00:00Z', ...routing }) } });
+    const deferred = async (snapshot: JsonObject, answer: Error) => {
+      fixedPlan('ParcelsApp', '17TRACK');
+      const run = setup();
+      run.direct.mockRejectedValue(answer);
+      run.universal.mockRejectedValue(new NotFoundError('ParcelsApp'));
+      const outcome = await run.router.fetch(snapshot, false).catch((error: unknown) => error);
+      expect(outcome).toBeInstanceOf(RoutingDeferred);
+      // While the carrier is confirmed, recognition asks no other carrier.
+      expect(run.recognize).not.toHaveBeenCalled();
+      return { ...run, routing: (outcome as RoutingDeferred).routing };
+    };
+    const kept = (routing: JsonObject) => {
+      expect(routing).toMatchObject({ confirmed_carrier: 'happy-post', confirmed_number: 'TEST1234' });
+      expect(routing).not.toHaveProperty('cleared_confirmation');
+    };
+
+    it.each([
+      ['no history', new NoHistoryError('Happy-Post'), 'no_history'],
+      ['not found', new NotFoundError('Happy-Post'), 'not_found'],
+      ['an item its tracking does not know', new IndeterminateError('Happy-Post', 'No such item', { reason: 'portal_not_found' }), 'no_history'],
+    ])('no longer holds an unknown parcel once it answers %s, so the next check routes the parcel afresh', async (_label, answer, kind) => {
+      const { direct, routing } = await deferred(confirmed('unknown'), answer);
+      expect(direct).toHaveBeenCalledExactlyOnceWith(expect.anything(), 'happy-post');
+      expect(routing).toMatchObject({ configured_carrier: 'unknown', cleared_confirmation: { carrier: 'happy-post', number: 'TEST1234' },
+        failures: { 'happy-post': { kind } } });
+      for (const key of ['confirmed_carrier', 'confirmed_number', 'confirmed_tracking_url', 'confirmed_postcode']) {
+        expect(routing).not.toHaveProperty(key);
+      }
+      // Once the providers' day of rest after their "not found" is over.
+      const next = setup(new Date('2026-09-11T12:30:00Z'));
+      const result = await next.router.fetch(parcel({ current_stage: 'in_transit', carrier_data: { routing } }), false);
+      expect(next.direct).not.toHaveBeenCalledWith(expect.anything(), 'happy-post');
+      expect(next.recognize).toHaveBeenCalled();
+      expect(result.result).toMatchObject({ tracking_provider: expect.any(String),
+        routing: { cleared_confirmation: { carrier: 'happy-post', number: 'TEST1234' } } });
+    });
+
+    it.each([
+      ['a transport error', new TransportError('Happy-Post')],
+      ['a challenge', new ChallengeError('Happy-Post')],
+      ['a rate limit', new RateLimitedError('Happy-Post')],
+      ['a timeout', new BudgetExceededError('Happy-Post', 45_000)],
+      ['an inconclusive answer', new IndeterminateError('Happy-Post')],
+    ])('keeps an unknown parcel\'s confirmation after %s, which says nothing about the number', async (_label, failure) => {
+      kept((await deferred(confirmed('unknown'), failure)).routing);
+    });
+
+    it('keeps an unknown parcel\'s confirmation while the carrier waits out an earlier answer and is not asked', async () => {
+      const { direct, routing } = await deferred(confirmed('unknown', { failures: { 'happy-post': {
+        count: 1, kind: 'no_history', retry_at: '2026-09-10T12:15:00Z' } } }), new NoHistoryError('Happy-Post'));
+      expect(direct).not.toHaveBeenCalled();
+      kept(routing);
+    });
+
+    it.each([
+      ['no history', new NoHistoryError('Happy-Post')],
+      ['not found', new NotFoundError('Happy-Post')],
+    ])('keeps the confirmation of a parcel filed under the carrier when it answers %s', async (_label, answer) => {
+      const { direct, routing } = await deferred(confirmed('happy-post'), answer);
+      expect(direct).toHaveBeenCalledExactlyOnceWith(expect.anything(), 'happy-post');
+      kept(routing);
     });
   });
   it.each([

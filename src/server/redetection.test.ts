@@ -123,6 +123,14 @@ it.each<[string, JsonObject, JsonObject]>([
   expect(rerouteCarrier(parcel(values, data))).toBeNull();
 });
 
+it('asks an unknown parcel\'s carrier again once a deferred check cleared its confirmation and its wait is over', () => {
+  const now = Date.parse('2026-09-10T12:00:00Z');
+  const cleared = (retry: string) => parcel({}, { routing: { cleared_confirmation: { carrier: 'ups', number: '1Z999AA10123456784' },
+    failures: { ups: { kind: 'no_history', count: 1, retry_at: retry } } } });
+  expect(rerouteCarrier(cleared('2026-09-10T11:00:00Z'), 'newer', now)).toBe('ups');
+  expect(rerouteCarrier(cleared('2026-09-10T13:00:00Z'), 'newer', now)).toBeNull();
+});
+
 it('points a parcel to a carrier that refused its number under an older release', async () => {
   const now = Date.parse('2026-09-10T12:00:00Z');
   const refusal = { kind: 'schema', count: 5, retry_at: '2026-09-09T06:00:00Z', user_error: 'carrier:invalid_input' };

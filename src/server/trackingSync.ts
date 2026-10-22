@@ -247,6 +247,23 @@ function deliveryWindowOpens(parcel: JsonObject): number | null {
 }
 
 /**
+ * Whether the carrier's newest scan is from today on its clock: an out-for-delivery scan from an
+ * earlier day announced a round that is over, and the regular cadence catches the next one. A
+ * parcel without a dated scan counts as today's.
+ */
+function deliveringToday(parcel: JsonObject, now: Date): boolean {
+  const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+  const zone = resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
+  const days = [routingState(parcel).last_event_at, data.last_update]
+    .map((value) => Date.parse(String(value ?? ''))).filter(Number.isFinite)
+    .map((time) => DateTime.fromMillis(time, { zone }).toISODate()!);
+  // A day-alone scan ("2026-10-21") has no instant, only the carrier's date.
+  const localDay = /^\d{4}-\d{2}-\d{2}/.exec(String(data.last_update_local ?? ''))?.[0];
+  if (localDay) days.push(localDay);
+  return !days.length || days.sort().at(-1)! >= DateTime.fromJSDate(now, { zone }).toISODate()!;
+}
+
+/**
  * The start of the parcel's current hour, which opens at a minute of its own: the
  * parcels checked hourly or less often are spread over the hour rather than all due at
  * its start, so no run takes them all. Copies of one number open at the same minute
@@ -328,9 +345,9 @@ function isScheduledTrackingSyncDue(
   // the carrier, so it is asked every 2 minutes, every 5 while its lookups open a browser, unless
   // the carrier sets a longer interval of its own. A universal provider has quotas and publishes
   // scans late, so it keeps the regular cadence. Until shortly before a delivery window opens, the
-  // regular cadence still catches a changed slot.
+  // regular cadence still catches a changed slot, as it does a round from an earlier day.
   const minimum = CARRIER_DEFINITIONS[String(parcel.carrier) as CarrierId]?.tracking.refresh?.minMinutes;
-  const delivering = parcel.current_stage === 'out_for_delivery';
+  const delivering = parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now);
   const opens = delivering ? deliveryWindowOpens(parcel) : null;
   const lastMile = delivering && !minimum && answeredByCarrier(parcel)
     && (opens === null || now.getTime() >= opens - BEFORE_WINDOW_MS);

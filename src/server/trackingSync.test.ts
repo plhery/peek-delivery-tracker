@@ -2299,6 +2299,24 @@ describe('TrackingSyncService', () => {
   });
 
   it.each([
+    { scan: 'from today', lastEvent: '2026-09-09T06:00:00Z', every2Minutes: true },
+    // A round from an earlier day is over: the regular cadence catches the next one, even for a parcel added today.
+    { scan: 'from an earlier day', lastEvent: '2026-09-07T17:00:00Z', every2Minutes: false },
+    { scan: 'from an earlier day, without its time', lastEvent: '2026-09-07T17:00:00Z', localDay: '2026-09-08', every2Minutes: false },
+    { scan: 'from today, without its time', lastEvent: '2026-09-07T17:00:00Z', localDay: '2026-09-09', every2Minutes: true },
+    // The day is the carrier's: 07:00 in Sydney is 21:00 UTC the day before.
+    { scan: 'from this morning in Sydney', carrier: 'j-and-t-au', lastEvent: '2026-09-08T21:00:00Z', every2Minutes: true },
+    { scan: 'from the morning before in Sydney', carrier: 'j-and-t-au', lastEvent: '2026-09-07T21:00:00Z', every2Minutes: false },
+  ])('checks a parcel out for delivery with its scan $scan every 2 minutes: $every2Minutes', ({ carrier = 'swiss-post', lastEvent, localDay, every2Minutes }) => {
+    const parcel = { carrier, current_stage: 'out_for_delivery', tracking_number: 'TEST1234', created_at: '2026-09-09T07:00:00Z',
+      last_synced_at: '2026-09-09T10:00:15Z', sync_status: 'ok', archived_at: null,
+      carrier_data: { ...(localDay ? { last_update_local: localDay } : {}), routing: { version: 1, configured_carrier: carrier, last_event_at: lastEvent } } };
+    const at = (time: string) => new Date(`2026-09-09T${time}Z`);
+    expect(isOpenedParcelSyncDue(parcel, at('10:02:00'))).toBe(every2Minutes);
+    expect(isOpenedParcelSyncDue(parcel, at('10:10:00'))).toBe(true);
+  });
+
+  it.each([
     // Out for delivery, the carrier's own adapter answering: every 2 minutes.
     { carrier: 'swiss-post', stage: 'out_for_delivery', time: '10:02:00', checked: 1 },
     { carrier: 'swiss-post', stage: 'out_for_delivery', time: '10:01:59', checked: 0 },

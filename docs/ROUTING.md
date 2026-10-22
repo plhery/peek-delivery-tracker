@@ -239,6 +239,7 @@ parcels followed without an account that nobody watches (below).
 | --- | --- |
 | Out for delivery (direct adapter) | every 2 min; every 5 min while its lookups open a browser; 15 min after a failed check |
 | Out for delivery, until 30 min before its delivery window opens | every 10 min |
+| Out for delivery since an earlier day | every 10 min |
 | Other stages (direct adapter) | every 10 min |
 | Served by a universal provider, out for delivery too | every 15 min |
 | PostNL | every 30 min, also after a failure and out for delivery |
@@ -284,6 +285,11 @@ says which (`browser_check` in its routing). A universal provider has quotas, co
 parcels keep the regular cadence, and the 15 minutes routing waits after each of its
 answers, even while someone is looking. A parcel counts as served by a universal provider
 while the summary it shows came from one (`tracking_provider` in `carrier_data`).
+
+**A round from an earlier day** is over: when the carrier's newest scan, timed or dated
+alone (`last_update_local`), is from an earlier day on its clock, the parcel keeps the
+regular cadence until the carrier scans it again. Its clock is the zone the delivery window
+below is read in; a parcel without a dated scan counts as today's.
 
 **A failed check** out for delivery, whose carrier lookup met a bot check, failed or
 answered without the parcel's progress, holds the next one back for 15 minutes: the carrier

@@ -300,12 +300,13 @@ function isScheduledTrackingSyncDue(
   if (!Number.isFinite(lastChecked)) return true;
   const local = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' });
   const hourStart = parcelHourStart(parcel, local);
-  // Archived, daily around the clock, as is a delivery its carrier may yet dispute.
-  if (archived || unconfirmedDelivery(parcel, now)) return lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   // A provider filed the parcel under a carrier with an adapter of its own that the check did
-  // not ask: the next run asks that carrier. That check clears the mark; failing that, it lapses.
+  // not ask: the next run asks that carrier, archived or delivered too. That check clears the
+  // mark; failing that, it lapses.
   const sinceNamed = now.getTime() - Date.parse(String(routingState(parcel).carrier_named_at ?? ''));
   if (sinceNamed >= 0 && sinceNamed < NAMED_CARRIER_DUE_MS) return true;
+  // Archived, daily around the clock, as is a delivery its carrier may yet dispute.
+  if (archived || unconfirmedDelivery(parcel, now)) return lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   // A lookup without an account filed under no carrier that nobody follows any more: every 6 hours
   // by day, and not overnight. A provider's next answer, or a carrier recognition asks, can name its carrier.
   if (oneOff && unfollowed) {
@@ -1633,10 +1634,12 @@ export class TrackingSyncService {
       // The parcel's own carrier answered in this check: its own answer, or the scans it gave on local clocks beside a provider's.
       const filed = String(parcel.carrier);
       const capture = isRecord(result.direct_local_history) ? result.direct_local_history : {};
-      const ownAnswer: CarrierResult | null = !directCarrier(filed) || result.original_carrier || previousData.original_carrier ? null
-        : typeof result.tracking_provider !== 'string' ? (sourceCarrierId === filed ? result : null)
-          : result.carrier_answered === true && capture.carrier === filed && capture.number === directHistoryNumber(parcel, result)
+      const answered = result;
+      const answerOf = (carrier: string): CarrierResult | null => !directCarrier(carrier) || answered.original_carrier || previousData.original_carrier ? null
+        : typeof answered.tracking_provider !== 'string' ? (sourceCarrierId === carrier ? answered : null)
+          : answered.carrier_answered === true && capture.carrier === carrier && capture.number === directHistoryNumber(parcel, answered)
             && Array.isArray(capture.events) ? { events: capture.events.filter(isRecord) } : null;
+      const ownAnswer = answerOf(filed);
       const carrierMoved = ownAnswer ? carrierMovedAt(filed, ownAnswer) : Number.NaN;
       // A saved delivery only a provider reported gives way to that answer when it disputes it, as
       // routing's does in a single check (disputedDelivery.ts): the provider's delivery rows go.
@@ -1790,11 +1793,14 @@ export class TrackingSyncService {
           if (values.current_stage !== selectedStage) anomalies = [...anomalies, 'early_stage_regression'];
         }
         // A delivery only a provider reported, which the parcel's own carrier did not show, is
-        // checked again daily for a while: the carrier may yet dispute it (activePackages).
+        // checked again daily for a while: the carrier may yet dispute it (activePackages). The
+        // carrier is the one the parcel is filed under once this check is saved: one a provider
+        // just named, which an Add preflight's history leaves unasked, is asked at the next run.
         const followed = previousStage === 'delivered' ? previousData.unconfirmed_delivery_until
           : new Date(now.getTime() + UNCONFIRMED_DELIVERY_MS).toISOString();
+        const owner = fetched.correction?.carrier ?? filed;
         if (values.current_stage === 'delivered' && typeof result.tracking_provider === 'string' && typeof followed === 'string'
-          && directCarrier(filed) && !result.original_carrier && !showsDelivery(ownAnswer)) carrierData.unconfirmed_delivery_until = followed;
+          && directCarrier(owner) && !result.original_carrier && !showsDelivery(answerOf(owner))) carrierData.unconfirmed_delivery_until = followed;
         // A parcel collected from its pickup point keeps the point once the carrier stops naming it.
         const collectedAt = collectedPickupPoint(parcel, carrierData, String(values.current_stage ?? previousStage),
           fetched.correction?.carrier ?? carrierId, [...stored, ...events]);

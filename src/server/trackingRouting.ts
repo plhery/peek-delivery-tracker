@@ -84,8 +84,11 @@ export interface RoutingState extends JsonObject {
   provider_input_needed?: { provider: string; field: 'dpdPostcode' };
   /** When providers last held no fuller history than the filed carrier's partial answer. */
   partial_checked_at?: string;
-  /** The filed carrier's local-clock answer that a provider's history last matched, adding no scan or stage. */
-  provider_copy?: { carrier: string; number: string; scans: number; stage: string | null; provider: string; checked_at: string };
+  /**
+   * The filed carrier's local-clock answer that a provider's history last matched, adding no scan or stage,
+   * or only guessing the clock of a scan the carrier dates by its day alone: then the carrier's answer was kept.
+   */
+  provider_copy?: { carrier: string; number: string; scans: number; stage: string | null; provider: string; checked_at: string; kept?: boolean };
   /**
    * Carriers whose answer a check set aside: why, when, how many checks in a row set that same
    * answer aside, and for one older than the parcel's newest scan, the answer's newest scan and
@@ -333,6 +336,31 @@ function datesEveryScan(carrier: string, answer: CarrierResult, provider: Carrie
   return zone !== null && scans.length > 0 && scans.every((scan) => {
     const local = minute(scan.local_time ?? scan.time, zone);
     return dated.some((event) => stage(event) === stage(scan) && [0, 60].includes(Math.abs(minute(event.time) - local)));
+  });
+}
+const DAY_ALONE = /^\d{4}-\d{2}-\d{2}$/;
+const offsetTime = (time: unknown): time is string => typeof time === 'string' && /(?:Z|[+-]\d{2}:?\d{2})$/i.test(time);
+/**
+ * Whether a provider's history is a carrier's answer whose scans are dated, or dated by their day
+ * alone, with nothing more than a guess at the clock of those days: each of the provider's scans
+ * is at an instant the carrier gives, to the minute, at midnight of one of those days (on the
+ * carrier's catalog clock, or UTC), or itself dated by one of those days alone.
+ */
+function guessesDayClocks(carrier: string, answer: CarrierResult, provider: CarrierResult): boolean {
+  const zone = carrierZone(carrier) ?? 'UTC';
+  const scans = answer.events ?? [];
+  const days = new Set(scans.flatMap((scan) => !offsetTime(scan.time) && DAY_ALONE.test(scan.local_time ?? '') ? [scan.local_time!] : []));
+  const instants = new Set(scans.flatMap((scan) => offsetTime(scan.time) ? [Math.floor(Date.parse(scan.time) / 60_000)] : []));
+  const events = provider.events ?? [];
+  if (!days.size || events.length !== scans.length
+    || scans.some((scan) => !offsetTime(scan.time) && !DAY_ALONE.test(scan.local_time ?? ''))) return false;
+  return events.every((event) => {
+    if (!offsetTime(event.time)) return DAY_ALONE.test(event.local_time ?? '') && days.has(event.local_time!);
+    if (instants.has(Math.floor(Date.parse(event.time) / 60_000))) return true;
+    return [zone, 'UTC'].some((clock) => {
+      const at = DateTime.fromISO(event.time as string, { zone: clock });
+      return at.isValid && at.toFormat('HH:mm:ss') === '00:00:00' && days.has(at.toISODate()!);
+    });
   });
 }
 /** The newest instant of a routed result, read in its source's zone exactly as its events are persisted. */
@@ -912,7 +940,14 @@ export class TrackingRouter {
     // While the answer stays the same and the parcel shows that provider's
     // history, a scheduled check keeps it instead of asking the providers again,
     // at their cadence. The sync keeps a provider's summary over a local-clock
-    // answer, unless the parcel is still pending.
+    // answer, unless the parcel is still pending. A copy that only guessed the
+    // clock of the carrier's days left the carrier's answer in its place: that
+    // answer serves the check, at the carrier's own cadence.
+    if (scheduled && unchanged && localDirectFallback && universalNumber === number && copy?.kept
+      && typeof metadata.tracking_provider !== 'string' && parcel.current_stage !== 'pending') {
+      state.direct_retry_at = undefined;
+      return persistResult(localDirectFallback.value, localDirectFallback.carrier);
+    }
     if (scheduled && unchanged && localDirectFallback && universalNumber === number && metadata.tracking_provider === copy?.provider
       && parcel.current_stage !== 'pending') {
       const kept = keepLocal(localDirectFallback);
@@ -1258,6 +1293,20 @@ export class TrackingRouter {
       }
       const own = hasRoutingProgress(value.result) ? undefined : ownLocalAnswer();
       if (own) return own;
+      // A provider holding just the carrier's scans, which only guesses the clock of those the
+      // carrier dates by their day alone, adds nothing: a midnight it gives one can even put it
+      // before the scan the carrier lists first. The carrier's answer serves the parcel, its scans
+      // in the carrier's order, and the carrier stays first on every check.
+      if (localDirectFallback && !withoutProgress && universalNumber === number
+        && guessesDayClocks(localDirectFallback.carrier, localDirectFallback.value.result, value.result)) {
+        state.provider_copy = { carrier: localDirectFallback.carrier, number, ...localAnswer(localDirectFallback.value.result),
+          provider: chosen, checked_at: now().toISOString(), kept: true };
+        state.direct_retry_at = undefined;
+        delete state.partial_checked_at;
+        state.last_probe_at ??= now().toISOString();
+        state.discovery_cursor = 0;
+        return persistResult(localDirectFallback.value, localDirectFallback.carrier);
+      }
       // The carrier's own answer had no current instant, so this provider dates the
       // timeline. A provider holding just the carrier's scans and stage adds
       // nothing else: the carrier stays first on every check and shows when there

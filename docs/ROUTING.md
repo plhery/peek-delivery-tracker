@@ -178,7 +178,13 @@ provider whose history holds just the carrier's number of scans and stage only d
 the carrier stays first on every check. While the carrier's answer keeps that number and
 stage and the parcel shows that provider's history, scheduled checks keep the history
 without asking the providers, for up to 6 h after the provider last matched it. A pending
-parcel is left out, since a local-clock answer would replace its summary. A provider that
+parcel is left out, since a local-clock answer would replace its summary. A provider whose
+history is the carrier's scans with nothing more than a guess at the clock of those the
+carrier dates by their day alone (midnight on the carrier's clock or in UTC, or the day
+alone too) adds nothing, and its midnight can put the day's scan before the one the carrier
+lists ahead of it: the carrier's answer serves the parcel, its scans in the carrier's order
+(`kept` in `provider_copy`). While that answer keeps its number of scans and stage, scheduled
+checks take it alone, at the carrier's cadence, for up to 6 h. A provider that
 adds scans or a different stage stays the source, as does one whose copy the parcel didn't
 keep, and the carrier is asked again 6 h later, not on every check. While no provider has
 progress for the parcel, the carrier's answer serves it if it moved, and the carrier is asked

@@ -1717,6 +1717,73 @@ describe('persistent tracking routing', () => {
     expect(next.result.routing).toMatchObject({ direct_retry_at: '2026-09-10T18:00:00.000Z' });
   });
 
+  describe('a provider that only guesses the clock of the day the filed carrier gives a scan', () => {
+    // Yamato dates its newest scan by its day alone, after one at 08:00 on its clock (UTC+9).
+    const own = (): RoutedResult => ({ sourceCarrierId: 'yamato', swissPostReady: null, handoffFallbackErrorType: null,
+      result: { status: 'out_for_delivery', current_stage: 'out_for_delivery', last_update: null, last_update_local: '2026-09-10',
+        events: [
+          { local_time: '2026-09-10', description: 'Out for delivery', stage: 'out_for_delivery' },
+          { time: '2026-09-10T08:00:00+09:00', local_time: '2026-09-10T08:00:00', description: 'Arrived at the depot', stage: 'in_transit' },
+        ] } });
+    // The provider's copy of those two scans; a midnight it gives the day sorts before the depot.
+    const copy = (newest: { time?: string; local_time?: string }): CarrierResult => ({ status: 'in_transit', current_stage: 'in_transit',
+      last_update: '2026-09-09T23:00:00Z', events: [
+        { time: '2026-09-09T23:00:00Z', description: 'Arrived at the depot', stage: 'in_transit' },
+        { ...newest, description: 'Out for delivery', stage: 'out_for_delivery' },
+      ] });
+    const filed = (routing: JsonObject, stage = 'in_transit') => parcel({ carrier: 'yamato', tracking_number: '123456789012',
+      current_stage: stage, carrier_data: { routing } });
+    async function kept(newest: { time?: string; local_time?: string } = { time: '2026-09-09T15:00:00Z' }) {
+      fixedPlan('Ship24', '17TRACK');
+      const { router, direct, universal } = setup();
+      direct.mockResolvedValue(own());
+      universal.mockResolvedValue(copy(newest));
+      return router.fetch(filed(state({ configured_carrier: 'yamato' })), true);
+    }
+
+    it.each([
+      ['midnight on the carrier\'s clock', { time: '2026-09-09T15:00:00Z' }],
+      ['midnight UTC', { time: '2026-09-10T00:00:00Z' }],
+      ['the day alone', { local_time: '2026-09-10' }],
+    ])('keeps the carrier\'s answer, its scans in its order, when the provider gives the day %s', async (_label, newest) => {
+      const result = await kept(newest);
+      expect(result.sourceCarrierId).toBe('yamato');
+      expect(result.result).toMatchObject({ current_stage: 'out_for_delivery' });
+      expect(result.result).not.toHaveProperty('tracking_provider');
+      expect(result.result).not.toHaveProperty('direct_local_fallback');
+      expect(result.result.routing).toMatchObject({ preferred_provider: 'Ship24', provider_copy: { carrier: 'yamato', number: '123456789012',
+        scans: 2, stage: 'out_for_delivery', provider: 'Ship24', checked_at: time.toISOString(), kept: true } });
+      expect((result.result.routing as JsonObject).direct_retry_at).toBeUndefined();
+    });
+
+    it('serves scheduled checks with the carrier\'s answer alone while it stays the same', async () => {
+      const first = await kept();
+      const later = setup(new Date('2026-09-10T12:02:00Z'));
+      later.direct.mockResolvedValue(own());
+      const result = await later.router.fetch(filed(first.result.routing as JsonObject, 'out_for_delivery'), true);
+      expect(later.direct).toHaveBeenCalledOnce();
+      expect(later.universal).not.toHaveBeenCalled();
+      expect(result.sourceCarrierId).toBe('yamato');
+      expect(result.result).not.toHaveProperty('direct_local_fallback');
+      expect(result.result.routing).toMatchObject({ provider_copy: { checked_at: time.toISOString(), kept: true } });
+      expect((result.result.routing as JsonObject).next_check_at).toBeUndefined();
+    });
+
+    it.each([
+      ['a clock of its own', copy({ time: '2026-09-10T01:30:00Z' })],
+      ['a scan the carrier does not list', { ...copy({ time: '2026-09-09T15:00:00Z' }),
+        events: [...copy({ time: '2026-09-09T15:00:00Z' }).events!, { time: '2026-09-09T12:00:00Z', description: 'Label created', stage: 'registered' }] }],
+    ])('stays on the provider when it gives the day %s', async (_label, provider) => {
+      fixedPlan('Ship24', '17TRACK');
+      const { router, direct, universal } = setup();
+      direct.mockResolvedValue(own());
+      universal.mockResolvedValue(provider);
+      const result = await router.fetch(filed(state({ configured_carrier: 'yamato' })), true);
+      expect(result.result.tracking_provider).toBe('Ship24');
+      expect(result.result.routing).not.toHaveProperty('provider_copy');
+    });
+  });
+
   describe('a provider that only dates the filed carrier\'s local-clock answer', () => {
     const local = (scans = 1, stage = 'in_transit'): RoutedResult => ({ sourceCarrierId: 'yamato', swissPostReady: null, handoffFallbackErrorType: null,
       result: { status: 'in_transit', current_stage: stage, last_update: null,

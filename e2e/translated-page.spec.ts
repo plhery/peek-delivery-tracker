@@ -29,6 +29,9 @@ const translate = (page: Page) => page.evaluate(() => {
 test('a page the browser translates carries on, without the error screen', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByText('No number handy? Tap Pip to open a sample.')).toBeVisible();
+  // A browser translates the page React has taken over. Text swapped before hydration differs
+  // from what the server sent, which React reports (#418) whatever happens next.
+  await expect(page.getByRole('button', { name: 'Sign in', exact: true })).toBeEnabled();
   expect(await translate(page)).toBeGreaterThan(20);
   // The hint under Pip turns into another, in place of the text the translator took.
   await page.getByRole('link', { name: 'Open a sample parcel' }).click();

@@ -315,7 +315,13 @@ stages closes as `mapped`, its note naming the stage, and the stage it was last 
 when that differs: the stored scans of finished parcels may then need a repair. A row the
 map leaves unmapped on purpose closes as `ignored` with the map's note. Both record the
 version. A row that version itself saw unmapped stays open, since its map covers it only
-sometimes. Wording no map knows stays open until reviewed by hand.
+sometimes. Wording no map knows stays open until reviewed by hand, or until it expires.
+
+Every check of a parcel records its wording again, and a followed parcel is checked at least
+weekly. A carrier's wording that no check has shown for 8 days is on no followed parcel,
+typically because a scraper release composes that carrier's wording otherwise. The replay
+closes its row as `expired`, and a later sighting reopens it. Wording a universal provider
+relays (carrier `unknown`) is the provider's own and stays open.
 
 Wording a carrier map leaves unmapped on purpose without the scraper declaring it belongs
 in `tracking_status_intentionally_unmapped`. Adding or editing a row there closes the open
@@ -546,9 +552,9 @@ Key JSON events:
   read or written; the scraper then carries on without it;
 - `review_queues_replayed`: the review queue replay of a `version`, with
   `cases_replayed`, `cases_fixed` and `cases_ignored` for the support backlog, and
-  `observations_replayed`, `observations_mapped` and `observations_ignored` for the
-  unmapped wording. `review_queue_replay_failed` (error, with `error_type`) when it could
-  not run; it is retried every five minutes;
+  `observations_replayed`, `observations_mapped`, `observations_ignored` and
+  `observations_expired` for the unmapped wording. `review_queue_replay_failed` (error, with
+  `error_type`) when it could not run; it is retried every five minutes;
 - `sync_claim_failed`: the sync worker could not claim a job, with its `failure_count` and
   `failing_for_ms`, how long claims have been failing. A database restart leaves a few of
   them. Alert when they repeat for two minutes (`failing_for_ms` of 120000 or more).

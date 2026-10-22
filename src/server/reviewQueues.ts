@@ -19,6 +19,11 @@ const REPLAY_RETRY_MS = 5 * 60_000;
 export const MAX_REPLAYED_CASES = 500;
 /** The most recently seen open status observations one replay reads. */
 export const MAX_REPLAYED_OBSERVATIONS = 1000;
+/**
+ * A carrier wording no sighting refreshed for this long expires: every check of a parcel
+ * records its wording again, and a followed parcel is checked at least weekly.
+ */
+export const UNSEEN_WORDING_EXPIRY_MS = 8 * 24 * 60 * 60_000;
 
 /**
  * The tracking code this server runs: the scraper release the app pins and,
@@ -197,6 +202,7 @@ export interface ReviewReplaySummary extends JsonObject {
   observations_replayed: number;
   observations_mapped: number;
   observations_ignored: number;
+  observations_expired: number;
 }
 
 /**
@@ -255,9 +261,13 @@ export async function replayReviewQueues(
   for (const closing of statusMapClosings(observations, { mapped: true, version })) {
     closed[closing.resolution] += await client.closeTrackingStatusObservations(version, closing);
   }
+  // A carrier adapter composes its wording, and a release that composes it otherwise leaves the
+  // old wording on no parcel: once no check has shown it for UNSEEN_WORDING_EXPIRY_MS, no map is
+  // left to close it. Its row expires, and a sighting reopens it.
+  const expired = await client.expireTrackingStatusObservations(version, new Date(now.getTime() - UNSEEN_WORDING_EXPIRY_MS));
   const summary = {
     cases_replayed: cases.length, cases_fixed: fixed, cases_ignored: ignored, observations_replayed: observations.length,
-    observations_mapped: closed.mapped, observations_ignored: closed.ignored,
+    observations_mapped: closed.mapped, observations_ignored: closed.ignored, observations_expired: expired,
   };
   await client.finishTrackingReviewRun(version, summary);
   return summary;

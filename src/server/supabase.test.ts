@@ -634,6 +634,29 @@ describe('tracking audit PostgREST client', () => {
     ]);
   });
 
+  it('expires the open carrier wording last seen before the cutoff', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValue([{}, {}]);
+    vi.useFakeTimers({ now: new Date('2026-01-09T12:00:00Z') });
+    try {
+      await expect(client.expireTrackingStatusObservations('v1', new Date('2026-01-01T12:00:00Z'))).resolves.toBe(2);
+    } finally {
+      vi.useRealTimers();
+    }
+    expect(request).toHaveBeenCalledExactlyOnceWith(
+      '/rest/v1/tracking_status_observations?reviewed_at=is.null&carrier=neq.unknown'
+        + '&last_seen=lt.2026-01-01T12%3A00%3A00.000Z&select=observation_key',
+      {
+        method: 'PATCH',
+        body: {
+          reviewed_at: '2026-01-09T12:00:00.000Z', resolution: 'expired', reviewed_version: 'v1',
+          review_note: 'No check showed this wording for 8 days: no followed parcel carries it any more.',
+        },
+        prefer: 'return=representation',
+      },
+    );
+  });
+
   it('returns audit maintenance counts', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     vi.spyOn(client, 'request').mockResolvedValue([{ abandoned: 2, purged: 7 }]);

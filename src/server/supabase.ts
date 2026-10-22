@@ -1302,6 +1302,28 @@ export class SupabaseServiceClient extends SupabaseClient {
     return closed;
   }
 
+  /**
+   * Expires the open observations of a carrier's wording that no sighting refreshed since
+   * `before`, as this server version; answers how many. Wording a universal provider relays,
+   * filed under the carrier `unknown`, is the provider's own and stays open.
+   */
+  async expireTrackingStatusObservations(version: string, before: Date): Promise<number> {
+    const params = query([
+      ['reviewed_at', 'is.null'],
+      ['carrier', 'neq.unknown'],
+      ['last_seen', `lt.${before.toISOString()}`],
+      ['select', 'observation_key'],
+    ]);
+    return rows(await this.request(`/rest/v1/tracking_status_observations?${params}`, {
+      method: 'PATCH',
+      body: {
+        reviewed_at: new Date().toISOString(), resolution: 'expired', reviewed_version: version.slice(0, 100) || null,
+        review_note: 'No check showed this wording for 8 days: no followed parcel carries it any more.',
+      },
+      prefer: 'return=representation',
+    })).length;
+  }
+
   /** Whether this server is to replay the review queues for its version, another one is, or one did. */
   async claimTrackingReviewRun(version: string, leaseSeconds: number): Promise<'claimed' | 'running' | 'done'> {
     const state = await this.request('/rest/v1/rpc/claim_tracking_review_run', {

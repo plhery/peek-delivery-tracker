@@ -210,6 +210,18 @@ begin
   if observed.id is null or observed.sample_event_id is not null then
     raise exception 'a deleted event did not clear only the sample reference';
   end if;
+
+  -- Wording that expired unseen is on a parcel again once a server that names itself sees it.
+  update public.tracking_status_observations as observation
+  set reviewed_at = now(), resolution = 'expired', reviewed_version = 'scraper@1', review_note = 'Synthetic expiry.'
+  where observation.observation_key = inpost_key;
+  perform public.record_tracking_status_observations(jsonb_build_array(jsonb_build_object(
+    'observation_key', inpost_key, 'carrier', 'inpost', 'description_normalized', 'przesylka w nowym stanie',
+    'stage_source', 'wording:in_transit', 'chosen_stage', 'in_transit')), '{}', 'scraper@2');
+  if (select reviewed_at is not null or resolution is not null or review_note is not null
+      from public.tracking_status_observations as observation where observation.observation_key = inpost_key) then
+    raise exception 'an expired wording seen again stayed closed';
+  end if;
 end;
 $$;
 

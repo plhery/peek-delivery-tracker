@@ -59,12 +59,14 @@ function fakeClient(claims: Array<'claimed' | 'running' | 'done' | Error> = ['cl
     ignoreReplayedTrackingSupportCases: vi.fn(async (_version: string, cases: unknown[]) => cases.length),
     listOpenTrackingStatusObservations: vi.fn().mockResolvedValue(OPEN_OBSERVATIONS),
     closeTrackingStatusObservations: vi.fn(async (_version: string, closing: { keys: string[] }) => closing.keys.length),
+    expireTrackingStatusObservations: vi.fn().mockResolvedValue(1),
     finishTrackingReviewRun: vi.fn().mockResolvedValue(undefined),
   };
 }
 
 const SUMMARY = {
   cases_replayed: 3, cases_fixed: 1, cases_ignored: 0, observations_replayed: 7, observations_mapped: 2, observations_ignored: 3,
+  observations_expired: 1,
 };
 
 afterEach(() => {
@@ -236,6 +238,15 @@ describe('review queue replay', () => {
         keys: ['5'.repeat(64)],
       }],
     ]);
+  });
+
+  it('expires the carrier wording no check has shown for 8 days', async () => {
+    const client = fakeClient();
+    await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
+      .resolves.toMatchObject({ observations_expired: 1 });
+    expect(client.expireTrackingStatusObservations).toHaveBeenCalledExactlyOnceWith('v1', new Date('2026-09-02T12:00:00Z'));
+    expect(client.expireTrackingStatusObservations.mock.invocationCallOrder[0])
+      .toBeGreaterThan(client.closeTrackingStatusObservations.mock.invocationCallOrder.at(-1)!);
   });
 
   it('counts the rows a closing found still open, and closes nothing without an answer', async () => {

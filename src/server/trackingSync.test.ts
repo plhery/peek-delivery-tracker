@@ -4387,6 +4387,31 @@ describe('TrackingSyncService', () => {
       carrier_data: { routing: { failures: { ecoscooting: { kind: 'transport' } } } } });
   });
 
+  it.each(['portal_not_found', 'no_history', 'webtrack_no_history'])(
+    'keeps a pending parcel waiting, check after check, while its carrier answers %s and no provider has history', async (reason) => {
+      const client = { ...fakeClient(),
+        acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+        finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+      };
+      const adapter = { fetch: vi.fn().mockRejectedValue(new IndeterminateError('Royal Mail', 'Royal Mail could not confirm the item', { reason })),
+        fetchUniversal: vi.fn(async (source: string) => { throw new NoHistoryError(source, `${source} has no usable shipment history`); }) };
+      let now = new Date('2026-09-10T12:00:00Z');
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+      let parcel: JsonObject = { id: 'unannounced', carrier: 'royal-mail', tracking_number: 'TEST1234', current_stage: 'pending' };
+      // Never answered with a scan, the parcel is never "recent": each check is still an answer, not a failure.
+      for (const time of ['12:00', '13:00', '14:00']) {
+        now = new Date(`2026-09-10T${time}:00Z`);
+        await expect(service.syncPackage(parcel, { trigger: 'scheduled' })).resolves.toMatchObject({ waiting: 1, errors: 0 });
+        const saved = client.updatePackage.mock.calls.at(-1)![1] as JsonObject;
+        expect(saved).toMatchObject({ sync_status: 'waiting', sync_error: null,
+          carrier_data: { routing: { consecutive_failures: 0, failures: { 'royal-mail': { kind: 'no_history' } } } } });
+        expect(client.recordTrackingHealth).toHaveBeenLastCalledWith(expect.any(String), 'unannounced',
+          expect.arrayContaining([expect.objectContaining({ kind: 'refresh', healthy: true })]));
+        parcel = { ...parcel, carrier_data: saved.carrier_data };
+      }
+      expect(adapter.fetch).toHaveBeenCalledTimes(3);
+    });
+
   it('asks the owner for the input its carrier needs, though no provider has history for the parcel either', async () => {
     const client = { ...fakeClient(),
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),

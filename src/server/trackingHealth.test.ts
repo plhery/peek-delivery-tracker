@@ -83,7 +83,7 @@ describe('tracking health evidence', () => {
     ]);
   });
 
-  it("counts Ukrposhta's misses as answers, and other inconclusive lookups as failures", async () => {
+  it("counts Ukrposhta's misses and a post's item without scans as answers, and other inconclusive lookups as failures", async () => {
     const samples = new Map<string, HealthSample>();
     const miss = (reason?: string) => new IndeterminateError('ukrposhta', undefined, reason ? { reason } : undefined);
     await observeTrackingHealth(samples, async () => {
@@ -91,6 +91,8 @@ describe('tracking health evidence', () => {
         error: miss('status_api_not_found') });
       healthStepRecorder.lookup({ carrier: 'ukrposhta', finalStep: 'browser', outcome: 'indeterminate', errorType: 'IndeterminateError',
         durationMs: 3000, attempts: 2, error: new Error('lookup failed', { cause: miss('portal_not_found') }) });
+      healthStepRecorder.lookup({ carrier: 'slovenska-posta', finalStep: 'direct', outcome: 'indeterminate', errorType: 'IndeterminateError',
+        durationMs: 1, attempts: 1, error: new IndeterminateError('Slovenská pošta', undefined, { reason: 'no_history' }) });
       healthStepRecorder.lookup({ carrier: 'dhl-ecommerce', finalStep: 'direct', outcome: 'indeterminate', errorType: 'IndeterminateError',
         durationMs: 1, attempts: 1, error: new IndeterminateError('DHL eCommerce', undefined, { reason: 'webtrack_not_found' }) });
       healthStepRecorder.lookup({ carrier: 'seur', finalStep: 'direct', outcome: 'indeterminate', errorType: 'IndeterminateError',
@@ -99,6 +101,7 @@ describe('tracking health evidence', () => {
     expect([...samples.values()].map(({ kind, subject, healthy, details }) => [kind, subject, healthy, details.category])).toEqual([
       ['direct', 'ukrposhta', true, 'not_found'],
       ['provider', 'ukrposhta', true, 'not_found'],
+      ['provider', 'slovenska-posta', true, 'not_found'],
       ['provider', 'dhl-ecommerce', false, 'indeterminate'],
       ['provider', 'seur', false, 'indeterminate'],
     ]);

@@ -1,12 +1,17 @@
 import { CarrierError, carrierErrorKind } from 'universal-parcel-scraper';
 
 /**
- * A carrier's own tracking that does not know the item: Ukrposhta's status API
- * or portal, myDSV's search, Ecoscooting's order query. The source answered,
- * but may not prove absence, so the adapter raises these as inconclusive with
- * these reasons.
+ * A carrier's own tracking that does not know the item yet: Ukrposhta's status API
+ * or portal, Royal Mail's, myDSV's search, Ecoscooting's order query; or one that lists
+ * it without a scan (Pošta Srbije, Slovenská pošta, DHL eCommerce's Webtrack). The
+ * source answered, but may not prove absence, so the adapter raises these as
+ * inconclusive with these reasons. A regional tracker that does not list the item
+ * (DHL eCommerce's Webtrack, `webtrack_not_found`) is no such answer: the carrier's
+ * global one may know it.
  */
-export const UNKNOWN_ITEM_REASONS: ReadonlySet<string> = new Set(['status_api_not_found', 'portal_not_found']);
+export const UNKNOWN_ITEM_REASONS: ReadonlySet<string> = new Set([
+  'status_api_not_found', 'portal_not_found', 'no_history', 'webtrack_no_history',
+]);
 
 /** Stable public copy codes. Full diagnostics remain in the tracking audit. */
 export function trackingFailureCode(error: unknown): string | null {

@@ -533,8 +533,9 @@ Key JSON events:
   `attempt_id` of the check whose lookup they belong to. Lookups outside a check, such as
   carrier recognition, have none. A `tracking_scrape` `outcome` is `success`, `error`, or
   an answer about the number: `not_found`, `no_history` (a provider has no scans for it
-  yet, or a carrier's tracking does not know the item: an inconclusive answer with the
-  reason `status_api_not_found` or `portal_not_found`), `input_required` or `invalid_input`.
+  yet, or a carrier's tracking does not know the item or lists it without a scan: an
+  inconclusive answer with a reason in `UNKNOWN_ITEM_REASONS`, `src/server/trackingFailure.ts`),
+  `input_required` or `invalid_input`.
   A `tracking_routing` line is a warning for `transport_fallback` and `provider_failed`,
   except a provider's `no_history` answer, which is info;
 - `tracking_sync_audit_write_failed`, `tracking_sync_audit_maintenance_failed`,

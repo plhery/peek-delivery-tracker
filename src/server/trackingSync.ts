@@ -702,6 +702,18 @@ export function normalizeObservedDescription(description: string): string {
 }
 
 /**
+ * Wording that names a shop or a postcode, kept as one template: every place shares one
+ * row the review closes once, and no place is stored. Its maps still read the wording itself.
+ */
+const PLACE_WORDINGS: readonly (readonly [RegExp, string])[] = [
+  [/^received at .+ local express(?: [a-z]{1,2}\d[a-z\d]? ?\d[a-z]{2})?$/, 'received at <store> local express <postcode>'],
+];
+
+function observedTemplate(description: string): string {
+  return PLACE_WORDINGS.find(([pattern]) => pattern.test(description))?.[1] ?? description;
+}
+
+/**
  * How one event's wording is observed: its key, carrier, code, stage source
  * and whether a map gave its stage; null without wording or stage.
  */
@@ -719,13 +731,14 @@ function observedWording(event: JsonObject, fallbackCarrierId: string) {
   const providerCode = typeof raw.provider_code === 'string' && raw.provider_code
     ? raw.provider_code.slice(0, 100)
     : null;
+  const wording = observedTemplate(description);
   const key = createHash('sha256')
-    .update(JSON.stringify([carrier, providerCode ?? '', description]))
+    .update(JSON.stringify([carrier, providerCode ?? '', wording]))
     .digest('hex');
   const mapped = source === 'carrier_map' || universalMapAgrees({
     carrier, provider_code: providerCode, description_normalized: description, chosen_stage: chosenStage,
   });
-  return { key, carrier, providerCode, description, source, chosenStage, eventId, mapped };
+  return { key, carrier, providerCode, description: wording, source, chosenStage, eventId, mapped };
 }
 
 /**

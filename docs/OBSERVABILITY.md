@@ -293,7 +293,10 @@ provider relays are filed under the carrier `unknown`, which has no carrier map:
 scraper's universal map, which reads them as the providers do, stands in for one. Such a
 scan is collected only when that map leaves its wording unread, or reads it as another
 stage than the scan's. There is one row per carrier, provider code and normalized
-description. `count` and `last_seen` grow on repeat sightings. It holds no tracking number
+description. Wording that names a shop or a postcode is kept as one template instead
+(`PLACE_WORDINGS` in `src/server/trackingSync.ts`, such as `received at <store> local express
+<postcode>`): every place shares its row, which the review closes once, and no place is stored.
+The maps still read the wording itself. `count` and `last_seen` grow on repeat sightings. It holds no tracking number
 or account reference. Each refresh records at most 32 observations, and a failed write
 never fails the refresh. `last_seen_version` names the server version of the latest
 sighting.

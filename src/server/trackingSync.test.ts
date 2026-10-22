@@ -522,6 +522,22 @@ describe('status observation collection', () => {
     expect(collectMappedStatusKeys(rows, 'unknown')).toEqual(rows.slice(2).map(universalKey));
   });
 
+  it('keeps wording that names a shop and postcode as one template, without the place', () => {
+    const scan = (description: string, id: string) => ({
+      package_id: 'package-1', stage: 'pending', description, provider_event_id: `unknown:${id}`, raw_data: { stage_source: 'none' },
+    });
+    const rows = [
+      scan('Received at Corner Local Express XX1 1XX', 'a'),
+      scan('Received at  Station Road Local Express xx99 9xx', 'b'),
+      scan('Received at Corner Local Express', 'c'),
+      scan('Received at hub', 'd'),
+    ];
+    expect(collectStatusObservations(rows, 'unknown').map((observation) => observation.description_normalized)).toEqual([
+      'received at <store> local express <postcode>', 'received at hub',
+    ]);
+    expect(universalKey(rows[0])).toBe(universalKey(rows[1]));
+  });
+
   it('reads only universal scans with the universal map: a direct carrier\'s wording fallback is still reviewed', () => {
     const scan = (carrier: string) => ({
       package_id: 'package-1', stage: 'in_transit', description: 'Sorted in regional hub',

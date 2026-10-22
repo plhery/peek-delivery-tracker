@@ -165,7 +165,8 @@ Every deploy restarts the server, and pushes often come a few minutes apart. So 
 over commit waits while CI tests a newer one ([deploy-gate.mjs](../scripts/deploy-gate.mjs)).
 If the newer one passes, its deploy replaces this one and includes it; if it fails, this
 one deploys. A commit pushed on its own deploys as soon as it passes, and none waits more
-than 30 minutes. To deploy the newest tested commit at once, run
+than 30 minutes. GitHub's list of CI's runs sometimes leaves a run out, so the commit's own
+runs are read from the repository's list too. To deploy the newest tested commit at once, run
 `gh workflow run deploy.yml`.
 
 The deploy asks the database, with the publishable key, which of the commit's migrations

@@ -33,6 +33,16 @@ export function deployedBy(jobs) {
   return job?.steps?.some(step => step.name === DEPLOY_STEP && step.conclusion === 'success') ?? false;
 }
 
+/**
+ * CI's runs of pushes to main, newest first: its workflow's list, and the commit's own runs from
+ * the repository's list, since GitHub's list of a workflow's runs sometimes leaves a run out.
+ */
+export function pushRuns(listed, commitRuns = []) {
+  const runs = new Map([...listed, ...commitRuns.filter(run => run.path === '.github/workflows/ci.yml')].map(run => [run.id, run]));
+  return [...runs.values()].filter(run => run.event === 'push' && run.head_branch === 'main' && SHA.test(run.head_sha))
+    .sort((a, b) => time(b.created_at) - time(a.created_at));
+}
+
 /** The newest commit CI handed over, from its runs on main, newest first. */
 export async function newestTested(runs, handoff) {
   for (const run of runs) if (completed(run) && await handoff(run) === 'done') return run.head_sha;
@@ -91,8 +101,11 @@ async function main() {
   if (requested && !SHA.test(requested)) throw new Error(`Not a commit: ${requested}`);
   // CI names its commit and lets newer ones replace it; a run by hand deploys the newest at once.
   const wait = Boolean(requested) && !process.argv.includes('--at-once');
-  const ciRuns = () => github(`repos/${repository}/actions/workflows/ci.yml/runs?branch=main&event=push&per_page=50`)
-    .workflow_runs.filter(run => run.event === 'push' && run.head_branch === 'main' && SHA.test(run.head_sha));
+  const ciRuns = commit => {
+    const listed = github(`repos/${repository}/actions/workflows/ci.yml/runs?branch=main&event=push&per_page=50`).workflow_runs;
+    return pushRuns(listed, commit && !listed.some(run => run.head_sha === commit)
+      ? github(`repos/${repository}/actions/runs?head_sha=${commit}&per_page=100`).workflow_runs : []);
+  };
   const finished = new Map();
   const jobs = run => {
     const key = `${run.id}:${run.run_attempt}`;
@@ -108,7 +121,7 @@ async function main() {
   let decision;
   for (;;) {
     try {
-      const runs = ciRuns();
+      const runs = ciRuns(commit);
       commit ??= await newestTested(runs, handoff);
       if (!commit) {
         decision = { action: 'refuse', reason: 'CI on main has passed no recent commit.' };

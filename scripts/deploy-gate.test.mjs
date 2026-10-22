@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { after, describe, it } from 'node:test';
 import {
-  DEPLOY_JOB, DEPLOY_STEP, HANDOFF_JOB, MAX_WAIT_MS, decide, deployedBy, handoffState, newestTested, waitingSince,
+  DEPLOY_JOB, DEPLOY_STEP, HANDOFF_JOB, MAX_WAIT_MS, decide, deployedBy, handoffState, newestTested, pushRuns, waitingSince,
 } from './deploy-gate.mjs';
 
 const sha = digit => digit.repeat(40);
@@ -28,6 +28,18 @@ describe('a CI run', () => {
     assert.equal(deployedBy(job('success')), true);
     assert.equal(deployedBy(job('skipped')), false);
     assert.equal(deployedBy([{ name: 'Wait for newer commits', steps: [] }]), false);
+  });
+});
+
+describe("CI's runs on main", () => {
+  const push = (digit, minute, extra = {}) => ({ ...run(digit, minute), event: 'push', head_branch: 'main', ...extra });
+  it("take in the commit's own CI runs the workflow's list left out, once each, newest first", () => {
+    const own = push('2', 5, { path: '.github/workflows/ci.yml' });
+    const runs = pushRuns([push('1', 0)], [own, { ...own, id: 7, path: '.github/workflows/secrets.yml' }, push('1', 0, { path: '.github/workflows/ci.yml' })]);
+    assert.deepEqual(runs.map(({ id }) => id), [2, 1]);
+  });
+  it('leave out runs other than pushes to main', () => {
+    assert.deepEqual(pushRuns([push('1', 0), push('2', 1, { event: 'workflow_dispatch' }), push('3', 2, { head_branch: 'fix' })]).map(({ id }) => id), [1]);
   });
 });
 
@@ -112,11 +124,12 @@ process.stdout.write(JSON.stringify(fixture[key]));
   const ciRun = (digit, minute, status = 'completed') => ({ id: Number(digit), run_attempt: 1, event: 'push', head_branch: 'main', head_sha: sha(digit), created_at: at(minute), status });
   const passed = { jobs: [{ name: HANDOFF_JOB, status: 'completed', conclusion: 'success' }] };
   const failed = { jobs: [{ name: HANDOFF_JOB, status: 'completed', conclusion: 'skipped' }] };
-  const gate = (args, { runs, jobs }) => {
+  const gate = (args, { runs, jobs, commitRuns = [] }) => {
     const output = path.join(directory, `output-${Math.random()}`);
     writeFileSync(output, '');
     const fixture = {
       'repos/owner/app/actions/workflows/ci.yml/runs': { workflow_runs: runs },
+      'repos/owner/app/actions/runs?head_sha=': { workflow_runs: commitRuns },
       'repos/owner/app/actions/workflows/deploy.yml/runs': { workflow_runs: [{ id: 50, created_at: at(9), status: 'in_progress' }] },
       ...Object.fromEntries(Object.entries(jobs).map(([id, value]) => [`repos/owner/app/actions/runs/${id}/jobs`, value])),
     };
@@ -132,6 +145,14 @@ process.stdout.write(JSON.stringify(fixture[key]));
     const result = gate([`--commit=${sha('2')}`], { runs: [ciRun('3', 6), ciRun('2', 3), ciRun('1', 0)], jobs: { 3: failed, 2: passed, 1: passed } });
     assert.equal(result.status, 0, result.log);
     assert.equal(result.output, `deploy=true\ncommit=${sha('2')}\n`);
+  });
+
+  it('finds the run of a commit CI handed over that its workflow\'s list leaves out', () => {
+    const own = { ...ciRun('3', 6), path: '.github/workflows/ci.yml' };
+    const result = gate([`--commit=${sha('3')}`], { runs: [ciRun('2', 3), ciRun('1', 0)], jobs: { 3: passed, 2: passed, 1: passed },
+      commitRuns: [own, { ...own, id: 4, path: '.github/workflows/secrets.yml' }] });
+    assert.equal(result.status, 0, result.log);
+    assert.equal(result.output, `deploy=true\ncommit=${sha('3')}\n`);
   });
 
   it('deploys the newest tested commit when run by hand', () => {

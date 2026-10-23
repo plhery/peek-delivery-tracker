@@ -710,5 +710,6 @@ detection or the adapters could act on: each check saves them for the hourly rev
 
 `carrier_coverage_discovered` fires once per parcel, only for names that are neither a
 catalog name/alias nor a known network of DHL, DPD, GLS or Hermes. The postal union's feed,
-which an aggregator lists as "UPU" beside a parcel's carriers, is not reported either.
+which an aggregator lists as "UPU" beside a parcel's carriers, is not reported either, nor is a
+shipping platform a shop books carriers through (Sendcloud, Packlink, Easyship, Shiprocket).
 Timings and metrics are in [OBSERVABILITY.md](OBSERVABILITY.md).

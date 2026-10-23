@@ -380,6 +380,14 @@ function latest(value: RoutedResult): number {
 // universal history that ended a month before and names only other catalog carriers.
 const OLD_LABEL_GAP = 90 * DAY;
 const OTHER_CARRIER_GAP = 30 * DAY;
+/**
+ * Shipping platforms a shop books other carriers through. A provider can name one beside the
+ * parcel's carrier, or in its place, but no catalog entry or adapter of its own could track it.
+ */
+const SHIPPING_PLATFORMS: ReadonlySet<string> = new Set(['easyship', 'packlink', 'sendcloud', 'shiprocket']);
+function isShippingPlatformName(name: string): boolean {
+  return SHIPPING_PLATFORMS.has(name.toLowerCase().replace(/[^a-z0-9]/g, ''));
+}
 /** Whether a reported name can mean this carrier: its id, a brand network of it, or a name the catalog doesn't know. */
 function mayNameCarrier(name: string, carrier: string): boolean {
   const id = carrierIdFromName(name);
@@ -1309,9 +1317,11 @@ export class TrackingRouter {
         const seen = Array.isArray(state.reported_carriers_seen) ? state.reported_carriers_seen : [];
         for (const name of value.result.reported_carriers) {
           // A catalog carrier is no discovery, even as one leg of a handoff or with a country.
-          // Nor is the postal union's feed, which names no carrier.
+          // Nor is the postal union's feed, which names no carrier, or a shipping platform.
           if (typeof name === 'string' && !value.result.discovered_carrier && !seen.includes(name)
-            && !isKnownCarrierName(name) && !isCarrierFeedName(name)) report('carrier_coverage_discovered', name);
+            && !isKnownCarrierName(name) && !isCarrierFeedName(name) && !isShippingPlatformName(name)) {
+            report('carrier_coverage_discovered', name);
+          }
         }
         state.reported_carriers_seen = [...new Set([...seen, ...value.result.reported_carriers])].slice(-20);
       }

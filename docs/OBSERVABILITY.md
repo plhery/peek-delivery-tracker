@@ -190,13 +190,14 @@ so the parcel's first checks can ask it. If a carrier recognition does not ask o
 HTTP tracks the number directly within that hour, leaving no shape or carrier gap, the case
 is marked `ignored` with a note. Otherwise it is reviewed once the hour is over.
 
-Review open cases:
+Review open cases. One whose parcel's latest check left no reason, its carrier having
+confirmed the number, needs no work: the next version's replay (below) marks it `fixed`.
 
 ```sql
 select id, tracking_number, reasons, detection_candidates, seen_count, fallback_count,
        last_outcome, last_provider, first_seen, last_seen, fix_status, fix_reference
 from public.tracking_support_cases
-where fix_status = 'open' and (held_until is null or held_until <= now())
+where fix_status = 'open' and (held_until is null or held_until <= now()) and cardinality(reasons) > 0
 order by last_seen desc;
 ```
 
@@ -393,7 +394,7 @@ anomalies and health incidents.
 
 [ops/review/signals.sql](../ops/review/signals.sql) is the hourly review of every queue. For
 a window of hours (1 by default, 24 for the daily review) it lists routing signals, sync
-anomalies, new unmapped wording, new open support cases, health incidents notified in the
+anomalies, new unmapped wording, new open support cases that still give a reason, health incidents notified in the
 window or open and failing in it (`rescued` when every check that failed still answered
 through another step; an open one nothing checked, or whose checks answered, waits unlisted
 until it fails, recovers or closes), the unfinished parcels a provider tracks, grouped by type, carrier and

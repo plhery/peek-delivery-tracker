@@ -195,7 +195,8 @@ describe('ParcelPage', () => {
     expect(await within(card()).findByText('Couldn’t get the latest update')).toBeVisible();
     expect(screen.getByRole('note')).toHaveTextContent('Something went wrong. Please try again.');
     expect(screen.getByRole('heading', { level: 1, name: 'In transit' })).toBeVisible();
-    expect(freshness()).toHaveTextContent(/^As of \d\d:\d\d$/);
+    // Checked two minutes ago: in the first minutes of a day, that is yesterday.
+    expect(freshness()).toHaveTextContent(/^As of (yesterday, )?\d\d:\d\d$/);
   });
 
   it('explains why nothing can be shown when the first read fails, and tries again on request', async () => {
@@ -338,7 +339,7 @@ describe('ParcelPage stages and troubles', () => {
     expect(within(card()).getByText('Couldn’t get the latest update')).toBeVisible();
     expect(screen.getByRole('note').textContent).not.toMatch(/carrier:not_found/);
     expect(screen.getByRole('note').textContent!.length).toBeGreaterThan(20);
-    expect(freshness()).toHaveTextContent(/^As of \d\d:\d\d$/);
+    expect(freshness()).toHaveTextContent(/^As of (yesterday, )?\d\d:\d\d$/);
   });
 
   it('says so when the carrier cannot be followed automatically', async () => {

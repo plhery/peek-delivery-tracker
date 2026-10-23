@@ -80,15 +80,30 @@ where coalesce(held_until, first_seen) >= :since and coalesce(held_until, first_
 group by 1, 2, 3, 4
 order by cases desc, carrier;
 
-\echo '== Health incidents: notified in the window, or still failing'
-select i.kind, i.subject, case when i.active then 'failing' else 'over' end as state,
+\echo '== Health incidents: notified in the window, or open and failing in it'
+\echo '   rescued: every check that failed still answered through another step; open: no failure in the window,'
+\echo '   the incident waits for three healthy checks, or closes once nothing was checked for 24 h'
+select i.kind, i.subject,
+       case when not i.active then 'over'
+            when count(s.healthy) filter (where not s.healthy) = 0 then 'open'
+            when count(s.healthy) filter (where not s.healthy and not s.rescued) = 0 then 'rescued'
+            else 'failing' end as state,
        'adapters' as lane, to_char(i.last_notified_at, 'YYYY-MM-DD HH24:MI') as notified,
-       count(s.*) filter (where not s.healthy) as failures, count(s.*) as checks
+       count(s.healthy) filter (where not s.healthy) as failures, count(s.healthy) as checks
 from public.tracking_health_incidents i
-left join public.tracking_health_samples s
-  on s.kind = i.kind and s.subject = i.subject and s.observed_at >= :since
+left join lateral (
+  -- A direct step's failure is rescued when its check's refresh answered, as record_tracking_health reads it.
+  select sample.healthy, sample.kind = 'direct' and exists (
+           select 1 from public.tracking_health_samples refresh
+           where refresh.attempt_id = sample.attempt_id and refresh.kind = 'refresh' and refresh.healthy) as rescued
+  from public.tracking_health_samples sample
+  where sample.kind = i.kind and sample.subject = i.subject and sample.observed_at >= :since
+) s on true
 where i.last_notified_at >= :since or i.active or i.pending is not null
-group by i.kind, i.subject, i.active, i.last_notified_at
+group by i.kind, i.subject, i.active, i.last_notified_at, i.pending is not null
+-- An open incident whose checks answered in the window, or that nothing checked, is not listed again
+-- until it fails, its six-hourly reminder goes out, or it recovers or closes.
+having i.last_notified_at >= :since or i.pending is not null or count(s.healthy) filter (where not s.healthy) > 0
 order by i.active desc, i.last_notified_at desc;
 
 \echo '== Unfinished parcels a provider tracks, by the carrier that could take them (new: added in the window)'

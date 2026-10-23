@@ -393,8 +393,10 @@ anomalies and health incidents.
 
 [ops/review/signals.sql](../ops/review/signals.sql) is the hourly review of every queue. For
 a window of hours (1 by default, 24 for the daily review) it lists routing signals, sync
-anomalies, new unmapped wording, new open support cases, health incidents notified or still
-failing, the unfinished parcels a provider tracks, grouped by type, carrier and
+anomalies, new unmapped wording, new open support cases, health incidents notified in the
+window or open and failing in it (`rescued` when every check that failed still answered
+through another step; an open one nothing checked, or whose checks answered, waits unlisted
+until it fails, recovers or closes), the unfinished parcels a provider tracks, grouped by type, carrier and
 provider, with `why` they stay with it, and readers' answers that something is off. It
 only reads, and shows a number as its shape (`MY + 10 digits + US`, from
 `private.tracking_number_pattern`). Free text can name a place, a shop or a person, so

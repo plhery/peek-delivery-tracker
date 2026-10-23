@@ -159,7 +159,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-18</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/guides/tracking-number-formats-by-carrier</loc>
@@ -327,7 +327,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/estados-da-encomenda-significado" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/statusy-przesylek-co-oznaczaja" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/tracking-status-meanings" />
-<lastmod>2026-10-10</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/guides/tracking-not-updating</loc>
@@ -4041,7 +4041,7 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/poste-italiane-tracking" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/poste-italiane-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/poste-italiane-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/seur-tracking</loc>
@@ -6411,6 +6411,18 @@
 <loc>https://peektracker.com/carriers/sf-express-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sf-express-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sf-express-tracking" />
+<lastmod>2026-10-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/straightship-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/straightship-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/straightship-tracking" />
+<lastmod>2026-10-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/correios-brazil-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/correios-brazil-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correios-brazil-tracking" />
 <lastmod>2026-10-23</lastmod>
 </url>
 <url>

@@ -38,12 +38,16 @@ where a.started_at >= :since
 group by 1, 2, 3, 4
 order by checks desc, carrier, anomaly;
 
-\echo '== Unmapped wording: first seen in the window (… masks a rare word; look the wording up by id)'
+\echo '== Unmapped wording: open and seen in the window (new: first seen in it; … masks a rare word; look the wording up by id)'
 -- Wording can quote a number or name a place, a shop or a person: its digits are masked, and so
 -- is each word fewer than five stored wordings share once their digits are masked, so that
 -- wordings differing only by a date or a time count once.
+-- A carrier's wording last seen on a server version that another replaced more than 2 days ago
+-- is left out: a followed parcel is checked again within a day, so the versions since no longer
+-- produce it, and the replay expires its row after 8 days unseen (src/server/reviewQueues.ts).
+-- Wording a universal provider relays (carrier `unknown`) is the provider's own and stays.
 with templates as (
-  select id, carrier, provider_code, chosen_stage, count, first_seen, reviewed_at,
+  select id, carrier, provider_code, chosen_stage, count, first_seen, last_seen, last_seen_version, reviewed_at,
          regexp_replace(description_normalized, '[0-9]+', '#', 'g') as template
   from public.tracking_status_observations
 ),
@@ -57,13 +61,17 @@ common as (
 select t.id, t.carrier, coalesce(t.provider_code, '-') as code,
        left(regexp_replace(string_agg(case when common.word is null and token.part[1] ~ '[[:alpha:]]' then '…' else token.part[1] end,
          '' order by token.n), '…([^[:alpha:]]*…)+', '…', 'g'), 80) as wording,
-       t.chosen_stage as read_as, 'adapters' as lane, t.count as sightings
+       t.chosen_stage as read_as, 'adapters' as lane, t.first_seen >= :since as new, t.count as sightings
 from templates as t
 cross join regexp_matches(t.template, '[[:alpha:]]+|[^[:alpha:]]+', 'g') with ordinality as token(part, n)
 left join common on common.word = token.part[1]
-where t.reviewed_at is null and t.first_seen >= :since
-group by t.id, t.carrier, t.provider_code, t.chosen_stage, t.count
-order by sightings desc, carrier, wording
+where t.reviewed_at is null and t.last_seen >= :since
+  and not (t.carrier <> 'unknown' and exists (
+    select from public.tracking_review_runs as run
+    where run.started_at > t.last_seen and run.started_at < now() - interval '2 days'
+      and run.version is distinct from t.last_seen_version))
+group by t.id, t.carrier, t.provider_code, t.chosen_stage, t.first_seen, t.count
+order by new desc, sightings desc, carrier, wording
 limit 50;
 
 \echo '== Support cases: opened in the window, or held until then, and still open with a reason'

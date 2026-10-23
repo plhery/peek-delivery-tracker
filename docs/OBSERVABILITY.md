@@ -327,6 +327,11 @@ typically because a scraper release composes that carrier's wording otherwise. T
 closes its row as `expired`, and a later sighting reopens it. Wording a universal provider
 relays (carrier `unknown`) is the provider's own and stays open.
 
+The review lists the open wording seen in its window. Until a row expires, the review leaves out
+a carrier's wording last seen on a server version that another replaced more than 2 days ago
+(`tracking_review_runs` dates each version): a followed parcel is usually checked again within a
+day, so the versions since no longer produce it.
+
 Wording a carrier map leaves unmapped on purpose without the scraper declaring it belongs
 in `tracking_status_intentionally_unmapped`. Adding or editing a row there closes the open
 observations it covers as `ignored`, with its note, and later sightings close as they are
@@ -394,7 +399,7 @@ anomalies and health incidents.
 
 [ops/review/signals.sql](../ops/review/signals.sql) is the hourly review of every queue. For
 a window of hours (1 by default, 24 for the daily review) it lists routing signals, sync
-anomalies, new unmapped wording, new open support cases that still give a reason, health incidents notified in the
+anomalies, open unmapped wording seen in the window (`new` when first seen in it), new open support cases that still give a reason, health incidents notified in the
 window or open and failing in it (`rescued` when every check that failed still answered
 through another step; an open one nothing checked, or whose checks answered, waits unlisted
 until it fails, recovers or closes), the unfinished parcels a provider tracks, grouped by type, carrier and

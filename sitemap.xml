@@ -3375,7 +3375,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers</loc>
@@ -3399,7 +3399,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers</loc>
@@ -3411,7 +3411,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers</loc>
@@ -3423,7 +3423,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pl/carriers</loc>
@@ -3821,15 +3821,25 @@
 <loc>https://peektracker.com/carriers/hermes-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/hermes-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/hermes-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/hermes-seguimiento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/hermes-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/hermes-sendungsverfolgung</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/hermes-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/hermes-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/hermes-seguimiento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/hermes-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/carriers/hermes-seguimiento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/hermes-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/hermes-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/hermes-seguimiento" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/hermes-tracking" />
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/gls-switzerland-tracking</loc>
@@ -4651,7 +4661,7 @@
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhl-ecommerce-iberia-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhl-ecommerce-iberia-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-iberia-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers/dhl-ecommerce-iberia-seguimiento</loc>
@@ -4659,7 +4669,7 @@
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhl-ecommerce-iberia-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhl-ecommerce-iberia-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-iberia-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers/dhl-ecommerce-iberia-rastreio</loc>
@@ -4667,7 +4677,7 @@
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/dhl-ecommerce-iberia-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dhl-ecommerce-iberia-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-iberia-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/dhl-ecommerce-poland-tracking</loc>
@@ -6344,6 +6354,34 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/dpd-portugal-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dpd-portugal-tracking" />
 <lastmod>2026-10-22</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/tnt-italy-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tnt-italy-tracking" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tnt-italy-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tnt-italy-tracking" />
+<lastmod>2026-10-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/tnt-italy-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tnt-italy-tracking" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tnt-italy-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tnt-italy-tracking" />
+<lastmod>2026-10-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/tnt-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tnt-tracking" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/tnt-rastreio" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tnt-tracking" />
+<lastmod>2026-10-23</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/tnt-rastreio</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tnt-tracking" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/tnt-rastreio" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tnt-tracking" />
+<lastmod>2026-10-23</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/privacy.html</loc>

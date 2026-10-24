@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { it } from 'node:test';
+import { execFileSync } from 'node:child_process';
 import { DEPLOY_JOB, DEPLOY_STEP, HANDOFF_JOB, MAX_WAIT_MS } from './deploy-gate.mjs';
 
 const read = file => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
@@ -27,6 +30,39 @@ const step = (body, name) => {
   assert.ok(start >= 0, `no step ${name}`);
   return body.slice(start).split(/\n {6}- /)[0];
 };
+
+for (const repository of [
+  'Dunky13/peek-delivery-tracker',
+  'CustomOwner/ConfiguredImage',
+  'OWNER/IMAGE',
+  'plhery/peek-delivery-tracker',
+  'custom-owner/configured.image',
+]) {
+  it(`uses a lowercase image repository for ${repository} throughout the image job`, () => {
+    const image = job(read('.github/workflows/ci.yml'), 'image');
+    const setup = step(image, 'Set image reference');
+    assert.match(setup, /IMAGE_REPOSITORY: \$\{\{ vars\.CONTAINER_IMAGE_REPOSITORY \|\| github\.repository \}\}/);
+    assert.doesNotMatch(image, /IMAGE: ghcr\.io/);
+    assert.ok(image.indexOf('- name: Set image reference') < image.indexOf('- name: Build the image'));
+    assert.match(step(image, 'Build the image'), /tags: \$\{\{ env\.IMAGE \}\}/);
+    assert.match(step(image, 'Start the container and check it'), /"\$IMAGE"/);
+    assert.match(step(image, 'Publish the image'), /docker push "\$IMAGE"/);
+    const script = setup.split('run: |\n')[1];
+    assert.ok(script, 'the selected repository is normalized before Docker uses it');
+    const commit = 'a'.repeat(40);
+    const directory = mkdtempSync(join(tmpdir(), 'peek-image-env-'));
+    const envFile = join(directory, 'github.env');
+    try {
+      execFileSync('sh', ['-c', script], {
+        encoding: 'utf8',
+        env: { ...process.env, IMAGE_REPOSITORY: repository, GITHUB_SHA: commit, GITHUB_ENV: envFile },
+      });
+      assert.equal(readFileSync(envFile, 'utf8'), `IMAGE=ghcr.io/${repository.toLowerCase()}:${commit}\n`);
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
+}
 
 // An outage of the audit endpoint skips the audit; a vulnerability still fails the job.
 it('audits the production dependencies through the script that tells the two apart', () => {

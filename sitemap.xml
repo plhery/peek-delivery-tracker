@@ -5919,6 +5919,7 @@
 <loc>https://peektracker.com/carriers/la-poste-colissimo-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/la-poste-colissimo-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-la-poste-colissimo" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/colissimo-la-poste-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/colissimo-la-poste-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/la-poste-colissimo-tracking" />
 <lastmod>2026-10-13</lastmod>
@@ -5927,14 +5928,25 @@
 <loc>https://peektracker.com/fr/carriers/suivi-la-poste-colissimo</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/la-poste-colissimo-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-la-poste-colissimo" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/colissimo-la-poste-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/colissimo-la-poste-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/la-poste-colissimo-tracking" />
 <lastmod>2026-10-13</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/es/carriers/colissimo-la-poste-seguimiento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/la-poste-colissimo-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-la-poste-colissimo" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/colissimo-la-poste-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/colissimo-la-poste-rastreio" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/la-poste-colissimo-tracking" />
+<lastmod>2026-10-24</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/pt/carriers/colissimo-la-poste-rastreio</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/la-poste-colissimo-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-la-poste-colissimo" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/colissimo-la-poste-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/colissimo-la-poste-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/la-poste-colissimo-tracking" />
 <lastmod>2026-10-22</lastmod>
@@ -6417,7 +6429,7 @@
 <loc>https://peektracker.com/carriers/straightship-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/straightship-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/straightship-tracking" />
-<lastmod>2026-10-23</lastmod>
+<lastmod>2026-10-24</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/correios-brazil-tracking</loc>

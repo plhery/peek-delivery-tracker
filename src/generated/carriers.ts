@@ -2828,7 +2828,24 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f9bb00"
     }
   ],
-  "hu": [],
+  "hu": [
+    {
+      "id": "foxpost",
+      "catalog": "foxpost",
+      "slug": "foxpost-csomagkovetes",
+      "title": "Foxpost csomagkövetés: státuszok, nyitókód, átvétel",
+      "name": "Foxpost",
+      "color": "#b70100"
+    },
+    {
+      "id": "magyar-posta",
+      "catalog": "magyar-posta",
+      "slug": "magyar-posta-nyomkovetes",
+      "title": "Magyar Posta nyomkövetés: státuszok, PostaPont, vám",
+      "name": "Magyar Posta",
+      "color": "#346631"
+    }
+  ],
   "ro": [
     {
       "id": "fan-courier",

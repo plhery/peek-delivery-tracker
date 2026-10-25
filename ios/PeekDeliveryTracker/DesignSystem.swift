@@ -351,20 +351,28 @@ extension View {
     }
 
     /// A sheet of choices or settings as a form centred over an iPad's window, rather than a page nearly as large as
-    /// it; on a phone, as it always was.
+    /// it; on a phone, as it always was. A Mac's is as tall as what it shows, as its sheets are, and never shorter than a
+    /// list of choices needs to show some: a list has no height of its own.
     @ViewBuilder
     func formOnPad() -> some View {
+        #if os(macOS)
+        frame(minHeight: 400).presentationSizing(.form.fitted(horizontal: false, vertical: true))
+        #else
         if DeviceIdiom.isPad {
             presentationSizing(.form)
         } else {
             self
         }
+        #endif
     }
 
     /// The same form on an iPad; on a phone, these detents. iPadOS would pin a sheet with detents to the window's
     /// bottom edge at their height rather than centre it.
     @ViewBuilder
     func formOnPad(phoneDetents detents: Set<PresentationDetent>, selection: Binding<PresentationDetent>? = nil) -> some View {
+        #if os(macOS)
+        formOnPad()
+        #else
         if DeviceIdiom.isPad {
             presentationSizing(.form)
         } else if let selection {
@@ -372,6 +380,7 @@ extension View {
         } else {
             presentationDetents(detents)
         }
+        #endif
     }
 
     @ViewBuilder

@@ -364,7 +364,7 @@ struct FriendsProfileForm: View {
                 Text(localizer.text(title)).font(.footnote.weight(.medium))
                 if title == "friends.shareStats" { Text(localizer.text(detail)).font(.caption2).foregroundStyle(.secondary) }
             }
-        }.toggleStyle(.switch).tint(ExperimentalPalette.delivered).padding(.vertical, 10).accessibilityHint(localizer.text(detail))
+        }.rowToggle().toggleStyle(.switch).tint(ExperimentalPalette.delivered).padding(.vertical, 10).accessibilityHint(localizer.text(detail))
     }
 }
 

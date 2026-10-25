@@ -8,6 +8,7 @@
 //   node scripts/adopt-scraper.mjs snapshot <file>        before installing the release
 //   node scripts/adopt-scraper.mjs gate <file> [--database-ready]   exits 3 when the release waits for a migration
 //   node scripts/adopt-scraper.mjs peers
+//   node scripts/adopt-scraper.mjs holds <package.json> --version=1.2.3   prints whether it pins that release or a newer one
 import { appendFile, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -86,6 +87,11 @@ export function chooseTarget({ current, requested = '', distTags = {}, databaseR
     version = published.reduce((newest, candidate) => (compareVersions(candidate, newest) > 0 ? candidate : newest));
   }
   return { version, adopt: compareVersions(version, current) > 0 };
+}
+
+/** Whether a package.json already pins `version` or a newer release, as main does after another run adopted it. */
+export function holdsRelease(manifest, version) {
+  return compareVersions(pinnedVersion(manifest), version) >= 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -448,7 +454,31 @@ async function registryDocument() {
   });
   if (!response.ok) throw new Error(`The npm registry answered ${response.status} for ${PACKAGE_NAME}`);
   const document = await response.json();
-  return { distTags: document['dist-tags'] ?? {}, versions: Object.keys(document.versions ?? {}) };
+  const tarballs = Object.fromEntries(Object.entries(document.versions ?? {})
+    .map(([version, manifest]) => [version, manifest?.dist?.tarball]));
+  return { distTags: document['dist-tags'] ?? {}, tarballs };
+}
+
+/** Whether npm serves a tarball: it lists a release before its tarball stops answering 404. */
+async function served(url) {
+  const response = await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(20_000) });
+  return response.ok;
+}
+
+/**
+ * Waits until npm lists a release and serves its tarball. npm scans a release for minutes
+ * before listing it, then answers 404 for its tarball a while longer: a run started by
+ * hand can name one in either state. This waits half an hour.
+ */
+export async function waitUntilServed(version, { tarballs = async () => (await registryDocument()).tarballs,
+  isServed = served, attempts = 121, pauseMs = 15_000, pause = delay } = {}) {
+  await retry(async () => {
+    const tarball = (await tarballs())[version];
+    if (!tarball || !(await isServed(tarball))) {
+      console.error(`Waiting for npm to serve ${PACKAGE_NAME}@${version}${tarball ? ' (its tarball answers 404)' : ''}.`);
+      throw new Error(`npm does not serve ${PACKAGE_NAME}@${version}`);
+    }
+  }, { attempts, pauseMs, pause });
 }
 
 // ---------------------------------------------------------------------------
@@ -544,16 +574,7 @@ async function resolveTarget(requested, databaseReady) {
   const current = pinnedVersion(await readJson(path.join(root, 'package.json')));
   const distTags = requested ? {} : (await retry(registryDocument, { attempts: 3, pauseMs: 5_000 })).distTags;
   const target = chooseTarget({ current, requested, distTags, databaseReady });
-  if (target.adopt) {
-    // npm scans a release for minutes before serving it: a run started by hand
-    // can name one still in the scan. This waits half an hour.
-    await retry(async () => {
-      if (!(await registryDocument()).versions.includes(target.version)) {
-        console.error(`Waiting for npm to serve ${PACKAGE_NAME}@${target.version}.`);
-        throw new Error(`npm does not serve ${PACKAGE_NAME}@${target.version}`);
-      }
-    }, { attempts: 121, pauseMs: 15_000 });
-  }
+  if (target.adopt) await waitUntilServed(target.version);
   const outputs = `version=${target.version}\ncurrent=${current}\nadopt=${target.adopt}\n`;
   process.stdout.write(outputs);
   if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, outputs);
@@ -635,7 +656,10 @@ async function main() {
   if (command === 'snapshot' && file) return writeFile(file, `${JSON.stringify(await installedRelease(), null, 2)}\n`);
   if (command === 'gate' && file) return gate(file, values['database-ready']);
   if (command === 'peers') return checkPeers();
-  throw new Error('Usage: adopt-scraper.mjs due | resolve [--version=X.Y.Z] [--database-ready] | snapshot <file> | gate <file> [--database-ready] | peers');
+  if (command === 'holds' && file && values.version) {
+    return void process.stdout.write(`${holdsRelease(await readJson(file), values.version.trim())}\n`);
+  }
+  throw new Error('Usage: adopt-scraper.mjs due | resolve [--version=X.Y.Z] [--database-ready] | snapshot <file> | gate <file> [--database-ready] | peers | holds <package.json> --version=X.Y.Z');
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

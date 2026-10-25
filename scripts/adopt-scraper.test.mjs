@@ -15,6 +15,7 @@ import {
   decideGate,
   diffDatabaseFacets,
   gateReport,
+  holdsRelease,
   installedRelease,
   matchesOnlyLettersAndDigits,
   parseVersion,
@@ -24,6 +25,7 @@ import {
   retry,
   slotAdoption,
   slotFailure,
+  waitUntilServed,
 } from './adopt-scraper.mjs';
 
 const postcode = {
@@ -219,6 +221,14 @@ describe('the release to adopt', () => {
     assert.throws(() => chooseTarget({ current: 'main', requested: '0.3.0' }), /Not a scraper release version/);
     assert.throws(() => chooseTarget({ current: '0.2.0', distTags: { latest: '0.2.0', next: '0.0.0-stage' } }), /as next/);
     assert.throws(() => chooseTarget({ current: '0.2.0', distTags: {} }), /no latest or next/);
+  });
+
+  it('finds the release, or a newer one, already on main', () => {
+    const pinning = (version) => ({ dependencies: { 'universal-parcel-scraper': version } });
+    assert.equal(holdsRelease(pinning('0.3.0-main.2'), '0.3.0-main.2'), true);
+    assert.equal(holdsRelease(pinning('0.3.0'), '0.3.0-main.2'), true);
+    assert.equal(holdsRelease(pinning('0.3.0-main.1'), '0.3.0-main.2'), false);
+    assert.throws(() => holdsRelease(pinning('^0.3.0'), '0.3.0'), /exact release/);
   });
 
   it('takes database_ready only for one named release', () => {
@@ -531,6 +541,32 @@ describe('waiting for the registry', () => {
     }, { attempts: 5, pauseMs: 10, pause: async (ms) => { pauses.push(ms); } });
     assert.equal(result, 'served');
     assert.deepEqual(pauses, [10, 10]);
+  });
+
+  it('waits for the tarball of a release npm already lists', async () => {
+    const listed = [{}, { '0.3.0': 'https://registry.example/0.3.0.tgz' }];
+    const answers = [false, false, true];
+    const pauses = [];
+    await waitUntilServed('0.3.0', {
+      tarballs: async () => listed.shift() ?? { '0.3.0': 'https://registry.example/0.3.0.tgz' },
+      isServed: async (url) => {
+        assert.equal(url, 'https://registry.example/0.3.0.tgz');
+        return answers.shift();
+      },
+      attempts: 5, pauseMs: 10, pause: async (ms) => { pauses.push(ms); },
+    });
+    assert.deepEqual(pauses, [10, 10, 10]);
+    assert.deepEqual(answers, []);
+  });
+
+  it('stops waiting for a tarball that never comes', async () => {
+    let asked = 0;
+    await assert.rejects(waitUntilServed('0.3.0', {
+      tarballs: async () => ({ '0.3.0': 'https://registry.example/0.3.0.tgz' }),
+      isServed: async () => { asked += 1; return false; },
+      attempts: 3, pauseMs: 0, pause: async () => {},
+    }), /npm does not serve universal-parcel-scraper@0.3.0/);
+    assert.equal(asked, 3);
   });
 
   it('gives up with the last failure', async () => {

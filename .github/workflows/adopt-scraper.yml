@@ -128,9 +128,9 @@ jobs:
         with:
           node-version: 26
 
-      # npm scans a release for minutes before it serves it. A run without a
-      # version takes what npm lists; one started by hand can name a release
-      # that is still being scanned.
+      # npm scans a release for minutes before it lists it, then answers 404
+      # for its tarball a while longer. A run without a version takes what npm
+      # lists; one started by hand can name a release in either state.
       - name: Wait for npm to serve the release
         id: release
         env:
@@ -174,12 +174,22 @@ jobs:
         if: steps.target.outputs.adopt == 'true'
         run: node scripts/adopt-scraper.mjs snapshot "$RUNNER_TEMP/scraper-before.json"
 
+      # npm's mirrors catch up at different times, so a tarball the wait found
+      # can still answer 404 here. Only that is tried again, for 5 minutes.
       - name: Install the release
         id: install
         if: steps.target.outputs.adopt == 'true'
         env:
           VERSION: ${{ steps.target.outputs.version }}
-        run: npm install --save-exact --prefer-online "universal-parcel-scraper@$VERSION"
+        run: |
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if npm install --save-exact --prefer-online "universal-parcel-scraper@$VERSION" 2>&1 | tee "$RUNNER_TEMP/install.log"; then
+              exit 0
+            fi
+            if ! grep -q E404 "$RUNNER_TEMP/install.log" || [ "$attempt" = 10 ]; then exit 1; fi
+            echo "npm answers 404 for the tarball of universal-parcel-scraper@$VERSION; trying again in 30 s ($attempt of 10)."
+            sleep 30
+          done
 
       # Before regenerating: the contract generator refuses a changed stage
       # vocabulary without saying what the database needs. A change passes once
@@ -324,10 +334,17 @@ jobs:
         with:
           name: adoption
           path: ${{ runner.temp }}/adoption
+      # For main's own script, which reads package.json; nothing is installed.
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
 
       # A lockfile or a generated file is never merged: when main changed one
-      # since preparation, the adoption is made again instead.
+      # since preparation, the adoption is made again instead. When main already
+      # pins the release or a newer one, another run or a commit by hand adopted
+      # it, and the run ends without pushing or failing.
       - name: Commit the adoption
+        id: commit
         run: |
           stop() {
             echo "$1" > "$RUNNER_TEMP/stopped"
@@ -339,6 +356,11 @@ jobs:
             || stop "The adopt job handed over something else than a release and a commit."
           git merge-base --is-ancestor "$BASE" HEAD \
             || stop "The commit the adoption was prepared on is not on main."
+          if [ "$(node scripts/adopt-scraper.mjs holds package.json "--version=$VERSION")" = true ]; then
+            echo 'held=true' >> "$GITHUB_OUTPUT"
+            printf '### Universal Parcel Scraper %s is already on main\n\nmain pins it or a newer release, so nothing was pushed.\n' "$VERSION" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           git diff --quiet "$BASE" HEAD -- "${files[@]}" \
             || stop "main changed a file of the adoption after it was prepared."
           # Into the index only: nothing is written to disk before the check.
@@ -359,6 +381,7 @@ jobs:
       # The workflow token suppresses downstream workflows. Require the adoption
       # token so the final commit, including any rebase, is tested before deployment.
       - name: Push to main
+        if: steps.commit.outputs.held != 'true'
         env:
           PUSH_TOKEN: ${{ secrets.SCRAPER_ADOPTION_TOKEN }}
         run: |
@@ -389,6 +412,11 @@ jobs:
               || stop "The push failed and main could not be fetched."
             if git merge-base --is-ancestor origin/main HEAD; then
               stop "GitHub refused the push although main had not moved; the log has its answer."
+            fi
+            git show origin/main:package.json > "$RUNNER_TEMP/main-package.json"
+            if [ "$(node scripts/adopt-scraper.mjs holds "$RUNNER_TEMP/main-package.json" "--version=$VERSION")" = true ]; then
+              printf '### Universal Parcel Scraper %s is already on main\n\nmain adopted it or a newer release meanwhile, so nothing was pushed.\n' "$VERSION" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
             fi
             git diff --quiet HEAD~1 origin/main -- "${files[@]}" \
               || stop "main changed a file of the adoption after it was prepared."

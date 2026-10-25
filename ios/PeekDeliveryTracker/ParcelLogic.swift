@@ -679,6 +679,36 @@ enum DeliveriesArrangement: Equatable {
     }
 }
 
+/// A parcel's page beside the list, given room for two columns as wide as a phone's, puts its history beside its
+/// card, as the web's parcel page does on a wide screen. Over the list, as on a phone, it keeps one column.
+enum ParcelPageColumns {
+    /// A column's least width: about a phone's page, more at the accessibility text sizes.
+    static func column(largeText: Bool) -> CGFloat { largeText ? 420 : 340 }
+    static let gap: CGFloat = 28
+    /// The page's margins and the paper's padding, on both sides.
+    static let sides: CGFloat = 2 * (16 + 18)
+    /// Past this, the columns stop growing and the page stands centred.
+    static let widest: CGFloat = 1080
+
+    /// Without a history the second column would only say when the carrier was last asked, and the page keeps one.
+    static func fit(width: CGFloat, besideList: Bool, largeText: Bool, history: Bool) -> Bool {
+        besideList && history && width >= 2 * column(largeText: largeText) + gap + sides
+    }
+}
+
+/// The passport lies open on two pages, as it does at an iPhone Duo's fold, in a window wide and tall in its own
+/// right with room for two pages as wide as a phone's. A phone, even on its side, keeps one page.
+enum PassportSpread {
+    /// The pages' margins, on both sides of each.
+    static let margins: CGFloat = 2 * 20
+    /// As wide as the single page grows.
+    static let widest: CGFloat = 480
+
+    static func fits(width: CGFloat, regularWidth: Bool, regularHeight: Bool, largeText: Bool) -> Bool {
+        regularWidth && regularHeight && width >= 2 * (ParcelPageColumns.column(largeText: largeText) + margins)
+    }
+}
+
 /// The parcel the deliveries show, over the list or beside it, and whether someone chose it. Every way a
 /// parcel opens comes through here: its card, a notification, a link, the widget, Add finding it followed already.
 struct DeliveriesNavigation: Equatable {

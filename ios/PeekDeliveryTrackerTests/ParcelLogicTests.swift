@@ -2675,6 +2675,46 @@ extension ParcelLogicTests {
         XCTAssertEqual(arrangement(887, largeText: true, from: .sideBySide), .stacked)
         XCTAssertEqual(arrangement(1032, largeText: true), .sideBySide)
     }
+
+    func testAParcelsPageBesideTheListPutsItsHistoryBesideTheCardWhereTwoPhoneWideColumnsFit() {
+        func columns(_ width: CGFloat, besideList: Bool = true, largeText: Bool = false, history: Bool = true) -> Bool {
+            ParcelPageColumns.fit(width: width, besideList: besideList, largeText: largeText, history: history)
+        }
+        // Beside the list on a 13-inch iPad on its side, and on an 11-inch one.
+        XCTAssertTrue(columns(996))
+        XCTAssertTrue(columns(800))
+        // The 13-inch upright and an open Duo leave the page a phone's column or a little more.
+        XCTAssertFalse(columns(652))
+        XCTAssertFalse(columns(507))
+        XCTAssertTrue(columns(776))
+        XCTAssertFalse(columns(775))
+        // Over the list, as on a phone on its side, the page keeps one column whatever its width.
+        XCTAssertFalse(columns(956, besideList: false))
+        // With nothing to tell yet, the history has no column of its own.
+        XCTAssertFalse(columns(996, history: false))
+        // At the accessibility text sizes each column needs more: the 13-inch still has room, the 11-inch not.
+        XCTAssertTrue(columns(996, largeText: true))
+        XCTAssertFalse(columns(800, largeText: true))
+    }
+
+    func testThePassportLiesOpenOnTwoPagesWhereAWideAndTallWindowHasRoomForTwoPhoneWidePages() {
+        func spread(_ width: CGFloat, regularWidth: Bool = true, regularHeight: Bool = true, largeText: Bool = false) -> Bool {
+            PassportSpread.fits(width: width, regularWidth: regularWidth, regularHeight: regularHeight, largeText: largeText)
+        }
+        // An iPad upright, 13-inch and 11-inch, and an open Duo lying flat, less its bar.
+        XCTAssertTrue(spread(1032))
+        XCTAssertTrue(spread(820))
+        XCTAssertTrue(spread(887))
+        XCTAssertTrue(spread(760))
+        XCTAssertFalse(spread(759))
+        // A phone on its side is wide but short; a narrow iPad window and the Duo's cover are compact.
+        XCTAssertFalse(spread(956, regularHeight: false))
+        XCTAssertFalse(spread(1024, regularWidth: false))
+        XCTAssertFalse(spread(678, regularWidth: false, regularHeight: false))
+        // At the accessibility text sizes each page needs more: the 13-inch still has room, the 11-inch not.
+        XCTAssertTrue(spread(1032, largeText: true))
+        XCTAssertFalse(spread(820, largeText: true))
+    }
 }
 
 extension ParcelLogicTests {
@@ -3038,6 +3078,26 @@ extension ParcelLogicTests {
         try await draw(.en, named: "detail", in: [CGSize(width: 390, height: 844), CGSize(width: 640, height: 900)]) { store in
             DetailPage(parcelID: try XCTUnwrap(store.parcels.first(where: \.isActive)).id)
         }
+        // Beside the list, the parcel waiting at its pickup point, the fullest page: one column upright on a 13-inch
+        // iPad, two on its side and on an 11-inch one.
+        try await draw(.en, named: "detail-beside", in: [CGSize(width: 652, height: 1000), CGSize(width: 800, height: 800),
+                                                          CGSize(width: 996, height: 1000)]) { store in
+            DetailPage(parcelID: try XCTUnwrap(store.parcels.first { $0.currentStage == .readyForPickup }).id, besideList: true)
+        }
+        try await draw(.de, named: "detail-beside", in: [CGSize(width: 800, height: 800)]) { store in
+            DetailPage(parcelID: try XCTUnwrap(store.parcels.first { $0.currentStage == .readyForPickup }).id, besideList: true)
+        }
+        // Its pickup point's buttons in German, whose "Copy address" is the longest, on a phone.
+        try await draw(.de, named: "detail-pickup", in: [CGSize(width: 390, height: 844)]) { store in
+            DetailPage(parcelID: try XCTUnwrap(store.parcels.first { $0.currentStage == .readyForPickup }).id)
+        }
+        // Two pages on an iPad upright, 11-inch and 13-inch; one on a phone on its side.
+        try await draw(.en, named: "passport", in: [CGSize(width: 820, height: 1180), CGSize(width: 1032, height: 1376)]) { _ in
+            PassportView()
+        }
+        try await draw(.en, named: "passport-phone", in: [CGSize(width: 956, height: 440)]) { _ in
+            PassportView().environment(\.verticalSizeClass, .compact)
+        }
         try await draw(.en, named: "first-open", in: [CGSize(width: 466, height: 678), CGSize(width: 678, height: 466),
                                                       CGSize(width: 1032, height: 1376), CGSize(width: 1376, height: 1032)]) { _ in
             FirstOpenView(covered: false) { _ in }
@@ -3103,13 +3163,14 @@ extension ParcelLogicTests {
     }
 }
 
-/// A parcel's page as the list opens it, with the transition it comes in by.
+/// A parcel's page as the list opens it, over itself or beside it, with the transition it comes in by.
 private struct DetailPage: View {
     let parcelID: UUID
+    var besideList = false
     @Namespace private var transition
 
     var body: some View {
-        NavigationStack { ParcelDetailView(parcelID: parcelID, transition: transition) }
+        NavigationStack { ParcelDetailView(parcelID: parcelID, transition: transition, release: besideList ? {} : nil) }
     }
 }
 

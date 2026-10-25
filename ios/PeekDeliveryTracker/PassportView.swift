@@ -5,6 +5,8 @@ struct PassportView: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.horizontalSizeClass) private var horizontalSize
+    @Environment(\.verticalSizeClass) private var verticalSize
     @ScaledMetric(relativeTo: .largeTitle) private var totalSize = 54
     @State private var showingAccount = false
     @State private var expandedCard: PassportSelection?
@@ -36,6 +38,24 @@ struct PassportView: View {
                             }
                             .frame(width: proxy.size.width - fold.maxX)
                         }
+                    } else if PassportSpread.fits(width: proxy.size.width, regularWidth: horizontalSize == .regular,
+                                                  regularHeight: verticalSize == .regular,
+                                                  largeText: dynamicTypeSize.isAccessibilitySize) {
+                        // The same two pages on a wide screen, either side of a seam.
+                        HStack(alignment: .top, spacing: 0) {
+                            page {
+                                passport(stats)
+                                stamps(stats)
+                            }
+                            .frame(maxWidth: PassportSpread.widest)
+                            Divider().padding(.vertical, 18)
+                            page {
+                                deliveryTimes(stats)
+                                if !stats.originCountries.isEmpty { countries(stats) }
+                            }
+                            .frame(maxWidth: PassportSpread.widest)
+                        }
+                        .frame(maxWidth: .infinity)
                     } else {
                         page {
                             passport(stats)
@@ -43,7 +63,7 @@ struct PassportView: View {
                             deliveryTimes(stats)
                             if !stats.originCountries.isEmpty { countries(stats) }
                         }
-                        .frame(maxWidth: 480)
+                        .frame(maxWidth: PassportSpread.widest)
                         .frame(maxWidth: .infinity)
                     }
                 }

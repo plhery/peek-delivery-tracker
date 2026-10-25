@@ -49,6 +49,8 @@ struct ParcelDetailView: View {
     @State private var buttonRow: CGRect?
     /// How tall the card's top row stands, which at the largest text sizes holds the buttons on a line of their own.
     @State private var headerHeight: CGFloat = 0
+    /// How wide the page stands, which decides whether the history goes beside the card.
+    @State private var pageWidth: CGFloat = 0
 
     @ObservedObject private var catalog = CarrierCatalog.shared
     @StateObject private var feedback = ParcelFeedbackModel()
@@ -57,14 +59,24 @@ struct ParcelDetailView: View {
         ZStack {
             ExperimentalBackdrop()
             if let parcel {
+                let columns = ParcelPageColumns.fit(width: pageWidth, besideList: release != nil,
+                                                    largeText: typeSize.isAccessibilitySize, history: showsHistory(parcel))
                 ScrollView {
                     VStack(spacing: 26) {
-                        VStack(alignment: .leading, spacing: 20) {
-                            liveParcelPass(parcel)
-                            if showsHistory(parcel) {
-                                ParcelJournal(parcel: parcel, tint: identity(parcel).ink)
+                        // Given the room, the history stands beside the card rather than under it.
+                        let layout = columns
+                            ? AnyLayout(HStackLayout(alignment: .top, spacing: ParcelPageColumns.gap))
+                            : AnyLayout(VStackLayout(alignment: .leading, spacing: 20))
+                        layout {
+                            liveParcelPass(parcel, divided: !columns)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            VStack(alignment: .leading, spacing: 20) {
+                                if showsHistory(parcel) {
+                                    ParcelJournal(parcel: parcel, tint: identity(parcel).ink)
+                                }
+                                syncStatus(parcel, tint: identity(parcel).ink)
                             }
-                            syncStatus(parcel, tint: identity(parcel).ink)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .animation(reduceMotion ? nil : .easeInOut(duration: 0.2), value: emailOffer)
                         .padding(18)
@@ -73,15 +85,17 @@ struct ParcelDetailView: View {
                         if feedback.standing != nil {
                             ParcelFeedbackQuestionView(model: feedback)
                                 .padding(.horizontal, 8)
+                                .frame(maxWidth: 640 - 32)
                         }
                     }
                     .padding(.horizontal, 16)
-                    .frame(maxWidth: 640)
+                    .frame(maxWidth: columns ? ParcelPageColumns.widest : 640)
                     .frame(maxWidth: .infinity)
                     .padding(.top, 10)
                     .padding(.bottom, 36)
                 }
                 .scrollIndicators(.hidden)
+                .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { pageWidth = $0 }
                 .softTopEdge()
                 #if DEBUG
                 // The question stands where the page ends: a look at it starts there.
@@ -228,7 +242,8 @@ struct ParcelDetailView: View {
         CarrierVisualIdentity.of(parcel.displayedCarrier, catalog: catalog, language: localizer.language)
     }
 
-    private func liveParcelPass(_ parcel: Parcel) -> some View {
+    /// The card and what is known of the shipment, ruled off from the history under it when `divided`.
+    private func liveParcelPass(_ parcel: Parcel, divided: Bool) -> some View {
         let branding = identity(parcel)
         let carrier = catalog.info(for: parcel.activeTrackingCarrier, language: localizer.language)
         // Handed from one carrier to another, or about to be, the card carries both marks and says who delivers, as its card in the list does.
@@ -504,7 +519,7 @@ struct ParcelDetailView: View {
                         .font(.footnote).foregroundStyle(branding.ink)
                 }
             }
-            Divider()
+            if divided { Divider() }
         }
         .accessibilityElement(children: .contain)
     }
@@ -578,11 +593,11 @@ struct ParcelDetailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityElement(children: .combine)
             }
-            // Side by side while each label reads on one line; otherwise, as at the largest text sizes, one under the
-            // other, each across the card.
+            // Side by side while each label reads on one line in its half; otherwise, as at the largest text sizes, one
+            // under the other, each across the card.
             ViewThatFits(in: .horizontal) {
                 if !typeSize.isAccessibilitySize {
-                    HStack(spacing: 8) { pickupButtons(point, identity: identity, oneLine: true) }
+                    EqualWidthRow(spacing: 8) { pickupButtons(point, identity: identity, oneLine: true) }
                 }
                 VStack(spacing: 8) { pickupButtons(point, identity: identity, oneLine: false) }
             }
@@ -1461,6 +1476,33 @@ struct ParcelJournal: View {
 }
 
 /// The carrier editor opens on a recognized carrier when a prompt asks for its input.
+/// Views side by side in equal widths, each as wide as the widest one needs. Short of that room it asks for more than it
+/// has, so a `ViewThatFits` passes it by rather than cutting a label.
+private struct EqualWidthRow: Layout {
+    var spacing: CGFloat
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let widest = subviews.map { $0.sizeThatFits(.unspecified).width }.max() ?? 0
+        let width = max(proposal.width ?? 0, widest * CGFloat(subviews.count) + gaps(subviews))
+        let column = ProposedViewSize(width: columnWidth(width, subviews), height: proposal.height)
+        return CGSize(width: width, height: subviews.map { $0.sizeThatFits(column).height }.max() ?? 0)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let column = columnWidth(bounds.width, subviews)
+        for (index, subview) in subviews.enumerated() {
+            subview.place(at: CGPoint(x: bounds.minX + CGFloat(index) * (column + spacing), y: bounds.minY),
+                          proposal: ProposedViewSize(width: column, height: bounds.height))
+        }
+    }
+
+    private func gaps(_ subviews: Subviews) -> CGFloat { spacing * CGFloat(max(subviews.count - 1, 0)) }
+
+    private func columnWidth(_ width: CGFloat, _ subviews: Subviews) -> CGFloat {
+        subviews.isEmpty ? 0 : (width - gaps(subviews)) / CGFloat(subviews.count)
+    }
+}
+
 private struct CarrierEditorRequest: Identifiable {
     let id = UUID()
     var initialCarrier: CarrierID?

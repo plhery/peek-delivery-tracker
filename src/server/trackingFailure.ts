@@ -24,6 +24,20 @@ export const HANDED_OFF_REASONS: ReadonlySet<string> = new Set(['other_country']
 
 export { PLACEHOLDER_NUMBER } from '../lib/messages';
 
+/** Why a carrier answered as it did (`parcel_found`, `postcode_mismatch`): the first reason in the error's causes. */
+export function carrierErrorReason(error: unknown): string | undefined {
+  const seen = new Set<Error>();
+  let current = error;
+  for (let depth = 0; current instanceof Error && !seen.has(current) && depth < 8; depth += 1) {
+    seen.add(current);
+    if (current instanceof CarrierError && typeof current.reason === 'string') {
+      return /^[a-z][a-z0-9_]{0,63}$/.test(current.reason) ? current.reason : undefined;
+    }
+    current = current.cause;
+  }
+  return undefined;
+}
+
 /** A source's refusal of the number: one it does not issue, or a placeholder. A later release may take either. */
 export function refusedNumberCode(code: unknown): boolean {
   return code === 'carrier:invalid_input' || code === PLACEHOLDER_NUMBER;

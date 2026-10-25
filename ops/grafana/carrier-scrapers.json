@@ -1997,7 +1997,7 @@
           "type": "timeseries",
           "id": 13,
           "title": "Step failures",
-          "description": "Failed step attempts by carrier, step and error class, per hour, including those a later step recovered. Answers about the number are left out.",
+          "description": "Failed step attempts by carrier, step, error class and reason, per hour, including those a later step recovered. Answers about the number are left out.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
           "gridPos": {"x": 0, "y": 92, "w": 12, "h": 8},
           "interval": "1h",
@@ -2005,8 +2005,8 @@
             {
               "datasource": {"type": "prometheus", "uid": "${datasource}"},
               "refId": "A",
-              "expr": "sum by (carrier, step, error_type) (increase(carrier_step_total{carrier=~\"$carrier\", outcome!~\"ok|not_found|no_history|input_required|invalid_input|handed_off\"}[1h]))",
-              "legendFormat": "{{carrier}} {{step}} {{error_type}}",
+              "expr": "sum by (carrier, step, error_type, reason) (increase(carrier_step_total{carrier=~\"$carrier\", outcome!~\"ok|not_found|no_history|input_required|invalid_input|handed_off\"}[1h]))",
+              "legendFormat": "{{carrier}} {{step}} {{error_type}} {{reason}}",
               "range": true
             }
           ],

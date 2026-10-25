@@ -97,7 +97,7 @@ describe('sentryStepRecorder', () => {
     hostStepRecorder().lookup({ carrier: 'gls-de', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
     // A new series reads 0 on its first scrape; the second carries the count.
     await metricsText();
-    expect(await metricsText()).toContain('carrier_lookup_total{carrier="gls-de",final_step="direct",outcome="ok",attempts="1"} 1');
+    expect(await metricsText()).toContain('carrier_lookup_total{carrier="gls-de",final_step="direct",outcome="ok",attempts="1",reason="none"} 1');
   });
 
   it('tells the running check which tier its lookup went through', () => {

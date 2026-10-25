@@ -577,7 +577,10 @@ Grafana through the "Loki (delivery tracker logs)" data source.
 Lines carry `app`, `container`, `event` and `level` labels, for example
 `{app="delivery-tracker", event="tracking_scrape"} | json | outcome = "error"`. The TRAWL
 browser service's lines come as the app `delivery-tracker-trawl`, with the same labels, in
-logfmt: `{app="delivery-tracker-trawl", event="tier.failure"} | logfmt`.
+logfmt: `{app="delivery-tracker-trawl", event="tier.failure"} | logfmt`. A helper that logs
+JSON gets no `event` label, so filter on its text instead:
+`{app="delivery-tracker-trawl"} |= "zto.verification" | json` has each ZTO verification,
+with every puzzle's solver score or OCR confidence and whether Dingxiang accepted the answer.
 
 Key JSON events:
 
@@ -894,8 +897,8 @@ dashboard's failure panels leave out.
 | Series | Answers |
 | --- | --- |
 | `carrier_step_duration_seconds` (carrier, step, outcome) | How long each step takes |
-| `carrier_step_total` (+ error_type) | Which step fails, and how |
-| `carrier_lookup_total` (carrier, final_step, outcome, attempts) | Which step served the result, after how many attempts |
+| `carrier_step_total` (+ error_type, reason) | Which step fails, and how. `reason` is the scraper's code for why (`verification_refused`, `portal_not_found`), `none` without one |
+| `carrier_lookup_total` (carrier, final_step, outcome, attempts, reason) | Which step served the result, after how many attempts, and why the last one failed |
 | `carrier_fallback_total` (from_step, to_step, reason) | How often recovery is needed |
 | `carrier_status_mapping_total` (carrier, stage_source) | Share of events mapped explicitly, by wording, or not at all |
 | `carrier_detection_total` (result) | Detection confidence served to clients |
@@ -945,6 +948,33 @@ Useful questions:
   ```
 - **Does an in-adapter retry ever help?**
   `carrier_lookup_total{final_step="retry",outcome="ok",attempts=~"[2-9]"}`.
+- **Why do a carrier's challenges fail?**
+  `sum by (step, reason) (increase(carrier_step_total{carrier="zto",outcome="challenge"}[7d]))`.
+  The scraper's [architecture](https://github.com/plhery/universal-parcel-scraper/blob/main/ARCHITECTURE.md)
+  lists the stages a challenge `reason` names. Each ZTO puzzle is in the browser service's
+  `zto.verification` log line.
+- **Would trying again help?** Compare how often a parcel's next check fails after a
+  failure with how often checks fail overall. Much more often, and the failure stays with the
+  parcel or the service's address: retrying sooner will not help. About as often, and it comes
+  and goes: another attempt could rescue it. Samples are kept for a day:
+
+  ```sql
+  with checks as (
+    select sample.subject, sample.healthy, sample.details ->> 'category' as category,
+           sample.details ->> 'reason' as reason,
+           avg((not sample.healthy)::int) over (partition by sample.subject) as failing_share,
+           lead(sample.healthy) over (partition by sample.subject, attempt.package_id
+                                      order by sample.observed_at) as next_healthy
+    from public.tracking_health_samples as sample
+    join public.tracking_sync_attempts as attempt on attempt.id = sample.attempt_id
+    where sample.kind = 'direct'
+  )
+  select subject, category, reason, round(max(failing_share), 3) as failing_share,
+         count(*) as failures, count(*) filter (where next_healthy) as next_answered,
+         count(*) filter (where not next_healthy) as next_failed
+  from checks where not healthy
+  group by 1, 2, 3 order by failures desc;
+  ```
 - **New unmapped wording?** A rising `stage_source="none"` share. See
   [Unmapped wording](#unmapped-wording).
 - **Is the daily lookup allowance right?** `public_lookups_per_client{stat="p90"}` is

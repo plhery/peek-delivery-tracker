@@ -2,7 +2,7 @@ import 'server-only';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { CarrierError, NoHistoryError, UpstreamHttpError } from 'universal-parcel-scraper';
 import type { LookupRecord, StepRecord } from 'universal-parcel-scraper/node';
-import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS } from './trackingFailure';
+import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason } from './trackingFailure';
 import type { JsonObject } from './types';
 
 export interface HealthSample extends JsonObject {
@@ -58,7 +58,7 @@ function details(record: StepRecord | LookupRecord, outcome: string): JsonObject
   for (let depth = 0; current instanceof Error && depth < 8; depth++, current = current.cause) {
     if (current instanceof UpstreamHttpError && current.status >= 100 && current.status <= 599) status = current.status;
   }
-  return { error_type: record.errorType, category: outcome, http_status: status,
+  return { error_type: record.errorType, category: outcome, reason: carrierErrorReason(record.error) ?? null, http_status: status,
     step: 'step' in record ? record.step : record.finalStep };
 }
 /**

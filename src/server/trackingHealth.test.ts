@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { IndeterminateError, NoHistoryError, NotFoundError, RateLimitedError, SchemaError, UpstreamHttpError } from 'universal-parcel-scraper';
+import { ChallengeError, IndeterminateError, NoHistoryError, NotFoundError, RateLimitedError, SchemaError, UpstreamHttpError } from 'universal-parcel-scraper';
 import { TrackingCaptureError, type LookupRecord } from 'universal-parcel-scraper/node';
 import { confirmationLookup, healthMessage, healthStepRecorder, observeTrackingHealth, type HealthSample } from './trackingHealth';
 import { TrackingSyncAudit } from './trackingAudit';
@@ -192,6 +192,16 @@ describe('tracking health evidence', () => {
         durationMs: 1, attempts: 1, error: new Error('lookup failed', { cause: new UpstreamHttpError('Ship24', 503) }) });
     });
     expect([...samples.values()].map((sample) => sample.details.http_status)).toEqual([null, null, 503]);
+  });
+
+  it('keeps the reason a failure gave, so one carrier\'s challenges can be told apart', async () => {
+    const samples = new Map<string, HealthSample>();
+    await observeTrackingHealth(samples, async () => {
+      healthStepRecorder.step({ ...step, carrier: 'zto', outcome: 'challenge', errorType: 'ChallengeError',
+        error: new Error('wrapped', { cause: new ChallengeError('ZTO', 'Not verified', { reason: 'puzzle_unsolved' }) }) });
+      healthStepRecorder.step({ ...step, carrier: 'paack', outcome: 'schema', errorType: 'SchemaError', error: new SchemaError('paack') });
+    });
+    expect([...samples.values()].map((sample) => sample.details.reason)).toEqual(['puzzle_unsolved', null]);
   });
 
   it('explains user impact, maintenance and rate-limit next steps', () => {

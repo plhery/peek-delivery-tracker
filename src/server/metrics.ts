@@ -5,12 +5,13 @@ import { Counter, Gauge, Histogram, Registry, collectDefaultMetrics, type LabelV
 import { CarrierError, NoHistoryError } from 'universal-parcel-scraper';
 import { METRICS, type LookupRecord, type StepOutcome, type StepRecord, type StepRecorder } from 'universal-parcel-scraper/node';
 import { initObservability } from './observability';
-import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS } from './trackingFailure';
+import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason } from './trackingFailure';
 
 /**
  * Prometheus sink for carrier telemetry. Labels are deliberately
- * low-cardinality: carrier ids, step ids, outcome kinds and error class names
- * only. Nothing here can carry a tracking number or provider wording.
+ * low-cardinality: carrier ids, step ids, outcome kinds, error class names and
+ * the scraper's fixed reason codes only. Nothing here can carry a tracking
+ * number or provider wording.
  *
  * `carrier_lookup_total{final_step}` is the one series that answers whether a
  * fallback tier is worth keeping: a tier that never serves a result can go.
@@ -34,14 +35,14 @@ import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS } from './trackingFailure';
  */
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 13;
+const RUNTIME_VERSION = 14;
 
 interface PrometheusRuntime {
   version: number;
   registry: Registry;
   stepDuration: Histogram<'carrier' | 'step' | 'outcome'>;
-  stepTotal: Counter<'carrier' | 'step' | 'outcome' | 'error_type'>;
-  lookupTotal: Counter<'carrier' | 'final_step' | 'outcome' | 'attempts'>;
+  stepTotal: Counter<'carrier' | 'step' | 'outcome' | 'error_type' | 'reason'>;
+  lookupTotal: Counter<'carrier' | 'final_step' | 'outcome' | 'attempts' | 'reason'>;
   fallbackTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason'>;
   statusMappingTotal: Counter<'carrier' | 'stage_source'>;
   detectionTotal: Counter<'result'>;
@@ -100,14 +101,14 @@ function createRuntime(): PrometheusRuntime {
     }),
     stepTotal: new Counter({
       name: METRICS.stepTotal,
-      help: 'Adapter step attempts by outcome and error class.',
-      labelNames: ['carrier', 'step', 'outcome', 'error_type'] as const,
+      help: 'Adapter step attempts by outcome, error class and reason.',
+      labelNames: ['carrier', 'step', 'outcome', 'error_type', 'reason'] as const,
       registers: [registry],
     }),
     lookupTotal: new Counter({
       name: METRICS.lookupTotal,
       help: 'Carrier lookups by the step that produced the result and the step attempts it took.',
-      labelNames: ['carrier', 'final_step', 'outcome', 'attempts'] as const,
+      labelNames: ['carrier', 'final_step', 'outcome', 'attempts', 'reason'] as const,
       registers: [registry],
     }),
     fallbackTotal: new Counter({
@@ -338,7 +339,8 @@ export const prometheusStepRecorder: StepRecorder = {
     const timing = { carrier: record.carrier, step: record.step, outcome: stepOutcome(record.outcome, record.error) };
     afterFirstScrape(METRICS.stepDuration + JSON.stringify(timing), () => runtime.stepDuration.zero(timing),
       () => runtime.stepDuration.observe(timing, record.durationMs / 1000));
-    count(runtime.stepTotal, METRICS.stepTotal, { ...timing, error_type: record.errorType ?? 'none' });
+    count(runtime.stepTotal, METRICS.stepTotal, { ...timing, error_type: record.errorType ?? 'none',
+      reason: carrierErrorReason(record.error) ?? 'none' });
     if (record.fallbackFrom) {
       count(runtime.fallbackTotal, METRICS.fallbackTotal, {
         carrier: record.carrier, from_step: record.fallbackFrom, to_step: record.step,
@@ -350,6 +352,7 @@ export const prometheusStepRecorder: StepRecorder = {
     count(runtime.lookupTotal, METRICS.lookupTotal, {
       carrier: record.carrier, final_step: record.finalStep ?? 'none', outcome: stepOutcome(record.outcome, record.error),
       attempts: String(Math.min(Math.max(Math.trunc(record.attempts) || 0, 0), 9)),
+      reason: carrierErrorReason(record.error) ?? 'none',
     });
   },
 };

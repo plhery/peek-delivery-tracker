@@ -3,9 +3,9 @@ import 'server-only';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import * as Sentry from '@sentry/node';
 import type { Breadcrumb, ErrorEvent } from '@sentry/node';
+import { carrierErrorReason } from './trackingFailure';
 import { healthMessage, healthReviewSignal } from './trackingHealth';
 import type { JsonObject } from './types';
-import { CarrierError } from 'universal-parcel-scraper';
 import { UpstreamHttpError, type UpstreamHttpDiagnostics } from 'universal-parcel-scraper/node';
 
 /**
@@ -200,20 +200,6 @@ export function operationalErrorMetadata(error: unknown): OperationalErrorMetada
     current = current.cause;
   }
   return metadata;
-}
-
-/** Why a carrier answered as it did (`parcel_found`, `postcode_mismatch`): the first reason in the error's causes. */
-export function carrierErrorReason(error: unknown): string | undefined {
-  const seen = new Set<Error>();
-  let current = error;
-  for (let depth = 0; current instanceof Error && !seen.has(current) && depth < 8; depth += 1) {
-    seen.add(current);
-    if (current instanceof CarrierError && typeof current.reason === 'string') {
-      return /^[a-z][a-z0-9_]{0,63}$/.test(current.reason) ? current.reason : undefined;
-    }
-    current = current.cause;
-  }
-  return undefined;
 }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

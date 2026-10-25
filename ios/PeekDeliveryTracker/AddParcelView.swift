@@ -7,6 +7,8 @@ import VisionKit
 struct AddParcelView: View {
     let onOpenParcel: (UUID) -> Void
     let onAdded: (UUID) -> Void
+    /// What was shared, linked or pasted from the menu bar to open it.
+    private let draft: SharedParcelDraft?
     /// Opens on the camera, for someone who asked to scan a label.
     private let scanning: Bool
 
@@ -49,6 +51,7 @@ struct AddParcelView: View {
     }
 
     init(draft: SharedParcelDraft?, scanning: Bool = false, onOpenParcel: @escaping (UUID) -> Void = { _ in }, onAdded: @escaping (UUID) -> Void = { _ in }) {
+        self.draft = draft
         self.scanning = scanning
         self.onOpenParcel = onOpenParcel
         self.onAdded = onAdded
@@ -155,6 +158,10 @@ struct AddParcelView: View {
             }
             .onChange(of: resolvedCarrier, initial: true) { _, carrier in
                 prepareRequiredDetails(for: carrier)
+            }
+            // A number that arrives while Add is open takes the field's place, as a paste does.
+            .onChange(of: draft) { _, draft in
+                if let draft { fill(draft) }
             }
             .onChange(of: focusedField) { previous, current in
                 // Leaving the tracking field settles the number, unless it left to save.
@@ -1019,6 +1026,15 @@ struct AddParcelView: View {
         }
         focusedField = .tracking
         recognition.settledNumber = Self.trackingNumber(in: value)
+    }
+
+    private func fill(_ draft: SharedParcelDraft) {
+        withAnimation(reduceMotion ? nil : .snappy(duration: 0.34)) {
+            errorMessage = nil
+            trackingInput = draft.trackingInput
+            if !draft.label.isEmpty { label = draft.label }
+        }
+        recognition.settledNumber = Self.trackingNumber(in: draft.trackingInput)
     }
 
     private func selectCarrier(_ carrier: CarrierID?) {

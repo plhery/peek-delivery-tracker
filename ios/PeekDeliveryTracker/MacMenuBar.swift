@@ -139,6 +139,8 @@ struct MenuBarPanel: View {
         return (next.filter(\.isOutForDelivery) + next.filter { !$0.isOutForDelivery }).prefix(MenuBarExtraSettings.parcelLimit)
     }
 
+    private var outForDelivery: String { localizer.text("stage.out_for_delivery") }
+
     /// Someone signed in, the demo, or the parcels this Mac follows without an account.
     private var followsParcels: Bool { session.isAuthenticated || session.isGuest }
 
@@ -171,6 +173,9 @@ struct MenuBarPanel: View {
                         Image(systemName: parcel.isOutForDelivery ? "box.truck.fill" : "shippingbox")
                             .foregroundStyle(.secondary)
                             .frame(width: 20)
+                            // The truck is the only sign a parcel is out for delivery, unless its line says so.
+                            .accessibilityLabel(outForDelivery)
+                            .accessibilityHidden(!parcel.isOutForDelivery || parcel.detail == outForDelivery)
                         VStack(alignment: .leading, spacing: 1) {
                             Text(parcel.label).lineLimit(1)
                             Text([parcel.detail, parcel.carrier].joined(separator: " · "))

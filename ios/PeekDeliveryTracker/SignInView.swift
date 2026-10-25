@@ -820,6 +820,11 @@ private struct AppleAuthenticationButton: NSViewRepresentable {
         context.coordinator.action = action
     }
 
+    /// The size it is given, as on iOS, rather than the AppKit button's own small one.
+    func sizeThatFits(_ proposal: ProposedViewSize, nsView button: ASAuthorizationAppleIDButton, context: Context) -> CGSize? {
+        proposal.replacingUnspecifiedDimensions(by: button.intrinsicContentSize)
+    }
+
     final class Coordinator: NSObject {
         var action: () -> Void
         init(action: @escaping () -> Void) { self.action = action }

@@ -672,20 +672,23 @@ enum PipArtwork {
 
     private static let spring = UnitCurve.bezier(startControlPoint: UnitPoint(x: 0.22, y: 1), endControlPoint: UnitPoint(x: 0.36, y: 1))
 
+    /// How long one bob, or one jump, takes.
+    static func period(_ mood: PipMood) -> Double { mood == .joy ? 2.2 : 1.1 }
+
     /// How the mood moves him, about the bottom of the box: an eager bob, or a joyful jump.
     static func motion(_ mood: PipMood, at time: Double) -> CGAffineTransform {
         // Rise, turn in degrees, and stretch across and up.
         var pose: (rise: Double, turn: Double, across: Double, up: Double) = (0, 0, 1, 1)
         switch mood {
         case .eager:
-            let phase = (time / 1.1).truncatingRemainder(dividingBy: 1)
+            let phase = (time / period(.eager)).truncatingRemainder(dividingBy: 1)
             let swing = UnitCurve.easeInOut.value(at: phase < 0.5 ? phase * 2 : (1 - phase) * 2)
             pose = (-3 * swing, -2 + 4.5 * swing, 1, 1)
         case .joy:
             let keys: [(at: Double, rise: Double, turn: Double, across: Double, up: Double)] = [
                 (0, 0, 0, 1, 1), (0.12, 0, 0, 1.07, 0.9), (0.28, -10, -5, 0.96, 1.05), (0.44, 0, 2, 1.05, 0.95), (0.58, 0, 0, 1, 1), (1, 0, 0, 1, 1),
             ]
-            let phase = (time / 2.2).truncatingRemainder(dividingBy: 1)
+            let phase = (time / period(.joy)).truncatingRemainder(dividingBy: 1)
             let next = keys.firstIndex { $0.at > phase } ?? keys.count - 1
             let from = keys[next - 1], to = keys[next]
             let t = spring.value(at: (phase - from.at) / (to.at - from.at))
@@ -816,6 +819,17 @@ struct InkPip: View {
     @State private var arrived = false
     /// When the news came, and the mood he was in.
     @State private var unboxing: (at: Date, from: PipMood)?
+    #if os(macOS)
+    /// A Mac's window stays open for hours, where a phone is looked at for a moment: there he moves for a few bobs
+    /// when he shows, when his window comes forward and when news comes, then holds still.
+    private static let spell: TimeInterval = 6.6
+    @Environment(\.appearsActive) private var appearsActive
+    /// Since when he has held still.
+    @State private var stillSince: Date?
+    /// How long he held still before, which his clock leaves out: he goes on from the pose he stopped in.
+    @State private var held: TimeInterval = 0
+    @State private var spells = 0
+    #endif
 
     var body: some View {
         let palette = PipPalette.ink(ink, on: surface, dark: colorScheme == .dark)
@@ -823,11 +837,11 @@ struct InkPip: View {
         // The flaps swing faster than he bobs: a box that has opened is drawn at every frame.
         let interval: Double? = unboxing == nil ? 1.0 / 30 : nil
         let shape: CGFloat = PipGeometry.frame.width / PipGeometry.frame.height
-        return TimelineView(.animation(minimumInterval: interval, paused: !moves)) { (timeline: TimelineViewDefaultContext) in
+        return TimelineView(.animation(minimumInterval: interval, paused: !moves || still)) { (timeline: TimelineViewDefaultContext) in
             Canvas { (context: inout GraphicsContext, size: CGSize) in
                 let scale: CGFloat = size.width / PipGeometry.frame.width
                 context.scaleBy(x: scale, y: scale)
-                draw(context, palette, moves: moves, at: timeline.date)
+                draw(context, palette, moves: moves, at: clock(timeline.date))
             }
         }
         .aspectRatio(shape, contentMode: .fit)
@@ -836,18 +850,64 @@ struct InkPip: View {
         .offset(y: arrived || reduceMotion ? 0 : 7)
         .onAppear { withAnimation(reduceMotion ? nil : .spring(duration: 0.6)) { arrived = true } }
         .onChange(of: mood) { was, now in
-            unboxing = now == .joy && was != .joy && !reduceMotion ? (at: Date.now, from: was) : nil
+            #if os(macOS)
+            wake()
+            #endif
+            unboxing = now == .joy && was != .joy && !reduceMotion ? (at: clock(.now), from: was) : nil
         }
+        #if os(macOS)
+        .onChange(of: appearsActive) { _, active in if active { wake() } }
+        .task(id: spells) {
+            // He stops after a whole bob or jump, past the box's opening, where a jump leaves him on the ground.
+            let start = Date.now
+            let period = PipArtwork.period(mood)
+            let now = time(at: clock(start))
+            let from = unboxing == nil ? now : max(now, PipOpening.duration)
+            let end = ((from + Self.spell) / period).rounded(.up) * period
+            do { try await Task.sleep(for: .seconds(end - now)) } catch { return }
+            stillSince = start.addingTimeInterval(end - now)
+        }
+        #endif
         .allowsHitTesting(false)
         .accessibilityHidden(true)
     }
 
+    private var still: Bool {
+        #if os(macOS)
+        stillSince != nil
+        #else
+        false
+        #endif
+    }
+
+    /// His clock, which stands still while he does.
+    private func clock(_ date: Date) -> Date {
+        #if os(macOS)
+        (stillSince ?? date).addingTimeInterval(-held)
+        #else
+        date
+        #endif
+    }
+
+    #if os(macOS)
+    /// He moves again, from the pose he held.
+    private func wake() {
+        if let stillSince { held += Date.now.timeIntervalSince(stillSince) }
+        stillSince = nil
+        spells += 1
+    }
+    #endif
+
+    /// Where his bob or jump is: his jump starts with the news, as his box does.
+    private func time(at date: Date) -> Double {
+        unboxing.map { date.timeIntervalSince($0.at) } ?? date.timeIntervalSinceReferenceDate
+    }
+
     private func draw(_ context: GraphicsContext, _ palette: PipPalette, moves: Bool, at date: Date) {
-        // His jump starts with the news, as his box does.
         let since = unboxing.map { date.timeIntervalSince($0.at) }
         let opening = since.flatMap { $0 < PipOpening.duration ? PipOpening(at: $0) : nil }
         PipArtwork.ink(context, palette, mood: mood, side: side, below: below,
-                       time: moves ? since ?? date.timeIntervalSinceReferenceDate : nil,
+                       time: moves ? time(at: date) : nil,
                        opening: mood == .joy ? opening : nil, before: unboxing?.from)
     }
 }

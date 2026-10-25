@@ -189,6 +189,10 @@ struct NotificationSettingsView: View {
                         .foregroundStyle(Brand.onAccent)
                         .background(Brand.accent, in: RoundedRectangle(cornerRadius: 14))
                     }
+                    #if os(macOS)
+                    // The button is its yellow shape, without a Mac push button's bezel around it.
+                    .buttonStyle(.plain)
+                    #endif
                 }
                 if let notice { Text(notice).font(.caption).foregroundStyle(settingsGreen) }
                 if let error = errorMessage ?? store.notificationError {

@@ -239,6 +239,15 @@ struct RootView: View {
 
     private func open(_ url: URL) {
         guard !deliveries.isRepeat(url) else { return }
+        #if os(macOS)
+        // The window may open again for the link on another tab, before the deliveries are made: the parcel or Add
+        // waits for them, as the menu bar's do.
+        switch NativeRoute(url: url) {
+        case .parcel(let parcelID): MenuBarRequests.send(.parcel(parcelID)); return
+        case .add(let trackingInput): MenuBarRequests.send(.add(.paste(trackingInput))); return
+        default: break
+        }
+        #endif
         if let link = ParcelLinkRoute(url: url) { links.open(link) }
         else if case .friend(let friendID) = NativeRoute(url: url), session.user != nil { friendsActivity.reveal(friendID) }
         else { invitation.open(url) }

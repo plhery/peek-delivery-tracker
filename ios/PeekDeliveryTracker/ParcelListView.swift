@@ -475,8 +475,9 @@ private struct DeliveryListView: View {
         }
         #if os(macOS)
         .onReceive(NotificationCenter.default.publisher(for: .didMakeMenuBarRequest)) { _ in consumeMenuBarRequest() }
-        #endif
+        #else
         .onOpenURL(perform: handleURL)
+        #endif
         .onChange(of: links.arrival, initial: true) { _, arrival in receive(arrival) }
         #if DEBUG
         .task {
@@ -1598,6 +1599,7 @@ private struct DeliveryListView: View {
         }
     }
 
+    #if os(iOS)
     private func handleURL(_ url: URL) {
         switch NativeRoute(url: url) {
         case .parcel(let parcelID):
@@ -1610,6 +1612,7 @@ private struct DeliveryListView: View {
             break
         }
     }
+    #endif
 }
 
 private struct ExperimentalNextDeliveryPass: View {

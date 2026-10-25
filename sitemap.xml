@@ -3531,7 +3531,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers</loc>
@@ -3555,7 +3555,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers</loc>
@@ -5378,22 +5378,40 @@
 <url>
 <loc>https://peektracker.com/carriers/box-now-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/box-now-tracking" />
+<xhtml:link rel="alternate" hreflang="el" href="https://peektracker.com/el/carriers/box-now-entopismos-dematos" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/box-now-tracking" />
-<lastmod>2026-10-12</lastmod>
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/el/carriers/box-now-entopismos-dematos</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/box-now-tracking" />
+<xhtml:link rel="alternate" hreflang="el" href="https://peektracker.com/el/carriers/box-now-entopismos-dematos" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/box-now-tracking" />
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhl-ecommerce-netherlands-suivi-colis" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/dhl-ecommerce-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking" />
-<lastmod>2026-10-12</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/dhl-ecommerce-netherlands-suivi-colis</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhl-ecommerce-netherlands-suivi-colis" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/dhl-ecommerce-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking" />
-<lastmod>2026-10-12</lastmod>
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/nl/carriers/dhl-ecommerce-pakket-volgen</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/dhl-ecommerce-netherlands-suivi-colis" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/dhl-ecommerce-pakket-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-netherlands-tracking" />
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/heppner-tracking</loc>

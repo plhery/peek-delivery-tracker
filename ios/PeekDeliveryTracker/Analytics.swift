@@ -87,7 +87,8 @@ final class DeliveryAnalytics {
 
     func start(configuration app: AppConfiguration = .current) async {
         guard enabled, !starting, !started else { return }
-        #if targetEnvironment(simulator)
+        // A Mac's Debug build is its simulator: test runs stay out of the counts.
+        #if targetEnvironment(simulator) || (os(macOS) && DEBUG)
         disabled = true
         queue.removeAll()
         return

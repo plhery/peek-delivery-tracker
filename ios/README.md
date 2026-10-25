@@ -170,6 +170,9 @@ npm run contract:generate   # Swift models and catalog from contracts/openapi.js
 npm run ios:resources       # translations, message map, analytics catalog, map data
 ```
 
+After changing only `src/brand`, `npm run brand:generate` writes `brand.ts` and `Brand.json`
+alone ([brand](../src/brand/README.md)).
+
 Build from `ios/`:
 
 ```bash

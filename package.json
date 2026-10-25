@@ -23,6 +23,7 @@
   },
   "scripts": {
     "contract:generate": "node scripts/generate-api-contract.mjs && node scripts/generate-brand.mjs",
+    "brand:generate": "node scripts/generate-brand.mjs && node scripts/generate-ios-resources.mjs --brand",
     "dev": "next dev",
     "build": "next build && node scripts/build-service-worker.mjs && node scripts/prepare-standalone.mjs",
     "start": "node .next/standalone/server.js",

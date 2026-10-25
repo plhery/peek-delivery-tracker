@@ -29,7 +29,8 @@ the same outline in straight lines, for the iPhone app's canvas.
 `scripts/generate-brand.mjs` writes `src/generated/brand.ts`, which leaves `points` and
 `segments` out so the browser does not download them. The iOS resource generator writes
 the whole data to `Brand.json`. Web and native parity tests check their rendering
-inputs. Run `npm run contract:generate` and `npm run ios:resources` after editing them.
+inputs. Run `npm run brand:generate` after editing them: it writes those two files alone, so
+the iPhone's catalog and detection files keep the scraper release `main` pins.
 
 Several carrier IDs can share a family. Exactly one family member declares each explicit
 palette or decal; other members only name the family. See [sources](SOURCES.md).

@@ -102,20 +102,26 @@ const files = new Map([
   ...[...outputs].map(([name, contents]) => [path.join(resources, name), contents]),
   ...infoPlistStrings(languages).map(([name, contents]) => [path.join(root, 'ios', name), contents]),
 ]);
+// --brand handles Brand.json alone, for a truck or palette change: the catalog, detection and checksum files follow
+// the scraper installed here, which can be a release main does not pin.
+const brandOnly = process.argv.includes('--brand');
+const handled = brandOnly ? new Map([...files].filter(([target]) => path.basename(target) === 'Brand.json')) : files;
 
 if (process.argv.includes('--check')) {
-  const stale = [...files].flatMap(([target, expected]) => {
+  const stale = [...handled].flatMap(([target, expected]) => {
     const current = fs.existsSync(target) ? fs.readFileSync(target) : Buffer.alloc(0);
     return current.equals(Buffer.from(expected)) ? [] : [path.relative(root, target)];
   });
   if (stale.length) {
-    throw new Error(`Generated iOS resources are stale: ${stale.join(', ')}. Run npm run ios:resources.`);
+    throw new Error(`Generated iOS resources are stale: ${stale.join(', ')}. Run npm run ${brandOnly ? 'brand:generate' : 'ios:resources'}.`);
   }
-  console.log('Generated iOS resources are current.');
+  console.log(brandOnly ? 'The generated iOS brand is current.' : 'Generated iOS resources are current.');
 } else {
-  for (const [target, contents] of files) {
+  for (const [target, contents] of handled) {
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, contents);
   }
-  console.log(`Generated iOS resources for ${Object.keys(languages).length} languages and ${Object.keys(contract['x-carriers']).length} carriers.`);
+  console.log(brandOnly
+    ? 'Generated the iOS brand.'
+    : `Generated iOS resources for ${Object.keys(languages).length} languages and ${Object.keys(contract['x-carriers']).length} carriers.`);
 }

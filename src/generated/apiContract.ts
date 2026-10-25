@@ -31559,10 +31559,10 @@ export const CARRIER_CAPABILITIES = {
     ],
     "color": "#4d148c",
     "selectable": true,
-    "timezone": "UTC",
+    "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fedex-international-connect"
     },
     "trackingUrlTemplate": "https://fictracking.fedex.com/?MyFICNumber={trackingNumber}",
     "linkRules": [

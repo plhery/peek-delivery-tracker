@@ -3,7 +3,7 @@ title: PPL tracking: shipment numbers, statuses and Parcelshops
 description: Track a PPL parcel in Czechia: the 11-digit shipment number, what PPL's English statuses mean, Parcelshops, Parcelboxes, missed deliveries and contacts.
 slug: ppl-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-25
 ---
 
 PPL (PPL CZ) is a Czech parcel carrier, part of DHL Group, that delivers to homes, Parcelshops and Parcelboxes across Czechia. Track a parcel with its 11-digit shipment number on [PPL's tracking page](https://www.ppl.cz/en/track-a-shipment), in the mojePPL app, or in the box above, then pick PPL. The number comes from the shop's shipping email or order page, or from PPL's own email and SMS.
@@ -14,11 +14,11 @@ PPL's help pages ask for "the 11-digit shipment number". PPL publishes no meanin
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `12345678901` | A PPL shipment number: 11 digits. |
+| `20000000000` | A PPL shipment number: 11 digits. |
 
-PPL doesn't publish where the number is printed. What it does say: it emails you when it accepts the parcel for transport, and sends an SMS and email when the parcel is ready for pickup. The acceptance email also carries the PIN you need to change the delivery. If you have no message at all, the shop has the number; see [how to find a tracking number](guide:find-tracking-number).
+The number is on the parcel's label, under the barcode, PPL's claims form says. PPL also emails you when it accepts the parcel for transport, and sends an SMS and email when the parcel is ready for pickup. The acceptance email also carries the PIN you need to change the delivery. If you have no message at all, the shop has the number; see [how to find a tracking number](guide:find-tracking-number).
 
-Eleven digits are a common length. GLS in Germany, Switzerland and France, Swiss Post's PostLogistics and DHL eCommerce Poland use it too, so an 11-digit number on its own doesn't prove the parcel is with PPL. Check which carrier the shop's email names; ten or twelve digits point to a typo or another carrier.
+Eleven digits are a common length. GLS (in Germany, Switzerland, France, Austria and Poland), Swiss Post's PostLogistics, Coordinadora and Mainfreight use it too, so an 11-digit number on its own doesn't prove the parcel is with PPL. Check which carrier the shop's email names; ten or twelve digits point to a typo or another carrier.
 
 mojePPL only lists a parcel when the email the sender gave PPL matches the one you signed in with.
 
@@ -50,7 +50,7 @@ You choose home delivery or a pickup point at the shop's checkout: a Parcelshop,
 
 **Not at home.** Someone else at the address can take it, but only if they give the driver the PIN. If the driver can't reach you on the first attempt, PPL says the parcel may go to the nearest pickup point.
 
-**Picking it up.** Bring the PIN from the SMS, email or mojePPL; anyone with the PIN can pick it up. PPL's customer-service answers give 7 calendar days at a Parcelshop, at most 72 hours in a PPL Parcelbox and 48 hours in a third-party box or AlzaBox. Its pickup points page gives shorter times, so trust the SMS or email, which says where the parcel is and until when. PPL Parcelbox storage can be extended in mojePPL, up to 30 calendar days. Parcels not picked up go back to the sender, and PPL doesn't deliver again.
+**Picking it up.** Bring the PIN from the SMS, email or mojePPL; anyone with the PIN can pick it up. PPL's customer-service answers give 7 calendar days at a Parcelshop, at most 72 hours in a PPL Parcelbox and 48 hours in a third-party box or AlzaBox. Its pickup points page gives shorter times, so trust the SMS or email, which says where the parcel is and until when. PPL Parcelbox storage can be extended in mojePPL, up to 30 calendar days, except when PPL shortens storage between 1 October and 31 January. Parcels not picked up go back to the sender, and PPL doesn't deliver again.
 
 **Cash on delivery.** Pay the driver in cash or with a Czech-issued card. Parcelshops may have no terminal; Parcelboxes take cards only; other boxes need payment online first, in mojePPL or via the link in the SMS or email.
 
@@ -58,7 +58,7 @@ You choose home delivery or a pickup point at the shop's checkout: a Parcelshop,
 
 PPL's pages say nothing about tracking that stops moving or lost parcels, and set no deadline for them. The sender holds the contract with PPL, and PPL handles complaints "mainly" with the sender, so start with the shop. See [tracking not updating](guide:tracking-not-updating) for how long to wait.
 
-**Damaged box:** you may accept it, but have the damage recorded in the driver's scanner. **Damaged contents in an intact box:** report it on [PPL's claims form](https://www.ppl.cz/en/claims) within 7 calendar days of delivery, with photos of the parcel, contents, filling and packaging (all labels included) and the invoice where relevant. PPL handles complete complaints within 30 days.
+**Damaged box:** you may accept it, but have the damage recorded in the driver's scanner. **Damaged contents in an intact box:** report it on [PPL's claims form](https://www.ppl.cz/en/claims) within 7 days of delivery (calendar days in PPL's help, working days in its claims rules), with photos of the parcel, contents, filling and packaging (all labels included) and the invoice where relevant. PPL handles complete complaints within 30 days.
 
 **Cash-on-delivery fraud.** PPL warns about cash-on-delivery parcels with worthless contents, often from unknown shops, and advises refusing parcels you don't remember ordering. If it happens, keep the order, payment details and photos and report it to the Czech Police at once: PPL can't refund the amount, and only the police can have it blocked.
 
@@ -76,9 +76,9 @@ PPL publishes no phone line for recipients. The email info@ppl.cz and the number
 
 ## Tracking PPL parcels with Peek
 
-[Peek](/) can't tell a PPL number from its 11 digits, and can't ask PPL whether it knows one. It asks GLS Germany, [GLS Switzerland](carrier:gls-ch), GLS France, PostLogistics and DHL eCommerce Poland instead, so pick "PPL" with "Change", or paste a ppl.cz tracking link with `shipmentId=`, which Peek reads as PPL's. A dhl.com link with a PPL number won't work.
+[Peek](/) can't tell a PPL number from its 11 digits alone, so it asks the carriers whose numbers look the same, PPL among them, along with GLS, [GLS Switzerland](carrier:gls-ch), PostLogistics, Coordinadora and Mainfreight, and names the one that knows it. You can also pick "PPL" with "Change", or paste a ppl.cz tracking link with `shipmentId=`, which Peek reads as PPL's. A dhl.com link with a PPL number won't work.
 
-Peek reads PPL's English statuses as written, with times in Prague time. It shows the expected delivery day while PPL gives one, the weight, the delivery time and the Parcelshop or Parcelbox name while the parcel waits there. PPL gives no places for its scans. Peek leaves out the delivery window, sender, customer reference, the pickup point's address, cash-on-delivery details and proof of delivery. It checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you when the status changes. It doesn't follow parcels between PPL and DHL or a partner abroad, and doesn't take SmartPIN codes.
+Peek reads PPL's English statuses as written, with times in Prague time. It shows the expected delivery day while PPL gives one, the weight, the delivery time and the Parcelshop or Parcelbox name while the parcel waits there. PPL gives no places for its scans. Peek leaves out the delivery window, sender, customer reference, the pickup point's address, cash-on-delivery details and proof of delivery. It checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you when the status changes. When PPL's reply links a partner abroad's tracker with the partner's number, Peek names that partner as the one delivering. It doesn't take SmartPIN codes.
 
 ## Questions about PPL tracking
 
@@ -109,6 +109,8 @@ Not quite: PPL is a Czech carrier that has been part of DHL Group since 2006 and
 - [PPL CZ: Beware of fraudulent cash-on-delivery parcels](https://www.ppl.cz/en/w/beware-of-fraudulent-cash-on-delivery-parcels) – cash-on-delivery fraud, police
 - [PPL CZ: Dispute resolution](https://www.ppl.cz/en/dispute-resolution) – ČTÚ and ČOI
 - [PPL CZ: Contact form](https://www.ppl.cz/en/contact-form) – web form
-- [PPL CZ: Claims](https://www.ppl.cz/en/claims) – damage form
+- [PPL CZ: Claims](https://www.ppl.cz/en/claims) – damage form, number under the barcode
+- [PPL CZ: Reklamační řád](https://www.ppl.cz/reklamacni-rad) – claims rules: 7 working days for damage
+- [PPL CZ: Všeobecné podmínky doručování zásilek](https://www.ppl.cz/documents/20122/1825980/ppl_cz_obchodni_podminky.pdf/80b8645c-14e6-e5ce-b9ca-06c60a9c8239) – storage shortened from October to January
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

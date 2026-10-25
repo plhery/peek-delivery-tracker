@@ -3,7 +3,7 @@ title: Packeta tracking: Z numbers, statuses and pickup points
 description: Track a Packeta (Zásilkovna) parcel: what the Z number looks like, what each status means, how long pickup points keep parcels and how to reach Packeta.
 slug: packeta-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-25
 ---
 
 Packeta is the group brand behind Zásilkovna, its Czech name, and ships to 33 countries. Track a parcel on [Packeta's tracking page](https://tracking.packeta.com/en/), in the Packeta app or in the box above. The number is a `Z` and ten digits, found in Packeta's email, its SMS or the app.
@@ -35,12 +35,12 @@ These are Packeta's English step sentences, in the order a parcel meets them; "�
 | `The parcel has been handed over to the carrier…` | Passed to the company that delivers it, often a partner carrier abroad. |
 | `…on its way to you…` | Out for delivery. |
 | `The parcel is ready for pickup…` | Waiting at the pickup point or Z-BOX. Use your pick-up code. |
-| `Last day to pick up your parcel.` | Today is the last day. Tomorrow it goes back to the sender. |
+| `Last day to pick up your parcel.` | Today is the last day to collect it: extend storage if the page offers it, or it goes back to the sender. |
 | `The package has been delivered` | Picked up or delivered. |
 | `…investigating the status of the parcel…` | Something went wrong and Packeta is looking into it. |
 | `Return (on the way back)` | On its way back to the sender. |
 
-`The parcel has been handed over to the carrier…` means another company now has it: Packeta's own drivers deliver only in Czechia and Slovakia, partner carriers elsewhere. On the last day the page may also say `Your parcel will wait for you only today!`, with a button to extend storage. A finished return reads `We have returned the parcel back to the sender.` or `Returned to sender`.
+`The parcel has been handed over to the carrier…` means another company now has it: Packeta's own drivers deliver only in Czechia and Slovakia, partner carriers elsewhere. On the last day the tracking page shows `Last day to pick up your parcel.` with a button to extend storage, or `Your parcel will wait for you only today!` once storage can't be extended any more. A finished return reads `We have returned the parcel back to the sender.` or `Returned to sender`.
 
 `Parcel not found` means Packeta doesn't know the number, or no longer shows an old one. Check the `Z` and ten digits.
 
@@ -48,17 +48,19 @@ These are Packeta's English step sentences, in the order a parcel meets them; "�
 
 Packeta says you have 7 days to pick a parcel up, with the code from the SMS or email, and can extend storage twice for free. In Czechia that makes 7 + 7 + 7, so 21 days at most, and an ID with your name works instead of the code. In Poland, an SMS to Packeta extends it to 21 days for free. Extend on the tracking page or in the app; storage may be shorter at Christmas. Someone else can pick it up with your code.
 
-**Z-BOX lockers** (Czechia, Slovakia, Hungary, Romania) open 24/7 with the app over Bluetooth. In Czechia a parcel waits 2 calendar days, plus 1 if extended.
+**Z-BOX lockers** (Czechia, Slovakia, Hungary, Romania) open 24/7 with the app over Bluetooth; in Czechia a six-digit code typed on the keypad opens them too. In Czechia a parcel waits 2 calendar days, plus 1 if extended.
 
-**Home delivery.** In Czechia and Slovakia Packeta's drivers send a window of about 90 minutes; if they miss you, the parcel can go to the nearest pickup point. Elsewhere partner carriers deliver.
+**Home delivery.** In Czechia and Slovakia Packeta's drivers send a window of about 90 minutes; if they miss you, the parcel can go to the nearest pickup point. In Czechia the driver calls you twice on arrival and tries the address once: a missed parcel goes to the nearest pickup point with room, where you can collect it the same day. Elsewhere partner carriers deliver.
 
-**Not picked up?** In Czechia it goes back to the sender automatically. Packeta's pages don't say how many delivery attempts it makes or whether it delivers at weekends.
+**Not picked up?** In Czechia it goes back to the sender automatically.
+
+**Weekends.** Zásilkovna delivers to addresses on working days only. In Prague, Brno and Ostrava it also fills Z-BOXes and some pickup points on Saturdays.
 
 ## Packeta parcel not moving, damaged or returned
 
-**No update for days.** Packeta gives no advice here; ask the shop, which booked the shipment. See [tracking that isn't updating](guide:tracking-not-updating).
+**No update for days.** In Czechia, once a parcel hasn't moved for more than 24 hours, Zásilkovna asks you to write through its contact form (topic "Kde je moje zásilka?") and say what the parcel holds. The shop booked the shipment, so it can chase it too. See [tracking that isn't updating](guide:tracking-not-updating).
 
-**Not received.** The sender files the claim, within 20 calendar days of handing the parcel over under Packeta's terms, so contact the shop. Delivered but missing? Read [delivered but not received](guide:delivered-not-received).
+**Not received.** The sender claims for a lost parcel, so contact the shop. Under Zásilkovna's terms for shops, it must report a parcel not delivered within 20 days of posting it and claim within 3 months. Delivered but missing? Read [delivered but not received](guide:delivered-not-received).
 
 **Damaged.** Claim yourself on claims.packeta.com/en ("I am the recipient") within five working days of receipt; Packeta answers within 30 days. Pickup points don't take claims. In Poland, Packeta sends recipients to the shop.
 
@@ -78,11 +80,11 @@ As read on 11 October 2026:
 
 ## Tracking Packeta parcels with Peek
 
-[Peek](/) recognises a `Z` and ten digits as Packeta at once. Without the `Z`, it asks other carriers such as Relais Colis; pick Packeta with "Change". Links from tracking.packeta.com work, and packeta.com links with `id=`; zasilkovna.cz links only with the `Z` number inside. No postcode needed.
+[Peek](/) recognises a `Z` and ten digits as Packeta at once. Ten digits without the `Z` fit several carriers, so Peek asks them, Packeta among them unless the first digit is 0, and names the one that knows the number; you can also pick Packeta with "Change". Links from tracking.packeta.com work, and packeta.com links with `id=`; zasilkovna.cz links only with the `Z` number inside. No postcode needed.
 
 Peek reads Packeta in English and shows its sentences as written (`Returned to sender` in Peek's words): the status, the newest 20 scans, the shop that sent it, the delivery time and the pickup point or Z-BOX address when the parcel heads there (none for home delivery or returns). It drops your name, address, phone and signature.
 
-Packeta gives no scan places, so nothing lands on the map, and no expected delivery. Times are Prague time (Romanian depot scans may be an hour off). Peek doesn't follow a partner carrier. It checks every 10 minutes by day, every 2 once out for delivery, and hourly overnight, and can notify you of changes.
+Scans that name a depot or pickup point show it as the place, and those naming a town go on the map. Packeta gives no expected delivery. Times are Prague time (Romanian depot scans may be an hour off). When a scan links a partner carrier's tracker Peek knows, Peek names that partner as the one delivering and, when Peek can track the partner itself, follows the parcel there once it shows fresh progress. It checks every 10 minutes by day, every 2 once out for delivery, and hourly overnight, and can notify you of changes.
 
 ## Questions about Packeta tracking
 
@@ -111,6 +113,10 @@ Yes, as Packeta Poland, with its own phone line and pickup points; Z-BOX lockers
 - [Zásilkovna: Glossary of terms, Packeta](https://www.zasilkovna.cz/en/glossary-of-terms/packeta) – Packeta and Zásilkovna, Czech phone and hours
 - [Zásilkovna: Fraudulent SMS](https://www.zasilkovna.cz/en/cybersecurity/sms) – fake SMS warning
 - [Packeta: General terms and conditions](https://www.packeta.com/general-terms-conditions) – claim rights and deadlines, 30-day answer, pickup points
+- [Zásilkovna: Obchodní podmínky](https://files.packeta.com/web/files/VOP_Zasilkovna.pdf) – shops' terms: 20 days to report, 3 months to claim a loss
+- [Zásilkovna: Zákaznická podpora](https://www.zasilkovna.cz/zakaznicky-servis/vyhledavani) – one delivery attempt, contact form after 24 hours, six-digit Z-BOX code
+- [Zásilkovna: Doručení domů](https://www.zasilkovna.cz/domu) – two calls, working days
+- [Zásilkovna: Doručujeme i v sobotu](https://www.zasilkovna.cz/blog/v-praze-brne-a-ostrave-dorucujeme-i-v-sobotu) – Saturday delivery to Z-BOXes and pickup points
 - [Packeta blog: How to claim a parcel](https://blog.packeta.com/how-to-claim-a-parcel/) – who claims, claims form
 - [Packeta.pl: Kontakt i reklamacje](https://www.packeta.pl/kontakt) – Polish phone, hours, forms
 - [Packeta.pl: Jak dokładnie działa odbiór paczek](https://www.packeta.pl/doreczanie) – Polish storage times, SMS extension

@@ -2794,6 +2794,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "cs": [
     {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-sledovani-zasilky",
+      "title": "Sledování zásilky Zásilkovny: číslo Z, stavy a Z-BOX",
+      "name": "Packeta",
+      "color": "#ba1b02"
+    },
+    {
+      "id": "ppl",
+      "catalog": "ppl",
+      "slug": "ppl-sledovani-zasilky",
+      "title": "PPL sledování zásilky: číslo, stavy a výdejní místa",
+      "name": "PPL",
+      "color": "#004b93"
+    },
+    {
       "id": "ceska-posta",
       "catalog": "ceska-posta",
       "slug": "ceska-posta-sledovani-zasilek",

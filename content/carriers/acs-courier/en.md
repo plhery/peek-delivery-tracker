@@ -52,9 +52,11 @@ The "Shipment Status" column sums things up. `In Transit` usually means on its w
 
 **Can't be reached.** With missing contact details or an unclear address, ACS keeps the parcel at the destination store for 5 calendar days, then sends it back.
 
-**Lockers in Greece.** Open the ACS Smartpoint Locker with the shipping number and the 6-digit PIN from the SMS or Viber. Lost it? Resend it from the locker screen. The parcel usually waits 3 calendar days, then 3 more working days at the ACS store serving that locker, then goes back to the sender. Lockers take parcels up to 10 kg.
+ACS's Smartpoint Lockers come with or without a screen, and the two open differently.
 
-**Lockers in Cyprus.** Open them with the link in the SMS, Viber or email, or with the ACS Mobile App over Bluetooth. A parcel usually waits 2 calendar days, then you collect it from the ACS store named in an SMS.
+**Lockers with a screen.** Open the locker with the shipping number and the 6-digit PIN from the SMS or Viber. Lost it? Resend it from the locker screen. The parcel usually waits 3 calendar days, then 3 more working days at the ACS store serving that locker, then goes back to the sender. Lockers take parcels up to 10 kg.
+
+**Lockers without a screen**, in Greece and Cyprus. Open them with the link in the SMS, Viber or email, or with the ACS Mobile App over Bluetooth. ACS's Greek instructions also mention a 6-digit PIN on the keypad, but the questions on the same page say no PIN is needed. You can't pay by card at these lockers for now, and ACS advises against passing the details to someone else. A parcel usually waits 2 calendar days, then you collect it from the ACS store (in Cyprus, the one named in an SMS).
 
 ## ACS parcel late, lost or damaged
 
@@ -115,6 +117,7 @@ For complaints in Greece, info@acscourier.gr; in Cyprus, helpdesk@acscyprus.com.
 - [ACS Courier: Mobile υπηρεσία ACS ReDirect](https://www.acscourier.net/el/plirofories/xrisimes-plirofories/ta-nea-tis-acs/mobile-uperesia-acs-redirect/) – ReDirect options
 - [ACS Courier: ACS Mobile App](https://www.acscourier.net/en/myacs/my-tools/acs-mobile-app/) – rescheduling in the app
 - [ACS Courier: Pickup from an ACS Locker with monitor](https://www.acscourier.net/en/services/domestic-courier-services/pickup-from-an-acs-locker-with-monitor/) – PIN, holding time, size, card payment, locker phone
+- [ACS: Παραλαβή από ACS Locker χωρίς οθόνη](https://www.acscourier.net/el/ypiresies/taxymetafores-eswterikoy/paralabe-apo-acs-locker-xoris-othoni/) – lockers without a screen in Greece: link, app, PIN, 2 days, no card payment
 - [ACS Courier: Pickup from ACS Locker via message link or ACS Mobile App](https://cyp.acscourier.net/en/services/domestic-courier-services/pickup-from-acs-locker-via-message-link-or-acs-mobile-app/) – Cyprus lockers, 2 days, payment
 - [ACS Courier: Frequent questions](https://www.acscourier.net/en/customer-support/information-desk/frequent-questions/) – lost or damaged parcels, delivery branch
 - [ACS Courier: Charter of Obligations to Consumers](https://www.acscourier.net/media/esdlz505/acs_xyk_12_01082026_eng.pdf) – reservation, loss, delay, 21 days, hours, email

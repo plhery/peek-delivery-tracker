@@ -3,7 +3,7 @@ title: Vinted Go seguimiento: estados, taquillas y contacto
 description: Sigue tu paquete Vinted Go: dónde está el código de seguimiento, qué significa cada estado, cuánto espera en la taquilla y a quién acudir si algo falla.
 slug: vinted-go-seguimiento
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-25
 ---
 
 Vinted Go es el servicio de paquetería del propio Vinted: lleva los paquetes vendidos en Vinted desde una taquilla o tienda de paquetería hasta otra taquilla o tienda de paquetería. Para seguir el tuyo, abre la conversación del pedido en Vinted y pulsa «Rastrear paquete», o escribe el número en la [página de seguimiento de Vinted Go](https://vintedgo.com/es/tracking?country=es&region=europe).
@@ -12,12 +12,14 @@ Vinted Go es el servicio de paquetería del propio Vinted: lleva los paquetes ve
 
 Está en la conversación del pedido en Vinted. Allí, además de «Rastrear paquete», puedes seguir el enlace a la página de seguimiento de la empresa de paquetería o copiar el número de seguimiento. Vinted avisa de que la información de seguimiento puede tardar hasta 48 horas en aparecer después de que el vendedor envíe el paquete.
 
-Vinted Go no publica la longitud ni el formato de sus números. La lista de transportistas de Peek los reconoce por esta forma: 16 cifras, empiezan por 17 o 18 y la última es un dígito de control:
+Vinted Go no publica la longitud ni el formato de sus números. Estas son las formas que conoce la lista de transportistas de Peek:
 
 | Número (inventado) | Qué es |
 | --- | --- |
 | `1700000000000001` | La forma de un número de Vinted Go: 16 cifras que empiezan por 17 o 18. DHL eCommerce, TNT y Evri también usan números de 16 cifras. |
 | `1700000000000002` | 16 cifras cuyo último dígito no cuadra: no tiene la forma de un número de Vinted Go. |
+| `VGS00000000000000` | `VGS` y 13 o 14 cifras: un número al que responde el seguimiento de Vinted Go, y solo el suyo. |
+| `ABC0UW0000000000` | 16 caracteres: 3 letras, una cifra, `UW`, una cifra y 9 letras o cifras. El seguimiento de Vinted Go también responde a estos códigos. |
 
 Dos cosas que se confunden con facilidad:
 
@@ -75,7 +77,7 @@ Aquí no tratas con Vinted Go sino con Vinted: su servicio de atención al clien
 
 ## Vinted Go teléfono y contacto
 
-A 11 de octubre de 2026, ni vintedgo.com ni la ayuda de Vinted dan un teléfono, correo o formulario de Vinted Go para compradores.
+A 25 de octubre de 2026, ni vintedgo.com ni la ayuda de Vinted dan para España un teléfono, correo o formulario de Vinted Go para compradores.
 
 - **Problemas con el pedido** (retraso, pérdida, daños, artículo equivocado): el equipo de asistencia de Vinted, entrando en tu cuenta y pulsando «Tengo un problema» en el pedido.
 - **Problemas en una taquilla:** pulsa el botón «?» en la pantalla de inicio de la taquilla para ver el teléfono del servicio de asistencia de Vinted Go. El horario de atención aparece en la misma pantalla. Si la pantalla no funciona, la ayuda de Vinted sugiere volver al día siguiente o al otro para ver si se ha resuelto.
@@ -86,9 +88,9 @@ Vinted avisa de que el phishing también llega por mensajes de texto a tu teléf
 
 [Peek](/) consulta directamente el seguimiento de Vinted Go, sin cuenta ni código postal. Muestra cada escaneo con su hora y la ciudad de cada centro de clasificación, bajo un titular con sus propias palabras («Listo para recoger», «Entregado»). La consulta se hace en inglés, así que el historial sale con los textos ingleses de Vinted Go, como `Ready to collect at the locker`, y no con los de la página en español. Mientras el paquete te espera, verás el nombre de la taquilla o la tienda de paquetería; cuando lo recojas, dónde y a qué hora. Las viviendas particulares no se nombran, y la dirección del punto, su horario y el plazo para recoger se quedan en la página de Vinted Go. Tampoco hay fecha prevista de entrega. En cuanto el paquete emprende la vuelta al vendedor, el titular pasa a «Devuelto al remitente».
 
-Si escribes solo el número de 16 cifras, Peek pregunta a Vinted Go, a TNT y a DHL eCommerce si lo conocen, y se queda con Vinted Go cuando es este quien lo conoce. Si no, pulsa «Cambiar» y elige «Vinted Go», o pega el enlace de seguimiento de vintedgo.com, con o sin el idioma: Vinted Go queda reconocido al momento. Vinted Go deja de dar el seguimiento de un paquete seis meses después de crearse su etiqueta.
+Un número que empieza por `VGS` Peek lo reconoce al momento como de Vinted Go. Si escribes solo el número de 16 cifras, Peek pregunta a Vinted Go, a TNT y a DHL eCommerce si lo conocen, y se queda con Vinted Go cuando es este quien lo conoce; por un código `UW` pregunta a Vinted Go. Si no, pulsa «Cambiar» y elige «Vinted Go», o pega el enlace de seguimiento de vintedgo.com, con o sin el idioma: Vinted Go queda reconocido al momento. Vinted Go deja de dar el seguimiento de un paquete seis meses después de crearse su etiqueta.
 
-Se consulta cada 10 minutos de día (también mientras el paquete espera en el punto) y cada hora por la noche, y puedes recibir notificaciones cuando cambia el estado. Si Vinted Go pasa el paquete a otra red con un número de seguimiento nuevo, Peek puede seguirlo con ese transportista cuando lo lee directamente. Peek no puede contactar con Vinted ni con Vinted Go, ni abrir una reclamación por ti.
+Se consulta cada 10 minutos de día y cada hora por la noche, y también cada hora en cuanto pasan 48 horas sin un escaneo nuevo, y puedes recibir notificaciones cuando cambia el estado. Si Vinted Go pasa el paquete a otra red con un número de seguimiento nuevo, Peek puede seguirlo con ese transportista cuando lo lee directamente. Peek no puede contactar con Vinted ni con Vinted Go, ni abrir una reclamación por ti.
 
 ## Preguntas sobre el seguimiento de Vinted Go
 

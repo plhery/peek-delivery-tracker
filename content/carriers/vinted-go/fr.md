@@ -3,7 +3,7 @@ title: Vinted Go suivi : statuts, consigne, point relais et contact
 description: Suivre un colis Vinted Go : où trouver le numéro, ce que veut dire chaque statut, combien de temps le colis t'attend en consigne et qui contacter en cas de souci.
 slug: vinted-go-suivi
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-25
 ---
 
 Vinted Go est le service de livraison de Vinted : il achemine les colis vendus sur Vinted d'une consigne ou d'un point relais vers une autre consigne, un point relais ou un voisin relais, et en France parfois jusqu'à ta porte. Pour suivre ton colis, ouvre la conversation de la commande sur Vinted et clique sur « Suivre le colis », ou saisis le numéro sur la [page de suivi de Vinted Go](https://vintedgo.com/fr/tracking).
@@ -12,12 +12,14 @@ Vinted Go est le service de livraison de Vinted : il achemine les colis vendus s
 
 Le numéro est dans la conversation de ta commande sur Vinted. Clique sur « Suivre le colis » : tu peux aussi ouvrir le lien vers la page de suivi du transporteur ou copier le numéro de suivi pour le coller ailleurs. Selon Vinted, il faut parfois jusqu'à 48 h pour que les informations de suivi apparaissent après l'envoi.
 
-Vinted Go ne publie pas de format pour ses numéros. Ceux que connaît la liste de transporteurs de Peek ont 16 chiffres, commencent par 17 ou 18 et finissent par un chiffre de contrôle :
+Vinted Go ne publie pas de format pour ses numéros. Voici les formes que connaît la liste de transporteurs de Peek :
 
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
 | `1700000000000001` | La forme d'un numéro Vinted Go : 16 chiffres qui commencent par 17 ou 18. DHL eCommerce, TNT et Evri utilisent aussi des numéros à 16 chiffres. |
 | `1700000000000002` | 16 chiffres dont le dernier ne colle pas avec le calcul de contrôle : ce n'est pas la forme d'un numéro Vinted Go. |
+| `VGS00000000000000` | `VGS` puis 13 ou 14 chiffres : un numéro auquel répond le suivi de Vinted Go, et lui seul. |
+| `ABC0UW0000000000` | 16 caractères : 3 lettres, un chiffre, `UW`, un chiffre, puis 9 lettres ou chiffres. Le suivi de Vinted Go répond aussi à ces codes. |
 
 Deux choses à ne pas confondre :
 
@@ -78,10 +80,10 @@ C'est Vinted qu'il faut contacter, pas Vinted Go : le service client de Vinted t
 
 ## Vinted Go contact : téléphone et service client
 
-Relevé le 11 octobre 2026 : ni vintedgo.com ni l'aide de Vinted ne donnent de numéro de téléphone, d'adresse e-mail ou de formulaire Vinted Go pour les acheteurs.
+Relevé le 25 octobre 2026 : Vinted Go ne donne aux acheteurs ni adresse e-mail ni formulaire, et son téléphone sert à l'aide aux consignes.
 
 - **Problème de commande** (retard, perte, colis abîmé, mauvais article) : l'équipe support de Vinted, en te connectant à ton compte et en cliquant sur « J'ai un problème » dans la conversation.
-- **Problème à une consigne**, en France, en Belgique et en Espagne : appuie sur le bouton « ? » de l'écran d'accueil de la consigne pour voir le numéro du support téléphonique de Vinted Go. Les horaires du support s'affichent sur le même écran.
+- **Problème à une consigne**, en France, en Belgique, aux Pays-Bas et en Espagne : appuie sur le bouton « ? » de l'écran d'accueil de la consigne pour voir le numéro du support téléphonique de Vinted Go. Les horaires du support s'affichent sur le même écran. Pour la Belgique, la FAQ de Vinted Go donne aussi le numéro : +31 20 793 2587, en anglais et en français.
 - **Problème à une consigne au Portugal** : appuie sur « Obter ajuda » et scanne avec ton téléphone le code QR affiché à l'écran. Un chat s'ouvre avec le support de Vinted Go, tous les jours de 7 h à 22 h (heure locale).
 - **L'écran de la consigne ne marche pas** au moment du retrait : Vinted conseille de revenir le lendemain ou le surlendemain.
 
@@ -91,9 +93,9 @@ Vinted prévient que l'hameçonnage passe aussi par SMS. Transfère les e-mails 
 
 [Peek](/) lit directement le suivi de Vinted Go, sans compte ni code postal. Il affiche chaque scan avec son heure et la ville de chaque centre de tri, sous un titre à lui (« Prêt à être retiré », « Livré »). Vinted Go est interrogé en anglais : l'historique garde donc ses libellés anglais, comme `Ready to collect at the locker`, et pas ceux de la page française. Tant que le colis t'attend, Peek nomme la consigne ou le point relais ; une fois le colis retiré, il indique où et à quelle heure. Les voisins relais ne sont pas nommés, et l'adresse du point, ses horaires et la date limite de retrait restent sur la page de Vinted Go. Pas de date de livraison prévue non plus. Dès que le colis repart vers le vendeur, le titre passe à « Retourné à l’expéditeur ».
 
-Si tu saisis seulement le numéro à 16 chiffres, Peek demande à Vinted Go, à TNT et à DHL eCommerce s'ils le connaissent, et retient Vinted Go si c'est lui qui le connaît. Sinon, appuie sur « Changer » et choisis « Vinted Go », ou colle le lien de suivi vintedgo.com, avec ou sans la langue dedans : Vinted Go est reconnu tout de suite.
+Un numéro qui commence par `VGS`, Peek le reconnaît tout de suite comme Vinted Go. Si tu saisis seulement le numéro à 16 chiffres, Peek demande à Vinted Go, à TNT et à DHL eCommerce s'ils le connaissent, et retient Vinted Go si c'est lui qui le connaît ; pour un code `UW`, il interroge Vinted Go. Sinon, appuie sur « Changer » et choisis « Vinted Go », ou colle le lien de suivi vintedgo.com, avec ou sans la langue dedans : Vinted Go est reconnu tout de suite.
 
-Le suivi est vérifié toutes les 10 minutes en journée (y compris quand le colis attend au point) et toutes les heures la nuit, et tu peux recevoir des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Si Vinted Go confie le colis à un autre réseau avec un nouveau numéro de suivi, Peek peut le suivre chez ce transporteur, s'il le lit directement. Peek ne peut pas contacter Vinted ou Vinted Go, ni signaler un problème à ta place.
+Le suivi est vérifié toutes les 10 minutes en journée et toutes les heures la nuit, toutes les heures aussi dès que 48 heures passent sans nouveau scan, et tu peux recevoir des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Si Vinted Go confie le colis à un autre réseau avec un nouveau numéro de suivi, Peek peut le suivre chez ce transporteur, s'il le lit directement. Peek ne peut pas contacter Vinted ou Vinted Go, ni signaler un problème à ta place.
 
 ## Questions sur le suivi Vinted Go
 
@@ -107,7 +109,7 @@ Les conditions de Vinted Go visent 3 à 6 jours ouvrés entre le dépôt et ton 
 
 ### Quel est le numéro de téléphone de Vinted Go ?
 
-Il n'est affiché que sur les consignes : en France, en Belgique et en Espagne, le bouton « ? » de l'écran le donne ; au Portugal, la consigne ouvre un chat à la place. Pour tout le reste, tu passes par le support de Vinted.
+Seulement pour l'aide aux consignes. En Belgique, c'est le +31 20 793 2587 (en anglais et en français) ; en France, en Belgique, aux Pays-Bas et en Espagne, le bouton « ? » de l'écran de la consigne le donne ; au Portugal, la consigne ouvre un chat à la place. Pour tout le reste, tu passes par le support de Vinted.
 
 ### Que faire si le point relais Vinted Go est fermé ?
 
@@ -119,6 +121,7 @@ Le suivi peut mettre jusqu'à 48 h à apparaître après l'envoi, et un numéro 
 
 :::sources
 - [Vinted Go : Foire aux questions](https://vintedgo.com/fr/faq?country=fr&region=europe) – code de retrait, 7 jours, autre point proche, 25 jours ouvrés, 2 jours pour signaler, suivi sans mise à jour, téléphone de la consigne
+- [Vinted Go : Foire aux questions (Belgique)](https://vintedgo.com/fr/faq?country=be&region=europe) – téléphone des consignes en Belgique
 - [Vinted Go : Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – point relais fermé, 7 jours pour retirer
 - [Vinted Go : Conditions générales](https://vintedgo.com/fr/terms-and-conditions?country=fr&region=europe) – société, types de points, rappel après 3 jours, 7 jours calendaires, tentatives à domicile, 3 à 6 jours ouvrés, colis abîmé en consigne, réclamations via Vinted
 - [Vinted Go : Suivre ton colis](https://vintedgo.com/fr/tracking) – formulaire de suivi, langues du site, libellés des statuts, colis introuvable
@@ -126,6 +129,7 @@ Le suivi peut mettre jusqu'à 48 h à apparaître après l'envoi, et un numéro 
 - [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – numéro dans la conversation, 48 h, 25 jours ouvrés, livré mais pas reçu, Bien reçu
 - [Vinted : Envoi avec Vinted Go](https://www.vinted.fr/help/1110) – trajets, livraison à domicile avec Uber Direct, disponibilité
 - [Vinted : Récupérer un colis](https://www.vinted.fr/help/1601) – colis non retiré, commande annulée et remboursée
+- [Vinted : Hulp met een Vinted Go locker](https://www.vinted.nl/help/1109) – bouton « ? » aux Pays-Bas
 - [Vinted : Comment utiliser les consignes Vinted Go ?](https://www.vinted.fr/help/1109) – support téléphonique via le bouton « ? », écran en panne, 2 et 14 jours
 - [Vinted Belgique : Comment utiliser les consignes Vinted Go ?](https://www.vinted.be/help/1109) – même support en Belgique
 - [Vinted Espagne : Ayuda en las taquillas de Vinted Go](https://www.vinted.es/help/1109) – même support en Espagne

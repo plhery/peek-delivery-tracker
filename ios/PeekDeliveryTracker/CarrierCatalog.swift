@@ -819,8 +819,39 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             let keyword = labelled.replacingOccurrences(of: "[.-]+$", with: "", options: .regularExpression)
             if Self.validInText(keyword) { return makeMatch(keyword, source: .text) }
         }
-        if !input.contains("://"), valid(input) { return makeMatch(input, source: .number) }
+        if let whole = numberEnteredWhole(input) { return makeMatch(whole.number, source: whole.labelled ? .text : .number) }
         return Self.emptyMatch
+    }
+
+    /// Words that offer a second number: "1234567899 or 9987654321" holds two.
+    private static let alternativeWords: Set<String> = ["or", "oder", "ou", "o", "of", "lub"]
+
+    /// A word naming the code after it, alone or after another word ("Pickup code"), and the rest of
+    /// the entry. German and Dutch join theirs into one word: Abholcode, Sendungsnummer.
+    private static let entryLabelPattern =
+        "^(?:\\p{L}+\\s+)?(?:\\p{L}*(?:code|nummer)|number|numer|numero|número|numéro|nr|kod|codice|codigo|código)"
+        + "[.:#\\s]+(?=[0-9])([\\s\\S]*)"
+
+    /// The number a short entry holds whole, groups a label prints apart included, as in
+    /// "1Z 999 AA1 01 2345 6784", as the shared engine reads it (`numberEnteredWhole`). A word offering
+    /// a second number leaves it unread, and a label word before the digits is no part of it, unless a
+    /// carrier confidently claims the two together.
+    private func numberEnteredWhole(_ input: String) -> (number: String, labelled: Bool)? {
+        guard !input.contains("://") else { return nil }
+        var alternatives = [""]
+        for word in input.split(whereSeparator: \.isWhitespace) {
+            if Self.alternativeWords.contains(word.lowercased()) {
+                alternatives.append("")
+            } else {
+                alternatives[alternatives.count - 1] += word
+            }
+        }
+        guard alternatives.filter({ Self.matches($0, pattern: "[0-9]") }).count <= 1 else { return nil }
+        if let number = Self.capture(input, pattern: Self.entryLabelPattern, caseInsensitive: true),
+           detect(input).confidence != .high, valid(number) {
+            return (number, true)
+        }
+        return valid(input) ? (input, false) : nil
     }
 
     /// A number in prose whose shape fits a carrier without proving one: "Track it with DHL: 1234567899".

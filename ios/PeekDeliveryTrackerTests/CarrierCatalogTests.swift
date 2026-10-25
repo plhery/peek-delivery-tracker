@@ -728,6 +728,35 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(catalog.parse("Shipment tracking: delayed").source, TrackingInputMatch.Source.none)
     }
 
+    func testLeavesALabelWordOutOfAShortEntry() {
+        for (text, number) in [
+            ("Abholcode 123456", "123456"),
+            ("Abholcode: 123456", "123456"),
+            ("Pickup code 123456", "123456"),
+            ("Sendungsnummer 0034 0434 1234 5678", "0034 0434 1234 5678"),
+            ("Nr. 12345678", "12345678"),
+            ("Numéro 12345678", "12345678"),
+        ] {
+            let parsed = catalog.parse(text)
+            XCTAssertEqual(parsed.trackingNumber, number, text)
+            XCTAssertEqual(parsed.source, .text, text)
+        }
+        // Letters a carrier prints apart from its digits stay on the number.
+        for text in ["QZX 123456", "ABCD 1234567", "LP 00123456789012", "1111 2222 3333 4444", "1Z 999 AA1 01 2345 6784", "abholcode123456"] {
+            let parsed = catalog.parse(text)
+            XCTAssertEqual(parsed.trackingNumber, text, text)
+            XCTAssertEqual(parsed.source, .number, text)
+        }
+    }
+
+    func testReadsNoSingleNumberFromTwoJoinedByAWord() {
+        for word in ["or", "oder", "ou", "o", "of", "lub", "OR"] {
+            let text = "5555666677 \(word) 7777888899"
+            XCTAssertEqual(catalog.parse(text).trackingNumber, "", text)
+            XCTAssertEqual(catalog.parse(text).source, TrackingInputMatch.Source.none, text)
+        }
+    }
+
     func testParsesGeodisHashLinkAndExposesFrenchCarriersInThePicker() {
         let parsed = catalog.parse(
             "https://espace-client.geodis.com/services/destinataires/#/fr/suivi/1G123GEODIS0"

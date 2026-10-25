@@ -7,8 +7,8 @@
     },
     {
       "shop": "shein",
-      "shape": "GSH and 12 letters or digits: GSH000000000000.",
-      "pattern": "(?:^|[^A-Za-z0-9_-])GSH[A-Z0-9]{12}(?![A-Za-z0-9_-])"
+      "shape": "GSH, GSO or GSU and 12 letters or digits: GSU000000000000. Shein's orders in the United States start GSU and in the United Kingdom GSO.",
+      "pattern": "(?:^|[^A-Za-z0-9_-])GS[HOU][A-Z0-9]{12}(?![A-Za-z0-9_-])"
     },
     {
       "shop": "shopee",
@@ -245,6 +245,19 @@
     {
       "text": "gsh0a1b2c3d4e5f",
       "shop": "shein"
+    },
+    {
+      "text": "GSU0123456789AB",
+      "shop": "shein"
+    },
+    {
+      "text": "GSO1A2B3C4D5E6F",
+      "shop": "shein"
+    },
+    {
+      "text": "GSX1A2B3C4D5E6F",
+      "shop": null,
+      "why": "Only the prefixes Shein's orders are seen with: GSH, GSO and GSU."
     },
     {
       "text": "Your Shein order GSH0A1B2C3D4E5F has shipped",

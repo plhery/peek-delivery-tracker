@@ -1,5 +1,11 @@
 #if os(iOS)
 import UIKit
+typealias PlatformApplication = UIApplication
+typealias PlatformApplicationDelegate = UIApplicationDelegate
+#else
+import AppKit
+typealias PlatformApplication = NSApplication
+typealias PlatformApplicationDelegate = NSApplicationDelegate
 #endif
 import UserNotifications
 
@@ -13,7 +19,7 @@ extension Notification.Name {
 }
 
 @MainActor
-final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+final class AppDelegate: NSObject, PlatformApplicationDelegate, UNUserNotificationCenterDelegate {
     static private(set) var currentDeviceToken: String?
     static private(set) var pendingParcelID: UUID?
     static private(set) var pendingFriendID: UUID?
@@ -45,6 +51,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         NotificationCenter.default.post(name: .didOpenParcelNotification, object: parcelID)
     }
 
+    #if os(iOS)
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
@@ -54,7 +61,21 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         return true
     }
 
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken token: Data) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UNUserNotificationCenter.current().setBadgeCount(0)
+    }
+    #else
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().setBadgeCount(0)
+    }
+
+    func applicationDidBecomeActive(_ notification: Notification) {
+        UNUserNotificationCenter.current().setBadgeCount(0)
+    }
+    #endif
+
+    func application(_ application: PlatformApplication, didRegisterForRemoteNotificationsWithDeviceToken token: Data) {
         let value = token.map { String(format: "%02x", $0) }.joined()
         // Apple can rotate this opaque value. Keep only the current launch's
         // token in memory and forward every value received to the server.
@@ -62,12 +83,8 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         NotificationCenter.default.post(name: .didReceiveAPNSToken, object: value)
     }
 
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    func application(_ application: PlatformApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         NotificationCenter.default.post(name: .didFailAPNSRegistration, object: error)
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        UNUserNotificationCenter.current().setBadgeCount(0)
     }
 
     func userNotificationCenter(

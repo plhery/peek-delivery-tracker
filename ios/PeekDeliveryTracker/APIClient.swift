@@ -288,6 +288,15 @@ final class DeliveryAPIClient {
         return try await request("/api/push/preferences", method: "PATCH", body: sent)
     }
 
+    /// The name the account's device list shows for this one.
+    private static var deviceName: String {
+        #if os(macOS)
+        Host.current().localizedName ?? "Mac"
+        #else
+        UIDevice.current.name
+        #endif
+    }
+
     func registerNativePushToken(
         _ token: String,
         installationID: UUID,
@@ -302,7 +311,7 @@ final class DeliveryAPIClient {
                 installationID: installationID,
                 environment: .current,
                 locale: NativePushLocale(language),
-                deviceName: UIDevice.current.name,
+                deviceName: Self.deviceName,
                 sendTest: sendTest
             )
         )

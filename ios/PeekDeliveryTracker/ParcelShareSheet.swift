@@ -86,7 +86,7 @@ struct ParcelShareSheet: View {
     /// An iPad's share sheet comes as a popover from the Share button rather than a small sheet
     /// at the window's foot; a phone's rises from the bottom.
     private func handOut(_ url: URL) {
-        guard UIDevice.current.userInterfaceIdiom == .pad, let button = shareButton.view,
+        guard DeviceIdiom.isPad, let button = shareButton.view,
               var top = button.window?.rootViewController else {
             handingOut = HandedAddress(url: url)
             return

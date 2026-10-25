@@ -52,12 +52,16 @@ final class DeliveryAnalytics {
     }
     enum Outcome: String { case success, error, started, accepted }
     enum Mode: String { case anonymous, demo, account }
-    /// The device the app runs on: a Mac runs the iPad app, so it asks first.
+    /// The device the app runs on: a Mac can also run the iPad app, so iOS asks first.
     enum Platform: String {
         case iphone, ipad, mac
         @MainActor static var current: Platform {
+            #if os(macOS)
+            return .mac
+            #else
             if ProcessInfo.processInfo.isiOSAppOnMac { return .mac }
             return UIDevice.current.userInterfaceIdiom == .pad ? .ipad : .iphone
+            #endif
         }
         var device: String {
             switch self { case .iphone: "mobile"; case .ipad: "tablet"; case .mac: "desktop" }
@@ -155,9 +159,14 @@ final class DeliveryAnalytics {
                     request.httpMethod = "POST"
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                     // Umami filters bare app user agents as bots. Keep the app suffix
-                    // on a standard iOS-compatible agent; explicit payload fields identify native.
+                    // on a standard Safari agent; explicit payload fields identify native.
+                    #if os(macOS)
+                    // Safari on the Mac still names macOS 10_15_7, whatever the version.
+                    request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15 DeliveryTracker/\(AppConfiguration.version)", forHTTPHeaderField: "User-Agent")
+                    #else
                     let osVersion = UIDevice.current.systemVersion.replacingOccurrences(of: ".", with: "_")
                     request.setValue("Mozilla/5.0 (iPhone; CPU iPhone OS \(osVersion) like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1 DeliveryTracker/\(AppConfiguration.version)", forHTTPHeaderField: "User-Agent")
+                    #endif
                     if let cache { request.setValue(cache, forHTTPHeaderField: "x-umami-cache") }
                     request.httpBody = try JSONSerialization.data(withJSONObject: ["type": "event", "payload": Self.payload(event, configuration: configuration)])
                     let (data, response) = try await transport.data(for: request)

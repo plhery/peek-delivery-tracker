@@ -1,6 +1,15 @@
 import Foundation
 import SwiftUI
 
+/// The device the app lays itself out for. The Mac app follows the iPad's layouts and copy.
+enum DeviceIdiom {
+    #if os(macOS)
+    static let isPad = true
+    #else
+    static let isPad = UIDevice.current.userInterfaceIdiom == .pad
+    #endif
+}
+
 struct AppConfiguration: Sendable {
     enum Mode: Sendable {
         case demo
@@ -145,7 +154,7 @@ final class Localizer: ObservableObject {
     /// Where the copy names the iPhone, an iPad reads the key's `.ipad` variant.
     private let onPad: Bool
 
-    init(bundle: Bundle = .main, onPad: Bool = UIDevice.current.userInterfaceIdiom == .pad) {
+    init(bundle: Bundle = .main, onPad: Bool = DeviceIdiom.isPad) {
         self.onPad = onPad
         if let url = bundle.url(forResource: "TrackingMessages", withExtension: "json"),
            let data = try? Data(contentsOf: url),

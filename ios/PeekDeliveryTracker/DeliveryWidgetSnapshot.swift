@@ -1,5 +1,5 @@
 import Foundation
-#if canImport(ActivityKit)
+#if os(iOS)
 import ActivityKit
 #endif
 
@@ -22,7 +22,6 @@ struct DeliveryWidgetSnapshot: Codable, Equatable, Sendable {
     let parcels: [DeliveryWidgetParcel]
 }
 
-#if canImport(ActivityKit)
 enum DeliveryActivityPhase: String, Codable, Hashable, Sendable {
     case outForDelivery = "out_for_delivery"
     case delivered
@@ -46,6 +45,8 @@ struct DeliveryActivityParcel: Codable, Equatable, Hashable, Identifiable, Senda
     }
 }
 
+// Live Activities are the iPhone's and iPad's: ActivityKit imports on macOS but has none.
+#if os(iOS)
 struct DeliveryActivityAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
         let parcel: DeliveryActivityParcel

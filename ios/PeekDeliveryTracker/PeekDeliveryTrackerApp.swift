@@ -2,7 +2,11 @@ import SwiftUI
 
 @main
 struct PeekDeliveryTrackerApp: App {
+    #if os(macOS)
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    #else
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    #endif
     @StateObject private var session: SessionStore
     @StateObject private var parcels: ParcelStore
     @StateObject private var localizer: Localizer

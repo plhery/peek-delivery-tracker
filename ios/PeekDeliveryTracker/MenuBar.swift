@@ -9,7 +9,7 @@ import UIKit
 /// do the same thing.
 enum MenuBar {
     /// Whether the screens tell the menu bar what they can do. A phone's menus stay dimmed and out of the way.
-    static let shown = UIDevice.current.userInterfaceIdiom == .pad
+    static let shown = DeviceIdiom.isPad
 }
 
 /// The keys the menu bar lists, as Mail has them, and the screens' buttons answer.

@@ -1,4 +1,6 @@
+#if os(iOS)
 import ActivityKit
+#endif
 import Foundation
 import Combine
 #if os(iOS)
@@ -1094,6 +1096,7 @@ final class ParcelStore: ObservableObject {
         WidgetCenter.shared.reloadTimelines(ofKind: DeliveryWidgetSharedStore.kind)
     }
 
+    #if os(iOS)
     private func scheduleDeliveryLiveActivities(forceEnd: Bool = false) {
         deliveryActivityTask?.cancel()
         deliveryActivityTask = Task { [weak self] in
@@ -1482,6 +1485,15 @@ final class ParcelStore: ObservableObject {
             }
         }
     }
+    #else
+    // The Mac has no Live Activities.
+    private func scheduleDeliveryLiveActivities(forceEnd: Bool = false) {}
+    private func endAllDeliveryLiveActivities() async {}
+    private func startDeliveryLiveActivityObservers() {}
+    private func stopDeliveryLiveActivityObservers() {}
+    private func registerCurrentDeliveryPushToStartToken() {}
+    private func registerCurrentDeliveryActivityUpdateTokens() {}
+    #endif
 
     private static func installationIdentifier(
         defaults: UserDefaults = .standard
@@ -1601,7 +1613,7 @@ struct DeviceNotificationAccess {
     static let system = DeviceNotificationAccess(
         status: { await UNUserNotificationCenter.current().notificationSettings().authorizationStatus },
         request: { _ = try? await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) },
-        register: { UIApplication.shared.registerForRemoteNotifications() },
+        register: { PlatformApplication.shared.registerForRemoteNotifications() },
         token: { AppDelegate.currentDeviceToken }
     )
 }

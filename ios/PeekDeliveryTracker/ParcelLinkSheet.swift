@@ -968,6 +968,22 @@ private struct SharedParcelNumber: View {
     }
 }
 
+#if os(macOS)
+/// On the Mac a parcel link opens as a sheet on the main window.
+struct FrontmostSheet<Content: View>: View {
+    let isPresented: Bool
+    /// The person closed the sheet.
+    let onClose: () -> Void
+    /// The sheet has left the screen, whoever closed it.
+    let onDismiss: () -> Void
+    @ViewBuilder let content: () -> Content
+
+    var body: some View {
+        Color.clear
+            .sheet(isPresented: Binding(get: { isPresented }, set: { if !$0 { onClose() } }), onDismiss: onDismiss, content: content)
+    }
+}
+#else
 /// Shows a sheet over whatever is frontmost, so a sheet or screen that was open stays as it
 /// was underneath. A SwiftUI sheet on the root view would close it first.
 struct FrontmostSheet<Content: View>: UIViewControllerRepresentable {
@@ -1065,7 +1081,7 @@ struct FrontmostSheet<Content: View>: UIViewControllerRepresentable {
             }
             let host = Host(rootView: content())
             // A form over an iPad's window, as the page is capped at 560; a phone's sheet as it was.
-            if UIDevice.current.userInterfaceIdiom == .pad { host.modalPresentationStyle = .formSheet }
+            if DeviceIdiom.isPad { host.modalPresentationStyle = .formSheet }
             host.onGone = { [weak self] in self?.gone() }
             sheet = host
             dismissing = false
@@ -1086,3 +1102,4 @@ struct FrontmostSheet<Content: View>: UIViewControllerRepresentable {
         }
     }
 }
+#endif

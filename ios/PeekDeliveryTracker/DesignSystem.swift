@@ -63,6 +63,23 @@ enum AppAppearance: String, CaseIterable, Identifiable {
     }
 }
 
+#if os(macOS)
+/// Apply the preference to the whole app, so its sheets and windows follow it too.
+struct AppWindowAppearance: View {
+    let appearance: AppAppearance
+
+    var body: some View {
+        Color.clear.frame(width: 0, height: 0)
+            .onChange(of: appearance, initial: true) { _, appearance in
+                switch appearance {
+                case .system: NSApp.appearance = nil
+                case .light: NSApp.appearance = NSAppearance(named: .aqua)
+                case .dark: NSApp.appearance = NSAppearance(named: .darkAqua)
+                }
+            }
+    }
+}
+#else
 /// Apply the preference to the window so presented sheets follow it too.
 /// Clearing a sheet's preferredColorScheme can leave its previous override active.
 struct AppWindowAppearance: UIViewRepresentable {
@@ -98,6 +115,7 @@ struct AppWindowAppearance: UIViewRepresentable {
         }
     }
 }
+#endif
 
 /// One account entry point, shared by the tabs. ⌘, opens it from the screen in front, as Settings opens elsewhere.
 struct AccountToolbarButton: View {
@@ -219,7 +237,7 @@ extension View {
     /// on an iPad, a form fitted to the content, as iPadOS keeps a sheet's detent at the height it opened with.
     @ViewBuilder
     func fittedSheet(height: CGFloat, detent: Binding<PresentationDetent>) -> some View {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if DeviceIdiom.isPad {
             presentationSizing(.form.fitted(horizontal: false, vertical: true))
         } else {
             presentationDetents([.height(height), .large], selection: detent)
@@ -230,7 +248,7 @@ extension View {
     /// it; on a phone, as it always was.
     @ViewBuilder
     func formOnPad() -> some View {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if DeviceIdiom.isPad {
             presentationSizing(.form)
         } else {
             self
@@ -241,7 +259,7 @@ extension View {
     /// bottom edge at their height rather than centre it.
     @ViewBuilder
     func formOnPad(phoneDetents detents: Set<PresentationDetent>, selection: Binding<PresentationDetent>? = nil) -> some View {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if DeviceIdiom.isPad {
             presentationSizing(.form)
         } else if let selection {
             presentationDetents(detents, selection: selection)

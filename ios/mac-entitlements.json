@@ -1,0 +1,18 @@
+{
+  "PeekDeliveryTracker": {
+    "com.apple.developer.applesignin": ["Default"],
+    "com.apple.developer.aps-environment": "production",
+    "com.apple.developer.associated-domains": ["applinks:peektracker.com", "applinks:delivery.plhery.com"],
+    "com.apple.security.app-sandbox": true,
+    "com.apple.security.application-groups": ["group.com.plhery.PeekDeliveryTracker"],
+    "com.apple.security.network.client": true
+  },
+  "ShareExtension": {
+    "com.apple.security.app-sandbox": true,
+    "com.apple.security.application-groups": ["group.com.plhery.PeekDeliveryTracker"]
+  },
+  "DeliveryWidgetExtension": {
+    "com.apple.security.app-sandbox": true,
+    "com.apple.security.application-groups": ["group.com.plhery.PeekDeliveryTracker"]
+  }
+}

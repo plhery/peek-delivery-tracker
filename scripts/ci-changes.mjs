@@ -14,6 +14,7 @@ const nativeInputs = new Set([
   'scripts/native-localization.mjs', 'scripts/native-localization.test.mjs',
   'scripts/prepare-personal-ios-project.mjs', 'scripts/prepare-personal-ios-project.test.mjs',
   'scripts/validate-ios-install.mjs', 'scripts/validate-ios-install.test.mjs', 'scripts/refresh-ios-app.sh',
+  'scripts/check-mac-entitlements.mjs', 'scripts/check-mac-entitlements.test.mjs',
   'src/components/map/world.json', 'src/components/map/detail.json',
 ]);
 const webConfiguration = new Set([

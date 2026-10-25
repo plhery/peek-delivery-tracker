@@ -1,4 +1,6 @@
+#if os(iOS)
 import ActivityKit
+#endif
 import SwiftUI
 import WidgetKit
 
@@ -238,6 +240,8 @@ struct NextDeliveryWidget: Widget {
     }
 }
 
+// A Mac has no Live Activities: its widget is the next deliveries alone.
+#if os(iOS)
 private struct DeliveryLiveActivityView: View {
     let state: DeliveryActivityAttributes.ContentState
 
@@ -360,11 +364,14 @@ private extension DeliveryActivityParcel {
         detail == status ? carrier : detail
     }
 }
+#endif
 
 @main
 struct DeliveryTrackerWidgetBundle: WidgetBundle {
     var body: some Widget {
         NextDeliveryWidget()
+        #if os(iOS)
         DeliveryLiveActivityWidget()
+        #endif
     }
 }

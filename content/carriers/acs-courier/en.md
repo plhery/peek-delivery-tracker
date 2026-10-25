@@ -3,7 +3,7 @@ title: ACS Courier tracking: numbers, statuses and contacts
 description: Track an ACS Courier parcel in Greece or Cyprus: the 10-digit shipping number, what ACS's English statuses mean, SmartPoint lockers, claims and contacts.
 slug: acs-courier-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-25
 ---
 
 ACS Courier is a Greek courier, part of the Quest Group, with its own company in Cyprus and SmartPoint lockers in both countries. Track a parcel with its 10-digit shipping number on the Track and Trace page of acscourier.net (Greece) or cyp.acscourier.net (Cyprus), switching the page to English, or paste the number in the box above and pick ACS Courier. ACS puts that number in every SMS, Viber message and email it sends you about the parcel.
@@ -14,7 +14,7 @@ ACS calls it the shipping number; shops often say voucher.
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `1234567890` | An ACS shipping number: 10 digits, no letters. |
+| `0000000000` | An ACS shipping number: 10 digits, no letters, the last a check digit. |
 | `RR000000005GR` | Not ACS: a postal number ending `GR` belongs to [ELTA Hellenic Post](carrier:elta). |
 
 It's in ACS's SMS, Viber or email, in the locker message and often in the shop's shipping email. The number on the "Absent" note left after a missed delivery works in ACS's tracker too, and a return gets its own new number.
@@ -79,9 +79,9 @@ There's no separate line for the UK or elsewhere: use these numbers.
 
 ## Tracking ACS Courier parcels with Peek
 
-[Peek](/) can't recognise an ACS number from its 10 digits and never asks ACS on its own: it asks DHL Express (when the last digit passes DHL's check, as ACS's usually do), Relais Colis, [TIPSA](carrier:tipsa) and [DHL eCommerce Iberia](carrier:dhl-ecommerce-es). Pick "ACS Courier" with "Change", or paste an ACS Track and Trace link with `trackingNumber=` from either site, which names ACS at once (myACS links aren't read). If DHL Express happens to know the number, it gets named instead: correct it with "Change". ACS and Geniki numbers can't be told apart either.
+[Peek](/) can't tell an ACS number from its 10 digits alone, so it asks the carriers it fits whether they know it: ACS (when the last digit passes ACS's check), DHL Express, Geniki Taxydromiki, [BOX NOW](carrier:box-now) and [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), naming ACS when ACS knows it, unless DHL Express knows the same number. Then, or if ACS isn't asked, pick "ACS Courier" with "Change", or paste an ACS Track and Trace link with `trackingNumber=` from either site, which names ACS at once (myACS links aren't read).
 
-ACS's tracker, read through its Cypriot English site, gives times without a time zone. So ACS's own history isn't shown: the dated history comes from [universal tracking services](guide:universal-tracker), and ACS is asked again every 6 hours. If no service answers, you see ACS's current status, dated when it was read. The page can show the expected delivery day while the parcel moves, which ACS's own page doesn't, and the SmartPoint where it waits. No weight; the recipient, signatory, sender, delivery comments and branch contacts are dropped.
+Peek reads ACS's tracker through its Cypriot English site: each scan in ACS's English words, with the branch or hub and its time. While the parcel moves it can show ACS's expected delivery day, and it names the SmartPoint where the parcel waits. No weight; the recipient, signatory, sender, delivery comments and branch contacts are dropped. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight.
 
 When Speedy names ACS as the carrier delivering in Greece or Cyprus, the parcel can be followed to ACS. Notifications come for every scan, important steps only, or on delivery day only.
 
@@ -89,7 +89,7 @@ When Speedy names ACS as the carrier delivering in Greece or Cyprus, the parcel 
 
 ### What is ACS Courier?
 
-ACS Courier and Postal Services S.A. is a Greek courier in business since 1981 and part of the Quest Group. It calls itself the leading courier in Greece, with over 600 service points in Greece, Cyprus, Albania and Bulgaria.
+ACS Courier and Postal Services S.A. is a Greek courier in business since 1981 and part of the Quest Group. It calls itself the leading courier in Greece, with more than 350 service points in Greece, Cyprus, Albania and Bulgaria.
 
 ### Is ACS tracking the same as DHL?
 

@@ -3,7 +3,7 @@ title: Vinted Go tracking: statuses, lockers and who to contact
 description: Track a Vinted Go parcel: where the number is, what each status means, how long a locker or parcel shop holds it and who to ask when it goes wrong.
 slug: vinted-go-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-25
 ---
 
 Vinted Go is Vinted's own parcel service: it carries parcels sold on Vinted from a locker or parcel shop to another locker, parcel shop or neighbourhood point, and in some places to the buyer's door. To track one, open the order's conversation in Vinted and tap the tracking button, or enter the number on [Vinted Go's tracking page](https://vintedgo.com/en/tracking).
@@ -12,12 +12,14 @@ Vinted Go is Vinted's own parcel service: it carries parcels sold on Vinted from
 
 In your order's conversation on Vinted, you can follow the link to the carrier's tracking page or copy the tracking number. Tracking can take up to 48 hours to show on Vinted after the seller ships.
 
-Vinted Go publishes no format for its numbers. Those Peek's carrier list knows are 16 digits starting 17 or 18, the last a check digit:
+Vinted Go publishes no format for its numbers. These are the shapes Peek's carrier list knows:
 
 | Number (invented) | What it is |
 | --- | --- |
 | `1700000000000001` | The shape of a Vinted Go number: 16 digits starting 17 or 18. [DHL eCommerce](carrier:dhl-ecommerce), TNT and [Evri](carrier:evri) use 16-digit numbers too. |
 | `1700000000000002` | 16 digits whose last digit doesn't check out, so it doesn't have Vinted Go's shape. |
+| `VGS00000000000000` | `VGS` and 13 or 14 digits: a number Vinted Go's tracking answers to, and only Vinted Go's. |
+| `ABC0UW0000000000` | 16 characters: 3 letters, a digit, `UW`, a digit, then 9 letters or digits. Vinted Go's tracking answers to these codes too. |
 
 Two things are easy to mix up:
 
@@ -75,10 +77,10 @@ You deal with Vinted, not Vinted Go: Vinted's customer service handles lost and 
 
 ## Vinted Go contact number and customer service
 
-As read on 11 October 2026, neither vintedgo.com nor Vinted's help pages give a Vinted Go phone number, email or form for buyers.
+As read on 25 October 2026, Vinted Go gives buyers no email or form, and its phone line is for help at a locker.
 
 - **Order problems** (late, lost, damaged, wrong item): Vinted's support, from the order in your Vinted account.
-- **Trouble at a locker** in France, Belgium or Spain: press the "?" button on the locker's home screen to see Vinted Go's support number and hours.
+- **Trouble at a locker** in France, Belgium, the Netherlands or Spain: press the "?" button on the locker's home screen to see Vinted Go's support number and hours. For the Netherlands and Belgium, Vinted Go's FAQ also gives the number: +31 20 793 2587, in English (and French for Belgium).
 - **Trouble at a locker in Portugal:** press "Obter ajuda" on the locker and scan the QR code with your phone. It opens a live chat with Vinted Go's support, every day from 7:00 to 22:00 local time.
 
 Vinted warns that phishing also arrives by SMS; its French help asks you to forward phishing emails to phishing@vinted.com.
@@ -87,9 +89,9 @@ Vinted warns that phishing also arrives by SMS; its French help asks you to forw
 
 [Peek](/) reads Vinted Go's own tracking, with no account or postcode: each scan with its time in Vinted Go's words, such as `Ready to collect at the locker`, the town of each sorting centre and a headline of its own ("Ready for pickup", "Delivered"). It names the locker or parcel shop the parcel waits at, then when and where you picked it up, but not neighbourhood points. The address, opening hours and pick-up deadline stay on Vinted Go's page, and there's no expected delivery day. A parcel heading back to the seller shows "Returned to sender".
 
-Type the 16-digit number alone and Peek asks Vinted Go, TNT and DHL eCommerce whether they know it, naming Vinted Go when it does. Otherwise press "Change" and pick "Vinted Go", or paste the vintedgo.com tracking link, which names Vinted Go at once.
+Peek names Vinted Go at once for a number starting `VGS`. Type the 16-digit number alone and Peek asks Vinted Go, TNT and DHL eCommerce whether they know it, naming Vinted Go when it does; a `UW` code it asks Vinted Go about. Otherwise press "Change" and pick "Vinted Go", or paste the vintedgo.com tracking link, which names Vinted Go at once.
 
-Peek checks every 10 minutes by day, also while the parcel waits, and hourly overnight, and can notify you of changes. If Vinted Go hands the parcel to another network under a new tracking code, Peek can follow it there if it reads that network directly. It can't contact Vinted or Vinted Go, or report a problem for you.
+Peek checks every 10 minutes by day and hourly overnight, hourly too once 48 hours pass with no new scan, and can notify you of changes. If Vinted Go hands the parcel to another network under a new tracking code, Peek can follow it there if it reads that network directly. It can't contact Vinted or Vinted Go, or report a problem for you.
 
 ## Questions about Vinted Go tracking
 
@@ -103,7 +105,7 @@ Its terms aim for 3 to 6 business days from drop-off to your point, not counting
 
 ### Does Vinted Go have a customer service phone number?
 
-Only on its lockers: in France, Belgium and Spain, the "?" button on the locker screen shows it. Everything about your order goes through Vinted's own support.
+For help at a locker only. In the Netherlands and Belgium it's +31 20 793 2587; in France, Belgium, the Netherlands and Spain the "?" button on the locker screen shows it. Everything about your order goes through Vinted's own support.
 
 ### Why is my Vinted Go tracking not working?
 
@@ -111,6 +113,7 @@ Tracking can take up to 48 hours to appear after the seller ships, and a mistype
 
 :::sources
 - [Vinted Go: Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – pick-up code, 7 days, other point nearby, 25 business days, 2-day report, timeline gaps, locker phone
+- [Vinted Go: Frequently Asked Questions (Netherlands)](https://vintedgo.com/en/faq?country=nl&region=europe) – locker phone line for the Netherlands and Belgium
 - [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – company, point types, home delivery attempts, 3 to 6 business days, reminder, damage at a locker, claims via Vinted
 - [Vinted Go: Shipping service, trusted by millions of Vinted users](https://vintedgo.com/en?country=fr&region=europe) – countries, start in 2022
 - [Vinted Go: Track your parcel](https://vintedgo.com/en/tracking) – tracking form, site languages, statuses, not-found message
@@ -118,6 +121,7 @@ Tracking can take up to 48 hours to appear after the seller ships, and a mistype
 - [Vinted: Envoi avec Vinted Go](https://www.vinted.fr/help/1110) – routes, Uber Direct home delivery, availability
 - [Vinted: Récupérer un colis](https://www.vinted.fr/help/1601) – uncollected parcel, order cancelled and refunded
 - [Vinted: Comment utiliser les consignes Vinted Go ?](https://www.vinted.fr/help/1109) – locker phone support, 2 and 14 days
+- [Vinted: Hulp met een Vinted Go locker](https://www.vinted.nl/help/1109) – the "?" button in the Netherlands
 - [Vinted: Ayuda en las taquillas de Vinted Go](https://www.vinted.es/help/1109) – locker phone support in Spain
 - [Vinted: Envio Vinted Go](https://www.vinted.pt/help/1110) – locker live chat in Portugal, 7:00 to 22:00
 - [Vinted: Le colis n'est pas arrivé](https://www.vinted.fr/help/657) – parcel not at the point, Vinted asks the carrier

@@ -2728,6 +2728,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "vinted-go",
+      "catalog": "vinted-go",
+      "slug": "vinted-go-pakket-volgen",
+      "title": "Vinted Go-pakket volgen: status, locker en afhaalcode",
+      "name": "Vinted Go",
+      "color": "#004654"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-pakje-volgen",
@@ -2874,6 +2882,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "bg": [],
   "el": [
+    {
+      "id": "acs-courier",
+      "catalog": "acs-courier",
+      "slug": "acs-courier-entopismos-apostolis",
+      "title": "Εντοπισμός αποστολής ACS: αριθμός, καταστάσεις, lockers",
+      "name": "ACS Courier",
+      "color": "#e42229"
+    },
     {
       "id": "elta",
       "catalog": "elta",

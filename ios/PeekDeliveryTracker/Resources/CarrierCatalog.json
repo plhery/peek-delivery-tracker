@@ -31581,6 +31581,30 @@
         }
       ],
       "trackingSearchUrl": "https://fictracking.fedex.com/"
+    },
+    "pengyou": {
+      "displayName": "Pengyou",
+      "aliases": [
+        "捧友",
+        "深圳市捧友供应链有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#043a82",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^[A-Z]{3}\\d{9}PY$",
+          "confidence": "low"
+        }
+      ]
     }
   }
 }

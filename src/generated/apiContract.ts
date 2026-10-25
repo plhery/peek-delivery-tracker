@@ -31582,6 +31582,30 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://fictracking.fedex.com/"
+  },
+  "pengyou": {
+    "displayName": "Pengyou",
+    "aliases": [
+      "捧友",
+      "深圳市捧友供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#043a82",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^[A-Z]{3}\\d{9}PY$",
+        "confidence": "low"
+      }
+    ]
   }
 } as const;
 
@@ -32433,7 +32457,8 @@ export const CARRIER_IDS = [
   "stone3pl",
   "maersk-ecommerce",
   "dpd-hu",
-  "fedex-international-connect"
+  "fedex-international-connect",
+  "pengyou"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

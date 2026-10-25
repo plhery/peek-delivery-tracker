@@ -737,17 +737,13 @@ struct ParcelDetailView: View {
                 Button {
                     run { try await store.refresh(parcel) }
                 } label: {
-                    Group {
-                        if working {
-                            ProgressView()
-                                .controlSize(.mini)
-                        } else {
-                            Image(systemName: "arrow.clockwise")
-                                .font(.caption)
-                        }
-                    }
-                    .frame(width: 26, height: 26)
-                    .contentShape(Circle())
+                    // The arrow turns while it checks, as the list's Refresh does.
+                    Image(systemName: "arrow.clockwise")
+                        .font(.caption)
+                        .symbolEffect(.rotate, isActive: working && !reduceMotion)
+                        .symbolEffect(.pulse, isActive: working && reduceMotion)
+                        .frame(width: 26, height: 26)
+                        .contentShape(Circle())
                 }
                 .buttonStyle(.plain)
                 .foregroundStyle(tint)

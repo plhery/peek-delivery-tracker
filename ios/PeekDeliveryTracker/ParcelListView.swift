@@ -944,13 +944,18 @@ private struct DeliveryListView: View {
             // Pulling refreshes the list. VoiceOver users also get a button, and so does a list beside a parcel,
             // where a pointer may be all there is to pull with, as on the web. ⌘R presses it.
             if voiceOverEnabled || windowArrangement == .sideBySide {
-                Button { Task { await refreshFromButton() } } label: {
-                    Group {
-                        if store.refreshing { ProgressView() }
-                        else { Image(systemName: "arrow.clockwise").font(.body.weight(.regular)) }
-                    }.frame(width: 44, height: 44)
+                // While the parcels are checked, the arrow turns where it is (pulses with Reduce Motion), at full
+                // strength, rather than giving way to a spinner.
+                Button {
+                    guard !store.refreshing else { return }
+                    Task { await refreshFromButton() }
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.body.weight(.regular))
+                        .symbolEffect(.rotate, isActive: store.refreshing && !reduceMotion)
+                        .symbolEffect(.pulse, isActive: store.refreshing && reduceMotion)
+                        .frame(width: 44, height: 44)
                 }
-                .disabled(store.refreshing)
                 .keyboardShortcut(keyboardFree ? MenuKey.refresh : nil)
                 .accessibilityLabel(localizer.text(store.refreshing ? "app.refreshing" : "app.refresh"))
                 .accessibilityIdentifier("deliveries.refresh")

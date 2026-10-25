@@ -220,6 +220,10 @@
           "confidence": "high"
         },
         {
+          "pattern": "^1MCAINIXX\\d{10}$",
+          "confidence": "high"
+        },
+        {
           "pattern": "^LP\\d{14}$",
           "confidence": "low"
         },
@@ -31429,6 +31433,44 @@
           "confidence": "low"
         }
       ]
+    },
+    "stone3pl": {
+      "displayName": "Stone3PL",
+      "aliases": [
+        "STONE3PL.COM",
+        "Stone 3PL"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#0066b3",
+      "selectable": true,
+      "timezone": "UTC",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "stone3pl",
+        "recognitionRank": 806
+      },
+      "trackingUrlTemplate": "https://stone3pl.com/?route=services/track&nums={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "stone3pl.com",
+            "www.stone3pl.com"
+          ],
+          "pathPattern": "^/(?:index\\.php)?$",
+          "params": [
+            "nums"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^S\\d{18}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://stone3pl.com/?route=services/track"
     }
   },
   "servers": [
@@ -35010,7 +35052,8 @@
           "far-international",
           "castle-parcels",
           "now-couriers",
-          "intel-valley"
+          "intel-valley",
+          "stone3pl"
         ]
       },
       "Stage": {

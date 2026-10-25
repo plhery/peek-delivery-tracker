@@ -21302,6 +21302,22 @@
     ]
   },
   {
+    "input": "1MCAINIXX0000134188",
+    "carrier": "aliexpress",
+    "confidence": "high",
+    "candidates": [
+      "aliexpress"
+    ]
+  },
+  {
+    "input": "1MCAINIXX0000484416",
+    "carrier": "aliexpress",
+    "confidence": "high",
+    "candidates": [
+      "aliexpress"
+    ]
+  },
+  {
     "input": "1ONBLN542027516",
     "carrier": "unknown",
     "confidence": "low",
@@ -88772,6 +88788,17 @@
     "confidence": "high",
     "candidates": [
       "canpar"
+    ]
+  },
+  {
+    "input": "S900000000000000001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "stone3pl"
+    ],
+    "asked": [
+      "stone3pl"
     ]
   },
   {

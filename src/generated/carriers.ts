@@ -2852,7 +2852,16 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffd100"
     }
   ],
-  "sl": [],
+  "sl": [
+    {
+      "id": "posta-slovenije",
+      "catalog": "posta-slovenije",
+      "slug": "posta-slovenije-sledenje-posiljk",
+      "title": "Sledenje pošiljk Pošte Slovenije: statusi, prevzem, kontakt",
+      "name": "Pošta Slovenije",
+      "color": "#ffc600"
+    }
+  ],
   "lt": [
     {
       "id": "omniva",
@@ -2872,7 +2881,16 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "lv": [],
-  "et": [],
+  "et": [
+    {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "omniva-saadetise-jalgimine",
+      "title": "Omniva saadetise jälgimine: olekud, pakiautomaat ja toll",
+      "name": "Omniva",
+      "color": "#f86300"
+    }
+  ],
   "uk": [
     {
       "id": "nova-poshta",

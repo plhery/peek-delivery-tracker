@@ -5522,8 +5522,16 @@
 <url>
 <loc>https://peektracker.com/carriers/foxpost-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/foxpost-tracking" />
+<xhtml:link rel="alternate" hreflang="hu" href="https://peektracker.com/hu/carriers/foxpost-csomagkovetes" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/foxpost-tracking" />
-<lastmod>2026-10-13</lastmod>
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/hu/carriers/foxpost-csomagkovetes</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/foxpost-tracking" />
+<xhtml:link rel="alternate" hreflang="hu" href="https://peektracker.com/hu/carriers/foxpost-csomagkovetes" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/foxpost-tracking" />
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/slovak-parcel-service-tracking</loc>
@@ -6234,8 +6242,16 @@
 <url>
 <loc>https://peektracker.com/carriers/magyar-posta-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/magyar-posta-tracking" />
+<xhtml:link rel="alternate" hreflang="hu" href="https://peektracker.com/hu/carriers/magyar-posta-nyomkovetes" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/magyar-posta-tracking" />
-<lastmod>2026-10-15</lastmod>
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/hu/carriers/magyar-posta-nyomkovetes</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/magyar-posta-tracking" />
+<xhtml:link rel="alternate" hreflang="hu" href="https://peektracker.com/hu/carriers/magyar-posta-nyomkovetes" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/magyar-posta-tracking" />
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/shiprocket-tracking</loc>

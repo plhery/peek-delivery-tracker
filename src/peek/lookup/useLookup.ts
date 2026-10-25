@@ -115,7 +115,8 @@ export function useLookup(onTracked: (lookup: ParcelLookup) => void): Lookup {
           // The postcode it was given is kept apart from the parcel, for the next one.
           if (job.input.carrier && job.input.dpdPostcode) rememberPostcode(job.input.carrier, job.input.dpdPostcode);
           live.current.onTracked(lookup);
-          handOver = setTimeout(() => dispatch({ type: 'done' }), HAND_OVER_MS);
+          // The hand-over can close the door at once, which stops the job: nothing is left to take the field back.
+          if (!controller.signal.aborted) handOver = setTimeout(() => dispatch({ type: 'done' }), HAND_OVER_MS);
         }, (error: unknown) => {
           if (controller.signal.aborted) return;
           trackAction('parcel-lookup', 'error');

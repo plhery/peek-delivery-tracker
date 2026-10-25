@@ -106,7 +106,7 @@ struct ParcelDetailView: View {
         }
         // A "Yes" that was the moment to ask for a rating: once its thanks has gone and nothing else is over the page.
         .askingForReview(due: feedback.reviewDue, ready: reviewReady) { feedback.takeReviewMoment() }
-        .navigationTitle(localizer.text("detail.label"))
+        .navigationTitle(windowTitle)
         .navigationBarTitleDisplayMode(.inline)
         // The card says which parcel this is: no bar names the page over it.
         .toolbar(removing: .title)
@@ -785,6 +785,16 @@ struct ParcelDetailView: View {
         }
     }
 
+    /// What the page is called where no bar shows it: a Mac's window names the parcel, in the Window menu and to
+    /// VoiceOver, as Mail's names the message.
+    private var windowTitle: String {
+        #if os(macOS)
+        parcel.map { $0.label.nonEmpty ?? localizer.text("common.parcel") } ?? localizer.text("detail.label")
+        #else
+        localizer.text("detail.label")
+        #endif
+    }
+
     /// The menu bar's Parcel menu, which the page answers.
     private var parcelMenu: ParcelMenu? {
         guard let parcel, sample == nil else { return nil }
@@ -1115,10 +1125,7 @@ struct ChangeCarrierView: View {
                             }
                         }
                     }
-                    #if os(iOS)
-                    // A Mac's link would lose its press with the row's own element: its label and value are enough.
-                    .accessibilityElement(children: .ignore)
-                    #endif
+                    .readsAsItsLabel()
                     .accessibilityLabel(localizer.text("add.carrier"))
                     .accessibilityValue([carrierName,
                                          refused ? localizer.text("add.line.refused") : nil].compactMap { $0 }.joined(separator: ", "))

@@ -228,12 +228,14 @@ private struct WelcomeView: View {
                     HStack {
                         if invitation != nil {
                             Button(action: onDismiss) { Image(systemName: "xmark").frame(width: 44, height: 44) }
+                                .drawnButton()
                                 .foregroundStyle(Brand.ink).accessibilityLabel(localizer.text("common.close"))
                         }
                         PeekLockup()
                         Spacer()
                         if invitation == nil {
                             Button(copy.signInTitle, action: onSignIn)
+                                .drawnButton()
                                 .font(.subheadline.weight(.medium))
                                 .foregroundStyle(Brand.ink)
                                 .padding(.horizontal, 14)
@@ -393,6 +395,7 @@ struct SignInView: View {
                                 .frame(width: 42, height: 42)
                                 .glassSurface(in: Circle())
                         }
+                        .drawnButton()
                         .foregroundStyle(Brand.ink)
                         .accessibilityLabel(localizer.text("welcome.back"))
                         Spacer()
@@ -905,6 +908,7 @@ private struct FriendInvitationAcceptanceView: View {
             VStack(spacing: 18) {
                 HStack {
                     Button(action: onBack) { Image(systemName: "chevron.left").frame(width: 44, height: 44) }
+                        .drawnButton()
                         .foregroundStyle(Brand.ink).accessibilityLabel(localizer.text("welcome.back")).disabled(joining)
                     Spacer()
                     AuthenticationLanguageMenu()

@@ -41,7 +41,7 @@ struct PeekDeliveryTrackerApp: App {
         #if os(macOS)
         // One window: links, notifications and the shared draft all go to the one set of deliveries. It is never
         // narrower than the list beside a parcel.
-        Window("Peek", id: "main") {
+        Window("Peek", id: MacWindow.id) {
             stores(RootView().background { AnalyticsLifecycleObserver() })
                 .frame(minWidth: MacWindow.minimumWidth, minHeight: MacWindow.minimumHeight)
         }

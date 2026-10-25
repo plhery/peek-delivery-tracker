@@ -535,6 +535,7 @@ struct FirstOpenView: View {
             PeekLockup().clearOfWindowControls()
             Spacer()
             Button(localizer.text("arrival.signInTitle")) { session.showSignIn() }
+                .drawnButton()
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(Brand.ink)
                 .padding(.horizontal, 14)

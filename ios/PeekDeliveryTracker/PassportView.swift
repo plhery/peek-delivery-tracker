@@ -90,7 +90,7 @@ struct PassportView: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(PassportPressStyle())
-            .accessibilityElement(children: .ignore)
+            .readsAsItsLabel()
             .accessibilityLabel("\(stats.deliveredCount) \(copy.delivered(stats.deliveredCount))")
             .accessibilityValue(expansionValue(.cover, explanation: copy.deliveredExplanation))
             .accessibilityHint(copy.expansionHint(expanded: expandedCard == .cover))
@@ -129,7 +129,7 @@ struct PassportView: View {
                         .contentShape(Rectangle())
                     }
                     .buttonStyle(PassportPressStyle())
-                    .accessibilityElement(children: .ignore)
+                    .readsAsItsLabel()
                     .accessibilityLabel(milestone.earned ? milestone.title : "\(milestone.title), \(milestone.progressLabel)")
                     .accessibilityValue(expansionValue(id, explanation: milestone.explanation))
                     .accessibilityHint(copy.expansionHint(expanded: expandedCard == id))
@@ -189,7 +189,7 @@ struct PassportView: View {
             .foregroundStyle(Brand.ink)
         }
         .buttonStyle(PassportPressStyle())
-        .accessibilityElement(children: .ignore)
+        .readsAsItsLabel()
         .accessibilityLabel("\(title), \(formattedDuration(duration, full: true))")
         .accessibilityValue(expansionValue(id, explanation: explanation))
         .accessibilityHint(copy.expansionHint(expanded: expandedCard == id))

@@ -14,6 +14,8 @@ struct ParcelListView: View {
     @State private var adding = false
     /// Nobody is signed in and this iPhone follows nothing: the first screen stands over the deliveries.
     @State private var showsFirstOpen = false
+    /// A sheet or an alert over a Mac's window: the tabs wait for it, and their menu items dim.
+    @State private var sheetOver = false
 
     var body: some View {
         TabView(selection: $selection) {
@@ -40,7 +42,10 @@ struct ParcelListView: View {
         }
         .tint(Brand.ink)
         .background { if !showsFirstOpen { tabKeys } }
-        .focusedSceneValue(\.tabsMenu, MenuBar.shown && !showsFirstOpen ? TabsMenu(choose: choose) : nil)
+        .focusedSceneValue(\.tabsMenu, MenuBar.shown && !showsFirstOpen && !sheetOver ? TabsMenu(choose: choose) : nil)
+        #if os(macOS)
+        .onSheetOverMainWindow($sheetOver)
+        #endif
         .accessibilityHidden(showsFirstOpen)
         .overlay {
             if showsFirstOpen {
@@ -1753,6 +1758,11 @@ private struct ExperimentalParcelPassCard: View {
         } else {
             card
                 .matchedTransitionSource(id: parcel.id, in: transition)
+                #if os(macOS)
+                // Read as one before the swipe's layers go round it, as the first card is: a Mac would keep only the
+                // carrier's name.
+                .accessibilityElement(children: .combine)
+                #endif
                 .experimentalSwipeToArchive(
                     title: localizer.text("parcel.archive"), cornerRadius: 16, shadow: false,
                     onOpen: onOpen, action: onArchive

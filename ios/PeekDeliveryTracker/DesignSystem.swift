@@ -175,6 +175,42 @@ extension View {
 }
 
 extension View {
+    /// A button read as its label alone. iOS reads it so once it ignores what the button shows; a Mac's button reads
+    /// only its label anyway, and would lose its press with what it shows.
+    @ViewBuilder func readsAsItsLabel() -> some View {
+        #if os(macOS)
+        self
+        #else
+        accessibilityElement(children: .ignore)
+        #endif
+    }
+}
+
+extension View {
+    /// A button the screen draws itself, as iOS leaves it. A Mac would put a push button's bezel behind it, and take
+    /// clicks only on its glyph.
+    @ViewBuilder func drawnButton() -> some View {
+        #if os(macOS)
+        buttonStyle(DrawnButtonStyle())
+        #else
+        self
+        #endif
+    }
+}
+
+#if os(macOS)
+private struct DrawnButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .contentShape(Rectangle())
+            .opacity(isEnabled ? (configuration.isPressed ? 0.6 : 1) : 0.4)
+    }
+}
+#endif
+
+extension View {
     /// A toggle as an iOS row draws it: the label across the row and a switch at its end. A Mac would put a checkbox
     /// before the label, and a sheet doesn't take a toggle style from the window under it, so each toggle asks.
     @ViewBuilder func rowToggle() -> some View {

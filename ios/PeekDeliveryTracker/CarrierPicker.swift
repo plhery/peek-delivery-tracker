@@ -352,7 +352,7 @@ struct CarrierPickerView: View {
             .contentShape(Rectangle())
         }
         .listRowBackground(selected ? ExperimentalPalette.ochreSurface : nil)
-        .accessibilityElement(children: .ignore)
+        .readsAsItsLabel()
         .accessibilityLabel(definition.displayName)
         .accessibilityValue([subtitle, tags[carrier]?.label ?? ""].filter { !$0.isEmpty }.joined(separator: ", "))
         .accessibilityAddTraits(selected ? [.isButton, .isSelected] : .isButton)

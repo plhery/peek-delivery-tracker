@@ -498,7 +498,7 @@ struct AddParcelView: View {
         }
         .buttonStyle(TactileButtonStyle(scale: 0.98))
         .foregroundStyle(Brand.ink)
-        .accessibilityElement(children: .ignore)
+        .readsAsItsLabel()
         .accessibilityLabel(name)
         .accessibilityValue(printed)
         .accessibilityAddTraits(chosen ? [.isButton, .isSelected] : .isButton)

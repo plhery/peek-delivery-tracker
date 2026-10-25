@@ -8,6 +8,7 @@ import SwiftUI
 /// The main window's smallest size. Wider than the list beside a parcel needs, so it never turns into the phone's
 /// stack, and so that the tabs, the account, Add and the parcel's menu fit over the parcel without folding into ».
 enum MacWindow {
+    static let id = "main"
     static let minimumWidth: CGFloat = 860
     static let minimumHeight: CGFloat = 560
 }
@@ -32,6 +33,17 @@ extension View {
     func textInputAutocapitalization(_ mode: AutocapitalizationMode?) -> some View { self }
 
     func toolbar(_ visibility: Visibility, for bars: IOSBar...) -> some View { self }
+
+    /// Follows whether a sheet or an alert stands over the main window, which the menu bar's items wait for.
+    func onSheetOverMainWindow(_ covered: Binding<Bool>) -> some View {
+        let isMain = { (note: Notification) in (note.object as? NSWindow)?.identifier?.rawValue == MacWindow.id }
+        return onReceive(NotificationCenter.default.publisher(for: NSWindow.willBeginSheetNotification)) {
+            if isMain($0) { covered.wrappedValue = true }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didEndSheetNotification)) {
+            if isMain($0) { covered.wrappedValue = false }
+        }
+    }
 
     /// A large sheet where iOS covers the screen: what it covers with (the map) has no size of its own.
     func fullScreenCover<Content: View>(

@@ -73,6 +73,7 @@ final class AppDelegate: NSObject, PlatformApplicationDelegate, UNUserNotificati
     func applicationDidFinishLaunching(_ notification: Notification) {
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().setBadgeCount(0)
+        NSApp.servicesProvider = TrackWithPeek.shared
         // Opened at login, Peek waits in the menu bar. Its window is made and hidden, so the deliveries load as at
         // any launch.
         if MenuBarExtraSettings.shown && Self.launchedAtLogin {

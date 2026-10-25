@@ -64,7 +64,7 @@ struct PeekDeliveryTrackerApp: App {
         MenuBarExtra(isInserted: menuBarInserted) {
             stores(MenuBarPanel())
         } label: {
-            Image(nsImage: MenuBarExtraSettings.icon)
+            MenuBarLabel()
         }
         .menuBarExtraStyle(.window)
         #else

@@ -49,6 +49,25 @@
 	<string>public.app-category.utilities</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Peek uses the camera to scan tracking barcodes, so you can add parcels without typing.</string>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Track with Peek</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>trackParcel</string>
+			<key>NSRequiredContext</key>
+			<dict/>
+			<key>NSSendTypes</key>
+			<array>
+				<string>public.utf8-plain-text</string>
+				<string>public.url</string>
+			</array>
+		</dict>
+	</array>
 	<key>NSSupportsLiveActivities</key>
 	<false/>
 	<key>SDTAPIBaseURL</key>

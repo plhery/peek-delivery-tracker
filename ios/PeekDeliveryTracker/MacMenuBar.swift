@@ -83,6 +83,38 @@ extension ParcelStore {
     }
 }
 
+/// "Track with Peek" in the Services menu: text or a link chosen in another app opens Add with it, as a drop does,
+/// in front of the deliveries.
+@MainActor
+final class TrackWithPeek: NSObject {
+    static let shared = TrackWithPeek()
+
+    /// Opens the window when it is closed. The menu bar's eyes keep it while they show; without them, closing the
+    /// window quits Peek, and the service opens it again with the window.
+    static var openWindow: OpenWindowAction?
+
+    /// The service's message (`NSMessage` in Info.plist).
+    @objc func trackParcel(_ pasteboard: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
+        let items = (pasteboard.pasteboardItems ?? []).compactMap { $0.string(forType: .string) ?? $0.string(forType: .URL) }
+        let text = items.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty else { return }
+        // With no number in it, Add opens with the text all the same, and says what it found.
+        MenuBarRequests.send(.add(FirstParcelRequest.drop(items) ?? .paste(String(text.prefix(FirstParcelRequest.pasteLimit)))))
+        Self.openWindow?(id: MacWindow.id)
+        NSApp.activate()
+    }
+}
+
+/// Peek's eyes in the menu bar, which keep the way to the window for the Services menu.
+struct MenuBarLabel: View {
+    @Environment(\.openWindow) private var openWindow
+
+    var body: some View {
+        Image(nsImage: MenuBarExtraSettings.icon)
+            .onAppear { TrackWithPeek.openWindow = openWindow }
+    }
+}
+
 /// What opens from Peek's place in the menu bar: up to five parcels on their way, as the widget orders them, then
 /// Paste, Add and Refresh, then the window, Settings and Quit.
 struct MenuBarPanel: View {

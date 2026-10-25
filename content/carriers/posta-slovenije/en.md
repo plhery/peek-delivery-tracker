@@ -3,7 +3,7 @@ title: Pošta Slovenije tracking: statuses, pickup and contacts
 description: Track a Pošta Slovenije (Post of Slovenia) parcel: the 13-character number, what the English statuses mean, PS Paketomat pickup, claims and contacts.
 slug: posta-slovenije-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-25
 ---
 
 Pošta Slovenije (Post of Slovenia in English) is Slovenia's national post. Track a parcel on its [MojaPošta tracking page](https://moja.posta.si/tracking), which has an English switch, in the MojaPošta app or by pasting the number in the box above. The number usually comes in the sender's message, such as the shop's shipping email.
@@ -47,13 +47,13 @@ The tracker shows each step in Slovenian, or in English with its language switch
 
 If nobody is home, the postman leaves a notice saying where the item waits and until when, sometimes by SMS or email too. How long it waits depends on the service:
 
-- **Most webshop parcels** (the MojPaket service): 8 days at the post office, counted from the day after the notice.
+- **MojPaket parcels** (sent under a contract with Pošta Slovenije): 8 days at the post office, counted from the day after the notice.
 - **Universal postal items**: 15 days, unless a sender abroad set a shorter period.
-- **PS Paketomat lockers** (more than 300, open around the clock, code by SMS): about 60 hours, say the help pages (the parcel terms say 72), then 5 days at a post office.
+- **PS Paketomat lockers** (more than 300, open around the clock, code by SMS): 60 hours, then 5 days at a post office.
 
 After that, the parcel goes back to the sender.
 
-**Changing delivery.** With My Delivery, My Choice you can send a parcel already on its way to a PS Paketomat, a Direct4.me box, a safe place, a Petrol station, another address, another date or a post office. The link comes by SMS or email, so give your mobile number when you order. In MojaPošta, it's "Preusmeri paket" (redirect parcel); not every parcel qualifies.
+**Changing delivery.** With My Delivery, My Choice you can send a parcel already on its way to a PS Paketomat, a Direct4.me box, a safe place, a Petrol station, another address, another date or a post office. The link comes through the MojaPošta app, Viber or SMS, so give your mobile number when you order. In MojaPošta, it's "Preusmeri paket" (redirect parcel); not every parcel qualifies.
 
 **Someone else collecting** needs your written authorisation and their ID; for one collection, fill in the back of the notice.
 
@@ -72,17 +72,17 @@ Pošta Slovenije's channels, as posta.si listed them in October 2026:
 - **Contact centre:** 080 14 00, free from Slovenia, Monday to Friday 7.00 to 17.00.
 - **Phone:** +386 2 449 20 00 (on the English contact page).
 - **Email:** info@posta.si; sledenje.posiljk@posta.si for tracking; PomocMojaPosta@posta.si for the app and tracker.
-- **Pio**, the virtual assistant in MojaPošta, and the "Have a question?" form on en.posta.si.
+- **Pio**, Pošta Slovenije's virtual assistant, and the "Have a question?" form on en.posta.si.
 
 > Pošta Slovenije sends SMS only as "Paketomat" or "POSTA", email only from @posta.si, links only ending in posta.si, and never asks for payment in advance. It warns of fake "failed delivery" texts, often from foreign numbers. Don't click or pay: check the number in MojaPošta.
 
 ## Tracking Pošta Slovenije with Peek
 
-For a postal number ending `SI` with a valid check digit, [Peek](/) asks Pošta Slovenije (and [Chronopost](carrier:chronopost)) at once and shows "Pošta Slovenije has this parcel." when it knows the number. If not yet, you see "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Pošta Slovenije isn't asked: check the number, or pick the carrier with "Change". A moja.posta.si tracking link can be pasted too, and always names Pošta Slovenije.
+A postal number ending `SI` that starts with C, E, L or R and has a valid check digit is Pošta Slovenije's by its shape, so [Peek](/) names Pošta Slovenije straight away. For one with other letters, Peek asks Pošta Slovenije (and [Chronopost](carrier:chronopost)) at once and shows "Pošta Slovenije has this parcel." when it knows the number. If not yet, you see "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Pošta Slovenije isn't asked, and its lookup refuses the number even when picked by hand: check it for a typo. A moja.posta.si tracking link can be pasted too, and always names Pošta Slovenije.
 
-An item from abroad stays with its foreign post in Peek, but Pošta Slovenije's lookup takes any postal number: pick "Pošta Slovenije" with "Change", or paste a moja.posta.si tracking link for it.
+An item from abroad keeps its foreign post's number. When the foreign post says it's coming to Slovenia, or names no destination and you track it from Slovenia, Peek asks Pošta Slovenije too and follows the parcel there once Pošta Slovenije shows fresh progress; the foreign post's steps stay. Pošta Slovenije's lookup takes any postal number, so you can also pick "Pošta Slovenije" with "Change", or paste a moja.posta.si tracking link for it.
 
-Peek reads the service behind the MojaPošta app, checks every 10 minutes by day (every 2 once the parcel is out for delivery) and hourly overnight, and can notify you when the status changes. Each step goes on a map with its post office. Peek also shows the delivery time and the post office where the parcel waits (never a locker). There's no expected delivery day or weight. A step abroad is read on that country's clock; one in a country with several time zones doesn't appear. Statuses keep Pošta Slovenije's English wording, detail line included.
+Peek reads the service behind the MojaPošta app, checks every 10 minutes by day (every 2 once the parcel is out for delivery) and hourly overnight, and can notify you when the status changes. Each step goes on a map with its post office. Peek also shows the delivery time and the post office where the parcel waits (never a locker). There's no expected delivery day or weight. A step abroad is read on that country's clock. Statuses keep Pošta Slovenije's English wording, detail line included.
 
 ## Questions about Pošta Slovenije tracking
 
@@ -106,10 +106,11 @@ Yes, with its postal number: the tracker shows items from abroad once they reach
 - [Pošta Slovenije: MojaPošta Parcel tracking](https://moja.posta.si/tracking) – English tracker, number shape, two-month window, statuses, help contact
 - [Post of Slovenia: PS Paketomat](https://en.posta.si/home/postal-services-/receiving-mail/ps-paketomat) – locker code by SMS, 60 hours, 5 days at a post office, return
 - [Pošta Slovenije: PS Paketomat](https://www.posta.si/zasebno/postne-storitve/ps-paketomat) – 24 hours a day, more than 300 lockers, cash on delivery
+- [Pošta Slovenije: Splošni pogoji PS Paketomat](https://www.posta.si/zasebno-site/Documents/Splosni%20pogoji%20PS%20Paketomat.pdf) – in force since 1 April 2026: 60 hours for every item in a locker
 - [Post of Slovenia: My Delivery – My Choice](https://en.posta.si/home/postal-services-/receiving-mail/my-delivery-my-choice) – changing the delivery point
-- [Pošta Slovenije: Moja dostava, moja izbira](https://www.posta.si/zasebno/postne-storitve/prejemanje/moja-dostava-moja-izbira) – link by SMS or email, mobile number condition
+- [Pošta Slovenije: Moja dostava, moja izbira](https://www.posta.si/zasebno/postne-storitve/prejemanje/moja-dostava-moja-izbira) – link through the MojaPošta app, Viber or SMS, mobile number condition
 - [Post of Slovenia: Authorization to collect mail](https://en.posta.si/home/postal-services-/receiving-mail/authorization-to-collect-mail) – authorisation, ID, back of the notice
-- [Pošta Slovenije: Splošni pogoji poslovanja s paketi MojPaket](https://www.posta.si/Documents/Zakoni%20in%20splo%C5%A1ni%20pogoji/Splosni-pogoji-poslovanja-s-paketi-MojPaket.pdf) – notice, 8 days, 72 hours at a locker, return
+- [Pošta Slovenije: Splošni pogoji poslovanja s paketi MojPaket](https://www.posta.si/Documents/Zakoni%20in%20splo%C5%A1ni%20pogoji/Splosni-pogoji-poslovanja-s-paketi-MojPaket.pdf) – contract parcels, notice, 8 days, return
 - [Pošta Slovenije: Splošni pogoji izvajanja univerzalne poštne storitve](https://www.posta.si/Documents/Zakoni%20in%20splo%c5%a1ni%20pogoji/Splo%c5%a1ni%20pogoji%20izvajanja%20univerzalne%20po%c5%a1tne%20storitve.pdf) – notice, 15 days, complaint deadlines, compensation, AKOS
 - [Pošta Slovenije: MojaPošta Center za pomoč](https://www.posta.si/zasebno/mojaposta/center-za-pomoc) – where the number is, 60-day list, redirecting, Pio
 - [Pošta Slovenije: Priročnik za pravilno opremo paketov](https://www.posta.si/poslovno-site/Documents/Prirocnik-za-pravilno-opremo-malih-poslovnih-paketov-poslovnih-paketov-PPIN-PPVD-palet-in-tovora.pdf) – number structure, service prefixes, check digit

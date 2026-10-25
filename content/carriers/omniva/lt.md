@@ -3,7 +3,7 @@ title: Omniva siuntų sekimas: statusai, paštomatai ir kontaktai
 description: Sekite Omniva siuntą Lietuvoje: kaip atrodo siuntos numeris, ką reiškia statusai, kiek siunta laukia paštomate, kaip pristato kurjeris ir kur kreiptis.
 slug: omniva-siuntu-sekimas
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-25
 ---
 
 Omniva – logistikos ir technologijų bendrovė, kurios paštomatai ir kurjeriai pristato siuntas Lietuvoje, Latvijoje ir Estijoje. Lietuvoje paslaugas teikia Omniva LT, UAB. Siuntą sekite svetainėje [mano.omniva.lt](https://mano.omniva.lt/track), OMNIVA programėlėje arba tiesiog įklijuokite numerį į laukelį viršuje. Sekimo numerį rasite Omniva SMS žinutėje ar el. laiške apie siuntą, o jei pirkote internetu – ir parduotuvės laiške apie išsiuntimą.
@@ -96,7 +96,7 @@ Skambindami turėkite po ranka siuntos numerį. Dėl paties užsakymo klauskite 
 
 Numerį, kuris prasideda `JJEE` (bet kurios iš dviejų formų), [Peek](/) iškart priskiria Omniva. Tinka ir mano.omniva.lt sekimo nuorodos (`/track/` ir numeris) bei omniva.lt nuorodos su `barcode=`. Pašto kodo nereikia.
 
-Kai įklijuojate numerį, kuris baigiasi `EE` ir turi teisingą kontrolinį skaitmenį, Peek iškart klausia Omniva ir [Chronopost](carrier:chronopost), ar jie šią siuntą žino. Jei Omniva siuntą žino, matysite „Omniva has this parcel.“, o jei dar ne – kad siunta dar nerasta: pridėtos siuntos Peek ieškos toliau, vis rečiau, iki mėnesio. Jei kontrolinis skaitmuo neteisingas, Peek tokio numerio Omniva neklausia: patikrinkite, ar gerai jį nusirašėte.
+Numerį, kuris baigiasi `EE`, prasideda raide C, R, E ar L (bet ne CR, CV ar RO) ir turi teisingą kontrolinį skaitmenį, Peek pagal formą iškart priskiria Omniva. Jei raidės kitos, Peek iškart klausia Omniva ir [Chronopost](carrier:chronopost), ar jie šią siuntą žino. Jei Omniva siuntą žino, matysite „Omniva has this parcel.“, o jei dar ne – kad siunta dar nerasta: pridėtos siuntos Peek ieškos toliau, vis rečiau, iki mėnesio. Jei kontrolinis skaitmuo neteisingas, Peek tokio numerio Omniva neklausia: patikrinkite, ar gerai jį nusirašėte.
 
 Siuntą su kitos šalies pašto numeriu Peek seks per Omniva, jei pasirinksite Omniva per „Change“ (jau pridėtai siuntai – per „Change carrier“) arba įklijuosite Omniva sekimo nuorodą. Pats Peek tokios siuntos Omniva neperduoda.
 

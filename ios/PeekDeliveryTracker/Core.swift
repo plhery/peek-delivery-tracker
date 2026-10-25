@@ -10,6 +10,54 @@ enum DeviceIdiom {
     #endif
 }
 
+/// The system clipboard.
+enum Clipboard {
+    static var string: String? {
+        get {
+            #if os(macOS)
+            NSPasteboard.general.string(forType: .string)
+            #else
+            UIPasteboard.general.string
+            #endif
+        }
+        set {
+            #if os(macOS)
+            NSPasteboard.general.clearContents()
+            if let newValue { NSPasteboard.general.setString(newValue, forType: .string) }
+            #else
+            UIPasteboard.general.string = newValue
+            #endif
+        }
+    }
+
+    static func copy(_ url: URL) {
+        #if os(macOS)
+        let item = NSPasteboardItem()
+        item.setString(url.absoluteString, forType: .URL)
+        item.setString(url.absoluteString, forType: .string)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.writeObjects([item])
+        #else
+        UIPasteboard.general.url = url
+        #endif
+    }
+}
+
+/// The taps a phone gives under the finger. A Mac gives none.
+@MainActor enum Haptics {
+    static func success() {
+        #if os(iOS)
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        #endif
+    }
+
+    static func selection() {
+        #if os(iOS)
+        UISelectionFeedbackGenerator().selectionChanged()
+        #endif
+    }
+}
+
 struct AppConfiguration: Sendable {
     enum Mode: Sendable {
         case demo

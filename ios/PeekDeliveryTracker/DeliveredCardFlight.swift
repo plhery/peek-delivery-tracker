@@ -21,7 +21,9 @@ enum DeliveryListSpace {
     private var names: [UUID: CGFloat] = [:]
     /// Where Pip shows on the screen, and on whose card.
     private var pip: (id: UUID, frame: CGRect)?
+    #if os(iOS)
     weak var scrollView: UIScrollView?
+    #endif
 
     func stand(_ id: UUID, at frame: CGRect) { frames[id] = frame }
     func name(_ id: UUID, at middle: CGFloat) { names[id] = middle }
@@ -36,6 +38,14 @@ enum DeliveryListSpace {
         frames[id].map { Place(frame: $0, title: (names[id] ?? $0.midY) - $0.minY) }
     }
 
+    #if os(macOS)
+    // For now the Mac pictures no card: each simply takes its new place, and nothing comes out of one.
+    var visible: CGRect? { nil }
+    var topmost: UUID? { nil }
+    func see(pip frame: CGRect, on id: UUID) { pip = (id, frame) }
+    func mouth(of id: UUID) -> CGPoint? { nil }
+    func picture(of frame: CGRect) -> PlatformImage? { nil }
+    #else
     /// The part of the list that shows.
     var visible: CGRect? {
         scrollView.map { CGRect(origin: $0.contentOffset, size: $0.bounds.size) }
@@ -76,8 +86,16 @@ enum DeliveryListSpace {
             scrollView.drawHierarchy(in: CGRect(origin: .zero, size: scrollView.bounds.size), afterScreenUpdates: false)
         }
     }
+    #endif
 }
 
+#if os(macOS)
+/// The Mac pictures no card, so the list's scroll view isn't needed.
+struct DeliveryScrollProbe: View {
+    let places: DeliveryCardPlaces
+    var body: some View { Color.clear }
+}
+#else
 /// Finds the scroll view the list is drawn in.
 struct DeliveryScrollProbe: UIViewRepresentable {
     let places: DeliveryCardPlaces
@@ -109,6 +127,7 @@ struct DeliveryScrollProbe: UIViewRepresentable {
         }
     }
 }
+#endif
 
 /// One card on its way to another place in the list.
 struct DeliveredFlight: Identifiable {
@@ -119,7 +138,7 @@ struct DeliveredFlight: Identifiable {
     let was: DeliveryCardKind
     let becomes: DeliveryCardKind
     /// The card it was, as it showed.
-    let picture: UIImage
+    let picture: PlatformImage
     let from: DeliveryCardPlaces.Place
     /// Where the card it becomes stands, once the list has laid it out.
     var to: DeliveryCardPlaces.Place?

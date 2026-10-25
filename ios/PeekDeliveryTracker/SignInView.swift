@@ -792,6 +792,36 @@ private struct SignInFormSurface: ViewModifier {
     }
 }
 
+#if os(macOS)
+private struct AppleAuthenticationButton: NSViewRepresentable {
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.isEnabled) private var isEnabled
+    var cornerRadius: CGFloat = 18
+    let action: () -> Void
+
+    func makeCoordinator() -> Coordinator { Coordinator(action: action) }
+
+    func makeNSView(context: Context) -> ASAuthorizationAppleIDButton {
+        let button = ASAuthorizationAppleIDButton(type: .continue, style: colorScheme == .dark ? .white : .black)
+        button.cornerRadius = cornerRadius
+        button.target = context.coordinator
+        button.action = #selector(Coordinator.tapped)
+        return button
+    }
+
+    func updateNSView(_ button: ASAuthorizationAppleIDButton, context: Context) {
+        button.isEnabled = isEnabled
+        button.cornerRadius = cornerRadius
+        context.coordinator.action = action
+    }
+
+    final class Coordinator: NSObject {
+        var action: () -> Void
+        init(action: @escaping () -> Void) { self.action = action }
+        @objc func tapped() { action() }
+    }
+}
+#else
 private struct AppleAuthenticationButton: UIViewRepresentable {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.isEnabled) private var isEnabled
@@ -819,6 +849,7 @@ private struct AppleAuthenticationButton: UIViewRepresentable {
         @objc func tapped() { action() }
     }
 }
+#endif
 
 private struct InvitationHeading: View {
     let nickname: String?

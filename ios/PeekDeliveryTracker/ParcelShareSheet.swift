@@ -86,6 +86,9 @@ struct ParcelShareSheet: View {
     /// An iPad's share sheet comes as a popover from the Share button rather than a small sheet
     /// at the window's foot; a phone's rises from the bottom.
     private func handOut(_ url: URL) {
+        #if os(macOS)
+        handingOut = HandedAddress(url: url)
+        #else
         guard DeviceIdiom.isPad, let button = shareButton.view,
               var top = button.window?.rootViewController else {
             handingOut = HandedAddress(url: url)
@@ -97,6 +100,7 @@ struct ParcelShareSheet: View {
         controller.popoverPresentationController?.sourceView = button
         controller.popoverPresentationController?.sourceRect = button.bounds
         top.present(controller, animated: true)
+        #endif
     }
 
     private func handedOut(_ shared: Bool, _ error: Error?) {
@@ -380,9 +384,9 @@ struct ParcelShareSheet: View {
     private func copy() {
         Task {
             guard let url = await model.addressToHandOut() else { return }
-            UIPasteboard.general.url = url
+            Clipboard.copy(url)
             DeliveryAnalytics.shared.action("parcel-link-share", .success)
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            Haptics.success()
             AccessibilityNotification.Announcement(localizer.text("link.copied")).post()
             copied = true
             try? await Task.sleep(for: .seconds(2))
@@ -494,6 +498,23 @@ private struct SharePreviewCard: View {
     }
 }
 
+#if os(macOS)
+/// The Mac's share sheet points at nothing for now.
+private final class ShareButtonAnchor {
+    struct Marker: View {
+        let anchor: ShareButtonAnchor
+        var body: some View { Color.clear }
+    }
+}
+
+/// For now the Mac offers the link in a small sheet of its own. Whether it was shared isn't known.
+private struct LinkActivitySheet: View {
+    let url: URL
+    let finished: (Bool, Error?) -> Void
+
+    var body: some View { MacShareSheet(url: url) }
+}
+#else
 /// The Share button's place in the window, for an iPad's share popover to point at.
 private final class ShareButtonAnchor {
     weak var view: UIView?
@@ -531,6 +552,7 @@ private struct LinkActivitySheet: UIViewControllerRepresentable {
 
     func updateUIViewController(_ controller: UIActivityViewController, context: Context) {}
 }
+#endif
 
 #if DEBUG
 /// Opens the share sheet of a demo parcel at launch, to look at it in the simulator:

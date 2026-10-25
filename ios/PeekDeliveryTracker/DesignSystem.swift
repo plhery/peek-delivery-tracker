@@ -2,6 +2,13 @@ import GameController
 import SwiftUI
 #if os(iOS)
 import UIKit
+typealias PlatformColor = UIColor
+typealias PlatformFont = UIFont
+typealias PlatformImage = UIImage
+#else
+typealias PlatformColor = NSColor
+typealias PlatformFont = NSFont
+typealias PlatformImage = NSImage
 #endif
 
 enum Brand {
@@ -21,29 +28,47 @@ enum Brand {
 
     /// Cards ask for carrier colors on every render. Returning the same dynamic
     /// color each time lets SwiftUI see that nothing changed.
-    private static let dynamicColors = NSCache<NSString, UIColor>()
+    private static let dynamicColors = NSCache<NSString, PlatformColor>()
 
     static func color(light: String, dark: String) -> Color {
         let key = "\(light)|\(dark)" as NSString
         if let cached = dynamicColors.object(forKey: key) { return Color(uiColor: cached) }
-        let lightColor = UIColor(Color(hex: light))
-        let darkColor = UIColor(Color(hex: dark))
+        let lightColor = PlatformColor(Color(hex: light))
+        let darkColor = PlatformColor(Color(hex: dark))
+        #if os(macOS)
+        let dynamic = NSColor(name: nil) { appearance in
+            let match = appearance.bestMatch(from: [
+                .aqua, .darkAqua, .accessibilityHighContrastAqua, .accessibilityHighContrastDarkAqua,
+            ])
+            let dark = match == .darkAqua || match == .accessibilityHighContrastDarkAqua
+            let color = dark ? darkColor : lightColor
+            guard match == .accessibilityHighContrastAqua || match == .accessibilityHighContrastDarkAqua,
+                  let rgb = color.usingColorSpace(.sRGB) else { return color }
+            return contrasted(rgb)
+        }
+        #else
         let dynamic = UIColor { traits in
             let color = traits.userInterfaceStyle == .dark ? darkColor : lightColor
             guard traits.accessibilityContrast == .high else { return color }
-            var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
-            color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-            let luminance = red * 0.2126 + green * 0.7152 + blue * 0.0722
-            let adjustment: CGFloat = luminance > 0.5 ? 0.06 : -0.06
-            return UIColor(
-                red: min(1, max(0, red + adjustment)),
-                green: min(1, max(0, green + adjustment)),
-                blue: min(1, max(0, blue + adjustment)),
-                alpha: alpha
-            )
+            return contrasted(color)
         }
+        #endif
         dynamicColors.setObject(dynamic, forKey: key)
         return Color(uiColor: dynamic)
+    }
+
+    /// A little further from the middle grey, for increased contrast.
+    private static func contrasted(_ color: PlatformColor) -> PlatformColor {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        let luminance = red * 0.2126 + green * 0.7152 + blue * 0.0722
+        let adjustment: CGFloat = luminance > 0.5 ? 0.06 : -0.06
+        return PlatformColor(
+            red: min(1, max(0, red + adjustment)),
+            green: min(1, max(0, green + adjustment)),
+            blue: min(1, max(0, blue + adjustment)),
+            alpha: alpha
+        )
     }
 }
 
@@ -54,6 +79,7 @@ enum AppAppearance: String, CaseIterable, Identifiable {
     static let defaultValue = AppAppearance.light
     var id: String { rawValue }
     var titleKey: String { "native.appearance.\(rawValue)" }
+    #if os(iOS)
     var interfaceStyle: UIUserInterfaceStyle {
         switch self {
         case .system: .unspecified
@@ -61,6 +87,7 @@ enum AppAppearance: String, CaseIterable, Identifiable {
         case .dark: .dark
         }
     }
+    #endif
 }
 
 #if os(macOS)
@@ -149,7 +176,7 @@ struct AccountToolbarButton: View {
 
     /// ⌘, reaches the button under a sheet or a popover of its screen as well: it waits for them.
     private func open() {
-        if !UIApplication.shared.windowCovered { action() }
+        if !PlatformApplication.shared.windowCovered { action() }
     }
 }
 
@@ -183,6 +210,14 @@ extension EnvironmentValues {
     @Entry var keyboardInFront = true
 }
 
+#if os(macOS)
+extension NSApplication {
+    /// Whether anything stands over the app's window: a sheet or a modal panel. For now popovers don't count.
+    var windowCovered: Bool {
+        (mainWindow ?? keyWindow)?.attachedSheet != nil || modalWindow != nil
+    }
+}
+#else
 extension UIApplication {
     /// Whether anything stands over the app's window: a sheet, a cover, an alert or a popover. The screens under it
     /// keep their keyboard shortcuts, which wait for it.
@@ -191,6 +226,7 @@ extension UIApplication {
             .rootViewController?.presentedViewController != nil
     }
 }
+#endif
 
 extension Color {
     init(hex: String) {
@@ -207,8 +243,12 @@ extension GeometryProxy {
     /// Where an iPhone Duo folds while it stands half open, in this reader's space: nil when it lies flat or closed,
     /// and on any other device.
     var fold: CGRect? {
+        #if os(macOS)
+        return nil
+        #else
         guard #available(iOS 27.1, *) else { return nil }
         return reservedRegions(kind: .division).first?.frame
+        #endif
     }
 }
 
@@ -216,7 +256,7 @@ extension View {
     /// What scrolls up under the buttons at the top fades away, rather than passing under a bar that appears for it.
     @ViewBuilder
     func softTopEdge() -> some View {
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, macOS 26.0, *) {
             scrollEdgeEffectStyle(.soft, for: .top)
         } else {
             self
@@ -226,7 +266,7 @@ extension View {
     /// In an iPad window, steps aside for the window's buttons in its top leading corner.
     @ViewBuilder
     func clearOfWindowControls() -> some View {
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, macOS 26.0, *) {
             containerCornerOffset(.leading)
         } else {
             self
@@ -270,7 +310,7 @@ extension View {
 
     @ViewBuilder
     func glassSurface<S: Shape>(in shape: S) -> some View {
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, macOS 26.0, *) {
             glassEffect(.regular, in: shape)
         } else {
             background(.ultraThinMaterial, in: shape)

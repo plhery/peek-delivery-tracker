@@ -105,6 +105,8 @@ enum PullToRefreshPalette {
     static let inkSoft = Brand.color(light: "#657060", dark: "#AFB9A9")
 }
 
+// The Mac has no pull-to-refresh: it refreshes from the menu and ⌘R.
+#if os(iOS)
 /// Stands in for the system spinner, like the web app's seal: neutral ink while
 /// pulling and refreshing, green only once every parcel has been checked.
 struct PullToRefreshIndicator: View {
@@ -321,3 +323,4 @@ private struct NativeRefreshSpinnerHider: UIViewRepresentable {
         }
     }
 }
+#endif

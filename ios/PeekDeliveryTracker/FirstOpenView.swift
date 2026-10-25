@@ -495,7 +495,7 @@ struct FirstOpenView: View {
             }
             .accessibilityLabel(localizer.text("add.tracking"))
             .accessibilityIdentifier("welcome.field")
-            if DataScannerViewController.isSupported && DataScannerViewController.isAvailable {
+            if LabelScanner.isAvailable {
                 Button { onAdd(.scan) } label: {
                     Image(systemName: "barcode.viewfinder")
                         .font(large ? .title2 : .title3)
@@ -556,7 +556,7 @@ struct FirstOpenView: View {
 
     private func paste() {
         DeliveryAnalytics.shared.action("parcel-paste")
-        onAdd(.paste(UIPasteboard.general.string ?? ""))
+        onAdd(.paste(Clipboard.string ?? ""))
     }
 }
 
@@ -683,7 +683,7 @@ struct DeliveriesEmptyState: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var pressed = false
 
-    private var canScan: Bool { DataScannerViewController.isSupported && DataScannerViewController.isAvailable }
+    private var canScan: Bool { LabelScanner.isAvailable }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -708,7 +708,7 @@ struct DeliveriesEmptyState: View {
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 8)
-            Button { onAdd(.paste(UIPasteboard.general.string ?? "")) } label: {
+            Button { onAdd(.paste(Clipboard.string ?? "")) } label: {
                 FirstParcelPrimaryLabel(title: localizer.text("landing.pasteAndTrack"), symbol: "doc.on.clipboard")
             }
             .accessibilityIdentifier("deliveries.empty.paste")

@@ -75,7 +75,7 @@ struct ParcelListView: View {
     }
 
     private func choose(_ tab: Int) {
-        if !UIApplication.shared.windowCovered { selection = tab }
+        if !PlatformApplication.shared.windowCovered { selection = tab }
     }
 }
 
@@ -452,7 +452,7 @@ private struct DeliveryListView: View {
         .onChange(of: showingAdd) { _, open in DeliveryAnalytics.shared.view(open ? "add-parcel" : "deliveries"); if open { revealParcelID = nil; parcelBurstID = nil } }
         .onChange(of: showingAccount) { _, open in DeliveryAnalytics.shared.view(open ? "account" : "deliveries"); if open { revealParcelID = nil; parcelBurstID = nil } }
         .onChange(of: showingFilters) { _, open in settleSheets(); if open { DeliveryAnalytics.shared.action("filters-open"); revealParcelID = nil; parcelBurstID = nil } }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+        .onReceive(NotificationCenter.default.publisher(for: PlatformApplication.didBecomeActiveNotification)) { _ in
             consumeSharedDraft()
         }
         .onReceive(NotificationCenter.default.publisher(for: .didOpenParcelNotification)) { notification in
@@ -765,11 +765,14 @@ private struct DeliveryListView: View {
                     }
                 }
                 .background { DeliveryScrollProbe(places: places) }
+                #if os(iOS)
                 .background(alignment: .top) {
                     PullToRefreshIndicator(model: pull, pullLabel: localizer.text("app.pullToRefresh"))
                 }
+                #endif
             }
             .scrollIndicators(.hidden)
+            #if os(iOS)
             .onScrollGeometryChange(for: PullGeometry.self, of: PullGeometry.init) { _, geometry in
                 pull.track(geometry)
             }
@@ -779,6 +782,7 @@ private struct DeliveryListView: View {
                 // pull waits for a task of its own instead.
                 await Task { await refreshFromPull() }.value
             }
+            #endif
             .overlay {
                 if store.loading && store.parcels.isEmpty {
                     VStack(spacing: 12) {
@@ -826,7 +830,7 @@ private struct DeliveryListView: View {
 
         // The mark stands at the leading edge on its own tile, not on a control's glass. It is drawn as one image:
         // beside a parcel, the list's bar draws an item's shapes with vibrancy, which greyed the eyes.
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, macOS 26.0, *) {
             ToolbarItem(placement: .topBarLeading) { PeekMark(size: 30).drawingGroup() }
                 .sharedBackgroundVisibility(.hidden)
         } else {
@@ -1972,11 +1976,16 @@ private extension View {
     /// A card the pointer lights up, and its menu. The card itself is lifted as the menu's preview, in its own shape.
     @ViewBuilder func cardMenu(_ menu: CardMenu?, shape: some Shape) -> some View {
         if let menu {
+            #if os(macOS)
+            contextMenu { ParcelMenuButtons(items: menu.items, shortcuts: menu.shortcuts, choose: menu.choose) }
+                .parcelDeleteConfirmation(isPresented: menu.deleting, delete: menu.delete)
+            #else
             contentShape(.hoverEffect, shape)
                 .hoverEffect(.highlight)
                 .contentShape(.contextMenuPreview, shape)
                 .contextMenu { ParcelMenuButtons(items: menu.items, shortcuts: menu.shortcuts, choose: menu.choose) }
                 .parcelDeleteConfirmation(isPresented: menu.deleting, delete: menu.delete)
+            #endif
         } else {
             self
         }
@@ -2221,6 +2230,8 @@ struct ArchiveSwipeMotion: Identifiable {
     }
 }
 
+// A Mac has no swipe to archive: its cards archive from their menu and ⌃⌘A.
+#if os(iOS)
 /// Decline vertical intent before recognition so the parent scroll view can win.
 /// Ignoring vertical values after a SwiftUI DragGesture begins is too late.
 final class ArchivePanGestureDelegate: NSObject, UIGestureRecognizerDelegate {
@@ -2361,6 +2372,7 @@ private struct ArchivePanGesture: UIGestureRecognizerRepresentable {
         }
     }
 }
+#endif
 
 private struct ExperimentalSwipeToArchiveModifier: ViewModifier {
     let title: String
@@ -2417,7 +2429,9 @@ private struct ExperimentalSwipeToArchiveModifier: ViewModifier {
                 width = nextWidth
             }
             .simultaneousGesture(tapGesture, including: .gesture)
+            #if os(iOS)
             .gesture(swipeGesture(action: action))
+            #endif
             .onDisappear(perform: cancelSwipe)
             .task(id: motion?.id) { await finishMotion() }
             .allowsHitTesting(!committing)
@@ -2501,6 +2515,7 @@ private struct ExperimentalSwipeToArchiveModifier: ViewModifier {
             }
     }
 
+    #if os(iOS)
     private func swipeGesture(action: @escaping () async -> Bool) -> ArchivePanGesture {
         ArchivePanGesture(
             onChanged: { translation in
@@ -2536,6 +2551,7 @@ private struct ExperimentalSwipeToArchiveModifier: ViewModifier {
             }
         )
     }
+    #endif
 
     /// Our own motion draws every frame; SwiftUI must not animate these changes again.
     private func quietly(_ change: () -> Void) {

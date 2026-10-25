@@ -531,12 +531,16 @@ struct MapPalette {
         return palette
     }
 
-    private static func rgb(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat) -> UIColor {
-        UIColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: alpha)
+    private static func rgb(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat) -> PlatformColor {
+        PlatformColor(red: red / 255, green: green / 255, blue: blue / 255, alpha: alpha)
     }
 
-    private static func adaptive(light: UIColor, dark: UIColor) -> Color {
+    private static func adaptive(light: PlatformColor, dark: PlatformColor) -> Color {
+        #if os(macOS)
+        Color(nsColor: NSColor(name: nil) { $0.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua ? dark : light })
+        #else
         Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? dark : light })
+        #endif
     }
 }
 
@@ -565,14 +569,14 @@ struct MapOverlay {
     var shown: Double { Double(labels.count) + (pip == nil ? 0 : 0.5) }
 
     enum Fonts {
-        static let label = UIFont.systemFont(ofSize: 11.5, weight: .medium)
-        static let area = UIFont.systemFont(ofSize: 10.5, weight: .medium)
-        static let context = UIFont.systemFont(ofSize: 9.5, weight: .medium)
-        static let city = UIFont.systemFont(ofSize: 10, weight: .regular)
-        static let pointerName = UIFont.systemFont(ofSize: 11, weight: .semibold)
-        static let pointerDetail = UIFont.systemFont(ofSize: 11, weight: .regular)
+        static let label = PlatformFont.systemFont(ofSize: 11.5, weight: .medium)
+        static let area = PlatformFont.systemFont(ofSize: 10.5, weight: .medium)
+        static let context = PlatformFont.systemFont(ofSize: 9.5, weight: .medium)
+        static let city = PlatformFont.systemFont(ofSize: 10, weight: .regular)
+        static let pointerName = PlatformFont.systemFont(ofSize: 11, weight: .semibold)
+        static let pointerDetail = PlatformFont.systemFont(ofSize: 11, weight: .regular)
 
-        static func width(_ text: String, _ font: UIFont, tracking: CGFloat = 0) -> CGFloat {
+        static func width(_ text: String, _ font: PlatformFont, tracking: CGFloat = 0) -> CGFloat {
             ceil((text as NSString).size(withAttributes: [.font: font]).width) + tracking * CGFloat(text.count)
         }
     }

@@ -27,6 +27,10 @@ struct ArrivalTilt: Equatable, Sendable {
 @MainActor
 final class ArrivalMotion: ObservableObject {
     @Published private(set) var tilt = ArrivalTilt()
+    #if os(macOS)
+    /// A Mac doesn't tilt: the pose stays level.
+    func setActive(_ active: Bool) {}
+    #else
     private let manager = CMMotionManager()
     private var samples: Task<Void, Never>?
     private var reference: CMAttitude?
@@ -80,4 +84,5 @@ final class ArrivalMotion: ObservableObject {
         samples?.cancel()
         manager.stopDeviceMotionUpdates()
     }
+    #endif
 }

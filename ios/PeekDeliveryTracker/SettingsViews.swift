@@ -128,7 +128,11 @@ struct NotificationSettingsView: View {
                         Text(systemStatusText).font(.subheadline).foregroundStyle(.secondary)
                         if store.notificationStatus == .denied && !store.isDemo {
                             Button(localizer.text("native.openSettings"), systemImage: "gear") {
+                                #if os(macOS)
+                                NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.Notifications-Settings.extension")!)
+                                #else
                                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                                #endif
                             }
                         } else {
                             Toggle(localizer.text("settings.deliveryUpdates"), isOn: Binding(
@@ -663,6 +667,14 @@ struct AccountView: View {
     }
 }
 
+#if os(macOS)
+private struct ActivityShareSheet: View {
+    let items: [Any]
+    var body: some View {
+        if let url = items.first as? URL { MacShareSheet(url: url) }
+    }
+}
+#else
 private struct ActivityShareSheet: UIViewControllerRepresentable {
     let items: [Any]
     func makeUIViewController(context: Context) -> UIActivityViewController {
@@ -670,6 +682,7 @@ private struct ActivityShareSheet: UIViewControllerRepresentable {
     }
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
+#endif
 
 /// A web page a list or a row leads to, shown in a sheet.
 struct SitePage: Identifiable {
@@ -677,6 +690,22 @@ struct SitePage: Identifiable {
     var id: URL { url }
 }
 
+#if os(macOS)
+/// A page of the site. For now the Mac opens it in the default browser, and the sheet closes again.
+struct SafariPage: View {
+    let url: URL
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        Color.clear
+            .frame(width: 1, height: 1)
+            .onAppear {
+                NSWorkspace.shared.open(url)
+                dismiss()
+            }
+    }
+}
+#else
 /// A page of the site, read without leaving the app. It opens web addresses only.
 struct SafariPage: UIViewControllerRepresentable {
     let url: URL
@@ -687,6 +716,7 @@ struct SafariPage: UIViewControllerRepresentable {
     }
     func updateUIViewController(_ controller: SFSafariViewController, context: Context) {}
 }
+#endif
 
 private extension String {
     var cleaned: String { trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }

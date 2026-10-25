@@ -132,6 +132,7 @@ struct AddParcelView: View {
                 .environmentObject(localizer)
                 .formOnPad()
             }
+            #if os(iOS)
             .fullScreenCover(isPresented: $showingScanner) {
                 TrackingScannerView { value in
                     withAnimation(reduceMotion ? nil : .snappy(duration: 0.34)) {
@@ -143,6 +144,7 @@ struct AddParcelView: View {
                 }
                 .environmentObject(localizer)
             }
+            #endif
             .task {
                 guard !didFocusTracking else { return }
                 didFocusTracking = true
@@ -744,7 +746,7 @@ struct AddParcelView: View {
     }
 
     private var scannerAvailable: Bool {
-        DataScannerViewController.isSupported && DataScannerViewController.isAvailable
+        LabelScanner.isAvailable
     }
 
     /// Every number the field names with certainty, when it names two or more: one is to be chosen.
@@ -1001,7 +1003,7 @@ struct AddParcelView: View {
 
     private func paste() {
         DeliveryAnalytics.shared.action("parcel-paste")
-        guard let value = UIPasteboard.general.string?.trimmingCharacters(
+        guard let value = Clipboard.string?.trimmingCharacters(
             in: .whitespacesAndNewlines
         ), !value.isEmpty else {
             errorMessage = localizer.text("add.pasteFailed")
@@ -1215,6 +1217,18 @@ struct ParcelAddedBurst: View {
     }
 }
 
+/// Whether this device scans a label's barcode. The Mac has no scanner.
+enum LabelScanner {
+    @MainActor static var isAvailable: Bool {
+        #if os(iOS)
+        DataScannerViewController.isSupported && DataScannerViewController.isAvailable
+        #else
+        false
+        #endif
+    }
+}
+
+#if os(iOS)
 struct TrackingScannerView: View {
     let onScan: (String) -> Void
     @EnvironmentObject private var localizer: Localizer
@@ -1289,6 +1303,7 @@ private struct TrackingDataScanner: UIViewControllerRepresentable {
         }
     }
 }
+#endif
 
 struct ParcelFilterView: View {
     @Binding var status: ParcelStatusFilter

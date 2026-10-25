@@ -152,7 +152,7 @@ final class ParcelStore: ObservableObject {
             shareNotes.forgetAll()
             // So does what it answered about its parcels.
             ParcelFeedbackMemory().forgetAll()
-            UIApplication.shared.unregisterForRemoteNotifications()
+            PlatformApplication.shared.unregisterForRemoteNotifications()
             AppDelegate.clearDeviceToken()
             UserDefaults.standard.set(true, forKey: notificationOptOutKey)
             UserDefaults.standard.set(false, forKey: nativePushRegisteredKey)
@@ -803,7 +803,7 @@ final class ParcelStore: ObservableObject {
         try session.checkGeneration(generation)
         await endAllDeliveryLiveActivities()
         try session.checkGeneration(generation)
-        UIApplication.shared.unregisterForRemoteNotifications()
+        PlatformApplication.shared.unregisterForRemoteNotifications()
         AppDelegate.clearDeviceToken()
         UserDefaults.standard.set(true, forKey: notificationOptOutKey)
         UserDefaults.standard.set(false, forKey: nativePushRegisteredKey)
@@ -834,7 +834,7 @@ final class ParcelStore: ObservableObject {
         try session.checkGeneration(generation)
         await endAllDeliveryLiveActivities()
         try session.checkGeneration(generation)
-        UIApplication.shared.unregisterForRemoteNotifications()
+        PlatformApplication.shared.unregisterForRemoteNotifications()
         AppDelegate.clearDeviceToken()
         UserDefaults.standard.set(true, forKey: notificationOptOutKey)
         UserDefaults.standard.set(false, forKey: nativePushRegisteredKey)
@@ -865,7 +865,7 @@ final class ParcelStore: ObservableObject {
             status: notificationStatus,
             optedOut: optedOut
         ) {
-            UIApplication.shared.registerForRemoteNotifications()
+            PlatformApplication.shared.registerForRemoteNotifications()
         }
     }
 
@@ -889,7 +889,7 @@ final class ParcelStore: ObservableObject {
             throw DeliveryAPIError.notificationsDenied
         }
         UserDefaults.standard.set(false, forKey: notificationOptOutKey)
-        UIApplication.shared.registerForRemoteNotifications()
+        PlatformApplication.shared.registerForRemoteNotifications()
         if isDemo {
             UserDefaults.standard.set(true, forKey: demoNotificationsKey)
             notificationsEnabledOnDevice = true
@@ -920,7 +920,7 @@ final class ParcelStore: ObservableObject {
         nativePushGeneration += 1
         let token = AppDelegate.currentDeviceToken
         if let token, !isDemo { try await api.unregisterNativePushToken(token) }
-        UIApplication.shared.unregisterForRemoteNotifications()
+        PlatformApplication.shared.unregisterForRemoteNotifications()
         AppDelegate.clearDeviceToken()
         UserDefaults.standard.set(true, forKey: notificationOptOutKey)
         UserDefaults.standard.set(false, forKey: nativePushRegisteredKey)

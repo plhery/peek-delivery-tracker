@@ -327,7 +327,7 @@ struct ParcelDetailView: View {
                                 run {
                                     try await store.setMuted(parcel, muted: !parcel.notificationsMuted)
                                     notificationAnimation += 1
-                                    UISelectionFeedbackGenerator().selectionChanged()
+                                    Haptics.selection()
                                 }
                             } label: {
                                 ParcelNotificationBell(muted: opensAlerts ? parcel.allAlertsMuted : parcel.notificationsMuted,
@@ -628,8 +628,8 @@ struct ParcelDetailView: View {
 
     private func copyPickupPoint(_ point: PickupPoint) {
         DeliveryAnalytics.shared.action("parcel-pickup-copy", .success)
-        UIPasteboard.general.string = point.query
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        Clipboard.string = point.query
+        Haptics.success()
         copiedPickupPoint = true
         Task {
             try? await Task.sleep(for: .seconds(2))
@@ -870,7 +870,7 @@ struct ParcelDetailView: View {
                 try await store.setEmailOnDelivery(accepted)
                 emailOffer = accepted && store.deliveryEmail?.isOn == true ? .accepted : .open
                 if emailOffer == .accepted {
-                    UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    Haptics.success()
                     AccessibilityNotification.Announcement(
                         localizer.text("email.offer.on", ["place": localizer.deliveryUpdatesPlace])
                     ).post()
@@ -986,8 +986,8 @@ enum TrackingNumberCopy {
 
     @MainActor static func copy(_ number: String, carrier: CarrierID) {
         DeliveryAnalytics.shared.action("parcel-copy-tracking")
-        UIPasteboard.general.string = text(number, carrier: carrier)
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        Clipboard.string = text(number, carrier: carrier)
+        Haptics.success()
     }
 }
 

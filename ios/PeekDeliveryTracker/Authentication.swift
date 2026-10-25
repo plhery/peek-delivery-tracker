@@ -568,8 +568,12 @@ private final class AppleSignInAuthorization: NSObject, AppleSignInAuthorizing, 
     }
 
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        #if os(macOS)
+        return NSApp.keyWindow ?? NSApp.mainWindow ?? ASPresentationAnchor()
+        #else
         let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
         return scenes.flatMap(\.windows).first(where: \.isKeyWindow) ?? ASPresentationAnchor()
+        #endif
     }
 
     private func finish(_ result: Result<AppleSignInCredential, Error>) {
@@ -596,8 +600,12 @@ private final class AuthenticationAnchorProvider: NSObject, ASWebAuthenticationP
     static let shared = AuthenticationAnchorProvider()
 
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        #if os(macOS)
+        return NSApp.keyWindow ?? NSApp.mainWindow ?? ASPresentationAnchor()
+        #else
         let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
         return scenes.flatMap(\.windows).first(where: \.isKeyWindow) ?? ASPresentationAnchor()
+        #endif
     }
 }
 

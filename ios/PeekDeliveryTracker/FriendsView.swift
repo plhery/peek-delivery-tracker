@@ -429,7 +429,7 @@ private struct FriendsInvitationView: View {
                 ShareLink(item: link) { Label(localizer.text("friends.shareLink"), systemImage: "square.and.arrow.up").frame(maxWidth: .infinity, minHeight: 44) }
                     .simultaneousGesture(TapGesture().onEnded { DeliveryAnalytics.shared.action("friend-invite-share", .started) })
                     .buttonStyle(.borderedProminent).tint(Brand.accent).foregroundStyle(Brand.onAccent)
-                Button { UIPasteboard.general.url = link; copied = true; DeliveryAnalytics.shared.action("friend-invite-copy", .success) } label: { Label(localizer.text(copied ? "friends.copied" : "friends.copyLink"), systemImage: copied ? "checkmark" : "doc.on.doc").font(.footnote).frame(maxWidth: .infinity, minHeight: 36) }.foregroundStyle(Brand.ink)
+                Button { Clipboard.copy(link); copied = true; DeliveryAnalytics.shared.action("friend-invite-copy", .success) } label: { Label(localizer.text(copied ? "friends.copied" : "friends.copyLink"), systemImage: copied ? "checkmark" : "doc.on.doc").font(.footnote).frame(maxWidth: .infinity, minHeight: 36) }.foregroundStyle(Brand.ink)
                 if previousInvitationsCancelled { Label(localizer.text("friends.previousRevoked"), systemImage: "checkmark").font(.caption).foregroundStyle(ExperimentalPalette.delivered) }
                 Divider()
                 DisclosureGroup {

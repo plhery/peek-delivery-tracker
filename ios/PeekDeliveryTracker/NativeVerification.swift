@@ -295,10 +295,14 @@ actor NativeVerification {
 
 /// Present above the add-parcel sheet, and accept messages only from the hosted verification page.
 @MainActor
-final class NativeTurnstilePresenter: NSObject, WKScriptMessageHandler, WKNavigationDelegate, UIAdaptivePresentationControllerDelegate {
+final class NativeTurnstilePresenter: NSObject, WKScriptMessageHandler, WKNavigationDelegate {
     static let shared = NativeTurnstilePresenter()
     private var pending: CheckedContinuation<String, Error>?
+    #if os(macOS)
+    private var sheet: NSWindow?
+    #else
     private var navigation: UINavigationController?
+    #endif
     private var webView: WKWebView?
     private var page: URL?
     private var timeout: Task<Void, Never>?
@@ -308,10 +312,16 @@ final class NativeTurnstilePresenter: NSObject, WKScriptMessageHandler, WKNaviga
         guard pending == nil, url.scheme == "https" else { throw NativeVerificationFailed() }
         return try await withTaskCancellationHandler {
             try await withCheckedThrowingContinuation { continuation in
+                #if os(macOS)
+                guard let parent = NSApp.keyWindow ?? NSApp.mainWindow else {
+                    continuation.resume(throwing: NativeVerificationFailed()); return
+                }
+                #else
                 guard var parent = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene })
                     .first(where: { $0.activationState == .foregroundActive })?.windows.first(where: \.isKeyWindow)?.rootViewController
                 else { continuation.resume(throwing: NativeVerificationFailed()); return }
                 while let presented = parent.presentedViewController { parent = presented }
+                #endif
                 pending = continuation
                 page = url
                 let localizer = Localizer()
@@ -320,6 +330,14 @@ final class NativeTurnstilePresenter: NSObject, WKScriptMessageHandler, WKNaviga
                 configuration.userContentController.add(self, name: "peekVerification")
                 let web = WKWebView(frame: .zero, configuration: configuration)
                 web.navigationDelegate = self
+                #if os(macOS)
+                sheet = Self.sheet(
+                    web, title: localizer.text("native.verification.title"),
+                    cancel: localizer.text("common.cancel"), target: self, over: parent
+                )
+                webView = web
+                web.load(URLRequest(url: url))
+                #else
                 let controller = UIViewController()
                 controller.view = web
                 controller.title = localizer.text("native.verification.title")
@@ -332,6 +350,7 @@ final class NativeTurnstilePresenter: NSObject, WKScriptMessageHandler, WKNaviga
                     nav.presentationController?.delegate = self
                     web.load(URLRequest(url: url))
                 }
+                #endif
                 timeout = Task { [weak self] in
                     try? await Task.sleep(for: .seconds(90))
                     guard !Task.isCancelled else { return }
@@ -341,7 +360,6 @@ final class NativeTurnstilePresenter: NSObject, WKScriptMessageHandler, WKNaviga
         } onCancel: { Task { @MainActor in self.finish(.failure(CancellationError())) } }
     }
     @objc private func cancel() { finish(.failure(CancellationError())) }
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { cancel() }
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let page, message.frameInfo.isMainFrame,
               message.frameInfo.securityOrigin.protocol == page.scheme,
@@ -370,10 +388,50 @@ final class NativeTurnstilePresenter: NSObject, WKScriptMessageHandler, WKNaviga
         webView?.stopLoading()
         webView?.configuration.userContentController.removeScriptMessageHandler(forName: "peekVerification")
         webView?.navigationDelegate = nil
+        #if os(macOS)
+        if let sheet { sheet.sheetParent?.endSheet(sheet) }
+        sheet = nil
+        #else
         navigation?.dismiss(animated: true)
         navigation = nil
+        #endif
         webView = nil
         page = nil
         continuation.resume(with: result)
     }
+
+    #if os(macOS)
+    /// For now the Mac shows the page in a plain sheet on the window in front, with Cancel under it.
+    private static func sheet(_ web: WKWebView, title: String, cancel: String, target: AnyObject, over parent: NSWindow) -> NSWindow {
+        let window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 480, height: 640),
+            styleMask: [.titled], backing: .buffered, defer: true
+        )
+        window.title = title
+        let button = NSButton(title: cancel, target: target, action: #selector(NativeTurnstilePresenter.cancel))
+        button.keyEquivalent = "\u{1b}"
+        let content = NSView()
+        for view in [web, button] as [NSView] {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            content.addSubview(view)
+        }
+        NSLayoutConstraint.activate([
+            web.topAnchor.constraint(equalTo: content.topAnchor),
+            web.leadingAnchor.constraint(equalTo: content.leadingAnchor),
+            web.trailingAnchor.constraint(equalTo: content.trailingAnchor),
+            button.topAnchor.constraint(equalTo: web.bottomAnchor, constant: 12),
+            button.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -16),
+            button.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: -12),
+        ])
+        window.contentView = content
+        parent.beginSheet(window)
+        return window
+    }
+    #endif
 }
+
+#if os(iOS)
+extension NativeTurnstilePresenter: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { cancel() }
+}
+#endif

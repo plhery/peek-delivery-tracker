@@ -394,8 +394,8 @@ private struct ParcelFeedbackOverlays: ViewModifier {
                     .environmentObject(localizer)
             }
             // A sheet shown from UIKit does not hear the scene's phase: the app's own notices reach every page.
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in model.left() }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in model.returned(busy: busy) }
+            .onReceive(NotificationCenter.default.publisher(for: PlatformApplication.didEnterBackgroundNotification)) { _ in model.left() }
+            .onReceive(NotificationCenter.default.publisher(for: PlatformApplication.didBecomeActiveNotification)) { _ in model.returned(busy: busy) }
             .task(id: model.word) {
                 guard let word = model.word else { return }
                 try? await Task.sleep(for: word.stay)
@@ -517,7 +517,7 @@ private struct ParcelFeedbackWordsSheet: View {
         let shape = RoundedRectangle(cornerRadius: 14, style: .continuous)
         return Button {
             if on { reasons.remove(reason) } else { reasons.insert(reason) }
-            UISelectionFeedbackGenerator().selectionChanged()
+            Haptics.selection()
         } label: {
             Text(localizer.text(reason.labelKey))
                 .font(.footnote.weight(.medium))

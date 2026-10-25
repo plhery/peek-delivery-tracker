@@ -63,3 +63,18 @@ jobs:
           -destination 'platform=iOS Simulator,name=iPhone 18 Pro,OS=latest'
           -collect-test-diagnostics never
           CODE_SIGNING_ALLOWED=NO test
+
+  macos:
+    name: Native Mac app
+    needs: changes
+    if: needs.changes.outputs.ios == 'true'
+    runs-on: xcode-27
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Build Mac app
+        run: >-
+          xcodebuild -project ios/PeekDeliveryTracker.xcodeproj
+          -scheme PeekDeliveryTracker
+          -destination 'generic/platform=macOS'
+          CODE_SIGNING_ALLOWED=NO build

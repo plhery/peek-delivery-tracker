@@ -178,6 +178,13 @@ xcodebuild -project PeekDeliveryTracker.xcodeproj -scheme PeekDeliveryTracker \
   CODE_SIGNING_ALLOWED=NO build
 ```
 
+The same scheme builds the Mac app, which has no widgets or Share extension yet:
+
+```bash
+xcodebuild -project PeekDeliveryTracker.xcodeproj -scheme PeekDeliveryTracker \
+  -destination 'generic/platform=macOS' CODE_SIGNING_ALLOWED=NO build
+```
+
 To run the unit tests, swap `build` for `test` and name a real simulator, for example
 `-destination 'platform=iOS Simulator,name=iPhone 18 Pro'`. Push itself can only be tried
 with a signed build on a real phone.

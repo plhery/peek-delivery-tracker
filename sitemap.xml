@@ -4593,8 +4593,9 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/vinted-go-suivi</loc>
@@ -4602,6 +4603,7 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <lastmod>2026-10-11</lastmod>
 </url>
@@ -4611,6 +4613,7 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <lastmod>2026-10-11</lastmod>
 </url>
@@ -4620,8 +4623,19 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
 <lastmod>2026-10-11</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/nl/carriers/vinted-go-pakket-volgen</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/vinted-go-suivi" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/vinted-go-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/vinted-go-encomenda" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/vinted-go-pakket-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/vinted-go-tracking" />
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/amazon-logistics-tracking</loc>
@@ -5662,8 +5676,16 @@
 <url>
 <loc>https://peektracker.com/carriers/acs-courier-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/acs-courier-tracking" />
+<xhtml:link rel="alternate" hreflang="el" href="https://peektracker.com/el/carriers/acs-courier-entopismos-apostolis" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/acs-courier-tracking" />
-<lastmod>2026-10-13</lastmod>
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/el/carriers/acs-courier-entopismos-apostolis</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/acs-courier-tracking" />
+<xhtml:link rel="alternate" hreflang="el" href="https://peektracker.com/el/carriers/acs-courier-entopismos-apostolis" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/acs-courier-tracking" />
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/elta-hellenic-post-tracking</loc>

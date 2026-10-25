@@ -1,6 +1,8 @@
 import GameController
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 enum Brand {
     // Postal yellow anchors the interface; content surfaces adapt to appearance.

@@ -1,5 +1,7 @@
 import Foundation
+#if os(iOS)
 import UIKit
+#endif
 
 /// The device's country preference helps order carrier queries; it does not select a carrier.
 enum ParcelLookupCountry {

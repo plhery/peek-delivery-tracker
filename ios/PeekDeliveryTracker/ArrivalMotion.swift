@@ -1,6 +1,8 @@
 import CoreMotion
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 /// A small, bounded pose relative to how the phone was held on arrival.
 struct ArrivalTilt: Equatable, Sendable {

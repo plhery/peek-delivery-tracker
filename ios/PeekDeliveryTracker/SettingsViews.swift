@@ -1,6 +1,8 @@
 import SafariServices
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 struct NotificationPromptView: View {
     @EnvironmentObject private var store: ParcelStore

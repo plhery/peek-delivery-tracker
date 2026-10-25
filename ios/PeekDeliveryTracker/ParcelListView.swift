@@ -1,6 +1,8 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
+#endif
 
 struct ParcelListView: View {
     @EnvironmentObject private var localizer: Localizer

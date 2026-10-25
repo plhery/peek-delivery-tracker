@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 /// A parcel someone shared, opened over whatever was on screen: its card, its history, and one
 /// button to keep it, in an account or on this iPhone. Nothing here changes the parcel. A link the

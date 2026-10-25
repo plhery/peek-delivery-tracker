@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 /// What the list's scroll view reports for pull-to-refresh. It only changes
 /// while the content is pulled below the top or the top inset moves, so

@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 struct ParcelDetailView: View {
     let parcelID: UUID

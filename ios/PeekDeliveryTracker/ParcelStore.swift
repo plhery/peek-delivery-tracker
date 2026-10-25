@@ -1,7 +1,9 @@
 import ActivityKit
 import Foundation
 import Combine
+#if os(iOS)
 import UIKit
+#endif
 import UserNotifications
 import WidgetKit
 

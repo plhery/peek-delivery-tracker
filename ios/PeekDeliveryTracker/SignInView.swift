@@ -1,6 +1,8 @@
 import SwiftUI
 import AuthenticationServices
+#if os(iOS)
 import UIKit
+#endif
 import UserNotifications
 
 /// One parcel stays alive across both layouts, so opening flows into sign-in.

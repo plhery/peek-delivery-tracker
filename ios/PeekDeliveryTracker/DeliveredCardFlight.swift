@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 /// The deliveries' own space: where a card stands in the list, wherever the list is scrolled.
 enum DeliveryListSpace {

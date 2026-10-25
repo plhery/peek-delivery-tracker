@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 /// The standing question, below a page's history: Pip's for a parcel a carrier answers for, a
 /// row for one none was found for. It stands on every visit, for a reader who has more to say

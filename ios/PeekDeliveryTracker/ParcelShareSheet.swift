@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 /// Sharing one of the account's parcels from its detail: what the link shows, as the other
 /// person will see it, the switches that change it, the link, and the way to stop. The name, a

@@ -3,7 +3,9 @@ import CryptoKit
 import Foundation
 import Combine
 import Security
+#if os(iOS)
 import UIKit
+#endif
 
 struct AuthUser: Codable, Equatable, Sendable {
     let id: UUID

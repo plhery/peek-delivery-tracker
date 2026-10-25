@@ -1,5 +1,7 @@
 import Foundation
+#if os(iOS)
 import UIKit
+#endif
 import SwiftUI
 
 /// One catalog shared with the web app; only these names can leave the device.

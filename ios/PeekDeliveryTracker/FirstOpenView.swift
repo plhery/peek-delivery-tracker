@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 import VisionKit
 
 /// How someone starts following their first parcel. The deliveries list owns the sheet that adds it.

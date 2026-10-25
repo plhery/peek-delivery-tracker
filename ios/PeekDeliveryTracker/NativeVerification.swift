@@ -1,7 +1,9 @@
 import CryptoKit
 import DeviceCheck
 import Foundation
+#if os(iOS)
 import UIKit
+#endif
 import WebKit
 
 struct NativeVerificationFailed: Error {}

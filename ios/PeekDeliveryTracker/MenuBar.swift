@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 /// The menu bar of an iPad, and of a Mac running the iPad app. Its menus list the keys the screens answer, and the
 /// screen in front says what it can do now, so an item is dimmed where its key would do nothing. The screens keep

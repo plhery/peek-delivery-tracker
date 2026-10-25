@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import UIKit
+#endif
 
 struct FriendsView: View {
     @EnvironmentObject private var session: SessionStore

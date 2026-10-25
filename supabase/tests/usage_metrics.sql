@@ -187,12 +187,38 @@ begin
 end;
 $$;
 
+-- A parcel counts once, in the hour its first check found a scan dated in the future; a parcel
+-- flagged before that hour does not count again.
+do $$
+declare
+  fresh constant uuid := 'f3000000-0000-4000-8000-000000000005';
+  repeated constant uuid := 'f3000000-0000-4000-8000-000000000006';
+  before metrics.health;
+  after metrics.health;
+begin
+  select * into strict before from metrics.health;
+  insert into public.packages (id, user_id, one_off, tracking_number, carrier)
+  values (fresh, null, true, 'HEALTH0002', 'unknown'), (repeated, null, true, 'HEALTH0003', 'unknown');
+  insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, outcome, started_at, completed_at, anomaly_codes)
+  values
+    (fresh, 'scheduled', 'health-d', 'updated', now() - interval '30 minutes', now() - interval '30 minutes', '{future_event_timestamp}'),
+    (fresh, 'scheduled', 'health-d', 'unchanged', now() - interval '10 minutes', now() - interval '10 minutes', '{future_event_timestamp}'),
+    (repeated, 'scheduled', 'health-d', 'updated', now() - interval '2 hours', now() - interval '2 hours', '{future_event_timestamp}'),
+    (repeated, 'scheduled', 'health-d', 'unchanged', now() - interval '10 minutes', now() - interval '10 minutes', '{future_event_timestamp}');
+  select * into strict after from metrics.health;
+
+  if after.future_scan_parcels_1h <> before.future_scan_parcels_1h + 1 then
+    raise exception 'Parcels first flagged with a future scan in the last hour were miscounted: % then %', before, after;
+  end if;
+end;
+$$;
+
 -- Grafana's role reads through the views without reading the tables behind them.
 set local role metrics_reader;
 select accounts, active_day, parcels_open_account, link_alerts from metrics.live;
 select stage, account, lookup from metrics.open_parcels;
 select day, carrier, parcels from metrics.carriers where carrier = 'unknown' limit 1;
-select checks_3h, failed_carriers_3h, seconds_since_check, open_health_incidents, failing_health_incidents, failing_incident_carriers from metrics.health;
+select checks_3h, failed_carriers_3h, seconds_since_check, open_health_incidents, failing_health_incidents, failing_incident_carriers, future_scan_parcels_1h from metrics.health;
 do $$
 begin
   perform 1 from public.packages;

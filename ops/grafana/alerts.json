@@ -81,6 +81,18 @@
       "execErrState": "KeepLast",
       "summary": "Sign in with Apple on the website stops working within 14 days, or Apple already refuses its client secret.",
       "description": "Apple accepts a web client secret for 6 months at most. A daily job on the production host checks the secret supabase-auth uses with Apple, publishes its expiry and the outcome (peek_apple_web_client_secret_expiry_timestamp_seconds, peek_apple_web_client_secret_accepted), and renews it 30 days before it expires, so this fires only once renewals have failed for two weeks or Apple refuses the secret. Run the job and read its journal (peek-apple-web-secret.service). It signs the secret with the Sign in with Apple key in the app's environment (APPLE_SIGN_IN_*); if Apple refuses it, check that key and the Services ID in the Apple Developer portal. Sign in with Apple in the iPhone app does not use this secret."
+    },
+    {
+      "uid": "peek-future-scans",
+      "title": "Peek scans dated in the future",
+      "datasource": "metrics",
+      "sql": "select now() as time, future_scan_parcels_1h as value from metrics.health",
+      "for": "0s",
+      "severity": "warning",
+      "noDataState": "Alerting",
+      "execErrState": "KeepLast",
+      "summary": "A check found a scan dated over an hour after it, on a parcel not flagged before: usually a carrier's clock read in the wrong zone.",
+      "description": "A check flags future_event_timestamp when one of its scans is dated over an hour after the check started. A parcel counts in the hour its first flagged check started, so the checks that repeat the scan stay quiet and the rule clears an hour later. The \"Future scans\" section of ops/review/signals.sql names the parcel by short id, its carrier and the provider that dated the scan. An adapter or provider that reads a local clock in the wrong zone is fixed in Universal Parcel Scraper (the adapters lane)."
     }
   ]
 }

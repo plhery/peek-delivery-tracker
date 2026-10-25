@@ -1070,13 +1070,19 @@ monitors). The rules cover what none of those show:
   ahead publishes `peek_apple_web_client_secret_expiry_timestamp_seconds` and
   `peek_apple_web_client_secret_accepted`, so this means renewals keep failing
   ([AUTHENTICATION.md](AUTHENTICATION.md)).
+- **Peek scans dated in the future**: a check found a scan dated over an hour after it
+  (`future_event_timestamp`) on a parcel no earlier check flagged, usually a carrier's clock
+  read in the wrong zone. It clears an hour later; the checks that repeat the scan stay quiet.
+  The review signals name the parcel and the provider that dated the scan.
 
-Each threshold sits above what ordinary days reach. The database rules read
+Each threshold sits above what ordinary days reach; a future scan alerts every time, as each
+is a fault to fix. The database rules read
 `metrics.health` through the usage dashboard's data source: the last 3 hours' checks,
 failures and the carriers they failed for, the time since a check last finished, the
 longest scheduled sync of the last 2 hours, the open health incidents, those of them that
-failed in the last 3 hours, and the carriers of those whose failures left a check without an
-answer, counted when read. A query that fails, as while Prometheus restarts, leaves each
+failed in the last 3 hours, the carriers of those whose failures left a check without an
+answer, and the parcels first flagged with a scan in the future in the last hour, counted when
+read. A query that fails, as while Prometheus restarts, leaves each
 rule in its last state instead of putting it in Error.
 
 Grafana does not take rules from CI. After changing the file, run

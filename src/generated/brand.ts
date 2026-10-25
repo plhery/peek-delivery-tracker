@@ -956,6 +956,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "m-and-p": "m-and-p",
   "m-one": "m-one",
   "madhur-courier": "madhur-courier",
+  "maersk-ecommerce": "pilot-freight",
   "magyar-posta": "magyar-posta",
   "mailplus-au": "mailplus-au",
   "mainfreight": "mainfreight",

@@ -396,6 +396,7 @@ and [`truck.json`](truck.json).
 | `m-and-p` | [mulphilog.com](https://www.mulphilog.com/frontend/assets/images/logo.png) — logo PNG orange #f26522 (flat fill); site CSS uses #ff6b35 |
 | `m-one` | [m-one.rs](https://m-one.rs/) — site bg-primary #024da0; logo blue #034ea1 and red #ec1c24 (approximate) |
 | `madhur-courier` | [madhurcouriers.in](https://madhurcouriers.in/assets/images/logo.png) — logo PNG #e31e24 with navy #393185 (approximate) |
+| `maersk-ecommerce` | [maersk.com](https://www.maersk.com/tracking/parcel) — Maersk blue #42b0d5, the colour Pilot Freight (Maersk Ground Freight) wears; the Maersk star is drawn white on it |
 | `magyar-posta` | [posta.hu](https://www.posta.hu/static/g/mp150_logo_fb.jpg) — sampled from the JPEG: wordmark #346631, horn #329822, crown #ca342e (approximate) |
 | `mailplus-au` | [mailplus.com.au](https://www.mailplus.com.au/) — header and accent CSS #025D7C; the branding logo square samples #085c76 and its yellow #ffe70a (approximate) |
 | `mainfreight` | [mainfreight.com](https://www.mainfreight.com/mf/styles/main.css) — site CSS --color-brandPrimary #005EB8 (logo PNG samples #007ac3) |
@@ -972,7 +973,7 @@ and [`truck.json`](truck.json).
 | `overseas-express` | White spiral and rising stroke on orange | [overseas.hr](https://www.overseas.hr/images/logo_overseas.png) — orange spiral ribbon symbol |
 | `palletways` | White five-ray burst around an oval on green | [palletways.com](https://www.palletways.com/wp-content/uploads/2020/02/New-logo-palletways-corporate.png) — green ray burst around an oval |
 | `pecom` | White ПЭК with red colon on navy | [pecom.ru](https://upload.pecom.ru/svg/logo.svg) — ПЭК wordmark with two red blocks |
-| `pilot-freight` | White seven-pointed star on light blue | [maersk.com](https://delivers.maersk.com/) — Maersk star |
+| `pilot-freight` (`pilot-freight`, `maersk-ecommerce`) | White seven-pointed star on light blue | [maersk.com](https://delivers.maersk.com/) — Maersk star |
 | `pitt-ohio` | White PITT over a black bar on red | [pittohio.com](https://pittohio.com/mypittohio/images/logo.png) — PITT OHIO wordmark over a red bar |
 | `pos-indonesia` | White POS over an orange bar on navy | [posindonesia.co.id](https://www.posindonesia.co.id/) — stacked navy POS IND logo with an orange accent |
 | `post-haste` | Black silver-fern frond on cyan | [posthaste.co.nz](https://www.posthaste.co.nz/) — header logo fern |

@@ -133,9 +133,13 @@ export class ParcelLookups {
   }
 }
 
-/** What a carrier lookup sends: the carrier, the number and the user's inputs for it. */
-export function carrierLookupKey(carrier: string, trackingNumber: string, trackingUrl: string | null, postcode?: string | null): unknown[] {
-  return ['carrier', carrier, number(trackingNumber), text(trackingUrl), text(postcode)];
+/**
+ * What a carrier lookup sends: the carrier, the number, the user's inputs for it and the owner's
+ * language, so copies whose owners read different languages never take each other's wording.
+ */
+export function carrierLookupKey(carrier: string, trackingNumber: string, trackingUrl: string | null, postcode?: string | null,
+  language?: string | null): unknown[] {
+  return ['carrier', carrier, number(trackingNumber), text(trackingUrl), text(postcode), text(language)];
 }
 
 /** What a universal provider lookup sends, the carrier it may ask about included. */

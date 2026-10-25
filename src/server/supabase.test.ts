@@ -92,8 +92,8 @@ describe('guarded tracking writes', () => {
     await user.listActivePackages();
 
     const identities = `${STORED_EVENT_IDENTITIES}:tracking_events(provider_event_id,occurred_at,stage,description,location,time:raw_data->>time,provider_code:raw_data->>provider_code,observed_without_provider_timestamp:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,local_time:raw_data->>local_time,time_zone_basis:raw_data->>time_zone_basis,time_provenance:raw_data->>time_provenance,provider_time_iso:raw_data->>provider_time_iso,retimed_from:raw_data->>retimed_from,created_at)`;
-    expect(select(serviceRequest, 0).endsWith(`,${identities}`)).toBe(true);
-    expect(select(serviceRequest, 1).endsWith(`,${identities}`)).toBe(true);
+    expect(select(serviceRequest, 0).endsWith(`,owner_locale,${identities}`)).toBe(true);
+    expect(select(serviceRequest, 1).endsWith(`,owner_locale,${identities}`)).toBe(true);
     // The API's package shape reads provider_event_id only to tell Peek's own rows, and the stored times
     // only to name a scan's day, which eventPlaces.ts serves without them, and never when the parcel joined its account.
     const apiShape = 'id,tracking_number,label,carrier,created_at,expected_delivery,last_status_text,'

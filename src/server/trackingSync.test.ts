@@ -74,6 +74,17 @@ describe('dedicated carrier dispatch', () => {
     expect(await adapter.fetch(carrier, 'SYNTHETIC0001', null, '00000')).toMatchObject({ status: 'in_transit' });
     expect(track.mock.calls[0][0]).toEqual({ number: 'SYNTHETIC0001', trackingUrl: null, postcode: '00000' });
   });
+
+  it('asks Swiss Post in the language it is given', async () => {
+    const adapter = new CarrierTrackingAdapter();
+    const track = vi.spyOn(adapter.registry.for('swiss-post')!, 'track').mockResolvedValue({ status: 'in_transit' });
+    await adapter.fetch('swiss-post', 'SYNTHETIC0001', null, null, 'fr');
+    await adapter.fetch('swiss-post', 'SYNTHETIC0001', null, null, null);
+    expect(track.mock.calls.map(([input]) => input)).toEqual([
+      { number: 'SYNTHETIC0001', trackingUrl: null, postcode: null, language: 'fr' },
+      { number: 'SYNTHETIC0001', trackingUrl: null, postcode: null },
+    ]);
+  });
 });
 
 describe('tracking event normalization', () => {
@@ -1555,7 +1566,7 @@ describe('TrackingSyncService', () => {
     const number = 'FEIXY0000000001YQ';
     await service.syncPackage({ id: 'filed-unknown', carrier: 'unknown', tracking_number: number, current_stage: 'in_transit',
       carrier_data: { tracking_provider: 'Ship24', routing: { version: 1, configured_carrier: 'unknown', last_event_at: '2026-09-10T10:00:00.000Z' } } });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('17feia', number, null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('17feia', number, null, null, null);
     const saved = client.updatePackage.mock.calls.at(-1)![1];
     // The database files a provider-tracked parcel only under the carrier routing settled on.
     expect(saved).toMatchObject({ carrier: '17feia', tracking_url: null, dpd_postcode: null, carrier_data: {
@@ -1588,7 +1599,7 @@ describe('TrackingSyncService', () => {
     };
     await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'))
       .syncPackage({ id: 'label-days-old', carrier: 'ups', tracking_number: number, current_stage: 'registered' }, { trigger: 'scheduled' });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('ups', number, null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('ups', number, null, null, null);
     expect(adapter.fetchUniversal).toHaveBeenCalledOnce();
     const saved = client.updatePackage.mock.calls.at(-1)![1];
     expect(saved).toMatchObject({ current_stage: 'customs', carrier_data: { carrier_answered: true, routing: { confirmed_carrier: 'ups' } } });
@@ -1617,7 +1628,7 @@ describe('TrackingSyncService', () => {
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null,
       () => new Date('2026-09-10T12:00:00Z'));
     await service.syncPackage({ id: 'recognized', carrier: 'unknown', tracking_number: number, current_stage: 'pending' });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('sto', number, null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('sto', number, null, null, null);
     const saved = client.updatePackage.mock.calls.at(-1)![1];
     // The database files it as a probe's confirmation: the carrier confirmed for the number, swapped from unknown.
     expect(saved).toMatchObject({ carrier: 'sto', tracking_url: null, dpd_postcode: null, current_stage: 'in_transit', carrier_data: {
@@ -2396,6 +2407,22 @@ describe('TrackingSyncService', () => {
         carrier_data: { tracking_provider: adapter.fetchUniversal.mock.calls[0][0],
           routing: { failures: { 'swiss-post': { kind: 'transport' } } } } });
     }
+  });
+
+  it("asks a number's carrier once per owner's language, and a lookup without an owner in none", async () => {
+    const parcel = (id: string, user: string | null, extra: JsonObject = {}): JsonObject => ({ id, user_id: user, carrier: 'swiss-post',
+      tracking_number: 'TEST1234', current_stage: 'in_transit', created_at: '2026-09-10T08:00:00Z', last_synced_at: '2026-09-10T11:00:00Z',
+      sync_status: 'ok', ...extra });
+    const client = fakeClient([parcel('french', 'a', { owner_locale: 'fr' }), parcel('english', 'b', { owner_locale: 'en' }),
+      parcel('also-french', 'c', { owner_locale: 'fr' })]);
+    client.listFollowedOneOffPackages.mockResolvedValue([parcel('lookup', null, { one_off: true, owner_locale: null })]);
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-10T11:30:00Z',
+      events: [{ time: '2026-09-10T11:30:00Z', description: 'Sorting', stage: 'in_transit', provider_code: 'SORT' }] }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await expect(service.sync()).resolves.toMatchObject({ checked: 4 });
+    // One language per parcel: the two French owners' copies share an answer, no copy takes another language's.
+    expect(adapter.fetch.mock.calls.map((call) => call[4]).sort()).toEqual(['en', 'fr', null]);
+    expect(adapter.fetch.mock.calls.every(([carrier, number]) => carrier === 'swiss-post' && number === 'TEST1234')).toBe(true);
   });
 
   it.each([
@@ -3265,7 +3292,7 @@ describe('TrackingSyncService', () => {
     const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'out_for_delivery', expected_delivery: '2026-09-10' }) };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null);
     await service.syncPackage(parcel);
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', parcel.tracking_number, null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', parcel.tracking_number, null, null, null);
     expect(client.updatePackage.mock.calls.at(-1)?.[1]).toMatchObject({
       carrier_data: identity, current_stage: 'out_for_delivery', expected_delivery: '2026-09-10',
     });
@@ -3289,7 +3316,7 @@ describe('TrackingSyncService', () => {
     expect(events.map((event: JsonObject) => String(event.provider_event_id).split(':')[0])).toEqual(['dhl', 'swiss-post']);
     adapter.fetch.mockClear();
     await service.syncPackage({ ...parcel, carrier_data: values.carrier_data });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', parcel.tracking_number, null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', parcel.tracking_number, null, null, null);
     expect(client.updatePackage.mock.calls.at(-1)?.[1].carrier_data).toMatchObject({ active_tracking_carrier: 'swiss-post', original_carrier: 'dhl' });
   });
 
@@ -3312,7 +3339,7 @@ describe('TrackingSyncService', () => {
       .toEqual(['la-poste', 'posti']);
     adapter.fetch.mockClear();
     await service.syncPackage({ ...parcel, ...values });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('posti', parcel.tracking_number, null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('posti', parcel.tracking_number, null, null, null);
     expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.original_carrier).toBe('la-poste');
   });
 
@@ -3326,20 +3353,20 @@ describe('TrackingSyncService', () => {
     const adapter = { fetch: vi.fn().mockResolvedValueOnce(origin).mockResolvedValue(delivery) };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null);
     await service.syncPackage(parcel);
-    expect(adapter.fetch.mock.calls).toEqual([[carrier, parcel.tracking_number, null, '0000'], ['dpd', parcel.tracking_number, null, '0000']]);
+    expect(adapter.fetch.mock.calls).toEqual([[carrier, parcel.tracking_number, null, '0000', null], ['dpd', parcel.tracking_number, null, '0000', null]]);
     const values = client.updatePackage.mock.calls.at(-1)![1];
     expect(values.carrier_data).toMatchObject({ active_tracking_carrier: 'dpd', original_carrier: carrier });
     adapter.fetch.mockClear();
     await service.syncPackage({ ...parcel, ...values });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('dpd', parcel.tracking_number, null, '0000');
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('dpd', parcel.tracking_number, null, '0000', null);
 
     // Without a postcode DPD Switzerland is asked without one, and another brand's carrier never receives it.
     const bare = { fetch: vi.fn().mockResolvedValueOnce(origin).mockResolvedValue(delivery) };
     await new TrackingSyncService(fakeClient() as unknown as SupabaseServiceClient, bare, null).syncPackage({ ...parcel, dpd_postcode: null });
-    expect(bare.fetch.mock.calls[1]).toEqual(['dpd', parcel.tracking_number, null, null]);
+    expect(bare.fetch.mock.calls[1]).toEqual(['dpd', parcel.tracking_number, null, null, null]);
     const posti = { fetch: vi.fn().mockResolvedValueOnce({ ...origin, delivery_carrier: 'posti' }).mockResolvedValue(delivery) };
     await new TrackingSyncService(fakeClient() as unknown as SupabaseServiceClient, posti, null).syncPackage(parcel);
-    expect(posti.fetch.mock.calls[1]).toEqual(['posti', parcel.tracking_number, null, null]);
+    expect(posti.fetch.mock.calls[1]).toEqual(['posti', parcel.tracking_number, null, null, null]);
   });
 
   it('asks the post of the country an outbound postal item is looked up from, when its origin names no destination', async () => {
@@ -3616,7 +3643,7 @@ describe('TrackingSyncService', () => {
     const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'delivered' }) };
     await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null)
       .syncPackage({ id: 'explicit-posti', carrier: 'posti', tracking_number: 'LX123456785CH' });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('posti', 'LX123456785CH', null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('posti', 'LX123456785CH', null, null, null);
     expect(client.updatePackage.mock.calls.at(-1)![1].current_stage).toBe('delivered');
   });
 
@@ -3713,7 +3740,7 @@ describe('TrackingSyncService', () => {
       delivery_probe: { carrier: 'posti', at: '2026-01-12T11:00:00.000Z' } });
     adapter.fetch.mockClear();
     await service.syncPackage(parcel);
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('la-poste', parcel.tracking_number, null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('la-poste', parcel.tracking_number, null, null, null);
   });
 
   it('lets an aggregator report Posti without a Swiss issuer suffix overriding the partner', async () => {
@@ -3830,7 +3857,7 @@ describe('TrackingSyncService', () => {
     expect(eventCarriers).toEqual(new Set(['aliexpress', 'swiss-post']));
     adapter.fetch.mockClear();
     await service.syncPackage({ ...parcel, ...values });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', swissNumber, null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', swissNumber, null, null, null);
     expect(cainiao).toHaveBeenCalledOnce();
     expect(adapter.fetchUniversal).not.toHaveBeenCalled();
   });
@@ -3852,7 +3879,7 @@ describe('TrackingSyncService', () => {
       .syncPackage({ id: 'legacy-confirmed', carrier, tracking_number: 'LX123456785CH', carrier_data: {
         swiss_post_ready: true, ...(storedCarrier ? { active_tracking_carrier: 'swiss-post' } : {}),
       } });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', 'LX123456785CH', null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', 'LX123456785CH', null, null, null);
   });
 
   it('keeps Cainiao and respects the probe cooldown when Swiss Post does not know the historical postal number', async () => {
@@ -3870,7 +3897,7 @@ describe('TrackingSyncService', () => {
     expect(values).toMatchObject({ sync_status: 'ok', current_stage: 'in_transit', carrier_data: { active_tracking_carrier: 'aliexpress' } });
     adapter.fetch.mockClear();
     await service.syncPackage({ ...parcel, ...values });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('aliexpress', 'LX123456785CH', null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('aliexpress', 'LX123456785CH', null, null, null);
   });
 
   it('asks Swiss Post less often about a Swiss postal number it keeps missing, and at once on Cainiao news', async () => {
@@ -4067,7 +4094,7 @@ describe('TrackingSyncService', () => {
       .toEqual(new Set(['spring-gds', 'swiss-post']));
     adapter.fetch.mockClear();
     await service.syncPackage({ ...parcel, ...values });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', number, null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', number, null, null, null);
     expect(fetcher).toHaveBeenCalledTimes(2);
   });
 
@@ -4415,7 +4442,7 @@ describe('TrackingSyncService', () => {
       await service.syncPackage(parcel);
       parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
       expect(adapter.fetch.mock.calls.map((call) => call[0])).toEqual(['dhl', partner]);
-      expect(adapter.fetch).toHaveBeenLastCalledWith(partner, reference, null, null);
+      expect(adapter.fetch).toHaveBeenLastCalledWith(partner, reference, null, null, null);
     }
   });
 
@@ -4474,13 +4501,13 @@ describe('TrackingSyncService', () => {
       .mockResolvedValue({ status: 'out_for_delivery', canonical_tracking_number: '990000000000000001' }) };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null);
     await service.syncPackage(parcel);
-    expect(adapter.fetch.mock.calls[1]).toEqual(['swiss-post', '12345678901', null, null]);
+    expect(adapter.fetch.mock.calls[1]).toEqual(['swiss-post', '12345678901', null, null, null]);
     const values = client.updatePackage.mock.calls.at(-1)?.[1];
     expect(values.carrier_data).toMatchObject({ active_tracking_number: '990000000000000001',
       original_tracking_number: '123456789011', original_canonical_tracking_number: '12345678901' });
     adapter.fetch.mockClear();
     await service.syncPackage({ ...parcel, ...values });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', '990000000000000001', null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('swiss-post', '990000000000000001', null, null, null);
     expect(client.updatePackage.mock.calls.at(-1)?.[1].carrier_data).toMatchObject({ active_tracking_number: '990000000000000001', original_canonical_tracking_number: '12345678901' });
   });
 
@@ -4543,7 +4570,7 @@ describe('TrackingSyncService', () => {
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
       adapter, null, () => new Date('2026-09-09T10:10:00Z'));
     await expect(service.sync()).resolves.toMatchObject({ checked: 1, updated: 1 });
-    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('dpd', 'TEST1234', null, null);
+    expect(adapter.fetch).toHaveBeenCalledExactlyOnceWith('dpd', 'TEST1234', null, null, null);
     expect(client.startSyncAttempt).toHaveBeenCalledOnce();
   });
 

@@ -43,6 +43,20 @@ describe('same-instant identity reuse', () => {
     }
   });
 
+  it("rewords a Swiss Post scan in its owner's language on the row it was stored with", () => {
+    const at = '2026-07-11T18:05:00Z';
+    const saved = { ...row('swiss-post:english', at, 'Arrived at the sorting centre', 'in_transit'), location: 'Example City',
+      raw_data: { provider_code: 'SORT' } };
+    const incoming = { ...scan('swiss-post:french', at, 'Arrivée au centre de tri', 'in_transit'), location: 'Example City',
+      raw_data: { provider_code: 'SORT' } };
+    expect([...sameInstantIdentities([incoming], [saved], 'swiss-post')]).toEqual([['swiss-post:french', 'swiss-post:english']]);
+    for (const different of [
+      { ...saved, location: 'Another City' },
+      { ...saved, raw_data: { provider_code: 'OTHER' } },
+      { ...saved, description: 'Arrived at the sorting centre — Revocation' },
+    ]) expect(sameInstantIdentities([incoming], [different], 'swiss-post').size).toBe(0);
+  });
+
   it('updates a UPS scan when its location is filled in', () => {
     const at = '2026-07-11T18:05:00Z';
     const saved = { ...row('ups:without-location', at, 'Package collected', 'accepted'), location: null };

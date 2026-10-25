@@ -19,13 +19,19 @@ translating it (not implemented).
   `TrackingLocation` in `PassportStatistics.swift`). Passport and Friends stamps count a
   final country field, or a code that is also a state or canton once the scan was placed in
   that country ([`scanPlace.ts`](../src/lib/scanPlace.ts)).
-- `TrackingInput` has no locale. UPU, EMS, Ship24, ParcelsApp, 17TRACK and Swiss Post are
-  asked for English; La Poste for French. That doesn't guarantee the language of every
-  event.
+- Every carrier lookup sends the parcel owner's app language (`language` in `TrackingInput`,
+  the account's `locale` read through the `owner_locale` computed field). Only Swiss Post
+  reads it: it words its scans in English, French, German or Italian, and in English for
+  any other language and for a lookup without an account. One language per parcel, never
+  per viewer, or each check would reword the stored scans back and forth; copies of a
+  number whose owners read different languages don't share the carrier's answer. UPU,
+  EMS, Ship24, ParcelsApp and 17TRACK are asked for English; La Poste for French. That
+  doesn't guarantee the language of every event.
 - Event identity ([`providerEventId`](../src/server/trackingSync.ts)) hashes carrier, time,
   location and description. Rewriting stored descriptions per language would duplicate
   scans, so translation has to happen at display time. A stored scan is only reworded in
-  place, when another source reports the same scan
+  place, when another source reports the same scan or Swiss Post words it in its owner's
+  language (the same provider code, instant and place)
   ([`eventIdentity.ts`](../src/server/eventIdentity.ts), [ROUTING.md](ROUTING.md)).
 - Pick tracking sources for coverage, freshness and identity, never for language. A handoff
   can bring English destination scans but never translates earlier origin scans.

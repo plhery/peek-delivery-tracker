@@ -45,6 +45,12 @@ const ACTIVE_PACKAGE_SELECT = 'id,user_id,tracking_number,label,carrier,current_
  */
 export const STORED_EVENT_IDENTITIES = 'stored_event_identities';
 const SYNC_EVENT_IDENTITIES = `${STORED_EVENT_IDENTITIES}:tracking_events(provider_event_id,occurred_at,stage,description,location,time:raw_data->>time,provider_code:raw_data->>provider_code,observed_without_provider_timestamp:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,local_time:raw_data->>local_time,time_zone_basis:raw_data->>time_zone_basis,time_provenance:raw_data->>time_provenance,provider_time_iso:raw_data->>provider_time_iso,retimed_from:raw_data->>retimed_from,created_at)`;
+/**
+ * What the sync loaders read besides the parcel's columns: the owner's app language (a computed
+ * field, migration 20261025180000), in which a carrier that words its scans in several languages
+ * answers, and the stored event identities.
+ */
+const SYNC_EXTRAS = `owner_locale,${SYNC_EVENT_IDENTITIES}`;
 
 /** Where each channel records that a scan was announced, or handled without an alert. */
 const SCAN_RECEIPT_TABLES = ['push_deliveries', 'native_push_deliveries', 'parcel_link_alert_deliveries', 'live_activity_event_deliveries'];
@@ -967,7 +973,7 @@ export class SupabaseServiceClient extends SupabaseClient {
    * identities instead of the public event list, which the worker never reads.
    */
   override async getPackage(packageId: string): Promise<JsonObject | null> {
-    const select = `${PACKAGE_COLUMNS},current_stage,tracking_generation,user_id,one_off,${SYNC_EVENT_IDENTITIES}`;
+    const select = `${PACKAGE_COLUMNS},current_stage,tracking_generation,user_id,one_off,${SYNC_EXTRAS}`;
     const params = query({
       select,
       id: `eq.${packageId}`,
@@ -987,7 +993,7 @@ export class SupabaseServiceClient extends SupabaseClient {
    * listFollowedOneOffPackages and listUnfiledOneOffPackages.
    */
   override async listActivePackages(): Promise<JsonObject[]> {
-    return await this.activePackages(`${ACTIVE_PACKAGE_SELECT},${SYNC_EVENT_IDENTITIES}`, [['one_off', 'is.false']]);
+    return await this.activePackages(`${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`, [['one_off', 'is.false']]);
   }
 
   /**
@@ -997,7 +1003,7 @@ export class SupabaseServiceClient extends SupabaseClient {
    */
   async listFollowedOneOffPackages(openedSince: Date): Promise<JsonObject[]> {
     const params = query({
-      select: `${ACTIVE_PACKAGE_SELECT},${SYNC_EVENT_IDENTITIES}`,
+      select: `${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`,
       order: 'last_synced_at.asc.nullsfirst,created_at.asc',
     });
     return rows(await this.request(`/rest/v1/rpc/followed_one_off_packages?${params}`, {
@@ -1012,7 +1018,7 @@ export class SupabaseServiceClient extends SupabaseClient {
    */
   async listUnfiledOneOffPackages(addedSince: Date): Promise<JsonObject[]> {
     const params = query([
-      ['select', `${ACTIVE_PACKAGE_SELECT},${SYNC_EVENT_IDENTITIES}`],
+      ['select', `${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`],
       ['one_off', 'is.true'],
       ['user_id', 'is.null'],
       ['archived_at', 'is.null'],

@@ -75,10 +75,13 @@ describe('SharedLookups', () => {
     expect([first.shared, second.shared]).toEqual([0, 1]);
     await first.once(carrierLookupKey('ups', 'TEST1234', null, '0000'), fetch);
     expect(fetch).toHaveBeenCalledTimes(2);
+    // Another owner's language is another lookup: no copy takes wording in a language its owner does not read.
+    await second.once(carrierLookupKey('ups', 'TEST1234', null, null, 'fr'), fetch);
+    expect(fetch).toHaveBeenCalledTimes(3);
     // A provider asked about another carrier is another lookup.
     await first.once(universalLookupKey('17TRACK', 'TEST1234', null, null, 'dpd'), fetch);
     await second.once(universalLookupKey('17TRACK', 'TEST1234', null, null, null), fetch);
-    expect(fetch).toHaveBeenCalledTimes(4);
+    expect(fetch).toHaveBeenCalledTimes(5);
     const failure = new Error('down');
     const failing = vi.fn().mockRejectedValue(failure);
     await expect(first.once(['universal', 'Ship24'], failing)).rejects.toBe(failure);

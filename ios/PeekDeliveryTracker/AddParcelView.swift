@@ -1309,6 +1309,17 @@ private struct TrackingDataScanner: UIViewControllerRepresentable {
 }
 #endif
 
+private extension View {
+    /// The choices alone, under their section's title, as iOS shows an inline picker. A Mac would title them again.
+    @ViewBuilder func choicesOnly() -> some View {
+        #if os(macOS)
+        labelsHidden()
+        #else
+        self
+        #endif
+    }
+}
+
 struct ParcelFilterView: View {
     @Binding var status: ParcelStatusFilter
     @Binding var carrier: CarrierID?
@@ -1328,6 +1339,7 @@ struct ParcelFilterView: View {
                         }
                     }
                     .pickerStyle(.inline)
+                    .choicesOnly()
                 }
                 Section(localizer.text("view.carrier")) {
                     Picker(localizer.text("view.carrier"), selection: $carrier) {
@@ -1344,6 +1356,7 @@ struct ParcelFilterView: View {
                         }
                     }
                     .pickerStyle(.inline)
+                    .choicesOnly()
                 }
                 Section {
                     Button(localizer.text("view.clear"), role: .destructive) {
@@ -1355,11 +1368,18 @@ struct ParcelFilterView: View {
             }
             .navigationTitle(localizer.text("view.showControls"))
             .navigationBarTitleDisplayMode(.inline)
+            #if os(macOS)
+            // Sections as iOS draws them, rather than a label beside each picker, on the app's paper rather than the
+            // popover's glass; a popover closes on a click outside it.
+            .formStyle(.grouped)
+            .presentationBackground(Brand.background)
+            #else
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(localizer.text("native.done")) { dismiss() }.fontWeight(.semibold)
                 }
             }
+            #endif
         }
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)

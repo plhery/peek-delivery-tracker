@@ -460,6 +460,9 @@ struct ParcelDetailView: View {
             shipmentIdentity(parcel, links: trackingLinks, tint: branding.ink)
             if let details = parcel.carrierData {
                 VStack(alignment: .leading, spacing: 10) {
+                    if let charges = localizer.importCharges(parcel) {
+                        shipmentFact("detail.importCharges", value: charges.text)
+                    }
                     if waitingAt == nil, let value = details.pickupPoint?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty {
                         shipmentFact(parcel.currentStage == .delivered ? "detail.collectedAt" : "detail.pickupPoint", value: value)
                     }

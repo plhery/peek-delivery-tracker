@@ -412,6 +412,16 @@ describe('a gift', () => {
     expect(within(opened).getByText('Delivery with Swiss Post')).toBeVisible();
   });
 
+  it('on its way tells its recipient the import charges, and whom to ask for the number to pay them online', async () => {
+    const importCharges = { currency: 'EUR', customs: 23.41, carrier_fee: 11, carrier_fee_online: 8.09 };
+    const gift = wrapped();
+    open({ ...gift, parcel: { ...gift.parcel, carrier: 'poste-italiane', importCharges } }, { hash: words });
+    await screen.findByRole('heading', { level: 1, name: 'Something’s on its way to you' });
+    expect(screen.getByText('Import charges').nextElementSibling).toHaveTextContent('€34.41 (€31.50 if paid online)');
+    expect(screen.getByText('To pay online, ask the person who shared this parcel for its tracking number.')).toBeVisible();
+    expect(screen.queryByRole('link', { name: /website/ })).toBeNull();
+  });
+
   it('adds a wrapped gift to the calendar without its name', async () => {
     const user = userEvent.setup();
     open(wrapped(), { hash: words });

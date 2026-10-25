@@ -1124,6 +1124,38 @@ final class ParcelLogicTests: XCTestCase {
     }
 
     @MainActor
+    func testImportChargesReadTheirAmountTheLowerOnlinePriceWhileItCanBePaidAndWhetherTheyArePaid() {
+        let localizer = Localizer()
+        localizer.language = .en
+        let id = UUID()
+        func line(_ charges: ImportCharges?, _ stage: TrackingStage = .inTransit) -> ImportChargesLine? {
+            var parcel = makeParcel(id: id, events: [event(id, stage, "2026-10-20T10:00:00Z")])
+            parcel.carrierData = CarrierData(importCharges: charges)
+            return localizer.importCharges(parcel)
+        }
+        let listed = ImportCharges(currency: "EUR", customs: 23.41, carrierFee: 11, carrierFeeOnline: 8.09)
+        var closed = listed
+        closed.statusCode = "FINESTRA_PAGAMENTO_CHIUSA"
+        var paid = listed
+        paid.paid = true
+        paid.statusCode = "PAGATO"
+
+        XCTAssertEqual(line(listed), ImportChargesLine(text: "€34.41 (€31.50 if paid online)", payableOnline: true))
+        XCTAssertEqual(line(closed), ImportChargesLine(text: "€34.41", payableOnline: false))
+        // Delivered unpaid: settled at the door or not at all.
+        XCTAssertEqual(line(listed, .delivered), ImportChargesLine(text: "€34.41", payableOnline: false))
+        XCTAssertEqual(line(paid), ImportChargesLine(text: "Paid (€34.41 on delivery, €31.50 online)", payableOnline: false))
+        XCTAssertEqual(line(paid, .delivered)?.text, "Paid (€34.41 on delivery, €31.50 online)")
+        XCTAssertEqual(line(ImportCharges(currency: "EUR", customs: 23.41, paid: true))?.text, "Paid (€23.41)")
+        XCTAssertEqual(line(ImportCharges(currency: "EUR", paid: true))?.text, "Paid")
+        XCTAssertNil(line(ImportCharges(currency: "EUR", statusCode: "IN_ATTESA")))
+        XCTAssertNil(line(nil))
+
+        localizer.language = .it
+        XCTAssertEqual(line(listed)?.text, "34,41\u{00A0}€ (31,50\u{00A0}€ pagando online)")
+    }
+
+    @MainActor
     func testAScanDatedByItsDayAloneShowsThatDayAndNoClockTime() throws {
         let localizer = Localizer()
         localizer.language = .en

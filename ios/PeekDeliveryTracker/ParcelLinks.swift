@@ -36,6 +36,7 @@ extension Parcel {
                 pickupPoint: data.pickupPoint,
                 dimensionsText: data.dimensionsText,
                 weightKg: data.weightKg,
+                importCharges: data.importCharges,
                 destinationCountry: data.destinationCountry
             ),
             archivedAt: package.archivedAt,
@@ -347,6 +348,7 @@ extension ParcelLinkStore {
     /// `handover` (a parcel AliExpress handed to Swiss Post, on its way from Shenzhen to Zürich), `handoverPlain` (the same
     /// parcel, its scans without a place), `stopped` or `gone`.
     /// `-sdt.debug.parcelLink.signedIn YES` shows it as a signed-in person sees it.
+    /// `-sdt.debug.importCharges` gives the parcel import charges (see `ImportChargesPreview`).
     static func debugPreview(defaults: UserDefaults = .standard) -> ParcelLinkStore? {
         guard let variant = defaults.string(forKey: "sdt.debug.parcelLink") else { return nil }
         struct Fixtures: Decodable {
@@ -413,6 +415,10 @@ extension ParcelLinkStore {
             }
             response?.package.lastSyncedAt = DateParser.isoString(now.addingTimeInterval(-120))
         }
+        if let charges = ImportChargesPreview.charges {
+            response?.package.carrier = ImportChargesPreview.carrier
+            response?.package.carrierData.importCharges = charges
+        }
         let shown = variant == "gone" ? nil : response
         let store = ParcelLinkStore(defaults: defaults, read: { _, _ in
             if variant == "stopped" { throw ParcelLinkStopped() }
@@ -421,6 +427,42 @@ extension ParcelLinkStore {
         store.previewsSignedIn = defaults.bool(forKey: "sdt.debug.parcelLink.signedIn")
         store.open(ParcelLinkRoute(id: shown?.link.id ?? "22222222222A", name: words.name, note: words.note, from: words.from))
         return store
+    }
+}
+
+/// Gives a parcel Poste Italiane's import charges at launch, to look at them in the simulator:
+/// `-sdt.debug.importCharges unpaid` (with a lower online price), `closed` (the online window
+/// closed) or `paid`. In the demo (`-sdt.native.experience.v1 demo`) the page of its first parcel
+/// on its way opens with them; a link opened with `-sdt.debug.parcelLink` carries them.
+enum ImportChargesPreview {
+    static let carrier = CarrierID(rawValue: "poste-italiane")
+
+    static var charges: ImportCharges? {
+        var charges = ImportCharges(currency: "EUR", customs: 23.41, carrierFee: 11, carrierFeeOnline: 8.09)
+        switch UserDefaults.standard.string(forKey: "sdt.debug.importCharges") {
+        case "unpaid": break
+        case "closed": charges.statusCode = ImportChargesLine.onlineWindowClosed
+        case "paid": charges.paid = true; charges.statusCode = "PAGATO"
+        default: return nil
+        }
+        return charges
+    }
+
+    /// The demo's parcels, the first in transit carried by Poste Italiane with the charges.
+    static func charging(_ parcels: [Parcel]) -> [Parcel] {
+        guard let charges, let index = parcels.firstIndex(where: { $0.currentStage == .inTransit }) ?? parcels.firstIndex(where: \.isActive)
+        else { return parcels }
+        var parcels = parcels
+        parcels[index].carrier = carrier
+        var data = parcels[index].carrierData ?? CarrierData()
+        data.importCharges = charges
+        parcels[index].carrierData = data
+        return parcels
+    }
+
+    /// The demo parcel whose page opens.
+    static func parcel(in parcels: [Parcel]) -> Parcel? {
+        charges == nil ? nil : parcels.first { $0.carrierData?.importCharges != nil }
     }
 }
 #endif

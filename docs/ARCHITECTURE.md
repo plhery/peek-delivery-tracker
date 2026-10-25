@@ -162,9 +162,11 @@ Key server modules:
   - **Gifts**: until the parcel is delivered, a gift's viewer gets no sender, weight, size,
     pickup point or carrier status line, a masked number whatever the link shows otherwise,
     no scan from before the carrier had the parcel, and the scans of the origin country
-    reduced to "Left the sender" and that country (`giftEvents` in `publicParcels.ts`). The
-    owner sees everything. A gift cannot be kept by a viewer before it is delivered; the
-    database refuses it, not only the page.
+    reduced to "Left the sender" and that country (`giftEvents` in `publicParcels.ts`). It
+    does get the import charges, which its recipient usually pays at the door; a page
+    without the number asks for it from whoever shared the parcel while they can be paid
+    online. The owner sees everything. A gift cannot be kept by a viewer before it is
+    delivered; the database refuses it, not only the page.
   - The page's metadata and preview image are built from the viewer's answer
     (`viewerParcel`), never from the stored row.
   - **Stopping** makes the link answer "not shared" to everyone but a lookup's owner and

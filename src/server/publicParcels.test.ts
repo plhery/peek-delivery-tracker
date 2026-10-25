@@ -147,7 +147,8 @@ describe('what a link shows', () => {
       'delivery_probe', 'swiss_post_probe', 'upu_history', 'direct_local_history',
       'international_tracking_number', 'pickup_code', 'last_update', 'events',
     ].map((key) => [key, ['carrier_answered', 'swiss_post_ready', 'dpd_postcode_verified'].includes(key) ? true
-      : key === 'weight_kg' ? 2 : key === 'routing' ? { confirmed_postcode: '9999' } : `stored ${key}`]));
+      : key === 'weight_kg' ? 2 : key === 'import_charges' ? { currency: 'EUR', customs: 23.41 }
+        : key === 'routing' ? { confirmed_postcode: '9999' } : `stored ${key}`]));
     const shown = (link: Record<string, unknown>) => publicParcelResponse({
       link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-02T08:00:00Z', forget_at: null, ...link },
       package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'unknown', sync_status: 'ok',
@@ -170,7 +171,7 @@ describe('what a link shows', () => {
       expect(shown(link).notifications_muted).toBe(false);
       expect(JSON.stringify(shown(link))).not.toMatch(/email_muted|owned_since/);
     }
-    // A gift on its way keeps back the sender, what describes the contents and where the parcel waits.
+    // A gift on its way keeps back the sender, what describes the contents and where the parcel waits, not what it costs to import.
     expect(Object.keys(shown({ owner: false, gift: true, show_number: true }).carrier_data).sort()).toEqual(listed.filter((key) => (
       !key.endsWith('_tracking_number') && !['sender_name', 'pickup_point', 'dimensions_text', 'weight_kg'].includes(key)
     )));
@@ -314,6 +315,21 @@ describe('what a link shows', () => {
         carrier_data: { sender_name: { name: 'nested' }, weight_kg: '2 kg', carrier_answered: 'yes', pickup_point: '', destination_country: 'CH' } },
     }, alerts).package;
     expect(shown).toEqual({ destination_country: 'CH' });
+  });
+
+  it('shows the import charges with the members it knows, and none without a currency or an amount', () => {
+    const shown = (charges: unknown) => publicParcelResponse({
+      link: { id: 'k7Qm2xHd9RtW', owner: false, created_at: '2026-10-02T08:00:00Z' },
+      package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'poste-italiane', sync_status: 'ok',
+        created_at: '2026-10-02T08:00:00Z', tracking_events: null, carrier_data: { import_charges: charges } },
+    }, alerts).package.carrier_data.import_charges;
+    expect(shown({ currency: 'EUR', customs: 23.41, carrier_fee: 11, carrier_fee_online: 8.09, paid: false,
+      status_code: 'FINESTRA_PAGAMENTO_CHIUSA', due_on: '2026-11-01', payment_url: 'https://example.com/pay' }))
+      .toEqual({ currency: 'EUR', customs: 23.41, carrier_fee: 11, carrier_fee_online: 8.09, paid: false, status_code: 'FINESTRA_PAGAMENTO_CHIUSA' });
+    expect(shown({ currency: 'EUR', customs: -1, carrier_fee: '11', paid: 'yes', status_code: '' })).toBeUndefined();
+    expect(shown({ currency: 'euro', customs: 23.41 })).toBeUndefined();
+    expect(shown({ currency: 'EUR', paid: true })).toEqual({ currency: 'EUR', paid: true });
+    expect(shown('€34.41')).toBeUndefined();
   });
 });
 

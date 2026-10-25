@@ -35050,6 +35050,46 @@
           }
         }
       },
+      "ImportCharges": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "The duties, taxes and fees the carrier lists for importing the parcel. Amounts are in the currency's major unit, such as 34.41 for €34.41.",
+        "required": [
+          "currency"
+        ],
+        "properties": {
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$",
+            "description": "ISO 4217 code of the amounts."
+          },
+          "customs": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Customs duty and import VAT together."
+          },
+          "carrier_fee": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The carrier's own fee for clearing the parcel, as charged on delivery."
+          },
+          "carrier_fee_online": {
+            "type": "number",
+            "minimum": 0,
+            "description": "That fee when the charges are paid online before delivery."
+          },
+          "paid": {
+            "type": "boolean",
+            "description": "Whether the charges are paid, when the carrier says."
+          },
+          "status_code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "description": "The carrier's own code for where the payment stands."
+          }
+        }
+      },
       "TrackingEventRow": {
         "type": "object",
         "additionalProperties": false,
@@ -35354,6 +35394,16 @@
                   "null"
                 ],
                 "minimum": 0
+              },
+              "import_charges": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ImportCharges"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "dpd_postcode_verified": {
                 "type": [
@@ -36920,6 +36970,9 @@
               "weight_kg": {
                 "type": "number",
                 "minimum": 0
+              },
+              "import_charges": {
+                "$ref": "#/components/schemas/ImportCharges"
               },
               "destination_country": {
                 "type": "string",

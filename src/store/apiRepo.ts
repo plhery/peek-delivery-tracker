@@ -131,6 +131,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     receiverName: row.carrier_data?.receiver_name?.trim() || undefined,
     weightKg: row.carrier_data?.weight_kg ?? undefined,
     dimensionsText: row.carrier_data?.dimensions_text?.trim() || undefined,
+    importCharges: row.carrier_data?.import_charges ?? undefined,
     originalParcelId: row.carrier_data?.original_package_id ?? undefined,
     originalCarrier: row.carrier_data?.original_carrier ?? undefined,
     originalTrackingNumber: row.carrier_data?.original_tracking_number ?? undefined,

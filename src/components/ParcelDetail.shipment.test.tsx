@@ -93,6 +93,24 @@ describe('shipment details', () => {
     expect(screen.queryByText('Pickup point')).not.toBeInTheDocument();
   });
 
+  it('lists the import charges first, with their online price while they can be paid online', () => {
+    const charges = { currency: 'EUR', customs: 23.41, carrier_fee: 11, carrier_fee_online: 8.09 };
+    let view = show({ carrier: 'poste-italiane', importCharges: charges, weightKg: 1.2 });
+    const facts = screen.getByText('Import charges').closest('dl')!;
+    expect(within(facts).getAllByRole('term').map((term) => term.textContent)).toEqual(['Import charges', 'Weight']);
+    expect(within(facts).getByText('€34.41 (€31.50 if paid online)')).toBeInTheDocument();
+    // The owner reads the number: nobody is sent to ask for it.
+    expect(screen.queryByText(/ask the person who shared/)).not.toBeInTheDocument();
+    view.unmount();
+
+    view = show({ carrier: 'poste-italiane', importCharges: { ...charges, paid: true, status_code: 'PAGATO' } });
+    expect(screen.getByText('Paid (€34.41 on delivery, €31.50 online)')).toBeInTheDocument();
+    view.unmount();
+
+    show({ carrier: 'poste-italiane', importCharges: { currency: 'EUR' } });
+    expect(screen.queryByText('Import charges')).not.toBeInTheDocument();
+  });
+
   it.each([
     ['failed_attempt', 'Check the carrier’s next steps'],
     ['exception', 'The carrier reported a problem'],

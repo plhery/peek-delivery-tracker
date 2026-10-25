@@ -2,6 +2,7 @@ import type { Locale } from './lib/locale';
 import type {
   ApiCarrierId,
   ApiEventPlace,
+  ApiImportCharges,
   ApiStage,
   ApiSyncStatus,
 } from './generated/apiContract';
@@ -9,6 +10,9 @@ import type {
 export type CarrierId = ApiCarrierId;
 
 export type SyncStatus = ApiSyncStatus;
+
+/** The duties, taxes and fees the carrier lists for importing a parcel. */
+export type ImportCharges = ApiImportCharges;
 
 /**
  * The lifecycle of a parcel. The first six are the "happy path" in order;
@@ -29,6 +33,7 @@ export interface Parcel {
   receiverName?: string;
   weightKg?: number;
   dimensionsText?: string;
+  importCharges?: ImportCharges;
   autoChangedFrom?: CarrierId;
   autoChangedTo?: CarrierId;
   autoChangedAt?: string;

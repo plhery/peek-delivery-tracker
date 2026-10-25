@@ -461,7 +461,8 @@ private struct DeliveryListView: View {
         .onChange(of: links.arrival, initial: true) { _, arrival in receive(arrival) }
         #if DEBUG
         .task {
-            if let parcel = ParcelSharePreview.parcel(in: store.parcels) ?? ParcelFeedbackPreview.parcel(in: store.parcels) { show(parcel.id) }
+            if let parcel = ParcelSharePreview.parcel(in: store.parcels) ?? ParcelFeedbackPreview.parcel(in: store.parcels)
+                ?? ImportChargesPreview.parcel(in: store.parcels) { show(parcel.id) }
         }
         #endif
         .onChange(of: store.undoParcel?.id) { _, next in

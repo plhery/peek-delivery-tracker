@@ -429,6 +429,38 @@ final class Localizer: ObservableObject {
         }
         return nil
     }
+
+    /// What importing the parcel costs: customs with the carrier's fee on delivery, and its lower online
+    /// price while it can still be paid that way. Paid charges say so and keep their prices. None when
+    /// the carrier lists neither an amount nor a payment.
+    func importCharges(_ parcel: Parcel) -> ImportChargesLine? {
+        guard let charges = parcel.carrierData?.importCharges else { return nil }
+        let paid = charges.paid == true
+        let customs = charges.customs ?? 0
+        let amount = charges.customs == nil && charges.carrierFee == nil ? nil : customs + (charges.carrierFee ?? 0)
+        let lower = charges.statusCode == ImportChargesLine.onlineWindowClosed ? nil : charges.carrierFeeOnline.map { customs + $0 }
+        // Once delivered, unpaid charges were settled at the door or not at all: the online price no longer applies.
+        var online: Double?
+        if let amount, let lower, lower < amount, paid || parcel.currentStage != .delivered { online = lower }
+        let money = { (value: Double) in value.formatted(.currency(code: charges.currency).locale(self.language.locale)) }
+        if paid {
+            guard let amount else { return ImportChargesLine(text: text("detail.importChargesPaid"), payableOnline: false) }
+            guard let online else { return ImportChargesLine(text: text("detail.importChargesPaidAmount", ["amount": money(amount)]), payableOnline: false) }
+            return ImportChargesLine(text: text("detail.importChargesPaidAmounts", ["amount": money(amount), "online": money(online)]), payableOnline: false)
+        }
+        guard let amount else { return nil }
+        guard let online else { return ImportChargesLine(text: money(amount), payableOnline: false) }
+        return ImportChargesLine(text: text("detail.importChargesOnline", ["amount": money(amount), "online": money(online)]), payableOnline: true)
+    }
+}
+
+/// The line a parcel's import charges read as, and whether they can still be paid online.
+struct ImportChargesLine: Equatable, Sendable {
+    /// Poste Italiane's code for a closed online payment window: what is left is paid on delivery.
+    static let onlineWindowClosed = "FINESTRA_PAGAMENTO_CHIUSA"
+
+    var text: String
+    var payableOnline: Bool
 }
 
 extension Parcel {

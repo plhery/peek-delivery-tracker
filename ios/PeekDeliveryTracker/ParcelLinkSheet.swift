@@ -131,6 +131,10 @@ struct ParcelLinkSheet: View {
                     if !wrapped {
                         SharedParcelNumber(parcel: parcel, hint: response.package.numberHint, tint: tint) { feedback.visited($0.name) }
                     }
+                    // A gift's recipient usually pays them at the door.
+                    if let charges = localizer.importCharges(parcel) {
+                        SharedImportCharges(charges: charges, asksForNumber: parcel.trackingNumber.isEmpty)
+                    }
                     if Self.showsHistory(parcel) {
                         ParcelJournal(parcel: parcel, tint: tint)
                     }
@@ -847,6 +851,30 @@ private struct GiftNote: View {
 
 /// The tracking number as the link shows it: whole, to copy and look up, or with its middle hidden. Each carrier's own
 /// page stands under its number.
+/// What importing the parcel costs. Charges that can be paid online send a reader without the
+/// number, which the carrier asks for, to whoever shared the parcel.
+private struct SharedImportCharges: View {
+    let charges: ImportChargesLine
+    let asksForNumber: Bool
+
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(localizer.text("detail.importCharges")).font(.caption2).foregroundStyle(.secondary)
+            Text(charges.text).font(.footnote).fixedSize(horizontal: false, vertical: true)
+            if charges.payableOnline && asksForNumber {
+                Text(localizer.text("detail.importChargesAskNumber"))
+                    .font(.caption).foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, 4)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
+    }
+}
+
 private struct SharedParcelNumber: View {
     let parcel: Parcel
     let hint: ParcelNumberHint?

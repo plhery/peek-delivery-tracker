@@ -4,6 +4,7 @@ import { trackingFailureMessage, useI18n, type MessageKey } from '../../i18n';
 import { AMAZON_HISTORY_EXPIRED } from '../../lib/amazon';
 import { numberToCheck } from '../../lib/messages';
 import { trackAction } from '../../lib/analytics';
+import { importChargesLine } from '../../lib/importCharges';
 import {
   activeTrackingCarrierId,
   carrierInfo,
@@ -165,7 +166,11 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
   </div>;
 }
 
-/** What the carrier told about the shipment itself. */
+/**
+ * What the carrier told about the shipment itself. Charges that can be paid
+ * online send a reader without the number, which the carrier asks for, to
+ * whoever shared the parcel.
+ */
 export function ShipmentFacts({ parcel, stage }: { parcel: ParcelWithEvents; stage: Stage | null }) {
   const { t, languageTag } = useI18n();
   const sender = parcel.senderName?.trim();
@@ -173,14 +178,17 @@ export function ShipmentFacts({ parcel, stage }: { parcel: ParcelWithEvents; sta
   const pickup = stage === 'ready_for_pickup' ? undefined : parcel.pickupPoint?.trim();
   const weight = Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0
     ? new Intl.NumberFormat(languageTag, { style: 'unit', unit: 'kilogram', maximumFractionDigits: 3 }).format(parcel.weightKg!) : null;
-  if (!sender && !pickup && !weight && !parcel.dimensionsText) return null;
+  const charges = importChargesLine(parcel.importCharges, stage === 'delivered', t, languageTag);
+  if (!sender && !charges && !pickup && !weight && !parcel.dimensionsText) return null;
   return <div className="peekp-facts">
     {sender && <p>{t('parcel.sender', { sender })}</p>}
-    {(pickup || weight || parcel.dimensionsText) && <dl>
+    {(charges || pickup || weight || parcel.dimensionsText) && <dl>
+      {charges && <div><dt>{t('detail.importCharges')}</dt><dd>{charges.text}</dd></div>}
       {pickup && <div><dt>{t(stage === 'delivered' ? 'detail.collectedAt' : 'detail.pickupPoint')}</dt><dd>{pickup}</dd></div>}
       {weight && <div><dt>{t('detail.weight')}</dt><dd>{weight}</dd></div>}
       {parcel.dimensionsText && <div><dt>{t('detail.dimensions')}</dt><dd>{parcel.dimensionsText}</dd></div>}
     </dl>}
+    {charges?.payableOnline && !parcel.trackingNumber && <p>{t('detail.importChargesAskNumber')}</p>}
   </div>;
 }
 

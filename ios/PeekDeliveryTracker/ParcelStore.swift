@@ -1700,7 +1700,12 @@ final class DemoRepository {
     }
 
     func list() -> [Parcel] {
-        load().sorted { $0.createdAt > $1.createdAt }
+        let parcels = load().sorted { $0.createdAt > $1.createdAt }
+        #if DEBUG
+        return ImportChargesPreview.charging(parcels)
+        #else
+        return parcels
+        #endif
     }
 
     func add(_ request: CreatePackageRequest) throws -> Parcel {

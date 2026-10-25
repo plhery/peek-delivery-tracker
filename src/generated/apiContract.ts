@@ -32269,6 +32269,15 @@ export interface ApiEventPlace {
   "region"?: string;
 }
 
+export interface ApiImportCharges {
+  "currency": string;
+  "customs"?: number;
+  "carrier_fee"?: number;
+  "carrier_fee_online"?: number;
+  "paid"?: boolean;
+  "status_code"?: string;
+}
+
 export interface ApiTrackingEventRow {
   "id": string;
   "package_id": string;
@@ -32316,6 +32325,7 @@ export interface ApiPackageRow {
   "receiver_name"?: string | null;
   "dimensions_text"?: string | null;
   "weight_kg"?: number | null;
+  "import_charges"?: ApiImportCharges | null;
   "dpd_postcode_verified"?: boolean | null;
   "destination_country"?: string | null;
   "routing"?: {
@@ -32677,6 +32687,7 @@ export interface ApiPublicPackage {
   "pickup_point"?: string;
   "dimensions_text"?: string;
   "weight_kg"?: number;
+  "import_charges"?: ApiImportCharges;
   "destination_country"?: string;
 };
   "archived_at": string | null;

@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor, within } from '@testing-library/react';
+import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testParcel, testView } from '../test/parcelLinks';
@@ -428,6 +428,32 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.getByText('Weight').nextElementSibling).toHaveTextContent('1.2 kg');
     expect(screen.getByText('Dimensions').nextElementSibling).toHaveTextContent('30 × 20 × 10 cm');
     expect(screen.getByText('Pickup point').nextElementSibling).toHaveTextContent('Example Kiosk');
+  });
+
+  it('lists the import charges first, and sends a viewer without the number to whoever shared the parcel to pay online', async () => {
+    const importCharges = { currency: 'EUR', customs: 23.41, carrier_fee: 11, carrier_fee_online: 8.09 };
+    const ask = 'To pay online, ask the person who shared this parcel for its tracking number.';
+    await shown(view(journey, { carrier: 'poste-italiane', importCharges, weightKg: 1.2 }));
+    const facts = screen.getByText('Import charges').closest('dl')!;
+    expect(within(facts).getAllByRole('term').map((term) => term.textContent)).toEqual(['Import charges', 'Weight']);
+    expect(screen.getByText('Import charges').nextElementSibling).toHaveTextContent('€34.41 (€31.50 if paid online)');
+    // The owner reads the number.
+    expect(screen.queryByText(ask)).toBeNull();
+    cleanup();
+
+    await shown(view(journey, { carrier: 'poste-italiane', importCharges }, false));
+    expect(screen.getByText(ask)).toBeVisible();
+    cleanup();
+
+    // Paid at the door only, or paid: nothing to ask for.
+    await shown(view(journey, { carrier: 'poste-italiane', importCharges: { ...importCharges, status_code: 'FINESTRA_PAGAMENTO_CHIUSA' } }, false));
+    expect(screen.getByText('Import charges').nextElementSibling).toHaveTextContent(/^€34\.41$/);
+    expect(screen.queryByText(ask)).toBeNull();
+    cleanup();
+
+    await shown(view(journey, { carrier: 'poste-italiane', importCharges: { ...importCharges, paid: true, status_code: 'PAGATO' } }, false));
+    expect(screen.getByText('Import charges').nextElementSibling).toHaveTextContent('Paid (€34.41 on delivery, €31.50 online)');
+    expect(screen.queryByText(ask)).toBeNull();
   });
 
   it('draws the route across the card once a scan has a place, behind a button that opens the map', async () => {

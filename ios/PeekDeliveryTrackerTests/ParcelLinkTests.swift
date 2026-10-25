@@ -122,6 +122,7 @@ final class ParcelLinkTests: XCTestCase {
             "pickup_point": "Example Kiosk\\nBahnhofstrasse 1, 8000 Zürich",
             "dimensions_text": "30 × 20 × 10 cm",
             "weight_kg": 0.8,
+            "import_charges": { "currency": "EUR", "customs": 23.41, "carrier_fee": 11, "carrier_fee_online": 8.09 },
             "destination_country": "CH",
             "receiver_name": "Never shared",
             "routing": { "input_needed": { "carrier": "dpd", "field": "dpdPostcode" } }
@@ -159,6 +160,7 @@ final class ParcelLinkTests: XCTestCase {
         XCTAssertEqual(PickupPoint(data.pickupPoint)?.name, "Example Kiosk")
         XCTAssertEqual(data.dimensionsText, "30 × 20 × 10 cm")
         XCTAssertEqual(data.weightKg, 0.8)
+        XCTAssertEqual(data.importCharges, ImportCharges(currency: "EUR", customs: 23.41, carrierFee: 11, carrierFeeOnline: 8.09))
         XCTAssertEqual(data.destinationCountry, "CH")
         // Whatever else a response carried, the parcel shows only what a link shares.
         XCTAssertNil(data.receiverName)

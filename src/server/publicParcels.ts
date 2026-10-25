@@ -4,6 +4,7 @@ import { createHash, createHmac, randomBytes } from 'node:crypto';
 import { locatePlace } from 'universal-parcel-scraper/places';
 import type {
   ApiCarrierId,
+  ApiImportCharges,
   ApiParcelAlerts,
   ApiParcelLink,
   ApiParcelNumberHint,
@@ -230,6 +231,7 @@ const SHOWN_CARRIER_DATA: Record<string, (value: unknown) => boolean> = {
   pickup_point: text,
   dimensions_text: text,
   weight_kg: amount,
+  import_charges: isRecord,
   destination_country: text,
 };
 /** The other leg's number, and the one the carrier tracks the parcel by, are tracking numbers too: shown only where the parcel's own is. */
@@ -241,18 +243,35 @@ const SHOWN_WITH_NUMBER: Record<string, (value: unknown) => boolean> = {
 };
 
 /**
- * The carrier details a gift keeps until it is delivered: who carries it and
- * when it arrives. Not the sender, nor what would describe the contents or
+ * The carrier details a gift keeps until it is delivered: who carries it,
+ * when it arrives and what importing it costs, which its recipient usually
+ * pays at the door. Not the sender, nor what would describe the contents or
  * where it waits. A detail a link starts to show later stays out of a gift
  * until it is listed here.
  */
 const SHOWN_IN_GIFT = new Set([
   'active_tracking_carrier', 'original_carrier', 'delivery_carrier', 'tracking_provider', 'carrier_answered', 'auto_changed_from',
-  'auto_changed_to', 'auto_changed_at', 'swiss_post_ready', 'expected_delivery_from', 'destination_country',
+  'auto_changed_to', 'auto_changed_at', 'swiss_post_ready', 'expected_delivery_from', 'import_charges', 'destination_country',
 ]);
 
+const IMPORT_CHARGE_AMOUNTS = ['customs', 'carrier_fee', 'carrier_fee_online'] as const;
+
+/** Import charges with the members a link shows; none without a currency or anything they say. */
+function shownImportCharges(value: unknown): ApiImportCharges | undefined {
+  if (!isRecord(value) || typeof value.currency !== 'string' || !/^[A-Z]{3}$/.test(value.currency)) return undefined;
+  const charges: ApiImportCharges = { currency: value.currency };
+  for (const key of IMPORT_CHARGE_AMOUNTS) {
+    const sum = value[key];
+    if (amount(sum)) charges[key] = sum;
+  }
+  if (flag(value.paid)) charges.paid = value.paid;
+  if (text(value.status_code) && value.status_code.length <= 60) charges.status_code = value.status_code;
+  return Object.keys(charges).length > 1 ? charges : undefined;
+}
+
 function publicCarrierData(value: unknown, numberShown: boolean, wrapped: boolean): ApiPublicPackage['carrier_data'] {
-  const stored = isRecord(value) ? value : {};
+  // A member of the import charges a later scraper release adds stays on the server too.
+  const stored: Record<string, unknown> = isRecord(value) ? { ...value, import_charges: shownImportCharges(value.import_charges) } : {};
   const shown = numberShown ? { ...SHOWN_CARRIER_DATA, ...SHOWN_WITH_NUMBER } : SHOWN_CARRIER_DATA;
   return Object.fromEntries(Object.entries(shown)
     .filter(([key, valid]) => valid(stored[key]) && (!wrapped || SHOWN_IN_GIFT.has(key)))

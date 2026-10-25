@@ -50,6 +50,7 @@ import { HANDOVER_ROOM, ParcelMapSheet, RouteEngraving, useCoveredBox, useParcel
 import { ProgressTrack } from './ProgressTrack';
 import { PickupPointCard } from './PickupPointCard';
 import { pickupPoint } from '../lib/pickupPoint';
+import { importChargesLine } from '../lib/importCharges';
 import type { CardOrigin } from '../lib/cardTransition';
 import { useRefreshAnimation } from '../lib/useRefreshAnimation';
 import type { ApiAuth } from '../lib/apiClient';
@@ -179,6 +180,7 @@ export function ParcelDetail({
   const [notificationsAnimated, setNotificationsAnimated] = useState(false);
   const [notificationError, setNotificationError] = useState<string | null>(null);
   const delivered = current?.stage === 'delivered';
+  const importCharges = importChargesLine(parcel.importCharges, delivered, t, languageTag);
   // While the account's delivery email is on, a parcel still on its way has two alerts: the bell opens them.
   const preferences = useNotificationPreferences(apiAuth);
   const deliveryEmail = useDeliveryEmail(apiAuth, accountEmail);
@@ -600,8 +602,9 @@ export function ParcelDetail({
       </div>}
       {delivered && apiAuth && accountEmail && <EmailOffer apiAuth={apiAuth} email={accountEmail} />}
       <section className="detail__information">
-        {(pickupFact || parcel.receiverName || parcel.dimensionsText || (Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0)) && (
+        {(importCharges || pickupFact || parcel.receiverName || parcel.dimensionsText || (Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0)) && (
           <dl className="detail__shipment-facts">
+            {importCharges && <div><dt>{t('detail.importCharges')}</dt><dd>{importCharges.text}</dd></div>}
             {pickupFact && <div><dt>{t(current?.stage === 'delivered' ? 'detail.collectedAt' : 'detail.pickupPoint')}</dt><dd>{pickupFact}</dd></div>}
             {parcel.receiverName && <div><dt>{t('detail.recipient')}</dt><dd>{parcel.receiverName}</dd></div>}
             {Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0 && <div><dt>{t('detail.weight')}</dt><dd>{new Intl.NumberFormat(languageTag, { style: 'unit', unit: 'kilogram', maximumFractionDigits: 3 }).format(parcel.weightKg!)}</dd></div>}

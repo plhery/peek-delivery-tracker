@@ -118,11 +118,14 @@ export function wrappedGiftEvents(events: readonly TrackingEvent[], destinationC
       : event);
 }
 
-/** A gift on its way, as its viewer sees the parcel: who carries it and when it arrives, and nothing about what it is. */
+/**
+ * A gift on its way, as its viewer sees the parcel: who carries it, when it arrives and what importing it costs, and
+ * nothing about what it is.
+ */
 function wrappedGift(parcel: ParcelWithEvents): ParcelWithEvents {
   return {
     id: parcel.id, trackingNumber: '', label: '', carrier: parcel.carrier, createdAt: parcel.createdAt,
-    expectedDelivery: parcel.expectedDelivery, expectedDeliveryFrom: parcel.expectedDeliveryFrom,
+    expectedDelivery: parcel.expectedDelivery, expectedDeliveryFrom: parcel.expectedDeliveryFrom, importCharges: parcel.importCharges,
     lastSyncedAt: parcel.lastSyncedAt, syncStatus: parcel.syncStatus, syncError: parcel.syncError,
     trackingSource: parcel.trackingSource, originalCarrier: parcel.originalCarrier, destinationCountry: parcel.destinationCountry,
     events: wrappedGiftEvents(parcel.events, parcel.destinationCountry?.toUpperCase() ?? null),

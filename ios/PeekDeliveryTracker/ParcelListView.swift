@@ -44,6 +44,9 @@ struct ParcelListView: View {
         .background { if !showsFirstOpen { tabKeys } }
         .focusedSceneValue(\.tabsMenu, MenuBar.shown && !showsFirstOpen && !sheetOver ? TabsMenu(choose: choose) : nil)
         #if os(macOS)
+        // The window's toolbar keeps to the page's ground, rather than showing a lighter bar of its own under the
+        // pointer.
+        .toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
         .onSheetOverMainWindow($sheetOver)
         // A parcel or Add asked for from the menu bar: the deliveries take it, in front.
         .onAppear { if MenuBarRequests.isPending { selection = 0 } }

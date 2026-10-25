@@ -46,7 +46,9 @@
  *   row keeps the carrier's instant from then on.
  * - A universal copy stored a zone away from a carrier's row of the scan,
  *   before a fix read the provider's clock right, goes with any check
- *   (`sharedScans`).
+ *   (`sharedScans`). So does one that shows the carrier scan's wall clock
+ *   under another offset (ParcelsApp's UTC for Maersk eCommerce's US
+ *   clocks), which the carrier's scan takes over when it is new.
  * - A stage change the sync stored at the time it saw it goes once a scan
  *   dates it, a scan new to the parcel taking its row over, and a new one a
  *   stored row dates is not stored (`datedObservations`).
@@ -233,6 +235,7 @@ function relabelledFrom(policy: SameInstantIdentityPolicy): string | null {
 }
 
 const WALL_CLOCK = "yyyy-LL-dd'T'HH:mm:ss";
+const MINUTE_CLOCK = "yyyy-LL-dd'T'HH:mm";
 const NUMERIC_OFFSET = /[+-]\d{2}:?\d{2}$/;
 
 function timeOf(row: JsonObject): string {
@@ -627,6 +630,30 @@ export function placesConflict(left: readonly string[], right: readonly string[]
   return left.length > 0 && right.length > 0 && !left.some((word) => right.includes(word));
 }
 
+/**
+ * A provider's copy that shows a carrier's scan on the scan's wall clock under another offset, to
+ * the minute, in any wording (ParcelsApp gave Maersk eCommerce's US scans their wall clock as UTC,
+ * in words and places of its own), with stages and codes that agree and places that do not conflict.
+ */
+function readsWallClock(copy: JsonObject, scan: JsonObject): boolean {
+  const [shown, own] = [labelledTime(copy), labelledTime(scan)];
+  return shown !== null && own !== null && shown.offset !== own.offset && shown.toFormat(MINUTE_CLOCK) === own.toFormat(MINUTE_CLOCK)
+    && stagesAgree(stageOf(copy), stageOf(scan)) && codesAgree(copy, scan) && !placesConflict(placeWords(copy), placeWords(scan));
+}
+
+/**
+ * The providers whose copies read two or more of a parcel's carrier scans that way, each copy the
+ * one scan it reads (`readsWallClock`): the provider's clock, not two scans of one minute by chance.
+ */
+function wallClockReaders(copies: readonly JsonObject[], scans: readonly JsonObject[]): Set<string> {
+  const read = new Map<string, Set<string>>();
+  for (const copy of copies) {
+    const twins = scans.filter((scan) => readsWallClock(copy, scan));
+    if (twins.length === 1) read.set(providerOf(copy), (read.get(providerOf(copy)) ?? new Set<string>()).add(identity(twins[0]!)));
+  }
+  return new Set([...read].filter(([, scans]) => scans.size >= 2).map(([provider]) => provider));
+}
+
 export interface SharedScans {
   /**
    * A scan's computed identity → the stored row it takes over in place: a
@@ -742,7 +769,11 @@ export function retimedScans(
  * hours apart too often by chance, and carriers stamp some scans 15 or 30
  * minutes after another to the second (Swiss Post sorts a parcel a quarter
  * hour after customs clear it). Across a zone's offset, two places that share
- * no word, countries aside, are two scans. A row that two scans match is
+ * no word, countries aside, are two scans. Failing all that, a carrier's scan
+ * matches a provider's copy that shows its wall clock, to the minute, under
+ * another offset, in any wording, with stages and codes that agree, when the
+ * copy's wording opens alike or its provider reads two of the parcel's
+ * carrier scans that way (`readsWallClock`). A row that two scans match is
  * ambiguous and stays unmatched.
  *
  * A carrier's scan takes over the universal row it matches. A universal scan
@@ -785,11 +816,12 @@ export function retimedScans(
  * carrier row that way is left out. A copy in whole minutes is compared to
  * the carrier's minute. So is one, in any wording or stage, at the carrier
  * row's place by the shift in whole quarter hours that most of the
- * provider's copies of the parcel show, two at least. A row at the copy's
- * own minute and place, the carrier's or one written before rows named their
- * provider, the provider's reading at the carrier row's minute, a scan that
- * takes the row over or repeats it, or a second copy of the carrier row from
- * the provider keeps it.
+ * provider's copies of the parcel show, two at least. Failing both, so is one
+ * on a carrier row's wall clock under another offset by the rule above. A
+ * row at the copy's own minute and place, the carrier's or one written before
+ * rows named their provider, the provider's reading at the carrier row's
+ * minute, a scan that takes the row over or repeats it, or a second copy of
+ * the carrier row from the provider keeps it.
  */
 export function sharedScans(
   events: readonly JsonObject[],
@@ -826,6 +858,14 @@ export function sharedScans(
   const occupied = new Set(rows.map(instantOf));
   // A row the batch shows at its own instant is that scan's, not a shifted copy's.
   const shown = new Set(events.map(instantOf));
+  // A provider's copy on a carrier scan's wall clock under another offset, from a provider that reads two of the
+  // parcel's carrier scans that way, or in wording that opens alike.
+  const carrierHeld = [...new Map([...stored, ...events].filter((row) => !['', 'app', UNIVERSAL].includes(sourceOf(identity(row)))
+    && !observedOnly(row)).map((row) => [identity(row), row] as const)).values()];
+  const readers = wallClockReaders([...rows, ...events].filter((row) => sourceOf(identity(row)) === UNIVERSAL && providerOf(row) !== ''
+    && !observedOnly(row)), carrierHeld);
+  const readsClock = (copy: JsonObject, scan: JsonObject) => providerOf(copy) !== '' && readsWallClock(copy, scan)
+    && (readers.has(providerOf(copy)) || opensAlike(copy, scan));
   /** The row a scan repeats; `alone` when no other new scan stands at its instant. */
   const matchOf = (event: JsonObject, alone: boolean): JsonObject | undefined => {
     const universal = sourceOf(identity(event)) === UNIVERSAL;
@@ -856,13 +896,15 @@ export function sharedScans(
       (sourceOf(identity(row)) === UNIVERSAL) !== universal && Math.abs(at - instantOf(row)) >= HOUR_MS
       && stagesAgree(stageOf(row), stageOf(event))
     ));
+    const clocked = universal ? [] : apart.filter((row) => readsClock(row, event));
     const staged = exact.length === 1 && alone && stageOf(event) !== '' && stagesAgree(stageOf(exact[0]!), stageOf(event));
     return worded.length === 1 ? worded[0]
       : worded.length === 0 && staged ? exact[0]
         : minuted.length > 0 ? (minuted.length === 1 ? minuted[0] : undefined)
           : restaged.length > 0 ? (restaged.length === 1 ? restaged[0] : openingAlike(event, restaged))
             : shifted.length === 1 ? shifted[0]
-              : shifted.length === 0 && reclocked.length === 1 ? reclocked[0] : undefined;
+              : shifted.length === 0 && reclocked.length === 1 ? reclocked[0]
+                : shifted.length + reclocked.length === 0 && clocked.length === 1 ? clocked[0] : undefined;
   };
   const picks = new Map<string, JsonObject[]>();
   for (const event of pending) {
@@ -946,7 +988,8 @@ export function sharedScans(
   // wording and place (ParcelsApp's copy of UPS's customs scan, 11 h late), or one at the shift in
   // whole quarter hours that most of the provider's copies of the parcel show, two at least, in
   // any wording or stage at the carrier row's place (17TRACK's copies of Shiprocket's scans, India's
-  // clock read as US Eastern). A row at the copy's own minute and place, the provider's reading at
+  // clock read as US Eastern). Failing both, one on a carrier row's wall clock under another offset
+  // (`readsClock`). A row at the copy's own minute and place, the provider's reading at
   // the carrier row's minute, or a second copy of the row from the provider makes it another scan.
   // A universal scan is matched with stored rows alone.
   const carrierRows = stored.filter((row) => !taken.has(identity(row)) && heldByCarrier(row) && !observedOnly(row)
@@ -988,9 +1031,10 @@ export function sharedScans(
   }
   const carrierRowOf = (copy: JsonObject, among: readonly JsonObject[]): JsonObject | undefined => {
     const clock = clocks.get(providerOf(copy));
-    const apart = among.filter((row) => own(row) && (clock === undefined
+    const misread = among.filter((row) => own(row) && (clock === undefined
       ? sameScan(copy, row) && hoursApart(instantOf(copy), instantOf(row))
       : placeOf(row) === placeOf(copy) && codesAgree(copy, row) && zoneShift(instantOf(copy), instantOf(row)) === clock));
+    const apart = misread.length > 0 ? misread : among.filter((row) => own(row) && readsClock(copy, row));
     if (apart.length !== 1) return undefined;
     const carrier = apart[0]!;
     const at = (row: JsonObject, instant: number) => placeOf(row) === placeOf(copy) && minute(instantOf(row)) === minute(instant);
@@ -1046,7 +1090,6 @@ function localTimeOf(row: JsonObject): string {
 
 /** How a carrier's scan on a wall clock in no zone got its offset: `stated` once another source gave it (`withStatedClocks`). */
 const STATED = 'stated';
-const MINUTE_CLOCK = "yyyy-LL-dd'T'HH:mm";
 
 function rawOf(row: JsonObject, key: string): unknown {
   return row[key] ?? (isRecord(row.raw_data) ? row.raw_data[key] : undefined);

@@ -1463,6 +1463,62 @@ describe('a provider\'s copies on a clock read in another zone', () => {
   });
 });
 
+describe('a provider\'s copies on a carrier\'s wall clocks under another offset', () => {
+  // A carrier gives its US scans their own offsets, its town in brackets; a provider gave the wall clocks as UTC, in its own words and places.
+  const own = (id: string, at: string, time: string, description: string, values: JsonObject = {}) =>
+    ({ ...row(`aliexpress:${id}`, at, description, 'in_transit'), raw_data: { time }, ...values });
+  const copy = (id: string, time: string, description: string, values: JsonObject = {}) => ({
+    ...row(`unknown:${id}`, time.replace('.000Z', '+00:00'), description, 'in_transit'), location: 'Usa, Example City',
+    raw_data: { universal_provider: 'ParcelsApp', time }, ...values,
+  });
+  const carrier = [
+    own('sorted', '2026-10-22T22:49:00+00:00', '2026-10-22T18:49:00-04:00', '[USA,Example City] Arrived at sorting center'),
+    own('relabelled', '2026-10-23T02:09:00+00:00', '2026-10-22T22:09:00-04:00', '[USA,Example City] Tracking number changed'),
+    own('depot', '2026-10-24T17:33:00+00:00', '2026-10-24T12:33:00-05:00', 'Arrived at delivery center'),
+  ];
+  const sorted = copy('sorted', '2026-10-22T18:49:00.000Z', 'At sorting center');
+  const relabelled = copy('relabelled', '2026-10-22T22:09:00.000Z', 'Package relabeled');
+  const depot = copy('depot', '2026-10-24T12:33:00.000Z', 'Arrived at delivery center', { location: 'Usa, Other Town' });
+  const delivered = { ...scan('aliexpress:delivered', '2026-10-25T15:00:00Z', 'Delivered', 'delivered'), raw_data: { time: '2026-10-25T10:00:00-05:00' } };
+  const left = (stored: JsonObject[], events: JsonObject[] = [delivered]) => [...sharedScans(events, stored).absorbed].sort();
+  const asScan = (stored: JsonObject) => ({ ...stored, package_id: 'package-1', occurred_at: String(stored.occurred_at).replace('+00:00', 'Z') });
+
+  it('go with any check once the provider reads two of them so, in any wording and place', () => {
+    expect(left([...carrier, sorted, relabelled, depot])).toEqual(['unknown:depot', 'unknown:relabelled', 'unknown:sorted']);
+    // The batch carries the carrier's scans, already stored, and the provider's next copy of one stays out.
+    expect(left([...carrier, sorted, relabelled], carrier.map(asScan))).toEqual(['unknown:relabelled', 'unknown:sorted']);
+    const again = sharedScans([asScan(sorted)], [...carrier, relabelled]);
+    expect(pairs(again.skipped)).toEqual([['unknown:sorted', 'aliexpress:sorted']]);
+    // One copy alone goes when its wording opens alike.
+    expect(left([...carrier, depot])).toEqual(['unknown:depot']);
+  });
+
+  it('are taken over by the carrier\'s scans that reach the parcel after them', () => {
+    const shared = sharedScans(carrier.map(asScan), [sorted, relabelled, depot]);
+    expect(pairs(shared.reused)).toEqual([
+      ['aliexpress:depot', 'unknown:depot'], ['aliexpress:relabelled', 'unknown:relabelled'], ['aliexpress:sorted', 'unknown:sorted'],
+    ]);
+    expect([...shared.shifted].sort()).toEqual(['aliexpress:depot', 'aliexpress:relabelled', 'aliexpress:sorted']);
+    expect(shared.absorbed.size).toBe(0);
+  });
+
+  it('stay when one copy alone shows the clock in other wording, or another stage, minute or place', () => {
+    expect(left([...carrier, sorted])).toEqual([]);
+    expect(left([...carrier, sorted, { ...relabelled, stage: 'delivered' }])).toEqual([]);
+    expect(left([...carrier, sorted, { ...relabelled, raw_data: { universal_provider: 'ParcelsApp', time: '2026-10-22T22:10:00.000Z' },
+      occurred_at: '2026-10-22T22:10:00+00:00' }])).toEqual([]);
+    expect(left([{ ...carrier[0]!, location: 'Example City' }, carrier[1]!, carrier[2]!, { ...sorted, location: 'Usa, Elsewhere' }, relabelled]))
+      .toEqual([]);
+    // Another provider's copy of the carrier's scan is not the reader's, nor is a copy that names no provider.
+    expect(left([...carrier, relabelled, { ...sorted, raw_data: { universal_provider: '17TRACK', time: '2026-10-22T18:49:00.000Z' } }]))
+      .toEqual([]);
+    expect(left([...carrier, relabelled, { ...sorted, raw_data: { time: '2026-10-22T18:49:00.000Z' } }])).toEqual([]);
+    // A copy at the carrier's own instant shows no other clock.
+    expect(left([...carrier, sorted, { ...relabelled, raw_data: { universal_provider: 'ParcelsApp', time: '2026-10-22T22:09:00-04:00' },
+      occurred_at: '2026-10-23T02:09:00+00:00' }])).toEqual([]);
+  });
+});
+
 describe('a stage change the sync saw without a time', () => {
   const sighting = { ...row('dpd-uk:observed', '2026-10-20T16:11:32.240+00:00', 'Order details received', 'registered'),
     location: null, observed_without_provider_timestamp: true };

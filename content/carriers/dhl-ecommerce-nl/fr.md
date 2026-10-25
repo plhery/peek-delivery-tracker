@@ -3,7 +3,7 @@ title: DHL eCommerce Netherlands suivi colis : statuts et contact
 description: Suivre un colis DHL eCommerce (ex-DHL Parcel) en Belgique ou aux Pays-Bas : le numéro JVGL, ce que veut dire chaque statut, les points bpost et qui contacter.
 slug: dhl-ecommerce-netherlands-suivi-colis
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
 DHL eCommerce, l'ancien DHL Parcel, livre les colis des boutiques en ligne en Belgique et aux Pays-Bas ; son site belge signe « DHL eCommerce Benelux (anciennement DHL Parcel Benelux) ». Pour suivre ton colis, saisis le numéro de suivi et ton code postal sur le [Track & Trace de DHL](https://www.dhlecommerce.be/fr/particuliers/track-trace), ou colle-le dans le champ ci-dessus. Ce numéro t'est envoyé par la boutique ou par DHL dans l'e-mail d'expédition.
@@ -70,7 +70,6 @@ Pour `Le colis ne peut pas être livré actuellement. La livraison sera retardé
 Relevé sur les pages françaises de DHL eCommerce Belgique le 12 octobre 2026 :
 
 - **Chat en direct :** sur la [page Service Clientèle](https://www.dhlecommerce.be/fr/particuliers/service-clientele). Tracy, une assistante numérique, vérifie si un collègue est disponible.
-- **Formulaire de contact pour les particuliers :** sur la [page Contact particuliers](https://www.dhlecommerce.be/fr/particuliers/contact-particuliers), avec une réponse sous 24 heures.
 - **Téléphone :** les pages de DHL pour les particuliers n'en donnent pas.
 - **Aux Pays-Bas :** le service clientèle répond par [chat](https://www.dhlecommerce.nl/en/chat).
 
@@ -84,7 +83,7 @@ Garde ton numéro de suivi sous la main. Pour une réclamation, passe par la bou
 
 Peek interroge DHL sans ton code postal : DHL n'affiche alors ni le destinataire, ni l'adresse, ni la signature, ni le point de retrait. Tu vois le statut, l'historique, la livraison prévue (un créneau ou un moment, quand DHL en planifie une) et l'heure de livraison. L'historique n'indique pas le lieu des scans. Le colis est vérifié toutes les 10 minutes en journée, puis toutes les 2 minutes quand il est en cours de livraison, et toutes les heures la nuit ; les notifications te préviennent quand le statut change : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 
-Peek affiche les libellés anglais de DHL, pas les français : `Delivered at DHL ServicePoint` plutôt que `Livré au DHL ServicePoint`, par exemple. Seuls `Delivered` et `Returned to sender` apparaissent dans les mots de Peek, « Livré » et « Retourné à l'expéditeur ». Peek compte `Delivered at DHL ServicePoint` comme prêt à être retiré. Quand un colis belge passe chez bpost, Peek ne le suit pas chez bpost.
+Peek affiche les scans avec les libellés anglais de DHL, pas les français : `Delivered at DHL ServicePoint` plutôt que `Livré au DHL ServicePoint`, par exemple. Au-dessus, le titre est toujours celui de Peek, comme « En transit » ou « Prêt à être retiré ». Peek compte `Delivered at DHL ServicePoint` comme prêt à être retiré. Quand un colis belge passe chez bpost, Peek ne le suit pas chez bpost.
 
 ## Questions sur le suivi DHL eCommerce Netherlands
 
@@ -120,7 +119,6 @@ En Belgique, 14 jours calendrier dans un point bpost et 5 jours calendrier dans 
 - [DHL eCommerce Belgique : Colis endommagé](https://www.dhlecommerce.be/fr/particuliers/faq/reception/colis-endommage) – dommage via l'expéditeur
 - [DHL eCommerce Belgique : Plainte](https://www.dhlecommerce.be/fr/particuliers/faq/reception/plainte) – seul l'expéditeur réclame
 - [DHL eCommerce Belgique : Renvoyé à l'expéditeur](https://www.dhlecommerce.be/fr/particuliers/faq/reception/renvoye-lexpediteur) – plus d'interception, contacter l'expéditeur
-- [DHL eCommerce Belgique : Contact particuliers](https://www.dhlecommerce.be/fr/particuliers/contact-particuliers) – formulaire, réponse sous 24 heures
 - [DHL eCommerce Belgique : Phishing par SMS ou e-mail](https://www.dhlecommerce.be/fr/phishing) – faux messages, adresses d'envoi, signalement
 - [DHL eCommerce : Traductions du suivi (fr-BE)](https://api-gw.dhlparcel.nl/translations/fr_BE.json) – libellés français des statuts
 - [DHL eCommerce : Traductions du suivi (en-NL)](https://api-gw.dhlparcel.nl/translations/en_NL.json) – libellés anglais, 15 minutes

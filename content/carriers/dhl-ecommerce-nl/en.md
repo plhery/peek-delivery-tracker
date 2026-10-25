@@ -3,10 +3,10 @@ title: DHL eCommerce Netherlands tracking: statuses and contact
 description: Track a DHL eCommerce parcel in the Netherlands or Belgium (formerly DHL Parcel): the JVGL number, what each status means, ServicePoints and who to contact.
 slug: dhl-ecommerce-netherlands-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
-DHL eCommerce Netherlands, formerly DHL Parcel, delivers parcels for online shops in the Netherlands and Belgium; its Belgian site signs as DHL eCommerce Benelux. Track a parcel with "Track and trace" on [dhlecommerce.nl](https://www.dhlecommerce.nl/en/consumer/track-and-trace) with the shipment number and your postcode, or paste the number from the shop's or DHL's email in the box above.
+DHL eCommerce Netherlands, formerly DHL Parcel, delivers parcels for online shops in the Netherlands and Belgium; its Belgian site signs as DHL eCommerce Benelux. Track a parcel with "Track and trace" on [dhlecommerce.nl](https://www.dhlecommerce.nl/en/consumer/track-and-trace) with the shipment number (Belgium's site also asks your postcode), or paste the number from the shop's or DHL's email in the box above.
 
 ## DHL eCommerce NL tracking number
 
@@ -61,14 +61,14 @@ If tracking stops moving, DHL asks you to contact the sender, even when the parc
 
 **Lost or damaged.** Tell the sender as soon as possible: it claims from DHL and can replace the item or refund you. In Belgium DHL says plainly that only the sender can file a claim.
 
-**Returned.** In Belgium DHL can no longer stop a returning parcel; ask the sender to send it again.
+**Returned.** Once a parcel is on its way back, DHL can no longer stop it, in the Netherlands or Belgium; ask the sender to send it again.
 
 ## DHL eCommerce Nederland contact and customer service
 
 As listed on DHL's consumer pages on 12 October 2026:
 
 - **Netherlands:** the [customer service chat](https://www.dhlecommerce.nl/en/chat). DHL's consumer pages give no phone number.
-- **Belgium:** a live chat, where a digital assistant checks whether a person is free, and a contact form for private customers with a reply within 24 hours, both on the [customer service page](https://www.dhlecommerce.be/en/consumer/customer-service). No phone number either.
+- **Belgium:** a live chat, where a digital assistant checks whether a person is free, on the [customer service page](https://www.dhlecommerce.be/en/consumer/customer-service). No phone number either.
 - **App:** My DHL, from the App Store or Google Play.
 
 > DHL warns about fake texts, WhatsApp messages and emails asking you to pay or click. Its real emails come from addresses ending in dhl.com, dhl.nl, dhlparcel.nl or dhlecommerce.nl. Type the shipment number into track and trace instead of clicking, and send fakes as an attachment to spam.ecommerce@dhl.com. Install only the official My DHL app.
@@ -77,7 +77,7 @@ As listed on DHL's consumer pages on 12 October 2026:
 
 [Peek](/) names DHL eCommerce Netherlands at once for `JVGL` numbers and for `3S` with three letters and 8 to 10 digits. Other `3S` codes are asked of DHL eCommerce Netherlands (with Colis Privé for some lengths). Some also fit PostNL, which can't be asked, and a DHL barcode with four letters after `3S` reads as PostNL's or matches nothing: pick DHL eCommerce Netherlands with "Change". A `JJD` number is named DHL unless you change it. Links from my.dhlecommerce.nl, dhlparcel.nl, dhlecommerce.be and dhlparcel.be ending in `/home/tracktrace/` and the number work too.
 
-It asks without your postcode, so DHL leaves out the recipient, address, signature and ServicePoint. You see the status, the history, the expected delivery (a time window or moment, when DHL plans one) and the delivery time. DHL gives no place for its scans. The parcel is checked every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight; notifications tell you when the status changes. Statuses appear in DHL's English, except `Delivered` and `Returned to sender`, shown in Peek's own words; Peek counts `Delivered at DHL ServicePoint` as ready for pickup. A Belgian parcel isn't followed on to bpost.
+It asks without your postcode, so DHL leaves out the recipient, address, signature and ServicePoint. You see the status, the history, the expected delivery (a time window or moment, when DHL plans one) and the delivery time. DHL gives no place for its scans. The parcel is checked every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight; notifications tell you when the status changes. Scans keep DHL's English wording, under Peek's own headline, such as 'In transit' or 'Ready for pickup'; Peek counts `Delivered at DHL ServicePoint` as ready for pickup. A Belgian parcel isn't followed on to bpost.
 
 ## Questions about DHL eCommerce Netherlands tracking
 
@@ -118,7 +118,6 @@ In the Netherlands DHL delivers Monday to Saturday, so Saturday yes. In Belgium 
 - [DHL eCommerce Belgium: Seconde livraison DHL](https://www.dhlecommerce.be/fr/particuliers/seconde-livraison-dhl) – second attempt, Regional Hub
 - [DHL eCommerce Belgium: Plainte](https://www.dhlecommerce.be/fr/particuliers/faq/reception/plainte) – only the sender claims
 - [DHL eCommerce Belgium: Temps de transit](https://www.dhlecommerce.be/fr/particuliers/faq/reception/temps-de-transit) – link to bpost tracking
-- [DHL eCommerce Belgium: Contact particuliers](https://www.dhlecommerce.be/fr/particuliers/contact-particuliers) – form, reply within 24 hours
 - [DHL eCommerce: Tracking translations (en-NL)](https://api-gw.dhlparcel.nl/translations/en_NL.json) – English status wordings
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

@@ -2744,6 +2744,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "dhl-ecommerce-nl",
+      "catalog": "dhl-ecommerce-nl",
+      "slug": "dhl-ecommerce-pakket-volgen",
+      "title": "DHL eCommerce pakket volgen: status, ServicePoint, klacht",
+      "name": "DHL eCommerce Netherlands",
+      "color": "#ffcc00"
+    },
+    {
       "id": "postnl",
       "catalog": "spring-gds",
       "slug": "postnl-pakket-volgen",
@@ -2882,6 +2890,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "bg": [],
   "el": [
+    {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "box-now-entopismos-dematos",
+      "title": "Εντοπισμός δέματος BOX NOW: αριθμός, καταστάσεις, PIN",
+      "name": "BOX NOW",
+      "color": "#44d62c"
+    },
     {
       "id": "acs-courier",
       "catalog": "acs-courier",

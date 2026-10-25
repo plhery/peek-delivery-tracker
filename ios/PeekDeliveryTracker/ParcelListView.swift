@@ -780,6 +780,9 @@ private struct DeliveryListView: View {
                 #endif
             }
             .scrollIndicators(.hidden)
+            #if os(macOS)
+            .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { places.list = $0 }
+            #endif
             #if os(iOS)
             .onScrollGeometryChange(for: PullGeometry.self, of: PullGeometry.init) { _, geometry in
                 pull.track(geometry)
@@ -1918,6 +1921,9 @@ private struct DeliveryCardPlace: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(DeliveryListSpace.name)) } action: { places.stand(id, at: $0) }
+            #if os(macOS)
+            .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { places.show(id, at: $0) }
+            #endif
             .opacity(flying ? 0 : 1)
             .transition(leaving ? .identity : .opacity)
     }

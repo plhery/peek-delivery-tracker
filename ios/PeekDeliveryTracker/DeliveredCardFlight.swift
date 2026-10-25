@@ -32,6 +32,9 @@ enum DeliveryListSpace {
     func forget(_ id: UUID) {
         frames[id] = nil
         names[id] = nil
+        #if os(macOS)
+        shown[id] = nil
+        #endif
     }
 
     func place(of id: UUID) -> Place? {
@@ -39,11 +42,27 @@ enum DeliveryListSpace {
     }
 
     #if os(macOS)
-    // For now the Mac pictures no card: each simply takes its new place, and nothing comes out of one.
+    // The Mac pictures no card: each simply takes its new place. Paper still comes out of one that arrives, placed
+    // from where the cards and the list show in the window, as there is no scroll view at hand to convert from.
+    private var shown: [UUID: CGRect] = [:]
+    /// Where the list shows in the window.
+    var list: CGRect?
     var visible: CGRect? { nil }
     var topmost: UUID? { nil }
+    func show(_ id: UUID, at frame: CGRect) { shown[id] = frame }
     func see(pip frame: CGRect, on id: UUID) { pip = (id, frame) }
-    func mouth(of id: UUID) -> CGPoint? { nil }
+
+    /// Where in the window something comes out of a parcel's card, as on iOS.
+    func mouth(of id: UUID) -> CGPoint? {
+        guard let list, let frame = shown[id] else { return nil }
+        if let pip, pip.id == id {
+            let mouth = CGPoint(x: pip.frame.midX, y: pip.frame.minY + pip.frame.height * 0.38)
+            if list.contains(mouth) { return mouth }
+        }
+        let end = CGPoint(x: frame.maxX - 52, y: frame.minY + min(frame.height / 2, 64))
+        return list.contains(end) ? end : nil
+    }
+
     func picture(of frame: CGRect) -> PlatformImage? { nil }
     #else
     /// The part of the list that shows.

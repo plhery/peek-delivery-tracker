@@ -615,11 +615,7 @@ struct KeychainStore: SessionPersistence {
 
     func save<T: Encodable>(_ value: T) throws {
         let data = try JSONEncoder.deliveryTracker.encode(value)
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service,
-            kSecAttrAccount as String: account,
-        ]
+        let query = item
         let attributes: [String: Any] = [
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
             kSecValueData as String: data,
@@ -634,13 +630,10 @@ struct KeychainStore: SessionPersistence {
     }
 
     func load<T: Decodable>() -> T? {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service,
-            kSecAttrAccount as String: account,
+        let query = item.merging([
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne,
-        ]
+        ]) { _, new in new }
         var result: CFTypeRef?
         guard SecItemCopyMatching(query as CFDictionary, &result) == errSecSuccess,
               let data = result as? Data else { return nil }
@@ -648,12 +641,22 @@ struct KeychainStore: SessionPersistence {
     }
 
     func delete() {
-        let query: [String: Any] = [
+        SecItemDelete(item as CFDictionary)
+    }
+
+    /// The item, which a Mac keeps in the data protection keychain as iOS does: it belongs to the app, signed by
+    /// its team, and its accessibility applies. A build signed otherwise finds nothing there, where the login
+    /// keychain would ask for the Mac's password.
+    private var item: [String: Any] {
+        var query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
             kSecAttrAccount as String: account,
         ]
-        SecItemDelete(query as CFDictionary)
+        #if os(macOS)
+        query[kSecUseDataProtectionKeychain as String] = true
+        #endif
+        return query
     }
 }
 

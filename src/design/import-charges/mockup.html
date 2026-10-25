@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Import charges on the parcel page</title>
+<style>
+  /* The page around the mock-ups follows the viewer's theme; each mock-up carries Peek's own tokens. */
+  .page { font: 14px/1.5 var(--font-sans, system-ui, sans-serif); color: var(--foreground, #222); }
+  .page h2 { margin: 28px 0 6px; font-size: 16px; font-weight: 650; letter-spacing: -.2px; }
+  .page h2:first-child { margin-top: 0; }
+  .page p, .page li { margin: 0 0 6px; color: var(--muted-foreground, #666); }
+  .page ul { margin: 0 0 8px; padding-left: 18px; }
+  .page code { font: 12px var(--font-mono, ui-monospace, monospace); }
+  .caption { font-size: 11px; color: var(--muted-foreground, #666); margin: 0 0 6px; }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 10px; }
+  .switch { display: inline-flex; gap: 4px; padding: 3px; margin: 6px 0 10px; border-radius: 10px; background: var(--secondary, #eee); }
+  .switch button { border: 0; padding: 5px 12px; border-radius: 8px; background: transparent; color: var(--muted-foreground, #666); font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .switch button[aria-pressed=true] { background: var(--background, #fff); color: var(--foreground, #222); }
+  .languages { display: grid; grid-template-columns: 74px minmax(0, 1fr) minmax(0, 1fr); gap: 8px 12px; align-items: start; }
+  .languages > .language { padding-top: 14px; font-size: 12px; font-weight: 600; }
+  .languages[data-platform=web] .ios, .languages[data-platform=ios] .web { display: none; }
+  .strings { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .strings th, .strings td { padding: 6px 8px 6px 0; border-bottom: 1px solid var(--border, #ddd); text-align: left; vertical-align: top; }
+  .strings th { font-weight: 600; color: var(--muted-foreground, #666); }
+
+  /* Peek's tokens (public/theme.css) and Poste Italiane's palette, as carrierBrand() derives it. */
+  .pk { --ink: #20251e; --ink-soft: #657060; --canvas: #f4f5f1; --paper: #fff; --control: #eceee7; --line: #dce0d5;
+    --tone: #6b6300; --tone-surface: #fdfadb; --carrier-brand: #0047bb;
+    color-scheme: light; color: var(--ink); background: var(--paper);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased; border-radius: 16px; overflow: hidden; border: 1px solid var(--border, #ddd); }
+  .pk--dark { --ink: #f5f6f2; --ink-soft: #afb9a9; --canvas: #151915; --paper: #242824; --control: #2e342d; --line: #3e463b;
+    --tone: #f9f3a6; --tone-surface: #494a19; --carrier-brand: #f8f199; color-scheme: dark; }
+  .pk svg { display: block; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+  .pk p { margin: 0; color: inherit; }
+  .pk .new { margin: -4px -6px; padding: 4px 6px; box-shadow: 0 0 0 1.5px var(--accent, #3b82f6); border-radius: 8px; }
+
+  /* Web: the parcel page (src/components/ParcelDetail.css, at its phone width). */
+  .web .detail__header { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 16px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .web .detail__back { display: flex; align-items: center; gap: 2px; font-weight: 600; }
+  .web .detail__back svg { width: 18px; height: 18px; stroke-width: 1.65; }
+  .web .detail__header > span:nth-child(2) { color: var(--ink-soft); }
+  .web .detail__hero { margin: 16px 16px 0; padding: 18px; border-radius: 20px; background: var(--tone-surface); }
+  .web .detail__hero-meta { display: flex; align-items: center; justify-content: space-between; }
+  .carrier-mark { display: inline-flex; align-items: center; gap: 7px; color: var(--carrier-brand); font-size: 12px; font-weight: 750; line-height: 1.2; }
+  .carrier-mark svg { width: 27px; height: 18px; stroke: none; fill: currentColor; }
+  .web .bell { color: var(--tone); opacity: .75; }
+  .web .bell svg { width: 18px; height: 18px; stroke-width: 1.2; }
+  .web .detail__title-row { display: flex; align-items: center; gap: 20px; margin-top: 16px; }
+  .web .detail__title { flex: 1; margin: 0; font-size: 25px; font-weight: 650; letter-spacing: -.8px; line-height: 1.15; }
+  .stamp { width: 40px; height: 50px; border: 1.5px dashed color-mix(in srgb, var(--tone) 45%, transparent); border-radius: 4px; }
+  .web .detail__sender { margin-top: 8px; color: var(--ink-soft); font-size: 12px; }
+  .web .detail__state { margin-top: 18px; color: var(--tone); font-size: 14px; }
+  .progress-track { display: flex; gap: 4px; height: 3px; margin-top: 18px; }
+  .progress-track i { flex: 1; border-radius: 4px; background: color-mix(in srgb, var(--tone) 12%, transparent); }
+  .progress-track i.on { background: color-mix(in srgb, var(--tone) 50%, var(--tone-surface)); }
+  .web .detail__information { margin: 0 20px; padding: 12px 0 15px; border-bottom: 1px solid var(--line); }
+  .detail__shipment-facts { display: grid; gap: 12px; margin: 0 0 20px; }
+  .detail__shipment-facts div { display: grid; grid-template-columns: minmax(90px, 1fr) minmax(0, 2fr); gap: 16px; }
+  .detail__shipment-facts dt { color: var(--ink-soft); font-size: 12px; }
+  .detail__shipment-facts dd { margin: 0; font-size: 13px; overflow-wrap: anywhere; }
+  .web .detail__tracking-ticket { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 3px 8px; font-size: 12px; }
+  .web .detail__tracking-ticket span { padding-top: 7px; }
+  .web .detail__tracking-ticket strong { font-weight: 400; }
+  .web .detail__tracking-ticket svg { grid-column: 2; grid-row: 1 / 3; place-self: center; width: 15px; height: 15px; stroke-width: 1.2; color: var(--ink-soft); }
+  .web .detail__carrier-link { display: flex; align-items: center; gap: 7px; min-height: 36px; color: var(--tone); font-size: 15px; }
+  .web .detail__carrier-link svg { width: 13px; height: 13px; stroke-width: 1.65; }
+  .web .journal { display: flex; justify-content: space-between; align-items: center; margin: 22px 20px 18px; font-size: 14px; font-weight: 550; }
+  .web .journal span { color: var(--ink-soft); font-size: 11px; font-weight: 400; }
+  .web.facts { padding: 16px; }
+  .web.facts .detail__shipment-facts { margin: 0; }
+
+  /* iPhone: ParcelDetailView.swift's facts (caption2 over footnote) and number row. */
+  .ios { background: var(--canvas); }
+  .ios .nav { display: flex; align-items: center; justify-content: space-between; height: 44px; padding: 0 12px; color: var(--tone); }
+  .ios .nav svg { width: 22px; height: 22px; stroke-width: 2; }
+  .ios .body { padding: 4px 16px 16px; display: grid; gap: 14px; }
+  .ios .card { padding: 16px; border-radius: 18px; background: var(--tone-surface); }
+  .ios .card .top { display: flex; align-items: center; justify-content: space-between; }
+  .ios .card h1 { margin: 14px 0 0; font-size: 24px; font-weight: 700; letter-spacing: -.5px; line-height: 1.15; }
+  .ios .card .from { margin-top: 6px; color: var(--ink-soft); font-size: 12px; }
+  .ios .card .state { margin-top: 14px; color: var(--tone); font-size: 15px; }
+  .ios .number { display: flex; align-items: center; gap: 8px; }
+  .ios .number small { color: var(--ink-soft); font-size: 11px; }
+  .ios .number code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .ios .number svg { margin-left: auto; width: 15px; height: 15px; stroke-width: 1.4; color: var(--ink-soft); }
+  .ios .link { display: flex; align-items: center; gap: 5px; margin-top: 4px; color: var(--tone); font-size: 12px; }
+  .ios .link svg { width: 10px; height: 10px; stroke-width: 1.6; }
+  .ios .fact { display: grid; gap: 3px; }
+  .ios .fact small { color: var(--ink-soft); font-size: 11px; line-height: 1.2; }
+  .ios .fact span { font-size: 13px; line-height: 1.3; }
+  .ios .divider { height: 1px; background: var(--line); }
+  .ios.facts { padding: 14px 16px; display: grid; gap: 10px; }
+</style>
+</head>
+<body>
+<div class="page" id="page"></div>
+<script>
+// Synthetic amounts: customs duty with import VAT 23.41, the carrier's fee 11.00 on delivery and 8.09 online.
+const CHARGES = { currency: 'EUR', customs: 23.41, carrier_fee: 11.00, carrier_fee_online: 8.09 };
+const STATES = [
+  { name: 'Unpaid, with an online price', charges: { ...CHARGES } },
+  { name: 'No online price, or the online window closed (FINESTRA_PAGAMENTO_CHIUSA)', charges: { ...CHARGES, carrier_fee_online: undefined } },
+  { name: 'Paid (PAGATO)', charges: { ...CHARGES, paid: true, status_code: 'PAGATO' } },
+];
+const COPY = {
+  en: { name: 'English', tag: 'en-GB', label: 'Import charges', online: '{{amount}} ({{online}} if paid online)', paid: 'Paid',
+    from: 'From Example Shop', state: 'In transit', title: 'Trainers', number: 'Tracking number', site: 'Open the Poste Italiane website', weight: 'Weight', history: 'Tracking history', back: 'Back', details: 'Parcel details' },
+  de: { name: 'Deutsch', tag: 'de', label: 'Einfuhrabgaben', online: '{{amount}} ({{online}} bei Online-Zahlung)', paid: 'Bezahlt' },
+  fr: { name: 'Français', tag: 'fr', label: 'Frais d’importation', online: '{{amount}} ({{online}} si payés en ligne)', paid: 'Payés' },
+  it: { name: 'Italiano', tag: 'it', label: 'Oneri doganali', online: '{{amount}} ({{online}} pagando online)', paid: 'Pagati' },
+  es: { name: 'Español', tag: 'es', label: 'Gastos de importación', online: '{{amount}} ({{online}} si se pagan en línea)', paid: 'Pagados' },
+  pt: { name: 'Português', tag: 'pt-PT', label: 'Encargos de importação', online: '{{amount}} ({{online}} com pagamento online)', paid: 'Pagos' },
+  pl: { name: 'Polski', tag: 'pl', label: 'Opłaty importowe', online: '{{amount}} ({{online}} przy płatności online)', paid: 'Opłacone' },
+};
+
+/** What the line says: "Paid" for PAGATO; otherwise the total on delivery, and the online one while it is lower and the window is open. */
+function chargesValue(charges, copy) {
+  if (charges.paid) return copy.paid;
+  const money = (value) => new Intl.NumberFormat(copy.tag, { style: 'currency', currency: charges.currency }).format(value);
+  const customs = charges.customs ?? 0;
+  const total = customs + (charges.carrier_fee ?? 0);
+  const online = charges.carrier_fee_online === undefined || charges.status_code === 'FINESTRA_PAGAMENTO_CHIUSA'
+    ? undefined : customs + charges.carrier_fee_online;
+  return online !== undefined && online < total
+    ? copy.online.replace('{{amount}}', money(total)).replace('{{online}}', money(online))
+    : money(total);
+}
+
+const escape = (text) => text.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const icon = (d, box = 24) => `<svg aria-hidden="true" viewBox="0 0 ${box} ${box}"><path d="${d}"/></svg>`;
+const truck = '<svg aria-hidden="true" viewBox="0 0 27 18"><path d="M1 3a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v10H1zM18 6h4.5l3.5 4v3h-8zM6 16.5a2 2 0 1 0 0-.1zM21 16.5a2 2 0 1 0 0-.1z"/></svg>';
+const COPY_ICON = icon('M9 9h11v12H9V9ZM5 15H3V3h12v2');
+const ARROW = icon('M6 18 18 6M6 6h12v12');
+const BELL = icon('M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4');
+const webFact = (dt, dd, mark) => `<div${mark ? ' class="new"' : ''}><dt>${escape(dt)}</dt><dd>${escape(dd)}</dd></div>`;
+const iosFact = (label, value, mark) => `<div class="fact${mark ? ' new' : ''}"><small>${escape(label)}</small><span>${escape(value)}</span></div>`;
+const theme = (dark) => `pk${dark ? ' pk--dark' : ''}`;
+
+function webPage(dark) {
+  const c = COPY.en;
+  return `<div class="${theme(dark)} web">
+    <header class="detail__header"><span class="detail__back">${icon('m13 4-6 6 6 6', 20)}${c.back}</span><span>${c.details}</span><span>•••</span></header>
+    <section class="detail__hero">
+      <div class="detail__hero-meta"><span class="carrier-mark">${truck}Poste Italiane</span><span class="bell">${BELL}</span></div>
+      <div class="detail__title-row"><h1 class="detail__title">${c.title}</h1><span class="stamp"></span></div>
+      <p class="detail__sender">${c.from}</p>
+      <p class="detail__state">${c.state}</p>
+      <div class="progress-track"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+    </section>
+    <section class="detail__information">
+      <dl class="detail__shipment-facts">
+        ${webFact(c.label, chargesValue(STATES[0].charges, c), true)}
+        ${webFact(c.weight, '1.2 kg')}
+      </dl>
+      <div class="detail__tracking-ticket"><span>${c.number}</span><strong>CX000000000IT</strong>${COPY_ICON}</div>
+      <span class="detail__carrier-link">${c.site}${ARROW}</span>
+    </section>
+    <div class="journal">${c.history}<span>6</span></div>
+  </div>`;
+}
+
+function iosPage(dark) {
+  const c = COPY.en;
+  return `<div class="${theme(dark)} ios">
+    <div class="nav">${icon('m15 5-7 7 7 7')}<span>${BELL}</span></div>
+    <div class="body">
+      <div class="card">
+        <div class="top"><span class="carrier-mark">${truck}Poste Italiane</span><span class="stamp"></span></div>
+        <h1>${c.title}</h1><p class="from">${c.from}</p><p class="state">${c.state}</p>
+        <div class="progress-track"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+      </div>
+      <div>
+        <div class="number"><small>${c.number}</small><code>CX000000000IT</code>${COPY_ICON}</div>
+        <span class="link">${c.site}${ARROW}</span>
+      </div>
+      <div style="display:grid;gap:10px">
+        ${iosFact(c.label, chargesValue(STATES[0].charges, c), true)}
+        ${iosFact(c.weight, '1.2 kg')}
+      </div>
+      <div class="divider"></div>
+    </div>
+  </div>`;
+}
+
+const facts = (copy, dark) => `
+  <div class="${theme(dark)} web facts"><dl class="detail__shipment-facts">${STATES.map((s) => webFact(copy.label, chargesValue(s.charges, copy))).join('')}</dl></div>
+  <div class="${theme(dark)} ios facts">${STATES.map((s) => iosFact(copy.label, chargesValue(s.charges, copy))).join('')}</div>`;
+
+document.getElementById('page').innerHTML = `
+  <h2>Where it sits</h2>
+  <p>The first of the shipment facts, above weight and recipient: beside the number on the web, under it on the iPhone. It shows only when the result has <code>import_charges</code> with an amount or <code>paid</code>, and it stays after delivery, as weight does.</p>
+  <ul>
+    <li>Amount: customs duty with import VAT plus the carrier's fee on delivery.</li>
+    <li>Online price: customs plus the online fee, while it is lower, not paid, not delivered, and the code is not <code>FINESTRA_PAGAMENTO_CHIUSA</code>.</li>
+    <li><code>PAGATO</code> says “Paid”. Other codes say nothing about payment.</li>
+    <li>Tapping does nothing. It's a fact, like the weight. Paying happens on Poste's own page, which the carrier link under the number already opens. Peek never shows a pay button: fake “pay your customs fees” texts are a common scam.</li>
+  </ul>
+
+  <h2>In context</h2>
+  <p class="caption">Web parcel page at phone width, then iPhone, light and dark. The new row is outlined.</p>
+  <div class="pair">${webPage(false)}${webPage(true)}</div>
+  <div class="pair">${iosPage(false)}${iosPage(true)}</div>
+
+  <h2>Every language</h2>
+  <p class="caption">Each panel shows the three states top to bottom: ${STATES.map((s, i) => `${i + 1}. ${escape(s.name)}`).join(' · ')}. Light on the left, dark on the right.</p>
+  <div class="switch" role="group" aria-label="Platform"><button type="button" data-platform="web" aria-pressed="true">Web</button><button type="button" data-platform="ios" aria-pressed="false">iPhone</button></div>
+  <div class="languages" data-platform="web">
+    ${Object.values(COPY).map((copy) => `<div class="language">${copy.name}</div><div>${facts(copy, false)}</div><div>${facts(copy, true)}</div>`).join('')}
+  </div>
+
+  <h2>Strings</h2>
+  <table class="strings"><thead><tr><th></th><th>detail.importCharges</th><th>detail.importChargesOnline</th><th>detail.importChargesPaid</th></tr></thead><tbody>
+    ${Object.values(COPY).map((copy) => `<tr><th>${copy.name}</th><td>${escape(copy.label)}</td><td>${escape(copy.online)}</td><td>${escape(copy.paid)}</td></tr>`).join('')}
+  </tbody></table>`;
+
+const languages = document.querySelector('.languages');
+for (const button of document.querySelectorAll('.switch button')) {
+  button.addEventListener('click', () => {
+    languages.dataset.platform = button.dataset.platform;
+    for (const other of document.querySelectorAll('.switch button')) other.setAttribute('aria-pressed', String(other === button));
+  });
+}
+</script>
+</body>
+</html>

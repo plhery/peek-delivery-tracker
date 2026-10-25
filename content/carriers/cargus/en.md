@@ -3,7 +3,7 @@ title: Cargus tracking: AWB number, statuses and SHIP & GO
 description: Track a Cargus parcel in Romania: where the AWB comes from, what the tracking statuses mean, SHIP & GO points, lockers, missed deliveries and contacts.
 slug: cargus-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-25
 ---
 
 Cargus is a Romanian courier that has delivered parcels for over 30 years, with its own SHIP & GO points and lockers. Track a parcel with its AWB number on [cargus.ro's Track your parcel page](https://www.cargus.ro/en/personal/track-your-parcel/), in the Cargus Mobile app or by pasting it in the box above. The AWB usually reaches you from the shop, by email or SMS.
@@ -41,13 +41,13 @@ cargus.ro opens in Romanian; its English tracker shows English wordings. The web
 
 Three of these trip people up. `Pickup shipment` is Cargus picking the parcel up from the sender, not you collecting it. `Drop off at delivery location by sender` is the start of the journey too: the sender dropped it off, it isn't waiting for you. And Cargus doesn't explain the long third-party wording, which can follow a depot scan; if it appears and nothing arrives, ask the shop.
 
-In Romanian the same steps read `Expediere colectata`, `Expedierea se afla in curs de livrare` (out for delivery) and `Livrat` or `Livrat la destinatar (confirmat)` (delivered). A missed delivery shows as `Destinatar avizat la adresă`: the courier couldn't reach you and the notice says where and until when to pick the parcel up.
+In Romanian, Cargus collecting the parcel reads `Expediere colectata`. A missed delivery shows as `Destinatar avizat la adresă`: the courier couldn't reach you and the notice says where and until when to pick the parcel up.
 
 ## Cargus delivery, SHIP & GO points and lockers
 
 Cargus's postal conditions set a domestic delivery time of no more than 3 working days from collection (5 for Sulina). Cargus doesn't deliver to the mailbox.
 
-**Not home.** The courier makes two free attempts on consecutive working days. You can't postpone a delivery or pay for a third attempt. The notice comes on paper, by SMS or by email, with the reason, the new location and the deadline. After the second attempt, the parcel goes the same day to the SHIP & GO point nearest the address, and you get its address.
+**Not home.** The courier makes two free attempts on consecutive working days. The FAQ says you can't postpone a delivery or pay for a third attempt, though the Cargus Mobile page offers changing the date or place "depending on the options available": check what the app offers for your parcel. The notice comes on paper, by SMS or by email, with the reason, the new location and the deadline. After the second attempt, the parcel goes the same day to the SHIP & GO point nearest the address, and you get its address.
 
 **Redirect it yourself.** In Cargus Mobile you can send the parcel to the SHIP & GO point nearest the address, after Cargus has collected it and before it's on the courier's route. You can't choose the point or a locker.
 
@@ -63,7 +63,7 @@ Cargus gives no advice for tracking that stops moving; for an AWB it can't find,
 
 **Damaged parcel:** you can note the damage on the transport note at the door, but not doing so doesn't take away your right to complain. Cargus's FAQ says to call 021 9330 or email contact@cargus.ro.
 
-**Complaints** can come from the sender or the recipient, within 6 calendar months of posting: by email to sesizari@cargus.ro, through the online complaints form, by post, at a staffed point or by phone. Give all the facts, the matching evidence, your contact details and your bank details if you want compensation by transfer. Cargus answers within 3 months and pays within 30 days of agreeing. Without declared value, compensation for loss or damage is 5 times the service price. Not resolved in time? You can go to ANCOM, Romania's regulator, with proof of your first complaint, or to court within a year.
+**Complaints** can come from the sender or the recipient, within 6 calendar months of posting: by email to sesizari@cargus.ro, through the online complaints form, by post, at a staffed point or by phone. Give all the facts, the matching evidence, your contact details and your bank details if you want compensation by transfer. Cargus answers within 3 months and pays within 30 days of agreeing. Without declared value, compensation for loss or damage is 5 times the service price. Not resolved? ANCOM, Romania's regulator, can look into a courier's conduct and sanction it, but can't make it pay compensation or redeliver a returned parcel for free. For compensation, go to court within a year of posting.
 
 **Unwanted parcel:** contact the seller about its return policy.
 
@@ -80,9 +80,9 @@ Hours may differ on public holidays. Cargus lists no contact for recipients outs
 
 ## Tracking Cargus parcels with Peek
 
-[Peek](/) can't tell a Cargus AWB from its digits. A 10-digit number is asked of Relais Colis, TIPSA and [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (and [DHL Express](carrier:dhl-express) when its check digit fits); a 9-digit one isn't asked of any carrier. When none knows it you'll see "not found yet · Peek keeps checking": pick "Cargus" with "Change". Or paste a cargus.ro tracking link, Romanian or English, which names Cargus whatever the number.
+[Peek](/) can't tell a Cargus AWB from its digits, so it never asks Cargus on its own. A 10-digit number is asked of other carriers that use that length, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and [BOX NOW](carrier:box-now); a 9-digit one of [TNT](carrier:tnt). When none knows it you'll see "not found yet · Peek keeps checking": pick "Cargus" with "Change". Or paste a cargus.ro tracking link, Romanian or English, which names Cargus whatever the number.
 
-Peek reads the service behind the Cargus app, which knows some parcels the website reports as not found. Cargus's scans carry a time without a time zone, so Peek doesn't list them. It takes a dated history from [universal tracking services](guide:universal-tracker) when one knows the parcel, asks Cargus again every 6 hours and, if no service answers, shows Cargus's current status, dated when Peek saw it. Cargus's statuses keep its own wording, mostly English with a few in Romanian, except `Delivered`, shown in Peek's own words, and you can be notified when the status changes.
+Peek reads the service behind the Cargus app, which knows some parcels the website reports as not found, and lists each scan with its date, time, town and county. Cargus's statuses keep its own wording, mostly English with a few in Romanian. Peek checks every 10 minutes by day, every 2 while the parcel is with the courier and hourly overnight, and can notify you when the status changes. Cargus gives no expected delivery day, so Peek shows none, and it doesn't say which SHIP & GO point or locker holds your parcel: the Cargus notice does.
 
 It shows no expected delivery day, pickup point or weight, and leaves out who signed, the delivery PIN, the sender's reference and the parcel count.
 
@@ -116,6 +116,7 @@ Yes. Cargus lockers open only with the Cargus Mobile app, signed in, with intern
 - [Cargus: Cum ridici un colet de la SHIP & GO](https://www.cargus.ro/personal/cum-ridici-un-colet/) – PIN, QR code, lockers
 - [Cargus: General Conditions for the Provision of Postal Services](https://www.cargus.ro/wp-content/uploads/Conditii_Generale_de_Furnizare_a_Serviciilor_Postale_Cargus_SRL_en_290926.pdf) – attempts, holds, lockers, delivery times, complaints, compensation
 - [Cargus: Terms and conditions for courier services](https://www.cargus.ro/wp-content/uploads/Termeni_si_conditii_aplicabile_serviciilor_de_curierat_si_transport_ro_en_010926.pdf) – complaint deadline
-- [ANCOM: Resolution of complaints](https://infocentru.ancom.ro/en/resolution-of-complaints/) – deadlines, escalation, courts
+- [Cargus: Aplicația Cargus Mobile](https://www.cargus.ro/cargus-mobile-app-ro/) – changing the date or place of delivery
+- [ANCOM: Comanzi online? Ce obligații au cei care îți livrează colete?](https://www.ancom.ro/despre-noi/media/comunicate-de-presa/comanzi-online-63-ce-obligatii-au-cei-care-iti-livreaza-colete-63/) – what ANCOM can and can't do
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

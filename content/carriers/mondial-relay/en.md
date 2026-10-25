@@ -3,14 +3,14 @@ title: Mondial Relay tracking: statuses in English and pickup
 description: Track a Mondial Relay parcel: where the 8-digit number is, what the French statuses mean in English, how long a Point Relais keeps it and who to contact.
 slug: mondial-relay-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-25
 ---
 
 Mondial Relay is a French parcel carrier in the InPost group that delivers to Points Relais (local shops acting as pickup points), lockers and homes. Track a parcel on [Mondial Relay's tracking page](https://www.mondialrelay.fr/suivi-de-colis/) with the 8-digit shipment number and the recipient's postcode, or paste the number in the box above. It's on the label and in the emails from Mondial Relay and the sender.
 
 ## Mondial Relay tracking number: where to find it
 
-Mondial Relay calls it the "n° d'expédition": 8 digits, at the top of the label in the "Information" box and in its tracking email. No number? Check the sender's confirmation email, then ask the sender, or see [how to find your tracking number](guide:find-tracking-number). Its Belgian site also takes 10 and 12 digits.
+Mondial Relay calls it the "n° d'expédition": 8 digits, at the top of the label in the "Information" box and in its tracking email. No number? Check the sender's confirmation email, then ask the sender, or see [how to find your tracking number](guide:find-tracking-number). Its Belgian and Dutch sites also take 10 and 12 digits.
 
 | Number (invented) | What it is |
 | --- | --- |
@@ -72,9 +72,9 @@ As listed on 10 October 2026; none is in English.
 
 [Peek](/) recognises the 26-digit barcode at once. With 8, 10 or 12 digits it may not name Mondial Relay on its own, since other carriers share those lengths and Mondial Relay can't be asked whether it knows a number: press "Change" and pick Mondial Relay, or paste a tracking link from mondialrelay.fr (links from its other sites aren't read).
 
-An 8-digit number also needs the "Delivery postcode": type the number alone, then the postcode in its field. Only French postcodes have been tested, and a wrong one reads as not found. It's sent to Mondial Relay and, when needed, to tracking services.
+An 8-digit number also needs the "Delivery postcode": type the number alone, then the postcode in its field. Peek compares it with the recipient's as typed, in any country's format, and a wrong one reads as not found. It's sent to Mondial Relay and, when needed, to tracking services.
 
-Peek shows Mondial Relay's French wordings as written and each scan's logistics site on a map, plus the expected day, delivery time and destination country when given. While the parcel waits, it shows the Point Relais or locker's name and address, never your pickup code or name. It checks every 10 minutes by day, every 2 once out for delivery, and hourly overnight, and can notify you of each change. Mondial Relay reuses numbers, so an old one can show a later parcel. Peek doesn't follow parcels to other carriers, and can't promise to find InPost's Spanish or Portuguese parcels.
+Peek shows Mondial Relay's French wordings as written and each scan's logistics site on a map, plus the expected day, delivery time and destination country when given. While the parcel waits, it shows the Point Relais or locker's name and address, never your pickup code or name. It checks every 10 minutes by day, every few minutes once out for delivery, and hourly overnight, and can notify you of each change. Peek doesn't follow parcels to other carriers, and can't promise to find InPost's Spanish or Portuguese parcels.
 
 ## Questions about Mondial Relay tracking
 
@@ -88,7 +88,7 @@ Mondial Relay gives 3 to 5 working days from hand-in in mainland France, where i
 
 ### Is Mondial Relay the same as InPost?
 
-It's part of the InPost group. In Spain and Portugal, InPost took over Mondial Relay in 2021, and mondialrelay.es and mondialrelay.pt now lead to InPost's sites. See [InPost tracking](carrier:inpost).
+It's part of the InPost group. In Spain and Portugal, InPost took over Mondial Relay in 2021, and mondialrelay.es and mondialrelay.pt now lead to InPost's sites. In the Netherlands, Mondial Relay is moving to the InPost brand over the coming months; until then everything runs through Mondial Relay. See [InPost tracking](carrier:inpost).
 
 ### Is Mondial Relay legit?
 
@@ -117,7 +117,9 @@ Yes: Mondial Relay SASU is a French company based in Villeneuve-d'Ascq. Fake mes
 - [Mondial Relay: Mentions légales](https://www.mondialrelay.fr/mentions-legales/) – company
 - [Mondial Relay: Étiquette](https://storage.mondialrelay.fr/etiquette-mondial-relay-v-24.pdf) – barcode
 - [Mondial Relay Belgique: Suivi](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 10, 12 digits
+- [Mondial Relay: Mijn Mondial Relay pakket volgen](https://www.mondialrelay.nl/mijn-mondial-relay-pakket-volgen/) – 8, 10, 12 digits in the Netherlands
 - [Mondial Relay Belgique: Contact](https://www.mondialrelay.be/fr-be/nous-contacter/) – phone, email
+- [InPost: Mondial Relay Nederland maakt plaats voor InPost](https://inpost.nl/) – move to the InPost brand in the Netherlands
 - [InPost: Quiénes somos](https://www.inpost.es/quienes-somos) – takeover in Spain
 - [InPost: Quem somos](https://www.inpost.pt/quem-somos) – takeover in Portugal
 - [InPost: Empresa de Paquetería Europea](https://www.mondialrelay.es/) – redirect

@@ -2720,6 +2720,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "nl": [
     {
+      "id": "mondial-relay",
+      "catalog": "mondial-relay",
+      "slug": "mondial-relay-pakket-volgen",
+      "title": "Mondial Relay-pakket volgen: Afhaalpunt, status, klachten",
+      "name": "Mondial Relay",
+      "color": "#ef3026"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-pakje-volgen",
@@ -2847,6 +2855,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "ro": [
+    {
+      "id": "cargus",
+      "catalog": "cargus",
+      "slug": "cargus-urmarire-colet",
+      "title": "Urmărire colet Cargus: AWB, statusuri și SHIP & GO",
+      "name": "Cargus",
+      "color": "#f68121"
+    },
     {
       "id": "fan-courier",
       "catalog": "fan-courier",

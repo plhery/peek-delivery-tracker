@@ -808,6 +808,7 @@
   "settings.openAtLogin": "Beim Anmelden öffnen",
   "settings.openAtLoginApproval": "Damit Peek beim Anmelden öffnet, erlaube es in den Systemeinstellungen.",
   "menuBar.paste": "Sendungsnummer einfügen",
+  "menuBar.trackWithPeek": "Mit Peek verfolgen",
   "menuBar.open": "Peek öffnen",
   "menuBar.settings": "Einstellungen …",
   "menuBar.quit": "Peek beenden",

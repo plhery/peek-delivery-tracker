@@ -145,6 +145,7 @@ describe('Localized Info.plist strings', () => {
   const catalogs = () => Object.fromEntries(locales.map((locale) => [locale, {
     'native.cameraUsage': `Camera ${locale}`,
     'shareExtension.title': `Add to Peek ${locale}`,
+    'menuBar.trackWithPeek': `Track with Peek ${locale}`,
   }]));
 
   it('writes one InfoPlist.strings per target and language', () => {
@@ -152,9 +153,11 @@ describe('Localized Info.plist strings', () => {
     assert.deepEqual(files.map(([file]) => file), [
       ...locales.map((locale) => `PeekDeliveryTracker/Resources/${locale}.lproj/InfoPlist.strings`),
       ...locales.map((locale) => `ShareExtension/${locale}.lproj/InfoPlist.strings`),
+      ...locales.map((locale) => `PeekDeliveryTracker/Resources/${locale}.lproj/ServicesMenu.strings`),
     ]);
     assert.match(files[1][1], /^"NSCameraUsageDescription" = "Camera de";$/m);
-    assert.match(files.at(-1)[1], /^"CFBundleDisplayName" = "Add to Peek pl";$/m);
+    assert.match(files[2 * locales.length - 1][1], /^"CFBundleDisplayName" = "Add to Peek pl";$/m);
+    assert.match(files.at(-1)[1], /^"Track with Peek" = "Track with Peek pl";$/m);
   });
 
   it('names each lproj after a project region and ships it in both targets', () => {
@@ -163,6 +166,7 @@ describe('Localized Info.plist strings', () => {
     for (const locale of locales) {
       assert.ok(regions.includes(locale), locale);
       assert.equal(project.split(`path = ${locale}.lproj/InfoPlist.strings;`).length - 1, 2, locale);
+      assert.equal(project.split(`path = ${locale}.lproj/ServicesMenu.strings;`).length - 1, 1, locale);
     }
   });
 

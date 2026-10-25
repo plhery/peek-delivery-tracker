@@ -808,6 +808,7 @@
   "settings.openAtLogin": "Otwieraj po zalogowaniu",
   "settings.openAtLoginApproval": "Aby Peek otwierał się po zalogowaniu, zezwól na to w Ustawieniach systemowych.",
   "menuBar.paste": "Wklej numer śledzenia",
+  "menuBar.trackWithPeek": "Śledź w Peeku",
   "menuBar.open": "Otwórz Peek",
   "menuBar.settings": "Ustawienia…",
   "menuBar.quit": "Zakończ Peek",

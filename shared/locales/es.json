@@ -808,6 +808,7 @@
   "settings.openAtLogin": "Abrir al iniciar sesión",
   "settings.openAtLoginApproval": "Para que Peek se abra al iniciar sesión, permítelo en Ajustes del Sistema.",
   "menuBar.paste": "Pegar número de seguimiento",
+  "menuBar.trackWithPeek": "Seguir con Peek",
   "menuBar.open": "Abrir Peek",
   "menuBar.settings": "Ajustes…",
   "menuBar.quit": "Salir de Peek",

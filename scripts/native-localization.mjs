@@ -6,9 +6,11 @@ const nativeSourceDirectories = ['PeekDeliveryTracker', 'DeliveryWidgetExtension
 
 // iOS shows these Info.plist strings before Peek runs, so each target ships them as
 // InfoPlist.strings in one lproj per catalog language, named like the project's knownRegions.
+// A Mac's Services menu reads its item's title, keyed by the English one, from ServicesMenu.strings.
 const infoPlistCopy = [
   ['PeekDeliveryTracker/Resources', { NSCameraUsageDescription: 'native.cameraUsage' }],
   ['ShareExtension', { CFBundleDisplayName: 'shareExtension.title' }],
+  ['PeekDeliveryTracker/Resources', { 'Track with Peek': 'menuBar.trackWithPeek' }, 'ServicesMenu.strings'],
 ];
 
 export function nativeSwiftSources(iosDirectory) {
@@ -58,15 +60,15 @@ export function keysWithoutAMacVariant(referencedKeys, catalogs) {
 const stringsEscapes = { '\\': '\\\\', '"': '\\"', '\n': '\\n', '\r': '\\r', '\t': '\\t' };
 const stringsLiteral = (text) => `"${text.replace(/[\\"\n\r\t]/g, (character) => stringsEscapes[character])}"`;
 
-/** Every target's InfoPlist.strings in every language, as [path under ios/, contents]. */
+/** Every target's InfoPlist.strings and ServicesMenu.strings in every language, as [path under ios/, contents]. */
 export function infoPlistStrings(catalogs) {
-  return infoPlistCopy.flatMap(([directory, keys]) => Object.entries(catalogs).map(([language, catalog]) => {
+  return infoPlistCopy.flatMap(([directory, keys, file = 'InfoPlist.strings']) => Object.entries(catalogs).map(([language, catalog]) => {
     const lines = Object.entries(keys).map(([plistKey, key]) => {
       if (typeof catalog[key] !== 'string') throw new Error(`Missing Info.plist translation: ${language}.${key}`);
       return `${stringsLiteral(plistKey)} = ${stringsLiteral(catalog[key])};\n`;
     });
     return [
-      `${directory}/${language}.lproj/InfoPlist.strings`,
+      `${directory}/${language}.lproj/${file}`,
       `/* Generated from shared/locales by npm run ios:resources. */\n${lines.join('')}`,
     ];
   }));

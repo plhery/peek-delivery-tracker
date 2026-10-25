@@ -808,6 +808,7 @@
   "settings.openAtLogin": "Apri al login",
   "settings.openAtLoginApproval": "Perché Peek si apra al login, consentilo in Impostazioni di Sistema.",
   "menuBar.paste": "Incolla numero di tracciamento",
+  "menuBar.trackWithPeek": "Traccia con Peek",
   "menuBar.open": "Apri Peek",
   "menuBar.settings": "Impostazioni…",
   "menuBar.quit": "Esci da Peek",

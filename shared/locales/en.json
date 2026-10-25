@@ -808,6 +808,7 @@
   "settings.openAtLogin": "Open at login",
   "settings.openAtLoginApproval": "To have Peek open at login, allow it in System Settings.",
   "menuBar.paste": "Paste tracking number",
+  "menuBar.trackWithPeek": "Track with Peek",
   "menuBar.open": "Open Peek",
   "menuBar.settings": "Settings…",
   "menuBar.quit": "Quit Peek",

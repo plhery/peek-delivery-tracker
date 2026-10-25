@@ -664,6 +664,25 @@ final class ParcelRouteTests: XCTestCase {
         XCTAssertEqual(clear.labels.map(\.text), ["Haiger", "Wilmington"])
         XCTAssertFalse(clear.labels.contains { $0.frame.intersects(buttons) })
         XCTAssertFalse(try XCTUnwrap(clear.pip).box.intersects(buttons))
+
+        // Up close on the last mile, the chip pointing back to Berlin falls under the buttons, and just below them it would
+        // cover the parcel's dot: on a phone's page it is left out, and Pip has his spot; a wider page keeps it.
+        let lastMile = ParcelRoute(places: [city("Berlin", "DE", 13.41, 52.52), city("Neuenstein", "DE", 9.58, 49.2)])
+        func upClose(_ width: CGFloat, buttons: Bool) -> MapOverlay {
+            let size = CGSize(width: width, height: 176)
+            let draw = { (camera: GlobeCamera) in
+                MapOverlay(route: lastMile, camera: camera, size: size, insets: card, labels: .ends, mode: .now, context: false, atlas: atlas,
+                           locale: Locale(identifier: "en"), countryName: { $0 }, pip: PipRequest(mood: .eager, ceiling: 52, floor: 160),
+                           buttons: buttons ? CGRect(x: width - 150, y: 18, width: 132, height: 44) : nil)
+            }
+            return draw(.framing(lastMile, mode: .now, in: size, insets: card, shown: { camera, _ in draw(camera).shown }, pip: true))
+        }
+        XCTAssertEqual(upClose(358, buttons: false).pointers.map(\.name), ["Berlin"])
+        let phone = upClose(358, buttons: true)
+        XCTAssertTrue(phone.pointers.isEmpty)
+        XCTAssertEqual(phone.labels.map(\.text), ["Neuenstein"])
+        XCTAssertFalse(try XCTUnwrap(phone.pip).box.intersects(buttons))
+        XCTAssertEqual(upClose(480, buttons: true).pointers.map(\.name), ["Berlin"])
     }
 
     func testPipStandsBesideTheDotOffItsNameAndTheRoute() throws {

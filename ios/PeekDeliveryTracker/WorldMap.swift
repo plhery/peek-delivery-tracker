@@ -815,20 +815,17 @@ struct MapOverlay {
                 // Keep the whole chip inside the frame, whichever edge it points past.
                 var x = max(insets.leading + half + 8, min(size.width - insets.trailing - half - 8, viewCenter.x + dx * reach))
                 var y = max(insets.top + 21, min(size.height - insets.bottom - 21, viewCenter.y + dy * reach))
-                // A chip the card would write over stands beside it or just below it instead: off the parcel's own dot first,
-                // then whichever is nearer.
+                // A chip the card would write over stands beside it or just below it instead, whichever is nearer, but never on
+                // the parcel's own dot: with nowhere else to go, it is left out, as the parcel matters more than the way.
                 let chip = { (x: CGFloat, y: CGFloat) in CGRect(x: x - half, y: y - 13, width: width, height: 26) }
                 if let box = written.first(where: { overlaps(chip(x, y), [$0]) }) {
                     let dot = at(current.place.point)
                     let parcel = CGRect(x: dot.x - 10, y: dot.y - 10, width: 20, height: 20)
-                    let nearest = [CGPoint(x: box.maxX + half + 4, y: y), CGPoint(x: x, y: min(size.height - insets.bottom - 21, box.maxY + 13))]
-                        .filter { $0.x <= size.width - insets.trailing - half - 8 }
-                        .map { (spot: $0, onParcel: overlaps(chip($0.x, $0.y), [parcel]) ? 1 : 0, far: abs($0.x - x) + abs($0.y - y)) }
-                        .min { ($0.onParcel, $0.far) < ($1.onParcel, $1.far) }
-                    if let nearest {
-                        x = nearest.spot.x
-                        y = nearest.spot.y
-                    }
+                    guard let nearest = [CGPoint(x: box.maxX + half + 4, y: y), CGPoint(x: x, y: min(size.height - insets.bottom - 21, box.maxY + 13))]
+                        .filter({ $0.x <= size.width - insets.trailing - half - 8 && !overlaps(chip($0.x, $0.y), [parcel]) })
+                        .min(by: { abs($0.x - x) + abs($0.y - y) < abs($1.x - x) + abs($1.y - y) }) else { continue }
+                    x = nearest.x
+                    y = nearest.y
                 }
                 placed.append(CGRect(x: x - half, y: y - 13, width: width, height: 26))
                 pointers.append(Pointer(center: CGPoint(x: x, y: y), width: width, angle: atan2(dy, dx), name: name, detail: detail))

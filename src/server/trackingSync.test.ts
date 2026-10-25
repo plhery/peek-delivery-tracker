@@ -295,7 +295,7 @@ describe('tracking event normalization', () => {
     expect(days(answer(scans, { direct_local_fallback: true }))).toEqual(['Departed', 'Received']);
     expect(days(answer(scans, { tracking_provider: 'UPU' }))).toEqual(['Departed', 'Received']);
     expect(days(answer(scans, { tracking_provider: 'ParcelsApp' }), 'unknown')).toEqual(['Departed', 'Received']);
-    expect(days(answer(scans), 'dhl')).toEqual(['Departed', 'Received']);
+    expect(days(answer(scans), 'ups')).toEqual(['Departed', 'Received']);
   });
 
   it('keeps a scan the carrier repeats word for word once', () => {

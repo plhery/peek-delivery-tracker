@@ -38,20 +38,42 @@ struct PeekDeliveryTrackerApp: App {
     }
 
     var body: some Scene {
+        #if os(macOS)
+        // One window: links, notifications and the shared draft all go to the one set of deliveries. It is never
+        // narrower than the list beside a parcel.
+        Window("Peek", id: "main") {
+            stores(RootView().background { AnalyticsLifecycleObserver() })
+                .frame(minWidth: MacWindow.minimumWidth, minHeight: MacWindow.minimumHeight)
+        }
+        .defaultSize(width: 1180, height: 820)
+        .windowResizability(.contentMinSize)
+        .commands { PeekCommands(localizer: localizer) }
+
+        Settings {
+            stores(AccountView())
+                .frame(width: 560)
+                .frame(minHeight: 520, idealHeight: 680)
+        }
+        .windowResizability(.contentMinSize)
+        #else
         WindowGroup {
-            RootView()
-                .background { AnalyticsLifecycleObserver() }
-                .environmentObject(session)
-                .environmentObject(parcels)
-                .environmentObject(localizer)
-                .environmentObject(invitation)
-                .environmentObject(friendsActivity)
-                .environmentObject(links)
-                .environment(\.locale, localizer.language.locale)
-                .background { AppWindowAppearance(appearance: appearance) }
-                .tint(Brand.accent)
+            stores(RootView().background { AnalyticsLifecycleObserver() })
         }
         .commands { PeekCommands(localizer: localizer) }
+        #endif
+    }
+
+    private func stores(_ content: some View) -> some View {
+        content
+            .environmentObject(session)
+            .environmentObject(parcels)
+            .environmentObject(localizer)
+            .environmentObject(invitation)
+            .environmentObject(friendsActivity)
+            .environmentObject(links)
+            .environment(\.locale, localizer.language.locale)
+            .background { AppWindowAppearance(appearance: appearance) }
+            .tint(Brand.accent)
     }
 }
 

@@ -325,6 +325,7 @@ struct FriendsProfileForm: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text(localizer.text("friends.nickname")).font(.subheadline.weight(.semibold))
                 TextField(localizer.text("friends.nicknamePlaceholder"), text: $name).textContentType(.nickname).padding(14).background(Brand.paper, in: RoundedRectangle(cornerRadius: 14))
+                    .drawnField()
                     .focused($nameFocused).submitLabel(.done).onSubmit { nameFocused = false }
                     .onChange(of: name) { _, next in
                         settledName = nil

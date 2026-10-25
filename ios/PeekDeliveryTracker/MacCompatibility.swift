@@ -5,6 +5,13 @@ import SwiftUI
 // The screens are shared with iOS and use a few modifiers and names only iOS has. On the Mac these stand in
 // for them: most do nothing, the others take the Mac's nearest equivalent.
 
+/// The main window's smallest size. Wider than the list beside a parcel needs, so it never turns into the phone's
+/// stack, and so that the tabs, the account, Add and the parcel's menu fit over the parcel without folding into ».
+enum MacWindow {
+    static let minimumWidth: CGFloat = 860
+    static let minimumHeight: CGFloat = 560
+}
+
 /// How a page's title shows in the bar. A Mac window shows it one way.
 enum TitleDisplayMode { case automatic, inline, large }
 

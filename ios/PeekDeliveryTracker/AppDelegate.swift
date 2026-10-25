@@ -65,6 +65,11 @@ final class AppDelegate: NSObject, PlatformApplicationDelegate, UNUserNotificati
         UNUserNotificationCenter.current().setBadgeCount(0)
     }
     #else
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        // One window: no window tabs, and none of their items in the View and Window menus.
+        NSWindow.allowsAutomaticWindowTabbing = false
+    }
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().setBadgeCount(0)

@@ -296,10 +296,12 @@ struct ParcelShareSheet: View {
         VStack(alignment: .leading, spacing: 10) {
             wordsField(localizer.text("share.gift.note"), .note) {
                 TextField(text: $model.words.note, prompt: Text(verbatim: ""), axis: .vertical) { Text(localizer.text("share.gift.note")) }
+                    .drawnField()
                     .lineLimit(2...5)
             }
             wordsField(localizer.text("share.gift.from"), .from) {
                 TextField(text: $model.words.from, prompt: Text(verbatim: "")) { Text(localizer.text("share.gift.from")) }
+                    .drawnField()
                     .textContentType(.name)
                     .submitLabel(.done)
                     .onSubmit { writing = nil }

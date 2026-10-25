@@ -655,6 +655,7 @@ struct SignInView: View {
                 .foregroundStyle(.secondary)
             SignInField(label: localizer.text("auth.email")) {
                 TextField(localizer.text("auth.email"), text: $email, prompt: Text(verbatim: "you@example.com"))
+                    .drawnField()
                     .textContentType(.emailAddress)
                     .keyboardType(.emailAddress)
                     .textInputAutocapitalization(.never)
@@ -682,6 +683,7 @@ struct SignInView: View {
                 .foregroundStyle(.secondary)
             SignInField(label: localizer.text("auth.code")) {
                 TextField(localizer.text("auth.code"), text: $code, prompt: Text(verbatim: ""))
+                    .drawnField()
                     .textContentType(.oneTimeCode)
                     .keyboardType(.numberPad)
                     .font(.system(.title2, design: .monospaced, weight: .medium))

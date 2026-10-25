@@ -237,6 +237,7 @@ struct AddParcelView: View {
                     .foregroundStyle(.secondary)
             }
             TextField(localizer.text("add.contentsPlaceholder"), text: $label)
+                .drawnField()
                 .font(.body)
                 .accessibilityLabel(localizer.text("design.parcelTitle"))
                 .accessibilityIdentifier("addParcel.name")
@@ -276,6 +277,7 @@ struct AddParcelView: View {
                 text: $trackingInput,
                 axis: .vertical
             )
+            .drawnField()
             .font(.body)
             .lineLimit(2...4)
             .textInputAutocapitalization(.never)
@@ -590,6 +592,7 @@ struct AddParcelView: View {
                     help: localizer.text("add.requirement.trackingUrlHelp")
                 ) {
                     TextField(requirement.placeholder ?? "https://…", text: $trackingURL)
+                        .drawnField()
                         .font(.body)
                         .keyboardType(.URL)
                         .textContentType(.URL)
@@ -618,6 +621,7 @@ struct AddParcelView: View {
                     ) {
                         let example = catalog.postcodeExample(for: resolvedCarrier, requirement: requirement)
                         TextField(example ?? "", text: $deliveryPostcode)
+                            .drawnField()
                             .font(.body.monospacedDigit())
                             .keyboardType(requirement.inputMode == "numeric" ? .numberPad
                                 : requirement.startsWithNumberKeys(example: example) ? .numbersAndPunctuation : .asciiCapable)

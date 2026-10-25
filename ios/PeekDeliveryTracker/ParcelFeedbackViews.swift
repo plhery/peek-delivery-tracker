@@ -492,6 +492,7 @@ private struct ParcelFeedbackWordsSheet: View {
             }
             FeedbackField(label: localizer.text("feedback.note"), focused: writing) { writing = true } input: {
                 TextField(text: $note, prompt: Text(verbatim: ""), axis: .vertical) { Text(localizer.text("feedback.note")) }
+                    .drawnField()
                     .lineLimit(2...6)
                     .focused($writing)
             }
@@ -564,6 +565,7 @@ private struct ParcelFeedbackCarrierSheet: View {
         FeedbackSheet(title: localizer.text("feedback.unknown.title"), busy: model.sending, writing: writing != nil) {
             FeedbackField(label: localizer.text("feedback.unknown.who"), focused: writing == .who) { writing = .who } input: {
                 TextField(text: $who, prompt: Text(verbatim: "")) { Text(localizer.text("feedback.unknown.who")) }
+                    .drawnField()
                     .autocorrectionDisabled()
                     .submitLabel(.next)
                     .focused($writing, equals: .who)
@@ -572,6 +574,7 @@ private struct ParcelFeedbackCarrierSheet: View {
             FeedbackField(label: localizer.text("feedback.unknown.where"), focused: writing == .page) { writing = .page } input: {
                 // An address as its reader has it, with or without its scheme: a person reads it, nothing opens it.
                 TextField(text: $page, prompt: Text(verbatim: "")) { Text(localizer.text("feedback.unknown.where")) }
+                    .drawnField()
                     .keyboardType(.URL)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()

@@ -507,6 +507,9 @@ private struct DeliveryListView: View {
                         .toolbar { besideToolbar }
                 }
                 .navigationSplitViewStyle(.balanced)
+                #if os(macOS)
+                .toolbar { macAccountToolbar }
+                #endif
                 // A fold turns the window compact a moment before the stack takes over. Folded into one column
                 // on its way out, the split view would leave the parcel on the stack with no way back.
                 .environment(\.horizontalSizeClass, .regular)
@@ -831,10 +834,10 @@ private struct DeliveryListView: View {
         // The mark stands at the leading edge on its own tile, not on a control's glass. It is drawn as one image:
         // beside a parcel, the list's bar draws an item's shapes with vibrancy, which greyed the eyes.
         if #available(iOS 26.0, macOS 26.0, *) {
-            ToolbarItem(placement: .topBarLeading) { PeekMark(size: 30).drawingGroup() }
+            ToolbarItem(placement: markPlacement) { PeekMark(size: 30).drawingGroup() }
                 .sharedBackgroundVisibility(.hidden)
         } else {
-            ToolbarItem(placement: .topBarLeading) { PeekMark(size: 30).drawingGroup() }
+            ToolbarItem(placement: markPlacement) { PeekMark(size: 30).drawingGroup() }
         }
 
         if windowArrangement == .stacked {
@@ -842,12 +845,37 @@ private struct DeliveryListView: View {
         }
     }
 
+    /// Over the list. A Mac puts a split view's leading items at the start of the parcel's column instead, where they
+    /// crowd the tabs: there the mark stays in the list's own part of the toolbar.
+    private var markPlacement: ToolbarItemPlacement {
+        #if os(macOS)
+        .automatic
+        #else
+        .topBarLeading
+        #endif
+    }
+
     /// Beside a parcel, adding one and the account stand at the window's trailing edge with the parcel's menu,
-    /// as on an iPhone Duo, rather than in the list's bar.
+    /// as on an iPhone Duo, rather than in the list's bar. On a Mac the account stands before them, on its own.
     @ToolbarContentBuilder private var besideToolbar: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) { addButton }
+        #if os(iOS)
         ToolbarItem(placement: .topBarTrailing) { accountButton }
+        #endif
     }
+
+    #if os(macOS)
+    /// The account before adding and the parcel's menu (the window's toolbar puts the split view's items ahead of a
+    /// column's), on its own tile rather than on their glass.
+    @ToolbarContentBuilder private var macAccountToolbar: some ToolbarContent {
+        if #available(macOS 26.0, *) {
+            ToolbarItem(placement: .automatic) { accountButton }
+                .sharedBackgroundVisibility(.hidden)
+        } else {
+            ToolbarItem(placement: .automatic) { accountButton }
+        }
+    }
+    #endif
 
     private var addButton: some View {
         Button {
@@ -922,6 +950,7 @@ private struct DeliveryListView: View {
             HStack(spacing: 7) {
                 Image(systemName: "magnifyingglass").foregroundStyle(.secondary).accessibilityHidden(true)
                 TextField(localizer.text("view.searchPlaceholder"), text: $query)
+                    .drawnField()
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .submitLabel(.search)

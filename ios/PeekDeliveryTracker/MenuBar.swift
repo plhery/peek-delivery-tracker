@@ -3,7 +3,7 @@ import SwiftUI
 import UIKit
 #endif
 
-/// The menu bar of an iPad, and of a Mac running the iPad app. Its menus list the keys the screens answer, and the
+/// The menu bar of an iPad and of the Mac. Its menus list the keys the screens answer, and the
 /// screen in front says what it can do now, so an item is dimmed where its key would do nothing. The screens keep
 /// their own key buttons (`KeyboardShortcuts`) as well: a phone has no menu bar, and where both answer a key they
 /// do the same thing.
@@ -64,8 +64,9 @@ extension FocusedValues {
     @Entry var parcelMenu: ParcelMenu?
 }
 
-/// Account in the app's menu, Add Parcel in File, Search in Edit, the tabs and Refresh in View, and a Parcel menu
-/// with the page's ••• items. Undo, ↑, ↓, Return and Esc stay on the screens' buttons everywhere.
+/// Account in the app's menu (the Settings window on a Mac), Add Parcel in File, Search in Edit, the tabs and Refresh
+/// in View, and a Parcel menu with the page's ••• items. Undo, ↑, ↓, Return and Esc stay on the screens' buttons
+/// everywhere.
 struct PeekCommands: Commands {
     @ObservedObject var localizer: Localizer
     @FocusedValue(\.tabsMenu) private var tabs
@@ -74,11 +75,14 @@ struct PeekCommands: Commands {
     @FocusedValue(\.parcelMenu) private var parcel
 
     var body: some Commands {
+        // A Mac keeps the system's Settings… item, which opens the Settings window.
+        #if os(iOS)
         CommandGroup(replacing: .appSettings) {
             Button(localizer.text("native.account")) { account?.open() }
                 .keyboardShortcut(MenuKey.account)
                 .disabled(account == nil)
         }
+        #endif
         CommandGroup(replacing: .newItem) {
             Button(localizer.text("app.addParcel")) { deliveries?.add?() }
                 .keyboardShortcut(MenuKey.add)

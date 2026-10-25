@@ -144,7 +144,20 @@ struct AppWindowAppearance: UIViewRepresentable {
 }
 #endif
 
+extension View {
+    /// A field the screen draws itself, as iOS leaves it. A Mac would draw its own bezel inside, and a sheet doesn't
+    /// take a field style from the window under it, so each field asks.
+    @ViewBuilder func drawnField() -> some View {
+        #if os(macOS)
+        textFieldStyle(.plain)
+        #else
+        self
+        #endif
+    }
+}
+
 /// One account entry point, shared by the tabs. ⌘, opens it from the screen in front, as Settings opens elsewhere.
+/// On a Mac the account is the Settings window, which ⌘, opens from the app's menu: the button opens it too.
 struct AccountToolbarButton: View {
     let action: () -> Void
     @EnvironmentObject private var session: SessionStore
@@ -152,26 +165,34 @@ struct AccountToolbarButton: View {
     @Environment(\.keyboardInFront) private var keyboardInFront
 
     var body: some View {
-        Button(action: open) {
-            Group {
-                if let initial = session.user?.email?.first {
-                    Text(String(initial).uppercased())
-                        .font(.subheadline.weight(.bold))
-                } else {
-                    Image(systemName: "person.fill")
-                        .font(.subheadline.weight(.semibold))
-                }
+        #if os(macOS)
+        SettingsLink { badge }
+            .buttonStyle(TactileButtonStyle(scale: 0.94))
+            .accessibilityLabel(localizer.text("native.account"))
+        #else
+        Button(action: open) { badge }
+            .buttonStyle(TactileButtonStyle(scale: 0.94))
+            .keyboardShortcut(keyboardInFront ? MenuKey.account : nil)
+            .focusedSceneValue(\.accountMenu, MenuBar.shown && keyboardInFront ? AccountMenu(open: open) : nil)
+            .accessibilityLabel(localizer.text("native.account"))
+        #endif
+    }
+
+    private var badge: some View {
+        Group {
+            if let initial = session.user?.email?.first {
+                Text(String(initial).uppercased())
+                    .font(.subheadline.weight(.bold))
+            } else {
+                Image(systemName: "person.fill")
+                    .font(.subheadline.weight(.semibold))
             }
-            .foregroundStyle(Brand.onAccent)
-            .frame(width: 34, height: 34)
-            .background(Brand.accent, in: Circle())
-            .frame(width: 44, height: 44)
-            .contentShape(Circle())
         }
-        .buttonStyle(TactileButtonStyle(scale: 0.94))
-        .keyboardShortcut(keyboardInFront ? MenuKey.account : nil)
-        .focusedSceneValue(\.accountMenu, MenuBar.shown && keyboardInFront ? AccountMenu(open: open) : nil)
-        .accessibilityLabel(localizer.text("native.account"))
+        .foregroundStyle(Brand.onAccent)
+        .frame(width: 34, height: 34)
+        .background(Brand.accent, in: Circle())
+        .frame(width: 44, height: 44)
+        .contentShape(Circle())
     }
 
     /// ⌘, reaches the button under a sheet or a popover of its screen as well: it waits for them.

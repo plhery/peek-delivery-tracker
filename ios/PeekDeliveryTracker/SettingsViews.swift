@@ -452,11 +452,14 @@ struct AccountView: View {
             .sheet(isPresented: $showingHomePage) {
                 SafariPage(url: session.configuration.homePageURL).ignoresSafeArea()
             }
+            // A Mac's Settings window closes as any window does.
+            #if os(iOS)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(localizer.text("common.close")) { dismiss() }.disabled(working)
                 }
             }
+            #endif
             .task {
                 await store.refreshNotificationState()
                 await store.loadNotificationPreferences()

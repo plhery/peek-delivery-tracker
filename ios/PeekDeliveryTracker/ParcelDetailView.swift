@@ -124,6 +124,9 @@ struct ParcelDetailView: View {
                     } label: {
                         Image(systemName: "ellipsis")
                     }
+                    #if os(macOS)
+                    .menuIndicator(.hidden)
+                    #endif
                     // On an iPad the question is a popover: off the menu, not off the page, where it covered the list.
                     .parcelDeleteConfirmation(isPresented: $showingDeleteConfirmation) { delete(parcel) }
                 }
@@ -1306,6 +1309,7 @@ struct ChangeCarrierView: View {
                 text: $trackingURL,
                 axis: .vertical
             )
+            .drawnField()
             .keyboardType(.URL)
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
@@ -1315,6 +1319,7 @@ struct ChangeCarrierView: View {
                     localizer.text("add.requirement.dpdPostcode"),
                     text: $deliveryPostcode
                 )
+                .drawnField()
                 .keyboardType(requirement.inputMode == "numeric" ? .numberPad
                     : requirement.startsWithNumberKeys(
                         example: catalog.postcodeExample(for: selectedCarrier, requirement: requirement)

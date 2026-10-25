@@ -818,15 +818,17 @@ struct MapOverlay {
                 // A chip the card would write over stands beside it or just below it instead, whichever is nearer, but never on
                 // the parcel's own dot: with nowhere else to go, it is left out, as the parcel matters more than the way.
                 let chip = { (x: CGFloat, y: CGFloat) in CGRect(x: x - half, y: y - 13, width: width, height: 26) }
+                let dot = at(current.place.point)
+                let parcel = CGRect(x: dot.x - 10, y: dot.y - 10, width: 20, height: 20)
                 if let box = written.first(where: { overlaps(chip(x, y), [$0]) }) {
-                    let dot = at(current.place.point)
-                    let parcel = CGRect(x: dot.x - 10, y: dot.y - 10, width: 20, height: 20)
                     guard let nearest = [CGPoint(x: box.maxX + half + 4, y: y), CGPoint(x: x, y: min(size.height - insets.bottom - 21, box.maxY + 13))]
                         .filter({ $0.x <= size.width - insets.trailing - half - 8 && !overlaps(chip($0.x, $0.y), [parcel]) })
                         .min(by: { abs($0.x - x) + abs($0.y - y) < abs($1.x - x) + abs($1.y - y) }) else { continue }
                     x = nearest.x
                     y = nearest.y
                 }
+                // A map too short to keep the chip off the middle would have it cover the dot, and Pip beside it: it is left out.
+                if overlaps(chip(x, y), [parcel.insetBy(dx: 7, dy: 7)]) { continue }
                 placed.append(CGRect(x: x - half, y: y - 13, width: width, height: 26))
                 pointers.append(Pointer(center: CGPoint(x: x, y: y), width: width, angle: atan2(dy, dx), name: name, detail: detail))
             }

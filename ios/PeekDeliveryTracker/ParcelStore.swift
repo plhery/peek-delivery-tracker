@@ -84,6 +84,10 @@ final class ParcelStore: ObservableObject {
     private var showingSavedParcels = false
     private var cacheCurrent = false
     private var publishedWidgetState: DeliveryWidgetState?
+    /// Where the widget's cards are drawn, and the cards drawn there or that could not be, by the name of their pictures.
+    private let widgetPictures: URL?
+    private var widgetPicturesFailed = Set<String>()
+    private var widgetPicturesTask: Task<Void, Never>?
     private var deliveryActivityTask: Task<Void, Never>?
     private var deliveryPushToStartTask: Task<Void, Never>?
     private var deliveryActivityUpdatesTask: Task<Void, Never>?
@@ -118,6 +122,7 @@ final class ParcelStore: ObservableObject {
             appGroupIdentifier: configuration.appGroupIdentifier,
             fallbackToStandard: true
         )
+        widgetPictures = DeliveryWidgetPicture.folder(appGroupIdentifier: configuration.appGroupIdentifier)
         liveActivityRevocations = LiveActivityRevocations(configuration: configuration, transport: transport)
         api = DeliveryAPIClient(configuration: configuration, session: session, transport: transport)
         demo = DemoRepository()
@@ -250,6 +255,7 @@ final class ParcelStore: ObservableObject {
         deliveryWidgetStore?.setLanguageCode(localizer.language.rawValue)
         deliveryWidgetStore?.clearSnapshot()
         publishedWidgetState = nil
+        if let widgetPictures { DeliveryWidgetPictures.sweep(keeping: [], in: widgetPictures) }
         WidgetCenter.shared.reloadTimelines(ofKind: DeliveryWidgetSharedStore.kind)
         scheduleDeliveryLiveActivities(forceEnd: true)
     }
@@ -1076,11 +1082,13 @@ final class ParcelStore: ObservableObject {
             snapshot = DeliveryWidgetSnapshot(
                 generatedAt: Date(),
                 languageCode: localizer.language.rawValue,
-                parcels: DeliveryWidgetSelection.displayParcels(from: nextDeliveries)
+                parcels: carded(DeliveryWidgetSelection.displayParcels(from: nextDeliveries))
             )
         } else {
             snapshot = nil
         }
+        // Cards still being drawn come with the next publication, so that the widget reloads once for them.
+        guard snapshot == nil || widgetPicturesTask == nil else { return }
 
         // Reloads spend the widget's system budget; skip them when nothing it shows changed.
         let state = DeliveryWidgetState(
@@ -1097,7 +1105,39 @@ final class ParcelStore: ObservableObject {
         } else {
             deliveryWidgetStore?.clearSnapshot()
         }
+        if let widgetPictures { DeliveryWidgetPictures.sweep(keeping: snapshot?.parcels.compactMap(\.card) ?? [], in: widgetPictures) }
         WidgetCenter.shared.reloadTimelines(ofKind: DeliveryWidgetSharedStore.kind)
+    }
+
+    /// Gives each parcel its card once the card's pictures are drawn, and starts drawing those that aren't.
+    private func carded(_ shown: [DeliveryWidgetParcel]) -> [DeliveryWidgetParcel] {
+        guard let folder = widgetPictures else { return shown }
+        var missing: [(parcel: Parcel, card: DeliveryWidgetCard)] = []
+        let carded = shown.map { item in
+            guard let parcel = parcels.first(where: { $0.id == item.id }) else { return item }
+            let card = DeliveryWidgetPictures.card(for: parcel, localizer: localizer)
+            guard DeliveryWidgetPictures.isDrawn(card, in: folder) else {
+                if !widgetPicturesFailed.contains(card.pictures) { missing.append((parcel, card)) }
+                return item
+            }
+            var item = item
+            item.card = card
+            return item
+        }
+        if !missing.isEmpty, widgetPicturesTask == nil {
+            widgetPicturesTask = Task { [weak self, localizer] in
+                let atlas = await WorldAtlas.bundled.value
+                for (parcel, card) in missing {
+                    guard await DeliveryWidgetPictures.draw(parcel, as: card, atlas: atlas, localizer: localizer, in: folder) else {
+                        self?.widgetPicturesFailed.insert(card.pictures)
+                        continue
+                    }
+                }
+                self?.widgetPicturesTask = nil
+                self?.publishDeliveryWidget()
+            }
+        }
+        return carded
     }
 
     #if os(iOS)

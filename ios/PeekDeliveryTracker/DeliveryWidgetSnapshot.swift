@@ -10,9 +10,42 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     let trackingNumber: String
     let detail: String
     let isOutForDelivery: Bool
+    /// The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone.
+    var card: DeliveryWidgetCard? = nil
 
     var deepLink: URL {
         URL(string: "peekdeliverytracker://parcel/\(id.uuidString)")!
+    }
+}
+
+/// A parcel's card as the widget shows it. A widget has too little memory to draw the map, so the app draws the card's
+/// pictures into the shared container and the widget writes the words over them.
+struct DeliveryWidgetCard: Codable, Equatable, Hashable, Sendable {
+    /// The card's colour and its words', light then dark, as hex.
+    let surface: [String]
+    let ink: [String]
+    /// The parcel's status, which the card writes before its date.
+    let status: String
+    /// What the pictures' file names start with. It changes whenever they do.
+    let pictures: String
+    /// The pictures' pixels per point.
+    let scale: Double
+}
+
+/// The pictures of a card: its carrier's mark, and its route as a small widget, half a medium one or a whole medium one
+/// shows it, across the top of the card.
+enum DeliveryWidgetPicture: String, CaseIterable, Sendable {
+    case mark, small, half, wide
+
+    static let routes: [DeliveryWidgetPicture] = [.small, .half, .wide]
+
+    static func folder(appGroupIdentifier: String) -> URL? {
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?
+            .appending(path: "Library/Caches/WidgetCards", directoryHint: .isDirectory)
+    }
+
+    func file(of card: DeliveryWidgetCard, dark: Bool, in folder: URL) -> URL {
+        folder.appending(path: "\(card.pictures)-\(rawValue)-\(dark ? "dark" : "light").png")
     }
 }
 

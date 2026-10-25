@@ -20,6 +20,8 @@ struct RouteEngraving: View {
     /// Off on the Next up card, which is one tap target in a scrolling list.
     var peek = true
     var insets = EdgeInsets(top: 40, leading: 16, bottom: 44, trailing: 16)
+    /// Where the card's top row ends, which Pip stays below.
+    var ceiling: CGFloat = 52
     /// Where the card starts writing over the bottom of the map, which Pip stays above.
     var floor: CGFloat?
     /// What the card writes over the map below its top row, such as a second carrier's mark.
@@ -42,7 +44,7 @@ struct RouteEngraving: View {
             // The parcel's dot pulses until the journey is over.
             live: stage != .delivered && stage != .returned,
             // Pip keeps below the top row of the parcel's page, and of Next up alike, so both show the same picture.
-            pip: PipMood(stage: stage).map { PipRequest(mood: $0, ceiling: 52, floor: floor) },
+            pip: PipMood(stage: stage).map { PipRequest(mood: $0, ceiling: ceiling, floor: floor) },
             fades: true, insets: EdgeInsets(top: insets.top + room, leading: insets.leading, bottom: insets.bottom, trailing: insets.trailing),
             covered: covered, buttons: buttons, language: localizer.language
         )

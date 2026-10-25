@@ -800,3 +800,77 @@ final class ParcelRouteTests: XCTestCase {
         XCTAssertEqual(route.scale, .world)
     }
 }
+
+extension ParcelRouteTests {
+    /// The app draws each card's pictures for the widget, which reads them by name: a new scan draws new ones, and the
+    /// pictures of cards no longer shown go.
+    @MainActor func testTheWidgetsCardsAreDrawnOnceForTheWidgetToRead() async throws {
+        let suite = "widget-cards-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let folder = FileManager.default.temporaryDirectory.appending(path: suite)
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let parcels = DemoRepository(defaults: defaults, language: { .en }).list()
+        let placed = try XCTUnwrap(parcels.first { $0.label.hasPrefix("Moon lamp") })
+        let unplaced = try XCTUnwrap(parcels.first { $0.trackingEvents.allSatisfy { $0.place == nil } })
+        let atlas = await WorldAtlas.bundled.value
+
+        let card = DeliveryWidgetPictures.card(for: placed, localizer: localizer)
+        XCTAssertEqual(DeliveryWidgetPictures.card(for: placed, localizer: localizer), card)
+        XCTAssertEqual(card.status, "In transit")
+        XCTAssertFalse(DeliveryWidgetPictures.isDrawn(card, in: folder))
+        let drawn = await DeliveryWidgetPictures.draw(placed, as: card, atlas: atlas, localizer: localizer, in: folder)
+        XCTAssertTrue(drawn)
+        XCTAssertTrue(DeliveryWidgetPictures.isDrawn(card, in: folder))
+        for shape in DeliveryWidgetPicture.routes {
+            let art = try XCTUnwrap(DeliveryWidgetCardArt(card, route: shape, in: folder))
+            XCTAssertNotNil(art.light.route)
+            XCTAssertNotNil(art.dark.route)
+            // No bigger than the smallest widget it goes in, at the screen's scale.
+            let image = try XCTUnwrap(UIImage(contentsOfFile: shape.file(of: card, dark: true, in: folder).path))
+            XCTAssertEqual(image.size.width * image.scale, DeliveryWidgetPictures.frame(of: shape).size.width * DeliveryWidgetPictures.scale, accuracy: 1)
+        }
+
+        // A widget's map is too short for the chip pointing to where the parcel came from: it would cover the parcel's dot.
+        let chocolate = try XCTUnwrap(parcels.first { $0.currentStage == .outForDelivery })
+        let world = try XCTUnwrap(atlas)
+        let lastMile = ParcelRoute(parcel: chocolate, atlas: world, language: .en)
+        for shape in DeliveryWidgetPicture.routes {
+            let frame = DeliveryWidgetPictures.frame(of: shape)
+            let mode = lastMile.defaultMode(for: chocolate.currentStage)
+            let draw = { (camera: GlobeCamera) in
+                MapOverlay(route: lastMile, camera: camera, size: frame.size, insets: frame.insets, labels: .ends, mode: mode, context: false,
+                           atlas: world, locale: Locale(identifier: "en"), countryName: { $0 },
+                           pip: PipRequest(mood: .eager, ceiling: frame.ceiling, floor: frame.floor))
+            }
+            let overlay = draw(.framing(lastMile, mode: mode, in: frame.size, insets: frame.insets, shown: { camera, _ in draw(camera).shown }, pip: true))
+            XCTAssertEqual(overlay.pointers.map(\.name), [], "\(shape)")
+            XCTAssertEqual(overlay.labels.map(\.text), ["Zürich"], "\(shape)")
+            XCTAssertNotNil(overlay.pip, "\(shape)")
+        }
+
+        // A parcel with no places has a card without a route.
+        let plain = DeliveryWidgetPictures.card(for: unplaced, localizer: localizer)
+        let drawnPlain = await DeliveryWidgetPictures.draw(unplaced, as: plain, atlas: atlas, localizer: localizer, in: folder)
+        XCTAssertTrue(drawnPlain)
+        XCTAssertNil(try XCTUnwrap(DeliveryWidgetCardArt(plain, route: .small, in: folder)).light.route)
+
+        // A new scan names new pictures; the old ones go with the next publication.
+        var moved = placed
+        moved.trackingEvents.append(TrackingEvent(
+            id: UUID(), packageID: placed.id, stage: .inTransit, description: "Arrived", occurredAt: "2026-10-27T08:00:00Z",
+            place: EventPlace(latitude: 49.2, longitude: 9.6, precision: .city, country: "DE", name: "Öhringen")
+        ))
+        let next = DeliveryWidgetPictures.card(for: moved, localizer: localizer)
+        XCTAssertNotEqual(next.pictures, card.pictures)
+        XCTAssertFalse(DeliveryWidgetPictures.isDrawn(next, in: folder))
+        DeliveryWidgetPictures.sweep(keeping: [plain], in: folder)
+        XCTAssertFalse(DeliveryWidgetPictures.isDrawn(card, in: folder))
+        XCTAssertTrue(DeliveryWidgetPictures.isDrawn(plain, in: folder))
+        XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: folder.path).count, 2)
+    }
+}

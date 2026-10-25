@@ -9,6 +9,8 @@ private struct DeliveryWidgetEntry: TimelineEntry {
     let enabled: Bool
     let languageCode: String
     let snapshot: DeliveryWidgetSnapshot?
+    /// The pictures of the cards the widget shows, in order; none unless every one of them has its pictures.
+    var art: [DeliveryWidgetCardArt] = []
 }
 
 private struct DeliveryWidgetProvider: TimelineProvider {
@@ -37,17 +39,19 @@ private struct DeliveryWidgetProvider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DeliveryWidgetEntry) -> Void) {
-        completion(context.isPreview ? placeholder(in: context) : currentEntry())
+        // The gallery shows the parcels' own cards once the app has drawn them.
+        let entry = currentEntry(context.family)
+        completion(context.isPreview && entry.art.isEmpty ? placeholder(in: context) : entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DeliveryWidgetEntry>) -> Void) {
-        let entry = currentEntry()
+        let entry = currentEntry(context.family)
         let refresh = Calendar.current.date(byAdding: .minute, value: 20, to: entry.date)
             ?? entry.date.addingTimeInterval(1_200)
         completion(Timeline(entries: [entry], policy: .after(refresh)))
     }
 
-    private func currentEntry() -> DeliveryWidgetEntry {
+    private func currentEntry(_ family: WidgetFamily) -> DeliveryWidgetEntry {
         let identifier = DeliveryWidgetSharedStore.appGroupIdentifier()
         let store = DeliveryWidgetSharedStore(appGroupIdentifier: identifier)
         let snapshot = store?.snapshot
@@ -58,8 +62,19 @@ private struct DeliveryWidgetProvider: TimelineProvider {
             date: Date(),
             enabled: store?.isEnabled ?? true,
             languageCode: languageCode,
-            snapshot: snapshot
+            snapshot: snapshot,
+            art: art(for: snapshot?.parcels ?? [], in: family, appGroupIdentifier: identifier)
         )
+    }
+
+    /// Reads the pictures of the cards a widget of `family` shows: a small one shows the first parcel, a medium one
+    /// the first two, side by side, or the first alone, across it.
+    private func art(for parcels: [DeliveryWidgetParcel], in family: WidgetFamily, appGroupIdentifier: String) -> [DeliveryWidgetCardArt] {
+        let shown = parcels.prefix(family == .systemMedium ? 2 : 1)
+        let shape: DeliveryWidgetPicture = family == .systemMedium ? shown.count > 1 ? .half : .wide : .small
+        guard !shown.isEmpty, let folder = DeliveryWidgetPicture.folder(appGroupIdentifier: appGroupIdentifier) else { return [] }
+        let art = shown.compactMap { parcel in parcel.card.flatMap { DeliveryWidgetCardArt($0, route: shape, in: folder) } }
+        return art.count == shown.count ? art : []
     }
 
     private var preferredLanguageCode: String {
@@ -85,7 +100,49 @@ private struct DeliveryWidgetView: View {
         entry.snapshot?.parcels ?? []
     }
 
+    /// The parcels the widget shows as the app's cards, once the app has drawn every one of them.
+    private var cards: [(parcel: DeliveryWidgetParcel, card: DeliveryWidgetCard, art: DeliveryWidgetCardArt)] {
+        guard entry.enabled else { return [] }
+        let cards = zip(parcels, entry.art).compactMap { parcel, art in parcel.card.map { (parcel, $0, art) } }
+        return cards.count == entry.art.count ? cards : []
+    }
+
     var body: some View {
+        if cards.isEmpty {
+            words
+        } else {
+            cardContent
+                .environment(\.locale, Locale(identifier: entry.languageCode == "pt" ? "pt-PT" : entry.languageCode))
+        }
+    }
+
+    @ViewBuilder
+    private var cardContent: some View {
+        let cards = cards
+        if let only = cards.first, cards.count == 1 {
+            DeliveryWidgetCardView(
+                parcel: only.parcel, card: only.card, art: only.art, shape: family == .systemMedium ? .wide : .small,
+                badge: family == .systemMedium ? copy.text("app.nextUp") : nil
+            )
+            .containerBackground(for: .widget) { DeliveryWidgetCardBackground(card: only.card, art: only.art) }
+            .widgetURL(only.parcel.deepLink)
+        } else {
+            HStack(spacing: 8) {
+                ForEach(cards, id: \.parcel.id) { shown in
+                    Link(destination: shown.parcel.deepLink) {
+                        DeliveryWidgetCardView(parcel: shown.parcel, card: shown.card, art: shown.art, shape: .half)
+                            .padding(10)
+                            .background { DeliveryWidgetCardBackground(card: shown.card, art: shown.art) }
+                            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .containerBackground(for: .widget) { DeliveryWidgetCardPage() }
+        }
+    }
+
+    private var words: some View {
         Group {
             if !entry.enabled {
                 stateView(

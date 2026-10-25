@@ -154,7 +154,10 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   app ends any still showing and withdraws the iPhone's registration, so the server
   starts none.
 - **The widget** shows the next parcel and up to two out-for-delivery parcels. Tapping one
-  opens it.
+  opens it. Each is its card from the app's list: the carrier's colours and mark over the
+  parcel's route. A widget hasn't the memory to draw the map, so the app draws these pictures
+  into the App Group (`DeliveryWidgetPictures`); until they are there, the widget shows the
+  parcels in words. Tinted and clear widgets keep the card without its colours or route.
 - **The delivery email** belongs to the account, not the device. Settings › Notifications
   has its switch, which saves the moment it is flipped. While it is on, the bell of a parcel
   still on its way opens that parcel's alerts, where notifications and the email are switched

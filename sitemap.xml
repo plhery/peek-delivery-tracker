@@ -87,7 +87,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-18</lastmod>
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/guides</loc>
@@ -99,7 +99,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-18</lastmod>
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/guides</loc>
@@ -111,7 +111,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-18</lastmod>
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/guides</loc>
@@ -123,7 +123,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-18</lastmod>
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/guides</loc>
@@ -135,7 +135,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-18</lastmod>
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/guides</loc>
@@ -147,7 +147,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-18</lastmod>
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pl/guides</loc>
@@ -159,7 +159,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-23</lastmod>
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/guides/tracking-number-formats-by-carrier</loc>
@@ -2260,6 +2260,90 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-ikea" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/ikea-order-tracking" />
 <lastmod>2026-10-18</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/guides/zara-order-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/zara-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/zara-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-zara" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-zara" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-zara" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-zara" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-zara" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/zara-order-tracking" />
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/guides/zara-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/zara-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/zara-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-zara" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-zara" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-zara" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-zara" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-zara" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/zara-order-tracking" />
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/guides/suivi-commande-zara</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/zara-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/zara-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-zara" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-zara" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-zara" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-zara" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-zara" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/zara-order-tracking" />
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/guides/tracciamento-ordine-zara</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/zara-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/zara-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-zara" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-zara" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-zara" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-zara" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-zara" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/zara-order-tracking" />
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/guides/seguimiento-pedido-zara</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/zara-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/zara-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-zara" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-zara" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-zara" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-zara" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-zara" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/zara-order-tracking" />
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/guides/seguimento-encomenda-zara</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/zara-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/zara-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-zara" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-zara" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-zara" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-zara" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-zara" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/zara-order-tracking" />
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/guides/sledzenie-zamowienia-zara</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/zara-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/zara-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-zara" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-zara" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-zara" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-zara" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-zara" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/zara-order-tracking" />
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/guides/how-to-find-tracking-number</loc>

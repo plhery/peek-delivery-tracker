@@ -201,6 +201,7 @@ describe('carrier brand', () => {
       'ywe',
       'far-international',
       'intel-valley',
+      'pengyou',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

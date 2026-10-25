@@ -7254,6 +7254,16 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low",
         "checksum": "magyar-posta",
         "preferred": true
+      },
+      {
+        "pattern": "^RL\\d{14}$",
+        "confidence": "low",
+        "preferred": true
+      },
+      {
+        "pattern": "^JJH[A-Z0-9]{17}$",
+        "confidence": "low",
+        "preferred": true
       }
     ],
     "trackingSearchUrl": "https://www.posta.hu/nyomkovetes/nyitooldal",
@@ -8469,6 +8479,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^CLFOX\\d{15}$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^66639\\d{5,15}$",
+        "confidence": "low",
+        "preferred": true
       }
     ],
     "trackingSearchUrl": "https://foxpost.hu/csomagkovetes/"
@@ -30851,7 +30866,12 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "universal"
     },
     "linkRules": [],
-    "detectionRules": []
+    "detectionRules": [
+      {
+        "pattern": "^ZL[A-Z]{2}\\d{9}$",
+        "confidence": "low"
+      }
+    ]
   },
   "correos-costa-rica": {
     "displayName": "Correos de Costa Rica",
@@ -31500,6 +31520,29 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.maersk.com/tracking/parcel"
+  },
+  "dpd-hu": {
+    "displayName": "DPD Hungary",
+    "countries": [
+      "HU"
+    ],
+    "color": "#dc0032",
+    "selectable": true,
+    "timezone": "Europe/Budapest",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dpd-hu",
+      "recognitionRank": 804
+    },
+    "trackingUrlTemplate": "https://www.dpdgroup.com/hu/mydpd/my-parcels/search?lang=en&parcelNumber={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{14}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.dpd.com/hu/hu/"
   }
 } as const;
 
@@ -32349,7 +32392,8 @@ export const CARRIER_IDS = [
   "now-couriers",
   "intel-valley",
   "stone3pl",
-  "maersk-ecommerce"
+  "maersk-ecommerce",
+  "dpd-hu"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

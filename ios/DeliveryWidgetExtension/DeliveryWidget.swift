@@ -118,36 +118,44 @@ private struct DeliveryWidgetView: View {
     }
 
     private func smallContent(_ parcel: DeliveryWidgetParcel) -> some View {
-        VStack(alignment: .leading, spacing: 7) {
+        // Inside the system margins, the smallest widgets (an iPad mini's) still fit a two-line name.
+        VStack(alignment: .leading, spacing: 0) {
             widgetHeader
-            parcelBadge(parcel)
-            Text(parcel.label)
-                .font(.headline.weight(.bold))
-                .lineLimit(2)
-                .minimumScaleFactor(0.82)
-            Spacer(minLength: 2)
-            Text(parcel.carrier)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(WidgetPalette.ink.opacity(0.68))
-                .lineLimit(1)
-            Text(parcel.detail)
-                .font(.caption.weight(.bold))
-                .lineLimit(1)
+            Spacer(minLength: 6)
+            VStack(alignment: .leading, spacing: 3) {
+                parcelBadge(parcel)
+                Text(parcel.label)
+                    .font(.headline.weight(.bold))
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.82)
+            }
+            Spacer(minLength: 6)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(parcel.carrier)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(WidgetPalette.ink.opacity(0.68))
+                    .lineLimit(1)
+                Text(parcel.detail)
+                    .font(.caption.weight(.bold))
+                    .lineLimit(1)
+            }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .combine)
     }
 
     private var mediumContent: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             widgetHeader
             HStack(spacing: 10) {
                 ForEach(parcels.prefix(2)) { parcel in
                     Link(destination: parcel.deepLink) {
-                        VStack(alignment: .leading, spacing: 5) {
+                        VStack(alignment: .leading, spacing: 3) {
                             parcelBadge(parcel)
                             Text(parcel.label)
                                 .font(.subheadline.weight(.bold))
                                 .lineLimit(1)
+                                .minimumScaleFactor(0.85)
                             Text(parcel.carrier)
                                 .font(.caption2.weight(.semibold))
                                 .foregroundStyle(WidgetPalette.ink.opacity(0.64))
@@ -157,7 +165,8 @@ private struct DeliveryWidgetView: View {
                                 .lineLimit(1)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        .padding(10)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 8)
                         .background(.white.opacity(0.36), in: RoundedRectangle(cornerRadius: 14))
                         .contentShape(Rectangle())
                     }
@@ -189,22 +198,29 @@ private struct DeliveryWidgetView: View {
     }
 
     private func parcelBadge(_ parcel: DeliveryWidgetParcel) -> some View {
-        Label(
-            copy.text(parcel.isOutForDelivery ? "stage.out_for_delivery" : "app.nextUp"),
-            systemImage: parcel.isOutForDelivery ? "bicycle" : "arrow.right.circle.fill"
-        )
+        // Tighter than a Label, so "Out for delivery" fits a small widget's width.
+        HStack(spacing: 4) {
+            Image(systemName: parcel.isOutForDelivery ? "bicycle" : "arrow.right.circle.fill")
+                .imageScale(.small)
+                .accessibilityHidden(true)
+            Text(copy.text(parcel.isOutForDelivery ? "stage.out_for_delivery" : "app.nextUp"))
+                .minimumScaleFactor(0.7)
+        }
         .font(.caption2.weight(.heavy))
         .textCase(.uppercase)
         .lineLimit(1)
     }
 
     private func stateView(symbol: String, title: String, description: String) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 6) {
             Image(systemName: symbol)
-                .font(.title2.weight(.bold))
+                .font(.title3.weight(.bold))
+            // Where space runs out, the description gives up lines before the title does.
             Text(title)
                 .font(.headline.weight(.bold))
                 .lineLimit(2)
+                .minimumScaleFactor(0.82)
+                .layoutPriority(1)
             Text(description)
                 .font(.caption)
                 .foregroundStyle(WidgetPalette.ink.opacity(0.67))
@@ -236,7 +252,6 @@ struct NextDeliveryWidget: Widget {
         .configurationDisplayName(copy.text("widget.galleryName"))
         .description(copy.text("widget.galleryDescription"))
         .supportedFamilies([.systemSmall, .systemMedium])
-        .contentMarginsDisabled()
     }
 }
 

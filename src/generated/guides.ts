@@ -137,6 +137,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Zara order tracking: delivery, returns and problems"
     },
     {
+      "id": "decathlon-orders",
+      "slug": "decathlon-order-tracking",
+      "title": "Decathlon order tracking: delivery, returns and problems"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "how-to-find-tracking-number",
       "title": "How to find your tracking number, or track without one"
@@ -332,6 +337,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "zara-orders",
       "slug": "zara-sendungsverfolgung",
       "title": "Zara Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
+    },
+    {
+      "id": "decathlon-orders",
+      "slug": "decathlon-sendungsverfolgung",
+      "title": "Decathlon Sendungsverfolgung: Lieferung, Retoure, Probleme"
     },
     {
       "id": "find-tracking-number",
@@ -531,6 +541,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Suivi de commande Zara\u00a0: livraison, retours et problèmes"
     },
     {
+      "id": "decathlon-orders",
+      "slug": "suivi-commande-decathlon",
+      "title": "Suivi de commande Decathlon\u00a0: livraison, retours, problèmes"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "ou-trouver-numero-de-suivi",
       "title": "Où trouver son numéro de suivi, et comment faire sans"
@@ -726,6 +741,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "zara-orders",
       "slug": "tracciamento-ordine-zara",
       "title": "Tracciamento ordine Zara: spedizione, consegna e problemi"
+    },
+    {
+      "id": "decathlon-orders",
+      "slug": "tracciamento-ordine-decathlon",
+      "title": "Tracciamento ordine Decathlon: consegna, resi e problemi"
     },
     {
       "id": "find-tracking-number",
@@ -925,6 +945,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimiento de pedidos Zara: envío, entrega y problemas"
     },
     {
+      "id": "decathlon-orders",
+      "slug": "seguimiento-pedido-decathlon",
+      "title": "Seguimiento de pedidos Decathlon: envío, entrega y problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "localizar-paquete-sin-numero-de-seguimiento",
       "title": "Cómo localizar un paquete sin número de seguimiento"
@@ -1122,6 +1147,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimento da encomenda Zara: envio, entrega e problemas"
     },
     {
+      "id": "decathlon-orders",
+      "slug": "seguimento-encomenda-decathlon",
+      "title": "Seguimento da encomenda Decathlon: entregas e problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "onde-encontrar-numero-de-seguimento",
       "title": "Onde encontrar o número de seguimento da encomenda"
@@ -1317,6 +1347,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "zara-orders",
       "slug": "sledzenie-zamowienia-zara",
       "title": "Śledzenie zamówienia Zara: dostawa, zwroty i problemy"
+    },
+    {
+      "id": "decathlon-orders",
+      "slug": "sledzenie-zamowienia-decathlon",
+      "title": "Śledzenie zamówienia Decathlon: dostawa, zwroty i problemy"
     },
     {
       "id": "find-tracking-number",

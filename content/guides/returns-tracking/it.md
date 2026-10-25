@@ -107,7 +107,7 @@ Il tracciamento e la ricevuta sono le tue prove. Procedi così:
 - **Con un venditore su Amazon.it** c'è la Garanzia dalla A alla Z. Copre un rimborso che non arriva 7 giorni dopo che il reso è stato consegnato al venditore, e un reso spedito con l'etichetta prepagata del venditore che si è perso, non è consegnabile o sta tornando da te.
 - **Chi rischia.** Amazon.it avverte che "i pacchi spediti senza tracciamento potrebbero non essere idonei per i rimborsi" del venditore o della Garanzia dalla A alla Z. Con un reso tracciato e la ricevuta, invece, il negozio non può più trattenere il rimborso aspettando il pacco: se hai esercitato il recesso, per la legge basta la prova che l'hai spedito.
 
-Per inseguire un pacco perso: [pacco smarrito](guide:lost-parcel) e [consegnato ma non ricevuto](guide:delivered-not-received). Un pacco che torna al venditore prima di arrivare a te è un altro caso: [pacco rispedito al mittente](guide:returned-to-sender). Negozio per negozio: [ordini Amazon](guide:amazon-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders) e [Zara](guide:zara-orders).
+Per inseguire un pacco perso: [pacco smarrito](guide:lost-parcel) e [consegnato ma non ricevuto](guide:delivered-not-received). Un pacco che torna al venditore prima di arrivare a te è un altro caso: [pacco rispedito al mittente](guide:returned-to-sender). Negozio per negozio: [ordini Amazon](guide:amazon-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders) e [Decathlon](guide:decathlon-orders).
 
 ## Posso tracciare il reso con Peek?
 

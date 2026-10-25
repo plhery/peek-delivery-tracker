@@ -1086,6 +1086,24 @@ function Bag() {
   </>;
 }
 
+function Bike() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* A long bike box, the bike drawn on its side. */}
+    <Box x={52} y={118} width={262} height={130}>
+      <circle cx="74" cy="88" r="26" stroke={CARD.ink} strokeWidth="5" />
+      <circle cx="188" cy="88" r="26" stroke={CARD.ink} strokeWidth="5" />
+      <path d="M74 88 104 56H160L188 88M104 56 128 88H74M128 88 150 50M140 50H162M98 48H114" stroke={CARD.ink} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+    </Box>
+    {/* A football, and Pip balancing on it. */}
+    <circle cx="384" cy="214" r="34" fill={paper} />
+    <path d="M384 200l12 9-5 14h-14l-5-14z" fill="var(--green)" />
+    <path d="M384 180v20M396 209l20-8M391 223l11 17M377 223l-11 17M372 209l-20-8" stroke={soft} strokeWidth="2.4" strokeLinecap="round" />
+    <Pip x={384} ground={182} width={96} mood="joy" side={1} />
+    <Truck x={604} y={172} tone="green" scale={4} flip />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1113,6 +1131,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'galaxus-orders': { tone: 'lilac', draw: Shelves },
   'ikea-orders': { tone: 'blue', draw: FlatPack },
   'zara-orders': { tone: 'rose', draw: Bag },
+  'decathlon-orders': { tone: 'green', draw: Bike },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },

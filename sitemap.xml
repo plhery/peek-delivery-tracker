@@ -3843,8 +3843,9 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mondial-relay-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mondial-relay-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mondial-relay-rastreio" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/mondial-relay-suivi</loc>
@@ -3852,6 +3853,7 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mondial-relay-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mondial-relay-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mondial-relay-rastreio" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
 <lastmod>2026-10-11</lastmod>
 </url>
@@ -3861,6 +3863,7 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mondial-relay-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mondial-relay-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mondial-relay-rastreio" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
 <lastmod>2026-10-11</lastmod>
 </url>
@@ -3870,8 +3873,19 @@
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mondial-relay-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mondial-relay-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mondial-relay-rastreio" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
 <lastmod>2026-10-11</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/mondial-relay-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mondial-relay-suivi" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mondial-relay-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mondial-relay-rastreio" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/gls-tracking-germany</loc>
@@ -5476,8 +5490,16 @@
 <url>
 <loc>https://peektracker.com/carriers/cargus-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/cargus-tracking" />
+<xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/cargus-urmarire-colet" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/cargus-tracking" />
-<lastmod>2026-10-13</lastmod>
+<lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/ro/carriers/cargus-urmarire-colet</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/cargus-tracking" />
+<xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/cargus-urmarire-colet" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/cargus-tracking" />
+<lastmod>2026-10-25</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/fan-courier-tracking</loc>

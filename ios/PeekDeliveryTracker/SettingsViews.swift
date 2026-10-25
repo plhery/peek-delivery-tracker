@@ -2,6 +2,8 @@ import SafariServices
 import SwiftUI
 #if os(iOS)
 import UIKit
+#else
+import ServiceManagement
 #endif
 
 struct NotificationPromptView: View {
@@ -370,7 +372,7 @@ struct AccountView: View {
     @EnvironmentObject private var session: SessionStore
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.openWindow) private var openWindow
     @AppStorage(AppAppearance.storageKey) private var appearance = AppAppearance.defaultValue
     @State private var working = false
     @State private var exportURL: URL?
@@ -383,6 +385,76 @@ struct AccountView: View {
     @State private var showingHomePage = false
 
     var body: some View {
+        page
+        .interactiveDismissDisabled(working)
+        .sensoryFeedback(.selection, trigger: appearance)
+        .sheet(isPresented: $showingShareSheet) {
+            if let exportURL { ActivityShareSheet(items: [exportURL]) }
+        }
+        .alert(forgetQuestion, isPresented: $confirmingForget) {
+            Button(localizer.text("common.cancel"), role: .cancel) {}
+            Button(localizer.text("door.recents.forget.yes"), role: .destructive) {
+                run { try await store.forgetDeviceParcels() }
+            }
+        }
+        .alert(localizer.text("native.resetDemoQuestion"), isPresented: $confirmingDemoReset) {
+            Button(localizer.text("common.cancel"), role: .cancel) {}
+            Button(localizer.text("native.resetDemo")) {
+                run {
+                    await store.resetDemoData()
+                    finish()
+                }
+            }
+        } message: {
+            Text(localizer.text("native.resetDemoDescription"))
+        }
+        .alert(localizer.text("account.deleteQuestion"), isPresented: $confirmingDeletion) {
+            if !store.isDemo {
+                TextField(
+                    localizer.text("account.typeToConfirm", ["email": session.user?.email ?? ""]),
+                    text: $confirmation
+                )
+                .textInputAutocapitalization(.never)
+            }
+            Button(localizer.text("common.cancel"), role: .cancel) {}
+            Button(localizer.text("account.deletePermanent")) {
+                run {
+                    try await store.deleteAccount(confirmation: confirmation)
+                    finish()
+                }
+            }
+            .disabled(!store.isDemo && confirmation.cleaned != (session.user?.email ?? "").cleaned)
+        } message: {
+            Text(localizer.text("account.deleteDescription"))
+        }
+        .tint(Brand.ink)
+        .presentationDetents([.large])
+        .presentationDragIndicator(.visible)
+    }
+
+    #if os(macOS)
+    /// The Account tab of a Mac's Settings window: who is signed in and their data. General and Notifications have the
+    /// rest of the sheet iOS shows.
+    private var page: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                profile
+                if session.isAuthenticated || store.isGuest { accountData }
+                SettingsGroup { siteRows }
+            }
+            .buttonStyle(.plain)
+            .padding(24)
+            .frame(maxWidth: 520)
+            .frame(maxWidth: .infinity)
+        }
+        .background(Brand.background)
+        .disabled(working)
+        .sheet(isPresented: $showingHomePage) {
+            SafariPage(url: session.configuration.homePageURL)
+        }
+    }
+    #else
+    private var page: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
@@ -421,7 +493,7 @@ struct AccountView: View {
                     SettingsGroup(title: localizer.text("settings.preferences")) {
                         SettingsAppearancePicker(appearance: $appearance)
                         settingsDivider
-                        languageRow
+                        SettingsLanguageRow()
                     }
                     SettingsGroup {
                         NavigationLink { accountPage } label: {
@@ -430,20 +502,7 @@ struct AccountView: View {
                         .buttonStyle(.plain)
                         .accessibilityIdentifier("settings.accountData")
                         settingsDivider
-                        // The site's landing, which the app itself never shows.
-                        Button { showingHomePage = true } label: {
-                            SettingsRow(title: localizer.text("app.homePage"), value: session.configuration.homePageURL.host(), chevron: true)
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityIdentifier("settings.homePage")
-                        settingsDivider
-                        // A mail to Peek, open at any time, under the version it would be about.
-                        Link(destination: AppConfiguration.feedbackURL()) {
-                            SettingsRow(title: localizer.text("settings.sendFeedback"),
-                                        detail: localizer.text("settings.version", ["version": AppConfiguration.version]), chevron: true)
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityIdentifier("settings.feedback")
+                        siteRows
                     }
                 }
                 .padding(24)
@@ -456,63 +515,41 @@ struct AccountView: View {
             .sheet(isPresented: $showingHomePage) {
                 SafariPage(url: session.configuration.homePageURL).ignoresSafeArea()
             }
-            // A Mac's Settings window closes as any window does.
-            #if os(iOS)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(localizer.text("common.close")) { dismiss() }.disabled(working)
                 }
             }
-            #endif
             .task {
                 await store.refreshNotificationState()
                 await store.loadNotificationPreferences()
             }
         }
-        .interactiveDismissDisabled(working)
-        .sensoryFeedback(.selection, trigger: appearance)
-        .sheet(isPresented: $showingShareSheet) {
-            if let exportURL { ActivityShareSheet(items: [exportURL]) }
+    }
+    #endif
+
+    /// The site's landing, which the app itself never shows, and a mail to Peek, open at any time, under the version
+    /// it would be about.
+    @ViewBuilder private var siteRows: some View {
+        Button { showingHomePage = true } label: {
+            SettingsRow(title: localizer.text("app.homePage"), value: session.configuration.homePageURL.host(), chevron: true)
         }
-        .alert(forgetQuestion, isPresented: $confirmingForget) {
-            Button(localizer.text("common.cancel"), role: .cancel) {}
-            Button(localizer.text("door.recents.forget.yes"), role: .destructive) {
-                run { try await store.forgetDeviceParcels() }
-            }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("settings.homePage")
+        settingsDivider
+        Link(destination: AppConfiguration.feedbackURL()) {
+            SettingsRow(title: localizer.text("settings.sendFeedback"),
+                        detail: localizer.text("settings.version", ["version": AppConfiguration.version]), chevron: true)
         }
-        .alert(localizer.text("native.resetDemoQuestion"), isPresented: $confirmingDemoReset) {
-            Button(localizer.text("common.cancel"), role: .cancel) {}
-            Button(localizer.text("native.resetDemo")) {
-                run {
-                    await store.resetDemoData()
-                    dismiss()
-                }
-            }
-        } message: {
-            Text(localizer.text("native.resetDemoDescription"))
-        }
-        .alert(localizer.text("account.deleteQuestion"), isPresented: $confirmingDeletion) {
-            if !store.isDemo {
-                TextField(
-                    localizer.text("account.typeToConfirm", ["email": session.user?.email ?? ""]),
-                    text: $confirmation
-                )
-                .textInputAutocapitalization(.never)
-            }
-            Button(localizer.text("common.cancel"), role: .cancel) {}
-            Button(localizer.text("account.deletePermanent")) {
-                run {
-                    try await store.deleteAccount(confirmation: confirmation)
-                    dismiss()
-                }
-            }
-            .disabled(!store.isDemo && confirmation.cleaned != (session.user?.email ?? "").cleaned)
-        } message: {
-            Text(localizer.text("account.deleteDescription"))
-        }
-        .tint(Brand.ink)
-        .presentationDetents([.large])
-        .presentationDragIndicator(.visible)
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("settings.feedback")
+    }
+
+    /// Back to what the change shows: iOS closes the sheet. A Mac's Settings window stays open beside the window.
+    private func finish() {
+        #if os(iOS)
+        dismiss()
+        #endif
     }
 
     private var accountTitle: String {
@@ -530,35 +567,9 @@ struct AccountView: View {
         return localizer.text(NotificationPreset.matching(preferences.enabledStages).titleKey)
     }
 
-    /// At the largest text sizes the language goes under its label.
-    @ViewBuilder private var languageRow: some View {
-        if dynamicTypeSize.isAccessibilitySize {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(localizer.text("language.label")).font(.subheadline)
-                languagePicker
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(15)
-        } else {
-            HStack {
-                Text(localizer.text("language.label")).font(.subheadline)
-                Spacer()
-                languagePicker
-            }
-            .frame(minHeight: 54)
-            .padding(.horizontal, 15)
-        }
-    }
-
-    private var languagePicker: some View {
-        Picker(localizer.text("language.label"), selection: $localizer.language) {
-            ForEach(AppLanguage.allCases) { language in Text(language.nativeName).tag(language) }
-        }
-        .labelsHidden().pickerStyle(.menu).tint(.secondary)
-    }
-
+    /// Nobody signed in gets the way to an account. On a Mac, Settings opens before anyone has.
     @ViewBuilder private var profile: some View {
-        if store.isGuest { signInOffer } else { account }
+        if session.isAuthenticated { account } else { signInOffer }
     }
 
     /// Nobody is signed in: what an account adds, and the way to one.
@@ -569,7 +580,16 @@ struct AccountView: View {
                 Text(localizer.text("link.keep.body")).font(.subheadline).foregroundStyle(.secondary)
             }
             .fixedSize(horizontal: false, vertical: true)
-            Button { dismiss(); session.showSignIn() } label: {
+            Button {
+                session.showSignIn()
+                #if os(macOS)
+                // The window asks to sign in.
+                openWindow(id: MacWindow.id)
+                NSApp.activate()
+                #else
+                dismiss()
+                #endif
+            } label: {
                 FirstParcelPrimaryLabel(title: localizer.text("arrival.signInTitle"), symbol: nil)
             }
             .buttonStyle(TactileButtonStyle())
@@ -603,47 +623,7 @@ struct AccountView: View {
             VStack(alignment: .leading, spacing: 24) {
                 Text(store.isGuest ? localizer.text("native.guest.kept") : session.user?.email ?? localizer.text("app.demo"))
                     .font(.subheadline).foregroundStyle(.secondary)
-                SettingsGroup(title: localizer.text("settings.yourData")) {
-                    Button {
-                        run { exportURL = try await store.exportAccount(); showingShareSheet = true }
-                    } label: { SettingsRow(title: localizer.text("account.export"), symbol: "square.and.arrow.up") }
-                    settingsDivider
-                    Link(destination: session.configuration.privacyURL) {
-                        SettingsRow(title: localizer.text("account.privacy"), symbol: "hand.raised", chevron: true)
-                    }
-                }
-                if store.isDemo {
-                    SettingsGroup(title: localizer.text("app.demo")) {
-                        Button { confirmingDemoReset = true } label: {
-                            SettingsRow(title: localizer.text("native.resetDemo"), chevron: true)
-                        }
-                        settingsDivider
-                        Button { session.showWelcome(); dismiss() } label: {
-                            SettingsRow(title: localizer.text("native.exitDemo"))
-                        }
-                    }
-                } else if store.isGuest {
-                    if !store.parcels.isEmpty {
-                        SettingsGroup {
-                            Button { confirmingForget = true } label: {
-                                SettingsRow(title: localizer.text("door.recents.forgetAll"))
-                            }
-                            .accessibilityIdentifier("settings.forgetAll")
-                        }
-                    }
-                } else {
-                    SettingsGroup {
-                        Button { run { try await store.signOut(); dismiss() } } label: {
-                            SettingsRow(title: localizer.text("account.signOut"))
-                        }
-                    }
-                    Button { confirmation = ""; confirmingDeletion = true } label: {
-                        Text(localizer.text("account.delete"))
-                            .font(.caption).foregroundStyle(Brand.warning)
-                            .frame(minHeight: 44)
-                    }
-                }
-                if let errorMessage { Text(errorMessage).font(.subheadline).foregroundStyle(.red) }
+                accountData
             }
             .buttonStyle(.plain)
             .padding(24)
@@ -656,6 +636,51 @@ struct AccountView: View {
         .navigationTitle(accountTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { if working { ToolbarItem(placement: .topBarTrailing) { ProgressView() } } }
+    }
+
+    /// The data kept, then the demo's, the device's or the account's own actions.
+    @ViewBuilder private var accountData: some View {
+        SettingsGroup(title: localizer.text("settings.yourData")) {
+            Button {
+                run { exportURL = try await store.exportAccount(); showingShareSheet = true }
+            } label: { SettingsRow(title: localizer.text("account.export"), symbol: "square.and.arrow.up") }
+            settingsDivider
+            Link(destination: session.configuration.privacyURL) {
+                SettingsRow(title: localizer.text("account.privacy"), symbol: "hand.raised", chevron: true)
+            }
+        }
+        if store.isDemo {
+            SettingsGroup(title: localizer.text("app.demo")) {
+                Button { confirmingDemoReset = true } label: {
+                    SettingsRow(title: localizer.text("native.resetDemo"), chevron: true)
+                }
+                settingsDivider
+                Button { session.showWelcome(); finish() } label: {
+                    SettingsRow(title: localizer.text("native.exitDemo"))
+                }
+            }
+        } else if store.isGuest {
+            if !store.parcels.isEmpty {
+                SettingsGroup {
+                    Button { confirmingForget = true } label: {
+                        SettingsRow(title: localizer.text("door.recents.forgetAll"))
+                    }
+                    .accessibilityIdentifier("settings.forgetAll")
+                }
+            }
+        } else {
+            SettingsGroup {
+                Button { run { try await store.signOut(); finish() } } label: {
+                    SettingsRow(title: localizer.text("account.signOut"))
+                }
+            }
+            Button { confirmation = ""; confirmingDeletion = true } label: {
+                Text(localizer.text("account.delete"))
+                    .font(.caption).foregroundStyle(Brand.warning)
+                    .frame(minHeight: 44)
+            }
+        }
+        if let errorMessage { Text(errorMessage).font(.subheadline).foregroundStyle(.red) }
     }
 
     private var accountInitial: String {
@@ -803,6 +828,38 @@ private struct SettingsRow: View {
     }
 }
 
+/// The app's language beside its label, or under it at the largest text sizes.
+private struct SettingsLanguageRow: View {
+    @EnvironmentObject private var localizer: Localizer
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    var body: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(localizer.text("language.label")).font(.subheadline)
+                picker
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(15)
+        } else {
+            HStack {
+                Text(localizer.text("language.label")).font(.subheadline)
+                Spacer()
+                picker
+            }
+            .frame(minHeight: 54)
+            .padding(.horizontal, 15)
+        }
+    }
+
+    private var picker: some View {
+        Picker(localizer.text("language.label"), selection: $localizer.language) {
+            ForEach(AppLanguage.allCases) { language in Text(language.nativeName).tag(language) }
+        }
+        .labelsHidden().pickerStyle(.menu).tint(.secondary)
+    }
+}
+
 private struct SettingsAppearancePicker: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -868,3 +925,92 @@ private struct SettingsAppearancePicker: View {
         .accessibilityHidden(true)
     }
 }
+
+#if os(macOS)
+/// A Mac's Settings window, where iOS has the Account sheet: General, Notifications for an account, then the account.
+struct SettingsWindow: View {
+    @EnvironmentObject private var session: SessionStore
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        TabView {
+            Tab(localizer.text("settings.general"), systemImage: "gearshape") {
+                GeneralSettings()
+            }
+            // Notifications come as pushes to an account, or the demo's.
+            if session.isAuthenticated {
+                Tab(localizer.text("settings.deliveryUpdates"), systemImage: "bell.badge") {
+                    NotificationSettingsView(embedded: true).frame(height: 540)
+                }
+            }
+            Tab(localizer.text("native.account"), systemImage: "person.crop.circle") {
+                AccountView().frame(height: 540)
+            }
+        }
+        .frame(width: 560)
+    }
+}
+
+/// How Peek looks and speaks, then its place in the menu bar and at login.
+private struct GeneralSettings: View {
+    @EnvironmentObject private var localizer: Localizer
+    @AppStorage(AppAppearance.storageKey) private var appearance = AppAppearance.defaultValue
+    @AppStorage(MenuBarExtraSettings.shownKey) private var menuBarShown = true
+    @State private var login = SMAppService.mainApp.status
+    @State private var loginError: String?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            SettingsGroup(title: localizer.text("settings.preferences")) {
+                SettingsAppearancePicker(appearance: $appearance)
+                settingsDivider
+                SettingsLanguageRow()
+            }
+            SettingsGroup {
+                Toggle(isOn: $menuBarShown) {
+                    SettingsRow(title: localizer.text("settings.menuBar"), symbol: "menubar.rectangle",
+                                detail: localizer.text("settings.menuBarDescription"), padded: false)
+                }
+                .rowToggle()
+                .padding(15)
+                settingsDivider
+                Toggle(isOn: Binding(get: { login == .enabled || login == .requiresApproval }, set: openAtLogin)) {
+                    SettingsRow(title: localizer.text("settings.openAtLogin"), symbol: "power", padded: false)
+                }
+                .rowToggle()
+                .padding(15)
+                // Registered, but the person still has to allow it.
+                if login == .requiresApproval {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(localizer.text("settings.openAtLoginApproval"))
+                            .font(.caption).foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Button(localizer.text("native.openSettings")) { SMAppService.openSystemSettingsLoginItems() }
+                    }
+                    .padding([.horizontal, .bottom], 15)
+                }
+            }
+            .tint(settingsGreen)
+            if let loginError { Text(loginError).font(.caption).foregroundStyle(.red) }
+        }
+        .padding(24)
+        .frame(maxWidth: 520)
+        .frame(maxWidth: .infinity)
+        .background(Brand.background)
+        // The person may change it in System Settings meanwhile.
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            login = SMAppService.mainApp.status
+        }
+    }
+
+    private func openAtLogin(_ on: Bool) {
+        loginError = nil
+        do {
+            if on { try SMAppService.mainApp.register() } else { try SMAppService.mainApp.unregister() }
+        } catch {
+            loginError = localizer.errorMessage(error)
+        }
+        login = SMAppService.mainApp.status
+    }
+}
+#endif

@@ -45,6 +45,9 @@ struct ParcelListView: View {
         .focusedSceneValue(\.tabsMenu, MenuBar.shown && !showsFirstOpen && !sheetOver ? TabsMenu(choose: choose) : nil)
         #if os(macOS)
         .onSheetOverMainWindow($sheetOver)
+        // A parcel or Add asked for from the menu bar: the deliveries take it, in front.
+        .onAppear { if MenuBarRequests.isPending { selection = 0 } }
+        .onReceive(NotificationCenter.default.publisher(for: .didMakeMenuBarRequest)) { _ in selection = 0 }
         #endif
         .accessibilityHidden(showsFirstOpen)
         .overlay {
@@ -443,6 +446,9 @@ private struct DeliveryListView: View {
         .onAppear {
             consumeSharedDraft()
             consumePendingParcelNotification()
+            #if os(macOS)
+            consumeMenuBarRequest()
+            #endif
         }
         .onDisappear { addedParcelID = nil; revealParcelID = nil; parcelBurstID = nil; flights = [] }
         .onChange(of: scenePhase) { _, phase in
@@ -464,6 +470,9 @@ private struct DeliveryListView: View {
             DeliveryAnalytics.shared.action("notification-open")
             openParcelNotification(AppDelegate.consumePendingParcelID() ?? (notification.object as? UUID))
         }
+        #if os(macOS)
+        .onReceive(NotificationCenter.default.publisher(for: .didMakeMenuBarRequest)) { _ in consumeMenuBarRequest() }
+        #endif
         .onOpenURL(perform: handleURL)
         .onChange(of: links.arrival, initial: true) { _, arrival in receive(arrival) }
         #if DEBUG
@@ -1541,6 +1550,21 @@ private struct DeliveryListView: View {
         guard let parcelID else { return }
         show(parcelID)
     }
+
+    #if os(macOS)
+    /// A parcel the menu bar showed, or Add from it, with what was pasted there.
+    private func consumeMenuBarRequest() {
+        switch MenuBarRequests.consume() {
+        case .parcel(let parcelID)?:
+            show(parcelID)
+        case .add(let request)?:
+            bringForward()
+            add(request)
+        case nil:
+            break
+        }
+    }
+    #endif
 
     /// A parcel kept from a link arrives like one just added; one already followed opens.
     private func receive(_ arrival: ParcelLinkStore.Arrival?) {

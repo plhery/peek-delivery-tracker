@@ -73,10 +73,38 @@ final class AppDelegate: NSObject, PlatformApplicationDelegate, UNUserNotificati
     func applicationDidFinishLaunching(_ notification: Notification) {
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().setBadgeCount(0)
+        // Opened at login, Peek waits in the menu bar. Its window is made and hidden, so the deliveries load as at
+        // any launch.
+        if MenuBarExtraSettings.shown && Self.launchedAtLogin {
+            DispatchQueue.main.async { NSApp.hide(nil) }
+        }
     }
 
     func applicationDidBecomeActive(_ notification: Notification) {
         UNUserNotificationCenter.current().setBadgeCount(0)
+    }
+
+    /// With Peek in the menu bar, closing the window leaves it running there.
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        !MenuBarExtraSettings.shown
+    }
+
+    /// Every notification that reaches the running app, in front or not: one about a parcel brings the menu bar's
+    /// deliveries up to date.
+    func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String: Any]) {
+        if case .parcel = NativeRoute(remoteNotification: userInfo) {
+            NotificationCenter.default.post(name: .didReceiveParcelNotification, object: nil)
+        }
+    }
+
+    /// Whether the system opened Peek as a login item.
+    private static var launchedAtLogin: Bool {
+        #if DEBUG
+        if UserDefaults.standard.bool(forKey: "sdt.debug.launchedAtLogin") { return true }
+        #endif
+        guard let event = NSAppleEventManager.shared().currentAppleEvent else { return false }
+        return event.eventID == AEEventID(kAEOpenApplication)
+            && event.paramDescriptor(forKeyword: AEKeyword(keyAEPropData))?.enumCodeValue == OSType(keyAELaunchedAsLogInItem)
     }
     #endif
 

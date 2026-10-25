@@ -1048,31 +1048,35 @@ final class ParcelStore: ObservableObject {
         scheduleDeliveryLiveActivities()
     }
 
+    /// The parcels on their way, the most pressing first, as the widget picks from them and a Mac's menu bar lists them.
+    var nextDeliveries: [DeliveryWidgetParcel] {
+        let ordered = ParcelOrganizer.visible(
+            parcels,
+            query: "",
+            status: .active,
+            carrier: nil,
+            sort: .priority
+        )
+        return ordered.map { parcel in
+            DeliveryWidgetParcel(
+                id: parcel.id,
+                label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
+                carrier: CarrierCatalog.shared.info(for: parcel.carrier, language: localizer.language).displayName,
+                trackingNumber: CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
+                detail: localizer.parcelDeliveryEstimate(parcel)
+                    ?? localizer.text(parcel.displayStatus.key),
+                isOutForDelivery: parcel.currentStage == .outForDelivery
+            )
+        }
+    }
+
     private func publishDeliveryWidget() {
         let snapshot: DeliveryWidgetSnapshot?
         if deliveryWidgetEnabled && (session.isAuthenticated || isGuest) {
-            let ordered = ParcelOrganizer.visible(
-                parcels,
-                query: "",
-                status: .active,
-                carrier: nil,
-                sort: .priority
-            )
-            let candidates = ordered.map { parcel in
-                DeliveryWidgetParcel(
-                    id: parcel.id,
-                    label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
-                    carrier: CarrierCatalog.shared.info(for: parcel.carrier, language: localizer.language).displayName,
-                    trackingNumber: CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
-                    detail: localizer.parcelDeliveryEstimate(parcel)
-                        ?? localizer.text(parcel.displayStatus.key),
-                    isOutForDelivery: parcel.currentStage == .outForDelivery
-                )
-            }
             snapshot = DeliveryWidgetSnapshot(
                 generatedAt: Date(),
                 languageCode: localizer.language.rawValue,
-                parcels: DeliveryWidgetSelection.displayParcels(from: candidates)
+                parcels: DeliveryWidgetSelection.displayParcels(from: nextDeliveries)
             )
         } else {
             snapshot = nil

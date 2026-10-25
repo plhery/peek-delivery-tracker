@@ -14,17 +14,24 @@ struct PeekDeliveryTrackerApp: App {
     @StateObject private var friendsActivity = FriendsActivityStore()
     @StateObject private var links: ParcelLinkStore
     @AppStorage(AppAppearance.storageKey) private var appearance = AppAppearance.defaultValue
+    #if os(macOS)
+    @AppStorage(MenuBarExtraSettings.shownKey) private var menuBarShown = true
+    #endif
 
     init() {
         let localizer = Localizer()
         let session = SessionStore(configuration: .current)
-        _localizer = StateObject(wrappedValue: localizer)
-        _session = StateObject(wrappedValue: session)
-        _parcels = StateObject(wrappedValue: ParcelStore(
+        let parcels = ParcelStore(
             configuration: .current,
             session: session,
             localizer: localizer
-        ))
+        )
+        _localizer = StateObject(wrappedValue: localizer)
+        _session = StateObject(wrappedValue: session)
+        _parcels = StateObject(wrappedValue: parcels)
+        #if os(macOS)
+        parcels.keepMenuBarCurrent()
+        #endif
         #if DEBUG
         _links = StateObject(wrappedValue: ParcelLinkStore.debugPreview() ?? ParcelLinkStore())
         #else
@@ -50,11 +57,16 @@ struct PeekDeliveryTrackerApp: App {
         .commands { PeekCommands(localizer: localizer) }
 
         Settings {
-            stores(AccountView())
-                .frame(width: 560)
-                .frame(minHeight: 520, idealHeight: 680)
+            stores(SettingsWindow())
         }
-        .windowResizability(.contentMinSize)
+        .windowResizability(.contentSize)
+
+        MenuBarExtra(isInserted: menuBarInserted) {
+            stores(MenuBarPanel())
+        } label: {
+            Image(nsImage: MenuBarExtraSettings.icon)
+        }
+        .menuBarExtraStyle(.window)
         #else
         WindowGroup {
             stores(RootView().background { AnalyticsLifecycleObserver() })
@@ -62,6 +74,14 @@ struct PeekDeliveryTrackerApp: App {
         .commands { PeekCommands(localizer: localizer) }
         #endif
     }
+
+    #if os(macOS)
+    /// Whether Peek is in the menu bar, which taking it out of there turns off too. SwiftUI sets it again as the
+    /// scene updates, so only a change is stored: storing the same value would update the scene again, without end.
+    private var menuBarInserted: Binding<Bool> {
+        Binding(get: { menuBarShown }, set: { if $0 != menuBarShown { menuBarShown = $0 } })
+    }
+    #endif
 
     private func stores(_ content: some View) -> some View {
         content
@@ -106,7 +126,8 @@ struct RootView: View {
             }
             }
         }
-        .task { await session.bootstrap() }
+        // Once a launch: a window opened again finds the session as it was left.
+        .task { if case .loading = session.state { await session.bootstrap() } }
         .onChange(of: sessionIdentity) { _, _ in friendsActivity.clear() }
         .task(id: sessionIdentity + (scenePhase == .active ? "-active" : "-hidden")) {
             guard session.user != nil else { friendsActivity.clear(); return }

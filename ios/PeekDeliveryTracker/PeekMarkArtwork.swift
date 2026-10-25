@@ -33,6 +33,22 @@ enum PeekMarkArtwork {
         context.restoreGState()
     }
 
+    /// Where the eyes lie in the frame.
+    static let eyesBounds = CGRect(x: 120, y: 185, width: 272, height: 154)
+
+    /// The eyes alone in the context's fill colour, the pupils cut out around their catchlights: a template image,
+    /// such as the one in a Mac's menu bar. Drawn in the frame's units, with y pointing down.
+    static func drawEyes(in context: CGContext) {
+        for eye in eyes { context.addPath(ellipse(190 + eye, 262, 70, 77)) }
+        context.fillPath()
+        context.setBlendMode(.clear)
+        for eye in eyes { context.addPath(ellipse(219.4 + eye, 269, 35, 35)) }
+        context.fillPath()
+        context.setBlendMode(.normal)
+        for eye in eyes { context.addPath(ellipse(207.5 + eye, 255, 10.5, 10.5)) }
+        context.fillPath()
+    }
+
     // MARK: Parts
 
     private static let yellow = color(0xF3CF48)

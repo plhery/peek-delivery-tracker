@@ -9,8 +9,9 @@ copy.
   Swift views.
 - `node scripts/generate-ios-resources.mjs --check` verifies key parity, placeholders,
   native references and generated output.
-- The iOS app also runs on iPad. Copy it shows that names the iPhone needs a `<key>.ipad`
-  variant, which an iPad reads instead; `ios:resources` refuses a key without one.
+- The iOS app also runs on iPad and Mac. Copy it shows that names the iPhone needs a `<key>.ipad`
+  variant, which an iPad reads instead, and a `<key>.mac` one for a Mac; `ios:resources` refuses
+  a key without them, unless only an iPhone or an iPad shows it.
 
 **Tone.** Informal and concise. Spanish and Portuguese are the European variants; Portuguese
 pages and emails declare `pt-PT`. In Portuguese the tracked parcel is always *encomenda*

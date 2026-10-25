@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { infoPlistStrings, keysNamingOnlyTheIPhone, nativeLocalizationReferences, nativeSwiftSources } from './native-localization.mjs';
+import {
+  infoPlistStrings, keysNamingOnlyTheIPhone, keysWithoutAMacVariant, nativeLocalizationReferences, nativeSwiftSources,
+} from './native-localization.mjs';
 import { locales, validateLocalizationCatalogs } from './localization-catalog.mjs';
 
 describe('Shared localization catalogs', () => {
@@ -112,6 +114,30 @@ describe('Copy that names the iPhone', () => {
     value.it['app.demo'] = 'Demo su iPhone';
     assert.deepEqual(keysNamingOnlyTheIPhone(new Set(['native.openSettings', 'app.demo']), value),
       ['app.demo', 'native.openSettings']);
+  });
+});
+
+describe('Copy a Mac shows instead of the iPad\'s', () => {
+  const catalogs = {
+    en: {
+      'native.openSettings': 'Open iPhone Settings', 'native.openSettings.ipad': 'Open iPad Settings',
+      'native.openSettings.mac': 'Open System Settings', 'liveActivity.systemDisabled.ipad': 'Off on this iPad',
+    },
+    it: {
+      'native.openSettings': 'Apri Impostazioni', 'native.openSettings.ipad': 'Apri Impostazioni',
+      'native.openSettings.mac': 'Apri Impostazioni di Sistema', 'liveActivity.systemDisabled.ipad': 'Disattivate su iPad',
+    },
+  };
+  const keys = new Set(['native.openSettings', 'liveActivity.systemDisabled']);
+
+  it('passes a key with a Mac variant in every language, and copy only an iPhone or an iPad shows', () => {
+    assert.deepEqual(keysWithoutAMacVariant(keys, catalogs), []);
+  });
+
+  it('names a key with an iPad variant but no Mac one', () => {
+    const value = structuredClone(catalogs);
+    delete value.it['native.openSettings.mac'];
+    assert.deepEqual(keysWithoutAMacVariant(keys, value), ['native.openSettings']);
   });
 });
 

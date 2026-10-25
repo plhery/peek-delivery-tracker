@@ -3,7 +3,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { TRACKING_CANDIDATE_PATTERNS } from 'universal-parcel-scraper';
 import { readBrandData, renderBrandJson } from './generate-brand.mjs';
-import { infoPlistStrings, keysNamingOnlyTheIPhone, nativeLocalizationReferences, nativeSwiftSources } from './native-localization.mjs';
+import {
+  infoPlistStrings, keysNamingOnlyTheIPhone, keysWithoutAMacVariant, nativeLocalizationReferences, nativeSwiftSources,
+} from './native-localization.mjs';
 import { readLocalizationCatalogs } from './localization-catalog.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -33,6 +35,10 @@ if (missingNativeReferences.length) {
 const iPhoneOnly = keysNamingOnlyTheIPhone(referencedKeys, languages);
 if (iPhoneOnly.length) {
   throw new Error(`The app also runs on iPad: give these keys an .ipad variant: ${iPhoneOnly.join(', ')}`);
+}
+const withoutMac = keysWithoutAMacVariant(referencedKeys, languages);
+if (withoutMac.length) {
+  throw new Error(`The app also runs on a Mac: give these keys a .mac variant: ${withoutMac.join(', ')}`);
 }
 
 const resources = path.join(root, 'ios', 'PeekDeliveryTracker', 'Resources');

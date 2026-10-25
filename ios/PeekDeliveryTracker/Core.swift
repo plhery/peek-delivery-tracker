@@ -199,11 +199,15 @@ final class Localizer: ObservableObject {
         let failures: [String: String]
     }
     private let trackingMessages: TrackingMessages
-    /// Where the copy names the iPhone, an iPad reads the key's `.ipad` variant.
-    private let onPad: Bool
+    /// Where the copy names the iPhone, an iPad reads the key's `.ipad` variant and a Mac its `.mac` one.
+    private let variant: String?
 
     init(bundle: Bundle = .main, onPad: Bool = DeviceIdiom.isPad) {
-        self.onPad = onPad
+        #if os(macOS)
+        variant = "mac"
+        #else
+        variant = onPad ? "ipad" : nil
+        #endif
         if let url = bundle.url(forResource: "TrackingMessages", withExtension: "json"),
            let data = try? Data(contentsOf: url),
            let decoded = try? JSONDecoder().decode(TrackingMessages.self, from: data) {
@@ -229,7 +233,7 @@ final class Localizer: ObservableObject {
 
     func text(_ key: String, _ variables: [String: CustomStringConvertible] = [:]) -> String {
         let messages = dictionaries[language.rawValue] ?? dictionaries["en"] ?? [:]
-        let key = onPad && messages["\(key).ipad"] != nil ? "\(key).ipad" : key
+        let key = variant.flatMap { messages["\(key).\($0)"] != nil ? "\(key).\($0)" : nil } ?? key
         let count = variables["count"].flatMap { Double($0.description) }
         let category: String
         if count == 1 {

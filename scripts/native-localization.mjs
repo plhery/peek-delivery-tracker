@@ -43,6 +43,18 @@ export function keysNamingOnlyTheIPhone(referencedKeys, catalogs) {
     .sort();
 }
 
+// Copy for what only an iPhone or an iPad has, which a Mac never shows.
+const iOSOnlyKeys = new Set(['liveActivity.systemDisabled']);
+
+/** The keys the app shows with an `.ipad` variant but no `.mac` one: a Mac names neither the iPhone nor the iPad. */
+export function keysWithoutAMacVariant(referencedKeys, catalogs) {
+  return [...referencedKeys]
+    .filter((key) => !key.endsWith('.ipad') && !key.endsWith('.mac') && !iOSOnlyKeys.has(key))
+    .filter((key) => Object.values(catalogs).some((catalog) => typeof catalog[`${key}.ipad`] === 'string'))
+    .filter((key) => !Object.values(catalogs).every((catalog) => typeof catalog[`${key}.mac`] === 'string'))
+    .sort();
+}
+
 const stringsEscapes = { '\\': '\\\\', '"': '\\"', '\n': '\\n', '\r': '\\r', '\t': '\\t' };
 const stringsLiteral = (text) => `"${text.replace(/[\\"\n\r\t]/g, (character) => stringsEscapes[character])}"`;
 

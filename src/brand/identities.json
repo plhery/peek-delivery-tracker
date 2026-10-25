@@ -865,6 +865,9 @@
   "fedex-freight": {
     "family": "fedex"
   },
+  "fedex-international-connect": {
+    "family": "fedex"
+  },
   "fedex-pl": {
     "family": "fedex"
   },

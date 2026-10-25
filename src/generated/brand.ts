@@ -27,6 +27,7 @@ export const CARRIER_FAMILIES: Record<string, string> = {
   "dpd-za": "dpd",
   "evri-uk": "evri",
   "fedex-freight": "fedex",
+  "fedex-international-connect": "fedex",
   "fedex-pl": "fedex",
   "geodis-pl": "geodis",
   "gls-at": "gls",
@@ -246,6 +247,9 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
     "accent": "#ff6600"
   },
   "fedex-freight": {
+    "accent": "#ff6600"
+  },
+  "fedex-international-connect": {
     "accent": "#ff6600"
   },
   "fedex-pl": {
@@ -780,6 +784,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "fastfrate": "fastfrate",
   "fedex": "fedex",
   "fedex-freight": "fedex",
+  "fedex-international-connect": "fedex",
   "fedex-pl": "fedex",
   "fermopoint": "fermopoint",
   "fg-delivery": "fg-delivery",

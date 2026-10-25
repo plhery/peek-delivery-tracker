@@ -865,15 +865,10 @@ private struct DeliveryListView: View {
     }
 
     #if os(macOS)
-    /// The account before adding and the parcel's menu (the window's toolbar puts the split view's items ahead of a
-    /// column's), on its own tile rather than on their glass.
-    @ToolbarContentBuilder private var macAccountToolbar: some ToolbarContent {
-        if #available(macOS 26.0, *) {
-            ToolbarItem(placement: .automatic) { accountButton }
-                .sharedBackgroundVisibility(.hidden)
-        } else {
-            ToolbarItem(placement: .automatic) { accountButton }
-        }
+    /// The account before adding and the parcel's menu: the window's toolbar puts the split view's items ahead of a
+    /// column's.
+    private var macAccountToolbar: some ToolbarContent {
+        AccountToolbarItem { showingAccount = true }
     }
     #endif
 

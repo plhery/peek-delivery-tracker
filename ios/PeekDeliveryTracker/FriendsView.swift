@@ -64,7 +64,7 @@ struct FriendsView: View {
             .scrollIndicators(.hidden).background(Brand.background)
             .safeAreaInset(edge: .top, spacing: 0) { DemoModeBar() }
             .navigationTitle(text("friends.title")).navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement: .topBarTrailing) { AccountToolbarButton { showingAccount = true } } }
+            .toolbar { AccountToolbarItem { showingAccount = true } }
             .refreshable { await model.load(parcels: parcels.parcels) }
             .navigationDestination(item: $openFriend) { friendPage($0) }
             .task(id: focusReady ? activity.presentationID.uuidString : "waiting") {

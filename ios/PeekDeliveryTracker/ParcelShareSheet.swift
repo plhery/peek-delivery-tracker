@@ -284,6 +284,7 @@ struct ParcelShareSheet: View {
                 }
             }
         }
+        .rowToggle()
         .tint(ExperimentalPalette.delivered)
         .disabled(model.loading)
         .padding(.horizontal, 14)

@@ -149,6 +149,7 @@ struct NotificationSettingsView: View {
                                     }
                                 }
                             ))
+                            .rowToggle()
                             .tint(settingsGreen)
                         }
                     }
@@ -323,6 +324,7 @@ struct DeliveryEmailSettings: View {
                     SettingsRow(title: localizer.text("email.setting.title"), symbol: "envelope",
                                 detail: localizer.text("email.setting.body", ["email": address]), padded: false)
                 }
+                .rowToggle()
                 .padding(15)
                 .disabled(saving)
                 .accessibilityIdentifier("settings.deliveryEmail")
@@ -399,6 +401,7 @@ struct AccountView: View {
                         Toggle(isOn: Binding(get: { store.deliveryWidgetEnabled }, set: { store.setDeliveryWidgetEnabled($0) })) {
                             SettingsRow(title: localizer.text("widget.settingTitle"), symbol: "rectangle.3.group", detail: localizer.text("widget.settingDescription"), padded: false)
                         }
+                        .rowToggle()
                         .padding(15)
                         .accessibilityIdentifier("settings.widgets")
                         if !store.isGuest && ParcelStore.offersLiveActivities {
@@ -406,6 +409,7 @@ struct AccountView: View {
                             Toggle(isOn: Binding(get: { store.deliveryLiveActivitiesEnabled }, set: { store.setDeliveryLiveActivitiesEnabled($0) })) {
                                 SettingsRow(title: localizer.text("liveActivity.settingTitle"), symbol: "wave.3.right", detail: localizer.text("liveActivity.settingDescription"), padded: false)
                             }
+                            .rowToggle()
                             .padding(15)
                             .accessibilityIdentifier("settings.liveActivities")
                         }

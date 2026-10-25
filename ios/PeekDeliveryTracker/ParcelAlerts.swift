@@ -148,6 +148,7 @@ struct ParcelAlertSwitches: View {
                 .fixedSize(horizontal: false, vertical: true)
             }
         }
+        .rowToggle()
         .tint(ExperimentalPalette.delivered)
         .disabled(saving != nil)
         .padding(.horizontal, 14)

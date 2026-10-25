@@ -851,7 +851,7 @@ struct FriendsSignedOutView: View {
             .background(Brand.background)
             .navigationTitle(localizer.text("friends.title"))
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement: .topBarTrailing) { AccountToolbarButton { showingAccount = true } } }
+            .toolbar { AccountToolbarItem { showingAccount = true } }
             .sheet(isPresented: $showingAccount) { AccountView().formOnPad() }
         }
     }

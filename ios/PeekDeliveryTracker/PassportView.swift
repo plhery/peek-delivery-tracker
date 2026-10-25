@@ -53,11 +53,7 @@ struct PassportView: View {
             .safeAreaInset(edge: .top, spacing: 0) { DemoModeBar() }
             .navigationTitle(copy.passport)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    AccountToolbarButton { showingAccount = true }
-                }
-            }
+            .toolbar { AccountToolbarItem { showingAccount = true } }
         }
         .sheet(isPresented: $showingAccount) { AccountView().formOnPad() }
         .sensoryFeedback(.impact(weight: .light, intensity: 0.65), trigger: touchCount)

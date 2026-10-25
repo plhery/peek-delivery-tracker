@@ -144,6 +144,24 @@ struct AppWindowAppearance: UIViewRepresentable {
 }
 #endif
 
+/// The account at a tab's trailing edge. On a Mac it stands on its own tile, off the toolbar's glass, as the mark does.
+struct AccountToolbarItem: ToolbarContent {
+    let action: () -> Void
+
+    var body: some ToolbarContent {
+        #if os(macOS)
+        if #available(macOS 26.0, *) {
+            ToolbarItem(placement: .topBarTrailing) { AccountToolbarButton(action: action) }
+                .sharedBackgroundVisibility(.hidden)
+        } else {
+            ToolbarItem(placement: .topBarTrailing) { AccountToolbarButton(action: action) }
+        }
+        #else
+        ToolbarItem(placement: .topBarTrailing) { AccountToolbarButton(action: action) }
+        #endif
+    }
+}
+
 extension View {
     /// A field the screen draws itself, as iOS leaves it. A Mac would draw its own bezel inside, and a sheet doesn't
     /// take a field style from the window under it, so each field asks.
@@ -155,6 +173,33 @@ extension View {
         #endif
     }
 }
+
+extension View {
+    /// A toggle as an iOS row draws it: the label across the row and a switch at its end. A Mac would put a checkbox
+    /// before the label, and a sheet doesn't take a toggle style from the window under it, so each toggle asks.
+    @ViewBuilder func rowToggle() -> some View {
+        #if os(macOS)
+        toggleStyle(RowToggleStyle())
+        #else
+        self
+        #endif
+    }
+}
+
+#if os(macOS)
+private struct RowToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 12) {
+            configuration.label
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Toggle("", isOn: configuration.$isOn)
+                .toggleStyle(.switch)
+                .labelsHidden()
+        }
+        .accessibilityRepresentation { Toggle(isOn: configuration.$isOn) { configuration.label } }
+    }
+}
+#endif
 
 /// One account entry point, shared by the tabs. ⌘, opens it from the screen in front, as Settings opens elsewhere.
 /// On a Mac the account is the Settings window, which ⌘, opens from the app's menu: the button opens it too.

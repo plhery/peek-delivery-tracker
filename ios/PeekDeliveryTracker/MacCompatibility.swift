@@ -33,13 +33,15 @@ extension View {
 
     func toolbar(_ visibility: Visibility, for bars: IOSBar...) -> some View { self }
 
-    /// A sheet where iOS covers the screen.
+    /// A large sheet where iOS covers the screen: what it covers with (the map) has no size of its own.
     func fullScreenCover<Content: View>(
         isPresented: Binding<Bool>,
         onDismiss: (() -> Void)? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View {
-        sheet(isPresented: isPresented, onDismiss: onDismiss, content: content)
+        sheet(isPresented: isPresented, onDismiss: onDismiss) {
+            content().frame(minWidth: 720, idealWidth: 1000, minHeight: 520, idealHeight: 720)
+        }
     }
 }
 

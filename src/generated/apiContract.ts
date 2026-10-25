@@ -28796,7 +28796,7 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "ocs-ana",
       "recognitionRank": 706
     },
-    "trackingUrlTemplate": "https://www2.ocsworldwide.net/ExpTracking/cwbCheck.php?cwbno={trackingNumber}",
+    "trackingUrlTemplate": "https://webcsw.ocs.co.jp/csw/ECSWG0201R00003P.do?cwbno={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -28818,7 +28818,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www2.ocsworldwide.net/ExpTracking/cwbCheck.html"
+    "trackingSearchUrl": "https://webcsw.ocs.co.jp/csw/ECSWG0201R00003P.do"
   },
   "pushpak-courier": {
     "displayName": "Pushpak Courier",
@@ -31466,6 +31466,40 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://stone3pl.com/?route=services/track"
+  },
+  "maersk-ecommerce": {
+    "displayName": "Maersk eCommerce",
+    "aliases": [
+      "Maersk Logistics And Services USA Inc",
+      "Maersk Parcel"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#42b0d5",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "maersk-ecommerce",
+      "recognitionRank": 501
+    },
+    "trackingUrlTemplate": "https://www.maersk.com/tracking/parcel/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "maersk.com"
+        ],
+        "path": "^/tracking/parcel/([A-Za-z0-9]{19})/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^1M(?=[A-Z0-9]{0,6}[A-Z])[A-Z0-9]{7}\\d{10}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.maersk.com/tracking/parcel"
   }
 } as const;
 
@@ -32314,7 +32348,8 @@ export const CARRIER_IDS = [
   "castle-parcels",
   "now-couriers",
   "intel-valley",
-  "stone3pl"
+  "stone3pl",
+  "maersk-ecommerce"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

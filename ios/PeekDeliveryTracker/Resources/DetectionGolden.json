@@ -21310,11 +21310,41 @@
     ]
   },
   {
+    "input": "1MCAINIXX0000451922",
+    "carrier": "aliexpress",
+    "confidence": "high",
+    "candidates": [
+      "aliexpress"
+    ]
+  },
+  {
     "input": "1MCAINIXX0000484416",
     "carrier": "aliexpress",
     "confidence": "high",
     "candidates": [
       "aliexpress"
+    ]
+  },
+  {
+    "input": "1MSPRDNAB0045866818",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "maersk-ecommerce"
+    ],
+    "asked": [
+      "maersk-ecommerce"
+    ]
+  },
+  {
+    "input": "1MX1234A90022351373",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "maersk-ecommerce"
+    ],
+    "asked": [
+      "maersk-ecommerce"
     ]
   },
   {

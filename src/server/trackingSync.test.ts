@@ -6543,7 +6543,7 @@ describe('reworded DPD scans', () => {
     ]);
   });
 
-  it('shares one row per scan with a universal copy, whichever source answered last', async () => {
+  it('shares one row per scan with a universal copy, in the carrier\'s words once it answers', async () => {
     vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
     const store = eventStore();
     const client = { ...store.client,
@@ -6586,14 +6586,14 @@ describe('reworded DPD scans', () => {
     // DPD takes over the universal rows at the same instants.
     expect(await sync(null)).toEqual(universalIds);
     expect(store.rows.get(universalIds[0]!)).toMatchObject({ description: 'Delivered', location: null });
-    // The universal copy finds its own identities stored and takes the rows back.
-    expect(await sync(null)).toEqual(universalIds);
-    expect(store.rows.get(universalIds[0]!)).toMatchObject({ description: 'Delivered to recipient', location: 'Urdorf' });
+    // The universal copy finds its own identities in DPD's words and leaves them.
+    expect(await sync(null)).toEqual([]);
+    expect(store.rows.get(universalIds[0]!)).toMatchObject({ description: 'Delivered', location: null });
     // The verified reply takes them over again; only its customs scan is new.
     const verifiedIds = await sync('8000');
     expect(verifiedIds.slice(0, 4)).toEqual(universalIds);
     expect(verifiedIds[4]).toBe(providerEventId('dpd', '2026-07-15T16:30:00+02:00', '', 'Your parcel cleared customs successfully'));
-    expect(await sync('8000')).toEqual(universalIds);
+    expect(await sync('8000')).toEqual([]);
 
     expect(adapter.fetchUniversal).toHaveBeenCalledTimes(3);
     expect(store.rows.size).toBe(5);
@@ -6737,8 +6737,8 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(await sync('in_transit')).toEqual([first]);
     expect((client.applyTrackingSync.mock.calls.at(-1) as unknown[] | undefined)?.[4]).toEqual([second]);
     expect([...store.rows.values()]).toMatchObject([{ id: copiedRow, description: hub.description, location: 'Hub City, EX' }]);
-    // Down again: the provider rewords the row GOFO holds, and its other reading stays out.
-    expect(await sync('in_transit')).toEqual([first]);
+    // Down again: both of the provider's readings of the row GOFO holds stay out.
+    expect(await sync('in_transit')).toEqual([]);
     expect(store.rows.size).toBe(1);
     expect(await sync('in_transit')).toEqual([first]);
     expect([...store.rows.values()]).toMatchObject([{ id: copiedRow, description: hub.description }]);

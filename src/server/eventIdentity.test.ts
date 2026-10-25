@@ -724,13 +724,14 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(sharedScans([scan('dhl:out', '2026-01-04T12:59:03Z', 'Out for Delivery')], carrier).reused.size).toBe(0);
   });
 
-  it('never lets a universal reply move a row a carrier corrected, but lets it reword the row in place', () => {
+  it('never lets a universal reply move or reword a row a carrier corrected', () => {
     const corrected = [row('unknown:out', '2026-01-04T12:59:03+00:00', 'Out for Delivery')];
     const late = sharedScans([scan('unknown:out', '2026-01-04T15:59:03Z', 'Out for Delivery')], corrected);
     expect(pairs(late.skipped)).toEqual([['unknown:out', 'unknown:out']]);
     expect([...late.shifted]).toEqual(['unknown:out']);
     const sameInstant = sharedScans([scan('unknown:out', '2026-01-04T12:59:03Z', 'With delivery courier')], corrected);
-    expect(sameInstant.skipped.size + sameInstant.reused.size).toBe(0);
+    expect(pairs(sameInstant.skipped)).toEqual([['unknown:out', 'unknown:out']]);
+    expect(sameInstant.reused.size + sameInstant.shifted.size).toBe(0);
     // A carrier's scan whose own identity is stored is left to the upsert.
     const own = sharedScans([scan('gofo:out', '2026-01-04T12:59:03Z', 'Out for Delivery')], [row('gofo:out', '2026-01-04T12:59:03+00:00', 'Out for Delivery')]);
     expect(own.skipped.size + own.reused.size).toBe(0);
@@ -1281,11 +1282,15 @@ describe('every copy at a carrier scan\'s instant', () => {
       copy('unknown:c', 'Departed', 'in_transit'), scan('unknown:d', instant, 'Unclassified')], [carrier]);
     // The copy in another stage too; not an unclassified one.
     expect(pairs(shared.skipped)).toEqual([['unknown:a', 'speedaf:accepted'], ['unknown:b', 'speedaf:accepted'], ['unknown:c', 'speedaf:accepted']]);
-    // A row the carrier took over names no provider: the provider rewrites it, and its other copy stays out.
+    // A row the carrier took over names no provider and keeps the carrier's words: the provider's copies stay out, its own too.
     const takenOver = row('unknown:a', instant, 'Guangzhou warehouse', 'accepted');
     const again = sharedScans([copy('unknown:a', 'Arrived at departure transport hub', 'pending'),
       copy('unknown:b', 'Guangzhou warehouse, International logistics', 'pending')], [takenOver]);
-    expect(pairs(again.skipped)).toEqual([['unknown:b', 'unknown:a']]);
+    expect(pairs(again.skipped)).toEqual([['unknown:a', 'unknown:a'], ['unknown:b', 'unknown:a']]);
+    // The carrier's place too; a row in the provider's own words and place, stored before rows named it, takes its rewrite.
+    const placedCopy = { ...copy('unknown:a', 'Guangzhou warehouse', 'accepted'), location: 'Guangzhou, GD, CN' };
+    expect(pairs(sharedScans([placedCopy], [{ ...takenOver, location: 'GUANGZHOU CN' }]).skipped)).toEqual([['unknown:a', 'unknown:a']]);
+    expect(sharedScans([placedCopy], [{ ...takenOver, location: 'Guangzhou, GD, CN' }]).skipped.size).toBe(0);
     // Another provider's row is no carrier's.
     expect(sharedScans([copy('unknown:b', 'Guangzhou warehouse, International logistics', 'pending'),
       copy('unknown:e', 'Sorted', 'pending')], [named(takenOver, 'Ship24')]).skipped.size).toBe(0);

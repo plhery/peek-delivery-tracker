@@ -43,7 +43,7 @@
  * - A row only a universal provider has written names that provider
  *   (`UNIVERSAL_PROVIDER`), and follows the provider's clock when a scraper
  *   fix moves it. A carrier's scan writes the row without the name, so the
- *   row keeps the carrier's instant from then on.
+ *   row keeps the carrier's instant and words from then on.
  * - A universal copy stored a zone away from a carrier's row of the scan,
  *   before a fix read the provider's clock right, goes with any check
  *   (`sharedScans`). So does one that shows the carrier scan's wall clock
@@ -813,8 +813,9 @@ export function retimedScans(
  * row whose zone the scraper deduced, at the row's wall clock: it takes the row
  * over, and the carrier's scan keeps that offset (`withStatedClocks`). A universal scan whose own identity
  * is stored at another instant is left out too: a carrier's scan has taken that row over and corrected
- * its time. At the same instant a universal scan still rewrites its own row,
- * so a row DPD took over follows whichever source answered last.
+ * its time. So is one whose own row a carrier's scan took over at its instant in other words or at
+ * another place, so the row keeps the carrier's words instead of switching with each source that
+ * answers (ParcelsApp's copies of FedEx's scans while FedEx's own lookup is challenged).
  *
  * At each instant of the batch's classified carrier scans, every other
  * universal row from no conflicting place copies one of them, in whatever
@@ -891,6 +892,8 @@ export function sharedScans(
       if (followsClock(own, event)) moving.push(event);
       else shared.skipped.set(id, id);
       if (!sameTruncated(instantOf(own), instantOf(event)) && !dayAlone(own) && !dayAlone(event)) shared.shifted.add(id);
+    } else if (source === UNIVERSAL && heldByCarrier(own) && (wordingOf(own) !== wordingOf(event) || placeOf(own) !== placeOf(event))) {
+      shared.skipped.set(id, id);
     }
   }
   const newAt = new Map<number, number>();

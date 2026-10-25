@@ -42,8 +42,9 @@ The browser tests use the fictional demo data at desktop and mobile sizes.
 - **API changes** start in `contracts/openapi.json`; regenerate the types from it.
 - **Carriers** live in [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper):
   fix an adapter or [add a carrier](https://github.com/plhery/universal-parcel-scraper/blob/main/CONTRIBUTING.md)
-  there, then [update the dependency](docs/SCRAPER.md) here. Never edit the generated
-  carrier catalog in the contract by hand.
+  there. The app [adopts its releases](docs/SCRAPER.md) by itself, and the maintainers write
+  the migration a new carrier id or input needs, so a carrier needs no pull request here.
+  Never edit the generated carrier catalog in the contract by hand.
 - **Privacy notice**: edit `PRIVACY.md`, then run `npm run privacy`. It writes
   `public/privacy.html`, the page both apps open.
 - **Help page**: edit `SUPPORT.md`, then run `npm run support`. It writes

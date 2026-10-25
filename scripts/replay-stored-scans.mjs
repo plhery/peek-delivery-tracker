@@ -1,10 +1,11 @@
 // A dry run of the installed scraper release over production's stored scans, asking no provider
 // (docs/SCRAPER.md). `--query` prints the read-only export to run on the database; its output, one
 // parcel a line, goes to stdin. `--from <version>` replays the rows with that earlier release too
-// and keeps the rows it reads as they are stored: the ones this release changes. The report names
-// rows by their ids' first eight characters and shows no number, place or wording. `--sql <file>`
-// writes the guarded transaction that would apply the changes, `--source <a,b>` keeps the rows of
-// those sources only.
+// and keeps the rows it reads as they are stored: the ones this release changes. It takes
+// 0.621.0-main.2946 or later, the first release to export `carrierHomeZone`, which the replay
+// imports; an older one fails on that import. The report names rows by their ids' first eight
+// characters and shows no number, place or wording. `--sql <file>` writes the guarded transaction
+// that would apply the changes, `--source <a,b>` keeps the rows of those sources only.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';

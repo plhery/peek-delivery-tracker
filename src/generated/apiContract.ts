@@ -937,7 +937,12 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^\\d{20}00\\d{12}$",
+        "pattern": "^(?!420)\\d{20}00\\d{12}$",
+        "confidence": "high",
+        "checksum": "fedex-1d"
+      },
+      {
+        "pattern": "^420\\d{17}00\\d{12}$",
         "confidence": "low",
         "checksum": "fedex-1d",
         "preferred": true
@@ -31543,6 +31548,40 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.dpd.com/hu/hu/"
+  },
+  "fedex-international-connect": {
+    "displayName": "FedEx International Connect",
+    "aliases": [
+      "FedEx International Connect (FIC)"
+    ],
+    "countries": [
+      "GB"
+    ],
+    "color": "#4d148c",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://fictracking.fedex.com/?MyFICNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "fictracking.fedex.com"
+        ],
+        "params": [
+          "MyFICNumber"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^[A-Z]{3}\\d{4}[A-Z]{2}\\d{11}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://fictracking.fedex.com/"
   }
 } as const;
 
@@ -32393,7 +32432,8 @@ export const CARRIER_IDS = [
   "intel-valley",
   "stone3pl",
   "maersk-ecommerce",
-  "dpd-hu"
+  "dpd-hu",
+  "fedex-international-connect"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

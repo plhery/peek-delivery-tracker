@@ -9999,12 +9999,9 @@
   },
   {
     "input": "1001921334250001000300779017972697",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "fedex",
+    "confidence": "high",
     "candidates": [
-      "fedex"
-    ],
-    "preferred": [
       "fedex"
     ]
   },
@@ -38753,6 +38750,17 @@
     ]
   },
   {
+    "input": "4200000000000000000000700000000021",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex"
+    ],
+    "preferred": [
+      "fedex"
+    ]
+  },
+  {
     "input": "4200000000009205596900893430673167",
     "carrier": "usps",
     "confidence": "high",
@@ -63004,12 +63012,9 @@
   },
   {
     "input": "9622001560001234567100794808390594",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "fedex",
+    "confidence": "high",
     "candidates": [
-      "fedex"
-    ],
-    "preferred": [
       "fedex"
     ]
   },
@@ -63021,12 +63026,9 @@
   },
   {
     "input": "9622001900000000000000776632517510",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "fedex",
+    "confidence": "high",
     "candidates": [
-      "fedex"
-    ],
-    "preferred": [
       "fedex"
     ]
   },
@@ -63088,34 +63090,25 @@
   },
   {
     "input": "9632001560123456789900794808390594",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "fedex",
+    "confidence": "high",
     "candidates": [
-      "fedex"
-    ],
-    "preferred": [
       "fedex"
     ]
   },
   {
     "input": "9632001960123456789400152152152158",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "fedex",
+    "confidence": "high",
     "candidates": [
-      "fedex"
-    ],
-    "preferred": [
       "fedex"
     ]
   },
   {
     "input": "9632080400123456789400152152152158",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "fedex",
+    "confidence": "high",
     "candidates": [
-      "fedex"
-    ],
-    "preferred": [
       "fedex"
     ]
   },
@@ -83431,9 +83424,11 @@
   },
   {
     "input": "NOR0012GB00002606001",
-    "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "carrier": "fedex-international-connect",
+    "confidence": "high",
+    "candidates": [
+      "fedex-international-connect"
+    ]
   },
   {
     "input": "NP00000001885813NPG",
@@ -84328,6 +84323,14 @@
     "confidence": "high",
     "candidates": [
       "pargo"
+    ]
+  },
+  {
+    "input": "PAR3450DK74052034501",
+    "carrier": "fedex-international-connect",
+    "confidence": "high",
+    "candidates": [
+      "fedex-international-connect"
     ]
   },
   {
@@ -95259,6 +95262,14 @@
     "asked": [
       "tnt-it",
       "gls-it"
+    ]
+  },
+  {
+    "input": "ZZZ0000GB00000000017",
+    "carrier": "fedex-international-connect",
+    "confidence": "high",
+    "candidates": [
+      "fedex-international-connect"
     ]
   },
   {

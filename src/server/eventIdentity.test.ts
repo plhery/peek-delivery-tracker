@@ -1519,6 +1519,74 @@ describe('a provider\'s copies on a carrier\'s wall clocks under another offset'
   });
 });
 
+describe('a provider\'s scans on a clock whole hours off another provider\'s', () => {
+  // One provider dated a post's scans right; the other read the post's summer time as London's, an hour late, in words of its own.
+  const theirs = (id: string, at: string, description: string, values: JsonObject = {}) => ({
+    ...row(`unknown:early-${id}`, at, description, 'in_transit'), location: 'United Kingdom',
+    raw_data: { universal_provider: 'ParcelsApp' }, ...values,
+  });
+  const ours = (id: string, at: string, description: string, values: JsonObject = {}) => ({
+    ...scan(`unknown:late-${id}`, at, description, 'in_transit'), raw_data: { universal_provider: '17TRACK' }, ...values,
+  });
+  const stored = [
+    theirs('received', '2026-10-22T01:21:00+00:00', 'The item is received by the post'),
+    theirs('processed', '2026-10-22T01:22:00+00:00', 'The item is processed at the sorting center'),
+    theirs('transport', '2026-10-22T01:23:00+00:00', 'The item is on transport to the country of destination'),
+    theirs('at-centre', '2026-10-22T02:21:00+00:00', 'The item is at the sorting center'),
+    theirs('sorted', '2026-10-22T02:21:00+00:00', 'The item is processed at the sorting center'),
+  ];
+  const received = ours('received', '2026-10-22T02:21:00Z', 'RECEIVED BY PARTNER CARRIER');
+  const processed = ours('processed', '2026-10-22T02:22:00Z', 'PROCESSED INTERNATIONAL FREIGHT DEPOT');
+  const transit = ours('transit', '2026-10-22T02:23:00Z', 'IN TRANSIT');
+  const depot = ours('depot', '2026-10-22T03:21:00Z', 'RECEIVED INTERNATIONAL FREIGHT DEPOT');
+  const sorted = ours('sorted', '2026-10-22T03:21:00Z', 'PROCESSED INTERNATIONAL FREIGHT DEPOT');
+  const departed = ours('departed', '2026-10-22T03:40:41Z', 'DEPARTED SITE');
+  const answer = [received, processed, transit, depot, sorted, departed];
+  const left = (events: JsonObject[], rows: JsonObject[] = stored) => [...sharedScans(events, rows).skipped.keys()].sort();
+
+  it('stay out with the shift flagged, one at the instant of the other provider\'s own scans too', () => {
+    const shared = sharedScans(answer, stored);
+    const copies = ['unknown:late-depot', 'unknown:late-processed', 'unknown:late-received', 'unknown:late-sorted', 'unknown:late-transit'];
+    expect([...shared.skipped.keys()].sort()).toEqual(copies);
+    expect([...shared.shifted].sort()).toEqual(copies);
+    expect(shared.skipped.get('unknown:late-received')).toBe('unknown:early-received');
+    expect(shared.skipped.get('unknown:late-transit')).toBe('unknown:early-transport');
+    expect(['unknown:early-at-centre', 'unknown:early-sorted']).toContain(shared.skipped.get('unknown:late-depot'));
+    expect(shared.reused.size + shared.absorbed.size).toBe(0);
+  });
+
+  it('stay out when the provider that came first read the clock right, whichever provider it is', () => {
+    // China Post's scans as 17TRACK dated them, and ParcelsApp's copies in whole minutes on China's wall clock read as UTC.
+    const china = [
+      { ...theirs('posted', '2026-10-10T07:55:49+00:00', 'Posted', { stage: 'accepted' }), raw_data: { universal_provider: '17TRACK' } },
+      { ...theirs('sorting', '2026-10-10T11:55:37+00:00', 'Sorted, ready to leave'), raw_data: { universal_provider: '17TRACK' } },
+      { ...theirs('export', '2026-10-10T13:58:35+00:00', 'Handed to export customs', { stage: 'customs' }),
+        raw_data: { universal_provider: '17TRACK' } },
+    ];
+    const copy = (id: string, at: string, description: string, stage: string) =>
+      ({ ...scan(`unknown:${id}`, at, description, stage), location: null });
+    expect(left([copy('posting', '2026-10-10T15:55:00Z', 'Posting/Collection', 'accepted'),
+      copy('departed', '2026-10-10T19:55:00Z', 'Departed office of exchange', 'in_transit'),
+      copy('customs', '2026-10-10T21:58:00Z', 'Presented to export customs', 'customs')], china))
+      .toEqual(['unknown:customs', 'unknown:departed', 'unknown:posting']);
+  });
+
+  it('are kept when one scan alone shows the shift, when as many meet the other\'s instants, or in another stage or place', () => {
+    const flagged = (events: JsonObject[], rows: JsonObject[] = stored) => [...sharedScans(events, rows).shifted].sort();
+    expect(flagged([received, departed])).toEqual([]);
+    expect(flagged([processed])).toEqual([]);
+    // Two scans at the other provider's own instants weigh as much as two at the shift.
+    expect(flagged([ours('a', '2026-10-22T01:21:00Z', 'Arrived'), ours('b', '2026-10-22T01:22:00Z', 'Sorted'), transit, depot])).toEqual([]);
+    expect(flagged([processed, { ...transit, stage: 'delivered' }])).toEqual([]);
+    expect(flagged([processed, transit].map((item) => ({ ...item, location: 'Amsterdam' })),
+      stored.map((item) => ({ ...item, location: 'Example City' })))).toEqual([]);
+    // A provider's own rows, and scans at whole hours, show no other provider's clock.
+    expect(flagged([processed, transit], stored.map((item) => ({ ...item, raw_data: { universal_provider: '17TRACK' } })))).toEqual([]);
+    expect(flagged([ours('x', '2026-10-22T03:00:00Z', 'Arrived at hub'), ours('y', '2026-10-22T05:00:00Z', 'Arrived at hub')],
+      [theirs('x', '2026-10-22T02:00:00+00:00', 'Hub'), theirs('y', '2026-10-22T04:00:00+00:00', 'Hub')])).toEqual([]);
+  });
+});
+
 describe('a stage change the sync saw without a time', () => {
   const sighting = { ...row('dpd-uk:observed', '2026-10-20T16:11:32.240+00:00', 'Order details received', 'registered'),
     location: null, observed_without_provider_timestamp: true };

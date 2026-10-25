@@ -654,6 +654,38 @@ function wallClockReaders(copies: readonly JsonObject[], scans: readonly JsonObj
   return new Set([...read].filter(([, scans]) => scans.size >= 2).map(([provider]) => provider));
 }
 
+/** A scan with a clock to compare: not dated by its day alone, nor at a whole hour, which unrelated scans share by chance. */
+function minuteClock(row: JsonObject): boolean {
+  return !dayAlone(row) && instantOf(row) % HOUR_MS !== 0;
+}
+
+/** Another provider's row that can name a scan: stages that agree, places that do not conflict. */
+function alike(scan: JsonObject, row: JsonObject): boolean {
+  return stagesAgree(stageOf(scan), stageOf(row)) && !placesConflict(placeWords(scan), placeWords(row));
+}
+
+/**
+ * The shift most of a provider's scans show from another provider's rows that are alike, in whole
+ * quarter hours up to 14 h (`zoneShift`): two instants at least, more than any other shift and more
+ * than meet a row at their own instant. One of the two reads the parcel's clock in another zone, in
+ * wording and places of its own: 17TRACK read a Dutch post's summer time as London's, ParcelsApp
+ * China Post's as UTC. Zero when no shift stands out.
+ */
+function providerShift(scans: readonly JsonObject[], rows: readonly JsonObject[]): number {
+  const shifts = new Map<number, Set<number>>();
+  for (const scan of scans) {
+    for (const row of rows) {
+      if (!alike(scan, row)) continue;
+      const same = instantOf(scan) === instantOf(row) || sameTruncated(instantOf(scan), instantOf(row));
+      const shift = same ? 0 : zoneShift(instantOf(scan), instantOf(row));
+      if (same || shift !== 0) shifts.set(shift, (shifts.get(shift) ?? new Set<number>()).add(instantOf(scan)));
+    }
+  }
+  const met = shifts.get(0)?.size ?? 0;
+  const [first, second] = [...shifts].filter(([shift]) => shift !== 0).sort(([, left], [, right]) => right.size - left.size);
+  return first && first[1].size >= 2 && first[1].size > met && (!second || second[1].size < first[1].size) ? first[0] : 0;
+}
+
 export interface SharedScans {
   /**
    * A scan's computed identity → the stored row it takes over in place: a
@@ -797,6 +829,14 @@ export function retimedScans(
  * no provider, is left out, so an absorbed copy does not come back with the
  * provider's next answer. Of several such rows it repeats the one whose wording
  * opens alike, when one alone does, else the first.
+ *
+ * A provider's scan that matched nothing repeats another provider's row at the
+ * shift most of its scans show from that provider's rows, in whole quarter
+ * hours up to 14 h, in any wording, with stages that agree and places that do
+ * not conflict: two instants at least, more than any other shift and more than
+ * meet a row at their own instant (17TRACK's copies of a Dutch post's scans,
+ * its summer time read as London's). It is left out and the shift flagged.
+ * Scans dated by their day alone or at a whole hour do not count.
  *
  * A row that only the scan's universal provider has written follows that
  * provider's clock instead (a scraper fix that reads its scans in another
@@ -955,6 +995,29 @@ export function sharedScans(
     if (sourceOf(id) !== UNIVERSAL || shared.skipped.has(id) || shared.reused.has(id)) continue;
     const twin = heldCopy(event);
     if (twin) shared.skipped.set(id, identity(twin));
+  }
+  // A provider's scan that matched nothing, at the shift most of its scans show from another provider's
+  // rows (`providerShift`), repeats the row there: the row holds the scan, and the shift is flagged.
+  const unmatched = pending.filter((event) => sourceOf(identity(event)) === UNIVERSAL && providerOf(event) !== ''
+    && !shared.skipped.has(identity(event)) && !shared.reused.has(identity(event)) && minuteClock(event));
+  const providerRows = rows.filter((row) => sourceOf(identity(row)) === UNIVERSAL && providerOf(row) !== '' && minuteClock(row));
+  for (const provider of new Set(unmatched.map(providerOf))) {
+    const scans = events.filter((event) => sourceOf(identity(event)) === UNIVERSAL && providerOf(event) === provider
+      && !observedOnly(event) && Number.isFinite(instantOf(event)) && minuteClock(event));
+    for (const other of new Set(providerRows.map(providerOf))) {
+      const theirs = providerRows.filter((row) => providerOf(row) === other);
+      const shift = other === provider ? 0 : providerShift(scans, theirs);
+      if (shift === 0) continue;
+      for (const event of unmatched) {
+        const id = identity(event);
+        if (providerOf(event) !== provider || shared.skipped.has(id)) continue;
+        const twins = theirs.filter((row) => alike(event, row) && zoneShift(instantOf(event), instantOf(row)) === shift);
+        const twin = twins.length > 1 ? openingAlike(event, twins) ?? twins[0] : twins[0];
+        if (!twin) continue;
+        shared.skipped.set(id, identity(twin));
+        shared.shifted.add(id);
+      }
+    }
   }
   // Moving its own row beside another row that holds the scan would store the scan twice:
   // the scan stays out, and its own row, on the clock the fix corrected, goes.

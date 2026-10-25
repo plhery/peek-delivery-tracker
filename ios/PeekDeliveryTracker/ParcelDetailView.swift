@@ -1115,7 +1115,10 @@ struct ChangeCarrierView: View {
                             }
                         }
                     }
+                    #if os(iOS)
+                    // A Mac's link would lose its press with the row's own element: its label and value are enough.
                     .accessibilityElement(children: .ignore)
+                    #endif
                     .accessibilityLabel(localizer.text("add.carrier"))
                     .accessibilityValue([carrierName,
                                          refused ? localizer.text("add.line.refused") : nil].compactMap { $0 }.joined(separator: ", "))
@@ -1163,6 +1166,10 @@ struct ChangeCarrierView: View {
             }
             .navigationTitle(localizer.text("detail.changeCarrier"))
             .navigationBarTitleDisplayMode(.inline)
+            #if os(macOS)
+            // Sections as iOS draws them, rather than labels in a column beside their fields.
+            .formStyle(.grouped)
+            #endif
             .interactiveDismissDisabled(saving)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

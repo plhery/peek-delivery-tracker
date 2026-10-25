@@ -439,7 +439,8 @@ anomalies and health incidents.
 [ops/review/signals.sql](../ops/review/signals.sql) is the hourly review of every queue. For
 a window of hours (1 by default, 24 for the daily review) it lists routing signals, sync
 anomalies (with `looping_track` for a parcel whose moves in transit, each to a new place, repeat one
-interval to within 2 s three times or more: a generated track), open unmapped wording seen in the window (`new` when first seen in it; a provider's
+interval to within 2 s three times or more: a generated track), the parcels first flagged in the window with a scan
+dated over an hour after its check (`future_event_timestamp`, by short id, with the provider that dated it), open unmapped wording seen in the window (`new` when first seen in it; a provider's
 own wording as relayed by it, beside the carrier of its sample's parcel), new open support cases that still give a reason, health incidents notified in the
 window or open and failing in it (`rescued` when every check that failed still answered
 through another step; an open one nothing checked, or whose checks answered, waits unlisted
@@ -464,7 +465,7 @@ Each row names the lane that acts on it:
 - **adapters**: a carrier without an adapter, a failing adapter or provider, an adapter that
   refuses a number its carrier issues or answers it only in part with no provider filling in
   the rest, without movement, on
-  local clocks only, without dates or behind a provider's delivered or returned stage, wording no map reads, a reader's answer that a carrier's status, steps,
+  local clocks only, without dates or behind a provider's delivered or returned stage, a scan dated in the future, wording no map reads, a reader's answer that a carrier's status, steps,
   times or places are off;
 - **captcha**: an adapter stopped by a verification or captcha page;
 - **delivery-tracker**: the app's routing, such as parcels left with a provider although

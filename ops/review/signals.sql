@@ -75,6 +75,30 @@ from (
 group by 1, 2, 3, 4
 order by checks desc, carrier, anomaly;
 
+\echo '== Future scans: parcels first flagged in the window with a scan dated over 1 h after its check'
+\echo '   usually a clock read in the wrong zone; provider: the universal provider of the future scan, else the check''s source'
+-- future_event_timestamp, counted above per carrier: a parcel shows once, at its first check that flags it,
+-- not at the checks after that repeat the scan.
+select left(a.package_id::text, 8) as parcel, a.configured_carrier as carrier,
+       coalesce((select string_agg(distinct e.raw_data->>'universal_provider', ',')
+                 from public.tracking_events as e
+                 where e.package_id = a.package_id and e.occurred_at > a.started_at + interval '1 hour'),
+                a.source_carrier, '-') as provider,
+       private.tracking_number_pattern(p.tracking_number) as pattern, 'adapters' as lane,
+       to_char(a.started_at, 'YYYY-MM-DD HH24:MI') as flagged
+from (
+  select distinct on (package_id) package_id, configured_carrier, source_carrier, started_at
+  from public.tracking_sync_attempts
+  where started_at >= :since and 'future_event_timestamp' = any(anomaly_codes)
+  order by package_id, started_at
+) as a
+left join public.packages as p on p.id = a.package_id
+where not exists (
+  select from public.tracking_sync_attempts as earlier
+  where earlier.package_id = a.package_id and earlier.started_at < :since
+    and 'future_event_timestamp' = any(earlier.anomaly_codes))
+order by a.started_at desc;
+
 \echo '== Unmapped wording: open and seen in the window (new: first seen in it; … masks a rare word; look the wording up by id)'
 -- Wording can quote a number or name a place, a shop or a person: its digits are masked, and so
 -- is each word fewer than five stored wordings share once their digits are masked, so that

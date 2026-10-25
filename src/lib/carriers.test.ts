@@ -577,22 +577,26 @@ describe('carrier detection', () => {
     const fifteen = detectCarrierMatch('041441760228964');
     expect(fifteen).toMatchObject({ carrier: 'unknown', confidence: 'low' });
     expect(fifteen.candidates).toContain('fedex');
-    // Full 18/22/32/34 barcode fixtures are not ordinary tracking numbers and never
+    // Full 18/22/32 barcode fixtures are not ordinary tracking numbers and never
     // route to FedEx by length alone. The scraper may suggest FedEx for a 22-digit
-    // 96 or 34-digit barcode whose embedded tracking number passes its check; the
-    // 18- and 32-digit ones are never suggested.
+    // 96 barcode whose embedded tracking number passes its check; the 18- and
+    // 32-digit ones are never suggested.
     // Source: https://github.com/jkeen/tracking_number_data/blob/main/couriers/fedex.json
     for (const number of [
-      '1001921334250001000300779017972697',
       '32971514560102447849175802862014',
       '000123450000000027',
       '9611020987654312345672',
-      '9622001900000000000000776632517510',
     ]) {
       expect(detectCarrier(number)).toBe('unknown');
     }
     for (const number of ['32971514560102447849175802862014', '000123450000000027']) {
       expect(detectCarrierMatch(number).candidates).not.toContain('fedex');
+    }
+    // A 34-digit barcode outside USPS's 420 routing goes to FedEx when the number it
+    // carries passes its check; older scraper releases only suggest FedEx for it.
+    for (const number of ['1001921334250001000300779017972697', '9622001900000000000000776632517510']) {
+      expect(['fedex', 'unknown']).toContain(detectCarrier(number));
+      expect(detectCarrierMatch(number).candidates).toContain('fedex');
     }
   });
 

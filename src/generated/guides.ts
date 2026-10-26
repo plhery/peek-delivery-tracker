@@ -152,6 +152,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "H&M order tracking: delivery, returns and problems"
     },
     {
+      "id": "xiaomi-orders",
+      "slug": "xiaomi-order-tracking",
+      "title": "Xiaomi order tracking: delivery, returns and problems"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "how-to-find-tracking-number",
       "title": "How to find your tracking number, or track without one"
@@ -362,6 +367,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "h-m-orders",
       "slug": "hm-sendungsverfolgung",
       "title": "H&M Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
+    },
+    {
+      "id": "xiaomi-orders",
+      "slug": "xiaomi-sendungsverfolgung",
+      "title": "Xiaomi Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
     },
     {
       "id": "find-tracking-number",
@@ -576,6 +586,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Suivi de commande H&M\u00a0: livraison, retours, problèmes"
     },
     {
+      "id": "xiaomi-orders",
+      "slug": "suivi-commande-xiaomi",
+      "title": "Suivi de commande Xiaomi\u00a0: livraison, retours, problèmes"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "ou-trouver-numero-de-suivi",
       "title": "Où trouver son numéro de suivi, et comment faire sans"
@@ -786,6 +801,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "h-m-orders",
       "slug": "tracciamento-ordine-hm",
       "title": "Tracciamento ordine H&M: spedizione, resi e problemi"
+    },
+    {
+      "id": "xiaomi-orders",
+      "slug": "tracciamento-ordine-xiaomi",
+      "title": "Tracciamento ordine Xiaomi: spedizione, resi e problemi"
     },
     {
       "id": "find-tracking-number",
@@ -1000,6 +1020,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimiento de pedidos H&M: envío, devolución y problemas"
     },
     {
+      "id": "xiaomi-orders",
+      "slug": "seguimiento-pedido-xiaomi",
+      "title": "Seguimiento de pedidos Xiaomi: envío, devolución y problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "localizar-paquete-sin-numero-de-seguimiento",
       "title": "Cómo localizar un paquete sin número de seguimiento"
@@ -1212,6 +1237,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimento da encomenda H&M: envio, devolução e problemas"
     },
     {
+      "id": "xiaomi-orders",
+      "slug": "seguimento-encomenda-xiaomi",
+      "title": "Seguimento de encomendas Xiaomi: envio, garantia e problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "onde-encontrar-numero-de-seguimento",
       "title": "Onde encontrar o número de seguimento da encomenda"
@@ -1422,6 +1452,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "h-m-orders",
       "slug": "sledzenie-zamowienia-hm",
       "title": "Śledzenie zamówienia H&M: dostawa, zwroty i problemy"
+    },
+    {
+      "id": "xiaomi-orders",
+      "slug": "sledzenie-zamowienia-xiaomi",
+      "title": "Śledzenie zamówienia Xiaomi: dostawa, zwroty i problemy"
     },
     {
       "id": "find-tracking-number",

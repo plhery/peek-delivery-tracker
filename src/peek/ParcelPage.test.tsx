@@ -705,7 +705,7 @@ describe('ParcelPage actions', () => {
     await user.type(within(sheet).getByRole('textbox'), ' 99999 ');
     await user.click(within(sheet).getByRole('button', { name: 'Add postcode' }));
     expect(await within(sheet).findByRole('alert')).toHaveTextContent('DHL doesn’t have this parcel for that postcode. Check it and try again.');
-    expect(mocks.addPostcode).toHaveBeenLastCalledWith(LINK_ID, OWNER_KEY, 'dhl', '99999');
+    expect(mocks.addPostcode).toHaveBeenLastCalledWith(LINK_ID, OWNER_KEY, 'dhl', '99999', undefined);
     await user.click(within(sheet).getByRole('button', { name: 'Add postcode' }));
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
     expect(mocks.addPostcode).toHaveBeenCalledTimes(2);
@@ -724,6 +724,23 @@ describe('ParcelPage actions', () => {
     await user.click(within(prompt.parentElement!).getByRole('button', { name: 'Add postcode' }));
     expect(screen.getByRole('dialog', { name: 'Add postcode' })).toHaveTextContent('PostNL needs the delivery postcode to find this parcel.');
     expect(screen.queryByText('PostNL has this parcel. Add the delivery postcode to track it.')).toBeNull();
+  });
+
+  it('sends a postcode from the country the parcel goes to with that country', async () => {
+    const asked = testView({ parcel: { carrier: 'spring-gds', trackingNumber: '3SABCD826405193', destinationCountry: 'BE' } });
+    asked.link = { ...asked.link, inputNeeded: { carrier: 'spring-gds', field: 'dpdPostcode' } };
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: asked });
+    mocks.read.mockResolvedValue(asked);
+    mocks.addPostcode.mockResolvedValueOnce(view(journey));
+    const user = userEvent.setup();
+    open();
+    const prompt = await screen.findByText('PostNL needs the delivery postcode to find this parcel.');
+    await user.click(within(prompt.parentElement!).getByRole('button', { name: 'Add postcode' }));
+    const sheet = screen.getByRole('dialog', { name: 'Add postcode' });
+    expect(within(sheet).getByRole('combobox', { name: 'Delivery country' })).toHaveValue('BE');
+    await user.type(within(sheet).getByRole('textbox'), '1000');
+    await user.click(within(sheet).getByRole('button', { name: 'Add postcode' }));
+    await waitFor(() => expect(mocks.addPostcode).toHaveBeenCalledWith(LINK_ID, OWNER_KEY, 'spring-gds', '1000', 'BE'));
   });
 
   it('asks nobody but the holder of the owner key for a postcode', async () => {

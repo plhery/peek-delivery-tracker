@@ -70,6 +70,8 @@ export interface ParcelLookupInput {
   carrier?: CarrierId;
   trackingUrl?: string;
   dpdPostcode?: string;
+  /** The postcode's country, only when it is not the carrier's home country. */
+  dpdPostcodeCountry?: string;
 }
 
 /** A lookup's answer: the new link, its owner key (given once) and the parcel as the owner sees it. */
@@ -106,7 +108,7 @@ export interface ParcelLinksClient {
    * Adds the delivery postcode the link's `inputNeeded` asks for, with its owner key. Answers the parcel filed under
    * that carrier, or as it now stands when nothing is asked any more; fails as `refused` when the carrier refuses it.
    */
-  addParcelPostcode(id: string, key: string, carrier: CarrierId, postcode: string, signal?: AbortSignal): Promise<ParcelLinkView>;
+  addParcelPostcode(id: string, key: string, carrier: CarrierId, postcode: string, country?: string, signal?: AbortSignal): Promise<ParcelLinkView>;
   /** Turns a browser's alerts on for this link, or changes what they announce. Anyone with the link can. */
   setParcelAlert(id: string, alert: ParcelAlertInput, key?: string | null): Promise<void>;
   /** Turns a browser's alerts off. Nothing is said about whether there were any. */

@@ -2,8 +2,9 @@ import 'server-only';
 import { isIP } from 'node:net';
 import { captureOperationalError } from './observability';
 import { HttpError } from './api';
+import { withPostcodeCountry } from './postcodeCountry';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
-import { isRecord, type JsonObject } from './types';
+import type { JsonObject } from './types';
 
 const names = new Intl.DisplayNames(['en'], { type: 'region' });
 const groupedRegions = new Set(['EU', 'UN', 'QO', 'ZZ', 'XA', 'XB']);
@@ -24,10 +25,14 @@ export function lookupCountry(request: Pick<Request, 'headers'>, deviceRegion?: 
   return normalizedLookupCountry(request.headers.get('cf-ipcountry'));
 }
 
-/** Called only for a newly created parcel, before its first sync is queued. */
-export async function rememberLookupCountry(service: SupabaseServiceClient, parcel: JsonObject, request: Pick<Request, 'headers'>, deviceRegion?: unknown): Promise<void> {
+/**
+ * Called only for a newly created parcel, before its first sync is queued. It
+ * also keeps the country of a postcode from abroad (`postcodeCountry`) with it.
+ */
+export async function rememberLookupCountry(service: SupabaseServiceClient, parcel: JsonObject, request: Pick<Request, 'headers'>,
+  deviceRegion?: unknown, postcodeCountry?: string | null): Promise<void> {
   const country = lookupCountry(request, deviceRegion);
-  const data = { ...(isRecord(parcel.carrier_data) ? parcel.carrier_data : {}),
+  const data = { ...withPostcodeCountry(parcel.carrier_data, parcel.dpd_postcode, postcodeCountry),
     add_recognition_pending: true, ...(country ? { lookup_country_hint: country } : {}) };
   try {
     await service.updatePackage(String(parcel.id), { carrier_data: data });

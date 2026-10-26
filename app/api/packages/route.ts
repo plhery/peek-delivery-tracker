@@ -72,7 +72,7 @@ export const POST = apiRoute(async (context) => {
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new SupabaseError('The new package could not be reloaded');
 
-  await rememberLookupCountry(service, parcel, context.request, body.lookupCountryHint);
+  await rememberLookupCountry(service, parcel, context.request, body.lookupCountryHint, values.dpdPostcodeCountry);
   await settleTypedSupportCases(service, values.trackingNumber);
   const jobIds: string[] = [];
   try {

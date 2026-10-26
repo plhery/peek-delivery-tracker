@@ -1,7 +1,10 @@
 import { useId, useState, type FormEvent } from 'react';
+import { PostcodeCountry } from '../../components/PostcodeCountry';
 import { useI18n, type MessageKey } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
 import { carrierInfo } from '../../lib/carriers';
+import { initialPostcodeCountry, postcodeCountries, sentPostcodeCountry } from '../../lib/postcodeCountry';
+import { deviceCountry } from '../../lib/postcodeExample';
 import type { CarrierId } from '../../types';
 import { addParcelPostcode, ParcelLinkError, parcelLinkErrorKey, type ParcelLinkView } from '../links';
 import { Sheet } from './Sheet';
@@ -27,14 +30,19 @@ export function PostcodeAsked({ carrier, own, onAdd }: { carrier: CarrierId; own
 }
 
 /**
- * The owner adds the postcode. The server asks the carrier first: a postcode
- * it accepts files the parcel under that carrier and checks it at once, and
- * the page shows the answer; one it refuses shows nothing of the parcel.
+ * The owner adds the postcode, and the country it is from: the parcel's
+ * destination when known, else the device's. The server asks the carrier
+ * first: a postcode it accepts files the parcel under that carrier and checks
+ * it at once, and the page shows the answer; one it refuses shows nothing of
+ * the parcel.
  */
-export function PostcodeSheet({ linkId, ownerKey, carrier, own, onAdded, onClose }: {
+export function PostcodeSheet({ linkId, ownerKey, carrier, trackingNumber, destination, own, onAdded, onClose }: {
   linkId: string;
   ownerKey: string;
   carrier: CarrierId;
+  /** The parcel's number, which the carrier is asked about. */
+  trackingNumber: string;
+  destination?: string;
   own: boolean;
   onAdded: (view: ParcelLinkView) => void;
   onClose: () => void;
@@ -43,6 +51,7 @@ export function PostcodeSheet({ linkId, ownerKey, carrier, own, onAdded, onClose
   const field = useId();
   const name = carrierInfo(carrier, locale).name;
   const [postcode, setPostcode] = useState('');
+  const [country, setCountry] = useState(() => initialPostcodeCountry(carrier, trackingNumber, [destination, deviceCountry()]));
   const [working, setWorking] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -68,7 +77,7 @@ export function PostcodeSheet({ linkId, ownerKey, carrier, own, onAdded, onClose
     setWorking(true);
     setError(null);
     try {
-      const view = await addParcelPostcode(linkId, ownerKey, carrier, postcode.trim());
+      const view = await addParcelPostcode(linkId, ownerKey, carrier, postcode.trim(), sentPostcodeCountry(carrier, country));
       trackAction('parcel-link-postcode', 'success');
       onAdded(view);
       dismiss();
@@ -83,9 +92,12 @@ export function PostcodeSheet({ linkId, ownerKey, carrier, own, onAdded, onClose
     {(dismiss) => <form onSubmit={(event) => void add(event, dismiss)} noValidate>
       <div className="peeks-gift">
         <label htmlFor={field}>{t('add.requirement.dpdPostcode')}</label>
-        <input id={field} type="text" inputMode="text" autoComplete="postal-code" autoCapitalize="characters" spellCheck={false}
-          maxLength={MAX_POSTCODE_LENGTH} value={postcode} disabled={working} aria-describedby={`${field}-private`}
-          aria-invalid={error ? true : undefined} onChange={(event) => setPostcode(event.target.value)} />
+        <PostcodeCountry carrier={carrier} countries={postcodeCountries(carrier, trackingNumber)} value={country} disabled={working}
+          onChange={setCountry}>
+          <input id={field} type="text" inputMode="text" autoComplete="postal-code" autoCapitalize="characters" spellCheck={false}
+            maxLength={MAX_POSTCODE_LENGTH} value={postcode} disabled={working} aria-describedby={`${field}-private`}
+            aria-invalid={error ? true : undefined} onChange={(event) => setPostcode(event.target.value)} />
+        </PostcodeCountry>
         <small id={`${field}-private`}>{t('door.postcode.private', { carrier: name })}</small>
       </div>
       {error && <p className="sheet__error" role="alert">{error}</p>}

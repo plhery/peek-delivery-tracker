@@ -65,6 +65,8 @@ import { noteTypoCandidate } from './typoCandidate';
 import { confirmationLookup } from './trackingHealth';
 import { carrierMapAgrees, deployedVersion, statusMapClosings, universalMapAgrees } from './reviewQueues';
 import { carrierLookupKey, recognitionKey, SharedLookups, universalLookupKey, type ParcelLookups } from './sharedLookups';
+import { carrierLookupInput } from './postcodeCountry';
+import { storedPostcodeCountry } from '../lib/postcodeCountry';
 
 const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
 /** One-off parcels have no owner: a scheduled run checks this many of them, all together. */
@@ -493,13 +495,17 @@ export interface TrackingAdapter {
   recognizeBrowser?(carrierId: string, trackingNumber: string, context?: TrackingContext, previousError?: unknown): Promise<Recognition>;
   /** Whether the carrier is tracked only through its own browser, which fails every parcel alike when it is down. */
   browserOnly?(carrierId: string): boolean;
-  /** `language`: the parcel owner's app language, in which a carrier that words its scans in several answers. */
+  /**
+   * `language`: the parcel owner's app language, in which a carrier that words its scans in several answers.
+   * `postcodeCountry`: the country of a postcode from outside the carrier's home country.
+   */
   fetch(
     carrierId: string,
     trackingNumber: string,
     trackingUrl: string | null,
     dpdPostcode?: string | null,
     language?: string | null,
+    postcodeCountry?: string | null,
   ): Promise<CarrierResult>;
 }
 
@@ -535,10 +541,11 @@ export class CarrierTrackingAdapter implements TrackingAdapter {
     trackingUrl: string | null,
     dpdPostcode?: string | null,
     language?: string | null,
+    postcodeCountry?: string | null,
   ): Promise<CarrierResult> {
     const prefetched = !trackingUrl && !dpdPostcode ? takeBrowserHistory(carrierId, trackingNumber) : undefined;
     if (prefetched) return dateLocalClocks(carrierId, normalizeCarrierResult(prefetched));
-    return trackCarrier(carrierId, { number: trackingNumber, trackingUrl, postcode: dpdPostcode ?? null, ...(language ? { language } : {}) }, {
+    return trackCarrier(carrierId, carrierLookupInput(trackingNumber, trackingUrl, dpdPostcode ?? null, postcodeCountry, language), {
       registry: this.registry, universal: this.universal, recorder: this.recorder,
     });
   }
@@ -2069,7 +2076,7 @@ export class TrackingSyncService {
       // Linked journey identity, the postcode the owner gave a provider, and the delivery partner's probe belong to the
       // parcel, not an individual carrier response: a provider answering while the origin is down keeps the probe's gap.
       if (isRecord(parcel.carrier_data)) {
-        for (const key of ['lookup_country_hint', 'universal_input', 'original_carrier', 'original_tracking_number', 'original_tracking_url', 'original_package_id', 'active_tracking_carrier', 'active_tracking_number', 'original_canonical_tracking_number', 'auto_changed_from', 'auto_changed_to', 'auto_changed_at', 'handed_over_at', 'earlier_checked_at', 'delivery_probe', 'scans_withdrawn', 'scans_withdrawn_at', 'clock_offsets', DIRECT_HISTORY]) {
+        for (const key of ['lookup_country_hint', 'postcode_country', 'universal_input', 'original_carrier', 'original_tracking_number', 'original_tracking_url', 'original_package_id', 'active_tracking_carrier', 'active_tracking_number', 'original_canonical_tracking_number', 'auto_changed_from', 'auto_changed_to', 'auto_changed_at', 'handed_over_at', 'earlier_checked_at', 'delivery_probe', 'scans_withdrawn', 'scans_withdrawn_at', 'clock_offsets', DIRECT_HISTORY]) {
           if (parcel.carrier_data[key] != null && carrierData[key] == null) carrierData[key] = parcel.carrier_data[key];
         }
       }
@@ -2388,12 +2395,17 @@ export class TrackingSyncService {
     }
   }
 
-  /** A carrier lookup, asked once per run for the same carrier, number, inputs and language. */
+  /**
+   * A carrier lookup, asked once per run for the same carrier, number, inputs and language. The
+   * parcel's `carrier_data` gives the country of its postcode, which goes wherever that postcode goes.
+   */
   private fetchCarrier(checks: ParcelLookups | undefined, carrierId: string, trackingNumber: string,
-    trackingUrl: string | null, dpdPostcode: string | null, language: string | null): Promise<CarrierResult> {
-    const lookup = () => this.adapter.fetch(carrierId, trackingNumber, trackingUrl, dpdPostcode, language);
+    trackingUrl: string | null, dpdPostcode: string | null, language: string | null, data?: unknown): Promise<CarrierResult> {
+    const postcodeCountry = storedPostcodeCountry(data, dpdPostcode) ?? null;
+    const lookup = () => this.adapter.fetch(carrierId, trackingNumber, trackingUrl, dpdPostcode, language,
+      ...(postcodeCountry ? [postcodeCountry] : []));
     if (!checks) return lookup();
-    const key = carrierLookupKey(carrierId, trackingNumber, trackingUrl, dpdPostcode, language);
+    const key = carrierLookupKey(carrierId, trackingNumber, trackingUrl, dpdPostcode, language, postcodeCountry);
     if (!this.adapter.browserOnly?.(carrierId)) return checks.once(key, lookup);
     // A run asks a carrier tracked only through its own browser once while that browser fails:
     // each failed lookup can take the browser's whole timeout.
@@ -2438,10 +2450,10 @@ export class TrackingSyncService {
       const followUp = metadata.original_carrier === carrierId && carrierId !== activeCarrier && directCarrier(carrierId)
         && metadata.original_tracking_number === trackingNumber && asksEarlierCarrier(metadata, this.now());
       const [result, earlier] = await Promise.all([
-        this.fetchCarrier(checks, activeCarrier, activeNumber, null, handoffPostcode(parcel, carrierId, activeCarrier, activeNumber), language),
+        this.fetchCarrier(checks, activeCarrier, activeNumber, null, handoffPostcode(parcel, carrierId, activeCarrier, activeNumber), language, metadata),
         followUp ? this.fetchCarrier(checks, carrierId, trackingNumber,
           typeof parcel.tracking_url === 'string' ? parcel.tracking_url : null,
-          typeof parcel.dpd_postcode === 'string' ? parcel.dpd_postcode : null, language,
+          typeof parcel.dpd_postcode === 'string' ? parcel.dpd_postcode : null, language, metadata,
         ).then(normalizeCarrierResult).catch((error: unknown) => {
           // The delivery carrier answers for the parcel: a miss here only waits for the next follow-up.
           if (!isUnannouncedTrackingError(error)) reportRoutingEvent('provider_failed', {
@@ -2467,7 +2479,7 @@ export class TrackingSyncService {
         origin = providerOrigin ?? normalizeCarrierResult(await this.fetchCarrier(checks,
           carrierId, trackingNumber,
           typeof parcel.tracking_url === 'string' ? parcel.tracking_url : null,
-          typeof parcel.dpd_postcode === 'string' ? parcel.dpd_postcode : null, language,
+          typeof parcel.dpd_postcode === 'string' ? parcel.dpd_postcode : null, language, metadata,
         ));
       } catch (error) {
         // An international operator outage must not hide a confirmed local delivery, nor
@@ -2498,7 +2510,7 @@ export class TrackingSyncService {
         origin.delivery_probe = probe;
         try {
           const delivery = normalizeCarrierResult(await confirmationLookup(() => this.fetchCarrier(checks, candidate.carrier, candidate.number,
-            null, handoffPostcode(parcel, carrierId, candidate.carrier, candidate.number), language)));
+            null, handoffPostcode(parcel, carrierId, candidate.carrier, candidate.number), language, metadata)));
           const originTime = latestResultTime(origin, carrierId);
           const watermark = Math.max(originTime, latestResultTime(metadata, carrierId),
             Date.parse(routingState(parcel).last_event_at || '') || 0);

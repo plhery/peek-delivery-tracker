@@ -75,6 +75,17 @@ describe('dedicated carrier dispatch', () => {
     expect(track.mock.calls[0][0]).toEqual({ number: 'SYNTHETIC0001', trackingUrl: null, postcode: '00000' });
   });
 
+  it('asks the carrier with the country of a postcode from abroad, and only with a postcode', async () => {
+    const adapter = new CarrierTrackingAdapter();
+    const track = vi.spyOn(adapter.registry.for('spring-gds')!, 'track').mockResolvedValue({ status: 'in_transit' });
+    await adapter.fetch('spring-gds', 'SYNTHETIC0001', null, '1000', null, 'BE');
+    await adapter.fetch('spring-gds', 'SYNTHETIC0001', null, null, null, 'BE');
+    expect(track.mock.calls.map(([input]) => input)).toEqual([
+      { number: 'SYNTHETIC0001', trackingUrl: null, postcode: '1000', postcodeCountry: 'BE' },
+      { number: 'SYNTHETIC0001', trackingUrl: null, postcode: null },
+    ]);
+  });
+
   it('asks Swiss Post in the language it is given', async () => {
     const adapter = new CarrierTrackingAdapter();
     const track = vi.spyOn(adapter.registry.for('swiss-post')!, 'track').mockResolvedValue({ status: 'in_transit' });
@@ -839,6 +850,16 @@ describe('status observation collection', () => {
 
     const many = Array.from({ length: MAX_STATUS_OBSERVATIONS_PER_SYNC + 8 }, (_, index) => scan(`Mapped ${index}`, 'carrier_map'));
     expect(collectMappedStatusKeys(many, 'ctt')).toHaveLength(MAX_STATUS_OBSERVATIONS_PER_SYNC);
+  });
+
+  it('asks with the country stored with the parcel’s postcode while the parcel holds that postcode', async () => {
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) };
+    const service = new TrackingSyncService(fakeClient() as unknown as SupabaseServiceClient, adapter, null);
+    const abroad = { postcode_country: { postcode: '1000', country: 'BE' } };
+    await service.syncPackage({ id: 'abroad', carrier: 'spring-gds', tracking_number: 'TEST1234', dpd_postcode: '1000', carrier_data: abroad });
+    await service.syncPackage({ id: 'changed', carrier: 'spring-gds', tracking_number: 'TEST1234', dpd_postcode: '1012 AB', carrier_data: abroad });
+    const asked = adapter.fetch.mock.calls.filter(([carrier]) => carrier === 'spring-gds');
+    expect(asked.map((call) => [call[3], call[5]])).toEqual([['1000', 'BE'], ['1012 AB', undefined]]);
   });
 
   it('sends the keys of mapped wording with the server version', async () => {

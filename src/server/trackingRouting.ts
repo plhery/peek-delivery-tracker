@@ -504,7 +504,7 @@ export function earlierParcelRows(parcel: JsonObject): string[] | null {
   return oldLabel(parcel.created_at, answer) ? rows.map((row) => String(row.provider_event_id)) : null;
 }
 /** What a parcel keeps of its carrier data once it forgets a reused number's earlier parcel: what the owner gave and the number's cooldowns. */
-const KEPT_WITHOUT_EARLIER_PARCEL = ['lookup_country_hint', 'universal_input', 'add_recognition_pending', 'delivery_probe', 'earlier_checked_at'];
+const KEPT_WITHOUT_EARLIER_PARCEL = ['lookup_country_hint', 'postcode_country', 'universal_input', 'add_recognition_pending', 'delivery_probe', 'earlier_checked_at'];
 /** Routing a reused number's earlier parcel taught: where its answers came from, its watermark and what filed or confirmed it. */
 const EARLIER_PARCEL_ROUTING = ['last_event_at', 'last_success_at', 'discovered_carrier', 'preferred_provider', 'preferred_number',
   'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'carrier_named_at', 'input_suggested'];
@@ -948,7 +948,9 @@ export class TrackingRouter {
         const lookupParcel = candidate ? { ...parcel, carrier,
           tracking_url: ownInputs ? state.confirmed_tracking_url : null,
           dpd_postcode: ownInputs ? state.confirmed_postcode : null,
-          carrier_data: {} } : parcel;
+          // The country of the owner's postcode goes with it.
+          carrier_data: ownInputs && isRecord(parcel.carrier_data) && parcel.carrier_data.postcode_country
+            ? { postcode_country: parcel.carrier_data.postcode_country } : {} } : parcel;
         // A carrier not confirmed for the number is asked whether it holds the parcel.
         const lookup = () => this.options.direct(lookupParcel, carrier);
         const value = await (candidate && !ownInputs ? confirmationLookup(lookup) : lookup());

@@ -20,9 +20,16 @@ describe('asking a carrier about the postcode a lookup adds', () => {
   it('asks the carrier\'s own tracking with the postcode, within a budget', async () => {
     tracked.mockResolvedValue({ status: 'in_transit', events: [] } as never);
     const signal = new AbortController().signal;
-    expect(await checkLinkPostcode('dhl', number, '99999', signal)).toEqual({ outcome: 'accepted' });
+    expect(await checkLinkPostcode('dhl', number, '99999', null, signal)).toEqual({ outcome: 'accepted' });
     expect(tracked).toHaveBeenCalledExactlyOnceWith('dhl', { number, trackingUrl: null, postcode: '99999' },
       expect.objectContaining({ budgetMs: 25_000, signal }));
+  });
+
+  it('sends a postcode from abroad with its country', async () => {
+    tracked.mockResolvedValue({ status: 'in_transit', events: [] } as never);
+    expect(await checkLinkPostcode('dhl', number, '1000', 'BE')).toEqual({ outcome: 'accepted' });
+    expect(tracked).toHaveBeenCalledExactlyOnceWith('dhl', { number, trackingUrl: null, postcode: '1000', postcodeCountry: 'BE' },
+      expect.anything());
   });
 
   it('reads a request for the input again, an invalid input and a parcel not found as a refusal', async () => {
@@ -60,6 +67,6 @@ describe('asking a carrier about the postcode a lookup adds', () => {
       controller.abort(new Error('owner left'));
       throw new ChallengeError('DHL', 'cancelled');
     });
-    await expect(checkLinkPostcode('dhl', number, '99999', controller.signal)).rejects.toThrow('owner left');
+    await expect(checkLinkPostcode('dhl', number, '99999', null, controller.signal)).rejects.toThrow('owner left');
   });
 });

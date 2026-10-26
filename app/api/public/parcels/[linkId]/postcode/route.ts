@@ -9,6 +9,7 @@ import {
 import { wakeSyncWorker } from '../../../../../../src/server/background';
 import { checkLinkPostcode, LINK_POSTCODE_TRIES, type PostcodeCheck } from '../../../../../../src/server/linkPostcodes';
 import { logOperationalEvent } from '../../../../../../src/server/observability';
+import { postcodeCountryWrite } from '../../../../../../src/server/postcodeCountry';
 import {
   isParcelLinkId,
   ownerKeyHash,
@@ -52,7 +53,8 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
   const { linkId } = await context.route.params;
   const keyHash = ownerKeyHash(context.request.headers.get('x-parcel-key'));
   const body = await readJsonObject(context.request);
-  if (typeof body.carrier !== 'string' || typeof body.postcode !== 'string') {
+  if (typeof body.carrier !== 'string' || typeof body.postcode !== 'string'
+    || (body.postcodeCountry !== undefined && typeof body.postcodeCountry !== 'string')) {
     throw new HttpError(400, 'Send the carrier and the delivery postcode');
   }
   const carrier = body.carrier.slice(0, 64);
@@ -76,9 +78,10 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
   // A try the carrier did not refuse is given back; filing the link clears them all.
   let settled = false;
   try {
-    const values = packageCarrierValues({ carrier, dpdPostcode: body.postcode }, claim.trackingNumber);
+    const values = packageCarrierValues({ carrier, dpdPostcode: body.postcode, dpdPostcodeCountry: body.postcodeCountry ?? '' }, claim.trackingNumber);
     if (!values.dpdPostcode) throw new HttpError(400, 'Invalid delivery postcode');
-    const check: PostcodeCheck = await checkLinkPostcode(values.carrier, claim.trackingNumber, values.dpdPostcode, context.request.signal);
+    const check: PostcodeCheck = await checkLinkPostcode(values.carrier, claim.trackingNumber, values.dpdPostcode,
+      values.dpdPostcodeCountry, context.request.signal);
     if (check.outcome === 'refused') {
       settled = true;
       recordPostcode('refused', carrier, context.requestId);
@@ -100,6 +103,9 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
     settled = true;
     recordPostcode('accepted', carrier, context.requestId);
     try {
+      // A parcel this postcode files for the first time keeps its country; one filed before keeps its own.
+      const write = filed.created ? postcodeCountryWrite(filed.package, values.dpdPostcodeCountry) : null;
+      if (write) await service.updatePackage(String(filed.package.id), write);
       await service.enqueueSyncJob({ packageId: String(filed.package.id), reason: filed.created ? 'added' : 'changed' });
       wakeSyncWorker();
     } catch (error) {

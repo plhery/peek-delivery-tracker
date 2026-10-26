@@ -233,6 +233,33 @@ describe('createApiRepo', () => {
         dpdPostcode: '8000',
       }),
     }));
+
+    // A postcode from abroad goes with its country; a country without a postcode goes nowhere.
+    await createApiRepo().add({
+      trackingNumber: '3SABCD1234567',
+      label: '',
+      carrier: 'spring-gds',
+      dpdPostcode: '1000',
+      dpdPostcodeCountry: 'BE',
+    });
+    expect(fetch).toHaveBeenLastCalledWith('/api/packages', expect.objectContaining({
+      body: JSON.stringify({
+        trackingNumber: '3SABCD1234567',
+        label: '',
+        carrier: 'spring-gds',
+        dpdPostcode: '1000',
+        dpdPostcodeCountry: 'BE',
+      }),
+    }));
+    await createApiRepo().add({
+      trackingNumber: '3SABCD1234567',
+      label: '',
+      carrier: 'spring-gds',
+      dpdPostcodeCountry: 'BE',
+    });
+    expect(fetch).toHaveBeenLastCalledWith('/api/packages', expect.objectContaining({
+      body: JSON.stringify({ trackingNumber: '3SABCD1234567', label: '', carrier: 'spring-gds' }),
+    }));
   });
 
   it('archives, restores, and queues syncs through the same-origin API', async () => {

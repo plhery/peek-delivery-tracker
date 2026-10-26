@@ -1,4 +1,5 @@
 import { detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
+import { storedPostcodeCountry } from '../lib/postcodeCountry';
 import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
 import type {
   ApiCreatePackageResponse,
@@ -142,6 +143,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     syncError: row.sync_error ?? undefined,
     trackingUrl: row.tracking_url ?? undefined,
     dpdPostcode: row.dpd_postcode ?? undefined,
+    dpdPostcodeCountry: storedPostcodeCountry(row.carrier_data, row.dpd_postcode),
     dpdPostcodeVerified: row.carrier_data?.dpd_postcode_verified ?? undefined,
     postcodeRefused: row.carrier_data?.routing?.postcode_refused?.carrier === row.carrier || undefined,
     trackingProvider: row.carrier_data?.tracking_provider ?? undefined,
@@ -369,6 +371,7 @@ export function createApiRepo(
         carrier,
         trackingUrl: input.trackingUrl?.trim() || undefined,
         dpdPostcode: input.dpdPostcode?.trim() || undefined,
+        dpdPostcodeCountry: input.dpdPostcode?.trim() ? input.dpdPostcodeCountry : undefined,
       };
       const payload = await request<ApiCreatePackageResponse>('/api/packages', auth, {
         method: 'POST',
@@ -398,6 +401,7 @@ export function createApiRepo(
         providerPostcode: input.providerPostcode?.trim() || undefined,
         trackingUrl: input.trackingUrl?.trim() || undefined,
         dpdPostcode: input.dpdPostcode?.trim() || undefined,
+        dpdPostcodeCountry: input.dpdPostcode?.trim() ? input.dpdPostcodeCountry : undefined,
       };
       const payload = await request<ApiChangePackageCarrierResponse>(
         `/api/packages/${encodeURIComponent(id)}/carrier`,

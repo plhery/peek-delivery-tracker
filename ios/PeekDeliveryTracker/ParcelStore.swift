@@ -371,7 +371,8 @@ final class ParcelStore: ObservableObject {
         label: String,
         carrier: CarrierID,
         trackingURL: String?,
-        dpdPostcode: String?
+        dpdPostcode: String?,
+        dpdPostcodeCountry: String? = nil
     ) async throws -> Parcel {
         let generation = session.generation
         let request = CreatePackageRequest(
@@ -380,6 +381,7 @@ final class ParcelStore: ObservableObject {
             carrier: carrier,
             trackingURL: trackingURL?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,
             dpdPostcode: dpdPostcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,
+            dpdPostcodeCountry: dpdPostcodeCountry,
             lookupCountryHint: ParcelLookupCountry.hint()
         )
         let parcel: Parcel
@@ -560,6 +562,7 @@ final class ParcelStore: ObservableObject {
         carrier: CarrierID,
         trackingURL: String?,
         dpdPostcode: String?,
+        dpdPostcodeCountry: String?,
         providerPostcode: String? = nil
     ) async throws {
         let generation = session.generation
@@ -573,11 +576,13 @@ final class ParcelStore: ObservableObject {
                 id: parcel.id,
                 carrier: carrier,
                 trackingURL: cleanedURL,
-                dpdPostcode: cleanedPostcode
+                dpdPostcode: cleanedPostcode,
+                dpdPostcodeCountry: dpdPostcodeCountry
             )
         } else if isGuest {
             // A new lookup takes the old one's place, under a new id.
-            _ = try await device.changeCarrier(id: parcel.id, carrier: carrier, trackingURL: cleanedURL, dpdPostcode: cleanedPostcode)
+            _ = try await device.changeCarrier(id: parcel.id, carrier: carrier, trackingURL: cleanedURL,
+                                               dpdPostcode: cleanedPostcode, dpdPostcodeCountry: dpdPostcodeCountry)
             try session.checkGeneration(generation)
             mutationRevision += 1
             parcels = device.list()
@@ -589,6 +594,7 @@ final class ParcelStore: ObservableObject {
                 carrier: carrier,
                 trackingURL: cleanedURL,
                 dpdPostcode: cleanedPostcode,
+                dpdPostcodeCountry: dpdPostcodeCountry,
                 providerPostcode: providerPostcode
             )
             updated = response.package
@@ -1779,7 +1785,6 @@ final class DemoRepository {
             description: "Tracking added; the carrier has not announced it yet",
             location: nil, occurredAt: now
         )
-        let handoff = CarrierCatalog.supportsSwissPostHandoff(request.trackingNumber)
         let parcel = Parcel(
             id: id,
             trackingNumber: request.trackingNumber,
@@ -1793,7 +1798,7 @@ final class DemoRepository {
             syncError: nil,
             trackingURL: request.trackingURL,
             dpdPostcode: request.dpdPostcode,
-            carrierData: handoff ? CarrierData(activeTrackingCarrier: .aliexpress, swissPostReady: false) : nil,
+            carrierData: Self.startingCarrierData(request.trackingNumber, postcode: request.dpdPostcode, country: request.dpdPostcodeCountry),
             archivedAt: nil,
             notificationsMuted: false,
             trackingEvents: [event]
@@ -1812,7 +1817,8 @@ final class DemoRepository {
         id: UUID,
         carrier: CarrierID,
         trackingURL: String?,
-        dpdPostcode: String?
+        dpdPostcode: String?,
+        dpdPostcodeCountry: String?
     ) throws -> Parcel {
         try update(id: id) { parcel in
             let now = DateParser.isoString(Date())
@@ -1824,9 +1830,7 @@ final class DemoRepository {
             parcel.lastSyncedAt = nil
             parcel.syncStatus = .pending
             parcel.syncError = nil
-            parcel.carrierData = CarrierCatalog.supportsSwissPostHandoff(parcel.trackingNumber)
-                ? CarrierData(activeTrackingCarrier: .aliexpress, swissPostReady: false)
-                : nil
+            parcel.carrierData = Self.startingCarrierData(parcel.trackingNumber, postcode: dpdPostcode, country: dpdPostcodeCountry)
             parcel.trackingEvents = [TrackingEvent(
                 id: UUID(),
                 packageID: id,
@@ -1836,6 +1840,14 @@ final class DemoRepository {
                 occurredAt: now
             )]
         }
+    }
+
+    /// A parcel's carrier data as the service starts it: Swiss Post's handoff, and the country of a postcode from abroad.
+    private static func startingCarrierData(_ trackingNumber: String, postcode: String?, country: String?) -> CarrierData? {
+        var data = CarrierCatalog.supportsSwissPostHandoff(trackingNumber)
+            ? CarrierData(activeTrackingCarrier: .aliexpress, swissPostReady: false) : CarrierData()
+        if let postcode, let country { data.postcodeCountry = PostcodeCountry(postcode: postcode, country: country) }
+        return data == CarrierData() ? nil : data
     }
 
     func setMuted(id: UUID, muted: Bool) throws -> Parcel {

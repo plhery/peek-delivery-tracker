@@ -1,13 +1,20 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, onTestFinished, vi } from 'vitest';
 import { ParcelDetail } from './ParcelDetail';
 import { parcelTrackingLinks } from '../lib/carriers';
 import type { ParcelWithEvents } from '../types';
 
 const parcel: ParcelWithEvents = { id: 'parcel', carrier: 'heppner', trackingNumber: '12345678', label: 'Books', createdAt: '2026-09-10T12:00:00Z', syncStatus: 'ok', events: [] };
-function show(values: Partial<ParcelWithEvents> = {}) {
-  return render(<ParcelDetail parcel={{ ...parcel, ...values }} onBack={vi.fn()} onRename={vi.fn()} onChangeCarrier={vi.fn()} onSetNotificationsMuted={vi.fn()} onRefresh={vi.fn()} onRestore={vi.fn()} onArchive={vi.fn()} onDelete={vi.fn()} />);
+function show(values: Partial<ParcelWithEvents> = {}, onChangeCarrier = vi.fn()) {
+  return render(<ParcelDetail parcel={{ ...parcel, ...values }} onBack={vi.fn()} onRename={vi.fn()} onChangeCarrier={onChangeCarrier} onSetNotificationsMuted={vi.fn()} onRefresh={vi.fn()} onRestore={vi.fn()} onArchive={vi.fn()} onDelete={vi.fn()} />);
+}
+
+/** Makes the device's clock read `timeZone`, the country a postcode field starts on. */
+function deviceIn(timeZone: string) {
+  const clock = vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
+    .mockReturnValue({ ...new Intl.DateTimeFormat().resolvedOptions(), timeZone });
+  onTestFinished(() => clock.mockRestore());
 }
 
 describe('shipment details', () => {
@@ -216,6 +223,7 @@ describe('shipment details', () => {
   });
 
   it('asks for the postcode the parcel’s own carrier needs to find it', async () => {
+    deviceIn('Europe/Amsterdam');
     const asked = { carrier: 'spring-gds', trackingNumber: '3SABCD826405193', inputNeeded: { carrier: 'spring-gds', field: 'dpdPostcode' } } as const;
     const view = show(asked);
     expect(screen.getByText('PostNL needs the delivery postcode to find this parcel.')).toBeInTheDocument();
@@ -231,6 +239,29 @@ describe('shipment details', () => {
       expect(screen.queryByText(/needs the delivery postcode/)).not.toBeInTheDocument();
       other.unmount();
     }
+  });
+
+  it('takes a postcode from the country the parcel goes to, named beside the field', async () => {
+    deviceIn('Europe/Amsterdam');
+    const onChangeCarrier = vi.fn().mockResolvedValue(undefined);
+    const user = userEvent.setup();
+    show({ carrier: 'spring-gds', trackingNumber: '3SABCD826405193', destinationCountry: 'BE',
+      inputNeeded: { carrier: 'spring-gds', field: 'dpdPostcode' } }, onChangeCarrier);
+    await user.click(screen.getByRole('button', { name: 'Add postcode' }));
+    const postcode = screen.getByRole('textbox', { name: /^Delivery postcode/ });
+    const country = screen.getByRole('combobox', { name: 'Delivery country' });
+    // The parcel goes to Belgium: its postcode is Belgian, and goes with the country.
+    expect(country).toHaveValue('BE');
+    expect(postcode).toHaveAttribute('placeholder', '1000');
+    await user.type(postcode, '1000');
+    expect(postcode).toBeValid();
+    await user.click(screen.getByRole('button', { name: 'Save carrier' }));
+    expect(onChangeCarrier).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'spring-gds' }),
+      expect.objectContaining({ carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' }));
+    // A Dutch one goes without a country, as it always has.
+    await user.click(screen.getByRole('button', { name: 'Add postcode' }));
+    await user.selectOptions(screen.getByRole('combobox', { name: 'Delivery country' }), 'NL');
+    expect(screen.getByRole('textbox', { name: /^Delivery postcode/ })).toHaveAttribute('placeholder', '1234 AB');
   });
 
   it('offers the carrier a number points to when it needs a postcode to be asked', async () => {

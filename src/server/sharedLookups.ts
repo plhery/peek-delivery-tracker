@@ -1,5 +1,6 @@
 import 'server-only';
 import { normalizeTrackingNumber } from '../lib/carriers';
+import { storedPostcodeCountry } from '../lib/postcodeCountry';
 import { normalizedLookupCountry } from './lookupCountry';
 import { isRecord, type JsonObject } from './types';
 
@@ -21,7 +22,7 @@ const number = (value: unknown): string => normalizeTrackingNumber(String(value 
 
 /**
  * Everything a check of the parcel sends upstream: its carrier, number,
- * inputs, delivery leg and lookup country. Copies with the same identity make
+ * inputs and its postcode's country, delivery leg and lookup country. Copies with the same identity make
  * the same lookups. None when the parcel's routing still holds the inputs of
  * an earlier configuration, which another copy must never receive.
  */
@@ -35,7 +36,7 @@ function lookupIdentity(parcel: JsonObject): string | null {
   const input = isRecord(data.universal_input) ? [text(data.universal_input.number), text(data.universal_input.postcode)] : null;
   return JSON.stringify([String(parcel.carrier ?? ''), number(parcel.tracking_number), url, postcode, input,
     text(data.original_carrier), text(data.active_tracking_carrier), text(data.active_tracking_number),
-    data.swiss_post_ready === true, normalizedLookupCountry(data.lookup_country_hint)]);
+    data.swiss_post_ready === true, normalizedLookupCountry(data.lookup_country_hint), storedPostcodeCountry(data, postcode) ?? null]);
 }
 
 function pick(source: JsonObject, keys: readonly string[]): JsonObject {
@@ -138,8 +139,8 @@ export class ParcelLookups {
  * language, so copies whose owners read different languages never take each other's wording.
  */
 export function carrierLookupKey(carrier: string, trackingNumber: string, trackingUrl: string | null, postcode?: string | null,
-  language?: string | null): unknown[] {
-  return ['carrier', carrier, number(trackingNumber), text(trackingUrl), text(postcode), text(language)];
+  language?: string | null, postcodeCountry?: string | null): unknown[] {
+  return ['carrier', carrier, number(trackingNumber), text(trackingUrl), text(postcode), text(language), text(postcodeCountry)];
 }
 
 /** What a universal provider lookup sends, the carrier it may ask about included. */

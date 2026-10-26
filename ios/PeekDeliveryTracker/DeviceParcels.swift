@@ -297,7 +297,7 @@ final class DeviceParcels {
         let response = try await client.lookup(PublicLookupRequest(
             trackingNumber: request.trackingNumber, carrier: request.carrier,
             trackingURL: request.trackingURL, dpdPostcode: request.dpdPostcode,
-            lookupCountryHint: request.lookupCountryHint
+            dpdPostcodeCountry: request.dpdPostcodeCountry, lookupCountryHint: request.lookupCountryHint
         ))
         guard ParcelLinkRoute.validID(response.link.id) else { throw DeliveryAPIError.invalidResponse }
         var entry = DeviceParcel(linkID: response.link.id, label: request.label ?? "", archivedAt: nil,
@@ -391,12 +391,13 @@ final class DeviceParcels {
     }
 
     /// Follows the same number with another carrier, link or postcode: a new lookup, which takes the old one's place and name.
-    func changeCarrier(id: UUID, carrier: CarrierID, trackingURL: String?, dpdPostcode: String?) async throws -> Parcel {
+    func changeCarrier(id: UUID, carrier: CarrierID, trackingURL: String?, dpdPostcode: String?,
+                       dpdPostcodeCountry: String? = nil) async throws -> Parcel {
         // Someone else's parcel is followed as its link shows it, and its carrier stays theirs to change.
         guard let entry = entries.first(where: { $0.parcel.id == id }), !entry.isViewer else { throw DeliveryAPIError.parcelMissing }
         let added = try await lookUp(CreatePackageRequest(
             trackingNumber: entry.parcel.trackingNumber, label: entry.label, carrier: carrier,
-            trackingURL: trackingURL, dpdPostcode: dpdPostcode,
+            trackingURL: trackingURL, dpdPostcode: dpdPostcode, dpdPostcodeCountry: dpdPostcodeCountry,
             lookupCountryHint: ParcelLookupCountry.hint()
         ), replacing: id)
         if added.id != id {

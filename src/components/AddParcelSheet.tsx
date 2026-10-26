@@ -16,7 +16,8 @@ import {
   tracksAutomatically,
   typedRequirementValue,
 } from '../lib/carriers';
-import { lettersPostcode, postcodeExample } from '../lib/postcodeExample';
+import { deviceCountry, lettersPostcode, postcodeExample } from '../lib/postcodeExample';
+import { initialPostcodeCountry, postcodeCountries, postcodeFieldFor, sentPostcodeCountry } from '../lib/postcodeCountry';
 import { rememberedPostcode, type GivenPostcode } from '../lib/postcodeMemory';
 import { canAskCarrier, carrierCheck, carrierChoiceSections, carrierChoiceTags, carrierNameList, shapeCarrier } from '../lib/carrierPicker';
 import {
@@ -29,6 +30,7 @@ import { useI18n } from '../i18n';
 import { Icon } from './Icon';
 import { CarrierTruck } from './CarrierMark';
 import { CarrierPickerSheet } from './CarrierPickerSheet';
+import { PostcodeCountry } from './PostcodeCountry';
 import './AddParcelSheet.css';
 import { useTypingPause } from '../lib/typingPause';
 import { FoundNumber } from '../peek/lookup/FoundNumber';
@@ -89,6 +91,9 @@ export function AddParcelSheet({
   });
   // Each carrier's postcode is kept apart: one typed for a carrier never goes to another.
   const [carrierPostcodes, setCarrierPostcodes] = useState<Partial<Record<CarrierId, string>>>({});
+  // And the country each is from, chosen beside it.
+  const [postcodeCountryChoices, setPostcodeCountryChoices] = useState<Partial<Record<CarrierId, string>>>({});
+  const [region] = useState(deviceCountry);
   const [selectedCarrier, setSelectedCarrier] = useState<CarrierId | 'auto'>('auto');
   const [verifiedCarrier, setVerifiedCarrier] = useState<ApiCarrierDetectionResponse>();
   // Carrier recognition: a shape several carriers share is checked with them
@@ -226,7 +231,11 @@ export function AddParcelSheet({
   const knownElsewhere = selectedCarrier !== 'auto' && check.status === 'found' && check.carrier !== selectedCarrier
     ? carrierInfo(check.carrier, locale) : null;
   const carrier = trackingNumber ? carrierInfo(resolvedCarrier, locale) : null;
-  const requirements = carrier ? carrierRequirements(carrier.id, trackingNumber) : [];
+  // A postcode is from the device's country unless the reader names another the carrier takes.
+  const postcodeCountry = carrier
+    ? postcodeCountryChoices[carrier.id] ?? initialPostcodeCountry(carrier.id, trackingNumber, [region]) : null;
+  const requirements = carrier ? carrierRequirements(carrier.id, trackingNumber)
+    .map((requirement) => postcodeFieldFor(requirement, carrier.id, trackingNumber, postcodeCountry)) : [];
   const requiresCarrierConfirmation =
     selectedCarrier === 'auto' && parsedTracking.confidence === 'low'
     && !tracksAutomatically(parsedTracking.carrier);
@@ -334,6 +343,9 @@ export function AddParcelSheet({
           : undefined,
         dpdPostcode: requirements.some(({ field }) => field === 'dpdPostcode')
           ? carrierInputValue('dpdPostcode').trim().toUpperCase()
+          : undefined,
+        dpdPostcodeCountry: requirements.some(({ field }) => field === 'dpdPostcode') && carrierInputValue('dpdPostcode').trim()
+          ? sentPostcodeCountry(resolvedCarrier, postcodeCountry)
           : undefined,
       });
       if (!mounted.current) return;
@@ -499,38 +511,45 @@ export function AddParcelSheet({
                         : t(`add.requirement.${requirement.field}`)}
                       {requirement.optional && <> <small>{t('add.optional')}</small></>}
                     </span>
-                    <input
-                      className={`field__input${lettersPostcode(requirement) ? ' field__input--postcode' : ''}`}
-                      type={requirement.type}
-                      inputMode={requirement.inputMode}
-                      autoComplete={requirement.autoComplete}
-                      value={carrierInputValue(requirement.field)}
-                      placeholder={postcodeExample(resolvedCarrier, requirement)}
-                      pattern={requirement.pattern}
-                      maxLength={requirement.maxLength}
-                      onChange={(event) => {
-                        const value = typedRequirementValue(requirement, event.target.value);
-                        if (requirement.field === 'dpdPostcode') {
-                          setCarrierPostcodes((current) => ({
-                            ...current,
-                            [resolvedCarrier]: value,
-                          }));
-                        } else {
-                          setCarrierInputs((current) => ({
-                            ...current,
-                            [requirement.field]: value,
-                          }));
-                        }
-                      }}
-                      onBlur={requirement.field === 'dpdPostcode' ? () => setCarrierPostcodes((current) => ({
-                        ...current,
-                        [resolvedCarrier]: (current[resolvedCarrier] ?? '').trim(),
-                      })) : undefined}
-                      autoCapitalize={requirement.type === 'url' ? 'none' : lettersPostcode(requirement) ? 'characters' : undefined}
-                      autoCorrect="off"
-                      spellCheck={false}
-                      required={!requirement.optional}
-                    />
+                    <PostcodeCountry
+                      carrier={resolvedCarrier}
+                      countries={requirement.field === 'dpdPostcode' ? postcodeCountries(resolvedCarrier, trackingNumber) : []}
+                      value={postcodeCountry}
+                      onChange={(country) => setPostcodeCountryChoices((current) => ({ ...current, [resolvedCarrier]: country }))}
+                    >
+                      <input
+                        className={`field__input${lettersPostcode(requirement) ? ' field__input--postcode' : ''}`}
+                        type={requirement.type}
+                        inputMode={requirement.inputMode}
+                        autoComplete={requirement.autoComplete}
+                        value={carrierInputValue(requirement.field)}
+                        placeholder={postcodeExample(resolvedCarrier, requirement, postcodeCountry)}
+                        pattern={requirement.pattern}
+                        maxLength={requirement.maxLength}
+                        onChange={(event) => {
+                          const value = typedRequirementValue(requirement, event.target.value);
+                          if (requirement.field === 'dpdPostcode') {
+                            setCarrierPostcodes((current) => ({
+                              ...current,
+                              [resolvedCarrier]: value,
+                            }));
+                          } else {
+                            setCarrierInputs((current) => ({
+                              ...current,
+                              [requirement.field]: value,
+                            }));
+                          }
+                        }}
+                        onBlur={requirement.field === 'dpdPostcode' ? () => setCarrierPostcodes((current) => ({
+                          ...current,
+                          [resolvedCarrier]: (current[resolvedCarrier] ?? '').trim(),
+                        })) : undefined}
+                        autoCapitalize={requirement.type === 'url' ? 'none' : lettersPostcode(requirement) ? 'characters' : undefined}
+                        autoCorrect="off"
+                        spellCheck={false}
+                        required={!requirement.optional}
+                      />
+                    </PostcodeCountry>
                     {requirement.field === 'dpdPostcode' && offeredPostcode && (
                       <button
                         type="button"

@@ -3,6 +3,7 @@ import 'server-only';
 import { CarrierError, carrierErrorKind, retryAfterMsOf } from 'universal-parcel-scraper';
 import { trackCarrier, UniversalTracker, type AdapterRegistry } from 'universal-parcel-scraper/node';
 import { createAdapterRegistry } from './adapterRegistry';
+import { carrierLookupInput } from './postcodeCountry';
 import { hostStepRecorder } from './stepRecorder';
 
 /**
@@ -41,18 +42,20 @@ function reasonOf(error: unknown): string | undefined {
  * A carrier that asks for the input again, finds it invalid or no longer finds
  * the parcel refused the postcode, and so does a portal that finds nothing
  * with it (PostNL's domestic tracker answers a wrong postcode as an unknown
- * barcode); any other failure says nothing about it.
+ * barcode); any other failure says nothing about it. A postcode from abroad
+ * goes with its country.
  */
 export async function checkLinkPostcode(
   carrier: string,
   trackingNumber: string,
   postcode: string,
+  country?: string | null,
   signal?: AbortSignal,
 ): Promise<PostcodeCheck> {
   const adapters = registry ??= createAdapterRegistry();
   if (!adapters.for(carrier)) return { outcome: 'unavailable' };
   try {
-    await trackCarrier(carrier, { number: trackingNumber, trackingUrl: null, postcode }, {
+    await trackCarrier(carrier, carrierLookupInput(trackingNumber, null, postcode, country), {
       registry: adapters,
       // Never asked: the carrier has an adapter of its own.
       universal: universal ??= new UniversalTracker(),

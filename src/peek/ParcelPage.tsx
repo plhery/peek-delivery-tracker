@@ -532,7 +532,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     {alerting && <AlertsSheet linkId={linkId} ownerKey={key} name={name} alerts={link.alerts} initialPreset={early ? 'all' : 'important'}
       calendar={calendarWindow} onCalendar={calendarFile}
       onSignIn={session.account === 'visitor' && !sample ? signInFor : undefined} onClose={() => setAlerting(false)} />}
-    {addingPostcode && asked && key && <PostcodeSheet linkId={linkId} ownerKey={key} carrier={asked.carrier} own={ownAsks} onAdded={adopt}
+    {addingPostcode && asked && key && <PostcodeSheet linkId={linkId} ownerKey={key} carrier={asked.carrier}
+      trackingNumber={parcel.trackingNumber} destination={parcel.destinationCountry} own={ownAsks} onAdded={adopt}
       onClose={() => setAddingPostcode(false)} />}
     {forgetting && <ForgetDialog arrived={forgetting === 'arrived' ? { forgetLine } : undefined} onForget={forget} onCancel={() => setForgetting(false)} />}
     {mapOpen && route && <ParcelMapSheet route={route} stage={stage ?? undefined} brand={brand} onClose={() => setMapOpen(false)} />}

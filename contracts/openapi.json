@@ -35317,6 +35317,25 @@
           }
         }
       },
+      "PostcodeCountry": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The country of the delivery postcode, when the owner named one other than the carrier's home country. It holds only while `postcode` is the parcel's `dpd_postcode`.",
+        "required": [
+          "postcode",
+          "country"
+        ],
+        "properties": {
+          "postcode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO 3166-1 alpha-2 code."
+          }
+        }
+      },
       "ImportCharges": {
         "type": "object",
         "additionalProperties": true,
@@ -35679,6 +35698,16 @@
                 ],
                 "description": "False when DPD rejected the stored delivery postcode and the lookup continued without it."
               },
+              "postcode_country": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/PostcodeCountry"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
               "destination_country": {
                 "type": [
                   "string",
@@ -35867,6 +35896,11 @@
             "pattern": "^(?=.{3,12}$)(?=.*[0-9])[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$",
             "description": "Recipient postcode, optional for DPD Switzerland (any country’s postcode, 3 to 12 letters and digits in groups joined by a space or hyphen; it unlocks verified scans) and DPD Germany (five digits), and required by GLS Switzerland (four digits), GLS Germany and Heppner (four or five digits), Mondial Relay short shipment numbers (five digits; optional for validated 26-digit barcodes) and Paack (carrier-specific alphanumeric format). It is rejected for other carriers. This property keeps its historical name for API compatibility."
           },
+          "dpdPostcodeCountry": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO country code of dpdPostcode when it is from another country than the carrier's home, such as a Belgian postcode for a parcel PostNL delivers in Belgium. Sent to the carrier with the postcode. A carrier that checks its own countries' postcode shapes takes only those countries; the home country, or no postcode, keeps none."
+          },
           "lookupCountryHint": {
             "type": "string",
             "pattern": "^[A-Z]{2}$",
@@ -35906,6 +35940,11 @@
             "type": "string",
             "pattern": "^(?=.{3,12}$)(?=.*[0-9])[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$",
             "description": "Recipient postcode, optional for DPD Switzerland and DPD Germany and required by GLS Switzerland, GLS Germany, Mondial Relay short shipment numbers, Heppner or Paack."
+          },
+          "dpdPostcodeCountry": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO country code of dpdPostcode when it is from another country than the carrier's home, such as a Belgian postcode for a parcel PostNL delivers in Belgium. Sent to the carrier with the postcode. A carrier that checks its own countries' postcode shapes takes only those countries; the home country, or no postcode, keeps none."
           },
           "providerPostcode": {
             "type": "string",
@@ -37325,6 +37364,11 @@
             "pattern": "^(?=.{3,12}$)(?=.*[0-9])[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$",
             "description": "Recipient postcode, for the carriers that take one; see CreatePackageRequest."
           },
+          "dpdPostcodeCountry": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO country code of dpdPostcode; see CreatePackageRequest."
+          },
           "lookupCountryHint": {
             "type": "string",
             "pattern": "^[A-Z]{2}$",
@@ -37510,6 +37554,11 @@
             "minLength": 1,
             "maxLength": 32,
             "description": "The parcel's delivery postcode, as the recipient writes it."
+          },
+          "postcodeCountry": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO country code of the postcode when it is from another country than the carrier's home; see CreatePackageRequest.dpdPostcodeCountry."
           }
         }
       },

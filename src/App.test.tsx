@@ -805,6 +805,11 @@ describe('App', () => {
       await user.clear(postcode);
     }
 
+    // The postcode is from the reader's country unless they name another beside it.
+    const country = within(sheet).getByRole('combobox', { name: 'Delivery country' });
+    expect(country).toHaveValue('FR');
+    await user.selectOptions(country, 'GB');
+    expect(postcode).toHaveAttribute('placeholder', 'SW1A 1AA');
     await user.type(postcode, ' sw1a  1aa ');
     expect(postcode).toHaveValue('sw1a 1aa ');
     await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
@@ -814,6 +819,7 @@ describe('App', () => {
       label: '',
       carrier: 'dpd',
       dpdPostcode: 'SW1A 1AA',
+      dpdPostcodeCountry: 'GB',
     });
   });
 
@@ -926,6 +932,7 @@ describe('App', () => {
 
     await user.clear(postcode);
     await user.type(postcode, '1000');
+    await user.selectOptions(within(sheet).getByRole('combobox', { name: 'Delivery country' }), 'BE');
     await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
 
     expect(add).toHaveBeenCalledWith({
@@ -933,6 +940,7 @@ describe('App', () => {
       label: '',
       carrier: 'mondial-relay',
       dpdPostcode: '1000',
+      dpdPostcodeCountry: 'BE',
     });
   });
 
@@ -1056,6 +1064,10 @@ describe('App', () => {
   });
 
   it('extracts the carrier and tracking number from a pasted tracking link', async () => {
+    // A reader in Switzerland: their postcode goes to DPD Switzerland without a country.
+    const clock = vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
+      .mockReturnValue({ ...new Intl.DateTimeFormat().resolvedOptions(), timeZone: 'Europe/Zurich' });
+    onTestFinished(() => clock.mockRestore());
     const base = createDemoRepo(window.localStorage);
     const add = vi.fn(base.add);
     const user = userEvent.setup();

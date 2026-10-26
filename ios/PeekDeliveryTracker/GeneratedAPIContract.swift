@@ -1707,6 +1707,11 @@ struct EventPlace: Codable, Equatable, Hashable, Sendable {
     var region: String? = nil
 }
 
+struct PostcodeCountry: Codable, Equatable, Hashable, Sendable {
+    var postcode: String
+    var country: String
+}
+
 struct ImportCharges: Codable, Equatable, Hashable, Sendable {
     var currency: String
     var customs: Double? = nil
@@ -1800,6 +1805,7 @@ struct CreatePackageRequest: Codable, Equatable, Hashable, Sendable {
     var carrier: CarrierID? = nil
     var trackingURL: String? = nil
     var dpdPostcode: String? = nil
+    var dpdPostcodeCountry: String? = nil
     var lookupCountryHint: String? = nil
 
     private enum CodingKeys: String, CodingKey {
@@ -1808,6 +1814,7 @@ struct CreatePackageRequest: Codable, Equatable, Hashable, Sendable {
         case carrier
         case trackingURL = "trackingUrl"
         case dpdPostcode
+        case dpdPostcodeCountry
         case lookupCountryHint
     }
 }
@@ -1820,12 +1827,14 @@ struct ChangePackageCarrierRequest: Codable, Equatable, Hashable, Sendable {
     var carrier: CarrierID
     var trackingURL: String? = nil
     var dpdPostcode: String? = nil
+    var dpdPostcodeCountry: String? = nil
     var providerPostcode: String? = nil
 
     private enum CodingKeys: String, CodingKey {
         case carrier
         case trackingURL = "trackingUrl"
         case dpdPostcode
+        case dpdPostcodeCountry
         case providerPostcode
     }
 }
@@ -2314,6 +2323,7 @@ struct PublicLookupRequest: Codable, Equatable, Hashable, Sendable {
     var carrier: CarrierID? = nil
     var trackingURL: String? = nil
     var dpdPostcode: String? = nil
+    var dpdPostcodeCountry: String? = nil
     var lookupCountryHint: String? = nil
 
     private enum CodingKeys: String, CodingKey {
@@ -2321,6 +2331,7 @@ struct PublicLookupRequest: Codable, Equatable, Hashable, Sendable {
         case carrier
         case trackingURL = "trackingUrl"
         case dpdPostcode
+        case dpdPostcodeCountry
         case lookupCountryHint
     }
 }
@@ -2375,6 +2386,7 @@ struct UpdateParcelLinkRequest: Codable, Equatable, Hashable, Sendable {
 struct ParcelLinkPostcodeRequest: Codable, Equatable, Hashable, Sendable {
     var carrier: CarrierID
     var postcode: String
+    var postcodeCountry: String? = nil
 }
 
 enum ParcelAlertPreset: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
@@ -2532,6 +2544,7 @@ struct CarrierData: Codable, Equatable, Hashable, Sendable {
     var weightKg: Double? = nil
     var importCharges: ImportCharges? = nil
     var dpdPostcodeVerified: Bool? = nil
+    var postcodeCountry: PostcodeCountry? = nil
     var destinationCountry: String? = nil
     var routing: CarrierDataRouting? = nil
 
@@ -2559,6 +2572,7 @@ struct CarrierData: Codable, Equatable, Hashable, Sendable {
         case weightKg
         case importCharges
         case dpdPostcodeVerified
+        case postcodeCountry
         case destinationCountry
         case routing
     }

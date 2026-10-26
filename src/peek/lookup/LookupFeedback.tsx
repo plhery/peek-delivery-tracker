@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { CarrierMark, CarrierTruck } from '../../components/CarrierMark';
+import { PostcodeCountry } from '../../components/PostcodeCountry';
 import { Icon } from '../../components/Icon';
 import { useI18n, type MessageKey } from '../../i18n';
 import { amazonOrdersUrl } from '../../lib/amazon';
@@ -157,18 +158,21 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
           {locale === 'en' ? requirement.label : t(`add.requirement.${requirement.field}`)}
           {requirement.optional && <> <small>{t('add.optional')}</small></>}
         </label>
-        <input id={id} className={`door-input__field${lettersPostcode(requirement) ? ' door-input__field--postcode' : ''}`}
-          type={requirement.type} inputMode={requirement.inputMode} autoComplete={requirement.autoComplete}
-          value={value} placeholder={postcodeExample(found.inputCarrier, requirement)} pattern={requirement.pattern} maxLength={requirement.maxLength}
-          readOnly={Boolean(state.job)} required={!requirement.optional} aria-describedby={`${id}-help`}
-          aria-invalid={inputTrouble && found.missing?.field === requirement.field ? true : undefined}
-          autoCapitalize={requirement.type === 'url' ? 'none' : lettersPostcode(requirement) ? 'characters' : undefined} autoCorrect="off" spellCheck={false}
-          onChange={(event) => send({
-            type: 'fill',
-            carrier: found.inputCarrier,
-            field: requirement.field,
-            value: typedRequirementValue(requirement, event.target.value),
-          })} />
+        <PostcodeCountry carrier={found.inputCarrier} countries={postcode ? found.postcodeCountries : []} value={found.postcodeCountry}
+          disabled={Boolean(state.job)} onChange={(country) => send({ type: 'country', carrier: found.inputCarrier, country })}>
+          <input id={id} className={`door-input__field${lettersPostcode(requirement) ? ' door-input__field--postcode' : ''}`}
+            type={requirement.type} inputMode={requirement.inputMode} autoComplete={requirement.autoComplete}
+            value={value} placeholder={postcodeExample(found.inputCarrier, requirement, found.postcodeCountry)} pattern={requirement.pattern}
+            maxLength={requirement.maxLength} readOnly={Boolean(state.job)} required={!requirement.optional} aria-describedby={`${id}-help`}
+            aria-invalid={inputTrouble && found.missing?.field === requirement.field ? true : undefined}
+            autoCapitalize={requirement.type === 'url' ? 'none' : lettersPostcode(requirement) ? 'characters' : undefined} autoCorrect="off" spellCheck={false}
+            onChange={(event) => send({
+              type: 'fill',
+              carrier: found.inputCarrier,
+              field: requirement.field,
+              value: typedRequirementValue(requirement, event.target.value),
+            })} />
+        </PostcodeCountry>
         {remembered && !value && requirement.optional && <button type="button" className="door-suggestion" disabled={Boolean(state.job)}
           onClick={() => send({ type: 'fill', carrier: found.inputCarrier, field: requirement.field, value: remembered })}>
           {t('add.usePostcode', { postcode: remembered })}

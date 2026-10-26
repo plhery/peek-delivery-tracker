@@ -320,6 +320,31 @@ describe('what a carrier asks for', () => {
   });
 });
 
+describe('the country of a postcode', () => {
+  const POSTNL = '3SABCD826405193';
+  const chosen = (from?: LookupState) => run([typed(POSTNL), { type: 'choose', carrier: 'spring-gds' }], [], from);
+
+  it('starts on the device’s country when the carrier takes a postcode from it, otherwise the carrier’s own', () => {
+    expect(survey(chosen())).toMatchObject({ postcodeCountry: 'NL', fields: [{ field: 'dpdPostcode', placeholder: '1234 AB' }] });
+    expect(survey(chosen(initialLookup('', 'BE')))).toMatchObject({ postcodeCountry: 'BE', fields: [{ placeholder: '1000' }] });
+  });
+
+  it('takes a postcode from the country named beside it, and sends that country with it', () => {
+    const refused = run([{ type: 'fill', carrier: 'spring-gds', field: 'dpdPostcode', value: '1000' }, track], [], chosen());
+    expect(refused).toMatchObject({ job: null, trouble: { kind: 'validation', message: 'error.postcode' } });
+    const belgian = run([{ type: 'country', carrier: 'spring-gds', country: 'BE' }], [], refused);
+    expect(belgian.trouble).toBeNull();
+    expect(survey(belgian)).toMatchObject({ postcodeCountry: 'BE', fields: [{ placeholder: '1000' }], missing: null });
+    expect(run([track], [], belgian).job).toEqual({ type: 'lookup', carrier: 'spring-gds',
+      input: { trackingNumber: POSTNL, carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' } });
+    // The carrier's own country goes without one.
+    const dutch = run([{ type: 'country', carrier: 'spring-gds', country: 'NL' },
+      { type: 'fill', carrier: 'spring-gds', field: 'dpdPostcode', value: '1012 AB' }, track], [], belgian);
+    expect(dutch.job).toEqual({ type: 'lookup', carrier: 'spring-gds',
+      input: { trackingNumber: POSTNL, carrier: 'spring-gds', dpdPostcode: '1012 AB' } });
+  });
+});
+
 describe('a carrier that may have the number', () => {
   const SHEIN = 'E25010100000001'; // A SHEIN shape: Paack may have it, and answers only with the delivery postcode.
   const answer: LookupEvent = { type: 'answer', answer: { trackingNumber: SHEIN, carrier: 'unknown', inputSuggested: { carrier: 'paack', field: 'dpdPostcode' } } };

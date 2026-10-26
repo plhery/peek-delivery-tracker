@@ -317,7 +317,7 @@ export function createDemoLinks(
       return view(id, next, true);
     },
 
-    async addParcelPostcode(id, key, _carrier, _postcode, signal) {
+    async addParcelPostcode(id, key, _carrier, _postcode, _country, signal) {
       signal?.throwIfAborted();
       const link = found(load(), id);
       if (!link || link.key === null || link.key !== key) throw new ParcelLinkError('unavailable');

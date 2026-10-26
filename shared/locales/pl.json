@@ -44,6 +44,7 @@
   "add.requirement.dpdPostcode": "Kod pocztowy odbiorcy",
   "add.requirement.dpdPostcodeHelp": "Przewoźnik potrzebuje kodu pocztowego odbiorcy, aby pokazać aktualizacje.",
   "add.requirement.dpdPostcodeOptionalHelp": "Dzięki niemu {{carrier}} pokaże też zweryfikowane skany i przedział czasowy doręczenia.",
+  "add.requirement.postcodeCountry": "Kraj doręczenia",
   "add.requirement.trackingUrl": "Pełny link śledzenia",
   "add.requirement.trackingUrlHelp": "Wklej pełny link z wiadomości o wysyłce.",
   "add.scan": "Skanuj kod kreskowy",

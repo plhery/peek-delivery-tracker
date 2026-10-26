@@ -6,11 +6,14 @@ import {
   type ApiParcelFeedbackAnswer,
   type ApiParcelFeedbackReason,
 } from '../generated/apiContract';
-import { validTrackingNumber } from '../lib/carriers';
+import { carrierInfo, validTrackingNumber } from '../lib/carriers';
+import { sentPostcodeCountry, takesAnyPostcode } from '../lib/postcodeCountry';
+import type { CarrierId } from '../types';
 import { ALERT_PRESET_STAGES, ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import { createECDH } from 'node:crypto';
 import { HttpError, parseUuid } from './api';
 import { normalizeCarrierInputs } from './carriers';
+import { normalizedLookupCountry } from './lookupCountry';
 import { isRecord, type JsonObject } from './types';
 
 const VALID_CARRIERS = new Set<string>(CARRIER_IDS);
@@ -34,12 +37,29 @@ export interface NewPackageValues {
   carrier: string;
   trackingUrl: string | null;
   dpdPostcode: string | null;
+  /** The postcode's country, when it is not the carrier's home country. */
+  dpdPostcodeCountry: string | null;
 }
 
 export type PackageCarrierValues = Pick<
   NewPackageValues,
-  'carrier' | 'trackingUrl' | 'dpdPostcode'
+  'carrier' | 'trackingUrl' | 'dpdPostcode' | 'dpdPostcodeCountry'
 >;
+
+/**
+ * The country a supplied postcode is from: any country for a carrier that
+ * takes any country's postcode, else one of its own. Its home country, or no
+ * postcode, keeps none.
+ */
+function postcodeCountry(carrier: CarrierId, trackingNumber: string, postcode: string | null, raw: string): string | null {
+  const code = raw.trim().toUpperCase();
+  if (!code || !postcode) return null;
+  if (normalizedLookupCountry(code) !== code
+    || (!takesAnyPostcode(carrier, trackingNumber) && !carrierInfo(carrier).countries.includes(code))) {
+    throw new HttpError(400, `${carrierInfo(carrier).name} takes no delivery postcode from that country`);
+  }
+  return sentPostcodeCountry(carrier, code) ?? null;
+}
 
 export function newPackageValues(payload: JsonObject): NewPackageValues {
   const rawTracking = payload.trackingNumber ?? '';
@@ -47,16 +67,18 @@ export function newPackageValues(payload: JsonObject): NewPackageValues {
   const rawCarrier = payload.carrier ?? 'unknown';
   const rawTrackingUrl = payload.trackingUrl ?? '';
   const rawDpdPostcode = payload.dpdPostcode ?? '';
+  const rawPostcodeCountry = payload.dpdPostcodeCountry ?? '';
   if (
     typeof rawTracking !== 'string'
     || typeof rawLabel !== 'string'
     || typeof rawCarrier !== 'string'
     || typeof rawTrackingUrl !== 'string'
     || typeof rawDpdPostcode !== 'string'
+    || typeof rawPostcodeCountry !== 'string'
   ) {
     throw new HttpError(
       400,
-      'Tracking number, label, carrier, tracking URL and postcode must be text',
+      'Tracking number, label, carrier, tracking URL, postcode and its country must be text',
     );
   }
   const trackingNumber = rawTracking.replace(/[\s.-]/g, '').toUpperCase();
@@ -93,6 +115,7 @@ export function newPackageValues(payload: JsonObject): NewPackageValues {
     label: rawLabel.trim(),
     carrier,
     ...extras,
+    dpdPostcodeCountry: postcodeCountry(carrier as CarrierId, trackingNumber, extras.dpdPostcode, rawPostcodeCountry),
   };
 }
 
@@ -109,11 +132,13 @@ export function packageCarrierValues(
     carrier: payload.carrier,
     trackingUrl: payload.trackingUrl ?? '',
     dpdPostcode: payload.dpdPostcode ?? '',
+    dpdPostcodeCountry: payload.dpdPostcodeCountry ?? '',
   });
   return {
     carrier: values.carrier,
     trackingUrl: values.trackingUrl,
     dpdPostcode: values.dpdPostcode,
+    dpdPostcodeCountry: values.dpdPostcodeCountry,
   };
 }
 

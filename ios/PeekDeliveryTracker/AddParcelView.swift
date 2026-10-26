@@ -24,6 +24,8 @@ struct AddParcelView: View {
     @State private var trackingURL = ""
     @State private var deliveryPostcode = ""
     @State private var postcodeFill = PostcodeFill()
+    /// The delivery country chosen beside the postcode, kept, as the postcode is, for each carrier whose field takes it.
+    @State private var chosenPostcodeCountry: String?
     @State private var showingScanner = false
     @State private var showingCarrierPicker = false
     @State private var didFocusTracking = false
@@ -612,6 +614,7 @@ struct AddParcelView: View {
                         .onChange(of: trackingURL) { _, value in
                             trackingURL = requirement.normalizedValue(value)
                         }
+                        .padding(14)
                 }
             }
 
@@ -626,20 +629,30 @@ struct AddParcelView: View {
                             : localizer.text("add.requirement.dpdPostcodeHelp"),
                         optional: requirement.isOptional
                     ) {
-                        let example = catalog.postcodeExample(for: resolvedCarrier, requirement: requirement)
-                        TextField(example ?? "", text: $deliveryPostcode)
-                            .drawnField()
-                            .font(.body.monospacedDigit())
-                            .keyboardType(requirement.inputMode == "numeric" ? .numberPad
-                                : requirement.startsWithNumberKeys(example: example) ? .numbersAndPunctuation : .asciiCapable)
-                            .textInputAutocapitalization(.characters)
-                            .autocorrectionDisabled()
-                            .textContentType(.postalCode)
-                            .focused($focusedField, equals: .deliveryPostcode)
-                            .accessibilityLabel(localizer.text("add.requirement.dpdPostcode"))
-                            .onChange(of: deliveryPostcode) { _, value in
-                                deliveryPostcode = requirement.typedValue(value)
+                        let example = catalog.postcodeExample(for: resolvedCarrier, requirement: requirement, region: postcodeCountry)
+                        HStack(spacing: 0) {
+                            if let country = offeredPostcodeCountry, let carrierRequirement = carrierPostcodeRequirement {
+                                PostcodeCountryMenu(carrier: resolvedCarrier, requirement: carrierRequirement, country: country,
+                                                    inset: EdgeInsets(top: 14, leading: 14, bottom: 14, trailing: 10)) {
+                                    chosenPostcodeCountry = $0
+                                }
+                                Divider().padding(.vertical, 12)
                             }
+                            TextField(example ?? "", text: $deliveryPostcode)
+                                .drawnField()
+                                .font(.body.monospacedDigit())
+                                .keyboardType(requirement.inputMode == "numeric" ? .numberPad
+                                    : requirement.startsWithNumberKeys(example: example) ? .numbersAndPunctuation : .asciiCapable)
+                                .textInputAutocapitalization(.characters)
+                                .autocorrectionDisabled()
+                                .textContentType(.postalCode)
+                                .focused($focusedField, equals: .deliveryPostcode)
+                                .accessibilityLabel(localizer.text("add.requirement.dpdPostcode"))
+                                .onChange(of: deliveryPostcode) { _, value in
+                                    deliveryPostcode = requirement.typedValue(value)
+                                }
+                                .padding(14)
+                        }
                     }
                     // An optional postcode is offered, never filled in for the user.
                     if requirement.isOptional, deliveryPostcode.isEmpty,
@@ -679,7 +692,6 @@ struct AddParcelView: View {
                 }
             }
             field()
-                .padding(14)
                 .background(Brand.paper, in: RoundedRectangle(cornerRadius: 12))
                 .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Brand.separator.opacity(0.3), lineWidth: 0.7))
             Text(help)
@@ -962,12 +974,38 @@ struct AddParcelView: View {
         return carrier
     }
 
+    /// The carrier's fields, the postcode's shaped for the country beside it.
     private var requirements: [CarrierRequirement] {
-        catalog.requirements(for: resolvedCarrier, trackingNumber: parsed.trackingNumber)
+        let country = postcodeCountry
+        return catalog.requirements(for: resolvedCarrier, trackingNumber: parsed.trackingNumber).map {
+            catalog.postcodeRequirement($0, for: resolvedCarrier, country: country)
+        }
     }
 
     private var trackingURLRequirement: CarrierRequirement? {
         requirements.first(where: { $0.field == .trackingURL })
+    }
+
+    /// The carrier's postcode field, before the country beside it shapes it.
+    private var carrierPostcodeRequirement: CarrierRequirement? {
+        catalog.requirements(for: resolvedCarrier, trackingNumber: parsed.trackingNumber).first(where: { $0.field == .dpdPostcode })
+    }
+
+    /// The country the postcode is from: the one chosen while this field takes it, otherwise where the field starts.
+    private var postcodeCountry: String? {
+        guard let requirement = carrierPostcodeRequirement else { return nil }
+        if let chosenPostcodeCountry,
+           catalog.postcodeCountries(for: resolvedCarrier, requirement: requirement).contains(chosenPostcodeCountry) {
+            return chosenPostcodeCountry
+        }
+        return catalog.initialPostcodeCountry(for: resolvedCarrier, requirement: requirement)
+    }
+
+    /// The postcode's country, offered beside the field when it takes more than one.
+    private var offeredPostcodeCountry: String? {
+        guard let requirement = carrierPostcodeRequirement,
+              catalog.postcodeCountries(for: resolvedCarrier, requirement: requirement).count > 1 else { return nil }
+        return postcodeCountry
     }
 
     private var postcodeRequirement: CarrierRequirement? {
@@ -1087,13 +1125,15 @@ struct AddParcelView: View {
 
         Task {
             do {
+                let postcode = postcodeRequirement?.normalizedValue(deliveryPostcode)
                 let parcel = try await store.add(
                     trackingNumber: parsed.trackingNumber,
                     label: label,
                     carrier: resolvedCarrier,
                     trackingURL: trackingURLRequirement != nil
                         ? (parsed.trackingURL ?? trackingURL) : nil,
-                    dpdPostcode: postcodeRequirement?.normalizedValue(deliveryPostcode)
+                    dpdPostcode: postcode,
+                    dpdPostcodeCountry: catalog.sentPostcodeCountry(postcodeCountry, postcode: postcode, for: resolvedCarrier)
                 )
                 onAdded(parcel.id)
                 dismiss()
@@ -1136,6 +1176,54 @@ struct PostcodeFill: Equatable {
 
     /// Another carrier's details: what was given before may fill the field again.
     mutating func prepare() { forgotten = false }
+}
+
+/// The country a delivery postcode is from, beside its field: its flag and code, opening on the countries the
+/// field takes, the carrier's own first.
+struct PostcodeCountryMenu: View {
+    let carrier: CarrierID
+    let requirement: CarrierRequirement
+    let country: String
+    /// Inside the label, so that all of it opens the menu.
+    var inset = EdgeInsets()
+    let choose: (String) -> Void
+
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        let choices = CarrierCatalog.shared.postcodeCountryChoices(for: carrier, requirement: requirement, language: localizer.language)
+        Menu {
+            Picker(localizer.text("add.requirement.postcodeCountry"), selection: Binding(get: { country }, set: choose)) {
+                Section { options(choices.own) }
+                Section { options(choices.others) }
+            }
+        } label: {
+            HStack(spacing: 4) {
+                Text(TrackingLocation.flag(country))
+                Text(country).fontWeight(.medium)
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
+            .foregroundStyle(Brand.ink)
+            .padding(inset)
+            .contentShape(Rectangle())
+        }
+        .tint(Brand.ink)
+        #if os(macOS)
+        .menuStyle(.button)
+        .buttonStyle(.plain)
+        .menuIndicator(.hidden)
+        #endif
+        .accessibilityLabel(localizer.text("add.requirement.postcodeCountry"))
+        .accessibilityValue(TrackingLocation.countryName(country, language: localizer.language))
+    }
+
+    private func options(_ countries: [String]) -> some View {
+        ForEach(countries, id: \.self) { code in
+            Text(TrackingLocation.flag(code) + " " + TrackingLocation.countryName(code, language: localizer.language)).tag(code)
+        }
+    }
 }
 
 /// Applied outside the card's swipe clipping so the little parcels can leave its edge.

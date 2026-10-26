@@ -155,6 +155,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
         carrier: input.carrier ?? detectCarrier(trackingNumber),
         ...(input.trackingUrl?.trim() ? { trackingUrl: input.trackingUrl.trim() } : {}),
         ...(input.dpdPostcode?.trim() ? { dpdPostcode: input.dpdPostcode.trim() } : {}),
+        ...(input.dpdPostcode?.trim() && input.dpdPostcodeCountry ? { dpdPostcodeCountry: input.dpdPostcodeCountry } : {}),
       };
       const response = await protectedPost('/api/public/parcels', body, signal);
       if (!response.ok) throw await failure(response);
@@ -195,9 +196,9 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
       return parcelLinkView(await answer<ApiPublicParcelResponse>(response));
     },
 
-    async addParcelPostcode(id, key, carrier, postcode, signal) {
+    async addParcelPostcode(id, key, carrier, postcode, country, signal) {
       if (!isParcelLinkId(id) || !OWNER_KEY.test(key)) throw new ParcelLinkError('unavailable');
-      const body: ApiParcelLinkPostcodeRequest = { carrier, postcode };
+      const body: ApiParcelLinkPostcodeRequest = { carrier, postcode, ...(country ? { postcodeCountry: country } : {}) };
       const response = await write('POST', `/api/public/parcels/${id}/postcode`, body, signal, key);
       if (response.status === 422) throw new ParcelLinkError('refused');
       if (response.status === 409) {
@@ -329,8 +330,8 @@ export function updateParcelLink(id: string, key: string, changes: ParcelLinkCha
 }
 
 /** Adds the delivery postcode another carrier asks for. Only the owner key can; the sample asks for none. */
-export function addParcelPostcode(id: string, key: string, carrier: CarrierId, postcode: string, signal?: AbortSignal): Promise<ParcelLinkView> {
-  return client.addParcelPostcode(id, key, carrier, postcode, signal);
+export function addParcelPostcode(id: string, key: string, carrier: CarrierId, postcode: string, country?: string, signal?: AbortSignal): Promise<ParcelLinkView> {
+  return client.addParcelPostcode(id, key, carrier, postcode, country, signal);
 }
 
 /** Turns a browser's alerts on for a link, or changes what they announce. */

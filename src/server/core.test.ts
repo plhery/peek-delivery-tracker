@@ -647,11 +647,12 @@ describe('input validation', () => {
       carrier: 'mondial-relay',
       trackingUrl: null,
       dpdPostcode: '59650',
+      dpdPostcodeCountry: null,
     });
     expect(() => packageCarrierValues({ carrier: 'mondial-relay' }, '76434219'))
       .toThrow('requires the delivery postcode');
     expect(packageCarrierValues({ carrier: 'dpd' }, '06080000000001'))
-      .toEqual({ carrier: 'dpd', trackingUrl: null, dpdPostcode: null });
+      .toEqual({ carrier: 'dpd', trackingUrl: null, dpdPostcode: null, dpdPostcodeCountry: null });
     expect(packageCarrierValues({ carrier: 'dpd', dpdPostcode: '8000' }, '06080000000001'))
       .toMatchObject({ dpdPostcode: '8000' });
     expect(packageCarrierValues({ carrier: 'dpd', dpdPostcode: '75001' }, '06080000000001'))
@@ -664,6 +665,29 @@ describe('input validation', () => {
       .toThrow('Carrier must be text');
     expect(packageCarrierValues({ carrier: 'ups' }, '440012345612345678'))
       .toMatchObject({ carrier: 'quickpac' });
+  });
+
+  it('takes the country of a postcode from abroad, and keeps it only when it is not the carrier’s home', () => {
+    const postnl = (dpdPostcode: string, dpdPostcodeCountry?: unknown) =>
+      packageCarrierValues({ carrier: 'spring-gds', dpdPostcode, dpdPostcodeCountry }, '3SABCD826405193');
+    expect(postnl('1000', 'BE')).toMatchObject({ carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' });
+    expect(newPackageValues({ trackingNumber: '3SABCD826405193', label: '', carrier: 'spring-gds', dpdPostcode: '1000',
+      dpdPostcodeCountry: 'BE' })).toMatchObject({ dpdPostcode: '1000', dpdPostcodeCountry: 'BE' });
+    // The home country, none or a blank one leave the postcode as it always went.
+    for (const country of ['NL', undefined, '', ' ']) {
+      expect(postnl('1012 ab', country)).toMatchObject({ dpdPostcode: '1012 AB', dpdPostcodeCountry: null });
+    }
+    expect(packageCarrierValues({ carrier: 'spring-gds', dpdPostcodeCountry: 'BE' }, '3SABCD826405193'))
+      .toMatchObject({ dpdPostcode: null, dpdPostcodeCountry: null });
+    for (const country of ['ZZ', 'Belgium', 'be1']) {
+      expect(() => postnl('1000', country)).toThrow('takes no delivery postcode from that country');
+    }
+    expect(() => postnl('1000', 32)).toThrow('must be text');
+    // A carrier that checks its own countries' postcodes takes only those.
+    expect(packageCarrierValues({ carrier: 'gls-ch', dpdPostcode: '9490', dpdPostcodeCountry: 'LI' }, '993990103198'))
+      .toMatchObject({ dpdPostcode: '9490', dpdPostcodeCountry: 'LI' });
+    expect(() => packageCarrierValues({ carrier: 'gls-ch', dpdPostcode: '8000', dpdPostcodeCountry: 'DE' }, '993990103198'))
+      .toThrow('takes no delivery postcode from that country');
   });
 
   it('allowlists browser push services without accepting lookalike hosts', () => {

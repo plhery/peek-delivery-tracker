@@ -956,6 +956,76 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(gls.suggestedPostcode(for: .glsCh, among: given([], remembered: remembered)), "3000")
     }
 
+    func testAPostcodeCanBeFromAnotherCountryThanTheCarriersOwn() throws {
+        func requirement(_ carrier: CarrierID, _ number: String) throws -> CarrierRequirement {
+            try XCTUnwrap(catalog.requirements(for: carrier, trackingNumber: number).first { $0.field == .dpdPostcode })
+        }
+        // PostNL's 3S labels take any country's postcode, Heppner its four countries' shapes, DPD Germany Germany's.
+        let postNL = try requirement(.springGDS, "3SABCD1234567")
+        let heppner = try requirement(.heppner, "23456789")
+        let dpdGermany = try requirement(.dpdDe, "12345678901234")
+        XCTAssertEqual(catalog.homeCountry(of: .springGDS), "NL")
+
+        // Any real country, or the carrier's own. A field that takes one alone offers no choice.
+        let any = catalog.postcodeCountries(for: .springGDS, requirement: postNL)
+        for country in ["NL", "BE", "LU", "GB", "XK"] { XCTAssertTrue(any.contains(country), country) }
+        for code in ["EU", "EZ", "UN", "ZZ", "IC", "AC", "419"] { XCTAssertFalse(any.contains(code), code) }
+        XCTAssertEqual(catalog.postcodeCountries(for: .heppner, requirement: heppner), ["FR", "CH", "BE", "LU"])
+        XCTAssertEqual(catalog.postcodeCountries(for: .dpdDe, requirement: dpdGermany), ["DE"])
+
+        // The menu lists the carrier's own first, then the others by name in the app's language.
+        let choices = catalog.postcodeCountryChoices(for: .springGDS, requirement: postNL, language: .fr)
+        XCTAssertEqual(choices.own, ["NL"])
+        XCTAssertEqual(Set(choices.own + choices.others), Set(any))
+        let names = choices.others.map { TrackingLocation.countryName($0, language: .fr) }
+        XCTAssertEqual(names, names.sorted { $0.compare($1, locale: AppLanguage.fr.locale) == .orderedAscending })
+        XCTAssertEqual(catalog.postcodeCountryChoices(for: .heppner, requirement: heppner, language: .fr).others, [])
+
+        // A postcode from the carrier's home keeps its field; one from abroad takes any country's shape and that
+        // country's example, or none rather than the carrier's.
+        XCTAssertEqual(catalog.postcodeRequirement(postNL, for: .springGDS, country: "NL"), postNL)
+        XCTAssertFalse(postNL.accepts("1000"))
+        XCTAssertEqual(catalog.postcodeExample(for: .springGDS, requirement: postNL, region: "NL"), "1234 AB")
+        let belgian = catalog.postcodeRequirement(postNL, for: .springGDS, country: "BE")
+        for postcode in ["1000", "1012 AB", "L-1009"] { XCTAssertTrue(belgian.accepts(postcode), postcode) }
+        for postcode in ["12", "ABCDE", "1234567890123"] { XCTAssertFalse(belgian.accepts(postcode), postcode) }
+        XCTAssertEqual(belgian.normalizedValue(" l-1009 "), "L-1009")
+        XCTAssertEqual(belgian.inputMode, "text")
+        XCTAssertTrue(belgian.isOptional)
+        XCTAssertEqual(catalog.postcodeExample(for: .springGDS, requirement: belgian, region: "BE"), "1000")
+        let emirati = catalog.postcodeRequirement(postNL, for: .springGDS, country: "AE")
+        XCTAssertNil(catalog.postcodeExample(for: .springGDS, requirement: emirati, region: "AE"))
+        XCTAssertEqual(catalog.postcodeRequirement(heppner, for: .heppner, country: "BE"), heppner)
+
+        // Only a postcode from abroad goes with its country: one from home goes as it always has.
+        XCTAssertNil(catalog.sentPostcodeCountry("NL", postcode: "1012 AB", for: .springGDS))
+        XCTAssertEqual(catalog.sentPostcodeCountry("BE", postcode: "1000", for: .springGDS), "BE")
+        XCTAssertNil(catalog.sentPostcodeCountry("BE", postcode: " ", for: .springGDS))
+        XCTAssertNil(catalog.sentPostcodeCountry("BE", postcode: nil, for: .springGDS))
+
+        // A new postcode starts on the parcel's destination, then the device's region, among those the field takes,
+        // else on the carrier's home.
+        XCTAssertEqual(catalog.initialPostcodeCountry(for: .springGDS, requirement: postNL, region: "BE"), "BE")
+        XCTAssertEqual(catalog.initialPostcodeCountry(for: .springGDS, requirement: postNL, region: nil), "NL")
+        XCTAssertEqual(catalog.initialPostcodeCountry(for: .heppner, requirement: heppner, region: "be"), "BE")
+        XCTAssertEqual(catalog.initialPostcodeCountry(for: .heppner, requirement: heppner, region: "DE"), "FR")
+        XCTAssertEqual(catalog.initialPostcodeCountry(for: .dpdDe, requirement: dpdGermany, region: "FR"), "DE")
+        func parcel(_ carrier: CarrierID, postcode: String?, data: CarrierData?) -> Parcel {
+            Parcel(id: UUID(), trackingNumber: "3SABCD1234567", label: "", carrier: carrier, createdAt: "2026-10-01T08:00:00Z",
+                   syncStatus: .ok, dpdPostcode: postcode, carrierData: data, notificationsMuted: false)
+        }
+        let abroad = CarrierData(postcodeCountry: PostcodeCountry(postcode: "1000", country: "BE"), destinationCountry: "LU")
+        func initial(_ parcel: Parcel) -> String? {
+            catalog.initialPostcodeCountry(for: .springGDS, requirement: postNL, parcel: parcel, region: "FR")
+        }
+        XCTAssertEqual(initial(parcel(.unknown, postcode: nil, data: abroad)), "LU")
+        XCTAssertEqual(initial(parcel(.dpd, postcode: "1000", data: abroad)), "LU", "Another carrier's postcode")
+        // The parcel's own postcode keeps the country saved with it, or the carrier's home when none was.
+        XCTAssertEqual(initial(parcel(.springGDS, postcode: "1000", data: abroad)), "BE")
+        XCTAssertEqual(initial(parcel(.springGDS, postcode: "1012 AB", data: abroad)), "NL", "A postcode changed since")
+        XCTAssertEqual(initial(parcel(.springGDS, postcode: "1012 AB", data: nil)), "NL")
+    }
+
     func testBuildsUsableCarrierLinks() throws {
         var parcel = Parcel(
             id: UUID(),

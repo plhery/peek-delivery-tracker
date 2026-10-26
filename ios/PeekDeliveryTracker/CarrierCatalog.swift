@@ -13,12 +13,15 @@ struct CarrierRequirement: Codable, Hashable, Sendable {
     let optional: Bool?
     let label: String
     let type: String
-    let placeholder: String?
+    var placeholder: String?
     let help: String?
-    let pattern: String?
-    let maxLength: Int?
-    let inputMode: String?
+    var pattern: String?
+    var maxLength: Int?
+    var inputMode: String?
     let autoComplete: String?
+
+    /// Any country's postcode, as the service checks one from another country than the carrier's own.
+    static let anyPostcode = "^(?=.{3,12}$)(?=.*[0-9])[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$"
 
     func normalizedValue(_ rawValue: String) -> String {
         var value = rawValue.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -637,17 +640,107 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     }()
 
     /// The example in a carrier's field. A national carrier states its own
-    /// postcode; one that takes any country's leaves it out and shows the
-    /// device's region, or the carrier's own country when that has no example.
+    /// postcode, and a field for another country's postcode that country's, or
+    /// none (an empty placeholder). One that takes any country's leaves it out
+    /// and shows the region given, or the carrier's own country when that has
+    /// no example.
     func postcodeExample(
         for carrier: CarrierID,
         requirement: CarrierRequirement,
         region: String? = Locale.current.region?.identifier
     ) -> String? {
-        if let placeholder = requirement.placeholder, !placeholder.isEmpty { return placeholder }
+        if let placeholder = requirement.placeholder { return placeholder.nonEmpty }
         guard requirement.field == .dpdPostcode else { return nil }
         return ([region].compactMap { $0?.uppercased() } + (info(for: carrier).countries ?? []))
             .lazy.compactMap { Self.postcodeExamples[$0] }.first
+    }
+
+    /// Every country a delivery postcode can be from: ISO 3166-1's, and Kosovo, as the service takes
+    /// them. The system's regions also name unions, groupings and reserved codes, which are left out.
+    static let countries: [String] = {
+        let others: Set<String> = ["AC", "CP", "CQ", "DG", "EA", "EU", "EZ", "IC", "QO", "TA", "UN", "XA", "XB", "ZZ"]
+        return Locale.Region.isoRegions.map(\.identifier).filter { code in
+            code.count == 2 && code.allSatisfy { $0.isASCII && $0.isUppercase } && !others.contains(code)
+        }.sorted()
+    }()
+
+    private static let countryOrders = NSCache<NSString, Memo<[String]>>()
+
+    /// Every country, by its name in the language. A menu of them is drawn again with each keystroke beside it.
+    static func countriesByName(in language: AppLanguage) -> [String] {
+        let key = language.rawValue as NSString
+        if let memo = countryOrders.object(forKey: key) { return memo.value }
+        let names = Dictionary(uniqueKeysWithValues: countries.map { ($0, TrackingLocation.countryName($0, language: language)) })
+        let ordered = countries.sorted {
+            names[$0, default: $0].compare(names[$1, default: $1], locale: language.locale) == .orderedAscending
+        }
+        countryOrders.setObject(Memo(ordered), forKey: key)
+        return ordered
+    }
+
+    /// The country a postcode given for the carrier is from unless another is named: its first.
+    func homeCountry(of carrier: CarrierID) -> String? {
+        info(for: carrier).countries?.first
+    }
+
+    /// The countries a postcode for this field can be from: any when the carrier takes any country's,
+    /// otherwise the carrier's own, whose shapes its check reads.
+    func postcodeCountries(for carrier: CarrierID, requirement: CarrierRequirement) -> [String] {
+        requirement.takesAnyPostcode ? Self.countries : info(for: carrier).countries ?? []
+    }
+
+    /// The same countries as a menu lists them: the carrier's own, home first, then the others by name.
+    func postcodeCountryChoices(
+        for carrier: CarrierID,
+        requirement: CarrierRequirement,
+        language: AppLanguage
+    ) -> (own: [String], others: [String]) {
+        let own = info(for: carrier).countries ?? []
+        guard requirement.takesAnyPostcode else { return (own, []) }
+        return (own, Self.countriesByName(in: language).filter { !own.contains($0) })
+    }
+
+    /// The country a postcode field starts on. The parcel's own postcode for the carrier keeps the
+    /// country stored with it, or the carrier's home when none was; otherwise the first the field
+    /// takes of the parcel's destination and the device's region, else the carrier's home.
+    func initialPostcodeCountry(
+        for carrier: CarrierID,
+        requirement: CarrierRequirement,
+        parcel: Parcel? = nil,
+        region: String? = Locale.current.region?.identifier
+    ) -> String? {
+        let home = homeCountry(of: carrier)
+        let known: [String?]
+        if let parcel, parcel.carrier == carrier, let postcode = parcel.dpdPostcode?.nonEmpty {
+            let stored = parcel.carrierData?.postcodeCountry
+            known = [stored?.postcode == postcode ? stored?.country : home]
+        } else {
+            known = [parcel?.carrierData?.destinationCountry, region]
+        }
+        let countries = postcodeCountries(for: carrier, requirement: requirement)
+        return known.lazy.compactMap { $0?.uppercased() }.first(where: countries.contains) ?? home
+    }
+
+    /// The field for a postcode from `country`: the carrier's own for its home country, or when its
+    /// check reads only its own countries' shapes; otherwise any country's shape, with that country's
+    /// example or none, never the carrier's.
+    func postcodeRequirement(_ requirement: CarrierRequirement, for carrier: CarrierID, country: String?) -> CarrierRequirement {
+        guard requirement.field == .dpdPostcode, requirement.takesAnyPostcode,
+              let country, country != homeCountry(of: carrier) else { return requirement }
+        var field = requirement
+        field.pattern = CarrierRequirement.anyPostcode
+        field.maxLength = 12
+        field.inputMode = "text"
+        field.placeholder = Self.postcodeExamples[country] ?? ""
+        return field
+    }
+
+    /// The country sent with a postcode: none without one, nor for the carrier's home country, so a
+    /// postcode from there goes as it always has.
+    func sentPostcodeCountry(_ country: String?, postcode: String?, for carrier: CarrierID) -> String? {
+        guard postcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty != nil,
+              country != homeCountry(of: carrier) else { return nil }
+        return country
     }
 
     func requirements(for carrier: CarrierID, trackingNumber: String) -> [CarrierRequirement] {

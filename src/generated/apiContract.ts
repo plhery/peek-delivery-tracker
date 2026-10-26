@@ -32536,6 +32536,11 @@ export interface ApiEventPlace {
   "region"?: string;
 }
 
+export interface ApiPostcodeCountry {
+  "postcode": string;
+  "country": string;
+}
+
 export interface ApiImportCharges {
   "currency": string;
   "customs"?: number;
@@ -32594,6 +32599,7 @@ export interface ApiPackageRow {
   "weight_kg"?: number | null;
   "import_charges"?: ApiImportCharges | null;
   "dpd_postcode_verified"?: boolean | null;
+  "postcode_country"?: ApiPostcodeCountry | null;
   "destination_country"?: string | null;
   "routing"?: {
   "input_needed"?: {
@@ -32635,6 +32641,7 @@ export interface ApiCreatePackageRequest {
   "carrier"?: ApiCarrierId;
   "trackingUrl"?: string;
   "dpdPostcode"?: string;
+  "dpdPostcodeCountry"?: string;
   "lookupCountryHint"?: string;
 }
 
@@ -32646,6 +32653,7 @@ export interface ApiChangePackageCarrierRequest {
   "carrier": ApiCarrierId;
   "trackingUrl"?: string;
   "dpdPostcode"?: string;
+  "dpdPostcodeCountry"?: string;
   "providerPostcode"?: string;
 }
 
@@ -32976,6 +32984,7 @@ export interface ApiPublicLookupRequest {
   "carrier"?: ApiCarrierId;
   "trackingUrl"?: string;
   "dpdPostcode"?: string;
+  "dpdPostcodeCountry"?: string;
   "lookupCountryHint"?: string;
 }
 
@@ -33023,6 +33032,7 @@ export interface ApiUpdateParcelLinkRequest {
 export interface ApiParcelLinkPostcodeRequest {
   "carrier": ApiCarrierId;
   "postcode": string;
+  "postcodeCountry"?: string;
 }
 
 export type ApiParcelAlertPreset = "all" | "important" | "delivery";

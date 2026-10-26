@@ -44,6 +44,7 @@
   "add.requirement.dpdPostcode": "Código postal de entrega",
   "add.requirement.dpdPostcodeHelp": "El transportista necesita el código postal de entrega para mostrar el seguimiento.",
   "add.requirement.dpdPostcodeOptionalHelp": "Con el código postal, {{carrier}} también muestra los escaneos verificados y la franja horaria de entrega.",
+  "add.requirement.postcodeCountry": "País de entrega",
   "add.requirement.trackingUrl": "Enlace de seguimiento completo",
   "add.requirement.trackingUrlHelp": "Pega el enlace completo del correo de envío.",
   "add.scan": "Escanear código de barras",

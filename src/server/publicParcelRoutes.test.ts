@@ -197,7 +197,7 @@ describe('looking up a parcel without an account', () => {
     // The database gets the key's hash, never the key, and never the name.
     const hash = createHash('sha256').update(answer.key).digest('hex');
     expect(create).toHaveBeenCalledExactlyOnceWith(
-      { trackingNumber, label: '', carrier: 'dpd', trackingUrl: null, dpdPostcode: postcode }, hash,
+      { trackingNumber, label: '', carrier: 'dpd', trackingUrl: null, dpdPostcode: postcode, dpdPostcodeCountry: null }, hash,
     );
     expect(text).not.toContain(hash);
     expect(text).not.toContain('Surprise');
@@ -236,6 +236,26 @@ describe('looking up a parcel without an account', () => {
     expect(response.status).toBe(201);
     expect(updateCountry).toHaveBeenCalledWith(packageId, { carrier_data: expect.objectContaining({ lookup_country_hint: 'CH', add_recognition_pending: true }) });
     expect(await response.text()).not.toContain('add_recognition_pending');
+  });
+
+  it('keeps the country of a postcode from abroad with the postcode of a new lookup', async () => {
+    allow();
+    const create = vi.spyOn(SupabaseServiceClient.prototype, 'createOneOffParcel').mockResolvedValue({
+      link: storedLink({ owner: true }), created: true,
+      package: storedPackage({ carrier: 'spring-gds', dpd_postcode: '1000', last_synced_at: null, sync_status: 'pending' }),
+    });
+    const updateCountry = vi.mocked(SupabaseServiceClient.prototype.updatePackage);
+    const response = await lookup({ trackingNumber: '3SABCD826405193', carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' });
+    expect(response.status).toBe(201);
+    expect(create).toHaveBeenCalledWith(expect.objectContaining({ dpdPostcode: '1000', dpdPostcodeCountry: 'BE' }), expect.any(String));
+    expect(updateCountry).toHaveBeenCalledWith(packageId, {
+      carrier_data: expect.objectContaining({ postcode_country: { postcode: '1000', country: 'BE' } }),
+    });
+    expect(await response.text()).not.toContain('postcode_country');
+    // A country the carrier takes no postcode from is refused before anything is stored.
+    create.mockClear();
+    expect((await lookup({ trackingNumber: '3SABCD826405193', carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'XX' }, nextIp())).status).toBe(400);
+    expect(create).not.toHaveBeenCalled();
   });
 
   it('rejects invalid device regions before creating a lookup or spending its allowance', async () => {
@@ -755,7 +775,7 @@ describe('the postcode another carrier asks for', () => {
     const response = await add({ carrier: 'dhl', postcode: ' 99999 ' });
     expect(response.status).toBe(200);
     expect(claimed).toHaveBeenCalledExactlyOnceWith(linkId, keyHash, 'dhl', linkPostcodes.LINK_POSTCODE_TRIES);
-    expect(checked).toHaveBeenCalledExactlyOnceWith('dhl', heldNumber, heldPostcode, expect.any(AbortSignal));
+    expect(checked).toHaveBeenCalledExactlyOnceWith('dhl', heldNumber, heldPostcode, null, expect.any(AbortSignal));
     expect(filed).toHaveBeenCalledExactlyOnceWith(linkId, keyHash, 'dhl', heldPostcode);
     expect(checked.mock.invocationCallOrder[0]).toBeLessThan(filed.mock.invocationCallOrder[0]!);
     const answer = await response.json();
@@ -767,6 +787,38 @@ describe('the postcode another carrier asks for', () => {
     // Filing clears the link's tries: none is given back on top.
     expect(release).not.toHaveBeenCalled();
     expect(outcomes()).toEqual(['accepted']);
+  });
+
+  it('asks the carrier with the country of a postcode from abroad, and keeps it with the parcel it files', async () => {
+    const postnl = '3SABCD826405193';
+    claim({ attempt: 'try-1', trackingNumber: postnl });
+    const checked = check({ outcome: 'accepted' });
+    const filed = vi.spyOn(SupabaseServiceClient.prototype, 'fileParcelLinkPostcode').mockResolvedValue({
+      link: storedLink({ owner: true }),
+      package: storedPackage({
+        id: filedId, tracking_number: postnl, carrier: 'spring-gds', dpd_postcode: '1000', sync_status: 'pending',
+        last_synced_at: null, carrier_data: {}, tracking_events: [],
+      }),
+      created: true,
+    });
+    const update = vi.mocked(SupabaseServiceClient.prototype.updatePackage);
+    const response = await add({ carrier: 'spring-gds', postcode: '1000', postcodeCountry: 'BE' });
+    expect(response.status).toBe(200);
+    expect(checked).toHaveBeenCalledExactlyOnceWith('spring-gds', postnl, '1000', 'BE', expect.any(AbortSignal));
+    expect(filed).toHaveBeenCalledExactlyOnceWith(linkId, keyHash, 'spring-gds', '1000');
+    expect(update).toHaveBeenCalledExactlyOnceWith(filedId, {
+      carrier_data: { postcode_country: { postcode: '1000', country: 'BE' } }, dpd_postcode: '1000',
+    });
+    expect(update.mock.invocationCallOrder[0]).toBeLessThan(enqueue.mock.invocationCallOrder[0]!);
+    expect(await response.text()).not.toContain('postcode_country');
+  });
+
+  it('refuses a postcode country that is not one, or not text, before asking the carrier', async () => {
+    claim();
+    const checked = check({ outcome: 'accepted' });
+    expect((await add({ carrier: 'dhl', postcode: heldPostcode, postcodeCountry: 'ZZ' })).status).toBe(400);
+    expect((await add({ carrier: 'dhl', postcode: heldPostcode, postcodeCountry: 49 })).status).toBe(400);
+    expect(checked).not.toHaveBeenCalled();
   });
 
   it('shows nothing for a postcode the carrier refuses, and keeps the try counted', async () => {

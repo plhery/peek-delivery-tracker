@@ -23,15 +23,17 @@ export function deviceCountry(
 
 /**
  * The example shown in a carrier's field. A national carrier states its own
- * postcode; one that takes any country's leaves it out and shows the reader's
- * country, or the carrier's own when the device does not tell.
+ * postcode, and a field for another country's postcode that country's, or
+ * none (an empty placeholder). One that takes any country's leaves it out and
+ * shows the country named beside the field, the reader's, or the carrier's own
+ * when the device does not tell.
  */
 export function postcodeExample(
   carrierId: CarrierId,
   requirement: Pick<CarrierInputRequirement, 'field' | 'placeholder'>,
   country: string | null = deviceCountry(),
 ): string | undefined {
-  if (requirement.field !== 'dpdPostcode' || requirement.placeholder) return requirement.placeholder;
+  if (requirement.field !== 'dpdPostcode' || requirement.placeholder !== undefined) return requirement.placeholder || undefined;
   return [country, ...carrierInfo(carrierId).countries]
     .map((code) => (code && Object.hasOwn(EXAMPLES, code) ? EXAMPLES[code] : undefined))
     .find(Boolean);

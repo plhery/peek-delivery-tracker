@@ -15,6 +15,7 @@ import { wakeSyncWorker } from '../../../../../src/server/background';
 import { withEventPlaces } from '../../../../../src/server/eventPlaces';
 import { recordProviderInput } from '../../../../../src/server/metrics';
 import { logOperationalEvent } from '../../../../../src/server/observability';
+import { holdsPostcodeCountry, postcodeCountryWrite } from '../../../../../src/server/postcodeCountry';
 import { SupabaseError } from '../../../../../src/server/supabase';
 import { isRecord } from '../../../../../src/server/types';
 import { packageCarrierValues } from '../../../../../src/server/validation';
@@ -47,7 +48,8 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
   );
   const unchanged = original.carrier === values.carrier
     && nullableText(original.tracking_url) === values.trackingUrl
-    && nullableText(original.dpd_postcode) === values.dpdPostcode;
+    && nullableText(original.dpd_postcode) === values.dpdPostcode
+    && holdsPostcodeCountry(original, values.dpdPostcodeCountry);
   if (body.providerPostcode !== undefined && !unchanged) throw new HttpError(400, 'Save the carrier change before updating provider input');
   let providerPostcode: string | undefined;
   if (body.providerPostcode !== undefined) {
@@ -64,6 +66,12 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
     values.trackingUrl,
     values.dpdPostcode,
   )) throw new HttpError(404, 'Package not found');
+  if (!providerPostcode && (values.dpdPostcodeCountry || (isRecord(original.carrier_data) && original.carrier_data.postcode_country))) {
+    // The postcode's country is kept with the postcode the change stored.
+    const changed = await client.getPackage(packageId);
+    const write = changed && postcodeCountryWrite(changed, values.dpdPostcodeCountry);
+    if (write) await service.updatePackage(packageId, write);
+  }
 
   if (providerPostcode) {
     const routing = isRecord(original.carrier_data) && isRecord(original.carrier_data.routing) ? original.carrier_data.routing : {};

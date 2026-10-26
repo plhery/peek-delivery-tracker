@@ -10,6 +10,7 @@ import {
   type CarrierInputRequirement,
   type TrackingInputMatch,
 } from '../../lib/carriers';
+import { initialPostcodeCountry, postcodeCountries, postcodeFieldFor, sentPostcodeCountry } from '../../lib/postcodeCountry';
 import { rememberedPostcode, type GivenPostcode } from '../../lib/postcodeMemory';
 import type { CarrierId } from '../../types';
 import type { CarrierAnswer, ParcelLookupInput } from '../linkModel';
@@ -68,6 +69,10 @@ export interface LookupState {
   carrier: CarrierId | 'auto';
   /** What the carriers asked for, kept apart so a postcode typed for one never goes to another. */
   inputs: Partial<Record<CarrierId, Partial<Record<CarrierInputField, string>>>>;
+  /** The country each carrier's postcode is from, when the visitor named one. */
+  countries: Partial<Record<CarrierId, string>>;
+  /** The device's country, which a postcode is from unless the visitor names another. */
+  region: string | null;
   /** The number whose carriers may be asked: set by a paste, by leaving the field and by Track, never by a keystroke. */
   asked: string | null;
   answer: CarrierAnswer | null;
@@ -94,6 +99,7 @@ export type LookupEvent =
   | { type: 'pick'; number: string }
   | { type: 'choose'; carrier: CarrierId | 'auto' }
   | { type: 'fill'; carrier: CarrierId; field: CarrierInputField; value: string }
+  | { type: 'country'; carrier: CarrierId; country: string }
   | { type: 'asTyped' }
   | { type: 'recheck' }
   | { type: 'failed'; trouble: LookupTrouble }
@@ -102,9 +108,9 @@ export type LookupEvent =
   | { type: 'online' }
   | { type: 'pasteFailed'; reason: 'blocked' | 'empty' };
 
-export function initialLookup(text = ''): LookupState {
+export function initialLookup(text = '', region: string | null = null): LookupState {
   return {
-    text, settled: text, intent: 'none', pick: null, carrier: 'auto', inputs: {}, asked: null, answer: null,
+    text, settled: text, intent: 'none', pick: null, carrier: 'auto', inputs: {}, countries: {}, region, asked: null, answer: null,
     asTyped: null, raised: false, offered: null, job: null, trouble: null, paste: null, halted: 0,
   };
 }
@@ -146,6 +152,9 @@ export interface Survey {
   inputCarrier: CarrierId;
   /** The inputs to show for the carrier. */
   fields: CarrierInputRequirement[];
+  /** The country the postcode is from, and the ones it can be from. */
+  postcodeCountry: string | null;
+  postcodeCountries: readonly string[];
   /** The first input that is required and not filled in properly. */
   missing: CarrierInputRequirement | null;
   input(field: CarrierInputField): string;
@@ -216,10 +225,12 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   const suggested = match && source === 'none' && state.carrier === 'auto' && answer?.inputSuggested?.field === 'dpdPostcode'
     && ['none', 'unasked', 'failed'].includes(check.status) ? answer.inputSuggested.carrier : null;
   const inputCarrier = suggested ?? carrier;
-  const requirements = !match || onDevice ? []
+  const postcodeCountry = match ? state.countries[inputCarrier] ?? initialPostcodeCountry(inputCarrier, match.trackingNumber, [state.region]) : null;
+  const requirements = (!match || onDevice ? []
     : suggested ? carrierRequirements(suggested, match.trackingNumber)
       .filter((requirement) => requirement.field === 'dpdPostcode').map((requirement) => ({ ...requirement, optional: true }))
-      : carrier !== 'unknown' ? carrierRequirements(carrier, match.trackingNumber) : [];
+      : carrier !== 'unknown' ? carrierRequirements(carrier, match.trackingNumber) : [])
+    .map((requirement) => postcodeFieldFor(requirement, inputCarrier, match!.trackingNumber, postcodeCountry));
   const pastedUrl = match && match.carrier === carrier ? match.trackingUrl : undefined;
   // A required postcode starts from one given before; an optional one is only offered.
   const postcodeField = requirements.find((requirement) => requirement.field === 'dpdPostcode');
@@ -241,7 +252,8 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   return {
     reading, several, match, normalized, nothing, order: order && (state.raised || calm.order) ? order : null, typo,
     pickup: code && (state.raised || settledNumber === normalized), onDevice, amazon, account,
-    check, carrier, source, certain, suggested, inputCarrier, fields, missing, input, remembered, ask, need,
+    check, carrier, source, certain, suggested, inputCarrier, fields, missing, input, remembered, ask, need, postcodeCountry,
+    postcodeCountries: match && postcodeField ? postcodeCountries(inputCarrier, match.trackingNumber) : [],
   };
 }
 
@@ -255,11 +267,13 @@ function lookupInput(found: Survey): ParcelLookupInput {
     carrierRequirements(carrier, found.match!.trackingNumber).some((requirement) => requirement.field === field);
   const trackingUrl = wanted('trackingUrl') ? found.input('trackingUrl').trim() : found.match!.carrier === carrier ? found.match!.trackingUrl : undefined;
   const dpdPostcode = wanted('dpdPostcode') ? found.input('dpdPostcode').trim() : undefined;
+  const dpdPostcodeCountry = dpdPostcode ? sentPostcodeCountry(carrier, found.postcodeCountry) : undefined;
   return {
     trackingNumber: found.normalized,
     ...(carrier !== 'unknown' ? { carrier } : {}),
     ...(trackingUrl ? { trackingUrl } : {}),
     ...(dpdPostcode ? { dpdPostcode } : {}),
+    ...(dpdPostcodeCountry ? { dpdPostcodeCountry } : {}),
   };
 }
 
@@ -348,6 +362,12 @@ export function lookupStep(
       return state.job ? state : {
         ...state,
         inputs: { ...state.inputs, [event.carrier]: { ...state.inputs[event.carrier], [event.field]: event.value } },
+        trouble: state.trouble?.kind === 'validation' ? null : state.trouble,
+      };
+    case 'country':
+      return state.job ? state : {
+        ...state,
+        countries: { ...state.countries, [event.carrier]: event.country },
         trouble: state.trouble?.kind === 'validation' ? null : state.trouble,
       };
     case 'failed':

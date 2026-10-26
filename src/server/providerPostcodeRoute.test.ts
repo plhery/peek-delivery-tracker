@@ -43,3 +43,28 @@ it('does not mutate a parcel the authenticated user cannot read', async () => {
   expect((await patch({ carrier: 'unknown', providerPostcode: '8000' })).status).toBe(404);
   expect(SupabaseUserClient.prototype.setProviderPostcode).not.toHaveBeenCalled();
 });
+it('keeps the country of a postcode from abroad with the postcode the change stores, and ends the carrier’s wait', async () => {
+  const postnl = { ...parcel, tracking_number: '3SABCD826405193', carrier_data: {} };
+  const stored = { ...postnl, carrier: 'spring-gds', dpd_postcode: '1000', carrier_data: {
+    routing: { version: 1, failures: { 'spring-gds': { count: 1 }, dhl: { count: 1 } }, next_check_at: '2026-10-24T09:00:00Z' } } };
+  vi.mocked(SupabaseUserClient.prototype.getPackage).mockResolvedValueOnce(postnl).mockResolvedValue(stored);
+  const update = vi.spyOn(SupabaseServiceClient.prototype, 'updatePackage').mockResolvedValue(undefined);
+  expect((await patch({ carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' })).status).toBe(200);
+  expect(SupabaseUserClient.prototype.changePackageCarrier).toHaveBeenCalledWith(id, 'spring-gds', null, '1000');
+  expect(update).toHaveBeenCalledExactlyOnceWith(id, {
+    carrier_data: { routing: { version: 1, failures: { dhl: { count: 1 } } }, postcode_country: { postcode: '1000', country: 'BE' } },
+    dpd_postcode: '1000',
+  });
+  expect(update.mock.invocationCallOrder[0])
+    .toBeLessThan(vi.mocked(SupabaseServiceClient.prototype.enqueueSyncJob).mock.invocationCallOrder[0]!);
+  // The same postcode from the same country changes nothing; from the carrier's home it goes without one.
+  update.mockClear();
+  vi.mocked(SupabaseUserClient.prototype.changePackageCarrier).mockClear();
+  const abroad = { ...stored, carrier_data: { postcode_country: { postcode: '1000', country: 'BE' } } };
+  vi.mocked(SupabaseUserClient.prototype.getPackage).mockReset().mockResolvedValue(abroad);
+  expect((await patch({ carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' })).status).toBe(200);
+  expect(SupabaseUserClient.prototype.changePackageCarrier).not.toHaveBeenCalled();
+  expect((await patch({ carrier: 'spring-gds', dpdPostcode: '1000' })).status).toBe(200);
+  expect(SupabaseUserClient.prototype.changePackageCarrier).toHaveBeenCalledWith(id, 'spring-gds', null, '1000');
+  expect(update).toHaveBeenCalledExactlyOnceWith(id, { carrier_data: {}, dpd_postcode: '1000' });
+});

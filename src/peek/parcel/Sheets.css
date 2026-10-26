@@ -98,6 +98,7 @@
 .peeks-gift textarea, .peeks-gift input { width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--canvas); font-size: 16px; line-height: 1.4; resize: vertical; }
 .peeks-gift textarea:focus, .peeks-gift input:focus { outline: none; border-color: var(--ochre); box-shadow: 0 0 0 3px color-mix(in srgb, var(--yellow) 20%, transparent); }
 .peeks-gift small { color: var(--ink-soft); font-size: 11.5px; line-height: 1.4; }
+.peeks-gift .postcode-country { min-height: 44px; border-radius: 12px; background: var(--canvas); }
 
 /* Ping me: the ways to be told. */
 .peeks-options { display: grid; gap: 7px; }

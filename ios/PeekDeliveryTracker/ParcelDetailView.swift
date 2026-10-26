@@ -1081,6 +1081,8 @@ struct ChangeCarrierView: View {
     @State private var chosenCarrier: CarrierID?
     @State private var trackingURL: String
     @State private var deliveryPostcode: String
+    /// The delivery country chosen beside the postcode, until another carrier is chosen.
+    @State private var chosenPostcodeCountry: String?
     @State private var providerPostcode = ""
     @State private var saving = false
     @State private var errorMessage: String?
@@ -1151,6 +1153,7 @@ struct ChangeCarrierView: View {
                     .onChange(of: selectedCarrier) { _, carrier in
                         trackingURL = carrier == parcel.carrier ? parcel.trackingURL ?? "" : ""
                         deliveryPostcode = carrier == parcel.carrier ? parcel.dpdPostcode ?? "" : ""
+                        chosenPostcodeCountry = nil
                         errorMessage = nil
                     }
                     Text(automatic ? automaticDescription : localizer.text(catalog.trackingHintKey(for: selectedCarrier), [
@@ -1254,8 +1257,12 @@ struct ChangeCarrierView: View {
         return localizer.text("picker.auto.detected", ["carrier": catalog.info(for: carrier, language: localizer.language).displayName])
     }
 
+    /// The carrier's fields, the postcode's shaped for the country beside it.
     private var requirements: [CarrierRequirement] {
-        catalog.requirements(for: selectedCarrier, trackingNumber: parcel.trackingNumber)
+        let country = postcodeCountry
+        return catalog.requirements(for: selectedCarrier, trackingNumber: parcel.trackingNumber).map {
+            catalog.postcodeRequirement($0, for: selectedCarrier, country: country)
+        }
     }
 
     private var refusalQuestion: NumberRefusalRequest? {
@@ -1286,6 +1293,33 @@ struct ChangeCarrierView: View {
 
     private var trackingURLRequirement: CarrierRequirement? {
         requirements.first(where: { $0.field == .trackingURL })
+    }
+
+    /// The carrier's postcode field, before the country beside it shapes it.
+    private var carrierPostcodeRequirement: CarrierRequirement? {
+        catalog.requirements(for: selectedCarrier, trackingNumber: parcel.trackingNumber).first(where: { $0.field == .dpdPostcode })
+    }
+
+    /// Where the postcode's country starts: the one saved with the parcel's postcode, or the field's own start.
+    private var initialPostcodeCountry: String? {
+        carrierPostcodeRequirement.flatMap { catalog.initialPostcodeCountry(for: selectedCarrier, requirement: $0, parcel: parcel) }
+    }
+
+    /// The country the postcode is from: the one chosen while this field takes it, otherwise where it starts.
+    private var postcodeCountry: String? {
+        guard let requirement = carrierPostcodeRequirement else { return nil }
+        if let chosenPostcodeCountry,
+           catalog.postcodeCountries(for: selectedCarrier, requirement: requirement).contains(chosenPostcodeCountry) {
+            return chosenPostcodeCountry
+        }
+        return initialPostcodeCountry
+    }
+
+    /// The postcode's country, offered beside the field when it takes more than one.
+    private var offeredPostcodeCountry: String? {
+        guard let requirement = carrierPostcodeRequirement,
+              catalog.postcodeCountries(for: selectedCarrier, requirement: requirement).count > 1 else { return nil }
+        return postcodeCountry
     }
 
     private var postcodeRequirement: CarrierRequirement? {
@@ -1320,6 +1354,7 @@ struct ChangeCarrierView: View {
         normalizedProviderPostcode != nil || selectedCarrier != parcel.carrier
             || normalizedTrackingURL != (parcel.trackingURL ?? "")
             || normalizedPostcode != (parcel.dpdPostcode ?? "")
+            || (!normalizedPostcode.isEmpty && postcodeCountry != initialPostcodeCountry)
     }
 
     private var normalizedTrackingURL: String {
@@ -1347,6 +1382,11 @@ struct ChangeCarrierView: View {
             .autocorrectionDisabled()
         case .dpdPostcode:
             HStack(alignment: .firstTextBaseline, spacing: 6) {
+                if let country = offeredPostcodeCountry, let carrierRequirement = carrierPostcodeRequirement {
+                    PostcodeCountryMenu(carrier: selectedCarrier, requirement: carrierRequirement, country: country) {
+                        chosenPostcodeCountry = $0
+                    }
+                }
                 TextField(
                     localizer.text("add.requirement.dpdPostcode"),
                     text: $deliveryPostcode
@@ -1354,7 +1394,7 @@ struct ChangeCarrierView: View {
                 .drawnField()
                 .keyboardType(requirement.inputMode == "numeric" ? .numberPad
                     : requirement.startsWithNumberKeys(
-                        example: catalog.postcodeExample(for: selectedCarrier, requirement: requirement)
+                        example: catalog.postcodeExample(for: selectedCarrier, requirement: requirement, region: postcodeCountry)
                     ) ? .numbersAndPunctuation : .asciiCapable)
                 .textInputAutocapitalization(.characters)
                 .autocorrectionDisabled()
@@ -1382,6 +1422,7 @@ struct ChangeCarrierView: View {
                     carrier: selectedCarrier,
                     trackingURL: normalizedTrackingURL.nonEmpty,
                     dpdPostcode: normalizedPostcode.nonEmpty,
+                    dpdPostcodeCountry: catalog.sentPostcodeCountry(postcodeCountry, postcode: normalizedPostcode, for: selectedCarrier),
                     providerPostcode: normalizedProviderPostcode
                 )
                 dismiss()

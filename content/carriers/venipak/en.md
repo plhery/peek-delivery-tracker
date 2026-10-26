@@ -10,7 +10,7 @@ Venipak is a courier that delivers parcels for shops in Lithuania, Latvia and Es
 
 ## Where to find your Venipak tracking number
 
-Venipak's Lithuanian FAQ says it texts the parcel number the evening before delivery and again on the day; its Latvian pages mention only a morning SMS with the delivery window. You may also get the number from the sender, for example in the shop's shipping email.
+Venipak's Lithuanian FAQ says it texts the parcel number the evening before delivery and again on the day; its Latvian and Estonian pages mention only a morning SMS with the delivery window. You may also get the number from the sender, for example in the shop's shipping email.
 
 Venipak's texts and calls only reach Lithuanian, Latvian or Estonian phone numbers: with a foreign one, ask the shop for the number. See [how to find your tracking number](guide:find-tracking-number) if nothing arrived.
 
@@ -43,7 +43,7 @@ Venipak publishes no list of statuses, and no status for a failed attempt or a r
 
 ## Venipak lockers, pickup points and missed deliveries
 
-**When it comes.** Venipak says about 98% of parcels arrive the next working day. Homes are served Monday to Friday, 8 am to 5 pm, and on the morning it's due an SMS gives a time window and the courier's number. Saturday deliveries happen only in Vilnius, Kaunas, Klaipėda, Šiauliai, Panevėžys and Alytus, if the sender ordered them.
+**When it comes.** Venipak says about 98% of parcels arrive the next working day. Homes are served Monday to Friday, 8 am to 5 pm, and on the morning it's due an SMS gives a time window; Venipak's Lithuanian and Latvian pages add that you can call the courier on the number in the message. Saturday deliveries happen only in Vilnius, Kaunas, Klaipėda, Šiauliai, Panevėžys and Alytus, if the sender ordered them.
 
 **At the door.** The courier can hand the parcel to someone else at the address, such as a colleague or neighbour. Check the packaging with the courier there and note visible damage on the manifest: Venipak isn't responsible for damage not noted then.
 
@@ -51,7 +51,7 @@ Venipak publishes no list of statuses, and no status for a failed attempt or a r
 
 **Changing the address.** Possible from the business day after the driver collected the parcel: email the new address to customer service or call, and it arrives a business day later. Venipak's Lithuanian FAQ allows a change on the delivery day itself too, with delivery moved to the next working day.
 
-**Lockers.** An SMS comes the moment the parcel is placed inside. Pick it up within 3 to 5 calendar days (the date is in the SMS or email) with the PIN from the SMS or the QR code from the email. If your locker has a fault or no free compartment of the right size, the parcel goes to the nearest available one: check the message.
+**Lockers.** An SMS comes the moment the parcel is placed inside; in Estonia an SMS or an email, depending on the contact details the sender gave. Pick it up within 3 to 5 calendar days (the date is in the SMS or email) with the PIN from the SMS or the QR code from the email. If your locker has a fault or no free compartment of the right size, the parcel goes to the nearest available one: check the message.
 
 **Pickup points** are shops or service centres, open on weekdays and weekends, for parcels too big for lockers. Venipak gives 5 working days on one page and 5 calendar days on another: go by your SMS. Storage can't be extended, and an uncollected parcel goes back to the sender.
 
@@ -75,7 +75,7 @@ As listed on Venipak's contact pages on 13 October 2026, each country has its ow
 - **Latvia:** +371 6601 6601, Monday to Friday 8 am to 5 pm; helpdesk.lv@venipak.com; form on [Venipak Latvia's contacts page](https://venipak.com/lv/en/contacts/).
 - **Estonia:** +372 641 4481, Monday to Friday 8 am to 5 pm; helpdesk.ee@venipak.com; form on [Venipak Estonia's contacts page](https://venipak.com/ee/en/contacts/).
 
-> Venipak warns that fake texts in its name have spread in Lithuania and Latvia. Report fraud to sukciai@venipak.com in Lithuania or fraud@venipak.com in Latvia and Estonia.
+> Venipak warns that fake texts in its name have spread in Lithuania, Latvia and Estonia. Report fraud to sukciai@venipak.com in Lithuania or fraud@venipak.com in Latvia and Estonia.
 
 ## Tracking a Venipak parcel with Peek
 
@@ -91,18 +91,18 @@ Venipak gives no expected arrival day and no weight. Peek leaves out map coordin
 
 ### Can I track a Venipak parcel without the tracking number?
 
-Not on your own: Venipak's form also takes a customer ID with a document number, but only the sender has those. Ask the shop, or, in Lithuania, wait for Venipak's SMS the evening before.
+Yes, in Venipak's new app: according to its Estonian news of 22 October 2026, the app works across the Baltics and shows every Venipak parcel linked to your account through your email or phone number. On the website, Venipak's form takes a customer ID with a document number instead, but only the sender has those: ask the shop, or, in Lithuania, wait for Venipak's SMS the evening before.
 
 ### Can I change the address for a Venipak parcel?
 
-Yes, from the business day after the driver collected it, or even on the delivery day according to Venipak's Lithuanian FAQ. Email the new address to customer service or call, and it arrives one business day later.
+Yes, from the business day after the driver collected it, or even on the delivery day according to Venipak's Lithuanian FAQ. Email the new address to customer service or call, and it arrives one business day later. To send it to a locker instead, Venipak's new app can redirect it, its Estonian news of 22 October 2026 says.
 
 ### Does Venipak deliver the next day?
 
 Usually: Venipak says about 98% of parcels arrive the next working day. Homes are served Monday to Friday; Saturdays only in six Lithuanian cities, when the sender ordered it.
 
 :::sources
-- [Venipak: Parcel tracking](https://venipak.com/lt/en/parcel-tracking/) – form, SMS with the number, terminal advice, time window, lockers, not at home, address change
+- [Venipak: Parcel tracking](https://venipak.com/lt/en/parcel-tracking/) – form, SMS with the number, terminal advice, time window, courier's number, lockers, not at home, address change
 - [Venipak: Private customers](https://venipak.com/lt/en/private-customers/) – options, next working day, local phone numbers, pickup points, Saturday, payment, returns
 - [Venipak: Contacts (Lithuania)](https://venipak.com/lt/en/contacts/) – phone, hours, email, chat, fraud address, company
 - [Venipak: Contacts (Latvia)](https://venipak.com/lv/en/contacts/) – phone, hours, email, company
@@ -114,9 +114,13 @@ Usually: Venipak says about 98% of parcels arrive the next working day. Homes ar
 - [Venipak: Lockers](https://venipak.com/lt/en/lockers/) – SMS on placement, QR code
 - [Venipak: Parcel tracking (Estonia)](https://venipak.com/ee/en/parcel-tracking/) – customer ID and document number
 - [Venipak: Private customers (Latvia)](https://venipak.com/lv/en/private-customers/) – pickup point storage
-- [Venipak: BUJ (Latvia)](https://venipak.com/lv/buj/) – morning SMS with the delivery window (Latvian)
+- [Venipak: BUJ (Latvia)](https://venipak.com/lv/buj/) – morning SMS with the delivery window, courier's number (Latvian)
 - [Venipak: Kā tas strādā? (Latvia)](https://venipak.com/lv/palidziba/pakomati/ka-tas-strada/) – PIN by SMS or QR code link by email (Latvian)
 - [Venipak: Fraudsters are now impersonating real couriers](https://venipak.com/lv/en/news/2025-11-13/venipak-warns-businesses-fraudsters-are-now-impersonating-real-couriers/) – fake texts
+- [Venipak Estonia: KKK](https://venipak.com/ee/kkk/) – morning SMS with the planned window (Estonian)
+- [Venipak Estonia: Kuidas see töötab](https://venipak.com/ee/abi/pakiautomaadid/kuidas-see-tootab/) – locker notice by SMS or email, PIN or QR code (Estonian)
+- [Venipak Estonia: Venipak hoiatab ettevõtteid: petturid esitlevad end kulleritena](https://venipak.com/ee/uudised/2025-11-13/venipak-hoiatab-ettevotteid-petturid-esitlevad-end-kulleritena/) – fake texts in Estonia (Estonian)
+- [Venipak Estonia: Venipaki uue äpiga saab pakiautomaadi ukse avada otse telefonist](https://venipak.com/ee/uudised/2026-10-22/venipaki-uue-apiga-saab-pakiautomaadi-ukse-avada-otse-telefonist/) – the app: parcels linked to your account, redirect to a locker (Estonian)
 - [WordPress.org: Venipak shipping for WooCommerce](https://wordpress.org/plugins/wc-venipak-shipping/) – parcel number shape
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

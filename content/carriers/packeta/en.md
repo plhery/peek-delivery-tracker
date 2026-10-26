@@ -40,17 +40,17 @@ These are Packeta's English step sentences, in the order a parcel meets them; "�
 | `…investigating the status of the parcel…` | Something went wrong and Packeta is looking into it. |
 | `Return (on the way back)` | On its way back to the sender. |
 
-`The parcel has been handed over to the carrier…` means another company now has it: Packeta's own drivers deliver only in Czechia and Slovakia, partner carriers elsewhere. On the last day the tracking page shows `Last day to pick up your parcel.` with a button to extend storage, or `Your parcel will wait for you only today!` once storage can't be extended any more. A finished return reads `We have returned the parcel back to the sender.` or `Returned to sender`.
+`The parcel has been handed over to the carrier…` means another company now has it: a partner carrier abroad or, in Romania, FAN Courier (FANbox lockers) or Poșta Română. On the last day the tracking page shows `Last day to pick up your parcel.` with a button to extend storage, or `Your parcel will wait for you only today!` once storage can't be extended any more. A finished return reads `We have returned the parcel back to the sender.` or `Returned to sender`.
 
 `Parcel not found` means Packeta doesn't know the number, or no longer shows an old one. Check the `Z` and ten digits.
 
 ## Packeta pickup points, Z-BOX and home delivery
 
-Packeta says you have 7 days to pick a parcel up, with the code from the SMS or email, and can extend storage twice for free. In Czechia that makes 7 + 7 + 7, so 21 days at most, and an ID with your name works instead of the code. In Poland, an SMS to Packeta extends it to 21 days for free. Extend on the tracking page or in the app; storage may be shorter at Christmas. In Hungary, Packeta's terms give 5 days, at most 7, from 1 October to 20 January, and 7, at most 21, the rest of the year. Someone else can pick it up with your code.
+Packeta says you have 7 days to pick a parcel up, with the code from the SMS or email, and can extend storage twice for free. In Czechia that makes 7 + 7 + 7, so 21 days at most, and an ID with your name works instead of the code. In Poland, an SMS to Packeta extends it to 21 days for free. Extend on the tracking page or in the app; storage may be shorter at Christmas. In Hungary, Packeta's terms give 5 days, at most 7, from 1 October to 20 January, and 7, at most 21, the rest of the year. Romania's terms give 7 days, but 4 plus 1 on request from 1 October to 20 January, while packeta.ro says an SMS reply extends storage free up to 21 days. Someone else can pick it up with your code.
 
-**Z-BOX lockers** (Czechia, Slovakia, Romania) open 24/7 with the app over Bluetooth; Hungary's became FOXPOST Z-BOXes in 2026, and the FOXPOST app has replaced Packeta's there; in Czechia a six-digit code typed on the keypad opens them too. In Czechia a parcel waits 2 calendar days, plus 1 if extended.
+**Z-BOX lockers** (Czechia, Slovakia, Romania) open 24/7 with the app over Bluetooth; Hungary's became FOXPOST Z-BOXes in 2026, and the FOXPOST app has replaced Packeta's there; in Czechia a six-digit code typed on the keypad opens them too. In Czechia a parcel waits 2 calendar days, plus 1 if extended; in Romania the terms say 48 hours, the FAQ 2 days plus 1.
 
-**Home delivery.** In Czechia and Slovakia Packeta's drivers send a delivery window (Slovakia's site gives an estimated time to the minute and live tracking for the last hour); if they miss you, the parcel can go to the nearest pickup point. In Czechia the driver calls you twice on arrival and tries the address once: a missed parcel goes to the nearest pickup point with room, where you can collect it the same day. Elsewhere partner carriers deliver.
+**Home delivery.** In Czechia and Slovakia Packeta's own drivers send a delivery window (Slovakia's site gives an estimated time to the minute and live tracking for the last hour); if they miss you, the parcel can go to the nearest pickup point. In Czechia the driver calls you twice on arrival and tries the address once: a missed parcel goes to the nearest pickup point with room, where you can collect it the same day. In Romania packeta.ro says "our courier" contacts you beforehand; elsewhere a partner carrier may deliver.
 
 **Not picked up?** In Czechia it goes back to the sender automatically.
 
@@ -60,9 +60,9 @@ Packeta says you have 7 days to pick a parcel up, with the code from the SMS or 
 
 **No update for days.** In Czechia, once a parcel hasn't moved for more than 24 hours, Zásilkovna asks you to write through its contact form (topic "Kde je moje zásilka?") and say what the parcel holds. The shop booked the shipment, so it can chase it too. See [tracking that isn't updating](guide:tracking-not-updating).
 
-**Not received.** The sender claims for a lost parcel, so contact the shop; in Slovakia the recipient may claim too, and in Hungary with the sender's written assignment or an order confirmation showing the full price paid. Under Zásilkovna's terms for shops, it must report a parcel not delivered within 20 days of posting it and claim within 3 months. Delivered but missing? Read [delivered but not received](guide:delivered-not-received).
+**Not received.** The sender claims for a lost parcel, so contact the shop. The recipient may claim too in Slovakia; in Romania, under the terms, within 6 months of posting (one FAQ answer says the sender must); and in Hungary with the sender's written assignment or an order confirmation showing the full price paid. Under Zásilkovna's terms for shops, it must report a parcel not delivered within 20 days of posting it and claim within 3 months. Delivered but missing? Read [delivered but not received](guide:delivered-not-received).
 
-**Damaged.** Claim yourself on claims.packeta.com/en ("I am the recipient") within five working days of receipt (in Slovakia, hidden damage by the next working day after delivery; in Hungary, hidden damage within 3 working days, and visible damage must be written up at delivery); Packeta answers within 30 days. Pickup points don't take claims. In Poland, Packeta sends recipients to the shop.
+**Damaged.** Claim yourself on claims.packeta.com/en ("I am the recipient"): in Czechia within five working days of receipt, under Zásilkovna's terms; in Slovakia, hidden damage by the next working day after delivery; in Hungary, hidden damage within 3 working days, and visible damage must be written up at delivery; in Romania, within the 6 months above. Packeta answers within 30 days. Pickup points don't take claims. In Poland, Packeta sends recipients to the shop.
 
 **Returned.** Ask the shop to resend or refund.
 
@@ -113,7 +113,7 @@ Yes, as Packeta Poland, with its own phone line and pickup points; Z-BOX lockers
 - [Zásilkovna: Glossary of terms, Packeta](https://www.zasilkovna.cz/en/glossary-of-terms/packeta) – Packeta and Zásilkovna, Czech phone and hours
 - [Zásilkovna: Fraudulent SMS](https://www.zasilkovna.cz/en/cybersecurity/sms) – fake SMS warning
 - [Packeta: General terms and conditions](https://www.packeta.com/general-terms-conditions) – claim rights and deadlines, 30-day answer, pickup points
-- [Zásilkovna: Obchodní podmínky](https://files.packeta.com/web/files/VOP_Zasilkovna.pdf) – shops' terms: 20 days to report, 3 months to claim a loss
+- [Zásilkovna: Obchodní podmínky](https://files.packeta.com/web/files/VOP_Zasilkovna.pdf) – shops' terms: 20 days to report, 3 months to claim a loss, five working days for damage
 - [Zásilkovna: Zákaznická podpora](https://www.zasilkovna.cz/zakaznicky-servis/vyhledavani) – one delivery attempt, contact form after 24 hours, six-digit Z-BOX code
 - [Zásilkovna: Doručení domů](https://www.zasilkovna.cz/domu) – two calls, working days
 - [Zásilkovna: Doručujeme i v sobotu](https://www.zasilkovna.cz/blog/v-praze-brne-a-ostrave-dorucujeme-i-v-sobotu) – Saturday delivery to Z-BOXes and pickup points
@@ -125,6 +125,11 @@ Yes, as Packeta Poland, with its own phone line and pickup points; Z-BOX lockers
 - [Packeta.pl: Z-BOX](https://www.packeta.pl/zbox) – Z-BOX countries, app, 24/7
 - [Packeta.hu: Kapcsolat](https://www.packeta.hu/kapcsolat) – Hungarian phone and hours
 - [Packeta.ro: Contact](https://www.packeta.ro/contact) – Romanian phone and hours
+- [Packeta.ro: Modalități de primire colet](https://www.packeta.ro/optiuni-livrare) – Romania: 21 days by SMS, "our courier"
+- [Packeta.ro: Întrebări frecvente](https://www.packeta.ro/serviciu-clienti/cautare) – Romania: Z-BOX 2 + 1 days, sender claims
+- [Packeta.ro: Condiții generale privind furnizarea serviciilor poștale](https://files.packeta.com/web/files/Condi%C8%9Bii-generale-privind-furnizarea-serviciilor-po%C8%99tale_Packeta-Romania_31.10.2024.pdf) – Romania: storage, Z-BOX, claims within 6 months
+- [Packeta.ro: Informații actualizate despre transportatori](https://www.packeta.ro/blog/informatii-actualizate-despre-transportatori) – Romania: FANbox
+- [Packeta.ro: Packeta România și Poșta Română](https://www.packeta.ro/blog/packeta-romania-si-posta-romana-un-nou-parteneriat-pentru-o-acoperire-nationala-extinsa) – Romania: Poșta Română
 - [Packeta.sk: Kontakty](https://www.packeta.sk/kontakty) – Slovak phone, hours and forms
 - [Packeta Hungary: A Packeta Z-BOX-ok hamarosan átalakulnak FOXPOST Z-BOX-okká](https://www.packeta.hu/blog/packeta-z-box-atalakulas-foxpost-zbox) – Hungary: FOXPOST Z-BOXes
 - [Packeta Hungary: Megérkezett: adj fel csomagot a FOXPOST applikációval](https://www.packeta.hu/blog/megerkezett-adj-fel-csomagot-a-foxpost-applikacioval) – Hungary: the FOXPOST app replaces Packeta's

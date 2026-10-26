@@ -2792,6 +2792,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spåra paket med PostNord: statusar, ombud och tull",
       "name": "PostNord",
       "color": "#00a0d6"
+    },
+    {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "bring-spara-paket",
+      "title": "Spåra Bring-paket: statusar, ombud, paketbox och tull",
+      "name": "Bring",
+      "color": "#56b529"
     }
   ],
   "da": [
@@ -2944,6 +2952,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "ro": [
     {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-urmarire-colet",
+      "title": "Urmărire colet Packeta: numărul Z, statusuri și Z-BOX",
+      "name": "Packeta",
+      "color": "#ba1b02"
+    },
+    {
       "id": "cargus",
       "catalog": "cargus",
       "slug": "cargus-urmarire-colet",
@@ -3013,6 +3029,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "hr": [
+    {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "box-now-pracenje-posiljke",
+      "title": "Praćenje BOX NOW pošiljke: paketomat, PIN i statusi",
+      "name": "BOX NOW",
+      "color": "#44d62c"
+    },
     {
       "id": "hrvatska-posta",
       "catalog": "hrvatska-posta",
@@ -3084,6 +3108,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Omniva saadetise jälgimine: olekud, pakiautomaat ja toll",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "venipak-saadetise-jalgimine",
+      "title": "Venipaki saadetise jälgimine: olekud, pakiautomaat ja kuller",
+      "name": "Venipak",
+      "color": "#9339f2"
     }
   ],
   "uk": [

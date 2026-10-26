@@ -4353,7 +4353,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:\\d{2})?[A-Z0-9]{3}\\d{9}000\\d{6}$",
+        "pattern": "^(?!MA\\d{19}$)(?:\\d{2})?[A-Z0-9]{3}\\d{9}000\\d{6}$",
         "confidence": "high"
       },
       {
@@ -8904,6 +8904,16 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low",
         "checksum": "s10",
         "preferred": true
+      },
+      {
+        "pattern": "^00\\d(?:64|73)\\d{15}$",
+        "confidence": "low",
+        "checksum": "sscc"
+      },
+      {
+        "pattern": "^\\d(?:64|73)\\d{15}$",
+        "confidence": "low",
+        "checksum": "gs1"
       }
     ],
     "trackingSearchUrl": "https://www.matkahuolto.fi/seuranta"

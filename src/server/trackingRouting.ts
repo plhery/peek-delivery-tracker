@@ -585,6 +585,12 @@ export class RoutingDeferred extends Error {
 export class TrackingRouter {
   constructor(readonly options: {
     direct: (parcel: JsonObject, carrier: string) => Promise<RoutedResult>;
+    /**
+     * The delivery carrier a provider's answer names for a parcel filed under `carrier`, asked as
+     * the named partner of a carrier's own answer is (fetchResult): its result once it takes the
+     * parcel over, else the provider's answer with the probe's marker.
+     */
+    handoff?: (parcel: JsonObject, carrier: string, origin: CarrierResult) => Promise<RoutedResult>;
     // postcode is the parcel's stored delivery postcode, if the user supplied
     // one; ParcelsApp submits it with its direct lookup.
     // timezone is the parcel carrier's catalog zone; when that is UTC, the zone
@@ -911,9 +917,13 @@ export class TrackingRouter {
       const newest = latest(value);
       return newest > 0 && !asNewAs(newest, watermark) && !asNewAs(newest, this.options.withoutCopies?.(watermark, value, provider) ?? watermark);
     };
+    // A parcel filed under a carrier with no adapter of its own, which the delivery carrier a provider
+    // named took over: the filed carrier's lookup asks that carrier, as after any handoff.
+    const handedOver = metadata.original_carrier === declared && typeof metadata.active_tracking_carrier === 'string'
+      && directCarrier(metadata.active_tracking_carrier);
     const tryDirect = async (carrier: string, candidate = false, terminalStage?: string, probe = false, provider?: CarrierResult): Promise<RoutedResult | null> => {
       signal?.throwIfAborted();
-      if (!directCarrier(carrier) || attemptedDirect.has(carrier)) return null;
+      if (!(directCarrier(carrier) || (handedOver && carrier === declared)) || attemptedDirect.has(carrier)) return null;
       // Never borrow a postcode/capability from another carrier or guess missing
       // input. An optional input (DPD's postcode) only adds detail, so a
       // candidate that needs nothing else is looked up without it.
@@ -1566,6 +1576,23 @@ export class TrackingRouter {
         && fillPartialAnswer(declared, number, partialAnswer.value.result, value.result)) {
         state.partial_history = { fingerprint, provider: chosen, checked_at: now().toISOString() };
         state.direct_retry_at = undefined;
+      }
+      // The provider names the carrier that delivers a parcel filed under one with no adapter of its
+      // own (DPD Poland's number for a Z-Leading parcel): that carrier is asked, at the gaps of a
+      // carrier's named partner, and answers for the parcel once its own scans confirm it.
+      const partner = this.options.handoff && !directCarrier(declared) && !['unknown', 'intl-post'].includes(declared)
+        && !metadata.original_carrier && universalNumber === number && !withoutProgress
+        ? deliveryHandoff(declared, number, value.result) : null;
+      if (partner?.basis === 'partner') {
+        const handed = await this.options.handoff!(parcel, declared, { ...value.result }).catch((error: unknown) => {
+          signal?.throwIfAborted();
+          report('provider_failed', partner.carrier, routingFailure(error).kind, error);
+          return null;
+        });
+        if (handed && handed.sourceCarrierId !== declared) {
+          state.direct_retry_at = undefined;
+          return persistResult(handed, declared);
+        }
       }
       return persistResult(value, chosen, withoutProgress);
     }

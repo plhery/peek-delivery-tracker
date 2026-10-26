@@ -1029,17 +1029,18 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /**
-   * The open, unarchived one-off parcels filed under no carrier and added since
-   * `addedSince`, followed or not, the least recently checked first, in the
-   * shape of listActivePackages.
+   * The open, unarchived one-off parcels filed under one of `carriers` (no
+   * carrier, or one with no adapter of its own) and added since `addedSince`,
+   * followed or not, the least recently checked first, in the shape of
+   * listActivePackages.
    */
-  async listUnfiledOneOffPackages(addedSince: Date): Promise<JsonObject[]> {
+  async listUnfiledOneOffPackages(addedSince: Date, carriers: readonly string[]): Promise<JsonObject[]> {
     const params = query([
       ['select', `${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`],
       ['one_off', 'is.true'],
       ['user_id', 'is.null'],
       ['archived_at', 'is.null'],
-      ['carrier', 'in.(unknown,intl-post)'],
+      ['carrier', `in.(${carriers.join(',')})`],
       ['current_stage', 'not.in.(delivered,returned)'],
       ['created_at', `gte.${addedSince.toISOString()}`],
       ['order', 'last_synced_at.asc.nullsfirst,created_at.asc'],

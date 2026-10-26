@@ -280,8 +280,8 @@ parcels followed without an account that nobody watches (below).
 | No new event for 48 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | Nobody waiting for it | hourly around the clock; manual refresh still allowed |
 | Followed without an account, no link opened for an hour and no alert on | every 3 h, not overnight; opening a link queues a check at once |
-| Without an account, filed under no carrier, added in the last 30 days, no link opened for a day and no alert on, once a carrier or provider answered for its number | every 6 h, not overnight |
-| Without an account, filed under no carrier, newest scan over 14 days old, no link opened for an hour and no alert on | daily, not overnight; opening a link queues a check at once |
+| Without an account, filed under no carrier or one with no adapter of its own, added in the last 30 days, no link opened for a day and no alert on, once a carrier or provider answered for its number | every 6 h, not overnight |
+| Without an account, filed under no carrier or one with no adapter of its own, newest scan over 14 days old, no link opened for an hour and no alert on | daily, not overnight; opening a link queues a check at once |
 | Another carrier holds it and waits for the delivery postcode (`routing.input_needed`) | daily, not overnight; adding the postcode checks it at once |
 | Number no carrier or provider has seen (no carrier identified, no history, no input asked) | hourly for 6 h after it was added, then every 6 h, daily after 48 h, weekly after 7 days, around the clock; manual refresh still allowed. An account's parcel, with its rechecks on: 1, 3 and 7 days after it was added, then no more after 14 days (below) |
 | Archived, with a new event in the last 30 days (from when it was added), and no alert on a link shared with someone | daily around the clock; manual refresh still allowed |
@@ -355,9 +355,10 @@ delivery only a provider reported that the parcel's carrier did not show, checke
 opened in the last 24 hours or has an alert on. Otherwise a parcel waits until a link is
 opened again; that read queues a check at once when the schedule would run one, and never
 more often than the schedule, however often the link is polled. A scheduled check made while
-that one waits stands in for it. One filed under no carrier stays on the schedule for 30
-days after it was added, every 6 hours by day, after the followed ones, once a carrier or
-provider has answered for its number: a check can find its carrier. Once its newest scan is
+that one waits stands in for it. One filed under no carrier, or under a carrier only universal
+providers track, stays on the schedule for 30 days after it was added, every 6 hours by day,
+after the followed ones, once a carrier or provider has answered for its number: a check can
+find its carrier, or the carrier that delivers it (Handoffs, below). Once its newest scan is
 more than 14 days old, followed or not, it is checked daily by day instead while no link was
 opened in the last hour and it has no alert on. One whose number nobody
 has seen 6 h after it was added leaves the schedule, followed or not, unless it has an alert on:
@@ -606,6 +607,11 @@ A parcel often changes carrier at the border. The origin history is always kept.
   wait.
   A partner that does not know the item yet, or answers inconclusively, is not
   reported as `provider_failed`; its network failures and server errors still are.
+- A parcel filed under a carrier only universal providers track has no origin adapter to name
+  a partner, but the provider can (ParcelsApp's next number, DPD Poland's for a Z-Leading
+  parcel). That partner is asked the same way, at the same gaps, and once adopted answers for
+  the parcel through the filed carrier on every check. The provider's rows stay as stored, and
+  no earlier carrier is asked alongside it. Parcels filed under no carrier keep their routing.
 - Until then the parcel is followed on the origin. The cards, parcel links and the delivered email
   already name the partner the origin names (`delivery_carrier`) as who delivers, and the cards and
   links show its number (`delivery_tracking_number`) after the followed one.

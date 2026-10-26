@@ -114,16 +114,20 @@ const NOT_YET_MOVING = new Set(['registered', 'accepted']);
 /** By day, a lookup without an account that nobody watches is checked this often. */
 const UNWATCHED_ONE_OFF_HOURS = 3;
 /**
- * By day, a lookup without an account filed under no carrier that nobody follows any more is
- * checked this often while it is new (REDETECTION_WINDOW_MS), once a carrier or provider has
- * answered for its number: the next answer can name its carrier.
+ * By day, a lookup without an account filed under no carrier, or under one with no adapter of its
+ * own, that nobody follows any more is checked this often while it is new (REDETECTION_WINDOW_MS),
+ * once a carrier or provider has answered for its number: the next answer can name its carrier,
+ * or the carrier that delivers it.
  */
 const UNFILED_ONE_OFF_HOURS = 6;
 /**
- * A lookup without an account filed under no carrier whose newest scan is older than this is
- * checked daily by day instead, followed or not, while nobody watches it: its scans have stopped.
+ * A lookup without an account filed under no carrier, or under one with no adapter of its own,
+ * whose newest scan is older than this is checked daily by day instead, followed or not, while
+ * nobody watches it: its scans have stopped.
  */
 const QUIET_UNFILED_AFTER_MS = 14 * 24 * 60 * 60 * 1_000;
+/** No carrier, or a carrier only universal providers track (z-leading): no adapter of its own answers for it. */
+const PROVIDER_TRACKED_CARRIERS = [...AUTOMATIC_CARRIER_IDS].filter((carrier) => !directCarrier(carrier));
 /**
  * An archived parcel is checked daily until this long after its newest carrier
  * event, or after it was added: one put away at a pickup point still shows its
@@ -399,16 +403,17 @@ function isScheduledTrackingSyncDue(
   if (waitsForPostcode(parcel)) {
     return local.hour >= 8 && local.hour < 22 && lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   }
-  // A lookup without an account filed under no carrier whose newest scan is over 14 days old, followed
-  // or not, while nobody watches it: daily by day, and not overnight. It stays on the schedule as
-  // long as before, and opening its link queues a check as before.
+  // A lookup without an account filed under no carrier, or under one with no adapter of its own, whose
+  // newest scan is over 14 days old, followed or not, while nobody watches it: daily by day, and not
+  // overnight. It stays on the schedule as long as before, and opening its link queues a check as before.
   const newest = newestEvent(parcel);
-  if (oneOff && (unfollowed || unwatched) && ['unknown', 'intl-post'].includes(String(parcel.carrier))
+  if (oneOff && (unfollowed || unwatched) && !directCarrier(String(parcel.carrier))
     && newest !== null && now.getTime() - newest > QUIET_UNFILED_AFTER_MS) {
     return local.hour >= 8 && local.hour < 22 && lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   }
-  // A lookup without an account filed under no carrier that nobody follows any more: every 6 hours
-  // by day, and not overnight. A provider's next answer, or a carrier recognition asks, can name its carrier.
+  // A lookup without an account filed under no carrier, or under one with no adapter of its own, that
+  // nobody follows any more: every 6 hours by day, and not overnight. A provider's next answer, or a
+  // carrier recognition asks, can name its carrier, or the carrier that delivers it.
   if (oneOff && unfollowed) {
     return local.hour >= 8 && local.hour < 22
       && lastChecked < hourStart.minus({ hours: UNFILED_ONE_OFF_HOURS - 1 }).toMillis();
@@ -1360,8 +1365,9 @@ export class TrackingSyncService {
 
   /**
    * One-off parcels stay on the schedule while a link was opened lately, and
-   * those filed under no carrier while they are new, followed or not: a check
-   * can find their carrier. They come after every account's share and count as
+   * those filed under no carrier, or under one with no adapter of its own, while
+   * they are new, followed or not: a check can find their carrier, or the one
+   * that delivers them. They come after every account's share and count as
    * one owner, the followed ones first, each the least recently checked first,
    * so lookups cannot starve accounts. Nor can they stop them: when a list
    * cannot be read, the others are still checked.
@@ -1384,7 +1390,7 @@ export class TrackingSyncService {
       () => this.client.listFollowedOneOffPackages(new Date(now.getTime() - ONE_OFF_FOLLOWED_MS)));
     const listed = new Set(followed.map((parcel) => String(parcel.id)));
     const unfiled = await list('list_unfiled_one_off_packages',
-      () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS)));
+      () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS), PROVIDER_TRACKED_CARRIERS));
     return [...followed.filter(followedDue), ...unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel))]
       .slice(0, MAX_ONE_OFF_PACKAGES_PER_SYNC);
   }
@@ -1729,6 +1735,8 @@ export class TrackingSyncService {
         fetched = await audit.observeFetch(async () => this.adapter.fetchUniversal && carrierId !== 'amazon-shipping'
           ? await new TrackingRouter({
             direct: (candidate, carrier) => this.fetchResult(withSavedProbe(candidate), carrier, checks, askedForCheck(context.trigger), lookupCountry, keepProbe),
+            handoff: (candidate, carrier, origin) => this.fetchResult(withSavedProbe(candidate), carrier, checks, askedForCheck(context.trigger),
+              lookupCountry, keepProbe, origin),
             universal: (source, number, timeout, postcode, timezone, carrier) => once(universalLookupKey(source, number, postcode, timezone, carrier),
               () => this.adapter.fetchUniversal!(source, number, timeout, postcode, timezone, carrier)),
             ...(checks ? { reusedUniversal: (source: UniversalSource, number: string, postcode: string | null, timezone: string | null, carrier: string | null) =>
@@ -2404,6 +2412,9 @@ export class TrackingSyncService {
     byHand = false,
     lookupCountry: string | null = null,
     onProbe?: (probe: JsonObject) => void,
+    // A provider's answer for a parcel filed under a carrier with no adapter of its own, which
+    // stands in for the origin's: only the delivery carrier it names is asked.
+    providerOrigin?: CarrierResult,
   ): Promise<{
     result: CarrierResult;
     sourceCarrierId: string;
@@ -2423,7 +2434,8 @@ export class TrackingSyncService {
     const activeNumber = typeof metadata.active_tracking_number === 'string' ? metadata.active_tracking_number : trackingNumber;
     if ((metadata.original_carrier || legacySwissReady) && hasDirectHandoffAdapter(activeCarrier, activeNumber)) {
       // The earlier carrier still publishes late scans: ask it too, as at the handoff, for a while.
-      const followUp = metadata.original_carrier === carrierId && carrierId !== activeCarrier
+      // One with no adapter of its own has none to ask.
+      const followUp = metadata.original_carrier === carrierId && carrierId !== activeCarrier && directCarrier(carrierId)
         && metadata.original_tracking_number === trackingNumber && asksEarlierCarrier(metadata, this.now());
       const [result, earlier] = await Promise.all([
         this.fetchCarrier(checks, activeCarrier, activeNumber, null, handoffPostcode(parcel, carrierId, activeCarrier, activeNumber), language),
@@ -2452,7 +2464,7 @@ export class TrackingSyncService {
       let originError: unknown;
       let savedPartner: DeliveryHandoff | null = null;
       try {
-        origin = normalizeCarrierResult(await this.fetchCarrier(checks,
+        origin = providerOrigin ?? normalizeCarrierResult(await this.fetchCarrier(checks,
           carrierId, trackingNumber,
           typeof parcel.tracking_url === 'string' ? parcel.tracking_url : null,
           typeof parcel.dpd_postcode === 'string' ? parcel.dpd_postcode : null, language,
@@ -2523,7 +2535,8 @@ export class TrackingSyncService {
                 ...(delivery.sender_name === undefined && origin.sender_name ? { sender_name: origin.sender_name } : {}),
               },
               sourceCarrierId: candidate.carrier, swissPostReady: candidate.carrier === 'swiss-post' ? true : null, handoffFallbackErrorType: null,
-              earlierResult: origin, earlierCarrierId: carrierId,
+              // A provider's answer is no earlier carrier's: the rows it wrote stay as they are.
+              ...(providerOrigin ? {} : { earlierResult: origin, earlierCarrierId: carrierId }),
             };
           }
           // It has the parcel on record with news of its own and no scan yet: its first scan comes next.

@@ -2485,14 +2485,21 @@ describe('TrackingSyncService', () => {
       const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
         { fetch: vi.fn(), fetchUniversal: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => now);
       await service.sync();
-      // Those added in the last 30 days, as recognition only asks for them.
-      expect(client.listUnfiledOneOffPackages).toHaveBeenCalledExactlyOnceWith(new Date(now.getTime() - 30 * 86_400_000));
+      // Those added in the last 30 days, as recognition only asks for them, filed under no carrier or one only
+      // providers track.
+      expect(client.listUnfiledOneOffPackages).toHaveBeenCalledExactlyOnceWith(new Date(now.getTime() - 30 * 86_400_000),
+        expect.arrayContaining(['unknown', 'intl-post', 'z-leading']));
+      expect(client.listUnfiledOneOffPackages.mock.calls[0][1]).not.toContain('dpd-pl');
       return client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id);
     };
     // Six hours after its last check (08:00 in Zurich), not before, and not overnight.
     await expect(check('2026-09-09T11:00:00Z', [lookup('seen')])).resolves.toEqual([]);
     await expect(check('2026-09-09T12:00:00Z', [lookup('seen')])).resolves.toEqual(['seen']);
     await expect(check('2026-09-09T21:00:00Z', [lookup('seen', { last_synced_at: '2026-09-09T12:00:15Z' })])).resolves.toEqual([]);
+    // So does one filed under a carrier only providers track: their next answer can name the carrier that delivers it.
+    const filed = lookup('filed', { carrier: 'z-leading', carrier_data: { routing: { ...routing, configured_carrier: 'z-leading' } } });
+    await expect(check('2026-09-09T11:00:00Z', [filed])).resolves.toEqual([]);
+    await expect(check('2026-09-09T12:00:00Z', [filed])).resolves.toEqual(['filed']);
     // A number nobody has seen stays off the schedule: it would ask every provider in turn.
     const unseen = lookup('unseen', { current_stage: 'pending', sync_status: 'waiting',
       carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {} } } });
@@ -3833,6 +3840,51 @@ describe('TrackingSyncService', () => {
     // delivery scan a row of its own that nothing pairs.
     expect(saved).toEqual(expect.arrayContaining([['nova-poshta', 'exception'], ['unknown', 'returned']]));
     expect(saved).toHaveLength(3);
+  });
+
+  it('asks the delivery carrier a provider names for a parcel filed under a carrier with no adapter of its own, then follows it there', async () => {
+    vi.spyOn(scraper, 'universalPlan').mockReturnValue({ sources: ['ParcelsApp'], carrier: null, tier: () => 'unknown', rank: () => 0 });
+    const store = eventStore();
+    const client = Object.assign(store.client, {
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined) });
+    // ParcelsApp follows a Z-Leading parcel to DPD Poland's number; numbers, wording and clocks are invented.
+    const out = { time: '2026-10-26T07:00:00Z', description: 'Out for delivery', stage: 'out_for_delivery' };
+    const provider: CarrierResult = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-10-24T06:34:09Z',
+      delivery_carrier: 'dpd-pl', delivery_tracking_number: '1000000000001U',
+      events: [{ time: '2026-10-24T06:34:09Z', description: 'Handed to the delivery company', stage: 'in_transit' }] };
+    const dpd = (...events: Array<typeof out>): CarrierResult => ({ status: events[0].stage as CarrierResult['status'],
+      current_stage: events[0].stage, last_update: events[0].time, events });
+    const adapter = { fetch: vi.fn().mockRejectedValueOnce(new CarrierError('not_found', 'dpd-pl', 'Unknown parcel'))
+      .mockResolvedValueOnce(dpd(out))
+      .mockResolvedValueOnce(dpd({ time: '2026-10-26T11:36:00Z', description: 'Delivered', stage: 'delivered' }, out)),
+    fetchUniversal: vi.fn().mockResolvedValue(provider) };
+    let saved: JsonObject = { id: 'named-last-mile', carrier: 'z-leading', tracking_number: 'ZLAB000000001', current_stage: 'pending',
+      created_at: '2026-10-21T15:00:00Z', one_off: true };
+    const check = async (at: string) => {
+      await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at))
+        .syncPackage({ ...saved, [STORED_EVENT_IDENTITIES]: store.identities() });
+      saved = { ...saved, ...client.applyTrackingSync.mock.calls.at(-1)![1] };
+      return saved.carrier_data as JsonObject;
+    };
+    // DPD Poland does not know its number yet: the provider's answer serves the parcel, and the ask is kept for its gap.
+    let data = await check('2026-10-26T06:00:00Z');
+    expect(adapter.fetch.mock.calls.map((call) => call.slice(0, 2))).toEqual([['dpd-pl', '1000000000001U']]);
+    expect(saved.current_stage).toBe('in_transit');
+    expect(data.active_tracking_carrier).toBeUndefined();
+    expect(data.delivery_probe).toMatchObject({ carrier: 'dpd-pl', number: '1000000000001U', misses: 1 });
+    // Once it scans the parcel, it takes the parcel over.
+    data = await check('2026-10-26T09:00:00Z');
+    expect(adapter.fetch).toHaveBeenCalledTimes(2);
+    expect(data).toMatchObject({ active_tracking_carrier: 'dpd-pl', active_tracking_number: '1000000000001U',
+      original_carrier: 'z-leading', original_tracking_number: 'ZLAB000000001' });
+    expect(saved.current_stage).toBe('out_for_delivery');
+    // The next check asks it alone.
+    await check('2026-10-26T12:00:00Z');
+    expect(adapter.fetch.mock.calls.map((call) => call.slice(0, 2))).toEqual(Array(3).fill(['dpd-pl', '1000000000001U']));
+    expect(adapter.fetchUniversal).toHaveBeenCalledTimes(2);
+    expect(saved.current_stage).toBe('delivered');
+    expect(saved.carrier).toBe('z-leading');
   });
 
   it('hands a Cainiao result to its reported local number through normalization', async () => {

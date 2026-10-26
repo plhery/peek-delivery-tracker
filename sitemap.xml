@@ -5211,15 +5211,25 @@
 <loc>https://peektracker.com/carriers/tipsa-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tipsa-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/tipsa-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/tipsa-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tipsa-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers/tipsa-seguimiento</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tipsa-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/tipsa-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/tipsa-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tipsa-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/tipsa-rastreio</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tipsa-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/tipsa-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/tipsa-rastreio" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tipsa-tracking" />
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/yanwen-tracking</loc>
@@ -5988,6 +5998,16 @@
 <url>
 <loc>https://peektracker.com/carriers/posti-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/posti-tracking" />
+<xhtml:link rel="alternate" hreflang="sv" href="https://peektracker.com/sv/carriers/posti-spara-paket" />
+<xhtml:link rel="alternate" hreflang="fi" href="https://peektracker.com/fi/carriers/posti-seuranta" />
+<xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/smartposti-paki-jalgimine" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/posti-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/sv/carriers/posti-spara-paket</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/posti-tracking" />
+<xhtml:link rel="alternate" hreflang="sv" href="https://peektracker.com/sv/carriers/posti-spara-paket" />
 <xhtml:link rel="alternate" hreflang="fi" href="https://peektracker.com/fi/carriers/posti-seuranta" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/smartposti-paki-jalgimine" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/posti-tracking" />
@@ -5996,6 +6016,7 @@
 <url>
 <loc>https://peektracker.com/fi/carriers/posti-seuranta</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/posti-tracking" />
+<xhtml:link rel="alternate" hreflang="sv" href="https://peektracker.com/sv/carriers/posti-spara-paket" />
 <xhtml:link rel="alternate" hreflang="fi" href="https://peektracker.com/fi/carriers/posti-seuranta" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/smartposti-paki-jalgimine" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/posti-tracking" />
@@ -6004,6 +6025,7 @@
 <url>
 <loc>https://peektracker.com/et/carriers/smartposti-paki-jalgimine</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/posti-tracking" />
+<xhtml:link rel="alternate" hreflang="sv" href="https://peektracker.com/sv/carriers/posti-spara-paket" />
 <xhtml:link rel="alternate" hreflang="fi" href="https://peektracker.com/fi/carriers/posti-seuranta" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/smartposti-paki-jalgimine" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/posti-tracking" />
@@ -6531,7 +6553,7 @@
 <loc>https://peektracker.com/carriers/helthjem-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/helthjem-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/helthjem-tracking" />
-<lastmod>2026-10-13</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/matkahuolto-tracking</loc>

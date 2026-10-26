@@ -2154,15 +2154,18 @@ export class TrackingSyncService {
       // The universal rows the carriers' scans hold, so the timeline tells a provider's copies from them (providerCopies.ts).
       const history = directHistory(keptEvents, persistedEvents, previousData[DIRECT_HISTORY], stored);
       if (history) carrierData[DIRECT_HISTORY] = history;
+      // The parcel's rows once this check is saved.
+      const rowsOnceSaved = () => {
+        const written = new Set([...persistedEvents.map((event) => String(event.provider_event_id)), ...removed]);
+        return [...stored.filter((row) => !written.has(String(row.provider_event_id))
+          && !deleteDescriptions.includes(String(row.description))), ...persistedEvents];
+      };
       if (!preserveSummary) {
         values.last_status_text = result.last_status_text || null;
         values.expected_delivery = result.expected_delivery ? String(result.expected_delivery) : null;
         values.carrier_data = carrierData;
         if (selectedStage && (hasUpdate || !swissPostReady)) {
-          // The parcel's rows once this check is saved.
-          const written = new Set([...persistedEvents.map((event) => String(event.provider_event_id)), ...removed]);
-          const rows = [...stored.filter((row) => !written.has(String(row.provider_event_id))
-            && !deleteDescriptions.includes(String(row.description))), ...persistedEvents];
+          const rows = rowsOnceSaved();
           // A carrier the router swapped to may rightly know less than a mistaken one did.
           values.current_stage = fetched.correction ? selectedStage : stageToSave(heldStage(parcel, previousStage, rows), selectedStage);
           // Only the check that brings such a scan, dated after the stored progress, flags it: not the
@@ -2187,6 +2190,14 @@ export class TrackingSyncService {
         const collectedAt = collectedPickupPoint(parcel, carrierData, String(values.current_stage ?? previousStage),
           fetched.correction?.carrier ?? carrierId, [...stored, ...events]);
         if (collectedAt) carrierData.pickup_point = collectedAt;
+      } else if (selectedStage && olderSnapshot && !keepSaved && !unprovenUpuSummary && !unprovenLocalSummary
+        && !unprovenProviderSummary && !['delivered', 'returned'].includes(previousStage)) {
+        // An answer set aside only as older, such as one a partner's copy of its scan seconds later
+        // makes look so, leaves the saved summary, but the saved stage still needs a row that shows
+        // it. Once none does (its row deleted, or a scraper fix re-reading the scan that moved the
+        // parcel), the parcel steps back to the stage its rows show. The answer moves it no further.
+        const kept = heldStage(parcel, previousStage, rowsOnceSaved());
+        if (stageRank(kept) >= 0 && stageRank(kept) < stageRank(previousStage)) values.current_stage = kept;
       }
       if (preserveSummary && postalHistory) {
         values.carrier_data = {

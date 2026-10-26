@@ -1921,6 +1921,37 @@ describe('TrackingSyncService', () => {
       expect.objectContaining({ anomaly_codes: ['early_stage_regression'] }), expect.any(Array));
   });
 
+  it('steps back to the stage its rows show when the answer is set aside and no row shows the saved one', async () => {
+    // The row that moved the parcel in transit is gone (a scraper fix reads its scan as the acceptance);
+    // a partner's copy of the acceptance seconds later (synthetic wording) makes the carrier's answer look older.
+    const collected = { time: '2026-09-10T08:00:00Z', description: 'Collected from the sender', stage: 'accepted' };
+    const row = (source: string, time: string, description: string, stage: string) => ({ stage, description,
+      occurred_at: new Date(time).toISOString(), provider_event_id: providerEventId(source, time, '', description) });
+    const copy = row('poczta-polska', '2026-09-10T08:00:03Z', 'Posted abroad', 'accepted');
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'accepted',
+      last_status_text: collected.description, last_update: collected.time, events: [collected] }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    const parcel = { id: 'set-aside', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'in_transit',
+      carrier_data: { last_update: copy.occurred_at, routing: { version: 1, configured_carrier: 'dhl', failures: {}, probe_cursor: 0,
+        discovery_cursor: 0, last_event_at: copy.occurred_at } },
+      [STORED_EVENT_IDENTITIES]: [row('dhl', collected.time, collected.description, 'accepted'), copy] };
+    await service.syncPackage(parcel);
+    const saved = client.updatePackage.mock.calls.at(-1)![1];
+    // The summary stays: the answer was set aside.
+    expect(saved).not.toHaveProperty('last_status_text');
+    expect(saved).toMatchObject({ current_stage: 'accepted', sync_status: 'ok' });
+    expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(expect.any(String),
+      expect.objectContaining({ outcome: 'updated', anomaly_codes: [] }), expect.any(Array));
+    // A row in transit the parcel keeps still holds the stage.
+    const sorted = row('dhl', '2026-09-10T06:00:00Z', 'Sorted at the hub', 'in_transit');
+    await service.syncPackage({ ...parcel, [STORED_EVENT_IDENTITIES]: [...parcel[STORED_EVENT_IDENTITIES], sorted] });
+    expect(client.updatePackage.mock.calls.at(-1)![1]).not.toHaveProperty('current_stage');
+  });
+
   it('keeps one row of a scan its carrier restates without its milliseconds', async () => {
     // Royal Mail dated a locker drop-off to the millisecond, then to the second (synthetic place and number).
     const scan = { description: 'Sender advised item dropped off at parcel locker', location: 'Example Delivery Office RM Parcel Locker',

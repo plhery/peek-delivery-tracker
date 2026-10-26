@@ -2784,7 +2784,10 @@ export const CARRIER_CAPABILITIES = {
       "ES",
       "PT"
     ],
-    "trackingSearchUrl": "https://shipping-tracking.production.cloud2.cttexpress.com/"
+    "trackingSearchUrl": "https://shipping-tracking.production.cloud2.cttexpress.com/",
+    "aliases": [
+      "CTT Express Tracking"
+    ]
   },
   "poste-italiane": {
     "displayName": "Poste Italiane",

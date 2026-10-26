@@ -57355,6 +57355,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "russian-post",
       "dpd",
       "ciblex",
       "hermes-de",
@@ -57368,6 +57369,9 @@
       "dpd-nl",
       "dpd-pt",
       "dpd-uk"
+    ],
+    "preferred": [
+      "russian-post"
     ],
     "asked": [
       "hermes-de",

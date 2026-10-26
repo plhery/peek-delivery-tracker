@@ -451,7 +451,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Spring GDS",
       "Mailing Technology",
-      "PostNL - Netherlands Post"
+      "PostNL - Netherlands Post",
+      "Spring Global Mail"
     ],
     "countries": [
       "NL"
@@ -3771,7 +3772,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "blue-dart"
+      "adapter": "blue-dart",
+      "recognitionRank": 599,
+      "recognitionServedCountriesOnly": true
     },
     "linkRules": [
       {
@@ -7640,7 +7643,14 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "universal"
     },
     "linkRules": [],
-    "detectionRules": []
+    "detectionRules": [
+      {
+        "pattern": "^80\\d{12}$",
+        "confidence": "low",
+        "checksum": "gs1",
+        "preferred": true
+      }
+    ]
   },
   "saia": {
     "displayName": "Saia",

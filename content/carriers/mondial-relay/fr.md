@@ -3,7 +3,7 @@ title: Mondial Relay suivi : statuts, Point Relais et contact
 description: Suivi Mondial Relay en France et en Belgique : le numéro à 8 chiffres, ce que veut dire chaque statut, le délai de retrait en Point Relais et qui contacter.
 slug: mondial-relay-suivi
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 Mondial Relay est un transporteur français du groupe InPost qui livre en Point Relais (des commerces de proximité), en Locker et à domicile. Pour suivre ton colis, saisis le numéro d'expédition à 8 chiffres et le code postal du destinataire sur [la page de suivi de Mondial Relay](https://www.mondialrelay.fr/suivi-de-colis/), ou colle le numéro dans le champ ci-dessus. Il figure sur l'étiquette et dans les e-mails de Mondial Relay et de l'expéditeur.
@@ -75,7 +75,7 @@ Relevé le 10 octobre 2026 :
 
 ## Suivre un colis Mondial Relay avec Peek
 
-[Peek](/) reconnaît tout de suite le code-barres de 26 chiffres, même tapé avec des espaces. Avec 8, 10 ou 12 chiffres, il peut ne pas nommer Mondial Relay de lui-même : d'autres transporteurs utilisent ces longueurs, et Peek ne peut pas demander à Mondial Relay s'il connaît un numéro. Appuie alors sur « Changer » et choisis Mondial Relay, ou colle un lien de suivi de mondialrelay.fr (ceux de ses autres sites ne sont pas lus).
+[Peek](/) reconnaît tout de suite le code-barres de 26 chiffres, même tapé avec des espaces. Avec 8, 10 ou 12 chiffres, il peut ne pas nommer Mondial Relay de lui-même : d'autres transporteurs utilisent ces longueurs, et Peek ne peut pas demander à Mondial Relay s'il connaît un numéro. Appuie alors sur « Changer » et choisis Mondial Relay, ou colle un lien de suivi de mondialrelay.fr, .be, .nl ou .com (ceux de ses sites espagnol et portugais ne sont pas lus).
 
 Un numéro à 8 chiffres demande aussi le « Code postal de livraison » : tape le numéro seul, puis le code postal dans son champ. Seuls des codes postaux français ont été testés, et avec un mauvais code, le colis reste introuvable. Il est envoyé à Mondial Relay et, si besoin, à des services de suivi.
 

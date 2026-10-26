@@ -3,7 +3,7 @@ title: DHL Express tracking: carta de porte, estados e contactos
 description: DHL Express tracking em Portugal: onde está a carta de porte de 10 algarismos, o que querem dizer os estados, alfândega, entregas falhadas e contactos.
 slug: dhl-express-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 A DHL Express é a divisão de correio expresso internacional da DHL, para envios com prazo definido, e muitas lojas no estrangeiro usam-na porque têm um acordo de entrega com a DHL. Para seguir a tua encomenda, usa o número de 10 algarismos da carta de porte no dhl.com ou no MyDHL+, abre o link da mensagem da DHL ou cola o número na caixa acima. Normalmente, a loja dá-te o número no e-mail de envio.
@@ -73,7 +73,7 @@ Assim estava a página «Ajuda e Suporte» da DHL Express Portugal a 13 de outub
 
 ## Seguir uma encomenda DHL Express com o Peek
 
-O [Peek](/) reconhece uma carta de porte de 10 algarismos que passa no algarismo de controlo da DHL Express, põe a DHL Express em primeiro lugar e pergunta ao mesmo tempo à DHL Express, à Relais Colis, à TIPSA e à DHL eCommerce Iberia, indicando quem tem a encomenda. Um número de 10 algarismos que falha o controlo não é proposto à DHL Express: escolhe-a com «Alterar transportadora». Os números de volume `JD01` e as etiquetas `JJD0146` (`JJD014612345678901234`) são logo atribuídos à DHL Express e ligados à sua carta de porte. Os links do mydhl.express.dhl com a carta de porte também funcionam. Um link do dhl.com deixa a encomenda em «DHL», que não lê as cartas de porte da DHL Express: cola só a carta de porte ou, se já colaste o link, muda para «DHL Express» com «Alterar transportadora».
+O [Peek](/) reconhece uma carta de porte de 10 algarismos que passa no algarismo de controlo da DHL Express, põe a DHL Express em primeiro lugar e pergunta ao mesmo tempo à DHL Express e a outras transportadoras com números de 10 algarismos, como a ACS Courier, a Geniki Taxydromiki e a DHL eCommerce Iberia, indicando quem tem a encomenda. A ACS e a Geniki usam o mesmo algarismo de controlo: se uma delas também conhecer o número, escolhes tu. Um número de 10 algarismos que falha o controlo não é proposto à DHL Express: escolhe-a com «Alterar transportadora». Os números de volume `JD01` e as etiquetas `JJD0146` (`JJD014612345678901234`) são logo atribuídos à DHL Express e ligados à sua carta de porte. Os links do mydhl.express.dhl com a carta de porte também funcionam. Um link do dhl.com deixa a encomenda em «DHL», que não lê as cartas de porte da DHL Express: cola só a carta de porte ou, se já colaste o link, muda para «DHL Express» com «Alterar transportadora».
 
 O Peek lê a DHL Express pelo serviço da sua aplicação móvel ou, se não der, abre a página de seguimento do dhl.com num navegador no seu servidor, o que é mais lento e pode ser recusado; nesse caso, serviços de seguimento preenchem o histórico. Verifica de 10 em 10 minutos durante o dia, de 2 em 2 ou de 5 em 5 minutos quando a encomenda sai para entrega e de hora a hora à noite. As notificações escolhes tu: cada leitura, só os passos importantes ou só o dia da entrega.
 

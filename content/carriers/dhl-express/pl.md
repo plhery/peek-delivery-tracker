@@ -3,7 +3,7 @@ title: DHL Express śledzenie przesyłki: numer, statusy i kontakt
 description: DHL Express śledzenie przesyłki: gdzie jest 10-cyfrowy numer listu przewozowego, co znaczą statusy, cło, nieudane doręczenie, reklamacja i infolinia w Polsce.
 slug: dhl-express-sledzenie-przesylki
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 DHL Express to międzynarodowy dział kurierski DHL dla przesyłek z gwarantowanym terminem, z którego korzystają sklepy mające z DHL umowę na doręczanie zamówień. Paczkę śledzisz po 10-cyfrowym numerze listu przewozowego na stronie DHL, przez link z e-maila lub SMS-a od DHL albo wklejając numer w pole powyżej. Numer zwykle podaje sklep w e-mailu o wysyłce.
@@ -73,7 +73,7 @@ Miej pod ręką numer listu przewozowego.
 
 ## Śledzenie DHL Express w Peek
 
-[Peek](/) rozpoznaje 10-cyfrowy numer listu przewozowego, który przechodzi kontrolę cyfry kontrolnej DHL Express. Stawia wtedy DHL Express na pierwszym miejscu, pyta naraz DHL Express, Relais Colis, TIPSA i DHL eCommerce Iberia i podaje tego, kto zna paczkę. Numeru, który kontroli nie przechodzi, nie proponuje DHL Express: wybierz go wtedy przez „Zmień przewoźnika”. Numery paczek `JD01` i etykiety `JJD0146` (`JJD014612345678901234`) przypisuje do DHL Express od razu i odnajduje ich list przewozowy. Działają też linki z mydhl.express.dhl. Link z dhl.com trafia pod „DHL”, a nie pod DHL Express, więc wklej sam numer listu przewozowego. Paczkę, która już trafiła pod „DHL”, przestaw na „DHL Express” przez „Zmień przewoźnika”.
+[Peek](/) rozpoznaje 10-cyfrowy numer listu przewozowego, który przechodzi kontrolę cyfry kontrolnej DHL Express. Stawia wtedy DHL Express na pierwszym miejscu, pyta naraz DHL Express i innych przewoźników z 10-cyfrowymi numerami, np. ACS Courier, Geniki Taxydromiki i DHL eCommerce Iberia, i podaje tego, kto zna paczkę. ACS i Geniki używają tej samej cyfry kontrolnej: jeśli któryś z nich też zna numer, wybór należy do ciebie. Numeru, który kontroli nie przechodzi, nie proponuje DHL Express: wybierz go wtedy przez „Zmień przewoźnika”. Numery paczek `JD01` i etykiety `JJD0146` (`JJD014612345678901234`) przypisuje do DHL Express od razu i odnajduje ich list przewozowy. Działają też linki z mydhl.express.dhl. Link z dhl.com trafia pod „DHL”, a nie pod DHL Express, więc wklej sam numer listu przewozowego. Paczkę, która już trafiła pod „DHL”, przestaw na „DHL Express” przez „Zmień przewoźnika”.
 
 Peek odczytuje DHL Express przez usługę, z której korzysta aplikacja mobilna DHL, a gdy to się nie uda, serwer Peek otwiera stronę śledzenia dhl.com w przeglądarce. To trwa dłużej i DHL może odmówić; wtedy historię uzupełniają serwisy śledzenia przesyłek. Peek sprawdza paczkę w dzień co 10 minut, a gdy kurier ma ją w doręczeniu, co 2–5 minut; w nocy co godzinę. Może Cię powiadamiać o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy.
 

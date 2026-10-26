@@ -3,7 +3,7 @@ title: DHL Express tracking: lettera di vettura, stati e contatti
 description: Tracking DHL Express: dove trovi la lettera di vettura di 10 cifre, cosa vogliono dire gli stati, dazi, consegna mancata e contatti di DHL Express Italia.
 slug: dhl-express-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 DHL Express è la divisione corriere internazionale di DHL per le spedizioni a tempo definito, e consegna anche gli ordini dei negozi online che hanno un accordo di consegna con DHL. Per seguire il pacco cerca il numero di 10 cifre su dhl.com o MyDHL+, apri il link nell'SMS o nell'e-mail di DHL oppure incollalo nel box qui sopra. Di solito il numero te lo dà il negozio, nell'e-mail di spedizione.
@@ -71,7 +71,7 @@ I canali di DHL Express per chi riceve un pacco, come li elencavano le pagine co
 
 ## Seguire un pacco DHL Express con Peek
 
-[Peek](/) riconosce una lettera di vettura di 10 cifre che supera la cifra di controllo di DHL Express, ma non può esserne sicuro: mette DHL Express al primo posto, chiede il numero a DHL Express, Relais Colis, TIPSA e DHL eCommerce Iberia, poi indica chi lo conosce. Un numero di 10 cifre che non supera il controllo non viene proposto a DHL Express: sceglilo con «Cambia corriere». Gli identificativi `JD01` e le etichette `JJD0146` (`JJD014612345678901234`) vengono riconosciuti subito come DHL Express e ricondotti alla loro lettera di vettura tramite la pagina di dhl.com aperta in un browser. Funzionano anche i link di mydhl.express.dhl. Da un link di dhl.com incolla invece la sola lettera di vettura; se il pacco finisce sotto «DHL», passalo a «DHL Express» con «Cambia corriere».
+[Peek](/) riconosce una lettera di vettura di 10 cifre che supera la cifra di controllo di DHL Express, ma non può esserne sicuro: mette DHL Express al primo posto, chiede il numero a DHL Express e ad altri corrieri con numeri di 10 cifre, come ACS Courier, Geniki Taxydromiki e DHL eCommerce Iberia, poi indica chi lo conosce. ACS e Geniki usano la stessa cifra di controllo: se anche uno dei due conosce il numero, scegli tu. Un numero di 10 cifre che non supera il controllo non viene proposto a DHL Express: sceglilo con «Cambia corriere». Gli identificativi `JD01` e le etichette `JJD0146` (`JJD014612345678901234`) vengono riconosciuti subito come DHL Express e ricondotti alla loro lettera di vettura tramite la pagina di dhl.com aperta in un browser. Funzionano anche i link di mydhl.express.dhl. Da un link di dhl.com incolla invece la sola lettera di vettura; se il pacco finisce sotto «DHL», passalo a «DHL Express» con «Cambia corriere».
 
 Peek legge DHL Express tramite il servizio dell'app mobile di DHL Express, altrimenti apre la pagina di tracking di dhl.com in un browser sul proprio server: è più lento e DHL può rifiutarlo, e allora rispondono i servizi di tracciamento. Controlla ogni 10 minuti di giorno, ogni 2-5 minuti quando il pacco è in consegna e ogni ora di notte, e le notifiche arrivano per «Ogni scansione», solo per i «Passaggi importanti» o «Solo giorno di consegna».
 

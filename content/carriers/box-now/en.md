@@ -86,7 +86,7 @@ None of the sites says what a call costs.
 
 ## Tracking a BOX NOW parcel with Peek
 
-[Peek](/) can't tell a BOX NOW parcel from its 10 digits alone, so it asks the carriers the number fits whether they know it: BOX NOW and DHL eCommerce Iberia, and, depending on the digits, [DHL Express](carrier:dhl-express), [ACS Courier](carrier:acs-courier), Geniki Taxydromiki or Packeta. If BOX NOW alone knows it, Peek names BOX NOW; if others know it too, you choose, and DHL Express wins when it knows the number. Otherwise pick "BOX NOW" with "Change". A BOX NOW tracking link with `?track=` isn't read: paste the number itself.
+[Peek](/) can't tell a BOX NOW parcel from its 10 digits alone, so it asks the carriers the number fits whether they know it: BOX NOW and DHL eCommerce Iberia, and, depending on the digits, [DHL Express](carrier:dhl-express), [ACS Courier](carrier:acs-courier), Geniki Taxydromiki or Packeta. If BOX NOW alone knows it, Peek names BOX NOW; if others know it too, you choose, except that DHL Express wins when it knows the number and neither ACS nor Geniki Taxydromiki does. Otherwise pick "BOX NOW" with "Change". A BOX NOW tracking link with `?track=` isn't read: paste the number itself.
 
 Peek then shows the status, the history with the place each scan names, the expected delivery day while the parcel is on its way, the destination country, the delivery time, and the locker's name once the parcel waits there or was collected. It leaves out the locker's address and position, the pickup deadline, the compartment size, payment, the sender and postcodes, so check the "Last pick up time" on BOX NOW's own page.
 

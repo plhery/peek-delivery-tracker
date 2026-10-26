@@ -3,7 +3,7 @@ title: Mondial Relay seguimiento: estados, Punto Pack e InPost
 description: Sigue tu paquete de Mondial Relay en España: dónde está el número, qué significan sus estados en francés, cuánto espera en un Punto Pack y a quién llamar.
 slug: mondial-relay-seguimiento
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 Mondial Relay es una empresa francesa de paquetería del grupo InPost que entrega en puntos de recogida, taquillas y a domicilio; en España, InPost adquirió Mondial Relay en 2021 y mondialrelay.es lleva ahora a inpost.es. Para seguir tu paquete, escribe el número de envío de 8 cifras y el código postal del destinatario en [el seguimiento de Mondial Relay](https://www.mondialrelay.fr/suivi-de-colis/), usa [el de InPost](https://www.inpost.es/seguimiento-del-envio/) si te lo envían con InPost España, o pega el número en la casilla de arriba. El número está en la etiqueta y en los correos de Mondial Relay y del remitente.
@@ -78,7 +78,7 @@ Datos consultados el 10 de octubre de 2026:
 
 ## Seguir un paquete de Mondial Relay con Peek
 
-[Peek](/) reconoce enseguida el código de barras de 26 cifras, aunque lo escribas con espacios. Con 8, 10 o 12 cifras puede que no nombre a Mondial Relay por sí solo, porque otras empresas usan esas longitudes y no puede preguntar a Mondial Relay si conoce un número: pulsa «Cambiar» y elige Mondial Relay, o pega un enlace de seguimiento de mondialrelay.fr. Los enlaces de mondialrelay.be, mondialrelay.es, mondialrelay.com o inpost.es no se leen.
+[Peek](/) reconoce enseguida el código de barras de 26 cifras, aunque lo escribas con espacios. Con 8, 10 o 12 cifras puede que no nombre a Mondial Relay por sí solo, porque otras empresas usan esas longitudes y no puede preguntar a Mondial Relay si conoce un número: pulsa «Cambiar» y elige Mondial Relay, o pega un enlace de seguimiento de mondialrelay.fr, .be, .nl o .com. Los enlaces de mondialrelay.es o inpost.es no se leen.
 
 Un número de 8 cifras pide además el «Código postal de entrega»: escribe el número solo y luego el código postal en su campo (el de un enlace no se usa). Admite códigos de cualquier país, pero solo se han probado los franceses, y uno equivocado hace que el paquete no aparezca. Se envía a Mondial Relay y, si hace falta, a servicios de seguimiento. Con un número de 8 cifras de InPost España, Peek propone Mondial Relay, no InPost, y consulta la web francesa: no se ha comprobado que así encuentre esos envíos, así que síguelos también en inpost.es.
 

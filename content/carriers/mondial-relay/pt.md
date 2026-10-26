@@ -3,7 +3,7 @@ title: Mondial Relay rastreio: estados, InPost e levantamento
 description: Rastreio Mondial Relay em Portugal, agora InPost: onde está o número, o que quer dizer cada estado em francês, quanto tempo espera no Ponto Pack e quem contactar.
 slug: mondial-relay-rastreio
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 A Mondial Relay é uma transportadora francesa do grupo InPost que entrega em pontos de levantamento, em Lockers (cacifos) e em casa; em Portugal, a InPost ficou com ela em 2021 e o mondialrelay.pt leva agora ao inpost.pt. Para rastrear a encomenda, escreve o número na página [Rastrear Encomenda da InPost](https://www.inpost.pt/seguimento-do-envio/), que só pede o número, ou cola-o na caixa acima. O número vem no e-mail de confirmação do remetente e, na etiqueta da Mondial Relay, é o «n° d'expédition» de 8 algarismos.
@@ -76,7 +76,7 @@ Tal como os sites os indicavam a 10 de outubro de 2026:
 
 ## Seguir encomenda Mondial Relay com o Peek
 
-O [Peek](/) reconhece logo o código de barras de 26 algarismos, mesmo com espaços. Com 8, 10 ou 12 algarismos, pode não dizer sozinho que é da Mondial Relay: outras transportadoras usam esses comprimentos, e o Peek não consegue perguntar à Mondial Relay se conhece um número. Carrega então em «Alterar» e escolhe Mondial Relay, ou cola uma ligação de seguimento do mondialrelay.fr; as dos sites .be, .es, .pt e .com não são lidas.
+O [Peek](/) reconhece logo o código de barras de 26 algarismos, mesmo com espaços. Com 8, 10 ou 12 algarismos, pode não dizer sozinho que é da Mondial Relay: outras transportadoras usam esses comprimentos, e o Peek não consegue perguntar à Mondial Relay se conhece um número. Carrega então em «Alterar» e escolhe Mondial Relay, ou cola uma ligação de seguimento do mondialrelay.fr, .be, .nl ou .com; as dos sites .es e .pt não são lidas.
 
 Um número de 8 algarismos pede também o «Código postal de entrega»: escreve só o número e depois o código postal no campo próprio. Só foram testados códigos postais franceses, e um código errado faz a encomenda parecer não encontrada. O código vai para a Mondial Relay e, quando é preciso, para serviços de seguimento. Um número de 8 algarismos da InPost em Portugal aparece com a Mondial Relay como hipótese, nunca com a InPost, e não está confirmado que o seguimento da Mondial Relay o encontre: nesse caso, segue-o no inpost.pt.
 

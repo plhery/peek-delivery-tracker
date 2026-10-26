@@ -3,10 +3,10 @@ title: Urmărire colet Cargus: AWB, statusuri și SHIP & GO
 description: Urmărește un colet Cargus: unde găsești AWB-ul, ce înseamnă statusurile, cât stă coletul la SHIP & GO sau în locker, cum plătești rambursul și cum faci reclamație.
 slug: cargus-urmarire-colet
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-10-26
 ---
 
-Cargus livrează colete în România de peste 30 de ani, la adresă sau în rețeaua SHIP & GO, formată din puncte de ridicare și lockere. Coletul îl urmărești cu numărul AWB pe [pagina Urmărește un colet](https://www.cargus.ro/personal/urmareste-coletul/) de pe cargus.ro, în aplicația Cargus Mobile sau în căsuța de mai sus, unde alegi apoi Cargus: Peek nu recunoaște singur un AWB Cargus. AWB-ul ți-l trimite de obicei magazinul, pe email sau prin SMS.
+Cargus livrează colete în România de peste 30 de ani, la adresă sau în rețeaua SHIP & GO, formată din puncte de ridicare și lockere. Coletul îl urmărești cu numărul AWB pe [pagina Urmărește un colet](https://www.cargus.ro/personal/urmareste-coletul/) de pe cargus.ro, în aplicația Cargus Mobile sau în căsuța de mai sus. AWB-ul ți-l trimite de obicei magazinul, pe email sau prin SMS.
 
 ## AWB-ul Cargus: numărul de urmărire
 
@@ -14,7 +14,7 @@ AWB vine de la Air Way Bill și este codul unic al coletului, cel pe care îl in
 
 | Număr (inventat) | Ce este |
 | --- | --- |
-| `0000000000` | AWB Cargus: 10 cifre în modelul dat de Cargus, care spune că formatul poate varia. |
+| `1000000000` | AWB Cargus: 10 cifre, ca în exemplul dat de Cargus, care spune că formatul poate varia. |
 | `7000000000000` | AWB [FAN Courier](carrier:fan-courier): 13 cifre. Nu e de la Cargus. |
 | `1ABC000000001` | AWB [Sameday](carrier:sameday): începe cu `1`, urmat de litere și cifre. Nu e de la Cargus. |
 | `RR000000005RO` | Trimitere Poșta Română: două litere, nouă cifre și `RO`. Nu e de la Cargus. |
@@ -87,7 +87,7 @@ Pe cargus.ro, la 25 octombrie 2026:
 
 ## Urmărirea coletelor Cargus cu Peek
 
-[Peek](/) nu poate recunoaște un AWB Cargus după cifre. Pentru un număr de 10 cifre întreabă alți curieri, de exemplu DHL eCommerce Iberia sau BOX NOW, dar nu Cargus, iar dacă niciunul nu-l are, vezi „not found yet · Peek keeps checking”: apasă atunci „Change” și alege „Cargus”. Sau lipește în Peek adresa paginii de tracking de pe cargus.ro, în română sau în engleză: din link, Peek știe că AWB-ul e de la Cargus.
+[Peek](/) nu poate recunoaște un AWB Cargus doar după cifre. Când cauți din România, întreabă și Cargus despre un număr de 10 cifre care începe cu `1` sau de 9 cifre care începe cu `85` sau `86`, alături de alți curieri cu numere de aceeași formă, de exemplu DHL eCommerce Iberia, BOX NOW sau TNT. Dacă doar Cargus îl are, vezi „Cargus has this parcel.”. Dacă îl cauți din altă țară, dacă are altă formă sau dacă îl are și alt curier, apasă „Change” și alege „Cargus”. Sau lipește în Peek adresa paginii de tracking de pe cargus.ro, în română sau în engleză: din link, Peek știe că AWB-ul e de la Cargus.
 
 Peek citește serviciul de urmărire din spatele aplicației Cargus Mobile și îți arată fiecare scanare cu data, ora, localitatea și județul. Formulările rămân ale Cargus, mai ales în engleză:
 

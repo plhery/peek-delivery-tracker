@@ -3,7 +3,7 @@ title: Geniki Taxydromiki tracking: vouchers, statuses, contacts
 description: Track a Geniki Taxydromiki parcel in Greece or Cyprus: the 10-digit voucher, what each status means, missed deliveries, claims and how to reach Geniki.
 slug: geniki-taxydromiki-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 Geniki Taxydromiki (Γενική Ταχυδρομική, sometimes called General Post) is a Greek courier with its own network in Greece, Cyprus, Bulgaria and Romania. Track a parcel with its 10-digit voucher number on the Track & Trace page at taxydromiki.com, or paste it in the box above. The number comes from whoever booked the delivery, usually the shop you ordered from.
@@ -80,7 +80,7 @@ As listed on taxydromiki.com on 13 October 2026:
 
 ## Tracking a Geniki Taxydromiki parcel with Peek
 
-[Peek](/) can't tell a Geniki voucher from its 10 digits, and it never asks Geniki on its own: it asks DHL Express (when the last digit passes DHL's check), Relais Colis, TIPSA and [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) instead. Pick "Geniki Taxydromiki" with "Change", or paste a taxydromiki.com tracking link (`/track/1234567890` or `/en/track/1234567890`), which names Geniki at once. A link holding several vouchers joined by `-` isn't tracked: paste each voucher alone.
+[Peek](/) can't tell a Geniki voucher from its 10 digits alone. When the last digit passes the check Geniki shares with ACS and DHL Express, Peek asks Geniki, DHL Express, ACS and other carriers the number fits, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), whether they know it. If Geniki alone knows it, you'll see "Geniki Taxydromiki has this parcel."; if another carrier knows it too, even DHL Express, you choose. Otherwise pick "Geniki Taxydromiki" with "Change", or paste a taxydromiki.com tracking link (`/track/1234567890` or `/en/track/1234567890`), which names Geniki at once. A link holding several vouchers joined by `-` isn't tracked: paste each voucher alone.
 
 Geniki's tracker gives times without a time zone. So Peek doesn't show Geniki's own history: it takes the dated history from [universal tracking services](guide:universal-tracker) and asks Geniki again every 6 hours. If no service answers, you see Geniki's current status, dated when Peek saw it. Geniki's own status appears in its English wording, as in the table. The two `Attempted Delivery` steps show as written, without a stage of their own. A scan Geniki cancelled is hidden together with its cancellation.
 

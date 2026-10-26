@@ -3,7 +3,7 @@ title: DHL Express suivi : numéro de bordereau et statuts
 description: Suivre un colis DHL Express : où trouver le numéro de bordereau à 10 chiffres, le sens des statuts, la douane, les livraisons manquées et le contact.
 slug: dhl-express-suivi
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 DHL Express est la branche de messagerie express internationale du groupe DHL : si ton colis arrive par DHL Express, c'est que la boutique a un contrat avec DHL pour livrer ses commandes en ligne. Pour suivre ton colis, saisis son numéro de bordereau à 10 chiffres sur le site de DHL, ouvre le lien de l'e-mail ou du SMS de DHL, ou colle le numéro dans le champ ci-dessus. La boutique te le donne en général dans son e-mail de confirmation ou d'expédition.
@@ -72,7 +72,7 @@ Les canaux de DHL Express pour les destinataires, tels que ses pages de contact 
 
 ## Suivre un colis DHL Express avec Peek
 
-[Peek](/) reconnaît un bordereau à 10 chiffres dont la clé de contrôle DHL Express est bonne : il place DHL Express en premier, l'interroge en même temps que Relais Colis, TIPSA et DHL eCommerce Iberia, et retient celui qui connaît le colis. Un numéro à 10 chiffres dont la clé est fausse n'est pas proposé à DHL Express : choisis-le avec « Changer de transporteur ». Les identifiants de pièce `JD01` et les étiquettes `JJD0146` (`JJD014612345678901234`) sont attribués tout de suite à DHL Express et ramenés à leur bordereau. Les liens de mydhl.express.dhl marchent aussi. Avec un lien dhl.com, colle plutôt le bordereau seul ; si un colis se retrouve sous « DHL », passe-le à « DHL Express » avec « Changer de transporteur ».
+[Peek](/) reconnaît un bordereau à 10 chiffres dont la clé de contrôle DHL Express est bonne : il place DHL Express en premier, l'interroge en même temps que d'autres transporteurs aux numéros de 10 chiffres, comme ACS Courier, Geniki Taxydromiki et DHL eCommerce Iberia, et retient celui qui connaît le colis. ACS et Geniki utilisent la même clé : si l'un d'eux connaît aussi le numéro, c'est toi qui choisis. Un numéro à 10 chiffres dont la clé est fausse n'est pas proposé à DHL Express : choisis-le avec « Changer de transporteur ». Les identifiants de pièce `JD01` et les étiquettes `JJD0146` (`JJD014612345678901234`) sont attribués tout de suite à DHL Express et ramenés à leur bordereau. Les liens de mydhl.express.dhl marchent aussi. Avec un lien dhl.com, colle plutôt le bordereau seul ; si un colis se retrouve sous « DHL », passe-le à « DHL Express » avec « Changer de transporteur ».
 
 Peek lit DHL Express par le service de l'application mobile de DHL Express, sinon en ouvrant la page de suivi de dhl.com dans un navigateur sur son serveur, ce qui est plus lent et peut être refusé : des services de suivi prennent alors le relais. Il vérifie le suivi toutes les 10 minutes en journée, toutes les 2 à 5 minutes une fois le colis en livraison, toutes les heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 

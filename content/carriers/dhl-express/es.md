@@ -3,7 +3,7 @@ title: DHL Express seguimiento: número de albarán y estados
 description: Seguimiento de DHL Express: dónde está el albarán de 10 cifras, qué significan sus estados, aduanas, entregas fallidas, reclamaciones y teléfono en España.
 slug: dhl-express-seguimiento
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 DHL Express es la división de mensajería internacional urgente de DHL, la de los envíos con plazo definido; si una tienda online te envía el pedido con DHL Express, es porque tiene un acuerdo de entrega con DHL. Para seguir tu envío necesitas el número de albarán de 10 cifras: búscalo en la web de DHL, abre el enlace de su SMS o correo, o pégalo en la casilla de arriba. Normalmente te lo da la tienda en el correo de envío.
@@ -72,7 +72,7 @@ Así aparecían el 13 de octubre de 2026 en la página «Ayuda y Soporte» de DH
 
 ## Seguimiento de DHL Express con Peek
 
-[Peek](/) reconoce un albarán de 10 cifras cuyo dígito de control es correcto, pone DHL Express en primer lugar y pregunta a la vez a DHL Express, Relais Colis, TIPSA y DHL eCommerce Iberia (en España, TIPSA primero), y se queda con quien conoce el envío. Un número de 10 cifras que no pasa el control no se ofrece a DHL Express: elígelo con «Cambiar transportista». Los identificadores `JD01` y las etiquetas `JJD0146` (`JJD014612345678901234`) se asignan a DHL Express al momento, y Peek los sigue con el albarán al que pertenecen. También puedes pegar un enlace de mydhl.express.dhl. Con un enlace de dhl.com, pega mejor el albarán solo; si el paquete acaba como «DHL», cámbialo a «DHL Express» con «Cambiar transportista».
+[Peek](/) reconoce un albarán de 10 cifras cuyo dígito de control es correcto, pone DHL Express en primer lugar y pregunta a la vez a DHL Express y a otras empresas con números de 10 cifras, como ACS Courier, Geniki Taxydromiki y DHL eCommerce Iberia, y se queda con quien conoce el envío. ACS y Geniki usan el mismo dígito de control: si una de ellas también conoce el número, eliges tú. Un número de 10 cifras que no pasa el control no se ofrece a DHL Express: elígelo con «Cambiar transportista». Los identificadores `JD01` y las etiquetas `JJD0146` (`JJD014612345678901234`) se asignan a DHL Express al momento, y Peek los sigue con el albarán al que pertenecen. También puedes pegar un enlace de mydhl.express.dhl. Con un enlace de dhl.com, pega mejor el albarán solo; si el paquete acaba como «DHL», cámbialo a «DHL Express» con «Cambiar transportista».
 
 Peek lee DHL Express a través del servicio de su app móvil o, si no, abre la página de seguimiento de dhl.com en un navegador de su servidor, que es más lento y que DHL puede rechazar; en ese caso, los datos llegan de servicios de seguimiento. Lo consulta cada 10 minutos de día, cada 2 a 5 minutos cuando el paquete está en reparto y cada hora por la noche. Las notificaciones las eliges tú: cada escaneo, solo los pasos importantes o solo el día de entrega.
 

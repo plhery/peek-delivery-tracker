@@ -3,7 +3,7 @@ title: Mondial Relay tracking: statuses in English and pickup
 description: Track a Mondial Relay parcel: where the 8-digit number is, what the French statuses mean in English, how long a Point Relais keeps it and who to contact.
 slug: mondial-relay-tracking
 published: 2026-10-11
-updated: 2026-10-25
+updated: 2026-10-26
 ---
 
 Mondial Relay is a French parcel carrier in the InPost group that delivers to Points Relais (local shops acting as pickup points), lockers and homes. Track a parcel on [Mondial Relay's tracking page](https://www.mondialrelay.fr/suivi-de-colis/) with the 8-digit shipment number and the recipient's postcode, or paste the number in the box above. It's on the label and in the emails from Mondial Relay and the sender.
@@ -70,7 +70,7 @@ As listed on 10 October 2026; none is in English.
 
 ## Tracking a Mondial Relay parcel with Peek
 
-[Peek](/) recognises the 26-digit barcode at once. With 8, 10 or 12 digits it may not name Mondial Relay on its own, since other carriers share those lengths and Mondial Relay can't be asked whether it knows a number: press "Change" and pick Mondial Relay, or paste a tracking link from mondialrelay.fr (links from its other sites aren't read).
+[Peek](/) recognises the 26-digit barcode at once. With 8, 10 or 12 digits it may not name Mondial Relay on its own, since other carriers share those lengths and Mondial Relay can't be asked whether it knows a number: press "Change" and pick Mondial Relay, or paste a tracking link from mondialrelay.fr, .be, .nl or .com (links from its Spanish and Portuguese sites aren't read).
 
 An 8-digit number also needs the "Delivery postcode": type the number alone, then the postcode in its field. Peek compares it with the recipient's as typed, in any country's format, and a wrong one reads as not found. It's sent to Mondial Relay and, when needed, to tracking services.
 

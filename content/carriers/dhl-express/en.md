@@ -3,7 +3,7 @@ title: DHL Express tracking: waybill numbers and statuses
 description: Track a DHL Express parcel: where to find the 10-digit waybill number, what DHL's statuses mean, duties, missed deliveries, claims and DHL Express contacts.
 slug: dhl-express-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 DHL Express is DHL's international courier division for time-definite shipments, often chosen by shops abroad that have a delivery agreement with DHL. Track a parcel with its 10-digit waybill number on dhl.com or MyDHL+, with the link in DHL's email or SMS, or by pasting the number in the box above. The shop usually gives you the number in its shipping email.
@@ -72,7 +72,7 @@ DHL Express's channels for recipients, as its MyDHL+ contact pages listed them o
 
 ## Tracking DHL Express parcels with Peek
 
-[Peek](/) recognises a 10-digit waybill that passes DHL Express's check digit, puts DHL Express first and asks it, Relais Colis, TIPSA and DHL eCommerce Iberia at once, naming whoever has the parcel. A 10-digit number that fails the check isn't offered to DHL Express: pick it with "Change". `JD01` piece numbers and `JJD0146` labels (`JJD014612345678901234`) are named DHL Express at once and traced to their waybill. Links from mydhl.express.dhl work too. For a dhl.com link, paste the waybill itself instead; if a parcel ends up under "DHL", switch it to "DHL Express" with "Change".
+[Peek](/) recognises a 10-digit waybill that passes DHL Express's check digit, puts DHL Express first and asks it at once along with other carriers whose numbers fit, such as [ACS Courier](carrier:acs-courier), Geniki Taxydromiki and DHL eCommerce Iberia, naming whoever has the parcel. ACS and Geniki share the check digit, so if one of them knows the number too, you choose. A 10-digit number that fails the check isn't offered to DHL Express: pick it with "Change". `JD01` piece numbers and `JJD0146` labels (`JJD014612345678901234`) are named DHL Express at once and traced to their waybill. Links from mydhl.express.dhl work too. For a dhl.com link, paste the waybill itself instead; if a parcel ends up under "DHL", switch it to "DHL Express" with "Change".
 
 Peek reads DHL Express through the service behind its mobile app, or else opens dhl.com's tracking page in a browser on its server, which is slower and can be refused; then tracking services fill in. It checks every 10 minutes by day, every 2 to 5 minutes once out for delivery, and hourly overnight, and can notify you at every scan, at important steps or on delivery day only.
 

@@ -209,12 +209,12 @@ describe('prometheus carrier metrics', () => {
     metrics.recordNativeVerification('attestation', 'rejected', 'environment');
     metrics.recordNativeVerification('account_lookup', 'missing', 'legacy');
     metrics.recordNativeVerification('account_lookup', 'missing', 'legacy');
-    metrics.recordLookupProof('lookup', 'ua_bypass');
+    metrics.recordLookupProof('lookup', 'app_attest');
     metrics.recordLookupProof('detection', 'turnstile');
     const text = await scraped();
     expect(text).toContain('native_verification_total{kind="attestation",outcome="rejected",reason="environment"} 1');
     expect(text).toContain('native_verification_total{kind="account_lookup",outcome="missing",reason="legacy"} 2');
-    expect(text).toContain('lookup_proof_total{kind="lookup",proof="ua_bypass"} 1');
+    expect(text).toContain('lookup_proof_total{kind="lookup",proof="app_attest"} 1');
     expect(text).toContain('lookup_proof_total{kind="detection",proof="turnstile"} 1');
   });
 

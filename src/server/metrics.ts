@@ -257,7 +257,7 @@ function createRuntime(): PrometheusRuntime {
     }),
     lookupProofTotal: new Counter({
       name: 'lookup_proof_total',
-      help: 'Lookups and detections without an account by the proof that let them through (app_attest, turnstile, ua_bypass, none) or refused.',
+      help: 'Lookups and detections without an account by the proof that let them through (app_attest, turnstile, none) or refused.',
       labelNames: ['kind', 'proof'] as const,
       registers: [registry],
     }),
@@ -410,7 +410,7 @@ export function recordNativeVerification(
 }
 
 /** What let a lookup or detection without an account through, or that it was refused. */
-export function recordLookupProof(kind: 'lookup' | 'detection', proof: 'app_attest' | 'turnstile' | 'ua_bypass' | 'none' | 'refused'): void {
+export function recordLookupProof(kind: 'lookup' | 'detection', proof: 'app_attest' | 'turnstile' | 'none' | 'refused'): void {
   count(runtime.lookupProofTotal, 'lookup_proof_total', { kind, proof });
 }
 

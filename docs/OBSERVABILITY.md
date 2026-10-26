@@ -912,7 +912,7 @@ dashboard's failure panels leave out.
 | `public_lookup_total` (outcome) | Lookups without an account: `created`, `reused` (the number was already stored), `limited_burst`, `limited_daily` (the client's day is used up), `limited_network` (its IPv6 /48's day), `limited_global` |
 | `public_detection_total` (outcome) | Detections without an account that needed a carrier's answer: `asked`, or refused first as `limited_burst`, `limited_daily` or `limited_global` |
 | `native_verification_total` (kind, outcome, reason) | App Attest checks, as the `native_verification` log line names them; `reason` is `none` when there is nothing to explain |
-| `lookup_proof_total` (kind, proof) | What let a `lookup` or `detection` without an account through: `app_attest`, `turnstile` (a browser proof), `ua_bypass` (the app's user-agent while `TURNSTILE_ALLOW_NATIVE_USER_AGENT` is on) or `none` (no verification configured), or that it was `refused` |
+| `lookup_proof_total` (kind, proof) | What let a `lookup` or `detection` without an account through: `app_attest`, `turnstile` (a browser proof) or `none` (no verification configured), or that it was `refused` |
 | `public_parcel_read_total` (outcome) | Reads of a parcel link: `ok`, `not_found` or `stopped` (its sharing was stopped) |
 | `parcel_claim_total` (outcome) | Links kept after sign-in: `kept`, `already`, `quota`, `unavailable` |
 | `parcel_forgotten_total` (kind, reason) | Forgotten links and parcels (`kind`): `asked` by their owner, `expired`, or `stopped` 30 days ago |
@@ -986,12 +986,8 @@ Useful questions:
   maintenance pass after each scheduled sync. `public_detections_per_client` and
   `PUBLIC_DETECTIONS_PER_DAY` read the same way.
 
-- **Can the user-agent exemption go?** `lookup_proof_total{proof="ua_bypass"}` counts
-  lookups from app builds that never verify, and from callers that copy their
-  user-agent. Once it is small next to `app_attest` and `turnstile`, turn
-  `TURNSTILE_ALLOW_NATIVE_USER_AGENT` off ([DEPLOYMENT.md](DEPLOYMENT.md)).
-  `native_verification_total{outcome="rejected"}` by `reason` says why installations
-  that do verify fall back to Turnstile.
+- **Why do installations fall back to Turnstile?** `native_verification_total{outcome="rejected"}`
+  by `reason`.
 
 - **Can signed-in requests require App Attest?** `native_verification_total` for the
   `account_*` kinds. Builds that never sign count `outcome="missing",reason="legacy"`

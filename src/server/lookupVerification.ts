@@ -6,7 +6,7 @@ import { clientIp, clientNetwork, HttpError } from './api';
 import { recordLookupProof } from './metrics';
 import { logOperationalEvent } from './observability';
 import { requestHostname } from './siteHosts';
-import { hasNativeAssertion, NATIVE_USER_AGENT, verifyNativeRequest } from './nativeVerification';
+import { hasNativeAssertion, verifyNativeRequest } from './nativeVerification';
 import type { SupabaseServiceClient } from './supabase';
 
 const PROOF_SECONDS = 15 * 60;
@@ -118,15 +118,11 @@ function checkProof(secret: string, request: Request): ProofCheck {
 
 /**
  * A short-lived proof never replaces the IP, network or global lookup budgets.
- * Says what let the request through: no check, the app's user-agent or a proof.
+ * Says what let the request through: no check, or a proof. No user-agent is exempt.
  */
-export function requireLookupProof(request: Request): 'none' | 'ua_bypass' | 'turnstile' {
+export function requireLookupProof(request: Request): 'none' | 'turnstile' {
   const settings = turnstileSettings();
   if (!settings) return 'none';
-  // Compatibility only: callers can forge this header. All lookup budgets still apply.
-  if (process.env.TURNSTILE_ALLOW_NATIVE_USER_AGENT === 'true'
-    && !request.headers.has('x-native-verification')
-    && NATIVE_USER_AGENT.test(request.headers.get('user-agent') ?? '')) return 'ua_bypass';
   const { outcome, reason, fields } = checkProof(settings.secret, request);
   if (outcome === 'accepted') return 'turnstile';
   logOperationalEvent('lookup_proof', { outcome, reason, ...fields });

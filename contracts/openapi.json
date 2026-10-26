@@ -32975,7 +32975,7 @@
             "name": "X-Lookup-Proof",
             "in": "header",
             "required": false,
-            "description": "Short-lived browser proof returned by /api/public/verification. Required for new anonymous work when Turnstile is enabled, except the native app user-agent when its compatibility exemption is configured.",
+            "description": "Short-lived browser proof returned by /api/public/verification. Required for new anonymous work when Turnstile is enabled, unless the request carries an App Attest assertion.",
             "schema": {
               "type": "string"
             }
@@ -32987,7 +32987,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Updated native clients set 1 to require verification even while legacy user-agent compatibility is enabled."
+            "description": "Native clients set 1 to say they verify."
           },
           {
             "in": "header",
@@ -33127,7 +33127,7 @@
             "name": "X-Lookup-Proof",
             "in": "header",
             "required": false,
-            "description": "Short-lived browser proof returned by /api/public/verification. Required for new anonymous work when Turnstile is enabled, except the native app user-agent when its compatibility exemption is configured.",
+            "description": "Short-lived browser proof returned by /api/public/verification. Required for new anonymous work when Turnstile is enabled, unless the request carries an App Attest assertion.",
             "schema": {
               "type": "string"
             }
@@ -33139,7 +33139,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Updated native clients set 1 to require verification even while legacy user-agent compatibility is enabled."
+            "description": "Native clients set 1 to say they verify."
           },
           {
             "in": "header",

@@ -299,14 +299,8 @@ every container that shares the key. Only parcel creation and detection that
 contacts a carrier need verification. Saved parcels and shared links remain
 readable during a verification outage. Keep the origin behind the trusted proxy
 and avoid Cloudflare challenge pages on JSON APIs and native app traffic.
-Set `TURNSTILE_ALLOW_NATIVE_USER_AGENT=true` to keep existing anonymous iPhone
-lookups working without verification. This exempts the app's
-`PeekDeliveryTracker/... CFNetwork/... Darwin/...` user-agent; Safari still
-requires verification. The header can be forged, so this compatibility setting
-leaves a bypass for scrapers. Updated apps opt into verification even while this
-setting is enabled. Turn it off once older installations have been replaced.
-All lookup budgets still apply. The default is
-`false`, which requires verification from every anonymous caller.
+No user-agent is exempt: the iPhone and Mac apps verify with App Attest or the
+hosted Turnstile check, like every other anonymous caller.
 
 Native builds signed with a free Personal Team use the hosted Turnstile check
 and keep its proof in memory. Apple App Attest needs paid Developer membership.

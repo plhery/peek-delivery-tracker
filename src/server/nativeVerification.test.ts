@@ -56,7 +56,6 @@ beforeEach(() => {
   vi.stubEnv('TURNSTILE_SECRET_KEY', 'synthetic-secret');
   vi.stubEnv('TURNSTILE_SITE_KEY', 'synthetic-site-key');
   vi.stubEnv('TURNSTILE_HOSTNAMES', 'peek.example');
-  vi.stubEnv('TURNSTILE_ALLOW_NATIVE_USER_AGENT', 'true');
   vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
   vi.stubEnv('SUPABASE_URL', 'https://database.example');
   vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-key');
@@ -170,7 +169,7 @@ describe('native verification', () => {
     vi.mocked(service.request).mockResolvedValueOnce({ public_key: storedKey, app_id: appID, sign_count: 0 }).mockResolvedValueOnce('rejected');
     await expect(verifyNativeRequest(await signedRequest(), service, signedBody)).rejects.toMatchObject({ status: 403, reason: 'replayed' });
   });
-  it('does not let incomplete attestation headers fall back to a browser proof or legacy user-agent', async () => {
+  it('does not let incomplete attestation headers fall back to a browser proof or a user-agent', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json({ success: true, hostname: 'peek.example', action: 'parcel_lookup' })));
     const req = request();
     const { proof } = await verifyLookupBrowser(req, 'synthetic-token');
@@ -178,7 +177,10 @@ describe('native verification', () => {
     req.headers.set('user-agent', 'PeekDeliveryTracker/1 CFNetwork/1 Darwin/1');
     req.headers.set('x-app-attest-key-id', keyID);
     await expect(verifyLookupRequest(req, service, signedBody)).rejects.toMatchObject({ status: 403 });
-    req.headers.delete('x-app-attest-key-id'); req.headers.delete('x-lookup-proof'); req.headers.set('x-native-verification', '1');
+    // Nor does the app's user-agent alone, from a build that says it verifies or one that never did.
+    req.headers.delete('x-app-attest-key-id'); req.headers.delete('x-lookup-proof');
+    await expect(verifyLookupRequest(req, service, signedBody)).rejects.toMatchObject({ status: 403 });
+    req.headers.set('x-native-verification', '1');
     await expect(verifyLookupRequest(req, service, signedBody)).rejects.toMatchObject({ status: 403 });
   });
   it('rejects invalid attestations before storing a public key', async () => {

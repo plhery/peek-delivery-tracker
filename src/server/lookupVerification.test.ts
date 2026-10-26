@@ -17,7 +17,6 @@ beforeEach(() => {
   vi.stubEnv('TURNSTILE_SITE_KEY', 'test-site-key');
   vi.stubEnv('TURNSTILE_SECRET_KEY', 'test-server-secret');
   vi.stubEnv('TURNSTILE_HOSTNAMES', 'peek.example,old.example');
-  vi.stubEnv('TURNSTILE_ALLOW_NATIVE_USER_AGENT', 'false');
   vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json({ success: true, hostname: 'peek.example', action: 'parcel_lookup' })));
 });
@@ -177,39 +176,29 @@ describe('lookup verification', () => {
     expect(await result.json()).toMatchObject({ proof: expect.any(String), expiresAt: expect.any(Number) });
   });
 
-  it('exempts the native app only when compatibility is enabled, keeping iPhone browsers protected', () => {
-    const native = request();
-    native.headers.set('User-Agent', 'PeekDeliveryTracker/1 CFNetwork/3860.500.111.2.2 Darwin/25.5.0');
-    expect(() => requireLookupProof(native)).toThrow('verify');
-    vi.stubEnv('TURNSTILE_ALLOW_NATIVE_USER_AGENT', 'true');
-    expect(() => requireLookupProof(native)).not.toThrow();
+  it('exempts no user-agent: the app, like every browser, needs a proof', () => {
     for (const agent of [
+      'PeekDeliveryTracker/1 CFNetwork/3860.500.111.2.2 Darwin/25.5.0',
+      'Peek/1 CFNetwork/3860.500.111.2.2 Darwin/25.5.0',
       'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 Safari/604.1',
-      'AnotherApp/1 CFNetwork/3860 Darwin/25.5.0',
-      'PeekDeliveryTracker/1',
-      'Mozilla/5.0 PeekDeliveryTracker/1 CFNetwork/3860 Darwin/25.5.0',
     ]) {
-      const browser = request();
-      browser.headers.set('User-Agent', agent);
-      expect(() => requireLookupProof(browser)).toThrow('verify');
+      const caller = request();
+      caller.headers.set('User-Agent', agent);
+      expect(() => requireLookupProof(caller)).toThrow('verify');
     }
   });
 
   it('counts which proof let each lookup or detection through, or its refusal', async () => {
     vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const service = new SupabaseServiceClient('https://database.example', 'test-service-key');
-    const names = [...['turnstile', 'ua_bypass', 'refused', 'none'].map((proof) => `lookup_proof_total{kind="lookup",proof="${proof}"}`),
+    const names = [...['turnstile', 'refused', 'none'].map((proof) => `lookup_proof_total{kind="lookup",proof="${proof}"}`),
       'lookup_proof_total{kind="detection",proof="refused"}'];
     const before: number[] = [];
     for (const name of names) before.push(await series(name));
     const { proof } = await verifyLookupBrowser(request(), 'one-use-token');
     await verifyLookupRequest(request(proof), service, new Uint8Array());
-    vi.stubEnv('TURNSTILE_ALLOW_NATIVE_USER_AGENT', 'true');
     const native = request();
     native.headers.set('User-Agent', 'PeekDeliveryTracker/1 CFNetwork/3860 Darwin/25.5.0');
-    await verifyLookupRequest(native, service, new Uint8Array());
-    // An app that verifies says so, and gets no exemption.
-    native.headers.set('X-Native-Verification', '1');
     await expect(verifyLookupRequest(native, service, new Uint8Array())).rejects.toMatchObject({ status: 403 });
     await expect(verifyLookupRequest(new NextRequest('https://peek.example/api/public/detect', { headers: { host: 'peek.example' } }), service, new Uint8Array()))
       .rejects.toMatchObject({ status: 403 });
@@ -217,12 +206,11 @@ describe('lookup verification', () => {
     await verifyLookupRequest(request(), service, new Uint8Array());
     const after: number[] = [];
     for (const name of names) after.push(await series(name));
-    expect(after.map((value, index) => value - before[index]!)).toEqual([1, 1, 1, 1, 1]);
+    expect(after.map((value, index) => value - before[index]!)).toEqual([1, 1, 1, 1]);
   });
 
-  it('still enforces lookup and detection allowances for exempt native requests', async () => {
-    vi.stubEnv('TURNSTILE_ALLOW_NATIVE_USER_AGENT', 'true');
-    const allowance = vi.spyOn(SupabaseServiceClient.prototype, 'claimPublicAllowance').mockResolvedValue({ allowed: false, scope: 'bucket', overallUsed: 0 });
+  it('asks the app for a proof before it spends a lookup or detection allowance', async () => {
+    const allowance = vi.spyOn(SupabaseServiceClient.prototype, 'claimPublicAllowance');
     const create = vi.spyOn(SupabaseServiceClient.prototype, 'createOneOffParcel');
     const check = vi.spyOn(amazon, 'checkAmazonShipping');
     for (const [handler, path] of [[lookup, 'parcels'], [detect, 'detect']] as const) {
@@ -230,10 +218,10 @@ describe('lookup verification', () => {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'User-Agent': 'PeekDeliveryTracker/1 CFNetwork/3860 Darwin/25.5.0' },
         body: JSON.stringify({ trackingNumber: 'FR0000000098', carrier: 'amazon-shipping' }),
       }), { params: Promise.resolve({}) });
-      expect(response.status).toBe(429);
-      expect(response.headers.get('X-Lookup-Verification')).toBeNull();
+      expect(response.status).toBe(403);
+      expect(response.headers.get('X-Lookup-Verification')).toBe('required');
     }
-    expect(allowance).toHaveBeenCalledTimes(2);
+    expect(allowance).not.toHaveBeenCalled();
     expect(create).not.toHaveBeenCalled();
     expect(check).not.toHaveBeenCalled();
   });

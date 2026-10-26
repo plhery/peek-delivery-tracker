@@ -1336,6 +1336,32 @@ describe('rows only a universal provider wrote', () => {
     expect(pairs(sharedScans([corrected], [unnamed]).skipped)).toEqual([['unknown:departed', 'unknown:departed-late']]);
   });
 
+  it('lets a scan a fix now classifies take over the row its provider alone wrote unclassified, at its instant', () => {
+    // A Russian Post delivery through ParcelsApp, stored pending before the scraper read its words as a delivery.
+    const at = '2026-01-05T00:19:54+00:00';
+    const place = { location: 'EXAMPLE TOWN' };
+    const pending = named({ ...row('unknown:handed', at, 'Handed to the addressee by the postman', 'pending'), ...place });
+    const delivered = { ...scan('unknown:delivered', '2026-01-05T00:19:54Z', 'Delivered', 'delivered'), ...place };
+    const taken = sharedScans([delivered], [pending]);
+    expect(pairs(taken.reused)).toEqual([['unknown:delivered', 'unknown:handed']]);
+    expect(taken.skipped.size + taken.shifted.size).toBe(0);
+    expect(withIdentities([delivered], taken.reused, [pending])).toMatchObject([
+      { provider_event_id: 'unknown:handed', stage: 'delivered', description: 'Delivered' },
+    ]);
+    // Another provider's row, a row with no provider's name, or the scan from another place is a copy, left out.
+    for (const stored of [named(pending, 'Ship24'), { ...pending, universal_provider: undefined }]) {
+      const kept = sharedScans([delivered], [stored]);
+      expect(kept.reused.size).toBe(0);
+      expect(pairs(kept.skipped)).toEqual([['unknown:delivered', 'unknown:handed']]);
+    }
+    const elsewhere = sharedScans([{ ...delivered, location: 'OTHER CITY' }], [pending]);
+    expect(elsewhere.reused.size).toBe(0);
+    expect(pairs(elsewhere.skipped)).toEqual([['unknown:delivered', 'unknown:handed']]);
+    // A scan the provider still gives unclassified, or a row it classified, keeps its row as it is.
+    expect(sharedScans([{ ...delivered, stage: 'pending' }], [pending]).reused.size).toBe(0);
+    expect(sharedScans([delivered], [{ ...pending, stage: 'in_transit' }]).reused.size).toBe(0);
+  });
+
   it('leaves the scan out when another row at the corrected instant already holds it', () => {
     // A carrier's own row of the scan stands where the provider's row would move.
     const carrier = row('speedaf:sorted', '2026-01-03T13:15:42+00:00', 'Arrived at sorting center');

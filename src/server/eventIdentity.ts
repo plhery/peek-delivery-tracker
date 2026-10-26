@@ -42,7 +42,7 @@
  *   copy of a scan a carrier holds.
  * - A row only a universal provider has written names that provider
  *   (`UNIVERSAL_PROVIDER`), and follows the provider's clock when a scraper
- *   fix moves it. A carrier's scan writes the row without the name, so the
+ *   fix moves it, and the stage a fix reads in a scan it held unclassified. A carrier's scan writes the row without the name, so the
  *   row keeps the carrier's instant and words from then on.
  * - A universal copy stored a zone away from a carrier's row of the scan,
  *   before a fix read the provider's clock right, goes with any check
@@ -841,7 +841,8 @@ export function retimedScans(
  *
  * A row that only the scan's universal provider has written follows that
  * provider's clock instead (a scraper fix that reads its scans in another
- * zone). A scan whose own row it is moves the row to the scan's instant,
+ * zone), and the stage a fix now reads in a scan the row holds unclassified,
+ * at the row's instant from no conflicting place: the scan takes the row over. A scan whose own row it is moves the row to the scan's instant,
  * unless another row matches the scan by the rules above: that row holds the
  * scan already, so the scan is left out and its row on the old clock goes. So
  * does such a row the fix gave another identity, when the provider's answer no
@@ -961,7 +962,11 @@ export function sharedScans(
     const row = storedById.get(rowId)!;
     const offset = instantOf(scan) !== instantOf(row) && !sameTruncated(instantOf(scan), instantOf(row));
     const restated = offset && sourceOf(id) === UNIVERSAL && restates(scan, row);
-    if (sourceOf(id) !== UNIVERSAL || (offset && followsClock(row, scan)) || restated) shared.reused.set(id, rowId);
+    // The provider's own row of a scan it gave in words no release classified then, which a fix now reads as a stage
+    // (ParcelsApp's Russian Post delivery): the row takes it rather than staying pending beside the parcel's stage.
+    const classified = instantOf(scan) === instantOf(row) && followsClock(row, scan) && stageOf(row) === 'pending'
+      && !['', 'pending'].includes(stageOf(scan)) && !placesConflict(placeWords(scan), placeWords(row));
+    if (sourceOf(id) !== UNIVERSAL || (offset && followsClock(row, scan)) || restated || classified) shared.reused.set(id, rowId);
     else shared.skipped.set(id, rowId);
     if (offset && !restated && !dayAlone(row) && !dayAlone(scan)) shared.shifted.add(id);
   }

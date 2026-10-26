@@ -1174,6 +1174,30 @@ function Laptop() {
   </>;
 }
 
+function Perfume() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    <Truck x={40} y={172} tone="rose" scale={4} />
+    <path d="M186 150C206 124 226 116 246 120" stroke="var(--rose)" strokeWidth="4" strokeLinecap="round" strokeDasharray="3 12" />
+    {/* A tall perfume bottle and a lipstick. */}
+    <rect x="290" y="106" width="28" height="24" rx="3" fill={paper} />
+    <rect x="282" y="80" width="44" height="30" rx="7" fill={ink} />
+    <rect x="262" y="128" width="84" height="120" rx="16" fill="var(--rose)" />
+    <rect x="280" y="168" width="48" height="40" rx="5" fill={paper} opacity=".9" />
+    <path d="M274 146V230" stroke={paper} strokeWidth="5" strokeLinecap="round" opacity=".5" />
+    <path d="M375 182V158L393 148V182Z" fill="var(--rose)" />
+    <rect x="372" y="180" width="24" height="18" rx="2" fill={soft} />
+    <rect x="368" y="196" width="32" height="52" rx="4" fill={ink} />
+    {/* A gift box, ribbon and bow, and Pip on it. */}
+    <rect x="432" y="192" width="132" height="56" rx="5" fill={paper} />
+    <rect x="426" y="178" width="144" height="18" rx="4" fill={paper} />
+    <path d="M426 196H570" stroke={line} strokeWidth="2" />
+    <rect x="458" y="178" width="14" height="70" fill="var(--rose)" />
+    <path d="M465 178C453 160 437 162 441 172C444 180 457 179 465 178ZM465 178C477 160 493 162 489 172C486 180 473 179 465 178Z" stroke="var(--rose)" strokeWidth="4" strokeLinejoin="round" />
+    <Pip x={526} ground={178} width={92} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1206,6 +1230,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'h-m-orders': { tone: 'lilac', draw: Hanger },
   'xiaomi-orders': { tone: 'blue', draw: Phonebox },
   'apple-orders': { tone: 'orange', draw: Laptop },
+  'douglas-orders': { tone: 'rose', draw: Perfume },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },

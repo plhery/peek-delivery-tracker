@@ -162,6 +162,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Apple order tracking: delivery, returns and problems"
     },
     {
+      "id": "douglas-orders",
+      "slug": "douglas-order-tracking",
+      "title": "Douglas order tracking: delivery, returns and problems"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "how-to-find-tracking-number",
       "title": "How to find your tracking number, or track without one"
@@ -382,6 +387,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "apple-orders",
       "slug": "apple-sendungsverfolgung",
       "title": "Apple-Bestellung verfolgen: Lieferung, Rückgabe, Probleme"
+    },
+    {
+      "id": "douglas-orders",
+      "slug": "douglas-sendungsverfolgung",
+      "title": "Douglas Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
     },
     {
       "id": "find-tracking-number",
@@ -606,6 +616,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Suivi de commande Apple\u00a0: livraison, retours et problèmes"
     },
     {
+      "id": "douglas-orders",
+      "slug": "suivi-commande-douglas",
+      "title": "Suivi de commande Douglas\u00a0: livraison, retours, problèmes"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "ou-trouver-numero-de-suivi",
       "title": "Où trouver son numéro de suivi, et comment faire sans"
@@ -826,6 +841,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "apple-orders",
       "slug": "tracciamento-ordine-apple",
       "title": "Tracciamento ordine Apple: spedizione, resi e problemi"
+    },
+    {
+      "id": "douglas-orders",
+      "slug": "tracciamento-ordine-douglas",
+      "title": "Tracciamento ordine Douglas: spedizione, resi e problemi"
     },
     {
       "id": "find-tracking-number",
@@ -1050,6 +1070,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimiento de pedidos Apple: envío, devolución y problemas"
     },
     {
+      "id": "douglas-orders",
+      "slug": "seguimiento-pedido-douglas",
+      "title": "Seguir un pedido de Douglas: envío, devolución y problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "localizar-paquete-sin-numero-de-seguimiento",
       "title": "Cómo localizar un paquete sin número de seguimiento"
@@ -1272,6 +1297,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimento de encomendas Apple: envio, devolução e problemas"
     },
     {
+      "id": "douglas-orders",
+      "slug": "seguimento-encomenda-douglas",
+      "title": "Seguimento de encomendas Douglas: envio, trocas e problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "onde-encontrar-numero-de-seguimento",
       "title": "Onde encontrar o número de seguimento da encomenda"
@@ -1492,6 +1522,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "apple-orders",
       "slug": "sledzenie-zamowienia-apple",
       "title": "Śledzenie zamówienia Apple: dostawa, zwroty i problemy"
+    },
+    {
+      "id": "douglas-orders",
+      "slug": "sledzenie-zamowienia-douglas",
+      "title": "Śledzenie zamówienia Douglas: dostawa, zwroty i problemy"
     },
     {
       "id": "find-tracking-number",

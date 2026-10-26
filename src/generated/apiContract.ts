@@ -2911,6 +2911,11 @@ export const CARRIER_CAPABILITIES = {
         "params": [
           "brtCode"
         ]
+      },
+      {
+        "domains": [
+          "mybrt.it"
+        ]
       }
     ],
     "detectionRules": [

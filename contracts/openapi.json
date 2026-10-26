@@ -2916,6 +2916,11 @@
           "params": [
             "brtCode"
           ]
+        },
+        {
+          "domains": [
+            "mybrt.it"
+          ]
         }
       ],
       "detectionRules": [

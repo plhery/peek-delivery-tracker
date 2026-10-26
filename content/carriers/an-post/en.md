@@ -86,7 +86,7 @@ An Post lists no customer email address. An unsettled complaint can go to the An
 
 ## Tracking An Post parcels with Peek
 
-[Peek](/) recognises a valid number of two letters, nine digits and `IE` as An Post's straight away. An anpost.com Track History link with `item=` or `barcode=` works too. No postcode needed.
+[Peek](/) recognises a valid number of two letters, nine digits and `IE` as An Post's straight away. An anpost.com Track History link with `item=` or `barcode=` works too. For the sender's reference from the postage label, pick An Post with "Change": Peek then shows the item's own number. No postcode needed.
 
 An Post's scans carry no time zone: Peek reads them on Irish time, or on the clock of the scan's place once the item has left Ireland, and lists An Post's own history. Statuses keep An Post's English wording. Peek can notify you when the status changes.
 

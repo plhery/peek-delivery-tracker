@@ -47,11 +47,11 @@ Posti's tracking shows its wordings in English, Finnish or Swedish, following th
 
 **Notice of arrival.** When a parcel reaches a Parcel Locker or service point, Posti sends the details and the opening code in OmaPosti, by SMS and by email. Pick it up within 5 days. Some parcels wait longer, so trust the last pickup date on your notice.
 
-**More time.** In OmaPosti, "Extend pickup time" adds up to 14 days from the original last pickup date, for €1.90.
+**More time.** In OmaPosti, "Extend pickup time" adds up to 14 days from the original last pickup date, for €1.90 according to Posti's English page, €1.90 a day according to its Finnish one.
 
 **At the locker.** Type the opening code (on keyboard lockers: C, the code, then OK). Anyone with the code can pick up for you, no ID needed. Registered and insured items need a power of attorney. Items without a pickup code wait at a Posti outlet: bring the item ID and an identity document.
 
-**Why it went elsewhere.** A parcel too big for a locker (over 59 x 36 x 60 cm), needing a personal handover or sent with a wrong phone number goes to a Posti outlet instead.
+**Why it went elsewhere.** A parcel too big for the locker, needing a personal handover or sent with a wrong phone number goes to a Posti outlet instead.
 
 **Home delivery.** If Posti can't deliver to your door, it takes the parcel to the nearest pickup location and tells you in OmaPosti, by SMS or by email. A Small parcel is left at the door or in the mailbox when nobody is home. In OmaPosti you can switch to home delivery only while the sender still has the parcel.
 
@@ -99,7 +99,7 @@ Open posti.fi/en/tracking and type the item ID; the statuses then show in Englis
 
 ### How long does Posti keep a parcel at a parcel locker?
 
-Posti asks you to pick it up within 5 days; the notice gives the exact last day. In OmaPosti you can extend it by up to 14 days for €1.90.
+Posti asks you to pick it up within 5 days; the notice gives the exact last day. In OmaPosti you can extend it by up to 14 days for €1.90 (€1.90 a day, says Posti's Finnish page).
 
 ### How long does Posti take to deliver?
 
@@ -111,6 +111,7 @@ Yes, in the OmaPosti app.
 
 :::sources
 - [Posti: Picking up an item](https://www.posti.fi/en/receiving/picking-up-an-item) – JJFI item ID, notices, storage, extension, lockers, codes, power of attorney, returns, phone, chat
+- [Posti: Lähetyksen noutaminen](https://www.posti.fi/vastaanottaminen/lahetyksen-noutaminen) – in Finnish: extension €1.90 a day
 - [Posti: Track item](https://www.posti.fi/en/tracking) – status wordings, explanation lines, ULKOMAILLA, languages
 - [Posti: Home delivery](https://www.posti.fi/en/receiving/home-delivery) – missed delivery, Small parcel, delivery times, delivered not received
 - [Posti: Customs clearance](https://www.posti.fi/en/receiving/customs-clearance) – handling fee, Finnish Customs, €2 fee from 1 November 2026, IOSS

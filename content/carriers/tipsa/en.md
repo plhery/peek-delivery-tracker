@@ -3,10 +3,10 @@ title: TIPSA tracking: numbers, statuses and missed deliveries
 description: Track a TIPSA parcel in Spain or Portugal: the 22-digit number, what TIPSA's Spanish statuses mean, missed deliveries, agencies and how to reach TIPSA.
 slug: tipsa-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
-TIPSA is a Spanish express parcel carrier, part of the Geopost group, with more than 330 agencies in Spain, Portugal and Andorra. Track a parcel with its 22-digit number on TIPSA's [Delivery locator](https://www.tip-sa.com/en/delivery-locator), or paste it in the box above. The number comes from the shop or person who sent the parcel, often in the shipping email or SMS.
+TIPSA is a Spanish express parcel carrier, part of the Geopost group, with agencies in Spain, Portugal and Andorra. Track a parcel with its 22-digit number on TIPSA's [Delivery locator](https://www.tip-sa.com/en/delivery-locator), or paste it in the box above. The number comes from the shop or person who sent the parcel, often in the shipping email or SMS.
 
 ## TIPSA tracking number: what it looks like
 
@@ -30,7 +30,7 @@ Twenty-two digits also fit Austrian Post, [USPS](carrier:usps) and Estafeta. A n
 
 ## What TIPSA's tracking statuses mean
 
-TIPSA's shipment page is in Spanish only, even when you open the locator from the English site. Its top part shows a short timeline with labels such as `Documentado`, `En camino`, `En reparto` and `Entregado`; below, a table lists each scan with date, time and town. These are the scan wordings, in the order a parcel meets them:
+TIPSA's shipment page is in Spanish only, even when you open the locator from the English site. Its top part shows a short timeline with labels such as `Documentado`, `En camino`, `En reparto` and `Entregado`; below, a table lists each scan with date, time and town. These are the scan wordings, in the order a parcel usually meets them:
 
 | TIPSA's status | What it means for you |
 | --- | --- |
@@ -38,14 +38,15 @@ TIPSA's shipment page is in Spanish only, even when you open the locator from th
 | `TRANSITO` | On its way between TIPSA agencies and hubs. |
 | `LECTURA EN HUB MADRID` | Scanned at one of TIPSA's hubs; the hub's name varies (`LECTURA EN HUB BARCELONA`, `LECTURA EN HUB BARBERA`). |
 | `Pendiente de llegada` | Not yet at the agency that will deliver it. |
-| `Mal clasificado` | Wrongly sorted at some point on the way. |
 | `LEIDO EN DESTINO` | Scanned at the destination. |
 | `LECTURA EN AGENCIA DESTINO` | Scanned at the agency that delivers, followed by its name. |
 | `REPARTO` | Out for delivery. |
 | `Ausente` | The courier couldn't deliver because nobody could be reached. |
+| `Faltan Datos / Datos incorrectos` | Address details are missing or wrong. Noted on the delivery round, before another attempt. |
+| `Solicitada en otra dirección` | Delivery was asked for at another address, and the parcel is rerouted. |
+| `DISPONIBLE` or `Pendiente de recoger en Tipsa` | After a missed delivery, it's held at the agency for you. |
+| `Devolver a Origen` | Going back to the sender. |
 | `ENTREGADO` | Delivered. |
-
-`Mal clasificado` worries people, and TIPSA's page gives no explanation for it. Read literally, the parcel was sorted to the wrong place at some step.
 
 `Ausente` comes with TIPSA's own note: it couldn't contact you, will try again the next working day, and you can call the destination agency to arrange delivery. The page names that agency, with its address, under "AGENCIA DESTINO".
 
@@ -84,7 +85,7 @@ Portugal has no separate line: TIPSA's Portuguese contact page gives the same tw
 
 [Peek](/) takes the 22-digit number with or without spaces. Other carriers share that shape, so Peek asks the likely ones at once, TIPSA first; you see "asking…" and then "TIPSA has this parcel." when TIPSA knows it. A number whose agency codes both start with `00` is taken for CTT Express (unless it starts `00001000`); if your shop said TIPSA, press "Change" and pick it. No postcode is needed.
 
-A 10-digit waybill can't be tracked through TIPSA, even after "Change" or from a link. Links from a shop's TIPSA email (tip-sa.com pages ending `datos_env.php` or `datos_prestashop.php` with `id=`) can be pasted; links to TIPSA's locator or its dinapaqweb shipment page are not read.
+A 10-digit waybill can't be tracked through TIPSA, even after "Change" or from a link. Links from a shop's TIPSA email can be pasted: Peek reads tip-sa.com links with `id=` on pages ending `datos_env.php`, `datos_prestashop.php` or `datos.php`, and on the bare tip-sa.com address. Links to TIPSA's locator or its shipment pages on tipsa-dinapaq.com are not read.
 
 Peek shows the status, the history with each scan's town on a map, the sender's name unless TIPSA masks it, and the weight. Statuses stay in TIPSA's Spanish, as written. Peek reads every scan time as Madrid time, Portuguese agencies included. It drops the recipient, address, postcodes, reference, parcel count, volume and proof of delivery. Peek shows no expected delivery date and doesn't follow the parcel to another carrier. It checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and can notify you when the status changes.
 
@@ -92,7 +93,7 @@ Peek shows the status, the history with each scan's town on a map, the sender's 
 
 ### What is TIPSA in Spain?
 
-TIPSA is Transporte Integral de Paquetería, an express parcel company in the Geopost group. It works through more than 330 agencies and 13 hubs, among them Madrid, Barcelona and Valencia, and delivers abroad through DPDgroup.
+TIPSA is Transporte Integral de Paquetería, an express parcel company in the Geopost group. Its about page counts more than 330 agencies, its Portuguese home page more than 300. It has 13 hubs, among them Madrid, Barcelona and Valencia, and delivers abroad through DPDgroup.
 
 ### How long does TIPSA take to deliver?
 
@@ -117,6 +118,7 @@ Yes, Pickup points in shops and lockers, shared with SEUR, where a parcel waits 
 - [TIPSA: Localizar mi envío](https://www.tip-sa.com/es/localizacion-envios) – Spanish locator, phone in footer
 - [TIPSA: Preguntas frecuentes](https://www.tip-sa.com/es/recursos/faqs) – coverage, 900 number
 - [TIPSA: Empresa de transporte urgente](https://www.tip-sa.com/es/tipsa) – Geopost, 330 agencies, hubs, lockers
+- [TIPSA: Página inicial (Portugal)](https://www.tip-sa.com/pt) – more than 300 agencies
 - [TIPSA: FAQs eTIPSA](https://www.tip-sa.com/es/faqs-etipsa) – two attempts, 24 and 48 hours, Saturday, shop notifications
 - [TIPSA: Recogida en puntos de recogida](https://www.tip-sa.com/es/envios-de-paquetes/puntos-de-recogidas) – shared with SEUR, 7 days, opening days
 - [TIPSA: Agencias de transporte](https://www.tip-sa.com/es/agencias-de-transporte) – agency finder

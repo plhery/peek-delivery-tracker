@@ -2412,6 +2412,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "tipsa",
+      "catalog": "tipsa",
+      "slug": "tipsa-rastreio",
+      "title": "TIPSA rastreio: número, estados, agências e contactos",
+      "name": "TIPSA",
+      "color": "#001e62"
+    },
+    {
       "id": "yanwen",
       "catalog": "yanwen",
       "slug": "rastrear-encomenda-yanwen",
@@ -2808,6 +2816,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spåra Bring-paket: statusar, ombud, paketbox och tull",
       "name": "Bring",
       "color": "#56b529"
+    },
+    {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "posti-spara-paket",
+      "title": "Spåra Posti-paket: försändelsekod, automat och kundtjänst",
+      "name": "Posti",
+      "color": "#ff8000"
     }
   ],
   "da": [

@@ -3,7 +3,7 @@ title: TIPSA seguimiento: número, estados y teléfono
 description: Sigue tu envío TIPSA: el número de 22 cifras, qué significa cada estado, qué pasa si estabas ausente, las agencias y los teléfonos de TIPSA.
 slug: tipsa-seguimiento
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 TIPSA es una empresa española de paquetería urgente, integrada en la red internacional de Geopost, con más de 330 agencias en España, Portugal y Andorra. Para seguir tu paquete, escribe el número de 22 cifras en el [localizador de envíos](https://www.tip-sa.com/es/localizacion-envios) de tip-sa.com o pégalo en la casilla de arriba. El número te lo da quien te envía el paquete, casi siempre la tienda, en el correo o el SMS de envío.
@@ -38,14 +38,15 @@ La página del envío de TIPSA está solo en español. Arriba enseña una línea
 | `TRANSITO` | Va de camino entre agencias y plataformas de TIPSA. |
 | `LECTURA EN HUB MADRID` | Lo han escaneado en una plataforma de TIPSA; el nombre cambia (`LECTURA EN HUB BARCELONA`, `LECTURA EN HUB BARBERA`). |
 | `Pendiente de llegada` | Todavía no ha llegado a la agencia que lo va a repartir. |
-| `Mal clasificado` | Se clasificó mal en algún punto del camino. |
 | `LEIDO EN DESTINO` | Lo han escaneado en destino. |
 | `LECTURA EN AGENCIA DESTINO` | Lo ha escaneado la agencia que lo reparte; detrás va su nombre. |
 | `REPARTO` | Ha salido para entregártelo. |
 | `Ausente` | No han podido entregarlo porque no te localizaron. |
+| `Faltan Datos / Datos incorrectos` | Faltan datos de la dirección o están mal. Se anota en el reparto, antes de otro intento. |
+| `Solicitada en otra dirección` | Se ha pedido la entrega en otra dirección y el paquete se desvía hacia ella. |
+| `DISPONIBLE` o `Pendiente de recoger en Tipsa` | Tras una entrega fallida, te espera en la agencia. |
+| `Devolver a Origen` | Vuelve al remitente. |
 | `ENTREGADO` | Entregado. |
-
-`Mal clasificado` es el que más preocupa, y TIPSA no lo explica en su página. Leído tal cual, el paquete se envió a un sitio equivocado en algún paso y tiene que dar un rodeo.
 
 `Ausente` lleva una nota de TIPSA: no pudieron contactar contigo, harán un segundo intento el siguiente día hábil y puedes ponerte en contacto con la agencia de destino para acordar la entrega. La página muestra esa agencia, con su dirección, bajo «AGENCIA DESTINO».
 
@@ -84,7 +85,7 @@ TIPSA mantiene una página de su app, pero sus fichas en las tiendas de aplicaci
 
 [Peek](/) acepta el número de 22 cifras con o sin espacios. Otros transportistas comparten esa forma, así que Peek pregunta a la vez a los posibles, TIPSA el primero: verás «preguntando a…» y luego «TIPSA tiene este paquete.» si TIPSA lo conoce. Un número cuyos dos códigos de agencia empiezan por `00` se asigna a CTT Express (salvo si empieza por `00001000`); si la tienda te dijo TIPSA, pulsa «Cambiar» y elígelo. No hace falta código postal.
 
-El albarán de 10 cifras no se puede seguir a través de TIPSA, ni con «Cambiar» ni desde un enlace. Puedes pegar el enlace del correo de la tienda (páginas de tip-sa.com que acaban en `datos_env.php` o `datos_prestashop.php` con `id=`); los enlaces al localizador de TIPSA o a la página del envío en dinapaqweb no se leen.
+El albarán de 10 cifras no se puede seguir a través de TIPSA, ni con «Cambiar» ni desde un enlace. Puedes pegar el enlace del correo de la tienda: Peek lee los enlaces de tip-sa.com con `id=` en páginas que acaban en `datos_env.php`, `datos_prestashop.php` o `datos.php`, y en la dirección principal de tip-sa.com. Los enlaces al localizador de TIPSA o a la página del envío en dinapaqweb no se leen.
 
 Peek muestra el estado, el historial con la población de cada escaneo en un mapa, el nombre del remitente si TIPSA no lo oculta y el peso. Los estados salen en el español de TIPSA, tal como los escribe. Peek lee todas las horas como hora de Madrid, también las de agencias portuguesas. Descarta el destinatario, la dirección, los códigos postales, la referencia, el número de bultos, el volumen y la prueba de entrega. No muestra fecha de entrega prevista ni sigue el paquete si pasa a otro transportista. Consulta TIPSA cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puede enviarte notificaciones cuando cambia el estado.
 

@@ -298,6 +298,45 @@ begin
 end;
 $$;
 
+-- named: a Z-Leading parcel, which only universal providers track, whose provider names La Poste as
+-- delivering it; asked: the same, La Poste asked without a scan yet; alone: one naming none.
+-- label: La Poste answered with its label alone beside 17TRACK's progress.
+insert into public.packages (id, user_id, one_off, tracking_number, carrier, current_stage, sync_status, created_at, last_synced_at, carrier_data)
+values
+  ('f4000000-0000-4000-8000-00000000001d', null, true, 'GOALS0020', 'z-leading',
+    'in_transit', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "ParcelsApp", "delivery_carrier": "la-poste"}'),
+  ('f4000000-0000-4000-8000-00000000001e', null, true, 'GOALS0021', 'z-leading',
+    'in_transit', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "ParcelsApp", "delivery_carrier": "la-poste", "delivery_probe": {"carrier": "la-poste", "misses": 1}}'),
+  ('f4000000-0000-4000-8000-00000000001f', null, true, 'GOALS0022', 'z-leading',
+    'in_transit', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "ParcelsApp"}'),
+  ('f4000000-0000-4000-8000-000000000020', null, true, 'GOALS0023', 'la-poste',
+    'in_transit', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "17TRACK", "carrier_answered": true}');
+insert into public.tracking_events (package_id, stage, description, occurred_at, provider_event_id, raw_data)
+values
+  ('f4000000-0000-4000-8000-000000000020', 'registered', 'Label created', '2026-10-09T08:00:00Z', 'la-poste:goals-label', '{}'),
+  ('f4000000-0000-4000-8000-000000000020', 'in_transit', 'Departed', '2026-10-08T05:46:00Z', 'unknown:goals-departed', '{}');
+
+-- A parcel a provider follows to a carrier whose adapter answers is that carrier's to take, not a
+-- carrier without an answer in 30 days; a carrier's label beside a provider's earlier leg is no half-answer.
+do $$
+begin
+  if (select array_agg(row(tracking_number, could_take, why, reason, lane)::text order by tracking_number)
+      from private.tracking_gaps where tracking_number between 'GOALS0020' and 'GOALS0023')
+      is distinct from array[
+        row('GOALS0020', 'la-poste', 'carrier not asked', 'carrier not asked', 'delivery-tracker')::text,
+        row('GOALS0021', 'la-poste', 'delivery carrier yet to scan', 'delivery carrier yet to scan', 'none')::text,
+        row('GOALS0022', 'z-leading', 'no direct answer in 30 days', 'no direct answer', 'adapters')::text,
+        row('GOALS0023', 'la-poste', 'carrier shows its label alone', 'carrier knows its label alone', 'none')::text] then
+    raise exception 'A named delivery carrier or a label alone was misread: %', (select array_agg(row(tracking_number, could_take, why, reason, lane)::text)
+      from private.tracking_gaps where tracking_number between 'GOALS0020' and 'GOALS0023');
+  end if;
+end;
+$$;
+
 -- Grafana's role reads the counts, not the parcels behind them.
 set local role metrics_reader;
 select day, parcels, stale_parcels from metrics.goals_daily order by day desc limit 1;

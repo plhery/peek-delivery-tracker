@@ -1104,6 +1104,25 @@ function Bike() {
   </>;
 }
 
+function Shoebox() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    <Truck x={40} y={172} tone="ochre" scale={4} />
+    {/* An open shoebox, its lid leaning behind, a pair of trainers inside. */}
+    <rect x="232" y="146" width="150" height="34" rx="4" fill={CARD.left} transform="rotate(-8 232 180)" />
+    {[[300, 160, .8], [252, 166, 1]].map(([x, y, opacity]) => <g key={x} transform={`translate(${x} ${y})`} opacity={opacity}>
+      <path d="M0 44V12Q0 0 12 2L22 4Q28 16 40 18L60 24Q78 28 80 40V44Z" fill="var(--ochre)" />
+      <path d="M0 42H80" stroke={paper} strokeWidth="5" />
+      <path d="M24 10l6 6M32 13l6 6" stroke={paper} strokeWidth="2.4" strokeLinecap="round" />
+    </g>)}
+    <rect x="236" y="200" width="150" height="48" rx="4" fill={CARD.top} />
+    <path d="M236 210H386" stroke={CARD.left} strokeWidth="2" />
+    {/* The closed one, with Pip on it. */}
+    <Box x={418} y={182} width={150} height={66} />
+    <Pip x={493} ground={182} width={100} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1132,6 +1151,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'ikea-orders': { tone: 'blue', draw: FlatPack },
   'zara-orders': { tone: 'rose', draw: Bag },
   'decathlon-orders': { tone: 'green', draw: Bike },
+  'adidas-orders': { tone: 'ochre', draw: Shoebox },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },

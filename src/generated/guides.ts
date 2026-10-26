@@ -142,6 +142,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Decathlon order tracking: delivery, returns and problems"
     },
     {
+      "id": "adidas-orders",
+      "slug": "adidas-order-tracking",
+      "title": "adidas order tracking: delivery, returns and problems"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "how-to-find-tracking-number",
       "title": "How to find your tracking number, or track without one"
@@ -342,6 +347,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "decathlon-orders",
       "slug": "decathlon-sendungsverfolgung",
       "title": "Decathlon Sendungsverfolgung: Lieferung, Retoure, Probleme"
+    },
+    {
+      "id": "adidas-orders",
+      "slug": "adidas-sendungsverfolgung",
+      "title": "adidas Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
     },
     {
       "id": "find-tracking-number",
@@ -546,6 +556,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Suivi de commande Decathlon\u00a0: livraison, retours, problèmes"
     },
     {
+      "id": "adidas-orders",
+      "slug": "suivi-commande-adidas",
+      "title": "Suivi de commande adidas\u00a0: livraison, retours et problèmes"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "ou-trouver-numero-de-suivi",
       "title": "Où trouver son numéro de suivi, et comment faire sans"
@@ -746,6 +761,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "decathlon-orders",
       "slug": "tracciamento-ordine-decathlon",
       "title": "Tracciamento ordine Decathlon: consegna, resi e problemi"
+    },
+    {
+      "id": "adidas-orders",
+      "slug": "tracciamento-ordine-adidas",
+      "title": "Tracciamento ordine adidas: spedizione, resi e problemi"
     },
     {
       "id": "find-tracking-number",
@@ -950,6 +970,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimiento de pedidos Decathlon: envío, entrega y problemas"
     },
     {
+      "id": "adidas-orders",
+      "slug": "seguimiento-pedido-adidas",
+      "title": "Seguimiento de pedidos adidas: envío, devolución y problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "localizar-paquete-sin-numero-de-seguimiento",
       "title": "Cómo localizar un paquete sin número de seguimiento"
@@ -1152,6 +1177,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimento da encomenda Decathlon: entregas e problemas"
     },
     {
+      "id": "adidas-orders",
+      "slug": "seguimento-encomenda-adidas",
+      "title": "Seguimento da encomenda adidas: envio, devolução e problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "onde-encontrar-numero-de-seguimento",
       "title": "Onde encontrar o número de seguimento da encomenda"
@@ -1352,6 +1382,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "decathlon-orders",
       "slug": "sledzenie-zamowienia-decathlon",
       "title": "Śledzenie zamówienia Decathlon: dostawa, zwroty i problemy"
+    },
+    {
+      "id": "adidas-orders",
+      "slug": "sledzenie-zamowienia-adidas",
+      "title": "Śledzenie zamówienia adidas: dostawa, zwroty i problemy"
     },
     {
       "id": "find-tracking-number",

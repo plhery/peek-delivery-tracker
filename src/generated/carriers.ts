@@ -2778,6 +2778,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "PostNord Track & Trace: spor din pakke i Danmark",
       "name": "PostNord",
       "color": "#00a0d6"
+    },
+    {
+      "id": "dao",
+      "catalog": "dao",
+      "slug": "dao-spor-pakke",
+      "title": "DAO Track & Trace: find din pakke, daoSHOP og natlevering",
+      "name": "DAO",
+      "color": "#e30613"
     }
   ],
   "nb": [
@@ -2860,6 +2868,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ba1b02"
     },
     {
+      "id": "slovak-parcel-service",
+      "catalog": "slovak-parcel-service",
+      "slug": "sps-sledovanie-zasielky",
+      "title": "Sledovanie zásielky SPS: číslo, stavy a Balíkovo",
+      "name": "Slovak Parcel Service",
+      "color": "#f58220"
+    },
+    {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",
       "slug": "slovenska-posta-sledovanie-zasielok",
@@ -2876,6 +2892,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Packeta csomagkövetés: Z-szám, státuszok, átvétel",
       "name": "Packeta",
       "color": "#ba1b02"
+    },
+    {
+      "id": "express-one",
+      "catalog": "express-one",
+      "slug": "express-one-csomagkovetes",
+      "title": "Express One csomagkövetés: státuszok, Exopoint, elérhetőség",
+      "name": "Express One",
+      "color": "#ec6500"
     },
     {
       "id": "foxpost",
@@ -2937,6 +2961,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Εντοπισμός δέματος ΕΛΤΑ: κωδικός, καταστάσεις, PostBox",
       "name": "ELTA Hellenic Post",
       "color": "#0063a9"
+    },
+    {
+      "id": "geniki-taxydromiki",
+      "catalog": "geniki-taxydromiki",
+      "slug": "geniki-taxydromiki-entopismos-apostolis",
+      "title": "Εντοπισμός αποστολής Γενικής Ταχυδρομικής: voucher, θυρίδες",
+      "name": "Geniki Taxydromiki",
+      "color": "#004fa0"
     },
     {
       "id": "cyprus-post",

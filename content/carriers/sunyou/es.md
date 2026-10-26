@@ -3,7 +3,7 @@ title: SunYou seguimiento: número SY, estados y quién entrega
 description: Sigue tu paquete de SunYou (SYPost) desde China: cómo es el número SY, qué significa cada estado, quién lo reparte en España y a quién preguntar si se para.
 slug: sunyou-seguimiento
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
 SunYou, también llamada SYPost, es una empresa de logística de Shenzhen que envía al extranjero los paquetes pequeños de vendedores online chinos y se los pasa a un transportista local para el último tramo. Su número empieza por SY: escríbelo en su web de seguimiento, [sypost.net](https://www.sypost.net), que tiene versión en español, o pégalo en la casilla de arriba. El número te lo da la tienda en los datos de envío de tu pedido.
@@ -85,7 +85,7 @@ Para cualquier gestión, quienes pueden actuar son la tienda y el transportista 
 
 [Peek](/) reconoce SunYou al momento con las dos formas SY, que no comparte ningún otro transportista de su catálogo. También puedes pegar un enlace de sypost.net con el número, como el que copia el botón «Copy Link».
 
-Las líneas de SunYou aparecen en inglés, sea cual sea tu idioma, salvo coincidencias exactas como `Delivered`, que se muestran con las palabras de Peek. Peek muestra el estado, el historial (hasta 20 escaneos, sin lugares), el país de destino, la hora de entrega y el transportista local con su número. Para SunYou no hay fecha prevista de entrega ni punto de recogida. Las horas conservan su zona horaria, primero la de China y luego la de tu país; un escaneo sin ella no aparece.
+Las líneas de SunYou aparecen en inglés, sea cual sea tu idioma, salvo coincidencias exactas como `Delivered`, que se muestran con las palabras de Peek. Peek muestra el estado, el historial (hasta 20 escaneos, sin lugares), el país de destino, la hora de entrega y el transportista local con su número. Para SunYou no hay fecha prevista de entrega ni punto de recogida. Las horas conservan la zona horaria que les da SunYou, primero la de China y luego la de tu país.
 
 Cuando SunYou da el número del transportista local, Peek puede preguntar a esa empresa y cambiar a sus datos cuando muestran un avance más reciente. Con un número postal que va a España, esa empresa es Correos. El paquete conserva su número de SunYou; su página dice «Entrega con» esa empresa y muestra su número con un enlace a su seguimiento. No pasa con todos los paquetes.
 

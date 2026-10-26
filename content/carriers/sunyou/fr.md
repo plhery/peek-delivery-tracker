@@ -3,7 +3,7 @@ title: SunYou tracking : suivi du colis, statuts et qui livre
 description: Suivre un colis SunYou (SYPost) venu de Chine : à quoi ressemble le numéro SY, ce que veut dire chaque statut, qui le livre chez toi et qui contacter s'il bloque.
 slug: sunyou-suivi
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
 SunYou, aussi appelé SYPost, est une entreprise logistique de Shenzhen qui expédie à l'étranger les petits colis de vendeurs en ligne chinois, puis les confie à un transporteur de ton pays pour la fin du trajet. Ses numéros commencent par SY : saisis le tien sur son site de suivi, [sypost.net](https://www.sypost.net), qui existe en français, ou colle-le dans le champ ci-dessus. C'est la boutique qui te donne ce numéro, avec les informations d'expédition de ta commande.
@@ -84,7 +84,7 @@ Pour faire bouger les choses, adresse-toi au vendeur et au transporteur local. S
 
 [Peek](/) reconnaît tout de suite les deux formes SY, qu'aucun autre transporteur de son catalogue n'utilise. Tu peux aussi coller un lien de sypost.net qui contient le numéro, comme celui que donne « Copy Link ».
 
-Peek interroge SunYou en anglais : les lignes restent en anglais, sauf les libellés exacts qu'il connaît, comme `Delivered`, qu'il affiche avec ses propres mots en français. Il montre le statut, l'historique (jusqu'à 20 scans, sans lieu), le pays de destination, l'heure de livraison et le transporteur local avec son numéro. Pas de date de livraison prévue ni de point de retrait. Les heures gardent leur fuseau, celui de la Chine puis celui de ton pays ; un scan sans fuseau n'apparaît pas.
+Peek interroge SunYou en anglais : les lignes restent en anglais, sauf les libellés exacts qu'il connaît, comme `Delivered`, qu'il affiche avec ses propres mots en français. Il montre le statut, l'historique (jusqu'à 20 scans, sans lieu), le pays de destination, l'heure de livraison et le transporteur local avec son numéro. Pas de date de livraison prévue ni de point de retrait. Les heures gardent le fuseau que SunYou leur donne, celui de la Chine puis celui de ton pays.
 
 Quand SunYou donne le numéro du transporteur local, Peek peut l'interroger, par exemple La Poste pour un numéro postal à destination de la France, et passer à lui dès qu'il montre des étapes plus récentes. Le colis garde son numéro SunYou, sa page indique « Livraison par » ce transporteur et donne son numéro, avec un lien vers son suivi. Pas pour chaque colis : Meest en Grèce, par exemple, n'est pas suivi.
 

@@ -3,7 +3,7 @@ title: Asendia tracking: statuses, delivery and who to contact
 description: Track an Asendia parcel: where the number comes from, what Asendia's statuses mean, who delivers it in your country and who to ask when it stalls.
 slug: asendia-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 Asendia, owned by La Poste and Swiss Post, carries online orders across borders for shops. It doesn't bring the parcel to your door: it gets it from the shop's warehouse abroad to your country, where a delivery company you probably know takes over. Track it with the number from the shop's shipping email, on [Asendia's tracking site](https://track.asendia.com/track) or, for Asendia USA, on [A1 tracking](https://a1.asendiausa.com/tracking/).
@@ -79,9 +79,9 @@ Asendia deals with shops, not shoppers, so the shop is usually the one who can a
 
 [Peek](/) names Asendia straight away for `ASE`, `AS…US` and `AHOY` numbers. You can also paste a link from track.asendia.com or from A1 tracking. A postal number goes to the post that issued it; if the shop calls it Asendia's, or gives a reference that names no carrier, choose Asendia with "Change".
 
-It reads Asendia USA's A1 tracker only. track.asendia.com, which Asendia's European companies use, is not read, so Asendia itself often gives no answer for a European number and Peek relies on universal tracking services instead. Older numbers can drop out of A1 too.
+It asks Asendia USA's A1 tracker first and, when A1 doesn't answer, opens track.asendia.com, the site of Asendia's European companies, in a browser. That site shows the scans only with the delivery postcode, an optional field when you add the parcel; without it, Peek reads the current status there and takes the history from universal tracking services when they have it.
 
-When A1 answers, you see the status, the history with town, region and country, the weight, the destination country and the delivery company with its own number. It shows no expected delivery date, and leaves out addresses, postcodes and order references, as well as any scan without a time zone. When the delivery company is one Peek tracks, such as USPS, Swiss Post or La Poste, the parcel can be followed there; its page then says "Delivery with" that carrier. It checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and hourly overnight, shows each scan on a map and can notify you of every scan, important steps only or "Delivery day only". It can't contact Asendia or the shop for you.
+When A1 answers, you see the status, the history with town, region and country, the weight, the destination country and the delivery company with its own number. It shows no expected delivery date, and leaves out addresses, postcodes and order references, as well as any scan without a time zone. When the delivery company is one Peek tracks, such as USPS, Swiss Post or La Poste, the parcel can be followed there; its page then says "Delivery with" that carrier. It checks every 10 minutes by day (once the parcel is out for delivery, every 2 minutes, or every 5 while it reads track.asendia.com) and hourly overnight, shows each scan on a map and can notify you of every scan, important steps only or "Delivery day only". It can't contact Asendia or the shop for you.
 
 ## Questions about Asendia tracking
 

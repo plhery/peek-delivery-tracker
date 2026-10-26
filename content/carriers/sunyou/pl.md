@@ -3,7 +3,7 @@ title: SunYou tracking: numer SY, statusy i kontakt
 description: Paczka SunYou (SYPost) z Chin: jak wygląda numer SY, co znaczą angielskie statusy, kto doręcza ostatni odcinek i do kogo pisać, gdy paczka stoi.
 slug: sunyou-sledzenie
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
 SunYou, pisane też SYPost, to firma logistyczna z Shenzhen, która wysyła małe paczki za granicę dla sprzedawców internetowych z Chin, a ostatni odcinek oddaje lokalnemu przewoźnikowi w kraju odbiorcy. Jej numery zaczynają się od SY: wpisz swój na stronie śledzenia SunYou, [sypost.net](https://www.sypost.net), albo wklej go w pole powyżej. Numer dostajesz od sklepu, razem z danymi wysyłki zamówienia.
@@ -88,7 +88,7 @@ Strony kontaktowej po polsku nie ma. W sprawie zamówienia odpowie sklep, a w sp
 
 [Peek](/) od razu rozpoznaje oba kształty SY jako SunYou, bo żaden inny przewoźnik w jego katalogu ich nie używa. Możesz też wkleić link z sypost.net z numerem, na przykład ten z przycisku „Copy Link”.
 
-Linie SunYou pojawiają się po angielsku, poza dokładnymi dopasowaniami, takimi jak `Delivered`, które aplikacja pokazuje własnymi słowami. Widzisz status, historię (do 20 skanów, bez miejsca przy każdym), kraj docelowy, godzinę doręczenia i lokalnego przewoźnika z jego numerem. Przewidywanej daty doręczenia ani punktu odbioru przy paczkach SunYou nie ma. Godziny skanów są podane w czasie lokalnym każdego odcinka: najpierw chińskim, potem kraju docelowego. Skan bez strefy czasowej się nie pojawia.
+Linie SunYou pojawiają się po angielsku, poza dokładnymi dopasowaniami, takimi jak `Delivered`, które aplikacja pokazuje własnymi słowami. Widzisz status, historię (do 20 skanów, bez miejsca przy każdym), kraj docelowy, godzinę doręczenia i lokalnego przewoźnika z jego numerem. Przewidywanej daty doręczenia ani punktu odbioru przy paczkach SunYou nie ma. Godziny skanów zachowują strefę czasową podaną przez SunYou: najpierw chińską, potem kraju docelowego.
 
 Gdy SunYou podaje numer lokalnego przewoźnika, aplikacja może zapytać tego przewoźnika i przełączyć się na niego, gdy pokaże nowsze postępy. Gdy tym numerem jest numer pocztowy (dwie litery, 9 cyfr, dwie litery) paczki do Polski, pyta [Pocztę Polską](carrier:poczta-polska). Paczka zachowuje numer SunYou, a jej strona pokazuje „Doręcza:” z nazwą przewoźnika oraz jego numer z linkiem. Nie dzieje się tak przy każdej paczce.
 

@@ -7708,6 +7708,7 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Sameday",
     "aliases": [
       "Sameday Courier",
+      "Sameday Bulgaria",
       "easybox"
     ],
     "countries": [

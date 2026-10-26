@@ -1,7 +1,8 @@
 /**
  * Replays stored scans through the installed scraper release, asking no provider: what the release
  * would write for each stored row of a carrier's or universal provider's scan, from the row's own
- * fields, each answer's rows together: a carrier's own, or one universal provider's. Two things a
+ * fields, each answer's rows together: a carrier's own, or one universal provider's. A carrier's
+ * scan that took over a universal provider's copy replays with its carrier's (`writerOf`). Two things a
  * release changes replay so. A wall clock the app dated on a zone it deduced
  * is dated again (`dateLocalClocks`); a scan whose time came with its offset keeps it, as does one
  * on its carrier's home clock, which the stored row cannot tell from a clock its adapter states
@@ -22,7 +23,7 @@ import { statusMapAnswer } from 'universal-parcel-scraper/app';
 import { carrierHomeZone, dateLocalClocks } from 'universal-parcel-scraper/places';
 import { STAGES } from '../generated/apiContract';
 import { scanStages } from './disputedDelivery';
-import { providerEventId, UNIVERSAL_PROVIDER } from './eventIdentity';
+import { providerEventId, scanDay, UNIVERSAL_PROVIDER } from './eventIdentity';
 import { isRecord, type JsonObject } from './types';
 
 export interface StoredScan {
@@ -40,6 +41,8 @@ export interface StoredParcel {
   destination: string | null;
   /** Neither archived nor delivered or returned: still checked. */
   open: boolean;
+  /** The carriers whose answers it stores: its own, and the one tracking it since a hand-over. Exports before the field have none. */
+  carriers?: string[];
   events: StoredScan[];
 }
 
@@ -70,6 +73,8 @@ export type ReplayedChange = ClockChange | StageChange;
 export const STORED_SCANS_QUERY = `set default_transaction_read_only = on;
 select json_build_object('id', p.id, 'destination', p.carrier_data->>'destination_country',
   'open', p.archived_at is null and coalesce(p.current_stage, '') not in ('delivered', 'returned'),
+  'carriers', (select coalesce(json_agg(distinct c), '[]') from unnest(array[p.carrier, p.carrier_data->>'original_carrier', p.carrier_data->>'active_tracking_carrier']) c
+    where c is not null and c <> 'unknown'),
   'events', (select json_agg(json_build_object('id', e.id, 'providerEventId', e.provider_event_id, 'stage', e.stage,
     'occurredAt', e.occurred_at, 'description', e.description, 'location', e.location, 'raw', e.raw_data)) from tracking_events e where e.package_id = p.id))
 from packages p where exists (select 1 from tracking_events e where e.package_id = p.id);`;
@@ -81,8 +86,27 @@ const VALID_STAGES = new Set<string>(STAGES);
 
 const sourceOf = (scan: StoredScan) => scan.providerEventId.slice(0, Math.max(0, scan.providerEventId.indexOf(':')));
 const text = (value: unknown) => typeof value === 'string' ? value : null;
-const deduced = (scan: StoredScan) => text(scan.raw.local_time) !== null && DEDUCED.has(String(scan.raw.time_zone_basis))
-  && !(scan.raw.time_zone_basis === 'carrier' && scan.raw.time_zone === carrierHomeZone(sourceOf(scan)));
+const deduced = (scan: StoredScan, source: string) => text(scan.raw.local_time) !== null && DEDUCED.has(String(scan.raw.time_zone_basis))
+  && !(scan.raw.time_zone_basis === 'carrier' && scan.raw.time_zone === carrierHomeZone(source));
+
+/**
+ * The source whose scan a row shows. A carrier's scan that takes over a universal provider's copy keeps the copy's
+ * identity and drops the provider's name (eventIdentity.ts): the row is the carrier's, under `unknown`, and its
+ * identity no longer hashes its strings on any of the times the sync keys a scan by. It goes with the parcel's
+ * carrier, or with the one of a handed-over parcel's two whose status map knows its code and wording; with neither,
+ * it stays where its identity puts it.
+ */
+function writerOf(parcel: StoredParcel, scan: StoredScan): string {
+  const source = sourceOf(scan);
+  if (source !== 'unknown' || text(scan.raw[UNIVERSAL_PROVIDER]) !== null) return source;
+  const times = [scan.raw.time, scan.raw.local_time, scanDay(scan.raw)];
+  if (times.some((time) => providerEventId(source, time, scan.location ?? '', scan.description) === scan.providerEventId)) return source;
+  const carriers = parcel.carriers ?? [];
+  const known = carriers.length === 1 ? carriers : carriers.filter((carrier) => (
+    statusMapAnswer({ carrier, providerCode: text(scan.raw.provider_code), description: scan.description }).kind !== 'unknown'
+  ));
+  return known.length === 1 ? known[0]! : source;
+}
 
 /** Every stored row of the parcel the installed release would write otherwise. */
 export function replayParcel(parcel: StoredParcel): ReplayedChange[] {
@@ -90,7 +114,7 @@ export function replayParcel(parcel: StoredParcel): ReplayedChange[] {
   // which share the source `unknown` with each other and with an adapter's that named no carrier.
   const groups = new Map<string, { source: string; scans: StoredScan[] }>();
   for (const scan of parcel.events) {
-    const source = sourceOf(scan);
+    const source = writerOf(parcel, scan);
     if (!source || source === 'app' || scan.raw.observed_without_provider_timestamp === true) continue;
     const key = JSON.stringify([source, text(scan.raw[UNIVERSAL_PROVIDER])]);
     const group = groups.get(key) ?? { source, scans: [] };
@@ -107,12 +131,12 @@ export function replayParcel(parcel: StoredParcel): ReplayedChange[] {
 }
 
 function replayedClocks(parcel: StoredParcel, source: string, ordered: StoredScan[]): ClockChange[] {
-  if (!ordered.some(deduced)) return [];
+  if (!ordered.some((scan) => deduced(scan, source))) return [];
   // Newest first, as carriers list them.
   const listed = [...ordered].reverse();
   const result = dateLocalClocks(source, {
     events: listed.map((scan) => ({
-      ...(deduced(scan) ? { local_time: scan.raw.local_time } : text(scan.raw.time) ? { time: scan.raw.time } : {}),
+      ...(deduced(scan, source) ? { local_time: scan.raw.local_time } : text(scan.raw.time) ? { time: scan.raw.time } : {}),
       ...(scan.location ? { location: scan.location } : {}),
       ...(isRecord(scan.raw.point) ? { point: scan.raw.point } : {}),
       stage: scan.stage,
@@ -123,7 +147,7 @@ function replayedClocks(parcel: StoredParcel, source: string, ordered: StoredSca
   const dated = (result.events ?? []) as unknown as JsonObject[];
   return listed.flatMap((scan, index): ClockChange[] => {
     const time = text(dated[index]?.time);
-    if (!deduced(scan) || !time || Date.parse(time) === Date.parse(scan.occurredAt)) return [];
+    if (!deduced(scan, source) || !time || Date.parse(time) === Date.parse(scan.occurredAt)) return [];
     const to = new Date(Date.parse(time)).toISOString();
     const identity = providerEventId(source, time, scan.location ?? '', scan.description);
     const clash = parcel.events.some((other) => other.id !== scan.id && (other.providerEventId === identity

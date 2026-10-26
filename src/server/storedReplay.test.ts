@@ -83,6 +83,28 @@ describe('stored scan replay', () => {
     }))).toEqual([]);
   });
 
+  it("replays a carrier's scan that took over a universal provider's copy with its carrier's rows", () => {
+    // The copy's identity, which no longer hashes the carrier's strings, and no provider's name.
+    const taken = {
+      ...scan('taken', 'unknown', '2026-10-19T10:00:00Z', 'in_transit', 'Arrived at GOFO Regional Origin Hub', { provider_code: '202', stage: 'in_transit' }),
+      providerEventId: providerEventId('unknown', '2026-10-19T09:00:00Z', '', 'Arrived at origin'),
+    };
+
+    expect(replayParcel({ ...parcel(taken), carriers: ['gofo'] }))
+      .toEqual([expect.objectContaining({ kind: 'stage', row: 'taken', source: 'gofo', from: 'in_transit', to: 'accepted', reason: 'mapped' })]);
+    // A handed-over parcel's carrier whose map knows the scan; with both or neither, the row stays apart.
+    expect(replayParcel({ ...parcel(taken), carriers: ['yunexpress', 'gofo'] })).toEqual([expect.objectContaining({ row: 'taken', source: 'gofo' })]);
+    expect(replayParcel({ ...parcel(taken), carriers: ['usps', 'gofo'] })).toEqual([]);
+    expect(replayParcel(parcel(taken))).toEqual([]);
+  });
+
+  it("leaves a universal provider's copy stored before rows named their provider with the universal rows", () => {
+    const time = '2026-10-19T10:00:00Z';
+    const copy = scan('copy', 'unknown', time, 'in_transit', 'Arrived at GOFO Regional Origin Hub', { time, provider_code: '202', stage: 'in_transit' });
+
+    expect(replayParcel({ ...parcel({ ...copy, providerEventId: providerEventId('unknown', time, '', copy.description) }), carriers: ['gofo'] })).toEqual([]);
+  });
+
   it('writes one transaction, left open, that fails unless every guarded row changes', () => {
     const changes = replayParcel(parcel(
       scan('origin', 'gofo', '2026-10-19T10:00:00Z', 'in_transit', 'Arrived at GOFO Regional Origin Hub', { provider_code: '202', stage: 'in_transit' }),

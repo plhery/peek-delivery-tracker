@@ -193,10 +193,11 @@ A check rewrites the scans its source returns, but not a closed parcel's, nor sc
 longer returns, and a wall clock dated again gets a new identity, so it is stored beside the old
 row rather than over it. After an adoption, a dry run replays production's stored scans through
 the release, asking no provider ([storedReplay.ts](../src/server/storedReplay.ts)), each answer's
-rows together, a carrier's own or one universal provider's, as the sync read them: a deduced
-zone's wall clocks are dated again, except on the carrier's home clock, which an adapter can state
-itself, and a scan's stage is read again from its source's status map and the wording rules, a
-notice stored as the sync stores it.
+rows together, a carrier's own or one universal provider's, as the sync read them. A carrier's scan
+that took over a universal provider's copy keeps the copy's identity, and replays with its carrier's
+rows. A deduced zone's wall clocks are dated again, except on the carrier's home clock, which an
+adapter can state itself, and a scan's stage is read again from its source's status map and the
+wording rules, a notice stored as the sync stores it.
 
 ```bash
 node scripts/replay-stored-scans.mjs --query > export.sql   # run read-only on the database, one parcel a line

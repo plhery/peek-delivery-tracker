@@ -2870,6 +2870,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "hu": [
     {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-csomagkovetes",
+      "title": "Packeta csomagkövetés: Z-szám, státuszok, átvétel",
+      "name": "Packeta",
+      "color": "#ba1b02"
+    },
+    {
       "id": "foxpost",
       "catalog": "foxpost",
       "slug": "foxpost-csomagkovetes",
@@ -2967,6 +2975,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Omniva siuntų sekimas: statusai, paštomatai ir kontaktai",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "venipak-siuntu-sekimas",
+      "title": "Venipak siuntų sekimas: statusai, paštomatai ir kurjeris",
+      "name": "Venipak",
+      "color": "#9339f2"
     },
     {
       "id": "lietuvos-pastas",

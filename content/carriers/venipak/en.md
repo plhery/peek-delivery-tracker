@@ -3,7 +3,7 @@ title: Venipak tracking: statuses, lockers and missed deliveries
 description: Track a Venipak parcel in Lithuania, Latvia or Estonia: where the number is, what each status means, lockers, pickup points and how to reach Venipak.
 slug: venipak-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 Venipak is a courier that delivers parcels for shops in Lithuania, Latvia and Estonia, to your door, to one of its parcel lockers or to a pickup point. Enter the number on Venipak's tracking page for your country, or paste it in the box above. It comes from the shop, or from Venipak by SMS.
@@ -50,7 +50,7 @@ Venipak publishes no list of statuses, and no status for a failed attempt or a r
 
 **Not at home.** Venipak can leave the parcel at the nearest locker or pickup point: arrange it with the courier, or call or email customer service. With no choice made, it comes the next business day. Venipak's rules allow two more attempts after the first time nobody is found; after three, or if you refuse the parcel, it goes back to the sender.
 
-**Changing the address.** Possible from the business day after the driver collected the parcel: email the new address to customer service or call, and it arrives a business day later.
+**Changing the address.** Possible from the business day after the driver collected the parcel: email the new address to customer service or call, and it arrives a business day later. Venipak's Lithuanian FAQ allows a change on the delivery day itself too, with delivery moved to the next working day.
 
 **Lockers.** An SMS comes the moment the parcel is placed inside. Pick it up within 3 to 5 calendar days (the date is in the SMS or email) with the PIN from the SMS or the QR code from the email. If your locker has a fault or no free compartment of the right size, the parcel goes to the nearest available one: check the message.
 
@@ -66,7 +66,7 @@ The shop holds the contract with Venipak, so a lost, damaged or wrong item goes 
 
 **Delivered but not there.** Look at the place after `Delivered`: it may name a locker or pickup point. Then contact the shop and Venipak, and see [delivered but not received](guide:delivered-not-received).
 
-**Damaged or lost.** The sender claims, with photos of the goods and outer packaging and the invoice for damage, or the invoice and any photos for loss. Venipak's rules set a six-month deadline from dispatch for a written claim, and its FAQ says local claims are handled within 14 business days, international ones within up to 90 calendar days.
+**Damaged or lost.** The sender claims, with photos of the goods and outer packaging and the invoice for damage, or the invoice and any photos for loss. Venipak's rules set a six-month deadline from dispatch for a written claim, and its English FAQ says local claims are handled within 14 business days (14 calendar days in the Lithuanian one), international ones within up to 90 calendar days.
 
 ## Venipak customer service and contact number
 
@@ -84,7 +84,7 @@ As listed on Venipak's contact pages on 13 October 2026, each country has its ow
 
 A 7 to 10-digit shipment number is never named Venipak: pick Venipak with "Change", or paste a link. A one-parcel shipment is then followed by its parcel number; for several parcels, add each parcel number.
 
-Venipak's scans carry no time zone, so Peek doesn't show Venipak's own scan list. It takes the dated history from [universal tracking services](guide:universal-tracker), asks Venipak again every 6 hours and, if no service answers, shows Venipak's current status, dated when Peek saw it. It can show the locker or pickup point where the parcel waits, with its town. Statuses keep Venipak's English wording, except `Delivered` and `Out for delivery`, shown in Peek's own words. You can be notified when the status changes.
+Venipak's scans carry no time zone: Peek reads them on the clock of the scan's place, the same in all three Baltic countries, and lists Venipak's own history. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight. It can show the locker or pickup point where the parcel waits, with its town. Statuses keep Venipak's English wording, except `Delivered` and `Out for delivery`, shown in Peek's own words. You can be notified when the status changes.
 
 Venipak gives no expected arrival day and no weight. Peek leaves out map coordinates, the parcel count and the recipient check, and can't contact Venipak for you.
 
@@ -96,7 +96,7 @@ Not on your own: Venipak's form also takes a customer ID with a document number,
 
 ### Can I change the address for a Venipak parcel?
 
-Yes, from the business day after the driver collected it. Email the new address to customer service or call, and it arrives one business day later.
+Yes, from the business day after the driver collected it, or even on the delivery day according to Venipak's Lithuanian FAQ. Email the new address to customer service or call, and it arrives one business day later.
 
 ### Does Venipak deliver the next day?
 
@@ -109,6 +109,8 @@ Usually: Venipak says about 98% of parcels arrive the next working day. Homes ar
 - [Venipak: Contacts (Latvia)](https://venipak.com/lv/en/contacts/) – phone, hours, email, company
 - [Venipak: Contacts (Estonia)](https://venipak.com/ee/en/contacts/) – phone, hours, email
 - [Venipak: Claims FAQ](https://venipak.com/lt/en/faq/claims-faq/) – who claims, documents, handling times
+- [Venipak: Siuntos sekimas](https://venipak.com/lt/siuntos-sekimas/) – address change on the delivery day (Lithuanian)
+- [Venipak: Pretenzijų DUK](https://venipak.com/lt/duk/pretenziju-duk/) – claims handled within 14 calendar days (Lithuanian)
 - [Venipak: Parcel rules (Lithuania)](https://venipak.com/lt/wp-content/uploads/Venipak-parcel-delivery-rules-LT-eng.pdf) – attempts, return, handover, damage notes, claim deadline
 - [Venipak: Lockers](https://venipak.com/lt/en/lockers/) – SMS on placement, QR code
 - [Venipak: Parcel tracking (Estonia)](https://venipak.com/ee/en/parcel-tracking/) – customer ID and document number

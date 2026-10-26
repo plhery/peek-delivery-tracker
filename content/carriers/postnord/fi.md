@@ -3,7 +3,7 @@ title: PostNord-seuranta: lähetystunnus, tilat ja tulli
 description: Seuraa PostNordin pakettia Suomessa: miltä lähetystunnus näyttää, mitä seurannan tilat tarkoittavat, miten noudat paketin automaatista ja mitä tullista maksat.
 slug: postnord-seuranta
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-26
 ---
 
 PostNord on posti- ja logistiikkakonserni, joka syntyi Tanskan ja Ruotsin postien yhdistyessä. Se kuljettaa lähetyksiä Pohjoismaissa sekä Pohjoismaihin ja niistä muualle. Suomessa PostNord tuo verkkokauppojen paketteja kotiin, palvelupisteisiin ja pakettiautomaatteihin. PostNord ei ole sama yhtiö kuin [Posti](carrier:posti), jolla on oma seurantansa. Pakettia seuraat [PostNordin seurannassa](https://tracking.postnord.com/fi/) tai PostNord-sovelluksessa lähetystunnuksella, tai voit liittää tunnuksen yllä olevaan kenttään. Tunnuksen saat lähettäjältä, yleensä verkkokaupalta.
@@ -99,7 +99,7 @@ PostNordin sivuilla 23.10.2026:
 
 ## PostNordin paketin seuranta Peekillä
 
-[Peek](/) tunnistaa PostNordin tunnuksen pelkästä muodosta vain, jos siinä on kaksi kirjainta, yhdeksän numeroa ja `SE` tai `DK`, tai 11 numeroa ja `SE`. PostNordin suomalaisia tunnuksia se ei tunnista muodon perusteella. 20-numeroisia `00`-alkuisia viivakoodeja PostNord jakaa muiden kanssa: jos kolmen ensimmäisen numeron jälkeen tulee `64`, `70`, `73` tai `57` ja tarkistusnumero täsmää, Peek kysyy PostNordilta ja muilta yhtiöiltä, joiden muotoon koodi sopii, Suomen `64`-koodeista myös Postilta. Jos vain PostNord tuntee paketin, näet tekstin "PostNord has this parcel." Jos useampi yhtiö tuntee koodin, Peek valitsee sen, jota koodin muoto suosii (`64`-koodeissa Postin), tai pyytää sinua valitsemaan. Jos kukaan ei vielä tunne pakettia, näet tekstin "Not found at … yet. Peek will keep checking after you add it."
+[Peek](/) tunnistaa PostNordin tunnuksen pelkästä muodosta vain, jos siinä on kaksi kirjainta, yhdeksän numeroa ja `SE` tai `DK`, tai 11 numeroa ja `SE`. PostNordin suomalaisia tunnuksia se ei tunnista muodon perusteella. 20-numeroisia `00`-alkuisia viivakoodeja PostNord jakaa muiden kanssa: jos kolmen ensimmäisen numeron jälkeen tulee `64`, `70`, `73` tai `57` ja tarkistusnumero täsmää, Peek kysyy PostNordilta ja muilta yhtiöiltä, joiden muotoon koodi sopii, Suomen `64`-koodeista myös Postilta ja `64`- ja `73`-koodeista Matkahuollolta. Jos vain PostNord tuntee paketin, näet tekstin "PostNord has this parcel." Jos useampi yhtiö tuntee koodin, Peek valitsee sen, jota koodin muoto suosii (`64`-koodeissa Postin), tai pyytää sinua valitsemaan. Jos kukaan ei vielä tunne pakettia, näet tekstin "Not found at … yet. Peek will keep checking after you add it."
 
 Jos tunnuksessa on muuten 10–20 numeroa, liitä se silti: Peek seuraa yli 3 500 kuljetusyhtiötä. Valitse PostNord painikkeella "Change", jolla vaihdat myös väärin valitun yhtiön. Linkki tracking.postnord.com- tai postnord.fi-sivulta vie tunnuksen suoraan PostNordille.
 

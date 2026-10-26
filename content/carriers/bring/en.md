@@ -3,7 +3,7 @@ title: Bring tracking: numbers, statuses and pickup deadlines
 description: Track a Bring or Posten parcel in Norway, Sweden or Denmark: what the number looks like, what Bring's statuses mean, pickup deadlines, claims and contacts.
 slug: bring-tracking
 published: 2026-10-12
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 Bring is the parcel brand of Posten Bring, Norway's state-owned postal group; Posten is its brand for people in Norway. Both share one tracking: use sporing.bring.no, sporing.posten.no or the Posten app, or paste the number in the box above. The number comes from the shop, or from Bring or Posten by SMS or email.
@@ -87,7 +87,7 @@ As listed on Bring's and Posten's pages on 12 October 2026:
 
 ## Tracking Bring parcels with Peek
 
-[Peek](/) names a postal number ending `NO` as Bring's straight away when its check digit is valid. The 18-digit `370`/`373` numbers, the 20-digit barcodes starting `00370` or `00373` and 17-digit numbers starting `70` are shared with other carriers, and Peek can't ask Bring whether it knows them: tap "Change" and pick Bring, listed first under "Fits this number", unless a tracking service names it. Links from sporing.bring.no, sporing.posten.no and tracking.bring.com, .se or .dk name Bring whatever the number, but at Bring Peek can only track all-digit numbers and postal numbers ending `NO`. A multi-parcel consignment number isn't tracked; use each parcel's number.
+[Peek](/) names a postal number ending `NO` as Bring's straight away when its check digit is valid. The 18-digit `370`/`373` numbers, the 20-digit barcodes starting `00370` or `00373` and 17-digit numbers starting `70` are shared with other carriers, so Peek asks Bring first, together with the other carriers the number fits, and names Bring whenever Bring knows the parcel. If Bring doesn't come up, tap "Change" and pick Bring, listed first under "Fits this number". Links from sporing.bring.no, sporing.posten.no and tracking.bring.com, .se or .dk name Bring whatever the number, but at Bring Peek can only track all-digit numbers and postal numbers ending `NO`. A multi-parcel consignment number isn't tracked; use each parcel's number.
 
 Peek shows the status, each scan's town on a map, the sender, service, weight, dimensions, the expected day when Bring gives one and, while the parcel waits, the pickup point's name. Instead of Bring's sentences, each step gets a short label such as "Handed in", "At terminal" or "Ready for pickup". It drops addresses, photos and the pickup code, checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you of changes.
 

@@ -3,7 +3,7 @@ title: PostNord Track & Trace: spor din pakke i Danmark
 description: Spor din PostNord-pakke: sådan ser forsendelsesnummeret ud, det betyder statusserne, så længe venter pakken i pakkeshop og pakkeboks, og sådan når du PostNord.
 slug: postnord-spor-pakke
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 PostNord leverer pakker til, fra og i Norden, og i Danmark er det i dag kun pakker: fra 1. januar 2026 håndterer PostNord ikke længere breve. Du sporer din pakke i Track & Trace i PostNord-appen, på postnord.dk eller på [PostNords sporingsside](https://tracking.postnord.com/dk/), eller du sætter nummeret ind i feltet ovenfor. Har du ikke forsendelsesnummeret, får du det hos afsenderen, typisk webshoppen.
@@ -90,7 +90,7 @@ Sådan stod det på PostNords sider 22. oktober 2026:
 
 ## Spor PostNord-pakker med Peek
 
-[Peek](/) kan med det samme se, at et nummer på to bogstaver, ni cifre og `DK` eller `SE`, eller 11 cifre og `SE`, er PostNords. Er nummeret på 20 cifre, starter med `00` og har `57` (Danmark) eller `73` (Sverige) efter de tre første cifre, spørger Peek først PostNord sammen med [Swiss Post Cargo](carrier:swiss-post-cargo), [USPS](carrier:usps) og [NZ Post](carrier:nz-post). Kender kun PostNord pakken, står der "PostNord has this parcel." i Peek. Andre numre på 10 til 20 cifre, fx et DPD-nummer, som PostNord leverer, virker, når du trykker på "Change" og vælger PostNord. Et link fra tracking.postnord.com virker med ethvert nummer.
+[Peek](/) kan med det samme se, at et nummer på to bogstaver, ni cifre og `DK` eller `SE`, eller 11 cifre og `SE`, er PostNords. Er nummeret på 20 cifre, starter med `00` og har `57` (Danmark) eller `73` (Sverige) efter de tre første cifre, spørger Peek først PostNord sammen med [Swiss Post Cargo](carrier:swiss-post-cargo), [USPS](carrier:usps) og [NZ Post](carrier:nz-post), ved `73` også [Matkahuolto](carrier:matkahuolto). Kender kun PostNord pakken, står der "PostNord has this parcel." i Peek. Andre numre på 10 til 20 cifre, fx et DPD-nummer, som PostNord leverer, virker, når du trykker på "Change" og vælger PostNord. Et link fra tracking.postnord.com virker med ethvert nummer.
 
 Peek læser PostNords sporing på engelsk, så du ser PostNords engelske tekster, fx `The shipment item has been delivered to a service point.` (pakken venter på dig, den er ikke leveret til dig) eller `The shipment item is being customs cleared by us.` (under toldbehandling). Peek viser stedet for hver scanning, afsenderen, ydelsen, vægt, mål, modtagerlandet og pakkeshoppens adresse, mens pakken venter. Beskeder om sms og mail tager Peek ikke med, og `The shipment item has been stored.` markerer Peek som et problem. Dit navn gemmer Peek ikke, og en forventet leveringsdato viser Peek ikke, heller ikke når PostNord har en. I dagtimerne tjekker Peek pakken hvert 10. minut og hvert 2. minut, når den er ude til levering. Peek viser scanningerne på et kort og kan give dig besked, når der sker noget. Peek kan ikke kontakte PostNord eller webshoppen for dig.
 

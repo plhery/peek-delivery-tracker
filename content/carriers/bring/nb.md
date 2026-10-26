@@ -3,7 +3,7 @@ title: Posten- og Bring-sporing: nummer, status og hentefrister
 description: Spor pakken fra Posten eller Bring: slik ser sporingsnummeret ut, dette betyr statusene, så lenge venter pakken på hentestedet, og slik når du kundeservice.
 slug: bring-sporing
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 Posten og Bring hører til Posten Bring-konsernet og har felles sporing: Posten er merkevaren for privatkunder, Bring for bedrifter. Du sporer pakken på sporing.posten.no, sporing.bring.no eller i Posten-appen, eller du limer inn nummeret i feltet over. Sporingsnummeret får du av nettbutikken, eller på SMS eller e-post fra Posten.
@@ -80,7 +80,7 @@ Slik står det på Postens og Brings sider 22. oktober 2026:
 
 ## Spor Bring-pakker med Peek
 
-[Peek](/) ser med en gang at et sporingsnummer som slutter på `NO`, er Brings, så sant kontrollsifferet stemmer. Tallnumrene deler Bring med andre transportører: 18 siffer som begynner på `370` eller `373`, 17 siffer som begynner på `70`, og strekkoder på 20 siffer som begynner på `00370` eller `00373`. Peek kan ikke spørre Bring om de har pakken. Med mindre en sporingstjeneste allerede har funnet den, trykker du derfor på "Change" og velger Bring, som står først under "Fits this number". En lenke fra sporing.posten.no, sporing.bring.no eller tracking.bring.com, .se eller .dk peker ut Bring uansett nummer, men hos Bring kan Peek bare spore tallnumre og sporingsnumre som slutter på `NO`. Et sendingsnummer for flere kolli spores ikke; bruk kollinummeret.
+[Peek](/) ser med en gang at et sporingsnummer som slutter på `NO`, er Brings, så sant kontrollsifferet stemmer. Tallnumrene deler Bring med andre transportører: 18 siffer som begynner på `370` eller `373`, 17 siffer som begynner på `70`, og strekkoder på 20 siffer som begynner på `00370` eller `00373`. Peek spør derfor Bring først, sammen med de andre transportørene nummeret kan høre til, og velger Bring når Bring kjenner pakken. Kommer ikke Bring opp, trykker du på "Change" og velger Bring, som står først under "Fits this number". En lenke fra sporing.posten.no, sporing.bring.no eller tracking.bring.com, .se eller .dk peker ut Bring uansett nummer, men hos Bring kan Peek bare spore tallnumre og sporingsnumre som slutter på `NO`. Et sendingsnummer for flere kolli spores ikke; bruk kollinummeret.
 
 Peek viser status, stedet for hver skanning, avsender, tjeneste, vekt, mål, forventet dag når Bring oppgir den, og navnet på hentestedet mens pakken venter. I stedet for Brings setninger får hvert steg en kort engelsk etikett, som "Handed in", "At terminal" eller "Ready for pickup". Adresser, bilder og hentekoden tar Peek ikke med. På dagtid sjekker Peek pakken hvert 10. minutt, hvert 2. når den er ute til levering, om natten hver time, og kan varsle deg når noe skjer.
 

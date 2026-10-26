@@ -3,7 +3,7 @@ title: Spåra paket med PostNord: statusar, ombud och tull
 description: Spåra ditt PostNord-paket: så ser försändelse-ID:t ut, det här betyder statusarna, så hämtar du hos ombud och i paketbox, och vem du klagar hos.
 slug: postnord-spara-paket
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 PostNord sköter post och paket till, från och inom Norden. I Sverige har Post- och telestyrelsen (PTS) utsett PostNord att sköta den samhällsomfattande posttjänsten: posten ska fungera för alla, oavsett var i landet man bor. Du spårar paketet på [PostNords spårningssida](https://tracking.postnord.com/se/) eller i PostNord-appen, eller så klistrar du in numret i fältet ovanför. Numret får du av den som skickar paketet, oftast webbutiken.
@@ -96,7 +96,7 @@ PostNords kundservice når du via postnord.se och i PostNord-appen, och spårnin
 
 ## Spåra PostNord-paket med Peek
 
-[Peek](/) ser direkt att ett nummer med två bokstäver, nio siffror och `SE` eller `DK`, eller 11 siffror och `SE`, är PostNords. Har numret 20 siffror, börjar med `00` och har `73` (Sverige) eller `57` (Danmark) efter de tre första siffrorna? Då frågar Peek först PostNord, tillsammans med [Swiss Post Cargo](carrier:swiss-post-cargo), [USPS](carrier:usps) och [NZ Post](carrier:nz-post). Känner bara PostNord till paketet står det "PostNord has this parcel." i Peek. Andra nummer på 10 till 20 siffror fungerar när du trycker på "Change" och väljer PostNord. En länk från tracking.postnord.com fungerar med alla nummer.
+[Peek](/) ser direkt att ett nummer med två bokstäver, nio siffror och `SE` eller `DK`, eller 11 siffror och `SE`, är PostNords. Har numret 20 siffror, börjar med `00` och har `73` (Sverige) eller `57` (Danmark) efter de tre första siffrorna? Då frågar Peek först PostNord, tillsammans med [Swiss Post Cargo](carrier:swiss-post-cargo), [USPS](carrier:usps) och [NZ Post](carrier:nz-post), och vid `73` även [Matkahuolto](carrier:matkahuolto). Känner bara PostNord till paketet står det "PostNord has this parcel." i Peek. Andra nummer på 10 till 20 siffror fungerar när du trycker på "Change" och väljer PostNord. En länk från tracking.postnord.com fungerar med alla nummer.
 
 Peek läser PostNords spårning på engelska, så du ser PostNords engelska texter. `The shipment item has been delivered to a service point.` betyder att paketet väntar på dig hos ombudet, inte att du har fått det, och `The shipment item is being customs cleared by us.` att det tullbehandlas. Peek visar platsen för varje skanning, avsändaren, tjänsten, vikt, mått och mottagarlandet. Medan paketet väntar visar Peek också ombudets adress. SMS- och mejlaviseringar tar Peek inte med, och `The shipment item has been stored.` markerar Peek som ett problem. Ditt namn sparar Peek inte, och Peek visar inget förväntat leveransdatum, inte ens när PostNord har ett. På dagtid kollar Peek paketet var tionde minut, och varannan minut när det är ute för leverans. Skanningarna visas på en karta, och Peek kan meddela dig när något händer. Peek kan inte kontakta PostNord eller butiken åt dig.
 

@@ -31612,7 +31612,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "pengyou",
+      "recognitionRank": 67
     },
     "linkRules": [],
     "detectionRules": [

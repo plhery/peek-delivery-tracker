@@ -67635,56 +67635,41 @@
   },
   {
     "input": "BR257449972818X",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "spx-br",
+    "confidence": "high",
     "candidates": [
-      "spx-br"
-    ],
-    "asked": [
       "spx-br"
     ]
   },
   {
     "input": "BR261973651109L",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "spx-br",
+    "confidence": "high",
     "candidates": [
-      "spx-br"
-    ],
-    "asked": [
       "spx-br"
     ]
   },
   {
     "input": "BR2667105260570",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "spx-br",
+    "confidence": "high",
     "candidates": [
-      "spx-br"
-    ],
-    "asked": [
       "spx-br"
     ]
   },
   {
     "input": "BR2671352786030",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "spx-br",
+    "confidence": "high",
     "candidates": [
-      "spx-br"
-    ],
-    "asked": [
       "spx-br"
     ]
   },
   {
     "input": "BR2694748525524",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "spx-br",
+    "confidence": "high",
     "candidates": [
-      "spx-br"
-    ],
-    "asked": [
       "spx-br"
     ]
   },

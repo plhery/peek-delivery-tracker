@@ -17765,7 +17765,7 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^BR\\d{12}[0-9A-Z]$",
-        "confidence": "low"
+        "confidence": "high"
       }
     ],
     "trackingSearchUrl": "https://spx.com.br/track"

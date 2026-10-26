@@ -3,7 +3,7 @@ title: China Post tracking: number, statuses and who delivers
 description: Track a China Post parcel: what a CN number looks like, what the Chinese statuses mean, which post delivers it in your country and why tracking goes quiet.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 China Post is China's state-owned national post, and EMS is its express brand. If your order from AliExpress, Temu, Shein or another shop came with a tracking number ending in `CN`, China Post issued it, and your own country's post delivers the parcel under that same number. Track it on China Post's site, ems.com.cn, or in the box above. The number is in the shop's shipping details for your order.
@@ -92,7 +92,7 @@ China Post doesn't say which languages they speak. ems.com.cn also has an online
 
 Peek reads China Post's own tracking. When China Post asks for phone digits, Peek tries the public preview on ems.com.cn instead; Peek never asks you for them. If the preview refuses too and no tracking service has the parcel, Peek says more information is needed: look the number up on China Post's site with the four digits. China Post gives visitors only its three newest scans, so Peek adds the acceptance date when China Post gives one, and takes a fuller history from tracking services when one has it.
 
-It shows the status, the history with the office of each scan, and the destination country. Scans appear in Chinese as China Post writes them, with times on the local clock of each place: China's, then your country's. China Post gives no expected delivery date, weight or pickup point, and Peek drops the service name, contacts, sender and recipient details, couriers' names and phone numbers, and map coordinates.
+It shows the status, the history with the office of each scan, and the destination country. Scans appear in Chinese as China Post writes them. China Post times its own scans on China's clock, even the arrival in your country; the later scans it copies from your national post usually keep that post's local time. Peek shows each scan in your device's time zone. China Post gives no expected delivery date, weight or pickup point, and Peek drops the service name, contacts, sender and recipient details, couriers' names and phone numbers, and map coordinates.
 
 Once China Post names your country, Peek also asks your national post with the same number (USPS, Royal Mail, Canada Post or Australia Post) and switches to it once it shows fresh scans, keeping China Post's history. An Post isn't asked, so in Ireland Peek stays with China Post and tracking services. Peek can notify you of "All tracking updates", "Important only" or "Delivery day only". It can't contact China Post, your post or the shop for you.
 

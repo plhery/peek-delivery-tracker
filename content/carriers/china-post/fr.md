@@ -3,7 +3,7 @@ title: Suivi China Post : numéro, statuts chinois et livraison
 description: Suivre un colis China Post : à quoi ressemble un numéro en CN, ce que veulent dire les statuts en chinois et qui le livre en France, en Belgique ou en Suisse.
 slug: china-post-suivi
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 China Post, c'est la poste nationale chinoise, une entreprise publique, et EMS est sa marque express. Si ta commande AliExpress, Temu, Shein ou d'une autre boutique a un numéro de suivi qui finit par `CN`, c'est China Post qui l'a créé, et chez toi c'est la poste nationale qui livre le colis sous ce même numéro : [La Poste](carrier:la-poste) en France, [bpost](carrier:bpost) en Belgique, [La Poste suisse](carrier:swiss-post) en Suisse. Suis-le sur ems.com.cn, le site de China Post, sur celui de ta poste une fois le colis arrivé, ou dans le champ ci-dessus. Le numéro est dans les détails d'expédition de ta commande, sur le site de la boutique.
@@ -95,7 +95,7 @@ Pour une enquête, passe par la boutique ; pour la livraison, le retrait ou la d
 
 Peek lit le suivi de China Post lui-même. Quand China Post demande les chiffres du téléphone, Peek essaie l'aperçu public d'ems.com.cn ; il ne te les demande jamais. Si l'aperçu refuse aussi et qu'aucun service de suivi n'a le colis, Peek indique que des informations sont nécessaires : cherche alors le numéro sur le site de China Post, avec les quatre chiffres. China Post ne montre aux visiteurs que ses trois scans les plus récents : Peek ajoute la date de prise en charge quand China Post la donne, et reprend un historique plus complet chez un service de suivi qui en a un.
 
-Il affiche le statut, l'historique avec le bureau de chaque scan et le pays de destination. Les scans restent en chinois, à l'heure locale de chaque lieu : celle de la Chine, puis celle de ton pays. China Post ne donne ni date de livraison prévue, ni poids, ni point de retrait ; Peek laisse de côté le nom du service, les contacts, les coordonnées de l'expéditeur et du destinataire, les noms et téléphones des livreurs et les coordonnées GPS.
+Il affiche le statut, l'historique avec le bureau de chaque scan et le pays de destination. Les scans restent en chinois, tels que China Post les écrit. China Post date ses propres scans à l'heure de la Chine, même l'arrivée dans ton pays ; les scans suivants, qu'elle recopie de ta poste nationale, gardent en général l'heure locale de celle-ci. Peek affiche chaque scan dans le fuseau horaire de ton appareil. China Post ne donne ni date de livraison prévue, ni poids, ni point de retrait ; Peek laisse de côté le nom du service, les contacts, les coordonnées de l'expéditeur et du destinataire, les noms et téléphones des livreurs et les coordonnées GPS.
 
 Quand China Post indique la France ou la Suisse comme destination, Peek interroge aussi La Poste ou La Poste suisse avec le même numéro et passe sur elle dès qu'elle montre des scans récents, sans perdre l'historique de China Post. Sans destination ou sans réponse de China Post, Peek se fie à la région de ton iPhone ou, sur le web, au pays de ta connexion au moment de l'ajout. bpost n'est pas interrogé : en Belgique, Peek reste sur China Post et les services de suivi. Notifications au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Peek ne peut contacter ni China Post, ni ta poste, ni la boutique à ta place.
 

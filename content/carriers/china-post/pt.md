@@ -3,7 +3,7 @@ title: China Post rastreio: número, estados e entrega em Portugal
 description: Rastreio China Post: como é o número que acaba em CN, o que querem dizer os estados em chinês, quando a encomenda passa para os CTT e porque é que o seguimento para.
 slug: china-post-rastreio
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 A China Post, os Correios da China, é o correio nacional chinês, uma empresa do Estado, e a EMS é a sua marca de correio expresso. Se a tua encomenda do AliExpress, da Temu, da Shein ou de outra loja veio com um número de rastreio que acaba em `CN`, foi a China Post que o criou, e em Portugal quem a entrega são os [CTT](carrier:ctt), com esse mesmo número. Podes segui-la no site da China Post, o ems.com.cn, no Seguir objeto dos CTT depois de chegar a Portugal, ou na caixa acima. O número está nos detalhes de envio da encomenda, na loja onde compraste.
@@ -98,7 +98,7 @@ O [Peek](/) reconhece logo como China Post um número com duas letras, nove alga
 
 O Peek lê o seguimento da própria China Post. Quando a China Post pede os algarismos do telefone, o Peek tenta em vez disso a pré-visualização pública do ems.com.cn; o Peek nunca tos pede. Se também essa recusar e nenhum serviço de seguimento tiver a encomenda, o Peek diz que são necessários mais dados: procura o número no site da China Post, com os quatro algarismos. A China Post só mostra a quem visita as três leituras mais recentes, por isso o Peek junta a data de aceitação quando a China Post a dá, e vai buscar um histórico mais completo a um serviço de seguimento quando algum o tem.
 
-Mostra o estado, o histórico com a estação de cada leitura e o país de destino. As leituras aparecem em chinês, como a China Post as escreve, com a hora local de cada sítio: a da China e depois a de Portugal. A China Post não dá data prevista de entrega, peso nem ponto de levantamento, e o Peek deixa de fora o nome do serviço, os contactos, os dados do remetente e do destinatário, os nomes e telefones dos carteiros e as coordenadas no mapa.
+Mostra o estado, o histórico com a estação de cada leitura e o país de destino. As leituras aparecem em chinês, como a China Post as escreve. A China Post data as suas próprias leituras com a hora da China, mesmo a chegada a Portugal; as seguintes, que copia dos CTT, costumam manter a hora local dos CTT. O Peek mostra cada leitura no fuso horário do teu dispositivo. A China Post não dá data prevista de entrega, peso nem ponto de levantamento, e o Peek deixa de fora o nome do serviço, os contactos, os dados do remetente e do destinatário, os nomes e telefones dos carteiros e as coordenadas no mapa.
 
 Quando a China Post indica Portugal como destino, o Peek pergunta também aos CTT com o mesmo número e passa para eles assim que mostram leituras novas, sem perder o histórico da China Post. Se a China Post não indicar o destino ou não responder, o Peek escolhe o correio nacional pela região do teu iPhone ou, na web, pelo país da tua ligação quando adicionaste a encomenda. Pode enviar-te notificações: «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Não pode contactar a China Post, os CTT nem a loja por ti.
 

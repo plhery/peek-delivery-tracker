@@ -3,7 +3,7 @@ title: China Post śledzenie przesyłki: numer, statusy, doręczenie
 description: Śledzenie przesyłki China Post: jak wygląda numer z CN, co znaczą chińskie statusy, kiedy przejmuje ją Poczta Polska i co zrobić, gdy utknie po drodze.
 slug: china-post-sledzenie
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 China Post to państwowa poczta Chin, a EMS to jej marka ekspresowa. Jeśli Twoje zamówienie z AliExpress, Temu, Shein lub innego sklepu ma numer kończący się na `CN`, nadała go China Post. W Polsce paczkę przejmuje zwykle [Poczta Polska](carrier:poczta-polska) i doręcza ją pod tym samym numerem. Śledzić ją możesz na stronie China Post, ems.com.cn, albo w polu powyżej. Numer znajdziesz w szczegółach wysyłki zamówienia w sklepie.
@@ -104,7 +104,7 @@ China Post nie pisze, w jakich językach tam rozmawiają. Na ems.com.cn jest te�
 
 Peek czyta śledzenie samej China Post. Gdy China Post prosi o cyfry telefonu, Peek próbuje zamiast tego publicznego podglądu na ems.com.cn. Peek nigdy nie zapyta Cię o te cyfry. Jeśli podgląd też ich zażąda albo się nie otworzy, a żaden serwis śledzący nie ma paczki, Peek napisze, że potrzeba więcej informacji: wtedy wyszukaj numer na stronie China Post z czterema cyframi. China Post pokazuje odwiedzającym tylko trzy najnowsze skany. Dlatego Peek dodaje datę przyjęcia, gdy China Post ją podaje, i bierze pełniejszą historię z serwisu śledzącego, jeśli któryś ją ma.
 
-Peek pokazuje status, historię z urzędem przy każdym skanie i kraj przeznaczenia. Skany zostają po chińsku, tak jak pisze je China Post, z czasem lokalnym każdego miejsca: najpierw Chin, potem Polski. China Post nie podaje przewidywanej daty doręczenia, wagi ani punktu odbioru. Nazwę usługi, kontakty, dane nadawcy i odbiorcy, imiona i telefony doręczycieli oraz współrzędne Peek pomija.
+Peek pokazuje status, historię z urzędem przy każdym skanie i kraj przeznaczenia. Skany zostają po chińsku, tak jak pisze je China Post. Własne skany China Post opatruje czasem chińskim, nawet przybycie do Polski; późniejsze, przepisane od Poczty Polskiej, mają zwykle czas polski. Peek pokazuje każdy skan w strefie czasowej Twojego urządzenia. China Post nie podaje przewidywanej daty doręczenia, wagi ani punktu odbioru. Nazwę usługi, kontakty, dane nadawcy i odbiorcy, imiona i telefony doręczycieli oraz współrzędne Peek pomija.
 
 Gdy China Post poda Polskę jako kraj przeznaczenia, Peek pyta też Pocztę Polską o ten sam numer. Przechodzi na nią, gdy pokaże świeże skany, i zachowuje historię z China Post. Pocztę Polską Peek czyta po angielsku, więc jej zdarzenia zobaczysz po angielsku, a nie pod polskimi nazwami z tabeli. Jeśli China Post nie poda kraju albo nie odpowie, Peek bierze Twój kraj: w aplikacji na iPhone’a region ustawiony w telefonie, w przeglądarce kraj, z którego dodajesz paczkę. Powiadomienia możesz ustawić na „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Peek nie skontaktuje się za Ciebie z China Post, Pocztą Polską ani sklepem.
 

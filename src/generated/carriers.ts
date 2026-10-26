@@ -2814,6 +2814,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Postin seuranta: lähetystunnus, tilat ja pakettiautomaatit",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "matkahuolto-seuranta",
+      "title": "Matkahuollon seuranta: lähetystunnus, nouto ja tilat",
+      "name": "Matkahuolto",
+      "color": "#001e60"
     }
   ],
   "cs": [
@@ -2843,6 +2851,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "sk": [
+    {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-sledovanie-zasielky",
+      "title": "Sledovanie zásielky Packeta: číslo Z, stavy a Z-BOX",
+      "name": "Packeta",
+      "color": "#ba1b02"
+    },
     {
       "id": "slovenska-posta",
       "catalog": "slovenska-posta",

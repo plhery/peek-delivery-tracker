@@ -3,7 +3,7 @@ title: Packeta tracking: Z numbers, statuses and pickup points
 description: Track a Packeta (Zásilkovna) parcel: what the Z number looks like, what each status means, how long pickup points keep parcels and how to reach Packeta.
 slug: packeta-tracking
 published: 2026-10-11
-updated: 2026-10-25
+updated: 2026-10-26
 ---
 
 Packeta is the group brand behind Zásilkovna, its Czech name, and ships to 33 countries. Track a parcel on [Packeta's tracking page](https://tracking.packeta.com/en/), in the Packeta app or in the box above. The number is a `Z` and ten digits, found in Packeta's email, its SMS or the app.
@@ -50,7 +50,7 @@ Packeta says you have 7 days to pick a parcel up, with the code from the SMS or 
 
 **Z-BOX lockers** (Czechia, Slovakia, Hungary, Romania) open 24/7 with the app over Bluetooth; in Czechia a six-digit code typed on the keypad opens them too. In Czechia a parcel waits 2 calendar days, plus 1 if extended.
 
-**Home delivery.** In Czechia and Slovakia Packeta's drivers send a window of about 90 minutes; if they miss you, the parcel can go to the nearest pickup point. In Czechia the driver calls you twice on arrival and tries the address once: a missed parcel goes to the nearest pickup point with room, where you can collect it the same day. Elsewhere partner carriers deliver.
+**Home delivery.** In Czechia and Slovakia Packeta's drivers send a delivery window (Slovakia's site gives an estimated time to the minute and live tracking for the last hour); if they miss you, the parcel can go to the nearest pickup point. In Czechia the driver calls you twice on arrival and tries the address once: a missed parcel goes to the nearest pickup point with room, where you can collect it the same day. Elsewhere partner carriers deliver.
 
 **Not picked up?** In Czechia it goes back to the sender automatically.
 
@@ -60,9 +60,9 @@ Packeta says you have 7 days to pick a parcel up, with the code from the SMS or 
 
 **No update for days.** In Czechia, once a parcel hasn't moved for more than 24 hours, Zásilkovna asks you to write through its contact form (topic "Kde je moje zásilka?") and say what the parcel holds. The shop booked the shipment, so it can chase it too. See [tracking that isn't updating](guide:tracking-not-updating).
 
-**Not received.** The sender claims for a lost parcel, so contact the shop. Under Zásilkovna's terms for shops, it must report a parcel not delivered within 20 days of posting it and claim within 3 months. Delivered but missing? Read [delivered but not received](guide:delivered-not-received).
+**Not received.** The sender claims for a lost parcel, so contact the shop; in Slovakia the recipient may claim too. Under Zásilkovna's terms for shops, it must report a parcel not delivered within 20 days of posting it and claim within 3 months. Delivered but missing? Read [delivered but not received](guide:delivered-not-received).
 
-**Damaged.** Claim yourself on claims.packeta.com/en ("I am the recipient") within five working days of receipt; Packeta answers within 30 days. Pickup points don't take claims. In Poland, Packeta sends recipients to the shop.
+**Damaged.** Claim yourself on claims.packeta.com/en ("I am the recipient") within five working days of receipt (in Slovakia, hidden damage by the next working day after delivery); Packeta answers within 30 days. Pickup points don't take claims. In Poland, Packeta sends recipients to the shop.
 
 **Returned.** Ask the shop to resend or refund.
 
@@ -74,7 +74,7 @@ As read on 11 October 2026:
 - **Poland:** +48 334 457 020, Monday to Friday 8:00 to 17:00, and forms on [packeta.pl](https://www.packeta.pl/kontakt).
 - **Hungary:** +36 1 999 0369, Monday, Tuesday, Wednesday and Friday 8:00 to 18:00, Thursday 8:00 to 20:00.
 - **Romania:** +40 316 300 402, Monday to Friday 9:00 to 17:00, and a contact form.
-- **Slovakia:** no phone listed; use packeta.sk's contact form.
+- **Slovakia:** +421 221 201 135, working days 8:00 to 18:00 (a voicebot answers evenings and weekends), and a contact form.
 
 > Zásilkovna warns about fake SMS. Its real messages show "Zásilkovna" as the sender. Don't reply, don't click links, delete the message and never forward your codes.
 
@@ -84,7 +84,7 @@ As read on 11 October 2026:
 
 Peek reads Packeta in English and shows its sentences as written (`Returned to sender` in Peek's words): the status, the newest 20 scans, the shop that sent it, the delivery time and the pickup point or Z-BOX address when the parcel heads there (none for home delivery or returns). It drops your name, address, phone and signature.
 
-Scans that name a depot or pickup point show it as the place, and those naming a town go on the map. Packeta gives no expected delivery. Times are Prague time (Romanian depot scans may be an hour off). When a scan links a partner carrier's tracker Peek knows, Peek names that partner as the one delivering and, when Peek can track the partner itself, follows the parcel there once it shows fresh progress. It checks every 10 minutes by day, every 2 once out for delivery, and hourly overnight, and can notify you of changes.
+Scans that name a depot or pickup point show it as the place, and those naming a town go on the map. Packeta gives no expected delivery. Times are Prague time (Romanian depot scans may be an hour off). When a scan links a partner carrier's tracker Peek knows, Peek names that partner as the one delivering and, when Peek can track the partner itself, follows the parcel there once it shows fresh progress. It checks Packeta every 10 minutes by day and hourly overnight, and can notify you of changes.
 
 ## Questions about Packeta tracking
 
@@ -125,5 +125,8 @@ Yes, as Packeta Poland, with its own phone line and pickup points; Z-BOX lockers
 - [Packeta.pl: Z-BOX](https://www.packeta.pl/zbox) – Z-BOX countries, app, 24/7
 - [Packeta.hu: Kapcsolat](https://www.packeta.hu/kapcsolat) – Hungarian phone and hours
 - [Packeta.ro: Contact](https://www.packeta.ro/contact) – Romanian phone and hours
+- [Packeta.sk: Kontakty](https://www.packeta.sk/kontakty) – Slovak phone, hours and forms
+- [Packeta.sk: Reklamačný poriadok](https://files.packeta.com/web/files/SK_Reklamacny_poriadok_20_10_2026.pdf) – Slovakia: the recipient may claim, hidden damage by the next working day
+- [Packeta.sk: Doručenie domov](https://www.packeta.sk/domov) – Slovakia: estimated time, live tracking for the last hour
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

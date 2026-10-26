@@ -91,7 +91,7 @@ Shopee says you can't contact the carrier directly about tracking or delivery: S
 
 ## Track an SPX Express parcel with Peek
 
-[Peek](/) can't tell an SPX number by its shape alone: `BR` with 13 more characters is only a weak match. Paste it all the same: Peek follows more than 3,500 carriers. Peek asks SPX whether it knows the number ("Checking tracking services…") and shows "SPX Express Brazil has this parcel." when it does. If you see "not found yet · Peek keeps checking", tap "Change" and pick SPX Express Brazil under "Fits this number", or use "Change carrier" on a saved parcel. A tracking link from spx.com.br (`/track?` or `/detail/` with the number) names SPX straight away. Peek's SPX lookup takes only `BR` numbers, not Shopee order IDs.
+[Peek](/) names SPX Express Brazil straight away for a `BR` number with 12 digits and a final digit or letter. A tracking link from spx.com.br (`/track?` or `/detail/` with the number) names SPX too, even when a text message prints it without `https://`. Peek's SPX lookup takes only `BR` numbers, not Shopee order IDs.
 
 Peek reads the same tracking spx.com.br does and shows the status, SPX's own lines (in Portuguese, a few in English), the place SPX gives for scans at its centres, hubs and ports, and the delivery time. There's no expected delivery date, weight, pickup point or delivering partner, and Peek drops the name of whoever took the parcel. The order, its keyword, the Agência PIN and refunds stay in the Shopee app.
 

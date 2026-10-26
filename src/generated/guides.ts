@@ -172,6 +172,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Lidl order tracking: delivery, returns and problems"
     },
     {
+      "id": "leroy-merlin-orders",
+      "slug": "leroy-merlin-order-tracking",
+      "title": "Leroy Merlin order tracking: delivery, returns and problems"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "how-to-find-tracking-number",
       "title": "How to find your tracking number, or track without one"
@@ -402,6 +407,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "lidl-orders",
       "slug": "lidl-sendungsverfolgung",
       "title": "Lidl Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
+    },
+    {
+      "id": "leroy-merlin-orders",
+      "slug": "leroy-merlin-bestellung-verfolgen",
+      "title": "Leroy-Merlin-Bestellung verfolgen: Lieferung und Probleme"
     },
     {
       "id": "find-tracking-number",
@@ -636,6 +646,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Suivi de commande Lidl\u00a0: livraison, retours et problèmes"
     },
     {
+      "id": "leroy-merlin-orders",
+      "slug": "suivi-commande-leroy-merlin",
+      "title": "Suivi de commande Leroy Merlin\u00a0: livraison et problèmes"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "ou-trouver-numero-de-suivi",
       "title": "Où trouver son numéro de suivi, et comment faire sans"
@@ -866,6 +881,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "lidl-orders",
       "slug": "tracciamento-ordine-lidl",
       "title": "Tracciamento ordine Lidl: spedizione, resi e problemi"
+    },
+    {
+      "id": "leroy-merlin-orders",
+      "slug": "tracciamento-ordine-leroy-merlin",
+      "title": "Tracciamento ordine Leroy Merlin: consegna, resi e problemi"
     },
     {
       "id": "find-tracking-number",
@@ -1100,6 +1120,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimiento de pedidos Lidl: envío, devolución y problemas"
     },
     {
+      "id": "leroy-merlin-orders",
+      "slug": "seguimiento-pedido-leroy-merlin",
+      "title": "Seguimiento de pedidos Leroy Merlin: envío y devoluciones"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "localizar-paquete-sin-numero-de-seguimiento",
       "title": "Cómo localizar un paquete sin número de seguimiento"
@@ -1332,6 +1357,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimento de encomendas Lidl: envio, devolução e problemas"
     },
     {
+      "id": "leroy-merlin-orders",
+      "slug": "seguimento-encomenda-leroy-merlin",
+      "title": "Seguimento de encomendas Leroy Merlin: envio e devoluções"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "onde-encontrar-numero-de-seguimento",
       "title": "Onde encontrar o número de seguimento da encomenda"
@@ -1562,6 +1592,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "lidl-orders",
       "slug": "sledzenie-zamowienia-lidl",
       "title": "Śledzenie zamówienia Lidl: dostawa, zwroty i problemy"
+    },
+    {
+      "id": "leroy-merlin-orders",
+      "slug": "sledzenie-zamowienia-leroy-merlin",
+      "title": "Śledzenie zamówienia Leroy Merlin: dostawa, zwroty, problemy"
     },
     {
       "id": "find-tracking-number",

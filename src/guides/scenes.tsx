@@ -1215,6 +1215,26 @@ function Crate() {
   </>;
 }
 
+function Paint() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    <Truck x={40} y={172} tone="green" scale={4} />
+    <path d="M186 150C204 126 220 118 236 120" stroke="var(--green)" strokeWidth="4" strokeLinecap="round" strokeDasharray="3 12" />
+    {/* A stack of planks, a paint tin and a roller on them. */}
+    {[[262, 230, CARD.left], [272, 212, CARD.top], [262, 194, CARD.left]].map(([x, y, fill]) => <g key={y}>
+      <rect x={x} y={y} width="300" height="18" rx="3" fill={fill as string} />
+      <path d={`M${Number(x) + 40} ${Number(y) + 9}H${Number(x) + 120}M${Number(x) + 170} ${Number(y) + 9}H${Number(x) + 250}`} stroke={CARD.ink} strokeWidth="2" strokeLinecap="round" opacity=".5" />
+    </g>)}
+    <path d="M300 136C300 108 370 108 370 136" stroke={ink} strokeWidth="4" strokeLinecap="round" />
+    <rect x="296" y="132" width="78" height="62" rx="6" fill="var(--green)" />
+    <rect x="292" y="126" width="86" height="12" rx="4" fill={soft} />
+    <path d="M312 138V160Q312 168 318 168Q324 168 324 160V138" fill={paper} opacity=".85" />
+    <path d="M386 194 394 162H404" stroke={ink} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+    <rect x="400" y="150" width="54" height="22" rx="11" fill={paper} stroke="var(--green)" strokeWidth="4" />
+    <Pip x={516} ground={194} width={92} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1249,6 +1269,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'apple-orders': { tone: 'orange', draw: Laptop },
   'douglas-orders': { tone: 'rose', draw: Perfume },
   'lidl-orders': { tone: 'blue', draw: Crate },
+  'leroy-merlin-orders': { tone: 'green', draw: Paint },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },

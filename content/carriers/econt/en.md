@@ -3,7 +3,7 @@ title: Econt tracking: shipment number, statuses and offices
 description: Track an Econt parcel in Bulgaria: where to find the shipment number, what Econt's English statuses mean, offices, Econtomats, claims and contacts.
 slug: econt-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 Econt Express is a Bulgarian courier, founded in 1993, that delivers to your door, to its offices and to Econtomat parcel lockers. Track a parcel with "Track a shipment" on [econt.com](https://www.econt.com/en/services/track-shipment), with the link in Econt's email or SMS, or by pasting the shipment number in the box above. The number comes from Econt's notification or the shop's shipping email.
@@ -12,7 +12,7 @@ Econt Express is a Bulgarian courier, founded in 1993, that delivers to your doo
 
 Econt calls it the shipment number or waybill number. Econt's emails and SMS carry a link that opens the tracking; SMS is an option the sender pays for, so not every parcel gets one. No message? Ask the shop, or see [where else to find a tracking number](guide:find-tracking-number).
 
-Econt publishes no format, but its tracker takes digits only and its manual's example has 13, like the invented `1234567890123`. On a computer you can enter up to 30 numbers at once; on a phone, one.
+Econt publishes no format, but its tracker takes digits only and its manual's example has 13, like the invented `1111111111111`. On a computer you can enter up to 30 numbers at once; on a phone, one.
 
 If Econt answers "A shipment with this number could not be found", check the digits and try again.
 
@@ -73,11 +73,11 @@ Econt's channels, as read on 12 October 2026 on its [customer service page](http
 
 ## Tracking an Econt parcel with Peek
 
-[Peek](/) can't tell an Econt parcel from its 13 digits: it offers them to La Poste, DPD France and others, never Econt. If none knows it, you'll see "not found yet · Peek keeps checking": pick "Econt" with "Change". Or paste an econt.com link with `/services/track-shipment/` or `/tracking/` and the number, which names Econt straight away.
+[Peek](/) can't tell an Econt parcel from its 13 digits: it offers them to La Poste and others, such as Delhivery, never Econt. If none knows it, you'll see "not found yet · Peek keeps checking": pick "Econt" with "Change". Or paste an econt.com link with `/services/track-shipment/`, `/tracking/` or `/tracking/?num=` and the number, which names Econt straight away.
 
 It then shows Econt's summary status, the history with the office of each office scan on a map, and the delivery time. While the parcel waits, it shows the name of the Econt office storing it; Econt lists its Econtomats as offices, so a locker can appear by name too. Econt gives no expected delivery day or weight. The parcel count, courier's and recipient's names, sender and order references are left out.
 
-Scans keep the English labels above, except `Delivered`, shown in Peek's own words; `Return receipt: …` lines change nothing. Times are read as Sofia time, so a scan in the hour the clocks repeat in late October doesn't appear. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps or on delivery day only.
+Scans keep the English labels above, except `Delivered`, shown in Peek's own words; `Return receipt: …` lines change nothing. Times are read as Sofia time; a scan in the hour the clocks repeat in late October stays in the history, in order, though not at its exact time. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps or on delivery day only.
 
 ## Questions about Econt tracking
 

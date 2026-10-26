@@ -14,7 +14,7 @@ Geniki calls it the shipment number of the courier consignment note (ΣΥ.ΔΕ.�
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `1234567890` | A Geniki Taxydromiki voucher: 10 digits, no letters. |
+| `0000000000` | A Geniki Taxydromiki voucher: 10 digits, no letters. |
 | `RR000000005GR` | Not Geniki: a postal number ending `GR` belongs to [ELTA Hellenic Post](carrier:elta). |
 
 Geniki doesn't say where recipients get it: look in the shop's shipping email or order page, or ask the shop. See [how to find your tracking number](guide:find-tracking-number).
@@ -35,24 +35,22 @@ Geniki's tracking page is in Greek on the Greek site and in English on the Engli
 | `Arrival at Service Point` | At the service point that delivers it, or sends it on. |
 | `Routing to other service point` | Sent on to another service point. |
 | `Out for Delivery` | With the courier who delivers it. |
-| `Attempted Delivery - Delivery in 2-3 days` | The courier couldn't deliver; another try follows. |
-| `Attempted Delivery - Delivery Rescheduled` | The courier couldn't deliver; the parcel waits as agreed with you. |
 | `Shipment Delivered` | Delivered. |
 | `Registration of delivery details` | The service point recorded the delivery: also means delivered. |
 
-On the Greek page, `Out for Delivery` reads "Χρέωση σε κούριερ", literally charged to a courier. The rescheduled attempt is "Παραμονή με συνεννόηση" in Greek: the parcel stays put until you and Geniki agree when to deliver it.
+On the Greek page, `Out for Delivery` reads "Χρέωση σε κούριερ", literally charged to a courier.
 
 A voucher Geniki doesn't find gives a notice in Greek only, even on the English page. For the general meaning of each step, see [tracking status meanings](guide:tracking-statuses).
 
 ## Delivery, Geniki stores and missed deliveries
 
-**Who can take it.** Geniki's Consumer Obligations Charter says the courier delivers to your address, to you or, if you're out, to another adult of the same household, or to the service point the sender chose.
+**Who can take it.** Geniki's Consumer Obligations Charter says the courier delivers to your address, to you or, if you're out, to someone who lives with you (an adult, says the English version; the Greek one doesn't), or to the service point the sender chose.
 
-**If you're out.** Geniki leaves a written notice, or notifies you electronically, and takes the parcel back to the branch that delivers it. It makes at least one more attempt, arranged with you or the sender. That's what the two `Attempted Delivery` statuses mean.
+**If you're out.** Geniki leaves a written notice, or notifies you electronically, and takes the parcel back to the branch that delivers it. It makes at least one more attempt, arranged with you or the sender.
 
-**Changing the address.** You can ask by phone or in writing, for example by email, to deliver to another address; extra charges may apply if it's in a different service area. You can also ask for delivery without a signature, confirmed with a PIN Geniki gives you.
+**Changing the address.** You can ask by phone or in writing, for example by email, to deliver to another address; extra charges may apply if it's in a different service area. Delivery without a signature is the sender's option: you then confirm receipt with a PIN Geniki gives you or a digital message.
 
-**Stores and lockers.** With Door 2 Service Point (D2SP), the parcel goes to a Geniki store instead of your door; in Cyprus, to a Geniki office. That's chosen when the delivery is booked. In Greece, Geniki also delivers to [BOX NOW](carrier:box-now) lockers. A parcel sent to a locker stays there 48 hours after you're notified. Geniki's site has a store finder and a locker finder. Geniki doesn't publish how long a store keeps a parcel.
+**Stores and lockers.** With Door 2 Service Point (D2SP), the parcel goes to a Geniki store instead of your door; in Cyprus, to a Geniki office. That's chosen when the delivery is booked. In Greece, Geniki also delivers to [BOX NOW](carrier:box-now) lockers; of the 2,621 lockers on Geniki's locker finder, 42 are Geniki's own, 33 in Greece and 9 in Cyprus. A parcel sent to a locker stays there 48 hours after you're notified. Geniki's site also has a store finder. Geniki doesn't publish how long a store keeps a parcel.
 
 **Never collected.** A refused or undeliverable parcel goes back to the sender. Geniki keeps undeliverable items six months after the last failed attempt.
 
@@ -80,11 +78,11 @@ As listed on taxydromiki.com on 13 October 2026:
 
 ## Tracking a Geniki Taxydromiki parcel with Peek
 
-[Peek](/) can't tell a Geniki voucher from its 10 digits alone. When the last digit passes the check Geniki shares with ACS and DHL Express, Peek asks Geniki, DHL Express, ACS and other carriers the number fits, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), whether they know it. If Geniki alone knows it, you'll see "Geniki Taxydromiki has this parcel."; if another carrier knows it too, even DHL Express, you choose. Otherwise pick "Geniki Taxydromiki" with "Change", or paste a taxydromiki.com tracking link (`/track/1234567890` or `/en/track/1234567890`), which names Geniki at once. A link holding several vouchers joined by `-` isn't tracked: paste each voucher alone.
+[Peek](/) can't tell a Geniki voucher from its 10 digits alone. When the last digit passes the check Geniki shares with ACS and DHL Express, Peek asks Geniki, DHL Express, ACS and other carriers the number fits, such as [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), whether they know it. If Geniki alone knows it, you'll see "Geniki Taxydromiki has this parcel."; if another carrier knows it too, even DHL Express, you choose. Otherwise pick "Geniki Taxydromiki" with "Change", or paste a full tracking link such as `https://taxydromiki.com/track/0000000000` (or `/en/track/`), which names Geniki at once. A link holding several vouchers joined by `-` isn't tracked: paste each voucher alone.
 
-Geniki's tracker gives times without a time zone: Peek reads them on Greek time and lists Geniki's own history. Scans appear in Geniki's English wording, as in the table. The two `Attempted Delivery` steps show as written, without a stage of their own. A scan Geniki cancelled is hidden together with its cancellation.
+Geniki's tracker gives times without a time zone: Peek reads them on Greek time and lists Geniki's own history. Scans appear in Geniki's English wording, as in the table. A scan the table doesn't list keeps Geniki's wording, without a stage of its own. A scan Geniki cancelled is hidden together with its cancellation.
 
-Geniki gives no expected delivery day, no pickup point and no weight, so Peek can't show them. Vouchers from earlier years read as not found. Peek can notify you of every scan, important steps only, or on delivery day only.
+Geniki gives no expected delivery day, no pickup point and no weight, so Peek can't show them. Peek recognises a voucher as Geniki's only if it had a scan in the last 60 days; for an older one, pick Geniki with "Change". Peek can notify you of every scan, important steps only, or on delivery day only. While someone is waiting for the parcel (notifications on, or a look in the last hour), it checks every 10 minutes from 9:00 to 23:00 Greek time and every 2 minutes once it's `Out for Delivery`; otherwise, and overnight, hourly.
 
 ## Questions about Geniki Taxydromiki tracking
 
@@ -107,7 +105,7 @@ info@taxydromiki.gr. Treat any email from an address not ending @taxydromiki.gr 
 :::sources
 - [Geniki Taxydromiki: Home Page](https://taxydromiki.com/en/home/) – network countries, D2SP, BOX NOW lockers, up to 10 tracking numbers
 - [Geniki Taxydromiki: Track](https://taxydromiki.com/en/track/) – voucher, tracking language, Greek-only not-found notice
-- [Geniki Taxydromiki: Consumer Obligations Charter](https://taxydromiki.com/en/consumer-obligations-charter/) – SYDETA number, EETT licence, delivery, attempts, address change, PIN delivery, lockers 48 hours, reservations, six months, delivery times, claims, complaints
+- [Geniki Taxydromiki: Consumer Obligations Charter](https://taxydromiki.com/en/consumer-obligations-charter/) – SYDETA number, EETT licence, delivery, adult household member, attempts, address change, signature-free delivery for senders, lockers 48 hours, reservations, six months, delivery times, claims, complaints
 - [Geniki Taxydromiki: General Terms of Carriage](https://taxydromiki.com/en/genikoi-oroi-analipsis-metaforas/) – second attempt, six-month claims, two working days
 - [Geniki Taxydromiki: Frequently Asked Questions](https://taxydromiki.com/en/erotiseis-kai-apantiseis/) – delivery days in Greece and Cyprus, contacting a store, 20-day request
 - [Geniki Taxydromiki: Ερωτήσεις και Απαντήσεις](https://taxydromiki.com/eksypiretisi-pelaton/erotiseis-kai-apantiseis/) – 20-day compensation request
@@ -117,6 +115,7 @@ info@taxydromiki.gr. Treat any email from an address not ending @taxydromiki.gr 
 - [Geniki Taxydromiki: Complaint Submission](https://taxydromiki.com/en/ypovoli-paraponon/) – complaint form fields
 - [Geniki Taxydromiki: Attempted Fraud Using the Brand Name Geniki Taxydromiki](https://taxydromiki.com/en/announcements/prospatheia-eksapatisis-me-chrisi-tis-eponymias-geniki-tachydromiki/) – fake SMS, email and Viber messages, official email addresses
 - [Geniki Taxydromiki: Office Network](https://taxydromiki.com/en/diktyo-katastimaton/) – store finder
-- [Geniki Taxydromiki: Automated Lockers Network](https://taxydromiki.com/en/lockers/) – locker finder
+- [Geniki Taxydromiki: Automated Lockers Network](https://taxydromiki.com/en/lockers/) – locker finder, BOX NOW and Geniki lockers
+- [Γενική Ταχυδρομική: Χάρτης Υποχρεώσεων Καταναλωτή](https://taxydromiki.com/hartis-ypohreoseon-katanaloti/) – Greek charter: household member («σύνοικο πρόσωπο»)
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

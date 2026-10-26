@@ -62,7 +62,7 @@
   { "id": "postnord", "catalog": "postnord", "name": "PostNord", "languages": ["en", "da", "sv", "nb", "fi"] },
   { "id": "bring", "catalog": "bring-posten", "name": "Bring", "languages": ["en", "nb"] },
   { "id": "posti", "catalog": "posti", "name": "Posti", "languages": ["en", "fi"] },
-  { "id": "omniva", "catalog": "omniva", "name": "Omniva", "languages": ["en", "lt", "et"] },
+  { "id": "omniva", "catalog": "omniva", "name": "Omniva", "languages": ["en", "lt", "et", "lv"] },
   { "id": "ppl", "catalog": "ppl", "name": "PPL", "languages": ["en", "cs"] },
   { "id": "box-now", "catalog": "box-now", "name": "BOX NOW", "languages": ["en", "el"] },
   { "id": "dhl-ecommerce-nl", "catalog": "dhl-ecommerce-nl", "name": "DHL eCommerce Netherlands", "languages": ["en", "fr", "nl"] },

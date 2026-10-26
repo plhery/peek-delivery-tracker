@@ -10,12 +10,12 @@ Slovak Parcel Service (SPS) is a Slovak courier, owned by [Austrian Post](carrie
 
 ## Slovak Parcel Service tracking number
 
-SPS's parcel number is 14 digits starting `703`. On the label it's printed in groups with two extra digits, like `703-010-00000000 00` (digits invented). Those 16 digits are the label barcode; the 14-digit parcel number is the same without the last two.
+SPS's parcel number is 14 digits starting `703`. On the label it's printed in groups with two extra digits, like `703-000-00000000 00` (digits invented). Those 16 digits are the label barcode; the 14-digit parcel number is the same without the last two.
 
 | Number | Whose it is |
 | --- | --- |
 | `70300000000000` | SPS: 14 digits starting 703. |
-| `703-010-00000000 00` | The same parcel as printed on the label, with 2 extra digits. |
+| `703-000-00000000 00` | The same parcel as printed on the label, with 2 extra digits. |
 | `00000000000000` | 14 digits not starting 703: DPD, [SEUR](carrier:seur), [BRT](carrier:brt) and others, not SPS. |
 | `RR000000005SK` | A postal number ending SK: [Slovenská pošta](carrier:slovenska-posta), not SPS. |
 
@@ -51,11 +51,11 @@ From there the site forwards you to mySPS (mysps.sk), which shows a progress bar
 
 **One attempt.** SPS's terms give the courier one delivery attempt. After a failed one, SPS may redirect the parcel to the nearest free Balíkovo box or partner shop and tells you where by SMS or email.
 
-**Balíkovo.** SPS's pickup network, formerly SPS Parcel Shops: partner shops and self-service boxes, more than 2,400 points according to SPS's Balíkovo page. When your parcel arrives you get an SMS or email with a PIN; whoever collects needs that PIN. A box keeps the parcel 48 hours, with a reminder 24 hours before the end; a partner shop keeps it up to 7 of its working days. SPS can change these periods in busy seasons, and mySPS offers "Extend storage period", which may cost a fee. A parcel left uncollected in a box goes back to the sender.
+**Balíkovo.** SPS's pickup network, formerly SPS Parcel Shops: partner shops and self-service boxes. SPS's "What is balíkovo?" page counts more than 2,500 points and 1,000 boxes, its home page 1,200 boxes, and its page for new partners still says more than 2,400 points. When your parcel arrives you get an SMS or email with a PIN; whoever collects needs that PIN. A box keeps the parcel 48 hours, with a reminder 24 hours before the end; a partner shop keeps it up to 7 of its working days. SPS can change these periods in busy seasons, and mySPS offers "Extend storage period", which may cost a fee. A parcel left uncollected in a box goes back to the sender.
 
 **Changing the delivery.** mySPS has "Flexible Delivery" to change the planned date or delivery type, one change per day. Redirecting to a pickup point needs your email or mobile number on the parcel.
 
-**Cash on delivery.** Pay the courier in cash (up to €500 unless the courier agrees) or by card. For a box, you pay online through a link sent by SMS or email, then the PIN arrives. Once you've opened a parcel at the door you can't hand it back to the courier: deal with the shop.
+**Cash on delivery.** Pay the courier in cash (up to €500 unless the courier agrees) or by card. For a Balíkovo parcel, SPS's terms say you pay online through a link sent by SMS or email, and a box's PIN arrives once you've paid; SPS's "How balíkovo works" page says cash only, no card. Once you've opened a parcel at the door you can't hand it back to the courier: deal with the shop.
 
 ## SPS parcel late, lost or damaged
 
@@ -73,7 +73,7 @@ From there the site forwards you to mySPS (mysps.sk), which shows a progress bar
 
 As listed on sps-sro.sk on 12 October 2026:
 
-- **Phone:** your local area code followed by 16877, for example 02/16877 (Bratislava and most regions), 055/16877 (Košice), 037/16877 (Nitra), 032/16877 (Trenčín). From abroad: +421 2 168 77.
+- **Phone:** your local area code followed by 16877, says SPS; its list of centres gives 02/16877 for Bratislava, Banská Bystrica, Trenčín, Trnava and Žilina, 055/16877 for Košice and 037/16877 for Nitra. From abroad: +421 2 168 77.
 - **Hours:** every working day, 8:00 to 16:30.
 - **mySPS:** SPS recommends mysps.sk for the fastest handling: tracking around the clock and customer-service requests.
 - **Email or chat:** none listed for recipients.
@@ -82,9 +82,9 @@ As listed on sps-sro.sk on 12 October 2026:
 
 ## Tracking an SPS parcel with Peek
 
-[Peek](/) knows SPS's shape, 14 digits starting 703, but it's shared with DPD, SEUR, BRT, [Hermes Germany](carrier:hermes-de) and others. In Slovakia Peek asks SPS first. Elsewhere it asks SPS just after you save the number, not while you add it. If another carrier claims it, or none does yet, use "Change" and pick "Slovak Parcel Service" (searching "SPS" finds it). Type the 14 digits: the 16-digit label code doesn't name SPS. An sps-sro.sk tracking link with `shipment_id=` names SPS whatever the number; a mysps.sk link doesn't.
+[Peek](/) knows SPS's shape, 14 digits starting 703, but it's shared with DPD, SEUR, BRT, [Hermes Germany](carrier:hermes-de) and others. In Slovakia Peek asks SPS first. Elsewhere SPS comes last of the 13 carriers with this shape, so Peek doesn't ask it while you add the number or at the first check; a later check in the parcel's first month can reach it. If another carrier claims it, or none does yet, use "Change" and pick "Slovak Parcel Service" (searching "SPS" finds it). Type the 14 digits: the 16-digit label code doesn't name SPS. An sps-sro.sk tracking link with `shipment_id=` names SPS whatever the number; a mysps.sk link doesn't.
 
-SPS's scan times carry no time zone: Peek reads them on Slovak time and lists SPS's own history. From SPS it can show the status, the depot of each scan and the weight, with wordings in Slovak as SPS writes them; `Doručenie` counts as delivered. There's no expected delivery date, and a Balíkovo box deposit shows only as a status, without the box's name. Peek can notify you when the status changes. It can't extend storage or resend your PIN.
+SPS's scan times carry no time zone: Peek reads them on Slovak time and lists SPS's own history. From SPS it can show the status, the depot of each scan and the weight, with wordings in Slovak as SPS writes them; `Doručenie` counts as delivered. There's no expected delivery date; a Balíkovo box deposit shows as `Uložený v balíkomate`, with whatever place SPS gives the scan. Peek can notify you when the status changes. While someone is waiting for the parcel (notifications on, or a look in the last hour), it checks every 10 minutes from 8:00 to 22:00 Slovak time and every 2 minutes once it's on `Doručovací hárok`; otherwise, and overnight, hourly. It can't extend storage or resend your PIN.
 
 ## Questions about Slovak Parcel Service tracking
 
@@ -105,13 +105,16 @@ SPS's pages point you to mySPS at mysps.sk, a web portal where you can track a p
 - [SPS: Obchodné podmienky účinné od 1.9.2026](https://backend.sps-sro.sk/storage/documents/82/sps-obchodne-podmienky-sk-09-2026-FMFHUp.pdf) – delivery, one attempt, redirect, notices, Slovak numbers, storage, PIN, cash on delivery, phone from abroad
 - [SPS: Rules for claims valid from May 1, 2026](https://backend.sps-sro.sk/storage/documents/64/sps-reklamacny-poriadok-en-2026-aqjOdQ.pdf) – claims, deadlines, packaging, compensation
 - [SPS: Do you need to contact customer service?](https://www.sps-sro.sk/en/kontakt/zakaznicky-servis) – hours, local area code + 16877
-- [SPS: Kontaktné strediská](https://www.sps-sro.sk/kontakt/kontaktne-strediska) – regional numbers, mySPS
+- [SPS: Kontaktné strediská](https://www.sps-sro.sk/kontakt/kontaktne-strediska) – number for each centre, mySPS
 - [SPS: Ako vygenerovať príjmový doklad](https://www.sps-sro.sk/documents/ako-vygenerovat-prijmovy-doklad_v2.pdf) – number on the label
 - [SPS: Where is my parcel](https://www.sps-sro.sk/en/moja-zasielka/kde-je-moj-balik) – what the section covers
 - [SPS: Report parcel damage](https://www.sps-sro.sk/en/moja-zasielka/nahlasit-poskodenie-balika) – damage form
 - [SPS: FAQ](https://www.sps-sro.sk/en/zasielky/faq) – 7-day claim wording
 - [SPS: Pozor na podvodné SMS a emaily](https://www.sps-sro.sk/novinky/pozor-na-podvodne-sms-a-emaily-2) – fake messages
 - [SPS: Become a Balíkovo Pickup Point](https://www.sps-sro.sk/en/balikovo/ako-sa-stat-balikovom) – more than 2,400 points
+- [SPS: What is balíkovo?](https://www.sps-sro.sk/en/balikovo/co-je-balikovo) – more than 2,500 points and 1,000 boxes
+- [SPS: Home](https://www.sps-sro.sk/en) – 1,200 Balíkovo boxes
+- [SPS: Ako funguje balíkovo?](https://www.sps-sro.sk/ako-funguje-balikovo/) – cash only for cash on delivery
 - [mySPS: interface texts](https://rest.mysps.sk/lang/get/en) – progress bar, Flexible Delivery, storage, PIN
 - [Austrian Post: Subsidiaries international](https://post.at/en/j/c/careers-austrian-post-subsidiaries-international) – owner since 2002
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads

@@ -3025,7 +3025,16 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fedd00"
     }
   ],
-  "lv": [],
+  "lv": [
+    {
+      "id": "omniva",
+      "catalog": "omniva",
+      "slug": "omniva-sutijumu-izsekosana",
+      "title": "Omniva sūtījumu izsekošana: statusi, pakomāti un kontakti",
+      "name": "Omniva",
+      "color": "#f86300"
+    }
+  ],
   "et": [
     {
       "id": "omniva",

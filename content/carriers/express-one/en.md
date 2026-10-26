@@ -6,11 +6,11 @@ published: 2026-10-13
 updated: 2026-10-26
 ---
 
-Express One Hungary is a Hungarian courier owned by [Austrian Post](carrier:austrian-post), delivering for online shops with around 700 couriers and over 2,300 parcel points and lockers. Track a parcel by its package ID on [tracking.expressone.hu](https://tracking.expressone.hu/) or paste it in the box above. The number comes in the email Express One sends when the sender registers the parcel.
+Express One Hungary is a Hungarian courier owned by [Austrian Post](carrier:austrian-post), delivering for online shops with around 700 couriers and over 2,300 parcel points and lockers. Track a parcel by its package ID on [tracking.expressone.hu](https://tracking.expressone.hu/) or paste it in the box above. The number comes in the email Express One sends once the parcel is registered and has reached it.
 
 ## Express One tracking number
 
-Express One emails you a pre-notice once the sender registers the parcel; an SMS comes only if the sender pays for it. Within Hungary, the messages give the delivery window, the courier's contact, any cash-on-delivery amount and a link to change the delivery. Parcels going abroad get none. No message? Ask the shop, and see [how to find your tracking number](guide:find-tracking-number).
+Express One emails you a pre-notice once the sender has registered the parcel and it has physically arrived at Express One; an SMS comes only if the sender pays for it. Within Hungary, the messages give the delivery window, the courier's contact, any cash-on-delivery amount and a link to change the delivery. Parcels going abroad get none. No message? Ask the shop, and see [how to find your tracking number](guide:find-tracking-number).
 
 The tracker also takes the shipper's reference or document number, but those need the sender's 5-digit Company ID, so use the package ID (the barcode number).
 
@@ -18,8 +18,8 @@ Express One publishes no format. Package IDs seen so far come in two shapes (dig
 
 | Number | Whose it is |
 | --- | --- |
-| `1234567890123` | 13 digits: an Express One package ID, but [La Poste](carrier:la-poste) and other carriers use this length too. |
-| `100000000000000000001011` | 24 digits, ending in a Hungarian postcode: Express One. [InPost](carrier:inpost), [bpost](carrier:bpost) and [Ciblex](carrier:ciblex) also use 24 digits. |
+| `0000000000000` | 13 digits: an Express One package ID, but [La Poste](carrier:la-poste) and other carriers use this length too. |
+| `100000000000000000001011` | 24 digits, ending in a Hungarian postcode: Express One. Austrian Post, [InPost](carrier:inpost), [bpost](carrier:bpost) and [Ciblex](carrier:ciblex) also use 24 digits. |
 | `00000000000000` | 14 digits: DPD, never Express One. |
 | `00000000000` | 11 or 12 digits: GLS, never Express One. |
 | `RR000000005HU` | Two letters, 9 digits, `HU`: [Magyar Posta](carrier:magyar-posta), never Express One. |
@@ -40,9 +40,9 @@ tracking.expressone.hu shows English or Hungarian, following your browser's lang
 | `Out for delivery` | On the courier's van today. |
 | `Delivery schedule updated` | The delivery plan was recalculated; nothing moved. |
 | `Processing in progress` | The delivery moved to a later time, without a reason. |
-| `Delivery failed - consignee not present at address` | The courier came and nobody was there. |
-| `Consignee provided instructions for OOH shipment` | You chose a parcel point or locker through the change link. |
-| `It can be handed over at the pick - up point` | Ready for pickup at the parcel point or locker. |
+| `Addressee not present at delivery address` | The courier came and nobody was there. |
+| `Addressee unavailable` | The second attempt failed too. |
+| `Obstacles of nature` | Bad weather stopped the round; it counts as an attempt, and the parcel goes out again. |
 | `Successful delivery` | Delivered. |
 
 EXOHU is Express One Hungary: the first status means only the label exists. The bar above the history has its own labels, from `Shipment data uploaded` to `Successfully delivered`. In Hungarian, delivered reads `Sikeres kézbesítés`.
@@ -51,13 +51,13 @@ EXOHU is Express One Hungary: the first status means only the label exists. The 
 
 **When it comes.** The pre-notice gives a 4-hour interval. On the delivery morning, a message gives a 2-hour window, which Express One calls only indicative: the courier may arrive earlier or later. That day the tracking page shows how many stops the courier has left before you. There's no weekend delivery, except paid Saturday delivery for business senders.
 
-**Changing it.** The "Modification" button in the morning SMS or email lets you change the time or address, or send the parcel to a parcel shop or locker, which works even an hour before the courier arrives. Changes are possible only on the first delivery day and only once. Some options depend on the sender (a large parcel can't go to a locker), and Express One's terms say a change counts as a delivery attempt and may cost extra.
+**Changing it.** The "Modification" button in the morning SMS or email lets you change the time or address, or send the parcel to a parcel shop or locker, which works even an hour before the courier arrives. Changes are possible only on the first delivery day and only once. Some options depend on the sender (a large parcel can't go to a locker). Express One's terms say a change counts as a delivery attempt and may cost extra; a 2024 Express One blog post says redirecting is free.
 
-**At the door.** Private recipients sign and give an ID document number. Cash on delivery is paid in cash or by card, or in advance through a link in the pre-arrival message. You can't unpack before signing and paying.
+**At the door.** Private recipients sign and give an ID document number. Cash on delivery is paid in cash (up to 300,000 Ft) or by card (up to 1,000,000 Ft), or in advance through a link in the pre-arrival message; at an Exopoint, the cash limit is 250,000 Ft. You can't unpack before signing and paying.
 
-**Missed delivery.** Under Express One's terms, it tells you by email or SMS by the next working day, tries once more for free and holds the parcel until the 5th working day at most. Meanwhile you can ask for a new date or a parcel point. After a second failed attempt the parcel goes back to the sender.
+**Missed delivery.** Under Express One's terms, it tells you by email or SMS by the next working day, tries once more for free and holds the parcel until the 5th working day at most. Meanwhile you can ask for a new date or a parcel point. After a second failed attempt the parcel goes back to the sender; a 2024 blog post says it first waits 5 working days at the Budapest central depot.
 
-**Parcel points and lockers.** At an Exopoint parcel point or locker you can pick up the parcel for up to a week, 24/7. Many shops let you pick one at checkout. Picking up at the Budapest logistics centre (H-1239 Budapest, Európa street 12, building L1) needs an appointment with customer service.
+**Parcel points and lockers.** Many shops let you pick an Exopoint parcel point or locker at checkout. Express One's parcel-point page says the parcel waits up to a week, 24/7. Its blog posts differ: 3 days at an EXOBOX, 2 at an Alzabox, up to 7 at a Packeta point (2025), 72 hours in a locker (2026), 5 days at a parcel point (2024), and only EXOBOX and Alzabox lockers open around the clock. Picking up at the Budapest logistics centre (H-1239 Budapest, Európa street 12, building L1) needs an appointment with customer service.
 
 ## Express One parcel delayed, damaged or lost
 
@@ -80,9 +80,9 @@ Express One's Parcel Tracking page also lists +36 1 8 777 444 and a chatbot.
 
 ## Tracking Express One parcels with Peek
 
-[Peek](/) can't tell an Express One number from its digits. A 13-digit number is offered to other carriers, a 24-digit one to InPost, bpost and Ciblex. When none knows it you'll see "not found yet · Peek keeps checking": pick "Express One" with "Change". Or paste a tracking.expressone.hu link with `?plc_number=`, which names Express One whatever the number.
+[Peek](/) can't tell an Express One number from its digits. A 13-digit number is offered to other carriers, a 24-digit one to Austrian Post, InPost and Ciblex. When none knows it you'll see "not found yet · Peek keeps checking": pick "Express One" with "Change". Or paste a tracking.expressone.hu link with `?plc_number=`, which names Express One whatever the number.
 
-Express One's scans carry a time without a time zone: Peek reads them on the clock of the scan's place, Hungarian time for scans in Hungary, and lists Express One's own history. From Express One it reads the status and, for hub scans, the town and country. Wordings stay as Express One writes them, except `Out for delivery`; `Successful delivery` counts as delivered and a return trip as returned. A pickup-point scan shows Express One's wording without a stage. You can be notified when the status changes. There's no expected delivery, weight or pickup point, and the progress bar and signature are left out.
+Express One's scans carry a time without a time zone: Peek reads them on the clock of the scan's place, Hungarian time for scans in Hungary, and lists Express One's own history. From Express One it reads the status and, for hub scans, the town and country. Wordings stay as Express One writes them, except `Out for delivery`; `Successful delivery` counts as delivered and a return trip as returned. A scan Peek doesn't know shows Express One's wording without a stage. You can be notified when the status changes. There's no expected delivery, weight or pickup point, and the progress bar and signature are left out.
 
 ## Questions about Express One tracking
 
@@ -92,7 +92,7 @@ The sender has created the shipment, but Express One Hungary hasn't received the
 
 ### How long does an Express One parcel wait at a parcel point?
 
-Up to one week, and you can pick it up at any hour.
+Up to a week, at any hour, says Express One's parcel-point page; its blog posts give 2 to 7 days depending on the point, and round-the-clock access only at EXOBOX and Alzabox lockers.
 
 ### Is Express One in Slovakia or Slovenia the same company?
 
@@ -102,12 +102,16 @@ No. They also belong to Austrian Post but are separate companies; this page and 
 - [Express One: Parcel Tracking](https://expressone.hu/en/csomagkovetes) – courier's stops, call centre, chatbot
 - [Express One: Tracking](https://tracking.expressone.hu/) – ID types, Company ID, not-found message, 180 days, statuses, languages
 - [Express One: Frequently asked questions](https://expressone.hu/en/gyik) – modification, 2-hour window, Saturday, cash on delivery, damage, wrong item
+- [Express One: GYIK](https://expressone.hu/gyik) – cash-on-delivery limits
 - [Express One: Contact](https://expressone.hu/en/kapcsolat) – phones, emails, hours, form, logistics centre
-- [Express One: Parcel point](https://expressone.hu/en/csomagpont) – 2,300 points and lockers, one week, checkout choice
+- [Express One: Parcel point](https://expressone.hu/en/csomagpont) – 2,300 points and lockers, one week, 24/7, checkout choice
 - [Express One: Home](https://expressone.hu/en) – Austrian Post, 700 couriers, redirect up to an hour before
 - [Express One: General Terms and Conditions](https://expressone.hu/downloads/General_Terms_and_Conditions_2026_08_15.pdf) – attempts, hold, ID, change fee, claims, complaints, NMHH, data erasure
-- [Express One: Merre jár a csomagom?](https://expressone.hu/blog/merre-jar-a-csomagom-csomagkovetes-es-ertesitesi-rendszerek-alkalmazasa) – pre-notice, 4-hour and 2-hour windows, SMS option
-- [Express One: eBOX GYIK](https://expressone.hu/ebox/faq) – notification contents, none for export
+- [Express One: Merre jár a csomagom?](https://expressone.hu/blog/merre-jar-a-csomagom-csomagkovetes-es-ertesitesi-rendszerek-alkalmazasa) – pre-notice after registration and arrival, 4-hour and 2-hour windows, SMS option
+- [Express One: Csomag átirányítás és a kézbesítés átütemezése](https://expressone.hu/blog/csomag-atiranyitas-es-a-kezbesites-atutemezese) – free redirect, 5 days at the Budapest depot or a parcel point
+- [Express One: Minden, amit az EXOPOINT megoldásokról tudni érdemes](https://expressone.hu/blog/minden-amit-az-exopoint-megoldasokrol-tudni-erdemes) – opening hours, 3, 2 and 7 days
+- [Express One: Csomagküldés csomagautomatába](https://expressone.hu/blog/csomagkuldes-csomagautomataba-miert-valasztjak-egyre-tobben) – 72 hours in a locker
+- [Express One: eBOX GYIK](https://expressone.hu/ebox/faq) – notification contents, none for export, 250,000 Ft cash at an Exopoint
 - [Austrian Post: Austrian Post Group acquires Hungarian parcel delivery provider](https://news.post.at/presse/en/post/id/2255390/) – wholly owned subsidiary
 - [Austrian Post: International subsidiaries](https://post.at/en/j/c/careers-austrian-post-subsidiaries-international) – Express One companies in other countries
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads

@@ -5846,6 +5846,15 @@
 <url>
 <loc>https://peektracker.com/carriers/box-now-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/box-now-tracking" />
+<xhtml:link rel="alternate" hreflang="bg" href="https://peektracker.com/bg/carriers/box-now-prosledyavane-na-pratka" />
+<xhtml:link rel="alternate" hreflang="el" href="https://peektracker.com/el/carriers/box-now-entopismos-dematos" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/box-now-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/bg/carriers/box-now-prosledyavane-na-pratka</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/box-now-tracking" />
+<xhtml:link rel="alternate" hreflang="bg" href="https://peektracker.com/bg/carriers/box-now-prosledyavane-na-pratka" />
 <xhtml:link rel="alternate" hreflang="el" href="https://peektracker.com/el/carriers/box-now-entopismos-dematos" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/box-now-tracking" />
 <lastmod>2026-10-26</lastmod>
@@ -5853,6 +5862,7 @@
 <url>
 <loc>https://peektracker.com/el/carriers/box-now-entopismos-dematos</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/box-now-tracking" />
+<xhtml:link rel="alternate" hreflang="bg" href="https://peektracker.com/bg/carriers/box-now-prosledyavane-na-pratka" />
 <xhtml:link rel="alternate" hreflang="el" href="https://peektracker.com/el/carriers/box-now-entopismos-dematos" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/box-now-tracking" />
 <lastmod>2026-10-26</lastmod>
@@ -6223,6 +6233,7 @@
 <loc>https://peektracker.com/carriers/venipak-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/venipak-tracking" />
 <xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/venipak-siuntu-sekimas" />
+<xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/venipak-sutijumu-izsekosana" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/venipak-tracking" />
 <lastmod>2026-10-26</lastmod>
 </url>
@@ -6230,6 +6241,15 @@
 <loc>https://peektracker.com/lt/carriers/venipak-siuntu-sekimas</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/venipak-tracking" />
 <xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/venipak-siuntu-sekimas" />
+<xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/venipak-sutijumu-izsekosana" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/venipak-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/lv/carriers/venipak-sutijumu-izsekosana</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/venipak-tracking" />
+<xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/venipak-siuntu-sekimas" />
+<xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/venipak-sutijumu-izsekosana" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/venipak-tracking" />
 <lastmod>2026-10-26</lastmod>
 </url>

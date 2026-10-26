@@ -1160,13 +1160,17 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [
       {
         "domains": [
-          "mondialrelay.fr"
+          "mondialrelay.fr",
+          "mondialrelay.be",
+          "mondialrelay.nl",
+          "mondialrelay.com"
         ],
         "params": [
           "shipment",
           "numeroExpedition",
           "numero",
-          "trackingNumber"
+          "trackingNumber",
+          "exp"
         ]
       }
     ],
@@ -1190,7 +1194,8 @@ export const CARRIER_CAPABILITIES = {
       "BE",
       "ES",
       "LU",
-      "PT"
+      "PT",
+      "NL"
     ],
     "trackingSearchUrl": "https://www.mondialrelay.fr/suivi-de-colis/",
     "aliases": [
@@ -8097,7 +8102,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "cargus",
-      "recognitionRank": 270
+      "recognitionRank": 270,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://www.cargus.ro/personal/urmareste-coletul/?tracking_number={trackingNumber}",
     "linkRules": [
@@ -8120,7 +8126,16 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^1\\d{9}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^8[56]\\d{7}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.cargus.ro/personal/urmareste-coletul/"
   },
   "cdl": {

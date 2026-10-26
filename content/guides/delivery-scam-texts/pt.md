@@ -1,6 +1,6 @@
 ---
-title: Burla CTT por SMS: como reconhecer uma mensagem falsa
-description: Como reconhecer uma burla CTT, DPD, GLS ou InPost por SMS, o que as transportadoras mandam mesmo e o que fazer se carregaste no link ou pagaste.
+title: SMS ou e-mail falso dos CTT? Como saber se é burla
+description: Como saber se uma mensagem dos CTT, da DPD, da GLS ou da InPost é falsa, o que as transportadoras mandam mesmo e o que fazer se carregaste no link ou pagaste.
 slug: burla-ctt-mensagem-falsa
 picture: Um telemóvel com uma mensagem com um triângulo de aviso e um anzol na ligação, uma moeda riscada e o Pip, preocupado, com uma mão de «para» no balão de fala.
 published: 2026-10-14

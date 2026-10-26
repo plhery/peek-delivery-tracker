@@ -1,6 +1,6 @@
 ---
-title: Paczka doręczona, a jej nie ma – co zrobić?
-description: Status „doręczona”, a paczki nie ma? Co sprawdzić najpierw, ile czekać, kto odpowiada za przesyłkę i ile czasu dają Ci Allegro, Amazon i Vinted.
+title: Przesyłka doręczona, a jej nie ma? Co to znaczy i co zrobić?
+description: „Doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła do Ciebie. Co sprawdzić, ile czekać i ile czasu na zgłoszenie dają Allegro, Amazon i Vinted.
 slug: paczka-doreczona-a-jej-nie-ma
 picture: Zamknięte drzwi, powiadomienie z zielonym ptaszkiem, pusty, przerywany kontur paczki ze znakiem zapytania na wycieraczce i zmartwiony Pip.
 published: 2026-10-09

@@ -1,6 +1,6 @@
 ---
-title: Estados da encomenda: o que significa cada um
-description: De «Aguarda entrada nos CTT» a «Entregue»: o que quer dizer cada estado do seguimento, pela ordem em que aparece, e os poucos em que tens de agir.
+title: Estados da encomenda nos CTT: o que significam
+description: «Aguarda entrada nos CTT», «Em trânsito», «Em entrega», «Entregue»: o que quer dizer cada estado dos CTT e de outras transportadoras, e quando tens de agir.
 slug: estados-da-encomenda-significado
 picture: Um percurso sinuoso com paragens marcadas com um visto (etiqueta, armazém, avião), uma carrinha na paragem atual, uma casa mais à frente e o Pip a correr.
 published: 2026-10-09

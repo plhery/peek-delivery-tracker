@@ -1,6 +1,6 @@
 ---
-title: Colis non retiré : délai de retrait et ce qu'il devient
-description: Colis non retiré au point relais, à la poste ou en consigne : combien de temps il est gardé, si tu peux prolonger, ce qu'il devient et ton remboursement.
+title: Colis non retiré : combien de temps est-il gardé, et après ?
+description: En France, ton colis reste 15 jours à la poste, 9 chez Relais Colis, 7 en relais Chronopost, 5 chez Mondial Relay : peux-tu prolonger, es-tu remboursé ?
 slug: colis-non-retire
 picture: Une consigne à colis avec une porte ouverte, Pip qui attend dans le casier, et un calendrier aux deux derniers jours entourés.
 published: 2026-10-14

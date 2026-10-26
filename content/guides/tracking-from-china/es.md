@@ -1,6 +1,6 @@
 ---
-title: Seguimiento de paquetes de China: AliExpress, Temu y Shein
-description: Por qué el seguimiento de AliExpress, Temu o Shein se para o cambia de número, quién lo reparte en España, cuánto tarda y qué se paga en aduanas.
+title: Seguimiento de AliExpress, Temu y Shein: estados y retrasos
+description: Qué significan los estados de Cainiao, por qué se para el seguimiento o aparece un número CNESP, quién reparte en España, cuánto tarda y qué se paga en aduanas.
 slug: seguimiento-paquete-de-china
 picture: Un avión traza un arco punteado sobre el globo, de un marcador rojo al marcador verde de casa, y Pip viaja entre dos furgonetas.
 published: 2026-10-09

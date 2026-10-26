@@ -1,6 +1,6 @@
 ---
-title: Vinted tracking: carriers, numbers and delays
-description: Track a Vinted parcel as a buyer or seller: who delivers it in the UK, Ireland, the US and Australia, what the number looks like and Vinted's deadlines.
+title: Vinted parcel tracking: where to look and why it stalls
+description: Where to track a Vinted or Vinted Go parcel, which carrier delivers it in the UK, Ireland, the US and Australia, and why tracking stops or the number changes.
 slug: vinted-tracking
 picture: Two phones, a seller's and a buyer's, with a parcel travelling between them in a van, and a cheerful Pip.
 published: 2026-10-16

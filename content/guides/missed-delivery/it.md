@@ -1,6 +1,6 @@
 ---
-title: Mancata consegna pacco: cosa fare, giacenza e ritiro
-description: Il corriere non ti ha trovato? Cosa dice l'avviso di giacenza, come fissare una nuova consegna, quando ritirare il pacco, con che documento e con quale delega.
+title: Mancata consegna per destinatario assente: cosa succede
+description: Destinatario assente? Poste Italiane, BRT e GLS ripassano da soli, poi il pacco va in giacenza: fino a quando, come ritirarlo, con quale documento e quale delega.
 slug: mancata-consegna-pacco
 picture: Una porta di casa con un avviso infilato sotto, un furgone già lontano e Pip che arriva senza fiato, un attimo troppo tardi.
 published: 2026-10-14

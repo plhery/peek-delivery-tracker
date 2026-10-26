@@ -1,6 +1,6 @@
 ---
-title: Pacco fermo in dogana: cosa fare, tempi e costi
-description: Cosa vuol dire pacco fermo in dogana, quanto dura lo sdoganamento, cosa paghi in Italia e in Ticino e come riconoscere i falsi SMS sulle spese doganali.
+title: Pacco fermo in dogana: cosa fare, quanto dura e cosa paghi
+description: «In attesa di sdoganamento» o fermo da settimane? Cosa vuol dire, quanto può durare, cosa paghi su Temu, Shein e AliExpress e come riconoscere gli SMS falsi.
 slug: pacco-fermo-in-dogana
 picture: Una cabina della dogana con la sbarra a strisce, un documento timbrato con una spunta e Pip che aspetta paziente davanti alla sbarra.
 published: 2026-10-09

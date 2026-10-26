@@ -49,7 +49,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "vinted-orders",
       "slug": "vinted-tracking",
-      "title": "Vinted tracking: carriers, numbers and delays"
+      "title": "Vinted parcel tracking: where to look and why it stalls"
     },
     {
       "id": "etsy-orders",
@@ -668,7 +668,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "uncollected-parcel",
       "slug": "colis-non-retire",
-      "title": "Colis non retiré\u00a0: délai de retrait et ce qu'il devient"
+      "title": "Colis non retiré\u00a0: combien de temps est-il gardé, et après\u202f?"
     },
     {
       "id": "parcel-lockers",
@@ -740,7 +740,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "customs",
       "slug": "pacco-fermo-in-dogana",
-      "title": "Pacco fermo in dogana: cosa fare, tempi e costi"
+      "title": "Pacco fermo in dogana: cosa fare, quanto dura e cosa paghi"
     },
     {
       "id": "tracking-from-china",
@@ -945,7 +945,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "missed-delivery",
       "slug": "mancata-consegna-pacco",
-      "title": "Mancata consegna pacco: cosa fare, giacenza e ritiro"
+      "title": "Mancata consegna per destinatario assente: cosa succede"
     },
     {
       "id": "delivery-times",
@@ -982,7 +982,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "tracking-from-china",
       "slug": "seguimiento-paquete-de-china",
-      "title": "Seguimiento de paquetes de China: AliExpress, Temu y Shein"
+      "title": "Seguimiento de AliExpress, Temu y Shein: estados y retrasos"
     },
     {
       "id": "amazon-orders",
@@ -1199,7 +1199,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "tracking-statuses",
       "slug": "estados-da-encomenda-significado",
-      "title": "Estados da encomenda: o que significa cada um"
+      "title": "Estados da encomenda nos CTT: o que significam"
     },
     {
       "id": "tracking-not-updating",
@@ -1399,7 +1399,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "delivery-scam-texts",
       "slug": "burla-ctt-mensagem-falsa",
-      "title": "Burla CTT por SMS: como reconhecer uma mensagem falsa"
+      "title": "SMS ou e-mail falso dos CTT? Como saber se é burla"
     },
     {
       "id": "change-delivery-address",
@@ -1446,7 +1446,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "delivered-not-received",
       "slug": "paczka-doreczona-a-jej-nie-ma",
-      "title": "Paczka doręczona, a jej nie ma – co zrobić?"
+      "title": "Przesyłka doręczona, a jej nie ma? Co to znaczy i co zrobić?"
     },
     {
       "id": "customs",

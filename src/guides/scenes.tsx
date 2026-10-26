@@ -1158,6 +1158,22 @@ function Phonebox() {
   </>;
 }
 
+function Laptop() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    <Truck x={40} y={172} tone="orange" scale={4} />
+    <path d="M190 150C216 118 248 110 276 118" stroke="var(--orange)" strokeWidth="4" strokeLinecap="round" strokeDasharray="3 12" />
+    {/* A slim laptop box, a small phone box on it, and Pip on top. */}
+    <rect x="282" y="217" width="236" height="34" rx="5" fill={ink} opacity=".07" />
+    <rect x="282" y="214" width="236" height="34" rx="5" fill={paper} />
+    <path d="M376 224H424L432 238H368Z" stroke="var(--orange)" strokeWidth="3" strokeLinejoin="round" />
+    <rect x="352" y="173" width="96" height="44" rx="5" fill={ink} opacity=".07" />
+    <rect x="352" y="170" width="96" height="44" rx="5" fill={paper} />
+    <rect x="390" y="178" width="20" height="28" rx="5" stroke="var(--orange)" strokeWidth="3" />
+    <Pip x={400} ground={170} width={96} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1189,6 +1205,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'adidas-orders': { tone: 'ochre', draw: Shoebox },
   'h-m-orders': { tone: 'lilac', draw: Hanger },
   'xiaomi-orders': { tone: 'blue', draw: Phonebox },
+  'apple-orders': { tone: 'orange', draw: Laptop },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },

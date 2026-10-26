@@ -837,6 +837,13 @@ extension ParcelRouteTests {
         let card = DeliveryWidgetPictures.card(for: placed, localizer: localizer)
         XCTAssertEqual(DeliveryWidgetPictures.card(for: placed, localizer: localizer), card)
         XCTAssertEqual(card.status, "In transit")
+        // Handed over, a parcel keeps the colours of the carrier it came with, as its card in the list does.
+        var handedOver = placed
+        let origin: CarrierID = placed.carrier == .dhl ? .glsDe : .dhl
+        handedOver.carrierData = CarrierData(originalCarrier: origin, originalTrackingNumber: "ORIGIN1234")
+        let listed = CarrierVisualIdentity.of(handedOver.displayedCarrier, language: .en).colors
+        XCTAssertEqual(DeliveryWidgetPictures.card(for: handedOver, localizer: localizer).surface, Array(listed[0...1]))
+        XCTAssertNotEqual(listed, CarrierVisualIdentity.of(placed.carrier, language: .en).colors)
         XCTAssertFalse(DeliveryWidgetPictures.isDrawn(card, in: folder))
         let drawn = await DeliveryWidgetPictures.draw(placed, as: card, atlas: atlas, localizer: localizer, in: folder)
         XCTAssertTrue(drawn)

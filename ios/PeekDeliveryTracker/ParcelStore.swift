@@ -1067,7 +1067,7 @@ final class ParcelStore: ObservableObject {
             DeliveryWidgetParcel(
                 id: parcel.id,
                 label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
-                carrier: CarrierCatalog.shared.info(for: parcel.carrier, language: localizer.language).displayName,
+                carrier: CarrierCatalog.shared.info(for: parcel.displayedCarrier, language: localizer.language).displayName,
                 trackingNumber: CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
                 detail: localizer.parcelDeliveryEstimate(parcel)
                     ?? localizer.text(parcel.displayStatus.key),

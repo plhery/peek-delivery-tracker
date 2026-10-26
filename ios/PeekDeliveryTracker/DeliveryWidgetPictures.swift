@@ -52,7 +52,7 @@ enum DeliveryWidgetPictures {
 
     /// A parcel's card, its pictures named after everything they show, so that a change to any of it draws them afresh.
     static func card(for parcel: Parcel, localizer: Localizer) -> DeliveryWidgetCard {
-        let identity = CarrierVisualIdentity.of(parcel.carrier, language: localizer.language)
+        let identity = CarrierVisualIdentity.of(parcel.displayedCarrier, language: localizer.language)
         let shown = [
             "\(version)", parcel.id.uuidString, identity.name, identity.family, identity.colors.joined(separator: ","),
             localizer.language.rawValue, "\(scale)", parcel.currentStage?.rawValue ?? "", parcel.carrierData?.destinationCountry ?? "",
@@ -72,7 +72,8 @@ enum DeliveryWidgetPictures {
     /// Draws a card's pictures; false when one could not be written.
     static func draw(_ parcel: Parcel, as card: DeliveryWidgetCard, atlas: WorldAtlas?, localizer: Localizer, in folder: URL) async -> Bool {
         guard (try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)) != nil else { return false }
-        let identity = CarrierVisualIdentity.of(parcel.carrier, language: localizer.language)
+        // The list's card: the carrier the parcel came with, after a handover too.
+        let identity = CarrierVisualIdentity.of(parcel.displayedCarrier, language: localizer.language)
         let placed = parcel.hasMappedPlace
         for dark in [false, true] {
             if placed, let atlas {

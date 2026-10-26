@@ -87,7 +87,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/guides</loc>
@@ -99,7 +99,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/guides</loc>
@@ -111,7 +111,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/guides</loc>
@@ -123,7 +123,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/guides</loc>
@@ -135,7 +135,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/guides</loc>
@@ -147,7 +147,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pl/guides</loc>
@@ -159,7 +159,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/guides/tracking-number-formats-by-carrier</loc>
@@ -2428,6 +2428,90 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-decathlon" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/decathlon-order-tracking" />
 <lastmod>2026-10-25</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/guides/adidas-order-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/adidas-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/adidas-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-adidas" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-adidas" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-adidas" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-adidas" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-adidas" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/adidas-order-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/guides/adidas-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/adidas-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/adidas-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-adidas" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-adidas" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-adidas" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-adidas" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-adidas" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/adidas-order-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/guides/suivi-commande-adidas</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/adidas-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/adidas-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-adidas" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-adidas" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-adidas" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-adidas" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-adidas" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/adidas-order-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/guides/tracciamento-ordine-adidas</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/adidas-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/adidas-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-adidas" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-adidas" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-adidas" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-adidas" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-adidas" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/adidas-order-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/guides/seguimiento-pedido-adidas</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/adidas-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/adidas-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-adidas" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-adidas" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-adidas" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-adidas" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-adidas" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/adidas-order-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/guides/seguimento-encomenda-adidas</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/adidas-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/adidas-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-adidas" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-adidas" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-adidas" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-adidas" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-adidas" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/adidas-order-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/guides/sledzenie-zamowienia-adidas</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/adidas-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/adidas-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-adidas" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-adidas" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-adidas" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-adidas" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-adidas" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/adidas-order-tracking" />
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/guides/how-to-find-tracking-number</loc>
@@ -5634,14 +5718,14 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/fan-courier-tracking" />
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/fan-courier-urmarire-awb" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/fan-courier-tracking" />
-<lastmod>2026-10-23</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/ro/carriers/fan-courier-urmarire-awb</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/fan-courier-tracking" />
 <xhtml:link rel="alternate" hreflang="ro" href="https://peektracker.com/ro/carriers/fan-courier-urmarire-awb" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/fan-courier-tracking" />
-<lastmod>2026-10-23</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/econt-tracking</loc>

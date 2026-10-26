@@ -4804,9 +4804,20 @@ describe('TrackingSyncService', () => {
       expect([...store.rows.values()]).toEqual(rows);
     });
 
-    it('still finds that progress gone after a newer scan in an earlier stage', async () => {
-      const { check } = await providerOnly();
+    // A destination post's pre-advice, dated after the origin's scans in transit.
+    it('keeps that progress after a newer label, without a signal or an error', async () => {
+      const { store, check } = await providerOnly();
+      const rows = structuredClone([...store.rows.values()]);
       const checked = await check(answer({ stage: 'registered', description: 'Label printed again', time: '2026-10-21T08:00:00Z' }, relabel, label));
+      expect(checked.counts).toMatchObject({ unchanged: 1, errors: 0 });
+      expect(checked.attempt).toMatchObject({ outcome: 'unchanged', anomaly_codes: [], error_type: null });
+      expect(checked.parcel).toMatchObject({ current_stage: 'in_transit', sync_status: 'ok', sync_error: null });
+      expect([...store.rows.values()]).toEqual(rows);
+    });
+
+    it('still finds that progress gone after a newer scan in no stage', async () => {
+      const { check } = await providerOnly();
+      const checked = await check(answer({ stage: 'pending', description: 'Status 42', time: '2026-10-21T08:00:00Z' }, relabel, label));
       expect(checked.attempt).toMatchObject({ outcome: 'error', anomaly_codes: ['progress_disappeared'], error_type: 'ProgressDisappeared' });
       expect(checked.parcel).toMatchObject({ current_stage: 'in_transit', sync_status: 'error' });
     });

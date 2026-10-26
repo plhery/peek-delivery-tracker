@@ -1946,10 +1946,12 @@ export class TrackingSyncService {
       const shown = new Set([...events.map((event) => String(event.provider_event_id)), ...matches.reused.values(), ...matches.skipped.values()]);
       const past = (rows: readonly JsonObject[]) => rows.filter((row) => stageRank(String(row.stage ?? '')) > stageRank(selectedStage ?? 'pending'));
       const latest = (rows: readonly JsonObject[]) => Math.max(...rows.map((row) => Date.parse(String(row.occurred_at ?? ''))).filter(Number.isFinite));
-      const listsFewer = (answered: readonly JsonObject[], progressAt: number) => answered.length > 0 && answered.every((event) => {
+      const listsFewer = (answered: readonly JsonObject[], progressAt: number, newerLabels = false) => answered.length > 0 && answered.every((event) => {
         const id = String(event.provider_event_id);
         const row = matches.reused.get(id) ?? matches.skipped.get(id) ?? (storedIds.has(id) ? id : undefined);
-        return row === undefined ? Date.parse(String(event.occurred_at ?? '')) < progressAt : storedStages.get(row) === event.stage;
+        return row === undefined
+          ? (newerLabels && event.stage === 'registered') || Date.parse(String(event.occurred_at ?? '')) < progressAt
+          : storedStages.get(row) === event.stage;
       });
       const progressAt = latest(past(stored));
       // The answering source's own rows past the selected stage, and whether its answer leaves one out.
@@ -1960,10 +1962,11 @@ export class TrackingSyncService {
       const fewerStoredScans = carrierWithoutProgress && leftOut && listsFewer(events, latest(ownRows));
       // Progress that only other sources' rows show (ParcelsApp's copies of an origin leg GOFO never
       // lists) is none the carrier takes back: the stored progress stays and the check answered, with
-      // no signal. A newer scan in an earlier stage, or a stored scan read in an earlier stage, still
-      // makes progress disappear.
+      // no signal. So does a label of its own however new (Swiss Post's pre-advice of a parcel AliExpress's
+      // scans show in transit): it announces the parcel and moves nothing back. A newer scan in no stage,
+      // or a stored scan read in an earlier stage, still makes progress disappear.
       const othersProgress = carrierWithoutProgress && ownRows.length === 0 && past(stored).length > 0
-        && listsFewer(events, progressAt);
+        && listsFewer(events, progressAt, true);
       if (fewerStoredScans || othersProgress) anomalies = anomalies.filter((code) => code !== 'progress_disappeared');
       // A delivery partner that falls behind rows of its own and no longer lists them withdraws scans the
       // same way (Posti back at its posting scan without its own scan in transit, or a summary back at

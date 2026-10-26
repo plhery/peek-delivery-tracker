@@ -1388,6 +1388,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "post-luxembourg",
+      "catalog": "post-luxembourg",
+      "slug": "post-luxembourg-sendungsverfolgung",
+      "title": "POST Luxembourg Sendungsverfolgung: PackUp, Abholung, Zoll",
+      "name": "POST Luxembourg",
+      "color": "#008736"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-sendungsverfolgung",
@@ -2727,6 +2735,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "nl": [
+    {
+      "id": "colis-prive",
+      "catalog": "colis-prive",
+      "slug": "colis-prive-pakket-volgen",
+      "title": "Colis Privé pakket volgen: statussen, afhaalpunt en contact",
+      "name": "Colis Privé",
+      "color": "#aa78ff"
+    },
     {
       "id": "mondial-relay",
       "catalog": "mondial-relay",

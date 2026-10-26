@@ -32,7 +32,7 @@ No number from the shop? See [where to find a tracking number](guide:find-tracki
 
 ## What POST Luxembourg tracking statuses mean
 
-POST's statuses are the [international postal (UPU) event names](guide:tracking-statuses). The English site shows them in English; the French, German and Luxembourgish versions show French or German ones. A scan carries a day but no time, sometimes with the post office or centre that recorded it. In the order an item meets them:
+POST's statuses are the [international postal (UPU) event names](guide:tracking-statuses), given here in English, as Peek shows them. A scan carries a day but no time, sometimes with the post office or centre that recorded it. In the order an item meets them:
 
 | POST Luxembourg's status | What it means for you |
 | --- | --- |
@@ -45,7 +45,7 @@ POST's statuses are the [international postal (UPU) event names](guide:tracking-
 | `Item out for delivery` | With the postal worker today. |
 | `Final delivery` | Delivered. |
 
-The two "office of exchange" lines aren't local post offices: they're the points where one country's post hands mail to another's, and where imports are cleared. On a parcel coming to you, the "inward" lines are POST Luxembourg's side. On an item you sent abroad, they're relayed from the destination post. `Final delivery` just means delivered.
+The "office of exchange" lines aren't local post offices: they're the points where one country's post hands mail to another's. On a parcel coming to you, the "inward" lines are POST Luxembourg's side. On an item you sent abroad, they're relayed from the destination post. `Final delivery` just means delivered.
 
 ## POST Luxembourg delivery, notices and PackUp
 
@@ -111,11 +111,12 @@ No. Only registered mail, parcels and items with a FollowMe label have a trackin
 Yes, if it has a tracking number. For an item you sent abroad, POST's tracking also shows steps the destination post reports, such as `Arrival at inward office of exchange`.
 
 :::sources
-- [POST Luxembourg: Track and Trace](https://www.post.lu/en/particuliers/colis-courrier/track-and-trace) – tracking page, language versions
+- [POST Luxembourg: Track and Trace](https://www.post.lu/en/particuliers/colis-courrier/track-and-trace) – tracking page
 - [POST Luxembourg: How can I track my items? (parcels)](https://www.post.lu/en/particuliers/support/colis/colis/securiser-et-suivre/suivre-mes-envois-colis) – trackandtrace.lu, RR, CP and LX shapes, phone
 - [POST Luxembourg: What is Track and Trace?](https://www.post.lu/en/particuliers/support/colis/colis/securiser-et-suivre/track-and-trace-cest-quoi) – full number on the dispatch slip, trackable items
 - [POST Luxembourg: How can I track my items? (mail)](https://www.post.lu/en/particuliers/support/courrier/courrier/suivre/comment-suivre-mes-envois) – tracking only for registered mail and parcels
-- [POST Luxembourg: What is FollowMe?](https://www.post.lu/en/particuliers/support/courrier/courrier/suivre/followme-c-est-quoi) – FollowMe, 2 kg
+- [POST Luxembourg: What is FollowMe?](https://www.post.lu/en/particuliers/support/courrier/courrier/suivre/followme-c-est-quoi) – FollowMe, no signature
+- [POST Luxembourg: FollowMe, pour quels envois ?](https://www.post.lu/fr/particuliers/support/courrier/courrier/suivre/followme-pour-quels-envois) – FollowMe up to 2 kg
 - [POST Luxembourg: Track and Trace service](https://api.post.lu/services/trackandtrace-api/items) – status wordings, day-only scans, offices
 - [POST Luxembourg: When might I be notified?](https://www.post.lu/en/particuliers/support/courrier/courrier/absence/quand-puis-je-etre-avise) – delivery notice
 - [POST Luxembourg: I received a delivery notice while I was out](https://www.post.lu/en/particuliers/support/courrier/courrier/absence/avise-dans-ma-boite-aux-lettres-pendant-mes-vacances) – 15 days at a sales outlet

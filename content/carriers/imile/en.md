@@ -3,7 +3,7 @@ title: iMile tracking: numbers, statuses and who delivers
 description: Track an iMile parcel: what iMile numbers look like, what its English scans mean, who delivers in your country and how to reach iMile when it stalls.
 slug: imile-tracking
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 iMile is an e-commerce delivery company founded in Dubai in 2017. It carries parcels across borders, including from China, clears customs and delivers the last mile with its own couriers in some countries. Track the number on iMile's own page, [imile.com/track](https://www.imile.com/en/track), or in the box above. The number comes from the shop, in your order's shipping details.
@@ -96,7 +96,7 @@ For the order itself, the shop is quicker. It booked iMile and can open a case w
 
 Peek reads iMile's tracker in English. It shows the status, the history with the centre or town of each scan on a map, and the destination country, with scan times on that country's clock. For a parcel Cainiao carries out of China for iMile, Peek adds Cainiao's earlier scans (pickup, sorting, export, flight, import) in front of iMile's history.
 
-Peek leaves out iMile's expected delivery date, proof of delivery, who signed, contacts and payment details, and drops the driver's phone from scans. Labels such as "Out for delivery" and "Delivery attempted" are Peek's own; the scan lines appear as iMile wrote them. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of "All tracking updates", "Important only" or "Delivery day only". It can't contact iMile or the shop for you.
+Peek leaves out iMile's expected delivery date, scheduled flight, proof of delivery, who signed, contacts and payment details, and drops the driver's phone from scans. Labels such as "Out for delivery" and "Delivery attempted" are Peek's own; the scan lines appear as iMile wrote them. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of "All tracking updates", "Important only" or "Delivery day only". It can't contact iMile or the shop for you.
 
 ## Questions about iMile tracking
 

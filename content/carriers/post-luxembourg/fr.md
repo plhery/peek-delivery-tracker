@@ -6,11 +6,11 @@ published: 2026-10-26
 updated: 2026-10-26
 ---
 
-POST Luxembourg est la poste nationale du Grand-Duché. Pour suivre un colis ou un recommandé, saisissez son numéro dans le [Track and Trace de POST](https://www.post.lu/fr/particuliers/colis-courrier/track-and-trace) (ou sur www.trackandtrace.lu), dans l'application POST Colis & Courrier ou dans le champ ci-dessus. Le numéro vous est donné par l'expéditeur : il figure sur le bordereau d'expédition.
+POST Luxembourg est la poste nationale du Grand-Duché. Pour suivre un colis ou un recommandé, saisis son numéro dans le [Track and Trace de POST](https://www.post.lu/fr/particuliers/colis-courrier/track-and-trace) (ou sur www.trackandtrace.lu), dans l'application POST Colis & Courrier ou dans le champ ci-dessus. C'est l'expéditeur qui te donne le numéro : il figure sur le bordereau d'expédition.
 
 ## Numéro de suivi POST Luxembourg
 
-Un numéro POST compte 13 caractères : deux lettres, neuf chiffres et `LU`. Saisissez-le en entier, lettres comprises. Les formes que donne POST (numéros inventés) :
+Un numéro POST compte 13 caractères : deux lettres, neuf chiffres et `LU`. Saisis-le en entier, lettres comprises. Les formes que donne POST (numéros inventés) :
 
 | Numéro | Ce que c'est |
 | --- | --- |
@@ -24,7 +24,7 @@ Seuls ces envois se suivent : une lettre simple n'a pas de numéro. Le neuvième
 
 POST désigne chaque étape par un code de l'Union postale universelle et la décrit dans la langue demandée ; Peek demande l'anglais. Chaque étape porte une date sans heure, parfois avec le bureau ou le centre qui l'a enregistrée. Dans l'ordre où un colis les rencontre :
 
-| POST écrit | Ce que cela signifie pour vous |
+| POST écrit | Ce que ça veut dire pour toi |
 | --- | --- |
 | `Entry into the postal network` | L'envoi a été déposé à la poste. |
 | `Departure from outward office of exchange` | Il quitte le pays d'expédition. |
@@ -39,40 +39,40 @@ Les « offices of exchange » ne sont pas des bureaux de quartier, mais les poin
 
 ## Livraison POST Luxembourg : avis de passage et retrait
 
-Si vous êtes absent quand le facteur sonne avec un recommandé, un colis ou un envoi contre signature, il dépose un avis de passage dans votre boîte aux lettres. L'envoi vous attend alors dans un point de vente : 15 jours pour un recommandé ou un colis avec suivi, 7 jours pour une signification judiciaire.
+Si tu es absent quand le facteur sonne avec un recommandé, un colis ou un envoi contre signature, il dépose un avis de passage dans ta boîte aux lettres. L'envoi t'attend alors dans un point de vente : 15 jours pour un recommandé ou un colis avec suivi, 7 jours pour une signification judiciaire.
 
-Quoi présenter au guichet, qui peut retirer l'envoi à votre place, ce qu'il devient s'il n'est pas retiré : les pages de POST ne le disent pas : renseignez-vous au 8002 8004. Voir aussi [colis non retiré](guide:uncollected-parcel).
+Quoi présenter au guichet, qui peut retirer l'envoi à ta place, ce qu'il devient s'il n'est pas retiré : les pages de POST ne le disent pas : renseigne-toi au 8002 8004. Voir aussi [colis non retiré](guide:uncollected-parcel).
 
 ## PackUp : stations, PackUp Points et livraison à domicile
 
-PackUp, service gratuit de POST, vous permet de recevoir vos colis au Luxembourg même en votre absence, chez vous ou dans plus de 170 points de retrait. Inscrivez-vous sur MyPost (www.mypost.lu) ou dans l'app POST Colis & Courrier, puis indiquez votre adresse PackUp lors de vos commandes. POST vous prévient par e-mail une fois le colis livré.
+PackUp, service gratuit de POST, te permet de recevoir tes colis au Luxembourg même quand tu n'es pas là, chez toi ou dans plus de 170 points de retrait. Inscris-toi sur MyPost (www.mypost.lu) ou dans l'app POST Colis & Courrier, puis indique ton adresse PackUp quand tu commandes. POST te prévient par e-mail une fois le colis livré.
 
-- **Station PackUp 24/24 :** des casiers, la plupart ouverts jour et nuit (les stations PackUp Indoor ont des horaires variables). Les codes PIN du casier arrivent par e-mail ou notification push ; suivez ensuite l'écran. Le colis y reste 7 jours.
-- **PackUp Point :** un bureau de poste ou un partenaire (station-service, commerce). Présentez le numéro de colis et le numéro PackUp de la notification, avec une pièce d'identité officielle. Le colis y est gardé 15 jours au maximum, puis retourné à l'expéditeur.
+- **Station PackUp 24/24 :** des casiers, la plupart ouverts jour et nuit (les stations PackUp Indoor ont des horaires variables). Les codes PIN du casier arrivent par e-mail ou notification push ; suis ensuite les indications à l'écran. Le colis y reste 7 jours.
+- **PackUp Point :** un bureau de poste ou un partenaire (station-service, commerce). Présente le numéro de colis et le numéro PackUp de la notification, avec une pièce d'identité officielle. Le colis y est gardé 15 jours au maximum, puis retourné à l'expéditeur.
 - **PackUp Home :** le livreur dépose le colis à l'endroit choisi : porte d'entrée, local à poubelle, terrasse, abri de jardin, boîte à colis, poubelle bleue, garage ou carport, voisin. Pas pour les recommandés.
 - **PackUp Import :** une adresse en France ou en Allemagne pour les boutiques qui ne livrent pas au Luxembourg (6,45 € TTC par colis).
 
-Pour trouver une station, utilisez l'outil « Trouver un point de vente » en cochant « Station PackUp ». PackUp ne fonctionne que si la boutique passe par POST Courrier ou par un transporteur qui lui remet ses colis. Certains transporteurs ne livrent pas en station : ils passent chez vous et, en votre absence, laissent un avis ; allez au point de vente indiqué au verso ou, pour certains, contactez le transporteur. Si la station est pleine, le colis est transféré ailleurs et vous en êtes informé. POST peut aussi aviser un colis trop lourd, ou un colis avec des droits de douane ou des taxes à payer si vous étiez absent. Les colis avec droits de douane ou contre remboursement sont admis en PackUp Point, pas en station 24/24.
+Pour trouver une station, utilise l'outil « Trouver un point de vente » en cochant « Station PackUp ». PackUp ne fonctionne que si la boutique passe par POST Courrier ou par un transporteur qui lui remet ses colis. Certains transporteurs ne livrent pas en station : ils passent chez toi et, si tu n'es pas là, laissent un avis ; va au point de vente indiqué au verso ou, pour certains, contacte le transporteur. Si la station est pleine, le colis est transféré ailleurs et tu en es informé. POST peut aussi aviser un colis trop lourd, ou un colis avec des droits de douane ou des taxes à payer si tu étais absent. Les colis avec droits de douane ou contre remboursement sont admis en PackUp Point, pas en station 24/24.
 
 **Changer la livraison.** Le lieu se choisit à l'avance, sur MyPost ou dans l'app ; POST ne décrit pas de report d'un colis déjà avisé. Voir aussi [changer l'adresse de livraison](guide:change-delivery-address).
 
 ## Retourner un colis avec POST Luxembourg
 
-Demandez le retour au site marchand : vous recevez une étiquette prépayée. Cachez les anciennes étiquettes, collez la nouvelle et déposez le colis dans le délai du commerçant, dans un bureau de poste, un Point POST ou une station PackUp 24/24. En station, c'est gratuit et sans inscription, pour un colis avec étiquette Cycleon, ERS ou Amazon retour, de 750 x 440 x 610 mm et 30 kg au plus ; les autres retours passent au guichet.
+Demande le retour au site marchand : tu reçois une étiquette prépayée. Cache les anciennes étiquettes, colle la nouvelle et dépose le colis dans le délai du commerçant, dans un bureau de poste, un Point POST ou une station PackUp 24/24. En station, c'est gratuit et sans inscription, pour un colis avec étiquette Cycleon, ERS ou Amazon retour, de 750 x 440 x 610 mm et 30 kg au plus ; les autres retours passent au guichet.
 
 ## Colis POST Luxembourg en retard, perdu ou abîmé
 
 **Délais.** Selon POST, un colis met en général 2 à 3 jours au Luxembourg ; à l'international, aucun délai n'est garanti, sauf en express avec [DHL](carrier:dhl-express). Suivi bloqué : voir [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
 
-**Pas livré.** Selon le CEC Luxembourg, le droit européen impose de livrer une commande en ligne sous 30 jours, sauf autre date convenue ; passé ce délai, mettez le vendeur en demeure, par écrit, de livrer ou, à défaut, de vous rembourser.
+**Pas livré.** Selon le CEC Luxembourg, le droit européen impose de livrer une commande en ligne sous 30 jours, sauf autre date convenue ; passé ce délai, mets le vendeur en demeure, par écrit, de livrer ou, à défaut, de te rembourser.
 
-**Perdu ou abîmé.** Les colis POST comprennent une assurance de base : l'indemnité couvre le dommage réellement causé, dans une limite de 50 à 530 € selon le pays de destination ; l'expéditeur peut ajouter SecurPack (jusqu'à 10 000 €). Les pages de POST ne disent ni qui réclame ni dans quel délai : commencez par la boutique, qui a confié le colis à la poste. Voir [colis perdu](guide:lost-parcel) et [colis abîmé](guide:damaged-parcel).
+**Perdu ou abîmé.** Les colis POST comprennent une assurance de base : l'indemnité couvre le dommage réellement causé, dans une limite de 50 à 530 € selon le pays de destination ; l'expéditeur peut ajouter SecurPack (jusqu'à 10 000 €). Les pages de POST ne disent ni qui réclame ni dans quel délai : commence par la boutique, qui a confié le colis à la poste. Voir [colis perdu](guide:lost-parcel) et [colis abîmé](guide:damaged-parcel).
 
-**Livré, mais introuvable.** Avec PackUp Home, regardez à l'endroit choisi et dans la boîte aux lettres, puis lisez [colis livré mais non reçu](guide:delivered-not-received).
+**Livré, mais introuvable.** Avec PackUp Home, regarde à l'endroit choisi et dans ta boîte aux lettres, puis lis [colis livré mais non reçu](guide:delivered-not-received).
 
 ## Douane : colis venus de l'extérieur de l'UE
 
-Tout colis de marchandises venant d'un pays hors UE fait l'objet de formalités douanières. Selon le cas, vous paierez à l'arrivée :
+Tout colis de marchandises venant d'un pays hors UE fait l'objet de formalités douanières. Selon le cas, tu paieras à l'arrivée :
 
 - la TVA luxembourgeoise (17 %) ;
 - un droit de douane : depuis le 1er juillet 2026, 3 € par type d'article pour un achat en ligne de 150 € au plus, même si la TVA a été payée à la commande ;
@@ -81,27 +81,27 @@ Tout colis de marchandises venant d'un pays hors UE fait l'objet de formalités 
 
 Exemple de POST : colis de 20 €, port compris, trois types d'articles, TVA non payée à la commande : 3,40 € de TVA, 6 € de frais et 9 € de droits, soit 18,40 €.
 
-Vous payez à la livraison ou au retrait en point de vente POST, sauf la TVA déjà encaissée à la commande par un vendeur inscrit au guichet unique IOSS. Un cadeau d'un particulier, sans caractère commercial et de 45 € au plus, est en franchise, selon l'Administration des douanes et accises ; au-delà, la TVA porte sur toute la valeur.
+Tu paies à la livraison ou au retrait en point de vente POST, sauf la TVA déjà encaissée à la commande par un vendeur inscrit au guichet unique IOSS. Un cadeau d'un particulier, sans caractère commercial et de 45 € au plus, est en franchise, selon l'Administration des douanes et accises ; au-delà, la TVA porte sur toute la valeur.
 
 À partir du 1er novembre 2026, l'UE appliquera en plus des frais de traitement de l'Union de 2 €, annonce la Commission européenne ; la page de POST n'en parle pas encore. Plus de détails dans [colis bloqué en douane](guide:customs).
 
-> POST encaisse ce qui reste dû à la livraison ou au retrait : un SMS ou un e-mail qui demande de payer par un lien pour débloquer un colis ne correspond pas à ce que décrit POST. Le CEC Luxembourg met en garde contre ces faux messages au nom d'entreprises connues : ne cliquez pas, vérifiez le numéro vous-même sur le Track and Trace. Voir [les SMS de livraison frauduleux](guide:delivery-scam-texts).
+> POST encaisse ce qui reste dû à la livraison ou au retrait : un SMS ou un e-mail qui demande de payer par un lien pour débloquer un colis ne correspond pas à ce que décrit POST. Le CEC Luxembourg met en garde contre ces faux messages au nom d'entreprises connues : ne clique pas, vérifie le numéro toi-même sur le Track and Trace. Voir [les SMS de livraison frauduleux](guide:delivery-scam-texts).
 
 ## Contact POST Luxembourg : téléphone et réclamation
 
 Relevé sur les pages françaises de POST le 26 octobre 2026 :
 
 - **Téléphone (courrier et colis) :** 8002 8004, gratuit depuis le Luxembourg, ou +352 2424 8004 depuis l'étranger, du lundi au vendredi de 8 h à 17 h selon la page Nous contacter. Certaines pages d'aide affichent « 24h/24 et 7j/7 » pour ces numéros, horaires que la page Nous contacter réserve au service Telecom.
-- **Formulaire :** sur la page [Nous contacter](https://www.post.lu/fr/particuliers/infos-aide/contactez-nous), avec votre numéro d'envoi.
+- **Formulaire :** sur la page [Nous contacter](https://www.post.lu/fr/particuliers/infos-aide/contactez-nous), avec ton numéro d'envoi.
 - **Sur place :** dans un bureau de poste (outil « Trouver un point de vente »).
 
-**Réclamation.** Écrivez d'abord à POST. Pour un litige contractuel avec POST, si votre réclamation écrite reste sans réponse après un délai raisonnable ou ne vous satisfait pas, l'Institut luxembourgeois de régulation (ILR) propose une médiation gratuite, conclue en principe sous 90 jours. Contre une boutique d'un autre pays de l'UE, le Centre Européen des Consommateurs Luxembourg vous aide gratuitement.
+**Réclamation.** Écris d'abord à POST. Pour un litige contractuel avec POST, si ta réclamation écrite reste sans réponse après un délai raisonnable ou ne te satisfait pas, l'Institut luxembourgeois de régulation (ILR) propose une médiation gratuite, conclue en principe sous 90 jours. Contre une boutique d'un autre pays de l'UE, le Centre Européen des Consommateurs Luxembourg t'aide gratuitement.
 
 ## Suivre un colis POST Luxembourg avec Peek
 
-Pour un numéro en `LU` dont la clé de contrôle est valide, [Peek](/) demande à POST Luxembourg et à [Chronopost](carrier:chronopost) s'ils le connaissent, et affiche « POST Luxembourg a ce colis. » quand POST le trouve ; sinon, « Pas encore trouvé chez … Peek continuera de vérifier après l'ajout. » Avec une clé fausse, POST n'est pas interrogé : vérifiez le numéro. Un lien Track and Trace de post.lu ou de trackandtrace.lu qui contient le numéro est attribué à POST Luxembourg.
+Pour un numéro en `LU` dont la clé de contrôle est valide, [Peek](/) demande à POST Luxembourg et à [Chronopost](carrier:chronopost) s'ils le connaissent, et affiche « POST Luxembourg a ce colis. » quand POST le trouve ; sinon, « Pas encore trouvé chez … Peek continuera de vérifier après l'ajout. » Avec une clé fausse, POST n'est pas interrogé : vérifie le numéro. Un lien Track and Trace de post.lu ou de trackandtrace.lu qui contient le numéro est attribué à POST Luxembourg.
 
-Un envoi venu de l'étranger est d'abord suivi chez la poste d'origine. Peek interroge POST quand celle-ci indique le Luxembourg comme destination, ou n'en indique aucune (voire ne répond pas) et que Peek vous situe au Luxembourg, puis passe à POST dès que POST montre une étape au moins aussi récente. Vous pouvez aussi choisir « POST Luxembourg » avec « Changer ».
+Un envoi venu de l'étranger est d'abord suivi chez la poste d'origine. Peek interroge POST quand celle-ci indique le Luxembourg comme destination, ou n'en indique aucune (voire ne répond pas) et que Peek te situe au Luxembourg, puis passe à POST dès que POST montre une étape au moins aussi récente. Tu peux aussi choisir « POST Luxembourg » avec « Changer ».
 
 Les étapes s'affichent dans l'ordre de POST et leurs libellés restent en anglais ; `Item out for delivery` fait passer le colis à « En livraison », `Final delivery` à « Livré ». Peek n'affiche ni date de livraison prévue, ni poids, ni point de retrait. En journée, Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison ; la nuit, toutes les heures. Notifications au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 

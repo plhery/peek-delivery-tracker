@@ -3,10 +3,10 @@ title: Colis Privé tracking: French statuses and what to do
 description: Track a Colis Privé parcel in France, Belgium or Luxembourg: where the 12-character number is, why it needs your postcode and what its French statuses mean.
 slug: colis-prive-tracking
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-26
 ---
 
-Colis Privé is a French parcel carrier for online shops, delivering in France, Belgium and Luxembourg to homes, pickup points and, in France, lockers. Track a parcel with its 12-character number and the delivery postcode on [colisprive.fr](https://colisprive.fr/en/) for France or [colisprive.be](https://colisprive.be/en/) for Belgium and Luxembourg. The number comes in the shop's shipping email or Colis Privé's notifications.
+Colis Privé is a French parcel carrier for online shops, delivering in France, Belgium and Luxembourg to homes, pickup points and, in France, lockers. Track a parcel with its 12-character number and the delivery postcode on [colisprive.fr](https://colisprive.fr/en/) for France or [colisprive.be](https://colisprive.be/en/) for Belgium and Luxembourg. The number comes in the shop's shipping email or Colis Privé's notifications. On 16 October 2026 Colis Privé announced that it and [Paack](carrier:paack) are joining under one brand, Paack, to be rolled out gradually from January 2027; until then its services, delivery and tracking included, carry on as before.
 
 ## Colis Privé tracking number: where to find it
 
@@ -24,11 +24,10 @@ The tracking also asks for the delivery postcode; a number it doesn't recognise 
 
 ## Colis Privé tracking statuses: what the French words mean
 
-Peek reads Colis Privé's tracking in French, one dated sentence per step; its English help pages use labels such as `in transit` instead ([what those mean](guide:tracking-statuses)). In the order a parcel meets them:
+Peek reads Colis Privé's tracking in French, one dated sentence per step; its English help pages use labels such as `in transit` instead ([what those mean](guide:tracking-statuses)). The lines Peek recognises, in the order a parcel meets them:
 
 | Colis Privé's words | What it means for you |
 | --- | --- |
-| `Colis attendu par Colis Privé` | Colis Privé doesn't have it yet. |
 | `pris en charge` | Colis Privé has your parcel. |
 | `arrivé sur notre agence` | It's at the local depot. |
 | `rendez-vous est confirmé` | Delivery day booked; the date ends the line. |
@@ -39,7 +38,7 @@ Peek reads Colis Privé's tracking in French, one dated sentence per step; its E
 | `incident` | A problem Colis Privé is checking. |
 | `retourné à l'expéditeur` | It has been returned to the shop. |
 
-`Colis attendu par Colis Privé` (`Package awaiting Colis Privé` in the English help) means Colis Privé hasn't received it from the sender yet: the shop still has the parcel or, the Belgian site adds, it's in international transport or customs. Ask the shop. `pris en charge` sounds like "taken care of" but only means Colis Privé has it. `va être prochainement déposé` announces a pickup-point drop on the date given, and `subi un retard` means a delay.
+Colis Privé's help also names `Colis attendu par Colis Privé` (`Package awaiting Colis Privé` in the English help), a line Peek doesn't sort into a step. It means Colis Privé hasn't received the parcel from the sender yet: the shop still has it or, the Belgian site adds, it's in international transport or customs. Ask the shop. `pris en charge` sounds like "taken care of" but only means Colis Privé has it. `va être prochainement déposé` announces a pickup-point drop on the date given, and `subi un retard` means a delay.
 
 ## Colis Privé delivery hours, missed deliveries and parcel shops
 
@@ -64,7 +63,7 @@ Nothing moving for days? See [why tracking stops updating](guide:tracking-not-up
 As listed on 9 October 2026:
 
 - **France:** 0 806 000 250 (free service plus the price of a call), Monday to Friday 9am to 7pm and Saturday 9am to 1pm, per the French page. There's no email address; claims go through the tracking page.
-- **Belgium and Luxembourg:** no incoming phone line. Email suividecolis@colisprive.com with your name, postcode and parcel number; replies take 4 to 7 working days.
+- **Belgium and Luxembourg:** no incoming phone line. colisprive.be gives two email addresses: suividecolis@colisprive.com on its English contact page, opvolgenvanpakketten@colisprive.com on its Dutch pages. Send your name, postcode and parcel number; email claims can take 4 to 7 days.
 
 > Colis Privé says it never asks you to pay to track a parcel, to give bank details by email or text or to call a premium-rate number. In France, you can forward a suspicious text to 33700.
 
@@ -72,7 +71,7 @@ As listed on 9 October 2026:
 
 [Peek](/) needs the 12-character number and the delivery postcode. Type the number and choose Colis Privé as the carrier: a field appears for the postcode, five digits in France, four in Belgium, or L and four digits in Luxembourg. Or type the number followed by its postcode: `AB1234567890 75001` (France), `AB1234567890 B1000` (Belgium) or `AB1234567890 L1234` (Luxembourg), all invented. Keep the B or L, and Peek finds Colis Privé by itself. Links from colisprive.com or colisprive.fr can be pasted too.
 
-It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps only or delivery day only. It shows the status, the history in French and the expected delivery, and leaves out the recipient's name and address. Peek can't file a claim or contact Colis Privé for you.
+It checks every 10 minutes by day and hourly overnight. Colis Privé's scans carry a date but no time, so the 2-minute checks of a parcel out for delivery run only on the day of the round. Peek can notify you of every scan, important steps only or delivery day only. It shows the status, the history in French and the expected delivery, and leaves out the recipient's name and address. Peek can't file a claim or contact Colis Privé for you.
 
 ## Questions about Colis Privé tracking
 
@@ -105,7 +104,9 @@ No. Colis Privé BeLux has no incoming line and takes questions by email; 0 806 
 - [Colis Privé BeLux: Returned to the sender](https://colisprive.be/en/aide/my-package-was-returned-to-the-sender-without-my-authorization/) – 8 days
 - [Colis Privé BeLux: My package is delayed](https://colisprive.be/en/aide/delay-in-delivery-of-my-package/) – delays
 - [Colis Privé BeLux: Submit a claim](https://colisprive.be/en/aide/the-file-a-complaint-button-does-not-appear/) – one month
-- [Colis Privé BeLux: Contact customer service](https://colisprive.be/en/aide/i-didnt-find-an-answer-to-my-question-and-would-like-to-contact-colis-prive-customer-service-directly/) – email
+- [Colis Privé BeLux: Contact customer service](https://colisprive.be/en/aide/i-didnt-find-an-answer-to-my-question-and-would-like-to-contact-colis-prive-customer-service-directly/) – email, 4 to 7 days
+- [Colis Privé BeLux: Klantendienst](https://colisprive.be/nl/aide/ik-heb-geen-antwoord-op-mijn-vraag-gevonden-en-wil-rechtstreeks-contact-opnemen-met-de-klantendienst-van-colis-prive/) – Dutch pages' email
+- [Colis Privé BeLux: Colis Privé en Paack verenigen zich onder één merk](https://colisprive.be/nl/colis-prive-en-paack-verenigen-zich-onder-een-merk-paack/) – Paack brand from January 2027
 - [Colis Privé: Reprogrammer une livraison](https://colisprive.fr/reprogrammer-une-livraison/) – noon to 9pm
 - [Colis Privé: Déclaré livré mais pas reçu](https://colisprive.fr/aide/mon-colis-est-declare-livre-alors-que-je-ne-lai-pas-recu/) – checks, 48 working hours
 - [Colis Privé: Service Client France](https://colisprive.fr/aide/comment-contacter-le-service-client-colis-prive/) – phone

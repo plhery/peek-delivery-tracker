@@ -3,7 +3,7 @@ title: Seguimiento iMile: números, estados y quién reparte
 description: Sigue tu paquete de iMile en España: cómo es el número, qué significan sus estados en inglés, quién lo reparte y cómo contactar con iMile si se atasca.
 slug: imile-seguimiento
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 iMile es una empresa de reparto para el comercio electrónico, fundada en Dubái en 2017. Lleva paquetes de un país a otro, por ejemplo desde China, se encarga del despacho de aduanas y en España tiene su propia sociedad, iMile Logistics & Transportation, S.L., con sede en Madrid. Sigue el número en la página de seguimiento de iMile, [imile.com/track](https://www.imile.com/en/track), o en el recuadro de arriba. El número te lo da la tienda, en los datos de envío del pedido.
@@ -90,7 +90,7 @@ Para el pedido en sí, la tienda suele ser más rápida: contrató a iMile y pue
 
 Peek consulta a iMile en inglés. Muestra el estado, el historial con el centro o la ciudad de cada escaneo en un mapa y el país de destino, con las horas de ese país. Si Cainiao saca el paquete de China para iMile, Peek añade delante los escaneos anteriores de Cainiao: recogida, clasificación, exportación, vuelo e importación.
 
-Peek no muestra la fecha prevista de iMile, la prueba de entrega, quién firmó, los contactos ni los datos de pago, y quita de los escaneos el teléfono del repartidor. Estados como «En reparto» o «Intento de entrega» son de Peek; las líneas del historial salen tal como las escribe iMile. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puede avisarte con «Todas las novedades», «Solo importantes» o «Solo el día de entrega». No puede contactar con iMile ni con la tienda por ti.
+Peek no muestra la fecha prevista de iMile, el vuelo programado, la prueba de entrega, quién firmó, los contactos ni los datos de pago, y quita de los escaneos el teléfono del repartidor. Estados como «En reparto» o «Intento de entrega» son de Peek; las líneas del historial salen tal como las escribe iMile. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puede avisarte con «Todas las novedades», «Solo importantes» o «Solo el día de entrega». No puede contactar con iMile ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de iMile
 

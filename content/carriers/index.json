@@ -1,7 +1,7 @@
 [
   { "id": "quickpac", "catalog": "quickpac", "name": "Quickpac", "languages": ["en", "de", "fr", "it"] },
   { "id": "planzer", "catalog": "planzer", "name": "Planzer", "languages": ["en", "de", "fr", "it"] },
-  { "id": "colis-prive", "catalog": "colis-prive", "name": "Colis Privé", "languages": ["en", "fr"] },
+  { "id": "colis-prive", "catalog": "colis-prive", "name": "Colis Privé", "languages": ["en", "fr", "nl"] },
   { "id": "brt", "catalog": "brt", "name": "BRT", "languages": ["en", "it"] },
   { "id": "correos-express", "catalog": "correos-express", "name": "Correos Express", "languages": ["en", "es", "pt"] },
   { "id": "nacex", "catalog": "nacex", "name": "NACEX", "languages": ["en", "es", "pt"] },
@@ -99,7 +99,7 @@
   { "id": "elta", "catalog": "elta", "name": "ELTA Hellenic Post", "languages": ["en", "el"] },
   { "id": "geniki-taxydromiki", "catalog": "geniki-taxydromiki", "name": "Geniki Taxydromiki", "languages": ["en", "el"] },
   { "id": "cyprus-post", "catalog": "cyprus-post", "name": "Cyprus Post", "languages": ["en", "el"] },
-  { "id": "post-luxembourg", "catalog": "post-luxembourg", "name": "POST Luxembourg", "languages": ["en", "fr"] },
+  { "id": "post-luxembourg", "catalog": "post-luxembourg", "name": "POST Luxembourg", "languages": ["en", "fr", "de"] },
   { "id": "maltapost", "catalog": "maltapost", "name": "MaltaPost", "languages": ["en"] },
   { "id": "whistl", "catalog": "whistl", "name": "Whistl", "languages": ["en"] },
   { "id": "xdp", "catalog": "xdp", "name": "XDP", "languages": ["en"] },

@@ -147,8 +147,8 @@ Tu peux, mais aucune des règles ci-dessus n'en fait une condition pour être re
 - [La Poste : Garanties et indemnisations Colissimo](https://aide.laposte.fr/contenu/quelles-sont-les-garanties-et-indemnisations-pour-un-envoi-avec-colissimo) – 23 € par kilo, expéditeur seul
 - [Chronopost : Colis indiqué livré mais non reçu (copie archivée)](https://web.archive.org/web/20251014094206/https://www.chronopost.fr/fr/faq/destinataire/je-nai-pas-recu-mon-colis-qui-est-indique-livre) – lieu sûr, Pickup Pass, Léonard
 - [Colis Privé : Colis déclaré livré mais non reçu](https://colisprive.fr/aide/mon-colis-est-declare-livre-alors-que-je-ne-lai-pas-recu/) – lieux de remise, réclamation
-- [Mondial Relay : Mon colis n'est pas au Point Relais (copie archivée)](https://web.archive.org/web/20251207050228/https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-colis-n-est-pas-au-point-relais-que-dois-je-faire/) – recherche à ton nom
-- [Mondial Relay : Colis perdu (copie archivée)](https://web.archive.org/web/20251217061038/https://www.mondialrelay.fr/faq/recevoir-un-colis/que-faire-si-mon-colis-est-perdu/) – contacter l'expéditeur
+- [Mondial Relay : Mon colis n'est pas au Point Relais](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-colis-n-est-pas-au-point-relais-que-dois-je-faire/) – recherche à ton nom
+- [Mondial Relay : Colis perdu](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-faire-si-mon-colis-est-perdu/) – contacter l'expéditeur
 - [bpost : Colis livré mais rien reçu](https://www.bpost.be/fr/faq/je-recois-un-message-indiquant-que-mon-colis-ete-livre-mais-je-nai-rien-recu-que-faire) – boîte aux lettres, préférences, photo
 - [bpost : Pourquoi contacter l'expéditeur ?](https://www.bpost.be/fr/faq/pourquoi-dois-je-contacter-lexpediteur-si-mon-colis-na-pas-ete-livre) – expéditeur seul, confirmation
 - [ombudsman poste : Colis perdu ou non reçu](https://www.ombudsmanposte.be/fr/infos/actualites/colis-perdu-ou-non-recu-en-belgique-voici-comment-reagir/) – vendeur responsable, autorisation de dépôt

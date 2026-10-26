@@ -133,7 +133,7 @@ Si le vendeur ne fait rien, ta banque ou PayPal peuvent aider. La rétrofacturat
 - [La Poste : Garanties et indemnisations Colissimo](https://aide.laposte.fr/contenu/quelles-sont-les-garanties-et-indemnisations-pour-un-envoi-avec-colissimo) – 23 € par kilo, expéditeur seul
 - [La Poste : CGV Courrier-Colis](https://www.laposte.fr/ecom/occ/smartedit/medias/sys_master/pdf/hfb/ha1/31823066595358/CGV_COURRIER_COLIS_07-07-2026/CGV-COURRIER-COLIS-07-07-2026.pdf) – 1 an, recours, Médiateur
 - [Chronopost : Colis perdu ou arrivé endommagé (copie archivée)](https://web.archive.org/web/20250114/https://www.chronopost.fr/fr/faq/destinataire/que-faire-si-mon-colis-est-perdu-ou-arrive-endommage) – réserves sur le bon d'émargement
-- [Mondial Relay : Mon colis est abîmé (copie archivée)](https://web.archive.org/web/20251219/https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-colis-est-abime-que-faire/) – refus au Point Relais, réclamations après remise
+- [Mondial Relay : Mon colis est abîmé](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-colis-est-abime-que-faire/) – refus au Point Relais, réclamations après remise
 - [bpost : Plainte pour colis endommagé](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – expéditeur, 7 jours, étranger
 - [SPF Economie : Achats en ligne, vos droits](https://news.economie.fgov.be/245209-achats-en-ligne-voici-vos-droits/) – colis endommagé, vendeur, particuliers
 - [SPF Economie : Garantie légale](https://news.economie.fgov.be/214975-garantie-legale-le-consommateur-mieux-protege/) – deux ans, preuve, deux mois

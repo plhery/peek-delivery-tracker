@@ -60,6 +60,20 @@ describe('stored scan replay', () => {
     ))).toEqual([]);
   });
 
+  it("dates an answer's wall clocks on its own places, not on a universal provider's copies beside it", () => {
+    expect(replayParcel(parcel(
+      {
+        ...scan('copy', 'unknown', '2026-10-21T09:00:00Z', 'in_transit', 'Arrived in the destination country', {
+          time: '2026-10-21T09:00:00.000Z', universal_provider: '17TRACK', stage: 'in_transit',
+        }),
+        location: 'Helsinki, Finland',
+      },
+      scan('own', 'unknown', '2026-10-21T12:09:00Z', 'out_for_delivery', 'Out for delivery', {
+        local_time: '2026-10-21T20:09:00', time: '2026-10-21T20:09:00+08:00', time_zone: 'Asia/Shanghai', time_zone_basis: 'carrier', stage: 'out_for_delivery',
+      }),
+    ))).toEqual([]);
+  });
+
   it("leaves a scan on its carrier's home clock, which its adapter may state itself", () => {
     expect(replayParcel(parcel({
       ...scan('home', 'zto-international', '2026-10-20T02:00:00Z', 'in_transit', 'Arrived at the sorting centre', {

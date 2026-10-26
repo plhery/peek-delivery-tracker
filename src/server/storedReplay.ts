@@ -1,7 +1,8 @@
 /**
  * Replays stored scans through the installed scraper release, asking no provider: what the release
  * would write for each stored row of a carrier's or universal provider's scan, from the row's own
- * fields. Two things a release changes replay so. A wall clock the app dated on a zone it deduced
+ * fields, each answer's rows together: a carrier's own, or one universal provider's. Two things a
+ * release changes replay so. A wall clock the app dated on a zone it deduced
  * is dated again (`dateLocalClocks`); a scan whose time came with its offset keeps it, as does one
  * on its carrier's home clock, which the stored row cannot tell from a clock its adapter states
  * itself (ZTO International dates every scan on Shanghai's). A scan's stage is read again from
@@ -21,7 +22,7 @@ import { statusMapAnswer } from 'universal-parcel-scraper/app';
 import { carrierHomeZone, dateLocalClocks } from 'universal-parcel-scraper/places';
 import { STAGES } from '../generated/apiContract';
 import { scanStages } from './disputedDelivery';
-import { providerEventId } from './eventIdentity';
+import { providerEventId, UNIVERSAL_PROVIDER } from './eventIdentity';
 import { isRecord, type JsonObject } from './types';
 
 export interface StoredScan {
@@ -85,14 +86,19 @@ const deduced = (scan: StoredScan) => text(scan.raw.local_time) !== null && DEDU
 
 /** Every stored row of the parcel the installed release would write otherwise. */
 export function replayParcel(parcel: StoredParcel): ReplayedChange[] {
-  const groups = new Map<string, StoredScan[]>();
+  // The rows of one answer replay together, as the sync read them: a carrier's own, or one universal provider's,
+  // which share the source `unknown` with each other and with an adapter's that named no carrier.
+  const groups = new Map<string, { source: string; scans: StoredScan[] }>();
   for (const scan of parcel.events) {
     const source = sourceOf(scan);
     if (!source || source === 'app' || scan.raw.observed_without_provider_timestamp === true) continue;
-    groups.set(source, [...groups.get(source) ?? [], scan]);
+    const key = JSON.stringify([source, text(scan.raw[UNIVERSAL_PROVIDER])]);
+    const group = groups.get(key) ?? { source, scans: [] };
+    group.scans.push(scan);
+    groups.set(key, group);
   }
   const changes: ReplayedChange[] = [];
-  for (const [source, scans] of groups) {
+  for (const { source, scans } of groups.values()) {
     // Oldest first, as notices take the stage of the scan before them.
     const ordered = [...scans].sort((a, b) => Date.parse(a.occurredAt) - Date.parse(b.occurredAt) || a.id.localeCompare(b.id));
     changes.push(...replayedClocks(parcel, source, ordered), ...replayedStages(parcel, source, ordered));

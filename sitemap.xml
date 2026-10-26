@@ -5703,22 +5703,34 @@
 <loc>https://peektracker.com/carriers/omniva-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/omniva-tracking" />
 <xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/omniva-siuntu-sekimas" />
+<xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/omniva-saadetise-jalgimine" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/omniva-tracking" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/lt/carriers/omniva-siuntu-sekimas</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/omniva-tracking" />
 <xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/omniva-siuntu-sekimas" />
+<xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/omniva-saadetise-jalgimine" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/omniva-tracking" />
 <lastmod>2026-10-25</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/omniva-tracking" />
+<xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/omniva-siuntu-sekimas" />
+<xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana" />
+<xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/omniva-saadetise-jalgimine" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/omniva-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/et/carriers/omniva-saadetise-jalgimine</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/omniva-tracking" />
 <xhtml:link rel="alternate" hreflang="lt" href="https://peektracker.com/lt/carriers/omniva-siuntu-sekimas" />
+<xhtml:link rel="alternate" hreflang="lv" href="https://peektracker.com/lv/carriers/omniva-sutijumu-izsekosana" />
 <xhtml:link rel="alternate" hreflang="et" href="https://peektracker.com/et/carriers/omniva-saadetise-jalgimine" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/omniva-tracking" />
 <lastmod>2026-10-25</lastmod>
@@ -5997,7 +6009,7 @@
 <loc>https://peektracker.com/carriers/econt-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/econt-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/econt-tracking" />
-<lastmod>2026-10-13</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/ceska-posta-czech-post-tracking</loc>

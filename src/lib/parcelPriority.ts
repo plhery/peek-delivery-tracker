@@ -1,3 +1,4 @@
+import { generatedScans } from './generatedTrack';
 import { currentEvent, currentStage } from './stages';
 import { parcelIsUnannounced } from './parcelStatus';
 import type { ParcelWithEvents } from '../types';
@@ -10,6 +11,7 @@ export type ParcelAttention =
   | 'ready_for_pickup'
   | 'exception'
   | 'customs'
+  | 'generated'
   | 'stalled'
   | 'not_announced';
 
@@ -40,6 +42,8 @@ export function parcelAttention(
     case 'exception': return 'exception';
     case 'customs': return 'customs';
   }
+  // Made-up moves say nothing of where the parcel is, whether the latest check failed or how old they are.
+  if (generatedScans(parcel.events).length) return 'generated';
   if (parcel.syncStatus === 'error') return 'sync_error';
 
   const latestTime = current ? new Date(current.occurredAt).getTime() : NaN;

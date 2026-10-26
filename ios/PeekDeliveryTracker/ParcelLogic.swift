@@ -307,6 +307,8 @@ extension Parcel {
         case .customs: return .customs
         default: break
         }
+        // Made-up moves say nothing of where the parcel is, whether the latest check failed or how old they are.
+        if !GeneratedTrack.scans(trackingEvents).isEmpty { return .generated }
         if syncStatus == .error { return .syncError }
         if let event = currentEvent,
            [.registered, .accepted, .inTransit].contains(event.stage),
@@ -321,6 +323,9 @@ extension Parcel {
         }
         return nil
     }
+
+    /// Whether the map has a place to draw: a generated track's are left out.
+    var hasMappedPlace: Bool { GeneratedTrack.without(trackingEvents).contains { $0.place != nil } }
 
     /// Whether the carrier has only ever announced the parcel, its first label at least a day ago: the sender made the
     /// label and still has the parcel. The carrier has nothing more to say until they hand it over.
@@ -401,11 +406,59 @@ struct ParcelDisplayStatus: Sendable {
     let syncing: Bool
 }
 
+/// The scans of a generated track, as the web app tells them (`src/lib/generatedTrack.ts`). The parcel's newest scans each
+/// moved it on in transit to a new place, each instant at one place, one hour to two days after the scan before and not
+/// in whole minutes, and three of those gaps are one interval to within 2 s. The track runs from the oldest move at a
+/// repeated interval to the newest scan. No network moves a parcel on at one interval to the second; a carrier that
+/// rounds its clock gives whole minutes. None unless the newest scan is such a move.
+enum GeneratedTrack {
+    private struct Instant {
+        var scans: [TrackingEvent] = []
+        var places: Set<String> = []
+        var transit = true
+    }
+
+    static func scans(_ events: [TrackingEvent]) -> [TrackingEvent] {
+        // Peek's own rows and notices are not the carrier moving the parcel.
+        var instants: [TimeInterval: Instant] = [:]
+        for event in events where event.stage != .pending {
+            guard let at = DateParser.date(event.occurredAt)?.timeIntervalSince1970 else { continue }
+            var instant = instants[at] ?? Instant()
+            instant.scans.append(event)
+            if let place = event.location?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(), !place.isEmpty {
+                instant.places.insert(place)
+            }
+            instant.transit = instant.transit && event.stage == .inTransit
+            instants[at] = instant
+        }
+        let newestFirst = instants.sorted { $0.key > $1.key }
+        var moves: [(gap: Int, scans: [TrackingEvent])] = []
+        for index in newestFirst.indices.dropFirst() {
+            let scan = newestFirst[index - 1], previous = newestFirst[index]
+            let gap = Int((scan.key - previous.key).rounded())
+            let moved = scan.value.transit && previous.value.transit && scan.value.places.count == 1
+                && previous.value.places.count == 1 && scan.value.places != previous.value.places
+            guard moved, (3_600...172_800).contains(gap), gap % 60 != 0 else { break }
+            moves.append((gap, scan.value.scans))
+        }
+        let repeated = { (gap: Int) in moves.filter { abs($0.gap - gap) <= 2 }.count >= 3 }
+        // Moves before the first repeated one may be the carrier's own.
+        guard let first = moves.lastIndex(where: { repeated($0.gap) }) else { return [] }
+        return moves[...first].flatMap(\.scans)
+    }
+
+    /// The scans with a generated track's left out: where the parcel really was last.
+    static func without(_ events: [TrackingEvent]) -> [TrackingEvent] {
+        let generated = Set(scans(events).map(\.id))
+        return generated.isEmpty ? events : events.filter { !generated.contains($0.id) }
+    }
+}
+
 enum ParcelAttention: String, Sendable {
     case syncError = "sync_error"
     case failedAttempt = "failed_attempt"
     case readyForPickup = "ready_for_pickup"
-    case customs, exception, stalled
+    case customs, exception, generated, stalled
     case notAnnounced = "not_announced"
 
     var localizationKey: String { "attention.\(rawValue)" }

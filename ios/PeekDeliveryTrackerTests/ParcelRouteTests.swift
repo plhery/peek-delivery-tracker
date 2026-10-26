@@ -40,6 +40,21 @@ final class ParcelRouteTests: XCTestCase {
         XCTAssertTrue(ParcelRoute(places: [china, germany]).legs[0].isApproximate)
     }
 
+    func testAGeneratedTrackEndsWhereTheParcelReallyWasLast() {
+        // A new place every 23 h 55 min 11 s, as the web map is told (route.test.ts): no network moves a parcel so.
+        let start = DateParser.date("2026-10-01T09:00:00Z")!
+        let villages = ["Exampleton", "Sampleby", "Testford", "Mockham"].enumerated().map { step, name in
+            TrackingEvent(id: UUID(), packageID: UUID(), stage: .inTransit, description: "Scan", location: name,
+                          occurredAt: ISO8601DateFormatter().string(from: start.addingTimeInterval(Double(step) * 86_111)),
+                          place: EventPlace(latitude: 52 + Double(step) / 10, longitude: -1, precision: .city, country: "GB", name: name))
+        }
+        let shenzhen = TrackingEvent(id: UUID(), packageID: UUID(), stage: .inTransit, description: "Scan", location: nil,
+                                     occurredAt: "2026-09-28T08:00:00Z",
+                                     place: EventPlace(latitude: 22.54, longitude: 114.06, precision: .city, country: "CN", name: "Shenzhen"))
+        let route = ParcelRoute(events: [shenzhen] + villages, countryName: { $0 })
+        XCTAssertEqual(route.stops.map(\.place.name), ["Shenzhen", "Exampleton"])
+    }
+
     func testAParcelIsWhereItsDeliveryWasPlacedAndNowhereElse() {
         func event(_ hour: Int, _ stage: TrackingStage, _ place: EventPlace?) -> TrackingEvent {
             TrackingEvent(id: UUID(), packageID: UUID(), stage: stage, description: "Scan", location: nil,

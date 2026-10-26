@@ -3,6 +3,7 @@ import 'server-only';
 import type { DpdSession } from 'universal-parcel-scraper/node';
 import type { ApiGiftWords } from '../generated/apiContract';
 import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
+import type { TrackingEvent } from '../types';
 import { EMAIL_STAGES, type DeliveredTime, type EmailStage } from './email/types';
 import type { SyncReason } from './trackingAudit';
 import { isRecord, type JsonObject } from './types';
@@ -647,6 +648,22 @@ export class SupabaseClient {
       method: 'DELETE',
       prefer: 'return=minimal',
     });
+  }
+
+  /** Each package's newest scans, enough to tell a generated track by (`generatedScans`). */
+  async recentScans(packageIds: string[]): Promise<Map<string, Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt'>[]>> {
+    const recent = new Map<string, Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt'>[]>();
+    await Promise.all([...new Set(packageIds)].map(async (packageId) => {
+      const events = rows(await this.request(`/rest/v1/tracking_events?${query([
+        ['package_id', `eq.${packageId}`],
+        ['select', 'id,stage,location,occurred_at'],
+        ['order', 'occurred_at.desc'],
+        ['limit', '60'],
+      ])}`));
+      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at }) => typeof id === 'string' && typeof occurred_at === 'string'
+        ? [{ id, stage: stage as TrackingEvent['stage'], occurredAt: occurred_at, ...(typeof location === 'string' ? { location } : {}) }] : []));
+    }));
+    return recent;
   }
 
   /**

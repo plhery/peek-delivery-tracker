@@ -258,7 +258,7 @@ struct ParcelDetailView: View {
         }
         // A made-up number has no page at its carrier, and neither has one a link hides.
         let trackingLinks = sample == nil && !parcel.trackingNumber.isEmpty ? catalog.trackingLinks(for: parcel, language: localizer.language) : []
-        let placed = parcel.trackingEvents.contains { $0.place != nil }
+        let placed = parcel.hasMappedPlace
         let route = placed ? atlas.map { ParcelRoute(parcel: parcel, atlas: $0, language: localizer.language) } : nil
         let email = store.deliveryEmail
         // While the account's email is on, the bell opens the parcel's alerts instead of muting.
@@ -440,6 +440,13 @@ struct ParcelDetailView: View {
                 if let waits = carrierWaits(parcel) {
                     ParcelFlag(text: localizer.text(waits.stage == .failedAttempt ? "attention.failed_attempt" : "attention.exception"),
                                symbol: "exclamationmark.triangle")
+                }
+                if parcel.attention() == .generated {
+                    ParcelFlag(text: localizer.text("attention.generated"), symbol: "exclamationmark.triangle")
+                    Text(localizer.text("link.generated",
+                                        ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
+                        .font(.caption).foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 ExperimentalJourneyRail(stage: parcel.currentStage, tint: branding.ink.opacity(0.45), compact: true)
             }

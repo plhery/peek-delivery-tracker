@@ -1645,7 +1645,7 @@ private struct ExperimentalNextDeliveryPass: View {
         CarrierVisualIdentity.of(parcel.displayedCarrier, catalog: catalog, language: localizer.language)
     }
     /// Scans with places are drawn as a route across the top of the card, as on the opened parcel.
-    private var placed: Bool { parcel.trackingEvents.contains { $0.place != nil } }
+    private var placed: Bool { parcel.hasMappedPlace }
 
     var body: some View {
         if decorative {
@@ -1772,7 +1772,7 @@ private struct ExperimentalParcelPassCard: View {
     }
     private var date: String? { localizer.parcelDeliveryEstimate(parcel) ?? localizer.parcelCompletionDate(parcel) }
     /// Scans with places are drawn as a small route at the end of the card.
-    private var placed: Bool { parcel.trackingEvents.contains { $0.place != nil } }
+    private var placed: Bool { parcel.hasMappedPlace }
     /// At the largest text sizes the words take the whole card, and the route goes.
     private var drawsRoute: Bool { placed && !typeSize.isAccessibilitySize }
     /// A past delivery's card is paler, once it stands among the past deliveries.

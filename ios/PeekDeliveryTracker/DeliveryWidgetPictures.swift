@@ -73,7 +73,7 @@ enum DeliveryWidgetPictures {
     static func draw(_ parcel: Parcel, as card: DeliveryWidgetCard, atlas: WorldAtlas?, localizer: Localizer, in folder: URL) async -> Bool {
         guard (try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)) != nil else { return false }
         let identity = CarrierVisualIdentity.of(parcel.carrier, language: localizer.language)
-        let placed = parcel.trackingEvents.contains { $0.place != nil }
+        let placed = parcel.hasMappedPlace
         for dark in [false, true] {
             if placed, let atlas {
                 for picture in DeliveryWidgetPicture.routes {

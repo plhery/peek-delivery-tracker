@@ -73,6 +73,7 @@ const HANDOVER_ROOM = 24;
 const FLAG_ICONS: Record<ParcelAttention, ReactNode> = {
   sync_error: <Icon name="refresh" />,
   stalled: <Icon name="clock" />,
+  generated: <Glyph name="warning" />,
   not_announced: <Icon name="clock" />,
   exception: <Glyph name="warning" />,
   failed_attempt: <Glyph name="warning" />,

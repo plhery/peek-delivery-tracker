@@ -191,7 +191,8 @@ struct ParcelRoute: Sendable {
 
     /// A parcel's scans, in the journal's order. Country-only places take the reader's name for the country.
     init(events: [TrackingEvent], destination: RoutePlace? = nil, countryName: (String) -> String) {
-        let newestFirst = events.sorted(by: Parcel.eventPrecedes)
+        // A generated track's places are left out: the route ends where the parcel really was last.
+        let newestFirst = GeneratedTrack.without(events).sorted(by: Parcel.eventPrecedes)
         self.init(places: newestFirst.reversed().map { event in
             guard let place = event.place else { return nil }
             var located = RoutePlace(place)

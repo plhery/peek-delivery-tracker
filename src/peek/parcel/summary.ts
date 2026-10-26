@@ -169,7 +169,9 @@ export function parcelFreshness({ parcel, checking, offline, trouble, seenAt }: 
     return { kind: 'stale', label: t('link.asOf', { time: momentLabel(checkedAt, wording) }), dot: false };
   }
   const ago = localizedRelativeTime(checkedAt, t, languageTag, now);
-  const quiet = !parcelHasCarrierUpdate(parcel) || stage === 'registered' || parcelAttention(parcel, now) === 'stalled';
+  const attention = parcelAttention(parcel, now);
+  // A generated track's moves are no news either.
+  const quiet = !parcelHasCarrierUpdate(parcel) || stage === 'registered' || attention === 'stalled' || attention === 'generated';
   return {
     kind: quiet ? 'checked' : 'updated',
     label: t(quiet ? 'detail.lastChecked' : 'parcel.updated', { date: ago }),

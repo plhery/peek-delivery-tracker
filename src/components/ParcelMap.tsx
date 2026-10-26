@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import { useI18n } from '../i18n';
+import { withoutGeneratedScans } from '../lib/generatedTrack';
 import { useNear } from '../lib/inView';
 import { useModalDialog } from '../lib/modal';
 import { countryName } from 'universal-parcel-scraper/app';
@@ -18,7 +19,7 @@ import './ParcelMap.css';
  * A card that draws no map passes `wanted` as false, and never asks for the map data.
  */
 export function useParcelRoute(parcel: ParcelWithEvents, languageTag: string, wanted = true): { placed: boolean; route: Route | null } {
-  const placed = wanted && parcel.events.some((event) => event.place);
+  const placed = wanted && withoutGeneratedScans(parcel.events).some((event) => event.place);
   const ready = useWorld(placed);
   const route = useMemo(() => {
     if (!placed || !ready) return null;

@@ -443,7 +443,7 @@ private struct SharedParcelCard: View {
         CarrierVisualIdentity.of(parcel.displayedCarrier, catalog: catalog, language: localizer.language)
     }
     /// Scans with places are drawn as a route across the top of the card, as on the parcel's own page.
-    private var placed: Bool { parcel.trackingEvents.contains { $0.place != nil } }
+    private var placed: Bool { parcel.hasMappedPlace }
     /// Without a route, a parcel that arrived shows its open box above the words, as its page does.
     private var arrived: Bool { !placed && parcel.currentStage == .delivered && !typeSize.isAccessibilitySize }
     /// The label on the kraft parcel's side, with the number as the link shows it. A number no carrier knows has none.

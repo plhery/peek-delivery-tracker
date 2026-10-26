@@ -968,6 +968,20 @@ final class ParcelLogicTests: XCTestCase {
             XCTAssertFalse(refused.updateFailed)
         }
 
+        // A generated track, however old and whatever the latest check (parcelPriority.test.ts).
+        let trackID = UUID()
+        let moves = (0..<4).map { step in
+            TrackingEvent(id: UUID(), packageID: trackID, stage: .inTransit, description: "In transit", location: "Place \(step)",
+                          occurredAt: ISO8601DateFormatter().string(from: DateParser.date("2026-07-20T09:00:00Z")!
+                              .addingTimeInterval(Double(step) * 86_111)))
+        }
+        var generated = makeParcel(id: trackID, events: moves)
+        XCTAssertEqual(generated.attention(now: now), .generated)
+        generated.syncStatus = .error
+        XCTAssertEqual(generated.attention(now: now), .generated)
+        // Two moves at the interval are not yet a track.
+        XCTAssertEqual(makeParcel(id: trackID, events: Array(moves.prefix(3))).attention(now: now), .stalled)
+
         let announcedID = UUID()
         let announced = makeParcel(
             id: announcedID,

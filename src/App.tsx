@@ -68,6 +68,7 @@ const ATTENTION_LABELS: Record<ParcelAttention, MessageKey> = {
   ready_for_pickup: 'attention.ready_for_pickup',
   exception: 'attention.exception',
   customs: 'attention.customs',
+  generated: 'attention.generated',
   stalled: 'attention.stalled',
   not_announced: 'attention.not_announced',
 };

@@ -1,4 +1,5 @@
 import { geoDistance } from 'd3-geo';
+import { withoutGeneratedScans } from '../../lib/generatedTrack';
 import { sortEventsDesc } from '../../lib/stages';
 import type { EventPlace, Stage, TrackingEvent } from '../../types';
 import type { Coordinate } from './geography';
@@ -156,9 +157,12 @@ export function buildRoute(scans: readonly Scan[], destination?: Place): Route {
   };
 }
 
-/** A parcel's scans, oldest first, as a route; country-only places take the reader's name for the country. */
+/**
+ * A parcel's scans, oldest first, as a route; country-only places take the reader's name for the country. A generated
+ * track's places are left out: the route ends where the parcel really was last.
+ */
 export function routeFromEvents(events: readonly TrackingEvent[], destination?: Place, countryName?: (code: string) => string): Route {
-  const scans = sortEventsDesc(events).reverse()
+  const scans = sortEventsDesc(withoutGeneratedScans(events)).reverse()
     .map((event) => {
       const place = event.place ? placeFromEvent(event.place) : undefined;
       if (place?.precision === 'country' && countryName) place.name = countryName(place.country);

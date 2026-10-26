@@ -63,6 +63,7 @@ beforeEach(() => {
   vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map());
   vi.spyOn(client, 'handoffScans').mockResolvedValue([]);
   vi.spyOn(client, 'providerCopyScans').mockResolvedValue([]);
+  vi.spyOn(client, 'recentScans').mockResolvedValue(new Map());
   vi.spyOn(client, 'archivedPackageIds').mockResolvedValue(new Set());
   vi.spyOn(console, 'log').mockImplementation(() => undefined);
   vi.spyOn(console, 'error').mockImplementation(() => undefined);
@@ -157,6 +158,26 @@ describe('what an alert announces', () => {
     expect(send).not.toHaveBeenCalled();
     expect(handled).toHaveBeenCalledExactlyOnceWith('alert-1', ['copy']);
     expect(counted).toHaveBeenCalledExactlyOnceWith('skipped', 'web');
+  });
+
+  it('handles a generated track\'s move silently: no network moved the parcel', async () => {
+    pending([row()]);
+    // A new place every 23 h 55 min 11 s, the newest the batch's scan.
+    const move = (step: number) => ({ id: step === 3 ? 'event-1' : `move-${step}`, stage: 'in_transit' as const, location: `Place ${step}`,
+      occurredAt: new Date(Date.parse('2026-10-02T12:30:00Z') - (3 - step) * 86_111_000).toISOString() });
+    const recent = vi.mocked(client.recentScans).mockResolvedValue(new Map([['package-1', [move(3), move(2), move(1), move(0)]]]));
+    const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
+    expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });
+    expect(recent).toHaveBeenCalledWith(['package-1']);
+    expect(send).not.toHaveBeenCalled();
+    expect(handled).toHaveBeenCalledExactlyOnceWith('alert-1', ['event-1']);
+    expect(counted).toHaveBeenCalledExactlyOnceWith('skipped', 'web');
+    // A move at another interval is news, and so is any scan when the lookup fails.
+    recent.mockResolvedValueOnce(new Map([['package-1', [move(3), move(1), move(0)]]]))
+      .mockRejectedValueOnce(new Error('down'));
+    await alerts.dispatch();
+    await alerts.dispatch();
+    expect(send).toHaveBeenCalledTimes(2);
   });
 
   it('handles what the parcel already showed when it was added silently, as for accounts', async () => {

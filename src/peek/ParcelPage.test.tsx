@@ -357,6 +357,19 @@ describe('ParcelPage stages and troubles', () => {
     expect(freshness()).toHaveTextContent('Last checked: 2 min ago');
   });
 
+  it('says a generated track looks so, and neither maps its places nor calls them updates', async () => {
+    // A new place every 23 h 55 min 11 s: no network moves a parcel so.
+    const move = (step: number) => scan('in_transit', 2 + (3 - step) * 86_111 / 3_600, 'In transit', {
+      id: `move-${step}`, location: `Place ${step}`, place: { latitude: 52 + step / 10, longitude: -1, precision: 'city', country: 'GB', name: `Place ${step}` },
+    });
+    // The place the track starts from is not known to the map.
+    await shown(view([{ ...move(0), place: undefined }, move(1), move(2), move(3)]));
+    expect(within(card()).getByText('These updates look generated')).toBeVisible();
+    expect(screen.getByRole('note')).toHaveTextContent(/^Every update comes exactly the same length of time.+Peek keeps asking DHL and shows the next real scan here\.$/);
+    expect(freshness()).toHaveTextContent('Last checked: 2 min ago');
+    expect(card()).not.toHaveClass('peekp-card--map');
+  });
+
   it('says what the carrier’s check failed with, keeping the last thing known', async () => {
     await shown(view(journey, { syncStatus: 'error', syncError: 'carrier:not_found', expectedDelivery: '2099-01-05' }));
     expect(screen.getByRole('heading', { level: 1, name: 'In transit' })).toBeVisible();

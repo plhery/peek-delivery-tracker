@@ -10,6 +10,7 @@ const privateKey = generateKeyPairSync('ec', { namedCurve: 'prime256v1' }).priva
 beforeEach(() => {
   vi.spyOn(SupabaseServiceClient.prototype, 'handoffScans').mockResolvedValue([]);
   vi.spyOn(SupabaseServiceClient.prototype, 'providerCopyScans').mockResolvedValue([]);
+  vi.spyOn(SupabaseServiceClient.prototype, 'recentScans').mockResolvedValue(new Map());
   vi.spyOn(SupabaseServiceClient.prototype, 'archivedPackageIds').mockResolvedValue(new Set());
 });
 afterEach(() => vi.restoreAllMocks());

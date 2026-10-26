@@ -119,6 +119,11 @@ describe('how fresh a parcel is', () => {
       parcel([['registered', at(2, 9)]], { lastSyncedAt: at(2, 11, 55) }),
       parcel([['pending', at(2, 9)]], { lastSyncedAt: at(2, 11, 55), syncStatus: 'waiting' }),
       parcel([['in_transit', new Date(2026, 8, 26, 9).toISOString()]], { lastSyncedAt: at(2, 11, 55) }),
+      // A generated track's moves, the newest an hour ago.
+      { ...moving({ lastSyncedAt: at(2, 11, 55) }), events: [3, 2, 1, 0].map((step) => ({
+        id: `move-${step}`, parcelId: 'parcel-1', stage: 'in_transit' as const, description: 'In transit', location: `Place ${step}`,
+        occurredAt: new Date(NOW - 3_600_000 - step * 86_111_000).toISOString(),
+      })) },
     ];
     for (const waiting of quiet) expect(parcelFreshness({ ...base, parcel: waiting }, wording)).toMatchObject({ kind: 'checked', label: 'Last checked: 5 min ago', dot: true });
   });

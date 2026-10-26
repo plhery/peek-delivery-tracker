@@ -36,6 +36,17 @@ describe('parcel priority', () => {
     expect(nextPriorityParcel([outage, { ...delivery, archivedAt: '2026-08-05' }], NOW)).toBeNull();
     expect(nextPriorityParcel([], NOW)).toBeNull();
   });
+  it('flags a generated track whatever its age or the latest check, and never as the next arrival', () => {
+    const track = parcel('generated');
+    track.events = [0, 1, 2, 3].map((step) => ({
+      id: `move-${step}`, parcelId: 'generated', stage: 'in_transit', description: 'In transit', location: `Place ${step}`,
+      occurredAt: new Date(Date.parse('2026-07-20T09:00:00Z') + step * 86_111_000).toISOString(),
+    }));
+    expect(parcelAttention(track, NOW)).toBe('generated');
+    expect(parcelAttention({ ...track, syncStatus: 'error' }, NOW)).toBe('generated');
+    expect(nextPriorityParcel([track], NOW)).toBeNull();
+  });
+
   it('separates customs and failed delivery notices from the next arrival', () => {
     const customs = { ...parcel('customs', 'customs'), expectedDelivery: '2026-08-05' };
     const failed = parcel('failed', 'failed_attempt');

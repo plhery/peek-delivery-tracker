@@ -113,6 +113,16 @@ describe('routeFromEvents', () => {
     expect(routeFromEvents([event('2026-09-20T08:00:00Z', place('China', 32.5, 106.34, 'CN', 'country'))]).stops[0].place.name).toBe('China');
   });
 
+  it('ends a generated track where the parcel really was last', () => {
+    // A new place every 23 h 55 min 11 s: no network moves a parcel so.
+    const villages = ['Exampleton', 'Sampleby', 'Testford', 'Mockham'].map((name, step) => ({
+      ...event(new Date(Date.parse('2026-10-01T09:00:00Z') + step * 86_111_000).toISOString(), place(name, 52 + step / 10, -1, 'GB')),
+      location: name,
+    }));
+    const route = routeFromEvents([event('2026-09-28T08:00:00Z', place('Shenzhen', 22.54, 114.06, 'CN')), ...villages]);
+    expect(route.stops.map((stop) => stop.place.name)).toEqual(['Shenzhen', 'Exampleton']);
+  });
+
   it('orders scans of one second by delivery progress, as the journal does', () => {
     const at = '2026-09-28T08:00:00Z';
     const route = routeFromEvents([

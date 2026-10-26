@@ -149,6 +149,7 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
     notes.push({ id: 'sync', icon: <Glyph name="info" />, body: trackingFailureMessage(parcel.syncError, t) });
   }
   if (flag === 'stalled') notes.push({ id: 'quiet', icon: <Icon name="hourglass" />, body: t('link.quiet', { carrier: carrier.name }) });
+  if (flag === 'generated') notes.push({ id: 'generated', icon: <Glyph name="warning" />, body: t('link.generated', { carrier: carrier.name }), paper: true });
   if ((stage === 'exception' || stage === 'failed_attempt') && scan?.description.trim()) {
     notes.push({ id: 'says', icon: <Glyph name="info" />, title: t('link.carrierSays', { carrier: carrier.name }), body: scan.description.trim(), quoted: true, paper: true });
   }

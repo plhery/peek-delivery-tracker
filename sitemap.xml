@@ -6477,7 +6477,7 @@
 <loc>https://peektracker.com/carriers/posta-srbije-serbian-post-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/posta-srbije-serbian-post-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/posta-srbije-serbian-post-tracking" />
-<lastmod>2026-10-13</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/venipak-tracking</loc>
@@ -6558,6 +6558,15 @@
 <url>
 <loc>https://peektracker.com/carriers/matkahuolto-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/matkahuolto-tracking" />
+<xhtml:link rel="alternate" hreflang="sv" href="https://peektracker.com/sv/carriers/matkahuolto-spara-paket" />
+<xhtml:link rel="alternate" hreflang="fi" href="https://peektracker.com/fi/carriers/matkahuolto-seuranta" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/matkahuolto-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/sv/carriers/matkahuolto-spara-paket</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/matkahuolto-tracking" />
+<xhtml:link rel="alternate" hreflang="sv" href="https://peektracker.com/sv/carriers/matkahuolto-spara-paket" />
 <xhtml:link rel="alternate" hreflang="fi" href="https://peektracker.com/fi/carriers/matkahuolto-seuranta" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/matkahuolto-tracking" />
 <lastmod>2026-10-26</lastmod>
@@ -6565,6 +6574,7 @@
 <url>
 <loc>https://peektracker.com/fi/carriers/matkahuolto-seuranta</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/matkahuolto-tracking" />
+<xhtml:link rel="alternate" hreflang="sv" href="https://peektracker.com/sv/carriers/matkahuolto-spara-paket" />
 <xhtml:link rel="alternate" hreflang="fi" href="https://peektracker.com/fi/carriers/matkahuolto-seuranta" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/matkahuolto-tracking" />
 <lastmod>2026-10-26</lastmod>

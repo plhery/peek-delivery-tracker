@@ -1710,6 +1710,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "post-luxembourg",
+      "catalog": "post-luxembourg",
+      "slug": "post-luxembourg-suivi-colis",
+      "title": "POST Luxembourg\u00a0: suivi de colis, PackUp et douane",
+      "name": "POST Luxembourg",
+      "color": "#008736"
+    },
+    {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking-suivi-colis",
@@ -3046,6 +3054,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "uk": [
+    {
+      "id": "meest",
+      "catalog": "meest",
+      "slug": "meest-vidstezhennia-posylky",
+      "title": "Meest відстеження посилки: номер, статуси, отримання",
+      "name": "Meest",
+      "color": "#0061af"
+    },
     {
       "id": "nova-poshta",
       "catalog": "nova-poshta",

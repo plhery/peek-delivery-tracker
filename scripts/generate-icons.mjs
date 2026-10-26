@@ -28,6 +28,26 @@ function markSvg({ bleed = false, scale = 1 } = {}) {
 }
 
 /**
+ * The mark as a Mac app's icon, on Apple's grid. macOS doesn't mask an icon, so the icon is its own shape: on a canvas
+ * of 1024, a tile of 824 with corners of 185.4, 100 from every edge, over the shadow macOS icons cast.
+ */
+function macIconSvg() {
+  const canvas = 1024;
+  const side = 824;
+  const inset = (canvas - side) / 2;
+  const scale = side / size;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${canvas} ${canvas}">
+  <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000" flood-opacity="0.5"/>
+  </filter>
+  <rect x="${inset}" y="${inset}" width="${side}" height="${side}" rx="185.4" fill="${tile.fill}" filter="url(#shadow)"/>
+  <g transform="translate(${inset} ${inset}) scale(${scale})">
+${shapes.map((shape) => `    ${element(shape)}\n`).join('')}  </g>
+</svg>
+`;
+}
+
+/**
  * The mark's eyes alone, white on nothing, for the badge of a notification. Android keeps only
  * a badge's outline and paints it in one colour, so the tile would come out as a plain square.
  * The light shapes show and the dark ones are cut out of them; a highlight is too small to
@@ -107,6 +127,10 @@ await write('public/icons/badge-96.png', render(badgeSvg(), 96));
 await write('public/icons/icon-maskable-512.png', opaque(render(markSvg({ bleed: true, scale: maskableScale }), 512)));
 await write('public/icons/apple-touch-icon.png', opaque(render(markSvg({ bleed: true }), 180)));
 await write('ios/PeekDeliveryTracker/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png', opaque(render(markSvg({ bleed: true }), 1024)));
+// Each size a Mac's icon comes in, from 16 points at 1x to 512 at 2x.
+for (const width of [16, 32, 64, 128, 256, 512, 1024]) {
+  await write(`ios/PeekDeliveryTracker/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-mac-${width}.png`, render(macIconSvg(), width));
+}
 
 // The link preview, once per language. `public/og.svg` is the English drawing; its words are
 // replaced with each language's own. The text is set in the typeface the parcel pictures use,

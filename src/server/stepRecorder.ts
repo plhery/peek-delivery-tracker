@@ -5,7 +5,9 @@ import type { LookupRecord, StepRecord, StepRecorder } from 'universal-parcel-sc
 import { combineRecorders } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
 import { prometheusStepRecorder, stepOutcome } from './metrics';
-import { initObservability, logOperationalEvent, reportRoutingEvent, reportTrackingStep, trackingAttemptId } from './observability';
+import {
+  initObservability, logOperationalEvent, reportRoutingEvent, reportTrackingLookup, reportTrackingStep, trackingAttemptId,
+} from './observability';
 
 /**
  * The host's telemetry sinks for the scraper's `StepRecorder`.
@@ -76,10 +78,10 @@ export const sentryStepRecorder: StepRecorder = {
   },
 };
 
-/** Tells the running check which tiers its lookups went through, such as a browser's. */
+/** Tells the running check which tiers its lookups went through, such as a browser's, and whom they asked. */
 const attemptStepRecorder: StepRecorder = {
   step(record: StepRecord) { reportTrackingStep(record.step); },
-  lookup() { /* The steps say it all. */ },
+  lookup(record: LookupRecord) { reportTrackingLookup(record.carrier, outcomeLabel(record)); },
 };
 
 const extraRecorders: StepRecorder[] = [];

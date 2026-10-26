@@ -210,6 +210,13 @@ export class TrackingSyncAudit {
   /** Whether the check's lookups went through a browser; null while no lookup tier ran. */
   #browser: boolean | null = null;
   readonly #step = (step: string): void => { this.#browser = this.#browser === true || BROWSER_STEPS.has(step); };
+  /** The carriers and providers the check's lookups asked, with how each ended; a success stays. */
+  readonly #lookups = new Map<string, string>();
+  readonly #lookup = (carrier: string, outcome: string): void => {
+    const key = carrier.slice(0, 100);
+    if ((!this.#lookups.has(key) && this.#lookups.size >= 32) || this.#lookups.get(key) === 'success') return;
+    this.#lookups.set(key, outcome.slice(0, 40));
+  };
 
   constructor(
     readonly client: SupabaseServiceClient,
@@ -226,7 +233,8 @@ export class TrackingSyncAudit {
   }
 
   observeFetch<T>(operation: () => Promise<T>): Promise<T> {
-    return withTrackingAttempt(this.attemptId, () => observeTrackingHealth(this.#healthSamples, operation), this.#signal, this.#step);
+    return withTrackingAttempt(this.attemptId, () => observeTrackingHealth(this.#healthSamples, operation), this.#signal, this.#step,
+      this.#lookup);
   }
 
   /**
@@ -390,6 +398,7 @@ export class TrackingSyncAudit {
       error_type: completion.error === undefined ? completion.errorType ?? null : errorType(completion.error),
       completed_at: completedAt.toISOString(),
       duration_ms: Math.round(elapsedMilliseconds(this.#startedAt)),
+      lookups: Object.fromEntries(this.#lookups),
     };
     // Telemetry must never change a tracking result.
     try { recordRefresh(this.configuredCarrier, completion.sourceCarrier, outcome); } catch { /* metrics only */ }
@@ -475,6 +484,7 @@ export class TrackingSyncAudit {
         error_type: 'WorkerShutdown',
         completed_at: new Date().toISOString(),
         duration_ms: durationMs,
+        lookups: Object.fromEntries(this.#lookups),
       }, this.#steps, { timeoutMs: 3_000 });
     });
   }

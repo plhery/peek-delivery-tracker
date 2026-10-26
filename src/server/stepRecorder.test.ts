@@ -4,7 +4,7 @@ import { IndeterminateError, NoHistoryError } from 'universal-parcel-scraper';
 const metrics = { distribution: vi.fn(), count: vi.fn() };
 const observability = {
   initObservability: vi.fn(() => true), logOperationalEvent: vi.fn(), reportRoutingEvent: vi.fn(),
-  trackingAttemptId: vi.fn((): string | undefined => undefined), reportTrackingStep: vi.fn(),
+  trackingAttemptId: vi.fn((): string | undefined => undefined), reportTrackingStep: vi.fn(), reportTrackingLookup: vi.fn(),
 };
 
 vi.mock('@sentry/node', () => ({ metrics }));
@@ -104,6 +104,13 @@ describe('sentryStepRecorder', () => {
     hostStepRecorder().step({ carrier: 'ups', step: 'trawl', attempt: 1, outcome: 'ok', errorType: null, durationMs: 1,
       fallbackFrom: null, fallbackReason: null, fallbackErrorType: null });
     expect(observability.reportTrackingStep).toHaveBeenCalledExactlyOnceWith('trawl');
+  });
+
+  it('tells the running check whom its lookup asked and how it ended', () => {
+    hostStepRecorder().lookup({ carrier: 'parcelsapp', finalStep: 'direct', outcome: 'not_found', errorType: 'NotFoundError', durationMs: 1, attempts: 1 });
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('parcelsapp', 'not_found');
+    hostStepRecorder().lookup({ carrier: 'dhl', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('dhl', 'success');
   });
 
   it('fans out to registered sinks', () => {

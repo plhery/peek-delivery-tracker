@@ -25,13 +25,18 @@ begin
   insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier)
   select id, parcel, 'scheduled', 'outcome-test' from unnest(checks) as id;
   assert public.complete_tracking_sync_attempt(checks[1],
-    '{"outcome":"unchanged", "events_received":4, "events_normalized":4, "events_new":0}', '[]');
+    '{"outcome":"unchanged", "events_received":4, "events_normalized":4, "events_new":0,
+      "lookups":{"nacex":"invalid_input", "parcelsapp":"success"}}', '[]');
   assert public.complete_tracking_sync_attempt(checks[2],
-    '{"outcome":"updated", "events_received":5, "events_normalized":5, "events_new":1}', '[]');
+    '{"outcome":"updated", "events_received":5, "events_normalized":5, "events_new":1, "lookups":{}}', '[]');
   -- The server running during the rollout sends no count.
   assert public.complete_tracking_sync_attempt(checks[3], '{"outcome":"updated", "events_normalized":5}', '[]');
   assert (select array_agg(outcome || ':' || coalesce(events_new::text, 'null') order by id)
     from public.tracking_sync_attempts where id = any(checks[1:3])) = array['unchanged:0', 'updated:1', 'updated:null'];
+  -- Whom the lookups asked, nobody included; the server running during the rollout sends none.
+  assert (select array_agg(coalesce(lookups::text, 'null') order by id)
+    from public.tracking_sync_attempts where id = any(checks[1:3]))
+    = array['{"nacex": "invalid_input", "parcelsapp": "success"}', '{}', 'null'];
 
   begin
     perform public.complete_tracking_sync_attempt(checks[4], '{"outcome":"updated", "events_new":-1}', '[]');
@@ -41,6 +46,12 @@ begin
   begin
     perform public.complete_tracking_sync_attempt(checks[4], '{"outcome":"same"}', '[]');
     raise exception 'An unknown outcome was stored' using errcode = 'P0002';
+  exception when check_violation then null;
+  end;
+
+  begin
+    perform public.complete_tracking_sync_attempt(checks[4], '{"outcome":"refused", "lookups":["nacex"]}', '[]');
+    raise exception 'Lookups that name no outcome were stored' using errcode = 'P0002';
   exception when check_violation then null;
   end;
 

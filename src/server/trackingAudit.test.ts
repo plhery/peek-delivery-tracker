@@ -4,7 +4,7 @@ import { TrackingSyncAudit } from './trackingAudit';
 import { healthStepRecorder } from './trackingHealth';
 import { SupabaseServiceClient } from './supabase';
 import { trackingSupportEvidence } from './trackingSupport';
-import { captureOperationalError, captureTrackingHealth, logOperationalEvent, reportRoutingEvent } from './observability';
+import { captureOperationalError, captureTrackingHealth, logOperationalEvent, reportRoutingEvent, reportTrackingLookup } from './observability';
 import { recordHealthIncident, recordRefresh, recordRoutingSignal, recordSyncAnomaly } from './metrics';
 
 // Routing reports and the attempt they belong to stay real: signals travel through them.
@@ -215,6 +215,50 @@ describe('a carrier\'s lookup in a check', () => {
     expect(audit.lookupOutcome('nacex')).toBe('transport');
     await audit.observeFetch(async () => healthStepRecorder.lookup({ ...lookup, outcome: 'ok', errorType: null }));
     expect(audit.lookupOutcome('nacex')).toBe('ok');
+  });
+});
+
+describe('the lookups of a check', () => {
+  it('name on its row whom they asked and how each ended, so a refused check still shows them', async () => {
+    const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),
+      recordTrackingHealth: vi.fn().mockResolvedValue([]), ackTrackingHealth: vi.fn() };
+    const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'nacex', 'pending', { trigger: 'added' });
+    await audit.observeFetch(async () => {
+      reportTrackingLookup('nacex', 'invalid_input');
+      reportTrackingLookup('parcelsapp', 'success');
+      // A success stays: a later lookup of the same provider in the check failing does not hide it.
+      reportTrackingLookup('parcelsapp', 'error');
+    });
+    reportTrackingLookup('dhl', 'success');
+    await audit.finish({ outcome: 'error', sourceCarrier: 'nacex',
+      providerFailures: { nacex: { kind: 'schema', count: 1, user_error: 'carrier:invalid_input' } } });
+    expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(audit.attemptId,
+      expect.objectContaining({ outcome: 'refused', lookups: { nacex: 'invalid_input', parcelsapp: 'success' } }), expect.any(Array));
+    // A check that asked nobody says so; shutdown keeps what the interrupted one asked.
+    const unasked = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'nacex', 'pending', { trigger: 'added' });
+    await unasked.finish({ outcome: 'waiting', sourceCarrier: 'nacex' });
+    expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(unasked.attemptId, expect.objectContaining({ lookups: {} }), expect.any(Array));
+    const interrupted = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'nacex', 'pending', { trigger: 'added' });
+    await interrupted.observeFetch(async () => reportTrackingLookup('nacex', 'transport'));
+    await interrupted.interrupt();
+    expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(interrupted.attemptId,
+      expect.objectContaining({ outcome: 'interrupted', lookups: { nacex: 'transport' } }), expect.any(Array), { timeoutMs: 3_000 });
+  });
+
+  it('keep at most 32 carriers and providers, each name bounded', async () => {
+    const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true) };
+    const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'nacex', 'pending', { trigger: 'package' });
+    await audit.observeFetch(async () => {
+      for (let index = 0; index < 40; index += 1) reportTrackingLookup(`carrier-${index}`.padEnd(120, 'x'), 'not_found');
+    });
+    await audit.finish({ outcome: 'waiting', sourceCarrier: 'nacex', evaluateHealth: false });
+    const lookups = client.completeSyncAttempt.mock.lastCall![1].lookups as Record<string, string>;
+    expect(Object.keys(lookups)).toHaveLength(32);
+    expect(Object.keys(lookups).every((carrier) => carrier.length === 100)).toBe(true);
   });
 });
 

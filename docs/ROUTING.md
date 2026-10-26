@@ -360,11 +360,12 @@ days after it was added, every 6 hours by day, after the followed ones, once a c
 provider has answered for its number: a check can find its carrier. Once its newest scan is
 more than 14 days old, followed or not, it is checked daily by day instead while no link was
 opened in the last hour and it has no alert on. One whose number nobody
-has seen 6 h after it was added leaves the schedule, followed or not; opening a link still queues a
+has seen 6 h after it was added leaves the schedule, followed or not, unless it has an alert on:
+then it is checked daily by day until 30 days after it was added. Opening a link still queues a
 check at its cadence, daily rather than weekly after 7 days, since someone is looking. With
 `TRACKING_ENABLE_SPARSE_LOOKUP_RECHECKS=true` (off by default), a release's re-check of one
-that left the schedule unseen contacts one universal provider at most, picked as for an
-account's recheck (below). One whose links nobody opened in the last hour and that has no alert
+that left the schedule unseen, or the daily check of one with an alert on, contacts one
+universal provider at most, picked as for an account's recheck (below). One whose links nobody opened in the last hour and that has no alert
 on is checked every 3 hours by day and waits for the morning overnight: nobody reads it,
 and a number no carrier is known for asks every provider in turn. A scheduled run checks at most ten of them, after every
 account's share, the least recently checked first. Their own checks queue behind every account's

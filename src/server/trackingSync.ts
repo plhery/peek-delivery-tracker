@@ -53,7 +53,7 @@ import type { UniversalSource } from 'universal-parcel-scraper';
 import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, freshnessWindow, hasRoutingProgress, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
-import { sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
+import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
 import { collectedPickupPoint } from './collectedPickupPoint';
 import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, hasUnresolvedDirectCurrent, localClockCarrier } from './directLocalHistory';
 import { carrierMovedAt, eventStage, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
@@ -359,7 +359,15 @@ function isScheduledTrackingSyncDue(
 ): boolean {
   if (!isTrackingSyncDue(parcel, now)) return false;
   const unseen = unseenFor(parcel, now);
-  if (oneOff && unseen !== null && (unfollowed || unseen >= UNSEEN_HOURLY_MS)) return false;
+  if (oneOff && unseen !== null && (unfollowed || unseen >= UNSEEN_HOURLY_MS)) {
+    // Past its hourly checks, a lookup someone keeps an alert on, which is what watches a lookup
+    // without an account besides a link opened in the last hour, is checked daily by day, and not
+    // overnight, until 30 days after it was added. One only opened gets its check from the opening.
+    if (unfollowed || unwatched || unseen >= ALERTED_UNSEEN_MS) return false;
+    const local = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' });
+    return local.hour >= 8 && local.hour < 22
+      && !(Date.parse(String(parcel.last_synced_at ?? '')) >= parcelHourStart(parcel, local).minus({ hours: 23 }).toMillis());
+  }
   // An account's parcel whose number nobody has answered for a day, with the rechecks on: once
   // 1, 3 and 7 days after it was added, by day, archived or not, and no more from 14 days. Any
   // check since the latest of these stands in for it, so a run that finds it done skips it.

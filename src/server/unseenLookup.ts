@@ -5,11 +5,18 @@ import { isRecord, type JsonObject } from './types';
 
 /**
  * A number nobody has seen yet is checked hourly for this long after it was
- * added, then every six hours. A one-off lookup then leaves the schedule.
+ * added, then every six hours. A one-off lookup then leaves the schedule, unless
+ * someone keeps an alert on it (ALERTED_UNSEEN_MS).
  */
 export const UNSEEN_HOURLY_MS = 6 * 60 * 60 * 1_000;
 
 const DAY_MS = 24 * 60 * 60 * 1_000;
+
+/**
+ * A one-off lookup nobody has answered for that someone keeps an alert on is checked
+ * daily by day until this long after it was added, rather than leaving the schedule.
+ */
+export const ALERTED_UNSEEN_MS = 30 * DAY_MS;
 
 /** After this long unseen, a number is checked daily. */
 const UNSEEN_DAILY_AFTER_MS = 48 * 60 * 60 * 1_000;
@@ -80,17 +87,25 @@ export function unseenRecheckDue(parcel: JsonObject, now: Date): number | null |
 /**
  * A one-off lookup that left the schedule before any carrier or provider answered for
  * its number. Only opening its link, or a scraper release that teaches a carrier to recognize
- * its number, checks it again.
+ * its number, checks it again. One someone keeps an alert on stays until ALERTED_UNSEEN_MS,
+ * as far as its links come with it (`parcel_links`, as trackingNumberParcels reads them).
  */
 export function leftScheduleUnseen(parcel: JsonObject, now: Date): boolean {
   const unseen = parcel.one_off === true ? unseenFor(parcel, now) : null;
-  return unseen !== null && unseen >= UNSEEN_HOURLY_MS;
+  return unseen !== null && unseen >= UNSEEN_HOURLY_MS && !(unseen < ALERTED_UNSEEN_MS && hasAlert(parcel));
+}
+
+/** Whether one of the parcel's links read with it has an alert on: its owner's, or anyone's on a shared link. */
+function hasAlert(parcel: JsonObject): boolean {
+  return Array.isArray(parcel.parcel_links) && parcel.parcel_links.some((link) => isRecord(link)
+    && Array.isArray(link.parcel_link_alerts)
+    && link.parcel_link_alerts.some((alert) => isRecord(alert) && (link.shared === true || alert.owner === true)));
 }
 
 /**
  * With `TRACKING_ENABLE_SPARSE_LOOKUP_RECHECKS=true`, a check nobody asked for of such a
- * lookup, a scraper release's re-check, contacts one universal provider at most, as an
- * account's parcel's recheck does.
+ * lookup, a scraper release's re-check or the daily check of one with an alert on, contacts
+ * one universal provider at most, as an account's parcel's recheck does.
  */
 export function sparseLookupRecheck(parcel: JsonObject, now: Date): boolean {
   return process.env.TRACKING_ENABLE_SPARSE_LOOKUP_RECHECKS === 'true' && leftScheduleUnseen(parcel, now);

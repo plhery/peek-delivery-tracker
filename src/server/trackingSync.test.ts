@@ -3135,30 +3135,38 @@ describe('TrackingSyncService', () => {
     if (!checked) await expect(service.syncPackage(parcel)).resolves.toMatchObject({ checked: 1 });
   });
 
-  it('stops scheduling a one-off lookup nobody has seen after six hours, until its link is opened', async () => {
+  it('stops scheduling a one-off lookup nobody has seen after six hours, until its link is opened, unless it has an alert on', async () => {
     const unseen = { carrier: 'unknown', current_stage: 'pending', tracking_number: 'TEST1234', user_id: null, one_off: true,
       created_at: '2026-09-09T05:30:00Z', last_synced_at: '2026-09-09T10:00:15Z', sync_status: 'waiting', archived_at: null,
       carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {} } } };
-    const check = async (parcels: JsonObject[], at: string) => {
+    // Listed for a link opened in the last day; nobody opened it in the last hour or keeps an alert on, unless `watched`.
+    const check = async (parcels: JsonObject[], at: string, watched = false) => {
       const client = fakeClient();
       client.listFollowedOneOffPackages.mockResolvedValue(parcels);
+      client.listUnwatchedPackageIds.mockResolvedValue(watched ? [] : parcels.map((parcel) => String(parcel.id)));
       const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
         { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date(at));
       return (await service.sync()).checked;
     };
-    // Hourly while young, then off the schedule.
-    await expect(check([{ ...unseen, id: 'young' }], '2026-09-09T11:00:00Z')).resolves.toBe(1);
+    // Hourly while young and watched, then off the schedule.
+    await expect(check([{ ...unseen, id: 'young' }], '2026-09-09T11:00:00Z', true)).resolves.toBe(1);
     await expect(check([{ ...unseen, id: 'old' }], '2026-09-09T11:30:00Z')).resolves.toBe(0);
+    await expect(check([{ ...unseen, id: 'old' }], '2026-09-10T12:00:00Z')).resolves.toBe(0);
+    // With an alert on, daily by day, not overnight, until 30 days after it was added.
+    await expect(check([{ ...unseen, id: 'alerted' }], '2026-09-09T16:00:00Z', true)).resolves.toBe(0);
+    await expect(check([{ ...unseen, id: 'alerted' }], '2026-09-10T12:00:00Z', true)).resolves.toBe(1);
+    await expect(check([{ ...unseen, id: 'alerted' }], '2026-09-10T21:00:00Z', true)).resolves.toBe(0);
+    await expect(check([{ ...unseen, id: 'alerted', created_at: '2026-08-10T05:30:00Z' }], '2026-09-10T12:00:00Z', true)).resolves.toBe(0);
     // A number a provider has answered for keeps the schedule.
     const seen = { ...unseen, id: 'seen', carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {},
       last_success_at: '2026-09-09T10:00:15Z' } } };
-    await expect(check([seen], '2026-09-09T11:30:00Z')).resolves.toBe(1);
+    await expect(check([seen], '2026-09-09T11:30:00Z', true)).resolves.toBe(1);
     // So does one filed under a carrier that refuses its number as one it does not issue, unlike
     // one whose carrier has yet to answer for its label.
     const refused = { ...unseen, id: 'refused', carrier: 'chronodiali', sync_status: 'error', sync_error: 'carrier:refused_number',
       carrier_data: { routing: { version: 1, configured_carrier: 'chronodiali', failures: {} } } };
     await expect(check([refused], '2026-09-09T11:30:00Z')).resolves.toBe(0);
-    await expect(check([{ ...refused, id: 'filed', sync_status: 'waiting', sync_error: null }], '2026-09-09T11:30:00Z')).resolves.toBe(1);
+    await expect(check([{ ...refused, id: 'filed', sync_status: 'waiting', sync_error: null }], '2026-09-09T11:30:00Z', true)).resolves.toBe(1);
     expect(isOpenedParcelSyncDue(refused, new Date('2026-09-09T16:00:00Z'))).toBe(true);
     // Opening the link still queues a check every six hours, then daily.
     expect(isOpenedParcelSyncDue(unseen, new Date('2026-09-09T11:30:00Z'))).toBe(false);

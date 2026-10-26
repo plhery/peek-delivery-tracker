@@ -164,23 +164,28 @@ describe('review queue replay', () => {
     const client = fakeClient();
     const lookup = (values: JsonObject = {}): JsonObject => ({ one_off: true, carrier: 'unknown', current_stage: 'pending',
       created_at: '2026-09-10T05:00:00Z', carrier_data: {}, ...values });
-    client.listOpenTrackingSupportCases.mockResolvedValue(['unseen', 'recent', 'account', 'answered', 'deleted'].map((name, index) => ({
+    client.listOpenTrackingSupportCases.mockResolvedValue(['unseen', 'recent', 'account', 'answered', 'deleted', 'alerted'].map((name, index) => ({
       id: `case-${name}`, tracking_number: `12345678900${index}`, configured_carrier: 'unknown', reasons: ['ambiguous_shape', 'recognition_unknown'],
       // The deleted parcel's last check had an answer.
       last_outcome: 'updated',
     })));
     client.trackingNumberParcels.mockResolvedValue(new Map([
-      ['123456789000', [lookup(), lookup({ created_at: '2026-09-09T05:00:00Z', archived_at: '2026-09-09T06:00:00Z' })]],
+      ['123456789000', [lookup(), lookup({ created_at: '2026-09-09T05:00:00Z', archived_at: '2026-09-09T06:00:00Z' }),
+        // An alert keeps a lookup checked daily for 30 days after it was added, and only then.
+        lookup({ created_at: '2026-08-01T05:00:00Z', parcel_links: [{ shared: true, parcel_link_alerts: [{ owner: false }] }] }),
+        // Someone else's alert on a link that is not shared reaches nobody.
+        lookup({ parcel_links: [{ shared: false, parcel_link_alerts: [{ owner: false }] }] })]],
       // Still in the schedule: added less than 6 hours ago.
       ['123456789001', [lookup({ created_at: '2026-09-10T07:00:00Z' })]],
       // An account's parcel is still checked.
       ['123456789002', [lookup(), lookup({ one_off: false })]],
       ['123456789003', [lookup({ carrier_data: { routing: { version: 1, last_success_at: '2026-09-10T06:00:00Z' } } })]],
+      ['123456789005', [lookup({ parcel_links: [{ shared: false, parcel_link_alerts: [{ owner: true }] }] })]],
     ]));
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
-      .resolves.toMatchObject({ cases_replayed: 5, cases_ignored: 1 });
+      .resolves.toMatchObject({ cases_replayed: 6, cases_ignored: 1 });
     expect(client.trackingNumberParcels).toHaveBeenCalledExactlyOnceWith(
-      ['123456789000', '123456789001', '123456789002', '123456789003', '123456789004']);
+      ['123456789000', '123456789001', '123456789002', '123456789003', '123456789004', '123456789005']);
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [{ id: 'case-unseen',
       note: 'Every parcel with the number is a one-off lookup that left the schedule before any carrier or provider answered for it: no check is left to update the case.' }]);
   });

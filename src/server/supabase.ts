@@ -1410,7 +1410,8 @@ export class SupabaseServiceClient extends SupabaseClient {
     for (let start = 0; start < numbers.length; start += 100) {
       const page = numbers.slice(start, start + 100).map((number) => `"${number.replace(/["\\]/g, '')}"`);
       const params = query({
-        select: 'tracking_number,one_off,carrier,current_stage,created_at,carrier_data', tracking_number: `in.(${page.join(',')})`,
+        select: 'tracking_number,one_off,carrier,current_stage,created_at,carrier_data,parcel_links(shared,parcel_link_alerts(owner))',
+        tracking_number: `in.(${page.join(',')})`,
       });
       for (const row of rows(await this.request(`/rest/v1/packages?${params}`))) {
         const number = String(row.tracking_number);

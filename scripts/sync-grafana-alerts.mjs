@@ -46,6 +46,13 @@ function condition(rule) {
     model: { type: 'classic_conditions', conditions, datasource: { type: '__expr__', uid: '__expr__' }, refId: 'C' } };
 }
 
+// Grafana's default notification policy keeps alerts in Grafana; a rule with "notify": "user"
+// gets the notify=user label, which a policy of its own sends on to the user.
+function labels(rule) {
+  if (rule.notify !== undefined && rule.notify !== 'user') throw new Error(`${rule.uid}: notify can only be "user"`);
+  return { service: 'delivery-tracker', severity: rule.severity, ...(rule.notify && { notify: rule.notify }) };
+}
+
 export function provisionedRule(rule, alerts, datasources) {
   const data = [query('A', rule, datasources)];
   if (rule.onlyWhile) data.push(query('G', rule.onlyWhile, datasources));
@@ -61,7 +68,7 @@ export function provisionedRule(rule, alerts, datasources) {
     execErrState: rule.execErrState,
     for: rule.for,
     annotations: { summary: rule.summary, description: rule.description },
-    labels: { service: 'delivery-tracker', severity: rule.severity },
+    labels: labels(rule),
     isPaused: false,
   };
 }

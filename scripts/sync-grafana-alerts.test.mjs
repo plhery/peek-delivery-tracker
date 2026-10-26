@@ -36,6 +36,27 @@ describe('the alert rules', () => {
     assert.throws(() => provisionedGroup(alerts, { ...datasources, loki: undefined }), /GRAFANA_LOKI_UID/);
   });
 
+  it('reach the user only when the source says notify: user', () => {
+    for (const [index, rule] of group.rules.entries()) {
+      const source = alerts.rules[index];
+      assert.deepEqual(rule.labels, source.notify
+        ? { service: 'delivery-tracker', severity: source.severity, notify: 'user' }
+        : { service: 'delivery-tracker', severity: source.severity }, rule.uid);
+    }
+    assert.deepEqual(group.rules.filter(rule => rule.labels.notify).map(rule => rule.uid), ['peek-down-15m']);
+    const [first] = alerts.rules;
+    assert.throws(() => provisionedGroup({ ...alerts, rules: [{ ...first, notify: 'everyone' }] }, datasources),
+      /notify can only be "user"/);
+  });
+
+  it('page the user only for an outage that lasts 15 minutes, never for missing data', () => {
+    const down = alerts.rules.find(rule => rule.uid === 'peek-down-15m');
+    const unreachable = alerts.rules.find(rule => rule.uid === 'peek-unreachable');
+    assert.equal(unreachable.expr, `absent(up{job="delivery-tracker"}) or ${down.expr}`);
+    assert.deepEqual([down.for, down.severity, down.noDataState], ['15m', 'critical', 'OK']);
+    assert.equal(unreachable.notify, undefined);
+  });
+
   it('fire a rule with onlyWhile only while both queries are above their thresholds', () => {
     const gated = group.rules.find(rule => rule.data.some(entry => entry.refId === 'G'));
     const conditions = gated.data.at(-1).model.conditions;
@@ -62,5 +83,12 @@ describe('a sync', () => {
     const changed = structuredClone(first);
     changed.data.at(-1).model.conditions[0].evaluator.params = [9];
     assert.notEqual(comparableRule(changed), comparableRule(first));
+  });
+
+  it('puts back a notify label Grafana lost', () => {
+    const notified = group.rules.find(rule => rule.labels.notify);
+    const live = group.rules.map(rule => stored(rule === notified
+      ? { ...rule, labels: { service: rule.labels.service, severity: rule.labels.severity } } : rule));
+    assert.deepEqual(plan(group, live), { create: [], update: [notified.uid], remove: [] });
   });
 });

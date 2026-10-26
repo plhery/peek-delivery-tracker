@@ -1040,13 +1040,19 @@ renewals instead of openings.
 ## Grafana alerts
 
 [ops/grafana/alerts.json](../ops/grafana/alerts.json) holds the alert rules Grafana
-evaluates every minute, in its "Peek alerts" folder. They notify through Grafana's default
-contact point. Sentry already reports each error, each carrier or provider outage,
-and a scheduled sync that is missed, fails or passes its 10-minute limit (its cron
-monitors). The rules cover what none of those show:
+evaluates every minute, in its "Peek alerts" folder. Since 2026-10-26 Grafana's default
+notification policy sends alerts to `grafana-only`, a contact point that sends nothing, so
+most fire in Grafana only. A rule with `"notify": "user"` in the file gets the label
+`notify=user`, and only those reach the `telegram-paul` contact point, grouped by alert name.
+Here that is **Peek down for 15 minutes** alone. Sentry already reports each error, each
+carrier or provider outage, and a scheduled sync that is missed, fails or passes its
+10-minute limit (its cron monitors). The rules cover what none of those show:
 
 - **Peek unreachable**: Prometheus has not scraped `/api/metrics` for 5 minutes. A deploy
   takes less.
+- **Peek down for 15 minutes**: the same scrape has failed for 15 minutes, a real outage for
+  users; the one rule that reaches the user. Unlike **Peek unreachable**, it stays quiet when
+  Prometheus has no `up` series for Peek at all, as while Prometheus itself is down.
 - **Peek checks failing across carriers**: in the last 3 hours, 10 checks or more failed,
   5% of them or more, across 3 carriers or more; or 5 carriers or more have an open health
   incident that failed in the last 3 hours. A carrier counts once, however many of its
@@ -1082,13 +1088,16 @@ answer, and the parcels first flagged with a scan in the future in the last hour
 read. A query that fails, as while Prometheus restarts, leaves each
 rule in its last state instead of putting it in Error. A query that returns nothing alerts,
 except for the server errors and future scans, which count it as none: the other database
-rules already alert when `metrics.health` is empty.
+rules already alert when `metrics.health` is empty. **Peek down for 15 minutes** counts it as
+none too, leaving a missing scrape to **Peek unreachable**.
 
 Grafana does not take rules from CI. After changing the file, run
 `npm run grafana:alerts` to see what would change, then `npm run grafana:alerts -- --apply`.
 It reaches Grafana over ssh and runs curl inside its container, so the admin password stays
 there; it saves every alert rule and the notification policies on the host before replacing
-the group. `-- --status` shows how each rule last evaluated. Set `GRAFANA_SSH_HOST`,
+the group. It writes each rule's labels, `notify` included, so a label added in Grafana alone
+is undone by the next sync; it never changes the notification policies.
+`-- --status` shows how each rule last evaluated. Set `GRAFANA_SSH_HOST`,
 `GRAFANA_CONTAINER`, and the data source uids `GRAFANA_PROMETHEUS_UID`, `GRAFANA_LOKI_UID`
 and `GRAFANA_METRICS_UID`.
 

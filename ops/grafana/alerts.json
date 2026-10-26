@@ -89,7 +89,7 @@
       "sql": "select now() as time, future_scan_parcels_1h as value from metrics.health",
       "for": "0s",
       "severity": "warning",
-      "noDataState": "Alerting",
+      "noDataState": "OK",
       "execErrState": "KeepLast",
       "summary": "A check found a scan dated over an hour after it, on a parcel not flagged before: usually a carrier's clock read in the wrong zone.",
       "description": "A check flags future_event_timestamp when one of its scans is dated over an hour after the check started. A parcel counts in the hour its first flagged check started, so the checks that repeat the scan stay quiet and the rule clears an hour later. The \"Future scans\" section of ops/review/signals.sql names the parcel by short id, its carrier and the provider that dated the scan. An adapter or provider that reads a local clock in the wrong zone is fixed in Universal Parcel Scraper (the adapters lane)."

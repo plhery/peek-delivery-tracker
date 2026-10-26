@@ -1084,7 +1084,9 @@ longest scheduled sync of the last 2 hours, the open health incidents, those of 
 failed in the last 3 hours, the carriers of those whose failures left a check without an
 answer, and the parcels first flagged with a scan in the future in the last hour, counted when
 read. A query that fails, as while Prometheus restarts, leaves each
-rule in its last state instead of putting it in Error.
+rule in its last state instead of putting it in Error. A query that returns nothing alerts,
+except for the server errors and future scans, which count it as none: the other database
+rules already alert when `metrics.health` is empty.
 
 Grafana does not take rules from CI. After changing the file, run
 `npm run grafana:alerts` to see what would change, then `npm run grafana:alerts -- --apply`.

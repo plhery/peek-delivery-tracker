@@ -57,8 +57,9 @@ are virtual names, never real URLs.
 - **Parcel links**: lookup without an account, share or copy the link, change what the
   link shows, stop sharing, open "Notify me", turn a browser's alerts on or off, get the
   iPhone app or open the parcel in it, add the delivery to a calendar, sign in (and apart from it, sign in for the email), keep in the
-  account, open the parcel already followed, forget. Sharing a parcel from an account
-  counts under the same names.
+  account, open the parcel already followed, forget, and the lookup's owner giving the
+  postcode another carrier asks for. Sharing a parcel from an account counts under the
+  same names.
 - **Safari from an app's browser**: where notifications need the Home Screen but an app's
   own browser has no way to it, a tap on "Open in Safari" (`started`, then `error` if the
   page is still in sight a moment later) and copying the link for Safari.
@@ -68,7 +69,9 @@ are virtual names, never real URLs.
   prompt, on the screen it asks from: `parcel` after a "Yes" there, `deliveries` after a
   parcel seen arriving. Apple doesn't say whether the prompt showed, so these are asks.
 - **Discovery**: search used (never the query), filters, sorting.
-- **Friends**: profile save, invitation create/revoke/accept/share, remove, disable.
+- **Friends**: profile save, invitation create/revoke/accept/share/copy, a friend's
+  card opened, remove, disable.
+- **Passport** (web): a stamp opened for its explanation.
 - **Settings**: language, appearance, notifications and the App Store link beside them,
   widgets, export, account deletion, app opens.
 - **Delivery email**: switched on or off in Settings, the one-time offer accepted or

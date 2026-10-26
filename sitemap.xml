@@ -4017,15 +4017,25 @@
 <loc>https://peektracker.com/carriers/colis-prive-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/colis-prive-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-colis-prive" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/colis-prive-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/colis-prive-tracking" />
-<lastmod>2026-10-10</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/suivi-colis-prive</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/colis-prive-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-colis-prive" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/colis-prive-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/colis-prive-tracking" />
 <lastmod>2026-10-10</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/nl/carriers/colis-prive-pakket-volgen</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/colis-prive-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-colis-prive" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/colis-prive-pakket-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/colis-prive-tracking" />
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/brt-tracking</loc>
@@ -6258,6 +6268,15 @@
 <url>
 <loc>https://peektracker.com/carriers/post-luxembourg-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/post-luxembourg-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/post-luxembourg-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/post-luxembourg-suivi-colis" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/post-luxembourg-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/carriers/post-luxembourg-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/post-luxembourg-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/post-luxembourg-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/post-luxembourg-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/post-luxembourg-tracking" />
 <lastmod>2026-10-26</lastmod>
@@ -6265,6 +6284,7 @@
 <url>
 <loc>https://peektracker.com/fr/carriers/post-luxembourg-suivi-colis</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/post-luxembourg-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/post-luxembourg-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/post-luxembourg-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/post-luxembourg-tracking" />
 <lastmod>2026-10-26</lastmod>
@@ -7028,7 +7048,7 @@
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/imile-sendungsverfolgung</loc>
@@ -7037,7 +7057,7 @@
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/imile-tracking</loc>
@@ -7046,7 +7066,7 @@
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers/imile-seguimiento</loc>
@@ -7055,7 +7075,7 @@
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/postnl-tracking</loc>

@@ -905,7 +905,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "uncollected-parcel",
       "slug": "pacco-in-giacenza-non-ritirato",
-      "title": "Pacco in giacenza non ritirato: quanti giorni e cosa succede"
+      "title": "Pacco non ritirato: cosa succede e quanti giorni di giacenza"
     },
     {
       "id": "parcel-lockers",
@@ -950,7 +950,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "delivery-times",
       "slug": "a-che-ora-consegna-il-corriere",
-      "title": "A che ora consegna il corriere? Orari, sabato e domenica"
+      "title": "A che ora consegna il corriere? Poste, BRT, GLS e il sabato"
     }
   ],
   "es": [
@@ -962,7 +962,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "tracking-statuses",
       "slug": "estados-de-envio-significado",
-      "title": "Estados de un envío: qué significa cada uno"
+      "title": "Estados de un envío en Correos, GLS y SEUR: qué significan"
     },
     {
       "id": "tracking-not-updating",
@@ -1182,12 +1182,12 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "missed-delivery",
       "slug": "intento-de-entrega-ausente",
-      "title": "Intento de entrega ausente: qué hacer y cómo recogerlo"
+      "title": "«Intento de entrega. Ausente» en Correos: qué hacer"
     },
     {
       "id": "delivery-times",
       "slug": "a-que-hora-reparte-correos",
-      "title": "¿A qué hora reparte Correos? Horarios de cada empresa"
+      "title": "¿A qué hora reparte Correos? Sábados y otras empresas"
     }
   ],
   "pt": [
@@ -1409,7 +1409,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "returned-to-sender",
       "slug": "encomenda-devolvida-ao-remetente",
-      "title": "Encomenda devolvida ao remetente: porquê e o que fazer"
+      "title": "«Devolvido ao remetente»: o que significa e o que fazer"
     },
     {
       "id": "returns-tracking",
@@ -1424,7 +1424,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "delivery-times",
       "slug": "a-que-horas-entrega-ctt",
-      "title": "A que horas entregam os CTT? Horários, sábado e domingo"
+      "title": "A que horas passa o carteiro dos CTT? Sábado e domingo"
     }
   ],
   "pl": [
@@ -1436,7 +1436,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "tracking-statuses",
       "slug": "statusy-przesylek-co-oznaczaja",
-      "title": "Statusy przesyłek – co oznaczają, krok po kroku"
+      "title": "„Przesyłka utworzona” – co to znaczy? Statusy przesyłek"
     },
     {
       "id": "tracking-not-updating",

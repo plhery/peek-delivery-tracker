@@ -1,6 +1,6 @@
 ---
-title: Intento de entrega ausente: qué hacer y cómo recogerlo
-description: Te han dejado un aviso de llegada o un SMS de ausente: qué significa, cómo reprogramar la entrega, cuándo recogerlo, qué llevar y dónde reclamar.
+title: «Intento de entrega. Ausente» en Correos: qué hacer
+description: El repartidor pasó y no había nadie. Qué hacer con el aviso de llegada o el SMS: otra entrega, cuándo recogerlo en Correos (desde el día siguiente) y qué llevar.
 slug: intento-de-entrega-ausente
 picture: Una puerta con un aviso metido por debajo, una furgoneta ya lejos y Pip llegando sin aliento, un momento tarde.
 published: 2026-10-14

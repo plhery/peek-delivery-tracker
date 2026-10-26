@@ -1,6 +1,6 @@
 ---
-title: A que horas entregam os CTT? Horários, sábado e domingo
-description: Até que horas entregam os CTT, a DPD, a GLS, a InPost, a UPS e a Amazon, quem entrega ao sábado e ao domingo, e porque é normal a encomenda chegar à noite.
+title: A que horas passa o carteiro dos CTT? Sábado e domingo
+description: Os CTT entregam ao sábado e, nas zonas mais povoadas, ao domingo; nos dias úteis, um Expresso pode chegar das 8h às 22h. E os horários da DPD, GLS, UPS e Amazon.
 slug: a-que-horas-entrega-ctt
 picture: Um relógio a marcar as oito da noite sob uma lua em quarto crescente, um calendário com os fins de semana assinalados, uma carrinha de faróis acesos e o Pip a espreitar de uma janela.
 published: 2026-10-14

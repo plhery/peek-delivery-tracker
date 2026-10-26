@@ -1,6 +1,6 @@
 ---
-title: Estados de un envío: qué significa cada uno
-description: Qué significan los estados de un envío, en el orden en que aparecen: cómo los llaman Correos, GLS y SEUR y en cuáles tienes que hacer algo.
+title: Estados de un envío en Correos, GLS y SEUR: qué significan
+description: «Alta en la unidad de reparto» no quiere decir que vaya en la furgoneta. Qué significan «En reparto», «En tránsito» y los demás estados de Correos, GLS y SEUR.
 slug: estados-de-envio-significado
 picture: Una ruta con curvas y paradas ya completadas (etiqueta, almacén, avión), una furgoneta en la parada actual, una casa más adelante y Pip corriendo.
 published: 2026-10-09

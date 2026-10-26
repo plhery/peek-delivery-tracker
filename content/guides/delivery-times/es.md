@@ -1,6 +1,6 @@
 ---
-title: ¿A qué hora reparte Correos? Horarios de cada empresa
-description: A qué hora reparten Correos, SEUR, GLS, MRW, CTT Express, NACEX y Amazon, quién entrega los sábados y domingos y por qué un paquete puede llegar a las 21:00.
+title: ¿A qué hora reparte Correos? Sábados y otras empresas
+description: Correos reparte paquetes de lunes a viernes, sin horario publicado. A qué hora reparten SEUR, GLS, MRW, NACEX y Amazon, y quién entrega los sábados y los domingos.
 slug: a-que-hora-reparte-correos
 picture: Un reloj que marca las ocho de la tarde bajo una luna creciente, un calendario con los fines de semana marcados, una furgoneta con los faros encendidos y Pip mirando desde una ventana.
 published: 2026-10-14

@@ -1,6 +1,6 @@
 ---
-title: Statusy przesyłek – co oznaczają, krok po kroku
-description: „Przesyłka utworzona” znaczy, że przewoźnik nie ma jeszcze paczki. A co znaczą „w tranzycie”, odprawa celna, „wydana do doręczenia”, awizo czy zwrot?
+title: „Przesyłka utworzona” – co to znaczy? Statusy przesyłek
+description: „Przesyłka utworzona” (np. w InPost) znaczy, że przewoźnik nie ma jeszcze paczki. A co znaczą „w tranzycie”, „w doręczeniu”, awizo, cło i zwrot?
 slug: statusy-przesylek-co-oznaczaja
 picture: Kręta trasa z odhaczonymi przystankami (etykieta z kodem kreskowym, magazyn, samolot), furgonetka na obecnym przystanku, dom jeszcze przed nią i pędzący Pip.
 published: 2026-10-09

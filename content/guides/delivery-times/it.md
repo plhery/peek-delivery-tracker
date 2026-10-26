@@ -1,6 +1,6 @@
 ---
-title: A che ora consegna il corriere? Orari, sabato e domenica
-description: Fino a che ora consegnano Poste, BRT, GLS, Amazon e la Posta svizzera, chi passa il sabato o la domenica e perché un pacco in consegna alle 20 è normale.
+title: A che ora consegna il corriere? Poste, BRT, GLS e il sabato
+description: Fino a che ora consegnano Poste Italiane, BRT, GLS e Amazon, se il sabato conta come giorno lavorativo, chi passa la domenica e perché si consegna anche alle 20.
 slug: a-che-ora-consegna-il-corriere
 picture: Un orologio che segna le otto di sera sotto una falce di luna, un calendario con i fine settimana evidenziati, un furgone a fari accesi e Pip che guarda da una finestra.
 published: 2026-10-14

@@ -1,6 +1,6 @@
 ---
-title: Encomenda devolvida ao remetente: porquê e o que fazer
-description: Porque é que uma encomenda é devolvida ao remetente, se dá para a recuperar, quanto tempo demora e como recebes o dinheiro na Amazon, na Vinted ou numa loja online.
+title: «Devolvido ao remetente»: o que significa e o que fazer
+description: A encomenda volta a quem a enviou por causa da morada, de uma recusa ou de um prazo que passou. Se a podes recuperar, quanto tempo demora e como recebes o dinheiro.
 slug: encomenda-devolvida-ao-remetente
 picture: Uma carrinha com uma encomenda com um carimbo redondo de devolução volta para uma loja ao longo de uma seta curva, e o Pip fica a vê-la partir.
 published: 2026-10-14

@@ -1,6 +1,6 @@
 ---
-title: Pacco in giacenza non ritirato: quanti giorni e cosa succede
-description: Cosa succede a un pacco in giacenza che non ritiri in posta, al punto di ritiro o al locker: quanti giorni resta, se puoi prorogare e il rimborso.
+title: Pacco non ritirato: cosa succede e quanti giorni di giacenza
+description: Un pacco in giacenza non ritirato di solito torna al mittente: Poste Italiane lo tiene 10 giorni lavorativi, i locker InPost e Amazon spesso 3. Proroga e rimborso.
 slug: pacco-in-giacenza-non-ritirato
 picture: Un locker con uno sportello aperto e Pip che aspetta nel vano, e un calendario con gli ultimi due giorni cerchiati.
 published: 2026-10-14

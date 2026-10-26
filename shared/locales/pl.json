@@ -162,6 +162,8 @@
   "detail.changeCarrierDescription": "Wybierz przewoźnika dla {{number}}. Historia śledzenia zostanie zachowana podczas sprawdzania nowego przewoźnika.",
   "detail.changeCarrierFailed": "Nie udało się zmienić przewoźnika. Spróbuj ponownie.",
   "detail.changeCarrierFrom": "Zmień przewoźnika ({{carrier}})",
+  "detail.refusedNumberLooksLike": "Ten przewoźnik nie wydaje takich numerów śledzenia. To wygląda na numer przewoźnika {{carrier}}.",
+  "detail.switchCarrier": "Zmień na {{carrier}}",
   "detail.changingCarrier": "Zmienianie…",
   "detail.checkFailed": "Nie udało się sprawdzić. Spróbuj ponownie.",
   "detail.checkNow": "Sprawdź teraz",

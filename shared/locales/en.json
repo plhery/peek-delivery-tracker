@@ -162,6 +162,8 @@
   "detail.changeCarrierDescription": "Choose the carrier for {{number}}. Your tracking history is kept while Peek checks the new carrier.",
   "detail.changeCarrierFailed": "Couldn’t change the carrier. Try again.",
   "detail.changeCarrierFrom": "Change carrier from {{carrier}}",
+  "detail.refusedNumberLooksLike": "This carrier doesn’t issue tracking numbers like this one. It looks like one from {{carrier}}.",
+  "detail.switchCarrier": "Switch to {{carrier}}",
   "detail.changingCarrier": "Changing…",
   "detail.checkFailed": "Couldn’t check. Try again.",
   "detail.checkNow": "Check now",

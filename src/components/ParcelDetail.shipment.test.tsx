@@ -180,8 +180,43 @@ describe('shipment details', () => {
     expect(screen.getByText('Check the tracking number')).toBeInTheDocument();
     expect(screen.queryByText('Update unavailable')).not.toBeInTheDocument();
     const box = screen.getByText('This carrier doesn’t issue tracking numbers like this one. Check the number, or choose another carrier.').closest('.detail__sync-error')!;
+    expect(within(box as HTMLElement).queryByRole('button', { name: /^Switch to/ })).not.toBeInTheDocument();
     await userEvent.click(within(box as HTMLElement).getByRole('button', { name: 'Change carrier' }));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
+
+  it('names the one carrier a refused number fits, and switches to it in one tap', async () => {
+    const onChangeCarrier = vi.fn().mockResolvedValue(undefined);
+    const refused = { trackingNumber: 'JJD000390012345678', syncStatus: 'error', syncError: 'carrier:refused_number' } as const;
+    const view = show(refused, onChangeCarrier);
+    const box = screen.getByText('This carrier doesn’t issue tracking numbers like this one. It looks like one from DHL.').closest('.detail__sync-error') as HTMLElement;
+    await userEvent.click(within(box).getByRole('button', { name: 'Switch to DHL' }));
+    expect(onChangeCarrier).toHaveBeenCalledWith(expect.objectContaining({ id: 'parcel' }), { carrier: 'dhl' });
+    expect(screen.queryByRole('button', { name: 'Save carrier' })).not.toBeInTheDocument();
+    // Another carrier can still be chosen.
+    await userEvent.click(within(box).getByRole('button', { name: 'Change carrier' }));
+    expect(screen.getByRole('button', { name: 'Carrier Heppner' })).toBeInTheDocument();
+    view.unmount();
+    // A switch that fails says so.
+    show(refused, vi.fn().mockRejectedValue(new TypeError('Failed to fetch')));
+    await userEvent.click(screen.getByRole('button', { name: 'Switch to DHL' }));
+    expect(screen.getByRole('alert')).toHaveTextContent('Check your internet connection and try again.');
+    expect(screen.getByRole('button', { name: 'Switch to DHL' })).toBeEnabled();
+  });
+
+  it('opens the carrier editor on the carrier a refused number fits when it needs the postcode', async () => {
+    const onChangeCarrier = vi.fn();
+    show({ trackingNumber: '3SABCD826405193', syncStatus: 'error', syncError: 'carrier:refused_number' }, onChangeCarrier);
+    await userEvent.click(screen.getByRole('button', { name: 'Switch to PostNL' }));
+    expect(onChangeCarrier).not.toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: 'Carrier PostNL' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /^Delivery postcode/ })).toBeInTheDocument();
+  });
+
+  it('keeps today’s warning when the refused number fits the parcel’s own carrier', () => {
+    show({ carrier: 'dhl', trackingNumber: 'JJD000390012345678', syncStatus: 'error', syncError: 'carrier:refused_number' });
+    expect(screen.getByText('This carrier doesn’t issue tracking numbers like this one. Check the number, or choose another carrier.')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^Switch to/ })).not.toBeInTheDocument();
   });
 
   it('says when DPD rejected the postcode and opens the editor to change it', async () => {

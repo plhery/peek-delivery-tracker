@@ -162,6 +162,8 @@
   "detail.changeCarrierDescription": "Scegli il corriere per {{number}}. La cronologia viene conservata mentre Peek verifica il nuovo corriere.",
   "detail.changeCarrierFailed": "Impossibile cambiare il corriere. Riprova.",
   "detail.changeCarrierFrom": "Cambia corriere ({{carrier}})",
+  "detail.refusedNumberLooksLike": "Questo corriere non emette numeri di tracciamento come questo. Sembra un numero di {{carrier}}.",
+  "detail.switchCarrier": "Passa a {{carrier}}",
   "detail.changingCarrier": "Salvataggio…",
   "detail.checkFailed": "Impossibile controllare. Riprova.",
   "detail.checkNow": "Controlla ora",

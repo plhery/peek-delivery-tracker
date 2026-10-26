@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   CARRIERS,
   SELECTABLE_CARRIERS,
+  carrierClaimingNumber,
   carrierInfo,
   displayedCarrierId,
   carrierTrackingHintKey,
@@ -2205,5 +2206,17 @@ describe('Amazon Logistics account links', () => {
       trackingUrl: 'https://track.amazon.fr/tracking/FR3000000001', trackingProvider: 'ParcelsApp' });
     expect(link).toMatchObject({ name: 'Amazon Logistics', url: 'https://www.amazon.fr/gp/your-account/order-history' });
     expect(tracksAutomatically('amazon-logistics')).toBe(false);
+  });
+});
+
+describe('carrierClaimingNumber', () => {
+  it('names the one other carrier a number’s shape and check digit fit, and no carrier otherwise', () => {
+    expect(carrierClaimingNumber('JJD000390012345678', 'heppner')).toBe('dhl');
+    expect(carrierClaimingNumber('JJD000390012345678', 'dhl')).toBeNull();
+    // Several carriers issue eight digits.
+    expect(carrierClaimingNumber('12345678', 'dhl')).toBeNull();
+    // A failed check digit leaves the number to no carrier.
+    expect(carrierClaimingNumber('1Z999AA10123456785', 'dhl')).toBeNull();
+    expect(carrierClaimingNumber('1Z999AA10123456784', 'dhl')).toBe('ups');
   });
 });

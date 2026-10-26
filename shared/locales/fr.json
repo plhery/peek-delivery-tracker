@@ -162,6 +162,8 @@
   "detail.changeCarrierDescription": "Choisis le transporteur pour {{number}}. Ton historique est conservé pendant la vérification du nouveau transporteur.",
   "detail.changeCarrierFailed": "Impossible de changer de transporteur. Réessaie.",
   "detail.changeCarrierFrom": "Changer de transporteur ({{carrier}})",
+  "detail.refusedNumberLooksLike": "Ce transporteur n’émet pas de numéros de suivi comme celui-ci. On dirait un numéro {{carrier}}.",
+  "detail.switchCarrier": "Passer à {{carrier}}",
   "detail.changingCarrier": "Modification…",
   "detail.checkFailed": "Vérification impossible. Réessaie.",
   "detail.checkNow": "Vérifier maintenant",

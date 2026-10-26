@@ -5,6 +5,7 @@ import {
   type CarrierId,
   type CarrierInputField as ScraperInputField,
   type CarrierInputRequirement as ScraperInputRequirement,
+  detectCarrierMatch,
   normalizeTrackingNumber,
 } from 'universal-parcel-scraper';
 import {
@@ -112,6 +113,16 @@ export {
  */
 export function isPickupCode(normalized: string): boolean {
   return /^\d{6}$/.test(normalized);
+}
+
+/**
+ * The one carrier a number's shape and check digit name, when it is not the parcel's own and the reader can choose
+ * it; null when no single carrier claims the number.
+ */
+export function carrierClaimingNumber(trackingNumber: string, carrierId: CarrierId): CarrierId | null {
+  const match = detectCarrierMatch(trackingNumber);
+  return match.confidence === 'high' && match.carrier !== carrierId && !['unknown', 'intl-post'].includes(match.carrier)
+    && carrierInfo(match.carrier).capabilities.selectable ? match.carrier : null;
 }
 
 /** What the followed carrier says about who delivers: a catalog carrier, and the number it gave the parcel. */

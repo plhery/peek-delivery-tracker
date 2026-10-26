@@ -13,6 +13,15 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertTrue(catalog.recognitionCandidates(for: "33870000000000001", browser: true).contains(.dhlEcommerce))
         XCTAssertEqual(catalog.discoveryCandidates(for: "1Z999AA10123456784"), [])
     }
+    func testClaimingCarrierNamesOnlyOneOtherCarrierByShapeAndCheckDigit() {
+        XCTAssertEqual(catalog.claimingCarrier(for: "JJD000390012345678", besides: .heppner), .dhl)
+        XCTAssertNil(catalog.claimingCarrier(for: "JJD000390012345678", besides: .dhl))
+        // Several carriers issue eight digits.
+        XCTAssertNil(catalog.claimingCarrier(for: "12345678", besides: .dhl))
+        // A failed check digit leaves the number to no carrier.
+        XCTAssertNil(catalog.claimingCarrier(for: "1Z999AA10123456785", besides: .dhl))
+        XCTAssertEqual(catalog.claimingCarrier(for: "1Z999AA10123456784", besides: .dhl), .ups)
+    }
     func testMondialRelayLabelBarcodeDetectionAndPublicLink() throws {
         // Published example in Mondial Relay's label specification, not customer data.
         let barcode = "12123456780101006623123454"

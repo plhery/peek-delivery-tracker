@@ -514,12 +514,24 @@ struct ParcelDetailView: View {
                     }
                 }
             } else if let error = parcel.syncError {
-                Text(localizer.trackingFailureMessage(error))
+                // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
+                let claiming = error == "carrier:refused_number"
+                    ? catalog.claimingCarrier(for: parcel.trackingNumber, besides: parcel.carrier) : nil
+                Text(claiming.map { localizer.text("detail.refusedNumberLooksLike", [
+                    "carrier": catalog.info(for: $0, language: localizer.language).displayName,
+                ]) } ?? localizer.trackingFailureMessage(error))
                     .font(.footnote).foregroundStyle(Brand.warning)
                 if editable, ["carrier:input_required", "carrier:invalid_input"].contains(error), parcel.activeTrackingCarrier == parcel.carrier,
                    !catalog.requirements(for: parcel.carrier, trackingNumber: parcel.trackingNumber).isEmpty {
                     Button(localizer.text("detail.updateTrackingDetails")) { carrierEditor = CarrierEditorRequest() }
                         .font(.footnote).foregroundStyle(branding.ink)
+                }
+                if editable, let claiming {
+                    Button(localizer.text("detail.switchCarrier", [
+                        "carrier": catalog.info(for: claiming, language: localizer.language).displayName,
+                    ])) { switchCarrier(parcel, to: claiming) }
+                        .font(.footnote.weight(.semibold)).foregroundStyle(branding.ink)
+                        .disabled(working)
                 }
                 if editable, error == "carrier:refused_number" {
                     Button(localizer.text("detail.changeCarrier")) { carrierEditor = CarrierEditorRequest() }
@@ -851,6 +863,15 @@ struct ParcelDetailView: View {
     /// Back to the list: off it, or from beside it.
     private func leave() {
         if let release { release() } else { dismiss() }
+    }
+
+    /// One tap moves the parcel to the carrier its number names; one that needs the postcode opens the editor on it.
+    private func switchCarrier(_ parcel: Parcel, to carrier: CarrierID) {
+        guard catalog.requirements(for: carrier, trackingNumber: parcel.trackingNumber).isEmpty else {
+            carrierEditor = CarrierEditorRequest(initialCarrier: carrier)
+            return
+        }
+        run { try await store.changeCarrier(parcel, carrier: carrier, trackingURL: nil, dpdPostcode: nil, dpdPostcodeCountry: nil) }
     }
 
     private func archive(_ parcel: Parcel) {

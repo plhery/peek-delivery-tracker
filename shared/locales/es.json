@@ -162,6 +162,8 @@
   "detail.changeCarrierDescription": "Elige el transportista para {{number}}. Peek conservará el historial mientras comprueba el nuevo transportista.",
   "detail.changeCarrierFailed": "No se ha podido cambiar el transportista. Inténtalo de nuevo.",
   "detail.changeCarrierFrom": "Cambiar transportista ({{carrier}})",
+  "detail.refusedNumberLooksLike": "Este transportista no emite números de seguimiento como este. Parece un número de {{carrier}}.",
+  "detail.switchCarrier": "Cambiar a {{carrier}}",
   "detail.changingCarrier": "Cambiando…",
   "detail.checkFailed": "No se ha podido comprobar. Inténtalo de nuevo.",
   "detail.checkNow": "Comprobar ahora",

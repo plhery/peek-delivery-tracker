@@ -162,6 +162,8 @@
   "detail.changeCarrierDescription": "Wähle den Paketdienst für {{number}}. Dein Sendungsverlauf bleibt erhalten, während Peek beim neuen Paketdienst nachfragt.",
   "detail.changeCarrierFailed": "Der Paketdienst konnte nicht geändert werden. Versuche es erneut.",
   "detail.changeCarrierFrom": "Paketdienst ändern ({{carrier}})",
+  "detail.refusedNumberLooksLike": "Dieser Paketdienst vergibt keine Sendungsnummern wie diese. Das sieht nach einer Sendungsnummer von {{carrier}} aus.",
+  "detail.switchCarrier": "Zu {{carrier}} wechseln",
   "detail.changingCarrier": "Wird geändert…",
   "detail.checkFailed": "Prüfen fehlgeschlagen. Versuche es erneut.",
   "detail.checkNow": "Jetzt prüfen",

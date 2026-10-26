@@ -763,6 +763,15 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         return match
     }
 
+    /// The one carrier a number's shape and check digit name, when it is not the parcel's own and the reader can
+    /// choose it; nil when no single carrier claims the number.
+    func claimingCarrier(for trackingNumber: String, besides carrier: CarrierID) -> CarrierID? {
+        let match = detect(trackingNumber)
+        guard match.confidence == .high, match.carrier != carrier, match.carrier != .unknown,
+              match.carrier != .internationalPost, info(for: match.carrier).selectable else { return nil }
+        return match.carrier
+    }
+
     private func detectNormalized(_ number: String, printed: String) -> CarrierMatch {
         var matches: [(carrier: CarrierID, confidence: CarrierMatch.Confidence, preferred: Bool)] = []
         for (carrier, definition) in definitions {

@@ -8,6 +8,7 @@ import {
   activeTrackingCarrierId,
   displayedCarrierId,
   carrierInfo,
+  carrierClaimingNumber,
   carrierRequirements,
   carrierTrackingHintKey,
   deliveringCarrierId,
@@ -142,6 +143,8 @@ export function ParcelDetail({
   const inputSuggested = !inputNeeded && parcel.inputSuggested?.field === 'dpdPostcode' && parcel.carrier === 'unknown'
     && !parcel.archivedAt && !current ? parcel.inputSuggested : undefined;
   const postcodePrompt = inputNeeded ?? inputSuggested;
+  // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
+  const claimingCarrier = parcel.syncError === REFUSED_NUMBER ? carrierClaimingNumber(parcel.trackingNumber, parcel.carrier) : null;
   const status = parcelDisplayStatus(parcel);
   const statusLabel = t(parcelDisplayStatusKey(parcel));
   const completionDate = localizedParcelCompletionDate(parcel, languageTag, t);
@@ -179,6 +182,7 @@ export function ParcelDetail({
   const [savingNotifications, setSavingNotifications] = useState(false);
   const [notificationsAnimated, setNotificationsAnimated] = useState(false);
   const [notificationError, setNotificationError] = useState<string | null>(null);
+  const [switchingCarrier, setSwitchingCarrier] = useState(false);
   const delivered = current?.stage === 'delivered';
   const importCharges = importChargesLine(parcel.importCharges, delivered, t, languageTag);
   // While the account's delivery email is on, a parcel still on its way has two alerts: the bell opens them.
@@ -268,6 +272,25 @@ export function ParcelDetail({
       if (!stillChecking) setCheckError(userErrorMessage(error, t, 'detail.checkFailed'));
     } finally {
       setChecking(false);
+    }
+  }
+
+  // One tap moves the parcel to the carrier its number names; one that needs the postcode opens the sheet on it.
+  async function switchCarrier(id: CarrierId) {
+    if (carrierRequirements(id, parcel.trackingNumber).length > 0) {
+      setCarrierSheetInitial(id);
+      setEditingCarrier(true);
+      return;
+    }
+    if (switchingCarrier) return;
+    setSwitchingCarrier(true);
+    setCheckError(null);
+    try {
+      await onChangeCarrier(parcel, { carrier: id });
+    } catch (error) {
+      setCheckError(userErrorMessage(error, t, 'detail.changeCarrierFailed'));
+    } finally {
+      setSwitchingCarrier(false);
     }
   }
 
@@ -651,13 +674,19 @@ export function ParcelDetail({
         )}
         {automaticTracking && parcel.syncError && (
           <div className="detail__sync-error" role="status">
-            <p>{trackingFailureMessage(parcel.syncError, t)}</p>
+            <p>{claimingCarrier ? t('detail.refusedNumberLooksLike', { carrier: carrierInfo(claimingCarrier, locale).name })
+              : trackingFailureMessage(parcel.syncError, t)}</p>
             {(parcel.syncError === 'carrier:input_required' || parcel.syncError === 'carrier:invalid_input') && carrier.id === parcel.carrier
               && carrierRequirements(parcel.carrier, parcel.trackingNumber).length > 0 && (
               <button type="button" className="button button--secondary" onClick={() => setEditingCarrier(true)}>{t('detail.updateTrackingDetails')}</button>
             )}
+            {claimingCarrier && (
+              <button type="button" className="button button--secondary" disabled={switchingCarrier} onClick={() => void switchCarrier(claimingCarrier)}>
+                {t('detail.switchCarrier', { carrier: carrierInfo(claimingCarrier, locale).name })}
+              </button>
+            )}
             {parcel.syncError === REFUSED_NUMBER && (
-              <button type="button" className="button button--secondary" onClick={() => setEditingCarrier(true)}>{t('detail.changeCarrier')}</button>
+              <button type="button" className={claimingCarrier ? 'text-button' : 'button button--secondary'} onClick={() => setEditingCarrier(true)}>{t('detail.changeCarrier')}</button>
             )}
           </div>
         )}

@@ -152,7 +152,9 @@ evidence while the chip is hidden. A parcel without scans whose own carrier refu
 number, such as one chosen by hand that issues no number of that shape, shows the refusal
 at the first check. The refusal is stored as `carrier:refused_number` when the carrier's
 adapter refuses the number alone ([`numberRefusal.ts`](../src/server/numberRefusal.ts)), so
-the reader is told to check the number or the carrier, and until a provider answers for it the
+the reader is told to check the number or the carrier. When the number's shape and check digit
+fit one other carrier alone, the warning names it with a one-tap switch to it, which opens the
+carrier sheet on it when it needs the postcode. Until a provider answers for it the
 number is scheduled as one nobody has seen (Refresh cadence, below): asking that carrier again
 changes nothing. A refused input such as a postcode
 keeps `carrier:invalid_input`, which asks for the parcel's details.

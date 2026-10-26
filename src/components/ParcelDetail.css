@@ -113,6 +113,7 @@
 .detail__shipment-facts dt { color: var(--ink-soft); font-size: 12px; }
 .detail__shipment-facts dd { margin: 0; font-size: 13px; overflow-wrap: anywhere; white-space: pre-line; }
 .detail__sync-error .button { margin-top: 8px; }
+.detail__sync-error .text-button { margin: 8px 0 0 16px; color: var(--ink); }
 .detail--postcard .detail__state { margin: 18px 0 0; text-align: left; color: var(--tone); font-size: 14px; font-weight: 400; }
 .detail--postcard .detail__arrival { margin-top: 6px; color: var(--tone); font-size: 12px; font-weight: 400; }
 .detail--postcard .detail__progress { padding: 0; margin-top: 18px; }

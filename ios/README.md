@@ -158,6 +158,10 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   parcel's route. A widget hasn't the memory to draw the map, so the app draws these pictures
   into the App Group (`DeliveryWidgetPictures`); until they are there, the widget shows the
   parcels in words. Tinted and clear widgets keep the card without its colours or route.
+  Until the app has drawn the reader's cards, the widget gallery shows the demo's next
+  deliveries, which the widget bundles in `DeliveryWidgetExtension/WidgetSample`. A test
+  checks them against the demo; it redraws them when run with
+  `TEST_RUNNER_PEEK_WIDGET_SAMPLE` set to that folder's full path.
 - **The delivery email** belongs to the account, not the device. Settings › Notifications
   has its switch, which saves the moment it is flipped. While it is on, the bell of a parcel
   still on its way opens that parcel's alerts, where notifications and the email are switched

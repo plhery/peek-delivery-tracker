@@ -1061,7 +1061,9 @@ final class ParcelStore: ObservableObject {
     }
 
     /// The parcels on their way, the most pressing first, as the widget picks from them and a Mac's menu bar lists them.
-    var nextDeliveries: [DeliveryWidgetParcel] {
+    var nextDeliveries: [DeliveryWidgetParcel] { Self.nextDeliveries(of: parcels, localizer: localizer) }
+
+    static func nextDeliveries(of parcels: [Parcel], localizer: Localizer) -> [DeliveryWidgetParcel] {
         let ordered = ParcelOrganizer.visible(
             parcels,
             query: "",

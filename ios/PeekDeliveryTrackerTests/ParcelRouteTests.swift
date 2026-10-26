@@ -895,4 +895,90 @@ extension ParcelRouteTests {
         XCTAssertTrue(DeliveryWidgetPictures.isDrawn(plain, in: folder))
         XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: folder.path).count, 2)
     }
+
+    /// Until the app has drawn the reader's own cards, the widget gallery shows the demo's next deliveries from the widget's
+    /// bundle: the words the app publishes for them in each language, and the pictures it draws for them, which name no
+    /// place or carrier differently from one language to another. With `PEEK_WIDGET_SAMPLE` naming `ios/DeliveryWidgetExtension/WidgetSample`, this draws them afresh.
+    @MainActor func testTheWidgetGalleryShowsTheDemosNextDeliveries() async throws {
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        let redraw = ProcessInfo.processInfo.environment["PEEK_WIDGET_SAMPLE"].map { URL(filePath: $0, directoryHint: .isDirectory) }
+        let bundled = try XCTUnwrap(Bundle.main.builtInPlugInsURL?.appending(path: "DeliveryWidgetExtension.appex/\(DeliveryWidgetSample.folderName)"))
+        let atlas = await WorldAtlas.bundled.value
+        let drawings = FileManager.default.temporaryDirectory.appending(path: "widget-sample-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: drawings) }
+        var snapshots: [String: DeliveryWidgetSnapshot] = [:]
+        for language in AppLanguage.allCases {
+            localizer.language = language
+            let suite = "widget-sample-\(UUID().uuidString)"
+            let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+            defer { defaults.removePersistentDomain(forName: suite) }
+            let parcels = DemoRepository(defaults: defaults, language: { language }).list()
+            let shown = DeliveryWidgetSelection.displayParcels(from: ParcelStore.nextDeliveries(of: parcels, localizer: localizer))
+            XCTAssertEqual(shown.count, 2, "\(language)")
+            var sample: [DeliveryWidgetParcel] = []
+            for (index, item) in shown.enumerated() {
+                let parcel = try XCTUnwrap(parcels.first { $0.id == item.id })
+                let card = DeliveryWidgetPictures.card(for: parcel, localizer: localizer)
+                sample.append(DeliveryWidgetParcel(
+                    id: try XCTUnwrap(UUID(uuidString: "00000000-0000-4000-8000-00000000000\(index)")), label: item.label,
+                    carrier: item.carrier, trackingNumber: item.trackingNumber, detail: item.detail, isOutForDelivery: item.isOutForDelivery,
+                    card: DeliveryWidgetCard(surface: card.surface, ink: card.ink, status: card.status, pictures: "sample-\(index)",
+                                             scale: DeliveryWidgetPictures.scale)
+                ))
+                guard redraw != nil, let drawn = sample.last?.card else { continue }
+                let folder = drawings.appending(path: language.rawValue)
+                let done = await DeliveryWidgetPictures.draw(parcel, as: drawn, atlas: atlas, localizer: localizer, in: folder)
+                XCTAssertTrue(done)
+            }
+            snapshots[language.rawValue] = DeliveryWidgetSnapshot(
+                generatedAt: Date(timeIntervalSinceReferenceDate: 0), languageCode: language.rawValue, parcels: sample
+            )
+        }
+
+        if let redraw {
+            try? FileManager.default.removeItem(at: redraw)
+            try FileManager.default.createDirectory(at: redraw, withIntermediateDirectories: true)
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
+            try encoder.encode(snapshots).write(to: redraw.appending(path: DeliveryWidgetSample.snapshotsFile))
+            let english = try XCTUnwrap(snapshots["en"])
+            for (index, parcel) in english.parcels.enumerated() {
+                let card = try XCTUnwrap(parcel.card)
+                for picture in [.mark] + DeliveryWidgetSample.pictures(of: index) {
+                    for dark in [false, true] {
+                        let name = picture.file(of: card, dark: dark, in: redraw).lastPathComponent
+                        let drawn = try Data(contentsOf: drawings.appending(path: "en/\(name)"))
+                        // Pip's pose changes from one drawing of a route to the next; a mark is drawn the same each time.
+                        for language in AppLanguage.allCases where picture == .mark {
+                            XCTAssertEqual(try Data(contentsOf: drawings.appending(path: "\(language.rawValue)/\(name)")), drawn, "\(name) in \(language)")
+                        }
+                        try drawn.write(to: redraw.appending(path: name))
+                    }
+                }
+            }
+            return
+        }
+
+        // What the app would publish for the demo: the pictures' scale is the screen's they were drawn on.
+        let words = { (snapshot: DeliveryWidgetSnapshot?) in
+            snapshot?.parcels.map { [$0.label, $0.carrier, $0.trackingNumber, $0.detail, "\($0.isOutForDelivery)", $0.card?.status ?? "",
+                                     $0.card?.surface.joined(separator: " ") ?? "", $0.card?.ink.joined(separator: " ") ?? ""] }
+        }
+        for language in AppLanguage.allCases {
+            let sample = DeliveryWidgetSample.snapshot(languageCode: language.rawValue, in: bundled)
+            XCTAssertEqual(sample?.languageCode, language.rawValue)
+            XCTAssertEqual(words(sample), words(snapshots[language.rawValue]),
+                           "The demo's next deliveries changed in \(language): redraw the widget's sample (PEEK_WIDGET_SAMPLE).")
+            for (index, parcel) in (sample?.parcels ?? []).enumerated() {
+                let card = try XCTUnwrap(parcel.card)
+                for shape in DeliveryWidgetSample.pictures(of: index) {
+                    let art = try XCTUnwrap(DeliveryWidgetCardArt(card, route: shape, in: bundled), "\(shape) of \(index)")
+                    XCTAssertNotNil(art.light.route)
+                    XCTAssertNotNil(art.dark.route)
+                }
+            }
+        }
+    }
 }

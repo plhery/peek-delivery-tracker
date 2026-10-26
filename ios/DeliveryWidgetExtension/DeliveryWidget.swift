@@ -11,35 +11,29 @@ private struct DeliveryWidgetEntry: TimelineEntry {
     let snapshot: DeliveryWidgetSnapshot?
     /// The pictures of the cards the widget shows, in order; none unless every one of them has its pictures.
     var art: [DeliveryWidgetCardArt] = []
+    /// The demo's cards, which the gallery shows as they are rather than redacted.
+    var isSample = false
 }
 
 private struct DeliveryWidgetProvider: TimelineProvider {
+    /// The demo's next deliveries, as the widget shows them in the reader's language.
     func placeholder(in context: Context) -> DeliveryWidgetEntry {
-        let languageCode = preferredLanguageCode
-        let copy = ExtensionLocalizer(languageCode: languageCode)
+        let store = DeliveryWidgetSharedStore(appGroupIdentifier: DeliveryWidgetSharedStore.appGroupIdentifier())
+        let languageCode = ExtensionLocalizer(savedLanguageCode: store?.languageCode).languageCode
+        let folder = Bundle.main.url(forResource: DeliveryWidgetSample.folderName, withExtension: nil)
+        let snapshot = folder.flatMap { DeliveryWidgetSample.snapshot(languageCode: languageCode, in: $0) }
         return DeliveryWidgetEntry(
             date: Date(),
             enabled: true,
             languageCode: languageCode,
-            snapshot: DeliveryWidgetSnapshot(
-                generatedAt: Date(),
-                languageCode: languageCode,
-                parcels: [
-                    DeliveryWidgetParcel(
-                        id: UUID(),
-                        label: copy.text("common.parcel"),
-                        carrier: "Swiss Post",
-                        trackingNumber: "99.34.123456.12345678",
-                        detail: copy.text("time.today"),
-                        isOutForDelivery: true
-                    ),
-                ]
-            )
+            snapshot: snapshot,
+            art: folder.map { art(for: snapshot?.parcels ?? [], in: context.family, folder: $0) } ?? [],
+            isSample: true
         )
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DeliveryWidgetEntry) -> Void) {
-        // The gallery shows the parcels' own cards once the app has drawn them.
+        // The gallery shows the parcels' own cards once the app has drawn them, and the demo's until then.
         let entry = currentEntry(context.family)
         completion(context.isPreview && entry.art.isEmpty ? placeholder(in: context) : entry)
     }
@@ -56,34 +50,25 @@ private struct DeliveryWidgetProvider: TimelineProvider {
         let store = DeliveryWidgetSharedStore(appGroupIdentifier: identifier)
         let snapshot = store?.snapshot
         let languageCode = snapshot?.languageCode
-            ?? store?.languageCode
-            ?? preferredLanguageCode
+            ?? ExtensionLocalizer(savedLanguageCode: store?.languageCode).languageCode
+        let folder = DeliveryWidgetPicture.folder(appGroupIdentifier: identifier)
         return DeliveryWidgetEntry(
             date: Date(),
             enabled: store?.isEnabled ?? true,
             languageCode: languageCode,
             snapshot: snapshot,
-            art: art(for: snapshot?.parcels ?? [], in: family, appGroupIdentifier: identifier)
+            art: folder.map { art(for: snapshot?.parcels ?? [], in: family, folder: $0) } ?? []
         )
     }
 
     /// Reads the pictures of the cards a widget of `family` shows: a small one shows the first parcel, a medium one
     /// the first two, side by side, or the first alone, across it.
-    private func art(for parcels: [DeliveryWidgetParcel], in family: WidgetFamily, appGroupIdentifier: String) -> [DeliveryWidgetCardArt] {
+    private func art(for parcels: [DeliveryWidgetParcel], in family: WidgetFamily, folder: URL) -> [DeliveryWidgetCardArt] {
         let shown = parcels.prefix(family == .systemMedium ? 2 : 1)
         let shape: DeliveryWidgetPicture = family == .systemMedium ? shown.count > 1 ? .half : .wide : .small
-        guard !shown.isEmpty, let folder = DeliveryWidgetPicture.folder(appGroupIdentifier: appGroupIdentifier) else { return [] }
+        guard !shown.isEmpty else { return [] }
         let art = shown.compactMap { parcel in parcel.card.flatMap { DeliveryWidgetCardArt($0, route: shape, in: folder) } }
         return art.count == shown.count ? art : []
-    }
-
-    private var preferredLanguageCode: String {
-        guard let code = Locale.preferredLanguages.first.map({
-            String($0.prefix(2)).lowercased()
-        }), ["en", "de", "fr", "it", "es", "pt", "pl"].contains(code) else {
-            return "en"
-        }
-        return code
     }
 }
 
@@ -111,8 +96,10 @@ private struct DeliveryWidgetView: View {
         if cards.isEmpty {
             words
         } else {
-            cardContent
+            let content = cardContent
                 .environment(\.locale, Locale(identifier: entry.languageCode == "pt" ? "pt-PT" : entry.languageCode))
+            // WidgetKit redacts a placeholder; the gallery's sample shows the widget as it will look.
+            if entry.isSample { content.unredacted() } else { content }
         }
     }
 
@@ -299,7 +286,8 @@ struct NextDeliveryWidget: Widget {
         let store = DeliveryWidgetSharedStore(
             appGroupIdentifier: DeliveryWidgetSharedStore.appGroupIdentifier()
         )
-        let copy = ExtensionLocalizer(languageCode: store?.languageCode ?? "en")
+        // The app's language, else the device's: the gallery can open before the app has.
+        let copy = ExtensionLocalizer(savedLanguageCode: store?.languageCode)
         return StaticConfiguration(
             kind: DeliveryWidgetSharedStore.kind,
             provider: DeliveryWidgetProvider()

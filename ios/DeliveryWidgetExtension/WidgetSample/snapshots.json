@@ -1,0 +1,338 @@
+{
+  "de" : {
+    "generatedAt" : 0,
+    "languageCode" : "de",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "In Zustellung",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "heute",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "Belgische Schokolade 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "Beim Paketdienst eingegangen",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "morgen",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "Trail-Wochenend-Set 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
+  },
+  "en" : {
+    "generatedAt" : 0,
+    "languageCode" : "en",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "Out for delivery",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "today",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "Belgian chocolate 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "Received by carrier",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "tomorrow",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "Trail weekend kit 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
+  },
+  "es" : {
+    "generatedAt" : 0,
+    "languageCode" : "es",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "En reparto",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "hoy",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "Chocolate belga 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "Admitido por el transportista",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "mañana",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "Kit trail de fin de semana 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
+  },
+  "fr" : {
+    "generatedAt" : 0,
+    "languageCode" : "fr",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "En livraison",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "aujourd’hui",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "Chocolat belge 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "Pris en charge",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "demain",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "Kit week-end trail 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
+  },
+  "it" : {
+    "generatedAt" : 0,
+    "languageCode" : "it",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "In consegna",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "oggi",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "Cioccolato belga 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "Preso in carico",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "domani",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "Kit weekend trail 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
+  },
+  "pl" : {
+    "generatedAt" : 0,
+    "languageCode" : "pl",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "W doręczeniu",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "dziś",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "Belgijska czekolada 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "Przyjęta przez przewoźnika",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "jutro",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "Zestaw na weekend w górach 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
+  },
+  "pt" : {
+    "generatedAt" : 0,
+    "languageCode" : "pt",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "Em distribuição",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "hoje",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "Chocolate belga 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "Aceite pela transportadora",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "amanhã",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "Kit trail de fim de semana 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
+  }
+}

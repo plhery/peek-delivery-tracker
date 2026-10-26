@@ -55,6 +55,22 @@ struct DeliveryWidgetSnapshot: Codable, Equatable, Sendable {
     let parcels: [DeliveryWidgetParcel]
 }
 
+/// What the widget gallery shows until the app has drawn the reader's own cards: the demo's next deliveries as the app
+/// publishes them in each language, with the pictures the app draws for them. The widget bundles them in this folder;
+/// the app's tests check them against the demo, and redraw them into the folder `PEEK_WIDGET_SAMPLE` names.
+enum DeliveryWidgetSample {
+    static let folderName = "WidgetSample"
+    static let snapshotsFile = "snapshots.json"
+    /// The picture of each shape a sample card shows in: the first card alone in a small widget, both in a medium one.
+    static func pictures(of index: Int) -> [DeliveryWidgetPicture] { index == 0 ? [.small, .half] : [.half] }
+
+    static func snapshot(languageCode: String, in folder: URL) -> DeliveryWidgetSnapshot? {
+        guard let data = try? Data(contentsOf: folder.appending(path: snapshotsFile)),
+              let snapshots = try? JSONDecoder().decode([String: DeliveryWidgetSnapshot].self, from: data) else { return nil }
+        return snapshots[languageCode] ?? snapshots["en"]
+    }
+}
+
 enum DeliveryActivityPhase: String, Codable, Hashable, Sendable {
     case outForDelivery = "out_for_delivery"
     case delivered

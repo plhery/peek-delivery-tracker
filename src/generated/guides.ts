@@ -147,6 +147,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "adidas order tracking: delivery, returns and problems"
     },
     {
+      "id": "h-m-orders",
+      "slug": "hm-order-tracking",
+      "title": "H&M order tracking: delivery, returns and problems"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "how-to-find-tracking-number",
       "title": "How to find your tracking number, or track without one"
@@ -352,6 +357,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "adidas-orders",
       "slug": "adidas-sendungsverfolgung",
       "title": "adidas Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
+    },
+    {
+      "id": "h-m-orders",
+      "slug": "hm-sendungsverfolgung",
+      "title": "H&M Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
     },
     {
       "id": "find-tracking-number",
@@ -561,6 +571,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Suivi de commande adidas\u00a0: livraison, retours et problèmes"
     },
     {
+      "id": "h-m-orders",
+      "slug": "suivi-commande-hm",
+      "title": "Suivi de commande H&M\u00a0: livraison, retours, problèmes"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "ou-trouver-numero-de-suivi",
       "title": "Où trouver son numéro de suivi, et comment faire sans"
@@ -766,6 +781,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "adidas-orders",
       "slug": "tracciamento-ordine-adidas",
       "title": "Tracciamento ordine adidas: spedizione, resi e problemi"
+    },
+    {
+      "id": "h-m-orders",
+      "slug": "tracciamento-ordine-hm",
+      "title": "Tracciamento ordine H&M: spedizione, resi e problemi"
     },
     {
       "id": "find-tracking-number",
@@ -975,6 +995,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimiento de pedidos adidas: envío, devolución y problemas"
     },
     {
+      "id": "h-m-orders",
+      "slug": "seguimiento-pedido-hm",
+      "title": "Seguimiento de pedidos H&M: envío, devolución y problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "localizar-paquete-sin-numero-de-seguimiento",
       "title": "Cómo localizar un paquete sin número de seguimiento"
@@ -1182,6 +1207,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimento da encomenda adidas: envio, devolução e problemas"
     },
     {
+      "id": "h-m-orders",
+      "slug": "seguimento-encomenda-hm",
+      "title": "Seguimento da encomenda H&M: envio, devolução e problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "onde-encontrar-numero-de-seguimento",
       "title": "Onde encontrar o número de seguimento da encomenda"
@@ -1387,6 +1417,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "adidas-orders",
       "slug": "sledzenie-zamowienia-adidas",
       "title": "Śledzenie zamówienia adidas: dostawa, zwroty i problemy"
+    },
+    {
+      "id": "h-m-orders",
+      "slug": "sledzenie-zamowienia-hm",
+      "title": "Śledzenie zamówienia H&M: dostawa, zwroty i problemy"
     },
     {
       "id": "find-tracking-number",

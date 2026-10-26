@@ -1123,6 +1123,25 @@ function Shoebox() {
   </>;
 }
 
+function Hanger() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    <Truck x={40} y={172} tone="lilac" scale={4} />
+    <path d="M186 150C204 126 220 118 236 120" stroke="var(--lilac)" strokeWidth="4" strokeLinecap="round" strokeDasharray="3 12" />
+    {/* A clothes rail, a coat on its hanger. */}
+    <path d="M256 248V52H428V248M244 248H268M416 248H440" stroke={soft} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M334 60a8 8 0 1 1 8 8v12M342 80 272 112H412Z" stroke={ink} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M278 112H406L418 232H266Z" fill="var(--lilac)" />
+    <path d="M318 112 342 148 366 112M342 148V232" stroke={paper} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" opacity=".85" />
+    {[168, 192, 216].map((cy) => <circle key={cy} cx="352" cy={cy} r="4" fill={paper} />)}
+    {/* Folded jumpers, and Pip standing on them. */}
+    <rect x="456" y="222" width="124" height="26" rx="9" fill="var(--lilac)" opacity=".6" />
+    <rect x="462" y="196" width="112" height="26" rx="9" fill={paper} />
+    <path d="M478 209H558" stroke="var(--lilac)" strokeWidth="3" strokeLinecap="round" />
+    <Pip x={518} ground={196} width={96} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1152,6 +1171,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'zara-orders': { tone: 'rose', draw: Bag },
   'decathlon-orders': { tone: 'green', draw: Bike },
   'adidas-orders': { tone: 'ochre', draw: Shoebox },
+  'h-m-orders': { tone: 'lilac', draw: Hanger },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },

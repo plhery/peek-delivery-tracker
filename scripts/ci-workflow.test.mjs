@@ -19,6 +19,14 @@ it('runs the browser journeys in the image of the installed Playwright', () => {
   }
 });
 
+// A push to main that only changes content would otherwise cancel the native tests in progress.
+it('lets a run on main finish in CI and the iPhone app, and replaces only a pull request\'s', () => {
+  for (const workflow of ['ci.yml', 'ios.yml']) {
+    assert.match(read(`.github/workflows/${workflow}`), /\nconcurrency:\n {2}group: [a-z]+-\$\{\{ github\.event\.pull_request\.number \|\| github\.ref \}\}\n {2}cancel-in-progress: \$\{\{ github\.event_name == 'pull_request' \}\}\n/,
+      `${workflow} must not cancel a run in progress on main`);
+  }
+});
+
 const job = (workflow, id) => {
   const start = workflow.indexOf(`\n  ${id}:\n`);
   assert.ok(start >= 0, `no ${id} job`);

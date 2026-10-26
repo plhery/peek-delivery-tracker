@@ -156,8 +156,9 @@ run iPhone tests; web changes run web checks, unit tests, browser journeys and t
 build. Dependencies and shared client data run both web and iPhone tests. Scraper updates
 keep browser journeys because the package supplies browser code too.
 
-Runs on `main` go one at a time; of the pushes that arrive during a run, only the newest
-is tested next. For web changes, once all selected checks have passed, CI hands the commit
+Runs on `main` go one at a time, in CI and in the iPhone app's workflow; of the pushes that
+arrive during a run, only the newest is tested next. So a push that only changes content
+waits for the native tests in progress, then skips them, instead of restarting them. For web changes, once all selected checks have passed, CI hands the commit
 to the Deploy workflow (`.github/workflows/deploy.yml`). Intentionally skipped migration
 tests allow this; failures and canceled checks block it. Documentation, native-only and
 SQL-only changes do not deploy the web image. The iPhone app is tested in its own workflow

@@ -9,10 +9,12 @@ permissions:
   contents: read
   actions: read
 
-# Only the newest commit of a branch is worth testing.
+# Only a pull request's newest commit is worth testing. On main a run in progress finishes,
+# and the newest push waits for it: one that only changes content then compares with it and
+# skips the native suites (scripts/ci-changes.mjs), instead of restarting them.
 concurrency:
   group: ios-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   changes:

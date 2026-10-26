@@ -15,7 +15,7 @@ import { isCarrierFeedName, isKnownCarrierName, statusMapAnswer } from 'universa
 import { brandCarrierIds, carrierBrand, carrierIdFromName } from 'universal-parcel-scraper/app';
 import { errorType, reportRoutingEvent } from './observability';
 import { recordChecksumRejection, recordProviderInput } from './metrics';
-import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, retryAfterMsOf } from 'universal-parcel-scraper';
+import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
 import { captureDirectLocalHistory, directHistoryNumber, directLocalHistory, hasUnresolvedDirectCurrent, hasUnresolvedDirectHistory } from './directLocalHistory';
 import { withoutDisputedDelivery } from './disputedDelivery';
 import { eventTimestamp, latestResultTime, resultTimezone } from 'universal-parcel-scraper/app';
@@ -889,6 +889,8 @@ export class TrackingRouter {
     // and those whose probe failed on the way (a rate limit, a challenge): no answer about the number.
     const heldDirect = new Set<string>();
     const unsettledDirect = new Set<string>();
+    // The clocks of rows a carrier holds back as written ahead of them: a provider relaying them shows them as scans.
+    const writtenAhead: string[] = [];
     let attempts = 0;
     // Probes are this parcel's own guesses: they are no evidence of provider health.
     let probeContacts = 0;
@@ -1046,6 +1048,7 @@ export class TrackingRouter {
         signal?.throwIfAborted();
         const failure = fail(carrier, error);
         if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
+        writtenAhead.push(...writtenAheadClocks(error));
         if (probe && error instanceof CarrierError && error.reason === 'parcel_found') heldDirect.add(carrier);
         if (probe && ['rate_limited', 'verification', 'schema', 'transport'].includes(failure.kind)) unsettledDirect.add(carrier);
         // The carrier does not issue this number (a failed check digit): a
@@ -1305,8 +1308,8 @@ export class TrackingRouter {
       attemptedUniversal.add(source);
       const prefetched = prefetchedUniversal.get(source) ?? this.options.takePrefetchedUniversal?.(source, universalNumber, providerPostcode);
       if (prefetched) {
-        const result = normalizeCarrierResult(prefetched);
-        if (usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at)) {
+        const result = withoutWrittenAhead(normalizeCarrierResult(prefetched), writtenAhead);
+        if (result && usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at)) {
           delete state.failures[source];
           return { result: { ...result, tracking_provider: source }, sourceCarrierId: 'unknown', swissPostReady: null, handoffFallbackErrorType: null };
         }
@@ -1345,8 +1348,9 @@ export class TrackingRouter {
       let kind: RoutingFailureKind | null = null;
       let retryAfterMs = 0;
       try {
-        const result = normalizeCarrierResult(await (reused ?? this.options.universal(source, universalNumber,
-          Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier)));
+        const result = withoutWrittenAhead(normalizeCarrierResult(await (reused ?? this.options.universal(source, universalNumber,
+          Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier))), writtenAhead);
+        if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier wrote ahead`);
         if (!usable(result)) throw new TypeError('No usable universal progress');
         if (foreignHistory(result, universalCarrier, parcel.created_at)) {
           report('foreign_history_rejected', source);
@@ -1485,6 +1489,10 @@ export class TrackingRouter {
         });
         state.last_event_at = watermark;
         if (direct) return persistResult(direct, state.discovered_carrier);
+        // The provider's copies of rows the carrier holds back as written ahead are no scans.
+        const scans = withoutWrittenAhead(value.result, writtenAhead);
+        if (!scans) return defer();
+        value = { ...value, result: scans };
       }
       if (Array.isArray(value.result.reported_carriers)) {
         const seen = Array.isArray(state.reported_carriers_seen) ? state.reported_carriers_seen : [];

@@ -636,6 +636,18 @@ describe('persistent tracking routing', () => {
     expect(result.correction).toBeUndefined();
     expect(result.result.tracking_provider).toBe('ParcelsApp');
   });
+  it.each(['ups', 'unknown'])('sets aside a provider\'s copies of the rows the carrier holds back as written ahead, for a parcel filed under %s', async (carrier) => {
+    const { router, direct, universal } = setup();
+    // The carrier's row at 11:00 UTC, which it wrote days before.
+    direct.mockRejectedValue(new NoHistoryError('UPS', 'UPS has no scans for the shipment yet',
+      { reason: 'written_ahead', writtenAhead: ['2026-09-10T19:00:00+08:00'] }));
+    universal.mockResolvedValue({ ...history(), discovered_carrier: 'ups' });
+    await expect(router.fetch(parcel({ carrier }), false)).rejects.toBeInstanceOf(RoutingDeferred);
+    const earlier = { time: '2026-09-10T09:00:00Z', description: 'Accepted', stage: 'accepted' };
+    universal.mockResolvedValue({ ...history(), discovered_carrier: 'ups', events: [...history().events!, earlier] });
+    const result = await router.fetch(parcel({ carrier }), false);
+    expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', last_update: earlier.time, events: [earlier] });
+  });
   it.each(['saved', 'discovered'])('shows a %s earlier leg handing the parcel to its carrier without swapping', async (hint) => {
     const number = 'CNPRT90000000000000000017';
     const { router, direct, universal } = setup();

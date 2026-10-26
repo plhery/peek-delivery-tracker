@@ -9,7 +9,9 @@
  * serves the copy with `relay_of`, the id of the scan it repeats, or the scan
  * with the copy's when the copy alone says where it was, and the apps show the
  * row with `relay_of` under the other (eventPlaces.ts). Of the two rows, the one
- * that reached the parcel second announces nothing (push.ts).
+ * that reached the parcel second announces nothing (push.ts). A copy that alone
+ * tells a problem beside the scan's routine step (Chronopost's parcel held as
+ * damaged beside DPD's "on its way") heads its pair, and announces.
  *
  * Both carriers may also tell a hand-over, each in its own stage, at the same
  * second (4PX's "Parcel handed to dpd" and DPD's acceptance, Chronopost's
@@ -89,6 +91,15 @@ function source(event: JsonObject): string {
   return typeof event.provider_event_id === 'string' ? event.provider_event_id.split(':')[0]! : '';
 }
 
+/** Steps that tell a problem, and the routine steps beside which such a step is the news. */
+const PROBLEM_STAGES = new Set(['exception', 'failed_attempt']);
+const ROUTINE_STAGES = new Set(['pending', 'registered', 'accepted', 'in_transit']);
+
+/** Whether the earlier carrier's copy tells a problem that its pair's scan, a routine step, does not. */
+export function copyTellsProblem(copy: JsonObject, scan: JsonObject): boolean {
+  return PROBLEM_STAGES.has(String(copy.stage)) && ROUTINE_STAGES.has(String(scan.stage));
+}
+
 /** Whether two scans at one second are one: places that do not conflict, sharing a word when the second is a minute's first. */
 function sameSecond(copy: { at: number; words: string[] }, scan: { at: number; words: string[] }): boolean {
   const second = (at: number) => Math.floor(at / SECOND_MS);
@@ -147,13 +158,17 @@ export function relayCopies(row: JsonObject): Map<string, string> {
 /**
  * The rows of relay pairs that reached the parcel after the other one: their
  * news was the parcel's already. Of a pair stored by the same check, the copy.
- * The scans need their `created_at`.
+ * A copy that alone tells a problem is news whenever it came: its scan is the
+ * repeat. The scans need their `stage` and `created_at`.
  */
 export function relayRepeats(row: JsonObject): Set<string> {
-  const stored = new Map((Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [])
-    .map((event) => [String(event.id), Date.parse(String(event.created_at))]));
+  const events = new Map((Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [])
+    .map((event) => [String(event.id), event]));
+  const stored = (id: string) => Date.parse(String(events.get(id)!.created_at));
   const repeats = new Set<string>();
-  for (const [copy, scan] of relayCopies(row)) repeats.add(stored.get(copy)! < stored.get(scan)! ? scan : copy);
+  for (const [copy, scan] of relayCopies(row)) {
+    repeats.add(copyTellsProblem(events.get(copy)!, events.get(scan)!) || stored(copy) < stored(scan) ? scan : copy);
+  }
   return repeats;
 }
 

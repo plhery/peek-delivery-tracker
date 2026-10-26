@@ -6,7 +6,7 @@ import { CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
 import { clockDay, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
-import { relayCopies } from './relayCopies';
+import { copyTellsProblem, relayCopies } from './relayCopies';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
 import { isRecord, type JsonObject } from './types';
 
@@ -154,13 +154,14 @@ function placed(event: JsonObject): boolean {
  * Each relay pair as it is served: the row the apps show under the other, and that row's id
  * (`relay_of`). The earlier carrier's copy goes under the scan it repeats, unless the copy alone
  * says where it was: YunExpress and Yanwen tell Ecoscooting's scans with the town Ecoscooting's
- * own leave out, Chronopost tells DPD's with the depot. The apps show the lower row's words, not
- * its place.
+ * own leave out, Chronopost tells DPD's with the depot. Nor does a copy that alone tells a problem
+ * beside the scan's routine step (relayCopies.ts). The apps show the lower row's words, not its place.
  */
 function relayLeads(events: readonly JsonObject[], relays: Map<string, string>): Map<string, string> {
   const byId = new Map(events.map((event) => [String(event.id), event]));
   return new Map([...relays].map(([copy, scan]): [string, string] => (
-    placed(byId.get(copy)!) && !placed(byId.get(scan)!) ? [scan, copy] : [copy, scan])));
+    (placed(byId.get(copy)!) && !placed(byId.get(scan)!)) || copyTellsProblem(byId.get(copy)!, byId.get(scan)!)
+      ? [scan, copy] : [copy, scan])));
 }
 
 /**

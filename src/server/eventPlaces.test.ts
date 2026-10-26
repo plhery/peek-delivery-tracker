@@ -187,6 +187,9 @@ describe('withEventPlaces', () => {
         // Nor does a copy that names none go over a scan that does.
         scan('left', 'ecoscooting', '2026-10-22T09:00:00+00:00', 'Salamanca'),
         scan('left-copy', 'yunexpress', '2026-10-22T09:00:00+00:00', null),
+        // Unless the copy alone tells a problem: the parcel held as damaged goes over "on its way".
+        { ...scan('moving', 'ecoscooting', '2026-10-23T09:00:12+00:00', 'Salamanca'), stage: 'in_transit' },
+        { ...scan('held', 'yunexpress', '2026-10-23T09:00:12+00:00', null), stage: 'exception' },
       ],
     };
     const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
@@ -195,6 +198,7 @@ describe('withEventPlaces', () => {
       ['sorted', undefined], ['sorted-copy', 'sorted'],
       ['out', undefined], ['out-copy', 'out'],
       ['left', undefined], ['left-copy', 'left'],
+      ['moving', 'held'], ['held', undefined],
     ]);
   });
 

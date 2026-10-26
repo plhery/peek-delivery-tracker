@@ -182,6 +182,23 @@ describe('relayRepeats', () => {
       scan('alone', 'swiss-post', 'in_transit', '2026-09-09T20:00:00Z', '2026-09-10T08:00:05Z'),
     ]))).toEqual(new Set(['arrived', 'depot-copy', 'delivered-copy']));
   });
+
+  it('names the routine scan beside a copy that alone tells a problem, however the two came', () => {
+    // Chronopost holds the parcel as damaged in the second DPD tells it "on its way".
+    const parcel = (tracking_events: object[]) => ({
+      carrier: 'chronopost', carrier_data: { original_carrier: 'chronopost', active_tracking_carrier: 'dpd-de' }, tracking_events,
+    });
+    expect(relayRepeats(parcel([
+      scan('held', 'chronopost', 'exception', '2026-10-26T11:31:22Z', '2026-10-26T11:51:00Z'),
+      scan('on-its-way', 'dpd-de', 'in_transit', '2026-10-26T11:31:22Z', '2026-10-26T11:51:00Z'),
+      // DPD's scan came first; Chronopost's problem is news when it comes.
+      scan('missed', 'chronopost', 'failed_attempt', '2026-10-27T09:12:40Z', '2026-10-27T11:00:00Z'),
+      scan('round', 'dpd-de', 'in_transit', '2026-10-27T09:12:40Z', '2026-10-27T10:00:00Z'),
+      // A problem both tell stays the copy's to repeat.
+      scan('damaged', 'chronopost', 'exception', '2026-10-28T08:00:12Z', '2026-10-28T09:00:00Z'),
+      scan('damaged-scan', 'dpd-de', 'exception', '2026-10-28T08:00:12Z', '2026-10-28T09:00:00Z'),
+    ]))).toEqual(new Set(['on-its-way', 'round', 'damaged']));
+  });
 });
 
 describe('lateScans', () => {

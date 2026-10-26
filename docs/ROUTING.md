@@ -648,8 +648,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
   that minute pair in any stage too (Poczta Polska's posting and DHL's or bpost's first row),
   when the places' names, codes left out, do not conflict. That pairing comes after the
   others, so two steps of one minute that both carriers tell pair stage by stage. When only
-  the earlier carrier's row says where the scan was, the other row is served with `relay_of`
-  instead. The new carrier may also tell
+  the earlier carrier's row says where the scan was, or only it tells a problem beside the other's
+  routine step (Chronopost's parcel held as damaged beside DPD's "on its way"), the other row is
+  served with `relay_of` instead. The new carrier may also tell
   the steps the earlier one sent it over the posts' data exchange, placed only in the earlier carrier's
   country and stamped when the message arrived (Slovenská pošta tells Poczta Polska's posting
   and departure an hour or two late). A row of the new carrier placed in nothing but a country
@@ -658,7 +659,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   hours. A gap of whole hours, to the second when both keep seconds, is one record read on two
   clocks, a scraper's to fix, and pairs nothing. The apps show the words of the row with
   `relay_of` as a line under the other row instead of a step of its own. Of a pair, the row
-  stored second announces no push or link alert, and the delivered email quotes the row
+  stored second announces no push or link alert, nor the copy of a pair stored together, unless
+  the copy alone tells a problem: then the other row is the one left out. The delivered email quotes the row
   without `relay_of` ([`relayCopies.ts`](../src/server/relayCopies.ts),
   [`eventPlaces.ts`](../src/server/eventPlaces.ts)).
 - Compatibility: AliExpress `L…CH` numbers keep a Swiss Post confirmation probe, and

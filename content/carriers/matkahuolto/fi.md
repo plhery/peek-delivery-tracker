@@ -17,7 +17,7 @@ Matkahuolto ei kerro sivuillaan tunnustensa muotoja. Peek tuntee nämä muodot:
 | Tunnus (keksitty) | Mikä se on |
 | --- | --- |
 | `MH000000005FI` | Matkahuollon oma tunnus: `MH`, yhdeksän numeroa ja `FI`. |
-| `MA0000000000100000000` | Matkahuollon oma tunnus: `MA` ja 19 numeroa. |
+| `MA0000000000000000000` | Matkahuollon oma tunnus: `MA` ja 19 numeroa. |
 | `00373000000000000005` | Paketin 20-numeroinen SSCC-viivakoodi. Matkahuollon seuranta löytää sen myös ilman alun nollia, 18 numerona. |
 
 `JJFI`-alkuinen tunnus kuuluu [Postille](carrier:posti), samoin `FI`-loppuinen postitunnus, jonka alussa on muut kirjaimet kuin `MH` (`RR000000005FI`). Jos Matkahuollon seuranta ei löydä pakettia, katso lähettäjän viestistä, mikä yhtiö sen kuljettaa.
@@ -45,7 +45,7 @@ Jos seuranta vastaa `Antamallasi lähetystunnuksella ei löydy vielä tietoja.`,
 
 ## Pakettipiste, pakettiautomaatti ja kotiinkuljetus
 
-Pakettipisteinä toimivat Matkahuollon omat pisteet sekä muun muassa monet K-kaupat ja R-kioskit, ja pakettiautomaatteja on 1 450.
+Pakettipisteinä toimivat Matkahuollon omat pisteet sekä muun muassa monet K-kaupat ja R-kioskit, ja pakettiautomaatteja on 1 450. Ahvenanmaalla Matkahuollon paketit toimittaa 1.10.2026 alkaen Åland Post, jonka postitoimistot, asiamiehet, pakettiautomaatit ja kotijakelu kuuluvat Matkahuollon verkostoon.
 
 **Saapumisilmoitus.** Nopeimmin ilmoitus tulee Paketit-sovellukseen. Muuten saat sen WhatsAppiin tai tekstiviestinä ja lisäksi sähköpostiin, jos osoitteesi on lähetyksen tiedoissa. Jos lähettäjä ei antanut puhelinnumeroasi eikä sähköpostiosoitettasi, ilmoitus tulee paperisena. Jos ilmoitusta ei kuulu, katso roskapostikansiot ja pyydä lähettäjää korjaamaan yhteystietosi.
 
@@ -92,7 +92,7 @@ Matkahuollon sivuilla 26.10.2026:
 
 [Peek](/) kysyy `MH…FI`-tunnuksesta Matkahuollolta, Postilta ja [Chronopostilta](carrier:chronopost) ja `MA`-tunnuksesta vain Matkahuollolta. Jos vain Matkahuolto tuntee tunnuksen, näet tekstin "Matkahuolto has this parcel." Jos myös Posti tuntee sen, valitset itse. Jos kukaan ei vielä tunne sitä, näet tekstin "Not found at … yet. Peek will keep checking after you add it."
 
-SSCC-viivakoodista Peek kysyy Matkahuollolta, jos ensimmäisen numeron jälkeen (20-numeroisessa koodissa `00`:n ja yhden numeron jälkeen) tulee Suomen `64` tai Ruotsin `73`, ja samalla muilta yhtiöiltä, joiden muotoon koodi sopii. Jos vain Matkahuolto tuntee koodin, Peek nimeää Matkahuollon. Jos myös [Posti](carrier:posti), Bring tai [PostNord](carrier:postnord) tuntee sen, Peek nimeää tämän yhtiön: valitse silloin Matkahuolto painikkeella "Change". Muista viivakoodeista Peek ei kysy Matkahuollolta. Liitä koodi silti, sillä Peek seuraa yli 3 500 kuljetusyhtiötä, ja valitse Matkahuolto painikkeella "Change". Matkahuollon seurannan linkki, jossa on `parcelNumber=`, vie Matkahuollolle minkä tahansa tunnuksen.
+SSCC-viivakoodista Peek kysyy Matkahuollolta, jos ensimmäisen numeron jälkeen (20-numeroisessa koodissa `00`:n ja yhden numeron jälkeen) tulee Suomen `64` tai Ruotsin `73`, ja samalla muilta yhtiöiltä, joiden muotoon koodi sopii. Jos vain Matkahuolto tuntee koodin, Peek nimeää Matkahuollon. Jos myös [Posti](carrier:posti) tuntee `64`-koodin tai Bring `73`-koodin, Peek nimeää tämän yhtiön: valitse silloin Matkahuolto painikkeella "Change". Jos koodin tuntee Matkahuollon lisäksi jokin muu yhtiö, esimerkiksi [PostNord](carrier:postnord), valitset itse. Muista viivakoodeista Peek ei kysy Matkahuollolta. Liitä koodi silti, sillä Peek seuraa yli 3 500 kuljetusyhtiötä, ja valitse Matkahuolto painikkeella "Change". Matkahuollon seurannan linkki, jossa on `parcelNumber=`, vie Matkahuollolle minkä tahansa tunnuksen, mutta Matkahuollolta Peek osaa hakea vain sen omia `MH…FI`- ja `MA`-tunnuksia sekä postitunnuksia ja SSCC-koodeja, joiden tarkistusnumero on oikein. Muilla tunnuksilla haku ei onnistu.
 
 Peek näyttää paketin tilan ja tapahtumat, palvelun nimen sekä noutopisteen nimen ja katuosoitteen ja voi ilmoittaa muutoksista. Arviota saapumisesta tai painoa Peek ei saa Matkahuollolta, eikä se poimi viimeistä noutopäivää erikseen: katso se saapumisilmoituksesta. Peek ei seuraa pakettia toiselta yhtiöltä Matkahuollolle eikä voi ottaa yhteyttä Matkahuoltoon tai verkkokauppaan puolestasi.
 
@@ -124,6 +124,7 @@ Automaattiin tai pakettipisteeseen pääsääntöisesti 1–2 työpäivää, iso
 - [Matkahuolto: Näin käytät pakettiautomaattia](https://www.matkahuolto.fi/paketit/nain-kaytat-pakettiautomaattia) – Nouda, verkkokaupan palautus, 9:llä alkava tunnus
 - [Matkahuolto: Palauta saapunut paketti helposti](https://www.matkahuolto.fi/paketit/palauta-paketti) – aktivointikoodi ja Palauta-painike
 - [Matkahuolto: Matkahuollon pakettipisteet ja -automaatit](https://www.matkahuolto.fi/paketit/palvelupisteverkosto) – K-kaupat, R-kioskit, 1 450 automaattia
+- [Matkahuolto: Åland Post blir Matkahuoltos nya transportpartner på Åland](https://www.matkahuolto.fi/news/%C3%85land%20Post%20blir%20Matkahuoltos%20nya%20transportpartner%20p%C3%A5%20%C3%85land) – ruotsiksi: Åland Post Ahvenanmaalla 1.10.2026 alkaen
 - [Matkahuolto: Lataa Paketit-äppi](https://www.matkahuolto.fi/paketit/paketit-sovellus) – chat, Mauno
 - [Matkahuolto: Kuljetusvahinko-ohje kuluttajille](https://www.matkahuolto.fi/paketit/kuljetusvahingot) – myyjän vastuu, korvauksen hakija, 7 päivää ja 30 vuorokautta, 20 €/kg
 - [Matkahuolto: Tietoa huijausviesteistä](https://www.matkahuolto.fi/paketit/tietoa-huijausviesteista) – huijaussivustot, lähettäjänimet, maksut, palautuskulut, pankki ja rikosilmoitus

@@ -17,7 +17,7 @@ Matkahuolto doesn't publish its number formats. These are the shapes Peek's cata
 | Number | What it is |
 | --- | --- |
 | `MH000000005FI` | `MH`, 9 digits and `FI`. |
-| `MA0000000000100000000` | `MA` followed by 19 digits. |
+| `MA0000000000000000000` | `MA` followed by 19 digits. |
 | `00373000000000000005` | A 20-digit parcel barcode (SSCC). Matkahuolto's tracking also finds it as 18 digits, without the `00`. |
 
 Numbers starting `JJFI`, and [postal numbers](guide:tracking-number-formats) ending `FI` with letters other than `MH` in front (`RR000000005FI`), belong to [Posti](carrier:posti), the Finnish post. If Matkahuolto can't find it, check which carrier the shop's email names.
@@ -52,15 +52,17 @@ Matkahuolto's tracking comes in Finnish (the default), Swedish and English, each
 
 **How long it waits.** 5 days, then it goes back to the sender; 14 days when the notice comes on paper because the sender gave no phone or email. You can buy 1 to 16 more days in the app or, if registered, on the website, unless the sender has blocked it. GLS's own page gives its parcels 10 days, so go by the last pickup day in your notice.
 
-**Changing the point.** Once, free, in the app before Matkahuolto accepts the parcel; after the arrival notice, only as a paid transfer. Not while it's in transit.
+**Changing the point.** Once, free, in the app: before Matkahuolto has the parcel, says its Q&A, or when the first arrival notice comes, says its Swedish page on receiving parcels. Not while it's in transit. After the arrival notice you can buy a transfer.
 
 **Home Parcels** come on weekdays between 8:00 and 18:00; Business Parcels and [FedEx](carrier:fedex) parcels come on weekdays between 8:00 and 16:00, without notice. A notice gives the planned day, which you can move to one of the next five business days on the day the notice arrives. The parcel is left in a safe, sheltered spot by the door; if that isn't possible and you can't be reached, it goes to a nearby pickup point the next business day.
+
+**Åland.** Since 1 October 2026, Åland Post has delivered Matkahuolto's parcels on Åland, and its post offices, postal agents, lockers and home deliveries are part of Matkahuolto's network.
 
 **Returns.** Get an activation code with the Palauta button in the app or on the website, write it on the parcel with your name and phone number, and take it to a locker or parcel point.
 
 ## Matkahuolto parcel delayed, not updating or damaged
 
-Most parcels arrive the day after dispatch and all within three working days, says Matkahuolto. Parcels from abroad can pass through other carriers first and take a little over a week to reach Matkahuolto.
+Most parcels arrive the day after dispatch, says Matkahuolto, and all within three days of it receiving them (three working days in its Finnish Q&A). Parcels from abroad can pass through other carriers first and take a little over a week to reach Matkahuolto.
 
 **Not updating.** Tracking can pause, for example while the parcel waits to go out or its packaging is checked. If it still doesn't move, Matkahuolto asks you to contact the sender. See [tracking that isn't updating](guide:tracking-not-updating).
 
@@ -81,11 +83,11 @@ As listed on Matkahuolto's English pages on 13 October 2026:
 
 ## Tracking a Matkahuolto parcel with Peek
 
-[Peek](/) asks Matkahuolto, Posti and [Chronopost](carrier:chronopost) about an `MH…FI` number and says "Matkahuolto has this parcel." when only Matkahuolto knows it; if Posti knows it too, you choose. An `MA` number goes to Matkahuolto alone. For an 18 or 20-digit barcode with Finland's `64` or Sweden's `73` after its first digit (after `00` and one digit in the 20-digit form), Peek asks Matkahuolto too, along with the other carriers it fits, and names Matkahuolto when only Matkahuolto knows it. If [Posti](carrier:posti), [Bring](carrier:bring) or [PostNord](carrier:postnord) knows it too, Peek names that carrier: pick Matkahuolto with "Change". Other barcodes aren't offered to Matkahuolto, so pick it with "Change" or paste a matkahuolto.fi tracking link with `parcelNumber=` in it, which works with any number.
+[Peek](/) asks Matkahuolto, Posti and [Chronopost](carrier:chronopost) about an `MH…FI` number and says "Matkahuolto has this parcel." when only Matkahuolto knows it; if Posti knows it too, you choose. An `MA` number goes to Matkahuolto alone. For an 18 or 20-digit barcode with Finland's `64` or Sweden's `73` after its first digit (after `00` and one digit in the 20-digit form), Peek asks Matkahuolto too, along with the other carriers it fits, and names Matkahuolto when only Matkahuolto knows it. If [Posti](carrier:posti) knows a `64` code too, or [Bring](carrier:bring) a `73` code, Peek names that carrier: pick Matkahuolto with "Change". If another carrier, such as [PostNord](carrier:postnord), knows it too, you choose. Other barcodes aren't offered to Matkahuolto, so pick it with "Change". A matkahuolto.fi tracking link with `parcelNumber=` files any number under Matkahuolto, but Peek can ask Matkahuolto only about its own `MH…FI` and `MA` codes and about postal numbers and SSCC barcodes with a valid check digit: any other number fails.
 
 Matkahuolto's scans carry no time zone: Peek reads them on Finnish time and lists Matkahuolto's own history. Statuses keep Matkahuolto's English wording. Peek can show the service name and the pickup point or locker with its town and street, and can notify you of every scan, important steps only or "Delivery day only".
 
-Peek gets no expected arrival day or weight from Matkahuolto. It leaves out additional services, the last pickup day and postcodes, and doesn't follow the parcel to another carrier.
+Peek gets no expected arrival day or weight from Matkahuolto. It leaves out additional services and postcodes and doesn't show the last pickup day separately: it's in the status line and your arrival notice. Peek doesn't follow the parcel to another carrier.
 
 ## Questions about Matkahuolto tracking
 
@@ -103,7 +105,7 @@ Yes, if you're registered or use the Paketit app and the sender gave your phone 
 
 ### How long does a Matkahuolto parcel take?
 
-As a rule 1 to 2 working days to lockers and parcel points, and at most three working days within Finland. Parcels from abroad can take a little over a week to reach Matkahuolto.
+As a rule 1 to 2 working days to lockers and parcel points, and at most three days once Matkahuolto has the parcel (three working days, says its Finnish Q&A). Parcels from abroad can take a little over a week to reach Matkahuolto.
 
 :::sources
 - [Matkahuolto: How to receive a parcel?](https://www.matkahuolto.fi/customer-service/parcels/how-to-receive-a-parcel) – pick-up code, ID, notices, point changes, home parcels, damage, phone numbers
@@ -122,6 +124,9 @@ As a rule 1 to 2 working days to lockers and parcel points, and at most three wo
 - [Matkahuolto: Usein kysyttyä](https://www.matkahuolto.fi/usein-kysyttya) – helpline price, three working days, Business Parcels and FedEx 8:00 to 16:00, feedback form
 - [Matkahuolto: Seuraa pakettisi matkaa](https://www.matkahuolto.fi/asiakaspalvelu/paketit/seuraa-paketin-matkaa) – a little over a week from abroad, the senders' payment link for return costs
 - [Matkahuolto: Track the parcel](https://www.matkahuolto.fi/tracking) – tracking in English, Finnish and Swedish, status wordings
+- [Matkahuolto: Ta emot paket](https://www.matkahuolto.fi/paket/ta-emot-paket) – in Swedish: free point change at the first arrival notice
+- [Matkahuolto: Spåra ditt paket](https://www.matkahuolto.fi/kundservice/paket/spara-ditt-paket) – in Swedish: all parcels within three days
+- [Matkahuolto: Åland Post blir Matkahuoltos nya transportpartner på Åland](https://www.matkahuolto.fi/news/%C3%85land%20Post%20blir%20Matkahuoltos%20nya%20transportpartner%20p%C3%A5%20%C3%85land) – in Swedish: Åland Post on Åland since 1 October 2026
 - [GLS Finland: Lähetysseuranta](https://gls-group.com/FI/fi/laehetysseuranta.html) – Matkahuolto points, Finland parcel number, 10 days
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

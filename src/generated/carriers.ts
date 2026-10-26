@@ -2824,6 +2824,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spåra Posti-paket: försändelsekod, automat och kundtjänst",
       "name": "Posti",
       "color": "#ff8000"
+    },
+    {
+      "id": "matkahuolto",
+      "catalog": "matkahuolto",
+      "slug": "matkahuolto-spara-paket",
+      "title": "Spåra Matkahuolto-paket: statusar, hämtning och kundtjänst",
+      "name": "Matkahuolto",
+      "color": "#001e60"
     }
   ],
   "da": [

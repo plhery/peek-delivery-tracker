@@ -3,7 +3,7 @@ title: Pošta Srbije: Serbian Post tracking, statuses and help
 description: Track a Pošta Srbije or Post Express item: the 13-character number, what the English statuses mean, notices, pickup deadlines, claims and contacts.
 slug: posta-srbije-serbian-post-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 Pošta Srbije (the Post of Serbia) is Serbia's national post, and Post Express is its courier service. Track an item for free on posta.rs's [Track and Trace](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx), in the Post of Serbia app, or by pasting the number in the box above. The number comes from the sender.
@@ -35,8 +35,8 @@ Posta.rs has Cyrillic, Latin and English versions. The table mixes the short Eng
 | `Dispatch` | Sent on to the next office, also by a post abroad. |
 | `Transport` | Handed to transport abroad at the office of exchange. |
 | `Arrived` | Arrived at an office, in Serbia or abroad. |
-| `In charge of delivery at post office` | Out for delivery with the postman or courier. |
-| `Left report` | Nobody was in: a notice of arrival was left. |
+| `Notified` | You've been notified of its arrival; the step names the post office holding it. |
+| `In charge of delivery at post office` | Ready to collect at the counter of the post office that notified you. |
 | `Neuspešan pokušaj uručenja` | A post abroad tried and failed to hand it over. |
 | `Delivered` | Delivered. |
 | `Refuses reception/Not requested` | Refused by the recipient, or not collected. |
@@ -47,7 +47,7 @@ Posta.rs has Cyrillic, Latin and English versions. The table mixes the short Eng
 
 ## Notices, post office pickup and parcel lockers
 
-If nobody is in, the postman leaves a notice of arrival (`Left report`). Storage counts from the day after the notice, whether it came on paper, by SMS, Viber or email. Pošta Srbije keeps items, unless the sender agreed otherwise:
+If nobody is in, the postman leaves a notice of arrival, and Peek shows `Notified`. Storage counts from the day after the notice, whether it came on paper, by SMS, Viber or email. Pošta Srbije keeps items, unless the sender agreed otherwise:
 
 - 5 working days at the post office for most items;
 - 20 days for items arriving from abroad;
@@ -57,7 +57,7 @@ You can ask in writing at any post office to keep it up to 30 days, or to forwar
 
 **Post Express** brings items to the address by 19:00 the next working day, with a free SMS on arrival. If the sender chose it, you collect at one of 1,100 post offices with ID and the SMS.
 
-**Parcel lockers** (*Poštin paketomat*): the notice comes by Viber or SMS. Open the locker 24/7 with the link in the message, the Direct4.me app, or by calling the number given. The posta.rs FAQ gives 2 business days in the locker, then the rest of the storage period at its post office. To have a parcel go to a locker instead, answer "yes" to Pošta Srbije's Viber or SMS question by 17:00.
+**Parcel lockers** (*Poštin paketomat*): the notice comes by Viber or SMS. Open the locker 24/7 with the link in the message, the Direct4.me app, or by calling the number given. The locker site says 48 hours in the locker, the posta.rs FAQ 2 working days: count on the shorter. Then it waits out the storage period at the locker's post office. To have a parcel go to a locker instead, answer "yes" to Pošta Srbije's Viber or SMS question by 17:00.
 
 ## Serbian Post parcel delayed or lost
 
@@ -81,11 +81,11 @@ Pošta Srbije's channels, as posta.rs listed them in October 2026:
 
 ## Tracking Pošta Srbije with Peek
 
-For a postal number ending `RS` with a valid check digit, [Peek](/) asks Pošta Srbije (and [Chronopost](carrier:chronopost)) and shows "Pošta Srbije has this parcel." when it knows the number. If not yet, you see "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Pošta Srbije isn't asked: check the number, or pick it with "Change". Posta.rs tracking links can be pasted too and always name Pošta Srbije; a postexpress.rs link works when it holds a valid postal number.
+[Peek](/) names Pošta Srbije straight away for a number starting `C`, `E`, `L` or `R`, ending `RS` and with a valid check digit. For other letters, such as `PE` or `V`, the shape names no carrier, so Peek asks Pošta Srbije, M-ONE and [Chronopost](carrier:chronopost), and shows "Pošta Srbije has this parcel." when Pošta Srbije knows the number. If not yet, you see "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit no carrier is asked: compare the number with your shipping message, as Pošta Srbije won't track it even if you pick it with "Change". Posta.rs tracking links can be pasted too and always name Pošta Srbije; from a postexpress.rs link, Peek reads the number as if you'd typed it.
 
 An item from abroad keeps its foreign post, even when it's going to Serbia. Pošta Srbije's lookup takes any postal number, though: pick "Pošta Srbije" with "Change", or paste a posta.rs link. Peek can also follow it there when the carrier abroad names "Serbian Post" or "Post Express".
 
-Peek reads the same service as Pošta Srbije's app. It checks every 10 minutes by day, every 2 minutes on the last leg, and hourly overnight, and can notify you when the status changes. Each step goes on a map with its Serbian post office (only the country for a step abroad), with the weight and the time it was delivered. Times in Serbia are Belgrade time; a step abroad is read on that country's clock, and one in a country with several time zones doesn't appear. Pošta Srbije gives no expected arrival day and names no pickup point. Who signed, postcodes and payment details are left out. Statuses keep Pošta Srbije's wording, except `Delivered`, shown in Peek's own words.
+Peek reads the same service as Pošta Srbije's app. It checks every 10 minutes by day and hourly overnight, and can notify you when the status changes. Each step goes on a map with its Serbian post office (only the country for a step abroad), with the weight and the time it was delivered. Times in Serbia are Belgrade time; a step abroad is read on that country's clock, and one in a country with several time zones doesn't appear. Pošta Srbije gives no expected arrival day and names no pickup point. Who signed, postcodes and payment details are left out. Statuses keep Pošta Srbije's wording, except `Delivered`, shown in Peek's own words.
 
 ## Questions about Serbian Post tracking
 
@@ -113,7 +113,7 @@ contact@ptt.rs, for complaints or compliments. Damage claims can't be made by em
 - [Pošta Srbije: Korisnički servis - Kontakt centar](https://www.posta.rs/lat/korisnicki-servis/kontakt-centar.aspx) – same numbers and hours
 - [Pošta Srbije: Post Express – courier service](https://www.posta.rs/eng/stanovnistvo/usluga.aspx?usluga=postal-services%2Fexpress-services-serbia%2Fpost-express) – next day by 19:00, SMS, 1,100 post offices, Post Express contact centre, app tracking
 - [Pošta Srbije: Slanje paketa u Srbiji](https://www.posta.rs/lat/stanovnistvo/usluga.aspx?usluga=postanske-usluge/paketske-usluge-srbija/slanje-paketa-u-srbiji) – up to 5 working days, SMS to the recipient
-- [Pošta Srbije: Poštin paketomat](https://paketomat.posta.rs/) – locker notice, three ways to open, 24/7, redirect by 17:00
+- [Pošta Srbije: Poštin paketomat](https://paketomat.posta.rs/) – locker notice, three ways to open, 24/7, 48 hours, redirect by 17:00
 - [Pošta Srbije: Customer Service - Claims](https://www.posta.rs/eng/korisnicki-servis/reklamacije.aspx) – claims form, handling hours, Takovska 2
 - [Pošta Srbije: Customer Service - Ask a Question](https://www.posta.rs/eng/korisnicki-servis/postavite-pitanje.aspx) – question form
 - [Pošta Srbije: Upozorenje na nove pokušaje prevare putem lažnih SMS poruka](https://www.posta.rs/lat/info/vest-detaljnije.aspx?ID=17516) – fake SMS warning, verified SMS and Viber

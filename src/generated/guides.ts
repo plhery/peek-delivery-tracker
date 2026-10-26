@@ -167,6 +167,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Douglas order tracking: delivery, returns and problems"
     },
     {
+      "id": "lidl-orders",
+      "slug": "lidl-order-tracking",
+      "title": "Lidl order tracking: delivery, returns and problems"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "how-to-find-tracking-number",
       "title": "How to find your tracking number, or track without one"
@@ -392,6 +397,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "douglas-orders",
       "slug": "douglas-sendungsverfolgung",
       "title": "Douglas Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
+    },
+    {
+      "id": "lidl-orders",
+      "slug": "lidl-sendungsverfolgung",
+      "title": "Lidl Sendungsverfolgung: Lieferung, Rückgabe, Probleme"
     },
     {
       "id": "find-tracking-number",
@@ -621,6 +631,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Suivi de commande Douglas\u00a0: livraison, retours, problèmes"
     },
     {
+      "id": "lidl-orders",
+      "slug": "suivi-commande-lidl",
+      "title": "Suivi de commande Lidl\u00a0: livraison, retours et problèmes"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "ou-trouver-numero-de-suivi",
       "title": "Où trouver son numéro de suivi, et comment faire sans"
@@ -846,6 +861,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "douglas-orders",
       "slug": "tracciamento-ordine-douglas",
       "title": "Tracciamento ordine Douglas: spedizione, resi e problemi"
+    },
+    {
+      "id": "lidl-orders",
+      "slug": "tracciamento-ordine-lidl",
+      "title": "Tracciamento ordine Lidl: spedizione, resi e problemi"
     },
     {
       "id": "find-tracking-number",
@@ -1075,6 +1095,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguir un pedido de Douglas: envío, devolución y problemas"
     },
     {
+      "id": "lidl-orders",
+      "slug": "seguimiento-pedido-lidl",
+      "title": "Seguimiento de pedidos Lidl: envío, devolución y problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "localizar-paquete-sin-numero-de-seguimiento",
       "title": "Cómo localizar un paquete sin número de seguimiento"
@@ -1302,6 +1327,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimento de encomendas Douglas: envio, trocas e problemas"
     },
     {
+      "id": "lidl-orders",
+      "slug": "seguimento-encomenda-lidl",
+      "title": "Seguimento de encomendas Lidl: envio, devolução e problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "onde-encontrar-numero-de-seguimento",
       "title": "Onde encontrar o número de seguimento da encomenda"
@@ -1527,6 +1557,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "douglas-orders",
       "slug": "sledzenie-zamowienia-douglas",
       "title": "Śledzenie zamówienia Douglas: dostawa, zwroty i problemy"
+    },
+    {
+      "id": "lidl-orders",
+      "slug": "sledzenie-zamowienia-lidl",
+      "title": "Śledzenie zamówienia Lidl: dostawa, zwroty i problemy"
     },
     {
       "id": "find-tracking-number",

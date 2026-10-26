@@ -1198,6 +1198,23 @@ function Perfume() {
   </>;
 }
 
+function Crate() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    <Truck x={40} y={172} tone="blue" scale={4} />
+    <path d="M186 150C204 126 220 118 236 120" stroke="var(--blue)" strokeWidth="4" strokeLinecap="round" strokeDasharray="3 12" />
+    {/* A garden chair beside a crate of boxed tools. */}
+    <path d="M264 112 290 190H338M330 190 342 248M290 190 276 248" stroke="var(--blue)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M270 136 284 134M276 156 290 154" stroke="var(--blue)" strokeWidth="5" strokeLinecap="round" opacity=".6" />
+    <Box x={374} y={152} width={52} height={36} />
+    <Box x={432} y={140} width={44} height={48} />
+    <rect x="360" y="186" width="210" height="62" rx="5" fill={paper} />
+    {[204, 222, 240].map((y) => <path key={y} d={`M372 ${y}H558`} stroke="var(--blue)" strokeWidth="3" strokeLinecap="round" opacity=".45" />)}
+    <path d="M360 191H570" stroke="var(--blue)" strokeWidth="4" />
+    <Pip x={524} ground={186} width={92} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1231,6 +1248,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'xiaomi-orders': { tone: 'blue', draw: Phonebox },
   'apple-orders': { tone: 'orange', draw: Laptop },
   'douglas-orders': { tone: 'rose', draw: Perfume },
+  'lidl-orders': { tone: 'blue', draw: Crate },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },

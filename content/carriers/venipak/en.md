@@ -6,11 +6,11 @@ published: 2026-10-13
 updated: 2026-10-26
 ---
 
-Venipak is a courier that delivers parcels for shops in Lithuania, Latvia and Estonia, to your door, to one of its parcel lockers or to a pickup point. Enter the number on Venipak's tracking page for your country, or paste it in the box above. It comes from the shop, or from Venipak by SMS.
+Venipak is a courier that delivers parcels for shops in Lithuania, Latvia and Estonia, to your door, to one of its parcel lockers or to a pickup point. Enter the number on Venipak's tracking page for your country, or paste it in the box above. It comes from the shop, or, in Lithuania, from Venipak by SMS.
 
 ## Where to find your Venipak tracking number
 
-Venipak sends the parcel number by SMS on the evening before it's due and again on the day itself. You may also get it from the sender, for example in the shop's shipping email.
+Venipak's Lithuanian FAQ says it texts the parcel number the evening before delivery and again on the day; its Latvian pages mention only a morning SMS with the delivery window. You may also get the number from the sender, for example in the shop's shipping email.
 
 Venipak's texts and calls only reach Lithuanian, Latvian or Estonian phone numbers: with a foreign one, ask the shop for the number. See [how to find your tracking number](guide:find-tracking-number) if nothing arrived.
 
@@ -25,7 +25,7 @@ Venipak's form takes a "Shipment/parcel code", or a "Customer ID" with a "Docume
 
 ## Venipak parcel tracking statuses explained
 
-Venipak's tracking shows statuses in the language of the site you use: Lithuanian, Latvian, Estonian or English. Each step reads as the status, then the place: a terminal in capitals such as `VILNIUS TM2`, or a Venipak locker with its name and town.
+Peek asks Venipak's tracking in English, so these are Venipak's English statuses; where a row has two, the second is the Lithuanian site's English wording. Each step reads as the status, then the place: a terminal in capitals such as `VILNIUS TM2`, or a Venipak locker with its name and town.
 
 | Status | What it means for you |
 | --- | --- |
@@ -34,11 +34,10 @@ Venipak's tracking shows statuses in the language of the site you use: Lithuania
 | `Picked up`, `Picked up from sender` | A courier collected it from the sender or the drop-off locker. |
 | `At terminal` | It's at a Venipak sorting terminal, such as KAUNAS or VILNIUS TM2. |
 | `Out for delivery`, `The parcel is out for delivery` | On its way to your door, locker or pickup point. |
-| `Delivered to pickup point` | Ready for pickup: it's in the locker or at the pickup point named, and your PIN comes by SMS. |
+| `Delivered to pickup point` | Ready for pickup: it's in the locker or at the pickup point named. The PIN comes by SMS, or a QR code by email. |
 | `Delivered` | Handed over at your door, or picked up from the locker or pickup point named after it. |
-| `Wrong shipment ID` | The number isn't a shape Venipak accepts. Check it for typos. |
 
-Two wordings catch people out: `Delivered to pickup point` means the parcel is waiting and its storage time has started, and `Delivered` also covers a parcel picked up from a locker.
+Two wordings catch people out: `Delivered to pickup point` means the parcel is waiting and its storage time has started, and `Delivered` also covers a parcel picked up from a locker. `Wrong shipment ID` isn't a status: it's how Venipak's tracker refuses a number, so check it for typos.
 
 Venipak publishes no list of statuses, and no status for a failed attempt or a return has turned up in its tracking. If the parcel sits `At terminal`, Venipak's advice is to wait for the SMS saying when and how it will arrive.
 
@@ -80,9 +79,9 @@ As listed on Venipak's contact pages on 13 October 2026, each country has its ow
 
 ## Tracking a Venipak parcel with Peek
 
-[Peek](/) names a number like `V12345E1234567` as Venipak's straight away; no other carrier shares the shape, and lowercase or a space before the `E` is fine. Venipak tracking links with the number in them work too.
+[Peek](/) names a number like `V12345E1234567` as Venipak's straight away; no other carrier shares the shape, and lowercase or a space before the `E` is fine. Tracking links on venipak.com or venipak.lt with the number in them work too; from a venipak.lv link Peek reads only a `V…E…` parcel number.
 
-A 7 to 10-digit shipment number is never named Venipak: pick Venipak with "Change", or paste a link. A one-parcel shipment is then followed by its parcel number; for several parcels, add each parcel number.
+A 7 to 10-digit shipment number is never named Venipak: pick Venipak with "Change", or paste a venipak.com or venipak.lt link. A one-parcel shipment is then followed by its parcel number; for several parcels, add each parcel number.
 
 Venipak's scans carry no time zone: Peek reads them on the clock of the scan's place, the same in all three Baltic countries, and lists Venipak's own history. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight. It can show the locker or pickup point where the parcel waits, with its town. Statuses keep Venipak's English wording, except `Delivered` and `Out for delivery`, shown in Peek's own words. You can be notified when the status changes.
 
@@ -92,7 +91,7 @@ Venipak gives no expected arrival day and no weight. Peek leaves out map coordin
 
 ### Can I track a Venipak parcel without the tracking number?
 
-Not on your own: Venipak's form also takes a customer ID with a document number, but only the sender has those. Ask the shop, or wait for Venipak's SMS the evening before.
+Not on your own: Venipak's form also takes a customer ID with a document number, but only the sender has those. Ask the shop, or, in Lithuania, wait for Venipak's SMS the evening before.
 
 ### Can I change the address for a Venipak parcel?
 
@@ -115,6 +114,8 @@ Usually: Venipak says about 98% of parcels arrive the next working day. Homes ar
 - [Venipak: Lockers](https://venipak.com/lt/en/lockers/) – SMS on placement, QR code
 - [Venipak: Parcel tracking (Estonia)](https://venipak.com/ee/en/parcel-tracking/) – customer ID and document number
 - [Venipak: Private customers (Latvia)](https://venipak.com/lv/en/private-customers/) – pickup point storage
+- [Venipak: BUJ (Latvia)](https://venipak.com/lv/buj/) – morning SMS with the delivery window (Latvian)
+- [Venipak: Kā tas strādā? (Latvia)](https://venipak.com/lv/palidziba/pakomati/ka-tas-strada/) – PIN by SMS or QR code link by email (Latvian)
 - [Venipak: Fraudsters are now impersonating real couriers](https://venipak.com/lv/en/news/2025-11-13/venipak-warns-businesses-fraudsters-are-now-impersonating-real-couriers/) – fake texts
 - [WordPress.org: Venipak shipping for WooCommerce](https://wordpress.org/plugins/wc-venipak-shipping/) – parcel number shape
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads

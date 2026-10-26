@@ -2960,7 +2960,16 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0f2345"
     }
   ],
-  "bg": [],
+  "bg": [
+    {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "box-now-prosledyavane-na-pratka",
+      "title": "Проследяване на пратка BOX NOW: номер, статуси и ПИН",
+      "name": "BOX NOW",
+      "color": "#44d62c"
+    }
+  ],
   "el": [
     {
       "id": "box-now",
@@ -3057,6 +3066,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Omniva sūtījumu izsekošana: statusi, pakomāti un kontakti",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "venipak",
+      "catalog": "venipak",
+      "slug": "venipak-sutijumu-izsekosana",
+      "title": "Venipak sūtījumu izsekošana: statusi, pakomāti un kurjers",
+      "name": "Venipak",
+      "color": "#9339f2"
     }
   ],
   "et": [

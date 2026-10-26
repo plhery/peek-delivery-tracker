@@ -52,16 +52,16 @@ While the parcel waits, the tracking page shows a "Last pick up time" and two bu
 
 - **Greece:** at least 24 hours, plus 24 more with "Extend the pick up time".
 - **Cyprus:** at least 24 hours on the English FAQ, extendable by 24.
-- **Bulgaria:** 48 hours, extendable free by another 48.
+- **Bulgaria:** 48 hours, extendable free by another 48, on the FAQ; the terms give 72 hours, plus up to 48 on request to BOX NOW.
 - **Croatia:** 96 hours.
 
 Trust the "Last pick up time" on the tracking page. A parcel not picked up goes back to BOX NOW and is returned to the sender.
 
-**Changing the locker.** Only in the BOX NOW app ("Change Locker"), and in Greece and Cyprus only once per parcel. If your locker is full, BOX NOW moves the parcel to the closest one.
+**Changing the locker.** BOX NOW's FAQs point to the app ("Change Locker"), in Greece and Cyprus once per parcel. Bulgaria's terms also allow one change requested from BOX NOW before the pickup time ends. If your locker is full, BOX NOW moves the parcel to the closest one.
 
 **Cash on delivery.** Lockers take no cash. You pay online through the link BOX NOW sends by email or SMS, and the tracking page shows a "PAY" button.
 
-**Returns.** Drop the parcel at any BOX NOW locker, with the shop's return form (Bulgaria, Croatia) or BOX NOW Returns (Greece).
+**Returns.** Drop the parcel at any BOX NOW locker, with BOX NOW's own returns form, offered for selected partner shops (Bulgaria, Croatia), or BOX NOW Returns (Greece).
 
 ## BOX NOW parcel missing, late or damaged
 
@@ -71,7 +71,7 @@ Trust the "Last pick up time" on the tracking page. A parcel not picked up goes 
 
 **Damaged or wrong parcel (Greece).** Email dema@boxnow.gr with your name, phone number, voucher ID and photos of the parcel. In Croatia, BOX NOW's terms want damage reported within 4 hours of opening the locker.
 
-**Lost or very late.** BOX NOW's terms pay compensation to the sender, who holds the contract (for an online order, the shop), so ask the shop for a refund and report the problem to BOX NOW. Its terms in Greece and Bulgaria allow claims within 6 months, and BOX NOW Cyprus's user agreement within 2 months; in Greece a delay beyond 15 working days counts as a loss. Croatia's terms give 3 months for domestic parcels and 6 for international ones, to podrska@boxnow.hr.
+**Lost or very late.** In Greece and Cyprus BOX NOW's terms pay compensation to the sender, who holds the contract (for an online order, the shop), so ask the shop for a refund and report the problem to BOX NOW. Bulgaria's terms let the recipient claim too, in writing to support@boxnow.bg. BOX NOW's terms in Greece and Bulgaria allow claims within 6 months, and BOX NOW Cyprus's user agreement within 2 months; in Greece a delay beyond 15 working days counts as a loss. Croatia's terms give 3 months for domestic parcels and 6 for international ones, to podrska@boxnow.hr.
 
 ## BOX NOW contact number and customer service
 
@@ -96,7 +96,7 @@ Peek's wordings may differ from BOX NOW's site: ready for pickup reads `Parcel h
 
 ### How long does BOX NOW take to deliver?
 
-In Greece, 1 business day on the mainland and 2 to the islands once BOX NOW has the parcel; in Cyprus 1 working day. BOX NOW's Bulgarian FAQ says within 24 hours of the shop finishing your order, and its Croatian FAQ within 5 working days.
+In Greece, 1 business day on the mainland and 2 to the islands once BOX NOW has the parcel; in Cyprus 1 working day. BOX NOW Bulgaria's FAQ says the next day after the shop has processed your order (its English version also says within 24 hours), and its Croatian FAQ within 5 working days.
 
 ### How does BOX NOW work?
 
@@ -104,7 +104,7 @@ You choose a BOX NOW locker at the shop's checkout. When the parcel arrives, BOX
 
 ### Do I need the BOX NOW app?
 
-No: the PIN comes by text message and the tracking page works without the app. The app (iOS and Android) is the only way to change your locker.
+No: the PIN comes by text message and the tracking page works without the app. BOX NOW's FAQs send you to the app (iOS and Android) to change your locker; Bulgaria's terms also allow one change requested from BOX NOW.
 
 :::sources
 - [BOX NOW Greece: FAQ](https://www.boxnow.gr/en/faq) – 10-digit ID, PIN, holding time, delivery days and times, locker change, full locker, cash on delivery, returns, dema@
@@ -118,13 +118,15 @@ No: the PIN comes by text message and the tracking page works without the app. T
 - [BOX NOW Cyprus: Let's get in touch](https://boxnow.cy/en/get-in-touch) – call centre and hours, dema@boxnow.cy
 - [BOX NOW Cyprus: Individual Agreement](https://boxnow.cy/en/individual-agreement) – claims within 2 months
 - [BOX NOW Cyprus: Track your parcel](https://boxnow.cy/en/track) – Cypriot labels
-- [BOX NOW Bulgaria: FAQ](https://boxnow.bg/en/faq) – lockers only, 48 plus 48 hours, delivery time, app
+- [BOX NOW Bulgaria: FAQ](https://boxnow.bg/en/faq) – lockers only, 48 plus 48 hours, delivery time, app, returns form
 - [BOX NOW Bulgaria: Contact us](https://boxnow.bg/en/get-in-touch) – call centre and hours, support@
-- [BOX NOW Bulgaria: Terms of Use for Shipping Services](https://boxnow.bg/en/terms-of-use-for-shipping-services) – claims within 6 months
+- [BOX NOW Bulgaria: Terms of Use for Shipping Services](https://boxnow.bg/en/terms-of-use-for-shipping-services) – 72 plus 48 hours, one locker change, claims by sender or recipient within 6 months
+- [BOX NOW Bulgaria: Често задавани въпроси](https://boxnow.bg/faq) – delivery the next day (Bulgarian)
 - [BOX NOW Bulgaria: Track your parcel](https://boxnow.bg/en/track) – Bulgarian site labels
 - [BOX NOW Croatia: FAQ](https://boxnow.hr/en/faq) – 96 hours, 5 working days, app notifications, returns
 - [BOX NOW Croatia: Contact](https://boxnow.hr/en/get-in-touch) – call centre and hours
 - [BOX NOW Croatia: Uvjeti korištenja usluga dostave](https://boxnow.hr/terms-of-use-for-shipping-services) – reminder, damage within 4 hours, complaint deadlines
 - [BOX NOW Croatia: Track your parcel](https://boxnow.hr/en/track) – Croatian site labels
+- [BOX NOW Croatia: Česta pitanja](https://boxnow.hr/faq) – BOX NOW's returns form (Croatian)
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

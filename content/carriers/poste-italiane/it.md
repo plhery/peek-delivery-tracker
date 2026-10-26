@@ -1,6 +1,6 @@
 ---
-title: Poste Italiane tracking: codice, stati, giacenza e ritiro
-description: Tracking Poste Italiane: dove trovi il codice spedizione, cosa vogliono dire gli stati, giacenza, Punto Poste, reclami e numero verde per parlare con un operatore.
+title: Poste Italiane tracking: codici 1UW e 3UW, stati e giacenza
+description: Tracking Poste Italiane: dove trovi il codice spedizione (anche 1UW e 3UW), cosa vogliono dire gli stati, giacenza, Punto Poste, reclami e numero verde.
 slug: poste-italiane-tracking
 published: 2026-10-11
 updated: 2026-10-23

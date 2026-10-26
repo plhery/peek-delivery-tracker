@@ -1883,7 +1883,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "poste-italiane",
       "catalog": "poste-italiane",
       "slug": "poste-italiane-tracking",
-      "title": "Poste Italiane tracking: codice, stati, giacenza e ritiro",
+      "title": "Poste Italiane tracking: codici 1UW e 3UW, stati e giacenza",
       "name": "Poste Italiane",
       "color": "#eedc00"
     },

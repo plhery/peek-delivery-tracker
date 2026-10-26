@@ -3,7 +3,7 @@ title: FAN Courier tracking: AWB numbers, statuses and FANbox
 description: Track a FAN Courier parcel in Romania: where the AWB number comes from, what the tracking statuses mean, FANbox lockers, missed deliveries and contacts.
 slug: fan-courier-tracking
 published: 2026-10-13
-updated: 2026-10-23
+updated: 2026-10-26
 ---
 
 FAN Courier is a Romanian courier founded in 1998, with FANbox lockers across the country; it calls itself Romania's courier leader since 2006. Track a parcel with its AWB number on [fancourier.ro's AWB Tracking page](https://www.fancourier.ro/en/awb-track/), with the link in FAN's SMS or in the FAN Courier app. The AWB comes from the shop or person who sent the parcel.
@@ -80,9 +80,9 @@ FAN's channels, as listed on its site on 12 October 2026:
 
 ## Tracking FAN Courier parcels with Peek
 
-[Peek](/) doesn't recognise a FAN Courier AWB by itself: 13 digits fit several carriers' numbers, so it asks [La Poste](carrier:la-poste) and Delhivery, and when neither knows it you'll see "not found yet · Peek keeps checking". Paste it all the same (Peek follows more than 3,500 carriers), then press "Change" and pick "FAN Courier". Or paste a link from FAN's Romanian tracking page (`/awb-tracking/` with `tracking=` or `awb=`), which goes straight to FAN Courier; links to the English page aren't read.
+[Peek](/) asks FAN Courier itself about a 13-digit number starting with `2`, `4` or `7000`, along with [La Poste](carrier:la-poste) and Delhivery, whose numbers can look the same. If only FAN knows it, you'll see "FAN Courier has this parcel."; if another carrier knows it too, you choose. An AWB of any other shape isn't recognised: paste it all the same (Peek follows more than 3,500 carriers), then press "Change" and pick "FAN Courier". A link from FAN's tracking page, Romanian (`/awb-tracking/`) or English (`/en/awb-track/`), with `tracking=` or `awb=`, goes straight to FAN Courier.
 
-Peek then asks FAN Courier itself and shows each of FAN's scans with its town and time. FAN's times carry no time zone, so Peek reads them as Romanian time. Scans keep FAN's English wording, except `Shipment picked up`, which shows as "Shipment collected". Peek checks every 10 minutes by day, every 2 while the parcel is out for delivery, and hourly overnight, and can notify you when the status changes.
+Peek shows each of FAN's scans with its town and time. FAN's times carry no time zone, so Peek reads them as Romanian time. Scans keep FAN's English wording, except `Shipment picked up`, which shows as "Shipment collected". Peek checks every 10 minutes by day, every 2 while the parcel is out for delivery, and hourly overnight, and can notify you when the status changes.
 
 It shows no expected delivery day and no FANbox name, and leaves out the recipient's name, contents, weight and payment details. A return travels under its own AWB, so this one never shows as returned.
 

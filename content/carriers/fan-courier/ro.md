@@ -3,10 +3,10 @@ title: Urmărire colet FAN Courier: AWB, statusuri și FANbox
 description: Urmărește un colet FAN Courier: unde găsești AWB-ul, ce înseamnă statusurile, cât stă coletul în FANbox, ce faci dacă nu ești acasă și cum contactezi FAN.
 slug: fan-courier-urmarire-awb
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-26
 ---
 
-FAN Courier se prezintă drept liderul curieratului din România încă din 2006 și a anunțat în iunie 2026 că a ajuns la 3.000 de lockere FANbox în toată țara. Coletul îl urmărești cu numărul AWB pe [pagina de tracking a FAN](https://www.fancourier.ro/awb-tracking/), din linkul primit prin SMS de la FAN sau în aplicația FAN Courier. AWB-ul ți-l dă cine a trimis coletul, de obicei magazinul online. Îl poți lipi și în căsuța de mai sus, apoi alegi FAN Courier: Peek nu-l recunoaște singur.
+FAN Courier se prezintă drept liderul curieratului din România încă din 2006 și a anunțat în iunie 2026 că a ajuns la 3.000 de lockere FANbox în toată țara. Coletul îl urmărești cu numărul AWB pe [pagina de tracking a FAN](https://www.fancourier.ro/awb-tracking/), din linkul primit prin SMS de la FAN sau în aplicația FAN Courier. AWB-ul ți-l dă cine a trimis coletul, de obicei magazinul online. Îl poți lipi și în căsuța de mai sus.
 
 ## AWB-ul FAN Courier: numărul de urmărire
 
@@ -87,7 +87,7 @@ Pe site-ul FAN, la 23 octombrie 2026:
 
 ## Urmărirea coletelor FAN Courier cu Peek
 
-[Peek](/) nu poate recunoaște singur un AWB FAN Courier după cele 13 cifre. Pentru un astfel de număr întreabă La Poste și Delhivery, iar dacă niciunul nu-l are, vezi „not found yet · Peek keeps checking”. Lipește-l oricum: Peek urmărește peste 3.500 de curieri. Apasă „Change” și alege „FAN Courier”. Sau caută AWB-ul pe pagina de tracking în română a FAN și lipește în Peek adresa paginii (`/awb-tracking/?tracking=` urmat de AWB): Peek o trimite direct la FAN Courier. Linkurile paginii în engleză (`/en/awb-track/`) nu sunt citite.
+[Peek](/) întreabă direct FAN Courier despre un număr de 13 cifre care începe cu `2`, `4` sau `7000`, împreună cu La Poste și Delhivery, ale căror numere pot arăta la fel. Dacă doar FAN îl are, vezi „FAN Courier has this parcel.”; dacă îl are și alt curier, alegi tu. Un AWB de altă formă nu e recunoscut: lipește-l oricum (Peek urmărește peste 3.500 de curieri), apasă „Change” și alege „FAN Courier”. Poți lipi și adresa paginii de tracking a FAN, în română (`/awb-tracking/`) sau în engleză (`/en/awb-track/`), cu `tracking=` sau `awb=` urmat de AWB: Peek o trimite direct la FAN Courier.
 
 Peek citește trackingul FAN în engleză, așa că vezi formulările englezești ale FAN, de exemplu `Shipment sorted` sau `Recipient notified` (adică `Avizat`); `Shipment picked up` apare ca „Shipment collected”. Pagina FAN arată doar statusul și cele patru etape, pe când Peek arată fiecare scanare, cu localitatea și ora. Ziua, Peek verifică coletul la fiecare 10 minute, la fiecare 2 minute cât e în livrare, noaptea o dată pe oră, și te poate anunța când se schimbă statusul.
 

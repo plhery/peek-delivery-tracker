@@ -7652,6 +7652,17 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     expect(client.getPackage.mock.calls.map(([id]) => id)).toEqual(['b1', 'c1', 'b2']);
   });
 
+  it('takes five of an account\'s parcels a run by day, and 25 in the hourly run overnight', async () => {
+    const parcel = (id: string, user: string): JsonObject => ({ id, user_id: user, one_off: false, carrier: 'swiss-post',
+      current_stage: 'in_transit', tracking_number: `TEST${id}`, created_at: '2026-09-03T09:00:00Z', last_synced_at: null,
+      sync_status: 'ok', archived_at: null });
+    const theirs = Array.from({ length: 30 }, (_, index) => parcel(`a${index}`, 'a'));
+    const parcels = [...theirs, parcel('b0', 'b')];
+    // 12:00 and 01:00 in Zurich.
+    await expect(checked(parcels, '2026-09-04T10:00:00Z')).resolves.toEqual(['a0', 'b0', 'a1', 'a2', 'a3', 'a4']);
+    await expect(checked(parcels, '2026-09-04T23:00:00Z')).resolves.toEqual(['a0', 'b0', ...theirs.slice(1, 25).map(({ id }) => id)]);
+  });
+
   it('skips a recheck when another check ran since the run listed it, or it cannot tell', async () => {
     vi.stubEnv('TRACKING_ENABLE_UNSEEN_RECHECKS', 'true');
     const parcel = unseen('unseen', { last_synced_at: '2026-09-02T10:00:15Z' });

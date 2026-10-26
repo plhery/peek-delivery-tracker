@@ -69,6 +69,12 @@ import { carrierLookupInput } from './postcodeCountry';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
 
 const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
+/**
+ * Overnight one run comes an hour instead of one every 2 minutes, so it takes half the 50 parcels
+ * an account can have open, the least recently checked first: each is checked at least every
+ * 2 hours, and an account still gets fewer checks an hour than by day.
+ */
+const MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC = 25;
 /** One-off parcels have no owner: a scheduled run checks this many of them, all together. */
 const MAX_ONE_OFF_PACKAGES_PER_SYNC = 10;
 /** A scheduled run rechecks at most this many accounts' parcels whose number nobody has answered (unseenRecheckDue). */
@@ -334,7 +340,8 @@ function deliveringToday(parcel: JsonObject, now: Date): boolean {
  * The start of the parcel's current hour, which opens at a minute of its own: the
  * parcels checked hourly or less often are spread over the hour rather than all due at
  * its start, so no run takes them all. Copies of one number open at the same minute
- * and still share their lookups. Overnight runs start on the hour and check them all.
+ * and still share their lookups. Overnight runs start on the hour and take every parcel
+ * due, up to an account's share of the run (MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC).
  */
 function parcelHourStart(parcel: JsonObject, local: DateTime): DateTime {
   const number = normalizeTrackingNumber(String(parcel.tracking_number ?? ''));
@@ -1218,7 +1225,9 @@ export class TrackingSyncService {
       // An account's parcel whose number nobody has answered for a day is rechecked after every
       // other parcel and lookup, within its account's share, a few a run.
       const rechecks = new Set(owned.filter((parcel) => unseenRecheckDue(parcel, now) !== undefined));
-      const shares = fairSyncPackages([...owned.filter((parcel) => !rechecks.has(parcel)), ...rechecks]);
+      const hour = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' }).hour;
+      const shares = fairSyncPackages([...owned.filter((parcel) => !rechecks.has(parcel)), ...rechecks],
+        hour >= 8 && hour < 22 ? MAX_PACKAGES_PER_OWNER_PER_SYNC : MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC);
       const parcels = [...shares.filter((parcel) => !rechecks.has(parcel)),
         ...await this.oneOffPackages(due(true), due(true, true), now, context.signal),
         ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)];

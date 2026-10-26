@@ -354,8 +354,8 @@ See [OBSERVABILITY.md](OBSERVABILITY.md) for verification monitoring.
   minute are kept in memory and start again with each deploy; the daily ones are in the
   database. A write is refused when a browser says a page of another site sent it.
 - **Quotas** (enforced in the database): 50 active and 500 total parcels per account.
-  Scheduled sync processes at most five due parcels per account per run, and ten followed
-  without an account. Treat changes to these limits as security-sensitive.
+  Scheduled sync processes at most five due parcels per account per run (25 in the hourly
+  overnight run), and ten followed without an account. Treat changes to these limits as security-sensitive.
 - **Queue**: `public.sync_jobs`, deduplicated. Finished jobs are kept for 30 days.
 - **Backups**: back up Postgres independently and regularly test restoring Auth, parcels,
   events and push tables together.

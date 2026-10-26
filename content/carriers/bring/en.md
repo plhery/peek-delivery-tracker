@@ -15,7 +15,7 @@ Bring says an item or parcel number generally has 13 characters (two letters, ni
 | Number (invented) | What it is |
 | --- | --- |
 | `RR000000005NO` | Two letters, nine digits, `NO`: an item number. |
-| `370123456789012347` | 18 digits starting with `3`. |
+| `370001111000000006` | 18 digits starting with `3`. |
 | `00370000000000000004` | `00` and an 18-digit number starting `370`: 20 digits in all. |
 | `70000000000000003` | 17 digits starting with `7`. |
 
@@ -63,7 +63,7 @@ Some senders allow no extension, and the tracking page shows each parcel's own d
 
 **Home delivery.** If you chose it in the shop, Posten delivers on weekdays, 17:00 to 21:00 in towns and 08:00 to 16:00 elsewhere. To move a pickup-point parcel to your door, use the link in the message: NOK 75 before it reaches the pickup point, NOK 100 after; not for locker or customs parcels.
 
-**Sweden and Denmark.** In Sweden, the first reminder offers 7 extra days at an ombud (agent). In Denmark, a missed home delivery returns to the terminal with a drop card; book a new one by phone or online.
+**Sweden and Denmark.** In Sweden, a parcel normally waits 7 days at an ombud (agent), and the first reminder offers 7 more; in a paketbox (locker) it waits 4 days, extendable to 7. A paketbox opens with the Bring app or the PIN Bring sends by SMS. In Denmark, a missed home delivery normally goes to the nearest pakkeshop (pickup point), and Bring tells you by SMS or email; if not, book a redelivery with Bring's online form or by phone.
 
 ## Bring parcel delayed, lost or damaged
 
@@ -81,13 +81,13 @@ As listed on Bring's and Posten's pages on 12 October 2026:
 - **Bring, Norway:** 04045, or +47 22030045 from abroad, weekdays 08:00 to 17:00; chat around the clock.
 - **Written complaints:** Posten and Bring customer service, Kjøita 19, 4630 Kristiansand.
 - **Sweden:** 0770-11 33 00, weekdays 08:00 to 17:00; chat around the clock.
-- **Denmark:** 70 28 60 70 (+45 70 28 60 70), weekdays 08:00 to 17:00; chat around the clock; email cs.dk@bring.dk.
+- **Denmark:** 70 28 60 70 (+45 70 28 60 70), weekdays 08:00 to 17:00; chat around the clock.
 
 > Posten never sends an SMS or email asking you to pay for a parcel: it uses only the Posten app, Digipost and letters. Delete such messages.
 
 ## Tracking Bring parcels with Peek
 
-[Peek](/) names a postal number ending `NO` as Bring's straight away when its check digit is valid. The 18-digit `370`/`373` numbers, the 20-digit barcodes starting `00370` or `00373` and 17-digit numbers starting `70` are shared with other carriers, so Peek asks Bring first, together with the other carriers the number fits, and names Bring whenever Bring knows the parcel. If Bring doesn't come up, tap "Change" and pick Bring, listed first under "Fits this number". Links from sporing.bring.no, sporing.posten.no and tracking.bring.com, .se or .dk name Bring whatever the number, but at Bring Peek can only track all-digit numbers and postal numbers ending `NO`. A multi-parcel consignment number isn't tracked; use each parcel's number.
+[Peek](/) names a postal number ending `NO` as Bring's straight away when its check digit is valid. The 18-digit `370`/`373` numbers, the 20-digit barcodes starting `00370` or `00373` and 17-digit numbers starting `70` are shared with other carriers, so Peek asks Bring first, together with the other carriers the number fits ([Matkahuolto](carrier:matkahuolto) too for `373`), and names Bring whenever Bring knows the parcel. If Bring doesn't come up, tap "Change" and pick Bring, listed first under "Fits this number". The exception is an 18-digit number starting `370` or `373` whose 6th to 9th digits are zeros: Peek files it under [Ecoscooting](carrier:ecoscooting) without asking Bring, so tap "Change" and search for Bring. Links from sporing.bring.no, sporing.posten.no and tracking.bring.com, .se or .dk name Bring whatever the number, but at Bring Peek can only track 17- or 18-digit numbers, 20-digit ones starting `00`, and postal numbers (two letters, nine digits, two letters) with a valid check digit, from any country. A multi-parcel consignment number isn't tracked; use each parcel's number.
 
 Peek shows the status, each scan's town on a map, the sender, service, weight, dimensions, the expected day when Bring gives one and, while the parcel waits, the pickup point's name. Instead of Bring's sentences, each step gets a short label such as "Handed in", "At terminal" or "Ready for pickup". It drops addresses, photos and the pickup code, checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you of changes.
 
@@ -127,10 +127,13 @@ Contact the shop: the sender files the claim with Bring, and all claims expire a
 - [Posten: Online fraud and fake inquiries](https://www.posten.no/en/customer-service/online-fraud) – phishing warning
 - [Bring: Svindelforsøk](https://www.bring.no/kundeservice/svindelforsok) – never links this way
 - [Bring Sweden: Kontakta oss](https://www.bring.se/privat/kundservice/kontakta-oss) – phone, hours, chat
-- [Bring Sweden: Vanliga frågor](https://www.bring.se/privat/kundservice/vanliga-fragor) – extension at an ombud, lockers in the app
+- [Bring Sweden: Vanliga frågor](https://www.bring.se/privat/kundservice/vanliga-fragor) – extension at an ombud
+- [Bring Sweden: Bring Paketbox](https://www.bring.se/privat/ta-emot/paketbox) – opening with the app or an SMS PIN
+- [Bring Sweden: Tjänstevillkor](https://www.bring.se/villkor/Tj%C3%A4nstevillkor-bring-ecommerce-logistics_01102026.pdf) – 7 days at an ombud, 4 in a paketbox, extensions
 - [Bring Denmark: Kontakt os](https://www.bring.dk/privat/kundeservice/kontakt-os) – phone, hours, chat
-- [Bring Denmark: Frequently asked questions](https://www.bring.dk/en/private/customer-service/frequently-asked-questions) – missed delivery, email
-- [Bring Denmark: Ofte stillede spørgsmål](https://www.bring.dk/privat/kundeservice/ofte-stillede-sporgsmal) – delivery times, ID, wrong number
+- [Bring Denmark: Ofte stillede spørgsmål](https://www.bring.dk/privat/kundeservice/ofte-stillede-sporgsmal) – missed delivery, delivery times, ID, wrong number
+- [Bring Denmark: Pakker til genlevering](https://www.bring.dk/privat/kundeservice/genlevering) – redelivery by form or phone
+- [Bring Denmark: Tjenestevilkår](https://www.bring.dk/vilkar/Tjenestevilk%C3%A5r-bring-ecommerce-logistics_01102026.pdf) – a missed home delivery goes to a pickup point
 - [Posten Bring: About the group](https://www.postenbring.no/en/about-us/about-the-group) – ownership, Posten and Bring brands
 - [Bring: Tracking API](https://developer.bring.com/api/tracking/) – meaning of each event code
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads

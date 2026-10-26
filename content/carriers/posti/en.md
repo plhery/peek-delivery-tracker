@@ -3,7 +3,7 @@ title: Posti tracking: item ID, statuses, lockers and contact
 description: Track a Posti parcel in Finland: what the JJFI item ID looks like, what each English status means, how long lockers keep parcels and how to reach Posti.
 slug: posti-tracking
 published: 2026-10-12
-updated: 2026-10-22
+updated: 2026-10-26
 ---
 
 Posti is Finland's postal and parcel company. Track a parcel on [Posti's tracking page](https://www.posti.fi/en/tracking) or in Posti's OmaPosti app with its item ID, or paste the number in the box above. The number comes from the sender, and it is also on Posti's notice of arrival in OmaPosti, by SMS or by email.
@@ -83,9 +83,11 @@ Posti lists no customer email address.
 
 ## Posti parcel tracking with Peek
 
-[Peek](/) names a `JJFI` number as Posti's straight away. A posti.fi tracking link (`/tracking/`, `/en/tracking/` or `/fi/tracking/` followed by the number) names Posti for any number. From a Finnish `/seuranta` link Peek takes the number alone and reads it as if typed, so a `JJFI` number goes straight to Posti. No postcode needed.
+[Peek](/) names a `JJFI` number as Posti's straight away. A posti.fi tracking link (`/tracking/`, `/seuranta/` or `/uppfoljning/` followed by the number, also after a language such as `/en/`) names Posti for any number. No postcode needed.
 
-For a postal number ending `FI`, Peek asks Posti first, with Chronopost, and names Posti once it knows it. If Posti doesn't know it yet, you see "Not found at … yet. Peek will keep checking after you add it." Peek then asks again after 1, 2 and 4 hours, then every 6 hours, then daily, for up to a month. With a wrong check digit, or for an SSCC that several carriers know, pick Posti with "Change". A foreign number tracks at Posti after "Change" or from a posti.fi link, and Peek can follow some international parcels to Posti.
+For a postal number ending `FI`, Peek asks Posti first, with Chronopost, and names Posti once it knows it. If Posti doesn't know it yet, you see "Not found at … yet. Peek will keep checking after you add it." Added to a Peek account, the parcel is then checked hourly for 6 hours, then less and less often; without an account, checks stop after 6 hours unless you turn on "Notify me when it’s found", which keeps a daily check going until 30 days after you added it. With a wrong check digit, or for an SSCC that several carriers know, pick Posti with "Change". A foreign number tracks at Posti after "Change" or from a posti.fi link, and Peek can follow some international parcels to Posti.
+
+In Estonia, Latvia and Lithuania, Posti goes by SmartPosti: Peek's carrier search finds Posti under that name ("Also called SmartPosti"), and tracking links from smartposti.ee or itella.ee (or their .lv and .lt sites) name Posti for any code. Peek keeps Posti's answer only when exactly one shipment carries the exact code you typed, so for a SmartPosti code it may find nothing; then look the parcel up on smartposti.ee.
 
 Peek reads Posti in English and shows each status with Posti's explanation line, the town of each scan, the weight, the dimensions and the pickup point's name and address. It checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, draws each scan on a map and can notify you of changes. It drops the pickup code and your address, and shows no expected delivery or sender. A number covering several parcels isn't tracked, and old parcels read as not found.
 
@@ -121,6 +123,8 @@ Yes, in the OmaPosti app.
 - [Posti: Privacy statement for Item Tracking](https://www.posti.fi/en/customer-service/terms-and-statements/data-protection/privacy-statements/privacy-statement-for-item-tracking) – tracking by exact code, call cost
 - [Posti: Changes to parcel storage periods](https://www.posti.fi/en/latest-news-at-posti/changes-to-parcel-storage-periods-to-improve-availability-at-posti-parcel-lockers-11-8-2025) – five-day storage
 - [Posti: Customer Service](https://www.posti.fi/en/customer-service) – customer service page
+- [SmartPosti: Meist (About us)](https://www.smartposti.ee/ariklient/meist) – part of Posti Group, SmartPosti in Latvia and Lithuania
+- [SmartPosti: Saadetise jälgimine](https://www.smartposti.ee/saadetise-jalgimine) – SmartPosti's tracking page
 - [KKV: Postal and parcel services](https://www.kkv.fi/en/consumer-affairs/telephone-and-internet-subscriptions-postal-and-parcel-services/postal-and-parcel-services/) – when a parcel counts as lost
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

@@ -15,7 +15,7 @@ Posten kaller det sporingsnummer, som er en fellesbetegnelse på sendingsnummer 
 | Nummer (oppdiktet) | Hva det er |
 | --- | --- |
 | `RR000000005NO` | To bokstaver, ni tall og `NO`: en postsending fra Norge. |
-| `370123456789012347` | 18 siffer som begynner på `3`. |
+| `370001111000000006` | 18 siffer som begynner på `3`. |
 | `70000000000000003` | 17 siffer som begynner på `7`. |
 | `RR000000005CN` | En pakke fra utlandet beholder nummeret fra avsenderlandet, her Kina. Posten sporer også slike pakker. |
 
@@ -80,7 +80,7 @@ Slik står det på Postens og Brings sider 22. oktober 2026:
 
 ## Spor Bring-pakker med Peek
 
-[Peek](/) ser med en gang at et sporingsnummer som slutter på `NO`, er Brings, så sant kontrollsifferet stemmer. Tallnumrene deler Bring med andre transportører: 18 siffer som begynner på `370` eller `373`, 17 siffer som begynner på `70`, og strekkoder på 20 siffer som begynner på `00370` eller `00373`. Peek spør derfor Bring først, sammen med de andre transportørene nummeret kan høre til, og velger Bring når Bring kjenner pakken. Kommer ikke Bring opp, trykker du på "Change" og velger Bring, som står først under "Fits this number". En lenke fra sporing.posten.no, sporing.bring.no eller tracking.bring.com, .se eller .dk peker ut Bring uansett nummer, men hos Bring kan Peek bare spore tallnumre og sporingsnumre som slutter på `NO`. Et sendingsnummer for flere kolli spores ikke; bruk kollinummeret.
+[Peek](/) ser med en gang at et sporingsnummer som slutter på `NO`, er Brings, så sant kontrollsifferet stemmer. Tallnumrene deler Bring med andre transportører: 18 siffer som begynner på `370` eller `373`, 17 siffer som begynner på `70`, og strekkoder på 20 siffer som begynner på `00370` eller `00373`. Peek spør derfor Bring først, sammen med de andre transportørene nummeret kan høre til (for `373`-numre også [Matkahuolto](carrier:matkahuolto)), og velger Bring når Bring kjenner pakken. Kommer ikke Bring opp, trykker du på "Change" og velger Bring, som står først under "Fits this number". Unntaket er 18-sifrede numre som begynner på `370` eller `373` og har nuller som 6. til 9. siffer: dem tolker Peek som numre fra [Ecoscooting](carrier:ecoscooting), uten å spørre Bring. Da trykker du på "Change" og søker opp Bring. En lenke fra sporing.posten.no, sporing.bring.no eller tracking.bring.com, .se eller .dk peker ut Bring uansett nummer, men hos Bring kan Peek bare spore numre på 17 eller 18 siffer, numre på 20 siffer som begynner på `00`, og sporingsnumre på 13 tegn (to bokstaver, ni siffer, to bokstaver) med riktig kontrollsiffer, fra alle land. Et sendingsnummer for flere kolli spores ikke; bruk kollinummeret.
 
 Peek viser status, stedet for hver skanning, avsender, tjeneste, vekt, mål, forventet dag når Bring oppgir den, og navnet på hentestedet mens pakken venter. I stedet for Brings setninger får hvert steg en kort engelsk etikett, som "Handed in", "At terminal" eller "Ready for pickup". Adresser, bilder og hentekoden tar Peek ikke med. På dagtid sjekker Peek pakken hvert 10. minutt, hvert 2. når den er ute til levering, om natten hver time, og kan varsle deg når noe skjer.
 

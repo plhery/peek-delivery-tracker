@@ -2820,6 +2820,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a0d6"
     },
     {
+      "id": "bring",
+      "catalog": "bring-posten",
+      "slug": "bring-spor-pakke",
+      "title": "Bring sporing: spor din pakke i Danmark",
+      "name": "Bring",
+      "color": "#56b529"
+    },
+    {
       "id": "dao",
       "catalog": "dao",
       "slug": "dao-spor-pakke",
@@ -3109,6 +3117,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "et": [
+    {
+      "id": "posti",
+      "catalog": "posti",
+      "slug": "smartposti-paki-jalgimine",
+      "title": "SmartPosti paki jälgimine: olekud, pakiautomaat ja toll",
+      "name": "Posti",
+      "color": "#ff8000"
+    },
     {
       "id": "omniva",
       "catalog": "omniva",

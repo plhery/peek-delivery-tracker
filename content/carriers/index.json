@@ -148,5 +148,6 @@
   { "id": "sf-express", "catalog": "sf-express", "name": "SF Express", "languages": ["en"] },
   { "id": "straightship", "catalog": "straightship", "name": "Straightship", "languages": ["en"] },
   { "id": "correios-br", "catalog": "correios-br", "name": "Correios Brazil", "languages": ["en", "es"] },
-  { "id": "yto", "catalog": "yto", "name": "YTO Express", "languages": ["en"] }
+  { "id": "yto", "catalog": "yto", "name": "YTO Express", "languages": ["en"] },
+  { "id": "spx-br", "catalog": "spx-br", "name": "SPX Express Brazil", "languages": ["en"] }
 ]

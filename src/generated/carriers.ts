@@ -1208,6 +1208,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "YTO Express tracking: YT numbers, statuses and contact",
       "name": "YTO Express",
       "color": "#4d148c"
+    },
+    {
+      "id": "spx-br",
+      "catalog": "spx-br",
+      "slug": "spx-express-brazil-tracking",
+      "title": "SPX Express Brazil tracking: Shopee orders and statuses",
+      "name": "SPX Express Brazil",
+      "color": "#ee4d2d"
     }
   ],
   "de": [

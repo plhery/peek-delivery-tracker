@@ -3603,7 +3603,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/quickpac-tracking</loc>
@@ -4292,24 +4292,36 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/packeta-tracking" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/packeta-sledzenie" />
 <xhtml:link rel="alternate" hreflang="cs" href="https://peektracker.com/cs/carriers/packeta-sledovani-zasilky" />
+<xhtml:link rel="alternate" hreflang="sk" href="https://peektracker.com/sk/carriers/packeta-sledovanie-zasielky" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/packeta-tracking" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pl/carriers/packeta-sledzenie</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/packeta-tracking" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/packeta-sledzenie" />
 <xhtml:link rel="alternate" hreflang="cs" href="https://peektracker.com/cs/carriers/packeta-sledovani-zasilky" />
+<xhtml:link rel="alternate" hreflang="sk" href="https://peektracker.com/sk/carriers/packeta-sledovanie-zasielky" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/packeta-tracking" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/cs/carriers/packeta-sledovani-zasilky</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/packeta-tracking" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/packeta-sledzenie" />
 <xhtml:link rel="alternate" hreflang="cs" href="https://peektracker.com/cs/carriers/packeta-sledovani-zasilky" />
+<xhtml:link rel="alternate" hreflang="sk" href="https://peektracker.com/sk/carriers/packeta-sledovanie-zasielky" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/packeta-tracking" />
-<lastmod>2026-10-25</lastmod>
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/sk/carriers/packeta-sledovanie-zasielky</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/packeta-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/packeta-sledzenie" />
+<xhtml:link rel="alternate" hreflang="cs" href="https://peektracker.com/cs/carriers/packeta-sledovani-zasilky" />
+<xhtml:link rel="alternate" hreflang="sk" href="https://peektracker.com/sk/carriers/packeta-sledovanie-zasielky" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/packeta-tracking" />
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/dpd-poland-tracking</loc>
@@ -5766,8 +5778,16 @@
 <url>
 <loc>https://peektracker.com/carriers/matkahuolto-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/matkahuolto-tracking" />
+<xhtml:link rel="alternate" hreflang="fi" href="https://peektracker.com/fi/carriers/matkahuolto-seuranta" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/matkahuolto-tracking" />
-<lastmod>2026-10-13</lastmod>
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fi/carriers/matkahuolto-seuranta</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/matkahuolto-tracking" />
+<xhtml:link rel="alternate" hreflang="fi" href="https://peektracker.com/fi/carriers/matkahuolto-seuranta" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/matkahuolto-tracking" />
+<lastmod>2026-10-26</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/ukrposhta-tracking</loc>

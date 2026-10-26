@@ -3,7 +3,7 @@ title: POST Luxembourg tracking: numbers, statuses and contacts
 description: Track a POST Luxembourg parcel or registered item: what the LU number looks like, what the statuses mean, PackUp, notices, customs fees and who to call.
 slug: post-luxembourg-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 POST Luxembourg is Luxembourg's national post, which also runs a telecom network and a bank. Track a parcel or registered item on its [Track and Trace page](https://www.post.lu/en/particuliers/colis-courrier/track-and-trace) (trackandtrace.lu leads there too), in the POST Parcel & Mail app or by pasting the number in the box above. The number comes from whoever sent the item: it's printed on the dispatch slip.
@@ -92,7 +92,7 @@ For a number ending `LU` with a valid check digit, [Peek](/) asks POST Luxembour
 
 A parcel from abroad stays with its foreign post, but POST's lookup takes it: pick "POST Luxembourg" with "Change", or paste a post.lu link. It moves to POST Luxembourg by itself only when the carrier abroad names POST, and not every one does.
 
-POST's scans carry no time, so its own history isn't listed. Peek takes a dated history from [universal tracking services](guide:universal-tracker) when one knows the item and asks POST again every 6 hours; if no service answers, it shows POST's current status, dated when Peek saw it. Statuses keep POST's English wording, and Peek can notify you when the status changes. `Item available at collection point` shows as written, without a "Ready for pickup" step. There's no expected delivery day, no pickup point and no weight.
+POST's scans carry a day but no time: Peek lists POST's own history, each scan under its day, in POST's order. Statuses keep POST's English wording, and Peek can notify you when the status changes. `Item available at collection point` shows as written, without a "Ready for pickup" step. There's no expected delivery day, no pickup point and no weight.
 
 ## Questions about POST Luxembourg tracking
 

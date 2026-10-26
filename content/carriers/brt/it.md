@@ -3,7 +3,7 @@ title: BRT tracking: dov'è il pacco e cosa fare se non arriva
 description: Tracking BRT: dove trovi il BRTcode, cosa vogliono dire gli stati, giacenza, BRT-fermopoint e locker, numero verde e cosa fare se il pacco non arriva.
 slug: brt-tracking
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-26
 ---
 
 BRT è un corriere espresso italiano del gruppo Geopost, come DPD. Per seguire il pacco apri il link nell'SMS o nell'e-mail di BRT, cerca il numero in «Dov'è la mia spedizione?» su [brt.it](https://www.brt.it/it/) oppure incollalo nel box qui sopra. Il numero, il BRTcode, te lo comunica BRT quando prende in carico la spedizione, se il mittente le ha dato il tuo cellulare o la tua e-mail.
@@ -90,7 +90,7 @@ Il numero di Bologna (051) sui documenti BRT è la sede operativa, non il serviz
 
 [Peek](/) riconosce i numeri BRT di 12, 14 e 15 cifre. Li usano anche altri corrieri, quindi prova BRT tra i più probabili; se ti chiede di scegliere, prendi il corriere nominato nel messaggio di spedizione. Funzionano anche i link di vas.brt.it con `brtCode=`, non i BRTcode di 19 cifre né i link di mybrt.it.
 
-Mostra le diciture inglesi di BRT, ma per le tre di consegna (`DELIVERED`, `COLLECTED AT BRT-fermopoint` e `COLLECTED AT BRT LOCKER`) scrive solo «Delivered». Mostra anche il luogo di ogni scansione su una mappa e il peso, e può mandarti notifiche quando lo stato cambia. Lascia fuori mittente, destinatario, riferimento del mittente, numero di colli e volume; non mostra un giorno di consegna previsto né i dati del punto di ritiro, e non segue il pacco quando all'estero passa a DPD. BRT dà a ogni scansione data e ora senza fuso orario, quindi gli orari in Peek possono differire da quelli di BRT, e alcune scansioni potrebbero non comparire una per una.
+Mostra le diciture inglesi di BRT, ma per le tre di consegna (`DELIVERED`, `COLLECTED AT BRT-fermopoint` e `COLLECTED AT BRT LOCKER`) scrive solo «Delivered». Mostra anche il luogo di ogni scansione su una mappa e il peso, e può mandarti notifiche quando lo stato cambia. Lascia fuori mittente, destinatario, riferimento del mittente, numero di colli e volume; non mostra un giorno di consegna previsto né i dati del punto di ritiro, e non segue il pacco quando all'estero passa a DPD. BRT dà a ogni scansione data e ora senza fuso orario: Peek le legge sull'ora italiana, o sull'ora locale di un deposito all'estero, e mostra la cronologia di BRT nel suo ordine.
 
 ## Domande sul tracking BRT
 

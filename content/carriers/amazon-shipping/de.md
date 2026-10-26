@@ -3,7 +3,7 @@ title: Amazon Shipping Sendungsverfolgung: Status und Hilfe
 description: Amazon-Shipping-Paket verfolgen: wo die Tracking-ID steht, was die englischen Status heißen, verpasste Zustellung und wen du bei Problemen fragst.
 slug: amazon-shipping-sendungsverfolgung
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
 Amazon Shipping ist Amazons Lieferdienst für andere Unternehmen: Ein Shop, der nicht Amazon ist, lässt deine Bestellung über Amazons Netz zustellen. Du verfolgst das Paket über den Link in der Versandbestätigung des Shops, der zu Amazons öffentlichem Amazon-Shipping-Tracker führt, oder mit der Tracking-ID darin. Was du direkt bei Amazon bestellt hast, verfolgst du dagegen unter „Meine Bestellungen“.
@@ -80,7 +80,7 @@ So stand es am 12. Oktober 2026 auf Amazons Seiten. Eine deutsche Kontaktseite g
 
 Füge die Nummer oder einen track.amazon-Link (`/tracking/` und die Nummer) in [Peek](/) ein. Peek fragt Amazons Tracker, ob er die Nummer kennt. Antwortet Amazon, siehst du „Amazon Shipping bietet eine öffentliche Sendungsverfolgung an. Peek hält diese Lieferung für dich aktuell.“ Kennt Amazon sie nicht, gilt sie als Amazon-Logistics-Lieferung, die du meist unter „Meine Bestellungen“ verfolgst. Klappt die Prüfung gerade nicht, versuch es noch einmal. In der Liste unter „Ändern“ fehlt Amazon Shipping: Diese Prüfung ist der einzige Weg. Eine Postleitzahl ist nicht nötig.
 
-Zu sehen sind der Status, der Verlauf mit Ort, Region und Land jedes Scans, der erwartete Liefertag und der Zeitpunkt der Zustellung. Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, setzt jeden Scan auf eine Karte und schickt dir auf Wunsch Mitteilungen: zu jedem Scan, nur zu wichtigen Schritten oder nur am Liefertag. Statt Amazons eigener Statustexte zeigt es eigene kurze Bezeichnungen auf Deutsch, etwa „In Zustellung“ oder „Zugestellt“. Nur „Arrived at sorting center“, „Arrived at delivery center“ und „Departed facility“ bleiben Englisch. Den Namen des Shops, deinen Namen, die Adressen, die Unterschrift und das Zustellfoto zeigt es nicht. Bei Nummern mit `TBA`, `TBC` oder `TBM` fehlt ein Scan, den Amazon ohne Zeitzone datiert. Amazon ist die einzige Quelle: Gibt Amazon den Verlauf nicht mehr heraus, sagt Peek das und fragt nicht weiter nach. Einem anderen Paketdienst folgt es nicht.
+Zu sehen sind der Status, der Verlauf mit Ort, Region und Land jedes Scans, der erwartete Liefertag und der Zeitpunkt der Zustellung. Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, setzt jeden Scan auf eine Karte und schickt dir auf Wunsch Mitteilungen: zu jedem Scan, nur zu wichtigen Schritten oder nur am Liefertag. Statt Amazons eigener Statustexte zeigt es eigene kurze Bezeichnungen auf Deutsch, etwa „In Zustellung“ oder „Zugestellt“. Nur „Arrived at sorting center“, „Arrived at delivery center“ und „Departed facility“ bleiben Englisch. Den Namen des Shops, deinen Namen, die Adressen, die Unterschrift und das Zustellfoto zeigt es nicht. Amazon ist die einzige Quelle: Gibt Amazon den Verlauf nicht mehr heraus, sagt Peek das und fragt nicht weiter nach. Einem anderen Paketdienst folgt es nicht.
 
 ## Fragen zu Amazon Shipping
 

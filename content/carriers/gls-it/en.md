@@ -3,7 +3,7 @@ title: GLS Italy tracking: numbers, statuses and missed deliveries
 description: Track a GLS parcel in Italy: where the shipment number comes from, what GLS Italy's English statuses mean, missed deliveries, GLS Points, giacenza and contacts.
 slug: gls-italy-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 GLS Italy is the Italian arm of the GLS parcel group, a network of local depots (each called a Sede) run as franchises under GLS Italy S.p.A. Track a parcel on GLS's [Track & Trace page](https://gls-group.com/IT/en/online-services/track-trace/), in the free GLS app or by pasting the number in the box above. The number comes from the sender, usually the shop, when the parcel leaves.
@@ -81,7 +81,7 @@ GLS Italy's channels, as read on 11 October 2026:
 
 [Peek](/) asks GLS Italy about two letters and nine digits and says "GLS Italy has this parcel." when GLS knows it. For GLS's letter-and-digit form, pick GLS Italy with "Change". A gls-group.com or gls-group.eu tracking link with /IT/ in its path works too; gls-italy.com links don't. Peek asks GLS France, Germany and Switzerland about 11-digit international numbers, never GLS Italy; if GLS Germany knows yours, Peek asks for the delivery postcode.
 
-GLS Italy's scan times carry no time zone, so Peek doesn't show GLS Italy's own scan list. It takes the dated history from universal tracking services, asks GLS Italy again every 6 hours and, if no service answers, shows GLS Italy's current status, dated when Peek saw it. Statuses keep GLS's English wording, and the weight shows.
+GLS Italy's scan times carry no time zone: Peek reads them on Italian time and lists GLS Italy's own history. When the newest scan has a day but no time, Peek dates the history from universal tracking services that know the parcel. Statuses keep GLS's English wording, and the weight shows.
 
 It shows no expected delivery day, pickup point or sender, and drops your name, address and signature. A parcel forwarded or returned under a new number isn't followed, and old shipments come back as not found.
 

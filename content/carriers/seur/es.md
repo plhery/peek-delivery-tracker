@@ -3,7 +3,7 @@ title: SEUR seguimiento: número, estados y puntos Pickup
 description: Sigue tu paquete de SEUR: cómo es el número, qué significa cada estado, qué pasa si no estás en casa, los puntos Pickup y los teléfonos de SEUR.
 slug: seur-seguimiento
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 SEUR es una empresa española de paquetería urgente que forma parte del grupo Geopost, el mismo de DPD. Puedes seguir tu paquete sin cuenta en [Mis envíos de miSEUR](https://www.seur.com/miseur/mis-envios) o pegando el número en la casilla de arriba. El número te lo da el remitente: si no lo tienes, la ayuda de SEUR dice que se lo pidas a él, que suele ser la tienda.
@@ -89,7 +89,7 @@ Su ayuda no indica horarios de atención.
 
 [Peek](/) pregunta directamente a SEUR por los números de 21 y 7 cifras. Con 14 cifras pregunta a la vez a los transportistas más probables, SEUR el primero para España y Portugal. Verás «preguntando a…» y luego «SEUR tiene este paquete.» si solo SEUR lo conoce; si no, pulsa «Cambiar» y elige SEUR. También sirve un enlace de miSEUR o de seguimiento en directo con `tracking=`, y no hace falta código postal. Un número de 21 cifras con `000` en las cifras 13 a 15 se toma por uno de Australia Post: elige SEUR con «Cambiar».
 
-Peek muestra el estado, el historial y el peso. SEUR no da el lugar de sus escaneos, así que no aparecen en el mapa. Los estados se quedan en el español de SEUR, salvo los de entrega, que salen como «Entregado». Peek no guarda el número de bultos, el remitente, el destinatario ni el PIN y el código QR de entrega. Las horas de SEUR no traen una zona horaria fiable, así que el historial con fechas sale de otros servicios de seguimiento y Peek vuelve a preguntar a SEUR cada 6 horas; si ninguno responde, solo ves el estado actual de SEUR, con la fecha en que Peek lo vio. Los envíos de varios bultos se siguen solo con esos servicios. Puedes recibir notificaciones cuando cambie el estado.
+Peek muestra el estado, el historial y el peso. SEUR no da el lugar de sus escaneos, así que no aparecen en el mapa. Los estados se quedan en el español de SEUR, salvo los de entrega, que salen como «Entregado». Peek no guarda el número de bultos, el remitente, el destinatario ni el PIN y el código QR de entrega. Las horas de SEUR no traen una zona horaria fiable, así que Peek las lee en hora de Madrid y muestra el historial propio de SEUR. Los envíos de varios bultos se siguen solo con otros servicios de seguimiento. Puedes recibir notificaciones cuando cambie el estado.
 
 ## Preguntas sobre el seguimiento de SEUR
 

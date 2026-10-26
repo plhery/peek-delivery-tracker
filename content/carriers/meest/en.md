@@ -3,7 +3,7 @@ title: Meest tracking: numbers, statuses and contacts
 description: Track a Meest parcel to Ukraine, from the US or Canada, or from China to Europe: what the number looks like, what each status means and who to contact.
 slug: meest-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
 Meest is a group of parcel companies with Ukrainian roots, with offices in the US, Canada, the UK and Poland, and an EU network (Meest International) that delivers online orders with local partners. Track a parcel on the group's tracker, t.meest-group.com, on the parcel-track page of your country's meest.com site, or in the box above. The number is in your shipment confirmation, on the shipping label or in the shop's shipping email.
@@ -79,7 +79,7 @@ As listed on Meest's sites on 12 October 2026:
 
 [Peek](/) knows Meest's consolidation number (`AB1234567CD12345G`) and asks Meest alone, which settles it. Postal numbers and senders' references reach Meest only after you pick "Meest" with "Change", or from a Meest link: a typed postal number goes to the post that issued it, or to the destination's post ([Ukrposhta](carrier:ukrposhta) for Ukraine). Peek reads links from t.meest-group.com, meest.com country sites (`parcel_number=`) and tracking-iframe.meest.com, but not from pl.meest.com's own tracker.
 
-Meest gives no time zone on its scans, so Meest's own history isn't shown: the dated history comes from universal tracking services when they know the parcel, Meest's current status is dated when Peek saw it, and Meest is asked again every 6 hours. Peek keeps the status, the destination country and, when a partner abroad delivers, that carrier and its number: the parcel's page says "Delivery with BOX NOW", for example, and Peek follows that carrier when it can track it directly. It can notify you when the status changes.
+Meest gives no time zone on its scans: Peek reads them on the clock of the scan's place and lists Meest's own history. Peek keeps the status, the destination country and, when a partner abroad delivers, that carrier and its number: the parcel's page says "Delivery with BOX NOW", for example, and Peek follows that carrier when it can track it directly. It can notify you when the status changes.
 
 There is no expected delivery, weight or pickup point, and the branch, its hours and the pickup deadline are left out: check those with Meest. A number Meest knows only as a partner's reference isn't tracked, and old histories drop out and read as not found.
 

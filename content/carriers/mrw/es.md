@@ -3,7 +3,7 @@ title: MRW seguimiento: número de envío, estados y teléfono
 description: Sigue tu envío MRW: dónde está el número de 12 cifras, qué significa cada estado, cómo recoger en un MRW Point, cómo reclamar y los teléfonos de MRW.
 slug: mrw-seguimiento
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 MRW es una red de franquicias de mensajería urgente con más de 550 oficinas en España, Portugal, Andorra y Gibraltar. Para seguir tu envío, escribe el número en la casilla «No abonados» del [seguimiento de MRW](https://www.mrw.es/seguimiento/), sin ser cliente, o pégalo en la casilla de arriba. El número está en el correo de envío de la tienda, en el SMS de MRW o, si enviaste tú el paquete, en el justificante de la oficina.
@@ -89,7 +89,7 @@ En las páginas de MRW no aparece chat ni dirección de correo para destinatario
 
 Verás el estado, el historial y cada oficina (código postal y población, «(Plataforma)» si es un centro logístico) en un mapa, y puede enviarte una notificación con todas las novedades, solo las importantes o solo el día de entrega. Los estados salen en español, con las palabras de MRW; los desconocidos aparecen como «Actualización del seguimiento». No muestra la dirección del punto de recogida ni fecha prevista de entrega.
 
-Las horas de MRW no llevan zona horaria, así que sus escaneos propios no se muestran: el historial con fechas viene de servicios universales de seguimiento, y se vuelve a preguntar a MRW cada 6 horas. Si ningún servicio responde, solo ves el estado actual de MRW. A veces MRW da solo un resumen. Peek no puede acelerar el paquete ni hablar con MRW por ti.
+Las horas de MRW no llevan zona horaria: Peek las lee con la hora del lugar de cada oficina y muestra el historial propio de MRW. Si MRW da solo un resumen, el historial viene de servicios universales de seguimiento; si ninguno lo tiene, solo ves el estado actual de MRW. Peek no puede acelerar el paquete ni hablar con MRW por ti.
 
 ## Preguntas sobre el seguimiento de MRW
 

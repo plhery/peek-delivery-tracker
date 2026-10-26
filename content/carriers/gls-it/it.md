@@ -3,7 +3,7 @@ title: GLS Italy tracking: pacco, stati, giacenza e contatti
 description: Tracking GLS in Italia: dove trovi il numero di spedizione, cosa vogliono dire gli stati, giacenza, GLS Point, pacco non consegnato e numero verde.
 slug: gls-italy-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 GLS Italy è la rete italiana del gruppo GLS: una rete di sedi locali indipendenti, affiliate in franchising a GLS Italy S.p.A. Per seguire il pacco cerca il numero nella [Ricerca Spedizione](https://gls-group.com/IT/it/servizi-online/ricerca-spedizioni/) di GLS, nell'app gratuita GLS oppure incollalo nel box qui sopra. Il numero te lo dà il mittente, di solito il negozio, quando la spedizione parte.
@@ -82,7 +82,7 @@ Chat o WhatsApp: GLS Italy non ne indica.
 
 [Peek](/) chiede a GLS Italy i numeri di due lettere e nove cifre e scrive «GLS Italy ha questo pacco.» quando GLS lo conosce. Per la forma con una lettera e una cifra, scegli GLS Italy con «Cambia». Funzionano anche i link di tracciamento di gls-group.com o gls-group.eu con /IT/ nel percorso, non quelli di gls-italy.com. I numeri internazionali di 11 cifre Peek li chiede a GLS Francia, Germania e Svizzera, mai a GLS Italy; se li conosce GLS Germania e non GLS Francia, ti chiede il codice postale di consegna.
 
-Gli orari di GLS Italy non hanno fuso orario, quindi Peek non mostra la cronologia di GLS Italy: prende quella datata da servizi di tracciamento universali, interroga di nuovo GLS Italy ogni 6 ore e, se nessun servizio risponde, mostra lo stato attuale di GLS Italy, datato quando Peek l'ha visto. Gli stati di GLS Italy compaiono nella dicitura inglese, così come sono scritti: `Delivered.`, con il punto, non diventa il «Consegnato» di Peek. Si vedono anche la città di ogni scansione e il peso, e puoi ricevere notifiche quando lo stato cambia.
+Gli orari di GLS Italy non hanno fuso orario: Peek li legge nell'ora italiana e mostra la cronologia di GLS Italy. Quando l'ultima scansione ha la data ma non l'ora, Peek prende le date dai servizi di tracciamento universali che conoscono il pacco. Gli stati di GLS Italy compaiono nella dicitura inglese, così come sono scritti: `Delivered.`, con il punto, non diventa il «Consegnato» di Peek. Si vedono anche la città di ogni scansione e il peso, e puoi ricevere notifiche quando lo stato cambia.
 
 Non mostra un giorno di consegna previsto, il punto di ritiro né il mittente, e lascia fuori nome, indirizzo e firma. Non segue una spedizione inoltrata o resa con un nuovo numero, e le spedizioni vecchie risultano non trovate.
 

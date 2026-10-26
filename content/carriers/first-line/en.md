@@ -3,7 +3,7 @@ title: FIRST LINE tracking: 1ST numbers, statuses and delivery
 description: Track a FIRST LINE (壹号专线) parcel from China: what a 1ST number looks like, what each status means, who delivers it in the US and who to ask when it stalls.
 slug: first-line-tracking
 published: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-26
 ---
 
 FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) is a Shenzhen forwarder that ships parcels from China for online sellers, mostly to the United States, and hands them to a local carrier there for delivery. It belongs to the 1ST group (一代国际集团), whose forwarders print waybills starting with 1ST. Track yours on FIRST LINE's tracker, under 追踪单号 (track a number) on firstline56.com, or in the box above. The shop gives the number with your order's shipping details.
@@ -79,9 +79,9 @@ These channels serve the sellers, FIRST LINE's customers; it publishes no help f
 
 [Peek](/) names FIRST LINE at once for a 1ST number with 11 digits, in capitals or not, with or without spaces. FIRST LINE's tracker has no address that opens one waybill, so there's no link to paste.
 
-Peek reads FIRST LINE's tracker and shows the status, the history (up to 100 scans), the place of each scan without its postcode, and each scan's time on that place's clock. Lines show as FIRST LINE writes them, relayed USPS or UniUni scans included, except an exact `Delivered`, which appears in Peek's own words. The tracker gives no expected delivery date, destination country, delivering company, last-mile number or proof of delivery, so Peek shows none. It doesn't switch to USPS or UniUni: if the seller gives you the last-mile number, add it as a parcel of its own.
+Peek reads FIRST LINE's tracker and shows the status, the history (up to 100 scans), the place of each scan without its postcode, and each scan's time, read on that place's clock. Lines show as FIRST LINE writes them, relayed USPS or UniUni scans included, except an exact `Delivered`, which appears in Peek's own words. The tracker gives no expected delivery date, destination country, delivering company, last-mile number or proof of delivery, so Peek shows none. It doesn't switch to USPS or UniUni: if the seller gives you the last-mile number, add it as a parcel of its own.
 
-Because FIRST LINE's times carry no time zone, Peek may show a tracking service's dated history instead when one holds the parcel, and then asks FIRST LINE again every 6 hours. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact FIRST LINE or the seller for you.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact FIRST LINE or the seller for you.
 
 ## Questions about FIRST LINE tracking
 

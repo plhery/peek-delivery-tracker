@@ -3,7 +3,7 @@ title: 4PX traccia pacco: numero, stati e chi consegna
 description: Traccia un pacco 4PX dalla Cina: com'è fatto il numero, cosa vogliono dire gli stati in inglese, chi consegna in Italia e a chi chiedere se si ferma.
 slug: 4px-traccia-pacco
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 4PX (递四方速递, 4PX Express Co., Ltd.) è un'azienda di logistica di Shenzhen, in Cina, che spedisce all'estero i pacchi dei venditori online e li affida a un corriere del tuo Paese per l'ultimo tratto. Puoi tracciare il numero sul sito di 4PX, [track.4px.com](https://track.4px.com/), oppure nel box qui sopra. Il numero te lo dà il negozio o il marketplace dove hai comprato, nei dettagli di spedizione dell'ordine.
@@ -76,7 +76,7 @@ All'11 ottobre 2026 il sito di tracciamento di 4PX indica un solo contatto per t
 
 Legge 4PX in inglese e mostra lo stato, la cronologia con il luogo di ogni scansione su una mappa, l'ora della consegna, il Paese di destinazione e il corriere locale con il suo numero. Quando quel corriere è tra quelli di Peek (USPS, per esempio), può seguire il pacco da lui appena mostra passi più recenti. `Out for delivery` e `Delivery attempt unsuccessful` compaiono con le parole di Peek, in italiano; le altre righe come le scrive 4PX. 4PX non dà una data di consegna prevista, né i dati del punto di ritiro, né il peso.
 
-Gli orari delle scansioni mantengono i fusi orari di 4PX. Se l'ultimo stato di 4PX non ha un orario preciso, la cronologia datata arriva dai servizi di tracking universali e 4PX viene interrogato di nuovo ogni 6 ore. Il controllo avviene ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e ogni ora di notte, e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Non può contattare 4PX o il negozio al posto tuo.
+Gli orari delle scansioni mantengono i fusi orari di 4PX; una scansione senza fuso orario viene letta sull'ora del suo luogo. Il controllo avviene ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e ogni ora di notte, e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Non può contattare 4PX o il negozio al posto tuo.
 
 ## Domande sul tracking 4PX
 

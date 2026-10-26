@@ -3,7 +3,7 @@ title: DPD UK tracking: statuses, Pickup shops and contact
 description: Track a DPD UK parcel: where the 14-digit number is, what each status means, your Predict delivery options, Pickup shops and how to reach DPD.
 slug: dpd-uk-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 DPD UK is a British parcel company that delivers for many online shops. Track a parcel on [DPD's tracking page](https://track.dpd.co.uk/) with the parcel number and your postcode, or paste the number in the box above. The number comes from the shop, from DPD's SMS or email, or from the "sorry we missed you" card.
@@ -76,7 +76,7 @@ As listed on dpd.co.uk on 11 October 2026:
 
 [Peek](/) recognises a 14-digit DPD number, but the shape is shared and Peek can't ask DPD UK whether it knows a number. So you'll usually press "Change" and pick "DPD UK", unless a tracking service names DPD UK first. A track.dpd.co.uk or tracking.dpd.co.uk link with `reference=` or `parcelNumber=` names DPD UK straight away. Order and collection references that need a postcode aren't tracked.
 
-DPD UK's scans carry no time zone, so Peek doesn't show DPD's own scan list. It takes the dated history from universal tracking services, asks DPD UK again every 6 hours and, if no service answers, shows DPD's current status, dated when Peek saw it. Statuses keep DPD's English wording, and a cancelled delivery shows as a problem. Peek can notify you when the status changes.
+DPD UK's scans carry no time zone: Peek reads them on UK time and lists DPD's own history. Statuses keep DPD's English wording, and a cancelled delivery shows as a problem. Peek can notify you when the status changes.
 
 DPD gives no place for its scans, and Peek doesn't read DPD's expected day or Predict window. It drops your details, references and delivery photos. DPD reuses numbers after some months, so an old number can show a newer parcel.
 

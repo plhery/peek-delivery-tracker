@@ -3,7 +3,7 @@ title: Amazon Shipping seguimiento: estados, entrega y contacto
 description: Sigue un paquete de Amazon Shipping enviado por otra tienda: dónde está el número, qué significa cada estado, entregas fallidas y con quién hablar.
 slug: amazon-shipping-seguimiento
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
 Amazon Shipping es Amazon repartiendo paquetes para otras empresas: una tienda que no es Amazon puede enviarte el pedido por la red de Amazon. Lo sigues en el seguimiento público de Amazon Shipping, track.amazon.es, con el número que viene en el correo de confirmación de envío de la tienda, que también trae un enlace directo. Los pedidos hechos en Amazon.es se siguen en Mis pedidos.
@@ -77,7 +77,7 @@ Consultado el 12 de octubre de 2026. La [página de contacto de Amazon Shipping]
 
 Pega el número o un enlace de track.amazon (`/tracking/` y el número) en [Peek](/). Peek pregunta al seguimiento público de Amazon si conoce el número. Si Amazon responde, verás «Amazon Shipping ofrece seguimiento público para este paquete. Peek mantendrá esta entrega al día.» Si no, lo trata como una entrega de Amazon Logistics, que se sigue en Mis pedidos. Si la consulta falla, pulsa «Volver a comprobar». Amazon Shipping no está en la lista de «Cambiar transportista»: esta consulta es la única forma de llegar a él. No hace falta código postal.
 
-Peek muestra el estado, el historial con la ciudad, la región y el país de cada escaneo, el día de entrega previsto y la hora de entrega. Lo consulta cada 10 minutos de día (cada 2 cuando sale a reparto) y cada hora por la noche, pone cada escaneo en un mapa y puede enviarte notificaciones cuando cambia. Usa sus propias etiquetas cortas en español en vez de las frases de Amazon, salvo «Arrived at sorting center», «Arrived at delivery center» y «Departed facility», que se quedan en inglés. No muestra el nombre de la tienda, tu nombre y dirección, la firma ni la foto de entrega. Con un número `TBA`, `TBC` o `TBM`, un escaneo que Amazon fecha sin zona horaria no aparece. Amazon es la única fuente: cuando deja de dar el historial, Peek lo avisa y deja de consultarlo. No sigue el paquete si pasa a otro transportista.
+Peek muestra el estado, el historial con la ciudad, la región y el país de cada escaneo, el día de entrega previsto y la hora de entrega. Lo consulta cada 10 minutos de día (cada 2 cuando sale a reparto) y cada hora por la noche, pone cada escaneo en un mapa y puede enviarte notificaciones cuando cambia. Usa sus propias etiquetas cortas en español en vez de las frases de Amazon, salvo «Arrived at sorting center», «Arrived at delivery center» y «Departed facility», que se quedan en inglés. No muestra el nombre de la tienda, tu nombre y dirección, la firma ni la foto de entrega. Amazon es la única fuente: cuando deja de dar el historial, Peek lo avisa y deja de consultarlo. No sigue el paquete si pasa a otro transportista.
 
 ## Preguntas sobre el seguimiento de Amazon Shipping
 

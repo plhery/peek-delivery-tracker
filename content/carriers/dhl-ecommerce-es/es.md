@@ -3,7 +3,7 @@ title: DHL eCommerce Iberia seguimiento: estados y teléfono
 description: Sigue tu paquete DHL eCommerce en España: dónde está el número, qué significa cada estado, ServicePoints, lockers, plazos de recogida y cómo contactar con DHL.
 slug: dhl-ecommerce-iberia-seguimiento
 published: 2026-10-11
-updated: 2026-10-23
+updated: 2026-10-26
 ---
 
 DHL eCommerce Iberia es el servicio de paquetería estándar de DHL en España y Portugal, el que antes se llamaba DHL Parcel (ese nombre aún sale en algunos sitios). Para seguir tu paquete, escribe el número en la casilla de [seguimiento de DHL eCommerce](https://www.dhl.com/es-es/ecommerce/home/private-shipments/customer-service/receive-a-parcel/tracking-your-shipment.html) o pégalo en la casilla de arriba. El número te lo da la tienda, o DHL en su correo o SMS con la fecha prevista de entrega.
@@ -87,7 +87,7 @@ Por los números de dos letras, 7 cifras y `0`, [Peek](/) pregunta a DHL eCommer
 
 También puedes pegar enlaces de clientesparcel.dhl.es, de la versión española, portuguesa o inglesa del portal (`/LiveTracking/ModificarEnvio/`, `ModificarMeuEnvio` o `ModifyMyShipment`). Indican DHL eCommerce Iberia directamente, sea cual sea el formato del número. Si el enlace lleva un código postal al final, Peek no lo usa, porque no le hace falta.
 
-Los escaneos de DHL no llevan zona horaria, así que Peek no muestra el historial de DHL. Toma el historial con fechas de servicios de seguimiento universales, vuelve a preguntar a DHL cada 6 horas y, si ningún servicio responde, enseña el estado actual de DHL con la fecha en que Peek lo vio. La consulta a DHL se hace en inglés, así que los estados salen con el texto inglés de DHL, salvo `Delivered` y `Out for delivery`, que aparecen con las palabras de Peek («Entregado» y «En reparto»). Si CTT Express hace la entrega, sigue el paquete en [CTT Express](carrier:ctt-express) con su número. También puede enviarte notificaciones cuando cambia el estado, pero no muestra fecha prevista ni hora de entrega para DHL eCommerce Iberia.
+Los escaneos de DHL no llevan zona horaria: Peek los lee en la hora del lugar de cada escaneo y muestra el historial de la propia DHL. La consulta a DHL se hace en inglés, así que los estados salen con el texto inglés de DHL, salvo `Delivered` y `Out for delivery`, que aparecen con las palabras de Peek («Entregado» y «En reparto»). Si CTT Express hace la entrega, sigue el paquete en [CTT Express](carrier:ctt-express) con su número. También puede enviarte notificaciones cuando cambia el estado, pero no muestra fecha prevista ni hora de entrega para DHL eCommerce Iberia.
 
 ## Preguntas sobre el seguimiento de DHL eCommerce
 

@@ -3,7 +3,7 @@ title: Amazon Shipping suivi : numéro, statuts et colis non reçu
 description: Suivre un colis Amazon Shipping envoyé par une autre boutique : le numéro de suivi, les statuts de track.amazon.fr, les absences, la reprogrammation, qui contacter.
 slug: amazon-shipping-suivi
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
 Amazon Shipping, c'est Amazon qui livre des colis pour d'autres entreprises : une boutique qui n'est pas Amazon peut t'envoyer ta commande par le réseau d'Amazon. Ton colis se suit sur le site de suivi public d'Amazon Shipping, track.amazon.fr, avec le numéro de suivi de l'e-mail de confirmation d'expédition de la boutique, qui contient aussi un lien direct. Une commande passée sur Amazon même se suit plutôt dans « Vos commandes ».
@@ -77,7 +77,7 @@ Lu le 12 octobre 2026. La [page Contactez-nous d'Amazon Shipping](https://track.
 
 Colle le numéro ou un lien track.amazon (`/tracking/` suivi du numéro) dans [Peek](/). Peek demande au site de suivi public d'Amazon s'il connaît le numéro. Si Amazon répond, tu vois « Le suivi public est disponible avec Amazon Shipping. Peek te tiendra au courant de cette livraison. » Sinon, c'est une livraison Amazon Logistics, qui se suit généralement dans Vos commandes. Si la vérification échoue, réessaie. Amazon Shipping n'est pas dans la liste « Changer de transporteur » : cette vérification est le seul chemin. Pas de code postal à donner.
 
-Peek affiche le statut, l'historique avec la ville, la région et le pays de chaque scan, le jour de livraison prévu et l'heure de livraison. Il vérifie toutes les 10 minutes en journée (toutes les 2 minutes une fois le colis en livraison) et toutes les heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications quand le statut change. Il montre ses propres libellés dans ta langue plutôt que les phrases d'Amazon, sauf « Arrived at sorting center », « Arrived at delivery center » et « Departed facility », qui restent en anglais. Il laisse de côté le nom de la boutique, ton nom et ton adresse, la signature et la photo de livraison. Pour un numéro `TBA`, `TBC` ou `TBM`, un scan qu'Amazon date sans fuseau horaire n'apparaît pas. Amazon est la seule source : quand Amazon ne fournit plus l'historique, Peek le dit et arrête de vérifier. Il ne suit pas le colis vers un autre transporteur.
+Peek affiche le statut, l'historique avec la ville, la région et le pays de chaque scan, le jour de livraison prévu et l'heure de livraison. Il vérifie toutes les 10 minutes en journée (toutes les 2 minutes une fois le colis en livraison) et toutes les heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications quand le statut change. Il montre ses propres libellés dans ta langue plutôt que les phrases d'Amazon, sauf « Arrived at sorting center », « Arrived at delivery center » et « Departed facility », qui restent en anglais. Il laisse de côté le nom de la boutique, ton nom et ton adresse, la signature et la photo de livraison. Amazon est la seule source : quand Amazon ne fournit plus l'historique, Peek le dit et arrête de vérifier. Il ne suit pas le colis vers un autre transporteur.
 
 ## Questions sur le suivi Amazon Shipping
 

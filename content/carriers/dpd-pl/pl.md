@@ -3,7 +3,7 @@ title: DPD Poland śledzenie paczki: statusy, Pickup i kontakt
 description: Śledzenie paczki DPD po 14-znakowym numerze: co znaczą statusy, ile paczka czeka w punkcie DPD Pickup, jak złożyć reklamację i gdzie dzwonić.
 slug: dpd-poland-sledzenie-paczki
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 DPD Polska to firma kurierska z Warszawy, część grupy Geopost, której właścicielem jest francuska poczta La Poste. Paczkę śledzisz na stronie [Track & Trace DPD](https://tracktrace.dpd.com.pl/findParcel) po 14-znakowym numerze przesyłki albo wklejasz numer w pole powyżej. Numer zwykle podaje sklep w e-mailu o wysyłce lub na stronie zamówienia.
@@ -78,7 +78,7 @@ Według strony DPD Polska (stan na 11 października 2026):
 
 [Peek](/) od razu rozpoznaje DPD Poland po 13 cyfrach i literze. Przy 14 cyfrach zaczynających się od 13 pyta naraz kilku przewoźników, z DPD Poland jako najbardziej prawdopodobnym, i pokazuje „DPD Poland ma tę przesyłkę.”, gdy numer zna tylko DPD Poland. Jeśli zna go kilku przewoźników albo żaden, a także przy innych 14-cyfrowych numerach, wybierz DPD Poland przyciskiem „Zmień”. Zadziała też link z tracktrace.dpd.com.pl lub tt.dpd.com.pl z `p1=`; kodu nadania, numeru referencyjnego ani numeru zlecenia nie rozpoznaje.
 
-Peek czyta angielską stronę DPD i pokazuje status, historię i godzinę doręczenia, z komunikatami po angielsku, tak jak pisze je DPD. DPD nie podaje tam miejsca skanów, przewidywanej daty dostawy, nadawcy ani wagi, a Peek pomija Twoje nazwisko, punkt odbioru z adresem, kod oddziału i liczbę paczek. Skany z polskich oddziałów i punktów mają czas warszawski; rejestracja, odbiór bez kodu oddziału i skany za granicą nie mają strefy czasowej i nie pojawiają się w historii. Peek sprawdza DPD w dzień co 10 minut, a od wydania do doręczenia co 2 minuty, w nocy zaś co godzinę, i może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie śledzi paczki po `Sent outside Poland` i nie zapamiętuje nowego numeru zwrotu.
+Peek czyta angielską stronę DPD i pokazuje status, historię i godzinę doręczenia, z komunikatami po angielsku, tak jak pisze je DPD. DPD nie podaje tam miejsca skanów, przewidywanej daty dostawy, nadawcy ani wagi, a Peek pomija Twoje nazwisko, punkt odbioru z adresem, kod oddziału i liczbę paczek. Peek odczytuje wszystkie skany w czasie warszawskim, także rejestrację, odbiór bez kodu oddziału i skany za granicą. Peek sprawdza DPD w dzień co 10 minut, a od wydania do doręczenia co 2 minuty, w nocy zaś co godzinę, i może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie śledzi paczki po `Sent outside Poland` i nie zapamiętuje nowego numeru zwrotu.
 
 ## Pytania o śledzenie paczki DPD
 

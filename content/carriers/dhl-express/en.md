@@ -76,7 +76,7 @@ DHL Express's channels for recipients, as its MyDHL+ contact pages listed them o
 
 Peek reads DHL Express through the service behind its mobile app, or else opens dhl.com's tracking page in a browser on its server, which is slower and can be refused; then tracking services fill in. It checks every 10 minutes by day, every 2 to 5 minutes once out for delivery, and hourly overnight, and can notify you at every scan, at important steps or on delivery day only.
 
-It shows the status, each scan with its facility on a map and the destination country. Scan times are placed by the facility's town; a scan it can't place makes Peek date the history from tracking services and ask DHL again every 6 hours. Scans read in DHL's English, except `Delivered`, `Shipment picked up` and `Shipment information received`, which appear in Peek's own words. Peek drops the signature, ignores old scans from a recycled waybill, and shows no expected delivery day, weight or Service Point. It can't pay duties or change a delivery.
+It shows the status, each scan with its facility on a map and the destination country. Scan times are read on the clock of the facility's town or, when that isn't enough, of the scans around it. Scans read in DHL's English, except `Delivered`, `Shipment picked up` and `Shipment information received`, which appear in Peek's own words. Peek drops the signature, ignores old scans from a recycled waybill, and shows no expected delivery day, weight or Service Point. It can't pay duties or change a delivery.
 
 ## Questions about DHL Express tracking
 

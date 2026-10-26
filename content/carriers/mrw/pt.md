@@ -3,7 +3,7 @@ title: MRW rastreio: número, estados e contactos em Portugal
 description: Rastreio MRW em Portugal: onde está o número de 12 algarismos, os estados explicados, os MRW Point, as reclamações e o contacto da MRW.
 slug: mrw-rastreio
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 A MRW é uma rede espanhola de transporte urgente em franquia, com mais de 550 lojas entre Portugal, Espanha, Andorra e Gibraltar. Para rastrear a encomenda, escreve o número de envio na caixa «Não assinante» da [página Seguimento de envios da MRW](https://www.mrw.pt/seguimiento/) ou cola-o na caixa acima. O número vem no e-mail de envio da loja, no SMS da MRW ou, se foste tu a enviar, no comprovativo que a loja MRW te deu.
@@ -85,7 +85,7 @@ O [Peek](/) reconhece logo como MRW a forma de cinco algarismos, uma letra e sei
 
 No Peek, os estados lidos na MRW aparecem em espanhol, e os desconhecidos aparecem como «Actualización de seguimiento». O Peek mostra o estado, o histórico e cada loja MRW (código postal e localidade, «(Plataforma)» para um centro) num mapa, e pode enviar-te notificações de todas as atualizações, só das importantes ou só no dia da entrega. Deixa de fora a morada do ponto de recolha e não dá data prevista de entrega.
 
-As horas da MRW não trazem fuso horário, por isso o Peek não mostra as leituras da própria MRW. O histórico com datas vem de serviços de seguimento universais, e a MRW volta a ser consultada de 6 em 6 horas; se nenhum serviço responder, vês só o estado atual da MRW. A consulta é feita ao seguimento espanhol da MRW, que também responde pelas encomendas da MRW Portugal.
+As horas da MRW não trazem fuso horário: o Peek lê-as na hora do local de cada loja e mostra o histórico da própria MRW. Se a MRW der só um resumo, o histórico vem de serviços de seguimento universais; se nenhum o tiver, vês só o estado atual da MRW. A consulta é feita ao seguimento espanhol da MRW, que também responde pelas encomendas da MRW Portugal.
 
 ## Perguntas sobre o rastreio MRW
 

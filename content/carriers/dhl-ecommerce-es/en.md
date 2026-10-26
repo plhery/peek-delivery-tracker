@@ -3,7 +3,7 @@ title: DHL eCommerce Iberia tracking: statuses and ServicePoints
 description: Track a DHL eCommerce parcel in Spain or Portugal: where the number is, what each status means, ServicePoint and locker deadlines and who to call.
 slug: dhl-ecommerce-iberia-tracking
 published: 2026-10-11
-updated: 2026-10-23
+updated: 2026-10-26
 ---
 
 DHL eCommerce Iberia is DHL's standard parcel service in Spain and Portugal, still called DHL Parcel in places. Track a parcel in the tracking box on [dhl.com/es-es/ecommerce](https://www.dhl.com/es-es/ecommerce/home/private-shipments/customer-service/receive-a-parcel/tracking-your-shipment.html), or paste the number in the box above. The number comes from the shop, or from DHL's own email or SMS with the expected delivery date.
@@ -84,7 +84,7 @@ As DHL's Spanish and Portuguese pages listed them on 11 October 2026 (there is n
 
 Links from clientesparcel.dhl.es can be pasted too, from the portal's Spanish, Portuguese or English version (`/LiveTracking/ModificarEnvio/`, `ModificarMeuEnvio` or `ModifyMyShipment`). They name DHL eCommerce Iberia straight away, whatever the number's shape. A postcode at the end of the link is left out, as none is needed.
 
-DHL's scans carry no time zone, so Peek doesn't show DHL's own scan list. It takes the dated history from universal tracking services, asks DHL again every 6 hours and, if no service answers, shows DHL's current status, dated when Peek saw it. Statuses keep DHL's English wording, except `Delivered` and `Out for delivery`, which show as Peek's own. Peek can notify you when the status changes. It shows no expected delivery date or delivery time for DHL eCommerce Iberia.
+DHL's scans carry no time zone: Peek reads them on the clock of the scan's place and lists DHL's own history. Statuses keep DHL's English wording, except `Delivered` and `Out for delivery`, which show as Peek's own. Peek can notify you when the status changes. It shows no expected delivery date or delivery time for DHL eCommerce Iberia.
 
 ## Questions about DHL eCommerce tracking
 

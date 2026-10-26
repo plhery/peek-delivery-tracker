@@ -3,7 +3,7 @@ title: APC Overnight tracking: numbers, statuses, missed deliveries
 description: Track an APC parcel: the 7-digit consignment number and the 22-digit one, what Carded means, rearranging a missed delivery and how to reach your depot.
 slug: apc-overnight-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 APC Overnight, now calling itself The APC, is the UK's largest independent parcel network: more than 90 locally owned depots that mostly deliver on the next working day. Track a parcel on APC Choice with the consignment number and your postcode, or paste the long number or the tracking link in the box above. You'll find the number in the sender's dispatch confirmation, in an email or text from APC or the retailer, or on APC's "Sorry we missed you" card.
@@ -84,7 +84,7 @@ APC has no national phone line, chat or general email for recipients; its own pa
 
 Paste the 22-digit number or an apcchoice.apc-overnight.com link with `id=` into [Peek](/); no postcode needed. Since the number's shape is shared, Peek asks APC Overnight and Austrian Post at once and shows "APC Overnight has this parcel." when APC knows it. A 22-digit number without a real date isn't offered to APC and isn't APC's: check it with the shop. The 7-digit consignment number on its own can't be tracked here, and apc.co.uk links aren't read.
 
-APC's times carry no time zone, so Peek doesn't list APC's own history. It takes a dated history from [universal tracking services](guide:universal-tracker) when one knows the parcel and asks APC again every 6 hours; if no service answers, it shows APC's current status, dated when it was seen. It can also show the weight and the service, and can notify you when the status changes. `Delivered` and `Out for delivery` appear in Peek's own words; other statuses keep APC's wording. There's no expected delivery day, no 2-hour slot and no pickup point, and rearranging a delivery stays in APC Choice.
+APC's times carry no time zone: Peek reads them on UK time and lists APC's own history. It can also show the weight and the service, and can notify you when the status changes. `Delivered` and `Out for delivery` appear in Peek's own words; other statuses keep APC's wording. There's no expected delivery day, no 2-hour slot and no pickup point, and rearranging a delivery stays in APC Choice.
 
 ## Questions about APC tracking
 

@@ -3,7 +3,7 @@ title: Aramex Australia tracking: numbers, statuses, contacts
 description: Track an Aramex Australia (formerly Fastway) parcel: where the label number is, what the statuses mean, missed deliveries, delays and how to reach your depot.
 slug: aramex-australia-tracking
 published: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-26
 ---
 
 Aramex Australia, formerly Fastway Couriers, is a franchise courier network that delivers parcels for Australian shops. Track a parcel with its label number on [aramex.com.au](https://www.aramex.com.au/tools/track/) or by pasting it in the box above. The number comes from the shop that sent it: look in its shipping email or on your order page.
@@ -90,7 +90,7 @@ As read on 15 October 2026, Aramex's Contact page lists no national phone line o
 
 It can show the status, the expected day and the service, `Priority Delivery` or `Economy Delivery`. `Delivered` and `In transit` appear in Peek's own words; the others as Aramex writes them. It drops the collection point and its address, opening hours, pickup code, signatory, photo or signature proof, delivery instructions and references.
 
-Aramex's scan times carry no time zone, so Peek takes the dated history from tracking services instead, shows it on a map and asks Aramex again every 6 hours. If no service answers, it shows Aramex's current status, dated when it was seen. It can notify you when the status changes.
+Aramex's scan times carry no time zone: Peek reads each on the clock of the scan's place and lists Aramex's own history, shown on a map. It can notify you when the status changes.
 
 ## Questions about Aramex tracking in Australia
 

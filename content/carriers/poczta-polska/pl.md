@@ -3,7 +3,7 @@ title: Poczta Polska śledzenie: numer, statusy, awizo i kontakt
 description: Śledzenie przesyłki Poczty Polskiej i Pocztex: jak wygląda numer, co znaczą statusy, ile czeka awizo, punkt i automat, reklamacje, cło i infolinia.
 slug: poczta-polska-sledzenie
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 Poczta Polska to państwowy operator pocztowy, a Pocztex to jej usługa kurierska. Przesyłkę śledzisz w eMonitoringu Poczty Polskiej (ta sama wyszukiwarka jest na poczta-polska.pl i pocztex.pl) albo wklejając numer w pole powyżej. Numer jest na potwierdzeniu nadania, więc ma go sklep lub nadawca, a powtarzają go też SMS-y i e-maile z powiadomieniami Poczty Polskiej.
@@ -92,7 +92,7 @@ Stan na 11 października 2026, według stron kontaktowych Poczty Polskiej i Pocz
 
 [Peek](/) rozpoznaje numery PX od razu. O numery 19-cyfrowe pyta tylko Pocztę Polską, dopisując cyfrę kontrolną tak jak jej strona. Przy 20 cyfrach w kształcie z tabeli i z poprawną cyfrą kontrolną pyta Pocztę Polską, Swiss Post Cargo i NZ Post, a pierwszeństwo ma Poczta Polska. Poprawny numer międzynarodowy kończący się na PL Peek pokazuje najpierw jako nieznanego przewoźnika pocztowego i pyta Pocztę Polską oraz Chronopost; gdy Poczta Polska zna numer, wygrywa. Przy błędnej cyfrze kontrolnej Peek pyta tylko Chronopost. Linki z eMonitoringu z `numer=` też działają, a kodu pocztowego nie trzeba.
 
-Peek odczytuje śledzenie po angielsku, więc zobaczysz w nim angielskie nazwy, na przykład `Final delivery` czy `Ready for pick-up at the Post Office`. Pokazuje każdą placówkę na mapie, wagę, kraj przeznaczenia, usługę (Pocztex, EMS) i placówkę, w której przesyłka czeka. Godzinę doręczenia zna tylko ze skanu w polskiej placówce, a planowanej daty dostawy Poczta Polska nie podaje. Pomija adresy placówek, godziny otwarcia, dokumenty płatności i usługi dodatkowe. Skany przekazane z zagranicy nie mają strefy czasowej, więc części z nich może zabraknąć. Palet, przesyłek grupowych i nierejestrowanych nie da się śledzić.
+Peek odczytuje śledzenie po angielsku, więc zobaczysz w nim angielskie nazwy, na przykład `Final delivery` czy `Ready for pick-up at the Post Office`. Pokazuje każdą placówkę na mapie, wagę, kraj przeznaczenia, usługę (Pocztex, EMS) i placówkę, w której przesyłka czeka. Planowanej daty dostawy Poczta Polska nie podaje. Pomija adresy placówek, godziny otwarcia, dokumenty płatności i usługi dodatkowe. Skany przekazane z zagranicy nie mają strefy czasowej, więc Peek odczytuje je według zegara kraju, z którego pochodzą. Palet, przesyłek grupowych i nierejestrowanych nie da się śledzić.
 
 Peek sprawdza śledzenie w dzień co 10 minut, a co 2 minuty, gdy przesyłka jest w doręczeniu, w nocy zaś co godzinę, i może wysyłać powiadomienia o zmianie statusu. Przy międzynarodowym numerze pocztowym paczki jadącej do Polski Peek może przejść na śledzenie w Poczcie Polskiej, gdy ta pokaże nowsze zdarzenia.
 

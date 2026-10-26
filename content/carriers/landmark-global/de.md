@@ -3,7 +3,7 @@ title: Landmark Global Sendungsverfolgung: Status, Partner, Kontakt
 description: Landmark-Global-Paket verfolgen: woher die LTN kommt, was die englischen Status heißen, wer in Deutschland und Österreich zustellt und wen du fragst.
 slug: landmark-global-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 Landmark Global bringt Online-Bestellungen für Shops über die Grenze. Es gehört zu Bnode, der Brüsseler Gruppe, zu der auch bpost gehört, und gibt dein Paket für das letzte Stück meist an einen Paketdienst in deinem Land weiter. Verfolgen kannst du es mit der Landmark Trackingnummer (LTN) aus der Bestätigung des Shops, auf [Landmarks Tracking-Seite](https://track.landmarkglobal.com/?lang=de) oder im Feld oben.
@@ -92,7 +92,7 @@ Landmarks allgemeine Kontaktseite ist nur für Geschäftsanfragen: Fragen zum Tr
 
 Gelesen wird Landmarks englische Seite. Die Scans stehen also auf Englisch, die des Partners in dessen Worten, und Landmarks Zustellscans erscheinen als „Zugestellt“. Du siehst den Status, den Ort jedes Schritts, das Zielland und den Zustellpartner mit seiner Nummer. Ein voraussichtliches Lieferdatum gibt es nicht, Bestell- und Paketreferenzen und Zahlungsaufforderungen fallen weg.
 
-Landmarks Scans haben keine Zeitzone, deshalb erscheint Landmarks eigener Verlauf nicht. Der datierte Verlauf kommt von universellen Tracking-Diensten oder, sobald das Paket weiterverfolgt wird, vom Zustellpartner, und Landmark wird alle 6 Stunden erneut gefragt. Antwortet kein Dienst, siehst du Landmarks aktuellen Status mit dem Zeitpunkt, an dem Peek ihn gesehen hat.
+Landmark schreibt jede Scanzeit in US-Central-Zeit. Peek liest sie so und zeigt Landmarks eigenen Verlauf.
 
 Ist der Partner einer, den Peek direkt verfolgt, etwa die Schweizerische Post, Royal Mail oder USPS, kann das Paket dort weiterverfolgt werden, sobald er neuere Schritte zeigt. Die Seite des Pakets zeigt dann „Zustellung durch“ diesen Paketdienst und seine Nummer mit Link. Das klappt nicht bei jedem Paket. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder „Nur am Liefertag“.
 

@@ -3,7 +3,7 @@ title: DAO tracking: statuses, daoSHOP and missed deliveries
 description: Track a DAO parcel in Denmark: where the 20-digit number is, what each status means, night drop-offs, daoSHOP pickup and how to reach DAO.
 slug: dao-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 DAO (Dansk Avis Omdeling) is a Danish carrier that has delivered newspapers since 1921 and brings online shops' parcels to your door at night or to a daoSHOP pickup point. Enter the parcel number on DAO's "Track your parcel" page, in the dao app or paste it in the box above. The number comes from the shop's shipping email or from DAO's own text and email.
@@ -82,7 +82,7 @@ As listed on DAO's contact page on 13 October 2026:
 
 [Peek](/) asks about a 20-digit number starting `0005712696` or `0005715127` at DAO and the other likely carriers, PostNord among them, at once. When only DAO knows it, you see "DAO has this parcel."; when PostNord knows it too, you pick with "Change". A 13-digit or 9-digit number needs "Change" and DAO, or a dao.as tracking link, which works with any number. DAO then answers with the 20-digit number, which is tracked from then on.
 
-DAO's scans carry no time zone, so Peek doesn't show DAO's own scan list. It takes the dated history from [universal tracking services](guide:universal-tracker), asks DAO again every 6 hours and, if no service answers, shows DAO's current status, dated when it was seen. It can show the daoSHOP the parcel goes to or waits at. Statuses keep DAO's English wording, except `Ready for pickup`, shown in Peek's own words. You can be notified when the status changes.
+DAO's scans carry no time zone: Peek reads them on the clock of the scan's place, Danish time in Denmark, and lists DAO's own history. It can show the daoSHOP the parcel goes to or waits at. Statuses keep DAO's English wording, except `Ready for pickup`, shown in Peek's own words. You can be notified when the status changes.
 
 For a parcel sent abroad, the partner's tracking number shows, and when DAO's link names a carrier in Peek's list, the parcel can be followed there. DAO gives no expected arrival day and no weight. The masked names, your address and postcode, and the shop's address, hours and map position are left out. Peek can't contact DAO for you.
 

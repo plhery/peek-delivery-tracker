@@ -3,7 +3,7 @@ title: An Post tracking: statuses, missed deliveries and contact
 description: Track an An Post parcel: what its IE tracking number looks like, what each status means, how long missed items wait and how to reach An Post.
 slug: an-post-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 An Post is Ireland's state-owned postal service. Track an item on [An Post's Track & Trace](https://www.anpost.com/Post-Parcels/Track/Search) with its tracking number, up to five at a time, or paste the number in the box above. The number comes from the sender: the shop's shipping email, or the receipt if someone posted it at a post office.
@@ -88,7 +88,7 @@ An Post lists no customer email address. An unsettled complaint can go to the An
 
 [Peek](/) recognises a valid number of two letters, nine digits and `IE` as An Post's straight away. An anpost.com Track History link with `item=` or `barcode=` works too. No postcode needed.
 
-An Post's scans carry no time zone, so Peek doesn't show An Post's own scan list. It takes the dated history from universal tracking services, asks An Post again every 6 hours and, if no service answers, shows An Post's current status, dated when Peek saw it. Statuses keep An Post's English wording. Peek can notify you when the status changes.
+An Post's scans carry no time zone: Peek reads them on Irish time, or on the clock of the scan's place once the item has left Ireland, and lists An Post's own history. Statuses keep An Post's English wording. Peek can notify you when the status changes.
 
 It drops your name, the signatory, references and the proof of delivery, and An Post gives no expected delivery day. Numbers ending in another country's letters go to that country's post, not An Post, and scans relayed from abroad aren't followed.
 

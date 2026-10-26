@@ -3,7 +3,7 @@ title: Slovak Parcel Service tracking: statuses and what to do
 description: Track an SPS parcel in Slovakia: where the number is, what the Slovak statuses mean, Balíkovo boxes, missed deliveries, claims and how to call SPS.
 slug: slovak-parcel-service-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 Slovak Parcel Service (SPS) is a Slovak courier, owned by [Austrian Post](carrier:austrian-post) since 2002, that delivers parcels from shops across Slovakia, to your door or to a Balíkovo box or partner shop. Your tracking number is in the shop's shipping email or in SPS's SMS or email: type it on sps-sro.sk, or paste it in the box above.
@@ -84,7 +84,7 @@ As listed on sps-sro.sk on 12 October 2026:
 
 [Peek](/) knows SPS's shape, 14 digits starting 703, but it's shared with DPD, SEUR, BRT, [Hermes Germany](carrier:hermes-de) and others. In Slovakia Peek asks SPS first. Elsewhere it asks SPS just after you save the number, not while you add it. If another carrier claims it, or none does yet, use "Change" and pick "Slovak Parcel Service" (searching "SPS" finds it). Type the 14 digits: the 16-digit label code doesn't name SPS. An sps-sro.sk tracking link with `shipment_id=` names SPS whatever the number; a mysps.sk link doesn't.
 
-SPS's scan times carry no time zone, so Peek doesn't list SPS's own history. It takes a dated history from [universal tracking services](guide:universal-tracker) when one knows the parcel and asks SPS again every 6 hours; if no service answers, it shows SPS's current status, dated when Peek saw it. From SPS it can show the status, the depot of each scan and the weight, with wordings in Slovak as SPS writes them; `Doručenie` counts as delivered. There's no expected delivery date, and a Balíkovo box deposit shows only as a status, without the box's name. Peek can notify you when the status changes. It can't extend storage or resend your PIN.
+SPS's scan times carry no time zone: Peek reads them on Slovak time and lists SPS's own history. From SPS it can show the status, the depot of each scan and the weight, with wordings in Slovak as SPS writes them; `Doručenie` counts as delivered. There's no expected delivery date, and a Balíkovo box deposit shows only as a status, without the box's name. Peek can notify you when the status changes. It can't extend storage or resend your PIN.
 
 ## Questions about Slovak Parcel Service tracking
 

@@ -3,7 +3,7 @@ title: DPD Ireland tracking: statuses, Pickup points and contact
 description: Track a DPD Ireland parcel: where the 9-digit number is, what each status means, how to change a delivery, Pickup points and how to reach DPD.
 slug: dpd-ireland-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 DPD Ireland delivers parcels across the whole island of Ireland, North and South, from 38 depots and a head office in Athlone. To track a parcel, enter its number on [DPD Ireland's tracking page](https://www.dpd.ie/tracking/). The number is in the email DPD sends when it collects your parcel, and usually in the shop's shipping email too.
@@ -80,7 +80,7 @@ DPD Ireland's contact pages give no customer-service phone number or email.
 
 [Peek](/) reads DPD Ireland's own tracker, with no account or postcode. It shows each scan in DPD's words with the depot that made it, under a headline in its own words ("Out for delivery", "Delivered"). Once the parcel is on the van, DPD's delivery window becomes the expected delivery and checks go from every 10 minutes to every 2 by day; overnight they're hourly. A delivered parcel shows the time of DPD's delivery scan.
 
-Scans from DPD networks abroad have no time zone, so they stay out of the history. While the latest scan is one of those, Peek dates the history from universal tracking services and asks DPD Ireland again every 6 hours; if none answers, it shows DPD Ireland's current status, dated when Peek saw it.
+Scans from DPD networks abroad have no time zone: Peek reads them on the clock of the scan's place and lists them with the rest of DPD Ireland's history.
 
 Peek doesn't recognise DPD Ireland from the number alone, nor ask it whether it knows a number. Most 9-digit numbers get no carrier; some match TNT's pattern, and TNT is asked first. A 10-digit number is asked of other carriers. Either way, press "Change" and pick "DPD Ireland", or paste a DPD Ireland tracking link with `consignmentNumber=` in it, from www.dpd.ie/tracking/, the track-my-parcel page or tracking.dpd.ie, which names DPD Ireland straight away.
 

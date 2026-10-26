@@ -3,7 +3,7 @@ title: SEUR tracking: numbers, statuses and pickup points
 description: Track a SEUR parcel in Spain: what the number looks like, what SEUR's Spanish statuses mean, Pickup points, missed deliveries and how to reach SEUR.
 slug: seur-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 SEUR is a Spanish parcel and express carrier, part of the Geopost group that also runs DPD. Track it without an account on SEUR's [miSEUR tracking page](https://www.seur.com/miseur/mis-envios), with the link in SEUR's emails or by pasting the number in the box above. The number comes from the sender: if you don't have it, SEUR's help says to ask the shop.
@@ -82,7 +82,7 @@ SEUR publishes no opening hours and no English-language line.
 
 [Peek](/) asks SEUR about 21- and 7-digit numbers directly. For 14 digits it asks the likely carriers at once, SEUR first for readers in Spain or Portugal. You see "asking…" and then "SEUR has this parcel." when only SEUR knows it; otherwise press "Change" and pick SEUR. A miSEUR or live-tracking link with `tracking=` works too, and no postcode is needed. A 21-digit number with `000` as its 13th to 15th digits is taken for [Australia Post](carrier:australia-post)'s: pick SEUR with "Change".
 
-Peek shows the status, the history and the weight. SEUR gives no place for its scans, so nothing appears on the map. Statuses stay in SEUR's Spanish; the delivered ones show as "Delivered". Peek drops the parcel count, the sender, the recipient and the delivery PIN and QR code. SEUR's scan times carry no reliable time zone, so the dated history comes from other tracking services and SEUR is asked again every 6 hours; if none answers, you see only SEUR's current status. Multi-parcel shipments are followed only through those services. You can be notified when the status changes.
+Peek shows the status, the history and the weight. SEUR gives no place for its scans, so nothing appears on the map. Statuses stay in SEUR's Spanish; the delivered ones show as "Delivered". Peek drops the parcel count, the sender, the recipient and the delivery PIN and QR code. SEUR's scan times carry no reliable time zone, so Peek reads them on Madrid time and lists SEUR's own history. Multi-parcel shipments are followed only through other tracking services. You can be notified when the status changes.
 
 ## Questions about SEUR tracking
 

@@ -3,7 +3,7 @@ title: Landmark Global suivi : statuts, livreur et contact
 description: Suivre un colis Landmark Global en France, en Belgique ou en Suisse : le numéro LTN, ce que veulent dire les statuts, qui livre et qui contacter s'il bloque.
 slug: landmark-global-suivi
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 Landmark Global transporte les commandes en ligne d'un pays à l'autre pour le compte des boutiques. Il fait partie de Bnode, le groupe bruxellois qui gère aussi bpost, et confie le plus souvent ton colis à un livreur de ton pays pour la fin du trajet. Pour le suivre, prends le numéro LTN que la boutique t'a envoyé, en général dans la confirmation de commande, et colle-le sur [le site de suivi de Landmark](https://track.landmarkglobal.com/?lang=fr) ou dans le champ ci-dessus.
@@ -89,7 +89,7 @@ La page « Contact » générale de Landmark sert aux demandes commerciales : le
 
 Peek lit la page anglaise de Landmark : tu y verras ses étapes en anglais et celles du livreur dans ses mots. Seules les livraisons écrites par Landmark, comme `Delivered`, deviennent « Livré » ; `Item delivered` reste tel quel. Il affiche le statut, le lieu de chaque étape, le pays de destination et le livreur avec son numéro, mais aucune date de livraison prévue, et il laisse de côté les références de commande et les demandes de paiement. Un colis renvoyé apparaît comme retourné.
 
-Les heures de Landmark n'ont pas de fuseau horaire : Peek n'affiche donc pas l'historique de Landmark. L'historique daté vient de services de suivi universels ou, une fois le colis suivi chez le livreur, de ce livreur ; Landmark est interrogé de nouveau toutes les 6 heures. Si aucun service ne répond, tu vois le statut actuel de Landmark, daté du moment où Peek l'a lu.
+Landmark écrit l'heure de chaque scan à l'heure du centre des États-Unis : Peek la lit ainsi et affiche l'historique de Landmark.
 
 Quand le livreur est un transporteur que Peek suit directement, comme [La Poste / Colissimo](carrier:la-poste) ou la Poste suisse, Peek peut suivre le colis chez lui : la page indique alors « Livraison par » ce transporteur, avec son numéro et un lien. Ça ne marche pas pour tous les colis. Chaque scan arrive sur une carte, et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Jour de livraison uniquement ».
 

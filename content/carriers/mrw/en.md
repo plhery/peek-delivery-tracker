@@ -3,7 +3,7 @@ title: MRW tracking: number, statuses in English and contact
 description: Track an MRW parcel in Spain or Portugal: where the 12-digit number is, its Spanish statuses in plain English, MRW Point pickup, claims and contacts.
 slug: mrw-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 MRW is a Spanish courier franchise network with more than 550 offices across Spain, Portugal, Andorra and Gibraltar. To track a parcel, type its shipment number into the "No abonados" box on [MRW's tracking page](https://www.mrw.es/seguimiento/) (in Portugal, [mrw.pt](https://www.mrw.pt/seguimiento/)), or paste it in the box above. The number is in the shop's shipping email, MRW's SMS or, if you sent the parcel yourself, the office receipt.
@@ -84,7 +84,7 @@ MRW lists no chat or recipient email, and says to take its numbers from mrw.es o
 
 Statuses appear in Spanish; unknown ones show as "Actualización de seguimiento". Peek shows the status, the history and each office (postcode and town, "(Plataforma)" for a hub) on a map, and can notify you of every scan, important steps or delivery day only. It drops the pickup point's address and gives no expected delivery date.
 
-MRW's times carry no time zone, so Peek doesn't show MRW's own scans. The dated history comes from universal tracking services, and Peek asks MRW again every 6 hours; if no service answers, you see only MRW's current status. MRW's Spanish tracking also answers for MRW Portugal parcels.
+MRW's times carry no time zone: Peek reads them on the clock of each office's place and lists MRW's own history. If MRW gives only a summary, the history comes from universal tracking services; if none has it, you see only MRW's current status. MRW's Spanish tracking also answers for MRW Portugal parcels.
 
 ## Questions about MRW tracking
 

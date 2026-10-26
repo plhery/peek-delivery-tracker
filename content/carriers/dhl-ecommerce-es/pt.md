@@ -3,7 +3,7 @@ title: DHL eCommerce Iberia rastreio: estados e ServicePoints
 description: Rastreio DHL eCommerce (antiga DHL Parcel) em Portugal: onde está o número, o que quer dizer cada estado, prazos no ServicePoint e contactos.
 slug: dhl-ecommerce-iberia-rastreio
 published: 2026-10-11
-updated: 2026-10-23
+updated: 2026-10-26
 ---
 
 A DHL eCommerce Iberia é o serviço de encomendas standard da DHL em Portugal e Espanha, que em muitos sítios ainda aparece como DHL Parcel. Segues a encomenda na caixa de seguimento do [dhl.com/pt-pt/ecommerce](https://www.dhl.com/pt-pt/ecommerce/home.html) ou colas o número na caixa acima. O número vem da loja, ou do email ou SMS da DHL eCommerce com a data prevista de entrega.
@@ -86,7 +86,7 @@ Para duas letras, 7 algarismos e `0`, o [Peek](/) consulta a DHL eCommerce Iberi
 
 Também podes colar ligações do clientesparcel.dhl.es, da versão portuguesa, espanhola ou inglesa do portal (`/LiveTracking/ModificarMeuEnvio/`, `ModificarEnvio` ou `ModifyMyShipment`), como a que a caixa de rastreio do site português abre. Indicam logo a DHL eCommerce Iberia, seja qual for o formato do número. Se a ligação tiver um código postal no fim, o Peek não o usa, porque não precisa dele.
 
-As leituras da DHL não têm fuso horário, por isso o Peek não mostra a lista de leituras da própria DHL. Vai buscar o histórico datado a serviços de seguimento universais, volta a consultar a DHL a cada 6 horas e, se nenhum serviço responder, mostra o estado atual da DHL, com a data em que o Peek o viu. A consulta à DHL é feita em inglês, por isso os estados aparecem como a DHL os escreve em inglês (por exemplo `Delivered to DHL ServicePoint, ready for collection by the recipient`), exceto `Delivered` e `Out for delivery`, que aparecem com as palavras do próprio Peek. Pode enviar-te notificações quando o estado muda. Não mostra data prevista nem hora de entrega para a DHL eCommerce Iberia. Se a DHL indicar um número da CTT Express, segue a encomenda na [CTT Express](carrier:ctt-express) com esse número.
+As leituras da DHL não têm fuso horário: o Peek lê-as na hora do local de cada leitura e mostra a lista de leituras da própria DHL. A consulta à DHL é feita em inglês, por isso os estados aparecem como a DHL os escreve em inglês (por exemplo `Delivered to DHL ServicePoint, ready for collection by the recipient`), exceto `Delivered` e `Out for delivery`, que aparecem com as palavras do próprio Peek. Pode enviar-te notificações quando o estado muda. Não mostra data prevista nem hora de entrega para a DHL eCommerce Iberia. Se a DHL indicar um número da CTT Express, segue a encomenda na [CTT Express](carrier:ctt-express) com esse número.
 
 ## Perguntas sobre o rastreio DHL eCommerce
 

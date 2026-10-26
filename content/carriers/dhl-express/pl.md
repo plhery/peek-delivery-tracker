@@ -77,7 +77,7 @@ Miej pod ręką numer listu przewozowego.
 
 Peek odczytuje DHL Express przez usługę, z której korzysta aplikacja mobilna DHL, a gdy to się nie uda, serwer Peek otwiera stronę śledzenia dhl.com w przeglądarce. To trwa dłużej i DHL może odmówić; wtedy historię uzupełniają serwisy śledzenia przesyłek. Peek sprawdza paczkę w dzień co 10 minut, a gdy kurier ma ją w doręczeniu, co 2–5 minut; w nocy co godzinę. Może Cię powiadamiać o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy.
 
-Widzisz status, każdy skan z placówką na mapie i kraj docelowy. Godzina skanu jest ustawiana według miasta placówki; gdy jakiegoś skanu nie da się umieścić w czasie, Peek bierze datowaną historię z serwisów śledzenia i pyta DHL ponownie co 6 godzin. Skany są po angielsku, jak pisze je DHL, z wyjątkiem `Delivered`, `Shipment picked up` i `Shipment information received`, pokazywanych własnymi słowami Peek. Pomija podpis i stare skany z ponownie użytego numeru, a nie pokazuje planowanej daty doręczenia, wagi ani punktu odbioru. Nie zapłaci cła ani nie zmieni doręczenia.
+Widzisz status, każdy skan z placówką na mapie i kraj docelowy. Godzina skanu jest ustawiana według miasta placówki, a gdy to nie wystarcza, według sąsiednich skanów. Skany są po angielsku, jak pisze je DHL, z wyjątkiem `Delivered`, `Shipment picked up` i `Shipment information received`, pokazywanych własnymi słowami Peek. Pomija podpis i stare skany z ponownie użytego numeru, a nie pokazuje planowanej daty doręczenia, wagi ani punktu odbioru. Nie zapłaci cła ani nie zmieni doręczenia.
 
 ## Pytania o DHL Express śledzenie
 

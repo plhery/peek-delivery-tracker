@@ -3,7 +3,7 @@ title: BRT tracking: numbers, statuses and missed deliveries
 description: Track a BRT parcel in or from Italy: where to find the BRTcode or shipment number, what BRT's English statuses mean, missed deliveries, lockers and contacts.
 slug: brt-tracking
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-26
 ---
 
 BRT is an Italian express courier, part of the Geopost group like DPD. Track a parcel with the link in BRT's SMS or email, with "Where is my shipment?" on [brt.it](https://www.brt.it/en/) or by pasting the number in the box above. BRT sends that number, the BRTcode, when it takes charge of the parcel, if the sender gave it your contact details.
@@ -87,7 +87,7 @@ The Bologna number on BRT's documents is its office, not customer service.
 
 [Peek](/) recognises BRT's 12-, 14- and 15-digit numbers. Other carriers share them, so it asks BRT among the likely ones. Links from vas.brt.it with `brtCode=` work too; 19-digit BRTcodes and mybrt.it links don't.
 
-Peek shows BRT's English statuses, except that a locker or fermopoint pickup appears as "Delivered". It puts each scan's place on a map, shows the weight and can notify you when the status changes. It drops the sender, recipient, merchant reference, parcel count and volume. It shows no expected day or pickup-point details and doesn't follow parcels handed to DPD abroad. BRT's scan times carry no time zone, so the times shown can differ from BRT's page, and some scans may not appear separately.
+Peek shows BRT's English statuses, except that a locker or fermopoint pickup appears as "Delivered". It puts each scan's place on a map, shows the weight and can notify you when the status changes. It drops the sender, recipient, merchant reference, parcel count and volume. It shows no expected day or pickup-point details and doesn't follow parcels handed to DPD abroad. BRT's scan times carry no time zone: Peek reads them on Italian time, or on a depot's local time abroad, and lists BRT's own history in BRT's order.
 
 ## Questions about BRT tracking
 

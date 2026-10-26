@@ -3,7 +3,7 @@ title: Express One tracking: statuses, parcel points, contacts
 description: Track an Express One parcel in Hungary: where the number comes from, what the statuses mean, parcel points, lockers, missed deliveries and contacts.
 slug: express-one-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 Express One Hungary is a Hungarian courier owned by [Austrian Post](carrier:austrian-post), delivering for online shops with around 700 couriers and over 2,300 parcel points and lockers. Track a parcel by its package ID on [tracking.expressone.hu](https://tracking.expressone.hu/) or paste it in the box above. The number comes in the email Express One sends when the sender registers the parcel.
@@ -82,7 +82,7 @@ Express One's Parcel Tracking page also lists +36 1 8 777 444 and a chatbot.
 
 [Peek](/) can't tell an Express One number from its digits. A 13-digit number is offered to other carriers, a 24-digit one to InPost, bpost and Ciblex. When none knows it you'll see "not found yet · Peek keeps checking": pick "Express One" with "Change". Or paste a tracking.expressone.hu link with `?plc_number=`, which names Express One whatever the number.
 
-Express One's scans carry a time without a time zone, so Peek doesn't list its history. It takes a dated history from [universal tracking services](guide:universal-tracker) when one knows the parcel, asks Express One again every 6 hours and, if no service answers, shows Express One's current status, dated when it was seen. From Express One it reads the status and, for hub scans, the town and country. Wordings stay as Express One writes them, except `Out for delivery`; `Successful delivery` counts as delivered and a return trip as returned. A pickup-point scan shows Express One's wording without a stage. You can be notified when the status changes. There's no expected delivery, weight or pickup point, and the progress bar and signature are left out.
+Express One's scans carry a time without a time zone: Peek reads them on the clock of the scan's place, Hungarian time for scans in Hungary, and lists Express One's own history. From Express One it reads the status and, for hub scans, the town and country. Wordings stay as Express One writes them, except `Out for delivery`; `Successful delivery` counts as delivered and a return trip as returned. A pickup-point scan shows Express One's wording without a stage. You can be notified when the status changes. There's no expected delivery, weight or pickup point, and the progress bar and signature are left out.
 
 ## Questions about Express One tracking
 

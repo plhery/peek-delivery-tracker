@@ -3,7 +3,7 @@ title: SEUR encomenda: rastreio, estados e contactos em Portugal
 description: Seguir uma encomenda SEUR em Portugal: o número, os estados em espanhol explicados, pontos Pickup, entregas falhadas, reclamações e contactos.
 slug: seur-encomenda
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 A SEUR é uma transportadora espanhola de encomendas e envios urgentes, do grupo Geopost, o mesmo da DPD. Para seguir a tua, abre a [página de seguimento miSEUR](https://www.seur.com/miseur/mis-envios), sem conta, ou cola o número na caixa acima. O número vem do remetente: se não o tens, a ajuda da SEUR manda pedi-lo à loja.
@@ -92,7 +92,7 @@ A SEUR não indica horários. Para uma encomenda que já está nas mãos da DPD 
 
 Com 21 ou 7 dígitos, o [Peek](/) pergunta diretamente à SEUR. Com 14, pergunta ao mesmo tempo às transportadoras prováveis, a SEUR primeiro para quem está em Portugal ou em Espanha. Vês «a consultar…» e depois «SEUR tem esta encomenda.» quando só a SEUR a conhece; caso contrário, carrega em «Alterar» e escolhe a SEUR. Também podes colar uma ligação do miSEUR ou do livetracking com `tracking=`. Não é preciso código postal. Um número de 21 dígitos com 000 entre o 13.º e o 15.º algarismo é lido como da Australia Post: escolhe a SEUR com «Alterar».
 
-O Peek mostra o estado, o histórico e o peso. A SEUR não dá o local das leituras, por isso o histórico aparece sem locais. Os estados ficam no espanhol da SEUR, menos os de entrega, que aparecem como «Entregue». Ficam de fora o número de volumes, o remetente, o destinatário e o PIN e o código QR da entrega. As horas da SEUR não trazem um fuso fiável, por isso o histórico datado vem de outros serviços de seguimento e a SEUR é consultada de novo a cada 6 horas; se nenhum responder, vês só o estado atual. Envios com vários volumes só se seguem por esses serviços, e o Peek não segue a encomenda para outra transportadora, como a DPD Portugal. Podes receber notificações quando o estado muda.
+O Peek mostra o estado, o histórico e o peso. A SEUR não dá o local das leituras, por isso o histórico aparece sem locais. Os estados ficam no espanhol da SEUR, menos os de entrega, que aparecem como «Entregue». Ficam de fora o número de volumes, o remetente, o destinatário e o PIN e o código QR da entrega. As horas da SEUR não trazem um fuso fiável, por isso o Peek lê-as na hora de Madrid e mostra o histórico da própria SEUR. Envios com vários volumes só se seguem por outros serviços de seguimento, e o Peek não segue a encomenda para outra transportadora, como a DPD Portugal. Podes receber notificações quando o estado muda.
 
 ## Perguntas sobre o rastreio SEUR
 

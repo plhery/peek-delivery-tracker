@@ -3,7 +3,7 @@ title: Landmark Global tracking: statuses, partners and contacts
 description: Track a Landmark Global parcel: where the LTN number comes from, what its statuses mean, who delivers it in your country and who to ask when it stalls.
 slug: landmark-global-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-26
 ---
 
 Landmark Global carries online orders across borders for shops. It's part of Bnode, the Brussels group that also runs bpost, and it usually hands your parcel to a delivery company in your country for the last stretch. Track it with the Landmark Tracking Number (LTN) from the shop's confirmation email, on [Landmark's tracking site](https://track.landmarkglobal.com/) or by pasting it in the box above.
@@ -84,7 +84,7 @@ Landmark's general contact page is for business enquiries: tracking questions se
 
 It reads Landmark's English page, so wordings appear in English, partners' scans in their own words, and Landmark's delivered scans as "Delivered". It shows the status, the place of each step, the destination country and the delivery partner with its number, but no expected delivery date, and it leaves out order and package references and payment prompts.
 
-Landmark's scan times carry no time zone, so its own history isn't shown: the dated history comes from universal tracking services or, once the parcel is followed, from the delivery partner, and Landmark is asked again every 6 hours. With no service answering, you see Landmark's current status, dated when Peek saw it.
+Landmark writes every scan time in US Central time. Peek reads them that way and lists Landmark's own history.
 
 When the partner is one Peek tracks directly, such as Evri, [Royal Mail](carrier:royal-mail), [USPS](carrier:usps) or [Canada Post](carrier:canada-post), the parcel can be followed there; its page then says "Delivery with" that carrier and lists the partner's number with a link. That doesn't happen for every parcel. Each scan goes on a map, and you can be notified of every scan, important steps or "Delivery day only".
 

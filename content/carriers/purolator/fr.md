@@ -3,7 +3,7 @@ title: Purolator suivi : NIC, statuts et livraison manquée
 description: Suivre un colis Purolator : à quoi ressemble le NIC, ce que veulent dire les statuts, la cueillette après une livraison manquée et qui appeler.
 slug: purolator-suivi
 published: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-26
 ---
 
 Purolator est un transporteur canadien de colis et de fret, détenu à 91 % par Postes Canada. Pour suivre ton colis, entre son NIC dans l'outil de repérage de [purolator.com](https://www.purolator.com/fr/) ou colle-le dans le champ ci-dessus. Ce numéro vient de l'expéditeur : pour une commande en ligne, il est dans le courriel de confirmation d'expédition de la boutique.
@@ -79,7 +79,7 @@ Tu reçois un texto au sujet d'une tentative de livraison, avec un lien ? Ne cli
 
 Peek affiche le statut, chaque scan avec sa ville, sa province et son pays sur une carte, le jour de livraison prévu, le pays de destination et, pour un envoi d'un seul colis, le poids. Peek lit le suivi de Purolator en anglais : les statuts restent dans l'anglais de Purolator, tels quels, même sur ta page en français. Le nom du destinataire est laissé de côté. Le comptoir qui garde un colis n'apparaît pas (seulement le statut `Available for pickup…`), et la livraison ne peut pas être modifiée depuis Peek.
 
-Les heures sont celles des scans de Purolator, à l'heure locale, sans heure de livraison exacte garantie. Pour un envoi transfrontalier, l'historique est daté par des services de suivi et Purolator est interrogé de nouveau toutes les 6 heures : l'historique peut donc avoir quelques heures de retard sur le site de Purolator. Le site de Purolator répond aussi parfois par une vérification au lieu des données ; des services de suivi prennent alors le relais. Sinon, Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et peut t'envoyer des notifications à chaque scan, pour les étapes importantes ou avec l'option « Jour de livraison uniquement ».
+Les heures sont celles des scans de Purolator, à l'heure locale, sans heure de livraison exacte garantie. Pour un envoi transfrontalier, elles arrivent sans fuseau horaire : Peek les lit à l'heure de la ville du scan et affiche quand même l'historique de Purolator. Le site de Purolator répond aussi parfois par une vérification au lieu des données ; des services de suivi prennent alors le relais. Sinon, Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et peut t'envoyer des notifications à chaque scan, pour les étapes importantes ou avec l'option « Jour de livraison uniquement ».
 
 ## Questions sur le suivi Purolator
 

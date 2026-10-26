@@ -3,7 +3,7 @@ title: Whistl tracking: who delivers your parcel and what to do
 description: Track a Whistl parcel: where the reference comes from, what each status means, which carrier delivers it after Whistl and who to ask when it goes wrong.
 slug: whistl-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 Whistl, formerly TNT Post UK, is a UK delivery company that ships parcels for shops and hands them to carriers such as [Royal Mail](carrier:royal-mail), Evri or DPD for the last mile. Track it on Whistl's Parcelhub tracker with the reference from the shop's dispatch email or tracking link, or paste its tracking link in the box above. Once the parcel is handed over, the delivering carrier's own number and tracking usually tell you more.
@@ -101,7 +101,7 @@ In Greece, Cyprus, Luxembourg and Malta, Whistl has no office or phone line. Ask
 
 Whistl's references have no shape, so a typed number never names Whistl. Paste a Whistl link instead (web.parcelhub.net or despatch.whistl.co.uk `/Tracking/reference/…`, or trackmyitem.whistl.co.uk `/tracking/…`), or add the reference and pick "Whistl" with "Change". No postcode is needed. A reference shaped like another carrier's number, such as the delivering carrier's own (a Royal Mail `…GB` number, say), tracks that carrier, not Whistl.
 
-[Peek](/) reads Whistl's Parcelhub tracker. Its times carry no time zone, so Whistl's own history isn't listed: Peek takes a dated history from [universal tracking services](guide:universal-tracker) when one knows the parcel and asks Whistl again every 6 hours. If no service answers, you see Whistl's current status, dated when it was read. Peek can show the service and the carrier that delivers it with that carrier's number, and can notify you when the status changes. There's no expected delivery day, weight or pickup point. Statuses keep Whistl's English wording, except plain `Delivered`, `In transit` and `Returned to sender`, shown in Peek's words.
+[Peek](/) reads Whistl's Parcelhub tracker. Its times carry no time zone: Peek reads them on the clock of the scan's place, UK time for scans in the UK, and lists Whistl's own history. Peek can show the service and the carrier that delivers it with that carrier's number, and can notify you when the status changes. There's no expected delivery day, weight or pickup point. Statuses keep Whistl's English wording, except plain `Delivered`, `In transit` and `Returned to sender`, shown in Peek's words.
 
 When Whistl names Royal Mail, Parcelforce Worldwide, DPD UK, DHL Parcel UK, Amazon Shipping, [InPost](carrier:inpost), [UPS](carrier:ups) or [FedEx](carrier:fedex), Peek can follow the parcel there. A parcel named only as Evri, DPD or Yodel isn't followed: add the carrier's own number, or use Yodel's site, as Peek can't track Yodel. A reference covering several parcels isn't tracked: add each parcel number.
 

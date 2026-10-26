@@ -77,7 +77,7 @@ O [Peek](/) reconhece uma carta de porte de 10 algarismos que passa no algarismo
 
 O Peek lê a DHL Express pelo serviço da sua aplicação móvel ou, se não der, abre a página de seguimento do dhl.com num navegador no seu servidor, o que é mais lento e pode ser recusado; nesse caso, serviços de seguimento preenchem o histórico. Verifica de 10 em 10 minutos durante o dia, de 2 em 2 ou de 5 em 5 minutos quando a encomenda sai para entrega e de hora a hora à noite. As notificações escolhes tu: cada leitura, só os passos importantes ou só o dia da entrega.
 
-Vês o estado, cada leitura com o seu centro num mapa e o país de destino. O Peek acerta as horas pela cidade e pelo país do centro, Açores incluídos. Quando não consegue situar uma leitura, data o histórico com serviços de seguimento e volta a perguntar à DHL de 6 em 6 horas. As leituras aparecem no inglês da DHL, menos `Delivered`, `Shipment picked up` e `Shipment information received`, que aparecem com as palavras do próprio Peek. Não mostra a assinatura, ignora leituras antigas de uma carta de porte reutilizada e não dá dia de entrega previsto, peso nem Service Point. Não paga direitos nem altera entregas.
+Vês o estado, cada leitura com o seu centro num mapa e o país de destino. O Peek acerta as horas pela cidade e pelo país do centro, Açores incluídos, e, quando isso não chega, pelas leituras vizinhas. As leituras aparecem no inglês da DHL, menos `Delivered`, `Shipment picked up` e `Shipment information received`, que aparecem com as palavras do próprio Peek. Não mostra a assinatura, ignora leituras antigas de uma carta de porte reutilizada e não dá dia de entrega previsto, peso nem Service Point. Não paga direitos nem altera entregas.
 
 ## Perguntas sobre o DHL Express tracking
 

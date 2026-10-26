@@ -3,7 +3,7 @@ title: Meest tracking: śledzenie przesyłki, statusy i kontakt
 description: Paczka Meest Post z Ukrainy lub do Ukrainy albo zamówienie od Meest International: jak wygląda numer, co znaczą statusy, gdzie odebrać paczkę i jak się skontaktować.
 slug: meest-sledzenie-przesylki
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-26
 ---
 
 Meest to grupa firm kurierskich z ukraińskimi korzeniami. W Polsce działają dwie jej spółki: Meest Polska z Dębicy, czyli Meest Post (paczki między Polską, Ukrainą i Europą), oraz Meest International (pl.meest.com), która doręcza zamówienia ze sklepów z pomocą lokalnych firm i punktów Meest Point. Przesyłkę śledzisz na stronie grupy, t.meest-group.com, w polskim polu śledzenia Meest albo w polu na górze tej strony. Numer znajdziesz w dokumentach przesyłki, w potwierdzeniu nadania albo na etykiecie.
@@ -80,7 +80,7 @@ Strona meest.pl nie należy do przewoźnika: to inna firma.
 
 [Peek](/) rozpoznaje numer zbiorczy Meest (`AB1234567CD12345G`) i pyta tylko Meest, a jego odpowiedź to rozstrzyga. Numery pocztowe i numery referencyjne nadawców trafiają do Meest dopiero, gdy wybierzesz „Meest” przyciskiem „Zmień” albo wkleisz link Meest: wpisany numer pocztowy idzie do poczty, która go nadała, albo do poczty kraju docelowego (dla Ukrainy to Ukrposzta). Peek czyta linki z t.meest-group.com, ze stron krajowych meest.com (z `parcel_number=`) i z tracking-iframe.meest.com, ale nie z trackera pl.meest.com/sledz-przesylke.
 
-Meest nie podaje strefy czasowej przy skanach, dlatego Peek nie wyświetla jego własnej historii. Historia z datami pochodzi z uniwersalnych serwisów śledzenia, jeśli znają paczkę; aktualny status Meest ma datę chwili, w której Peek go zobaczył, a Meest jest pytany ponownie co 6 godzin. Peek zachowuje status, kraj docelowy, a gdy doręcza partner za granicą, także tego przewoźnika i jego numer: strona paczki pokazuje wtedy na przykład „Doręcza: BOX NOW”, a paczka jest śledzona dalej u niego, jeśli da się go sprawdzić bezpośrednio. Może Cię też powiadomić, gdy zmieni się status.
+Meest nie podaje strefy czasowej przy skanach, więc Peek odczytuje je według czasu miejsca skanu i pokazuje własną historię Meest. Peek zachowuje status, kraj docelowy, a gdy doręcza partner za granicą, także tego przewoźnika i jego numer: strona paczki pokazuje wtedy na przykład „Doręcza: BOX NOW”, a paczka jest śledzona dalej u niego, jeśli da się go sprawdzić bezpośrednio. Może Cię też powiadomić, gdy zmieni się status.
 
 Nie ma planowanej dostawy, wagi ani punktu odbioru, a oddział, jego godziny i termin odbioru są pominięte: to sprawdzisz u Meest. Numer, który Meest zna tylko jako numer partnera, nie jest śledzony, a stare historie znikają i wyglądają jak nieznaleziona przesyłka.
 

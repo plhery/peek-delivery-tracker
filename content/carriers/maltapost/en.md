@@ -3,7 +3,7 @@ title: MaltaPost tracking: numbers, statuses and collection
 description: Track a MaltaPost item: what its tracking number looks like, what each status means, picking it up at a post office or Easipik locker and who to call.
 slug: maltapost-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 MaltaPost is Malta's national post, delivering to every address in Malta and Gozo six days a week. Track an item on its [tracking page](https://www.maltapost.com/tracking) or paste the number in the box above. The number comes from whoever posted the item: the sender's receipt, the label under the barcode or your delivery notice.
@@ -81,7 +81,7 @@ For a number ending `MT` with a valid check digit, [Peek](/) asks MaltaPost and 
 
 Peek leaves a number from abroad with its own post, but MaltaPost's lookup takes it, SendOn barcodes included: pick "MaltaPost" with "Change", or paste a maltapost.com link. It switches to MaltaPost by itself only when the carrier abroad names MaltaPost.
 
-MaltaPost's times carry no time zone, so Peek hides MaltaPost's own history. It takes a dated history from [universal tracking services](guide:universal-tracker) when one knows the item and asks MaltaPost again every 6 hours; if no service answers, it shows MaltaPost's current status, dated when Peek saw it. Statuses keep MaltaPost's wording. Peek can show the post office where an item waits or was picked up, and can notify you when the status changes. There's no expected delivery day and no weight. An item MaltaPost withholds from tracking can't be followed.
+MaltaPost's times carry no time zone: Peek reads them on the clock of the scan's place, Maltese time for scans in Malta, and lists MaltaPost's own history. Statuses keep MaltaPost's wording. Peek can show the post office where an item waits or was picked up, and can notify you when the status changes. There's no expected delivery day and no weight. An item MaltaPost withholds from tracking can't be followed.
 
 ## Questions about MaltaPost tracking
 

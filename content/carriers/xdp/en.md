@@ -3,7 +3,7 @@ title: XDP tracking: consignment numbers, statuses and delivery
 description: Track an XDP parcel in the UK: where the consignment number comes from, why XDP asks for your postcode, what its statuses mean and how to reach XDP.
 slug: xdp-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 XDP (XDP Express) is a UK parcel and freight network that delivers large and heavy items for shops: furniture, mattresses, garden and gym equipment, often with one or two drivers. Track a parcel on [XDP's tracking page](https://xdp.co.uk/track/) or in the XDP app with the consignment number and the delivery postcode, or paste the number in the box above. The number comes from the shop that sent the item, not from XDP.
@@ -89,7 +89,7 @@ XDP's website gives no phone number. Its app mentions calls charged at a premium
 
 Peek shows an optional "Delivery or collection postcode" field for XDP. Without a postcode, XDP isn't asked at all and the parcel is followed only through [universal tracking services](guide:universal-tracker). With it, Peek reads XDP's tracking page; the postcode is sent to XDP and, when needed, to tracking services. A wrong postcode reads as not found, just like on XDP's site: fix it with "Change".
 
-XDP's scan times carry no time zone, so XDP's own history isn't listed. Peek takes a dated history from tracking services when one knows the parcel and asks XDP again every 6 hours; if no service answers, it shows XDP's current status, dated when Peek saw it. Statuses keep XDP's wording, except `Delivered`, which Peek writes in its own words; the weight and service can be shown, and Peek can notify you when the status changes. There's no expected delivery day, no places for the scans and no window, except inside a wording like `Scheduled for Delivery - Route 11 - ETA: 10:51am to 12:51pm`.
+XDP's scan times carry no time zone: Peek reads them on UK time and lists XDP's own history. Statuses keep XDP's wording, except `Delivered`, which Peek writes in its own words; the weight and service can be shown, and Peek can notify you when the status changes. There's no expected delivery day, no places for the scans and no window, except inside a wording like `Scheduled for Delivery - Route 11 - ETA: 10:51am to 12:51pm`.
 
 ## Questions about XDP tracking
 

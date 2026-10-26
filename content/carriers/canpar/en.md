@@ -3,7 +3,7 @@ title: Canpar tracking: numbers, statuses and missed deliveries
 description: Track a Canpar Express parcel in Canada: where the tracking number is, what Canpar's statuses mean, SMARTSpot pickup, missed deliveries and how to reach Canpar.
 slug: canpar-tracking
 published: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-26
 ---
 
 Canpar Express is a Canadian parcel courier, owned by TFI International, that delivers across Canada. Track a parcel with its barcode number on [canpar.com](https://www.canpar.com/en/tracking/track.htm) or by pasting it in the box above. The shop gives you that number in its shipping email or on your order page, and it's printed on the parcel's label.
@@ -89,7 +89,7 @@ Have the barcode or W number ready.
 
 It shows Canpar's status in Canpar's English words, the expected delivery day and the service, such as `GROUND`. A SMARTSpot parcel shows as ready for pickup, without the shop's name or address. It drops the proof of delivery, recipient, addresses and references. A handoff to a local partner shows as in transit; the partner isn't followed.
 
-Canpar's scan times carry no time zone, so Peek takes the dated history from tracking services, shows it on a map and asks Canpar again every 6 hours. If no service answers, it shows Canpar's current status, dated when Peek saw it. Times can differ from Canpar's page. Peek can notify you when the status changes.
+Canpar's scan times carry no time zone: Peek reads each on the clock of the scan's place and lists Canpar's own history, shown on a map. Peek can notify you when the status changes.
 
 ## Questions about Canpar tracking
 

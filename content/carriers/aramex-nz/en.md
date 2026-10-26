@@ -3,7 +3,7 @@ title: Aramex New Zealand tracking number: statuses, contacts
 description: Track an Aramex New Zealand (formerly Fastway) parcel: where the label number is, what the statuses mean, missed deliveries, rural parcels and your depot.
 slug: aramex-new-zealand-tracking-number
 published: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-26
 ---
 
 Aramex New Zealand, formerly Fastway Couriers, is a franchise courier network that delivers parcels for shops from Kaitaia to Bluff. Track a parcel with its label number on [aramex.co.nz](https://www.aramex.co.nz/tools/track/) or by pasting it in the box above. The shop that sent it creates the label, so the number is in its shipping email or on your order page.
@@ -90,7 +90,7 @@ As read on 15 October 2026, Aramex New Zealand's Contact page lists no national 
 
 It shows the status, the depot of each scan and an expected day when Aramex knows both depots. `Delivered` and `In transit` appear in its own words, `In transit with our freight partners` as out for delivery, the others as Aramex writes them. It drops the collection point and its address, opening hours, pickup code, signatory, photo or signature proof, delivery instructions and references.
 
-For rural parcels handed to NZ Post, it can follow the NZ Post label ("Delivery with NZ Post"). Domestic scans are on Auckland time. Scans on journeys from abroad carry no time zone, so it takes the dated history from tracking services and asks Aramex again every 6 hours. Each scan shows on a map, and it can notify you when the status changes.
+For rural parcels handed to NZ Post, it can follow the NZ Post label ("Delivery with NZ Post"). Domestic scans are on Auckland time. Scans on journeys from abroad carry no time zone, so Peek reads them on the clock of the scan's place. Either way it lists Aramex's own history. Each scan shows on a map, and it can notify you when the status changes.
 
 ## Questions about Aramex NZ tracking
 

@@ -3,7 +3,7 @@ title: Latvijas Pasts tracking: numbers, statuses and lockers
 description: Track a Latvijas Pasts (Latvian Post) parcel in English: where the number is, what each status means, parcel lockers, missed deliveries and contacts.
 slug: latvijas-pasts-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-26
 ---
 
 Latvijas Pasts (Latvian Post) is Latvia's state-owned national post, with the country's largest network of parcel lockers. Track an item on [mans.pasts.lv/track](https://mans.pasts.lv/track), which opens in Latvian and has an English switch, or paste the number in the box above. The number comes from the shop's or sender's shipping message, or from the courier's SMS before delivery.
@@ -84,7 +84,7 @@ For a postal number ending `LV` with a valid check digit, [Peek](/) asks Latvija
 
 An item from abroad stays with its foreign post in Peek, but Latvijas Pasts's lookup takes it: pick "Latvijas Pasts" with "Change".
 
-Latvijas Pasts's times carry no time zone, so Peek never shows Latvijas Pasts's own history. It takes a dated history from [universal tracking services](guide:universal-tracker) when one knows the item and asks Latvijas Pasts again every 6 hours; if no service answers, it shows the current status, dated when Peek saw it. Statuses keep Latvijas Pasts's English wording, `Item delivered` included. Peek can show the post office where an item waits and can notify you when the status changes. It gives no expected arrival day and no weight.
+Latvijas Pasts's times carry no time zone: Peek reads them on the clock of the scan's place, Latvian time for Latvian post offices, and lists Latvijas Pasts's own history. Statuses keep Latvijas Pasts's English wording, `Item delivered` included. Peek can show the post office where an item waits and can notify you when the status changes. It gives no expected arrival day and no weight.
 
 ## Questions about Latvian Post tracking
 

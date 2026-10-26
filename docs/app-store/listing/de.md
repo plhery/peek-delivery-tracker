@@ -71,14 +71,15 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Vergibt ein Paketdienst solche Sendungsnummern gar nicht, zeigt das Paket jetzt „Sendungsnummer prüfen“ und bietet „Paketdienst ändern“ an, statt zu melden, dass die letzte Aktualisierung nicht abgerufen werden konnte.
-• Braucht der Paketdienst eines Pakets die Postleitzahl der Lieferadresse, um es zu finden, fragt Peek jetzt danach. Lehnt der Paketdienst die Postleitzahl ab, bietet das Paket „Sendungsdaten ergänzen“ an; findet er mit ihr kein Paket, steht das neben der Postleitzahl, und das Paket bietet „Postleitzahl ändern“ an.
-• „Paketdienst ändern“ zeigt den aktuellen Paketdienst des Pakets ganz oben in der Liste.
-• Hat der Zustellscan keinen Ort, zeigt die Karte das Paket am letzten Halt als zugestellt, wenn dieser im Zielland liegt, und sonst als dort zuletzt gesehen.
-• Auf der Seite eines Pakets verdecken die Tasten oben keine Ortsnamen der Karte mehr.
-• Eine Reise innerhalb von ein, zwei Orten erscheint als ein Ort, und Stationen, die zu nah beieinanderliegen, teilen sich eine Markierung.
-• Mit dem iPhone im Querformat hält der Globus die Route von der Dynamic Island fern.
-• Ein Scan wie „Haiger, DE“ zeigt die Flagge und den Namen des Landes.
-• Deine Notiz zu „Liege ich hier richtig?“ darf bis zu 4000 Zeichen lang sein und zeigt gegen Ende, wie viele noch übrig sind.
-• Auf dem iPad öffnen sich „Paketdienst ändern“ und die Freunde-Fenster in der Mitte des Bildschirms, und „Teilen“ öffnet sich neben seiner Taste.
+• Das Widget auf dem Home-Bildschirm zeigt jedes Paket jetzt wie in deiner Liste: in den Farben seines Paketdiensts, mit seiner Route auf der Karte.
+• Die Seite eines Pakets zeigt die Einfuhrabgaben, die bei der Zustellung fällig sind, und, solange du sie noch online bezahlen kannst, den niedrigeren Online-Preis daneben.
+• Lehnt ein Paketdienst eine Sendungsnummer ab, die nur zu einem einzigen anderen Paketdienst passt, nennt der Hinweis diesen Paketdienst und bietet an, mit einem Tippen zu ihm zu wechseln.
+• Wirken die Aktualisierungen eines Pakets automatisch erzeugt, sagt Peek das, lässt ihre Orte auf der Karte weg und benachrichtigt dich nicht darüber.
+• Die Postleitzahl der Lieferadresse kann jetzt aus einem anderen Land als dem des Paketdiensts sein: Das Land steht neben der Postleitzahl, und du kannst es ändern.
+• Füge unter „Paket hinzufügen“ eine Nachricht mit mehreren Sendungsnummern ein, und Peek listet sie alle in der Reihenfolge des Textes auf, damit du eine auswählen kannst.
+• Beim Hinzufügen eines Pakets erkennt Peek Bestellnummern von Amazon, Shein, Shopee und Temu und sagt dir, wo du im Shop stattdessen die Sendungsnummer findest.
+• Peek erkennt eine Sendungsnummer jetzt auch hinter Angaben wie „Sendungsnummer“, „Nr.“ oder „N° de suivi“. Geht die Prüfziffer einer Postsendungsnummer nicht auf, schlägt Peek die vermutlich gemeinte Nummer vor oder bittet dich, sie mit deiner Versandnachricht zu vergleichen.
+• Während Peek deine Pakete prüft, dreht sich der Aktualisieren-Pfeil an Ort und Stelle, statt einem Ladekreis zu weichen.
+• Auf dem iPad steht der Sendungsverlauf eines Pakets neben seinen Angaben statt darunter, wenn neben der Liste genug Platz ist.
+• Auf dem iPad öffnet sich der Reisepass auf zwei Seiten: auf der einen deine Briefmarken, auf der anderen Lieferzeiten und Länder.
 ```

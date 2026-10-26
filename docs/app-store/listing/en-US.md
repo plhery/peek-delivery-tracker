@@ -73,14 +73,15 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• When a carrier doesn’t issue a tracking number, the package now says “Check the tracking number” and offers Change carrier, rather than saying it couldn’t get the latest update.
-• When a package’s carrier needs the delivery postcode to find it, Peek now asks for it. If the carrier turns the postcode down, the package offers Update tracking details; if it finds no package with it, the package says so beside the postcode and offers Edit postcode.
-• Change carrier shows the package’s current carrier at the top of the list.
-• When the delivery scan has no place, the map shows the package delivered at its last stop if that stop is in the country it was going to, and otherwise where it was last seen.
-• On a package’s card, the map’s place names no longer sit under the buttons at the top.
-• A journey within a town or two shows as one place, and stops too close to tell apart share one mark.
-• With your iPhone on its side, the globe keeps the route clear of the Dynamic Island.
-• A scan written like “Haiger, DE” shows the country’s flag and name.
-• Your note on “Did I get this one right?” can run to 4,000 characters, and shows how many are left near the end.
-• On iPad, Change carrier and the Friends panels open in the middle of the screen, and Share opens beside its button.
+• The Home Screen widget now shows each package as it looks in your list: its card in its carrier’s colors, with its route on the map.
+• A package’s page shows the import charges due on delivery and, while they can still be paid online, the lower online price beside them.
+• When a carrier refuses a tracking number that fits only one other carrier, the warning names that carrier and offers to switch to it in one tap.
+• When a package’s updates look generated, Peek says so, leaves their places off the map and doesn’t notify you about them.
+• A delivery postcode can now be in a different country from the carrier’s: the country shows beside the postcode, and you can change it.
+• Paste a message that names several tracking numbers when adding a package, and Peek lists them all, in the order written, so you can pick which to track.
+• When you add a package, Peek recognizes an Amazon, Shein, Shopee or Temu order number and says where in that store to find the tracking number instead.
+• Peek now also reads a tracking number after a French, Spanish, Italian, Portuguese or Polish label such as “N° de suivi”. When a postal number’s check digit doesn’t add up, Peek suggests the number you may have meant or asks you to compare it with your shipping message.
+• While Peek checks your packages for updates, the refresh arrow turns in place instead of giving way to a spinner.
+• On iPad, when the list is beside a package and there’s room, the package’s tracking history sits next to its card rather than under it.
+• On iPad, the Passport opens on two pages: your stamps on one, your delivery times and countries on the other.
 ```

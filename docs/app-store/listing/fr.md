@@ -73,14 +73,15 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Quand un transporteur ne délivre pas un numéro de suivi, le colis affiche désormais « Numéro de suivi à vérifier » et propose Changer de transporteur, au lieu de dire que la dernière mise à jour n’a pas pu être récupérée.
-• Quand le transporteur d’un colis a besoin du code postal de livraison pour le trouver, Peek le demande désormais. Si le transporteur refuse le code postal, le colis propose Compléter les informations de suivi ; s’il ne trouve aucun colis avec ce code, le colis le signale à côté du code postal et propose Modifier le code postal.
-• Changer de transporteur montre le transporteur actuel du colis en haut de la liste.
-• Quand le scan de livraison n’a pas de lieu, la carte montre le colis livré à sa dernière étape si elle se trouve dans le pays de destination, et sinon sa dernière position connue.
-• Sur la fiche d’un colis, les noms de lieux de la carte ne passent plus sous les boutons du haut.
-• Un trajet qui tient en une ou deux villes s’affiche comme un seul lieu, et des étapes trop proches pour être distinguées partagent un seul repère.
-• iPhone à l’horizontale : le globe garde le trajet à l’écart de la Dynamic Island.
-• Un scan noté comme « Haiger, DE » affiche le drapeau et le nom du pays.
-• Ta note dans « J’ai tout bon pour ce colis ? » peut atteindre 4 000 caractères, et indique combien il en reste vers la fin.
-• Sur iPad, Changer de transporteur et les fenêtres Amis s’ouvrent au centre de l’écran, et Partager s’ouvre à côté de son bouton.
+• Le widget de l’écran d’accueil montre désormais chaque colis comme dans ta liste : sa fiche aux couleurs de son transporteur, avec son trajet sur la carte.
+• La fiche d’un colis indique les frais d’importation à payer à la livraison et, tant que tu peux encore les régler en ligne, leur prix en ligne, moins élevé.
+• Quand un transporteur refuse un numéro de suivi qui ne correspond qu’à un seul autre transporteur, l’avertissement nomme ce transporteur et propose d’y passer d’un seul geste.
+• Quand les mises à jour d’un colis semblent générées, Peek le signale, retire leurs lieux de la carte et ne t’envoie aucune notification à leur sujet.
+• Le code postal de livraison peut désormais être d’un autre pays que celui du transporteur : le pays s’affiche à côté du code postal, et tu peux le changer.
+• Dans Ajouter un colis, colle un message qui cite plusieurs numéros de suivi : Peek les liste tous, dans l’ordre du texte, pour que tu choisisses celui à suivre.
+• Quand tu ajoutes un colis, Peek distingue un numéro de commande Amazon, Shein, Shopee ou Temu d’un numéro de suivi, et t’indique où trouver le numéro de suivi dans la boutique.
+• Peek lit désormais aussi un numéro de suivi précédé d’une mention comme « N° de suivi », en français comme en espagnol, italien, portugais ou polonais. Quand le chiffre de contrôle d’un numéro postal ne correspond pas, Peek propose le numéro que tu voulais sans doute saisir ou te demande de le comparer avec ton message d’expédition.
+• Pendant que Peek vérifie tes colis, la flèche d’actualisation tourne sur place au lieu d’être remplacée par un indicateur de chargement.
+• Sur iPad, quand la liste est à côté d’un colis et qu’il y a la place, l’historique du suivi s’affiche à côté de sa fiche plutôt qu’en dessous.
+• Sur iPad, le Passeport s’ouvre sur deux pages : d’un côté tes timbres, de l’autre tes délais de livraison et les pays où tes colis ont d’abord été scannés.
 ```

@@ -71,14 +71,15 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Gdy przewoźnik w ogóle nie wydaje takich numerów śledzenia, przesyłka pokazuje teraz „Sprawdź numer śledzenia” i proponuje „Zmień przewoźnika”, zamiast informować, że nie udało się pobrać ostatniej aktualizacji.
-• Gdy przewoźnik przesyłki potrzebuje kodu pocztowego dostawy, aby ją znaleźć, Peek teraz o niego prosi. Jeśli przewoźnik odrzuci kod pocztowy, przesyłka proponuje „Uzupełnij dane śledzenia”, a jeśli przewoźnik nie znajdzie przesyłki z tym kodem, przesyłka informuje o tym obok kodu i proponuje „Zmień kod pocztowy”.
-• „Zmień przewoźnika” pokazuje obecnego przewoźnika przesyłki na górze listy.
-• Gdy skan doręczenia nie podaje miejsca, mapa pokazuje przesyłkę jako doręczoną na ostatnim przystanku, jeśli leży on w kraju docelowym, a w przeciwnym razie jako ostatnio widzianą w tym miejscu.
-• Na karcie przesyłki nazwy miejsc na mapie nie chowają się już pod przyciskami u góry.
-• Trasa w obrębie jednej lub dwóch miejscowości wyświetla się jako jedno miejsce, a przystanki zbyt bliskie, by je rozróżnić, mają wspólny znacznik.
-• Gdy obrócisz iPhone’a poziomo, globus trzyma trasę z dala od Dynamic Island.
-• Skan zapisany w postaci „Haiger, DE” pokazuje flagę i nazwę kraju.
-• Twoja notatka w „Dobrze to odczytałem?” może mieć do 4000 znaków, a pod koniec pokazuje, ile jeszcze zostało.
-• Na iPadzie „Zmień przewoźnika” i panele „Znajomi” otwierają się na środku ekranu, a „Udostępnij” otwiera się obok swojego przycisku.
+• Widżet na ekranie początkowym pokazuje teraz każdą przesyłkę tak jak na liście: jej kartę w barwach przewoźnika, z trasą na mapie.
+• Strona przesyłki pokazuje opłaty importowe płatne przy doręczeniu, a dopóki można je jeszcze opłacić online, obok widać niższą cenę online.
+• Gdy przewoźnik odrzuca numer śledzenia, który pasuje tylko do jednego innego przewoźnika, ostrzeżenie podaje nazwę tego przewoźnika i proponuje zmianę na niego jednym dotknięciem.
+• Gdy aktualizacje przesyłki wyglądają na wygenerowane, Peek o tym informuje, nie pokazuje ich miejsc na mapie i nie wysyła o nich powiadomień.
+• Kod pocztowy doręczenia może teraz pochodzić z innego kraju niż kraj przewoźnika: kraj widać obok kodu pocztowego i można go zmienić.
+• W oknie „Dodaj przesyłkę” wklej wiadomość z kilkoma numerami śledzenia, a Peek pokaże je wszystkie w kolejności z tekstu, żeby można było wybrać, który śledzić.
+• Przy dodawaniu przesyłki Peek odróżnia numer zamówienia z Amazona, Shein, Shopee lub Temu od numeru śledzenia i podpowiada, gdzie w sklepie znaleźć numer śledzenia.
+• Peek odczytuje teraz także numer śledzenia zapisany po oznaczeniu takim jak „numer przesyłki” czy „N° de suivi”. Gdy cyfra kontrolna numeru pocztowego się nie zgadza, Peek proponuje numer, o który prawdopodobnie chodziło, albo prosi o porównanie go z wiadomością o wysyłce.
+• Gdy Peek sprawdza przesyłki, strzałka odświeżania obraca się w miejscu, zamiast ustępować kółku ładowania.
+• Na iPadzie, gdy obok przesyłki jest lista i wystarcza miejsca, historia śledzenia wyświetla się obok karty przesyłki zamiast pod nią.
+• Na iPadzie Paszport otwiera się na dwóch stronach: na jednej Twoje znaczki, na drugiej czasy dostaw i kraje.
 ```

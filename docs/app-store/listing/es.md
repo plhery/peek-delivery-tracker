@@ -71,14 +71,15 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Cuando un transportista no emite un número de seguimiento, el paquete ahora muestra «Revisa el número de seguimiento» y ofrece Cambiar transportista, en lugar de decir que no se pudo obtener la última actualización.
-• Cuando el transportista de un paquete necesita el código postal de entrega para encontrarlo, Peek ahora te lo pide. Si el transportista rechaza el código postal, el paquete ofrece Actualizar datos de seguimiento; si no encuentra ningún paquete con él, el paquete lo indica junto al código postal y ofrece Cambiar código postal.
-• Cambiar transportista muestra el transportista actual del paquete al principio de la lista.
-• Cuando el escaneo de entrega no indica ningún lugar, el mapa muestra el paquete entregado en su última parada si esa parada está en el país de destino y, si no, dónde se vio por última vez.
-• En la ficha de un paquete, los nombres de lugares del mapa ya no quedan debajo de los botones de arriba.
-• Un trayecto dentro de una o dos localidades se muestra como un solo lugar, y las paradas demasiado cercanas para distinguirlas comparten una sola marca.
-• Con el iPhone en horizontal, el globo mantiene la ruta lejos de la Dynamic Island.
-• Un escaneo escrito como «Haiger, DE» muestra la bandera y el nombre del país.
-• Tu nota en «¿He acertado con este?» puede tener hasta 4000 caracteres y, cerca del final, muestra cuántos quedan.
-• En iPad, Cambiar transportista y los paneles de Amigos se abren en el centro de la pantalla, y Compartir se abre junto a su botón.
+• El widget de la pantalla de inicio ahora muestra cada paquete como en tu lista: su ficha con los colores de su transportista y su recorrido en el mapa.
+• La página de un paquete muestra los gastos de importación que se pagan a la entrega y, mientras aún puedas pagarlos en línea, al lado el precio en línea, más bajo.
+• Cuando un transportista rechaza un número de seguimiento que solo encaja con otro transportista, el aviso nombra a ese transportista y te ofrece cambiar a él con un toque.
+• Cuando las novedades de un paquete parecen generadas, Peek lo indica, quita sus lugares del mapa y no te avisa de ellas.
+• El código postal de entrega ya puede ser de un país distinto al del transportista: el país aparece junto al código postal y puedes cambiarlo.
+• En Añadir un paquete, pega un mensaje que cite varios números de seguimiento y Peek los muestra todos, en el orden del texto, para que elijas cuál seguir.
+• Al añadir un paquete, Peek distingue un número de pedido de Amazon, Shein, Shopee o Temu de un número de seguimiento y te dice dónde encontrar en la tienda el número de seguimiento.
+• Peek ahora también lee un número de seguimiento escrito tras una indicación como «número de seguimiento» o «N° de suivi». Cuando el dígito de control de un número postal no cuadra, Peek te propone el número que quizá querías poner o te pide que lo compares con el mensaje de envío.
+• Mientras Peek revisa tus paquetes, la flecha de actualizar gira sobre sí misma en lugar de dejar paso a una rueda de carga.
+• En iPad, cuando la lista está al lado de un paquete y hay espacio, el historial de seguimiento aparece junto a su ficha en lugar de debajo.
+• En iPad, el Pasaporte se abre en dos páginas: tus sellos en una, y tus plazos de entrega y países en la otra.
 ```

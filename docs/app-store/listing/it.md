@@ -71,14 +71,15 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Quando un corriere non rilascia un numero di tracciamento, il pacco ora mostra «Controlla il numero di tracciamento» e propone Cambia corriere, invece di dire che non è stato possibile ottenere l’ultimo aggiornamento.
-• Quando il corriere di un pacco ha bisogno del codice postale di consegna per trovarlo, ora Peek te lo chiede. Se il corriere rifiuta il codice postale, il pacco propone Aggiorna i dati di tracciamento; se non trova nessun pacco con quel codice, il pacco lo segnala accanto al codice postale e propone Modifica codice postale.
-• Cambia corriere mostra il corriere attuale del pacco in cima all’elenco.
-• Quando la scansione di consegna non indica un luogo, la mappa mostra il pacco consegnato all’ultima tappa se questa si trova nel paese di destinazione, altrimenti dove è stato visto l’ultima volta.
-• Nella scheda di un pacco, i nomi dei luoghi sulla mappa non finiscono più sotto i pulsanti in alto.
-• Un viaggio dentro una o due città appare come un solo luogo, e le tappe troppo vicine per distinguerle condividono un solo segno.
-• Con l’iPhone in orizzontale, il globo tiene il percorso lontano dalla Dynamic Island.
-• Una scansione scritta come «Haiger, DE» mostra la bandiera e il nome del paese.
-• La tua nota in «Questo l’ho azzeccato?» può arrivare a 4.000 caratteri e, verso la fine, mostra quanti ne restano.
-• Su iPad, Cambia corriere e i pannelli di Amici si aprono al centro dello schermo, e Condividi si apre accanto al suo pulsante.
+• Il widget della schermata Home ora mostra ogni pacco come nella tua lista: la sua scheda con i colori del corriere e il percorso sulla mappa.
+• La pagina di un pacco mostra gli oneri doganali da pagare alla consegna e, finché puoi ancora pagarli online, accanto il prezzo online, più basso.
+• Quando un corriere rifiuta un numero di tracciamento che corrisponde a un solo altro corriere, l’avviso indica quel corriere e propone di passarci con un tocco.
+• Quando gli aggiornamenti di un pacco sembrano generati, Peek lo segnala, toglie i loro luoghi dalla mappa e non te li notifica.
+• Il codice postale di consegna ora può essere di un paese diverso da quello del corriere: il paese compare accanto al codice postale e puoi cambiarlo.
+• In Aggiungi un pacco, incolla un messaggio con più numeri di tracciamento: Peek li elenca tutti, nell’ordine del testo, così puoi scegliere quale seguire.
+• Quando aggiungi un pacco, Peek distingue un numero d’ordine Amazon, Shein, Shopee o Temu da un numero di tracciamento e ti dice dove trovare nel negozio il numero di tracciamento.
+• Peek ora legge anche un numero di tracciamento scritto dopo un’indicazione come «numero di tracciamento» o «N° de suivi». Quando la cifra di controllo di un numero postale non torna, Peek propone il numero che forse intendevi o ti chiede di confrontarlo con il messaggio di spedizione.
+• Mentre Peek controlla i tuoi pacchi, la freccia di aggiornamento gira su sé stessa invece di lasciare il posto a una rotella.
+• Su iPad, quando l’elenco è accanto a un pacco e c’è spazio, la cronologia del tracciamento sta accanto alla sua scheda invece che sotto.
+• Su iPad, il Passaporto si apre su due pagine: i tuoi francobolli da una parte, i tempi di consegna e i paesi dall’altra.
 ```

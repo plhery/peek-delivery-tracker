@@ -71,14 +71,15 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Quando uma transportadora não emite um número de seguimento, a encomenda mostra agora «Verifica o número de seguimento» e propõe Alterar transportadora, em vez de dizer que não foi possível obter a última atualização.
-• Quando a transportadora de uma encomenda precisa do código postal de entrega para a encontrar, o Peek pede-to agora. Se a transportadora recusar o código postal, a encomenda propõe Atualizar dados de seguimento; se não encontrar nenhuma encomenda com ele, a encomenda indica-o ao lado do código postal e propõe Alterar código postal.
-• Alterar transportadora mostra a transportadora atual da encomenda no topo da lista.
-• Quando a leitura de entrega não tem local, o mapa mostra a encomenda entregue na última paragem se esta ficar no país de destino e, caso contrário, onde foi vista pela última vez.
-• Na ficha de uma encomenda, os nomes dos locais no mapa já não ficam por baixo dos botões no topo.
-• Um percurso dentro de uma ou duas localidades aparece como um só local, e as paragens demasiado próximas para as distinguir partilham uma só marca.
-• Com o iPhone na horizontal, o globo mantém o percurso longe da Dynamic Island.
-• Uma leitura registada como «Haiger, DE» mostra a bandeira e o nome do país.
-• A tua nota em «Acertei nesta?» pode ter até 4000 caracteres e, perto do fim, mostra quantos faltam.
-• No iPad, Alterar transportadora e os painéis de Amigos abrem-se no centro do ecrã, e Partilhar abre-se ao lado do seu botão.
+• O widget do ecrã principal mostra agora cada encomenda como na tua lista: a ficha com as cores da transportadora e o percurso no mapa.
+• A página de uma encomenda mostra os encargos de importação a pagar na entrega e, enquanto ainda os puderes pagar online, o preço online, mais baixo, ao lado.
+• Quando uma transportadora recusa um número de seguimento que corresponde apenas a uma outra transportadora, o aviso indica essa transportadora e propõe mudar para ela com um toque.
+• Quando as atualizações de uma encomenda parecem geradas, o Peek indica-o, retira os seus locais do mapa e não te envia notificações sobre elas.
+• O código postal de entrega já pode ser de um país diferente do da transportadora: o país aparece ao lado do código postal e podes alterá-lo.
+• Em Adicionar uma encomenda, cola uma mensagem com vários números de seguimento e o Peek mostra-os todos, pela ordem do texto, para escolheres qual seguir.
+• Ao adicionares uma encomenda, o Peek distingue um número de pedido da Amazon, Shein, Shopee ou Temu de um número de seguimento e diz-te onde encontrar, na loja, o número de seguimento.
+• O Peek lê agora também um número de seguimento escrito a seguir a uma indicação como «código de rastreio» ou «N° de suivi». Quando o dígito de controlo de um número postal não bate certo, o Peek propõe o número que talvez quisesses escrever ou pede-te que o compares com a mensagem de envio.
+• Enquanto o Peek verifica as tuas encomendas, a seta de atualizar roda sobre si mesma em vez de dar lugar a um indicador de carregamento.
+• No iPad, quando a lista está ao lado de uma encomenda e há espaço, o histórico de seguimento fica ao lado da ficha em vez de por baixo.
+• No iPad, o Passaporte abre-se em duas páginas: os teus selos numa, os tempos de entrega e os países na outra.
 ```

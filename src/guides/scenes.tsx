@@ -1235,6 +1235,26 @@ function Paint() {
   </>;
 }
 
+function Refurb() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    <Truck x={40} y={172} tone="lilac" scale={4} />
+    <path d="M186 150C204 126 220 118 236 120" stroke="var(--lilac)" strokeWidth="4" strokeLinecap="round" strokeDasharray="3 12" />
+    {/* A phone standing up, a closed laptop with a green tag, and Pip on the laptop. */}
+    <rect x="270" y="154" width="54" height="94" rx="10" fill={ink} />
+    <rect x="277" y="164" width="40" height="70" rx="4" fill="var(--lilac)" />
+    <circle cx="297" cy="241" r="3" fill={paper} />
+    <rect x="348" y="225" width="196" height="26" rx="6" fill={ink} opacity=".07" />
+    <rect x="348" y="222" width="196" height="26" rx="6" fill={paper} />
+    <path d="M348 236H544" stroke="var(--lilac)" strokeWidth="3" />
+    <path d="M540 230Q562 240 576 214" stroke={ink} strokeWidth="2" strokeLinecap="round" />
+    <path d="M548 200H574L584 212L574 224H548Z" fill="var(--green)" />
+    <circle cx="575" cy="212" r="3" fill={paper} />
+    <path d="M553 212l5 5 9-10" stroke={paper} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <Pip x={446} ground={222} width={96} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1270,6 +1290,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'douglas-orders': { tone: 'rose', draw: Perfume },
   'lidl-orders': { tone: 'blue', draw: Crate },
   'leroy-merlin-orders': { tone: 'green', draw: Paint },
+  'back-market-orders': { tone: 'lilac', draw: Refurb },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },

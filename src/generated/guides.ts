@@ -177,6 +177,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Leroy Merlin order tracking: delivery, returns and problems"
     },
     {
+      "id": "back-market-orders",
+      "slug": "back-market-order-tracking",
+      "title": "Back Market order tracking: delivery, returns and problems"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "how-to-find-tracking-number",
       "title": "How to find your tracking number, or track without one"
@@ -412,6 +417,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "leroy-merlin-orders",
       "slug": "leroy-merlin-bestellung-verfolgen",
       "title": "Leroy-Merlin-Bestellung verfolgen: Lieferung und Probleme"
+    },
+    {
+      "id": "back-market-orders",
+      "slug": "back-market-sendungsverfolgung",
+      "title": "Back Market Sendungsverfolgung: Versand, Rückgabe, Hilfe"
     },
     {
       "id": "find-tracking-number",
@@ -651,6 +661,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Suivi de commande Leroy Merlin\u00a0: livraison et problèmes"
     },
     {
+      "id": "back-market-orders",
+      "slug": "suivi-commande-back-market",
+      "title": "Suivi de commande Back Market\u00a0: livraison, retours, SAV"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "ou-trouver-numero-de-suivi",
       "title": "Où trouver son numéro de suivi, et comment faire sans"
@@ -886,6 +901,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "leroy-merlin-orders",
       "slug": "tracciamento-ordine-leroy-merlin",
       "title": "Tracciamento ordine Leroy Merlin: consegna, resi e problemi"
+    },
+    {
+      "id": "back-market-orders",
+      "slug": "tracciamento-ordine-back-market",
+      "title": "Tracciamento ordine Back Market: consegna, resi e problemi"
     },
     {
       "id": "find-tracking-number",
@@ -1125,6 +1145,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimiento de pedidos Leroy Merlin: envío y devoluciones"
     },
     {
+      "id": "back-market-orders",
+      "slug": "seguimiento-pedido-back-market",
+      "title": "Seguimiento de pedidos Back Market: envío y devoluciones"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "localizar-paquete-sin-numero-de-seguimiento",
       "title": "Cómo localizar un paquete sin número de seguimiento"
@@ -1362,6 +1387,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimento de encomendas Leroy Merlin: envio e devoluções"
     },
     {
+      "id": "back-market-orders",
+      "slug": "seguimento-encomenda-back-market",
+      "title": "Seguimento de encomendas Back Market: envio e devoluções"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "onde-encontrar-numero-de-seguimento",
       "title": "Onde encontrar o número de seguimento da encomenda"
@@ -1597,6 +1627,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "leroy-merlin-orders",
       "slug": "sledzenie-zamowienia-leroy-merlin",
       "title": "Śledzenie zamówienia Leroy Merlin: dostawa, zwroty, problemy"
+    },
+    {
+      "id": "back-market-orders",
+      "slug": "sledzenie-zamowienia-back-market",
+      "title": "Śledzenie zamówienia Back Market: dostawa, zwroty, problemy"
     },
     {
       "id": "find-tracking-number",

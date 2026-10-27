@@ -3,7 +3,7 @@ title: PostNL tracking: numbers, statuses and delivery abroad
 description: PostNL tracking outside the Netherlands: what NL and 3S numbers mean, what postnl.post's statuses say, who delivers in your country and who to ask when it stalls.
 slug: postnl-tracking
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 PostNL is the Dutch post. It sends parcels and letters from Dutch shops abroad, and through Spring GDS, its international arm, it carries parcels for online sellers around the world. Both are tracked on PostNL's international site, [postnl.post](https://postnl.post/), or in the box above. In your country, a local carrier, often the national post, delivers the parcel. The number is in the shop's shipping email or on your order page.
@@ -89,9 +89,9 @@ For anything else, the shop or marketplace you bought from is the quickest route
 
 [Peek](/) recognises NL numbers with a valid check digit and 3S barcodes with a four-letter customer code straight away. A 3S barcode with three letters goes to [DHL eCommerce Netherlands](carrier:dhl-ecommerce-nl), though PostNL's own guidelines show three-letter codes too. For a shorter customer code, Peek can't tell the carrier by shape: paste it all the same, Peek follows more than 3,500 carriers. It shows "asking …" while it checks; if the wrong carrier comes up, pick PostNL with "Change". Links from postnl.post (`/track?barcodes=`) and mailingtechnology.com, Spring GDS's tracker (`/tracking?tn=`), are read as PostNL.
 
-Peek reads postnl.post. It shows the status, the history with the country of each scan, the delivery time and the destination country. Scan times keep each country's local clock. PostNL gives no expected delivery date and no sender. For an NL number, once PostNL names the destination, Peek asks that country's national post, such as Royal Mail or USPS, under the same number, and switches to it once it shows newer progress. postnl.post calls 13-character 3S barcodes incorrect, so for those Peek looks for the parcel through [universal tracking services](guide:universal-tracker).
+Peek reads postnl.post. It shows the status, the history with the country of each scan, the delivery time and the destination country. Scan times are read on each country's local clock and shown in your device's time zone. PostNL gives no expected delivery date and no sender. For an NL number, once PostNL names the destination, Peek asks that country's national post, such as Royal Mail or USPS, under the same number, and switches to it once it shows newer progress. postnl.post calls 13-character 3S barcodes incorrect, so for those Peek looks for the parcel through [universal tracking services](guide:universal-tracker).
 
-Peek checks PostNL every 30 minutes, out for delivery too, and hourly overnight, and can notify you at every scan, at important steps or on delivery day only. It can't contact PostNL or the shop for you.
+Peek checks PostNL every 30 minutes, out for delivery too, and every hour or two overnight, and can notify you at every scan, at important steps or on delivery day only. It can't contact PostNL or the shop for you.
 
 ## Questions about PostNL tracking
 

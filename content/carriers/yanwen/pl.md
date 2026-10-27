@@ -3,7 +3,7 @@ title: Yanwen śledzenie przesyłki: statusy, kurier, kontakt
 description: Paczka Yanwen z Chin: jak wygląda numer, co znaczą angielskie statusy, kto doręcza w Polsce i do kogo się zwrócić, gdy paczka utknie.
 slug: yanwen-sledzenie
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Yanwen to chińska firma logistyczna założona w 1998 roku w Pekinie, która wysyła paczki za granicę dla sprzedawców internetowych, a ostatni odcinek oddaje lokalnemu przewoźnikowi. Paczkę śledzisz na stronie Yanwen, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), albo wklejasz numer w pole powyżej. Numer dostajesz od sklepu lub platformy, na której kupowałeś: szukaj go w danych wysyłki przy zamówieniu.
@@ -86,7 +86,7 @@ Polskiego kontaktu Yanwen nie publikuje: nie ma ani biura, ani numeru dla Polski
 
 Widzisz status, historię z miastem lub regionem każdego skanu na mapie, godzinę doręczenia, kraj docelowy i lokalnego przewoźnika z jego numerem („Doręcza: DPD”, na przykład). Gdy Yanwen podaje przewoźnika z listy Peek, a numer do niego pasuje, aplikacja pyta tego przewoźnika i przełącza się na niego, gdy ten pokaże nowsze postępy. Jeśli nie, a numer z „Last Mile Tracking” ma kształt rozpoznawany na pewno, aplikacja pyta jego przewoźnika; w ostatniej kolejności, przy numerze z YP, Pocztę Polską. Nie dzieje się tak przy każdej paczce. Yanwen nie podaje przewidywanej daty doręczenia, punktu odbioru też nie zobaczysz, a numery zamówienia, kontakty, kody pocztowe, kody PIN i numery drzwi są pomijane.
 
-Godziny skanów zachowują przesunięcia GMT z Yanwen, a powtórzone skany są usuwane. `Delivered` i `Out for delivery` pojawiają się słowami aplikacji, inne linie tak, jak je zapisano, także `Delivered.` z kropką. Śledzenie jest sprawdzane w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu; w nocy co godzinę. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo „Tylko w dniu dostawy”. Peek nie skontaktuje się za Ciebie z Yanwen ani ze sklepem.
+Godziny skanów Peek odczytuje z przesunięciami GMT podanymi przez Yanwen i pokazuje w strefie czasowej Twojego urządzenia, a powtórzone skany są usuwane. `Delivered` i `Out for delivery` pojawiają się słowami aplikacji, inne linie tak, jak je zapisano, także `Delivered.` z kropką. Śledzenie jest sprawdzane w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu; w nocy co godzinę lub dwie. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo „Tylko w dniu dostawy”. Peek nie skontaktuje się za Ciebie z Yanwen ani ze sklepem.
 
 ## Pytania o śledzenie Yanwen
 

@@ -3,7 +3,7 @@ title: Colis Privé suivi : statuts, relais et service client
 description: Suivi Colis Privé en France, en Belgique et au Luxembourg : le numéro de 12 caractères et le code postal, chaque statut, les relais et qui contacter.
 slug: suivi-colis-prive
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Colis Privé est un transporteur de colis français pour les boutiques en ligne, qui livre en France, en Belgique et au Luxembourg, à domicile ou en point relais. Pour suivre ton colis, saisis son numéro de 12 caractères et le code postal de livraison sur [colisprive.fr](https://colisprive.fr/) (France) ou [colisprive.be](https://colisprive.be/) (Belgique, Luxembourg). Le numéro arrive dans l'e-mail de la boutique ou dans les notifications de Colis Privé.
@@ -75,7 +75,7 @@ Aucune page de Colis Privé ne donne de moyen de joindre le livreur.
 
 [Peek](/) a besoin du numéro de 12 caractères et du code postal de livraison. Saisis le numéro et choisis Colis Privé comme transporteur : un champ apparaît pour le code postal, cinq chiffres en France, quatre en Belgique, ou L et quatre chiffres au Luxembourg. Ou saisis le numéro suivi de son code postal : `AB1234567890 75001` (France), `AB1234567890 B1000` (Belgique) ou `AB1234567890 L1234` (Luxembourg), tous inventés. Espaces et tirets passent, mais garde le B ou le L : Peek trouve alors Colis Privé tout seul. Tu peux aussi coller un lien de colisprive.com ou de colisprive.fr.
 
-Il vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il affiche le statut, l'historique en français jour par jour, et un jour de livraison prévu quand une ligne en annonce un, mais ne peut ni réclamer ni contacter Colis Privé à ta place. Le suivi de Colis Privé ne donne pas le lieu des scans, donc pas de carte, et le nom et l'adresse du destinataire sont laissés de côté.
+Il vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il affiche le statut, l'historique en français jour par jour, et un jour de livraison prévu quand une ligne en annonce un, mais ne peut ni réclamer ni contacter Colis Privé à ta place. Le suivi de Colis Privé ne donne pas le lieu des scans, donc pas de carte, et le nom et l'adresse du destinataire sont laissés de côté.
 
 ## Questions sur le suivi Colis Privé
 

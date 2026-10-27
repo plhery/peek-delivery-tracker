@@ -3,7 +3,7 @@ title: Hermes Einrichtungs-Service Sendungsverfolgung: Liefertermin
 description: Möbel und Großgeräte vom Hermes Einrichtungs-Service verfolgen: wo die Nummer steht, was die Status heißen, wie du den Termin änderst und wen du fragst.
 slug: hermes-einrichtungs-service-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Der Hermes Einrichtungs-Service (HES) ist die Firma der Otto Group, die Möbel, große Elektrogeräte und andere sperrige Ware zu zweit bis in die Wohnung liefert, an einem mit dir abgestimmten Tag. Du verfolgst die Lieferung auf myhes.de mit der Sendungsverfolgungsnummer aus der E-Mail oder SMS von HES oder aus der Versandmail des Shops. Du kannst sie auch oben ins Feld einfügen.
@@ -85,7 +85,7 @@ Hermes Germany verschickt nach eigener Angabe keine SMS, ausgenommen der Hermes 
 
 Peek zeigt Status und Sendungsverlauf mit den deutschen Sätzen von HES, den geplanten Liefertag mit Zeitfenster, wenn myhes.de eines nennt, den Händler oder Shop, der die Ware verkauft hat, und den Zeitpunkt der Zustellung. Orte gibt HES nicht heraus, deshalb erscheint auf der Karte nichts, und das Live-Tracking des Lieferwagens ist nicht zu sehen. Ein storniertes oder zurückgehendes Paket erscheint als Problem. Dein Name, deine Adresse und Lieferhinweise wie eine Abstellgenehmigung fehlen, alle Zeiten gelten als deutsche Zeit.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald die Ware auf Tour ist, nachts stündlich, und du bekommst auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
+Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald die Ware auf Tour ist, nachts alle ein bis zwei Stunden, und du bekommst auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
 
 ## Fragen zur Hermes Einrichtungs-Service Sendungsverfolgung
 

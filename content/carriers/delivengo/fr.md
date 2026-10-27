@@ -3,7 +3,7 @@ title: Delivengo suivi : ton colis La Poste envoyé de France
 description: Suivi Delivengo hors de France : le numéro en FR, ce que dit le suivi de La Poste, qui livre en Belgique, en Suisse ou au Canada et qui contacter.
 slug: delivengo-suivi
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 Delivengo est le service de [La Poste](carrier:la-poste) qui permet aux entreprises françaises d'envoyer à l'étranger de petits colis légers, jusqu'à 2 kg. Si une boutique française l'a choisi, ton colis quitte la France avec La Poste et c'est la poste de ton pays qui le livre : bpost en Belgique, la Poste suisse, [Postes Canada](carrier:canada-post) au Québec. Tu le suis sur le suivi de La Poste avec le numéro que la boutique te donne, ou en le collant dans la case ci-dessus.
@@ -76,7 +76,7 @@ Peek affiche ce que La Poste affiche : le statut, l'historique avec le pays de c
 
 Quand La Poste nomme un partenaire ou donne le pays de destination, et que la poste de ce pays est dans la liste de Peek (la Suisse et le Canada en font partie, comme l'Allemagne, l'Espagne, le Royaume-Uni ou les États-Unis), Peek interroge aussi cette poste et la suit dès qu'elle montre une étape plus récente. La Belgique, le Luxembourg, l'Italie et le Portugal ne sont pas dans cette liste, et l'historique de La Poste peut se taire après l'export : la dernière étape n'apparaît donc pas toujours.
 
-Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 
 ## Questions sur le suivi Delivengo
 

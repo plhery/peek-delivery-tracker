@@ -77,9 +77,9 @@ Correos's channels, as read on 13 October 2026, are the same for English speaker
 
 [Peek](/) names Correos at once for 23-character parcel codes, 16-character shipment codes, `PR` numbers and postal numbers ending ES. A code whose check letter fails names no carrier: check it for a typo, or pick Correos with "Change". For a shipment code with one parcel, Peek follows that parcel; with several, track each parcel's 23-character code. correos.es links with `tracking-number=` work, and so do older links with `numero=`.
 
-Peek reads Correos in Spanish, so statuses stay Spanish. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your name, address and signature. It shows no expected delivery date, and it reads every time on Madrid's clock, so a scan in the Canary Islands can show an hour later than local time.
+Peek reads Correos in Spanish, so statuses stay Spanish. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your name, address and signature. It shows no expected delivery date, and it reads every time on Madrid's clock, so a scan in the Canary Islands can show an hour early.
 
-A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you at every scan, at important steps or on delivery day only. It can't pay customs or change a delivery.
+A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, and can notify you at every scan, at important steps or on delivery day only. It can't pay customs or change a delivery.
 
 ## Questions about Correos tracking
 

@@ -86,9 +86,9 @@ Canales de Correos según su web, consultada el 13 de octubre de 2026:
 
 [Peek](/) reconoce Correos al momento con los códigos de paquete de 23 caracteres, los de expedición de 16, los `PR` y los números postales que acaban en ES. Si la letra de control no cuadra, no propone ningún transportista: revisa si hay una errata o elige Correos con «Cambiar transportista». Con un código de expedición de un solo paquete, Peek sigue ese paquete; si lleva varios, sigue cada uno con su código de 23 caracteres. También sirven los enlaces de correos.es con `tracking-number=` y los antiguos con `numero=`.
 
-Peek lee el seguimiento de Correos en español y muestra los estados tal como los escribe Correos: los 20 últimos escaneos (sin lugar), el peso y las medidas, la hora de entrega y, mientras te espera, el nombre y la dirección de la oficina. No guarda tu nombre, tu dirección ni la firma. No muestra fecha de entrega prevista, y lee todas las horas en hora de Madrid: un escaneo en Canarias puede salir una hora más tarde que la hora local.
+Peek lee el seguimiento de Correos en español y muestra los estados tal como los escribe Correos: los 20 últimos escaneos (sin lugar), el peso y las medidas, la hora de entrega y, mientras te espera, el nombre y la dirección de la oficina. No guarda tu nombre, tu dirección ni la firma. No muestra fecha de entrega prevista, y lee todas las horas en hora de Madrid: un escaneo en Canarias puede salir una hora antes.
 
-Un envío postal que viene de otro país hacia España puede pasar a seguirse en Correos («Entrega con Correos») en cuanto Correos muestra avances. Peek consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y te manda notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede pagar la aduana ni cambiar la entrega.
+Un envío postal que viene de otro país hacia España puede pasar a seguirse en Correos («Entrega con Correos») en cuanto Correos muestra avances. Peek consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y te manda notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede pagar la aduana ni cambiar la entrega.
 
 ## Preguntas sobre el seguimiento de Correos
 

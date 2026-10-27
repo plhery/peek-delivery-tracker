@@ -79,7 +79,7 @@ Have the airbill number ready. LSO's holidays page gives another number, 866.215
 
 Peek can't read LSO's own tracking. It follows LSO parcels through tracking services instead and shows the status and history those services hold, in their wording. That history is often hours behind LSO's page, and for some parcels there's nothing yet. Peek shows no expected delivery, proof of delivery or pickup point for LSO.
 
-Peek checks every 15 minutes from 8 am to 10 pm Swiss time (about 1 am to 3 pm Central), out for delivery too, and hourly the rest of the time, and can notify you when the status changes. For the signature, a claim or a delivery problem, go to LSO or the shop.
+Peek checks every 15 minutes from 8 am to 10 pm Swiss time (about 1 am to 3 pm Central), out for delivery too, and every hour or two the rest of the time, and can notify you when the status changes. For the signature, a claim or a delivery problem, go to LSO or the shop.
 
 ## Questions about LSO tracking
 

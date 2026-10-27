@@ -3,7 +3,7 @@ title: Hermes seguimiento: paquetes de Alemania a España
 description: Sigue un paquete Hermes enviado desde Alemania: cómo es el número, qué significan los estados, quién lo entrega en España y qué hacer si se retrasa o se pierde.
 slug: hermes-seguimiento
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 Hermes Germany, con sede en Hamburgo, es la empresa de paquetería del grupo Otto y reparte sobre todo dentro de Alemania. Si una tienda o un vendedor de Alemania te manda un paquete con Hermes, en España te lo entrega una empresa local con la que trabaja Hermes. Puedes seguirlo con el número de Hermes en el [seguimiento de myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/), que está en alemán, o pegándolo en la casilla de arriba. El número te lo tiene que dar quien te envía el paquete.
@@ -97,7 +97,7 @@ Peek muestra el estado, el historial, el día previsto de entrega, el remitente 
 
 Los pasos en España aparecen como los demás: «En reparto», «Listo para recoger» o «Entregado». Si el paquete no se recogió y después aparece `Die Sendung wurde erfolgreich zugestellt.`, Peek lo marca como «Devuelto al remitente», no como entregado.
 
-Peek no sigue el paquete en la web de la empresa que reparte en España. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y te avisa según elijas: «Todas las novedades», «Solo importantes» o «Solo el día de entrega». Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
+Peek no sigue el paquete en la web de la empresa que reparte en España. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y te avisa según elijas: «Todas las novedades», «Solo importantes» o «Solo el día de entrega». Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
 
 ## Preguntas sobre el seguimiento de Hermes
 

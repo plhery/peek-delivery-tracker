@@ -3,7 +3,7 @@ title: Colis Privé pakket volgen: statussen, afhaalpunt en contact
 description: Volg je Colis Privé-pakket in België met het nummer van 12 tekens en je postcode: wat elke status betekent, hoelang een afhaalpunt het bewaart en wie je contacteert.
 slug: colis-prive-pakket-volgen
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Colis Privé is een Franse pakketbezorger voor webshops. In België en Luxemburg levert Colis Privé BeLux sinds 2021 aan huis en in afhaalpunten. Je volgt je pakket op [colisprive.be](https://colisprive.be/nl/) met het pakketnummer van 12 tekens én de postcode van het leveringsadres, of je plakt ze in het veld hierboven. Colis Privé en Paack gaan voortaan samen verder onder het merk [Paack](carrier:paack), dat vanaf januari 2027 geleidelijk wordt ingevoerd; tot dan blijven levering en tracking zoals ze zijn.
@@ -91,7 +91,7 @@ Zo stond het op de Nederlandstalige pagina's van Colis Privé op 26 oktober 2026
 
 Typ in [Peek](/) het pakketnummer, kies Colis Privé als vervoerder met ‘Change’ en vul ‘Delivery postcode’ in: vier cijfers in België, L en vier cijfers in Luxemburg. Of zet je postcode met een B ervoor achter het nummer, zoals `AB0000000000 B1000` (verzonnen): dan vraagt Peek het alleen aan Colis Privé. Zonder die B vindt Peek Colis Privé niet vanzelf. Je kan ook een trackinglink van colisprive.com plakken.
 
-Peek haalt de tracking rechtstreeks bij Colis Privé, toont een verwachte leverdag zodra een regel een afspraak of een dag in het afhaalpunt aankondigt, en laat je naam en adres weg. Overdag controleert Peek elke 10 minuten, op de dag van de ronde elke 2 minuten, 's nachts elk uur. Meldingen kies je zelf: ‘All tracking updates’, ‘Important only’ of ‘Delivery day only’. Peek kan geen klacht indienen en Colis Privé of de webshop niet voor je contacteren.
+Peek haalt de tracking rechtstreeks bij Colis Privé, toont een verwachte leverdag zodra een regel een afspraak of een dag in het afhaalpunt aankondigt, en laat je naam en adres weg. Overdag controleert Peek elke 10 minuten, op de dag van de ronde elke 2 minuten, 's nachts elk uur of om de twee uur. Meldingen kies je zelf: ‘All tracking updates’, ‘Important only’ of ‘Delivery day only’. Peek kan geen klacht indienen en Colis Privé of de webshop niet voor je contacteren.
 
 ## Vragen over Colis Privé pakket volgen
 

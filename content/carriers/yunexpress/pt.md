@@ -3,7 +3,7 @@ title: YunExpress rastreio: código YT, estados e contactos
 description: Rastreio YunExpress em Portugal: o código YT, o que quer dizer cada estado em inglês, a ligação aos CTT e a quem perguntar quando a encomenda para.
 slug: yunexpress-rastreio
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 A YunExpress, também escrita Yun Express, é uma empresa de logística de Shenzhen que envia pequenas encomendas da China para vendedores online, incluindo os da Amazon, da Temu e da SHEIN. Para rastrear a encomenda, escreve o número que começa por YT no [yuntrack.com](https://www.yuntrack.com/), o site de seguimento da YunExpress, ou cola-o na caixa acima. O site da YunExpress não fala de SMS ou e-mails para quem recebe: procura o número no e-mail de envio da loja ou na página da tua encomenda.
@@ -79,7 +79,7 @@ A caixa «Feedback» do yuntrack serve para comentar o site, não a tua encomend
 
 ## Seguir encomenda YunExpress com o Peek
 
-O [Peek](/) reconhece YT e 16 algarismos como YunExpress e aceita ligações do yuntrack.com. Verifica o seguimento de 10 em 10 minutos durante o dia (de 5 em 5 minutos quando a encomenda sai para entrega) e de hora a hora à noite, põe cada leitura num mapa e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega. Mostra o estado, o histórico, o local de cada leitura e, depois da entrega, a hora a que foi entregue.
+O [Peek](/) reconhece YT e 16 algarismos como YunExpress e aceita ligações do yuntrack.com. Verifica o seguimento de 10 em 10 minutos durante o dia (de 5 em 5 minutos quando a encomenda sai para entrega) e de hora a hora ou de duas em duas horas à noite, põe cada leitura num mapa e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega. Mostra o estado, o histórico, o local de cada leitura e, depois da entrega, a hora a que foi entregue.
 
 Quando a YunExpress indica a transportadora local e o número dela, pode seguir a encomenda nessa transportadora, mas não acontece com todas. Não mostra data prevista de entrega nem ponto de levantamento para as encomendas YunExpress, deixa de fora as referências de encomenda da loja e não pode contactar a YunExpress nem reclamar por ti.
 

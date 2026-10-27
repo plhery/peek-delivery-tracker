@@ -3,7 +3,7 @@ title: Dachser tracking in Spain and Portugal: link and statuses
 description: Track a Dachser delivery in Spain or Portugal: why the full tracking link matters, what the statuses mean, delivery appointments and who to call.
 slug: dachser-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 Dachser is a German logistics group whose Spanish and Portuguese companies carry freight and pallets, mostly between businesses, and deliver bulky orders to homes for shops that book its targo on-site service. To track a delivery in Spain or Portugal, open the tracking link in the email or message you received about the delivery: it leads to Dachser's Customer Iberia page. Pasted whole in the box above, it works too.
@@ -94,9 +94,9 @@ Dachser lists no customer line for recipients. As shown on its Spanish and Portu
 
 [Peek](/) can't tell a Dachser number from its digits or look one up without the key, so paste the complete link from your message: Peek recognises it as Dachser's and keeps it. If you typed the number, press "Change", pick Dachser and paste the link in the "Complete tracking link" field. A link with another address, a missing key, an unknown parameter or a different number is refused with "Use the complete tracking link from your shipping email."
 
-It reads the Customer Iberia page only, so it covers Dachser deliveries in Spain and Portugal. It shows the status, the history and the expected delivery day until delivery. Each step appears in Peek's own words, such as Shipment information received, Shipment collected, Shipment arrived at a Dachser facility, Out for delivery, Delivery appointment updated or Delivered; Dachser's own text isn't kept. Times keep their time zone, else they're read as Madrid time. Dachser gives no places, so there's little to pin on the map. The sender, your name, address, contact details and signature are left out.
+It reads the Customer Iberia page only, so it covers Dachser deliveries in Spain and Portugal. It shows the status, the history and the expected delivery day until delivery. Each step appears in Peek's own words, such as Shipment information received, Shipment collected, Shipment arrived at a Dachser facility, Out for delivery, Delivery appointment updated or Delivered; Dachser's own text isn't kept. Times are read in the time zone Dachser gives, else as Madrid time, and shown in your device's time zone. Dachser gives no places, so there's little to pin on the map. The sender, your name, address, contact details and signature are left out.
 
-Peek checks every 10 minutes by day, every 2 once the delivery is out, and hourly overnight, and can notify you of every scan, important steps or delivery day only. An unknown shipment or a broken link may show as not found or as a failed check.
+Peek checks every 10 minutes by day, every 2 once the delivery is out, and every hour or two overnight, and can notify you of every scan, important steps or delivery day only. An unknown shipment or a broken link may show as not found or as a failed check.
 
 ## Questions about Dachser tracking
 

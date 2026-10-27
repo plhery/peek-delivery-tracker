@@ -3,7 +3,7 @@ title: InPost rastreio: estados, Lockers e prazo para levantar
 description: Rastreio InPost em Portugal: onde está o número, o que quer dizer cada estado, quanto tempo a encomenda espera no Locker ou Ponto Pack e como contactar a InPost.
 slug: inpost-rastreio
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 A InPost é uma rede de Lockers (cacifos) e pontos de recolha nascida na Polónia, que chegou a Portugal em 2021, com a compra da Mondial Relay, e entrega em Lockers, em Pontos Pack e em casa. Para rastrear a encomenda, escreve o número na página [Rastrear Encomenda](https://www.inpost.pt/seguimento-do-envio) do inpost.pt, que só pede o número, ou cola-o na caixa acima. O número vem do remetente, normalmente a loja; o PIN de 6 dígitos que a InPost te envia serve para levantar a encomenda, não para a seguir.
@@ -78,7 +78,7 @@ O [Peek](/) reconhece de imediato os números `8YDR` do Reino Unido. Para os de 
 
 Lê o serviço de seguimento da InPost em inposteasy.com (não está confirmado que responda pelos números `JJD`, `JD` e `8YDR`) e mostra o estado, as 20 leituras mais recentes com a cidade ou o centro e o país de cada uma num mapa, a hora de entrega e o país de destino; a InPost não dá data de entrega prevista. Cada passo aparece com o título que esse serviço envia, ou com o código interno da InPost quando não tem título, e alguns códigos ficam sem etapa. O Peek não pede uma língua ao serviço: o único registo lido assim veio em polaco, e não se sabe em que língua aparece uma encomenda portuguesa.
 
-O nome e a morada do Locker ou ponto só aparecem em números de 24 algarismos, quando o seguimento polaco da InPost os confirma, o que na prática é provável que só aconteça com encomendas polacas. O horário do ponto e o teu PIN nunca aparecem. As leituras sem fuso horário ficam de fora, e o Peek nunca lê o teu nome, morada, telefone ou assinatura, nem segue a encomenda noutra transportadora. Verifica o seguimento de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora à noite, e pode enviar-te notificações: «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
+O nome e a morada do Locker ou ponto só aparecem em números de 24 algarismos, quando o seguimento polaco da InPost os confirma, o que na prática é provável que só aconteça com encomendas polacas. O horário do ponto e o teu PIN nunca aparecem. As leituras sem fuso horário ficam de fora, e o Peek nunca lê o teu nome, morada, telefone ou assinatura, nem segue a encomenda noutra transportadora. Verifica o seguimento de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações: «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
 
 ## Perguntas sobre o rastreio InPost
 

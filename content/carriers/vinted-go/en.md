@@ -3,7 +3,7 @@ title: Vinted Go tracking: statuses, lockers and who to contact
 description: Track a Vinted Go parcel: where the number is, what each status means, how long a locker or parcel shop holds it and who to ask when it goes wrong.
 slug: vinted-go-tracking
 published: 2026-10-11
-updated: 2026-10-25
+updated: 2026-10-27
 ---
 
 Vinted Go is Vinted's own parcel service: it carries parcels sold on Vinted from a locker or parcel shop to another locker, parcel shop or neighbourhood point, and in some places to the buyer's door. To track one, open the order's conversation in Vinted and tap the tracking button, or enter the number on [Vinted Go's tracking page](https://vintedgo.com/en/tracking).
@@ -91,7 +91,7 @@ Vinted warns that phishing also arrives by SMS; its French help asks you to forw
 
 Peek names Vinted Go at once for a number starting `VGS`. Type the 16-digit number alone and Peek asks Vinted Go, TNT and DHL eCommerce whether they know it, naming Vinted Go when it does; a `UW` code it asks Vinted Go about. Otherwise press "Change" and pick "Vinted Go", or paste the vintedgo.com tracking link, which names Vinted Go at once.
 
-Peek checks every 10 minutes by day and hourly overnight, hourly too once 48 hours pass with no new scan, and can notify you of changes. If Vinted Go hands the parcel to another network under a new tracking code, Peek can follow it there if it reads that network directly. It can't contact Vinted or Vinted Go, or report a problem for you.
+Peek checks every 10 minutes by day, hourly once 48 hours pass with no new scan, and every hour or two overnight, and can notify you of changes. If Vinted Go hands the parcel to another network under a new tracking code, Peek can follow it there if it reads that network directly. It can't contact Vinted or Vinted Go, or report a problem for you.
 
 ## Questions about Vinted Go tracking
 

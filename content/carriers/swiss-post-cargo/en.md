@@ -3,7 +3,7 @@ title: Swiss Post Cargo tracking: statuses, delivery and contact
 description: Track a Swiss Post Cargo shipment: which number works, what Data entry POST and Loaded for Delivery mean, how freight is delivered and who to call.
 slug: swiss-post-cargo-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 Swiss Post Cargo is Swiss Post's freight brand: pallets, bulky goods and furniture carried by truck, not ordinary parcels. Track a shipment on its Track & Trace page (tt.swisspost-cargo.com) with the barcode or the reference the sender gave you, or paste it in the box above. If what you have is a Swiss Post parcel number, it belongs on [Swiss Post's page](carrier:swiss-post) instead.
@@ -79,9 +79,9 @@ For Swiss Post letters and parcels (not Cargo), Swiss Post's line is +41 848 888
 
 A 20-digit barcode starting `00` belongs to whoever shipped it, not to one carrier, so [Peek](/) shows "asking Swiss Post Cargo, NZ Post…" and names Swiss Post Cargo only if Swiss Post Cargo knows the number. A `PL-12345678` reference is asked of Swiss Post Cargo alone. For any other reference of 6 to 40 letters and digits, pick Swiss Post Cargo with "Change", or paste a tt.swisspost-cargo.com or apv.swisspost-cargo.com Track & Trace link. A Swiss Post parcel number in such a link is tracked as Swiss Post.
 
-Peek shows the status and the history with the town of each scan on a map, in Zurich time, with the delivery time. Wordings stay in English; `Loaded for Delivery` counts as out for delivery. The signature and photo rows fold into the delivery scan, without the picture. Peek leaves out your name and address and has no expected delivery, weight or pickup point.
+Peek shows the status and the history with the town of each scan on a map, with the delivery time. Times are read on Zurich time and shown in your device's time zone. Wordings stay in English; `Loaded for Delivery` counts as out for delivery. The signature and photo rows fold into the delivery scan, without the picture. Peek leaves out your name and address and has no expected delivery, weight or pickup point.
 
-A reference shared by several shipments is read only while one of them has scans from the last 60 days; otherwise it reads as not found, so use the barcode. Peek can't track the German portal's shipment and company numbers. It checks every 10 minutes by day, every 2 once out for delivery, and hourly overnight, and can notify you of every scan, important steps or delivery day only.
+A reference shared by several shipments is read only while one of them has scans from the last 60 days; otherwise it reads as not found, so use the barcode. Peek can't track the German portal's shipment and company numbers. It checks every 10 minutes by day, every 2 once out for delivery, and every hour or two overnight, and can notify you of every scan, important steps or delivery day only.
 
 ## Questions about Swiss Post Cargo tracking
 

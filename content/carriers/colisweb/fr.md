@@ -3,7 +3,7 @@ title: Suivi Colisweb : messages, créneau de livraison et contact
 description: Suivi Colisweb en France : où trouver le numéro (8 chiffres ou plus), ce que veut dire chaque message, comment changer ton créneau et qui contacter.
 slug: suivi-colisweb
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Colisweb livre sur rendez-vous, à domicile et sur un créneau horaire, les commandes des enseignes françaises : meubles, électroménager, mais aussi petits colis, partout en France métropolitaine. Pour suivre ta livraison, saisis ton numéro sur [la page de suivi de Colisweb](https://www.colisweb.com/suivi-livraison). Ce numéro est dans le SMS ou l'e-mail qui t'a annoncé la date et le créneau.
@@ -85,7 +85,7 @@ Un numéro à 8 chiffres correspond à Colisweb, Mondial Relay et Heppner, et Pe
 
 Colisweb n'envoie que des codes d'étape : Peek affiche donc chaque étape avec ses propres mots, en français. Il montre le statut, trois étapes (livraison confirmée, commande récupérée par l'équipe, livrée) avec leur heure mais sans lieu, le nom de l'enseigne et l'heure de livraison. Tant que la livraison est programmée, récupérée ou en cours et qu'elle n'est pas en train d'être reprogrammée, il affiche ton créneau : un jour et des heures, à l'heure de Paris. Une livraison annulée apparaît comme retournée à l'expéditeur. Ton nom et ton adresse ne sont pas repris.
 
-Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois la livraison en cours, toutes les heures la nuit, et peut t'envoyer des notifications : chaque scan, les étapes importantes ou le jour de livraison uniquement. Un numéro que Colisweb ne connaît pas n'est pas signalé comme introuvable : compare les chiffres avec ton SMS. Peek ne peut ni changer ton créneau ou ton adresse, ni utiliser le chat de Colisweb, ni contacter le magasin à ta place.
+Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois la livraison en cours, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : chaque scan, les étapes importantes ou le jour de livraison uniquement. Un numéro que Colisweb ne connaît pas n'est pas signalé comme introuvable : compare les chiffres avec ton SMS. Peek ne peut ni changer ton créneau ou ton adresse, ni utiliser le chat de Colisweb, ni contacter le magasin à ta place.
 
 ## Questions sur le suivi Colisweb
 

@@ -3,7 +3,7 @@ title: Bring tracking: numbers, statuses and pickup deadlines
 description: Track a Bring or Posten parcel in Norway, Sweden or Denmark: what the number looks like, what Bring's statuses mean, pickup deadlines, claims and contacts.
 slug: bring-tracking
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Bring is the parcel brand of Posten Bring, Norway's state-owned postal group; Posten is its brand for people in Norway. Both share one tracking: use sporing.bring.no, sporing.posten.no or the Posten app, or paste the number in the box above. The number comes from the shop, or from Bring or Posten by SMS or email.
@@ -89,7 +89,7 @@ As listed on Bring's and Posten's pages on 12 October 2026:
 
 [Peek](/) names a postal number ending `NO` as Bring's straight away when its check digit is valid. The 18-digit `370`/`373` numbers, the 20-digit barcodes starting `00370` or `00373` and 17-digit numbers starting `70` are shared with other carriers, so Peek asks Bring first, together with the other carriers the number fits ([Matkahuolto](carrier:matkahuolto) too for `373`), and names Bring whenever Bring knows the parcel. If Bring doesn't come up, tap "Change" and pick Bring, listed first under "Fits this number". The exception is an 18-digit number starting `370` or `373` whose 6th to 9th digits are zeros: Peek files it under [Ecoscooting](carrier:ecoscooting) without asking Bring, so tap "Change" and search for Bring. Links from sporing.bring.no, sporing.posten.no and tracking.bring.com, .se or .dk name Bring whatever the number, but at Bring Peek can only track 17- or 18-digit numbers, 20-digit ones starting `00`, and postal numbers (two letters, nine digits, two letters) with a valid check digit, from any country. A multi-parcel consignment number isn't tracked; use each parcel's number.
 
-Peek shows the status, each scan's town on a map, the sender, service, weight, dimensions, the expected day when Bring gives one and, while the parcel waits, the pickup point's name. Instead of Bring's sentences, each step gets a short label such as "Handed in", "At terminal" or "Ready for pickup". It drops addresses, photos and the pickup code, checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you of changes.
+Peek shows the status, each scan's town on a map, the sender, service, weight, dimensions, the expected day when Bring gives one and, while the parcel waits, the pickup point's name. Instead of Bring's sentences, each step gets a short label such as "Handed in", "At terminal" or "Ready for pickup". It drops addresses, photos and the pickup code, checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, and can notify you of changes.
 
 ## Questions about Bring tracking
 

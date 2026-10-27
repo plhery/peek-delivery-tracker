@@ -3,7 +3,7 @@ title: NACEX seguimiento: número de envío, estados y teléfono
 description: Sigue tu envío NACEX con su número 0000/00000000: qué significa cada estado, los puntos NACEX.shop, qué hacer si no llega y el teléfono gratuito.
 slug: seguimiento-nacex
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en España, Portugal y Andorra con más de 300 franquicias. Para seguir tu envío, escribe su número (la agencia, una barra y el albarán) en la casilla «Seguimiento de envío» de la [web de NACEX](https://www.nacex.es/), o pégalo en la casilla de arriba. El número es el del envío que contrató el remitente, normalmente la tienda: si no lo tienes, pídeselo, porque NACEX no busca por número de pedido ni por código postal.
@@ -92,7 +92,7 @@ Para Andorra, NACEX no da canales propios: usa los de España. En Portugal, su n
 
 [Peek](/) reconoce un número de NACEX por su forma: exactamente cuatro cifras, una barra y ocho cifras, con o sin espacios alrededor de la barra. También puedes pegar un enlace de seguimiento de nacex.es que lleve `intcli=`, o el correo de envío entero. Con otras longitudes, usa el formulario de NACEX.
 
-Peek consulta el seguimiento de NACEX cada 10 minutos de día, cada 2 minutos cuando el paquete está en reparto y cada hora por la noche, y puede enviarte una notificación en cada escaneo, solo en los pasos importantes o solo el día de entrega. Muestra el estado y el historial con las palabras de NACEX, los lugares donde se escaneó el paquete en un mapa y el día de cada paso, sin hora, porque NACEX no la publica. No muestra fecha prevista de entrega. Deja fuera el nombre del destinatario, la prueba de entrega, los comentarios de entrega, los datos de contacto y la referencia de la tienda, y no puede acelerar el paquete ni hablar con NACEX por ti.
+Peek consulta el seguimiento de NACEX cada 10 minutos de día, cada 2 minutos cuando el paquete está en reparto y cada una o dos horas por la noche, y puede enviarte una notificación en cada escaneo, solo en los pasos importantes o solo el día de entrega. Muestra el estado y el historial con las palabras de NACEX, los lugares donde se escaneó el paquete en un mapa y el día de cada paso, sin hora, porque NACEX no la publica. No muestra fecha prevista de entrega. Deja fuera el nombre del destinatario, la prueba de entrega, los comentarios de entrega, los datos de contacto y la referencia de la tienda, y no puede acelerar el paquete ni hablar con NACEX por ti.
 
 ## Preguntas sobre el seguimiento de NACEX
 

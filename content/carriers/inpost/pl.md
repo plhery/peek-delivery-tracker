@@ -3,7 +3,7 @@ title: InPost śledzenie przesyłki: numer, statusy i Paczkomat
 description: Śledzenie paczki InPost w Polsce: jak wygląda numer, co znaczą statusy, ile paczka czeka w Paczkomacie, jak złożyć reklamację i gdzie dzwonić.
 slug: inpost-sledzenie-przesylki
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 InPost to sieć automatów paczkowych Paczkomat, punktów PaczkoPunkt i kurierów, która zaczynała w Polsce; polski operator to InPost sp. z o.o. z Krakowa. Paczkę śledzisz na [inpost.pl/sledzenie-przesylek](https://inpost.pl/sledzenie-przesylek), wpisując numer z 24 albo 8 cyfr; numer z 24 cyfr możesz też wkleić w pole powyżej. Numer dostajesz od nadawcy, na przykład sklepu; nie myl go z kodem odbioru, który InPost przysyła, gdy paczka czeka w Paczkomacie.
@@ -94,7 +94,7 @@ Peek czyta śledzenie z serwisu InPost na inposteasy.com, tego samego dla Polski
 
 Statusy są takie, jak przysyła je serwis InPost, dla polskich paczek po polsku; gdy krok nie ma tytułu, możesz zobaczyć surowy kod InPost. Nie każdy kod InPost ma w Peek swój etap, więc paczka czekająca w Paczkomacie nie zawsze dostaje etap „Do odbioru”. Skany bez strefy czasowej są pomijane, a Twoje imię, adres, telefon i podpis nie są odczytywane.
 
-Peek sprawdza śledzenie w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu, w nocy zaś co godzinę, i może Cię powiadomić o wszystkich aktualizacjach, tylko o ważnych albo tylko w dniu dostawy. Nie śledzi paczki dalej u innego przewoźnika, nie przedłuży czasu odbioru, nie złoży reklamacji i nie skontaktuje się za Ciebie z InPost.
+Peek sprawdza śledzenie w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu, w nocy zaś co godzinę lub dwie, i może Cię powiadomić o wszystkich aktualizacjach, tylko o ważnych albo tylko w dniu dostawy. Nie śledzi paczki dalej u innego przewoźnika, nie przedłuży czasu odbioru, nie złoży reklamacji i nie skontaktuje się za Ciebie z InPost.
 
 ## Pytania o śledzenie przesyłek InPost
 

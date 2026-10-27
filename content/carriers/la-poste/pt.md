@@ -3,7 +3,7 @@ title: Colissimo e La Poste rastreio: estados e entrega em Portugal
 description: Rastreio Colissimo e La Poste: como é o número, o que querem dizer os estados em francês, quem entrega em Portugal e quanto tempo a encomenda fica à tua espera.
 slug: colissimo-la-poste-rastreio
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 A Colissimo é o serviço de encomendas da La Poste, o correio nacional francês. Esta página é sobretudo para quem está em Portugal à espera de uma encomenda que vem de França, de uma loja online ou da família; mais abaixo há uma parte para quem vive em França. Segues a encomenda com o número na página de rastreio da La Poste, [Suivre une lettre, un Colissimo ou un Chronopost](https://www.laposte.fr/outils/suivre-vos-envois) (em francês ou inglês), ou colando-o na caixa acima. O número vem de quem envia: as lojas põem-no no email de envio, e a La Poste também o pode mandar por email.
@@ -97,7 +97,7 @@ Segundo as páginas de cada empresa, consultadas em outubro de 2026:
 
 O [Peek](/) reconhece logo a La Poste / Colissimo num número Colissimo de 13 caracteres com a chave certa, num número de 14 algarismos começado por `870`, num dos números de parceiro de 15 caracteres que a La Poste usa ou num número postal acabado em `FR` (fora os da Chronopost), estes dois com o carácter de controlo certo. Noutros casos, como duas letras e 11 algarismos, uma chave errada ou 14 algarismos que a DPD e outras também usam, cola-o na mesma: o Peek segue mais de 3.500 transportadoras e pergunta às prováveis. Se não aparecer a La Poste, escolhe-a em «Alterar transportadora». O número do avis de passage não serve: usa o da encomenda. Os links do laposte.fr com `code=` ou `idShip=` também funcionam.
 
-O Peek lê a La Poste em francês, por isso os estados ficam em francês. Mostra cada evento no mapa, a entrega prevista, o nome da loja e, enquanto a encomenda espera, o ponto de levantamento com a morada. Não guarda o teu nome nem a tua morada. Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada hora à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
+O Peek lê a La Poste em francês, por isso os estados ficam em francês. Mostra cada evento no mapa, a entrega prevista, o nome da loja e, enquanto a encomenda espera, o ponto de levantamento com a morada. Não guarda o teu nome nem a tua morada. Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
 
 Quando a La Poste diz que parceiro entrega e qual é o número dele, o Peek mostra-os ao lado do teu número e, se conhecer esse parceiro, pode passar a seguir a encomenda no site dele assim que este mostrar progresso. Com um número postal `…FR` e destino Portugal, pode procurá-la nos [CTT](carrier:ctt). Um envio Chronopost segue-se na Chronopost. O Peek não consegue mudar uma entrega, responder a um aviso nem reclamar por ti.
 

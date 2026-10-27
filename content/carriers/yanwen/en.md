@@ -3,7 +3,7 @@ title: Yanwen tracking number: UL…YP format and who delivers
 description: Two letters (often UL or UK), 9 digits, then YP: that's a Yanwen tracking number. Track it here, see what each status means and who delivers it in your country.
 slug: yanwen-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Yanwen is a Chinese logistics company, founded in Beijing in 1998, that ships parcels abroad for online sellers and hands them to a local carrier for the last mile. Track the number on Yanwen's own site, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), or in the box above. The number comes from the shop or marketplace you bought from, in the shipping details of your order.
@@ -86,7 +86,7 @@ Yanwen publishes no contact for any European country. For the order, the shop or
 
 It shows the status, the history with the town or region of each scan on a map, the delivery time, the destination country and the local carrier with its number ("Delivery with" that carrier). When Yanwen names a local carrier in Peek's list and the number fits it, Peek asks that carrier and switches to it once it shows newer progress. Yanwen gives no expected delivery date; Peek shows no pickup point and drops order references, contacts, postcodes, delivery PINs and door numbers.
 
-Scan times keep Yanwen's GMT offsets, and repeated scans are removed. `Delivered` and `Out for delivery` appear in Peek's own words; other lines as written, including `Delivered.`. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Yanwen or the shop for you.
+Scan times are read with Yanwen's GMT offsets and shown in your device's time zone, and repeated scans are removed. `Delivered` and `Out for delivery` appear in Peek's own words; other lines as written, including `Delivered.`. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Yanwen or the shop for you.
 
 ## Questions about Yanwen tracking
 

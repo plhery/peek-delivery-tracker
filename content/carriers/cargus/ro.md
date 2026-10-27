@@ -3,7 +3,7 @@ title: Urmărire colet Cargus: AWB, statusuri și SHIP & GO
 description: Urmărește un colet Cargus: unde găsești AWB-ul, ce înseamnă statusurile, cât stă coletul la SHIP & GO sau în locker, cum plătești rambursul și cum faci reclamație.
 slug: cargus-urmarire-colet
 published: 2026-10-25
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Cargus livrează colete în România de peste 30 de ani, la adresă sau în rețeaua SHIP & GO, formată din puncte de ridicare și lockere. Coletul îl urmărești cu numărul AWB pe [pagina Urmărește un colet](https://www.cargus.ro/personal/urmareste-coletul/) de pe cargus.ro, în aplicația Cargus Mobile sau în căsuța de mai sus. AWB-ul ți-l trimite de obicei magazinul, pe email sau prin SMS.
@@ -100,7 +100,7 @@ Peek citește serviciul de urmărire din spatele aplicației Cargus Mobile și �
 | `With courier` | E la curier, în livrare. |
 | `Delivered` | Livrat. |
 
-Ziua, Peek verifică coletul la fiecare 10 minute, la fiecare 2 minute cât e la curier, iar noaptea o dată pe oră, și te poate anunța când se schimbă statusul. Cargus nu-i dă o zi estimată de livrare, așa că Peek nu arată niciuna. Peek lasă deoparte cine a semnat, PIN-ul de livrare, referința expeditorului și numărul de colete. Nu-ți spune nici în ce punct SHIP & GO sau locker te așteaptă coletul: pe acela îl afli din avizul Cargus. Peek nu poate contacta Cargus sau magazinul în locul tău.
+Ziua, Peek verifică coletul la fiecare 10 minute, la fiecare 2 minute cât e la curier, iar noaptea o dată la una-două ore, și te poate anunța când se schimbă statusul. Cargus nu-i dă o zi estimată de livrare, așa că Peek nu arată niciuna. Peek lasă deoparte cine a semnat, PIN-ul de livrare, referința expeditorului și numărul de colete. Nu-ți spune nici în ce punct SHIP & GO sau locker te așteaptă coletul: pe acela îl afli din avizul Cargus. Peek nu poate contacta Cargus sau magazinul în locul tău.
 
 ## Întrebări despre urmărirea Cargus
 

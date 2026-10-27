@@ -3,7 +3,7 @@ title: GLS Spain tracking: statuses, Parcel Shops and contact
 description: Track a GLS parcel in Spain: why you need the postcode, what GLS's statuses mean, Parcel Shops and lockers, missed deliveries and how to reach GLS Spain.
 slug: gls-spain-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GLS Spain is the Spanish arm of the GLS Group, the parcel network that took over ASM Transporte Urgente in 2016. To track a parcel, open "Track your shipment" on GLS Spain's site or the My GLS app and enter the tracking number together with the delivery postcode: GLS asks for both. The number comes from the shop that sent the parcel.
@@ -77,7 +77,7 @@ GLS says 911 118 768 is a genuine number it uses only for quality calls.
 
 [Peek](/) reads GLS Spain's own tracking, without an account. Like GLS, it needs the delivery postcode: once GLS Spain is the carrier, a "Delivery postcode" field appears, filled in if you gave one before. It goes to GLS and, when needed, to tracking services. A wrong postcode looks like an unknown number.
 
-You then see each scan's time and GLS's English wording, such as `At delivery agency`, under a headline in Peek's words ("Ready for pickup"), with the expected delivery day, the weight and the Parcel Shop or locker where the parcel waits. GLS gives no scan places, and the pickup code stays on its page. Peek's link to GLS opens its form without the number. Checks run every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and you can be notified of changes.
+You then see each scan's time and GLS's English wording, such as `At delivery agency`, under a headline in Peek's words ("Ready for pickup"), with the expected delivery day, the weight and the Parcel Shop or locker where the parcel waits. GLS gives no scan places, and the pickup code stays on its page. Peek's link to GLS opens its form without the number. Checks run every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and you can be notified of changes.
 
 The number alone doesn't name GLS Spain, and GLS answers nothing without the postcode, so Peek asks TIPSA, Relais Colis, DHL eCommerce Iberia and, when its check digit fits, [DHL Express](carrier:dhl-express) about a 10-digit number. Press "Change", pick "GLS Spain" and add the postcode. A mygls.gls-spain.es link, or a gls-group.com or gls-group.eu link with `/ES/`, names GLS Spain at once, though the postcode is still asked. A parcel another carrier hands to GLS Spain isn't followed there automatically.
 

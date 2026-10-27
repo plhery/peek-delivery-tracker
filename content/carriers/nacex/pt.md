@@ -3,7 +3,7 @@ title: NACEX rastreio: código, estados e contacto em Portugal
 description: Rastreio NACEX em Portugal: o código 0000/00000000, os estados em espanhol explicados, os pontos NACEX.shop, as entregas falhadas e o 800 200 077.
 slug: nacex-rastreio
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 A NACEX é uma transportadora expresso do Grupo Logista que entrega em Portugal, Espanha e Andorra. Para rastrear a encomenda, escreve o número (quatro algarismos, uma barra e oito algarismos) na caixa «Seguimento de envio» do [site da NACEX](https://www.nacex.pt/) ou cola-o na caixa acima. O número junta o código da agência NACEX de onde a encomenda partiu e o número da expedição: o seguimento não pesquisa pelo número da encomenda nem pelo código postal.
@@ -89,7 +89,7 @@ Tal como o site português da NACEX os indicava a 9 de outubro de 2026, sem hor�
 
 O [Peek](/) reconhece um número NACEX pela forma: exatamente quatro algarismos, uma barra e oito algarismos. Também podes colar uma ligação de seguimento do nacex.es com `intcli=` ou o e-mail de envio inteiro. Com outro comprimento, usa o formulário da NACEX, que pede as duas partes em separado.
 
-Verifica o seguimento de 10 em 10 minutos durante o dia (de 2 em 2 minutos no último troço, quando a encomenda sai para entrega) e de hora a hora à noite, e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega. Mostra o estado e o histórico e põe num mapa os sítios onde a encomenda foi lida. O seguimento público da NACEX não dá horas, por isso vês o dia de cada passo, sem hora. Deixa de fora os dados do destinatário, a prova de entrega, os comentários de entrega, os contactos e a referência da loja, e não acelera a encomenda nem contacta a NACEX por ti.
+Verifica o seguimento de 10 em 10 minutos durante o dia (de 2 em 2 minutos no último troço, quando a encomenda sai para entrega) e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega. Mostra o estado e o histórico e põe num mapa os sítios onde a encomenda foi lida. O seguimento público da NACEX não dá horas, por isso vês o dia de cada passo, sem hora. Deixa de fora os dados do destinatário, a prova de entrega, os comentários de entrega, os contactos e a referência da loja, e não acelera a encomenda nem contacta a NACEX por ti.
 
 ## Perguntas sobre o rastreio NACEX
 

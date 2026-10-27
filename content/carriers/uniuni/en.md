@@ -89,7 +89,7 @@ The tracking result also shows a number to call for that parcel.
 
 Peek reads UniUni's tracking and shows the status, each scan with its town and province or state on a map, the expected day or time window, the delivery time and the destination country. It leaves out addresses, driver names and the delivery photos, so look at the photos on UniUni's page. `Delivered` and `Out for delivery` appear in Peek's own words; other lines show as UniUni writes them, without the reason in brackets.
 
-When UniUni hands a parcel to another courier, that courier's scans show up inside UniUni's history, but Peek doesn't follow the other courier's number. Parcels sent with [SpeedPAK](carrier:speedpak) or [DHL eCommerce](carrier:dhl-ecommerce) can name UniUni for the last mile, and Peek can then follow them on UniUni. Peek checks every 10 minutes from 8am to 10pm Swiss time (about 2am to 4pm ET, 11pm to 1pm PT), every 2 minutes in those hours once the parcel is out for delivery, and hourly the rest of the time, and can notify you when the status changes.
+When UniUni hands a parcel to another courier, that courier's scans show up inside UniUni's history, but Peek doesn't follow the other courier's number. Parcels sent with [SpeedPAK](carrier:speedpak) or [DHL eCommerce](carrier:dhl-ecommerce) can name UniUni for the last mile, and Peek can then follow them on UniUni. Peek checks every 10 minutes from 8am to 10pm Swiss time (about 2am to 4pm ET, 11pm to 1pm PT), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time, and can notify you when the status changes.
 
 ## Questions about UniUni tracking
 

@@ -3,7 +3,7 @@ title: Pošta Slovenije tracking: statuses, pickup and contacts
 description: Track a Pošta Slovenije (Post of Slovenia) parcel: the 13-character number, what the English statuses mean, PS Paketomat pickup, claims and contacts.
 slug: posta-slovenije-tracking
 published: 2026-10-13
-updated: 2026-10-25
+updated: 2026-10-27
 ---
 
 Pošta Slovenije (Post of Slovenia in English) is Slovenia's national post. Track a parcel on its [MojaPošta tracking page](https://moja.posta.si/tracking), which has an English switch, in the MojaPošta app or by pasting the number in the box above. The number usually comes in the sender's message, such as the shop's shipping email.
@@ -82,7 +82,7 @@ A postal number ending `SI` that starts with C, E, L or R and has a valid check 
 
 An item from abroad keeps its foreign post's number. When the foreign post says it's coming to Slovenia, or names no destination and you track it from Slovenia, Peek asks Pošta Slovenije too and follows the parcel there once Pošta Slovenije shows fresh progress; the foreign post's steps stay. Pošta Slovenije's lookup takes any postal number, so you can also pick "Pošta Slovenije" with "Change", or paste a moja.posta.si tracking link for it.
 
-Peek reads the service behind the MojaPošta app, checks every 10 minutes by day (every 2 once the parcel is out for delivery) and hourly overnight, and can notify you when the status changes. Each step goes on a map with its post office. Peek also shows the delivery time and the post office where the parcel waits (never a locker). There's no expected delivery day or weight. A step abroad is read on that country's clock. Statuses keep Pošta Slovenije's English wording, detail line included.
+Peek reads the service behind the MojaPošta app, checks every 10 minutes by day (every 2 once the parcel is out for delivery) and every hour or two overnight, and can notify you when the status changes. Each step goes on a map with its post office. Peek also shows the delivery time and the post office where the parcel waits (never a locker). There's no expected delivery day or weight. A step abroad is read on that country's clock. Statuses keep Pošta Slovenije's English wording, detail line included.
 
 ## Questions about Pošta Slovenije tracking
 

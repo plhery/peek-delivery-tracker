@@ -3,7 +3,7 @@ title: CTT Express seguimiento: número, estados y teléfono
 description: Sigue tu paquete CTT Express: el número de 22 cifras, qué significa cada estado, los puntos Collectt, qué hacer si no estabas y los teléfonos de CTT Express.
 slug: ctt-express-seguimiento
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 CTT Express es la filial española de paquetería urgente del grupo portugués CTT, la antigua Tourline Express, y reparte en toda España y Portugal. Para seguir tu paquete, escribe el número en el [localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) de cttexpress.com o pégalo en la casilla de arriba. El número te llega en el SMS o en el correo de confirmación de CTT Express.
@@ -84,7 +84,7 @@ La atención al cliente está centralizada en Madrid, solo por teléfono o corre
 
 Pega un número de 22 o 25 cifras de las dos primeras formas de arriba y [Peek](/) lo asigna a CTT Express al momento, incluida la forma de 25 cifras de un número que empieza por `00001000`. Con 22 cifras que empiezan por `00001000`, verás «preguntando a» TIPSA, Austrian Post y CTT Express; si no queda claro cuál lo tiene, elige con «Cambiar». También sirve un enlace de la página de seguimiento de CTT Express.
 
-Peek consulta el seguimiento de CTT Express cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puede enviarte una notificación con todas las novedades, solo las importantes o solo el día de entrega. Verás el estado, el historial (sin lugares), el día de entrega previsto mientras el paquete avanza, el peso, la hora de entrega y, si otro operador postal le pasó el paquete, su número internacional. Los textos de los escaneos salen tal como los escribe CTT Express, como `Entregado`. En un punto Collectt, Peek muestra `Disponible en Punto Collectt Express`, pero no el nombre ni la dirección del punto. A partir de `En devolución`, Peek marca el paquete como un problema. Los envíos de varios bultos se siguen a través de servicios universales de seguimiento.
+Peek consulta el seguimiento de CTT Express cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede enviarte una notificación con todas las novedades, solo las importantes o solo el día de entrega. Verás el estado, el historial (sin lugares), el día de entrega previsto mientras el paquete avanza, el peso, la hora de entrega y, si otro operador postal le pasó el paquete, su número internacional. Los textos de los escaneos salen tal como los escribe CTT Express, como `Entregado`. En un punto Collectt, Peek muestra `Disponible en Punto Collectt Express`, pero no el nombre ni la dirección del punto. A partir de `En devolución`, Peek marca el paquete como un problema. Los envíos de varios bultos se siguen a través de servicios universales de seguimiento.
 
 ## Preguntas sobre el seguimiento de CTT Express
 

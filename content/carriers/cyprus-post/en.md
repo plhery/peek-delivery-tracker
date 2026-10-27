@@ -3,7 +3,7 @@ title: Cyprus Post tracking: numbers, statuses and collection
 description: Track a Cyprus Post item: what its barcode looks like, what the English UPU statuses mean, collecting from the post office or Parcel24 and who to call.
 slug: cyprus-post-tracking
 published: 2026-10-13
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 Cyprus Post (Κυπριακά Ταχυδρομεία) is the Republic of Cyprus's national post, the Department of Postal Services. Track an item on its [Track & Trace page](https://www.cypruspost.post/en/track-n-trace-results), in its free app or by pasting the number in the box above. The number comes from the sender: the shop or person who posted the item.
@@ -91,7 +91,7 @@ For a postal number ending `CY` with a valid check digit, [Peek](/) asks Cyprus 
 
 Peek doesn't name Cyprus Post for an item posted abroad, but Cyprus Post's lookup takes it: pick "Cyprus Post" with "Change". Peek switches to Cyprus Post by itself only when the carrier abroad names it.
 
-Peek shows Cyprus Post's statuses as written, the office or facility and country of each scan on a map, the delivery time and the post office where an item waits or was collected. Cypriot scans keep their exact time, and a foreign post's are read on its country's clock; where a country has several time zones, Peek works the zone out from the place named, which can put the hour off. Peek checks every 10 minutes by day, every 2 once the item is with the postman, and hourly overnight, and can notify you when the status changes. It shows no expected delivery or weight, and drops the Extra Information, next office, postcodes and who signed.
+Peek shows Cyprus Post's statuses as written, the office or facility and country of each scan on a map, the delivery time and the post office where an item waits or was collected. Cypriot scans keep their exact time, and a foreign post's are read on its country's clock; where a country has several time zones, Peek works the zone out from the place named, which can put the hour off. Peek checks every 10 minutes by day, every 2 once the item is with the postman, and every hour or two overnight, and can notify you when the status changes. It shows no expected delivery or weight, and drops the Extra Information, next office, postcodes and who signed.
 
 ## Questions about Cyprus Post tracking
 

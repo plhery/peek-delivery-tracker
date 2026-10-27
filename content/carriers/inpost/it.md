@@ -3,7 +3,7 @@ title: InPost tracking: codice, stati e ritiro al locker
 description: Tracking InPost in Italia: dove trovi il codice di 24 cifre, cosa vogliono dire gli stati, quanto resta il pacco al locker e chi chiamare se non arriva.
 slug: inpost-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 InPost è la rete di locker nata in Polonia che in Italia, con Locker InPost Italia, consegna i pacchi degli acquisti online nei suoi Locker, negli InPost Point (negozi, bar ed edicole) e a casa. Per seguire il pacco inserisci il codice di spedizione nella [pagina di tracking di inpost.it](https://inpost.it/trova-il-tuo-pacco), oppure incollalo nel box qui sopra. Il codice è nelle e-mail di conferma dell'ordine e in quelle di InPost per il ritiro; il PIN che apre il locker è un'altra cosa.
@@ -88,7 +88,7 @@ Peek legge il servizio di tracking di InPost su inposteasy.com, lo stesso per Po
 
 Gli stati arrivano come li manda quel servizio, non con i titoli di inpost.it. Per i pacchi polacchi sono in polacco, come `Odebrana przez Kuriera` (ritirato dal corriere) o `Wydana do doręczenia` (in consegna); per quelli italiani non si sa in che lingua arrivino, e potrebbero essere in polacco. Un passaggio senza titolo può comparire con il codice interno di InPost, del tipo `LMD.1002`. Alcuni passaggi finiscono in una fase diversa: quello che inpost.it chiama `Arrivato al punto di consegna` può comparire come «In transito» o senza fase, non come «Pronto per il ritiro», `Tempo scaduto per il ritiro` come «Tentativo di consegna», e un pacco consegnato al vicino può non risultare «Consegnato». Il nome e l'indirizzo del punto compaiono solo quando li conferma il tracking polacco di InPost, quindi con ogni probabilità solo per i pacchi polacchi, e mai con il codice di ritiro o gli orari: per un pacco italiano guarda la notifica di InPost.
 
-Peek non segue il pacco se passa a un altro corriere. Lo controlla ogni 10 minuti di giorno, ogni 2 quando è in consegna e ogni ora di notte, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna.
+Peek non segue il pacco se passa a un altro corriere. Lo controlla ogni 10 minuti di giorno, ogni 2 quando è in consegna e di notte ogni una o due ore, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna.
 
 ## Domande sul tracking InPost
 

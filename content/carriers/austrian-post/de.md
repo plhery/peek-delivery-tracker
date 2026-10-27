@@ -3,7 +3,7 @@ title: Austrian Post Sendungsverfolgung: Status, Abholung, Hilfe
 description: Paket der Österreichischen Post verfolgen: wie die Sendungsnummer aussieht, was jeder Status heißt, wie lange die Filiale wartet und wen du fragst.
 slug: austrian-post-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Die Österreichische Post (Österreichische Post AG, Sitz in Wien, international Austrian Post) stellt in Österreich Briefe und Pakete zu. Dein Paket verfolgst du auf post.at unter „Sendungsverfolgung“, in der Post App oder mit der Nummer im Feld oben. Die Sendungsnummer bekommst du vom Shop, aus der e-Benachrichtigung der Post oder vom gelben Zettel nach einem verpassten Zustellversuch.
@@ -91,7 +91,7 @@ So nennt die Post ihre Kanäle für Privatkunden (gelesen am 11. Oktober 2026):
 
 Peek zeigt den Status, den Verlauf mit jedem Logistikzentrum auf einer Karte, Gewicht, Maße, die Zustellzeit und eine voraussichtliche Zustellung (ein Tag, ein paar Tage oder ein Zeitfenster), solange das Paket übernommen, in Verteilung oder in Zustellung ist. Ein abholbereites Paket zeigt Peek als abholbereit, aber nicht, wo es liegt. Der Versender fehlt ebenfalls. Die Texte der Post erscheinen auf Deutsch, so wie die Post sie liefert: Ein zugestelltes Paket zeigt `Sendung wurde zugestellt`.
 
-Peek prüft das Paket tagsüber alle 10 Minuten, in Zustellung alle 2 Minuten, nachts stündlich, und kann dir Mitteilungen schicken: bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nach `Übergabe an Zustellpartner` folgt Peek dem Partner nicht, und ein Paket eines anderen Paketdienstes wechselt nie zur Post.
+Peek prüft das Paket tagsüber alle 10 Minuten, in Zustellung alle 2 Minuten, nachts alle ein bis zwei Stunden, und kann dir Mitteilungen schicken: bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nach `Übergabe an Zustellpartner` folgt Peek dem Partner nicht, und ein Paket eines anderen Paketdienstes wechselt nie zur Post.
 
 ## Fragen zur Sendungsverfolgung der Post
 

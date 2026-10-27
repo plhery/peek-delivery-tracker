@@ -3,7 +3,7 @@ title: FedEx Tracking und Sendungsverfolgung: Status und Hilfe
 description: FedEx-Paket verfolgen: wo die 12-stellige Sendungsnummer steht, was „Zustellausnahme“ heißt, wie du die Zustellung änderst und wie du FedEx erreichst.
 slug: fedex-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 FedEx ist ein Express- und Paketdienst, der auf seinen europäischen Seiten die Dienste von FedEx Express anbietet. Verfolgen kannst du dein Paket auf der Tracking-Seite von fedex.com, in der FedEx Mobile App oder mit der Nummer im Feld oben. Die Sendungsnummer steht laut FedEx meist in der E-Mail oder SMS, die du zu deiner Sendung bekommst.
@@ -83,7 +83,7 @@ Bei 12- und 15-stelligen Nummern mit gültiger Prüfziffer denkt [Peek](/) zuers
 
 Peeks Server öffnet dafür die Tracking-Seite von fedex.com in einem Browser. Das klappt nicht immer: Blockt FedEx den Abruf oder verlangt FedEx eine Bestätigung durch den Empfänger, springen Tracking-Dienste ein.
 
-Antwortet FedEx, siehst du den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den erwarteten Liefertag, die Zustellzeit und, solange das Paket wartet, Name und Adresse des FedEx-Standorts, an dem es liegt. Peek schaut tagsüber alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, und schickt dir auf Wunsch Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind dein Name und deine Adresse, der Versender, die Unterschrift, Gewicht und Abmessungen. Die Scans erscheinen in FedEx' englischer Fassung, nicht mit den deutschen Status von fedex.com. Nur den Zustellscan, in dem FedEx den Namen der unterschreibenden Person nennt, sowie `Ready for pickup` und `Shipment exception` zeigt Peek in eigenen Worten auf Deutsch, etwa „Zugestellt“ oder „Abholbereit“.
+Antwortet FedEx, siehst du den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den erwarteten Liefertag, die Zustellzeit und, solange das Paket wartet, Name und Adresse des FedEx-Standorts, an dem es liegt. Peek schaut tagsüber alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind dein Name und deine Adresse, der Versender, die Unterschrift, Gewicht und Abmessungen. Die Scans erscheinen in FedEx' englischer Fassung, nicht mit den deutschen Status von fedex.com. Nur den Zustellscan, in dem FedEx den Namen der unterschreibenden Person nennt, sowie `Ready for pickup` und `Shipment exception` zeigt Peek in eigenen Worten auf Deutsch, etwa „Zugestellt“ oder „Abholbereit“.
 
 Bestellst du in den USA und übergibt FedEx ein Ground-Economy-Paket an die US-Post, geht die Verfolgung dort weiter („Zustellung durch USPS“). Die meisten dieser Pakete stellt FedEx aber selbst zu.
 

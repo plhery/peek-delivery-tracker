@@ -3,7 +3,7 @@ title: iMile Sendungsverfolgung: Nummer, Status, Zustellung
 description: iMile Sendungsverfolgung in Deutschland, Österreich und der Schweiz: wie die Nummer aussieht, was die Status heißen, wer zustellt und wie du iMile erreichst.
 slug: imile-sendungsverfolgung
 published: 2026-10-22
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 iMile ist ein Zustelldienst für den Onlinehandel, 2017 in Dubai gegründet. Er bringt Pakete über Grenzen, auch aus China, und hat Gesellschaften in Deutschland (Düsseldorf) und Österreich (Wien). Verfolge die Nummer auf iMiles [Tracking-Seite](https://www.imile.com/en/track) oder oben im Feld. Die Nummer bekommst du vom Shop, in den Versanddaten deiner Bestellung.
@@ -99,9 +99,9 @@ Bei Fragen zur Bestellung ist der Shop meist schneller: Er hat iMile beauftragt 
 
 [Peek](/) erkennt `IM0601…`-Nummern sofort als iMile. Bei anderen IM-Nummern mit 14 Ziffern und bei 13-stelligen Nummern, die auch andere Paketdienste nutzen, reicht die Form allein nicht: Füg sie trotzdem ein, Peek verfolgt mehr als 3.500 Paketdienste. Beim Hinzufügen fragt Peek die Paketdienste mit solchen Nummern, bei datumsförmigen Nummern mit 6 vorne iMile als einen der ersten, und zeigt „iMile hat dieses Paket.“, wenn iMile sie kennt. Antwortet noch keiner oder landet sie beim falschen Dienst, wähl iMile mit „Ändern“. Links von iMiles Tracking-Seite (`/track?waybillNo=`) funktionieren auch.
 
-Peek fragt iMile auf Englisch ab. Es zeigt den Status, den Verlauf mit dem Zentrum oder Ort jedes Scans auf einer Karte und das Zielland, mit den Uhrzeiten dieses Landes. Bringt Cainiao das Paket für iMile aus China, setzt Peek Cainiaos frühere Scans davor: Abholung, Sortierung, Export, Flug und Import.
+Peek fragt iMile auf Englisch ab. Es zeigt den Status, den Verlauf mit dem Zentrum oder Ort jedes Scans auf einer Karte und das Zielland, mit Uhrzeiten, die es nach der Uhr dieses Landes liest und in der Zeitzone deines Geräts zeigt. Bringt Cainiao das Paket für iMile aus China, setzt Peek Cainiaos frühere Scans davor: Abholung, Sortierung, Export, Flug und Import.
 
-Peek zeigt kein voraussichtliches Lieferdatum, keinen geplanten Flug, keinen Zustellnachweis, keine Unterschrift, keine Kontakte und keine Zahlungsdaten von iMile und entfernt die Telefonnummer des Fahrers aus den Scans. Status wie „In Zustellung“ oder „Zustellversuch“ sind Peeks eigene; die Zeilen im Verlauf bleiben so, wie iMile sie schreibt. Peek prüft tagsüber alle 10 Minuten, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, und benachrichtigt dich mit „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. iMile oder den Shop kann Peek nicht für dich kontaktieren.
+Peek zeigt kein voraussichtliches Lieferdatum, keinen geplanten Flug, keinen Zustellnachweis, keine Unterschrift, keine Kontakte und keine Zahlungsdaten von iMile und entfernt die Telefonnummer des Fahrers aus den Scans. Status wie „In Zustellung“ oder „Zustellversuch“ sind Peeks eigene; die Zeilen im Verlauf bleiben so, wie iMile sie schreibt. Peek prüft tagsüber alle 10 Minuten, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und benachrichtigt dich mit „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. iMile oder den Shop kann Peek nicht für dich kontaktieren.
 
 ## Fragen zur iMile Sendungsverfolgung
 

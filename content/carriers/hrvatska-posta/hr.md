@@ -3,7 +3,7 @@ title: Praćenje pošiljke Hrvatske pošte: statusi, rokovi i kontakt
 description: Prati pošiljku Hrvatske pošte: kako izgleda prijamni broj, što znače statusi, koliko pošiljka čeka u uredu ili paketomatu i kako doći do Kontakt centra.
 slug: hrvatska-posta-pracenje-posiljke
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 Hrvatska pošta je nacionalni poštanski operater, a za brzu dostavu paketa ima i uslugu Paket24. Pošiljku pratiš na [posiljka.posta.hr](https://posiljka.posta.hr/hr/tracking) upisom prijamnog broja pošiljke, a broj možeš zalijepiti i u polje iznad. Broj dobiješ od pošiljatelja, primjerice u e-poruci web-trgovine ili na stranici narudžbe, a nalazi se i u službenim obavijestima Hrvatske pošte.
@@ -91,7 +91,7 @@ Poštanske urede i poštare ne možeš nazvati izravno.
 
 Poveznicu s posiljka.posta.hr u kojoj je broj Peek uvijek pripisuje Hrvatskoj pošti. Druge bar kodove Hrvatske pošte, poput onih koji počinju s `3S`, 12-znamenkastih brojeva ili 20-znamenkastih SSCC kodova, Peek ne prepoznaje kad ih upišeš: pod "Change" potraži Hrvatsku poštu. Isto vrijedi za pošiljku iz inozemstva: Peek je vodi kod strane pošte i sam je ne prebacuje Hrvatskoj pošti, iako je Hrvatska pošta prati pod istim brojem.
 
-Peek prikazuje povijest Hrvatske pošte na engleskom, onako kako je ispisuje njezina engleska stranica: `Pošiljka je uručena primatelju` u Peeku je "Item delivered", a `Pošiljku možete preuzeti u poštanskom uredu` "Item can be picked up at the Post Office". Korake u hrvatskim uredima i paketomatima datira po hrvatskom vremenu, a korake u inozemstvu, kad prepozna zemlju ureda, po tamošnjem vremenu. Uz korake vidiš ured ili paketomat bez poštanskog broja, a uz pošiljku masu i mjesto gdje te čeka. Očekivanog dana dostave nema. Danju Peek provjerava pošiljku svakih 10 minuta, a svake 2 minute kad je u dostavi, noću svaki sat, i može ti javiti kad se status promijeni.
+Peek prikazuje povijest Hrvatske pošte na engleskom, onako kako je ispisuje njezina engleska stranica: `Pošiljka je uručena primatelju` u Peeku je "Item delivered", a `Pošiljku možete preuzeti u poštanskom uredu` "Item can be picked up at the Post Office". Korake u hrvatskim uredima i paketomatima datira po hrvatskom vremenu, a korake u inozemstvu, kad prepozna zemlju ureda, po tamošnjem vremenu. Uz korake vidiš ured ili paketomat bez poštanskog broja, a uz pošiljku masu i mjesto gdje te čeka. Očekivanog dana dostave nema. Danju Peek provjerava pošiljku svakih 10 minuta, a svake 2 minute kad je u dostavi, noću svakih sat ili dva, i može ti javiti kad se status promijeni.
 
 ## Pitanja o praćenju pošiljaka Hrvatske pošte
 

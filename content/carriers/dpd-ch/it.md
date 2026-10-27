@@ -3,7 +3,7 @@ title: DPD Svizzera tracking: stati, giacenza e contatti
 description: Segui un pacco DPD in Ticino e nel resto della Svizzera: il numero di 14 cifre, cosa vogliono dire gli stati, la giacenza, la consegna mancata e i contatti.
 slug: dpd-svizzera-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 DPD Svizzera è DPD (Schweiz) AG di Buchs ZH, un corriere pacchi della rete Geopost con oltre 1'000 DPD Pickup Location in tutta la Svizzera. Per seguire un pacco inserisci il suo numero di 14 cifre su [myDPD](https://www.dpdgroup.com/ch/mydpd/), il portale di DPD che esiste anche in italiano, oppure incollalo nel box qui sopra. Di solito il numero arriva per e-mail, e se DPD non ti trova è anche sulla cartolina informativa che lascia nella bucalettere.
@@ -83,7 +83,7 @@ Il campo «Codice postale di consegna» è facoltativo e accetta il formato di q
 
 Quando il pacco è `Ready for collection`, il negozio viene nominato se DPD lo indica, con l'indirizzo di solito solo se hai dato l'NPA. Gli stati restano nell'inglese di DPD, tranne il semplice `Delivered`, che compare come «Consegnato». Il tuo nome, il tuo indirizzo e il link alla prova di consegna non vengono conservati.
 
-Peek controlla il pacco ogni 10 minuti di giorno, ogni 2 quando è in consegna e ogni ora di notte, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Non segue il pacco presso un altro corriere e non può contattare DPD al posto tuo.
+Peek controlla il pacco ogni 10 minuti di giorno, ogni 2 quando è in consegna e di notte ogni una o due ore, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Non segue il pacco presso un altro corriere e non può contattare DPD al posto tuo.
 
 ## Domande sul tracking DPD Svizzera
 

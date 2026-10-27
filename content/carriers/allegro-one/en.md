@@ -3,7 +3,7 @@ title: Allegro One tracking: One Box, One Punkt and One Kurier
 description: Track an Allegro One parcel in English: where the number is, what each status means, One Box pickup codes and deadlines, delays, complaints and contacts.
 slug: allegro-one-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Allegro One is the Polish marketplace Allegro's own delivery network: Allegro One Box parcel lockers, Allegro One Punkt pickup points and Allegro One Kurier home delivery, all part of Allegro Delivery. Track a parcel in Allegro under "Moje przesyłki" (My parcels) or on Allegro's tracking page, or paste the number in the box above. The number is in your purchase details, in Allegro's email after you buy and in the app.
@@ -90,7 +90,7 @@ Allegro advises not to open links or attachments in a doubtful email or SMS unti
 
 It reads Allegro's tracking in English and shows the wordings above as written, with the history and the delivery time. Allegro gives no places, so there's nothing to pin on the map, and no pickup point name, expected delivery, weight or sender. For `AD` numbers Allegro's tracking has listed no scans so far, so Peek may show only what universal tracking services give.
 
-It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps only, or on delivery day only.
+It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only, or on delivery day only.
 
 ## Questions about Allegro One tracking
 

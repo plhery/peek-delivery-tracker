@@ -3,7 +3,7 @@ title: Spåra Matkahuolto-paket: statusar, hämtning och kundtjänst
 description: Spåra ditt Matkahuolto-paket: var du hittar försändelsekoden, vad statusarna betyder, hur länge paketet väntar på dig och hur du når Matkahuoltos kundtjänst.
 slug: matkahuolto-spara-paket
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Matkahuolto kör paket till serviceställen, paketautomater och hem till dörren i hela Finland. Du spårar paketet i [Matkahuoltos uppföljning](https://www.matkahuolto.fi/uppfoljning) eller i appen Paketit med försändelsekoden, eller så klistrar du in koden i fältet ovanför.
@@ -106,7 +106,7 @@ Enligt Matkahuoltos svenska sidor den 26 oktober 2026:
 
 För en SSCC-kod på 18 eller 20 siffror med Finlands `64` eller Sveriges `73` efter den första siffran (efter `00` och en siffra i den långa formen) frågar Peek Matkahuolto och andra transportörer som koden passar. Känner också [Posti](carrier:posti) (`64`) eller [Bring](carrier:bring) (`73`) till koden väljer Peek den, och känner till exempel [PostNord](carrier:postnord) också till den väljer du själv. Om andra koder frågar Peek inte Matkahuolto. Klistra in koden ändå: Peek följer fler än 3 500 transportörer, och du byter till Matkahuolto med "Change". En länk från Matkahuoltos uppföljning med `parcelNumber=` lägger Peek hos Matkahuolto.
 
-Peek visar Matkahuoltos engelska händelser med ort och finsk tid, tjänstens namn och, när paketet väntar på dig, ställets namn och gatuadress. Beräknad leveranstid, vikt och avsändare får Peek inte, och sista hämtningsdagen läser Peek inte ut separat: den står i statusraden och i avin. Har du aviseringar på, eller har du tittat på paketet den senaste timmen, kollar Peek det på dagtid var tionde minut, varannan minut den dag det körs ut till ditt serviceställe och på natten en gång i timmen. Aviseringarna ställer du in på "All tracking updates", "Important only" eller "Delivery day only". Peek följer inte ett paket vidare från FedEx eller andra till Matkahuolto och kan inte kontakta Matkahuolto eller webbutiken åt dig.
+Peek visar Matkahuoltos engelska händelser med ort och tid, tjänstens namn och, när paketet väntar på dig, ställets namn och gatuadress. Peek läser tiderna som finsk tid och visar dem i din enhets tidszon. Beräknad leveranstid, vikt och avsändare får Peek inte, och sista hämtningsdagen läser Peek inte ut separat: den står i statusraden och i avin. Har du aviseringar på, eller har du tittat på paketet den senaste timmen, kollar Peek det på dagtid var tionde minut, varannan minut den dag det körs ut till ditt serviceställe och på natten var eller varannan timme. Aviseringarna ställer du in på "All tracking updates", "Important only" eller "Delivery day only". Peek följer inte ett paket vidare från FedEx eller andra till Matkahuolto och kan inte kontakta Matkahuolto eller webbutiken åt dig.
 
 ## Frågor om att spåra Matkahuolto-paket
 

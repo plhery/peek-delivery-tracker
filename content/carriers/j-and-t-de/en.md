@@ -3,7 +3,7 @@ title: J&T Express Germany tracking: statuses, neighbours, contact
 description: Track a J&T Express parcel in Germany: what a JTDE number looks like, what the statuses mean, which neighbour took it and how to reach J&T's hotline.
 slug: jt-express-germany-tracking
 published: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-27
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt am Main) delivers parcels across Germany for J&T Express, the parcel group founded in Indonesia in 2015 and listed in Hong Kong. Track a parcel on [jtexpress.de/tracking](https://www.jtexpress.de/tracking) or paste its number in the box above. The number starts with `JTDE`, and the shop that sent your order has it: look in your order details or its shipping email.
@@ -77,7 +77,7 @@ J&T Express Germany's channels, as read on [its contact page](https://www.jtexpr
 
 Peek reads J&T's own tracker and shows the status, each scan at its exact time and the delivery time. Scans show in J&T's English, even if you read them in German on jtexpress.de. Peek counts the loading line as out for delivery and `Returns have begun` as a return, so the parcel's status reads "Out for delivery" or "Returned to sender". On the delivered line it keeps the delivery type, such as `Left with neighbor`, without brackets, and drops the hotline sentence. J&T gives no places, expected delivery day or weight, so the map stays empty. Peek doesn't open the neighbour details behind J&T's postcode check, and on a very long history it keeps the newest 100 scans.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps only or delivery day only. It can't contact J&T or the shop for you.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only. It can't contact J&T or the shop for you.
 
 ## Questions about J&T Express Germany tracking
 

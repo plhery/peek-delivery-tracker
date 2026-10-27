@@ -3,7 +3,7 @@ title: TNT tracking: lettera di vettura, stati e giacenza
 description: Tracking TNT in Italia: dove trovi la lettera di vettura, cosa vogliono dire gli stati, lasciato avviso, fermo deposito, reclami e numeri da chiamare.
 slug: tnt-italy-tracking
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 In Italia TNT è oggi un marchio di FedEx Express Italy S.r.l., la società unica in cui TNT Italia e FedEx Italia si sono fuse il 1° dicembre 2022. Le spedizioni nazionali viaggiano con una lettera di vettura di due lettere e otto cifre, come `NA00000000`. Il pacco lo segui sulla [pagina di tracking di tnt.it](https://www.tnt.it/tracking/Tracking.do), che porta il nome FedEx. La lettera di vettura la trovi nella conferma di spedizione del mittente e sulla cartolina «Lasciato avviso», se il corriere passa e non ti trova.
@@ -81,7 +81,7 @@ Secondo le pagine di contatto di TNT Italia, al 23 ottobre 2026:
 
 Incolla la lettera di vettura come due lettere e otto cifre, senza trattino né ultima cifra. Con questa forma [Peek](/) interroga TNT Italy, e anche DHL eCommerce Iberia se il numero finisce per 0, e scrive «TNT Italy ha questo pacco.» quando TNT lo conosce. Se TNT Italy non compare, sceglilo con «Cambia», o con «Cambia corriere» sul pacco. Se incolli un link di tracking di tnt.it con `consigNos=`, Peek riconosce subito TNT Italy.
 
-Peek legge il tracking di tnt.it, quindi le scansioni restano nelle parole di TNT. Mostra lo stato, la cronologia con la filiale che tnt.it indica per una scansione e l'ora di consegna. Controlla ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e ogni ora di notte, e ti avvisa con «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna». Data prevista di consegna, origine e destinazione, numero di colli, riferimento del mittente e firma restano su tnt.it. Peek non segue una spedizione che tnt.it rimanda al sito FedEx, e non passa da solo a una nuova lettera di vettura: aggiungila tu. Non può contattare TNT o il mittente al posto tuo.
+Peek legge il tracking di tnt.it, quindi le scansioni restano nelle parole di TNT. Mostra lo stato, la cronologia con la filiale che tnt.it indica per una scansione e l'ora di consegna. Controlla ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e di notte ogni una o due ore, e ti avvisa con «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna». Data prevista di consegna, origine e destinazione, numero di colli, riferimento del mittente e firma restano su tnt.it. Peek non segue una spedizione che tnt.it rimanda al sito FedEx, e non passa da solo a una nuova lettera di vettura: aggiungila tu. Non può contattare TNT o il mittente al posto tuo.
 
 ## Domande sul tracking TNT
 

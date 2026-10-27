@@ -3,7 +3,7 @@ title: Paack tracking: order number, postcode and delivery slots
 description: Track a Paack delivery in Spain, Portugal, France or Italy: where the order number is, why you need the postcode, what each status means and how to reach Paack.
 slug: paack-tracking
 published: 2026-10-11
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Paack delivers online shops' orders to homes in Spain, Portugal, France and Italy, in scheduled time slots. To track a parcel, enter the order number and the delivery postcode on [Paack's tracking page](https://paack.co/shipments/tracking), or paste the number in the box above and pick Paack. Both are at the end of Paack's email; the number is also in the shop's messages.
@@ -83,7 +83,7 @@ Paack's help gives no number for Italy or the UK.
 
 Then fill in "Delivery postcode". It's marked optional because a `PK` number needs none, but Paack shows other orders only with it, and a postcode inside a link isn't used. Paack answers only when both match, so a wrong pair looks like an unknown number. The postcode goes to Paack and, when needed, to tracking services. Peek writes the number in capitals and drops spaces, dots and hyphens, while Paack asks for it exactly as written: if nothing turns up, try Paack's page too.
 
-You see the status, the history and the expected day and slot, on the delivery address's clock (Canary Islands time for postcodes starting 35 or 38). At a PaackGo Point, Peek should show its name and address (not yet seen on a real parcel), never the pickup code, QR code or deadline: keep Paack's email. Steps appear in Peek's own words; a PaackGo pickup shows as "Delivered". Paack gives no place for its scans and names no other carrier, so Peek follows none. The shop's name and your name and address are dropped. Checks run every 10 minutes by day, every 2 once out for delivery, and hourly overnight, with notifications for every scan, important steps or delivery day only.
+You see the status, the history and the expected day and slot, on the delivery address's clock (Canary Islands time for postcodes starting 35 or 38). At a PaackGo Point, Peek should show its name and address (not yet seen on a real parcel), never the pickup code, QR code or deadline: keep Paack's email. Steps appear in Peek's own words; a PaackGo pickup shows as "Delivered". Paack gives no place for its scans and names no other carrier, so Peek follows none. The shop's name and your name and address are dropped. Checks run every 10 minutes by day, every 2 once out for delivery, and every hour or two overnight, with notifications for every scan, important steps or delivery day only.
 
 ## Questions about Paack tracking
 

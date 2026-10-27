@@ -3,7 +3,7 @@ title: YunExpress Sendungsverfolgung: Status, Zusteller, Kontakt
 description: YunExpress-Paket aus China verfolgen: die YT-Nummer, was die englischen Status bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, wen du fragst.
 slug: yunexpress-sendungsverfolgung
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 YunExpress, oft auch Yun Express geschrieben, ist ein Logistikunternehmen aus Shenzhen, das für Onlinehändler kleine Pakete aus China verschickt, auch für Verkäufer auf Amazon, Temu oder SHEIN. Für die Sendungsverfolgung gibst du die Nummer, die mit YT beginnt, auf [yuntrack.com](https://www.yuntrack.com/) ein, der Tracking-Seite von YunExpress, oder fügst sie oben ins Feld ein. Eine SMS oder E-Mail an Empfänger beschreibt YunExpress nirgends: Die Nummer steht in der Versand-E-Mail des Shops oder in deiner Bestellübersicht.
@@ -77,7 +77,7 @@ Das Feld „Feedback“ auf Yuntrack betrifft die Website, nicht dein Paket. Fan
 
 ## YunExpress-Paket mit Peek verfolgen
 
-[Peek](/) erkennt YT mit 16 Ziffern als YunExpress und nimmt auch Links von yuntrack.com an. Es schaut tagsüber alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen, wenn sich der Status ändert. Du siehst Status, Verlauf, den Ort jedes Scans und die Zustellzeit.
+[Peek](/) erkennt YT mit 16 Ziffern als YunExpress und nimmt auch Links von yuntrack.com an. Es schaut tagsüber alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen, wenn sich der Status ändert. Du siehst Status, Verlauf, den Ort jedes Scans und die Zustellzeit.
 
 Nennt YunExpress die Nummer des Paketdiensts vor Ort in einer Form, die Peek kennt, verfolgt Peek das Paket dort weiter, allerdings nicht bei jedem Paket. Ein voraussichtliches Lieferdatum oder eine Abholstelle zeigt es bei YunExpress-Paketen nicht, die Bestellnummern des Händlers lässt es weg, und YunExpress kontaktieren oder etwas reklamieren kann es nicht für dich.
 

@@ -3,7 +3,7 @@ title: TIPSA rastreio: número, estados, agências e contactos
 description: Rastreio TIPSA em Portugal: o número de 22 algarismos, os estados em espanhol explicados, entregas falhadas, levantamento na agência e contactos.
 slug: tipsa-rastreio
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 A TIPSA (Transporte Integral de Paquetería) é uma transportadora espanhola de encomendas urgentes, da rede Geopost, com agências em Espanha, Portugal e Andorra. Para seguir a encomenda, escreve o número de 22 algarismos no [localizador de envios](https://www.tip-sa.com/pt/localizador-envios) do site português da TIPSA ou cola-o na caixa acima. Quem te dá o número é o remetente, normalmente a loja onde compraste.
@@ -113,7 +113,7 @@ Um albarán de 10 algarismos não dá para seguir na TIPSA, nem com «Alterar» 
 
 O Peek mostra o estado, o histórico com a localidade de cada leitura no mapa, o remetente quando a TIPSA não o esconde com asteriscos e o «Peso». Lê todas as horas como hora de Madrid, também as das agências portuguesas. Não mostra o destinatário, a morada, a referência, o número de volumes, o comprovativo de entrega nem a data prevista de entrega, e não segue a encomenda se ela passar para outra transportadora.
 
-Consulta a TIPSA de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda está em `REPARTO` («Em distribuição») e de hora a hora à noite, e pode avisar-te de todas as atualizações, só das importantes ou só no dia da entrega. Com `DISPONIBLE` ou `Pendiente de recoger en Tipsa`, mostra «Pronta para levantamento». Não muda a entrega nem reclama por ti.
+Consulta a TIPSA de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda está em `REPARTO` («Em distribuição») e de hora a hora ou de duas em duas horas à noite, e pode avisar-te de todas as atualizações, só das importantes ou só no dia da entrega. Com `DISPONIBLE` ou `Pendiente de recoger en Tipsa`, mostra «Pronta para levantamento». Não muda a entrega nem reclama por ti.
 
 ## Perguntas sobre o rastreio TIPSA
 

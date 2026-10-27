@@ -3,7 +3,7 @@ title: Urmărire colet Packeta: numărul Z, statusuri și Z-BOX
 description: Urmărește un colet Packeta: unde găsești numărul care începe cu Z, ce înseamnă statusurile, cât stă coletul la punctul pick-up sau în Z-BOX și cum faci reclamație.
 slug: packeta-urmarire-colet
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Packeta, membră a Packeta Group, e prezentă în România din 2017 și livrează coletele magazinelor online la punctele sale pick-up, în lockerele Z-BOX sau la adresă. Coletul îl urmărești pe [pagina de urmărire Packeta](https://tracking.packeta.com/ro/), în aplicația Packeta sau în căsuța de mai sus. Numărul de urmărire începe cu `Z`. Packeta ți-l trimite pe e-mail imediat ce magazinul îi predă coletul; îl mai găsești în SMS sau în aplicație.
@@ -99,7 +99,7 @@ Pe packeta.ro, la 26 octombrie 2026:
 
 Peek îți arată cei mai noi 20 de pași, magazinul care a trimis coletul, ora livrării și adresa punctului pick-up sau a Z-BOX-ului spre care merge coletul (nu și la livrarea la adresă sau la retur). Depozitul sau punctul numit într-un pas apare ca loc. Peek ia orele Packeta drept ora Pragăi, așa că scanările din depozitele din România pot ieși decalate cu o oră. Packeta nu dă o dată estimată de livrare, deci nici Peek. Numele, adresa și semnătura ta nu le păstrează.
 
-Dacă un pas trimite la urmărirea unui transportator partener pe care Peek îl cunoaște, Peek arată cine livrează coletul și, dacă îl poate urmări direct, trece la el de îndată ce partenerul arată pași noi. Ziua, Peek verifică coletul la fiecare 10 minute, noaptea o dată pe oră, și te poate anunța când se schimbă ceva. Nu poate însă contacta Packeta sau magazinul în locul tău.
+Dacă un pas trimite la urmărirea unui transportator partener pe care Peek îl cunoaște, Peek arată cine livrează coletul și, dacă îl poate urmări direct, trece la el de îndată ce partenerul arată pași noi. Ziua, Peek verifică coletul la fiecare 10 minute, noaptea o dată la una-două ore, și te poate anunța când se schimbă ceva. Nu poate însă contacta Packeta sau magazinul în locul tău.
 
 ## Întrebări despre urmărirea Packeta
 

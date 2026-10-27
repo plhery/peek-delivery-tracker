@@ -74,7 +74,7 @@ As listed on 10 October 2026; none is in English.
 
 An 8-digit number also needs the "Delivery postcode": type the number alone, then the postcode in its field. Peek compares it with the recipient's as typed, in any country's format, but a Portuguese one needs all seven digits (1234-567, hyphen optional). A wrong one reads as not found. It's sent to Mondial Relay and, when needed, to tracking services.
 
-Peek shows Mondial Relay's French wordings as written and each scan's logistics site on a map, plus the expected day, delivery time and destination country when given. While the parcel waits, it shows the Point Relais or locker's name and address, never your pickup code or name. It checks every 10 minutes by day, every few minutes once out for delivery, and hourly overnight, and can notify you of each change. Peek doesn't follow parcels to other carriers. It reads InPost Spain's `FV` numbers on inpost.es, but can't promise to find InPost's other Spanish or Portuguese parcels.
+Peek shows Mondial Relay's French wordings as written and each scan's logistics site on a map, plus the expected day, delivery time and destination country when given. While the parcel waits, it shows the Point Relais or locker's name and address, never your pickup code or name. It checks every 10 minutes by day, every few minutes once out for delivery, and every hour or two overnight, and can notify you of each change. Peek doesn't follow parcels to other carriers. It reads InPost Spain's `FV` numbers on inpost.es, but can't promise to find InPost's other Spanish or Portuguese parcels.
 
 ## Questions about Mondial Relay tracking
 

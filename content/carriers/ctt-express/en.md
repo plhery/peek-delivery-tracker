@@ -3,7 +3,7 @@ title: CTT Express tracking: statuses in English and contact
 description: Track a CTT Express parcel in Spain or Portugal: the 22-digit number, its Spanish statuses in plain English, Collectt points, missed deliveries and who to call.
 slug: ctt-express-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 CTT Express is the Spanish parcel company of Portugal's CTT group, formerly Tourline Express, delivering across Spain and Portugal. Type your number into the [localizador](https://www.cttexpress.com/localizador-de-envios/) on cttexpress.com, or paste it in the box above. The number comes from the sender, usually the shop, and CTT Express sends it to you by SMS or email.
@@ -81,7 +81,7 @@ As CTT Express's and CTT's sites listed them on 11 October 2026 (none in English
 
 Paste a number in the first two shapes above and [Peek](/) names CTT Express at once, the 25-digit form of a `00001000` number included. For 22 digits starting `00001000`, Peek asks TIPSA, Austrian Post and CTT Express; if it can't settle on one, pick with "Change". A link from CTT Express's tracking page works too.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps or delivery day only. It shows the status, the history (without places, as CTT Express gives none), the expected delivery day while the parcel is moving, the weight, the delivery time and, when another post handed the parcel over, its international number. Scan texts stay in CTT Express's Spanish, such as `Entregado`. At a Collectt point Peek shows `Disponible en Punto Collectt Express` but not the point's name or address. Multi-parcel shipments are tracked through universal tracking services.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps or delivery day only. It shows the status, the history (without places, as CTT Express gives none), the expected delivery day while the parcel is moving, the weight, the delivery time and, when another post handed the parcel over, its international number. Scan texts stay in CTT Express's Spanish, such as `Entregado`. At a Collectt point Peek shows `Disponible en Punto Collectt Express` but not the point's name or address. Multi-parcel shipments are tracked through universal tracking services.
 
 ## Questions about CTT Express tracking
 

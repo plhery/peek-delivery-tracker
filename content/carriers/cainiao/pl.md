@@ -3,7 +3,7 @@ title: Cainiao śledzenie przesyłki: numery, statusy i kontakt
 description: Paczka z AliExpress wysłana przez Cainiao: jakie numery są Cainiao, co znaczą angielskie statusy, co z doręczeniem w Polsce i gdzie pytać, gdy utknie.
 slug: cainiao-sledzenie
 published: 2026-10-11
-updated: 2026-10-20
+updated: 2026-10-27
 ---
 
 Cainiao to grupa logistyczna Alibaby: wysyła za granicę paczki sprzedawców z platform takich jak AliExpress, a jej strona śledzenia, [global.cainiao.com](https://global.cainiao.com/), pokazuje tylko przesyłki Cainiao i AliExpress. Wpisz numer na global.cainiao.com albo wklej go w pole na samej górze tej strony. Na AliExpress numer jest przy zamówieniu: pomoc AliExpress, także w wersji polskiej, opisuje to po angielsku jako „My Orders”, potem zamówienie i „Tracking”.
@@ -82,7 +82,7 @@ Numery z chińskiej strony Cainiao są dla klientów w Chinach oraz dla sprzedaw
 
 Czasem AliExpress od razu podaje numer przewoźnika, który doręczy paczkę, na przykład numer SDA przy paczce do Włoch, choć paczka jest jeszcze w Cainiao. Przy niektórych takich kształtach Peek pyta Cainiao obok tego przewoźnika. Jeśli obaj znają numer, Peek zapisuje paczkę pod „AliExpress / Cainiao”, gdzie są skany sprzed granicy, i na ostatni odcinek pyta też przewoźnika doręczającego: jego skany trafiają do historii, gdy tylko zgłosi on paczkę.
 
-Sprawdza śledzenie w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu, w nocy zaś co godzinę, pokazuje każdy skan na mapie i powiadomi Cię o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Widzisz status i historię, miejsce skanu, gdy Cainiao je podaje, planowaną dostawę jako przedział dni, gdy Cainiao go podaje, i godzinę doręczenia. Nie skontaktuje się za Ciebie z Cainiao ani nie złoży reklamacji.
+Sprawdza śledzenie w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu, w nocy zaś co godzinę lub dwie, pokazuje każdy skan na mapie i powiadomi Cię o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Widzisz status i historię, miejsce skanu, gdy Cainiao je podaje, planowaną dostawę jako przedział dni, gdy Cainiao go podaje, i godzinę doręczenia. Nie skontaktuje się za Ciebie z Cainiao ani nie złoży reklamacji.
 
 ## Pytania o śledzenie Cainiao
 

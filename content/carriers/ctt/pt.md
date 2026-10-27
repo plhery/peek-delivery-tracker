@@ -3,7 +3,7 @@ title: CTT rastreio: números, estados, levantamento e contactos
 description: Rastreio CTT: onde está o código de envio, o que quer dizer cada estado, prazos para levantar, taxas de alfândega, reclamações e contactos dos CTT.
 slug: ctt-rastreio
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Os CTT – Correios de Portugal são o correio nacional, com um serviço expresso, o CTT Expresso. Para seguir uma encomenda, escreve o código de envio no «Seguir objeto» do [ctt.pt](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt) ou na app CTT, ou cola-o na caixa no topo desta página. O código chega-te por SMS ou email dos CTT, num aviso em papel na caixa do correio, ou pelo remetente.
@@ -90,11 +90,11 @@ Os canais dos CTT para particulares, lidos a 11 de outubro de 2026:
 
 O [Peek](/) mostra os CTT como «CTT Portugal». Reconhece logo os códigos de envio internacionais dos CTT (duas letras, nove algarismos, `PT`, algarismo de controlo válido) e lê-os no seguimento dos CTT; as ligações do ctt.pt com `objects=` também servem. Com um algarismo errado, o controlo deixa de bater certo e o Peek sugere a Chronopost em vez dos CTT: confirma o número ou escolhe com «Alterar». Outros códigos dos CTT não são lidos nos CTT; aí o Peek recorre a serviços universais de seguimento.
 
-Mostra o estado, o código de estado dos CTT e as 20 leituras mais recentes num mapa, com um local aproximado (o centro ou o ponto). Não guarda o remetente nem o destinatário, nem mostra uma data de entrega prevista. As horas são as de Lisboa, as dos Açores para moradas e ilhas dos Açores, e as do país de destino para leituras de um correio estrangeiro.
+Mostra o estado, o código de estado dos CTT e as 20 leituras mais recentes num mapa, com um local aproximado (o centro ou o ponto). Não guarda o remetente nem o destinatário, nem mostra uma data de entrega prevista. As horas são lidas na hora de Lisboa, na dos Açores para moradas e ilhas dos Açores e na do país de destino para leituras de um correio estrangeiro, e mostradas no fuso horário do teu dispositivo.
 
 Os números de 22 e 25 algarismos (`00`, quatro algarismos, `00` e 14 algarismos, mais `001` nos de 25) vão para a CTT Express, que o Peek lista à parte, mesmo quando é o Seguir objeto que os segue. Para esses, mostra o histórico sem locais, o dia de entrega previsto, o peso, a hora de entrega e os estados em espanhol, como `El envío fue entregado correctamente`.
 
-Verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora à noite, e envia-te notificações de todas as atualizações, só das importantes ou «Só no dia da entrega». Não consegue acelerar a encomenda nem reclamar por ti.
+Verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e envia-te notificações de todas as atualizações, só das importantes ou «Só no dia da entrega». Não consegue acelerar a encomenda nem reclamar por ti.
 
 ## Perguntas sobre o rastreio CTT
 

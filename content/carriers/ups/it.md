@@ -3,7 +3,7 @@ title: UPS tracking: stato del pacco, consegna e contatti
 description: Tracking UPS: dove trovi il numero 1Z, cosa vogliono dire stati come «Eccezione», come funzionano InfoNotice e UPS Access Point e come contatti UPS Italia.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 UPS (United Parcel Service) è il corriere espresso americano con cui spediscono molti negozi, in Italia, in Ticino e dall'estero. Per seguire il pacco cerca il numero su ups.com, apri il link nelle e-mail di UPS oppure incollalo nel box qui sopra. Il numero è sull'etichetta e nei messaggi del negozio e di UPS, e di solito inizia con `1Z`.
@@ -83,7 +83,7 @@ Così erano indicati il 13 ottobre 2026 sulle pagine di contatto di UPS:
 
 [Peek](/) riconosce subito UPS da un numero `1Z` la cui ultima cifra supera il controllo di UPS. Se non lo supera, propone solo UPS, che lo rifiuta come sbagliato. Da UPS cerca solo numeri `1Z`: se con «Cambia corriere» scegli UPS per un numero come `H1234567890` (una lettera e 10 cifre) o per le altre forme della tabella, rispondono solo servizi di tracking. Puoi incollare i link di ups.com con un numero e qualsiasi link che contenga un numero `1Z`.
 
-Per leggere i dati, il suo server apre la pagina di tracciamento di UPS in un browser, ogni 10 minuti di giorno, ogni 5 minuti quando il pacco è in consegna e ogni ora di notte. Se UPS rifiuta la richiesta, subentrano servizi di tracking; se riesce a leggere solo il testo della pagina, mostra lo stato e la cronologia arriva da quei servizi. Vedi lo stato, ogni scansione con luogo e ora esatta su una mappa, il giorno di consegna previsto (mai una fascia oraria), l'ora di consegna, il servizio, il paese di destinazione e, finché il pacco aspetta, nome e indirizzo dell'Access Point. Le notifiche le scegli tu: ogni scansione, solo i passaggi importanti o «Solo giorno di consegna». Non vedi chi ha firmato, il tuo indirizzo, la prova di consegna, il punto dove è stato lasciato né la foto. Peso e mittente UPS non li fornisce.
+Per leggere i dati, il suo server apre la pagina di tracciamento di UPS in un browser, ogni 10 minuti di giorno, ogni 5 minuti quando il pacco è in consegna e di notte ogni una o due ore. Se UPS rifiuta la richiesta, subentrano servizi di tracking; se riesce a leggere solo il testo della pagina, mostra lo stato e la cronologia arriva da quei servizi. Vedi lo stato, ogni scansione con luogo e ora esatta su una mappa, il giorno di consegna previsto (mai una fascia oraria), l'ora di consegna, il servizio, il paese di destinazione e, finché il pacco aspetta, nome e indirizzo dell'Access Point. Le notifiche le scegli tu: ogni scansione, solo i passaggi importanti o «Solo giorno di consegna». Non vedi chi ha firmato, il tuo indirizzo, la prova di consegna, il punto dove è stato lasciato né la foto. Peso e mittente UPS non li fornisce.
 
 Qualunque sia la lingua di Peek, le scansioni compaiono come le scrive UPS in inglese: la consegna si legge «DELIVERED». Se negli Stati Uniti UPS affida un pacco Ground Saver al servizio postale americano e ne indica il numero, il pacco viene seguito su USPS appena USPS mostra progressi («Consegna con USPS»). Modifiche della consegna e reclami passano solo da UPS o dal mittente.
 

@@ -3,7 +3,7 @@ title: DHL eCommerce pakket volgen: status, ServicePoint, klacht
 description: Volg je DHL eCommerce-pakket (vroeger DHL Parcel) in Nederland of België: het JVGL-nummer, wat de statussen betekenen, ServicePoints, klachten en contact.
 slug: dhl-ecommerce-pakket-volgen
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 DHL eCommerce is de nieuwe naam van DHL Parcel, de pakketdienst die in Nederland en België bestellingen van webshops bezorgt. Je volgt je pakket op [dhlecommerce.nl](https://www.dhlecommerce.nl/nl/consument/track-en-trace), in België op [dhlecommerce.be](https://www.dhlecommerce.be/nl/particulieren/track-trace), of je plakt het zendingsnummer in het vak hierboven. Dat nummer krijg je van de webshop of van DHL.
@@ -96,7 +96,7 @@ Zo stond het op 26 oktober 2026 op de Nederlandstalige pagina's van DHL eCommerc
 
 Peek vraagt het pakket zonder postcode op bij DHL, dus zie je geen ontvanger, adres, handtekening of afhaalpunt. Je ziet de status, de scans (zonder plaats), de verwachte bezorging (een tijdvak of moment, als DHL er een plant) en het tijdstip van bezorging. Peek toont de scans met de Engelse teksten van DHL, zoals `Delivered at DHL ServicePoint` voor `Bezorgd bij DHL ServicePoint`, en zet er een eigen kop boven, zoals 'Ready for pickup' of 'Delivered'. Bij een vertraging (`Delivery interrupted, delivery date changed`) staat er 'Needs attention', ook al hoef je volgens DHL meestal alleen te wachten.
 
-Overdag kijkt Peek elke 10 minuten, en elke 2 minuten zodra de bezorger onderweg is (met een tijdvak pas vanaf een halfuur ervoor). 's Nachts, en na 48 uur zonder nieuwe scan, kijkt Peek elk uur. Meldingen kies je zelf: 'All tracking updates', 'Important only' of 'Delivery day only'. Een Belgisch pakket dat naar bpost gaat, volgt Peek daar niet verder. Peek kan geen contact opnemen met DHL of de webshop.
+Overdag kijkt Peek elke 10 minuten, en elke 2 minuten zodra de bezorger onderweg is (met een tijdvak pas vanaf een halfuur ervoor). Na 48 uur zonder nieuwe scan kijkt Peek elk uur, en 's nachts elk uur of om de twee uur. Meldingen kies je zelf: 'All tracking updates', 'Important only' of 'Delivery day only'. Een Belgisch pakket dat naar bpost gaat, volgt Peek daar niet verder. Peek kan geen contact opnemen met DHL of de webshop.
 
 ## Vragen over DHL eCommerce track en trace
 

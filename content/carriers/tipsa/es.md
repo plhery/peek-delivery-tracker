@@ -3,7 +3,7 @@ title: TIPSA seguimiento: número, estados y teléfono
 description: Sigue tu envío TIPSA: el número de 22 cifras, qué significa cada estado, qué pasa si estabas ausente, las agencias y los teléfonos de TIPSA.
 slug: tipsa-seguimiento
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 TIPSA es una empresa española de paquetería urgente, integrada en la red internacional de Geopost, con más de 330 agencias en España, Portugal y Andorra. Para seguir tu paquete, escribe el número de 22 cifras en el [localizador de envíos](https://www.tip-sa.com/es/localizacion-envios) de tip-sa.com o pégalo en la casilla de arriba. El número te lo da quien te envía el paquete, casi siempre la tienda, en el correo o el SMS de envío.
@@ -87,7 +87,7 @@ TIPSA mantiene una página de su app, pero sus fichas en las tiendas de aplicaci
 
 El albarán de 10 cifras no se puede seguir a través de TIPSA, ni con «Cambiar» ni desde un enlace. Puedes pegar el enlace del correo de la tienda: Peek lee los enlaces de tip-sa.com con `id=` en páginas que acaban en `datos_env.php`, `datos_prestashop.php` o `datos.php`, y en la dirección principal de tip-sa.com. Los enlaces al localizador de TIPSA o a la página del envío en dinapaqweb no se leen.
 
-Peek muestra el estado, el historial con la población de cada escaneo en un mapa, el nombre del remitente si TIPSA no lo oculta y el peso. Los estados salen en el español de TIPSA, tal como los escribe. Peek lee todas las horas como hora de Madrid, también las de agencias portuguesas. Descarta el destinatario, la dirección, los códigos postales, la referencia, el número de bultos, el volumen y la prueba de entrega. No muestra fecha de entrega prevista ni sigue el paquete si pasa a otro transportista. Consulta TIPSA cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puede enviarte notificaciones cuando cambia el estado.
+Peek muestra el estado, el historial con la población de cada escaneo en un mapa, el nombre del remitente si TIPSA no lo oculta y el peso. Los estados salen en el español de TIPSA, tal como los escribe. Peek lee todas las horas como hora de Madrid, también las de agencias portuguesas. Descarta el destinatario, la dirección, los códigos postales, la referencia, el número de bultos, el volumen y la prueba de entrega. No muestra fecha de entrega prevista ni sigue el paquete si pasa a otro transportista. Consulta TIPSA cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede enviarte notificaciones cuando cambia el estado.
 
 ## Preguntas sobre el seguimiento de TIPSA
 

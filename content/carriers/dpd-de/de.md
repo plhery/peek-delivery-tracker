@@ -3,7 +3,7 @@ title: DPD Sendungsverfolgung Deutschland: Status und Hilfe
 description: DPD-Paket in Deutschland verfolgen: wo die 14-stellige Paketnummer steht, was die Status heißen, wie Predict und der Paketshop funktionieren und wen du anrufst.
 slug: dpd-sendungsverfolgung-deutschland
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 DPD in Deutschland ist die DPD Deutschland GmbH aus Aschaffenburg, ein Paketdienst im Geopost-Netz mit 10.300 Pickup Paketshops. Dein Paket verfolgst du mit der 14-stelligen Paketnummer auf DPDs Seite, mit deiner Postleitzahl siehst du dort alle Details. Oder du fügst die Nummer oben ins Feld ein: Sie steht in der Versandbestätigung des Shops und in DPDs Benachrichtigung per E-Mail.
@@ -89,7 +89,7 @@ Die 06021 8430 aus dem Impressum ist die Zentrale, nicht die Hotline für Empfä
 
 Das Feld „Postleitzahl der Lieferadresse“ (fünf Ziffern) ist optional. Die Postleitzahl geht an DPD und bei Bedarf an Tracking-Dienste. Ohne sie liest Peek, was DPDs deutsche App zeigt: die Scans mit Ort, das Gewicht, die Größe, den erwarteten Tag oder ein Zeitfenster und, solange das Paket in einem Pickup Paketshop oder an einer Pickup Station wartet, Name und Adresse von Shop oder Station. Mit ihr liest Peek DPDs bestätigte Sendungsverfolgung: die Scans mit Ort, den Namen des Absenders, das Gewicht und das Zeitfenster, aber weder Größe noch Shop-Adresse. Lehnt DPD die Postleitzahl ab, bleibt nur eine kurze Übersicht ohne Orte, ein Hinweis darauf fehlt.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, zeigt jeden Scan auf einer Karte und schickt dir auf Wunsch Mitteilungen: alle Updates, nur wichtige oder nur am Liefertag. Ein Scan, der nennt, wer das Paket angenommen hat, heißt „Delivery update“. Nicht zu sehen sind dein Name, deine Adresse und der Zustellnachweis. DPDs App gibt die Zeiten ohne Zeitzone an: Peek liest sie als deutsche Zeit, Scans im Ausland in der Zeit ihres Landes. Verortet DPD das Paket in einem anderen Land, hört Peek auf, DPD Germany abzufragen, und folgt keinem anderen Paketdienst.
+Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, zeigt jeden Scan auf einer Karte und schickt dir auf Wunsch Mitteilungen: alle Updates, nur wichtige oder nur am Liefertag. Ein Scan, der nennt, wer das Paket angenommen hat, heißt „Delivery update“. Nicht zu sehen sind dein Name, deine Adresse und der Zustellnachweis. DPDs App gibt die Zeiten ohne Zeitzone an: Peek liest sie als deutsche Zeit, Scans im Ausland in der Zeit ihres Landes. Verortet DPD das Paket in einem anderen Land, hört Peek auf, DPD Germany abzufragen, und folgt keinem anderen Paketdienst.
 
 ## Fragen zur DPD Sendungsverfolgung
 

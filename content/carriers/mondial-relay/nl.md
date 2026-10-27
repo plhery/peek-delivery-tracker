@@ -3,7 +3,7 @@ title: Mondial Relay-pakket volgen: Afhaalpunt, status, klachten
 description: Volg uw Mondial Relay-pakket in Nederland of België: wat de statussen betekenen, hoelang het Afhaalpunt het bewaart, wie klaagt en hoe u Mondial Relay bereikt.
 slug: mondial-relay-pakket-volgen
 published: 2026-10-25
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Mondial Relay is een Franse pakketdienst die pakketten aflevert in Afhaalpunten (winkels in uw buurt), in Pakketautomaten en soms aan huis. U volgt uw pakket op [mondialrelay.nl](https://www.mondialrelay.nl/mijn-mondial-relay-pakket-volgen/) of, in België, op [mondialrelay.be](https://www.mondialrelay.be/nl-be/mijn-mondial-relay-pakje-opvolgen/) met het pakketnummer en de postcode van het afleveradres, of u plakt het nummer in het veld hierboven. Ligt uw pakket klaar, dan krijgt u een e-mail of sms van Mondial Relay.
@@ -98,7 +98,7 @@ Gecontroleerd op de Nederlandstalige pagina's van Mondial Relay op 25 oktober 20
 
 Voor een nummer van 8 cijfers vraagt Peek ook de ‘Delivery postcode’, de postcode van het afleveradres. Kent niemand het nummer, dan stelt Peek vanuit Nederland of België zelf Mondial Relay voor (‘Mondial Relay may have this parcel. Add the delivery postcode to track it.’). Voor 10 of 12 cijfers en voor de barcode is geen postcode nodig.
 
-Peek toont bij elke scan het genoemde sorteercentrum en, als Mondial Relay ze geeft, het land van bestemming en de verwachte leveringsdag. Ligt uw pakket klaar, dan ziet u de naam en het adres van het Afhaalpunt of de automaat, nooit uw afhaalcode. Uw naam en adres laat Peek weg. Overdag kijkt Peek elke 10 minuten, vaker zodra de bezorger onderweg is, en 's nachts elk uur; als u wilt, krijgt u een melding bij elke nieuwe status. Peek kan geen contact opnemen met Mondial Relay of de webshop.
+Peek toont bij elke scan het genoemde sorteercentrum en, als Mondial Relay ze geeft, het land van bestemming en de verwachte leveringsdag. Ligt uw pakket klaar, dan ziet u de naam en het adres van het Afhaalpunt of de automaat, nooit uw afhaalcode. Uw naam en adres laat Peek weg. Overdag kijkt Peek elke 10 minuten, vaker zodra de bezorger onderweg is, en 's nachts elk uur of om de twee uur; als u wilt, krijgt u een melding bij elke nieuwe status. Peek kan geen contact opnemen met Mondial Relay of de webshop.
 
 ## Veelgestelde vragen over Mondial Relay
 

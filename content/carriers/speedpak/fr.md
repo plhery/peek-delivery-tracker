@@ -3,7 +3,7 @@ title: SpeedPAK suivi : colis eBay, statuts et qui contacter
 description: Suivre un colis eBay SpeedPAK : à quoi ressemble le numéro de 28 caractères, ce que veut dire chaque statut, qui le livre et qui contacter s'il bloque.
 slug: speedpak-suivi
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 SpeedPAK est le service d'expédition d'eBay pour les commandes venues de l'étranger, conçu avec la société logistique Orange Connex pour les colis qui partent de Chine. Son numéro compte 28 caractères et commence par ES ou EE : saisis-le sur la page de suivi d'Orange Connex, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), ou colle-le dans le champ ci-dessus. Sur eBay.fr, tu le trouves sous forme de lien à côté de l'objet, dans « Mon eBay », puis « Objets achetés ».
@@ -87,7 +87,7 @@ Le site ne dit pas que ces lignes servent aux destinataires, et elles sont en Ch
 
 Quand SpeedPAK nomme le transporteur qui livre, Peek peut l'interroger et passer à lui dès qu'il montre des étapes plus récentes. Le colis garde le numéro que tu as ajouté, sa page indique « Livraison par » ce transporteur et donne son numéro, avec un lien vers son suivi. Ça dépend de ce que SpeedPAK publie, donc pas pour chaque colis.
 
-Peek vérifie le suivi toutes les 10 minutes en journée (toutes les 2 minutes une fois le colis en livraison) et toutes les heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut pas contacter SpeedPAK ni le vendeur, ni ouvrir une réclamation à ta place.
+Peek vérifie le suivi toutes les 10 minutes en journée (toutes les 2 minutes une fois le colis en livraison) et toutes les une à deux heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut pas contacter SpeedPAK ni le vendeur, ni ouvrir une réclamation à ta place.
 
 ## Questions sur le suivi SpeedPAK
 

@@ -3,7 +3,7 @@ title: Juxi Express tracking: JXC numbers, delivery and help
 description: Track a Juxi Express (SHJX) parcel from China: what the JXC waybill looks like, why Juxi has no tracker, who delivers it and who to ask when it stalls.
 slug: juxi-express-tracking
 published: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-27
 ---
 
 Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) is a Shanghai forwarder that ships parcels abroad for online sellers in China, on its own lines and through the post. It has no tracking page of its own: paste the number in the box above, or look it up on a tracking service such as 17TRACK, which lists Juxi as SHJX. The seller who booked Juxi has the number and gives it with your order's shipping details.
@@ -80,7 +80,7 @@ Juxi lists no contact, form or office for recipients outside China. For anything
 
 Juxi has no tracking page left for Peek to read: the tracking button on its home page no longer opens a tracker. So Peek follows Juxi parcels through tracking services and shows the status and history those services hold, in their wording. That history can lag behind the local carrier's own, and for some parcels there's nothing yet. If it gives the local carrier's number, add that number to Peek as well.
 
-Peek checks every 15 minutes by day, out for delivery too, and hourly overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Juxi Express or the seller for you.
+Peek checks every 15 minutes by day, out for delivery too, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Juxi Express or the seller for you.
 
 ## Questions about Juxi Express tracking
 

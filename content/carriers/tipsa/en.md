@@ -3,7 +3,7 @@ title: TIPSA tracking: numbers, statuses and missed deliveries
 description: Track a TIPSA parcel in Spain or Portugal: the 22-digit number, what TIPSA's Spanish statuses mean, missed deliveries, agencies and how to reach TIPSA.
 slug: tipsa-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 TIPSA is a Spanish express parcel carrier, part of the Geopost group, with agencies in Spain, Portugal and Andorra. Track a parcel with its 22-digit number on TIPSA's [Delivery locator](https://www.tip-sa.com/en/delivery-locator), or paste it in the box above. The number comes from the shop or person who sent the parcel, often in the shipping email or SMS.
@@ -87,7 +87,7 @@ Portugal has no separate line: TIPSA's Portuguese contact page gives the same tw
 
 A 10-digit waybill can't be tracked through TIPSA, even after "Change" or from a link. Links from a shop's TIPSA email can be pasted: Peek reads tip-sa.com links with `id=` on pages ending `datos_env.php`, `datos_prestashop.php` or `datos.php`, and on the bare tip-sa.com address. Links to TIPSA's locator or its shipment pages on tipsa-dinapaq.com are not read.
 
-Peek shows the status, the history with each scan's town on a map, the sender's name unless TIPSA masks it, and the weight. Statuses stay in TIPSA's Spanish, as written. Peek reads every scan time as Madrid time, Portuguese agencies included. It drops the recipient, address, postcodes, reference, parcel count, volume and proof of delivery. Peek shows no expected delivery date and doesn't follow the parcel to another carrier. It checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and can notify you when the status changes.
+Peek shows the status, the history with each scan's town on a map, the sender's name unless TIPSA masks it, and the weight. Statuses stay in TIPSA's Spanish, as written. Peek reads every scan time as Madrid time, Portuguese agencies included. It drops the recipient, address, postcodes, reference, parcel count, volume and proof of delivery. Peek shows no expected delivery date and doesn't follow the parcel to another carrier. It checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you when the status changes.
 
 ## Questions about TIPSA tracking
 

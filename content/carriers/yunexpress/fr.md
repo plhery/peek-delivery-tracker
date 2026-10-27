@@ -3,7 +3,7 @@ title: YunExpress suivi : numéro YT, statuts et qui livre
 description: Suivre un colis YunExpress (Yun Express) venu de Chine : le numéro YT, les statuts en anglais expliqués, qui livre en France, en Belgique et en Suisse.
 slug: yunexpress-suivi
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 YunExpress, aussi écrit Yun Express, est une société de logistique de Shenzhen qui expédie depuis la Chine les petits colis de vendeurs en ligne, notamment de vendeurs présents sur Amazon, Temu, SHEIN ou la Fnac. Pour suivre ton colis, saisis le numéro qui commence par YT sur [yuntrack.com](https://www.yuntrack.com/), le site de suivi de YunExpress, ou colle-le dans le champ ci-dessus. YunExpress ne décrit aucun SMS ni e-mail aux destinataires : le numéro se trouve dans l'e-mail d'expédition de la boutique ou sur la page de ta commande.
@@ -75,7 +75,7 @@ L'encadré « Feedback » de yuntrack concerne le site, pas ton colis. Commence 
 
 ## Suivre un colis YunExpress avec Peek
 
-[Peek](/) reconnaît YT suivi de 16 chiffres comme YunExpress, même avec des espaces, et accepte les liens de yuntrack.com. Il vérifie le suivi toutes les 10 minutes en journée (toutes les 5 minutes une fois le colis en livraison) et toutes les heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications : à chaque scan, pour les étapes importantes ou avec l'option « Jour de livraison uniquement ». Il affiche le statut, l'historique, le lieu de chaque scan et l'heure de livraison.
+[Peek](/) reconnaît YT suivi de 16 chiffres comme YunExpress, même avec des espaces, et accepte les liens de yuntrack.com. Il vérifie le suivi toutes les 10 minutes en journée (toutes les 5 minutes une fois le colis en livraison) et toutes les une à deux heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications : à chaque scan, pour les étapes importantes ou avec l'option « Jour de livraison uniquement ». Il affiche le statut, l'historique, le lieu de chaque scan et l'heure de livraison.
 
 Quand YunExpress donne le numéro du transporteur local sous une forme connue, Peek peut suivre le colis chez ce transporteur, mais pas pour chaque colis. Il n'affiche ni date de livraison prévue ni point relais pour les colis YunExpress, laisse de côté les références de commande et ne peut ni contacter YunExpress ni réclamer à ta place.
 

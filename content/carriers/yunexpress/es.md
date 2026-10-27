@@ -3,7 +3,7 @@ title: YunExpress seguimiento: estados, quién entrega y contacto
 description: Sigue tu paquete de YunExpress desde China: cómo es el número YT, qué significa cada estado en inglés, quién lo entrega en España y a quién preguntar.
 slug: yunexpress-seguimiento
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 YunExpress, también escrito Yun Express, es una empresa de logística de Shenzhen que envía [paquetes pequeños desde China](guide:tracking-from-china) para vendedores online, también los de Amazon, Temu o SHEIN. Para seguir tu paquete, escribe el número que empieza por YT en [yuntrack.com](https://www.yuntrack.com/), su web de seguimiento, o pégalo en la casilla de arriba. La web de YunExpress no habla de SMS ni correos a los destinatarios: busca el número en el correo de envío de la tienda o en la página de tu pedido.
@@ -79,7 +79,7 @@ El cuadro «Feedback» de Yuntrack es para opinar sobre la web, no sobre tu paqu
 
 ## Seguir un paquete de YunExpress con Peek
 
-[Peek](/) reconoce YT y 16 cifras como YunExpress, y también acepta enlaces de yuntrack.com. Consulta el seguimiento cada 10 minutos de día (cada 5 minutos cuando el paquete está en reparto) y cada hora por la noche, pone cada escaneo en un mapa y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Verás el estado, el historial, el lugar de cada escaneo y la hora de entrega.
+[Peek](/) reconoce YT y 16 cifras como YunExpress, y también acepta enlaces de yuntrack.com. Consulta el seguimiento cada 10 minutos de día (cada 5 minutos cuando el paquete está en reparto) y cada una o dos horas por la noche, pone cada escaneo en un mapa y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Verás el estado, el historial, el lugar de cada escaneo y la hora de entrega.
 
 Si el registro de YunExpress da el número del transportista local y Peek reconoce su formato, puede seguir el paquete con esa empresa, aunque no pasa con todos. No muestra fecha prevista de entrega ni punto de recogida para los paquetes de YunExpress, deja fuera las referencias de pedido y no puede contactar con YunExpress ni reclamar por ti.
 

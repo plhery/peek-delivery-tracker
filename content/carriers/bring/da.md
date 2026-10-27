@@ -3,7 +3,7 @@ title: Bring sporing: spor din pakke i Danmark
 description: Spor din Bring-pakke: sådan ser nummeret ud, det betyder statusserne, så længe ligger pakken i pakkeshop og pakkeboks, og sådan kontakter du Bring.
 slug: bring-spor-pakke
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Bring er en del af Posten Bring-koncernen. I Danmark er det Bring E-commerce & Logistics A/S, der leverer pakkerne til en pakkeshop, en pakkeboks eller hjem til døren. Du sporer pakken på [Brings sporingsside](https://tracking.bring.dk/tracking/) eller i Bring-appen, eller du sætter nummeret ind i feltet ovenfor.
@@ -87,7 +87,7 @@ Sådan stod det på Brings sider 26. oktober 2026:
 
 [Peek](/) kan med det samme se, at et nummer på to bogstaver, ni cifre og `NO` er Brings, når kontrolcifferet stemmer. Talnumrene deler Bring med andre transportører. Sæt nummeret ind alligevel: Peek følger over 3.500 transportører og spørger Bring først, ved 20 cifre sammen med [PostNord](carrier:postnord), [Swiss Post Cargo](carrier:swiss-post-cargo) og [NZ Post](carrier:nz-post), ved `373` også [Matkahuolto](carrier:matkahuolto), og ved 17 cifre sammen med [DHL eCommerce](carrier:dhl-ecommerce). Kender kun Bring pakken, står der "Bring has this parcel." Kommer Bring ikke frem, så tryk på "Change" og vælg Bring under "Fits this number", eller søg Bring frem, hvis Peek har valgt en anden transportør. Et link fra tracking.bring.dk fortæller Peek, at det er Bring, uanset nummer. Hos Bring følger Peek numre på 17 eller 18 cifre (20 med `00` foran) og numre på to bogstaver, ni cifre og to bogstaver med gyldigt kontrolciffer, men ikke et forsendelsesnummer med flere pakker: brug kollinummeret.
 
-Peek viser hvert trin med en kort engelsk betegnelse som "Handed in", "At terminal", "Out for delivery" og "Ready for pickup". Du ser status, byen for hver scanning på et kort, afsender, ydelse, vægt, mål, forventet leveringsdag, når Bring oplyser den, og navnet på pakkeshoppen eller pakkeboksen, mens pakken venter. Adresser, billeder og hentekoden tager Peek ikke med. Følger du pakken, tjekker Peek den hvert 10. minut kl. 8–22, hvert 2. minut, når den er ude til levering, og én gang i timen om natten. Peek kan give dig besked, når der sker noget, men kan ikke kontakte Bring eller webshoppen for dig.
+Peek viser hvert trin med en kort engelsk betegnelse som "Handed in", "At terminal", "Out for delivery" og "Ready for pickup". Du ser status, byen for hver scanning på et kort, afsender, ydelse, vægt, mål, forventet leveringsdag, når Bring oplyser den, og navnet på pakkeshoppen eller pakkeboksen, mens pakken venter. Adresser, billeder og hentekoden tager Peek ikke med. Følger du pakken, tjekker Peek den hvert 10. minut kl. 8–22, hvert 2. minut, når den er ude til levering, og hver eller hver anden time om natten. Peek kan give dig besked, når der sker noget, men kan ikke kontakte Bring eller webshoppen for dig.
 
 ## Spørgsmål om Bring-sporing
 

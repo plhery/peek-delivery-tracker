@@ -92,7 +92,7 @@ None of the sites says what a call costs.
 
 Peek then shows the status, the history with the place each scan names, the expected delivery day while the parcel is on its way, the destination country, the delivery time, and the locker's name once the parcel waits there or was collected. It leaves out the locker's address and position, the pickup deadline, the compartment size, payment, the sender and postcodes, so check the "Last pick up time" on BOX NOW's own page.
 
-Peek's wordings may differ from BOX NOW's site: ready for pickup reads `Parcel has reached its final destination, waiting for pickup`, delivered `Parcel has been delivered`. `Expired`, `Delivery has expired`, `Lost`, `Parcel search - We will update you shortly` and the sender's cancellations show under "Needs attention". Peek checks every 10 minutes by day while you follow the parcel, hourly overnight, and can notify you of every scan, important steps or delivery day only. It can't extend the pickup time or resend your PIN.
+Peek's wordings may differ from BOX NOW's site: ready for pickup reads `Parcel has reached its final destination, waiting for pickup`, delivered `Parcel has been delivered`. `Expired`, `Delivery has expired`, `Lost`, `Parcel search - We will update you shortly` and the sender's cancellations show under "Needs attention". Peek checks every 10 minutes by day while you follow the parcel, every hour or two overnight, and can notify you of every scan, important steps or delivery day only. It can't extend the pickup time or resend your PIN.
 
 ## Questions about BOX NOW tracking
 

@@ -3,7 +3,7 @@ title: Dachser tracking: rastrear encomenda, estados e contactos
 description: Rastrear uma encomenda Dachser em Portugal: a ligação de seguimento completa, o que querem dizer os estados, a marcação da entrega e os contactos.
 slug: rastrear-encomenda-dachser
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 A Dachser é um grupo alemão de logística cujas empresas em Portugal e Espanha transportam mercadoria e paletes, sobretudo entre empresas, e entregam encomendas volumosas em casa quando a loja contrata o serviço targo on-site. Para rastrear a encomenda, abre a ligação de seguimento do e-mail ou da mensagem que recebeste sobre a entrega: leva à página Customer Iberia da Dachser. Também a podes colar inteira na caixa acima.
@@ -94,9 +94,9 @@ A Dachser não publica uma linha de apoio para destinatários. Estes são os con
 
 O [Peek](/) não reconhece um número Dachser pelos algarismos nem o consegue procurar sem a chave, por isso cola a ligação completa da tua mensagem: o Peek reconhece-a como da Dachser e guarda-a. Se escreveste o número, toca em «Alterar», escolhe Dachser e cola a ligação no campo «Ligação de seguimento completa». Uma ligação com outro endereço, sem chave, com um parâmetro desconhecido ou de outro número é recusada com «Usa a ligação de seguimento completa do e-mail de envio.»
 
-O Peek só lê a página Customer Iberia, por isso cobre as entregas da Dachser em Portugal e Espanha. Mostra o estado, o histórico e o dia de entrega previsto até à entrega. Cada passo aparece com as palavras do próprio Peek, como «Dados da encomenda recebidos», «Encomenda recolhida», «Encomenda chegou a um centro Dachser», «Em distribuição», «Agendamento de entrega atualizado» ou «Entregue»; o texto da Dachser não é guardado. As horas mantêm o fuso horário; quando não o têm, são lidas como hora de Madrid. A Dachser não indica locais, por isso os passos não aparecem no mapa. O remetente, o teu nome, a morada, os contactos e a assinatura ficam de fora.
+O Peek só lê a página Customer Iberia, por isso cobre as entregas da Dachser em Portugal e Espanha. Mostra o estado, o histórico e o dia de entrega previsto até à entrega. Cada passo aparece com as palavras do próprio Peek, como «Dados da encomenda recebidos», «Encomenda recolhida», «Encomenda chegou a um centro Dachser», «Em distribuição», «Agendamento de entrega atualizado» ou «Entregue»; o texto da Dachser não é guardado. As horas são lidas no fuso horário que trazem ou, quando não o têm, como hora de Madrid, e mostradas no fuso horário do teu dispositivo. A Dachser não indica locais, por isso os passos não aparecem no mapa. O remetente, o teu nome, a morada, os contactos e a assinatura ficam de fora.
 
-O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora à noite, e pode enviar-te notificações em «Todas as leituras», «Passos importantes» ou «Só no dia da entrega». Uma remessa desconhecida ou uma ligação estragada pode aparecer como não encontrada ou como uma verificação falhada.
+O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações em «Todas as leituras», «Passos importantes» ou «Só no dia da entrega». Uma remessa desconhecida ou uma ligação estragada pode aparecer como não encontrada ou como uma verificação falhada.
 
 ## Perguntas sobre o Dachser tracking
 

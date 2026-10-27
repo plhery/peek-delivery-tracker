@@ -3,7 +3,7 @@ title: DHL Paket tracking: numero, stati e consegna in Italia
 description: Tracking DHL Paket: com'è fatto il numero, cosa vogliono dire gli stati, Filiale e Packstation in Germania e chi consegna in Italia i pacchi dalla Germania.
 slug: dhl-paket-tracking
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 DHL Paket è il servizio pacchi tedesco di DHL Group, con i marchi Deutsche Post e DHL. Segui il pacco con il suo numero su dhl.de (in tedesco o in inglese), nell'app Post & DHL o incollandolo nel box qui sopra. Il numero te lo dà il mittente: i negozi di solito lo mettono nell'e-mail di spedizione. Se vivi in Germania, qui trovi consegna, ritiro e reclami; se aspetti in Italia un pacco partito dalla Germania, trovi chi te lo porta e a chi rivolgerti.
@@ -90,7 +90,7 @@ Per SMS DHL non chiede mai dati personali né pagamenti: un messaggio sospetto l
 
 [Peek](/) riconosce subito DHL da un numero `JJD` con 18 cifre, da un numero `0034043…` con cifra di controllo valida o da un numero `C…DE` o `L…DE` valido. Un Identcode di 12 cifre o un numero di 10 cifre va bene anche per altri corrieri: incollalo lo stesso, Peek segue più di 3.500 corrieri, e se il pacco non finisce sotto DHL scegli «DHL» con «Cambia corriere». Così sistemi anche un pacco finito sotto la rete DHL sbagliata. Funzionano anche i link di dhl.de e deutschepost.de.
 
-Peek legge il tracking di dhl.de in inglese e, se DHL rifiuta la richiesta, lo apre in un browser sul proprio server. Se DHL chiede un CAP o dice che il numero appartiene a un altro servizio DHL, subentrano altri servizi di tracking. Controlla ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e ogni ora di notte, e può avvisarti a ogni scansione, solo per i passaggi importanti o solo il giorno della consegna.
+Peek legge il tracking di dhl.de in inglese e, se DHL rifiuta la richiesta, lo apre in un browser sul proprio server. Se DHL chiede un CAP o dice che il numero appartiene a un altro servizio DHL, subentrano altri servizi di tracking. Controlla ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore, e può avvisarti a ogni scansione, solo per i passaggi importanti o solo il giorno della consegna.
 
 Vedi lo stato, ogni scansione su una mappa con il luogo e l'ora esatta di DHL, il giorno di consegna previsto (senza fascia oraria) e il Paese di destinazione, con le frasi di DHL così come sono. Peek non conserva né il tuo nome né l'indirizzo né la firma, e non mostra l'indirizzo di una Packstation o di una Filiale. Se una scansione all'estero porta il link al tracking del corriere locale, come Poste Italiane o DHL Express, Peek può seguire il pacco lì; senza link, per un numero `C…DE` diretto in Italia, prova con Poste Italiane. Non può deviare un pacco, prenotare un Liefertag né contattare DHL o il negozio al posto tuo.
 

@@ -3,7 +3,7 @@ title: Ecoscooting rastreio: estados, pontos de recolha e contacto
 description: Rastreio Ecoscooting em Portugal: que número usar, o que querem dizer os estados, entregas falhadas, pontos de recolha e como contactar a Ecoscooting.
 slug: ecoscooting-rastreio
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 A Ecoscooting é uma empresa de entregas em Portugal e Espanha para compras feitas em plataformas internacionais, e pertence à Cainiao, a empresa de logística do grupo Alibaba. Faz só a última parte do caminho: a entrega em casa ou num ponto de recolha. Segue a encomenda no ecoscooting.com com o número que vem nos e-mails da Ecoscooting, ou cola-o na caixa no topo desta página.
@@ -87,7 +87,7 @@ Quando a Cainiao ou a CACESA dão um número CNPRT ou CNESP, a encomenda é acom
 
 O Peek mostra o estado, o histórico com as horas exatas da Ecoscooting mas sem locais, o peso, a hora da entrega e, quando a encomenda chega a um ponto de recolha, o nome e a morada do ponto, que ficam depois do levantamento. Não há data prevista de entrega. Ficam de fora o PIN, o telefone e o horário do ponto, os códigos postais e as referências do pedido. O seguimento é pedido em inglês, por isso as linhas aparecem no inglês da Ecoscooting, por exemplo `Your shipment is out for delivery`; um `Out for delivery` simples aparece nas palavras do Peek, «Em distribuição». A Ecoscooting nunca diz que um número não existe, por isso um número errado fica simplesmente sem atualizações.
 
-O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda está em distribuição e de hora a hora à noite, e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega.
+O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda está em distribuição e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega.
 
 ## Perguntas sobre o rastreio Ecoscooting
 

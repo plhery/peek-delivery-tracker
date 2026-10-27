@@ -3,7 +3,7 @@ title: Packeta Sendungsverfolgung: Z-Nummer, Status und Abholung
 description: Packeta-Paket in Deutschland verfolgen: wie die Z-Nummer aussieht, was die Status heißen, wie lange der Pick-Up Point dein Paket aufhebt und wen du fragst.
 slug: packeta-sendungsverfolgung
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Packeta bringt Bestellungen aus Online-Shops an Abholstellen oder direkt an deine Adresse. Dahinter steht die Packeta Group, die 2010 in Tschechien als Zásilkovna begann und heute unter anderem in der Slowakei, Ungarn, Polen und Rumänien tätig ist. In Deutschland ist das die Packeta eCommerce GmbH in Leipzig. Dein Paket verfolgst du in [Packetas Sendungsverfolgung](https://tracking.packeta.com/de/), in der Packeta-App oder oben im Feld. Die Sendungsnummer besteht aus einem `Z` und zehn Ziffern. Sie steht in der E-Mail oder SMS von Packeta und in der App.
@@ -102,7 +102,7 @@ So stand es am 26. Oktober 2026 auf packeta.de:
 
 Peek zeigt den Status, die neuesten 20 Scans im Wortlaut von Packeta, den Shop als Absender, den Zeitpunkt der Zustellung und, wenn das Paket an einen Pick-Up Point geht, dessen Adresse. Wartet es dort, steht es auf „Abholbereit“, auch am letzten Tag. Nennt ein Scan ein Depot oder eine Abholstelle, zeigt Peek sie als Ort. Deinen Namen, deine Adresse und die Unterschrift lässt Peek weg. Einen voraussichtlichen Liefertag gibt Packeta nicht heraus.
 
-Verlinkt der Übergabesatz die Sendungsverfolgung eines Partners, den Peek kennt, etwa [DHL](carrier:dhl), [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de) oder [GLS](carrier:gls-de), nennt Peek diesen Partner als Zusteller. Kann Peek ihn selbst abfragen, folgt es dem Paket dorthin, sobald der Partner neue Scans zeigt; Packetas Verlauf bleibt erhalten. Peek schaut tagsüber alle 10 Minuten nach, nachts stündlich, und schickt dir auf Wunsch Mitteilungen: alle Updates, nur wichtige oder nur am Liefertag. Packeta oder den Shop kontaktiert Peek nicht für dich.
+Verlinkt der Übergabesatz die Sendungsverfolgung eines Partners, den Peek kennt, etwa [DHL](carrier:dhl), [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de) oder [GLS](carrier:gls-de), nennt Peek diesen Partner als Zusteller. Kann Peek ihn selbst abfragen, folgt es dem Paket dorthin, sobald der Partner neue Scans zeigt; Packetas Verlauf bleibt erhalten. Peek schaut tagsüber alle 10 Minuten nach, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen: alle Updates, nur wichtige oder nur am Liefertag. Packeta oder den Shop kontaktiert Peek nicht für dich.
 
 ## Fragen zur Packeta Sendungsverfolgung
 

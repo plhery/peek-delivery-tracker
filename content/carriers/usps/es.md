@@ -3,7 +3,7 @@ title: USPS seguimiento: estados, reintento de entrega y envíos
 description: Sigue tu paquete de USPS: dónde está el número, qué significan sus estados en inglés, cómo pedir un reintento de entrega y qué pasa si el envío va a España.
 slug: usps-seguimiento
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 USPS, el U.S. Postal Service, es el correo de Estados Unidos: llega a todas las direcciones del país, y la mayoría de sus servicios de paquetes nacionales incluyen seguimiento gratis. Para seguir un paquete, escribe el número en USPS Tracking, en usps.com o en su versión en español, es.usps.com; también puedes mandarlo por SMS al 28777 o pegarlo en la casilla de arriba. El número te lo da quien envía, normalmente en el correo de envío de la tienda. Esta página te sirve si vives en Estados Unidos y también si estás en España esperando un paquete que viene de allí.
@@ -94,7 +94,7 @@ USPS solo te manda SMS o correos si tú los pediste con un número de seguimient
 
 [Peek](/) reconoce USPS al momento con las etiquetas de 22 cifras que pasan el control de USPS, con casi todos los números de 26 cifras que empiezan por `92` y con los códigos `420` escaneados, a los que quita el ZIP. Con formas compartidas (números `9261` y `9361`, 20 cifras, números postales que acaban en `US`), Peek pregunta antes a los otros transportistas probables y a servicios de seguimiento, y abre la página de USPS al final, así que la respuesta puede tardar un poco. También valen los enlaces de usps.com.
 
-Peek abre la página de seguimiento de USPS en un navegador en su servidor. Es más lento, y USPS puede rechazarlo; entonces completan los servicios de seguimiento, aunque no siempre tienen todo el historial de USPS. Muestra el estado, cada evento en el mapa con la hora del estado donde ocurrió y el día previsto de entrega, y te avisa con «Todas las novedades», «Solo importantes» o «Solo el día de entrega». No guarda quién firmó ni las instrucciones de entrega.
+Peek abre la página de seguimiento de USPS en un navegador en su servidor. Es más lento, y USPS puede rechazarlo; entonces completan los servicios de seguimiento, aunque no siempre tienen todo el historial de USPS. Muestra el estado, cada evento en el mapa y el día previsto de entrega, y te avisa con «Todas las novedades», «Solo importantes» o «Solo el día de entrega». La hora de cada evento se lee según el estado donde ocurrió y se muestra en la zona horaria de tu dispositivo. No guarda quién firmó ni las instrucciones de entrega.
 
 Cada evento sale en el inglés de USPS. Si [UPS](carrier:ups) o [FedEx](carrier:fedex) pasan el paquete a USPS, o un paquete del extranjero llega a Estados Unidos, Peek puede seguirlo en USPS en cuanto USPS muestra movimiento. Si sigues desde España un número postal que acaba en `US`, Peek también puede consultarlo en Correos y pasar a Correos cuando Correos da novedades. El reintento de entrega, Informed Delivery y las reclamaciones se hacen en usps.com.
 

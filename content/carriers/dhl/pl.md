@@ -3,7 +3,7 @@ title: DHL Paket śledzenie przesyłki: numer, statusy i odbiór
 description: Śledzenie DHL Paket: jak wygląda numer, co znaczą statusy, Packstation i Filiale w Niemczech oraz kto w Polsce doręcza paczki wysłane z Niemiec.
 slug: dhl-paket-sledzenie-przesylki
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 DHL Paket to niemiecka usługa paczkowa DHL Group, działająca pod markami Deutsche Post i DHL. Paczkę śledzisz po numerze na dhl.de (po niemiecku lub po angielsku), w aplikacji Post & DHL albo wklejając numer w pole powyżej. Numer dostajesz od nadawcy: sklepy podają go zwykle w e-mailu o wysyłce. Ta strona przyda Ci się, gdy mieszkasz w Niemczech, i wtedy, gdy czekasz w Polsce na paczkę nadaną w Niemczech.
@@ -90,7 +90,7 @@ DHL nigdy nie prosi SMS-em o dane osobowe ani o płatność; podejrzaną wiadomo
 
 [Peek](/) od razu rozpoznaje DHL po numerze `JJD` z 18 cyframi, numerze `0034043…` z poprawną cyfrą kontrolną albo poprawnym numerze `C…DE` lub `L…DE`. 12-cyfrowy Identcode czy numer 10-cyfrowy pasuje też do innych przewoźników: wklej go mimo to, Peek śledzi ponad 3500 przewoźników, a jeśli paczka nie trafi pod DHL, wybierz „DHL” przez „Zmień przewoźnika”. Działają też linki z dhl.de i deutschepost.de.
 
-Peek czyta śledzenie z dhl.de po angielsku, a gdy DHL odmawia, otwiera je w przeglądarce na swoim serwerze. Gdy DHL żąda kodu pocztowego albo odsyła do innej usługi DHL, pomagają serwisy śledzenia przesyłek. Peek sprawdza paczkę w dzień co 10 minut, a gdy jest w doręczeniu, co 2 minuty, w nocy zaś co godzinę, i może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy.
+Peek czyta śledzenie z dhl.de po angielsku, a gdy DHL odmawia, otwiera je w przeglądarce na swoim serwerze. Gdy DHL żąda kodu pocztowego albo odsyła do innej usługi DHL, pomagają serwisy śledzenia przesyłek. Peek sprawdza paczkę w dzień co 10 minut, a gdy jest w doręczeniu, co 2 minuty, w nocy zaś co godzinę lub dwie, i może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy.
 
 Widzisz status, każdy skan z miejscem na mapie i dokładną godziną DHL, przewidywany dzień doręczenia (bez przedziału godzin) i kraj docelowy, w brzmieniu DHL. Peek nie zapisuje Twojego imienia i nazwiska, adresu ani podpisu, nie pokazuje też adresu Packstation ani Filiale. Jeśli skan za granicą zawiera link do śledzenia DHL eCommerce Polska (sprawdz.dhl.com.pl lub mojdhl.pl) albo DHL Express, Peek może śledzić paczkę dalej u nich. Nie przekieruje paczki, nie zamówi Liefertag i nie skontaktuje się za Ciebie z DHL ani ze sklepem.
 

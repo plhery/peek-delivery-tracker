@@ -3,7 +3,7 @@ title: CACESA seguimiento: aduanas, estados y quién entrega
 description: Sigue tu paquete de CACESA en España: qué número usar, qué significa cada estado, cómo pagar la aduana, quién lo reparte y cómo contactar con CACESA.
 slug: cacesa-seguimiento
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 CACESA (Compañía Auxiliar al Cargo Express) es un agente de aduanas de Madrid para los paquetes de compras online que llegan de China a España y Portugal: los recibe en varios aeropuertos, hace el despacho de aduanas y los pasa a la empresa que los reparte. CACESA no entrega nada. Para seguir tu paquete, escribe en su web el número de envío que te dio la tienda, o pégalo en la casilla de arriba.
@@ -87,9 +87,9 @@ Según cacesa.com, consultada el 12 de octubre de 2026:
 
 Ningún formato de número es de CACESA, así que [Peek](/) nunca nombra a CACESA solo por el número. Añade el número y elige CACESA con «Cambiar», o pega un enlace del localizador de cacesa.com (`/es/seguimiento` o `/en/tracking` con `busqueda=`), que nombra a CACESA sea cual sea el número. Un número CNESP o CNPRT nombra a Ecoscooting al momento.
 
-Peek muestra los textos de CACESA en inglés, tal como los escribe, con el historial en hora de Madrid: el primero es `Electronic notification of shipment received`. Una línea de entregado sale como entregado. `Start Custom clearance Process` aparece como paso de aduanas y `Customs cleared-Green channel` como que el paquete sigue su camino, pero Peek no muestra cuánto pagar ni permite pagarlo. CACESA no da lugares, así que no hay nada que marcar en el mapa; tampoco da fecha prevista, peso, remitente ni destinatario.
+Peek muestra los textos de CACESA en inglés, tal como los escribe: el primero es `Electronic notification of shipment received`. Lee las horas del historial en hora de Madrid y las muestra en la zona horaria de tu dispositivo. Una línea de entregado sale como entregado. `Start Custom clearance Process` aparece como paso de aduanas y `Customs cleared-Green channel` como que el paquete sigue su camino, pero Peek no muestra cuánto pagar ni permite pagarlo. CACESA no da lugares, así que no hay nada que marcar en el mapa; tampoco da fecha prevista, peso, remitente ni destinatario.
 
-CACESA no nombra a la empresa de reparto, y el paquete sigue con el mismo número. Peek solo puede seguirlo si ese número es claramente de otra empresa: Ecoscooting para CNESP y CNPRT, [Correos](carrier:correos-spain) para un número postal que acaba en ES o un número propio de Correos, CTT para uno que acaba en PT, o [CTT Express](carrier:ctt-express) para sus propios números. Con un número CNES o LP, el seguimiento acaba en CACESA. Peek consulta cada 10 minutos de día y cada hora por la noche, y puede enviarte una notificación cuando cambia el estado.
+CACESA no nombra a la empresa de reparto, y el paquete sigue con el mismo número. Peek solo puede seguirlo si ese número es claramente de otra empresa: Ecoscooting para CNESP y CNPRT, [Correos](carrier:correos-spain) para un número postal que acaba en ES o un número propio de Correos, CTT para uno que acaba en PT, o [CTT Express](carrier:ctt-express) para sus propios números. Con un número CNES o LP, el seguimiento acaba en CACESA. Peek consulta cada 10 minutos de día y cada una o dos horas por la noche, y puede enviarte una notificación cuando cambia el estado.
 
 ## Preguntas sobre el seguimiento de CACESA
 

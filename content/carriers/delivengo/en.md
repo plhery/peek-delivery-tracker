@@ -3,7 +3,7 @@ title: Delivengo tracking: follow a La Poste parcel from France
 description: Track a Delivengo parcel sent from France: the number, La Poste's tracking messages, who delivers it in your country and who to ask when tracking stops.
 slug: delivengo-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 Delivengo is [La Poste](carrier:la-poste)'s service for French businesses sending small, low-value parcels (up to 2 kg) abroad, so if a French shop chose it, your parcel leaves France with La Poste and your own country's post delivers it. You track it on La Poste's tracking with the number the shop gives you, or paste it in the box above.
@@ -73,7 +73,7 @@ Peek shows what La Poste publishes: the status, the history with the country of 
 
 When La Poste gives the destination country and it is the UK, the US, Canada, Australia, Japan, Switzerland, Germany, Spain, the Netherlands, Poland, Sweden, Finland or Ukraine, Peek can also ask that country's postal service, and switches to it once it shows newer progress. Ireland, Belgium, Italy, Portugal and Luxembourg aren't in that list, and La Poste's history can go quiet after export, so the last leg doesn't always show.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and its notifications can cover every scan, important steps only or delivery day only.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and its notifications can cover every scan, important steps only or delivery day only.
 
 ## Questions about Delivengo tracking
 

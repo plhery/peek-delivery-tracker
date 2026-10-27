@@ -3,7 +3,7 @@ title: Yanwen tracking: rastrear encomenda, estados e contactos
 description: Rastrear uma encomenda Yanwen em Portugal: como é o número, o que quer dizer cada estado em inglês, quem faz a entrega e a quem perguntar quando fica parada.
 slug: rastrear-encomenda-yanwen
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 A Yanwen é uma empresa chinesa de logística, fundada em Pequim em 1998, que envia para o estrangeiro as encomendas de vendedores online e as entrega a uma transportadora local para o último troço. Para rastrear a encomenda, escreve o número no site de seguimento da Yanwen, o [track.yw56.com.cn](https://track.yw56.com.cn/en/index), ou cola-o na caixa acima. O número vem da loja ou do marketplace onde compraste, nos detalhes de envio da encomenda.
@@ -86,7 +86,7 @@ O [Peek](/) reconhece logo os números BYS, os números YP e os números YW dos 
 
 Mostra o estado, o histórico com a cidade ou região de cada leitura num mapa, a hora da entrega, o país de destino e a transportadora local com o número dela («Entrega:» seguido do nome). Quando a Yanwen nomeia uma transportadora local que o Peek conhece e o número lhe corresponde, ou quando o número local tem uma forma que o Peek reconhece com certeza, o Peek pergunta a essa transportadora e passa para ela assim que ela mostra novidades mais recentes. Um número YP para Portugal nunca passa para os CTT só por ter forma postal. A Yanwen não dá data prevista de entrega; o Peek não mostra ponto de levantamento e deixa de fora as referências de encomenda, os contactos, os códigos postais, os PIN de entrega e os números de porta.
 
-As horas mantêm o fuso GMT da Yanwen, e as leituras repetidas desaparecem. As linhas aparecem como a Yanwen as escreve, em inglês, salvo umas poucas que o Peek conhece tal e qual, como «Delivered», que mostra em português. Qualquer leitura com o código de entrega da Yanwen conta como entregue. O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 minutos quando a encomenda sai para entrega e de hora a hora à noite, e pode enviar-te notificações de todas as atualizações, só das importantes ou só no dia da entrega. Não pode contactar a Yanwen nem a loja por ti.
+As horas são lidas no fuso GMT da Yanwen e mostradas no fuso horário do teu dispositivo; as leituras repetidas desaparecem. As linhas aparecem como a Yanwen as escreve, em inglês, salvo umas poucas que o Peek conhece tal e qual, como «Delivered», que mostra em português. Qualquer leitura com o código de entrega da Yanwen conta como entregue. O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 minutos quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações de todas as atualizações, só das importantes ou só no dia da entrega. Não pode contactar a Yanwen nem a loja por ti.
 
 ## Perguntas sobre o tracking Yanwen
 

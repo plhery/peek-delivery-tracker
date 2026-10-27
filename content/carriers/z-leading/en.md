@@ -3,7 +3,7 @@ title: Z-Leading (Zhongling) tracking: numbers, delivery and help
 description: Track a Z-Leading (Zhongling) shipment from China: which number to use, why it has no tracker of its own, who delivers it and who to contact.
 slug: z-leading-tracking
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 Z-Leading (Shenzhen Z-leading International Logistics, which the tracking service 17TRACK lists as ZHONGLING) is a Shenzhen freight forwarder that ships goods from China by express, air, sea, rail and road. It has no tracking page of its own: it gives its customers the carrier's number and that carrier's website. Paste the number in the box above, or track it on the carrier's site.
@@ -63,7 +63,7 @@ For any other number, Peek asks tracking services while you add it ("Checking tr
 
 Z-Leading has no tracker for Peek to read. So for a parcel filed under Z-Leading, Peek asks ParcelsApp, Ship24 and 17TRACK in turn and keeps the first one that has the parcel. It shows the status and history that service holds, in its wording. That history can lag behind the carrier's own, and for some shipments there's nothing at all. The parcel's tracking link opens that service's page for the number. When the service names a carrier Peek reads directly, Peek asks that carrier for the same number and switches to it once it shows progress as recent. Peek doesn't pass your IP address or country on to the services.
 
-Peek checks every 15 minutes by day, out for delivery too, and hourly overnight; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery day only". It can't contact Z-Leading or the shop for you.
+Peek checks every 15 minutes by day, out for delivery too, and every hour or two overnight; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery day only". It can't contact Z-Leading or the shop for you.
 
 ## Questions about Z-Leading tracking
 

@@ -3,7 +3,7 @@ title: Yanwen seguimiento: estados, quién entrega y contacto
 description: Sigue tu paquete de Yanwen desde China: cómo es el número, qué significa cada estado en inglés, quién lo reparte en España y a quién preguntar si se para.
 slug: yanwen-seguimiento
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Yanwen es una empresa de logística china, fundada en Pekín en 1998, que envía al extranjero los paquetes de vendedores online y se los entrega a un transportista local para el último tramo. Para seguir tu paquete, escribe el número en su web de seguimiento, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), o pégalo en la casilla de arriba. El número te lo da la tienda o el marketplace donde compraste, en los datos de envío de tu pedido.
@@ -82,7 +82,7 @@ Para el pedido, escribe a la tienda o al marketplace. Para la entrega, usa la em
 
 Muestra el estado, el historial con la ciudad o la región de cada escaneo en un mapa, la hora de entrega, el país de destino y el transportista local con su número («Entrega con» esa empresa). Si Yanwen nombra un transportista local que está en la lista de Peek y el número encaja, Peek le pregunta a esa empresa; si no, a la empresa a la que corresponde con seguridad el número local; y si tampoco, con un número YP, al correo nacional del país de destino. Cambia a sus datos cuando muestran un avance más reciente. No pasa con todos los paquetes. Yanwen no da fecha prevista de entrega y no verás punto de recogida; se quedan fuera las referencias de pedido, los contactos, los códigos postales, los PIN de entrega y los números de puerta.
 
-Las horas conservan el desfase GMT de Yanwen y los escaneos repetidos se eliminan. Las líneas exactas `Delivered` y `Out for delivery` aparecen con las palabras de Peek; las demás, tal como aparecen en Yanwen, casi siempre en inglés. Peek consulta el seguimiento cada 10 minutos de día, cada 2 minutos cuando el paquete está en reparto y cada hora por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o «Solo el día de entrega». No puede contactar con Yanwen ni con la tienda por ti.
+Las horas se leen con el desfase GMT que da Yanwen y se muestran en la zona horaria de tu dispositivo; los escaneos repetidos se eliminan. Las líneas exactas `Delivered` y `Out for delivery` aparecen con las palabras de Peek; las demás, tal como aparecen en Yanwen, casi siempre en inglés. Peek consulta el seguimiento cada 10 minutos de día, cada 2 minutos cuando el paquete está en reparto y cada una o dos horas por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o «Solo el día de entrega». No puede contactar con Yanwen ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Yanwen
 

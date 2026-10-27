@@ -3,7 +3,7 @@ title: Lietuvos paštas siuntų sekimas: statusai ir paštomatai
 description: Sek Lietuvos pašto ar LP EXPRESS siuntą: kur rasti siuntos numerį, ką reiškia statusai, kiek siunta laukia paštomate, kaip sumokėti muitą ir kur skambinti.
 slug: lietuvos-pastas-siuntu-sekimas
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 Lietuvos paštas – nacionalinis Lietuvos pašto operatorius, o LP EXPRESS – jo paštomatų, kurjerių ir savitarnos prekės ženklas. Siuntą gali sekti [lpexpress.lt/track](https://lpexpress.lt/track) arba [post.lt siuntų sekimo puslapyje](https://www.post.lt/lt/siuntu-sekimas), o gali tiesiog įklijuoti numerį į laukelį viršuje. Numerį rasi Lietuvos pašto SMS žinutėje ar el. laiške, o jei siuntą siuntei pats – kasos kvite, kurį gavai pašte arba iš kurjerio.
@@ -90,7 +90,7 @@ Kai įklijuoji numerį, kuris baigiasi `LT` ir turi teisingą kontrolinį skaitm
 
 Siuntą iš užsienio su tarptautinio formato numeriu Peek iš pradžių seka pagal siuntėjo šalies pašto duomenis. Kai tas paštas nurodo, kad siunta keliauja į Lietuvą, arba šalies nenurodo, o tu esi Lietuvoje, Peek gali paklausti ir Lietuvos pašto: kai šis parodo naujų žingsnių, siuntą toliau seka jis, o ankstesni žingsniai lieka. Jei to neįvyksta, Lietuvos paštą pasirink per „Change“.
 
-Peek skaito tą pačią paslaugą, kuria remiasi lpexpress.lt/track, anglų kalba, todėl įvykius matysi angliškai, kaip lentelėje aukščiau. Dieną Peek tikrina kas 10 minučių, o kai siunta išvežta pristatyti – kas 2 minutes, naktį – kas valandą, ir pasikeitus būsenai gali tau pranešti. Kiekvieną žingsnį jis rodo žemėlapyje su miestu, skirstymo centru ar šalimi, taip pat muitinės žingsnius, įteikimo laiką ir paštomatą ar paštą, kuriame siunta laukia, su miestu (be gatvės ir pašto kodo). Lietuvoje atlikti žingsniai rodomi Vilniaus laiku, užsienyje – tos šalies laiku. Numatomos pristatymo dienos ir svorio nėra, o grąžinama siunta rodoma kaip problema. Peek negali už tave susisiekti su Lietuvos paštu ar parduotuve.
+Peek skaito tą pačią paslaugą, kuria remiasi lpexpress.lt/track, anglų kalba, todėl įvykius matysi angliškai, kaip lentelėje aukščiau. Dieną Peek tikrina kas 10 minučių, o kai siunta išvežta pristatyti – kas 2 minutes, naktį – kas valandą ar dvi, ir pasikeitus būsenai gali tau pranešti. Kiekvieną žingsnį jis rodo žemėlapyje su miestu, skirstymo centru ar šalimi, taip pat muitinės žingsnius, įteikimo laiką ir paštomatą ar paštą, kuriame siunta laukia, su miestu (be gatvės ir pašto kodo). Lietuvoje atliktų žingsnių laiką Peek skaito pagal Vilniaus laiką, užsienyje atliktų – pagal tos šalies laiką, o rodo jį tavo įrenginio laiko juostoje. Numatomos pristatymo dienos ir svorio nėra, o grąžinama siunta rodoma kaip problema. Peek negali už tave susisiekti su Lietuvos paštu ar parduotuve.
 
 ## Dažni klausimai apie Lietuvos pašto siuntų sekimą
 

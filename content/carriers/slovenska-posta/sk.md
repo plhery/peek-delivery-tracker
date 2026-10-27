@@ -3,7 +3,7 @@ title: Slovenská pošta sledovanie zásielok: podacie číslo a stavy
 description: Ako sledovať zásielku Slovenskej pošty: ako vyzerá podacie číslo, čo znamenajú stavy, ako dlho zásielka čaká na pošte či v BalíkoBOXe, reklamácie a kontakty.
 slug: slovenska-posta-sledovanie-zasielok
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 Slovenská pošta je národný poštový operátor. Zásielku môžete sledovať na stránke [Sledovanie zásielok](https://www.posta.sk/sledovanie-zasielok) na posta.sk, v mobilnej aplikácii Slovenskej pošty alebo tak, že podacie číslo vložíte do poľa vyššie. Podacie číslo vám dá odosielateľ: e-shop ho zvyčajne uvedie v e-maile o odoslaní alebo pri objednávke.
@@ -96,7 +96,7 @@ Kontakty podľa posta.sk k 22. októbru 2026:
 
 Pri poštovom čísle so `SK` na konci a správnou kontrolnou číslicou, ktorého prefix sa začína na C, E, L alebo R, určí [Peek](/) Slovenskú poštu priamo podľa čísla. Pri inom prefixe, napríklad pri vnútroštátnom balíku na B alebo D, sa Peek opýta Slovenskej pošty (a [Chronopostu](carrier:chronopost)): ak číslo pozná, ukáže „Slovenská pošta has this parcel.“, ak ešte nie, „Not found at … yet. Peek will keep checking after you add it.“ So zlou kontrolnou číslicou sa Slovenskej pošty nepýta, preto číslo skontrolujte. Číslo zahraničnej pošty Slovenskej pošte neodovzdá: vložte ho aj tak (Peek sleduje viac ako 3 500 prepravcov), kliknite na „Change“ a vyberte „Slovenská pošta“. Vložiť môžete aj odkaz z posta.sk/sledovanie-zasielok alebo z tandt.posta.sk.
 
-Peek kontroluje zásielku každých 10 minút, keď ju doručovateľ vezie k vám, každé 2 minúty, a pri zmene stavu vás môže upozorniť. Každý krok ukáže na mape: poštu, BalíkoBOX alebo PoštaPOINT na Slovensku a krajinu v zahraničí. Ukáže aj hmotnosť, cieľovú krajinu, čas doručenia a názov miesta, kde zásielka čaká (nie jeho adresu ani dátum, dokedy čaká). Predpokladaný deň doručenia Slovenská pošta neuvádza. Časy krokov na Slovensku sú v slovenskom čase; krok v krajine s viacerými časovými pásmami sa nezobrazí. Udalosti majú anglické znenie Slovenskej pošty, okrem `In transit` a `Out for delivery`, ktoré Peek nahradí vlastným znením; `Picked up` sa počíta ako doručenie. Zásielku do krajiny, ktorej národná pošta je v zozname Peeku, môžete sledovať aj tam. Kontaktovať Slovenskú poštu ani podať reklamáciu za vás Peek nemôže.
+Peek kontroluje zásielku každých 10 minút, keď ju doručovateľ vezie k vám, každé 2 minúty, a pri zmene stavu vás môže upozorniť. Každý krok ukáže na mape: poštu, BalíkoBOX alebo PoštaPOINT na Slovensku a krajinu v zahraničí. Ukáže aj hmotnosť, cieľovú krajinu, čas doručenia a názov miesta, kde zásielka čaká (nie jeho adresu ani dátum, dokedy čaká). Predpokladaný deň doručenia Slovenská pošta neuvádza. Časy krokov na Slovensku Peek číta podľa slovenského času a ukazuje ich v časovom pásme vášho zariadenia; krok v krajine s viacerými časovými pásmami sa nezobrazí. Udalosti majú anglické znenie Slovenskej pošty, okrem `In transit` a `Out for delivery`, ktoré Peek nahradí vlastným znením; `Picked up` sa počíta ako doručenie. Zásielku do krajiny, ktorej národná pošta je v zozname Peeku, môžete sledovať aj tam. Kontaktovať Slovenskú poštu ani podať reklamáciu za vás Peek nemôže.
 
 ## Časté otázky o sledovaní zásielok Slovenskej pošty
 

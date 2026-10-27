@@ -3,7 +3,7 @@ title: Foxpost csomagkövetés: státuszok, nyitókód, átvétel
 description: Így követheted a Foxpost-csomagot CLFOX vagy 66639 kezdetű számmal: mit jelentenek a státuszok, meddig vár a csomag az automatában, hogyan fizetsz utánvétet.
 slug: foxpost-csomagkovetes
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-10-27
 ---
 
 A Foxpost magyar csomagküldő cég: országszerte csomagautomatákba (A-BOX és Z-BOX), Z-Pont átvevőhelyekre és házhoz szállít. 2026. január 1-jén a Packeta Hungary beolvadt a FoxPost Kft.-be, ezért a hálózat ma „FOXPOST – Packeta Group” néven fut. A csomagodat a foxpost.hu [Csomagkövetés](https://foxpost.hu/csomagkovetes/) oldalán követheted, vagy beírhatod a számot a fenti mezőbe.
@@ -94,7 +94,7 @@ A Csomagkövetés minden lépésnél egy rövid címet (például „Automatába
 
 A [Peek](/) a `CLFOX` kezdetű számról rögtön tudja, hogy Foxpost-csomag. A 10 jegyű, `66639` kezdetű házhoz szállítási számot viszont más szállítóknak ajánlja fel, a Foxpostnak nem. Ezt is nyugodtan illeszd be: a Peek több mint 3500 szállítót követ. A Foxpostot a „Change” gombbal választhatod ki. Beillesztheted a foxpost.hu Csomagkövetés linkjét is a `code=` résszel: ebből a Peek a számtól függetlenül tudja, hogy Foxpostról van szó. A `Z` kezdetű számot a Peek a [Packetánál](carrier:packeta) követi.
 
-A Peek a Foxpost teljes előzményét mutatja, budapesti idő szerint, a lépéseket pedig magyarul, ahogy a Foxpost írja őket, akármilyen nyelven használod a Peeket. Látod a feladót (többnyire a webshopot) és azt az automatát vagy átvevőhelyet, ahová a csomag tart, vagy ahol vár. Várható kézbesítési napot és súlyt a Foxpost nem ad, a rendelésszámot és a fizetési adatokat pedig a Peek nem veszi át. Ha változik a státusz, a Peek értesítést küldhet. A Foxposttal vagy a webshoppal helyetted nem tud kapcsolatba lépni.
+A Peek a Foxpost teljes előzményét mutatja, a lépéseket pedig magyarul, ahogy a Foxpost írja őket, akármilyen nyelven használod a Peeket. Az időpontokat budapesti idő szerint értelmezi, és az eszközöd időzónájában jeleníti meg. Látod a feladót (többnyire a webshopot) és azt az automatát vagy átvevőhelyet, ahová a csomag tart, vagy ahol vár. Várható kézbesítési napot és súlyt a Foxpost nem ad, a rendelésszámot és a fizetési adatokat pedig a Peek nem veszi át. Ha változik a státusz, a Peek értesítést küldhet. A Foxposttal vagy a webshoppal helyetted nem tud kapcsolatba lépni.
 
 ## Gyakori kérdések a Foxpost-csomagkövetésről
 

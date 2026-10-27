@@ -96,7 +96,7 @@ Peek odczytuje śledzenie JCEX i pokazuje status, historię z miejscami skanów 
 
 JCEX nie podaje nazwy przewoźnika doręczającego, a Peek nie odczytuje pola „跟踪单号”, więc śledzi paczkę numerem JCEX do końca i nie przełącza się na przewoźnika w Polsce. Nie pokazuje też przewidywanej daty doręczenia, nazwy usługi ani potwierdzenia doręczenia.
 
-Śledzenie jest sprawdzane w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu; w nocy co godzinę. Powiadomienia możesz dostawać o każdym skanie („Wszystkie aktualizacje”), tylko o ważnych etapach („Tylko ważne”) albo „Tylko w dniu dostawy”. Peek nie skontaktuje się za Ciebie z JCEX ani ze sklepem.
+Śledzenie jest sprawdzane w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu; w nocy co godzinę lub dwie. Powiadomienia możesz dostawać o każdym skanie („Wszystkie aktualizacje”), tylko o ważnych etapach („Tylko ważne”) albo „Tylko w dniu dostawy”. Peek nie skontaktuje się za Ciebie z JCEX ani ze sklepem.
 
 ## Pytania o śledzenie JCEX
 

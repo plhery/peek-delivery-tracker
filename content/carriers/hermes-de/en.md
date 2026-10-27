@@ -3,7 +3,7 @@ title: Hermes tracking: German statuses explained in English
 description: Track a Hermes parcel in Germany: where the number is, what Hermes's German statuses mean in English, ParcelShops, missed deliveries and how to reach Hermes.
 slug: hermes-tracking
 published: 2026-10-11
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 Hermes Germany is the Otto Group's Hamburg-based parcel carrier, focused on deliveries within Germany. Track a parcel with its Sendungsnummer (tracking number) on [myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/), in German only, or paste the number in the box above. The sender has the number; Hermes's own emails reach you if the sender passed on your email address.
@@ -79,7 +79,7 @@ Hermes lists no customer-service phone line, hours or chat; the head-office numb
 
 It shows the status, history, expected day (not Hermes's time window), sending shop and delivery time. At a ParcelShop it shows "Ready for pickup" with the shop's name and address. It drops your name, address and booked preferences. Each scan keeps Hermes's own sentence, which Peek asks for in English, though some lines stay German; delivery to a neighbour, or pickup at a ParcelShop, counts as delivered. A parcel in a Hermes Box shows "Ready for pickup" until you take it out with its pickup TAN. Hermes gives no scan places, so the map stays empty.
 
-Peek checks every 10 minutes by day, every 2 once out for delivery, and hourly overnight, and can notify you of every scan, important steps only or delivery day only. It doesn't follow parcels to other carriers, and old numbers show as not found once Hermes deletes them after 30 days. Hermes Einrichtungs-Service (furniture) is a separate carrier, picked by hand.
+Peek checks every 10 minutes by day, every 2 once out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only. It doesn't follow parcels to other carriers, and old numbers show as not found once Hermes deletes them after 30 days. Hermes Einrichtungs-Service (furniture) is a separate carrier, picked by hand.
 
 ## Questions about Hermes tracking
 

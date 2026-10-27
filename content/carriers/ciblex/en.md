@@ -3,7 +3,7 @@ title: Ciblex tracking: numbers, French statuses and contact
 description: Track a Ciblex Express parcel in France or Belgium: which barcode to use, what Ciblex's French statuses mean, deliveries, C Dispo relays, claims and contacts.
 slug: ciblex-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Ciblex, or Ciblex Express, is a French express carrier founded in 1977 that delivers between businesses in France, Belgium and abroad, often early in the morning. Track a parcel with the barcode from its label on [Ciblex's tracking page](https://ciblex.eu/en/fast-tracking-of-your-parcels/), which is free, or paste the number in the box above. The number comes from the sender: if you don't have it, ask the shop or supplier that shipped the parcel.
@@ -78,7 +78,7 @@ The contact form on ciblex.eu is for companies' sales enquiries, not tracking qu
 
 [Peek](/) knows Ciblex's 14- and 24-digit numbers, but other carriers share both shapes, so it asks the likely carriers at once. For 14 digits in France, it asks Relais Colis and Ciblex first, after DPD or DHL only when the number's start points to one of their networks; elsewhere Ciblex comes sixth or later and may only be asked after you save the parcel. For 24 digits it asks Ciblex, InPost and bpost. If two carriers know the number, you pick with "Change". Links from secure.extranet.ciblex.fr with `colis=` work too; ciblex.eu pages don't.
 
-It checks Ciblex every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight. It shows the status, the history with each scan's depot town on a map, and the delivery time, in Paris time. Ciblex's French words never appear: each scan shows in plain words such as Delivered, Out for delivery, Ready for pickup, Delivery issue or "Parcel processed at a Ciblex facility", and other lines, `COLIS NON REMIS` and the 48-hour line included, as "Tracking update". It can notify you of every scan, important steps only or delivery day only.
+It checks Ciblex every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It shows the status, the history with each scan's depot town on a map, and the delivery time, with times read on Paris time and shown in your device's time zone. Ciblex's French words never appear: each scan shows in plain words such as Delivered, Out for delivery, Ready for pickup, Delivery issue or "Parcel processed at a Ciblex facility", and other lines, `COLIS NON REMIS` and the 48-hour line included, as "Tracking update". It can notify you of every scan, important steps only or delivery day only.
 
 There's no expected delivery date, no relay name or address and no weight, and your address is dropped when Ciblex puts it in the place column. An empty history isn't treated as "not found": it keeps asking.
 

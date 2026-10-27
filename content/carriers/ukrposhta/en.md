@@ -3,7 +3,7 @@ title: Ukrposhta tracking: Ukraine Post numbers and statuses
 description: Track a Ukrposhta parcel in English: the 13-digit and UA numbers, what the statuses mean, branch pickup, storage times, claims and contacts.
 slug: ukrposhta-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 Ukrposhta (Укрпошта) is Ukraine's state-owned national post. Track a parcel on [track.ukrposhta.ua/en](https://track.ukrposhta.ua/en/), in the Ukrposhta 2.0 app or by pasting the number in the box above. The number comes from the sender: 13 digits within Ukraine, or two letters, nine digits and two letters to or from abroad.
@@ -95,7 +95,7 @@ For 13 digits with Ukrposhta's check digit, [Peek](/) asks Ukrposhta, [La Poste]
 
 A number from another country's post isn't offered to Ukrposhta. When the item is heading to Ukraine, Peek can follow it to Ukrposhta, or you can pick "Ukrposhta" with "Change".
 
-It reads the service behind Ukrposhta's app, checks every 10 minutes by day (every 2 once the item is out for delivery) and hourly overnight, and can notify you when the status changes. It shows each step on a map with its place and country, the customs steps and the time it was delivered. Times in Ukraine are Kyiv time; steps abroad don't appear, and while the latest step is abroad it shows a dated history from [tracking services](guide:universal-tracker) when one has it. Peek shows no expected arrival day and leaves out Ukrposhta's planned date and postcodes; the only pickup point named is the branch on `Arrived to the Branch`. Statuses keep Ukrposhta's English wording, `Final delivery` included.
+It reads the service behind Ukrposhta's app, checks every 10 minutes by day (every 2 once the item is out for delivery) and every hour or two overnight, and can notify you when the status changes. It shows each step on a map with its place and country, the customs steps and the time it was delivered. Times in Ukraine are read on Kyiv time and shown in your device's time zone; steps abroad don't appear, and while the latest step is abroad it shows a dated history from [tracking services](guide:universal-tracker) when one has it. Peek shows no expected arrival day and leaves out Ukrposhta's planned date and postcodes; the only pickup point named is the branch on `Arrived to the Branch`. Statuses keep Ukrposhta's English wording, `Final delivery` included.
 
 ## Questions about Ukrposhta tracking
 

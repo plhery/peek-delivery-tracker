@@ -83,7 +83,7 @@ As read on 11 October 2026:
 
 Peek reads Packeta in English and shows its wording as written: the overall status, the newest 20 scans, the shop that sent it, the delivery time and the pickup point or Z-BOX address when the parcel heads there (none for home delivery or returns). It drops your name, address, phone and signature.
 
-Scans that name a depot or pickup point show it as the place, and those naming a town go on the map. Packeta gives no expected delivery. Times are Prague time (Romanian depot scans may be an hour off). When a scan links a partner carrier's tracker Peek knows, Peek names that partner as the one delivering and, when Peek can track the partner itself, follows the parcel there once it shows fresh progress. It checks Packeta every 10 minutes by day and hourly overnight, and can notify you of changes.
+Scans that name a depot or pickup point show it as the place, and those naming a town go on the map. Packeta gives no expected delivery. Times are read on Prague time and shown in your device's time zone (Romanian depot scans may be an hour off). When a scan links a partner carrier's tracker Peek knows, Peek names that partner as the one delivering and, when Peek can track the partner itself, follows the parcel there once it shows fresh progress. It checks Packeta every 10 minutes by day and every hour or two overnight, and can notify you of changes.
 
 ## Questions about Packeta tracking
 

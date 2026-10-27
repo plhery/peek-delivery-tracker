@@ -3,7 +3,7 @@ title: C Chez Vous suivi : numéro de commande, étapes et contact
 description: Suivi C Chez Vous pour un meuble ou un gros électroménager : où trouver le numéro de commande, ce que veut dire chaque étape et comment changer ta date.
 slug: c-chez-vous-suivi
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 C Chez Vous livre les colis volumineux de plus de 30 kg commandés en ligne, comme les meubles et le gros électroménager, à domicile sur rendez-vous ou en point retrait. C'est le magasin qui l'a choisi quand tu as commandé. Pour suivre ta livraison, saisis sur [la page de suivi de C Chez Vous](https://www.cchezvous.fr/suivi-colis) le numéro de commande reçu par e-mail ou par SMS, ou colle-le dans la case ci-dessus.
@@ -99,7 +99,7 @@ Peek affiche l'étape en cours avec ses propres mots : « Commande enregistrée 
 
 Quelques limites. Peek affiche `En livraison` comme si le livreur était en route, alors que la phrase de C Chez Vous parle encore de la plateforme régionale. Pour une commande en point retrait, il peut afficher « Livré » alors qu'elle t'attend seulement au point : fie-toi au SMS et aux 15 jours. Il ne lit pas `Annulée` : une commande annulée cesse simplement d'avancer.
 
-Il laisse de côté le créneau horaire, le magasin, ton nom, ton adresse, tes coordonnées et les articles commandés. Il vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois la commande en livraison, toutes les heures la nuit, et peut t'envoyer des notifications : toutes les mises à jour, les importantes uniquement ou le jour de livraison uniquement. Il ne peut pas déplacer ton rendez-vous.
+Il laisse de côté le créneau horaire, le magasin, ton nom, ton adresse, tes coordonnées et les articles commandés. Il vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois la commande en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : toutes les mises à jour, les importantes uniquement ou le jour de livraison uniquement. Il ne peut pas déplacer ton rendez-vous.
 
 ## Questions sur le suivi C Chez Vous
 

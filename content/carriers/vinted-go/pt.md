@@ -3,7 +3,7 @@ title: Vinted Go encomenda: rastreio, cacifos e levantamento
 description: Encomenda Vinted Go em Portugal: onde está o código de acompanhamento, o que quer dizer cada estado, quanto tempo espera no cacifo e a quem pedir ajuda.
 slug: vinted-go-encomenda
 published: 2026-10-11
-updated: 2026-10-25
+updated: 2026-10-27
 ---
 
 A Vinted Go é o serviço de entregas da própria Vinted: leva as encomendas vendidas na Vinted de um cacifo ou loja de encomendas para outro cacifo ou loja de encomendas. Para a acompanhar, abre a conversa da encomenda na Vinted e pressiona «Acompanhar encomenda», ou escreve o código na [página de acompanhamento da Vinted Go](https://vintedgo.com/pt/tracking?country=pt&region=europe).
@@ -89,7 +89,7 @@ O [Peek](/) consulta diretamente o acompanhamento da Vinted Go, sem conta nem c�
 
 Um código que comece por `VGS`, o Peek reconhece-o logo como Vinted Go. Se escreveres só o código de 16 algarismos, o Peek pergunta à Vinted Go, à TNT e à DHL eCommerce se o conhecem, e fica com a Vinted Go quando é ela que o conhece; por um código `UW` pergunta à Vinted Go. Se não, carrega em «Alterar transportadora» e escolhe «Vinted Go», ou cola o link de acompanhamento do vintedgo.com, com ou sem a língua: a Vinted Go é reconhecida logo. A Vinted Go deixa de dar o acompanhamento de uma encomenda seis meses depois de a etiqueta ser criada.
 
-O Peek verifica de 10 em 10 minutos durante o dia e de hora a hora à noite, e também de hora a hora quando passam 48 horas sem uma nova leitura, e pode enviar-te notificações quando o estado muda. Se a Vinted Go passar a encomenda a outra rede com um novo código de acompanhamento, o Peek pode segui-la nessa transportadora, se a ler diretamente. Não contacta a Vinted nem a Vinted Go, nem reporta problemas por ti.
+O Peek verifica de 10 em 10 minutos durante o dia, de hora a hora quando passam 48 horas sem uma nova leitura e, à noite, de hora a hora ou de duas em duas horas, e pode enviar-te notificações quando o estado muda. Se a Vinted Go passar a encomenda a outra rede com um novo código de acompanhamento, o Peek pode segui-la nessa transportadora, se a ler diretamente. Não contacta a Vinted nem a Vinted Go, nem reporta problemas por ti.
 
 ## Perguntas sobre encomendas Vinted Go
 

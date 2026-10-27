@@ -3,7 +3,7 @@ title: FedEx Polska śledzenie przesyłki krajowej: numer i statusy
 description: Śledzenie krajowej przesyłki FedEx po 13-cyfrowym numerze: co znaczą statusy, awizo, odbiór w Żabce i punktach FedEx, reklamacja i kontakt.
 slug: fedex-polska-sledzenie-przesylki
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 FedEx Polska to krajowy kurier FedEx: przesyłki z jednego polskiego adresu na drugi, z 13-cyfrowym numerem, które FedEx nazywa przesyłkami FDS 2.0. Sieć wywodzi się z firmy Opek, polskiego kuriera założonego w 1994 roku, którego przejęcie FedEx ogłosił w 2012 roku. Przesyłkę śledzisz na stronie [Monitoruj przesyłkę krajową](https://www.fedex.com/pl-pl/online/domestic-tracking.html) albo wklejasz numer w pole powyżej.
@@ -89,7 +89,7 @@ Stan na 22 października 2026:
 
 Link ze strony śledzenia krajowego, z fds2tracking.emea.fedex.com lub fedex.com, albo link z poland.fedex.com z `packageId=` od razu otwiera się jako FedEx Poland.
 
-Peek czyta krajowe śledzenie FedEx bezpośrednio. Pokazuje status, każdy skan w polskim brzmieniu FedEx z oddziałem i dokładną godziną, przedział godzinowy kuriera w dniu doręczenia, godzinę doręczenia i wagę. Pomija liczbę paczek, oddział nadania i doręczenia, datę wysyłki, numer przesyłki zwrotnej i potwierdzenie doręczenia; nadawcy, nazwiska ani adresu FedEx tam nie podaje. Peek sprawdza przesyłkę co 10 minut w dzień, a gdy jest wydana do doręczenia, co 2 minuty; jeśli FedEx podał okno kuriera, od pół godziny przed jego początkiem. W nocy sprawdza ją co godzinę. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni doręczenia i nie złoży reklamacji: to załatwisz w FedEx albo u nadawcy.
+Peek czyta krajowe śledzenie FedEx bezpośrednio. Pokazuje status, każdy skan w polskim brzmieniu FedEx z oddziałem i dokładną godziną, przedział godzinowy kuriera w dniu doręczenia, godzinę doręczenia i wagę. Pomija liczbę paczek, oddział nadania i doręczenia, datę wysyłki, numer przesyłki zwrotnej i potwierdzenie doręczenia; nadawcy, nazwiska ani adresu FedEx tam nie podaje. Peek sprawdza przesyłkę co 10 minut w dzień, a gdy jest wydana do doręczenia, co 2 minuty; jeśli FedEx podał okno kuriera, od pół godziny przed jego początkiem. W nocy sprawdza ją co godzinę lub dwie. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni doręczenia i nie złoży reklamacji: to załatwisz w FedEx albo u nadawcy.
 
 ## Pytania o śledzenie przesyłek FedEx Polska
 

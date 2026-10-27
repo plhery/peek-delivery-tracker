@@ -3,7 +3,7 @@ title: DHLink tracking: numbers, statuses and who delivers
 description: Track a DHLink parcel from a DHgate order: which numbers DHLink's tracker takes, what its English scans mean, who delivers in your country and who to ask.
 slug: dhlink-tracking
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 DHLink (驼飞侠) is the cross-border logistics platform of DHgate (敦煌网). Founded in 2014, it ships orders for DHgate sellers and other customers, from China or from its warehouses abroad, and hands them to a carrier in your country for the last leg. Track the number on DHLink's [tracking page](https://www.dhlink.com/trackQuery?lang=en) or in the box above. Take the number from your DHgate order, or ask the seller for it.
@@ -72,7 +72,7 @@ As read on 22 October 2026, DHLink's contact page lists one customer service add
 
 Peek reads DHLink's tracker. It shows the status, the history with each scan's place and the destination country, and lists each scan once. Scans in China are read on Beijing time and USPS scans on the time of their US state; others keep the time DHLink gives. DHLink gives no expected delivery date, delivery time, weight or service name, and Peek drops postcodes and order references. When the "Last Leg No." is a GOFO number (GFUS and 14 digits) or a SwiftX one (SWX and 18 digits), Peek shows that carrier and its number, asks it and switches to it once it shows newer progress. Other last-leg numbers stay on DHLink's history.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you at every scan, at important steps or on delivery day only. It can't contact DHLink, DHgate or the seller for you.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you at every scan, at important steps or on delivery day only. It can't contact DHLink, DHgate or the seller for you.
 
 ## Questions about DHLink tracking
 

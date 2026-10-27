@@ -3,7 +3,7 @@ title: DHL Paket rastreio: estados e envios para Portugal
 description: Rastreio DHL Paket: como é o número, o que querem dizer os estados em alemão e inglês, Packstation e Filiale na Alemanha, e quem entrega em Portugal.
 slug: dhl-paket-rastreio
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 A DHL Paket é o serviço de encomendas da DHL na Alemanha, o das encomendas da Deutsche Post e da DHL. Esta página serve-te se vives na Alemanha e também se estás em Portugal à espera de uma encomenda enviada de lá com DHL Paket International. Nos dois casos segues a encomenda com o número no dhl.de (em alemão ou inglês), na app Post & DHL ou colando-o na caixa acima. O número vem de quem envia: as lojas costumam pô-lo no email de confirmação do envio.
@@ -88,7 +88,7 @@ A DHL avisa para SMS falsos com links encurtados ou indicativos de país estranh
 
 O [Peek](/) reconhece a DHL logo com um número de etiqueta `JJD` de 18 algarismos, um código de barras `0034043…` válido ou um código `C…DE` ou `L…DE` válido. Um Identcode de 12 algarismos pode ser de várias transportadoras: o Peek pergunta a várias, a DHL incluída, se o conhecem. Um número de 10 algarismos, cola-o na mesma: o Peek segue mais de 3.500 transportadoras. Se não aparecer a DHL, escolhe-a em «Alterar transportadora». Os links do dhl.de e do deutschepost.de também funcionam.
 
-O Peek lê o rastreio do dhl.de em inglês, por isso os estados aparecem com o texto inglês da DHL, e se a DHL recusar a consulta usa um navegador no servidor. Se a DHL pedir código postal, ou disser que o número é de outro serviço DHL, entram os serviços de rastreio universais. O Peek consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada hora à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
+O Peek lê o rastreio do dhl.de em inglês, por isso os estados aparecem com o texto inglês da DHL, e se a DHL recusar a consulta usa um navegador no servidor. Se a DHL pedir código postal, ou disser que o número é de outro serviço DHL, entram os serviços de rastreio universais. O Peek consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
 
 Mostra o estado, cada evento com o local no mapa, o dia previsto de entrega (sem janela horária) e o país de destino. Não guarda o teu nome, a tua morada nem a assinatura. Se um evento em Portugal tiver o link do rastreio dos CTT ou da DHL eCommerce Iberia, o Peek pode seguir a encomenda aí. Com um código `C…DE` e destino Portugal, também a pode procurar nos CTT. O Peek não consegue desviar uma encomenda, marcar um Liefertag nem reclamar por ti.
 

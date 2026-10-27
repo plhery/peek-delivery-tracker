@@ -3,7 +3,7 @@ title: Kun Express tracking: KUN numbers, statuses and USPS
 description: Track a Kun Express parcel from China: what the KUN number looks like, what each status means, when USPS takes over and who to ask when it stalls.
 slug: kun-express-tracking
 published: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-27
 ---
 
 Kun Express (鲲辰, Hangzhou Kunchen Cross-border Supply Chain Management Co., Ltd.) is a forwarder in Hangzhou, China, that flies parcels for online sellers to the United States, Canada and Europe. On its US line, USPS delivers them. Its numbers start with KUN: type yours in the search box on [kun-express.com](https://www.kun-express.com/en), which opens Kun Express's tracking page, or in the box above. The shop that sold you the item gives the number with its shipping details.
@@ -82,7 +82,7 @@ Kun Express publishes no help for recipients and no warning about fake delivery 
 
 [Peek](/) names Kun Express at once from a KUN number with 10 digits, which no other carrier in its catalog shares. Type or paste the number itself: Peek takes no Kun Express tracking links.
 
-Peek reads Kun Express's own tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight. It shows the status, the history with each scan's place where Kun Express gives one, the service name the seller booked and the destination country. Each scan keeps the clock Kun Express gives it; a USPS scan without a time shows only its day. Where Kun Express's page repeats a USPS scan, Peek shows it once, without USPS's explanation or ZIP codes. Peek leaves out the recipient's name, which Kun Express's page shows, and gives no expected delivery date.
+Peek reads Kun Express's own tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It shows the status, the history with each scan's place where Kun Express gives one, the service name the seller booked and the destination country. Each scan is read on the clock Kun Express gives it and shown in your device's time zone; a USPS scan without a time shows only its day. Where Kun Express's page repeats a USPS scan, Peek shows it once, without USPS's explanation or ZIP codes. Peek leaves out the recipient's name, which Kun Express's page shows, and gives no expected delivery date.
 
 `Shipment information received` appears in Peek's own words. The other lines, USPS's included, show as written, except exact matches such as `Delivered`.
 

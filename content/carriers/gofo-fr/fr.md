@@ -3,7 +3,7 @@ title: GOFO France suivi colis : statuts, livraison et contact
 description: Suivi GOFO en France : où trouver le numéro GFFR ou CIFR, ce que veulent dire les statuts, les livraisons manquées, les colis perdus et qui appeler.
 slug: gofo-france-suivi
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GOFO France est un livreur du dernier kilomètre qui apporte à domicile, en France, les commandes passées sur des plateformes d'e-commerce, des marketplaces et des boutiques en ligne ; depuis 2025, il réunit aussi l'ancien CIRRO Parcel. Pour suivre ton colis, saisis son numéro qui commence par `GFFR` ou `CIFR` sur [la page de suivi de GOFO](https://www.gofo.com/fr/tracking-results/), qui accepte plusieurs numéros à la fois. Le numéro vient de la boutique : cherche dans l'e-mail de confirmation de commande ou d'expédition.
@@ -76,7 +76,7 @@ GOFO conseille le téléphone aux heures calmes et l'e-mail aux heures de pointe
 
 [Peek](/) reconnaît tout seul les numéros `GFFR` et `CIFR`. Tu peux aussi coller un lien du site français de GOFO (gofo.com/fr ou gofoexpress.fr, avec `id=` et le numéro). Une référence de la boutique en `PK` suivie de 20 chiffres, parfois écrite `PK-1234567890123456789-0` (inventée), marche aussi : Peek la demande à GOFO France seul et la lui attribue dès que GOFO la reconnaît.
 
-Peek lit le suivi de GOFO en français toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, et toutes les heures la nuit. Il affiche le statut, l'historique avec le lieu que GOFO donne pour chaque étape, le nom du service (souvent `CIRRO Parcel`) et l'heure de livraison, place chaque étape sur une carte et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Les étapes gardent les mots de GOFO, et une livraison s'affiche `Livré`. Peek n'affiche ni date de livraison prévue, ni point relais, ni poids, et laisse de côté les photos de livraison et les avis de GOFO. Tant que GOFO n'a renvoyé aucune étape, Peek continue de demander au lieu de déclarer le numéro inconnu. Il ne peut pas contacter GOFO ni la boutique à ta place.
+Peek lit le suivi de GOFO en français toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, et toutes les une à deux heures la nuit. Il affiche le statut, l'historique avec le lieu que GOFO donne pour chaque étape, le nom du service (souvent `CIRRO Parcel`) et l'heure de livraison, place chaque étape sur une carte et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Les étapes gardent les mots de GOFO, et une livraison s'affiche `Livré`. Peek n'affiche ni date de livraison prévue, ni point relais, ni poids, et laisse de côté les photos de livraison et les avis de GOFO. Tant que GOFO n'a renvoyé aucune étape, Peek continue de demander au lieu de déclarer le numéro inconnu. Il ne peut pas contacter GOFO ni la boutique à ta place.
 
 ## Questions sur le suivi GOFO
 

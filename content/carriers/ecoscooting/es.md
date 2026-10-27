@@ -3,7 +3,7 @@ title: Ecoscooting seguimiento: estados, entregas y teléfono
 description: Sigue tu paquete de Ecoscooting en España: qué número usar, qué significa cada estado, qué pasa si falla la entrega, puntos de recogida y teléfonos.
 slug: ecoscooting-seguimiento
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 Ecoscooting es una empresa de reparto de compras online de plataformas extranjeras en España y Portugal, del grupo Cainiao, la logística de Alibaba. Solo hace el último tramo: lleva el paquete a tu casa o a un punto de recogida. Para seguirlo, escribe en ecoscooting.com el número que aparece en sus correos, o pégalo en la casilla de arriba.
@@ -89,7 +89,7 @@ Cuando Cainiao o CACESA dan un número CNESP o CNPRT, Peek puede seguir el paque
 
 Peek muestra el estado, el historial con las horas exactas de Ecoscooting pero sin lugares, el peso, la hora de entrega y, cuando el paquete llega a un punto de recogida, su nombre y dirección, que se quedan después de recogerlo. No hay fecha de entrega prevista. Deja fuera el PIN, el teléfono y el horario del punto, los códigos postales y las referencias del pedido. Las líneas salen en el inglés de Ecoscooting, porque Peek lo consulta en ese idioma, salvo un `Out for delivery` a secas, que aparece como «En reparto». Ecoscooting responde igual con un número desconocido que con uno que no puede consultar, así que un número equivocado simplemente se queda sin novedades.
 
-Peek consulta el seguimiento cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega.
+Peek consulta el seguimiento cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega.
 
 ## Preguntas sobre el seguimiento de Ecoscooting
 

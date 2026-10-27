@@ -3,7 +3,7 @@ title: USPS tracking: numbers, statuses and missed deliveries
 description: Track a USPS parcel: where the tracking number is, what USPS's statuses mean, redelivery and Post Office pickup, lost parcels and how to reach USPS.
 slug: usps-tracking
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 USPS, the U.S. Postal Service, delivers to every address in the United States, and tracking comes free with most of its domestic parcel services. Type the number into USPS Tracking on usps.com, text it to 28777 or paste it in the box above. The number comes from the sender, usually in the shop's shipping email.
@@ -83,7 +83,7 @@ Read on usps.com on 13 October 2026:
 
 [Peek](/) names USPS at once for 22-digit labels that pass USPS's check, most 26-digit `92` numbers and scanned `420` barcodes, whose ZIP it removes. For shared shapes (`9261` and `9361` numbers, 20 digits, postal numbers ending `US`) Peek first asks the other likely carriers and tracking services and opens USPS's page last, so the answer can take a moment. Links from usps.com work too.
 
-Peek opens USPS's tracking page in a browser on its own server. That is slower, and USPS can refuse it; tracking services then fill in, though they don't always hold USPS's history. Peek shows the status, each scan on a map, timed in the state where it happened, and the expected delivery day, and can notify you at every scan, at important steps or on delivery day only. It drops the signatory and delivery instructions.
+Peek opens USPS's tracking page in a browser on its own server. That is slower, and USPS can refuse it; tracking services then fill in, though they don't always hold USPS's history. Peek shows the status, each scan on a map, its time read in the state where it happened and shown in your device's time zone, and the expected delivery day, and can notify you at every scan, at important steps or on delivery day only. It drops the signatory and delivery instructions.
 
 Statuses stay in USPS's English; delivered scans read "Delivered". When [UPS](carrier:ups) or [FedEx](carrier:fedex) hand a parcel to USPS, or a parcel from abroad reaches the US, Peek can follow it on USPS once USPS shows progress. Redelivery and Informed Delivery stay on usps.com.
 

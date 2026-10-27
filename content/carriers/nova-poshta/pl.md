@@ -3,7 +3,7 @@ title: Nova Poshta (Nova Post) śledzenie: numer, statusy, odbiór
 description: Paczka z Ukrainy przez Nova Post: gdzie jest numer listu przewozowego, co znaczą statusy, ile czeka w oddziale, Paczkomacie i punkcie oraz jak się skontaktować.
 slug: nova-poshta-sledzenie
 published: 2026-10-12
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 Nova Poshta, w Polsce Nova Post, to ukraińska firma kurierska, która sama nazywa się liderem przesyłek ekspresowych na Ukrainie; w Polsce działa jako NOVA POST POLAND z własnymi oddziałami. Paczkę śledzisz po numerze listu przewozowego na [polskiej stronie śledzenia Nova Post](https://novapost.com/pl-pl/tracking/), w aplikacji albo wklejając go w pole powyżej. Numer dostajesz od nadawcy, w SMS-ie albo w powiadomieniu z aplikacji.
@@ -91,7 +91,7 @@ Stan na 22 października 2026, według stron Nova Post:
 
 Te same kształty numerów mają inne firmy, więc po samym numerze [Peek](/) nie wskaże Nova Poshta. Pyta za to przewoźników, którzy takich numerów używają, a wśród nich Nova Poshta: od razu, jeśli szukasz z Ukrainy albo numer zaczyna się od 595000, a w innym wypadku dopiero wtedy, gdy pierwsi przewoźnicy go nie znają. Jeśli Nova Poshta zna numer, zobaczysz „Nova Poshta (Ukraine) ma tę przesyłkę.”. Jeśli nie, naciśnij „Zmień” i wybierz „Nova Poshta (Ukraine)” albo wklej link do śledzenia z novaposhta.ua. Linków z novapost.com Peek nie odczytuje: wklej sam numer. Peek śledzi ukraińskie listy przewozowe, także nadane w oddziałach Nova Post za granicą. Numery Nova Global z `NPG` na końcu to osobny przewoźnik, którego Peek rozpoznaje po samym numerze.
 
-Pokazuje angielskie komunikaty Nova Poshta, na przykład `Arrived at the branch 12` zamiast polskiego „Dotarła do oddziału”. Widzisz miasto każdego skanu na mapie, przewidywane dotarcie do oddziału lub pod drzwi, wagę, wymiary pojedynczej paczki, oddział lub automat, w którym czeka, kraj docelowy i godzinę doręczenia. Nazwisk, adresów i płatności nie pokazuje. Gdy przesyłka eksportowa wymienia partnera za granicą, [UPS](carrier:ups) albo GoFo Express, Peek może przejść za nią do tego przewoźnika. Sprawdza śledzenie w dzień co 10 minut, co 2 minuty, gdy paczka jest w doręczeniu, a w nocy co godzinę, i powiadomi Cię o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Nie skontaktuje się za Ciebie z Nova Post ani nie złoży reklamacji.
+Pokazuje angielskie komunikaty Nova Poshta, na przykład `Arrived at the branch 12` zamiast polskiego „Dotarła do oddziału”. Widzisz miasto każdego skanu na mapie, przewidywane dotarcie do oddziału lub pod drzwi, wagę, wymiary pojedynczej paczki, oddział lub automat, w którym czeka, kraj docelowy i godzinę doręczenia. Nazwisk, adresów i płatności nie pokazuje. Gdy przesyłka eksportowa wymienia partnera za granicą, [UPS](carrier:ups) albo GoFo Express, Peek może przejść za nią do tego przewoźnika. Sprawdza śledzenie w dzień co 10 minut, co 2 minuty, gdy paczka jest w doręczeniu, a w nocy co godzinę lub dwie, i powiadomi Cię o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Nie skontaktuje się za Ciebie z Nova Post ani nie złoży reklamacji.
 
 ## Pytania o śledzenie Nova Post
 

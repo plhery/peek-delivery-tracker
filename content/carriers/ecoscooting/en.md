@@ -3,7 +3,7 @@ title: Ecoscooting tracking: statuses, pickup points and contact
 description: Track an Ecoscooting parcel in Spain or Portugal: which number to use, what its statuses mean, missed deliveries, parcelshops and how to reach Ecoscooting.
 slug: ecoscooting-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 Ecoscooting is a delivery company for online orders from cross-border platforms in Spain and Portugal, part of Cainiao, Alibaba's logistics arm. It only does the last leg: the local delivery to your door or to a pickup point. Track the parcel on ecoscooting.com with the number from Ecoscooting's emails, or paste it in the box above.
@@ -88,7 +88,7 @@ When Cainiao or CACESA gives a `CNESP` or `CNPRT` number, Peek follows the parce
 
 Peek shows the status, the history with Ecoscooting's exact times but no places, the weight, the delivery time and, once the parcel reaches a parcelshop, its name and address, kept after you pick it up. There's no expected delivery date. It leaves out the PIN, the shop's phone and hours, postcodes and order references. Lines appear in Ecoscooting's English, except a plain `Out for delivery`, which shows in Peek's own words. Ecoscooting never says a number doesn't exist, so a wrong number simply stays without updates.
 
-Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps only or delivery day only.
+Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only.
 
 ## Questions about Ecoscooting tracking
 

@@ -3,7 +3,7 @@ title: GOFO Italy tracking: stati, consegna e contatti
 description: Tracking GOFO in Italia: dove trovi il codice GFIT o CIIT, cosa vogliono dire gli stati, consegna fallita, pacco smarrito e numero di telefono.
 slug: gofo-italy-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GOFO Italy è un corriere dell'ultimo miglio che consegna in Italia gli ordini online di negozi e marchi di e-commerce; ha assorbito CIRRO Parcel, e il tracciamento indica ancora spesso quel nome come servizio. Per seguire il pacco inserisci il codice che inizia con `GFIT` o `CIIT` sulla [pagina di tracciamento di GOFO](https://www.gofo.com/it/tracking-results/), che accetta anche più codici insieme. Il codice te lo dà il negozio che ha spedito: guarda nell'e-mail di conferma dell'ordine o di spedizione.
@@ -79,7 +79,7 @@ Nelle ore di punta GOFO consiglia l'e-mail. La sua pagina di tracciamento parla 
 
 [Peek](/) riconosce da solo i codici `GFIT` e `CIIT`, in maiuscolo o minuscolo. Puoi incollare anche un link del sito italiano di GOFO (gofo.com/it o gofoexpress.it, con `id=` e il codice): a decidere è il codice che contiene.
 
-Peek controlla il tracciamento italiano di GOFO ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e ogni ora di notte. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, il nome del servizio (spesso `CIRRO Parcel`) e l'ora di consegna, ogni scansione su una mappa, e ti manda notifiche: ogni scansione, solo i passaggi importanti o solo il giorno di consegna. Le scansioni restano nelle parole italiane di GOFO, e una consegna appare come `Consegnato`. Gli orari tengono il fuso orario che dà GOFO. Peek non mostra una data di consegna prevista, un punto di ritiro o il peso, e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
+Peek controlla il tracciamento italiano di GOFO ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, il nome del servizio (spesso `CIRRO Parcel`) e l'ora di consegna, ogni scansione su una mappa, e ti manda notifiche: ogni scansione, solo i passaggi importanti o solo il giorno di consegna. Le scansioni restano nelle parole italiane di GOFO, e una consegna appare come `Consegnato`. Gli orari sono letti nel fuso orario che dà GOFO e mostrati in quello del tuo dispositivo. Peek non mostra una data di consegna prevista, un punto di ritiro o il peso, e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
 
 ## Domande sul tracking GOFO
 

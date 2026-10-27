@@ -3,7 +3,7 @@ title: CACESA tracking: customs, statuses and who delivers
 description: Track a CACESA parcel into Spain or Portugal: the number to use, what CACESA's statuses mean, customs payments, who delivers it and how to contact CACESA.
 slug: cacesa-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 CACESA (Compañía Auxiliar al Cargo Express) is a Madrid customs agent for online shopping parcels from China to Spain and Portugal: it receives them at several airports, clears them through customs and hands them to the company that delivers them. It delivers nothing itself. Track a parcel on CACESA's tracking page with the shipment number the shop gave you, or paste it in the box above.
@@ -87,9 +87,9 @@ As listed on cacesa.com on 12 October 2026. CACESA has no Portuguese site or Por
 
 No number shape is CACESA's, so [Peek](/) never names CACESA from a number. Add the number and pick CACESA with "Change", or paste a cacesa.com tracking link (`/en/tracking` or `/es/seguimiento` with `busqueda=`), which names CACESA for any number. A `CNESP` or `CNPRT` number names Ecoscooting at once.
 
-Peek shows CACESA's English wordings as written, with the history in Madrid time. A delivered line shows as delivered. `Start Custom clearance Process` shows as a customs step and the green-channel release as moving on, but Peek shows no duty amount and can't pay it. CACESA gives no places, so there's nothing to pin on the map, and no expected delivery, weight, sender or recipient.
+Peek shows CACESA's English wordings as written, with the history's times read on Madrid time and shown in your device's time zone. A delivered line shows as delivered. `Start Custom clearance Process` shows as a customs step and the green-channel release as moving on, but Peek shows no duty amount and can't pay it. CACESA gives no places, so there's nothing to pin on the map, and no expected delivery, weight, sender or recipient.
 
-CACESA doesn't name the delivery company, and the parcel goes on under the same number. Peek can follow it only when that number is clearly another carrier's: Ecoscooting for `CNESP` and `CNPRT`, [Correos](carrier:correos-spain) for a postal number ending `ES`, [CTT](carrier:ctt) for one ending `PT`, or [CTT Express](carrier:ctt-express) for its own numbers. `CNES` and `LP` numbers aren't followed. Peek checks every 10 minutes by day and hourly overnight, and can notify you when the status changes.
+CACESA doesn't name the delivery company, and the parcel goes on under the same number. Peek can follow it only when that number is clearly another carrier's: Ecoscooting for `CNESP` and `CNPRT`, [Correos](carrier:correos-spain) for a postal number ending `ES`, [CTT](carrier:ctt) for one ending `PT`, or [CTT Express](carrier:ctt-express) for its own numbers. `CNES` and `LP` numbers aren't followed. Peek checks every 10 minutes by day and every hour or two overnight, and can notify you when the status changes.
 
 ## Questions about CACESA tracking
 

@@ -3,7 +3,7 @@ title: SunYou Tracking: Sendungsverfolgung, Status und Kontakt
 description: SunYou-Paket (SYPost) aus China verfolgen: wie die SY-Nummer aussieht, was die Status bedeuten, wer in Deutschland zustellt und wen du fragst, wenn nichts kommt.
 slug: sunyou-sendungsverfolgung
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 SunYou, auch SYPost geschrieben, ist ein Logistikunternehmen aus Shenzhen, das kleine Pakete für Onlinehändler in China ins Ausland bringt und sie im Zielland einem Paketdienst vor Ort übergibt. Seine Nummern beginnen mit SY: Gib deine auf SunYous Tracking-Seite [sypost.net](https://www.sypost.net) ein oder oben ins Feld. Die Nummer bekommst du vom Shop, mit den Versanddaten deiner Bestellung.
@@ -86,11 +86,11 @@ Für alles, was jemand tun muss, sind der Händler und der Paketdienst vor Ort d
 
 [Peek](/) erkennt SunYou sofort an beiden SY-Formen, die kein anderer Paketdienst in seinem Katalog teilt. Einen sypost.net-Link mit der Nummer darin, wie ihn „Copy Link“ auf der Tracking-Seite kopiert, kannst du ebenfalls einfügen.
 
-Peek liest SunYous Tracking auf Englisch, darum stehen die Zeilen dort englisch, etwa `Departed Sunyou Facility`. Nur genaue Treffer wie `Delivered` zeigt es in seinen eigenen Worten auf Deutsch. Du siehst den Status, den Verlauf (bis zu 20 Scans, ohne Ort), das Zielland, die Zustellzeit und den Paketdienst vor Ort mit seiner Nummer. Ein voraussichtliches Lieferdatum und eine Abholstelle zeigt es für SunYou-Pakete nicht. Die Uhrzeiten behalten die Zeitzone, die SunYou ihnen gibt, erst die chinesische, dann die des Ziellands.
+Peek liest SunYous Tracking auf Englisch, darum stehen die Zeilen dort englisch, etwa `Departed Sunyou Facility`. Nur genaue Treffer wie `Delivered` zeigt es in seinen eigenen Worten auf Deutsch. Du siehst den Status, den Verlauf (bis zu 20 Scans, ohne Ort), das Zielland, die Zustellzeit und den Paketdienst vor Ort mit seiner Nummer. Ein voraussichtliches Lieferdatum und eine Abholstelle zeigt es für SunYou-Pakete nicht. Die Uhrzeiten liest Peek in der Zeitzone, die SunYou ihnen gibt, erst der chinesischen, dann der des Ziellands, und zeigt sie in der Zeitzone deines Geräts.
 
 Nennt SunYou die Nummer des Paketdiensts vor Ort, kann Peek diesen Dienst abfragen, etwa DHL in Deutschland oder bei einer Postnummer die Post des Ziellands, und wechselt zu ihm, sobald er neuere Schritte zeigt. Das Paket behält seine SunYou-Nummer, seine Seite zeigt „Zustellung durch“ und den Dienst, mit dessen eigener Nummer und einem Link. Das klappt nicht bei jedem Paket.
 
-Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. SunYou oder den Händler kontaktieren kann es nicht für dich.
+Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. SunYou oder den Händler kontaktieren kann es nicht für dich.
 
 ## Fragen zur SunYou Sendungsverfolgung
 

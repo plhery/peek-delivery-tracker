@@ -3,7 +3,7 @@ title: Omniva tracking: codes, statuses and parcel machines
 description: Track an Omniva parcel in Estonia, Latvia or Lithuania: what the shipment code looks like, what each status means, parcel machine storage and contacts.
 slug: omniva-tracking
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Omniva is Estonia's post (the company is still Eesti Post) and the parcel network behind the parcel machines in Estonia, Latvia and Lithuania. Track a parcel with its shipment tracking code on minu.omniva.ee, in the Omniva app, or paste the code in the box above. The code comes from the shop's shipping email or from Omniva's own SMS or email.
@@ -88,7 +88,7 @@ Each site also has forms for a delivery status request, a damaged or lost parcel
 
 A postal-format number ending `EE` that starts with C, R, E or L (but not CR, CV or RO) and has a valid check digit is Omniva's by its shape, so Peek names Omniva straight away. For one with other letters, Peek asks Omniva first, with Chronopost, and names Omniva once it knows the code. If Omniva doesn't know it yet, you see "Not found at … yet. Peek will keep checking after you add it." It keeps asking, less often over time, for up to a month. A number with a wrong check digit names no carrier, and Omniva refuses it even when picked by hand: check it for a typo. A foreign postal number tracks at Omniva after "Change" or from an Omniva link. When the sending post says it is going to Estonia, or names no country and you're in Estonia, Peek also asks Omniva and, once Omniva shows new steps, follows the parcel there; for Latvia or Lithuania it asks Latvijas Pasts or Lietuvos paštas instead. An `EE` postal number Omniva sends abroad can be followed to the destination's post the same way.
 
-It shows Omniva's English statuses, the Omniva site of each scan, the destination country, the delivery time and the parcel machine or post office it waits at. It drops addresses, postcodes and failure reasons, and shows no expected delivery or weight. Peek checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, puts each scan on a map and can notify you of changes. Old parcels may keep only the delivery.
+It shows Omniva's English statuses, the Omniva site of each scan, the destination country, the delivery time and the parcel machine or post office it waits at. It drops addresses, postcodes and failure reasons, and shows no expected delivery or weight. Peek checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, puts each scan on a map and can notify you of changes. Old parcels may keep only the delivery.
 
 ## Questions about Omniva tracking
 

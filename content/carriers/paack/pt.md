@@ -3,7 +3,7 @@ title: Paack rastreio: número, código postal e janela horária
 description: Rastreio Paack em Portugal: onde está o número de pedido, porque é preciso o código postal, o que quer dizer cada estado e como contactar a Paack.
 slug: paack-rastreio
 published: 2026-10-11
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 A Paack é uma transportadora com sede em Barcelona que entrega encomendas de lojas online em Portugal, Espanha, França e Itália, em janelas horárias marcadas. Para rastreares uma encomenda Paack, escreve o número de pedido e o código postal de entrega na [página de seguimento da Paack](https://paack.co/shipments/tracking?lng=pt), ou cola o número na caixa acima e escolhe Paack. Os dois estão no fim do e-mail da Paack, e o número também nas mensagens da loja.
@@ -81,7 +81,7 @@ O [Peek](/) reconhece logo como da Paack um número `PK` com 18 algarismos, o da
 
 Depois, preenche o campo «Código postal de entrega». Aparece como opcional porque um número `PK` não precisa dele, mas a Paack só mostra as outras encomendas com ele; um código postal dentro da ligação não conta. Usa o do e-mail da Paack; o campo aceita o formato português, com hífen. A Paack só responde quando o número e o código postal batem certo, por isso um par errado parece um número desconhecido. O código postal vai para a Paack e, quando é preciso, para serviços de seguimento. O Peek escreve o número em maiúsculas e tira espaços, pontos e hífenes, ao passo que a Paack o pede tal como está: se nada aparecer, experimenta também na página da Paack.
 
-Vês o estado, o histórico e o dia e a janela previstos, na hora local da morada de entrega. Num Ponto PaackGo, o Peek deve mostrar o nome e a morada do ponto (ainda não visto numa encomenda real), nunca o código de levantamento, o código QR nem o prazo: para esses, usa a página da Paack e o e-mail com as instruções de levantamento. Os passos aparecem com palavras do Peek, em português, e um levantamento num Ponto PaackGo aparece como «Entregue». A Paack não dá o local das leituras nem nomeia outra transportadora, por isso o seguimento fica na Paack. O nome da loja, o teu nome e a tua morada ficam de fora. O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora à noite, e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só no dia da entrega».
+Vês o estado, o histórico e o dia e a janela previstos, na hora local da morada de entrega. Num Ponto PaackGo, o Peek deve mostrar o nome e a morada do ponto (ainda não visto numa encomenda real), nunca o código de levantamento, o código QR nem o prazo: para esses, usa a página da Paack e o e-mail com as instruções de levantamento. Os passos aparecem com palavras do Peek, em português, e um levantamento num Ponto PaackGo aparece como «Entregue». A Paack não dá o local das leituras nem nomeia outra transportadora, por isso o seguimento fica na Paack. O nome da loja, o teu nome e a tua morada ficam de fora. O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só no dia da entrega».
 
 ## Perguntas sobre o rastreio Paack
 

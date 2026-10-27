@@ -3,7 +3,7 @@ title: Suivi colis DHL Paket : numéro, statuts et livraison
 description: Suivi DHL Paket : à quoi ressemble le numéro, ce que disent les statuts, la Packstation en Allemagne et qui livre un colis d'Allemagne en France, Belgique ou Suisse.
 slug: dhl-paket-suivi-colis
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 DHL Paket est le service colis allemand de DHL Group, sous les marques Deutsche Post et DHL. Tu suis ton colis avec son numéro sur dhl.de (en allemand ou en anglais), dans l'app Post & DHL ou en le collant dans le champ ci-dessus. Le numéro vient de l'expéditeur, en général dans l'e-mail d'expédition. Cette page sert à qui vit en Allemagne comme à qui attend en France, en Belgique ou en Suisse un colis parti d'Allemagne.
@@ -90,7 +90,7 @@ DHL ne demande jamais de données personnelles ni de paiement par SMS : un faux 
 
 [Peek](/) reconnaît DHL tout de suite avec un numéro `JJD` à 18 chiffres, un numéro `0034043…` dont la clé de contrôle est bonne, ou un numéro `C…DE` ou `L…DE` valable. Un Identcode à 12 chiffres ou un numéro à 10 chiffres peut aussi appartenir à d'autres transporteurs : colle-le quand même, Peek suit plus de 3 500 transporteurs, et si le colis n'est pas classé sous DHL, choisis « DHL » avec « Changer de transporteur ». Les liens de dhl.de et deutschepost.de marchent aussi.
 
-Peek lit le suivi de dhl.de en anglais, au besoin dans un navigateur sur son serveur ; si DHL réclame un code postal ou renvoie vers un autre service DHL, des services de suivi prennent le relais. Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et peut te prévenir à chaque scan, aux étapes importantes ou le jour de livraison seulement.
+Peek lit le suivi de dhl.de en anglais, au besoin dans un navigateur sur son serveur ; si DHL réclame un code postal ou renvoie vers un autre service DHL, des services de suivi prennent le relais. Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut te prévenir à chaque scan, aux étapes importantes ou le jour de livraison seulement.
 
 Tu vois le statut, chaque scan sur une carte, avec son lieu et l'heure exacte de DHL, le jour de livraison prévu (sans créneau) et le pays de destination, avec les phrases de DHL telles quelles. Peek ne conserve ni ton nom, ni ton adresse, ni la signature, et n'affiche pas l'adresse d'une Packstation ou d'une Filiale. Quand un scan à l'étranger renvoie vers le suivi de La Poste, de la Poste suisse ou de DHL Express, Peek peut continuer le suivi chez eux. Sans ce lien, pour un numéro `C…DE` envoyé en France ou en Belgique, il essaie La Poste ou bpost. Il ne peut ni dévier un colis, ni réserver un Liefertag, ni contacter DHL ou la boutique à ta place.
 

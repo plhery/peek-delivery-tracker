@@ -3,7 +3,7 @@ title: Magyar Posta tracking: Hungarian statuses in English
 description: Track a Magyar Posta (Hungarian Post) parcel: number shapes, what the Hungarian statuses mean, PostaPont and locker pickup, customs, claims and contacts.
 slug: magyar-posta-tracking
 published: 2026-10-15
-updated: 2026-10-25
+updated: 2026-10-27
 ---
 
 Magyar Posta (Hungarian Post) is Hungary's national postal service, and MPL is the name on its parcels, PostaPont pickup points and lockers. Track a parcel free on posta.hu's "Nyomkövetés" page or in the Magyar Posta app, or paste the number in the box above. The number comes from the shop's shipping email or from Magyar Posta's own email or SMS when the parcel arrives.
@@ -87,7 +87,7 @@ As listed on posta.hu on 15 October 2026:
 
 [Peek](/) asks Magyar Posta whether it knows a domestic `P…` number or a postal `…HU` one, in a browser on Peek's server, so the answer can take up to about 20 seconds; for 11 digits after `P` and a letter, La Poste is asked too. You can also pick Magyar Posta with "Change", or paste a posta.hu tracking link with `searchvalue=`, which names it straight away. Peek doesn't recognise an MPL Europe Standard `JJH…` number: pick Magyar Posta with "Change".
 
-The first lookup opens posta.hu in a browser on Peek's server to pass its captcha, so it isn't instant; later checks read the number from Magyar Posta's app list. If the captcha is refused, Peek waits 10 minutes and tracking services fill in, though their history can lag. Peek shows the status, the history with each place, the service and the pickup point (post office, PostaPont or locker), in Magyar Posta's Hungarian. It shows no expected delivery or pickup deadline. It checks every 10 minutes by day, every 2 to 5 minutes once out for delivery, and hourly overnight, and can notify you on changes. An item posted abroad keeps its foreign post's number. When the foreign post says it's coming to Hungary, or names no destination and you track it from Hungary, Peek asks Magyar Posta too and follows the parcel there once Magyar Posta shows fresh progress.
+The first lookup opens posta.hu in a browser on Peek's server to pass its captcha, so it isn't instant; later checks read the number from Magyar Posta's app list. If the captcha is refused, Peek waits 10 minutes and tracking services fill in, though their history can lag. Peek shows the status, the history with each place, the service and the pickup point (post office, PostaPont or locker), in Magyar Posta's Hungarian. It shows no expected delivery or pickup deadline. It checks every 10 minutes by day, every 2 to 5 minutes once out for delivery, and every hour or two overnight, and can notify you on changes. An item posted abroad keeps its foreign post's number. When the foreign post says it's coming to Hungary, or names no destination and you track it from Hungary, Peek asks Magyar Posta too and follows the parcel there once Magyar Posta shows fresh progress.
 
 ## Questions about Magyar Posta tracking
 

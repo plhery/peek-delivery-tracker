@@ -3,7 +3,7 @@ title: Omniva sūtījumu izsekošana: statusi, pakomāti un kontakti
 description: Izseko Omniva sūtījumu Latvijā: kā izskatās sūtījuma numurs, ko nozīmē statusi, cik ilgi paka gaida pakomātā, kā piegādā kurjers un kur vērsties.
 slug: omniva-sutijumu-izsekosana
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Omniva piegādā sūtījumus Igaunijā, Latvijā un Lietuvā, un Latvijā tās pakalpojumus sniedz OMNIVA SIA. Sūtījumu vari izsekot Omniva lapā [Sūtījumu izsekošana](https://www.omniva.lv/sutijumu-izsekosana/), Omniva lietotnē, e-pašapkalpošanās vidē mana.omniva.lv vai vienkārši ielīmējot numuru laukā lapas augšā. Izsekošanas kodu atradīsi Omniva īsziņā vai e-pastā par sūtījumu.
@@ -104,7 +104,7 @@ Arī numuru, kas beidzas ar `EE`, sākas ar C, R, E vai L (bet ne CR, CV vai RO)
 
 Sūtījumu ar citas valsts pasta numuru Peek izsekos pie Omniva, ja izvēlēsies Omniva ar „Change“ (jau pievienotam sūtījumam – ar „Change carrier“) vai ielīmēsi Omniva izsekošanas saiti. Ja šāds sūtījums ceļo uz Latviju, piegādes posmu Peek pats meklē tikai pie Latvijas Pasta, ne pie Omniva.
 
-Peek rāda Omniva statusus angliski, katra soļa vietu Omniva tīklā, galamērķa valsti, izsniegšanas laiku un pakomātu, kurā sūtījums gaida vai no kura tas izņemts. Pasta indeksus un neizdevušās piegādes iemeslus tas nerāda, paredzamo piegādes dienu un svaru arī ne. Dienā Peek pārbauda sūtījumu ik pēc 10 minūtēm, bet, kad tas nodots kurjeram, ik pēc 2 minūtēm, naktī reizi stundā; soļus tas rāda kartē un, mainoties statusam, var tev paziņot. Peek nevar tavā vietā sazināties ar Omniva vai veikalu.
+Peek rāda Omniva statusus angliski, katra soļa vietu Omniva tīklā, galamērķa valsti, izsniegšanas laiku un pakomātu, kurā sūtījums gaida vai no kura tas izņemts. Pasta indeksus un neizdevušās piegādes iemeslus tas nerāda, paredzamo piegādes dienu un svaru arī ne. Dienā Peek pārbauda sūtījumu ik pēc 10 minūtēm, bet, kad tas nodots kurjeram, ik pēc 2 minūtēm, naktī ik pēc vienas vai divām stundām; soļus tas rāda kartē un, mainoties statusam, var tev paziņot. Peek nevar tavā vietā sazināties ar Omniva vai veikalu.
 
 ## Biežāk uzdotie jautājumi par Omniva sūtījumu izsekošanu
 

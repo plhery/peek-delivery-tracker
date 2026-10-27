@@ -3,7 +3,7 @@ title: FedEx tracking: número, estados e entregas em Portugal
 description: FedEx tracking em Portugal: onde está o número de 12 dígitos, o que quer dizer «Exceção de entrega», entregas falhadas, alfândega, reclamações e contactos.
 slug: fedex-tracking
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 A FedEx é uma transportadora expresso e de encomendas. Para seguir a tua encomenda, introduz o número na página de rastreio do fedex.com, na app FedEx Mobile ou cola-o na caixa acima. Segundo a FedEx, o número vem normalmente no e-mail ou SMS que te envia sobre a expedição.
@@ -78,7 +78,7 @@ O [Peek](/) reconhece os números FedEx de 12 e 15 dígitos quando o dígito de 
 
 Um servidor do Peek abre a página de rastreio do fedex.com num navegador. Quando a FedEx recusa, ou pede a verificação do destinatário, serviços de seguimento preenchem o histórico.
 
-Vês o estado, cada leitura num mapa com o local e a hora exata, o dia de entrega previsto, a hora da entrega e, enquanto a encomenda espera, o nome e a morada do local FedEx. A verificação é de 10 em 10 minutos durante o dia, de 5 em 5 quando a encomenda sai para entrega e de hora a hora à noite, e as notificações escolhes tu: todas as atualizações, só as importantes ou só no dia da entrega. Ficam de fora o teu nome e morada, o remetente, a assinatura, o peso e as dimensões. As leituras aparecem no inglês da FedEx, menos três: a da entrega, em que a FedEx escreve quem assinou, aparece como «Entregue», e `Ready for pickup` e `Shipment exception` aparecem com as palavras do Peek.
+Vês o estado, cada leitura num mapa com o local e a hora exata, o dia de entrega previsto, a hora da entrega e, enquanto a encomenda espera, o nome e a morada do local FedEx. A verificação é de 10 em 10 minutos durante o dia, de 5 em 5 quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e as notificações escolhes tu: todas as atualizações, só as importantes ou só no dia da entrega. Ficam de fora o teu nome e morada, o remetente, a assinatura, o peso e as dimensões. As leituras aparecem no inglês da FedEx, menos três: a da entrega, em que a FedEx escreve quem assinou, aparece como «Entregue», e `Ready for pickup` e `Shipment exception` aparecem com as palavras do Peek.
 
 Nos Estados Unidos, a maior parte das encomendas Ground Economy é entregue pela própria FedEx. Quando a FedEx diz que o correio americano (USPS) tem uma, o Peek segue-a lá.
 

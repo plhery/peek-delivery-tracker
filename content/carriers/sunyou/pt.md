@@ -3,7 +3,7 @@ title: SunYou rastreamento: número SY, estados e quem entrega
 description: Rastrear uma encomenda SunYou (SYPost) em Portugal: como é o número SY, o que quer dizer cada estado, quem faz a entrega e a quem perguntar quando fica parada.
 slug: sunyou-rastreamento
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 A SunYou, também escrita SYPost, é uma empresa de logística de Shenzhen que leva para o estrangeiro as encomendas pequenas de vendedores online chineses e as passa a uma transportadora local para o último troço. Os números começam por SY: escreve o teu no site de seguimento da SunYou, o [sypost.net](https://www.sypost.net), ou cola-o na caixa acima. O número vem da loja, nos detalhes de envio da encomenda.
@@ -88,11 +88,11 @@ Para tudo o que precise de uma ação, quem deves contactar é o vendedor e a tr
 
 O [Peek](/) reconhece logo a SunYou nas duas formas SY, que nenhuma outra transportadora do catálogo partilha. Também podes colar uma ligação do sypost.net com o número, como a que dá o botão «Copy Link».
 
-O Peek pergunta à SunYou em inglês, por isso as linhas aparecem em inglês, salvo as que conhece tal e qual, como `Delivered`, que mostra em português. Mostra o estado, o histórico (até 20 leituras, sem o local de cada uma), o país de destino, a hora da entrega e a transportadora local com o número dela («Entrega:» seguido do nome). Não mostra data prevista de entrega nem ponto de levantamento para encomendas SunYou. As horas mantêm o fuso que a SunYou lhes dá, o da China e depois o do país de destino.
+O Peek pergunta à SunYou em inglês, por isso as linhas aparecem em inglês, salvo as que conhece tal e qual, como `Delivered`, que mostra em português. Mostra o estado, o histórico (até 20 leituras, sem o local de cada uma), o país de destino, a hora da entrega e a transportadora local com o número dela («Entrega:» seguido do nome). Não mostra data prevista de entrega nem ponto de levantamento para encomendas SunYou. As horas são lidas no fuso que a SunYou lhes dá, o da China e depois o do país de destino, e mostradas no fuso horário do teu dispositivo.
 
 Quando a SunYou dá o número da transportadora local e o Peek segue essa transportadora no país de destino, pergunta-lhe e passa para ela assim que mostra novidades mais recentes. A encomenda fica com o número SunYou, e a página dela mostra a transportadora que entrega e o número dela com uma ligação. Isto não acontece com todas as encomendas: a Meest, na Grécia, por exemplo, não é seguida.
 
-Verifica de 10 em 10 minutos durante o dia, de 2 em 2 minutos quando a encomenda sai para entrega e de hora a hora à noite, e pode enviar-te notificações de todas as leituras, só das importantes ou «Só no dia da entrega». Não pode contactar a SunYou nem o vendedor por ti.
+Verifica de 10 em 10 minutos durante o dia, de 2 em 2 minutos quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações de todas as leituras, só das importantes ou «Só no dia da entrega». Não pode contactar a SunYou nem o vendedor por ti.
 
 ## Perguntas sobre o rastreamento SunYou
 

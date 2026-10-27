@@ -79,7 +79,7 @@ Yuntrack's Feedback box is about the website. Start with the shop, which holds t
 
 ## Tracking a YunExpress parcel with Peek
 
-[Peek](/) recognises YT and 16 digits as YunExpress and takes yuntrack.com links. It checks every 10 minutes by day (every 5 minutes once the parcel is out for delivery) and hourly overnight, puts each scan on a map and can notify you when the status changes. It shows the status, history, place of each scan and delivery time.
+[Peek](/) recognises YT and 16 digits as YunExpress and takes yuntrack.com links. It checks every 10 minutes by day (every 5 minutes once the parcel is out for delivery) and every hour or two overnight, puts each scan on a map and can notify you when the status changes. It shows the status, history, place of each scan and delivery time.
 
 When YunExpress names the local carrier and its number, Peek can follow the parcel to that carrier, though not for every parcel. It shows no expected delivery date or pickup point for YunExpress parcels, leaves out order references and can't contact YunExpress or file a claim for you.
 

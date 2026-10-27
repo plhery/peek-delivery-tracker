@@ -3,7 +3,7 @@ title: Sledovanie zásielky SPS: číslo, stavy a Balíkovo
 description: Ako sledovať zásielku Slovak Parcel Service (SPS): kde nájdete číslo, čo znamenajú stavy, Balíkovo box, dobierka, reklamácie, clo a kontakty.
 slug: sps-sledovanie-zasielky
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Slovak Parcel Service (SPS) je slovenská kuriérska spoločnosť, ktorú od roku 2002 vlastní [Rakúska pošta](carrier:austrian-post) (v angličtine). Balíky z e-shopov doručuje až k vašim dverám alebo do siete Balíkovo, teda na odberné miesta v obchodoch a do samoobslužných Balíkovo boxov. Zásielku môžete sledovať na sps-sro.sk v časti [Moja zásielka](https://www.sps-sro.sk/moja-zasielka/), v portáli mySPS na mysps.sk alebo tak, že jej číslo vložíte do poľa vyššie. Číslo zásielky vám dá odosielateľ, zvyčajne v potvrdzovacom e-maile alebo v SMS.
@@ -111,7 +111,7 @@ Kontakty podľa sps-sro.sk k 26. októbru 2026:
 
 Peek ukáže kroky po slovensky, ako ich píše SPS, pri krokoch stredisko SPS a hmotnosť balíka; `Doručenie` berie ako doručené. Predpokladaný dátum doručenia od SPS nedostáva. Mená, PSČ ani referenčné čísla si zo SPS neukladá.
 
-Cez deň Peek zásielku kontroluje každých 10 minút, v deň, keď je na doručovacom hárku (`Doručovací hárok`), každé 2 minúty a v noci raz za hodinu. Pri zmene stavu vás môže upozorniť. SPS ani e-shop za vás nekontaktuje: úložnú dobu nepredĺži, PIN znova nepošle, dobierku nezaplatí a reklamáciu nepodá.
+Cez deň Peek zásielku kontroluje každých 10 minút, v deň, keď je na doručovacom hárku (`Doručovací hárok`), každé 2 minúty a v noci raz za hodinu až dve. Pri zmene stavu vás môže upozorniť. SPS ani e-shop za vás nekontaktuje: úložnú dobu nepredĺži, PIN znova nepošle, dobierku nezaplatí a reklamáciu nepodá.
 
 ## Časté otázky o sledovaní zásielok SPS
 

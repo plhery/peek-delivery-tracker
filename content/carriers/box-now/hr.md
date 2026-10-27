@@ -3,7 +3,7 @@ title: Praćenje BOX NOW pošiljke: paketomat, PIN i statusi
 description: Pratite BOX NOW pošiljku u Hrvatskoj: broj od 10 znamenki, što znače statusi, PIN za paketomat, rok od 96 sati, pouzeće, prigovori i kontakt.
 slug: box-now-pracenje-posiljke
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 BOX NOW dostavlja pakete iz e-trgovina u svoje paketomate, dostupne od 0 do 24 sata svaki dan. Pošiljku pratite brojem za praćenje na stranici [Pratite svoju pošiljku](https://boxnow.hr/track), u BOX NOW aplikaciji ili u polju iznad. Broj ćete naći u e-mailu i u SMS ili Viber poruci koju ste dobili kad je slanje pokrenuto.
@@ -89,7 +89,7 @@ Iz deset znamenki ne vidi se da je broj BOX NOW-ov. Zato [Peek](/) pita prijevoz
 
 Peek prikazuje statuse na engleskom, kao u tablici, s lokacijom svakog koraka. Dok paket putuje, vidite očekivani dan dostave ("Expected: …"). Kad vas paket čeka ili ste ga preuzeli, vidite naziv paketomata kao "Pickup point". Prikazuje i zemlju odredišta i vrijeme preuzimanja. Ne prikazuje adresu ni položaj paketomata, „Zadnje vrijeme prikupa“, veličinu pretinca, plaćanje, pošiljatelja ni poštanske brojeve, pa rok provjerite na boxnow.hr. `Expired`, `Delivery has expired`, `Lost`, potraga za paketom i otkazivanje prikazuju se kao "Needs attention".
 
-Dok imate uključene obavijesti ili ste pošiljku nedavno otvorili, Peek je danju provjerava svakih 10 minuta, a noću svaki sat. Inače je provjerava svaki sat, kao i kad se dulje ništa ne mijenja: 12 sati kod tek prijavljene ili predane pošiljke, 48 sati kod ostalih. Obavijesti možete dobivati za svaki korak ("All tracking updates"), samo za važne ("Important only") ili samo na dan dostave ("Delivery day only"). Peek ne može produljiti rok, ponovno poslati PIN, promijeniti paketomat ni javiti se BOX NOW-u ili trgovini umjesto vas. Ako ne znate prijevoznika, broj svejedno zalijepite: Peek prati više od 3.500 prijevoznika.
+Dok imate uključene obavijesti ili ste pošiljku nedavno otvorili, Peek je danju provjerava svakih 10 minuta, a noću svakih sat ili dva. Inače je provjerava svaki sat, kao i kad se dulje ništa ne mijenja: 12 sati kod tek prijavljene ili predane pošiljke, 48 sati kod ostalih. Obavijesti možete dobivati za svaki korak ("All tracking updates"), samo za važne ("Important only") ili samo na dan dostave ("Delivery day only"). Peek ne može produljiti rok, ponovno poslati PIN, promijeniti paketomat ni javiti se BOX NOW-u ili trgovini umjesto vas. Ako ne znate prijevoznika, broj svejedno zalijepite: Peek prati više od 3.500 prijevoznika.
 
 ## Pitanja o praćenju BOX NOW pošiljaka
 

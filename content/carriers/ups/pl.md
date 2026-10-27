@@ -3,7 +3,7 @@ title: UPS tracking: śledzenie paczki, statusy i kontakt
 description: Śledzenie paczki UPS: gdzie jest numer 1Z, co znaczą statusy jak „Wydarzenie wyjątkowe”, awizo InfoNotice, punkty UPS Access Point i infolinia UPS Polska.
 slug: ups-tracking-sledzenie-paczki
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 UPS (United Parcel Service) to amerykańska firma kurierska i ekspresowa, z której korzysta wiele sklepów wysyłających paczki w Polsce i z zagranicy. Paczkę śledzisz na ups.com, przez link z e-maili UPS albo wklejając numer w pole powyżej. Numer jest na etykiecie i w wiadomościach od sklepu lub UPS, a zwykle zaczyna się od `1Z`.
@@ -79,7 +79,7 @@ Strona kontaktowa UPS Polska, stan na 13 października 2026:
 
 [Peek](/) od razu rozpoznaje UPS po numerze `1Z`, którego ostatnia cyfra przechodzi kontrolę UPS. Jeśli nie przechodzi, proponuje tylko UPS, a UPS odrzuca numer jako błędnie wpisany. W samym UPS sprawdza tylko numery `1Z`. Pozostałe numery UPS, takie jak `H1234567890` (H, J, K lub V i 10 cyfr) czy numery z samych cyfr, dostają więc odpowiedź tylko od serwisów śledzenia przesyłek, także po „Zmień przewoźnika”. Możesz wkleić link z ups.com z numerem, a także każdy link, w którym jest numer `1Z`.
 
-Serwer Peek otwiera w dzień stronę śledzenia ups.com w przeglądarce co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu; w nocy co godzinę. Gdy UPS odmówi albo da się odczytać tylko status, historię uzupełniają serwisy śledzenia. Widzisz status, każdy skan z miejscem i dokładną godziną na mapie, planowany dzień doręczenia (nigdy przedział godzin), godzinę doręczenia, usługę, kraj docelowy i, dopóki paczka czeka, nazwę i adres punktu Access Point. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zobaczysz tam, kto podpisał, ani Twojego adresu, potwierdzenia doręczenia, miejsca pozostawienia czy zdjęcia. Wagi ani nadawcy UPS nie przekazuje.
+Serwer Peek otwiera w dzień stronę śledzenia ups.com w przeglądarce co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu; w nocy co godzinę lub dwie. Gdy UPS odmówi albo da się odczytać tylko status, historię uzupełniają serwisy śledzenia. Widzisz status, każdy skan z miejscem i dokładną godziną na mapie, planowany dzień doręczenia (nigdy przedział godzin), godzinę doręczenia, usługę, kraj docelowy i, dopóki paczka czeka, nazwę i adres punktu Access Point. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zobaczysz tam, kto podpisał, ani Twojego adresu, potwierdzenia doręczenia, miejsca pozostawienia czy zdjęcia. Wagi ani nadawcy UPS nie przekazuje.
 
 Skany są w każdym języku po angielsku, tak jak pisze je UPS: doręczenie to „DELIVERED”. Gdy w USA UPS przekaże paczkę Ground Saver poczcie amerykańskiej i poda jej numer, śledzenie przechodzi tam, gdy USPS pokaże postęp („Doręcza: USPS”). Zmianę doręczenia i reklamację załatwisz tylko w UPS albo u nadawcy.
 

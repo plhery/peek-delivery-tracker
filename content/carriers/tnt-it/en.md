@@ -3,7 +3,7 @@ title: TNT Italy tracking: waybill, statuses and missed delivery
 description: Track a TNT Italy parcel on tnt.it: where the waybill is, what the Italian statuses mean, missed deliveries, depot pickup, claims and who to call.
 slug: tnt-italy-tracking
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 TNT Italy is the TNT brand of FedEx Express Italy S.r.l., the single company TNT's and FedEx's Italian businesses became on 1 December 2022. A parcel sent within Italy travels on a waybill (*lettera di vettura*) of two letters and eight digits, such as `NA00000000`. Track it on [tnt.it's tracking page](https://www.tnt.it/tracking/Tracking.do), which carries FedEx's name. The waybill is in the sender's shipping confirmation, and on the "Lasciato avviso" card the courier leaves when you're out.
@@ -79,7 +79,7 @@ As read on TNT Italy's contact pages on 23 October 2026:
 
 Paste the waybill as two letters and eight digits, without the dash and the digit after it. [Peek](/) asks TNT Italy about that shape, and [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) too when it ends in 0, then shows "TNT Italy has this parcel." when TNT Italy knows the number. If TNT Italy doesn't come up, pick it with "Change", or "Change carrier" on the parcel. A tnt.it tracking link with `consigNos=` names TNT Italy straight away.
 
-Peek reads tnt.it's tracking, so scans stay in TNT's Italian words. It shows the status, the history with the depot tnt.it names for a scan, and the delivery time. It checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only". The expected delivery date, origin and destination, number of parcels, the sender's reference and who signed stay on tnt.it. Peek can't follow a shipment tnt.it hands over to FedEx's site, and it doesn't switch to a replacement waybill: add the new one. It can't contact TNT or the sender for you.
+Peek reads tnt.it's tracking, so scans stay in TNT's Italian words. It shows the status, the history with the depot tnt.it names for a scan, and the delivery time. It checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only". The expected delivery date, origin and destination, number of parcels, the sender's reference and who signed stay on tnt.it. Peek can't follow a shipment tnt.it hands over to FedEx's site, and it doesn't switch to a replacement waybill: add the new one. It can't contact TNT or the sender for you.
 
 ## Questions about TNT Italy tracking
 

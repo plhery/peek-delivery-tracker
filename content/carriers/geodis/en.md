@@ -3,7 +3,7 @@ title: GEODIS tracking: 1G number, statuses and delivery options
 description: Track a GEODIS parcel or pallet in France: where the 1G tracking number is, what the statuses mean, how to change the delivery and who to contact.
 slug: geodis-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 GEODIS is a French transport group owned by SNCF, and its parcel and pallet network delivers online orders across France. Track a delivery in GEODIS's recipient space ("Espace destinataire") with the 12-character number starting `1G`, or paste that number in the box above. The shop or sender gives you the number, most often in the order confirmation or shipping email.
@@ -83,9 +83,9 @@ GEODIS publishes no phone line for recipients. The shop holds the contract and c
 
 Paste a `1G` number and [Peek](/) names GEODIS at once; no other carrier uses that shape. A link from espace-client.geodis.com or geodis.com with `noSuivi=` or `trackingNumber=` names GEODIS too, but only a `1G` number inside it can be tracked. Peek can't track the 14-digit shipment number: it doesn't read it as GEODIS, so use the `1G` number instead.
 
-Peek reads GEODIS's tracking in French and shows the steps in GEODIS's French wording (the first column above; `Livraison effectuée` shows as Delivered), with the GEODIS site of each scan on a map, in Paris time. It also shows the expected delivery day, the sender, the service and the weight. A missed delivery, a problem, a return or a parcel held for pickup takes priority over the timeline step. When GEODIS gives steps without dated scans, Peek dates the status when it first saw it.
+Peek reads GEODIS's tracking in French and shows the steps in GEODIS's French wording (the first column above; `Livraison effectuée` shows as Delivered), with the GEODIS site of each scan on a map; times are read on Paris time and shown in your device's time zone. It also shows the expected delivery day, the sender, the service and the weight. A missed delivery, a problem, a return or a parcel held for pickup takes priority over the timeline step. When GEODIS gives steps without dated scans, Peek dates the status when it first saw it.
 
-It leaves out the parcel count, your name and address, delivery instructions and delivery documents. Shipments older than 12 months read as not found. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps or delivery day only. It can't change your delivery: do that in GEODIS's recipient space.
+It leaves out the parcel count, your name and address, delivery instructions and delivery documents. Shipments older than 12 months read as not found. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps or delivery day only. It can't change your delivery: do that in GEODIS's recipient space.
 
 ## Questions about GEODIS tracking
 

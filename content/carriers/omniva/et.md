@@ -3,7 +3,7 @@ title: Omniva saadetise jälgimine: olekud, pakiautomaat ja toll
 description: Jälgi Omniva pakki Eestis: milline on jälgimisnumber, mida olekud tähendavad, kui kaua pakk pakiautomaadis ootab, kuidas käib tollivormistus ja kuhu pöörduda.
 slug: omniva-saadetise-jalgimine
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-10-27
 ---
 
 Omniva (Aktsiaselts Eesti Post) on Eesti postiettevõte, mille pakiautomaadid, kullerid ja postkontorid toimetavad pakke kätte üle Eesti. Paki teekonda näed Omniva e-teeninduses [minu.omniva.ee](https://minu.omniva.ee/track), Omniva äpis või siin: kleebi jälgimisnumber ülalolevasse lahtrisse. Numbri saad Omniva SMSi või e-kirjaga; kui seda pole, küsi saatjalt.
@@ -105,7 +105,7 @@ Nii olid Omniva eraklienditoe kontaktid omniva.ee lehel 25. oktoobril 2026:
 
 Muu `EE`-lõpulise koodi puhul küsib Peek Omnivalt ja [Chronopostilt](carrier:chronopost), kas nad koodi tunnevad. Kui Omniva tunneb, näed teksti „Omniva has this parcel.“ Kui veel mitte, otsib Peek lisatud pakki edasi, aja jooksul harvemini, kuni kuu aega. Vale kontrollnumbriga koodi ei seo Peek ühegi vedajaga ja ka siis, kui valid Omniva käsitsi, märgib Peek, et Omniva sellist numbrit ei väljasta: kontrolli, kas number on õigesti kirjas. Teise riigi postinumbriga pakk jääb Peekis saatjariigi posti juurde. Omniva kaudu jälgib Peek seda siis, kui vajutad „Change“ (lisatud pakil „Change carrier“) ja valid Omniva või kleebid Omniva jälgimislingi: ise Peek pakki Omnivale üle ei anna.
 
-Peek näitab Omniva olekuid inglise keeles, sammude asukohti Omniva võrgus, sihtriiki, millal pakk kätte toimetati, ning pakiautomaati või postkontorit, kus pakk ootab. Aadresse, sihtnumbreid, ebaõnnestunud katse põhjust, eeldatavat tarneaega ega kaalu Peek ei näita. Päeval kontrollib Peek pakki iga 10 minuti järel (kui pakk on kulleriga teel, iga 2 minuti järel) ja öösel kord tunnis. Sammud on kaardil ja muutustest võib Peek sulle teada anda. Vanal pakil võib alles olla ainult kättetoimetamise samm. Peek ei saa sinu eest Omniva ega e-poega ühendust võtta.
+Peek näitab Omniva olekuid inglise keeles, sammude asukohti Omniva võrgus, sihtriiki, millal pakk kätte toimetati, ning pakiautomaati või postkontorit, kus pakk ootab. Aadresse, sihtnumbreid, ebaõnnestunud katse põhjust, eeldatavat tarneaega ega kaalu Peek ei näita. Päeval kontrollib Peek pakki iga 10 minuti järel (kui pakk on kulleriga teel, iga 2 minuti järel) ja öösel iga tunni või kahe järel. Sammud on kaardil ja muutustest võib Peek sulle teada anda. Vanal pakil võib alles olla ainult kättetoimetamise samm. Peek ei saa sinu eest Omniva ega e-poega ühendust võtta.
 
 ## Küsimused Omniva paki jälgimise kohta
 

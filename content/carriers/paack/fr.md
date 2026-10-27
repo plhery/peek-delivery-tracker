@@ -3,7 +3,7 @@ title: Paack suivi colis : numéro, code postal et statuts
 description: Suivre un colis Paack en France : où trouver le numéro de commande, pourquoi il faut le code postal, ce que veut dire chaque statut et comment joindre Paack.
 slug: paack-suivi
 published: 2026-10-11
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Paack est une société de livraison basée à Barcelone : elle livre les commandes de boutiques en ligne sur un créneau horaire, en France, en Espagne, en Italie et au Portugal. Pour suivre ton colis, il te faut le numéro de commande et le code postal de livraison, tous deux en bas de l'e-mail de Paack. Saisis-les sur [la page de suivi de Paack](https://paack.co/shipments/tracking?lng=fr), ou colle le numéro dans le champ ci-dessus et choisis Paack.
@@ -83,7 +83,7 @@ Relevé sur les pages de Paack le 10 octobre 2026 :
 
 Remplis alors le champ « Code postal de livraison ». Il est marqué facultatif, car un numéro `PK` n'en a pas besoin, mais Paack n'affiche les autres commandes qu'avec lui, et un code postal contenu dans le lien n'est pas repris. Paack ne répond que si le numéro et le code postal correspondent : sinon, le colis a l'air inconnu. Le code postal est envoyé à Paack et, si besoin, à des services de suivi. Le numéro est mis en majuscules, sans espaces, points ni tirets, alors que Paack le demande tel quel : si rien ne s'affiche, essaie aussi la page de Paack.
 
-Tu vois le statut, l'historique, le jour et le créneau prévus, à l'heure de l'adresse de livraison. Au PaackGo Point, Peek affiche « Prêt à être retiré » avec le nom et l'adresse du point (pas encore vu sur un vrai colis), jamais le code de retrait, le code QR ni la date limite : pour ceux-là, ouvre la page de suivi de Paack. Les étapes s'affichent avec les mots de Peek ; un retrait au point apparaît comme « Livré ». Paack ne donne pas le lieu de ses scans (la carte n'en montre donc aucun) et ne nomme aucun autre transporteur à suivre. Le nom de la boutique, ton nom et ton adresse ne sont pas repris. Le suivi est vérifié toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, et toutes les heures la nuit, avec des notifications au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Tu vois le statut, l'historique, le jour et le créneau prévus, à l'heure de l'adresse de livraison. Au PaackGo Point, Peek affiche « Prêt à être retiré » avec le nom et l'adresse du point (pas encore vu sur un vrai colis), jamais le code de retrait, le code QR ni la date limite : pour ceux-là, ouvre la page de suivi de Paack. Les étapes s'affichent avec les mots de Peek ; un retrait au point apparaît comme « Livré ». Paack ne donne pas le lieu de ses scans (la carte n'en montre donc aucun) et ne nomme aucun autre transporteur à suivre. Le nom de la boutique, ton nom et ton adresse ne sont pas repris. Le suivi est vérifié toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, et toutes les une à deux heures la nuit, avec des notifications au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 
 ## Questions sur le suivi Paack
 

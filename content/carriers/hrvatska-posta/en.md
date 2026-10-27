@@ -3,7 +3,7 @@ title: Hrvatska pošta tracking: statuses, lockers and contacts
 description: Track a Hrvatska pošta (Croatian Post) parcel: the item number, what the English statuses mean, paketomat lockers, post office pickup, claims and contacts.
 slug: hrvatska-posta-tracking
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 Hrvatska pošta (Croatian Post) is Croatia's national post, with its Paket24 parcel service. Track an item on its [English tracking page](https://posiljka.posta.hr/en/tracking) (the plain posiljka.posta.hr address opens in Croatian), or paste the number in the box above. The number comes from the sender: the shop's shipping email or order page, or Hrvatska pošta's own SMS and notices.
@@ -89,7 +89,7 @@ Hrvatska pošta's channels, as posta.hr listed them in October 2026:
 
 An item from abroad stays with its foreign post in Peek, but Hrvatska pošta's lookup takes it: pick "Hrvatska pošta" with "Change".
 
-Peek lists Hrvatska pošta's own history, in the English wording of its English site. Hrvatska pošta's times carry no time zone, so Peek dates scans at Croatian post offices and parcel lockers on Croatian time, and scans abroad on the local time of the facility's country when its office code shows one. Peek can show the post office or parcel locker where the parcel waits (by name) and the weight. There's no expected delivery day, and postcodes are left out. Peek checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you when the status changes.
+Peek lists Hrvatska pošta's own history, in the English wording of its English site. Hrvatska pošta's times carry no time zone, so Peek dates scans at Croatian post offices and parcel lockers on Croatian time, and scans abroad on the local time of the facility's country when its office code shows one. Peek can show the post office or parcel locker where the parcel waits (by name) and the weight. There's no expected delivery day, and postcodes are left out. Peek checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, and can notify you when the status changes.
 
 ## Questions about Croatian Post tracking
 

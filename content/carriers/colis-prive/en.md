@@ -3,7 +3,7 @@ title: Colis Privé tracking: French statuses and what to do
 description: Track a Colis Privé parcel in France, Belgium or Luxembourg: where the 12-character number is, why it needs your postcode and what its French statuses mean.
 slug: colis-prive-tracking
 published: 2026-10-10
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Colis Privé is a French parcel carrier for online shops, delivering in France, Belgium and Luxembourg to homes, pickup points and, in France, lockers. Track a parcel with its 12-character number and the delivery postcode on [colisprive.fr](https://colisprive.fr/en/) for France or [colisprive.be](https://colisprive.be/en/) for Belgium and Luxembourg. The number comes in the shop's shipping email or Colis Privé's notifications. On 16 October 2026 Colis Privé announced that it and [Paack](carrier:paack) are joining under one brand, Paack, to be rolled out gradually from January 2027; until then its services, delivery and tracking included, carry on as before.
@@ -71,7 +71,7 @@ As listed on 9 October 2026:
 
 [Peek](/) needs the 12-character number and the delivery postcode. Type the number and choose Colis Privé as the carrier: a field appears for the postcode, five digits in France, four in Belgium, or L and four digits in Luxembourg. Or type the number followed by its postcode: `AB1234567890 75001` (France), `AB1234567890 B1000` (Belgium) or `AB1234567890 L1234` (Luxembourg), all invented. Keep the B or L, and Peek finds Colis Privé by itself. Links from colisprive.com or colisprive.fr can be pasted too.
 
-It checks every 10 minutes by day and hourly overnight. Colis Privé's scans carry a date but no time, so the 2-minute checks of a parcel out for delivery run only on the day of the round. Peek can notify you of every scan, important steps only or delivery day only. It shows the status, the history in French and the expected delivery, and leaves out the recipient's name and address. Peek can't file a claim or contact Colis Privé for you.
+It checks every 10 minutes by day and every hour or two overnight. Colis Privé's scans carry a date but no time, so the 2-minute checks of a parcel out for delivery run only on the day of the round. Peek can notify you of every scan, important steps only or delivery day only. It shows the status, the history in French and the expected delivery, and leaves out the recipient's name and address. Peek can't file a claim or contact Colis Privé for you.
 
 ## Questions about Colis Privé tracking
 

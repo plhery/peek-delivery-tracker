@@ -3,7 +3,7 @@ title: Swiss Post Cargo Tracking: Status, Zustellung, Kontakt
 description: Swiss Post Cargo Sendung verfolgen: welche Nummer funktioniert, was „Wareneingang POST“ heißt, wie Stückgut zugestellt wird und wen du anrufst.
 slug: swiss-post-cargo-sendungsverfolgung
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 Swiss Post Cargo ist die Gütermarke der Schweizerischen Post: Paletten, sperrige Ware und Möbel, die per Lastwagen kommen, keine gewöhnlichen Pakete. Du verfolgst die Sendung auf der Track-&-Trace-Seite (tt.swisspost-cargo.com) mit dem Barcode oder der Referenz, die dir der Absender gegeben hat, oder fügst sie oben ins Feld ein. Hast du eine Paketnummer der Post, gehört sie auf [die Seite der Post](carrier:swiss-post).
@@ -81,9 +81,9 @@ Für Briefe und Pakete der Post (nicht Cargo) gilt +41 848 888 888 (CHF 0.08 pro
 
 Ein 20-stelliger Barcode mit 00 am Anfang stammt vom Versender, nicht von einem bestimmten Dienst. Stimmt seine Prüfziffer, zeigt [Peek](/) deshalb „Peek fragt bei Swiss Post Cargo, NZ Post nach …“ und nennt Swiss Post Cargo nur, wenn Swiss Post Cargo die Nummer kennt. Eine Referenz wie `PL-12345678` geht nur an Swiss Post Cargo. Für andere Referenzen mit 6 bis 40 Buchstaben und Ziffern wählst du Swiss Post Cargo mit „Ändern“ oder fügst einen Track-&-Trace-Link von tt.swisspost-cargo.com oder apv.swisspost-cargo.com ein. Eine Paketnummer der Post in so einem Link wird als Post-Sendung verfolgt.
 
-Du siehst den Status und den Verlauf mit dem Ort jedes Scans auf einer Karte, in Schweizer Zeit, und den Zeitpunkt der Zustellung. Die Scan-Texte bleiben Englisch, weil die Abfrage auf Englisch läuft; `Loaded for Delivery` gilt als in Zustellung. Unterschrift und Foto gehen im Zustellscan auf, ohne das Bild. Dein Name und deine Adresse fehlen, eine voraussichtliche Zustellung, ein Gewicht oder eine Abholstelle gibt es nicht.
+Du siehst den Status und den Verlauf mit dem Ort jedes Scans auf einer Karte und den Zeitpunkt der Zustellung. Die Uhrzeiten liest Peek als Schweizer Zeit und zeigt sie in der Zeitzone deines Geräts. Die Scan-Texte bleiben Englisch, weil die Abfrage auf Englisch läuft; `Loaded for Delivery` gilt als in Zustellung. Unterschrift und Foto gehen im Zustellscan auf, ohne das Bild. Dein Name und deine Adresse fehlen, eine voraussichtliche Zustellung, ein Gewicht oder eine Abholstelle gibt es nicht.
 
-Eine Referenz, die mehrere Sendungen teilen, wird nur gelesen, solange eine davon Scans aus den letzten 60 Tagen hat. Sonst gilt sie als nicht gefunden, nimm dann den Barcode. Sendungs- und Betriebsnummern des deutschen Portals kann Peek nicht verfolgen. Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald die Ware in Zustellung ist, nachts stündlich, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
+Eine Referenz, die mehrere Sendungen teilen, wird nur gelesen, solange eine davon Scans aus den letzten 60 Tagen hat. Sonst gilt sie als nicht gefunden, nimm dann den Barcode. Sendungs- und Betriebsnummern des deutschen Portals kann Peek nicht verfolgen. Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald die Ware in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
 
 ## Fragen zum Swiss Post Cargo Tracking
 

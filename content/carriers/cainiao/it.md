@@ -3,7 +3,7 @@ title: Cainiao tracking: numero, stati e pacco che non arriva
 description: Tracking Cainiao per i pacchi AliExpress: quale numero usare, cosa vogliono dire gli stati in inglese e a chi scrivere se il pacco non arriva in Italia.
 slug: cainiao-tracking
 published: 2026-10-11
-updated: 2026-10-20
+updated: 2026-10-27
 ---
 
 Cainiao è il gruppo logistico di Alibaba: spedisce all'estero i pacchi dei venditori di piattaforme come AliExpress. Il suo sito di tracciamento, [global.cainiao.com](https://global.cainiao.com/), segue solo i pacchi Cainiao e AliExpress: inserisci lì il numero, oppure incollalo nel box qui sopra. Su AliExpress parti da «My Orders»: trova l'ordine e clicca «Tracking».
@@ -81,7 +81,7 @@ I numeri di telefono del sito cinese di Cainiao sono per i clienti in Cina e per
 
 A volte AliExpress ti dà già il numero del corriere che consegnerà, per esempio una lettera di vettura SDA di 13 caratteri come `123A12345678B`, mentre il pacco è ancora con Cainiao. In quel caso Peek chiede sia a Cainiao sia a Poste Italiane. Se lo conoscono entrambi, Peek mette il pacco sotto «AliExpress / Cainiao», che ha le scansioni di prima del confine, e per l'ultimo tratto chiede anche a Poste Italiane: le sue scansioni entrano nella cronologia appena segnala il pacco.
 
-Controlla il tracking ogni 10 minuti di giorno (ogni 2 quando il pacco è in consegna) e ogni ora di notte, mette ogni scansione su una mappa e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Mostra lo stato, la cronologia, il luogo di una scansione quando Cainiao lo indica, la consegna prevista, come finestra di giorni quando Cainiao la indica, l'ora della consegna e il numero del corriere locale quando Cainiao lo pubblica. Non può contattare Cainiao né aprire una contestazione al posto tuo.
+Controlla il tracking ogni 10 minuti di giorno (ogni 2 quando il pacco è in consegna) e di notte ogni una o due ore, mette ogni scansione su una mappa e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Mostra lo stato, la cronologia, il luogo di una scansione quando Cainiao lo indica, la consegna prevista, come finestra di giorni quando Cainiao la indica, l'ora della consegna e il numero del corriere locale quando Cainiao lo pubblica. Non può contattare Cainiao né aprire una contestazione al posto tuo.
 
 ## Domande sul tracking Cainiao
 

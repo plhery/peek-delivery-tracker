@@ -3,7 +3,7 @@ title: Cainiao Sendungsverfolgung: Nummern, Status und Kontakt
 description: AliExpress-Paket mit Cainiao verfolgen: welche Nummern dazugehören, was die englischen Status bedeuten und wen du in Deutschland, Österreich und der Schweiz fragst.
 slug: cainiao-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-20
+updated: 2026-10-27
 ---
 
 Cainiao ist die Logistiksparte der Alibaba-Gruppe und verschickt Pakete über Grenzen hinweg, für Händler auf Plattformen wie AliExpress. Seine Tracking-Seite [global.cainiao.com](https://global.cainiao.com/) verfolgt nur Cainiao- und AliExpress-Pakete: Gib die Nummer dort ein oder füg sie oben ins Feld ein. Bei AliExpress steht sie in der Bestellung, laut AliExpress-Hilfe unter „My Orders“ und dann „Tracking“.
@@ -82,7 +82,7 @@ Die Nummern auf Cainiaos chinesischer Seite sind für Kunden in China und für H
 
 Manchmal gibt dir AliExpress schon die Nummer des Paketdiensts vor Ort, etwa eine SDA-Nummer für ein Paket nach Italien, während Cainiao das Paket noch hat. Bei einigen dieser Formen fragt Peek Cainiao neben diesem Paketdienst ab. Kennen beide die Nummer, legt Peek das Paket unter „AliExpress / Cainiao“ ab, wo die Scans von vor der Grenze stehen, und fragt für die letzte Meile auch den Paketdienst vor Ort: Seine Scans kommen in den Verlauf, sobald er das Paket meldet.
 
-Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, zeigt jeden Scan auf einer Karte und kann dir Mitteilungen schicken, für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Du siehst Status und Verlauf auf Englisch, den Ort eines Scans, wenn Cainiao einen nennt, die voraussichtliche Zustellung als Zeitfenster von Tagen, wenn Cainiao eines angibt, die Zustellzeit und die Nummer des Paketdiensts vor Ort, wenn Cainiao sie veröffentlicht. Cainiao kontaktieren oder etwas reklamieren kann es nicht für dich.
+Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, zeigt jeden Scan auf einer Karte und kann dir Mitteilungen schicken, für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Du siehst Status und Verlauf auf Englisch, den Ort eines Scans, wenn Cainiao einen nennt, die voraussichtliche Zustellung als Zeitfenster von Tagen, wenn Cainiao eines angibt, die Zustellzeit und die Nummer des Paketdiensts vor Ort, wenn Cainiao sie veröffentlicht. Cainiao kontaktieren oder etwas reklamieren kann es nicht für dich.
 
 ## Fragen zur Cainiao Sendungsverfolgung
 

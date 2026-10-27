@@ -3,7 +3,7 @@ title: Suivi Ciblex : numéro, statuts du colis et contact
 description: Suivi Ciblex Express en France et en Belgique : quel code-barres saisir, ce que veulent dire les statuts, livraison, relais C Dispo, réclamations et contact.
 slug: suivi-ciblex
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Ciblex, ou Ciblex Express, est un transporteur express français créé en 1977, spécialisé dans la livraison entre professionnels en France, en Belgique et à l'étranger, souvent tôt le matin. Pour suivre ton colis, saisis le code-barres de son étiquette sur [la page de suivi de Ciblex](https://ciblex.eu/suivi-colis-express/), gratuite, ou colle le numéro dans la case ci-dessus. Ce numéro vient de l'expéditeur : si tu ne l'as pas, demande-le au fournisseur ou à la boutique qui a envoyé le colis.
@@ -74,7 +74,7 @@ Le formulaire de contact de ciblex.eu sert aux demandes commerciales des entrepr
 
 [Peek](/) connaît les numéros Ciblex à 14 et 24 chiffres, mais d'autres transporteurs ont les mêmes formes : il interroge donc en même temps les transporteurs probables. Pour 14 chiffres en France, il demande d'abord à Relais Colis et à Ciblex, après DPD ou DHL seulement quand le début du numéro désigne l'un de leurs réseaux ; ailleurs, Ciblex vient en sixième position ou plus loin et n'est parfois interrogé qu'une fois le colis enregistré. Pour 24 chiffres, il interroge Ciblex, InPost et bpost : Ciblex en premier en France, bpost en premier pour un numéro qui commence par 3232 ou 3299. Si plusieurs transporteurs connaissent le numéro, ou aucun, c'est toi qui choisis avec « Changer ». Les liens de secure.extranet.ciblex.fr qui contiennent `colis=` fonctionnent aussi ; les pages de ciblex.eu, non.
 
-Peek vérifie le suivi Ciblex toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, et toutes les heures la nuit. Il montre le statut, l'historique avec la ville du dépôt de chaque scan sur une carte, et l'heure de livraison. Les heures sont celles de Paris. Les mots de Ciblex n'apparaissent jamais : chaque scan s'affiche avec les mots de Peek, comme Livré, En livraison, Prêt à être retiré, Problème de livraison ou « Colis traité dans un dépôt Ciblex », et les autres lignes, dont `COLIS NON REMIS` et celle des 48 heures, comme « Mise à jour du suivi ». Il peut t'envoyer des notifications : à chaque scan, pour les étapes importantes ou le jour de livraison uniquement.
+Peek vérifie le suivi Ciblex toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, et toutes les une à deux heures la nuit. Il montre le statut, l'historique avec la ville du dépôt de chaque scan sur une carte, et l'heure de livraison. Les heures sont lues à l'heure de Paris et affichées dans le fuseau horaire de ton appareil. Les mots de Ciblex n'apparaissent jamais : chaque scan s'affiche avec les mots de Peek, comme Livré, En livraison, Prêt à être retiré, Problème de livraison ou « Colis traité dans un dépôt Ciblex », et les autres lignes, dont `COLIS NON REMIS` et celle des 48 heures, comme « Mise à jour du suivi ». Il peut t'envoyer des notifications : à chaque scan, pour les étapes importantes ou le jour de livraison uniquement.
 
 Pas de date de livraison prévue, ni de nom ou d'adresse de relais, ni de poids. Ton adresse n'est pas reprise quand Ciblex la met dans la colonne du lieu. Un historique vide n'est pas pris pour un numéro introuvable : Peek continue de demander.
 

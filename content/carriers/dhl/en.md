@@ -3,7 +3,7 @@ title: DHL Paket tracking: numbers, statuses and pickup help
 description: Track a DHL Paket parcel in Germany: the tracking number shapes, what DHL's statuses mean, missed deliveries, Packstation pickup, claims and contacts.
 slug: dhl-paket-tracking
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 DHL Paket is the German parcel service of DHL Group, sold under the Deutsche Post and DHL brands. Track a parcel with its tracking number on dhl.de (in English or German), in the Post & DHL app or by pasting it in the box above. The number comes from the sender: shops usually put it in the shipping confirmation.
@@ -78,7 +78,7 @@ DHL warns about fake SMS with shortened links or odd country codes, and fake car
 
 [Peek](/) names DHL at once from a `JJD` label number with 18 digits, a valid `0034043…` barcode number or a valid `C…DE` / `L…DE` number. A 12-digit Identcode fits several carriers: Peek asks a few of them whether they know it, DHL among them. A 10-digit number fits several too: paste it all the same, as Peek follows more than 3,500 carriers. If the parcel isn't filed under DHL, pick "DHL" with "Change", which also fixes a parcel filed under the wrong DHL network. Links from dhl.de, deutschepost.de and nolp.dhl.de work too.
 
-Peek reads dhl.de's tracking in English, falling back to a browser on its server when DHL refuses. If DHL wants a postcode or says the number belongs to another DHL service, tracking services fill in. Peek checks every 10 minutes by day, every 2 minutes once out for delivery, and hourly overnight, and can notify you at every scan, at important steps or on delivery day only.
+Peek reads dhl.de's tracking in English, falling back to a browser on its server when DHL refuses. If DHL wants a postcode or says the number belongs to another DHL service, tracking services fill in. Peek checks every 10 minutes by day, every 2 minutes once out for delivery, and every hour or two overnight, and can notify you at every scan, at important steps or on delivery day only.
 
 It shows the status, each scan with its place on a map at DHL's exact time, the expected delivery day (no time window) and the destination country, with DHL's wordings as written. It drops your name, address and signature and shows no Packstation or branch address. When a scan abroad links a local post's tracking (Swiss Post, for example), Peek can follow the parcel there. It can't redirect a parcel or book a Liefertag.
 

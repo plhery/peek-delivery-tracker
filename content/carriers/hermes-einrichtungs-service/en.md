@@ -3,7 +3,7 @@ title: Hermes Einrichtungs-Service tracking: furniture deliveries
 description: Track a Hermes Einrichtungs-Service delivery: where the number is, the German statuses in English, changing the appointment and who to contact.
 slug: hermes-einrichtungs-service-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Hermes Einrichtungs-Service (HES) is the Otto Group company that delivers furniture, large appliances and other bulky goods in Germany, with a two-person crew who carry them into your home on an agreed day. You track the delivery on myhes.de with the number in HES's email or SMS, or in the shop's shipping email. You can also paste it in the box above.
@@ -85,7 +85,7 @@ Hermes Germany sends no SMS, but HES does, so a text from HES can be genuine.
 
 Peek shows the status and history in HES's German wording, the planned delivery day with its time window when myhes.de gives one, the shop or dealer that sold the goods and the time of delivery. HES gives no places, so nothing appears on the map, and the van's live tracking isn't shown. A cancelled or returned order shows as a problem. Your name, address and delivery instructions are left out, and times are read as German time.
 
-It checks every 10 minutes by day, every 2 once the van is out, and hourly overnight, and can notify you of every scan, important steps only or delivery day only.
+It checks every 10 minutes by day, every 2 once the van is out, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only.
 
 ## Questions about Hermes Einrichtungs-Service tracking
 

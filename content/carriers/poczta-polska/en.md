@@ -91,7 +91,7 @@ As read on 11 October 2026 on Poczta Polska's English and Polish pages:
 
 Peek shows the English wordings as written, each post office on a map, the weight, the destination country, the service (Pocztex, EMS) and the office holding a parcel for pickup. There is no expected delivery date. It drops office addresses, opening hours, payment documents and extra services. Scans relayed from abroad carry no time zone: Peek reads them on the clock of the country they come from. Pallets, grouped consignments and unregistered mail can't be tracked.
 
-Peek checks every 10 minutes by day, every 2 once out for delivery, and hourly overnight, and can notify you when the status changes. A parcel posted abroad to Poland can be followed to Poczta Polska.
+Peek checks every 10 minutes by day, every 2 once out for delivery, and every hour or two overnight, and can notify you when the status changes. A parcel posted abroad to Poland can be followed to Poczta Polska.
 
 ## Questions about Poczta Polska tracking
 

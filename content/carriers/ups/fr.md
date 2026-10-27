@@ -3,7 +3,7 @@ title: UPS tracking : suivi de colis, statuts et contact
 description: Suivre un colis UPS : où trouver le numéro 1Z, ce que veulent dire « Anomalie » et les autres statuts, l'avis InfoNotice, les points Access Point et le contact UPS.
 slug: ups-tracking-suivi-colis
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 UPS (United Parcel Service) est le transporteur américain de colis et d'express, présent en France, en Belgique et en Suisse. Pour suivre ton colis, saisis son numéro sur ups.com, ouvre le lien des e-mails de UPS ou colle le numéro dans le champ ci-dessus. Il figure sur l'étiquette et dans l'e-mail d'expédition de la boutique, et commence en général par `1Z`.
@@ -81,7 +81,7 @@ Pages de contact de UPS, lues le 13 octobre 2026 :
 
 [Peek](/) reconnaît UPS tout de suite pour un numéro `1Z` dont la clé de contrôle est bonne. Si elle est fausse, seul UPS est proposé, et UPS refuse le numéro comme mal saisi. Tu peux aussi coller un lien ups.com, ou n'importe quel lien qui contient un numéro `1Z`. Peek n'interroge UPS qu'avec des numéros `1Z` : les autres formes, comme `H1234567890`, ne sont suivies que par des services de suivi, même après « Changer de transporteur ».
 
-Pour lire le suivi, le serveur de Peek ouvre la page de suivi de ups.com dans un navigateur, toutes les 10 minutes en journée, toutes les 5 minutes une fois le colis en livraison, et toutes les heures la nuit. Si UPS refuse, ou si seul le statut est lisible, des services de suivi complètent l'historique. Tu vois le statut, chaque scan sur une carte avec son lieu et son heure exacte, le jour de livraison prévu (jamais un créneau horaire), l'heure de livraison, le service, le pays de destination et, tant que le colis attend, le nom et l'adresse du point Access Point. Peek peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Pour lire le suivi, le serveur de Peek ouvre la page de suivi de ups.com dans un navigateur, toutes les 10 minutes en journée, toutes les 5 minutes une fois le colis en livraison, et toutes les une à deux heures la nuit. Si UPS refuse, ou si seul le statut est lisible, des services de suivi complètent l'historique. Tu vois le statut, chaque scan sur une carte avec son lieu et son heure exacte, le jour de livraison prévu (jamais un créneau horaire), l'heure de livraison, le service, le pays de destination et, tant que le colis attend, le nom et l'adresse du point Access Point. Peek peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 
 Peek ne reprend ni le nom de la personne qui a signé, ni ton adresse, ni la preuve de livraison, ni l'endroit où le colis a été déposé, ni les horaires du point Access Point. Il n'affiche pas la photo de livraison, et UPS ne lui donne ni le poids ni l'expéditeur. Les scans apparaissent en anglais, tels que UPS les écrit, quelle que soit ta langue : une livraison se lit « DELIVERED ». Aux États-Unis, quand UPS confie un colis Ground Saver à la poste américaine et donne son numéro, Peek suit la suite chez USPS (« Livraison par USPS »). Pour modifier une livraison ou réclamer, adresse-toi à UPS ou à l'expéditeur.
 

@@ -3,7 +3,7 @@ title: Econt tracking: shipment number, statuses and offices
 description: Track an Econt parcel in Bulgaria: where to find the shipment number, what Econt's English statuses mean, offices, Econtomats, claims and contacts.
 slug: econt-tracking
 published: 2026-10-13
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Econt Express is a Bulgarian courier, founded in 1993, that delivers to your door, to its offices and to Econtomat parcel lockers. Track a parcel with "Track a shipment" on [econt.com](https://www.econt.com/en/services/track-shipment), with the link in Econt's email or SMS, or by pasting the shipment number in the box above. The number comes from Econt's notification or the shop's shipping email.
@@ -77,7 +77,7 @@ Econt's channels, as read on 12 October 2026 on its [customer service page](http
 
 It then shows Econt's summary status, the history with the office of each office scan on a map, and the delivery time. While the parcel waits, it shows the name of the Econt office storing it; Econt lists its Econtomats as offices, so a locker can appear by name too. Econt gives no expected delivery day or weight. The parcel count, courier's and recipient's names, sender and order references are left out.
 
-Scans keep the English labels above, except `Delivered`, shown in Peek's own words; `Return receipt: …` lines change nothing. Times are read as Sofia time; a scan in the hour the clocks repeat in late October stays in the history, in order, though not at its exact time. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps or on delivery day only.
+Scans keep the English labels above, except `Delivered`, shown in Peek's own words; `Return receipt: …` lines change nothing. Times are read as Sofia time; a scan in the hour the clocks repeat in late October stays in the history, in order, though not at its exact time. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps or on delivery day only.
 
 ## Questions about Econt tracking
 

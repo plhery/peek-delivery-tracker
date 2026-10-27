@@ -3,7 +3,7 @@ title: Pošta Srbije: Serbian Post tracking, statuses and help
 description: Track a Pošta Srbije or Post Express item: the 13-character number, what the English statuses mean, notices, pickup deadlines, claims and contacts.
 slug: posta-srbije-serbian-post-tracking
 published: 2026-10-13
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Pošta Srbije (the Post of Serbia) is Serbia's national post, and Post Express is its courier service. Track an item for free on posta.rs's [Track and Trace](https://www.posta.rs/eng/alati/pracenje-posiljke.aspx), in the Post of Serbia app, or by pasting the number in the box above. The number comes from the sender.
@@ -85,7 +85,7 @@ Pošta Srbije's channels, as posta.rs listed them in October 2026:
 
 An item from abroad keeps its foreign post, even when it's going to Serbia. Pošta Srbije's lookup takes any postal number, though: pick "Pošta Srbije" with "Change", or paste a posta.rs link. Peek can also follow it there when the carrier abroad names "Serbian Post" or "Post Express".
 
-Peek reads the same service as Pošta Srbije's app. It checks every 10 minutes by day and hourly overnight, and can notify you when the status changes. Each step goes on a map with its Serbian post office (only the country for a step abroad), with the weight and the time it was delivered. Times in Serbia are Belgrade time; a step abroad is read on that country's clock, and one in a country with several time zones doesn't appear. Pošta Srbije gives no expected arrival day and names no pickup point. Who signed, postcodes and payment details are left out. Statuses keep Pošta Srbije's wording, except `Delivered`, shown in Peek's own words.
+Peek reads the same service as Pošta Srbije's app. It checks every 10 minutes by day and every hour or two overnight, and can notify you when the status changes. Each step goes on a map with its Serbian post office (only the country for a step abroad), with the weight and the time it was delivered. Times in Serbia are read on Belgrade time and a step abroad on that country's clock, and shown in your device's time zone; a step in a country with several time zones doesn't appear. Pošta Srbije gives no expected arrival day and names no pickup point. Who signed, postcodes and payment details are left out. Statuses keep Pošta Srbije's wording, except `Delivered`, shown in Peek's own words.
 
 ## Questions about Serbian Post tracking
 

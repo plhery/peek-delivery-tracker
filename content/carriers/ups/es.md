@@ -3,7 +3,7 @@ title: UPS seguimiento: estado del paquete, entrega y teléfono
 description: Seguimiento de UPS: dónde está el número 1Z, qué significa «Excepción», cómo funcionan el aviso InfoNotice y los Access Point, y el teléfono de UPS España.
 slug: ups-seguimiento
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 UPS (United Parcel Service) es la empresa estadounidense de paquetería con la que envían muchas tiendas, en España y desde el extranjero. Para seguir tu paquete, busca el número en ups.com, abre el enlace de los correos de UPS o pégalo en la casilla de arriba. El número está en la etiqueta y en el correo de envío de la tienda, y casi siempre empieza por `1Z`.
@@ -81,7 +81,7 @@ Así figuraban el 13 de octubre de 2026 en la página de contacto de UPS España
 
 [Peek](/) reconoce UPS al momento con un número `1Z` cuyo dígito de control es correcto. Si no lo es, propone solo UPS, que lo rechaza por estar mal escrito. Puedes pegar también un enlace de ups.com o cualquier enlace que lleve dentro un número `1Z`. A UPS Peek solo le pregunta por números `1Z`: con otras formas, como `H1234567890` (una letra y 10 cifras) o los números de solo cifras, responden únicamente servicios de seguimiento, también después de «Cambiar transportista».
 
-Para leer los datos, el servidor de Peek abre la página de seguimiento de ups.com en un navegador, cada 10 minutos de día, cada 5 minutos cuando el paquete está en reparto y cada hora por la noche. Si UPS rechaza la consulta, o solo se puede leer el estado, los servicios de seguimiento completan el historial. Ves el estado, cada escaneo en un mapa con su lugar y su hora exacta, el día de entrega previsto (nunca una franja horaria), la hora de entrega, el servicio, el país de destino y, mientras el paquete espera, el nombre y la dirección del Access Point. Las notificaciones las eliges tú: cada escaneo, los pasos importantes o solo el día de entrega.
+Para leer los datos, el servidor de Peek abre la página de seguimiento de ups.com en un navegador, cada 10 minutos de día, cada 5 minutos cuando el paquete está en reparto y cada una o dos horas por la noche. Si UPS rechaza la consulta, o solo se puede leer el estado, los servicios de seguimiento completan el historial. Ves el estado, cada escaneo en un mapa con su lugar y su hora exacta, el día de entrega previsto (nunca una franja horaria), la hora de entrega, el servicio, el país de destino y, mientras el paquete espera, el nombre y la dirección del Access Point. Las notificaciones las eliges tú: cada escaneo, los pasos importantes o solo el día de entrega.
 
 Peek no muestra quién firmó, tu dirección, la prueba de entrega, dónde se dejó el paquete ni la foto, y UPS no le da ni el peso ni el remitente. Los escaneos salen en el inglés de UPS: la entrega se lee «DELIVERED». Si en Estados Unidos UPS pasa un paquete Ground Saver al servicio postal estadounidense e indica su número, Peek lo sigue allí en cuanto este muestra movimiento («Entrega con USPS»). Los cambios de entrega y las reclamaciones pasan por UPS o por el remitente.
 

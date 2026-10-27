@@ -3,7 +3,7 @@ title: DHL Paket Sendungsverfolgung: Nummer, Status, Packstation
 description: DHL Sendungsverfolgung für Pakete: wie die Sendungsnummer aussieht, was die Status heißen, Filiale, Packstation, Nachforschung und Kontakt.
 slug: dhl-paket-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 DHL Paket ist der deutsche Paketdienst der DHL Group, unterwegs unter den Marken Deutsche Post und DHL. Dein Paket verfolgst du kostenlos mit der Sendungsnummer auf dhl.de, in der Post & DHL App oder indem du die Nummer oben ins Feld einfügst. Die Nummer bekommst du vom Absender: Shops schicken sie meist mit der Versandbestätigung.
@@ -83,7 +83,7 @@ Wurde dein Paket im Ausland zugestellt, kümmert sich bei fehlendem Inhalt das Z
 
 [Peek](/) erkennt DHL sofort an einer `JJD`-Etikettennummer mit 18 Ziffern, einer `0034043…`-Barcode-Nummer mit gültiger Prüfziffer oder einer `C…DE`- oder `L…DE`-Nummer mit gültiger Prüfziffer. Einen 12-stelligen Identcode nutzen auch andere Paketdienste: Peek fragt mehrere davon, ob sie die Nummer kennen, DHL darunter. Eine 10-stellige Nummer fügst du trotzdem ein, denn Peek verfolgt mehr als 3.500 Paketdienste. Landet das Paket nicht bei DHL, wähle „DHL“ über „Paketdienst ändern“. So korrigierst du auch ein Paket, das unter dem falschen DHL-Bereich gelandet ist. Links von dhl.de, deutschepost.de und nolp.dhl.de kannst du ebenfalls einfügen.
 
-Peek liest die Sendungsverfolgung von dhl.de auf Englisch und öffnet sie in einem Browser auf dem eigenen Server, wenn DHL die Anfrage ablehnt. Will DHL eine Postleitzahl oder sagt, die Nummer gehöre zu einem anderen DHL-Dienst, helfen Tracking-Dienste aus. Nachgefragt wird tagsüber alle 10 Minuten, sobald das Paket in Zustellung ist alle 2 Minuten, und nachts stündlich. Auf Wunsch bekommst du Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag.
+Peek liest die Sendungsverfolgung von dhl.de auf Englisch und öffnet sie in einem Browser auf dem eigenen Server, wenn DHL die Anfrage ablehnt. Will DHL eine Postleitzahl oder sagt, die Nummer gehöre zu einem anderen DHL-Dienst, helfen Tracking-Dienste aus. Nachgefragt wird tagsüber alle 10 Minuten, sobald das Paket in Zustellung ist alle 2 Minuten, und nachts alle ein bis zwei Stunden. Auf Wunsch bekommst du Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag.
 
 Du siehst den Status, jeden Scan mit Ort und DHLs genauer Uhrzeit auf einer Karte, den voraussichtlichen Liefertag (ohne Zeitfenster) und das Zielland. Die Meldungen stehen so da, wie DHL sie schreibt, also meist Englisch mit etwas Deutsch. Ob das Paket zugestellt ist, entnimmt Peek DHLs eigener Markierung. Deinen Namen, deine Adresse und die Unterschrift blendet Peek aus, die Adresse einer Packstation oder Filiale zeigt es nicht an. Verweist ein Scan im Ausland auf die Sendungsverfolgung einer Post, etwa der [Schweizerischen Post](carrier:swiss-post), geht die Verfolgung dort weiter. Umleiten, einen Liefertag buchen oder einen Ablageort wählen geht nur bei DHL.
 

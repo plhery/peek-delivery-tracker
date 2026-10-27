@@ -3,7 +3,7 @@ title: SpeedPAK tracking: eBay parcels, statuses and who to ask
 description: Track an eBay SpeedPAK parcel: what the 28-character number looks like, what each status means, who delivers it and who to ask when it stalls.
 slug: speedpak-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 SpeedPAK is eBay's shipping service for cross-border orders, run with the logistics company Orange Connex and built for parcels leaving China. Its number has 28 characters and starts with ES or EE: type it on Orange Connex's tracking page, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), or in the box above. On eBay, the number shows as a link beside the item in your Purchase history.
@@ -87,7 +87,7 @@ eBay prints the same email with the hours in China Standard Time, on a page for 
 
 When SpeedPAK names the delivering carrier, Peek can ask that carrier and switch to it once it shows newer progress. The parcel keeps the number you added, its page says "Delivery with" that carrier, and lists the carrier's own number with a link to its tracking. This depends on what SpeedPAK publishes, so not every parcel gets it.
 
-Peek checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and hourly overnight, puts each scan on a map and can notify you of every scan, important steps only or "Delivery day only". It can't contact SpeedPAK or the seller, or open a claim for you.
+Peek checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and every hour or two overnight, puts each scan on a map and can notify you of every scan, important steps only or "Delivery day only". It can't contact SpeedPAK or the seller, or open a claim for you.
 
 ## Questions about SpeedPAK tracking
 

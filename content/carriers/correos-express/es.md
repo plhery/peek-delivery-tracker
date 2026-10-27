@@ -3,7 +3,7 @@ title: Correos Express seguimiento: estados, entrega y teléfono
 description: Sigue tu paquete de Correos Express: cómo es el número, qué significa cada estado, cómo pedir una nueva entrega y su teléfono gratuito.
 slug: correos-express-seguimiento
 published: 2026-10-10
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Correos Express, la empresa de paquetería urgente del Grupo Correos, reparte en España y Portugal y no es lo mismo que [Correos](carrier:correos-spain), el servicio postal. Para seguir tu paquete, escribe el número de envío en su [buscador de envíos](https://s.correosexpress.com/) o pégalo en la casilla de arriba. Quien registra el envío en Correos Express es el remitente, por ejemplo la tienda donde compraste: si no tienes el número, pídeselo.
@@ -90,7 +90,7 @@ Para reclamar, las condiciones de transporte dan el mismo teléfono y la web, pe
 
 [Peek](/) reconoce el transportista por el número. Varios transportistas comparten los [números de 16 cifras](guide:tracking-number-formats), así que pregunta a los más probables. Uno de 23 cifras apunta a Correos Express. Si no te ofrece Correos Express, repasa las cifras.
 
-Peek consulta el seguimiento cada 10 minutos de día, cada 2 minutos en el último tramo y cada hora por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Verás el estado, el historial con el lugar de cada escaneo en un mapa y la entrega prevista, solo mientras el paquete siga en camino. No guarda la prueba de entrega, los datos de contacto ni los comentarios de entrega, y no puede hablar con Correos Express por ti.
+Peek consulta el seguimiento cada 10 minutos de día, cada 2 minutos en el último tramo y cada una o dos horas por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Verás el estado, el historial con el lugar de cada escaneo en un mapa y la entrega prevista, solo mientras el paquete siga en camino. No guarda la prueba de entrega, los datos de contacto ni los comentarios de entrega, y no puede hablar con Correos Express por ti.
 
 ## Preguntas sobre el seguimiento de Correos Express
 

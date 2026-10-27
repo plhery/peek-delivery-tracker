@@ -3,7 +3,7 @@ title: DPD Portugal rastreio: estados, pontos Pickup e contactos
 description: Rastreio DPD Portugal: onde está o número de 14 algarismos, o que quer dizer cada estado, o Predict, os pontos Pickup e cacifos, reclamações e contactos.
 slug: dpd-portugal-rastreio
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 A DPD Portugal é a transportadora de encomendas da Geopost em Portugal, o mesmo grupo da [Chronopost](carrier:chronopost). Entrega no continente, na Madeira e nos Açores, e é a parceira que a Colissimo da [La Poste](carrier:la-poste) indica para as entregas em Portugal. Para saberes onde está a tua encomenda, escreve o número no [Track & Trace](https://tracking.dpd.pt/track-and-trace) da DPD ou cola-o na caixa no topo desta página.
@@ -90,7 +90,7 @@ Segundo a [página de contactos](https://www.dpd.com/pt/pt/ajuda/contactos/) da 
 
 Com 14 algarismos começados entre 0955 e 0988, com ou sem o carácter de controlo, o [Peek](/) pergunta às transportadoras prováveis, a DPD Portugal primeiro, e mostra «DPD Portugal tem esta encomenda.» quando a DPD conhece o número. Com outro número da DPD, cola-o na mesma: o Peek segue mais de 3.500 transportadoras. Se a DPD Portugal não aparecer, escolhe-a em «Alterar» ou, na encomenda, em «Alterar transportadora». Um carácter de controlo errado é uma gralha: confirma a etiqueta. Os links do tracking.dpd.pt com `reference=` também funcionam.
 
-O Peek lê o rastreio da DPD em português, com as horas tal como a DPD as dá. Quando um ponto Pickup recebe a encomenda, mostra o nome do ponto. O mapa, a janela horária e o nome de quem assinou ficam no site da DPD. Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada hora à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
+O Peek lê o rastreio da DPD em português, com as horas tal como a DPD as dá. Quando um ponto Pickup recebe a encomenda, mostra o nome do ponto. O mapa, a janela horária e o nome de quem assinou ficam no site da DPD. Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
 
 Se o rastreio da La Poste disser que a encomenda passou para a DPD Portugal e der o número dela, o Peek pode passar a segui-la na DPD assim que esta mostrar movimento. Uma encomenda da Chronopost continua a ser seguida na Chronopost: o Peek não a passa para a DPD Portugal. Se a DPD te mandar o número dela, adiciona-o também ao Peek. O Peek não consegue mudar uma entrega nem reclamar por ti.
 

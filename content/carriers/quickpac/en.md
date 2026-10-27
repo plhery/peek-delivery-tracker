@@ -3,7 +3,7 @@ title: Quickpac tracking: 18-digit number, statuses and contact
 description: Track a Quickpac parcel with its 18-digit number. On Planzer's English tracking, Shipped means delivered. For help, call Planzer Paket or use its contact form.
 slug: quickpac-tracking
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Quickpac is a Swiss parcel service, part of Planzer Paket (Planzer Parcel in English) since 2024, that brings shops' parcels to homes in selected postcode areas of Switzerland. Your 18-digit tracking number comes from the sender, usually in its shipping email, and is printed below the barcode on the parcel. Enter it on [Quickpac's tracking page](https://quickpac.ch/en/tracking) or paste it in the box above.
@@ -87,7 +87,7 @@ Drivers can't be called directly. No page says whether 0848 works from abroad.
 
 ## Tracking a Quickpac parcel with Peek
 
-[Peek](/) recognises an 18-digit number starting 44 as Quickpac and reads it from Planzer's tracking site; a tracking link from quickpac.ch or tracking.app.planzer.ch works too. It checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and hourly overnight, and can notify you of every scan, important steps or delivery day only.
+[Peek](/) recognises an 18-digit number starting 44 as Quickpac and reads it from Planzer's tracking site; a tracking link from quickpac.ch or tracking.app.planzer.ch works too. It checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and every hour or two overnight, and can notify you of every scan, important steps or delivery day only.
 
 It shows the status, history, expected delivery, weight, dimensions, delivery time and destination country. It leaves out the recipient address. `Shipped` appears as delivered. Peek can't contact Quickpac for you.
 

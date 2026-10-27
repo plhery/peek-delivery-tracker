@@ -3,7 +3,7 @@ title: Speedy tracking: waybill number, statuses and lockers
 description: Track a Speedy parcel in Bulgaria: where to find the 11-digit waybill number, what Speedy's statuses mean, Smart Control, offices, lockers and contacts.
 slug: speedy-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 Speedy is a Bulgarian courier, Speedy AD of Sofia, with offices, Speedy Lockers and couriers to the door, and part of the DPD group (Geopost). Track a parcel with the waybill number in "Track Shipment" on [speedy.bg](https://www.speedy.bg/en), with the Smart Control link in Speedy's message, or by pasting the number in the box above. The number comes from Speedy's email, SMS or Viber message, the Speedy Mobile app or the shop's shipping email.
@@ -92,7 +92,7 @@ Speedy publishes no opening hours and no chat. These are Bulgarian numbers; Spee
 
 Peek then shows the status, the history with the town (and country) of each scan on a map, the expected delivery day while the parcel is on its way, and the delivery time. When the parcel waits at an office or locker, you see its name, not its address. When [ACS Courier](carrier:acs-courier) delivers the leg in Greece or Cyprus, Speedy names ACS and its number, and Peek can follow the parcel there. It leaves out the recipient, proof of delivery and return number.
 
-Speedy's wordings appear in English as Speedy writes them; `Delivered` shows in Peek's own words. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and its notifications cover every scan, important steps only or delivery day only. It can't extend a pickup period or resend your PIN.
+Speedy's wordings appear in English as Speedy writes them; `Delivered` shows in Peek's own words. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and its notifications cover every scan, important steps only or delivery day only. It can't extend a pickup period or resend your PIN.
 
 ## Questions about Speedy tracking
 

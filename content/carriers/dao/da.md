@@ -3,7 +3,7 @@ title: DAO Track & Trace: find din pakke, daoSHOP og natlevering
 description: Spor din DAO-pakke: sådan ser pakkenummeret ud, det betyder statusserne, så længe venter pakken i en daoSHOP, og sådan når du DAO's kundeservice.
 slug: dao-spor-pakke
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 DAO (Dansk Avis Omdeling) har båret aviser ud siden 1921 og kører i dag også pakker ud for webshops i hele Danmark: om natten hjem til dig eller til en daoSHOP, hvor du selv henter dem. Du sporer pakken under Find din pakke på dao.as eller i dao-appen, eller du sætter pakkenummeret ind i feltet ovenfor.
@@ -89,7 +89,7 @@ Sådan stod det på DAO's sider 26. oktober 2026:
 
 Sætter du et 20-cifret nummer ind, der starter med `0005712696` eller `0005715127`, spørger [Peek](/) på én gang DAO, [PostNord](carrier:postnord) og et par andre transportører, hvis numre kan se sådan ud. Kender kun DAO pakken, står der "DAO has this parcel." i Peek. Kender PostNord den også, kan Peek bede dig vælge. Ved andre 20-cifrede numre, 13-cifrede numre og e-labelkoder kan Peek ikke se på nummeret, at det er DAO's. Sæt det ind alligevel, for Peek følger over 3.500 transportører, og tryk på "Change" og vælg DAO. Et link fra Find din pakke på dao.as virker med alle tre slags numre.
 
-Peek henter DAO's sporing på engelsk, så du ser de engelske statustekster fra tabellen ovenfor. Peek viser hver scanning med tid og sted og navnet på den daoSHOP, pakken skal til eller venter i. Afsender- og modtagernavnene, som DAO viser maskeret, din adresse og dit postnummer samt butikkens adresse, åbningstider og placering på kortet tager Peek ikke med. DAO oplyser hverken forventet leveringsdag eller vægt. Får du beskeder om pakken, tjekker Peek den i dagtimerne, kl. 8–22, hvert 10. minut og hvert 2. minut, når den står som `To be delivered today`. Om natten, når DAO kører ud, tjekker Peek én gang i timen. Peek kan give dig besked, når der sker noget, men kan ikke kontakte DAO eller webshoppen for dig.
+Peek henter DAO's sporing på engelsk, så du ser de engelske statustekster fra tabellen ovenfor. Peek viser hver scanning med tid og sted og navnet på den daoSHOP, pakken skal til eller venter i. Afsender- og modtagernavnene, som DAO viser maskeret, din adresse og dit postnummer samt butikkens adresse, åbningstider og placering på kortet tager Peek ikke med. DAO oplyser hverken forventet leveringsdag eller vægt. Får du beskeder om pakken, tjekker Peek den i dagtimerne, kl. 8–22, hvert 10. minut og hvert 2. minut, når den står som `To be delivered today`. Om natten, når DAO kører ud, tjekker Peek hver eller hver anden time. Peek kan give dig besked, når der sker noget, men kan ikke kontakte DAO eller webshoppen for dig.
 
 ## Spørgsmål om DAO-pakker
 

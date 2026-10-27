@@ -3,7 +3,7 @@ title: DHL Paket seguimiento: estados y envíos a España
 description: Sigue un paquete DHL Paket: cómo es el número, qué significan los estados en alemán e inglés, Packstation y oficinas en Alemania, y quién lo entrega en España.
 slug: dhl-paket-seguimiento
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 DHL Paket es el servicio de paquetería de DHL en Alemania, el de los paquetes de Deutsche Post y DHL. Esta página te sirve si vives en Alemania y también si estás en España esperando un paquete enviado desde allí con DHL Paket International. En los dos casos se sigue con el número en dhl.de (en alemán o en inglés), en la app Post & DHL o pegándolo en la casilla de arriba. El número te lo da quien envía: las tiendas suelen ponerlo en el correo de confirmación del envío.
@@ -91,7 +91,7 @@ DHL avisa de SMS falsos con enlaces acortados o prefijos de país raros, y de ta
 
 [Peek](/) reconoce DHL al momento con un número de etiqueta `JJD` de 18 cifras, un código de barras `0034043…` válido o un número `C…DE` o `L…DE` válido. Un Identcode de 12 cifras encaja con muchas empresas: Peek pregunta a varias si lo conocen, DHL entre ellas. Un número de 10 cifras, pégalo igualmente: Peek sigue a más de 3.500 transportistas. Si no sale DHL, elígelo con «Cambiar transportista». También valen los enlaces de dhl.de y deutschepost.de.
 
-Peek lee el seguimiento de dhl.de en inglés, así que los estados salen con el texto inglés de DHL, y si DHL rechaza la consulta recurre a un navegador en su servidor. Si DHL pide código postal, o dice que el número es de otro servicio de DHL, completan los servicios de seguimiento universales. Peek consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y te avisa con «Todas las novedades», «Solo importantes» o «Solo el día de entrega».
+Peek lee el seguimiento de dhl.de en inglés, así que los estados salen con el texto inglés de DHL, y si DHL rechaza la consulta recurre a un navegador en su servidor. Si DHL pide código postal, o dice que el número es de otro servicio de DHL, completan los servicios de seguimiento universales. Peek consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y te avisa con «Todas las novedades», «Solo importantes» o «Solo el día de entrega».
 
 Muestra el estado, cada evento con su lugar en el mapa, el día previsto de entrega (sin franja horaria) y el país de destino. No guarda tu nombre, tu dirección ni la firma. Si un evento en España enlaza el seguimiento de Correos o de DHL eCommerce Iberia, Peek puede seguir el paquete allí. Con un número `C…DE` y destino España, también puede probarlo en Correos. Peek no puede desviar un paquete, pedir un Liefertag ni reclamar por ti.
 

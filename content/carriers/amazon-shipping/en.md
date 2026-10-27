@@ -3,7 +3,7 @@ title: Amazon Shipping tracking: numbers, statuses and help
 description: Track an Amazon Shipping parcel from another shop: where the tracking ID is, what each status means, missed deliveries, Counter pickups and who to contact.
 slug: amazon-shipping-tracking
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Amazon Shipping is Amazon delivering parcels for other businesses, so a shop that isn't Amazon can send your order through Amazon's network. You track it on Amazon Shipping's public tracker (track.amazon.co.uk in the UK) with the tracking ID from the shop's shipping confirmation email, which also holds a link straight to it. Orders placed on Amazon itself are followed in Your Orders instead.
@@ -77,7 +77,7 @@ Read on 12 October 2026. Amazon Shipping's [Contact us page](https://track.amazo
 
 Paste the number or a track.amazon link (`/tracking/` followed by the number) into [Peek](/). Peek asks Amazon's public tracker whether it knows the number. If Amazon answers, you see "Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date." If not, it counts as an Amazon Logistics delivery, usually tracked in Your Orders on Amazon. If the check can't run, try again. Amazon Shipping isn't in the "Change" list: this check is the only way in. No postcode needed.
 
-Peek shows the status, the history with the town, region and country of each scan, the expected delivery day and the delivery time, checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, draws each scan on a map and can notify you of changes. It shows its own short labels in your language rather than Amazon's sentences, except "Arrived at sorting center", "Arrived at delivery center" and "Departed facility", which stay in English. It drops the shop's name, your name and address, the signature and the delivery photo. Amazon is the only source: when Amazon stops giving the history, Peek says so and stops checking. It doesn't follow the parcel to another carrier.
+Peek shows the status, the history with the town, region and country of each scan, the expected delivery day and the delivery time, checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, draws each scan on a map and can notify you of changes. It shows its own short labels in your language rather than Amazon's sentences, except "Arrived at sorting center", "Arrived at delivery center" and "Departed facility", which stay in English. It drops the shop's name, your name and address, the signature and the delivery photo. Amazon is the only source: when Amazon stops giving the history, Peek says so and stops checking. It doesn't follow the parcel to another carrier.
 
 ## Questions about Amazon Shipping tracking
 

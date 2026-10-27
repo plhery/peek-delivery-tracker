@@ -3,7 +3,7 @@ title: C Chez Vous tracking: order number, statuses and contact
 description: Track a C Chez Vous delivery of furniture or appliances in France: where the order number is, what the French statuses mean and how to change the date.
 slug: c-chez-vous-tracking
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 C Chez Vous delivers bulky online orders of more than 30 kg, such as furniture and large appliances, to homes and pickup points in France, on a booked appointment. The shop chose it when you ordered. Track it on [C Chez Vous's tracking page](https://www.cchezvous.fr/suivi-colis) with the order number from its email or SMS, or paste that number in the box above.
@@ -99,7 +99,7 @@ Peek shows the order's current step in its own words: Order registered, Scheduli
 
 Some limits. Peek shows `En livraison` as Out for delivery, though C Chez Vous's own text says the order is still heading to the regional depot. And for a pickup-point order, Peek may show Delivered when the parcel is only waiting at the point; trust the SMS and the 15-day deadline. Peek doesn't read `Annulée`: a cancelled order simply stops moving.
 
-It leaves out the time slot, the shop, your name, address and contacts, and the items ordered. Peek checks every 10 minutes by day, every 2 minutes once the order is out for delivery, and hourly overnight, and can notify you of every scan, important steps only or delivery day only. It can't move your appointment.
+It leaves out the time slot, the shop, your name, address and contacts, and the items ordered. Peek checks every 10 minutes by day, every 2 minutes once the order is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only. It can't move your appointment.
 
 ## Questions about C Chez Vous tracking
 

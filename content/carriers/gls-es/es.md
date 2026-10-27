@@ -3,7 +3,7 @@ title: GLS Spain seguimiento: estados, Parcel Shop y teléfono
 description: Sigue tu paquete GLS en España: por qué te pide el código postal, qué significa cada estado, Parcel Shops y lockers, ausencias y cómo contactar con GLS.
 slug: gls-spain-seguimiento
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GLS Spain es la filial española del grupo GLS, la red de paquetería que compró ASM Transporte Urgente en 2016. Para seguir tu paquete, entra en «Seguimiento de envío» en la web de GLS o en la app My GLS y escribe el número de seguimiento junto con el código postal de destino: GLS pide los dos. El número te lo da la tienda que te envía el paquete.
@@ -77,7 +77,7 @@ GLS dice que el asistente y los mensajes por redes sociales son gratuitos. El 91
 
 [Peek](/) consulta directamente el seguimiento de GLS Spain, sin cuenta. Como GLS, necesita el código postal de entrega: en cuanto GLS Spain es el transportista, aparece el campo obligatorio «Código postal de entrega», ya relleno si diste uno antes. Se envía a GLS y, si hace falta, a servicios de seguimiento. Con un código postal equivocado, GLS responde como si no conociera el número.
 
-Verás cada escaneo con su hora y el texto inglés de GLS, como `At delivery agency`, bajo un titular con las palabras de Peek («Listo para recoger», «Entregado»); solo `Delivered` y `Out for delivery` salen traducidos. GLS no dice dónde se hizo cada escaneo. También verás el día previsto de entrega, el peso y, cuando GLS lo nombra, el Parcel Shop o el Parcel Locker donde te espera el paquete. El código de recogida, el PIN y el plazo se quedan en la página de GLS, y el enlace «Abrir la web de GLS Spain» lleva a su formulario sin el número. Se consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puedes recibir notificaciones cuando cambia el estado.
+Verás cada escaneo con su hora y el texto inglés de GLS, como `At delivery agency`, bajo un titular con las palabras de Peek («Listo para recoger», «Entregado»); solo `Delivered` y `Out for delivery` salen traducidos. GLS no dice dónde se hizo cada escaneo. También verás el día previsto de entrega, el peso y, cuando GLS lo nombra, el Parcel Shop o el Parcel Locker donde te espera el paquete. El código de recogida, el PIN y el plazo se quedan en la página de GLS, y el enlace «Abrir la web de GLS Spain» lleva a su formulario sin el número. Se consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puedes recibir notificaciones cuando cambia el estado.
 
 Peek no reconoce GLS Spain solo por el número, y sin el código postal GLS no dice si lo conoce. Con un número de 10 cifras, pregunta a TIPSA, Relais Colis y DHL eCommerce Iberia, y también a [DHL Express](carrier:dhl-express) si cuadra su dígito de control; puede que un servicio de seguimiento te pida el código postal. Mejor pulsa «Cambiar», elige «GLS Spain» y añade el código postal. Un enlace de mygls.gls-spain.es, o uno de gls-group.com o gls-group.eu con `/ES/`, nombra GLS Spain directamente, aunque el código postal se te sigue pidiendo. Si otro transportista pasa tu paquete a GLS Spain, Peek no lo sigue allí por su cuenta, porque haría falta tu código postal.
 

@@ -84,7 +84,7 @@ Peek reads JCEX's own tracking and shows the status, the history with each scan'
 
 As JCEX names no delivering carrier and no second number, Peek follows the JCEX number to the end rather than switching to USPS or Colissimo, whose scans arrive through JCEX's history. It shows no expected delivery date, service or proof of delivery for JCEX.
 
-It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact JCEX or the seller for you.
+It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact JCEX or the seller for you.
 
 ## Questions about JCEX tracking
 

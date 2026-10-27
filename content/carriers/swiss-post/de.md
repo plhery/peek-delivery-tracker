@@ -3,7 +3,7 @@ title: Swiss Post Sendungsverfolgung: Status, Abholung, Kontakt
 description: Post-Paket verfolgen: wie die Sendungsnummer aussieht, was die Status heißen, was nach einer Abholungseinladung zu tun ist und wie du die Post erreichst.
 slug: swiss-post-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 Die Post (Swiss Post, Schweizerische Post) ist der nationale Postdienst der Schweiz und stellt Pakete in der Schweiz und in Liechtenstein zu. Verfolgen kannst du ein Paket kostenlos auf [post.ch](https://www.post.ch/de/empfangen/sendung-verfolgen) mit der Sendungsnummer, oder du fügst die Nummer oben ins Feld ein. Die Nummer vergibt der Absender, schau also zuerst in die Versandbestätigung des Shops.
@@ -93,7 +93,7 @@ Es liest die englischen Texte der Post, egal in welcher Sprache du die Seite nut
 
 `Delivered` erscheint als „Zugestellt“, `Delivered to the mailbox/letter box` so, wie die Post es schreibt. Bei `Registered for collection` und `Deposited in the MyPost24 machine` steht das Paket auf „Abholbereit“, die Zeile selbst bleibt englisch.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und nachts stündlich. Auf Wunsch bekommst du Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Pakete von [GLS Schweiz](carrier:gls-ch) und ausländische Postnummern, die in die Schweiz gehen, kann Peek bis zur Post weiterverfolgen. Eine `CH`-Nummer ins Ausland kann es bei der nationalen Post des Ziellands weiterverfolgen, wenn es diese kennt (etwa in Deutschland, Frankreich oder Italien), sobald sie neuere Schritte zeigt. Die Post für dich kontaktieren kann Peek nicht.
+Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und nachts alle ein bis zwei Stunden. Auf Wunsch bekommst du Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Pakete von [GLS Schweiz](carrier:gls-ch) und ausländische Postnummern, die in die Schweiz gehen, kann Peek bis zur Post weiterverfolgen. Eine `CH`-Nummer ins Ausland kann es bei der nationalen Post des Ziellands weiterverfolgen, wenn es diese kennt (etwa in Deutschland, Frankreich oder Italien), sobald sie neuere Schritte zeigt. Die Post für dich kontaktieren kann Peek nicht.
 
 ## Fragen zur Post Sendungsverfolgung
 

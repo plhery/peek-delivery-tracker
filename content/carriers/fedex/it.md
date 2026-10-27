@@ -3,7 +3,7 @@ title: FedEx tracking: numero, stati e consegna del pacco
 description: Tracking FedEx: dove trovi il numero di 12 cifre, cosa vuol dire «Eccezione di consegna», come cambi la consegna e come contatti FedEx Italia.
 slug: fedex-tracking
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 FedEx è un corriere espresso internazionale, attivo anche in Italia e in Ticino. Per seguire il pacco inserisci il numero nella pagina di monitoraggio di fedex.com, nell'app FedEx Mobile oppure nel box qui sopra. Secondo FedEx, il numero arriva di solito nell'e-mail o nell'SMS che ricevi sulla spedizione.
@@ -81,7 +81,7 @@ Così li indicavano il 13 ottobre 2026 le pagine di FedEx:
 
 Il server di Peek apre la pagina di monitoraggio di fedex.com in un browser. Quando FedEx rifiuta la richiesta, o chiede di verificare il destinatario, subentrano servizi di tracking.
 
-Vedi lo stato, ogni scansione con luogo e ora esatta su una mappa, il giorno di consegna previsto, l'ora di consegna e, finché il pacco aspetta, nome e indirizzo della sede FedEx. Controlla ogni 10 minuti di giorno, ogni 5 minuti quando il pacco è in consegna e ogni ora di notte, e le notifiche le scegli tu: tutti gli aggiornamenti, solo importanti o «Solo giorno di consegna». Non mostra il tuo nome e indirizzo, il mittente, la firma, il peso e le dimensioni. Le scansioni sono in inglese come le scrive FedEx, tranne poche, tra cui quella di consegna: FedEx ci mette il nome di chi ha firmato, quindi compare «Consegnato». Modifiche della consegna, dazi e reclami passano solo da FedEx o dal mittente.
+Vedi lo stato, ogni scansione con luogo e ora esatta su una mappa, il giorno di consegna previsto, l'ora di consegna e, finché il pacco aspetta, nome e indirizzo della sede FedEx. Controlla ogni 10 minuti di giorno, ogni 5 minuti quando il pacco è in consegna e di notte ogni una o due ore, e le notifiche le scegli tu: tutti gli aggiornamenti, solo importanti o «Solo giorno di consegna». Non mostra il tuo nome e indirizzo, il mittente, la firma, il peso e le dimensioni. Le scansioni sono in inglese come le scrive FedEx, tranne poche, tra cui quella di consegna: FedEx ci mette il nome di chi ha firmato, quindi compare «Consegnato». Modifiche della consegna, dazi e reclami passano solo da FedEx o dal mittente.
 
 Negli Stati Uniti FedEx consegna da sé la maggior parte dei pacchi Ground Economy; quando dice che il servizio postale americano ne ha uno, il pacco viene seguito su USPS («Consegna con USPS»).
 

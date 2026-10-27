@@ -3,7 +3,7 @@ title: bpost tracking: statuses, Pick-up points and contact
 description: Track a bpost parcel: where the barcode is, what each Track & Trace status means, how long Pick-up points and lockers keep it and how to reach bpost.
 slug: bpost-tracking
 published: 2026-10-11
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 bpost is Belgium's postal company, the brand of the bnode group that delivers the last mile in Belgium and the Netherlands. Track a parcel on [bpost's Track & Trace](https://track.bpost.cloud/) or in the My bpost app with its barcode, or paste the number in the box above. The barcode comes from the shop's shipping email, bpost's text or email, the shipping label or the notice in your letterbox.
@@ -86,7 +86,7 @@ Have the barcode ready. bpost lists no customer service email address.
 
 [Peek](/) names bpost straight away for a valid number of two letters, nine digits and BE, and for `JJBE` followed by a letter and 18 or 22 digits. A 24-digit number starting 3232 or 3299 is asked of bpost, Austrian Post, InPost and Ciblex; an 18-digit one starting 3232, of bpost and Ecoscooting. If only bpost knows it, Peek picks bpost; if several carriers do, you pick with "Change". The 30-digit registered numbers work only after picking bpost with "Change". A link from bpost.be or the Track & Trace search page with the barcode in `itemCodes` is read as bpost. A U barcode isn't named bpost, since bpost doesn't track it; Peek suggests only Chronopost for it.
 
-Peek asks bpost directly, without a postcode. You see bpost's own scans in its English wording, with the place, weight and dimensions; scans in Belgium are on Belgian time. While the parcel waits at a Pick-up point or locker, Peek shows that point's name and address, and still does after you've collected it there. For a parcel delivered in Belgium you see the time of delivery, and a parcel delivered back to the sender shows as returned. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and can notify you when the status changes.
+Peek asks bpost directly, without a postcode. You see bpost's own scans in its English wording, with the place, weight and dimensions; scans in Belgium are read on Belgian time and shown in your device's time zone. While the parcel waits at a Pick-up point or locker, Peek shows that point's name and address, and still does after you've collected it there. For a parcel delivered in Belgium you see the time of delivery, and a parcel delivered back to the sender shows as returned. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you when the status changes.
 
 Peek shows no expected delivery day, and drops the sender, recipient, the recipient's address, contact details, delivery preferences and proof of delivery.
 

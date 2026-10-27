@@ -3,7 +3,7 @@ title: DPD Portugal tracking: statuses, Pickup points and contact
 description: Track a DPD Portugal parcel: the 14-digit number, what the Portuguese statuses mean, Predict, Pickup points and lockers, claims and who to call.
 slug: dpd-portugal-tracking
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 DPD Portugal is the Portuguese parcel carrier of Geopost, the parcel group behind DPD and [Chronopost](carrier:chronopost). It delivers parcels across mainland Portugal, Madeira and the Azores, and it is the delivery partner La Poste's Colissimo names for Portugal. Track a parcel on DPD's [Track & Trace](https://tracking.dpd.pt/track-and-trace) with its 14-digit number, or paste the number in the box above.
@@ -91,7 +91,7 @@ The contact page, in Portuguese or English, doesn't say which languages the line
 
 For 14 digits starting 0955 to 0988, with or without the check character, [Peek](/) asks the likely carriers, DPD Portugal first, and shows "DPD Portugal has this parcel." when DPD knows it. For another DPD number, paste it all the same: Peek follows more than 3,500 carriers. If DPD Portugal doesn't come up, pick it with "Change", or "Change carrier" on the parcel. tracking.dpd.pt links with `reference=` work too.
 
-Peek reads DPD's Portuguese tracking, so the wordings stay Portuguese. Once a Pickup point takes your parcel, Peek shows its name; DPD's map, delivery window and the name of whoever signed stay on DPD's page. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only".
+Peek reads DPD's Portuguese tracking, so the wordings stay Portuguese. Once a Pickup point takes your parcel, Peek shows its name; DPD's map, delivery window and the name of whoever signed stay on DPD's page. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only".
 
 When La Poste's tracking names DPD Portugal and gives its number, Peek can follow the parcel there once DPD shows progress. A Chronopost parcel stays on Chronopost: Peek doesn't move it to DPD Portugal, so if DPD emails you its own number, add that one to Peek too. Peek can't change a delivery or claim for you.
 

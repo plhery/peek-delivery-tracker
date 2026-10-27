@@ -3,7 +3,7 @@ title: Correos Express tracking: statuses in English and contact
 description: Track a Correos Express parcel in Spain or Portugal: the 16- or 23-digit number, its Spanish statuses in plain English, missed deliveries and who to call.
 slug: correos-express-tracking
 published: 2026-10-10
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Correos Express is the express parcel company of Spain's Correos group, delivering across Spain and Portugal; it isn't [Correos](carrier:correos-spain), the post office. Type your number into its Spanish-language [tracking page](https://s.correosexpress.com/) or paste it in the box above. The sender, usually the shop, registers the parcel with Correos Express, so ask the shop if you have no number.
@@ -77,7 +77,7 @@ As Correos Express's sites listed them on 9 October 2026 (none in English):
 
 A 16-digit number is shared, so [Peek](/) asks the likely carriers; a 23-digit number points to Correos Express, apart from the Australia Post case above. If Peek doesn't offer Correos Express, check the digits. Paste the number, not a link.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight. It can notify you of every scan, important steps or delivery day only. It shows the status, the estimated delivery (only while the parcel is still on its way) and the history, with each scan's place on a map. It leaves out the proof of delivery, contact details and delivery comments, and can't contact Correos Express for you.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of every scan, important steps or delivery day only. It shows the status, the estimated delivery (only while the parcel is still on its way) and the history, with each scan's place on a map. It leaves out the proof of delivery, contact details and delivery comments, and can't contact Correos Express for you.
 
 ## Questions about Correos Express tracking
 

@@ -3,7 +3,7 @@ title: Cainiao em Portugal: rastreio, estados e contactos
 description: A Cainiao é o grupo de logística da Alibaba. Vê os seus números e estados, como saber quem entrega em Portugal e os contactos da Cainiao e da Ecoscooting.
 slug: cainiao-rastreio
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 A Cainiao é o grupo de logística da Alibaba: envia para o estrangeiro as encomendas de vendedores de plataformas como o AliExpress, e o seu site de seguimento, [global.cainiao.com](https://global.cainiao.com/), só segue encomendas Cainiao e AliExpress. Escreve o número no site da Cainiao ou cola-o na caixa no topo desta página. No AliExpress, o número está na encomenda: a ajuda do AliExpress manda abrir «My Orders», encontrar a encomenda e carregar em «Tracking».
@@ -89,7 +89,7 @@ O [Peek](/) mostra estas encomendas como «AliExpress / Cainiao». Reconhece log
 
 Às vezes, o AliExpress dá-te já o número da transportadora que vai entregar, por exemplo um da SDA para uma encomenda para Itália, quando a Cainiao ainda tem a encomenda. Com algumas dessas formas, o Peek pergunta à Cainiao além dessa transportadora. Se as duas conhecerem o número, o Peek arquiva a encomenda como «AliExpress / Cainiao», que tem as leituras de antes da fronteira, e pergunta também à transportadora que entrega para a última etapa: as leituras dela juntam-se ao histórico assim que der notícias da encomenda.
 
-Verifica de 10 em 10 minutos durante o dia (de 2 em 2 quando a encomenda sai para entrega) e de hora a hora à noite, põe cada leitura num mapa e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só no dia da entrega». Mostra o estado e o histórico em inglês, o local de uma leitura quando a Cainiao o dá, a entrega prevista como intervalo de dias quando a Cainiao o indica, a hora de entrega e o número da transportadora local quando a Cainiao o publica. Não pode contactar a Cainiao nem reclamar por ti.
+Verifica de 10 em 10 minutos durante o dia (de 2 em 2 quando a encomenda sai para entrega) e de hora a hora ou de duas em duas horas à noite, põe cada leitura num mapa e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só no dia da entrega». Mostra o estado e o histórico em inglês, o local de uma leitura quando a Cainiao o dá, a entrega prevista como intervalo de dias quando a Cainiao o indica, a hora de entrega e o número da transportadora local quando a Cainiao o publica. Não pode contactar a Cainiao nem reclamar por ti.
 
 ## Perguntas sobre o rastreio Cainiao
 

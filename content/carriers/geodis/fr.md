@@ -98,7 +98,7 @@ Colle un numéro `1G` et [Peek](/) reconnaît GEODIS tout de suite : aucun autre
 
 Peek lit le suivi de GEODIS en français et affiche ses étapes telles que GEODIS les écrit (la première colonne ci-dessus) ; `Livraison effectuée` devient « Livré ». Il montre le site GEODIS de chaque scan sur une carte, lit les heures de GEODIS comme celles de Paris et affiche le jour de livraison prévu, l'expéditeur, le service et le poids. Une livraison manquée, un problème, un retour ou un colis à retirer passe avant l'étape de la frise. Quand GEODIS donne des étapes sans scans datés, Peek date le statut du moment où il l'a vu.
 
-Il ne reprend pas le nombre de colis, ton nom, ton adresse, les instructions de livraison ni les documents de livraison. Les envois de plus de 12 mois apparaissent comme introuvables. Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut pas changer ta date de livraison : fais-le dans l'Espace destinataire.
+Il ne reprend pas le nombre de colis, ton nom, ton adresse, les instructions de livraison ni les documents de livraison. Les envois de plus de 12 mois apparaissent comme introuvables. Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut pas changer ta date de livraison : fais-le dans l'Espace destinataire.
 
 ## Questions sur le suivi GEODIS
 

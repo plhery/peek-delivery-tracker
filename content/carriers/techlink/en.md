@@ -3,7 +3,7 @@ title: Techlink tracking: ZHPHD numbers, statuses and help
 description: Track a Techlink (智禾) parcel from China: what a ZHPHD number looks like, what its scans mean, who delivers it and what to do when tracking stops.
 slug: techlink-tracking
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 Techlink (智禾国际物流, Zhihe International Logistics) is a Shenzhen logistics company that ships parcels from China to Europe and America for online sellers. Its numbers start with ZHPHD and end in ML: type yours on Techlink's tracking page, www.techlinksz.cn/trajectory, or in the box above. The shop that sent your order gives the number with its shipping details.
@@ -70,7 +70,7 @@ Peek reads Techlink's own tracker, the same one its tracking page uses, and show
 
 When Techlink's record holds the delivering carrier's number, Peek looks at its shape. An international postal number (two letters, nine digits, two letters) points to the post of the destination country; a number only one carrier in Peek's catalog uses points to that carrier. When Peek reads that carrier's own tracking, it asks it and switches to it once it shows progress as recent as Techlink's. The parcel keeps its ZHPHD number and shows the other one with it. Otherwise Peek stays on Techlink's tracker: Peek hasn't yet seen it show a scan after the handover, so expect its history to end there.
 
-Peek checks every 10 minutes by day and hourly overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Techlink or the seller for you.
+Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Techlink or the seller for you.
 
 ## Questions about Techlink tracking
 

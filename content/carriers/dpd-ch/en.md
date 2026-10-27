@@ -3,7 +3,7 @@ title: DPD Switzerland tracking: statuses, delivery and contact
 description: Track a DPD parcel in Switzerland: the 14-digit number, what DPD's statuses mean, Pickup Locations, missed deliveries and who to contact.
 slug: dpd-switzerland-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 DPD Switzerland is DPD (Schweiz) AG in Buchs ZH, a parcel carrier in the Geopost network with over 1,000 DPD Pickup Locations. Track a parcel on [myDPD](https://www.dpdgroup.com/ch/mydpd/) with its 14-digit parcel number, or paste it in the box above. It usually comes by email, and it's on the card DPD leaves if it misses you.
@@ -77,7 +77,7 @@ As listed on DPD's Swiss pages on 10 October 2026, for the whole country:
 
 The optional "Delivery postcode" field takes any country's format and is sent to DPD and, when needed, to tracking services. Without it you get one line per step and the expected day, when DPD has one. With it, DPD's scans appear on the map with town and country, plus its notices, the delivery window (in Swiss time), the sender's name and the weight. If DPD refuses the postcode, the parcel page says so and offers "Edit postcode".
 
-At a Pickup Location the shop is named when DPD names it, its address usually only with the postcode. Statuses stay in DPD's English, except plain `Delivered`, shown as "Delivered" in your language. Your name, address and the proof-of-delivery link are dropped. Peek checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you of every scan, important steps or delivery day only. It doesn't follow the parcel to another carrier.
+At a Pickup Location the shop is named when DPD names it, its address usually only with the postcode. Statuses stay in DPD's English, except plain `Delivered`, shown as "Delivered" in your language. Your name, address and the proof-of-delivery link are dropped. Peek checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, and can notify you of every scan, important steps or delivery day only. It doesn't follow the parcel to another carrier.
 
 ## Questions about DPD Switzerland tracking
 

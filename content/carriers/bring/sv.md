@@ -3,7 +3,7 @@ title: Spåra Bring-paket: statusar, ombud, paketbox och tull
 description: Spåra ditt Bring-paket: så ser kollinumret ut, det här betyder statusarna, så hämtar du hos ombud och i paketbox, och vem du klagar hos om något går fel.
 slug: bring-spara-paket
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Bring hör till norska Posten Bring-koncernen och levererar paket från webbutiker i hela Sverige: till ett ombud, till en paketbox eller hem till dörren. Du spårar paketet på [Brings spårningssida](https://tracking.bring.se/tracking/) eller i Bring-appen, eller så klistrar du in numret i fältet ovanför. Numret hittar du oftast i orderbekräftelsen som du har fått på mejl eller sms.
@@ -96,7 +96,7 @@ Saknar du ett paket kontaktar du först butiken. Så når du Brings kundservice,
 
 [Peek](/) ser direkt att ett nummer med två bokstäver, nio siffror och `NO` är Brings, om kontrollsiffran stämmer. Sifferformerna delar Bring med andra transportörer. Då frågar Peek Bring först, tillsammans med de andra som numret passar: [Matkahuolto](carrier:matkahuolto) vid `373`, [PostNord](carrier:postnord), [Swiss Post Cargo](carrier:swiss-post-cargo) och [NZ Post](carrier:nz-post) vid 20 siffror, och [DHL eCommerce](carrier:dhl-ecommerce) vid 17 siffror. Kommer Bring inte upp trycker du på "Change" och väljer Bring under "Fits this number". Har Peek valt en annan transportör söker du fram Bring där. Klistrar du in en länk från tracking.bring.se, tracking.bring.com, tracking.bring.dk, sporing.bring.no eller sporing.posten.no vet Peek att det är Bring, oavsett nummer. Hos Bring följer Peek nummer på 17 eller 18 siffror, 20 siffror som börjar med `00` och nummer med två bokstäver, nio siffror och två bokstäver med rätt kontrollsiffra, men inte ett sändningsnummer för flera paket: använd kollinumret.
 
-Peek visar status, platsen för varje skanning på en karta, avsändaren, tjänsten, vikt, mått, förväntad dag när Bring anger en och, medan paketet väntar, namnet på ombudet eller paketboxen. I stället för Brings meningar får varje steg en kort engelsk etikett, som "Handed in", "At terminal" eller "Ready for pickup". Adresser, foton och hämtkoden tar Peek inte med. På dagtid kollar Peek paketet var tionde minut, varannan minut när det är ute för leverans och en gång i timmen på natten, och Peek kan meddela dig när något händer. Peek kan inte kontakta Bring eller butiken åt dig.
+Peek visar status, platsen för varje skanning på en karta, avsändaren, tjänsten, vikt, mått, förväntad dag när Bring anger en och, medan paketet väntar, namnet på ombudet eller paketboxen. I stället för Brings meningar får varje steg en kort engelsk etikett, som "Handed in", "At terminal" eller "Ready for pickup". Adresser, foton och hämtkoden tar Peek inte med. På dagtid kollar Peek paketet var tionde minut, varannan minut när det är ute för leverans och var eller varannan timme på natten, och Peek kan meddela dig när något händer. Peek kan inte kontakta Bring eller butiken åt dig.
 
 ## Frågor om att spåra paket med Bring
 

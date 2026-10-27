@@ -3,7 +3,7 @@ title: FedEx śledzenie: numer przesyłki, statusy i awizo
 description: Śledzenie przesyłki FedEx: gdzie jest 12-cyfrowy numer, co znaczą statusy jak „Wyjątek w doręczeniu”, co zrobić z awizem, cłem i jak skontaktować się z FedEx.
 slug: fedex-sledzenie
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 FedEx to międzynarodowa firma kurierska i ekspresowa, która w Europie sprzedaje usługi FedEx Express. Przesyłkę śledzisz na stronie śledzenia fedex.com, w aplikacji FedEx Mobile albo wklejając numer w pole powyżej. Według FedEx numer przychodzi zwykle w e-mailu lub SMS-ie o Twojej przesyłce.
@@ -82,7 +82,7 @@ Polska strona kontaktowa FedEx, stan na 13 października 2026:
 
 [Peek](/) stawia FedEx na pierwszym miejscu przy 12- i 15-cyfrowych numerach, których cyfra kontrolna się zgadza, ale nie ma pewności: te same kształty mają inni przewoźnicy. Stronę FedEx otwiera w przeglądarce dopiero na końcu, więc przewoźnika często wskazuje serwis śledzenia przesyłek albo Peek podaje go po krótkiej chwili. Numeru, który nie przechodzi kontroli, Peek nie proponuje FedEx: wybierz wtedy przewoźnika przez „Zmień przewoźnika”. Ważne w Polsce: krajowe 13-cyfrowe numery FedEx Peek śledzi osobno, jako FedEx Poland. Możesz wkleić link z fedex.com z `trknbr=` albo `tracknumbers=`, także z polskiej strony śledzenia. Zeskanowany kod z etykiety jest odczytywany jako numer, który w sobie ma.
 
-Serwer Peek otwiera w dzień stronę śledzenia fedex.com w przeglądarce co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu; w nocy co godzinę. FedEx często odmawia takich wizyt. Gdy odmówi albo zażąda weryfikacji odbiorcy, historię uzupełniają serwisy śledzenia przesyłek.
+Serwer Peek otwiera w dzień stronę śledzenia fedex.com w przeglądarce co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu; w nocy co godzinę lub dwie. FedEx często odmawia takich wizyt. Gdy odmówi albo zażąda weryfikacji odbiorcy, historię uzupełniają serwisy śledzenia przesyłek.
 
 Widzisz status, każdy skan z miejscem i dokładną godziną na mapie, przewidywany dzień doręczenia, godzinę doręczenia i, dopóki paczka czeka, nazwę i adres placówki FedEx. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie ma tam Twojego imienia i adresu, nadawcy, podpisu, wagi ani wymiarów. Skany są po angielsku, tak jak zapisuje je FedEx (`On FedEx vehicle for delivery` to wydanie do doręczenia). Skan doręczenia, odbiór w placówce i wyjątek w przesyłce (`Delivered`, `Ready for pickup`, `Shipment exception`) Peek pokazuje własnymi słowami: „Dostarczona”, „Do odbioru” i „Problem z przesyłką”. Zmianę doręczenia, cło i reklamację załatwisz tylko w FedEx albo u nadawcy.
 

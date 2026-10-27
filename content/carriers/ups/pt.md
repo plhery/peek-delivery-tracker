@@ -3,7 +3,7 @@ title: UPS tracking: número 1Z, estados e entregas em Portugal
 description: UPS tracking em Portugal: onde está o número 1Z, o que quer dizer «Exceção» e os outros estados, InfoNotice, Access Point, reclamações e contactos da UPS.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 A UPS (United Parcel Service) é a transportadora americana a que muitas lojas, em Portugal e no estrangeiro, confiam as encomendas. Para seguir a tua, introduz o número no ups.com, abre o link dos e-mails da UPS ou cola o número na caixa acima. O número vem na etiqueta e no e-mail de envio da loja, e começa normalmente por `1Z`.
@@ -87,7 +87,7 @@ A empresa indicada é a UPS de Portugal, no Prior Velho.
 
 O [Peek](/) reconhece logo a UPS num número `1Z` cujo último algarismo passa no controlo da UPS. Se não passar, propõe só a UPS, que o recusa por estar mal escrito. O Peek só procura números `1Z` na UPS: outras formas, como `H1234567890`, ficam para serviços de seguimento, mesmo depois de «Alterar transportadora». Também podes colar um link do ups.com ou qualquer link com um número `1Z`.
 
-O servidor do Peek abre a página de seguimento do ups.com num navegador e lê a resposta, de 10 em 10 minutos durante o dia, de 5 em 5 minutos quando a encomenda sai para entrega e de hora a hora à noite. Se a UPS recusar, ou se só der para ler o estado, serviços de seguimento preenchem o histórico. Vês o estado, cada leitura num mapa com o local e a hora exata, o dia de entrega previsto (nunca uma janela horária), a hora da entrega, o serviço, o país de destino e, enquanto a encomenda espera, o nome e a morada do Access Point. As notificações escolhes tu: todas as atualizações, só as importantes ou só no dia da entrega.
+O servidor do Peek abre a página de seguimento do ups.com num navegador e lê a resposta, de 10 em 10 minutos durante o dia, de 5 em 5 minutos quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite. Se a UPS recusar, ou se só der para ler o estado, serviços de seguimento preenchem o histórico. Vês o estado, cada leitura num mapa com o local e a hora exata, o dia de entrega previsto (nunca uma janela horária), a hora da entrega, o serviço, o país de destino e, enquanto a encomenda espera, o nome e a morada do Access Point. As notificações escolhes tu: todas as atualizações, só as importantes ou só no dia da entrega.
 
 Não vês quem assinou, a tua morada, a prova de entrega, onde ficou a encomenda nem a fotografia; peso e remetente, a UPS não os dá. As leituras aparecem no inglês da UPS e a entrega lê-se «DELIVERED». Nos Estados Unidos, quando a UPS passa uma encomenda Ground Saver ao correio americano (USPS) e indica o número, o Peek segue-a lá assim que o USPS mostra progresso e indica que é o USPS a entregar.
 

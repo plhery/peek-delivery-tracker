@@ -3,7 +3,7 @@ title: PPL tracking: shipment numbers, statuses and Parcelshops
 description: Track a PPL parcel in Czechia: the 11-digit shipment number, what PPL's English statuses mean, Parcelshops, Parcelboxes, missed deliveries and contacts.
 slug: ppl-tracking
 published: 2026-10-12
-updated: 2026-10-25
+updated: 2026-10-27
 ---
 
 PPL (PPL CZ) is a Czech parcel carrier, part of DHL Group, that delivers to homes, Parcelshops and Parcelboxes across Czechia. Track a parcel with its 11-digit shipment number on [PPL's tracking page](https://www.ppl.cz/en/track-a-shipment), in the mojePPL app, or in the box above, then pick PPL. The number comes from the shop's shipping email or order page, or from PPL's own email and SMS.
@@ -78,7 +78,7 @@ PPL publishes no phone line for recipients. The email info@ppl.cz and the number
 
 [Peek](/) can't tell a PPL number from its 11 digits alone, so it asks the carriers whose numbers look the same, PPL among them, along with GLS, [GLS Switzerland](carrier:gls-ch), PostLogistics, Coordinadora and Mainfreight, and names the one that knows it. You can also pick "PPL" with "Change", or paste a ppl.cz tracking link with `shipmentId=`, which Peek reads as PPL's. A dhl.com link with a PPL number won't work.
 
-Peek reads PPL's English statuses as written, with times in Prague time. It shows the expected delivery day while PPL gives one, the weight, the delivery time and the Parcelshop or Parcelbox name while the parcel waits there. PPL gives no places for its scans. Peek leaves out the delivery window, sender, customer reference, the pickup point's address, cash-on-delivery details and proof of delivery. It checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you when the status changes. When PPL's reply links a partner abroad's tracker with the partner's number, Peek names that partner as the one delivering. It doesn't take SmartPIN codes.
+Peek reads PPL's English statuses as written, with times read on Prague time and shown in your device's time zone. It shows the expected delivery day while PPL gives one, the weight, the delivery time and the Parcelshop or Parcelbox name while the parcel waits there. PPL gives no places for its scans. Peek leaves out the delivery window, sender, customer reference, the pickup point's address, cash-on-delivery details and proof of delivery. It checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, and can notify you when the status changes. When PPL's reply links a partner abroad's tracker with the partner's number, Peek names that partner as the one delivering. It doesn't take SmartPIN codes.
 
 ## Questions about PPL tracking
 

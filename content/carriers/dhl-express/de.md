@@ -3,7 +3,7 @@ title: DHL Express Sendungsverfolgung: Nummer, Status, Kontakt
 description: DHL Express Sendung verfolgen: wo die 10-stellige Frachtbriefnummer steht, was die englischen Status heißen, Zoll, verpasste Zustellung und Kontakt.
 slug: dhl-express-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 DHL Express ist der internationale Kurierdienst von DHL für zeitgenaue Sendungen. Shops im Ausland nutzen ihn oft, weil sie mit DHL einen Vertrag über die Lieferung von Online-Bestellungen haben. Verfolgen kannst du die Sendung mit der 10-stelligen Frachtbriefnummer auf dhl.com oder MyDHL+, über den Link in DHLs E-Mail oder SMS, oder indem du die Nummer oben ins Feld einfügst. Die Nummer schickt dir meist der Shop mit der Versandbestätigung.
@@ -76,7 +76,7 @@ So listete DHL Express die Kanäle am 13. Oktober 2026 auf seinen Hilfe-und-Supp
 
 [Peek](/) erkennt eine 10-stellige Frachtbriefnummer, deren Prüfziffer DHL Express' Regel besteht. Weil auch andere Paketdienste 10 Ziffern nutzen, setzt Peek DHL Express an die erste Stelle, fragt gleichzeitig auch andere, etwa ACS Courier, Geniki Taxydromiki und DHL eCommerce Iberia, und nennt den, der das Paket kennt. ACS und Geniki nutzen dieselbe Prüfziffer: Kennt einer von ihnen die Nummer ebenfalls, wählst du selbst. Fällt die Prüfziffer durch, wird DHL Express nicht angeboten: Wähle es dann mit „Ändern“. Packstück-Nummern mit `JD01` und Etiketten mit `JJD0146` (`JJD014612345678901234`) erkennt Peek sofort als DHL Express und führt sie auf ihre Frachtbriefnummer zurück. Links von mydhl.express.dhl kannst du einfügen. Bei einem dhl.com-Link füg lieber die Frachtbriefnummer selbst ein. Landet ein Paket unter „DHL“, stell es mit „Paketdienst ändern“ auf „DHL Express“ um.
 
-Peek liest DHL Express über den Dienst hinter dessen App oder öffnet sonst die Tracking-Seite von dhl.com in einem Browser auf Peeks Server. Das ist langsamer und kann abgelehnt werden: Dann helfen Tracking-Dienste aus. Peek fragt tagsüber alle 10 Minuten nach, sobald das Paket in Zustellung ist alle 2 bis 5 Minuten, nachts stündlich, und schickt dir auf Wunsch Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag.
+Peek liest DHL Express über den Dienst hinter dessen App oder öffnet sonst die Tracking-Seite von dhl.com in einem Browser auf Peeks Server. Das ist langsamer und kann abgelehnt werden: Dann helfen Tracking-Dienste aus. Peek fragt tagsüber alle 10 Minuten nach, sobald das Paket in Zustellung ist alle 2 bis 5 Minuten, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag.
 
 Du siehst den Status, jeden Scan mit Station auf einer Karte und das Zielland. Die Uhrzeiten werden nach dem Ort der Station eingeordnet oder, wenn der nicht reicht, nach den Scans davor und danach. Die Scans stehen in DHLs Englisch, nur `Delivered`, `Shipment picked up` und `Shipment information received` zeigt Peek in eigenen Worten. Peek blendet die Unterschrift aus und ignoriert alte Scans einer neu vergebenen Frachtbriefnummer. Ein voraussichtliches Lieferdatum, Gewicht oder Service Point zeigt es nicht. Zoll bezahlen oder die Zustellung ändern geht nur bei DHL.
 

@@ -3,7 +3,7 @@ title: TNT tracking: consignment number, statuses and delivery
 description: Track a TNT Express consignment on tnt.com: where the 9-digit number is, what the statuses mean, missed deliveries, customs, claims and who to call.
 slug: tnt-tracking
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 TNT delivers parcels, documents and freight for people and businesses across the world, with its own road network across Europe. tnt.com now presents FedEx Express and TNT as "coming together", and its US and Canadian pages say TNT is operating as FedEx there. A TNT consignment has a 9-digit number, also called the shipment or waybill number. Track it on [tnt.com's Track & Trace](https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html), by that number or by the sender's reference. A parcel sent within Italy belongs to [TNT Italy](carrier:tnt-it) instead.
@@ -86,7 +86,7 @@ In the UK, the complaints charter linked from tnt.com's Help Centre says to comp
 
 Paste the 9-digit number. When its check digit is right, [Peek](/) asks TNT, and XPO too when the number also fits XPO's check, then shows "TNT has this parcel." when TNT knows it. If the check digit doesn't fit, paste it all the same: Peek follows more than 3,500 carriers. If TNT doesn't come up, pick it with "Change", or "Change carrier" on the parcel. tnt.com tracking links aren't read: paste the number itself.
 
-Peek reads tnt.com's tracking in English, so the wordings above stay English in every language. It shows the status, the history with the city and country of each scan, the destination country and the expected delivery date while TNT gives one. The sender's reference and the signature stay on tnt.com. Since numbers get reused, Peek follows the shipment with the newest scan: check that its route is yours. Peek also follows TNT France's 16-digit national numbers, on TNT France's own tracking and in French; many carriers share that length, so you may have to pick TNT. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact TNT or the sender for you.
+Peek reads tnt.com's tracking in English, so the wordings above stay English in every language. It shows the status, the history with the city and country of each scan, the destination country and the expected delivery date while TNT gives one. The sender's reference and the signature stay on tnt.com. Since numbers get reused, Peek follows the shipment with the newest scan: check that its route is yours. Peek also follows TNT France's 16-digit national numbers, on TNT France's own tracking and in French; many carriers share that length, so you may have to pick TNT. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact TNT or the sender for you.
 
 ## Questions about TNT tracking
 

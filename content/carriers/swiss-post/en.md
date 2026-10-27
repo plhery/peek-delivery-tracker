@@ -3,7 +3,7 @@ title: Swiss Post tracking: statuses, collection notes and contact
 description: Track a Swiss Post parcel: what its numbers look like, what each English status means, what to do after a collection note, and how to reach Swiss Post.
 slug: swiss-post-tracking
 published: 2026-10-11
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 Swiss Post (Die Post, La Poste, La Posta) is Switzerland's national postal service and delivers parcels across Switzerland and Liechtenstein. Track one free on [post.ch](https://www.post.ch/en/receiving-mail/track-consignments) with the consignment number, or paste it in the box above. The number comes from the sender, so look in the shop's shipping email first.
@@ -84,7 +84,7 @@ Peek reads Swiss Post's English texts, whatever your language. It shows the stat
 
 `Delivered` shows as Peek's own "Delivered". `Registered for collection` and `Deposited in the MyPost24 machine` show as ready for pickup.
 
-Peek checks every 10 minutes by day, every 2 once out for delivery, and hourly overnight, and can notify you of every scan, important steps only or delivery day only. [GLS Switzerland](carrier:gls-ch) parcels and foreign postal numbers heading to Switzerland can be followed to Swiss Post; a `CH` number going abroad, to the destination's national post when Peek knows it (Germany, France or Italy, for example) once it shows newer progress.
+Peek checks every 10 minutes by day, every 2 once out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only. [GLS Switzerland](carrier:gls-ch) parcels and foreign postal numbers heading to Switzerland can be followed to Swiss Post; a `CH` number going abroad, to the destination's national post when Peek knows it (Germany, France or Italy, for example) once it shows newer progress.
 
 ## Questions about Swiss Post tracking
 

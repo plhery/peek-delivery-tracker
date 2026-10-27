@@ -3,7 +3,7 @@ title: YunExpress śledzenie przesyłki: statusy, kurier, kontakt
 description: Paczka YunExpress z Chin: co znaczy numer YT, co mówią angielskie statusy, kto doręcza w Polsce i do kogo pisać, gdy paczka utknie.
 slug: yunexpress-sledzenie
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 YunExpress, pisany też Yun Express, to firma logistyczna z Shenzhen, która wysyła z Chin małe paczki dla sprzedawców internetowych, także tych z Allegro, Temu, SHEIN czy Amazona. Paczkę śledzisz numerem zaczynającym się od YT na stronie YunExpress, [yuntrack.com](https://www.yuntrack.com/), albo wklejasz go w pole powyżej. YunExpress nigdzie nie opisuje SMS-ów ani e-maili do odbiorców, więc numeru szukaj w e-mailu sklepu o wysyłce albo na stronie zamówienia.
@@ -77,7 +77,7 @@ Pole „Feedback” na yuntrack dotyczy strony, a nie Twojej paczki. Zacznij wi�
 
 ## Śledzenie paczki YunExpress w Peek
 
-[Peek](/) rozpoznaje YT i 16 cyfr jako YunExpress i przyjmuje też linki z yuntrack.com. Sprawdza śledzenie w dzień co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu, w nocy zaś co godzinę, pokazuje każdy skan na mapie i może Cię powiadomić, gdy zmieni się status. Widzisz status, historię, miejsce każdego skanu i godzinę doręczenia.
+[Peek](/) rozpoznaje YT i 16 cyfr jako YunExpress i przyjmuje też linki z yuntrack.com. Sprawdza śledzenie w dzień co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu, w nocy zaś co godzinę lub dwie, pokazuje każdy skan na mapie i może Cię powiadomić, gdy zmieni się status. Widzisz status, historię, miejsce każdego skanu i godzinę doręczenia.
 
 Gdy YunExpress podaje lokalnego przewoźnika i jego numer, Peek może śledzić paczkę dalej u tego przewoźnika, choć nie przy każdej paczce. Przy paczkach YunExpress nie pokazuje przewidywanej daty doręczenia ani punktu odbioru, pomija numery zamówienia i nie skontaktuje się za Ciebie z YunExpressem ani nie złoży reklamacji.
 

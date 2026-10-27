@@ -3,7 +3,7 @@ title: Magyar Posta nyomkövetés: státuszok, PostaPont, vám
 description: Magyar Posta nyomkövetés: hol találja a küldeményazonosítót, mit jelentenek a státuszok, átvétel postán, PostaPonton és automatában, vám, kártérítés.
 slug: magyar-posta-nyomkovetes
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-10-27
 ---
 
 A Magyar Posta a csomagot házhoz kézbesíti, vagy postán, MPL PostaPonton, illetve MPL csomagautomatában veheti át. Küldeményét ingyen követheti a posta.hu Nyomkövetés oldalán és a Magyar Posta alkalmazásában, de az azonosítót a fenti mezőbe is beírhatja. Az azonosítót a webáruház szállítási e-mailjében találja; belföldi csomagnál a Magyar Posta is küld e-mailt, amikor csomagot adtak fel Önnek.
@@ -88,7 +88,7 @@ A posta.hu-n 2026. október 25-én:
 
 [Peek](/) felülete angol nyelvű. A `P`-vel kezdődő belföldi és a `HU`-ra végződő azonosítóból Peek nem tudja biztosan, hogy a csomag a Magyar Postáé (a `P`, egy betű és 11 számjegy a francia [La Poste](carrier:la-poste) számaira is illik), ezért megkérdezi a Magyar Postát. Ehhez böngészőben nyitja meg a posta.hu-t, ami akár 20 másodpercig is eltarthat. Ha a Magyar Posta ismeri a számot, ezt látja: „Magyar Posta has this parcel.” Ha nem, a „Change” gombbal választhatja ki. A `JJH…` és az `RL…` azonosítót Peek nem ismeri fel: illessze be így is (Peek több mint 3500 szállítót követ), és válassza ki a Magyar Postát a „Change” gombbal.
 
-Peek mutatja az eseményeket a helyükkel, a szolgáltatás nevét és az átvételi helyet (posta, PostaPont vagy automata), de várható kézbesítési napot és átvételi határidőt nem. Külföldről érkező küldeményt Peek a feladó ország postájának azonosítójával követ. Ha az szerint a csomag Magyarországra tart, Peek ugyanazzal a számmal a Magyar Postát is megkérdezi, és amint ott friss esemény van, onnan követi tovább. Napközben 10 percenként, kiszállítás közben 2–5 percenként, éjjel óránként ellenőriz, és változáskor értesítést küldhet. A Magyar Postával vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
+Peek mutatja az eseményeket a helyükkel, a szolgáltatás nevét és az átvételi helyet (posta, PostaPont vagy automata), de várható kézbesítési napot és átvételi határidőt nem. Külföldről érkező küldeményt Peek a feladó ország postájának azonosítójával követ. Ha az szerint a csomag Magyarországra tart, Peek ugyanazzal a számmal a Magyar Postát is megkérdezi, és amint ott friss esemény van, onnan követi tovább. Napközben 10 percenként, kiszállítás közben 2–5 percenként, éjjel egy-két óránként ellenőriz, és változáskor értesítést küldhet. A Magyar Postával vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
 
 ## Gyakori kérdések a Magyar Posta nyomkövetéséről
 

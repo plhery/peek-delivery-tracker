@@ -3,7 +3,7 @@ title: Express One csomagkövetés: státuszok, Exopoint, elérhetőség
 description: Így követheti az Express One-csomagot: mit jelentenek a státuszok, hogyan irányíthatja Exopointba, hogyan fizeti ki az utánvétet, és hol reklamálhat.
 slug: express-one-csomagkovetes
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Az Express One Hungary Kft. az [Osztrák Posta](carrier:austrian-post) tulajdonában álló magyar futárszolgálat. Házhoz szállít, és Exopoint néven több mint 2300 csomagpontra és csomagautomatába is kézbesít. A csomagot a [tracking.expressone.hu](https://tracking.expressone.hu/) oldalon követheti, vagy beírhatja a számát a fenti mezőbe.
@@ -84,9 +84,9 @@ A Csomagkövetés oldal a +36 1 8 777 444-es számot és egy Messenger-chatbotot
 
 A [Peek](/) felülete angol nyelvű. A Peek a számból nem ismeri fel, hogy Express One-csomagról van szó: a 13 jegyű számmal más szállítókat, például a La Poste-ot kérdezi meg, a 24 jegyűvel az Osztrák Postát, az InPostot és a Ciblexet. Illessze be így is: a Peek több mint 3500 szállítót követ. Ha egyik sem ismeri, ezt látja: „not found yet · Peek keeps checking”; ilyenkor a „Change” gombbal válassza ki az Express One-t. Ha a tracking.expressone.hu `plc_number=` részt tartalmazó linkjét illeszti be, a Peek abból tudja, hogy Express One-csomagról van szó.
 
-A lépéseket angolul, magyar idő szerint mutatja, a depós beolvasásoknál a településsel együtt. Az ismeretlen kódú lépéseket állapot nélkül jeleníti meg. Várható kézbesítési időt (az Express One időablakát), súlyt, feladót és aláírást nem mutat.
+A lépéseket angolul mutatja, a depós beolvasásoknál a településsel együtt; az időpontokat magyar idő szerint értelmezi, és az eszköze időzónájában jeleníti meg. Az ismeretlen kódú lépéseket állapot nélkül jeleníti meg. Várható kézbesítési időt (az Express One időablakát), súlyt, feladót és aláírást nem mutat.
 
-Ha valaki várja a csomagot (értesítést kért rá, vagy az elmúlt órában megnézte), a Peek napközben, 8 és 22 óra között 10 percenként ellenőrzi, `Out for delivery` állapotban 2 percenként; egyébként és éjjel óránként. Változáskor értesítést küldhet. Az Express One-nal vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
+Ha valaki várja a csomagot (értesítést kért rá, vagy az elmúlt órában megnézte), a Peek napközben, 8 és 22 óra között 10 percenként ellenőrzi, `Out for delivery` állapotban 2 percenként; egyébként óránként, éjjel egy-két óránként. Változáskor értesítést küldhet. Az Express One-nal vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
 
 ## Gyakori kérdések az Express One-csomagkövetésről
 

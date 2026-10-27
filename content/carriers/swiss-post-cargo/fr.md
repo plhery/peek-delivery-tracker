@@ -3,7 +3,7 @@ title: Swiss Post Cargo suivi : statuts, livraison et contact
 description: Suivre un envoi Swiss Post Cargo en Suisse romande : quel numéro saisir, ce que veut dire LIVRE SCANNE, comment se passe la livraison et qui appeler.
 slug: swiss-post-cargo-suivi
 published: 2026-10-12
-updated: 2026-10-12
+updated: 2026-10-27
 ---
 
 Swiss Post Cargo, c'est le transport de marchandises de la Poste suisse : palettes, meubles et autres marchandises livrés en camion, pas les colis ordinaires. Tu suis ton envoi sur sa page Track & Trace (tt.swisspost-cargo.com) avec le code à barres ou la référence donnés par l'expéditeur, ou en le collant dans le champ ci-dessus. Si tu as un numéro de colis de la Poste, il se suit sur [la page de la Poste suisse](carrier:swiss-post).
@@ -79,9 +79,9 @@ Le suivi cite aussi le « Service à la clientèle Merchandises » à Dintikon e
 
 Un code à barres de 20 chiffres commençant par `00` appartient à l'expéditeur, pas à un transporteur : [Peek](/) affiche « Peek demande à Swiss Post Cargo, NZ Post… » et ne nomme Swiss Post Cargo que si celui-ci connaît le numéro. Une référence `PL-12345678` n'est demandée qu'à Swiss Post Cargo. Pour une autre référence de 6 à 40 lettres et chiffres, choisis Swiss Post Cargo avec « Changer », ou colle un lien Track & Trace de tt.swisspost-cargo.com ou apv.swisspost-cargo.com. Un numéro de colis de la Poste dans un tel lien est suivi comme un colis de la Poste.
 
-Peek affiche le statut et l'historique, avec la localité de chaque scan sur une carte, à l'heure de Zurich, et l'heure de livraison. Peek interroge le suivi en anglais : les étapes y gardent donc leurs libellés anglais, comme `Data entry POST` ou `DELIVERED SCANNED`, et `Loaded for Delivery` compte comme en cours de livraison. Les lignes signature et photo rejoignent le scan de livraison, sans l'image. Peek laisse de côté ton nom et ton adresse, et n'a ni date de livraison prévue, ni poids, ni point de retrait.
+Peek affiche le statut et l'historique, avec la localité de chaque scan sur une carte, et l'heure de livraison ; les heures, lues à l'heure de Zurich, s'affichent dans le fuseau horaire de ton appareil. Peek interroge le suivi en anglais : les étapes y gardent donc leurs libellés anglais, comme `Data entry POST` ou `DELIVERED SCANNED`, et `Loaded for Delivery` compte comme en cours de livraison. Les lignes signature et photo rejoignent le scan de livraison, sans l'image. Peek laisse de côté ton nom et ton adresse, et n'a ni date de livraison prévue, ni poids, ni point de retrait.
 
-Une référence partagée par plusieurs envois n'est lue que tant que l'un d'eux a des scans des 60 derniers jours ; sinon elle passe pour introuvable, alors utilise le code à barres. Peek ne suit pas les numéros d'envoi et d'entreprise du portail allemand. Il vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois l'envoi en livraison, toutes les heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Une référence partagée par plusieurs envois n'est lue que tant que l'un d'eux a des scans des 60 derniers jours ; sinon elle passe pour introuvable, alors utilise le code à barres. Peek ne suit pas les numéros d'envoi et d'entreprise du portail allemand. Il vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois l'envoi en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 
 ## Questions sur le suivi Swiss Post Cargo
 

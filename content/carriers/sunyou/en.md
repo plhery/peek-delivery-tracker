@@ -3,7 +3,7 @@ title: SunYou tracking: SY numbers, statuses and who delivers
 description: Track a SunYou (SYPost) parcel from China: what the SY number looks like, what each status means, which carrier delivers it and who to ask when it stalls.
 slug: sunyou-tracking
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 SunYou, also written SYPost, is a Shenzhen logistics company that carries small parcels for online sellers in China and hands them to a local carrier in your country for the last stretch. Its numbers start with SY: type yours on SunYou's tracking site, [sypost.net](https://www.sypost.net), or in the box above. The shop gives the number with your order's shipping details.
@@ -86,11 +86,11 @@ For anything that needs action, the seller and the local carrier are the ones to
 
 [Peek](/) names SunYou at once for both SY shapes, which no other carrier in its catalog shares. A sypost.net link with the number in it, such as the one "Copy Link" gives, can be pasted too.
 
-SunYou's lines show in English whatever your language, except exact matches such as `Delivered`, which appear in Peek's own words. Peek shows the status, the history (up to 20 scans, with no place for each), the destination country, the delivery time and the local carrier with its number. It shows no expected delivery date and no pickup point for SunYou parcels. Scan times keep the time zone SunYou gives them, China's and then your country's.
+SunYou's lines show in English whatever your language, except exact matches such as `Delivered`, which appear in Peek's own words. Peek shows the status, the history (up to 20 scans, with no place for each), the destination country, the delivery time and the local carrier with its number. It shows no expected delivery date and no pickup point for SunYou parcels. Scan times are read in the time zone SunYou gives them, China's and then your country's, and shown in your device's time zone.
 
 When SunYou gives the local carrier's number, Peek can ask that carrier (Royal Mail, DHL in Germany, Canada Post, USPS or the national post, for example) and switch to it once it shows newer progress. The parcel keeps its SunYou number, its page says "Delivery with" that carrier and lists the carrier's own number with a link. This doesn't happen for every parcel: [Meest](carrier:meest) in Greece, for one, isn't followed.
 
-It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact SunYou or the seller for you.
+It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact SunYou or the seller for you.
 
 ## Questions about SunYou tracking
 

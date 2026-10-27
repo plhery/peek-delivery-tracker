@@ -3,7 +3,7 @@ title: SpeedPAK Sendungsverfolgung: eBay-Pakete, Status, Kontakt
 description: eBay-Paket mit SpeedPAK verfolgen: wie die 28-stellige Nummer aussieht, was die englischen Status bedeuten, wer zustellt und wen du fragst, wenn nichts passiert.
 slug: speedpak-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 SpeedPAK ist der Versandservice von eBay für grenzüberschreitende Bestellungen, betrieben mit dem Logistiker Orange Connex und gedacht für Pakete aus China. Die Nummer hat 28 Zeichen und beginnt mit ES oder EE: Gib sie auf der Tracking-Seite von Orange Connex ein, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), oder füg sie oben ins Feld ein. Bei eBay findest du sie unter „Mein eBay“ und „Käufe“, als Link neben dem Artikel.
@@ -89,7 +89,7 @@ Steht der Paketdienst vor Ort fest, ist sein Kundenservice derjenige, der bei ei
 
 Nennt SpeedPAK den Paketdienst vor Ort, kann Peek auch diesen fragen und zu ihm wechseln, sobald er neuere Schritte zeigt. Das Paket behält die Nummer, die du eingegeben hast, seine Seite zeigt „Zustellung durch“ diesen Paketdienst und listet dessen Nummer mit einem Link zu seinem Tracking. Das hängt davon ab, was SpeedPAK veröffentlicht, und klappt nicht bei jedem Paket.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und nachts stündlich. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei allen Updates, nur bei wichtigen Schritten oder „Nur am Liefertag“. Peek kann aber weder SpeedPAK noch den Verkäufer für dich kontaktieren und keine Reklamation einreichen.
+Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und nachts alle ein bis zwei Stunden. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei allen Updates, nur bei wichtigen Schritten oder „Nur am Liefertag“. Peek kann aber weder SpeedPAK noch den Verkäufer für dich kontaktieren und keine Reklamation einreichen.
 
 ## Fragen zur SpeedPAK Sendungsverfolgung
 

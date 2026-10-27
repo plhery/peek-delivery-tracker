@@ -3,7 +3,7 @@ title: FedEx suivi : colis, statuts et avis de passage
 description: Suivre un colis FedEx : le numéro à 12 chiffres, le sens de « Exception de livraison » et des autres statuts, l'avis de passage, la douane et le contact.
 slug: fedex-suivi-colis
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 FedEx est un transporteur express et de colis, présent en France, en Belgique et en Suisse. Pour suivre ton colis, saisis le numéro sur la page de suivi de fedex.com, dans l'application FedEx Mobile, ou colle-le dans le champ ci-dessus. FedEx précise que le numéro arrive en général dans l'e-mail ou le SMS qu'il t'envoie au sujet de ton envoi.
@@ -78,7 +78,7 @@ Pages de contact de FedEx, lues le 13 octobre 2026 :
 
 Pour FedEx, il ouvre la page de suivi de fedex.com dans un navigateur, sur son propre serveur. Quand FedEx refuse, ou exige une vérification du destinataire, des services de suivi prennent le relais.
 
-Tu vois le statut, chaque scan sur une carte avec son lieu et son heure exacte, le jour de livraison prévu, l'heure de livraison et, tant que le colis attend, le nom et l'adresse du site FedEx qui le garde. Le suivi est vérifié toutes les 10 minutes en journée, toutes les 5 minutes une fois le colis en livraison, toutes les heures la nuit, et tu peux recevoir des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Peek ne garde ni ton nom ni ton adresse, ni l'expéditeur, la signature, le poids ou les dimensions. Les scans s'affichent dans l'anglais de FedEx, sauf la livraison : la ligne de FedEx nomme la personne qui a signé, elle s'affiche donc « Livré ». Pour changer une livraison, payer la douane ou réclamer, adresse-toi à FedEx ou à l'expéditeur.
+Tu vois le statut, chaque scan sur une carte avec son lieu et son heure exacte, le jour de livraison prévu, l'heure de livraison et, tant que le colis attend, le nom et l'adresse du site FedEx qui le garde. Le suivi est vérifié toutes les 10 minutes en journée, toutes les 5 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et tu peux recevoir des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Peek ne garde ni ton nom ni ton adresse, ni l'expéditeur, la signature, le poids ou les dimensions. Les scans s'affichent dans l'anglais de FedEx, sauf la livraison : la ligne de FedEx nomme la personne qui a signé, elle s'affiche donc « Livré ». Pour changer une livraison, payer la douane ou réclamer, adresse-toi à FedEx ou à l'expéditeur.
 
 ## Questions sur le suivi FedEx
 

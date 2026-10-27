@@ -3,7 +3,7 @@ title: UPS Sendungsverfolgung: Status, Zustellung und Kontakt
 description: UPS-Paket verfolgen: wo die 1Z-Trackingnummer steht, was Status wie „Ausnahme“ heißen, wie InfoNotice und Access Point funktionieren und wie du UPS erreichst.
 slug: ups-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 UPS (United Parcel Service) ist der US-amerikanische Paket- und Expressdienst, mit dem viele Shops in Deutschland, Österreich und der Schweiz verschicken. Dein Paket verfolgst du auf ups.com, über den Link in UPS' E-Mail-Benachrichtigungen oder indem du die Nummer oben ins Feld einfügst. Sie steht auf dem Etikett und in der Versand-E-Mail des Shops und beginnt meist mit `1Z`.
@@ -80,7 +80,7 @@ So stand es am 13. Oktober 2026 auf UPS' Kontaktseiten:
 
 [Peek](/) erkennt UPS sofort an einer `1Z`-Nummer, deren letzte Ziffer UPS' Prüfung besteht. Fällt sie durch, wird nur UPS angeboten, und UPS lehnt sie als vertippt ab. Bei UPS selbst fragt Peek nur `1Z`-Nummern ab. Die anderen Formen aus der Tabelle oben und Nummern wie `H1234567890` (Buchstabe und 10 Ziffern) gehen deshalb nie an UPS: Wählst du über „Paketdienst ändern“ UPS, liefern nur Tracking-Dienste den Verlauf. Links von ups.com mit einer Nummer kannst du ebenso einfügen wie jeden Link, in dem eine `1Z`-Nummer steckt.
 
-Peeks Server öffnet dafür UPS' Tracking-Seite in einem Browser, tagsüber alle 10 Minuten, ab der Zustellung alle 5 Minuten und nachts stündlich. Blockt UPS den Abruf oder ist nur der Status lesbar, liefern Tracking-Dienste den Verlauf. Du siehst den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den geplanten Zustelltag (nie ein Zeitfenster), die Zustellzeit, den Service, das Zielland und, solange das Paket wartet, Name und Adresse des Access Points. Mitteilungen bekommst du auf Wunsch bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind, wer unterschrieben hat, deine Adresse, der Zustellnachweis, der Ablageort und das Zustellfoto. Gewicht und Absender gibt UPS nicht heraus.
+Peeks Server öffnet dafür UPS' Tracking-Seite in einem Browser, tagsüber alle 10 Minuten, ab der Zustellung alle 5 Minuten und nachts alle ein bis zwei Stunden. Blockt UPS den Abruf oder ist nur der Status lesbar, liefern Tracking-Dienste den Verlauf. Du siehst den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den geplanten Zustelltag (nie ein Zeitfenster), die Zustellzeit, den Service, das Zielland und, solange das Paket wartet, Name und Adresse des Access Points. Mitteilungen bekommst du auf Wunsch bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind, wer unterschrieben hat, deine Adresse, der Zustellnachweis, der Ablageort und das Zustellfoto. Gewicht und Absender gibt UPS nicht heraus.
 
 Die Scans erscheinen in jeder Sprache in UPS' englischer Fassung: Zugestellt heißt dort „DELIVERED“. Übergibt UPS in den USA ein Ground-Saver-Paket an die US-Post und nennt deren Nummer, geht die Verfolgung dort weiter („Zustellung durch USPS“), sobald USPS das Paket bewegt. Zustellung ändern oder Schäden melden geht nur bei UPS oder beim Versender.
 

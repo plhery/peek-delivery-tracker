@@ -3,7 +3,7 @@ title: Helthjem tracking: statuses, pickup points and contact
 description: Track a Helthjem parcel in Norway: where the number is, what the Norwegian statuses mean, night drop-offs, pickup points and how to reach Helthjem.
 slug: helthjem-tracking
 published: 2026-10-13
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Helthjem is a Norwegian network that brings online shops' parcels to your mailbox or doormat, mostly overnight, or to a pickup point. Track yours on helthjem.no/sporing with the number from the shop's shipping email, or paste it in the box above. Helthjem's tracking is in Norwegian only, so the statuses are translated below.
@@ -88,7 +88,7 @@ Have the tracking number or pickup code ready. Helthjem mentions no support in E
 
 Peek shows the status, each scan's place on a map (including sorter scans Helthjem's page hides), the time it was delivered, the shop that sent it and the pickup point's name while it waits or once collected. When Helthjem relabels a parcel for a pickup point, Peek also shows the new label's number. Statuses stay in Helthjem's Norwegian, and scan times match Helthjem's. Peek leaves out the expected day Helthjem's page shows, the point's address, the photo and postcodes.
 
-When Helthjem marks a parcel as one PostNord delivers, Peek can follow it to PostNord under its shipment number. Peek checks every 10 minutes by day, every 2 on the last mile, and hourly overnight, and can notify you when the status changes. It can't contact Helthjem for you.
+When Helthjem marks a parcel as one PostNord delivers, Peek can follow it to PostNord under its shipment number. Peek checks every 10 minutes by day, every 2 on the last mile, and every hour or two overnight, and can notify you when the status changes. It can't contact Helthjem for you.
 
 ## Questions about Helthjem tracking
 

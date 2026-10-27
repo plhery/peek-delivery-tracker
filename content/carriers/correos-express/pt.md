@@ -3,7 +3,7 @@ title: Correos Express rastreio: estados, entregas e contacto
 description: Rastreio Correos Express em Portugal: o número de seguimento, os estados em espanhol explicados, o Ponto Correos, as entregas falhadas e o contacto.
 slug: correos-express-rastreio
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 A Correos Express é a empresa de transporte urgente do Grupo Correos, o grupo dos correios espanhóis, e entrega em Espanha e em Portugal, onde opera através da Correos Express Portugal, com morada na Maia. Para rastrear a encomenda, escreve o número no [localizador português](https://s.correosexpress.com/SeguimientoSinCP/search-pt) da Correos Express ou cola-o na caixa acima. O número identifica o envio que o remetente, normalmente a loja, registou na Correos Express.
@@ -87,7 +87,7 @@ O «Também pode escrever aqui» do localizador português abre o [formulário d
 
 Um número de 16 dígitos é partilhado, por isso o [Peek](/) pergunta às transportadoras prováveis ao mesmo tempo; um de 23 dígitos aponta para a Correos Express, salvo o caso da Australia Post acima. Se não te propuser a Correos Express, confirma os algarismos: com o último errado, o dígito de controlo não bate certo. Cola o número, não uma ligação.
 
-Consulta o seguimento a cada 10 minutos durante o dia, a cada 2 minutos quando a encomenda está em distribuição e a cada hora à noite, e pode enviar-te notificações de todas as leituras, só dos passos importantes ou só no dia da entrega. Mostra o estado, o histórico com o local de cada leitura num mapa e a entrega prevista enquanto a encomenda está a caminho. Deixa de fora a prova de entrega, os contactos e os comentários de entrega, e não contacta a Correos Express por ti.
+Consulta o seguimento a cada 10 minutos durante o dia, a cada 2 minutos quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e pode enviar-te notificações de todas as leituras, só dos passos importantes ou só no dia da entrega. Mostra o estado, o histórico com o local de cada leitura num mapa e a entrega prevista enquanto a encomenda está a caminho. Deixa de fora a prova de entrega, os contactos e os comentários de entrega, e não contacta a Correos Express por ti.
 
 ## Perguntas sobre o rastreio Correos Express
 

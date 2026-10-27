@@ -3,7 +3,7 @@ title: Lingdong International tracking: SZLD numbers and statuses
 description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its few scans mean and why its tracking stops in China.
 slug: lingdong-tracking
 published: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-27
 ---
 
 Lingdong International (领东国际, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) is a freight forwarder in Shenzhen, China, that ships parcels abroad for online sellers. Its numbers start with SZLD: type yours in the 快件查询 (parcel lookup) box on Lingdong's site, lingdong56.com, which opens its tracker, or in the box above. The shop that sent your order gives the number with its shipping details.
@@ -74,7 +74,7 @@ Peek reads Lingdong's own tracker and shows the status, each scan with its place
 
 As Lingdong's record names no delivery carrier or second number, Peek doesn't hand the parcel over to another carrier: its history stops where Lingdong's does. If the seller gives you the local carrier's number, add it as a parcel of its own.
 
-Peek checks every 10 minutes by day and hourly overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Lingdong or the seller for you.
+Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Lingdong or the seller for you.
 
 ## Questions about Lingdong tracking
 

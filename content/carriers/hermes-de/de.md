@@ -3,7 +3,7 @@ title: Hermes Sendungsverfolgung: Status, PaketShop und Kontakt
 description: Hermes-Paket verfolgen: wo die Sendungsnummer steht, was die Status heißen, wie lange es im PaketShop liegt und wie du Hermes ohne Hotline erreichst.
 slug: hermes-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 Hermes Germany aus Hamburg gehört zur Otto Group und stellt vor allem Pakete innerhalb Deutschlands zu. Dein Paket verfolgst du mit der Sendungsnummer in der [Sendungsverfolgung auf myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) oder in der Hermes App, oder du fügst die Nummer oben ins Feld ein. Die Nummer hat der Absender, der die Sendung bei Hermes gebucht hat; E-Mails von Hermes bekommst du, wenn er Hermes deine E-Mail-Adresse gegeben hat oder du dich in der Sendungsverfolgung selbst dafür anmeldest.
@@ -89,7 +89,7 @@ So stand es am 10. Oktober 2026 auf myhermes.de:
 
 Peek zeigt Status, Sendungsverlauf, den erwarteten Zustelltag (ohne das Zeitfenster), den Absender, etwa den Shop, und den Zeitpunkt der Zustellung. Wartet das Paket in einem PaketShop, steht es auf „Abholbereit“, mit Name und Adresse des Shops. Nicht zu sehen sind dein Name, deine Adresse und gebuchte Wünsche wie Ablageort oder WunschPaketShop. Jeder Scan behält den Satz von Hermes, den Peek auf Englisch abfragt; einige Zeilen bleiben deutsch. Zustellung an Nachbarn und Abholung im PaketShop zählen als „Zugestellt“. Liegt das Paket in einer Hermes Box, steht es auf „Abholbereit“, bis du es mit der Abhol-TAN herausnimmst. Welcher Nachbar das Paket hat, liest Peek nicht aus: Das sagen dir Karte oder E-Mail von Hermes. Orte zu den Scans gibt Hermes nicht heraus, deshalb erscheint auf der Karte nichts.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Zu einem anderen Paketdienst folgt Peek dem Paket nicht. Ältere Nummern erscheinen als nicht gefunden, sobald Hermes sie nach 30 Tagen löscht. Für Möbel vom [Hermes Einrichtungs Service](carrier:hermes-einrichtungs-service) (eigene Sendungsverfolgung auf myhes.de) wählst du von Hand den Paketdienst „Hermes Einrichtungs-Service“.
+Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Zu einem anderen Paketdienst folgt Peek dem Paket nicht. Ältere Nummern erscheinen als nicht gefunden, sobald Hermes sie nach 30 Tagen löscht. Für Möbel vom [Hermes Einrichtungs Service](carrier:hermes-einrichtungs-service) (eigene Sendungsverfolgung auf myhes.de) wählst du von Hand den Paketdienst „Hermes Einrichtungs-Service“.
 
 ## Fragen zur Hermes Sendungsverfolgung
 

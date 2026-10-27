@@ -3,7 +3,7 @@ title: Quickpac tracking: segui il pacco e capisci gli stati
 description: Quickpac tracking in Svizzera: dove trovi il numero di 18 cifre, perché Shipped vuol dire consegnato, dove ritirare il pacco e chi chiamare in italiano.
 slug: quickpac-tracking
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Quickpac è un servizio pacchi svizzero, dal 2024 parte di [Planzer Paket](carrier:planzer) (Planzer Pacchi in italiano), che porta ai privati i pacchi di negozi e aziende in zone selezionate della Svizzera. Il numero di 18 cifre te lo dà il mittente, di solito nell'e-mail di spedizione, ed è stampato anche sotto il codice a barre del pacco. Inseriscilo nel [tracking di Quickpac](https://quickpac.ch/de/tracking), una pagina in tedesco con il riquadro di ricerca in italiano se il tuo browser è in italiano, o incollalo nel box qui sopra.
@@ -87,7 +87,7 @@ I fattorini non si possono chiamare direttamente. Il sito di Quickpac esiste sol
 
 ## Seguire un pacco Quickpac con Peek
 
-[Peek](/) riconosce un numero di 18 cifre che inizia con 44 come Quickpac e lo legge dal sito di tracking di Planzer; puoi incollare anche un link di tracking di quickpac.ch o di tracking.app.planzer.ch. Controlla il pacco ogni 10 minuti di giorno (ogni 2 minuti quando è in consegna) e ogni ora di notte, mette ogni scansione su una mappa e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna.
+[Peek](/) riconosce un numero di 18 cifre che inizia con 44 come Quickpac e lo legge dal sito di tracking di Planzer; puoi incollare anche un link di tracking di quickpac.ch o di tracking.app.planzer.ch. Controlla il pacco ogni 10 minuti di giorno (ogni 2 minuti quando è in consegna) e di notte ogni una o due ore, mette ogni scansione su una mappa e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna.
 
 Mostra stato, cronologia, consegna prevista, peso, dimensioni, ora di consegna e paese di destinazione, e lascia fuori l'indirizzo del destinatario che il sito di Planzer mostra. `Shipped` compare come consegnato. Non può contattare Quickpac al posto tuo né far arrivare prima il pacco.
 

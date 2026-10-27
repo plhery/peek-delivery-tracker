@@ -3,7 +3,7 @@ title: GOFO France tracking: statuses, delivery and contact
 description: Track a GOFO parcel in France: where the GFFR or CIFR number is, what GOFO's French statuses mean, missed deliveries, lost parcels and who to call.
 slug: gofo-france-tracking
 published: 2026-10-11
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 GOFO France is a last-mile delivery company that brings online orders to homes across France for e-commerce platforms, marketplaces and shops; since 2025 it includes the former CIRRO Parcel. Track one with its number starting `GFFR` or `CIFR` on [GOFO's tracking page](https://www.gofo.com/fr/en/tracking-results/), which takes several numbers at once. The number comes from the shop: look in the order confirmation or shipping email.
@@ -74,7 +74,7 @@ GOFO suggests phoning at calmer times and emailing when the line is busy. Its tr
 
 [Peek](/) recognises `GFFR` and `CIFR` numbers by themselves. You can also paste a link from GOFO's French site (gofo.com/fr or gofoexpress.fr, with `id=` and the number). A shop's reference of `PK` and 20 digits, sometimes written `PK-1234567890123456789-0` (invented), works too: Peek asks GOFO France about it and names it once GOFO knows the number.
 
-Peek reads GOFO's French tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight. It shows the status, the history with the place GOFO names for each scan, the service name (often `CIRRO Parcel`) and the delivery time, each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Scans appear in GOFO's French words, and a delivery shows as `Livré` in every language. Peek shows no expected delivery date, no pickup point and no weight, and it leaves out delivery photos and GOFO's notices. If GOFO hasn't answered with a scan yet, Peek keeps asking rather than calling the number unknown. It can't contact GOFO or the shop for you.
+Peek reads GOFO's French tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It shows the status, the history with the place GOFO names for each scan, the service name (often `CIRRO Parcel`) and the delivery time, each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Scans appear in GOFO's French words, and a delivery shows as `Livré` in every language. Peek shows no expected delivery date, no pickup point and no weight, and it leaves out delivery photos and GOFO's notices. If GOFO hasn't answered with a scan yet, Peek keeps asking rather than calling the number unknown. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 

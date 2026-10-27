@@ -3,7 +3,7 @@ title: UPS tracking: numbers, statuses and missed deliveries
 description: Track a UPS parcel: where to find the 1Z tracking number, what Exception and other UPS statuses mean, InfoNotice, Access Points, claims and UPS contacts.
 slug: ups-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 UPS (United Parcel Service) is the American parcel carrier that many shops in the UK, Ireland, the US and the rest of Europe hand their parcels to. Track a parcel on ups.com, with the link in UPS's email notifications or by pasting the number in the box above. The number is on the label and in the shop's shipping email, and usually starts with `1Z`.
@@ -82,7 +82,7 @@ UPS's contact pages, read on 13 October 2026:
 
 [Peek](/) names UPS at once for a `1Z` number whose check digit is right; with a wrong one, UPS refuses it as mistyped. Links holding a `1Z` number work too. Peek looks up only `1Z` numbers at UPS: other shapes go to tracking services.
 
-Peek opens ups.com's tracking page in a browser on its own server and reads the reply, every 10 minutes by day, every 5 minutes once the parcel is out for delivery, and hourly overnight. If UPS refuses, or only the status can be read, tracking services fill in the history. It shows the status, each scan on a map with its exact time, the scheduled delivery day (never a time window), the delivered time, the service and, while the parcel waits, the Access Point's name and address. It can notify you at every scan, at important steps or on delivery day only.
+Peek opens ups.com's tracking page in a browser on its own server and reads the reply, every 10 minutes by day, every 5 minutes once the parcel is out for delivery, and every hour or two overnight. If UPS refuses, or only the status can be read, tracking services fill in the history. It shows the status, each scan on a map with its exact time, the scheduled delivery day (never a time window), the delivered time, the service and, while the parcel waits, the Access Point's name and address. It can notify you at every scan, at important steps or on delivery day only.
 
 It drops the signatory, your address, proof of delivery and where the parcel was left, and shows no delivery photo or weight. Scans appear in UPS's English; delivery reads "DELIVERED". When UPS hands a Ground Saver parcel to the [US Postal Service](carrier:usps) and names its number, Peek follows it there once USPS shows progress ("Delivery with USPS").
 

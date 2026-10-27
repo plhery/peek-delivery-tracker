@@ -3,7 +3,7 @@ title: PPL sledování zásilky: číslo, stavy a výdejní místa
 description: Jak sledovat zásilku PPL: kde najdete 11místné číslo zásilky, co znamenají stavy, jak dlouho čeká balík v PPL shopu a boxu, reklamace a kontakty.
 slug: ppl-sledovani-zasilky
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-10-27
 ---
 
 PPL (PPL CZ) je český přepravce balíků, od roku 2006 součást skupiny DHL Group. Doručuje na adresu, do PPL shopů a PPL boxů a do boxů jiných sítí, třeba Alza boxů. Zásilku sledujete na stránce [Vyhledat zásilku](https://www.ppl.cz/vyhledat-zasilku) na ppl.cz, v aplikaci mojePPL, nebo tak, že 11místné číslo zásilky vložíte do pole nahoře. Číslo vám pošle e-mailem e-shop nebo přímo PPL.
@@ -94,7 +94,7 @@ Kontakty uvedené na ppl.cz 25. října 2026:
 
 PPL můžete vybrat i sami přes „Change“, třeba u čísla, které začíná 0 nebo 1: takové číslo Peek u PPL sám neověřuje. U čísla, které nemá přesně 11 číslic, Peek napíše, že PPL „doesn’t issue numbers like this one“. Vložit můžete i odkaz ze sledování na ppl.cz se `shipmentId=`.
 
-Kromě stavů Peek ukáže očekávaný den doručení, dokud ho PPL uvádí, hmotnost, čas doručení a název PPL shopu nebo boxu, kde zásilka čeká. Místa jednotlivých kroků PPL neuvádí. Časové okno doručení, odesílatele, referenční číslo, adresu výdejního místa, údaje o dobírce ani doklad o doručení Peek neukazuje. Když PPL zásilku předá partnerovi v zahraničí a odkáže na jeho sledování, Peek ukáže partnera i číslo zásilky u něj. Přes den Peek kontroluje zásilku u PPL každých 10 minut, na rozvozu každé 2 minuty, v noci jednou za hodinu, a při změně stavu vám může poslat upozornění.
+Kromě stavů Peek ukáže očekávaný den doručení, dokud ho PPL uvádí, hmotnost, čas doručení a název PPL shopu nebo boxu, kde zásilka čeká. Místa jednotlivých kroků PPL neuvádí. Časové okno doručení, odesílatele, referenční číslo, adresu výdejního místa, údaje o dobírce ani doklad o doručení Peek neukazuje. Když PPL zásilku předá partnerovi v zahraničí a odkáže na jeho sledování, Peek ukáže partnera i číslo zásilky u něj. Přes den Peek kontroluje zásilku u PPL každých 10 minut, na rozvozu každé 2 minuty, v noci jednou za hodinu až dvě, a při změně stavu vám může poslat upozornění.
 
 ## Časté otázky ke sledování PPL
 

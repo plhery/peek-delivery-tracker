@@ -3,7 +3,7 @@ title: Paack seguimiento: estados, entrega fallida y teléfono
 description: Sigue tu pedido de Paack en España: dónde están el número y el código postal, qué significa cada estado, qué hacer si falla la entrega y cómo contactar.
 slug: paack-seguimiento
 published: 2026-10-11
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Paack es una empresa de reparto que lleva a domicilio los pedidos de tiendas online en España, Portugal, Francia e Italia, en franjas horarias programadas. Para seguir tu pedido, escribe el número de pedido y el código postal de entrega en [la página de seguimiento de Paack](https://paack.co/shipments/tracking), o pega el número en la casilla de arriba y elige Paack. Los dos están al final del correo de Paack; el número también aparece en los mensajes de la tienda.
@@ -86,7 +86,7 @@ La titular de paack.co es Paack Logistics Iberia, S.L., con domicilio social en 
 
 Después, escribe el «Código postal de entrega». Aparece como opcional porque un número `PK` no lo necesita, pero Paack solo muestra los demás pedidos con él, y el de un enlace no se usa. Paack solo responde si el número y el código postal coinciden, así que, si uno de los dos está mal, el número parece desconocido. El código postal se envía a Paack y, si hace falta, a servicios de seguimiento. Peek pasa el número a mayúsculas y quita espacios, puntos y guiones, mientras que Paack pide copiarlo tal cual: si no aparece nada, prueba también en la página de Paack.
 
-Verás el estado, el historial y el día y la franja previstos, según la hora local de la dirección de entrega (la de Canarias si el código postal empieza por 35 o 38, aunque Paack no cita Canarias entre sus zonas). En un PaackGo Point, Peek debería mostrar su nombre y dirección (aún no se ha visto en un paquete real), nunca el código de recogida, el QR ni el plazo: guarda el correo de Paack. Los pasos aparecen con palabras de Peek, en tu idioma, nunca con los textos de Paack; una recogida en un PaackGo Point sale como «Entregado». Paack no da el lugar de sus escaneos ni nombra a otra empresa, así que el paquete no se sigue en ninguna otra. El nombre de la tienda y tu nombre y dirección no se guardan. El seguimiento se consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puedes recibir notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega.
+Verás el estado, el historial y el día y la franja previstos, según la hora local de la dirección de entrega (la de Canarias si el código postal empieza por 35 o 38, aunque Paack no cita Canarias entre sus zonas). En un PaackGo Point, Peek debería mostrar su nombre y dirección (aún no se ha visto en un paquete real), nunca el código de recogida, el QR ni el plazo: guarda el correo de Paack. Los pasos aparecen con palabras de Peek, en tu idioma, nunca con los textos de Paack; una recogida en un PaackGo Point sale como «Entregado». Paack no da el lugar de sus escaneos ni nombra a otra empresa, así que el paquete no se sigue en ninguna otra. El nombre de la tienda y tu nombre y dirección no se guardan. El seguimiento se consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puedes recibir notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega.
 
 ## Preguntas sobre el seguimiento de Paack
 

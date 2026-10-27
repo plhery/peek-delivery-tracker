@@ -3,7 +3,7 @@ title: FedEx tracking: numbers, statuses and missed deliveries
 description: Track a FedEx parcel: where to find the 12-digit tracking number, what statuses like Delivery exception mean, missed deliveries, customs bills and contacts.
 slug: fedex-tracking
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 FedEx is an express and parcel carrier. Track a parcel on fedex.com's tracking page, in the FedEx Mobile App or by pasting the number in the box above. FedEx says the number usually comes in the email or SMS it sends about your shipment.
@@ -82,7 +82,7 @@ FedEx's contact pages, read on 13 October 2026:
 
 Peek opens fedex.com's tracking page in a browser on its own server. When FedEx refuses, or asks for recipient verification, tracking services fill in.
 
-It shows the status, each scan with its place and exact time on a map, the expected delivery day, the delivered time and, while the parcel waits, the FedEx location's name and address. It checks every 10 minutes by day, every 5 minutes once the parcel is out for delivery, and hourly overnight, and can notify you at every scan, at important steps or on delivery day only. It drops your name and address, the shipper, the signature, weight and dimensions. Scans show in FedEx's English, except the delivered one: FedEx's line names who signed, so Peek shows "Delivered".
+It shows the status, each scan with its place and exact time on a map, the expected delivery day, the delivered time and, while the parcel waits, the FedEx location's name and address. It checks every 10 minutes by day, every 5 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you at every scan, at important steps or on delivery day only. It drops your name and address, the shipper, the signature, weight and dimensions. Scans show in FedEx's English, except the delivered one: FedEx's line names who signed, so Peek shows "Delivered".
 
 Most Ground Economy parcels are delivered by FedEx itself. When FedEx says the [US Postal Service](carrier:usps) has one, Peek follows it there ("Delivery with USPS").
 

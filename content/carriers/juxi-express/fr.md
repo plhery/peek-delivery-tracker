@@ -3,7 +3,7 @@ title: Juxi Express suivi : numéro JXC, livraison et contact
 description: Suivre un colis Juxi Express (SHJX) venu de Chine : à quoi ressemble le numéro JXC, pourquoi Juxi n'a pas de suivi, qui le livre et qui contacter s'il bloque.
 slug: juxi-express-suivi
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) est un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en ligne chinois, sur ses propres lignes ou par la poste. Il n'a pas de page de suivi à lui : colle le numéro dans le champ ci-dessus, ou cherche-le sur un service de suivi comme 17TRACK, où Juxi s'appelle SHJX. C'est le vendeur qui a choisi Juxi : il te donne le numéro avec les informations d'expédition de ta commande.
@@ -95,7 +95,7 @@ Juxi ne donne aucun contact, formulaire ou bureau pour les destinataires en Belg
 
 Juxi n'a plus de page de suivi que Peek pourrait lire : le bouton « 在线追踪 » (suivi en ligne) de son site n'ouvre plus rien. Peek suit donc les colis Juxi via des services de suivi et affiche le statut et l'historique qu'ils ont, dans leur formulation ; les libellés exacts qu'il connaît, comme `Delivered`, s'affichent avec ses propres mots en français. Cet historique peut être en retard sur celui du transporteur local, et pour certains colis il n'y a encore rien. S'il donne le numéro du transporteur local, ajoute aussi ce numéro dans Peek.
 
-Peek vérifie toutes les 15 minutes en journée (même quand le colis est en livraison) et toutes les heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
+Peek vérifie toutes les 15 minutes en journée (même quand le colis est en livraison) et toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
 
 ## Questions sur le suivi Juxi Express
 

@@ -3,7 +3,7 @@ title: PostNord-seuranta: lähetystunnus, tilat ja tulli
 description: Seuraa PostNordin pakettia Suomessa: miltä lähetystunnus näyttää, mitä seurannan tilat tarkoittavat, miten noudat paketin automaatista ja mitä tullista maksat.
 slug: postnord-seuranta
 published: 2026-10-23
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 PostNord on posti- ja logistiikkakonserni, joka syntyi Tanskan ja Ruotsin postien yhdistyessä. Se kuljettaa lähetyksiä Pohjoismaissa sekä Pohjoismaihin ja niistä muualle. Suomessa PostNord tuo verkkokauppojen paketteja kotiin, palvelupisteisiin ja pakettiautomaatteihin. PostNord ei ole sama yhtiö kuin [Posti](carrier:posti), jolla on oma seurantansa. Pakettia seuraat [PostNordin seurannassa](https://tracking.postnord.com/fi/) tai PostNord-sovelluksessa lähetystunnuksella, tai voit liittää tunnuksen yllä olevaan kenttään. Tunnuksen saat lähettäjältä, yleensä verkkokaupalta.
@@ -103,7 +103,7 @@ PostNordin sivuilla 23.10.2026:
 
 Jos tunnuksessa on muuten 10–20 numeroa, liitä se silti: Peek seuraa yli 3 500 kuljetusyhtiötä. Valitse PostNord painikkeella "Change", jolla vaihdat myös väärin valitun yhtiön. Linkki tracking.postnord.com- tai postnord.fi-sivulta vie tunnuksen suoraan PostNordille.
 
-Peek lukee PostNordin seurannan englanniksi, joten näet PostNordin englanninkieliset tekstit. `The shipment item has been delivered to a service point.` tarkoittaa, että paketti odottaa sinua palvelupisteessä, ei sitä, että olisit saanut sen, ja `The shipment item is being customs cleared by us.` sitä, että paketti on tullauksessa. Peek näyttää jokaisen skannauksen paikan, lähettäjän, palvelun, painon, mitat ja kohdemaan sekä noutoa odottavan paketin palvelupisteen nimen ja osoitteen. Tekstiviesti- ja sähköposti-ilmoitukset jäävät pois, ja `The shipment item has been stored.` merkitään ongelmaksi. Nimeäsi Peek ei tallenna, eikä se näytä arvioitua toimitusaikaa, vaikka PostNordin seuranta näyttäisi. Päiväsaikaan Peek tarkistaa paketin 10 minuutin välein, jakelussa olevan 2 minuutin välein, ja öisin kerran tunnissa. Skannaukset näkyvät kartalla, ja Peek voi ilmoittaa muutoksista. PostNordiin tai verkkokauppaan Peek ei voi ottaa yhteyttä puolestasi.
+Peek lukee PostNordin seurannan englanniksi, joten näet PostNordin englanninkieliset tekstit. `The shipment item has been delivered to a service point.` tarkoittaa, että paketti odottaa sinua palvelupisteessä, ei sitä, että olisit saanut sen, ja `The shipment item is being customs cleared by us.` sitä, että paketti on tullauksessa. Peek näyttää jokaisen skannauksen paikan, lähettäjän, palvelun, painon, mitat ja kohdemaan sekä noutoa odottavan paketin palvelupisteen nimen ja osoitteen. Tekstiviesti- ja sähköposti-ilmoitukset jäävät pois, ja `The shipment item has been stored.` merkitään ongelmaksi. Nimeäsi Peek ei tallenna, eikä se näytä arvioitua toimitusaikaa, vaikka PostNordin seuranta näyttäisi. Päiväsaikaan Peek tarkistaa paketin 10 minuutin välein, jakelussa olevan 2 minuutin välein, ja öisin tunnin tai kahden välein. Skannaukset näkyvät kartalla, ja Peek voi ilmoittaa muutoksista. PostNordiin tai verkkokauppaan Peek ei voi ottaa yhteyttä puolestasi.
 
 ## Kysymyksiä PostNordin seurannasta
 

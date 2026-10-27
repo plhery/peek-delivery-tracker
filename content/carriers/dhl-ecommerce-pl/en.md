@@ -3,7 +3,7 @@ title: DHL eCommerce Poland tracking: statuses, pickup and help
 description: Track a DHL parcel in Poland: the 11-digit waybill number, what DHL eCommerce's statuses mean, DHL POP points and lockers, claims and the hotline.
 slug: dhl-ecommerce-poland-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 DHL eCommerce Poland (formerly DHL Parcel Polska) is the DHL company that delivers online shops' parcels inside Poland. Track a parcel on DHL's tracking page at sprawdz.dhl.com.pl or in the Mój DHL app with its 11-digit waybill number, or paste it in the box above. DHL sends the number by SMS or email when the courier collects the parcel from the shop.
@@ -81,7 +81,7 @@ DHL's pages list no chat and no email address for recipients.
 
 For 11 digits, [Peek](/) asks the likely carriers at once (GLS France, GLS Germany, GLS Switzerland, Swiss Post's PostLogistics and DHL eCommerce Poland, DHL first for readers in Poland) and shows "DHL eCommerce Poland has this parcel." when only DHL knows the number. If a GLS network knows it too, pick DHL eCommerce Poland with "Change"; picked this way, other numbers of 11 to 34 letters and digits work too. Allegro Delivery `AD` numbers are refused, as Allegro tracks them, and `JJD` plates go to DHL Germany unless you pick DHL eCommerce Poland. Links from mojdhl.pl (`paczki=`) and sprawdz.dhl.com.pl (`sn=`) work; a dhl.com link with `tracking-id=` is read as DHL Germany, so type the number instead.
 
-DHL's public lookup gives only the current status, with no history and no places; Peek asks for it in English. Peek shows that status (`Parcel has been delivered`, for example), dated when Peek saw it, except delivered and returned, which carry DHL's time. It adds the expected delivery day, the sender (usually the shop) and the delivery time. A number covering several parcels can't be tracked this way. Peek checks every 10 minutes by day, every 5 once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps or delivery day only.
+DHL's public lookup gives only the current status, with no history and no places; Peek asks for it in English. Peek shows that status (`Parcel has been delivered`, for example), dated when Peek saw it, except delivered and returned, which carry DHL's time. It adds the expected delivery day, the sender (usually the shop) and the delivery time. A number covering several parcels can't be tracked this way. Peek checks every 10 minutes by day, every 5 once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps or delivery day only.
 
 ## Questions about DHL parcel tracking in Poland
 

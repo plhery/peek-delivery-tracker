@@ -3,7 +3,7 @@ title: Swiss Post rastreio: correios suíços e entrega em Portugal
 description: Rastreio Swiss Post, os correios suíços: como é o número, o que querem dizer os estados, quem entrega em Portugal e como pagar o IVA na alfândega.
 slug: correios-suicos-rastreio
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 A Swiss Post é o correio da Suíça: Die Post em alemão, La Poste em francês, La Posta em italiano. Segues a encomenda no Track & Trace do post.ch, em alemão, francês, italiano ou inglês, ou colando o número na caixa acima. O número dá-to quem envia.
@@ -89,7 +89,7 @@ O [Peek](/) reconhece as duas formas logo, com pontos ou espaços, e não precis
 
 O Peek lê o rastreio da Swiss Post em inglês, seja qual for a tua língua. Mostra o estado, cada leitura no mapa, o dia previsto (com janela horária, se houver), o peso, o tamanho, a hora de entrega e o país de destino; enquanto a encomenda espera, a estação ou o My Post 24 com morada. Deixa de fora o teu nome, a morada e a assinatura, e não lê o prazo de levantamento. `Registered for collection` aparece como «Pronta para levantamento».
 
-Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada hora à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Com um número `…CH` que vai para Portugal, pode passar a segui-la nos CTT quando estes mostrarem eventos mais recentes. Se o Peek não indicar a Swiss Post, escolhe-a em «Alterar transportadora». O Peek não paga a alfândega nem fala com a Swiss Post, os CTT ou a loja por ti.
+Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Com um número `…CH` que vai para Portugal, pode passar a segui-la nos CTT quando estes mostrarem eventos mais recentes. Se o Peek não indicar a Swiss Post, escolhe-a em «Alterar transportadora». O Peek não paga a alfândega nem fala com a Swiss Post, os CTT ou a loja por ti.
 
 ## Perguntas sobre o rastreio Swiss Post
 

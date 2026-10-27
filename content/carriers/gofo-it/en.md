@@ -3,7 +3,7 @@ title: GOFO Italy tracking: statuses, delivery and contact
 description: Track a GOFO parcel in Italy: where the GFIT or CIIT number is, what GOFO's Italian statuses mean, missed deliveries, lost parcels and who to call.
 slug: gofo-italy-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GOFO Italy is a last-mile courier that delivers online orders for shops and e-commerce brands across Italy; its parcels used to travel as CIRRO Parcel. Track one with its number starting `GFIT` or `CIIT` on [GOFO's tracking page](https://www.gofo.com/it/en/tracking-results/), which takes several numbers at once. The number comes from the shop that sent the parcel: look in the order confirmation or shipping email.
@@ -82,7 +82,7 @@ GOFO suggests emailing at busy times. Its tracking page mentions 24/7 support an
 
 [Peek](/) recognises `GFIT` and `CIIT` numbers by themselves, in capitals or lower case. You can also paste a link from GOFO's Italian site (gofo.com/it or gofoexpress.it, with `id=` and the number); the number inside decides the carrier.
 
-Peek reads GOFO's Italian tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight. It shows the status, the history with the place GOFO names for each scan, the service name (often `CIRRO Parcel`) and the delivery time, each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Scans appear in GOFO's Italian words, and a delivery shows as `Consegnato` in every language. Scan times keep the time zone GOFO gives them. Peek shows no expected delivery date, no pickup point and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
+Peek reads GOFO's Italian tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It shows the status, the history with the place GOFO names for each scan, the service name (often `CIRRO Parcel`) and the delivery time, each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Scans appear in GOFO's Italian words, and a delivery shows as `Consegnato` in every language. Scan times are read in the time zone GOFO gives them and shown in your device's time zone. Peek shows no expected delivery date, no pickup point and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 

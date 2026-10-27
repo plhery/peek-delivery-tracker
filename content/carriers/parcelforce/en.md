@@ -3,7 +3,7 @@ title: Parcelforce Worldwide tracking: statuses and redelivery
 description: Track a Parcelforce Worldwide parcel: where the number is, what each status means, redelivery and depot collection, customs fees and how to reach Parcelforce.
 slug: parcelforce-worldwide-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Parcelforce Worldwide is [Royal Mail](carrier:royal-mail)'s express parcel service, in the UK and abroad. It runs on one network with Royal Mail, so you track a Parcelforce parcel on [Royal Mail's Track your item page](https://www.royalmail.com/track-your-item) or in the Royal Mail app, or paste the number in the box above. The number comes from the shop or sender, usually in the order confirmation email.
@@ -84,7 +84,7 @@ There is no live chat or email address for recipients.
 
 Peek reads Parcelforce on Royal Mail's tracking site by opening it in a real browser on its server, so a check takes longer and can fail when the site blocks automated visits. Peek then tries universal tracking services, which hold little for Parcelforce.
 
-Peek shows the status, each scan with its place (no postcodes), the expected delivery day, the delivery time and the destination country. It checks every 10 minutes by day (every 5 minutes once the parcel is out for delivery) and hourly overnight, puts each scan on a map and can notify you when the status changes. Statuses keep Royal Mail's English wording, and every delivered line shows as "Delivered", without the name of who signed. A scan from abroad that comes without a time zone isn't dated. For some destinations, an export with an `EA000000005GB`-style number can be followed to that country's national post once it shows progress there.
+Peek shows the status, each scan with its place (no postcodes), the expected delivery day, the delivery time and the destination country. It checks every 10 minutes by day (every 5 minutes once the parcel is out for delivery) and every hour or two overnight, puts each scan on a map and can notify you when the status changes. Statuses keep Royal Mail's English wording, and every delivered line shows as "Delivered", without the name of who signed. A scan from abroad that comes without a time zone isn't dated. For some destinations, an export with an `EA000000005GB`-style number can be followed to that country's national post once it shows progress there.
 
 ## Questions about Parcelforce tracking
 

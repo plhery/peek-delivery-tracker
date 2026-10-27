@@ -3,7 +3,7 @@ title: Yanwen suivi : numéros, statuts et qui contacter
 description: Suivre un colis Yanwen venu de Chine : à quoi ressemble le numéro, ce que veut dire chaque statut, qui le livre chez toi et qui contacter s'il bloque.
 slug: yanwen-suivi
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Yanwen est une société de logistique chinoise, fondée à Pékin en 1998, qui expédie à l'étranger les colis de vendeurs en ligne puis les confie à un transporteur local pour le dernier kilomètre. Pour suivre ton colis, saisis son numéro sur [track.yw56.com.cn](https://track.yw56.com.cn/en/index), le site de suivi de Yanwen, ou colle-le dans le champ ci-dessus. Le numéro vient de la boutique ou de la plateforme où tu as commandé, dans les détails d'expédition de ta commande.
@@ -84,7 +84,7 @@ Yanwen ne publie aucun contact pour la France, la Belgique ou la Suisse. Pour la
 
 Il affiche le statut, l'historique avec la ville ou la région de chaque scan sur une carte, l'heure de livraison, le pays de destination et le transporteur local avec son numéro (« Livraison par » ce transporteur). Quand Yanwen nomme un transporteur local que Peek connaît et que le numéro lui correspond, il l'interroge et bascule sur lui dès qu'il montre une étape plus récente ; pour un numéro YP, il peut aussi suivre la poste du pays de destination. Yanwen ne donne pas de date de livraison prévue ni de point de retrait, et Peek écarte références de commande, contacts, codes postaux, codes PIN de livraison et numéros de porte.
 
-Les heures gardent le décalage GMT de Yanwen, et les scans répétés sont supprimés. Peek affiche `Delivered` et `Out for delivery` avec ses propres mots, en français ; les autres lignes restent en anglais, telles qu'écrites. Il vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut contacter ni Yanwen ni la boutique à ta place.
+Les heures sont lues avec le décalage GMT de Yanwen et affichées dans le fuseau horaire de ton appareil ; les scans répétés sont supprimés. Peek affiche `Delivered` et `Out for delivery` avec ses propres mots, en français ; les autres lignes restent en anglais, telles qu'écrites. Il vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut contacter ni Yanwen ni la boutique à ta place.
 
 ## Questions sur le suivi Yanwen
 

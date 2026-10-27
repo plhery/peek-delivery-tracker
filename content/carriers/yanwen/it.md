@@ -3,7 +3,7 @@ title: Yanwen tracking: numero, stati e chi consegna in Italia
 description: Tracking Yanwen per i pacchi dalla Cina: com'è fatto il numero, cosa vogliono dire gli stati in inglese, chi consegna in Italia e a chi scrivere.
 slug: yanwen-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Yanwen è un'azienda di logistica cinese, nata a Pechino nel 1998, che spedisce all'estero i pacchi dei venditori online e poi li passa a un corriere locale per l'ultimo tratto. Per il tracking inserisci il numero sul sito di Yanwen, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), oppure incollalo nel box qui sopra. Il numero te lo dà il negozio o il marketplace dove hai comprato, nei dettagli di spedizione dell'ordine.
@@ -86,7 +86,7 @@ Yanwen non pubblica nessun contatto per l'Italia o la Svizzera. Per l'ordine è 
 
 Mostra lo stato, la cronologia con la città o la regione di ogni scansione su una mappa, l'ora della consegna, il Paese di destinazione e il corriere locale con il suo numero («Consegna con» quel corriere). Quando Yanwen nomina un corriere locale che Peek conosce e il numero gli corrisponde, Peek chiede a quel corriere e passa a lui quando mostra novità più recenti. Yanwen non dà una data di consegna prevista; Peek non mostra punti di ritiro e scarta riferimenti d'ordine, contatti, CAP, PIN di consegna e numeri di porta.
 
-Gli orari mantengono il fuso GMT di Yanwen, e le scansioni ripetute vengono tolte. `Delivered` e `Out for delivery` compaiono con parole italiane; le altre righe restano come sono scritte, compreso `Delivered.` del corriere italiano. Il tracking viene controllato ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e ogni ora di notte, e puoi ricevere notifiche: per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Peek non può contattare Yanwen o il negozio al posto tuo.
+Gli orari sono letti nel fuso GMT di Yanwen e mostrati nel fuso orario del tuo dispositivo, e le scansioni ripetute vengono tolte. `Delivered` e `Out for delivery` compaiono con parole italiane; le altre righe restano come sono scritte, compreso `Delivered.` del corriere italiano. Il tracking viene controllato ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e di notte ogni una o due ore, e puoi ricevere notifiche: per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Peek non può contattare Yanwen o il negozio al posto tuo.
 
 ## Domande sul tracking Yanwen
 

@@ -3,7 +3,7 @@ title: La Poste / Colissimo : suivi de colis, numéro et statuts
 description: Suivi Colissimo et La Poste : à quoi ressemble le numéro, ce que veut dire chaque statut, l'avis de passage, les points de retrait et qui contacter.
 slug: suivi-la-poste-colissimo
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 Colissimo, c'est le service de colis de La Poste. Pour suivre ton colis, saisis son numéro sur la page [Suivre une lettre, un Colissimo ou un Chronopost](https://www.laposte.fr/outils/suivre-vos-envois) de La Poste, ou colle-le dans le champ ci-dessus. Ce numéro te vient de l'expéditeur, en général dans l'e-mail d'expédition de la boutique, ou d'un e-mail de La Poste.
@@ -89,7 +89,7 @@ Les canaux de La Poste pour les destinataires, lus le 13 octobre 2026 :
 
 [Peek](/) reconnaît La Poste / Colissimo tout de suite pour les numéros Colissimo de 13 caractères dont la clé est valide, les numéros de 14 chiffres commençant par `870`, ainsi que les numéros partenaires de 15 caractères et les numéros postaux en FR dont le caractère de contrôle est valide. Avec un autre code produit ou une clé fausse, il interroge La Poste seule ; pour 14 chiffres partagés avec DPD et d'autres, il interroge en même temps les transporteurs probables. Le numéro de l'avis de passage ne marche pas : prends celui du colis. Les liens laposte.fr avec `code=` ou `idShip=` marchent ; un lien colissimo.fr seulement si le numéro qu'il contient est reconnu tout de suite.
 
-Peek lit le suivi de La Poste en français, avec l'heure exacte de chaque scan. Il affiche le pays de chaque scan sur une carte, la livraison prévue, le nom de la boutique, l'heure de livraison et, pendant que le colis attend, le bureau de poste, le relais ou la consigne avec son adresse. Il ne garde ni ton nom ni ton adresse. Il vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et t'envoie des notifications à chaque scan, aux étapes importantes ou le jour de livraison uniquement.
+Peek lit le suivi de La Poste en français, avec l'heure exacte de chaque scan. Il affiche le pays de chaque scan sur une carte, la livraison prévue, le nom de la boutique, l'heure de livraison et, pendant que le colis attend, le bureau de poste, le relais ou la consigne avec son adresse. Il ne garde ni ton nom ni ton adresse. Il vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et t'envoie des notifications à chaque scan, aux étapes importantes ou le jour de livraison uniquement.
 
 Un service Chronopost est suivi chez Chronopost, un partenaire nommé par La Poste est suivi chez lui, et un numéro postal envoyé à l'étranger peut être suivi chez la poste du pays, comme [La Poste suisse](carrier:swiss-post), une fois qu'elle montre une progression. Peek ne peut ni modifier une livraison, ni répondre à un avis de passage, ni payer la douane.
 

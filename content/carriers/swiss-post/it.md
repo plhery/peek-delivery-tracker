@@ -3,7 +3,7 @@ title: Swiss Post tracking: Posta Svizzera, stati e ritiro
 description: Segui un pacco della Posta Svizzera in Ticino: com'è fatto il numero, cosa vogliono dire gli stati, cosa fare con l'invito di ritiro e come contattare la Posta.
 slug: swiss-post-tracking-posta-svizzera
 published: 2026-10-11
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 La Posta Svizzera (Swiss Post, Die Post, La Poste) consegna pacchi e raccomandate in tutta la Svizzera e nel Principato del Liechtenstein. Puoi seguire il pacco gratis su [post.ch](https://www.post.ch/it/ricezione/monitorare-gli-invii) con il numero d'invio, oppure incollare il numero nel box qui sopra. Il numero lo crea il mittente: cercalo prima nell'e-mail di spedizione del negozio.
@@ -86,7 +86,7 @@ Legge i testi inglesi della Posta, in qualunque lingua usi Peek. Mostra lo stato
 
 Peek mostra `Delivered` con la sua etichetta «Consegnato» e segna `Registered for collection` e `Deposited in the MyPost24 machine` come «Pronto per il ritiro»; `Delivered to the mailbox/letter box` resta come lo scrive la Posta.
 
-Controlla il pacco ogni 10 minuti di giorno, ogni 2 quando è in consegna e ogni ora di notte, e può mandarti notifiche per tutti gli aggiornamenti, solo per quelli importanti o solo il giorno di consegna. I pacchi di [GLS Svizzera](carrier:gls-ch) e i numeri postali stranieri diretti in Svizzera possono essere seguiti fino alla Posta; un numero `CH` diretto all'estero, fino alla posta nazionale del paese di destinazione, se Peek la conosce (per esempio Italia, Francia o Germania), appena questa mostra progressi più recenti. Peek non può contattare la Posta al posto tuo.
+Controlla il pacco ogni 10 minuti di giorno, ogni 2 quando è in consegna e di notte ogni una o due ore, e può mandarti notifiche per tutti gli aggiornamenti, solo per quelli importanti o solo il giorno di consegna. I pacchi di [GLS Svizzera](carrier:gls-ch) e i numeri postali stranieri diretti in Svizzera possono essere seguiti fino alla Posta; un numero `CH` diretto all'estero, fino alla posta nazionale del paese di destinazione, se Peek la conosce (per esempio Italia, Francia o Germania), appena questa mostra progressi più recenti. Peek non può contattare la Posta al posto tuo.
 
 ## Domande sul tracking della Posta Svizzera
 

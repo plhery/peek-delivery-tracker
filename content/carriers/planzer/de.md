@@ -3,7 +3,7 @@ title: Planzer Sendungsverfolgung: Status, Zustellung und Hilfe
 description: Planzer-Paket verfolgen: wo die Sendungsnummer steht, warum „Shipped“ zugestellt heißt, wie der Paket Shop funktioniert und wen du bei Problemen fragst.
 slug: planzer-sendungsverfolgung
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Planzer Paket ist der Paketdienst der Schweizer Planzer-Gruppe und stellt im Auftrag von Versendern Pakete bis 30 kg in der Schweiz und in Liechtenstein zu. Deine Sendungsnummer steht in der E-Mail oder SMS „Eine Sendung ist unterwegs für Sie“, die dir der Absender oder Planzer Paket schickt. Über den Link darin verfolgst du das Paket in Planzers Empfängerportal, oder du fügst die Nummer oben ins Feld ein.
@@ -89,7 +89,7 @@ So stand es am 9. Oktober 2026 auf Planzers Seiten:
 
 Bei einer 13-stelligen Nummer mit 99990 am Anfang fragt es nach dem vollständigen Sendungslink (trackandtrace.planzergroup.com/shared/…, mit accessKey) und liest dann die erreichten Schritte mit ihren Zeiten und ein erwartetes Datum.
 
-Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Planzer für dich kontaktieren kann es nicht. Scan-Orte veröffentlicht Planzer nicht, deshalb fehlen sie auch im Sendungsverlauf.
+Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Planzer für dich kontaktieren kann es nicht. Scan-Orte veröffentlicht Planzer nicht, deshalb fehlen sie auch im Sendungsverlauf.
 
 ## Fragen zur Planzer Sendungsverfolgung
 

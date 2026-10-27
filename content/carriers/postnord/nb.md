@@ -3,7 +3,7 @@ title: PostNord-sporing: sendingsnummer, statuser og toll
 description: Spor PostNord-pakken din i Norge: slik ser sendingsnummeret ut, dette betyr statusene, slik henter du pakken, og dette gjelder for toll og VOEC.
 slug: postnord-sporing
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 PostNord er post- og logistikkonsernet som ble til da danske Post Danmark og svenske Posten AB slo seg sammen. Konsernet frakter pakker til, fra og innenfor Norden, og i Norge leverer PostNord AS til hentesteder, til pakkeautomater og hjem på døren. PostNord er ikke Posten: Posten og [Bring](carrier:bring) hører til et annet konsern og har egen sporing. Du sporer PostNord-pakken på [PostNords sporingsside](https://tracking.postnord.com/no/) eller i PostNord-appen, eller du limer inn nummeret i feltet over. Nummeret får du av den som sender pakken, som oftest nettbutikken.
@@ -99,7 +99,7 @@ Slik står det på PostNords sider 23. oktober 2026:
 
 Andre nummer på 10 til 20 siffer: lim dem inn likevel, Peek følger mer enn 3 500 transportører. Trykk på "Change" og velg PostNord. En lenke fra tracking.postnord.com eller postnord.no peker ut PostNord uansett nummer.
 
-Peek leser PostNords sporing på engelsk, så du ser PostNords engelske tekster. `The shipment item has been delivered to a service point.` betyr at pakken venter på deg på hentestedet, ikke at du har fått den, og `The shipment item is being customs cleared by us.` at den blir fortollet. Peek viser stedet for hver skanning, avsenderen, tjenesten, vekt, mål og mottakerlandet, og mens pakken venter, hentestedets navn og adresse. SMS- og e-postvarsler tar Peek ikke med, og `The shipment item has been stored.` markerer Peek som et problem. Navnet ditt lagrer Peek ikke, og Peek viser ingen forventet leveringsdag, heller ikke når PostNord har en. På dagtid sjekker Peek pakken hvert 10. minutt, hvert 2. når den er ute for levering, og om natten hver time. Skanningene vises på et kart, og Peek kan varsle deg når noe skjer. Peek kan ikke kontakte PostNord eller nettbutikken for deg.
+Peek leser PostNords sporing på engelsk, så du ser PostNords engelske tekster. `The shipment item has been delivered to a service point.` betyr at pakken venter på deg på hentestedet, ikke at du har fått den, og `The shipment item is being customs cleared by us.` at den blir fortollet. Peek viser stedet for hver skanning, avsenderen, tjenesten, vekt, mål og mottakerlandet, og mens pakken venter, hentestedets navn og adresse. SMS- og e-postvarsler tar Peek ikke med, og `The shipment item has been stored.` markerer Peek som et problem. Navnet ditt lagrer Peek ikke, og Peek viser ingen forventet leveringsdag, heller ikke når PostNord har en. På dagtid sjekker Peek pakken hvert 10. minutt, hvert 2. når den er ute for levering, og om natten hver eller annenhver time. Skanningene vises på et kart, og Peek kan varsle deg når noe skjer. Peek kan ikke kontakte PostNord eller nettbutikken for deg.
 
 ## Spørsmål om PostNord-sporing
 

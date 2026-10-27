@@ -3,7 +3,7 @@ title: bpost pakje volgen: barcode, statussen en Afhaalpunt
 description: Volg je bpost-pakje: waar je de barcode vindt, wat Track & Trace toont, hoelang een Afhaalpunt of bbox-automaat je pakje bewaart en hoe je bpost bereikt.
 slug: bpost-pakje-volgen
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 bpost is het Belgische postbedrijf. Binnen de bnode-groep, tot december 2025 bpostgroup, is bpost het merk dat pakjes en post aan de deur brengt in België en Nederland. Je volgt je pakje met de barcode in [bpost Track & Trace](https://track.bpost.cloud/) of in de My bpost app, of je plakt de barcode in het veld hierboven. Die barcode staat in de verzendmail van de webshop, in de e-mail of sms van bpost, op het verzendetiket of op het afwezigheidsbericht in je brievenbus.
@@ -101,7 +101,7 @@ Hou je barcode bij de hand. Een e-mailadres voor de klantendienst vermeldt bpost
 
 Een pakje uit het buitenland met een internationaal postnummer volgt Peek eerst bij de post van het land van verzending. Meldt die dat het naar België gaat, of noemt ze geen land en ben je zelf in België, dan kan Peek ook bpost vragen. Zodra bpost nieuwe scans toont, volgt Peek het pakje daar verder, en de eerdere scans blijven staan.
 
-Peek vraagt bpost rechtstreeks, zonder postcode. Je ziet de scans van bpost in het Engels, met de plaats, het gewicht en de afmetingen. Scans in België staan op Belgische tijd. Ligt je pakje klaar, dan toont Peek de naam en het adres van het Afhaalpunt of de automaat, ook nadat je het daar hebt afgehaald. Voor een pakje dat in België is geleverd, zie je het uur van levering, en een pakje dat terug bij de afzender is, staat als teruggestuurd. Overdag kijkt Peek elke 10 minuten, en elke 2 minuten zodra je pakje met de postbode op ronde is. 's Nachts kijkt Peek elk uur. Als je wil, krijg je een melding bij elke nieuwe status.
+Peek vraagt bpost rechtstreeks, zonder postcode. Je ziet de scans van bpost in het Engels, met de plaats, het gewicht en de afmetingen. Scans in België leest Peek op Belgische tijd en toont ze in de tijdzone van je toestel. Ligt je pakje klaar, dan toont Peek de naam en het adres van het Afhaalpunt of de automaat, ook nadat je het daar hebt afgehaald. Voor een pakje dat in België is geleverd, zie je het uur van levering, en een pakje dat terug bij de afzender is, staat als teruggestuurd. Overdag kijkt Peek elke 10 minuten, en elke 2 minuten zodra je pakje met de postbode op ronde is. 's Nachts kijkt Peek elk uur of om de twee uur. Als je wil, krijg je een melding bij elke nieuwe status.
 
 Peek toont geen verwachte leveringsdag en laat de afzender en de ontvanger, het adres van de ontvanger, contactgegevens, leveringsvoorkeuren en het leveringsbewijs weg. Peek kan bpost of de webshop niet voor je contacteren.
 

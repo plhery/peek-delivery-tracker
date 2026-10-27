@@ -3,7 +3,7 @@ title: CTT tracking: numbers, statuses and pickup in Portugal
 description: Track a CTT parcel in Portugal: where the tracking number comes from, what CTT's statuses mean, pickup deadlines, customs fees and how to reach CTT.
 slug: ctt-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 CTT (CTT – Correios de Portugal) is Portugal's national postal service, with an express arm, CTT Expresso. Track a parcel with "Seguir objeto" on [ctt.pt](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt), which has an English version, in the CTT app, or by pasting the number in the box above. The number reaches you by CTT's SMS or email, on a paper notice, or from the sender.
@@ -91,11 +91,11 @@ CTT's channels, as read on 11 October 2026:
 
 [Peek](/) recognises CTT's postal codes (two letters, nine digits, `PT`, valid check digit) at once and reads them from CTT's tracking; ctt.pt links with `objects=` work too. With one digit wrong, the check digit no longer fits and Peek suggests Chronopost instead, so check the number. Other CTT codes aren't read from CTT; Peek uses universal tracking services.
 
-Peek shows the status and the newest 20 scans with a rough place (depot or point) on a map, plus CTT's status code. It drops the sender and recipient, and CTT gives no expected delivery day. Times are Lisbon time, or Azores time for the islands.
+Peek shows the status and the newest 20 scans with a rough place (depot or point) on a map, plus CTT's status code. It drops the sender and recipient, and CTT gives no expected delivery day. Times are read on Lisbon time, or Azores time for the islands, and shown in your device's time zone.
 
 CTT Express's 22- and 25-digit numbers (`00`, four digits, `00`, then 14 digits, plus `001` for 25) go to CTT Express, which Peek lists separately: history without places, the expected delivery day, weight, delivery time and Spanish wordings such as `El envío fue entregado correctamente`.
 
-Peek checks every 10 minutes by day, every 2 minutes once out for delivery, and hourly overnight, and can notify you when the status changes.
+Peek checks every 10 minutes by day, every 2 minutes once out for delivery, and every hour or two overnight, and can notify you when the status changes.
 
 ## Questions about CTT tracking
 

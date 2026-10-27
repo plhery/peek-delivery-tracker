@@ -3,7 +3,7 @@ title: La Poste / Colissimo tracking: numbers and statuses
 description: Track a Colissimo or La Poste parcel: what the tracking number looks like, what the French statuses mean, missed deliveries, pickup points and contacts.
 slug: la-poste-colissimo-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 Colissimo is the parcel service of La Poste, France's national post. Track a parcel on La Poste's English tracking page, [Track a letter, Colissimo or Chronopost](https://www.laposte.fr/outils/track-a-parcel), or by pasting the number in the box above. The number comes from the sender, usually in the shop's shipping email, or from La Poste by email.
@@ -81,7 +81,7 @@ La Poste's channels for recipients, as read on 13 October 2026:
 
 [Peek](/) names La Poste / Colissimo at once for 13-character Colissimo numbers with a valid key, 14-digit `870` numbers, 15-character partner numbers and postal numbers ending FR, each with a valid check character. Other codes or a failed key: it asks La Poste alone; 14 digits shared with DPD and others: it asks the likely carriers. The avis number doesn't work; use the parcel's. laposte.fr links with `code=` or `idShip=` work; colissimo.fr links only when the number inside is one Peek names at once.
 
-Peek reads La Poste in French, so statuses stay French in every language. It shows each scan on a map with its exact time, the expected delivery, the shop's name, the delivered time and, while the parcel waits, the post office, relay or locker with its address. It drops your name and address. It checks every 10 minutes by day (every 2 once out for delivery) and hourly overnight, and can notify you at every scan, at important steps only or on delivery day only.
+Peek reads La Poste in French, so statuses stay French in every language. It shows each scan on a map with its exact time, the expected delivery, the shop's name, the delivered time and, while the parcel waits, the post office, relay or locker with its address. It drops your name and address. It checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, and can notify you at every scan, at important steps only or on delivery day only.
 
 Chronopost services are followed on Chronopost, a partner La Poste names is followed there, and a postal number bound abroad can be followed to that country's post, such as [Royal Mail](carrier:royal-mail), once it shows progress. Peek can't change a delivery, answer an avis or pay customs.
 

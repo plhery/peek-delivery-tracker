@@ -3,7 +3,7 @@ title: DPD Suisse : suivre un colis, points relais et contact
 description: Suivre un colis DPD Suisse : le numéro à 14 chiffres qui commence par 060, les statuts de myDPD, les points relais, utilisables le samedi, et le téléphone de DPD.
 slug: suivi-dpd-suisse
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 DPD Suisse, c'est DPD (Schweiz) AG, à Buchs ZH : un service de colis du réseau Geopost, avec plus de 1000 points relais DPD Pickup Location dans tout le pays. Pour suivre ton colis, saisis son numéro de colis à 14 chiffres sur [myDPD](https://www.dpdgroup.com/ch/mydpd/), le site de suivi de DPD, ou colle-le dans le champ ci-dessus. Tu le reçois en général par e-mail, et il figure aussi sur l'avis de passage que DPD laisse dans ta boîte aux lettres quand tu n'es pas là.
@@ -81,7 +81,7 @@ Relevé sur les pages suisses de DPD le 10 octobre 2026. DPD donne les mêmes ca
 
 Le champ « Code postal de livraison » est facultatif et accepte le format de n'importe quel pays ; le code est envoyé à DPD et, si besoin, à des services de suivi. Sans lui, tu vois une ligne par étape et le jour prévu quand DPD en donne un. Avec lui, s'ajoutent les scans de DPD sur la carte avec ville et pays, ses messages, le créneau de livraison à l'heure suisse, le nom de l'expéditeur et le poids. Si DPD refuse le code, la page du colis le dit et propose « Modifier le code postal ».
 
-Au point relais, le magasin est nommé quand DPD le nomme, son adresse en général seulement avec le code postal. Les statuts restent dans l'anglais de DPD, sauf `Delivered` tout court, affiché « Livré ». Ton nom, ton adresse et la preuve de livraison ne sont pas conservés. Peek vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne suit pas le colis chez un autre transporteur.
+Au point relais, le magasin est nommé quand DPD le nomme, son adresse en général seulement avec le code postal. Les statuts restent dans l'anglais de DPD, sauf `Delivered` tout court, affiché « Livré ». Ton nom, ton adresse et la preuve de livraison ne sont pas conservés. Peek vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne suit pas le colis chez un autre transporteur.
 
 ## Questions sur le suivi DPD Suisse
 

@@ -3,7 +3,7 @@ title: Colisweb tracking: French messages and delivery slots
 description: Track a Colisweb delivery in France: where the 8-digit number is, what its French messages mean, how to change the slot and who to contact.
 slug: colisweb-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Colisweb delivers furniture, appliances and other orders from French retailers to your home, by appointment on a time slot, anywhere in metropolitan France. Track it on [colisweb.com/suivi-livraison](https://www.colisweb.com/suivi-livraison), which is in French only, with the tracking number Colisweb sent you by SMS or email when it announced your delivery date and slot.
@@ -85,7 +85,7 @@ An 8-digit number fits Colisweb, Mondial Relay and Heppner, and none of them can
 
 Colisweb sends only step codes, so Peek shows every step in its own words in your language. It shows the status, three milestones (delivery confirmed, collected by the crew, delivered) with their times but without places, the retailer's name and the delivery time. While the delivery is booked, collected or out for delivery and not being rescheduled, it shows your slot: a day and hours, in Paris time. A cancelled delivery shows as returned to the sender. It leaves out your name and address.
 
-Peek checks every 10 minutes by day, every 2 once it's out for delivery, and hourly overnight, and can notify you of every scan, important steps only or delivery day only. A number Colisweb doesn't know isn't reported as not found, so check the digits against your SMS. Peek can't change your slot or address, use Colisweb's chat or contact the shop for you.
+Peek checks every 10 minutes by day, every 2 once it's out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only. A number Colisweb doesn't know isn't reported as not found, so check the digits against your SMS. Peek can't change your slot or address, use Colisweb's chat or contact the shop for you.
 
 ## Questions about Colisweb tracking
 

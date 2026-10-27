@@ -3,7 +3,7 @@ title: FedEx seguimiento: estado del envío, entrega y teléfono
 description: Seguimiento de FedEx en España: dónde está el número de 12 cifras, qué significa «Excepción de entrega», entregas fallidas, aduanas y teléfono.
 slug: fedex-seguimiento
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 FedEx es una empresa de mensajería urgente y paquetería. Para seguir tu envío, busca el número en la página de seguimiento de fedex.com, en la app FedEx Mobile o pégalo en la casilla de arriba. Según FedEx, el número suele llegar en el correo o el SMS que te manda sobre el envío.
@@ -83,7 +83,7 @@ Según esa página, para hablar con atención al cliente basta el número de cue
 
 Para leer los datos, el servidor de Peek abre la página de seguimiento de fedex.com en un navegador. Cuando FedEx la rechaza, o pide verificar al destinatario, los servicios de seguimiento completan el historial.
 
-Ves el estado, cada escaneo en un mapa con su lugar y su hora exacta, el día de entrega previsto, la hora de entrega y, mientras el paquete espera, el nombre y la dirección del centro de FedEx. El paquete se consulta cada 10 minutos de día, cada 5 minutos cuando está en reparto y cada hora por la noche, y recibes notificaciones de cada escaneo, de los pasos importantes o solo el día de entrega. No muestra tu nombre ni tu dirección, el remitente, la firma, el peso ni las medidas. Los escaneos salen en el inglés de FedEx, salvo la entrega, que nombra a quien firmó: Peek la muestra como «Entregado».
+Ves el estado, cada escaneo en un mapa con su lugar y su hora exacta, el día de entrega previsto, la hora de entrega y, mientras el paquete espera, el nombre y la dirección del centro de FedEx. El paquete se consulta cada 10 minutos de día, cada 5 minutos cuando está en reparto y cada una o dos horas por la noche, y recibes notificaciones de cada escaneo, de los pasos importantes o solo el día de entrega. No muestra tu nombre ni tu dirección, el remitente, la firma, el peso ni las medidas. Los escaneos salen en el inglés de FedEx, salvo la entrega, que nombra a quien firmó: Peek la muestra como «Entregado».
 
 ## Preguntas sobre el seguimiento de FedEx
 

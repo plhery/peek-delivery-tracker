@@ -3,7 +3,7 @@ title: DPD France tracking: numbers, statuses and Pickup relays
 description: Track a DPD France parcel: where the number is, what DPD's French statuses mean, Predict, Pickup relays, missed deliveries, claims and contacts.
 slug: dpd-france-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 DPD France, called Exapaq until 2015, is the French parcel network of Geopost, part of the [La Poste](carrier:la-poste) group. Track a parcel on trace.dpd.fr, with the link in DPD's SMS or email, or by pasting the number in the box above. The number is in the shop's shipping confirmation or in DPD France's own email or SMS.
@@ -81,9 +81,9 @@ These cover parcels in DPD France's network; DPD France gives no separate number
 
 [Peek](/) recognises the 15-digit number starting 250 at once. Other shapes, including the 16-digit label form, are shared with other carriers, and Peek can't ask DPD France about them, so you'll usually press "Change" and pick DPD France. trace.dpd.fr links work (`/fr/trace/` and `/trace-particuliers/`). Other links, such as `/en/trace/` or www.dpd.fr ones, work only when they hold the 15-digit `250` number, and dpd.com links with `parcelNumber=` are read as DPD Switzerland.
 
-Peek shows the status, the history with each scan's depot, the expected day, the weight and the delivery time, and maps the delivering depot. Statuses stay in French, times in Paris time. It drops your name and address, the signature and the customer reference, and shows no relay's name or address, only "Ready for pickup". If DPD shows an outbound and a return trip, Peek keeps the one for your number. It follows no other carrier.
+Peek shows the status, the history with each scan's depot, the expected day, the weight and the delivery time, and maps the delivering depot. Statuses stay in French; times are read on Paris time and shown in your device's time zone. It drops your name and address, the signature and the customer reference, and shows no relay's name or address, only "Ready for pickup". If DPD shows an outbound and a return trip, Peek keeps the one for your number. It follows no other carrier.
 
-Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight, and can notify you when the status changes.
+Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you when the status changes.
 
 ## Questions about DPD France tracking
 

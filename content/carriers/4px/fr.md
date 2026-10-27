@@ -3,7 +3,7 @@ title: 4PX suivi : numéro, statuts et qui contacter
 description: Suivre un colis 4PX venu de Chine : à quoi ressemble le numéro, ce que veut dire chaque statut, qui le livre en France ou en Belgique et qui contacter.
 slug: 4px-suivi
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 4PX (递四方速递, 4PX Express Co., Ltd.) est une société de logistique transfrontalière basée à Shenzhen, en Chine : elle expédie à l'étranger les colis de vendeurs en ligne, puis les confie à un transporteur de ton pays pour la livraison. Pour suivre ton colis, saisis son numéro sur [track.4px.com](https://track.4px.com/), le site de suivi de 4PX, ou colle-le dans le champ ci-dessus. Le numéro vient de la boutique ou de la plateforme où tu as commandé, dans les infos d'expédition de ta commande.
@@ -76,7 +76,7 @@ Relevé le 11 octobre 2026, le site de suivi de 4PX donne un seul contact pour t
 
 Peek interroge 4PX en anglais et affiche le statut, l'historique avec le lieu de chaque scan sur une carte, l'heure de livraison, le pays de destination et le transporteur local avec son numéro. Quand ce transporteur figure dans sa liste, Peek peut suivre le colis chez lui dès qu'il montre une étape plus récente. `Out for delivery` et `Delivery attempt unsuccessful` s'affichent avec les mots de Peek, les autres lignes telles que 4PX les écrit. 4PX ne donne ni date de livraison prévue, ni détails de point de retrait, ni poids.
 
-Les heures gardent le fuseau de 4PX ; un scan sans fuseau est lu à l'heure de son lieu. Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les heures la nuit, et peut t'envoyer des notifications pour chaque scan, les étapes importantes ou « Jour de livraison uniquement ». Il ne peut contacter ni 4PX ni la boutique à ta place.
+Les heures sont lues dans le fuseau de 4PX, celles d'un scan sans fuseau à l'heure de son lieu, puis affichées dans le fuseau horaire de ton appareil. Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications pour chaque scan, les étapes importantes ou « Jour de livraison uniquement ». Il ne peut contacter ni 4PX ni la boutique à ta place.
 
 ## Questions sur le suivi 4PX
 

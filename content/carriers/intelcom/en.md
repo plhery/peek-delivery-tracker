@@ -85,7 +85,7 @@ Agents see the same tracking information you do, so have the number ready and ex
 
 Peek reads Dragonfly's tracking directly and shows the status in its English words, as written, even for Quebec parcels. Each step has its exact time; Dragonfly gives no place for it. Peek shows the expected delivery, a time window once the parcel is with the driver and a day before that, and for big shops such as Amazon, Walmart or Canadian Tire the sender's name. It drops the driver's name, your details and the proof of delivery, and shows no pickup point or weight. It can't change the delivery or show the photo.
 
-Peek checks every 10 minutes from 8 a.m. to 10 p.m. Swiss time (about 2 a.m. to 4 p.m. Eastern, 11 p.m. to 1 p.m. Pacific), every 2 minutes in those hours once the parcel is out for delivery, and hourly the rest of the time, evening deliveries included, and can notify you when the status changes.
+Peek checks every 10 minutes from 8 a.m. to 10 p.m. Swiss time (about 2 a.m. to 4 p.m. Eastern, 11 p.m. to 1 p.m. Pacific), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time, evening deliveries included, and can notify you when the status changes.
 
 ## Questions about Intelcom tracking
 

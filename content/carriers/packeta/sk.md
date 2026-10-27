@@ -3,7 +3,7 @@ title: Sledovanie zásielky Packeta: číslo Z, stavy a Z-BOX
 description: Ako sledovať zásielku Packeta: kde nájdete číslo začínajúce na Z, čo znamenajú stavy, ako dlho zásielka čaká na výdajnom mieste a v Z-BOXe, reklamácie a kontakty.
 slug: packeta-sledovanie-zasielky
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Packeta, na Slovensku do roku 2021 Zásielkovňa, doručuje zásielky z e-shopov na výdajné miesta, do Z-BOXov aj na adresu. Zásielku môžete sledovať v [Sledovaní zásielky](https://tracking.packeta.com/sk/) na tracking.packeta.com, v aplikácii Packeta alebo tak, že trasovacie číslo vložíte do poľa vyššie. Číslo vám Packeta pošle e-mailom, hneď ako jej e-shop zásielku odovzdá do prepravy. Nájdete ho aj v SMS a v aplikácii.
@@ -99,9 +99,9 @@ Kontakty podľa packeta.sk k 26. októbru 2026:
 
 [Peek](/) spozná číslo Packety, teda `Z` a 10 číslic, hneď podľa tvaru, aj s medzerami. Číslo z 10 číslic bez `Z` môže patriť viacerým prepravcom: vložte ho aj tak (Peek sleduje viac ako 3 500 prepravcov). Peek sa spýta niekoľkých z nich, a ak číslo nezačína nulou, aj Packety. Ak Packeta zásielku pozná, uvidíte „Packeta has this parcel.“, inak „Not found at … yet. Peek will keep checking after you add it.“ a Packetu si vyberiete cez „Change“. Funguje aj odkaz z tracking.packeta.com alebo odkaz z packeta.com s `id=`. PSČ netreba.
 
-Peek ukáže súhrnný stav a 20 najnovších krokov v angličtine, ako ich píše Packeta, ďalej e-shop, ktorý zásielku poslal, kedy bola doručená, a adresu výdajného miesta alebo Z-BOXu, kam zásielka ide (pri doručení na adresu a pri vratke nie). Ak krok uvádza depo alebo výdajné miesto, Peek ho ukáže ako miesto kroku. Časy sú v pražskom čase, ktorý je rovnaký ako slovenský. Predpokladaný čas doručenia zo SMS Peek nevidí. Vaše meno, adresu ani podpis si neukladá.
+Peek ukáže súhrnný stav a 20 najnovších krokov v angličtine, ako ich píše Packeta, ďalej e-shop, ktorý zásielku poslal, kedy bola doručená, a adresu výdajného miesta alebo Z-BOXu, kam zásielka ide (pri doručení na adresu a pri vratke nie). Ak krok uvádza depo alebo výdajné miesto, Peek ho ukáže ako miesto kroku. Časy Peek číta podľa pražského času, ktorý je rovnaký ako slovenský, a ukazuje ich v časovom pásme vášho zariadenia. Predpokladaný čas doručenia zo SMS Peek nevidí. Vaše meno, adresu ani podpis si neukladá.
 
-Ak Packeta odovzdá zásielku inému prepravcovi a v kroku odkáže na jeho sledovanie, Peek ukáže, kto ju doručuje. Ak tohto prepravcu Peek pozná a ten hlási nové kroky, sleduje zásielku ďalej u neho. Cez deň ju Peek kontroluje každých 10 minút, v noci raz za hodinu, a pri zmene vás môže upozorniť. Packetu za vás ale nekontaktuje a reklamáciu za vás nepodá.
+Ak Packeta odovzdá zásielku inému prepravcovi a v kroku odkáže na jeho sledovanie, Peek ukáže, kto ju doručuje. Ak tohto prepravcu Peek pozná a ten hlási nové kroky, sleduje zásielku ďalej u neho. Cez deň ju Peek kontroluje každých 10 minút, v noci raz za hodinu až dve, a pri zmene vás môže upozorniť. Packetu za vás ale nekontaktuje a reklamáciu za vás nepodá.
 
 ## Časté otázky o sledovaní zásielok Packety
 

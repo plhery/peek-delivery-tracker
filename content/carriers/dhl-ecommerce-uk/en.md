@@ -3,7 +3,7 @@ title: DHL eCommerce UK tracking: statuses, ServicePoints, contact
 description: Track a DHL eCommerce UK parcel (formerly DHL Parcel UK): the 14-digit number, what each status means, ServicePoint pickup and how to reach DHL.
 slug: dhl-ecommerce-uk-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 DHL eCommerce UK, formerly DHL Parcel UK, is DHL Group's British parcel network: it delivers for online shops and other businesses, often the next day. Track a parcel on [DHL eCommerce UK's tracker](https://track.dhlecommerce.co.uk/) with the shipment number and your postcode, or paste the number in the box above. The number is in DHL's own texts and emails, and the sender can give it to you too.
@@ -78,7 +78,7 @@ As listed on DHL eCommerce UK's pages on 11 October 2026:
 
 [Peek](/) recognises a 14-digit number but the shape is shared, so it asks the likely carriers at once. A number starting `6012` goes to DHL eCommerce UK first, and so does any 14-digit number for readers in the UK. If a DPD network also knows the number, you pick the carrier with "Change". A link from track.dhlecommerce.co.uk (with `con=`) or track.dhlparcel.co.uk (with `consignmentnumber=`) can be pasted too. A 9-digit return number is tracked once you pick DHL eCommerce UK with "Change"; calling-card numbers and references aren't tracked, because they need a postcode.
 
-Peek checks DHL's tracker every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you when the status changes. It shows the status, the history, the expected delivery day and the delivery time, in UK time, with DHL's English messages as DHL writes them. It leaves out who signed and the sender's reference. DHL gives no place for its scans, so nothing appears on the map. Shipments drop out of DHL's tracking some time after delivery, and Peek doesn't follow a parcel to another carrier.
+Peek checks DHL's tracker every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you when the status changes. It shows the status, the history, the expected delivery day and the delivery time, with DHL's English messages as DHL writes them. Times are read on UK time and shown in your device's time zone. It leaves out who signed and the sender's reference. DHL gives no place for its scans, so nothing appears on the map. Shipments drop out of DHL's tracking some time after delivery, and Peek doesn't follow a parcel to another carrier.
 
 ## Questions about DHL eCommerce UK tracking
 

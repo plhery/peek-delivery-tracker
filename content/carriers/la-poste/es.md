@@ -3,7 +3,7 @@ title: Colissimo y La Poste seguimiento: estados, SEUR y Correos
 description: Sigue un Colissimo o un envío de La Poste: cómo es el número, qué significan los estados en francés, quién lo entrega en España (SEUR o Correos) y a quién llamar.
 slug: colissimo-la-poste-seguimiento
 published: 2026-10-24
-updated: 2026-10-24
+updated: 2026-10-27
 ---
 
 Colissimo es el servicio de paquetes de La Poste, el correo francés. Esta página es para quien espera en España un paquete que llega de Francia, de una tienda o de la familia; más abajo hay una parte para quien vive en Francia. Lo sigues con el número en la [página de seguimiento de La Poste](https://www.laposte.fr/outils/suivre-vos-envois), en francés o en inglés, o pegándolo en la casilla de arriba. El número te lo da el remitente, o te llega en un email de La Poste.
@@ -83,7 +83,7 @@ Canales que daban La Poste y Correos el 24 de octubre de 2026:
 
 [Peek](/) reconoce La Poste / Colissimo al momento con un número Colissimo de 13 caracteres cuya clave cuadra, con 14 cifras que empiezan por `870`, con un número «partenaire» de La Poste o con un número postal acabado en `FR` que no sea de Chronopost; estos dos, si su carácter de control es correcto. Con dos letras y 11 cifras, o con una clave que no cuadra, se lo pregunta a La Poste. Si el número también puede ser de otra empresa, como muchos de 14 cifras, pégalo igualmente: Peek sigue más de 3.500 transportistas; si no sale La Poste, elígela con «Cambiar transportista». El número del avis de passage no sirve: pega el del paquete. También vale un enlace de laposte.fr con `code=` o `idShip=`.
 
-Peek muestra cada escaneo con la frase de La Poste en francés, su hora y su país, la fecha prevista, el nombre de la tienda y, si el paquete espera en una oficina, relais o consigna de La Poste, ese punto con su dirección. No guarda tu nombre ni tu dirección. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puede avisarte con «Todas las novedades», «Solo importantes» o «Solo el día de entrega».
+Peek muestra cada escaneo con la frase de La Poste en francés, su hora y su país, la fecha prevista, el nombre de la tienda y, si el paquete espera en una oficina, relais o consigna de La Poste, ese punto con su dirección. No guarda tu nombre ni tu dirección. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede avisarte con «Todas las novedades», «Solo importantes» o «Solo el día de entrega».
 
 Cuando La Poste nombra a la empresa que entrega, Peek la muestra en la tarjeta («Entrega con SEUR», por ejemplo) con su número, si La Poste lo da, y con SEUR o Correos pasa a seguirlo allí en cuanto esa empresa muestra movimientos nuevos, sin perder el historial de La Poste. Si La Poste no nombra a nadie y el número es postal (acabado en `FR`), Peek lo busca en Correos con el mismo número cuando el destino es España o, si La Poste no da destino, cuando lo añades desde España. Peek no puede cambiar una entrega, responder a un aviso ni reclamar por ti.
 

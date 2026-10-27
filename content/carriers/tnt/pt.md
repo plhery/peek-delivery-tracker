@@ -3,7 +3,7 @@ title: TNT rastreio: carta de porte, estados e entrega
 description: Rastreio TNT em Portugal: onde está a carta de porte de 9 dígitos, o que quer dizer cada estado, entregas falhadas, alfândega, reclamações e contactos.
 slug: tnt-rastreio
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 A TNT entrega encomendas, documentos e paletes para empresas e particulares em todo o mundo, com uma rede rodoviária própria pela Europa. O site da TNT Portugal apresenta hoje a «FedEx Express e TNT» como «unidas». Cada envio tem uma carta de porte de 9 dígitos, a que a TNT também chama número de envio. Para saberes onde está a encomenda, introduz esse número no [Localizador de envios](https://www.tnt.com/express/pt_pt/site/shipping-tools/tracking.html) do tnt.com (ou o número de referência do remetente), ou cola-o na caixa no topo desta página.
@@ -89,7 +89,7 @@ Segundo o Centro de Ajuda da TNT Portugal, consultado a 23 de outubro de 2026:
 
 Cola a carta de porte de 9 algarismos. Quando o algarismo de controlo bate certo, o [Peek](/) pergunta à TNT, e também à XPO se o número passar no controlo dela, e mostra «TNT tem esta encomenda.» quando a TNT conhece o número. Se o algarismo de controlo não bater certo, cola-a na mesma: o Peek segue mais de 3.500 transportadoras. Se a TNT não aparecer, escolhe-a em «Alterar» ou, na encomenda, em «Alterar transportadora». As ligações do tnt.com não são lidas: cola o número.
 
-O Peek mostra o estado, o histórico com a cidade e o país de cada leitura, o país de destino e a data prevista de entrega enquanto a TNT a der. A referência do remetente e a assinatura ficam no tnt.com. Como os números se repetem, o Peek segue o envio com a leitura mais recente: confirma que o percurso é o teu. Também segue os números nacionais de 16 algarismos da TNT França, no rastreio da TNT França e em francês; há várias transportadoras com esse comprimento, por isso podes ter de escolher a TNT. Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada hora à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». O Peek não consegue contactar a TNT nem o remetente por ti.
+O Peek mostra o estado, o histórico com a cidade e o país de cada leitura, o país de destino e a data prevista de entrega enquanto a TNT a der. A referência do remetente e a assinatura ficam no tnt.com. Como os números se repetem, o Peek segue o envio com a leitura mais recente: confirma que o percurso é o teu. Também segue os números nacionais de 16 algarismos da TNT França, no rastreio da TNT França e em francês; há várias transportadoras com esse comprimento, por isso podes ter de escolher a TNT. Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». O Peek não consegue contactar a TNT nem o remetente por ti.
 
 ## Perguntas sobre o rastreio TNT
 

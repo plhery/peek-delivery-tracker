@@ -3,7 +3,7 @@ title: SunYou tracking: numero SY, stati e chi consegna in Italia
 description: Traccia un pacco SunYou (SYPost) dalla Cina: com'è fatto il numero SY, cosa vogliono dire gli stati, chi lo consegna in Italia e a chi chiedere se si ferma.
 slug: sunyou-tracking
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 SunYou, scritto anche SYPost, è un'azienda di logistica di Shenzhen che spedisce all'estero i piccoli pacchi dei venditori online cinesi e li affida, nel Paese di arrivo, a un corriere locale per l'ultimo tratto. I suoi numeri cominciano con SY: inserisci il tuo sul sito di tracciamento di SunYou, [sypost.net](https://www.sypost.net), oppure nel box qui sopra. Il numero te lo dà il negozio, con i dati di spedizione dell'ordine.
@@ -84,11 +84,11 @@ Per tutto ciò che richiede un intervento, le persone giuste sono il venditore e
 
 [Peek](/) riconosce subito SunYou da entrambe le forme SY, che nessun altro corriere del suo catalogo condivide. Puoi incollare anche un link di sypost.net con il numero dentro, come quello che copia «Copy Link» sul tracking.
 
-Peek legge il tracking di SunYou in inglese, quindi su Peek le righe compaiono in inglese, per esempio `Departed Sunyou Facility`; solo quelle che corrispondono esattamente alle sue, come `Delivered`, le mostra con parole sue in italiano. Vedi lo stato, la cronologia (fino a 20 scansioni, senza il luogo), il Paese di arrivo, l'ora di consegna e il corriere locale con il suo numero. Una data di consegna prevista e un punto di ritiro, per i pacchi SunYou, non li mostra. Gli orari tengono il fuso che dà loro SunYou, prima quello cinese e poi quello del Paese di arrivo.
+Peek legge il tracking di SunYou in inglese, quindi su Peek le righe compaiono in inglese, per esempio `Departed Sunyou Facility`; solo quelle che corrispondono esattamente alle sue, come `Delivered`, le mostra con parole sue in italiano. Vedi lo stato, la cronologia (fino a 20 scansioni, senza il luogo), il Paese di arrivo, l'ora di consegna e il corriere locale con il suo numero. Una data di consegna prevista e un punto di ritiro, per i pacchi SunYou, non li mostra. Gli orari sono letti nel fuso che dà loro SunYou, prima quello cinese e poi quello del Paese di arrivo, e mostrati nel fuso orario del tuo dispositivo.
 
 Quando SunYou dà il numero del corriere locale, Peek può chiedere a quel corriere, per esempio Royal Mail o DHL in Germania, e passare a lui appena mostra passaggi più recenti. Il pacco tiene il numero SunYou e la sua pagina dice «Consegna con» seguito dal corriere, con il suo numero e un link. Non succede per ogni pacco: un numero postale diretto in Svizzera può passare alla Posta Svizzera, ma per l'Italia Peek non ha una regola che lo passi a Poste Italiane: lo segue semmai sulla posta che ha emesso il numero, se la traccia.
 
-Controlla ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e ogni ora di notte, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Non può contattare SunYou o il venditore al posto tuo.
+Controlla ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e di notte ogni una o due ore, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Non può contattare SunYou o il venditore al posto tuo.
 
 ## Domande sul tracking SunYou
 

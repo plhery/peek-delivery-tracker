@@ -3,7 +3,7 @@ title: Yanwen Sendungsverfolgung: Nummern, Status und Kontakt
 description: Yanwen-Paket aus China verfolgen: wie die Nummer aussieht, was die englischen Status bedeuten, wer in DE, AT und CH zustellt und wen du fragst.
 slug: yanwen-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Yanwen ist ein chinesischer Logistiker, 1998 in Peking gegründet, der Pakete für Onlinehändler ins Ausland bringt und sie dort einem Paketdienst vor Ort übergibt. Verfolgen kannst du die Nummer auf Yanwens eigener Seite [track.yw56.com.cn](https://track.yw56.com.cn/en/index) oder oben im Feld. Die Nummer bekommst du vom Shop oder Marktplatz, bei dem du bestellt hast, in den Versanddetails deiner Bestellung.
@@ -86,7 +86,7 @@ Einen Kontakt für Deutschland, Österreich oder die Schweiz veröffentlicht Yan
 
 Peek zeigt den Status, den Verlauf mit Ort oder Region jedes Scans auf einer Karte, die Zustellzeit, das Zielland und den Paketdienst vor Ort mit seiner Nummer („Zustellung durch“ und sein Name). Nennt Yanwen einen Paketdienst, den Peek kennt, und passt die Nummer zu ihm, fragt Peek dort nach und wechselt, sobald dieser neuere Schritte zeigt. Einen voraussichtlichen Liefertermin oder eine Abholstelle zeigt Peek nicht; Bestellnummern, Kontakte, Postleitzahlen, Zustell-PINs und Türnummern lässt es weg.
 
-Die Uhrzeiten behalten Yanwens GMT-Abweichung, doppelte Scans fallen weg. `Delivered` und `Out for delivery` zeigt Peek in eigenen Worten, alle anderen Zeilen so, wie Yanwen sie schreibt, auch `Delivered.`. Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Yanwen oder den Shop kontaktieren kann es nicht für dich.
+Die Uhrzeiten liest Peek mit Yanwens GMT-Abweichung und zeigt sie in der Zeitzone deines Geräts, doppelte Scans fallen weg. `Delivered` und `Out for delivery` zeigt Peek in eigenen Worten, alle anderen Zeilen so, wie Yanwen sie schreibt, auch `Delivered.`. Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Yanwen oder den Shop kontaktieren kann es nicht für dich.
 
 ## Fragen zur Yanwen Sendungsverfolgung
 

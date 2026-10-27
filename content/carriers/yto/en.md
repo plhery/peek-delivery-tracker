@@ -3,7 +3,7 @@ title: YTO Express tracking: YT numbers, statuses and contact
 description: Track a YTO Express (圆通) parcel: what a YT number looks like, what YTO's Chinese scans mean, where parcels wait in China and how to reach YTO.
 slug: yto-express-tracking
 published: 2026-10-24
-updated: 2026-10-24
+updated: 2026-10-27
 ---
 
 YTO Express (圆通速递, Yuantong) is a Chinese express company founded in Shanghai in 2000, with more than 5,000 branches across China. A YTO number often belongs to a parcel inside China: an order from Taobao, Pinduoduo or Douyin, platforms YTO serves, on its way to a forwarder's warehouse or a friend's address. Track it on [YTO's tracker](https://www.yto.net.cn/ytoExpress/waybill/search), which is in Chinese only, or in the box above. YTO's service abroad is run by YTO International, which has its own tracker on [ytoglobal.com](https://www.ytoglobal.com/service).
@@ -88,11 +88,11 @@ YTO gives no hours or languages for them. Its site also has an online customer s
 
 [Peek](/) names YTO Express at once from `YT` and 13 digits. A `D` number with 11 digits fits Colis Privé too, so Peek can't tell which it is. Paste it all the same: Peek follows more than 3,500 carriers. If YTO Express doesn't come up, tap "Change" and pick it under "Fits this number", or use "Change carrier" on the parcel. Peek's YTO lookup takes YTO waybills in other shapes too: for those, pick YTO Express under "All carriers". A yto.net.cn link with `mailNo=` or `waybillNo=` and the number names YTO too.
 
-Peek reads YTO's own tracking in China, not YTO International's. It shows the status, the scans YTO returns with the branch or station that made each, and the delivery time, with times on China's clock. Scans in the table above appear in Peek's English, others in YTO's Chinese, and repeated scans once. After `退回件扫描`, Peek shows the trip back as "Out for delivery back to the sender" and "Returned to the sender".
+Peek reads YTO's own tracking in China, not YTO International's. It shows the status, the scans YTO returns with the branch or station that made each, and the delivery time, with times read on China's clock and shown in your device's time zone. Scans in the table above appear in Peek's English, others in YTO's Chinese, and repeated scans once. After `退回件扫描`, Peek shows the trip back as "Out for delivery back to the sender" and "Returned to the sender".
 
 YTO gives no expected delivery date. Peek leaves out couriers' names and phone numbers, the recipient's details and collection addresses: YTO's own tracker has those. YTO answers any number in a valid shape, so no scans yet doesn't prove a mistake: Peek keeps checking.
 
-It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact YTO or the seller for you.
+It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact YTO or the seller for you.
 
 ## Questions about YTO Express tracking
 

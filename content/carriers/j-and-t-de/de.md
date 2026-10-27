@@ -3,7 +3,7 @@ title: J&T Express Sendungsverfolgung: Status, Nachbar, Kontakt
 description: J&T-Paket in Deutschland verfolgen: wie eine JTDE-Nummer aussieht, was die Status heißen, welcher Nachbar es hat und wie du die Hotline von J&T erreichst.
 slug: jt-express-sendungsverfolgung
 published: 2026-10-21
-updated: 2026-10-21
+updated: 2026-10-27
 ---
 
 J&T Express Germany (J&T Express Germany GmbH aus Frankfurt am Main) stellt in ganz Deutschland Pakete für J&T Express zu, die 2015 in Indonesien gegründete und in Hongkong börsennotierte Paketgruppe. Dein Paket verfolgst du in der [Sendungsverfolgung auf jtexpress.de](https://www.jtexpress.de/tracking), oder du fügst die Nummer oben ins Feld ein. Die Nummer beginnt mit `JTDE`, und der Shop, der deine Bestellung verschickt hat, kennt sie: Schau in deine Bestelldetails oder in seine Versand-E-Mail.
@@ -77,7 +77,7 @@ So stand es am 21. Oktober 2026 auf der [Kontaktseite von J&T](https://www.jtexp
 
 Peek liest die Sendungsverfolgung von J&T und zeigt den Status, jeden Scan mit genauer Uhrzeit und den Zeitpunkt der Zustellung. Die Scans stehen in den englischen Sätzen von J&T, auch wenn du sie auf jtexpress.de auf Deutsch liest: `Your package has been loaded and is on its way to you` steht etwa für `Die Sendung ist verladen und wird Ihnen in Kürze zugestellt`. Peek wertet diesen Satz als Zustellung und `Returns have begun` als Rücksendung, der Status heißt dann „In Zustellung“ oder „Zurück an Absender“. Beim Zustellsatz behält Peek die Zustellart, etwa `Left with neighbor`, ohne Klammern, und lässt die Hotline weg. Orte, einen erwarteten Zustelltag oder das Gewicht gibt J&T nicht heraus, auf der Karte erscheint also nichts. Die Nachbardetails hinter der Postleitzahl liest Peek nicht aus, und bei sehr langem Verlauf behält es die neuesten 100 Scans.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts stündlich, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. J&T oder den Shop kann Peek nicht für dich kontaktieren.
+Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. J&T oder den Shop kann Peek nicht für dich kontaktieren.
 
 ## Fragen zur J&T Express Sendungsverfolgung
 

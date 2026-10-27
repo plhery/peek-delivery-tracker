@@ -3,7 +3,7 @@ title: DHL eCommerce Netherlands tracking: statuses and contact
 description: Track a DHL eCommerce parcel in the Netherlands or Belgium (formerly DHL Parcel): the JVGL number, what each status means, ServicePoints and who to contact.
 slug: dhl-ecommerce-netherlands-tracking
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 DHL eCommerce Netherlands, formerly DHL Parcel, delivers parcels for online shops in the Netherlands and Belgium; its Belgian site signs as DHL eCommerce Benelux. Track a parcel with "Track and trace" on [dhlecommerce.nl](https://www.dhlecommerce.nl/en/consumer/track-and-trace) with the shipment number (Belgium's site also asks your postcode), or paste the number from the shop's or DHL's email in the box above.
@@ -77,7 +77,7 @@ As listed on DHL's consumer pages on 12 October 2026:
 
 [Peek](/) names DHL eCommerce Netherlands at once for `JVGL` numbers and for `3S` with three letters and 8 to 10 digits. Other `3S` codes are asked of DHL eCommerce Netherlands (with Colis Privé for some lengths). Some also fit PostNL, which can't be asked, and a DHL barcode with four letters after `3S` reads as PostNL's or matches nothing: pick DHL eCommerce Netherlands with "Change". A `JJD` number is named DHL unless you change it. Links from my.dhlecommerce.nl, dhlparcel.nl, dhlecommerce.be and dhlparcel.be ending in `/home/tracktrace/` and the number work too.
 
-It asks without your postcode, so DHL leaves out the recipient, address, signature and ServicePoint. You see the status, the history, the expected delivery (a time window or moment, when DHL plans one) and the delivery time. DHL gives no place for its scans. The parcel is checked every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight; notifications tell you when the status changes. Scans keep DHL's English wording, under Peek's own headline, such as 'In transit' or 'Ready for pickup'; Peek counts `Delivered at DHL ServicePoint` as ready for pickup. A Belgian parcel isn't followed on to bpost.
+It asks without your postcode, so DHL leaves out the recipient, address, signature and ServicePoint. You see the status, the history, the expected delivery (a time window or moment, when DHL plans one) and the delivery time. DHL gives no place for its scans. The parcel is checked every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight; notifications tell you when the status changes. Scans keep DHL's English wording, under Peek's own headline, such as 'In transit' or 'Ready for pickup'; Peek counts `Delivered at DHL ServicePoint` as ready for pickup. A Belgian parcel isn't followed on to bpost.
 
 ## Questions about DHL eCommerce Netherlands tracking
 

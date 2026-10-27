@@ -3,7 +3,7 @@ title: 4PX seguimiento: estados, quién entrega y contacto
 description: Sigue tu paquete de 4PX desde China: cómo es el número, qué significa cada estado, quién lo reparte en España y a quién preguntar si no avanza.
 slug: 4px-seguimiento
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 4PX (递四方速递, 4PX Express Co., Ltd.) es una empresa de logística de Shenzhen, en China, que envía al extranjero los paquetes de vendedores online y, en tu país, se los pasa a una empresa de reparto local para el último tramo. Puedes seguir el número en la web de 4PX, [track.4px.com](https://track.4px.com/), que tiene versión en español, o pegarlo en la casilla de arriba. El número te lo da la tienda o el marketplace donde compraste, en los datos de envío de tu pedido.
@@ -87,7 +87,7 @@ A 11 de octubre de 2026, la web de seguimiento de 4PX da un único contacto para
 
 Peek lee 4PX en inglés y muestra el estado, el historial con el lugar de cada escaneo en un mapa, la hora de entrega, el país de destino y, cuando es una empresa de la lista de Peek (USPS, por ejemplo), la empresa local con su número. Entonces puede seguir el paquete con ella en cuanto muestre novedades, aunque no pasa con todos. `Out for delivery` y `Delivery attempt unsuccessful` aparecen con las palabras de Peek; el resto, como lo escribe 4PX. 4PX no da fecha prevista de entrega, datos del punto de recogida ni peso.
 
-Los escaneos con zona horaria la conservan; los que no la llevan se leen en la hora del lugar del escaneo. Peek consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puede enviarte notificaciones con «Todas las novedades», «Solo importantes» o «Solo el día de entrega». No puede contactar con 4PX ni con la tienda por ti.
+Las horas de los escaneos se leen en la zona horaria que da 4PX o, si no la llevan, en la hora del lugar del escaneo, y se muestran en la zona horaria de tu dispositivo. Peek consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede enviarte notificaciones con «Todas las novedades», «Solo importantes» o «Solo el día de entrega». No puede contactar con 4PX ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de 4PX
 

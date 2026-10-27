@@ -3,7 +3,7 @@ title: Correos seguimiento: estados, entregas, aduanas y teléfono
 description: Seguimiento de Correos: cómo es el número de envío, qué significa cada estado, avisos de llegada, Citypaq, aduanas, reclamaciones y teléfonos.
 slug: seguimiento-correos
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 Correos es el operador postal público de España. Para seguir tu envío, escribe el código en su [localizador de envíos](https://www.correos.es/es/es/herramientas/localizador/envios) o pégalo en la casilla de arriba. El código te llega por correo electrónico, SMS o en el aviso de llegada en papel, y la tienda lo pone en su correo de confirmación de compra. [Correos Express](carrier:correos-express) es otra empresa del mismo grupo, con sus propios números y su propio buscador.
@@ -14,7 +14,7 @@ Correos no publica el formato de sus códigos, pero suelen tener una de estas fo
 
 | Código | Qué es |
 | --- | --- |
-| `PQ0ABC0000000000000000W` | 23 caracteres: el código del paquete. Empieza por P o D y una letra (o por CD) y acaba en una letra de control. |
+| `PQ0ABC0000000000000000W` | 23 caracteres: el código del paquete. Empieza por una letra y acaba en una letra de control. |
 | `PQ0ABC000000000B` | 16 caracteres: el código de la expedición. Una expedición puede llevar varios paquetes, cada uno con su código de 23 caracteres. |
 | `PR000000000000000C` | PR, 15 cifras y C. |
 | `RR000000005ES` | Dos letras, 9 cifras y ES: un número postal internacional de Correos. |

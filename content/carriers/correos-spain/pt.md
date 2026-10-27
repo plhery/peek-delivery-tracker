@@ -3,7 +3,7 @@ title: Correos rastreio: encomendas de Espanha para Portugal
 description: Rastreio Correos (Espanha): como é o número, o que querem dizer os estados, quem entrega em Portugal, quanto tempo a encomenda espera e os contactos úteis.
 slug: correos-espanha-rastreio
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 A Correos é o correio nacional de Espanha. Não é a mesma empresa que a [Correos Express](carrier:correos-express), a transportadora expresso do Grupo Correos, que tem números próprios. Esta página é sobretudo para quem está em Portugal à espera de uma encomenda enviada de Espanha com a Correos; mais abaixo há uma parte para quem vive em Espanha. Segues a encomenda com o número no [localizador da Correos](https://www.correos.es/es/es/herramientas/localizador/envios), em espanhol ou inglês, ou colando-o na caixa acima. O número chega por email ou SMS, ou vem no aviso de chegada; as lojas põem-no no email de envio.
@@ -14,7 +14,7 @@ Os números da Correos costumam ter estas formas (exemplos inventados):
 
 | Forma | O que é |
 | --- | --- |
-| `PQ00000000000000000000V` | 23 caracteres: o código da encomenda. Começa por P ou D e uma letra (ou CD) e acaba numa letra de controlo. |
+| `PQ00000000000000000000V` | 23 caracteres: o código da encomenda. Começa por uma letra e acaba numa letra de controlo. |
 | `PQ0000000000000A` | 16 caracteres: o código do envio. Um envio pode ter várias encomendas, cada uma com o seu código de 23 caracteres. |
 | `PR000000000000000C` | PR, 15 algarismos e C. |
 | `RR000000005ES` | 2 letras, 9 algarismos e `ES`: um número postal internacional criado em Espanha. |

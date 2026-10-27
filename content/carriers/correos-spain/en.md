@@ -3,7 +3,7 @@ title: Correos tracking: Spain's post, numbers and statuses
 description: Track a Correos parcel in Spain: what the tracking number looks like, what the Spanish statuses mean, missed deliveries, Citypaq, customs and contacts.
 slug: correos-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 Correos is Spain's national post. Track a parcel on its English [delivery tracker](https://www.correos.es/es/en/tools/tracker/items) or paste the number in the box above. The number comes by email, SMS or on the paper notice. This page covers Correos in Spain, not Chile or Mexico; [Correos Express](carrier:correos-express) is a sister company with its own numbers.
@@ -14,7 +14,7 @@ Correos publishes no official format, but its numbers usually look like this (ex
 
 | Shape | What it is |
 | --- | --- |
-| `PQ0ABC0000000000000000W` | 23 characters: the parcel code. Starts with P or D and a letter (or CD), ends with a check letter. |
+| `PQ0ABC0000000000000000W` | 23 characters: the parcel code. Starts with a letter and ends with a check letter. |
 | `PQ0ABC000000000B` | 16 characters: the shipment code. A shipment can hold several parcels, each with its own 23-character code. |
 | `PR000000000000000C` | PR, 15 digits and C. |
 | `RR000000005ES` | 2 letters, 9 digits, ES: an international postal number from Spain. |

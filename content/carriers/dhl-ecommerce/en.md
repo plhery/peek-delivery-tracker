@@ -3,7 +3,7 @@ title: DHL eCommerce tracking: GM numbers, statuses and contacts
 description: Track a DHL eCommerce parcel (formerly DHL Global Mail): the GM number, what each status means, who delivers it and who to ask when it stalls.
 slug: dhl-ecommerce-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 DHL eCommerce is the DHL division that ships parcels for high-volume online shops. It sorts your parcel at its own distribution centres, then hands it to a delivery company in your country: [USPS](carrier:usps) in the US, elsewhere the local post or another carrier. Track it with the number in the shop's shipping email on DHL eCommerce's Webtrack site, or paste it in the box above.
@@ -16,12 +16,12 @@ DHL says its tracking IDs are 10 to 39 letters and digits, and that the shop or 
 | --- | --- |
 | `GM0000000000000000` | GM and 16 to 18 digits: the GM number, which DHL also calls the customer confirmation number. |
 | `9261234567890123456789` | 22 digits starting 9261 or 9361: a USPS-style number, used for parcels within the US. |
-| `00000000000000000` | 17 digits: another DHL eCommerce shape. |
+| `0000000000000000` | 16 or 17 digits: another DHL eCommerce shape. |
 | `0031000000000000000000000000000` | 0031 and 27 digits: another DHL eCommerce shape. |
 
 Webtrack's "Delivery by" line names the last-mile carrier, whose own number may appear later.
 
-Lookalikes: 16 digits can also be TNT's or Evri's, and a 9261 or 9361 number USPS's. A 14-digit number belongs to [DHL eCommerce UK](carrier:dhl-ecommerce-uk), a separate network with its own tracking, a `JVGL` number to [DHL eCommerce Netherlands](carrier:dhl-ecommerce-nl), and [DHL Express](carrier:dhl-express) and [DHL Paket](carrier:dhl) use other shapes again. More in [tracking number formats](guide:tracking-number-formats).
+Lookalikes: 16 digits can also be TNT's, Evri's, Canada Post's or Correos Express's, and a 9261 or 9361 number USPS's. A 14-digit number belongs to [DHL eCommerce UK](carrier:dhl-ecommerce-uk), a separate network with its own tracking, a `JVGL` number to [DHL eCommerce Netherlands](carrier:dhl-ecommerce-nl), and [DHL Express](carrier:dhl-express) and [DHL Paket](carrier:dhl) use other shapes again. More in [tracking number formats](guide:tracking-number-formats).
 
 ## DHL eCommerce tracking statuses explained
 
@@ -83,7 +83,7 @@ Doubtful message? DHL eCommerce says "DHL does not request direct payment from o
 
 ## Tracking a DHL eCommerce parcel with Peek
 
-[Peek](/) names DHL eCommerce at once for a GM number. For shared shapes, it asks the likely carriers at the same time (TNT for 16 digits, Austrian Post for a 9261 number, Colis Privé for 17 digits; USPS can't be asked). If only DHL eCommerce knows it, you're told. If several brands do, you pick with "Change", which accepts any 5 to 40 letters and digits for DHL eCommerce. Links from webtrack.dhlglobalmail.com, ecommerceportal.dhl.com work too, and dhl.com tracking links when the number has a DHL eCommerce shape.
+[Peek](/) names DHL eCommerce at once for a GM number. For shared shapes, it asks the likely carriers at the same time (TNT for 16 digits, plus Evri UK, Canada Post and Correos Express when the last digit checks out; Colis Privé for 17 digits; Austrian Post for a 9261 or 9361 number, then USPS's page last if neither knows it). If only DHL eCommerce knows it, you're told. If several brands do, you pick with "Change", which accepts any 5 to 40 letters and digits for DHL eCommerce. Links from webtrack.dhlglobalmail.com, ecommerceportal.dhl.com work too, and dhl.com tracking links when the number has a DHL eCommerce shape.
 
 Webtrack is asked first. When it doesn't list the parcel, Peek opens DHL's global tracking page on dhl.com, which takes longer and can fail when DHL blocks automated visits.
 

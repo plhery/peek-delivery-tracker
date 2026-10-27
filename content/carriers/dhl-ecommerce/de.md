@@ -3,7 +3,7 @@ title: DHL eCommerce Sendungsverfolgung: GM-Nummer, Status, Kontakt
 description: DHL-eCommerce-Paket verfolgen (früher DHL Global Mail): die GM-Nummer, was die englischen Status heißen, wer zustellt und wen du fragst, wenn es hängt.
 slug: dhl-ecommerce-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 DHL eCommerce ist der Bereich von DHL, der Pakete für große Online-Shops verschickt, oft aus den USA oder Asien. Es sortiert dein Paket in seinen eigenen Verteilzentren und übergibt es dann einem Zusteller im Zielland: der Post vor Ort oder einem anderen Paketdienst. Verfolgen kannst du es mit der Nummer aus der Versandmail des Shops auf Webtrack, der Tracking-Seite von DHL eCommerce, oder im Feld oben.
@@ -15,13 +15,13 @@ Laut DHL ist die Tracking-ID zwischen 10 und 39 Zeichen lang, Buchstaben und Zif
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
 | `GM0000000000000000` | GM und 16 bis 18 Ziffern: die GM-Nummer, die DHL auch Kundenbestätigungsnummer (Customer Confirmation Number) nennt. |
-| `00000000000000000` | 17 Ziffern: eine weitere Form von DHL eCommerce. |
+| `0000000000000000` | 16 oder 17 Ziffern: eine weitere Form von DHL eCommerce. |
 | `0031000000000000000000000000000` | 0031 und 27 Ziffern: ebenfalls DHL eCommerce. |
 | `9261000000000000000000` | 22 Ziffern mit 9261 oder 9361 vorne: eine Nummer im Format von USPS, für Pakete innerhalb der USA. |
 
 In Webtracks Detailbox steht unter „Delivery by“, welcher Paketdienst zustellt. Auf Webtrack kannst du bis zu 10 Nummern auf einmal eingeben, getrennt durch Kommas.
 
-Verwechslungsgefahr: 16 Ziffern können auch zu TNT oder Evri gehören, eine 9261-Nummer auch zu USPS. 14 Ziffern sind DHL eCommerce UK, ein eigenes Netz mit eigenem Tracking. [DHL Paket](carrier:dhl) und [DHL Express](carrier:dhl-express) nutzen wieder andere Formen, etwa `JJD…` bei DHL Paket. Mehr in [Sendungsnummer: welcher Paketdienst steckt dahinter](guide:tracking-number-formats).
+Verwechslungsgefahr: 16 Ziffern können auch zu TNT, Evri, Canada Post oder Correos Express gehören, eine 9261- oder 9361-Nummer auch zu USPS. 14 Ziffern sind DHL eCommerce UK, ein eigenes Netz mit eigenem Tracking. [DHL Paket](carrier:dhl) und [DHL Express](carrier:dhl-express) nutzen wieder andere Formen, etwa `JJD…` bei DHL Paket. Mehr in [Sendungsnummer: welcher Paketdienst steckt dahinter](guide:tracking-number-formats).
 
 ## DHL eCommerce Tracking: was die Status bedeuten
 
@@ -93,7 +93,7 @@ Verdächtige Nachricht? DHL eCommerce schreibt, dass DHL Online-Käufer nicht di
 
 ## DHL eCommerce mit Peek verfolgen
 
-[Peek](/) erkennt eine GM-Nummer sofort als DHL eCommerce. Bei Formen, die sich mehrere Paketdienste teilen, fragt Peek DHL eCommerce und die anderen wahrscheinlichen gleichzeitig: TNT bei 16 Ziffern, Colis Privé bei 17, die [Österreichische Post](carrier:austrian-post) bei einer 9261- oder 9361-Nummer (USPS lässt sich nicht fragen). Kennt nur DHL eCommerce die Nummer, steht da „DHL eCommerce hat dieses Paket.“ Kennen mehrere Marken die Nummer, wählst du mit „Ändern“, das für DHL eCommerce jede Folge aus 5 bis 40 Buchstaben und Ziffern annimmt. Links von webtrack.dhlglobalmail.com und ecommerceportal.dhl.com funktionieren auch, Tracking-Links von dhl.com nur, wenn die Nummer darin eine Form von DHL eCommerce hat.
+[Peek](/) erkennt eine GM-Nummer sofort als DHL eCommerce. Bei Formen, die sich mehrere Paketdienste teilen, fragt Peek DHL eCommerce und die anderen wahrscheinlichen gleichzeitig: TNT bei 16 Ziffern, bei passender Prüfziffer auch Evri UK, Canada Post und Correos Express; Colis Privé bei 17; die [Österreichische Post](carrier:austrian-post) bei einer 9261- oder 9361-Nummer, und kennen beide sie nicht, öffnet Peek zuletzt die Seite von USPS. Kennt nur DHL eCommerce die Nummer, steht da „DHL eCommerce hat dieses Paket.“ Kennen mehrere Marken die Nummer, wählst du mit „Ändern“, das für DHL eCommerce jede Folge aus 5 bis 40 Buchstaben und Ziffern annimmt. Links von webtrack.dhlglobalmail.com und ecommerceportal.dhl.com funktionieren auch, Tracking-Links von dhl.com nur, wenn die Nummer darin eine Form von DHL eCommerce hat.
 
 Gefragt wird zuerst Webtrack. Kennt Webtrack das Paket nicht, wird DHLs globale Tracking-Seite auf dhl.com geöffnet. Das dauert länger und kann scheitern, wenn DHL automatische Besuche blockiert.
 

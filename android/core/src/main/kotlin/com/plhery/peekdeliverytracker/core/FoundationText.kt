@@ -10,18 +10,18 @@ import kotlin.math.abs
 // Swift's String and Character behaviour the catalog relies on, on the JVM: a Swift String counts
 // grapheme clusters, and Foundation's character sets and Character properties have their own members.
 
-/** Foundation's `CharacterSet.whitespacesAndNewlines`: general category Z*, U+0009 to U+000D and U+0085. */
+/** Foundation's `CharacterSet.whitespacesAndNewlines`: `whitespaces`, U+000A to U+000D, U+0085, U+2028 and U+2029. */
 internal fun isWhitespaceOrNewline(scalar: Int): Boolean = when (scalar) {
-    in 0x09..0x0D, 0x85 -> true
-    else -> when (Character.getType(scalar).toByte()) {
-        Character.SPACE_SEPARATOR, Character.LINE_SEPARATOR, Character.PARAGRAPH_SEPARATOR -> true
-        else -> false
-    }
+    in 0x0A..0x0D, 0x85, 0x2028, 0x2029 -> true
+    else -> isWhitespaceScalar(scalar)
 }
 
-/** Foundation's `CharacterSet.whitespaces`: general category Zs and U+0009. */
+/**
+ * Foundation's `CharacterSet.whitespaces`: general category Zs, U+0009 and, as CoreFoundation still counts it,
+ * the zero width space U+200B.
+ */
 internal fun isWhitespaceScalar(scalar: Int): Boolean =
-    scalar == 0x09 || Character.getType(scalar).toByte() == Character.SPACE_SEPARATOR
+    scalar == 0x09 || scalar == 0x200B || Character.getType(scalar).toByte() == Character.SPACE_SEPARATOR
 
 /** Unicode's White_Space, which Swift's `Character.isWhitespace` reads on the first scalar. */
 internal fun hasWhiteSpaceProperty(scalar: Int): Boolean = when (scalar) {

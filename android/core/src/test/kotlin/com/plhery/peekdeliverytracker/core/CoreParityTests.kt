@@ -28,6 +28,13 @@ class CoreParityTests {
         assertEquals(listOf("peektracker.com"), AppConfiguration.linkHosts("PeekTracker.com, www.peektracker.com\r\n"))
     }
 
+    @Test
+    fun aZeroWidthSpaceIsWhitespaceToFoundation() {
+        assertEquals("AB 12", "​ AB 12​​".trimmingWhitespaces())
+        assertEquals("AB", "​\nAB​ ".trimmingWhitespacesAndNewlines())
+        assertEquals("᠎AB﻿", "᠎AB﻿".trimmingWhitespacesAndNewlines())
+    }
+
     /** An amount as the import charges line writes it: `formatted(.currency(code:).locale(_:))` on iOS. */
     private fun money(language: AppLanguage, code: String, amount: Double): String? {
         val localizer = Localizer()

@@ -261,8 +261,10 @@ do not know is still asked once a day. A younger label stands alone, and progres
 has shown stays (Older or regressing result, under Scenarios).
 
 When detection also lists Cainiao for the number (GoFo's `GFUS` numbers), Cainiao is asked
-before the providers for either answer. Its own movement, not behind the parcel's, files the
-parcel under Cainiao; its label alone or a miss leaves the rest to the providers.
+before the providers for either answer. Its own movement, not behind the parcel's, serves the
+check. When Cainiao names the filed carrier as its delivery partner, as for GoFo, its answer is
+the leg before that carrier, which stays filed and asked first; otherwise the parcel is filed
+under Cainiao. Its label alone or a miss leaves the rest to the providers.
 
 **Rate limits (429).** If the last successful retrieval is recent (under 1 h by day, 3 h
 overnight), the parcel keeps its progress and skips fallback until that window or the

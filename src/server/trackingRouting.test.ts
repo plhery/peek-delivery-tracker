@@ -1825,6 +1825,18 @@ describe('persistent tracking routing', () => {
         expect(universal).not.toHaveBeenCalled();
       });
 
+      it('serves Cainiao\'s leg before the filed carrier it names as its delivery partner, which stays filed', async () => {
+        fixedPlan('ParcelsApp');
+        const { router, direct, universal } = setup();
+        const leg = { ...journey(), discovered_carrier: undefined, delivery_carrier: 'gofo', delivery_tracking_number: 'GFUS01000000000001' };
+        direct.mockImplementation(async (_parcel, carrier) => carrier === 'gofo' ? label(undefined, 'gofo') : cainiao(leg));
+        const result = await router.fetch(gofo(), false);
+        expect(result.sourceCarrierId).toBe('aliexpress');
+        expect(result).not.toHaveProperty('correction');
+        expect(routingOf(result)).toMatchObject({ configured_carrier: 'gofo', confirmed_carrier: 'gofo' });
+        expect(universal).not.toHaveBeenCalled();
+      });
+
       it.each([
         ['holds a label of its own', () => cainiao({ ...label().result })],
         ['does not know the number', () => { throw new NotFoundError('aliexpress'); }],

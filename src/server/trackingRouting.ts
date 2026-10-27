@@ -1178,7 +1178,8 @@ export class TrackingRouter {
     }
     // Beside the filed carrier's partial answer or label alone, Cainiao, an aggregator, is asked for
     // the rest before the universals when detection lists it for the number (GoFo's GFUS numbers).
-    // Its movement, not a label of its own, files the parcel under it.
+    // Its movement, not a label of its own, serves the check: the leg before the filed carrier when it
+    // names that carrier as its delivery partner (GoFo), which stays filed, else filed under Cainiao.
     if (partialDirect && primary !== 'aliexpress' && detected.candidates.includes('aliexpress')) {
       const value = await tryDirect('aliexpress', true, undefined, true);
       if (value) return persistResult(value, 'aliexpress');

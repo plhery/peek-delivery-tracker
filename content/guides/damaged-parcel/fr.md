@@ -4,7 +4,7 @@ description: Colis abîmé ou cassé à la livraison ? Les photos à prendre, qu
 slug: colis-endommage-que-faire
 picture: Un carton cabossé au coin déchiré et au ruban adhésif qui se décolle, un téléphone qui le photographie au flash, et Pip, inquiet, un pansement collé sur lui.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Si ton colis arrive abîmé, photographie-le avant de continuer à le déballer, garde le carton et tout ce qu'il contient, et préviens le vendeur le jour même. Si tu l'as acheté à un professionnel en France ou en Belgique, l'article doit t'arriver en bon état : c'est au vendeur de te le remplacer ou de te rembourser, et de se retourner ensuite contre le transporteur. Si le carton arrive déjà écrasé, déchiré ou mouillé, tu peux le refuser, ou l'accepter en faisant noter les dégâts.
@@ -97,7 +97,7 @@ Prends-les avant de continuer à déballer. [UPS](carrier:ups) en demande trois,
 2. Un gros plan de l'étiquette avec le numéro de suivi.
 3. L'extérieur du carton, avec les dégâts.
 
-Vinted veut aussi l'emballage à l'intérieur et à l'extérieur, sous toutes ses faces, et le bordereau d'envoi. Amazon peut demander des photos, et veut que « les dommages apparaissent clairement sur la photo ». Ajoute ta facture : elle prouve ce que valait l'article.
+Vinted veut aussi l'emballage à l'intérieur et à l'extérieur, sous toutes ses faces, et le bordereau d'envoi. Ajoute ta facture : elle prouve ce que valait l'article.
 
 Ensuite, garde tout. La Poste suisse veut voir l'emballage et le rembourrage, et DPD Suisse te demande de conserver emballage et contenu jusqu'à trois mois après la livraison. En Belgique, jeter la boîte ne te fait pas perdre la garantie légale, rappelle le SPF Economie, mais elle reste utile au vendeur face au transporteur.
 
@@ -119,7 +119,7 @@ Si Vinted confirme les dommages, il annule la commande et te rembourse intégral
 
 Sur Leboncoin, la protection rembourse le prix de l'article avec Mondial Relay et Colissimo, et jusqu'à 400 € par colis avec Shop2Shop et Relais Colis, si tu le demandes entre le 6e et le 10e jour.
 
-Sur Amazon, passe par « Vos commandes », puis « Retourner ou remplacer des articles » à côté de l'article abîmé.
+Sur Amazon, les retours se gèrent depuis la page du service client. Si l'article vient d'un vendeur partenaire et que le problème n'a pas pu être réglé avec lui, la Garantie A à Z te permet de demander un remboursement à Amazon pour un article arrivé en mauvais état.
 
 Sur eBay, tu renvoies l'objet avec le bordereau de retour fourni par le vendeur et tu récupères son coût total, frais de livraison initiaux compris. Le vendeur et toi pouvez aussi convenir d'un remboursement partiel ou d'un remplacement.
 
@@ -150,5 +150,6 @@ Si le vendeur ne fait rien, ta banque ou PayPal peuvent aider. La rétrofacturat
 - [Vinted : Indemnisation des vendeurs](https://www.vinted.fr/help/1018) – plafonds par transporteur
 - [Leboncoin : Conditions générales](https://www.leboncoin.fr/dc/cgu) – 3 jours, refus, 6e au 10e jour, 400 €
 - [eBay.fr : Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 jours, accepter puis signaler, livraison organisée par l'acheteur, remboursement et retour
-- [Amazon.fr : Remplacer un article non conforme](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GP7Z9RS868ZP5J9F) – « Retourner ou remplacer des articles », photos où les dommages apparaissent
+- [About Amazon France : Comment contacter le service client Amazon ?](https://www.aboutamazon.fr/actualites/nos-boutiques/comment-contacter-le-service-client-amazon) – la gestion des retours sur la page du service client
+- [About Amazon France : Amazon étend les protections apportées par la Garantie A à Z en France](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – remboursement par Amazon si le vendeur partenaire n'a pas réglé le problème
 :::

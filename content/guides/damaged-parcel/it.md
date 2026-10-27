@@ -4,7 +4,7 @@ description: Pacco arrivato danneggiato o rotto? Le foto da fare, quando rifiuta
 slug: pacco-danneggiato-cosa-fare
 picture: Una scatola ammaccata con un angolo strappato e il nastro che si stacca, un telefono che la fotografa con il flash e Pip preoccupato, con un cerotto attaccato addosso.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Se il pacco arriva danneggiato o con il contenuto rotto, fotografalo prima di aprirlo del tutto, tieni la scatola e tutto quello che c'è dentro e scrivi al venditore il giorno stesso. In Italia, se hai comprato da un negozio, il venditore ti deve un articolo integro, e farsi pagare dal corriere è compito suo, non tuo. Se la scatola è già schiacciata, bucata o bagnata alla consegna, puoi rifiutarla, oppure accettarla con riserva e far annotare il danno. In Ticino muoviti ancora più in fretta: il Codice delle obbligazioni ti chiede di segnalare i difetti subito.
@@ -117,7 +117,7 @@ Se Vinted conferma che il danno è avvenuto durante la spedizione, ti rimborsa s
 
 Su Subito, se il pacco è aperto, danneggiato o bagnato alla consegna, devi rifiutarlo; Subito ti rimborsa con la Protezione Acquisti se hai aperto la contestazione con «Ho bisogno di aiuto» nella sezione Messaggi. Su eBay rendi l'articolo, con l'etichetta che ti dà il venditore, e ricevi il rimborso; oppure vi accordate per un rimborso parziale senza reso o per un oggetto sostitutivo.
 
-Su Amazon vai in «I miei ordini» e scegli «Restituisci o sostituisci articoli» accanto all'articolo; Amazon può chiederti foto in cui il danno si veda bene. Per gli articoli venduti e spediti da venditori terzi c'è anche la Garanzia dalla A alla Z.
+Su Amazon il reso parte dall'ordine, cliccando su «restituisci». Per gli articoli dei partner di vendita c'è anche la Garanzia dalla A alla Z: se non risolvi il problema con il venditore, puoi chiedere il rimborso direttamente ad Amazon.
 
 Se il venditore non ti aiuta, restano lo storno con la carta e la contestazione con PayPal: tempi e condizioni sono in [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -138,5 +138,6 @@ Se il venditore non ti aiuta, restano lo storno con la carta e la contestazione 
 - [Vinted: Politica di rimborso](https://www.vinted.it/help/465) – «Ho un problema», rimborso senza reso, conservare l'imballaggio
 - [Subito: Condizioni generali del servizio TuttoSubito](https://info.subito.it/policies/tutto-subito.htm) – 3 e 10 giorni, rifiuto obbligatorio, Protezione Acquisti, «Ho bisogno di aiuto»
 - [eBay.it: Garanzia cliente eBay](https://www.ebay.it/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 giorni, reso o rimborso parziale, spedizione organizzata dall'acquirente, pacco danneggiato da accettare, pacco rifiutato
-- [Amazon.it: Sostituire un articolo danneggiato, difettoso o rotto](https://www.amazon.it/gp/help/customer/display.html?nodeId=GP7Z9RS868ZP5J9F) – «Restituisci o sostituisci articoli», foto, Garanzia dalla A alla Z
+- [About Amazon Italia: Uno sguardo dietro le quinte al processo di gestione dei resi di Amazon](https://www.aboutamazon.it/notizie/sostenibilita/uno-sguardo-dietro-le-quinte-al-processo-di-gestione-dei-resi-di-amazon) – il reso parte da «restituisci» nell'ordine
+- [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – rimborso da Amazon se il problema con il partner di vendita resta aperto
 :::

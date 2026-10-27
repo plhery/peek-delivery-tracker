@@ -4,7 +4,7 @@ description: ¿Tu paquete ha llegado dañado o roto? Las fotos que debes hacer, 
 slug: paquete-danado-que-hacer
 picture: Una caja abollada con una esquina rota y la cinta despegándose, un móvil que le hace una foto con flash y Pip, preocupado, con una tirita pegada.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Si tu paquete llega dañado, hazle fotos antes de seguir desembalando, guarda la caja y todo lo que trae dentro, y avisa al vendedor ese mismo día. Si compraste a una empresa, la tienda te debe un producto en buen estado, y reclamar al transportista le toca a ella, no a ti. Si la caja ya llega aplastada, rota o mojada a tu puerta, puedes rechazarla, o aceptarla y dejar constancia del daño en el albarán.
@@ -91,7 +91,7 @@ Hazlas antes de mover nada. [UPS](carrier:ups) pide tres en su [página de recla
 2. Un primer plano de la etiqueta con el número de seguimiento.
 3. El exterior de la caja, con el daño a la vista.
 
-Vinted pide además fotos de todos los lados del embalaje, por dentro y por fuera, y de la etiqueta de envío. Amazon puede pedirte imágenes en las que «el daño se muestre claramente». Añade tu factura: si el envío llevaba seguro o valor declarado, Correos puede pedir un justificante del valor de la mercancía.
+Vinted pide además fotos de todos los lados del embalaje, por dentro y por fuera, y de la etiqueta de envío. Añade tu factura: si el envío llevaba seguro o valor declarado, Correos puede pedir un justificante del valor de la mercancía.
 
 Luego guárdalo todo. Vinted recomienda quedarte con el embalaje hasta que se resuelva tu solicitud, Wallapop te pide conservar el embalaje original con la etiqueta del transportista, y Correos mira si el embalaje era el adecuado antes de pagar.
 
@@ -112,7 +112,7 @@ En Wallapop, no confirmes que todo está bien si el producto llega dañado: conf
 
 Después Vinted lo investiga: «Si se confirma el daño, cancelaremos el pedido y te realizaremos un reembolso completo», sin devolver los artículos dañados. Si solo se dañó parte de un lote, pueden pedirte que devuelvas el lote completo.
 
-En Amazon, ve a «Mis pedidos», elige «Devolver o reemplazar productos» junto al producto y escoge el motivo. Si pides un reemplazo, devuelve el original antes de la «fecha de devolución» indicada para que no te cobren el reemplazo.
+En Amazon, entra en «Mis pedidos», selecciona el artículo y elige el motivo y el método de devolución. Ante cualquier problema con un pedido, Amazon dice que puedes contactar con atención al cliente para pedir un reemplazo o un reembolso.
 
 En eBay, puedes devolverlo, con el envío de vuelta a cargo del vendedor, para recibir el reembolso íntegro, o acordar con el vendedor un reembolso parcial o un artículo de sustitución.
 
@@ -131,5 +131,6 @@ Si el vendedor no lo soluciona, te quedan tu banco o PayPal, y las vías de cons
 - [Vinted: Política de reembolso](https://www.vinted.es/help/465) – «Tengo un problema», embalaje, reembolso sin devolver el artículo
 - [Wallapop: Condiciones de uso](https://about.wallapop.com/condiciones-de-uso/) – Protección Wallapop, 48 horas, embalaje y etiqueta
 - [eBay.es: Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – roto o dañado, 30 días, reembolso, envío del comprador, entrega rechazada
-- [Amazon.es: Reemplazar un producto dañado, defectuoso o roto](https://www.amazon.es/gp/help/customer/display.html?nodeId=GP7Z9RS868ZP5J9F) – «Mis pedidos», fotos, reemplazo
+- [About Amazon España: 15 cosas sobre Amazon que aún no sabías](https://www.aboutamazon.es/noticias/noticias-de-la-compania/15-cosas-sobre-amazon-que-aun-no-sabias) – devoluciones desde «Mis pedidos»: artículo, motivo y método
+- [About Amazon España: A un 62 % de los españoles no le importaría recibir sus pedidos online sin embalaje adicional](https://www.aboutamazon.es/noticias/sostenibilidad/a-un-62-de-los-espanoles-no-le-importaria-recibir-sus-pedidos-online-sin-embalaje-adicional) – atención al cliente para pedir un reemplazo o un reembolso
 :::

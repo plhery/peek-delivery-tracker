@@ -1781,6 +1781,39 @@ describe('persistent tracking routing', () => {
       }
     });
 
+    it('asks again 12 h after a round that adds no scan and a day after a second, and 6 h after a scan', async () => {
+      fixedPlan('ParcelsApp');
+      let routing: JsonObject | undefined;
+      // Whether a check at `at` asks the provider, the carrier answering `carrier` and the provider holding `held`.
+      const asks = async (at: string, carrier = label(), held: CarrierResult = label().result) => {
+        const check = setup(new Date(at));
+        check.direct.mockResolvedValue(carrier);
+        check.universal.mockResolvedValue(held);
+        const result = await check.router.fetch(ups(routing ? { carrier_data: { routing } } : {}), false);
+        expect(result).toMatchObject({ sourceCarrierId: 'ups', result: { current_stage: 'registered' } });
+        expect(check.direct).toHaveBeenCalledOnce();
+        routing = routingOf(result);
+        return check.universal.mock.calls.length > 0;
+      };
+      const more = (result: CarrierResult, time: string): CarrierResult => ({ ...result,
+        events: [...result.events!, { time, description: 'Label updated', stage: 'registered' }] });
+      const scanned = { ...label(), result: more(label().result, '2026-09-12T03:00:00Z') };
+      expect(await asks('2026-09-10T12:00:00Z')).toBe(true);
+      expect(await asks('2026-09-10T18:00:00Z')).toBe(false);
+      expect(await asks('2026-09-11T00:00:00Z')).toBe(true);
+      expect(await asks('2026-09-11T23:59:00Z')).toBe(false);
+      expect(await asks('2026-09-12T00:00:00Z')).toBe(true);
+      // The carrier's own scan brings the 6 h back.
+      expect(await asks('2026-09-12T05:59:00Z', scanned)).toBe(false);
+      expect(await asks('2026-09-12T06:00:00Z', scanned)).toBe(true);
+      expect(await asks('2026-09-12T12:00:00Z', scanned)).toBe(true);
+      expect(await asks('2026-09-12T23:59:00Z', scanned)).toBe(false);
+      // So does a scan a provider adds, though it shows no progress.
+      expect(await asks('2026-09-13T00:00:00Z', scanned, more(scanned.result, '2026-09-12T20:00:00Z'))).toBe(true);
+      expect(await asks('2026-09-13T06:00:00Z', scanned)).toBe(true);
+      expect(routing).toMatchObject({ partial_checked_at: '2026-09-13T06:00:00.000Z', label_rounds: { empty: 1 } });
+    });
+
     it.each([
       ['is behind the label', { ...journey(), events: [{ time: '2026-09-05T09:00:00Z', description: 'Departed facility', stage: 'in_transit' },
         { time: '2026-09-04T09:00:00Z', description: 'Picked up', stage: 'accepted' }] }],

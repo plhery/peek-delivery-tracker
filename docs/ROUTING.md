@@ -249,16 +249,19 @@ The filed carrier's partial answer, its status without scans or only its newest 
 (`summary_only`, `history_truncated`), stands unless a provider holds a fuller history that is
 not behind it, as the scraper's `fillPartialAnswer` decides. That history then takes the
 carrier's facts it lacks, such as the estimate. The carrier is still asked first on every
-check. While no provider holds more, the providers are asked again every 15 min by day and
-hourly overnight.
+check. While no provider holds more, the providers are asked again every 15 min by day and at
+most hourly overnight, when the parcel's checks are due hourly and made at least every 2 hours
+(Refresh cadence).
 
 The same holds for the filed carrier's own answer with the parcel's label alone, nothing past
 registration, once its earliest scan, else the day the parcel was added, is two days old: a
 carrier that takes the parcel over after a border may scan it only on its own leg, while
 providers follow the legs before. Only a provider's progress replaces that answer. While none
-has any, the providers are asked again every 6 h, each within its own backoff, so a number they
-do not know is still asked once a day. A younger label stands alone, and progress the parcel
-has shown stays (Older or regressing result, under Scenarios).
+has any, the providers are asked again 6 h after a round in which the carrier or a provider
+added a scan, 12 h after a round that added none and a day after a second such round
+(`routing.label_rounds`), each within its own backoff (a day for a number it does not know).
+The carrier is still asked on every check. A younger label stands alone, and progress the
+parcel has shown stays (Older or regressing result, under Scenarios).
 
 When detection also lists Cainiao for the number (GoFo's `GFUS` numbers), Cainiao is asked
 before the providers for either answer. Its own movement, not behind the parcel's, serves the

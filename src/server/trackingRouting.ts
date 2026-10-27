@@ -93,6 +93,11 @@ export interface RoutingState extends JsonObject {
    * progress beside its label alone (LABEL_WAIT).
    */
   partial_checked_at?: string;
+  /**
+   * The providers' last rounds beside the filed carrier's label alone: how many in a row added no
+   * scan (labelSpacing), and the most scans the carrier and a provider held at the last one.
+   */
+  label_rounds?: LabelRounds;
   /** The China Post preview whose fuller provider history was last fetched. The digest binds the lookup inputs and scraper rules too. */
   partial_history?: { fingerprint: string; provider: string; checked_at: string };
   /**
@@ -206,7 +211,10 @@ export function freshnessWindow(now: Date): number {
   const hour = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' }).hour;
   return hour >= 8 && hour < 22 ? HOUR : 3 * HOUR;
 }
-/** How often a parcel asks the universal providers: every 15 min by day, hourly overnight. */
+/**
+ * How often a parcel asks the universal providers: every 15 min by day, at most hourly overnight,
+ * when its checks are due hourly and made at least every 2 hours.
+ */
 function universalSpacing(now: Date): number {
   return freshnessWindow(now) === HOUR ? 15 * 60_000 : HOUR;
 }
@@ -215,12 +223,28 @@ const iso = (value: number): string => new Date(value).toISOString();
 /**
  * A filed carrier still answering with the parcel's label alone this long after it first listed
  * it may only scan the parcel once it reaches its own leg, while providers follow the legs before
- * it: they are asked too, as for a partial answer, every LABEL_SPACING while none shows progress.
+ * it: they are asked too, as for a partial answer, at labelSpacing while none shows progress.
  * A carrier that delivers at home scans most labels within a day; one that takes a parcel over
  * after a border, within days.
  */
 const LABEL_WAIT = 2 * DAY;
 const LABEL_SPACING = 6 * HOUR;
+interface LabelRounds { empty: number; carrier: number; providers: number }
+const scanCount = (result: CarrierResult): number => result.events?.length ?? 0;
+/**
+ * How long the providers wait after their last round beside the carrier's label alone: LABEL_SPACING,
+ * 12 h after a round that added no scan and a day after a second. A scan the carrier adds since, or
+ * one a provider added in that round, brings LABEL_SPACING back. The carrier is still asked every check.
+ */
+function labelSpacing(rounds: LabelRounds | undefined, carrierScans: number): number {
+  if (!rounds || rounds.empty === 0 || carrierScans > rounds.carrier) return LABEL_SPACING;
+  return rounds.empty === 1 ? 12 * HOUR : DAY;
+}
+/** The round just made, which no provider's progress served: `providers` is the most scans one held beside the label. */
+function labelRound(last: LabelRounds | undefined, carrier: number, providers: number): LabelRounds {
+  const added = carrier > (last?.carrier ?? carrier) || providers > (last?.providers ?? carrier);
+  return { empty: added ? 0 : Math.min(2, (last?.empty ?? 0) + 1), carrier, providers };
+}
 /** When an answer first listed the parcel: its earliest dated scan or update, else when the parcel was added. 0 when nothing dates it. */
 function listedSince(value: RoutedResult, addedAt: unknown): number {
   const zone = resultTimezone(value.sourceCarrierId, value.result);
@@ -507,7 +531,7 @@ export function earlierParcelRows(parcel: JsonObject): string[] | null {
 const KEPT_WITHOUT_EARLIER_PARCEL = ['lookup_country_hint', 'postcode_country', 'universal_input', 'add_recognition_pending', 'delivery_probe', 'earlier_checked_at'];
 /** Routing a reused number's earlier parcel taught: where its answers came from, its watermark and what filed or confirmed it. */
 const EARLIER_PARCEL_ROUTING = ['last_event_at', 'last_success_at', 'discovered_carrier', 'preferred_provider', 'preferred_number',
-  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'carrier_named_at', 'input_suggested'];
+  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested'];
 /**
  * The parcel as if it had never stored a reused number's earlier parcel (`earlierParcelRows`):
  * no stage, summary, estimate or rows of that parcel, nor the routing it taught, so the check
@@ -1097,7 +1121,9 @@ export class TrackingRouter {
       // Providers are asked for the rest at their own cadence, and on the next check after one held it.
       if (filed && isPartialAnswer(filed.result)) {
         if (sinceChecked >= universalSpacing(now())) partialDirect = { value: filed, carrier: primary };
-      } else if (filed && label && sinceChecked >= LABEL_SPACING) partialDirect = { value: filed, carrier: primary, label: true };
+      } else if (filed && label && sinceChecked >= labelSpacing(state.label_rounds, scanCount(filed.result))) {
+        partialDirect = { value: filed, carrier: primary, label: true };
+      }
       if (value && !partialDirect) return persistResult(value, primary);
     }
     // The filed carrier's answer, kept although its clocks are local: it
@@ -1414,6 +1440,8 @@ export class TrackingRouter {
     const needsProgress = PROGRESS_STAGES.has(rereadStage(parcel));
     let thinAnswer: { value: RoutedResult; source: UniversalSource } | undefined;
     let selected: { value: RoutedResult; source: UniversalSource } | undefined;
+    // The most scans a provider held beside the carrier's partial answer or label.
+    let fullest = 0;
     for (const source of ordered) {
       const value = await universal(source).catch((error: unknown) => {
         // A later cooldown cannot erase an answer already available to preserve.
@@ -1426,6 +1454,7 @@ export class TrackingRouter {
         const filled = fillPartialAnswer(declared, number, partialDirect.value.result, value.result);
         if (!filled) continue;
         value.result = filled;
+        fullest = Math.max(fullest, scanCount(filled));
       }
       // Beside the carrier's label, only progress serves the parcel.
       if ((needsProgress || partialDirect?.label) && !hasRoutingProgress(value.result)) {
@@ -1538,6 +1567,7 @@ export class TrackingRouter {
           provider: chosen, checked_at: now().toISOString(), kept: true };
         state.direct_retry_at = undefined;
         delete state.partial_checked_at;
+        delete state.label_rounds;
         state.last_probe_at ??= now().toISOString();
         state.discovery_cursor = 0;
         return persistResult(localDirectFallback.value, localDirectFallback.carrier);
@@ -1567,6 +1597,7 @@ export class TrackingRouter {
       if (partialDirect || (copied && !again) || unmoved) state.direct_retry_at = undefined;
       else if (localDirectFallback || !state.direct_retry_at) state.direct_retry_at = iso(now().getTime() + 6 * HOUR);
       delete state.partial_checked_at;
+      delete state.label_rounds;
       state.last_probe_at ??= now().toISOString();
       state.discovery_cursor = 0;
       // The carrier answered too: only its clock, a partial answer or its label alone sent the result elsewhere, so links stay with it.
@@ -1608,6 +1639,7 @@ export class TrackingRouter {
     }
     if (partialDirect) {
       state.partial_checked_at = now().toISOString();
+      if (partialDirect.label) state.label_rounds = labelRound(state.label_rounds, scanCount(partialDirect.value.result), fullest);
       return persistResult(partialDirect.value, partialDirect.carrier);
     }
     if (localDirectFallback) return keepLocal(localDirectFallback);

@@ -107,18 +107,21 @@ data class AppConfiguration(
     }
 }
 
-/** `URL.appending(path:)`: the component after the URL's path, with a slash between them. */
-private fun String.appendingPath(component: String): String {
-    val url = UrlComponents.parse(this) ?: return this
-    val path = url.path
-    url.path = (if (path.endsWith("/")) path else "$path/") + component
-    return url.url ?: this
-}
-
 internal val String.nonEmpty: String? get() = ifEmpty { null }
 
 /** Foundation's `uuidString`: upper case, which orders as the lower case form does. */
 internal val UUID.uuidString: String get() = toString().uppercase()
+
+private val uuidFormat = Regex("[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}")
+
+/**
+ * Foundation's `UUID(uuidString:)`: 8-4-4-4-12 hex digits in either case, nothing else. It reads the string as C
+ * does, so a NUL ends it.
+ */
+internal fun uuid(uuidString: String): UUID? {
+    val text = uuidString.substringBefore('\u0000')
+    return if (uuidFormat.matches(text)) UUID.fromString(text) else null
+}
 
 enum class AppLanguage(val rawValue: String) {
     En("en"), De("de"), Fr("fr"), It("it"), Es("es"), Pt("pt"), Pl("pl");

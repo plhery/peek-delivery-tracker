@@ -15,17 +15,37 @@ import java.nio.charset.CodingErrorAction
  */
 class UrlComponents private constructor(
     val scheme: String?,
-    private val percentEncodedUser: String?,
-    private val percentEncodedPassword: String?,
+    val percentEncodedUser: String?,
+    val percentEncodedPassword: String?,
     /** Nil when the URL has no authority. */
-    private val encodedHost: String?,
-    private val port: String?,
-    private var percentEncodedPath: String,
-    private var percentEncodedQuery: String?,
-    private val percentEncodedFragment: String?,
+    internal val encodedHost: String?,
+    /** The port as written, digits only but for `addressbook:`. */
+    internal val portString: String?,
+    percentEncodedPath: String,
+    percentEncodedQuery: String?,
+    percentEncodedFragment: String?,
     /** The string as read, until a setter changes a component. */
     private var parsedString: String?,
 ) {
+    /** Setting one takes it as it is, already encoded. */
+    var percentEncodedPath: String = percentEncodedPath
+        set(value) {
+            field = value
+            parsedString = null
+        }
+
+    var percentEncodedQuery: String? = percentEncodedQuery
+        set(value) {
+            field = value
+            parsedString = null
+        }
+
+    var percentEncodedFragment: String? = percentEncodedFragment
+        set(value) {
+            field = value
+            parsedString = null
+        }
+
     /** A host with a `%` is percent-decoded (`%00` kept); any other is IDNA-decoded, nil if that fails. */
     val host: String?
         get() {
@@ -38,12 +58,19 @@ class UrlComponents private constructor(
         get() = percentEncodedPath.removingUrlPercentEncoding() ?: ""
         set(value) {
             percentEncodedPath = encodedPath(value)
-            parsedString = null
         }
 
-    val query: String? get() = percentEncodedQuery?.removingUrlPercentEncoding()
+    var query: String?
+        get() = percentEncodedQuery?.removingUrlPercentEncoding()
+        set(value) {
+            percentEncodedQuery = value?.addingPercentEncoding(QUERY)
+        }
 
-    val fragment: String? get() = percentEncodedFragment?.removingUrlPercentEncoding()
+    var fragment: String?
+        get() = percentEncodedFragment?.removingUrlPercentEncoding()
+        set(value) {
+            percentEncodedFragment = value?.addingPercentEncoding(FRAGMENT)
+        }
 
     var queryItems: List<QueryItem>?
         get() {
@@ -62,19 +89,13 @@ class UrlComponents private constructor(
             }
         }
         set(items) {
-            percentEncodedQuery = items?.joinToString("&") { item ->
-                val name = item.name.addingPercentEncoding(QUERY_ITEM)
-                item.value?.let { "$name=${it.addingPercentEncoding(QUERY_ITEM)}" } ?: name
-            }
-            parsedString = null
+            percentEncodedQuery = items?.let(::encodedQuery)
         }
 
     /** `URLComponents.url`, as a string: nil when the parts make no URL. */
     val url: String?
         get() {
             parsedString?.let { return it }
-            val hasAuthority = encodedHost != null || port != null || percentEncodedUser != null ||
-                percentEncodedPassword != null
             if (hasAuthority) {
                 if (percentEncodedPath.isNotEmpty() && !percentEncodedPath.startsWith("/")) return null
             } else if (percentEncodedPath.startsWith("//")) {
@@ -88,12 +109,15 @@ class UrlComponents private constructor(
             if (percentEncodedUser != null || percentEncodedPassword != null) result.append('@')
             encodedHost?.let { result.append(it) }
             // The port as the number it reads, or as written when it is no number.
-            port?.let { result.append(':').append(it.toLongOrNull()?.toString() ?: it) }
+            portString?.let { result.append(':').append(it.toLongOrNull()?.toString() ?: it) }
             result.append(if (result.isEmpty()) pathWithoutSchemeColon() else percentEncodedPath)
             percentEncodedQuery?.let { result.append('?').append(it) }
             percentEncodedFragment?.let { result.append('#').append(it) }
             return result.toString()
         }
+
+    internal val hasAuthority: Boolean
+        get() = encodedHost != null || portString != null || percentEncodedUser != null || percentEncodedPassword != null
 
     /** A path that would start the URL encodes the colons of its first segment, which would read as a scheme. */
     private fun pathWithoutSchemeColon(): String {
@@ -125,7 +149,7 @@ class UrlComponents private constructor(
         private val HOST = USER
         private val IP_LITERAL = USER + ':'
         private val ZONE_ID = (ALPHANUMERIC + "-._~").toSet()
-        private val PATH = (ALPHANUMERIC + "!$&'()*+,-./:;=@_~").toSet()
+        internal val PATH = (ALPHANUMERIC + "!$&'()*+,-./:;=@_~").toSet()
         private val PATH_FIRST_SEGMENT = PATH - ':'
         private val QUERY = PATH + '?'
         private val FRAGMENT = QUERY
@@ -173,7 +197,8 @@ class UrlComponents private constructor(
                     },
                 )
             }
-            parts.port?.let { encoded.append(':').append(it) }
+            // The port as the number it reads ("0443" is 443); one past a 64-bit number, or none, is left out.
+            parts.port?.toLongOrNull()?.let { encoded.append(':').append(it) }
             encoded.append(if (invalidPath) encodedPath(parts.path) else parts.path)
             parts.query?.let { encoded.append('?').append(if (invalidQuery) it.addingPercentEncoding(QUERY) else it) }
             parts.fragment?.let {
@@ -188,12 +213,18 @@ class UrlComponents private constructor(
             percentEncodedUser = parts.user,
             percentEncodedPassword = parts.password,
             encodedHost = parts.host,
-            port = parts.port,
+            portString = parts.port,
             percentEncodedPath = parts.path,
             percentEncodedQuery = parts.query,
             percentEncodedFragment = parts.fragment,
             parsedString = string,
         )
+
+        /** The query `queryItems` sets: names and values encoded, `&` and `=` too. */
+        private fun encodedQuery(items: List<QueryItem>): String = items.joinToString("&") { item ->
+            val name = item.name.addingPercentEncoding(QUERY_ITEM)
+            item.value?.let { "$name=${it.addingPercentEncoding(QUERY_ITEM)}" } ?: name
+        }
 
         /** Splits a URL at its delimiters, as RFC3986Parser does: nil for a bad scheme or port, or text after an IP literal. */
         private fun split(string: String): Parts? {
@@ -375,6 +406,101 @@ class UrlComponents private constructor(
 
         private val String.utf8Length: Int get() = toByteArray(Charsets.UTF_8).size
     }
+}
+
+/**
+ * Foundation's URL, for the getters where it differs from URLComponents: `host` is percent-decoded but keeps its IDNA
+ * form and drops an IP literal's brackets, `user` is nil when it is not UTF-8, `password`, `query` and `fragment`
+ * stay percent-encoded, `path` loses its trailing slashes and is empty when it is not UTF-8, and `pathComponents`
+ * decodes each component on its own. A URL is the string `URL(string:)` reads, `absoluteString`.
+ */
+internal class Url private constructor(internal val components: UrlComponents) {
+    val absoluteString: String get() = components.url ?: ""
+    val scheme: String? get() = components.scheme
+    val user: String? get() = components.percentEncodedUser?.removingUrlPercentEncoding()
+    val password: String? get() = components.percentEncodedPassword
+
+    /** Nil without an authority, when the authority is empty ("http:///p"), or when the host is not UTF-8. */
+    val host: String?
+        get() {
+            val host = components.encodedHost ?: return null
+            if (host.isEmpty() && authorityIsEmpty) return null
+            val name = if (host.length >= 2 && host.startsWith("[") && host.endsWith("]")) host.substring(1, host.length - 1) else host
+            return name.removingUrlPercentEncoding(keepingNul = true)
+        }
+
+    private val authorityIsEmpty: Boolean
+        get() {
+            val string = absoluteString
+            val start = (components.scheme?.length?.plus(1) ?: 0) + 2
+            return start >= string.length || string[start] in "/?#"
+        }
+
+    /** `Int(port)`: nil past a 64-bit number. */
+    val port: Long? get() = components.portString?.toLongOrNull()
+
+    val path: String
+        get() {
+            val path = components.percentEncodedPath.removingUrlPercentEncoding() ?: return ""
+            var end = path.length
+            while (end > 1 && path[end - 1] == '/') end--
+            return path.substring(0, end)
+        }
+
+    /** "/" for a leading slash, then each component decoded ("" when it is not UTF-8). A last "/" is left out. */
+    val pathComponents: List<String>
+        get() {
+            val path = components.percentEncodedPath
+            val segments = path.split('/').filter { it.isNotEmpty() }
+            val result = mutableListOf<String>()
+            if (path.startsWith("/")) result += "/"
+            segments.mapTo(result) { it.removingUrlPercentEncoding() ?: "" }
+            if (path.endsWith("/") && segments.isNotEmpty()) result += "/"
+            if (result.size > 1 && result.last() == "/") result.removeAt(result.size - 1)
+            return result
+        }
+
+    val query: String? get() = components.percentEncodedQuery
+    val fragment: String? get() = components.percentEncodedFragment
+
+    companion object {
+        /** `URL(string:)`. */
+        fun parse(string: String): Url? = UrlComponents.parse(string)?.let(::Url)
+    }
+}
+
+/**
+ * `URL.appending(path:)` on a URL's string: the component percent-encoded after the path, one slash between them.
+ * The rest of the URL stays as written, its port too. The string as it was when it is no URL.
+ */
+internal fun String.appendingPath(component: String): String {
+    val url = UrlComponents.parse(this) ?: return this
+    val string = url.url ?: return this
+    val added = component.addingPercentEncoding(UrlComponents.PATH)
+    val path = url.percentEncodedPath
+    val joined = when {
+        path.isEmpty() -> if (url.hasAuthority && !added.startsWith("/")) "/$added" else added
+        path.endsWith("/") && added.startsWith("/") -> path + added.substring(1)
+        path.endsWith("/") || added.startsWith("/") -> path + added
+        else -> "$path/$added"
+    }
+    var pathStart = url.scheme?.length?.plus(1) ?: 0
+    if (string.startsWith("//", pathStart)) {
+        pathStart += 2
+        while (pathStart < string.length && string[pathStart] !in "/?#") pathStart++
+    }
+    val pathEnd = pathStart + path.length
+    return string.substring(0, pathStart) + joined + string.substring(pathEnd)
+}
+
+/**
+ * `URL.appending(queryItems:)` on a URL's string: the items after those it has, which are read and encoded again as
+ * `queryItems` does (a value that is not UTF-8 is lost).
+ */
+internal fun String.appendingQueryItems(items: List<UrlComponents.QueryItem>): String {
+    val url = UrlComponents.parse(this) ?: return this
+    url.queryItems = (url.queryItems ?: emptyList()) + items
+    return url.url ?: this
 }
 
 /** Foundation's `addingPercentEncoding(withAllowedCharacters:)`: UTF-8 bytes outside the set as %XX. */

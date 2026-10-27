@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.core
 
 import java.lang.reflect.Method
 import java.net.IDN
+import java.text.BreakIterator
 import java.text.Collator
 import java.text.NumberFormat
 import java.util.Currency
@@ -9,8 +10,9 @@ import java.util.Locale
 
 /**
  * The ICU services Foundation reads host names and sorts with, which a JVM has its own version of. A phone has
- * ICU (android.icu); a plain JVM has java.net.IDN, which is IDNA 2003, not UTS #46, and java.text.Collator,
- * which passes over spaces and punctuation. The tests install ICU4J here, so they see what a phone does.
+ * ICU (android.icu); a plain JVM has java.net.IDN, which is IDNA 2003, not UTS #46, java.text.Collator,
+ * which passes over spaces and punctuation, and a java.text.BreakIterator a Unicode version behind. The tests install
+ * ICU4J here, so they see what a phone does.
  */
 object Icu {
     /** UTS #46 host names, as Foundation's URL parser converts them. */
@@ -28,6 +30,10 @@ object Icu {
     /** Distances, which Foundation's measurement format style writes with ICU. */
     @Volatile
     var lengths: LengthFormatter = IcuLengths.from("android.icu") ?: JdkLengths
+
+    /** Extended grapheme clusters, which Swift's Characters are. */
+    @Volatile
+    var characterBreaks: CharacterBreaks = IcuCharacterBreaks.from("android.icu.text") ?: JdkCharacterBreaks
 }
 
 /** ICU's UTS #46 processing (`IDNA.nameToASCII`, `nameToUnicode`): the converted name and the `IDNA.Error`s met, by name. */
@@ -231,4 +237,49 @@ internal class IcuLengths private constructor(packageName: String) : LengthForma
 private object JdkLengths : LengthFormatter {
     override fun kilometres(value: Double, locale: Locale): String =
         NumberFormat.getIntegerInstance(locale).format(value) + "\u00A0km"
+}
+
+/** Where a string's Characters end: the UTF-16 offset after each one, in order, the last being the string's length. */
+fun interface CharacterBreaks {
+    fun ends(text: String): IntArray
+}
+
+/**
+ * ICU's character `BreakIterator`, found by name like `IcuHostNames`. It keeps a consonant, a virama and the next
+ * consonant together (Unicode 15.1), as Swift does. Its iterators keep a position, so each thread has its own.
+ */
+internal class IcuCharacterBreaks private constructor(packageName: String) : CharacterBreaks {
+    private val iteratorClass = Class.forName("$packageName.BreakIterator")
+    private val getCharacterInstance = iteratorClass.getMethod("getCharacterInstance", Locale::class.java)
+    private val setText = iteratorClass.getMethod("setText", String::class.java)
+    private val next = iteratorClass.getMethod("next")
+    private val done = iteratorClass.getField("DONE").getInt(null)
+    private val iterators = ThreadLocal.withInitial { getCharacterInstance.invoke(null, Locale.ROOT) }
+
+    override fun ends(text: String): IntArray {
+        val iterator = iterators.get()
+        setText.invoke(iterator, text)
+        return generateSequence { (next.invoke(iterator) as Int).takeIf { it != done } }.toList().toIntArray()
+    }
+
+    companion object {
+        fun from(packageName: String): IcuCharacterBreaks? = try {
+            IcuCharacterBreaks(packageName)
+        } catch (_: ReflectiveOperationException) {
+            null
+        } catch (_: LinkageError) {
+            null
+        }
+    }
+}
+
+/** java.text.BreakIterator, which on a JVM 21 follows Unicode 15.0 and splits a conjunct after its virama. */
+private object JdkCharacterBreaks : CharacterBreaks {
+    private val iterators = ThreadLocal.withInitial { BreakIterator.getCharacterInstance(Locale.ROOT) }
+
+    override fun ends(text: String): IntArray {
+        val iterator = iterators.get()
+        iterator.setText(text)
+        return generateSequence { iterator.next().takeIf { it != BreakIterator.DONE } }.toList().toIntArray()
+    }
 }

@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
 import java.math.BigDecimal
-import java.text.BreakIterator
 import java.text.Collator
 import java.text.Normalizer
 import java.util.Locale
@@ -52,22 +51,58 @@ internal fun String.trimmingWhitespacesAndNewlines(): String = trimmingScalars(:
 /** `trimmingCharacters(in: .whitespaces)`. */
 internal fun String.trimmingWhitespaces(): String = trimmingScalars(::isWhitespaceScalar)
 
-private val characterBreaks = ThreadLocal.withInitial { BreakIterator.getCharacterInstance(Locale.ROOT) }
-
 /** The string's Characters: its extended grapheme clusters. */
 internal fun String.characters(): List<String> {
     if (all { it.code < 0x80 && it != '\r' }) return map { it.toString() }
-    val breaks = characterBreaks.get()
-    breaks.setText(this)
-    val characters = mutableListOf<String>()
-    var start = breaks.first()
-    var end = breaks.next()
-    while (end != BreakIterator.DONE) {
-        characters += substring(start, end)
-        start = end
-        end = breaks.next()
+    var start = 0
+    return Icu.characterBreaks.ends(this).map { end -> substring(start, end).also { start = end } }
+}
+
+/**
+ * Swift's `hasPrefix`, which compares Characters: the prefix must end where a Character does, so "n=\u0301" does not
+ * start with "n=". For an ASCII prefix without CR.
+ */
+internal fun String.hasCharacterPrefix(prefix: String): Boolean {
+    if (!startsWith(prefix)) return false
+    if (length == prefix.length || this[prefix.length].code < 0x80) return true
+    return Icu.characterBreaks.ends(this).binarySearch(prefix.length) >= 0
+}
+
+/**
+ * Swift's `split(separator:)` on a String: pieces between the Characters that are the separator, empty pieces left out.
+ * A separator a combining mark follows ("&\u0301") is another Character, so it does not split.
+ */
+internal fun String.splitOnCharacter(separator: String): List<String> {
+    if (all { it.code < 0x80 }) return split(separator).filter { it.isNotEmpty() }
+    val pieces = mutableListOf<String>()
+    val piece = StringBuilder()
+    for (character in characters()) {
+        if (character == separator) {
+            if (piece.isNotEmpty()) pieces += piece.toString()
+            piece.setLength(0)
+        } else {
+            piece.append(character)
+        }
     }
-    return characters
+    if (piece.isNotEmpty()) pieces += piece.toString()
+    return pieces
+}
+
+/** Swift's `==` on Strings: canonically equivalent, as NFC compares them. */
+internal fun String.equalsCanonically(other: String): Boolean =
+    this == other || Normalizer.normalize(this, Normalizer.Form.NFC) == Normalizer.normalize(other, Normalizer.Form.NFC)
+
+/** Swift's `lowercased()`: each scalar's full lowercase mapping on its own, so a final Σ is σ, not ς. */
+internal fun String.lowercased(): String {
+    if (all { it.code < 0x80 }) return lowercase(Locale.ROOT)
+    val result = StringBuilder(length)
+    var index = 0
+    while (index < length) {
+        val scalar = codePointAt(index)
+        result.append(String(Character.toChars(scalar)).lowercase(Locale.ROOT))
+        index += Character.charCount(scalar)
+    }
+    return result.toString()
 }
 
 /** `String.count`. */

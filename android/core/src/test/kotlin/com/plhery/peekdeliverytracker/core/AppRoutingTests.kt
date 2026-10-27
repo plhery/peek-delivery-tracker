@@ -36,6 +36,15 @@ class AppRoutingTests {
         return value!!
     }
 
+    /**
+     * `URL(string:)!`. The routes take text and give nothing for text that is no URL, where the Swift test would trap,
+     * so a link a test expects nothing from must first be one.
+     */
+    private fun parsed(text: String): String {
+        assertNotNull(text, Url.parse(text))
+        return text
+    }
+
     /** `Dictionary(uniqueKeysWithValues:)` over the URL's query items, which traps on a repeated name. */
     private fun queryValues(components: UrlComponents): Map<String, String?> {
         val items = components.queryItems ?: emptyList()
@@ -74,7 +83,7 @@ class AppRoutingTests {
             "https://user@peektracker.com/invite#$code", "https://peektracker.com/invite#short",
             "http://peektracker.com/invite#$code", "peekdeliverytracker://auth-callback#$code",
         )) {
-            assertNull(text, inviteCode(from = text, baseUrl = base))
+            assertNull(text, inviteCode(from = parsed(text), baseUrl = base))
         }
     }
 
@@ -93,7 +102,7 @@ class AppRoutingTests {
         assertEquals(preview, inviteCode(from = "peekdeliverytracker://invite#$preview"))
         assertEquals(code, inviteCode(from = "peekdeliverytracker://invite#$code"))
         for (invalid in listOf("$base/i/short#$code", "$base/i/$preview/extra#$code", "https://evil.example/i/$preview#$code")) {
-            assertNull(invalid, inviteCode(from = invalid, baseUrl = base))
+            assertNull(invalid, inviteCode(from = parsed(invalid), baseUrl = base))
         }
     }
 
@@ -107,7 +116,7 @@ class AppRoutingTests {
         // A restored invitation keeps its code only while it is one.
         assertTrue(FriendInvitationLink.validCode(shortKey))
         // The sign-in callback is no invitation, so it leaves the pending one alone.
-        assertFalse(isInvitation(OAuthFlow.callbackUrl))
+        assertFalse(isInvitation(parsed(OAuthFlow.callbackUrl)))
         // A new invitation replaces it, and one with no valid code leaves nothing to restore.
         val replacement = "peekdeliverytracker://invite#" + "b".repeat(32)
         assertTrue(isInvitation(replacement))
@@ -154,8 +163,8 @@ class AppRoutingTests {
         // Another deployment answers on its own origin only, port included.
         val local = "http://localhost:3000"
         assertEquals(id, route("http://localhost:3000/p/$id", baseUrl = local)?.id)
-        assertNull(route("http://localhost:4000/p/$id", baseUrl = local))
-        assertNull(route("https://peektracker.com/p/$id", baseUrl = local, linkHosts = emptyList()))
+        assertNull(route(parsed("http://localhost:4000/p/$id"), baseUrl = local))
+        assertNull(route(parsed("https://peektracker.com/p/$id"), baseUrl = local, linkHosts = emptyList()))
 
         for (text in listOf(
             "https://evil.example/p/$id",
@@ -177,7 +186,7 @@ class AppRoutingTests {
             "peekdeliverytracker://user@p/$id",
             "otherapp://p/$id",
         )) {
-            assertNull(text, route(text, baseUrl = base))
+            assertNull(text, route(parsed(text), baseUrl = base))
         }
         // Lookalike characters are not in the alphabet, so a mistyped link is never sent.
         for (lookalike in listOf("0", "1", "I", "O", "l", "-", "_", "é")) {
@@ -190,10 +199,10 @@ class AppRoutingTests {
         assertTrue(ParcelLinkRoute.validId("uvwxyz222222"))
 
         // A parcel link is not an invitation, and the other routes leave it alone.
-        val link = "peekdeliverytracker://p/$id"
+        val link = parsed("peekdeliverytracker://p/$id")
         assertNull(NativeRoute(link))
         assertFalse(isInvitation(link, baseUrl = base))
-        assertFalse(isInvitation("https://peektracker.com/p/$id", baseUrl = base))
+        assertFalse(isInvitation(parsed("https://peektracker.com/p/$id"), baseUrl = base))
     }
 
     @Test
@@ -221,16 +230,16 @@ class AppRoutingTests {
             "http://delivery.plhery.com", "https://delivery.plhery.com:8443", "https://user@delivery.plhery.com",
             "https://delivery.plhery.com.evil.example", "https://old.delivery.plhery.com", "https://evil.example",
         )) {
-            assertNull(text, route("$text/p/$id", baseUrl = base, linkHosts = earlier))
-            assertNull(text, inviteCode(from = "$text/i/$preview", baseUrl = base, linkHosts = earlier))
-            assertFalse(text, SiteLink.belongs("$text/", baseUrl = base, linkHosts = earlier))
+            assertNull(text, route(parsed("$text/p/$id"), baseUrl = base, linkHosts = earlier))
+            assertNull(text, inviteCode(from = parsed("$text/i/$preview"), baseUrl = base, linkHosts = earlier))
+            assertFalse(text, SiteLink.belongs(parsed("$text/"), baseUrl = base, linkHosts = earlier))
         }
-        assertNull(route("https://delivery.plhery.com/p/$id", baseUrl = base, linkHosts = emptyList()))
-        assertNull(inviteCode(from = "https://delivery.plhery.com/i/$preview", baseUrl = base, linkHosts = emptyList()))
+        assertNull(route(parsed("https://delivery.plhery.com/p/$id"), baseUrl = base, linkHosts = emptyList()))
+        assertNull(inviteCode(from = parsed("https://delivery.plhery.com/i/$preview"), baseUrl = base, linkHosts = emptyList()))
         // The same paths and ids as on the site's own host, nothing more.
-        assertNull(route("https://delivery.plhery.com/p/$id/extra", baseUrl = base, linkHosts = earlier))
-        assertNull(inviteCode(from = "https://delivery.plhery.com/i/short", baseUrl = base, linkHosts = earlier))
-        assertFalse(isInvitation("https://delivery.plhery.com/", baseUrl = base, linkHosts = earlier))
+        assertNull(route(parsed("https://delivery.plhery.com/p/$id/extra"), baseUrl = base, linkHosts = earlier))
+        assertNull(inviteCode(from = parsed("https://delivery.plhery.com/i/short"), baseUrl = base, linkHosts = earlier))
+        assertFalse(isInvitation(parsed("https://delivery.plhery.com/"), baseUrl = base, linkHosts = earlier))
 
         // A link the app shares is always on the site's own host.
         assertEquals("https://peektracker.com/i/$preview", FriendInvitationLink.url(code = code, previewId = preview, baseUrl = base))
@@ -273,7 +282,7 @@ class AppRoutingTests {
     fun aParcelLinkCarriesItsNameOnlyAfterTheHash() {
         val base = "https://peektracker.com"
         val id = "k7Qm2xHd9RtW"
-        fun name(fragment: String): String? = route("https://peektracker.com/p/$id$fragment", baseUrl = base)?.name
+        fun name(fragment: String): String? = route(parsed("https://peektracker.com/p/$id$fragment"), baseUrl = base)?.name
         assertEquals("New sneakers", name("#n=New%20sneakers"))
         assertEquals("Café ☕", name("#n=Caf%C3%A9%20%E2%98%95"))
         assertEquals("Moon lamp", name("#x=1&n=Moon%20lamp"))
@@ -350,9 +359,9 @@ class AppRoutingTests {
 
     @Test
     fun rejectsMalformedOrUnrelatedDeepLinks() {
-        assertNull(NativeRoute("https://parcel/not-ours"))
-        assertNull(NativeRoute("peekdeliverytracker://parcel/not-a-uuid"))
-        assertNull(NativeRoute(OAuthFlow.callbackUrl))
+        assertNull(NativeRoute(parsed("https://parcel/not-ours")))
+        assertNull(NativeRoute(parsed("peekdeliverytracker://parcel/not-a-uuid")))
+        assertNull(NativeRoute(parsed(OAuthFlow.callbackUrl)))
     }
 
     @Test
@@ -394,9 +403,9 @@ class AppRoutingTests {
     @Test
     fun oAuthCodeOnlyAcceptsTheExpectedNativeCallback() {
         assertEquals("valid-code", OAuthFlow.authorizationCode(from = "peekdeliverytracker://auth-callback?code=valid-code"))
-        assertNull(OAuthFlow.authorizationCode(from = "peekdeliverytracker://other?code=valid-code"))
-        assertNull(OAuthFlow.authorizationCode(from = "https://auth-callback?code=valid-code"))
-        assertNull(OAuthFlow.authorizationCode(from = "peekdeliverytracker://auth-callback?code="))
+        assertNull(OAuthFlow.authorizationCode(from = parsed("peekdeliverytracker://other?code=valid-code")))
+        assertNull(OAuthFlow.authorizationCode(from = parsed("https://auth-callback?code=valid-code")))
+        assertNull(OAuthFlow.authorizationCode(from = parsed("peekdeliverytracker://auth-callback?code=")))
     }
 
     @Test

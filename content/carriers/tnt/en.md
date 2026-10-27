@@ -46,7 +46,7 @@ Track & Trace also shows when TNT expects the parcel to arrive and, once deliver
 
 ## TNT delivery: missed deliveries, redelivery and the depot
 
-TNT delivers to the recipient's address, to you or to someone who appears to be allowed to accept it for you. Its FAQ says it can't deliver to PO boxes and needs a full street address; its conditions allow PO boxes for certain international destinations, if the sender gives TNT your phone number.
+TNT delivers to the recipient's address, to you or to someone who appears to be allowed to accept it for you. Its FAQ says it can't deliver to PO boxes and needs a full street address; its conditions allow PO boxes for certain international destinations, if the sender gives TNT your phone number. Those conditions are TNT's for shipments sent from Europe: one sent from outside Europe is governed by the terms of the TNT company that accepted it.
 
 **Missed delivery.** The driver leaves a "We Missed You" card. TNT's FAQ says to use it with the Re-delivery Service to book another delivery or a pickup at the depot. No card, or no attempt yet? Contact TNT with the shipment number, the delivery address and the day you want. Redeliveries happen Monday to Friday only.
 
@@ -111,7 +111,7 @@ Redeliveries happen Monday to Friday only. Saturday delivery, where TNT offers i
 - [TNT: Track & Trace](https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html) – up to an hour, 90 days, two million shipments a month, reused numbers, missed delivery, Monday to Friday, proof of delivery
 - [TNT: Help Centre](https://www.tnt.com/express/en_gb/site/support.html) – number on the invoice, redelivery, UK phone and hours
 - [TNT: Frequently Asked Questions](https://www.tnt.com/express/en_gb/site/support/faq.html) – PO boxes, depot pickup, who claims, three weeks
-- [TNT: Terms and Conditions of Carriage for Europe](https://www.tnt.com/express/en_gb/site/terms-conditions.html) – delivery, PO boxes, Saturday, attempts, undeliverable parcels, customs, duties, 21-day claims
+- [TNT: Terms and Conditions of Carriage for Europe](https://www.tnt.com/express/en_gb/site/terms-conditions.html) – shipments from Europe only, delivery, PO boxes, Saturday, attempts, undeliverable parcels, customs, duties, 21-day claims
 - [TNT: Customs clearance](https://www.tnt.com/express/en_gb/site/how-to/clear-customs.html) – expected arrival on Track & Trace
 - [TNT: Advice on avoiding internet fraud](https://www.tnt.com/express/en_gb/site/support/fraud.html) – no escrow, reporting address
 - [TNT: Complaints charter](https://www.tnt.com/dam/tnt_express_media/tnt-local-pages/en_gb/support/fedex-complaints-charter-posterv4-2021.pdf) – UK complaints, 5 and 14 days

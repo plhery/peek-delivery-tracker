@@ -45,7 +45,7 @@ O Localizador também diz quando a TNT espera que a encomenda chegue e, depois d
 
 ## Entrega da TNT em Portugal: falhas, reentrega e armazém
 
-A TNT entrega na morada do destinatário, a ti ou a quem pareça ter autorização para receber por ti. Nas perguntas frequentes, a TNT diz que não entrega em caixas postais e que precisa de uma morada completa; as condições de transporte admitem apartados em certos destinos internacionais, se o remetente der à TNT o teu número de telefone.
+A TNT entrega na morada do destinatário, a ti ou a quem pareça ter autorização para receber por ti. Nas perguntas frequentes, a TNT diz que não entrega em caixas postais e que precisa de uma morada completa; as condições de transporte admitem apartados em certos destinos internacionais, se o remetente der à TNT o teu número de telefone. Essas condições são as da TNT para envios com origem na Europa: um envio vindo de fora da Europa rege-se pelas condições da empresa da TNT que o aceitou.
 
 **Não estavas em casa.** O motorista deixa um cartão «Não atendeu». Segundo as perguntas frequentes, é com ele que marcas no Serviço de Re-entrega da TNT outra entrega ou a recolha da encomenda no armazém. Sem cartão, ou se o motorista ainda não tentou entregar, contacta a TNT com a carta de porte, a morada de entrega e o dia que queres. As reentregas só se fazem de segunda a sexta-feira.
 
@@ -115,7 +115,7 @@ Para um envio para outro país, a TNT diz que depende do serviço pedido e dos l
 - [TNT Portugal: Localizador de envios](https://www.tnt.com/express/pt_pt/site/shipping-tools/tracking.html) – até uma hora, 90 dias, dois milhões de envios por mês, números reutilizados, cartão «Não atendeu», segunda a sexta, comprovativo de entrega, paletes
 - [TNT Portugal: Centro de Ajuda](https://www.tnt.com/express/pt_pt/site/support.html) – carta de porte na fatura, quem recebeu, reentrega, telefones e horário
 - [TNT Portugal: Perguntas frequentes](https://www.tnt.com/express/pt_pt/site/support/faq.html) – caixas postais, armazém, prazo de entrega, quem reclama, inspeção, três semanas
-- [TNT Portugal: Termos e Condições de Transporte da TNT para a Europa](https://www.tnt.com/express/pt_pt/site/terms-conditions.html) – entrega, apartados, sábado, tentativas, remessas não entregáveis, alfândega, direitos, 21 dias
+- [TNT Portugal: Termos e Condições de Transporte da TNT para a Europa](https://www.tnt.com/express/pt_pt/site/terms-conditions.html) – só envios com origem na Europa, entrega, apartados, sábado, tentativas, remessas não entregáveis, alfândega, direitos, 21 dias
 - [TNT Portugal: Serviços e sobretaxas adicionais](https://www.tnt.com/express/pt_pt/site/shipping-services/additional-services.html) – taxa de processamento de importação, taxa de desembolso, entrega ao fim de semana
 - [TNT Portugal: Recolha e entrega](https://www.tnt.com/express/pt_pt/site/shipping-services/additional-services/collection-delivery.html) – endereço errado, fim de semana a marcar
 - [TNT Portugal: Serviços de Desalfandegamento](https://www.tnt.com/express/pt_pt/site/shipping-services/additional-services/customs-services.html) – adiantamento de taxas aduaneiras e impostos

@@ -137,7 +137,7 @@ Podes, mas nenhuma das regras acima o exige para teres o reembolso. Um furto pod
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – vizinho, contacto
 - [InPost: Fala connosco](https://www.inpost.pt/fala-connosco) – aviso de chegada, cacifo vazio em 24 horas, perda total, remetente
 - [ANACOM: Serviços postais](https://www.anacom-consumidor.pt/faq-servicos-postais) – indemnização do remetente, limites, PSP e GNR
-- [About Amazon España: Diez cosas de Amazon que mejoran tu experiencia de compra (em espanhol)](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantia de A a Z nas compras a vendedores externos, prazo de entrega, reclamação à Amazon
+- [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día (em espanhol)](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantia de A a Z nas compras a vendedores externos, prazo de entrega, reclamação à Amazon
 - [eBay.es: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 dias, 3 dias úteis, 550 €, devolução de cargo
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 horas, 30 dias, estornos
 - [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/726) – 2 dias, cancelar o pedido

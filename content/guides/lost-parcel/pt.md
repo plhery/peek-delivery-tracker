@@ -123,7 +123,7 @@ Pagaste por transferência? Pede ao vendedor que reclame à transportadora e te 
 - [InPost: Fala connosco](https://www.inpost.pt/fala-connosco) – 5 e 30 dias, contacto com o remetente em 7 dias, seguro de 25 €, nível mais alto
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – contacto
 - [Correos: Extravío internacional](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales/extravio-internacional) – 1 DTS = 1,2119 € em 2026
-- [About Amazon España: Diez cosas de Amazon que mejoran tu experiencia de compra (em espanhol)](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantia de A a Z nas compras a vendedores externos, prazo de entrega, reclamação à Amazon
+- [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día (em espanhol)](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantia de A a Z nas compras a vendedores externos, prazo de entrega, reclamação à Amazon
 - [eBay.es: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 dias, 3 dias úteis, devolução de cargo
 - [eBay: Money Back Guarantee](https://www.ebay.com/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – pagamento no eBay, vendedores particulares
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 horas, 30 dias, greves e mau tempo

@@ -1069,7 +1069,7 @@ carrier or provider outage, and a scheduled sync that is missed, fails or passes
   incident. Several at once usually mean Peek's side: the network, Chromium, the database or
   a provider many carriers share.
 - **Peek scheduled sync slow**: a scheduled sync that finished in the last 2 hours took
-  over 5 minutes, half its limit.
+  over 7.5 minutes, three quarters of its limit. Overnight runs take 4 to 5 minutes.
 - **Peek stopped checking parcels**: no check has finished for 30 minutes between 09:00 and
   22:00 Zurich time, or for 2 hours otherwise, while Prometheus still reaches Peek. The
   scheduled sync can run without checking anything.

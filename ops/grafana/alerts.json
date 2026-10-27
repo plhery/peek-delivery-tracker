@@ -46,13 +46,13 @@
       "title": "Peek scheduled sync slow",
       "datasource": "metrics",
       "sql": "select now() as time, longest_scheduled_sync_2h as value from metrics.health",
-      "threshold": 300,
+      "threshold": 450,
       "for": "0s",
       "severity": "warning",
       "noDataState": "Alerting",
       "execErrState": "KeepLast",
-      "summary": "A scheduled sync took over 5 minutes, half its 10-minute limit.",
-      "description": "A scheduled sync that finished in the last two hours took more than 300 seconds. Daytime runs take seconds; overnight runs check more parcels and take up to a few minutes. Sentry's cron monitors report a sync that is missed, fails or passes 10 minutes; this warns before that. The sync_job_completed lines in Loki ({app=\"delivery-tracker\", event=\"sync_job_completed\"}) say how many parcels each run checked, and the dashboard's step durations which carrier is slow. Clears two hours after the last slow run."
+      "summary": "A scheduled sync took over 7.5 minutes, three quarters of its 10-minute limit.",
+      "description": "A scheduled sync that finished in the last two hours took more than 450 seconds. Daytime runs take seconds; overnight runs check up to 25 parcels an account and take 4 to 5 minutes, more when a provider is slow to fail. Sentry's cron monitors report a sync that is missed, fails or passes 10 minutes; this warns before that. The sync_job_completed lines in Loki ({app=\"delivery-tracker\", event=\"sync_job_completed\"}) say how many parcels each run checked, and the dashboard's step durations which carrier is slow. Clears two hours after the last slow run."
     },
     {
       "uid": "peek-checks-stopped",

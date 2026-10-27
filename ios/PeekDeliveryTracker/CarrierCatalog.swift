@@ -980,12 +980,13 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// Spanish, Italian and Portuguese name what the number tracks after a preposition ("N° de suivi",
     /// "número de seguimiento", "numero di tracciamento"), Polish after the word ("numer przesyłki"),
     /// and the tracking word can stand alone ("Suivi"), as can a courier's word for its waybill ("AWB",
-    /// "Guía"). An abbreviated "No." can follow the label ("AWB No."), and "N°" can touch its digits.
+    /// "Guía"). An abbreviated "No." can follow the label ("AWB No."). "N°", "Waybill" and "Tracking"
+    /// can touch their digits; no carrier's number starts with those words.
     private static let entryLabelPattern: String = {
         let tracked = "suivi|seguimiento|rastreo|tracciamento|rastreio|rastreamento|tracking|waybill|awb|guía|guia"
         return "^(?:\\p{L}+\\s+)?(?:(?:\\p{L}*(?:code|nummer)|number|numer|numero|número|numéro|nr|n\\.?[°º]|kod|codice|codigo|código)"
             + "(?:\\s+(?:(?:de|du|del|di|do|da)\\s+(?:\(tracked)|colis|envío|envio|spedizione)|przesyłki|paczki))?|\(tracked))"
-            + "(?:\\s+(?:no|nr)\\.)?(?:[.:#\\s]+|(?<=[°º]))(?=[0-9])([\\s\\S]*)"
+            + "(?:\\s+(?:no|nr)\\.)?(?:[.:#\\s]+|(?<=[°º]|waybill|tracking))(?=[0-9])([\\s\\S]*)"
     }()
 
     /// The number a short entry holds whole, groups a label prints apart included, as in

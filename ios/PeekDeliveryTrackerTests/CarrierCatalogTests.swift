@@ -777,6 +777,8 @@ final class CarrierCatalogTests: XCTestCase {
             ("Número de guía 12345678", "12345678"),
             ("Guía: 12345678", "12345678"),
             ("WAYBILL 1234567890", "1234567890"),
+            ("WAYBILL1234567890", "1234567890"),
+            ("Tracking1234567890", "1234567890"),
         ] {
             let parsed = catalog.parse(text)
             XCTAssertEqual(parsed.trackingNumber, number, text)
@@ -788,7 +790,7 @@ final class CarrierCatalogTests: XCTestCase {
             XCTAssertEqual(catalog.parse(text).source, TrackingInputMatch.Source.none, text)
         }
         // Letters a carrier prints apart from its digits stay on the number.
-        for text in ["QZX 123456", "ABCD 1234567", "LP 00123456789012", "1111 2222 3333 4444", "1Z 999 AA1 01 2345 6784", "abholcode123456"] {
+        for text in ["QZX 123456", "ABCD 1234567", "LP 00123456789012", "1111 2222 3333 4444", "1Z 999 AA1 01 2345 6784", "abholcode123456", "AWB1234567890"] {
             let parsed = catalog.parse(text)
             XCTAssertEqual(parsed.trackingNumber, text, text)
             XCTAssertEqual(parsed.source, .number, text)

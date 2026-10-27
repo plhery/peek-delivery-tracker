@@ -3263,6 +3263,22 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "canpar",
+      "requirements": [
+        {
+          "field": "dpdPostcode",
+          "whenTrackingNumber": "^[CDKLSUXZ][0-9]{8,20}$",
+          "validator": "internationalPostcode",
+          "optional": true,
+          "label": "Destination postal code",
+          "type": "text",
+          "placeholder": "A1A 1A1",
+          "help": "Optional. Canpar finds some shorter barcodes only with their destination postal code.",
+          "pattern": "^(?=.{3,12}$)(?=.*[0-9])[A-Za-z0-9]+(?:[ \\-][A-Za-z0-9]+)*$",
+          "maxLength": 12,
+          "inputMode": "text",
+          "autoComplete": "postal-code"
+        }
+      ],
       "recognitionRank": 780
     },
     "linkRules": [

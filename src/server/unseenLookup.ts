@@ -43,13 +43,19 @@ export function unseenIntervalHours(unseen: number, opened = false): number {
  * for its number yet: no carrier identified or recognised, no history and
  * nothing asked of the user. Null once one has. A parcel filed under a carrier
  * counts only while that carrier refuses its number as one it does not issue
- * (`carrier:refused_number`): asking it again changes nothing.
+ * (`carrier:refused_number`): asking it again changes nothing. So does a lookup
+ * without an account while its carrier's last answer is that it has not found
+ * the number or has no history for it, so it leaves the schedule as an unfiled
+ * one does; the carrier's outage is no answer.
  */
 export function unseenFor(parcel: JsonObject, now: Date): number | null {
-  const unfiled = ['unknown', 'intl-post'].includes(String(parcel.carrier)) || parcel.sync_error === REFUSED_NUMBER;
-  if (!unfiled || String(parcel.current_stage ?? 'pending') !== 'pending') return null;
-  const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+  if (String(parcel.current_stage ?? 'pending') !== 'pending') return null;
+  const carrier = String(parcel.carrier);
   const routing = routingState(parcel);
+  const unfiled = ['unknown', 'intl-post'].includes(carrier) || parcel.sync_error === REFUSED_NUMBER
+    || (parcel.one_off === true && ['not_found', 'no_history'].includes(routing.failures[carrier]?.kind ?? ''));
+  if (!unfiled) return null;
+  const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
   if (data.original_carrier || data.universal_input || routing.last_success_at || routing.last_event_at
     || routing.confirmed_carrier || routing.discovered_carrier || routing.input_needed || routing.provider_input_needed) return null;
   const added = Date.parse(String(parcel.created_at ?? ''));

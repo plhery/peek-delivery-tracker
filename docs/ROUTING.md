@@ -378,7 +378,9 @@ after the followed ones, once a carrier or provider has answered for its number:
 find its carrier, or the carrier that delivers it (Handoffs, below). Once its newest scan is
 more than 14 days old, followed or not, it is checked daily by day instead while no link was
 opened in the last hour and it has no alert on. One whose number nobody
-has seen 6 h after it was added leaves the schedule, followed or not, unless it has an alert on:
+has seen 6 h after it was added, or whose carrier's last answer is still that it has not found
+the number or has no history for it (the carrier's outage is no answer), leaves the schedule,
+followed or not, unless it has an alert on:
 then it is checked daily by day until 30 days after it was added. Opening a link still queues a
 check at its cadence, daily rather than weekly after 7 days, since someone is looking. With
 `TRACKING_ENABLE_SPARSE_LOOKUP_RECHECKS=true` (off by default), a release's re-check of one

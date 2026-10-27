@@ -44,6 +44,7 @@ import { UniversalTrackingError } from 'universal-parcel-scraper/node';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
 import { NOOP_RECORDER } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
+import { unseenFor } from './unseenLookup';
 import { BudgetExceededError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, SchemaError } from 'universal-parcel-scraper';
 import * as scraper from 'universal-parcel-scraper';
 import { doubled, s10 } from '../test/trackingNumbers';
@@ -3269,6 +3270,19 @@ describe('TrackingSyncService', () => {
     await expect(check([refused], '2026-09-09T11:30:00Z')).resolves.toBe(0);
     await expect(check([{ ...refused, id: 'filed', sync_status: 'waiting', sync_error: null }], '2026-09-09T11:30:00Z', true)).resolves.toBe(1);
     expect(isOpenedParcelSyncDue(refused, new Date('2026-09-09T16:00:00Z'))).toBe(true);
+    // So does one whose carrier's last answer is that it has not found the number, or has no history for it, while
+    // one whose carrier is down keeps the schedule, as does an account's parcel.
+    const notFound = (kind: string) => ({ ...refused, id: kind, sync_status: 'waiting', sync_error: null,
+      carrier_data: { routing: { version: 1, configured_carrier: 'chronodiali',
+        failures: { chronodiali: { count: 3, kind, retry_at: '2026-09-09T10:30:00Z' } } } } });
+    await expect(check([notFound('not_found')], '2026-09-09T14:30:00Z')).resolves.toBe(0);
+    await expect(check([notFound('no_history')], '2026-09-09T14:30:00Z')).resolves.toBe(0);
+    await expect(check([notFound('not_found')], '2026-09-09T16:00:00Z', true)).resolves.toBe(0);
+    await expect(check([notFound('not_found')], '2026-09-10T12:00:00Z', true)).resolves.toBe(1);
+    await expect(check([notFound('transport')], '2026-09-09T14:30:00Z')).resolves.toBe(1);
+    await expect(check([notFound('transport')], '2026-09-09T16:00:00Z', true)).resolves.toBe(1);
+    expect(unseenFor({ ...notFound('not_found'), one_off: false, user_id: 'a' }, new Date('2026-09-09T16:00:00Z'))).toBeNull();
+    expect(isOpenedParcelSyncDue(notFound('not_found'), new Date('2026-09-09T16:00:00Z'))).toBe(true);
     // Opening the link still queues a check every six hours, then daily.
     expect(isOpenedParcelSyncDue(unseen, new Date('2026-09-09T11:30:00Z'))).toBe(false);
     expect(isOpenedParcelSyncDue(unseen, new Date('2026-09-09T16:00:00Z'))).toBe(true);

@@ -8,14 +8,18 @@ import java.time.Instant
 import java.time.ZoneId
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.isActive
 import kotlinx.serialization.Required
 import kotlinx.serialization.Serializable
 
 // ReviewPrompt.swift. The system's prompt is the app's: Play In-App Review through `ReviewRequester`, where iOS asks
-// StoreKit's `requestReview`. `settled(session:store:links:invitation:)` comes with the stores it reads.
+// StoreKit's `requestReview`. `settled(session:store:links:invitation:)` comes with the stores it reads. The iPhone makes
+// a `ReviewPrompt()` at each use, in the zone the device is in then; this one reads `timeZone` at each use instead.
 
 /**
  * When Peek asks for a rating with the system's prompt, which the store shows only now and then: right after something
@@ -27,8 +31,8 @@ class ReviewPrompt(
     private val defaults: UserDefaults,
     /** The app's version name (`CFBundleShortVersionString` on iOS): each version asks once. */
     private val version: String,
-    /** The reader's zone, which their days are counted in. */
-    private val timeZone: ZoneId = ZoneId.systemDefault(),
+    /** The reader's zone, which their days are counted in: the device's at each use, as it moves with them. */
+    private val timeZone: () -> ZoneId = ZoneId::systemDefault,
     /**
      * Debug builds' `-sdt.debug.reviewDue YES` on iOS: every calm moment is the one to ask at, so that a run shows the
      * prompt. Never in a release.
@@ -96,7 +100,7 @@ class ReviewPrompt(
      * The calendar day of `date` where the reader is, as days since 1970: the day's date read in the reader's zone,
      * counted in UTC, where every day is as long as the next.
      */
-    private fun day(date: Instant): Long = date.atZone(timeZone).toLocalDate().toEpochDay()
+    private fun day(date: Instant): Long = date.atZone(timeZone()).toLocalDate().toEpochDay()
 
     private fun update(change: (Memory) -> Memory) {
         defaults.set(JsonEncoder().encode(Memory.serializer(), change(read())), forKey = key)
@@ -122,22 +126,49 @@ class ReviewPrompt(
         /**
          * Swift's `askingForReview(due:ready:take:)` modifier without its view: what its task does each time `due` or
          * `ready` changes. The screen runs it keyed on both (a `LaunchedEffect(due, ready)`), so that one that stops
-         * being ready waits to be again. `take` has the last word, and an ask is counted (`report`, the analytics
-         * action). Never from a tap: the store may show nothing, and a button that does nothing would be a broken one.
+         * being ready waits to be again. `ready` says the screen is in front of the reader with nothing over it, and
+         * that includes the screen being resumed, as the iPhone's includes `scenePhase == .active`. `take` has the last
+         * word, and an ask is counted (`report`, the analytics action). Never from a tap: the store may show nothing,
+         * and a button that does nothing would be a broken one.
+         *
+         * StoreKit's prompt needs nothing first; Play's needs its review info, which may not come (no Play Store or an
+         * outdated one, no connection, an app not installed from Play). It is fetched while the moment settles, and
+         * without it nothing is taken: the version keeps its ask and no month starts, as no ask reached the system.
          */
         suspend fun ask(due: Boolean, ready: Boolean, take: () -> Boolean, requester: ReviewRequester, report: (String) -> Unit) {
             if (!due || !ready) return
-            delay(settle)
-            if (!currentCoroutineContext().isActive || !take()) return
-            requester.requestReview()
+            val prepared = coroutineScope {
+                val prepared = async {
+                    try {
+                        requester.prepare()
+                    } catch (error: Exception) {
+                        currentCoroutineContext().ensureActive()
+                        false
+                    }
+                }
+                delay(settle)
+                prepared.await()
+            }
+            if (!currentCoroutineContext().isActive || !prepared || !take()) return
+            requester.launch()
             report("review-ask")
         }
     }
 }
 
-/** Shows the system's prompt for a rating, which may show nothing: Play In-App Review (StoreKit's `requestReview` on iOS). */
-fun interface ReviewRequester {
-    fun requestReview()
+/**
+ * Shows the system's prompt for a rating, which may show nothing: Play In-App Review (StoreKit's `requestReview` on
+ * iOS), in two steps.
+ */
+interface ReviewRequester {
+    /**
+     * Play's `requestReviewFlow()`: fetches the review info the prompt needs. False, or a throw, when there is none (no
+     * Play Store or an outdated one, no connection, an app not installed from Play); nothing is asked then.
+     */
+    suspend fun prepare(): Boolean
+
+    /** Play's `launchReviewFlow` with the info `prepare` fetched, once the ask is counted. Play may show nothing. */
+    fun launch()
 }
 
 /**

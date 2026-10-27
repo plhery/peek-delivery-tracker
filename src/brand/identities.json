@@ -1801,6 +1801,9 @@
   "pilot-freight": {
     "decal": "pilot-freight"
   },
+  "pin-ag": {
+    "decal": "pin-ag"
+  },
   "pitney-bowes": {
     "decal": "pitney-bowes"
   },
@@ -2407,6 +2410,9 @@
     "palette": {
       "accent": "#14192e"
     }
+  },
+  "tusk-logistics": {
+    "decal": "tusk-logistics"
   },
   "tws-express": {
     "decal": "tws-express",

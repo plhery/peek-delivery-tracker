@@ -75,10 +75,10 @@ class UrlComponentsTests {
         assertEquals("https://xn--zz.de/t/1", url("https://xn--zz.de/t/1"))
         assertNull(UrlComponents.parse("https://xn--zz.de/t/1")?.host)
         // ICU's UTF-8 reading, which Foundation uses, sees an empty last label after ASCII ones.
-        assertNull(UrlComponents.parse("https://a.﻿/"))
-        assertNull(UrlComponents.parse("https://DHL.DE.﻿#"))
-        assertEquals("ü.", UrlComponents.parse("https://ü.﻿/")?.host)
-        assertEquals("a.com", UrlComponents.parse("https://a﻿.com/")?.host)
+        assertNull(UrlComponents.parse("https://a.\uFEFF/"))
+        assertNull(UrlComponents.parse("https://DHL.DE.\uFEFF#"))
+        assertEquals("ü.", UrlComponents.parse("https://ü.\uFEFF/")?.host)
+        assertEquals("a.com", UrlComponents.parse("https://a\uFEFF.com/")?.host)
     }
 
     @Test
@@ -97,11 +97,11 @@ class UrlComponentsTests {
     @Test
     fun decodingDropsAByteOrderMarkThatStartsTheResult() {
         assertEquals("abc", UrlComponents.parse("https://h.com/x?%EF%BB%BFabc")?.query)
-        assertEquals("﻿abc", UrlComponents.parse("https://h.com/x?%EF%BB%BF%EF%BB%BFabc")?.query)
-        assertEquals("%41", UrlComponents.parse("https://h.com/x?﻿%41")?.query)
+        assertEquals("\uFEFFabc", UrlComponents.parse("https://h.com/x?%EF%BB%BF%EF%BB%BFabc")?.query)
+        assertEquals("%41", UrlComponents.parse("https://h.com/x?\uFEFF%41")?.query)
         assertEquals("é", UrlComponents.parse("HTTPS://%EF%BB%BF%C3%A9/")?.host)
         // String's own removingPercentEncoding keeps it.
-        assertEquals("﻿abc", "%EF%BB%BFabc".removingPercentEncoding())
+        assertEquals("\uFEFFabc", "%EF%BB%BFabc".removingPercentEncoding())
     }
 
     @Test

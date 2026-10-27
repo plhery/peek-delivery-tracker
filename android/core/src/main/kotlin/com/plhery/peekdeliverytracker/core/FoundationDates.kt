@@ -87,7 +87,7 @@ internal object FoundationDates {
         return fields to position
     }
 
-    private fun isBidiMark(char: Char): Boolean = char == '‎' || char == '‏' || char == '؜'
+    private fun isBidiMark(char: Char): Boolean = char == '\u200E' || char == '\u200F' || char == '\u061C'
 
     /** The characters a field lets stand in for the separator before it. */
     private fun ignorable(field: Field, code: Int): Boolean = hasWhiteSpaceProperty(code) || when (field) {
@@ -106,7 +106,7 @@ internal object FoundationDates {
             var index = start
             while (index < text.length && isBidiMark(text[index])) index++
             if (index < text.length && text[index] == literal) return index + 1
-            val found = if (index < text.length) text[index] else '￿'
+            val found = if (index < text.length) text[index] else '\uFFFF'
             if (!ignorable(next, literal.code) || !(ignorable(next, found.code) || Character.isLetter(found))) return null
         }
         var index = start

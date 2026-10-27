@@ -51,9 +51,9 @@ class CoreParityTests {
 
     @Test
     fun aZeroWidthSpaceIsWhitespaceToFoundation() {
-        assertEquals("AB 12", "​ AB 12​​".trimmingWhitespaces())
-        assertEquals("AB", "​\nAB​ ".trimmingWhitespacesAndNewlines())
-        assertEquals("᠎AB﻿", "᠎AB﻿".trimmingWhitespacesAndNewlines())
+        assertEquals("AB 12", "\u200B\u2000AB 12\u200B\u200B".trimmingWhitespaces())
+        assertEquals("AB", "\u200B\nAB\u200B\u2029".trimmingWhitespacesAndNewlines())
+        assertEquals("\u180EAB\uFEFF", "\u180EAB\uFEFF".trimmingWhitespacesAndNewlines())
     }
 
     /** An amount as the import charges line writes it: `formatted(.currency(code:).locale(_:))` on iOS. */
@@ -236,7 +236,7 @@ class CoreParityTests {
             "2026-Sep-27T10:00:00Z" to "2026-09-27T10:00:00Z",
             "2026-SEPTEMBER-27T10:00:00Z" to "2026-09-27T10:00:00Z",
             "２０２６-٠٩-27T10:00:00Z" to "2026-09-27T10:00:00Z",
-            "‎2026-09-27T10:00:00Z" to "2026-09-27T10:00:00Z",
+            "\u200E2026-09-27T10:00:00Z" to "2026-09-27T10:00:00Z",
             "2026-09-27T10:00:00.5Z" to "2026-09-27T10:00:00.500Z",
             "2026-09-27T10:00:00.123456Z" to "2026-09-27T10:00:00.123Z",
             "2026-09-27T1e1:00:00Z" to "2026-09-27T10:00:00Z",
@@ -272,8 +272,8 @@ class CoreParityTests {
             "2026-9-7" to "2026-09-07T00:00:00Z",
             " 2026-9-7" to "2026-09-07T00:00:00Z",
             "2026-9-7\t " to "2026-09-07T00:00:00Z",
-            "2026-9-7​" to "2026-09-07T00:00:00Z",
-            "2026-9-7　" to "2026-09-07T00:00:00Z",
+            "2026-9-7\u200B" to "2026-09-07T00:00:00Z",
+            "2026-9-7\u3000" to "2026-09-07T00:00:00Z",
             "2026-09-27x" to "2026-09-27T00:00:00Z",
             "2026/09/27" to "2026-09-27T00:00:00Z",
             "2026-Sep-7" to "2026-09-07T00:00:00Z",

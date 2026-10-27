@@ -6698,6 +6698,14 @@
 <url>
 <loc>https://peektracker.com/carriers/posta-srbije-serbian-post-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/posta-srbije-serbian-post-tracking" />
+<xhtml:link rel="alternate" hreflang="sr" href="https://peektracker.com/sr/carriers/posta-srbije-pracenje-posiljke" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/posta-srbije-serbian-post-tracking" />
+<lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/sr/carriers/posta-srbije-pracenje-posiljke</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/posta-srbije-serbian-post-tracking" />
+<xhtml:link rel="alternate" hreflang="sr" href="https://peektracker.com/sr/carriers/posta-srbije-pracenje-posiljke" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/posta-srbije-serbian-post-tracking" />
 <lastmod>2026-10-26</lastmod>
 </url>

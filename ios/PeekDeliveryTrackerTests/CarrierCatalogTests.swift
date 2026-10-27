@@ -738,6 +738,22 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(catalog.parse("Shipment tracking: delayed").source, TrackingInputMatch.Source.none)
     }
 
+    func testReadsAWaybillAndNoAmazonNumberAfterALabelWord() {
+        for text in [
+            "Your DHL waybill 1234567890 is ready",
+            "Waybill No. 1234567890 has shipped",
+            "AWB No. 1234567890",
+            "Tracking No. 1234567890",
+            "TRACKING NO. 1234567890",
+            "Your parcel No. 1234567890 has shipped",
+        ] {
+            let parsed = catalog.parse(text)
+            XCTAssertEqual(parsed.trackingNumber, "1234567890", text)
+            XCTAssertEqual(parsed.source, .text, text)
+            XCTAssertNotEqual(parsed.carrier.rawValue, "amazon-logistics", text)
+        }
+    }
+
     func testLeavesALabelWordOutOfAShortEntry() {
         for (text, number) in [
             ("Abholcode 123456", "123456"),

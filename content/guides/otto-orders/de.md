@@ -143,7 +143,7 @@ Du meldest die Rücksendung in „Mein Konto“ an und bekommst das Etikett als 
 
 ## Kann ich ein OTTO-Paket mit Peek verfolgen?
 
-Ja, mit der Sendungsnummer des Paketdienstes. Kopiere sie aus der Sendungsverfolgung in „Mein Konto“ und füge sie in [Peek](/) ein. Hermes-Nummern aus `H` und 16 bis 19 Ziffern erkennt Peek allein an der Form, ebenso DHL-Nummern aus `JJD` und 18 Ziffern und UPS-Nummern aus `1Z` und 16 Zeichen. Bei einer Form, die sich mehrere Dienste teilen, etwa 14 Ziffern bei Hermes und DPD oder 12 Ziffern bei DHL und GLS, fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, lässt Peek dich wählen; zeigt es den falschen, tippst du auf „Ändern“ und wählst den Paketdienst, den OTTO nennt.
+Ja, mit der Sendungsnummer des Paketdienstes. Kopiere sie aus der Sendungsverfolgung in „Mein Konto“ und füge sie in [Peek](/) ein. Hermes-Nummern aus `H` und 16 bis 19 Ziffern erkennt Peek allein an der Form, ebenso die meisten DHL-Nummern aus `JJD` und 18 Ziffern und UPS-Nummern aus `1Z` und 16 Zeichen. Bei einer Form, die sich mehrere Dienste teilen, etwa 14 Ziffern bei Hermes und DPD oder 12 Ziffern bei DHL und GLS, fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, lässt Peek dich wählen; zeigt es den falschen, tippst du auf „Ändern“ und wählst den Paketdienst, den OTTO nennt.
 
 Bringt Hermes deine Speditionsware zu zweit, wählst du mit „Ändern“ den Hermes Einrichtungs-Service: Seine Nummern erkennt Peek nie allein. Jedes Paket hat seine eigene Nummer, füg also jedes hinzu. OTTOs eigene Nummern, etwa deine Kundennummer, verfolgt Peek nicht.
 

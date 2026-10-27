@@ -136,7 +136,7 @@ Where the return's tracking number is and when the money comes: [returns trackin
 
 ## Can I track a Galaxus parcel in Peek?
 
-Yes, with the carrier's tracking number: paste it into [Peek](/). Peek recognises Swiss Post numbers by their shape alone: 18 digits starting `98` or `99`, or 2 letters, 9 digits and `CH`, like `RR000000005CH` (made up). It does the same for Planzer numbers of 13 digits starting `99990` or 20 digits starting `91346097`, and for DHL numbers made of `JJD` and 18 digits. When several carriers share a number shape, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier.
+Yes, with the carrier's tracking number: paste it into [Peek](/). Peek recognises Swiss Post numbers by their shape alone: 18 digits starting `98` or `99`, or 2 letters, 9 digits and `CH`, like `RR000000005CH` (made up). It does the same for Planzer numbers of 13 digits starting `99990` or 20 digits starting `91346097`, and for most DHL numbers made of `JJD` and 18 digits. When several carriers share a number shape, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier.
 
 For a merchant's, supplier's or haulage company's parcel, paste its number all the same: Peek follows more than 3,500 carriers. A merchant's item has its own number only if the merchant ships it with tracking. In the EU, when DHL hands your parcel to the local post and names it as the carrier taking over, Peek keeps the history from the start and follows the new carrier.
 

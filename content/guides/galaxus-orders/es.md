@@ -123,7 +123,7 @@ Dónde está el número de la devolución y cuándo llega el dinero: [seguimient
 
 ## ¿Puedo seguir un paquete de Galaxus en Peek?
 
-Sí, con el número del transportista: pégalo en [Peek](/). Peek reconoce los números de Swiss Post solo por la forma: 18 cifras que empiezan por `98` o `99`, o 2 letras, 9 cifras y `CH`, como `RR000000005CH` (inventado). Lo mismo con los de Planzer, de 13 cifras que empiezan por `99990` o 20 que empiezan por `91346097`, y con los de DHL formados por `JJD` y 18 cifras. Si varias empresas comparten la forma de un número, Peek pregunta a las probables y muestra la que lo conoce. Si lo conocen varias, pulsa «Elegir»; si muestra la que no es, pulsa «Cambiar» y elige la correcta.
+Sí, con el número del transportista: pégalo en [Peek](/). Peek reconoce los números de Swiss Post solo por la forma: 18 cifras que empiezan por `98` o `99`, o 2 letras, 9 cifras y `CH`, como `RR000000005CH` (inventado). Lo mismo con los de Planzer, de 13 cifras que empiezan por `99990` o 20 que empiezan por `91346097`, y con la mayoría de los de DHL formados por `JJD` y 18 cifras. Si varias empresas comparten la forma de un número, Peek pregunta a las probables y muestra la que lo conoce. Si lo conocen varias, pulsa «Elegir»; si muestra la que no es, pulsa «Cambiar» y elige la correcta.
 
 Con el paquete de un comerciante, de un proveedor o de una empresa de transportes, pega su número igualmente: Peek sigue a más de 3500 transportistas. Un artículo de un comerciante tiene su propio número solo si lo envía con seguimiento. En la UE, cuando DHL pasa el paquete al correo local y lo indica como nuevo transportista, Peek conserva el historial desde el principio y sigue al nuevo.
 

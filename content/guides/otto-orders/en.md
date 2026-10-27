@@ -150,7 +150,7 @@ You register the return in Mein Konto and get the label as a QR code or PDF. It'
 
 ## Can I track an OTTO parcel in Peek?
 
-Yes, with the carrier's tracking number. Copy it from the "Sendungsverfolgung" in Mein Konto and paste it into [Peek](/). Peek recognises Hermes numbers of `H` and 16 to 19 digits by their shape alone, as well as DHL numbers of `JJD` and 18 digits and UPS numbers of `1Z` and 16 characters. For a shape several carriers share, such as 14 digits at Hermes and DPD or 12 digits at DHL and GLS, Peek asks the likely carriers and shows the one that knows the number. If several know it, it asks you to choose; if it shows the wrong one, press "Change" and pick the carrier OTTO names.
+Yes, with the carrier's tracking number. Copy it from the "Sendungsverfolgung" in Mein Konto and paste it into [Peek](/). Peek recognises Hermes numbers of `H` and 16 to 19 digits by their shape alone, as well as most DHL numbers of `JJD` and 18 digits and UPS numbers of `1Z` and 16 characters. For a shape several carriers share, such as 14 digits at Hermes and DPD or 12 digits at DHL and GLS, Peek asks the likely carriers and shows the one that knows the number. If several know it, it asks you to choose; if it shows the wrong one, press "Change" and pick the carrier OTTO names.
 
 If Hermes brings your freight with two people, use "Change" to pick Hermes Einrichtungs-Service: Peek never recognises its numbers on its own. Each parcel has its own number, so add each one. OTTO's own numbers, such as your customer number, aren't tracking numbers, and Peek can't track them.
 

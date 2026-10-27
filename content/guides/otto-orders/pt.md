@@ -144,7 +144,7 @@ Registas a devolução em «Mein Konto» e recebes a etiqueta em código QR ou P
 
 ## Posso seguir uma encomenda OTTO no Peek?
 
-Sim, com o número da transportadora. Copia-o da «Sendungsverfolgung» em «Mein Konto» e cola-o no [Peek](/). O Peek reconhece só pela forma os números da Hermes com `H` e 16 a 19 algarismos, e também os números da DHL com `JJD` e 18 algarismos e os da UPS com `1Z` e 16 caracteres. Se uma forma for usada por várias transportadoras, como os 14 algarismos da Hermes e da DPD ou os 12 algarismos da DHL e da GLS, o Peek pergunta às transportadoras prováveis e mostra a que conhece o número. Se várias o conhecerem, pede-te que escolhas; se mostrar a errada, toca em «Alterar» e escolhe a que a OTTO indica.
+Sim, com o número da transportadora. Copia-o da «Sendungsverfolgung» em «Mein Konto» e cola-o no [Peek](/). O Peek reconhece só pela forma os números da Hermes com `H` e 16 a 19 algarismos, e também a maioria dos números da DHL com `JJD` e 18 algarismos e os da UPS com `1Z` e 16 caracteres. Se uma forma for usada por várias transportadoras, como os 14 algarismos da Hermes e da DPD ou os 12 algarismos da DHL e da GLS, o Peek pergunta às transportadoras prováveis e mostra a que conhece o número. Se várias o conhecerem, pede-te que escolhas; se mostrar a errada, toca em «Alterar» e escolhe a que a OTTO indica.
 
 Se a Hermes te entregar um artigo volumoso com duas pessoas, escolhe Hermes Einrichtungs-Service com «Alterar»: o Peek nunca reconhece os números dela sozinho. Cada pacote tem o seu número, por isso adiciona-os todos. Os números da própria OTTO, como o número de cliente, não são números de seguimento, e o Peek não os consegue seguir.
 

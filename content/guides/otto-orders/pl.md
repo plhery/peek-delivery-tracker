@@ -144,7 +144,7 @@ Zwrot zgłaszasz w „Mein Konto” i dostajesz etykietę jako kod QR albo PDF. 
 
 ## Czy mogę śledzić paczkę z OTTO w Peek?
 
-Tak, numerem przesyłki przewoźnika. Skopiuj go z „Sendungsverfolgung” w „Mein Konto” i wklej do [Peek](/). Numery Hermesa z `H` i 16–19 cyframi Peek rozpoznaje po samym kształcie, podobnie jak numery DHL z `JJD` i 18 cyframi oraz numery UPS z `1Z` i 16 znakami. Gdy kilka firm ma numery tego samego kształtu, jak 14 cyfr u Hermesa i DPD albo 12 cyfr u DHL i GLS, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, prosi cię o wybór; jeśli pokaże złego, naciśnij „Zmień” i wybierz przewoźnika, którego podaje OTTO.
+Tak, numerem przesyłki przewoźnika. Skopiuj go z „Sendungsverfolgung” w „Mein Konto” i wklej do [Peek](/). Numery Hermesa z `H` i 16–19 cyframi Peek rozpoznaje po samym kształcie, podobnie jak większość numerów DHL z `JJD` i 18 cyframi oraz numery UPS z `1Z` i 16 znakami. Gdy kilka firm ma numery tego samego kształtu, jak 14 cyfr u Hermesa i DPD albo 12 cyfr u DHL i GLS, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, prosi cię o wybór; jeśli pokaże złego, naciśnij „Zmień” i wybierz przewoźnika, którego podaje OTTO.
 
 Jeśli Hermes przywozi ci towar gabarytowy w dwie osoby, wybierz przez „Zmień” Hermes Einrichtungs-Service: jego numerów Peek nigdy nie rozpozna sam. Każda paczka ma własny numer, więc dodaj każdą. Własne numery OTTO, jak numer klienta, nie są numerami przesyłki i Peek ich nie śledzi.
 

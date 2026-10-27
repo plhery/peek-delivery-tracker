@@ -147,7 +147,7 @@ In Spain you have up to 60 days, well beyond the 14 days EU law requires. Return
 Yes, with the carrier's tracking number. Copy it from the tracking page and paste it into [Peek](/). Peek knows these by their shape alone:
 
 - Hermes: `H` and 16 to 19 digits
-- DHL: `JJD` and 18 digits
+- DHL: most numbers of `JJD` and 18 digits
 - Correos: `PR`, 15 digits and `C`
 - Paack: `PK` and 18 digits
 - Austrian Post: two letters, 9 digits and `AT`

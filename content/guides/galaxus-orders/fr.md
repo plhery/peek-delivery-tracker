@@ -121,7 +121,7 @@ Oui, avec le numéro du transporteur. Colle-le dans [Peek](/). Peek reconnaît c
 
 - La Poste suisse : 18 chiffres commençant par `98` ou `99`, ou deux lettres, 9 chiffres et `CH`
 - Planzer : 13 chiffres commençant par `99990`, ou 20 chiffres commençant par `91346097`
-- DHL : `JJD` suivi de 18 chiffres
+- DHL : la plupart des numéros `JJD` suivis de 18 chiffres
 
 Pour une forme que plusieurs transporteurs partagent, Peek interroge les transporteurs possibles et affiche celui qui connaît le numéro. S'ils sont plusieurs, touche « Choisir » ; s'il affiche le mauvais, touche « Changer » et choisis le bon.
 

@@ -123,7 +123,7 @@ Onde está o número da devolução e quando chega o dinheiro: [seguimento de de
 
 ## Posso seguir uma encomenda Galaxus no Peek?
 
-Sim, com o número da transportadora: cola-o no [Peek](/). O Peek reconhece os números dos correios suíços só pela forma: 18 algarismos a começar por `98` ou `99`, ou 2 letras, 9 algarismos e `CH`, como `RR000000005CH` (inventado). O mesmo com os da Planzer, de 13 algarismos a começar por `99990` ou 20 a começar por `91346097`, e com os da DHL feitos de `JJD` e 18 algarismos. Se várias transportadoras partilham a forma de um número, o Peek pergunta às prováveis e mostra a que o conhece. Se várias o conhecem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa.
+Sim, com o número da transportadora: cola-o no [Peek](/). O Peek reconhece os números dos correios suíços só pela forma: 18 algarismos a começar por `98` ou `99`, ou 2 letras, 9 algarismos e `CH`, como `RR000000005CH` (inventado). O mesmo com os da Planzer, de 13 algarismos a começar por `99990` ou 20 a começar por `91346097`, e com a maioria dos da DHL feitos de `JJD` e 18 algarismos. Se várias transportadoras partilham a forma de um número, o Peek pergunta às prováveis e mostra a que o conhece. Se várias o conhecem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa.
 
 Numa encomenda de um comerciante, de um fornecedor ou de uma transportadora de carga, cola o número na mesma: o Peek segue mais de 3500 transportadoras. Um artigo de um comerciante só tem número próprio se ele o enviar com seguimento. Na UE, quando a DHL passa a encomenda aos correios locais e os indica como nova transportadora, o Peek mantém o histórico desde o início e segue a nova transportadora.
 

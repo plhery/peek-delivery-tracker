@@ -120,7 +120,7 @@ Sì, con il numero del corriere. Incollalo in [Peek](/). Peek riconosce questi s
 - Posta Svizzera: 18 cifre che iniziano con `98` o `99`, oppure due lettere, 9 cifre e `CH`
 - Planzer: 13 cifre che iniziano con `99990`, oppure 20 cifre che iniziano con `91346097`
 - DHL Express: `JJD0146` e 14 cifre, oppure `JD01` e 16 cifre
-- DHL: gli altri numeri con `JJD` e 18 cifre
+- DHL: quasi tutti gli altri numeri con `JJD` e 18 cifre
 
 Se lo stesso formato appartiene a più corrieri, Peek interroga quelli probabili e ti mostra quello che conosce il numero. Se lo conoscono in tanti, tocca «Scegli»; se Peek mostra quello sbagliato, tocca «Cambia» e scegli quello giusto.
 

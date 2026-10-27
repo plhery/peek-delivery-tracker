@@ -61,7 +61,7 @@ Onde a lei local o permite, a TNT desalfandega ela própria os envios internacio
 
 A mesma tabela inclui, desde 3 de agosto de 2026, uma taxa de processamento de importação de 2,40 € por expedição vinda de um país fora da UE. A página não diz quem a paga: se ta pedirem, pergunta à TNT a que corresponde.
 
-Nas compras feitas fora da UE, as encomendas até 150 € pagam desde 1 de julho de 2026 um direito de 3 € por tipo de artigo. A partir de 1 de novembro de 2026, vai juntar-se a taxa de tratamento da União de 2 €. Quando a alfândega liberta a encomenda, o rastreio mostra `Customs has released the goods`. Vê [encomenda retida na alfândega](guide:customs).
+Nas compras feitas fora da UE, as encomendas até 150 € pagam desde 1 de julho de 2026 um direito de 3 € por tipo de artigo. A partir de 1 de novembro de 2026, junta-se a taxa de tratamento da União de 2 €. Quando a alfândega liberta a encomenda, o rastreio mostra `Customs has released the goods`. Vê [encomenda retida na alfândega](guide:customs).
 
 ## Encomenda TNT que não aparece, perdida, danificada ou dada como entregue
 

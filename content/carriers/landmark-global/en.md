@@ -3,7 +3,7 @@ title: Landmark Global tracking: statuses, partners and contacts
 description: Track a Landmark Global parcel: where the LTN number comes from, what its statuses mean, who delivers it in your country and who to ask when it stalls.
 slug: landmark-global-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Landmark Global carries online orders across borders for shops. It's part of Bnode, the Brussels group that also runs bpost, and it usually hands your parcel to a delivery company in your country for the last stretch. Track it with the Landmark Tracking Number (LTN) from the shop's confirmation email, on [Landmark's tracking site](https://track.landmarkglobal.com/) or by pasting it in the box above.
@@ -18,20 +18,20 @@ Landmark calls it the LTN, its "unique identifier created for every parcel to mo
 | `LTN123456789` | LTN and 9 digits: the same. |
 | `LTN123456789N1` | LTN, 9 digits and N1: the same, with Landmark's ending. |
 | `AB12345678` | The shop's order or package reference, which Landmark's tracking also accepts. |
-| Another carrier's number | The delivery partner's own number for the same parcel (Evri, Hermes, DPD…). |
+| Another carrier's number | The delivery partner's own number for the same parcel (Evri, UPS, bpost…). |
 
-Landmark's tracking page takes up to 25 numbers at once, separated by commas. Once Landmark has handled the parcel, the page lists a "Delivery Partner" with that company's own number and a link to its site, so one parcel can have two numbers.
+Landmark's tracking page takes up to 25 numbers at once, separated by commas. Once the delivery partner is known, the page lists it under "Delivery Partner" with that company's own number and a link to its site, so one parcel can have two numbers.
 
 An LTN with 7 or 10 digits, or an ending other than N1, isn't one of Landmark's shapes: check the email for a typo. More in [tracking number formats](guide:tracking-number-formats).
 
 ## Landmark Global tracking statuses explained
 
-Landmark's site has a language menu, but its scans are mostly in English: the German version keeps them in English, the French one translates Landmark's own scans, and the delivery partner's stay in the partner's words. The scans people see most, in the order a parcel meets them:
+Landmark's tracking site has a language menu, but Peek reads its English page, so these are the wordings Peek shows. Landmark's page in another language may word a step differently, and the delivery partner's scans keep the partner's own words. In the order a parcel meets them:
 
 | Landmark says | What it means for you |
 | --- | --- |
 | `Shipment Data Uploaded` | The shop has sent Landmark the parcel's details. Landmark doesn't have it yet. |
-| `Processed` | Landmark has the parcel at its facility. |
+| `Processed` | Landmark has processed the parcel. |
 | `Scanned at Landmark crossdock facility` | It's passing through a Landmark hub. |
 | `Transmitted customs information` | The customs data has been sent ahead. |
 | `Customs cleared` | Customs has let it through. |
@@ -41,33 +41,30 @@ Landmark's site has a language menu, but its scans are mostly in English: the Ge
 | `Out for Delivery` | It's with the driver today. |
 | `Item arrival at collection point for pick-up` | It's waiting for you at the local post's counter. |
 | `Delivered` | Delivered. |
-| `The item was successfully returned to the sender.` | It went back to the shop. |
 
-Above the history, Landmark shows a one-word summary: `Data Received`, `Shipped`, `In Transit`, `Complete`, `Delivery Issue` or `Returned`. `Complete` usually follows a delivery, but it also appears when the last scan is a parcel waiting at a collection point, so read the latest scan rather than the summary. `Returned` comes with a link to the return's own tracking.
-
-Once the delivery partner has the parcel, its scans appear in its own words: `Arrival from abroad` from a post, `Courier Received` or `Parcel delivered` from a courier. Evri's `Out For Delivery To Courier` means the depot has handed it to a courier; the delivery round comes after. `Customs cleared : awaiting payment` means duties or taxes are due before delivery.
+Once the delivery partner has the parcel, its scans appear in its own words. Evri's `Out For Delivery To Courier` means the depot has handed it to a courier, who confirms receipt before the delivery round. `Item deposited to local postal operator` means Landmark has handed the parcel to your country's post for the last stretch, not that it has been delivered.
 
 ## Landmark Global delivery: who brings it and missed parcels
 
-In most countries Landmark doesn't deliver itself. On live parcels, the partner was often Evri in the UK, Hermes in Germany, DPD in Austria and Apple Express, Landmark's sister company, in Canada; parcels to the US, Italy and other countries often show "Postal Carrier", meaning the national post, linked to bpost's international tracking. In Belgium, Landmark works with bpost. These are examples, not rules: the partner field on your parcel is what counts.
+In most countries Landmark doesn't deliver itself. Its own pages name some partners: bpost in Belgium, its sister company Apple Express in Canada, and DHL eCommerce and UPS in the US. Its UK page speaks of "multiple logistics partners" without naming them. Evri's hub and depot scans also turn up on Landmark parcels. These are examples, not rules: the partner named on your parcel is what counts.
 
-Notices, pickup points, holding times and redelivery follow that partner's rules, not Landmark's. If you're out, Landmark says to follow the driver's instructions or contact its customer service to reschedule or arrange pickup, adding that not every service offers redelivery or pickup. `Not Delivered - Addressee not present- Message left` is a post's scan for a missed attempt with a notice.
+Notices, pickup points, holding times and redelivery follow that partner's rules, not Landmark's. If you're out, Landmark says to follow the driver's instructions or contact its customer service to reschedule or arrange pickup, adding that not every service offers redelivery or pickup.
 
 Address changes: Landmark's European FAQ says once the parcel has a label, the address can no longer be changed. Its US and Canada page says a change depends on the shipping stage.
 
-For the partner's own rules, see the [Evri](carrier:evri), [Hermes](carrier:hermes-de) or [bpost](carrier:bpost) page.
+For the partner's own rules, see the [Evri](carrier:evri), [UPS](carrier:ups) or [bpost](carrier:bpost) page.
 
 ## Landmark Global parcel delayed, lost or returned
 
-**Stuck on `Shipment Data Uploaded`.** The shop has sent Landmark the parcel's details but Landmark hasn't received the parcel yet, and the partner reads "To Be Routed" until it does. Ask the shop when it was sent.
+**Stuck on `Shipment Data Uploaded`.** The shop has sent Landmark the parcel's details but Landmark hasn't received the parcel yet. Ask the shop when it was sent.
 
 **No update after handover.** Newer scans may appear only on the delivery partner's site, under the "Delivery Partner" link on Landmark's page. See [why tracking stops updating](guide:tracking-not-updating).
 
-**Lost, damaged or wrong item.** Landmark asks you to contact the seller, who can open an investigation and deal with Landmark. It offers insurance only to its direct customers, the shops. Act quickly: Landmark's EU terms give the shop 30 calendar days from Landmark's "accepted" scan to file a complaint.
+**Lost, damaged or wrong item.** Landmark asks you to contact the seller, who can open an investigation and deal with Landmark. It offers insurance only to its direct customers, the shops.
 
-**Customs.** Scans such as `Customs cleared : awaiting payment` or `Held by Customs - Unspecified reason` mean customs is involved. Landmark publishes nothing for recipients on duties; [parcels held at customs](guide:customs) explains what generally applies.
+**Customs.** Landmark publishes nothing for recipients on duties; [parcels held at customs](guide:customs) explains what generally applies.
 
-**Returned.** The page shows `Returned` with a link to the return's tracking. Ask the shop about a refund or a new shipment.
+**Returned.** A parcel sent back travels under a new reference: Landmark's page links to the return's own tracking, and Peek shows the parcel as "Returned to sender". Ask the shop about a refund or a new shipment.
 
 ## Landmark Global customer service and contact number
 
@@ -84,9 +81,9 @@ Landmark's general contact page is for business enquiries: tracking questions se
 
 It reads Landmark's English page, so wordings appear in English, partners' scans in their own words, and Landmark's delivered scans as "Delivered". It shows the status, the place of each step, the destination country and the delivery partner with its number, but no expected delivery date, and it leaves out order and package references and payment prompts.
 
-Landmark writes every scan time in US Central time. Peek reads them that way and lists Landmark's own history.
+Landmark writes every scan time in US Central time. Peek reads them that way, lists Landmark's own history and shows each time in your own time zone.
 
-When the partner is one Peek tracks directly, such as Evri, [Royal Mail](carrier:royal-mail), [USPS](carrier:usps) or [Canada Post](carrier:canada-post), the parcel can be followed there; its page then says "Delivery with" that carrier and lists the partner's number with a link. That doesn't happen for every parcel. Each scan goes on a map, and you can be notified of every scan, important steps or "Delivery day only".
+When the partner is one Peek tracks directly, such as Evri, UPS, bpost or Apple Express, the parcel can be followed there; its page then says "Delivery with" that carrier and lists the partner's number with a link. That doesn't happen for every parcel. Each scan goes on a map, and Peek can notify you of "All tracking updates", "Important only" or "Delivery day only".
 
 ## Questions about Landmark Global tracking
 
@@ -96,26 +93,22 @@ It's a cross-border shipping company for online shops, working with postal and d
 
 ### Is Landmark Global part of Canada Post?
 
-No. Landmark has been part of Bnode, bpost's group, since 2016. In Canada it works with its sister company Apple Express, and some parcels show a generic "Postal Carrier" instead.
+No. Landmark has been part of Bnode, bpost's group, since 2016. In Canada it hands parcels to its sister company Apple Express, also part of Bnode, which Landmark says covers 60% of the Canadian population.
 
 ### How long does Landmark Global take to deliver?
 
-Landmark says delivery times depend on the service the shop chose and the destination. Check the shop's shipping details or the tracking.
-
-### What does "To Be Routed" mean on Landmark Global tracking?
-
-The delivery partner hasn't been chosen yet, usually because Landmark has only the shop's data (`Shipment Data Uploaded`) and not the parcel. The partner appears once Landmark has handled it.
+Landmark says delivery times depend on the service the shop chose and the destination. Its page for shops sending to the US gives a standard 3 to 6 days. Check the shop's shipping details or the tracking.
 
 :::sources
 - [Landmark Global: Customer Support](https://landmarkglobal.com/eu/en/customer-support/) – LTN, shop first, missed delivery, address change, lost or damaged, insurance, delivery times, email, addresses
 - [Landmark Global: Customer Support Form (US and Canada)](https://landmarkglobal.com/us/en/customer-support-form/) – phone, hours, email, address changes
 - [Landmark Global: Contact](https://landmarkglobal.com/eu/en/contact/) – business enquiries only
-- [Landmark Global: Landmark Tracking](https://track.landmarkglobal.com/) – tracking, 25 numbers, language menu, statuses, delivery partner, returns
+- [Landmark Global: Landmark Tracking](https://track.landmarkglobal.com/) – tracking, 25 numbers, language menu
 - [Landmark Global: About us](https://landmarkglobal.com/eu/en/about-us/) – part of Bnode since 2016
 - [Landmark Global: Home](https://landmarkglobal.com/eu/en/) – what it does, partners, 220+ destinations
 - [Landmark Global: Parcel delivery to Belgium](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-belgium/) – bpost
-- [Landmark Global: Parcel delivery to Canada](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-canada/) – Apple Express
-- [Landmark Global: Parcel delivery to the UK](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-uk/) – no named partner
-- [Landmark Global: EU General Terms and Conditions 2025](https://landmarkglobal.com/uploads/no-index-files/EU-GTC-2025-V1-English.pdf) – 30-day complaint window for shops
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows
+- [Landmark Global: Parcel delivery to Canada](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-canada/) – Apple Express, part of Bnode, 60% of the population
+- [Landmark Global: Parcel delivery to the US](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-united-states/) – DHL E-Com, UPS, SurePost and UPS Ground; standard 3 to 6 days
+- [Landmark Global: Parcel delivery to the UK](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-uk/) – "multiple logistics partners", none named
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – statuses, Evri's scans, delivery partner, returns, scan times, what Peek reads and shows
 :::

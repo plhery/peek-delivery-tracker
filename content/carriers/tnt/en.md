@@ -58,7 +58,7 @@ TNT delivers to the recipient's address, to you or to someone who appears to be 
 
 Where local law allows, TNT clears international shipments through customs itself. It may pay duties and taxes for whoever owes them and charge a clearance fee for that, which varies by country. It can also ask for payment before it releases the parcel to you. The sender is ultimately responsible: if you refuse to pay, TNT may ask the sender, and if the sender doesn't pay either, the parcel may go back.
 
-For parcels bought from outside the EU and sent into the EU, a flat €3 customs duty per item type has applied since 1 July 2026 to consignments worth up to €150. From 1 November 2026, a €2 EU handling fee will apply too. The details, and the rules in other countries, are in [the customs guide](guide:customs).
+For parcels bought from outside the EU and sent into the EU, a flat €3 customs duty per item type has applied since 1 July 2026 to consignments worth up to €150. From 1 November 2026, a €2 EU handling fee applies too. The details, and the rules in other countries, are in [the customs guide](guide:customs).
 
 ## TNT parcel not showing, late, lost or damaged
 

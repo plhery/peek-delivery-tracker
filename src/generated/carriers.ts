@@ -2370,6 +2370,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0032a0"
     },
     {
+      "id": "tnt",
+      "catalog": "tnt",
+      "slug": "tnt-seguimiento",
+      "title": "TNT seguimiento: número de envío, estados y entrega",
+      "name": "TNT",
+      "color": "#ff6600"
+    },
+    {
       "id": "correios-br",
       "catalog": "correios-br",
       "slug": "correios-brasil-seguimiento",

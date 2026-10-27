@@ -89,7 +89,7 @@ O que fazer, por esta ordem:
 - Atenção ao prazo da plataforma | Abre um caso no eBay ou na Vinted antes de o prazo acabar.
 :::
 
-## Encomenda atrasada: quando reclamar no eBay ou na Vinted?
+## Encomenda atrasada: quando reclamar na Amazon, no eBay ou na Vinted?
 
 Uma plataforma pode devolver-te o dinheiro, mas só dentro do prazo dela:
 
@@ -97,6 +97,8 @@ Uma plataforma pode devolver-te o dinheiro, mas só dentro do prazo dela:
 | --- | --- | --- |
 | eBay | Quando passa a data de entrega prevista | 30 dias de calendário depois dela |
 | Vinted | Etiqueta gerada na Vinted: espera até 25 dias úteis desde `enviado`. Envio personalizado: aos 21 dias úteis, a compra é marcada como `entregue` | 2 dias depois do aviso da Vinted ou da marcação como entregue |
+
+Na Amazon.es, a Garantia de A a Z cobre também as compras a vendedores externos: se tiveres problemas com o prazo de entrega e não os conseguires resolver com o vendedor, podes reclamar diretamente à Amazon.
 
 Na Etsy, podes abrir um caso até 30 dias depois da data de entrega prevista; no AliExpress, uma disputa até 15 dias depois de acabar o prazo de entrega.
 
@@ -141,6 +143,8 @@ A encomenda pode ainda não ter sido lida, o número pode ser de outra transport
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – desalfandegamento
 - [DHL: Why are there delays?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – morada e etiqueta
 - [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – mau tempo, trânsito, acidentes, antes do Natal
+- [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día (em espanhol)](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantia de A a Z nas compras a vendedores externos, problemas com o prazo de entrega, reclamação à Amazon
+- [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales (em espanhol)](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – reclamar à Amazon quando o vendedor não resolve o problema
 - [eBay: Money Back Guarantee](https://www.ebay.co.uk/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 dias
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 30 dias
 - [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/658) – 5 e 7 dias úteis, 25, 21, 2 e 14 dias

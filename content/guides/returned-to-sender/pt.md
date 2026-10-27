@@ -59,6 +59,7 @@ Enquanto a encomenda ainda vem a caminho, fala com a loja. Nos CTT, se o envio e
 
 Normalmente, sim, quando ela chega à loja. As plataformas têm regras próprias:
 
+- **Amazon.es**: se a compraste a um vendedor externo e não conseguiste resolver o problema da entrega com ele, a Garantia de A a Z permite-te pedir o reembolso diretamente à Amazon.
 - **eBay**: a Money Back Guarantee do eBay devolve o preço e os portes de um artigo que não chegou à morada indicada na compra, mas não se deste uma morada errada, se o recusaste (a não ser por portes mal pagos pelo vendedor) ou se não pagaste os encargos de importação.
 - **Vinted**: quando o pedido passa a «A devolver ao remetente» e a Vinted confirma que a encomenda está a voltar, cancela a compra e dá-te um reembolso total, «o preço do artigo, incluindo as taxas de envio e as taxas da Vinted». Se quem vendeu não a receber, ou não a marcar como recebida, em 14 dias úteis, o reembolso começa sozinho. Sem dinheiro ao fim de 25 dias úteis, contacta a Vinted.
 
@@ -133,6 +134,7 @@ Nos Envios Online dos CTT, quando não é possível entregar nem devolver, a CTT
 - [UPS: Delivery Intercept](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – só o expedidor, taxas
 - [UPS: The package was returned to the sender](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – não recupera uma encomenda já devolvida
 - [União Postal Universal: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – menções em francês, devolução imediata, retenção, via menos prioritária, encargos, abandono
+- [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales (em espanhol)](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – a Garantia de A a Z cobre as compras a vendedores externos, reembolso pedido à Amazon se o vendedor não resolver
 - [eBay: Money Back Guarantee](https://www.ebay.com/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – o que está coberto
 - [Vinted: A encomenda foi devolvida ao remetente](https://www.vinted.pt/help/730) – reembolso total, motivos
 - [Vinted: A minha encomenda está a ser devolvida ao remetente](https://www.vinted.pt/help/1447) – 14 e 25 dias úteis

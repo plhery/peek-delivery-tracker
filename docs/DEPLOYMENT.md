@@ -263,7 +263,7 @@ in progress gets 10 s to end; a scheduled run stops before its next parcel. A jo
 finishes in time is done. Otherwise the check is aborted and logged and recorded as
 `interrupted`, and its job goes back to the queue without using up a retry; the
 replacement checks what is still due. Its first scheduled run starts after 8 s, unless
-one already ended in the current window (the even minute by day, the hour overnight). Next.js then drains HTTP requests. Time limits: 4 s
+one already ended in the current window (the even minute by day, the last :00, :20 or :40 overnight). Next.js then drains HTTP requests. Time limits: 4 s
 for an aborted check to stop, 18 s for the whole handoff, 500 ms for Sentry, 25 s
 overall, inside the platform's 30 s grace period.
 
@@ -355,8 +355,8 @@ See [OBSERVABILITY.md](OBSERVABILITY.md) for verification monitoring.
   minute are kept in memory and start again with each deploy; the daily ones are in the
   database. A write is refused when a browser says a page of another site sent it.
 - **Quotas** (enforced in the database): 50 active and 500 total parcels per account.
-  Scheduled sync processes at most five due parcels per account per run (25 in the hourly
-  overnight run), and ten followed without an account. Treat changes to these limits as security-sensitive.
+  Scheduled sync processes at most five due parcels per account per run (nine in the
+  overnight runs, every 20 minutes), and ten followed without an account. Treat changes to these limits as security-sensitive.
 - **Queue**: `public.sync_jobs`, deduplicated. Finished jobs are kept for 30 days.
 - **Backups**: back up Postgres independently and regularly test restoring Auth, parcels,
   events and push tables together.

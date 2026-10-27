@@ -165,7 +165,7 @@ it('closes the check-in of a scheduled run lost with its worker as an error, bef
   worker.start();
   await vi.advanceTimersByTimeAsync(1);
   worker.stop();
-  // Two hours back covers the hourly runs overnight.
+  // Two hours back covers several runs, 20 minutes apart overnight.
   expect(take).toHaveBeenCalledExactlyOnceWith(new Date(Date.now() - 2 * 60 * 60_000 - 1));
   expect(end.mock.calls).toEqual([[lostCheckIn, 'error'], [opened, 'ok']]);
   expect(end.mock.invocationCallOrder[0]).toBeLessThan(begin.mock.invocationCallOrder[0]!);

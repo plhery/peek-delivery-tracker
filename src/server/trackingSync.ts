@@ -70,11 +70,17 @@ import { storedPostcodeCountry } from '../lib/postcodeCountry';
 
 const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
 /**
- * Overnight one run comes an hour instead of one every 2 minutes, so it takes half the 50 parcels
- * an account can have open, the least recently checked first: each is checked at least every
- * 2 hours, and an account still gets fewer checks an hour than by day.
+ * Overnight a run comes every 20 minutes instead of every 2, so it takes 9 of an account's due
+ * parcels, the least recently checked first: 27 an hour, so each of the 50 parcels an account can
+ * have open is checked at least every 2 hours, and an account still gets fewer checks an hour than by day.
  */
-const MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC = 25;
+const MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC = 9;
+/**
+ * A scheduled run starts no check after this long. The parcels it leaves are still due, and the
+ * next run, 2 minutes later by day and 20 overnight, takes them; a run stays well inside the
+ * Sentry cron's 10 minutes, and checks queued meanwhile, such as a link opened, go between runs.
+ */
+const SCHEDULED_RUN_BUDGET_MS = 4 * 60_000;
 /** One-off parcels have no owner: a scheduled run checks this many of them, all together. */
 const MAX_ONE_OFF_PACKAGES_PER_SYNC = 10;
 /** A scheduled run rechecks at most this many accounts' parcels whose number nobody has answered (unseenRecheckDue). */
@@ -340,7 +346,7 @@ function deliveringToday(parcel: JsonObject, now: Date): boolean {
  * The start of the parcel's current hour, which opens at a minute of its own: the
  * parcels checked hourly or less often are spread over the hour rather than all due at
  * its start, so no run takes them all. Copies of one number open at the same minute
- * and still share their lookups. Overnight runs start on the hour and take every parcel
+ * and still share their lookups. Overnight a run comes every 20 minutes and takes every parcel
  * due, up to an account's share of the run (MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC).
  */
 function parcelHourStart(parcel: JsonObject, local: DateTime): DateTime {
@@ -1215,6 +1221,7 @@ export class TrackingSyncService {
       context.signal?.throwIfAborted();
       const summary = emptySyncSummary();
       const now = this.now();
+      const started = performance.now();
       const unwatched = await this.unwatchedPackages(now, context.signal);
       const active = await this.client.listActivePackages();
       const shared = await this.sharedAlertPackages(active, context.signal);
@@ -1239,6 +1246,10 @@ export class TrackingSyncService {
         // At shutdown the run stops between checks; its job goes back to the queue, and the
         // replacement checks the parcels still due.
         if (context.stopping?.aborted) throw context.stopping.reason;
+        if (performance.now() - started >= SCHEDULED_RUN_BUDGET_MS) {
+          logOperationalEvent('scheduled_sync_budget_reached', { checked: summary.checked, left: parcels.length - index });
+          break;
+        }
         // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck.
         if (rechecks.has(parcel) && !await this.uncheckedSinceListed(parcel, context.signal)) continue;
         // A merge earlier in the run removed the parcel or gave it the other leg: the next run checks it.

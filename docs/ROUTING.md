@@ -291,8 +291,8 @@ parcels followed without an account that nobody watches (below).
 
 A parcel checked hourly or less often has an hour of its own, opening at a minute its
 number gives, so by day those checks spread over the hour rather than all falling in its
-first runs; copies of one number open together and share their lookups. Overnight runs
-start on the hour and check every parcel due, up to an account's share (below). A carrier tracked only through its own browser, such
+first runs; copies of one number open together and share their lookups. Overnight a run
+comes every 20 minutes and checks every parcel due, up to an account's share (below). A carrier tracked only through its own browser, such
 as Royal Mail, fails every parcel alike while that browser is down or times out: once it
 fails that way in a run, the run's other checks take the same failure without asking it.
 
@@ -302,8 +302,9 @@ next run, is a parcel a provider just filed under a carrier with an adapter of i
 the check did not ask (an Add preflight's history skips confirming it): that carrier is asked
 without waiting the provider's 15 minutes, archived or delivered too (`carrier_named_at` in its
 routing, which that check clears and which lapses after 15 minutes). A scheduled run handles at most five due parcels
-per account, round-robin. Overnight, when one run comes an hour, it handles 25, half the 50 an account can have open,
-the least recently checked first: each is checked at least every 2 hours.
+per account, round-robin. Overnight, when a run comes every 20 minutes, it handles nine, the least recently checked
+first: 27 an hour, so each of the 50 an account can have open is checked at least every 2 hours. A run starts no
+check after 4 minutes; the next run takes the parcels it left, which are still due.
 
 **Someone is waiting** for a parcel while a notification can reach them: its account has
 browser or phone notifications or the delivery email on and the parcel is not muted for

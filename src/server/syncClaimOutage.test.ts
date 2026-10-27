@@ -292,12 +292,12 @@ describe('the scheduled sync at start', () => {
   }
 
   it('waits for the next run when one already finished in this window, such as after a deploy overnight', async () => {
-    // 04:30 in Zurich: overnight, the window is the hour.
-    const { runtime, enqueue } = starting(async () => new Date('2026-09-09T02:01:00Z'));
+    // 04:30 in Zurich: overnight, the window opened at 04:20.
+    const { runtime, enqueue } = starting(async () => new Date('2026-09-09T02:21:00Z'));
     await vi.advanceTimersByTimeAsync(8_000);
     expect(enqueue).not.toHaveBeenCalled();
-    expect(runtime.state.nextScheduledSync).toBe(Date.parse('2026-09-09T03:00:00Z') / 1_000);
-    await vi.advanceTimersByTimeAsync(30 * 60_000);
+    expect(runtime.state.nextScheduledSync).toBe(Date.parse('2026-09-09T02:40:00Z') / 1_000);
+    await vi.advanceTimersByTimeAsync(10 * 60_000);
     expect(enqueue).toHaveBeenCalledExactlyOnceWith({ scheduled: true });
   });
 

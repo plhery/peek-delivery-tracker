@@ -641,6 +641,8 @@ Key JSON events:
   them. Alert when they repeat for two minutes (`failing_for_ms` of 120000 or more).
   `sync_claim_recovered` follows with the first claim that works again and says how long
   the streak lasted;
+- `scheduled_sync_budget_reached`: a scheduled run reached its 4 minutes and left the rest
+  to the next run, with how many parcels it `checked` and how many it `left`;
 - `sync_job_completed` (by `job_id`): the job's `SyncSummary` counts
   ([contracts/openapi.json](../contracts/openapi.json)), with what each push channel sent
   (`web`, `native`, `live_activity`, `link_alert`) beside the `notifications_sent` total;
@@ -1069,7 +1071,8 @@ carrier or provider outage, and a scheduled sync that is missed, fails or passes
   incident. Several at once usually mean Peek's side: the network, Chromium, the database or
   a provider many carriers share.
 - **Peek scheduled sync slow**: a scheduled sync that finished in the last 2 hours took
-  over 7.5 minutes, three quarters of its limit. Overnight runs take 4 to 5 minutes.
+  over 7.5 minutes, three quarters of its limit. A run starts no check after 4 minutes, so
+  a run this long means a check took minutes.
 - **Peek stopped checking parcels**: no check has finished for 30 minutes between 09:00 and
   22:00 Zurich time, or for 2 hours otherwise, while Prometheus still reaches Peek. The
   scheduled sync can run without checking anything.

@@ -36,7 +36,7 @@ const MAX_IDLE_POLL_INTERVALS = 10;
 // the handoff waits at most 4 s for it to stop before returning its job to the queue.
 export const CHECK_FINISH_MS = 10_000;
 const ABORT_SETTLE_MS = 4_000;
-// Runs come every hour overnight: the next one still closes a lost run's check-in.
+// Runs come every 20 minutes overnight: several of the next ones can still close a lost run's check-in.
 const LOST_RUN_WINDOW_MS = 2 * 60 * 60_000;
 
 export interface BackgroundState {
@@ -60,25 +60,21 @@ function initialState(): BackgroundState {
   };
 }
 
-/** When the schedule's current window opened: the last even minute by day, the hour overnight. */
+/** Minutes between scheduled runs: every 2 by day, every 20 overnight. */
+function runMinutes(local: DateTime): number {
+  return local.hour >= 8 && local.hour < 22 ? 2 : 20;
+}
+
+/** When the schedule's current window opened: the last even minute by day, the last :00, :20 or :40 overnight. */
 export function syncWindowStart(now = new Date()): Date {
   const local = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' });
-  const start = local.hour >= 8 && local.hour < 22
-    ? local.startOf('minute').minus({ minutes: local.minute % 2 })
-    : local.startOf('hour');
-  return start.toJSDate();
+  return local.startOf('minute').minus({ minutes: local.minute % runMinutes(local) }).toJSDate();
 }
 
 export function secondsUntilNextSync(now = new Date()): number {
   if (!Number.isFinite(now.getTime())) throw new TypeError('Sync clock must be valid');
   const local = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' });
-  let candidate: DateTime;
-  if (local.hour >= 8 && local.hour < 22) {
-    const minutes = 2 - (local.minute % 2);
-    candidate = local.startOf('minute').plus({ minutes });
-  } else {
-    candidate = local.startOf('hour').plus({ hours: 1 });
-  }
+  const candidate = local.startOf('minute').plus({ minutes: runMinutes(local) - (local.minute % runMinutes(local)) });
   return Math.max(1, candidate.toUTC().diff(local.toUTC(), 'seconds').seconds);
 }
 

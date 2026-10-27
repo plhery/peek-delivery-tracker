@@ -572,15 +572,16 @@ describe('fair scheduling', () => {
     expect(() => fairSyncPackages(packages, 0)).toThrow('positive');
   });
 
-  it('aligns daytime checks to two minutes and overnight checks to the hour', () => {
+  it('aligns daytime checks to two minutes and overnight checks to 20 minutes', () => {
     expect(secondsUntilNextSync(new Date('2026-07-15T07:03:30Z'))).toBe(30);
     expect(secondsUntilNextSync(new Date('2026-07-15T07:04:00Z'))).toBe(120);
     expect(secondsUntilNextSync(new Date('2026-07-15T19:59:30Z'))).toBe(30);
-    expect(secondsUntilNextSync(new Date('2026-07-15T20:00:00Z'))).toBe(3_600);
-    // The window a run belongs to opened at the last even minute by day, at the hour overnight.
+    expect(secondsUntilNextSync(new Date('2026-07-15T20:00:00Z'))).toBe(1_200);
+    // The window a run belongs to opened at the last even minute by day, at the last :00, :20 or :40 overnight.
     expect(syncWindowStart(new Date('2026-07-15T07:03:30Z'))).toEqual(new Date('2026-07-15T07:02:00Z'));
-    expect(syncWindowStart(new Date('2026-07-15T20:30:00Z'))).toEqual(new Date('2026-07-15T20:00:00Z'));
-    expect(secondsUntilNextSync(new Date('2026-07-15T20:15:00Z'))).toBe(2_700);
+    expect(syncWindowStart(new Date('2026-07-15T20:30:00Z'))).toEqual(new Date('2026-07-15T20:20:00Z'));
+    expect(secondsUntilNextSync(new Date('2026-07-15T20:15:00Z'))).toBe(300);
+    expect(secondsUntilNextSync(new Date('2026-07-16T05:50:00Z'))).toBe(600);
     expect(() => secondsUntilNextSync(new Date('invalid'))).toThrow('valid');
   });
 
@@ -7652,7 +7653,7 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     expect(client.getPackage.mock.calls.map(([id]) => id)).toEqual(['b1', 'c1', 'b2']);
   });
 
-  it('takes five of an account\'s parcels a run by day, and 25 in the hourly run overnight', async () => {
+  it('takes five of an account\'s parcels a run by day, and nine in a run overnight', async () => {
     const parcel = (id: string, user: string): JsonObject => ({ id, user_id: user, one_off: false, carrier: 'swiss-post',
       current_stage: 'in_transit', tracking_number: `TEST${id}`, created_at: '2026-09-03T09:00:00Z', last_synced_at: null,
       sync_status: 'ok', archived_at: null });
@@ -7660,7 +7661,23 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     const parcels = [...theirs, parcel('b0', 'b')];
     // 12:00 and 01:00 in Zurich.
     await expect(checked(parcels, '2026-09-04T10:00:00Z')).resolves.toEqual(['a0', 'b0', 'a1', 'a2', 'a3', 'a4']);
-    await expect(checked(parcels, '2026-09-04T23:00:00Z')).resolves.toEqual(['a0', 'b0', ...theirs.slice(1, 25).map(({ id }) => id)]);
+    await expect(checked(parcels, '2026-09-04T23:00:00Z')).resolves.toEqual(['a0', 'b0', ...theirs.slice(1, 9).map(({ id }) => id)]);
+  });
+
+  it('starts no check once a run has taken four minutes, and leaves the rest to the next run', async () => {
+    let elapsed = 0;
+    vi.spyOn(performance, 'now').mockImplementation(() => elapsed);
+    const logged = vi.spyOn(observability, 'logOperationalEvent').mockImplementation(() => undefined);
+    const parcels = ['a', 'b', 'c'].map((user): JsonObject => ({ id: user, user_id: user, one_off: false, carrier: 'swiss-post',
+      current_stage: 'in_transit', tracking_number: `TEST${user}`, created_at: '2026-09-03T09:00:00Z', last_synced_at: null,
+      sync_status: 'ok', archived_at: null }));
+    const client = fakeClient(parcels);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockImplementation(async () => { elapsed += 2 * 60_000; return { status: 'in_transit' }; }) },
+      null, () => new Date('2026-09-04T10:00:00Z'));
+    await expect(service.sync()).resolves.toMatchObject({ checked: 2 });
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual(['a', 'b']);
+    expect(logged).toHaveBeenCalledWith('scheduled_sync_budget_reached', { checked: 2, left: 1 });
   });
 
   it('skips a recheck when another check ran since the run listed it, or it cannot tell', async () => {

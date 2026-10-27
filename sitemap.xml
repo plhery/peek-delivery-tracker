@@ -5670,6 +5670,16 @@
 <url>
 <loc>https://peektracker.com/carriers/bpost-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/carriers/bpost-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
@@ -5678,6 +5688,7 @@
 <url>
 <loc>https://peektracker.com/fr/carriers/bpost-suivi</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
@@ -5686,6 +5697,7 @@
 <url>
 <loc>https://peektracker.com/nl/carriers/bpost-pakje-volgen</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
@@ -7806,6 +7818,15 @@
 <url>
 <loc>https://peektracker.com/carriers/tnt-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tnt-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/tnt-suivi-colis" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/tnt-rastreio" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tnt-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/tnt-suivi-colis</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tnt-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/tnt-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/tnt-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tnt-tracking" />
 <lastmod>2026-10-27</lastmod>
@@ -7813,6 +7834,7 @@
 <url>
 <loc>https://peektracker.com/pt/carriers/tnt-rastreio</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tnt-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/tnt-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/tnt-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tnt-tracking" />
 <lastmod>2026-10-27</lastmod>

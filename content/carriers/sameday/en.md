@@ -71,7 +71,7 @@ Sameday's channels:
 
 ## Tracking a Sameday parcel with Peek
 
-[Peek](/) recognises Sameday's AWB shape and asks Sameday's Romanian network, then its Bulgarian one, whether they know it: you'll see "Sameday has this parcel." or "Not found at Sameday yet". Some 17-character AWBs are also asked of Colis Privé; some 16-character ones are tried at Royal Mail only if Sameday doesn't confirm them. A parcel number is offered to Sameday when its AWB has 9 digits; otherwise pick "Sameday" with "Change". Either way Sameday answers with its AWB, shown as "Sameday tracks this as". Links from sameday.ro, .hu or .bg aren't read, so paste the AWB.
+[Peek](/) recognises Sameday's AWB shape and asks Sameday's Romanian network, then its Bulgarian one, whether they know it: you'll see "Sameday has this parcel." or "Not found at Sameday yet". Some 17-character AWBs are also asked of Colis Privé; some 16-character ones are tried at Royal Mail only if Sameday doesn't confirm them. A parcel number is offered to Sameday when its AWB has 9 digits; otherwise pick "Sameday" with "Change". Either way Sameday answers with its AWB, shown as "Sameday tracks this as". A sameday.ro or sameday.bg tracking link with the AWB in it works too.
 
 Peek shows the status, the history with each scan's county and country on a map, and the delivery time, in Sameday's English wordings. There's no expected delivery day and no easybox or point name. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps or on delivery day only. It can't extend easybox storage or send you a PIN.
 

@@ -85,7 +85,7 @@ The tracking result also shows a number to call for that parcel.
 
 ## Tracking UniUni parcels with Peek
 
-[Peek](/) names UniUni at once for numbers starting `UUS`, `UUSC`, `4C` (ending `US`) and `U9999`, and for the CAA0 shape with a U after `CAA0`. For other numbers that are U and 15 digits, other CAA0 numbers and the JY shape, it asks UniUni and names it when UniUni knows the number. It doesn't recognise `UR` IDs: choose UniUni with "Change". A uniuni.com tracking link with the number in it works too. A master number for a multi-piece shipment can't be tracked as one: add each parcel's own number.
+[Peek](/) names UniUni at once for numbers starting `UUS`, `UUSC`, `4C` (ending `US`) and `U9999`, for `UR` IDs, and for the CAA0 shape with a U after `CAA0`. For other numbers that are U and 15 digits, other CAA0 numbers and the JY shape, it asks UniUni and names it when UniUni knows the number. A uniuni.com tracking link with the number in it works too. A master number for a multi-piece shipment can't be tracked as one: add each parcel's own number.
 
 Peek reads UniUni's tracking and shows the status, each scan with its town and province or state on a map, the expected day or time window, the delivery time and the destination country. It leaves out addresses, driver names and the delivery photos, so look at the photos on UniUni's page. `Delivered` and `Out for delivery` appear in Peek's own words; other lines show as UniUni writes them, without the reason in brackets.
 

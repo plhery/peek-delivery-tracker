@@ -1,6 +1,6 @@
 ---
 title: Paquete perdido: cómo reclamar y recuperar tu dinero
-description: Paquete perdido o extraviado: cuándo se da por perdido, a quién reclamar, cuánto indemnizan Correos, SEUR e InPost y cómo pedir el reembolso en Amazon o Vinted.
+description: Paquete perdido o extraviado: cuándo se da por perdido, a quién reclamar, cuánto indemnizan Correos e InPost y cómo pedir el reembolso en Amazon o Vinted.
 slug: paquete-perdido-como-reclamar
 picture: Una estantería de un centro de clasificación con cajas y un hueco vacío de línea discontinua, una lupa encima y Pip junto a una linterna que ilumina el hueco.
 published: 2026-10-14
@@ -34,7 +34,6 @@ Cada transportista fija su propio plazo, contado desde la admisión o el aviso d
 | [Correos](carrier:correos-spain), envíos nacionales | Paq Premium: desde 3 días después de la admisión; Paq Estándar: desde 4; Paquete Azul: desde 6 | 1 año (6 meses el Paquete Azul) | Siempre el remitente; tú, solo si el remitente firma una autorización |
 | Correos, envíos al extranjero | Paquete Internacional Premium: desde 7 días; Standard: desde 15; Económico: desde 25 | 4 meses el Premium, 6 meses los demás | Igual que en los nacionales |
 | InPost | Por demora: más de 5 días desde el aviso de envío. Como pérdida total: a los 30 días de ese aviso | Demora: 21 días desde que el pedido está disponible o entregado | InPost contacta con el remitente para indemnizarlo |
-| [SEUR](carrier:seur) | Sus condiciones no dan un día de espera | Reclamación por escrito; las acciones prescriben al año | Sus condiciones no lo dicen |
 | [GLS](carrier:gls-es) | Su página de ayuda no da plazo de espera | Hoja de reclamaciones, con respuesta en 30 días | Su página de ayuda no lo dice |
 
 ## ¿Quién es responsable de un paquete perdido, el comprador o el vendedor?
@@ -47,7 +46,7 @@ Si compraste a una empresa, casi siempre el vendedor:
 
 El riesgo pasa a ti si encargaste tú el transporte o elegiste un transportista que la tienda no ofrecía. Si compraste a un particular, esta ley no se aplica: lo que cuenta es la protección de la plataforma (más abajo). Los detalles y las excepciones están en [paquete entregado pero no recibido](guide:delivered-not-received).
 
-## Reembolso de un paquete perdido en Amazon, Vinted, Wallapop, eBay, AliExpress y Temu
+## Reembolso de un paquete perdido en Amazon, Vinted, Wallapop, eBay y AliExpress
 
 Si el vendedor no te ayuda, la plataforma puede hacerlo, siempre que pagaras desde su web o su app:
 
@@ -58,7 +57,6 @@ Si el vendedor no te ayuda, la plataforma puede hacerlo, siempre que pagaras des
 | Vinted (etiqueta de Vinted) | Cuando el seguimiento pone `Parece que se ha perdido el paquete`, o 25 días laborables después de `Enviado` | 2 días naturales después del aviso de Vinted |
 | Wallapop (Wallapop Envíos) | Más de 20 días desde la admisión sin cambios en el seguimiento: contacta con Wallapop | No da plazo; te reembolsa si el transportista declara el paquete extraviado |
 | AliExpress | Desde el día 11 después de que el vendedor lo envíe, o al acabar el plazo de entrega si el seguimiento se mueve con normalidad | 15 días después de que acabe el plazo de entrega |
-| Temu | Artículo perdido en tránsito | 90 días después de la compra |
 
 En Amazon, la Garantía de la A a la Z cubre también las compras a vendedores externos: si tienes problemas con el plazo de entrega y no has podido resolverlo con el vendedor, puedes reclamar directamente a Amazon y pedir el reembolso.
 
@@ -75,24 +73,23 @@ Poco. La indemnización incluida tiene tope, a menudo por kilo, y suele sumar la
 | Correos, Paq Ligero | Nada: Correos no indemniza por pérdida ni robo | – |
 | Correos, Paquete Internacional Premium | Tarifa más 52,98 € | Seguro o valor declarado, hasta 3.000 € |
 | Correos, Paquete Internacional Standard y Económico | Tarifa más 40 DEG y 4,50 DEG por kilo (la escala de la UPU) | Seguro o valor declarado, hasta 3.000 € |
-| SEUR | Sin valor declarado, como máximo 33 € por kilo y 1.800 € por envío | Seguro de valor declarado, hasta 6.000 € |
 | InPost | Seguro fijo de 25 € (IVA incluido) en el precio del envío | Un nivel de indemnización más alto, al pagar |
 
 Correos da el cambio de la Unión Postal Universal para 2026: 1 DEG = 1,2119 €. Un Paquete Internacional Standard de 2 kg perdido cobra como mucho 49 DEG (unos 59 €) más la tarifa, y un Paq Estándar de 2 kg, 13,34 € más la tarifa. Por eso, si compraste a una empresa, te sale mejor la tienda: te debe el producto o todo el dinero.
 
-Con valor declarado o seguro, Correos no suma los 6,67 € por kilo en España: te devuelve la tarifa más ese valor, y puede pedirte un justificante del valor de la mercancía. SEUR cobra un 8 % sobre el porte por su cobertura de 33 € por kilo; su seguro de valor declarado cuesta el 1,40 % del valor y sustituye ese recargo.
+Con valor declarado o seguro, Correos no suma los 6,67 € por kilo en España: te devuelve la tarifa más ese valor, y puede pedirte un justificante del valor de la mercancía.
 
-## ¿Cómo reclamar un paquete perdido en Correos, SEUR o InPost?
+## ¿Cómo reclamar un paquete perdido en Correos o InPost?
 
 En la web del transportista (con Correos, también en una oficina), antes de que acabe el plazo de la primera tabla, con esto:
 
 - **Número de seguimiento e historial.** Haz capturas de pantalla: las páginas de seguimiento caducan. [Peek](/) muestra todos los escaneos en la página del paquete, pero no puede reclamar por ti.
 - **Justificante del envío.** El resguardo que te dieron al enviarlo, si lo enviaste tú.
-- **Justificante del valor.** Factura, ticket, extracto bancario o el pago de PayPal. Correos puede pedirlo si el envío llevaba seguro o valor declarado, y SEUR pide documentos que acrediten el valor real.
+- **Justificante del valor.** Factura, ticket, extracto bancario o el pago de PayPal. Correos puede pedirlo si el envío llevaba seguro o valor declarado.
 - **Qué había dentro y las dos direcciones.**
 - **Si eres el destinatario de Correos:** la autorización firmada del remitente, porque si no la indemnización es para él.
 
-Correos responde a las reclamaciones de envíos nacionales en un mes como máximo (10 días de media) y a las internacionales en dos. InPost contacta con el remitente en 7 días desde que declara la pérdida. SEUR quiere la reclamación por cualquier medio escrito.
+Correos responde a las reclamaciones de envíos nacionales en un mes como máximo (10 días de media) y a las internacionales en dos. InPost contacta con el remitente en 7 días desde que declara la pérdida.
 
 ## ¿Compraste a un particular en Wallapop o Vinted?
 
@@ -113,7 +110,6 @@ Sí, como último recurso. En PayPal tienes que abrir la disputa por artículo n
 - [Correos: Extravío, envíos internacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales/extravio-internacional) – 7, 15 y 25 días, 4 y 6 meses, 40 DEG y 4,5 DEG por kilo, 52,98 €, 3.000 €, 1 DEG = 1,2119 €
 - [Correos: Paq Ligero](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paq-ligero) – sin indemnización por pérdida ni robo
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – 1 y 2 meses, canales
-- [SEUR: Condiciones de envíos y transporte](https://www.seur.com/es/condiciones-de-transporte/) – 33 € por kilo, 1.800 €, 8 %, seguro de valor declarado (1,40 %, 6.000 €), reclamación por escrito, un año
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 5, 21 y 30 días, remitente en 7 días, seguro de 25 €
 - [GLS: Hoja de reclamaciones](https://gls-group.com/ES/es/hoja-de-reclamaciones/) – respuesta en 30 días
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 66 bis y 66 ter
@@ -128,7 +124,6 @@ Sí, como último recurso. En PayPal tienes que abrir la disputa por artículo n
 - [Wallapop: Plazos de entrega](https://ayuda.wallapop.com/hc/es-es/articles/360004524538-Plazos-de-entrega) – 20 días desde la admisión, reembolso si se declara extraviado
 - [Wallapop: Reembolsos](https://ayuda.wallapop.com/hc/es-es/articles/360004532077-Reembolsos) – reembolso si el paquete se ha perdido
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=es) – día 11 y 15 días
-- [Temu: Purchase Protection (Reino Unido, en inglés)](https://www.temu.com/uk/bgt_purchase_protection.html) – 90 días
 - [PayPal: Programa Protección del comprador](https://www.paypal.com/es/legalhub/paypal/buyer-protection) – 30 días desde la entrega prevista o 180 desde el pago, lo que ocurra primero; pagos personales, prueba de entrega
 - [Banco de España: ¿Has pagado algo por internet y no te ha llegado el producto?](https://clientebancario.bde.es/pcb/es/blog/has-pagado-algo-por-internet-y-no-te-ha-llegado-el-producto-que-esperabas--esto-te-interesa.html) – mandatos de pago irrevocables, gestión diligente
 :::

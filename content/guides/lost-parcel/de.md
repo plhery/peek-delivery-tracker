@@ -48,7 +48,7 @@ Hast du bei einem Händler gekauft, meist der Händler:
 
 Das Risiko liegt bei dir, wenn du einen Paketdienst gebucht hast, den der Shop nicht angeboten hat, oder bei einer Privatperson gekauft hast.
 
-## Paket verloren bei Amazon, eBay, Etsy, Vinted, Temu oder AliExpress
+## Paket verloren bei Amazon, eBay, Etsy, Vinted oder AliExpress
 
 Hilft der Verkäufer nicht, kann der Marktplatz einspringen, wenn du über seine Kasse bezahlt hast:
 
@@ -58,7 +58,6 @@ Hilft der Verkäufer nicht, kann der Marktplatz einspringen, wenn du über seine
 | Etsy | Liefertermin verstrichen und Verkäufer vor mehr als 48 Stunden kontaktiert | 30 Tage ab dem angesetzten Liefertermin |
 | Vinted (mit Vinted-Versandschein) | Status `Sendung scheint verloren gegangen zu sein` oder mehr als 25 Werktage nach „verschickt“ | 2 Kalendertage nach dem Hinweis von Vinted |
 | AliExpress | Ab dem 11. Tag nach dem Versand. Bewegt sich das Paket normal, erst nach Ende der Lieferzeit | 15 Tage nach Ende der Lieferzeit |
-| Temu | Paket beim Transport verloren | 90 Tage nach dem Kauf |
 
 Bei Amazon gilt die A-bis-z-Garantie für alles, was du in den Amazon-Stores kaufst, ob Amazon oder ein anderer Verkäufer es verkauft: Kommt die Lieferung nicht pünktlich, ersetzt oder erstattet Amazon den Kauf. Hat ein Marketplace-Verkäufer selbst versendet, wendest du dich zuerst an ihn. Löst er das Problem nicht, machst du den Anspruch bei Amazon geltend, und Amazon entscheidet über die Erstattung.
 
@@ -73,7 +72,7 @@ Weniger, als du denkst. Paketdienste haften nur bis zu einer Grenze und nur für
 | DHL (DE) | Paket bis 500 €. Päckchen S und M: keine Haftung. Kleinpaket (für Geschäftskunden): bis 20 € | Transportversicherung bis 2.500 € (6,99 €) oder 25.000 € (19,99 €) |
 | Hermes (DE) | Päckchen bis 50 €, Paket bis 500 € | Lässt sich nicht erhöhen |
 | DPD (DE) | 520 € bei Zustellung an die Adresse, 265 € bei Zustellung in den Paketshop und bei Retouren | Nur für Geschäftskunden |
-| [GLS](carrier:gls-de) (DE) | Warenwert bis 750 € | – |
+| [GLS](carrier:gls-de) (DE) | Warenwert bis 750 € je Paket (AGB für Geschäftskunden) | – |
 | Österreichische Post | 8,33 SZR je Kilogramm. Darüber bis 510 € nur bei Vorsatz oder grober Fahrlässigkeit | Wertangabe |
 | Schweizerische Post | Inland CHF 500.– | Signature CHF 1500.–, Assurance oder Fragile CHF 5000.– |
 | Pakete zwischen Postgesellschaften (Weltpostverein) | 40 SZR plus 4,50 SZR je Kilogramm | Wertsendungen |
@@ -120,7 +119,7 @@ Hilft weder der Händler noch die Plattform, bleibt der Zahlungsweg, und den geh
 - [DPD: Support](https://www.dpd.com/de/de/support/) – mehrere Tage, Nachforschung über den Versender
 - [DPD: Paketversand](https://www.dpd.com/de/de/versenden/paketversand/) – 520 € und 265 €
 - [DPD: Wie hoch ist mein Paket versichert?](https://www.dpd.com/de/en/faq/wie-hoch-ist-mein-paket-versichert-kann-ich-mein-paket-hoher-versichern/) – höhere Versicherung nur für Geschäftskunden
-- [GLS: Leitfaden Paketversand für gelegentliche Versender](https://gls-pakete.de/downloads/en/Leitfaden_Paketversand_sporadische_Versender_A4_DE-en_2025-02.pdf) – Warenwert bis 750 €
+- [GLS: AGB für Geschäftskunden, Stand Januar 2025 (auf Englisch)](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – Warenwert bis 750 € je Paket
 - [Österreichische Post: Nachforschung](https://www.post.at/p/a/nachforschung) – 3 bis 5 Werktage, 2 bis 3 Wochen, nur der Versender, 3 und 6 Monate, derzeit kostenlos
 - [Österreichische Post: AGB Paket Österreich](https://assets.post.at/-/media/Dokumente/De/AGB/AGB-Paket-Oesterreich-01102025.pdf) – 8,33 SZR je kg, 510 €, Wertangabe, Aufgabeschein, Marktwert
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – mindestens 2 Wochen
@@ -149,6 +148,5 @@ Hilft weder der Händler noch die Plattform, bleibt der Zahlungsweg, und den geh
 - [Vinted: Rückerstattungsrichtlinien](https://www.vinted.de/help/465) – Sendung scheint verloren gegangen zu sein, 25 Werktage, 2 Kalendertage, mehrere Wochen, außerhalb von Vinted bezahlt
 - [Vinted: Meine Sendung ist nicht angekommen](https://www.vinted.de/help/658) – Rückerstattung und Entschädigung für den Verkäufer
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 11. Tag, 15 Tage
-- [Temu: Purchase Protection](https://www.temu.com/uk/bgt_purchase_protection.html) – 90 Tage nach dem Kauf
 - [PayPal: PayPal-Käuferschutz](https://www.paypal.com/de/legalhub/paypal/buyer-protection) – 180 Tage, 20 Tage, Freunde und Familie, nicht gleichzeitig mit dem Kartenanbieter
 :::

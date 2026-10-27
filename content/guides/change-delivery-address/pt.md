@@ -1,21 +1,20 @@
 ---
 title: Mudar a morada de uma encomenda: CTT, DPD, GLS e InPost
-description: Como mudar a morada ou o dia de entrega de uma encomenda: o que a Temu e a Vinted deixam, o que os CTT, a DPD, a GLS e a InPost permitem, e quanto custa.
+description: Como mudar a morada ou o dia de entrega de uma encomenda: o que a Vinted deixa, o que os CTT, a DPD, a GLS e a InPost permitem, e quanto custa.
 slug: mudar-morada-encomenda
 picture: Uma estrada que se divide junto a uma placa, para uma casa de um lado e para um cacifo do outro, uma carrinha a tomar o novo caminho e o Pip a olhar pela estrada nessa direção.
 published: 2026-10-14
 updated: 2026-10-27
 ---
 
-Antes de a encomenda sair, muda a morada na loja: na Temu podes editá-la na própria encomenda, e na Vinted cancelas com quem vende e voltas a comprar. Depois de enviada, é com a transportadora: os CTT, a DPD e a GLS deixam-te escolher outro dia, um ponto de recolha e, às vezes, outra morada, a partir do número de seguimento ou do e-mail que te mandam. Mas é o remetente que decide o que podes mudar, e algumas alterações pagam-se.
+Antes de a encomenda sair, muda a morada na loja: na Vinted, por exemplo, cancelas com quem vende e voltas a comprar. Depois de enviada, é com a transportadora: os CTT, a DPD e a GLS deixam-te escolher outro dia, um ponto de recolha e, às vezes, outra morada, a partir do número de seguimento ou do e-mail que te mandam. Mas é o remetente que decide o que podes mudar, e algumas alterações pagam-se.
 
-## Como mudar a morada antes do envio: Temu e Vinted
+## Como mudar a morada antes do envio
 
 Na loja, enquanto a encomenda não sair do armazém.
 
 | Loja | Como mudar a morada | Até quando |
 | --- | --- | --- |
-| Temu | Na lista de encomendas da tua conta, abre a encomenda e edita a morada | Antes de ser embalada ou enviada: vê a página da encomenda |
 | Vinted | Avisa quem vende, cancela o pedido, corrige a morada nas definições de envio e volta a comprar | Antes de quem vende enviar |
 
 Na Vinted, combina o cancelamento com quem vende antes de cancelares o pedido, para evitar uma avaliação negativa.
@@ -113,7 +112,6 @@ Confirma a morada antes de pagar, ou escolhe um ponto de recolha ou um cacifo na
 Não. O Peek segue a encomenda e mostra onde ela está; só a loja ou a transportadora a podem redirecionar.
 
 :::sources
-- [Temu: How do I update my shipping address?](https://www.temu.com/uk/support/c3/how-do-i-update-my-shipping-address-f-48-s-150.html) – editar a morada antes de a encomenda ser embalada
 - [Vinted: A morada de entrega está incorreta](https://www.vinted.pt/help/660) – cancelar com quem vende, definições de envio, redirecionamento em trânsito
 - [CTT: Alterar entrega de encomenda Expresso](https://www.ctt.pt/particulares/receber/seguir-ou-alterar-uma-entrega/alterar-uma-entrega-expresso) – códigos começados por D, o que se altera, preços para clientes sem contrato (incluindo 5,01 € por outro dia), até 5 dias úteis
 - [CTT: Tenho um código que começa por D](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/alterar/tenho-um-codigo-que-comeca-por-d-o-que-posso-fazer) – análise em 24 a 48 horas, DS e DT pela Linha de Apoio, DD, DE, DF e DZ só pelo remetente, devolução, valor cativo

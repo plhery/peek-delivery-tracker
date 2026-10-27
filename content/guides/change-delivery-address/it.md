@@ -4,7 +4,7 @@ description: Come cambiare indirizzo di consegna di un pacco, prima o dopo la sp
 slug: come-cambiare-indirizzo-di-consegna
 picture: Una strada che si biforca a un cartello, da una parte verso una casa e dall'altra verso un locker, un furgone che prende la nuova svolta e Pip che guarda lungo la strada in quella direzione.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Se l'ordine non è ancora partito, cambia l'indirizzo nel negozio: Amazon.it te lo lascia modificare finché l'ordine non entra nel processo di spedizione, su eBay chiedi al venditore di annullare l'ordine e lo ricompri. Quando il pacco è già in viaggio, chiedi al corriere: con il codice tracking, sul suo sito o nella sua app, di solito puoi scegliere un vicino, un luogo sicuro, un punto di ritiro o un altro giorno. Un indirizzo nuovo spesso non è tra le opzioni, perché è il mittente a decidere cosa puoi cambiare; e quando il pacco è già in consegna, di solito è tardi.
@@ -18,7 +18,6 @@ Di solito sì, finché l'ordine non è imballato o spedito.
 | Amazon.it (spedito da Amazon) | **I miei ordini** → **Dettagli dell'ordine** → **Modifica** accanto all'indirizzo | Finché non viene avviato il processo di spedizione |
 | Amazon.it (venditori terzi) | In **I miei ordini** entro 30 minuti dall'ordine, poi **Contatta il venditore** | Prima della spedizione; se non riesci, annulla e fai un nuovo ordine |
 | eBay | Di solito il venditore non può cambiarlo: chiedigli di annullare la transazione e ricompra con l'indirizzo giusto | Prima che il venditore spedisca |
-| Temu | Nell'ordine, con il tasto per modificare l'indirizzo | Prima che l'ordine sia imballato o spedito: controlla la pagina dell'ordine |
 | Vinted | Avvisa chi vende, annulla l'ordine d'accordo con lui, correggi l'indirizzo in **Impostazioni spedizione** e ricompra | Prima che chi vende spedisca |
 
 Se un ordine Amazon non è ancora partito ma non riesci a modificare l'indirizzo, Amazon.it ti dice di chiedere l'annullamento e di fare un nuovo ordine con l'indirizzo corretto. Tieni presente che la modifica può spostare la data di consegna.
@@ -115,7 +114,6 @@ No. Peek segue il pacco e ti mostra ogni scansione; solo il negozio o il corrier
 :::sources
 - [Amazon.it: Modifica le informazioni sull'ordine](https://www.amazon.it/gp/help/customer/display.html?nodeId=GSWAYSNV7RBSTND9) – I miei ordini, Modifica, fino all'avvio della spedizione, 30 minuti per il Marketplace, il corriere dopo la spedizione
 - [eBay.it: Modificare i dati di spedizione dopo l'acquisto](https://www.ebay.it/help/buying/spedizione-consegna/modificare-dettagli-spedizione-acquisto?id=4028) – il venditore di solito non può cambiare l'indirizzo, annullare e ricomprare
-- [Temu: How do I update my shipping address?](https://www.temu.com/uk/support/c3/how-do-i-update-my-shipping-address-f-48-s-150.html) – modifica prima che l'ordine sia imballato
 - [Vinted.it: L'indirizzo di consegna è errato](https://www.vinted.it/help/660) – annullare con chi vende, Impostazioni spedizione, Traccia il pacco
 - [Poste Italiane: PostePlus](https://www.poste.it/posteplus) – servizio gratuito, requisiti, indirizzi e giorni, vicino, luogo sicuro, altra data entro 5 giorni, giacenza per vacanza, abilitazione del mittente, pacchi esclusi
 - [Poste Italiane: Seguimi](https://www.poste.it/soluzioni-recapito/servizio-seguimi) – prezzi, pacchi esclusi tranne Poste Deliverybox Standard

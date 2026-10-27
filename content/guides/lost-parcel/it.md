@@ -40,7 +40,7 @@ Se hai comprato da un'azienda, di solito il venditore:
 
 Il rischio è tuo anche in Italia se hai scelto tu un corriere che il negozio non proponeva (art. 63, comma 2), o se hai comprato da un privato. Tutti i dettagli, con i casi della consegna a un vicino, in [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
-## Rimborso per pacco smarrito su Amazon, eBay, Vinted, Etsy, AliExpress e Temu
+## Rimborso per pacco smarrito su Amazon, eBay, Vinted, Etsy e AliExpress
 
 Se il venditore non ti aiuta, può farlo la piattaforma, se hai pagato tramite lei:
 
@@ -50,7 +50,6 @@ Se il venditore non ti aiuta, può farlo la piattaforma, se hai pagato tramite l
 | Etsy | Passata la data prevista, se hai scritto al venditore da più di 48 ore | 30 giorni dopo la data di consegna prevista |
 | Vinted (etichetta generata su Vinted) | Quando il tracciamento dice `Il pacco sembra essere stato smarrito`, o 25 giorni lavorativi dopo `spedito` | 2 giorni di calendario dall'avviso di Vinted |
 | AliExpress | Dall'11° giorno dopo la spedizione, o a tempo di consegna scaduto se il tracking si muove ancora | 15 giorni dopo la fine del tempo di consegna |
-| Temu | Pacco smarrito durante il trasporto | 90 giorni dall'acquisto |
 
 Su Amazon, la Garanzia dalla A alla Z copre ogni prodotto comprato nel suo negozio, che lo venda Amazon o un altro venditore: se non arriva, chiedi il rimborso all'assistenza clienti di Amazon. Se l'ha venduto un altro venditore, prova prima a risolvere con lui; se non ci riesci, chiedi il rimborso direttamente ad Amazon.
 
@@ -126,7 +125,6 @@ Hai pagato con un bonifico? Chiedi a chi vende di fare reclamo al corriere e di 
 - [Vinted: Politica di rimborso](https://www.vinted.it/help/465) – pacco smarrito, 25 giorni lavorativi, diverse settimane, 2 giorni, pagamento fuori da Vinted
 - [Vinted: Il pacco non è arrivato](https://www.vinted.it/help/658) – Ho un problema, rimborso e risarcimento a chi vende
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 11 e 15 giorni
-- [Temu: Purchase Protection Program](https://www.temu.com/uk/bgt_purchase_protection.html) – 90 giorni
 - [PayPal: Protezione acquisti](https://www.paypal.com/it/legalhub/paypal/buyer-protection) – 180 e 7 giorni, pagamenti ad amici e familiari
 - [ACSI: Il chargeback, un'arma in più](https://www.acsi.ch/wp-content/uploads/2025/02/Chargeback.pdf) – prima il commerciante, 30 giorni dalla fattura
 :::

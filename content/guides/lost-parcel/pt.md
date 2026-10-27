@@ -49,7 +49,7 @@ Se compraste a uma empresa, normalmente da loja:
 
 O risco é teu se escolheste uma transportadora diferente da que a loja propunha (art. 11.º, n.º 13) ou se compraste a um particular, porque esta lei só se aplica a compras a profissionais (art. 3.º). Os casos e as exceções estão em [encomenda dada como entregue mas não recebi](guide:delivered-not-received).
 
-## Encomenda extraviada na Vinted, Amazon, Shein ou Temu: como pedir o reembolso
+## Encomenda extraviada na Vinted, Amazon ou Shein: como pedir o reembolso
 
 Se o vendedor não ajudar, a plataforma pode fazê-lo, desde que tenhas pago através dela:
 
@@ -59,7 +59,6 @@ Se o vendedor não ajudar, a plataforma pode fazê-lo, desde que tenhas pago atr
 | Etsy | Data de entrega estimada já passada e vendedor contactado há mais de 48 horas | 30 dias depois da data estimada |
 | Vinted (etiqueta da Vinted) | `A encomenda aparenta ter-se perdido`, ou 25 dias úteis depois de `enviado` | 2 dias depois do aviso da Vinted |
 | AliExpress | A partir do 11.º dia depois do envio; se o seguimento ainda mexe, só quando acaba o prazo de entrega | 15 dias depois de acabar o prazo de entrega |
-| Temu | Encomenda perdida em trânsito | 90 dias depois da compra |
 | Shein | Não chegou no prazo estimado | 45 dias depois do pagamento |
 
 Na Amazon.es, a Garantia de A a Z cobre também as compras a vendedores externos: se tiveres problemas com o prazo de entrega, podes reclamar diretamente à Amazon para encontrar uma solução.
@@ -132,7 +131,6 @@ Pagaste por transferência? Pede ao vendedor que reclame à transportadora e te 
 - [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/658) – Tenho um problema, quem vendeu é compensado
 - [Vinted: Indemnização de vendedores para envios com etiquetas integradas](https://www.vinted.pt/help/1018) – 10 € por kg, 25 €, 500 €
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 11.º dia, 15 dias
-- [Temu: Purchase Protection](https://www.temu.com/uk/bgt_purchase_protection.html) – 90 dias
 - [Shein Portugal: Informação de envio](https://pt.shein.com/Shipping-Info-a-280.html) – 45 dias depois do pagamento
 - [PayPal: Programa de Proteção do comprador do PayPal](https://www.paypal.com/pt/legalhub/paypal/buyer-protection?locale.x=pt_PT) – 180 e 20 dias, amigos e familiares, emissor do cartão
 :::

@@ -963,12 +963,13 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             return makeMatch(recognized, source: input == recognized ? .number : .text)
         }
 
+        // An entry that holds its number whole comes before a label in prose, as in the scraper: "AWB1234567890" stays whole.
+        if let whole = numberEnteredWhole(input) { return makeMatch(whole.number, source: whole.labelled ? .text : .number) }
         if let labelled = Self.capture(prose, pattern: Self.labelledNumberPattern, caseInsensitive: true) {
             // A sentence can end right after its number.
             let keyword = labelled.replacingOccurrences(of: "[.-]+$", with: "", options: .regularExpression)
             if Self.validInText(keyword) { return makeMatch(keyword, source: .text) }
         }
-        if let whole = numberEnteredWhole(input) { return makeMatch(whole.number, source: whole.labelled ? .text : .number) }
         return Self.emptyMatch
     }
 
@@ -992,7 +993,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// The number a short entry holds whole, groups a label prints apart included, as in
     /// "1Z 999 AA1 01 2345 6784", as the shared engine reads it (`numberEnteredWhole`). A word offering
     /// a second number leaves it unread, and a label word before the digits is no part of it, unless a
-    /// carrier confidently claims the two together.
+    /// carrier confidently claims the two together. Nor is any other word: a sentence holds no number whole.
     private func numberEnteredWhole(_ input: String) -> (number: String, labelled: Bool)? {
         guard !input.contains("://") else { return nil }
         var alternatives = [""]
@@ -1004,11 +1005,18 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             }
         }
         guard alternatives.filter({ Self.matches($0, pattern: "[0-9]") }).count <= 1 else { return nil }
+        let claimed = detect(input).confidence == .high
         if let number = Self.capture(input, pattern: Self.entryLabelPattern, caseInsensitive: true),
-           detect(input).confidence != .high, valid(number) {
+           !claimed, valid(number), !Self.holdsWord(number) {
             return (number, true)
         }
-        return valid(input) ? (input, false) : nil
+        return valid(input) && (claimed || !Self.holdsWord(input)) ? (input, false) : nil
+    }
+
+    /// A word among the groups of an entry. The letters a number prints apart are fewer,
+    /// "RR 123 456 789 FR", and GLS's lettered Track IDs stand alone.
+    private static func holdsWord(_ entry: String) -> Bool {
+        matches(entry, pattern: "\\s") && matches(entry, pattern: "(?:^|\\s)\\p{L}{5,}(?=\\s|$)")
     }
 
     /// A number in prose whose shape fits a carrier without proving one: "Track it with DHL: 1234567899".

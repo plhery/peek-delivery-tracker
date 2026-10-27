@@ -1195,7 +1195,9 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(catalog.detect("123456785").preferred, [.tnt])
         XCTAssertFalse(catalog.detect("123456789").candidates.contains(.tnt))
         XCTAssertTrue(catalog.detect("1234567890123456").candidates.contains(.tnt))
-        XCTAssertEqual(catalog.detect("00159007731234567899").preferred, [.pocztaPolska])
+        let polish = catalog.detect("00159007731234567899")
+        XCTAssertEqual(polish.carrier, .pocztaPolska)
+        XCTAssertEqual(polish.confidence, .high)
         XCTAssertFalse(catalog.detect("12345678901234567891").candidates.contains(.pocztaPolska))
         XCTAssertTrue(catalog.detect("1234567890123456789").candidates.contains(.pocztaPolska))
     }

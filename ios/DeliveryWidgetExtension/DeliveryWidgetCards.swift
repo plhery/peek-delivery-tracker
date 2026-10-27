@@ -87,11 +87,15 @@ struct DeliveryWidgetCardView: View {
     let shape: DeliveryWidgetPicture
     /// What a whole medium card says at its top right, as Next up does in the app.
     var badge: String?
+    /// The end of the top row is left to the widget's next button.
+    var leavesNext = false
 
     @Environment(\.colorScheme) private var scheme
 
     private var ink: Color { DeliveryWidgetCardColors.color(card.ink, scheme) }
     private var status: String { card.status == parcel.detail ? card.status : "\(card.status) · \(parcel.detail)" }
+
+    static func markHeight(_ shape: DeliveryWidgetPicture) -> CGFloat { shape == .half ? 13 : 15 }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -99,7 +103,7 @@ struct DeliveryWidgetCardView: View {
                 art.look(scheme).mark
                     .resizable()
                     .scaledToFit()
-                    .frame(height: shape == .half ? 13 : 15)
+                    .frame(height: Self.markHeight(shape))
                     .accessibilityLabel(parcel.carrier)
                 Spacer(minLength: 0)
                 if let badge {
@@ -111,6 +115,7 @@ struct DeliveryWidgetCardView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                 }
+                if leavesNext { Color.clear.frame(width: DeliveryWidgetNextMark.size, height: 1) }
             }
             Spacer(minLength: 4)
             VStack(alignment: .leading, spacing: shape == .half ? 2 : 3) {
@@ -128,5 +133,33 @@ struct DeliveryWidgetCardView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// The widget's next button, as quiet as the card's words: a small chevron in the card's ink. It reaches past what it
+/// shows, so that a finger finds it.
+struct DeliveryWidgetNextMark: View {
+    let ink: Color
+
+    static let size: CGFloat = 18
+    static let reach: CGFloat = 9
+
+    var body: some View {
+        Image(systemName: "chevron.forward")
+            .font(.system(size: 8, weight: .bold))
+            .foregroundStyle(ink.opacity(0.6))
+            .frame(width: Self.size, height: Self.size)
+            .background(ink.opacity(0.07), in: Circle())
+            .padding(Self.reach)
+            .contentShape(Rectangle())
+    }
+}
+
+extension View {
+    /// The widget's next button at the end of a card's top row, level with the card's mark.
+    func deliveryWidgetNext(markHeight: CGFloat, @ViewBuilder _ button: () -> some View) -> some View {
+        overlay(alignment: .topTrailing) {
+            button().offset(x: DeliveryWidgetNextMark.reach, y: (markHeight - DeliveryWidgetNextMark.size) / 2 - DeliveryWidgetNextMark.reach)
+        }
     }
 }

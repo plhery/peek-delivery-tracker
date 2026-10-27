@@ -875,11 +875,13 @@ extension ParcelRouteTests {
             XCTAssertNotNil(overlay.pip, "\(shape)")
         }
 
-        // A parcel with no places has a card without a route.
+        // A parcel with no places has no route, and Pip stands alone across its card.
         let plain = DeliveryWidgetPictures.card(for: unplaced, localizer: localizer)
         let drawnPlain = await DeliveryWidgetPictures.draw(unplaced, as: plain, atlas: atlas, localizer: localizer, in: folder)
         XCTAssertTrue(drawnPlain)
-        XCTAssertNil(try XCTUnwrap(DeliveryWidgetCardArt(plain, route: .small, in: folder)).light.route)
+        for shape in DeliveryWidgetPicture.routes {
+            XCTAssertNotNil(try XCTUnwrap(DeliveryWidgetCardArt(plain, route: shape, in: folder)).dark.route, "\(shape)")
+        }
 
         // A new scan names new pictures; the old ones go with the next publication.
         var moved = placed
@@ -893,7 +895,7 @@ extension ParcelRouteTests {
         DeliveryWidgetPictures.sweep(keeping: [plain], in: folder)
         XCTAssertFalse(DeliveryWidgetPictures.isDrawn(card, in: folder))
         XCTAssertTrue(DeliveryWidgetPictures.isDrawn(plain, in: folder))
-        XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: folder.path).count, 2)
+        XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: folder.path).count, 2 + DeliveryWidgetPicture.routes.count * 2)
     }
 
     /// Until the app has drawn the reader's own cards, the widget gallery shows the demo's next deliveries from the widget's
@@ -915,7 +917,7 @@ extension ParcelRouteTests {
             let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
             defer { defaults.removePersistentDomain(forName: suite) }
             let parcels = DemoRepository(defaults: defaults, language: { language }).list()
-            let shown = DeliveryWidgetSelection.displayParcels(from: ParcelStore.nextDeliveries(of: parcels, localizer: localizer))
+            let shown = DeliveryWidgetSelection.pages(of: ParcelStore.widgetDeliveries(of: parcels, localizer: localizer), medium: true).first ?? []
             XCTAssertEqual(shown.count, 2, "\(language)")
             var sample: [DeliveryWidgetParcel] = []
             for (index, item) in shown.enumerated() {

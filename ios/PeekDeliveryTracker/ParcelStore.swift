@@ -1072,16 +1072,31 @@ final class ParcelStore: ObservableObject {
             sort: .priority
         )
         return ordered.map { parcel in
-            DeliveryWidgetParcel(
-                id: parcel.id,
-                label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
-                carrier: CarrierCatalog.shared.info(for: parcel.displayedCarrier, language: localizer.language).displayName,
-                trackingNumber: CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
-                detail: localizer.parcelDeliveryEstimate(parcel)
-                    ?? localizer.text(parcel.displayStatus.key),
-                isOutForDelivery: parcel.currentStage == .outForDelivery
-            )
+            widgetParcel(parcel, localizer: localizer, detail: localizer.parcelDeliveryEstimate(parcel))
         }
+    }
+
+    /// The parcels the widget turns through: those on their way, then those delivered within the last day, the latest first.
+    static func widgetDeliveries(of parcels: [Parcel], localizer: Localizer, now: Date = Date()) -> [DeliveryWidgetParcel] {
+        let delivered = ParcelOrganizer.visible(parcels, query: "", status: .delivered, carrier: nil, sort: .updated, now: now)
+            .compactMap { parcel -> DeliveryWidgetParcel? in
+                guard let arrived = parcel.currentEvent?.displayDate else { return nil }
+                var item = widgetParcel(parcel, localizer: localizer, detail: localizer.parcelCompletionDate(parcel, now: now))
+                item.deliveredAt = arrived
+                return item
+            }
+        return DeliveryWidgetSelection.parcels(onTheWay: nextDeliveries(of: parcels, localizer: localizer), delivered: delivered, now: now)
+    }
+
+    private static func widgetParcel(_ parcel: Parcel, localizer: Localizer, detail: String?) -> DeliveryWidgetParcel {
+        DeliveryWidgetParcel(
+            id: parcel.id,
+            label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
+            carrier: CarrierCatalog.shared.info(for: parcel.displayedCarrier, language: localizer.language).displayName,
+            trackingNumber: CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
+            detail: detail ?? localizer.text(parcel.displayStatus.key),
+            isOutForDelivery: parcel.currentStage == .outForDelivery
+        )
     }
 
     private func publishDeliveryWidget() {
@@ -1090,7 +1105,7 @@ final class ParcelStore: ObservableObject {
             snapshot = DeliveryWidgetSnapshot(
                 generatedAt: Date(),
                 languageCode: localizer.language.rawValue,
-                parcels: carded(DeliveryWidgetSelection.displayParcels(from: nextDeliveries))
+                parcels: carded(Self.widgetDeliveries(of: parcels, localizer: localizer))
             )
         } else {
             snapshot = nil

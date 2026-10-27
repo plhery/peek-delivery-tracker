@@ -1,3 +1,4 @@
+import AppIntents
 #if os(iOS)
 import ActivityKit
 #endif
@@ -9,6 +10,11 @@ private struct DeliveryWidgetEntry: TimelineEntry {
     let enabled: Bool
     let languageCode: String
     let snapshot: DeliveryWidgetSnapshot?
+    /// The parcels the widget shows: its first ones, or those its next button turned it to.
+    var shown: [DeliveryWidgetParcel] = []
+    var isFirstPage = true
+    /// The parcel the next button turns the widget to, the first again from the last parcels; none when all fit at once.
+    var next: UUID?
     /// The pictures of the cards the widget shows, in order; none unless every one of them has its pictures.
     var art: [DeliveryWidgetCardArt] = []
     /// The demo's cards, which the gallery shows as they are rather than redacted.
@@ -22,68 +28,104 @@ private struct DeliveryWidgetProvider: TimelineProvider {
         let languageCode = ExtensionLocalizer(savedLanguageCode: store?.languageCode).languageCode
         let folder = Bundle.main.url(forResource: DeliveryWidgetSample.folderName, withExtension: nil)
         let snapshot = folder.flatMap { DeliveryWidgetSample.snapshot(languageCode: languageCode, in: $0) }
-        return DeliveryWidgetEntry(
-            date: Date(),
-            enabled: true,
-            languageCode: languageCode,
-            snapshot: snapshot,
-            art: folder.map { art(for: snapshot?.parcels ?? [], in: context.family, folder: $0) } ?? [],
-            isSample: true
-        )
+        var entry = makeEntry(at: Date(), enabled: true, languageCode: languageCode, snapshot: snapshot, folder: folder, family: context.family)
+        entry.isSample = true
+        return entry
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DeliveryWidgetEntry) -> Void) {
         // The gallery shows the parcels' own cards once the app has drawn them, and the demo's until then.
-        let entry = currentEntry(context.family)
+        let entry = currentEntry(context.family, at: Date())
         completion(context.isPreview && entry.art.isEmpty ? placeholder(in: context) : entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DeliveryWidgetEntry>) -> Void) {
-        let entry = currentEntry(context.family)
-        let refresh = Calendar.current.date(byAdding: .minute, value: 20, to: entry.date)
-            ?? entry.date.addingTimeInterval(1_200)
-        completion(Timeline(entries: [entry], policy: .after(refresh)))
+        let now = Date()
+        let entry = currentEntry(context.family, at: now)
+        var entries = [entry]
+        // Turned to other parcels, the widget shows its first ones again once the turn's spell ends.
+        if !entry.isFirstPage, let ends = turn(context.family, at: now)?.ends {
+            entries.append(currentEntry(context.family, at: ends))
+        }
+        let refresh = Calendar.current.date(byAdding: .minute, value: 20, to: now) ?? now.addingTimeInterval(1_200)
+        completion(Timeline(entries: entries, policy: .after(refresh)))
     }
 
-    private func currentEntry(_ family: WidgetFamily) -> DeliveryWidgetEntry {
+    private func currentEntry(_ family: WidgetFamily, at date: Date) -> DeliveryWidgetEntry {
         let identifier = DeliveryWidgetSharedStore.appGroupIdentifier()
         let store = DeliveryWidgetSharedStore(appGroupIdentifier: identifier)
         let snapshot = store?.snapshot
         let languageCode = snapshot?.languageCode
             ?? ExtensionLocalizer(savedLanguageCode: store?.languageCode).languageCode
-        let folder = DeliveryWidgetPicture.folder(appGroupIdentifier: identifier)
-        return DeliveryWidgetEntry(
-            date: Date(),
-            enabled: store?.isEnabled ?? true,
-            languageCode: languageCode,
-            snapshot: snapshot,
-            art: folder.map { art(for: snapshot?.parcels ?? [], in: family, folder: $0) } ?? []
-        )
+        return makeEntry(at: date, enabled: store?.isEnabled ?? true, languageCode: languageCode, snapshot: snapshot,
+                         folder: DeliveryWidgetPicture.folder(appGroupIdentifier: identifier), family: family,
+                         turn: turn(family, at: date)?.parcel)
     }
 
-    /// Reads the pictures of the cards a widget of `family` shows: a small one shows the first parcel, a medium one
-    /// the first two, side by side, or the first alone, across it.
-    private func art(for parcels: [DeliveryWidgetParcel], in family: WidgetFamily, folder: URL) -> [DeliveryWidgetCardArt] {
-        let shown = parcels.prefix(family == .systemMedium ? 2 : 1)
-        let shape: DeliveryWidgetPicture = family == .systemMedium ? shown.count > 1 ? .half : .wide : .small
-        guard !shown.isEmpty else { return [] }
-        let art = shown.compactMap { parcel in parcel.card.flatMap { DeliveryWidgetCardArt($0, route: shape, in: folder) } }
-        return art.count == shown.count ? art : []
+    private func turn(_ family: WidgetFamily, at date: Date) -> DeliveryWidgetTurn? {
+        DeliveryWidgetSharedStore(appGroupIdentifier: DeliveryWidgetSharedStore.appGroupIdentifier())?.turn(size: family.turnSize, now: date)
+    }
+
+    /// The page the widget was turned to, else its first, and the pictures of its cards: a small widget shows one parcel,
+    /// a medium one two side by side, or one alone, across it.
+    private func makeEntry(
+        at date: Date, enabled: Bool, languageCode: String, snapshot: DeliveryWidgetSnapshot?, folder: URL?, family: WidgetFamily,
+        turn: UUID? = nil
+    ) -> DeliveryWidgetEntry {
+        let medium = family == .systemMedium
+        let pages = DeliveryWidgetSelection.pages(of: snapshot?.parcels ?? [], medium: medium, now: date)
+        let index = turn.flatMap { id in pages.firstIndex { $0.contains { $0.id == id } } } ?? 0
+        let shown = pages.indices.contains(index) ? pages[index] : []
+        let shape: DeliveryWidgetPicture = medium ? shown.count > 1 ? .half : .wide : .small
+        let art = folder.map { folder in shown.compactMap { $0.card.flatMap { DeliveryWidgetCardArt($0, route: shape, in: folder) } } } ?? []
+        return DeliveryWidgetEntry(
+            date: date, enabled: enabled, languageCode: languageCode, snapshot: snapshot, shown: shown, isFirstPage: index == 0,
+            next: pages.count > 1 ? pages[(index + 1) % pages.count].first?.id : nil,
+            art: !shown.isEmpty && art.count == shown.count ? art : []
+        )
+    }
+}
+
+private extension WidgetFamily {
+    /// Widgets of one size turn together; those of the other keep their own page.
+    var turnSize: String { self == .systemMedium ? "medium" : "small" }
+}
+
+/// Turns the widgets of one size to the next parcels. WidgetKit draws them again once it has.
+struct ShowNextParcelIntent: AppIntent {
+    static let title: LocalizedStringResource = "Next parcel"
+    static let isDiscoverable = false
+
+    @Parameter(title: "Parcel") var parcel: String
+    @Parameter(title: "Widget size") var size: String
+
+    init() {}
+
+    init(parcel: UUID, size: String) {
+        self.parcel = parcel.uuidString
+        self.size = size
+    }
+
+    func perform() async throws -> some IntentResult {
+        if let id = UUID(uuidString: parcel) {
+            DeliveryWidgetSharedStore(appGroupIdentifier: DeliveryWidgetSharedStore.appGroupIdentifier())?
+                .setTurn(DeliveryWidgetTurn(parcel: id, at: Date()), size: size)
+        }
+        return .result()
     }
 }
 
 private struct DeliveryWidgetView: View {
     @Environment(\.widgetFamily) private var family
     @Environment(\.widgetRenderingMode) private var renderingMode
+    @Environment(\.colorScheme) private var scheme
     let entry: DeliveryWidgetEntry
 
     private var copy: ExtensionLocalizer {
         ExtensionLocalizer(languageCode: entry.languageCode)
     }
 
-    private var parcels: [DeliveryWidgetParcel] {
-        entry.snapshot?.parcels ?? []
-    }
+    private var parcels: [DeliveryWidgetParcel] { entry.shown }
 
     /// The parcels the widget shows as the app's cards, once the app has drawn every one of them.
     private var cards: [(parcel: DeliveryWidgetParcel, card: DeliveryWidgetCard, art: DeliveryWidgetCardArt)] {
@@ -107,17 +149,21 @@ private struct DeliveryWidgetView: View {
     private var cardContent: some View {
         let cards = cards
         if let only = cards.first, cards.count == 1 {
+            let shape: DeliveryWidgetPicture = family == .systemMedium ? .wide : .small
             DeliveryWidgetCardView(
-                parcel: only.parcel, card: only.card, art: only.art, shape: family == .systemMedium ? .wide : .small,
-                badge: family == .systemMedium ? copy.text("app.nextUp") : nil
+                parcel: only.parcel, card: only.card, art: only.art, shape: shape,
+                badge: family == .systemMedium && entry.isFirstPage && only.parcel.deliveredAt == nil ? copy.text("app.nextUp") : nil,
+                leavesNext: entry.next != nil
             )
+            .deliveryWidgetNext(markHeight: DeliveryWidgetCardView.markHeight(shape)) { nextButton(on: only.card) }
             .containerBackground(for: .widget) { DeliveryWidgetCardBackground(card: only.card, art: only.art) }
             .widgetURL(only.parcel.deepLink)
         } else {
             HStack(spacing: 8) {
                 ForEach(cards, id: \.parcel.id) { shown in
                     Link(destination: shown.parcel.deepLink) {
-                        DeliveryWidgetCardView(parcel: shown.parcel, card: shown.card, art: shown.art, shape: .half)
+                        DeliveryWidgetCardView(parcel: shown.parcel, card: shown.card, art: shown.art, shape: .half,
+                                               leavesNext: entry.next != nil && shown.parcel.id == cards.last?.parcel.id)
                             .padding(10)
                             .background { DeliveryWidgetCardBackground(card: shown.card, art: shown.art) }
                             .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
@@ -125,7 +171,23 @@ private struct DeliveryWidgetView: View {
                     .buttonStyle(.plain)
                 }
             }
+            // Over the last card, outside its link.
+            .deliveryWidgetNext(markHeight: DeliveryWidgetCardView.markHeight(.half)) {
+                cards.last.map { nextButton(on: $0.card).padding([.top, .trailing], 10) }
+            }
             .containerBackground(for: .widget) { DeliveryWidgetCardPage() }
+        }
+    }
+
+    /// Shown only when there are more parcels than the widget shows at once.
+    @ViewBuilder
+    private func nextButton(on card: DeliveryWidgetCard?) -> some View {
+        if let next = entry.next {
+            Button(intent: ShowNextParcelIntent(parcel: next, size: family.turnSize)) {
+                DeliveryWidgetNextMark(ink: card.map { DeliveryWidgetCardColors.color($0.ink, scheme) } ?? WidgetPalette.ink)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(copy.text("app.nextParcel"))
         }
     }
 
@@ -239,15 +301,19 @@ private struct DeliveryWidgetView: View {
             Spacer(minLength: 0)
         }
         .foregroundStyle(WidgetPalette.ink.opacity(0.72))
+        .deliveryWidgetNext(markHeight: 16) { nextButton(on: nil) }
     }
 
     private func parcelBadge(_ parcel: DeliveryWidgetParcel) -> some View {
+        let delivered = parcel.deliveredAt != nil
         // Tighter than a Label, so "Out for delivery" fits a small widget's width.
-        HStack(spacing: 4) {
-            Image(systemName: parcel.isOutForDelivery ? "bicycle" : "arrow.right.circle.fill")
+        return HStack(spacing: 4) {
+            Image(systemName: parcel.isOutForDelivery ? "bicycle" : delivered ? "checkmark.circle.fill" : "arrow.right.circle.fill")
                 .imageScale(.small)
                 .accessibilityHidden(true)
-            Text(copy.text(parcel.isOutForDelivery ? "stage.out_for_delivery" : "app.nextUp"))
+            // Next up is the first parcel's alone: the others are on their way after it.
+            Text(copy.text(parcel.isOutForDelivery ? "stage.out_for_delivery" : delivered ? "stage.delivered"
+                : entry.isFirstPage ? "app.nextUp" : "app.onTheWaySection"))
                 .minimumScaleFactor(0.7)
         }
         .font(.caption2.weight(.heavy))

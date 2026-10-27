@@ -10,6 +10,8 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     let trackingNumber: String
     let detail: String
     let isOutForDelivery: Bool
+    /// When a delivered parcel arrived: the widget keeps it for a day after.
+    var deliveredAt: Date? = nil
     /// The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone.
     var card: DeliveryWidgetCard? = nil
 
@@ -107,24 +109,52 @@ struct DeliveryActivityAttributes: ActivityAttributes {
 #endif
 
 enum DeliveryWidgetSelection {
-    static func displayParcels(
-        from priorityOrderedCandidates: [DeliveryWidgetParcel],
-        limit: Int = 2
+    /// How many parcels the widget's next button turns through.
+    static let limit = 8
+    /// How long a delivered parcel stays in the widget.
+    static let deliveredFor: TimeInterval = 24 * 60 * 60
+
+    /// The parcels the widget turns through: those out for delivery, then the others on their way as `onTheWay` orders
+    /// them, then those delivered within the last day, as `delivered` orders them.
+    static func parcels(
+        onTheWay: [DeliveryWidgetParcel],
+        delivered: [DeliveryWidgetParcel],
+        now: Date = Date()
     ) -> [DeliveryWidgetParcel] {
-        guard limit > 0 else { return [] }
-        let outForDelivery = priorityOrderedCandidates.filter(\.isOutForDelivery)
-        if outForDelivery.count >= limit {
-            return Array(outForDelivery.prefix(limit))
-        }
-        guard let firstOutForDelivery = outForDelivery.first else {
-            return Array(priorityOrderedCandidates.prefix(1))
-        }
-        guard limit > 1,
-              let nextUp = priorityOrderedCandidates.first(where: { !$0.isOutForDelivery }) else {
-            return [firstOutForDelivery]
-        }
-        return [firstOutForDelivery, nextUp]
+        let recent = delivered.filter { isShown($0, now: now) && $0.deliveredAt != nil }
+        return Array((onTheWay.filter(\.isOutForDelivery) + onTheWay.filter { !$0.isOutForDelivery } + recent).prefix(limit))
     }
+
+    /// What a widget shows at a time, first page first. A small one shows one parcel. A medium one shows a parcel out for
+    /// delivery beside the parcel after it, and any other parcel alone, across it.
+    static func pages(of parcels: [DeliveryWidgetParcel], medium: Bool, now: Date = Date()) -> [[DeliveryWidgetParcel]] {
+        var rest = parcels.filter { isShown($0, now: now) }[...]
+        var pages: [[DeliveryWidgetParcel]] = []
+        while let first = rest.popFirst() {
+            if medium, first.isOutForDelivery, let second = rest.popFirst() {
+                pages.append([first, second])
+            } else {
+                pages.append([first])
+            }
+        }
+        return pages
+    }
+
+    /// A delivered parcel leaves the widget a day after it arrived, whenever the app last published it.
+    private static func isShown(_ parcel: DeliveryWidgetParcel, now: Date) -> Bool {
+        parcel.deliveredAt.map { now.timeIntervalSince($0) < deliveredFor } ?? true
+    }
+}
+
+/// A widget turned to other parcels with its next button: the first of them, and when. It shows its first parcels again
+/// a few minutes later, as its job is the next delivery.
+struct DeliveryWidgetTurn: Codable, Equatable, Sendable {
+    let parcel: UUID
+    let at: Date
+
+    static let spell: TimeInterval = 5 * 60
+
+    var ends: Date { at.addingTimeInterval(Self.spell) }
 }
 
 struct DeliveryWidgetSharedStore {
@@ -135,6 +165,7 @@ struct DeliveryWidgetSharedStore {
     private static let liveActivitiesEnabledKey = "sdt.deliveryLiveActivities.enabled.v1"
     private static let languageKey = "sdt.deliveryWidget.language.v1"
     private static let snapshotKey = "sdt.deliveryWidget.snapshot.v1"
+    private static let turnsKey = "sdt.deliveryWidget.turns.v1"
     private let defaults: UserDefaults
 
     init?(appGroupIdentifier: String, fallbackToStandard: Bool = false) {
@@ -198,6 +229,23 @@ struct DeliveryWidgetSharedStore {
 
     func clearSnapshot() {
         defaults.removeObject(forKey: Self.snapshotKey)
+    }
+
+    /// Where the widgets of one size were turned to, until the turn's spell ends.
+    func turn(size: String, now: Date = Date()) -> DeliveryWidgetTurn? {
+        turns[size].flatMap { now < $0.ends ? $0 : nil }
+    }
+
+    func setTurn(_ turn: DeliveryWidgetTurn, size: String) {
+        var turns = turns
+        turns[size] = turn
+        guard let data = try? JSONEncoder().encode(turns) else { return }
+        defaults.set(data, forKey: Self.turnsKey)
+    }
+
+    private var turns: [String: DeliveryWidgetTurn] {
+        guard let data = defaults.data(forKey: Self.turnsKey) else { return [:] }
+        return (try? JSONDecoder().decode([String: DeliveryWidgetTurn].self, from: data)) ?? [:]
     }
 
     static func appGroupIdentifier(bundle: Bundle = .main) -> String {

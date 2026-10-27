@@ -14,7 +14,7 @@ import AppKit
 @MainActor
 enum DeliveryWidgetPictures {
     /// Changes whenever the pictures are drawn differently, so that the ones already drawn are drawn again.
-    private static let version = 1
+    private static let version = 2
 
     /// How a route is drawn for each size of widget. A route is no bigger than the smallest widget it goes in, which
     /// shows it as wide as the card: an image larger than its widget is not shown.
@@ -76,9 +76,10 @@ enum DeliveryWidgetPictures {
         let identity = CarrierVisualIdentity.of(parcel.displayedCarrier, language: localizer.language)
         let placed = parcel.hasMappedPlace
         for dark in [false, true] {
-            if placed, let atlas {
-                for picture in DeliveryWidgetPicture.routes {
-                    let frame = frame(of: picture)
+            for picture in DeliveryWidgetPicture.routes {
+                let frame = frame(of: picture)
+                let file = picture.file(of: card, dark: dark, in: folder)
+                if placed, let atlas {
                     let route = RouteEngraving(
                         atlas: atlas, route: ParcelRoute(parcel: parcel, atlas: atlas, language: localizer.language),
                         stage: parcel.currentStage, identity: identity, peek: false, insets: frame.insets, ceiling: frame.ceiling,
@@ -88,9 +89,13 @@ enum DeliveryWidgetPictures {
                     .mask(LinearGradient(stops: [.init(color: .clear, location: frame.fade.lowerBound / frame.size.height),
                                                  .init(color: .black, location: frame.fade.upperBound / frame.size.height)],
                                          startPoint: .top, endPoint: .bottom))
-                    guard write(route, dark: dark, localizer: localizer, to: picture.file(of: card, dark: dark, in: folder)) else { return false }
-                    await Task.yield()
+                    guard write(route, dark: dark, localizer: localizer, to: file) else { return false }
+                } else {
+                    // With no route to draw, Pip still stands where it would be.
+                    let pip = LonePip(mood: PipMood(stage: parcel.currentStage) ?? .look, identity: identity, frame: frame)
+                    guard write(pip, dark: dark, localizer: localizer, to: file) else { return false }
                 }
+                await Task.yield()
             }
         }
         for dark in [false, true] {
@@ -124,5 +129,27 @@ enum DeliveryWidgetPictures {
               let destination = CGImageDestinationCreateWithURL(file as CFURL, UTType.png.identifier as CFString, 1, nil) else { return false }
         CGImageDestinationAddImage(destination, image, nil)
         return CGImageDestinationFinalize(destination)
+    }
+}
+
+/// Pip across the top of a card whose parcel has no places: as big as he fits between the card's top row and its words,
+/// at its trailing end, looking back at them.
+private struct LonePip: View {
+    let mood: PipMood
+    let identity: CarrierVisualIdentity
+    let frame: DeliveryWidgetPictures.Frame
+
+    var body: some View {
+        let side = -1
+        let extents = PipGeometry.extents(mood, side: side)
+        let room = frame.floor - frame.ceiling
+        let width = mood.widths.first { extents.height * $0 / PipGeometry.frame.width <= room } ?? mood.widths[mood.widths.count - 1]
+        let unit = width / PipGeometry.frame.width
+        let origin = CGPoint(x: frame.size.width - frame.insets.trailing - extents.maxX * unit,
+                             y: frame.ceiling + (room - extents.height * unit) / 2 - extents.minY * unit)
+        InkPip(mood: mood, side: side, below: false, ink: identity.ink, surface: identity.surface)
+            .frame(width: width, height: width * PipGeometry.frame.height / PipGeometry.frame.width)
+            .offset(x: origin.x, y: origin.y)
+            .frame(width: frame.size.width, height: frame.size.height, alignment: .topLeading)
     }
 }

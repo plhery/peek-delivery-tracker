@@ -154,11 +154,14 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   `NSSupportsLiveActivities` in `Info.plist`). Settings has no switch for them, and the
   app ends any still showing and withdraws the iPhone's registration, so the server
   starts none.
-- **The widget** shows the next parcel and up to two out-for-delivery parcels. Tapping one
-  opens it. Each is its card from the app's list: the carrier's colours and mark over the
-  parcel's route. A widget hasn't the memory to draw the map, so the app draws these pictures
-  into the App Group (`DeliveryWidgetPictures`); until they are there, the widget shows the
-  parcels in words. Tinted and clear widgets keep the card without its colours or route.
+- **The widget** shows the next parcel; a medium one shows a parcel out for delivery beside
+  the one after it. Tapping one opens it. When more parcels are on their way, or were delivered in the last day, a small
+  next button turns the widget to them (`ShowNextParcelIntent`); a few minutes later it shows
+  its first parcels again. Each is its card from the app's list: the carrier's colours and mark
+  over the parcel's route, or Pip alone for a parcel without places. A widget hasn't the memory
+  to draw the map, so the app draws these pictures into the App Group (`DeliveryWidgetPictures`);
+  until they are there, the widget shows the parcels in words. Tinted and clear widgets keep
+  the card without its colours or route.
   Until the app has drawn the reader's cards, the widget gallery shows the demo's next
   deliveries, which the widget bundles in `DeliveryWidgetExtension/WidgetSample`. A test
   checks them against the demo; it redraws them when run with

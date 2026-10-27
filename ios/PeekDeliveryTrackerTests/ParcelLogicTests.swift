@@ -823,26 +823,56 @@ final class ParcelLogicTests: XCTestCase {
         let nextUp = widgetParcel(label: "Next up", outForDelivery: false)
         let outForDelivery = widgetParcel(label: "Courier", outForDelivery: true)
         let later = widgetParcel(label: "Later", outForDelivery: false)
+        let parcels = DeliveryWidgetSelection.parcels(onTheWay: [nextUp, outForDelivery, later], delivered: [])
 
-        XCTAssertEqual(
-            DeliveryWidgetSelection.displayParcels(from: [nextUp, outForDelivery, later]),
-            [outForDelivery, nextUp]
-        )
+        XCTAssertEqual(parcels, [outForDelivery, nextUp, later])
+        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: true), [[outForDelivery, nextUp], [later]])
+        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: false), [[outForDelivery], [nextUp], [later]])
     }
 
     func testWidgetShowsTwoOutForDeliveryParcelsBeforeOtherCandidates() {
         let nextUp = widgetParcel(label: "Next up", outForDelivery: false)
         let first = widgetParcel(label: "Courier one", outForDelivery: true)
         let second = widgetParcel(label: "Courier two", outForDelivery: true)
+        let third = widgetParcel(label: "Courier three", outForDelivery: true)
+        let parcels = DeliveryWidgetSelection.parcels(onTheWay: [nextUp, first, second, third], delivered: [])
 
-        XCTAssertEqual(
-            DeliveryWidgetSelection.displayParcels(from: [nextUp, first, second]),
-            [first, second]
-        )
-        XCTAssertEqual(
-            DeliveryWidgetSelection.displayParcels(from: [nextUp]),
-            [nextUp]
-        )
+        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: true), [[first, second], [third, nextUp]])
+        XCTAssertEqual(DeliveryWidgetSelection.pages(of: [nextUp], medium: true), [[nextUp]])
+    }
+
+    /// A delivered parcel comes after those on their way, for a day after it arrived, even when the app has not
+    /// published since.
+    func testWidgetKeepsADeliveredParcelForADay() {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let nextUp = widgetParcel(label: "Next up", outForDelivery: false)
+        var arrived = widgetParcel(label: "Arrived", outForDelivery: false)
+        arrived.deliveredAt = now.addingTimeInterval(-3_600)
+        var older = widgetParcel(label: "Older", outForDelivery: false)
+        older.deliveredAt = now.addingTimeInterval(-DeliveryWidgetSelection.deliveredFor - 1)
+        let parcels = DeliveryWidgetSelection.parcels(onTheWay: [nextUp], delivered: [arrived, older], now: now)
+
+        XCTAssertEqual(parcels, [nextUp, arrived])
+        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: true, now: now), [[nextUp], [arrived]])
+        XCTAssertEqual(DeliveryWidgetSelection.pages(of: parcels, medium: false, now: now.addingTimeInterval(DeliveryWidgetSelection.deliveredFor)), [[nextUp]])
+        let many = (0..<12).map { widgetParcel(label: "Parcel \($0)", outForDelivery: false) }
+        XCTAssertEqual(DeliveryWidgetSelection.parcels(onTheWay: many, delivered: [arrived], now: now).count, DeliveryWidgetSelection.limit)
+    }
+
+    /// The next button turns the widgets of one size, and for a few minutes only.
+    func testWidgetTurnLastsItsSpellForOneSize() throws {
+        let suiteName = "DeliveryWidgetTurnTests.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        let store = DeliveryWidgetSharedStore(defaults: defaults)
+        let at = Date(timeIntervalSince1970: 1_800_000_000)
+        let turn = DeliveryWidgetTurn(parcel: UUID(), at: at)
+
+        XCTAssertNil(store.turn(size: "small", now: at))
+        store.setTurn(turn, size: "small")
+        XCTAssertEqual(store.turn(size: "small", now: at.addingTimeInterval(60)), turn)
+        XCTAssertNil(store.turn(size: "medium", now: at.addingTimeInterval(60)))
+        XCTAssertNil(store.turn(size: "small", now: turn.ends))
     }
 
     func testDisablingWidgetRemovesSharedParcelSnapshot() throws {

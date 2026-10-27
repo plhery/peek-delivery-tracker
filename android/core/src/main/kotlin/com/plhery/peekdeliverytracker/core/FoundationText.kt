@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.core
 
 import java.math.BigDecimal
+import java.math.MathContext
+import java.math.RoundingMode
 import java.text.Collator
 import java.text.Normalizer
 import java.util.Locale
@@ -217,16 +219,23 @@ internal enum class LocalizedComparison {
 private fun String.foldedForCollation(): String = if (all { it < '\u0080' }) this else foldedCase()
 
 /**
- * Swift's `Double.description`: the shortest digits that read back as the value, written with an exponent
- * below 0.0001 and beyond 2^53.
+ * Swift's `Double.description`: the shortest digits that read back as the value (the nearest of them when several
+ * do), written with an exponent below 0.0001 and beyond 2^53.
  */
 internal fun Double.swiftDescription(): String {
     if (isNaN()) return "nan"
     if (isInfinite()) return if (this > 0) "inf" else "-inf"
     if (this == 0.0) return if (1.0 / this < 0) "-0.0" else "0.0"
     val sign = if (this < 0) "-" else ""
-    // Double.toString gives those shortest digits (JDK 19 on).
-    val decimal = BigDecimal(abs(this).toString()).stripTrailingZeros()
+    // Rounded from the exact value: Double.toString keeps two digits (4.9E-324 for 5e-324), and before JDK 19, as on
+    // Android, is not always the shortest.
+    val magnitude = abs(this)
+    val exact = BigDecimal(magnitude)
+    val decimal = (1..17).firstNotNullOf { length ->
+        sequenceOf(RoundingMode.HALF_EVEN, RoundingMode.DOWN, RoundingMode.UP)
+            .map { exact.round(MathContext(length, it)) }
+            .firstOrNull { it.toString().toDouble() == magnitude }
+    }.stripTrailingZeros()
     val digits = decimal.unscaledValue().toString()
     // The value is 0.digits × 10^exponent.
     val exponent = digits.length - decimal.scale()

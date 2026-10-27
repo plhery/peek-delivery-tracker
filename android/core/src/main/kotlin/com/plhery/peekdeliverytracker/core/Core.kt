@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import com.plhery.peekdeliverytracker.core.api.UuidSerializer
 import java.io.IOException
 import java.time.Instant
 import java.time.ZoneId
@@ -20,12 +21,20 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.StructureKind
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 
-// Core.swift without what is the platform's: DeviceIdiom, Clipboard and Haptics are the app's, and the
-// JSONDecoder/JSONEncoder settings are ApiJson.
+// Core.swift without what is the platform's: DeviceIdiom, Clipboard and Haptics are the app's. The JSONDecoder settings
+// are ApiJson; `JsonEncoder` writes the bytes Swift's JSONEncoder does.
 
 data class AppConfiguration(
     val mode: Mode,
@@ -505,6 +514,10 @@ val TrackingEvent.displayDate: Instant? get() = calendarDay ?: DateParser.date(o
 internal fun Instant.timeIntervalSince(other: Instant): Double =
     (epochSecond - other.epochSecond) + (nano - other.nano) / 1_000_000_000.0
 
+/** Foundation's `timeIntervalSinceReferenceDate`: the seconds since 2001-01-01, as a `Date` holds them and JSON writes them. */
+internal val Instant.timeIntervalSinceReferenceDate: Double
+    get() = (epochSecond - 978_307_200) + nano / 1_000_000_000.0
+
 object DateParser {
     private val unparsed = Instant.MIN
 
@@ -530,4 +543,110 @@ object DateParser {
 
     /** ISO8601DateFormatter's default: whole seconds, in UTC. */
     fun isoString(date: Instant): String = isoFormatter.format(date)
+}
+
+/**
+ * Swift's `JSONEncoder`: the bytes the iPhone app writes for a value. Nil properties are left out (but for the types
+ * in `typesEncodingNil`, whose own `encode(to:)` writes them as null), a UUID is its `uuidString` in capitals, `/` is
+ * written `\/`, control characters are escaped and the rest written as it is, and numbers as Swift prints a Double.
+ * The keys follow the declaration unless sorted, by their Unicode scalars: Swift's own unsorted order is a hash order no
+ * two runs share.
+ */
+class JsonEncoder(private val sortedKeys: Boolean = false) {
+    fun <T> encode(serializer: SerializationStrategy<T>, value: T): ByteArray {
+        val element = tree.encodeToJsonElement(serializer, value).asSwiftWrites(serializer.descriptor)
+        return StringBuilder().also { it.write(element) }.toString().toByteArray(Charsets.UTF_8)
+    }
+
+    private fun JsonElement.asSwiftWrites(descriptor: SerialDescriptor): JsonElement = when {
+        this is JsonObject && descriptor.kind == StructureKind.CLASS -> {
+            val nil = descriptor.serialName.removeSuffix("?") in typesEncodingNil
+            val fields = LinkedHashMap<String, JsonElement>()
+            for (index in 0 until descriptor.elementsCount) {
+                val name = descriptor.getElementName(index)
+                val field = this[name]
+                if (field != null) fields[name] = field.asSwiftWrites(descriptor.getElementDescriptor(index)) else if (nil) fields[name] = JsonNull
+            }
+            JsonObject(fields)
+        }
+        this is JsonObject && descriptor.kind == StructureKind.MAP ->
+            JsonObject(mapValues { it.value.asSwiftWrites(descriptor.getElementDescriptor(1)) })
+        this is JsonArray && descriptor.kind == StructureKind.LIST -> JsonArray(map { it.asSwiftWrites(descriptor.getElementDescriptor(0)) })
+        this is JsonPrimitive && isString && descriptor.serialName.removeSuffix("?") == UuidSerializer.descriptor.serialName ->
+            JsonPrimitive(content.uppercase(Locale.ROOT))
+        else -> this
+    }
+
+    private fun StringBuilder.write(element: JsonElement) {
+        when (element) {
+            is JsonObject -> {
+                append('{')
+                val keys = if (sortedKeys) element.keys.sortedWith(byScalars) else element.keys
+                for ((index, key) in keys.withIndex()) {
+                    if (index > 0) append(',')
+                    quote(key)
+                    append(':')
+                    write(element.getValue(key))
+                }
+                append('}')
+            }
+            is JsonArray -> {
+                append('[')
+                for ((index, item) in element.withIndex()) {
+                    if (index > 0) append(',')
+                    write(item)
+                }
+                append(']')
+            }
+            is JsonPrimitive -> when {
+                element.isString -> quote(element.content)
+                element is JsonNull || element.content == "true" || element.content == "false" -> append(element.content)
+                // Swift writes a Double's description, less a whole number's ".0".
+                element.content.any { it == '.' || it == 'e' || it == 'E' } -> append(element.content.toDouble().swiftDescription().removeSuffix(".0"))
+                else -> append(element.content)
+            }
+        }
+    }
+
+    private fun StringBuilder.quote(text: String) {
+        append('"')
+        for (char in text) {
+            when (char) {
+                '"' -> append("\\\"")
+                '\\' -> append("\\\\")
+                '/' -> append("\\/")
+                '\n' -> append("\\n")
+                '\r' -> append("\\r")
+                '\t' -> append("\\t")
+                '\b' -> append("\\b")
+                '\u000C' -> append("\\f")
+                else -> if (char < ' ') append("\\u00").append(String.format(Locale.ROOT, "%02x", char.code)) else append(char)
+            }
+        }
+        append('"')
+    }
+
+    companion object {
+        /** `JSONEncoder.deliveryTracker`: keys sorted, as the API's requests go. */
+        val deliveryTracker = JsonEncoder(sortedKeys = true)
+
+        /** UTF-16 order puts the scalars above U+FFFF before U+E000 to U+FFFF; Swift does not. */
+        private val byScalars = Comparator<String> { left, right ->
+            var i = 0
+            var j = 0
+            while (i < left.length && j < right.length) {
+                val a = left.codePointAt(i)
+                val b = right.codePointAt(j)
+                if (a != b) return@Comparator a.compareTo(b)
+                i += Character.charCount(a)
+                j += Character.charCount(b)
+            }
+            (left.length - i).compareTo(right.length - j)
+        }
+
+        private val tree = Json {
+            encodeDefaults = true
+            explicitNulls = false
+        }
+    }
 }

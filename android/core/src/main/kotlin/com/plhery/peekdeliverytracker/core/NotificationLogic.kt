@@ -211,6 +211,13 @@ interface UserDefaults {
     fun bool(forKey: String): Boolean
 
     fun set(value: Boolean, forKey: String)
+
+    /** The bytes saved under the key; nil when nothing, or something else, is. */
+    fun data(forKey: String): ByteArray?
+
+    fun set(value: ByteArray, forKey: String)
+
+    fun removeObject(forKey: String)
 }
 
 object NotificationInvitationPreference {

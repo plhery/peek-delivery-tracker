@@ -24,15 +24,6 @@ import org.junit.Test
 
 /** NotificationLogicTests.swift. The SwiftUI layouts it renders are the app's to test. */
 class NotificationLogicTests {
-    /** A UserDefaults suite in memory: a second instance on the same values reads what the first one saved. */
-    private class MemoryDefaults(val values: MutableMap<String, Boolean> = mutableMapOf()) : UserDefaults {
-        override fun bool(forKey: String): Boolean = values[forKey] ?: false
-
-        override fun set(value: Boolean, forKey: String) {
-            values[forKey] = value
-        }
-    }
-
     @Test
     fun presetsMatchStageSetsRegardlessOfOrder() {
         assertEquals(NotificationPreset.All, NotificationPreset.matching(NotificationPreset.All.stages.reversed()))

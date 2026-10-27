@@ -4,10 +4,16 @@ import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.event
 import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.makeParcel
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
+import com.plhery.peekdeliverytracker.core.api.LiveActivityUpdateTokenRequest
+import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
+import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
 import java.time.ZoneId
 import java.util.UUID
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.builtins.serializer
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -293,5 +299,29 @@ class CoreParityTests {
         // Midnight falls in the gap when the clocks go forward, and the day starts by the offset before it.
         assertEquals(Instant.parse("2026-03-08T05:00:00Z"), day("2026-03-08", "America/Havana"))
         assertEquals(Instant.parse("2026-09-06T04:00:00Z"), day("2026-09-06", "America/Santiago"))
+    }
+
+    @Test
+    fun requestsAreWrittenAsTheIphoneAppWritesThem() {
+        val request = LiveActivityUpdateTokenRequest(
+            installationId = UUID.fromString("4600000a-0000-4000-8000-00000000abcd"), activityId = "a/b",
+            parcelId = UUID.fromString("46000000-0000-0000-0000-0000000000ef"), token = "a1b2c3d4",
+            environment = NativePushEnvironment.Production, locale = NativePushLocale.Fr,
+        )
+        assertEquals(
+            "{\"activityId\":\"a\\/b\",\"environment\":\"production\",\"installationId\":\"4600000A-0000-4000-8000-00000000ABCD\"," +
+                "\"locale\":\"fr\",\"parcelId\":\"46000000-0000-0000-0000-0000000000EF\",\"token\":\"a1b2c3d4\"}",
+            JsonEncoder.deliveryTracker.encode(LiveActivityUpdateTokenRequest.serializer(), request).decodeToString(),
+        )
+        val keys = mapOf("\uFFFF" to 0, "\uD800\uDC00" to 1, "Z" to 2, "a" to 3)
+        assertEquals(
+            "{\"Z\":2,\"a\":3,\"\uFFFF\":0,\"\uD800\uDC00\":1}",
+            JsonEncoder.deliveryTracker.encode(MapSerializer(String.serializer(), Int.serializer()), keys).decodeToString(),
+        )
+        val numbers = listOf(9007199254740992.0, 9007199254740994.0, Double.MIN_VALUE, 1e16, 0.0001, 0.0000999, 100.0, -0.0)
+        assertEquals(
+            "[9007199254740992,9.007199254740994e+15,5e-324,1e+16,0.0001,9.99e-05,100,-0]",
+            JsonEncoder.deliveryTracker.encode(ListSerializer(Double.serializer()), numbers).decodeToString(),
+        )
     }
 }

@@ -5,8 +5,6 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.io.IOException
-import java.text.DecimalFormat
-import java.text.NumberFormat
 import java.time.DateTimeException
 import java.time.Instant
 import java.time.LocalDate
@@ -17,7 +15,6 @@ import java.time.chrono.IsoChronology
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.FormatStyle
-import java.util.Currency
 import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
@@ -416,12 +413,23 @@ class Localizer(
         )
     }
 
-    /** An amount in a currency, as the app language writes it. A code Java does not know is written before the number. */
+    /**
+     * `value.formatted(.currency(code:).locale(_:))`: ICU's currency format in the app language. Foundation hands
+     * ICU the code inside a number skeleton, where it is three of ICU's invariant characters in either case, up
+     * to the white space that ends the option; anything else is no currency, and the number is written as Swift
+     * describes it.
+     */
     private fun money(value: Double, code: String): String {
-        val currency = runCatching { Currency.getInstance(code.uppercase(Locale.ROOT)) }.getOrNull()
-            ?: return "$code " + (NumberFormat.getNumberInstance(language.locale) as DecimalFormat)
-                .apply { minimumFractionDigits = 2; maximumFractionDigits = 2 }.format(value)
-        return NumberFormat.getCurrencyInstance(language.locale).apply { this.currency = currency }.format(value)
+        val match = currencyCode.matcher(code)
+        if (!match.matches()) return value.swiftDescription()
+        val token = match.group(1).uppercase(Locale.ROOT)
+        if (token.all { it in 'A'..'Z' }) {
+            return Icu.currencies.format(value, token, language.locale, if (token in wholeCurrencies) 0 else null)
+        }
+        // ICU's Currency takes letters alone; any other code is one ICU has no data for, written as it is given,
+        // which ICU keeps apart from the digits unless it ends in a symbol ("EU+34.41").
+        val text = Icu.currencies.format(value, unknownCurrency, language.locale, null).replace(unknownCurrency, token)
+        return if (Character.getType(token.last()) == Character.MATH_SYMBOL.toInt()) text.replace("$token\u00A0", token) else text
     }
 
     @Serializable
@@ -431,6 +439,15 @@ class Localizer(
     }
 
     private companion object {
+        val currencyCode: Pattern =
+            Pattern.compile("([\"%&'()*+,\\-.0-9:;<=>?A-Z_a-z]{3})[\\t\\n\\x{0B}\\f\\r \\x{85}\\x{200E}\\x{200F}\\x{2028}\\x{2029}]*")
+
+        // Apple writes these without decimals, where CLDR gives them two.
+        val wholeCurrencies = setOf("COP", "HUF", "IDR", "PKR")
+
+        // A code no currency has, which ICU writes as it is.
+        const val unknownCurrency = "QQQ"
+
         val dictionaries: Map<String, Map<String, String>> by lazy {
             runCatching {
                 Json.decodeFromString(

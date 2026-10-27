@@ -3,6 +3,8 @@ package com.plhery.peekdeliverytracker.core
 import java.lang.reflect.Method
 import java.net.IDN
 import java.text.Collator
+import java.text.NumberFormat
+import java.util.Currency
 import java.util.Locale
 
 /**
@@ -18,6 +20,10 @@ object Icu {
     /** Collation, which Foundation's localized comparisons run on. */
     @Volatile
     var collators: CollatorFactory = IcuCollators.from("android.icu.text") ?: JdkCollators
+
+    /** Amounts of money, which Foundation's currency format style writes with ICU. */
+    @Volatile
+    var currencies: CurrencyFormatter = IcuCurrencies.from("android.icu") ?: JdkCurrencies
 }
 
 /** ICU's UTS #46 processing (`IDNA.nameToASCII`, `nameToUnicode`): the converted name and the `IDNA.Error`s met, by name. */
@@ -121,5 +127,59 @@ private object JdkCollators : CollatorFactory {
         val collator = Collator.getInstance(locale)
         collator.strength = if (caseLevel) Collator.TERTIARY else strength
         return Comparator { left, right -> collator.compare(left, right) }
+    }
+}
+
+/**
+ * ICU's `NumberFormatter` with a currency for a locale. `code` is three ASCII capitals; `fractionDigits`, when
+ * given, replaces the currency's own.
+ */
+fun interface CurrencyFormatter {
+    fun format(value: Double, code: String, locale: Locale, fractionDigits: Int?): String
+}
+
+/** ICU's `NumberFormatter` (android.icu.number, com.ibm.icu.number), found by name. */
+internal class IcuCurrencies private constructor(packageName: String) : CurrencyFormatter {
+    private val localized = Class.forName("$packageName.number.LocalizedNumberFormatter")
+    private val precisionClass = Class.forName("$packageName.number.Precision")
+    private val withLocale = Class.forName("$packageName.number.NumberFormatter").getMethod("withLocale", Locale::class.java)
+    private val unit = localized.getMethod("unit", Class.forName("$packageName.util.MeasureUnit"))
+    private val precision = localized.getMethod("precision", precisionClass)
+    private val fixedFraction = precisionClass.getMethod("fixedFraction", Int::class.javaPrimitiveType)
+    private val format = localized.getMethod("format", Double::class.javaPrimitiveType)
+    private val currency = Class.forName("$packageName.util.Currency").getMethod("getInstance", String::class.java)
+
+    override fun format(value: Double, code: String, locale: Locale, fractionDigits: Int?): String {
+        var formatter = unit.invoke(withLocale.invoke(null, locale), currency.invoke(null, code))
+        if (fractionDigits != null) formatter = precision.invoke(formatter, fixedFraction.invoke(null, fractionDigits))
+        return format.invoke(formatter, value).toString()
+    }
+
+    companion object {
+        fun from(packageName: String): IcuCurrencies? = try {
+            IcuCurrencies(packageName)
+        } catch (_: ReflectiveOperationException) {
+            null
+        } catch (_: LinkageError) {
+            null
+        }
+    }
+}
+
+/** java.text's currency format, which groups every thousand and writes a code it does not know before the number. */
+private object JdkCurrencies : CurrencyFormatter {
+    override fun format(value: Double, code: String, locale: Locale, fractionDigits: Int?): String {
+        val currency = runCatching { Currency.getInstance(code) }.getOrNull()
+        val format = if (currency != null) {
+            NumberFormat.getCurrencyInstance(locale).also { it.currency = currency }
+        } else {
+            NumberFormat.getNumberInstance(locale).also { it.minimumFractionDigits = 2; it.maximumFractionDigits = 2 }
+        }
+        if (fractionDigits != null) {
+            format.minimumFractionDigits = fractionDigits
+            format.maximumFractionDigits = fractionDigits
+        }
+        val text = format.format(value)
+        return if (currency != null) text else "$code\u00A0$text"
     }
 }

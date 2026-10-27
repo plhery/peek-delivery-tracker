@@ -40,7 +40,7 @@ private fun isDelta(scalar: Int): Boolean = ScalarData.normalizationDelta.binary
 private fun String.hasNormalizationDelta(): Boolean {
     var index = 0
     while (index < length) {
-        if (this[index] < 'ࢗ') {
+        if (this[index] < '\u0897') {
             index++
             continue
         }

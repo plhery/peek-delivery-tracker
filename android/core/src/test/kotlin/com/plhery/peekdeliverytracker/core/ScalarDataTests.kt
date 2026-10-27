@@ -89,10 +89,25 @@ class ScalarDataTests {
             listOf(
                 text(0x61, scalar, 0x301), text(0x61, 0x301, scalar), text(0x61, scalar, 0x316, 0x301), text(scalar, scalar),
                 text(scalar, 0x301), text(0x1100, 0x1161, scalar), text(0xE1, scalar), text(0x1E0B, 0x323, scalar),
-            ) + (nfc.getRawDecomposition(scalar)?.let { parts -> listOf(parts, parts + "́", "a$partş") } ?: emptyList())
+            ) + (nfc.getRawDecomposition(scalar)?.let { parts -> listOf(parts, parts + "\u0301", "a$parts\u0327") } ?: emptyList())
         }
         val mismatches = texts.filter { it.nfc() != nfc.normalize(it) || it.nfd() != nfd.normalize(it) }
         assertEquals(emptyList<String>(), mismatches.map(::hex))
+    }
+
+    /**
+     * U+0898, a mark of class 230 from Unicode 14, is unassigned on Android 12, whose normalizer would leave it where
+     * it stands. It is in the delta, so the core orders it by Swift's classes on every phone: after U+0316, of class
+     * 220, as Swift's `==` and hash have it on macOS 27.
+     */
+    @Test
+    fun aMarkAndroid12DoesNotKnowIsOrderedAsOnTheIPhone() {
+        assertTrue(0x898 in ScalarData.normalizationDelta)
+        val ordered = text(0x61, 0x316, 0x898)
+        val typed = text(0x61, 0x898, 0x316)
+        assertTrue(ordered.equalsCanonically(typed))
+        assertEquals(ordered.canonicalHashCode(), typed.canonicalHashCode())
+        assertEquals(ordered, typed.nfc())
     }
 
     /** Swift's `==` on macOS 27, with Unicode 17's marks, which no ICU4J nor phone yet knows. */

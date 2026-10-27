@@ -867,17 +867,17 @@ class ParcelFeedbackTests {
     fun wordsWrittenInAnotherNormalizationAreTheSame() = runTest {
         val sent = Sent()
         val clock = Clock()
-        val composed = page(ParcelFeedbackSubject.Link("café"), scan = "1:café")
+        val composed = page(ParcelFeedbackSubject.Link("caf\u00E9"), scan = "1:caf\u00E9")
         val model = visit(composed, sent, MemoryDefaults(), clock)
         model.notQuite()
-        model.show(page(ParcelFeedbackSubject.Link("café"), scan = "1:café"), through = sent.client)
+        model.show(page(ParcelFeedbackSubject.Link("cafe\u0301"), scan = "1:cafe\u0301"), through = sent.client)
         assertEquals(ParcelFeedbackModel.Moment.Reasons, model.moment)
         assertEquals(composed, model.page)
-        assertEquals(composed.hashCode(), page(ParcelFeedbackSubject.Link("café"), scan = "1:café").hashCode())
+        assertEquals(composed.hashCode(), page(ParcelFeedbackSubject.Link("cafe\u0301"), scan = "1:cafe\u0301").hashCode())
 
-        comeBack(model, clock, from = "Café")
-        assertEquals(ParcelFeedbackModel.Word.Back(site = "Café"), model.word)
-        model.wordLeft(ParcelFeedbackModel.Word.Back(site = "Café"))
+        comeBack(model, clock, from = "Caf\u00E9")
+        assertEquals(ParcelFeedbackModel.Word.Back(site = "Caf\u00E9"), model.word)
+        model.wordLeft(ParcelFeedbackModel.Word.Back(site = "Cafe\u0301"))
         assertNull(model.word)
     }
 

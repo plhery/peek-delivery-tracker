@@ -601,12 +601,12 @@ class ParcelRouteTests {
         val measured = mutableListOf<String>()
         val measurer = TextMeasurer { text, font -> measured.add("$text ${font.size}"); 10.2 }
         val font = MapOverlay.Fonts.pointerName
-        repeat(3) { assertEquals(11.0, MapOverlay.Fonts.width("Zürich", font, measurer), 0.0) }
-        assertEquals(11.0, MapOverlay.Fonts.width("Zürich", MapOverlay.Fonts.pointerDetail, measurer), 0.0)
-        assertEquals(11.0 + 6 * 0.5, MapOverlay.Fonts.width("Zürich", font, measurer, tracking = 0.5), 0.0)
-        assertEquals(listOf("Zürich 11.0", "Zürich 11.0", "Zürich 11.0"), measured)
+        repeat(3) { assertEquals(11.0, MapOverlay.Fonts.width("Z\u00FCrich", font, measurer), 0.0) }
+        assertEquals(11.0, MapOverlay.Fonts.width("Zu\u0308rich", MapOverlay.Fonts.pointerDetail, measurer), 0.0)
+        assertEquals(11.0 + 6 * 0.5, MapOverlay.Fonts.width("Zu\u0308rich", font, measurer, tracking = 0.5), 0.0)
+        assertEquals(listOf("Z\u00FCrich 11.0", "Zu\u0308rich 11.0", "Zu\u0308rich 11.0"), measured)
         // Another measurer measures for itself.
-        assertEquals(12.0, MapOverlay.Fonts.width("Zürich", font, TextMeasurer { _, _ -> 12.0 }), 0.0)
+        assertEquals(12.0, MapOverlay.Fonts.width("Z\u00FCrich", font, TextMeasurer { _, _ -> 12.0 }), 0.0)
     }
 
     @Test

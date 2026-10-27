@@ -106,7 +106,7 @@ class GraphemeBreakingTests {
         assertEquals(listOf(3), ends("କ୍ଷ"))
         assertEquals(listOf(3), ends("క్ష"))
         assertEquals(listOf(3), ends("ക്ഷ"))
-        assertEquals(listOf(5), ends("क़्\u200Dष"))
+        assertEquals(listOf(5), ends("क\u093C\u094D\u200Dष"))
         assertEquals(listOf(3, 4), ends("क्\u200Cष"))
         // Unicode 17's further linkers join nothing in Swift; its further consonants follow one of the six.
         assertEquals(listOf(2, 3), ends("က္က"))
@@ -123,9 +123,9 @@ class GraphemeBreakingTests {
         assertEquals(listOf(2, 3, 4), ends("\r\n\n\r"))
         assertEquals(listOf(2, 3), ends("\u0600a\u0600"))
         // A lone surrogate is U+FFFD, which a mark joins; an unassigned scalar is like any other.
-        assertEquals(listOf(2, 3, 4), ends("\uD800́\uDC00a"))
-        assertEquals(listOf(2), ends("\u0378́"))
+        assertEquals(listOf(2, 3, 4), ends("\uD800\u0301\uDC00a"))
+        assertEquals(listOf(2), ends("\u0378\u0301"))
         assertEquals(emptyList<Int>(), ends(""))
-        assertEquals(listOf("é", "x"), "éx".characters())
+        assertEquals(listOf("e\u0301", "x"), "e\u0301x".characters())
     }
 }

@@ -8,7 +8,6 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
-import java.text.Collator
 import java.time.Instant
 import java.time.ZoneId
 import java.util.Locale
@@ -653,10 +652,15 @@ object ParcelOrganizer {
     }
 
     /** `localizedCaseInsensitiveCompare`: the current locale's order, case aside. */
-    private fun caseInsensitiveCollator(): Collator =
-        Collator.getInstance(Locale.getDefault()).apply { strength = Collator.SECONDARY }
+    private fun caseInsensitiveCollator(): Comparator<String> =
+        LocalizedComparison.CaseInsensitive.comparator(Locale.getDefault())
 
-    private class SortKey(val parcel: Parcel, val sort: ParcelSort, catalog: CarrierCatalog, private val collator: Collator) {
+    private class SortKey(
+        val parcel: Parcel,
+        val sort: ParcelSort,
+        catalog: CarrierCatalog,
+        private val collator: Comparator<String>,
+    ) {
         val expected: String =
             if (sort == ParcelSort.Priority || sort == ParcelSort.Eta) parcel.expectedDayKey ?: "9999-99-99" else ""
         val updated: String =

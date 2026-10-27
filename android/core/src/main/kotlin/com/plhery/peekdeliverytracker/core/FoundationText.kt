@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import java.text.BreakIterator
+import java.text.Collator
 import java.text.Normalizer
 import java.util.Locale
 
@@ -142,3 +143,35 @@ private fun String.foldedCase(): String {
     }
     return Normalizer.normalize(folded, Normalizer.Form.NFD)
 }
+
+/** Foundation's localized comparisons, by the options they are given, as ICU collation (`Icu.collators`). */
+internal enum class LocalizedComparison {
+    /**
+     * `compare(_:locale:)`: accents and case tell strings apart, a letter's width or compatibility form (ﬁ, ②)
+     * does not. ICU's secondary strength with the case level.
+     */
+    Plain,
+
+    /** `localizedCaseInsensitiveCompare`, `.caseInsensitive`: accents count and case does not, ß is ss. */
+    CaseInsensitive,
+
+    /**
+     * `[.caseInsensitive, .diacriticInsensitive, .numeric]`: the letters alone, and numbers by their value.
+     * Foundation also calls two strings equal when they differ only in accents, even letters the language
+     * tells apart (Polish ó); that is left out, as a sort cannot rely on a comparison that does it.
+     */
+    Loose;
+
+    fun comparator(locale: Locale): Comparator<String> = when (this) {
+        Plain -> Icu.collators.collator(locale, Collator.SECONDARY, caseLevel = true, numeric = false)
+        CaseInsensitive -> {
+            // Foundation folds case in full before it collates (ß is ss, ſ is s), which ICU's secondary strength
+            // alone does not. ASCII needs no folding: its case is all the secondary strength passes over.
+            val collator = Icu.collators.collator(locale, Collator.SECONDARY, caseLevel = false, numeric = false)
+            Comparator { left, right -> collator.compare(left.foldedForCollation(), right.foldedForCollation()) }
+        }
+        Loose -> Icu.collators.collator(locale, Collator.PRIMARY, caseLevel = false, numeric = true)
+    }
+}
+
+private fun String.foldedForCollation(): String = if (all { it < '\u0080' }) this else foldedCase()

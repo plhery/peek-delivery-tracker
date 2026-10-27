@@ -14,7 +14,6 @@ import java.nio.ByteBuffer
 import java.nio.charset.CodingErrorAction
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
-import java.text.Collator
 import java.time.Duration
 import java.time.Instant
 import java.util.Locale
@@ -160,10 +159,9 @@ class CarrierCatalog private constructor(
 
     val selectableCarriers: List<CarrierId>
         get() {
-            // `localizedCaseInsensitiveCompare`.
-            val collator = Collator.getInstance(Locale.getDefault()).apply { strength = Collator.SECONDARY }
+            val comparator = LocalizedComparison.CaseInsensitive.comparator(Locale.getDefault())
             return definitions.filter { it.value.selectable }.keys
-                .sortedWith { left, right -> collator.compare(info(left).displayName, info(right).displayName) }
+                .sortedWith { left, right -> comparator.compare(info(left).displayName, info(right).displayName) }
         }
 
     fun tracksAutomatically(carrier: CarrierId): Boolean = info(carrier).tracking.mode == "automatic"
@@ -935,10 +933,10 @@ class CarrierCatalog private constructor(
         }
 
         /** Every country a delivery postcode can be from: ISO 3166-1's, and Kosovo, as the service takes them.
-         * The system's regions also name unions, groupings and reserved codes, which are left out. */
+         * Apple's regions also name unions, groupings and reserved codes, which are left out. */
         val countries: List<String> by lazy {
             val others = setOf("AC", "CP", "CQ", "DG", "EA", "EU", "EZ", "IC", "QO", "TA", "UN", "XA", "XB", "ZZ")
-            (Locale.getISOCountries().toSet() + "XK").filter { code ->
+            TrackingLocation.regions.filter { code ->
                 code.length == 2 && code.all { it in 'A'..'Z' } && code !in others
             }.sorted()
         }
@@ -949,8 +947,8 @@ class CarrierCatalog private constructor(
          * beside it. */
         fun countriesByName(language: AppLanguage): List<String> = countryOrders.getOrPut(language) {
             val names = countries.associateWith { TrackingLocation.countryName(it, language) }
-            val collator = Collator.getInstance(language.locale)
-            countries.sortedWith { left, right -> collator.compare(names[left] ?: left, names[right] ?: right) }
+            val comparator = LocalizedComparison.Plain.comparator(language.locale)
+            countries.sortedWith { left, right -> comparator.compare(names[left] ?: left, names[right] ?: right) }
         }
 
         private fun currentRegion(): String? = Locale.getDefault().country.nonEmpty

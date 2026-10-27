@@ -4,8 +4,10 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.BeforeClass
 import org.junit.Test
+import java.util.Locale
 
 /**
  * Inputs where Foundation and the JVM part ways, with what the iPhone app answers: each expected value is the
@@ -117,5 +119,87 @@ class CarrierCatalogParityTests {
         assertLink(linkMatch("1234567899", CarrierId.Dhl), "https://www.dhl.com/track?trac\u212Aing-id=1234567899")
         // A ligature is the letters it joins.
         assertLink(linkMatch("XT123456785FR", CarrierId.Chronopost), "https://www.chronopost.fr/suivi?li\uFB06eNumeros=XT123456785FR")
+    }
+
+    private fun ids(vararg rawValues: String) = rawValues.map { CarrierId(it) }
+
+    @Test
+    fun carriersSortAsFoundationComparesTheirNames() {
+        // A space sorts before letters and punctuation, which java.text.Collator passes over.
+        val saved = Locale.getDefault()
+        Locale.setDefault(Locale.ENGLISH)
+        try {
+            val selectable = catalog.selectableCarriers
+            assertEquals(
+                ids("a-tu-hora-express", "a-duie-pyle", "ab-courier", "a1-post", "aaa-cooper", "abf-freight"),
+                selectable.filter { catalog.info(it).displayName.uppercase().startsWith("A") }.take(6),
+            )
+            assertEquals(
+                ids("am-home-delivery", "amazon-logistics", "ameex", "american-west-express", "amerijet", "an-post", "andreani"),
+                selectable.filter { catalog.info(it).displayName.uppercase().let { name -> name.startsWith("AM") || name.startsWith("AN") } }
+                    .take(7),
+            )
+        } finally {
+            Locale.setDefault(saved)
+        }
+        val section = CarrierPickerSearch.letterSections(catalog, AppLanguage.En).first { it.letter == "A" }
+        assertEquals(ids("a-tu-hora-express", "a-duie-pyle", "ab-courier", "a1-post", "aaa-cooper", "abf-freight"), section.carriers.take(6))
+    }
+
+    @Test
+    fun namesCompareAsFoundationComparesThem() {
+        for (language in listOf(AppLanguage.En, AppLanguage.De, AppLanguage.Pl)) {
+            val plain = LocalizedComparison.Plain.comparator(language.locale)
+            val caseInsensitive = LocalizedComparison.CaseInsensitive.comparator(language.locale)
+            val loose = LocalizedComparison.Loose.comparator(language.locale)
+            for (comparator in listOf(plain, caseInsensitive, loose)) {
+                assertTrue(comparator.compare("DHL parcel", "DHL-Paket") < 0)
+                assertTrue(comparator.compare("A Tu Hora Express", "A1 POST") < 0)
+            }
+            // Numbers by their value in the picker's comparison only.
+            assertTrue(plain.compare("DPD 2", "DPD 10") > 0)
+            assertTrue(caseInsensitive.compare("DPD 2", "DPD 10") > 0)
+            assertTrue(loose.compare("DPD 2", "DPD 10") < 0)
+            // Case aside, ß is ss.
+            assertTrue(plain.compare("Straße", "Strasse") > 0)
+            assertEquals(0, caseInsensitive.compare("Straße", "Strasse"))
+            assertEquals(0, loose.compare("Straße", "Strasse"))
+            // Polish has Ć after every C.
+            val polish = language == AppLanguage.Pl
+            for (comparator in listOf(plain, caseInsensitive, loose)) {
+                assertEquals(polish, comparator.compare("Ćma", "Czechy") > 0)
+            }
+        }
+    }
+
+    @Test
+    fun countriesAreNamedAndSortedAsOnTheIPhone() {
+        val names = mapOf(
+            AppLanguage.En to mapOf(
+                "HK" to "Hong Kong", "MO" to "Macao", "IO" to "Chagos Archipelago", "GS" to "So. Georgia & So. Sandwich Isl.",
+                "UM" to "U.S. Outlying Islands", "TL" to "Timor-Leste", "PS" to "Palestinian Territories", "CI" to "Côte d’Ivoire",
+                "MM" to "Myanmar (Burma)", "CN" to "China",
+            ),
+            AppLanguage.It to mapOf(
+                "HK" to "Hong Kong", "MO" to "Macao", "IO" to "Isole Chagos", "UM" to "Isole Minori Esterne degli Stati Uniti",
+                "US" to "Stati Uniti", "BA" to "Bosnia ed Erzegovina", "CN" to "Cina",
+            ),
+            AppLanguage.De to mapOf("HK" to "Hongkong", "CN" to "China"),
+            AppLanguage.Pl to mapOf("HK" to "Hongkong", "CN" to "Chiny"),
+        )
+        for ((language, expected) in names) {
+            for ((code, name) in expected) assertEquals("$language $code", name, TrackingLocation.countryName(code, language))
+        }
+        // Foundation reads a code in either case, and names a code it no longer lists.
+        assertEquals("France", TrackingLocation.countryName("fr", AppLanguage.En))
+        assertEquals("United Kingdom", TrackingLocation.countryName("UK", AppLanguage.En))
+        assertEquals("QQ", TrackingLocation.countryName("QQ", AppLanguage.En))
+
+        assertEquals(250, CarrierCatalog.countries.size)
+        assertEquals(listOf("AF", "AX", "AL", "DZ", "AS"), CarrierCatalog.countriesByName(AppLanguage.En).take(5))
+        assertEquals(listOf("AF", "EG", "AX", "AL", "DZ"), CarrierCatalog.countriesByName(AppLanguage.De).take(5))
+        val polish = CarrierCatalog.countriesByName(AppLanguage.Pl)
+        val laos = polish.indexOf("LA")
+        assertEquals(listOf("LA", "LS", "LB", "LR", "LY", "LI", "LT", "LU", "LV", "MK", "MG", "YT", "MO", "MW"), polish.subList(laos, laos + 14))
     }
 }

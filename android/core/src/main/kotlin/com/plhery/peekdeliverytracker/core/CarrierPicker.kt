@@ -2,7 +2,6 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
-import java.text.Collator
 import java.text.Normalizer
 
 // The logic of CarrierPicker.swift that the carrier catalog's tests cover.
@@ -96,13 +95,14 @@ object CarrierPickerSearch {
         preferred: Set<CarrierId> = emptySet(),
     ): List<Result> {
         val names = countryNames(language)
+        val comparator = LocalizedComparison.Loose.comparator(language.locale)
         return catalog.selectableCarriers.mapNotNull { carrier ->
             val definition = catalog.info(carrier, language)
             val found = match(carrier, definition, query, names) ?: return@mapNotNull null
             Result(carrier, found.score - (if (carrier in preferred) 0.3 else 0.0), found.highlight, found.alias)
         }.sortedWith { left, right ->
             if (left.score != right.score) return@sortedWith left.score.compareTo(right.score)
-            compare(catalog.info(left.carrier, language).displayName, catalog.info(right.carrier, language).displayName, language)
+            comparator.compare(catalog.info(left.carrier, language).displayName, catalog.info(right.carrier, language).displayName)
         }
     }
 
@@ -113,46 +113,12 @@ object CarrierPickerSearch {
         if (local == english) listOf(local) else listOf(local, english)
     }
 
-    /**
-     * `compare(options: [.caseInsensitive, .diacriticInsensitive, .numeric], locale:)`: the language's
-     * collation at primary strength, with runs of digits compared by their value.
-     */
-    private fun compare(left: String, right: String, language: AppLanguage): Int {
-        val collator = Collator.getInstance(language.locale).apply { strength = Collator.PRIMARY }
-        val leftRuns = runs(left)
-        val rightRuns = runs(right)
-        for (index in 0 until minOf(leftRuns.size, rightRuns.size)) {
-            val a = leftRuns[index]
-            val b = rightRuns[index]
-            val result = if (a[0] in '0'..'9' && b[0] in '0'..'9') compareNumbers(a, b) else collator.compare(a, b)
-            if (result != 0) return result
-        }
-        return leftRuns.size.compareTo(rightRuns.size)
-    }
-
-    private fun runs(value: String): List<String> {
-        val runs = mutableListOf<String>()
-        var start = 0
-        while (start < value.length) {
-            val digits = value[start] in '0'..'9'
-            var end = start + 1
-            while (end < value.length && (value[end] in '0'..'9') == digits) end++
-            runs += value.substring(start, end)
-            start = end
-        }
-        return runs
-    }
-
-    private fun compareNumbers(left: String, right: String): Int {
-        val a = left.trimStart('0')
-        val b = right.trimStart('0')
-        return if (a.length != b.length) a.length.compareTo(b.length) else a.compareTo(b)
-    }
-
     /** Carriers by initial, in the reader's alphabet; names starting with a digit come last under "#". */
     fun letterSections(catalog: CarrierCatalog, language: AppLanguage): List<LetterSection> {
+        // `compare(options: [.caseInsensitive, .diacriticInsensitive, .numeric], locale:)`.
+        val comparator = LocalizedComparison.Loose.comparator(language.locale)
         val sorted = catalog.selectableCarriers.sortedWith { left, right ->
-            compare(catalog.info(left, language).displayName, catalog.info(right, language).displayName, language)
+            comparator.compare(catalog.info(left, language).displayName, catalog.info(right, language).displayName)
         }
         val sections = mutableListOf<LetterSection>()
         val other = mutableListOf<CarrierId>()

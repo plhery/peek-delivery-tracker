@@ -7,5 +7,6 @@ package com.plhery.peekdeliverytracker.core
 internal object TestIcu {
     fun install() {
         Icu.hostNames = checkNotNull(IcuHostNames.from("com.ibm.icu.text")) { "ICU4J is a test dependency" }
+        Icu.collators = checkNotNull(IcuCollators.from("com.ibm.icu.text")) { "ICU4J is a test dependency" }
     }
 }

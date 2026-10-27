@@ -20,7 +20,6 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.unknownChe
 import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.unreadableCarrierCatalogData
 import java.io.File
 import java.io.IOException
-import java.text.Collator
 import java.util.UUID
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
@@ -1117,7 +1116,7 @@ class CarrierCatalogTests {
         assertEquals(listOf("NL"), choices.own)
         assertEquals(any.toSet(), (choices.own + choices.others).toSet())
         val names = choices.others.map { TrackingLocation.countryName(it, language = AppLanguage.Fr) }
-        assertEquals(names.sortedWith(Collator.getInstance(AppLanguage.Fr.locale)), names)
+        assertEquals(names.sortedWith(LocalizedComparison.Plain.comparator(AppLanguage.Fr.locale)), names)
         assertEquals(emptyList<String>(), catalog.postcodeCountryChoices(CarrierId.Heppner, requirement = heppner, language = AppLanguage.Fr).others)
 
         // A postcode from the carrier's home keeps its field; one from abroad takes any country's shape and that

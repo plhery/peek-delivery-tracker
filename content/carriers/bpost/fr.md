@@ -77,9 +77,9 @@ Après `Votre envoi est arrivé chez l'opérateur postal du pays de destination 
 
 ## bpost contact : téléphone, chat et plainte
 
-Relevé sur les pages françaises de bpost le 11 octobre 2026 :
+Relevé sur les pages françaises de bpost le 27 octobre 2026 :
 
-- **Téléphone :** 02 278 51 27, du lundi au vendredi de 8 h à 12 h 30 et de 13 h à 18 h, le samedi de 9 h à 13 h, au tarif zonal. Le temps d'attente varie.
+- **Téléphone :** 02 278 51 27 sur les pages françaises et allemandes de bpost, 02 278 51 26 sur ses pages anglaises et néerlandaises ; du lundi au vendredi de 8 h à 12 h 30 et de 13 h à 18 h, le samedi de 9 h à 13 h, au tarif zonal. Le temps d'attente varie.
 - **Chat :** pour certains services, dont le Track & Trace. bpost ne publie pas d'horaires pour le chat.
 - **Sur place :** dans un Bureau de Poste, un Point Poste ou un Point Colis.
 - **Courrier (sans timbre) :** bpost, Boîte 5000, 1000 Bruxelles.
@@ -88,7 +88,7 @@ Garde le code-barres sous la main. bpost ne donne pas d'adresse e-mail pour son 
 
 ## Suivre un colis bpost avec Peek
 
-[Peek](/) reconnaît tout de suite bpost pour un numéro valide de 2 lettres, 9 chiffres et BE, et pour JJBE suivi d'une lettre et de 18 ou 22 chiffres. Un numéro à 24 chiffres qui commence par 3232 ou 3299 est demandé à bpost, Austrian Post, InPost et Ciblex ; un numéro à 18 chiffres qui commence par 3232, à bpost et Ecoscooting. Si seul bpost le connaît, Peek choisit bpost ; si plusieurs transporteurs le connaissent, tu choisis avec « Changer ». Un recommandé belge à 30 chiffres ne se suit qu'après avoir choisi bpost avec « Changer ». Un lien de bpost.be ou de la page de recherche du Track & Trace qui contient le code-barres dans `itemCodes` est attribué à bpost. Un code-barres en U n'est pas attribué à bpost, qui ne le suit pas : seul Chronopost est alors proposé.
+[Peek](/) reconnaît tout de suite bpost pour un numéro valide de 2 lettres, 9 chiffres et BE, et pour JJBE suivi d'une lettre et de 18 ou 22 chiffres. Un numéro à 24 chiffres qui commence par 3232 ou 3299 est demandé à bpost, Austrian Post, InPost et Ciblex ; un numéro à 18 chiffres qui commence par 3232, à bpost et Ecoscooting. Si bpost le connaît, Peek choisit bpost ; c'est seulement quand Ecoscooting connaît aussi un numéro à 18 chiffres que tu choisis, avec « Choisir ». Un recommandé belge à 30 chiffres ne se suit qu'après avoir choisi bpost avec « Changer ». Un lien de bpost.be ou de la page de recherche du Track & Trace qui contient le code-barres dans `itemCodes` est attribué à bpost. Un code-barres en U n'est pas attribué à bpost, qui ne le suit pas : seul Chronopost est alors proposé.
 
 Peek interroge bpost directement, sans code postal. Tu vois les scans de bpost avec le lieu, le poids et les dimensions ; ceux faits en Belgique sont lus à l'heure belge. Quand le colis attend dans un Point d'enlèvement ou un Distributeur de Colis, Peek affiche son nom et son adresse, même après le retrait. Pour un colis livré en Belgique, tu vois l'heure de livraison. En journée, Peek vérifie toutes les 10 minutes, et toutes les 2 minutes quand le colis est en cours de livraison ; la nuit, toutes les une à deux heures.
 
@@ -138,6 +138,7 @@ Le plus souvent, l'expéditeur ne l'a pas encore remis à bpost : le suivi comme
 - [bpost : Achats en ligne hors de l'UE](https://www.bpost.be/fr/shopping-hors-ue) – 3 € par article, 21,5 € de frais administratifs
 - [bpost : bpost livre-t-elle le samedi et le dimanche ?](https://www.bpost.be/fr/faq/quels-courriers-ou-colis-bpost-livre-t-elle-le-samedi-et-le-dimanche) – horaires du week-end
 - [bpost : Comment contacter le service clientèle de bpost ?](https://www.bpost.be/fr/faq/comment-contacter-le-service-clientele-de-bpost) – téléphone, chat, sur place, Boîte 5000
+- [bpost : How do I contact bpost's customer services?](https://www.bpost.be/en/faq/how-do-i-contact-bposts-customer-services) – 02 278 51 26 (page anglaise)
 - [bpost : FAQ](https://www.bpost.be/fr/faqs) – Service de médiation pour le secteur postal
 - [bpost : Reçu un SMS ou un e-mail suspect ?](https://www.bpost.be/fr/faq/jai-recu-un-sms-ou-un-e-mail-suspect-pretendument-de-bpost-que-dois-je-faire) – faux messages, abuse@bpost.be
 - [bnode : bpostgroup becomes bnode](https://press.bnode.com/bpostgroup-becomes-bnode) – nom du groupe, marque bpost, Landmark Global

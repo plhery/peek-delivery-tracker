@@ -32,7 +32,7 @@ The tracking page shows a headline status, a four-step bar (`Registrert`, `På v
 | `Nettbutikken har meldt at en pakke er på vei!` | The shop has [announced a parcel](guide:tracking-statuses). Helthjem doesn't have it yet. |
 | `Pakken er under transport.` | In transit: a terminal or sorter scan. |
 | `Vi har mottatt pakken din, og gjør den klar for veien videre.` | Received at a Helthjem terminal, getting ready for the next leg. |
-| `Planlagt levering natt til 8. oktober!` | Out for delivery in the night leading into the date shown. |
+| `Planlagt levering natt til 8. oktober!` | Booked on the night round leading into the date shown. No courier has it yet: it goes out that night. |
 | `Pakken er levert på dørmatten din!` | Delivered on your doormat. |
 | `Pakken er levert i postkassen din!` | Delivered in your mailbox. |
 | `På vei til hentested` | Sent on to a pickup point instead of your home. |

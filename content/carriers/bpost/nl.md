@@ -85,9 +85,9 @@ In Peek, en in de Engelstalige Track & Trace, lees je de scans in het Engels. Di
 
 ## Klantendienst van bpost contacteren
 
-Zo stond het op de Nederlandstalige pagina's van bpost op 22 oktober 2026:
+Zo stond het op de Nederlandstalige pagina's van bpost op 27 oktober 2026:
 
-- **Telefoon:** 02 278 51 26, maandag tot vrijdag van 08.00 tot 12.30 u. en van 13.00 tot 18.00 u., zaterdag van 09.00 tot 13.00 u. Zonaal tarief.
+- **Telefoon:** 02 278 51 26 op de Nederlandstalige en Engelstalige pagina's van bpost, 02 278 51 27 op de Franstalige en Duitstalige; maandag tot vrijdag van 08.00 tot 12.30 u. en van 13.00 tot 18.00 u., zaterdag van 09.00 tot 13.00 u. Zonaal tarief.
 - **Chat:** voor sommige diensten, waaronder Track & Trace.
 - **Ter plaatse:** in een Postkantoor, PostPunt of PakjesPunt.
 - **Per brief, zonder postzegel:** bpost, Postbus 5000, 1000 Brussel.
@@ -97,7 +97,7 @@ Hou je barcode bij de hand. Een e-mailadres voor de klantendienst vermeldt bpost
 
 ## Je bpost-pakje volgen met Peek
 
-[Peek](/) herkent bpost meteen aan een geldig postnummer van twee letters, negen cijfers en BE, en aan `JJBE` gevolgd door een letter en 18 of 22 cijfers. Een barcode van 24 cijfers die met 3232 of 3299 begint, of van 18 cijfers die met 3232 begint, kan ook bij andere vervoerders passen: Peek vraagt hem na bij bpost en bij de andere vervoerders waarbij die vorm past. Kent alleen bpost het pakje, dan kiest Peek bpost; kennen er meerdere het, dan kies je zelf met ‘Change’. Een aangetekende zending van 30 cijfers volg je door bpost te kiezen met ‘Change’. Een U-barcode koppelt Peek niet aan bpost, want bpost volgt hem niet. Plak je een link van bpost.be of van de Track & Trace-zoekpagina waarin de barcode als `itemCodes` staat, dan kiest Peek bpost.
+[Peek](/) herkent bpost meteen aan een geldig postnummer van twee letters, negen cijfers en BE, en aan `JJBE` gevolgd door een letter en 18 of 22 cijfers. Een barcode van 24 cijfers die met 3232 of 3299 begint, of van 18 cijfers die met 3232 begint, kan ook bij andere vervoerders passen: Peek vraagt hem na bij bpost en bij de andere vervoerders waarbij die vorm past. Kent bpost het pakje, dan kiest Peek bpost; alleen als Ecoscooting een barcode van 18 cijfers ook kent, kies je zelf, met ‘Choose’. Een aangetekende zending van 30 cijfers volg je door bpost te kiezen met ‘Change’. Een U-barcode koppelt Peek niet aan bpost, want bpost volgt hem niet. Plak je een link van bpost.be of van de Track & Trace-zoekpagina waarin de barcode als `itemCodes` staat, dan kiest Peek bpost.
 
 Een pakje uit het buitenland met een internationaal postnummer volgt Peek eerst bij de post van het land van verzending. Meldt die dat het naar België gaat, of noemt ze geen land en ben je zelf in België, dan kan Peek ook bpost vragen. Zodra bpost nieuwe scans toont, volgt Peek het pakje daar verder, en de eerdere scans blijven staan.
 
@@ -156,6 +156,7 @@ Niet echt. Track & Trace aanvaardt ook een referentie, maar toont dan om privacy
 - [bpost: Hoe kan ik de invoerkosten betalen?](https://www.bpost.be/nl/faq/hoe-kan-ik-de-invoerkosten-betalen) – betaalmiddelen
 - [bpost: Verdachte sms of e-mail](https://www.bpost.be/nl/faq/i-received-suspicious-text-message-or-email-allegedly-bpost-what-should-i-do) – phishing
 - [bpost: Hoe contacteer ik de klantendienst van bpost?](https://www.bpost.be/nl/faq/how-do-i-contact-bposts-customer-services) – telefoon, uren, chat, Postbus 5000
+- [bpost: Comment contacter le service clientèle de bpost ?](https://www.bpost.be/fr/faq/comment-contacter-le-service-clientele-de-bpost) – 02 278 51 27 (Franstalige pagina)
 - [bnode: bpostgroup wordt bnode](https://press.bnode.com/bpostgroup-wordt-bnode) – groep, bpost, Landmark Global
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – wat Peek bij bpost leest
 :::

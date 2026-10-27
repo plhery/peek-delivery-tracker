@@ -65,7 +65,7 @@ Pakete innerhalb Belgiens will bpost am nächsten Werktag zustellen. Das angekü
 
 ## Paket hängt fest, ist verloren, beschädigt oder zurück
 
-**Keine Bewegung.** Ändert sich der Status nicht mehr, wende dich an den Absender: innerhalb Belgiens nach mehreren Werktagen in Folge, bei einem Paket aus einem Nachbarland oder dorthin nach mindestens 5 Werktagen, bei anderen Ländern, auch dem Vereinigten Königreich, nach mindestens 10 Werktagen. Der Absender meldet sich dann bei bpost, denn nur er kann eine Beschwerde einreichen. Ist das Paket laut Track & Trace noch unterwegs nach Belgien, ist es noch nicht hier: Track & Trace zeigt, wie lange das im Schnitt dauert. Siehe [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Keine Bewegung.** Ändert sich bei einer Sendung ins Ausland der Status nicht mehr, wende dich an den Absender: bei einem Nachbarland nach mindestens 5 Werktagen, beim Vereinigten Königreich und allen anderen Ländern nach mindestens 10. Der Absender meldet sich dann bei bpost, denn nur er kann eine Beschwerde einreichen. Ist das Paket laut Track & Trace noch unterwegs nach Belgien, ist es noch nicht hier: Track & Trace zeigt, wie lange das im Schnitt dauert. Siehe [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **Verloren.** Nach denselben Fristen, oder wenn Track & Trace „zugestellt“ meldet und das Paket unauffindbar ist, wende dich an den Absender. Nur er kann den Verlust reklamieren, weil er bpost bezahlt. Die meisten Absender haben dafür feste Absprachen mit bpost, etwa einen neuen Versand oder eine Erstattung. Siehe [Paket verloren](guide:lost-parcel).
 
@@ -102,7 +102,7 @@ Ein Geschenk von einer Privatperson an eine andere, ohne kommerziellen Charakter
 
 So nennen die deutschen Seiten von bpost ihre Kanäle (gelesen am 27. Oktober 2026):
 
-- **Telefon:** 02 278 51 27, aus dem Ausland 00 32 2 278 51 27, montags bis freitags 8.00 bis 12.30 und 13.00 bis 18.00 Uhr, samstags 9.00 bis 13.00 Uhr, zum Ortstarif.
+- **Telefon:** 02 278 51 27, aus dem Ausland 00 32 2 278 51 27, so auf den deutschen und französischen Seiten von bpost; die englischen und niederländischen nennen 02 278 51 26. Montags bis freitags 8.00 bis 12.30 und 13.00 bis 18.00 Uhr, samstags 9.00 bis 13.00 Uhr, zum Ortstarif.
 - **Online:** das Online-Formular und die Beschwerdeformulare.
 - **Vor Ort:** in einem Postamt, PostPunkt oder PaketPunkt.
 - **Per Brief, ohne Briefmarke:** bpost, Postbus 5000, 1000 Brüssel.
@@ -167,6 +167,7 @@ Meist hat der Absender es noch nicht übergeben: Verfolgen kannst du es erst, we
 - [bpost: Ein Paket aus einem Land außerhalb der EU?](https://www.bpost.be/de/ein-paket-aus-einem-land-ausserhalb-der-eu) – Beträge, Geschenke, Neuberechnung
 - [bpost: Zweifelhafte SMS oder E-Mail](https://www.bpost.be/de/faq/ich-habe-eine-zweifelhafte-sms-oder-e-mail-erhalten-die-angeblich-von-bpost-stammt-was-soll-ich-tun) – Betrug
 - [bpost: Kundenservice erreichen](https://www.bpost.be/de/faq/wie-erreiche-ich-den-kundenservice-von-bpost) – Kanäle, Zeiten
+- [bpost: How do I contact bpost's customer services?](https://www.bpost.be/en/faq/how-do-i-contact-bposts-customer-services) – 02 278 51 26 (englische Seite)
 - [bpost: Häufig gestellte Fragen](https://www.bpost.be/de/faqs) – Ombudsdienst
 - [Ombudsdienst für den Postsektor](https://www.ombudsmanposte.be/de/) – kostenlos, schriftlich
 - [Ombudsdienst für den Postsektor: Wer kann eine Beschwerde einreichen?](https://www.ombudsmanposte.be/de/uber-uns/unser-betrieb/wer-kann-eine-beschwerde-einreichen/) – Empfänger, nach dem Kundendienst

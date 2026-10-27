@@ -34,7 +34,6 @@ bpost's Track & Trace is available in English, French, Dutch and German. These a
 | bpost says | What it means for you |
 | --- | --- |
 | `Confirmation of preparation of the shipment received` | The sender has announced the parcel. bpost doesn't have it yet. |
-| `Item information registered manually at the counter` | The sender handed the parcel in at a counter. |
 | `Item is announced / Landmark Global (bpost) received the information` | A cross-border parcel was announced to [Landmark Global](carrier:landmark-global), the group's brand for parcels across borders. |
 | `Landmark Global (bpost) has received the item` | Landmark Global has the parcel. |
 | `Arrival at facilities` | A parcel posted abroad reached a sorting centre in the sending country, before bpost scans it. |
@@ -44,8 +43,6 @@ bpost's Track & Trace is available in English, French, Dutch and German. These a
 | `The postman's delivery round for your item has started` | Out for delivery today. |
 | `Item available at Pick-up point` | Ready to pick up at a Pick-up point or Parcel Locker. |
 | `Item delivered` | Delivered, or picked up at the point. |
-
-`Item arrived at the distribution center - Item can't be assigned to a delivery round - missing information` means the delivery office couldn't put the parcel on a round because some information is missing. If nothing changes, ask the shop.
 
 ## Delivery, Pick-up points and Parcel Lockers
 
@@ -67,15 +64,15 @@ If you're out and set no preferences, the postman will generally try a neighbour
 
 **Delivered but not there.** Ask the neighbours, check your letterbox (small parcels go in without a ring), your preferences and the safe-place photo in the app or Track & Trace. bpost also has a form for undelivered shipments; keep the barcode and the recipient's postcode ready.
 
-**Customs.** Parcels from outside the EU must be cleared first. You pay the import costs in advance, preferably in the My bpost app or Track & Trace, within 14 days. On orders under €150, bpost lists €3 per item in import duties, plus €21.50 administration costs if the shop didn't collect VAT and duties up front. Check [bpost's page on parcels from outside the EU](https://www.bpost.be/en/shopping-outside-eu) and the [customs guide](guide:customs).
+**Customs.** Parcels from outside the EU must be cleared first. You pay the import costs in advance, preferably in the My bpost app or Track & Trace, within 14 days. On orders under €150, bpost lists €3 per item in import duties and, from 1 November 2026, a €2 European handling fee per item, where an item is a type of product: two identical T-shirts cost €5 in duties and fee, a T-shirt and swimming shorts €10. On top come VAT, usually 21%, and €21.50 administration costs if the shop didn't collect VAT and duties up front. Above €150 you pay duties by product type, VAT, €40 administration costs and the €2 fee. Check [bpost's page on parcels from outside the EU](https://www.bpost.be/en/shopping-outside-eu) and the [customs guide](guide:customs).
 
 > For shipments within the EU, bpost never asks you to pay while a parcel is in transit or to give personal details by email or text. Forward suspicious messages to abuse@bpost.be.
 
 ## bpost customer service number and contact
 
-As bpost's English pages listed them on 11 October 2026:
+As bpost's English pages listed them on 27 October 2026:
 
-- **Phone:** 02 278 51 26, Monday to Friday 08.00 to 12.30 and 13.00 to 18.00, Saturday 09.00 to 13.00, zonal rate.
+- **Phone:** 02 278 51 26 on bpost's English and Dutch pages, 02 278 51 27 on its French and German ones; Monday to Friday 08.00 to 12.30 and 13.00 to 18.00, Saturday 09.00 to 13.00, zonal rate.
 - **Chat:** for some services, Track & Trace included.
 - **In person:** a Post Office, Post Point or Parcel Point.
 - **Letter (no stamp needed):** bpost, Box 5000, 1000 Brussels.
@@ -84,7 +81,7 @@ Have the barcode ready. bpost lists no customer service email address.
 
 ## Tracking bpost parcels with Peek
 
-[Peek](/) names bpost straight away for a valid number of two letters, nine digits and BE, and for `JJBE` followed by a letter and 18 or 22 digits. A 24-digit number starting 3232 or 3299 is asked of bpost, Austrian Post, InPost and Ciblex; an 18-digit one starting 3232, of bpost and Ecoscooting. If only bpost knows it, Peek picks bpost; if several carriers do, you pick with "Change". The 30-digit registered numbers work only after picking bpost with "Change". A link from bpost.be or the Track & Trace search page with the barcode in `itemCodes` is read as bpost. A U barcode isn't named bpost, since bpost doesn't track it; Peek suggests only Chronopost for it.
+[Peek](/) names bpost straight away for a valid number of two letters, nine digits and BE, and for `JJBE` followed by a letter and 18 or 22 digits. A 24-digit number starting 3232 or 3299 is asked of bpost, Austrian Post, InPost and Ciblex; an 18-digit one starting 3232, of bpost and Ecoscooting. When bpost knows the number, Peek picks bpost; only when Ecoscooting knows an 18-digit one too do you pick, with "Choose". The 30-digit registered numbers work only after picking bpost with "Change". A link from bpost.be or the Track & Trace search page with the barcode in `itemCodes` is read as bpost. A U barcode isn't named bpost, since bpost doesn't track it; Peek suggests only Chronopost for it.
 
 Peek asks bpost directly, without a postcode. You see bpost's own scans in its English wording, with the place, weight and dimensions; scans in Belgium are read on Belgian time and shown in your device's time zone. While the parcel waits at a Pick-up point or locker, Peek shows that point's name and address, and still does after you've collected it there. For a parcel delivered in Belgium you see the time of delivery, and a parcel delivered back to the sender shows as returned. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you when the status changes.
 
@@ -129,9 +126,10 @@ Usually the sender hasn't handed it to bpost yet. A barcode starting with U has 
 - [bpost: How to file a complaint about a parcel](https://www.bpost.be/en/faq/how-do-i-file-complaint-if-my-parcel-damaged-or-lost-or-hasnt-been-delivered) – recipient can't complain, damage within 7 days, phone hours
 - [bpost: Parcel delivered, but didn't receive anything](https://www.bpost.be/en/faq/i-get-message-my-parcel-has-been-delivered-i-havent-received-anything-what-now) – checks, safe-place photo, form
 - [bpost: Parcel must pass through customs](https://www.bpost.be/en/receive-parcel/customs) – paying import costs in advance
-- [bpost: A parcel from outside the EU?](https://www.bpost.be/en/shopping-outside-eu) – €3 per item, €21.50 administration costs
+- [bpost: A parcel from outside the EU?](https://www.bpost.be/en/shopping-outside-eu) – €3 and €2 per item, €21.50 and €40 administration costs
 - [bpost: Does bpost deliver on Saturday and Sunday?](https://www.bpost.be/en/faq/which-mail-or-shipments-does-bpost-deliver-saturday-and-sunday) – weekend delivery hours
 - [bpost: How do I contact bpost's customer services?](https://www.bpost.be/en/faq/how-do-i-contact-bposts-customer-services) – phone, chat, in person, Box 5000
+- [bpost: Comment contacter le service clientèle de bpost ?](https://www.bpost.be/fr/faq/comment-contacter-le-service-clientele-de-bpost) – 02 278 51 27 (French page)
 - [bpost: Phishing, received suspicious text or email?](https://www.bpost.be/en/faq/i-received-suspicious-text-message-or-email-allegedly-bpost-what-should-i-do) – scam warning, abuse@bpost.be
 - [bnode: bpostgroup becomes bnode](https://press.bnode.com/bpostgroup-becomes-bnode) – group name, bpost brand, Landmark Global
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads

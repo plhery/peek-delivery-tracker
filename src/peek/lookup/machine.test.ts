@@ -15,11 +15,11 @@ import type { GivenPostcode } from '../../lib/postcodeMemory';
 
 // Every number here is fictional.
 const UPS = '1ZDEMO202600000001';
-const SHARED = '01234567890123'; // A shape several carriers use: the carriers are asked.
+const SHARED = '01234564890123'; // A shape several carriers use: the carriers are asked.
 const EXPRESS = '0000000046'; // Ten digits: DHL Express shares this shape with other carriers.
 const SHAPELESS = 'DEMO4471203'; // No carrier's shape: nobody can be asked.
-const AMAZON = 'TBA123456789012';
-const TYPO = 'LX1234567B5DE';
+const AMAZON = 'TBA123476789012';
+const TYPO = 'LX1234367B5DE';
 const PICKUP = '204617'; // Six digits: a locker's or a pickup point's code.
 
 function run(
@@ -45,8 +45,8 @@ describe('going on', () => {
 
   it('goes straight on after a paste when the carrier is certain and nothing else is needed', () => {
     expect(run([pasted(`Your parcel ${UPS} is on its way`)]).job).toEqual({ type: 'lookup', carrier: 'ups', input: { trackingNumber: UPS, carrier: 'ups' } });
-    expect(run([pasted('https://www.dhl.com/ch-en/home/tracking.html?tracking-id=1234567899')]).job)
-      .toMatchObject({ input: { trackingNumber: '1234567899', carrier: 'dhl' } });
+    expect(run([pasted('https://www.dhl.com/ch-en/home/tracking.html?tracking-id=1234577899')]).job)
+      .toMatchObject({ input: { trackingNumber: '1234577899', carrier: 'dhl' } });
   });
 
   it('sends the number and the carrier and nothing else', () => {
@@ -63,8 +63,8 @@ describe('going on', () => {
 
 describe('asking the carriers', () => {
   it.each([
-    ['RR123456785FI', 'posti', ['posti', 'chronopost']],
-    ['RA123456785IR', 'chronopost', ['chronopost']],
+    ['RR123436785FI', 'posti', ['posti', 'chronopost']],
+    ['RA123436785IR', 'chronopost', ['chronopost']],
   ] as const)('confirms the postal fallback %s through its direct carrier before continuing a paste', (number, carrier, asked) => {
     const waiting = run([pasted(number)]);
     expect(waiting.job).toBeNull();
@@ -75,7 +75,7 @@ describe('asking the carriers', () => {
   });
 
   it('keeps the postal fallback and manual choices when direct recognition finds nothing', () => {
-    const number = 'RR123456785FI';
+    const number = 'RR123436785FI';
     const waiting = run([pasted(number)]);
     const none = run([{ type: 'answer', answer: { trackingNumber: number, carrier: 'intl-post', asked: ['posti', 'chronopost'] } }], [], waiting);
     expect(none.job).toEqual({ type: 'lookup', carrier: 'intl-post', input: { trackingNumber: number, carrier: 'intl-post' } });
@@ -142,7 +142,7 @@ describe('asking the carriers', () => {
     expect(survey({ ...refused, job: null }).check.status).toBe('failed');
     expect(refused.job).toEqual({ type: 'lookup', carrier: 'unknown', input: { trackingNumber: SHARED } });
     // An answer about another number is not this number's answer.
-    expect(run([{ type: 'answer', answer: { trackingNumber: '99999999999999', carrier: 'dpd' } }], [], waiting)).toBe(waiting);
+    expect(run([{ type: 'answer', answer: { trackingNumber: '99999994999999', carrier: 'dpd' } }], [], waiting)).toBe(waiting);
   });
 
   it('drops a pending Track when the text changes', () => {
@@ -214,7 +214,7 @@ describe('input edge cases', () => {
     const typing = run([typed(TYPO)]);
     expect(survey(typing).typo).toBeNull();
     const shown = run([rested(TYPO)], [], typing);
-    expect(survey(shown)).toMatchObject({ typo: { suggestion: 'LX123456785DE' }, need: 'typo' });
+    expect(survey(shown)).toMatchObject({ typo: { suggestion: 'LX123436785DE' }, need: 'typo' });
     // A paste shows the question at once and does not go on.
     expect(run([pasted(TYPO)])).toMatchObject({ job: null, intent: 'none' });
     expect(survey(run([pasted(TYPO)])).typo).not.toBeNull();
@@ -233,7 +233,7 @@ describe('input edge cases', () => {
     const shown = run([typed(TYPO), rested(TYPO)]);
     expect(run([{ type: 'asTyped' }], [], shown).job).toMatchObject({ input: { trackingNumber: TYPO } });
     // The suggestion arrives like a paste: its carrier is certain, so it goes straight on.
-    expect(run([pasted('LX123456785DE')], [], shown).job).toMatchObject({ input: { trackingNumber: 'LX123456785DE', carrier: 'dhl' } });
+    expect(run([pasted('LX123436785DE')], [], shown).job).toMatchObject({ input: { trackingNumber: 'LX123436785DE', carrier: 'dhl' } });
   });
 
   it('holds an Amazon order number back', () => {
@@ -277,6 +277,18 @@ describe('input edge cases', () => {
     const chosen = run([{ type: 'choose', carrier: 'pannon-xp' }, track], [], typing);
     expect(survey(chosen).pickup).toBe(false);
     expect(chosen.job).toEqual({ type: 'lookup', carrier: 'pannon-xp', input: { trackingNumber: PICKUP, carrier: 'pannon-xp' } });
+  });
+
+  it('holds a placeholder such as the demo number back, under any carrier, and asks nobody about it', () => {
+    const typing = run([typed('123EXAMPLE')]);
+    expect(survey(typing)).toMatchObject({ placeholder: false, need: 'code', ask: null });
+    expect(survey(run([rested('123EXAMPLE')], [], typing))).toMatchObject({ placeholder: true, pickup: false, ask: null });
+    const pressed = run([track], [], typing);
+    expect(survey(pressed)).toMatchObject({ placeholder: true, nothing: false });
+    expect(pressed.job).toBeNull();
+    const chosen = run([{ type: 'choose', carrier: 'nacex' }, track], [], typing);
+    expect(survey(chosen)).toMatchObject({ placeholder: true, need: 'code' });
+    expect(chosen.job).toBeNull();
   });
 });
 

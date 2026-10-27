@@ -6,7 +6,7 @@ import {
   type ApiParcelFeedbackAnswer,
   type ApiParcelFeedbackReason,
 } from '../generated/apiContract';
-import { carrierInfo, validTrackingNumber } from '../lib/carriers';
+import { carrierInfo, isPlaceholderNumber, validTrackingNumber } from '../lib/carriers';
 import { sentPostcodeCountry, takesAnyPostcode } from '../lib/postcodeCountry';
 import type { CarrierId } from '../types';
 import { ALERT_PRESET_STAGES, ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
@@ -17,6 +17,8 @@ import { normalizedLookupCountry } from './lookupCountry';
 import { isRecord, type JsonObject } from './types';
 
 const VALID_CARRIERS = new Set<string>(CARRIER_IDS);
+/** Why a placeholder number is refused; clients show their own wording for it (userErrorKey). */
+export const PLACEHOLDER_MESSAGE = 'This is not a real tracking number: enter the one from your order';
 const NOTIFICATION_STAGES = new Set<string>(ALL_NOTIFICATION_STAGES);
 const PUSH_ENDPOINT_HOSTS = new Set([
   'android.googleapis.com',
@@ -89,6 +91,8 @@ export function newPackageValues(payload: JsonObject): NewPackageValues {
   if (!/^(?:[A-Z0-9]+|\d{4}\/\d{8})$/.test(trackingNumber) || !validTrackingNumber(rawTracking)) {
     throw new HttpError(400, 'Tracking numbers use letters and numbers and include a digit, unless a carrier issues them as letters alone');
   }
+  // Every carrier's lookup refuses a placeholder, such as the app's demo number, so it is not added.
+  if (isPlaceholderNumber(trackingNumber)) throw new HttpError(400, PLACEHOLDER_MESSAGE);
   if (codePointLength(rawLabel) > 80) {
     throw new HttpError(400, 'Parcel names can be at most 80 characters');
   }

@@ -53,7 +53,7 @@ describe('web notification invitation placement', () => {
     expect(inspectPushState).not.toHaveBeenCalled();
     await user.click(screen.getByRole('button', { name: 'Add a parcel' }));
     const sheet = screen.getByRole('dialog', { name: 'Add a parcel' });
-    await user.type(within(sheet).getByLabelText('Tracking number or link'), 'LX123456785NL');
+    await user.type(within(sheet).getByLabelText('Tracking number or link'), 'LX123436785NL');
     expect(invitation()).not.toBeInTheDocument();
     await user.click(within(sheet).getByRole('button', { name: 'Add parcel' }));
     const finish = await screen.findByRole('button', { name: 'Finish parcel animation' });

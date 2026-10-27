@@ -163,7 +163,9 @@ keeps `carrier:invalid_input`, which asks for the parcel's details.
 A placeholder number, such as 123456789, is one under which providers merge other people's
 shipments, and the scraper looks it up nowhere (`placeholder_number`). A check refused so
 fails at once, at any stage, as `carrier:placeholder_number`, which asks the owner to check
-the number and add the parcel again. Whatever was stored from such a number is served
+the number and add the parcel again. Adding one is refused (400), and the web, front-door
+and iOS Add hold it back as they hold a pickup code, except in a demo build, whose samples
+are placeholders. Whatever was stored from such a number is served
 without its carrier scans, status line, estimate and carrier data, with that error, whether
 or not a check ran since ([`eventPlaces.ts`](../src/server/eventPlaces.ts)); the rows stay
 stored.

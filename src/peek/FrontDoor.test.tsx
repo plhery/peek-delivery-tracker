@@ -28,13 +28,13 @@ vi.mock('./links', async (original) => ({
 
 // Every number here is fictional.
 const UPS = '1ZDEMO202600000001';
-const SHARED = '01234567890123';
+const SHARED = '01234564890123';
 const lookup: ParcelLookup = { id: LINK_ID, key: OWNER_KEY, view: testView() };
 const onTracked = vi.fn();
 const onSample = vi.fn();
 const onSignIn = vi.fn();
 const notFound = 'Peek couldn’t find a tracking number. Paste the number or a tracking link.';
-const TYPO_NUMBER = 'LX1234567B5DE';
+const TYPO_NUMBER = 'LX1234367B5DE';
 
 function door() {
   // The clipboard the Paste button reads exists from here on, as it does in a browser.
@@ -252,29 +252,29 @@ describe('FrontDoor', () => {
   it('asks about a check digit that does not add up once typing rests, and takes the suggested number', async () => {
     vi.useFakeTimers();
     const { field } = door();
-    type(field, 'LX1234567B5DE');
+    type(field, 'LX1234367B5DE');
     expect(screen.queryByText(/check digit/)).not.toBeInTheDocument();
     act(() => { vi.advanceTimersByTime(800); });
     // After a pause the question waits its turn to be read out; after Track it is said at once.
     expect(screen.getByText('This number’s check digit doesn’t add up. A letter may have been read as a digit.')).toHaveAttribute('role', 'status');
     expect(field).toHaveAttribute('aria-invalid', 'true');
-    const suggestion = screen.getByRole('button', { name: 'Did you mean LX123456785DE?' });
+    const suggestion = screen.getByRole('button', { name: 'Did you mean LX123436785DE?' });
     expect([...suggestion.querySelectorAll('mark')].map((mark) => mark.textContent)).toEqual(['8']);
     fireEvent.click(suggestion);
-    expect(field.value).toBe('LX123456785DE');
-    expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'LX123456785DE', carrier: 'dhl' }, expect.any(AbortSignal));
+    expect(field.value).toBe('LX123436785DE');
+    expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'LX123436785DE', carrier: 'dhl' }, expect.any(AbortSignal));
   });
 
   it('tracks a doubtful number as typed when asked to', async () => {
     const { user, field, track } = door();
-    await user.type(field, 'LX1234567B5DE');
+    await user.type(field, 'LX1234367B5DE');
     // The first Track shows the question instead of spending a lookup.
     await user.click(track);
     expect(screen.getByRole('alert')).toHaveTextContent('This number’s check digit doesn’t add up.');
     expect(mocks.lookup).not.toHaveBeenCalled();
     await user.click(screen.getByRole('button', { name: 'Track it as typed' }));
     await waitFor(() => expect(onTracked).toHaveBeenCalledOnce());
-    expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'LX1234567B5DE' }, expect.any(AbortSignal));
+    expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'LX1234367B5DE' }, expect.any(AbortSignal));
   });
 
   it('says so when the text holds no tracking number, without asking anyone, and shows what numbers look like', async () => {
@@ -350,16 +350,16 @@ describe('FrontDoor', () => {
   });
 
   it('checks an Amazon number before looking it up, and sends account-only parcels to Amazon', async () => {
-    mocks.detect.mockResolvedValueOnce({ trackingNumber: 'TBA123456789012', carrier: 'amazon-logistics', amazonShippingStatus: 'not-found' });
+    mocks.detect.mockResolvedValueOnce({ trackingNumber: 'TBA123476789012', carrier: 'amazon-logistics', amazonShippingStatus: 'not-found' });
     const { user, field } = door();
-    await user.type(field, 'TBA123456789012{Enter}');
+    await user.type(field, 'TBA123476789012{Enter}');
     expect(await screen.findByText('Amazon Logistics deliveries are usually tracked in Your Orders on Amazon.')).toBeVisible();
     expect(mocks.lookup).not.toHaveBeenCalled();
     // Amazon Shipping tracks this one publicly.
-    mocks.detect.mockResolvedValueOnce({ trackingNumber: 'TBA123456789013', carrier: 'amazon-shipping', amazonShippingStatus: 'available' });
+    mocks.detect.mockResolvedValueOnce({ trackingNumber: 'TBA123476789013', carrier: 'amazon-shipping', amazonShippingStatus: 'available' });
     await user.clear(field);
-    await user.type(field, 'TBA123456789013{Enter}');
-    await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'TBA123456789013', carrier: 'amazon-shipping' }, expect.any(AbortSignal)));
+    await user.type(field, 'TBA123476789013{Enter}');
+    await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'TBA123476789013', carrier: 'amazon-shipping' }, expect.any(AbortSignal)));
   });
 
   it('asks for the postcode a carrier needs before looking the parcel up', async () => {
@@ -600,7 +600,7 @@ describe('FrontDoor', () => {
     let answer: (value: ParcelLookup) => void = () => undefined;
     mocks.lookup.mockReturnValueOnce(new Promise((resolve) => { answer = resolve; }));
     const { user, field, track, view } = door();
-    await user.type(field, '1234567899');
+    await user.type(field, '1234577899');
     await user.click(track);
     await waitFor(() => expect(mocks.lookup).toHaveBeenCalledOnce());
     expect(track).toBeDisabled();

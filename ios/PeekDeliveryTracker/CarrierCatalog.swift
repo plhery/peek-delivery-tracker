@@ -254,8 +254,9 @@ struct CarrierRecognition: Equatable, Sendable {
     /// check keeps running when a carrier is picked by hand meanwhile: its answer
     /// then only says when another carrier has the parcel.
     static func applies(to input: TrackingInputMatch, amazon: Bool, demo: Bool) -> Bool {
-        !demo && !amazon && ((input.confidence == .low && input.carrier == .unknown)
-            || input.carrier == .internationalPost)
+        // Nobody is asked about a placeholder.
+        !demo && !amazon && !CarrierCatalog.isPlaceholderNumber(CarrierCatalog.normalize(input.trackingNumber))
+            && ((input.confidence == .low && input.carrier == .unknown) || input.carrier == .internationalPost)
     }
 
     /// The number to ask about: the settled one, while it is still the number in
@@ -1229,6 +1230,20 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// pickup point, which no carrier's detection claims. Only a carrier picked by hand takes one as its number.
     static func isPickupCode(_ normalized: String) -> Bool {
         matches(normalized, pattern: "^[0-9]{6}$")
+    }
+
+    /// A placeholder rather than a number a carrier issued, normalized, as the shared engine reads it
+    /// (`isPlaceholderNumber`): apart from a letter prefix and suffix, six or more digits that repeat one digit or
+    /// run straight up or down, or a run of nine or more with one digit after it, as a check digit would be. An S10
+    /// item is read by its serial without the check digit. So is the word EXAMPLE with digits around it, such as the
+    /// first screen's demo parcel. Every lookup refuses one.
+    static func isPlaceholderNumber(_ normalized: String) -> Bool {
+        if matches(normalized, pattern: "^[0-9]*EXAMPLE[0-9]*$") { return true }
+        guard let digits = capture(normalized, pattern: "^[A-Z]{2}([0-9]{8})[0-9][A-Z]{2}$")
+            ?? capture(normalized, pattern: "^[A-Z]*([0-9]{6,})[A-Z]*$") else { return false }
+        let runs = [String(repeating: "0123456789", count: 5), String(repeating: "9876543210", count: 5)]
+        let isRun = { (digits: String) in runs.contains { $0.contains(digits) } }
+        return Set(digits).count == 1 || isRun(digits) || (digits.count >= 10 && isRun(String(digits.dropLast())))
     }
 
     /// How the front door reads a text (`shared/reading.json`), with the shapes of a number in a text

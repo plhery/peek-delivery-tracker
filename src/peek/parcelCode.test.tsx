@@ -52,7 +52,7 @@ describe('the parcel screens’ code', () => {
     const { PeekRoot } = await page();
     render(<PeekRoot session={visitor} />);
     const user = userEvent.setup();
-    await user.type(screen.getByRole('textbox', { name: 'Tracking number or link' }), '1234567899');
+    await user.type(screen.getByRole('textbox', { name: 'Tracking number or link' }), '1234577899');
     await user.click(screen.getByRole('button', { name: 'Track' }));
     await waitFor(() => expect(mocks.fetched).toBe(1), WAIT);
     // The answer is in, the code is not: the address has not moved, and the door still stands.

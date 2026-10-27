@@ -13,8 +13,8 @@ const carrierLine = (name: RegExp) => screen.getByRole('button', { name });
 
 describe('automatic unknown-carrier lookup', () => {
   it.each([
-    ['RR123456785FI', 'posti', 'Posti'],
-    ['RA123456785IR', 'chronopost', 'Chronopost'],
+    ['RR123436785FI', 'posti', 'Posti'],
+    ['RA123436785IR', 'chronopost', 'Chronopost'],
   ] as const)('confirms postal fallback %s with the direct carrier before saving', async (trackingNumber, carrier, name) => {
     vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber, carrier, asked: [carrier] });
     const onAdd = vi.fn().mockResolvedValue(undefined);
@@ -27,7 +27,7 @@ describe('automatic unknown-carrier lookup', () => {
   });
 
   it('preserves the postal fallback when no direct carrier recognizes it', async () => {
-    const trackingNumber = 'RR123456785FI';
+    const trackingNumber = 'RR123436785FI';
     vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber, carrier: 'intl-post', asked: ['posti', 'chronopost'] });
     const onAdd = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
@@ -39,16 +39,16 @@ describe('automatic unknown-carrier lookup', () => {
 
   it('files a printed PostLogistics reference under its carrier', async () => {
     const onAdd = vi.fn().mockResolvedValue(undefined);
-    render(<AddParcelSheet onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="12345678-001" />);
+    render(<AddParcelSheet onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="12347678-001" />);
 
     expect(screen.getByText('PostLogistics')).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: /^add parcel$/i }));
     expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({
-      trackingNumber: '12345678-001', carrier: 'postlogistics',
+      trackingNumber: '12347678-001', carrier: 'postlogistics',
     }));
   });
 
-  it.each(['12345678901234'])('saves %s without requiring a guessed carrier', async (number) => {
+  it.each(['12345677901234'])('saves %s without requiring a guessed carrier', async (number) => {
     const onAdd = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
     render(<AddParcelSheet onAdd={onAdd} onClose={vi.fn()} initialTrackingInput={number} />);
@@ -79,10 +79,10 @@ describe('automatic unknown-carrier lookup', () => {
 
 describe('GLS carrier lookup', () => {
   it('detects the carrier, requires a postcode, and saves a Swiss postcode unchanged', async () => {
-    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: '123456789018', carrier: 'gls-de' });
+    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: '123456589018', carrier: 'gls-de' });
     const onAdd = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
-    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="123456789018" />);
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="123456589018" />);
     const button = screen.getByRole('button', { name: /^add parcel$/i });
     const postcode = await screen.findByRole('textbox', { name: /^Delivery postcode/ });
     expect(carrierLine(/^GLS Germany has this parcel/)).toBeInTheDocument();
@@ -98,10 +98,10 @@ describe('GLS carrier lookup', () => {
     vi.mocked(lookupCarrier).mockReturnValue(new Promise((resolve) => { finish = resolve; }));
     const user = userEvent.setup();
     const onAdd = vi.fn().mockResolvedValue(undefined);
-    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="123456789018" />);
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="123456589018" />);
     await waitFor(() => expect(lookupCarrier).toHaveBeenCalledOnce());
     await pickCarrier(user, carrierLine(/^Detect automatically/), 'UPS');
-    finish({ trackingNumber: '123456789018', carrier: 'gls-de' });
+    finish({ trackingNumber: '123456589018', carrier: 'gls-de' });
     expect(await screen.findByText('GLS Germany knows this number.')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /^add parcel$/i }));
     expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'ups' }));
@@ -109,7 +109,7 @@ describe('GLS carrier lookup', () => {
 
   it('allows the usual unknown-carrier flow when the lookup is unavailable', async () => {
     vi.mocked(lookupCarrier).mockRejectedValue(new Error('Unavailable'));
-    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="123456789018" />);
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="123456589018" />);
     expect(await screen.findByText('couldn’t check · Peek will retry after you add it')).toBeInTheDocument();
     expect(carrierLine(/^Detect automatically/)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /^add parcel$/i })).toBeEnabled();
@@ -171,10 +171,10 @@ describe('DPD carrier lookup', () => {
   });
 
   it('asks the user to choose when several carriers know the number', async () => {
-    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: '12345678901231', carrier: 'unknown', recognized: ['dpd', 'hermes-de'], asked: ['dpd', 'hermes-de'] });
+    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: '12345677601231', carrier: 'unknown', recognized: ['dpd', 'hermes-de'], asked: ['dpd', 'hermes-de'] });
     const onAdd = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
-    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="12345678901231" />);
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="12345677601231" />);
     await user.click(await screen.findByRole('button', { name: 'Detect automatically DPD Switzerland and Hermes Germany know it Choose' }));
     const known = within(carrierPicker()).getByRole('group', { name: 'Know this number' });
     expect(within(known).getAllByRole('option').map((option) => option.textContent)).toEqual([
@@ -220,7 +220,7 @@ describe('DPD carrier lookup', () => {
     vi.stubGlobal('fetch', vi.fn(async (_path: string, init?: RequestInit) => Response.json({ refused: JSON.parse(String(init?.body)).carrier === 'nz-couriers' })));
     const onAdd = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
-    render(<AddParcelSheet onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="12345678901234" />);
+    render(<AddParcelSheet onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="12345677901234" />);
     await pickCarrier(user, carrierLine(/^Detect automatically/), 'New Zealand Couriers');
     expect(await screen.findByText('doesn’t issue numbers like this one')).toHaveClass('is-attention');
     await pickCarrier(user, carrierLine(/^New Zealand Couriers/), 'SEUR');
@@ -277,7 +277,7 @@ describe('DPD carrier lookup', () => {
   });
 
   it('checks tracking services even when no dedicated carrier fits', () => {
-    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="12345678" />);
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="12347678" />);
     expect(carrierLine(/^Detect automatically Checking tracking services/)).toBeInTheDocument();
   });
 });

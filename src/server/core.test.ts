@@ -494,6 +494,10 @@ describe('input validation', () => {
       trackingUrl: '',
       dpdPostcode: '',
     })).toThrow('letters and numbers');
+    // Every lookup refuses a placeholder, such as the app's demo number, under any carrier.
+    for (const [trackingNumber, carrier] of [['123EXAMPLE', 'unknown'], ['123 example', 'nacex'], ['RR123456785CH', 'swiss-post']]) {
+      expect(() => newPackageValues({ trackingNumber, label: '', carrier, trackingUrl: '', dpdPostcode: '' })).toThrow('not a real tracking number');
+    }
     expect(newPackageValues({
       trackingNumber: '06080000000001',
       label: 'Parcel',
@@ -561,7 +565,7 @@ describe('input validation', () => {
       dpdPostcode: '8000',
     });
     expect(newPackageValues({
-      trackingNumber: '23456789',
+      trackingNumber: '23457789',
       label: 'Heppner shipment',
       carrier: 'heppner',
       trackingUrl: '',
@@ -631,14 +635,14 @@ describe('input validation', () => {
 
   it('validates carrier corrections against the existing tracking number', () => {
     for (const dpdPostcode of ['8000', '01067']) {
-      expect(newPackageValues({ trackingNumber: '123456789018', label: '', carrier: 'gls-de', dpdPostcode }))
+      expect(newPackageValues({ trackingNumber: '123456589018', label: '', carrier: 'gls-de', dpdPostcode }))
         .toMatchObject({ carrier: 'gls-de', dpdPostcode });
-      expect(packageCarrierValues({ carrier: 'gls-de', dpdPostcode }, '123456789018'))
+      expect(packageCarrierValues({ carrier: 'gls-de', dpdPostcode }, '123456589018'))
         .toMatchObject({ carrier: 'gls-de', dpdPostcode });
     }
-    expect(packageCarrierValues({ carrier: 'gls-de', dpdPostcode: '1012 ab' }, '123456789018'))
+    expect(packageCarrierValues({ carrier: 'gls-de', dpdPostcode: '1012 ab' }, '123456589018'))
       .toMatchObject({ carrier: 'gls-de', dpdPostcode: '1012 AB' });
-    expect(() => packageCarrierValues({ carrier: 'gls-de', dpdPostcode: '80/0' }, '123456789018'))
+    expect(() => packageCarrierValues({ carrier: 'gls-de', dpdPostcode: '80/0' }, '123456589018'))
       .toThrow('valid delivery postcode');
     expect(packageCarrierValues({
       carrier: 'mondial-relay',
@@ -1283,7 +1287,7 @@ describe('Amazon Logistics addition policy', () => {
       .toThrow(expect.objectContaining({ status: 400, message: expect.stringContaining('Amazon account') }));
   });
   it('rejects manually selected Amazon Logistics and carrier changes', () => {
-    expect(() => newPackageValues({ trackingNumber: '12345678', carrier: 'amazon-logistics' }))
+    expect(() => newPackageValues({ trackingNumber: '12347678', carrier: 'amazon-logistics' }))
       .toThrow('Amazon account');
     expect(() => packageCarrierValues({ carrier: 'ups' }, 'FR3000000001')).toThrow('Amazon account');
   });

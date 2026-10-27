@@ -6,7 +6,7 @@ import { SupabaseServiceClient, SupabaseUserClient } from './supabase';
 import * as metrics from './metrics';
 vi.mock('./background', () => ({ wakeSyncWorker: vi.fn() }));
 const id = '55000000-0000-4000-a000-000000000002';
-const parcel = { id, tracking_number: '1234567891', carrier: 'unknown', tracking_url: null, dpd_postcode: null, archived_at: null,
+const parcel = { id, tracking_number: '1234560891', carrier: 'unknown', tracking_url: null, dpd_postcode: null, archived_at: null,
   carrier_data: { routing: { version: 1, provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode' } } } };
 const patch = (body: object) => PATCH(new NextRequest(`https://delivery.example/api/packages/${id}/carrier`, {
   method: 'PATCH', headers: { Authorization: 'Bearer synthetic-token', 'Content-Type': 'application/json' }, body: JSON.stringify(body),

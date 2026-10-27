@@ -36,6 +36,7 @@ export function userErrorKey(error: unknown): MessageKey | null {
   if (/amazon logistics.*amazon account/.test(message)) return 'add.amazonAccount';
   if (/postcode|postal code/.test(message)) return 'error.postcode';
   if (/tracking.*(?:url|link)|complete.*link/.test(message)) return 'error.trackingLink';
+  if (/not a real tracking number/.test(message)) return 'tracking.failure.placeholderNumber';
   if (/tracking (?:number|input)|parcel number/.test(message)) return 'error.trackingNumber';
   if (/80 characters|label.*long/.test(message)) return 'error.nameTooLong';
   if (/notifications were not allowed/.test(message) || value.name === 'NotAllowedError') {

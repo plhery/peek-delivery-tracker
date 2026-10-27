@@ -100,7 +100,7 @@ describe('native verification', () => {
     // Once verified, the lookup reaches its daily allowance, used up here.
     expect((await send(signedBody)).status).toBe(429);
     expect(service.request).toHaveBeenCalledWith('/rest/v1/rpc/accept_native_assertion', expect.anything());
-    expect((await send(Buffer.from('{"trackingNumber":"TESTPARCEL654321"}'))).status).toBe(403);
+    expect((await send(Buffer.from('{"trackingNumber":"TESTPARCEL674321"}'))).status).toBe(403);
     expect(claim).toHaveBeenCalledOnce();
   });
   it.each([

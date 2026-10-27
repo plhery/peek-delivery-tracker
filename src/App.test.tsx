@@ -36,7 +36,7 @@ describe('App', () => {
     const repo = createDemoRepo(window.localStorage);
     const original = await repo.list();
     await repo.remove(original[0].id);
-    await repo.add({ trackingNumber: '123456789012', label: 'My demo parcel' });
+    await repo.add({ trackingNumber: '123456889092', label: 'My demo parcel' });
     const user = userEvent.setup();
     renderApp(repo);
     expect(await screen.findByText('My demo parcel')).toBeInTheDocument();
@@ -89,11 +89,11 @@ describe('App', () => {
     renderApp(repo);
     await user.click(await screen.findByRole('button', { name: 'Add a parcel' }));
     const sheet = screen.getByRole('dialog', { name: 'Add a parcel' });
-    await user.type(within(sheet).getByLabelText('Tracking number or link'), 'LX123456785NL');
+    await user.type(within(sheet).getByLabelText('Tracking number or link'), 'LX123436785NL');
     expect(within(sheet).getByText('PostNL', { selector: 'strong' })).toBeInTheDocument();
     await user.click(within(sheet).getByRole('button', { name: 'Add parcel' }));
     await waitFor(() => expect(add).toHaveBeenCalledWith(expect.objectContaining({
-      trackingNumber: 'LX123456785NL', carrier: 'spring-gds',
+      trackingNumber: 'LX123436785NL', carrier: 'spring-gds',
     })));
   });
 
@@ -104,13 +104,13 @@ describe('App', () => {
     renderApp(repo);
     await user.click(await screen.findByRole('button', { name: 'Add a parcel' }));
     const sheet = screen.getByRole('dialog', { name: 'Add a parcel' });
-    await user.type(within(sheet).getByLabelText('Tracking number or link'), 'LF123456785DE');
+    await user.type(within(sheet).getByLabelText('Tracking number or link'), 'LF123436785DE');
     expect(within(sheet).getByText('DHL', { exact: true })).toBeInTheDocument();
     expect(within(sheet).queryByText('Peek will check DHL for updates automatically.')).not.toBeInTheDocument();
     expect(within(sheet).queryByText(/carrier is still unknown/)).not.toBeInTheDocument();
     await user.click(within(sheet).getByRole('button', { name: 'Add parcel' }));
     await waitFor(() => expect(add).toHaveBeenCalledWith(expect.objectContaining({
-      trackingNumber: 'LF123456785DE', carrier: 'dhl',
+      trackingNumber: 'LF123436785DE', carrier: 'dhl',
     })));
   });
 
@@ -118,8 +118,8 @@ describe('App', () => {
     const repo = createDemoRepo(window.localStorage);
     const [sample] = await repo.list();
     const parcel: ParcelWithEvents = {
-      ...sample, carrier: 'intl-post', trackingNumber: 'RA123456785IR',
-      trackingUrl: 'https://service.post.ch/ekp-web/ui/entry/search/RA123456785IR',
+      ...sample, carrier: 'intl-post', trackingNumber: 'RA123436785IR',
+      trackingUrl: 'https://service.post.ch/ekp-web/ui/entry/search/RA123436785IR',
       label: 'Postal shipment', syncStatus: 'pending', events: [], archivedAt: undefined,
       syncError: undefined,
     };
@@ -136,7 +136,7 @@ describe('App', () => {
     const detail = screen.getByRole('dialog', { name: 'Postal shipment' });
     expect(within(detail).getByText('Unknown postal carrier', { exact: true })).toBeInTheDocument();
     expect(within(detail).getByRole('link', { name: 'Open the 17TRACK website' }))
-      .toHaveAttribute('href', 'https://t.17track.net/en#nums=RA123456785IR');
+      .toHaveAttribute('href', 'https://t.17track.net/en#nums=RA123436785IR');
     expect(within(detail).queryByRole('link', { name: /Swiss Post|International Post/ })).not.toBeInTheDocument();
     expect(within(detail).queryByText(/automatic adapter/)).not.toBeInTheDocument();
     expect(within(detail).getByRole('button', { name: 'Check now' })).toBeInTheDocument();
@@ -556,7 +556,7 @@ describe('App', () => {
   it('treats returned parcels as final without calling them delivered', async () => {
     const returned: ParcelWithEvents = {
       id: 'parcel-returned',
-      trackingNumber: 'LX123456789DE',
+      trackingNumber: 'LX123476789DE',
       label: 'Returned shoes',
       carrier: 'intl-post',
       createdAt: '2026-07-10T10:00:00Z',
@@ -688,7 +688,7 @@ describe('App', () => {
     const writeText = vi.spyOn(window.navigator.clipboard, 'writeText');
     const parcel: ParcelWithEvents = {
       id: 'linked-parcel', trackingNumber: '993412345612345678', label: 'Perfume / Surprise',
-      carrier: 'swiss-post', originalCarrier: 'gls-de', originalTrackingNumber: '12345678901',
+      carrier: 'swiss-post', originalCarrier: 'gls-de', originalTrackingNumber: '12345478901',
       createdAt: new Date().toISOString(), syncStatus: 'ok', events: [],
     };
     const repo: ParcelRepo = {
@@ -726,8 +726,8 @@ describe('App', () => {
 
   it('says who will deliver on the card of a parcel its carrier hands on, before that carrier is followed', async () => {
     const parcel: ParcelWithEvents = {
-      id: 'named-parcel', trackingNumber: 'XY123456789FR', label: 'Lamp', carrier: 'chronopost',
-      deliveryCarrier: 'dpd-de', deliveryTrackingNumber: '01234567890123',
+      id: 'named-parcel', trackingNumber: 'XY123476789FR', label: 'Lamp', carrier: 'chronopost',
+      deliveryCarrier: 'dpd-de', deliveryTrackingNumber: '01234564890123',
       createdAt: new Date().toISOString(), syncStatus: 'ok', events: [],
     };
     renderApp({
@@ -1206,7 +1206,7 @@ describe('App', () => {
 
     await user.click(screen.getByRole('button', { name: /add a parcel/i }));
     const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
-    await user.type(within(sheet).getByLabelText(/tracking number/i), 'ZZ123456');
+    await user.type(within(sheet).getByLabelText(/tracking number/i), 'ZZ127456');
     await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
 
     expect(await within(sheet).findByRole('alert')).toHaveTextContent("Couldn’t add this parcel. Check the details and try again.");
@@ -1885,7 +1885,7 @@ describe('App', () => {
     clock.mockReturnValue(new Date('2026-07-20T12:00:00Z').getTime());
     const parcel: ParcelWithEvents = {
       id: 'pkg-missed',
-      trackingNumber: '123456789',
+      trackingNumber: '123476789',
       label: 'Desk lamp',
       carrier: 'tnt',
       createdAt: '2026-07-10T10:00:00Z',

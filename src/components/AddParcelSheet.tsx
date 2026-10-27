@@ -1,5 +1,6 @@
 import { amazonOrdersUrl, isAmazonTrackingNumber, requiresAmazonAccount } from '../lib/amazon';
 import { trackAction } from '../lib/analytics';
+import { isDemoBuild } from '../lib/buildMode';
 import { userErrorMessage } from '../lib/userMessages';
 import { useEffect, useLayoutEffect, useRef, useState, type FocusEvent, type FormEvent } from 'react';
 import { createPortal } from 'react-dom';
@@ -10,6 +11,7 @@ import {
   carrierTrackingHintKey,
   formatTrackingNumber,
   isPickupCode,
+  isPlaceholderNumber,
   normalizeTrackingNumber,
   parseTrackingInput,
   requirementSatisfied,
@@ -197,6 +199,10 @@ export function AddParcelSheet({
   // longer number is still being typed: its notice waits for a pause.
   const pickupCode = selectedCarrier === 'auto' && isPickupCode(normalizedNumber);
   const pickupNotice = pickupCode && normalizeTrackingNumber(settledTrackingNumber) === normalizedNumber;
+  // A placeholder, such as the app's demo number, is held back in the same way, whichever the carrier: every lookup
+  // refuses it. A demo build looks nothing up.
+  const placeholder = !isDemoBuild && !pickupCode && isPlaceholderNumber(normalizedNumber);
+  const placeholderNotice = placeholder && normalizeTrackingNumber(settledTrackingNumber) === normalizedNumber;
   useEffect(() => {
     if (!shouldLookup || !apiAuth) return;
     const controller = new AbortController();
@@ -329,7 +335,7 @@ export function AddParcelSheet({
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (accountRequired || pickupCode || !trackingNumber.trim() || lookingUp || requiresCarrierConfirmation || !requirementsSatisfied || saving) return;
+    if (accountRequired || pickupCode || placeholder || !trackingNumber.trim() || lookingUp || requiresCarrierConfirmation || !requirementsSatisfied || saving) return;
     setSaving(true);
     setError(null);
     setExistingParcelId(null);
@@ -444,6 +450,11 @@ export function AddParcelSheet({
               {pickupNotice && (
                 <div className="add-parcel-notice">
                   <p role="status"><strong>{t('add.pickupCode.title')}</strong><br />{t('add.pickupCode.body')}</p>
+                </div>
+              )}
+              {placeholderNotice && (
+                <div className="add-parcel-notice">
+                  <p role="status">{t('tracking.failure.placeholderNumber')}</p>
                 </div>
               )}
               {parsedTracking.source !== 'number' && trackingNumber && (
@@ -613,7 +624,7 @@ export function AddParcelSheet({
               className="button button--primary"
               disabled={
                 !trackingNumber
-                || accountRequired || pickupCode || lookingUp || requiresCarrierConfirmation
+                || accountRequired || pickupCode || placeholder || lookingUp || requiresCarrierConfirmation
                 || !requirementsSatisfied
                 || saving
               }

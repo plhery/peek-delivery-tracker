@@ -320,6 +320,12 @@ struct AddParcelView: View {
             if pickupCode && recognition.settledNumber == normalizedNumber {
                 heldBackNote(title: localizer.text("add.pickupCode.title"), body: localizer.text("add.pickupCode.body"))
             }
+            if placeholderNumber && recognition.settledNumber == normalizedNumber {
+                Text(localizer.text("tracking.failure.placeholderNumber"))
+                    .font(.caption)
+                    .foregroundStyle(Brand.warning)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             // An order number is held back at once, and its notice waits in the same way.
             if let order, recognition.settledNumber == normalizedNumber {
                 heldBackNote(title: localizer.text("door.order.\(order.rawValue).title"),
@@ -821,6 +827,10 @@ struct AddParcelView: View {
     /// Six digits are a pickup code unless a carrier picked by hand takes them as its number.
     private var pickupCode: Bool { carrierOverride == nil && CarrierCatalog.isPickupCode(normalizedNumber) }
 
+    /// A placeholder, such as the first screen's demo number, is held back in the same way, whichever the carrier:
+    /// every lookup refuses it. The demo looks nothing up.
+    private var placeholderNumber: Bool { !store.isDemo && !pickupCode && CarrierCatalog.isPlaceholderNumber(normalizedNumber) }
+
     private var currentVerification: CarrierDetectionResponse? {
         verifiedCarrier?.trackingNumber == normalizedNumber ? verifiedCarrier : nil
     }
@@ -1018,7 +1028,7 @@ struct AddParcelView: View {
     }
 
     private var canSave: Bool {
-        guard !accountRequired, !pickupCode, !parsed.trackingNumber.isEmpty else { return false }
+        guard !accountRequired, !pickupCode, !placeholderNumber, !parsed.trackingNumber.isEmpty else { return false }
         if let number = lookupTrackingNumber, verifiedCarrier?.trackingNumber != number { return false }
         for requirement in requirements {
             switch requirement.field {

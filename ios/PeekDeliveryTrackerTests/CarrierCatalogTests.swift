@@ -333,7 +333,7 @@ final class CarrierCatalogTests: XCTestCase {
     }
 
     func testRecognitionAsksOnlyAboutASettledAmbiguousNumber() {
-        let number = "12345678901"
+        let number = "12345478901"
         let ambiguous = catalog.parse(number)
         let asked = catalog.recognitionCandidates(for: number)
         XCTAssertEqual(ambiguous.confidence, .low)
@@ -373,6 +373,18 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertFalse(CarrierRecognition.applies(to: catalog.parse("204617"), amazon: false, demo: false))
     }
 
+    func testPlaceholdersAreReadAsTheSharedEngineReadsThemAndNobodyIsAsked() {
+        for number in ["123EXAMPLE", "EXAMPLE", "000000", "777777777", "123456789", "9876543210", "1234567899",
+                       "RR123456785CH", "JJD000000000000000", "ABC123456"] {
+            XCTAssertTrue(CarrierCatalog.isPlaceholderNumber(number), number)
+        }
+        for number in ["LX123436785DE", "1Z999AA10123456784", "12345", "204617", "01234564890123", "123456ABCD7"] {
+            XCTAssertFalse(CarrierCatalog.isPlaceholderNumber(number), number)
+        }
+        XCTAssertTrue(CarrierCatalog.isPlaceholderNumber(CarrierCatalog.normalize("123 example")))
+        XCTAssertFalse(CarrierRecognition.applies(to: catalog.parse("123456789"), amazon: false, demo: false))
+    }
+
     @MainActor func testARefusalIsAskedOnceForACarrierAndANumberTheServerTakes() async throws {
         XCTAssertNil(NumberRefusals.question(carrier: nil, trackingNumber: "SYNTH12345", demo: false))
         XCTAssertNil(NumberRefusals.question(carrier: .unknown, trackingNumber: "SYNTH12345", demo: false))
@@ -397,7 +409,7 @@ final class CarrierCatalogTests: XCTestCase {
     }
 
     func testRecognitionAsksDirectCandidatesForGenericPostalNumbers() {
-        let number = "RR123456785FI"
+        let number = "RR123436785FI"
         let input = catalog.parse(number)
         XCTAssertEqual(input.carrier, .internationalPost)
         XCTAssertEqual(input.confidence, .high)
@@ -1514,16 +1526,16 @@ final class CarrierCatalogTests: XCTestCase {
     func testAnUnknownChecksumOnAHighRuleNeverSelectsTheCarrier() throws {
         let dynamic = try CarrierCatalog(data: Self.unknownChecksumCatalogData)
         let futureExpress = CarrierID(rawValue: "future-express")
-        XCTAssertNil(CarrierCatalog.checksumPasses("future-check", "FX12345678"))
+        XCTAssertNil(CarrierCatalog.checksumPasses("future-check", "FX12375678"))
 
         // The shape still suggests the carrier; the user or the carriers confirm it.
-        XCTAssertEqual(dynamic.detect("FX12345678"), CarrierMatch(carrier: .unknown, confidence: .low, candidates: [futureExpress]))
-        let input = dynamic.parse("FX12345678")
+        XCTAssertEqual(dynamic.detect("FX12375678"), CarrierMatch(carrier: .unknown, confidence: .low, candidates: [futureExpress]))
+        let input = dynamic.parse("FX12375678")
         XCTAssertEqual(input.carrier, .unknown)
         XCTAssertEqual(input.confidence, .low)
         XCTAssertEqual(input.candidates, [futureExpress])
         XCTAssertTrue(CarrierRecognition.applies(to: input, amazon: false, demo: false))
-        XCTAssertEqual(dynamic.recognitionCandidates(for: "FX12345678"), [futureExpress])
+        XCTAssertEqual(dynamic.recognitionCandidates(for: "FX12375678"), [futureExpress])
 
         // A check this build knows still selects a carrier and rejects a mistyped number.
         XCTAssertEqual(CarrierCatalog.checksumPasses("s10", "RA123456785CH"), true)

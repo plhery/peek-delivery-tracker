@@ -98,6 +98,7 @@ export {
   detectCarrier,
   detectCarrierMatch,
   formatTrackingNumber,
+  isPlaceholderNumber,
   isPlanzerSharedTrackingNumber,
   isValidS10TrackingNumber,
   normalizeTrackingNumber,

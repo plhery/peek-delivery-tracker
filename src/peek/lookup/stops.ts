@@ -12,6 +12,8 @@ export const DOOR_STOPS = {
   order: 'door-order-number',
   /** Six digits: a locker's or a pickup point's code, not a tracking number. */
   pickup: 'door-pickup-code',
+  /** A placeholder, such as the app's demo number. */
+  placeholder: 'door-placeholder-number',
   /** A postal number whose check digit does not add up. */
   typo: 'door-check-digit',
   /** The text names several numbers: one is to be chosen. */
@@ -42,6 +44,7 @@ export function doorStops(state: LookupState, found: Survey): DoorStop[] {
   if (found.nothing) stops.push(DOOR_STOPS.nothing);
   if (found.order) stops.push(DOOR_STOPS.order);
   if (found.pickup) stops.push(DOOR_STOPS.pickup);
+  if (found.placeholder) stops.push(DOOR_STOPS.placeholder);
   if (found.typo) stops.push(DOOR_STOPS.typo);
   if (found.several.length) stops.push(DOOR_STOPS.numbers);
   if (found.match && !found.typo && !found.several.length && found.check.status === 'several' && state.carrier === 'auto') stops.push(DOOR_STOPS.carriers);

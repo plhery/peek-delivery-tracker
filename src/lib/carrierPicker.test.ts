@@ -167,11 +167,11 @@ describe('what a picker beside a number leads with', () => {
   });
 
   it('asks direct carriers about a postal fallback while preserving concrete offline detection', () => {
-    expect(canAskCarrier(shape('intl-post', 'high'), 'RR123456785FI')).toBe(true);
-    expect(canAskCarrier(shape('intl-post', 'high'), 'RA123456785IR')).toBe(true);
+    expect(canAskCarrier(shape('intl-post', 'high'), 'RR123436785FI')).toBe(true);
+    expect(canAskCarrier(shape('intl-post', 'high'), 'RA123436785IR')).toBe(true);
     expect(canAskCarrier(shape('intl-post', 'high'), 'DEMO4471203')).toBe(false);
     expect(canAskCarrier(shape('ups', 'high'), '1Z999AA10123456784')).toBe(false);
-    expect(canAskCarrier(shape('unknown', 'low'), '12345678901231')).toBe(true);
+    expect(canAskCarrier(shape('unknown', 'low'), '12345677601231')).toBe(true);
   });
 
   it('lists the carriers that know the number, then those it fits, then those used before, each once', () => {

@@ -69,7 +69,7 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
             : check.status === 'several' ? { mark: detect(), strong: t('door.line.several.many', { count: check.carriers.length }), detail: t('door.line.chooseYours'), attention: true }
               : refused ? { mark: truck, strong: carrier.name, detail: t('add.line.refused'), attention: true }
                 : found.source !== 'none' ? { mark: truck, strong: carrier.name, detail: t(found.source === 'chosen' ? 'add.line.chosen' : found.source === 'found' ? 'add.line.found' : 'add.detectedCarrier') }
-                  : rested ? { mark: detect(), strong: t('add.carrier'), detail: found.pickup ? '' : t(check.status === 'none' ? 'add.line.none' : 'door.line.later') }
+                  : rested ? { mark: detect(), strong: t('add.carrier'), detail: found.pickup || found.placeholder ? '' : t(check.status === 'none' ? 'add.line.none' : 'door.line.later') }
                     : null;
     // The way to the picker stays put while the carriers are asked: leaving the field starts the asking, and a
     // button that left with it would take the click along.
@@ -210,6 +210,10 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
 
     {found.pickup && <DoorNote icon="lock" tone="warm" title={t('add.pickupCode.title')} urgent={state.raised}>
       <p>{t('add.pickupCode.body')}</p>
+    </DoorNote>}
+
+    {found.placeholder && <DoorNote icon="receipt" tone="warm" urgent={state.raised}>
+      <p>{t('tracking.failure.placeholderNumber')}</p>
     </DoorNote>}
 
     {found.nothing && <section className="door-shapes" aria-labelledby="door-shapes-title">

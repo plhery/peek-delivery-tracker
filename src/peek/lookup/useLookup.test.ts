@@ -28,7 +28,7 @@ describe('useLookup', () => {
     const onTracked = vi.fn(() => view.unmount());
     const view = renderHook(() => useLookup(onTracked));
     act(() => {
-      view.result.current.send({ type: 'edit', text: '1234567899', via: 'typing' });
+      view.result.current.send({ type: 'edit', text: '1234577899', via: 'typing' });
       view.result.current.send({ type: 'submit' });
     });
     await act(async () => { await vi.advanceTimersByTimeAsync(RECOGNISE_BEAT_MS); });

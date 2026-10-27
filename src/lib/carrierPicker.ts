@@ -6,7 +6,7 @@
 import type { ApiCarrierDetectionResponse } from '../generated/apiContract';
 import type { Translate } from '../i18n';
 import type { CarrierId } from '../types';
-import { carrierInfo, recognitionAskedCarriers, type CarrierDetection, type CarrierInfo } from './carriers';
+import { carrierInfo, isPlaceholderNumber, recognitionAskedCarriers, type CarrierDetection, type CarrierInfo } from './carriers';
 
 const LETTER_OR_DIGIT = /[\p{L}\p{N}]/u;
 
@@ -218,11 +218,12 @@ export function shapeCarrier(detection: Pick<CarrierDetection, 'carrier' | 'conf
     ? detection.carrier : undefined;
 }
 
-/** A postal fallback still needs a direct carrier's answer, even when its format is certain. */
+/** A postal fallback still needs a direct carrier's answer, even when its format is certain. Nobody is asked about a placeholder. */
 export function canAskCarrier(
   detection: Pick<CarrierDetection, 'carrier' | 'confidence'>,
   number: string,
 ): boolean {
+  if (isPlaceholderNumber(number)) return false;
   return (detection.confidence === 'low' && detection.carrier === 'unknown')
     || (detection.carrier === 'intl-post' && recognitionAskedCarriers(number).length > 0);
 }

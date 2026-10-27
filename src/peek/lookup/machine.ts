@@ -1,9 +1,11 @@
 import type { MessageKey } from '../../i18n';
 import { isAmazonTrackingNumber, requiresAmazonAccount } from '../../lib/amazon';
+import { isDemoBuild } from '../../lib/buildMode';
 import { canAskCarrier, carrierCheck, type CarrierCheck } from '../../lib/carrierPicker';
 import {
   carrierRequirements,
   isPickupCode,
+  isPlaceholderNumber,
   normalizeTrackingNumber,
   requirementSatisfied,
   type CarrierInputField,
@@ -131,6 +133,8 @@ export interface Survey {
   typo: CheckDigitTrouble | null;
   /** Say that six digits are a pickup code, and ask for the parcel's tracking number. */
   pickup: boolean;
+  /** Say that the number is a placeholder, such as the app's demo number, which no lookup takes. */
+  placeholder: boolean;
   onDevice: DeviceParcel | null;
   amazon: boolean;
   /** An Amazon number: still being checked, tracked in the Amazon account only, or the check gave no answer. */
@@ -193,6 +197,9 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   // Six digits are a pickup code unless a carrier picked by hand takes them as its number. The start of a longer
   // number is still being typed: its notice waits for the text to rest.
   const code = Boolean(match) && !onDevice && state.carrier === 'auto' && isPickupCode(normalized);
+  // A placeholder is held back in the same way, whichever the carrier: every lookup refuses it. A demo build looks
+  // nothing up and tells its samples' stories by their numbers.
+  const placeholder = !isDemoBuild && Boolean(match) && !onDevice && !code && isPlaceholderNumber(normalized);
 
   const amazon = Boolean(match) && isAmazonTrackingNumber(normalized);
   const answer = match && state.answer?.trackingNumber === normalized ? state.answer : undefined;
@@ -243,7 +250,7 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   const missing = requirements.find((requirement) => !requirementSatisfied(requirement, input(requirement.field))) ?? null;
 
   const ask = match && !onDevice && !state.job && settledForAsking && !answer && (amazon || (recognizable && state.carrier === 'auto')) ? normalized : null;
-  const need: Survey['need'] = order ? 'order' : !match ? 'number' : typo ? 'typo' : onDevice ? null : code ? 'code'
+  const need: Survey['need'] = order ? 'order' : !match ? 'number' : typo ? 'typo' : onDevice ? null : code || placeholder ? 'code'
     : account === 'checking' || check.status === 'asking' ? 'wait'
       : account ? 'account'
         : check.status === 'several' && state.carrier === 'auto' ? 'carrier'
@@ -251,7 +258,8 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
 
   return {
     reading, several, match, normalized, nothing, order: order && (state.raised || calm.order) ? order : null, typo,
-    pickup: code && (state.raised || settledNumber === normalized), onDevice, amazon, account,
+    pickup: code && (state.raised || settledNumber === normalized),
+    placeholder: placeholder && (state.raised || settledNumber === normalized), onDevice, amazon, account,
     check, carrier, source, certain, suggested, inputCarrier, fields, missing, input, remembered, ask, need, postcodeCountry,
     postcodeCountries: match && postcodeField ? postcodeCountries(inputCarrier, match.trackingNumber) : [],
   };

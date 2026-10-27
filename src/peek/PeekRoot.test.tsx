@@ -20,7 +20,7 @@ const moved = () => new Promise<void>((resolve) => window.addEventListener('pops
 
 async function track() {
   const user = userEvent.setup();
-  await user.type(screen.getByRole('textbox', { name: 'Tracking number or link' }), '1234567899');
+  await user.type(screen.getByRole('textbox', { name: 'Tracking number or link' }), '1234577899');
   await user.click(screen.getByRole('button', { name: 'Track' }));
 }
 

@@ -69,4 +69,24 @@ describe('Add parcel feedback while typing', () => {
     expect(screen.queryByText(pickup)).not.toBeInTheDocument();
     expect(add).toBeEnabled();
   });
+
+  it('holds back a placeholder such as the demo number, under any carrier', () => {
+    const tracking = renderSheet();
+    const add = screen.getByRole('button', { name: 'Add parcel' });
+    const placeholder = /doesn’t look like a real tracking number/;
+
+    fireEvent.change(tracking, { target: { value: '123EXAMPLE' } });
+    expect(add).toBeDisabled();
+    expect(screen.queryByText(placeholder)).not.toBeInTheDocument();
+
+    act(() => vi.advanceTimersByTime(800));
+    expect(screen.getByText(placeholder)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /^Detect automatically/ }));
+    const picker = screen.getByRole('dialog', { name: 'Carrier' });
+    fireEvent.change(within(picker).getByRole('combobox', { name: 'Search carriers' }), { target: { value: 'Pannon' } });
+    fireEvent.click(within(picker).getByRole('option', { name: /^Pannon/ }));
+    expect(screen.getByText(placeholder)).toBeInTheDocument();
+    expect(add).toBeDisabled();
+  });
 });

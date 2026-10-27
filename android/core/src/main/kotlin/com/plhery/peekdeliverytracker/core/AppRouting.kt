@@ -241,8 +241,8 @@ class ParcelLinkRoute(
             return characters.size == 12 && characters.all { character -> character.nfc().let { it.length == 1 && it[0] in alphabet } }
         }
 
-        /** An id in the format the service gives a link, for a demo that has no service. */
-        fun madeUpId(random: Random = Random.Default): String = String(CharArray(12) { alphabet[random.nextInt(alphabet.length)] })
+        /** An id in the format the service gives a link, for a demo that has no service. The caller picks the generator. */
+        fun madeUpId(random: Random): String = String(CharArray(12) { alphabet[random.nextInt(alphabet.length)] })
 
         /** An owner key as the service makes them: 32 random bytes in base64url, 43 characters. */
         fun validKey(value: String): Boolean =

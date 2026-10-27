@@ -30,7 +30,11 @@ import java.net.UnknownHostException
 import java.time.Instant
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.yield
 import kotlinx.serialization.Serializable
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -375,6 +379,51 @@ class ParcelLinkTests {
         assertEquals("error.rateLimited", ParcelLinkFailure.RateLimited.messageKey)
         assertNull(ParcelLinkFailure(CancellationException()))
         assertNull(ParcelLinkFailure(CancellationException("Canceled")))
+    }
+
+    /**
+     * A `withTimeout` around a read that runs out is a read that timed out, as `URLError.timedOut` is: offline. A read
+     * the app cancelled leaves the sheet as it was.
+     */
+    @Test
+    fun aReadThatTimesOutIsOfflineAndOneTheAppCancelledSaysNothing() = runTest {
+        val shown = fixture().publicParcel
+        var slow = true
+        var hanging = false
+        var entered = false
+        val store = ParcelLinkStore(defaults = MemoryDefaults(), read = { _, _ ->
+            entered = true
+            if (slow) withTimeout(15_000) { awaitCancellation() }
+            if (hanging) awaitCancellation()
+            shown
+        })
+        store.open(ParcelLinkRoute(linkId))
+        store.load()
+        assertEquals(ParcelLinkStore.Phase.Failed(ParcelLinkFailure.Offline), store.phase)
+        slow = false
+        store.load()
+        assertEquals(ParcelLinkStore.Phase.Shown(shown), store.phase)
+        slow = true
+        store.load()
+        assertEquals("A refresh that timed out keeps the parcel", ParcelLinkStore.Phase.Shown(shown), store.phase)
+        assertEquals(ParcelLinkFailure.Offline, store.refreshFailure)
+
+        slow = false
+        hanging = true
+        store.open(ParcelLinkRoute(linkId))
+        entered = false
+        val reading = launch { store.load() }
+        while (!entered) yield()
+        reading.cancel()
+        reading.join()
+        assertEquals(ParcelLinkStore.Phase.Loading, store.phase)
+        assertNull(store.refreshFailure)
+
+        val timedOut = runCatching { withTimeout(1) { awaitCancellation() } }.exceptionOrNull()!!
+        assertTrue(timedOut is CancellationException)
+        assertEquals(ParcelLinkFailure.Offline, ParcelLinkFailure(timedOut))
+        // OkHttp's `Call.cancel()` from outside the coroutine, as a network failure.
+        assertEquals(ParcelLinkFailure.Offline, ParcelLinkFailure(IOException("Canceled")))
     }
 
     /** Swift compares routes canonically: words the service writes another way leave the route as it is. */

@@ -21,6 +21,7 @@ import java.io.IOException
 import java.time.Instant
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -187,9 +188,11 @@ enum class ParcelLinkFailure {
     companion object {
         /**
          * Nil for a read that was cancelled. A connection failure is an `IOException`, as OkHttp throws it (Swift's
-         * `URLError`); a call the app cancelled reaches here as a `CancellationException`.
+         * `URLError`); a call the app cancelled reaches here as a `CancellationException`. A `withTimeout` that ran out
+         * is one too, but the read timed out, as `URLError.timedOut` does: offline.
          */
         operator fun invoke(error: Throwable): ParcelLinkFailure? = when (error) {
+            is TimeoutCancellationException -> Offline
             is CancellationException -> null
             is IOException -> Offline
             is DeliveryApiError.RateLimited -> RateLimited
@@ -341,6 +344,7 @@ class ParcelLinkStore(
             if (current != generation || !currentCoroutineContext().isActive) return
             gone(Phase.Stopped)
         } catch (error: Exception) {
+            // A read that timed out ends in a CancellationException while this coroutine carries on.
             if (current != generation || !currentCoroutineContext().isActive) return
             val failure = ParcelLinkFailure(error) ?: return
             if (phase is Phase.Shown) refreshFailure = failure else phase = Phase.Failed(failure)
@@ -370,7 +374,8 @@ class ParcelLinkStore(
             val pending = runCatching { ApiJson.decodeFromString(Pending.serializer(), data.decodeToString()) }.getOrNull()
             // Swift's `timeIntervalSince`, on the same seconds since 2001 the link was saved with.
             val age = pending?.let { now().timeIntervalSinceReferenceDate - it.receivedAt }
-            if (pending == null || !ParcelLinkRoute.validId(pending.id) || age == null || age < 0 || age >= 604_800) {
+            // Written as Swift accepts it, so an age that is not a number is refused.
+            if (pending == null || !ParcelLinkRoute.validId(pending.id) || age == null || !(age >= 0 && age < 604_800)) {
                 defaults.removeObject(forKey = storageKey)
                 return null
             }
@@ -432,7 +437,10 @@ class ParcelLinkStore(
         defaults.removeObject(forKey = storageKey)
     }
 
-    /** Set by `debugPreview`: the sheet shows what a signed-in person sees. Debug builds only. */
+    /**
+     * Set by `debugPreview`: the sheet shows what a signed-in person sees. Debug-only API: the iPhone compiles it into
+     * debug builds alone (`#if DEBUG`), so the app reads and sets it only in a debug build.
+     */
     var previewsSignedIn = false
 
     companion object {
@@ -448,6 +456,9 @@ class ParcelLinkStore(
          * without a place), `stopped` or `gone`. `signedIn` (`-sdt.debug.parcelLink.signedIn`) shows it as a
          * signed-in person sees it; `importCharges` (`-sdt.debug.importCharges`) gives the parcel import charges (see
          * `ImportChargesPreview`). `demoParcels` is the demo repository's list.
+         *
+         * Debug-only API: the iPhone compiles it into debug builds alone (`#if DEBUG`), so the app calls it only in a
+         * debug build.
          */
         fun debugPreview(
             variant: String?,
@@ -572,14 +583,29 @@ class ParcelLinkStore(
 @Serializable
 private class DebugFixtures(val publicParcel: PublicParcelResponse, val publicGiftParcel: PublicParcelResponse)
 
-/** Swift's `ParcelLinkStore.Reader`: reads a link, with its owner key when the site handed the parcel over. */
+/**
+ * Swift's `ParcelLinkStore.Reader`: reads a link, with its owner key when the site handed the parcel over. The app
+ * makes it of its API client, as `APIClient.publicParcel` does on iOS: `GET api/public/parcels/{linkId}`, asking for
+ * JSON, past any cache, with a 15-second timeout, and
+ * - without cookies (none sent, none kept) and without an `Authorization` header: a link reads the same signed in or
+ *   not;
+ * - with `X-Parcel-Key` only when there is a key, and the key in that header alone. The device's app alerts follow
+ *   the same rule (`DeviceParcels.setAlert`): the key goes along only for a parcel whose owner key this phone holds;
+ * - a 404 is null, a 410 throws `ParcelLinkStopped`, a 429 throws `DeliveryApiError.RateLimited` with the wait its
+ *   `Retry-After` asks for (`DeliveryApiClient.retryAfterSeconds`), a 200 whose body is not a link (`{}`) throws
+ *   `DeliveryApiError.InvalidResponse` and any other status `DeliveryApiError.ServiceFailed`: both a service failure.
+ *
+ * A read the app cancelled must surface as a `CancellationException`, which leaves the sheet as it was. A network
+ * failure, a connection that timed out and an OkHttp `Call.cancel()` from outside the coroutine surface as an
+ * `IOException`: offline. A `withTimeout` around the read that runs out (`TimeoutCancellationException`) is offline too.
+ */
 typealias ParcelLinkReader = suspend (linkId: String, key: String?) -> PublicParcelResponse?
 
 /**
- * Gives a parcel Poste Italiane's import charges, to look at them in a debug build. `setting` (the iPhone's
- * `-sdt.debug.importCharges`): `unpaid` (with a lower online price), `closed` (the online window closed) or `paid`. In
- * the demo the page of its first parcel on its way opens with them; a link opened with `ParcelLinkStore.debugPreview`
- * carries them.
+ * Gives a parcel Poste Italiane's import charges, to look at them in a debug build. Debug-only API, as on the iPhone
+ * (`#if DEBUG`). `setting` (the iPhone's `-sdt.debug.importCharges`): `unpaid` (with a lower online price), `closed`
+ * (the online window closed) or `paid`. In the demo the page of its first parcel on its way opens with them; a link
+ * opened with `ParcelLinkStore.debugPreview` carries them.
  */
 object ImportChargesPreview {
     val carrier = CarrierId("poste-italiane")

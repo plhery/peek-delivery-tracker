@@ -22,8 +22,10 @@ import kotlin.coroutines.cancellation.CancellationException
 import kotlin.random.asKotlinRandom
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.yield
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -478,6 +480,54 @@ class ParcelShareTests {
         assertTrue(model.shown.gift)
     }
 
+    /**
+     * A `withTimeout` around a call that runs out is a call that timed out, as `URLError.timedOut` is. A call the app
+     * cancelled says nothing.
+     */
+    @Test
+    fun aCallThatTimesOutSaysTheConnectionFailedAndOneTheAppCancelledSaysNothing() = runTest {
+        val service = Service()
+        service.link = ParcelShare(id = linkId, showNumber = false, gift = false, createdAt = "2026-10-01T08:00:00.000Z")
+        var slow = false
+        var hanging = false
+        var entered = false
+        val client = service.client
+        val model = ParcelShareModel(
+            parcelId = UUID.randomUUID(), name = "New sneakers", notes = ParcelShareNotes(MemoryDefaults()), baseUrl = base,
+            client = ParcelShareModel.Client(
+                current = client.current,
+                share = { settings ->
+                    entered = true
+                    if (slow) withTimeout(15_000) { awaitCancellation() }
+                    if (hanging) awaitCancellation()
+                    client.share(settings)
+                },
+                stop = {
+                    if (slow) withTimeout(15_000) { awaitCancellation() }
+                    client.stop()
+                },
+            ),
+        )
+        model.load()
+        slow = true
+        model.set(ParcelShareModel.Field.Gift, to = true)
+        assertEquals("error.connection", model.failureKey)
+        assertFalse(model.shown.gift)
+        model.stop()
+        assertEquals("error.connection", model.failureKey)
+        assertEquals(linkId, model.link?.id)
+
+        slow = false
+        hanging = true
+        entered = false
+        val saving = launch { model.set(ParcelShareModel.Field.Gift, to = true) }
+        while (!entered) yield()
+        saving.cancel()
+        saving.join()
+        assertNull(model.failureKey)
+        assertFalse(model.isSaving(ParcelShareModel.Field.Gift))
+    }
+
     /** Swift compares the words canonically: while only how they are written changes, the device keeps them as they were. */
     @Test
     fun wordsWrittenAnotherWayAreNotKeptAgain() = runTest {
@@ -735,12 +785,19 @@ class ParcelShareTests {
         assertNull(ApiJson.decodeFromString(ParcelShareResponse.serializer(), """{"link":null}""").link)
 
         // `shareClient` sends the switches as the sheet shows them, and gift words only when there are some.
-        val settings = ParcelShareModel.Settings(showNumber = false, gift = true)
-        val request = ShareParcelRequest(showNumber = settings.showNumber, gift = settings.gift, giftWords = settings.giftWords)
+        val request = ParcelShareModel.Settings(showNumber = false, gift = true).request
         assertEquals(
             "Never a name, a note or a signature",
             """{"gift":true,"showNumber":false}""",
             JsonEncoder.deliveryTracker.encode(ShareParcelRequest.serializer(), request).decodeToString(),
+        )
+        val words = GiftWords(name = "Moon lamp", note = "Enjoy", from = null)
+        assertEquals(
+            """{"gift":true,"giftWords":{"from":null,"name":"Moon lamp","note":"Enjoy"},"showNumber":true}""",
+            JsonEncoder.deliveryTracker.encode(
+                ShareParcelRequest.serializer(),
+                ParcelShareModel.Settings(showNumber = true, gift = true, giftWords = words).request,
+            ).decodeToString(),
         )
 
         // Deleting the parcel drops what its link carried.

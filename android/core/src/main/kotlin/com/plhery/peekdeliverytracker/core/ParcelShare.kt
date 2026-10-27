@@ -3,12 +3,14 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.GiftWords
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
+import com.plhery.peekdeliverytracker.core.api.ShareParcelRequest
 import java.io.IOException
 import java.security.SecureRandom
 import java.time.Instant
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.random.asKotlinRandom
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -182,11 +184,23 @@ class ParcelShareModel(
         val showNumber: Boolean = false,
         val gift: Boolean = false,
         val giftWords: GiftWords? = null,
-    )
+    ) {
+        /**
+         * The body that changes a link through the account, `PUT api/packages/{id}/share`: the switches, and gift words
+         * only when there are some. The iPhone's `ParcelStore.shareClient(for:)` writes it inline.
+         */
+        val request: ShareParcelRequest
+            get() = ShareParcelRequest(showNumber = showNumber, gift = gift, giftWords = giftWords)
+    }
 
     enum class Field { ShowNumber, Gift }
 
-    /** How the sheet reaches the parcel's link: through the service, or in the demo. */
+    /**
+     * How the sheet reaches the parcel's link: through the service, or in the demo. A call the app cancelled must
+     * surface as a `CancellationException`, which shows nothing. A network failure, a connection that timed out and an
+     * OkHttp `Call.cancel()` from outside the coroutine surface as an `IOException`: "error.connection". A
+     * `withTimeout` around the call that runs out (`TimeoutCancellationException`) shows that too.
+     */
     class Client(
         /** The parcel's live link, or nil while it is not shared. */
         val current: suspend () -> ParcelShare?,
@@ -435,8 +449,12 @@ class ParcelShareModel(
     }
 
     private companion object {
-        /** A connection failure is an `IOException`, as OkHttp throws it (Swift's `URLError`). */
+        /**
+         * A connection failure is an `IOException`, as OkHttp throws it (Swift's `URLError`), and so is a `withTimeout`
+         * that ran out, as `URLError.timedOut` is.
+         */
         fun failureKey(error: Throwable): String? = when (error) {
+            is TimeoutCancellationException -> "error.connection"
             is CancellationException -> null
             is IOException -> "error.connection"
             is DeliveryApiError.RateLimited -> "error.rateLimited"

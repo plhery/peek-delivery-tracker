@@ -8,6 +8,13 @@ updated: 2026-10-27
 
 Correos Express is the express parcel company of Spain's Correos group, delivering across Spain and Portugal; it isn't [Correos](carrier:correos-spain), the post office. Type your number into its Spanish-language [tracking page](https://s.correosexpress.com/) or paste it in the box above. The sender, usually the shop, registers the parcel with Correos Express, so ask the shop if you have no number.
 
+## Correos or Correos Express: which number do you have?
+
+Correos, the post office, is Correos Express's parent company, but each has its own numbers and tracker. Your number tells you which one has your parcel:
+
+- **Digits only, 16 or 23 of them:** Correos Express, though other carriers share these shapes (see below). Track it in the box above.
+- **Letters and digits:** Correos. Its codes are 23 or 16 characters that start and end with a letter, `PR` plus 15 digits plus `C`, or 13 characters ending in `ES`. Correos has an [English tracker](https://www.correos.es/es/en/tools/tracker/items), and our [Correos page](carrier:correos-spain) explains its statuses.
+
 ## Your Correos Express tracking number
 
 Correos Express publishes no number format; its tracker asks for the *número de envío* (shipment number). Peek's catalog knows two all-digit shapes, each ending in a check digit (examples invented):
@@ -48,7 +55,7 @@ Correos Express explains `ESTACIONADO` only in its Portuguese FAQ, and doesn't e
 
 ## Correos Express delivery: change the date, address or parcel shop
 
-**In Spain**, before the parcel goes out, its tracking may offer **Gestionar entrega** (manage delivery) if the sender and the service allow changes: send it to a Punto Correos pickup point, authorise someone else (a neighbour or your porter), change the address or pick another date. If you miss it, Correos Express tries again before the service's deadline. To rebook, the tracker's **Solicita nueva entrega** form (request a new delivery) takes a date with a morning or afternoon slot, or a Correos post office or pickup point. Wrong address? Contact the sender.
+**In Spain**, before the parcel goes out, its tracking may offer **Gestionar entrega** (manage delivery) if the sender and the service allow changes: send it to a Punto Correos pickup point, authorise someone else (a neighbour or your porter), change the address or pick another date. If you miss it, Correos Express tries again before the service's deadline. To rebook, the tracker's **Solicita nueva entrega** form (request a new delivery) takes a date with a morning or afternoon slot, or a Correos post office or pickup point. Wrong address? Contact the sender. Paying on delivery (*contra reembolso*)? The courier takes the money at your door; Correos Express suggests having the exact amount ready in cash.
 
 **In Portugal**, the second attempt is automatic. A notification then offers another day, another address in the same district or a Ponto Correos where available. Once it's out for delivery, wait for that notification to change the address. The terms say a parcel unclaimed 3 working days after a failed delivery goes back to the sender.
 
@@ -59,6 +66,7 @@ Correos Express explains `ESTACIONADO` only in its Portuguese FAQ, and doesn't e
 The sender, usually the shop, holds the contract; Correos Express sends recipients to it for most problems.
 
 - **No update:** tracking can lag a few hours between logistics centres. After 24 to 48 hours without change, Correos Express says to contact the sender. See [tracking that isn't updating](guide:tracking-not-updating).
+- **Attempted delivery while you were home:** check the tracking detail. Correos Express says access problems or incomplete details can stop a delivery; then rebook as above.
 - **Delivered but not received:** in Spain, check the delivery detail on Correos Express's tracking, then contact the sender. In Portugal, write to destinatarioscep@correosexpress.com. See [delivered but not received](guide:delivered-not-received).
 - **Damaged:** within Spain, the transport terms ask for written reservations at handover, or within 7 calendar days for hidden damage or loss. In Portugal, photograph the packaging and contents, and contact the sender within 7 days.
 - **Bad weather:** "Fuerza mayor / Área inaccesible / Meteorología" means delivery wasn't safe. The [notices page](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales1) lists current restrictions.
@@ -85,6 +93,10 @@ Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for 
 
 It's the Correos group's urgent-parcel company; Correos, its parent, runs the universal postal service. Correos Express says it reaches anywhere on the Iberian Peninsula in 24 hours, and mainland Portugal from Spain usually in 24 to 48.
 
+### Does Correos Express deliver to the UK?
+
+Yes, from Spain, with its Internacional Express service: more than 180 countries, up to two delivery attempts, and tracking on its website until delivery. Correos Express warns that since the UK left the EU's single market and customs union at the end of 2020, parcels to England, Wales, Scotland and Northern Ireland face extra requirements and costs. For countries outside the EU, Internacional Express handles customs clearance.
+
 ### What time does Correos Express deliver?
 
 It depends on the service the sender chose: Paq 10 arrives before 10:00 and Paq 14 by 14:00. The tracker's estimated time comes from past deliveries in your postcode and can shift with the route.
@@ -94,16 +106,20 @@ It depends on the service the sender chose: Paq 10 arrives before 10:00 and Paq 
 No: it lists no English channel, and its tracking and help are only in Spanish and Portuguese.
 
 :::sources
-- [Correos Express: Seguimiento de envíos y gestión de entrega](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio) – statuses, updates, number not found
+- [Correos Express: Seguimiento de envíos y gestión de entrega](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio) – statuses, updates, number not found, missed attempts
 - [Correos Express: Gestiona la entrega de tu envío](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio/gestiona-tu-entrega) – changes, second attempt
 - [Correos Express: Recogida de envíos en Punto Correos](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio/recogida-en-punto-correos) – PIN, 7 days
-- [Correos Express: Otras consultas sobre la entrega](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio/otras-consultas-entrega) – official channels
+- [Correos Express: Otras consultas sobre la entrega](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio/otras-consultas-entrega) – official channels, cash on delivery
 - [Correos Express: Sigue tu envío](https://s.correosexpress.com/) – Spanish tracker, 913 277 020
 - [Correos Express: Solicita nueva entrega](https://s.correosexpress.com/SeguimientoSinCP/saveNewDelivery) – rebooking form
 - [Correos Express: Formulario de Atención al Cliente](https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente) – form
 - [Correos Express: Envío rápido y seguro a España y Portugal](https://www.correosexpress.es/) – services, second attempt
-- [Correos Express: Quiénes somos](https://www.correosexpress.es/es/sobre-correos-express/quienes-somos) – what it is, 24 hours
+- [Correos Express: Quiénes somos](https://www.correosexpress.es/es/sobre-correos-express/quienes-somos) – what it is, how it differs from Correos, 24 hours
 - [Correos Express: Envíos a España y Portugal](https://www.correosexpress.es/es/atencion-al-cliente/envios-en-espana-y-portugal) – 24 to 48 hours
+- [Correos Express: Envíos internacionales](https://www.correosexpress.es/es/atencion-al-cliente/envios-internacionales1) – UK requirements and costs
+- [Correos Express: Internacional Express](https://www.correosexpress.es/es/particulares/enviar/internacionales/internacional-express) – 180 countries, tracking
+- [Correos Express: Internacional Express para empresas](https://www.correosexpress.es/es/empresas/productos/internacional-express) – two attempts, customs outside the EU
+- [Correos: Correos delivery tracker](https://www.correos.es/es/en/tools/tracker/items) – Correos's English tracker
 - [Correos Express: Términos y condiciones del transporte](https://www.correosexpress.es/es/atencion-al-cliente/tyc-transporte) – reservations
 - [Correos Express: Restricciones y avisos](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales1) – weather incident
 - [Correos Express: Alerta de seguridad](https://www.correosexpress.es/es/legales/alerta-de-seguridad) – scam warning

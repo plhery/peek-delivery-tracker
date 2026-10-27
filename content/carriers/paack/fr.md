@@ -23,7 +23,7 @@ Un numéro de commande peut donc ressembler à celui d'un autre transporteur (ex
 | `12345678` | 8 chiffres : à un numéro [Mondial Relay](carrier:mondial-relay), [Colisweb](carrier:colisweb) ou Heppner. |
 | `123456789012` | 12 chiffres : à un numéro [FedEx](carrier:fedex), [DPD France](carrier:dpd-fr), Colis Privé et d'autres. |
 
-Si le numéro vient d'un e-mail de Paack, c'est un numéro Paack, quelle que soit sa forme. Paack et Colis Privé sont deux transporteurs différents.
+Si le numéro vient d'un e-mail de Paack, c'est un numéro Paack, quelle que soit sa forme. Si l'e-mail vient de livraison@notification.colisprive.com, seule adresse des e-mails de suivi de Colis Privé, suis ton colis sur [colisprive.fr](https://colisprive.fr/) avec ton code postal.
 
 ## Paack suivi colis : ce que veulent dire les statuts
 
@@ -75,7 +75,7 @@ Relevé sur les pages de Paack le 10 octobre 2026 :
 - **Téléphone en France :** +33 1 87 65 31 89, du lundi au vendredi de 10 h à 20 h, le samedi et le dimanche de 10 h à 14 h.
 - **Chat :** [Paack Support](https://help.paack.app/), un assistant à base d'IA qui prévient qu'il peut se tromper, accessible aussi en bas à droite de la FAQ et de la page de suivi. L'équipe répond aux mêmes horaires, heure de Madrid.
 - **Formulaire :** sur [Information concernant ma commande](https://paack.co/fr/information-concernant-ma-commande/), avec des motifs comme « Il y a un problème avec ma commande ».
-- **E-mail :** aucune adresse de service client n'est publiée.
+- **E-mail :** aucune adresse de service client n'est publiée ; notifications@paack.co est l'expéditeur des e-mails de suivi.
 
 ## Suivre un colis Paack avec Peek
 
@@ -91,6 +91,10 @@ Tu vois le statut, l'historique, le jour et le créneau prévus, à l'heure de l
 
 Une société de livraison fondée à Dubaï en 2015 et lancée en France en 2017, qui livre les commandes des boutiques sur créneau horaire, le jour même ou le lendemain. Derrière paack.co se trouve Paack Logistics Iberia, à Barcelone. Sa page d'accueil française affiche Colvin, Sephora et Zooplus parmi ses clients.
 
+### Paack et Colis Privé, c'est la même société ?
+
+Deux entreprises rapprochées, bientôt sous un même nom. Le 16 octobre 2026, Colis Privé a annoncé qu'après leur rapprochement, « finalisé à l'été 2026 », elles passent sous une marque commune, Paack, « progressivement déployée à partir de janvier 2027 ». D'ici là, la livraison et le suivi « restent accessibles dans les conditions habituelles » : suis ton colis chez le transporteur qui te l'annonce.
+
 ### Combien de temps met Paack pour livrer ?
 
 Paack ne publie pas de délai pour les destinataires : la boutique choisit le service (créneau, jour même ou lendemain). Ton jour et ton créneau s'affichent sur la page de suivi dès que Paack les connaît.
@@ -103,10 +107,6 @@ Aucune page de Paack destinée aux destinataires ne le promet. Regarde le jour a
 
 Aucune page de Paack n'en parle. Ses en-têtes de livraison citent un endroit sûr, un membre du foyer, un tiers ou un PaackGo Point, et ses pages d'aide un voisin ou la conciergerie : l'en-tête sous `Livrée` ou `Livré` te dit lequel.
 
-### Paack a-t-il une adresse e-mail de contact ?
-
-Non, aucune n'est publiée : passe par le chat, le formulaire ou le téléphone. Les e-mails de suivi de Paack viennent de notifications@paack.co.
-
 :::sources
 - [Paack : Track your order](https://paack.co/shipments/tracking?lng=fr) – formulaire, langues, statuts, créneaux, PaackGo Points
 - [Paack Support : Statut de ma commande](https://help.paack.co/fr/support/solutions/folders/44001208238) – deuxième tentative, voisin, retour à la boutique
@@ -116,6 +116,9 @@ Non, aucune n'est publiée : passe par le chat, le formulaire ou le téléphone.
 - [Paack : Information concernant ma commande](https://paack.co/fr/information-concernant-ma-commande/) – formulaire
 - [Paack : Entreprise de livraison de colis](https://paack.co/fr/) – clients en France
 - [Paack Support : assistant](https://help.paack.app/) – numéro dans l'e-mail, expéditeur, copie exacte, chat
+- [Colis Privé : Colis Privé et Paack s'unissent sous une marque commune : Paack](https://colisprive.fr/blog/colis-prive-et-paack-sunissent-sous-une-marque-commune-paack/) – annonce du 16 octobre 2026, rapprochement, marque commune, janvier 2027, suivi inchangé
+- [Colis Privé : Comment suivre mon colis ?](https://colisprive.fr/aide/comment-suivre-mon-colis-3/) – colisprive.fr, code postal
+- [Colis Privé : Comment éviter les attaques de phishing ?](https://colisprive.fr/aide/comment-eviter-les-attaques-de-phishing/) – adresse des e-mails de suivi
 - [Paack : Conócenos](https://paack.co/es/conocenos/) – fondation, lancement en France
 - [Paack : Términos y condiciones](https://paack.co/es/terminos-y-condiciones/) – société
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit

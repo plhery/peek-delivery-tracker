@@ -3,7 +3,7 @@ title: China Post tracking: number, statuses and who delivers
 description: Track a China Post parcel: what a CN number looks like, what the Chinese statuses mean, which post delivers it in your country and why tracking goes quiet.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 China Post is China's state-owned national post, and EMS is its express brand. If your order from AliExpress, Temu, Shein or another shop came with a tracking number ending in `CN`, China Post issued it, and your own country's post delivers the parcel under that same number. Track it on China Post's site, ems.com.cn, or in the box above. The number is in the shop's shipping details for your order.
@@ -58,7 +58,7 @@ The last scans come from your country's post, relayed by China Post, sometimes o
 China Post flies the parcel out; in your country the national post takes over, through customs to your door:
 
 - **United States**: [USPS](carrier:usps).
-- **United Kingdom**: [Royal Mail](carrier:royal-mail). It says you can track an item from abroad "once it reaches the UK", if it was sent with a tracking service.
+- **United Kingdom**: [Royal Mail](carrier:royal-mail). It takes the parcel through UK customs and tells you if VAT or duty is due.
 - **Ireland**: [An Post](carrier:an-post). Its tracking shows the parcel only once An Post has received and scanned it in Ireland, and it warns that another post's tracking can say Ireland while the item is still in transit abroad.
 - **Canada**: [Canada Post](carrier:canada-post). Look the number up in its Track tool; if nothing appears, Canada Post asks you to have the sender investigate with their country's post.
 - **Australia**: [Australia Post](carrier:australia-post). It says tracking for items from overseas depends on the service used in the sending country, and that customs can take up to 15 days.
@@ -73,7 +73,7 @@ Delivery attempts, notice cards and how long a parcel waits at the post office f
 
 **Delivered but not there.** Your post made the delivery, so start with its tracking and proof of delivery, then the shop. See [delivered but not received](guide:delivered-not-received).
 
-**Lost or damaged.** China Post says that "for formal inquiry of all international items, the sender shall go to local post office". USPS, Royal Mail, Canada Post and Australia Post also send recipients to the sender, who asks the post in the sending country. So tell the shop or marketplace and ask for a refund or a new parcel; see [lost parcels](guide:lost-parcel).
+**Lost or damaged.** China Post says that "for formal inquiry of all international items, the sender shall go to local post office". USPS, Canada Post and Australia Post also send recipients to the sender, who asks the post in the sending country. So tell the shop or marketplace and ask for a refund or a new parcel; see [lost parcels](guide:lost-parcel).
 
 **Returned.** `已退回` means the parcel is going back to the sender. Ask the shop what it will do; see [returned to sender](guide:returned-to-sender).
 
@@ -116,7 +116,7 @@ Delivered. `【英国】已妥投`, for example, means delivered in the UK. If y
 
 ### Who delivers China Post parcels in the US or UK?
 
-Your national post: USPS in the US, Royal Mail in the UK. They deliver it under the China Post number, since the UPU allows one number per item, and Royal Mail tracks it once it reaches the UK.
+Your national post: USPS in the US, Royal Mail in the UK. They deliver it under the China Post number, since the UPU allows one number per item.
 
 :::sources
 - [China Post: Introduction to China Post Group](https://english.chinapost.com.cn/en/folder/1408/3969-1.htm) – state-owned national post
@@ -125,7 +125,7 @@ Your national post: USPS in the US, Royal Mail in the UK. They deliver it under 
 - [China Post: Home page (English)](https://english.chinapost.com.cn/) – Logistics and EMS and Postal Business numbers
 - [China Post: 邮件查询 (mail tracking, Chinese)](https://www.ems.com.cn/mailtracking/you_jian_cha_xun.html) – picture check, online customer service
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – number format, service letters, U range without tracking, one number per item
-- [Royal Mail: Tracking items posted to the UK from another country](https://www.royalmail.com/help/tracking-items-sent-to-uk-from-abroad) – tracking once in the UK, enquiries through the sender
+- [GOV.UK: Tax and customs for goods sent from abroad: Overview](https://www.gov.uk/goods-sent-from-abroad) – Royal Mail takes goods through UK customs and says if VAT or duty is due
 - [An Post: Track and Trace help](https://www.anpost.com/Help-Support/Track-and-Trace) – items from abroad shown once scanned in Ireland
 - [Canada Post: Tracking international packages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-international-packages.page) – packages coming to Canada, sender investigates, timelines
 - [Australia Post: International tracking](https://auspost.com.au/help/parcel-tracking/international-parcel/tracking) – tracking depends on the sending country's service

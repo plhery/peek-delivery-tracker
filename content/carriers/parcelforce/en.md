@@ -1,18 +1,16 @@
 ---
-title: Parcelforce Worldwide tracking: statuses and redelivery
-description: Track a Parcelforce Worldwide parcel: where the number is, what each status means, redelivery and depot collection, customs fees and how to reach Parcelforce.
+title: Parcelforce Worldwide tracking: statuses and customs
+description: Track a Parcelforce Worldwide parcel: where the number is, what each status means, delivery options, customs bills and how to reach Royal Mail's customer services.
 slug: parcelforce-worldwide-tracking
 published: 2026-10-11
 updated: 2026-10-27
 ---
 
-Parcelforce Worldwide is [Royal Mail](carrier:royal-mail)'s express parcel service, in the UK and abroad. It runs on one network with Royal Mail, so you track a Parcelforce parcel on [Royal Mail's Track your item page](https://www.royalmail.com/track-your-item) or in the Royal Mail app, or paste the number in the box above. The number comes from the shop or sender, usually in the order confirmation email.
+Parcelforce Worldwide is part of [Royal Mail](carrier:royal-mail) Group, and you track a Parcelforce parcel on Royal Mail's Track your item page, or paste the number in the box above. The number comes from the shop or sender, usually in the order confirmation email.
 
 ## Parcelforce tracking number: where to find it
 
-Parcelforce can't track by name or address, only by number. Look in the shop's order confirmation email, or ask the shop. If the driver missed you, the "Something for you" card has what you need to book a redelivery, and a customs "Fee to pay" card or letter carries the parcel's reference number. Lost it? See [how to find your tracking number](guide:find-tracking-number).
-
-Parcelforce says its numbers can be 9, 11, 13, 14, 16 or 21 characters long, with letters and digits. Three shapes you may see:
+Look in the shop's order confirmation email, or ask the shop. Lost it? See [how to find your tracking number](guide:find-tracking-number). Three shapes you may see:
 
 | Number (invented) | What it is |
 | --- | --- |
@@ -24,7 +22,7 @@ The 13-character shape is also Royal Mail's (`RR000000005GB` is Royal Mail, not 
 
 ## Parcelforce tracking statuses explained
 
-Royal Mail's tracker shows these lines in English (a Welsh version is one switch away). In the order a parcel usually meets them:
+Royal Mail's tracker shows these lines in English. In the order a parcel usually meets them:
 
 | Tracking says | What it means for you |
 | --- | --- |
@@ -36,51 +34,41 @@ Royal Mail's tracker shows these lines in English (a Welsh version is one switch
 | `Despatched to delivery office` | On its way to your local depot or delivery office. |
 | `Received at Delivery Depot` | At your local depot. It isn't ready to pick up yet. |
 | `Out for delivery` | With the driver today. |
-| `Delivery attempted` | The driver couldn't deliver it. Look for the card. |
+| `Delivery attempted` | The driver couldn't deliver it. |
 | `Delivered by` | Delivered. The line goes on to name who signed. |
 | `Delivered to Neighbour/Reception by` | Left with a neighbour or a reception desk, named in the line. |
 | `Returned to sender` | Going back to the sender. |
 
-On parcels sent abroad, the history can show transit countries and the delivering partner's lines, such as `Due to be delivered today`. Parcelforce's help page speaks of `In progress` until delivery, and Royal Mail's glossary lists `Fee to pay` (a charge to pay before delivery) and `Ready for redelivery or collection` (a card was left).
+On parcels sent abroad, the history goes on with lines such as `Item Leaving the UK` and the delivering partner's `Due to be delivered today`.
 
-## Parcelforce redelivery, depot collection and missed deliveries
+## Parcelforce delivery options and missed deliveries
 
-**Delivery times.** Parcelforce aims to deliver to UK zones 1 to 3 by 6pm, Monday to Friday, later in remote areas such as the Highlands and Islands. Not usually on bank holidays, and never to PO Boxes.
+**Before delivery.** In the Royal Mail app or through Royal Mail Customer Services, you can choose another delivery date for a Parcelforce parcel or ask for it to go to a neighbour, and ask the driver to knock louder or give you more time to reach the door. A safe place is set with Royal Mail too, even for Parcelforce parcels.
 
-**Before delivery.** If the sender gave your email or mobile number, Parcelforce tells you when it will arrive, and you can pick another day, a neighbour, a Safeplace (not for parcels needing a signature), your local Parcelforce depot or a Post Office.
-
-**Missed it.** The driver leaves a "Something for you" card and tries again automatically the next working day, unless the parcel went to a neighbour or a Safeplace. That makes two attempts. You can also book a redelivery on Royal Mail's site, free: to your address, another address or a Parcel Locker in your postcode area, or your local Post Office. Parcelforce needs 48 working hours' notice. In a hurry? Pick it up from the depot named on the card.
-
-**How long it waits.** Parcelforce holds parcels for 18 calendar days for UK services and 21 days for international services and parcels with customs charges, then returns them to the sender. A Parcel Locker keeps a parcel 3 calendar days, then it goes back to the depot for 18 more.
-
-**What to bring.** At a depot or Post Office: the card and an original ID in the addressee's name, such as a bank card, passport or driving licence. At a locker: the collection or QR code from the email or SMS. Signature parcels can't go to a locker.
-
-**No card, but tracking says they came?** Parcelforce suggests checking the tracking or calling 03457 740 740.
+**Missed it.** Tracking shows `Delivery attempted`, or `Delivered to Neighbour/Reception by` with the name of whoever took it in. If you still can't tell where the parcel is, call Royal Mail Customer Services (below).
 
 ## Parcelforce tracking not updating, delayed or lost
 
-**No scans yet.** The sender may have created the number before handing the parcel over. Parcelforce suggests trying later and checking the number. Its [service updates page](https://www.parcelforce.com/service-updates) lists disruptions. More in [why tracking stops updating](guide:tracking-not-updating).
+**No scans yet.** The sender may have created the number before handing the parcel over: `Sender has despatched item` means Parcelforce doesn't have it yet. Check the number and try later. More in [why tracking stops updating](guide:tracking-not-updating).
 
-**Late, lost or damaged.** If you bought online, Parcelforce asks you to contact the retailer, who is legally responsible for getting it to you. The sender holds the contract and makes the claim, online and not by phone. For UK services the claim is due within 30 days of despatch. For damage, keep the parcel, contents and packaging and take photos: Parcelforce may ask to inspect them.
+**Late, lost or damaged.** If you bought online, contact the seller first: Citizens Advice says you'll usually get a better result, and you can ask for a refund or for the item to be sent again. For compensation, check how to claim on Parcelforce's own website.
 
-**Customs charges.** Parcels from outside the UK go to Border Force, which works out the VAT and duty for HMRC. Parcelforce pays and leaves a "Fee to pay" card ([more on customs](guide:customs)); you pay online with [Royal Mail's Pay a fee tool](https://www.royalmail.com/receiving-mail/pay-a-fee), which lists a £12 handling fee for Parcelforce products. Unpaid after 21 days, the parcel goes back. Questions about the duty itself go to HMRC on 0300 200 3700.
+**Customs charges.** Parcelforce takes parcels from outside the UK through customs and contacts you if VAT, duty or other charges are due, with a bill that says exactly what to pay ([more on customs](guide:customs)). It normally holds the parcel for about 3 weeks; unpaid by then, it goes back to the sender. Questions about the goods go to Parcelforce too.
 
-> Parcelforce says it never emails asking for payment before releasing a parcel. Forward suspicious emails to reportascam@royalmail.com and scam texts to 7726. Royal Mail may text or email about a real customs fee when the sender gave your details, along with a grey "Fee to pay" card.
+> Not sure an email or text asking you to pay for a parcel is genuine? Don't click its links or give bank details. Forward scam emails to report@phishing.gov.uk and scam texts to 7726, free.
 
 ## Parcelforce contact number and customer service
 
-As listed on parcelforce.com on 11 October 2026:
+Citizens Advice sends Parcelforce customers to Royal Mail for delivery needs and safe places:
 
-- **Phone:** 03457 740 740, Monday to Friday 8.00am to 6.30pm and Saturday 8.00am to 12.30pm, excluding UK public and bank holidays.
-- **Relay UK:** 18001 0345 266 0075, same hours. **Welsh:** 0345 746 8469.
-- **Web form:** on the [contact page](https://www.parcelforce.com/contact-us); Parcelforce aims to reply within 2 days.
-- **Complaints by post:** Parcelforce Worldwide, Correspondence Team, PO Box 486, Wakefield, WF1 9AG.
+- **Royal Mail Customer Services:** 03457 740 740, Monday to Friday 8am to 6.30pm, Saturday 8am to 3pm and Sunday 9am to 2pm. **Relay UK:** 18001 then 0345 266 0075.
+- **Royal Mail app:** delivery date, neighbour, safe place and delivery needs for Parcelforce parcels too.
 
-There is no live chat or email address for recipients.
+For a claim or a complaint, go through Parcelforce's own website.
 
 ## Tracking Parcelforce parcels with Peek
 
-[Peek](/) names Parcelforce at once for `EA000000005GB`-style numbers with a valid check digit and for 14-character `PB` numbers. A consignment number on its own isn't tracked. A parcelforce.com link with `trackNumber=` works, and so does a Royal Mail link ending `#/tracking-results/` and a Parcelforce number.
+[Peek](/) names Parcelforce at once for `EA000000005GB`-style numbers with a valid check digit and for 14-character `PB` numbers. A consignment number on its own isn't tracked. A Parcelforce tracking link with `trackNumber=` works, and so does a Royal Mail link ending `#/tracking-results/` and a Parcelforce number.
 
 Peek reads Parcelforce on Royal Mail's tracking site by opening it in a real browser on its server, so a check takes longer and can fail when the site blocks automated visits. Peek then tries universal tracking services, which hold little for Parcelforce.
 
@@ -90,40 +78,28 @@ Peek shows the status, each scan with its place (no postcodes), the expected del
 
 ### Is Parcelforce part of Royal Mail?
 
-Yes. Parcelforce Worldwide is a trading name of Royal Mail Group Ltd, and its parcels are tracked on Royal Mail's site and app.
+Yes. GOV.UK counts Parcelforce in Royal Mail Group, and its parcels are tracked on Royal Mail's Track your item page.
 
 ### Why is my Parcelforce number not recognised?
 
-The parcel may not have reached Parcelforce yet, or the number may be mistyped. Check it with the sender and try later.
+The parcel may not have reached Parcelforce yet, or the number may be mistyped. A consignment number on its own isn't tracked: ask the sender for the 14-character `PB` number of each parcel, and try later.
 
-### How long does Parcelforce keep a parcel at the depot?
+### How long does Parcelforce hold a parcel with customs charges?
 
-18 calendar days for UK services, 21 for international parcels and those with customs charges, then it goes back to the sender.
+About 3 weeks. If the bill isn't paid by then, the parcel goes back to the sender.
 
-### Does Parcelforce deliver on Saturday?
+### Can I choose another day for a Parcelforce delivery?
 
-Sometimes. Its standard days are Monday to Friday, but when a delivery is expected on a Saturday Parcelforce aims to deliver by 6pm.
+Yes, in the Royal Mail app or through Royal Mail Customer Services. You can also ask for it to go to a neighbour.
 
 :::sources
-- [Parcelforce: Track your Parcel](https://www.parcelforce.com/track-trace) – single network with Royal Mail, number lengths, number not recognised, automatic redelivery
-- [Parcelforce: How can I track my parcel?](https://www.parcelforce.com/help-and-advice/tracking/how-can-i-track-my-parcel) – number from the retailer, In progress, transit countries, card
-- [Parcelforce: Receiving a parcel](https://www.parcelforce.com/receiving/parcel-delivery) – tracking on Royal Mail's website
-- [Parcelforce: Parcel Redelivery](https://www.parcelforce.com/redelivery) – redelivery options, two attempts, 48 working hours, hold periods, lockers, ID
-- [Parcelforce: Returned to sender options](https://www.parcelforce.com/help-and-advice/receiving/return-sender) – 18 days UK, 21 days international and customs
-- [Parcelforce: Missing an attempted delivery card](https://www.parcelforce.com/help-and-advice/receiving/missed-an-attempted-delivery-card) – no card: track or call
-- [Parcelforce: Delivery Times & Failed Deliveries](https://www.parcelforce.com/help-and-advice/receiving/delivery-times) – by 6pm, Saturday, holidays
-- [Parcelforce: Delivery Options and Speed Exceptions](https://www.parcelforce.com/help-and-advice/sending/delivery-options) – email and text notice, delivery options, no PO Boxes
-- [Parcelforce: Pay a Customs Charge](https://www.parcelforce.com/receiving/customs-charge) – Border Force, HMRC, Fee to pay card, 21 days, HMRC number
-- [Parcelforce: Buying items online, who you should contact](https://www.parcelforce.com/help-and-advice/receiving/buying-items-online-who-you-should-contact) – contact the retailer
-- [Parcelforce: How to submit a claim](https://www.parcelforce.com/help-and-advice/sending/making-a-claim) – online claims, evidence
-- [Parcelforce: Problem or complaint](https://www.parcelforce.com/help-and-advice/sending/problem-or-complaint) – complaints address, no claims by phone
-- [Parcelforce: Conditions of Carriage](https://www.parcelforce.com/sites/parcelforce.com/files/2025-04/parcelforce-worldwide-conditions-of-carriage.pdf) – Royal Mail Group Ltd, sender's claim, deadlines, damage evidence
-- [Parcelforce: Contact Us](https://www.parcelforce.com/contact-us) – phone, hours, Relay UK, Welsh line, web form
-- [Parcelforce: Online Security](https://www.parcelforce.com/help-and-advice/account-customers/online-security) – fake payment emails, reportascam
-- [Parcelforce: Download our App](https://www.parcelforce.com/downloadapp) – Royal Mail app tracks Parcelforce
-- [Royal Mail: Track your Item](https://www.royalmail.com/track-your-item) – tracking page, Welsh version
-- [Royal Mail: Postage tracking terms explained](https://www.royalmail.com/help/postage-tracking-terms-explained) – Fee to pay, Ready for redelivery or collection
-- [Royal Mail: Pay a fee](https://www.royalmail.com/receiving-mail/pay-a-fee) – paying online, £12 Parcelforce handling fee
-- [Royal Mail: Help with online security](https://www.royalmail.com/help/scam-protection) – 7726, genuine customs fee messages
+- [GOV.UK: Check when you can account for import VAT on your VAT Return](https://www.gov.uk/guidance/check-when-you-can-account-for-import-vat-on-your-vat-return) – Parcelforce part of Royal Mail Group
+- [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail app and Customer Services for Parcelforce, another date, neighbour, safe place, knocking, phone and hours
+- [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – Relay UK number
+- [Citizens Advice: Damaged, lost or delayed post or parcel](https://www.citizensadvice.org.uk/consumer/post-and-parcels/damaged-lost-delayed-post-or-parcel/) – seller first, claims on the courier's website
+- [GOV.UK: Tax and customs for goods sent from abroad: Overview](https://www.gov.uk/goods-sent-from-abroad) – Parcelforce takes goods through customs, questions about the goods
+- [GOV.UK: Tax and customs for goods sent from abroad: Tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – bill, about 3 weeks, return to sender
+- [GOV.UK: Avoid and report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – 7726, report@phishing.gov.uk
+- [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – check digit before the country code
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, statuses, number shapes
 :::

@@ -333,7 +333,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "parcelforce",
       "catalog": "parcelforce",
       "slug": "parcelforce-worldwide-tracking",
-      "title": "Parcelforce Worldwide tracking: statuses and redelivery",
+      "title": "Parcelforce Worldwide tracking: statuses and customs",
       "name": "Parcelforce Worldwide",
       "color": "#9d0f11"
     },

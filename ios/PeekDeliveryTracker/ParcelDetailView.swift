@@ -382,6 +382,8 @@ struct ParcelDetailView: View {
                         inputNeededPrompt(suggested.carrier, text: "detail.inputSuggested", tint: branding.ink)
                     } else if let likely = parcel.likelyCarrierPrompt() {
                         likelyCarrierPrompt(likely.carrier, waited: likely.waited, tint: branding.ink)
+                    } else if let shape = parcel.nonTrackingShape {
+                        nonTrackingPrompt(shape, tint: branding.ink)
                     }
                 }
                 HStack(alignment: .center, spacing: 18) {
@@ -589,6 +591,32 @@ struct ParcelDetailView: View {
                 .buttonStyle(TactileButtonStyle())
             }
         }
+        .foregroundStyle(tint)
+        .accessibilityElement(children: .contain)
+    }
+
+    /// A number that looks like a shop's order number, or is shorter than tracking numbers are: where the
+    /// tracking number is, and the way to choose the carrier.
+    private func nonTrackingPrompt(_ shape: NonTrackingShape, tint: Color) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            switch shape {
+            case .order(let shop):
+                Text(localizer.text("link.notTracking.order", ["shop": NonTrackingShape.shopNames[shop] ?? shop]))
+            case .short:
+                Text(localizer.text("link.notTracking.short"))
+            }
+            Button {
+                carrierEditor = CarrierEditorRequest()
+            } label: {
+                Text(localizer.text("link.chooseCarrier"))
+                    .font(.footnote.weight(.semibold))
+                    .frame(minHeight: 44, alignment: .leading)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(TactileButtonStyle())
+        }
+        .font(.footnote)
+        .fixedSize(horizontal: false, vertical: true)
         .foregroundStyle(tint)
         .accessibilityElement(children: .contain)
     }

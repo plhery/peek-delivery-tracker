@@ -12,7 +12,7 @@ import { TrackingJournal } from '../components/TrackingJournal';
 import { localizedDeliveryWindow, localizedEventDescription, stageLabel, trackingFailureMessage, useI18n, type MessageKey } from '../i18n';
 import { trackAction, trackScreen } from '../lib/analytics';
 import { carrierBrand } from '../lib/carrierBrand';
-import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, displayedCarrierId, formatTrackingNumber, tracksAutomatically } from '../lib/carriers';
+import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber, tracksAutomatically } from '../lib/carriers';
 import { writeCarrierHandoff } from '../lib/carrierHandoff';
 import { LANDING_PATH } from '../lib/experience';
 import { numberToCheck } from '../lib/messages';
@@ -63,6 +63,7 @@ import {
 import { announceNotice, Toast } from './parcel/Toast';
 import { announceKeepOutcome, onKeepOutcome, usePendingKeep, type KeepOutcome } from './pending';
 import { recentFor, renameParcel } from './recents';
+import { nonTrackingShape, SHOP_NAMES } from './lookup/reading';
 import { closeParcelLink, forgetParcelLinkOpener, leaveParcelLink, openLanding, parcelLinkOpener, parcelLinkURL, PIP_TRANSITION_NAME } from './route';
 import { SAMPLE_LINK_ID } from './sample';
 import { usePeekSession } from './session';
@@ -266,9 +267,14 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // who reads the number, may choose another carrier at the front door.
   const likely = !carrierKnown && !placeholder && !present ? likelyCarrier(parcel, now) : null;
   const likelyName = likely ? carrierInfo(likely.carrier, locale) : null;
-  const choosing = !!likely?.waited && owner && !sample && !!parcel.trackingNumber;
+  // Or a number that looks like a shop's order number, or is shorter than tracking numbers are: its owner, who looked it
+  // up, is told where the tracking number is, and may choose the carrier.
+  const shape = !carrierKnown && !placeholder && !present && !likely && parcel.trackingNumber
+    ? nonTrackingShape(normalizeTrackingNumber(parcel.trackingNumber)) : null;
+  const choosing = (!!likely?.waited || !!shape) && owner && !sample && !!parcel.trackingNumber;
   const unknownNote = likelyName ? t(!likely?.waited ? 'link.likely.body' : choosing ? 'link.likely.week' : 'link.likely.weekNoChoice', { carrier: likelyName.name })
-    : number ? t('link.unknown.body', { number }) : t('link.unknown.bodyNoNumber');
+    : shape ? (shape.kind === 'order' ? t('link.notTracking.order', { shop: SHOP_NAMES[shape.shop] }) : t('link.notTracking.short'))
+      : number ? t('link.unknown.body', { number }) : t('link.unknown.bodyNoNumber');
   const notes = present ? (deliveryNote ? [deliveryNote] : []) : placeholder ? [trackingFailureMessage(parcel.syncError, t)] : !carrierKnown ? [unknownNote] : [
     previousEstimateLine(previousEstimate, parcel, wording),
     deliveryNote,
@@ -498,9 +504,10 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {opened && <GiftNote note={state.words.note} from={state.words.from} inside={state.words.name ?? state.name} />}
         {asked && <PostcodeAsked carrier={asked.carrier} own={ownAsks} onAdd={() => setAddingPostcode(true)} />}
         {owner && link.shared === false && <p className="peekp-shared"><Glyph name="info" />{t('share.stopped.owner')}</p>}
-        {/* The likely carrier's words say Peek keeps asking it already. */}
-        {!carrierKnown && !placeholder && !likely && <p className="peekp-keeppage">{t('link.unknown.keep')}</p>}
-        {choosing && <button type="button" className="button button--secondary peekp-choose" onClick={chooseCarrier}>{t('link.likely.choose')}</button>}
+        {/* The likely carrier's words say Peek keeps asking it already; no carrier will answer for an order number. */}
+        {!carrierKnown && !placeholder && !likely && !shape && <p className="peekp-keeppage">{t('link.unknown.keep')}</p>}
+        {choosing && <button type="button" className="button button--secondary peekp-choose" onClick={chooseCarrier}>
+          {t(likely ? 'link.likely.choose' : 'link.chooseCarrier')}</button>}
         {signedIn && !followed && link.canKeep && <AddToDeliveries busy={adding || pendingId === linkId} error={addError && t(addError)} onAdd={() => void add()} />}
         {!afterwards && <Actions name={name} ping={ping}
           onHave={key && delivered && link.kind === 'lookup' ? () => setForgetting('arrived') : undefined}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkDigitTrouble, looksLikeNumber, readText } from './reading';
+import { checkDigitTrouble, looksLikeNumber, nonTrackingShape, readText } from './reading';
 import { isPickupCode, normalizeTrackingNumber } from '../../lib/carriers';
 import rules from '../../../shared/reading.json';
 
@@ -49,5 +49,29 @@ describe('reading the field', () => {
 describe('check digits', () => {
   it.each(rules.checkDigits)('questions a postal number whose check digit does not add up: $number', (example) => {
     expect(checkDigitTrouble(example.number)).toEqual(example.trouble ? { suggestion: example.suggestion ?? null } : null);
+  });
+});
+
+describe('a looked-up number no carrier answered for', () => {
+  it.each([
+    // Amazon's order number without its hyphens, in one of its stores or for a digital order.
+    ['30245719832294617', { kind: 'order', shop: 'amazon' }],
+    ['11245719832294617', { kind: 'order', shop: 'amazon' }],
+    ['D0112345671234567', { kind: 'order', shop: 'amazon' }],
+    ['3041234567890123', { kind: 'order', shop: 'aliexpress' }],
+    ['8121234567890123', { kind: 'order', shop: 'aliexpress' }],
+    // The door's own shops, as a lookup stores their numbers.
+    ['PO00012345678901234567', { kind: 'order', shop: 'temu' }],
+    ['GSH0A1B2C3D4E5F', { kind: 'order', shop: 'shein' }],
+    ['261025ABCD1234', { kind: 'order', shop: 'shopee' }],
+    ['10293', { kind: 'short' }],
+    ['AB12C3', { kind: 'short' }],
+    // 17 or 16 digits Amazon's or AliExpress's don't start with, and the shapes of carriers' numbers.
+    ['99945719832294617', null],
+    ['1234567890123456', null],
+    ['12345678', null],
+    ['EOB10293847561029384', null],
+  ])('%s', (number, shape) => {
+    expect(nonTrackingShape(number)).toEqual(shape);
   });
 });

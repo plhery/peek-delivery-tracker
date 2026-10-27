@@ -320,6 +320,34 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.queryByRole('button', { name: 'Choose another carrier' })).toBeNull();
   });
 
+  it('says where the tracking number is when the number no carrier knows looks like an order number, and lets its owner choose the carrier', async () => {
+    const unknown = (trackingNumber: string, owner = true) =>
+      view([scan('pending', 60, 'Tracking added')], { carrier: 'unknown', syncStatus: 'waiting', trackingNumber }, owner);
+    // A synthetic Amazon order number, stored without its hyphens.
+    await shown(unknown('30245719832294617'));
+    expect(within(card()).getByText('Carrier not found yet')).toBeVisible();
+    expect(within(card()).getByText('This looks like an order number from Amazon, not a tracking number. The tracking number is in the shipping email or on the order’s page at Amazon.')).toBeVisible();
+    expect(screen.queryByText(/^Keep this page/)).toBeNull();
+    await userEvent.click(screen.getByRole('button', { name: 'Choose the carrier' }));
+    expect(takeCarrierHandoff()).toEqual({ text: '30245719832294617', pick: true });
+
+    cleanup();
+    await shown(unknown('10293'));
+    expect(within(card()).getByText('This is shorter than most tracking numbers. If it’s an order number, the tracking number is in the shipping email or on the shop’s order page.')).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Choose the carrier' })).toBeVisible();
+
+    // A carrier's number keeps the usual words, and the carrier the number's own format points to wins.
+    cleanup();
+    await shown(unknown('12345678'));
+    expect(within(card()).getByText(/^No carrier knows 12345678 yet/)).toBeVisible();
+    expect(screen.queryByRole('button', { name: 'Choose the carrier' })).toBeNull();
+    cleanup();
+    await shown(view([scan('pending', 60, 'Tracking added')], { carrier: 'unknown', syncStatus: 'waiting', trackingNumber: '10293',
+      likelyCarrier: { carrier: 'brt', since: ago(1) } }));
+    expect(within(card()).getByText('Probably BRT')).toBeVisible();
+    expect(screen.queryByText(/^This is shorter/)).toBeNull();
+  });
+
   it('says plainly that the chosen carrier does not issue the number, once and without a failed update', async () => {
     await shown(view([scan('pending', 60, 'Tracking added')], { syncStatus: 'error', syncError: 'carrier:refused_number' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Check the tracking number' })).toBeVisible();

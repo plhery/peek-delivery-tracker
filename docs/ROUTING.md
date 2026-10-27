@@ -549,6 +549,10 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   <carrier>": the carrier does not list the number yet, and Peek keeps asking it. After a
   week, the owner is asked to check the number or choose another carrier; a link's owner
   chooses at the front door, which takes the number back with its picker open.
+  A number no carrier answered for that has a shop's order number shape (`shops` and
+  `storedOrders` in `shared/reading.json`) or fewer than eight characters: the parcel page
+  and the detail (web and iPhone) say where the tracking number is, rather than that Peek
+  keeps looking, and offer to choose the carrier. A likely carrier comes first.
   A transient failure of a matching carrier and failures of an already confirmed carrier
   do not trigger recognition.
 - **Retries.** Answers are kept in `routing.candidate_probes`, not with the carrier

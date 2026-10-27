@@ -206,6 +206,17 @@ enum OrderShop: String, Decodable, Sendable {
     case amazon, shein, shopee, temu
 }
 
+/// What a looked-up number no carrier answered for looks like instead of a tracking number: a shop's
+/// order number, or one shorter than tracking numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
+enum NonTrackingShape: Equatable, Sendable {
+    /// The shop by its id in `shared/reading.json`: amazon, aliexpress, shein, shopee or temu.
+    case order(shop: String)
+    case short
+
+    /// The shop by the name the app writes.
+    static let shopNames = ["amazon": "Amazon", "aliexpress": "AliExpress", "shein": "Shein", "shopee": "Shopee", "temu": "Temu"]
+}
+
 /// One tracking number a text names, with what its shape says about the carrier.
 struct NumberInText: Equatable, Sendable {
     /// The number without spaces, dots or dashes: what makes two spellings the same number.
@@ -1253,6 +1264,10 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             let shop: OrderShop
             let pattern: String
         }
+        struct StoredOrder: Decodable {
+            let shop: String
+            let pattern: String
+        }
         struct Shape: Decodable {
             let source: String
             let flags: String
@@ -1262,6 +1277,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             let letterForDigit: [String: String]
         }
         let shops: [Shop]
+        let storedOrders: [StoredOrder]
         let numberWords: String
         let lookalikes: Lookalikes
         let candidates: [Shape]
@@ -1275,6 +1291,9 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
 
     /// Each shop's order number, tried in turn and read without regard to case: the front door's patterns.
     static let orderNumbers: [(shop: OrderShop, pattern: String)] = readingRules?.shops.map { ($0.shop, $0.pattern) } ?? []
+
+    /// Order numbers as a lookup stores them, without hyphens, which only a parcel no carrier answered for is taken for.
+    static let storedOrderNumbers: [(shop: String, pattern: String)] = readingRules?.storedOrders.map { ($0.shop, $0.pattern) } ?? []
 
     /// The shapes of a number in a text, as the shared engine tries them (`TRACKING_CANDIDATE_PATTERNS`).
     static let candidatePatterns: [(pattern: String, caseInsensitive: Bool)] =
@@ -1319,6 +1338,16 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// The shop whose order number a text holds.
     static func orderShop(in text: String) -> OrderShop? {
         orderNumbers.first { matches(text, pattern: $0.pattern, caseInsensitive: true) }?.shop
+    }
+
+    /// Whether a normalized number no carrier answered for looks like a shop's order number, or is shorter than
+    /// tracking numbers are: the parcel says so instead of waiting for a carrier.
+    static func nonTrackingShape(_ normalized: String) -> NonTrackingShape? {
+        if let shop = orderShop(in: normalized)?.rawValue
+            ?? storedOrderNumbers.first(where: { matches(normalized, pattern: $0.pattern) })?.shop {
+            return .order(shop: shop)
+        }
+        return normalized.count < 8 ? .short : nil
     }
 
     /// The text without its order numbers, so that no part of one is read as a tracking number.

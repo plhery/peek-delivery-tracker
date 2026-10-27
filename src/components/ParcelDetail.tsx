@@ -13,6 +13,7 @@ import {
   carrierTrackingHintKey,
   deliveringCarrierId,
   formatTrackingNumber,
+  normalizeTrackingNumber,
   parcelTrackingLinks,
   parcelTrackingNumbers,
   trackingLinksByNumber,
@@ -27,7 +28,7 @@ import {
   localizedScanAge,
   useI18n,
 } from '../i18n';
-import { REFUSED_NUMBER } from '../lib/messages';
+import { numberToCheck, REFUSED_NUMBER } from '../lib/messages';
 import {
   localizedParcelCompletionDate,
   parcelDeliveryEstimate,
@@ -57,6 +58,7 @@ import type { CardOrigin } from '../lib/cardTransition';
 import { useRefreshAnimation } from '../lib/useRefreshAnimation';
 import type { ApiAuth } from '../lib/apiClient';
 import { createAccountFeedback, createAccountShare, demoAccountShare } from '../peek/links';
+import { nonTrackingShape, SHOP_NAMES } from '../peek/lookup/reading';
 import { FeedbackOverlays, FeedbackQuestion, useParcelFeedback } from '../peek/parcel/Feedback';
 import { scanIdentity } from '../peek/parcel/feedbackModel';
 import { parcelFeedbackNotes } from '../peek/parcel/feedbackNotes';
@@ -147,6 +149,10 @@ export function ParcelDetail({
   // Or the number has one carrier's own format, and that carrier does not list it yet: after a week, its owner is asked
   // to choose another.
   const likely = !postcodePrompt && !parcel.archivedAt ? likelyCarrier(parcel) : null;
+  // Or a number no carrier answered for that looks like a shop's order number, or is shorter than tracking numbers are:
+  // its owner is told where the tracking number is, and may choose the carrier.
+  const shape = !postcodePrompt && !likely && !parcel.providerInputNeeded && parcel.carrier === 'unknown' && !parcel.archivedAt
+    && !current && !numberToCheck(parcel.syncError) ? nonTrackingShape(normalizeTrackingNumber(parcel.trackingNumber)) : null;
   // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
   const claimingCarrier = parcel.syncError === REFUSED_NUMBER ? carrierClaimingNumber(parcel.trackingNumber, parcel.carrier) : null;
   const status = parcelDisplayStatus(parcel);
@@ -560,6 +566,12 @@ export function ParcelDetail({
           <div className="detail__input-needed" role="status">
             <p>{t(likely.waited ? 'link.likely.week' : 'link.likely.body', { carrier: carrierInfo(likely.carrier, locale).name })}</p>
             {likely.waited && <button type="button" className="text-button" onClick={() => setEditingCarrier(true)}>{t('link.likely.choose')}</button>}
+          </div>
+        )}
+        {shape && (
+          <div className="detail__input-needed" role="status">
+            <p>{shape.kind === 'order' ? t('link.notTracking.order', { shop: SHOP_NAMES[shape.shop] }) : t('link.notTracking.short')}</p>
+            <button type="button" className="text-button" onClick={() => setEditingCarrier(true)}>{t('link.chooseCarrier')}</button>
           </div>
         )}
         {editingTitle ? (

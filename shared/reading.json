@@ -21,6 +21,18 @@
       "pattern": "(?:^|[^A-Za-z0-9_-])PO[- ]?[0-9]{3}[- ]?[0-9]{17}(?![A-Za-z0-9_-])"
     }
   ],
+  "storedOrders": [
+    {
+      "shop": "amazon",
+      "shape": "Amazon's 3-7-7 digits without the hyphens, which start with one of its stores' 3 digits, or D and 16 digits for digital orders.",
+      "pattern": "^(?:026|028|11[1-4]|171|20[2-6]|249|250|30[2-6]|40[2-8]|503|70[12])[0-9]{14}$|^D[0-9]{16}$"
+    },
+    {
+      "shop": "aliexpress",
+      "shape": "16 digits that start 30, 31, 80 or 81.",
+      "pattern": "^(?:30|31|80|81)[0-9]{14}$"
+    }
+  ],
   "numberWords": "track|parcel|shipment|sendung|paket|suivi|colis|tracciamento|spedizione|pacco|seguimiento|env[ií]o|paquete|seguimento|encomenda|śledzeni|przesyłk|paczk",
   "lookalikes": {
     "digitForLetter": { "O": "0", "Q": "0", "D": "0", "I": "1", "L": "1", "Z": "2", "A": "4", "S": "5", "G": "6", "T": "7", "B": "8" },

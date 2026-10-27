@@ -545,6 +545,41 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(suggested.likelyCarrierPrompt(now: since))
     }
 
+    func testTellsAnOrderNumberOrAShortNumberNoCarrierAnsweredFor() throws {
+        // Synthetic numbers: Amazon's without hyphens, AliExpress's, Temu's as a lookup stores it, a short one.
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("30245719832294617"), .order(shop: "amazon"))
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("3041234567890123"), .order(shop: "aliexpress"))
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("PO00012345678901234567"), .order(shop: "temu"))
+        XCTAssertEqual(CarrierCatalog.nonTrackingShape("10293"), .short)
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("99945719832294617"))
+        XCTAssertNil(CarrierCatalog.nonTrackingShape("12345678"))
+
+        let packageID = UUID()
+        let json = """
+        {
+          "packages": [{
+            "id": "\(packageID.uuidString)",
+            "tracking_number": "30245719832294617",
+            "label": "Test parcel",
+            "carrier": "unknown",
+            "created_at": "2026-08-01T10:00:00Z",
+            "sync_status": "waiting",
+            "notifications_muted": false,
+            "tracking_events": []
+          }]
+        }
+        """
+        let parcel = try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(json.utf8)).packages.first)
+        XCTAssertEqual(parcel.nonTrackingShape, .order(shop: "amazon"))
+        // Filed under a carrier, or with a carrier its own format points to: nothing said.
+        var filed = parcel
+        filed.carrier = .ups
+        XCTAssertNil(filed.nonTrackingShape)
+        var likely = parcel
+        likely.carrierData = CarrierData(routing: CarrierDataRouting(likelyCarrier: LikelyCarrier(carrier: .brt, since: "2026-08-01T10:00:00Z")))
+        XCTAssertNil(likely.nonTrackingShape)
+    }
+
     func testDecodesSharedAPIContractFixture() throws {
         struct Fixture: Decodable {
             let packageList: PackageListResponse

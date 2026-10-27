@@ -329,6 +329,21 @@ describe('shipment details', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
+  it('tells an order number or a short number no carrier answered for, and offers to choose the carrier', async () => {
+    // Synthetic: a bare Amazon order number and a five-digit one.
+    const view = show({ carrier: 'unknown', trackingNumber: '30245719832294617' });
+    expect(screen.getByText(/^This looks like an order number from Amazon, not a tracking number\./)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Choose the carrier' }));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    view.unmount();
+    const short = show({ carrier: 'unknown', trackingNumber: '10293' });
+    expect(screen.getByText(/^This is shorter than most tracking numbers\./)).toBeInTheDocument();
+    short.unmount();
+    // A tracking number's length, or a carrier filed: nothing to tell.
+    show({ carrier: 'unknown', trackingNumber: '12345678' });
+    expect(screen.queryByRole('button', { name: 'Choose the carrier' })).not.toBeInTheDocument();
+  });
+
   it('never displays legacy diagnostics', () => {
     show({ syncStatus: 'error', syncError: 'private upstream error details' });
     expect(screen.queryByText('private upstream error details')).not.toBeInTheDocument();

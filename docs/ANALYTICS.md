@@ -58,7 +58,7 @@ are virtual names, never real URLs.
   link shows, stop sharing, open "Notify me", turn a browser's alerts on or off, get the
   iPhone app or open the parcel in it, add the delivery to a calendar, sign in (and apart from it, sign in for the email), keep in the
   account, open the parcel already followed, forget, and the lookup's owner giving the
-  postcode another carrier asks for. Sharing a parcel from an account counts under the
+  postcode another carrier asks for or choosing the carrier at the front door. Sharing a parcel from an account counts under the
   same names.
 - **Safari from an app's browser**: where notifications need the Home Screen but an app's
   own browser has no way to it, a tap on "Open in Safari" (`started`, then `error` if the

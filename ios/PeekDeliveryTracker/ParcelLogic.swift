@@ -151,6 +151,15 @@ extension Parcel {
         return (likely.carrier, since.map { now.timeIntervalSince($0) >= Self.likelyCarrierWait } ?? false)
     }
 
+    /// Nobody has answered for the number, its format points to no carrier of its own, and it looks
+    /// like a shop's order number or is shorter than tracking numbers are: its owner is told where the
+    /// tracking number is, and may choose the carrier.
+    var nonTrackingShape: NonTrackingShape? {
+        guard inputNeededPrompt == nil, inputSuggestedPrompt == nil, carrierData?.routing?.likelyCarrier == nil,
+              carrier == .unknown, !isArchived, !hasCarrierUpdate, syncError != "carrier:placeholder_number" else { return nil }
+        return CarrierCatalog.nonTrackingShape(CarrierCatalog.normalize(trackingNumber))
+    }
+
     var sortedEvents: [TrackingEvent] {
         trackingEvents.sorted(by: Self.eventPrecedes)
     }

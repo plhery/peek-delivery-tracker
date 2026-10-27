@@ -35,6 +35,34 @@ const ORDER_NUMBERS = rules.shops.map(({ shop, pattern }) => ({ shop: shop as Or
 /** The shop whose order number a text holds. */
 const orderShop = (text: string) => ORDER_NUMBERS.find(({ pattern }) => pattern.test(text))?.shop ?? null;
 
+/**
+ * Order numbers as a lookup stores them, without hyphens: the door can't tell these from a carrier's numbers before
+ * the carriers are asked, but a parcel no carrier answered for is most likely one.
+ */
+const STORED_ORDER_NUMBERS = rules.storedOrders.map(({ shop, pattern }) => ({ shop: shop as StoredOrderShop, pattern: new RegExp(pattern) }));
+
+/** A shop whose order numbers a parcel page tells from tracking numbers once no carrier answered for one. */
+export type StoredOrderShop = OrderShop | 'aliexpress';
+
+/** Shops by the name a page writes. */
+export const SHOP_NAMES: Record<StoredOrderShop, string> = { amazon: 'Amazon', aliexpress: 'AliExpress', shein: 'Shein', shopee: 'Shopee', temu: 'Temu' };
+
+/** What a looked-up number no carrier answered for looks like instead of a tracking number. */
+export type NonTrackingShape = { kind: 'order'; shop: StoredOrderShop } | { kind: 'short' };
+
+/** Tracking numbers have 8 characters or more, but for a few carriers' own. */
+const SHORTEST_TRACKING_NUMBER = 8;
+
+/**
+ * Whether a normalized number no carrier answered for looks like a shop's order number, or is shorter than tracking
+ * numbers are: the parcel page says so instead of waiting for a carrier.
+ */
+export function nonTrackingShape(normalized: string): NonTrackingShape | null {
+  const shop = orderShop(normalized) ?? STORED_ORDER_NUMBERS.find(({ pattern }) => pattern.test(normalized))?.shop;
+  if (shop) return { kind: 'order', shop };
+  return normalized.length < SHORTEST_TRACKING_NUMBER ? { kind: 'short' } : null;
+}
+
 const EVERY_ORDER_NUMBER = ORDER_NUMBERS.map(({ pattern }) => new RegExp(pattern.source, 'gi'));
 /** A line without its order numbers, so that no part of one is read as a tracking number. */
 const withoutOrders = (line: string) => EVERY_ORDER_NUMBER.reduce((rest, order) => rest.replace(order, ' '), line);

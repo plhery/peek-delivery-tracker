@@ -160,6 +160,51 @@ class CoreParityTests {
         assertEquals("-€3.50", money(AppLanguage.En, "EUR", -3.5))
     }
 
+    @Test
+    fun shortDatesAreWrittenAsEachLanguagesDateFormatterWritesThem() {
+        val expected = mapOf(
+            "2026-09-12T12:00:00Z" to listOf("Sat 12 Sep", "Sa 12. Sept", "sam 12 sept", "sab 12 set", "sáb 12 sept", "sábado 12 set", "sob 12 wrz"),
+            "2026-05-04T12:00:00Z" to listOf("Mon 4 May", "Mo 4. Mai", "lun 4 mai", "lun 4 mag", "lun 4 may", "segunda 4 mai", "pon 4 maj"),
+            "2026-03-01T12:00:00Z" to listOf("Sun 1 Mar", "So 1. März", "dim 1 mars", "dom 1 mar", "dom 1 mar", "domingo 1 mar", "niedz 1 mar"),
+            "2026-06-17T12:00:00Z" to listOf("Wed 17 Jun", "Mi 17. Juni", "mer 17 juin", "mer 17 giu", "mié 17 jun", "quarta 17 jun", "śr 17 cze"),
+        )
+        for ((value, texts) in expected) {
+            val date = DateParser.date(value)!!
+            assertEquals(value, texts, AppLanguage.entries.map { Localizer(it).shortDate(date) })
+        }
+    }
+
+    @Test
+    fun polishCountsTakeTheirFewAndManyForms() {
+        val localizer = Localizer(AppLanguage.Pl)
+        val counts = listOf<Any>(0, 1, 2, 4, 5, 12, 14, 21, 22, 25, 102, 112, 122, 2.5, -2, 3.0)
+        val expected = mapOf(
+            "map.countries" to listOf(
+                "0 krajów", "1 kraj", "2 kraje", "4 kraje", "5 krajów", "12 krajów", "14 krajów", "21 krajów", "22 kraje",
+                "25 krajów", "102 kraje", "112 krajów", "122 kraje", "map.countries", "map.countries", "3.0 kraje",
+            ),
+            // No many form: the key itself has it.
+            "friends.stampCount" to listOf(
+                "0 znaczków", "1 znaczek", "2 znaczki", "4 znaczki", "5 znaczków", "12 znaczków", "14 znaczków", "21 znaczków",
+                "22 znaczki", "25 znaczków", "102 znaczki", "112 znaczków", "122 znaczki", "2.5 znaczków", "-2 znaczków", "3.0 znaczki",
+            ),
+            // No few form: the key itself has it.
+            "passport.delivered" to listOf(
+                "Dostarczonych", "Dostarczona", "Dostarczone", "Dostarczone", "Dostarczonych", "Dostarczonych", "Dostarczonych",
+                "Dostarczonych", "Dostarczone", "Dostarczonych", "Dostarczone", "Dostarczonych", "Dostarczone", "Dostarczone",
+                "Dostarczone", "Dostarczone",
+            ),
+            // A key named in one of its forms finds the others.
+            "map.countries.one" to listOf(
+                "0 krajów", "1 kraj", "2 kraje", "4 kraje", "5 krajów", "12 krajów", "14 krajów", "21 krajów", "22 kraje",
+                "25 krajów", "102 kraje", "112 krajów", "122 kraje", "1 kraj", "1 kraj", "3.0 kraje",
+            ),
+        )
+        for ((key, texts) in expected) {
+            assertEquals(key, texts, counts.map { localizer.text(key, mapOf("count" to it)) })
+        }
+    }
+
     /** The instant to the millisecond, as the iOS output was printed. */
     private fun Instant.toMillisecond(): Instant = Instant.ofEpochSecond(epochSecond, Math.round(nano / 1e6) * 1_000_000)
 

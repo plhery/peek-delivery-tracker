@@ -803,4 +803,51 @@ class ParcelLogicTests {
         parcel = parcel.copy(trackingEvents = parcel.trackingEvents.dropLast(1))
         assertEquals(before, parcel.currentStage)
     }
+
+    /** SessionIsolationTests' parcel, for the two of its tests that need only the parcel logic. */
+    private fun sessionParcel(): Parcel = Parcel(
+        id = UUID.randomUUID(), trackingNumber = "12345678", label = "Private account A parcel", carrier = CarrierId.Unknown,
+        createdAt = "2026-09-08T00:00:00Z", syncStatus = SyncStatus.Ok, notificationsMuted = false,
+    )
+
+    @Test
+    fun equalTimeEventsPreferDeliveryProgressRegardlessOfUUIDOrTimeZone() {
+        var value = sessionParcel()
+        value = value.copy(
+            trackingEvents = listOf(
+                TrackingEvent(
+                    id = UUID.fromString("ffffffff-ffff-4fff-8fff-ffffffffffff"), packageId = value.id, stage = TrackingStage.InTransit,
+                    description = "Transit", occurredAt = "2026-09-08T12:00:00+02:00",
+                ),
+                TrackingEvent(
+                    id = UUID.fromString("00000000-0000-4000-8000-000000000001"), packageId = value.id, stage = TrackingStage.Delivered,
+                    description = "Delivered", occurredAt = "2026-09-08T10:00:00Z",
+                ),
+            ),
+        )
+        assertEquals(TrackingStage.Delivered, value.currentStage)
+    }
+
+    @Test
+    fun refreshReportsNewTrackingOnlyWhenTheTimelineStatusOrDeliveryDateChanged() {
+        val checked = sessionParcel()
+        val rechecked = checked.copy(lastSyncedAt = "2026-09-25T10:05:00Z", syncStatus = SyncStatus.Ok)
+        assertFalse(Parcel.trackingChanged(from = listOf(checked), to = listOf(rechecked)))
+
+        val status = checked.copy(lastStatusText = "Sorted at the depot")
+        assertTrue(Parcel.trackingChanged(from = listOf(checked), to = listOf(status)))
+        val delivery = checked.copy(expectedDelivery = "2026-09-27")
+        assertTrue(Parcel.trackingChanged(from = listOf(checked), to = listOf(delivery)))
+        val scanned = checked.copy(
+            trackingEvents = checked.trackingEvents + TrackingEvent(
+                id = UUID.randomUUID(), packageId = checked.id, stage = TrackingStage.InTransit,
+                description = "Sorted at the depot", occurredAt = "2026-09-25T10:00:00Z",
+            ),
+        )
+        assertTrue(Parcel.trackingChanged(from = listOf(checked), to = listOf(scanned)))
+
+        // A delivery partner's parcel continues the one it replaced.
+        val handoff = checked.copy(id = UUID.randomUUID(), carrierData = CarrierData(originalPackageId = checked.id))
+        assertFalse(Parcel.trackingChanged(from = listOf(checked), to = listOf(handoff)))
+    }
 }

@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PeekDeliveryTracker"
 include(":app")
+include(":core")

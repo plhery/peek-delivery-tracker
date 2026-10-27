@@ -70,4 +70,52 @@ class CarrierCatalogParityTests {
             NumberRefusals.question(CarrierId.Dhl, "000000000", demo = false),
         )
     }
+
+    private val nothing = TrackingInputMatch(
+        trackingNumber = "",
+        carrier = CarrierId.Unknown,
+        confidence = CarrierMatch.Confidence.None,
+        candidates = emptyList(),
+        trackingUrl = null,
+        source = TrackingInputMatch.Source.None,
+    )
+
+    @Test
+    fun ignoringCaseTheTurkishIsAreNoIs() {
+        // ICU folds İ to "i̇" and keeps ı, so "trackİng" is no tracking label.
+        assertEquals(nothing, catalog.parse("Trackİng NO123456789"))
+        assertEquals(nothing, catalog.parse("Your trackİng number İs 12345678901."))
+        assertEquals(nothing, catalog.read("trackİng notable1234"))
+        val entry = "Tracking number ıs 12345678901"
+        val asTyped = TrackingInputMatch(
+            trackingNumber = entry,
+            carrier = CarrierId.Unknown,
+            confidence = CarrierMatch.Confidence.None,
+            candidates = emptyList(),
+            trackingUrl = null,
+            source = TrackingInputMatch.Source.Number,
+        )
+        assertEquals(asTyped, catalog.parse(entry))
+        assertEquals(asTyped, catalog.read(entry))
+    }
+
+    @Test
+    fun ignoringCaseTheKelvinSignIsK() {
+        assertEquals(nothing, catalog.parse("Tracking: JJD000\u212A0000000000"))
+        assertEquals(nothing, catalog.read("Tracking: JJD000\u212A0000000000"))
+        assertEquals(OrderShop.Shein, catalog.order("GSH\u212A1B2C3D4E5F6"))
+        assertEquals(OrderShop.Shein, catalog.order("Order GSH0A1B2C3D4E5\u212A"))
+    }
+
+    @Test
+    fun linkParametersAreNamedAsCaseInsensitiveCompareReadsThem() {
+        // ı, İ and "i̇" are no i.
+        assertLink(nothing, "https://www.dhl.com/track?tracking-\u0131d=1234567899")
+        assertLink(nothing, "https://www.dhl.com/track?tracking-\u0130d=1234567899")
+        assertLink(nothing, "https://www.dhl.com/track?tracking-i\u0307d=1234567899")
+        assertLink(linkMatch("1234567899", CarrierId.Dhl), "https://www.dhl.com/track?TRACKING-ID=1234567899")
+        assertLink(linkMatch("1234567899", CarrierId.Dhl), "https://www.dhl.com/track?trac\u212Aing-id=1234567899")
+        // A ligature is the letters it joins.
+        assertLink(linkMatch("XT123456785FR", CarrierId.Chronopost), "https://www.chronopost.fr/suivi?li\uFB06eNumeros=XT123456785FR")
+    }
 }

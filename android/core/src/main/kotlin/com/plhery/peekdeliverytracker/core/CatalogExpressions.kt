@@ -135,28 +135,57 @@ internal object CatalogExpressions {
         return result.toString()
     }
 
+    /**
+     * The value as java.util.regex is given it. Ignoring case, ICU folds İ to "i̇" and leaves ı alone, so
+     * neither is i or I, while java.util.regex lowers İ to i and raises ı to I: both become ƻ, a letter
+     * without case. ICU folds the Kelvin sign to k, which `[A-Z]` holds, so it becomes K. Each stands for
+     * one UTF-16 unit, so offsets stay, and the text matched is read from the value itself.
+     */
+    private fun subject(value: String, caseInsensitive: Boolean): String {
+        if (!caseInsensitive || value.none { it == '\u0130' || it == '\u0131' || it == '\u212A' }) return value
+        val subject = StringBuilder(value.length)
+        for (character in value) {
+            subject.append(
+                when (character) {
+                    '\u0130', '\u0131' -> '\u01BB'
+                    '\u212A' -> 'K'
+                    else -> character
+                },
+            )
+        }
+        return subject.toString()
+    }
+
     fun matches(value: String, pattern: String, caseInsensitive: Boolean = false): Boolean =
-        expression(pattern, caseInsensitive)?.matcher(value)?.find() == true
+        expression(pattern, caseInsensitive)?.matcher(subject(value, caseInsensitive))?.find() == true
 
     fun matchesIn(value: String, pattern: String, caseInsensitive: Boolean = false): List<String> =
         hits(value, pattern, caseInsensitive).map { it.text }
 
     fun hits(value: String, pattern: String, caseInsensitive: Boolean = false): List<Hit> {
-        val matcher = expression(pattern, caseInsensitive)?.matcher(value) ?: return emptyList()
+        val matcher = expression(pattern, caseInsensitive)?.matcher(subject(value, caseInsensitive)) ?: return emptyList()
         val hits = mutableListOf<Hit>()
-        while (matcher.find()) hits += Hit(matcher.start(), matcher.end(), matcher.group())
+        while (matcher.find()) hits += Hit(matcher.start(), matcher.end(), value.substring(matcher.start(), matcher.end()))
         return hits
     }
 
     fun capture(value: String, pattern: String, caseInsensitive: Boolean = false): String? {
-        val matcher = expression(pattern, caseInsensitive)?.matcher(value) ?: return null
-        if (!matcher.find() || matcher.groupCount() < 1) return null
-        return matcher.group(1)
+        val matcher = expression(pattern, caseInsensitive)?.matcher(subject(value, caseInsensitive)) ?: return null
+        if (!matcher.find() || matcher.groupCount() < 1 || matcher.start(1) < 0) return null
+        return value.substring(matcher.start(1), matcher.end(1))
     }
 
     /** `stringByReplacingMatches` with a template free of `$` and `\`. */
-    fun replacing(pattern: String, value: String, template: String, caseInsensitive: Boolean = false): String? =
-        expression(pattern, caseInsensitive)?.matcher(value)?.replaceAll(java.util.regex.Matcher.quoteReplacement(template))
+    fun replacing(pattern: String, value: String, template: String, caseInsensitive: Boolean = false): String? {
+        val matcher = expression(pattern, caseInsensitive)?.matcher(subject(value, caseInsensitive)) ?: return null
+        val result = StringBuilder(value.length)
+        var copied = 0
+        while (matcher.find()) {
+            result.append(value, copied, matcher.start()).append(template)
+            copied = matcher.end()
+        }
+        return result.append(value, copied, value.length).toString()
+    }
 
     /** Foundation's `value.range(of: pattern, options: .regularExpression) != nil`, whose `$` is the end of the input. */
     fun foundationMatches(value: String, pattern: String): Boolean = matches(value, pattern)

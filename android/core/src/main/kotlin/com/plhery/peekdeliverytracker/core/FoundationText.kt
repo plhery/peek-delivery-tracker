@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import java.text.BreakIterator
+import java.text.Normalizer
 import java.util.Locale
 
 // Swift's String and Character behaviour the catalog relies on, on the JVM: a Swift String counts
@@ -120,4 +121,24 @@ internal fun String.splitOnWhitespace(): List<String> {
     }
     if (word.isNotEmpty()) words += word.toString()
     return words
+}
+
+/**
+ * `caseInsensitiveCompare(_:) == .orderedSame`: the same once case is folded in full (ß is ss, ﬆ is st,
+ * İ is i̇ and ı stays ı) and canonically equivalent.
+ */
+internal fun String.equalsFoldingCase(other: String): Boolean = foldedCase() == other.foldedCase()
+
+private fun String.foldedCase(): String {
+    val decomposed = Normalizer.normalize(this, Normalizer.Form.NFD)
+    val folded = StringBuilder(decomposed.length)
+    var index = 0
+    while (index < decomposed.length) {
+        val scalar = decomposed.codePointAt(index)
+        val text = String(Character.toChars(scalar))
+        // Lowered, raised and lowered again, the way full case folding takes ẞ to ss; ı has no folding.
+        folded.append(if (scalar == 0x131) text else text.lowercase(Locale.ROOT).uppercase(Locale.ROOT).lowercase(Locale.ROOT))
+        index += Character.charCount(scalar)
+    }
+    return Normalizer.normalize(folded, Normalizer.Form.NFD)
 }

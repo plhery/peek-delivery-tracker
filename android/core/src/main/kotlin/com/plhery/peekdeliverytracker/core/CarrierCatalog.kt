@@ -509,7 +509,7 @@ class CarrierCatalog private constructor(
             for (firstMatch in matchingRules) {
                 val rule = firstMatch.second
                 val queryValue = components.queryItems?.firstOrNull { item ->
-                    rule.params?.any { it.equals(item.name, ignoreCase = true) } == true
+                    rule.params?.any { it.equalsFoldingCase(item.name) } == true
                 }?.value
                 val bareQueryValue = rule.query?.let { capture(components.query ?: "", it, caseInsensitive = true) }
                 val pathValue = rule.path?.let { capture(components.path, it, caseInsensitive = true) }

@@ -1,19 +1,18 @@
 ---
 title: Colis livré mais non reçu : que faire, étape par étape
-description: Le suivi dit « livré » mais rien n'est arrivé ? Où chercher, combien de temps attendre, qui est responsable et les délais d'Amazon, eBay, Etsy et Vinted.
+description: Le suivi dit « livré » mais rien n'est arrivé ? Où chercher, combien de temps attendre, qui est responsable et les délais d'eBay, Etsy et Vinted.
 slug: colis-livre-mais-non-recu
 picture: Une porte fermée, une notification avec une coche verte, la silhouette d'un colis en pointillés sur le paillasson et Pip, inquiet.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Si le suivi indique « livré » mais que tu n'as rien reçu, ne considère pas encore le colis comme perdu : « livré » est un scan sur le terminal du livreur, pas la preuve que le colis est entre tes mains. Cherche une photo ou un nom dans le suivi, fais le tour des endroits habituels et laisse passer un jour. S'il manque toujours, adresse-toi au vendeur, pas au transporteur : en France et en Belgique, un colis acheté à un professionnel reste à ses risques tant que tu ne l'as pas en main.
 
 ## Pourquoi mon colis est indiqué livré alors que je n'ai rien reçu ?
 
-Parce que « livré » enregistre l'endroit où le livreur a laissé le colis, pas le fait que tu l'aies récupéré. Chez [La Poste suisse](carrier:swiss-post), l'envoi est « distribué » (`Distribué par` dans le suivi), et ça veut dire la même chose. Trois explications possibles :
+Parce que « livré » enregistre l'endroit où le livreur a laissé le colis, pas le fait que tu l'aies récupéré. Chez [La Poste suisse](carrier:swiss-post), l'envoi est « distribué » (`Distribué par` dans le suivi), et ça veut dire la même chose. Deux explications possibles :
 
-- **Il a été scanné trop tôt.** Oui, un colis peut être indiqué livré avant d'arriver. Amazon prévient que des colis sont parfois scannés comme livrés « jusqu'à 48 heures avant la livraison effective », et que certains transporteurs livrent jusqu'à 22 h.
 - **Il est là où tu n'as pas encore regardé.** Chez un voisin, chez le gardien, dans un lieu sûr ou au point relais : tout cela compte comme livré.
 - **Il s'est vraiment égaré.** Une mauvaise adresse sur la commande, la mauvaise porte ou un voleur.
 
@@ -36,7 +35,7 @@ Le suivi n'a jamais dit « livré » ? Lis [pourquoi le suivi ne bouge plus](gui
 :::steps
 - Regarde la preuve | Cherche dans le suivi une photo, le nom de la personne qui a signé ou celui d'un voisin, et vérifie l'adresse de ta commande.
 - Fais le tour | Demande à tout le monde chez toi. Regarde dans la boîte aux lettres, chez les voisins et le gardien, et cherche un avis de passage. Au point relais, fais chercher le colis à ton nom.
-- Laisse passer un jour | Amazon demande d'attendre 48 heures, le temps qu'un colis scanné trop tôt arrive vraiment.
+- Laisse passer un jour | Un voisin, le gardien ou la personne qui a pris le colis peut te le remettre un peu plus tard.
 - Écris au vendeur | Donne [les numéros de commande et de suivi](guide:find-tracking-number), et ce que tu as vérifié. Demande une enquête, puis un nouvel envoi ou un remboursement.
 - Ouvre un litige à temps | Sur une plateforme, avant la fin du délai : 2 jours sur Vinted, 30 sur eBay et Etsy.
 - Puis ta banque | Si personne ne règle le problème, demande une rétrofacturation à ta banque ou ouvre un litige PayPal, dans leurs délais.
@@ -81,19 +80,19 @@ En France, le vendeur. S'il dit avoir livré, « c'est à lui d'en apporter la p
 
 Si tu contestes, l'expéditeur d'un envoi bpost avec garantie peut te demander de confirmer par e-mail ou par un document signé que tu n'as rien reçu. La Poste suisse lance une recherche si le destinataire confirme, oralement ou par écrit, ne pas avoir reçu l'envoi.
 
-## Combien de temps pour réclamer sur Amazon, eBay, Etsy ou Vinted ?
+## Combien de temps pour réclamer sur eBay, Etsy ou Vinted ?
 
 | Plateforme | Que faire | Délai |
 | --- | --- | --- |
-| Amazon, expédié par Amazon | Attendre 48 heures, puis contacter le service client | 30 jours après la date de livraison prévue |
-| Amazon, vendu et expédié par un vendeur tiers (garantie A à Z) | Contacter le vendeur, puis « Problème avec la commande » s'il n'a rien réglé en 48 heures | Dernière date de livraison possible il y a 90 jours au plus |
 | eBay (garantie client eBay) | Signaler le problème ; le vendeur a 3 jours ouvrés, puis tu peux demander à eBay d'intervenir | 30 jours calendaires après la date de livraison estimée ou réelle |
 | Etsy | « Aide concernant la commande », puis « Ouvrir un litige » si le vendeur n'a rien réglé en 48 heures et que la date de livraison estimée est passée | 30 jours après la date de livraison estimée |
 | Vinted | « J'ai un problème » dans la conversation, ou « Nous contacter » dans l'aide | 2 jours après l'indication « livré » (14 avec un vendeur Pro) |
 
-Amazon accepte une demande au titre de la garantie A à Z même quand le suivi affiche une confirmation de livraison. Sur eBay.fr, un statut « Livré » avec la date et ton code postal ou ta ville suffit comme preuve de livraison (à partir de 550 €, il faut aussi un accusé de réception), et eBay peut alors clôturer le litige automatiquement.
+Sur Amazon, la garantie A à Z couvre chaque produit acheté dans ses boutiques, qu'il soit vendu par Amazon ou par un vendeur indépendant : en cas de livraison retardée, Amazon rembourse ou remplace l'article. Si c'est un vendeur tiers qui te l'a vendu, essaie d'abord de régler le problème avec lui. Si tu n'y arrives pas, tu peux demander un remboursement à Amazon.
 
-Attention : demander un rejet de débit à ta banque te prive de la protection de la plateforme. Amazon refuse alors tout remboursement au titre de la garantie A à Z, eBay peut clôturer ton litige et Etsy prévient que « vous ne pourrez pas ouvrir de litige ».
+Sur eBay.fr, un statut « Livré » avec la date et ton code postal ou ta ville suffit comme preuve de livraison (à partir de 550 €, il faut aussi un accusé de réception), et eBay peut alors clôturer le litige automatiquement.
+
+Attention : demander un rejet de débit à ta banque te prive de la protection de la plateforme : eBay peut clôturer ton litige et Etsy prévient que « vous ne pourrez pas ouvrir de litige ».
 
 Commande passée sur AliExpress, Temu ou Shein ? Leurs délais sont dans [suivre un colis venu de Chine](guide:tracking-from-china). Colis [Cainiao](carrier:cainiao) ou [YunExpress](carrier:yunexpress) ? Leur page dit qui contacter quand il est indiqué livré.
 
@@ -158,8 +157,8 @@ Tu peux, mais aucune des règles ci-dessus n'en fait une condition pour être re
 - [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – « Distribué par »
 - [La Poste suisse : Gérer un envoi](https://www.post.ch/fr/reception/gerer-un-envoi/gerer-ponctuellement) – Pas de dépôt, preuve de dépôt
 - [Ombud-PostCom : Procédure](https://www.ombud-postcom.ch/vorgehen-1-1) – démarche préalable, CHF 20.–
-- [Amazon.fr : Colis manquant indiqué comme livré](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – 48 heures, 22 h, 30 jours
-- [Amazon.fr : Garantie A à Z](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – conditions, 90 jours, rejet de débit
+- [About Amazon France : Six conseils contre les arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – garantie A à Z sur chaque produit, livraison retardée, remboursement ou remplacement
+- [About Amazon France : La Garantie A à Z](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeur d'abord, puis remboursement par Amazon
 - [eBay.fr : Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – délais, preuve de livraison
 - [Etsy : L'ouverture d'un litige (copie archivée)](https://web.archive.org/web/20260504151748/https://help.etsy.com/hc/fr/articles/5745586898199-L-ouverture-d-un-litige) – 48 heures, 30 jours
 - [Vinted : Le colis n'a pas été livré](https://www.vinted.fr/help/726) – 2 jours, clôturer le litige

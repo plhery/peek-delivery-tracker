@@ -1,19 +1,18 @@
 ---
 title: Encomenda dada como entregue mas não recebi: o que fazer
-description: A encomenda aparece como entregue e não está lá? O que verificar primeiro, quanto esperar, quem é responsável e os prazos da Amazon, da Vinted e do eBay.
+description: A encomenda aparece como entregue e não está lá? O que verificar primeiro, quanto esperar, quem é responsável e os prazos da Vinted, do eBay e da Etsy.
 slug: encomenda-dada-como-entregue-nao-recebi
 picture: Uma porta fechada, uma notificação com um visto verde, o contorno vazio de uma caixa no tapete e o Pip preocupado.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Se o seguimento diz que a encomenda foi entregue mas não a recebeste, não a dês já como perdida: «entregue» é um registo no terminal do estafeta, não a prova de que chegou às tuas mãos. Vê no seguimento quem assinou ou com quem ficou, procura nos sítios do costume e espera um dia. Se continuar sem aparecer, fala com a loja, não com a transportadora: em Portugal, quando compras a uma empresa, a encomenda corre por conta e risco da loja até a teres fisicamente nas mãos.
 
 ## Porque é que aparece como entregue se não recebi nada?
 
-Porque «entregue» regista onde o estafeta deixou a encomenda, e não que já a tenhas contigo. Há três explicações possíveis:
+Porque «entregue» regista onde o estafeta deixou a encomenda, e não que já a tenhas contigo. Há duas explicações possíveis:
 
-- **Foi registada antes de chegar.** Por isso sim, uma encomenda pode aparecer como entregue antes de estar à tua porta. Nas páginas de ajuda de outros países, a Amazon avisa que uma encomenda pode ser dada como entregue antes de chegar; na Amazon.es, lembra que algumas transportadoras entregam até às 22h00.
 - **Está num sítio onde ainda não procuraste.** Deixá-la com um vizinho, com alguém de casa, na caixa do correio ou num cacifo também conta como entrega.
 - **Foi parar a outro lado.** Uma morada errada na encomenda, a porta errada ou um ladrão.
 
@@ -25,7 +24,6 @@ Onde cada transportadora a pode deixar:
 | CTT, Encomenda Postal com entrega ao domicílio e Encomenda Expresso | Em mão a quem estiver na morada, exceto menores |
 | GLS | Um vizinho, que assina por ti, se não estiveres em casa |
 | [InPost](carrier:inpost) | O Locker ou o Ponto Pack que escolheste; a InPost avisa por e-mail ou SMS quando a encomenda lá chega |
-| Amazon | Alguém de casa, um vizinho, a receção do prédio ou o teu lugar seguro |
 
 O seguimento nunca chegou a dizer «entregue»? Vê [porque é que o tracking não atualiza](guide:tracking-not-updating) ou [o que querem dizer os estados do seguimento](guide:tracking-statuses).
 
@@ -34,7 +32,7 @@ O seguimento nunca chegou a dizer «entregue»? Vê [porque é que o tracking n�
 :::steps
 - Vê a prova de entrega | Procura no seguimento quem assinou ou o nome de um vizinho e confirma a morada que deste na encomenda.
 - Procura nos sítios do costume | Pergunta a quem vive contigo e aos vizinhos. Vê a caixa do correio, a receção ou a portaria, e procura um aviso de entrega.
-- Espera um dia | Algumas transportadoras entregam até às 22h00, lembra a Amazon, e a leitura «entregue» pode ser feita antes de a encomenda chegar. Cacifo InPost vazio: aí não esperes, avisa a InPost nas 24 horas seguintes.
+- Espera um dia | Se ficou com um vizinho ou com alguém de casa, pode chegar-te às mãos mais tarde. Cacifo InPost vazio: aí não esperes, avisa a InPost nas 24 horas seguintes.
 - Fala com a loja | Dá o número da encomenda, o [número de seguimento](guide:find-tracking-number) e o que já verificaste. Pede-lhe que a procure junto da transportadora e, se não aparecer, que a volte a enviar ou te reembolse.
 - Abre um caso a tempo | Se compraste numa plataforma, antes de o prazo acabar: 2 dias na Vinted, 30 no eBay e na Etsy.
 - Por fim, o pagamento | Se ninguém resolver, abre uma disputa no PayPal ou pede ao banco que conteste a compra.
@@ -75,19 +73,19 @@ Pelo contrário, o risco já é teu quando:
 
 Se contestares a entrega, podem pedir-te uma declaração por escrito. Quando a DPD não tem o comprovativo físico de uma entrega que deu como feita, só aceita a reclamação se vier acompanhada de uma reclamação escrita do destinatário e do «comprovativo da reposição da encomenda».
 
-## Quanto tempo te dão a Amazon, o eBay, a Etsy e a Vinted?
+## Quanto tempo te dão o eBay, a Etsy e a Vinted?
 
 | Plataforma | O que fazer | Prazo |
 | --- | --- | --- |
-| Amazon, enviado pela Amazon | Procura em casa e junto dos vizinhos, contacta a transportadora e depois o Serviço de apoio ao cliente, logo que passem 48 horas | Só pode ajudar nos 30 dias a contar da data de entrega |
-| Amazon, vendido e enviado por um vendedor do Marketplace (Garantia de A a Z) | Contacta o vendedor; se não responder em 48 horas nem resolver, escolhe «Problema com pedido» | A partir de 3 dias depois da data de entrega prevista mais recente ou da entrega confirmada, o que vier primeiro; até 90 dias depois da última data de entrega possível |
 | eBay | Comunica que o artigo não chegou; o vendedor tem 3 dias úteis, depois pede ajuda ao eBay | 30 dias a contar da data de entrega prevista ou real |
 | Etsy | Pede ajuda ao vendedor a partir da encomenda; abre um caso 48 horas depois, já passada a data de entrega estimada | 30 dias depois da data de entrega estimada |
 | Vinted | «Tenho um problema» | 2 dias depois do aviso de entrega (14 nas compras a uma Conta de Venda Pro) |
 
-A Amazon deixa-te recorrer à Garantia de A a Z mesmo quando a entrega aparece confirmada. No eBay.es, abaixo de 550 €, um registo «entregue» com data e com o teu código postal ou a tua cidade basta como prova, e o caso pode ser fechado automaticamente.
+Na Amazon.es, a Garantia de A a Z cobre também as compras a vendedores externos: se tiveres problemas com o prazo de entrega, podes reclamar diretamente à Amazon para encontrar uma solução.
 
-Atenção: se pedires um estorno ao banco, a via da plataforma fecha-se. A Amazon deixa de reembolsar pela Garantia de A a Z, o eBay pode fechar o caso e a Etsy diz que já não podes abrir um.
+No eBay.es, abaixo de 550 €, um registo «entregue» com data e com o teu código postal ou a tua cidade basta como prova, e o caso pode ser fechado automaticamente.
+
+Atenção: se pedires um estorno ao banco, a via da plataforma fecha-se: o eBay pode fechar o caso e a Etsy diz que já não podes abrir um.
 
 Compraste no AliExpress, na Temu ou na Shein? Os prazos destas lojas estão no guia [como seguir uma encomenda da China](guide:tracking-from-china). Se o seguimento é da [Cainiao](carrier:cainiao) ou da [YunExpress](carrier:yunexpress), vê também o que as páginas delas dizem sobre uma encomenda dada como entregue.
 
@@ -139,10 +137,7 @@ Podes, mas nenhuma das regras acima o exige para teres o reembolso. Um furto pod
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – vizinho, contacto
 - [InPost: Fala connosco](https://www.inpost.pt/fala-connosco) – aviso de chegada, cacifo vazio em 24 horas, perda total, remetente
 - [ANACOM: Serviços postais](https://www.anacom-consumidor.pt/faq-servicos-postais) – indemnização do remetente, limites, PSP e GNR
-- [Amazon.es: Encontrar uma embalagem em falta que é apresentada como entregue](https://www.amazon.es/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS&language=pt_PT) – 22h00, vizinhos, 30 dias
-- [Amazon.com: Find a Missing Package that Shows as Delivered](https://www.amazon.com/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – leitura antes da chegada
-- [Amazon.pl: Odnajdywanie zaginionej przesyłki (em polaco)](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – avisar logo após 48 horas, ajuda só nos 30 dias a contar da data de entrega
-- [Amazon.es: O que é a Garantia A-to-Z?](https://www.amazon.es/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV&language=pt_PT) – 3 dias, 48 horas, 90 dias, estornos
+- [About Amazon España: Diez cosas de Amazon que mejoran tu experiencia de compra (em espanhol)](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantia de A a Z nas compras a vendedores externos, prazo de entrega, reclamação à Amazon
 - [eBay.es: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 dias, 3 dias úteis, 550 €, devolução de cargo
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 horas, 30 dias, estornos
 - [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/726) – 2 dias, cancelar o pedido

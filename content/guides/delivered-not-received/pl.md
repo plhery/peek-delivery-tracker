@@ -1,19 +1,18 @@
 ---
 title: Przesyłka doręczona, a jej nie ma? Co to znaczy i co zrobić?
-description: „Doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła do Ciebie. Co sprawdzić, ile czekać i ile czasu na zgłoszenie dają Allegro, Amazon i Vinted.
+description: „Doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła do Ciebie. Co sprawdzić, ile czekać i ile czasu dają Allegro i Vinted.
 slug: paczka-doreczona-a-jej-nie-ma
 picture: Zamknięte drzwi, powiadomienie z zielonym ptaszkiem, pusty, przerywany kontur paczki ze znakiem zapytania na wycieraczce i zmartwiony Pip.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Jeśli śledzenie pokazuje „doręczona”, a paczki nie ma, nie zakładaj od razu, że przepadła: „doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła w Twoje ręce. Sprawdź w szczegółach przesyłki, kto ją odebrał, zapytaj domowników i sąsiadów, rozejrzyj się wokół drzwi i odczekaj dzień lub dwa. Jeśli nadal jej nie ma, napisz do sprzedawcy, a nie do kuriera: przy zakupie od firmy to sprzedawca odpowiada za paczkę, dopóki jej nie dostaniesz.
 
 ## Dlaczego paczka ma status „doręczona”, skoro jej nie ma?
 
-Bo ten status mówi tylko, że kurier gdzieś zostawił paczkę, a nie, że trafiła do Ciebie. Każda firma nazywa go trochę inaczej: [InPost](carrier:inpost) pisze `Dostarczona`, Vinted „Doręczono”, a Amazon oznacza paczkę jako „dostarczoną”. Są trzy możliwe wyjaśnienia:
+Bo ten status mówi tylko, że kurier gdzieś zostawił paczkę, a nie, że trafiła do Ciebie. Każda firma nazywa go trochę inaczej: [InPost](carrier:inpost) pisze `Dostarczona`, a Vinted „Doręczono”. Są dwa możliwe wyjaśnienia:
 
-- **Skan pojawił się za wcześnie.** Paczka naprawdę może dostać status „doręczona”, zanim dotrze. Amazon pisze, że status dostawy bywa aktualizowany z wyprzedzeniem, a w rzadkich przypadkach paczki są oznaczane jako dostarczone „do 48 godzin przed doręczeniem”. Dodaje, że niektórzy przewoźnicy dowożą paczki nawet do 22.00.
 - **Leży tam, gdzie nikt jeszcze nie zajrzał.** Gdy paczka ma status odebranej, a jej nie masz, Allegro radzi sprawdzić, czy nie odebrał jej ktoś inny: domownik, sąsiad, a przy zamówieniu do firmy recepcja albo ochrona budynku.
 - **Naprawdę zginęła.** Błędny adres w zamówieniu, kurier pomylił drzwi albo ktoś ją ukradł.
 
@@ -33,9 +32,9 @@ Gdzie przewoźnik może ją zostawić:
 :::steps
 - Sprawdź szczegóły | W śledzeniu i w szczegółach zamówienia poszukaj, kto odebrał paczkę i gdzie. Sprawdź też adres w zamówieniu.
 - Rozejrzyj się | Zapytaj domowników i sąsiadów, a w pracy recepcję. Zajrzyj do skrzynki, poszukaj awizo, SMS-a lub e-maila od przewoźnika.
-- Odczekaj dzień lub dwa | Amazon prosi o 48 godzin, bo paczka bywa oznaczona jako dostarczona nawet 48 godzin przed doręczeniem.
+- Odczekaj dzień lub dwa | Jeśli paczkę odebrał domownik, sąsiad albo recepcja, może Ci ją oddać dopiero po jakimś czasie.
 - Napisz do sprzedawcy | Podaj numer zamówienia i numer przesyłki oraz to, co już udało Ci się sprawdzić. Poproś, żeby wyjaśnił sprawę z przewoźnikiem, a potem wysłał paczkę jeszcze raz albo oddał pieniądze.
-- Zgłoś problem na czas | Na platformie, zanim minie termin: Vinted daje 2 dni, Amazon 30 dni, a Allegro 2 lata od zakupu.
+- Zgłoś problem na czas | Na platformie, zanim minie termin: Vinted daje 2 dni, a Allegro 2 lata od zakupu.
 - Na końcu bank | Jeśli nikt nie pomoże, złóż w banku reklamację transakcji kartą albo otwórz spór w PayPal, zanim miną terminy.
 :::
 
@@ -76,18 +75,18 @@ Dowód doręczenia może też zadziałać przeciwko Tobie. PayPal pisze, że je�
 
 Gdy zgłaszasz brak paczki, przygotuj szczegóły. Vinted prosi między innymi o adres dostawy (punkt, automat paczkowy albo dom), przewidywaną datę dostawy, [numer śledzenia](guide:find-tracking-number) i opis zamówienia. Allegro może poprosić o dokument z wynikiem reklamacji, o potwierdzenie płatności, gdy zakup był opłacony poza Allegro albo przy odbiorze, a w wyjątkowych sytuacjach o zgłoszenie sprawy organom ścigania.
 
-## Ile czasu dają Ci Allegro, Amazon i Vinted?
+## Ile czasu dają Ci Allegro i Vinted?
 
 | Platforma | Co zrobić | Termin |
 | --- | --- | --- |
 | Allegro (Allegro Ochrona Kupujących) | Załóż Dyskusję z powodem „nie otrzymałem produktu”. Sprzedający ma 24 godziny na odpowiedź, potem wybierz „poproś o pomoc Allegro”. Jeśli nie dojdziecie do porozumienia, oznacz Dyskusję jako nierozwiązaną, a Allegro przyśle link do wniosku o rekompensatę | Dyskusja od 1 godziny do 2 lat po zakupie. Wniosek o rekompensatę od 14. dnia do 2 lat od zakupu albo 7 dni po zgłoszeniu, że produkt nie dotarł. Do 20 000 zł |
-| Amazon, wysyłka przez Amazon | Odczekaj 48 godzin, potem od razu skontaktuj się z obsługą klienta | Amazon pomoże tylko w ciągu 30 dni od daty dostawy |
-| Amazon, sprzedawca z platformy Marketplace (Gwarancja od A do Z) | Napisz do sprzedawcy. Jeśli przez ponad 48 godzin nie rozwiąże problemu, wybierz „Problem z zamówieniem” | 90 dni od ostatniej możliwej daty dostawy |
 | Vinted | „Mam problem” w oknie rozmowy | 2 dni kalendarzowe od zmiany statusu na „Doręczono” |
 
-Amazon przyjmuje wniosek z Gwarancji od A do Z także wtedy, gdy według śledzenia przesyłka została dostarczona. Rekompensata z Allegro nie zawsze pokrywa 100% poniesionych kosztów. Jeśli paczka dotrze już po założeniu Dyskusji i nie masz zastrzeżeń, Allegro zamknie Dyskusję po 24 godzinach.
+Rekompensata z Allegro nie zawsze pokrywa 100% poniesionych kosztów. Jeśli paczka dotrze już po założeniu Dyskusji i nie masz zastrzeżeń, Allegro zamknie Dyskusję po 24 godzinach.
 
-Nie zaczynaj od banku. Jeśli zlecisz w banku obciążenie zwrotne, Amazon nie przyjmie wniosku z Gwarancji od A do Z. Allegro nie wypłaci rekompensaty, jeśli pieniądze odzyskasz już z innego źródła, na przykład z ubezpieczenia karty kredytowej albo od sprzedającego.
+Na Amazon.pl każdy produkt, czy sprzedaje go Amazon, czy niezależny sprzedawca, jest objęty Gwarancją od A do Z: jeśli masz problem z terminową dostawą, Amazon zwróci Ci pieniądze albo wymieni produkt. Gdy kupujesz od innego sprzedawcy, najpierw spróbuj rozwiązać problem z nim, a jeśli się nie uda, skontaktuj się bezpośrednio z Amazonem i poproś o zwrot pieniędzy.
+
+Nie zaczynaj od banku: Allegro nie wypłaci rekompensaty, jeśli pieniądze odzyskasz już z innego źródła, na przykład z ubezpieczenia karty kredytowej albo od sprzedającego.
 
 Zamówienie z AliExpress, Temu albo Shein? Ich terminy znajdziesz w poradniku o [śledzeniu paczki z Chin](guide:tracking-from-china). Jeśli paczkę wiózł [Cainiao](carrier:cainiao) albo [YunExpress](carrier:yunexpress), zobacz też, kogo wtedy pytać.
 
@@ -142,8 +141,8 @@ Zadzwoń na infolinię InPost, 722 444 000 lub 746 600 000: przy skradzionej pac
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – sąsiad, safeplace, kod odbioru e-mailem, decyzja w 30 dni
 - [DPD Polska: Regulamin Świadczenia Usług w Obrocie Krajowym](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – § 11 ust. 2 dorosły domownik, § 21 kto składa reklamację, 12 miesięcy
 - [GLS Polska: Co jeśli nie odbiorę paczki od kuriera?](https://gls-group.com/PL/pl/blog/co-jesli-mnie-nie-ma-w-domu/) – domownik, sąsiad za zgodą, FlexDeliveryService, miejsce bez podpisu
-- [Amazon.pl: Odnajdywanie zaginionej przesyłki oznaczonej jako dostarczona](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – 48 godzin, 22.00, 30 dni
-- [Amazon.pl: Gwarancja od A do Z](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 48 godzin, 90 dni, status dostarczona, obciążenie zwrotne
+- [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – Gwarancja od A do Z dla każdego produktu, problem z terminową dostawą, zwrot pieniędzy albo wymiana
+- [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, potem zwrot pieniędzy od Amazona
 - [Allegro: Jak działa Allegro Ochrona Kupujących](https://allegro.pl/pomoc/dla-kupujacych/allegro-ochrona-kupujacych/jak-dziala-allegro-ochrona-kupujacych-qzdAg2Klbsl) – 20 000 zł, 7 i 14 dni, 2 lata, wyłączenia, potwierdzenie płatności, organy ścigania, 6 tygodni
 - [Allegro: Co możesz zrobić, gdy czekasz na przesyłkę zbyt długo](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/co-mozesz-zrobic-gdy-czekasz-na-przesylke-zbyt-dlugo-xG71gn36qC4) – Dyskusja, 24 godziny, paczka odebrana przez domownika, sąsiada lub recepcję
 - [Vinted: Śledzenie przesyłki](https://www.vinted.pl/help/100) – „Mam problem” w ciągu dwóch dni od „Doręczono”

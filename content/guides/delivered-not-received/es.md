@@ -1,19 +1,18 @@
 ---
 title: Paquete entregado pero no recibido: qué hacer
-description: Pone «entregado» y no tienes el paquete: qué comprobar primero, a quién reclamar, quién es responsable y los plazos de Amazon, Vinted, Wallapop y eBay.
+description: Pone «entregado» y no tienes el paquete: qué comprobar primero, a quién reclamar, quién es responsable y los plazos de Vinted, Wallapop y eBay.
 slug: paquete-entregado-pero-no-recibido
 picture: Una puerta cerrada, una notificación con un tic verde, el contorno vacío de una caja con un interrogante sobre el felpudo y Pip, preocupado.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Si el seguimiento pone «Entregado» pero no tienes el paquete, no lo des por perdido: «entregado» es un escaneo en la PDA del repartidor, no la prueba de que llegó a tus manos. Mira si el seguimiento dice dónde o con quién se quedó, busca en los sitios de siempre y date un margen. Si sigue sin aparecer, reclama a la tienda, no al transportista: en España, si compraste a una empresa, el paquete es responsabilidad del vendedor hasta que lo tengas en tus manos.
 
 ## ¿Por qué pone «entregado» si no tengo el paquete?
 
-Porque «entregado» registra dónde lo dejó el repartidor, no que lo tengas tú. Suele ser por una de estas tres cosas:
+Porque «entregado» registra dónde lo dejó el repartidor, no que lo tengas tú. Suele ser por una de estas dos cosas:
 
-- **Lo escanearon antes de tiempo.** Sí, un paquete puede aparecer como entregado antes de llegar. Amazon reconoce en su web francesa que a veces se marca por error como entregado hasta 48 horas antes de la entrega real, y en la española recuerda que algunos transportistas [reparten hasta las 22:00](guide:delivery-times).
 - **Está donde aún no has mirado.** Un vecino, el conserje, tu buzón, una taquilla o un punto de recogida también cuentan como entrega.
 - **Ha acabado donde no debía.** Una dirección mal escrita en el pedido, la puerta equivocada o un robo.
 
@@ -25,7 +24,6 @@ Dónde puede estar, según quién lo lleve:
 | [SEUR](carrier:seur) | En un punto SEUR Pickup: en los envíos a particulares hace un solo intento en casa y luego lo lleva al Pickup más cercano |
 | [GLS](carrier:gls-es) | En el Parcel Shop que elegiste: GLS te dice que vayas a recogerlo cuando el seguimiento ponga «Entregado». Con EconomyParcel, tras un solo intento, en el Parcel Shop más cercano |
 | InPost | En el Locker o el Punto Pack que elegiste al pedir, donde te espera 5 días naturales. Las taquillas solo se abren con el código que recibe el destinatario |
-| Amazon | En un lugar seguro, con alguien de casa, un vecino o el conserje. Amazon.es también te pide buscar un aviso de entrega fallida en el buzón o en la puerta |
 
 ¿El seguimiento nunca llegó a poner «Entregado»? Mira [por qué no se actualiza el seguimiento](guide:tracking-not-updating) o [qué significa cada estado](guide:tracking-statuses).
 
@@ -34,7 +32,7 @@ Dónde puede estar, según quién lo lleve:
 :::steps
 - Mira la prueba | Busca en el seguimiento una firma, un nombre o el punto de recogida, y revisa la dirección de tu pedido.
 - Busca en los sitios de siempre | Pregunta en casa. Mira el buzón, el rellano y el portal, pregunta a los vecinos y al conserje, y busca un aviso de llegada, una nota de paso o un SMS con un código de taquilla.
-- Date un día | Algunos transportistas reparten hasta las 22:00, y a veces el escaneo «Entregado» se adelanta a la entrega real.
+- Date un día | Un vecino o el conserje que lo recogió puede dártelo un poco más tarde.
 - Reclama a la tienda | Por escrito, con el número de pedido, el [número de seguimiento](guide:find-tracking-number) y lo que ya has comprobado. Pide que lo investigue y te lo reenvíe o te devuelva el dinero, y guarda una copia.
 - Abre el caso a tiempo | En una plataforma, antes de que cierre el plazo: 2 días en Vinted (14 si el vendedor es Pro), 48 horas en Wallapop, 30 días en eBay.
 - Después, tu banco o PayPal | Si nadie lo soluciona, pide la devolución del cargo de la tarjeta o abre una disputa en PayPal.
@@ -76,19 +74,19 @@ Te toca a ti, en cambio, cuando:
 
 Ojo con el Paq Ligero de Correos: va al buzón sin firma, así que no habrá firma que enseñar. Y recuerda a quién le toca probar: al vendedor. Si te responde que «el transportista lo da por entregado», pídele la prueba.
 
-## ¿Cuánto tiempo tengo para reclamar en Amazon, Vinted, Wallapop y eBay?
+## ¿Cuánto tiempo tengo para reclamar en Vinted, Wallapop y eBay?
 
 | Plataforma | Qué hacer | Plazo |
 | --- | --- | --- |
-| Amazon, enviado por Amazon | Busca en un lugar seguro, pregunta a vecinos o al conserje y contacta con el transportista. Si no aparece, escribe a atención al cliente cuando hayan pasado 48 horas | 30 días desde la fecha de entrega prevista |
-| Amazon, vendido y enviado por otro vendedor (Garantía de la A a la Z) | Contacta con el vendedor. Si no responde en 48 horas ni lo resuelve, reclama a Amazon, a partir de 3 días desde la última fecha de entrega estimada o la entrega confirmada | Hasta 90 días desde la última fecha de entrega |
 | eBay | Informa de que no ha llegado. El vendedor tiene 3 días laborables; después, pide ayuda a eBay | 30 días naturales desde la fecha de entrega prevista o real |
 | Vinted | «Tengo un problema» en la conversación | 2 días desde el aviso de entrega (14 si el vendedor es Pro) |
 | Wallapop | No pulses «Todo OK». Contacta con Wallapop desde su centro de ayuda, con el código de seguimiento del envío a mano. La disputa no sirve aquí: es para un producto que sí llegó pero no es lo acordado | 48 horas desde «Entregado»: después, Wallapop paga al vendedor automáticamente |
 
-La Garantía de la A a la Z vale aunque el seguimiento ponga «entregado»: los 3 días cuentan desde la entrega confirmada si llega antes que la fecha estimada. En eBay, en cambio, un estado «entregado» con fecha, un número de seguimiento verificable y tu ciudad o código postal bastan como prueba de entrega, y el caso puede cerrarse solo. Desde 550 € de pedido, eBay pide además una confirmación de entrega bajo firma.
+En Amazon, la Garantía de la A a la Z cubre también las compras a vendedores externos: si tienes problemas con el plazo de entrega y no has podido resolverlo con el vendedor, puedes reclamar directamente a Amazon y pedir el reembolso.
 
-Pero la devolución del cargo cierra la vía de la plataforma: si devuelves un cargo, Amazon no te reembolsa con la Garantía de la A a la Z, y eBay puede cerrar tu caso.
+En eBay, un estado «entregado» con fecha, un número de seguimiento verificable y tu ciudad o código postal bastan como prueba de entrega, y el caso puede cerrarse solo. Desde 550 € de pedido, eBay pide además una confirmación de entrega bajo firma.
+
+Pero la devolución del cargo cierra la vía de la plataforma: si devuelves un cargo, eBay puede cerrar tu caso.
 
 ¿Compraste en AliExpress, Temu o Shein? Sus plazos están en [cómo seguir un paquete que viene de China](guide:tracking-from-china). Si lo llevaba Cainiao, mira [qué hacer cuando lo da por entregado](carrier:cainiao).
 
@@ -126,11 +124,8 @@ No. Como cualquier [localizador universal](guide:universal-tracker), [Peek](/) s
 Puedes, aunque ninguna de las normas de arriba lo exige para devolverte el dinero. De hecho, el Centro Europeo del Consumidor en España señala como problema que algunos vendedores pidan denuncias policiales: así trasladan al consumidor la carga de la prueba. PayPal sí puede pedirte una denuncia, entre otros documentos, cuando revisa una reclamación. Otra cosa es que sospeches que la tienda era una estafa: eso no es un conflicto de consumo, y el ministerio lo remite a la denuncia en comisaría.
 
 :::sources
-- [Amazon.es: Encuentra un paquete no recibido que aparece como entregado](https://www.amazon.es/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – lugar seguro, vecinos, conserje, aviso de entrega fallida, 22:00, 30 días
-- [Amazon.es: Entregas con retraso](https://www.amazon.es/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – 48 horas después de la fecha de entrega estimada, después atención al cliente
-- [Amazon.pl: paquete marcado como entregado que no llega (en polaco)](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – 48 horas, 30 días desde la fecha de entrega
-- [Amazon.fr: Rechercher un colis manquant qui apparaît comme livré](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – escaneos hasta 48 horas antes
-- [Amazon.es: ¿Qué es la Garantía de la A a la Z?](https://www.amazon.es/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 días, 48 horas, 90 días, devolución de cargo
+- [About Amazon España: Diez cosas de Amazon que mejoran tu experiencia de compra](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z en las compras a vendedores externos, plazo de entrega, reclamación a Amazon
+- [About Amazon España: Amazon amplía la Garantía de la A a la Z en España](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primero el vendedor, después el reembolso de Amazon
 - [eBay.es: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 días, 3 días laborables, prueba de entrega, cierre automático, 550 €, devolución de cargo
 - [Vinted: No se ha entregado el paquete](https://www.vinted.es/help/726) – 2 días, «Resolver incidencia», no se puede deshacer
 - [Vinted: Política de reembolso](https://www.vinted.es/help/465) – «Tengo un problema», 2 días naturales

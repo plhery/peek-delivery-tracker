@@ -1,19 +1,18 @@
 ---
 title: Paket zugestellt, aber nicht erhalten: was jetzt tun?
-description: Laut Sendungsverfolgung zugestellt, aber kein Paket da? Wo du suchst, wie lange du wartest, wer haftet und welche Fristen Amazon, eBay und Vinted setzen.
+description: Laut Sendungsverfolgung zugestellt, aber kein Paket da? Wo du suchst, wie lange du wartest, wer haftet und welche Fristen eBay und Vinted setzen.
 slug: paket-zugestellt-aber-nicht-erhalten
 picture: Eine geschlossene Haustür, eine Mitteilung mit grünem Haken, auf der Fußmatte der gestrichelte Umriss eines Pakets mit Fragezeichen und ein besorgter Pip.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Die Sendungsverfolgung sagt „zugestellt“, aber bei dir ist kein Paket? Dann ist es noch lange nicht verloren: „Zugestellt“ ist nur ein Scan im Handgerät des Zustellers, kein Beweis, dass das Paket bei dir angekommen ist. Schau nach, an wen oder wohin es laut Sendungsverfolgung ging, such die üblichen Stellen ab und warte ein, zwei Tage. Fehlt es dann immer noch, wende dich an den Händler, nicht an den Paketdienst. Der Händler hat den Paketdienst beauftragt, und hast du bei einem Shop bestellt, trägt er in Deutschland und Österreich das Risiko, bis du das Paket wirklich in den Händen hältst.
 
 ## Paket angeblich zugestellt, aber nicht da: Woran liegt das?
 
-„Zugestellt“ hält nur fest, wo der Zusteller das Paket abgegeben hat, nicht, dass du es hast. Meist steckt eines von drei Dingen dahinter:
+„Zugestellt“ hält nur fest, wo der Zusteller das Paket abgegeben hat, nicht, dass du es hast. Meist steckt eines von zwei Dingen dahinter:
 
-- **Es wurde zu früh gescannt.** Ja, das gibt es: Ein Paket kann als zugestellt erscheinen, bevor es da ist. Amazon schreibt: „Pakete können bereits vor der Ankunft als zugestellt gescannt werden“, und bittet darum, 48 Stunden abzuwarten. Manche Paketdienste liefern laut Amazon bis 22 Uhr.
 - **Es liegt dort, wo du noch nicht nachgesehen hast.** Beim Nachbarn, am Ablageort, im Briefkasten, in der Packstation oder im Paketshop: Das alles zählt als zugestellt. Bei [DHL](carrier:dhl) kann „zugestellt“ sogar bedeuten, dass das Paket an den Absender zurückging und dort zugestellt wurde. Schau im vollständigen Sendungsverlauf nach dem Status „Rücksendung eingeleitet“.
 - **Es ist wirklich weg.** Eine falsche Adresse in der Bestellung, die falsche Haustür oder ein Dieb.
 
@@ -33,7 +32,7 @@ Stand in der Sendungsverfolgung nie „zugestellt“? Lies, warum sich [die Send
 :::steps
 - Nachweis prüfen | Schau, ob die Sendungsverfolgung einen Namen, eine Unterschrift oder ein Foto zeigt, und prüf die Lieferadresse in deiner Bestellung.
 - Die üblichen Stellen absuchen | Frag alle im Haushalt. Schau in Briefkasten, Paketfach oder Milchkasten, bei den Nachbarn, an Haustür, Garage, Mülltonnen und Hintertür, und such nach einer Benachrichtigungskarte (in der Schweiz: Abholungseinladung).
-- Kurz abwarten | Amazon bittet um 48 Stunden. Kennst du den Nachbarn nicht, den DHL nennt, und meldet er sich nach zwei Tagen nicht, wendest du dich an den DHL-Kundenservice.
+- Kurz abwarten | Kennst du den Nachbarn nicht, den DHL nennt, und meldet er sich nach zwei Tagen nicht, wendest du dich an den DHL-Kundenservice.
 - Beim Händler melden | Mit Bestell- und Sendungsnummer und dem, was du schon geprüft hast. Bitte ihn um eine Nachforschung und danach um Ersatz oder dein Geld zurück.
 - Auf der Plattform reklamieren | Bei einem Marktplatz, bevor die Frist abläuft: 2 Tage bei Vinted (bei Pro-Verkäufern 14 Kalendertage), 30 bei eBay und Etsy.
 - Zuletzt über die Zahlung | Hilft niemand, holst du dein Geld über Rechnung, PayPal oder Karte zurück. Achte auf deren Fristen.
@@ -70,24 +69,24 @@ Bei dir liegt das Risiko eher, wenn:
 
 - **„Zugestellt an“.** In der DHL-Sendungsverfolgung klickst du auf „Weitere Informationen zur Sendung anzeigen“ und gibst deine Postleitzahl ein. Dann steht da „Empfänger (orig.)“, also du, ein Familienangehöriger, ein Nachbar oder eine sonstige Person, oder „Briefkasten“.
 - **Ein Name und eine Unterschrift.** DHL hält den Namen des Empfängers elektronisch fest, mit dessen digitaler Unterschrift oder einer PIN, laut AGB aber auch mit der digitalen Unterschrift eines Zustellers. Eine fremde Unterschrift ist also nicht unbedingt gefälscht: Sie kann vom Zusteller stammen. DPD zeigt bei einer Nachbarzustellung gegebenenfalls den Namen.
-- **Ein Foto.** Bei Amazon suchst du unter „Meine Bestellungen“ nach einem Zustellungsfoto. Bei [Planzer](carrier:planzer) und [Quickpac](carrier:quickpac) schaust du im Portal von Planzer Paket unter „Lieferbestätigung“ nach: Je nach Absender ist dort ein Foto dabei.
+- **Ein Foto.** Bei Amazon zeigt „Lieferung verfolgen“ unter „Meine Bestellungen“ bei manchen Lieferungen ein Zustellfoto. Bei [Planzer](carrier:planzer) und [Quickpac](carrier:quickpac) schaust du im Portal von Planzer Paket unter „Lieferbestätigung“ nach: Je nach Absender ist dort ein Foto dabei.
 - **Selten GPS-Daten.** Von den Paketdiensten, deren Seiten wir gelesen haben, macht nur Planzer ein Nachweisfoto mit GPS-Daten.
 
 Bestreitest du die Zustellung, musst du das unter Umständen ausdrücklich bestätigen. Der Schweizerischen Post genügt das im Inland mündlich oder schriftlich, etwa per E-Mail. Bei internationalen Sendungen braucht sie es schriftlich.
 
-## Wie viel Zeit geben dir Amazon, eBay, Etsy und Vinted?
+## Wie viel Zeit geben dir eBay, Etsy und Vinted?
 
 | Plattform | Was du tust | Frist |
 | --- | --- | --- |
-| Amazon, Versand durch Amazon | 48 Stunden warten, dann den Kundenservice kontaktieren | 30 Tage nach der erwarteten Zustellung |
-| Amazon, Verkauf und Versand durch einen Marketplace-Verkäufer (A-bis-z-Garantie) | Den Verkäufer kontaktieren. Antwortet er nicht innerhalb von 48 Stunden oder löst er das Problem nicht, stellst du den Antrag, sobald 3 Tage seit dem letzten voraussichtlichen Lieferdatum oder der bestätigten Lieferung vergangen sind, je nachdem, was früher war | Solange das letzte mögliche Lieferdatum höchstens 90 Tage zurückliegt |
 | eBay (eBay-Käuferschutz) | Melden, dass der Artikel nicht angekommen ist. Der Verkäufer hat 3 Werktage, danach schaltest du eBay ein | 30 Kalendertage nach dem Ca.-Datum oder dem tatsächlichen Lieferdatum |
 | Etsy | Über „Hilfe bei einer Bestellung“ den Verkäufer kontaktieren, dann einen Fall eröffnen, wenn 48 Stunden vergangen sind und der Liefertermin verstrichen ist | 30 Tage ab dem angesetzten Liefertermin |
 | Vinted | Im Chat „Ich habe ein Problem“ | 2 Tage nach der Nachricht „geliefert“, bei Pro-Verkäufern 14 Kalendertage |
 
-Bei Amazon kannst du den Antrag also auch stellen, wenn die Lieferung bestätigt ist. Bei eBay entscheidet der Zustellnachweis: Kann eBay weder eine Zustellung noch eine Abholung feststellen, bekommst du Artikel und Versand erstattet. Als Nachweis zählen eine Sendungsnummer, der Status „Zugestellt“ oder „Zustellversuch“, das Datum und eine Adresse mit deiner Postleitzahl. Eine Unterschrift nennt eBay.de dort nicht.
+Bei Amazon gilt die A-bis-z-Garantie für alles, was du in den Amazon-Stores kaufst, ob Amazon oder ein anderer Verkäufer es verkauft: Kommt die Lieferung nicht pünktlich, ersetzt oder erstattet Amazon den Kauf. Hat ein Marketplace-Verkäufer selbst versendet, wendest du dich zuerst an ihn. Löst er das Problem nicht, machst du den Anspruch bei Amazon geltend, und Amazon entscheidet über die Erstattung.
 
-Aber: Eine Rückbuchung beendet den Weg über die Plattform. Widerrufst du bei Amazon eine Lastschrift oder lässt eine Zahlung zurückbuchen, gibt es keine A-bis-z-Erstattung mehr. eBay kann deinen Fall schließen, und bei Etsy kannst du keinen Fall mehr eröffnen.
+Bei eBay entscheidet der Zustellnachweis: Kann eBay weder eine Zustellung noch eine Abholung feststellen, bekommst du Artikel und Versand erstattet. Als Nachweis zählen eine Sendungsnummer, der Status „Zugestellt“ oder „Zustellversuch“, das Datum und eine Adresse mit deiner Postleitzahl. Eine Unterschrift nennt eBay.de dort nicht.
+
+Aber: Eine Rückbuchung beendet den Weg über die Plattform. eBay kann deinen Fall schließen, und bei Etsy kannst du keinen Fall mehr eröffnen.
 
 Bei AliExpress, Temu oder Shein bestellt? Was dort gilt, steht unter [Paket aus China verfolgen](guide:tracking-from-china). Kam es über Cainiao oder YunExpress, steht auf den Seiten zu [Cainiao](carrier:cainiao) und [YunExpress](carrier:yunexpress), wen du dann fragst.
 
@@ -118,7 +117,7 @@ Oft, als letzter Schritt. Schreib vorher dem Händler, denn Banken wollen sehen,
 - **Kauf auf Rechnung:** Klarna schreibt, du musst eine Bestellung nur bezahlen, wenn du alle Artikel erhalten hast. Lass die Rechnung trotzdem nicht einfach liegen: Wähl bei Klarna „Ein Problem melden“, dann pausiert die Zahlung, bis du dich mit dem Shop geeinigt hast.
 - **PayPal:** Einen Konflikt meldest du innerhalb von 180 Tagen nach der Zahlung, den Antrag auf Käuferschutz stellst du innerhalb von 20 Tagen danach. Weist der Verkäufer nach, dass er an deine Adresse geliefert hat, kann PayPal zu seinen Gunsten entscheiden. Zahlungen über „Freunde und Familie“ sind nicht geschützt.
 - **Kredit- oder Debitkarte:** Frag deine Bank nach einer Rückbuchung (Chargeback). Die Kartenfirmen geben dafür meist bis zu 120 Tage ab der Abbuchung, schreibt das Europäische Verbraucherzentrum Deutschland. Bei Debitkarten geht das nur teilweise, etwa mit Visa oder Mastercard Debit. Bei nicht gelieferter Ware rät es, sich zu melden, sobald absehbar ist, dass nichts mehr kommt. PayPal und Kartenfirma gleichzeitig geht nicht: Meldest du den Fall der Kartenfirma, endet das Verfahren bei PayPal.
-- **Lastschrift:** Eine SEPA-Lastschrift holst du bis zu 8 Wochen nach der Abbuchung ohne Begründung zurück. Bei Amazon verlierst du damit die A-bis-z-Garantie.
+- **Lastschrift:** Eine SEPA-Lastschrift holst du bis zu 8 Wochen nach der Abbuchung ohne Begründung zurück.
 
 ## Kurz beantwortet
 
@@ -151,8 +150,10 @@ Das kannst du, aber keine der Regeln oben verlangt eine Anzeige, bevor du dein G
 - [Bundesnetzagentur: FAQ Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – gebührenfrei, Empfänger, Sonderbedingungen, 10 bis 2.500 €
 - [RTR: Verfahrensrichtlinien Schlichtung Post](https://www2.rtr.at/de/inf/Konsult_Verfahrensrichtlinien_Post/VerfahrensrichtlinienSV_Post.pdf) – schriftliche Beschwerde, ein Jahr, kostenfrei
 - [Ombud-PostCom: Vorgehen](https://www.ombud-postcom.ch/vorgehen-1) – erst beim Anbieter, CHF 20, Verjährung
-- [Amazon.de: Ein fehlendes Paket finden, das laut Sendungsverfolgung zugestellt wurde](https://www.amazon.de/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – vor der Ankunft gescannt, 48 Stunden, 22 Uhr, Zustellungsfoto, 30 Tage
-- [Amazon.de: A-bis-z-Garantie](https://www.amazon.de/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 Tage, 48 Stunden, 90 Tage, Lastschrift und Rückbuchung
+- [About Amazon: Amazon-Lieferung: einfache Bestellung und Verfolgung](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-lieferoptionen-sendung-verfolgen) – Lieferung verfolgen, Zustellfoto bei manchen Lieferungen
+- [About Amazon: 5 praktische Tipps gegen Betrugsmaschen](https://www.aboutamazon.de/news/amazon-prime-und-shopping/5-praktische-tipps-die-dir-helfen-sicher-bei-amazon-einzukaufen-und-betrugsmaschen-zu-verhindern) – A-bis-Z-Garantie für jedes Produkt, pünktliche Lieferung, Ersatz oder Erstattung
+- [About Amazon: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – Marketplace-Verkäufer, rechtzeitige Lieferung, Amazon entscheidet über die Erstattung
+- [About Amazon: A-bis-z-Garantie bei Sach- und Personenschäden](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst der Verkäufer, dann Amazon
 - [eBay.de: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 Kalendertage, 3 Werktage, Zustellnachweis, Rückbelastung
 - [Etsy: Einen Fall eröffnen](https://help.etsy.com/hc/de/articles/5745586898199) – 48 Stunden, 30 Tage, Rückbuchung
 - [Vinted: Die Sendung wurde nicht geliefert](https://www.vinted.de/help/726) – 2 Tage, Problem lösen

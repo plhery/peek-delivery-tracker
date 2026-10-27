@@ -1,10 +1,10 @@
 ---
 title: Tracking says delivered but not received? What to do
-description: Tracking says delivered but there's no parcel? What to check first, how long to wait, who owes you a refund, and the deadlines at Amazon, eBay, Etsy and Vinted.
+description: Tracking says delivered but there's no parcel? What to check first, how long to wait, who owes you a refund, and the deadlines at eBay, Etsy and Vinted.
 slug: parcel-delivered-but-not-received
 picture: A closed door, a notification with a green tick, an empty box outline on the doormat, and a worried Pip.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 If tracking says delivered but you haven't received the parcel, don't assume it's gone: "delivered" is a scan on the driver's handheld, not proof it reached you. Look for a photo or a name in the tracking, search the usual spots and give it a day. If it's still missing, go to the seller, not the carrier: in the UK and Ireland, a parcel bought from a business stays the seller's responsibility until you physically have it.
@@ -13,7 +13,7 @@ If tracking says delivered but you haven't received the parcel, don't assume it'
 
 Because "delivered" records where the driver left the parcel, not that you have it. Three things can explain it:
 
-- **It was scanned early.** So yes, a parcel can say delivered before it arrives. Amazon warns that parcels "may be scanned as delivered before arrival", and [Royal Mail](carrier:royal-mail) mentions "a rare scanning error".
+- **It was scanned by mistake.** It happens: [Royal Mail](carrier:royal-mail) mentions "a rare scanning error".
 - **It's somewhere you haven't looked.** A neighbour, a safe place, a locker or a mailroom all count as delivered.
 - **It went astray.** A wrong address on the order, the wrong door, or a thief.
 
@@ -35,7 +35,7 @@ Tracking never said delivered? See [why tracking stops updating](guide:tracking-
 :::steps
 - Read the proof | Look for a photo, who signed or a neighbour's name, and check the address on your order.
 - Search the usual spots | Ask everyone at home. Check the letterbox, neighbours, porch, bins and mailroom, and look for a locker key or a card.
-- Give it a day | An extra day for Royal Mail, one postal business day for USPS, 48 hours for Amazon.
+- Give it a day | An extra day for Royal Mail, one postal business day for USPS.
 - Report it to the seller | Give the [order and tracking numbers](guide:find-tracking-number) and what you checked. Ask for a trace, then a resend or refund.
 - Open a case in time | On a marketplace, before the window closes: 2 days on Vinted (14 from a Pro seller), 30 on eBay and Etsy.
 - Then your card | If nobody sorts it out, dispute the payment within your card issuer's time limit.
@@ -71,25 +71,25 @@ It's on you instead when:
 
 ## What proof of delivery can you ask for?
 
-- **A photo.** Evri, DPD UK, Amazon and [FedEx](carrier:fedex) show one when the driver took one.
+- **A photo.** Evri, DPD UK and [FedEx](carrier:fedex) show one when the driver took one. In the US, Amazon's Photo-on-Delivery shows parcels left by its delivery partners' drivers.
 - **A name or signature.** Royal Mail asks if you "recognise the name of the person who accepted the item"; Canada Post's tracking shows who signed, if anyone did.
 - **Rarely a GPS pin.** Of the carriers whose pages we read, only [Planzer](carrier:planzer), in Switzerland, says its proof photo is GPS-tagged; USPS speaks of a recorded "delivery location".
 
 If you dispute it, you may be asked to sign a statement: a "Denial of Receipt" at DPD UK, a "declaration of non-receipt" at Royal Mail.
 
-## How long do Amazon, eBay, Etsy and Vinted give you?
+## How long do eBay, Etsy and Vinted give you?
 
 | Platform | What to do | Deadline |
 | --- | --- | --- |
-| Amazon, shipped by Amazon | Wait 48 hours, then contact Amazon | 30 days after the expected delivery date |
-| Amazon, sold and shipped by another seller (A-to-z Guarantee) | Contact the seller; claim if it hasn't solved it within 48 hours | 90 days after the last possible delivery date |
 | eBay | Report it; the seller has 3 business days, then ask eBay to step in | 30 days after the estimated or actual delivery date |
 | Etsy | "Help with order", then open a case 48 hours later, once the estimated delivery date has passed | 30 days after the estimated delivery date |
 | Vinted | "I have an issue" | 2 days after "delivered", or 14 days when the seller is a Vinted Pro seller |
 
-Amazon lets you claim under A-to-z even when tracking shows delivery. On eBay, a delivered scan with a date and your postcode is proof enough below $750 (eBay.com) or £450 (eBay.co.uk), and a case can close itself on it.
+On Amazon, the A-to-z Guarantee covers delivery problems with anything bought in its stores, whether Amazon or another seller sold it: Amazon refunds or replaces it. If another seller shipped it, contact that seller first; if it hasn't replied within 48 hours, Amazon UK says you can claim from Amazon, which decides on the refund.
 
-But a chargeback ends the platform route: Amazon won't refund under A-to-z, eBay may close your case, and Etsy says "you won't be able to open a case".
+On eBay, a delivered scan with a date and your postcode is proof enough below $750 (eBay.com) or £450 (eBay.co.uk), and a case can close itself on it.
+
+But a chargeback ends the platform route: eBay may close your case, and Etsy says "you won't be able to open a case".
 
 Bought on AliExpress, Temu or Shein? Their deadlines are in [tracking a parcel from China](guide:tracking-from-china), and [Cainiao's page](carrier:cainiao) covers AliExpress parcels marked delivered.
 
@@ -144,8 +144,9 @@ You can, though none of the rules above require it for a refund. Citizens Advice
 - [Canada Post: Missing but Delivered](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/missing-package-showing-as-delivered.page) – lockers, sender paid
 - [Canada Post: Claims](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/missing-packages.page) – 90 days
 - [Australia Post: Lost or late items](https://auspost.com.au/personal/receiving/parcel-deliveries/lost-late-items) – enquiries
-- [Amazon: Missing but delivered](https://www.amazon.com/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – 48 hours, 30 days
-- [Amazon: A-to-z Guarantee](https://www.amazon.com/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 48 hours, 90 days, chargebacks
+- [About Amazon UK: 7 tips to avoid scams impersonating Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-avoid-scams-impersonating-amazon-this-holiday-season) – A-to-z Guarantee on every product, delivery problems, refund or replacement
+- [About Amazon UK: How to contact a third-party seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – seller first, 48 hours, claim from Amazon
+- [About Amazon: 10 tips to protect your Amazon packages](https://www.aboutamazon.com/news/operations/amazon-porch-pirate-prevention-tips) – Photo-on-Delivery in the US
 - [eBay.com: Money Back Guarantee](https://www.ebay.com/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – $750, chargebacks
 - [eBay.co.uk: Money Back Guarantee](https://www.ebay.co.uk/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – £450, 30 days
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 hours, 30 days, chargebacks

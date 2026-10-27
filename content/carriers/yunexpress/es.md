@@ -107,8 +107,8 @@ No publica ninguna, ni en Madrid ni en Barcelona ni en otra ciudad. Según su hi
 
 :::sources
 - [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – número YT, solo en inglés, Feedback
-- [YunExpress: Tracking Results, Yuntrack](https://www.yuntrack.com/parcelTracking?id=YT1234567890123456) – pestañas, Last Mile Tracking, Not Found (número inventado)
-- [YunExpress: código de la página de Yuntrack](https://www.yuntrack.com/static/js/app.239f901b375358352522.js) – Alert, barra de progreso, prueba de entrega
+- [YunExpress: código de la página de resultados de Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – pestañas, Last Mile Tracking, Not Found
+- [YunExpress: código de la página de Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, barra de progreso, prueba de entrega
 - [YunExpress: the Best Logistics Service Provider](https://www.yunexpress.com/) – empresa, correo y horario, inglés y chino, puerta a puerta, redes de transportistas
 - [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, línea a España desde 2017, sede europea, Amazon
 - [YunExpress: Zongteng Group Announces Its Acquisition of the First Boeing 777F](https://www.yunexpress.com/newsroom/detail/6) – YunExpress, marca del grupo Zongteng

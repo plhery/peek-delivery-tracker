@@ -107,8 +107,8 @@ Non ne indica: la sede è a Shenzhen, in Cina, e per l'Italia YunExpress non pub
 
 :::sources
 - [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – numero YT, solo inglese, Feedback
-- [YunExpress: Tracking Results, Yuntrack](https://www.yuntrack.com/parcelTracking?id=YT1234567890123456) – schede, Last Mile Tracking, Not Found (numero inventato)
-- [YunExpress: codice della pagina di Yuntrack](https://www.yuntrack.com/static/js/app.239f901b375358352522.js) – Alert, barra di avanzamento, Additional Notes, prova di consegna
+- [YunExpress: codice della pagina dei risultati di Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – schede, Last Mile Tracking, Not Found
+- [YunExpress: codice della pagina di Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, barra di avanzamento, Additional Notes, prova di consegna
 - [YunExpress: the Best Logistics Service Provider](https://www.yunexpress.com/) – azienda, sede, e-mail e orari, inglese e cinese, reti di corrieri
 - [YunExpress: About Us](https://www.yunexpress.com/about-us) – linee per Italia e Svizzera, sede europea nel 2021
 - [YunExpress: Privacy Policy](https://www.yunexpress.com/privacy-policy) – il venditore come cliente

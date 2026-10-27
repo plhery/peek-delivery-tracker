@@ -105,8 +105,8 @@ Ja, wenn der Händler eine der Abhollinien von YunExpress gebucht hat: Dann zeig
 
 :::sources
 - [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – YT-Nummer, nur Englisch, Feedback
-- [YunExpress: Tracking Results, Yuntrack](https://www.yuntrack.com/parcelTracking?id=YT1234567890123456) – Reiter, Last Mile Tracking, Not Found (erfundene Nummer)
-- [YunExpress: Seitencode von Yuntrack](https://www.yuntrack.com/static/js/app.239f901b375358352522.js) – Alert, Fortschrittsleiste, Additional Notes, Zustellnachweis
+- [YunExpress: Code der Yuntrack-Ergebnisseite](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – Reiter, Last Mile Tracking, Not Found
+- [YunExpress: Seitencode von Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, Fortschrittsleiste, Additional Notes, Zustellnachweis
 - [YunExpress: the Best Logistics Service Provider](https://www.yunexpress.com/) – Firma, E-Mail und Zeiten, Englisch und Chinesisch, Partnernetze
 - [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, 220+ Länder, Linien nach Deutschland, Österreich und in die Schweiz, Amazon
 - [YunExpress: Privacy Policy](https://www.yunexpress.com/privacy-policy) – Händler als Vertragskunde

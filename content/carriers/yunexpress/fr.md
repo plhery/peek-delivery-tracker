@@ -103,8 +103,8 @@ Oui, si le vendeur a choisi une ligne de retrait de YunExpress : le suivi affich
 
 :::sources
 - [YunExpress : Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – numéro YT, anglais uniquement, Feedback
-- [YunExpress : Tracking Results, Yuntrack](https://www.yuntrack.com/parcelTracking?id=YT1234567890123456) – onglets, Last Mile Tracking, Last Event, Not Found (numéro inventé)
-- [YunExpress : code de la page Yuntrack](https://www.yuntrack.com/static/js/app.239f901b375358352522.js) – Alert, Returned, barre de progression, preuve de livraison
+- [YunExpress : code de la page de résultats Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – onglets, Last Mile Tracking, Last Event, Not Found
+- [YunExpress : code de la page Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, Returned, barre de progression, preuve de livraison
 - [YunExpress : the Best Logistics Service Provider](https://www.yunexpress.com/) – société, e-mail, horaires, langues
 - [YunExpress : About Us](https://www.yunexpress.com/about-us) – 2014, lignes France et Suisse, Amazon, Fnac
 - [YunExpress : Privacy Policy](https://www.yunexpress.com/privacy-policy) – le vendeur, client sous contrat

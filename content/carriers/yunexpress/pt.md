@@ -107,8 +107,8 @@ Não publica nenhuma morada em Portugal: a empresa está no distrito de Longgang
 
 :::sources
 - [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – número YT, só em inglês, Feedback
-- [YunExpress: Tracking Results, Yuntrack](https://www.yuntrack.com/parcelTracking?id=YT1234567890123456) – separadores, Last Mile Tracking, Not Found (número inventado)
-- [YunExpress: código da página do Yuntrack](https://www.yuntrack.com/static/js/app.239f901b375358352522.js) – Alert, barra de progresso, prova de entrega
+- [YunExpress: código da página de resultados do Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – separadores, Last Mile Tracking, Not Found
+- [YunExpress: código da página do Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, barra de progresso, prova de entrega
 - [YunExpress: the Best Logistics Service Provider](https://www.yunexpress.com/) – empresa, morada, e-mail e horário, EN/CN, redes de transportadoras
 - [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, Amazon, sede europeia em 2021
 - [YunExpress: Privacy Policy](https://www.yunexpress.com/privacy-policy) – a loja como cliente

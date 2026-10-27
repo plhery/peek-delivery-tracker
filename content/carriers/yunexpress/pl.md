@@ -101,8 +101,8 @@ DHL przejmuje ostatni odcinek: linia `Shipment in transit to DHL` znaczy, że pa
 
 :::sources
 - [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – numer YT, tylko po angielsku (także w polskiej przeglądarce), Feedback
-- [YunExpress: Tracking Results, Yuntrack](https://www.yuntrack.com/parcelTracking?id=YT1234567890123456) – zakładki, Last Mile Tracking, Not Found (wymyślony numer)
-- [YunExpress: kod strony Yuntrack](https://www.yuntrack.com/static/js/app.239f901b375358352522.js) – Alert, pasek postępu, Additional Notes, potwierdzenie doręczenia
+- [YunExpress: kod strony wyników Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – zakładki, Last Mile Tracking, Not Found
+- [YunExpress: kod strony Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, pasek postępu, Additional Notes, potwierdzenie doręczenia
 - [YunExpress: the Best Logistics Service Provider](https://www.yunexpress.com/) – firma, e-mail i godziny, angielski i chiński, sieci przewoźników
 - [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, ponad 220 krajów, linia do Polski od 2018, Allegro od 2020, Amazon od 2017
 - [YunExpress: Privacy Policy](https://www.yunexpress.com/privacy-policy) – sprzedawca jako klient z umową

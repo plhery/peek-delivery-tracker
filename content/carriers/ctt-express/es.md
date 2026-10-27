@@ -21,6 +21,8 @@ El localizador de CTT Express pide «el código de envío», una ristra larga de
 
 En la casilla de arriba puedes escribir el número con o sin espacios. Un número de 22 cifras sin `00` en las posiciones 1-2 y 7-8 no encaja con CTT Express: el catálogo de Peek lo atribuye a TIPSA o a otros transportistas, así que busca el nombre del transportista en el correo de la tienda.
 
+**¿CTT o CTT Express?** No son lo mismo. CTT (Correios de Portugal) es el correo portugués, que presta el servicio postal universal en Portugal; CTT Express es la filial de paquetería urgente del Grupo CTT en España. Si buscabas el «rastreio» de CTT o tu número acaba en `PT`, síguelo en [ctt.pt](https://www.ctt.pt/particulares/index), en «Seguir objeto».
+
 ¿No tienes ningún número? Pídeselo a la tienda o lee [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 
 ## Estados de CTT Express: qué significa cada uno
@@ -42,7 +44,7 @@ El seguimiento de CTT Express está solo en español. La página muestra cuatro 
 | `En devolución` | Vuelve a la dirección del remitente. |
 | `Devuelto a remitente` | Ya está de vuelta con el remitente. |
 
-`Pendiente de recepción en CTT Express` es el que más preocupa, y solo significa que el envío aún no ha entrado en la red. Si sigue así más de 24 horas después de pedir la recogida (en envíos desde España o Portugal), CTT Express dice que uses la opción «Mi envío sigue en pendiente de entrada en red» de su formulario de contacto. En compras a marketplaces internacionales, la admisión en el país de origen y el viaje hasta la península tardan más.
+`Pendiente de recepción en CTT Express` es el que más preocupa, y solo significa que el envío aún no ha entrado en la red. Si sigue así más de 24 horas después de pedir la recogida (en envíos desde España o Portugal), CTT Express te pide que elijas «Mi envío sigue en “Pendiente de recepción en CTT Express”» en su formulario de contacto. En compras a marketplaces internacionales, la admisión en el país de origen y el viaje hasta la península tardan más.
 
 Bajo una incidencia, el motivo te dice qué pasó: `No pudimos contactar contigo`, `Dirección incorrecta`, `Se necesita concertar cita previa` o `Envío demorado por festivo local`, por ejemplo. Las preguntas frecuentes de CTT Express avisan de que una «Incidencia de destinatario no contesta/ausente» puede salir aunque estuvieras en casa, si el repartidor no llegó hasta tu puerta; el siguiente intento es al día laborable siguiente.
 
@@ -67,13 +69,13 @@ Si quieres el reembolso o un nuevo envío, habla con la tienda que te lo vendió
 
 Las páginas de CTT Express no dan un plazo para reclamar una pérdida o un retraso, ni dicen si reclama el destinatario o el remitente. Para la pérdida o el robo, el remitente puede contratar una cobertura adicional de hasta 2.000 €.
 
-## CTT Express teléfono y atención al cliente
+## CTT Express teléfono, correo electrónico y atención al cliente
 
-Así lo indicaban las páginas de CTT Express el 11 de octubre de 2026:
+Así lo indicaban las páginas de CTT Express el 27 de octubre de 2026:
 
 - **Teléfono gratuito:** 900 841 352, de lunes a viernes de 9:00 a 19:00, salvo festivos.
 - **Otro teléfono:** 916 602 200, con tarifa normal, en el mismo horario.
-- **Correo:** ccaweb@cttexpress.com.
+- **Correo electrónico:** ccaweb@cttexpress.com.
 - **Formulario:** en la [página de contacto](https://www.cttexpress.com/contacto-atc), con opciones como un envío que no entra en la red o un paquete que pone entregado y no tienes.
 
 La atención al cliente está centralizada en Madrid, solo por teléfono o correo, sin atención presencial, y suele responder en 24 horas laborables. En sus páginas no aparece chat ni WhatsApp.
@@ -90,11 +92,11 @@ Peek consulta el seguimiento de CTT Express cada 10 minutos de día, cada 2 cuan
 
 ### ¿Cuánto tarda CTT Express en entregar un paquete?
 
-CTT Express anuncia entregas en menos de 24 horas en España y Portugal. Las compras en marketplaces internacionales tardan más, porque la admisión en el país de origen y el viaje hasta la península llevan su tiempo.
+CTT Express anuncia entregas en menos de 24 horas en España y Portugal, pero el plazo depende del servicio que contrató el remitente. Con CTT 24h, su servicio urgente, la entrega es en 24 horas en la península; con CTT 48h, en un plazo de 48 horas, también en Baleares, Canarias, Ceuta, Melilla, Madeira y Azores. En los servicios para particulares, el plazo cuenta desde la recogida: con CTT e24h, la entrega está prevista el día laborable siguiente al de la recogida, y con CTT 10h o CTT 14h, antes de las 10:00 o de las 14:00 de ese día. Las compras en marketplaces internacionales tardan más, porque la admisión en el país de origen y el viaje hasta la península llevan su tiempo.
 
 ### ¿Qué es CTT Express?
 
-Es la filial española de paquetería urgente del grupo portugués CTT, que cambió el nombre de Tourline Express por CTT Express. Reparte en la península, Baleares, Canarias, Ceuta, Melilla y Portugal.
+Es la filial española de paquetería urgente del grupo portugués CTT. Tourline Express era la marca con la que el Grupo CTT operaba en España hasta que, en 2019, la cambió por CTT Express; hoy los envíos se siguen en el [localizador de CTT Express](https://www.cttexpress.com/localizador-de-envios/). Reparte en la península, Baleares, Canarias, Ceuta, Melilla y Portugal. En mayo de 2026, CTT Express y DHL eCommerce firmaron una alianza, y ahora la marca aparece como «CTT Express together with DHL». No es una fusión: en España, CTT Express se ocupará de los envíos de empresas a particulares (B2C) y DHL, de los envíos entre empresas (B2B) y los transfronterizos.
 
 ### ¿CTT Express entrega los sábados?
 
@@ -102,14 +104,25 @@ Solo en campaña de Navidad. El resto del año reparte de lunes a viernes.
 
 ### ¿Cuál es el teléfono gratuito de CTT Express?
 
-El 900 841 352, de lunes a viernes de 9:00 a 19:00. El 916 602 200 tiene tarifa normal.
+El 900 841 352, de lunes a viernes de 9:00 a 19:00. El 916 602 200 tiene tarifa normal. Si prefieres escribir, el correo electrónico de atención al cliente es ccaweb@cttexpress.com.
+
+### ¿Qué significa «pendiente de entrada en red» en CTT Express?
+
+Así llaman las preguntas frecuentes de CTT Express a un envío que sigue en `Pendiente de recepción en CTT Express`, que es el estado que verás en el seguimiento: el remitente lo ha grabado, pero el paquete aún no ha entrado en la red. Si sale de España o Portugal y han pasado más de 24 horas desde que se pidió la recogida, CTT Express te pide que rellenes su [formulario de contacto](https://www.cttexpress.com/contacto-atc); allí la opción se llama «Mi envío sigue en “Pendiente de recepción en CTT Express”». Si viene del extranjero, verás `En tránsito internacional. Pendiente de recepción en CTT Express` hasta que llegue a CTT Express.
 
 :::sources
 - [CTT Express: Localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) – localizador, cambios de entrega
 - [CTT Express: Seguimiento de envíos](https://shipping-tracking.production.cloud2.cttexpress.com/) – seguimiento solo en español, pasos, textos de escaneo, motivos de incidencia
 - [CTT Express: Empresa de Paquetería y Mensajería](https://www.cttexpress.com/) – cobertura, entregas en menos de 24 h, puntos Collectt, ejemplo de número
-- [CTT Express: Quiénes somos](https://www.cttexpress.com/nosotros/quienes-somos) – grupo CTT, Tourline Express
-- [CTT Express: FAQs sobre los estados de envío](https://www.cttexpress.com/preguntas-frecuentes/estados-envio) – estados, entregado pero no recibido, daños en 7 días
+- [CTT Express: Quiénes somos](https://www.cttexpress.com/nosotros/quienes-somos) – grupo CTT, operador postal de Portugal, cambio de Tourline Express a CTT Express en 2019
+- [CTT Express: Dos grandes redes ibéricas unen fuerzas](https://www.cttexpress.com/nosotros/ctt-express-y-dhl-unen-fuerzas) – marca «CTT Express together with DHL»
+- [CTT Express: CTT Expresso y DHL eCommerce sellan un hito en su alianza](https://www.cttexpress.com/zona-de-prensa/notas-de-prensa/ctt-expresso-y-dhl-ecommerce-sellan-un-hito-en-su-alianza-para-construir-la-red-de-paqueteria-mas-completa-de-la-peninsula-iberica) – alianza firmada el 12 de mayo de 2026, sin fusión; en España, B2C con CTT Express y B2B y transfronterizos con DHL
+- [CTT Express: Envíos urgentes en 24 horas](https://www.cttexpress.com/envios/24-h) – servicio CTT 24h en la península
+- [CTT Express: Envíos en 48 horas](https://www.cttexpress.com/envios/48-h) – CTT 48h, destinos insulares
+- [CTT Express: Envíos nacionales](https://www.cttexpress.com/servicios/particulares/envios-nacionales) – CTT e24h y entregas antes de las 10:00 o las 14:00 del día laborable siguiente a la recogida
+- [CTT: Particulares](https://www.ctt.pt/particulares/index) – «Seguir objeto»
+- [CTT: Serviço Postal Universal](https://www.ctt.pt/home/servico-postal-universal/condicoes-gerais-de-acesso-e-utilizacao-do-servico-universal) – CTT, Correios de Portugal, concesionaria del servicio postal universal en Portugal
+- [CTT Express: FAQs sobre los estados de envío](https://www.cttexpress.com/preguntas-frecuentes/estados-envio) – estados, «pendiente de entrada en red» y formulario tras 24 horas, entregado pero no recibido, daños en 7 días
 - [CTT Express: Preguntas frecuentes de incidencias](https://www.cttexpress.com/preguntas-frecuentes/incidencias) – dos intentos, retrasos, expedientes
 - [CTT Express: Horarios de reparto](https://www.cttexpress.com/preguntas-frecuentes/horarios) – horario, sábados en Navidad, llamadas del repartidor
 - [CTT Express: Cambiar dirección de entrega](https://www.cttexpress.com/cambiar-direccion-entrega/) – dónde está el número, condiciones del cambio
@@ -119,7 +132,7 @@ El 900 841 352, de lunes a viernes de 9:00 a 19:00. El 916 602 200 tiene tarifa 
 - [CTT Express: Qué significa «aceptado por la última milla»](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – significado de los estados
 - [CTT Express: Nota de prensa sobre envíos](https://www.cttexpress.com/zona-de-prensa/notas-de-prensa/como-localizo-mi-paquete-con-ctt-express-y-otras-preguntas-frecuentes-sobre-envios) – «en tránsito», compras en marketplaces internacionales
 - [CTT Express: ¿Cómo contactar con CTT Express?](https://www.cttexpress.com/preguntas-frecuentes/como-contactar-con-ctt) – teléfonos, horario, correo, Madrid, aviso sobre los 807
-- [CTT Express: Contacto y Atención al Cliente](https://www.cttexpress.com/contacto-atc) – formulario de contacto
+- [CTT Express: Contacto y Atención al Cliente](https://www.cttexpress.com/contacto-atc) – formulario de contacto y sus opciones
 - [CTT Express: ¿Qué es Phishing y cómo evitar sufrirlo?](https://www.cttexpress.com/blog/actualidad/como-evitar-phishing) – SMS y correos falsos
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek
 :::

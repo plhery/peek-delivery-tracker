@@ -3,7 +3,7 @@ title: Purolator tracking: PIN, statuses and missed deliveries
 description: Track a Purolator parcel: what the PIN looks like, what Purolator's statuses mean, pickup after a missed delivery, customs from the US and who to call.
 slug: purolator-tracking
 published: 2026-10-15
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Purolator is a Canadian courier for parcels and freight, majority owned by Canada Post. To track a parcel, enter its PIN in Purolator's tracker at [purolator.com](https://www.purolator.com/en/shipping/tracker) or paste it in the box above. The PIN comes from the sender: for an online order, it's in the shop's shipping confirmation.
@@ -81,7 +81,7 @@ Got a text about a delivery attempt with a link? Don't tap it: type the PIN into
 
 Peek shows the status, each scan with its town, province and country on a map, the expected delivery day, the destination country and, for single-parcel shipments, the weight. Statuses stay in Purolator's English, exactly as written. The recipient's name is dropped, and Peek doesn't show which counter holds a parcel (only the `Available for pickup…` wording) or let you change a delivery.
 
-Purolator's scans often come without a time zone. Peek then reads them on the clock of the scan's town and still lists Purolator's own history. Purolator's website also sometimes answers Peek with a check instead of data; then tracking services fill in. You can be notified at every scan, at important steps or on delivery day only.
+Scan times show in your device's time zone. On cross-border shipments, Purolator sends them without a time zone: Peek then reads them on the clock of the scan's town and still lists Purolator's own history. Purolator's website also sometimes answers Peek with a check instead of data; then tracking services fill in. You can be notified at every scan, at important steps or on delivery day only.
 
 ## Questions about Purolator tracking
 

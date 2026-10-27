@@ -50,23 +50,25 @@ Le site de suivi de Vinted Go existe en sept langues, dont le français ; en Bel
 
 La page de suivi prévoit aussi d'autres libellés, comme `En cours de livraison`, `Colis impossible à livrer` ou `Colis perdu`. Tu ne les vois que si ton colis passe par cette étape.
 
-## Vinted Go point relais et locker : retirer ton colis
+## Consigne Vinted Go et point relais : retirer ou déposer un colis
 
-**Où il arrive.** Vinted Go livre dans des consignes (les lockers), des points relais et chez des voisins relais. Sa page d'accueil cite la France, la Belgique, les Pays-Bas, l'Espagne, le Portugal et la Finlande. Vinted ne propose ce mode d'envoi que si une consigne Vinted Go se trouve près de l'acheteur et du vendeur. Si le point choisi est fermé ou plein, Vinted Go peut déposer le colis dans un autre point proche et te dit où le trouver quand il est prêt.
+**Où il arrive.** Vinted Go livre dans des consignes (les lockers), des points relais et chez des voisins relais. Sa page d'accueil cite la France, la Belgique, les Pays-Bas, l'Espagne, le Portugal et la Finlande, et plus de 25 000 relais dans plus de 4 000 villes. Sur Vinted, il relie la France aux Pays-Bas, à la Belgique, à l'Italie, à l'Espagne, au Portugal et à l'Allemagne. Pas de Vinted Go au Luxembourg : Vinted y propose [Mondial Relay](carrier:mondial-relay), DPD, [Shop2Shop by Chronopost](carrier:chronopost) et [DHL Express](carrier:dhl-express). Vinted ne propose ce mode d'envoi que si une consigne Vinted Go se trouve près de l'acheteur et du vendeur. Si le point choisi est fermé ou plein, Vinted Go peut déposer le colis dans un autre point proche et te dit où le trouver quand il est prêt.
 
 **Quand il est là.** Vinted Go t'envoie un e-mail quand le colis est prêt ; Vinted met la commande à jour et tu peux aussi recevoir un SMS. Ses conditions générales prévoient un rappel 3 jours après l'arrivée du colis au point.
 
-**Le retirer.** À une consigne, scanne ou saisis ton code de retrait pour ouvrir le bon casier. En point relais ou chez un voisin relais, présente ton code de retrait ou ta pièce d'identité. Les horaires de chaque point sont sur la carte de Vinted Go.
+**Ouvrir la consigne.** Scanne ou saisis ton code de retrait : le bon casier s'ouvre. Code refusé ? Vérifie dans tes e-mails, tes SMS et la commande sur Vinted que tu es à la bonne consigne, avec le bon code. Porte refermée avant d'avoir pris le colis : appelle le support de Vinted Go (numéro derrière le bouton « ? »). En point relais ou chez un voisin relais, présente ton code de retrait ou ta pièce d'identité. Les horaires de chaque point sont sur la carte de Vinted Go.
 
-**Combien de temps il attend.** 7 jours calendaires. Vinted Go ne peut pas prolonger ce délai ni arrêter le colis une fois qu'il repart. Un colis non retiré retourne au point de dépôt du vendeur ; Vinted annule alors la commande et te rembourse.
+**Combien de temps il attend.** 7 jours calendaires, en consigne comme en point relais ; le suivi Vinted Go affiche la date limite. Vinted Go ne peut pas prolonger ce délai ni arrêter le colis une fois qu'il repart. Un colis non retiré retourne au point de dépôt du vendeur ; Vinted annule alors la commande et te rembourse.
 
 **Livraison à domicile.** En France, dans certains relais, un coursier Uber peut livrer le colis chez toi à l'heure convenue, via un lien de réservation que Vinted t'envoie par message. Là où la livraison à domicile existe, les conditions de Vinted Go prévoient une seule tentative avec un créneau réservé, deux sans créneau.
 
 **Délai.** Les conditions générales de Vinted Go visent 3 à 6 jours ouvrés entre le dépôt et l'arrivée au point.
 
+**Déposer en consigne (vendeur).** Dans les 5 jours après la vente, appuie sur « Déposer », scanne le QR code du bordereau (sur le colis, ou sur ton téléphone : la consigne l'imprime et tu le colles) ou saisis le numéro de suivi, puis choisis un casier. Au plus 38 × 30 × 18 cm et 15 kg. Vinted Go confirme le dépôt par e-mail sous 48 heures.
+
 ## Suivi Vinted Go bloqué, colis pas reçu ou perdu
 
-C'est Vinted qu'il faut contacter, pas Vinted Go : le service client de Vinted traite les colis perdus ou abîmés et demande au transporteur d'enquêter si besoin.
+Pour une commande Vinted, c'est Vinted qu'il faut contacter, pas Vinted Go : le service client de Vinted traite les colis perdus ou abîmés et demande au transporteur d'enquêter si besoin.
 
 **Le suivi ne bouge plus.** Selon Vinted Go, il est normal que le suivi reste quelques jours sans mise à jour pendant l'acheminement. Plus d'explications dans [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
 
@@ -80,12 +82,13 @@ C'est Vinted qu'il faut contacter, pas Vinted Go : le service client de Vinted t
 
 ## Vinted Go contact : téléphone et service client
 
-Relevé le 25 octobre 2026 : Vinted Go ne donne aux acheteurs ni adresse e-mail ni formulaire, et son téléphone sert à l'aide aux consignes.
+Relevé le 25 octobre 2026 : Vinted Go ne donne aux acheteurs Vinted ni adresse e-mail ni formulaire, et son téléphone sert à l'aide aux consignes.
 
 - **Problème de commande** (retard, perte, colis abîmé, mauvais article) : l'équipe support de Vinted, en te connectant à ton compte et en cliquant sur « J'ai un problème » dans la conversation.
 - **Problème à une consigne**, en France, en Belgique, aux Pays-Bas et en Espagne : appuie sur le bouton « ? » de l'écran d'accueil de la consigne pour voir le numéro du support téléphonique de Vinted Go. Les horaires du support s'affichent sur le même écran. Pour la Belgique, la FAQ de Vinted Go donne aussi le numéro : +31 20 793 2587, en anglais et en français.
 - **Problème à une consigne au Portugal** : appuie sur « Obter ajuda » et scanne avec ton téléphone le code QR affiché à l'écran. Un chat s'ouvre avec le support de Vinted Go, tous les jours de 7 h à 22 h (heure locale).
 - **L'écran de la consigne ne marche pas** au moment du retrait : Vinted conseille de revenir le lendemain ou le surlendemain.
+- **Colis envoyé hors de Vinted avec Routes by Vinted Go** (sans compte) : l'expéditeur reçoit le lien de suivi avec la confirmation d'envoi, et lui seul peut faire une réclamation, via le formulaire de l'aide Routes. Selon le trajet choisi, le colis voyage avec Vinted Go ou un autre transporteur, comme [Mondial Relay](carrier:mondial-relay) ou [Relais Colis](carrier:relais-colis).
 
 Vinted prévient que l'hameçonnage passe aussi par SMS. Transfère les e-mails d'hameçonnage à phishing@vinted.com.
 
@@ -120,20 +123,23 @@ Repasse pendant ses heures d'ouverture, que tu trouves sur la carte de Vinted Go
 Le suivi peut mettre jusqu'à 48 h à apparaître après l'envoi, et un numéro mal saisi affiche un message d'erreur. Et Vinted Go ne donne plus le suivi d'un colis six mois après la création de son bordereau.
 
 :::sources
-- [Vinted Go : Foire aux questions](https://vintedgo.com/fr/faq?country=fr&region=europe) – code de retrait, 7 jours, autre point proche, 25 jours ouvrés, 2 jours pour signaler, suivi sans mise à jour, téléphone de la consigne
+- [Vinted Go : Foire aux questions](https://vintedgo.com/fr/faq?country=fr&region=europe) – code de retrait, code refusé, 7 jours, autre point proche, 25 jours ouvrés, 2 jours pour signaler, suivi sans mise à jour, téléphone de la consigne, dépôt, dimensions, e-mail de dépôt
 - [Vinted Go : Foire aux questions (Belgique)](https://vintedgo.com/fr/faq?country=be&region=europe) – téléphone des consignes en Belgique
 - [Vinted Go : Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – point relais fermé, 7 jours pour retirer
 - [Vinted Go : Conditions générales](https://vintedgo.com/fr/terms-and-conditions?country=fr&region=europe) – société, types de points, rappel après 3 jours, 7 jours calendaires, tentatives à domicile, 3 à 6 jours ouvrés, colis abîmé en consigne, réclamations via Vinted
-- [Vinted Go : Suivre ton colis](https://vintedgo.com/fr/tracking) – formulaire de suivi, langues du site, libellés des statuts, colis introuvable
-- [Vinted Go : Shipping service, trusted by millions of Vinted users](https://vintedgo.com/en?country=fr&region=europe) – pays desservis
+- [Vinted Go : Suivre ton colis](https://vintedgo.com/fr/tracking) – formulaire de suivi, langues du site, libellés des statuts, date limite de retrait, colis introuvable
+- [Vinted Go : Service de livraison, approuvé par des millions d'utilisateurs de Vinted](https://vintedgo.com/fr?country=fr&region=europe) – pays desservis, taille du réseau, Routes
 - [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – numéro dans la conversation, 48 h, 25 jours ouvrés, livré mais pas reçu, Bien reçu
-- [Vinted : Envoi avec Vinted Go](https://www.vinted.fr/help/1110) – trajets, livraison à domicile avec Uber Direct, disponibilité
+- [Vinted : Envoi avec Vinted Go](https://www.vinted.fr/help/1110) – trajets, pays reliés depuis la France, livraison à domicile avec Uber Direct, disponibilité, bouton « Déposer »
 - [Vinted : Récupérer un colis](https://www.vinted.fr/help/1601) – colis non retiré, commande annulée et remboursée
 - [Vinted : Hulp met een Vinted Go locker](https://www.vinted.nl/help/1109) – bouton « ? » aux Pays-Bas
-- [Vinted : Comment utiliser les consignes Vinted Go ?](https://www.vinted.fr/help/1109) – support téléphonique via le bouton « ? », écran en panne, 2 et 14 jours
+- [Vinted : Comment utiliser les consignes Vinted Go ?](https://www.vinted.fr/help/1109) – support téléphonique via le bouton « ? », porte refermée, 5 jours pour déposer, écran en panne, 2 et 14 jours
 - [Vinted Belgique : Comment utiliser les consignes Vinted Go ?](https://www.vinted.be/help/1109) – même support en Belgique
 - [Vinted Espagne : Ayuda en las taquillas de Vinted Go](https://www.vinted.es/help/1109) – même support en Espagne
 - [Vinted Portugal : Envio Vinted Go](https://www.vinted.pt/help/1110) – chat de la consigne au Portugal, de 7 h à 22 h
+- [Vinted Luxembourg : Quels sont les différents modes d'envoi sur Vinted ?](https://www.vinted.lu/help/234) – transporteurs au Luxembourg
+- [Routes by Vinted Go : Expédiez votre colis avec Routes](https://routes.vintedgo.com/fr) – envoi sans compte
+- [Routes by Vinted Go : Aide](https://routes.vintedgo.com/fr/help) – suivi, réclamation, transporteurs
 - [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/657) – colis absent du point, Vinted interroge le transporteur
 - [Vinted : Comment repérer et signaler les tentatives d'hameçonnage et d'escroquerie ?](https://www.vinted.fr/help/628) – hameçonnage par SMS, phishing@vinted.com
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit chez Vinted Go, limite de six mois

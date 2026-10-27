@@ -44,11 +44,10 @@ Zamawiasz z AliExpress albo innego chińskiego sklepu? Zajrzyj do poradnika o [�
 - **[Poczta Polska](carrier:poczta-polska)**: oprócz papierowego awiza dostaniesz SMS albo e-maila z terminem odbioru i adresem placówki, jeśli nadawca podał Twój telefon lub e-mail. Wtedy przy odbiorze wystarczy podać „numer przesyłki wskazany w SMS-ie czy w mailu”.
 - **Poczta Polska, eINFO:awizo**: tę bezpłatną usługę zamówisz przez profil zaufany albo w placówce, która doręcza Ci przesyłki. Od następnego dnia powiadomienie o awizowanej przesyłce przyjdzie SMS-em albo e-mailem, z jej numerem, terminem odbioru i adresem placówki. Wyjątek: zawiadomienia o pismach w postępowaniach karnych, cywilnych, administracyjnych czy podatkowych nadal przychodzą na papierze.
 - **GLS**: numer Track-ID z awiza działa w śledzeniu GLS.
-- **[FedEx](carrier:fedex)**: wyszukiwarka przyjmuje „numery etykiet awizo”.
 
 ## Jak śledzić paczkę bez numeru przesyłki?
 
-Są trzy sposoby i żaden nie opiera się na nazwisku ani adresie.
+Są dwa sposoby i żaden nie opiera się na nazwisku ani adresie.
 
 ### Zapytaj nadawcę
 
@@ -71,13 +70,9 @@ Niektórzy przewoźnicy sami pokazują w aplikacji albo na koncie paczki, które
 
 Paczki nie ma na liście? Jeśli nadawca podał inny numer telefonu albo inny e-mail, i tak potrzebujesz numeru przesyłki.
 
-### Śledź po numerze referencyjnym nadawcy
-
-Jeśli nadawca poda Ci swój numer referencyjny, na przykład numer faktury, w niektórych firmach kurierskich wyszukasz paczkę właśnie po nim: FedEx ma **Śledzenie według informacji referencyjnych**, a [DHL Express](carrier:dhl-express) **Monitoruj według referencji**. W wyszukiwarce Poczty Polskiej takiej opcji nie ma.
-
 ## Czy można śledzić paczkę po nazwisku, adresie albo numerze telefonu?
 
-Po nazwisku i adresie się nie da. Wyszukiwarki Poczty Polskiej i DPD przyjmują tylko numer przesyłki (DPD także kod nadania, numer referencyjny i numer zlecenia). Niemiecki DHL pisze wprost, że śledzenie jest możliwe tylko z ważnym numerem przesyłki, a bez niego statusu nie sprawdzi nawet obsługa klienta.
+Po nazwisku i adresie się nie da. Wyszukiwarki Poczty Polskiej i DPD przyjmują tylko numer przesyłki (DPD także 9-znakowy kod nadania). Niemiecki DHL pisze wprost, że śledzenie jest możliwe tylko z ważnym numerem przesyłki, a bez niego statusu nie sprawdzi nawet obsługa klienta.
 
 Po numerze telefonu: tylko w aplikacji przewoźnika i tylko paczki wysłane na numer, na który masz w niej konto (tabela wyżej). [Trackery paczek](guide:universal-tracker) też nie szukają po nazwisku, Peek również: żeby zapytać przewoźnika o paczkę, potrzebuje jej numeru.
 
@@ -119,7 +114,6 @@ Najczęściej dlatego, że jest nowy: etykieta już jest, ale przewoźnik jeszcz
 Jeśli czekasz dłużej, sprawdź sam numer:
 
 - **Czy to numer przesyłki?** Numer zamówienia i numer oferty z Allegro należą do sklepu, więc u przewoźnika nie zadziałają.
-- **Czy to nie referencja nadawcy?** Numer faktury czy inny numer referencyjny nadawcy zadziała tylko w wyszukiwaniu po referencji u FedEx i DHL Express.
 - **Czy to ten przewoźnik?** Numer od `AD` (Allegro Delivery) nic nie pokaże na stronie [ORLEN Paczki](carrier:orlen-paczka): taką paczkę śledzisz tylko w Allegro. Nazwę przewoźnika zwykle znajdziesz w e-mailu o wysyłce albo w szczegółach zakupu.
 - **Czy to jeden numer?** Wklej jeden numer naraz, bez spacji i nawiasów, jak prosi Poczta Polska.
 
@@ -144,8 +138,6 @@ Nadal nic? Zapytaj nadawcę albo sklep. Co znaczy każdy status, wyjaśnia [pora
 - [ORLEN Paczka: Śledź paczkę](https://www.orlenpaczka.pl/sledz-paczke/) – paczki Allegro Delivery z numerem od AD tylko w Allegro
 - [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – 24-cyfrowy format numerów InPost
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numery 1Z i ich cyfra kontrolna
-- [FedEx Polska: Monitorowanie przesyłki](https://www.fedex.com/pl-pl/tracking.html) – numery etykiet awizo, śledzenie według informacji referencyjnych
-- [DHL Express: Monitoruj według referencji](https://mydhl.express.dhl/pl/pl/tracking.html#/track-by-reference) – wyszukiwanie po referencji
 - [DHL Niemcy: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – numer przesyłki to nie numer zamówienia, śledzenie tylko z ważnym numerem, obsługa klienta
 - [UPU: S10 standard](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – międzynarodowy format 13 znaków
 :::

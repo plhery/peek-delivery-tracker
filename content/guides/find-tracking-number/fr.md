@@ -11,14 +11,14 @@ Ton numéro de suivi se trouve en général dans l'e-mail ou le SMS d'expéditio
 
 ## Où trouver mon numéro de suivi ?
 
-C'est en général l'expéditeur qui te transmet le numéro. Selon le transporteur, il s'appelle aussi numéro d'envoi ([La Poste suisse](carrier:swiss-post), [Planzer](carrier:planzer)), numéro du colis ([Quickpac](carrier:quickpac)), n° d'expédition ([Mondial Relay](carrier:mondial-relay)) ou code-barres ([bpost](carrier:bpost)). Cherche dans cet ordre :
+C'est en général l'expéditeur qui te transmet le numéro. Selon le transporteur, il s'appelle aussi numéro d'envoi ([La Poste suisse](carrier:swiss-post), [Planzer](carrier:planzer)), numéro du colis ([Quickpac](carrier:quickpac)), numéro d'expédition ([Mondial Relay](carrier:mondial-relay)) ou code-barres ([bpost](carrier:bpost)). Cherche dans cet ordre :
 
 :::steps
 - Tes e-mails et SMS | Cherche « expédié », « expédition », « suivi » ou le nom de la boutique, sans oublier les spams.
 - La page de ta commande | À un clic du numéro de commande (voir le tableau ci-dessous).
 - L'avis de passage | Chez bpost et La Poste suisse, il porte un numéro que tu peux taper dans le suivi.
 - Le compte du transporteur | La Poste suisse et bpost listent les colis qui t'arrivent.
-- L'expéditeur | « Contactez l'expéditeur pour qu'il vous communique le numéro », conseille Mondial Relay.
+- L'expéditeur | Sans numéro, « vous pouvez contacter l'expéditeur afin qu'il vous le communique », indique la FAQ belge de Mondial Relay.
 :::
 
 Tu as l'e-mail, mais tu ne sais pas quel numéro est le bon ? Colle l'e-mail en entier dans [Peek](/) : il repère le numéro de suivi et le transporteur.
@@ -45,11 +45,11 @@ Commande passée sur AliExpress, Temu ou Shein ? Lis notre guide sur [le suivi d
 
 ## Comment suivre un colis sans numéro de suivi ?
 
-Trois pistes existent, et aucune ne passe par ton nom ou ton adresse.
+Deux pistes existent, et aucune ne passe par ton nom ou ton adresse.
 
 ### Demande-le à l'expéditeur
 
-Les transporteurs qui abordent le cas d'un numéro manquant te renvoient tous vers l'expéditeur : [FedEx](carrier:fedex) et Mondial Relay l'écrivent noir sur blanc. Demande-lui :
+Les transporteurs qui abordent le cas d'un numéro manquant te renvoient tous vers l'expéditeur : Mondial Relay l'écrit noir sur blanc. Demande-lui :
 
 - **Le nom du transporteur.** Sur le site d'un autre, le numéro ne donnera rien.
 - **Le numéro tel qu'il est imprimé.**
@@ -67,17 +67,12 @@ Certains transporteurs affichent d'eux-mêmes les colis qui te sont destinés, u
 | Belgique | App My bpost | Les colis bpost liés à tes adresses e-mail s'ajoutent tout seuls. Il en manque un ? Il a sans doute été commandé avec une autre adresse : ajoute-la dans **Mes adresses e-mail** |
 | France, Belgique | App Mondial Relay, gratuite | Jusqu'à 5 adresses e-mail et 5 numéros de mobile dans ton profil, pour tes colis et ceux de tes proches. Un colis manque ? Ajoute-le avec « + » et son numéro |
 
-### Suis le colis avec la référence de l'expéditeur
-
-Si l'expéditeur te donne sa propre référence (bon de commande, numéro de facture), les transporteurs express peuvent retrouver l'envoi grâce à elle : **Suivre par référence** chez FedEx et chez [DHL Express](carrier:dhl-express). Chez bpost ou La Poste suisse, nous n'avons pas trouvé de recherche publique par référence.
-
 ## Peut-on suivre un colis avec son nom, son adresse ou son téléphone ?
 
 Non, pas sur la page de suivi d'un transporteur, et pas non plus en appelant son service client. Les transporteurs sont clairs :
 
 - **bpost** : « Sans code-barres, nous ne pourrons malheureusement pas vous aider. »
 - **DHL**, pour ses colis en Allemagne : le suivi n'est possible qu'avec un numéro valide, et même son service client ne peut pas consulter le statut d'un envoi sans lui.
-- **FedEx** : sans numéro d'envoi ni numéro de référence, « veuillez contacter l'expéditeur ».
 
 Ce qui s'en rapproche le plus, c'est le compte d'un transporteur (tableau ci-dessus) : ton numéro de téléphone peut y servir, par exemple dans l'app Mondial Relay si tu l'as enregistré dans ton profil. Les [sites de suivi universels](guide:universal-tracker) n'y arrivent pas non plus, Peek compris : il lui faut un numéro à demander au transporteur.
 
@@ -91,7 +86,7 @@ C'est toi qui as envoyé le colis ? Le numéro figure sur ton bordereau ou sur l
 
 | Transporteur | Où chercher |
 | --- | --- |
-| Mondial Relay | Le bordereau d'envoi, en haut dans le cadre « Information » : le « n° d'expédition », 8 chiffres. Aussi dans l'e-mail de suivi, et dans l'app sous « Mes colis » |
+| Mondial Relay | Ton profil, rubrique « Mes Colis », d'après la FAQ belge de Mondial Relay : le numéro d'expédition, à 8 chiffres |
 | bpost | La preuve de dépôt ou de paiement, l'étiquette d'envoi, le bordereau de livraison ou l'e-mail de confirmation |
 | La Poste suisse | « Mes envois », si tu as déposé l'envoi avec ton compte (par exemple pick@home) et que ton adresse d'expéditeur est celle de ton Login client Poste |
 
@@ -120,7 +115,6 @@ Passé ce délai, vérifie le numéro lui-même :
 
 - **Est-ce le numéro de commande ?** Celui de la boutique ne marche pas sur le site du transporteur (voir plus haut).
 - **Est-ce un code douanier ?** Un code-barres bpost qui commence par « U » sert seulement à la douane : il ne se suit pas.
-- **Est-ce la référence de l'expéditeur ?** Un bon de commande ou un numéro de facture ne marche que dans la recherche par référence de FedEx ou de DHL Express.
 - **Es-tu sur le site du bon transporteur ?** Sur celui d'un autre, le numéro ne donnera rien. Mondial Relay et Colis Privé demandent aussi le code postal du destinataire.
 - **As-tu collé plusieurs numéros ensemble ?** DHL lit une tabulation, une virgule, un espace ou un point-virgule comme le début d'un autre numéro.
 
@@ -128,9 +122,9 @@ Toujours rien ? Demande à l'expéditeur ou à la boutique. Pour comprendre chaq
 
 :::sources
 - [Universal Parcel Scraper : La Poste / Colissimo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – numéros de 13 caractères, ou de 14 chiffres avec un 15e caractère de contrôle facultatif
-- [Mondial Relay : Où retrouver mon numéro de colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/ou-trouver-mon-numero-de-colis/) – bordereau, 8 chiffres, app
-- [Mondial Relay : Comment suivre l'acheminement de mon colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/comment-suivre-l-acheminement-de-mon-colis/) – sans numéro, l'expéditeur
-- [Mondial Relay Belgique : Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 ou 12 chiffres
+- [Mondial Relay Belgique : Comment suivre l'acheminement de mon colis ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/comment-suivre-l-acheminement-de-mon-colis/) – numéro d'expédition de 8 chiffres, sans numéro l'expéditeur
+- [Mondial Relay Belgique : J'ai envoyé un colis, où puis-je retrouver le numéro de suivi ?](https://www.mondialrelay.be/fr-be/faq/votre-compte/jai-envoye-un-colis-ou-puis-je-retrouver-le-numero-de-suivi-du-colis/) – profil, « Mes Colis »
+- [Mondial Relay Belgique : Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 ou 12 chiffres, code postal
 - [Mondial Relay : l'app sur l'App Store](https://apps.apple.com/fr/app/mondial-relay-suivi-de-colis/id1633060599) – e-mails et mobiles du profil
 - [Colis Privé : Comment suivre mon colis ?](https://colisprive.fr/aide/comment-suivre-mon-colis-3/) – 12 caractères, code postal
 - [bpost : A quoi ressemble un code-barres et où puis-je le trouver ?](https://www.bpost.be/fr/faq/quoi-ressemble-un-code-barres-et-ou-puis-je-le-trouver) – emplacements, codes « U »
@@ -141,8 +135,6 @@ Toujours rien ? Demande à l'expéditeur ou à la boutique. Pour comprendre chaq
 - [La Poste suisse : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – code de retrait
 - [La Poste suisse : Questions et réponses, expédier](https://www.post.ch/fr/aide-et-contact/expedier) – recherches
 - [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numéros 1Z et leur clé de contrôle
-- [FedEx : Comment puis-je localiser mon colis sans numéro de suivi ?](https://www.fedex.com/fr-fr/customer-support/faq/receiving/tracking-questions/how-to-track-a-package-without-a-tracking-number.html) – suivi par référence
-- [DHL Express : Suivre par référence](https://mydhl.express.dhl/fr/fr/tracking.html#/track-by-reference) – suivi par référence
 - [DHL : Suivi](https://www.dhl.com/fr-fr/home/suivi.html) – séparateurs entre plusieurs numéros
 - [DHL : Sendungsverfolgung, Probleme und Lösungen (en allemand)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – numéro de commande, numéro valide
 - [About Amazon France : Six conseils pratiques pour se protéger des tentatives d'arnaques par usurpation d'identité](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – historique des commandes sur le compte ou l'application

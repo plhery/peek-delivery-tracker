@@ -22,9 +22,8 @@ It goes back to the sender.
 - shop | Sender | Decides whether to refund you or send it again.
 :::
 
-- **[FedEx](carrier:fedex)** returns it to the shipper after up to 7 days.
 - **Canada Post** charges the sender for the return trip.
-- **[Mondial Relay](carrier:mondial-relay)** sends it back, at its own cost, to the locker or Point Relais where the sender dropped it off.
+- **[Mondial Relay](carrier:mondial-relay)** sends it back, at its own cost, to the Point Relais where the sender dropped it off, its Belgian site says.
 - **[InPost](carrier:inpost)** UK says redelivery or a refund is up to the retailer.
 
 Once the parcel is on its way back, [returned to sender](guide:returned-to-sender) covers the trip and what to ask the shop.
@@ -33,15 +32,14 @@ Once the parcel is on its way back, [returned to sender](guide:returned-to-sende
 
 | Country | Post office after a missed delivery | Parcel shop or counter | Locker |
 | --- | --- | --- | --- |
-| US | USPS: usually 15 days (Priority Mail Express 5 calendar days); FedEx location: up to 7 days | – | Amazon Locker: 3 calendar days |
+| US | USPS: usually 15 days (Priority Mail Express 5 calendar days) | – | Amazon Locker: 3 calendar days |
 | UK | [Royal Mail](carrier:royal-mail) or [Parcelforce](carrier:parcelforce), with a customs bill to pay: about 3 weeks | [Evri](carrier:evri) ParcelShop: 10 days | Evri: 3 days; InPost: 3 days; Amazon Locker: 3 calendar days |
-| Ireland | An Post: 5 working days, 3 for registered post, 16 from abroad | – | An Post: 48 hours, then 5 more days at the depot |
 | Canada | Canada Post: 15 calendar days | – | – |
 | Australia | [Australia Post](carrier:australia-post): 10 business days | – | 2 business days, then 10 business days at a Post Office |
 
-A locker parcel can get a second clock. At [Australia Post](https://auspost.com.au/personal/receiving/parcel-deliveries/parcel-lockers), after 2 business days in a Parcel Locker it moves to the nearest Post Office, with a message and 10 more business days. At [An Post](carrier:an-post), it goes back to the delivery depot after 48 hours and waits 5 more days there.
+A locker parcel can get a second clock. At [Australia Post](https://auspost.com.au/personal/receiving/parcel-deliveries/parcel-lockers), after 2 business days in a Parcel Locker it moves to the nearest Post Office, with a message and 10 more business days.
 
-In Europe, a [DHL](carrier:dhl) Packstation in Germany holds a parcel 7 calendar days (9 after a missed delivery), and Mondial Relay in France 5.
+In Europe, a [DHL](carrier:dhl) Packstation in Germany holds a parcel 7 calendar days (9 after a missed delivery), and Mondial Relay 5 days in France or Belgium.
 
 ### Why your date may differ from the table
 
@@ -57,7 +55,7 @@ The tracking then says something like `Available for Pickup` (USPS), `Available 
 
 ## What to do if you can't collect your parcel in time
 
-Extra time is rare. Evri, An Post, Canada Post and Australia Post mention no extension, and InPost UK says it "cannot extend your collection time". Canada Post can't move a parcel once it's there either.
+Extra time is rare. Evri, Canada Post and Australia Post mention no extension, and InPost UK says it "cannot extend your collection time". Canada Post can't move a parcel once it's there either.
 
 [Swiss Post](carrier:swiss-post) does give more time: you can [extend for free online](https://www.post.ch/en/receiving-mail/collection-note), with no account.
 
@@ -65,12 +63,12 @@ Otherwise, work through these before the last day:
 
 :::steps
 - Find the last day | It's on the card, text or email.
-- Rebook delivery | Royal Mail, USPS and An Post let you book a redelivery online while the parcel is held.
+- Rebook delivery | Royal Mail and USPS let you book a redelivery online while the parcel is held.
 - Send someone | Share your locker code or barcode, or give someone the signed card and their own ID.
 - Tell the shop | Before the deadline if you no longer want it, after it if you missed it.
 :::
 
-USPS asks you to allow 2 days when you rebook with the paper notice, and An Post says one can take up to 5 working days, so book early. Australia Post can move a missed parcel to another Post Office for $7.20, using a form. For an [Amazon](carrier:amazon-logistics) Locker, forward the delivery confirmation email to whoever is collecting.
+USPS asks you to allow 2 days when you rebook with the paper notice, so book early. Australia Post can move a missed parcel to another Post Office for $7.20, using a form. For an [Amazon](carrier:amazon-logistics) Locker, forward the delivery confirmation email to whoever is collecting.
 
 With only 2 or 3 days at many lockers, a notice you see late can cost you the parcel. [Peek](/) can send a notification when the tracking says a parcel is waiting for pickup, but only the carrier or the shop can move the deadline.
 
@@ -103,15 +101,12 @@ A locker or mailroom counts as delivered. See [delivered but not received](guide
 :::sources
 - [USPS: Domestic Mail Manual 508](https://pe.usps.com/text/dmm300/508.htm) – 15 days, Priority Mail Express 5, sender's shorter period
 - [USPS: Redelivery, the basics](https://faq.usps.com/s/article/Redelivery-The-Basics) – usually 15 days, second notice, 2 days for redelivery
-- [FedEx: Hold at location](https://www.fedex.com/en-us/shipping/hold-at-location.html) – up to 7 days, then returned
 - [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – the bill, about 3 weeks, then back to the sender
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail redelivery on its website
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail status wordings
 - [Evri: ParcelShop delivery](https://www.evri.com/our-services/parcelshop-delivery) – 10 days, then returned
 - [Evri: Lockers](https://www.evri.com/faqs/lockers/can-i-get-my-parcel-delivered-to-a-locker) – 3 days, barcode
 - [InPost UK: Collect in 3 days](https://inpost.co.uk/blog/collect-in-3-days) – no extension, retailer decides
-- [An Post: Receiving post](https://www.anpost.com/Post-Parcels/Receiving/Receiving-Post) – 5, 3 and 16 working days, redelivery
-- [An Post: Parcel lockers](https://www.anpost.com/Post-Parcels/Receiving/Parcel-Lockers) – 48 hours, then 5 days at the depot
 - [Canada Post: Can I refuse delivery of a parcel?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/can-i-refuse-delivery-of-a-parcel.page) – 15 calendar days, sender pays the return
 - [Canada Post: Where to get your delivery](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/where-to-get-your-delivery.page) – location can't be changed
 - [Australia Post: Missed parcel deliveries](https://auspost.com.au/personal/receiving/parcel-deliveries/missed-parcel-deliveries) – 2 and 10 business days, $7.20 transfer
@@ -121,8 +116,8 @@ A locker or mailroom counts as delivered. See [delivered but not received](guide
 - [About Amazon UK: What is an Amazon Counter and how does it work?](https://www.aboutamazon.co.uk/news/retail/how-to-use-amazon-counter) – automatic refund and return from a Counter
 - [About Amazon Australia: How to use Amazon Locker](https://www.aboutamazon.com.au/news/retail/how-to-use-amazon-locker) – three calendar days, automatic return and refund
 - [DHL: Packstation](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/empfangen.html) – 7 calendar days
-- [Mondial Relay: Collection period](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – 5 calendar days, no extension
-- [Mondial Relay: The recipient didn't collect the parcel](https://www.mondialrelay.fr/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – back to the drop-off point, at Mondial Relay's cost
+- [Mondial Relay Belgium: Collection period (in French)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 days in France and Belgium
+- [Mondial Relay Belgium: The recipient didn't collect the parcel (in French)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – back to the drop-off point, at Mondial Relay's cost
 - [Swiss Post: Collection note](https://www.post.ch/en/receiving-mail/collection-note) – free extension
 - [Consumer Contracts Regulations 2013, reg. 30](https://www.legislation.gov.uk/uksi/2013/3134/regulation/30) – when the 14 days start
 - [legislation.gov.uk: reg. 32](https://www.legislation.gov.uk/uksi/2013/3134/regulation/32) – a clear statement is needed

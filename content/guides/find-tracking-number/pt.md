@@ -43,7 +43,6 @@ Compraste no AliExpress ou noutra loja chinesa? Vê [como seguir uma encomenda d
 - **CTT:** quando não está ninguém em casa, os CTT podem deixar-te o código num aviso na caixa do correio. Se o aviso não tiver código ou o código estiver ilegível, podes levantar o envio na Loja ou Ponto CTT indicado no aviso, dentro do prazo.
 - **DPD:** o aviso de passagem traz o número da encomenda, que podes pôr no Track & Trace da DPD.
 - **GLS:** cada cartão de notificação traz um «ID de Rastreamento», que podes usar no seguimento da GLS. Se a GLS deixar a encomenda num GLS Point, tens 10 dias úteis para a levantar.
-- **[FedEx](carrier:fedex):** o rastreio da FedEx também aceita o número do aviso de passagem.
 
 ## Como seguir uma encomenda sem número de seguimento
 
@@ -72,7 +71,7 @@ Os CTT não anunciam nada parecido. Na App CTT e na área de cliente, segues um 
 
 ### Segue pela referência do remetente
 
-Se o remetente te disser a referência dele (o número de uma nota de encomenda ou de uma fatura, por exemplo), algumas transportadoras deixam-te procurar por ela: a DPD em **Procurar por referência**, no Track & Trace; a FedEx em **Rastrear por referência**; e a [DHL Express](carrier:dhl-express) em **Localização por referência de Expedidor**.
+Se o remetente te disser a referência dele, algumas transportadoras deixam-te procurar por ela, como a DPD em **Procurar por referência**, no Track & Trace.
 
 ## Dá para seguir uma encomenda pelo nome ou pela morada?
 
@@ -90,7 +89,7 @@ O mais parecido são as contas e as apps da secção anterior, ligadas ao teu te
 
 Estás à espera de uma encomenda? Volta a procurar no e-mail ou abre outra vez a encomenda na tua conta da loja; se não estiver lá, pede ao remetente que to mande de novo.
 
-Foste tu a enviar? O número está no talão que te deram ao balcão ou, se criaste o envio online, no e-mail que recebeste. Guarda-o até a encomenda chegar. A DHL Express di-lo sem rodeios: «Recomendamos fortemente que guarde o número de localização do seu envio.»
+Foste tu a enviar? O número está no talão que te deram ao balcão ou, se criaste o envio online, no e-mail que recebeste. Guarda-o até a encomenda chegar.
 
 | Transportadora | Onde procurar |
 | --- | --- |
@@ -98,7 +97,6 @@ Foste tu a enviar? O número está no talão que te deram ao balcão ou, se cria
 | CTT, online | Aparece quando acabas de criar o envio e vai para o e-mail que puseste no campo do remetente. Se não recebeste os documentos ou não os conseguiste descarregar, contacta o apoio ao cliente dos CTT |
 | DPD | No arquivo de encomendas e na confirmação da encomenda que recebeste |
 | Vinted | No ecrã da conversa com quem compra → **Acompanhar encomenda**, onde podes copiar o código |
-| DHL Express | Sem o número, resta a **Localização por referência de Expedidor** ou o apoio ao cliente da DHL |
 
 ### Posso seguir uma encomenda que enviei sem o número?
 
@@ -127,7 +125,7 @@ Passado esse tempo, confirma que tens o número certo:
 
 - **É o número da encomenda?** O número que vem com a palavra «encomenda» ou «pedido» costuma ser da loja e não funciona no site da transportadora (secção anterior).
 - **É outro código?** Os CTT avisam que alguns códigos só servem para a alfândega e não dão resultados.
-- **É a referência do remetente?** Só funciona na pesquisa por referência da DPD, da FedEx ou da DHL Express (vê acima).
+- **É a referência do remetente?** Só funciona numa pesquisa por referência, como a da DPD (vê acima).
 - **É da transportadora certa?** No site de outra transportadora, o número não dá nada. Os CTT lembram que um código sem resultados pode ser de um envio entregue em Portugal por outra empresa.
 - **Colaste mais do que um número?** Cola só um de cada vez, sem espaços: segundo a norma S10 da UPU, os espaços impressos não fazem parte do número.
 
@@ -146,10 +144,8 @@ Continua sem nada? Pergunta ao remetente, como mandam os CTT. Para perceberes ca
 - [GLS Portugal: FAQ Receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – Track ID dado pelo expedidor ou pela GLS, aviso de passagem, 10 dias úteis
 - [GLS Portugal: App My GLS](https://gls-group.com/PT/pt/informacao-gls/app-my-gls/) – número de telemóvel e informação automática
 - [InPost Portugal: Rastrear encomenda](https://www.inpost.pt/seguimento-do-envio/) – pedir o número de expedição ao remetente
-- [MyDHL Express Portugal: FAQs Localização e Monitorização](https://mydhl.express.dhl/pt/pt/help-and-support/faqs/tracking-monitoring.html) – guardar o número, localização por referência de expedidor
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – o número de envio não é um número de encomenda
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – números 1Z e o seu algarismo de controlo
-- [FedEx Portugal: Rastrear a sua expedição](https://www.fedex.com/pt-pt/tracking.html) – avisos de passagem, Rastrear por referência
 - [Shein Portugal: Como rastrear meu pedido](https://m.shein.com/pt/How-to-track-my-order-a-496.html) – Meus pedidos, Rastrear
 - [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – Acompanhar encomenda, até 48 horas, Comprar agora, envio personalizado
 - [Worten: Política de Entregas](https://www.worten.pt/worten-entregas/seguir-encomenda) – seguir na área de cliente, Marketplace, contactar o vendedor ou a Worten

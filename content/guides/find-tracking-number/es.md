@@ -44,11 +44,10 @@ Quién reparte para cada tienda y qué hacer si el seguimiento se para: [Amazon]
 
 - **Correos:** el aviso de llegada lleva el número de envío en la parte delantera, en «Datos del envío», junto al remitente y la fecha del [intento de entrega](guide:missed-delivery). El envío te espera en la oficina a partir del siguiente día laborable. Si te avisan por SMS o por correo electrónico, ese mensaje sustituye al papel.
 - **GLS:** si no estabas en casa, la nota de paso que te deja el repartidor te dice dónde está el envío.
-- **[FedEx](carrier:fedex):** su buscador acepta, además de los números de seguimiento, el de la «etiqueta de puerta», el aviso que te dejan si no estás.
 
 ## Cómo localizar un paquete sin número de seguimiento
 
-Hay tres caminos, y ninguno pasa por tu nombre o tu DNI.
+Hay dos caminos, y ninguno pasa por tu nombre o tu DNI.
 
 ### Pregúntale al remitente
 
@@ -70,10 +69,6 @@ Algunos transportistas te enseñan los envíos que vienen hacia ti si te registr
 | App de Correos | Envíos como remitente o destinatario, «sin necesidad de introducir ningún código de envío», también los de Vinted y Wallapop | Correos no explica con qué datos los relaciona. Correos ID usa tu correo o tu teléfono, verificados con un código |
 
 La app de InPost en España, en cambio, solo habla de seguir tus envíos introduciendo el número.
-
-### Busca con la referencia del remitente
-
-Si el remitente te da su propia referencia (su número de pedido interno o el de la factura, por ejemplo), algunas empresas de mensajería te dejan buscar el envío con ella: FedEx en **Seguimiento por referencia** y [DHL Express](carrier:dhl-express) en **Seguimiento por Referencia**.
 
 ## ¿Se puede localizar un envío por nombre, DNI o teléfono?
 
@@ -124,7 +119,6 @@ Casi siempre porque es nuevo: la etiqueta ya existe, pero el transportista aún 
 Pasado ese plazo, revisa el número:
 
 - **¿Es el de seguimiento?** El número de pedido de la tienda no sirve en la web del transportista.
-- **¿Es una referencia del remitente?** Su número de pedido interno o el de su factura solo sirven en la búsqueda por referencia de FedEx o DHL Express (mira arriba).
 - **¿Es de este transportista?** En la web de otro no encontrarás el número. Busca el nombre del transportista en el correo de envío y, en GLS, comprueba también el código postal de destino.
 - **¿Has copiado un solo número?** El correo de envío suele traer varios. Copia solo el de seguimiento, sin el texto de alrededor, y revísalo carácter a carácter, o pega el correo entero en Peek para que encuentre el bueno.
 
@@ -143,8 +137,6 @@ Pasado ese plazo, revisa el número:
 - [App Store: InPost, Rastrea tu pedido](https://apps.apple.com/es/app/inpost-rastrea-tu-pedido/id6748218565) – seguimiento introduciendo el número
 - [MRW: Seguimiento de envíos](https://www.mrw.es/seguimiento/) – «número de envío», en el justificante de la oficina
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – números 1Z y su dígito de control
-- [FedEx: Seguimiento del envío](https://www.fedex.com/es-es/tracking.html) – etiquetas de puerta, seguimiento por referencia
-- [DHL Express: Seguimiento por Referencia](https://mydhl.express.dhl/es/es/tracking.html#/track-by-reference) – búsqueda por referencia
 - [DHL: Hilfe bei Problemen mit Sendungsverfolgung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – el número de pedido lo asigna la tienda y no es un número de seguimiento (en alemán)
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primero el vendedor, después Amazon
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – reclamación directa a Amazon por la entrega de un vendedor externo

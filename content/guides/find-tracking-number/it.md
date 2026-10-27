@@ -43,7 +43,6 @@ Hai ordinato su AliExpress o in un altro negozio cinese? Leggi [come tracciare u
 ### Sull'avviso lasciato dal corriere
 
 - **[BRT](carrier:brt)** (ex Bartolini): il BRTcode, oltre che negli SMS e nelle e-mail, è anche «sul tagliando lasciato dal corriere dopo un tentativo di consegna». Lo cerchi sul sito di BRT come sempre.
-- **[FedEx](carrier:fedex)**: la ricerca accetta anche i numeri degli «avvisi di tentata consegna».
 - **[Poste Italiane](carrier:poste-italiane)**: il portalettere lascia un [avviso di giacenza](guide:missed-delivery) per il ritiro in Ufficio Postale. Se lo perdi, puoi averne un duplicato telefonando al Servizio Clienti.
 - **La Posta**, in Ticino: l'«Invito di ritiro» ha un codice di ritiro che funziona nella ricerca, dove il campo chiede il «Numero d'invio o codice di ritiro». Di norma hai sette giorni per ritirare un pacco (15 per gli invii internazionali), e il termine si può prolungare.
 - **[Planzer](carrier:planzer)**, in Svizzera: il codice di consegna sull'avviso apre il portale destinatari, ma per seguire il pacco serve il numero di spedizione, che trovi nel messaggio «A breve riceverà una spedizione».
@@ -77,7 +76,7 @@ Per BRT e [GLS](carrier:gls-it) non abbiamo trovato una pagina che spieghi se e 
 
 ### Cerca con il riferimento del mittente
 
-Se il mittente ti dà un suo riferimento, per esempio il numero di un ordine d'acquisto o di una fattura, alcuni corrieri cercano anche con quello: FedEx con **Monitorare tramite il numero di riferimento**, [DHL Express](carrier:dhl-express) con **Ricerca per Riferimento**, GLS con il numero del documento di trasporto (**Rif. DDT**). DHL Express precisa che senza numero si può cercare solo «a determinate condizioni».
+Se il mittente ti dà un suo riferimento, alcuni corrieri cercano anche con quello: GLS, per esempio, con il numero del documento di trasporto (**Rif. DDT**).
 
 ## Si può tracciare un pacco con nome e cognome?
 
@@ -122,8 +121,6 @@ Per distinguerli: un numero accanto alla parola «ordine» è del negozio (eBay,
 | Poste Italiane | codice spedizione, codice invio |
 | BRT | BRTcode, di 14 o 19 cifre, oppure numero spedizione, di 12 o 14 |
 | GLS | riferimento spedizione; c'è anche l'ID collo |
-| DHL Express | numero di lettera di vettura |
-| FedEx | numero di monitoraggio |
 | La Posta | numero d'invio |
 | eBay.it | codice della spedizione |
 
@@ -137,7 +134,7 @@ Passata l'attesa, controlla il numero:
 
 - **È il numero d'ordine?** Sul sito del corriere non funziona: il codice tracking è quello che arriva con il nome del corriere o con un link alla sua pagina (sezione qui sopra).
 - **È un altro codice del corriere?** Non tutti seguono il pacco. Se prenoti un ritiro a domicilio con Poste Delivery Web, per esempio, ricevi un codice prenotazione ritiro come `CP123456789`: serve a seguire il ritiro, non la spedizione.
-- **È un riferimento del mittente?** Il numero di un ordine d'acquisto, di una fattura o di un DDT funziona solo nelle ricerche per riferimento dei corrieri (sezione qui sopra), non nel campo del codice.
+- **È un riferimento del mittente?** Il numero di un DDT funziona solo dove il corriere cerca per riferimento, come GLS con l'opzione **Rif. DDT** (sezione qui sopra), non come codice di spedizione.
 - **È il corriere giusto?** Sul sito del corriere sbagliato il codice non dà risultati. Le spedizioni del corriere espresso SDA, per esempio, ora si cercano su poste.it.
 - **Hai incollato più codici insieme?** Poste vuole ogni codice «senza interruzioni e senza trattino» e, se ne cerchi più di uno, separati da una virgola.
 
@@ -145,8 +142,6 @@ Ancora niente? Chiedi al mittente o al negozio di ricontrollare codice e corrier
 
 :::sources
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – il numero di spedizione non è un numero d'ordine
-- [MyDHL+ Italia: Ricerca per Riferimento](https://mydhl.express.dhl/it/it/tracking.html#/track-by-reference) – ricerca con il riferimento della spedizione
-- [MyDHL+ Italia: FAQ Ricerca e Monitoraggio](https://mydhl.express.dhl/it/it/help-and-support/faqs/tracking-monitoring.html) – senza numero solo a determinate condizioni, numero di lettera di vettura
 - [Poste Italiane: Cerca spedizioni](https://www.poste.it/cerca/index.html) – senza interruzioni e senza trattino, più codici separati da una virgola, il codice sotto il codice a barre, Posta1 e Postapriority con 2DComm fino al Centro di Scambio Internazionale
 - [Poste Italiane: assistenza Cerca spedizioni](https://www.poste.it/support-layer/www-poste-it/cerca/) – lo stato al telefono fornendo il codice invio, Archivio delle spedizioni effettuate
 - [Poste Italiane: FAQ spedizioni e consegne](https://www.poste.it/faq-spedizioni-e-consegne.html) – duplicato dell'avviso di giacenza
@@ -160,7 +155,6 @@ Ancora niente? Chiedi al mittente o al negozio di ricontrollare codice e corrier
 - [Planzer Pacchi: Contatti](https://www.planzer-paket.ch/it/contatti/) – messaggio con il numero di spedizione, codice di consegna sull'avviso
 - [Quickpac: FAQ](https://quickpac.ch/en/faq) – numero di 18 cifre, scheda per il ritiro
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – codici 1Z e la loro cifra di controllo, l'etichetta creata prima che UPS abbia il pacco
-- [FedEx Italia: Monitoraggio delle spedizioni](https://www.fedex.com/it-it/tracking.html) – numero di monitoraggio, avvisi di tentata consegna, numero di riferimento
 - [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z per includere le richieste di risarcimento per danni alla proprietà e alle persone](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prima il partner di vendita, poi il rimborso da Amazon
 - [eBay.it: Controllare lo stato della spedizione dell'oggetto](https://www.ebay.it/help/buying/spedizione-consegna/tracciare-oggetto?id=4027) – Cronologia acquisti, Ordine confermato, codice non ancora caricato
 - [Vinted.it: Tracciare un pacco](https://www.vinted.it/help/100) – Traccia il pacco, fino a 48 ore, spedizione personalizzata

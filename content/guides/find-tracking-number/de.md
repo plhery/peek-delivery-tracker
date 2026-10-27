@@ -16,7 +16,7 @@ Deine Sendungsnummer steht meist in der Versandmail oder SMS des Shops. Sonst fi
 :::steps
 - Mails und SMS | Such nach „versandt“, „Sendungsnummer“, „Sendungsverfolgung“ oder dem Namen des Shops, auch im Spam-Ordner.
 - Deine Bestellung im Shop | Meist einen Klick von der Bestellnummer entfernt (Tabelle unten).
-- Die Benachrichtigungskarte | Bei der [Schweizerischen Post](carrier:swiss-post) und bei [FedEx](carrier:fedex) funktioniert der Code darauf wie eine Sendungsnummer.
+- Die Benachrichtigungskarte | Bei der [Schweizerischen Post](carrier:swiss-post) funktioniert der Code darauf wie eine Sendungsnummer.
 - Dein Konto beim Paketdienst | Manche Paketdienste zeigen dir Pakete an deine Adresse von selbst an.
 - Der Absender | Er hat die Nummer, auch wenn sie nie bei dir angekommen ist.
 :::
@@ -44,7 +44,6 @@ Was dir die Karte bringt, hängt vom Paketdienst ab:
 
 - **Schweizerische Post**, Abholungseinladung: Der Abholcode passt ins Feld „Sendungsnummer oder Abholcode“ der Sendungsverfolgung. Pakete kannst du in der Regel 7 Tage lang abholen, internationale Sendungen 15 Tage, und die Frist lässt sich verlängern.
 - **[Österreichische Post](carrier:austrian-post)**, Gelber Zettel: Hat der Versender deine E-Mail-Adresse übermittelt oder passen Name und Adresse zu deinem Post Account, kommt er zusätzlich als kostenlose e-Benachrichtigung per Mail und in der Post App unter „Meine Sendungen“. Mit ihr und einem amtlichen Lichtbildausweis holst du das Paket ab, genau wie mit dem Zettel.
-- **FedEx**: Die Nummer der Benachrichtigungskarte nimmt die FedEx-Sendungsverfolgung direkt an.
 - **[DHL Express](carrier:dhl-express)**: Auf der Karte steht eine Sendungs-Referenznummer. Mit ihr buchst du kostenlos eine zweite Zustellung.
 - **DHL**: Fehlt die Karte, schickt DHL sie dir in den nächsten Tagen per Post. Liegt das Paket in einer Filiale, brauchst du sie zum Abholen gar nicht: Dein Personalausweis reicht.
 - **[Hermes](carrier:hermes-de)**: Statt einer Karte schickt Hermes manchmal eine E-Mail.
@@ -81,7 +80,7 @@ Fehlt ein Paket in der Liste, brauchst du doch wieder die Nummer. Bei der Schwei
 
 ### Mit der Referenz des Absenders verfolgen
 
-Nennt dir der Absender seine eigene Referenz, etwa eine Auftrags- oder Rechnungsnummer, können die Expressdienste danach suchen. DHL Express beantwortet die Frage „Kann ich auch ohne Sendungsnummer meine Express-Sendung verfolgen?“ mit „Ja, unter bestimmten Voraussetzungen“: mit der Referenznummer des Versenders in der Referenzsuche. Bei FedEx heißt das **Sendungsverfolgung nach Referenz**. Bei DHL Paket gibt es diesen Weg nicht.
+Nennt dir der Absender seine eigene Referenznummer, hilft das bei Express-Sendungen von DHL. DHL Express beantwortet die Frage „Kann ich auch ohne Sendungsnummer meine Express-Sendung verfolgen?“ mit „Ja, unter bestimmten Voraussetzungen“: mit der Referenznummer des Versenders in der Referenzsuche. Bei DHL Paket gibt es diesen Weg nicht.
 
 ## Kann man ein Paket nur mit Namen oder Adresse verfolgen?
 
@@ -129,7 +128,7 @@ Danach lohnt ein Blick auf die Nummer selbst:
 
 - **Ist es die Bestellnummer?** Die funktioniert nur im Shop, nicht beim Paketdienst (siehe oben).
 - **Ist es ein anderer Code des Paketdienstes?** Die Postnummer, die du für Packstation und Filiale in die Lieferadresse schreibst, ist laut DHL deine persönliche Kundennummer und gehört zu dir, nicht zu einem Paket.
-- **Ist es die Referenz des Absenders?** Eine Auftrags- oder Rechnungsnummer findet nur die Referenzsuche von DHL Express oder FedEx (siehe oben), nicht die normale Sendungsverfolgung.
+- **Ist es die Referenz des Absenders?** Die Referenznummer des Versenders findet nur die Referenzsuche von DHL Express (siehe oben), nicht die normale Sendungsverfolgung.
 - **Bist du beim richtigen Paketdienst?** Ist eine Nummer bei DHL ungültig, kann sie laut DHL zu einer Express- oder Briefsendung mit eigener Sendungsverfolgung gehören oder zu einem ganz anderen Paketdienst.
 - **Steht nur diese eine Nummer im Feld?** Kopierst du aus einer Mail, rutschen leicht die Bestellnummer, ein Wort oder eine zweite Sendungsnummer mit hinein. Prüf außerdem jedes Zeichen: DHL nennt Zahlendreher, [DPD](carrier:dpd-de) verwechselte Zeichen wie 0 und O.
 
@@ -152,7 +151,6 @@ Immer noch nichts? Dann frag den Absender, meist also den Online-Shop: Von ihm k
 - [Schweizerische Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – Abholcode, Fristen
 - [Schweizerische Post: Fragen und Antworten zum Versenden](https://www.post.ch/de/hilfe-und-kontakt/versenden) – Nachforschung nur mit Barcode, Kopie der Aufgabequittung
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z-Nummern und ihre Prüfziffer
-- [FedEx: Sendungsverfolgung](https://www.fedex.com/de-de/tracking.html) – Benachrichtigungskartennummer, Suche nach Referenz
 - [About Amazon Deutschland: Amazon-Lieferung: einfache Bestellung und Verfolgung](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-lieferoptionen-sendung-verfolgen) – Meine Bestellungen, Lieferung verfolgen
 - [About Amazon Deutschland: Amazon A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst der Verkaufspartner, dann Amazon
 - [eBay: Sendung für Ihren Artikel nachverfolgen](https://www.ebay.de/help/buying/versand-lieferung/sendungsverfolgung?id=4027) – Mein eBay: Käufe, Gastkauf, Verkäufer kontaktieren

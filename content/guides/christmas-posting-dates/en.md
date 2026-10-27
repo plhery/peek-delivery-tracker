@@ -1,6 +1,6 @@
 ---
 title: Last posting dates for Christmas and shipping deadlines
-description: When to send for Christmas with Royal Mail, Evri, USPS, FedEx, An Post, Canada Post and Australia Post, from each carrier's own page.
+description: When to send for Christmas with Royal Mail, Evri, USPS, FedEx, An Post, Canada Post and Australia Post: last posting dates at home and abroad.
 slug: christmas-posting-dates
 picture: A December calendar page with one day circled, a van carrying a red-ribboned parcel through falling snow, and Pip hurrying alongside.
 published: 2026-10-09
@@ -28,7 +28,7 @@ UK carriers haven't put their 2026 dates on their own pages yet, so most dates h
 
 ## United States: USPS and FedEx
 
-Both have published their 2026 dates. USPS aims at delivery before Christmas Day; FedEx aims at Christmas Eve, Thursday 24 December.
+Both have published their 2026 dates. USPS aims at delivery before Christmas Day; FedEx's dates, as FOX 13 Tampa Bay reported them on 23 September 2026, are for arrival by Christmas.
 
 | Carrier | Service | Send by |
 | --- | --- | --- |
@@ -45,18 +45,18 @@ Both have published their 2026 dates. USPS aims at delivery before Christmas Day
 | FedEx | First, Priority or Standard Overnight | Wednesday 23 December |
 | FedEx | SameDay | Thursday 24 December |
 
-USPS notes that Hanukkah, from Friday 4 to Saturday 12 December, is earlier this year, so send for it earlier. FedEx's Ground dates assume a scheduled pickup or a drop-off at a staffed FedEx location.
+USPS notes that Hanukkah, from Friday 4 to Saturday 12 December, is earlier this year, so send for it earlier. FedEx's Ground and Home Delivery transit days don't count weekends.
 
 ## Ireland: An Post
 
-[An Post](carrier:an-post)'s page still shows 2025's dates, which it says "may be subject to change".
+[An Post](carrier:an-post)'s 2026 dates aren't confirmed yet. Below are its 2025 dates, as RTÉ and ComReg, Ireland's postal regulator, published them on 3 December 2025; RTÉ calls them "only estimated". Look for this year's on An Post's own site.
 
 | Carrier | Service | Send by |
 | --- | --- | --- |
-| An Post | Standard Post letters, Republic of Ireland | Not announced yet (2025: Monday 22 December) |
-| An Post | Standard Post letters, Northern Ireland | Not announced yet (2025: Friday 19 December) |
-| An Post | Standard Post letters, Great Britain | Not announced yet (2025: Thursday 18 December) |
-| An Post | Standard Post parcels, Republic of Ireland, Northern Ireland or Great Britain | Not announced yet (2025: Tuesday 16 December) |
+| An Post | Standard letters, Republic of Ireland | Not confirmed yet (2025: Monday 22 December) |
+| An Post | Standard letters, Northern Ireland | Not confirmed yet (2025: Friday 19 December) |
+| An Post | Standard letters, Great Britain | Not confirmed yet (2025: Thursday 18 December) |
+| An Post | Standard parcels, Republic of Ireland, Northern Ireland or Great Britain | Not confirmed yet (2025: Tuesday 16 December) |
 
 ## Canada: Canada Post
 
@@ -96,8 +96,8 @@ International dates come earlier than domestic ones.
 | UK | Evri standard to the USA or Australia, ParcelShop drop-off | Not announced yet (2025: Friday 12 December) |
 | US | USPS Priority Mail International, First-Class Package International Service | Wednesday 9 December |
 | US | USPS Priority Mail Express International | Wednesday 16 December |
-| Ireland | An Post Standard Post parcels to the rest of Europe | Not announced yet (2025: Friday 12 December) |
-| Ireland | An Post Standard Post parcels to the USA or the rest of the world | Not announced yet (2025: Thursday 4 December) |
+| Ireland | An Post standard parcels to the rest of Europe | Not confirmed yet (2025: Friday 12 December) |
+| Ireland | An Post standard parcels to the USA or the rest of the world | Not confirmed yet (2025: Thursday 4 December) |
 | Canada | Canada Post to the USA: Xpresspost USA, Expedited Parcel USA, Tracked Packet/Small Packet | Thursday 17, Monday 14 and Friday 11 December |
 | Canada | Canada Post to the UK: Xpresspost International, Tracked Packet/Small Packet | Tuesday 15 and Friday 11 December |
 | Australia | Australia Post to the UK: Express, Standard, Economy Air | Tuesday 15, Friday 11 and Friday 4 December |
@@ -121,14 +121,13 @@ Sent after the last date? Australia Post delivers such items as quickly as it ca
 | --- | --- |
 | Royal Mail | No post on bank holidays: Friday 25 and Monday 28 December |
 | DPD UK | Closed Friday 25, Saturday 26 and Monday 28 December in Great Britain |
-| FedEx | Modified service on Thursday 24 December, closed on Friday 25 December |
 | Australia Post | No deliveries on Christmas Day or Boxing Day |
-| An Post, Canada Post | Not announced yet |
+| Canada Post | Not announced yet |
 
 :::steps
 - Check the carrier's own tracking | On its site or app, with [the number from your shipping email](guide:find-tracking-number).
 - Allow for days off | On the days above, the parcel may not move at all.
-- Read the service alerts | Evri, FedEx and Canada Post post disruptions there, such as bad weather.
+- Read the service alerts | Evri and Canada Post post disruptions there, such as bad weather.
 - Still stuck after Christmas? | See [why tracking stops updating](guide:tracking-not-updating).
 :::
 
@@ -143,9 +142,9 @@ Waiting for a gift? Paste its number into [Peek](/) and set its notifications to
 - [InPost: Christmas drop-off date](https://inpost.co.uk/blog/do-they-know-its-xs-mas-time) – 2025 date
 - [DPD UK: Delivery schedule](https://www.dpd.co.uk/content/about_dpd/delivery_schedule.jsp) – 2026 days off in Great Britain
 - [USPS: Holiday shipping deadlines](https://www.usps.com/holiday/holiday-shipping-dates.htm) – 2026 dates, Hanukkah
-- [FedEx: Last days to ship](https://www.fedex.com/en-us/holiday/last-days-to-ship.html) – days off, service alerts
-- [FedEx: 2026 last days to ship](https://www.fedex.com/content/dam/fedex/us-united-states/services/2026_Peak_Last_Day_to_ship.pdf) – 2026 dates, pickups
-- [An Post: Christmas postal dates](https://www.anpost.com/Post-Parcels/Christmas/christmas-postal-dates) – 2025 dates
+- [FOX 13 Tampa Bay: Here are FedEx's deadlines to ensure holiday gifts arrive by Christmas](https://www.fox13news.com/news/here-fedexs-deadlines-ensure-your-holiday-gifts-arrive-christmas) – FedEx's 2026 dates, weekends, 23 September 2026
+- [RTÉ: What are the Christmas postal dates in Ireland for 2025?](https://www.rte.ie/lifestyle/living/2025/1203/1547111-what-are-the-christmas-postal-dates-in-ireland-for-2025/) – An Post's 2025 dates, "only estimated", 3 December 2025
+- [ComReg: Latest postal dates for Christmas delivery](https://www.comreg.ie/latest-postal-dates-for-christmas-delivery-2/) – An Post's 2025 dates in Ireland and to the UK, 3 December 2025
 - [Canada Post: Holiday sending guidelines](https://www.canadapost-postescanada.ca/cpc/en/our-company/holiday-sending-guidelines.page) – 2026 dates, delivery tool
 - [Canada Post: Service alerts](https://www.canadapost-postescanada.ca/cpc/en/our-company/news-and-media/service-alerts.page) – suspensions
 - [Australia Post: Christmas sending dates](https://auspost.com.au/christmas) – 2026 dates, 2.30pm, interstate days

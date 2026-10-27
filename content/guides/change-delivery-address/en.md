@@ -24,7 +24,7 @@ On a phone, Amazon.co.uk only lets you cancel the order: the 30-minute change wo
 
 ## Can you change the delivery address after it has shipped?
 
-Sometimes, through the carrier rather than the shop. Amazon says so: once an order it manages has shipped, you can ask "the carrier in charge of the delivery" to change your address. The sender is the carrier's customer, though, so the sender chooses which changes you may make. FedEx warns that "some shippers may restrict certain delivery options", and [Evri](carrier:evri) says its options "will depend on the sender's chosen delivery service".
+Sometimes, through the carrier rather than the shop. Amazon says so: once an order it manages has shipped, you can ask "the carrier in charge of the delivery" to change your address. The sender is the carrier's customer, though, so the sender chooses which changes you may make: [Evri](carrier:evri) says its options "will depend on the sender's chosen delivery service".
 
 :::journey
 - shop | Ordered | The shop can still change the address
@@ -44,35 +44,32 @@ Can't find the number, or need one of the free carrier accounts some changes req
 
 > A text asking you to "update your address" or pay a small fee before delivery is the classic scam: [how to spot a fake delivery text](guide:delivery-scam-texts).
 
-## How to change the delivery address with USPS, FedEx, DPD and others
+## How to change the delivery address with USPS, DPD and others
 
 What each carrier lets you change, and what it costs:
 
 | Carrier | Where it can go instead | Cost |
 | --- | --- | --- |
 | [USPS](carrier:usps) (Delivery Instructions) | A spot at your address, a neighbour on the same street and route, Hold for Pickup at your Post Office, another address or Post Office | Free, except another address or Post Office: you pay the postage |
-| [FedEx](carrier:fedex) Delivery Manager (US) | A FedEx retail location, another residence, an evening or 2-hour window | Pickup free; another residence within 120 miles $5.55, further $14.50 to $33.50 |
 | [Royal Mail](carrier:royal-mail) | Another day, depending on what's being delivered. If you don't answer, your safe place (set in its app; Parcelforce uses it too) or a neighbour | No fee stated |
 | Evri | A neighbour, a safe place, a ParcelShop or Evri Locker where offered. No new address: "contact your sender or retailer" | No fee stated |
 | [DPD UK](carrier:dpd-uk) | Another day, a safe place, a neighbour, a Pickup shop. A new address goes through the sender | No fee stated |
 | [DPD Ireland](carrier:dpd-ie) | Another address up to the day before, another date, a safe place, a Pickup Point | No fee stated |
-| [An Post](carrier:an-post) | A safe spot or neighbour you set in My Deliveries, a parcel locker from its text | Lockers free |
 | [Canada Post](carrier:canada-post) | A safe-drop spot at your address, chosen before the first attempt | Free |
 | [Australia Post](carrier:australia-post) (MyPost) | Another street address, a Parcel Locker, Parcel Collect at a Post Office, your PO Box | No fee stated |
 
 A few catches:
 
 - **USPS:** Delivery Instructions need a USPS.com account, show under the tracking status only for eligible items, and are final once submitted.
-- **FedEx:** fees depend on location, so check the total before you confirm.
 - **Australia Post:** redirects only if the sender passed on your email, mobile number or other details matching your MyPost account.
 
 At Canada Post, redirecting a parcel is a business service for senders ($13 plus shipping). USPS Package Intercept ($19.45) is a sender tool too: if the shop agrees to call a parcel back, see [returned to sender](guide:returned-to-sender).
 
 ## Can I reschedule the delivery day?
 
-Often, and more easily than the address. DPD UK and DPD Ireland let you pick another date online, and Royal Mail may let you, depending on what's being delivered. FedEx sells a 5 to 8 p.m. slot on the planned day for $5.55, or a 2-hour window up to 7 days after the original date for $11.50.
+Often, and more easily than the address. DPD UK and DPD Ireland let you pick another date online, and Royal Mail may let you, depending on what's being delivered.
 
-Going away? USPS Hold Mail keeps everything at your Post Office for 3 to 30 days, and FedEx Delivery Manager has a free vacation hold of up to 14 days.
+Going away? USPS Hold Mail keeps everything at your Post Office for 3 to 30 days.
 
 Has the driver already left a card? You're rebooking, not redirecting: see [what to do after a missed delivery](guide:missed-delivery).
 
@@ -91,12 +88,11 @@ If nothing works, ask someone at the original address to take it in, or collect 
 
 ## Moving house: does mail forwarding cover parcels?
 
-Don't count on it. Some posts don't forward even their own parcels, and USPS says a change of address only changes your address with the Post Office, so tell every shop your new address.
+Don't count on it. Canada Post doesn't forward even its own parcels, and USPS says a change of address only changes your address with the Post Office, so tell every shop your new address.
 
 | Country | Service | Price | Parcels |
 | --- | --- | --- | --- |
 | US | USPS Change of Address | $1.25 online identity check; 12 months of forwarding | Priority Mail and Ground Advantage forwarded free; UPS and FedEx are not USPS mail |
-| Ireland | An Post Redirection | €50 for a month, €220 for 12 | Not items sent with An Post Parcels or Courier Post |
 | Canada | Canada Post Mail Forwarding | $66.50 for 4 months, $100.75 for 12, same province | "Parcels (for example Xpresspost or Regular Parcel)" aren't forwarded |
 | Australia | Australia Post Mail Redirection | $40.50 for a month, $202.50 for 12 | "Eligible letters and parcels" |
 
@@ -104,11 +100,11 @@ Don't count on it. Some posts don't forward even their own parcels, and USPS say
 
 ### Can I redirect a parcel to a parcel locker?
 
-Often, if the carrier has lockers and the sender allows it: Evri where available, An Post (free, chosen by text) or Australia Post through MyPost.
+Often, if the carrier has lockers and the sender allows it: Evri where available, or Australia Post through MyPost.
 
 ### How do I stop this happening next time?
 
-Check the address before you pay, or choose a pickup point or locker at checkout. Give the shop your email and mobile number: An Post and Australia Post need them to offer you options, and DPD Ireland to send its notices. Turn on notifications in [Peek](/) or the carrier's app, so you can act before the parcel is out for delivery.
+Check the address before you pay, or choose a pickup point or locker at checkout. Give the shop your email and mobile number: Australia Post needs them to offer you options, and DPD Ireland to send its notices. Turn on notifications in [Peek](/) or the carrier's app, so you can act before the parcel is out for delivery.
 
 Standing preferences help: a safe place set in the Royal Mail app or Evri's MyPlaces.
 
@@ -120,16 +116,12 @@ Standing preferences help: a safe place set in the Royal Mail app or Evri's MyPl
 - [USPS: Package Intercept](https://www.usps.com/manage/package-intercept.htm) – sender tool, $19.45
 - [USPS: Hold Mail](https://www.usps.com/manage/hold-mail.htm) – 3 to 30 days
 - [USPS: Forward mail and change of address](https://www.usps.com/manage/forward.htm) – $1.25, 12 months, parcels forwarded, an address change with the Post Office only
-- [FedEx: Delivery Manager](https://www.fedex.com/en-us/delivery-manager.html) – fees, holds, shipper restrictions
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's other date, safe place in the app, neighbour
 - [Evri: How can I change my delivery address?](https://www.evri.com/faqs/receiving-a-parcel/how-can-i-change-my-delivery-address) – contact the sender
 - [Evri: Diversions](https://www.evri.com/diversions) – options, cut-off, MyPlaces
 - [DPD UK: How can we help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – new address via the sender, options
 - [DPD Ireland: Manage my deliveries](https://www.dpd.ie/manage-my-deliveries/) – address, date, safe place, Pickup point
 - [DPD Ireland: Track Parcels in Realtime](https://www.dpd.ie/track-my-parcel/) – address up to the day before, Pickup Points
-- [An Post: My Deliveries FAQ](https://www.anpost.com/myAccount/My-deliveries/My-Deliveries-FAQ) – safe spot, contact details
-- [An Post: Parcel Lockers](https://www.anpost.com/Post-Parcels/Receiving/Parcel-Lockers) – free lockers chosen by text
-- [An Post: Arrange Redirection](https://www.anpost.com/Post-Parcels/Manage-Your-Post/Arrange-Redirection) – prices
 - [Canada Post: Set a delivery preference](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/setting-preferences/set-a-delivery-preference-canada-post.page) – free safe drop
 - [Canada Post: Choose a delivery preference](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/setting-preferences/choose-a-delivery-preference-canada-post.page) – limits
 - [Canada Post: Package Redirection](https://www.canadapost-postescanada.ca/cpc/en/commercial/manage-shipments/package-redirection.page) – $13 business service

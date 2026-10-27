@@ -1,6 +1,6 @@
 ---
 title: Changer l'adresse de livraison d'un colis : comment faire
-description: Changer l'adresse de livraison d'un colis : ce que permettent eBay et Vinted, puis Colissimo, Chronopost, DPD, bpost, La Poste suisse et FedEx.
+description: Changer l'adresse de livraison d'un colis : ce que permettent eBay et Vinted, puis Colissimo, Chronopost, DPD, bpost et La Poste suisse.
 slug: changer-adresse-livraison-colis
 picture: Une route qui se divise à un panneau, un côté vers une maison et l'autre vers une consigne à colis, une camionnette qui prend le nouveau virage, et Pip qui regarde la route dans cette direction.
 published: 2026-10-14
@@ -20,7 +20,7 @@ Souvent, tant que le vendeur n'a pas envoyé la commande.
 
 ## Changer l'adresse de livraison après expédition
 
-C'est parfois possible, mais c'est au transporteur qu'il faut demander de rediriger le colis, plus à la boutique. Seulement, le client du transporteur, c'est l'expéditeur : c'est lui qui choisit ce que tu as le droit de changer. [La Poste suisse](carrier:swiss-post) prévient que certains services peuvent manquer « en fonction de directives de l'expéditeur », et [FedEx](carrier:fedex) n'accepte un changement d'adresse que si « l'expéditeur n'a pas fixé de conditions ».
+C'est parfois possible, mais c'est au transporteur qu'il faut demander de rediriger le colis, plus à la boutique. Seulement, le client du transporteur, c'est l'expéditeur : c'est lui qui choisit ce que tu as le droit de changer. [La Poste suisse](carrier:swiss-post) prévient que certains services peuvent manquer « en fonction de directives de l'expéditeur ».
 
 :::journey
 - shop | Commande passée | La boutique peut encore changer l'adresse
@@ -42,7 +42,7 @@ Pas de numéro, ou une option qui demande un compte gratuit chez le transporteur
 
 ## Changer l'adresse de livraison chez DPD, bpost, La Poste suisse et les autres
 
-Peu de transporteurs acceptent une adresse dans une autre ville : La Poste suisse accepte toute adresse en Suisse ou au Liechtenstein, DPD Belgique propose « une autre adresse de livraison », et FedEx réachemine dans le même pays si l'expéditeur ne l'a pas exclu. Chez les autres, les choix restent près de l'adresse d'origine.
+Peu de transporteurs acceptent une adresse dans une autre ville : La Poste suisse accepte toute adresse en Suisse ou au Liechtenstein, et DPD Belgique propose « une autre adresse de livraison ». Chez les autres, les choix restent près de l'adresse d'origine.
 
 | Transporteur | Où le colis peut aller à la place | Coût |
 | --- | --- | --- |
@@ -51,7 +51,6 @@ Peu de transporteurs acceptent une adresse dans une autre ville : La Poste suiss
 | [bpost](carrier:bpost) | Pas de nouvelle adresse une fois le colis en route. Depuis l'e-mail ou la notification de l'app : une autre adresse près de chez toi, ou la livraison un jour ouvrable plus tard. Un voisin ou un lieu sûr jusqu'à 10 minutes avant la livraison | Aucun frais indiqué |
 | DPD Belgique | Jusqu'à la veille : un autre jour, une autre adresse, un Pickup Shop, un lieu sûr | Aucun frais indiqué |
 | La Poste suisse | Avec « Mes envois » : un automate My Post 24, un point PickPost ou une autre adresse en Suisse ou au Liechtenstein ; un voisin du même bâtiment ou d'un immeuble attenant ; un lieu de dépôt | Réacheminement gratuit tant que le colis est en route ; après un avis de passage, CHF 8.– |
-| FedEx | Un autre jour ou une autre adresse dans le même pays, avant la première tentative de livraison. Après, suis les instructions de l'e-mail, du SMS ou de l'avis de passage | « Des restrictions et des frais supplémentaires peuvent s'appliquer » |
 
 D'après La Poste (juin 2025), tu peux modifier la livraison de ton colis [Colissimo](carrier:la-poste) jusqu'à minuit la veille.
 
@@ -73,11 +72,11 @@ Si le livreur est déjà passé et a laissé un avis, tu ne rediriges plus le co
 
 Si les options manquent ou sont grisées, c'est souvent pour l'une de ces raisons :
 
-- **L'expéditeur les a bloquées.** La Poste suisse et FedEx le disent.
+- **L'expéditeur les a bloquées.** La Poste suisse le dit.
 - **C'est trop tard.** DPD Belgique accepte ton choix jusqu'à la veille, comme La Poste suisse (minuit, et plus tôt pour une nouvelle adresse). bpost va jusqu'à 10 minutes avant la livraison, mais seulement pour un voisin ou un lieu sûr.
 - **Il vient de l'étranger.** Les réglages permanents de La Poste suisse ne s'appliquent pas aux petits colis de l'étranger dont le numéro commence par 98.
 - **Il attend déjà en point de retrait.** bpost ne transfère pas un colis vers un autre Point d'enlèvement : « Non, ce n'est malheureusement pas possible. »
-- **L'adresse est imprimée sur l'étiquette.** bpost livre « à l'adresse indiquée sur votre colis », et FedEx explique qu'il « ne peut pas modifier physiquement le bordereau d'expédition d'origine ».
+- **L'adresse est imprimée sur l'étiquette.** bpost livre « à l'adresse indiquée sur votre colis ».
 
 Si rien ne marche, demande à quelqu'un à l'adresse d'origine de prendre le colis, ou va le retirer au point de retrait. S'il n'est pas retiré à temps, il repart chez la boutique : [que devient un colis non retiré](guide:uncollected-parcel). La prochaine fois, active les notifications dans [Peek](/) ou dans l'app du transporteur, pour agir avant que le colis parte en livraison.
 
@@ -127,5 +126,4 @@ Non. Peek suit ton colis et te montre où il en est ; seuls la boutique ou le tr
 - [La Poste suisse : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – réexpédition après un avis, CHF 8.–
 - [La Poste suisse : Gérer les colis de manière permanente](https://www.post.ch/fr/reception/gerer-un-envoi/gerer-permanente) – réacheminement permanent, numéros 98
 - [La Poste suisse : Changement d'adresse avec réexpédition](https://www.post.ch/fr/reception/demenagement/changement-d-adresse-avec-reexpedition) – prix, CHF 8 par colis, exclusions
-- [FedEx : Est-il possible de changer l'adresse de livraison de mon colis ?](https://www.fedex.com/fr-fr/customer-support/faq/receiving/delivery-options-fedex/change-fedex-delivery-address.html) – conditions de l'expéditeur, avant la première tentative, frais, bordereau
 :::

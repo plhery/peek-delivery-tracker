@@ -14,6 +14,7 @@ import {
   declaredChanges,
   decideGate,
   diffDatabaseFacets,
+  failureHeldSince,
   gateReport,
   holdsRelease,
   installedRelease,
@@ -180,6 +181,18 @@ describe('adoption slots', () => {
       'Regenerate the contract and the iPhone resources', 'Write the adoption as a patch']) {
       assert.equal(slotFailure(slot, '0.689.0', [failed(1, '0.689.0', step)])?.id, 1);
     }
+  });
+
+  it('holds a failed release for the rest of a day slot, and for two hours in the night', () => {
+    const since = (slotStart, now) => failureHeldSince(new Date(slotStart), new Date(now)).toISOString();
+    assert.equal(since('2026-10-21T12:07:00Z', '2026-10-21T14:06:00Z'), '2026-10-21T12:07:00.000Z');
+    assert.equal(since('2026-10-21T22:07:00Z', '2026-10-21T23:50:00Z'), '2026-10-21T22:07:00.000Z');
+    assert.equal(since('2026-10-21T22:07:00Z', '2026-10-22T00:30:00Z'), '2026-10-21T22:30:00.000Z');
+    // The 22:07 slot's failure holds at 23:50, and the release is tried again at 00:30.
+    const night = [failed(1, '0.689.0', 'Test the app with the release', '2026-10-21T22:11:00Z')];
+    const nightSlot = '2026-10-21T22:07:00Z';
+    assert.equal(slotFailure(failureHeldSince(new Date(nightSlot), new Date('2026-10-21T23:50:00Z')), '0.689.0', night)?.id, 1);
+    assert.equal(slotFailure(failureHeldSince(new Date(nightSlot), new Date('2026-10-22T00:30:00Z')), '0.689.0', night), undefined);
   });
 
   it('tries a release again after a failure of the runner, or one in the slot before', () => {

@@ -101,7 +101,9 @@ adoption; later runs look at the workflow's runs, find that one and stop at once
 finds nothing newer leaves the slot to the next run, so a release published in the meantime
 does not wait for the next slot. Each run records the release it tries as an artifact
 (`release-<version>`): when that release fails, such as the app's tests with it, the slot's
-later runs that would take it stop at once too, and a newer release still adopts. The timer
+later runs that would take it stop at once too, and a newer release still adopts. In the
+night's slot, which lasts eight hours, the first CI run on main from two hours after the
+failure tries it again, so a fix that lands at night does not wait for 06:07. The timer
 sets the workflow's `slot` input. A run without it, by hand, always adopts but never counts
 as its slot's adoption, so a release published after it still adopts in the same slot. An
 urgent release is adopted by hand:

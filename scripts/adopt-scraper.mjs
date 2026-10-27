@@ -144,22 +144,31 @@ export function releaseArtifact(version) {
 export const RELEASE_STEPS = new Set(['Install the release', "Check the scraper's optional peers",
   'Regenerate the contract and the iPhone resources', 'Write the adoption as a patch', 'Test the app with the release']);
 
-/** Whether a run's Adopt job, started in the slot, failed at a step that runs its release. */
-export function releaseFailed(slot, run) {
+/**
+ * Since when a release that failed waits: the slot's start, or a slot's length ago in the night's longer slot. A CI run
+ * on main tries a release that failed at 22:07 again from 00:07, once the app may have been fixed, not only at 06:07.
+ */
+export function failureHeldSince(slot, now) {
+  return new Date(Math.max(slot.getTime(), now.getTime() - SLOT_LENGTH * MINUTE));
+}
+
+/** Whether a run's Adopt job, started since `since`, failed at a step that runs its release. */
+export function releaseFailed(since, run) {
   return run.jobs.some((job) => job.name === 'Adopt' && job.status === 'completed' && job.conclusion === 'failure'
-    && Date.parse(job.started_at) >= slot.getTime()
+    && Date.parse(job.started_at) >= since.getTime()
     && (job.steps ?? []).some((step) => step.conclusion === 'failure' && RELEASE_STEPS.has(step.name)));
 }
 
 /**
- * The run of this slot whose release `version` failed, such as the app's tests
- * with it: that release waits for the next slot instead of failing every later
- * run of this one, while a newer release still adopts at once. A run by hand
- * counts too: the release fails the same way whoever started the run. `runs`
- * carry their `jobs` and `artifacts`.
+ * The run since `since` (failureHeldSince) whose release `version` failed, such
+ * as the app's tests with it: that release waits for the next slot, or two
+ * hours in the night's, instead of failing every later run of this one, while a
+ * newer release still adopts at once. A run by hand counts too: the release
+ * fails the same way whoever started the run. `runs` carry their `jobs` and
+ * `artifacts`.
  */
-export function slotFailure(slot, version, runs) {
-  return runs.find((run) => releaseFailed(slot, run)
+export function slotFailure(since, version, runs) {
+  return runs.find((run) => releaseFailed(since, run)
     && (run.artifacts ?? []).some((artifact) => artifact.name === releaseArtifact(version)));
 }
 
@@ -532,7 +541,9 @@ async function due() {
   const repository = process.env.GITHUB_REPOSITORY;
   const ownRun = Number(process.env.GITHUB_RUN_ID);
   if (!repository || !ownRun) throw new Error('GITHUB_REPOSITORY and GITHUB_RUN_ID are required to look for the slot\'s adoption');
-  const slot = adoptionSlot(new Date());
+  const now = new Date();
+  const slot = adoptionSlot(now);
+  const held = failureHeldSince(slot, now);
   const ask = (pathname) => retry(() => github(pathname), { attempts: 3, pauseMs: 5_000 });
   const query = new URLSearchParams({ created: `>=${new Date(slot.getTime() - SLOT_LENGTH * MINUTE).toISOString()}`, per_page: '100' });
   const { workflow_runs: listed } = await ask(`/repos/${repository}/actions/workflows/adopt-scraper.yml/runs?${query}`);
@@ -546,14 +557,14 @@ async function due() {
   // The release this run would take, asked only when one of the slot's runs failed with its release.
   let failure;
   let target;
-  if (!adoption && runs.some((run) => releaseFailed(slot, run))) {
+  if (!adoption && runs.some((run) => releaseFailed(held, run))) {
     const current = pinnedVersion(await readJson(path.join(root, 'package.json')));
     target = chooseTarget({ current, distTags: (await retry(registryDocument, { attempts: 3, pauseMs: 5_000 })).distTags });
     if (target.adopt) {
-      for (const run of runs.filter((candidate) => releaseFailed(slot, candidate))) {
+      for (const run of runs.filter((candidate) => releaseFailed(held, candidate))) {
         run.artifacts = (await ask(`/repos/${repository}/actions/runs/${run.id}/artifacts?per_page=100`)).artifacts;
       }
-      failure = slotFailure(slot, target.version, runs);
+      failure = slotFailure(held, target.version, runs);
     }
   }
   const name = `${slot.toISOString().slice(11, 16)} UTC slot`;

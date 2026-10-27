@@ -31834,7 +31834,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "topyou",
+      "recognitionRank": 58
     },
     "trackingUrlTemplate": "https://track.szty56.com/",
     "linkRules": [],
@@ -31845,6 +31846,40 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://track.szty56.com/"
+  },
+  "yfhex": {
+    "displayName": "YFHEX",
+    "aliases": [
+      "YFH",
+      "YFHEX Logistics",
+      "原飞航",
+      "原飛航物流",
+      "深圳市原飞航物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#00a2e9",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://toms.yfhex.com:6055/track_query_c.aspx?track_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "toms.yfhex.com"
+        ],
+        "pathPattern": "^/track_query_c\\.aspx$",
+        "params": [
+          "track_number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.yfhex.com/"
   }
 } as const;
 
@@ -32701,7 +32736,8 @@ export const CARRIER_IDS = [
   "pin-ag",
   "tusk-logistics",
   "gofo-ca",
-  "topyou"
+  "topyou",
+  "yfhex"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

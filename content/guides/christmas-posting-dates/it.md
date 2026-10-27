@@ -4,10 +4,10 @@ description: Entro quando spedire per Natale con Poste Italiane, SDA, GLS e BRT 
 slug: spedire-pacco-per-natale-ultimo-giorno
 picture: Una pagina di calendario con un giorno di dicembre cerchiato, un furgone che porta un pacco legato con un nastro rosso sotto la neve e Pip che gli corre accanto.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
-[Poste Italiane](carrier:poste-italiane) non ha ancora pubblicato le date di Natale 2026: nel 2025 garantiva la consegna entro Natale in Italia per i pacchi affidati entro giovedì 18 dicembre con i servizi a 2 giorni lavorativi, ed entro venerdì 19 dicembre con quelli a 1 giorno. In Ticino [la Posta](carrier:swiss-post) ha già le date 2026: mercoledì 23 dicembre per Posta A e PostPac Priority, martedì 22 per PostPac Economy. Le tabelle danno la scadenza di ogni corriere come l'abbiamo verificata venerdì 9 ottobre 2026, con la data dell'anno scorso dove quella di quest'anno non è ancora uscita.
+[Poste Italiane](carrier:poste-italiane) non ha ancora pubblicato le date di Natale 2026: nel 2025 garantiva la consegna entro Natale in Italia per i pacchi affidati entro giovedì 18 dicembre con i servizi a 2 giorni lavorativi, ed entro venerdì 19 dicembre con quelli a 1 giorno. In Ticino [la Posta](carrier:swiss-post) ha già le date 2026: mercoledì 23 dicembre per Posta A e PostPac Priority, martedì 22 per PostPac Economy. Le tabelle danno la scadenza di ogni corriere come l'abbiamo verificata venerdì 9 ottobre 2026 (per Poste Italiane, martedì 27 ottobre), con la data dell'anno scorso dove quella di quest'anno non è ancora uscita.
 
 ## Italia: Poste Italiane, SDA, GLS e BRT
 
@@ -23,7 +23,7 @@ Nessun corriere italiano ha ancora messo online il calendario di Natale 2026, qu
 | GLS Italy | Logistics Groupage | Non ancora annunciata (2025: lunedì 15 dicembre) |
 | [BRT](carrier:brt) | Tutti i servizi | Nessuna data pubblicata, neanche nel 2025 |
 
-> Nel 2025 l'avviso di Natale di Poste è comparso online tra il 12 e il 21 novembre. Prima di spedire, controlla la sua pagina [Aggiornamenti operativi](https://www.poste.it/aggiornamenti-operativi.html).
+> Prima di spedire, controlla la pagina [Aggiornamenti operativi](https://www.poste.it/aggiornamenti-operativi/) di Poste.
 
 Cosa c'è dietro queste date:
 
@@ -39,7 +39,7 @@ Nel 2025 Poste ha dato le stesse date per tutta Italia, senza distinguere le iso
 
 - **Poste Delivery Web veloce:** da 1 a 4 giorni lavorativi per gli invii da o per Sicilia, Calabria e Sardegna.
 - **BRT Express:** tempi indicativi di 48 ore per Calabria, Sicilia e Sardegna, ma fino a 48/72 ore in provincia in buona parte della Sicilia e nelle province di Cosenza e Crotone. Per le isole minori servono altri 2 giorni lavorativi.
-- **Traghetti e voli:** BRT avvisa quando saltano i traghetti tra Livorno e la Sardegna (a novembre 2024, con almeno un giorno di ritardo). A dicembre 2025 Poste segnalava possibili ritardi verso la Sardegna, per alcuni invii del sabato e del lunedì, per le chiusure notturne dell'aeroporto di Cagliari Elmas.
+- **Traghetti:** BRT avvisa quando saltano i traghetti tra Livorno e la Sardegna (a novembre 2024, con almeno un giorno di ritardo).
 
 ## Ticino e Grigioni italiano: La Posta
 
@@ -62,7 +62,7 @@ Per PostPac Priority la Posta è chiara: «per garantire un recapito affidabile 
 
 ## Spedire un pacco all'estero per Natale
 
-Per l'estero le scadenze arrivano prima. La Posta svizzera divide le date solo tra «Europa» e «altri paesi», e l'Italia conta come Europa. Poste Italiane invece, nel 2025, non ha dato date di Natale per l'estero, né per le lettere né per i pacchi.
+Per l'estero le scadenze arrivano prima. La Posta svizzera divide le date solo tra «Europa» e «altri paesi», e l'Italia conta come Europa. Poste Italiane invece non ha ancora pubblicato date di Natale 2026 per l'estero.
 
 | Da | Corriere e servizio | Spedisci entro |
 | --- | --- | --- |
@@ -71,7 +71,7 @@ Per l'estero le scadenze arrivano prima. La Posta svizzera divide le date solo t
 | Svizzera | La Posta, documenti e merci di piccole dimensioni | Europa: martedì 8 dicembre. Altri paesi: martedì 1° dicembre |
 | Svizzera | La Posta, documenti URGENT | Europa: venerdì 11 dicembre. Altri paesi: mercoledì 9 dicembre |
 | Svizzera | La Posta, merci di piccole dimensioni URGENT e merce URGENT | Europa: giovedì 10 dicembre. Altri paesi: martedì 8 dicembre |
-| Italia | Poste Italiane, lettere e pacchi | Nessuna data di Natale, neanche nel 2025 |
+| Italia | Poste Italiane, lettere e pacchi | Non ancora annunciata |
 | Italia | GLS Italy, spedizioni internazionali | Non ancora annunciata (2025: ultime partenze lunedì 22 dicembre) |
 | Italia | BRT, Europa | Nessuna data: BRT rimanda al suo calcolatore dei tempi di consegna |
 
@@ -110,10 +110,7 @@ Hai spedito dopo l'ultima data? Nel 2025 Poste avvisava che le spedizioni affida
 Aspetti un regalo? Incolla il numero su [Peek](/) e scegli le notifiche «Solo giorno di consegna»: quando il pacco è in consegna lo controlla fino a ogni 2 minuti, ma non può farlo arrivare prima.
 
 :::sources
-- [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi.html) – nessuna data 2026 al 9 ottobre, sospensioni e ritardi per l'estero, Raccomandata Internazionale, Stati Uniti
-- [Poste Italiane: Aggiornamenti operativi, 12 novembre 2025 (archivio)](https://web.archive.org/web/20251112015828/https://www.poste.it/aggiornamenti-operativi) – ancora nessun avviso di Natale
-- [Poste Italiane: Aggiornamenti operativi, 21 novembre 2025 (archivio)](https://web.archive.org/web/20251121125448/https://www.poste.it/aggiornamenti-operativi) – avviso di Natale 2025 online
-- [Poste Italiane: Aggiornamenti operativi, 30 dicembre 2025 (archivio)](https://web.archive.org/web/20251230062221/https://www.poste.it/aggiornamenti-operativi) – solo date nazionali, aeroporto di Cagliari
+- [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi/) – nessuna data 2026 al 27 ottobre, sospensioni e ritardi per l'estero, Raccomandata Internazionale, Stati Uniti
 - [Poste Italiane: Calendario operativo spedizioni Natale 2025](https://www.media.poste.it/599012ae-8aba-49d6-ae9f-3e85feafebd5/file/calendario-operativo-spedizioni-natale) – 18 e 19 dicembre 2025, consegne dal 29 dicembre, giorni di stop, filiali SDA
 - [Poste Italiane: Indicazioni per i clienti privati, Natale 2025](https://www.media.poste.it/6411262c-c71f-4627-b6e5-2ac9758c1b69/file/indicazioni-preparazione-spedizioni-natale-clienti-privati) – 2 giorni e 1 giorno lavorativo, orari limite, uffici chiusi il 25 e 26 dicembre
 - [Poste Italiane: Indicazioni per i clienti business, Natale 2025](https://www.media.poste.it/6dd7045e-2f24-4d17-bf80-df6672cf673e/file/indicazioni-preparazione-spedizioni-natale-clienti-business) – ultimo giorno per gli acquisti

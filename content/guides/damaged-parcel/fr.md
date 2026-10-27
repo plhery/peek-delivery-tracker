@@ -1,6 +1,6 @@
 ---
 title: Colis endommagé : que faire et comment réclamer
-description: Colis abîmé ou cassé à la livraison ? Les photos à prendre, quand le refuser, qui doit te rembourser et les délais de La Poste, Chronopost, bpost et Vinted.
+description: Colis abîmé ou cassé à la livraison ? Les photos à prendre, quand le refuser, qui doit te rembourser et les délais de La Poste, Mondial Relay, bpost et Vinted.
 slug: colis-endommage-que-faire
 picture: Un carton cabossé au coin déchiré et au ruban adhésif qui se décolle, un téléphone qui le photographie au flash, et Pip, inquiet, un pansement collé sur lui.
 published: 2026-10-14
@@ -45,7 +45,6 @@ La plupart des transporteurs ne traitent qu'avec l'expéditeur : ta réclamation
 | Transporteur | Qui peut réclamer | Délai pour un dommage | Indemnité sans option |
 | --- | --- | --- | --- |
 | [Colissimo, La Poste](carrier:la-poste) (FR) | Tout le monde peut réclamer ; seul l'expéditeur est indemnisé | Colis abîmé laissé dans ta boîte aux lettres ou chez un voisin : au bureau de poste au plus tard le jour ouvrable suivant. Réclamation : 1 an après le dépôt | 23 € par kilo (France métropolitaine) |
-| [Chronopost](carrier:chronopost) (FR) | Réserves écrites par toi à la livraison, puis l'expéditeur | À la livraison, devant le livreur | Non indiqué |
 | [Mondial Relay](carrier:mondial-relay) (FR) | L'expéditeur, après ton refus au Point Relais | À la remise : rien n'est pris en compte après | Non indiqué |
 | [bpost](carrier:bpost) (BE) | L'expéditeur ; colis venu de l'étranger : préviens aussi bpost | 7 jours après la réception | Non indiqué |
 | [La Poste suisse](carrier:swiss-post) | L'expéditeur ou le destinataire, l'un ou l'autre peut être payé | 8 jours après la distribution | CHF 500.– (Signature CHF 1500.–, Assurance ou Fragile CHF 5000.–) |
@@ -59,9 +58,7 @@ Si l'emballage est abîmé quand le facteur te le remet, refuse-le (il repart ch
 
 Pour Colissimo, « le destinataire du colis ne peut prétendre à une indemnisation » : seul l'expéditeur reçoit les 23 € par kilo, ou plus avec une option. Pas de réponse satisfaisante ? Il faut d'abord passer par un recours interne auprès de La Poste, puis tu peux saisir le Médiateur du groupe La Poste.
 
-### Colis endommagé avec Chronopost ou Mondial Relay
-
-Chez Chronopost, écris tes réserves devant le livreur, sur le bon d'émargement prévu pour ça. Elles doivent être « précises, complètes, datées et signées » : quel article, combien de pièces, quels dégâts. Contacte ensuite l'expéditeur, c'est-à-dire la boutique en ligne.
+### Colis endommagé avec Mondial Relay
 
 Chez Mondial Relay, refuse le colis au Point Relais s'il est abîmé, déchiré ou écrasé : il repart chez l'expéditeur. « Le colis doit être refusé pour que son état soit expertisé et que la procédure de remboursement soit effectuée », et les réclamations faites après la remise ne sont pas prises en compte. Si une boutique te l'a fait livrer à domicile, signale le colis abîmé à son service client.
 
@@ -132,7 +129,6 @@ Si le vendeur ne fait rien, ta banque ou PayPal peuvent aider. La rétrofacturat
 - [La Poste : Mon envoi a été livré abîmé](https://aide.laposte.fr/contenu/mon-envoi-a-ete-livre-abime-son-contenu-deteriore-que-faire) – refus, observation, jour ouvrable suivant, expéditeur
 - [La Poste : Garanties et indemnisations Colissimo](https://aide.laposte.fr/contenu/quelles-sont-les-garanties-et-indemnisations-pour-un-envoi-avec-colissimo) – 23 € par kilo, expéditeur seul
 - [La Poste : CGV Courrier-Colis](https://www.laposte.fr/ecom/occ/smartedit/medias/sys_master/pdf/hfb/ha1/31823066595358/CGV_COURRIER_COLIS_07-07-2026/CGV-COURRIER-COLIS-07-07-2026.pdf) – 1 an, recours, Médiateur
-- [Chronopost : Colis perdu ou arrivé endommagé (copie archivée)](https://web.archive.org/web/20250114/https://www.chronopost.fr/fr/faq/destinataire/que-faire-si-mon-colis-est-perdu-ou-arrive-endommage) – réserves sur le bon d'émargement
 - [Mondial Relay : Mon colis est abîmé](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-colis-est-abime-que-faire/) – refus au Point Relais, réclamations après remise
 - [bpost : Plainte pour colis endommagé](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – expéditeur, 7 jours, étranger
 - [SPF Economie : Achats en ligne, vos droits](https://news.economie.fgov.be/245209-achats-en-ligne-voici-vos-droits/) – colis endommagé, vendeur, particuliers

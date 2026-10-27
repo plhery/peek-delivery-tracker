@@ -4,7 +4,7 @@ description: Warum die Sendungsverfolgung aus China tagelang stehen bleibt oder 
 slug: paket-aus-china-verfolgen
 picture: Ein Flugzeug zieht einen gepunkteten Bogen über den Globus, von einer roten Stecknadel zu einer grünen am Ziel, und Pip reist zwischen zwei Lieferwagen.
 published: 2026-10-09
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Ein Paket von AliExpress, Temu oder Shein geht durch mehrere Hände: Ein chinesisches Logistikunternehmen schickt es per Flugzeug los, der Zoll prüft es, und bei dir stellt es die Post, [DHL](carrier:dhl) oder ein anderer Paketdienst zu, oft unter einer neuen Nummer. Jeder scannt nur seine eigene Etappe. Rechne also mit bis zu 11 Tagen bis zum ersten Scan, mit Funkstille während des Flugs und mit Wartezeit nach „Arrived at destination country“. Verfolge erst die Nummer aus dem Shop, dann die des Paketdienstes vor Ort. Beim billigsten Versand ist an dieser Übergabe manchmal endgültig Schluss mit der Sendungsverfolgung. Ware aus einem Lager in der EU spart sich den Flug, in Deutschland und Österreich auch den Zoll.
@@ -30,7 +30,7 @@ Hängt eine Bestellung scheinbar fest, liegt das Paket meist zwischen zwei Unter
 
 - **Vor dem ersten Scan.** Laut AliExpress und Cainiao kann es nach dem Versand durch den Verkäufer bis zu 11 Tage dauern, bis die ersten Daten auftauchen. So lange zeigt Cainiao `Not Found`. Nach 12 Tagen immer noch nichts? Dann schreib dem Verkäufer.
 - **Beim Zoll.** Nach der Landung wartet das Paket auf die Verzollung (nächster Abschnitt).
-- **Beim Economy-Versand.** Cainiao sagt es offen: „Die Sendungsverfolgung bei Economy-Versand wird nur bis zur Übergabe an den Spediteur des Ziellandes/der Zielregion aktualisiert.“ Shein Schweiz schreibt, Economy-Versand könne derzeit „keine Logistik-Track-Informationen erhalten“. Und Temu warnt, die Sendungsverfolgung sei „möglicherweise nicht für jeden Schritt des Weges verfügbar“.
+- **Beim Economy-Versand.** Cainiao sagt es offen: „Die Sendungsverfolgung bei Economy-Versand wird nur bis zur Übergabe an den Spediteur des Ziellandes/der Zielregion aktualisiert.“ Shein Schweiz schreibt, Economy-Versand könne derzeit „keine Logistik-Track-Informationen erhalten“.
 - **Rund um chinesische Feiertage.** Feiertage in China wie das chinesische Neujahrsfest (Ende Januar oder im Februar) und der Nationalfeiertag (die erste Oktoberwoche) können Abfertigung und Verzollung bremsen. Für die Feiertage im Oktober 2026 kündigte SF International an, manche chinesischen Zollstellen würden keine privaten Postsendungen abfertigen.
 
 Ist die Lieferzeit deiner Bestellung schon abgelaufen? Dann lies weiter unten, wann du dein Geld zurückbekommst. Mehr zu solchen Lücken: [Warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
@@ -73,7 +73,7 @@ Weitere Meldungen von Cainiao und YunExpress erklären die Seiten zur [Cainiao S
 Meist aus einem von drei Gründen:
 
 - **AliExpress hat Bestellungen zusammengelegt.** Teilen sich mehrere Bestellungen eine neue Nummer, wurde ihr Versand laut AliExpress hochgestuft.
-- **Eine Bestellung, mehrere Pakete.** Laut Shein können Pakete aus verschiedenen Lagern kommen und dann unterschiedlich lange brauchen. Temu nennt für jedes Paket eine eigene Lieferzeit und die Sendungsnummer, sobald sie feststeht.
+- **Eine Bestellung, mehrere Pakete.** Laut Shein können Pakete aus verschiedenen Lagern kommen und dann unterschiedlich lange brauchen.
 - **Ein Paketdienst vor Ort hat übernommen**, mit eigenem Etikett und eigener Nummer. Veröffentlicht Cainiao diese Nummer, steht sie auf seiner Tracking-Seite. Ab dann schaust du auf der Seite dieses Paketdienstes nach. Wie Tracker mit zwei Nummern umgehen, steht unter [Paketverfolgung aller Anbieter](guide:universal-tracker).
 
 Nummern der Post sind die Ausnahme. Der Weltpostverein erlaubt nur eine S10-Nummer pro Sendung, deshalb funktioniert eine Nummer von China Post meist auch in der Sendungsverfolgung deiner Post.
@@ -107,7 +107,7 @@ Das hängt von der Versandlinie ab, die der Verkäufer bucht. Den Namen des Pake
 
 ## Versand aus einem Lager in der EU: Was ändert sich?
 
-Nicht jedes Temu-Paket kommt aus China: Ein Teil der Ware wird laut Temu aus lokalen Lagern verschickt. Auf den Versandseiten für Deutschland und Österreich nennt Temu diese Produkte ausdrücklich, für sie gilt kein Mindestbestellwert. Es sollen mehr werden: Temu lädt Verkäufer aus Deutschland, Österreich und anderen europäischen Ländern ein, die über lokale Lagerhäuser liefern, und erwartet, dass bis zu 80 Prozent seines Umsatzes in Europa künftig aus diesem Local-to-Local-Modell kommen, mit schnelleren Lieferungen. Laut seiner Absichtserklärung mit Temu soll DHL auch dieses Modell unterstützen.
+Nicht jedes Temu-Paket kommt aus China: Temu lädt auch Verkäufer aus Deutschland, Österreich und anderen europäischen Ländern ein, deren Bestellungen über lokale Lagerhäuser laufen. Auf den Versandseiten für Deutschland und Österreich nennt Temu Produkte aus lokalen Lagern ausdrücklich, für sie gilt kein Mindestbestellwert. Es sollen mehr werden: Temu erwartet, dass bis zu 80 Prozent seines Umsatzes in Europa künftig aus diesem Local-to-Local-Modell kommen, mit schnelleren Lieferungen. Laut seiner Absichtserklärung mit Temu soll DHL auch dieses Modell unterstützen.
 
 Für die Sendungsverfolgung heißt das: Ein Paket aus einem Lager in der EU spart sich den Flug aus China und den Zoll. Die zwei langen Funkstillen von oben fallen weg, die Sendungsverfolgung beginnt in Europa.
 
@@ -123,7 +123,6 @@ Das hängt von der Versandart ab, die du bezahlt hast. Cainiao zählt Kalenderta
 | --- | --- |
 | AliExpress | Choice-Artikel nach Deutschland: 6 bis 8 Tage, mit voller Sendungsverfolgung. Sonst steht die Lieferzeit auf der Produkt- und der Bestellseite |
 | Cainiao-Linien | Premium 5 bis 10 Tage in gefragte Länder wie Spanien oder die Niederlande. Standard 10 bis 18 Tage, nach Deutschland im besten Fall 7 Tage ab Abholung. Economy 20 bis 45 Tage |
-| Temu | 1 bis 3 Tage Bearbeitung, dann eine Lieferzeit pro Paket, sobald es verschickt ist |
 | Shein Deutschland | Ein Lieferzeitraum mit Datum. Für eine Standardbestellung Anfang Oktober 2026 waren es 11 bis 14 Kalendertage |
 | Shein Österreich | Standard 6 bis 9 Werktage, Abholung 6 bis 8 |
 | Shein Schweiz | Standard 6 bis 8 Werktage, Versand CHF 5.90 bei Bestellungen unter CHF 39.– |
@@ -153,7 +152,6 @@ Geh in dieser Reihenfolge vor:
 | Plattform | Nicht angekommen | Als zugestellt markiert, aber nicht da |
 | --- | --- | --- |
 | AliExpress | Streitfall ab dem 11. Tag nach dem Versand bis 15 Tage nach Ende der Lieferzeit | Erst beim Paketdienst vor Ort nachfragen, dann Streitfall |
-| Temu | Kundenservice innerhalb von 90 Tagen nach dem Bestelldatum | Ebenso |
 | Shein | Innerhalb von 45 Tagen nach dem Zahlungsdatum | Innerhalb von 30 Tagen nach dem Lieferdatum in der Sendungsverfolgung |
 
 Bei Artikeln mit dem Hinweis „Schnelle Lieferung“ gibt es bei AliExpress einen Gutschein, wenn die Lieferung zu spät kommt, und eine Erstattung, wenn sie nach einer festgelegten Zahl von Tagen noch nicht da ist. Bei Artikeln ohne den Hinweis gibt es eine Erstattung nach 60, 75, 90 oder 120 Tagen, je nach Lieferbedingungen.
@@ -175,7 +173,6 @@ Bildschirme, Status, Gutschriften und Reklamationen der Shops selbst: [AliExpres
 - [AliExpress: Shows delivered, not received](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – erst der Paketdienst im Zielland
 - [AliExpress: AliExpress-Verpflichtung](https://de.aliexpress.com/p/service-mindset/index.html) – Choice 6 bis 8 Tage, „Schnelle Lieferung“, 60 bis 120 Tage
 - [AliExpress: Do I have to pay for customs and import taxes?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – Lager im eigenen Land, keine zusätzlichen Zölle und Steuern
-- [Temu: Versandinformationen (Archivkopie vom 11. März 2026)](https://web.archive.org/web/20260311044435/https://www.temu.com/de/shipping-info.html) – Bearbeitung, Lieferzeit pro Paket, lokale Lager, Tracking, 90 Tage
 - [Temu Deutschland: Versandinformationen](https://www.temu.com/de/shipping-info.html) – lokale Lager ohne Mindestbestellwert
 - [Temu Österreich: Versandinformationen](https://www.temu.com/at/shipping-info.html) – lokale Lager ohne Mindestbestellwert
 - [Shein Deutschland: Versandinformation](https://de.shein.com/Shipping-Info-a-280.html) – Lieferzeitraum, verschiedene Lager, 45 und 30 Tage

@@ -1,6 +1,6 @@
 ---
 title: Paquete dañado: qué hacer y cómo reclamar
-description: ¿Tu paquete ha llegado dañado o roto? Las fotos que debes hacer, cuándo rechazarlo, quién te devuelve el dinero y los plazos de Correos, SEUR, InPost y Wallapop.
+description: ¿Tu paquete ha llegado dañado o roto? Las fotos que debes hacer, cuándo rechazarlo, quién te devuelve el dinero y los plazos de Correos, InPost y Wallapop.
 slug: paquete-danado-que-hacer
 picture: Una caja abollada con una esquina rota y la cinta despegándose, un móvil que le hace una foto con flash y Pip, preocupado, con una tirita pegada.
 published: 2026-10-14
@@ -20,7 +20,7 @@ Si tu paquete llega dañado, hazle fotos antes de seguir desembalando, guarda la
 - Que reclame el vendedor | Reclama tú al transportista solo si enviaste tú el paquete, si contrataste tú el transporte o si ese transportista paga al destinatario.
 :::
 
-Un daño que descubres al abrir la caja también cuenta: avisa en cuanto lo veas. La ley del transporte terrestre de mercancías da 7 días naturales para los daños que no se ven desde fuera. SEUR también da 7 días, y en InPost tienes 7 para avisar a la tienda.
+Un daño que descubres al abrir la caja también cuenta: avisa en cuanto lo veas. La ley del transporte terrestre de mercancías da 7 días naturales para los daños que no se ven desde fuera, y en InPost tienes 7 para avisar a la tienda.
 
 ## Paquete dañado o roto: ¿quién es responsable?
 
@@ -45,7 +45,6 @@ Casi todos los transportistas tratan solo con el remitente, así que tu reclamac
 | Transportista | Quién reclama | Plazo para daños | Indemnización |
 | --- | --- | --- | --- |
 | [Correos](carrier:correos-spain) | Cobra siempre el remitente; tú, solo si él firma una autorización | Paquete Azul y carta certificada: al recibirlo; después no admite reclamaciones por daños. Paq Estándar y Paq Premium: Correos solo publica plazos para extravío (hasta 1 año desde la admisión) | En los envíos que regula la Ley 15/2009, lo menor entre el valor declarado, la reposición y la reparación. Con valor declarado o seguro, hasta 6.000 € |
-| [SEUR](carrier:seur) | Sus condiciones no lo dicen; tú anotas las reservas en el albarán | Daño visible: en el albarán, al entregarlo. No visible: 7 días desde la entrega | Sin valor declarado, hasta 33 € por kg, con un máximo de 1.800 € por envío |
 | [GLS](carrier:gls-es) | El remitente: si el contenido está dañado, GLS te manda a él | – | – |
 | InPost | Tú avisas a la tienda; los particulares reclaman con los formularios de InPost | Para avisar a la tienda: 1 día desde la entrega si el daño se ve, 7 días si no se ve | – |
 
@@ -55,9 +54,7 @@ En el transporte terrestre de mercancías, la Ley 15/2009 pide que el destinatar
 
 Correos lo deja claro: «El beneficiario de cualquier indemnización es siempre el remitente». Tú solo puedes cobrar si el remitente presenta una solicitud firmada que lo autorice. En el Paquete Azul y la carta certificada tienes que comunicar el deterioro en el momento de recibirlo: si no, Correos considera que se entregó en buen estado y no admite la reclamación después. Puede pedirte fotos del embalaje y del contenido dañado, porque comprueba si el embalaje era el adecuado, y, si el envío llevaba seguro o valor declarado, un justificante del valor o una factura de reparación. Responde en un mes como máximo.
 
-### Paquete dañado con SEUR o GLS
-
-SEUR te pide firmar el albarán de entrega. Si ves el daño desde fuera, escribe tus reservas en ese albarán en el mismo momento. Si aparece al abrir la caja, tienes 7 días desde la entrega. SEUR no responde de los daños causados por un embalaje insuficiente.
+### Paquete dañado con GLS
 
 Con GLS, si el envoltorio llega dañado puedes negarte a recibir el paquete: GLS lo devuelve e informa al remitente. Si lo que está dañado es el contenido, GLS te pide que hables directamente con el remitente, porque no revisa lo que llevan los paquetes.
 
@@ -81,7 +78,7 @@ Solo hasta que lo aceptas. Después, toca reclamar el daño. Con la opción «So
 
 Frente a la tienda no pierdes nada: responde de la falta de conformidad que existía en la entrega durante 3 años (arts. 117 y 120). Las reservas en el albarán protegen sobre todo la reclamación del vendedor contra el transportista, porque sin ellas se presume que la mercancía llegó bien (Ley 15/2009, art. 60).
 
-Si el daño era oculto, todavía estás a tiempo con el transportista: 7 días naturales según esa ley y 7 días en SEUR. En InPost, tienes 7 días para avisar a la tienda. Con el Paquete Azul de Correos, en cambio, el daño se comunica al recibirlo.
+Si el daño era oculto, todavía estás a tiempo con el transportista: 7 días naturales según esa ley. En InPost, tienes 7 días para avisar a la tienda. Con el Paquete Azul de Correos, en cambio, el daño se comunica al recibirlo.
 
 ## Qué fotos hacer de un paquete dañado
 
@@ -123,7 +120,6 @@ Si el vendedor no lo soluciona, te quedan tu banco o PayPal, y las vías de cons
 - [BOE: Ley 15/2009 del contrato de transporte terrestre de mercancías](https://www.boe.es/eli/es/l/2009/11/11/15/con) – reservas, 7 días naturales, un año (arts. 60 y 79)
 - [Correos: Coberturas y garantías, extravío envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – remitente, autorización firmada, deterioro al recibirlo, fotos, embalaje, valor declarado, reposición o reparación, 6.000 €, 1 año
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – respuesta en 1 mes
-- [SEUR: Condiciones de envíos y transporte (copia archivada)](https://web.archive.org/web/20260821/https://www.seur.com/es/condiciones-de-transporte/) – albarán, 7 días, 33 € por kg, 1.800 €, embalaje
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – envoltorio dañado, remitente
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – Punto Pack, Locker, 1 y 7 días, particulares
 - [UPS: File a claim (en inglés)](https://www.ups.com/us/en/support/file-a-claim) – tres fotos

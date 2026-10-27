@@ -21,12 +21,11 @@ Où chaque transporteur peut le laisser :
 | Transporteur | Compte aussi comme livré |
 | --- | --- |
 | [Colissimo](carrier:la-poste) (FR) | Dans ta boîte aux lettres, ou remis à « toute personne présente » à ton adresse, gardien ou concierge compris. Au-delà de 5 kg, contre signature ou contre un code reçu par SMS ou e-mail |
-| [Chronopost](carrier:chronopost) (FR) | En lieu sûr : boîte aux lettres, pas-de-porte, voisin ou gardien. Chronopost conseille aussi de regarder « sous le porche, sur la terrasse » |
 | [Colis Privé](carrier:colis-prive) (FR) | Dans ta boîte aux lettres, ou remis à un gardien, un voisin ou « un tiers de confiance » |
 | [bpost](carrier:bpost) (BE) | Dans ta boîte aux lettres, sans sonner, pour un petit colis. Ou selon tes préférences : Point d'enlèvement, lieu sûr, voisin |
 | La Poste suisse | Remis à toute personne présente à ton domicile, ou à un voisin si personne n'est là. Trop grand pour la boîte, déposé dans « un lieu sûr et protégé des intempéries », sauf si tu as choisi « Pas de dépôt » |
 
-Colis [Planzer](carrier:planzer) ou [Quickpac](carrier:quickpac) ? Leurs pages disent quoi vérifier, dont la « Confirmation de livraison » du portail de Planzer.
+Colis [Chronopost](carrier:chronopost), [Planzer](carrier:planzer) ou [Quickpac](carrier:quickpac) ? Leurs pages disent quoi vérifier, dont la « Confirmation de livraison » du portail de Planzer.
 
 Le suivi n'a jamais dit « livré » ? Lis [pourquoi le suivi ne bouge plus](guide:tracking-not-updating) ou [ce que veulent dire les statuts de suivi](guide:tracking-statuses).
 
@@ -74,7 +73,7 @@ En revanche, le risque est pour toi quand :
 En France, le vendeur. S'il dit avoir livré, « c'est à lui d'en apporter la preuve : signature, remise contre code, photo », rappelle l'INC. Ce que les transporteurs peuvent montrer :
 
 - **Une photo.** bpost montre la photo du lieu sûr dans l'app My bpost ou dans Track & Trace. La Poste suisse photographie les colis déposés (« preuve de dépôt » dans « Mes envois »), pour l'instant dans certaines régions seulement.
-- **Une signature ou un code.** Au-delà de 5 kg, Colissimo livre contre signature ou contre un code confidentiel, dont la concordance « vaut signature ». Avec le code Pickup Pass, Chronopost dit pouvoir « garantir la remise en mains propres ».
+- **Une signature ou un code.** Au-delà de 5 kg, Colissimo livre contre signature ou contre un code confidentiel, dont la concordance « vaut signature ».
 - **Un simple scan.** Jusqu'à 5 kg, Colissimo ne demande aucune signature : l'enregistrement dans son système fait preuve de la distribution. Les conditions de La Poste suisse disent la même chose de ses scans.
 - **Rarement une position GPS.** Parmi les transporteurs dont nous avons lu les pages, seul Planzer joint ses données GPS à la photo qui sert de preuve.
 
@@ -103,7 +102,6 @@ Parfois, mais [l'indemnisation va en général à l'expéditeur](guide:lost-parc
 | Transporteur | Ce que tu peux faire | Délai |
 | --- | --- | --- |
 | Colissimo, La Poste (FR) | Tout le monde peut réclamer, au 3631 ou sur laposte.fr. Seul l'expéditeur est indemnisé : jusqu'à 23 € par kilo en France métropolitaine | 1 an après le dépôt (6 mois pour l'international) ; réponse sous 21 jours en France métropolitaine |
-| Chronopost (FR) | Dis « contester livraison » au chatbot Léonard. Colis remis avec Pickup Pass : contacte l'expéditeur | Non indiqué |
 | Colis Privé (FR) | « Déposer une réclamation » sur son site, avec ton numéro de colis et ton code postal | Réponse sous 48 heures ouvrées |
 | [Mondial Relay](carrier:mondial-relay) (FR) | Fais chercher le colis au point relais à ton nom, puis remplis le formulaire de contact. Colis perdu : contacte l'expéditeur | Non indiqué |
 | bpost (BE) | Rien en ton nom : seul l'expéditeur peut demander une enquête | Non indiqué |
@@ -144,7 +142,6 @@ Tu peux, mais aucune des règles ci-dessus n'en fait une condition pour être re
 - [La Poste : Conditions générales de vente](https://www.laposte.fr/ecom/occ/smartedit/medias/sys_master/pdf/h46/h8a/32305317117982/CGV-PART-22-09-26/CGV-PART-22-09-26.pdf) – distribution Colissimo, 5 kg, code
 - [La Poste : CGV Courrier-Colis](https://www.laposte.fr/ecom/occ/smartedit/medias/sys_master/pdf/hfb/ha1/31823066595358/CGV_COURRIER_COLIS_07-07-2026/CGV-COURRIER-COLIS-07-07-2026.pdf) – réclamation, délais, recours, Médiateur
 - [La Poste : Garanties et indemnisations Colissimo](https://aide.laposte.fr/contenu/quelles-sont-les-garanties-et-indemnisations-pour-un-envoi-avec-colissimo) – 23 € par kilo, expéditeur seul
-- [Chronopost : Colis indiqué livré mais non reçu (copie archivée)](https://web.archive.org/web/20251014094206/https://www.chronopost.fr/fr/faq/destinataire/je-nai-pas-recu-mon-colis-qui-est-indique-livre) – lieu sûr, Pickup Pass, Léonard
 - [Colis Privé : Colis déclaré livré mais non reçu](https://colisprive.fr/aide/mon-colis-est-declare-livre-alors-que-je-ne-lai-pas-recu/) – lieux de remise, réclamation
 - [Mondial Relay : Mon colis n'est pas au Point Relais](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-colis-n-est-pas-au-point-relais-que-dois-je-faire/) – recherche à ton nom
 - [Mondial Relay : Colis perdu](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-faire-si-mon-colis-est-perdu/) – contacter l'expéditeur

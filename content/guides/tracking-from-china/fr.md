@@ -4,7 +4,7 @@ description: Pourquoi le suivi AliExpress, Temu ou Shein ne bouge plus ou change
 slug: suivi-colis-chine-aliexpress-temu-shein
 picture: Au-dessus du globe, un avion file en pointillés d'un repère rouge au repère vert de la maison, et Pip voyage entre deux camionnettes.
 published: 2026-10-09
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Un colis AliExpress, Temu ou Shein change de mains en route : une société logistique chinoise l'expédie hors de Chine, la douane le contrôle à l'arrivée, puis ta poste ou un transporteur local le livre, souvent sous un nouveau numéro. Chacun ne scanne que sa part du trajet. Le premier scan peut mettre jusqu'à 11 jours à apparaître, le suivi reste muet pendant le vol, et il faut encore patienter après « arrivé dans le pays de destination ». Suis le numéro donné par la boutique, puis celui du transporteur local. En livraison économique, le suivi peut s'arrêter pour de bon à ce passage de relais. Un article expédié depuis un entrepôt dans l'UE évite l'avion et, en France et en Belgique, la douane.
@@ -30,7 +30,7 @@ Quand une commande semble bloquée en transit, le colis est en général entre d
 
 - **Avant le premier scan.** AliExpress et Cainiao indiquent qu'il faut en général jusqu'à 11 jours après l'envoi par le vendeur pour que le suivi apparaisse ; en attendant, Cainiao affiche `Not Found`. Toujours rien 12 jours après l'envoi ? Contacte le vendeur.
 - **À la douane.** Une fois arrivé, le colis attend d'être dédouané (section suivante).
-- **En livraison économique.** Cainiao ne tourne pas autour du pot : « La livraison économique n'inclut pas le suivi du colis après remise au transporteur du pays/de la région de destination. » Temu prévient de son côté que « le suivi peut ne pas être disponible à chaque étape du processus ».
+- **En livraison économique.** Cainiao ne tourne pas autour du pot : « La livraison économique n'inclut pas le suivi du colis après remise au transporteur du pays/de la région de destination. »
 - **Autour des fêtes chinoises.** En Chine, les jours fériés comme le Nouvel An chinois (fin janvier ou en février) et la fête nationale (la première semaine d'octobre) peuvent ralentir le traitement et le dédouanement. Pour les congés d'octobre 2026, SF International a prévenu que certains ports suspendraient le dédouanement des envois postaux de particuliers.
 
 En retard plutôt que muet ? Une fois le délai de livraison passé, va voir la partie remboursement, plus bas. Plus de détails sur ces trous dans [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
@@ -64,7 +64,7 @@ En cours de livraison et autres statuts courants : [ce que veulent dire les stat
 Trois raisons habituelles :
 
 - **AliExpress a regroupé tes commandes.** Selon AliExpress, un numéro commun à plusieurs commandes veut dire que leur mode de livraison a été remplacé par un plus rapide, et que tu peux récupérer les colis ensemble.
-- **Une commande, plusieurs colis.** Chez Shein France, un article marqué « Entrepôt UE » peut partir d'un entrepôt en Europe, sinon il part d'un entrepôt hors d'Europe. Shein Suisse prévient que les colis peuvent partir d'entrepôts différents, avec des délais différents. Temu donne à chaque colis son propre délai de livraison, et son numéro de suivi quand il est prêt.
+- **Une commande, plusieurs colis.** Chez Shein France, un article marqué « Entrepôt UE » peut partir d'un entrepôt en Europe, sinon il part d'un entrepôt hors d'Europe. Shein Suisse prévient que les colis peuvent partir d'entrepôts différents, avec des délais différents.
 - **Un transporteur local a pris le relais** avec sa propre étiquette et son propre numéro. Cainiao affiche ce numéro sur sa page de suivi quand il en publie un ; à partir de là, suis le colis sur le site du transporteur.
 
 Les numéros postaux font exception. L'Union postale universelle ne permet qu'un seul numéro au format postal (norme S10) par envoi : un numéro China Post fonctionne donc en général aussi sur le site de ta poste.
@@ -114,7 +114,6 @@ En Suisse, c'est différent : un colis parti d'un entrepôt en France ou en Alle
 | --- | --- |
 | AliExpress | Un délai par commande, sur la page du produit et de la commande. Articles Choice : 6 à 8 jours vers la France, suivis sur tout le trajet |
 | Lignes Cainiao | Premium 5 à 10 jours vers des pays comme la Belgique ; Standard 10 à 18 jours (7 au mieux vers la France) ; Économique 20 à 45 jours |
-| Temu | 1 à 3 jours de préparation, puis un délai pour chaque colis une fois expédié |
 | Shein France | Standard et Point Relais 5 à 9 jours ouvrés, Express 4 à 8 |
 | Shein Belgique | Standard 4 à 8 jours ouvrés, Point Relais 5 à 9 |
 | Shein Suisse | Standard 6 à 8 jours ouvrés |
@@ -144,7 +143,6 @@ Dans cet ordre :
 | Plateforme | Pas arrivé | Indiqué livré, mais pas reçu |
 | --- | --- | --- |
 | AliExpress | Litige possible du 11e jour après l'envoi jusqu'à 15 jours après la fin du délai de livraison | Vois d'abord avec le transporteur local, puis ouvre un litige |
-| Temu | Contacte le service client dans les 90 jours suivant la date de commande | Idem |
 | Shein | Dans les 45 jours suivant la date de paiement | Dans les 30 jours suivant la date de livraison indiquée dans le suivi |
 
 Sur les articles qui portent la mention « Livraison rapide », AliExpress te donne un coupon en cas de retard, puis un remboursement si le colis n'arrive pas dans un nombre de jours fixé ; sans cette mention, le remboursement vient au bout de 60, 75, 90 ou 120 jours, selon les conditions de livraison. Chez Shein, une commande qui n'arrive pas à la date prévue te vaut 200 points en France, 500 en Suisse ; en Belgique, 200 selon fr.shein.com/be, 500 selon le site européen de Shein.
@@ -166,7 +164,6 @@ Les écrans, statuts, crédits et réclamations propres à chaque boutique : [su
 - [AliExpress : Delivered but not received (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – transporteur local d'abord
 - [AliExpress : L'engagement AliExpress](https://fr.aliexpress.com/p/service-mindset/index.html) – Choice, « Livraison rapide », 60 à 120 jours
 - [AliExpress : Do I have to pay for customs and import taxes? (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – entrepôt dans ton pays, pas de droits ni de taxes en plus
-- [Temu : Informations de livraison (copie d'archive du 18 mai 2026)](https://web.archive.org/web/20260518215914/https://www.temu.com/fr/shipping-info.html) – préparation, délai par colis, suivi, 90 jours
 - [Temu France : Informations de livraison](https://www.temu.com/fr/shipping-info.html) – entrepôts locaux sans minimum de commande
 - [Temu Belgique : Informations de livraison](https://www.temu.com/be/shipping-info.html) – entrepôts locaux sans minimum de commande
 - [Shein France : Livraison](https://fr.shein.com/Shipping-Info-a-280.html) – délais, Entrepôt UE, Mondial Relay, délais de réclamation, points

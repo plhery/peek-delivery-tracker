@@ -4,10 +4,10 @@ description: Até quando enviar uma encomenda para chegar a tempo do Natal com o
 slug: prazos-envio-encomendas-natal
 picture: Uma página de calendário com um dia de dezembro assinalado com um círculo, uma carrinha de entregas a levar uma encomenda atada com uma fita vermelha debaixo de neve, e o Pip a correr ao lado.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
-Os [CTT](carrier:ctt), a DPD e a GLS ainda não publicaram datas limite para o Natal de 2026, e em 2025 também não publicaram nenhuma. Os CTT dão prazos indicativos: cerca de 1 dia útil com Correio Azul no continente, 3 com Correio Normal ou Encomenda Postal, e 7 a 15 com Encomenda Postal para os Açores, por isso conta para trás a partir de quinta-feira, 24 de dezembro, e envia com folga. As tabelas dão o prazo de cada transportadora tal como o verificámos na sexta-feira, 9 de outubro de 2026, e dizem se houve data no ano passado.
+Os [CTT](carrier:ctt), a DPD e a GLS ainda não publicaram datas limite para o Natal de 2026, e em 2025 também não publicaram nenhuma. Os CTT dão prazos indicativos: cerca de 1 dia útil com Correio Azul no continente, 3 com Correio Normal ou Encomenda Postal, e 7 a 15 com Encomenda Postal para os Açores, por isso conta para trás a partir de quinta-feira, 24 de dezembro, e envia com folga. As tabelas dão o prazo de cada transportadora tal como o verificámos na sexta-feira, 9 de outubro de 2026 (a DPD, na terça-feira, 27 de outubro), e dizem se houve data no ano passado.
 
 ## Portugal continental: CTT, DPD e GLS
 
@@ -102,7 +102,7 @@ Nenhuma das três diz ainda se recolhe ou entrega na quinta-feira, 24, na sexta-
 | Transportadora | Dias sem recolhas nem entregas, Natal de 2026 |
 | --- | --- |
 | CTT | Ainda não anunciado (2025: distribuição alargada a sábados, domingos e feriados, anunciada para a época alta) |
-| DPD Portugal | Ainda não anunciado (2025: só um aviso de mais espera ao telefone) |
+| DPD Portugal | Ainda não anunciado |
 | GLS Portugal | Ainda não anunciado (2025: nenhum aviso) |
 
 :::steps
@@ -144,7 +144,8 @@ Estás à espera de um presente? Cola o código no [Peek](/) e escolhe nas notif
 - [CTT: Envios de bens para os Estados Unidos e Porto Rico](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-asseguram-envios-de-bens-para-os-estados-unidos-e-porto-rico-para-todos-os-clientes) – serviços, Zonos Prepay
 - [DPD Portugal: Serviço doméstico](https://www.dpd.com/pt/pt/enviar-encomenda/servico-domestico/) – prazos, ilhas, sábado
 - [DPD Portugal: Calculadora de preços](https://tracking.dpd.pt/node/24) – DPD Ilhas, internacional
-- [DPD Portugal: Página inicial, dezembro de 2025 (arquivo)](https://web.archive.org/web/20251209222607/https://www.dpd.com/pt/pt/) – aviso de 2025
+- [DPD Portugal: Página inicial](https://www.dpd.com/pt/pt/) – sem aviso de Natal a 27 de outubro de 2026
+- [DPD Portugal: Imprensa](https://www.dpd.com/pt/pt/empresa/press/) – nenhum comunicado de Natal em 2025
 - [GLS Portugal: Envios nacionais](https://gls-group.com/PT/pt/enviar-encomendas/envio-empresas/envios-nacionais/) – 24 horas úteis
 - [GLS Portugal: Envios de particulares](https://gls-group.com/PT/pt/enviar-encomendas/envios-particulares/) – tempos, sobretaxa ilhas
 :::

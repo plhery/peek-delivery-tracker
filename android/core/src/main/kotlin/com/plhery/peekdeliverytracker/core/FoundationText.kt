@@ -97,6 +97,9 @@ internal fun String.splitOnCharacter(separator: String): List<String> {
 internal fun String.equalsCanonically(other: String): Boolean =
     this == other || Normalizer.normalize(this, Normalizer.Form.NFC) == Normalizer.normalize(other, Normalizer.Form.NFC)
 
+/** A hash code that agrees with `equalsCanonically`, for a type that compares a String as Swift does. */
+internal fun String.canonicalHashCode(): Int = Normalizer.normalize(this, Normalizer.Form.NFC).hashCode()
+
 /** Swift's `lowercased()`: each scalar's full lowercase mapping on its own, so a final Σ is σ, not ς. */
 internal fun String.lowercased(): String {
     if (all { it.code < 0x80 }) return lowercase(Locale.ROOT)

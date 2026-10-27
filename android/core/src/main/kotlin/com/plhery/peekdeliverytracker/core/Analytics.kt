@@ -5,7 +5,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 
-// From Analytics.swift, the catalog that names what is counted. Sending the events comes with the analytics port.
+// From Analytics.swift, the catalog that names what is counted and the outcomes an action is counted with. Sending the
+// events comes with the analytics port.
 
 /** One catalog shared with the web app; only these names can leave the device. */
 @Serializable
@@ -34,5 +35,15 @@ data class AnalyticsCatalog(
                 Json { ignoreUnknownKeys = true }.decodeFromString(serializer(), SharedResources.text("Analytics.json"))
             }.getOrNull()
         }
+    }
+}
+
+object DeliveryAnalytics {
+    /** How an action went, as the catalog's events say it. */
+    enum class Outcome(val rawValue: String) {
+        Success("success"),
+        Error("error"),
+        Started("started"),
+        Accepted("accepted"),
     }
 }

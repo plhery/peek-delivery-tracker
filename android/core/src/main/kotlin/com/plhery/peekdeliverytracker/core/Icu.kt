@@ -61,7 +61,9 @@ internal class IcuHostNames private constructor(packageName: String) : HostNameC
     override fun convert(name: String, toAscii: Boolean): Pair<String, Set<String>> {
         val info = newInfo.newInstance()
         val result = StringBuilder()
-        (if (toAscii) this.toAscii else toUnicode).invoke(idna, name, result, info)
+        // Before Unicode 15.1 (ICU 74, Android 15), UTS #46 maps ẞ to "ss"; the iPhone's ICU maps it to ß, which
+        // nontransitional processing keeps. Mapping it first gives the newer answer from any ICU.
+        (if (toAscii) this.toAscii else toUnicode).invoke(idna, name.replace('\u1E9E', '\u00DF'), result, info)
         return result.toString() to (errors.invoke(info) as Set<*>).map { (it as Enum<*>).name }.toSet()
     }
 

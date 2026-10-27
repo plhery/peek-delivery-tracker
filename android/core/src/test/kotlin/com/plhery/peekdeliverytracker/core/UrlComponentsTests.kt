@@ -66,6 +66,10 @@ class UrlComponentsTests {
         assertEquals("https://xn--mnchen-3ya.de/t/0000000000000000000000", munich?.url)
         assertEquals("münchen.de", munich?.host)
         assertEquals("münchen.de", UrlComponents.parse("https://xn--mnchen-3ya.de/t/1")?.host)
+        // ẞ is ß, as on the iPhone, whatever the phone's ICU.
+        assertEquals("https://xn--strae-oqa.example/", url("https://stra\u1E9Ee.example/"))
+        assertEquals("xn--strae-oqa.example", Url.parse("https://stra\u1E9Ee.example/")?.host)
+        assertEquals("straße.example", UrlComponents.parse("https://stra\u1E9Ee.example/")?.host)
         assertEquals("https://dhl.de/x", url("https://ｄｈｌ.ｄｅ/x"))
         assertEquals("dhl.de", UrlComponents.parse("https://ｄｈｌ.ｄｅ/x")?.host)
         assertEquals("WWW.UPS.COM", UrlComponents.parse("HTTPS://WWW.UPS.COM/track?tracknum=1")?.host)

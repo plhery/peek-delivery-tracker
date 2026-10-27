@@ -24,6 +24,10 @@ object Icu {
     /** Amounts of money, which Foundation's currency format style writes with ICU. */
     @Volatile
     var currencies: CurrencyFormatter = IcuCurrencies.from("android.icu") ?: JdkCurrencies
+
+    /** Distances, which Foundation's measurement format style writes with ICU. */
+    @Volatile
+    var lengths: LengthFormatter = IcuLengths.from("android.icu") ?: JdkLengths
 }
 
 /** ICU's UTS #46 processing (`IDNA.nameToASCII`, `nameToUnicode`): the converted name and the `IDNA.Error`s met, by name. */
@@ -182,4 +186,49 @@ private object JdkCurrencies : CurrencyFormatter {
         val text = format.format(value)
         return if (currency != null) text else "$code\u00A0$text"
     }
+}
+
+/**
+ * `Measurement(value:unit: .kilometers).formatted(.measurement(width: .abbreviated, usage: .asProvided,
+ * numberFormatStyle: .number.precision(.fractionLength(0))).locale(_:))`: ICU's short unit width, in whole numbers.
+ */
+fun interface LengthFormatter {
+    fun kilometres(value: Double, locale: Locale): String
+}
+
+/** ICU's `NumberFormatter` with the kilometre unit, found by name like `IcuCurrencies`. */
+internal class IcuLengths private constructor(packageName: String) : LengthFormatter {
+    private val localized = Class.forName("$packageName.number.LocalizedNumberFormatter")
+    private val precisionClass = Class.forName("$packageName.number.Precision")
+    private val unitWidthClass = Class.forName("$packageName.number.NumberFormatter\$UnitWidth")
+    private val measureUnitClass = Class.forName("$packageName.util.MeasureUnit")
+    private val withLocale = Class.forName("$packageName.number.NumberFormatter").getMethod("withLocale", Locale::class.java)
+    private val unit = localized.getMethod("unit", measureUnitClass)
+    private val unitWidth = localized.getMethod("unitWidth", unitWidthClass)
+    private val precision = localized.getMethod("precision", precisionClass)
+    private val format = localized.getMethod("format", Double::class.javaPrimitiveType)
+    private val kilometre = measureUnitClass.getField("KILOMETER").get(null)
+    private val short = unitWidthClass.getField("SHORT").get(null)
+    private val whole = precisionClass.getMethod("integer").invoke(null)
+
+    override fun kilometres(value: Double, locale: Locale): String {
+        val formatter = precision.invoke(unitWidth.invoke(unit.invoke(withLocale.invoke(null, locale), kilometre), short), whole)
+        return format.invoke(formatter, value).toString()
+    }
+
+    companion object {
+        fun from(packageName: String): IcuLengths? = try {
+            IcuLengths(packageName)
+        } catch (_: ReflectiveOperationException) {
+            null
+        } catch (_: LinkageError) {
+            null
+        }
+    }
+}
+
+/** java.text's whole numbers, which group as the JDK's locale data says, and the unit after a no-break space. */
+private object JdkLengths : LengthFormatter {
+    override fun kilometres(value: Double, locale: Locale): String =
+        NumberFormat.getIntegerInstance(locale).format(value) + "\u00A0km"
 }

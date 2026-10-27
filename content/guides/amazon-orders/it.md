@@ -37,7 +37,7 @@ Un venditore che spedisce da sé organizza la propria consegna: il suo corriere 
 
 Ce ne sono di due tipi, più un numero d'ordine che non è né l'uno né l'altro.
 
-Amazon non pubblica il formato dei suoi numeri. Queste sono le forme che Peek riconosce come Amazon, qui con cifre inventate:
+Queste sono le forme che Peek riconosce come Amazon, qui con cifre inventate:
 
 :::anatomy TBA 123456789012
 - TBA | Lettere di Amazon. `TBC` e `TBM` funzionano allo stesso modo

@@ -37,7 +37,7 @@ Um vendedor que envia por conta própria usa a sua transportadora, por exemplo o
 
 Há dois tipos, e ainda um número de pedido que não é nenhum deles.
 
-A Amazon não publica o formato dos seus números. Estas são as formas que o Peek reconhece como da Amazon, aqui com algarismos inventados:
+Estas são as formas que o Peek reconhece como da Amazon, aqui com algarismos inventados:
 
 :::anatomy TBA 123456789012
 - TBA | Letras da Amazon. `TBC` e `TBM` funcionam da mesma maneira

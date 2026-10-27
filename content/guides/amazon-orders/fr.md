@@ -39,7 +39,7 @@ Un vendeur qui expédie lui-même organise sa propre livraison : son transporteu
 
 Il y en a deux sortes, plus un numéro de commande qui n'est ni l'un ni l'autre.
 
-Amazon ne publie pas le format de ses propres numéros. Voici les formes que Peek reconnaît comme celles d'Amazon, ici avec des chiffres inventés :
+Voici les formes que Peek reconnaît comme celles d'Amazon, ici avec des chiffres inventés :
 
 :::anatomy TBA 123456789012
 - TBA | Lettres d'Amazon. `TBC` et `TBM` fonctionnent pareil

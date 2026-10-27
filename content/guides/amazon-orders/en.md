@@ -43,7 +43,7 @@ A seller who ships its own orders chooses how they travel, so its parcels can co
 
 There are two kinds, and an order number that is neither.
 
-Amazon doesn't publish the format of its own numbers. These are the shapes Peek recognises as Amazon's, here with made-up digits:
+These are the shapes Peek recognises as Amazon's, here with made-up digits:
 
 :::anatomy TBA 123456789012
 - TBA | Amazon letters. `TBC` and `TBM` work the same way

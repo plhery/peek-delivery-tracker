@@ -36,7 +36,7 @@ Gdzie dokładnie jest numer w każdym sklepie: [jak znaleźć numer przesyłki](
 
 Są dwa rodzaje, a do tego numer zamówienia, który nie jest żadnym z nich.
 
-Amazon nie publikuje formatu swoich numerów. Te kształty Peek rozpoznaje jako numery Amazona, tu z wymyślonymi cyframi:
+Te kształty Peek rozpoznaje jako numery Amazona, tu z wymyślonymi cyframi:
 
 :::anatomy TBA 123456789012
 - TBA | Litery Amazona. `TBC` i `TBM` działają tak samo

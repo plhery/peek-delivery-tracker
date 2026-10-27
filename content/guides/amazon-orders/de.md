@@ -37,7 +37,7 @@ Ein Verkäufer mit eigenem Versand kümmert sich selbst um die Lieferung: Sein Z
 
 Es gibt zwei Arten, und dazu eine Bestellnummer, die keine von beiden ist.
 
-Amazon veröffentlicht das Format seiner eigenen Nummern nicht. Diese Formen erkennt Peek als Amazon-Nummern, hier mit erfundenen Ziffern:
+Diese Formen erkennt Peek als Amazon-Nummern, hier mit erfundenen Ziffern:
 
 :::anatomy TBA 123456789012
 - TBA | Amazon-Buchstaben. `TBC` und `TBM` funktionieren genauso

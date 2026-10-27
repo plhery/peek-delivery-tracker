@@ -31,7 +31,7 @@ Un vendedor que envía por su cuenta usa su propio transportista, por ejemplo [C
 
 Hay dos tipos, y además un número de pedido que no es ninguno de los dos.
 
-Amazon no publica el formato de sus números. Estas son las formas que Peek reconoce como de Amazon, aquí con cifras inventadas:
+Estas son las formas que Peek reconoce como de Amazon, aquí con cifras inventadas:
 
 :::anatomy TBA 123456789012
 - TBA | Letras de Amazon. `TBC` y `TBM` funcionan igual

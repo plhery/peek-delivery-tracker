@@ -168,7 +168,10 @@ and iOS Add hold it back as they hold a pickup code, except in a demo build, who
 are placeholders. Whatever was stored from such a number is served
 without its carrier scans, status line, estimate and carrier data, with that error, whether
 or not a check ran since ([`eventPlaces.ts`](../src/server/eventPlaces.ts)); the rows stay
-stored.
+stored. A mobile number as dialled in the reader's country (`isPhoneNumber`) is no carrier's
+either: detecting or adding one is refused with the placeholder's error, so no provider is
+asked about it, and the web and front-door Add hold it back too. The server takes the country from the request
+(`lookupCountry`), the browser from its clock or languages.
 
 A scan an adapter dates by its day alone, with no clock (NACEX's history), is stored as a
 row of that day anyway, in the carrier's order: a second after the scan before it when that

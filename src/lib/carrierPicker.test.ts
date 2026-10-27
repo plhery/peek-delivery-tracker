@@ -172,6 +172,9 @@ describe('what a picker beside a number leads with', () => {
     expect(canAskCarrier(shape('intl-post', 'high'), 'DEMO4471203')).toBe(false);
     expect(canAskCarrier(shape('ups', 'high'), '1Z999AA10123456784')).toBe(false);
     expect(canAskCarrier(shape('unknown', 'low'), '12345677601231')).toBe(true);
+    // A mobile number as dialled in the reader's country is nobody's to confirm.
+    expect(canAskCarrier(shape('unknown', 'low'), '0981000001', 'PY')).toBe(false);
+    expect(canAskCarrier(shape('unknown', 'low'), '0981000001', 'CH')).toBe(true);
   });
 
   it('lists the carriers that know the number, then those it fits, then those used before, each once', () => {

@@ -6,6 +6,8 @@ import {
   type CarrierInputField as ScraperInputField,
   type CarrierInputRequirement as ScraperInputRequirement,
   detectCarrierMatch,
+  isPhoneNumber,
+  isPlaceholderNumber,
   normalizeTrackingNumber,
 } from 'universal-parcel-scraper';
 import {
@@ -98,7 +100,6 @@ export {
   detectCarrier,
   detectCarrierMatch,
   formatTrackingNumber,
-  isPlaceholderNumber,
   isPlanzerSharedTrackingNumber,
   isValidS10TrackingNumber,
   normalizeTrackingNumber,
@@ -106,6 +107,14 @@ export {
   supportsSwissPostHandoff,
   validTrackingNumber,
 } from 'universal-parcel-scraper';
+
+/**
+ * A number no carrier issues, which nobody is asked about and Add holds back: a placeholder, such as the app's demo
+ * number, or a mobile number as dialled in the reader's `country`.
+ */
+export function notTrackingNumber(normalized: string, country: string | null): boolean {
+  return isPlaceholderNumber(normalized) || isPhoneNumber(normalized, country);
+}
 
 /**
  * Six digits and nothing else, normalized: no carrier's detection claims one, and those looked up turned out to be

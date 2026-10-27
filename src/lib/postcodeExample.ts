@@ -1,3 +1,4 @@
+import { timeZoneCountry } from 'universal-parcel-scraper';
 import postcodes from '../../shared/postcode-examples.json';
 import { carrierInfo, type CarrierInputRequirement } from './carriers';
 import type { CarrierId } from '../types';
@@ -15,10 +16,26 @@ export function deviceCountry(
 ): string | null {
   if (timeZone && Object.hasOwn(TIME_ZONES, timeZone)) return TIME_ZONES[timeZone]!;
   for (const language of languages) {
-    const region = /[-_]([A-Za-z]{2})(?:[-_]|$)/.exec(language)?.[1]?.toUpperCase();
+    const region = languageRegion(language);
     if (region && Object.hasOwn(EXAMPLES, region)) return region;
   }
   return null;
+}
+
+/**
+ * The country this device is set up for, whichever it is, where the reader dials a phone number: its clock's when one
+ * country keeps that time, otherwise the first region its languages name.
+ */
+export function deviceRegion(
+  timeZone: string | undefined = Intl.DateTimeFormat().resolvedOptions().timeZone,
+  languages: readonly string[] = typeof navigator === 'undefined' ? [] : navigator.languages ?? [navigator.language],
+): string | null {
+  return (timeZone ? timeZoneCountry(timeZone) : null) ?? languages.map(languageRegion).find(Boolean) ?? null;
+}
+
+/** The region a language names ("en-US"). */
+function languageRegion(language: string): string | undefined {
+  return /[-_]([A-Za-z]{2})(?:[-_]|$)/.exec(language)?.[1]?.toUpperCase();
 }
 
 /**

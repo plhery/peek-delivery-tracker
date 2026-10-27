@@ -5,8 +5,8 @@ import { canAskCarrier, carrierCheck, type CarrierCheck } from '../../lib/carrie
 import {
   carrierRequirements,
   isPickupCode,
-  isPlaceholderNumber,
   normalizeTrackingNumber,
+  notTrackingNumber,
   requirementSatisfied,
   type CarrierInputField,
   type CarrierInputRequirement,
@@ -75,6 +75,8 @@ export interface LookupState {
   countries: Partial<Record<CarrierId, string>>;
   /** The device's country, which a postcode is from unless the visitor names another. */
   region: string | null;
+  /** The device's country, whichever it is: a mobile number as dialled there is no tracking number. */
+  dialling: string | null;
   /** The number whose carriers may be asked: set by a paste, by leaving the field and by Track, never by a keystroke. */
   asked: string | null;
   answer: CarrierAnswer | null;
@@ -110,9 +112,9 @@ export type LookupEvent =
   | { type: 'online' }
   | { type: 'pasteFailed'; reason: 'blocked' | 'empty' };
 
-export function initialLookup(text = '', region: string | null = null): LookupState {
+export function initialLookup(text = '', region: string | null = null, dialling = region): LookupState {
   return {
-    text, settled: text, intent: 'none', pick: null, carrier: 'auto', inputs: {}, countries: {}, region, asked: null, answer: null,
+    text, settled: text, intent: 'none', pick: null, carrier: 'auto', inputs: {}, countries: {}, region, dialling, asked: null, answer: null,
     asTyped: null, raised: false, offered: null, job: null, trouble: null, paste: null, halted: 0,
   };
 }
@@ -197,14 +199,14 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   // Six digits are a pickup code unless a carrier picked by hand takes them as its number. The start of a longer
   // number is still being typed: its notice waits for the text to rest.
   const code = Boolean(match) && !onDevice && state.carrier === 'auto' && isPickupCode(normalized);
-  // A placeholder is held back in the same way, whichever the carrier: every lookup refuses it. A demo build looks
-  // nothing up and tells its samples' stories by their numbers.
-  const placeholder = !isDemoBuild && Boolean(match) && !onDevice && !code && isPlaceholderNumber(normalized);
+  // A placeholder or a phone number is held back in the same way, whichever the carrier: no carrier issues either. A
+  // demo build looks nothing up and tells its samples' stories by their numbers.
+  const placeholder = !isDemoBuild && Boolean(match) && !onDevice && !code && notTrackingNumber(normalized, state.dialling);
 
   const amazon = Boolean(match) && isAmazonTrackingNumber(normalized);
   const answer = match && state.answer?.trackingNumber === normalized ? state.answer : undefined;
   const settledForAsking = Boolean(match) && state.asked === normalized;
-  const recognizable = Boolean(match) && !amazon && canAskCarrier(match!, normalized);
+  const recognizable = Boolean(match) && !amazon && canAskCarrier(match!, normalized, state.dialling);
   // A carrier chosen by hand needs no asking; an answer that came before the choice still shows who knows the number.
   const check = carrierCheck({
     applies: recognizable && (state.carrier === 'auto' || answer !== undefined),

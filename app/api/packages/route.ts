@@ -37,8 +37,7 @@ export const GET = apiRoute(async (context) => {
 
 export const POST = apiRoute(async (context) => {
   const { raw, value: body } = await readJsonBody(context.request);
-  const values = newPackageValues(body);
-  lookupCountry(context.request, body.lookupCountryHint);
+  const values = newPackageValues(body, lookupCountry(context.request, body.lookupCountryHint));
   await checkAccountRequest(context.request, requireService(context), raw, 'account_lookup');
   await claimAccountTracking(requireService(context), requireUser(context).id, 'lookup');
   await verifyAmazonShippingAddition(values.carrier, values.trackingNumber);

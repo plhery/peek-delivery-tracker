@@ -11,14 +11,14 @@ import {
   carrierTrackingHintKey,
   formatTrackingNumber,
   isPickupCode,
-  isPlaceholderNumber,
   normalizeTrackingNumber,
+  notTrackingNumber,
   parseTrackingInput,
   requirementSatisfied,
   tracksAutomatically,
   typedRequirementValue,
 } from '../lib/carriers';
-import { deviceCountry, lettersPostcode, postcodeExample } from '../lib/postcodeExample';
+import { deviceCountry, deviceRegion, lettersPostcode, postcodeExample } from '../lib/postcodeExample';
 import { initialPostcodeCountry, postcodeCountries, postcodeFieldFor, sentPostcodeCountry } from '../lib/postcodeCountry';
 import { rememberedPostcode, type GivenPostcode } from '../lib/postcodeMemory';
 import { canAskCarrier, carrierCheck, carrierChoiceSections, carrierChoiceTags, carrierNameList, shapeCarrier } from '../lib/carrierPicker';
@@ -96,6 +96,7 @@ export function AddParcelSheet({
   // And the country each is from, chosen beside it.
   const [postcodeCountryChoices, setPostcodeCountryChoices] = useState<Partial<Record<CarrierId, string>>>({});
   const [region] = useState(deviceCountry);
+  const [dialling] = useState(deviceRegion);
   const [selectedCarrier, setSelectedCarrier] = useState<CarrierId | 'auto'>('auto');
   const [verifiedCarrier, setVerifiedCarrier] = useState<ApiCarrierDetectionResponse>();
   // Carrier recognition: a shape several carriers share is checked with them
@@ -177,7 +178,7 @@ export function AddParcelSheet({
   const currentVerification = verifiedCarrier?.trackingNumber === normalizedNumber ? verifiedCarrier : undefined;
   // The check keeps running when a carrier is picked by hand meanwhile: its
   // answer then only says when another carrier has the parcel.
-  const recognizable = Boolean(apiAuth) && !amazonNumber && canAskCarrier(parsedTracking, normalizedNumber);
+  const recognizable = Boolean(apiAuth) && !amazonNumber && canAskCarrier(parsedTracking, normalizedNumber, dialling);
   const currentRecognition = recognizable && recognition?.trackingNumber === normalizedNumber ? recognition : undefined;
   const check = carrierCheck({
     applies: recognizable,
@@ -199,9 +200,9 @@ export function AddParcelSheet({
   // longer number is still being typed: its notice waits for a pause.
   const pickupCode = selectedCarrier === 'auto' && isPickupCode(normalizedNumber);
   const pickupNotice = pickupCode && normalizeTrackingNumber(settledTrackingNumber) === normalizedNumber;
-  // A placeholder, such as the app's demo number, is held back in the same way, whichever the carrier: every lookup
-  // refuses it. A demo build looks nothing up.
-  const placeholder = !isDemoBuild && !pickupCode && isPlaceholderNumber(normalizedNumber);
+  // A placeholder, such as the app's demo number, or a phone number is held back in the same way, whichever the
+  // carrier: no carrier issues either. A demo build looks nothing up.
+  const placeholder = !isDemoBuild && !pickupCode && notTrackingNumber(normalizedNumber, dialling);
   const placeholderNotice = placeholder && normalizeTrackingNumber(settledTrackingNumber) === normalizedNumber;
   useEffect(() => {
     if (!shouldLookup || !apiAuth) return;

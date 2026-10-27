@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { trackAction } from '../../lib/analytics';
 import { normalizeTrackingNumber } from '../../lib/carriers';
-import { deviceCountry } from '../../lib/postcodeExample';
+import { deviceCountry, deviceRegion } from '../../lib/postcodeExample';
 import { rememberPostcode, usePostcodeMemory } from '../../lib/postcodeMemory';
 import { useTypingPause } from '../../lib/typingPause';
 import { detectCarrierPublic, lookupParcel, ParcelLinkError, parcelLinkErrorKey, type ParcelLookup } from '../links';
@@ -63,7 +63,7 @@ export function useLookup(onTracked: (lookup: ParcelLookup) => void): Lookup {
   const device = useMemo<DeviceParcel[]>(() => recents.flatMap(({ id, snapshot: { parcel } }) =>
     parcel.trackingNumber ? [{ id, number: normalizeTrackingNumber(parcel.trackingNumber), carrier: parcel.carrier }] : []), [recents]);
   const postcodes = usePostcodeMemory();
-  const [state, setState] = useState(() => initialLookup('', deviceCountry()));
+  const [state, setState] = useState(() => initialLookup('', deviceCountry(), deviceRegion()));
   const [retryIn, setRetryIn] = useState(0);
   // The requests outlive a render: they read and move the latest state, not the one they started from.
   const live = useRef({ state, device, postcodes, onTracked });

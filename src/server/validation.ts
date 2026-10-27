@@ -6,7 +6,7 @@ import {
   type ApiParcelFeedbackAnswer,
   type ApiParcelFeedbackReason,
 } from '../generated/apiContract';
-import { carrierInfo, isPlaceholderNumber, validTrackingNumber } from '../lib/carriers';
+import { carrierInfo, notTrackingNumber, validTrackingNumber } from '../lib/carriers';
 import { sentPostcodeCountry, takesAnyPostcode } from '../lib/postcodeCountry';
 import type { CarrierId } from '../types';
 import { ALERT_PRESET_STAGES, ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
@@ -17,7 +17,7 @@ import { normalizedLookupCountry } from './lookupCountry';
 import { isRecord, type JsonObject } from './types';
 
 const VALID_CARRIERS = new Set<string>(CARRIER_IDS);
-/** Why a placeholder number is refused; clients show their own wording for it (userErrorKey). */
+/** Why a placeholder or a phone number is refused; clients show their own wording for it (userErrorKey). */
 export const PLACEHOLDER_MESSAGE = 'This is not a real tracking number: enter the one from your order';
 const NOTIFICATION_STAGES = new Set<string>(ALL_NOTIFICATION_STAGES);
 const PUSH_ENDPOINT_HOSTS = new Set([
@@ -63,7 +63,8 @@ function postcodeCountry(carrier: CarrierId, trackingNumber: string, postcode: s
   return sentPostcodeCountry(carrier, code) ?? null;
 }
 
-export function newPackageValues(payload: JsonObject): NewPackageValues {
+/** `country`: the reader's (lookupCountry), where a mobile number as dialled there is refused. */
+export function newPackageValues(payload: JsonObject, country: string | null = null): NewPackageValues {
   const rawTracking = payload.trackingNumber ?? '';
   const rawLabel = payload.label ?? '';
   const rawCarrier = payload.carrier ?? 'unknown';
@@ -91,8 +92,9 @@ export function newPackageValues(payload: JsonObject): NewPackageValues {
   if (!/^(?:[A-Z0-9]+|\d{4}\/\d{8})$/.test(trackingNumber) || !validTrackingNumber(rawTracking)) {
     throw new HttpError(400, 'Tracking numbers use letters and numbers and include a digit, unless a carrier issues them as letters alone');
   }
-  // Every carrier's lookup refuses a placeholder, such as the app's demo number, so it is not added.
-  if (isPlaceholderNumber(trackingNumber)) throw new HttpError(400, PLACEHOLDER_MESSAGE);
+  // Every carrier's lookup refuses a placeholder, such as the app's demo number, and no carrier issues a phone number,
+  // so neither is added.
+  if (notTrackingNumber(trackingNumber, country)) throw new HttpError(400, PLACEHOLDER_MESSAGE);
   if (codePointLength(rawLabel) > 80) {
     throw new HttpError(400, 'Parcel names can be at most 80 characters');
   }

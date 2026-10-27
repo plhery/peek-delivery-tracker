@@ -8,13 +8,14 @@ import { createAdapterRegistry } from './adapterRegistry';
 import { BROWSER_RECOGNITION_BUDGET_MS, MAX_BROWSER_RECOGNITIONS, recognizeBrowser } from './browserRecognition';
 import { checkAmazonShipping } from './amazonShippingEligibility';
 import { HttpError } from './api';
-import { MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
+import { isPhoneNumber, MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
 import { preflightTracking } from './trackingPreflight';
 import { recordDetection } from './metrics';
 import { logOperationalEvent } from './observability';
 import type { SupabaseServiceClient } from './supabase';
 import { retainDetectionSupport } from './trackingSupport';
 import type { JsonObject } from './types';
+import { PLACEHOLDER_MESSAGE } from './validation';
 import { getRecognitionPriorities } from './recognitionRanking';
 import { suggestedPostcodeCarrier } from './trackingRouting';
 
@@ -115,6 +116,9 @@ export async function detectCarrier(
   if (!/^[A-Z0-9]{4,40}$/.test(trackingNumber) || !validTrackingNumber(body.trackingNumber)) {
     throw new HttpError(400, 'Invalid tracking number');
   }
+  // A mobile number as dialled in the reader's country is refused as a placeholder is when added: no carrier, and no
+  // universal provider either, is asked about it.
+  if (isPhoneNumber(trackingNumber, countryHint)) throw new HttpError(400, PLACEHOLDER_MESSAGE);
   if (isAmazonTrackingNumber(trackingNumber)) {
     await beforeAsking?.();
     const amazonShippingStatus = await checkAmazonShipping(trackingNumber);

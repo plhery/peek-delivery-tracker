@@ -290,6 +290,15 @@ describe('input edge cases', () => {
     expect(survey(chosen)).toMatchObject({ placeholder: true, need: 'code' });
     expect(chosen.job).toBeNull();
   });
+
+  it("holds a mobile number as dialled in the device's country back as a placeholder", () => {
+    const phone = '0981 000 001';
+    const home = run([typed(phone), rested(phone)], [], initialLookup('', null, 'PY'));
+    expect(survey(home)).toMatchObject({ placeholder: true, need: 'code', ask: null });
+    expect(run([track], [], home).job).toBeNull();
+    // Dialled elsewhere, the same digits may be a tracking number.
+    expect(survey(run([typed(phone), rested(phone)], [], initialLookup('', null, 'CH')))).toMatchObject({ placeholder: false });
+  });
 });
 
 describe('what a carrier asks for', () => {

@@ -327,6 +327,7 @@ final class Localizer: ObservableObject {
             ("amazon logistics.*amazon account", "add.amazonAccount"),
             ("postcode|postal code", "error.postcode"),
             ("tracking.*(url|link)|complete.*link", "error.trackingLink"),
+            ("not a real tracking number", "tracking.failure.placeholderNumber"),
             ("tracking (number|input)|parcel number", "error.trackingNumber"),
             ("80 characters|label.*long", "error.nameTooLong"),
             ("package not found|parcel.*no longer", "native.parcelMissing"),

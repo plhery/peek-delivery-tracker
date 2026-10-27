@@ -498,6 +498,10 @@ describe('input validation', () => {
     for (const [trackingNumber, carrier] of [['123EXAMPLE', 'unknown'], ['123 example', 'nacex'], ['RR123456785CH', 'swiss-post']]) {
       expect(() => newPackageValues({ trackingNumber, label: '', carrier, trackingUrl: '', dpdPostcode: '' })).toThrow('not a real tracking number');
     }
+    // So is a mobile number as dialled in the reader's country; dialled elsewhere it may be a tracking number.
+    const phone = { trackingNumber: '0981 000 001', label: '', carrier: 'unknown', trackingUrl: '', dpdPostcode: '' };
+    expect(() => newPackageValues(phone, 'PY')).toThrow('not a real tracking number');
+    expect(newPackageValues(phone, 'CH').trackingNumber).toBe('0981000001');
     expect(newPackageValues({
       trackingNumber: '06080000000001',
       label: 'Parcel',

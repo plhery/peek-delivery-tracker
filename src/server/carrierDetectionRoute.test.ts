@@ -104,6 +104,22 @@ it('refuses an invalid device region before spending recognition resources', asy
   expect(SupabaseServiceClient.prototype.claimAccountTracking).not.toHaveBeenCalled();
 });
 
+it('asks nobody about a mobile number as dialled in the device region, and refuses it as a placeholder', async () => {
+  const detect = (lookupCountryHint: string) => POST(new NextRequest('https://delivery.example/api/carriers/detect', {
+    method: 'POST', headers: { 'content-type': 'application/json', Authorization: 'Bearer detection-test' },
+    body: JSON.stringify({ trackingNumber: '0981 000 001', lookupCountryHint }),
+  }), { params: Promise.resolve({}) });
+  const refused = await detect('PY');
+  expect(refused.status).toBe(400);
+  expect((await refused.json()).error).toMatch('not a real tracking number');
+  expect(recognize).not.toHaveBeenCalled();
+  expect(preflightTracking).not.toHaveBeenCalled();
+  expect(SupabaseServiceClient.prototype.claimAccountTracking).not.toHaveBeenCalled();
+  // Dialled elsewhere, the same digits may be a tracking number.
+  recognize.mockImplementation(knows());
+  expect((await detect('CH')).status).toBe(200);
+});
+
 it('returns the one carrier that knows an ambiguous number', async () => {
   recognize.mockImplementation(knows('dpd'));
   const response = await request('0608 0000 0000 02');

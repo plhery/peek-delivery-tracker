@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import postcodes from '../../shared/postcode-examples.json';
 import { carrierRequirements, requirementSatisfied, typedRequirementValue } from './carriers';
-import { deviceCountry, lettersPostcode, postcodeExample } from './postcodeExample';
+import { deviceCountry, deviceRegion, lettersPostcode, postcodeExample } from './postcodeExample';
 
 const dpd = carrierRequirements('dpd', '06080000000002')[0]!;
 const dpdGermany = carrierRequirements('dpd-de', '06080000000002')[0]!;
@@ -15,6 +15,14 @@ describe('postcode examples', () => {
     expect(deviceCountry('Australia/Perth', ['zh-Hant-AU'])).toBe('AU');
     expect(deviceCountry('Etc/UTC', ['en'])).toBeNull();
     expect(deviceCountry('', ['en-ZZ'])).toBeNull();
+  });
+
+  it('reads any country for a phone number, whose postcodes the app need not know', () => {
+    expect(deviceCountry('America/Asuncion', ['es-PY'])).toBeNull();
+    expect(deviceRegion('America/Asuncion', ['en-US'])).toBe('PY');
+    expect(deviceRegion('Etc/UTC', ['es', 'es-PY'])).toBe('PY');
+    expect(deviceRegion('Europe/Zurich', ['fr-FR'])).toBe('CH');
+    expect(deviceRegion('Etc/UTC', ['en'])).toBeNull();
   });
 
   it("shows the reader's country where a carrier takes any postcode", () => {

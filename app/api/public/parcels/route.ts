@@ -34,8 +34,7 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage }): Pr
   const service = requireService(context);
   // The name stays on the device: only the number, the carrier and its inputs are read.
   const { raw, value: body } = await readJsonBody(context.request);
-  const values = newPackageValues({ ...body, label: '' });
-  lookupCountry(context.request, body.lookupCountryHint);
+  const values = newPackageValues({ ...body, label: '' }, lookupCountry(context.request, body.lookupCountryHint));
   progress.stage = 'verification';
   await verifyLookupRequest(context.request, service, raw);
 

@@ -78,7 +78,7 @@ Canada Post's channels, as read on 15 October 2026:
 
 ## Tracking Canada Post parcels with Peek
 
-[Peek](/) names Canada Post at once for postal numbers ending `CA` that pass their check. A 16-digit number with a valid check digit is shared, so Peek asks Canada Post, Correos Express, TNT and DHL eCommerce together (Canada Post leads the list for readers in Canada) and names the one that knows it; a 16-digit number that fails the check is never offered to Canada Post. Links with `searchFor=` work, but not Track's `#/search` links: paste the number. For a notice card number or a reference, pick Canada Post with "Change".
+[Peek](/) names Canada Post at once for postal numbers ending `CA` that pass their check. A 16-digit number with a valid check digit is shared, so Peek asks Canada Post, Correos Express, Evri UK, TNT and DHL eCommerce together (Canada Post leads the list for readers in Canada) and names the one that knows it; a 16-digit number that fails the check is never offered to Canada Post. Links with `searchFor=` work, but not Track's `#/search` links: paste the number. For a notice card number or a reference, pick Canada Post with "Change".
 
 Peek shows the status, each scan with its town and province on a map, the expected delivery day, a delivery time window while one is given, the delivery time, the sender's business name and the service. Each scan keeps the clock of the place it happened. Statuses stay in Canada Post's English; delivered scans read "Delivered" and a parcel back with the sender "Returned to sender". Peek drops delivery options, addresses, signatures and delivery photos, and doesn't show the post office's name or the pickup deadline.
 

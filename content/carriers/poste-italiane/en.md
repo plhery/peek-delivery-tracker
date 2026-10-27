@@ -3,7 +3,7 @@ title: Poste Italiane tracking: numbers, statuses and pickup
 description: Track a Poste Italiane parcel: where the code is, what the Italian statuses mean, missed deliveries, Punto Poste lockers, claims and how to call from abroad.
 slug: poste-italiane-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Poste Italiane is the Italian post, based in Rome, and it delivers parcels from Italian shops and from abroad. Track one with "Cerca Spedizioni" on poste.it, in the Poste Italiane app or by pasting the code in the box above. The code is on the sender's receipt; for an online order, the shop gives it to you.
@@ -80,7 +80,7 @@ Poste's channels, as listed on poste.it on 11 October 2026:
 
 ## Tracking Poste Italiane parcels with Peek
 
-[Peek](/) names Poste Italiane at once for `RA`, `1UW`, `3UW`, `2IMA` and `5P` codes. A digits-only `5P` code that also fits La Poste is asked of both, Poste Italiane first for readers in Italy; SDA-style codes are asked of Poste Italiane alone. Other codes, such as 12 digits, fit several carriers: Peek checks with those that use the shape, Poste Italiane included, and "Change" lets you pick the carrier yourself. A poste.it link ending in `#/risultati-spedizioni/` and the code works too. Peek asks Poste Italiane itself about international postal numbers ending in `IT` as well, and names it at once for those starting with `C`, `E`, `L` or `R`.
+[Peek](/) names Poste Italiane at once for `RA`, `1UW`, `3UW`, `2IMA`, `2IVC` and `5P` codes, and for Poste Delivery codes starting `EF`, `EG`, `GF`, `JG` or `LF`. A digits-only `5P` code that also fits La Poste is asked of both, Poste Italiane first for readers in Italy; SDA-style codes are asked of Poste Italiane alone. Other codes, such as 12 digits, fit several carriers: Peek checks with those that use the shape, Poste Italiane included, and "Change" lets you pick the carrier yourself. A poste.it link ending in `#/risultati-spedizioni/` and the code works too. Peek asks Poste Italiane itself about international postal numbers ending in `IT` as well, and names it at once for those starting with `C`, `E`, `L` or `R`.
 
 Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight; it can notify you when it moves. It shows the status, the newest 20 scans with their post office or town on a map, the expected delivery day and the service name, in Poste's Italian wording with exact times. It drops the sender, recipient, address, signature, weight, size and pickup office. An unknown code and one too old to track both show as not found, and Peek doesn't follow parcels to another carrier.
 

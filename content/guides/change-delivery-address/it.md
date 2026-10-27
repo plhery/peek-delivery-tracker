@@ -1,6 +1,6 @@
 ---
 title: Come cambiare indirizzo di consegna di un pacco
-description: Come cambiare indirizzo di consegna di un pacco, prima o dopo la spedizione: Amazon, eBay e Vinted, poi Poste, BRT, GLS, DHL e la Posta svizzera, con i costi.
+description: Come cambiare indirizzo di consegna di un pacco, prima o dopo la spedizione: Amazon, eBay e Vinted, poi Poste, BRT, GLS e la Posta svizzera, con i costi.
 slug: come-cambiare-indirizzo-di-consegna
 picture: Una strada che si biforca a un cartello, da una parte verso una casa e dall'altra verso un locker, un furgone che prende la nuova svolta e Pip che guarda lungo la strada in quella direzione.
 published: 2026-10-14
@@ -44,14 +44,13 @@ Non trovi il codice, o ti serve uno degli account gratuiti dei corrieri che alcu
 
 > Un SMS che ti chiede di «aggiornare l'indirizzo» o di pagare una piccola cifra prima della consegna è la truffa classica. Le vere opzioni per cambiare la consegna stanno sul sito o nell'app del corriere, dietro il tuo codice tracking: [come riconoscere un SMS truffa sul pacco](guide:delivery-scam-texts).
 
-## Come cambiare indirizzo di consegna con Poste, BRT, GLS, DHL e la Posta
+## Come cambiare indirizzo di consegna con Poste, BRT, GLS e la Posta
 
 | Corriere | Dove può andare il pacco | Costo |
 | --- | --- | --- |
 | [Poste Italiane](carrier:poste-italiane) (PostePlus) | Un altro indirizzo in Italia, con lo stesso destinatario; un Ufficio Postale o un Punto Poste; un vicino allo stesso numero civico; un luogo sicuro allo stesso indirizzo | Gratis |
 | [BRT](carrier:brt) (ex Bartolini, myBRT) | Un altro indirizzo se il mittente lo autorizza, un BRT-fermopoint, il ritiro in filiale | Nessun costo indicato |
 | [GLS](carrier:gls-it) (FlexDeliveryService) | Solo se la tua spedizione ha FlexDeliveryService: un nuovo indirizzo nella zona della stessa sede GLS, un GLS Shop o la sede GLS, un luogo sicuro, un vicino allo stesso indirizzo. Senza, l'indirizzo «può essere variato soltanto facendone richiesta al mittente» | Nessun costo indicato |
-| [DHL Express](carrier:dhl-express) (On Demand Delivery) | Un altro indirizzo, un vicino o il custode, un posto sicuro, un DHL Service Point o Locker | Nessun costo indicato |
 | [La Posta](carrier:swiss-post) (Ticino, «I miei invii») | Uno sportello automatico My Post 24, un punto PickPost, un altro indirizzo in Svizzera o nel Liechtenstein, un vicino nello stesso edificio o in quello accanto | Gratis mentre il pacco è in viaggio; CHF 8.00 dopo un avviso di mancata consegna |
 
 Con Poste Italiane serve PostePlus: devi risiedere in Italia, essere registrato su poste.it e attivare il servizio. Quando Poste prende in carico il pacco ti arriva una notifica (e-mail, SMS o push nell'app Poste Italiane), e «finché è in consegna» puoi scegliere dove o quando riceverlo. Con BRT entri su brt.it con il BRTcode, che trovi nell'SMS, nell'e-mail o sull'avviso lasciato dal corriere, più il codice di sicurezza; nell'app myBRT ti servono il BRTcode e il CAP o il PIN. Con GLS le opzioni arrivano solo con FlexDeliveryService: apri il link che GLS ti manda per e-mail o SMS, prima o dopo il primo tentativo di consegna, e scegli tra quelle che il mittente ha attivato. Con la Posta serve un account verificato sul portale «La mia Posta», per usare «I miei invii» dal sito o dalla Post-App.
@@ -60,11 +59,11 @@ Se invece vuoi che il pacco torni indietro, chiedilo al negozio: se accetta, leg
 
 ## Si può modificare la data di consegna di un pacco?
 
-Spesso sì, ed è più facile che cambiare indirizzo. BRT ti fa cambiare data e fascia oraria sul suo sito o nell'app myBRT, GLS dal link FlexDeliveryService, entro 3 giorni lavorativi da quella prevista. Con PostePlus scegli i giorni della settimana in cui preferisci ricevere, per ogni indirizzo salvato, oppure sposti un singolo pacco a un'altra data entro 5 giorni lavorativi da quella prevista. DHL Express ti lascia scegliere un'altra data con On Demand Delivery.
+Spesso sì, ed è più facile che cambiare indirizzo. BRT ti fa cambiare data e fascia oraria sul suo sito o nell'app myBRT, GLS dal link FlexDeliveryService, entro 3 giorni lavorativi da quella prevista. Con PostePlus scegli i giorni della settimana in cui preferisci ricevere, per ogni indirizzo salvato, oppure sposti un singolo pacco a un'altra data entro 5 giorni lavorativi da quella prevista.
 
 In Ticino la Posta consegna gratis il giorno che scegli dal lunedì al venerdì, finché il pacco è in viaggio. Prima del primo tentativo, il sabato costa CHF 3.80, la consegna al mattino presto (7.00–9.00, dal martedì al sabato) CHF 7.00 e quella serale (16.30–21.00, dal lunedì al venerdì) CHF 7.90. Puoi fare le richieste fino alla mezzanotte del giorno prima del recapito, ma per cambiare giorno o indirizzo il termine scade prima.
 
-Vai in vacanza? Poste e DHL Express hanno la «giacenza per vacanza»: con PostePlus il pacco resta in giacenza e la nuova consegna va fissata entro 15 giorni lavorativi dalla data prevista; DHL Express lo tiene in custodia mentre sei via.
+Vai in vacanza? PostePlus ha la «giacenza per vacanza»: il pacco resta in giacenza e la nuova consegna va fissata entro 15 giorni lavorativi dalla data prevista.
 
 Se il corriere è già passato e ti ha lasciato un avviso, non stai cambiando indirizzo ma fissando una nuova consegna: leggi [cosa fare dopo una mancata consegna](guide:missed-delivery).
 
@@ -101,7 +100,7 @@ Niente: Poste lo presenta come «servizio gratuito» per modificare la data o l'
 
 ### Posso spostare un pacco in un locker o in un punto di ritiro?
 
-Spesso sì, se il corriere li ha e il mittente lo permette. Poste ti lascia scegliere un Punto Poste o un Ufficio Postale, BRT un BRT-fermopoint, GLS un GLS Shop (con FlexDeliveryService), DHL Express un Service Point o un Locker, la Posta, gratis finché il pacco è in viaggio, uno sportello My Post 24 o un punto PickPost. Quanto tempo resta lì il pacco lo trovi in [pacco in giacenza non ritirato](guide:uncollected-parcel).
+Spesso sì, se il corriere li ha e il mittente lo permette. Poste ti lascia scegliere un Punto Poste o un Ufficio Postale, BRT un BRT-fermopoint, GLS un GLS Shop (con FlexDeliveryService), la Posta, gratis finché il pacco è in viaggio, uno sportello My Post 24 o un punto PickPost. Quanto tempo resta lì il pacco lo trovi in [pacco in giacenza non ritirato](guide:uncollected-parcel).
 
 ### Come evito che succeda di nuovo?
 
@@ -121,7 +120,6 @@ No. Peek segue il pacco e ti mostra ogni scansione; solo il negozio o il corrier
 - [BRT: FAQ](https://www.brt.it/it/servizio-clienti/faq/) – myBRT, BRTcode, codice di sicurezza, autorizzazione del mittente, data e fascia oraria, BRT-fermopoint, 20–31,5 kg
 - [GLS Italia: FAQ](https://gls-group.com/IT/it/faq) – senza FlexDeliveryService l'indirizzo si cambia solo tramite il mittente
 - [GLS Italia: FlexDeliveryService](https://gls-group.com/IT/it/spedire-ricevere/servizio-per-te/servizi-accessori/flexdeliveryservice/) – link per e-mail o SMS, nuova data entro 3 giorni lavorativi, GLS Shop o sede, nuovo indirizzo nella stessa zona, luogo sicuro, vicino
-- [MyDHL+ Italia: Servizio On Demand Delivery](https://mydhl.express.dhl/it/it/ship/solutions/on-demand-delivery-management.html) – data, posto sicuro, vicino, Service Point o Locker, indirizzo alternativo, giacenza per vacanza
 - [La Posta: Invio singolo](https://www.post.ch/it/ricezione/gestire-un-invio/invio-singolo) – rispedizione gratuita, prezzi di sabato, mattina e sera, vicino, termine della mezzanotte
 - [La Posta: Gestione permanente](https://www.post.ch/it/ricezione/gestire-un-invio/gestione-permanente) – impostazioni permanenti, eccezione dei piccoli pacchi 98 dall'estero
 - [La Posta: Invito di ritiro](https://www.post.ch/fr/reception/invitation-a-retirer) – réexpédition gratis solo mentre il pacco è in viaggio, CHF 8.00 dopo l'avviso di mancata consegna

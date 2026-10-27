@@ -60,6 +60,8 @@ Każdy przewoźnik ma własne zasady. DPD, DHL eCommerce i GLS przyjmą inny adr
 
 **GLS:** opcje działają, jeśli nadawca podał GLS Twój e-mail. Wtedy dostaniesz wiadomość o zbliżającej się dostawie z linkiem do zmiany jej warunków.
 
+**InPost:** według regulaminu Konta InPost w Polsce mogą być dostępne usługi zarządzania paczkami, takie jak zmiany lub przekierowania. Aktualne informacje o dostępnych usługach znajdziesz w aplikacji InPost Mobile.
+
 Jeśli sklep chce ściągnąć paczkę z powrotem do siebie, to sprawa między nim a przewoźnikiem. Co dzieje się wtedy z paczką, opisuje poradnik [paczka wraca do nadawcy](guide:returned-to-sender).
 
 ## Czy mogę zmienić termin dostawy paczki?
@@ -120,6 +122,7 @@ Nie. Peek śledzi paczkę i pokazuje, gdzie jest. Przekierować ją może tylko 
 - [DHL eCommerce Polska: Regulamin korzystania z serwisu Przekieruj paczkę](https://przekieruj.dhlparcel.pl/doc/Regulamin_korzystania_z_serwisu_Przekieruj_paczke_1.pdf) – POP, BOX, adres, data, PIN, link, 23:59 w dniu nadania, realizacja następnego dnia roboczego, ostatnia dyspozycja, 31,5 kg i 25 kg, „DHL osobisty podpis”, 2 dni w POP i BOX, bezpłatnie, dyspozycja nadawcy
 - [DHL eCommerce Polska: Przekieruj paczkę](https://przekieruj.dhlparcel.pl/) – logowanie numerem paczki i PIN-em, „Nie mam kodu PIN”
 - [GLS Polska: FlexDeliveryService](https://gls-group.com/PL/pl/flexdelivery-service/) – nowy termin, nowy adres, ParcelShop, bez dodatkowych opłat, e-mail od nadawcy, wyłączenia CashService i IdentService
+- [InPost: Regulamin Konta InPost](https://terms.inpost-group.com/pl/regulamin) – obowiązuje od 1 października 2026, w Polsce usługi zarządzania paczkami (zmiany, przekierowania), aktualne informacje o usługach w aplikacji InPost Mobile
 - [Poczta Polska: Regulamin usługi Pocztex w obrocie krajowym](https://www.poczta-polska.pl/wp-content/uploads/2025/02/regulamin-swiadczenia-uslugi-pocztex-w-obrocie-krajowym_27-04-2026.pdf) – żądanie zmiany adresu składa nadawca, dyspozycja telefoniczna adresata
 - [Poczta Polska: Cennik opłat dodatkowych](https://cennik.poczta-polska.pl/plik,1/cennik_oplat_dodatkowych_01112025.pdf) – 9,00 zł za żądanie nadawcy, Dosyłanie 6,00 zł w placówce, opłata jak za przesyłkę
 - [Poczta Polska: Odbiór w punkcie, FAQ](https://odbiorwpunkcie.poczta-polska.pl/faq/) – Pocztex PUNKT i AUTOMAT bez przekierowania

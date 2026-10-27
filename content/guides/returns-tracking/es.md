@@ -1,6 +1,6 @@
 ---
 title: Devolución: ¿dónde está mi paquete y mi reembolso?
-description: Dónde ver el número de tu devolución en Amazon, El Corte Inglés, Zalando, Shein y Temu, por qué el seguimiento se para y cuándo te devuelven el dinero.
+description: Dónde ver el número de tu devolución en Amazon, El Corte Inglés, Zalando y Shein, por qué el seguimiento se para y cuándo te devuelven el dinero.
 slug: seguimiento-devolucion-reembolso
 picture: Un paquete de vuelta al almacén de una tienda, un resguardo y Pip despidiéndolo con la mano.
 published: 2026-10-17
@@ -35,7 +35,6 @@ En la página de devoluciones de la tienda y en el correo que te llega cuando en
 | El Corte Inglés | Mis compras › Gestiona tu compra › Devoluciones | Correos y Celeritas (pedidos de hasta 3 kg), recogida a domicilio |
 | Zalando | Sección «Devoluciones» de tu cuenta. El código vale 30 días | Lo eliges en la devolución online. Recogida a domicilio con SEUR |
 | Shein | Mis pedidos › Devoluciones › Registro de devoluciones y reembolsos › Detalles › «Guardar la etiqueta» | CTT (código QR), InPost (QR o etiqueta), GLS (QR), Correos (etiqueta), FedEx (recogida) |
-| Temu | Pides la devolución en «Sus pedidos» o en la página de devoluciones en línea | Correos, InPost, Cacesa/Celeritas o DPD |
 
 Los transportistas tienen su propio seguimiento: [Correos](carrier:correos-spain), [SEUR](carrier:seur), [GLS](carrier:gls-es) y [FedEx](carrier:fedex).
 
@@ -61,7 +60,6 @@ Lo que dicen las tiendas sobre los plazos:
 | El Corte Inglés | No lo dice: el reembolso se cuenta desde la recogida del paquete |
 | Shein | 5–7 días de envío, luego 5–7 días de control en el almacén |
 | Zalando | No lo dice: el reembolso se cuenta desde que entregas el paquete al transportista |
-| Temu | No lo dice. Envíalo en los 14 días siguientes a tu solicitud de desistimiento |
 
 Si el seguimiento del transportista lleva días quieto antes del centro de devoluciones, mira [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
 
@@ -74,9 +72,8 @@ Después de la revisión, más lo que tarde tu banco:
 | El Corte Inglés | Correos, Celeritas o recogida: en 14 días naturales como máximo desde la recogida. En tienda, al entregarlo | Por el mismo medio de pago |
 | Zalando | En 14 días desde que entregas el paquete al transportista | No lo dice |
 | Shein | 1 día después del control | 2–10 días hábiles |
-| Temu | Desistimiento: en 14 días desde que el vendedor recibe tu solicitud. Devolución voluntaria: tras recibirla y revisarla | Por el mismo medio de pago |
 
-Un artículo usado, dañado o incompleto puede valer menos. Amazon.es te pide entregarlo "en su estado y embalaje originales junto con cualquier pieza, accesorio o manual que pudiera incluir", y Temu reduce el reembolso hasta el precio del artículo.
+Un artículo usado, dañado o incompleto puede valer menos. Amazon.es te pide entregarlo "en su estado y embalaje originales junto con cualquier pieza, accesorio o manual que pudiera incluir".
 
 :::steps
 - Inicias la devolución | En la app o la web de la tienda, dentro de su plazo. Recibes una etiqueta, un código QR o un código de devolución.
@@ -90,10 +87,10 @@ Un artículo usado, dañado o incompleto puede valer menos. Amazon.es te pide en
 
 - **14 días para desistir.** Si compras online a una empresa, puedes desistir en 14 días desde la entrega sin dar explicaciones. Luego tienes otros 14 días naturales para devolverlo, y basta con enviarlo antes de que acabe el plazo.
 - **Reembolso en 14 días naturales** desde que la tienda sabe que desistes. La ley le deja retenerlo "hasta haber recibido los bienes, o hasta que el consumidor y usuario haya presentado una prueba de la devolución de los bienes, según qué condición se cumpla primero". Para eso sirve el resguardo.
-- **Los gastos de devolución** son tuyos, salvo que la tienda los asuma o no te lo haya dicho antes de comprar. Shein y Temu pagan la primera devolución de cada pedido; desde la segunda, Shein cobra 3,9 EUR.
+- **Los gastos de devolución** son tuyos, salvo que la tienda los asuma o no te lo haya dicho antes de comprar. Shein paga la primera devolución de cada pedido; desde la segunda, cobra 3,9 EUR.
 - **A un particular** no se le aplica. Para Wallapop y compañía: [compras de segunda mano](guide:second-hand-orders).
 
-Los 30 días de Amazon y Zalando o los 90 de Temu son política de cada tienda, además de la ley.
+Los 30 días de Amazon y Zalando son política de cada tienda, además de la ley.
 
 ## ¿Y si la tienda dice que la devolución nunca llegó?
 
@@ -121,8 +118,6 @@ Peek ve lo que publica el transportista. Te dice que el paquete llegó al centro
 - [Zalando: ¿Qué puedo hacer si no tengo etiqueta de devolución?](https://www.zalando.es/faq/Returns-and-Refunds/what-can-i-do-if-i-do-not-have-a-return-label.html) – código QR por transportista, SEUR, un código por paquete, paquetes separados
 - [Zalando: ¿Cómo devuelvo un artículo de un Partner de Zalando?](https://www.zalando.es/faq/Returns-and-Refunds/how-do-i-return-a-zalando-partner-item.html) – devolución al Partner con la etiqueta adjunta
 - [Shein: Política de devolución](https://es.shein.com/Return-Policy-a-281.html) – etiqueta, transportistas, costes, plazos del reembolso, direcciones de devolución, desistimiento
-- [Temu: Política de devoluciones y reembolsos](https://www.temu.com/es/return-and-refund-policy.html) – desistimiento, 14 días, primera devolución gratis, 90 días, reembolso reducido
-- [Temu: ¿Cómo puedo enviar mis artículos de regreso?](https://www.temu.com/es/support/c3/c-mo-puedo-enviar-mis-art-culos-de-regreso-f-50-s-201.html) – Correos, InPost, Cacesa/Celeritas, DPD
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios, art. 107](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555#a107) – reembolso en 14 días, retención hasta los bienes o la prueba de devolución
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios, art. 108](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555#a108) – 14 días naturales para devolver, costes directos
 - [Your Europe: Devoluciones y derecho de desistimiento](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_es.htm) – 14 días desde la entrega, gastos de devolución, compras a particulares

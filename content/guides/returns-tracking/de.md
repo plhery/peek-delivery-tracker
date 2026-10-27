@@ -1,6 +1,6 @@
 ---
 title: Retoure verfolgen: Wo ist mein Paket, wann kommt mein Geld?
-description: Wo du die Sendungsnummer deiner Retoure bei Amazon, Zalando, Otto, Shein und Temu findest, warum die Verfolgung am Retourenzentrum endet und wann das Geld kommt.
+description: Wo du die Sendungsnummer deiner Retoure bei Amazon, Zalando, Otto und Shein findest, warum die Verfolgung am Retourenzentrum endet und wann das Geld kommt.
 slug: retoure-verfolgen
 picture: Ein Paket auf dem Weg zurück ins Lager eines Shops, ein Beleg, und Pip winkt ihm nach.
 published: 2026-10-17
@@ -35,9 +35,8 @@ In deinem Konto beim Shop und in seinen E-Mails zur Rücksendung. Welcher Paketd
 | Zalando (DE, AT, CH) | „Rücksendungen“ in deinem Konto, mit QR-Code und Etikett | Zeigt Zalando im Online-Rücksendeprozess |
 | Otto | Mein Konto. Das Etikett gibt es als QR-Code fürs Smartphone oder als PDF | Verkäufer OTTO: Hermes, rund 16.000 PaketShops, oder du gibst die Retoure dem Hermes-Boten mit |
 | Shein | Meine Bestellungen, Rücksendungen, Rückgabe- & Erstattungsprotokoll, Details, Etikett speichern | Deutschland: GLS, DPD, DHL, Hermes, FedEx-Abholung. Österreich: Hermes, DPD, Österreichische Post. Schweiz: DPD, Die Post |
-| Temu | Deine Bestellungen, Rücksendungen, Rücksende-Etikett drucken. Den Erstattungsstatus zeigt die Bestelldetailseite | Deutschland: DHL, GLS, UPS, DPD. Österreich: Österreichische Post. Schweiz: Schweizerische Post, Päckli Punkt |
 
-Bei den Paketdiensten verfolgst du die Retoure wie jedes andere Paket: [DHL](carrier:dhl) in der Post & DHL App, [Hermes](carrier:hermes-de) mit der Sendungs- oder Quittungsnummer, bis zu vier Stunden nach der Abgabe. Dazu kommen [DPD](carrier:dpd-de), [GLS](carrier:gls-de), [FedEx](carrier:fedex), [Österreichische Post](carrier:austrian-post), [Schweizerische Post](carrier:swiss-post), [DPD Schweiz](carrier:dpd-ch) und [DHL Express](carrier:dhl-express).
+Bei den Paketdiensten verfolgst du die Retoure wie jedes andere Paket: [DHL](carrier:dhl) in der Post & DHL App, [Hermes](carrier:hermes-de) mit der Sendungs- oder Quittungsnummer, bis zu vier Stunden nach der Abgabe. Dazu kommen [DPD](carrier:dpd-de), [GLS](carrier:gls-de), [FedEx](carrier:fedex), [Österreichische Post](carrier:austrian-post), [Schweizerische Post](carrier:swiss-post) und [DPD Schweiz](carrier:dpd-ch).
 
 Ein Paket, eine Nummer. Passt deine Zalando-Retoure nicht in einen Karton, erstellst du über „Artikel passen nicht in ein Paket“ einen zweiten Code. Artikel aus mehreren Bestellungen darfst du bei Zalando und Shein zusammenpacken, Zalando- und Partner-Artikel aber nicht.
 
@@ -59,7 +58,6 @@ Oft geht die Retoure auch nicht direkt zum Shop. Shein warnt, weder die Absender
 | Zalando | Erstattung innerhalb von 14 Tagen nach der Übergabe an den Paketdienst, der Weg inklusive |
 | Otto | Gutschrift bis zu 14 Tage ab Rücksendedatum |
 | Shein | 5–7 Tage unterwegs, dann 5–7 Tage Qualitätskontrolle im Lager |
-| Temu | Nicht genannt. Abschicken musst du das Paket innerhalb von 14 Tagen nach dem Antrag |
 
 Bei Otto heißen die Schritte der Retoure `Rücksendung angemeldet`, `Rücksendung unterwegs`, `Rücksendung wird geprüft` und `Rücksendung akzeptiert & gutgeschrieben`. Bewegt sich die Sendungsverfolgung schon vor dem Retourenzentrum tagelang nicht, hilft [Sendungsverfolgung wird nicht aktualisiert](guide:tracking-not-updating).
 
@@ -72,11 +70,8 @@ Nach der Prüfung, plus die Zeit deiner Bank:
 | Zalando | Innerhalb von 14 Tagen nach der Übergabe an den Paketdienst | Ein paar zusätzliche Tage |
 | Otto | Bis zu 14 Tage ab Rücksendedatum | Wenige Tage, über dieselbe Zahlungsart |
 | Shein | 1 Tag nach der Qualitätskontrolle | Meist 2–10 Werktage |
-| Temu | Nach Eingang und Qualitätsprüfung | Schweiz: 5–14 Werktage, bis zu 30 Tage |
 
-Temu Schweiz erstattet nach eigenem Ermessen manchmal schon nach der Abgabe. Kommt die Ware dann nicht rechtzeitig zurück, holt sich Temu das Geld über deine Zahlungsart wieder.
-
-Die Prüfung zählt. Shein und Temu kürzen die Erstattung, wenn die Ware benutzt, beschädigt oder unvollständig zurückkommt, und Otto stellt einen Artikel in nicht einwandfreiem Zustand womöglich wieder in Rechnung.
+Die Prüfung zählt. Shein kürzt die Erstattung, wenn die Ware benutzt, beschädigt oder unvollständig zurückkommt, und Otto stellt einen Artikel in nicht einwandfreiem Zustand womöglich wieder in Rechnung.
 
 :::steps
 - Du meldest die Retoure an | In der App oder im Konto des Shops, innerhalb seiner Frist. Du bekommst ein Etikett, einen QR-Code oder einen Rücksendecode.
@@ -92,7 +87,7 @@ Die Prüfung zählt. Shein und Temu kürzen die Erstattung, wenn die Ware benutz
 - **Österreich:** Hier heißt es Rücktritt, die Fristen sind dieselben. Der Shop erstattet binnen 14 Tagen ab Zugang deiner Rücktrittserklärung und darf warten, bis er die Ware hat oder du ihm einen Nachweis über die Rücksendung bringst. Die Ware rechtzeitig abzusenden, genügt.
 - **Schweiz:** „In der Schweiz haben Sie keinen gesetzlichen Anspruch auf Umtausch oder Rückgabe“, sagt ch.ch, auch nicht online. Es gelten die AGB des Shops.
 
-Längere Fristen sind freiwillig: die 30 Tage bei Zalando, Otto und Shein, die 90 Tage bei Temu. Und was du von einer Privatperson kaufst, fällt nicht unter das Widerrufsrecht.
+Längere Fristen sind freiwillig: die 30 Tage bei Zalando, Otto und Shein. Und was du von einer Privatperson kaufst, fällt nicht unter das Widerrufsrecht.
 
 ## Der Shop sagt, meine Retoure sei nie angekommen
 
@@ -122,11 +117,6 @@ Peek sieht, was der Paketdienst veröffentlicht. Es zeigt dir, dass die Retoure 
 - [Shein Deutschland: Widerrufsrecht & Rückgaberichtlinie](https://de.shein.com/Return-Policy-a-281.html) – Paketdienste, Etikett, Rücksendeadressen, Zeitplan, Kürzung
 - [Shein Österreich: Widerrufsrecht & Rückgaberichtlinie](https://at.shein.com/Return-Policy-a-281.html) – Paketdienste in Österreich
 - [Shein Schweiz: Widerrufsrecht & Rückgaberichtlinie](https://ch.shein.com/Return-Policy-a-281.html) – Paketdienste in der Schweiz
-- [Temu Deutschland: Rückgabe- und Erstattungsbedingungen](https://www.temu.com/de/return-and-refund-policy.html) – 90 Tage, Prüfung, Kürzung
-- [Temu Schweiz: Rückgabe- und Erstattungsbedingungen](https://www.temu.com/ch/return-and-refund-policy.html) – Päckli Punkt, 14 Tage, Etikett, vorzeitige Rückerstattung, Bank
-- [Temu Deutschland: Wie kann ich meine Artikel zurückschicken?](https://www.temu.com/de/support/c3/wie-kann-ich-meine-artikel-zur-ckschicken-f-50-s-201.html) – DHL, GLS, UPS, DPD, 14 Tage
-- [Temu Österreich: Wie kann ich meine Artikel zurückschicken?](https://www.temu.com/at/support/c3/wie-kann-ich-meine-artikel-zur-ckschicken-f-50-s-201.html) – Österreichische Post
-- [Temu Schweiz: Wie kann ich meine Artikel zurückschicken?](https://www.temu.com/ch/support/c3/wie-kann-ich-meine-artikel-zur-ckschicken-f-50-s-201.html) – Schweizerische Post, Päckli Punkt
 - [DHL: Hilfe zur Retoure](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/versenden/retoure.html) – Verfolgung in der App, Einlieferungsbeleg als Nachweis
 - [DHL: Retouren versenden](https://www.dhl.de/retoure-verschicken) – QR-Code, Abgabestellen
 - [Hermes: Wo ist meine Hermes Retoure?](https://www.myhermes.de/service/fragen/retournieren/wo-ist-meine-retoure.html) – Sendungs- oder Quittungsnummer, vier Stunden, Händler

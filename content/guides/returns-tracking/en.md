@@ -1,6 +1,6 @@
 ---
 title: Return tracking: where is my parcel and my refund?
-description: Where to find your return's tracking number at Amazon, Shein, Temu, ASOS and Zalando, why tracking stops at the returns centre, and when your refund is due.
+description: Where to find your return's tracking number at Amazon, Shein, ASOS and Zalando, why tracking stops at the returns centre, and when your refund is due.
 slug: return-tracking
 picture: A parcel heading back to a shop's warehouse, a receipt, and Pip waving it off.
 published: 2026-10-17
@@ -33,7 +33,6 @@ On the shop's returns page, and in its return emails. The shop offers its carrie
 | --- | --- | --- |
 | Amazon | Your Orders, Return or Replace Items. You then follow it in the Returns Centre | UK: Asda, Morrisons, the Post Office, Evri. US: "more than 10,000" drop-off locations, such as FedEx Office, Whole Foods Market and The UPS Store. Canada: Staples, Purolator, some Couche-Tard and Canada Post locations. Australia: Australia Post, ParcelPoint |
 | Shein | My Orders, Returns, Return & Refund Record, Details | US: Happy Returns, USPS. UK: Evri, Royal Mail, InPost lockers. Ireland: An Post. Canada: Canada Post, Neighbour Express, FedEx. Australia: Hubbed, Australia Post |
-| Temu | Your Orders, Returns, Print return label. Refund status in the order details | US: Happy Returns, FedEx, USPS, UPS. Canada: Neighbour Express, Purolator, Canada Post, FedEx, UPS. Australia: PARCELPOINT, Australia Post. UK: Evri, Royal Mail, InPost. Ireland: An Post, drop2shop |
 | ASOS (UK, Australia) | My Account, My Returns. Guests only get it in the drop-off confirmation email | Shown when you create the return |
 | Zalando (Ireland) | Returns, in your account | Shown during the online return |
 
@@ -52,7 +51,7 @@ The number of the order you received is somewhere else: see [find your tracking 
 
 The last scan is often the carrier handing the parcel over, not the shop opening it. Evri's final tracking point on a return is `On its way back to the retailer`, with no update when the retailer gets it: the shop tells you itself. Evri asks you to allow 14 days from drop-off.
 
-Returns rarely go straight to the shop, either. Shein and Temu warn that the address on the parcel you received isn't the return address, and Shein's Irish returns go to a logistics firm near Dublin. ASOS returns from Australia travel to Doncaster, England, and Amazon UK groups each return with others before routing it to one of its return centres.
+Returns rarely go straight to the shop, either. Shein warns that the address on the parcel you received isn't the return address, and its Irish returns go to a logistics firm near Dublin. ASOS returns from Australia travel to Doncaster, England, and Amazon UK groups each return with others before routing it to one of its return centres.
 
 | Shop | To reach the returns centre and be processed |
 | --- | --- |
@@ -69,11 +68,10 @@ After the check, plus your bank's time:
 | --- | --- | --- |
 | Amazon US | Typically within days of receiving it | Credit card 3–5 business days, debit card up to 10 |
 | Shein | 1 day after the warehouse check | Usually 1–10 business days |
-| Temu | Once it's received and passes the quality check | 5–14 business days, up to 30 days |
 | ASOS | Aims for 14 days from receiving it | Up to 10 working days |
 | Zalando Ireland | Within 14 days of handing it to the carrier | Your bank may take a few days more |
 
-Temu sometimes refunds as soon as you've dropped the parcel off. Otherwise Shein and Temu refund once the item passes their quality check, and Amazon US gives a full refund when the item comes back "unused, with all the original accessories and packaging intact".
+Shein refunds once the item passes its quality check, and Amazon US gives a full refund when the item comes back "unused, with all the original accessories and packaging intact".
 
 :::steps
 - You start the return | In the shop's app or website, within its return window. You get a label, a QR code or a return code.
@@ -86,12 +84,12 @@ Temu sometimes refunds as soon as you've dropped the parcel off. Otherwise Shein
 ### What does the law say?
 
 - **UK:** you can cancel an online order within 14 days of receiving it, for any reason, and then have another 14 days to send it back. The shop must refund you within 14 days of getting it back, or of receiving your proof that you sent it, whichever comes first. Standard delivery is refunded too.
-- **Ireland:** the same 14 days, plus 14 to send it back. The CCPC says the shop must refund you within 14 days of your cancelling, "subject to receiving the returned items back". Shein's and Temu's terms for Ireland add that they can hold the refund until the parcel arrives or you show you sent it, whichever is earlier.
+- **Ireland:** the same 14 days, plus 14 to send it back. The CCPC says the shop must refund you within 14 days of your cancelling, "subject to receiving the returned items back". Shein's terms for Ireland add that it can hold the refund until the parcel arrives or you show you sent it, whichever is earlier.
 - **US:** the FTC's Cooling-Off Rule doesn't cover sales made "entirely online, by mail, or telephone". The FTC says "a seller's return policy should tell you if you can return the item for a refund and how to do that."
 - **Canada:** "businesses are not obligated to accept the return of purchased items unless they are defective", says the federal Office of Consumer Affairs. The shop's policy decides.
 - **Australia:** changing your mind gives you no right to a refund, the ACCC says. "However, if a business has a 'change of mind' policy, they must follow it."
 
-Longer windows, like Amazon's 30 days, ASOS's 28 or Temu's 90, are the shop's own policy, on top of the law.
+Longer windows, like Amazon's 30 days or ASOS's 28, are the shop's own policy, on top of the law.
 
 ## What if the shop says my return never arrived?
 
@@ -124,12 +122,6 @@ Peek sees what the carrier publishes. It can tell you the parcel reached the ret
 - [Shein Europe: Right of withdrawal & Return Policy](https://eur.shein.com/Return-Policy-a-281.html) – An Post, Irish return address, refund rule
 - [Shein Canada: Return Policy](https://ca.shein.com/Return-Policy-a-281.html) – Canadian carriers
 - [Shein Australia: Return Policy](https://au.shein.com/Return-Policy-a-281.html) – Australian carriers
-- [Temu US: Return and Refund Policy](https://www.temu.com/return-and-refund-policy.html) – US carriers, posting deadline, refund timing
-- [Temu Canada: Return and Refund Policy](https://www.temu.com/ca/return-and-refund-policy.html) – Canadian carriers
-- [Temu Australia: Return and Refund Policy](https://www.temu.com/au/return-and-refund-policy.html) – Australian carriers
-- [Temu Ireland: Return and Refund Policy](https://www.temu.com/ie/return-and-refund-policy.html) – Irish refund rule
-- [Temu UK: How do I ship my items back?](https://www.temu.com/uk/support/c3/how-do-i-ship-my-items-back-f-50-s-201.html) – Evri, Royal Mail, InPost
-- [Temu Ireland: How do I ship my items back?](https://www.temu.com/ie/support/c3/how-do-i-ship-my-items-back-f-50-s-201.html) – An Post, drop2shop
 - [ASOS: Returns Policy](https://www.asos.com/customer-care/returns-refunds/what-is-your-returns-policy/) – 28 days, refund, risk in transit
 - [ASOS: How do I return something to you from the UK?](https://www.asos.com/customer-care/returns-refunds/how-do-i-return-something-to-you-from-the-uk/) – My Returns, timing, InPost proof of postage
 - [ASOS: Returns from Australia](https://www.asos.com/au/customer-care/returns-refunds/how-can-i-return-something-to-you-from-australia/) – Doncaster, timing, one number per parcel

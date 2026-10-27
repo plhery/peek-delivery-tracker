@@ -1,6 +1,6 @@
 ---
 title: Śledzenie zwrotu: gdzie jest paczka i moje pieniądze?
-description: Gdzie znaleźć numer zwrotu na Allegro, Zalando, Shein i Temu, dlaczego śledzenie urywa się w magazynie i kiedy sklep odda Ci pieniądze.
+description: Gdzie znaleźć numer zwrotu na Allegro, Zalando i Shein, dlaczego śledzenie urywa się w magazynie i kiedy sklep odda Ci pieniądze.
 slug: sledzenie-zwrotu-paczki
 picture: Paczka w drodze do magazynu sklepu, potwierdzenie nadania i Pip, który macha jej na pożegnanie.
 published: 2026-10-17
@@ -34,7 +34,6 @@ Na stronie zwrotów w sklepie i w mailu, który przychodzi po nadaniu paczki. Sk
 | Allegro | Moje zakupy › szczegóły zakupu | Allegro One Punkt i Box, Poczta Polska (przy Allegro One Kurier), Paczkomaty i PaczkoPunkty (przy Allegro InPost), inne opcje z formularza zwrotu |
 | Zalando | Zakładka „Zwroty” na koncie. Kod zwrotu jest ważny 30 dni | Widzisz ich w zwrocie online. „Użyj telefonu”: Paczkomat InPost albo punkt lub skrytka DPD |
 | Shein | Moje zamówienia › Zwroty › Rejestr zwrotów i refundacji › Szczegóły › „Zapisz etykietę” | InPost (kod PIN), Poczta Polska (etykieta), FedEx (odbiór) |
-| Temu | Zwrot zgłaszasz w „Twoje zamówienia” albo na Stronie Zwrotu Online | DPD, DHL lub InPost |
 
 Przewoźnicy mają też własne śledzenie: [InPost](carrier:inpost), [DPD](carrier:dpd-pl), [Poczta Polska](carrier:poczta-polska), [Allegro One](carrier:allegro-one) i [FedEx](carrier:fedex).
 
@@ -62,7 +61,6 @@ Co sklepy mówią o czasie:
 | Allegro | Nie podaje czasu drogi: liczy się status „Dostarczona” przesyłki zwrotnej |
 | Shein | 5–7 dni drogi, potem 5–7 dni kontroli w magazynie |
 | Zalando | Nie podaje: zwrot pieniędzy liczy się od przekazania paczki przewoźnikowi |
-| Temu | Nie podaje. Odeślij w 14 dni od zgłoszenia odstąpienia |
 
 Jeśli śledzenie u przewoźnika stoi od kilku dni przed centrum zwrotów, zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
@@ -75,11 +73,10 @@ Po sprawdzeniu zwrotu, plus czas Twojego banku:
 | Allegro | W 7 dni kalendarzowych od statusu „Dostarczona”, nie później niż 14 dni od wysłania formularza zwrotu | Przelew zatytułowany „Zwrot do płatności” albo zaczynający się od „Allegro” |
 | Zalando | W 14 dni od przekazania paczki przewoźnikowi | Nie podaje |
 | Shein | 1 dzień po kontroli | 1–10 dni roboczych |
-| Temu | Odstąpienie: 14 dni od poinformowania sprzedawcy. Zwrot dobrowolny: po otrzymaniu i kontroli | Tą samą metodą płatności |
 
 Na Allegro dostajesz maila, kiedy sprzedający zleci zwrot, a status widzisz w szczegółach zakupu.
 
-Używany, uszkodzony albo niekompletny produkt może być wart mniej. Allegro pisze, że sprzedający może pomniejszyć kwotę zwrotu, jeśli towar ma ślady użytkowania albo brakuje w nim elementów. Temu obniża zwrot nawet do ceny produktu.
+Używany, uszkodzony albo niekompletny produkt może być wart mniej. Allegro pisze, że sprzedający może pomniejszyć kwotę zwrotu, jeśli towar ma ślady użytkowania albo brakuje w nim elementów.
 
 :::steps
 - Zgłaszasz zwrot | W aplikacji albo na stronie sklepu, w terminie zwrotu. Dostajesz etykietę, kod QR albo kod zwrotu.
@@ -93,10 +90,10 @@ Używany, uszkodzony albo niekompletny produkt może być wart mniej. Allegro pi
 
 - **14 dni na odstąpienie.** Kupując przez internet od firmy, możesz odstąpić od umowy w 14 dni od otrzymania towaru, bez podawania przyczyny. Potem masz 14 dni na odesłanie, a "do zachowania 14-dniowego terminu wystarczy odesłanie rzeczy przed jego upływem".
 - **Zwrot pieniędzy w 14 dni** od otrzymania Twojego oświadczenia. UOKiK wyjaśnia: "Przedsiębiorca może wstrzymać się ze zwrotem pieniędzy do chwili otrzymania zwracanej rzeczy lub potwierdzenia jej odesłania (w zależności od tego, co nastąpi wcześniej)." Do tego służy potwierdzenie nadania.
-- **Koszty odesłania** ponosisz Ty, chyba że sklep zgodził się je pokryć albo Cię o nich nie poinformował. Shein i Temu płacą za pierwszy zwrot z każdego zamówienia; od drugiego Shein potrąca 19 zł. Na Allegro zwrot jest darmowy z Allegro Smart!, Allegro Delivery, Allegro InPost i w niektórych promocjach.
+- **Koszty odesłania** ponosisz Ty, chyba że sklep zgodził się je pokryć albo Cię o nich nie poinformował. Shein płaci za pierwszy zwrot z każdego zamówienia, a od drugiego potrąca 19 zł. Na Allegro zwrot jest darmowy z Allegro Smart!, Allegro Delivery, Allegro InPost i w niektórych promocjach.
 - **Od osoby prywatnej** zwrotu nie wymusisz: Allegro przypomina, że sprzedający, który nie jest przedsiębiorcą, nie ma obowiązku go przyjąć. Więcej: [OLX i Allegro Lokalnie](guide:second-hand-orders).
 
-30 dni Zalando czy 90 dni Temu to zasady sklepu, ponad to, co daje prawo.
+30 dni Zalando to zasada sklepu, ponad to, co daje prawo.
 
 ## Co, jeśli sklep twierdzi, że zwrot nie dotarł?
 
@@ -124,8 +121,6 @@ Peek widzi to, co publikuje przewoźnik. Pokaże, że paczka dotarła do centrum
 - [Zalando: Co mogę zrobić, jeśli nie mam etykiety zwrotu?](https://www.zalando.pl/faq/Returns-and-Refunds/what-can-i-do-if-i-do-not-have-a-return-label.html) – „Użyj telefonu”, InPost, DPD, jeden kod na przesyłkę, osobne paczki
 - [Zalando: Jak mogę zwrócić produkt partnerski Zalando?](https://www.zalando.pl/faq/Returns-and-Refunds/how-do-i-return-a-zalando-partner-item.html) – zwrot do Partnera z dołączoną etykietą
 - [Shein: Polityka Zwrotów](https://pl.shein.com/Return-Policy-a-281.html) – etykieta, przewoźnicy, koszty, czas zwrotu pieniędzy, adresy zwrotu, odstąpienie
-- [Temu: Polityka zwrotu produktów i zwrotu pieniędzy](https://www.temu.com/pl/return-and-refund-policy.html) – odstąpienie, 14 dni, darmowy pierwszy zwrot, 90 dni, pomniejszony zwrot
-- [Temu: Jak mogę odesłać moje zamówienie?](https://www.temu.com/pl/support/c3/jak-mog-odes-a-moje-zam-wienie-f-50-s-201.html) – DPD, DHL, InPost
 - [UOKiK: Odstąpienie od umowy, skutek](https://prawakonsumenta.uokik.gov.pl/prawo-odstapienia-od-umowy/skutek/) – zwrot pieniędzy w 14 dni, wstrzymanie do otrzymania rzeczy lub potwierdzenia odesłania, termin na odesłanie
 - [UOKiK: Odstąpienie od umowy, terminy](https://prawakonsumenta.uokik.gov.pl/prawo-odstapienia-od-umowy/terminy-odstapienie/) – 14 dni od otrzymania towaru
 - [UOKiK: Odstąpienie od umowy, koszty](https://prawakonsumenta.uokik.gov.pl/prawo-odstapienia-od-umowy/koszty/) – bezpośrednie koszty zwrotu

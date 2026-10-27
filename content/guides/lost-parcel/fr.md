@@ -1,6 +1,6 @@
 ---
 title: Colis perdu : que faire et comment se faire rembourser
-description: Colis perdu ? Quand il est considéré comme perdu, qui doit te rembourser, ce que paient Mondial Relay, bpost ou La Poste suisse, et comment réclamer.
+description: Colis perdu ? Quand il est considéré comme perdu, qui doit te rembourser, ce que paient bpost ou La Poste suisse, et comment réclamer.
 slug: colis-perdu-remboursement
 picture: Une étagère de centre de tri chargée de cartons, avec un vide en pointillés, une loupe dessus, et Pip à côté d'une lampe torche qui éclaire le vide.
 published: 2026-10-14
@@ -32,7 +32,6 @@ Chaque transporteur fixe son propre délai, compté depuis le dépôt ou le dern
 | Transporteur | Recherche à partir de | Délai pour réclamer | Qui réclame |
 | --- | --- | --- | --- |
 | [Colissimo, La Poste](carrier:la-poste) (FR) | – | Action en justice : 1 an après le dépôt | L'expéditeur ou le destinataire, dont les droits diffèrent un peu |
-| [Mondial Relay](carrier:mondial-relay) (FR) | Colis bloqué au même point depuis 5 jours | Non indiqué | L'expéditeur. Étiquette achetée sur Vinted ou Leboncoin : la plateforme |
 | [bpost](carrier:bpost) (BE) | Vers l'étranger, statut inchangé depuis 5 jours ouvrables (pays voisin) ou 10 (autres pays) | Non indiqué | L'expéditeur seulement |
 | [La Poste suisse](carrier:swiss-post) (CH) | Délai d'acheminement dépassé de plus de 2 jours | 1 an après le dépôt (6 mois pour l'international) | L'expéditeur ou le destinataire |
 
@@ -59,7 +58,7 @@ Si le vendeur ne fait rien, la plateforme peut te rembourser, si tu as payé par
 
 Sur Amazon, la garantie A à Z couvre chaque produit acheté dans ses boutiques, qu'il soit vendu par Amazon ou par un vendeur indépendant : en cas de livraison retardée, Amazon rembourse ou remplace l'article. Si c'est un vendeur tiers qui te l'a vendu, essaie d'abord de régler le problème avec lui. Si tu n'y arrives pas, tu peux demander un remboursement à Amazon.
 
-Sur Vinted, tu es remboursé « si la perte est confirmée » : l'enquête avec le transporteur « peut prendre plusieurs semaines », et ton paiement est conservé en attendant. Pour une étiquette Mondial Relay achetée sur Vinted, Leboncoin ou Rakuten, c'est le service client de la plateforme qui indemnise, après une enquête « généralement traitée sous 30 jours ». Etsy exclut les retards dus à une grève, à des intempéries graves ou à des événements comparables, et les colis bloqués parce que tu as refusé de payer les frais de douane. AliExpress, Temu et Shein en détail : [suivre un colis venu de Chine](guide:tracking-from-china).
+Sur Vinted, tu es remboursé « si la perte est confirmée » : l'enquête avec le transporteur « peut prendre plusieurs semaines », et ton paiement est conservé en attendant. Etsy exclut les retards dus à une grève, à des intempéries graves ou à des événements comparables, et les colis bloqués parce que tu as refusé de payer les frais de douane. AliExpress, Temu et Shein en détail : [suivre un colis venu de Chine](guide:tracking-from-china).
 
 ## Colis perdu : combien indemnise le transporteur ?
 
@@ -67,7 +66,6 @@ Pas grand-chose. La couverture de base est plafonnée et ne paie que la valeur p
 
 | Transporteur | Couverture incluse | En option |
 | --- | --- | --- |
-| Mondial Relay (FR) | 25 € forfaitaires, frais de port compris | Cinq niveaux de 50 € à 500 €, seulement à la création de l'étiquette |
 | bpost (BE), en Belgique | Remboursement des frais de port seulement | « Avec garantie » : jusqu'à 500 € pour des marchandises, 15 € pour des documents |
 | bpost (BE), vers l'étranger | Standard : 40 DTS plus 4,5 DTS par kilo. Economy : rien | Garantie jusqu'à 500 € |
 | La Poste suisse (CH), en Suisse | CHF 500.– par colis | Signature CHF 1500.– ; Assurance ou Fragile CHF 5000.– |
@@ -76,7 +74,7 @@ Pas grand-chose. La couverture de base est plafonnée et ne paie que la valeur p
 
 Le DTS (droit de tirage spécial) vaut 1,2119 € en 2026, selon le taux de l'Union postale universelle que publie Correos. Un colis postal international de 2 kg perdu rapporte donc au plus 49 DTS, environ 59 €, plus les frais d'envoi. En France et en Belgique, la boutique te doit de toute façon un nouvel envoi ou un remboursement complet.
 
-Même avec une option, seule la perte prouvée est payée. La Poste suisse rembourse au plus le prix de revient du contenu, hors TVA, et ne paie rien pour un colis déposé ailleurs à ta demande. bpost exige toujours une preuve de valeur ou une facture d'achat. Chez Mondial Relay, l'indemnisation complémentaire ne se rajoute pas après coup et n'est versée qu'en cas de perte confirmée.
+Même avec une option, seule la perte prouvée est payée. La Poste suisse rembourse au plus le prix de revient du contenu, hors TVA, et ne paie rien pour un colis déposé ailleurs à ta demande. bpost exige toujours une preuve de valeur ou une facture d'achat.
 
 ## Comment faire une réclamation pour colis perdu auprès de La Poste ou de bpost ?
 
@@ -87,7 +85,7 @@ Sur le site ou au service client du transporteur, avant le délai du tableau plu
 - **La preuve de valeur.** Facture, ticket de caisse, relevé bancaire ou paiement PayPal. bpost l'exige toujours, La Poste suisse demande le prix de revient du contenu.
 - **Le contenu et les deux adresses,** avec les numéros de téléphone chez La Poste suisse.
 
-Chez Mondial Relay, une étiquette faite sur son site est remboursée automatiquement sur le compte de l'expéditeur, sous 10 jours après la déclaration de perte. Si la réponse de La Poste ne te convient pas, demande d'abord un nouvel examen à son service recours, puis saisis gratuitement le Médiateur du groupe La Poste si le désaccord subsiste ou sans réponse deux mois après ta réclamation. Le Médiateur exige une réclamation écrite et datée au préalable.
+En France, si la réponse de La Poste ne te convient pas, demande d'abord un nouvel examen à son service recours, puis saisis gratuitement le Médiateur du groupe La Poste si le désaccord subsiste ou sans réponse deux mois après ta réclamation. Le Médiateur exige une réclamation écrite et datée au préalable.
 
 ## Acheté à un particulier sur Vinted, Leboncoin ou eBay ?
 
@@ -106,12 +104,6 @@ En dernier recours seulement. Sur PayPal, ouvre un litige « Objet non reçu » 
 :::sources
 - [Arcep : Comment résoudre un litige avec un opérateur postal ?](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – expéditeur ou destinataire, service recours, deux mois, Médiateur, action en justice un an après le dépôt (art. L10)
 - [Service-Public.fr : Médiateur de la consommation du prestataire du service universel postal](https://www.service-public.gouv.fr/particuliers/vosdroits/F11064) – réclamation écrite et datée d'abord, deux mois, gratuit
-- [Mondial Relay : Que faire en cas de retard de livraison ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-faire-en-cas-de-retard-de-livraison/) – bloqué 5 jours au même point
-- [Mondial Relay : Y a-t-il une indemnisation ?](https://www.mondialrelay.fr/faq/assurance/y-a-t-il-une-indemnisation-lorsque-j-envoie-un-colis/) – 25 € forfaitaires
-- [Mondial Relay : Assurer mon colis](https://www.mondialrelay.fr/envoi-de-colis/assurer-mon-colis/) – de 50 € à 500 €, à la création de l'étiquette
-- [Mondial Relay : Conditions de remboursement de l'indemnisation](https://www.mondialrelay.fr/faq/assurance/quelles-sont-les-conditions-de-remboursement-de-lindemnisation/) – perte confirmée
-- [Mondial Relay : Comment obtenir un remboursement d'un colis perdu ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/comment-obtenir-un-remboursement-dun-colis-perdu/) – crédit sous 10 jours, destinataire vers l'expéditeur
-- [Mondial Relay : Colis envoyé via Vinted, Leboncoin ou Rakuten déclaré perdu](https://www.mondialrelay.fr/faq/envoyer-un-colis/un-colis-envoye-via-un-site-partenaire-vinted-leboncoin-rakuten-est-declare-perdu-que-faire/) – la plateforme indemnise, 30 jours
 - [bpost : Comment introduire une plainte ?](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – seul l'expéditeur
 - [bpost : Pourquoi contacter l'expéditeur ?](https://www.bpost.be/fr/faq/pourquoi-dois-je-contacter-lexpediteur-si-mon-colis-na-pas-ete-livre) – confirmation par e-mail ou document signé
 - [bpost : Mon colis semble coincé quelque part](https://www.bpost.be/fr/faq/mon-colis-semble-coince-quelque-part-il-na-pas-bouge-sur-track-trace-depuis-un-moment) – 5 et 10 jours ouvrables

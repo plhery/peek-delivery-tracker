@@ -1,6 +1,6 @@
 ---
 title: Changer l'adresse de livraison d'un colis : comment faire
-description: Changer l'adresse de livraison d'un colis : ce que permettent eBay et Vinted, puis Chronopost, DPD, Mondial Relay, bpost, La Poste suisse et FedEx.
+description: Changer l'adresse de livraison d'un colis : ce que permettent eBay et Vinted, puis Colissimo, Chronopost, DPD, bpost, La Poste suisse et FedEx.
 slug: changer-adresse-livraison-colis
 picture: Une route qui se divise à un panneau, un côté vers une maison et l'autre vers une consigne à colis, une camionnette qui prend le nouveau virage, et Pip qui regarde la route dans cette direction.
 published: 2026-10-14
@@ -48,13 +48,12 @@ Peu de transporteurs acceptent une adresse dans une autre ville : La Poste suiss
 | --- | --- | --- |
 | [Chronopost](carrier:chronopost) (Predict) | Un autre jour : tu reprogrammes la livraison depuis les notifications Predict de l'app My Chronopost, ou avec le chatbot Léonard sur chronopost.fr | Aucun frais indiqué |
 | [DPD France](carrier:dpd-fr) (Predict) | Une nouvelle date, un autre lieu de livraison ou un relais Pickup, depuis le suivi DPD ou myDPD | Aucun frais indiqué |
-| [Mondial Relay](carrier:mondial-relay) | Rien : une fois l'étiquette créée, le Point Relais ou le Locker ne change plus | – |
 | [bpost](carrier:bpost) | Pas de nouvelle adresse une fois le colis en route. Depuis l'e-mail ou la notification de l'app : une autre adresse près de chez toi, ou la livraison un jour ouvrable plus tard. Un voisin ou un lieu sûr jusqu'à 10 minutes avant la livraison | Aucun frais indiqué |
 | DPD Belgique | Jusqu'à la veille : un autre jour, une autre adresse, un Pickup Shop, un lieu sûr | Aucun frais indiqué |
 | La Poste suisse | Avec « Mes envois » : un automate My Post 24, un point PickPost ou une autre adresse en Suisse ou au Liechtenstein ; un voisin du même bâtiment ou d'un immeuble attenant ; un lieu de dépôt | Réacheminement gratuit tant que le colis est en route ; après un avis de passage, CHF 8.– |
 | FedEx | Un autre jour ou une autre adresse dans le même pays, avant la première tentative de livraison. Après, suis les instructions de l'e-mail, du SMS ou de l'avis de passage | « Des restrictions et des frais supplémentaires peuvent s'appliquer » |
 
-Chez Mondial Relay, seul l'expéditeur peut agir : tant que le colis n'est pas pris en charge, il peut annuler l'étiquette dans les 30 jours et en créer une nouvelle avec un autre point.
+D'après La Poste (juin 2025), tu peux modifier la livraison de ton colis [Colissimo](carrier:la-poste) jusqu'à minuit la veille.
 
 La Poste suisse demande un login « Mes envois » avec une adresse vérifiée, et accepte les demandes jusqu'à minuit la veille de la distribution ; pour un autre jour ou une nouvelle adresse, le délai expire plus tôt.
 
@@ -74,7 +73,7 @@ Si le livreur est déjà passé et a laissé un avis, tu ne rediriges plus le co
 
 Si les options manquent ou sont grisées, c'est souvent pour l'une de ces raisons :
 
-- **L'expéditeur les a bloquées.** La Poste suisse et FedEx le disent, et chez Mondial Relay le point est figé dès que l'étiquette existe.
+- **L'expéditeur les a bloquées.** La Poste suisse et FedEx le disent.
 - **C'est trop tard.** DPD Belgique accepte ton choix jusqu'à la veille, comme La Poste suisse (minuit, et plus tôt pour une nouvelle adresse). bpost va jusqu'à 10 minutes avant la livraison, mais seulement pour un voisin ou un lieu sûr.
 - **Il vient de l'étranger.** Les réglages permanents de La Poste suisse ne s'appliquent pas aux petits colis de l'étranger dont le numéro commence par 98.
 - **Il attend déjà en point de retrait.** bpost ne transfère pas un colis vers un autre Point d'enlèvement : « Non, ce n'est malheureusement pas possible. »
@@ -102,11 +101,11 @@ Pour une absence plus courte en France, La Poste vend aussi une réexpédition t
 
 ### Peut-on changer de point relais ?
 
-Pour un colis livré chez toi, souvent oui : DPD propose ses relais Pickup, et La Poste suisse un automate My Post 24 ou un point PickPost, gratuitement. bpost peut aussi livrer tes colis directement dans un distributeur de colis, sans passer chez toi, si tu le choisis dans tes préférences. Pour un colis déjà adressé à un point, c'est plus dur : un colis Mondial Relay ne change pas de point une fois l'étiquette créée, et bpost ne transfère pas un colis d'un Point d'enlèvement à un autre.
+Pour un colis livré chez toi, souvent oui : DPD propose ses relais Pickup, et La Poste suisse un automate My Post 24 ou un point PickPost, gratuitement. bpost peut aussi livrer tes colis directement dans un distributeur de colis, sans passer chez toi, si tu le choisis dans tes préférences. Pour un colis déjà adressé à un point, c'est plus dur : bpost, par exemple, ne transfère pas un colis d'un Point d'enlèvement à un autre.
 
 ### Comment éviter ça la prochaine fois ?
 
-Vérifie l'adresse avant de payer, ou choisis un point relais ou une consigne à la commande. Les réglages permanents aident aussi : un point favori chez Mondial Relay (**Mon Profil** → **Mes informations** → **Mon Point Relais® \| Locker favori**), tes préférences de livraison chez bpost, le réacheminement permanent et gratuit de La Poste suisse vers un automate My Post 24 ou un point PickPost.
+Vérifie l'adresse avant de payer, ou choisis un point relais ou une consigne à la commande. Les réglages permanents aident aussi : tes préférences de livraison chez bpost, ou le réacheminement permanent et gratuit de La Poste suisse vers un automate My Post 24 ou un point PickPost.
 
 ### Peek peut-il changer mon adresse de livraison ?
 
@@ -116,10 +115,9 @@ Non. Peek suit ton colis et te montre où il en est ; seuls la boutique ou le tr
 - [eBay : Modifier les informations de livraison après l'achat](https://www.ebay.fr/help/buying/livraison/modifier-informations-livraison-apres-achat?id=4028) – annuler et racheter
 - [Vinted : L'adresse de livraison est incorrecte](https://www.vinted.fr/help/660) – prévenir le vendeur, annuler, réacheminement en cours de livraison
 - [Groupe La Poste : Les offres commerciales du service universel postal, 15 avril 2026](https://www.lapostegroupe.com/assets/media/le-groupe-laposte/ad-EsJ1ZCF7ETNk2_Catalogue_du_SU_15_avril_2026.pdf) – réexpédition définitive et temporaire, courrier et colis pris en charge par La Poste, réexpédition internationale du courrier seul, garde du courrier, prix
+- [Groupe La Poste : 3 nouveaux films Colissimo (3 juin 2025)](https://www.lapostegroupe.com/fr/actualite/3-nouveaux-films-colissimo-viennent-enrichir-la-saga-ya-pas-ecrit-la-poste) – modification de la livraison jusqu'à minuit la veille
 - [Geopost : Chronopost remains French people's favourite brand (en anglais)](https://www.geopost.com/en/news/chronopost-french-people-favourite-brand/) – Predict, reprogrammer depuis l'app My Chronopost ou avec le chatbot Léonard
 - [DPD France : Recevoir des colis](https://www.dpd.com/fr/fr/recevoir-des-colis/) – nouvelle date, autre lieu, relais Pickup
-- [Mondial Relay : Je souhaite modifier le Point Relais de livraison, est-ce possible ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/je-souhaite-modifier-le-point-relais-de-livraison-est-ce-possible/) – étiquette figée, annulation sous 30 jours
-- [Mondial Relay : Ajouter un Point Relais en favori](https://www.mondialrelay.fr/faq/recevoir-un-colis/je-souhaite-ajouter-un-point-relais-en-favori-comment-faire/) – point favori
 - [bpost : Mon colis est en route. Puis-je encore changer l'adresse de livraison ?](https://www.bpost.be/fr/faq/mon-colis-est-en-route-puis-je-encore-changer-ladresse-de-livraison) – adresse sur le colis, 10 minutes avant
 - [bpost : Que faire si je ne suis pas chez moi lorsque le facteur vient livrer mon colis ?](https://www.bpost.be/fr/faq/que-faire-si-je-ne-suis-pas-chez-moi-lorsque-le-facteur-vient-livrer-mon-colis) – préférences de livraison, autre adresse près de chez toi, un jour ouvrable
 - [bpost : Puis-je transférer mon colis vers un autre Point d'enlèvement ?](https://www.bpost.be/fr/faq/puis-je-transferer-mon-colis-vers-un-autre-point-denlevement) – pas possible

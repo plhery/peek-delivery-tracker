@@ -1,6 +1,6 @@
 ---
 title: Suivi de retour : où est mon colis et mon remboursement ?
-description: Où trouver le numéro de suivi de ton retour chez Amazon, Zalando, Shein, Temu et Vinted, pourquoi le suivi s'arrête à l'entrepôt et quand tu es remboursé.
+description: Où trouver le numéro de suivi de ton retour chez Zalando, Shein et Vinted, pourquoi le suivi s'arrête à l'entrepôt et quand tu es remboursé.
 slug: suivi-retour-colis
 picture: Un colis repart vers l'entrepôt d'une boutique, avec un reçu, et Pip lui fait au revoir de la main.
 published: 2026-10-17
@@ -11,9 +11,9 @@ Ton retour a son propre numéro de suivi, différent de celui de ta commande. Il
 
 ## Mon retour a-t-il un numéro de suivi ?
 
-Oui, si tu passes par l'étiquette ou le code QR de la boutique. Le code QR n'est pas le numéro de suivi : c'est ce que le point de dépôt scanne pour imprimer l'étiquette. Pour un retour Amazon, quand l'option est proposée, tu apportes juste l'article et le code QR reçu par e-mail au bureau de poste : La Poste l'emballe, colle l'étiquette et l'expédie. Chez Zalando aussi, c'est le transporteur qui imprime l'étiquette. Le numéro apparaît ensuite sur l'étiquette, sur ta preuve de dépôt et dans ton compte.
+Oui, si tu passes par l'étiquette ou le code QR de la boutique. Le code QR n'est pas le numéro de suivi : c'est ce que le point de dépôt scanne pour imprimer l'étiquette. Chez Zalando, c'est le transporteur qui imprime l'étiquette. Le numéro apparaît ensuite sur l'étiquette, sur ta preuve de dépôt et dans ton compte.
 
-Garde la preuve de dépôt jusqu'au remboursement. À La Poste, le guichet te la remet avec la date de dépôt, la consigne Pickup l'envoie par e-mail ou SMS, et elle porte le numéro de suivi. La Poste la dit « indispensable pour toute demande auprès du Service Clients ». En Point Relais Mondial Relay, tu signes sur le terminal du commerçant, puis un e-mail « Prise en charge de votre colis » te sert de preuve de dépôt. Zalando te demande aussi de garder ton reçu de retour jusqu'au remboursement.
+Garde la preuve de dépôt jusqu'au remboursement. En Belgique, quand tu déposes un retour en Point Relais Mondial Relay, tu signes sur le terminal du commerçant, puis un e-mail « Prise en charge de votre colis » te sert de preuve de dépôt. Zalando te demande aussi de garder ton reçu de retour jusqu'au remboursement.
 
 Tu paies l'envoi toi-même ? Le retour n'est alors suivi que si tu choisis un envoi avec suivi. Chez Shein, ce « retour autonome » est à tes frais, et Shein ne les rembourse pas.
 
@@ -27,18 +27,16 @@ Tu paies l'envoi toi-même ? Le retour n'est alors suivi que si tu choisis un en
 
 ## Où trouver le numéro de suivi du retour ?
 
-Dans ton compte chez la boutique et dans ses e-mails de retour. Tu vois le transporteur au moment où tu crées le retour ; voici ceux que citent les boutiques et La Poste :
+Dans ton compte chez la boutique et dans ses e-mails de retour. Tu vois le transporteur au moment où tu crées le retour ; voici ceux que citent les boutiques :
 
 | Boutique | Où est le retour | Transporteurs cités |
 | --- | --- | --- |
-| Amazon (amazon.fr) | Vos commandes, Retourner ou remplacer des articles. Tu suis ensuite le retour dans ton compte Amazon | France : près de 1 500 bureaux de poste et 1 900 relais Pickup, sans emballage ni étiquette quand l'option est proposée |
 | Zalando (France, Belgique, Suisse) | « Retours », dans ton compte, avec le code QR | France : La Poste (code valable 10 jours) ou Mondial Relay (30 jours). Ailleurs, affiché pendant le retour en ligne. En Suisse, enlèvement à domicile possible |
 | Shein | Mes commandes, Retours, Enregistrement des retours et remboursements, Détails, Enregistrer l'étiquette | France : Mondial Relay, Colissimo, Chronopost, enlèvement FedEx. Belgique : bpost, GLS, Mondial Relay. Suisse : DPD, La Poste |
-| Temu | Vos commandes, Retours, Imprimer l'étiquette de retour. Le statut du remboursement est sur la page de détails de la commande | France : Mondial Relay, Chronopost, DPD, La Poste, enlèvement UPS. Belgique : Homerr, Mondial Relay, DPD. Suisse : Päckli Punkt |
 
 Les transporteurs suivent le retour comme n'importe quel colis : [La Poste](carrier:la-poste) pour Colissimo, [Mondial Relay](carrier:mondial-relay), [Chronopost](carrier:chronopost), [FedEx](carrier:fedex), [bpost](carrier:bpost), [La Poste suisse](carrier:swiss-post) et [DPD Suisse](carrier:dpd-ch). Chez bpost, tu suis le retour dans Track & Trace ou l'app My bpost grâce au code-barres de ta preuve de dépôt. En Suisse, tu peux aussi faire enlever ton retour gratuitement à domicile avec la Post-App.
 
-Un colis, un numéro. Si tes articles Zalando ne tiennent pas dans une seule boîte, l'option « Les articles ne rentrent pas dans une seule boîte » te donne un code de plus. Temu, lui, veut tous les articles du retour dans un seul colis.
+Un colis, un numéro. Si tes articles Zalando ne tiennent pas dans une seule boîte, l'option « Les articles ne rentrent pas dans une seule boîte » te donne un code de plus.
 
 Tu ne sais pas à qui est le numéro ? Tape-le ici :
 
@@ -49,17 +47,16 @@ Le numéro de la commande que tu as reçue se trouve ailleurs : voir [où trouve
 
 ## Combien de temps met le retour, et pourquoi le suivi s'arrête ?
 
-Le dernier scan montre souvent que le transporteur a livré le colis, pas que la boutique l'a ouvert. La Poste suit ton colis « jusqu'à sa réception par le destinataire », ici le centre de retours. Le contrôle et le remboursement, eux, ne se voient que dans ton compte chez la boutique. Zalando t'envoie un e-mail quand son centre de retours a traité ton colis.
+Le dernier scan montre souvent que le transporteur a livré le colis, pas que la boutique l'a ouvert. Le contrôle et le remboursement, eux, ne se voient que dans ton compte chez la boutique. Zalando t'envoie un e-mail quand son centre de retours a traité ton colis.
 
-Le retour ne va pas toujours directement à la boutique. Shein prévient que ni l'adresse de l'expéditeur sur ton colis d'origine ni celle de son étiquette de retour ne sont « les adresses de retour réelles ». Temu Suisse prévient aussi : l'adresse jointe à ton colis « N'EST PAS l'adresse de retour ». Utilise toujours l'étiquette fournie. Chez Amazon, c'est une étiquette spécifique qui oriente le colis vers le bon site ; en France, le centre de Saran joue un rôle central dans le traitement des retours.
+Le retour ne va pas toujours directement à la boutique. Shein prévient que ni l'adresse de l'expéditeur sur ton colis d'origine ni celle de son étiquette de retour ne sont « les adresses de retour réelles ». Utilise toujours l'étiquette fournie. Chez Amazon, c'est une étiquette spécifique qui oriente le colis vers le bon site ; en France, le centre de Saran joue un rôle central dans le traitement des retours.
 
 | Boutique | Pour arriver et être traité |
 | --- | --- |
 | Zalando | Remboursement sous 14 jours après la remise au transporteur, trajet compris |
 | Shein | 5 à 7 jours de trajet, puis 5 à 7 jours de contrôle qualité à l'entrepôt |
-| Temu | Pas précisé. Le colis doit être posté dans les 14 jours suivant ta demande ; en Suisse, sinon, le retour est annulé |
 
-Pour un retour Amazon déposé à La Poste, des notifications t'annoncent les principales étapes jusqu'au remboursement. Le suivi ne bouge plus avant même d'arriver au centre de retours ? Voir [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
+Le suivi ne bouge plus avant même d'arriver au centre de retours ? Voir [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
 
 ## Quand suis-je remboursé ?
 
@@ -69,11 +66,8 @@ Après le contrôle, plus le délai de ta banque :
 | --- | --- | --- |
 | Zalando | Sous 14 jours après la remise au transporteur | « Quelques jours de plus » |
 | Shein | 1 jour après le contrôle qualité | En général 2 à 10 jours ouvrables |
-| Temu | Après réception et vérification | Suisse : 5 à 14 jours ouvrés, parfois jusqu'à 30 jours |
 
-Temu Suisse peut te rembourser dès le dépôt du colis, à sa seule discrétion. Si l'article ne revient pas ou ne passe pas le contrôle, l'argent est repris sur ton moyen de paiement.
-
-Le contrôle compte. Shein et Temu remboursent après leur contrôle qualité. Chez Amazon, un premier employé scanne l'étiquette et vérifie que c'est le bon produit, puis un second examine son état : emballage intact, signes d'utilisation, dommages.
+Le contrôle compte. Shein rembourse après son contrôle qualité. Chez Amazon, un premier employé scanne l'étiquette et vérifie que c'est le bon produit, puis un second examine son état : emballage intact, signes d'utilisation, dommages.
 
 :::steps
 - Tu crées le retour | Dans l'app ou sur le site de la boutique, dans son délai de retour. Tu reçois une étiquette, un code QR ou un code de retour.
@@ -91,14 +85,14 @@ Sur Vinted, entre particuliers, un article conforme à l'annonce qui ne te va pa
 - **Belgique :** les mêmes 14 jours. Le SPF Économie précise : si tu as utilisé la méthode de retour du vendeur, par exemple son étiquette, il doit te rembourser dans les 14 jours suivant ta rétractation. Sinon, il peut attendre ta preuve d'envoi ou l'article.
 - **Suisse :** « En Suisse, vous ne disposez pas d'un droit légal à échanger ou retourner un produit », dit ch.ch, et les achats en ligne suivent les mêmes règles qu'en magasin. Ce sont les conditions générales de la boutique qui comptent.
 
-Les délais plus longs, comme les 30 jours de Zalando ou les 90 jours de Temu, sont la politique de la boutique, en plus de la loi. Et un achat à un particulier n'ouvre pas de droit de rétractation.
+Les délais plus longs, comme les 30 jours de Zalando, sont la politique de la boutique, en plus de la loi. Et un achat à un particulier n'ouvre pas de droit de rétractation.
 
 ## La boutique dit que mon retour n'est jamais arrivé
 
 Ton suivi et ta preuve de dépôt sont tes preuves. Procède dans cet ordre :
 
 - **Regarde le suivi.** S'il indique le colis livré, envoie à la boutique une capture d'écran et une photo de ta preuve de dépôt.
-- **Laisse à la boutique le temps prévu.** Chez Zalando, 14 jours après la remise au transporteur. Pour un retour Amazon déposé à La Poste, pose tes questions au service client Amazon, depuis ton espace client.
+- **Laisse à la boutique le temps prévu.** Chez Zalando, 14 jours après la remise au transporteur.
 - **Sache qui porte le risque.** En Belgique, si tu as utilisé l'étiquette du vendeur, il reste responsable d'un problème pendant le renvoi, sauf s'il prouve que tu en es responsable. Sans sa méthode de retour, la perte est pour toi. En France, ta preuve d'expédition suffit pour que le vendeur ne puisse plus différer ton remboursement.
 - **Sur Vinted,** c'est le vendeur qui signale un problème avec l'article retourné, et Vinted répond sous 48 heures.
 
@@ -111,7 +105,6 @@ Oui, dès que tu as un numéro. Colle celui de l'étiquette, de la preuve de dé
 Peek voit ce que publie le transporteur. Il peut te dire que le colis est arrivé au centre de retours, mais pas si la boutique l'a contrôlé ou t'a remboursé : ça, c'est uniquement dans ton compte chez la boutique.
 
 :::sources
-- [La Poste : Retour de colis Amazon sans emballage](https://www.laposte.fr/envoyer/comment-retourner-colis-amazon-sans-emballage) – Vos commandes, code QR par e-mail, emballage et étiquette au bureau de poste, 1 500 bureaux et 1 900 relais Pickup, suivi et notifications dans le compte Amazon, service client Amazon
 - [About Amazon France : Que deviennent vos retours Amazon ?](https://www.aboutamazon.fr/actualites/durabilite/que-deviennent-vos-retours-amazon) – étiquette spécifique, centre de Saran, contrôle à l'arrivée
 - [Zalando : Comment puis-je renvoyer ma commande ?](https://www.zalando.fr/faq/Returns-and-Refunds/how-can-i-return-my-order.html) – 30 jours, 14 jours, reçu de retour, transporteur, enlèvement en Suisse
 - [Zalando : Quand recevrai-je mon remboursement ?](https://www.zalando.fr/faq/Returns-and-Refunds/when-will-i-receive-my-refund.html) – e-mail, banque
@@ -119,15 +112,9 @@ Peek voit ce que publie le transporteur. Il peut te dire que le colis est arriv�
 - [Shein France : Politique de retour](https://fr.shein.com/Return-Policy-a-281.html) – transporteurs, étiquette, adresses, retour autonome, délais, rétractation
 - [Shein Belgique : Politique de retour](https://euqs.shein.com/Return-Policy-a-281.html?language=fr) – transporteurs en Belgique
 - [Shein Suisse : Politique de retour](https://ch.shein.com/fr/Return-Policy-a-281.html) – transporteurs en Suisse
-- [Temu France : Politique de retour et de remboursement](https://www.temu.com/fr/return-and-refund-policy.html) – 14 jours, report, 90 jours, vérification
-- [Temu Suisse : Politique de retour et de remboursement](https://www.temu.com/ch-fr/return-and-refund-policy.html) – Päckli Punkt, 14 jours, étiquette, adresse, remboursement anticipé, banque
-- [Temu France : Comment puis-je renvoyer mes articles ?](https://www.temu.com/fr/support/c3/comment-puis-je-renvoyer-mes-articles-f-50-s-201.html) – Mondial Relay, Chronopost, DPD, La Poste, UPS, 14 jours
-- [Temu Belgique : Comment puis-je renvoyer mes articles ?](https://www.temu.com/be-fr/support/c3/comment-puis-je-renvoyer-mes-articles-f-50-s-201.html) – Homerr, Mondial Relay, DPD
 - [Vinted : Politique de remboursement de Vinted](https://www.vinted.fr/help/465) – 2 jours, 5 jours ouvrés, frais de retour, remboursement
 - [Vinted : Que faire en cas de problèmes avec l'article retourné ?](https://www.vinted.fr/help/1476) – 2 jours, remboursement automatique, 48 heures
-- [La Poste : Où et comment déposer un Colissimo ?](https://aide.laposte.fr/contenu/ou-et-comment-deposer-un-colissimo) – preuve de dépôt au guichet et en consigne, numéro de suivi
-- [La Poste : A quoi sert la preuve de dépôt d'un Colissimo ?](https://aide.laposte.fr/contenu/a-quoi-sert-la-preuve-de-depot-d-un-colissimo) – indispensable pour le Service Clients
-- [Mondial Relay : Quelle preuve de dépôt aurai-je en déposant mon colis ?](https://www.mondialrelay.fr/faq/envoyer-un-colis/quelle-preuve-de-depot-aurai-je-en-deposant-mon-colis/) – signature, e-mail de prise en charge
+- [Mondial Relay Belgique : Quelle preuve de dépôt aurai-je en déposant mon colis ?](https://www.mondialrelay.be/fr-be/faq/envoyer-un-colis/quelle-preuve-de-depot-aurai-je-en-deposant-mon-colis/) – signature au Point Relais, e-mail « Prise en charge de votre colis », retours e-commerce
 - [bpost : Retourner ou renvoyer un colis](https://www.bpost.be/fr/envoyer-colis/retour) – Track & Trace, My bpost, code-barres
 - [La Poste suisse : Retourner des envois](https://meine-sendungen.post.ch/fr/sendungen-retournieren) – enlèvement gratuit, points de dépôt
 - [Service-Public.fr : Achat à distance, droit de rétractation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – 14 jours, déclaration, remboursement, report, majorations

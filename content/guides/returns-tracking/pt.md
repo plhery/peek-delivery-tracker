@@ -1,6 +1,6 @@
 ---
 title: Devolução: onde está a encomenda e o meu reembolso?
-description: Onde ver o número da tua devolução na Zalando, Shein e Temu, porque é que o seguimento para no armazém e quando recebes o reembolso.
+description: Onde ver o número da tua devolução na Zalando e na Shein, porque é que o seguimento para no armazém e quando recebes o reembolso.
 slug: seguir-devolucao-reembolso
 picture: Uma encomenda a caminho do armazém de uma loja, um talão e o Pip a dizer-lhe adeus.
 published: 2026-10-17
@@ -33,7 +33,6 @@ Na página de devoluções da loja e no e-mail que recebes quando entregas a enc
 | --- | --- | --- |
 | Zalando | Secção «Devoluções» da tua conta. O código vale 30 dias | Aparecem durante a devolução online |
 | Shein | Meus Pedidos › Devoluções › Registro de Devolução e Reembolso › Detalhes › «Salvar a Etiqueta» | GLS (código QR), InPost (código QR), CTT (código PIN) |
-| Temu | Pedes a devolução em «As suas encomendas» ou na página de devolução online | CTT, InPost ou DPD |
 
 As transportadoras também têm o seu seguimento: [CTT](carrier:ctt) e [InPost](carrier:inpost), por exemplo.
 
@@ -60,7 +59,6 @@ O que dizem as lojas sobre os prazos:
 | --- | --- |
 | Shein | 5–7 dias de envio, depois 5–7 dias de controlo no armazém |
 | Zalando | Não indica: o reembolso conta a partir da entrega à transportadora |
-| Temu | Não indica. Envia nos 14 dias seguintes ao pedido de livre resolução |
 
 Se o seguimento da transportadora está parado há dias antes do centro de devoluções, vê [porque é que o seguimento não atualiza](guide:tracking-not-updating).
 
@@ -72,9 +70,6 @@ Depois da verificação, mais o tempo do teu banco:
 | --- | --- | --- |
 | Zalando | No prazo de 14 dias após entregares a encomenda à transportadora | Não indica |
 | Shein | 1 dia depois do controlo | 1–10 dias úteis |
-| Temu | Livre resolução: em 14 dias a contar do dia em que o vendedor é informado. Devolução voluntária: depois de receber e verificar os artigos | Pelo mesmo meio de pagamento |
-
-Um artigo usado, danificado ou incompleto pode valer menos: a Temu reduz o reembolso até ao preço do artigo.
 
 :::steps
 - Inicias a devolução | Na app ou no site da loja, dentro do prazo. Recebes uma etiqueta, um código QR ou um código de devolução.
@@ -89,10 +84,10 @@ Um artigo usado, danificado ou incompleto pode valer menos: a Temu reduz o reemb
 - **14 dias para mudar de ideias.** Se compras online a uma empresa, podes resolver o contrato em 14 dias a contar da entrega, sem dar explicações. Depois tens mais 14 dias, a contar do dia em que comunicaste a decisão, para devolver o artigo.
 - **Reembolso em 14 dias** a contar do dia em que a loja é informada. O Decreto-Lei 24/2014 só lhe permite reter o reembolso "enquanto os bens não forem recebidos ou enquanto o consumidor não apresentar prova da devolução do bem". É para isso que serve o talão.
 - **Se a loja falhar o prazo**, tem de te devolver o dobro, no prazo de 15 dias úteis.
-- **Os portes da devolução** são teus, a não ser que a loja os pague ou não te tenha avisado antes da compra. A Shein e a Temu pagam a primeira devolução de cada encomenda; a partir da segunda, a Shein desconta 4,50 € pela GLS ou pela InPost e 7,00 € pelos CTT.
+- **Os portes da devolução** são teus, a não ser que a loja os pague ou não te tenha avisado antes da compra. A Shein paga a primeira devolução de cada encomenda; a partir da segunda, desconta 4,50 € pela GLS ou pela InPost e 7,00 € pelos CTT.
 - **A um particular** não se aplica. Para a OLX e companhia: [compras em segunda mão](guide:second-hand-orders).
 
-Os 30 dias da Zalando ou os 90 da Temu são política de cada loja, além da lei.
+Os 30 dias da Zalando são política da loja, além da lei.
 
 ## E se a loja diz que a devolução nunca chegou?
 
@@ -116,8 +111,6 @@ O Peek vê o que a transportadora publica. Diz-te que a encomenda chegou ao cent
 - [Zalando: O que posso fazer se não tiver uma etiqueta de devolução?](https://www.zalando.pt/faq/Returns-and-Refunds/what-can-i-do-if-i-do-not-have-a-return-label.html) – código de devolução, a transportadora imprime a etiqueta
 - [Zalando: Como posso devolver um artigo de Parceiro da Zalando?](https://www.zalando.pt/faq/Returns-and-Refunds/how-do-i-return-a-zalando-partner-item.html) – devolução ao parceiro com a etiqueta incluída
 - [Shein: Política de devolução](https://pt.shein.com/Return-Policy-a-281.html) – etiqueta, transportadoras, custos, prazos do reembolso, moradas de devolução, livre resolução
-- [Temu: Política de devolução e reembolso](https://www.temu.com/pt/return-and-refund-policy.html) – livre resolução, 14 dias, primeira devolução grátis, 90 dias, reembolso reduzido
-- [Temu: Como é que envio os meus artigos para devolução?](https://www.temu.com/pt/support/c3/como-que-envio-os-meus-artigos-para-devolu-o-f-50-s-201.html) – CTT, InPost, DPD
 - [Diário da República: Decreto-Lei n.º 24/2014, versão consolidada](https://diariodarepublica.pt/dr/legislacao-consolidada/decreto-lei/2014-73222992) – arts. 10.º, 12.º e 13.º: 14 dias, retenção do reembolso, reembolso em dobro, custos de devolução
 - [Your Europe: Devoluções e direito de retratação](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pt.htm) – 14 dias a contar da entrega, portes de devolução, compras a particulares
 :::

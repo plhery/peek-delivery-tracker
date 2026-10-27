@@ -19,7 +19,7 @@ Der Absender erzeugt die Sendungsnummer und meldet die Daten der Post, meist bev
 
 Das Suchfeld auf post.ch heißt „Sendungsnummer oder Abholcode“: Dort funktioniert also auch ein Abholcode.
 
-Kopier die Nummer lieber, statt sie abzutippen. Fehlt eine Ziffer, ist eine zu viel oder stimmt die Prüfziffer nicht, sieht die Nummer aus wie die eines anderen Paketdiensts. 18 Ziffern mit `44` am Anfang gehören zu [Quickpac](carrier:quickpac), nicht zur Post. Paletten, Möbel und andere Güter bringt [Swiss Post Cargo](carrier:swiss-post-cargo), die Gütermarke der Post, mit eigenem Tracking. Ein Paket aus dem Ausland behält in der Schweiz seine ausländische Nummer (endet etwa auf `DE` oder `FR`). Keine Nummer bekommen? Hilfe dazu gibt [Sendungsnummer finden](guide:find-tracking-number).
+Kopier die Nummer lieber, statt sie abzutippen. Fehlt eine Ziffer, ist eine zu viel oder stimmt die Prüfziffer nicht, sieht die Nummer aus wie die eines anderen Paketdiensts. 18 Ziffern mit `44` am Anfang gehören zu [Quickpac](carrier:quickpac), nicht zur Post. Paletten und andere Güter bringt [Swiss Post Cargo](carrier:swiss-post-cargo), die Gütermarke der Post, mit eigenem Tracking. Ein Paket aus dem Ausland behält in der Schweiz seine ausländische Nummer (endet etwa auf `DE` oder `FR`). Keine Nummer bekommen? Hilfe dazu gibt [Sendungsnummer finden](guide:find-tracking-number).
 
 ## Post Sendungsverfolgung: was die Status bedeuten
 

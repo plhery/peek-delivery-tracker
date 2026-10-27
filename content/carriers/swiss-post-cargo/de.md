@@ -1,44 +1,43 @@
 ---
 title: Swiss Post Cargo Tracking: Status, Zustellung, Kontakt
-description: Swiss Post Cargo Sendung verfolgen: welche Nummer funktioniert, was „Wareneingang POST“ heißt, wie Stückgut zugestellt wird und wen du anrufst.
+description: Swiss Post Cargo Sendung verfolgen: welche Nummer funktioniert, was „Received warehouse POST“ heißt, wie Stückgut zugestellt wird und wen du anrufst.
 slug: swiss-post-cargo-sendungsverfolgung
 published: 2026-10-12
 updated: 2026-10-27
 ---
 
-Swiss Post Cargo ist die Gütermarke der Schweizerischen Post: Paletten, sperrige Ware und Möbel, die per Lastwagen kommen, keine gewöhnlichen Pakete. Du verfolgst die Sendung auf der Track-&-Trace-Seite (tt.swisspost-cargo.com) mit dem Barcode oder der Referenz, die dir der Absender gegeben hat, oder fügst sie oben ins Feld ein. Hast du eine Paketnummer der Post, gehört sie auf [die Seite der Post](carrier:swiss-post).
+Swiss Post Cargo ist die Gütermarke der Schweizerischen Post: Paletten und andere Güter per Lastwagen, vom einzelnen Stück bis zur ganzen Wagenladung, keine gewöhnlichen Pakete. Du verfolgst die Sendung auf der Track-&-Trace-Seite (tt.swisspost-cargo.com) mit dem Barcode oder der Referenz, die dir der Absender gegeben hat, oder fügst sie oben ins Feld ein. Hast du eine Paketnummer der Post, gehört sie auf [die Seite der Post](carrier:swiss-post).
 
 ## Swiss Post Cargo Sendungsnummer: Barcode oder Referenz
 
-Ein Nummernformat veröffentlicht Swiss Post Cargo nicht. Das Tracking verlangt „eine Sendungsnummer pro Zeile (Barcode oder Referenz)“: einen Barcode für ein einzelnes Stück oder eine Referenz des Absenders, etwa eine Bestell- oder Liefernummer. Eine Referenz zeigt alle Barcodes ihrer Sendung. Diese Formen kommen vor (Ziffern erfunden):
+Das Tracking von Swiss Post Cargo akzeptiert einen Barcode für ein einzelnes Stück oder eine Referenz des Absenders. Eine Referenz zeigt alle Barcodes ihrer Sendung. Diese Formen bringt Peek mit Swiss Post Cargo in Verbindung (Ziffern erfunden):
 
 | Nummer | Was sie ist |
 | --- | --- |
 | `00012345600000000005` | 20 Ziffern, beginnt mit 00: der Barcode einer Palette oder eines Stücks (eine SSCC). Die letzte Ziffer ist eine Prüfziffer. |
 | `PL-12345678` | PL- und 8 Ziffern: eine Kundenreferenz. |
 
-Wo du die Nummer findest, steht auf keiner Seite von Swiss Post Cargo. Schau in die E-Mails des Shops und frag sonst dort nach. Weitere Stellen zeigt [Sendungsnummer finden](guide:find-tracking-number). Antwortet das Tracking mit `Zu Ihrer Anfrage wurden keine Daten gefunden. Bitte überprüfen Sie, ob die eingegebenen Daten korrekt sind.`, prüf die Ziffern und frag dann den Absender.
+Schau in die E-Mails des Shops und frag sonst dort nach. Weitere Stellen zeigt [Sendungsnummer finden](guide:find-tracking-number). Findet das Tracking nichts, prüf die Ziffern und frag dann den Absender.
 
-Diese Nummern gehören in ein anderes Tracking:
+Diese Nummern werden nicht als Swiss Post Cargo verfolgt:
 
 - **Pakete der Post:** 18 Ziffern mit 99 am Anfang (gedruckt `99.00.123456.12345678`) oder zwei Buchstaben, neun Ziffern und CH (`RR000000005CH`).
-- **PostLogistics-Referenzen** wie `12345678-123`: das ältere Tracking desselben Unternehmens, tracking.postlogistics.ch.
-- **Deutschland:** Das deutsche Portal mit dem Titel „Sendungsverfolgung - Hugger“ (portal-de1.swisspost-cargo.com) fragt nach einer Collinummer oder einer Sendungsnummer mit Betriebsnummer. Laut Portal kann es in Einzelfällen etwas dauern, bis eine Collinummer im System gefunden wird.
+- **PostLogistics-Referenzen** wie `12345678-123`: PostLogistics tritt heute als Swiss Post Cargo auf, das alte Tracking tracking.postlogistics.ch lässt sich nicht mehr öffnen. Peek verfolgt solche Referenzen als PostLogistics.
 
 ## Swiss Post Cargo Sendung verfolgen: was die Status bedeuten
 
-Das Tracking lässt sich auf Deutsch, Französisch, Italienisch und Englisch umstellen, und die Scan-Texte wechseln mit. Auf Deutsch liest sich eine zugestellte Sendung so, in der Mitte steht der englische Text derselben Meldung:
+Swiss Post Cargo schreibt seine Scans auf Deutsch, Französisch, Italienisch oder Englisch. In Peek erscheinen sie auf Englisch. Auf Englisch liest sich eine zugestellte Sendung so:
 
-| Auf Deutsch | Auf Englisch | Was es für dich heißt |
-| --- | --- | --- |
-| `Dateneingang Post` | `Data entry POST` | Die Daten des Absenders sind da. Die Ware ist noch nicht bei Swiss Post Cargo. |
-| `Wareneingang POST` | `Received warehouse POST` | Die Ware ist in einem Hub oder Depot von Swiss Post Cargo angekommen, der Ort steht daneben. |
-| `Beladung für Zustellung` | `Loaded for Delivery` | Die Ware ist auf dem Lastwagen: in Zustellung. |
-| `Bild` | `IMAGE` | Ein Zustellfoto, direkt vor dem Zustellscan aufgeführt. |
-| `AUSGELIEFERT` | `DELIVERED SCANNED` | Zugestellt, der Ort steht daneben. |
-| `Unterschrift` | `SIGNATURE` | Die Unterschrift bei der Zustellung, mit Zeit und Ort des Zustellscans. |
+| Swiss Post Cargo (auf Englisch) | Was es für dich heißt |
+| --- | --- |
+| `Data entry POST` | Die Daten des Absenders sind da. Die Ware ist noch nicht bei Swiss Post Cargo. |
+| `Received warehouse POST` | Die Ware ist in einem Hub oder Depot von Swiss Post Cargo angekommen, der Ort steht daneben. |
+| `Loaded for Delivery` | Die Ware ist auf dem Lastwagen: in Zustellung. |
+| `IMAGE` | Ein Zustellfoto, direkt vor dem Zustellscan aufgeführt. |
+| `DELIVERED SCANNED` | Zugestellt, der Ort steht daneben. |
+| `SIGNATURE` | Die Unterschrift bei der Zustellung, zur selben Zeit wie der Zustellscan. |
 
-`Dateneingang Post` sind nur Daten: Bewegt hat sich noch nichts. `Bild` und `Unterschrift` sind Belege zur Zustellung, keine neuen Ereignisse. Im Verlauf können `Wareneingang POST` und `Beladung für Zustellung` zweimal vor der Zustellung stehen, ohne eine Zeile, die erklärt, warum die erste Tour nicht geklappt hat. Erklärt werden die Texte auf keiner Seite von Swiss Post Cargo.
+Bei `Data entry POST` geht es nur um Daten: Bewegt hat sich noch nichts. `IMAGE` und `SIGNATURE` sind Belege zur Zustellung, keine neuen Ereignisse.
 
 ## Swiss Post Cargo Zustellung: wann, wohin und wenn niemand da ist
 
@@ -48,56 +47,45 @@ Das Tracking lässt sich auf Deutsch, Französisch, Italienisch und Englisch ums
 
 **Extras des Absenders.** Eine Avisierung per Telefon, E-Mail oder SMS, eine geplante Zustellung, die Lieferung ins Stockwerk und eine zweite Zustellung sind Zusatzleistungen. Du bekommst sie nur, wenn der Absender sie gebucht hat.
 
-**Möbel und Geräte.** Beim Aufstellservice gibt der Shop den Auftrag, und Swiss Post Cargo vereinbart den Liefertermin direkt mit dir. Die Ware wird am Verwendungsort ausgepackt und aufgestellt, Verpackung oder das alte Gerät kann Swiss Post Cargo mitnehmen. Geliefert wird Montag bis Samstag in der ganzen Schweiz und in Liechtenstein.
-
-**Verpasste Zustellung und Abholung.** Abholstellen oder Paketautomaten erwähnt Swiss Post Cargo nicht. Wie viele Versuche es gibt, wie lange Ware im Depot wartet und wie du einen neuen Termin bekommst, steht ebenfalls nirgends. Frag den Shop, der den Transport gebucht hat.
+**Verpasste Zustellung und Abholung.** Abholstellen oder Paketautomaten nennt die Stückgut-Broschüre der Post nicht, und eine Zweitzustellung ist eines der Extras oben. Wie lange Ware im Depot wartet und wie du einen neuen Termin bekommst, steht dort nicht. Frag den Shop, der den Transport gebucht hat.
 
 ## Swiss Post Cargo Sendung verspätet, verloren oder beschädigt
 
-Kunde von Swiss Post Cargo ist der Shop: Die Dienste bestellen Firmen. Verspätung, Schaden oder ein fehlendes Stück meldest du deshalb zuerst dem Shop. Ein Reklamationsverfahren oder eine Frist für Empfänger veröffentlicht Swiss Post Cargo nicht. Fotografiere einen Schaden, bevor du ihn dem Shop meldest.
+Kunde von Swiss Post Cargo ist der Shop: Die Dienste bestellen Firmen. Verspätung, Schaden oder ein fehlendes Stück meldest du deshalb zuerst dem Shop. Fotografiere einen Schaden, bevor du ihn dem Shop meldest.
 
-**Seit Tagen kein neuer Scan.** Steht nur `Dateneingang Post` da, kann die Ware noch beim Absender sein: Frag den Shop, wann er sie übergibt. Die üblichen Gründe erklärt [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Seit Tagen kein neuer Scan.** Stehen nur die Daten des Absenders da (`Data entry POST`), kann die Ware noch beim Absender sein: Frag den Shop, wann er sie übergibt. Die üblichen Gründe erklärt [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Zugestellt, aber nicht da.** Schau im Tracking nach den Zeilen `Unterschrift` und `Bild` und melde dich dann beim Shop. Wie es weitergeht, zeigt [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
+**Zugestellt, aber nicht da.** Schau im Tracking nach den Zeilen mit Unterschrift und Foto (auf Englisch `SIGNATURE` und `IMAGE`) und melde dich dann beim Shop. Wie es weitergeht, zeigt [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-> Swiss Post Cargo verlinkt auf die Phishing-Seite der Post. Dort steht, dass gefälschte Nachrichten im Namen der Post per SMS, E-Mail, WhatsApp, Website, Anruf oder über soziale Medien kommen. „Oft geht es um Pakete, Gebühren, Sendungsverfolgung oder persönliche Daten.“
+> Auf der Phishing-Seite der Post steht, dass gefälschte Nachrichten im Namen der Post per SMS, E-Mail, WhatsApp, Website, Anruf oder über soziale Medien kommen. „Oft geht es um Pakete, Gebühren, Sendungsverfolgung oder persönliche Daten.“
 
 ## Swiss Post Cargo Kontakt und Telefonnummer
 
-Die Hilfeseite von Swiss Post Cargo (letzte gespeicherte Fassung, gelesen am 12. Oktober 2026) nennt Nummern „rund um bestehende oder neue Aufträge“, also für Geschäftskunden, und keine allgemeine Nummer für Empfänger. Alle gelten Montag bis Freitag:
-
-- **Aufstellservice:** +41 (0)58 386 74 74, 9 bis 12 und 14 bis 17 Uhr, aufstellservice@post.ch.
-- **Swiss-Express Tag:** +41 (0)848 754 754, 7 bis 12 und 13 bis 18 Uhr, swissexpress.tag@post.ch.
-- **Swiss-Express Innight:** +41 (0)848 754 754, 8 bis 12 und 13 bis 18 Uhr, swissexpress.innight@post.ch.
-- **Retourenmanagement:** +41 (0)58 386 44 11, 9 bis 12 und 14 bis 17 Uhr, returnservices@post.ch.
-- **Verzollung:** +41 (0)58 341 31 41, 6 bis 20 Uhr, zoll.plin@post.ch.
-- **Kontaktformular:** auf der Seite „Hilfe und Kontakt“.
-
-Die Kontaktliste im Tracking nennt den Kundenservice Stückgut an der Lagerstrasse 12 in 5606 Dintikon und den Aufstellservice an der Nordstrasse 12 in 5612 Villmergen, beide ohne Telefonnummer.
+Swiss Post Cargo arbeitet für den Shop, also fang dort an: Er hat den Transport gebucht. Die Stückgut-Broschüre der Post vom April 2022 nennt einen einzigen Kontakt, für Geschäftskunden und ohne Telefonnummer: Kundendienst Transporte CH, Lagerstrasse 12, 5606 Dintikon, sales.ls4@post.ch.
 
 Für Briefe und Pakete der Post (nicht Cargo) gilt +41 848 888 888 (CHF 0.08 pro Minute vom Schweizer Festnetz), Montag bis Freitag 7.30 bis 18 Uhr und Samstag 8 bis 12 Uhr, dazu ein Chat auf post.ch.
 
 ## Swiss Post Cargo mit Peek verfolgen
 
-Ein 20-stelliger Barcode mit 00 am Anfang stammt vom Versender, nicht von einem bestimmten Dienst. Stimmt seine Prüfziffer, zeigt [Peek](/) deshalb „Peek fragt bei Swiss Post Cargo, NZ Post nach …“ und nennt Swiss Post Cargo nur, wenn Swiss Post Cargo die Nummer kennt. Eine Referenz wie `PL-12345678` geht nur an Swiss Post Cargo. Für andere Referenzen mit 6 bis 40 Buchstaben und Ziffern wählst du Swiss Post Cargo mit „Ändern“ oder fügst einen Track-&-Trace-Link von tt.swisspost-cargo.com oder apv.swisspost-cargo.com ein. Eine Paketnummer der Post in so einem Link wird als Post-Sendung verfolgt.
+Ein 20-stelliger Barcode mit 00 am Anfang stammt vom Versender, nicht von einem bestimmten Dienst. Stimmt seine Prüfziffer, zeigt [Peek](/) deshalb „Peek fragt bei Swiss Post Cargo, NZ Post nach …“ und nennt Swiss Post Cargo nur, wenn Swiss Post Cargo die Nummer kennt. Eine Referenz wie `PL-12345678` geht an Swiss Post Cargo und an TNT Italy, deren Nummern dieselbe Form haben können. Für andere Referenzen mit 6 bis 40 Buchstaben und Ziffern wählst du Swiss Post Cargo mit „Ändern“ oder fügst einen Track-&-Trace-Link von tt.swisspost-cargo.com oder apv.swisspost-cargo.com ein. Eine Paketnummer der Post in so einem Link wird als Post-Sendung verfolgt.
 
 Du siehst den Status und den Verlauf mit dem Ort jedes Scans auf einer Karte und den Zeitpunkt der Zustellung. Die Uhrzeiten liest Peek als Schweizer Zeit und zeigt sie in der Zeitzone deines Geräts. Die Scan-Texte bleiben Englisch, weil die Abfrage auf Englisch läuft; `Loaded for Delivery` gilt als in Zustellung. Unterschrift und Foto gehen im Zustellscan auf, ohne das Bild. Dein Name und deine Adresse fehlen, eine voraussichtliche Zustellung, ein Gewicht oder eine Abholstelle gibt es nicht.
 
-Eine Referenz, die mehrere Sendungen teilen, wird nur gelesen, solange eine davon Scans aus den letzten 60 Tagen hat. Sonst gilt sie als nicht gefunden, nimm dann den Barcode. Sendungs- und Betriebsnummern des deutschen Portals kann Peek nicht verfolgen. Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald die Ware in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
+Eine Referenz, die mehrere Sendungen teilen, wird nur gelesen, solange eine davon Scans aus den letzten 60 Tagen hat. Sonst gilt sie als nicht gefunden, nimm dann den Barcode. Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald die Ware in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
 
 ## Fragen zum Swiss Post Cargo Tracking
 
 ### Was ist Swiss Post Cargo?
 
-So heißt die Güterlogistik der Post seit dem 1. März 2025: Stückgut, Expresstransporte, Verzollung und Aufstellservice. Als erste Gesellschaft der Gruppe hat PostLogistics den Namen übernommen.
+So heißt die Güterlogistik der Post seit dem 1. März 2025: Logistik für Firmen, in der Schweiz und international, Stückgut inklusive. Zu den Konzerngesellschaften der Post in der Schweiz gehört die Swiss Post Cargo CH AG, an der die Post zu 100 Prozent beteiligt ist. PostLogistics gehörte zu den ersten Gesellschaften der Gruppe, die den Namen übernommen haben.
 
 ### Ist PostLogistics jetzt Swiss Post Cargo?
 
-Ja, PostLogistics tritt heute als Swiss Post Cargo auf. Das ältere Tracking tracking.postlogistics.ch liest Referenzen wie `12345678-123`, das eigene Tracking von Swiss Post Cargo ist tt.swisspost-cargo.com.
+Ja, PostLogistics tritt heute als Swiss Post Cargo auf. Das alte Tracking tracking.postlogistics.ch lässt sich nicht mehr öffnen, das Tracking von Swiss Post Cargo ist tt.swisspost-cargo.com. Referenzen wie `12345678-123` verfolgt Peek weiter als PostLogistics.
 
 ### Hat Swiss Post Cargo eine E-Mail-Adresse?
 
-Eine allgemeine nennt die Hilfeseite nicht. Jeder Dienst hat seine eigene, etwa aufstellservice@post.ch für den Aufstellservice; dazu gibt es ein Kontaktformular.
+Die Stückgut-Broschüre der Post vom April 2022 nennt sales.ls4@post.ch, für Geschäftskunden. Als Empfänger schreibst du zuerst dem Shop: Er hat den Transport gebucht.
 
 ### Warum bekomme ich eine SMS von Swiss Post Cargo?
 
@@ -105,17 +93,14 @@ Oft, weil der Absender eine Avisierung gebucht hat: Die Stückgut-Broschüre der
 
 ### Kann ich Swiss Post Cargo live verfolgen?
 
-Nicht auf einer Live-Karte. Das Tracking listet jeden Scan mit Ort und hat ein Feld für die voraussichtliche Lieferung, das leer sein kann.
+Nicht auf einer Live-Karte. Das Tracking listet jeden Scan mit Ort, und laut Stückgut-Broschüre lassen sich Status und Standort der Sendung laufend online abfragen.
 
 :::sources
-- [Swiss Post Cargo: Hilfe und Kontakt](https://web.archive.org/web/20260623100227/https://www.swisspost-cargo.com/ch-de/hilfe-und-kontakt) – Telefonnummern, Zeiten, E-Mails, Formular, Phishing-Link (gespeicherte Fassung, Live-Seite gesperrt)
-- [Swiss Post Cargo: Praktischer Aufstellservice für Ihre Kundschaft](https://web.archive.org/web/20260610160403/https://www.swisspost-cargo.com/ch-de/transport/aufstellservice) – Aufstellservice, Termin mit dir, Montag bis Samstag, von Firmen bestellt
-- [Swiss Post Cargo: Stückguttransport Schweiz und Europa](https://web.archive.org/web/20260623100227/https://www.swisspost-cargo.com/ch-de/transport/stueckgut) – was Stückgut ist
-- [Swiss Post Cargo: Track & Trace](https://tt.swisspost-cargo.com/public/trackandtrace) – Eingabehinweis, Sprachen, Status, Meldung ohne Daten, Lieferfeld, Kontaktliste
-- [Swiss Post Cargo: Sendungsverfolgung - Hugger](https://portal-de1.swisspost-cargo.com/Track?language=de&culture=DE) – Collinummer, Sendungs- und Betriebsnummer, Hinweis zur Verzögerung
-- [Die Post: Stückgut-Broschüre](https://www.post.ch/de/-/media/post/gk/dokumente/stueckgut.pdf) – nächster Arbeitstag, Berggebiete, Erdgeschoss, Abladen, Unterschrift, Zusatzleistungen
+- [Die Post: Stückgut-Broschüre](https://www.post.ch/de/-/media/post/gk/dokumente/stueckgut.pdf) – einzelne Stücke bis ganze Wagenladungen, Aufträge über Swiss Post Cargo Web von Geschäftskunden, nächster Arbeitstag, Berggebiete, Erdgeschoss, Abladen, Unterschrift, Zusatzleistungen samt Zweitzustellung, Status und Standort online, Kontakt in Dintikon und E-Mail
+- [Die Post: Logistikmarkt der Post](https://site.post.ch/de/ueber-uns/unternehmen/strategie/geschaeftstaetigkeit/logistik) – Swiss Post Cargo ist die Güterlogistik der Post, Logistiklösungen für Unternehmen, national und international
+- [Die Post: Konzerngesellschaften](https://site.post.ch/de/ueber-uns/unternehmen/governance/organisation/konzerngesellschaften) – Swiss Post Cargo CH AG, zu 100 % bei der Post
 - [Die Post: Hilfe und Kontakt](https://www.post.ch/de/hilfe-und-kontakt) – Nummer für Briefe und Pakete, Preis, Zeiten, Chat
 - [Die Post: Aktuelle Betrugsversuche im Namen der Post](https://site.post.ch/de/ueber-uns/sicherheit/phishing-und-betrug/aktuelle-betrugsversuche) – gefälschte Nachrichten
-- [VerkehrsRundschau: Schweizerische Post mit neuem Marktauftritt](https://www.verkehrsrundschau.de/nachrichten/transport-logistik/logistik-schweizerische-post-fuehrt-neue-marke-ein-3626449) – Name Swiss Post Cargo ab 1. März 2025, PostLogistics zuerst
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest
+- [VerkehrsRundschau: Schweizerische Post mit neuem Marktauftritt](https://www.verkehrsrundschau.de/nachrichten/transport-logistik/logistik-schweizerische-post-fuehrt-neue-marke-ein-3626449) – Name Swiss Post Cargo ab 1. März 2025, PostLogistics unter den ersten Gesellschaften
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest: Barcodes und Referenzen, Nummernformen, die englischen Scan-Texte, Track-&-Trace-Adressen, PostLogistics heute als Swiss Post Cargo
 :::

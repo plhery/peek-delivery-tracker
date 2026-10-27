@@ -6,7 +6,7 @@ published: 2026-10-21
 updated: 2026-10-27
 ---
 
-FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) is a Shenzhen forwarder that ships parcels from China for online sellers, mostly to the United States, and hands them to a local carrier there for delivery. It belongs to the 1ST group (一代国际集团), whose forwarders print waybills starting with 1ST. Track yours on FIRST LINE's tracker, under 追踪单号 (track a number) on firstline56.com, or in the box above. The shop gives the number with your order's shipping details.
+FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) is a Shenzhen forwarder that ships parcels from China for online sellers, mostly to the United States, and hands them to a local carrier there for delivery. It belongs to the 1ST group (一代国际集团), whose forwarders print waybills starting with 1ST. Track yours in the tracking box on firstline56.com's home page, which opens FIRST LINE's 追踪单号 (track a number) page, or in the box above. The shop gives the number with your order's shipping details.
 
 ## FIRST LINE tracking number: what it looks like
 
@@ -66,7 +66,7 @@ FIRST LINE publishes no rules for delivery attempts, notice cards or pickup poin
 
 ## FIRST LINE contact number and customer service
 
-As read on 21 October 2026, at the foot of every page of FIRST LINE's website, in Chinese:
+As read on 27 October 2026, at the foot of every page of FIRST LINE's website, in Chinese:
 
 - **Hotline** (客服热线): 13823642553, a mobile number in China (+86 138 2364 2553 from abroad).
 - **Address:** 3rd floor, Building 36, Zone 5, Cuigang Industrial Park, Huaide, Fuyong, Bao'an District, Shenzhen, China.

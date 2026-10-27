@@ -17,7 +17,7 @@ The sender creates the number, usually before handing the parcel over. Swiss Pos
 | `RR000000005CH` | Two letters, nine digits and `CH`: an international postal number issued in Switzerland. The last digit before `CH` is a check digit. |
 | `99.00.000000.00000000` | 18 digits starting `98` or `99`, with or without dots or spaces: Swiss Post's domestic barcode number. |
 
-Copy the number rather than typing it: one wrong, missing or extra digit makes it look like another carrier's. 18 digits starting `44` belong to [Quickpac](carrier:quickpac). Pallets, furniture and other freight come with [Swiss Post Cargo](carrier:swiss-post-cargo), Swiss Post's freight brand, which has its own tracker. A parcel from abroad keeps its foreign number (ending `DE`, `FR` and so on) in Switzerland too: a [Delivengo](carrier:delivengo) parcel from a French shop, for one, keeps its La Poste number ending `FR`. No number at all? See [how to find your tracking number](guide:find-tracking-number).
+Copy the number rather than typing it: one wrong, missing or extra digit makes it look like another carrier's. 18 digits starting `44` belong to [Quickpac](carrier:quickpac). Pallets and other freight come with [Swiss Post Cargo](carrier:swiss-post-cargo), Swiss Post's freight brand, which has its own tracker. A parcel from abroad keeps its foreign number (ending `DE`, `FR` and so on) in Switzerland too: a [Delivengo](carrier:delivengo) parcel from a French shop, for one, keeps its La Poste number ending `FR`. No number at all? See [how to find your tracking number](guide:find-tracking-number).
 
 ## Swiss Post tracking statuses explained
 

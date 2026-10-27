@@ -19,7 +19,7 @@ Il mittente genera il numero e trasmette i dati alla Posta, di solito prima di c
 
 Nel campo di ricerca della Posta, «Numero d’invio o codice di ritiro», puoi inserire anche il codice di ritiro; Peek invece riconosce solo il numero d'invio.
 
-Copia il numero invece di riscriverlo: con una cifra sbagliata, in meno o in più, sembra il numero di un altro corriere. 18 cifre che iniziano con `44` sono di [Quickpac](carrier:quickpac), non della Posta. Pallet, mobili e altra merce viaggiano con [Swiss Post Cargo](carrier:swiss-post-cargo), il marchio merci della Posta, che ha un suo tracking. Un pacco dall'estero tiene il suo numero straniero (che finisce con `DE`, `FR`, `IT` e così via) anche in Svizzera. Nessun numero? Leggi [dove si trova il codice tracking](guide:find-tracking-number).
+Copia il numero invece di riscriverlo: con una cifra sbagliata, in meno o in più, sembra il numero di un altro corriere. 18 cifre che iniziano con `44` sono di [Quickpac](carrier:quickpac), non della Posta. Pallet e altra merce viaggiano con [Swiss Post Cargo](carrier:swiss-post-cargo), il marchio merci della Posta, che ha un suo tracking. Un pacco dall'estero tiene il suo numero straniero (che finisce con `DE`, `FR`, `IT` e così via) anche in Svizzera. Nessun numero? Leggi [dove si trova il codice tracking](guide:find-tracking-number).
 
 ## Posta Svizzera tracciamento: cosa vogliono dire gli stati
 

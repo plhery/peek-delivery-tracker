@@ -35,7 +35,7 @@ Here's what the carriers and the postal standard say about the numbers you're mo
 | [USPS](carrier:usps) | 22 digits starting `92`, `93`, `94` or `95`, printed in groups of four, such as `9212 3912 3456 7812 3456 70`; 26 digits on some labels; international items can carry the postal format ending `US` |
 | [FedEx](carrier:fedex) | 12 digits on FedEx Ground Economy labels since 2022, where some shippers used to get 15-digit Ground numbers |
 | DHL | [DHL Express](carrier:dhl-express): 10 digits, never letters. [DHL in Germany](carrier:dhl): 10 to 39 characters |
-| [Royal Mail](carrier:royal-mail), [Parcelforce](carrier:parcelforce) | 9 to 27 characters, says the Post Office; the postal format ends `GB` |
+| [Royal Mail](carrier:royal-mail), [Parcelforce](carrier:parcelforce) | the postal format ending `GB`. In Peek's carrier data, those starting `E` and any letter, `CP` or `GI` are Parcelforce's, and so is `PB` + two letters + 10 digits, 14 characters in all, such as `PBAB1234567890`; Royal Mail also has 16- or 21-character references made of digits and the letters A to F |
 | [Evri](carrier:evri) | 16 characters (Evri's page says both "16 digit" and "16 character") |
 | DPD | 14 characters, says [DPD Germany](carrier:dpd-de); 14 digits, say DPD Austria and Belgium. [DPD UK](carrier:dpd-uk)'s help page gives no length and asks for your postcode too |
 | [XDP](carrier:xdp) | no published format; its numbers are `ZDB`, three letters and six digits, such as `ZDBABC123456`, sometimes with a leading `0`; its tracker asks for the delivery postcode too |
@@ -70,7 +70,7 @@ There's no single length. These are the lengths carriers give on their own pages
 | 16 digits | Canada Post online labels; Evri (16 characters) |
 | 22 digits | USPS; Portugal's CTT; Austrian Post; TIPSA |
 | 26 digits | USPS, on some labels |
-| 9 to 27 characters | Royal Mail and Parcelforce |
+| 13, 14, 16 or 21 characters | Royal Mail (13, 16 or 21) and Parcelforce (13 or 14), in Peek's carrier data |
 | 10 to 39 characters | DHL in Germany |
 
 ## Whose tracking number starts with TBA?
@@ -152,7 +152,6 @@ A number that returns nothing isn't always mistyped. Portugal's CTT gives two re
 - [FedEx Developer: Track API](https://developer.fedex.com/api/en-us/catalog/track/docs.html) – door tag numbers
 - [DHL Express Netherlands: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 digits
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – 10 to 39 characters, not an order number
-- [Post Office: Track and trace](https://www.postoffice.co.uk/track-trace) – Royal Mail and Parcelforce references
 - [Evri: Track a parcel](https://www.evri.com/track-a-parcel) – 16 characters and the calling card
 - [InPost UK: Yodel by InPost help](https://inpost.co.uk/yodel-help) – numbers starting JD, JJD or 8
 - [DPD UK: How can we help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – reference number and postcode
@@ -178,5 +177,5 @@ A number that returns nothing isn't always mistyped. Portugal's CTT gives two re
 - [Mondial Relay Belgium: Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 or 12 digits
 - [La Poste: Comment suivre mon colis ou ma lettre](https://aide.laposte.fr/professionnel/contenu/comment-suivre-mon-colis-ou-ma-lettre) – 14 digits
 - [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – Your Orders, then Track Package
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – the TBA, YT, LP and CNG shapes in Peek's carrier data, InPost's JD, JJD and 8YDR shapes, 4PX's 4PX and LP shapes, Yanwen's BYS, YP and YW shapes, XDP's ZDB shape and APC's 22-digit shape
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – the TBA, YT, LP and CNG shapes in Peek's carrier data, InPost's JD, JJD and 8YDR shapes, 4PX's 4PX and LP shapes, Yanwen's BYS, YP and YW shapes, XDP's ZDB shape, APC's 22-digit shape, and Royal Mail's and Parcelforce's shapes
 :::

@@ -58,7 +58,7 @@ Techlink's door-to-door express service comes duties paid (DDP) or duties unpaid
 
 ## Techlink contact number and customer service
 
-As read on 22 October 2026, Techlink's site, www.techlinksz.cn, lists no phone number, email address or office address. Its 联系我们 (contact us) link leads nowhere, and the site has no chat or contact form.
+As read on 27 October 2026, Techlink's site, www.techlinksz.cn, lists no phone number, email address or office address. Its 联系我们 (contact us) link leads nowhere, and the site has no chat or contact form.
 
 For anything about your order, the seller is the one to ask. For a delivery problem in your country, ask the local carrier once you know which one it is.
 

@@ -58,7 +58,7 @@ Lingdong publishes no delivery times and no rules for delivery attempts, notice 
 
 ## Lingdong contact number and customer service
 
-As listed on lingdong56.com on 21 October 2026, in Chinese only:
+As listed on lingdong56.com on 27 October 2026, in Chinese only:
 
 - **Phone**: 173 3900 3327 and 189 0502 5944, two Chinese mobile numbers (+86 from abroad). No hours or languages are given.
 - **QQ**: the site's chat buttons for quotes, bulk business and problem parcels, claims and complaints all open a QQ chat with 596154560.

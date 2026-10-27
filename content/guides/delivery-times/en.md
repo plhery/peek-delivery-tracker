@@ -1,28 +1,25 @@
 ---
 title: What time do parcels get delivered? Carrier by carrier
-description: What time USPS, UPS, FedEx, Amazon, Royal Mail, Evri, Canada Post and others deliver until, who comes on Saturday and Sunday, and why late evenings are normal.
+description: What time USPS, UPS, Amazon, Royal Mail, Evri, Canada Post and others deliver until, who comes on Saturday and Sunday, and why late evenings are normal.
 slug: what-time-do-parcels-get-delivered
 picture: A clock at eight in the evening under a crescent moon, a calendar with its weekends marked, a van with its headlights on, and Pip watching from a window.
 published: 2026-10-14
 updated: 2026-10-27
 ---
 
-Parcels get delivered any time from early morning to late evening, and almost no carrier promises you an hour. USPS aims to finish by 5 p.m., UPS delivers to homes from 9 a.m. to 7 p.m., FedEx and Evri from 8 a.m. to 8 p.m., and Amazon brings UK Same-Day orders by 10 p.m. Saturday is a normal delivery day for most of them; Sunday usually depends on the service the sender paid for.
+Parcels get delivered any time from early morning to late evening, and almost no carrier promises you an hour. USPS aims to finish by 5 p.m., UPS delivers to homes from 9 a.m. to 7 p.m., Evri from 8 a.m. to 8 p.m., and Amazon brings UK Same-Day orders by 10 p.m. Saturday is a normal delivery day for most of them; Sunday usually depends on the service the sender paid for.
 
 ## What time does each carrier deliver until?
 
 | Carrier | Weekdays | Saturday | Sunday |
 | --- | --- | --- | --- |
 | [USPS](carrier:usps) (US) | By 5 p.m., sometimes later | Yes, same aim | Priority Mail Express and Amazon parcels only |
-| [UPS](carrier:ups) (US) | Homes 9 a.m. to 7 p.m., occasionally later; businesses by close of business | Yes, no extra fee for ground residential | Its pages disagree: none, or some areas |
-| [FedEx](carrier:fedex) (US) | 8 a.m. to 8 p.m. | Homes | Homes |
+| [UPS](carrier:ups) (US) | Homes 9 a.m. to 7 p.m., occasionally later; businesses by close of business | – | – |
 | [Amazon](carrier:amazon-logistics) (UK, Ireland) | UK Same-Day orders by 7 p.m. or 10 p.m. | Ireland: yes | Ireland: "seven days a week" |
 | [Royal Mail](carrier:royal-mail) (UK) | Usually by 4.30 p.m.; a parcel due at a specific time may come later | Yes, as normal | In some areas |
-| [Parcelforce](carrier:parcelforce) (UK) | By 6 p.m. | By 6 p.m., when a Saturday delivery is expected | No Sunday service listed |
 | [Evri](carrier:evri) (UK) | 8 a.m. to 8 p.m. | Yes, as normal | Uncommon |
 | Yodel, now [InPost](carrier:inpost) (UK) | 7 a.m. to 9 p.m. | 7 a.m. to 9 p.m. in mainland UK | Busy periods only |
 | [DPD](carrier:dpd-uk) (UK) | None published; a one-hour window on the day | An upgrade offered in Predict | An upgrade offered in Predict |
-| [An Post](carrier:an-post) (Ireland) | None published | A sender option on business parcels | None found |
 | [Canada Post](carrier:canada-post) | Homes 9 a.m. to as late as 8 p.m.; businesses 9 a.m. to 5 p.m. | Select areas of Toronto, Ottawa and Montreal | The same select areas |
 | [Purolator](carrier:purolator) (Canada) | "End of day" means 9 p.m. on guaranteed services | Saturday Service, a sender option | No Sunday service listed |
 | [Australia Post](carrier:australia-post) | None published; a 2-hour window by text | Express Post has a Saturday network | None found |
@@ -34,11 +31,10 @@ Two things the table can't show:
 
 ## Do parcels get delivered on Saturday and Sunday?
 
-**Saturday** is a normal working day for USPS, UPS, FedEx (to homes), Royal Mail, Evri, InPost and, in Ireland, Amazon.
+**Saturday** is a normal working day for USPS, Royal Mail, Evri, InPost and, in Ireland, Amazon.
 
 **Sunday** is the exception, and each "some" in the table comes with conditions:
 
-- **UPS:** one of its pages says no Sunday deliveries, another says "in select areas". Don't count on it.
 - **Royal Mail:** only in some areas.
 - **USPS:** Priority Mail Express can come on a Sunday or holiday in many large cities, for a fee the sender pays.
 - **Couriers:** Evri rarely delivers on a Sunday, InPost only in busy periods, and DPD UK only as a Predict upgrade.
@@ -56,14 +52,10 @@ It's the time span in which the carrier expects to reach you, worked out from th
 | InPost UK | 2 hours | Once the driver starts the route, which can take until around 11 a.m. |
 | Australia Post | 2 hours | By text on the day |
 | Amazon | A 2- to 4-hour "Estimated Delivery Window" in the US; a live map in the UK and US | The map once your parcel is 10 stops away |
-| FedEx | 4 hours | In tracking, when available |
-| UPS | An estimated time; a 2-hour window from the 4-hour estimate is a paid option | The paid window can be picked from two days before |
 
-USPS, Canada Post and An Post describe no window on their help pages: expect a day, not an hour.
+USPS and Canada Post describe no window on their help pages: expect a day, not an hour.
 
-A window is an estimate, and you usually can't move it ("an ETA can't be changed", says Evri), though Evri lets you pick a neighbour or a safe place instead, and DPD also another day.
-
-If you want a set time, you pay for it. UPS My Choice sells a confirmed 2-hour window ($14.99 for free members), and FedEx Delivery Manager an evening slot from 5 to 8 p.m. for $5.55. On [Peek](/), a window the carrier gives can be added to your calendar.
+A window is an estimate, and you usually can't move it ("an ETA can't be changed", says Evri), though Evri lets you pick a neighbour or a safe place instead, and DPD also another day. On [Peek](/), a window the carrier gives can be added to your calendar.
 
 ## Why is my parcel still out for delivery at 8 p.m.?
 
@@ -75,7 +67,7 @@ Because your address isn't the only stop. `Out for delivery` means the parcel is
 - home | Your door | Any time up to the carrier's latest hour.
 :::
 
-The latest normal times are 8 p.m. for FedEx, Evri and Canada Post, 9 p.m. for InPost UK and Purolator, and 10 p.m. for Amazon's Same-Day orders in the UK. A driver knocking at 8.45 p.m. is having a normal day. For what each status means along the way, see [tracking statuses explained](guide:tracking-statuses).
+The latest normal times are 8 p.m. for Evri and Canada Post, 9 p.m. for InPost UK and Purolator, and 10 p.m. for Amazon's Same-Day orders in the UK. A driver knocking at 8.45 p.m. is having a normal day. For what each status means along the way, see [tracking statuses explained](guide:tracking-statuses).
 
 Sometimes the round isn't finished: DHL in Germany names a driver falling ill or running out of working time, road closures and accidents. The parcel then usually goes out again the next working day, and the tracking says so:
 
@@ -101,7 +93,7 @@ Peek checks every 2 minutes once a parcel is out for delivery with the carriers 
 
 ## Do parcels get delivered on bank holidays?
 
-Usually not. Royal Mail doesn't deliver on bank holidays, Canada Post on statutory holidays, and UPS on "UPS holidays". Australia Post stops all deliveries on national public holidays, and local ones on state and local holidays.
+Usually not. Royal Mail doesn't deliver on bank holidays, and Canada Post doesn't deliver on statutory holidays. Australia Post stops all deliveries on national public holidays, and local ones on state and local holidays.
 
 Holidays don't count towards delivery times either: a "3 business days" estimate skips them. For the Christmas deadlines, see the [last posting dates](guide:christmas-posting-dates).
 
@@ -111,7 +103,7 @@ Yes, if it goes to a locker or a shop:
 
 - Evri lockers are open "24 hours a day, 7 days a week", and almost all its ParcelShops 7 days a week.
 - Australia Post has more than 1,500 Parcel Lockers open 24/7.
-- UPS can send it to an Access Point ($5.99 for My Choice free members), FedEx to a retail location for free, and DPD to a Pickup Shop.
+- DPD can send it to a Pickup Shop.
 
 One catch: a locker you can open at any hour is only filled on delivery days, so nothing lands in it on a day the carrier doesn't work. To send a parcel somewhere else once it has left, see [changing the delivery address](guide:change-delivery-address).
 
@@ -120,12 +112,6 @@ One catch: a locker you can open at any hour is only filled on delivery days, so
 - [USPS: Tracking status help](https://faq.usps.com/s/article/Where-is-my-package) – out for delivery, 9 p.m., one business day
 - [USPS: Priority Mail Express](https://www.usps.com/ship/priority-mail-express.htm) – Sunday and holiday delivery
 - [UPS: Understanding tracking status](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – 9 a.m. to 7 p.m., close of business
-- [UPS: Weekend pickups and deliveries](https://www.ups.com/us/en/business-solutions/pickup-dropoff-options/weekend-pickups-deliveries) – Saturday, no Sunday
-- [UPS: InfoNotice](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – Sunday in select areas, UPS holidays
-- [UPS: My Choice](https://www.ups.com/us/en/track/ups-my-choice) – confirmed windows, Access Point, prices
-- [FedEx: Reattempt delivery](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/reattempt-delivery.html) – 8 a.m. to 8 p.m., weekends
-- [FedEx: When will it arrive?](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/when-will-my-package-arrive.html) – 4-hour window
-- [FedEx: Delivery Manager](https://www.fedex.com/en-us/delivery-manager.html) – evening slot, $5.55
 - [About Amazon UK: Amazon expands Same Day Delivery to over 80 UK cities and towns](https://www.aboutamazon.co.uk/news/retail/amazon-expands-same-day-delivery-uk) – "Today by 7pm", "Today by 10pm"
 - [About Amazon UK: Amazon delivers at record speeds in 2025](https://www.aboutamazon.co.uk/news/retail/amazon-record-delivery-speeds-2025) – order by 5 p.m., delivered by 10 p.m.; more than 80 towns and cities, minimum order values
 - [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – live map from 10 stops away
@@ -133,7 +119,6 @@ One catch: a locker you can open at any hour is only filled on delivery days, so
 - [About Amazon: 10 tips to protect your Amazon packages from porch pirates](https://www.aboutamazon.com/news/operations/amazon-porch-pirate-prevention-tips) – 2- to 4-hour Estimated Delivery Window (US)
 - [About Amazon: How to track your packages](https://www.aboutamazon.com/news/retail/track-amazon-package) – live map from 10 stops away (US)
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – 4.30 p.m., later for timed parcels, Saturday, Sunday in some areas, bank holidays
-- [Parcelforce: Delivery times](https://www.parcelforce.com/help-and-advice/receiving/delivery-times) – 6 p.m., Saturday
 - [Evri: Next Day delivery](https://www.evri.com/our-services/next-day-parcel-delivery) – 8 a.m. to 8 p.m., one-hour window
 - [Evri: Expected delivery time](https://www.evri.com/faqs/receiving-a-parcel/expected-delivery-time) – an ETA can't be changed
 - [Evri: Saturday delivery](https://www.evri.com/our-services/saturday-delivery) – Saturday as normal
@@ -145,7 +130,6 @@ One catch: a locker you can open at any hour is only filled on delivery days, so
 - [InPost UK: Do you deliver on Sundays?](https://inpost.co.uk/help/do-you-deliver-on-sundays) – busy periods only
 - [InPost UK: Can I get a delivery time window?](https://inpost.co.uk/help/can-i-get-a-delivery-time-window) – 2 hours
 - [InPost UK: Yodel help](https://inpost.co.uk/yodel-help) – Yodel is now InPost
-- [An Post: Domestic parcel delivery](https://www.anpost.com/Commerce/SME/Domestic-Sending/Domestic-Parcel-Delivery) – Saturday as a sender option
 - [DPD Ireland: Track my parcel](https://www.dpd.ie/track-my-parcel/) – one-hour window
 - [Canada Post: Mail and parcel delivery hours](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/what-are-the-mail-and-parcel-delivery-hours.page) – hours, weekends, holidays
 - [Canada Post: Tracking statuses](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-statuses.page) – rescheduled next business day

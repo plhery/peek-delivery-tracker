@@ -44,23 +44,23 @@ La plupart des transporteurs ne traitent qu'avec l'expéditeur : ta réclamation
 
 | Transporteur | Qui peut réclamer | Délai pour un dommage | Indemnité sans option |
 | --- | --- | --- | --- |
-| [Colissimo, La Poste](carrier:la-poste) (FR) | Tout le monde peut réclamer ; seul l'expéditeur est indemnisé | Colis abîmé laissé dans ta boîte aux lettres ou chez un voisin : au bureau de poste au plus tard le jour ouvrable suivant. Réclamation : 1 an après le dépôt | 23 € par kilo (France métropolitaine) |
-| [Mondial Relay](carrier:mondial-relay) (FR) | L'expéditeur, après ton refus au Point Relais | À la remise : rien n'est pris en compte après | Non indiqué |
+| [Colissimo, La Poste](carrier:la-poste) (FR) | L'expéditeur comme le destinataire, avec des droits qui ne sont pas tout à fait les mêmes | Action en justice : 1 an à compter du lendemain du dépôt | – |
+| [Mondial Relay](carrier:mondial-relay) (BE) | Tu le refuses au Point Relais, puis tu contactes l'expéditeur | À la remise : rien n'est pris en compte après | Non indiqué |
 | [bpost](carrier:bpost) (BE) | L'expéditeur ; colis venu de l'étranger : préviens aussi bpost | 7 jours après la réception | Non indiqué |
 | [La Poste suisse](carrier:swiss-post) | L'expéditeur ou le destinataire, l'un ou l'autre peut être payé | 8 jours après la distribution | CHF 500.– (Signature CHF 1500.–, Assurance ou Fragile CHF 5000.–) |
 | [DPD Suisse](carrier:dpd-ch) | L'expéditeur seulement | 7 jours calendaires après la livraison, pour l'expéditeur | Non indiqué |
 
 Si tu as choisi toi-même le transporteur en France, la loi te donne 3 jours après la réception, jours fériés non compris, pour lui adresser une protestation motivée par lettre recommandée (code de commerce, art. L133-3). Ce délai passe à 10 jours si le transporteur ne peut pas prouver qu'il t'a laissé vérifier le bon état du colis (code de la consommation, art. L224-65).
 
-### Colis abîmé avec La Poste ou Colissimo : que faire ?
+### Colis abîmé avec La Poste ou Colissimo : comment réclamer ?
 
-Si l'emballage est abîmé quand le facteur te le remet, refuse-le (il repart chez l'expéditeur), ou accepte-le et demande au facteur d'enregistrer ton observation. S'il a été laissé dans ta boîte aux lettres ou chez un voisin, abîmé mais pas ouvert, porte-le dans un bureau de poste au plus tard le jour ouvrable suivant. Contenu cassé au déballage : La Poste te dit de contacter l'expéditeur, avec qui elle traite la demande. Ses agents ne peuvent pas assister à l'ouverture.
+L'expéditeur comme le destinataire peuvent adresser une réclamation à La Poste, même si leurs droits ne sont pas tout à fait les mêmes, rappelle l'Arcep, le régulateur des postes. Pour un colis, elle se fait sur le site d'aide de La Poste, par téléphone, par courrier ou dans un point de contact postal.
 
-Pour Colissimo, « le destinataire du colis ne peut prétendre à une indemnisation » : seul l'expéditeur reçoit les 23 € par kilo, ou plus avec une option. Pas de réponse satisfaisante ? Il faut d'abord passer par un recours interne auprès de La Poste, puis tu peux saisir le Médiateur du groupe La Poste.
+Pas de réponse satisfaisante, ou aucune au bout de deux mois ? Tu peux saisir le Médiateur du groupe La Poste, après être passé par le service recours de La Poste si les conditions générales de ton envoi prévoient ce second examen. Une action en justice pour un colis abîmé se prescrit par un an à compter du lendemain du dépôt (code des postes et des communications électroniques, art. L10), mais la saisine du Médiateur suspend ce délai, selon sa charte.
 
 ### Colis endommagé avec Mondial Relay
 
-Chez Mondial Relay, refuse le colis au Point Relais s'il est abîmé, déchiré ou écrasé : il repart chez l'expéditeur. « Le colis doit être refusé pour que son état soit expertisé et que la procédure de remboursement soit effectuée », et les réclamations faites après la remise ne sont pas prises en compte. Si une boutique te l'a fait livrer à domicile, signale le colis abîmé à son service client.
+Sur son site belge, Mondial Relay te demande de dire au commerçant du Point Relais que tu refuses le colis si son emballage est abîmé, déchiré ou défoncé : il repart chez l'expéditeur, que Mondial Relay t'invite à contacter. Les réclamations faites après la livraison et la remise du colis ne sont pas prises en compte.
 
 ### Colis endommagé avec bpost ou La Poste suisse
 
@@ -88,7 +88,7 @@ La Suisse est plus stricte. La Poste suisse écrit qu'accepter un envoi sans ré
 
 ## Quelles photos prendre d'un colis abîmé ?
 
-Prends-les avant de continuer à déballer. [UPS](carrier:ups) en demande trois, et c'est une bonne base pour n'importe quel transporteur ou vendeur :
+Prends-les avant de continuer à déballer. Ces trois-là sont une bonne base pour n'importe quel transporteur ou vendeur :
 
 1. L'article abîmé, et la façon dont il était calé dans le carton.
 2. Un gros plan de l'étiquette avec le numéro de suivi.
@@ -126,10 +126,8 @@ Si le vendeur ne fait rien, ta banque ou PayPal peuvent aider. La rétrofacturat
 - [Service-Public.fr : Achat à distance, livraison du bien](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – vendeur seul responsable, refus, réserves, clause abusive, 3 et 10 jours
 - [Légifrance : Code de la consommation](https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006069565) – art. L216-2, L216-3, L216-5, L217-3, L217-8 à L217-10, L224-65
 - [Légifrance : Code de commerce](https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000005634379) – art. L133-3, 3 jours
-- [La Poste : Mon envoi a été livré abîmé](https://aide.laposte.fr/contenu/mon-envoi-a-ete-livre-abime-son-contenu-deteriore-que-faire) – refus, observation, jour ouvrable suivant, expéditeur
-- [La Poste : Garanties et indemnisations Colissimo](https://aide.laposte.fr/contenu/quelles-sont-les-garanties-et-indemnisations-pour-un-envoi-avec-colissimo) – 23 € par kilo, expéditeur seul
-- [La Poste : CGV Courrier-Colis](https://www.laposte.fr/ecom/occ/smartedit/medias/sys_master/pdf/hfb/ha1/31823066595358/CGV_COURRIER_COLIS_07-07-2026/CGV-COURRIER-COLIS-07-07-2026.pdf) – 1 an, recours, Médiateur
-- [Mondial Relay : Mon colis est abîmé](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-colis-est-abime-que-faire/) – refus au Point Relais, réclamations après remise
+- [Arcep : La résolution des litiges postaux](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – expéditeur ou destinataire, réclamation à La Poste, service recours, Médiateur, deux mois, un an (art. L10)
+- [Mondial Relay Belgique : Mon colis est abîmé](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/mon-colis-est-abime-que-faire/) – refus au Point Relais, contacter l'expéditeur, réclamations après remise
 - [bpost : Plainte pour colis endommagé](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – expéditeur, 7 jours, étranger
 - [SPF Economie : Achats en ligne, vos droits](https://news.economie.fgov.be/245209-achats-en-ligne-voici-vos-droits/) – colis endommagé, vendeur, particuliers
 - [SPF Economie : Garantie légale](https://news.economie.fgov.be/214975-garantie-legale-le-consommateur-mieux-protege/) – deux ans, preuve, deux mois
@@ -140,7 +138,6 @@ Si le vendeur ne fait rien, ta banque ou PayPal peuvent aider. La rétrofacturat
 - [La Poste suisse : CG clientèle privée](https://www.post.ch/-/media/post/agb/agb-postdienstleistungen-pk.pdf?vs=24&sc_lang=fr&hash=84B987128A5FDC7FD6E9EA6641A5CEBB) – acceptation sans réserve, plafonds, paiement
 - [DPD Suisse : Colis arrivé endommagé (en anglais)](https://www.dpd.com/ch/en/news/parcel-arrived-broken-what-to-do/) – expéditeur, 7 jours, trois mois
 - [Stiftung für Konsumentenschutz : Paket gestohlen oder beschädigt (en allemand)](https://www.konsumentenschutz.ch/online-ratgeber/paket-gestohlen-oder-beschaedigt-wer-haftet/) – réserve, huit jours
-- [UPS : Déposer une réclamation (en anglais)](https://www.ups.com/us/en/support/file-a-claim) – trois photos
 - [Vinted : Le colis a été endommagé en cours d'acheminement](https://www.vinted.fr/help/662) – 2 ou 14 jours, photos, remboursement
 - [Vinted : Politique de remboursement](https://www.vinted.fr/help/465) – « J'ai un problème », 2 jours, vendeur payé
 - [Vinted : Indemnisation des vendeurs](https://www.vinted.fr/help/1018) – plafonds par transporteur

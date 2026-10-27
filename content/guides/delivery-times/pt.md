@@ -1,13 +1,13 @@
 ---
 title: A que horas passa o carteiro dos CTT? Sábado e domingo
-description: Os CTT entregam ao sábado e, nas zonas mais povoadas, ao domingo; nos dias úteis, um Expresso pode chegar das 8h às 22h. E os horários da DPD, GLS e UPS.
+description: Os CTT entregam ao sábado e, nas zonas mais povoadas, ao domingo; nos dias úteis, um Expresso pode chegar das 8h às 22h. E os horários da DPD, GLS e InPost.
 slug: a-que-horas-entrega-ctt
 picture: Um relógio a marcar as oito da noite sob uma lua em quarto crescente, um calendário com os fins de semana assinalados, uma carrinha de faróis acesos e o Pip a espreitar de uma janela.
 published: 2026-10-14
 updated: 2026-10-27
 ---
 
-Uma encomenda pode chegar de manhã cedo ou já de noite, e quase nenhuma transportadora te promete uma hora. Nos CTT, uma Encomenda Expresso pode ter uma janela entre as 8h00 e as 22h00, a UPS entrega em casa entre as 9h00 e as 19h00 e a GLS em horário comercial, de segunda a sexta. O sábado depende da transportadora; ao domingo, só entregam os CTT, nas zonas mais povoadas, e o CTT Now.
+Uma encomenda pode chegar de manhã cedo ou já de noite, e quase nenhuma transportadora te promete uma hora. Nos CTT, uma Encomenda Expresso pode ter uma janela entre as 8h00 e as 22h00, e a GLS entrega em horário comercial, de segunda a sexta. O sábado depende da transportadora; ao domingo, só entregam os CTT, nas zonas mais povoadas, e o CTT Now.
 
 ## Até que horas entregam os CTT e as outras transportadoras?
 
@@ -18,7 +18,6 @@ Uma encomenda pode chegar de manhã cedo ou já de noite, e quase nenhuma transp
 | DPD Portugal | No dia útil seguinte à recolha; até às 13h00 com DPD Home 13, se o remetente o escolher | Até às 13h00, com DPD Home Saturday | Nenhuma opção publicada |
 | GLS Portugal | De segunda a sexta, em horário comercial | Não | Não |
 | [InPost](carrier:inpost) (Lockers e Pontos Pack) | De segunda a sexta | Não há distribuição | Não há distribuição |
-| [UPS](carrier:ups) | Casas das 9h00 às 19h00, por vezes mais tarde; empresas perto do fim do expediente | A página não diz | A página não diz |
 
 O que a tabela não mostra: nos CTT, o horário de sábado, o domingo e as três janelas vêm de um comunicado de 2024, e as janelas são as do Expresso. Sem janela, `Em entrega` só quer dizer que o carteiro ou distribuidor já está no percurso do dia.
 
@@ -44,7 +43,6 @@ Só sabes a hora se a transportadora te disser uma janela, que é o intervalo em
 | Transportadora | O que te dizem | Quando |
 | --- | --- | --- |
 | DPD Portugal (Predict) | A hora exata da entrega, e depois a encomenda em tempo real (Live-Tracking) | No dia da entrega |
-| [SEUR](carrier:seur) (envios de Espanha para Portugal) | Uma janela de 1 hora | No dia da entrega |
 | CTT, Expresso Para Amanhã | Podes pedir manhã (8h00–13h00), tarde (13h00–19h00) ou noite (19h00–22h00), pagando | No Seguir objeto ou na App CTT, a partir da entrada nos CTT |
 | CTT, logística para lojas | Janelas de 2 a 3 horas nos dias úteis, das 8h00 às 22h00, e das 9h00 às 14h00 ao sábado | Se a loja contratou a Janela Horária de Entrega |
 | GLS, InPost | Nenhuma janela publicada | Conta com um dia, não com uma hora |
@@ -63,7 +61,7 @@ Porque a tua morada não é a única paragem. `Em entrega` (nos CTT) ou `Em dist
 - home | A tua porta | A qualquer hora, até ao limite da transportadora.
 :::
 
-As horas mais tardias normais são as 19h00 da UPS («por vezes, mais tarde»), as 21h00 do CTT Now e as 22h00 da janela da noite dos CTT. Uma encomenda que chega às 20h45 é um dia normal. Para o que quer dizer cada estado pelo caminho, vê [estados da encomenda](guide:tracking-statuses).
+As horas mais tardias normais são as 21h00 do CTT Now e as 22h00 da janela da noite dos CTT. Uma encomenda que chega às 20h45 é um dia normal. Para o que quer dizer cada estado pelo caminho, vê [estados da encomenda](guide:tracking-statuses).
 
 Às vezes o percurso fica a meio: a DHL alemã fala de um estafeta que adoece ou chega ao limite de horas de trabalho, de estradas cortadas e de acidentes. A encomenda volta a sair, normalmente no dia útil seguinte, e o seguimento mostra-o:
 
@@ -117,7 +115,5 @@ Um senão: um Locker que abres a qualquer hora só é abastecido nos dias de ent
 - [DPD Portugal: Receber encomendas](https://www.dpd.com/pt/pt/receber-encomenda/) – Predict com a hora exata, Live-Tracking, mudar dia ou local
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – segunda a sexta em horário comercial, segunda entrega no dia útil seguinte
 - [InPost: Fala connosco, perguntas frequentes](https://www.inpost.pt/fala-connosco) – distribuição de segunda a sexta, sem sábados, domingos ou feriados, Lockers 24 horas por dia, PIN, reclamação após 5 dias
-- [UPS Portugal: Compreender o estado de seguimento](https://www.ups.com/pt/pt/support/tracking-support/where-is-my-package/understanding-tracking-status) – das 9h às 19h em residências, fim de expediente para empresas
-- [SEUR: SEUR Predict](https://www.seur.com/es/seur-predict/) – janela de 1 hora em Espanha e Portugal
 - [DHL: Was bedeutet mein Sendungsstatus? (em alemão)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – percursos interrompidos, sem contacto direto com os estafetas
 :::

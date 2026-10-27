@@ -82,7 +82,7 @@ Si el daño era oculto, todavía estás a tiempo con el transportista: 7 días n
 
 ## Qué fotos hacer de un paquete dañado
 
-Hazlas antes de mover nada. [UPS](carrier:ups) pide tres en su [página de reclamaciones](https://www.ups.com/us/en/support/file-a-claim), y son una buena serie para cualquier transportista o tienda:
+Hazlas antes de mover nada. Estas tres son una buena serie para cualquier transportista o tienda:
 
 1. El producto dañado, y cómo iba colocado dentro de la caja.
 2. Un primer plano de la etiqueta con el número de seguimiento.
@@ -122,7 +122,6 @@ Si el vendedor no lo soluciona, te quedan tu banco o PayPal, y las vías de cons
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – respuesta en 1 mes
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – envoltorio dañado, remitente
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – Punto Pack, Locker, 1 y 7 días, particulares
-- [UPS: File a claim (en inglés)](https://www.ups.com/us/en/support/file-a-claim) – tres fotos
 - [Vinted: El paquete recibió daños durante el envío](https://www.vinted.es/help/662) – 2 o 14 días, fotos, reembolso completo
 - [Vinted: Política de reembolso](https://www.vinted.es/help/465) – «Tengo un problema», embalaje, reembolso sin devolver el artículo
 - [Wallapop: Condiciones de uso](https://about.wallapop.com/condiciones-de-uso/) – Protección Wallapop, 48 horas, embalaje y etiqueta

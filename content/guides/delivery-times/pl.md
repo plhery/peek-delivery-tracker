@@ -4,7 +4,7 @@ description: O której przyjedzie kurier InPost, DPD, DHL, Allegro One czy Poczt
 slug: o-ktorej-dostarczaja-paczki
 picture: Zegar wskazujący ósmą wieczorem pod sierpem księżyca, kalendarz z zaznaczonymi weekendami, furgonetka z zapalonymi światłami i Pip patrzący przez okno.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Kurierzy dostarczają paczki od rana do późnego wieczoru i prawie żaden nie obiecuje Ci konkretnej godziny. Kurierzy InPost pracują planowo do 17:00, ale paczki do automatów Paczkomat InPost przyjeżdżają nawet późnym wieczorem, a Allegro One Kurier większość paczek wozi między 18:00 a 22:00. W tygodniu jeżdżą wszyscy, a sobota i niedziela zwykle zależą od usługi, którą wykupił nadawca.
@@ -20,12 +20,11 @@ Kurierzy dostarczają paczki od rana do późnego wieczoru i prawie żaden nie o
 | [Allegro One](carrier:allegro-one) Kurier | Ponad 80% paczek wieczorem, między 18:00 a 22:00 | Tak, do Allegro One Box i na adres | Strona o niej nie wspomina |
 | GLS | Następny dzień roboczy; ExpressParcel przed 10:00 albo 12:00 | Doręczenie w soboty jako usługa | Strona o niej nie wspomina |
 | [Poczta Polska](carrier:poczta-polska), Pocztex | Godzin nie podaje; terminy liczy w dniach roboczych, od poniedziałku do piątku | Regulamin dla klientów indywidualnych nie przewiduje | Nie przewiduje |
-| Amazon.pl, dostawa priorytetowa (wiozą ją Poczta Polska, InPost albo DHL) | Tak | Tak, ale na adresy firmowe zwykle nie | Tylko dla wybranych kodów pocztowych |
 
 Czego tabela nie pokazuje:
 
 - **InPost ma dwa rodzaje kursów.** Kurier, który puka do drzwi, kończy planowo o 17:00. Paczka do automatu Paczkomat jedzie z doręczycielem, który według InPost rozwozi przesyłki „nawet do późnych godzin wieczornych”. W okresach świątecznych, gdy paczek jest dużo więcej, godziny pracy kurierów się zmieniają.
-- **Wieczór to w Polsce norma, nie wyjątek.** Allegro One Kurier sam pisze, że ponad 80% przesyłek doręcza w godzinach wieczornych, a Amazon.pl przypomina, że przesyłki bywają doręczane późnym wieczorem.
+- **Wieczór to w Polsce norma, nie wyjątek.** Allegro One Kurier sam pisze, że ponad 80% przesyłek doręcza w godzinach wieczornych, a DHL eCommerce sprzedaje doręczenie między 18:00 a 22:00.
 
 ## Czy kurier dostarcza w sobotę i w niedzielę?
 
@@ -34,12 +33,12 @@ Czego tabela nie pokazuje:
 - **DPD:** w soboty kurierzy doręczają wyłącznie paczki z usługą dodatkową Sobota. Czy Twoja ją ma, sprawdzisz u nadawcy albo w aplikacji DPD Mobile.
 - **InPost:** kurier dowiezie paczkę w sobotę tylko z usługą Dostawa w sobotę, a do automatu Paczkomat trafi w sobotę lub niedzielę tylko z Paczką w Weekend. W obu przypadkach paczka musi być nadana w piątek, a przy Paczce w Weekend przed godziną graniczną. Paczka w Weekend działa tylko z automatami Paczkomat, nie z PaczkoPunktami ani z adresem domowym.
 - **DHL eCommerce:** Doręczenie w sobotę zaznacza nadawca przy paczce nadanej w piątek.
-- **Allegro One Kurier i Amazon.pl** dowożą paczki także w soboty, Amazon.pl jednak zwykle nie na adresy firmowe.
+- **Allegro One Kurier** dowozi paczki także w soboty, do Allegro One Box i na adres.
 - **Pocztex:** regulamin dla klientów indywidualnych liczy dni robocze od poniedziałku do piątku i nie ma opcji weekendowej.
 
-**Niedziela** to w Polsce ustawowo dzień wolny od pracy i przewoźnicy prawie w nią nie jeżdżą. Wyjątki są dwa: Paczka w Weekend od InPost (do automatu Paczkomat, do 18:00) i Amazon.pl, który oferuje niedzielne dostawy tylko dla wybranych kodów pocztowych. Niedziela handlowa niczego tu nie zmienia: w regulaminach InPost i Pocztex dzień roboczy to zawsze poniedziałek–piątek.
+**Niedziela** to w Polsce ustawowo dzień wolny od pracy i przewoźnicy prawie w nią nie jeżdżą. Wyjątkiem jest Paczka w Weekend od InPost (do automatu Paczkomat, do 18:00). Niedziela handlowa niczego tu nie zmienia: w regulaminach InPost i Pocztex dzień roboczy to zawsze poniedziałek–piątek.
 
-Weekendowa dostawa zależy więc od tego, co wykupił **nadawca**, i rzadko możesz ją dodać sam. Wyjątki są dwa: w DHL eCommerce paczkę nadaną najpóźniej w czwartek możesz w serwisie Przekieruj paczkę przestawić na sobotę, jeśli zrobisz to do piątku do północy, a w Amazon.pl w sekcji Adresy ustawisz, czy pod danym adresem przyjmujesz paczki w weekend.
+Weekendowa dostawa zależy więc od tego, co wykupił **nadawca**, i rzadko możesz ją dodać sam. Wyjątkiem jest DHL eCommerce: paczkę nadaną najpóźniej w czwartek możesz w serwisie Przekieruj paczkę przestawić na sobotę, jeśli zrobisz to do piątku do północy.
 
 ## Jak sprawdzić, o której przyjdzie paczka?
 
@@ -58,7 +57,7 @@ Konkretną godzinę kupuje nadawca, nie Ty. W cenniku InPost Kurier Dostawa w go
 
 ## Paczka wydana do doręczenia: kiedy będzie?
 
-Zwykle dziś, ale o godzinie decyduje trasa. „Wydana do doręczenia” znaczy, że paczka jest w aucie kuriera, a to, czy jesteś na trasie 15. czy 115. przystankiem, przesądza o porze. Amazon.pl pisze, że pogoda i ruch drogowy mogą opóźnić dostawę.
+Zwykle dziś, ale o godzinie decyduje trasa. „Wydana do doręczenia” znaczy, że paczka jest w aucie kuriera, a to, czy jesteś na trasie 15. czy 115. przystankiem, przesądza o porze.
 
 :::journey
 - warehouse | Oddział | Paczka posortowana i załadowana do auta.
@@ -84,7 +83,7 @@ Wieczorny telefon na infolinię zwykle niewiele daje: kolejna próba i tak będz
 - Potem pytaj | Napisz do sprzedawcy albo przewoźnika, gdy minie czas, który podaje.
 :::
 
-W DPD numer telefonu do kuriera znajdziesz w aplikacji DPD Mobile i na tt.dpd.com.pl, ale dopiero po wydaniu paczki do doręczenia. Infolinia InPost działa od poniedziałku do piątku w godzinach 7:00–22:00, w sobotę 8:00–20:00, w niedzielę 8:00–18:00, a w święta 8:00–16:00. Amazon.pl prosi, by po minięciu daty dostawy poczekać dzień lub dwa: większość opóźnionych paczek dociera w ciągu 48 godzin. DPD gwarantuje doręczenie krajowej paczki w 3 dni robocze.
+W DPD numer telefonu do kuriera znajdziesz w aplikacji DPD Mobile i na tt.dpd.com.pl, ale dopiero po wydaniu paczki do doręczenia. Infolinia InPost działa od poniedziałku do piątku w godzinach 7:00–22:00, w sobotę 8:00–20:00, w niedzielę 8:00–18:00, a w święta 8:00–16:00. DPD gwarantuje doręczenie krajowej paczki w 3 dni robocze.
 
 Kurier był, ale Cię nie zastał? Zobacz [awizo i nieudana próba doręczenia](guide:missed-delivery). Brak nowego skanu od kilku dni? Przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
@@ -94,7 +93,7 @@ Peek sprawdza paczkę nawet co 2 minuty, gdy jest wydana do doręczenia u przewo
 
 Zwykle nie. Dzień roboczy to u InPost, DHL eCommerce i Pocztex poniedziałek–piątek bez dni ustawowo wolnych od pracy. Ustawa wymienia między innymi 1 i 11 listopada, 24 grudnia (Wigilię), oba dni Bożego Narodzenia i wszystkie niedziele. Przewoźnicy publikują wtedy własne harmonogramy: DHL eCommerce na stronie „Ważne informacje”, a InPost może ogłosić specjalne odbiory i dostawy Paczki w Weekend.
 
-Święta nie liczą się też do czasu dostawy: „2 dni robocze” je pomijają. Amazon.pl dodaje, że zamówienie złożone w niedzielę zwykle przychodzi we wtorek. Terminy nadania przed Bożym Narodzeniem znajdziesz w poradniku [do kiedy wysłać paczkę przed świętami](guide:christmas-posting-dates).
+Święta nie liczą się też do czasu dostawy: „2 dni robocze” je pomijają. Terminy nadania przed Bożym Narodzeniem znajdziesz w poradniku [do kiedy wysłać paczkę przed świętami](guide:christmas-posting-dates).
 
 ## Czy mogę odebrać paczkę poza godzinami kuriera?
 
@@ -123,7 +122,5 @@ Jedno zastrzeżenie: automat otwarty o każdej porze zapełnia się tylko w dni 
 - [Allegro: Allegro One Kurier](https://allegro.pl/kampania/one/kurier) – ponad 80% przesyłek w godzinach 18:00–22:00, dostawa w soboty
 - [GLS Polska: Przesyłki krajowe](https://gls-group.com/PL/pl/wysylanie-paczek/przesylki-krajowe/) – doręczenie w soboty, ExpressParcel przed 10:00 lub 12:00, e-mail z terminem w FlexDeliveryService
 - [Poczta Polska: Regulamin usługi Pocztex dla klienta detalicznego od 24 sierpnia 2026](https://www.poczta-polska.pl/wp-content/uploads/2026/08/Regulamin-swiadczenia-uslugi-Pocztex-w-obrocie-krajowym-dla-klienta-detalicznego-obowiazuje-od-24.08.2026-r.pdf) – dzień roboczy od poniedziałku do piątku, brak opcji weekendowej
-- [Amazon.pl: Dostawa priorytetowa](https://www.amazon.pl/gp/help/customer/display.html?nodeId=G65JDWT6NDUEFY2S) – poniedziałek–sobota, niedziela dla wybranych kodów, adresy firmowe, zamówienie z niedzieli we wtorek
-- [Amazon.pl: Śledzenie paczki](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – późny wieczór, pogoda i ruch drogowy, 48 godzin, dostawy w weekend w sekcji Adresy
 - [Ustawa o dniach wolnych od pracy (Dz.U. 2025 poz. 296)](https://api.sejm.gov.pl/eli/acts/DU/2025/296/text.pdf) – lista dni wolnych, Wigilia, niedziele
 :::

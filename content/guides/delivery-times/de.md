@@ -1,13 +1,13 @@
 ---
 title: Wann liefert DHL? Uhrzeit der Paketzustellung im Überblick
-description: Bis wie spät DHL, Hermes, DPD, Amazon und die Post in Österreich und der Schweiz liefern, wer samstags kommt und warum ein Paket abends noch in Zustellung ist.
+description: Bis wie spät DHL, Hermes, DPD und die Post in Österreich und der Schweiz liefern, wer samstags kommt und warum ein Paket abends noch in Zustellung ist.
 slug: wann-liefert-dhl-uhrzeit-paketzustellung
 picture: Eine Uhr, die acht Uhr abends zeigt, unter einer Mondsichel, ein Kalender mit markierten Wochenenden, ein Lieferwagen mit eingeschalteten Scheinwerfern und Pip, der aus dem Fenster schaut.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Pakete kommen zwischen früh am Morgen und spät am Abend, und eine feste Uhrzeit verspricht dir fast kein Paketdienst. Hermes stellt von 8 bis 20 Uhr zu, Amazon von 6 bis 22 Uhr. DHL, die Österreichische Post und die Schweizerische Post nennen für normale Pakete gar keine Uhrzeit. Samstag ist in Deutschland ein normaler Zustelltag. Die Schweizerische Post und GLS Österreich stellen montags bis freitags zu, die Post in der Schweiz samstags nur gegen Aufpreis.
+Pakete kommen zwischen früh am Morgen und spät am Abend, und eine feste Uhrzeit verspricht dir fast kein Paketdienst. Hermes stellt von 8 bis 20 Uhr zu. DHL, die Österreichische Post und die Schweizerische Post nennen für normale Pakete gar keine Uhrzeit. Samstag ist in Deutschland ein normaler Zustelltag. Die Schweizerische Post und GLS Österreich stellen montags bis freitags zu, die Post in der Schweiz samstags nur gegen Aufpreis.
 
 ## Bis wie spät liefern DHL, Hermes, DPD und die Post?
 
@@ -15,7 +15,6 @@ Pakete kommen zwischen früh am Morgen und spät am Abend, und eine feste Uhrzei
 | --- | --- | --- |
 | [DHL](carrier:dhl) (DE) | Keine Uhrzeiten veröffentlicht | Werktage, also Montag bis Samstag außer Feiertagen |
 | [Hermes](carrier:hermes-de) (DE) | 8 bis 20 Uhr | Montag bis Samstag |
-| [Amazon](carrier:amazon-logistics) (DE) | 6 bis 22 Uhr | Nennt die Hilfeseite nicht |
 | [DPD](carrier:dpd-de) (DE) | Nennt die Empfangsseite nicht; am Liefertag ein Zeitfenster von 2 Stunden | Nennt die Empfangsseite nicht |
 | [Österreichische Post](carrier:austrian-post) | Keine: Die Post plant nach Tagen, nicht nach Uhrzeiten | Laut ORF Montag bis Samstag; sonntags nur gegen Aufpreis des Händlers in vier Großräumen |
 | GLS (AT) | „Während der üblichen Geschäftszeiten“ | Montag bis Freitag |
@@ -24,7 +23,7 @@ Pakete kommen zwischen früh am Morgen und spät am Abend, und eine feste Uhrzei
 Zwei Dinge zeigt die Tabelle nicht:
 
 - **DHL** nennt keine Zustellzeiten. Die Uhrzeiten, die man online findet, stammen von Blogs, nicht von DHL. Zum Status `Die Sendung wurde in das Zustellfahrzeug geladen.` schreibt DHL nur: „In der Regel wird Ihr Paket noch am gleichen Tag zugestellt.“ Auch der angekündigte Zustelltag ist eine Prognose, die Wetter, Staus oder Probleme bei der Sortierung durcheinanderbringen können.
-- **Amazons** Fahrer stellen zwar bis 22 Uhr zu, klopfen, klingeln oder rufen aber nur zwischen 8 und 21 Uhr an.
+- **Amazon** liefert in über 70 deutschen Städten auch am selben Tag. In Berlin und München kannst du bestimmte Produkte sogar bis zum Nachmittag bestellen und bekommst sie noch am selben Abend.
 
 ## Liefert DHL am Samstag und am Sonntag?
 
@@ -66,7 +65,7 @@ Wahrscheinlich ja, denn deine Adresse ist nicht der einzige Stopp. `In Zustellun
 - home | Deine Tür | Irgendwann bis zur spätesten Uhrzeit des Paketdienstes.
 :::
 
-Hermes kann bis 20 Uhr klingeln, die Abendzustellung der Schweizerischen Post bis 21 Uhr und Amazon bis 22 Uhr. Ein Amazon-Paket um 21.30 Uhr ist also nichts Ungewöhnliches. Was die einzelnen Meldungen bedeuten, erklärt [Sendungsstatus: Bedeutung aller Meldungen](guide:tracking-statuses).
+Hermes kann bis 20 Uhr klingeln und die Abendzustellung der Schweizerischen Post bis 21 Uhr. Ein Paket um 20.30 Uhr ist also nichts Ungewöhnliches. Was die einzelnen Meldungen bedeuten, erklärt [Sendungsstatus: Bedeutung aller Meldungen](guide:tracking-statuses).
 
 Manchmal wird eine Tour nicht fertig. DHL nennt als Gründe Krankheit des Zustellers, das Ende seiner Arbeitszeit, Straßensperrungen und Unfälle. Das Paket fährt dann meist am nächsten Werktag wieder los, und die Sendungsverfolgung sagt es:
 
@@ -117,7 +116,7 @@ Ein Haken bleibt: Eine Station, die du jederzeit öffnen kannst, wird nur an Zus
 - [Hermes Newsroom: Sendungsverfolgung und mehr](https://newsroom.hermesworld.com/themen-digitalisierung-hermes-sendungsverfolgung-und-mehr-wie-empfaengerinnen-von-mehr-transparenz-und-flexibilitaet-profitieren-34419/) – höchstens 2 Stunden für über 90 Prozent, 30 Minuten, Stopps ab einer Stunde vorher
 - [DPD: Empfangen](https://www.dpd.com/de/de/empfangen/) – Zeitfenster von 2 Stunden, 30 Minuten
 - [DPD: Feiertage](https://www.dpd.com/de/de/support/versandbestimmungen/feiertage/) – bundesweite und regionale Feiertage
-- [Amazon.de: Amazon Logistics](https://www.amazon.de/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – 6 bis 22 Uhr, Kontakt 8 bis 21 Uhr
+- [About Amazon Deutschland: Amazon Prime 2025, Rekord bei Liefergeschwindigkeit](https://www.aboutamazon.de/amazon-prime-liefergeschwindigkeit-2025-rekord) – Same-Day in über 70 Städten, in Berlin und München bis zum Nachmittag bestellt, am selben Abend geliefert
 - [Österreichische Post: FAQ](https://www.post.at/p/c/faq-privat) – nach Tagen, nicht nach Uhrzeiten, Position in der Tour, Post Express am Samstag, Poststation rund um die Uhr
 - [RTR: Wie oft muss die Post Briefe und Pakete zustellen?](https://www.rtr.at/TKP/was_wir_tun/post/konsumentenservice/empfangsbeschwerden/empfang-postendungen.de.html) – Zustellpflicht an Werktagen außer Samstag
 - [ORF Salzburg: Post mit neuer Paketzustellung an Sonntagen](https://salzburg.orf.at/stories/3358040/) – Sonntag in Wien, Linz, Graz und Salzburg für Geschäftskunden, sonst Montag bis Samstag

@@ -4,10 +4,10 @@ description: What time USPS, UPS, FedEx, Amazon, Royal Mail, Evri, Canada Post a
 slug: what-time-do-parcels-get-delivered
 picture: A clock at eight in the evening under a crescent moon, a calendar with its weekends marked, a van with its headlights on, and Pip watching from a window.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Parcels get delivered any time from early morning to late evening, and almost no carrier promises you an hour. USPS aims to finish by 5 p.m., UPS delivers to homes from 9 a.m. to 7 p.m., FedEx and Evri from 8 a.m. to 8 p.m., and Amazon's drivers from 6 a.m. to 10 p.m. Saturday is a normal delivery day for most of them; Sunday usually depends on the service the sender paid for.
+Parcels get delivered any time from early morning to late evening, and almost no carrier promises you an hour. USPS aims to finish by 5 p.m., UPS delivers to homes from 9 a.m. to 7 p.m., FedEx and Evri from 8 a.m. to 8 p.m., and Amazon brings UK Same-Day orders by 10 p.m. Saturday is a normal delivery day for most of them; Sunday usually depends on the service the sender paid for.
 
 ## What time does each carrier deliver until?
 
@@ -16,7 +16,7 @@ Parcels get delivered any time from early morning to late evening, and almost no
 | [USPS](carrier:usps) (US) | By 5 p.m., sometimes later | Yes, same aim | Priority Mail Express and Amazon parcels only |
 | [UPS](carrier:ups) (US) | Homes 9 a.m. to 7 p.m., occasionally later; businesses by close of business | Yes, no extra fee for ground residential | Its pages disagree: none, or some areas |
 | [FedEx](carrier:fedex) (US) | 8 a.m. to 8 p.m. | Homes | Homes |
-| [Amazon](carrier:amazon-logistics) (US, UK, Ireland) | 6 a.m. to 10 p.m. | Yes | UK and Ireland: "seven days a week" |
+| [Amazon](carrier:amazon-logistics) (UK, Ireland) | UK Same-Day orders by 7 p.m. or 10 p.m. | Ireland: yes | Ireland: "seven days a week" |
 | [Royal Mail](carrier:royal-mail) (UK) | Aims for 4.30 p.m.; parcels as late as 6 p.m. when busy, some scheduled ones in the evening | Yes, as normal | Some Tracked 24 and Special Delivery parcels, up to 7.30 p.m. in some areas |
 | [Parcelforce](carrier:parcelforce) (UK) | By 6 p.m. | By 6 p.m., when a Saturday delivery is expected | No Sunday service listed |
 | [Evri](carrier:evri) (UK) | 8 a.m. to 8 p.m. | Yes, as normal | Uncommon |
@@ -30,11 +30,11 @@ Parcels get delivered any time from early morning to late evening, and almost no
 Two things the table can't show:
 
 - **USPS** says traffic, staffing or weather can push deliveries past 5 p.m., and that "delivery times are not guaranteed". A package may also come on a different vehicle from your letters, later in the day.
-- **Amazon's** drivers knock, ring or call only between 8 a.m. and 8 p.m. in the US, and 8 a.m. and 9 p.m. in the UK and Ireland, unless the delivery is scheduled or has to be handed to you.
+- **Amazon** comes as late as 10 p.m. on Same-Day orders, which cover more than 80 UK towns and cities, with a minimum order value. Items are marked "Today by 7pm" or "Today by 10pm" depending on when you order, and where its Sub-Same Day sites deliver, an order placed by 5 p.m. still arrives by 10 p.m.
 
 ## Do parcels get delivered on Saturday and Sunday?
 
-**Saturday** is a normal working day for USPS, UPS, FedEx (to homes), Amazon, Royal Mail, Evri and InPost.
+**Saturday** is a normal working day for USPS, UPS, FedEx (to homes), Royal Mail, Evri, InPost and, in Ireland, Amazon.
 
 **Sunday** is the exception, and each "some" in the table comes with conditions:
 
@@ -43,7 +43,7 @@ Two things the table can't show:
 - **USPS:** Priority Mail Express can come on a Sunday or holiday in many large cities, for a fee the sender pays.
 - **Couriers:** Evri rarely delivers on a Sunday, InPost only in busy periods, and DPD UK only as a Predict upgrade.
 
-So a weekend delivery depends on what the **sender** bought, and you can rarely add it yourself. The exceptions: your Amazon address book can say whether an address takes weekend deliveries, and DPD UK's Predict can offer the upgrade.
+So a weekend delivery depends on what the **sender** bought, and you can rarely add it yourself. The exception is DPD UK, whose Predict can offer the upgrade.
 
 ## What is a delivery window, and which carriers give one?
 
@@ -55,14 +55,14 @@ It's the time span in which the carrier expects to reach you, worked out from th
 | Evri | 1 hour | By text on the day |
 | InPost UK | 2 hours | Once the driver starts the route, which can take until around 11 a.m. |
 | Australia Post | 2 hours | By text on the day |
-| Amazon | 2 to 4 hours | When available |
+| Amazon | A 2- to 4-hour "Estimated Delivery Window" in the US; a live map in the UK and US | The map once your parcel is 10 stops away |
 | FedEx | 4 hours | In tracking, when available |
 | UPS | An estimated time; a 2-hour window from the 4-hour estimate is a paid option | The paid window can be picked from two days before |
 | Royal Mail | An indicative time | Only if the sender passed on your email or mobile number |
 
 USPS, Canada Post and An Post describe no window on their help pages: expect a day, not an hour.
 
-A window is an estimate: Amazon says parcels "can arrive before or after" it. You usually can't move it either ("an ETA can't be changed", says Evri), though Evri lets you pick a neighbour or a safe place instead, and DPD also another day.
+A window is an estimate, and you usually can't move it ("an ETA can't be changed", says Evri), though Evri lets you pick a neighbour or a safe place instead, and DPD also another day.
 
 If you want a set time, you pay for it. UPS My Choice sells a confirmed 2-hour window ($14.99 for free members), and FedEx Delivery Manager an evening slot from 5 to 8 p.m. for $5.55. On [Peek](/), a window the carrier gives can be added to your calendar.
 
@@ -76,7 +76,7 @@ Because your address isn't the only stop. `Out for delivery` means the parcel is
 - home | Your door | Any time up to the carrier's latest hour.
 :::
 
-The latest normal times are 8 p.m. for FedEx, Evri and Canada Post, 9 p.m. for InPost UK and Purolator, and 10 p.m. for Amazon. An Amazon driver knocking at 8.45 p.m. in the UK or Ireland is having a normal day. For what each status means along the way, see [tracking statuses explained](guide:tracking-statuses).
+The latest normal times are 8 p.m. for FedEx, Evri and Canada Post, 9 p.m. for InPost UK and Purolator, and 10 p.m. for Amazon's Same-Day orders in the UK. A driver knocking at 8.45 p.m. is having a normal day. For what each status means along the way, see [tracking statuses explained](guide:tracking-statuses).
 
 Sometimes the round isn't finished: DHL in Germany names a driver falling ill or running out of working time, road closures and accidents. The parcel then usually goes out again the next working day, and the tracking says so:
 
@@ -127,9 +127,12 @@ One catch: a locker you can open at any hour is only filled on delivery days, so
 - [FedEx: Reattempt delivery](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/reattempt-delivery.html) – 8 a.m. to 8 p.m., weekends
 - [FedEx: When will it arrive?](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/when-will-my-package-arrive.html) – 4-hour window
 - [FedEx: Delivery Manager](https://www.fedex.com/en-us/delivery-manager.html) – evening slot, $5.55
-- [Amazon: Amazon Logistics (US)](https://www.amazon.com/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – 6 a.m. to 10 p.m., 8 a.m. to 8 p.m. contact, weekends
-- [Amazon: Amazon Logistics (UK)](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=G9FG3HRMSTJK3A9F) – seven days a week, 8 a.m. to 9 p.m. contact
-- [Amazon: Estimated delivery windows](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GK8CZJ8DR2J2WS5H) – 2 to 4 hours, not guaranteed
+- [About Amazon UK: Amazon expands Same Day Delivery to over 80 UK cities and towns](https://www.aboutamazon.co.uk/news/retail/amazon-expands-same-day-delivery-uk) – "Today by 7pm", "Today by 10pm"
+- [About Amazon UK: Amazon delivers at record speeds in 2025](https://www.aboutamazon.co.uk/news/retail/amazon-record-delivery-speeds-2025) – order by 5 p.m., delivered by 10 p.m.; more than 80 towns and cities, minimum order values
+- [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – live map from 10 stops away
+- [About Amazon EU: Amazon's €25 billion commitment to Ireland](https://www.aboutamazon.eu/news/job-creation-and-investment/amazons-25-billion-commitment-to-ireland-creating-jobs-driving-growth-and-building-infrastructure) – delivery across Ireland seven days a week
+- [About Amazon: 10 tips to protect your Amazon packages from porch pirates](https://www.aboutamazon.com/news/operations/amazon-porch-pirate-prevention-tips) – 2- to 4-hour Estimated Delivery Window (US)
+- [About Amazon: How to track your packages](https://www.aboutamazon.com/news/retail/track-amazon-package) – live map from 10 stops away (US)
 - [Royal Mail: What time, what days do you deliver?](https://help.royalmail.com/personal/s/article/What-time-what-days-do-you-deliver) – 4.30 p.m., evenings, remote areas
 - [Royal Mail: Weekday and weekend delivery times](https://www.royalmail.com/receiving/delivery-times) – 6 p.m., Saturday, bank holidays
 - [Royal Mail: Sunday parcel deliveries](https://www.royalmail.com/business/shipping/uk-services/sunday-parcel-deliveries) – Tracked 24, Special Delivery, 7.30 p.m.

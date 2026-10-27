@@ -1,13 +1,13 @@
 ---
 title: A que horas passa o carteiro dos CTT? Sábado e domingo
-description: Os CTT entregam ao sábado e, nas zonas mais povoadas, ao domingo; nos dias úteis, um Expresso pode chegar das 8h às 22h. E os horários da DPD, GLS, UPS e Amazon.
+description: Os CTT entregam ao sábado e, nas zonas mais povoadas, ao domingo; nos dias úteis, um Expresso pode chegar das 8h às 22h. E os horários da DPD, GLS e UPS.
 slug: a-que-horas-entrega-ctt
 picture: Um relógio a marcar as oito da noite sob uma lua em quarto crescente, um calendário com os fins de semana assinalados, uma carrinha de faróis acesos e o Pip a espreitar de uma janela.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Uma encomenda pode chegar de manhã cedo ou já de noite, e quase nenhuma transportadora te promete uma hora. Nos CTT, uma Encomenda Expresso pode ter uma janela entre as 8h00 e as 22h00, a UPS entrega em casa entre as 9h00 e as 19h00 e a GLS em horário comercial, de segunda a sexta. O sábado depende da transportadora; ao domingo, só entregam os CTT, nas zonas mais povoadas, o CTT Now e a Amazon.
+Uma encomenda pode chegar de manhã cedo ou já de noite, e quase nenhuma transportadora te promete uma hora. Nos CTT, uma Encomenda Expresso pode ter uma janela entre as 8h00 e as 22h00, a UPS entrega em casa entre as 9h00 e as 19h00 e a GLS em horário comercial, de segunda a sexta. O sábado depende da transportadora; ao domingo, só entregam os CTT, nas zonas mais povoadas, e o CTT Now.
 
 ## Até que horas entregam os CTT e as outras transportadoras?
 
@@ -19,12 +19,8 @@ Uma encomenda pode chegar de manhã cedo ou já de noite, e quase nenhuma transp
 | GLS Portugal | De segunda a sexta, em horário comercial | Não | Não |
 | [InPost](carrier:inpost) (Lockers e Pontos Pack) | De segunda a sexta | Não há distribuição | Não há distribuição |
 | [UPS](carrier:ups) | Casas das 9h00 às 19h00, por vezes mais tarde; empresas perto do fim do expediente | A página não diz | A página não diz |
-| [Amazon Logistics](carrier:amazon-logistics) | Das 6h00 às 21h00 | Sim | Sim, «os sete dias da semana» |
 
-Duas coisas que a tabela não mostra:
-
-- **CTT:** o horário de sábado, o domingo e as três janelas vêm de um comunicado dos CTT de 2024, e as janelas são as do Expresso. Sem janela, `Em entrega` só quer dizer que o carteiro ou distribuidor já está no percurso do dia.
-- **Amazon:** a página de ajuda da Amazon.es só existe em espanhol e fala de Espanha. Segundo ela, os estafetas só batem à porta, tocam à campainha ou te contactam entre as 8h00 e as 20h00, a não ser que seja uma entrega programada.
+O que a tabela não mostra: nos CTT, o horário de sábado, o domingo e as três janelas vêm de um comunicado de 2024, e as janelas são as do Expresso. Sem janela, `Em entrega` só quer dizer que o carteiro ou distribuidor já está no percurso do dia.
 
 ## Os CTT entregam ao sábado e ao domingo?
 
@@ -38,7 +34,6 @@ Duas coisas que a tabela não mostra:
 
 - **CTT:** desde abril de 2024, entregam encomendas ao domingo, mas só nas áreas de maior densidade populacional. Não contes com isso numa aldeia.
 - **CTT Now:** entrega todos os dias, mas só na mesma cidade e onde o serviço existe.
-- **Amazon:** a Amazon.es diz que entrega os sete dias da semana. Se não quiseres receber ao fim de semana, podes marcar a morada como fechada para entregas ao sábado e ao domingo, nas moradas da tua conta Amazon.
 
 Ou seja: um sábado ou um domingo dependem quase sempre do que o **remetente** contratou, e raramente o acrescentas tu. A exceção é o Expresso dos CTT, onde podes escolher outra data (até 5 dias úteis além do prazo), pagando a alteração.
 
@@ -68,7 +63,7 @@ Porque a tua morada não é a única paragem. `Em entrega` (nos CTT) ou `Em dist
 - home | A tua porta | A qualquer hora, até ao limite da transportadora.
 :::
 
-As horas mais tardias normais são as 19h00 da UPS («por vezes, mais tarde»), as 21h00 da Amazon e do CTT Now e as 22h00 da janela da noite dos CTT. Uma encomenda da Amazon que chega às 20h45 é um dia normal, mas sem campainha: a Amazon.es diz que os estafetas só batem à porta ou tocam entre as 8h00 e as 20h00. Para o que quer dizer cada estado pelo caminho, vê [estados da encomenda](guide:tracking-statuses).
+As horas mais tardias normais são as 19h00 da UPS («por vezes, mais tarde»), as 21h00 do CTT Now e as 22h00 da janela da noite dos CTT. Uma encomenda que chega às 20h45 é um dia normal. Para o que quer dizer cada estado pelo caminho, vê [estados da encomenda](guide:tracking-statuses).
 
 Às vezes o percurso fica a meio: a DHL alemã fala de um estafeta que adoece ou chega ao limite de horas de trabalho, de estradas cortadas e de acidentes. A encomenda volta a sair, normalmente no dia útil seguinte, e o seguimento mostra-o:
 
@@ -124,6 +119,5 @@ Um senão: um Locker que abres a qualquer hora só é abastecido nos dias de ent
 - [InPost: Fala connosco, perguntas frequentes](https://www.inpost.pt/fala-connosco) – distribuição de segunda a sexta, sem sábados, domingos ou feriados, Lockers 24 horas por dia, PIN, reclamação após 5 dias
 - [UPS Portugal: Compreender o estado de seguimento](https://www.ups.com/pt/pt/support/tracking-support/where-is-my-package/understanding-tracking-status) – das 9h às 19h em residências, fim de expediente para empresas
 - [SEUR: SEUR Predict](https://www.seur.com/es/seur-predict/) – janela de 1 hora em Espanha e Portugal
-- [Amazon.es: Amazon Logistics (em espanhol)](https://www.amazon.es/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – das 6:00 às 21:00, contacto das 8:00 às 20:00, sete dias da semana
 - [DHL: Was bedeutet mein Sendungsstatus? (em alemão)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – percursos interrompidos, sem contacto direto com os estafetas
 :::

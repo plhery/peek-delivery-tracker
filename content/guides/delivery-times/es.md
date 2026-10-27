@@ -4,10 +4,10 @@ description: Correos reparte paquetes de lunes a viernes, sin horario publicado.
 slug: a-que-hora-reparte-correos
 picture: Un reloj que marca las ocho de la tarde bajo una luna creciente, un calendario con los fines de semana marcados, una furgoneta con los faros encendidos y Pip mirando desde una ventana.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Un paquete puede llegarte desde primera hora de la mañana hasta bien entrada la tarde, y casi ninguna empresa te promete una hora. Correos no publica horario de reparto, GLS reparte más o menos de 9:00 a 20:00, CTT Express en general de 9:00 a 19:00 y Amazon entre las 6:00 y las 21:00. La mayoría reparte de lunes a viernes: el sábado depende casi siempre del servicio que pagó quien envía, y el domingo solo lo anuncia Amazon.
+Un paquete puede llegarte desde primera hora de la mañana hasta bien entrada la tarde, y casi ninguna empresa te promete una hora. Correos no publica horario de reparto, GLS reparte más o menos de 9:00 a 20:00, CTT Express en general de 9:00 a 19:00, y Amazon, con «Entrega hoy», hasta las 22:00. La mayoría reparte de lunes a viernes: el sábado depende casi siempre del servicio que pagó quien envía, y el domingo solo lo anuncia Amazon, en determinados códigos postales.
 
 ## ¿A qué hora reparte Correos y hasta qué hora reparten los demás?
 
@@ -20,21 +20,21 @@ Un paquete puede llegarte desde primera hora de la mañana hasta bien entrada la
 | [MRW](carrier:mrw) | Envíos contratados en su web, en la Península: antes de las 19:00 del día laborable siguiente | Sus páginas no lo dicen | Sus páginas no lo dicen |
 | [NACEX](carrier:nacex) | Con NACEX 19:00 H, antes de las 19:00 del día laborable siguiente | De 9:00 a 13:00, si quien envía contrata la Entrega en sábado | No lo ofrece |
 | [CTT Express](carrier:ctt-express) | En general, de 9:00 a 19:00 | Solo en la temporada navideña | No lo ofrece |
-| [Amazon](carrier:amazon-logistics) | De 6:00 a 21:00 | Sí | Sí: reparte «los siete días de la semana» |
+| [Amazon](carrier:amazon-logistics) | Con «Entrega hoy», antes de las 22:00 en algunas ciudades | Con Prime, en determinados códigos postales | Con Prime, en determinados códigos postales |
 | InPost (a Punto Pack y Locker) | De lunes a viernes | No | No |
 
 Dos cosas que la tabla no cuenta:
 
 - **El horario depende del servicio.** CTT Express avisa de que la hora concreta cambia según el servicio y la zona, y Correos Express calcula su hora estimada con el historial de entregas en tu código postal; aun así, puede cambiar con la ruta, el volumen de envíos o cualquier incidencia.
-- **Amazon reparte hasta las 21:00, pero solo llama a tu puerta de 8:00 a 20:00.** Sus repartidores solo tocan el timbre o te llaman en esa franja, salvo en una entrega programada. Cuando no hace falta que estés, lo dejan en el buzón si cabe o en un lugar seguro.
+- **Amazon llega hasta las 22:00 con «Entrega hoy».** Lo ofrece en 16 ciudades, y en algunas, como Madrid, un pedido hecho hasta las 17:00 puede entregarse antes de las 22:00 del mismo día.
 
 ## ¿Reparten paquetes los sábados y los domingos?
 
 **Los sábados**, casi siempre solo si quien envía lo ha pagado. La Ley 43/2010 obliga a Correos, como operador del servicio postal universal, a entregar «al menos, todos los días laborables, de lunes a viernes», y sus condiciones de paquetería describen un servicio de lunes a viernes. SEUR, GLS, NACEX y Correos Express reparten en sábado solo como un servicio añadido que contrata el remitente, y CTT Express solo en Navidad.
 
-**Los domingos**, solo Amazon dice que reparte: sus socios de transporte entregan «los siete días de la semana». Ninguna otra empresa de la tabla lo ofrece en sus páginas.
+**Los domingos**, solo Amazon dice que reparte: sus envíos Prime en un día incluyen «entregas en fin de semana en determinados códigos postales». Ninguna otra empresa de la tabla lo ofrece en sus páginas.
 
-Así que un reparto en fin de semana depende de lo que compró **quien envía**, y tú casi nunca puedes añadirlo. La excepción es Amazon: en Mis direcciones puedes marcar si una dirección está cerrada para entregas los sábados y domingos.
+Así que un reparto en fin de semana depende de lo que compró **quien envía**, y tú casi nunca puedes añadirlo.
 
 ## ¿A qué hora llega mi paquete? La franja de entrega
 
@@ -63,12 +63,9 @@ Porque tu casa no es la única parada. `En reparto` quiere decir que el paquete 
 - home | Tu puerta | A cualquier hora, hasta la última de la empresa.
 :::
 
-Las horas más tardías normales son las 19:00 de CTT Express y de los servicios «antes de las 19:00» de MRW y NACEX, las 20:00 más o menos de GLS y las 21:00 de Amazon y de la última franja de Paq Premium. Si un repartidor de Amazon te lo deja a las 20:45, no es nada raro, y Amazon.es recuerda que algunos transportistas reparten hasta las 22:00. Para saber qué significa cada estado por el camino, mira [los estados de un envío](guide:tracking-statuses).
+Las horas más tardías normales son las 19:00 de CTT Express y de los servicios «antes de las 19:00» de MRW y NACEX, las 20:00 más o menos de GLS, las 21:00 de la última franja de Paq Premium y las 22:00 de «Entrega hoy» de Amazon. Si un repartidor te lo deja a las 20:45, no es nada raro. Para saber qué significa cada estado por el camino, mira [los estados de un envío](guide:tracking-statuses).
 
-A veces el repartidor no termina la ruta: DHL, en su web alemana, cita como causas que se ponga enfermo o se le acabe la jornada, las carreteras cortadas y los accidentes. El paquete suele salir de nuevo el siguiente día laborable:
-
-- **Correos:** si no puede entregarlo y el envío incluye dos intentos, te avisa por SMS de un segundo intento en tu domicilio en 24 horas.
-- **Amazon:** si hace falta, hace al menos cinco intentos en días seguidos, y desde Mis pedidos puedes pedir otra fecha si el pedido lo permite.
+A veces el repartidor no termina la ruta: DHL, en su web alemana, cita como causas que se ponga enfermo o se le acabe la jornada, las carreteras cortadas y los accidentes. El paquete suele salir de nuevo el siguiente día laborable. Si Correos no puede entregarlo y el envío incluye dos intentos, te avisa por SMS de un segundo intento en tu domicilio en 24 horas.
 
 ## Paquete en reparto que no llega: qué hacer
 
@@ -81,7 +78,7 @@ Llamar esa misma tarde rara vez sirve: DHL en Alemania, por ejemplo, dice que no
 - Después, pregunta | Contacta con la tienda o con la empresa cuando pase su plazo.
 :::
 
-Cada una da su propio plazo. Correos dice que, tras su SMS de entrega a domicilio, el paquete llega entre 24 y 72 horas después, según el producto. Correos Express te pide que, si pasan 24-48 horas sin cambios en el seguimiento, contactes con el remitente. Y Amazon te pide esperar 48 horas desde la fecha de entrega estimada antes de reclamar.
+Cada una da su propio plazo. Correos dice que, tras su SMS de entrega a domicilio, el paquete llega entre 24 y 72 horas después, según el producto. Y Correos Express te pide que, si pasan 24-48 horas sin cambios en el seguimiento, contactes con el remitente.
 
 ¿Te han dejado un aviso porque no estabas? Mira [qué hacer si no estabas cuando pasó el repartidor](guide:missed-delivery). ¿Varios días sin un escaneo nuevo? Mira [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
@@ -100,7 +97,7 @@ Sí, si va a un locker o a una tienda:
 - La mayoría de los Lockers de InPost están en la calle, y puedes recoger tus paquetes las 24 horas del día, los 7 días de la semana.
 - Correos promete con sus taquillas Citypaq recoger «cuando y donde quieras», «sin horarios».
 - Muchos puntos NACEX.shop abren sábados y domingos, y SEUR tiene 10.000 puntos Pickup.
-- Amazon te deja enviar un pedido a un Amazon Hub Locker desde la app Amazon Compras, pero solo antes de que llegue a la estación de entrega.
+- Algunos Amazon Lockers están disponibles las 24 horas del día, siete días a la semana.
 
 Eso sí: un locker que abres a cualquier hora solo se llena los días de reparto. InPost no lleva paquetes a sus Punto Pack y Lockers ni sábados, ni domingos, ni festivos. Para que un paquete ya enviado vaya a otro sitio, mira [cómo cambiar la dirección de entrega](guide:change-delivery-address).
 
@@ -121,9 +118,10 @@ Eso sí: un locker que abres a cualquier hora solo se llena los días de reparto
 - [NACEX: Servicios complementarios](https://www.nacex.es/irServicioNacional.do?seccion=complementarios) – Entrega concertada, 9 €, 15 km
 - [NACEX: NACEX.shop](https://www.nacex.es/irServicioNacional.do?seccion=mep) – puntos abiertos sábados y domingos
 - [CTT Express: Horarios de reparto](https://www.cttexpress.com/preguntas-frecuentes/horarios) – 9:00 a 19:00, sábados en Navidad
-- [Amazon.es: Entregas de Amazon Logistics](https://www.amazon.es/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – 6:00 a 21:00, contacto de 8:00 a 20:00, siete días, fines de semana, cinco intentos, Amazon Hub Locker
-- [Amazon.es: Encuentra un paquete no recibido que aparece como entregado](https://www.amazon.es/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – algunos transportistas reparten hasta las 22:00
-- [Amazon.es: Entregas con retraso](https://www.amazon.es/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – 48 horas
+- [About Amazon España: Nuevas inversiones en robótica, entregas rápidas y formación profesional](https://www.aboutamazon.es/noticias/logistica/amazon-nuevas-inversiones-robotica-entregas-rapidas-formacion-profesional) – pedidos hasta las 17:00 entregados antes de las 22:00 del mismo día, también en Madrid
+- [About Amazon España: Amazon bate su récord de entregas rápidas en España](https://www.aboutamazon.es/noticias/noticias-de-la-compania/amazon-bate-record-entregas-rapidas-espana) – «Entrega hoy» en 16 ciudades
+- [About Amazon España: Prime a mitad de precio para los jóvenes](https://www.aboutamazon.es/noticias/noticias-de-la-compania/amazon-prime-mitad-precio-los-jovenes) – entregas en fin de semana en determinados códigos postales
+- [About Amazon España: Amazon Lockers](https://www.aboutamazon.es/noticias/innovacion/amazon-lockers) – algunos lockers disponibles las 24 horas, siete días a la semana (2017)
 - [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – reparto de lunes a viernes, Lockers 24 horas
 - [DHL: ¿Qué significa el estado de mi envío?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – rutas sin terminar, sin contacto directo con el repartidor
 :::

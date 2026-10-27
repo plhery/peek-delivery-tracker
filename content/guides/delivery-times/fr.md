@@ -1,13 +1,13 @@
 ---
 title: À quelle heure livre Colissimo ? Horaires par transporteur
-description: Jusqu'à quelle heure livrent Colissimo, Chronopost, Mondial Relay, bpost, La Poste suisse et Amazon, qui livre le week-end, et pourquoi le soir est normal.
+description: Jusqu'à quelle heure livrent Colissimo, Chronopost, Mondial Relay, UPS, bpost et La Poste suisse, qui livre le week-end, et pourquoi le soir est normal.
 slug: a-quelle-heure-livre-colissimo
 picture: Une horloge qui marque huit heures du soir sous un croissant de lune, un calendrier aux week-ends marqués, une camionnette phares allumés, et Pip qui regarde par la fenêtre.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteur ne te promet une heure. La Poste ne publie aucun horaire pour Colissimo, UPS livre en général les particuliers entre 9 h et 19 h, et les livreurs d'Amazon passent entre 6 h et 21 h. Le samedi, Colissimo et Chronopost livrent comme un jour normal ; le dimanche dépend presque toujours du service que l'expéditeur a payé.
+Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteur ne te promet une heure. La Poste ne publie aucun horaire pour Colissimo, UPS livre en général les particuliers entre 9 h et 19 h, et Chronopost propose avec Chrono Precise des créneaux jusqu'à 22 h. Le samedi, Colissimo et Chronopost livrent comme un jour normal ; le dimanche dépend presque toujours du service que l'expéditeur a payé.
 
 ## Jusqu'à quelle heure livre chaque transporteur ?
 
@@ -16,7 +16,6 @@ Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteu
 | [Colissimo](carrier:la-poste) (France) | Aucun horaire publié ; un e-mail 24 h avant la livraison | Oui, en France métropolitaine | Rien trouvé |
 | [Chronopost](carrier:chronopost) (France) | Aucun horaire publié ; avec Chrono Precise, créneaux de 8 h à 22 h | Oui | Chrono Precise seulement, de 9 h à 13 h, à Paris, en Île-de-France et dans 14 grandes villes |
 | [Mondial Relay](carrier:mondial-relay) (France) | Livraison en Point Relais du mardi au samedi, aux heures du commerce | Oui | Jamais |
-| [Amazon](carrier:amazon-logistics) (France) | De 6 h à 21 h | Oui, « 7 jours sur 7 » | Oui, « 7 jours sur 7 » |
 | [UPS](carrier:ups) | Particuliers de 9 h à 19 h, parfois plus tard ; entreprises jusqu'à la fermeture des bureaux | Non précisé | Non précisé |
 | [bpost](carrier:bpost) (Belgique) | Une heure indicative, sans horaire général publié | En point d'enlèvement ou distributeur de colis, de 8 h à 17 h, si l'expéditeur a un accord avec bpost | À domicile, de 9 h à 19 h, même condition |
 | [La Poste suisse](carrier:swiss-post) | Du lundi au vendredi, sans horaire publié ; en option, le matin (7 h à 9 h) ou le soir (16 h 30 à 21 h) | En option, CHF 3.80 | Non pour le PostPac Priority |
@@ -24,16 +23,16 @@ Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteu
 Deux choses que le tableau ne montre pas :
 
 - **Colissimo** t'annonce le jour, pas l'heure : La Poste t'écrit 24 heures avant la livraison et donne un délai indicatif de 48 heures, soit 2 jours ouvrables, pour un colis en France métropolitaine, Corse et Monaco compris.
-- **Amazon** précise que ses livreurs ne frappent, ne sonnent ou ne t'appellent qu'entre 8 h et 20 h, sauf si ta livraison est prévue dans un créneau précis.
+- **Amazon** livre aussi le soir même : dans plus de 15 grandes villes, dont Paris, Lyon, Marseille et Lille, un membre Prime peut recevoir en quelques heures une commande éligible de plus de 35 euros.
 
 ## Livraison de colis le samedi et le dimanche
 
-**Le samedi** est un jour de livraison normal en France : « Colissimo et Chronopost livrent le samedi » en métropole, Mondial Relay remplit ses Points Relais du mardi au samedi, et Amazon livre 7 jours sur 7. En Belgique et en Suisse, c'est une option :
+**Le samedi** est un jour de livraison normal en France : « Colissimo et Chronopost livrent le samedi » en métropole, et Mondial Relay remplit ses Points Relais du mardi au samedi. En Belgique et en Suisse, c'est une option :
 
 - **bpost :** lettres et recommandés ne sont livrés que du lundi au vendredi. Certaines boutiques en ligne ont un accord pour faire livrer leurs colis le samedi, en point d'enlèvement ou en distributeur de colis, entre 8 h et 17 h.
 - **La Poste suisse :** le PostPac Priority est distribué du lundi au vendredi. Le samedi coûte CHF 3.80 de supplément, payé par l'expéditeur, ou par toi depuis « Gérer ponctuellement ».
 
-**Le dimanche** reste l'exception, et chaque « oui » du tableau a ses conditions :
+**Le dimanche** reste l'exception :
 
 - **Chronopost :** seulement avec Chrono Precise, de 9 h à 13 h, à Paris, en partie en Île-de-France et dans 14 grandes villes (dont Lyon, Marseille, Lille, Toulouse et Bordeaux), pour un colis pris en charge le vendredi ou le samedi.
 - **bpost :** à domicile entre 9 h et 19 h, si la boutique en ligne a un accord. Rien n'arrive en point d'enlèvement ni en distributeur le dimanche : ces colis arrivent le lundi.
@@ -70,7 +69,7 @@ Parce que ton adresse n'est pas le seul arrêt. `En livraison` chez UPS, ou « e
 - home | Ta porte | À n'importe quelle heure, jusqu'à la dernière du transporteur.
 :::
 
-Les heures les plus tardives sont normales : jusqu'à 19 h « parfois plus tard » chez UPS, 21 h chez Amazon et pour la distribution du soir de La Poste suisse, 22 h pour Chrono Precise. Un colis Amazon déposé à 20 h 30, c'est une journée normale (le livreur ne sonne qu'entre 8 h et 20 h, mais peut déposer un colis jusqu'à 21 h). Pour le sens de chaque statut du suivi, lis [les étapes du suivi d'un colis](guide:tracking-statuses).
+Les heures les plus tardives sont normales : jusqu'à 19 h « parfois plus tard » chez UPS, 21 h pour la distribution du soir de La Poste suisse, 22 h pour Chrono Precise. Un colis livré à 20 h 30, c'est une journée normale. Pour le sens de chaque statut du suivi, lis [les étapes du suivi d'un colis](guide:tracking-statuses).
 
 « En cours de livraison au point de retrait » ne parle pas de chez toi : chez Mondial Relay, `Colis en route vers le point de livraison` veut dire qu'il roule vers le Point Relais, qui le reçoit pendant ses heures d'ouverture.
 
@@ -122,7 +121,7 @@ Un piège : une consigne ouverte jour et nuit n'est remplie que les jours de liv
 - [DPD France : Quand serai-je informé de mon créneau ?](https://www.dpd.com/fr/en/faq/quand-serai-je-informee-de-mon-creneau-horaire-de-livraison/) – créneau le jour même, aucun créneau sans Predict
 - [DPD France : Livraison à domicile Predict](https://www.dpd.com/fr/fr/expedier-des-colis/domicile-predict/) – créneau, Pickup, voisin, autre date
 - [Mondial Relay : Jours de passage du livreur au Point Relais](https://www.mondialrelay.fr/faq/recevoir-un-colis/quels-sont-les-jours-ou-le-livreur-passe-au-point-relais-pour-y-deposer-les-colis/) – du mardi au samedi, Lockers à toute heure, ni dimanche, ni lundi, ni jours fériés
-- [Amazon.fr : Livraisons d'Amazon Logistics](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – 7 jours sur 7, 6 h à 21 h, contact de 8 h à 20 h
+- [About Amazon France : Nouveau record de livraison en France pour les membres Prime](https://www.aboutamazon.fr/actualites/actualites/amazon-etablit-un-nouveau-record-de-livraison-en-france-170-millions-darticles-livres-le-soir-meme-ou-le-lendemain-pour-les-membres-prime) – livraison le soir même dans plus de 15 grandes villes, commandes éligibles de plus de 35 euros
 - [UPS : Comprendre le statut de suivi](https://www.ups.com/fr/fr/support/tracking-support/where-is-my-package/understanding-tracking-status) – statut En livraison, 9 h à 19 h, fermeture des bureaux
 - [bpost : Quand mon colis va-t-il être livré ?](https://www.bpost.be/fr/faq/quand-mon-colis-va-t-il-etre-livre) – jour ouvrable suivant, heure indicative, 95 %, service clientèle
 - [bpost : Livraison le samedi et le dimanche](https://www.bpost.be/fr/faq/quels-courriers-ou-colis-bpost-livre-t-elle-le-samedi-et-le-dimanche) – samedi 8 h à 17 h, dimanche 9 h à 19 h, accords des expéditeurs

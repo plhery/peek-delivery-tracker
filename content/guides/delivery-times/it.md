@@ -4,10 +4,10 @@ description: Fino a che ora consegnano Poste Italiane, BRT, GLS e Amazon, se il 
 slug: a-che-ora-consegna-il-corriere
 picture: Un orologio che segna le otto di sera sotto una falce di luna, un calendario con i fine settimana evidenziati, un furgone a fari accesi e Pip che guarda da una finestra.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Il corriere può passare dalla mattina presto alla sera tardi, e quasi nessuno ti promette un'ora. Amazon consegna dalle 8 alle 22, Poste Italiane e BRT non pubblicano un orario, e la Posta svizzera ti dà una fascia di 40-90 minuti nelle zone dove il servizio è attivo. Il sabato è un giorno normale solo per alcuni, e di solito lo sceglie chi spedisce; tra i corrieri di questa guida, la domenica consegna solo Amazon.
+Il corriere può passare dalla mattina presto alla sera tardi, e quasi nessuno ti promette un'ora. Con la consegna in giornata Amazon porta i pacchi fino alle 22, Poste Italiane e BRT non pubblicano un orario, e la Posta svizzera ti dà una fascia di 40-90 minuti nelle zone dove il servizio è attivo. Il sabato è un giorno normale solo per alcuni, e di solito lo sceglie chi spedisce; tra i corrieri di questa guida, la domenica consegna solo Amazon.
 
 ## Fino a che ora consegna il corriere?
 
@@ -17,12 +17,12 @@ Il corriere può passare dalla mattina presto alla sera tardi, e quasi nessuno t
 | Poste Delivery Business Express | Di sera dalle 18:30 alle 21:00, se il mittente lo sceglie e la tua località è coperta | Se il mittente lo sceglie, nelle località coperte | Non prevista |
 | [BRT (ex Bartolini)](carrier:brt) | Nessun orario pubblicato | Non conta nei tempi di consegna | Non conta nei tempi di consegna |
 | [GLS](carrier:gls-it) | Nessun orario pubblicato; entro le 12 con Express12Service, se il mittente lo sceglie | Con SaturdayExpressService, nei capoluoghi di provincia | Non prevista |
-| [Amazon](carrier:amazon-logistics) | Dalle 8:00 alle 22:00 | Sì | Sì, «sette giorni su sette» |
+| [Amazon](carrier:amazon-logistics) | Fino alle 22:00 con la consegna in giornata, nelle città dove c'è | Sì | Sì, «sette giorni su sette» |
 | [La Posta](carrier:swiss-post) (Ticino) | Nessun orario pubblicato; di sera dalle 16.30 alle 21.00 se lo paghi | PostPac Priority sì, con un supplemento; PostPac Economy no | Non prevista |
 
 Due cose che la tabella non dice:
 
-- **Amazon** bussa, suona o ti chiama solo tra le 8:00 e le 21:00. Fuori da questa fascia prova a consegnare solo dopo aver parlato con te, per esempio per una consegna programmata o un pacco da ricevere di persona.
+- **Amazon** arriva fino alle 22:00 con la consegna in giornata, che c'è in oltre 30 città italiane: nell'area di Milano, per esempio, per alcuni dei prodotti più richiesti ordini entro le 17:00 e ricevi il pacco la sera stessa. Per i clienti Prime è gratuita sopra i 29 euro, per gli altri costa 8,99 euro.
 - **Poste Italiane** fa due tentativi di consegna per ogni pacco, ma non dice a che ora. Se ti serve un orario preciso, devono averlo scelto il negozio o chi ti spedisce il pacco, con le opzioni di Poste Delivery Business Express.
 
 ## I corrieri consegnano anche il sabato e la domenica?
@@ -37,7 +37,7 @@ Due cose che la tabella non dice:
 
 **La domenica** è l'eccezione: tra i corrieri qui sopra solo Amazon dice di consegnare tutti i giorni.
 
-Il fine settimana, quindi, lo decide quasi sempre il **mittente**, e di rado puoi aggiungerlo tu. Le eccezioni: in «Gestisci indirizzi» puoi dire ad Amazon se un indirizzo è chiuso per le consegne il sabato e la domenica, e in Ticino la Posta ti fa scegliere il sabato con «Invio singolo» per CHF 3.80, oppure per tutti i pacchi con «Gestione permanente» (CHF 20.00 a persona, CHF 40.00 per economia domestica).
+Il fine settimana, quindi, lo decide quasi sempre il **mittente**, e di rado puoi aggiungerlo tu. L'eccezione è la Posta in Ticino, che ti fa scegliere il sabato con «Invio singolo» per CHF 3.80, oppure per tutti i pacchi con «Gestione permanente» (CHF 20.00 a persona, CHF 40.00 per economia domestica).
 
 ## Come sapere a che ora arriva il pacco?
 
@@ -47,12 +47,11 @@ Ti serve la fascia oraria che il corriere ricava dal giro del furgone. Non la sc
 | --- | --- | --- |
 | La Posta | Una fascia di 40-90 minuti, poi il percorso del pacco in tempo reale negli ultimi minuti | Il giorno della consegna, in sempre più zone della Svizzera |
 | La Posta | Un avviso del giorno di consegna | Il giorno prima, via SMS, e-mail o Post-App: per PostPac Priority di regola tra le 18.00 e le 22.00 |
-| Amazon | Una finestra di consegna prevista di due o quattro ore | In «Traccia il mio pacco» e nelle notifiche, quando c'è |
 | BRT | Data e fascia oraria, che puoi cambiare con il BRTcode | Se la spedizione lo consente |
 | GLS | Aggiornamenti e fino a sei opzioni di consegna, con FlexDeliveryService | Via e-mail o SMS, se il mittente ha attivato il servizio |
 | Poste Italiane | Nessuna fascia per Poste Delivery Express e Standard | Conta il giorno, non l'ora |
 
-Una fascia è una stima. Amazon lo scrive chiaro: questi intervalli «non sono garantiti» e le consegne «possono arrivare prima o dopo». Non sempre puoi spostarla, ma puoi cambiare altro: con il BRTcode scegli un'altra data o fascia, un BRT-fermopoint o il ritiro in filiale, e la Posta svizzera ti lascia cambiare luogo e momento del recapito fino a mezzanotte del giorno prima.
+Una fascia è una stima e non sempre puoi spostarla, ma puoi cambiare altro: con il BRTcode scegli un'altra data o fascia, un BRT-fermopoint o il ritiro in filiale, e la Posta svizzera ti lascia cambiare luogo e momento del recapito fino a mezzanotte del giorno prima.
 
 Un orario preciso, di solito, si paga. In Ticino, con «Invio singolo», la Posta vende il «Recapito mattutino» dal martedì al sabato dalle 7.00 alle 9.00 (CHF 7.00) e il «Recapito serale» dal lunedì al venerdì dalle 16.30 alle 21.00 (CHF 7.90). In Italia lo decide il mittente: Poste Delivery Business Express offre la consegna su appuntamento, o una finestra di due ore scelta in anticipo. Su [Peek](/), la fascia che il corriere ti dà puoi aggiungerla al calendario con «Aggiungi al calendario».
 
@@ -66,12 +65,9 @@ Perché il tuo indirizzo non è l'unica tappa. `In consegna` vuol dire che il pa
 - home | Casa tua | A qualsiasi ora, fino all'orario più tardo del corriere.
 :::
 
-Gli orari più tardi sono normali: Amazon consegna fino alle 22:00, Poste Delivery Business Express con «Consegna di Sera» fino alle 21:00, la Posta con il «Recapito serale» fino alle 21.00. Un corriere Amazon che suona alle 20:45 sta facendo una giornata normale. Cosa vuol dire ogni stato lungo il percorso lo trovi negli [stati della spedizione](guide:tracking-statuses).
+Gli orari più tardi sono normali: Amazon fino alle 22:00 con la consegna in giornata, Poste Delivery Business Express con «Consegna di Sera» fino alle 21:00, la Posta con il «Recapito serale» fino alle 21.00. Un corriere che suona alle 20:45 sta facendo una giornata normale. Cosa vuol dire ogni stato lungo il percorso lo trovi negli [stati della spedizione](guide:tracking-statuses).
 
-A volte il giro non si chiude. DHL, in Germania, cita il corriere che si ammala o esaurisce le ore di lavoro, le strade chiuse e gli incidenti. Di solito il pacco riparte il giorno lavorativo dopo, e ogni corriere ha le sue regole:
-
-- **Poste Italiane:** ogni pacco ha due tentativi di consegna; se nessuno va a buon fine, va in giacenza all'ufficio postale indicato sull'avviso.
-- **Amazon:** se non c'era un posto sicuro dove lasciarlo, o serviva qualcuno per riceverlo, ti manda un'e-mail e scegli tu la data del nuovo tentativo.
+A volte il giro non si chiude. DHL, in Germania, cita il corriere che si ammala o esaurisce le ore di lavoro, le strade chiuse e gli incidenti. Di solito il pacco riparte il giorno lavorativo dopo. Con Poste Italiane ogni pacco ha due tentativi di consegna; se nessuno va a buon fine, va in giacenza all'ufficio postale indicato sull'avviso.
 
 ## Pacco in consegna ma non arriva: cosa fare
 
@@ -108,8 +104,10 @@ Sì, se lo fai arrivare in un locker o in un negozio:
 Attenzione: un locker che apri a ogni ora viene riempito solo nei giorni in cui il corriere lavora. Se il corriere non consegna la domenica, la domenica nel locker non arriva niente. Per mandare il pacco altrove quando è già partito, leggi [come cambiare l'indirizzo di consegna](guide:change-delivery-address).
 
 :::sources
-- [Amazon.it: Amazon Logistics](https://www.amazon.it/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – consegne dalle 8:00 alle 22:00, contatti dalle 8:00 alle 21:00, sette giorni su sette, nuovo tentativo, preferenza per il fine settimana
-- [Amazon.it: Finestra di consegna prevista](https://www.amazon.it/gp/help/customer/display.html?nodeId=GK8CZJ8DR2J2WS5H) – due o quattro ore, non garantite, prima o dopo
+- [Amazon.it: Amazon Logistics](https://www.amazon.it/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – sette giorni su sette
+- [About Amazon Italia: Nuova tecnologia robotica ed espansione delle consegne veloci](https://www.aboutamazon.it/notizie/company-news/amazon-annuncia-nuova-tecnologia-robotica-lespansione-consegne-veloci-1-miliardo-dollari-formazione) – ordini fino alle 17:00 consegnati entro le 22:00 dello stesso giorno, siti per la consegna in giornata anche a Milano
+- [About Amazon Italia: Nuove soluzioni per consegne più veloci in Italia](https://www.aboutamazon.it/notizie/logistica/amazon-introduce-nuove-soluzioni-per-consegne-piu-veloci-e-piu-sostenibili-in-italia) – area di Milano, ordini fino alle 17:00 e consegna la sera stessa, consegna in giornata in oltre 30 città
+- [About Amazon Italia: Nuovo record di velocità nelle consegne Prime nel 2025](https://www.aboutamazon.it/notizie/company-news/amazon-nuovo-record-velocita-consegne-prime-2025-italia-230-milioni-prodotti) – consegna in giornata gratuita per i clienti Prime sopra i 29 euro, 8,99 euro per gli altri
 - [Poste Italiane: Poste Delivery Express](https://www.poste.it/pacchi/poste-delivery-express) – 1-4 giorni lavorativi, sabato e festivi esclusi, due tentativi
 - [Poste Italiane: Poste Delivery Standard](https://www.poste.it/pacchi/poste-delivery-standard) – 5 giorni lavorativi nel 90% dei casi, due tentativi
 - [Poste Italiane: Poste Delivery Business Express](https://business.poste.it/professionisti-imprese/prodotti/poste-delivery-business-express.html) – consegna di sabato e di sera (18:30-21:00), appuntamento, finestra di due ore, ritiro il sabato

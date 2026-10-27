@@ -3,7 +3,7 @@ title: Canada Post tracking: numbers, statuses and notice cards
 description: Track a Canada Post parcel: where the tracking number is, what Canada Post's statuses mean, notice cards and pickup deadlines, missing parcels and contacts.
 slug: canada-post-tracking
 published: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-27
 ---
 
 Canada Post is Canada's national postal service, a federal Crown corporation. Track a parcel with Canada Post's Track tool on [canadapost-postescanada.ca](https://www.canadapost-postescanada.ca/track-reperage/en), in Canada Post's app or by pasting the number in the box above. The number comes from the sender: the shop's shipping confirmation email, or the receipt if you posted it yourself.
@@ -82,7 +82,7 @@ Canada Post's channels, as read on 15 October 2026:
 
 Peek shows the status, each scan with its town and province on a map, the expected delivery day, a delivery time window while one is given, the delivery time, the sender's business name and the service. Each scan keeps the clock of the place it happened. Statuses stay in Canada Post's English; delivered scans read "Delivered" and a parcel back with the sender "Returned to sender". Peek drops delivery options, addresses, signatures and delivery photos, and doesn't show the post office's name or the pickup deadline.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you at every scan, at important steps or on delivery day only. When a parcel posted abroad with a postal number is bound for Canada, Peek can follow it on Canada Post once Canada Post shows progress.
+Peek checks every 10 minutes from 8am to 10pm Swiss time (about 2am to 4pm ET, 11pm to 1pm PT), every 2 minutes in those hours once the parcel is out for delivery, and hourly the rest of the time, and can notify you at every scan, at important steps or on delivery day only. When a parcel posted abroad with a postal number is bound for Canada, Peek can follow it on Canada Post once Canada Post shows progress.
 
 ## Questions about Canada Post tracking
 

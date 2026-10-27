@@ -3,7 +3,7 @@ title: SpeedX tracking: statuses, missed deliveries and contact
 description: Track a SpeedX package in the US: what an SPX tracking number looks like, what SpeedX's statuses mean, attempted deliveries, photos and how to reach support.
 slug: speedx-tracking
 published: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-27
 ---
 
 SpeedX (Speed Xpress Inc., New Hyde Park, New York) is a last-mile delivery company that brings online orders to the door in the United States. Track a parcel on [tracking.speedx.io](https://tracking.speedx.io/) or paste its number in the box above. The number comes from the shop you ordered from: SpeedX makes the label for the shop, so the shop has it before SpeedX has the parcel.
@@ -84,7 +84,7 @@ SpeedX's channels for recipients in the US, as listed on its [support page](http
 
 It reads SpeedX's own tracking page and shows the status and each scan with its town on a map, at the time SpeedX recorded it, plus the delivery time and the destination country. It leaves out your address and the delivery photo, so look at the photo on SpeedX's page. Peek shows no expected delivery date for SpeedX. `Delivered` appears in Peek's own words; other lines show as SpeedX writes them, `Out for Delivery` included. There's no handoff to another carrier to follow.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you when the status changes. If SpeedX's page doesn't answer, other tracking sources rarely hold SpeedX parcels, so there may be nothing new until it does.
+Peek checks every 10 minutes from 8 am to 10 pm Swiss time (about 2 am to 4 pm Eastern, 11 pm to 1 pm Pacific), every 2 minutes in those hours once the parcel is out for delivery, and hourly the rest of the time, and can notify you when the status changes. If SpeedX's page doesn't answer, other tracking sources rarely hold SpeedX parcels, so there may be nothing new until it does.
 
 ## Questions about SpeedX tracking
 

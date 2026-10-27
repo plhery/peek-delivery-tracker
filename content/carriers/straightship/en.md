@@ -3,7 +3,7 @@ title: Straightship tracking: STRTD numbers, statuses and delivery
 description: Track a Straightship parcel in Canada: what STRTD, STRCA and STSH numbers look like, what each status means, missed deliveries, customs and who to contact.
 slug: straightship-tracking
 published: 2026-10-23
-updated: 2026-10-24
+updated: 2026-10-27
 ---
 
 Straightship (Straightship Solutions Limited) is a logistics company based in Burnaby, British Columbia, that ships goods from Asia to North America and delivers parcels across Canada with its own drivers. Its site lists SHEIN among its partners. If an online order came with a number starting `STRTD` or `STRCA`, Straightship has it; one starting `STSH` can be Straightship's too. Track it on [straightship.com](https://www.straightship.com/new/), in the "Track Your Shipment" box, or in the box above. The shop gives the number in its shipping email or on the order page.
@@ -94,7 +94,7 @@ For the order itself, a refund or a return, contact the seller.
 
 Peek reads Straightship's own tracker and shows the status, the history with the town and province of each scan, and the delivery time. It reads the tracker's times as UTC, as the tracker states. `Package will be delivered before 9:00pm` counts as out for delivery, the attempt lines as failed attempts, and `Delivery is in progress` as in transit. Peek shows no expected delivery date, and it leaves out the customer reference and the delivery photo: see those on Straightship's tracker. As Straightship names no other carrier, Peek follows the Straightship number to the end.
 
-Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight. It can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact Straightship or the seller for you.
+Peek checks every 10 minutes from 8:00 to 22:00 Swiss time (about 2:00 to 16:00 Eastern, 23:00 to 13:00 Pacific), every 2 in those hours once the parcel is out for delivery, and hourly the rest of the time, evening deliveries included. It can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact Straightship or the seller for you.
 
 ## Questions about Straightship tracking
 

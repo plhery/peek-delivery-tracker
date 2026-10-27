@@ -3,7 +3,7 @@ title: Canpar tracking: numbers, statuses and missed deliveries
 description: Track a Canpar Express parcel in Canada: where the tracking number is, what Canpar's statuses mean, SMARTSpot pickup, missed deliveries and how to reach Canpar.
 slug: canpar-tracking
 published: 2026-10-15
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Canpar Express is a Canadian parcel courier, owned by TFI International, that delivers across Canada. Track a parcel with its barcode number on [canpar.com](https://www.canpar.com/en/tracking/track.htm) or by pasting it in the box above. The shop gives you that number in its shipping email or on your order page, and it's printed on the parcel's label.
@@ -12,7 +12,7 @@ Canpar Express is a Canadian parcel courier, owned by TFI International, that de
 
 Each Canpar parcel gets its own barcode number, in the shop's shipping confirmation, on the order page and on the label. Still nothing? See [where else to find a tracking number](guide:find-tracking-number).
 
-Parcels today carry one letter (C, D, K, L, S, U, X or Z) followed by 21 digits, 22 characters in all. Canpar's FAQ says 8 to 20 digits, but current numbers are longer.
+Parcels today carry one letter (C, D, K, L, S, U, X or Z) followed by 21 digits, 22 characters in all. Canpar's FAQ also describes shorter ones, 8 to 20 digits, which its tracker still finds with the destination postal code.
 
 | Shape (invented) | What it is |
 | --- | --- |
@@ -24,7 +24,7 @@ Canpar's own tracking tool also takes these, and a sender's reference with the d
 
 No results? Canpar says this usually means the shop has made the label but hasn't handed the parcel over yet. If nothing shows within 24 hours of getting the number, contact the shop.
 
-A full 22-character Canpar number fits no other carrier. Shorter ones can look like another carrier's, so if the email names Canpar, trust the email.
+A full 22-character Canpar number fits no other carrier, and it's the only Canpar number Peek tracks. For any other Canpar number or reference, use Canpar's own tracker.
 
 ## What Canpar's tracking statuses mean
 
@@ -32,7 +32,6 @@ Canpar writes its statuses in English on canpar.com/en (French on canpar.com/fr)
 
 | Canpar's status | What it means for you |
 | --- | --- |
-| `Label created` | The shop has sent Canpar the details; Canpar doesn't have the parcel yet. |
 | `Picked Up and On the Move!` | Canpar has collected it from the sender. |
 | `Sorting It Out-Stay Tuned!` | It's being sorted at a Canpar terminal. |
 | `Departing sort facility` | It has left a terminal. |
@@ -45,19 +44,19 @@ Canpar writes its statuses in English on canpar.com/en (French on canpar.com/fr)
 | `Our Package was Delivered` | Delivered. |
 | `Returned to Sender` | It's going back to the shop. |
 
-The FAQ still speaks of `With Courier`, the older name for out for delivery. `Our Package was Delivered` is how Canpar words the delivered scan; the summary line on top simply says `Delivered`. `No tracking results available for this Barcode` means Canpar holds no scans yet.
+The FAQ still speaks of `With Courier`, the older name for out for delivery. `Our Package was Delivered` is how Canpar words the delivered scan; the summary line on top simply says `Delivered`. `Label created` with nothing after it means the shop has sent Canpar the details but Canpar doesn't have the parcel yet; `No tracking results available for this Barcode` means Canpar holds no scans yet. Peek has nothing to show before the first scan.
 
 Long gaps are normal: between terminals there are no scans until arrival. `Delayed at Facility`, `Handed Off to a Local Delivery Partner` and `Package was sorted to the incorrect terminal` come with Canpar's longer note: "Your shipment is on hold, please connect with a live agent for further updates". `Weather's Slowing Us Down, But We're on It!` is a weather delay, and `Change of Address` means the address is being updated and the parcel forwarded.
 
 ## Canpar delivery, SMARTSpots and missed deliveries
 
-Canpar delivers Monday to Friday, homes as late as 7pm, businesses 9am to 5pm. Drivers don't call ahead. Your estimated delivery date is on the tracking results.
+Canpar delivers Monday to Friday. Its FAQ gives two answers on hours: homes as late as 7pm and businesses 9am to 5pm, but also 9am to 6pm once a parcel is out for delivery. Drivers don't call ahead. Your estimated delivery date is on the tracking results.
 
 **Missed delivery.** A home address gets one attempt; the driver can't come back the same day, so the parcel goes to a SMARTSpot. Business addresses get up to two attempts, and the notice gives the day of the next one. Type the W number from the card into Canpar's tracking to see where the parcel is held.
 
 **SMARTSpots** are partner shops across Canada (more than 800, says Canpar). A parcel is ready after 12pm on the next business day and kept for at most 5 business days. Bring ID. Someone else can pick it up if their ID shows the delivery address on the label; otherwise they need a completed Authorization Notice.
 
-**Changing the delivery.** Before the driver's attempt, most parcels can be sent to a SMARTSpot: track the parcel on canpar.com, then choose Redirect to SMARTSpot under Delivery Options. A fee applies under Canpar's terms. For another address, or another attempt, call customer service; extra attempts are paid by Visa or MasterCard over the phone.
+**Changing the delivery.** Before the driver's attempt, most parcels can be sent to a SMARTSpot: track the parcel on canpar.com, then choose Redirect to SMARTSpot under Delivery Options. A fee applies under Canpar's terms. For another address, or another attempt, call customer service. The FAQ has you pay for an extra attempt by Visa or MasterCard over the phone; the 2026 service guide puts it at $10.00 per attempt plus fuel surcharge, billed to the recipient, though one clause of Canpar's terms bills the original payer instead.
 
 **Leaving it at the door.** Leave a signed note to the outside of your front door saying where to leave it. This doesn't work for parcels needing a signature in person, and Canpar never leaves parcels unattended in apartment or condo buildings. Canpar doesn't deliver to PO boxes, RR addresses or Range Roads.
 
@@ -85,9 +84,9 @@ Have the barcode or W number ready.
 
 ## Tracking Canpar parcels with Peek
 
-[Peek](/) names Canpar as soon as you paste a full 22-character number, or a canpar.com link containing it. It doesn't track references, delivery notice (W) numbers, pickup tags or return tags, so paste the full tracking number from the email or label.
+[Peek](/) names Canpar as soon as you paste a full 22-character number, or a canpar.com link containing it. It doesn't track shorter barcodes, references, delivery notice (W) numbers, pickup tags or return tags: paste the full tracking number from the email or label, or look the others up on Canpar's own tracker.
 
-It shows Canpar's status in Canpar's English words, the expected delivery day and the service, such as `GROUND`. A SMARTSpot parcel shows as ready for pickup, without the shop's name or address. It drops the proof of delivery, recipient, addresses and references. A handoff to a local partner shows as in transit; the partner isn't followed.
+It shows Canpar's status in Canpar's English words, the expected delivery day and the service name. A SMARTSpot parcel shows as ready for pickup, without the shop's name or address. It drops the proof of delivery, recipient, addresses and references. A handoff to a local partner shows as in transit; the partner isn't followed.
 
 Canpar's scan times carry no time zone: Peek reads each on the clock of the scan's place and lists Canpar's own history, shown on a map. Peek can notify you when the status changes.
 
@@ -95,7 +94,7 @@ Canpar's scan times carry no time zone: Peek reads each on the clock of the scan
 
 ### How many digits is a Canpar tracking number?
 
-Current numbers are one letter followed by 21 digits, such as the invented `D123456789012345678901`. Canpar's FAQ still mentions 8 to 20 digits.
+Current numbers are one letter followed by 21 digits, such as the invented `D123456789012345678901`. Canpar's FAQ also lists shorter ones, 8 to 20 digits, which its own tracker finds with the destination postal code; Peek takes only the 22-character kind.
 
 ### Does Canpar deliver on weekends?
 
@@ -103,7 +102,7 @@ Usually not: Canpar delivers Monday to Friday. During peak season it says weeken
 
 ### How late does Canpar deliver?
 
-Until about 7pm at home addresses and 5pm at businesses. Canpar can't give a smaller window.
+Canpar's FAQ says until 7pm at home addresses and 5pm at businesses, but also that a parcel out for delivery is attempted between 9am and 6pm. It can't give a smaller window.
 
 ### Is Canpar the same as Canada Post?
 
@@ -121,7 +120,8 @@ It depends on the service and on where the parcel starts and ends. Canpar's Tran
 - [Canpar: Delivery Options](https://www.canpar.com/en/solutions/delivery_options.htm) – notice, redirect, e-signature, notifications
 - [Canpar: How to Read a Delivery Notice](https://www.canpar.com/download/help/How_to_Read_a_Delivery_Notice_en.pdf) – W number, attempts
 - [Canpar: How to File a Claim](https://www.canpar.com/en/support/file_a_claim.htm) – 60 and 180 days, trace number, timings, claims email
-- [Canpar: Terms of Service](https://www.canpar.com/download/documents/Canpar_Terms_of_Service_EN.pdf) – redirect fee, claims
+- [Canpar: Terms of Service](https://www.canpar.com/download/documents/Canpar_Terms_of_Service_EN.pdf) – redirect fee, extra attempts, claims
+- [Canpar: Guide des services 2026](https://www.canpar.com/download/documents/CanparExpress_2026_SERVICE_GUIDE_FR.pdf) – extra attempt fee
 - [Canpar: Contact Us](https://www.canpar.com/en/contact/contact_us.htm) – phone, hours, chat
 - [Canpar: Privacy Policy](https://www.canpar.com/en/about/privacy.htm) – barcode per parcel, search period
 - [Canpar: Foire aux questions](https://www.canpar.com/fr/support/faqs.htm) – French wording, same rules

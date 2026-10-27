@@ -3,7 +3,7 @@ title: NZ Post tracking: numbers, statuses and missed parcels
 description: Track an NZ Post or CourierPost parcel: where the tracking number is, what each status means, card left, Collect my parcel, delays and how to contact NZ Post.
 slug: nz-post-tracking
 published: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-27
 ---
 
 NZ Post is New Zealand's state-owned postal service, and its CourierPost courier services are tracked the same way. Track a parcel in the tracking tool on [nzpost.co.nz](https://www.nzpost.co.nz/tools/tracking), in the NZ Post app or by pasting the number in the box above. The number comes from the sender: the shop's shipping email or order page, or your PostShop receipt if you posted it yourself.
@@ -90,7 +90,7 @@ As listed on nzpost.co.nz on 15 October 2026, Monday to Friday, 8am to 5.30pm, e
 
 Peek reads NZ Post's own tracking and shows the status, each scan with its depot on a map and the time of delivery. `Delivered` appears in Peek's own words; the rest as NZ Post writes them. It drops the recipient, signatures and the delivery photo, shows no expected delivery date or collection location, and can't redirect a parcel or set Leave my parcel.
 
-It checks every 10 minutes by day, every 2 minutes once the parcel is with the courier, and hourly overnight, and can notify you at every scan, at important steps or on delivery day only. When Aramex New Zealand passes a rural parcel to NZ Post, Peek follows it there ("Delivery with NZ Post"). A parcel posted abroad isn't switched over to NZ Post; Peek follows it through the sending post and tracking services.
+It checks every 10 minutes from 8am to 10pm Swiss time, about 8pm to 10am in New Zealand (6pm to 8am in winter), every 2 minutes in those hours once the parcel is with the courier, and hourly the rest of the time, so most of a delivery day is checked hourly. It can notify you at every scan, at important steps or on delivery day only. When Aramex New Zealand passes a rural parcel to NZ Post, Peek follows it there ("Delivery with NZ Post"). A parcel posted abroad isn't switched over to NZ Post; Peek follows it through the sending post and tracking services.
 
 ## Questions about NZ Post tracking
 

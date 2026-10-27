@@ -3,7 +3,7 @@ title: GOFO Express tracking: statuses, photos and support
 description: Track a GOFO Express parcel in the US: what a GOFO tracking number looks like, what the statuses mean, missed deliveries, delivery photos and how to reach support.
 slug: gofo-express-tracking
 published: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-27
 ---
 
 GOFO Express (Gofo Inc.) is a US last-mile carrier that delivers online orders for shops and marketplaces; it says it covers 47 states and more than 12,000 ZIP codes. Track a parcel on [gofo.com/us/track](https://www.gofo.com/us/track) or paste its number in the box above. The number comes from the shop that shipped your order, in its shipping email or on your order page.
@@ -79,7 +79,7 @@ The +1 (626) 505-1101 line is for sellers and warehouses booking pickups, not fo
 
 [Peek](/) names GOFO Express at once for a `GFUS` number, typed with or without spaces. For `GF` and `CR` numbers it can't ask GOFO, so it names GOFO only if a tracking service does; otherwise pick GOFO Express with "Change", or paste a GOFO US tracking link (gofo.com/us or gofoexpress.com) with `searchID=` and the number in it.
 
-Peek reads GOFO's US tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight. It shows the status, each scan with its town and state on a map, the exact time of each scan, the delivery time, the service name and the destination. Delivered scans appear as "Delivered" in Peek's own words, without GOFO's support line; other scans show as GOFO writes them. Peek shows no expected delivery day and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
+Peek reads GOFO's US tracking every 10 minutes from 8 am to 10 pm Swiss time (about 2 am to 4 pm Eastern, 11 pm to 1 pm Pacific), every 2 minutes in those hours once the parcel is out for delivery, and hourly the rest of the time. It shows the status, each scan with its town and state on a map, the exact time of each scan, the delivery time, the service name and the destination. Delivered scans appear as "Delivered" in Peek's own words, without GOFO's support line; other scans show as GOFO writes them. Peek shows no expected delivery day and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 

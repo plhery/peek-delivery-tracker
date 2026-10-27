@@ -3,7 +3,7 @@ title: Australia Post tracking: numbers, statuses and lockers
 description: Track an Australia Post parcel: where the tracking number is, what each status means, Post Office and Parcel Locker pickup, late parcels and contacts.
 slug: australia-post-tracking
 published: 2026-10-15
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Australia Post is Australia's national postal service. Track a parcel on [auspost.com.au/mypost/track](https://auspost.com.au/mypost/track), in the AusPost app or by pasting the number in the box above, no account needed. The number comes from the sender: the shop's order confirmation, an email from Australia Post or your Post Office receipt.
@@ -92,7 +92,7 @@ If Australia Post refuses Peek's plain request, a browser on Peek's server opens
 
 Peek shows the status, each scan with its place on a map, the service, the time of delivery, the destination country and the name of the Post Office or Parcel Locker holding the parcel. Statuses stay in Australia Post's English; delivered ones read "Delivered". Peek drops the recipient, the address and delivery photos, and shows no expected delivery date. It can't redirect a parcel or change a locker, and it doesn't track StarTrack.
 
-It checks every 10 minutes by day, every 2 minutes once out for delivery, and hourly overnight, and can notify you at every scan, at important steps or on delivery day only. A parcel posted abroad with a postal number bound for Australia can be followed on Australia Post once Australia Post shows progress.
+It checks every 10 minutes from 8am to 10pm Swiss time, about 6pm to 8am in Sydney (4pm to 6am in winter; Perth's clocks are 2 to 3 hours behind Sydney's), every 2 minutes in those hours once out for delivery, and hourly the rest of the time, so most of a delivery day is checked hourly. It can notify you at every scan, at important steps or on delivery day only. A parcel posted abroad with a postal number bound for Australia can be followed on Australia Post once Australia Post shows progress.
 
 ## Questions about Australia Post tracking
 

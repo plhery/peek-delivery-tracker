@@ -1806,6 +1806,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#13a58f"
     },
     {
+      "id": "canpar",
+      "catalog": "canpar",
+      "slug": "canpar-suivi",
+      "title": "Canpar suivi\u00a0: numéro, avis de livraison et SMARTSpot",
+      "name": "Canpar",
+      "color": "#003b70"
+    },
+    {
+      "id": "uniuni",
+      "catalog": "uniuni",
+      "slug": "uniuni-suivi-colis",
+      "title": "UniUni suivi colis\u00a0: statuts, livraison et contact",
+      "name": "UniUni",
+      "color": "#f68841"
+    },
+    {
       "id": "juxi-express",
       "catalog": "juxi-express",
       "slug": "juxi-express-suivi",

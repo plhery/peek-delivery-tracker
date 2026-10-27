@@ -3,7 +3,7 @@ title: Correios Brazil tracking: codes, statuses and customs
 description: Track a Correios parcel to or from Brazil: what BR codes look like, what the Portuguese statuses mean, import taxes, Minhas Importações and contacts.
 slug: correios-brazil-tracking
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 Correios (Empresa Brasileira de Correios e Telégrafos) is Brazil's post. A parcel sent from Brazil keeps its Correios code all the way, and the post of the country it's going to delivers it. A parcel bought abroad keeps the sending post's code, and Correios delivers it in Brazil. Track it on [Correios' tracker](https://rastreamento.correios.com.br/app/index.php), which takes up to 20 codes or a CPF or CNPJ and asks you to type the text from an image, or paste the code in the box above.
@@ -104,7 +104,7 @@ Peek fetches Correios' history and shows the status, each scan with its town and
 
 Correios doesn't tell Peek where a parcel is going, so outside Brazil Peek also asks your national post (USPS, Royal Mail, Canada Post, An Post or Australia Post, for example) with the same code and switches once it shows newer scans, keeping Correios' history. A parcel coming into Brazil under another post's code is followed on that post; Peek also asks Correios once that post names Brazil as the destination (or, if it names none, when you're in Brazil).
 
-Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight. It can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact Correios, pay taxes or file a claim for you.
+Peek checks every 10 minutes from 8:00 to 22:00 Swiss time (about 4:00 to 18:00 Brasília time), every 2 in those hours once the parcel is out for delivery, and hourly the rest of the time. It can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact Correios, pay taxes or file a claim for you.
 
 ## Questions about Correios Brazil tracking
 

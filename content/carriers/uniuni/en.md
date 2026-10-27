@@ -3,10 +3,10 @@ title: UniUni tracking: statuses, missed deliveries and contact
 description: Track a UniUni parcel in Canada or the US: what the tracking number looks like, what UniUni's statuses mean, missed deliveries, photos and how to reach support.
 slug: uniuni-tracking
 published: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-27
 ---
 
-UniUni (Uni Express Inc., based in Richmond, B.C.) is a last-mile delivery company that brings online orders to the door in Canada and the United States, for shops such as Shein, Temu and AliExpress. Track a parcel on [uniuni.com/tracking](https://www.uniuni.com/tracking/) or paste its number in the box above. The number comes from the shop or marketplace you ordered from, which hands the labelled parcel to UniUni for the final stretch.
+UniUni (Uni Express Inc., based in Richmond, B.C.) is a last-mile delivery company that brings online orders to the door in Canada and the United States, for shops such as Shein and Temu. Track a parcel on [uniuni.com/tracking](https://www.uniuni.com/tracking/) or paste its number in the box above. The number comes from the shop or marketplace you ordered from, which hands the labelled parcel to UniUni for the final stretch.
 
 ## UniUni tracking number: format and where to find it
 
@@ -14,20 +14,21 @@ Parcels reach UniUni already labelled by the seller, so the number is in your or
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `UUS1234567890ABCDEF` | UUS followed by 16 letters and digits |
-| `UUSC123456789012` | UUSC followed by 12 digits |
-| `4C123456789US` | 4C, 9 digits, then US |
-| `U123456789012345` | U followed by 15 digits |
-| `AB12CAA0X123456789` | 2 letters, 2 digits, CAA0, a letter and 9 digits |
-| `UR12345678901234567` | UR and 17 digits (or URB and 16), from UniUni's seller platform |
+| `UUS0000000000000000` | UUS followed by 16 letters and digits |
+| `UUSC000000000000` | UUSC followed by 12 digits |
+| `4C000000000US` | 4C, 9 digits, then US |
+| `U000000000000000` | U followed by 15 digits |
+| `AA00CAA0U000000000` | 2 letters, 2 digits, CAA0, a letter and 9 digits |
+| `JY00CA00A000000000` | JY, 2 digits, CA, 2 digits, A and 9 digits |
+| `UR00000000000000000` | UR and 17 digits, from UniUni's seller platform |
 
-A reference starting with `UNI` is an order number, not the tracking number: track the other one. UniUni's tracker takes up to 25 numbers at once, separated by commas.
+A reference starting with `UNI` is an order number, and `URB` with 16 digits a batch ID: neither is the parcel's tracking number. UniUni's tracker takes up to 25 numbers at once, separated by commas.
 
 These shapes don't overlap with USPS, [GOFO](carrier:gofo) or [SpeedX](carrier:speedx) numbers.
 
 ## What UniUni's tracking statuses mean
 
-UniUni writes its history in English only; its French page translates the page's labels, not the scan lines. These are the lines a parcel usually meets, in order.
+These are the lines a parcel usually meets on UniUni's English tracking page, in order.
 
 | UniUni's status | What it means for you |
 | --- | --- |
@@ -57,9 +58,9 @@ UniUni tells shippers it delivers from next day up to 7 days. An estimated deliv
 
 **Picking it up.** UniUni offers pickup only in Canada, in a few cities such as Montreal, Toronto and North York. Elsewhere, ask for a new delivery instead.
 
-**Delivery PIN.** In Canada, a seller can require a PIN, sent to you by email or text. Without it, the attempt fails and the parcel goes on a later route.
+**Delivery PIN.** In Canada, the sender can require a PIN, sent to you by email or text. Without it, the attempt fails and the parcel goes on a later route.
 
-**Proof of delivery.** Drivers take three photos at drop-off. To see them, track the parcel on uniuni.com, choose `View Delivery Confirmation` and enter the postal or ZIP code of the delivery address.
+**Proof of delivery.** Drivers take photos at drop-off. To see them, track the parcel on uniuni.com, choose `View Delivery Confirmation` and enter the postal or ZIP code of the delivery address.
 
 ## UniUni package not moving, not delivered or damaged
 
@@ -84,11 +85,11 @@ The tracking result also shows a number to call for that parcel.
 
 ## Tracking UniUni parcels with Peek
 
-[Peek](/) names UniUni at once for numbers starting `UUS`, `UUSC`, `4C` (ending `US`) and `U9999`. For other numbers that are U and 15 digits, or the CAA0 shape, it asks UniUni and names it when UniUni knows the number. It doesn't recognise the `UR` and `URB` IDs: choose UniUni with "Change". A uniuni.com tracking link with the number in it works too. A master number for a multi-piece shipment can't be tracked as one: add each parcel's own number.
+[Peek](/) names UniUni at once for numbers starting `UUS`, `UUSC`, `4C` (ending `US`) and `U9999`, and for the CAA0 shape with a U after `CAA0`. For other numbers that are U and 15 digits, other CAA0 numbers and the JY shape, it asks UniUni and names it when UniUni knows the number. It doesn't recognise `UR` IDs: choose UniUni with "Change". A uniuni.com tracking link with the number in it works too. A master number for a multi-piece shipment can't be tracked as one: add each parcel's own number.
 
 Peek reads UniUni's tracking and shows the status, each scan with its town and province or state on a map, the expected day or time window, the delivery time and the destination country. It leaves out addresses, driver names and the delivery photos, so look at the photos on UniUni's page. `Delivered` and `Out for delivery` appear in Peek's own words; other lines show as UniUni writes them, without the reason in brackets.
 
-When UniUni hands a parcel to another courier, that courier's scans show up inside UniUni's history, but Peek doesn't follow the other courier's number. Parcels sent with [SpeedPAK](carrier:speedpak) or [DHL eCommerce](carrier:dhl-ecommerce) can name UniUni for the last mile, and Peek can then follow them on UniUni. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you when the status changes.
+When UniUni hands a parcel to another courier, that courier's scans show up inside UniUni's history, but Peek doesn't follow the other courier's number. Parcels sent with [SpeedPAK](carrier:speedpak) or [DHL eCommerce](carrier:dhl-ecommerce) can name UniUni for the last mile, and Peek can then follow them on UniUni. Peek checks every 10 minutes from 8am to 10pm Swiss time (about 2am to 4pm ET, 11pm to 1pm PT), every 2 minutes in those hours once the parcel is out for delivery, and hourly the rest of the time, and can notify you when the status changes.
 
 ## Questions about UniUni tracking
 
@@ -102,7 +103,7 @@ After a second failed attempt, UniUni keeps the parcel in its warehouse for 30 d
 
 ### Is UniUni legit?
 
-Yes. UniUni is run by Uni Express Inc., a delivery company based in Richmond, British Columbia, that delivers for Shein, Temu and AliExpress among others.
+Yes. UniUni is run by Uni Express Inc., a delivery company based in Richmond, British Columbia, that delivers for Shein and Temu among others.
 
 ### Why does my UniUni tracking show no updates?
 
@@ -112,12 +113,11 @@ Usually the seller hasn't given UniUni the parcel yet. UniUni's estimated date a
 - [UniUni: Package Tracking](https://www.uniuni.com/tracking/) – tracking, 25 numbers, estimated date, no updates, attempts, delivery photos
 - [UniUni: Customer Support](https://www.uniuni.com/support/) – chatbot, second attempt, storage for 30 days, PO boxes, pickup cities, address changes, damage, delivered but not received
 - [UniUni: Home](https://www.uniuni.com/) – last-mile delivery, Canada and US coverage, phone numbers and hours, proof photos
-- [UniUni: Shipping & Last Mile Delivery Services](https://www.uniuni.com/shipping-last-mile-delivery-services/) – next day to 7 days, three photos
-- [UniUni: FAQ (French)](https://www.uniuni.com/fr/faqs-fr/) – misrouted parcels, Canada Post and USPS
-- [UniUni: Suivi](https://www.uniuni.com/fr/suivi/) – French tracking page, English scan lines
-- [UniUni Platform: Tracking API](https://help.ship.uniuni.com/en/api/endpoints/tracking/track) – UR and URB tracking IDs, order numbers
+- [UniUni: Shipping & Last Mile Delivery Services](https://www.uniuni.com/shipping-last-mile-delivery-services/) – next day to 7 days, proof photos
+- [UniUni: FAQ (French)](https://www.uniuni.com/fr/faqs-fr/) – Shein and Temu, misrouted parcels, Canada Post and USPS
+- [UniUni Platform: Tracking API](https://help.ship.uniuni.com/en/api/endpoints/tracking/track) – UR tracking IDs, URB batch IDs, order numbers
 - [UniUni Platform: Delivery Verification](https://help.ship.uniuni.com/en/shipments/canada/delivery-verification) – delivery PIN in Canada
 - [UniUni Platform: Filing a Claim](https://help.ship.uniuni.com/en/services/add-on/filing-a-claim) – claims for shippers with parcel protection
-- [The Globe and Mail: Last-mile e-commerce delivery giant UniUni raises US$70-million](https://www.theglobeandmail.com/business/article-last-mile-e-commerce-delivery-giant-uniuni-raises-us70-million) – Uni Express Inc., Richmond B.C., Shein, Temu and AliExpress
+- [UniUni: Termes et conditions](https://www.uniuni.com/fr/termes-et-conditions/) – Uni Express Inc., Richmond B.C.
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from UniUni
 :::

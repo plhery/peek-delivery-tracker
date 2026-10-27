@@ -3,7 +3,7 @@ title: SF Express tracking: waybill numbers, statuses and delivery
 description: Track an SF Express parcel: the 12-digit or SF waybill number, what SF's status words mean, how SF International delivers abroad and who to call.
 slug: sf-express-tracking
 published: 2026-10-23
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 SF Express (顺丰, SF) is a Chinese logistics company founded in 1993 and based in Shenzhen. Its cross-border arm, SF International, ships abroad for businesses, online sellers and private customers. Each of SF's regional sites has a tracker: [sf-express.com](https://www.sf-express.com/chn/en) for mainland China, [hk.sf-express.com](https://hk.sf-express.com/hk/en) for Hong Kong and [htm.sf-express.com](https://htm.sf-express.com/tw/en/dynamic_function/waybill/) for Taiwan. Or paste the number in the box above.
@@ -96,7 +96,7 @@ Have the waybill number ready. For the order itself, ask the seller.
 
 Peek reads the English tracking of SF's Taiwan site: the status and the history in SF's words, with delivered lines as "Delivered" and SF's labels as "Cancelled", "Forwarded", "Returned to sender", "Held" or "Lost". It reads SF's times on China's clock and shows each scan in your device's time zone, not China's. There's no expected delivery date or proof of delivery, and Peek follows the SF number to the end, not a local partner's.
 
-It checks every 10 minutes by day, every 5 once the parcel is out for delivery, and hourly overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact SF or the seller for you.
+It checks every 10 minutes from 08:00 to 22:00 Swiss time (about 02:00 to 16:00 in New York, evening to morning in Sydney), every 5 in those hours once the parcel is out for delivery, and hourly the rest of the time, and can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact SF or the seller for you.
 
 ## Questions about SF Express tracking
 

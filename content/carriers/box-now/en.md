@@ -3,14 +3,14 @@ title: BOX NOW tracking: lockers, PIN codes and statuses
 description: Track a BOX NOW parcel in Greece, Cyprus, Bulgaria or Croatia: the 10-digit parcel ID, what the statuses mean, locker PINs, pickup times and contacts.
 slug: box-now-tracking
 published: 2026-10-12
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
-BOX NOW is a parcel service that delivers only to its own lockers, open 24/7, in Greece, Cyprus, Bulgaria and Croatia. Track your parcel with its 10-digit parcel ID on the "Track your parcel" page of BOX NOW's site for your country, in the BOX NOW app, or in the box above. The number is in the email and the SMS or Viber message you get when the shop books your parcel.
+BOX NOW is a parcel service that delivers only to its own lockers, open 24/7, in Greece, Cyprus, Bulgaria and Croatia. In Slovenia it runs lockers too, but there the shop can also have the parcel brought to your address, handed over against a signature. Track your parcel with its 10-digit parcel ID on the "Track your parcel" page of BOX NOW's site for your country, in the BOX NOW app, or in the box above. The number is in the email and the SMS or Viber message you get when the shop books your parcel.
 
 ## Where to find your BOX NOW tracking number
 
-BOX NOW's help pages in all four countries point to the email and the SMS or Viber message you received. Its tracking pages ask for the number alone, no postcode. The Greek contact page calls it the "voucher ID".
+BOX NOW's help pages in all five countries point to the email and the SMS or Viber message you received. Its tracking pages ask for the number alone, no postcode. The Greek contact page calls it the "voucher ID".
 
 | Shape (invented) | What it is |
 | --- | --- |
@@ -54,6 +54,7 @@ While the parcel waits, the tracking page shows a "Last pick up time" and two bu
 - **Cyprus:** at least 24 hours on the English FAQ, extendable by 24.
 - **Bulgaria:** 48 hours, extendable free by another 48, on the FAQ; the terms give 72 hours, plus up to 48 on request to BOX NOW.
 - **Croatia:** 96 hours.
+- **Slovenia:** 48 hours, on both the FAQ and the terms.
 
 Trust the "Last pick up time" on the tracking page. A parcel not picked up goes back to BOX NOW and is returned to the sender.
 
@@ -61,7 +62,7 @@ Trust the "Last pick up time" on the tracking page. A parcel not picked up goes 
 
 **Cash on delivery.** Lockers take no cash. You pay online through the link BOX NOW sends by email or SMS, and the tracking page shows a "PAY" button.
 
-**Returns.** Drop the parcel at any BOX NOW locker, with BOX NOW's own returns form, offered for selected partner shops (Bulgaria, Croatia), or BOX NOW Returns (Greece).
+**Returns.** Drop the parcel at any BOX NOW locker, with BOX NOW's own returns form, offered for selected partner shops (Bulgaria, Croatia, Slovenia), or BOX NOW Returns (Greece).
 
 ## BOX NOW parcel missing, late or damaged
 
@@ -71,7 +72,7 @@ Trust the "Last pick up time" on the tracking page. A parcel not picked up goes 
 
 **Damaged or wrong parcel (Greece).** Email dema@boxnow.gr with your name, phone number, voucher ID and photos of the parcel. In Croatia, BOX NOW's terms want damage reported within 4 hours of opening the locker.
 
-**Lost or very late.** In Greece and Cyprus BOX NOW's terms pay compensation to the sender, who holds the contract (for an online order, the shop), so ask the shop for a refund and report the problem to BOX NOW. Bulgaria's terms let the recipient claim too, in writing to support@boxnow.bg. BOX NOW's terms in Greece and Bulgaria allow claims within 6 months, and BOX NOW Cyprus's user agreement within 2 months; in Greece a delay beyond 15 working days counts as a loss. Croatia's terms give 3 months for domestic parcels and 6 for international ones, to podrska@boxnow.hr.
+**Lost or very late.** In Greece and Cyprus BOX NOW's terms pay compensation to the sender, who holds the contract (for an online order, the shop), so ask the shop for a refund and report the problem to BOX NOW. Bulgaria's terms let the recipient claim too, in writing to support@boxnow.bg. BOX NOW's terms in Greece and Bulgaria allow claims within 6 months, and BOX NOW Cyprus's user agreement within 2 months; in Greece a delay beyond 15 working days counts as a loss. Croatia's terms give 3 months for domestic parcels and 6 for international ones, to podrska@boxnow.hr; Slovenia's the same, in writing to info@boxnow.si.
 
 ## BOX NOW contact number and customer service
 
@@ -81,6 +82,7 @@ As listed on BOX NOW's English sites on 12 October 2026:
 - **Cyprus:** Call Center +357 240 42000, Monday to Friday 8:00 to 20:00, Saturday 10:00 to 18:00. Parcel problems: dema@boxnow.cy, or the contact form.
 - **Bulgaria:** Call Center 0700 70 774 (+359 700 70 774), Monday to Friday 08:00 to 21:00, Saturday 09:00 to 20:00, Sunday 09:00 to 17:00. Email support@boxnow.bg, or the contact form's "Problem with parcel delivery".
 - **Croatia:** Call Center +385 1 7000 900, Monday to Friday 8:00 to 20:00, Saturday 8:00 to 14:00. Email podrska@boxnow.hr, or the contact form.
+- **Slovenia** (boxnow.si, 27 October 2026): Call Center +386 1 330 6111, Monday to Friday 8:00 to 20:00, Saturday 8:00 to 14:00. Email podpora@boxnow.si, or the contact form.
 
 None of the sites says what a call costs.
 
@@ -96,7 +98,7 @@ Peek's wordings may differ from BOX NOW's site: ready for pickup reads `Parcel h
 
 ### How long does BOX NOW take to deliver?
 
-In Greece, 1 business day on the mainland and 2 to the islands once BOX NOW has the parcel; in Cyprus 1 working day. BOX NOW Bulgaria's FAQ says the next day after the shop has processed your order (its English version also says within 24 hours). In Croatia the terms give 3 working days from the shop to your locker (5 from locker to locker); the FAQ says 5 working days in English, 5 days in Croatian, and the home page 48 hours after the shop has processed your order.
+In Greece, 1 business day on the mainland and 2 to the islands once BOX NOW has the parcel; in Cyprus 1 working day. BOX NOW Bulgaria's FAQ says the next day after the shop has processed your order (its English version also says within 24 hours). In Croatia the terms give 3 working days from the shop to your locker (5 from locker to locker); the FAQ says 5 working days in English, 5 days in Croatian, and the home page 48 hours after the shop has processed your order. In Slovenia the FAQ says 24 hours on working days once the shop hands the parcel over, the terms 2 to 3 working days.
 
 ### How does BOX NOW work?
 
@@ -129,5 +131,9 @@ No: the PIN comes by text message and the tracking page works without the app. B
 - [BOX NOW Croatia: Track your parcel](https://boxnow.hr/en/track) – Croatian site labels, "Being delivered"
 - [BOX NOW Croatia: Česta pitanja](https://boxnow.hr/faq) – 5 days, BOX NOW's returns form (Croatian)
 - [BOX NOW Croatia: Naslovna](https://boxnow.hr/) – 48 hours after the shop has processed the order (Croatian)
+- [BOX NOW Slovenia: Pogosta vprašanja](https://boxnow.si/faq) – 48 hours, 24 hours on working days, returns form (Slovenian)
+- [BOX NOW Slovenia: Splošni pogoji za opravljanje poštnih storitev](https://boxnow.si/pogoji-uporabe-storitev-posiljanja) – delivery to an address with a signature, 48 hours, 2 to 3 working days, complaints to info@ within 3 or 6 months (Slovenian)
+- [BOX NOW Slovenia: Kje lahko najdem svojo sledilno številko?](https://boxnow.si/my-tracking-number) – email and SMS or Viber (Slovenian)
+- [BOX NOW Slovenia: Kontakt](https://boxnow.si/get-in-touch) – call centre and hours, podpora@ (Slovenian)
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

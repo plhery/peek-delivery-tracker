@@ -3056,6 +3056,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Проследяване на пратка BOX NOW: номер, статуси и ПИН",
       "name": "BOX NOW",
       "color": "#44d62c"
+    },
+    {
+      "id": "sameday",
+      "catalog": "sameday",
+      "slug": "sameday-prosledyavane-na-pratka",
+      "title": "Проследяване на пратка Sameday: AWB, easybox и статуси",
+      "name": "Sameday",
+      "color": "#e92427"
     }
   ],
   "el": [
@@ -3119,6 +3127,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "sl": [
+    {
+      "id": "box-now",
+      "catalog": "box-now",
+      "slug": "box-now-sledenje-posiljke",
+      "title": "Sledenje pošiljke BOX NOW: paketomat, PIN-koda in statusi",
+      "name": "BOX NOW",
+      "color": "#44d62c"
+    },
     {
       "id": "posta-slovenije",
       "catalog": "posta-slovenije",

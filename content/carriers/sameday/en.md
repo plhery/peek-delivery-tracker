@@ -3,7 +3,7 @@ title: Sameday tracking: AWB, easybox and statuses explained
 description: Track a Sameday parcel in Romania or Bulgaria: where to find the AWB, what Sameday's statuses mean, easybox pickup times, missed deliveries and contacts.
 slug: sameday-tracking
 published: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-27
 ---
 
 Sameday is a Romanian courier, also in Bulgaria, with its own easybox parcel lockers. Track a parcel with its AWB, the number in Sameday's SMS, email and SAMEDAY App, under "Check AWB" on sameday.ro or sameday.bg, or by pasting it in the box above.
@@ -14,7 +14,7 @@ Sameday calls the tracking number the AWB: 5 to 50 letters and digits, in the SA
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `1ABC123456789` | An AWB: `1`, three to five letters and 9 to 11 digits. |
+| `1ABC123456789` | An AWB: `1`, three to five letters and 9 to 12 digits. |
 | `1ABC123456789001` | A parcel number: the AWB plus 3 digits. Track the AWB without them. |
 
 The SAMEDAY App lists every AWB linked to the phone number you registered with; orders placed with another number don't appear. Some 17-character AWBs look like [Colis Privé](carrier:colis-prive) numbers, and some 16-character ones like [Royal Mail](carrier:royal-mail)'s, so check which carrier the shop's email names.
@@ -45,7 +45,7 @@ Sameday's trackers open in Romanian, Hungarian or Bulgarian, with a switch to En
 
 **Door delivery in Bulgaria.** The delivery-day SMS gives the courier's number, and the courier calls first. Call them to change the time that day, or use the email's link for the next business day.
 
-**easybox.** Sameday counts more than 4,700 easyboxes in Romania and nearly 1,000 in Bulgaria. In Bulgaria the PIN comes only in the SAMEDAY App or the email sent when the parcel is loaded, never by SMS. Storage times are in the questions below; in the app you can extend storage, for a fee, by up to 7 days. When time runs out, the reminder email has a link valid for 12 hours to collect the parcel from a local agency; otherwise it goes back to the sender. PIN refused? Check you're at the easybox named in the email and haven't mixed up 0 and O or 1 and I.
+**easybox.** Sameday counts more than 4,700 easyboxes in Romania and, depending on the page, 800 to nearly 1,000 in Bulgaria. In Bulgaria the PIN comes only in the SAMEDAY App or the email sent when the parcel is loaded, never by SMS. Storage times are in the questions below; in the app you can extend storage, for a fee, by up to 7 days. When time runs out, the reminder email has a link valid for 12 hours to collect the parcel from a local agency; otherwise it goes back to the sender. PIN refused? Check you're at the easybox named in the email and haven't mixed up 0 and O or 1 and I.
 
 **SAMEDAY points** (partner shops, petrol stations and other businesses) keep a parcel 36 working hours in Romania and 48 in Bulgaria.
 
@@ -57,7 +57,7 @@ Sameday's Romanian terms promise domestic delivery within 5 working days of coll
 
 To cancel or return an order, Sameday points you to the shop. For a delay, damage or missing item, use the form on [sameday.ro/contact](https://sameday.ro/contact/) with your AWB.
 
-In Romania the sender or recipient can claim in writing within 6 calendar months of posting, by registered post, at Sameday's office or through that form. Sameday has 3 months to resolve it, and compensation goes to the sender unless they give it up to you. If the answer doesn't satisfy you or none comes within 3 months, complain to ANCOM, the regulator, within a year of posting. In Bulgaria, send a written claim within 6 months of Sameday accepting the parcel, to claims@sameday.bg, by post or in person.
+In Romania the sender or recipient can claim in writing within 6 calendar months of posting, by registered post, at Sameday's office or through that form. Sameday has 3 months to resolve it, and compensation goes to the sender unless they give it up to you. If the answer doesn't satisfy you or none comes within 3 months, complain to ANCOM, the regulator, within a year of posting. In Bulgaria, the sender or recipient can send a written claim within 6 months of Sameday accepting the parcel, to claims@sameday.bg, by post or in person. Sameday answers within 1 month (3 for international parcels); compensation goes to the sender unless they give it up to you, €7.67 for a lost or damaged parcel with no declared value. If the claim is rejected or unanswered, ask the CRC, the regulator, for its opinion.
 
 ## Sameday contact number and customer service
 
@@ -71,7 +71,7 @@ Sameday's channels:
 
 ## Tracking a Sameday parcel with Peek
 
-[Peek](/) recognises Sameday's AWB shape and asks Sameday's Romanian and Bulgarian networks, and its former Hungarian one, whether they know it: you'll see "Sameday has this parcel." or "Not found at Sameday yet". Some 16- and 17-character AWBs are also asked of Royal Mail or Colis Privé. A parcel number isn't offered to Sameday: pick "Sameday" with "Change", and Sameday answers with the AWB, which becomes the parcel's number. Links from sameday.ro, .hu or .bg aren't read, so paste the AWB.
+[Peek](/) recognises Sameday's AWB shape and asks Sameday's Romanian network, then its Bulgarian one, whether they know it: you'll see "Sameday has this parcel." or "Not found at Sameday yet". Some 17-character AWBs are also asked of Colis Privé; some 16-character ones are tried at Royal Mail only if Sameday doesn't confirm them. A parcel number is offered to Sameday when its AWB has 9 digits; otherwise pick "Sameday" with "Change". Either way Sameday answers with its AWB, shown as "Sameday tracks this as". Links from sameday.ro, .hu or .bg aren't read, so paste the AWB.
 
 Peek shows the status, the history with each scan's county and country on a map, and the delivery time, in Sameday's English wordings. There's no expected delivery day and no easybox or point name. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and hourly overnight, and can notify you of every scan, important steps or on delivery day only. It can't extend easybox storage or send you a PIN.
 
@@ -79,7 +79,7 @@ Peek shows the status, the history with each scan's county and country on a map,
 
 ### How long does a parcel stay in an easybox?
 
-In Romania, 36 hours if loaded Sunday to Thursday, 72 on Friday and 48 on Saturday. Bulgaria's easybox FAQ says 48 hours Monday to Thursday and 72 Friday to Sunday, though other Bulgarian pages differ. The app shows the time left.
+In Romania, 36 hours if loaded Sunday to Thursday, 72 on Friday and 48 on Saturday. Bulgaria's easybox FAQ says 48 hours Monday to Thursday and 72 Friday to Sunday, but Sameday's easybox terms say 36 hours from the notice, 24 at busy times such as Black Friday or Christmas. The app shows the time left.
 
 ### Is easybox Sameday?
 
@@ -106,9 +106,11 @@ In Bulgaria, written claims go to claims@sameday.bg. In Romania, Sameday uses th
 - [Sameday: FAQ easybox delivery (Bulgaria)](https://sameday.bg/frequent-questions/easybox-delivery/?lang=en) – 48 and 72 hours, extension
 - [Sameday: FAQ delivery to address (Bulgaria)](https://sameday.bg/frequent-questions/delivery-to-address/?lang=en) – delivery-day SMS, rescheduling
 - [Sameday: SAMEDAY point (Bulgaria)](https://sameday.bg/sameday-point/?lang=en) – 48 working hours
-- [Sameday: Общи условия](https://sameday.bg/terms-and-conditions-delivery-courier-services-bg/) – claims@sameday.bg, 6 months
+- [Sameday: Общи условия](https://sameday.bg/terms-and-conditions-delivery-courier-services-bg/) – claims@sameday.bg, 6 months, sender or recipient, €7.67, answer times, CRC
+- [Sameday: Доставка до easybox](https://sameday.bg/pravila-i-usloviya-za-predostavyane-na-n/) – easybox terms: 36 hours, 24 at busy times
 - [Sameday: Често задавани въпроси](https://sameday.bg/frequent-questions/) – 72-hour locker figure
 - [Sameday: Home (Bulgaria)](https://sameday.bg/) – nearly 1,000 easyboxes
+- [Sameday: Sameday App (Bulgaria)](https://sameday.bg/sameday-app/) – 800 easyboxes
 - [Sameday: Home (Hungary)](https://sameday.hu/) – closure from 23 July 2026
 - [Sameday: Contact (Hungary)](https://sameday.hu/contact/?lang=en) – form only
 - [Sameday: Tracker script](https://sameday.hu/app/themes/samedaytwo/public/js/modules/awb/tracker.js) – status titles and sentences

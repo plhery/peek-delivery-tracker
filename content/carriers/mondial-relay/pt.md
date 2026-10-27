@@ -3,7 +3,7 @@ title: Mondial Relay rastreio: estados, InPost e levantamento
 description: Rastreio Mondial Relay em Portugal, agora InPost: onde está o número, o que quer dizer cada estado em francês, quanto tempo espera no Ponto Pack e quem contactar.
 slug: mondial-relay-rastreio
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 A Mondial Relay é uma transportadora francesa do grupo InPost que entrega em pontos de levantamento, em Lockers (cacifos) e em casa; em Portugal, a InPost ficou com ela em 2021 e o mondialrelay.pt leva agora ao inpost.pt. Para rastrear a encomenda, escreve o número na página [Rastrear Encomenda da InPost](https://www.inpost.pt/seguimento-do-envio/), que só pede o número, ou cola-o na caixa acima. O número vem no e-mail de confirmação do remetente e, na etiqueta da Mondial Relay, é o «n° d'expédition» de 8 algarismos.
@@ -78,7 +78,7 @@ Tal como os sites os indicavam a 10 de outubro de 2026:
 
 O [Peek](/) reconhece logo o código de barras de 26 algarismos, mesmo com espaços. Com 8, 10 ou 12 algarismos, pode não dizer sozinho que é da Mondial Relay: outras transportadoras usam esses comprimentos, e o Peek não consegue perguntar à Mondial Relay se conhece um número. Carrega então em «Alterar» e escolhe Mondial Relay, ou cola uma ligação de seguimento do mondialrelay.fr, .be, .nl ou .com; as dos sites .es e .pt não são lidas.
 
-Um número de 8 algarismos pede também o «Código postal de entrega»: escreve só o número e depois o código postal no campo próprio. Só foram testados códigos postais franceses, e um código errado faz a encomenda parecer não encontrada. O código vai para a Mondial Relay e, quando é preciso, para serviços de seguimento. Um número de 8 algarismos da InPost em Portugal aparece com a Mondial Relay como hipótese, nunca com a InPost, e não está confirmado que o seguimento da Mondial Relay o encontre: nesse caso, segue-o no inpost.pt.
+Um número de 8 algarismos pede também o «Código postal de entrega»: escreve só o número e depois o código postal no campo próprio. Só foram testados códigos postais franceses e portugueses, e um português tem de levar os sete algarismos (1234-567, com ou sem hífen). Um código errado faz a encomenda parecer não encontrada. O código vai para a Mondial Relay e, quando é preciso, para serviços de seguimento. Um número de 8 algarismos da InPost em Portugal aparece com a Mondial Relay como hipótese, nunca com a InPost, e não está confirmado que o seguimento da Mondial Relay o encontre: nesse caso, segue-o no inpost.pt.
 
 O Peek mostra as frases francesas tal como estão, o centro logístico de cada leitura num mapa e, quando a Mondial Relay os dá, o dia de entrega previsto, a hora a que foi entregue e o país de destino. Enquanto a encomenda espera, mostra o nome e a morada do ponto ou Locker, nunca o horário nem o teu código de levantamento. Lê as horas como hora de Paris, verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora à noite, e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só no dia da entrega». A Mondial Relay reutiliza números, por isso um número antigo pode mostrar uma encomenda mais recente. O Peek não segue a encomenda noutra transportadora.
 

@@ -12,26 +12,25 @@ import java.util.concurrent.ConcurrentHashMap
 
 /**
  * The ICU services Foundation reads host names and sorts with, which a JVM has its own version of. A phone has
- * ICU (android.icu); a plain JVM has java.net.IDN, which is IDNA 2003, not UTS #46, and java.text.Collator,
- * which passes over spaces and punctuation. The tests install ICU4J here, so they see what a phone does. Characters
- * are Swift's own, not ICU's (GraphemeBreaking.kt).
+ * ICU (android.icu). A JVM with ICU4J (com.ibm.icu) on its class path, as the tests have, uses that, so they see what a
+ * phone does whichever ran first; a plain JVM has java.net.IDN, which is IDNA 2003, not UTS #46, and
+ * java.text.Collator, which passes over spaces and punctuation. Characters are Swift's own, not ICU's
+ * (GraphemeBreaking.kt).
  */
 object Icu {
+    private val packages = listOf("android.icu", "com.ibm.icu")
+
     /** UTS #46 host names, as Foundation's URL parser converts them. */
-    @Volatile
-    var hostNames: HostNameConverter = IcuHostNames.from("android.icu.text") ?: JdkHostNames
+    val hostNames: HostNameConverter = packages.firstNotNullOfOrNull { IcuHostNames.from("$it.text") } ?: JdkHostNames
 
     /** Collation, which Foundation's localized comparisons run on. */
-    @Volatile
-    var collators: CollatorFactory = IcuCollators.from("android.icu.text") ?: JdkCollators
+    val collators: CollatorFactory = packages.firstNotNullOfOrNull { IcuCollators.from("$it.text") } ?: JdkCollators
 
     /** Amounts of money, which Foundation's currency format style writes with ICU. */
-    @Volatile
-    var currencies: CurrencyFormatter = IcuCurrencies.from("android.icu") ?: JdkCurrencies
+    val currencies: CurrencyFormatter = packages.firstNotNullOfOrNull { IcuCurrencies.from(it) } ?: JdkCurrencies
 
     /** Distances, which Foundation's measurement format style writes with ICU. */
-    @Volatile
-    var lengths: LengthFormatter = IcuLengths.from("android.icu") ?: JdkLengths
+    val lengths: LengthFormatter = packages.firstNotNullOfOrNull { IcuLengths.from(it) } ?: JdkLengths
 }
 
 /** ICU's UTS #46 processing (`IDNA.nameToASCII`, `nameToUnicode`): the converted name and the `IDNA.Error`s met, by name. */

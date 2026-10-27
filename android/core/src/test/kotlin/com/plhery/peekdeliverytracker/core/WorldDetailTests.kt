@@ -26,7 +26,6 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
-import org.junit.BeforeClass
 import org.junit.Test
 
 private fun city(name: String, country: String, longitude: Double, latitude: Double): RoutePlace =
@@ -53,10 +52,6 @@ class WorldDetailTests {
         private val atlas: WorldAtlas by lazy { WorldAtlas(SharedResources.open("World.json").use { it.readBytes() }) }
 
         private fun pack(): WorldDetailPack = WorldDetailPack(SharedResources.open("WorldDetail.pack").use { it.readBytes() })
-
-        @JvmStatic
-        @BeforeClass
-        fun installIcu() = TestIcu.install()
     }
 
     /** The towns a close-up names for bearings. */

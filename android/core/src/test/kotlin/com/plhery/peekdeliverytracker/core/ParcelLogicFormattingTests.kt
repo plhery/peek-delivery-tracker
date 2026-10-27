@@ -13,17 +13,10 @@ import java.time.format.DateTimeFormatter
 import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
-import org.junit.BeforeClass
 import org.junit.Test
 
 /** ParcelLogicTests.swift: how the localizer writes a parcel's dates, estimates and charges. */
 class ParcelLogicFormattingTests {
-    companion object {
-        @JvmStatic
-        @BeforeClass
-        fun installIcu() = TestIcu.install()
-    }
-
     @Test
     fun estimatesKeepTodayAndWindowsWhileOutForDeliveryAndHideObsoleteDates() {
         val id = UUID.randomUUID()

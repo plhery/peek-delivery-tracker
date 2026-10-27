@@ -54,8 +54,8 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
-    // A phone sorts and reads host names with ICU (android.icu), as iOS does; the JDK's own differ. The tests
-    // install ICU4J so they see what a phone does.
+    // A phone sorts and reads host names with ICU (android.icu), as iOS does; the JDK's own differ. With ICU4J on
+    // the tests' class path, `Icu` takes it, so they see what a phone does.
     testImplementation(libs.icu4j)
 }
 

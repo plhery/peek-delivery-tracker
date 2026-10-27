@@ -5,7 +5,6 @@ import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.BeforeClass
 import org.junit.Test
 import java.util.Locale
 
@@ -14,12 +13,6 @@ import java.util.Locale
  * output of CarrierCatalog.swift run on iOS 27's Foundation.
  */
 class CarrierCatalogParityTests {
-    companion object {
-        @JvmStatic
-        @BeforeClass
-        fun installIcu() = TestIcu.install()
-    }
-
     private val catalog = CarrierCatalog(cacheFile = null)
 
     private fun assertLink(expected: TrackingInputMatch, input: String) {

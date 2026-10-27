@@ -7,7 +7,6 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.BeforeClass
 import org.junit.Test
 
 /**
@@ -17,10 +16,6 @@ import org.junit.Test
  */
 class AppRoutingTests {
     companion object {
-        @JvmStatic
-        @BeforeClass
-        fun installIcu() = TestIcu.install()
-
         /** `AppConfiguration.current.apiBaseURL` and `.linkHosts` in the iPhone app's tests. */
         private const val currentBase = "https://peektracker.com"
         private val currentLinkHosts = listOf("delivery.plhery.com")

@@ -15,7 +15,6 @@ import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.BeforeClass
 import org.junit.Test
 
 private fun city(name: String, country: String, longitude: Double, latitude: Double): RoutePlace =
@@ -62,10 +61,6 @@ private val eightieths = (0..80).map { it * (1.0 / 80) }
 class ParcelRouteTests {
     companion object {
         val atlas: WorldAtlas by lazy { WorldAtlas(SharedResources.open("World.json").use { it.readBytes() }) }
-
-        @JvmStatic
-        @BeforeClass
-        fun installIcu() = TestIcu.install()
     }
 
     @Test

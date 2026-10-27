@@ -38,16 +38,9 @@ import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.BeforeClass
 import org.junit.Test
 
 class CarrierCatalogTests {
-    companion object {
-        @JvmStatic
-        @BeforeClass
-        fun installIcu() = TestIcu.install()
-    }
-
     // Exercise the bundled rules without inheriting a previously cached live catalog.
     private val catalog = CarrierCatalog(cacheFile = null)
 

@@ -9,7 +9,7 @@ import java.time.Instant
 import java.time.ZoneId
 import java.util.UUID
 import org.junit.Assert.assertEquals
-import org.junit.BeforeClass
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
@@ -17,10 +17,13 @@ import org.junit.Test
  * expected value is the output of the Swift code run on iOS 27's Foundation.
  */
 class CoreParityTests {
-    companion object {
-        @JvmStatic
-        @BeforeClass
-        fun installIcu() = TestIcu.install()
+    /** With no android.icu on the JVM, `Icu` takes ICU4J, so each test class sees what a phone does, run alone or not. */
+    @Test
+    fun theTestsReadTextWithIcu4j() {
+        assertTrue(Icu.hostNames is IcuHostNames)
+        assertTrue(Icu.collators is IcuCollators)
+        assertTrue(Icu.currencies is IcuCurrencies)
+        assertTrue(Icu.lengths is IcuLengths)
     }
 
     @Test

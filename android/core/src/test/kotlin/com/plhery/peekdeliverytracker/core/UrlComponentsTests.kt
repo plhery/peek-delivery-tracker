@@ -2,17 +2,10 @@ package com.plhery.peekdeliverytracker.core
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
-import org.junit.BeforeClass
 import org.junit.Test
 
 /** What iOS 27's URLComponents(string:) makes of links people paste. Every expected value is Foundation's. */
 class UrlComponentsTests {
-    companion object {
-        @JvmStatic
-        @BeforeClass
-        fun installIcu() = TestIcu.install()
-    }
-
     private fun url(string: String) = UrlComponents.parse(string)?.url
 
     @Test

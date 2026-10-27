@@ -15,7 +15,6 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
@@ -23,13 +22,17 @@ import org.junit.Test
  * expected value is the output of the Swift code run on iOS 27's Foundation.
  */
 class CoreParityTests {
-    /** With no android.icu on the JVM, `Icu` takes ICU4J, so each test class sees what a phone does, run alone or not. */
+    /**
+     * With no android.icu on the JVM, `Icu` takes ICU4J, so each test class sees what a phone does, run alone or not.
+     * On a device it takes the phone's own, though the device tests (coredevice) carry ICU4J as well.
+     */
     @Test
-    fun theTestsReadTextWithIcu4j() {
-        assertTrue(Icu.hostNames is IcuHostNames)
-        assertTrue(Icu.collators is IcuCollators)
-        assertTrue(Icu.currencies is IcuCurrencies)
-        assertTrue(Icu.lengths is IcuLengths)
+    fun theTestsReadTextWithThePhonesIcuElseIcu4j() {
+        val icu = if (System.getProperty("java.vm.vendor").orEmpty().contains("Android")) "android.icu" else "com.ibm.icu"
+        assertEquals("$icu.text", (Icu.hostNames as? IcuHostNames)?.packageName)
+        assertEquals("$icu.text", (Icu.collators as? IcuCollators)?.packageName)
+        assertEquals(icu, (Icu.currencies as? IcuCurrencies)?.packageName)
+        assertEquals(icu, (Icu.lengths as? IcuLengths)?.packageName)
     }
 
     @Test

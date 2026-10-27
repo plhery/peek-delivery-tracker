@@ -7,7 +7,6 @@ import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
-import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.UUID
@@ -60,7 +59,8 @@ class ParcelLogicFormattingTests {
         val localizer = Localizer(AppLanguage.En)
         val id = UUID.randomUUID()
         val now = Instant.now()
-        val today = LocalDate.ofInstant(now, ZoneId.systemDefault()).toString()
+        // LocalDate.ofInstant is API 34; the device tests run from API 31.
+        val today = now.atZone(ZoneId.systemDefault()).toLocalDate().toString()
 
         // On its way: the estimate is a line of its own, and a gift only says when it arrives.
         var moving = makeParcel(id, events = listOf(event(id, TrackingStage.OutForDelivery, DateParser.isoString(now))))

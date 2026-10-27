@@ -1,0 +1,19 @@
+# Android app
+
+## Core tests on a device
+
+`./gradlew :core:test` runs the core's JUnit tests on the JVM, with ICU4J standing in for the phone's ICU.
+`:coredevice` builds the same tests (`core/src/test`) into an instrumented test APK, so they also run against a
+phone's own ICU, regular expressions, number parsing, normalizer and zone data. With an emulator or device connected:
+
+```sh
+./gradlew :coredevice:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.timeZone=Europe/Zurich
+```
+
+`timeZone` takes any zone ID, such as `UTC`; without it the tests run in the device's zone. To run one class, add
+`-Pandroid.testInstrumentationRunnerArguments.class=com.plhery.peekdeliverytracker.core.CoreParityTests`.
+
+The JUnit XML lands in `coredevice/build/outputs/androidTest-results/connected/debug/` and the HTML report in
+`coredevice/build/reports/androidTests/connected/debug/`; each run replaces the last.
+
+The tests run from Android 12 (API 31) up: `./gradlew :coredevice:lintDebug` fails on a test that calls a newer API.

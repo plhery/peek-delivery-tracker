@@ -42,7 +42,7 @@ fun interface HostNameConverter {
  * ICU's IDNA with Foundation's options, nontransitional and with the bidi and CONTEXTJ checks, found by name:
  * android.icu and ICU4J (com.ibm.icu) have the same API.
  */
-internal class IcuHostNames private constructor(packageName: String) : HostNameConverter {
+internal class IcuHostNames private constructor(val packageName: String) : HostNameConverter {
     private val idnaClass = Class.forName("$packageName.IDNA")
     private val infoClass = Class.forName("$packageName.IDNA\$Info")
     private val idna: Any = idnaClass.getMethod("getUTS46Instance", Int::class.javaPrimitiveType).invoke(
@@ -96,7 +96,7 @@ fun interface CollatorFactory {
 }
 
 /** ICU's `Collator`, found by name like `IcuHostNames`. A frozen collator can be shared between threads. */
-internal class IcuCollators private constructor(packageName: String) : CollatorFactory {
+internal class IcuCollators private constructor(val packageName: String) : CollatorFactory {
     private val collatorClass = Class.forName("$packageName.Collator")
     private val ruleBasedClass = Class.forName("$packageName.RuleBasedCollator")
     private val getInstance = collatorClass.getMethod("getInstance", Locale::class.java)
@@ -148,7 +148,7 @@ fun interface CurrencyFormatter {
 }
 
 /** ICU's `NumberFormatter` (android.icu.number, com.ibm.icu.number), found by name. */
-internal class IcuCurrencies private constructor(packageName: String) : CurrencyFormatter {
+internal class IcuCurrencies private constructor(val packageName: String) : CurrencyFormatter {
     private val localized = Class.forName("$packageName.number.LocalizedNumberFormatter")
     private val precisionClass = Class.forName("$packageName.number.Precision")
     private val withLocale = Class.forName("$packageName.number.NumberFormatter").getMethod("withLocale", Locale::class.java)
@@ -202,7 +202,7 @@ fun interface LengthFormatter {
 }
 
 /** ICU's `NumberFormatter` with the kilometre unit, found by name like `IcuCurrencies`. */
-internal class IcuLengths private constructor(packageName: String) : LengthFormatter {
+internal class IcuLengths private constructor(val packageName: String) : LengthFormatter {
     private val localized = Class.forName("$packageName.number.LocalizedNumberFormatter")
     private val precisionClass = Class.forName("$packageName.number.Precision")
     private val unitWidthClass = Class.forName("$packageName.number.NumberFormatter\$UnitWidth")

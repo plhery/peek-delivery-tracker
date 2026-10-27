@@ -4,18 +4,18 @@ description: Où trouver le numéro de suivi de ton retour chez Amazon, Zalando,
 slug: suivi-retour-colis
 picture: Un colis repart vers l'entrepôt d'une boutique, avec un reçu, et Pip lui fait au revoir de la main.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Ton retour a son propre numéro de suivi, différent de celui de ta commande. Il figure sur l'étiquette de retour ou sur la preuve de dépôt, et la boutique l'affiche dans ton compte. Elle te rembourse une fois que son centre de retours a reçu le colis et l'a contrôlé. En France et en Belgique, si tu te rétractes dans les 14 jours, la loi lui laisse 14 jours pour te rembourser. En France, elle peut attendre d'avoir le colis ou ta preuve d'envoi ; en Belgique, seulement si tu n'as pas utilisé sa méthode de retour, comme son étiquette. En Suisse, ce sont les règles de la boutique qui comptent.
 
 ## Mon retour a-t-il un numéro de suivi ?
 
-Oui, si tu passes par l'étiquette ou le code QR de la boutique. Le code QR n'est pas le numéro de suivi : c'est ce que le point de dépôt scanne pour imprimer l'étiquette. Pour un retour Amazon.fr, l'employé du point Mondial Relay imprime l'étiquette, et parfois emballe même l'article. Au bureau de poste, tu présentes le code-barres reçu par e-mail. Chez Zalando aussi, c'est le transporteur qui imprime l'étiquette. Le numéro apparaît ensuite sur l'étiquette, sur ta preuve de dépôt et dans ton compte.
+Oui, si tu passes par l'étiquette ou le code QR de la boutique. Le code QR n'est pas le numéro de suivi : c'est ce que le point de dépôt scanne pour imprimer l'étiquette. Pour un retour Amazon, quand l'option est proposée, tu apportes juste l'article et le code QR reçu par e-mail au bureau de poste : La Poste l'emballe, colle l'étiquette et l'expédie. Chez Zalando aussi, c'est le transporteur qui imprime l'étiquette. Le numéro apparaît ensuite sur l'étiquette, sur ta preuve de dépôt et dans ton compte.
 
 Garde la preuve de dépôt jusqu'au remboursement. À La Poste, le guichet te la remet avec la date de dépôt, la consigne Pickup l'envoie par e-mail ou SMS, et elle porte le numéro de suivi. La Poste la dit « indispensable pour toute demande auprès du Service Clients ». En Point Relais Mondial Relay, tu signes sur le terminal du commerçant, puis un e-mail « Prise en charge de votre colis » te sert de preuve de dépôt. Zalando te demande aussi de garder ton reçu de retour jusqu'au remboursement.
 
-Tu paies l'envoi toi-même ? Le retour n'est alors suivi que si tu choisis un envoi avec suivi. Chez Shein, ce « retour autonome » est à tes frais, et Shein ne les rembourse pas. Amazon.fr juge « indispensable » d'utiliser son étiquette de retour pour le suivi.
+Tu paies l'envoi toi-même ? Le retour n'est alors suivi que si tu choisis un envoi avec suivi. Chez Shein, ce « retour autonome » est à tes frais, et Shein ne les rembourse pas.
 
 :::journey
 - home | Toi | Tu emballes, colles l'étiquette ou gardes le code QR
@@ -27,18 +27,18 @@ Tu paies l'envoi toi-même ? Le retour n'est alors suivi que si tu choisis un en
 
 ## Où trouver le numéro de suivi du retour ?
 
-Dans ton compte chez la boutique et dans ses e-mails de retour. Tu vois le transporteur au moment où tu crées le retour ; voici ceux que citent les pages d'aide :
+Dans ton compte chez la boutique et dans ses e-mails de retour. Tu vois le transporteur au moment où tu crées le retour ; voici ceux que citent les boutiques et La Poste :
 
 | Boutique | Où est le retour | Transporteurs cités |
 | --- | --- | --- |
-| Amazon (amazon.fr, amazon.com.be) | Vos retours, 3 derniers mois, Afficher l'état du retour. Sur amazon.com.be : Vos commandes, Voir le statut du retour/remboursement | France : bureau de poste, point Mondial Relay, borne de retour Amazon dans certains Monoprix. Depuis la Belgique, la Suisse ou le Luxembourg : étiquette prépayée, sans transporteur précisé |
+| Amazon (amazon.fr) | Vos commandes, Retourner ou remplacer des articles. Tu suis ensuite le retour dans ton compte Amazon | France : près de 1 500 bureaux de poste et 1 900 relais Pickup, sans emballage ni étiquette quand l'option est proposée |
 | Zalando (France, Belgique, Suisse) | « Retours », dans ton compte, avec le code QR | France : La Poste (code valable 10 jours) ou Mondial Relay (30 jours). Ailleurs, affiché pendant le retour en ligne. En Suisse, enlèvement à domicile possible |
 | Shein | Mes commandes, Retours, Enregistrement des retours et remboursements, Détails, Enregistrer l'étiquette | France : Mondial Relay, Colissimo, Chronopost, enlèvement FedEx. Belgique : bpost, GLS, Mondial Relay. Suisse : DPD, La Poste |
 | Temu | Vos commandes, Retours, Imprimer l'étiquette de retour. Le statut du remboursement est sur la page de détails de la commande | France : Mondial Relay, Chronopost, DPD, La Poste, enlèvement UPS. Belgique : Homerr, Mondial Relay, DPD. Suisse : Päckli Punkt |
 
 Les transporteurs suivent le retour comme n'importe quel colis : [La Poste](carrier:la-poste) pour Colissimo, [Mondial Relay](carrier:mondial-relay), [Chronopost](carrier:chronopost), [FedEx](carrier:fedex), [bpost](carrier:bpost), [La Poste suisse](carrier:swiss-post) et [DPD Suisse](carrier:dpd-ch). Chez bpost, tu suis le retour dans Track & Trace ou l'app My bpost grâce au code-barres de ta preuve de dépôt. En Suisse, tu peux aussi faire enlever ton retour gratuitement à domicile avec la Post-App.
 
-Un colis, un numéro. Chez Amazon, « une étiquette de retour correspond à un seul carton ». Si tes articles Zalando ne tiennent pas dans une seule boîte, l'option « Les articles ne rentrent pas dans une seule boîte » te donne un code de plus. Temu, lui, veut tous les articles du retour dans un seul colis.
+Un colis, un numéro. Si tes articles Zalando ne tiennent pas dans une seule boîte, l'option « Les articles ne rentrent pas dans une seule boîte » te donne un code de plus. Temu, lui, veut tous les articles du retour dans un seul colis.
 
 Tu ne sais pas à qui est le numéro ? Tape-le ici :
 
@@ -51,16 +51,15 @@ Le numéro de la commande que tu as reçue se trouve ailleurs : voir [où trouve
 
 Le dernier scan montre souvent que le transporteur a livré le colis, pas que la boutique l'a ouvert. La Poste suit ton colis « jusqu'à sa réception par le destinataire », ici le centre de retours. Le contrôle et le remboursement, eux, ne se voient que dans ton compte chez la boutique. Zalando t'envoie un e-mail quand son centre de retours a traité ton colis.
 
-Le retour ne va pas toujours directement à la boutique. Shein prévient que ni l'adresse de l'expéditeur sur ton colis d'origine ni celle de son étiquette de retour ne sont « les adresses de retour réelles ». Temu Suisse prévient aussi : l'adresse jointe à ton colis « N'EST PAS l'adresse de retour ». Utilise toujours l'étiquette fournie.
+Le retour ne va pas toujours directement à la boutique. Shein prévient que ni l'adresse de l'expéditeur sur ton colis d'origine ni celle de son étiquette de retour ne sont « les adresses de retour réelles ». Temu Suisse prévient aussi : l'adresse jointe à ton colis « N'EST PAS l'adresse de retour ». Utilise toujours l'étiquette fournie. Chez Amazon, c'est une étiquette spécifique qui oriente le colis vers le bon site ; en France, le centre de Saran joue un rôle central dans le traitement des retours.
 
 | Boutique | Pour arriver et être traité |
 | --- | --- |
-| Amazon.fr | Remboursement dans les 14 jours suivant ta demande de retour |
 | Zalando | Remboursement sous 14 jours après la remise au transporteur, trajet compris |
 | Shein | 5 à 7 jours de trajet, puis 5 à 7 jours de contrôle qualité à l'entrepôt |
 | Temu | Pas précisé. Le colis doit être posté dans les 14 jours suivant ta demande ; en Suisse, sinon, le retour est annulé |
 
-Après le dépôt, Vos retours chez Amazon.fr indique la date prévue pour chaque statut. Le suivi ne bouge plus avant même d'arriver au centre de retours ? Voir [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
+Pour un retour Amazon déposé à La Poste, des notifications t'annoncent les principales étapes jusqu'au remboursement. Le suivi ne bouge plus avant même d'arriver au centre de retours ? Voir [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
 
 ## Quand suis-je remboursé ?
 
@@ -68,15 +67,13 @@ Après le contrôle, plus le délai de ta banque :
 
 | Boutique | Remboursement | Puis à ta banque |
 | --- | --- | --- |
-| Amazon.fr | Dans les 14 jours suivant ta demande de retour, pour les articles expédiés par Amazon | Jusqu'à 7 jours ouvrés |
-| Amazon.com.be | Dans un délai maximum de 14 jours | Jusqu'à 7 jours ouvrés |
 | Zalando | Sous 14 jours après la remise au transporteur | « Quelques jours de plus » |
 | Shein | 1 jour après le contrôle qualité | En général 2 à 10 jours ouvrables |
 | Temu | Après réception et vérification | Suisse : 5 à 14 jours ouvrés, parfois jusqu'à 30 jours |
 
-Certains remboursent plus tôt. Amazon.fr propose parfois un remboursement instantané, mais « vous devrez tout de même retourner vos articles ». Temu Suisse peut te rembourser dès le dépôt du colis, à sa seule discrétion. Si l'article ne revient pas ou ne passe pas le contrôle, l'argent est repris sur ton moyen de paiement.
+Temu Suisse peut te rembourser dès le dépôt du colis, à sa seule discrétion. Si l'article ne revient pas ou ne passe pas le contrôle, l'argent est repris sur ton moyen de paiement.
 
-Le contrôle compte. Shein et Temu remboursent après leur contrôle qualité, et Amazon.fr te refacture le montant si un article manque ou n'est pas dans son état d'origine.
+Le contrôle compte. Shein et Temu remboursent après leur contrôle qualité. Chez Amazon, un premier employé scanne l'étiquette et vérifie que c'est le bon produit, puis un second examine son état : emballage intact, signes d'utilisation, dommages.
 
 :::steps
 - Tu crées le retour | Dans l'app ou sur le site de la boutique, dans son délai de retour. Tu reçois une étiquette, un code QR ou un code de retour.
@@ -101,7 +98,7 @@ Les délais plus longs, comme les 30 jours de Zalando ou les 90 jours de Temu, s
 Ton suivi et ta preuve de dépôt sont tes preuves. Procède dans cet ordre :
 
 - **Regarde le suivi.** S'il indique le colis livré, envoie à la boutique une capture d'écran et une photo de ta preuve de dépôt.
-- **Laisse à la boutique le temps prévu.** 14 jours chez Amazon.fr et Zalando. Pour un vendeur tiers sur Amazon qui ne répond pas à ta demande de retour sous 48 heures, tu peux faire une réclamation au titre de la Garantie A à Z.
+- **Laisse à la boutique le temps prévu.** Chez Zalando, 14 jours après la remise au transporteur. Pour un retour Amazon déposé à La Poste, pose tes questions au service client Amazon, depuis ton espace client.
 - **Sache qui porte le risque.** En Belgique, si tu as utilisé l'étiquette du vendeur, il reste responsable d'un problème pendant le renvoi, sauf s'il prouve que tu en es responsable. Sans sa méthode de retour, la perte est pour toi. En France, ta preuve d'expédition suffit pour que le vendeur ne puisse plus différer ton remboursement.
 - **Sur Vinted,** c'est le vendeur qui signale un problème avec l'article retourné, et Vinted répond sous 48 heures.
 
@@ -114,12 +111,8 @@ Oui, dès que tu as un numéro. Colle celui de l'étiquette, de la preuve de dé
 Peek voit ce que publie le transporteur. Il peut te dire que le colis est arrivé au centre de retours, mais pas si la boutique l'a contrôlé ou t'a remboursé : ça, c'est uniquement dans ton compte chez la boutique.
 
 :::sources
-- [Amazon.fr : Remboursements](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GKQNFKFK5CF3C54B) – 14 jours, report, banque, remboursement instantané, refacturation, étiquette pour le suivi
-- [Amazon.fr : Vérifiez le statut de votre remboursement](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GMP8PC8KBY5FCPM2) – Vos retours, date prévue par statut, 14 jours, 7 jours ouvrés
-- [Amazon.fr : Retours depuis la France](https://www.amazon.fr/gp/help/customer/display.html?nodeId=G6E3B2E8QPHQ88KF) – bureau de poste, Mondial Relay, Monoprix, un carton par étiquette, Garantie A à Z
-- [Amazon.fr : Étiquettes prépayées pour les retours internationaux](https://www.amazon.fr/gp/help/customer/display.html?nodeId=TDGVnNEJdQ30SbCuLh) – Belgique, Suisse, Luxembourg
-- [Amazon.com.be : Remboursements](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GKQNFKFK5CF3C54B) – 14 jours, 7 jours ouvrés
-- [Amazon.com.be : Retourner des articles que vous avez commandés](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=G6E3B2E8QPHQ88KF) – statut du retour, 48 heures
+- [La Poste : Retour de colis Amazon sans emballage](https://www.laposte.fr/envoyer/comment-retourner-colis-amazon-sans-emballage) – Vos commandes, code QR par e-mail, emballage et étiquette au bureau de poste, 1 500 bureaux et 1 900 relais Pickup, suivi et notifications dans le compte Amazon, service client Amazon
+- [About Amazon France : Que deviennent vos retours Amazon ?](https://www.aboutamazon.fr/actualites/durabilite/que-deviennent-vos-retours-amazon) – étiquette spécifique, centre de Saran, contrôle à l'arrivée
 - [Zalando : Comment puis-je renvoyer ma commande ?](https://www.zalando.fr/faq/Returns-and-Refunds/how-can-i-return-my-order.html) – 30 jours, 14 jours, reçu de retour, transporteur, enlèvement en Suisse
 - [Zalando : Quand recevrai-je mon remboursement ?](https://www.zalando.fr/faq/Returns-and-Refunds/when-will-i-receive-my-refund.html) – e-mail, banque
 - [Zalando : Comment retourner des articles avec un code QR ?](https://www.zalando.fr/faq/Returns-and-Refunds/how-do-i-return-items-using-a-qr-code.html) – Retours, code supplémentaire, validité La Poste et Mondial Relay

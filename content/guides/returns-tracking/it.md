@@ -1,21 +1,21 @@
 ---
 title: Reso: dov'è il pacco e quando arriva il rimborso?
-description: Dove trovi il numero del reso su Amazon, Zalando, Shein e Temu, perché il tracciamento si ferma al centro resi e quando ti spetta il rimborso.
+description: Dove trovi il numero del reso con Zalando, Shein e Temu, dove rendere un pacco Amazon, perché il tracciamento si ferma al centro resi e quando arriva il rimborso.
 slug: tracciare-reso-rimborso
 picture: Un pacco in viaggio verso il magazzino di un negozio, una ricevuta e Pip che lo saluta.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Un reso ha il suo numero di tracciamento, diverso da quello dell'ordine. Sta sull'etichetta di reso o sulla ricevuta del punto di consegna, e lo mostra anche la pagina dei resi del negozio. Il negozio ti rimborsa quando il centro resi ha ricevuto il pacco e l'ha controllato. Quanto ci vuole dipende dal negozio e, se eserciti il diritto di recesso entro 14 giorni, anche dalla legge.
 
 ## Il mio reso ha un numero di tracciamento?
 
-Sì, se usi l'etichetta o il QR code del negozio. Il QR code non è il numero di tracciamento: è quello che il punto di consegna scansiona per stampare l'etichetta. Con Zalando lo mostri al punto di ritiro e il personale stampa e attacca l'etichetta per te. Con Amazon.it puoi rendere un articolo senza scatola e senza etichetta negli Uffici Postali, nei Punti Poste e nei punti UPS, se pesa meno di 5 kg ed è lungo meno di 45 cm. Il numero compare poi sulla ricevuta, nell'email del negozio e nella sua pagina dei resi.
+Sì, se usi l'etichetta o il QR code del negozio. Il QR code non è il numero di tracciamento: è quello che il punto di consegna scansiona per stampare l'etichetta. Con Zalando lo mostri al punto di ritiro e il personale stampa e attacca l'etichetta per te. Con Amazon puoi rendere gratis presso il punto di raccolta di un corriere, tramite Poste Italiane, negli Amazon Locker o con il ritiro a domicilio, e in circa 600 stazioni Enilive anche senza etichetta né imballaggio: se ne occupa il gestore. Il numero compare poi sulla ricevuta, nell'email del negozio e nella sua pagina dei resi.
 
-Tieni la ricevuta finché non hai i soldi. Zalando lo chiede in chiaro: "Assicurati di conservare la ricevuta di reso del corriere fino alla ricezione del rimborso." Per i resi ai venditori terzi, Amazon.it dice lo stesso: "Utilizza un servizio di reso tracciabile e conserva la ricevuta."
+Tieni la ricevuta finché non hai i soldi. Zalando lo chiede in chiaro: "Assicurati di conservare la ricevuta di reso del corriere fino alla ricezione del rimborso."
 
-Spedisci da te, a tue spese? Allora il reso è tracciato solo se paghi un servizio tracciato. Shein lo chiama "reso autogestito" e non ti rimborsa la spedizione. Amazon.it offre anche etichette non prepagate: paghi tu il corriere e, se ti spetta il rimborso delle spese, mandi la ricevuta ad Amazon, che te le rimborsa 14 giorni dopo l'invio del reso.
+Spedisci da te, a tue spese? Allora il reso è tracciato solo se paghi un servizio tracciato. Shein lo chiama "reso autogestito" e non ti rimborsa la spedizione.
 
 :::journey
 - home | Tu | Imballi il pacco, attacchi l'etichetta o tieni il QR code
@@ -27,11 +27,10 @@ Spedisci da te, a tue spese? Allora il reso è tracciato solo se paghi un serviz
 
 ## Dove trovo il numero di tracciamento del reso?
 
-Nella pagina dei resi del negozio e nell'email che ti arriva quando consegni il pacco. Il negozio ti mostra i corrieri mentre crei il reso; questi sono quelli che elencano le sue pagine di aiuto:
+Nella pagina dei resi del negozio e nell'email che ti arriva quando consegni il pacco. Il negozio ti mostra i corrieri mentre crei il reso; questi sono quelli che indicano i negozi:
 
 | Negozio | Dove trovi il reso | Corrieri indicati |
 | --- | --- | --- |
-| Amazon.it | Centro resi: «Gestisci i resi», «Vedi altri resi», «Controlla pacchetto» | Uffici Postali e Punti Poste, punti UPS, Punti assistenza DHL, ritiro a domicilio |
 | Zalando | Sezione «Resi» del tuo account. Il QR code vale 30 giorni | Li vedi durante il reso online. Ritiro a domicilio con Poste Italiane |
 | Shein | I miei ordini › Resi › Scheda resi e rimborsi › Dettagli, poi «Salva l'etichetta» | BRT, Poste Italiane, InPost (armadietto con codice PIN), FedEx (ritiro a domicilio) |
 | Temu | Chiedi il reso da «I tuoi ordini» o dalla pagina di reso online | Poste Italiane o InPost, oppure ritiro con UPS |
@@ -49,21 +48,19 @@ Il numero dell'ordine che hai ricevuto sta altrove: vedi [trovare il numero di t
 
 ## Quanto ci mette ad arrivare al negozio, e perché il tracciamento si ferma?
 
-L'ultima scansione che vedi spesso è il corriere che consegna il pacco, non il negozio che lo apre. Amazon.it lo spiega così: se il tracciamento dice «consegnato», "significa che il reso è stato elaborato all'interno della nostra rete logistica". Il rimborso viene dopo, "generalmente" entro 14 giorni.
+L'ultima scansione che vedi spesso è il corriere che consegna il pacco, non il negozio che lo apre.
 
-E il reso di rado va dritto al negozio. Shein avverte di non spedire all'indirizzo del mittente sul pacco che hai ricevuto né a quello sulla sua etichetta di reso, perché "non sono gli indirizzi effettivi di reso". Se riusi la scatola, copri la vecchia etichetta, altrimenti il reso rischia di tornare a te; Zalando chiede lo stesso. E se eserciti il recesso per posta, Shein vuole il pacco al suo magazzino di Kąty Wrocławskie, in Polonia, a tue spese.
+E il reso di rado va dritto al negozio. Amazon applica al pacco un'etichetta di spedizione speciale che lo porta al centro giusto: per la maggior parte dei resi in Italia è Castel San Giovanni, il suo primo centro resi nel Paese. Shein avverte di non spedire all'indirizzo del mittente sul pacco che hai ricevuto né a quello sulla sua etichetta di reso, perché "non sono gli indirizzi effettivi di reso". Se riusi la scatola, copri la vecchia etichetta, altrimenti il reso rischia di tornare a te; Zalando chiede lo stesso. E se eserciti il recesso per posta, Shein vuole il pacco al suo magazzino di Kąty Wrocławskie, in Polonia, a tue spese.
 
 Cosa dicono i negozi sui tempi:
 
 | Negozio | Per arrivare ed essere elaborato |
 | --- | --- |
-| Amazon.it | Elaborato entro 14 giorni dalla consegna al centro resi |
-| Venditori su Amazon.it | Il venditore lo elabora entro 2 giorni da quando lo riceve |
 | Shein | 5–7 giorni di viaggio, poi 5–7 giorni di controllo in magazzino |
 | Zalando | Non indicato: il rimborso si conta da quando consegni il pacco al corriere |
 | Temu | Non indicato. Spedisci entro 14 giorni dalla richiesta di recesso |
 
-Nel Centro resi di Amazon.it ogni reso passa per «Iniziato», «Consegna», «Ricevuto», «Rimborso emesso» e «Rimborso accreditato», con la data prevista del rimborso. Se il tracciamento del corriere è fermo da giorni prima del centro resi, vedi [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
+Se il tracciamento del corriere è fermo da giorni prima del centro resi, vedi [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
 
 ## Quando arriva il rimborso?
 
@@ -71,15 +68,11 @@ Dopo il controllo, più i tempi della tua banca:
 
 | Negozio | Rimborso emesso | Poi in banca |
 | --- | --- | --- |
-| Amazon.it, articoli spediti da Amazon | Entro 14 giorni al massimo | Fino a 7 giorni lavorativi. Buono Regalo: di solito entro 1 giorno lavorativo |
-| Venditori su Amazon.it | Amazon lo emette entro una settimana dalle istruzioni del venditore | Fino a 7 giorni lavorativi |
 | Zalando | Entro 14 giorni dalla consegna al corriere | Non indicato |
 | Shein | 1 giorno dopo il controllo in magazzino | 2–10 giorni lavorativi |
 | Temu | Recesso: entro 14 giorni da quando il venditore riceve la richiesta. Reso volontario: dopo ricezione e controllo | Sullo stesso metodo di pagamento |
 
-Qualcuno rimborsa prima che il pacco arrivi. Amazon.it a volte offre il "Rimborso immediato" sulla carta o sul saldo Buoni Regalo: il reso va comunque spedito entro 14 giorni da quando l'hai annunciato.
-
-Un articolo usato, danneggiato o incompleto può valere meno, o niente. Amazon.it rifiuta i resi non restituiti "nelle condizioni originali" o senza parti e accessori, e Temu riduce il rimborso fino al prezzo dell'articolo.
+Un articolo usato, danneggiato o incompleto può valere meno. Temu riduce il rimborso fino al prezzo dell'articolo. Nel centro resi di Amazon un addetto scansiona l'etichetta e verifica che sia tornato l'articolo giusto, poi un collega ne valuta le condizioni: segni di usura, sigillo, danni.
 
 :::steps
 - Avvii il reso | Nell'app o sul sito del negozio, entro il periodo di reso. Ricevi un'etichetta, un QR code o un codice di reso.
@@ -103,9 +96,8 @@ I 30 giorni di Zalando o i 90 di Temu sono una politica del negozio, in più ris
 Il tracciamento e la ricevuta sono le tue prove. Procedi così:
 
 - **Guarda il tracciamento.** Se il pacco risulta consegnato al centro resi, manda al negozio uno screenshot e una foto della ricevuta.
-- **Dai al negozio il suo tempo.** Amazon.it ti chiede di contattarla se il rimborso non compare e il tempo di elaborazione del tuo metodo di pagamento è passato. Shein mette in conto fino a due settimane tra viaggio e controllo.
-- **Con un venditore su Amazon.it** c'è la Garanzia dalla A alla Z. Copre un rimborso che non arriva 7 giorni dopo che il reso è stato consegnato al venditore, e un reso spedito con l'etichetta prepagata del venditore che si è perso, non è consegnabile o sta tornando da te.
-- **Chi rischia.** Amazon.it avverte che "i pacchi spediti senza tracciamento potrebbero non essere idonei per i rimborsi" del venditore o della Garanzia dalla A alla Z. Con un reso tracciato e la ricevuta, invece, il negozio non può più trattenere il rimborso aspettando il pacco: se hai esercitato il recesso, per la legge basta la prova che l'hai spedito.
+- **Dai al negozio il suo tempo.** Shein mette in conto fino a due settimane tra viaggio e controllo.
+- **Chi rischia.** Con un reso tracciato e la ricevuta, il negozio non può più trattenere il rimborso aspettando il pacco: se hai esercitato il recesso, per la legge basta la prova che l'hai spedito.
 
 Per inseguire un pacco perso: [pacco smarrito](guide:lost-parcel) e [consegnato ma non ricevuto](guide:delivered-not-received). Un pacco che torna al venditore prima di arrivare a te è un altro caso: [pacco rispedito al mittente](guide:returned-to-sender). Negozio per negozio: [ordini Amazon](guide:amazon-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders) e [Kaufland](guide:kaufland-orders).
 
@@ -116,12 +108,9 @@ Sì, appena hai un numero. Incolla quello dell'etichetta, della ricevuta o dell'
 Peek vede quello che pubblica il corriere. Ti dice che il pacco è arrivato al centro resi, ma non se il negozio l'ha controllato o ti ha rimborsato: quello lo vedi solo nel tuo account del negozio.
 
 :::sources
-- [Amazon.it: Verifica lo stato del rimborso](https://www.amazon.it/gp/help/customer/display.html?nodeId=GMP8PC8KBY5FCPM2) – stati del reso, 14 giorni dalla consegna, data prevista del rimborso
-- [Amazon.it: Rimborsi](https://www.amazon.it/gp/help/customer/display.html?nodeId=GKQNFKFK5CF3C54B) – 14 giorni, 7 giorni lavorativi, Buoni Regalo, rimborso immediato, resi rifiutati, quando contattare Amazon
-- [Amazon.it: Etichette di reso](https://www.amazon.it/gp/help/customer/display.html?nodeId=202056880) – «Controlla pacchetto», «consegnato» nella rete logistica, resi senza scatola e senza etichetta, punti di consegna, etichette non prepagate
-- [Amazon.it: Restituisci un articolo](https://www.amazon.it/gp/help/customer/display.html?nodeId=G6E3B2E8QPHQ88KF) – Centro resi, resi ai venditori
-- [Amazon.it: Marketplace Returns and Refunds](https://www.amazon.it/gp/help/customer/display.html?nodeId=GV38326YW5JX9V9X) – reso tracciabile e ricevuta, 2 giorni per il venditore, una settimana per il rimborso
-- [Amazon.it: Che cos'è la Garanzia dalla A alla Z?](https://www.amazon.it/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – resi ai venditori coperti
+- [About Amazon Italia: Amazon ed Enilive, ritiri e resi nelle stazioni di servizio in tutta Italia](https://www.aboutamazon.it/notizie/company-news/amazon-enilive-stazioni-servizio-tutta-italia) – resi senza etichetta né imballaggio, circa 600 stazioni Enilive
+- [About Amazon Italia: Amazon, siamo pronti per il Prime Day!](https://www.aboutamazon.it/notizie/amazon-prime/amazon-siamo-pronti-per-il-prime-day) – resi gratuiti tramite corriere, Poste Italiane, Amazon Locker, ritiro a domicilio
+- [About Amazon Italia: Uno sguardo dietro le quinte al processo di gestione dei resi di Amazon](https://www.aboutamazon.it/notizie/sostenibilita/uno-sguardo-dietro-le-quinte-al-processo-di-gestione-dei-resi-di-amazon) – etichetta speciale, Castel San Giovanni, controllo dell'articolo
 - [Zalando: Come posso restituire il mio ordine?](https://www.zalando.it/faq/Returns-and-Refunds/how-can-i-return-my-order.html) – 30 giorni, rimborso entro 14 giorni dalla consegna al corriere, ricevuta, QR valido 30 giorni, pacchi separati per i partner
 - [Zalando: Cosa posso fare se non ho l'etichetta di reso?](https://www.zalando.it/faq/Returns-and-Refunds/what-can-i-do-if-i-do-not-have-a-return-label.html) – QR code al punto di ritiro, locker di Poste Italiane, ritiro a domicilio, un QR per pacco
 - [Zalando: Come posso restituire un articolo di un partner di Zalando?](https://www.zalando.it/faq/Returns-and-Refunds/how-do-i-return-a-zalando-partner-item.html) – reso al partner con l'etichetta inclusa

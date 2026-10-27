@@ -4,18 +4,18 @@ description: Where to find your return's tracking number at Amazon, Shein, Temu,
 slug: return-tracking
 picture: A parcel heading back to a shop's warehouse, a receipt, and Pip waving it off.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 A return has its own tracking number, separate from your order's. It's on the return label or on the receipt from the drop-off point, and the shop's returns page shows it too. The shop refunds you once its returns centre has the parcel and has checked it. How long that takes depends on the shop and, if you cancel within the 14-day cooling-off period in the UK or Ireland, on the law.
 
 ## Does my return have a tracking number?
 
-Yes, if you used the shop's label or QR code. A QR code isn't the tracking number itself: it's what the drop-off point scans. At a Post Office, Amazon UK's label-free returns are even packed and labelled for you. The number then shows up on your receipt, in the shop's email and on its returns page.
+Yes, if you used the shop's label or QR code. A QR code isn't the tracking number itself: it's what the drop-off point scans. At a Post Office or an Evri drop-off point, Amazon UK's label-free returns are even packed and labelled for you. The number then shows up on your receipt, in the shop's email and on its returns page.
 
-Keep that receipt until your money is back. Amazon UK says the Evri assistant "will scan your item and give you a receipt", and Zalando asks you to keep the carrier's return receipt until you've had your refund. At an InPost locker there's no counter: ASOS asks you to request a virtual proof of postage by scanning the QR code on the locker screen.
+Keep that receipt until your money is back: Zalando asks you to keep the carrier's return receipt until you've had your refund. At an InPost locker there's no counter: ASOS asks you to request a virtual proof of postage by scanning the QR code on the locker screen.
 
-Paying the postage yourself? Then it's only tracked if you choose a tracked service. Amazon.com asks for one on returns over $35 to third-party sellers.
+Paying the postage yourself? Then it's only tracked if you choose a tracked service.
 
 :::journey
 - home | You | Pack it, add the label or keep the QR code
@@ -27,11 +27,11 @@ Paying the postage yourself? Then it's only tracked if you choose a tracked serv
 
 ## Where is the return tracking number?
 
-On the shop's returns page, and in its return emails. The shop offers its carriers when you create the return; these are the ones its help pages list:
+On the shop's returns page, and in its return emails. The shop offers its carriers when you create the return; these are the ones the shops list:
 
 | Shop | Where the return is | Carriers listed |
 | --- | --- | --- |
-| Amazon | Your Returns, Last 3 Months, or Return/Refund Status in the return email | UK: Evri, the Post Office, Amazon Lockers and Hub Counters. US: "over 8,000" drop-off locations. Amazon.co.uk orders sent back from Ireland: An Post |
+| Amazon | Your Orders, Return or Replace Items. You then follow it in the Returns Centre | UK: Asda, Morrisons, the Post Office, Evri. US: "more than 10,000" drop-off locations, such as FedEx Office, Whole Foods Market and The UPS Store. Canada: Staples, Purolator, some Couche-Tard and Canada Post locations. Australia: Australia Post, ParcelPoint |
 | Shein | My Orders, Returns, Return & Refund Record, Details | US: Happy Returns, USPS. UK: Evri, Royal Mail, InPost lockers. Ireland: An Post. Canada: Canada Post, Neighbour Express, FedEx. Australia: Hubbed, Australia Post |
 | Temu | Your Orders, Returns, Print return label. Refund status in the order details | US: Happy Returns, FedEx, USPS, UPS. Canada: Neighbour Express, Purolator, Canada Post, FedEx, UPS. Australia: PARCELPOINT, Australia Post. UK: Evri, Royal Mail, InPost. Ireland: An Post, drop2shop |
 | ASOS (UK, Australia) | My Account, My Returns. Guests only get it in the drop-off confirmation email | Shown when you create the return |
@@ -39,7 +39,7 @@ On the shop's returns page, and in its return emails. The shop offers its carrie
 
 The carriers track it too: [Royal Mail](carrier:royal-mail), [Evri](carrier:evri), [InPost](carrier:inpost), [An Post](carrier:an-post), [USPS](carrier:usps), [UPS](carrier:ups), [FedEx](carrier:fedex), [Canada Post](carrier:canada-post), [Purolator](carrier:purolator) and [Australia Post](carrier:australia-post). Evri takes the 16-digit number or your ParcelShop receipt number.
 
-One parcel, one number. ASOS gives each extra parcel "its own QR code and tracking number", and Amazon asks you not to mix items from different orders in one box.
+One parcel, one number: ASOS gives each extra parcel "its own QR code and tracking number".
 
 Not sure whose number you have? Type it here:
 
@@ -52,17 +52,14 @@ The number of the order you received is somewhere else: see [find your tracking 
 
 The last scan is often the carrier handing the parcel over, not the shop opening it. Evri's final tracking point on a return is `On its way back to the retailer`, with no update when the retailer gets it: the shop tells you itself. Evri asks you to allow 14 days from drop-off.
 
-Returns rarely go straight to the shop, either. Shein and Temu warn that the address on the parcel you received isn't the return address, and Shein's Irish returns go to a logistics firm near Dublin. ASOS returns from Australia travel to Doncaster, England.
+Returns rarely go straight to the shop, either. Shein and Temu warn that the address on the parcel you received isn't the return address, and Shein's Irish returns go to a logistics firm near Dublin. ASOS returns from Australia travel to Doncaster, England, and Amazon UK groups each return with others before routing it to one of its return centres.
 
 | Shop | To reach the returns centre and be processed |
 | --- | --- |
-| Amazon UK | Processed within 14 days of drop-off |
-| Amazon Ireland | Up to 10 business days after the carrier gets it |
-| Amazon US, Australia | Up to 30 days |
 | Shein | 5–7 days on the way, then 5–7 days for the warehouse check |
 | ASOS | UK: up to 10 calendar days to reach the warehouse. Australia: up to 21 business days, processing included |
 
-On Amazon UK and Ireland, the return tracker in Your Orders shows an expected date for each step: `Initiated`, `Drop off`, `Received`, `Refund issued`, `Refund credited`. Tracking stuck before the returns centre? See [why tracking stops updating](guide:tracking-not-updating).
+Tracking stuck before the returns centre? See [why tracking stops updating](guide:tracking-not-updating).
 
 ## When do I get my refund?
 
@@ -70,18 +67,13 @@ After the check, plus your bank's time:
 
 | Shop | Refund issued | Then at your bank |
 | --- | --- | --- |
-| Amazon US | Up to 30 days in all. Third-party sellers: usually within two business days of getting it | Credit card 3–5 business days, debit card up to 10 |
-| Amazon UK, Ireland | Within 14 days at most, for products shipped by Amazon | Up to 7 business days |
-| Amazon Canada | Up to 30 days after Amazon receives it | Credit card 3–5 business days |
-| Amazon Australia | Usually 2–5 business days after it's marked delivered to Amazon | 2–5 business days |
+| Amazon US | Typically within days of receiving it | Credit card 3–5 business days, debit card up to 10 |
 | Shein | 1 day after the warehouse check | Usually 1–10 business days |
 | Temu | Once it's received and passes the quality check | 5–14 business days, up to 30 days |
 | ASOS | Aims for 14 days from receiving it | Up to 10 working days |
 | Zalando Ireland | Within 14 days of handing it to the carrier | Your bank may take a few days more |
 
-Some refund early. Amazon.com can issue an advanced refund "when a carrier first scans your return", Temu sometimes refunds once you've dropped it off, and Amazon UK and Ireland may offer an instant refund. Send the item back in time, or you're charged again.
-
-Shein and Temu refund once the item passes their quality check, and Amazon.com reduces refunds for returns that are "used, damaged, or missing parts".
+Temu sometimes refunds as soon as you've dropped the parcel off. Otherwise Shein and Temu refund once the item passes their quality check, and Amazon US gives a full refund when the item comes back "unused, with all the original accessories and packaging intact".
 
 :::steps
 - You start the return | In the shop's app or website, within its return window. You get a label, a QR code or a return code.
@@ -106,9 +98,9 @@ Longer windows, like Amazon's 30 days, ASOS's 28 or Temu's 90, are the shop's ow
 Your tracking and your receipt are your evidence. Go in this order:
 
 - **Look at the tracking.** If it shows the parcel delivered, or `On its way back to the retailer`, send the shop a screenshot and a photo of the receipt.
-- **Give it the shop's time.** Evri suggests 14 days. Amazon.com and Amazon.ca ask you to contact them if 30 days have passed without a refund. ASOS asks for your proof of postage if the refund doesn't come.
+- **Give it the shop's time.** Evri suggests 14 days. ASOS asks for your proof of postage if the refund doesn't come.
 - **Let the right one claim.** With the shop's free label, the shop is the carrier's customer. "If your return was free, you'll need to ask your retailer to start an investigation on your behalf," says Evri. If you paid the postage, ask the carrier yourself.
-- **Know who bears the risk.** "Returned items are your responsibility until they reach us," says ASOS. Amazon.com's A-to-z Guarantee may not cover a lost return to a seller sent without tracking. In the UK, your proof of sending is enough to start the shop's 14-day refund deadline.
+- **Know who bears the risk.** "Returned items are your responsibility until they reach us," says ASOS. In the UK, your proof of sending is enough to start the shop's 14-day refund deadline.
 
 More on chasing a missing parcel: [lost parcels](guide:lost-parcel) and [delivered but not received](guide:delivered-not-received). A delivery that bounced back to the seller before reaching you is a different case: [returned to sender](guide:returned-to-sender). Shop by shop, see [Amazon orders](guide:amazon-orders), [Temu orders](guide:temu-orders), [Shein orders](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) and [Vinted orders](guide:vinted-orders).
 
@@ -119,20 +111,14 @@ Yes, once you have a number. Paste the one from the label, the receipt or the sh
 Peek sees what the carrier publishes. It can tell you the parcel reached the returns centre, but not whether the shop has checked it or refunded you: that's only in your account with the shop.
 
 :::sources
-- [Amazon.com: Track Your Return](https://www.amazon.com/gp/help/customer/display.html?nodeId=GNF2KMBB2JD4VXV8) – where to track a return
-- [Amazon.com: Refunds](https://www.amazon.com/gp/help/customer/display.html?nodeId=GKQNFKFK5CF3C54B) – 30 days, advanced and partial refunds, bank times
-- [Amazon.com: Amazon Return Policy](https://www.amazon.com/gp/help/customer/display.html?nodeId=GKM69DUUYKQWKWX7) – 30 days, drop-off locations
-- [Amazon.com: Return Items You Ordered](https://www.amazon.com/gp/help/customer/display.html?nodeId=200572800) – one return per label
-- [Amazon.com: Returns to Third-Party Sellers](https://www.amazon.com/gp/help/customer/display.html?nodeId=G38BHJQ25PNCLUBU) – seller refunds, tracked postage, A-to-z
-- [Amazon.co.uk: Refunds](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GKQNFKFK5CF3C54B) – 14 days, bank time, instant refund
-- [Amazon.co.uk: Check the Status of Your Refund](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GMP8PC8KBY5FCPM2) – return statuses
-- [Amazon.co.uk: Return an Item at an Evri Drop Off Location](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GLN3ENMPHW7HJAHB) – Evri receipt
-- [Amazon.co.uk: Post Office Label free Box Free](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=TVsncuMwkVx8D5eC2e) – Post Office returns
-- [Amazon.co.uk: About Our Returns Policies](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GKM69DUUYKQWKWX7) – Lockers and Hub Counters
-- [Amazon.co.uk: Return Items from the Republic of Ireland to the UK](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=TFwn6l7PUMPP1lzqbi) – An Post label
-- [Amazon.ie: Refunds](https://www.amazon.ie/gp/help/customer/display.html?nodeId=GKQNFKFK5CF3C54B) – processing, instant refund charges
-- [Amazon.ca: Refunds](https://www.amazon.ca/gp/help/customer/display.html?nodeId=GKQNFKFK5CF3C54B) – refund timing
-- [Amazon.com.au: Refunds](https://www.amazon.com.au/gp/help/customer/display.html?nodeId=GKQNFKFK5CF3C54B) – refund timing
+- [About Amazon UK: How to return an Amazon package for free](https://www.aboutamazon.co.uk/news/operations/amazon-free-returns-no-box-tape-label) – Return or Replace Items, Asda, Morrisons, Post Office, Evri, Returns Centre
+- [About Amazon UK: Amazon gives an inside look at what happens to returns](https://www.aboutamazon.co.uk/news/retail/how-the-returns-process-works-at-amazon) – packed and labelled at the drop-off point, routed to a return centre
+- [About Amazon UK: Amazon Warehouse rebrands as Amazon Resale](https://www.aboutamazon.co.uk/news/retail/amazon-resale-discounts) – 30-day return policy
+- [About Amazon: Amazon expands free returns to over 10,000 U.S. drop-off locations](https://www.aboutamazon.com/news/operations/free-returns-with-no-box-tape-or-label-needed) – US drop-off locations
+- [About Amazon: How to return a gift to Amazon](https://www.aboutamazon.com/news/retail/amazon-gift-return) – Returns Center, full refund condition
+- [About Amazon: Amazon's holiday return policy 2025](https://www.aboutamazon.com/news/retail/amazon-holiday-return-policy-2025) – refund timing, bank times
+- [About Amazon Canada: Amazon offers returns with no box, tape, or label needed](https://www.aboutamazon.ca/news/customer-trust/amazon-offers-returns-with-no-box-tape-or-label-needed) – Canadian drop-off options
+- [About Amazon Australia: How to return a product on Amazon if you can't cancel it](https://www.aboutamazon.com.au/news/shopping/how-to-return-an-order-if-you-cant-cancel-it-on-amazon-australia) – Australia Post, ParcelPoint
 - [Shein US: Return Policy](https://us.shein.com/Return-Policy-a-281.html) – returns record, US carriers, refund timeline, return address
 - [Shein UK: Return Policy](https://www.shein.co.uk/Return-Policy-a-281.html) – UK carriers
 - [Shein Europe: Right of withdrawal & Return Policy](https://eur.shein.com/Return-Policy-a-281.html) – An Post, Irish return address, refund rule

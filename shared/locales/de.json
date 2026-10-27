@@ -537,7 +537,7 @@
   "notifications.save": "Einstellungen speichern",
   "notifications.saved": "Einstellungen gespeichert",
   "notifications.saving": "Wird gespeichert…",
-  "notifications.schedule": "Pakete werden von 08:00 bis 22:00 Uhr Schweizer Zeit alle 10 Minuten geprüft, nachts stündlich.",
+  "notifications.schedule": "Pakete werden von 08:00 bis 22:00 Uhr Schweizer Zeit alle 10 Minuten geprüft, nachts alle ein bis zwei Stunden.",
   "notifications.scope": "Auf allen deinen Geräten",
   "notifications.state.blocked": "Mitteilungen sind blockiert. Erlaube sie in den Systemeinstellungen der App.",
   "notifications.state.blockedBrowser": "Mitteilungen sind blockiert. Erlaube sie in den Website-Einstellungen deines Browsers.",

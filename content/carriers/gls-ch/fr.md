@@ -3,7 +3,7 @@ title: GLS Suisse suivi colis : statuts, La Poste et contact
 description: Suivre un colis GLS en Suisse romande : le numéro, le code postal demandé, les statuts en anglais, la livraison par La Poste et qui contacter.
 slug: gls-suisse-suivi-colis
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GLS est un réseau international de colis basé à Amsterdam, sans société à lui en Suisse : c'est son partenaire, La Poste, qui dédouane et livre les colis GLS qui arrivent ici. Pour suivre le tien, saisis son numéro puis ton code postal sur [la page de suivi de GLS](https://gls-group.com/EU/en/parcel-tracking), ou colle le numéro dans le champ ci-dessus. Ce numéro vient de l'expéditeur : cherche-le d'abord dans l'e-mail d'expédition de la boutique ou sur la page de ta commande.
@@ -83,7 +83,7 @@ Au Liechtenstein, c'est le même partenaire, avec les mêmes contacts.
 
 GLS n'affiche son historique qu'avec le code postal : le champ « Code postal de livraison » est donc obligatoire (quatre chiffres, comme 8000), et le suivi attend qu'il soit rempli. Ce code est envoyé à GLS et, si besoin, à des services de suivi ; un code faux fait passer le colis pour un numéro inconnu.
 
-Tu vois ensuite le statut, la ville et le pays de chaque scan sur une carte, le jour de livraison prévu, le poids et l'heure de livraison, sans ton nom, ton adresse, tes coordonnées, ta signature ni la référence. Les statuts gardent l'anglais de GLS ; celui du ParcelShop s'affiche « Prêt à être retiré ». Les heures des scans sont interprétées comme heure suisse. GLS est consulté environ une fois par heure, jour de livraison compris, et de nouveau 4 heures après une consultation qui a échoué. Notifications au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Tu vois ensuite le statut, la ville et le pays de chaque scan sur une carte, le jour de livraison prévu, le poids et l'heure de livraison, sans ton nom, ton adresse, tes coordonnées, ta signature ni la référence. Les statuts gardent l'anglais de GLS ; celui du ParcelShop s'affiche « Prêt à être retiré ». Les heures des scans sont interprétées comme heure suisse. GLS est consulté environ une fois par heure en journée et toutes les une à deux heures la nuit, jour de livraison compris, et de nouveau 4 heures après une consultation qui a échoué. Notifications au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 
 Quand GLS nomme La Poste comme livreur, la page du colis affiche « Livraison par Swiss Post », et le suivi peut passer sur celui de La Poste, avec le même numéro, dès qu'elle y montre une étape au moins aussi récente que le dernier scan de GLS.
 

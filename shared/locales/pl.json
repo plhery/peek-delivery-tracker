@@ -537,7 +537,7 @@
   "notifications.save": "Zapisz ustawienia",
   "notifications.saved": "Zapisano ustawienia",
   "notifications.saving": "Zapisywanie…",
-  "notifications.schedule": "Przesyłki są sprawdzane co 10 minut od 8:00 do 22:00 czasu szwajcarskiego, a w nocy co godzinę.",
+  "notifications.schedule": "Przesyłki są sprawdzane co 10 minut od 8:00 do 22:00 czasu szwajcarskiego, a w nocy co godzinę lub dwie.",
   "notifications.scope": "Na wszystkich Twoich urządzeniach",
   "notifications.state.blocked": "Powiadomienia są zablokowane. Włącz je w ustawieniach systemowych aplikacji.",
   "notifications.state.blockedBrowser": "Powiadomienia są zablokowane. Zezwól na nie w ustawieniach witryny w przeglądarce.",

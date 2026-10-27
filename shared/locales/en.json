@@ -537,7 +537,7 @@
   "notifications.save": "Save preferences",
   "notifications.saved": "Preferences saved",
   "notifications.saving": "Saving…",
-  "notifications.schedule": "Parcels are checked every 10 minutes from 08:00 to 22:00 Swiss time, then hourly overnight.",
+  "notifications.schedule": "Parcels are checked every 10 minutes from 08:00 to 22:00 Swiss time, then every hour or two overnight.",
   "notifications.scope": "On all your devices",
   "notifications.state.blocked": "Notifications are blocked. Allow them in this app’s system settings.",
   "notifications.state.blockedBrowser": "Notifications are blocked. Allow them in your browser’s site settings.",

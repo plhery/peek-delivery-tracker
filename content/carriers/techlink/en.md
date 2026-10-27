@@ -66,7 +66,7 @@ For anything about your order, the seller is the one to ask. For a delivery prob
 
 [Peek](/) names Techlink straight away for a ZHPHD number: no other carrier in its catalog uses that shape. There's no Techlink link to paste, as its tracking page doesn't put the number in its address.
 
-Peek reads Techlink's own tracker, the same one its tracking page uses, and shows the status, each scan with its country, and the destination country. Techlink's English lines show as it writes them. Its own scans, in China, are read on China's clock; any other scan keeps the time it gives. Techlink gives no expected delivery date, weight or service name, so Peek shows none.
+Peek reads Techlink's own tracker, the same one its tracking page uses, and shows the status, each scan with its country, and the destination country. Techlink's English lines show as it writes them. Its own scans, in China, are read on China's clock, any other scan on the clock of its country, and Peek shows each in your device's time zone. Techlink gives no expected delivery date, weight or service name, so Peek shows none.
 
 When Techlink's record holds the delivering carrier's number, Peek looks at its shape. An international postal number (two letters, nine digits, two letters) points to the post of the destination country; a number only one carrier in Peek's catalog uses points to that carrier. When Peek reads that carrier's own tracking, it asks it and switches to it once it shows progress as recent as Techlink's. The parcel keeps its ZHPHD number and shows the other one with it. Otherwise Peek stays on Techlink's tracker: Peek hasn't yet seen it show a scan after the handover, so expect its history to end there.
 

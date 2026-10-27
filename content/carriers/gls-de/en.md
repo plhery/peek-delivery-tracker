@@ -3,7 +3,7 @@ title: GLS tracking in Germany: statuses, ParcelShops and contact
 description: Track a GLS parcel in Germany: where the parcel number or Track-ID is, why GLS needs your postcode, what its statuses mean, ParcelShops and how to reach GLS.
 slug: gls-tracking-germany
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GLS Germany delivers on weekdays and says it has over 11,000 ParcelShops and Parcelstations in Germany. Track a parcel on [GLS's tracking page](https://www.gls-pakete.de/en/parcel-tracking) with its parcel number and the recipient's postcode, or paste the number in the box above. The number is in the shop's or GLS's email, or on GLS's notification card.
@@ -81,7 +81,7 @@ As listed on gls-pakete.de on 10 October 2026, for parcels within Germany:
 
 GLS needs the delivery postcode for the detailed history, so the "Delivery postcode" field is required: without it Peek only learns whether GLS knows the number, and a wrong one looks like an unknown number. Any country's format works. It goes to GLS and, when needed, to tracking services.
 
-You then see the status, each scan's town and country on a map, the expected day, the weight, the delivery time and, at a ParcelShop, its name and address. Your name, address and contact details, the signature and the sender's reference are dropped. GLS's ParcelShop status shows as ready for pickup. Times are read as German time. Peek checks GLS about once an hour, delivery day included (4 hours after a failed check), and can notify you of each change. Only a parcel GLS hands to Swiss Post is followed to another carrier.
+You then see the status, each scan's town and country on a map, the expected day, the weight, the delivery time and, at a ParcelShop, its name and address. Your name, address and contact details, the signature and the sender's reference are dropped. GLS's ParcelShop status shows as ready for pickup. Times are read as German time. Peek checks GLS about once an hour by day and every hour or two overnight, delivery day included (4 hours after a failed check), and can notify you of each change. Only a parcel GLS hands to Swiss Post is followed to another carrier.
 
 ## Questions about GLS tracking in Germany
 

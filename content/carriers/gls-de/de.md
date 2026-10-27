@@ -3,7 +3,7 @@ title: GLS Sendungsverfolgung Deutschland: Status und Paketshop
 description: GLS-Paket in Deutschland verfolgen: wo Paketnummer und Track-ID stehen, warum GLS deine PLZ braucht, was die Status heißen und wie du GLS erreichst.
 slug: gls-sendungsverfolgung-deutschland
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GLS Germany (General Logistics Systems Germany aus Neuenstein) stellt montags bis freitags zu und hat laut eigenen Angaben über 11.000 Paketshops und Paketstationen in Deutschland. Dein Paket verfolgst du in der [Sendungsverfolgung auf gls-pakete.de](https://www.gls-pakete.de/sendungsverfolgung) mit Paketnummer und Postleitzahl des Empfängers, oder du fügst die Nummer oben ins Feld ein. Die Nummer steht in der Versand-E-Mail des Shops, in der Paketankündigung von GLS oder, als Track-ID, auf der Benachrichtigungskarte.
@@ -88,7 +88,7 @@ So stand es am 10. Oktober 2026 auf gls-pakete.de, für Pakete innerhalb Deutsch
 
 Das Feld „Postleitzahl der Lieferadresse“ ist Pflicht, weil GLS sie für den detaillierten Verlauf braucht: Ohne sie lässt sich nur klären, ob GLS die Nummer kennt, und eine falsche sieht aus wie eine unbekannte Nummer. Jedes Länderformat geht. Die Postleitzahl geht an GLS und bei Bedarf an Tracking-Dienste.
 
-Dann siehst du den Status, jeden Scan mit Ort und Land auf einer Karte, den erwarteten Zustelltag, das Gewicht, den Zeitpunkt der Zustellung und, solange das Paket im Paketshop wartet, Name und Adresse des Shops (ohne Öffnungszeiten). Weggelassen werden dein Name, deine Adresse und Kontaktdaten, die Unterschrift und die Referenz des Versenders. Die Scans stehen in den englischen Sätzen von GLS, ihre Uhrzeiten werden als deutsche Zeit gelesen. GLS wird etwa einmal pro Stunde abgefragt, auch am Zustelltag (nicht alle 2 Minuten wie bei anderen Paketdiensten), nach einer gescheiterten Abfrage erst nach 4 Stunden wieder. Auf Wunsch bekommst du Mitteilungen: alle Updates, nur wichtige oder nur am Liefertag. Zu einem anderen Paketdienst wechselt die Verfolgung nur, wenn GLS die Schweizerische Post als Zusteller nennt.
+Dann siehst du den Status, jeden Scan mit Ort und Land auf einer Karte, den erwarteten Zustelltag, das Gewicht, den Zeitpunkt der Zustellung und, solange das Paket im Paketshop wartet, Name und Adresse des Shops (ohne Öffnungszeiten). Weggelassen werden dein Name, deine Adresse und Kontaktdaten, die Unterschrift und die Referenz des Versenders. Die Scans stehen in den englischen Sätzen von GLS, ihre Uhrzeiten werden als deutsche Zeit gelesen. GLS wird tagsüber etwa einmal pro Stunde abgefragt, nachts alle ein bis zwei Stunden, auch am Zustelltag (nicht alle 2 Minuten wie bei anderen Paketdiensten), nach einer gescheiterten Abfrage erst nach 4 Stunden wieder. Auf Wunsch bekommst du Mitteilungen: alle Updates, nur wichtige oder nur am Liefertag. Zu einem anderen Paketdienst wechselt die Verfolgung nur, wenn GLS die Schweizerische Post als Zusteller nennt.
 
 ## Fragen zur GLS Sendungsverfolgung
 

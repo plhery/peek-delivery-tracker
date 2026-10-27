@@ -537,7 +537,7 @@
   "notifications.save": "Guardar preferencias",
   "notifications.saved": "Preferencias guardadas",
   "notifications.saving": "Guardando…",
-  "notifications.schedule": "Los paquetes se consultan cada 10 minutos de 08:00 a 22:00, hora de Suiza, y cada hora durante la noche.",
+  "notifications.schedule": "Los paquetes se consultan cada 10 minutos de 08:00 a 22:00, hora de Suiza, y cada una o dos horas durante la noche.",
   "notifications.scope": "En todos tus dispositivos",
   "notifications.state.blocked": "Las notificaciones están bloqueadas. Permítelas en los ajustes del sistema de la app.",
   "notifications.state.blockedBrowser": "Las notificaciones están bloqueadas. Permítelas en los ajustes del sitio de tu navegador.",

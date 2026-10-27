@@ -3,7 +3,7 @@ title: GLS Switzerland tracking: statuses, Swiss Post and contact
 description: Track a GLS parcel in Switzerland: the number's shapes, why GLS asks for your postcode, what its English statuses mean, who delivers and who to contact.
 slug: gls-switzerland-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GLS is an international parcel network based in Amsterdam with no company of its own in Switzerland: its partner, Swiss Post, clears and delivers the parcels it brings into Switzerland. Track one on [GLS's tracking page](https://gls-group.com/EU/en/parcel-tracking) with the parcel number and your postcode, or paste the number in the box above. The number comes from the sender, so start with the shop's shipping email.
@@ -79,7 +79,7 @@ GLS has no Swiss hotline of its own. Its contact page points to "the website of 
 
 GLS shows its scan history only with the delivery postcode, so the "Delivery postcode" field is required: four digits, like 8000. It goes to GLS and, when needed, to tracking services; a wrong one looks like an unknown number.
 
-You then see the status, each scan's town and country on a map, the expected delivery day, the weight and the delivery time, without your name, address, contact details or signature. Statuses keep GLS's English wording; the ParcelShop one shows as ready for pickup. GLS is checked about once an hour, delivery day included, and you can be notified of every scan, important steps or delivery day only.
+You then see the status, each scan's town and country on a map, the expected delivery day, the weight and the delivery time, without your name, address, contact details or signature. Statuses keep GLS's English wording; the ParcelShop one shows as ready for pickup. GLS is checked about once an hour by day and every hour or two overnight, delivery day included, and you can be notified of every scan, important steps or delivery day only.
 
 When GLS names Swiss Post as the deliverer, the parcel page says "Delivery with Swiss Post", and Peek can follow the parcel on Swiss Post's tracking with the same number once Swiss Post shows newer progress.
 

@@ -537,7 +537,7 @@
   "notifications.save": "Enregistrer les préférences",
   "notifications.saved": "Préférences enregistrées",
   "notifications.saving": "Enregistrement…",
-  "notifications.schedule": "Les colis sont vérifiés toutes les 10 minutes de 8 h à 22 h (heure suisse), puis toutes les heures la nuit.",
+  "notifications.schedule": "Les colis sont vérifiés toutes les 10 minutes de 8 h à 22 h (heure suisse), puis toutes les une à deux heures la nuit.",
   "notifications.scope": "Sur tous tes appareils",
   "notifications.state.blocked": "Les notifications sont bloquées. Autorise-les dans les réglages système de l’app.",
   "notifications.state.blockedBrowser": "Les notifications sont bloquées. Autorise-les dans les réglages du site de ton navigateur.",

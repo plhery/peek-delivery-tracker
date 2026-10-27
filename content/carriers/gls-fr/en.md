@@ -3,7 +3,7 @@ title: GLS France tracking: statuses, Relais GLS and contact
 description: Track a GLS parcel in France: which number to use, what GLS's statuses mean, missed deliveries, Relais GLS and lockers, and how to reach GLS France.
 slug: gls-france-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 GLS France, part of the GLS Group, works only with businesses, so your parcel comes from a shop or company. Track it on [GLS France's tracking page](https://gls-group.com/FR/en/parcel-tracking/) with the parcel number, no postcode needed, or paste the number in the box above. The number is in the seller's confirmation email or in GLS's email or SMS announcing the delivery.
@@ -78,7 +78,7 @@ As listed on GLS France's pages on 11 October 2026:
 
 [Peek](/) names GLS France at once for an 8-character number starting `00` and mixing letters and digits. For other 8-character codes, 11 digits and 12 digits with GLS's check digit, it asks the likely carriers, GLS France first, and GLS France wins when it knows the parcel ("GLS France has this parcel."). No postcode is needed. Links from moncolis.gls-france.com, gls-france.com and gls-group pages with /FR/ work too; the notice reference doesn't.
 
-Peek shows the status, the history, the expected day (until delivery, a pickup-point wait or a problem), the sender's name, the delivery time and, while the parcel waits, the shop, locker or depot's name and address. GLS's scans carry facility codes such as `FR0012`, not towns, so nothing appears on the map. GLS France sends only status codes, so the wordings are Peek's own. Your name, address, contact details, signature and instructions are dropped; there's no weight. Peek checks GLS about once an hour, and 4 hours after a failed check, and can notify you of each change. Old parcels drop out of GLS's tracking, and Peek doesn't follow a parcel to another carrier.
+Peek shows the status, the history, the expected day (until delivery, a pickup-point wait or a problem), the sender's name, the delivery time and, while the parcel waits, the shop, locker or depot's name and address. GLS's scans carry facility codes such as `FR0012`, not towns, so nothing appears on the map. GLS France sends only status codes, so the wordings are Peek's own. Your name, address, contact details, signature and instructions are dropped; there's no weight. Peek checks GLS about once an hour by day, every hour or two overnight and 4 hours after a failed check, and can notify you of each change. Old parcels drop out of GLS's tracking, and Peek doesn't follow a parcel to another carrier.
 
 ## Questions about GLS tracking in France
 

@@ -266,8 +266,9 @@ throttled one early.
 
 ## Refresh cadence
 
-Daytime is 08:00–22:00 Europe/Zurich. Overnight, everything is checked hourly, except the
-parcels followed without an account that nobody watches (below).
+Daytime is 08:00–22:00 Europe/Zurich. Overnight, everything is due hourly and checked at least every
+2 hours, within an account's share of each run (below), except the parcels followed without an
+account that nobody watches (below).
 
 | Parcels | Daytime |
 | --- | --- |

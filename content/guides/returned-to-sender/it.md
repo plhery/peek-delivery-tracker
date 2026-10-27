@@ -31,13 +31,12 @@ Su Poste lo stato da cercare è `Resa al mittente`, che riassume gli stessi moti
 
 ## Come recuperare un pacco rispedito al mittente?
 
-Quando ha già fatto inversione, non si ferma più: puoi solo chiedere al venditore di rispedirtelo quando gli torna. Prima, di solito può richiamarlo solo il mittente. DHL in Germania scrive che un ritorno «non può essere fermato», anche quando sei stato tu a rifiutare il pacco. [UPS](carrier:ups) non può recuperare un pacco che è già tornato al mittente. E dopo un `Rinvio con disposizione preliminare`, la Posta avverte che il tracking non mostra più niente.
+Quando ha già fatto inversione, non si ferma più: puoi solo chiedere al venditore di rispedirtelo quando gli torna. Prima, di solito può richiamarlo solo il mittente. DHL in Germania scrive che un ritorno «non può essere fermato», anche quando sei stato tu a rifiutare il pacco. E dopo un `Rinvio con disposizione preliminare`, la Posta avverte che il tracking non mostra più niente.
 
 Quasi tutti i servizi per fermare o richiamare un pacco sono riservati al mittente e chiedono un contratto o un conto business:
 
 | Corriere | Servizio | Chi può usarlo | Costi e limiti |
 | --- | --- | --- | --- |
-| UPS | Delivery Intercept, opzione `Return to Sender` | Il mittente | Solo prima della consegna; UPS dice che possono esserci costi, addebitati solo se l'intercettazione riesce |
 | [DHL Paket](carrier:dhl) (Germania) | Paketstopp | Clienti business | 0 € per chiederlo, 4,50 € di rientro se va a buon fine |
 | BRT | Nuove disposizioni per una giacenza, nella sezione «rintraccia giacenza» | Chi ha l'area riservata BRT | Solo mentre il pacco è in giacenza, prima che riparta |
 
@@ -128,8 +127,6 @@ La Posta può aprire il pacco per risalire al mittente; se non ci riesce, ne dis
 - [La Posta: CG «Servizi postali» per clienti privati](https://www.post.ch/-/media/post/agb/agb-postdienstleistungen-pk.pdf?sc_lang=it) – rinvii a spese del mittente, apertura del pacco, un mese, dazio non pagato, rifiuto solo alla consegna di persona
 - [DHL: Hilfe zur Rücksendung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/hilfe-ruecksendung.html) – un ritorno non si può fermare, anche dopo un rifiuto
 - [DHL: Preise für Services](https://www.dhl.de/dam/jcr:03e8bbfe-7e82-450c-a5be-1132bccfb798/dhl-paket-preise-fuer-services-102025.pdf) – Paketstopp, 4,50 € di rientro
-- [UPS: Delivery Intercept](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – mittente, costi
-- [UPS: Returned to the sender](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – pacco tornato non recuperabile
 - [Posta austriaca: FAQ](https://www.post.at/p/c/faq-privat) – «consegnato» al mittente nei ritorni
 - [Unione postale universale: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – ritorno immediato dei rifiutati, giacenza, via meno prioritaria
 - [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prodotti dei partner di vendita, rimborso da Amazon se il problema di consegna non si risolve con il venditore

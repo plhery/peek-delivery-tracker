@@ -1,10 +1,10 @@
 ---
 title: Truffa pacco via SMS: come riconoscerla e cosa fare
-description: Come riconoscere un SMS truffa sul pacco, cosa mandano davvero Poste, BRT, GLS, DHL e la Posta, e cosa fare se hai cliccato sul link o hai pagato.
+description: Come riconoscere un SMS truffa sul pacco, cosa mandano davvero Poste, BRT, GLS, InPost e la Posta, e cosa fare se hai cliccato sul link o hai pagato.
 slug: truffa-pacco-sms
 picture: Un telefono con un messaggio con un triangolo di avviso e un amo sul link, una moneta barrata e Pip preoccupato, con una mano alzata che dice stop nel suo fumetto.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Un SMS, un'e-mail o un messaggio WhatsApp che ti dice che il pacco è sospeso o in giacenza, e che per sbloccarlo basta pagare una piccola commissione o confermare l'indirizzo da un link, è quasi sempre una truffa. Non toccare niente: apri tu il sito o l'app del corriere e inserisci il codice tracking che trovi nell'e-mail di spedizione del negozio. Se hai già inserito i dati della carta, chiama subito la banca e fai bloccare la carta.
@@ -14,11 +14,11 @@ Un SMS, un'e-mail o un messaggio WhatsApp che ti dice che il pacco è sospeso o 
 Un falso di solito ha più di uno di questi segnali:
 
 - **Non aspetti niente.** Nessun ordine, nessuno che ti debba spedire qualcosa? Allora il pacco «sospeso» non esiste. Anche un numero di spedizione nel messaggio non prova nulla: la Posta svizzera cita come esempio di truffa un falso numero d'invio, `34632900-371`.
-- **Ti chiede soldi per consegnare.** GLS scrive che «in nessun caso» chiede pagamenti con carta di credito via SMS o e-mail. InPost ti dice di diffidare di chi chiede un pagamento per sbloccare un pacco. DHL scrive che gli unici pagamenti che chiede per e-mail o SMS sono dazi e tasse.
-- **Ti mette fretta.** La Posta svizzera dice che la sua comunicazione ufficiale non ti mette sotto pressione con minacce o scadenze urgenti, e tra gli esempi di falsi cita il «termine di 24 ore». UPS porta come esempio di falso «Il tuo codice cliente verrà sospeso entro 24 ore».
-- **Il link non è del corriere.** Link accorciati che iniziano con `https://bit.ly/` (DHL), indirizzi che imitano quello vero come `post.ch.paysget.info` (la Posta) o `unitedparcelservices.com` al posto di ups.com (UPS), estensioni nuove come `.shop`, su cui oggi FedEx mette in guardia.
-- **Il mittente non torna.** Negli SMS falsi, dice DHL, al posto del numero del mittente compare un nome generico come «Consegna», oppure il numero ha il prefisso di un altro Paese (per esempio +235). Le e-mail vere di DHL non arrivano mai da Gmail, Yahoo o altri servizi gratuiti. BRT mette in guardia anche da un indirizzo del mittente che differisce «anche lievemente» da quello vero.
-- **Ti chiede di rispondere, chiamare o inquadrare qualcosa.** Mandare un codice via SMS al 41414 o chiamare un numero 0901 sono trucchi che la Posta svizzera ha già visto. Poste Italiane ti dice di non inquadrare i QR code ricevuti via SMS o e-mail. E l'italiano zoppicante è un indizio: GLS e BRT citano gli errori di grammatica, DHL ricorda che i suoi messaggi sono scritti in un italiano corretto.
+- **Ti chiede soldi per consegnare.** GLS scrive che «in nessun caso» chiede pagamenti con carta di credito via SMS o e-mail. InPost ti dice di diffidare di chi chiede un pagamento per sbloccare un pacco.
+- **Ti mette fretta.** La Posta svizzera dice che la sua comunicazione ufficiale non ti mette sotto pressione con minacce o scadenze urgenti, e tra gli esempi di falsi cita il «termine di 24 ore».
+- **Il link non è del corriere.** Indirizzi che imitano quello vero, come `post.ch.paysget.info` (la Posta).
+- **Il mittente non torna.** BRT mette in guardia da un indirizzo del mittente che differisce «anche lievemente» da quello vero.
+- **Ti chiede di rispondere, chiamare o inquadrare qualcosa.** Mandare un codice via SMS al 41414 o chiamare un numero 0901 sono trucchi che la Posta svizzera ha già visto. Poste Italiane ti dice di non inquadrare i QR code ricevuti via SMS o e-mail. E l'italiano zoppicante è un indizio: GLS e BRT citano gli errori di grammatica.
 
 Un mittente conosciuto, però, non prova niente. Poste Italiane avverte che alcuni SMS e messaggi WhatsApp falsi possono comparire perfino nelle sue conversazioni ufficiali, con una tecnica chiamata spoofing.
 
@@ -36,7 +36,7 @@ I link truffa spesso cominciano con il nome di un corriere. Quello che conta è 
 
 Anche se il link sembra giusto, non usarlo: scrivi tu l'indirizzo del corriere.
 
-## Poste, BRT, GLS e DHL mandano davvero SMS?
+## Poste, BRT e GLS mandano davvero SMS?
 
 Sì, quasi tutti, ed è per questo che i falsi funzionano. Ecco cosa dice ogni corriere dei propri messaggi e cosa non fa mai:
 
@@ -45,24 +45,22 @@ Sì, quasi tutti, ed è per questo che i falsi funzionano. Ecco cosa dice ogni c
 | [Poste Italiane](carrier:poste-italiane) | SMS, ma i falsi possono finire nella stessa conversazione; ti chiede di digitare sempre www.poste.it nel browser | Chiederti, in nessun modo, di trasferire denaro o di dare dati della carta, codici OTP o credenziali |
 | [BRT](carrier:brt) (ex Bartolini) | La sua pagina non lo dice; consiglia di leggere bene il mittente e, nel dubbio, di non cliccare link né scaricare allegati | La sua pagina non lo dice, ma avverte di finte «mancate consegne» e false fatture |
 | [GLS](carrier:gls-it) | SMS con spunta blu su Android con RCS; per pacchi da fuori UE può chiederti dazi e tasse per e-mail, SMS o lettera | Chiedere un pagamento con carta via SMS o e-mail |
-| [DHL](carrier:dhl-express) | E-mail da @dhl.com e suoi sottodomini, @dpdhl.com o @dhl-news.com; per e-mail o SMS chiede solo dazi e tasse, con un codice OTP | Scriverti da Gmail o Yahoo, mettere link a siti che non sono suoi |
-| [UPS](carrier:ups) | E-mail con un link «eparcel» che comincia sempre con `https://ftp2.ups.com` | Chiedere pagamenti, dati personali o password per e-mail, posta, telefono o fax |
 | [InPost](carrier:inpost) | Assistenza solo dai canali ufficiali del suo sito, come il form su inpost.it | Assisterti via WhatsApp, social o numeri privati |
 | [La Posta](carrier:swiss-post) (Ticino) | Domini post.ch, poste.ch, posta.ch, swisspost.ch e swisspost.com; scrive in tedesco, francese o italiano, a volte in inglese | Chiedere password, codici SMS o dati completi della carta via e-mail, SMS o WhatsApp |
 
-I corrieri veri mandano anche dei link, quindi un link da solo non dice niente. E qualche richiesta di pagamento vera esiste: quasi sempre per dazi e IVA su un pacco da fuori UE (in Ticino, dall'estero). UPS lo riassume così: solo pochi pacchi richiedono denaro per la consegna, cioè contrassegno, dazi o tasse, e il modo più sicuro per saperlo è seguire il pacco sul suo sito.
+I corrieri veri mandano anche dei link, quindi un link da solo non dice niente. E qualche richiesta di pagamento vera esiste: quasi sempre per dazi e IVA su un pacco da fuori UE (in Ticino, dall'estero).
 
 ## Pacco sospeso o mancata consegna: cosa dicono gli SMS truffa
 
 Tornano sempre gli stessi copioni. Questi sono quelli citati dai corrieri nelle loro pagine di avviso:
 
-- **Mancata consegna.** Falsi SMS ed e-mail su presunte «mancate consegne» (BRT), o un'e-mail che dice che il pacco non si può consegnare e ti chiede di aprire un allegato (DHL).
+- **Mancata consegna.** Falsi SMS ed e-mail su presunte «mancate consegne» (BRT).
 - **Pacco sospeso o trattenuto.** Il pacco «non può essere inoltrato» e devi pagare una commissione o confermare i dati, oppure è «trattenuto presso il terminale» (la Posta svizzera).
 - **Spese doganali.** Alcune sono vere: la [guida sul pacco fermo in dogana](guide:customs) spiega come le chiedono davvero Poste e la Posta.
 - **Fattura da scaricare.** False fatture il cui download installa un programma malevolo (BRT), finti allegati (GLS).
 - **Un codice da mandare o un numero da chiamare.** Codici SMS da inviare al 41414 o numeri a pagamento 0901 (la Posta svizzera).
-- **WhatsApp al posto dell'SMS.** Account falsi che provano a portarti su WhatsApp o Telegram (DHL), finta assistenza InPost che ti scrive su WhatsApp.
-- **Una telefonata.** Poste Italiane descrive un SMS di allarme seguito da una chiamata da un numero che sembra ufficiale: un finto operatore, a volte un finto agente, ti spinge a spostare soldi. Per UPS, chi chiama davvero da UPS sa sempre darti un numero di spedizione da controllare sul suo sito; nel dubbio, chiedi nome, cognome e numero di telefono.
+- **WhatsApp al posto dell'SMS.** Una finta assistenza InPost che ti scrive su WhatsApp.
+- **Una telefonata.** Poste Italiane descrive un SMS di allarme seguito da una chiamata da un numero che sembra ufficiale: un finto operatore, a volte un finto agente, ti spinge a spostare soldi.
 - **Un falso corriere alla porta.** GLS avverte di finti autisti che si spacciano per sostituti di quello di zona: controlla logo GLS sul furgone, badge e divisa, e diffida di chi ti chiede di restituirgli un pacco già consegnato.
 - **Una vendita online.** Vinted avverte che i truffatori cercano di portarti fuori dalla piattaforma, e ricorda che non serve uscire da Vinted per confermare un pagamento o ricevere un ordine. La Posta svizzera segnala falsi ordini di presa in consegna nei piccoli annunci.
 
@@ -108,7 +106,7 @@ Segnala il messaggio anche se non hai cliccato, poi cancellalo.
 
 | Paese | Segnala il messaggio | Hai perso soldi o dati |
 | --- | --- | --- |
-| Italia | Polizia Postale, modulo [Segnala online](https://www.commissariatodips.it/segnalazioni/segnala-online/index.html) con argomento «Phishing»; falsi a nome di Poste ad antiphishing@posteitaliane.it; di DHL a phishing@dhl.com (screenshot e numero del mittente); di GLS a cybersec@gls-italy.com | Banca, poi denuncia in un ufficio di polizia; per un'emergenza 112 o 113 |
+| Italia | Polizia Postale, modulo [Segnala online](https://www.commissariatodips.it/segnalazioni/segnala-online/index.html) con argomento «Phishing»; falsi a nome di Poste ad antiphishing@posteitaliane.it, di GLS a cybersec@gls-italy.com | Banca, poi denuncia in un ufficio di polizia; per un'emergenza 112 o 113 |
 | Svizzera (Ticino) | E-mail inoltrate (meglio come allegato) a reports@antiphishing.ch, o il modulo dell'Ufficio federale della cibersicurezza (UFCS) | Denuncia alla polizia cantonale; in alcuni Cantoni anche online con Suisse ePolice (l'UFCS non accetta denunce penali) |
 
 Sull'iPhone, sotto un messaggio di un mittente sconosciuto compare **Segnala come indesiderato**: toccalo, poi tocca **Elimina e segnala come indesiderato** (se per gli SMS l'opzione non compare, chiedi al tuo operatore). In Google Messaggi su Android apri la conversazione, tocca **Altre opzioni**, poi **Dettagli** e **Blocca e segnala spam**.
@@ -118,9 +116,6 @@ Sull'iPhone, sotto un messaggio di un mittente sconosciuto compare **Segnala com
 - [BRT: Alert Phishing, SMS ed e-mail](https://www.brt.it/it/news/2026/04/16/alert-phishing-sms-email/) – false mancate consegne, fatture con malware, mittente, linguaggio povero
 - [GLS Italia: Sicurezza in GLS](https://gls-group.com/IT/it/gls-informa/sicurezza/) – nessun pagamento con carta via SMS o e-mail, errori, cybersec@gls-italy.com, falsi autisti
 - [GLS Italia: Uso improprio del marchio GLS a scopo di frode](https://gls-group.com/IT/it/misuse-gls-brand-fraud/) – dazi per pacchi extra-UE, spunta blu RCS, denuncia se hai pagato
-- [DHL Italia: Prevenzione delle frodi](https://www.dhl.com/it-it/home/footer/prevenzione-frodi.html) – indirizzi e link ufficiali, bit.ly, mittente «Consegna», prefissi esteri, WhatsApp, solo dazi e tasse con OTP, phishing@dhl.com
-- [UPS Italia: Proteggiti da frodi e truffe](https://www.ups.com/it/it/support/shipping-support/legal-terms-conditions/fight-fraud) – cosa UPS non chiede, ftp2.ups.com, unitedparcelservices.com, 24 ore, contrassegno, dazi o tasse, chiamate
-- [FedEx: Report fraud](https://www.fedex.com/en-us/report-fraud.html) – link con dominio .shop
 - [InPost: Attenzione ai tentativi di phishing](https://inpost.it/news-attenzione-ai-tentativi-di-phishing) – finta assistenza su WhatsApp, form ufficiale, pagamenti per sbloccare un pacco
 - [Vinted: Come evitare e segnalare i messaggi di phishing e le truffe](https://www.vinted.it/help/392/628-come-evitare-e-segnalare-i-messaggi-di-phishing-e-le-truffe) – non serve uscire da Vinted per pagare o ricevere un ordine
 - [La Posta: Phishing e frode a nome della Posta](https://site.post.ch/it/chi-siamo/sicurezza/phishing-e-frodi) – pacco trattenuto, piccola commissione, numero d'invio falso, cosa fare se hai cliccato o inserito dati

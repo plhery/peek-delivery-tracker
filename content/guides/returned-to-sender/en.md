@@ -21,7 +21,7 @@ The reason is usually in the latest scan, and the carrier marks it on the parcel
 | Nobody known at the address, or moved | USPS `Moved, Left No Address`, `Vacant`; Canada Post `Recipient not located at address provided. Item being returned to sender.` |
 | Not collected in time | USPS `Unclaimed`; [An Post](carrier:an-post) `Your item was not collected within the specified timeframe. This item will now be returned to sender.` |
 | Refused at the door | USPS `Refused`; [Australia Post](carrier:australia-post): "someone declined delivery" |
-| Customs charges unpaid or paperwork incomplete | An Post: charges not paid by the "pay by date", or the sender's customs declaration incomplete |
+| Customs charges unpaid | In the UK, Royal Mail, Parcelforce or the courier holds the parcel about 3 weeks for the bill, then sends it back, says GOV.UK |
 | Postage or label problem | Canada Post: not enough postage, an improper label, a reused tracking number |
 | Not allowed in the post | USPS `Returned to Sender, Mailpiece Contains Nonmailable Contents` |
 
@@ -31,14 +31,13 @@ Some statuses hide a return, such as Australia Post's `Contact sender`: [trackin
 
 ## Can I stop my parcel from being returned to sender?
 
-Once it has turned back, no. Before that, usually only the sender can. "Once the return process starts, we can't stop it," says Canada Post. DHL says the same, even for a parcel you refused. [UPS](carrier:ups) can't retrieve a parcel that's back with the sender.
+Once it has turned back, no. Before that, usually only the sender can. "Once the return process starts, we can't stop it," says Canada Post. DHL says the same, even for a parcel you refused.
 
 The stop services that exist belong to the sender, and some need a business account:
 
 | Carrier | Service | Who can use it | Cost and limits |
 | --- | --- | --- | --- |
 | USPS | Package Intercept | The sender or their authorised agent, with a USPS.com account | $19.45 per piece, charged only if the parcel is found; US only; not once it's out for delivery |
-| UPS | Delivery Intercept, `Return to Sender` | The shipper | Before delivery; "fees may apply", charged only if it works |
 | Australia Post | Recall or redirect | Business credit account holders | eParcel and Parcel Send to a street address; the return charge in the sender's contract |
 
 So while the parcel is still on its way to you, the seller is the one to ask. If you only need it delivered somewhere else, see [change the delivery address](guide:change-delivery-address).
@@ -104,7 +103,7 @@ The parcel goes back along much the same route, and the tracking runs backwards:
 
 ## How long does a return to sender take?
 
-**The wait.** A refused item usually goes back at once: the Universal Postal Union's rules return refused letters and small packets "forthwith", and USPS returns items it can't carry "immediately". An uncollected parcel waits out its holding period first: 5 working days at An Post, 15 calendar days at Canada Post, and about 3 weeks at [Royal Mail](carrier:royal-mail) or [Parcelforce](carrier:parcelforce) when a customs bill is unpaid. [Parcel not collected](guide:uncollected-parcel) lists each carrier's wait and how to get more time.
+**The wait.** A refused item usually goes back at once: the Universal Postal Union's rules return refused letters and small packets "forthwith", and USPS returns items it can't carry "immediately". An uncollected parcel waits out its holding period first: 15 calendar days at Canada Post, and about 3 weeks at [Royal Mail](carrier:royal-mail) or [Parcelforce](carrier:parcelforce) when a customs bill is unpaid. [Parcel not collected](guide:uncollected-parcel) lists each carrier's wait and how to get more time.
 
 **The trip back.** No carrier we checked publishes a return transit time. Vinted warns that a returned parcel "may take up to 25 business days to reach the seller".
 
@@ -120,8 +119,6 @@ DHL says a return after a refusal can't be stopped, so ask the shop to send it a
 - [USPS: Domestic Mail Manual 507](https://pe.usps.com/text/dmm300/507.htm) – reasons, free returns
 - [USPS: Package Intercept, the basics](https://faq.usps.com/s/article/USPS-Package-Intercept-The-Basics) – who, conditions
 - [USPS: Notice 123, price list](https://pe.usps.com/text/dmm300/notice123.htm) – Package Intercept $19.45
-- [UPS: Delivery Intercept](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – shipper, fees
-- [UPS: Returned to the sender](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – can't retrieve
 - [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – about 3 weeks, then back to the sender
 - [Canada Post: Why was my item returned? (French)](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/recevoir/faq-livraison/votre-courrier-a-t-il-ete-renvoye.page) – reasons, mistakes
 - [Canada Post: Can I refuse delivery of a parcel?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/can-i-refuse-delivery-of-a-parcel.page) – 15 days, return charge
@@ -129,8 +126,7 @@ DHL says a return after a refusal can't be stopped, so ask the shop to send it a
 - [Canada Post: Tracking statuses](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-statuses.page) – can't stop a return
 - [Australia Post: Return to sender](https://auspost.com.au/help/delivered-parcel/return-to-sender) – reasons, statuses
 - [Australia Post: Business Support Portal](https://auspost.com.au/business/services/business-support-portal) – recall, charge
-- [An Post: Return to sender](https://www.anpost.com/Post-Parcels/Receiving/Customs-Information/Return-to-sender) – customs reasons
-- [An Post: Receiving post](https://www.anpost.com/Post-Parcels/Receiving/Receiving-Post) – 5 and 16 working days
+- [Universal Parcel Scraper: An Post statuses](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/an-post/statuses.json) – not collected, returned to sender
 - [DHL: Help with a return](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/hilfe-ruecksendung.html) – can't stop a return
 - [Austrian Post: FAQ](https://www.post.at/p/c/faq-privat) – delivered to the sender
 - [Universal Postal Union: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – ownership, retention, route

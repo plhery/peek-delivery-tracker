@@ -17,30 +17,29 @@ La raison est en général dans le dernier scan du suivi, et elle est notée sur
 
 | Raison | Ce qu'en dit le transporteur |
 | --- | --- |
-| Adresse fausse ou incomplète | [La Poste](carrier:la-poste) : « coordonnées erronées ou incomplètes », par exemple un numéro de bâtiment ou un étage manquant ; [bpost](carrier:bpost) : l'expéditeur s'est trompé d'adresse |
-| Nom absent de la boîte aux lettres | La Poste : ton nom ne figure pas sur la boîte aux lettres, la sonnette ou l'interphone ; La Poste suisse : `Renvoi`, par exemple pour une boîte aux lettres sans nom |
-| Destinataire inconnu ou déménagé | [La Poste suisse](carrier:swiss-post) : `Destinataire introuvable à l'adresse indiquée`, `Destinataire a déménagé, délai de réexpédition expiré` |
-| Pas retiré à temps | La Poste : délai de mise en instance dépassé au bureau de poste ou au point de retrait ; La Poste suisse : `Envoi non retiré` ; bpost : 14 jours en Point d'enlèvement, 5 en distributeur de colis |
+| Adresse fausse ou incomplète | [La Poste](carrier:la-poste) : adresse incorrecte ; [bpost](carrier:bpost) : l'expéditeur s'est trompé d'adresse |
+| Nom absent de la boîte aux lettres | [La Poste suisse](carrier:swiss-post) : `Renvoi`, par exemple pour une boîte aux lettres sans nom |
+| Destinataire inconnu ou déménagé | La Poste suisse : `Destinataire introuvable à l'adresse indiquée`, `Destinataire a déménagé, délai de réexpédition expiré` |
+| Pas retiré à temps | La Poste : délai de retrait dépassé ; La Poste suisse : `Envoi non retiré` ; bpost : 14 jours en Point d'enlèvement, 5 en distributeur de colis |
 | Refusé à la porte | La Poste suisse : `Refusé` ; bpost : refusé à la porte, par exemple parce qu'il est abîmé ; [Mondial Relay](carrier:mondial-relay) : `Colis refusé` |
-| Frais de douane impayés | La Poste : refus de payer les droits et taxes, ou colis non accepté en douane ; La Poste suisse : envoi de l'étranger refusé faute de paiement |
-| Colis abîmé en route | La Poste : « incident sur votre colis », comme une détérioration ; La Poste suisse : `Envoi en retour en raison d'un dommage` |
-| L'expéditeur l'a demandé | La Poste : demande de retour de ton expéditeur ; La Poste suisse : `Retour direct selon instruction de l'expéditeur` |
+| Douane : frais impayés, documents non conformes | La Poste : documents d'import non conformes ; La Poste suisse : envoi de l'étranger refusé faute de paiement |
+| Colis abîmé en route | La Poste suisse : `Envoi en retour en raison d'un dommage` |
+| L'expéditeur l'a demandé | La Poste suisse : `Retour direct selon instruction de l'expéditeur` |
 
 Entre deux pays, le motif est souvent noté en français, quelle que soit la langue du pays, comme le prévoient les règles de l'Union postale universelle : « Inconnu », « Refusé », « Non réclamé », « Déménagé ».
 
-Le statut lui-même varie : `Retourné à l'expéditeur` chez La Poste, `Colis en retour expéditeur` chez [Chronopost](carrier:chronopost), `Retour à l'expéditeur` chez Mondial Relay. [Les étapes du suivi](guide:tracking-statuses) expliquent ces statuts, y compris les retours qu'on ne reconnaît pas tout de suite. Si c'était une histoire de frais à payer, [le guide sur les frais de douane](guide:customs) explique ce qui était dû et comment récupérer des droits déjà payés.
+Le statut lui-même varie : `Colis en retour expéditeur` chez [Chronopost](carrier:chronopost), `Retour à l'expéditeur` chez Mondial Relay. [Les étapes du suivi](guide:tracking-statuses) expliquent ces statuts, y compris les retours qu'on ne reconnaît pas tout de suite. Si c'était une histoire de frais à payer, [le guide sur les frais de douane](guide:customs) explique ce qui était dû et comment récupérer des droits déjà payés.
 
 ## Peut-on annuler le retour d'un colis ?
 
-Une fois qu'il a fait demi-tour, non. Avant, en général, seul l'expéditeur peut agir. [UPS](carrier:ups) ne peut pas récupérer un colis déjà revenu chez l'expéditeur. Chez Mondial Relay, même changer de Point Relais devient impossible une fois le colis pris en charge. Et le colis appartient à l'expéditeur jusqu'à sa livraison, rappellent les règles de l'Union postale universelle : c'est lui, pas toi, qui peut le rappeler.
+Une fois qu'il a fait demi-tour, non. Avant, en général, seul l'expéditeur peut agir. Chez Mondial Relay, même changer de Point Relais devient impossible une fois le colis pris en charge, précise sa FAQ belge. Et le colis appartient à l'expéditeur jusqu'à sa livraison, rappellent les règles de l'Union postale universelle : c'est lui, pas toi, qui peut le rappeler.
 
 Les rares services pour arrêter ou rappeler un colis sont réservés à l'expéditeur :
 
 | Transporteur | Service | Qui peut s'en servir | Conditions |
 | --- | --- | --- | --- |
-| UPS | Delivery Intercept, option `Return to Sender` | L'expéditeur | Avant la livraison ; des frais peuvent s'appliquer, facturés seulement si l'interception réussit |
 | La Poste suisse | `Retour direct selon instruction de l'expéditeur` | L'expéditeur, à l'avance | Le colis repart dès la première tentative de livraison ratée |
-| La Poste (Colissimo), Chronopost, Mondial Relay, bpost | Aucun service de rappel trouvé sur leurs pages d'aide | – | Contacte l'expéditeur |
+| bpost | Aucun service de rappel trouvé sur ses pages d'aide | – | Contacte l'expéditeur |
 
 Tant que le colis vient encore vers toi, demande au vendeur. Pour le faire livrer ailleurs, lis [comment changer l'adresse de livraison](guide:change-delivery-address).
 
@@ -54,7 +53,7 @@ Tant que le colis vient encore vers toi, demande au vendeur. Pour le faire livre
 - Attends son retour | La boutique te rembourse ou renvoie le colis une fois qu'il est rentré.
 :::
 
-C'est aussi ce que conseillent Chronopost et bpost : contacter l'expéditeur pour un nouvel envoi ou un remboursement.
+C'est aussi ce que conseille bpost : contacter l'expéditeur pour un nouvel envoi ou un remboursement.
 
 ## Colis retourné à l'expéditeur : suis-je remboursé ?
 
@@ -80,8 +79,7 @@ Les boutiques en ligne doivent désormais proposer cette fonction de rétractati
 
 L'expéditeur paie le transporteur, selon les règles de chaque service :
 
-- **La Poste** : si tu refuses un colis venu de l'étranger ou les droits et taxes à payer, elle le renvoie, et « ce retour est gratuit, vous n'avez rien à payer ».
-- **Mondial Relay** renvoie un colis non retiré au Point Relais ou au Locker où il a été déposé, et prend en charge le coût de cette réexpédition.
+- **Mondial Relay**, d'après sa FAQ belge, renvoie un colis non retiré au Point Relais où il a été déposé, et prend en charge le coût de cette réexpédition.
 - **La Poste suisse** renvoie un colis non distribuable à l'expéditeur, à ses frais, sans lui rembourser l'affranchissement payé au départ.
 - **Depuis l'étranger**, les règles de l'Union postale universelle font payer à l'expéditeur le trajet du retour et les frais restés dus à l'arrivée.
 
@@ -95,7 +93,7 @@ Le colis repart à peu près par le même chemin, et le suivi se lit à l'envers
 - shop | Vendeur | Il t'envoie le colis.
 - warehouse | Centres de tri | Les scans se rapprochent de chez toi.
 - locker | Près de chez toi | Refusé, pas retiré ou personne à l'adresse.
-- truck | Demi-tour | Une ligne comme `Retourné à l'expéditeur`.
+- truck | Demi-tour | Une ligne comme `Retour à l'expéditeur`.
 - warehouse | Centres de tri | Le même trajet, en sens inverse.
 - shop | Vendeur | « Livré » veut dire ici livré à l'expéditeur.
 :::
@@ -106,7 +104,7 @@ C'est le piège : à la fin d'un retour, La Poste comme La Poste suisse marquent
 
 ## Retour à l'expéditeur : quel délai ?
 
-**L'attente.** Un colis refusé repart en général tout de suite : les règles de l'Union postale universelle renvoient sans délai les lettres et petits paquets refusés. Un colis non retiré attend d'abord la fin de son délai de garde, de 5 jours chez Mondial Relay à 15 jours au bureau de poste chez La Poste. [Colis non retiré](guide:uncollected-parcel) donne le délai de chaque transporteur.
+**L'attente.** Un colis refusé repart en général tout de suite : les règles de l'Union postale universelle renvoient sans délai les lettres et petits paquets refusés. Un colis non retiré attend d'abord la fin de son délai de garde, de 5 jours chez Mondial Relay, en France comme en Belgique, à 14 jours dans un Point d'enlèvement bpost. [Colis non retiré](guide:uncollected-parcel) donne le délai de chaque transporteur.
 
 **Le trajet retour.** Aucun transporteur consulté ne publie de délai de retour. Vinted prévient qu'il faut « parfois jusqu'à 25 jours ouvrés pour qu'un colis retourné soit livré au vendeur ».
 
@@ -120,27 +118,23 @@ Le retour ne s'arrête pas. Demande à la boutique de te le renvoyer une fois qu
 
 ### Colis retourné à l'expéditeur sans raison : que faire ?
 
-Chez La Poste, si aucune des raisons connues ne correspond, remplis son formulaire de contact Colissimo. bpost te demande de signaler un retour fait par erreur avec le formulaire en ligne en bas de [sa page d'aide](https://www.bpost.be/fr/faq/mon-colis-aurait-du-etre-livre-domicile-mais-ete-renvoye-lexpediteur-pourquoi-et-comment-puis-je). Dans tous les cas, préviens aussi le vendeur.
+En Belgique, bpost te demande de signaler un retour fait par erreur avec le formulaire en ligne en bas de [sa page d'aide](https://www.bpost.be/fr/faq/mon-colis-aurait-du-etre-livre-domicile-mais-ete-renvoye-lexpediteur-pourquoi-et-comment-puis-je). Dans tous les cas, préviens aussi le vendeur.
 
 ### Et s'il n'y a pas d'adresse d'expéditeur dessus ?
 
 La Poste suisse peut ouvrir un colis renvoyé pour trouver son expéditeur. Si elle n'y arrive pas, elle en dispose librement.
 
 :::sources
-- [La Poste : Mon colis ou mon courrier a été retourné à son expéditeur, pourquoi ?](https://aide.laposte.fr/contenu/mon-colis-ou-mon-courrier-a-ete-retourne-a-son-expediteur-pourquoi) – raisons, formulaire de contact
-- [La Poste : Puis-je refuser de payer les droits et taxes à l'importation ?](https://aide.laposte.fr/contenu/puis-je-refuser-de-payer-les-droits-et-ou-taxes-a-l-importation) – retour gratuit pour toi
-- [Chronopost : Pourquoi mon colis a-t-il été retourné à l'expéditeur ?](https://www.chronopost.fr/fr/faq/destinataire/pourquoi-mon-colis-a-t-il-ete-retourne-a-l-expediteur) – raisons, contacter l'expéditeur
-- [Mondial Relay : Le destinataire n'est pas venu chercher son colis](https://www.mondialrelay.fr/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – 5 jours, retour au point de dépôt à ses frais
-- [Mondial Relay : Modifier le Point Relais de livraison](https://www.mondialrelay.fr/faq/recevoir-un-colis/je-souhaite-modifier-le-point-relais-de-livraison-est-ce-possible/) – plus de changement de Point Relais une fois le colis pris en charge
+- [Mondial Relay Belgique : Le destinataire n'est pas venu chercher son colis](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – retour au Point Relais de dépôt, à ses frais
+- [Mondial Relay Belgique : Délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours en France et en Belgique, puis retour à l'expéditeur
+- [Mondial Relay Belgique : Modifier le Point Relais de livraison](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/je-souhaite-modifier-le-point-relais-de-livraison-est-ce-possible/) – plus de changement de Point Relais une fois le colis pris en charge
 - [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – « Retour à l'expéditeur », « Colis refusé »
 - [Universal Parcel Scraper : libellés Chronopost](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/chronopost/statuses.json) – « Colis en retour expéditeur »
-- [Universal Parcel Scraper : codes La Poste](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/la-poste/statuses.json) – retour, puis livraison à l'expéditeur
+- [Universal Parcel Scraper : codes La Poste](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/la-poste/statuses.json) – retour (adresse incorrecte, délai de retrait dépassé, documents d'import non conformes), puis livraison à l'expéditeur
 - [Universal Parcel Scraper : statuts La Poste suisse](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/swiss-post/statuses.json) – un renvoi finit en « distribué » chez l'expéditeur
 - [bpost : Mon colis a été renvoyé à l'expéditeur](https://www.bpost.be/fr/faq/mon-colis-aurait-du-etre-livre-domicile-mais-ete-renvoye-lexpediteur-pourquoi-et-comment-puis-je) – raisons, 14 et 5 jours, retour par erreur
 - [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – motifs de renvoi, retour direct selon instruction de l'expéditeur
 - [La Poste suisse : CG clientèle privée](https://www.post.ch/-/media/post/agb/agb-postdienstleistungen-pk.pdf?vs=24&sc_lang=fr&hash=84B987128A5FDC7FD6E9EA6641A5CEBB) – renvois, frais de l'expéditeur, ouverture, importation
-- [UPS : Delivery Intercept (en anglais)](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – expéditeur, frais
-- [UPS : Colis renvoyé à l'expéditeur (en anglais)](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – impossible de le récupérer
 - [Union postale universelle : Manuel de la Convention (en anglais)](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – propriété de l'expéditeur, motifs en français, garde, voie de retour
 - [About Amazon France : Amazon étend les protections apportées par la Garantie A à Z en France](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeurs tiers, remboursement par Amazon si le problème de livraison n'est pas réglé avec le vendeur
 - [About Amazon (Europe) : Amazon expands A-to-z Guarantee in Europe](https://www.aboutamazon.eu/news/customer-trust/amazon-expands-a-to-z-guarantee-in-europe-to-include-property-damage-and-personal-injury-claims) – Belgique, remboursement par Amazon si le problème n'est pas réglé avec le vendeur

@@ -32,7 +32,7 @@ Alguns estados não dizem logo que a encomenda vai voltar para trás. Nos CTT, `
 
 ## Como recuperar uma encomenda devolvida ao remetente?
 
-Depois de a encomenda dar meia-volta, já não dá. Antes disso, quase sempre só o remetente pode fazer alguma coisa. Os CTT são claros: «Não é possível cancelar a devolução». Também não aceitam pedidos de alteração de uma Encomenda Expresso que já «está em devolução ao remetente». A [UPS](carrier:ups) diz que não consegue ir buscar uma encomenda que já voltou a quem a enviou e pede que o remetente a volte a mandar.
+Depois de a encomenda dar meia-volta, já não dá. Antes disso, quase sempre só o remetente pode fazer alguma coisa. Os CTT são claros: «Não é possível cancelar a devolução». Também não aceitam pedidos de alteração de uma Encomenda Expresso que já «está em devolução ao remetente».
 
 Os serviços para travar ou desviar uma encomenda são quase todos de quem envia, e muitos exigem contrato. Numa Encomenda Expresso dos CTT, também tu podes mudar a entrega enquanto ela vem a caminho:
 
@@ -41,7 +41,6 @@ Os serviços para travar ou desviar uma encomenda são quase todos de quem envia
 | CTT, Encomenda Expresso (códigos DA, DB, DC, DW, DX e DY) | Alterar a entrega: outra morada, Loja ou Ponto CTT, outra data, outro nome de destinatário | Tu, o destinatário; um remetente com contrato pode ainda mudar o que acontece se a entrega falhar | Desde que o envio entra na rede; não quando já está para levantar, em devolução ou devolvida; pode ter custo |
 | CTT, códigos DD, DE e DF | Alterar a entrega | Só o remetente, cliente com contrato | Se quiseres mudar alguma coisa, falas com quem enviou |
 | CTT, Envios Online | Escolher, ao enviar, entre deixar aviso ou devolver de imediato | O remetente | A devolução não lhe custa mais nada |
-| UPS | Delivery Intercept, `Return to Sender` | O expedidor | Antes da entrega; pode haver taxas, cobradas só se a interceção resultar |
 
 Enquanto a encomenda ainda vem a caminho, fala com a loja. Nos CTT, se o envio estiver num Centro Operacional à espera de instruções do remetente, podes conseguir pedir uma alteração, conforme o tipo de envio. Para a receberes noutro sítio, vê [mudar a morada de uma encomenda](guide:change-delivery-address).
 
@@ -131,8 +130,6 @@ Nos Envios Online dos CTT, quando não é possível entregar nem devolver, a CTT
 - [InPost: Fala connosco, perguntas frequentes](https://www.inpost.pt/fala-connosco) – 5 dias seguidos, regresso ao ponto de origem à custa da InPost, não conformidade
 - [InPost: Os estados de envio InPost](https://www.inpost.pt/blog/os-estados-de-envio-inpost-o-que-significa-cada-mensagem-do-rastreio) – «Devolução em curso»
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – segunda tentativa, 10 dias úteis, recusa de encomenda danificada
-- [UPS: Delivery Intercept](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – só o expedidor, taxas
-- [UPS: The package was returned to the sender](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – não recupera uma encomenda já devolvida
 - [União Postal Universal: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – menções em francês, devolução imediata, retenção, via menos prioritária, encargos, abandono
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales (em espanhol)](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – a Garantia de A a Z cobre as compras a vendedores externos, reembolso pedido à Amazon se o vendedor não resolver
 - [eBay: Money Back Guarantee](https://www.ebay.com/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – o que está coberto

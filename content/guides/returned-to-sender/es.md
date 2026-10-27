@@ -32,7 +32,7 @@ Algunos estados esconden una devolución, como `Finalizado plazo retirada`: [est
 
 ## ¿Se puede parar la devolución de un paquete?
 
-Cuando ya ha dado la vuelta, no. Antes, casi siempre solo puede el remitente. En España lo dice la ley: un envío es del remitente hasta que llega a manos del destinatario, y se puede recuperar o cambiar de dirección pagando el precio. DHL, en Alemania, avisa de que una devolución no se puede parar, ni siquiera la de un paquete que rehusaste. [UPS](carrier:ups) no puede recuperar un paquete que ya está con el remitente y te pide que hables con él.
+Cuando ya ha dado la vuelta, no. Antes, casi siempre solo puede el remitente. En España lo dice la ley: un envío es del remitente hasta que llega a manos del destinatario, y se puede recuperar o cambiar de dirección pagando el precio. DHL, en Alemania, avisa de que una devolución no se puede parar, ni siquiera la de un paquete que rehusaste.
 
 Lo que existe para pararla es, casi todo, del remitente:
 
@@ -41,7 +41,6 @@ Lo que existe para pararla es, casi todo, del remitente:
 | Correos | Autorización Previa a la Entrega (APE) | Empresas con Paq Estándar | Bloquea el envío al llegar a la oficina o la unidad de reparto; el remitente lo desbloquea para entregarlo o devolverlo |
 | Correos | Envío estacionado | El remitente, en Mi Oficina; tú, en «Gestión de estacionados» con el número de envío y el PIN | 5 días naturales para corregir los datos; un particular que envía tiene que llamar al 915 197 197 |
 | Cualquier operador postal | Aviso de que no se ha podido entregar, si el operador avisa en vez de devolverlo | El remitente | 15 días para recuperarlo o cambiar la dirección, pagando el cambio; si no, se da por abandonado |
-| UPS | Delivery Intercept, `Return to Sender` | El remitente | Antes de la entrega; «puede haber cargos», solo si sale bien |
 
 Mientras el paquete siga de camino hacia ti, pídeselo a la tienda. Si lo que quieres es recibirlo en otro sitio, mira [cómo cambiar la dirección de entrega](guide:change-delivery-address).
 
@@ -136,8 +135,6 @@ El Reglamento postal solo prevé devolverlo «cuando conste la dirección» del 
 - [Universal Parcel Scraper: estados de Correos Express](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-express/statuses.json) – fin del periodo de recogida y devolución a origen
 - [Universal Parcel Scraper: estados de CTT Express](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/ctt-express/statuses.json) – En devolución, Devuelto a remitente
 - [DHL: Ayuda con una devolución (en alemán)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/hilfe-ruecksendung.html) – una devolución no se puede parar
-- [UPS: Delivery Intercept (en inglés)](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – remitente, antes de la entrega, cargos
-- [UPS: Paquete devuelto al remitente (en inglés)](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – no se puede recuperar
 - [Unión Postal Universal: Manual del Convenio (en inglés)](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – motivos en francés, plazos de espera, vía de vuelta, gastos del remitente
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z para vendedores externos, problemas con el tiempo de entrega
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – reembolso de Amazon si no se resuelve con el vendedor

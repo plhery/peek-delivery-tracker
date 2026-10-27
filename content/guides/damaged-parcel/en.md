@@ -1,6 +1,6 @@
 ---
 title: What to do if a parcel arrives damaged, and how to claim
-description: What to do if a parcel arrives damaged: the photos to take, when to refuse it, who owes you a refund, and claim deadlines at Royal Mail, USPS, UPS and others.
+description: What to do if a parcel arrives damaged: the photos to take, when to refuse it, who owes you a refund, and claim deadlines at Royal Mail, USPS, Evri and others.
 slug: parcel-arrived-damaged
 picture: A dented box with a torn corner and its tape peeling off, a phone photographing it with a flash, and a worried Pip with a plaster stuck on him.
 published: 2026-10-14
@@ -47,12 +47,9 @@ Most carriers deal only with the sender, so your claim usually goes through the 
 | Carrier | Who can claim | Deadline for damage | Paid without extra cover |
 | --- | --- | --- | --- |
 | [USPS](carrier:usps) | Sender or recipient, insured items only | 60 days after mailing | Nothing if uninsured |
-| [UPS](carrier:ups) | Shipper; recipient as a guest unless the shipper blocks it | 60 days after the scheduled delivery | – (paid to the shipper) |
-| [FedEx](carrier:fedex) (US) | Shipper or recipient | 60 calendar days after shipment (21 international) | – |
 | [Royal Mail](carrier:royal-mail) | Sender or recipient; Tracked 24 and 48: sender only | 80 days after posting (6 months if sent abroad) | Up to £20 (1st, 2nd Class, Signed For), £75 (Tracked 24 and 48) |
 | [Evri](carrier:evri) | Sender | 28 days after the order (binding on business senders) | Up to £20 |
 | [DPD UK](carrier:dpd-uk) | Sender | 14 days after despatch | Up to £100 |
-| [An Post](carrier:an-post), business senders | Sender | 30 days after posting | Nothing for standard parcels |
 | Canada Post | Sender | 90 days after shipping within Canada | Insured value and postage |
 | [Australia Post](carrier:australia-post) | Recipient, in person at a Post Office | 6 months after posting | Up to A$100 plus postage |
 
@@ -73,10 +70,6 @@ Only if it was insured, as Priority Mail Express and other insured mail are. "US
 Tell the seller first: most posts pay only the sender. Royal Mail and insured USPS mail are the exceptions.
 
 Australia Post works the other way round. Take the item and its packaging to a Post Office for a damage report and leave them there. For a parcel sent within Australia, the recipient is usually the one paid.
-
-### Is UPS responsible for damaged packages, and how do you claim?
-
-Yes, to the shipper, and it pays the shipper. You can file as a guest within 60 days of the scheduled delivery, unless the shipper blocks it.
 
 ## Can you refuse a damaged parcel?
 
@@ -100,7 +93,7 @@ Switzerland is stricter. Swiss Post says accepting a parcel without reservation 
 
 ## What photos do you need of a damaged parcel?
 
-[UPS](https://www.ups.com/us/en/support/file-a-claim) asks for three, and they work for any carrier or shop:
+Take them before you unpack any further. These three make a good set for any carrier or shop:
 
 1. The damaged item, and how it was packed inside the box.
 2. A close-up of the label with the tracking number.
@@ -129,14 +122,11 @@ On eBay, send it back with the seller's prepaid label for a full refund includin
 If the seller won't help, a card dispute may. In the US, your written dispute must reach the card issuer within 60 days of the first statement showing the charge. Elsewhere, see [card and PayPal disputes](guide:delivered-not-received).
 
 :::sources
-- [UPS: File a claim](https://www.ups.com/us/en/support/file-a-claim) – 60 days, guests, photos
 - [USPS: File a claim](https://www.usps.com/help/claims.htm) – insured items, 60 days
-- [FedEx: Claims](https://www.fedex.com/en-us/customer-support/claims.html) – 60 and 21 days
 - [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – who claims, 80 days, 6 months, limits, photos, postmark, proof of value, 30 and 90 days
 - [Citizens Advice: Damaged, lost or delayed post](https://www.citizensadvice.org.uk/consumer/post-and-parcels/damaged-lost-delayed-post-or-parcel/) – seller first, POSTRS
 - [Evri: Terms and conditions](https://www.evri.com/terms-and-conditions) – 28 days, £20
 - [DPD UK: Standard Terms and Conditions of Carriage](https://www.dpd.co.uk/pdf/dpd-stcc.pdf) – 14 days, £100
-- [An Post: Non-USO parcels terms](https://www.anpost.com/Terms-Conditions/Non-USO-Packets-and-Parcels-Terms) – sender, 30 days
 - [Canada Post: Damage claims](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/damaged-packages.page) – sender only, 90 days
 - [Australia Post: Compensation](https://auspost.com.au/personal/receiving/parcel-deliveries/compensation) – damage report, $100
 - [Swiss Post: Beschädigung oder Verlust](https://www.post.ch/de/pakete-versenden/schaden-oder-verlust) – 8 days after delivery

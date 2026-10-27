@@ -32,12 +32,9 @@ Carriers count from posting or the due date, not from the last scan. Most "lost"
 | Carrier | Search or claim from | Claim deadline | Who claims |
 | --- | --- | --- | --- |
 | [USPS](carrier:usps) | Search: 7 days after mailing. Insured claim: 15 days (7 for Priority Mail Express) | 60 days after mailing | Sender or recipient, with the mailing receipt |
-| [UPS](carrier:ups) | No day count | 60 days after scheduled delivery | You, unless the shipper blocks it; the shipper is paid |
-| [FedEx](carrier:fedex) | No day count | 9 months after shipping | You, or the merchant |
 | [Royal Mail](carrier:royal-mail) | Working days after posting: 11 (1st Class), 14 (2nd Class). Special Delivery: 5 after the due date | 80 days after posting; 6 months abroad | Sender or recipient. Tracked 24 and 48: sender only |
 | [Evri](carrier:evri) | Over 7 days with Evri: tell the sender | 28 days after the order (45 abroad), recommended | The sender |
 | [DPD UK](carrier:dpd-uk) | The sender reports it within 14 days of despatch | 1 year | The sender |
-| [An Post](carrier:an-post) | 5 working days after posting (15 days international) | 3 months after posting (6 international) | Sender or recipient |
 | Canada Post | After the expected delivery date | 90 days after shipping (6 months abroad) | Only the sender is paid |
 | Australia Post | 10 business days after the expected date | 6 months after posting | The sender is paid, unless it waives |
 
@@ -52,7 +49,7 @@ If you bought from a business, the seller, in most places:
 
 The risk is yours if you booked a courier the shop didn't offer, or bought from a private person. Canada's rules and the other exceptions are in [delivered but not received](guide:delivered-not-received).
 
-## Lost parcel refund on Amazon, eBay, Etsy, Vinted, Temu and AliExpress
+## Lost parcel refund on Amazon, eBay, Etsy, Vinted and AliExpress
 
 If the seller doesn't help, the marketplace can, if you paid through its checkout:
 
@@ -62,7 +59,6 @@ If the seller doesn't help, the marketplace can, if you paid through its checkou
 | Etsy | Estimated date passed and the seller contacted over 48 hours ago | 30 days after the estimated date |
 | Vinted (its label) | `Parcel seems to be lost`, or 25 business days after `shipped` | 2 days after Vinted's notice |
 | AliExpress | From the 11th day after dispatch, or once the delivery time is over if tracking still moves | 15 days after the delivery time ends |
-| Temu | Lost in transit | 90 days after purchase |
 
 On Amazon, the A-to-z Guarantee covers delivery problems with anything bought in its stores, whether Amazon or another seller sold it: Amazon refunds or replaces it. If another seller shipped it, contact that seller first; if it hasn't replied within 48 hours, Amazon UK says you can claim from Amazon, which decides on the refund.
 
@@ -75,17 +71,13 @@ Not much. Included cover is capped and pays only the value you can prove, usuall
 | Carrier | Included cover | Extra cover |
 | --- | --- | --- |
 | USPS | Up to $100 on Priority Mail Express, Priority Mail, Ground Advantage | Insurance to $5,000; Registered Mail $50,000 |
-| UPS, FedEx | $100 | Declared value |
 | Royal Mail | 1st, 2nd Class £20; Tracked 24, 48 £75; Special Delivery by 1pm £750 | More on Special Delivery with extra insurance |
 | Evri | £20 | Full Cover |
 | Canada Post | CAN$100 on Priority, Xpresspost, Expedited Parcel; none on Regular Parcel | CAN$5,000 in Canada, CAN$1,000 abroad |
 | Australia Post | Up to A$100 on most services | Extra Cover to A$5,000 |
-| An Post | Standard Post: postage and direct costs, usually in stamps | Registered Post |
 | Parcels between national posts (UPU) | 40 SDR plus 4.50 SDR per kg | Insured items |
 
 Between two national posts, a lost 2 kg parcel pays at most 49 SDR plus postage, about €59 at the UPU's 2026 rate of €1.2119 per SDR (Correos), unless the posts agreed a flat 130 SDR.
-
-Declared value isn't insurance: you pay UPS to raise its limit, and UPS says it "does not receive any form of insurance".
 
 ## How do I file a claim with USPS, Royal Mail or another carrier?
 
@@ -96,7 +88,7 @@ On the carrier's own site, before the deadline in the first table, with:
 - **Proof of value.** Invoice, receipt, bank statement or PayPal record; Royal Mail wants the original. USPS accepts an online transaction printout showing buyer, seller, price, date and item.
 - **Contents and both addresses.**
 
-USPS usually decides within 5 to 10 days, UPS in 8 to 10 business days, Royal Mail within 30 days.
+USPS usually decides within 5 to 10 days, Royal Mail within 30 days.
 
 ## Bought from a private seller on eBay or Vinted?
 
@@ -118,16 +110,10 @@ On PayPal, open an Item Not Received dispute within 180 days of paying, and esca
 - [USPS: Missing Mail](https://www.usps.com/help/missing-mail.htm) – 7 days
 - [USPS: Claims](https://www.usps.com/help/claims.htm) – deadlines, evidence, timing
 - [USPS: Insurance](https://www.usps.com/ship/insurance-extra-services.htm) – cover
-- [UPS: File a claim](https://www.ups.com/us/en/support/file-a-claim) – 60 days
-- [UPS: Terms of Service](https://www.ups.com/assets/resources/webcontent/en_US/terms_service_us.pdf) – $100, declared value
-- [FedEx: Claims](https://www.fedex.com/en-us/customer-support/claims.html) – 9 months
-- [FedEx: Declared value](https://www.fedex.com/en-us/shipping/declared-value.html) – $100
 - [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – waiting times, 80 days, 6 months, who claims, £20, £75, £750, extra insurance, proof of posting and value, 30 days
 - [Evri: Parcel not received](https://www.evri.com/faqs/receiving-a-parcel/what-can-i-do-if-i-havent-received-my-parcel) – 7 days
 - [Evri: Terms](https://www.evri.com/terms-and-conditions) – £20, deadlines
 - [DPD UK: Standard Terms and Conditions of Carriage](https://www.dpd.co.uk/pdf/dpd-stcc.pdf) – 14 days, 1 year
-- [An Post: Receiving post](https://www.anpost.com/Post-Parcels/Receiving/Receiving-Post) – 5 working days, 15 days
-- [An Post: Feedback and complaints](https://www.anpost.com/Customer-Charter/Feedback-Complaints) – who complains, deadlines, stamps
 - [Canada Post: Missing packages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/missing-packages.page) – 90 days, senders
 - [Canada Post: Coverage](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/insurance-coverage.page) – CAN$100, caps
 - [Australia Post: Lost or late items](https://auspost.com.au/personal/receiving/parcel-deliveries/lost-late-items) – 10 business days
@@ -147,7 +133,6 @@ On PayPal, open an Item Not Received dispute within 180 days of paying, and esca
 - [Vinted: Refund policy](https://www.vinted.co.uk/help/465-the-vinted-refund-policy) – lost parcels
 - [Vinted: Parcel didn't arrive](https://www.vinted.co.uk/help/658-package-didn-t-arrive) – 25 days
 - [AliExpress: Open a dispute](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 11, 15 days
-- [Temu: Purchase Protection](https://www.temu.com/uk/bgt_purchase_protection.html) – 90 days
 - [PayPal UK: Buyer Protection](https://www.paypal.com/uk/legalhub/paypal/buyer-protection) – 180, 20 days
 - [PayPal US: Purchase Protection](https://www.paypal.com/us/legalhub/paypal/buyer-protection) – proof of shipment
 - [CFPB: Card disputes](https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-a-charge-on-my-credit-card-bill-en-61/) – 60 days

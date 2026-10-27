@@ -484,6 +484,20 @@ class ParcelRouteTests {
         assertTrue("${moved.frame}", frame.contains(moved.frame))
     }
 
+    // Not an iPhone test: the layout measures each name once per measurer and font, and tracks it per Character.
+    @Test
+    fun eachNameIsMeasuredOnce() {
+        val measured = mutableListOf<String>()
+        val measurer = TextMeasurer { text, font -> measured.add("$text ${font.size}"); 10.2 }
+        val font = MapOverlay.Fonts.pointerName
+        repeat(3) { assertEquals(11.0, MapOverlay.Fonts.width("Zürich", font, measurer), 0.0) }
+        assertEquals(11.0, MapOverlay.Fonts.width("Zürich", MapOverlay.Fonts.pointerDetail, measurer), 0.0)
+        assertEquals(11.0 + 6 * 0.5, MapOverlay.Fonts.width("Zürich", font, measurer, tracking = 0.5), 0.0)
+        assertEquals(listOf("Zürich 11.0", "Zürich 11.0", "Zürich 11.0"), measured)
+        // Another measurer measures for itself.
+        assertEquals(12.0, MapOverlay.Fonts.width("Zürich", font, TextMeasurer { _, _ -> 12.0 }), 0.0)
+    }
+
     @Test
     fun pipHasAMoodForEveryStageWithAMap() {
         val moods = TrackingStage.entries.associateWith { PipMood(it) }
@@ -610,6 +624,70 @@ class ParcelRouteTests {
         assertTrue(frames.size < 3 * 25)
         assertTrue(frames.any { PipBlink.eyeScale(it) < 0.2 })
         assertTrue(frames.any { PipBlink.eyeScale(it, eye = 1) < 0.2 })
+    }
+
+    // Not an iPhone test: PipPalette's colours as SwiftUI resolves them on the iPhone, in Float32.
+    @Test
+    fun pipIsDrawnInTheIphonesColours() {
+        val kraft = PipPalette.kraft
+        val light = PipPalette.ink(Brand.ink, on = Brand.paper, dark = false)
+        val dark = PipPalette.ink(Brand.ink, on = Brand.paper, dark = true)
+        val cases = listOf(
+            Triple(kraft.inside, false, listOf(0.501961, 0.388235, 0.270588, 1.0)),
+            Triple(kraft.eyeWhite, false, listOf(1.0, 0.992157, 0.964706, 1.0)),
+            Triple(kraft.catchlight, true, listOf(1.0, 1.0, 1.0, 1.0)),
+            Triple(kraft.shadow, false, listOf(0.0, 0.0, 0.0, 0.08)),
+            Triple(kraft.speedLines, false, listOf(0.717647, 0.560784, 0.4, 0.45)),
+            Triple(kraft.glint(3), false, listOf(0.709804, 0.580392, 0.745098, 1.0)),
+            Triple(light.inside, false, listOf(0.102902, 0.11898, 0.096471, 1.0)),
+            Triple(light.right, false, listOf(0.265412, 0.281882, 0.258824, 1.0)),
+            Triple(light.eyeWhite, false, listOf(1.0, 1.0, 1.0, 1.0)),
+            Triple(light.blush, false, listOf(0.747271, 0.476133, 0.499412, 1.0)),
+            Triple(light.shadow, false, listOf(0.102902, 0.11898, 0.096471, 0.14)),
+            Triple(light.speedLines, false, listOf(0.12549, 0.145098, 0.117647, 0.32)),
+            Triple(light.glint(3), false, listOf(0.247922, 0.264784, 0.241176, 1.0)),
+            Triple(dark.inside, true, listOf(0.115765, 0.128627, 0.115765, 1.0)),
+            Triple(dark.right, true, listOf(0.829647, 0.835451, 0.819765, 1.0)),
+            Triple(dark.eyeWhite, true, listOf(0.985098, 0.986588, 0.980627, 1.0)),
+            Triple(dark.blush, true, listOf(0.787718, 0.515733, 0.538871, 1.0)),
+            Triple(dark.shadow, true, listOf(0.0, 0.0, 0.0, 0.26)),
+            Triple(dark.speedLines, true, listOf(0.960784, 0.964706, 0.94902, 0.32)),
+            Triple(dark.glint(3), true, listOf(0.846039, 0.851608, 0.835922, 1.0)),
+        )
+        for ((index, case) in cases.withIndex()) {
+            val (color, inDark, expected) = case
+            val resolved = color.resolve(inDark)
+            val actual = listOf(resolved.red, resolved.green, resolved.blue, resolved.opacity)
+            for (channel in 0..3) assertEquals("case $index channel $channel", expected[channel], actual[channel], 1e-6)
+        }
+        // The glints take their three tones in turn, the ink's own first.
+        assertEquals(listOf(0, 1, 0, 2, 1, 0).map { light.glints[it] }, (0..5).map(light::glint))
+        assertEquals(Brand.ink, light.glints[0])
+    }
+
+    // Not an iPhone test: each glint's twinkle as the iPhone's PipArtwork.twinkle gives it, its curve in Float32.
+    @Test
+    fun eachGlintTwinklesOnItsOwnClock() {
+        val cases = listOf(
+            Triple(0, 0.0, listOf(0.2, 0.6, -10.0)),
+            Triple(3, 0.0, listOf(0.9998748779296875, 1.0999217987060548, 7.997184753417969)),
+            Triple(0, 1.1, listOf(1.0, 1.1, 8.0)),
+            Triple(1, 1.1, listOf(0.65595703125, 0.88497314453125, 0.259033203125)),
+            Triple(2, 2.7, listOf(0.9167694091796876, 1.0479808807373048, 6.127311706542969)),
+            Triple(5, 2.7, listOf(0.6429962158203125, 0.8768726348876953, -0.03258514404296875)),
+            // Before its clock starts, a glint twinkles as it would a period later.
+            Triple(3, -1.0, listOf(0.21048507690429688, 0.6065531730651855, -9.76408576965332)),
+        )
+        for ((index, time, expected) in cases) {
+            val twinkle = PipArtwork.twinkle(index, at = time)
+            assertEquals("$index at $time", expected[0], twinkle.opacity, 1e-5)
+            assertEquals("$index at $time", expected[1], twinkle.scale, 1e-5)
+            assertEquals("$index at $time", expected[2], twinkle.degrees, 1e-4)
+        }
+        // Each glint repeats on a period of its own: 2.2, 2.7 or 3.2 seconds.
+        for ((index, period) in listOf(0 to 2.2, 1 to 2.7, 2 to 3.2, 4 to 2.7)) {
+            assertEquals("$index", PipArtwork.twinkle(index, at = 0.5).degrees, PipArtwork.twinkle(index, at = 0.5 + period).degrees, 1e-9)
+        }
     }
 
     @Test

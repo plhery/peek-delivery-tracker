@@ -4,6 +4,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
 import java.util.Locale
+import java.util.WeakHashMap
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.acos
@@ -815,7 +816,15 @@ data class MapFont(val size: Double, val weight: Weight) {
 
 /**
  * How wide a line of text is in a font, unrounded: `(text as NSString).size(withAttributes: [.font: font]).width` on
- * the iPhone. :app measures with the platform's text metrics.
+ * the iPhone. Given the system font's size and weight, it returns the advance width of the text alone, on one line,
+ * kerning included: the layout rounds it up and adds any tracking itself (`MapOverlay.Fonts.width`).
+ *
+ * Sizes and widths are in points, which are dp on Android. The iPhone's map names keep their size whatever the
+ * reader's text size: it measures them with `UIFont.systemFont(ofSize:weight:)` and writes them with
+ * `.system(size:weight:)`, neither of which follows Dynamic Type. So :app measures and writes them in dp, not sp.
+ *
+ * The layout keeps the widths it measured per measurer, font and text, so a measurer gives the same width each time,
+ * and :app keeps one rather than making one for each layout.
  */
 fun interface TextMeasurer {
     fun width(text: String, font: MapFont): Double
@@ -890,8 +899,30 @@ class MapOverlay(
         val pointerName = MapFont(11.0, MapFont.Weight.Semibold)
         val pointerDetail = MapFont(11.0, MapFont.Weight.Regular)
 
-        fun width(text: String, font: MapFont, measurer: TextMeasurer, tracking: Double = 0.0): Double =
-            ceil(measurer.width(text, font)) + tracking * text.characters().size.toDouble()
+        /**
+         * The width rounded up, then the tracking `Text.tracking` adds after each Character. One framing lays the map
+         * out dozens of times over the same names, so each measurer's widths are kept, a few thousand at most, for as
+         * long as the measurer itself is.
+         */
+        fun width(text: String, font: MapFont, measurer: TextMeasurer, tracking: Double = 0.0): Double {
+            val key = Measured(font, tracking, text)
+            val widths = synchronized(measured) { measured.getOrPut(measurer, ::Widths) }
+            synchronized(widths) { widths[key] }?.let { return it }
+            // Untracked, the Characters do not count.
+            val width = ceil(measurer.width(text, font)) + if (tracking == 0.0) 0.0 else tracking * text.characterCount()
+            synchronized(widths) { widths[key] = width }
+            return width
+        }
+
+        private data class Measured(val font: MapFont, val tracking: Double, val text: String)
+
+        /** The widths a measurer measured last, the least recently used dropped first. */
+        private class Widths : LinkedHashMap<Measured, Double>(KEPT, 0.75f, true) {
+            override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Measured, Double>): Boolean = size > KEPT
+        }
+
+        private const val KEPT = 2_048
+        private val measured = WeakHashMap<TextMeasurer, Widths>()
     }
 
     private class Candidate(val id: String, val place: RoutePlace, val kind: LabelKind, val priority: Int)

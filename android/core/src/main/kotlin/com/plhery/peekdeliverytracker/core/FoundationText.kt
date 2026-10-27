@@ -58,6 +58,9 @@ internal fun String.characters(): List<String> {
     return Icu.characterBreaks.ends(this).map { end -> substring(start, end).also { start = end } }
 }
 
+/** `count`: how many Characters the string has. */
+internal fun String.characterCount(): Int = if (all { it.code < 0x80 && it != '\r' }) length else Icu.characterBreaks.ends(this).size
+
 /**
  * Swift's `hasPrefix`, which compares Characters: the prefix must end where a Character does, so "n=\u0301" does not
  * start with "n=". For an ASCII prefix without CR.

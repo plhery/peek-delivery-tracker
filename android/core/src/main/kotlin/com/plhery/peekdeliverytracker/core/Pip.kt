@@ -10,8 +10,8 @@ import kotlin.math.hypot
 import kotlin.math.sin
 
 // From Pip.swift, what the map needs to place Pip and what his drawing computes: his moods, where he stands, his box's
-// geometry, its opening, his blink and his motion. The drawing itself (PipArtwork's GraphicsContext code, the
-// palettes, the views) belongs to :app.
+// geometry, its opening, his colours, his blink, his motion and his glints' twinkle. The drawing itself (PipArtwork's
+// GraphicsContext code, the views) belongs to :app.
 
 /** How Pip, the parcel with a face, feels about the parcel's stage. */
 enum class PipMood {
@@ -291,7 +291,73 @@ object PipGeometry {
     }
 }
 
-/** PipArtwork's motion, the one part of his drawing that is arithmetic alone; the drawing is :app's. */
+// MARK: - Colours
+
+/** Every colour Pip is drawn with: kraft paper, or a card's ink mixed toward its surface. */
+data class PipPalette(
+    val inside: AdaptiveColor,
+    val right: AdaptiveColor,
+    val left: AdaptiveColor,
+    val backLeft: AdaptiveColor,
+    val backRight: AdaptiveColor,
+    val frontRight: AdaptiveColor,
+    val frontLeft: AdaptiveColor,
+    val tape: AdaptiveColor,
+    val seam: AdaptiveColor,
+    val hairline: AdaptiveColor,
+    val highlight: AdaptiveColor,
+    val eyeWhite: AdaptiveColor,
+    /** Pupils and mouth. */
+    val features: AdaptiveColor,
+    val catchlight: AdaptiveColor,
+    val blush: AdaptiveColor,
+    /** The three tones the glints alternate between. */
+    val glints: List<AdaptiveColor>,
+    val shadow: AdaptiveColor,
+    val speedLines: AdaptiveColor,
+) {
+    /** The tone of `PipGeometry.glints[index]`. */
+    fun glint(index: Int): AdaptiveColor = glints[GLINT_TONES[index]]
+
+    companion object {
+        private val GLINT_TONES = listOf(0, 1, 0, 2, 1, 0)
+
+        private fun hex(hex: String): AdaptiveColor = AdaptiveColor(RgbaColor.hex(hex))
+        private val black = AdaptiveColor(RgbaColor(0.0, 0.0, 0.0))
+        private val white = AdaptiveColor(RgbaColor(1.0, 1.0, 1.0))
+
+        val kraft = PipPalette(
+            inside = hex("#806345"), right = hex("#B78F66"), left = hex("#C9A47B"),
+            backLeft = hex("#C4A078"), backRight = hex("#D8B997"), frontRight = hex("#D1AE85"),
+            frontLeft = hex("#DDBD96"), tape = hex("#EBDDCA"), seam = hex("#AF9474"),
+            hairline = hex("#987450"), highlight = hex("#FFF2CF"), eyeWhite = hex("#FFFDF6"),
+            features = hex("#20251E"), catchlight = white, blush = hex("#E9958F"),
+            glints = listOf(hex("#C99B35"), hex("#D6AE48"), hex("#B594BE")),
+            shadow = black.opacity(0.08), speedLines = hex("#B78F66").opacity(0.45),
+        )
+
+        /**
+         * The card's own colours. On a dark card the surface is the darker of the two, so the eyes keep
+         * their white and the pupils their depth.
+         */
+        fun ink(ink: AdaptiveColor, on: AdaptiveColor, dark: Boolean): PipPalette {
+            val surface = on
+            val mix = { amount: Double -> surface.mix(ink, amount) }
+            val deep = (if (dark) surface else ink).mix(black, 0.18)
+            val paper = (if (dark) ink else surface).mix(white, 0.62)
+            return PipPalette(
+                inside = deep, right = mix(0.84), left = mix(0.56), backLeft = mix(0.62), backRight = mix(0.40),
+                frontRight = mix(0.50), frontLeft = mix(0.36), tape = mix(0.20), seam = mix(0.70), hairline = ink,
+                highlight = paper, eyeWhite = paper, features = deep, catchlight = paper,
+                blush = mix(0.56).mix(hex("#F0707E"), 0.55),
+                glints = listOf(ink, mix(0.72), mix(0.86)),
+                shadow = if (dark) black.opacity(0.26) else deep.opacity(0.14), speedLines = ink.opacity(0.32),
+            )
+        }
+    }
+}
+
+/** PipArtwork's arithmetic: his motion and his glints' twinkle. The drawing is :app's. */
 object PipArtwork {
     private val spring = UnitCurve.bezier(Point(0.22, 1.0), Point(0.36, 1.0))
 
@@ -340,6 +406,18 @@ object PipArtwork {
             .rotated(turn * PI / 180)
             .scaledBy(across, up)
             .translatedBy(-pivot.x, -pivot.y)
+    }
+
+    /** How a glint shows: its opacity, its size as a share of its own, and its turn in degrees. */
+    data class Twinkle(val opacity: Double, val scale: Double, val degrees: Double)
+
+    /** Each glint twinkles on its own clock: the one at `PipGeometry.glints[index]`, `at` seconds on it. */
+    fun twinkle(index: Int, at: Double): Twinkle {
+        val period = 2.2 + (index % 3).toDouble() * 0.5
+        val phase = ((at - index.toDouble() * 0.37) / period) % 1
+        val wrapped = if (phase < 0) phase + 1 else phase
+        val glow = UnitCurve.easeInOut.value(if (wrapped < 0.5) wrapped * 2 else (1 - wrapped) * 2)
+        return Twinkle(0.2 + 0.8 * glow, 0.6 + 0.5 * glow, -10 + 18 * glow)
     }
 }
 

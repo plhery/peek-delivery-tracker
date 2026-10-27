@@ -35437,7 +35437,7 @@
           "relay_of": {
             "type": "string",
             "format": "uuid",
-            "description": "Set on one scan of a relay pair, a scan of the carrier the parcel was handed over from that repeats a scan of another source (at the same stage within a minute, or in any stage at the same second, or to the minute when one of the two keeps no seconds): the other scan's id. It is set on the copy, or on the scan it repeats when only the copy has a location. Apps show the scan with relay_of under the other rather than as a step of its own, and keep its words visible, since it may be a scan of its own."
+            "description": "Set on a scan shown under another, with that scan's id. One scan of a relay pair, a scan of the carrier the parcel was handed over from that repeats a scan of another source (at the same stage within a minute, or in any stage at the same second, or to the minute when one of the two keeps no seconds): set on the copy, or on the scan it repeats when only the copy has a location or only the copy tells a problem. Or a carrier's repeat of its own scan, in the same stage, words and place right after it and within an hour of the first: set on each but the newest. Apps show the scan with relay_of under the other rather than as a step of its own, and keep its words visible when they differ, since it may be a scan of its own."
           }
         }
       },

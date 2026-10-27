@@ -164,7 +164,7 @@ describe('what an alert announces', () => {
     pending([row()]);
     // A new place every 23 h 55 min 11 s, the newest the batch's scan.
     const move = (step: number) => ({ id: step === 3 ? 'event-1' : `move-${step}`, stage: 'in_transit' as const, location: `Place ${step}`,
-      occurredAt: new Date(Date.parse('2026-10-02T12:30:00Z') - (3 - step) * 86_111_000).toISOString() });
+      occurredAt: new Date(Date.parse('2026-10-02T12:30:00Z') - (3 - step) * 86_111_000).toISOString(), description: 'In transit', source: 'yunexpress' });
     const recent = vi.mocked(client.recentScans).mockResolvedValue(new Map([['package-1', [move(3), move(2), move(1), move(0)]]]));
     const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
     expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });
@@ -178,6 +178,30 @@ describe('what an alert announces', () => {
     await alerts.dispatch();
     await alerts.dispatch();
     expect(send).toHaveBeenCalledTimes(2);
+  });
+
+  it('handles a carrier\'s repeat of a scan it had sent silently, and announces a run that arrives at once by its first scan', async () => {
+    const scan = (id: string, occurredAt: string, location = 'Example Town') => ({ id, stage: 'failed_attempt' as const, location, occurredAt,
+      description: 'Address details incorrect', source: 'j-and-t-au' });
+    pending([row({ stage: 'failed_attempt', package_stage: 'failed_attempt', occurred_at: '2026-10-02T12:32:44Z' })]);
+    const recent = vi.mocked(client.recentScans).mockResolvedValue(new Map([['package-1', [
+      scan('event-1', '2026-10-02T12:32:44Z'), scan('earlier', '2026-10-02T12:29:09Z')]]]));
+    const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
+    expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });
+    expect(send).not.toHaveBeenCalled();
+    expect(handled).toHaveBeenCalledExactlyOnceWith('alert-1', ['event-1']);
+    expect(counted).toHaveBeenCalledExactlyOnceWith('skipped', 'web');
+    // Told at another place it is news.
+    recent.mockResolvedValueOnce(new Map([['package-1', [scan('event-1', '2026-10-02T12:32:44Z'), scan('earlier', '2026-10-02T12:29:09Z', 'Other Town')]]]));
+    await alerts.dispatch();
+    expect(send).toHaveBeenCalledOnce();
+    // Both in one batch: the first is announced, once.
+    pending([row({ event_id: 'earlier', stage: 'failed_attempt', occurred_at: '2026-10-02T12:29:09Z' }),
+      row({ stage: 'failed_attempt', occurred_at: '2026-10-02T12:32:44Z' })]);
+    handled.mockClear();
+    await alerts.dispatch();
+    expect(send).toHaveBeenCalledTimes(2);
+    expect(handled).toHaveBeenCalledExactlyOnceWith('alert-1', ['earlier', 'event-1']);
   });
 
   it('handles what the parcel already showed when it was added silently, as for accounts', async () => {

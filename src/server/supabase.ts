@@ -5,6 +5,7 @@ import type { ApiGiftWords } from '../generated/apiContract';
 import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import type { TrackingEvent } from '../types';
 import { EMAIL_STAGES, type DeliveredTime, type EmailStage } from './email/types';
+import { scanSource } from './scanRepeats';
 import type { SyncReason } from './trackingAudit';
 import { isRecord, type JsonObject } from './types';
 
@@ -188,6 +189,9 @@ export interface DeliveryEmailClaim {
 
 /** How a claimed delivery email ended. A failed one is claimed again while it is fresh and attempts are left. */
 export type DeliveryEmailOutcome = 'sent' | 'failed' | 'skipped';
+
+/** One of a package's newest scans, with its words and its source (`scanSource`). */
+export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string };
 
 /** What the Auth server knows of an account that an email to it needs. */
 export interface AuthAccount {
@@ -650,18 +654,24 @@ export class SupabaseClient {
     });
   }
 
-  /** Each package's newest scans, enough to tell a generated track by (`generatedScans`). */
-  async recentScans(packageIds: string[]): Promise<Map<string, Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt'>[]>> {
-    const recent = new Map<string, Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt'>[]>();
+  /**
+   * Each package's newest scans, enough to tell a generated track by (`generatedScans`) and a carrier's
+   * repeats of a scan (`repeatedScans`).
+   */
+  async recentScans(packageIds: string[]): Promise<Map<string, RecentScan[]>> {
+    const recent = new Map<string, RecentScan[]>();
     await Promise.all([...new Set(packageIds)].map(async (packageId) => {
       const events = rows(await this.request(`/rest/v1/tracking_events?${query([
         ['package_id', `eq.${packageId}`],
-        ['select', 'id,stage,location,occurred_at'],
+        ['select', 'id,stage,location,occurred_at,description,provider_event_id,universal_provider:raw_data->>universal_provider'],
         ['order', 'occurred_at.desc'],
         ['limit', '60'],
       ])}`));
-      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at }) => typeof id === 'string' && typeof occurred_at === 'string'
-        ? [{ id, stage: stage as TrackingEvent['stage'], occurredAt: occurred_at, ...(typeof location === 'string' ? { location } : {}) }] : []));
+      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at, description, provider_event_id, universal_provider }) =>
+        typeof id === 'string' && typeof occurred_at === 'string' ? [{
+          id, stage: stage as TrackingEvent['stage'], occurredAt: occurred_at, ...(typeof location === 'string' ? { location } : {}),
+          description: typeof description === 'string' ? description.trim() : '', source: scanSource(provider_event_id, universal_provider),
+        }] : []));
     }));
     return recent;
   }

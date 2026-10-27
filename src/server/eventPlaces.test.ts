@@ -202,6 +202,31 @@ describe('withEventPlaces', () => {
     ]);
   });
 
+  it('serves a carrier\'s repeats of one scan under the newest of them', () => {
+    const scan = (id: string, occurredAt: string, extra: Record<string, unknown> = {}) => ({
+      ...event(id, null, occurredAt), stage: 'failed_attempt', description: 'Address details incorrect',
+      provider_event_id: `j-and-t-au:${id}`, ...extra,
+    });
+    const row = {
+      id: 'parcel', carrier: 'j-and-t-au', tracking_events: [
+        // Told three times in three minutes: one step.
+        scan('first', '2026-10-26T12:29:09Z'), scan('again', '2026-10-26T12:29:33Z'), scan('last', '2026-10-26T12:32:44Z'),
+        // Told again more than an hour after the first: the parcel is still there.
+        scan('later', '2026-10-26T13:35:00Z'),
+        // Elsewhere, in another stage, from a provider, or after another scan: steps of their own.
+        scan('elsewhere', '2026-10-26T13:36:00Z', { location: 'Other Town' }),
+        scan('held', '2026-10-26T13:37:00Z', { location: 'Other Town', stage: 'exception' }),
+        scan('copy', '2026-10-26T13:38:00Z', { location: 'Other Town', stage: 'exception', universal_provider: '17TRACK' }),
+        scan('back', '2026-10-26T13:39:00Z', { location: 'Other Town' }),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of }) => [id, relay_of])).toEqual([
+      ['first', 'last'], ['again', 'last'], ['last', undefined], ['later', undefined],
+      ['elsewhere', undefined], ['held', undefined], ['copy', undefined], ['back', undefined],
+    ]);
+  });
+
   it('leaves out a provider\'s copy of a confirmed carrier\'s scan, and pairs relay copies without it', () => {
     const scan = (id: string, source: string, occurredAt: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, null, occurredAt), provider_event_id: `${source}:${id}`, ...extra,

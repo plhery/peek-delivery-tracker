@@ -16,6 +16,7 @@ import { recordAccountPushSent, recordParcelAlertRemoved, recordParcelAlertSent 
 import { errorType, logOperationalEvent } from './observability';
 import { providerCopies } from './providerCopies';
 import { lateScans, relayRepeats } from './relayCopies';
+import { repeatedScans } from './scanRepeats';
 import { messagesFor } from './requestLocale';
 import type { SupabaseServiceClient } from './supabase';
 import { errorMessage, isRecord, type JsonObject } from './types';
@@ -460,22 +461,25 @@ const NO_SCANS: Awaited<ReturnType<SupabaseServiceClient['recentScans']>> = new 
 /**
  * The scans of the batches whose news their parcel already had: a handed-over
  * parcel's relay repeats and late scans (relayCopies.ts) and the universal
- * copies its timeline leaves out (providerCopies.ts). Copies are looked for
- * only in parcels with a confirmed carrier whose batch holds a universal row.
- * A generated track's moves are no news either (generatedTrack.ts): they are
+ * copies its timeline leaves out (providerCopies.ts), and a carrier's repeats
+ * of a scan it had sent (scanRepeats.ts). Copies are looked for only in
+ * parcels with a confirmed carrier whose batch holds a universal row. A
+ * generated track's moves are no news either (generatedTrack.ts): they are
  * looked for in parcels whose batch holds a scan in transit.
  */
 async function knownScans(client: SupabaseServiceClient, batches: readonly JsonObject[][]): Promise<Set<string>> {
   const eventIds = batches.flat().map((event) => stringField(event, 'event_id')).filter(Boolean);
-  const moving = batches.filter((events) => events.some((event) => stringField(event, 'stage') === 'in_transit'));
+  const moving = new Set(batchParcels(batches.filter((events) => events.some((event) => stringField(event, 'stage') === 'in_transit'))));
   const [handoffs, copied, recent] = await Promise.all([
     orNone(() => client.handoffScans(batchParcels(batches)), []),
     orNone(() => client.providerCopyScans(eventIds), []),
-    moving.length ? orNone(() => client.recentScans(batchParcels(moving)), NO_SCANS) : NO_SCANS,
+    batches.length ? orNone(() => client.recentScans(batchParcels(batches)), NO_SCANS) : NO_SCANS,
   ]);
   return new Set([...handoffs.flatMap((row) => [...relayRepeats(row), ...lateScans(row)]),
     ...copied.flatMap((row) => [...providerCopies(row)]),
-    ...[...recent.values()].flatMap((scans) => generatedScans(scans).map((scan) => scan.id))]);
+    ...[...recent].flatMap(([packageId, scans]) => [
+      ...moving.has(packageId) ? generatedScans(scans).map((scan) => scan.id) : [],
+      ...repeatedScans(scans.map((scan) => ({ ...scan, at: Date.parse(scan.occurredAt), location: scan.location?.trim() ?? '' })))])]);
 }
 
 async function parcelTimes(client: SupabaseServiceClient, batches: Iterable<JsonObject[]>): Promise<ParcelTimes> {

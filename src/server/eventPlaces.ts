@@ -7,6 +7,7 @@ import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/place
 import { clockDay, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
 import { copyTellsProblem, relayCopies } from './relayCopies';
+import { repeatLeads } from './scanRepeats';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
 import { isRecord, type JsonObject } from './types';
 
@@ -15,7 +16,8 @@ let reported = false;
 /**
  * The stored point only feeds the place, and the source and provider only tell
  * Peek's own rows, relay copies and provider copies apart: the API returns none
- * of them. A row of a relay pair names the other row instead (`relayLeads`). A
+ * of them. A row of a relay pair names the other row instead (`relayLeads`), and
+ * a carrier's repeat of a scan the newest of its run (scanRepeats.ts). A
  * scan dated by its day alone names that day. A stage change Peek saw with no
  * words from the carrier (AliExpress's undated record) is served without
  * Peek's stand-in, so the apps name the stage.
@@ -194,8 +196,8 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * served, so improving the gazetteer improves every parcel, old ones
  * included. A universal provider's copy of a confirmed carrier's scan is left
  * out (providerCopies.ts), so is Peek's own opening row once carrier scans
- * reach back to it (see `timeline`), and a row of a relay pair names the row it
- * is shown under (`relay_of`, see `relayLeads` and relayCopies.ts). A carrier's scan that names no place the
+ * reach back to it (see `timeline`), and a row of a relay pair or a carrier's repeat of a scan names the row it
+ * is shown under (`relay_of`, see `relayLeads`, relayCopies.ts and scanRepeats.ts). A carrier's scan that names no place the
  * gazetteer finds, such as an office, takes the place of a left-out copy of it (`placeLenders`). A placeholder
  * number's parcel is served without what was stored from it (`withoutPlaceholderAnswers`).
  */
@@ -205,7 +207,8 @@ export function withEventPlaces(row: JsonObject): JsonObject {
   if (!Array.isArray(row.tracking_events) || !row.tracking_events.length) return row;
   const events = shownEvents(stored);
   const relays = relayLeads(events, relayCopies({ ...row, tracking_events: events }));
-  const shown = (event: JsonObject) => served(event, relays.get(String(event.id)));
+  const repeats = repeatLeads(events, new Set([...relays.keys(), ...relays.values()]));
+  const shown = (event: JsonObject) => served(event, relays.get(String(event.id)) ?? repeats.get(String(event.id)));
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   try {
     const ordered = [...events].sort((a, b) => String(a.occurred_at).localeCompare(String(b.occurred_at))

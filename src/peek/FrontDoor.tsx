@@ -134,13 +134,21 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
 
   // A number typed into a carrier's page's box arrives here, never in the address: once the page is live it is
   // put in the field as if pasted, which looks it up. Not while a saved sign-in is still being restored: the
-  // landing drawn meanwhile gives way to the account's, which takes it.
+  // landing drawn meanwhile gives way to the account's, which takes it. A parcel's page hands its number back for its
+  // carrier to be chosen: once the page has left the door, the number waits in the field with the picker open.
   useEffect(() => {
-    if (account === 'checking') return;
+    if (account === 'checking' || covered) return;
     const handed = takeCarrierHandoff();
+    if (!handed) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- session storage, which only the live page can read
-    if (handed) put(handed);
-  }, [account, put]);
+    if (!handed.pick) return put(handed.text);
+    if (field.current) field.current.value = handed.text;
+    touch();
+    send({ type: 'edit', text: handed.text, via: 'typing' });
+    send({ type: 'pause', text: handed.text });
+    send({ type: 'blur' });
+    setPicking(true);
+  }, [account, covered, put, send, touch]);
 
   // Where going on stopped is where the visitor continues: the choice to make or the input to give.
   // Without either, the focus stays where it is; only a focus left nowhere is brought back.

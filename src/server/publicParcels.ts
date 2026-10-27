@@ -5,6 +5,7 @@ import { locatePlace } from 'universal-parcel-scraper/places';
 import type {
   ApiCarrierId,
   ApiImportCharges,
+  ApiLikelyCarrier,
   ApiParcelAlerts,
   ApiParcelLink,
   ApiParcelNumberHint,
@@ -233,6 +234,7 @@ const SHOWN_CARRIER_DATA: Record<string, (value: unknown) => boolean> = {
   weight_kg: amount,
   import_charges: isRecord,
   destination_country: text,
+  likely_carrier: isRecord,
 };
 /** The other leg's number, and the one the carrier tracks the parcel by, are tracking numbers too: shown only where the parcel's own is. */
 const SHOWN_WITH_NUMBER: Record<string, (value: unknown) => boolean> = {
@@ -252,6 +254,7 @@ const SHOWN_WITH_NUMBER: Record<string, (value: unknown) => boolean> = {
 const SHOWN_IN_GIFT = new Set([
   'active_tracking_carrier', 'original_carrier', 'delivery_carrier', 'tracking_provider', 'carrier_answered', 'auto_changed_from',
   'auto_changed_to', 'auto_changed_at', 'swiss_post_ready', 'expected_delivery_from', 'import_charges', 'destination_country',
+  'likely_carrier',
 ]);
 
 const IMPORT_CHARGE_AMOUNTS = ['customs', 'carrier_fee', 'carrier_fee_online'] as const;
@@ -269,9 +272,17 @@ function shownImportCharges(value: unknown): ApiImportCharges | undefined {
   return Object.keys(charges).length > 1 ? charges : undefined;
 }
 
+/** The carrier a number's own format points to, out of the routing state that otherwise stays on the server. */
+function shownLikelyCarrier(routing: unknown): ApiLikelyCarrier | undefined {
+  const likely = isRecord(routing) ? routing.likely_carrier : undefined;
+  return isRecord(likely) && text(likely.carrier) && text(likely.since)
+    ? { carrier: likely.carrier as ApiCarrierId, since: likely.since } : undefined;
+}
+
 function publicCarrierData(value: unknown, numberShown: boolean, wrapped: boolean): ApiPublicPackage['carrier_data'] {
   // A member of the import charges a later scraper release adds stays on the server too.
-  const stored: Record<string, unknown> = isRecord(value) ? { ...value, import_charges: shownImportCharges(value.import_charges) } : {};
+  const stored: Record<string, unknown> = isRecord(value)
+    ? { ...value, import_charges: shownImportCharges(value.import_charges), likely_carrier: shownLikelyCarrier(value.routing) } : {};
   const shown = numberShown ? { ...SHOWN_CARRIER_DATA, ...SHOWN_WITH_NUMBER } : SHOWN_CARRIER_DATA;
   return Object.fromEntries(Object.entries(shown)
     .filter(([key, valid]) => valid(stored[key]) && (!wrapped || SHOWN_IN_GIFT.has(key)))

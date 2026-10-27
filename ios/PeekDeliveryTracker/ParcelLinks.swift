@@ -37,7 +37,8 @@ extension Parcel {
                 dimensionsText: data.dimensionsText,
                 weightKg: data.weightKg,
                 importCharges: data.importCharges,
-                destinationCountry: data.destinationCountry
+                destinationCountry: data.destinationCountry,
+                routing: data.likelyCarrier.map { CarrierDataRouting(likelyCarrier: $0) }
             ),
             archivedAt: package.archivedAt,
             notificationsMuted: package.notificationsMuted,

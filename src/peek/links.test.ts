@@ -63,6 +63,11 @@ describe('parcel link model', () => {
     const shown = parcelLinkView(owner as ApiPublicParcelResponse);
     expect(shown.parcel.trackingNumber).toBe('TESTPARCEL983456');
     expect(shown.numberHint).toBeNull();
+    expect(shown.parcel.likelyCarrier).toBeUndefined();
+    // The carrier the number's own format points to comes beside the other carrier details.
+    const likely = { carrier: 'brt', since: '2026-10-02T08:00:00Z' } as const;
+    expect(parcelLinkView({ ...viewer, package: { ...viewer.package, carrier: 'unknown', carrier_data: { likely_carrier: likely } } })
+      .parcel.likelyCarrier).toEqual(likely);
   });
 
   it('carries whether the link is a gift, whether it is still shared, and how a browser subscribes to its alerts', () => {

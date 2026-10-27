@@ -26,6 +26,7 @@ import { providerCarrier } from './providerCarrier';
 import { normalizedLookupCountry } from './lookupCountry';
 import manifest from '../../package.json';
 import { getRecognitionPriorities } from './recognitionRanking';
+import { keptLikelyCarrier, likelyCarrierAfter } from './likelyCarrier';
 import { confirmationLookup } from './trackingHealth';
 
 const HOUR = 3_600_000;
@@ -87,6 +88,11 @@ export interface RoutingState extends JsonObject {
   postcode_refused?: { carrier: string };
   /** A carrier the number of a parcel filed under no carrier points to, which needs the user's input before it can be asked (suggestedInput). */
   input_suggested?: { carrier: string; field: 'dpdPostcode' };
+  /**
+   * For a parcel filed under no carrier, the carrier its number's format belongs to alone, which recognition asked and
+   * which did not say it knows the number (likelyCarrier.ts), and when a check first found it so.
+   */
+  likely_carrier?: { carrier: string; since: string };
   provider_input_needed?: { provider: string; field: 'dpdPostcode' };
   /**
    * When providers last held no fuller history than the filed carrier's partial answer, or no
@@ -531,7 +537,7 @@ export function earlierParcelRows(parcel: JsonObject): string[] | null {
 const KEPT_WITHOUT_EARLIER_PARCEL = ['lookup_country_hint', 'postcode_country', 'universal_input', 'add_recognition_pending', 'delivery_probe', 'earlier_checked_at'];
 /** Routing a reused number's earlier parcel taught: where its answers came from, its watermark and what filed or confirmed it. */
 const EARLIER_PARCEL_ROUTING = ['last_event_at', 'last_success_at', 'discovered_carrier', 'preferred_provider', 'preferred_number',
-  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested'];
+  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested', 'likely_carrier'];
 /**
  * The parcel as if it had never stored a reused number's earlier parcel (`earlierParcelRows`):
  * no stage, summary, estimate or rows of that parcel, nor the routing it taught, so the check
@@ -684,6 +690,9 @@ export class TrackingRouter {
     const suggested = suggestedInput(parcel, state);
     if (suggested) state.input_suggested = suggested;
     else delete state.input_suggested;
+    const kept = keptLikelyCarrier(parcel, state);
+    if (kept) state.likely_carrier = kept;
+    else delete state.likely_carrier;
     let localDirectFallback: { value: RoutedResult; carrier: string } | undefined;
     let localHistory: JsonObject | undefined;
     // The filed carrier's status alone, part of its history, or its label alone after LABEL_WAIT, while
@@ -839,6 +848,8 @@ export class TrackingRouter {
       const eventTime = Math.min(now().getTime(), Math.max(latest(value), value.earlierResult && !value.earlierFollowUp
         ? latestResultTime(value.earlierResult, value.earlierCarrierId ?? value.sourceCarrierId) : 0));
       state.last_event_at = eventTime && !withoutProgress && !value.preserveHistory && value.result.direct_local_fallback !== true ? iso(eventTime) : state.last_event_at;
+      // An answer with scans says more than the carrier the number's format points to.
+      if (state.last_event_at) delete state.likely_carrier;
       // Universal checks are deliberately less frequent than direct in-transit polls.
       state.next_check_at = sources.includes(provider as UniversalSource)
         ? iso(now().getTime() + universalSpacing(now())) : undefined;
@@ -1314,6 +1325,9 @@ export class TrackingRouter {
           count, retry_at: iso(beforeHourlyEnd(now().getTime() + Math.min(count > 6 ? DAY : 6 * HOUR, HOUR * 2 ** (count - 1)))),
         } };
       }
+      const likely = likelyCarrierAfter(parcel, state, outcomes, now());
+      if (likely) state.likely_carrier = likely;
+      else delete state.likely_carrier;
     }
 
     const richerSources = sources.filter((source) => source !== 'UPU');

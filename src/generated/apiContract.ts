@@ -32790,6 +32790,11 @@ export interface ApiImportCharges {
   "status_code"?: string;
 }
 
+export interface ApiLikelyCarrier {
+  "carrier": ApiCarrierId;
+  "since": string;
+}
+
 export interface ApiTrackingEventRow {
   "id": string;
   "package_id": string;
@@ -32853,6 +32858,7 @@ export interface ApiPackageRow {
   "carrier": ApiCarrierId;
   "field": "dpdPostcode";
 };
+  "likely_carrier"?: ApiLikelyCarrier;
   "provider_input_needed"?: {
   "provider": string;
   "field": "dpdPostcode";
@@ -33208,6 +33214,7 @@ export interface ApiPublicPackage {
   "weight_kg"?: number;
   "import_charges"?: ApiImportCharges;
   "destination_country"?: string;
+  "likely_carrier"?: ApiLikelyCarrier;
 };
   "archived_at": string | null;
   "notifications_muted": boolean;

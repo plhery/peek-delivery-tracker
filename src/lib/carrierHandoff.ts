@@ -4,7 +4,9 @@ import { languagePath, type Locale } from './locale';
 /**
  * The text typed into a carrier's page's box, on its way to the tracker. A
  * tracking number never goes into an address, so the box notes it for this
- * tab and opens the landing, which takes the note once and looks it up.
+ * tab and opens the landing, which takes the note once and looks it up. A
+ * parcel's page notes its number this way too, to `pick` its carrier: the
+ * landing then opens its carrier picker instead of looking the number up.
  */
 export const CARRIER_HANDOFF_STORAGE_KEY = 'sdt.peek.carrierHandoff.v1'; // gitleaks:allow -- sessionStorage name, not a credential
 // A note this old was left by a landing that never opened: it is not looked up on a later visit.
@@ -20,23 +22,29 @@ export function carrierHandoffLanding(locale: Locale): string {
   return locale === 'en' ? LANDING_PATH : languagePath(locale);
 }
 
+export interface CarrierHandoff {
+  text: string;
+  pick: boolean;
+}
+
 /** Notes the typed text for the landing. Without session storage the landing opens with its field empty. */
-export function writeCarrierHandoff(text: string, now = Date.now()): void {
+export function writeCarrierHandoff(text: string, now = Date.now(), { pick = false } = {}): void {
   try {
-    window.sessionStorage.setItem(CARRIER_HANDOFF_STORAGE_KEY, JSON.stringify({ text: text.trim().slice(0, MAX_LENGTH), at: now }));
+    window.sessionStorage.setItem(CARRIER_HANDOFF_STORAGE_KEY,
+      JSON.stringify({ text: text.trim().slice(0, MAX_LENGTH), at: now, ...(pick ? { pick } : {}) }));
   } catch { /* The landing opens anyway, and the number can be typed again. */ }
 }
 
 /** The text a carrier's page handed over a moment ago, once: the note is dropped whether it is used or not. */
-export function takeCarrierHandoff(now = Date.now()): string | null {
+export function takeCarrierHandoff(now = Date.now()): CarrierHandoff | null {
   try {
     const written = window.sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY);
     if (written === null) return null;
     window.sessionStorage.removeItem(CARRIER_HANDOFF_STORAGE_KEY);
-    const note = JSON.parse(written) as { text?: unknown; at?: unknown } | null;
+    const note = JSON.parse(written) as { text?: unknown; at?: unknown; pick?: unknown } | null;
     const age = now - Number(note?.at);
     if (typeof note?.text !== 'string' || !note.text.trim() || !(age >= 0 && age < MAX_AGE_MS)) return null;
-    return note.text.trim().slice(0, MAX_LENGTH);
+    return { text: note.text.trim().slice(0, MAX_LENGTH), pick: note.pick === true };
   } catch {
     return null;
   }

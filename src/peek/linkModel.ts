@@ -232,7 +232,8 @@ export function parcelLinkView(response: ApiPublicParcelResponse): ParcelLinkVie
         ...(link.alerts?.email === true ? { email: true } : {}),
       },
     },
-    parcel: toParcel({ ...row, tracking_number: row.tracking_number ?? '' }),
+    // A link shows its routing state's likely carrier alone, among the carrier details.
+    parcel: { ...toParcel({ ...row, tracking_number: row.tracking_number ?? '' }), likelyCarrier: row.carrier_data?.likely_carrier ?? undefined },
     numberHint: hint && typeof hint.head === 'string' && typeof hint.tail === 'string'
       ? { head: hint.head, tail: hint.tail } : null,
   };

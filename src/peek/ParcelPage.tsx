@@ -13,12 +13,13 @@ import { localizedDeliveryWindow, localizedEventDescription, stageLabel, trackin
 import { trackAction, trackScreen } from '../lib/analytics';
 import { carrierBrand } from '../lib/carrierBrand';
 import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, displayedCarrierId, formatTrackingNumber, tracksAutomatically } from '../lib/carriers';
+import { writeCarrierHandoff } from '../lib/carrierHandoff';
 import { LANDING_PATH } from '../lib/experience';
 import { numberToCheck } from '../lib/messages';
 import { captureCardOrigin } from '../lib/cardTransition';
 import { useCardDialog } from '../lib/cardDialog';
 import { focusClickedButton } from '../lib/modal';
-import { parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelIsUnannounced } from '../lib/parcelStatus';
+import { likelyCarrier, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelIsUnannounced } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
 import { awaitingHandover, currentEvent, isFinal, sortEventsDesc } from '../lib/stages';
 import { useTabTitle } from '../lib/tabTitle';
@@ -261,7 +262,14 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   const deliveringId = deliveringCarrierId(parcel);
   const delivering = carrierKnown && deliveringId ? carrierInfo(deliveringId, locale) : null;
   const deliveryNote = delivering ? t('parcel.deliveryCarrier', { carrier: delivering.name }) : null;
-  const notes = present ? (deliveryNote ? [deliveryNote] : []) : placeholder ? [trackingFailureMessage(parcel.syncError, t)] : !carrierKnown ? [number ? t('link.unknown.body', { number }) : t('link.unknown.bodyNoNumber')] : [
+  // The carrier the number's own format points to, while it does not list the number yet. After a week, its owner,
+  // who reads the number, may choose another carrier at the front door.
+  const likely = !carrierKnown && !placeholder && !present ? likelyCarrier(parcel, now) : null;
+  const likelyName = likely ? carrierInfo(likely.carrier, locale) : null;
+  const choosing = !!likely?.waited && owner && !sample && !!parcel.trackingNumber;
+  const unknownNote = likelyName ? t(!likely?.waited ? 'link.likely.body' : choosing ? 'link.likely.week' : 'link.likely.weekNoChoice', { carrier: likelyName.name })
+    : number ? t('link.unknown.body', { number }) : t('link.unknown.bodyNoNumber');
+  const notes = present ? (deliveryNote ? [deliveryNote] : []) : placeholder ? [trackingFailureMessage(parcel.syncError, t)] : !carrierKnown ? [unknownNote] : [
     previousEstimateLine(previousEstimate, parcel, wording),
     deliveryNote,
     // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over.
@@ -451,6 +459,12 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // The sample's way back to the landing: at its own address for someone signed in, whose `/` is their deliveries.
   const landingPath = signedIn ? LANDING_PATH : '/';
   const toLanding = () => { if (signedIn) openLanding(); else leave(); };
+  // The front door takes the number with its carrier picker open, and looks it up again with the carrier chosen.
+  const chooseCarrier = () => {
+    trackAction('parcel-link-choose-carrier');
+    writeCarrierHandoff(parcel.trackingNumber, Date.now(), { pick: true });
+    toLanding();
+  };
   const invitation = sample && <SampleInvitation carrier={displayed} onTrack={onHome} onSignIn={visitor ? signInToKeep : undefined} />;
   const map = (shape: 'card' | 'tile', covered?: Rect | null, room?: number) =>
     <RouteMap route={route} parcel={parcel} stage={stage} shape={shape} pip={figure === 'map' || figure === 'none'} covered={covered} room={room} onOpen={openMap} />;
@@ -474,7 +488,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
       <div className="peekp-column">
         {followed && <AlreadyFollowed name={followed.label || t('common.parcel')} onOpen={() => { trackAction('parcel-link-open-existing'); openDeliveries?.(followed.id); }} />}
         {sample ? <SampleNote landingPath={landingPath} onLanding={toLanding} /> : !owner && !present && <SharedWithYou visitor={!signedIn} until={worksUntil} />}
-        <LinkCard parcel={parcel} stage={stage} carrier={carrierKnown ? displayed : null} delivery={delivering}
+        <LinkCard parcel={parcel} stage={stage} carrier={carrierKnown ? displayed : null} likely={likelyName} delivery={delivering}
           headline={headline} name={name} detail={detail} notes={notes} flag={flag} figure={figure} number={number} settled={entrance === 'reveal' && !checking}
           gift={wrapped ? 'wrapped' : opened ? 'opened' : link.gift ? 'own' : undefined}
           map={figure === 'map' ? (covered, room) => map('card', covered, room) : undefined}
@@ -484,7 +498,9 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {opened && <GiftNote note={state.words.note} from={state.words.from} inside={state.words.name ?? state.name} />}
         {asked && <PostcodeAsked carrier={asked.carrier} own={ownAsks} onAdd={() => setAddingPostcode(true)} />}
         {owner && link.shared === false && <p className="peekp-shared"><Glyph name="info" />{t('share.stopped.owner')}</p>}
-        {!carrierKnown && !placeholder && <p className="peekp-keeppage">{t('link.unknown.keep')}</p>}
+        {/* The likely carrier's words say Peek keeps asking it already. */}
+        {!carrierKnown && !placeholder && !likely && <p className="peekp-keeppage">{t('link.unknown.keep')}</p>}
+        {choosing && <button type="button" className="button button--secondary peekp-choose" onClick={chooseCarrier}>{t('link.likely.choose')}</button>}
         {signedIn && !followed && link.canKeep && <AddToDeliveries busy={adding || pendingId === linkId} error={addError && t(addError)} onAdd={() => void add()} />}
         {!afterwards && <Actions name={name} ping={ping}
           onHave={key && delivered && link.kind === 'lookup' ? () => setForgetting('arrived') : undefined}

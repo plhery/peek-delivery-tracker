@@ -138,6 +138,19 @@ extension Parcel {
         return suggested
     }
 
+    /// How long a carrier may go without listing a number of its own format before the reader is asked to check it.
+    static let likelyCarrierWait: TimeInterval = 7 * 24 * 60 * 60
+
+    /// Nobody has answered for the number yet, and it has one carrier's own format, which does not list
+    /// it: the carrier it probably travels with. `waited` once it has not for a week, when its owner is
+    /// asked to check the number or choose another carrier.
+    func likelyCarrierPrompt(now: Date = .now) -> (carrier: CarrierID, waited: Bool)? {
+        guard inputNeededPrompt == nil, inputSuggestedPrompt == nil, let likely = carrierData?.routing?.likelyCarrier,
+              carrier == .unknown, !isArchived, !hasCarrierUpdate else { return nil }
+        let since = DateParser.date(likely.since)
+        return (likely.carrier, since.map { now.timeIntervalSince($0) >= Self.likelyCarrierWait } ?? false)
+    }
+
     var sortedEvents: [TrackingEvent] {
         trackingEvents.sorted(by: Self.eventPrecedes)
     }

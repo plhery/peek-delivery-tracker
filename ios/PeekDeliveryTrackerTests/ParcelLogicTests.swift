@@ -506,6 +506,45 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(needed.inputNeededPrompt?.carrier, .glsCh)
     }
 
+    func testNamesTheLikelyCarrierWhileNobodyAnsweredAndAsksToChooseAfterAWeek() throws {
+        let packageID = UUID()
+        let json = """
+        {
+          "packages": [{
+            "id": "\(packageID.uuidString)",
+            "tracking_number": "EOB10293847561029384",
+            "label": "Test parcel",
+            "carrier": "unknown",
+            "created_at": "2026-08-01T10:00:00Z",
+            "sync_status": "waiting",
+            "carrier_data": { "routing": { "likely_carrier": { "carrier": "brt", "since": "2026-08-01T10:00:00Z" } } },
+            "notifications_muted": false,
+            "tracking_events": []
+          }]
+        }
+        """
+        let parcel = try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(json.utf8)).packages.first)
+        let since = try XCTUnwrap(DateParser.date("2026-08-01T10:00:00Z"))
+        let early = try XCTUnwrap(parcel.likelyCarrierPrompt(now: since.addingTimeInterval(24 * 60 * 60)))
+        XCTAssertEqual(early.carrier, .brt)
+        XCTAssertFalse(early.waited)
+        XCTAssertEqual(parcel.likelyCarrierPrompt(now: since.addingTimeInterval(Parcel.likelyCarrierWait))?.waited, true)
+
+        // Filed under a carrier, archived, with a scan, or once a postcode is asked for: no likely carrier.
+        var filed = parcel
+        filed.carrier = .brt
+        XCTAssertNil(filed.likelyCarrierPrompt(now: since))
+        var archived = parcel
+        archived.archivedAt = "2026-08-10T10:00:00Z"
+        XCTAssertNil(archived.likelyCarrierPrompt(now: since))
+        var scanned = parcel
+        scanned.trackingEvents.append(event(packageID, .inTransit, "2026-08-10T10:00:00Z"))
+        XCTAssertNil(scanned.likelyCarrierPrompt(now: since))
+        var suggested = parcel
+        suggested.carrierData?.routing?.inputSuggested = CarrierInputSuggested(carrier: .mondialRelay, field: .dpdPostcode)
+        XCTAssertNil(suggested.likelyCarrierPrompt(now: since))
+    }
+
     func testDecodesSharedAPIContractFixture() throws {
         struct Fixture: Decodable {
             let packageList: PackageListResponse

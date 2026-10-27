@@ -88,11 +88,13 @@ const FLAG_ICONS: Record<ParcelAttention, ReactNode> = {
  * the open box in the middle (`hero`), or not at all when the map beside the
  * card has him.
  */
-export function LinkCard({ parcel, stage, carrier, delivery, headline, name, detail, notes, flag, figure, number, map, bell, settled, gift }: {
+export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, name, detail, notes, flag, figure, number, map, bell, settled, gift }: {
   parcel: ParcelWithEvents;
   stage: Stage | null;
   /** Null while no carrier is known. */
   carrier: CarrierInfo | null;
+  /** While none is, the carrier the number's own format points to, which the card names as probable. */
+  likely?: CarrierInfo | null;
   /** The carrier that delivers a parcel handed over by the first: its mark stands under the first one. */
   delivery: CarrierInfo | null;
   headline: string;
@@ -131,7 +133,8 @@ export function LinkCard({ parcel, stage, carrier, delivery, headline, name, det
         <span ref={deliveryMark} className="peekp-card__delivery" style={carrierBrand(delivery).style}><CarrierMark carrier={delivery} /></span>
       </span>
         : carrier ? <CarrierMark carrier={carrier} />
-        : <span className="peekp-card__nocarrier"><Icon name="detect" />{t('link.unknown.carrier')}</span>}
+        : <span className="peekp-card__nocarrier"><Icon name="detect" />
+          {likely ? t('link.likely.carrier', { carrier: likely.name }) : t('link.unknown.carrier')}</span>}
       {bell}
     </div>
     {figure === 'hero' && <KraftPip carrier={carrier} number={number} open={delivered} hero sparks={false} ribbon={present} />}

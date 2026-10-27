@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testParcel, testView } from '../test/parcelLinks';
 import type { ParcelWithEvents, Stage, TrackingEvent } from '../types';
+import { takeCarrierHandoff } from '../lib/carrierHandoff';
 import { ParcelLinkError, type ParcelLinkView } from './links';
 import { ParcelPage } from './ParcelPage';
 import { NoticeToast } from './parcel/Toast';
@@ -292,6 +293,31 @@ describe('ParcelPage stages and troubles', () => {
     // The headline says it already: no flag, and no journal of one line.
     expect(card().querySelector('.peekp-card__flag')).toBeNull();
     expect(screen.queryByText('Tracking history')).toBeNull();
+  });
+
+  it('names the carrier the number’s own format points to, and after a week lets its owner choose another', async () => {
+    const waiting = (likelyCarrier: ParcelWithEvents['likelyCarrier'], owner = true) =>
+      view([scan('pending', 60, 'Tracking added')], { carrier: 'unknown', syncStatus: 'waiting', likelyCarrier }, owner);
+    await shown(waiting({ carrier: 'brt', since: ago(30) }));
+    expect(card()).toHaveClass('peekp-card--neutral');
+    expect(within(card()).getByText('Probably BRT')).toBeVisible();
+    expect(within(card()).getByText('This looks like a number from BRT, but BRT doesn’t list it yet. Senders often create it before handing the parcel over. Peek keeps asking BRT and shows the parcel as soon as BRT does.')).toBeVisible();
+    // The words say Peek keeps asking already, and it is early to choose another carrier.
+    expect(screen.queryByText(/^Keep this page/)).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Choose another carrier' })).toBeNull();
+
+    cleanup();
+    await shown(waiting({ carrier: 'brt', since: ago(8 * 24) }));
+    expect(within(card()).getByText('BRT still doesn’t list it after a week. Check the number with the sender, or choose another carrier.')).toBeVisible();
+    await userEvent.click(screen.getByRole('button', { name: 'Choose another carrier' }));
+    // The front door takes the number with its picker open.
+    expect(takeCarrierHandoff()).toEqual({ text: '1234567899', pick: true });
+
+    // Someone the parcel is shared with reads the number masked, and cannot choose.
+    cleanup();
+    await shown(waiting({ carrier: 'brt', since: ago(8 * 24) }, false));
+    expect(within(card()).getByText('BRT still doesn’t list it after a week. Check the number with the sender.')).toBeVisible();
+    expect(screen.queryByRole('button', { name: 'Choose another carrier' })).toBeNull();
   });
 
   it('says plainly that the chosen carrier does not issue the number, once and without a failed update', async () => {

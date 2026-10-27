@@ -1731,6 +1731,11 @@ struct ImportCharges: Codable, Equatable, Hashable, Sendable {
     var statusCode: String? = nil
 }
 
+struct LikelyCarrier: Codable, Equatable, Hashable, Sendable {
+    var carrier: CarrierID
+    var since: String
+}
+
 struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
     var id: UUID
     var packageID: UUID
@@ -2648,6 +2653,7 @@ struct PublicPackageCarrierData: Codable, Equatable, Hashable, Sendable {
     var weightKg: Double? = nil
     var importCharges: ImportCharges? = nil
     var destinationCountry: String? = nil
+    var likelyCarrier: LikelyCarrier? = nil
 }
 
 enum ClaimParcelResultOutcome: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
@@ -2683,6 +2689,7 @@ struct CarrierDataRouting: Codable, Equatable, Hashable, Sendable {
     var inputNeeded: CarrierInputNeeded? = nil
     var postcodeRefused: CarrierPostcodeRefused? = nil
     var inputSuggested: CarrierInputSuggested? = nil
+    var likelyCarrier: LikelyCarrier? = nil
     var providerInputNeeded: ProviderInputNeeded? = nil
     var nextCheckAt: String? = nil
 }

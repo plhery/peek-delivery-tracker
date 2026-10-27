@@ -1,6 +1,6 @@
 import { scanDate } from './format';
 import { localizedDeliveryDate, numberToCheck, type MessageKey, type Translate } from './messages';
-import type { ParcelWithEvents } from '../types';
+import type { CarrierId, ParcelWithEvents } from '../types';
 import { currentEvent, stageMeta } from './stages';
 import { activeTrackingCarrierId, tracksAutomatically } from './carriers';
 
@@ -29,6 +29,19 @@ export function parcelDeliveryEstimate(parcel: ParcelWithEvents, now = Date.now(
 export function parcelHasCarrierUpdate(parcel: ParcelWithEvents): boolean {
   const current = currentEvent(parcel.events);
   return Boolean(current && current.stage !== 'pending');
+}
+
+/** How long a carrier may go without listing a number of its own format before the reader is asked to check it. */
+export const LIKELY_CARRIER_WAIT_MS = 7 * 24 * 60 * 60_000;
+
+/**
+ * The carrier a parcel filed under none probably travels with: the only one whose own format its number has, which
+ * does not list the number yet. `waited` once it has not for a week.
+ */
+export function likelyCarrier(parcel: ParcelWithEvents, now = Date.now()): { carrier: CarrierId; waited: boolean } | null {
+  const likely = parcel.likelyCarrier;
+  if (!likely || parcel.carrier !== 'unknown' || parcelHasCarrierUpdate(parcel)) return null;
+  return { carrier: likely.carrier, waited: now - Date.parse(likely.since) >= LIKELY_CARRIER_WAIT_MS };
 }
 
 export function parcelIsUnannounced(parcel: ParcelWithEvents): boolean {

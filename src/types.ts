@@ -43,6 +43,8 @@ export interface Parcel {
   inputNeeded?: { carrier: CarrierId; field: 'dpdPostcode' | 'trackingUrl' };
   /** A carrier the number points to that needs the delivery postcode before it can be asked about it. */
   inputSuggested?: { carrier: CarrierId; field: 'dpdPostcode' };
+  /** For a parcel filed under no carrier, the only carrier whose own format its number has, asked and not listing it since `since`. */
+  likelyCarrier?: { carrier: CarrierId; since: string };
   originalParcelId?: string;
   originalCarrier?: CarrierId;
   originalTrackingNumber?: string;

@@ -706,6 +706,21 @@ describe('FrontDoor', () => {
     expect(mocks.lookup).toHaveBeenCalledOnce();
   });
 
+  it('waits with a number a parcel’s page hands back, its carrier picker open, until a carrier is chosen and tracked', async () => {
+    writeCarrierHandoff('DEMO4471205', Date.now(), { pick: true });
+    const user = userEvent.setup();
+    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    expect(document.querySelector('textarea')).toHaveValue('DEMO4471205');
+    const picker = await screen.findByRole('dialog', { name: 'Carrier' });
+    expect(mocks.lookup).not.toHaveBeenCalled();
+    await user.type(within(picker).getByRole('combobox', { name: 'Search carriers' }), 'UPS');
+    await user.click(within(picker).getByRole('option', { name: /^UPS/ }));
+    expect(document.querySelector('.door-line')).toHaveTextContent('UPS Chosen by you');
+    await user.click(screen.getByRole('button', { name: 'Track' }));
+    await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'DEMO4471205', carrier: 'ups' }, expect.any(AbortSignal)));
+    expect(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)).toBeNull();
+  });
+
   it('leaves a number from a carrier’s page for later while it makes sure whose the landing is', async () => {
     const { PeekSessionProvider } = await import('./session');
     writeCarrierHandoff(UPS);

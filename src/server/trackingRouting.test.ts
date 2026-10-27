@@ -943,6 +943,44 @@ describe('persistent tracking routing', () => {
       expect((third.result.routing as JsonObject & { candidate_probes: JsonObject }).candidate_probes)
         .toMatchObject({ dpd: { count: 2, retry_at: '2026-09-10T15:05:00.000Z' } });
     });
+    it('names the carrier a number\'s own format belongs to once asked, until it knows the number or a scan comes', async () => {
+      // BRT's EOB numbers are no other carrier's; nothing answers for this one.
+      const own = 'EOB10293847561029384';
+      const check = async (at: Date, routing?: JsonObject, change?: (run: ReturnType<typeof setup>) => void) => {
+        const run = setup(at);
+        run.universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
+        change?.(run);
+        const outcome = await run.router.fetch(parcel({ tracking_number: own, ...(routing ? { carrier_data: { routing } } : {}) }), false)
+          .catch((deferred: unknown) => deferred);
+        return { asked: asked(run.recognize), routing: outcome instanceof RoutingDeferred ? outcome.routing as JsonObject
+          : (outcome as { result: { routing: JsonObject } }).result.routing };
+      };
+      const first = await check(time);
+      expect(first.asked).toEqual(['brt']);
+      expect(first.routing.likely_carrier).toEqual({ carrier: 'brt', since: time.toISOString() });
+      // Waiting to ask it again, a check keeps it, and when it was first found so.
+      const waiting = await check(new Date('2026-09-10T12:30:00Z'), first.routing);
+      expect(waiting.asked).toEqual([]);
+      expect(waiting.routing.likely_carrier).toEqual(first.routing.likely_carrier);
+      const again = await check(new Date('2026-09-10T13:30:00Z'), waiting.routing);
+      expect(again.asked).toEqual(['brt']);
+      expect(again.routing.likely_carrier).toEqual(first.routing.likely_carrier);
+      // A carrier that says it knows the number, even with no more than a pre-advice, is more than likely.
+      const known = await check(new Date('2026-09-10T16:00:00Z'), again.routing, (run) => {
+        run.recognize.mockImplementation(knows('brt'));
+        run.direct.mockResolvedValue({ ...directValue('brt'), result: { status: 'registered', current_stage: 'registered',
+          last_update: '2026-09-10T15:00:00Z', events: [{ time: '2026-09-10T15:00:00Z', description: 'Order created', stage: 'registered' }] } });
+      });
+      expect(known.routing).not.toHaveProperty('likely_carrier');
+      // So is a provider's scan; and a shape other carriers share names none.
+      const scanned = await check(new Date('2026-09-10T13:30:00Z'), waiting.routing, (run) => run.universal.mockResolvedValue(history()));
+      expect(scanned.routing).not.toHaveProperty('likely_carrier');
+      const run = setup();
+      run.universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
+      const shared = await run.router.fetch(parcel({ tracking_number: swissDpd }), false).catch((deferred: RoutingDeferred) => deferred);
+      expect(asked(run.recognize)).toEqual(fourteen);
+      expect((shared as RoutingDeferred).routing).not.toHaveProperty('likely_carrier');
+    });
     it('asks again by the last hourly check of a number nobody has seen', async () => {
       // Added at 08:20 and checked hourly until 14:20; the carrier ranked first is among those asked.
       const added = '2026-09-10T08:20:00Z';

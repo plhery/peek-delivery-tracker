@@ -33,6 +33,7 @@ import {
   parcelDeliveryEstimate,
   parcelDisplayStatus,
   parcelDisplayStatusKey,
+  likelyCarrier,
   parcelHasCarrierUpdate,
 } from '../lib/parcelStatus';
 import { awaitingHandover, currentEvent } from '../lib/stages';
@@ -143,6 +144,9 @@ export function ParcelDetail({
   const inputSuggested = !inputNeeded && parcel.inputSuggested?.field === 'dpdPostcode' && parcel.carrier === 'unknown'
     && !parcel.archivedAt && !current ? parcel.inputSuggested : undefined;
   const postcodePrompt = inputNeeded ?? inputSuggested;
+  // Or the number has one carrier's own format, and that carrier does not list it yet: after a week, its owner is asked
+  // to choose another.
+  const likely = !postcodePrompt && !parcel.archivedAt ? likelyCarrier(parcel) : null;
   // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
   const claimingCarrier = parcel.syncError === REFUSED_NUMBER ? carrierClaimingNumber(parcel.trackingNumber, parcel.carrier) : null;
   const status = parcelDisplayStatus(parcel);
@@ -550,6 +554,12 @@ export function ParcelDetail({
               setCarrierSheetInitial(postcodePrompt.carrier);
               setEditingCarrier(true);
             }}>{t('detail.inputNeededAction')}</button>
+          </div>
+        )}
+        {likely && (
+          <div className="detail__input-needed" role="status">
+            <p>{t(likely.waited ? 'link.likely.week' : 'link.likely.body', { carrier: carrierInfo(likely.carrier, locale).name })}</p>
+            {likely.waited && <button type="button" className="text-button" onClick={() => setEditingCarrier(true)}>{t('link.likely.choose')}</button>}
           </div>
         )}
         {editingTitle ? (

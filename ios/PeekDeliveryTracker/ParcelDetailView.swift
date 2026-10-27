@@ -380,6 +380,8 @@ struct ParcelDetailView: View {
                             ? "detail.carrierInputNeeded" : "detail.inputNeeded", tint: branding.ink)
                     } else if let suggested = parcel.inputSuggestedPrompt {
                         inputNeededPrompt(suggested.carrier, text: "detail.inputSuggested", tint: branding.ink)
+                    } else if let likely = parcel.likelyCarrierPrompt() {
+                        likelyCarrierPrompt(likely.carrier, waited: likely.waited, tint: branding.ink)
                     }
                 }
                 HStack(alignment: .center, spacing: 18) {
@@ -560,6 +562,32 @@ struct ParcelDetailView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(TactileButtonStyle())
+        }
+        .foregroundStyle(tint)
+        .accessibilityElement(children: .contain)
+    }
+
+    /// The carrier the number's own format points to, which does not list it yet. After a week, the
+    /// owner is asked to check the number or choose another carrier.
+    private func likelyCarrierPrompt(_ carrier: CarrierID, waited: Bool, tint: Color) -> some View {
+        let name = catalog.info(for: carrier, language: localizer.language).displayName
+        return VStack(alignment: .leading, spacing: 2) {
+            Text(localizer.text("link.likely.carrier", ["carrier": name]))
+                .font(.footnote.weight(.semibold))
+            Text(localizer.text(waited ? "link.likely.week" : "link.likely.body", ["carrier": name]))
+                .font(.footnote)
+                .fixedSize(horizontal: false, vertical: true)
+            if waited {
+                Button {
+                    carrierEditor = CarrierEditorRequest()
+                } label: {
+                    Text(localizer.text("link.likely.choose"))
+                        .font(.footnote.weight(.semibold))
+                        .frame(minHeight: 44, alignment: .leading)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(TactileButtonStyle())
+            }
         }
         .foregroundStyle(tint)
         .accessibilityElement(children: .contain)

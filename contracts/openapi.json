@@ -32707,7 +32707,7 @@
         },
         "responses": {
           "200": {
-            "description": "Language updated for the signed-in account\u2019s active subscription",
+            "description": "Language updated for the signed-in account’s active subscription",
             "content": {
               "application/json": {
                 "schema": {
@@ -35616,6 +35616,24 @@
           }
         }
       },
+      "LikelyCarrier": {
+        "type": "object",
+        "description": "A carrier a parcel filed under no carrier likely travels with: the only carrier whose own number format the number has, asked and not yet saying it knows the number. `since` is when a check first found it so.",
+        "additionalProperties": false,
+        "required": [
+          "carrier",
+          "since"
+        ],
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/CarrierId"
+          },
+          "since": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "TrackingEventRow": {
         "type": "object",
         "additionalProperties": false,
@@ -36014,6 +36032,10 @@
                         ]
                       }
                     }
+                  },
+                  "likely_carrier": {
+                    "description": "For a parcel filed under no carrier, the carrier whose own number format the number has, which was asked and has not said it knows the number. `since` is when a check first found it so.",
+                    "$ref": "#/components/schemas/LikelyCarrier"
                   },
                   "provider_input_needed": {
                     "type": "object",
@@ -37539,6 +37561,10 @@
               "destination_country": {
                 "type": "string",
                 "pattern": "^[A-Z]{2}$"
+              },
+              "likely_carrier": {
+                "description": "The stored routing state's likely carrier.",
+                "$ref": "#/components/schemas/LikelyCarrier"
               }
             }
           },

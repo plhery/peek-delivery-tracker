@@ -541,6 +541,14 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   (`inputSuggested`, for an unknown answer without tracking history): the postcode field is
   optional, a paste stops once to show it, and the lookup names that carrier only with the
   postcode, sent in the request body like any other.
+  When the number has one carrier's own format (detection lists that carrier alone, through
+  a rule naming at least two characters outright, so no bare run of digits) and recognition
+  asked that carrier without it saying it knows the number, `routing.likely_carrier` names
+  it, with `since` from the first such check, until a carrier answers or a scan comes. Links
+  show it as `likely_carrier`. The parcel page, its card and the app's detail say "Probably
+  <carrier>": the carrier does not list the number yet, and Peek keeps asking it. After a
+  week, the owner is asked to check the number or choose another carrier; a link's owner
+  chooses at the front door, which takes the number back with its picker open.
   A transient failure of a matching carrier and failures of an already confirmed carrier
   do not trigger recognition.
 - **Retries.** Answers are kept in `routing.candidate_probes`, not with the carrier

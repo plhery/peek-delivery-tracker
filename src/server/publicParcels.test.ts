@@ -148,7 +148,8 @@ describe('what a link shows', () => {
       'international_tracking_number', 'pickup_code', 'last_update', 'events',
     ].map((key) => [key, ['carrier_answered', 'swiss_post_ready', 'dpd_postcode_verified'].includes(key) ? true
       : key === 'weight_kg' ? 2 : key === 'import_charges' ? { currency: 'EUR', customs: 23.41 }
-        : key === 'routing' ? { confirmed_postcode: '9999' } : `stored ${key}`]));
+        : key === 'routing' ? { confirmed_postcode: '9999', likely_carrier: { carrier: 'brt', since: '2026-10-02T08:00:00Z', at: 1 } }
+          : `stored ${key}`]));
     const shown = (link: Record<string, unknown>) => publicParcelResponse({
       link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-02T08:00:00Z', forget_at: null, ...link },
       package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'unknown', sync_status: 'ok',
@@ -158,6 +159,9 @@ describe('what a link shows', () => {
     }, alerts).package;
 
     expect(Object.keys(shown({ owner: true }).carrier_data).sort()).toEqual(listed);
+    // Of the routing state, only the carrier the number's own format points to, and only what it says.
+    expect(shown({ owner: false }).carrier_data.likely_carrier).toEqual({ carrier: 'brt', since: '2026-10-02T08:00:00Z' });
+    expect(JSON.stringify(shown({ owner: true }))).not.toContain('9999');
     expect(Object.keys(shown({ owner: false }).carrier_data).sort())
       .toEqual(listed.filter((key) => !key.endsWith('_tracking_number')));
     for (const hidden of ['routing', 'receiver_name', 'original_tracking_url', 'original_package_id',

@@ -9,10 +9,17 @@ afterEach(() => {
 describe('the text a carrier’s page hands to the tracker', () => {
   it('is taken once, as it was typed', () => {
     writeCarrierHandoff('JJD000390012345678', 1_000);
-    expect(takeCarrierHandoff(2_000)).toBe('JJD000390012345678');
+    expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: false });
     // The landing opened again later starts empty.
     expect(takeCarrierHandoff(3_000)).toBeNull();
     expect(sessionStorage.getItem(KEY)).toBeNull();
+  });
+
+  it('says when a parcel’s page hands its number over to choose its carrier', () => {
+    writeCarrierHandoff('JJD000390012345678', 1_000, { pick: true });
+    expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: true });
+    sessionStorage.setItem(KEY, JSON.stringify({ text: 'JJD000390012345678', at: 1_000, pick: 'yes' }));
+    expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: false });
   });
 
   it('is dropped unread when it is ten minutes old, or dated after now', () => {
@@ -22,7 +29,7 @@ describe('the text a carrier’s page hands to the tracker', () => {
     writeCarrierHandoff('JJD000390012345678', 5_000);
     expect(takeCarrierHandoff(4_000)).toBeNull();
     writeCarrierHandoff('JJD000390012345678', 0);
-    expect(takeCarrierHandoff(10 * 60_000 - 1)).toBe('JJD000390012345678');
+    expect(takeCarrierHandoff(10 * 60_000 - 1)).toEqual({ text: 'JJD000390012345678', pick: false });
   });
 
   it('is nothing when the note is blank, not a note, or not readable', () => {
@@ -42,7 +49,7 @@ describe('the text a carrier’s page hands to the tracker', () => {
 
   it('keeps a long pasted message to what the landing’s field is handed', () => {
     writeCarrierHandoff(`  ${'x'.repeat(20_000)}`, 0);
-    expect(takeCarrierHandoff(1)).toHaveLength(10_000);
+    expect(takeCarrierHandoff(1)?.text).toHaveLength(10_000);
   });
 
   it('leaves the landing to open without it when session storage is out of reach', () => {

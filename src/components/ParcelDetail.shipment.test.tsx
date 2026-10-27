@@ -317,6 +317,18 @@ describe('shipment details', () => {
     expect(screen.queryByText(/may have this parcel/)).not.toBeInTheDocument();
   });
 
+  it('names the carrier a number’s own format points to, and after a week offers to choose another', async () => {
+    const day = 24 * 3_600_000;
+    const view = show({ carrier: 'unknown', trackingNumber: 'EOB10293847561029384', likelyCarrier: { carrier: 'brt', since: new Date(Date.now() - day).toISOString() } });
+    expect(screen.getByText(/^This looks like a number from BRT, but BRT doesn’t list it yet\./)).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Choose another carrier' })).not.toBeInTheDocument();
+    view.unmount();
+    show({ carrier: 'unknown', trackingNumber: 'EOB10293847561029384', likelyCarrier: { carrier: 'brt', since: new Date(Date.now() - 8 * day).toISOString() } });
+    expect(screen.getByText('BRT still doesn’t list it after a week. Check the number with the sender, or choose another carrier.')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Choose another carrier' }));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
+
   it('never displays legacy diagnostics', () => {
     show({ syncStatus: 'error', syncError: 'private upstream error details' });
     expect(screen.queryByText('private upstream error details')).not.toBeInTheDocument();

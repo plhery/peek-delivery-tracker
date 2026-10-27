@@ -4,7 +4,7 @@ import { ParcelIllustration } from '../../components/Icon';
 import { useI18n } from '../../i18n';
 import { carrierBrand } from '../../lib/carrierBrand';
 import { carrierInfo, deliveringCarrierId, displayedCarrierId, formatTrackingNumber } from '../../lib/carriers';
-import { parcelHasCarrierUpdate } from '../../lib/parcelStatus';
+import { likelyCarrier, parcelHasCarrierUpdate } from '../../lib/parcelStatus';
 import type { ParcelWithEvents } from '../../types';
 import { maskedNumber, numberEnds } from '../links';
 import { giftArrival, giftDelivered, parcelDetail, parcelHeadline, parcelStage } from './summary';
@@ -29,6 +29,7 @@ export function SharePreview({ parcel, name, showNumber, gift }: {
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);
   // No carrier has been found for the number yet: the card stays neutral, as the page does.
   const known = parcel.carrier !== 'unknown' || parcelHasCarrierUpdate(parcel);
+  const likely = likelyCarrier(parcel);
   // Handed from one carrier to another, or about to be, it carries both marks, as the page does.
   const deliveringId = known ? deliveringCarrierId(parcel) : null;
   const delivery = deliveringId ? carrierInfo(deliveringId, locale) : null;
@@ -40,7 +41,8 @@ export function SharePreview({ parcel, name, showNumber, gift }: {
     <p className="peeks-preview__caption" id={caption}>{t(wrapped ? 'share.preview.wrapped' : 'share.preview.title')}</p>
     <div className="peeks-preview" style={known ? carrierBrand(carrier).style : undefined} data-gift={gift || undefined}>
       <div className="peeks-preview__text">
-        {!known ? <span className="peeks-preview__nocarrier">{t('link.unknown.carrier')}</span>
+        {!known ? <span className="peeks-preview__nocarrier">
+          {likely ? t('link.likely.carrier', { carrier: carrierInfo(likely.carrier, locale).name }) : t('link.unknown.carrier')}</span>
           : delivery ? <span className="peeks-preview__marks">
             <CarrierMark carrier={carrier} />
             <span className="peeks-preview__delivery" style={carrierBrand(delivery).style}><CarrierMark carrier={delivery} /></span>

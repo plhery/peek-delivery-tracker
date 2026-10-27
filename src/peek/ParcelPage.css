@@ -163,6 +163,7 @@
 .peekp-sample { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -8px 4px -6px; }
 .peekp-sample .peekp-shared { margin: 0; }
 .peekp-keeppage { margin: 0 4px; color: var(--ink-soft); font-size: 12.5px; line-height: 1.5; }
+.peekp-choose { justify-self: start; }
 
 /* Notes beside the card. */
 .peekp-notes { display: grid; gap: 12px; }

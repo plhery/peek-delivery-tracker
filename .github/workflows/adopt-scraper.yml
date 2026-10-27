@@ -64,6 +64,7 @@ env:
     contracts/openapi.json
     src/generated/apiContract.ts
     ios/PeekDeliveryTracker/GeneratedAPIContract.swift
+    android/core/src/main/kotlin/com/plhery/peekdeliverytracker/core/api/GeneratedApiContract.kt
     ios/PeekDeliveryTracker/Resources/CarrierCatalog.json
     ios/PeekDeliveryTracker/Resources/DetectionGolden.json
     ios/PeekDeliveryTracker/Resources/ChecksumVectors.json

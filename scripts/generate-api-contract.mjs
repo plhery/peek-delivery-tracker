@@ -7,6 +7,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contractPath = path.join(root, 'contracts', 'openapi.json');
 const typesPath = path.join(root, 'src', 'generated', 'apiContract.ts');
 const swiftPath = path.join(root, 'ios', 'PeekDeliveryTracker', 'GeneratedAPIContract.swift');
+const kotlinPath = path.join(root, 'android', 'core', 'src', 'main', 'kotlin', 'com', 'plhery', 'peekdeliverytracker',
+  'core', 'api', 'GeneratedApiContract.kt');
 
 const contractSource = await readFile(contractPath, 'utf8');
 const contract = JSON.parse(contractSource);
@@ -576,6 +578,183 @@ function generatedSwift() {
 }
 
 // ---------------------------------------------------------------------------
+// Kotlin
+// ---------------------------------------------------------------------------
+
+// The Android app names types and enum cases the way the iPhone app does
+// (Parcel, TrackingStage, internationalPost), in Kotlin's casing.
+const kotlinSchemaNames = { ...swiftSchemaNames, CarrierId: 'CarrierId', OkResponse: 'OkResponse' };
+
+const kotlinKeywords = new Set(['as', 'break', 'class', 'continue', 'do', 'else', 'false', 'for', 'fun', 'if',
+  'in', 'interface', 'is', 'null', 'object', 'package', 'return', 'super', 'this', 'throw', 'true', 'try',
+  'typealias', 'typeof', 'val', 'var', 'when', 'while']);
+
+const kotlinKeywordNames = {
+  package: 'parcel',
+};
+
+function kotlinPropertyName(value) {
+  const name = lowerCamelIdentifier(value);
+  if (!kotlinKeywords.has(name)) return name;
+  if (!kotlinKeywordNames[name]) throw new Error(`${value} is a Kotlin keyword; name it in kotlinKeywordNames`);
+  return kotlinKeywordNames[name];
+}
+
+function kotlinTypeName(schemaName) {
+  return kotlinSchemaNames[schemaName] ?? schemaName;
+}
+
+function kotlinReferenceName(reference) {
+  const prefix = '#/components/schemas/';
+  if (!reference.startsWith(prefix)) {
+    throw new Error(`Unsupported Kotlin schema reference: ${reference}`);
+  }
+  return kotlinTypeName(reference.slice(prefix.length));
+}
+
+function kotlinEnumCase(schemaName, value) {
+  return upperFirst(swiftEnumCaseNames[`${schemaName}.${value}`] ?? lowerCamelIdentifier(value));
+}
+
+function kotlinEnumCases(schemaName, values) {
+  const cases = values.map((value) => ({ name: kotlinEnumCase(schemaName, value), value }));
+  const names = new Set(cases.map((item) => item.name));
+  if (names.size !== cases.length) throw new Error(`Two ${schemaName} values share a Kotlin name`);
+  return cases;
+}
+
+const kotlinInlineSchemas = new Map();
+
+function registerKotlinInlineSchema(parentSchemaName, propertyName, schema) {
+  const name = swiftInlineNames[`${parentSchemaName}.${propertyName}`]
+    ?? `${kotlinTypeName(parentSchemaName)}${upperFirst(kotlinPropertyName(propertyName))}`;
+  if (!/^[A-Z][A-Za-z0-9]*$/.test(name)) {
+    throw new Error(`Cannot name the Kotlin type for ${parentSchemaName}.${propertyName}; name it in swiftInlineNames`);
+  }
+  const existing = kotlinInlineSchemas.get(name);
+  if (existing && JSON.stringify(existing.schema) !== JSON.stringify(schema)) {
+    throw new Error(`Conflicting inline Kotlin schema name: ${name}`);
+  }
+  kotlinInlineSchemas.set(name, { name, schema, schemaName: `${parentSchemaName}.${propertyName}` });
+  return name;
+}
+
+function kotlinBaseType(schema, parentSchemaName, propertyName) {
+  const value = schemaWithoutNull(schema);
+  if (value.$ref) return kotlinReferenceName(value.$ref);
+  if (value.enum) return registerKotlinInlineSchema(parentSchemaName, propertyName, value);
+  switch (value.type) {
+    case 'string':
+      return value.format === 'uuid' ? 'UUID' : 'String';
+    case 'integer':
+      return 'Int';
+    case 'number':
+      return 'Double';
+    case 'boolean':
+      return 'Boolean';
+    case 'array':
+      return `List<${kotlinBaseType(value.items ?? {}, parentSchemaName, `${propertyName}Item`)}>`;
+    case 'object':
+      if (value.properties) return registerKotlinInlineSchema(parentSchemaName, propertyName, value);
+      throw new Error(`Object dictionaries are not supported by the Kotlin generator: ${parentSchemaName}.${propertyName}`);
+    default:
+      throw new Error(`Unsupported Kotlin schema at ${parentSchemaName}.${propertyName}: ${JSON.stringify(value)}`);
+  }
+}
+
+function generatedKotlinEnum(schemaName, kotlinName, schema) {
+  const cases = kotlinEnumCases(schemaName, schema.enum);
+  return [
+    '@Serializable',
+    `enum class ${kotlinName}(val rawValue: String) {`,
+    ...cases.map((item) => `    @SerialName(${JSON.stringify(item.value)}) ${item.name}(${JSON.stringify(item.value)}),`),
+    '    ;',
+    '',
+    '    companion object {',
+    `        fun fromRawValue(rawValue: String): ${kotlinName}? = entries.firstOrNull { it.rawValue == rawValue }`,
+    '    }',
+    '}',
+  ];
+}
+
+// Open like the Swift CarrierID: a carrier the scraper adds after a release
+// still decodes, and the published ones read as CarrierId.Dhl.
+function generatedKotlinCarrierIdentifier(schema) {
+  const cases = kotlinEnumCases('CarrierId', schema.enum);
+  return [
+    '@Serializable',
+    '@JvmInline',
+    'value class CarrierId(val rawValue: String) {',
+    '    companion object {',
+    ...cases.map((item) => `        val ${item.name} = CarrierId(${JSON.stringify(item.value)})`),
+    '',
+    '        val entries: List<CarrierId> = listOf(',
+    ...cases.map((item) => `            ${item.name},`),
+    '        )',
+    '    }',
+    '}',
+  ];
+}
+
+function generatedKotlinClass(schemaName, kotlinName, schema) {
+  const required = new Set(schema.required ?? []);
+  const lines = ['@Serializable', `data class ${kotlinName}(`];
+  for (const [jsonName, value] of Object.entries(schema.properties)) {
+    const name = kotlinPropertyName(jsonName);
+    const type = kotlinBaseType(value, schemaName, jsonName);
+    const annotations = [];
+    if (name !== jsonName) annotations.push(`@SerialName(${JSON.stringify(jsonName)})`);
+    // The server may leave a parcel's history out or send null; both read as none.
+    if (schemaName === 'PackageRow' && jsonName === 'tracking_events') {
+      annotations.push('@Serializable(with = TrackingEventsSerializer::class)');
+      lines.push(`    ${annotations.join(' ')} val ${name}: ${type} = emptyList(),`);
+    } else if (!required.has(jsonName) || schemaAllowsNull(value)) {
+      lines.push(`    ${[...annotations, ''].join(' ')}val ${name}: ${type}? = null,`);
+    } else {
+      lines.push(`    ${[...annotations, ''].join(' ')}val ${name}: ${type},`);
+    }
+  }
+  lines.push(')');
+  return lines;
+}
+
+function generatedKotlin() {
+  kotlinInlineSchemas.clear();
+  const body = [];
+  for (const [schemaName, schema] of Object.entries(schemas)) {
+    const kotlinName = kotlinTypeName(schemaName);
+    if (schema.enum) {
+      body.push(...(schemaName === 'CarrierId'
+        ? generatedKotlinCarrierIdentifier(schema)
+        : generatedKotlinEnum(schemaName, kotlinName, schema)), '');
+    } else if (schema.type === 'object' && schema.properties) {
+      body.push(...generatedKotlinClass(schemaName, kotlinName, schema), '');
+    } else {
+      throw new Error(`Unsupported top-level Kotlin schema: ${schemaName}`);
+    }
+  }
+  for (const { name, schema, schemaName } of kotlinInlineSchemas.values()) {
+    body.push(...(schema.enum
+      ? generatedKotlinEnum(schemaName, name, schema)
+      : generatedKotlinClass(schemaName, name, schema)), '');
+  }
+  const lines = [
+    '// This file is generated by scripts/generate-api-contract.mjs. Do not edit.',
+    '@file:UseSerializers(UuidSerializer::class)',
+    '',
+    'package com.plhery.peekdeliverytracker.core.api',
+    '',
+    'import java.util.UUID',
+    'import kotlinx.serialization.SerialName',
+    'import kotlinx.serialization.Serializable',
+    'import kotlinx.serialization.UseSerializers',
+    '',
+    ...body,
+  ];
+  return `${lines.join('\n').trim()}\n`;
+}
+
+// ---------------------------------------------------------------------------
 // Write or check
 // ---------------------------------------------------------------------------
 
@@ -583,6 +762,7 @@ const outputs = [
   [contractPath, generatedContract(contractSource, carrierCapabilities, carrierIds)],
   [typesPath, generatedTypeScript()],
   [swiftPath, generatedSwift()],
+  [kotlinPath, generatedKotlin()],
 ];
 
 /** Reports scraper/contract disagreements before the generic staleness message. */

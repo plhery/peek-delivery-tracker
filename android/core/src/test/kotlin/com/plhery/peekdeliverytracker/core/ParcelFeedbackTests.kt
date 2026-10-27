@@ -327,6 +327,61 @@ class ParcelFeedbackTests {
         assertNull(ParcelFeedbackRequest.words("  \n", limit = 10))
     }
 
+    // The sheets' fields (ParcelFeedbackViews.swift)
+
+    @Test
+    fun aSheetWithNothingButSpaceHasNothingToSend() {
+        assertTrue(ParcelFeedbackWordsSheet.empty(emptySet(), note = ""))
+        assertTrue(ParcelFeedbackWordsSheet.empty(emptySet(), note = " \n\t\r\n\u00A0\u3000\u2028\u0085"))
+        assertFalse(ParcelFeedbackWordsSheet.empty(setOf(ParcelFeedbackReason.Status), note = " "))
+        assertFalse(ParcelFeedbackWordsSheet.empty(emptySet(), note = " Lyon "))
+        // A zero-width space is space to Foundation; a no-break space too.
+        assertTrue(ParcelFeedbackWordsSheet.empty(emptySet(), note = "\u200B\u00A0"))
+
+        assertTrue(ParcelFeedbackCarrierSheet.empty(who = "", page = " \n "))
+        assertFalse(ParcelFeedbackCarrierSheet.empty(who = " Example Parcels", page = ""))
+        assertFalse(ParcelFeedbackCarrierSheet.empty(who = "", page = "example.com/track"))
+    }
+
+    @Test
+    fun theNoteSaysHowManyUnicodeScalarsAreLeftNearItsLimit() {
+        val english = Localizer(AppLanguage.En)
+        assertEquals(ParcelFeedbackRequest.noteLimit, ParcelFeedbackWordsSheet.noteLeft(""))
+        assertNull(ParcelFeedbackWordsSheet.noteLeftText("", english))
+        // Unicode scalars, as Swift counts `unicodeScalars`, not UTF-16 units nor Characters.
+        assertEquals(ParcelFeedbackRequest.noteLimit - 1, ParcelFeedbackWordsSheet.noteLeft("\uD83D\uDC4D"))
+        assertEquals(ParcelFeedbackRequest.noteLimit - 5, ParcelFeedbackWordsSheet.noteLeft("\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67"))
+        assertEquals(ParcelFeedbackRequest.noteLimit - 2, ParcelFeedbackWordsSheet.noteLeft("e\u0301"))
+        assertEquals(ParcelFeedbackRequest.noteLimit - 2, ParcelFeedbackWordsSheet.noteLeft("\r\n"))
+        assertEquals("A lone surrogate is U+FFFD", ParcelFeedbackRequest.noteLimit - 1, ParcelFeedbackWordsSheet.noteLeft("\uD800"))
+
+        val warning = ParcelFeedbackRequest.noteLimit - ParcelFeedbackRequest.noteWarning
+        assertNull(ParcelFeedbackWordsSheet.noteLeftText("a".repeat(warning - 1), english))
+        assertEquals("200 characters left", ParcelFeedbackWordsSheet.noteLeftText("a".repeat(warning), english))
+        assertEquals("1 character left", ParcelFeedbackWordsSheet.noteLeftText("a".repeat(ParcelFeedbackRequest.noteLimit - 1), english))
+        assertEquals("0 characters left", ParcelFeedbackWordsSheet.noteLeftText("\uD83D\uDC4D".repeat(ParcelFeedbackRequest.noteLimit), english))
+    }
+
+    @Test
+    fun aFieldKeepsWhatIsTypedWithinItsLimitAsItIsTyped() {
+        val limit = ParcelFeedbackRequest.noteLimit
+        val full = "a".repeat(limit - 1)
+        assertEquals("a".repeat(limit), ParcelFeedbackWordsSheet.note("a".repeat(limit + 1)))
+        // Whole Characters while their scalars fit: a thumb fits, a flag or an accented e does not.
+        assertEquals("$full\uD83D\uDC4D", ParcelFeedbackWordsSheet.note("$full\uD83D\uDC4D"))
+        assertEquals(full, ParcelFeedbackWordsSheet.note("$full\uD83C\uDDE8\uD83C\uDDED"))
+        assertEquals(full, ParcelFeedbackWordsSheet.note("${full}e\u0301"))
+        // Space stays until the answer is sent.
+        assertEquals("  Lyon \n", ParcelFeedbackWordsSheet.note("  Lyon \n"))
+        assertEquals("a\uFFFDb", ParcelFeedbackWordsSheet.note("a\uD800b"))
+
+        assertEquals("n".repeat(ParcelFeedbackRequest.carrierNameLimit), ParcelFeedbackCarrierSheet.who("n".repeat(ParcelFeedbackRequest.carrierNameLimit + 1)))
+        val thumbs = "\uD83D\uDC4D".repeat(ParcelFeedbackRequest.carrierNameLimit)
+        assertEquals("Twice as many UTF-16 units, as many scalars", thumbs, ParcelFeedbackCarrierSheet.who(thumbs))
+        assertEquals("p".repeat(ParcelFeedbackRequest.trackingPageLimit), ParcelFeedbackCarrierSheet.page("p".repeat(ParcelFeedbackRequest.trackingPageLimit + 9)))
+        assertEquals(" example.com ", ParcelFeedbackCarrierSheet.page(" example.com "))
+    }
+
     @Test
     fun foundElsewhereCarriesANameOrItsPageAsTyped() {
         val request = ParcelFeedbackRequest.foundElsewhere(

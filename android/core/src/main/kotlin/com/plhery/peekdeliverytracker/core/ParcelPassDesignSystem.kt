@@ -1,6 +1,5 @@
-package com.plhery.peekdeliverytracker.core.catalog
+package com.plhery.peekdeliverytracker.core
 
-import com.plhery.peekdeliverytracker.core.SharedResources
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive

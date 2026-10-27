@@ -1,4 +1,4 @@
-package com.plhery.peekdeliverytracker.core.catalog
+package com.plhery.peekdeliverytracker.core
 
 import java.text.BreakIterator
 import java.util.Locale

@@ -1,6 +1,6 @@
-package com.plhery.peekdeliverytracker.core.catalog
+package com.plhery.peekdeliverytracker.core
 
-import com.plhery.peekdeliverytracker.core.catalog.CatalogExpressions.matches
+import com.plhery.peekdeliverytracker.core.CatalogExpressions.matches
 
 // CarrierCatalog's check digits, as the shared engine runs them. Each check reads its digits only once
 // an ASCII pattern has proved them.

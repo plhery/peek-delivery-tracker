@@ -1,15 +1,14 @@
-package com.plhery.peekdeliverytracker.core.catalog
+package com.plhery.peekdeliverytracker.core
 
-import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
-import com.plhery.peekdeliverytracker.core.catalog.CatalogExpressions.capture
-import com.plhery.peekdeliverytracker.core.catalog.CatalogExpressions.foundationMatches
-import com.plhery.peekdeliverytracker.core.catalog.CatalogExpressions.foundationReplacing
-import com.plhery.peekdeliverytracker.core.catalog.CatalogExpressions.hits
-import com.plhery.peekdeliverytracker.core.catalog.CatalogExpressions.matches
-import com.plhery.peekdeliverytracker.core.catalog.CatalogExpressions.matchesIn
+import com.plhery.peekdeliverytracker.core.CatalogExpressions.capture
+import com.plhery.peekdeliverytracker.core.CatalogExpressions.foundationMatches
+import com.plhery.peekdeliverytracker.core.CatalogExpressions.foundationReplacing
+import com.plhery.peekdeliverytracker.core.CatalogExpressions.hits
+import com.plhery.peekdeliverytracker.core.CatalogExpressions.matches
+import com.plhery.peekdeliverytracker.core.CatalogExpressions.matchesIn
 import java.io.File
 import java.nio.ByteBuffer
 import java.nio.charset.CodingErrorAction

@@ -1,6 +1,5 @@
-package com.plhery.peekdeliverytracker.core.catalog
+package com.plhery.peekdeliverytracker.core
 
-import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.util.Locale

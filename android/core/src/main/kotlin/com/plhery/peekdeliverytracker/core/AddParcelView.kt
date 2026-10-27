@@ -1,4 +1,4 @@
-package com.plhery.peekdeliverytracker.core.catalog
+package com.plhery.peekdeliverytracker.core
 
 // The logic of AddParcelView.swift's `suggestionLabel`, without SwiftUI's AttributedString: the label's text
 // with where the number stands and which of its characters the suggestion changes.

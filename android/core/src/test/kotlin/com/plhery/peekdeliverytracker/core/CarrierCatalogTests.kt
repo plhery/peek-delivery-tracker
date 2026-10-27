@@ -1,6 +1,5 @@
-package com.plhery.peekdeliverytracker.core.catalog
+package com.plhery.peekdeliverytracker.core
 
-import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
@@ -13,12 +12,12 @@ import com.plhery.peekdeliverytracker.core.api.PublicPackageCarrierData
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingProviderCheck
 import com.plhery.peekdeliverytracker.core.api.TrackingProviderCheckOutcome
-import com.plhery.peekdeliverytracker.core.catalog.CarrierCatalogTestFixtures.bundledCatalogData
-import com.plhery.peekdeliverytracker.core.catalog.CarrierCatalogTestFixtures.futureCatalogData
-import com.plhery.peekdeliverytracker.core.catalog.CarrierCatalogTestFixtures.linkRulesCatalogData
-import com.plhery.peekdeliverytracker.core.catalog.CarrierCatalogTestFixtures.recognitionPatternCatalogData
-import com.plhery.peekdeliverytracker.core.catalog.CarrierCatalogTestFixtures.unknownChecksumCatalogData
-import com.plhery.peekdeliverytracker.core.catalog.CarrierCatalogTestFixtures.unreadableCarrierCatalogData
+import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.bundledCatalogData
+import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.futureCatalogData
+import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.linkRulesCatalogData
+import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.recognitionPatternCatalogData
+import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.unknownChecksumCatalogData
+import com.plhery.peekdeliverytracker.core.CarrierCatalogTestFixtures.unreadableCarrierCatalogData
 import java.io.File
 import java.io.IOException
 import java.text.Collator

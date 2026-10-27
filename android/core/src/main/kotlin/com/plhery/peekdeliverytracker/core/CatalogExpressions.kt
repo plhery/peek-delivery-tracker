@@ -1,4 +1,4 @@
-package com.plhery.peekdeliverytracker.core.catalog
+package com.plhery.peekdeliverytracker.core
 
 import java.util.Optional
 import java.util.concurrent.ConcurrentHashMap

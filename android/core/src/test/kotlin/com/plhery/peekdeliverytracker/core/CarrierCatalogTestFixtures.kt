@@ -1,6 +1,5 @@
-package com.plhery.peekdeliverytracker.core.catalog
+package com.plhery.peekdeliverytracker.core
 
-import com.plhery.peekdeliverytracker.core.SharedResources
 
 /** The catalogs CarrierCatalogTests.swift builds its dynamic catalogs from, as the same JSON text. */
 internal object CarrierCatalogTestFixtures {

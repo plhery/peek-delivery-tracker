@@ -160,7 +160,7 @@ Tu peux, mais aucune des règles ci-dessus n'en fait une condition pour être re
 - [About Amazon France : Six conseils contre les arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – garantie A à Z sur chaque produit, livraison retardée, remboursement ou remplacement
 - [About Amazon France : La Garantie A à Z](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeur d'abord, puis remboursement par Amazon
 - [eBay.fr : Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – délais, preuve de livraison
-- [Etsy : L'ouverture d'un litige (copie archivée)](https://web.archive.org/web/20260504151748/https://help.etsy.com/hc/fr/articles/5745586898199-L-ouverture-d-un-litige) – 48 heures, 30 jours
+- [Etsy : L'ouverture d'un litige](https://help.etsy.com/hc/fr/articles/5745586898199-L-ouverture-d-un-litige) – 48 heures, 30 jours
 - [Vinted : Le colis n'a pas été livré](https://www.vinted.fr/help/726) – 2 jours, clôturer le litige
 - [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/658) – 14 jours avec un vendeur Pro
 - [Vinted : Politique de remboursement](https://www.vinted.fr/help/465) – « J'ai un problème », 2 jours calendaires

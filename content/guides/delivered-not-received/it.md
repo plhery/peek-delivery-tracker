@@ -149,7 +149,7 @@ Puoi farla, ma nessuna delle regole qui sopra la pone come condizione per il rim
 - [About Amazon Italia: Garanzia dalla A alla Z](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prima il venditore, poi il rimborso da Amazon
 - [eBay.it: Garanzia cliente eBay](https://www.ebay.it/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 giorni, 3 giorni lavorativi, città o CAP, firma da 550 €, chiusura automatica, storno
 - [Etsy Help: How to Open a Case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 ore, 30 giorni, storno
-- [Etsy: Come aprire una disputa (copia d'archivio, dicembre 2025)](https://web.archive.org/web/20251214000633/https://help.etsy.com/hc/it/articles/5745586898199-Come-aprire-una-disputa) – nomi delle opzioni in italiano, scadenza mostrata nella richiesta (i 100 giorni indicati lì oggi sono 30)
+- [Etsy: Come aprire una disputa](https://help.etsy.com/hc/it/articles/5745586898199-Come-aprire-una-disputa) – nomi delle opzioni in italiano, 48 ore, 30 giorni dalla data di consegna prevista, scadenza mostrata nella richiesta, storno
 - [Vinted: Politica di rimborso](https://www.vinted.it/help/465) – 2 giorni di calendario, «Ho un problema»
 - [Vinted: Il pacco non è stato consegnato](https://www.vinted.it/help/726) – annullare la richiesta se il pacco arriva
 - [PayPal: Protezione acquisti](https://www.paypal.com/it/legalhub/paypal/buyer-protection) – 180 e 20 giorni, prova di consegna, verbale di polizia, PayPal o emittente della carta

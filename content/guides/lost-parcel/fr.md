@@ -136,7 +136,7 @@ En dernier recours seulement. Sur PayPal, ouvre un litige « Objet non reçu » 
 - [About Amazon France : Six conseils contre les arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – garantie A à Z sur chaque produit, livraison retardée, remboursement ou remplacement
 - [About Amazon France : La Garantie A à Z](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeur d'abord, puis remboursement par Amazon
 - [eBay.fr : Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 jours, 3 jours ouvrés, paiement par eBay, rétrofacturation
-- [Etsy : L'ouverture d'un litige (copie archivée)](https://web.archive.org/web/20260504151748/https://help.etsy.com/hc/fr/articles/5745586898199-L-ouverture-d-un-litige) – 48 heures, 30 jours, rétrofacturation
+- [Etsy : L'ouverture d'un litige](https://help.etsy.com/hc/fr/articles/5745586898199-L-ouverture-d-un-litige) – 48 heures, 30 jours, rétrofacturation
 - [Etsy : How to Open a Case (en anglais)](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – grèves et intempéries
 - [Etsy : Purchase Protection Programme (en anglais)](https://help.etsy.com/hc/en-gb/articles/7471925990807-Etsy-s-Purchase-Protection-Programme) – frais de douane refusés
 - [Vinted : Politique de remboursement](https://www.vinted.fr/help/465) – perte confirmée, plusieurs semaines, 25 jours ouvrés, paiement hors Vinted

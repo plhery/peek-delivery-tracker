@@ -193,11 +193,15 @@ class Vector3(val x: Double, val y: Double, val z: Double) {
     /** simd_normalize, which multiplies by the reciprocal of the length. */
     fun normalized(): Vector3 = this * (1 / sqrt(dot(this)))
 
-    /** simd_cross. Clang fuses each component's first product with the subtraction of the second. */
+    /**
+     * simd_cross. On the iPhone clang fuses each component's first product with the subtraction of the second, which
+     * Math.fma would match exactly, but Android has Math.fma only from API 33. Plain products differ from it by at
+     * most 2 ulp of the larger product, a few 1e-13 of the result: no drawn point moves.
+     */
     fun cross(other: Vector3): Vector3 = Vector3(
-        Math.fma(y, other.z, -(z * other.y)),
-        Math.fma(z, other.x, -(x * other.z)),
-        Math.fma(x, other.y, -(y * other.x)),
+        y * other.z - z * other.y,
+        z * other.x - x * other.z,
+        x * other.y - y * other.x,
     )
 
     override fun equals(other: Any?): Boolean = other is Vector3 && x == other.x && y == other.y && z == other.z

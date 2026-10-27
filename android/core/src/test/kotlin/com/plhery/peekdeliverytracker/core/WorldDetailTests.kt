@@ -3,9 +3,21 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import java.util.Locale
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.Executors
 import kotlin.math.acos
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.job
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -206,16 +218,17 @@ class WorldDetailTests {
         assertFalse(tiles.isEmpty())
     }
 
-    @Test
-    fun anOpenedMapReadsItsTilesOnceAndKeepsTheLastOnesShown() = runBlocking {
-        val store = WorldDetailStore(this)
-        suspend fun eventually(met: () -> Boolean) {
-            for (attempt in 0 until 500) {
-                if (met()) break
-                delay(10)
-            }
-            assertTrue(met())
+    /** Waits for what the store reads off the main thread, up to five seconds. */
+    private suspend fun eventually(met: () -> Boolean) {
+        for (attempt in 0 until 500) {
+            if (met()) break
+            delay(10)
         }
+        assertTrue(met())
+    }
+
+    private suspend fun readsItsTilesOnceAndKeepsTheLastOnesShown(scope: CoroutineScope) {
+        val store = WorldDetailStore(scope)
         // Before the pack is open there is nothing to read from.
         store.need(listOf("37_27"))
         assertNull(store.pack)
@@ -237,5 +250,84 @@ class WorldDetailTests {
         assertNull(store.tiles["37_27"])
         assertNull(store.tiles[keys[1]])
         assertNotNull(store.tiles[keys[19]])
+    }
+
+    @Test
+    fun anOpenedMapReadsItsTilesOnceAndKeepsTheLastOnesShown() = runBlocking {
+        readsItsTilesOnceAndKeepsTheLastOnesShown(this)
+    }
+
+    /** The iPhone's store lives on the main actor; this one keeps the same tiles whatever threads its scope runs on. */
+    @Test
+    fun onAnyThreadTheStoreKeepsTheSameTiles() = runBlocking {
+        val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        try {
+            readsItsTilesOnceAndKeepsTheLastOnesShown(scope)
+        } finally {
+            scope.cancel()
+        }
+    }
+
+    @Test
+    fun tilesReadAtTheSameTimeAreAllKept() = runBlocking {
+        val pack = pack()
+        val keys = pack.keys.sorted().take(16)
+        repeat(6) { round ->
+            val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+            val store = WorldDetailStore(scope, bundled = { pack })
+            store.open()
+            if (round % 2 == 0) {
+                // Asked for together, read on several threads, and finished at about the same time.
+                store.need(keys)
+            } else {
+                // Asked for from several threads at once.
+                keys.map { key -> scope.launch { store.need(listOf(key)) } }.joinAll()
+            }
+            eventually { store.tiles.size == keys.size }
+            assertEquals(keys, store.tiles.keys.sorted())
+            scope.cancel()
+        }
+    }
+
+    @Test
+    fun aReadCancelledBeforeItStartsCanBeAskedForAgain() = runBlocking {
+        val pack = pack()
+        val dispatcher = StandardTestDispatcher()
+        val scope = CoroutineScope(SupervisorJob() + dispatcher)
+        val store = WorldDetailStore(scope, reading = dispatcher, bundled = { pack })
+        store.open()
+        store.need(listOf("37_27"))
+        // The read is cancelled before it has started, as when what asked for it goes away.
+        scope.coroutineContext.job.cancelChildren()
+        dispatcher.scheduler.advanceUntilIdle()
+        assertNull(store.tiles["37_27"])
+        store.need(listOf("37_27"))
+        dispatcher.scheduler.advanceUntilIdle()
+        assertNotNull(store.tiles["37_27"])
+        scope.cancel()
+    }
+
+    @Test
+    fun aReadCancelledWhileItWaitsCanBeAskedForAgain() = runBlocking {
+        val pack = pack()
+        val executor = Executors.newSingleThreadExecutor()
+        val gate = CountDownLatch(1)
+        // The reading thread is busy, so the read waits for it.
+        executor.execute { gate.await() }
+        val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        try {
+            val store = WorldDetailStore(scope, reading = executor.asCoroutineDispatcher(), bundled = { pack })
+            store.open()
+            store.need(listOf("37_27"))
+            scope.coroutineContext.job.cancelChildren()
+            gate.countDown()
+            eventually {
+                store.need(listOf("37_27"))
+                store.tiles["37_27"] != null
+            }
+        } finally {
+            scope.cancel()
+            executor.shutdown()
+        }
     }
 }

@@ -4,12 +4,14 @@ import java.io.ByteArrayOutputStream
 import java.util.zip.Inflater
 import kotlin.math.acos
 import kotlin.math.floor
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -210,8 +212,8 @@ class WorldDetailPack(private val data: ByteArray) {
 }
 
 /**
- * The tiles one opened map has read so far. Like the iPhone's main-actor store, its state belongs to `scope`, the
- * main thread's in the app; tiles are read on `reading`.
+ * The tiles one opened map has read so far. The iPhone's store is a main-actor object; this one guards its state
+ * itself, so `need` may be called from any thread and `scope` may run on any dispatcher. Tiles are read on `reading`.
  */
 class WorldDetailStore(
     private val scope: CoroutineScope,
@@ -229,39 +231,66 @@ class WorldDetailStore(
     val tiles: Map<String, DetailTile> get() = tilesState.value
     val pack: WorldDetailPack? get() = packState.value
 
-    private val asked = HashSet<String>()
+    /** Guards `asked`, `shown` and every change to the tiles, as the main actor does on the iPhone. */
+    private val lock = Any()
+
+    /** The tiles being read, each with a ticket of its own read, so a read that ends late never clears a newer one. */
+    private val asked = HashMap<String, Any>()
 
     /** The tiles in the order they were last shown, the oldest first. */
     private var shown: List<String> = emptyList()
 
     suspend fun open() {
-        if (packState.value == null) packState.value = bundled()
+        if (packState.value == null) packState.compareAndSet(null, bundled())
     }
 
     /** Reads the tiles that are not read yet, off the main thread. */
     fun need(keys: List<String>) {
         val pack = packState.value ?: return
-        shown = shown.filter { it !in keys } + keys
-        for (key in keys) {
-            if (tilesState.value[key] != null || key in asked) continue
-            asked.add(key)
-            scope.launch {
-                val tile = withContext(reading) { runCatching { pack.tile(key) }.getOrNull() }
-                asked.remove(key)
-                if (tile == null) return@launch
-                val tiles = LinkedHashMap(tilesState.value)
-                tiles[key] = tile
-                for (oldest in shown) {
-                    if (tiles.size > KEPT && oldest !in keys) tiles.remove(oldest)
-                }
-                tilesState.value = tiles
+        val reads = ArrayList<Pair<String, Any>>()
+        synchronized(lock) {
+            shown = shown.filter { it !in keys } + keys
+            for (key in keys) {
+                if (tilesState.value[key] != null || key in asked) continue
+                val ticket = Any()
+                asked[key] = ticket
+                reads.add(key to ticket)
             }
+        }
+        for ((key, ticket) in reads) {
+            val job = scope.launch {
+                val tile = withContext(reading) { read(pack, key) }
+                synchronized(lock) {
+                    asked.remove(key, ticket)
+                    if (tile == null) return@launch
+                    tilesState.update { current ->
+                        val tiles = LinkedHashMap(current)
+                        tiles[key] = tile
+                        for (oldest in shown) {
+                            if (tiles.size > KEPT && oldest !in keys) tiles.remove(oldest)
+                        }
+                        tiles
+                    }
+                }
+            }
+            // A read cancelled with its scope may be asked for again, even one that never started and so never ran a
+            // `finally`.
+            job.invokeOnCompletion { synchronized(lock) { asked.remove(key, ticket) } }
         }
     }
 
     private companion object {
         /** Tiles kept once read: a few journeys' worth. */
         const val KEPT = 16
+
+        /** `try? pack.tile(key)`: a tile that cannot be read is none, but cancellation still cancels. */
+        fun read(pack: WorldDetailPack, key: String): DetailTile? = try {
+            pack.tile(key)
+        } catch (cancelled: CancellationException) {
+            throw cancelled
+        } catch (_: Exception) {
+            null
+        }
     }
 }
 

@@ -1482,6 +1482,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "iMile Sendungsverfolgung: Nummer, Status, Zustellung",
       "name": "iMile",
       "color": "#0032a0"
+    },
+    {
+      "id": "tnt",
+      "catalog": "tnt",
+      "slug": "tnt-sendungsverfolgung",
+      "title": "TNT Sendungsverfolgung: Sendungsnummer, Status, Zustellung",
+      "name": "TNT",
+      "color": "#ff6600"
     }
   ],
   "fr": [
@@ -2240,6 +2248,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SpeedPAK seguimiento: paquetes de eBay, estados y contacto",
       "name": "SpeedPAK",
       "color": "#ee7532"
+    },
+    {
+      "id": "landmark-global",
+      "catalog": "landmark-global",
+      "slug": "landmark-global-seguimiento",
+      "title": "Landmark Global seguimiento: estados, entrega y contacto",
+      "name": "Landmark Global",
+      "color": "#e62337"
     },
     {
       "id": "cacesa",

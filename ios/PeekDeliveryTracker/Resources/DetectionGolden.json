@@ -75978,6 +75978,14 @@
     ]
   },
   {
+    "input": "GFCA01071289947136",
+    "carrier": "gofo-ca",
+    "confidence": "high",
+    "candidates": [
+      "gofo-ca"
+    ]
+  },
+  {
     "input": "GFFR0000000000001",
     "carrier": "gofo-fr",
     "confidence": "high",

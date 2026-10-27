@@ -31727,8 +31727,10 @@ export const CARRIER_CAPABILITIES = {
     "selectable": true,
     "timezone": "Europe/Berlin",
     "tracking": {
-      "mode": "link-only",
-      "adapter": null
+      "mode": "automatic",
+      "adapter": "pin-ag",
+      "recognitionRank": 121,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://sendungsverfolgung.pin-ag.de/?sendung={trackingNumber}",
     "linkRules": [
@@ -31780,6 +31782,42 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.tusklogistics.com/track-your-shipment"
+  },
+  "gofo-ca": {
+    "displayName": "GOFO Canada",
+    "aliases": [
+      "GOFO CA"
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#fc4c02",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gofo-ca",
+      "recognitionRank": 471
+    },
+    "trackingUrlTemplate": "https://www.gofo.com/ca/track?searchID={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "gofo.com"
+        ],
+        "pathPattern": "^/ca(?:/|$)",
+        "params": [
+          "searchID"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^GFCA\\d{14}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://www.gofo.com/ca/track"
   }
 } as const;
 
@@ -32634,7 +32672,8 @@ export const CARRIER_IDS = [
   "fedex-international-connect",
   "pengyou",
   "pin-ag",
-  "tusk-logistics"
+  "tusk-logistics",
+  "gofo-ca"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

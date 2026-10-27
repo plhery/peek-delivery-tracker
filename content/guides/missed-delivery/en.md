@@ -23,7 +23,6 @@ Each carrier's notice, and what it does next:
 | Carrier | The notice | What happens next |
 | --- | --- | --- |
 | [USPS](carrier:usps) (US) | PS Form 3849; tracking says `Notice Left` | No automatic second try: book a redelivery or pick it up |
-| [UPS](carrier:ups) (US) | UPS Delivery Notice (InfoNotice) | Up to three attempts at UPS's discretion, or a UPS Access Point |
 | [FedEx](carrier:fedex) (US) | Door tag | A nearby FedEx location if it can't be left |
 | [Royal Mail](carrier:royal-mail) (UK) | A red card with the address and opening hours of where to collect | Collect it there, or book a redelivery to your door |
 | [Evri](carrier:evri) (UK) | Calling card with an 8-digit number | Up to three attempts on consecutive working days; no depot collection |
@@ -36,7 +35,7 @@ Each carrier's notice, and what it does next:
 
 The driver tried, nobody took the parcel, and a notice was left: USPS's PS Form 3849 or Canada Post's Delivery Notice Card. Keep it; you rebook or collect with it. Other carriers' wordings for a missed attempt are in [tracking statuses explained](guide:tracking-statuses).
 
-The number on a UPS Delivery Notice, a FedEx door tag or an Evri card isn't your tracking number, but either works in that carrier's tracker.
+The number on a FedEx door tag or an Evri card isn't your tracking number, but either works in that carrier's tracker.
 
 Parcels end up at the counter when they need a signature, have something to pay (see [customs](guide:customs) for an import charge) or have no safe place to go. DPD UK, for one, only leaves a parcel with a neighbour or in a safe place if the sender didn't ask for a signature.
 
@@ -45,7 +44,6 @@ Parcels end up at the counter when they need a signature, have something to pay 
 On the carrier's own site or app, or with the QR code on the card. Most redeliveries are free, USPS's included.
 
 - **USPS:** scan the QR code, use USPS Redelivery online, or call 1-800-ASK-USPS. Ask by 2 a.m. CST, Monday to Saturday, for redelivery that day. You get one request, to the original address only.
-- **UPS:** sign the delivery notice and put it back where it was left, so the parcel is left next time, unless an adult (21+) signature is required.
 - **FedEx:** redirect it in FedEx Delivery Manager to a FedEx location or a retail partner such as Walgreens.
 - **Royal Mail:** book a redelivery to your door on its website, or collect the parcel where the red card says.
 - **Evri:** after a missed attempt, divert it in the app or online to a ParcelShop, locker, neighbour or safe place.
@@ -75,7 +73,6 @@ The notice, and ID in the name on the parcel, usually with a photo:
 | Carrier | Bring | Watch out |
 | --- | --- | --- |
 | USPS | Valid photo ID, and the 3849 if you have it | "Digital or electronic forms of identification in any form are not accepted" |
-| UPS Access Point | Government-issued photo ID | Some shippers also set a release code |
 | FedEx location | Tracking number, door tag number and government-issued photo ID | |
 | DPD UK Pickup shop | A photo ID and an ID with your address, such as a utility bill | |
 | An Post | The notice and ID such as a driving licence | |
@@ -128,7 +125,7 @@ Complain to the carrier first and keep its reference. For an online order, tell 
 | --- | --- |
 | US | USPS District Consumer and Industry Affairs, then the Postal Regulatory Commission |
 | UK | Royal Mail: Postal Review Panel, then POSTRS. Others: their own procedure |
-| Ireland | An Post Customer Advocate (free), then ComReg's Postal Dispute Resolution (€15) or Small Claims |
+| Ireland | An Post's Customer Advocate, then ComReg's Postal Dispute Resolution (€15) |
 | Canada | Ombudsman at Canada Post, once you have a closed service ticket |
 | Australia | Commonwealth Ombudsman, for Australia Post and StarTrack, if you complained to them within 12 months |
 
@@ -139,7 +136,6 @@ Complain to the carrier first and keep its reference. For an online order, tell 
 - [USPS: Picking up held mail](https://faq.usps.com/s/article/Picking-Up-Mail-that-is-Being-Held-at-Your-Post-Office) – timing, photo ID, 1-800-ASK-USPS, agents
 - [USPS: Acceptable ID](https://faq.usps.com/s/article/Acceptable-Form-of-Identification) – no digital ID
 - [PRC: Consumer assistance](https://prc.gov/node/188) – complaints
-- [UPS: UPS Delivery Notice](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – attempts, Access Point, ID
 - [FedEx: Missed delivery](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/missed-delivery.html) – door tag, redirecting
 - [FedEx: Hold at Location](https://www.fedex.com/en-us/shipping/hold-at-location.html) – what to bring for a missed delivery
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's red card, redelivery, Customer Service Points
@@ -148,9 +144,9 @@ Complain to the carrier first and keep its reference. For an online order, tell 
 - [Evri: Track a parcel](https://www.evri.com/track-a-parcel) – 8-digit calling card number, no depot collection
 - [DPD UK: How can we help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – Pickup shops, ID
 - [An Post: Receiving post](https://www.anpost.com/Post-Parcels/Receiving/Receiving-Post) – notice, redelivery, ID
-- [An Post: Feedback and complaints](https://www.anpost.com/Customer-Charter/Feedback-Complaints) – Customer Advocate, ComReg, Small Claims
+- [ComReg: Make a complaint to your provider](https://www.comreg.ie/advice-information/postal/make-complaint-postal-service-provider/) – An Post Customer Services, then its Customer Advocate
 - [An Post: Security](https://www.anpost.com/Security) – no payment links for parcels coming into Ireland
-- [ComReg: Dispute resolution form](https://www.comreg.ie/media/2025/07/Postal_DR01_Application_Form_and_Guidelines_0525_Editable.pdf) – €15 fee
+- [ComReg: Dispute resolution form](https://www.comreg.ie/media/2025/07/Postal_DR01_Application_Form_and_Guidelines_0525_Editable.pdf) – the provider's own procedure first, €15 fee
 - [Canada Post: Delivery notice card](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/a-delivery-notice-card-was-left-when-i-was-home.page) – ID, agents
 - [Canada Post: Tracking statuses](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-statuses.page) – next attempt
 - [Canada Post: Can I refuse a delivery?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/can-i-refuse-delivery-of-a-parcel.page) – 15 calendar days

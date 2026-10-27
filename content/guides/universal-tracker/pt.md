@@ -4,7 +4,7 @@ description: Como funciona o seguimento universal de encomendas, o que nenhum se
 slug: seguir-todas-as-encomendas
 picture: Cinco carrinhas coloridas cujos caminhos tracejados acabam numa lista num telemóvel, e o Pip, radiante, numa caixa aberta.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Um serviço universal de seguimento (ou de rastreio) de encomendas é um site ou uma app que aceita o número de seguimento de qualquer transportadora, descobre de quem é, vai buscar as leituras e junta todas as tuas encomendas numa só lista. Só mostra as leituras que a transportadora registou, por isso nunca vai à frente dela. O que muda de um serviço para outro é o que te pede em troca: uma conta, acesso ao teu e-mail, uma assinatura para teres notificações ou paciência para os anúncios.
@@ -31,7 +31,7 @@ Começa pelas apps grátis das transportadoras que mais te entregam:
 | myDPD | Mostra onde está a encomenda, manda-te, se pedires, mensagens push com a hora prevista de entrega e deixa mudar o dia ou o local |
 | InPost Mobile | Segue os envios que esperas, avisa-te quando mudam de estado e guarda as encomendas levantadas nos últimos 30 dias |
 
-A UPS My Choice faz o mesmo com as encomendas [UPS](carrier:ups). Transportadora a transportadora, e com o que cada uma pede: [como seguir uma encomenda sem número](guide:find-tracking-number).
+Transportadora a transportadora, e com o que cada uma pede: [como seguir uma encomenda sem número](guide:find-tracking-number).
 
 Outras opções, com os seus limites:
 
@@ -78,7 +78,7 @@ Quase todos seguem cinco passos:
 
 :::steps
 - Colas | Um número de seguimento, a ligação da transportadora ou o e-mail de envio. A ligação é o mais seguro: diz qual é a transportadora, e com a [Dachser](carrier:dachser) é a única coisa que funciona.
-- Lê o formato | As letras, o comprimento e o dígito de controlo encurtam a lista. `1Z999AA10123456784` começa pelo `1Z` da UPS; `RR000000005CH` tem o formato de 13 caracteres que os operadores postais partilham, como os CTT.
+- Lê o formato | As letras, o comprimento e o dígito de controlo encurtam a lista. `1Z999AA10123456784` começa pelo `1Z` da [UPS](carrier:ups); `RR000000005CH` tem o formato de 13 caracteres que os operadores postais partilham, como os CTT.
 - Desempata | Alguns formatos servem a várias transportadoras: um número só com 14 algarismos pode ser da DPD, da SEUR, da BRT ou da Hermes alemã, e um de 16, da [Correos Express](carrier:correos-express) ou da TNT, entre outras. Pergunta a mais do que uma, ou deixa-te escolher.
 - Vai buscar as leituras | À transportadora ou a outro serviço de seguimento, para um só histórico.
 - Volta a verificar | A intervalos regulares, e envia-te uma notificação quando há novidades.
@@ -88,7 +88,7 @@ Para leres um número por tua conta, vê [como saber qual é a transportadora pe
 
 ### De onde vêm as leituras
 
-- **Os dados da transportadora**, com as condições dela: a API da DHL proíbe misturar os seus dados com publicidade e pede que sejam apagados 30 dias depois da entrega, salvo acordo em contrário.
+- **Os dados da transportadora**, com as condições dela.
 - **O site da transportadora**, lido de forma automática. No Google Play, a app da ParcelsApp diz que mostra informação dos sites oficiais dos serviços postais nacionais.
 - **Um aviso pago, enviado pela transportadora.** A Parcel diz que as novidades enviadas pela própria transportadora costumam chegar em menos de 10 minutos, mas que a maioria dessas transportadoras lhe cobra cada entrega seguida.
 - **Outro serviço de seguimento.** O seguimento do PayPal funciona com a AfterShip. O aviso de privacidade do Peek nomeia a ParcelsApp, a Ship24, o 17TRACK e a União Postal Universal entre os serviços a que pergunta quando é preciso.
@@ -145,7 +145,6 @@ Pode, e costuma trazer uma ligação. Os CTT mantêm uma página de alertas de p
 - [App Store: GLS](https://apps.apple.com/pt/app/id1581091038) – envios associados ao telemóvel no My GLS
 - [DPD Portugal: App myDPD](https://www.dpd.com/pt/pt/receber-encomenda/mydpd-app/) – mensagens push, mudar o dia ou o local
 - [App Store: myDPD](https://apps.apple.com/pt/app/id1571987104) – app grátis
-- [UPS Portugal: UPS My Choice](https://www.ups.com/pt/pt/track/ups-my-choice) – envios UPS a caminho, sem números de seguimento
 - [App Store: InPost Mobile](https://apps.apple.com/pt/app/id1437787639) – envios esperados, notificações, arquivo de 30 dias
 - [App Store: Seguir Encomenda](https://apps.apple.com/pt/app/id6747679736) – transportadoras, publicidade, Premium
 - [ParcelsApp: página inicial (em inglês)](https://parcelsapp.com/en) – números ligados
@@ -166,7 +165,6 @@ Pode, e costuma trazer uma ligação. Os CTT mantêm uma página de alertas de p
 - [App Store: Deliveries](https://apps.apple.com/pt/app/id290986013) – preços
 - [Junecloud: Subscriptions (em inglês)](https://junecloud.com/support/deliveries-ios/subscriptions.html) – assinatura para começar
 - [Junecloud: Privacy overview (em inglês)](https://junecloud.com/support/deliveries-ios/deliveries-privacy-overview.html) – conta opcional, e-mails guardados dez dias
-- [DHL Developer: Shipment Tracking API (em inglês)](https://developer.dhl.com/api-reference/shipment-tracking) – condições dos dados de seguimento
 - [DHL: Probleme mit der Sendungsverfolgung (em alemão)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – 24 horas para aparecer
 - [USPS: Tracking API access changes (em inglês)](https://www.usps.com/business/api-access.htm) – acesso ligado ao Mailer ID
 - [Gmail: seguimento de encomendas](https://support.google.com/mail/answer/13073650?hl=pt-PT) – só transportadoras dos EUA
@@ -177,7 +175,7 @@ Pode, e costuma trazer uma ligação. Os CTT mantêm uma página de alertas de p
 - [Shop: Track orders (em inglês)](https://help.shop.app/en/shop/delivery-tracking/track-orders) – caixa de correio, e-mails em inglês
 - [Apple Developer: Age ratings (em inglês)](https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions) – publicidade, respostas do programador
 - [Play Console: Ads declaration (em inglês)](https://support.google.com/googleplay/android-developer/answer/9859455?hl=en) – rótulo de anúncios
-- [UPS: Sample package label (em inglês)](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – números 1Z
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – números 1Z e o seu algarismo de controlo
 - [UPU: Standards (em inglês)](https://www.upu.int/en/postal-solutions/programmes-services/standards) – números postais de 13 caracteres
 - [Universal Parcel Scraper: catálogo de transportadoras](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – formas de 14 e 16 algarismos partilhadas
 :::

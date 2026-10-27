@@ -1,6 +1,6 @@
 ---
 title: Last posting dates for Christmas and shipping deadlines
-description: When to send for Christmas with Royal Mail, Evri, USPS, UPS, FedEx, An Post, Canada Post and Australia Post, from each carrier's own page.
+description: When to send for Christmas with Royal Mail, Evri, USPS, FedEx, An Post, Canada Post and Australia Post, from each carrier's own page.
 slug: christmas-posting-dates
 picture: A December calendar page with one day circled, a van carrying a red-ribboned parcel through falling snow, and Pip hurrying alongside.
 published: 2026-10-09
@@ -11,7 +11,7 @@ Royal Mail hasn't published its 2026 Christmas dates yet: in 2025, the last days
 
 ## United Kingdom: Royal Mail, Evri and InPost
 
-UK carriers haven't put their 2026 dates on their own pages yet (Royal Mail: "Last posting dates coming soon"), so most dates here are last year's, for UK addresses.
+UK carriers haven't put their 2026 dates on their own pages yet, so most dates here are last year's, for UK addresses.
 
 | Carrier | Service | Send by |
 | --- | --- | --- |
@@ -26,9 +26,9 @@ UK carriers haven't put their 2026 dates on their own pages yet (Royal Mail: "La
 
 [DPD UK](carrier:dpd-uk)'s pages show no Christmas cut-off for UK deliveries.
 
-## United States: USPS, UPS and FedEx
+## United States: USPS and FedEx
 
-All three have published their 2026 dates. USPS aims at delivery before Christmas Day; UPS and FedEx aim at Christmas Eve, Thursday 24 December.
+Both have published their 2026 dates. USPS aims at delivery before Christmas Day; FedEx aims at Christmas Eve, Thursday 24 December.
 
 | Carrier | Service | Send by |
 | --- | --- | --- |
@@ -38,10 +38,6 @@ All three have published their 2026 dates. USPS aims at delivery before Christma
 | USPS | Ground Advantage to Alaska, Hawaii, Puerto Rico and US territories | Wednesday 16 December |
 | USPS | Military APO/FPO/DPO, Ground Advantage | Wednesday 4 November |
 | USPS | Military APO/FPO/DPO, First-Class Mail and Priority Mail | Wednesday 9 December |
-| [UPS](carrier:ups) | Ground | No fixed date: check ups.com/ctc |
-| UPS | 3 Day Select | Monday 21 December |
-| UPS | 2nd Day Air | Tuesday 22 December |
-| UPS | Next Day Air | Wednesday 23 December |
 | [FedEx](carrier:fedex) | Ground Economy | Tuesday 15 December |
 | FedEx | Ground, Home Delivery | Thursday 17 December (5 days in transit) to Wednesday 23 December (1 day) |
 | FedEx | Express Saver | Monday 21 December |
@@ -119,13 +115,12 @@ A parcel from outside your country also passes through customs, which can hold i
 
 ## What if your Christmas parcel is late?
 
-Sent after the last date? Australia Post delivers such items as quickly as it can, but says they may not arrive until after Christmas. A faster service often closes later, such as Special Delivery Guaranteed or UPS Next Day Air.
+Sent after the last date? Australia Post delivers such items as quickly as it can, but says they may not arrive until after Christmas. A faster service often closes later, such as USPS Priority Mail Express.
 
 | Carrier | Days off, Christmas 2026 |
 | --- | --- |
 | Royal Mail | No post on bank holidays: Friday 25 and Monday 28 December |
 | DPD UK | Closed Friday 25, Saturday 26 and Monday 28 December in Great Britain |
-| UPS | Normal delivery on Thursday 24 December, none on Friday 25 December |
 | FedEx | Modified service on Thursday 24 December, closed on Friday 25 December |
 | Australia Post | No deliveries on Christmas Day or Boxing Day |
 | An Post, Canada Post | Not announced yet |
@@ -148,7 +143,6 @@ Waiting for a gift? Paste its number into [Peek](/) and set its notifications to
 - [InPost: Christmas drop-off date](https://inpost.co.uk/blog/do-they-know-its-xs-mas-time) – 2025 date
 - [DPD UK: Delivery schedule](https://www.dpd.co.uk/content/about_dpd/delivery_schedule.jsp) – 2026 days off in Great Britain
 - [USPS: Holiday shipping deadlines](https://www.usps.com/holiday/holiday-shipping-dates.htm) – 2026 dates, Hanukkah
-- [UPS: Holiday shipping schedule](https://www.ups.com/us/en/support/shipping-support/shipping-services/holiday-shipping-schedule) – 2026 dates, days off
 - [FedEx: Last days to ship](https://www.fedex.com/en-us/holiday/last-days-to-ship.html) – days off, service alerts
 - [FedEx: 2026 last days to ship](https://www.fedex.com/content/dam/fedex/us-united-states/services/2026_Peak_Last_Day_to_ship.pdf) – 2026 dates, pickups
 - [An Post: Christmas postal dates](https://www.anpost.com/Post-Parcels/Christmas/christmas-postal-dates) – 2025 dates

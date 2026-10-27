@@ -4,7 +4,7 @@ description: Jak działa śledzenie przesyłek wszystkich firm, czego nie widzi 
 slug: sledzenie-przesylek-wszystkich-firm
 picture: Pięć furgonetek w różnych kolorach, których kropkowane trasy zbiegają się w jednej liście na telefonie, i rozpromieniony Pip w otwartym pudełku.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Uniwersalny tracker paczek to strona albo aplikacja, w której śledzisz przesyłki wszystkich firm w jednym miejscu: wklejasz numer od dowolnego przewoźnika, a tracker sam ustala, czyj to numer, pobiera skany i trzyma wszystkie Twoje paczki na jednej liście. Pokazuje tylko te skany, które zapisał przewoźnik, więc nigdy nie wie więcej niż on. Trackery różnią się tym, czego chcą od Ciebie w zamian: konta, dostępu do skrzynki mailowej, abonamentu za powiadomienia albo cierpliwości do reklam.
@@ -18,7 +18,7 @@ Tak, i może nawet już masz coś takiego: oprócz uniwersalnych trackerów pacz
 | Wklejasz numer albo link | Ten numer | Każdy tracker |
 | Przesyłasz dalej jednego e-maila | Tego e-maila | ParcelsApp, Shop, Deliveries |
 | Podłączasz skrzynkę mailową | Twoją skrzynkę, przefiltrowaną według reguł serwisu | Shop, AfterShip |
-| Przewoźnik albo sklep sam przypisuje Ci paczkę | Twój numer telefonu, e-mail albo konto w sklepie | InPost Mobile, DPD Mobile, Pocztex Mobile, Allegro; zamówienia ze sklepów na Shopify w Shop |
+| Przewoźnik albo sklep sam przypisuje Ci paczkę | Twój numer telefonu, e-mail albo konto w sklepie | DPD Mobile, Pocztex Mobile, Allegro; zamówienia ze sklepów na Shopify w Shop |
 
 ## Jak zobaczyć wszystkie paczki, które do Ciebie idą?
 
@@ -26,7 +26,6 @@ Zacznij od darmowych aplikacji, które same przypisują Ci paczki, także gdy [n
 
 | Aplikacja | Co pokazuje | Powiadomienia |
 | --- | --- | --- |
-| InPost Mobile | Twoje paczki [InPost](carrier:inpost) bez wpisywania numerów: „Nie musisz rejestrować paczek samodzielnie”. Paczki bliskich i znajomych dodasz po numerze przesyłki | Komunikat na telefonie przy każdej zmianie statusu |
 | DPD Mobile | Paczki w sieci [DPD Polska](carrier:dpd-pl) przypisane do numeru telefonu lub adresu e-mail z Twojego konta w aplikacji. Te dane muszą się zgadzać z listem przewozowym | W aplikacji i e-mailem, na bieżąco o statusie doręczenia |
 | Pocztex Mobile ([Poczta Polska](carrier:poczta-polska)) | Wszystkie przesyłki rejestrowane, „do których został przypisany Twój numer telefonu” | O zmianach statusu przesyłek |
 | Allegro | Zakładka „Moje przesyłki”: paczki z Twoich zakupów, od oczekiwania na nadanie aż do odbioru. Nic nie zobaczysz, jeśli sprzedający nie dodał numeru listu przewozowego | W aplikacji i e-mailem, gdy przesyłka się opóźnia |
@@ -52,7 +51,7 @@ Nie ma jednej najlepszej dla wszystkich: to zależy od firm kurierskich, z któr
 | Jak długo przechowuje dane | Polityka prywatności | Deliveries trzyma przesłane e-maile do dziesięciu dni. Przy ParcelsApp na Androida Google Play podaje: „Nie można usunąć danych” |
 | Język | Pole „Języki” w App Store | Polski podają Parcel, Packages i Shop, a AfterShip i Deliveries nie. 17TRACK podaje tam tylko angielski, ale w opisie obiecuje ponad 30 języków, a jego strona ma wersję polską |
 | Dostawca | Sekcja „Dostawca” w polskim App Store | Czy twórca deklaruje, że jest przedsiębiorcą. AfterShip tego nie robi, więc App Store uprzedza, że do umów z nim nie mają zastosowania prawa konsumenta obowiązujące w EOG |
-| Twoi przewoźnicy | Lista przewoźników | Liczby podają same firmy: 17TRACK pisze o ponad 2500 w App Store i o ponad 2800 na swojej stronie o USPS. Sprawdź raczej, czy na liście są InPost, Poczta Polska, DPD i [ORLEN Paczka](carrier:orlen-paczka) |
+| Twoi przewoźnicy | Lista przewoźników | Liczby podają same firmy: 17TRACK pisze o ponad 2500 w App Store i o ponad 2800 na swojej stronie o USPS. Sprawdź raczej, czy na liście są [InPost](carrier:inpost), Poczta Polska, DPD i [ORLEN Paczka](carrier:orlen-paczka) |
 
 ## Darmowe czy płatne: porównanie trackerów
 
@@ -85,7 +84,7 @@ Jak samemu rozpoznać kuriera po numerze, wyjaśniamy w poradniku [jaki kurier p
 
 ### Skąd biorą się skany
 
-- **Interfejs danych przewoźnika (API)**, na jego warunkach. Poczta Polska udostępnia usługę sieciową (web service), na której można budować aplikacje do śledzenia przesyłek. Regulamin API DHL zabrania łączenia danych o przesyłkach z reklamami i każe je usunąć 30 dni po doręczeniu, chyba że strony umówiły się inaczej.
+- **Interfejs danych przewoźnika (API)**, na jego warunkach. Poczta Polska udostępnia usługę sieciową (web service), na której można budować aplikacje do śledzenia przesyłek.
 - **Strona przewoźnika**, odczytywana automatycznie. Aplikacja ParcelsApp na Androida „wyświetla informacje z oficjalnych stron internetowych krajowych służb pocztowych”.
 - **Płatne powiadomienia od przewoźnika.** Parcel pisze, że takie aktualizacje przychodzą zwykle w ciągu 10 minut, ale większość tych przewoźników każe Parcelowi płacić za każdą śledzoną przesyłkę.
 - **Inny tracker.** W PayPalu dane o przesyłkach dostarcza AfterShip. Informacja o prywatności Peeka wymienia ParcelsApp, Ship24, 17TRACK i Światowy Związek Pocztowy wśród serwisów, do których w razie potrzeby się zwraca.
@@ -128,15 +127,13 @@ ParcelsApp ma przedstawiciela w UE na podstawie art. 27 RODO: firmę EU Rep z Ir
 
 ## Czy SMS o paczce może być fałszywy?
 
-Tak. W kwietniu 2026 roku CERT Polska ostrzegał przed [SMS-ami podszywającymi się pod DPD](guide:delivery-scam-texts): pisały o nieudanej próbie doręczenia i prowadziły na fałszywą stronę, która prosiła o dane kontaktowe i dane karty, rzekomo żeby opłacić zmianę terminu dostawy. InPost pisze wprost, że „nigdy nie wysyła SMS-ów z informacją o dopłatach”. Podejrzany SMS przekaż w całości, razem z linkiem, do CERT Polska na numer 8080. W Polsce to nic nie kosztuje.
+Tak. W kwietniu 2026 roku CERT Polska ostrzegał przed [SMS-ami podszywającymi się pod DPD](guide:delivery-scam-texts): pisały o nieudanej próbie doręczenia i prowadziły na fałszywą stronę, która prosiła o dane kontaktowe i dane karty, rzekomo żeby opłacić zmianę terminu dostawy. Podejrzany SMS przekaż w całości, razem z linkiem, do CERT Polska na numer 8080. W Polsce to nic nie kosztuje.
 
 > Nie klikaj linku w wiadomości o paczce, której się nie spodziewasz. Otwórz zamówienie w sklepie albo wpisz ręcznie adres strony przewoźnika i sprawdź, czy tam też widać tę samą prośbę. O SMS-ach z żądaniem opłaty za paczkę z zagranicy piszemy w [poradniku o paczce zatrzymanej przez urząd celny](guide:customs).
 
 :::sources
 - [Peek: strona główna](https://peektracker.com/pl) – bez konta
 - [Peek: Privacy notice](https://peektracker.com/privacy.html) – brak reklam, serwisy, o które pyta, dzienny limit wyszukiwań, projekt niekomercyjny
-- [InPost: Aplikacja mobilna](https://inpost.pl/aplikacja-mobilna) – paczki bez samodzielnej rejestracji, powiadomienia o zmianie statusu, paczki bliskich
-- [App Store: InPost Mobile](https://apps.apple.com/pl/app/id1437787639) – darmowa aplikacja
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – paczki przypisane do telefonu lub e-maila z konta w DPD Mobile, powiadomienia, 14-znakowy numer
 - [App Store: DPD Mobile](https://apps.apple.com/pl/app/dpd-mobile/id1593210812) – automatyczne śledzenie paczek w sieci DPD Polska, darmowa aplikacja
 - [App Store: Pocztex Mobile](https://apps.apple.com/pl/app/pocztex-mobile/id1661761150) – przesyłki przypisane do numeru telefonu, powiadomienia, darmowa aplikacja
@@ -170,12 +167,10 @@ Tak. W kwietniu 2026 roku CERT Polska ostrzegał przed [SMS-ami podszywającymi 
 - [App Store: Shop](https://apps.apple.com/pl/app/id1223471316) – języki
 - [Apple Developer: Age ratings](https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions) – reklamy jako deklaracja twórcy
 - [Pomoc Konsoli Play: Przygotowanie aplikacji do sprawdzenia](https://support.google.com/googleplay/android-developer/answer/9859455?hl=pl) – etykieta „Zawiera reklamy” deklarowana przez twórcę
-- [DHL Developer: Shipment Tracking API](https://developer.dhl.com/api-reference/shipment-tracking) – warunki korzystania z danych
 - [DHL: Probleme mit der Sendungsverfolgung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – do 24 godzin
-- [UPS: Sample package label](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – numery 1Z
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numery 1Z i ich cyfra kontrolna
 - [UPU: Standards](https://www.upu.int/en/postal-solutions/programmes-services/standards) – 13-znakowe numery pocztowe
 - [Universal Parcel Scraper: Carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – wspólny układ 14 cyfr
 - [CERT Polska: Uwaga na fałszywe SMS-y podszywające się pod firmę kurierską](https://moje.cert.pl/komunikaty/2026/49/uwaga-na-falszywe-sms-y-podszywajace-sie-pod-firme-kurierska/) – kampania z wizerunkiem DPD z kwietnia 2026, dane kontaktowe i dane karty, numer 8080
-- [InPost: Bezpieczeństwo z InPost](https://inpost.pl/bezpieczenstwo-z-inpost) – brak SMS-ów o dopłatach, sprawdzanie wiadomości u źródła
 - [gov.pl: Fałszywe SMS-y, zachowaj czujność](https://www.gov.pl/web/baza-wiedzy/coraz-wiecej-prob-wyludzenia-przez-tzw-falszywe-sms-y-zachowaj-czujnosc) – 8080 bezpłatnie w Polsce, cała wiadomość z linkiem
 :::

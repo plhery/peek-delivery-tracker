@@ -11,14 +11,14 @@ El seguimiento universal de paquetes reúne todos tus envíos en una sola web o 
 
 ## ¿Hay una app para seguir todos tus paquetes en un solo sitio?
 
-Sí, y puede que ya la tengas: además de los localizadores universales, PayPal y Shop reúnen paquetes, y [Correos](carrier:correos-spain), [GLS](carrier:gls-es) o [SEUR](carrier:seur) juntan los suyos en tu cuenta. Lo que ve cada servicio depende de cómo entra el paquete en la lista:
+Sí, y puede que ya la tengas: además de los localizadores universales, PayPal y Shop reúnen paquetes, y [Correos](carrier:correos-spain) o [GLS](carrier:gls-es) juntan los suyos en tu cuenta. Lo que ve cada servicio depende de cómo entra el paquete en la lista:
 
 | Cómo entra el paquete | Qué ve el servicio | Ejemplos |
 | --- | --- | --- |
 | Pegas un número o un enlace | Ese número | Todos los localizadores |
 | Reenvías un correo | Ese correo | ParcelsApp, Shop, Deliveries |
 | Conectas tu bandeja de entrada | Tu buzón, filtrado según sus propias reglas | Shop, AfterShip, PayPal |
-| El transportista o la tienda te reconoce | Los datos de tu cuenta, como tu correo o tu móvil | Correos, GLS y SEUR con tu cuenta; los pedidos de Shopify en Shop |
+| El transportista o la tienda te reconoce | Los datos de tu cuenta, como tu correo o tu móvil | Correos y GLS con tu cuenta; los pedidos de Shopify en Shop |
 
 ## ¿Cómo ver todos los paquetes que te llegan a casa?
 
@@ -28,7 +28,6 @@ Empieza por lo que ya te dan los transportistas con los que más tratas. Cada un
 | --- | --- | --- |
 | Correos | En su app, la sección «Actividad» muestra de forma automática los envíos en los que figuras como remitente o destinatario, también los de Vinted, Wallapop o AliExpress, sin teclear códigos | Una cuenta Correos ID. Sin ella, el modo invitado te deja consultar el seguimiento |
 | GLS | En su app, con una cuenta My GLS, los envíos de GLS que llevan tu número de teléfono aparecen solos, con notificaciones de cómo van | Registrarte con tu móvil y escribirlo bien cuando compras. Sin cuenta, el número de seguimiento y el código postal |
-| SEUR | miSEUR recupera en tu perfil los pedidos asociados a tu email o a tu móvil, con notificaciones del estado de cada envío | Registrarte en miSEUR |
 | InPost | Su app sigue envíos a domicilio, a Lockers y a Punto Pack, y te envía notificaciones cuando cambian de estado | El número de seguimiento de cada envío |
 | Amazon | Sus entregas se siguen en «Mis pedidos» | Tu cuenta de Amazon |
 
@@ -76,7 +75,7 @@ Casi todos siguen cinco pasos:
 :::steps
 - Pegas | Un [número de seguimiento](guide:find-tracking-number), el enlace del transportista o el correo de envío. El enlace es lo más seguro: dice quién es el transportista, y con [Dachser](carrier:dachser) es lo único que sirve.
 - Mira el formato | Las letras, la longitud y el dígito de control acotan la lista. `1Z999AA10123456784` empieza por el `1Z` de [UPS](carrier:ups); `RR000000005CH` tiene el formato de 13 caracteres que comparten los operadores postales.
-- Sopesa los candidatos | Algunos formatos encajan con varios transportistas: un número de 14 cifras puede ser de SEUR, DPD, BRT o Hermes Alemania, entre otros. Pregunta a más de uno o te deja elegir.
+- Sopesa los candidatos | Algunos formatos encajan con varios transportistas: un número de 14 cifras puede ser de [SEUR](carrier:seur), DPD, BRT o Hermes Alemania, entre otros. Pregunta a más de uno o te deja elegir.
 - Recoge los escaneos | Del transportista o de otro localizador, en un solo historial.
 - Vuelve a mirar | Cada cierto tiempo, y te notifica si hay algo nuevo.
 :::
@@ -85,7 +84,7 @@ Para leer un número por tu cuenta, mira [los formatos de número de seguimiento
 
 ### De dónde salen los escaneos
 
-- **Los datos del transportista**, con sus condiciones: la API de DHL prohíbe mezclar sus datos con publicidad y pide borrarlos 30 días después de la entrega, salvo acuerdo distinto.
+- **Los datos del transportista**, con sus condiciones.
 - **La web del transportista**, leída de forma automática. En Google Play, Parcels dice que muestra «información de los sitios web oficiales de los servicios postales nacionales».
 - **Avisos que manda el propio transportista, y que se pagan.** Parcel dice que esas novedades no suelen tardar más de 10 minutos, pero que la mayoría de esos transportistas le cobran por cada envío que sigue.
 - **Otro localizador.** El seguimiento de PayPal funciona con AfterShip. El aviso de privacidad de Peek nombra ParcelsApp, Ship24, 17TRACK y la Unión Postal Universal entre los servicios a los que pregunta cuando hace falta.
@@ -142,7 +141,6 @@ Sí, y suele traer un enlace. Correos cuenta que pedir un pago o completar la di
 - [Correos: App Correos](https://www.correos.es/es/es/herramientas/correos-app) – Correos ID, «Actividad»
 - [App Store: Correos](https://apps.apple.com/es/app/id6478281790) – modo invitado
 - [App Store: GLS](https://apps.apple.com/es/app/id1581091038) – My GLS, envíos ligados a tu teléfono
-- [SEUR: nota de prensa sobre miSEUR (2023)](https://saladeprensa.seur.com/2023/10/30/seur-estrena-el-entorno-digital-miseur-una-plataforma-pionera-y-unica-para-la-gestion-de-envios/) – pedidos asociados a tu email o móvil
 - [App Store: InPost](https://apps.apple.com/es/app/id6748218565) – seguimiento y notificaciones
 - [Correos Express: Seguimiento y entrega](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio) – unas horas para aparecer
 - [Correos: Qué es el phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – excusas habituales, sin pagos por SMS
@@ -166,7 +164,6 @@ Sí, y suele traer un enlace. Correos cuenta que pedir un pago o completar la di
 - [App Store: Deliveries](https://apps.apple.com/es/app/id290986013) – precios, idiomas
 - [Junecloud: Subscriptions (en inglés)](https://junecloud.com/support/deliveries-ios/subscriptions.html) – suscripción obligatoria
 - [Junecloud: Privacy overview (en inglés)](https://junecloud.com/support/deliveries-ios/deliveries-privacy-overview.html) – correos guardados diez días
-- [DHL Developer: Shipment Tracking API (en inglés)](https://developer.dhl.com/api-reference/shipment-tracking) – condiciones de uso
 - [USPS: Tracking API access changes (en inglés)](https://www.usps.com/business/api-access.htm) – acceso de pago
 - [Gmail: seguimiento de envíos](https://support.google.com/mail/answer/13073650?hl=es) – solo Estados Unidos
 - [Gmail: funciones inteligentes](https://support.google.com/mail/answer/15604322?hl=es) – desactivadas en el EEE
@@ -176,7 +173,7 @@ Sí, y suele traer un enlace. Correos cuenta que pedir un pago o completar la di
 - [Shop: Track orders (en inglés)](https://help.shop.app/en/shop/delivery-tracking/track-orders) – 30 días, correos en inglés
 - [Apple Developer: clasificaciones por edad (en inglés)](https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions) – publicidad declarada
 - [Ayuda de Play Console: preparar una aplicación para su revisión](https://support.google.com/googleplay/android-developer/answer/9859455?hl=es) – etiqueta «Contiene anuncios», declarada por el desarrollador
-- [UPS: ejemplo de etiqueta (en inglés)](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – números 1Z
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – números 1Z y su dígito de control
 - [UPU: normas (en inglés)](https://www.upu.int/en/postal-solutions/programmes-services/standards) – 13 caracteres
 - [Universal Parcel Scraper: catálogo de transportistas](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – números de 14 cifras; Amazon Logistics, sin seguimiento público, se sigue en el historial de pedidos
 :::

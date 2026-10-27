@@ -4,7 +4,7 @@ description: How universal parcel tracking works, what no tracker can see, and h
 slug: universal-parcel-tracking
 picture: Five vans in different colours, their dotted paths leading into one list on a phone, and Pip beaming from an open box.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 A universal parcel tracker (or universal package tracker) is a website or app that takes a tracking number from any carrier, works out whose it is, fetches the scans and keeps all your parcels in one list. It only shows scans the carrier has recorded, so it is never ahead of the carrier. Trackers differ in what they ask of you: an account, your inbox, a subscription for notifications or your patience with ads.
@@ -32,7 +32,7 @@ Start with the carriers' own free options:
 | Canada | Canada Post automatic tracking | A personal account, verified with the name and address on your photo ID; business and PO box addresses aren't eligible |
 | Australia | Australia Post app | Shows parcels automatically when the sender's data matches your MyPost details |
 
-UPS My Choice does the same for [UPS](carrier:ups) parcels in all five countries. Carrier by carrier, with the catches: [track a parcel without a number](guide:find-tracking-number).
+Carrier by carrier, with the catches: [track a parcel without a number](guide:find-tracking-number).
 
 Other options, with their limits:
 
@@ -84,7 +84,7 @@ Most trackers work in five steps:
 
 :::steps
 - You paste | A tracking number, the carrier's link or the shipping email. A link is safest: it names the carrier, and for [Dachser](carrier:dachser) it's the only thing that works.
-- It reads the shape | Letters, length and check digit narrow it down. `1Z999AA10123456784` starts with UPS's `1Z`; `RR000000005CH` has the 13-character shape national posts share.
+- It reads the shape | Letters, length and check digit narrow it down. `1Z999AA10123456784` starts with [UPS](carrier:ups)'s `1Z`; `RR000000005CH` has the 13-character shape national posts share.
 - It weighs the candidates | Some shapes fit several carriers: a plain 14-digit number can be DPD, [SEUR](carrier:seur), [BRT](carrier:brt) or [Hermes Germany](carrier:hermes-de), among others. It asks more than one, or lets you choose.
 - It fetches the scans | From the carrier or another tracker, into one timeline.
 - It checks again | At set intervals, and notifies you of anything new.
@@ -94,7 +94,7 @@ To read a number yourself, see [tracking number formats](guide:tracking-number-f
 
 ### Where the scans come from
 
-- **The carrier's data feed**, on its terms: DHL's API forbids mixing its data with advertising and wants it deleted 30 days after delivery, unless agreed otherwise.
+- **The carrier's data feed**, on its terms.
 - **The carrier's website**, read automatically. ParcelsApp's Android app "shows information from official websites of national postal services".
 - **A paid push.** Parcel says live updates from the carrier usually arrive within 10 minutes, but most such carriers "charge Parcel for each tracked delivery".
 - **Another tracker.** PayPal's tracking is "powered by Aftership". Peek's privacy notice names "ParcelsApp, Ship24, 17TRACK and the Universal Postal Union" among the services it asks when needed.
@@ -161,7 +161,6 @@ Yes, [usually by text, with a link](guide:delivery-scam-texts). The US Postal In
 - [App Store: Deliveries](https://apps.apple.com/us/app/deliveries-a-package-tracker/id290986013) – prices
 - [Junecloud: Subscriptions](https://junecloud.com/support/deliveries-ios/subscriptions.html) – subscription to start
 - [Junecloud: Privacy overview](https://junecloud.com/support/deliveries-ios/deliveries-privacy-overview.html) – optional account, emails kept ten days
-- [DHL Developer: Shipment Tracking API](https://developer.dhl.com/api-reference/shipment-tracking) – terms for tracking data
 - [DHL: Probleme mit der Sendungsverfolgung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – 24 hours to appear
 - [USPS: Tracking API access changes](https://www.usps.com/business/api-access.htm) – Mailer ID access
 - [USPIS: Smishing text scams](https://www.uspis.gov/news/scam-article/smishing-package-tracking-text-scams) – no links
@@ -170,7 +169,6 @@ Yes, [usually by text, with a link](guide:delivery-scam-texts). The US Postal In
 - [Australia Post: App](https://auspost.com.au/personal/receiving/australia-post-app) – parcel matching
 - [App Store UK: Royal Mail](https://apps.apple.com/gb/app/id1435168829) – tracking by ID or barcode
 - [DPD UK: The DPD app](https://www.dpd.co.uk/lp/app/index.html) – parcels matched to your phone or email
-- [UPS: UPS My Choice](https://www.ups.com/us/en/track/ups-my-choice) – UPS parcels to your address
 - [App Store Ireland: An Post](https://apps.apple.com/ie/app/id399791956) – saved numbers, customs charges
 - [Gmail Help: Package tracking](https://support.google.com/mail/answer/13073650?hl=en) – US carriers only
 - [Apple Support: Track orders in Wallet](https://support.apple.com/en-us/105065) – merchant data
@@ -179,7 +177,7 @@ Yes, [usually by text, with a link](guide:delivery-scam-texts). The US Postal In
 - [Shop Help: Track orders](https://help.shop.app/en/shop/delivery-tracking/track-orders) – inbox scan
 - [Apple Developer: Age ratings](https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions) – advertising, developer's answers
 - [Play Console Help: Ads declaration](https://support.google.com/googleplay/android-developer/answer/9859455?hl=en) – "Contains ads" label
-- [UPS: Sample package label](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – 1Z numbers
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z numbers and their check digit
 - [UPU: Standards](https://www.upu.int/en/postal-solutions/programmes-services/standards) – 13-character postal numbers
 - [Universal Parcel Scraper: Carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – shared 14-digit shape
 :::

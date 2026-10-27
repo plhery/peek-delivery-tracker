@@ -4,7 +4,7 @@ description: Was eine Sendungsverfolgung für alle Paketdienste kann, wie sie fu
 slug: paketverfolgung-aller-anbieter
 picture: Fünf bunte Lieferwagen, deren gepunktete Wege alle in einer Liste auf einem Handy enden, und Pip, der strahlend aus einem offenen Karton schaut.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Eine Paketverfolgung aller Anbieter, kurz Paket-Tracker, ist eine Website oder App, die Sendungsnummern jedes Paketdienstes annimmt, selbst erkennt, woher eine Nummer stammt, die Scans abruft und alle deine Pakete in einer Liste sammelt. Sie zeigt nur Scans, die der Paketdienst erfasst hat, und ist ihm deshalb nie voraus. Die Tracker unterscheiden sich vor allem darin, was sie von dir wollen: ein Konto, Zugriff auf dein Postfach, ein Abo für Mitteilungen oder Geduld mit Werbung.
@@ -30,7 +30,7 @@ Fang mit dem kostenlosen Angebot deiner Post an:
 | Österreich | Post App, „Meine Sendungen“ im Post Account | Die App sammelt alle Lieferungen in einer Übersicht und meldet Statusänderungen per Push. Die e-Benachrichtigung kommt, wenn der Absender Versanddaten übermittelt hat, die zu deinem Post Account passen. Wurde das Paket von einer Privatperson, in einer Postfiliale oder bei einem Post Partner aufgegeben, fehlen diese Daten meist, außer bei einer Paketmarke |
 | Schweiz | „Meine Sendungen“ im Kundenportal „Meine Post“ | Kostenlose Infos zu allen Sendungen an die Adresse in deinem Kundenkonto, per E-Mail und Push in der Post-App, auf Wunsch per SMS. In immer mehr Gebieten meist mit einem Zeitfenster von 40 bis 90 Minuten |
 
-Ähnliche Dienste von [DPD](carrier:dpd-de), [Hermes](carrier:hermes-de) und [UPS](carrier:ups) stellt [Sendungsnummer finden](guide:find-tracking-number) vor.
+Ähnliche Dienste von [DPD](carrier:dpd-de) und [Hermes](carrier:hermes-de) stellt [Sendungsnummer finden](guide:find-tracking-number) vor.
 
 Andere Möglichkeiten, mit ihren Grenzen:
 
@@ -85,7 +85,7 @@ Ein Tracker arbeitet meist in fünf Schritten:
 
 :::steps
 - Du fügst etwas ein | Eine Sendungsnummer, den Link des Paketdienstes oder die Versandmail. Ein Link ist am sichersten: Er nennt den Paketdienst.
-- Er prüft den Aufbau | Buchstaben, Länge und Prüfziffer grenzen die Auswahl ein. `1Z999AA10123456784` beginnt mit dem `1Z` von UPS, `RR000000005CH` hat das 13-stellige Format der Postgesellschaften.
+- Er prüft den Aufbau | Buchstaben, Länge und Prüfziffer grenzen die Auswahl ein. `1Z999AA10123456784` beginnt mit dem `1Z` von [UPS](carrier:ups), `RR000000005CH` hat das 13-stellige Format der Postgesellschaften.
 - Er wägt ab | Manche Formate passen zu mehreren Paketdiensten: Eine reine 14-stellige Ziffernfolge kann unter anderem von DPD oder Hermes stammen. Er fragt mehrere an oder lässt dich wählen.
 - Er holt die Scans | Vom Paketdienst oder von einem anderen Tracker, zusammengeführt in einem Verlauf.
 - Er schaut wieder nach | In festen Abständen. Gibt es etwas Neues, meldet er sich.
@@ -95,7 +95,7 @@ Wie du eine Nummer selbst entschlüsselst, erklärt der Ratgeber [Sendungsnummer
 
 ### Woher die Scans kommen
 
-- **Die Schnittstelle (API) des Paketdienstes**, zu dessen Bedingungen: DHL verbietet, die Sendungsdaten aus seiner API mit Werbung zu vermischen, und verlangt, sie 30 Tage nach der Zustellung zu löschen, sofern nichts anderes vereinbart ist.
+- **Die Schnittstelle (API) des Paketdienstes**, zu dessen Bedingungen.
 - **Die Website des Paketdienstes**, automatisch ausgelesen. Die Android-App von ParcelsApp „zeigt Informationen von offiziellen Websites der nationalen Postdienste an“.
 - **Bezahlte Echtzeit-Meldungen.** Manche Paketdienste melden neue Scans direkt an Parcel, laut Parcel meist innerhalb von 10 Minuten. Die meisten davon lassen sich aber jede verfolgte Lieferung von Parcel bezahlen. [GLS Deutschland](carrier:gls-de) verlangt dafür derzeit nichts, deshalb bekommen bei GLS alle Parcel-Nutzer diese Meldungen ohne Begrenzung.
 - **Ein anderer Tracker.** Bei PayPal werden die Tracking-Updates „von Aftership unterstützt“. Peeks Datenschutzhinweis nennt ParcelsApp, Ship24, 17TRACK und den Weltpostverein unter den Diensten, die bei Bedarf abgefragt werden.
@@ -184,9 +184,8 @@ Ja, und die Sendungsnummer darin beweist nichts. Die Schweizerische Post warnt: 
 - [ParcelsApp: Startseite](https://parcelsapp.com/en) – verknüpfte Nummern
 - [ParcelsApp: Privacy policy](https://parcelsapp.com/en/privacy) – Weiterleiten von E-Mails, EU-Vertreter, Werbe-Cookies
 - [ParcelsApp: Why is my parcel not tracking?](https://parcelsapp.com/en/faq/why-is-my-parcel-not-tracking) – neue Nummern, keine zusätzlichen Scans, Website des Paketdienstes
-- [DHL Developer: Shipment Tracking API](https://developer.dhl.com/api-reference/shipment-tracking) – Bedingungen für Sendungsdaten
 - [DHL: Probleme mit der Sendungsverfolgung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – bis zu 24 Stunden, Päckchen ohne Sendungsverfolgung
-- [UPS: Sample package label](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – 1Z-Nummern
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z-Nummern und ihre Prüfziffer
 - [UPU: Standards](https://www.upu.int/en/postal-solutions/programmes-services/standards) – 13-stellige Postnummern
 - [Universal Parcel Scraper: Carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – gemeinsames 14-stelliges Format
 - [Schweizerische Post: Aktuelle Betrugsversuche](https://site.post.ch/de/ueber-uns/sicherheit/phishing-und-betrug/aktuelle-betrugsversuche) – gefälschte Sendungsnummern

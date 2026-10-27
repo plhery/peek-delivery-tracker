@@ -4,7 +4,7 @@ description: Comment marche un suivi de colis universel, ce qu'il ne voit pas, e
 slug: suivi-colis-universel-tous-transporteurs
 picture: Cinq camionnettes de couleurs différentes dont les pointillés mènent à une seule liste sur un téléphone, et Pip, radieux, dans un carton ouvert.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Un suivi de colis universel (ou « tracker de colis ») est un site ou une app qui accepte le numéro de suivi de n'importe quel transporteur, trouve à qui il appartient, va chercher les scans et range tous tes colis dans une seule liste. Il n'affiche que ce que le transporteur a enregistré : il n'est donc jamais en avance sur lui. Ce qui change d'un service à l'autre, c'est ce qu'il te demande en échange : un compte, l'accès à ta boîte mail, un abonnement pour les notifications, ou de la patience face aux pubs.
@@ -93,7 +93,7 @@ Pour décoder un numéro toi-même, lis [à quel transporteur appartient un num�
 
 ### D'où viennent les scans
 
-- **Le flux de données du transporteur**, selon ses conditions : l'API de DHL interdit de mêler ses données à de la publicité et demande de les effacer 30 jours après la livraison, sauf accord contraire.
+- **Le flux de données du transporteur**, selon ses conditions.
 - **Le site du transporteur**, lu automatiquement. Sur Android, l'app de ParcelsApp « affiche des informations provenant des sites officiels des services postaux nationaux ».
 - **Les mises à jour envoyées par le transporteur, souvent payantes.** Chez Parcel, elles arrivent en général en 10 minutes au plus, mais la plupart des transporteurs concernés lui facturent chaque livraison suivie.
 - **Un autre service de suivi.** Celui de PayPal s'appuie sur AfterShip. L'avis de confidentialité de Peek cite ParcelsApp, Ship24, 17TRACK et l'Union postale universelle parmi les services qu'il interroge au besoin.
@@ -142,7 +142,7 @@ La grille plus haut vaut pour n'importe quel autre service.
 
 Oui, le plus souvent par SMS, avec un lien. Parmi les arnaques à repérer, La Poste suisse cite le faux suivi d'envoi : un message qui contient un « prétendu numéro d'envoi ». Elle conseille de vérifier un envoi uniquement sur poste.ch ou dans la Post-App officielle.
 
-En France, La Poste rappelle de ne jamais payer un supplément ou des « frais de port » pour recevoir un colis ou modifier sa livraison. Seules exceptions : les droits et taxes de douane, et un affranchissement non conforme. Dans le doute, saisis toi-même le numéro dans l'outil de suivi de La Poste.
+En France, Cybermalveillance.gouv.fr rappelle que La Poste « ne vous demandera jamais de payer pour retirer un colis par SMS ou par mail ». Au moindre doute, vérifie le vrai suivi de ton colis ou contacte directement le transporteur.
 
 Pour signaler un faux message en France, transfère le SMS au 33700. En Belgique, transfère l'e-mail ou une capture d'écran à abuse@bpost.be. En Suisse, La Poste suisse renvoie vers l'Office fédéral de la cybersécurité (OFCS).
 
@@ -155,7 +155,7 @@ Pour signaler un faux message en France, transfère le SMS au 33700. En Belgique
 - [bpost : l'app My bpost](https://www.bpost.be/fr/my-bpost-app) – suivi automatique, autres livreurs, code-barres tardif
 - [App Store Belgique : My bpost](https://apps.apple.com/be/app/my-bpost/id1279683771?l=fr) – gratuite
 - [La Poste suisse : Suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois) – Mes envois, plage horaire
-- [La Poste : Reconnaître une tentative de fraude](https://aide.laposte.fr/contenu/comment-reconnaitre-une-tentative-de-fraude) – frais de port, 33700
+- [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – La Poste ne fait pas payer par SMS ou par mail, vrai suivi, 33700
 - [bpost : Phishing](https://www.bpost.be/fr/phishing) – signalement
 - [La Poste suisse : Hameçonnage et fraude](https://site.post.ch/fr/notre-profil/securite/hameconnage-et-fraude) – prétendu numéro d'envoi
 - [La Poste suisse : Signaler une tentative d'escroquerie](https://site.post.ch/fr/notre-profil/securite/hameconnage-et-fraude/signaler-une-fraud) – OFCS
@@ -182,7 +182,6 @@ Pour signaler un faux message en France, transfère le SMS au 33700. En Belgique
 - [App Store Suisse : 17TRACK](https://apps.apple.com/ch/app/id1004956012?l=fr-FR) – prix en francs
 - [App Store Suisse : Deliveries](https://apps.apple.com/ch/app/id290986013?l=fr-FR) – prix en francs
 - [App Store Suisse : Parcel](https://apps.apple.com/ch/app/id375589283?l=fr-FR) – prix en francs
-- [DHL : Tracking API (en anglais)](https://developer.dhl.com/api-reference/shipment-tracking) – conditions
 - [USPS : API access (en anglais)](https://www.usps.com/business/api-access.htm) – accès payant
 - [Gmail : suivi des colis](https://support.google.com/mail/answer/13073650?hl=fr) – États-Unis
 - [Gmail : fonctionnalités intelligentes](https://support.google.com/mail/answer/15604322?hl=fr) – désactivées par défaut
@@ -192,7 +191,7 @@ Pour signaler un faux message en France, transfère le SMS au 33700. En Belgique
 - [Shop : suivi de livraison](https://help.shop.app/fr/shop/delivery-tracking) – Shopify, app seulement
 - [Shop : suivre des commandes](https://help.shop.app/fr/shop/delivery-tracking/track-orders) – 30 jours, anglais
 - [Apple Developer : Age ratings (en anglais)](https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions) – publicité déclarée
-- [UPS : étiquette (en anglais)](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – 1Z
+- [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numéros 1Z et leur clé de contrôle
 - [UPU : normes (en anglais)](https://www.upu.int/en/postal-solutions/programmes-services/standards) – 13 caractères
 - [Universal Parcel Scraper : catalogue](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – 14 chiffres
 :::

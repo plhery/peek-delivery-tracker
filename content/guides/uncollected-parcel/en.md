@@ -22,10 +22,10 @@ It goes back to the sender.
 - shop | Sender | Decides whether to refund you or send it again.
 :::
 
-- **[UPS](carrier:ups)** returns it "as undeliverable" after 7 calendar days at an Access Point. **[FedEx](carrier:fedex)** returns it to the shipper after up to 7 days.
+- **[FedEx](carrier:fedex)** returns it to the shipper after up to 7 days.
 - **Canada Post** charges the sender for the return trip.
 - **[Mondial Relay](carrier:mondial-relay)** sends it back, at its own cost, to the locker or Point Relais where the sender dropped it off.
-- **[InPost](carrier:inpost)** in Poland sends it back to where it was posted, or to the return address. InPost UK says redelivery or a refund is up to the retailer.
+- **[InPost](carrier:inpost)** UK says redelivery or a refund is up to the retailer.
 
 Once the parcel is on its way back, [returned to sender](guide:returned-to-sender) covers the trip and what to ask the shop.
 
@@ -33,7 +33,7 @@ Once the parcel is on its way back, [returned to sender](guide:returned-to-sende
 
 | Country | Post office after a missed delivery | Parcel shop or counter | Locker |
 | --- | --- | --- | --- |
-| US | USPS: usually 15 days (Priority Mail Express 5 calendar days); FedEx location: up to 7 days | UPS Access Point: 7 calendar days | Amazon Locker: 3 calendar days |
+| US | USPS: usually 15 days (Priority Mail Express 5 calendar days); FedEx location: up to 7 days | – | Amazon Locker: 3 calendar days |
 | UK | [Royal Mail](carrier:royal-mail) or [Parcelforce](carrier:parcelforce), with a customs bill to pay: about 3 weeks | [Evri](carrier:evri) ParcelShop: 10 days | Evri: 3 days; InPost: 3 days; Amazon Locker: 3 calendar days |
 | Ireland | An Post: 5 working days, 3 for registered post, 16 from abroad | – | An Post: 48 hours, then 5 more days at the depot |
 | Canada | Canada Post: 15 calendar days | – | – |
@@ -41,7 +41,7 @@ Once the parcel is on its way back, [returned to sender](guide:returned-to-sende
 
 A locker parcel can get a second clock. At [Australia Post](https://auspost.com.au/personal/receiving/parcel-deliveries/parcel-lockers), after 2 business days in a Parcel Locker it moves to the nearest Post Office, with a message and 10 more business days. At [An Post](carrier:an-post), it goes back to the delivery depot after 48 hours and waits 5 more days there.
 
-In Europe, a [DHL](carrier:dhl) Packstation in Germany holds a parcel 7 calendar days (9 after a missed delivery), Mondial Relay in France 5, and an InPost locker in Poland 48 hours.
+In Europe, a [DHL](carrier:dhl) Packstation in Germany holds a parcel 7 calendar days (9 after a missed delivery), and Mondial Relay in France 5.
 
 ### Why your date may differ from the table
 
@@ -59,7 +59,7 @@ The tracking then says something like `Available for Pickup` (USPS), `Available 
 
 Extra time is rare. Evri, An Post, Canada Post and Australia Post mention no extension, and InPost UK says it "cannot extend your collection time". Canada Post can't move a parcel once it's there either.
 
-A few European carriers do give more time. [Swiss Post](carrier:swiss-post) lets you [extend for free online](https://www.post.ch/en/receiving-mail/collection-note), with no account. InPost in Poland sells 24 more hours for 7.99 zł in its app, before the first 48 hours run out, and you can buy it more than once.
+[Swiss Post](carrier:swiss-post) does give more time: you can [extend for free online](https://www.post.ch/en/receiving-mail/collection-note), with no account.
 
 Otherwise, work through these before the last day:
 
@@ -103,7 +103,6 @@ A locker or mailroom counts as delivered. See [delivered but not received](guide
 :::sources
 - [USPS: Domestic Mail Manual 508](https://pe.usps.com/text/dmm300/508.htm) – 15 days, Priority Mail Express 5, sender's shorter period
 - [USPS: Redelivery, the basics](https://faq.usps.com/s/article/Redelivery-The-Basics) – usually 15 days, second notice, 2 days for redelivery
-- [UPS: How to use an InfoNotice](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – Access Point 7 calendar days, then returned
 - [FedEx: Hold at location](https://www.fedex.com/en-us/shipping/hold-at-location.html) – up to 7 days, then returned
 - [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – the bill, about 3 weeks, then back to the sender
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail redelivery on its website
@@ -124,8 +123,6 @@ A locker or mailroom counts as delivered. See [delivered but not received](guide
 - [DHL: Packstation](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/empfangen.html) – 7 calendar days
 - [Mondial Relay: Collection period](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – 5 calendar days, no extension
 - [Mondial Relay: The recipient didn't collect the parcel](https://www.mondialrelay.fr/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – back to the drop-off point, at Mondial Relay's cost
-- [InPost Poland: What if the recipient doesn't collect my parcel?](https://inpost.pl/pomoc-co-sie-stanie-jezeli-odbiorca-nie-odbierze-mojej-paczki) – back to where it was posted, or to the return address
-- [InPost Poland: Extend the pickup time](https://inpost.pl/pomoc-jak-przedluzyc-termin-odbioru-paczki-w-paczkomacie) – 24 hours for 7.99 zł
 - [Swiss Post: Collection note](https://www.post.ch/en/receiving-mail/collection-note) – free extension
 - [Consumer Contracts Regulations 2013, reg. 30](https://www.legislation.gov.uk/uksi/2013/3134/regulation/30) – when the 14 days start
 - [legislation.gov.uk: reg. 32](https://www.legislation.gov.uk/uksi/2013/3134/regulation/32) – a clear statement is needed

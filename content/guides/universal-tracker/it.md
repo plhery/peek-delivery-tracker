@@ -4,7 +4,7 @@ description: Come funziona un tracking universale, cosa non può vedere e un con
 slug: tracking-universale-pacchi
 picture: Cinque furgoni colorati i cui percorsi tratteggiati finiscono in un'unica lista su un telefono, e Pip che spunta raggiante da una scatola aperta.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Un tracking universale, o multi corriere, è un sito o un'app che accetta il codice di tracking di qualsiasi corriere, riconosce di chi è, recupera le scansioni e tiene tutti i tuoi pacchi in un'unica lista. Mostra solo le scansioni che il corriere ha registrato, quindi non ne sa mai più del corriere. I tracker si distinguono per quello che ti chiedono in cambio: un account, l'accesso alla tua casella di posta, un abbonamento per le notifiche o un po' di pazienza con la pubblicità.
@@ -92,7 +92,7 @@ Per decifrare un codice da solo, vedi [come capire il corriere dal numero di tra
 
 ### Da dove arrivano le scansioni
 
-- **Il flusso dati del corriere**, alle sue condizioni: l'API di DHL vieta di mescolare i suoi dati con la pubblicità e chiede di cancellarli 30 giorni dopo la consegna, salvo accordi diversi.
+- **Il flusso dati del corriere**, alle sue condizioni.
 - **Il sito del corriere**, letto in automatico. Secondo la sua scheda su Google Play, l'app Android di ParcelsApp «mostra informazioni dai siti ufficiali dei servizi postali nazionali».
 - **Una notifica a pagamento.** Parcel dice che le notifiche in tempo reale inviate dal corriere di solito arrivano entro 10 minuti, ma che la maggior parte di questi corrieri gli fa pagare ogni consegna seguita.
 - **Un altro tracker.** PayPal scrive che gli aggiornamenti del suo tracciamento pacchi «sono forniti da Aftership». L'informativa privacy di Peek cita ParcelsApp, Ship24, 17TRACK e l'Unione postale universale tra i servizi che interroga quando serve.
@@ -164,7 +164,6 @@ Sì, e [il punto pericoloso è proprio il link](guide:delivery-scam-texts). Post
 - [App Store Svizzera: 17TRACK](https://apps.apple.com/ch/app/id1004956012?l=it) – prezzo in franchi
 - [App Store Svizzera: Deliveries](https://apps.apple.com/ch/app/id290986013?l=it) – prezzo in franchi
 - [App Store Svizzera: Parcel](https://apps.apple.com/ch/app/id375589283?l=it) – prezzo in franchi
-- [DHL Developer: Shipment Tracking API (in inglese)](https://developer.dhl.com/api-reference/shipment-tracking) – condizioni per i dati di tracking
 - [DHL: Probleme mit der Sendungsverfolgung (in tedesco)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – fino a 24 ore per comparire
 - [USPS: Tracking API Access Control Changes (in inglese)](https://www.usps.com/business/api-access.htm) – accesso legato al Mailer ID, accesso a pagamento
 - [Poste Italiane: PostePlus](https://www.poste.it/posteplus/) – servizio gratuito, residenti in Italia, canali delle notifiche, abilitazione del mittente
@@ -178,7 +177,7 @@ Sì, e [il punto pericoloso è proprio il link](guide:delivery-scam-texts). Post
 - [Shop Help: Track orders (in inglese)](https://help.shop.app/en/shop/delivery-tracking/track-orders) – analisi della casella, e-mail inoltrate solo in inglese
 - [Apple Developer: Age ratings (in inglese)](https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions) – pubblicità, risposte dello sviluppatore
 - [Guida di Play Console: Preparare l'app per la revisione](https://support.google.com/googleplay/android-developer/answer/9859455?hl=it) – etichetta «Contiene annunci»
-- [UPS: Sample package label (in inglese)](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – codici 1Z
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – codici 1Z e la loro cifra di controllo
 - [UPU: Standards (in inglese)](https://www.upu.int/en/postal-solutions/programmes-services/standards) – codici postali di 13 caratteri
 - [Universal Parcel Scraper: catalogo dei corrieri](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – formato di 14 cifre condiviso
 - [Poste Italiane: Come difendersi dalle truffe](https://www.poste.it/sicurezza-online/guide-per-operare-in-sicurezza/come-difendersi-dalle-truffe/) – SMS contraffatti, spoofing, digitare www.poste.it

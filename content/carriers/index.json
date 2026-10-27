@@ -144,7 +144,7 @@
   { "id": "dhlink", "catalog": "dhlink", "name": "DHLink", "languages": ["en"] },
   { "id": "dpd-pt", "catalog": "dpd-pt", "name": "DPD Portugal", "languages": ["en", "pt"] },
   { "id": "tnt-it", "catalog": "tnt-it", "name": "TNT Italy", "languages": ["en", "it"] },
-  { "id": "tnt", "catalog": "tnt", "name": "TNT", "languages": ["en", "pt", "fr", "de", "es"] },
+  { "id": "tnt", "catalog": "tnt", "name": "TNT", "languages": ["en", "pt", "fr", "de", "es", "pl"] },
   { "id": "sf-express", "catalog": "sf-express", "name": "SF Express", "languages": ["en"] },
   { "id": "straightship", "catalog": "straightship", "name": "Straightship", "languages": ["en"] },
   { "id": "correios-br", "catalog": "correios-br", "name": "Correios Brazil", "languages": ["en", "es"] },

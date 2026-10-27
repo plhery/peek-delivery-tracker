@@ -2836,6 +2836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "PostNL śledzenie przesyłki: numer, statusy, doręczenie",
       "name": "PostNL",
       "color": "#ef7d00"
+    },
+    {
+      "id": "tnt",
+      "catalog": "tnt",
+      "slug": "tnt-sledzenie-przesylki",
+      "title": "TNT śledzenie przesyłki: numer, statusy i doręczenie",
+      "name": "TNT",
+      "color": "#ff6600"
     }
   ],
   "nl": [

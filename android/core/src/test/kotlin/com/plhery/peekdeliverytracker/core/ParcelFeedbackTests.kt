@@ -14,7 +14,18 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
 import java.util.UUID
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withTimeout
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
@@ -86,10 +97,13 @@ class ParcelFeedbackTests {
         scan: String? = null,
     ): ParcelFeedbackModel.Page = ParcelFeedbackModel.Page(subject, question, scan ?: this.scan, carrier = "DHL", language = AppLanguage.Fr)
 
-    /** A page as one visit holds it: another visit is another model over the same memory. */
-    private fun visit(page: ParcelFeedbackModel.Page?, sent: Sent, store: UserDefaults, clock: Clock): ParcelFeedbackModel {
+    /**
+     * A page as one visit holds it: another visit is another model over the same memory. Its answers run in the scope
+     * it is visited from, the app's here.
+     */
+    private fun CoroutineScope.visit(page: ParcelFeedbackModel.Page?, sent: Sent, store: UserDefaults, clock: Clock): ParcelFeedbackModel {
         val model = ParcelFeedbackModel(
-            memory = ParcelFeedbackMemory(store) { clock.now }, now = { clock.now },
+            scope = this, memory = ParcelFeedbackMemory(store) { clock.now }, now = { clock.now },
             report = { name, outcome -> sent.counted += "$name ${outcome.rawValue}" },
             review = ReviewPrompt(store, version = appVersion), app = ios,
         )
@@ -457,6 +471,99 @@ class ParcelFeedbackTests {
         assertEquals(listOf("parcel-feedback-wrong success"), sent.counted)
     }
 
+    /**
+     * On iOS an answer runs in its button's `Task`, which nothing cancels. Here it runs in the app's scope: a screen that
+     * goes away while an answer is on its way, cancelling its call, leaves the answer to the service.
+     */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun leavingThePageWhileAnAnswerIsOnItsWayLeavesItToTheService() = runTest {
+        val app = CoroutineScope(SupervisorJob() + StandardTestDispatcher(testScheduler))
+        val store = MemoryDefaults()
+        val clock = Clock()
+        val counted = mutableListOf<String>()
+        var reply = CompletableDeferred<Unit>()
+        val subject = ParcelFeedbackSubject.Parcel(UUID.randomUUID())
+        val model = ParcelFeedbackModel(
+            scope = app, memory = ParcelFeedbackMemory(store) { clock.now }, now = { clock.now },
+            report = { name, outcome -> counted += "$name ${outcome.rawValue}" }, review = ReviewPrompt(store, version = appVersion), app = ios,
+        )
+        model.show(page(subject), through = ParcelFeedbackClient { reply.await() })
+
+        val screen = launch { model.right() }
+        runCurrent()
+        assertEquals(ParcelFeedbackModel.Moment.Right, model.moment)
+        screen.cancel()
+        runCurrent()
+        reply.complete(Unit)
+        advanceUntilIdle()
+        assertEquals(ParcelFeedbackModel.Moment.Right, model.moment)
+        assertNull("Not a failure", model.word)
+        assertEquals(listOf("parcel-feedback-right success"), counted)
+        assertFalse("The answer is remembered", ParcelFeedbackMemory(store) { clock.now }.asksOnReturn(subject, scan = scan))
+
+        // A sheet's send too: the sheet goes with its screen, and the model is ready for the next answer.
+        model.show(page(ParcelFeedbackSubject.Parcel(UUID.randomUUID())), through = ParcelFeedbackClient { reply.await() })
+        model.wrongOnReturn()
+        reply = CompletableDeferred()
+        val sheet = launch { model.sendWords(setOf(ParcelFeedbackReason.Status), note = "Not here") }
+        runCurrent()
+        assertTrue(model.sending)
+        sheet.cancel()
+        runCurrent()
+        reply.complete(Unit)
+        advanceUntilIdle()
+        assertFalse(model.sending)
+        assertNull(model.words)
+        assertEquals(ParcelFeedbackModel.Word.BackSent, model.word)
+        assertEquals(listOf("parcel-feedback-right success", "parcel-feedback-wrong success"), counted)
+
+        // A call that runs out of time is a failure, as `URLError.timedOut` is on iOS, though it throws a cancellation.
+        val late = ParcelFeedbackModel(
+            scope = app, memory = ParcelFeedbackMemory(store) { clock.now }, now = { clock.now },
+            report = { name, outcome -> counted += "$name ${outcome.rawValue}" }, review = ReviewPrompt(store, version = appVersion), app = ios,
+        )
+        late.show(page(ParcelFeedbackSubject.Parcel(UUID.randomUUID())), through = ParcelFeedbackClient { withTimeout(10.seconds) { awaitCancellation() } })
+        val waiting = launch { late.right() }
+        advanceTimeBy(10.seconds)
+        advanceUntilIdle()
+        assertTrue(waiting.isCompleted)
+        assertEquals(ParcelFeedbackModel.Moment.Ask, late.moment)
+        assertEquals(ParcelFeedbackModel.Word.Failed, late.word)
+        assertEquals("parcel-feedback-right error", counted.last())
+    }
+
+    /** Only the send can fail an answer, as on iOS: what the app does once the service has it takes nothing back. */
+    @Test
+    fun analyticsThatThrowOnceTheServiceHasTheAnswerTakeNothingBack() = runTest {
+        val app = CoroutineScope(SupervisorJob() + StandardTestDispatcher(testScheduler))
+        val store = MemoryDefaults()
+        val clock = Clock()
+        val days = ReviewPrompt(store, version = appVersion)
+        days.used(at = clock.now.minusSeconds(2 * 86_400))
+        days.used(at = clock.now.minusSeconds(86_400))
+        val sent = Sent()
+        val model = ParcelFeedbackModel(
+            scope = app, memory = ParcelFeedbackMemory(store) { clock.now }, now = { clock.now },
+            report = { name, outcome ->
+                sent.counted += "$name ${outcome.rawValue}"
+                throw IllegalStateException("analytics")
+            },
+            review = ReviewPrompt(store, version = appVersion), app = ios,
+        )
+        sent.model = model
+        model.show(page(ParcelFeedbackSubject.Parcel(UUID.randomUUID())), through = sent.client)
+
+        val thrown = runCatching { model.right() }.exceptionOrNull()
+
+        assertEquals("analytics", thrown?.message)
+        assertEquals(1, sent.requests.size)
+        assertEquals(ParcelFeedbackModel.Moment.Right, model.moment)
+        assertNull(model.word)
+        assertEquals("Not counted as a failure too", listOf("parcel-feedback-right success"), sent.counted)
+        assertTrue("Nothing went wrong today", ReviewPrompt(store, version = appVersion).isDue(at = clock.now, calm = true))
+    }
+
     // On the way back
 
     @Test
@@ -494,7 +601,7 @@ class ParcelFeedbackTests {
         assertTrue(sent.requests.isEmpty())
     }
 
-    private fun comeBackOnALaterVisit(subject: ParcelFeedbackSubject, store: UserDefaults, clock: Clock): ParcelFeedbackModel.Word? {
+    private fun CoroutineScope.comeBackOnALaterVisit(subject: ParcelFeedbackSubject, store: UserDefaults, clock: Clock): ParcelFeedbackModel.Word? {
         val model = visit(page(subject), Sent(), store, clock)
         comeBack(model, clock)
         return model.word
@@ -603,7 +710,7 @@ class ParcelFeedbackTests {
     // A parcel no carrier knows
 
     @Test
-    fun notYetIsAnAnswerThatSendsNothing() {
+    fun notYetIsAnAnswerThatSendsNothing() = runTest {
         val store = MemoryDefaults()
         val clock = Clock()
         val sent = Sent()
@@ -764,9 +871,9 @@ class ParcelFeedbackTests {
     }
 
     @Test
-    fun aMadeUpParcelIsAskedNothing() {
+    fun aMadeUpParcelIsAskedNothing() = runTest {
         val store = MemoryDefaults()
-        val parcel = this.parcel()
+        val parcel = this@ParcelFeedbackTests.parcel()
         fun page(parcel: Parcel, madeUp: Boolean, showsHistory: Boolean = true): ParcelFeedbackModel.Page? =
             ParcelFeedbackModel.Page(
                 parcel, subject = ParcelFeedbackSubject.Parcel(parcel.id), showsHistory = showsHistory, madeUp = madeUp, carrier = "DHL",
@@ -780,16 +887,16 @@ class ParcelFeedbackTests {
             ),
             page(parcel, madeUp = false),
         )
-        assertEquals(ParcelFeedbackQuestion.Unknown, page(this.parcel(carrier = CarrierId.Unknown, stage = null), madeUp = false, showsHistory = false)?.question)
-        assertEquals("", page(this.parcel(carrier = CarrierId.Unknown, stage = null), madeUp = false, showsHistory = false)?.scan)
-        assertNull(page(this.parcel(archived = true), madeUp = false))
+        assertEquals(ParcelFeedbackQuestion.Unknown, page(this@ParcelFeedbackTests.parcel(carrier = CarrierId.Unknown, stage = null), madeUp = false, showsHistory = false)?.question)
+        assertEquals("", page(this@ParcelFeedbackTests.parcel(carrier = CarrierId.Unknown, stage = null), madeUp = false, showsHistory = false)?.scan)
+        assertNull(page(this@ParcelFeedbackTests.parcel(archived = true), madeUp = false))
 
         // The demo's stories: whatever they show, nothing stands on their pages.
         assertNull(page(parcel, madeUp = true))
-        assertNull(page(this.parcel(carrier = CarrierId.Unknown, stage = null), madeUp = true, showsHistory = false))
+        assertNull(page(this@ParcelFeedbackTests.parcel(carrier = CarrierId.Unknown, stage = null), madeUp = true, showsHistory = false))
         val sent = Sent()
         val clock = Clock()
-        val model = visit(this.page(ParcelFeedbackSubject.Parcel(parcel.id)), sent, store, clock)
+        val model = visit(this@ParcelFeedbackTests.page(ParcelFeedbackSubject.Parcel(parcel.id)), sent, store, clock)
         assertEquals(ParcelFeedbackQuestion.Found, model.standing)
         model.show(page(parcel, madeUp = true), through = sent.client)
         assertNull(model.standing)

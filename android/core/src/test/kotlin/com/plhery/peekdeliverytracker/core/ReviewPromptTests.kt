@@ -14,6 +14,7 @@ import java.util.UUID
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -381,10 +382,10 @@ class ReviewPromptTests {
             untroubled = untroubled,
         )
 
-    /** A parcel's page as one visit holds it, over the same store as the others. */
-    private fun visit(page: ParcelFeedbackModel.Page, store: UserDefaults, clock: Clock, fails: Boolean = false): ParcelFeedbackModel {
+    /** A parcel's page as one visit holds it, over the same store as the others, its answers run in the scope given. */
+    private fun CoroutineScope.visit(page: ParcelFeedbackModel.Page, store: UserDefaults, clock: Clock, fails: Boolean = false): ParcelFeedbackModel {
         val model = ParcelFeedbackModel(
-            memory = ParcelFeedbackMemory(store) { clock.now }, now = { clock.now }, report = { _, _ -> },
+            scope = this, memory = ParcelFeedbackMemory(store) { clock.now }, now = { clock.now }, report = { _, _ -> },
             review = ReviewPrompt(store, version = "1.0.2", timeZone = { ZoneOffset.UTC }), app = ParcelFeedbackRequestApp.Ios,
         )
         model.show(page, through = ParcelFeedbackClient { if (fails) throw DeliveryApiError.ServiceFailed(500) })

@@ -15,6 +15,11 @@ import java.time.Instant
 import java.util.UUID
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.async
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -222,8 +227,9 @@ fun ParcelFeedbackRequest.Companion.limited(text: String, to: Int): String {
 private fun locale(language: AppLanguage): NativePushLocale = NativePushLocale.fromRawValue(language.rawValue) ?: NativePushLocale.En
 
 /**
- * How a page sends an answer: to the service as the account, through the parcel's link, or nowhere in the demo. The
- * app runs it from the main thread; it throws when the answer could not be sent.
+ * How a page sends an answer: to the service as the account, through the parcel's link, or nowhere in the demo. It
+ * throws when the answer could not be sent: a network failure, a timeout (an `IOException`, or the
+ * `TimeoutCancellationException` of a `withTimeout`) or the service's refusal, each a failure as on iOS.
  */
 class ParcelFeedbackClient(val send: suspend (ParcelFeedbackRequest) -> Unit)
 
@@ -231,18 +237,26 @@ class ParcelFeedbackClient(val send: suspend (ParcelFeedbackRequest) -> Unit)
  * The question on one page: what stands where it is asked, the sheets that take the words, and the word said at the
  * bottom of the page. An answer shows at once, and is taken back if it could not be sent.
  *
- * Used from the main thread, as the iPhone's model is `@MainActor`. The page runs an answer as iOS does from a `Task`
- * of its own: in a scope that outlives the screen, so leaving the page does not cut an answer short.
+ * Used from the main thread, as the iPhone's model is `@MainActor`. An answer runs in `scope`, as on iOS in a button's
+ * `Task`, which nothing cancels: leaving the page, which cancels the screen's call, neither cuts it short nor makes it
+ * a failure.
  */
 class ParcelFeedbackModel(
+    /**
+     * The app's own scope, which outlives every screen, on the main thread and with a `SupervisorJob`, so that one
+     * answer's failure leaves the others alone: `ProcessLifecycleOwner`'s `lifecycleScope`, or a `MainScope()` the
+     * application keeps.
+     */
+    private val scope: CoroutineScope,
     private val memory: ParcelFeedbackMemory,
     private val now: () -> Instant = Instant::now,
     /** `DeliveryAnalytics.action`: an answer counted under its name, with how it went. */
     private val report: (String, DeliveryAnalytics.Outcome) -> Unit,
     private val review: ReviewPrompt,
     /**
-     * The app an answer says it comes from. The iPhone's say `ios`; the service takes `web` and `ios` only until it
-     * knows Android's own.
+     * The app an answer says it comes from, as the service counts it. The iPhone's say `ios` and the website's `web`,
+     * the only two the contract accepts so far. Android's must say `android` once the contract accepts it (a planned
+     * change to the service), and never `ios` or `web`.
      */
     private val app: ParcelFeedbackRequestApp,
 ) {
@@ -476,13 +490,17 @@ class ParcelFeedbackModel(
     suspend fun right(asked: ParcelFeedbackRequestAsked = ParcelFeedbackRequestAsked.Page) {
         val page = page ?: return
         if (page.question != ParcelFeedbackQuestion.Found) return
-        val before = moment
-        moment = Moment.Right
-        word = if (asked == ParcelFeedbackRequestAsked.Back) Word.BackRight else null
-        if (deliver(ParcelFeedbackRequest.right(asked = asked, language = page.language, app = app), page)) return
-        if (this.page?.subject != page.subject) return
-        moment = before
-        word = Word.Failed
+        answering {
+            val before = moment
+            moment = Moment.Right
+            word = if (asked == ParcelFeedbackRequestAsked.Back) Word.BackRight else null
+            if (!deliver(ParcelFeedbackRequest.right(asked = asked, language = page.language, app = app), page) &&
+                this.page?.subject == page.subject
+            ) {
+                moment = before
+                word = Word.Failed
+            }
+        }
     }
 
     fun notQuite() {
@@ -496,17 +514,19 @@ class ParcelFeedbackModel(
     suspend fun pick(reason: ParcelFeedbackReason) {
         val page = page ?: return
         if (moment != Moment.Reasons) return
-        val answer = Words(id = UUID.randomUUID(), reasons = setOf(reason), asked = ParcelFeedbackRequestAsked.Page)
-        given = answer
-        moment = Moment.Sent
-        val feedback = ParcelFeedbackRequest.wrong(
-            id = answer.id, reasons = answer.reasons, asked = ParcelFeedbackRequestAsked.Page, language = page.language, app = app,
-        )
-        if (deliver(feedback, page)) return
-        if (this.page?.subject != page.subject) return
-        given = null
-        moment = Moment.Reasons
-        word = Word.Failed
+        answering {
+            val answer = Words(id = UUID.randomUUID(), reasons = setOf(reason), asked = ParcelFeedbackRequestAsked.Page)
+            given = answer
+            moment = Moment.Sent
+            val feedback = ParcelFeedbackRequest.wrong(
+                id = answer.id, reasons = answer.reasons, asked = ParcelFeedbackRequestAsked.Page, language = page.language, app = app,
+            )
+            if (!deliver(feedback, page) && this.page?.subject == page.subject) {
+                given = null
+                moment = Moment.Reasons
+                word = Word.Failed
+            }
+        }
     }
 
     /** More to say about the reason just given. */
@@ -540,20 +560,23 @@ class ParcelFeedbackModel(
         val page = page ?: return false
         val words = words ?: return false
         if (sending) return false
-        sending = true
-        try {
-            // A note added to the reason given in place is the same answer: it is not counted twice.
-            val feedback = ParcelFeedbackRequest.wrong(
-                id = words.id, reasons = reasons, note = note, asked = words.asked, language = page.language, app = app,
-            )
-            if (!deliver(feedback, page, counted = words.asked == ParcelFeedbackRequestAsked.Back)) return false
-            if (this.page?.subject != page.subject) return true
-            this.words = null
-            if (this.page?.question == ParcelFeedbackQuestion.Found) moment = Moment.Noted
-            if (words.asked == ParcelFeedbackRequestAsked.Back) word = Word.BackSent
-            return true
-        } finally {
-            sending = false
+        return answering {
+            sending = true
+            try {
+                // A note added to the reason given in place is the same answer: it is not counted twice.
+                val feedback = ParcelFeedbackRequest.wrong(
+                    id = words.id, reasons = reasons, note = note, asked = words.asked, language = page.language, app = app,
+                )
+                val sent = deliver(feedback, page, counted = words.asked == ParcelFeedbackRequestAsked.Back)
+                if (sent && this.page?.subject == page.subject) {
+                    this.words = null
+                    if (this.page?.question == ParcelFeedbackQuestion.Found) moment = Moment.Noted
+                    if (words.asked == ParcelFeedbackRequestAsked.Back) word = Word.BackSent
+                }
+                sent
+            } finally {
+                sending = false
+            }
         }
     }
 
@@ -562,22 +585,32 @@ class ParcelFeedbackModel(
         val address = page
         val shown = this.page ?: return false
         if (sending) return false
-        sending = true
-        try {
-            val feedback = ParcelFeedbackRequest.foundElsewhere(carrierName = name, trackingPage = address, language = shown.language, app = app)
-            if (!deliver(feedback, shown)) return false
-            if (this.page?.subject != shown.subject) return true
-            namingCarrier = false
-            if (this.page?.question == ParcelFeedbackQuestion.Unknown) moment = Moment.Named
-            return true
-        } finally {
-            sending = false
+        return answering {
+            sending = true
+            try {
+                val feedback = ParcelFeedbackRequest.foundElsewhere(carrierName = name, trackingPage = address, language = shown.language, app = app)
+                val sent = deliver(feedback, shown)
+                if (sent && this.page?.subject == shown.subject) {
+                    namingCarrier = false
+                    if (this.page?.question == ParcelFeedbackQuestion.Unknown) moment = Moment.Named
+                }
+                sent
+            } finally {
+                sending = false
+            }
         }
     }
 
     /**
-     * Sends an answer, and remembers it once the service has it. Any failure, a cancelled call included, counts as
-     * one, as on iOS: the answer is taken back and the day asks for no rating.
+     * Runs an answer in the app's scope, at once and on the caller's thread until it first waits, so what it shows at
+     * once is shown before the call returns. A caller cancelled meanwhile stops waiting; the answer goes on.
+     */
+    private suspend fun <T> answering(answer: suspend () -> T): T = scope.async(start = CoroutineStart.UNDISPATCHED) { answer() }.await()
+
+    /**
+     * Sends an answer, and remembers it once the service has it. A send that fails counts as a failure, as on iOS: the
+     * answer is taken back and the day asks for no rating. Only the send can fail so; the app's scope cancelled, as
+     * the app goes away, ends the answer there.
      */
     private suspend fun deliver(feedback: ParcelFeedbackRequest, page: Page, counted: Boolean = true): Boolean {
         val action = when (feedback.answer) {
@@ -588,16 +621,17 @@ class ParcelFeedbackModel(
         try {
             val client = client ?: throw DeliveryApiError.ParcelMissing()
             client.send(feedback)
-            if (counted) report(action, DeliveryAnalytics.Outcome.Success)
-            memory.rememberAnswer(page.subject, scan = page.scan)
-            // The reader found the page right: on a parcel with nothing wrong, the moment to ask for a rating.
-            if (feedback.answer == ParcelFeedbackAnswer.Right && review.isDue(at = now(), calm = page.untroubled)) reviewDue = true
-            return true
         } catch (error: Exception) {
+            currentCoroutineContext().ensureActive()
             if (counted) report(action, DeliveryAnalytics.Outcome.Error)
             review.noteBadMoment(at = now())
             return false
         }
+        if (counted) report(action, DeliveryAnalytics.Outcome.Success)
+        memory.rememberAnswer(page.subject, scan = page.scan)
+        // The reader found the page right: on a parcel with nothing wrong, the moment to ask for a rating.
+        if (feedback.answer == ParcelFeedbackAnswer.Right && review.isDue(at = now(), calm = page.untroubled)) reviewDue = true
+        return true
     }
 
     /**

@@ -23,6 +23,27 @@ const JOURNEY_PATHS: Record<JourneyIcon, string> = {
   home: 'm3 11 9-8 9 8v10h-6v-6H9v6H3V11Z',
 };
 
+/** An email address in a page's text. Its letters hold nothing HTML would read as markup. */
+const EMAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}/g;
+
+/**
+ * Text with each email address in it between `email_off` comments, which Cloudflare's email obfuscation
+ * leaves alone: it would make the address a link to /cdn-cgi/l/email-protection, which answers crawlers
+ * with a 404. The address stays text, as the page writes it.
+ */
+function withEmails(text: string): ReactNode {
+  const parts: ReactNode[] = [];
+  let from = 0;
+  for (const { 0: email, index } of text.matchAll(EMAIL)) {
+    if (index > from) parts.push(text.slice(from, index));
+    parts.push(<span key={index} dangerouslySetInnerHTML={{ __html: `<!--email_off-->${email}<!--/email_off-->` }} />);
+    from = index + email.length;
+  }
+  if (from === 0) return text;
+  if (from < text.length) parts.push(text.slice(from));
+  return parts;
+}
+
 function JourneyGlyph({ name }: { name: JourneyIcon }) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={JOURNEY_PATHS[name]} /></svg>;
 }
@@ -53,8 +74,8 @@ export function GuideBody({ blocks, locale, language = locale, links, sources, c
   function inline(nodes: readonly Inline[]): ReactNode {
     return nodes.map((node, index) => {
       switch (node.type) {
-        case 'text': return <Fragment key={index}>{node.text}</Fragment>;
-        case 'code': return <code key={index}>{node.text}</code>;
+        case 'text': return <Fragment key={index}>{withEmails(node.text)}</Fragment>;
+        case 'code': return <code key={index}>{withEmails(node.text)}</code>;
         case 'strong': return <strong key={index}>{inline(node.children)}</strong>;
         case 'em': return <em key={index}>{inline(node.children)}</em>;
         case 'guide': return <a key={index} href={guidePath(locale, links.find((link) => link.id === node.id)?.slug)}>{inline(node.children)}</a>;

@@ -104,6 +104,16 @@ describe('a guide’s page', () => {
     expect(updated('en', en)).toBe('Updated 1 October 2026');
   });
 
+  it('keeps the email addresses in its text out of Cloudflare\'s email obfuscation', () => {
+    const mail = parseGuide('---\ntitle: Mail\ndescription: Mail.\nslug: mail\npicture: Pip.\npublished: 2026-10-04\nupdated: 2026-10-04\n---\n\n'
+      + 'Write to help@post.example or `fraud.desk+sms@mail.post-example.co.uk`; not to post@ nor @post.example.\n');
+    const markup = renderToStaticMarkup(<GuidePage guide={mail} id="customs" locale="en" t={t('en', en)} links={links} others={[]} />);
+    expect(markup).toContain('Write to <span><!--email_off-->help@post.example<!--/email_off--></span> or '
+      + '<code><span><!--email_off-->fraud.desk+sms@mail.post-example.co.uk<!--/email_off--></span></code>; not to post@ nor @post.example.');
+    render(<GuidePage guide={mail} id="customs" locale="en" t={t('en', en)} links={links} others={[]} />);
+    expect(document.querySelector('.guide-lead')).toHaveTextContent('Write to help@post.example or fraud.desk+sms@mail.post-example.co.uk; not to post@ nor @post.example.');
+  });
+
   it('leaves the list of sections out of a short guide', () => {
     const short = parseGuide('---\ntitle: Short\ndescription: Short.\nslug: short\npicture: Pip.\npublished: 2026-10-04\nupdated: 2026-10-04\n---\n\nOnly a lead.\n\n## One section\n\nText.\n');
     render(<GuidePage guide={short} id="customs" locale="en" t={t('en', en)} links={links} others={[]} />);

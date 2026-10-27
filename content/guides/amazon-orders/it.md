@@ -4,39 +4,34 @@ description: Chi spedisce il tuo ordine Amazon, quale corriere lo consegna, perc
 slug: tracciamento-ordine-amazon
 picture: Un telefono mostra l'avanzamento di un ordine, due furgoni si passano un pacco e Pip guarda.
 published: 2026-10-16
-updated: 2026-10-16
+updated: 2026-10-27
 ---
 
-Per tracciare un ordine Amazon apri I miei ordini, scegli l'ordine e poi "Traccia il mio pacco": lì Amazon mostra il corriere, il numero di tracciamento e ogni aggiornamento. Chi ti aiuta quando qualcosa va storto dipende da chi spedisce. Amazon segue i propri ordini e quelli "Gestiti da Amazon", mentre un venditore che spedisce da sé sceglie il corriere e risponde della consegna.
+Per tracciare un ordine Amazon accedi al tuo account su amazon.it o apri l'app Amazon e vai in I miei ordini, lo storico dei tuoi ordini: è lì che si seguono di solito le consegne Amazon. Chi ti aiuta quando qualcosa va storto dipende da chi spedisce. Amazon segue i propri ordini e quelli gestiti con Logistica di Amazon, mentre un venditore che spedisce da sé gestisce direttamente la spedizione e l'assistenza clienti.
 
 ## Chi spedisce il mio ordine Amazon: Amazon o un venditore terzo?
 
-Guarda le righe "Spedizione da" e "Venduto da" sotto il pulsante "Acquista ora", oppure il nome del venditore in I miei ordini.
+Un ordine Amazon rientra in uno di questi tre casi:
 
-| Cosa dice la pagina | Cosa significa | Chi ti aiuta per la consegna |
+| Chi vende, chi spedisce | Cosa significa | Chi ti aiuta per la consegna |
 | --- | --- | --- |
-| Venduto da Amazon, Spedizione da Amazon | Merce di Amazon | Amazon |
-| Venduto da un venditore, Spedizione da Amazon | "Gestito da Amazon": merce del venditore, imballata e spedita da un centro logistico Amazon | Amazon |
-| Venduto da e Spedizione da lo stesso venditore | Il venditore spedisce da sé, con il corriere che preferisce | Prima il venditore |
+| Amazon vende e spedisce | Merce di Amazon | Amazon |
+| Un venditore vende, Amazon spedisce | "Logistica di Amazon": il venditore manda la merce ai centri logistici di Amazon, e Amazon la conserva, la imballa e la spedisce | Amazon, che gestisce anche l'assistenza clienti, i resi e i rimborsi |
+| Lo stesso venditore vende e spedisce | "Gestito dal venditore": conserva i prodotti da sé e gestisce direttamente spedizione e assistenza clienti | Prima il venditore |
 
-Per gli articoli "Gestiti da Amazon" è Amazon a occuparsi del servizio clienti e dei resi.
-
-C'è poi un caso che in Italia Amazon chiama **VOC, Vendor Owned Carrier**: "Amazon consente ad alcuni rivenditori di gestire in autonomia il processo di spedizione. In questi casi, non è possibile tracciare un ordine sulla piattaforma di Amazon.it, ma dovrai seguire le istruzioni fornite dal venditore stesso."
+Se un ordine gestito con Logistica di Amazon ha problemi di spedizione, se ne fa carico Amazon.
 
 ## Quale corriere consegna il mio pacco Amazon?
 
-Te lo dice "Traccia il mio pacco", insieme al codice della spedizione. Quando il corriere è Amazon, si tratta di [Amazon Logistics](carrier:amazon-logistics), la rete di consegna di Amazon. Questi sono i corrieri principali per le spedizioni in Italia secondo Amazon.it:
+Quando consegna Amazon stessa si tratta di [Amazon Logistics](carrier:amazon-logistics), la rete di consegna di Amazon: per l'ultimo miglio, dal deposito di smistamento fino a casa tua, Amazon collabora con decine di fornitori di servizi di consegna in tutta Italia. Questi sono i corrieri e i punti di ritiro che Amazon cita per l'Italia:
 
-| Corriere | Cosa dice Amazon.it |
+| Corriere | Cosa dice Amazon |
 | --- | --- |
-| Amazon | Cinque tentativi di consegna automatici, poi giacenza per 72 ore |
-| [Poste Italiane](carrier:poste-italiane), SDA | Due tentativi, poi giacenza per 10 giorni |
-| [BRT (Bartolini)](carrier:brt) | Due tentativi, poi 10 giorni. Sul sito BRT inserisci il numero in "ID collo cliente" |
-| [GLS](carrier:gls-it) | Due tentativi, poi 10 giorni |
-| Energo | Dopo due tentativi l'ordine torna indietro per un rimborso completo |
-| DHL, Nexive, Hermes, Sailpost, T-GROUP, [UPS](carrier:ups) | Anche loro nella lista |
+| Amazon | Consegna dai depositi di smistamento con gli autisti dei suoi fornitori di servizi di consegna: a casa, in ufficio o in un Amazon Locker |
+| [Poste Italiane](carrier:poste-italiane) | Uno dei grandi corrieri nazionali con cui Amazon collabora, per esempio per le consegne nella Laguna di Venezia |
+| Amazon Locker e Amazon Counter | Oltre 44.000 punti di ritiro in Italia: i Locker sono self-service, i Counter sono negozi della zona con personale |
 
-Un venditore che spedisce da sé può usare uno di questi o un altro. Dove trovare il numero su ogni negozio: [trovare il numero di tracciamento](guide:find-tracking-number). Se non ritiri un pacco in giacenza: [pacco non ritirato](guide:uncollected-parcel).
+Un venditore che spedisce da sé organizza la propria consegna: il suo corriere può essere uno di questi o un altro. Dove trovare il numero su ogni negozio: [trovare il numero di tracciamento](guide:find-tracking-number). Se non ritiri un pacco in giacenza: [pacco non ritirato](guide:uncollected-parcel).
 
 ## Com'è fatto un numero di tracciamento Amazon?
 
@@ -63,58 +58,55 @@ Il numero di un corriere funziona sul suo sito, come spiega [i formati dei numer
 
 ## Perché il mio numero di tracciamento Amazon è cambiato, o ne ho due?
 
-Di solito per uno di questi motivi:
+Due casi possono spiegarlo:
 
-- **Più articoli, più pacchi.** Se un ordine contiene più articoli, ognuno può avere date di consegna e tracciamento separati. Un articolo che manca nel pacco potrebbe essere stato spedito separatamente.
-- **Un corriere intermedio.** "La prima fase della spedizione potrebbe essere stata affidata a un corriere intermedio", e in quel tratto il tracciamento può mancare.
-- **Il venditore usa il suo corriere.** Allora il numero è quello di BRT, GLS o un altro, non di Amazon.
+- **Un altro corriere subentra.** Per un ordine consegnato a Murano, nella Laguna di Venezia, per esempio, Amazon manda il pacco al magazzino di un partner di trasporto della zona, e da lì un postino lo porta al cliente.
+- **Il venditore spedisce da sé.** Allora il numero è quello del suo corriere, BRT, GLS o un altro, non di Amazon.
 
 :::journey
-- warehouse | Amazon o il venditore | Più articoli possono partire in più pacchi, ognuno con il suo numero
-- label | Etichetta creata | Alcune modalità di spedizione non sono tracciabili
-- handover | Corriere intermedio | Può gestire la prima fase, a volte senza tracciamento
-- truck | In consegna | Alcuni corrieri consegnano fino alle 22:00
-- home | Tu | Può risultare consegnato prima che arrivi
+- warehouse | Amazon o il venditore | Un articolo con Logistica di Amazon parte da un centro logistico Amazon, gli altri dal venditore
+- label | Etichetta creata | Con Logistica di Amazon il pacco parte con il tracciamento della spedizione
+- handover | Partner di trasporto | Può subentrare, come Poste Italiane per le consegne nella Laguna di Venezia
+- truck | In consegna | Un autista di un fornitore di servizi di consegna di Amazon, di un corriere nazionale o del corriere del venditore
+- home | Tu | A casa, in ufficio, in un Amazon Locker o in un Amazon Counter
 :::
 
 Quando il primo corriere indica il partner che subentra, [Peek](/) tiene la prima cronologia, segue il partner appena il suo tracciamento mostra novità e indica sulla scheda nome e numero del partner.
 
 ## Perché non c'è il tracciamento del mio ordine Amazon?
 
-Amazon dà questi motivi nella pagina "Informazioni di tracciabilità mancanti":
+Due motivi possibili:
 
-- **Corriere intermedio.** La prima fase può essere affidata a un altro corriere.
-- **Spedizione non tracciabile.** "La modalità di spedizione non consente di tenere traccia del pacco." Anche le consegne internazionali standard potrebbero non essere tracciabili.
-- **Il venditore non l'ha condiviso.** Gli ordini dei venditori si tracciano solo se il venditore condivide le informazioni con Amazon e se hai scelto un'opzione di spedizione tracciabile. Altrimenti contatta il venditore, "perché Amazon non è responsabile del processo di spedizione".
-- **Venditore VOC.** Sulla pagina dei corrieri Amazon.it aggiunge questo caso: segui le istruzioni del venditore, non Amazon.it.
+- **Consegna Amazon Logistics.** Non ha una pagina di tracciamento pubblica: il pacco si segue nel tuo account, in I miei ordini, sul negozio dove hai ordinato.
+- **Il venditore spedisce da sé.** Gestisce direttamente spedizione e assistenza clienti, quindi è lui il primo a cui chiedere se il tracciamento manca.
 
-Se la data di consegna prevista è passata e non cambia nulla, Amazon consiglia di attendere uno o due giorni. Per scrivere al venditore: I miei ordini, poi "Problema con l'ordine". Se il tracciamento resta fermo per giorni: [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
+Se il pacco di un venditore non arriva e lui non risolve il problema, puoi chiedere un rimborso ad Amazon con la Garanzia dalla A alla Z. Se il tracciamento resta fermo per giorni: [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
 
 ## Cosa fare se l'ordine Amazon è in ritardo o risulta consegnato?
 
-Gli stati di Amazon in I miei ordini sono `In arrivo`, `In consegna`, `Consegnato` e `Non consegnabile`. L'ultimo vuol dire che il pacco torna ad Amazon, che ti rimborsa in automatico quando lo riceve. Per il resto, procedi così:
+Nell'Unione europea il commerciante deve consegnarti la merce entro 30 giorni, salvo una diversa data concordata, ed è lui il responsabile della consegna. Procedi così:
 
 :::steps
-- Aspetta 48 ore | "La maggior parte dei pacchi in ritardo arriva entro 48 ore" dalla data prevista. Un pacco può anche essere scansionato come consegnato prima della consegna effettiva.
-- Guardati intorno | Controlla il tuo luogo sicuro e chiedi ai vicini. Alcuni corrieri consegnano fino alle 22:00.
-- Chiedi al corriere | "Traccia il mio pacco" ti dice qual è. La pagina "Informazioni di contatto del corriere" di Amazon.it ha i contatti di ognuno.
-- Contatta il venditore | Se ha venduto e spedito lui: I miei ordini, "Problema con l'ordine". "I venditori rispondono entro 48 ore."
-- Chiedi ad Amazon | Ordini spediti da Amazon: Servizio Clienti, entro 30 giorni dalla data di consegna prevista. Ordini di venditori: Garanzia dalla A alla Z.
+- Controlla l'ordine | Aprilo in I miei ordini, nel tuo account su amazon.it o nell'app Amazon, e verifica dove deve arrivare: a casa, in un Amazon Locker o in un Amazon Counter.
+- Guardati intorno | Controlla la cassetta delle lettere e il posto dove ricevi di solito i pacchi, e chiedi ai vicini.
+- Contatta il venditore | Se ha venduto e spedito lui, scrivigli prima. Spetta a lui dimostrare che l'articolo è stato consegnato; se non può, deve inviarti un articolo identico o rimborsarti.
+- Contatta Amazon | Per un ordine spedito da Amazon, o se il venditore non risolve: scrivi al servizio clienti dall'app o dal sito Amazon. Non chiamare numeri ricevuti per e-mail o SMS o trovati nei risultati di ricerca.
+- Fai valere i tuoi diritti | Nessuna consegna entro 30 giorni o alla data concordata? Sollecita il commerciante e concedigli un'ulteriore proroga ragionevole; se non consegna neppure allora, puoi recedere dal contratto ed essere rimborsato.
 :::
 
 Più dettagli su ogni caso: [risulta consegnato ma non è arrivato](guide:delivered-not-received) e [pacco smarrito](guide:lost-parcel).
 
 ### Quando puoi chiedere la Garanzia dalla A alla Z?
 
-Copre gli articoli che un venditore del Marketplace ha venduto e spedito da sé. Per un pacco mai arrivato devono essere passati tre giorni dall'ultima data di consegna prevista, o dalla consegna confermata. Devi anche aver contattato il venditore senza che abbia risposto entro 48 ore o risolto il problema.
+Copre i prodotti venduti e spediti dai partner di vendita di Amazon. Se non sei soddisfatto della consegna o delle condizioni del prodotto e non sei riuscito a risolvere il problema direttamente con il venditore, puoi chiedere un rimborso ad Amazon.
 
-| Termine | Amazon.it |
+| Problema | Cosa prevede la Garanzia dalla A alla Z |
 | --- | --- |
-| Risposta del venditore | 48 ore |
-| Attesa dopo l'ultima data prevista | Tre giorni |
-| Richiesta possibile finché | L'ultima data di consegna prevista risale a 90 giorni o meno |
+| Pacco non arrivato o problema con la consegna | Rimborso |
+| Prodotto in cattive condizioni o diverso dalla descrizione | Rimborso |
+| Danni a cose o persone causati da un prodotto difettoso | Coperti in Italia da maggio 2024: Amazon aiuta a risolvere la richiesta tra te, il venditore e il suo assicuratore |
 
-Fai la richiesta da I miei ordini con "Problema con l'ordine". Se il venditore non ti ha rimborsato costi in più, come la tassa doganale, puoi chiederli con la garanzia.
+Per un danno fai la richiesta al Servizio Clienti di Amazon, che informa il venditore.
 
 ## Posso tracciare un pacco Amazon fuori da Amazon?
 
@@ -123,19 +115,20 @@ Dipende dal numero. Incollalo in [Peek](/):
 - **Il numero di un corriere** (Poste Italiane, BRT, GLS, SDA…) si traccia come qualsiasi altro pacco.
 - **Un numero Amazon**, o un link track.amazon: Peek interroga prima il tracciamento pubblico di Amazon. Se risponde, il pacco viaggia con [Amazon Shipping](carrier:amazon-shipping), il servizio di spedizioni di Amazon per gli e-commerce, o con la Gestione multicanale, in cui Amazon spedisce ordini fatti su altri siti, spesso in imballaggi neutri. Allora Peek lo segue da solo.
 - Altrimenti è Amazon Logistics che consegna un ordine Amazon, e Amazon lo mostra solo nel tuo account. Peek te lo dice e propone "Apri i miei ordini Amazon", che apre i tuoi ordini sul sito Amazon giusto per quel numero: amazon.it per `IT`. Peek non ti chiede mai le credenziali Amazon.
-- **Un numero d'ordine** riceve "Sembra un numero d'ordine Amazon". Usa invece il numero di tracciamento di "Traccia il mio pacco" o dell'e-mail di spedizione.
+- **Un numero d'ordine** riceve "Sembra un numero d'ordine Amazon". Se l'e-mail di spedizione contiene un numero di tracciamento, incolla quello.
 
 :::sources
-- [Amazon.it: Informazioni di contatto del corriere](https://www.amazon.it/gp/help/customer/display.html?nodeId=GBPEXEXYULHB5WCH) – corrieri in Italia, tentativi e giacenza, ID collo cliente BRT, VOC
-- [Amazon.it: Effettua un ordine da un venditore Marketplace](https://www.amazon.it/gp/help/customer/display.html?nodeId=GEF528GN65XSJ7V8) – Spedizione da e Venduto da
-- [Amazon.it: Gestito da Amazon](https://www.amazon.it/gp/help/customer/display.html?nodeId=G239KSGYPUFUY8TQ) – merce dei venditori spedita da Amazon, servizio clienti e resi
-- [Amazon.it: Traccia il tuo pacco](https://www.amazon.it/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – pacchi separati, stati, 48 ore, tracciamento dei venditori
-- [Amazon.it: Informazioni di tracciabilità mancanti](https://www.amazon.it/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – corriere intermedio, spedizioni non tracciabili, venditori, uno o due giorni
-- [Amazon.it: Consegne in ritardo](https://www.amazon.it/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – 48 ore, 30 giorni
-- [Amazon.it: Trova un pacco mancante che risulta essere stato consegnato](https://www.amazon.it/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – 22:00, scansione anticipata, 48 ore
-- [Amazon.it: Contatta un venditore del Marketplace](https://www.amazon.it/gp/help/customer/display.html?nodeId=GLC8ZMBWMBTR6QZZ) – Problema con l'ordine, 48 ore
-- [Amazon.it: Garanzia dalla A alla Z](https://www.amazon.it/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 90 giorni, tre giorni, 48 ore, tassa doganale
+- [About Amazon Italia: Come evitare le truffe basate sui furti di identità di Amazon](https://www.aboutamazon.it/notizie/company-news/come-evitare-le-truffe-basate-sui-furti-di-identita-di-amazon-in-questo-periodo-festivo) – storico degli ordini nell'account o nell'app, Garanzia dalla A alla Z se il prodotto non arriva o non corrisponde alla descrizione, numeri da non chiamare (2022)
+- [About Amazon Italia: Un'alleanza pubblico-privato per contrastare le truffe basate sui furti d'identità](https://www.aboutamazon.it/news/customer-trust/unalleanza-pubblico-privato-per-contrastare-le-truffe-basate-sui-furti-didentita) – servizio clienti dall'app o dal sito Amazon
+- [Amazon: Amazon FBA, accresci il tuo business in Italia](https://sell.amazon.it/logistica-di-amazon) – Logistica di Amazon: stoccaggio, imballaggio, spedizione con tracciamento, assistenza clienti, resi e rimborsi; Gestito dal venditore
+- [About Amazon Italia: Consegna e logistica di Amazon](https://www.aboutamazon.it/cosa-facciamo/consegna-e-logistica) – ultimo miglio dal deposito di smistamento a case, aziende e Amazon Locker
+- [About Amazon Italia: L'impegno di Amazon verso i dipendenti e i fornitori di servizi](https://www.aboutamazon.it/notizie/lavorare-ad-amazon/il-nostro-impegno-nei-confronti-dei-dipendenti-e-degli-autisti-dei-fornitori-di-servizi-di-consegna) – decine di fornitori di servizi di consegna in tutta Italia
+- [About Amazon Italia: Segui una consegna Amazon a Murano, la città costruita sull'acqua nella laguna di Venezia](https://www.aboutamazon.it/notizie/logistica/segui-una-consegna-amazon-a-murano-la-citta-costruita-sullacqua-nella-laguna-di-venezia) – grandi corrieri nazionali come Poste Italiane, partner di trasporto nella Laguna di Venezia (2022)
+- [About Amazon Italia: Amazon continua a garantire consegne rapide e convenienti su un'ampia selezione di prodotti per i clienti Prime](https://www.aboutamazon.it/notizie/company-news/amazon-garantire-consegne-rapide-convenienti-clienti-prime) – oltre 44.000 punti di ritiro, Amazon Locker e Amazon Counter
+- [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z per includere le richieste di risarcimento per danni alla proprietà e alle persone](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prima il venditore, rimborso, danni a cose o persone da maggio 2024
+- [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – 30 giorni, proroga ragionevole, recesso e rimborso
+- [Your Europe: Domande frequenti su spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_it.htm) – il commerciante è responsabile della consegna, articolo identico o rimborso
 - [Amazon Shipping Italia](https://shipping.amazon.it/) – spedizioni per gli e-commerce
 - [Amazon: Gestione multicanale](https://sell.amazon.it/logistica-di-amazon/gestione-multicanale) – ordini da altri canali, imballaggi neutri
-- [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei numeri Amazon, cosa controlla Peek
+- [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei numeri Amazon, cosa controlla Peek, tracciamento di Amazon Logistics nell'account
 :::

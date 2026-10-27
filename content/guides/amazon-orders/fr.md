@@ -4,38 +4,36 @@ description: Qui expédie ta commande Amazon, quel transporteur la livre, pourqu
 slug: suivi-commande-amazon
 picture: Un téléphone affiche l'avancée d'une commande, deux camionnettes se passent un colis, et Pip regarde.
 published: 2026-10-16
-updated: 2026-10-16
+updated: 2026-10-27
 ---
 
-Pour suivre une commande Amazon, ouvre Vos commandes, choisis la commande puis « Suivre le colis » : Amazon y montre le transporteur, le numéro de suivi et chaque étape. Qui t'aide en cas de souci dépend de qui expédie. Amazon s'occupe de ses propres commandes et des articles « Expédié par Amazon », alors qu'un vendeur qui expédie lui-même choisit son transporteur et répond de la livraison.
+Pour suivre une commande Amazon, connecte-toi à ton compte sur amazon.fr ou ouvre l'application Amazon, puis va dans Vos commandes : c'est là que tu vérifies l'état de tes commandes. La page du service client d'Amazon donne aussi accès au suivi de tes colis. Qui t'aide en cas de souci dépend de qui expédie. Amazon s'occupe de ses propres commandes et des articles « Expédié par Amazon », alors qu'un vendeur qui expédie lui-même se charge de l'envoi et de la livraison.
 
 ## Qui expédie ma commande Amazon : Amazon ou un vendeur tiers ?
 
-Regarde les lignes « Expédié par » et « Vendu par » sous le bouton « Acheter maintenant », ou le nom du vendeur dans Vos commandes.
+Une commande Amazon entre dans l'un de ces trois cas :
 
-| Ce qu'affiche la page | Ce que ça veut dire | Qui t'aide pour la livraison |
+| Qui vend, qui expédie | Ce que ça veut dire | Qui t'aide pour la livraison |
 | --- | --- | --- |
-| Vendu par Amazon, Expédié par Amazon | Le stock d'Amazon | Amazon |
-| Vendu par un vendeur, Expédié par Amazon | « Expédié par Amazon » : le stock du vendeur, emballé et envoyé depuis un centre de distribution Amazon | Amazon |
-| Vendu par et Expédié par le même vendeur | Le vendeur envoie lui-même, avec le transporteur de son choix | Le vendeur d'abord |
+| Amazon vend et expédie | Le stock d'Amazon | Amazon |
+| Un vendeur vend, Amazon expédie | « Expédié par Amazon » : le vendeur confie son stock à Amazon, qui le stocke, l'emballe et l'expédie | Amazon, qui gère aussi le service client et les retours |
+| Le même vendeur vend et expédie | « Expédié par le vendeur » : il se charge lui-même du stockage, de l'emballage, de l'envoi et de la livraison | Le vendeur d'abord |
 
-Amazon le dit ainsi : si un article est affiché « Expédié par (nom du vendeur) », « le vendeur gère son propre service client ». Sauf si la commande est admissible à Prime : là, c'est Amazon.
+**En Belgique**, amazon.com.be, ouvert en 2022, propose un service client en français, en néerlandais ou en anglais.
 
-**En Belgique**, tu commandes sur amazon.com.be, en français. Les délais de la garantie A à Z et les conseils en cas de retard y sont les mêmes qu'en France.
-
-**En Suisse**, il n'y a pas de boutique Amazon : amazon.ch renvoie vers amazon.de. Amazon.fr « expédie des millions de produits à l'international, y compris en Suisse ». Ce qu'Amazon expédie arrive en 3 à 5 jours ouvrables en livraison standard, 1 à 3 en envoi rapide, et le prix final inclut les droits et la TVA : « Vous n'avez rien à payer à la douane. » Si tu as quand même payé des droits de douane pour un article « Expédié par Amazon », demande le remboursement au service client. Pour un vendeur qui expédie lui-même, ses propres règles s'appliquent. Plus de détails : [colis bloqué en douane](guide:customs).
+**En Suisse**, tu peux commander sur amazon.de, ou sur amazon.fr pour faire tes achats en français. Sur amazon.de, ce qu'Amazon expédie arrive en 3 à 5 jours ouvrables en livraison standard, 1 à 3 en livraison express, et le prix total affiché au paiement comprend la TVA suisse, les éventuels droits de douane et les frais de port. Un vendeur qui n'expédie pas via Amazon peut faire exception : des frais de douane peuvent s'ajouter s'il ne les a pas inclus dans son prix. Plus de détails : [colis bloqué en douane](guide:customs).
 
 ## Quel transporteur livre mon colis Amazon ?
 
-« Suivre le colis » le nomme, et chaque colis peut avoir le sien. Quand c'est Amazon, il s'agit d'[Amazon Logistics](carrier:amazon-logistics), son propre réseau de livraison. Voici les transporteurs qu'Amazon cite sur ses pages de contact :
+Quand Amazon livre lui-même, c'est [Amazon Logistics](carrier:amazon-logistics), son propre réseau : en France, des entreprises de livraison indépendantes travaillent avec les agences de livraison de proximité d'Amazon. Amazon confie aussi des colis au groupe La Poste, son partenaire historique, et à d'autres spécialistes de la livraison du dernier kilomètre, qui livrent avec leurs propres réseaux. Voici les transporteurs qu'Amazon cite pour chaque pays :
 
 | Pays | Boutique | Transporteurs cités par Amazon |
 | --- | --- | --- |
-| France | amazon.fr | Amazon, [La Poste Colissimo](carrier:la-poste), [Chronopost](carrier:chronopost), [Colis Privé](carrier:colis-prive), [DPD France](carrier:dpd-fr), [GLS](carrier:gls-fr), [Mondial Relay](carrier:mondial-relay), [Paack](carrier:paack), France Express ([Geodis](carrier:geodis)), DHL France, [UPS](carrier:ups), JP Home |
-| Belgique | amazon.com.be | Amazon, [bpost](carrier:bpost) (Taxipost), Colis Privé, Chronopost, DPD, UPS |
-| Suisse | amazon.fr, amazon.de | [La Poste suisse](carrier:swiss-post) (« Poste Suisse », liste d'amazon.fr), [Quickpac](carrier:quickpac) (liste d'amazon.de) |
+| France | amazon.fr | Amazon et ses entreprises de livraison partenaires, le groupe [La Poste](carrier:la-poste), et en points de retrait [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis) et La Poste |
+| Belgique | amazon.com.be | Amazon et ses partenaires de livraison locaux, [bpost](carrier:bpost) |
+| Suisse | amazon.de, amazon.fr | [La Poste suisse](carrier:swiss-post), qui livre avec son propre réseau |
 
-Un vendeur qui expédie lui-même peut passer par l'un d'eux ou par un autre. Où se trouve le numéro sur chaque boutique : [trouver ton numéro de suivi](guide:find-tracking-number).
+Un vendeur qui expédie lui-même organise sa propre livraison : son transporteur peut être l'un de ceux-ci ou un autre. Pour retrouver le numéro de suivi : [trouver ton numéro de suivi](guide:find-tracking-number).
 
 ## À quoi ressemble un numéro de suivi Amazon ?
 
@@ -62,57 +60,55 @@ Le numéro d'un transporteur marche sur le site de celui-ci, comme expliqué dan
 
 ## Pourquoi mon numéro de suivi Amazon a changé, ou pourquoi j'en ai deux ?
 
-En général pour l'une de ces raisons :
+Deux cas peuvent l'expliquer :
 
-- **Plusieurs articles, plusieurs colis.** « Si vous avez commandé plusieurs articles, les dates de livraison et les informations de suivi peuvent être différentes. » Un article absent du carton a peut-être été expédié séparément.
-- **Un autre transporteur prend le relais.** Amazon.fr le précise pour DHL France : « les colis DHL sont livrés par La Poste ».
-- **Le vendeur a son propre transporteur.** Le numéro est alors celui de Colissimo, de Mondial Relay ou d'un autre, pas celui d'Amazon.
+- **Un autre transporteur prend le relais.** Pour la Suisse, par exemple, Amazon remet les colis à La Poste suisse, qui les livre avec son propre réseau.
+- **Le vendeur expédie lui-même.** Le numéro est alors celui de son transporteur, Colissimo, Mondial Relay ou un autre, pas un numéro Amazon.
 
 :::journey
-- warehouse | Amazon ou le vendeur | Plusieurs articles peuvent partir en plusieurs colis, chacun avec son numéro
-- label | Étiquette créée | Le suivi peut tarder : la base de données se met parfois à jour en retard
-- handover | Transporteur partenaire | Peut prendre le relais, par exemple La Poste pour DHL France
-- truck | En cours de livraison | Certains transporteurs livrent jusqu'à 22 h
-- home | Toi | Peut être scanné livré jusqu'à 48 heures trop tôt
+- warehouse | Amazon ou le vendeur | Un article « Expédié par Amazon » part d'un centre de distribution Amazon, les autres de chez le vendeur
+- label | Étiquette créée | Le vendeur qui expédie lui-même doit fournir un suivi valide pour au moins 95 % de ses commandes
+- handover | Transporteur partenaire | Peut prendre le relais, par exemple La Poste suisse pour un colis envoyé en Suisse
+- truck | En cours de livraison | Un livreur d'une entreprise partenaire d'Amazon, de La Poste ou du transporteur du vendeur
+- home | Toi | À domicile, dans un Amazon Locker ou dans un point de retrait partenaire
 :::
 
 Quand le premier transporteur nomme le partenaire qui prend le relais, [Peek](/) garde le premier historique, suit le partenaire dès que son suivi montre du nouveau, et affiche sur la carte le nom et le numéro du partenaire.
 
 ## Pourquoi je n'ai pas de suivi pour ma commande Amazon ?
 
-Amazon donne ces raisons sur sa page « Informations de suivi manquantes » :
+Deux raisons possibles :
 
-- **Une mise à jour en retard.** La base de données du suivi peut prendre du retard.
-- **Un envoi non suivi.** « Certaines expéditions, comme les expéditions internationales standard, ne sont pas traçables. »
-- **Le vendeur ne l'a pas transmis.** « Les vendeurs tiers ne communiquent pas toujours les informations de suivi des commandes à Amazon. » Une commande de vendeur n'est suivie que s'il partage ces infos et si tu as choisi un mode d'expédition avec suivi.
+- **Amazon Logistics livre le colis.** Il n'a pas de page de suivi publique : il se suit dans ton compte, dans Vos commandes, sur la boutique où tu as commandé.
+- **Le vendeur expédie lui-même.** Amazon lui demande un suivi valide pour au moins 95 % de ses commandes, pas pour toutes : certaines peuvent donc partir sans suivi.
 
-Si la date de livraison estimée est passée et que rien ne bouge, Amazon conseille de « patienter encore un à deux jours ». Pas de suivi du tout sur une commande de vendeur ? Dans Vos commandes, choisis « Problème avec la commande » et écris au vendeur. Quand le suivi reste figé plusieurs jours : [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
+Pas de suivi du tout sur une commande de vendeur ? Écris d'abord au vendeur ; si le colis n'arrive pas et qu'il ne règle pas le problème, la garantie A à Z te permet de demander un remboursement à Amazon. Quand le suivi reste figé plusieurs jours : [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
 
 ## Que faire si ma commande Amazon est en retard ou dite livrée ?
 
-Les statuts d'Amazon dans Vos commandes sont `Arrivée`, `En cours de livraison`, `Livré` et `Non livrable`. Ce dernier veut dire que le colis repart chez Amazon, qui te rembourse automatiquement à sa réception. Pour le reste, procède dans cet ordre :
+Dans l'Union européenne, le commerçant doit te livrer dans les 30 jours, sauf si vous avez convenu d'un autre délai, et c'est lui qui est responsable de la livraison. Procède dans cet ordre :
 
 :::steps
-- Attendre 48 heures | La plupart des colis en retard arrivent dans les 48 heures suivant la date estimée. Un colis peut aussi être scanné livré jusqu'à 48 heures avant d'arriver.
-- Chercher autour | Regarde l'endroit indiqué pour la livraison, ta boîte aux lettres, et demande aux voisins. Certains transporteurs livrent jusqu'à 22 h.
-- Demander au transporteur | « Suivre le colis » le nomme. La page « Coordonnées des transporteurs » d'Amazon donne le lien de chacun.
-- Contacter le vendeur | S'il a vendu et expédié : Vos commandes, « Problème avec la commande ». « Les vendeurs répondent par e-mail dans les 48 heures. »
-- Demander à Amazon | Commande expédiée par Amazon : service client, dans les 30 jours suivant la date de livraison estimée. Commande de vendeur : garantie A à Z.
+- Vérifier la commande | Ouvre-la dans Vos commandes, sur amazon.fr ou dans l'application, pour voir son état et l'adresse de livraison choisie : domicile, Amazon Locker ou point de retrait.
+- Chercher autour | Regarde ta boîte aux lettres et l'endroit où tu reçois d'habitude tes colis, et demande aux voisins.
+- Contacter le vendeur | S'il a vendu et expédié l'article, écris-lui d'abord. C'est à lui de prouver que l'article a été livré ; sinon, il doit t'envoyer un article identique ou te rembourser.
+- Contacter Amazon | Pour une commande expédiée par Amazon, ou si le vendeur ne règle pas le problème : service client, par chat ou par téléphone de 6 h à minuit, 7 j/7, ou rappel sur demande.
+- Faire valoir tes droits | Pas de livraison dans les 30 jours ou à la date convenue ? Accorde au commerçant un délai supplémentaire raisonnable ; s'il ne livre toujours pas, tu peux mettre fin au contrat et être remboursé.
 :::
 
 Plus de détails sur chaque cas : [colis livré mais pas reçu](guide:delivered-not-received) et [colis perdu](guide:lost-parcel).
 
 ### Quand demander la garantie A à Z ?
 
-Elle couvre les articles qu'un vendeur Marketplace a vendus et expédiés lui-même. Pour un colis jamais arrivé, il faut que trois jours se soient écoulés depuis la dernière date de livraison estimée, ou depuis que le suivi indique une livraison si c'est plus tôt. Il faut aussi avoir contacté le vendeur il y a plus de 48 heures sans réponse ni solution.
+Elle couvre les articles qu'un vendeur partenaire a vendus et expédiés lui-même. Si la livraison ou l'état de l'article ne te convient pas et que tu n'as pas pu régler le problème directement avec le vendeur, tu peux demander un remboursement à Amazon.
 
-| Délai | amazon.fr et amazon.com.be |
+| Problème | Ce que prévoit la garantie A à Z |
 | --- | --- |
-| Réponse du vendeur | 48 heures |
-| Attente après la dernière date estimée | Trois jours |
-| Demande possible tant que | La dernière date de livraison possible remonte à 90 jours au plus |
+| Livraison en retard | Remboursement ou remplacement |
+| Article reçu en mauvais état | Remboursement ou remplacement |
+| Dommage matériel ou corporel causé par un produit défectueux | Couvert en France depuis mai 2024 : Amazon traite la réclamation avec le vendeur et son assureur |
 
-Tu fais la demande dans Vos commandes, via « Problème avec la commande ». Sur amazon.com.be, les articles d'Amazon Global Store et ceux de vendeurs livrés via Prime passent directement par le service client d'Amazon. Si le vendeur ne t'a pas remboursé des frais en plus, comme des frais de douane, tu peux aussi les réclamer.
+Pour un dommage, tu fais la réclamation auprès du service client d'Amazon, qui prévient le vendeur.
 
 ## Est-ce que je peux suivre un colis Amazon ailleurs que sur Amazon ?
 
@@ -121,25 +117,22 @@ Tu fais la demande dans Vos commandes, via « Problème avec la commande ». Sur
 - **Le numéro d'un transporteur** (Colissimo, Chronopost, Mondial Relay, bpost, La Poste suisse…) se suit comme n'importe quel colis.
 - **Un numéro Amazon**, ou un lien track.amazon : Peek interroge d'abord le suivi public d'Amazon. S'il répond, le colis voyage avec [Amazon Shipping](carrier:amazon-shipping), le service de livraison d'Amazon pour les e-commerçants, ou avec les Ventes Multi-Sites (MCF), où Amazon envoie des commandes passées sur d'autres sites, souvent dans un emballage neutre. Peek le suit alors tout seul.
 - Sinon, c'est Amazon Logistics qui livre une commande Amazon, et Amazon ne la montre que dans ton compte. Peek te le dit et propose « Voir mes commandes Amazon », qui ouvre tes commandes sur le site Amazon qui correspond au numéro : amazon.fr pour `FR`, amazon.com.be pour `BE`. Peek ne te demande jamais tes identifiants Amazon.
-- **Un numéro de commande** reçoit « On dirait un numéro de commande Amazon ». Prends plutôt le numéro de suivi de « Suivre le colis » ou de l'e-mail d'expédition.
+- **Un numéro de commande** reçoit « On dirait un numéro de commande Amazon ». Si l'e-mail d'expédition contient un numéro de suivi, colle plutôt celui-ci.
 
 :::sources
-- [Amazon.fr : Coordonnées des transporteurs](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GBPEXEXYULHB5WCH) – transporteurs en France, DHL France livré par La Poste, Poste Suisse
-- [Amazon.fr : Commande auprès d'un vendeur Marketplace](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GEF528GN65XSJ7V8) – Expédié par et Vendu par, service client du vendeur
-- [Amazon.fr : Expédié par Amazon](https://www.amazon.fr/gp/help/customer/display.html?nodeId=G239KSGYPUFUY8TQ) – stock de vendeurs envoyé depuis Amazon
-- [Amazon.fr : Suivre votre colis](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – colis séparés, statuts, 48 heures, suivi des vendeurs tiers
-- [Amazon.fr : Informations de suivi manquantes](https://www.amazon.fr/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – retards de mise à jour, envois non traçables, un à deux jours
-- [Amazon.fr : Livraisons en retard](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – 48 heures, 30 jours
-- [Amazon.fr : Rechercher un colis manquant qui apparaît comme livré](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – 22 h, scan livré jusqu'à 48 heures avant, 30 jours
-- [Amazon.fr : Contacter un vendeur Marketplace](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GLC8ZMBWMBTR6QZZ) – 48 heures, exception Prime
-- [Amazon.fr : Qu'est-ce que la Garantie A à Z ?](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 90 jours, trois jours, 48 heures
-- [Amazon.fr : À propos des livraisons vers la Suisse](https://www.amazon.fr/gp/help/customer/display.html?nodeId=201910940) – délais, droits et TVA inclus, remboursement des droits de douane
-- [Amazon.com.be : Coordonnées des transporteurs](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GBPEXEXYULHB5WCH&language=fr_BE) – transporteurs en Belgique
-- [Amazon.com.be : Informations de suivi manquantes](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER&language=fr_BE) – mêmes règles qu'en France
-- [Amazon.com.be : Livraisons en retard](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6&language=fr_BE) – 48 heures, 30 jours
-- [Amazon.com.be : Garantie A à Z](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV&language=fr_BE) – 90 jours, trois jours, 48 heures, Global Store et Prime, frais de douane
-- [Amazon.de : Ein Transportunternehmen kontaktieren](https://www.amazon.de/gp/help/customer/display.html?nodeId=GBPEXEXYULHB5WCH) – Quickpac
+- [About Amazon France : Six conseils pratiques pour se protéger des tentatives d'arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – vérifier ses commandes dans son compte ou l'application, garantie A à Z en cas de retard ou d'article en mauvais état
+- [About Amazon France : Comment contacter le service client Amazon ?](https://www.aboutamazon.fr/actualites/nos-boutiques/comment-contacter-le-service-client-amazon) – suivi des colis sur la page du service client, chat et téléphone de 6 h à minuit, rappel
+- [Amazon : Amazon FBA, emballé, expédié, livré](https://sell.amazon.fr/expedie-par-amazon) – stockage, expédition, service client et retours par Amazon, vendeur qui expédie lui-même, suivi valide sur 95 % des commandes
+- [About Amazon France : Les clients Amazon mettent leurs livreurs à l'honneur](https://www.aboutamazon.fr/actualites/activite-logistique/les-clients-amazon-mettent-leurs-livreurs-a-lhonneur) – entreprises de livraison indépendantes, agences de livraison d'Amazon, groupe La Poste (décembre 2022)
+- [About Amazon France : Garantir des livraisons fiables et efficaces](https://www.aboutamazon.fr/actualites/activite-logistique/garantir-des-livraisons-fiables-et-efficaces-pendant-les-periodes-exceptionnelles) – Amazon Locker, points de retrait Mondial Relay, Relais Colis et La Poste
+- [About Amazon (Europe) : Amazon.com.be launches in Belgium](https://www.aboutamazon.eu/news/amazon-prime/amazon-com-be-launches-in-belgium) – amazon.com.be, service client en français, néerlandais ou anglais
+- [About Amazon (Europe) : Amazon announces plans to invest over €1 billion in Belgium](https://www.aboutamazon.eu/news/job-creation-and-investment/amazon-announces-plans-to-invest-over-1-billion-to-enhance-belgian-customer-experience) – bpost, partenaires de livraison locaux
+- [About Amazon Deutschland : Amazon in der Schweiz, alles, was du wissen musst](https://www.aboutamazon.de/news/company-news/aus-der-schweiz-bei-amazon-bestellen-das-musst-du-wissen) – amazon.de et amazon.fr depuis la Suisse, délais, TVA, droits de douane et frais de port compris
+- [About Amazon Deutschland : Wie kommt mein Paket zu mir?](https://www.aboutamazon.de/news/verpackung/wie-kommt-mein-paket-zu-mir) – livraison en Suisse par La Poste suisse
+- [About Amazon France : Amazon étend les protections apportées par la Garantie A à Z](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeur d'abord, remboursement, dommages matériels et corporels depuis mai 2024
+- [Your Europe : Expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_fr.htm) – 30 jours, délai supplémentaire, fin du contrat et remboursement
+- [Your Europe : FAQ expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_fr.htm) – le vendeur répond de la livraison, article identique ou remboursement
 - [Amazon Shipping France](https://shipping.amazon.fr/) – livraison pour les e-commerçants
 - [Amazon : Ventes Multi-Sites (MCF)](https://sell.amazon.fr/expedie-par-amazon/expedie-multicanal) – commandes d'autres canaux, emballages neutres
-- [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes des numéros Amazon, ce que Peek vérifie
+- [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes des numéros Amazon, ce que Peek vérifie, suivi d'Amazon Logistics dans le compte
 :::

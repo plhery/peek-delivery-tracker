@@ -4,36 +4,33 @@ description: Kto wysyła Twoje zamówienie z Amazon.pl, który przewoźnik je do
 slug: sledzenie-zamowienia-amazon
 picture: Telefon pokazuje postęp zamówienia, dwie furgonetki przekazują sobie paczkę, a Pip się przygląda.
 published: 2026-10-16
-updated: 2026-10-16
+updated: 2026-10-27
 ---
 
-Zamówienie z Amazona śledzisz w sekcji Moje zamówienia: wybierz zamówienie i kliknij „Śledź przesyłkę”. Tam Amazon pokazuje przewoźnika, identyfikator przesyłki i każdą aktualizację. Kto pomoże, gdy coś pójdzie nie tak, zależy od tego, kto wysyła. Amazon zajmuje się własnymi zamówieniami i produktami z „Realizacją przez Amazon”, a sprzedawca, który wysyła sam, wybiera przewoźnika i odpowiada za dostawę.
+Zamówienie z Amazona śledzisz na stronie zamówień na swoim koncie, w serwisie Amazon.pl albo w aplikacji Amazon. Jeśli paczkę doręcza Amazon, widzisz tam jej status, historię, przewidywaną datę dostawy i zdjęcie z doręczenia. Kto pomoże, gdy coś pójdzie nie tak, zależy od tego, kto wysyła. Amazon zajmuje się zamówieniami, które sam wysyła, także produktami z „Realizacją przez Amazon”, a sprzedawca, który wysyła sam, odpowiada za dostawę.
 
 ## Kto wysyła moje zamówienie z Amazona: Amazon czy sprzedawca?
 
-Sprawdź nazwę sprzedawcy na stronie produktu albo w sekcji Moje zamówienia i zwróć uwagę na odznakę Prime.
+Sprzedawcy wysyłają zamówienia sami, przez wybranego przewoźnika, albo z pomocą Amazona.
 
 | Sytuacja | Co to znaczy | Kto pomaga przy dostawie |
 | --- | --- | --- |
 | Sprzedaje i wysyła Amazon | Towar Amazona | Amazon |
-| Sprzedaje sprzedawca, wysyła Amazon | „Realizacja przez Amazon” (FBA): produkt sprzedawcy, pakowany i wysyłany z centrum logistycznego Amazon | Amazon |
-| Sprzedaje i wysyła sprzedawca, bez Prime | Sprzedawca wysyła sam, przewoźnikiem, którego wybierze | Najpierw sprzedawca |
+| Sprzedaje sprzedawca, wysyła Amazon | „Realizacja przez Amazon” (FBA): Amazon składuje, pakuje i wysyła produkt sprzedawcy oraz obsługuje klienta | Amazon |
+| Sprzedaje i wysyła sprzedawca | „Realizacja przez sprzedawcę” (FBM): sprzedawca wysyła sam, przewoźnikiem, którego wybierze | Najpierw sprzedawca |
 
-Amazon pisze wprost: „Jeśli produkty sprzedawcy zewnętrznego nie mają odznaki Amazon Prime, to sprzedawca ten będzie realizował zamówienie, zajmie się dostawą i ewentualnym zwrotem.” Przy produktach z „Realizacją przez Amazon” obsługę klienta i zwroty zapewnia Amazon.
+Sprzedawca, który sam realizuje zamówienia, odpowiada za dostawę, obsługę klienta i zwroty. Jeśli nie rozwiąże problemu, możesz zwrócić się do Amazona w ramach Gwarancji od A do Z.
 
 ## Który przewoźnik doręcza moją paczkę z Amazona?
 
-Pokazuje go „Śledź przesyłkę”, razem z identyfikatorem przesyłki. Jeśli przewoźnikiem jest sam Amazon, to [Amazon Logistics](carrier:amazon-logistics), własna sieć dostaw Amazona. Na stronie z danymi kontaktowymi Amazon.pl wymienia tych przewoźników:
+To zależy od tego, kto wysyła. Jeśli przewoźnikiem jest sam Amazon, to [Amazon Logistics](carrier:amazon-logistics), własna sieć dostaw Amazona: w stacjach dostawczych paczki są sortowane według tras doręczeń i trafiają do partnerów odpowiedzialnych za ostatni etap dostawy. Amazon.pl dowozi zamówienia pod drzwi, do automatów Paczkomat i do tysięcy punktów odbioru w całej Polsce.
 
-| Przewoźnik | Co mówi Amazon.pl |
+| Przewoźnik | Kiedy doręcza |
 | --- | --- |
-| [DHL Polska](carrier:dhl-ecommerce-pl) | U niego zmienisz datę dostawy (tylko DHL) |
-| [InPost](carrier:inpost) | U niego przedłużysz czas odbioru z automatu paczkowego (tylko InPost) |
-| [Poczta Polska](carrier:poczta-polska) | Śledzenie w jej serwisie |
-| [UPS](carrier:ups) Polska | Śledzenie w jego serwisie |
-| [DPD Polska](carrier:dpd-pl) | Śledzenie w jego serwisie |
+| [InPost](carrier:inpost) | Gdy wybierzesz dostawę do Paczkomatu: InPost jest partnerem logistycznym Amazon.pl. W usłudze Easy Ship doręcza też paczki sprzedawców |
+| Przewoźnik sprzedawcy | Gdy sprzedawca wysyła sam: na przykład [DPD Polska](carrier:dpd-pl), [DHL Polska](carrier:dhl-ecommerce-pl) albo [Poczta Polska](carrier:poczta-polska) |
 
-Przewoźnika przydziela system Amazona i nie da się wykluczyć konkretnej firmy. Amazon radzi: „Jeśli chcesz skorzystać z konkretnego przewoźnika, wybierz dostawę do punktu odbioru.” Sprzedawca, który wysyła sam, może użyć dowolnego przewoźnika. Gdzie dokładnie jest numer w każdym sklepie: [jak znaleźć numer przesyłki](guide:find-tracking-number).
+Gdzie dokładnie jest numer w każdym sklepie: [jak znaleźć numer przesyłki](guide:find-tracking-number).
 
 ## Jak wygląda numer śledzenia Amazon?
 
@@ -62,57 +59,46 @@ Numer przewoźnika działa na jego stronie, jak opisują [formaty numerów przes
 
 Zwykle z jednego z tych powodów:
 
-- **Kilka produktów, kilka paczek.** Jeśli zamówisz kilka produktów, mogą mieć oddzielne daty dostawy i informacje o śledzeniu. Brakujący produkt mógł zostać wysłany osobno.
-- **Paczka z zagranicy.** „W przypadku przesyłek wysyłanych z centrów logistycznych za granicą możliwość śledzenia będzie dostępna po dotarciu paczki do centrum dystrybucyjnego przewoźnika w Polsce.”
-- **Kilku przewoźników.** „Niektóre paczki są przewożone przez wielu przewoźników.”
+- **Jeden z nich to numer zamówienia.** Numer z 3, 7 i 7 cyfr oznacza zakup, a nie przesyłkę.
 - **Sprzedawca ma własnego przewoźnika.** Wtedy numer należy do InPost, DPD czy innej firmy, a nie do Amazona.
+- **Paczkę przejmuje inny przewoźnik.** Niektórzy przewoźnicy przekazują paczkę partnerowi, który doręcza ją pod własnym numerem.
 
 :::journey
-- warehouse | Amazon lub sprzedawca | Kilka produktów może wyjść w kilku paczkach, każda z własnym numerem
-- label | Etykieta | Baza danych śledzenia bywa aktualizowana z opóźnieniem
-- handover | Przewoźnik w Polsce | Paczka z zagranicy: śledzenie od jego centrum w Polsce
-- truck | W trakcie dostawy | Niektórzy przewoźnicy doręczają do 22.00
-- home | Ty | Może być oznaczona jako dostarczona do 48 godzin wcześniej
+- warehouse | Amazon lub sprzedawca | Przy FBA Amazon składuje, pakuje i wysyła produkt, przy FBM wysyła sprzedawca
+- label | Etykieta | W Easy Ship sprzedawca drukuje etykietę, a InPost odbiera paczkę spod jego drzwi
+- handover | Stacja dostawcza | Paczki Amazona są tu sortowane według tras doręczeń
+- truck | W trakcie dostawy | Ostatni etap przejmują partnerzy Amazona
+- home | Ty | Pod drzwiami, w Paczkomacie albo w punkcie odbioru
 :::
 
 Gdy pierwszy przewoźnik poda partnera, który przejmuje paczkę, [Peek](/) zachowuje pierwszą historię, przechodzi na partnera, gdy jego śledzenie pokaże nowe postępy, i pokazuje na karcie jego nazwę i numer.
 
 ## Dlaczego nie ma śledzenia mojego zamówienia z Amazona?
 
-Amazon podaje te powody na stronach „Brak informacji o śledzeniu” i „Śledzenie paczki”:
+To zależy od tego, gdzie go szukasz i kto wysyła:
 
-- **Opóźnienie w bazie.** Aktualizacja bazy danych śledzenia może się spóźniać.
-- **Przesyłka bez śledzenia.** „Niektórych przesyłek, takich jak standardowe przesyłki międzynarodowe, nie można śledzić.”
-- **Sprzedawca nie przekazał danych.** „Sprzedawcy korzystający z platformy handlowej czasem nie udostępniają firmie Amazon informacji dotyczących śledzenia ich zamówień.” Przesyłkę od sprzedawcy śledzisz tylko wtedy, gdy przekaże on dane i gdy wybrano opcję wysyłki z możliwością śledzenia.
-- **Paczka jeszcze za granicą.** Śledzenie pojawi się, gdy dotrze do centrum przewoźnika w Polsce.
+- **Poza Amazonem.** Amazon Logistics nie ma publicznej strony śledzenia: status widać tylko na stronie zamówień na twoim koncie.
+- **Zamówienia od sprzedawców.** Jeśli sprzedawca wysyła sam, śledzenie zależy od niego i od jego przewoźnika. To on odpowiada za dostawę, więc najpierw zapytaj jego.
 
-Jeśli minęła szacowana data dostawy, a nic się nie zmienia, Amazon radzi: „poczekaj jeszcze dzień lub dwa”. Brak śledzenia przy paczce od sprzedawcy? Wejdź w Moje zamówienia, wybierz „Problem z zamówieniem” i napisz do sprzedawcy. Gdy śledzenie stoi od dni: [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
+Gdy śledzenie stoi od dni: [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
 ## Co zrobić, gdy zamówienie z Amazona się spóźnia albo jest „dostarczone”?
 
-Statusy Amazona w Moich zamówieniach to między innymi `Dostawa`, `W trakcie dostawy`, `Dostarczono`, `Odebrano` i `Dostawa niemożliwa`. Ten ostatni znaczy, że paczka wraca do Amazona, a ten po jej otrzymaniu automatycznie zwraca ci pieniądze. W pozostałych przypadkach działaj w tej kolejności:
+Według zasad unijnych sprzedawca powinien dostarczyć towar w uzgodnionym terminie, a jeśli żadnego nie uzgodniono, w ciągu 30 dni. Jeśli paczka nie dotrze, przypomnij mu o zamówieniu i wyznacz dodatkowy, rozsądny termin. Jeśli i w nim nie dostarczy towaru, masz prawo od razu rozwiązać umowę i odzyskać pieniądze. Działaj w tej kolejności:
 
 :::steps
-- Odczekaj 48 godzin | „Większość opóźnionych paczek dociera w ciągu 48 godzin od podanej daty dostawy.” Paczka może też zostać oznaczona jako dostarczona do 48 godzin przed doręczeniem.
-- Rozejrzyj się | Sprawdź miejsce dostawy, skrzynkę pocztową, awizo i zapytaj sąsiadów. Niektórzy przewoźnicy doręczają do 22.00.
-- Zapytaj przewoźnika | „Śledź przesyłkę” pokazuje, kto to jest. Strona „Informacje kontaktowe przewoźników” podaje telefony i linki.
-- Napisz do sprzedawcy | Jeśli to on sprzedał i wysłał: Moje zamówienia, „Problem z zamówieniem”. „Sprzedawcy odpowiadają e-mailem w ciągu 48 godzin.”
-- Zwróć się do Amazona | Zamówienia wysłane przez Amazon: obsługa klienta, w ciągu 30 dni od spodziewanej daty dostawy. Zamówienia od sprzedawców: Gwarancja od A do Z.
+- Sprawdź swoje zamówienia | Jeśli paczkę doręcza Amazon, na stronie zamówień zobaczysz status, przewidywaną datę i zdjęcie z doręczenia.
+- Rozejrzyj się | Sprawdź skrzynkę pocztową i miejsce, w którym zwykle zostają paczki, i zapytaj sąsiadów. Przy dostawie do Paczkomatu albo punktu odbioru sprawdź, czy paczka już tam czeka.
+- Zapytaj przewoźnika | Jeśli numer należy do InPost, DPD czy innego przewoźnika, śledź paczkę na jego stronie albo w Peek.
+- Napisz do sprzedawcy | Jeśli to on sprzedał i wysłał: odpowiada za dostawę, a jeśli nie udowodni, że paczka została dostarczona, powinien wysłać ci taki sam produkt albo zwrócić pieniądze.
+- Zwróć się do Amazona | Przy problemie z terminową dostawą albo stanem produktu Amazon zwraca pieniądze lub wymienia produkt, także gdy sprzedaje niezależny sprzedawca. Przy zamówieniu od sprzedawcy najpierw spróbuj z nim.
 :::
 
 Więcej o każdym przypadku: [paczka dostarczona, ale jej nie ma](guide:delivered-not-received) i [zaginiona paczka](guide:lost-parcel).
 
 ### Kiedy mogę skorzystać z Gwarancji od A do Z?
 
-Obejmuje zamówienia u sprzedawcy z platformy Marketplace. Gdy paczka nie dotarła, muszą minąć trzy dni od ostatniej przewidywanej daty dostawy albo od momentu, gdy śledzenie pokazało doręczenie, zależnie od tego, co nastąpi wcześniej. Musisz też skontaktować się ze sprzedawcą ponad 48 godzin wcześniej, bez odpowiedzi ani rozwiązania.
-
-| Termin | Amazon.pl |
-| --- | --- |
-| Odpowiedź sprzedawcy | 48 godzin |
-| Czekanie po ostatniej przewidywanej dacie | Trzy dni |
-| Wniosek możliwy | Najwyżej 90 dni od ostatniej możliwej daty dostawy |
-
-Wniosek składasz w Moich zamówieniach, opcją „Problem z zamówieniem”. Przy produktach z Amazon Global Store i produktach od sprzedawców dostarczanych w ramach Prime kontaktujesz się od razu z Amazonem. Jeśli sprzedawca nie zwrócił ci dodatkowych kosztów, na przykład cła, też możesz je zgłosić.
+Gwarancja od A do Z obejmuje każdy produkt w sklepie, niezależnie od tego, czy sprzedaje go Amazon, czy niezależny sprzedawca. Przy zakupie od sprzedawcy najpierw spróbuj rozwiązać problem z nim. Jeśli nie jesteś zadowolony z dostawy albo stanu produktu i sprawa nie została załatwiona, możesz zwrócić się bezpośrednio do Amazona o zwrot pieniędzy.
 
 ## Czy mogę śledzić paczkę z Amazona poza Amazonem?
 
@@ -121,18 +107,20 @@ To zależy od numeru. Wklej go do [Peek](/):
 - **Numer przewoźnika** (InPost, DPD, DHL, Poczta Polska…) śledzisz jak każdą inną paczkę.
 - **Numer Amazona** albo link track.amazon: Peek najpierw pyta publiczny system śledzenia Amazona. Jeśli Amazon odpowie, paczka jedzie z Amazon Shipping, usługą dostaw Amazona dla innych sklepów i sprzedawców, albo w ramach Multi-Channel Fulfilment, gdzie Amazon wysyła zamówienia z innych stron, często w opakowaniach bez logo Amazona. Wtedy Peek śledzi ją sam.
 - Jeśli nie, to Amazon Logistics dowozi zamówienie z Amazona, a Amazon pokazuje je tylko na twoim koncie. Peek mówi ci o tym i proponuje „Otwórz moje zamówienia Amazon”, które otwiera twoje zamówienia na stronie Amazona pasującej do numeru: amazon.pl dla `PL`. Peek nigdy nie prosi o login do Amazona.
-- **Numer zamówienia** dostaje komunikat „To wygląda na numer zamówienia Amazon”. Użyj zamiast niego numeru ze „Śledź przesyłkę” albo z e-maila o wysyłce.
+- **Numer zamówienia** dostaje komunikat „To wygląda na numer zamówienia Amazon”. Użyj zamiast niego numeru przesyłki ze swojego konta.
 
 :::sources
-- [Amazon.pl: Informacje kontaktowe przewoźników](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GBPEXEXYULHB5WCH) – przewoźnicy, śledzenie po dotarciu do Polski, DHL i InPost
-- [Amazon.pl: Zamawianie u sprzedawcy zewnętrznego](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GEF528GN65XSJ7V8) – odznaka Prime, sprzedawca odpowiada za dostawę
-- [Amazon.pl: Realizacja przez serwis Amazon](https://www.amazon.pl/gp/help/customer/display.html?nodeId=G239KSGYPUFUY8TQ) – FBA, obsługa klienta i zwroty
-- [Amazon.pl: Śledzenie paczki](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – oddzielne paczki, śledzenie przesyłek od sprzedawców i z zagranicy, statusy, 48 godzin, przydział przewoźników, punkt odbioru
-- [Amazon.pl: Brak informacji o śledzeniu](https://www.amazon.pl/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – powody braku śledzenia, dzień lub dwa
-- [Amazon.pl: Odnajdywanie zaginionej przesyłki, która została oznaczona jako dostarczona](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – 22.00, wielu przewoźników, 48 godzin, 30 dni
-- [Amazon.pl: Skontaktuj się ze sprzedawcą zewnętrznym](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GLC8ZMBWMBTR6QZZ) – 48 godzin
-- [Amazon.pl: Gwarancja od A do Z](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 90 dni, trzy dni, 48 godzin, Global Store, Prime, cło
+- [About Amazon: 5 sposobów na bezpieczne zakupy z Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-sposobow-na-bezpieczne-zakupy-z-amazon-nie-daj-sie-oszustom) – śledzenie na stronie zamówień na koncie
+- [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – historia zamówień na Amazon.pl i w aplikacji, Gwarancja od A do Z dla każdego produktu, zwrot pieniędzy lub wymiana
+- [About Amazon: Pierwsze kroki w sprzedaży na Amazon](https://www.aboutamazon.pl/wiadomosci/sprzedaz-na-amazon/pierwsze-kroki-w-sprzedazy-na-amazon) – wysyłka przez sprzedawcę i wybranego przewoźnika albo FBA, odpowiedzialność za dostawę, obsługę klienta i zwroty
+- [About Amazon: Easy Ship – jeszcze łatwiejsze i szybsze wysyłki dla sprzedawców na Amazon.pl](https://www.aboutamazon.pl/wiadomosci/sprzedaz-na-amazon/easy-ship-jeszcze-latwiejsze-i-szybsze-wysylki-dla-sprzedawcow-na-amazon-pl) – Realizacja przez Amazon i przez sprzedawcę, odbiór paczek, dostawa InPost
+- [About Amazon: Amazon unowocześnia dostawy w Europie](https://www.aboutamazon.pl/wiadomosci/miejsca-pracy-i-inwestycje/amazon-unowoczesnia-dostawy-w-europie) – stacje dostawcze, sortowanie według tras, partnerzy na ostatnim etapie dostawy
+- [About Amazon: Pozwól sobie nie pamiętać](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/pozwol-sobie-nie-pamietac-w-sklepie-amazon-pl-niskie-ceny-kazdego-dnia-oraz-szybka-i-darmowa-dostawa-to-mniej-stresu-przy-codziennych-zakupach) – dostawa pod drzwi, do Paczkomatów i punktów odbioru w całej Polsce
+- [About Amazon: Największy unboxing w Polsce](https://www.aboutamazon.pl/wiadomosci/amazon-w-polsce/najwiekszy-unboxing-w-polsce-tak-amazon-pl-swietowal-swoje-5-urodziny) – InPost jako partner logistyczny Amazon.pl, Paczkomaty InPost
+- [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, zwrot pieniędzy od Amazona
+- [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – 30 dni, dodatkowy termin, rozwiązanie umowy i zwrot pieniędzy
+- [Your Europe: Najczęściej zadawane pytania – Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_pl.htm) – sprzedawca odpowiada za dostawę, taki sam produkt lub zwrot pieniędzy
 - [Amazon Shipping UK](https://shipping.amazon.co.uk/) – dostawy dla sklepów i sprzedawców Amazon
 - [Amazon UK: Multi-Channel Fulfilment](https://sell.amazon.co.uk/fulfilment-by-amazon/fba-multi-channel) – zamówienia z innych kanałów, opakowania bez logo
-- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów Amazona, co sprawdza Peek
+- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów Amazona, śledzenie tylko na koncie, co sprawdza Peek
 :::

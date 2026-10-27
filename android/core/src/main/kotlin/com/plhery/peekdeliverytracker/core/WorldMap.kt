@@ -522,8 +522,11 @@ class GlobeProjection(val camera: GlobeCamera) {
     /** Above 0 the point faces the viewer; below 0 it is behind the globe. */
     fun facing(vector: Vector3): Double = vector.dot(forward)
 
-    fun screen(vector: Vector3): Point =
-        Point(camera.offset.x + camera.scale * vector.dot(east), camera.offset.y - camera.scale * vector.dot(north))
+    fun screen(vector: Vector3): Point = Point(screenX(vector), screenY(vector))
+
+    /** `screen(vector)` one coordinate at a time, for the paths built each frame. */
+    fun screenX(vector: Vector3): Double = camera.offset.x + camera.scale * vector.dot(east)
+    fun screenY(vector: Vector3): Double = camera.offset.y - camera.scale * vector.dot(north)
 
     fun project(point: GeoPoint): Point = screen(point.vector)
 
@@ -559,55 +562,82 @@ object MapGeometry {
         if (around) path.addPath(disk)
     }
 
+    // The map outlines every shape again each frame, so this works in plain numbers: a point seen from behind is the
+    // pair of its dot products with east and north.
     private fun outline(path: MapPath, ring: List<Vector3>, projection: GlobeProjection, disk: MapPath) {
-        val facing = ring.map(projection::facing)
-        // Where a point lies seen from behind, around the point straight behind the globe.
-        val behind = { vector: Vector3 -> Vector2(vector.dot(projection.east), vector.dot(projection.north)) }
-        val turn = { a: Vector2, b: Vector2 -> atan2(a.x * b.y - a.y * b.x, a.dot(b)) }
+        val count = ring.size
+        val facing = DoubleArray(count) { projection.facing(ring[it]) }
+        val east = projection.east
+        val north = projection.north
         // Start in front, so every stretch behind has both its ends on the rim.
-        val start = facing.indexOfFirst { it >= 0 }
+        var start = -1
+        for (index in 0 until count) {
+            if (facing[index] >= 0) {
+                start = index
+                break
+            }
+        }
         if (start < 0) {
             // All of it behind: the rim all the way round if it winds around that point, else nothing.
-            val last = ring.lastOrNull() ?: return
+            if (count == 0) return
             var turned = 0.0
-            var previous = behind(last)
-            for (vector in ring) {
-                turned += turn(previous, behind(vector))
-                previous = behind(vector)
+            var previousX = ring[count - 1].dot(east)
+            var previousY = ring[count - 1].dot(north)
+            for (index in 0 until count) {
+                val x = ring[index].dot(east)
+                val y = ring[index].dot(north)
+                turned += turn(previousX, previousY, x, y)
+                previousX = x
+                previousY = y
             }
             if (abs(turned) > PI) path.addPath(disk)
             return
         }
-        path.move(projection.screen(ring[start]))
-        // Where the ring went behind the globe, how far round it has turned since, and the last point it passed there.
-        class Hidden(val from: Double, val turned: Double, val last: Vector2)
-        var hidden: Hidden? = null
-        for (step in 1..ring.size) {
-            val a = (start + step - 1) % ring.size
-            val b = (start + step) % ring.size
-            val stretch = hidden
+        path.move(projection.screenX(ring[start]), projection.screenY(ring[start]))
+        // Behind the globe: where the ring went behind it, how far round it has turned since, and the last point it
+        // passed there.
+        var hidden = false
+        var from = 0.0
+        var turned = 0.0
+        var lastX = 0.0
+        var lastY = 0.0
+        for (step in 1..count) {
+            val a = (start + step - 1) % count
+            val b = (start + step) % count
             if (facing[b] >= 0) {
-                if (stretch != null) {
-                    val edge = behind(horizon(ring[a], facing[a], ring[b], facing[b]))
+                if (hidden) {
+                    val edge = horizon(ring[a], facing[a], ring[b], facing[b])
                     // Angles on the rim run the other way on screen, whose y points down.
                     path.addRelativeArc(
                         center = projection.camera.offset, radius = projection.camera.scale,
-                        startAngle = -stretch.from, delta = -(stretch.turned + turn(stretch.last, edge)),
+                        startAngle = -from, delta = -(turned + turn(lastX, lastY, edge.dot(east), edge.dot(north))),
                     )
-                    hidden = null
+                    hidden = false
                 }
-                path.addLine(projection.screen(ring[b]))
-            } else if (stretch != null) {
-                hidden = Hidden(stretch.from, stretch.turned + turn(stretch.last, behind(ring[b])), behind(ring[b]))
+                path.addLine(projection.screenX(ring[b]), projection.screenY(ring[b]))
+            } else if (hidden) {
+                val x = ring[b].dot(east)
+                val y = ring[b].dot(north)
+                turned += turn(lastX, lastY, x, y)
+                lastX = x
+                lastY = y
             } else {
                 val edge = horizon(ring[a], facing[a], ring[b], facing[b])
-                path.addLine(projection.screen(edge))
-                val point = behind(edge)
-                hidden = Hidden(atan2(point.y, point.x), turn(point, behind(ring[b])), behind(ring[b]))
+                path.addLine(projection.screenX(edge), projection.screenY(edge))
+                val edgeX = edge.dot(east)
+                val edgeY = edge.dot(north)
+                lastX = ring[b].dot(east)
+                lastY = ring[b].dot(north)
+                from = atan2(edgeY, edgeX)
+                turned = turn(edgeX, edgeY, lastX, lastY)
+                hidden = true
             }
         }
         path.closeSubpath()
     }
+
+    /** The angle from one point seen from behind the globe to another, around the point straight behind it. */
+    private fun turn(ax: Double, ay: Double, bx: Double, by: Double): Double = atan2(ax * by - ay * bx, ax * bx + ay * by)
 
     /**
      * The visible part of a cap `radius` radians around `center`, for an even-odd fill. Its circle
@@ -634,44 +664,58 @@ object MapGeometry {
 
     /** Seen from the point behind the globe (a stereographic view), whether the ring winds around it. */
     private fun surroundsBack(ring: List<Vector3>, projection: GlobeProjection): Boolean {
-        val points = ring.mapNotNull { vector ->
-            val distance = 1 - projection.facing(vector)
-            if (!(distance > 1e-9)) null else Vector2(vector.dot(projection.east), vector.dot(projection.north)) / distance
+        val east = projection.east
+        val north = projection.north
+        // The point straight behind is not seen from itself.
+        var last = ring.size - 1
+        while (last >= 0 && !(1 - projection.facing(ring[last]) > 1e-9)) last--
+        if (last < 0) return false
+        var distance = 1 - projection.facing(ring[last])
+        var previousX = ring[last].dot(east) / distance
+        var previousY = ring[last].dot(north) / distance
+        var turned = 0.0
+        for (index in ring.indices) {
+            val vector = ring[index]
+            distance = 1 - projection.facing(vector)
+            if (!(distance > 1e-9)) continue
+            val x = vector.dot(east) / distance
+            val y = vector.dot(north) / distance
+            turned += turn(previousX, previousY, x, y)
+            previousX = x
+            previousY = y
         }
-        val last = points.lastOrNull() ?: return false
-        var turn = 0.0
-        var previous = last
-        for (point in points) {
-            turn += atan2(previous.x * point.y - previous.y * point.x, previous.dot(point))
-            previous = point
-        }
-        return abs(turn) > PI
+        return abs(turned) > PI
     }
 
     /** An open line, cut where it passes behind the globe. */
     fun addLine(path: MapPath, line: List<Vector3>, projection: GlobeProjection) {
-        var previous: Pair<Vector3, Double>? = null
+        var previous: Vector3? = null
+        var previousFacing = 0.0
         var drawing = false
-        for (vector in line) {
+        for (index in line.indices) {
+            val vector = line[index]
             val facing = projection.facing(vector)
             val before = previous
             if (facing >= 0) {
                 if (drawing) {
-                    path.addLine(projection.screen(vector))
+                    path.addLine(projection.screenX(vector), projection.screenY(vector))
                 } else {
-                    if (before != null && before.second < 0) {
-                        path.move(projection.screen(horizon(before.first, before.second, vector, facing)))
-                        path.addLine(projection.screen(vector))
+                    if (before != null && previousFacing < 0) {
+                        val edge = horizon(before, previousFacing, vector, facing)
+                        path.move(projection.screenX(edge), projection.screenY(edge))
+                        path.addLine(projection.screenX(vector), projection.screenY(vector))
                     } else {
-                        path.move(projection.screen(vector))
+                        path.move(projection.screenX(vector), projection.screenY(vector))
                     }
                     drawing = true
                 }
             } else if (drawing && before != null) {
-                path.addLine(projection.screen(horizon(before.first, before.second, vector, facing)))
+                val edge = horizon(before, previousFacing, vector, facing)
+                path.addLine(projection.screenX(edge), projection.screenY(edge))
                 drawing = false
             }
-            previous = vector to facing
+            previous = vector
+            previousFacing = facing
         }
     }
 
@@ -693,9 +737,18 @@ object MapGeometry {
         val aim = from?.let { it - center * it.dot(center) }
         val u = aim?.let { if (it.length > 1e-9) it.normalized() else null } ?: center.cross(helper).normalized()
         val w = center.cross(u)
-        return (0 until steps).map { step ->
+        // center * cos(radius) + (u * cos(theta) + w * sin(theta)) * sin(radius), with one vector per point.
+        val near = cos(radius)
+        val out = sin(radius)
+        return List(steps) { step ->
             val theta = step.toDouble() / steps.toDouble() * 2 * PI
-            center * cos(radius) + (u * cos(theta) + w * sin(theta)) * sin(radius)
+            val c = cos(theta)
+            val s = sin(theta)
+            Vector3(
+                center.x * near + (u.x * c + w.x * s) * out,
+                center.y * near + (u.y * c + w.y * s) * out,
+                center.z * near + (u.z * c + w.z * s) * out,
+            )
         }
     }
 

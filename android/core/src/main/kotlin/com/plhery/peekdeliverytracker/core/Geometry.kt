@@ -213,66 +213,112 @@ class Vector3(val x: Double, val y: Double, val z: Double) {
     }
 }
 
-/** SIMD2<Double>. */
-class Vector2(val x: Double, val y: Double) {
-    operator fun div(scalar: Double): Vector2 = Vector2(x / scalar, y / scalar)
-
-    /** simd_dot. */
-    fun dot(other: Vector2): Double = x * other.x + y * other.y
-
-    override fun equals(other: Any?): Boolean = other is Vector2 && x == other.x && y == other.y
-    override fun hashCode(): Int = x.hashKey() * 31 + y.hashKey()
-}
-
 /**
  * SwiftUI's Path, built the way the map builds one: moves, lines, quadratic curves, arcs of a circle and ellipses. It
- * is a builder, filled in place as Swift fills an `inout Path`; :app draws its elements. Arcs and ellipses are kept
- * whole rather than as CoreGraphics' Bézier pieces, so each platform draws them its own way.
+ * is a builder, filled in place as Swift fills an `inout Path`; :app draws it by replaying it into its own path. Arcs
+ * and ellipses are kept whole rather than as CoreGraphics' Bézier pieces, so each platform draws them its own way.
+ * The map rebuilds its paths each frame, so they hold plain numbers rather than an object per point.
  */
 class MapPath {
-    sealed interface Element {
-        data class Move(val to: Point) : Element
-        data class Line(val to: Point) : Element
-        data class QuadCurve(val to: Point, val control: Point) : Element
+    /** What a path is made of, in order: `replay` gives each piece to the platform's path. */
+    interface Sink {
+        fun move(x: Double, y: Double)
+        fun line(x: Double, y: Double)
+        fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double)
 
         /**
          * `addRelativeArc(center:radius:startAngle:delta:)`: a line from the current point to the arc's start, then
          * the arc, `delta` radians from `startAngle`, positive toward screen y.
          */
-        data class Arc(val center: Point, val radius: Double, val startAngle: Double, val delta: Double) : Element
+        fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double)
 
         /** `Path(ellipseIn:)`: a closed subpath of its own, starting at the rectangle's right middle. */
-        data class Ellipse(val rect: Rect) : Element
-        data object Close : Element
+        fun ellipse(x: Double, y: Double, width: Double, height: Double)
+        fun close()
     }
 
-    private val list = mutableListOf<Element>()
-    val elements: List<Element> get() = list
+    /** One verb per piece, and the numbers each takes, in order. */
+    private var verbs = ByteArray(16)
+    private var verbCount = 0
+    private var numbers = DoubleArray(32)
+    private var numberCount = 0
 
-    val isEmpty: Boolean get() = list.isEmpty()
+    val isEmpty: Boolean get() = verbCount == 0
 
-    fun move(to: Point) {
-        list.add(Element.Move(to))
+    /** Empties the path but keeps its room, so one path can be filled again each frame. */
+    fun rewind() {
+        verbCount = 0
+        numberCount = 0
     }
 
-    fun addLine(to: Point) {
-        list.add(Element.Line(to))
+    private fun add(verb: Byte, count: Int) {
+        if (verbCount == verbs.size) verbs = verbs.copyOf(verbs.size * 2)
+        verbs[verbCount++] = verb
+        if (numberCount + count > numbers.size) numbers = numbers.copyOf(max(numbers.size * 2, numberCount + count))
     }
 
-    fun addQuadCurve(to: Point, control: Point) {
-        list.add(Element.QuadCurve(to, control))
+    fun move(x: Double, y: Double) {
+        add(MOVE, 2)
+        numbers[numberCount++] = x
+        numbers[numberCount++] = y
     }
+
+    fun move(to: Point) = move(to.x, to.y)
+
+    fun addLine(x: Double, y: Double) {
+        add(LINE, 2)
+        numbers[numberCount++] = x
+        numbers[numberCount++] = y
+    }
+
+    fun addLine(to: Point) = addLine(to.x, to.y)
+
+    fun addQuadCurve(x: Double, y: Double, controlX: Double, controlY: Double) {
+        add(QUAD, 4)
+        numbers[numberCount++] = x
+        numbers[numberCount++] = y
+        numbers[numberCount++] = controlX
+        numbers[numberCount++] = controlY
+    }
+
+    fun addQuadCurve(to: Point, control: Point) = addQuadCurve(to.x, to.y, control.x, control.y)
 
     fun addRelativeArc(center: Point, radius: Double, startAngle: Double, delta: Double) {
-        list.add(Element.Arc(center, radius, startAngle, delta))
+        add(ARC, 5)
+        numbers[numberCount++] = center.x
+        numbers[numberCount++] = center.y
+        numbers[numberCount++] = radius
+        numbers[numberCount++] = startAngle
+        numbers[numberCount++] = delta
     }
 
-    fun closeSubpath() {
-        list.add(Element.Close)
-    }
+    fun closeSubpath() = add(CLOSE, 0)
 
     fun addPath(path: MapPath) {
-        list.addAll(path.list)
+        if (verbCount + path.verbCount > verbs.size) verbs = verbs.copyOf(max(verbs.size * 2, verbCount + path.verbCount))
+        path.verbs.copyInto(verbs, verbCount, 0, path.verbCount)
+        verbCount += path.verbCount
+        if (numberCount + path.numberCount > numbers.size) {
+            numbers = numbers.copyOf(max(numbers.size * 2, numberCount + path.numberCount))
+        }
+        path.numbers.copyInto(numbers, numberCount, 0, path.numberCount)
+        numberCount += path.numberCount
+    }
+
+    fun replay(sink: Sink) {
+        var at = 0
+        val n = numbers
+        for (index in 0 until verbCount) {
+            when (verbs[index]) {
+                MOVE -> sink.move(n[at], n[at + 1])
+                LINE -> sink.line(n[at], n[at + 1])
+                QUAD -> sink.quadCurve(n[at], n[at + 1], n[at + 2], n[at + 3])
+                ARC -> sink.relativeArc(n[at], n[at + 1], n[at + 2], n[at + 3], n[at + 4])
+                ELLIPSE -> sink.ellipse(n[at], n[at + 1], n[at + 2], n[at + 3])
+                else -> sink.close()
+            }
+            at += COUNTS[verbs[index].toInt()]
+        }
     }
 
     /** Where the next element would start; nil for an empty path. */
@@ -280,19 +326,33 @@ class MapPath {
         get() {
             var start: Point? = null
             var current: Point? = null
-            for (element in list) {
-                when (element) {
-                    is Element.Move -> { start = element.to; current = element.to }
-                    is Element.Line -> current = element.to
-                    is Element.QuadCurve -> current = element.to
-                    is Element.Arc -> current = arcPoint(element, element.startAngle + element.delta)
-                    is Element.Ellipse -> {
-                        start = Point(element.rect.maxX, element.rect.midY)
-                        current = start
-                    }
-                    Element.Close -> current = start
+            replay(object : Sink {
+                override fun move(x: Double, y: Double) {
+                    start = Point(x, y)
+                    current = start
                 }
-            }
+
+                override fun line(x: Double, y: Double) {
+                    current = Point(x, y)
+                }
+
+                override fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double) {
+                    current = Point(x, y)
+                }
+
+                override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) {
+                    current = arcPoint(centerX, centerY, radius, startAngle + delta)
+                }
+
+                override fun ellipse(x: Double, y: Double, width: Double, height: Double) {
+                    start = Point(x + width, y + height / 2)
+                    current = start
+                }
+
+                override fun close() {
+                    current = start
+                }
+            })
             return current
         }
 
@@ -347,57 +407,76 @@ class MapPath {
             start = point
             return mutableListOf(point).also { run = it; runs.add(it) }
         }
-        for (element in list) {
-            when (element) {
-                is Element.Move -> begin(element.to)
-                is Element.Line -> (run ?: begin(element.to)).add(element.to)
-                is Element.QuadCurve -> {
-                    val points = run ?: continue
-                    val from = points.last()
-                    val steps = 32
-                    for (step in 1..steps) {
-                        val t = step.toDouble() / steps
-                        val u = 1 - t
-                        points.add(
-                            Point(
-                                u * u * from.x + 2 * u * t * element.control.x + t * t * element.to.x,
-                                u * u * from.y + 2 * u * t * element.control.y + t * t * element.to.y,
-                            ),
-                        )
-                    }
-                }
-                is Element.Arc -> {
-                    val first = arcPoint(element, element.startAngle)
-                    val points = run?.also { it.add(first) } ?: begin(first)
-                    val steps = max(1, ceil(abs(element.delta) / (PI / 180)).toInt())
-                    for (step in 1..steps) points.add(arcPoint(element, element.startAngle + element.delta * step / steps))
-                }
-                is Element.Ellipse -> {
-                    val rect = element.rect
-                    val points = begin(Point(rect.maxX, rect.midY))
-                    val steps = 180
-                    for (step in 1..steps) {
-                        val angle = 2 * PI * step / steps
-                        points.add(Point(rect.midX + rect.width / 2 * cos(angle), rect.midY + rect.height / 2 * sin(angle)))
-                    }
-                    begin(points.first())
-                }
-                // Closing draws back to the subpath's start, where whatever follows starts.
-                Element.Close -> {
-                    val back = start ?: continue
-                    run?.add(back)
-                    begin(back)
+        replay(object : Sink {
+            override fun move(x: Double, y: Double) {
+                begin(Point(x, y))
+            }
+
+            override fun line(x: Double, y: Double) {
+                val to = Point(x, y)
+                (run ?: begin(to)).add(to)
+            }
+
+            override fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double) {
+                val points = run ?: return
+                val from = points.last()
+                val steps = 32
+                for (step in 1..steps) {
+                    val t = step.toDouble() / steps
+                    val u = 1 - t
+                    points.add(Point(u * u * from.x + 2 * u * t * controlX + t * t * x, u * u * from.y + 2 * u * t * controlY + t * t * y))
                 }
             }
-        }
+
+            override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) {
+                val first = arcPoint(centerX, centerY, radius, startAngle)
+                val points = run?.also { it.add(first) } ?: begin(first)
+                val steps = max(1, ceil(abs(delta) / (PI / 180)).toInt())
+                for (step in 1..steps) points.add(arcPoint(centerX, centerY, radius, startAngle + delta * step / steps))
+            }
+
+            override fun ellipse(x: Double, y: Double, width: Double, height: Double) {
+                val rect = Rect(x, y, width, height)
+                val points = begin(Point(rect.maxX, rect.midY))
+                val steps = 180
+                for (step in 1..steps) {
+                    val angle = 2 * PI * step / steps
+                    points.add(Point(rect.midX + rect.width / 2 * cos(angle), rect.midY + rect.height / 2 * sin(angle)))
+                }
+                begin(points.first())
+            }
+
+            // Closing draws back to the subpath's start, where whatever follows starts.
+            override fun close() {
+                val back = start ?: return
+                run?.add(back)
+                begin(back)
+            }
+        })
         return runs
     }
 
-    private fun arcPoint(arc: Element.Arc, angle: Double): Point =
-        Point(arc.center.x + arc.radius * cos(angle), arc.center.y + arc.radius * sin(angle))
+    private fun arcPoint(centerX: Double, centerY: Double, radius: Double, angle: Double): Point =
+        Point(centerX + radius * cos(angle), centerY + radius * sin(angle))
 
     companion object {
-        fun ellipse(rect: Rect): MapPath = MapPath().also { it.list.add(Element.Ellipse(rect)) }
+        private const val MOVE: Byte = 0
+        private const val LINE: Byte = 1
+        private const val QUAD: Byte = 2
+        private const val ARC: Byte = 3
+        private const val ELLIPSE: Byte = 4
+        private const val CLOSE: Byte = 5
+
+        /** How many numbers each verb takes. */
+        private val COUNTS = intArrayOf(2, 2, 4, 5, 4, 0)
+
+        fun ellipse(rect: Rect): MapPath = MapPath().also {
+            it.add(ELLIPSE, 4)
+            it.numbers[it.numberCount++] = rect.minX
+            it.numbers[it.numberCount++] = rect.minY
+            it.numbers[it.numberCount++] = rect.width
+            it.numbers[it.numberCount++] = rect.height
+        }
     }
 }
 

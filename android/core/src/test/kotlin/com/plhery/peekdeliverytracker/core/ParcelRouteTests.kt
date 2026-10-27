@@ -314,6 +314,44 @@ class ParcelRouteTests {
         }
     }
 
+    // Not an iPhone test: a MapPath gives its pieces back in order for :app's path, and empties to be filled again.
+    @Test
+    fun aMapPathReplaysWhatItWasGiven() {
+        fun replayed(path: MapPath): List<String> {
+            val pieces = mutableListOf<String>()
+            path.replay(object : MapPath.Sink {
+                override fun move(x: Double, y: Double) { pieces.add("M $x $y") }
+                override fun line(x: Double, y: Double) { pieces.add("L $x $y") }
+                override fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double) { pieces.add("Q $x $y $controlX $controlY") }
+                override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) {
+                    pieces.add("A $centerX $centerY $radius $startAngle $delta")
+                }
+                override fun ellipse(x: Double, y: Double, width: Double, height: Double) { pieces.add("E $x $y $width $height") }
+                override fun close() { pieces.add("Z") }
+            })
+            return pieces
+        }
+        val path = MapPath()
+        repeat(20) { path.addLine(Point(it.toDouble(), 1.0)) }
+        path.closeSubpath()
+        path.move(Point(2.0, 3.0))
+        path.addQuadCurve(Point(4.0, 5.0), control = Point(6.0, 7.0))
+        path.addRelativeArc(Point(8.0, 9.0), radius = 10.0, startAngle = 0.5, delta = -1.5)
+        // A rectangle given from its far corner is drawn from its near one, as CGRect stands it.
+        path.addPath(MapPath.ellipse(Rect(30.0, 40.0, -20.0, -10.0)))
+        assertEquals(
+            (0 until 20).map { "L $it.0 1.0" } +
+                listOf("Z", "M 2.0 3.0", "Q 4.0 5.0 6.0 7.0", "A 8.0 9.0 10.0 0.5 -1.5", "E 10.0 30.0 20.0 10.0"),
+            replayed(path),
+        )
+        assertEquals(Point(30.0, 35.0), path.currentPoint)
+        path.rewind()
+        assertTrue(path.isEmpty)
+        assertNull(path.currentPoint)
+        path.move(Point(1.0, 2.0))
+        assertEquals(listOf("M 1.0 2.0"), replayed(path))
+    }
+
     /**
      * The pixels wait for :app's MapPainter. What it fills is checked here: drawBase shades the night in twenty rings
      * around the sun's antipode, 1.2° wide from 92° in, ring `b` at an opacity of (b + 1) / 20 of the night colour.

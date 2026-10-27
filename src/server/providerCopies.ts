@@ -7,7 +7,10 @@
  * cannot tell apart stay stored. Once a direct carrier is confirmed for the
  * parcel, its timeline leaves out such a copy: a row only a universal provider
  * wrote, at the minute of one of the carrier's scans, in that scan's stage
- * within 15 minutes or a whole number of hours up to 14 h away, or in any stage
+ * within 15 minutes or a whole number of hours up to 14 h away, or within an
+ * hour in the scan's words, alone or followed by the copy's place (ParcelsApp
+ * dates a USPS departure at the time USPS first gave it, before USPS moved the
+ * departure on), or in any stage
  * and words whole hours away to the second when that second is not a minute's
  * first (ParcelsApp reads ECMS's Japanese scans an hour off). A copy only
  * whole hours from the carrier's scans shows the provider read them a zone
@@ -138,9 +141,15 @@ function stagesAgree(copy: JsonObject, scan: JsonObject): boolean {
   return copy.stage === scan.stage || ['', 'pending'].includes(String(copy.stage ?? ''));
 }
 
+/** Whether `copy` tells `scan` in its words, alone or followed by the copy's place. */
+function inScanWords(copy: JsonObject, scan: JsonObject): boolean {
+  const words = wording(scan);
+  return words !== '' && [words, `${words}, ${place(copy)}`].includes(wording(copy));
+}
+
 /**
- * Whether `copy` repeats the carrier's `scan`: at its minute, or in its stage close to it or whole
- * hours from it, or whole hours from it to the second when that second is not a minute's first (a
+ * Whether `copy` repeats the carrier's `scan`: at its minute, or in its stage close to it, within an
+ * hour in its words or whole hours from it, or whole hours from it to the second when that second is not a minute's first (a
  * provider reads the carrier's seconds on another clock, in its own words and stage). A scan dated
  * by its day is repeated at its wall clock in some zone: in its stage and words, or at that second
  * when it is not a minute's first, or at the wall clock itself, read as UTC, to the second, in its stage.
@@ -158,8 +167,9 @@ function copies(copy: JsonObject, scan: JsonObject): boolean {
   const minutes = Math.abs(Math.floor(instant(copy) / MINUTE_MS) - Math.floor(instant(scan) / MINUTE_MS)) * MINUTE_MS;
   if (minutes === 0) return true;
   if (second(instant(scan)) % MINUTE_MS !== 0 && wholeHours(second(instant(copy)) - second(instant(scan)))) return true;
+  const apart = Math.abs(instant(copy) - instant(scan));
   return copy.stage === scan.stage
-    && (Math.abs(instant(copy) - instant(scan)) <= NEAR_MS || (minutes % HOUR_MS === 0 && minutes <= MAX_SHIFT_MS));
+    && (apart <= NEAR_MS || (apart <= HOUR_MS && inScanWords(copy, scan)) || (minutes % HOUR_MS === 0 && minutes <= MAX_SHIFT_MS));
 }
 
 /** The minutes from `scan` to `row`, each read to the minute, in milliseconds. */

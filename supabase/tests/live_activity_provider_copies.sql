@@ -269,5 +269,35 @@ do $$ begin
     raise exception 'A provider row with no place at another shift was hidden';
   end if;
 end; $$;
+-- A provider's row within an hour of a carrier scan, in its stage and words, alone or followed by the row's place,
+-- is a copy; one in other words, another stage or over an hour away stays.
+insert into public.packages(id, user_id, tracking_number, label, carrier, current_stage, carrier_data)
+values ('97000000-0000-0000-0000-000000000061', '97000000-0000-0000-0000-000000000001', 'COPYTEST6', 'Words',
+  'posti', 'in_transit', '{"routing": {"confirmed_carrier": "posti"}}');
+insert into public.tracking_events(id, package_id, stage, description, location, provider_event_id, occurred_at, created_at, raw_data)
+values
+ ('97000000-0000-0000-0000-000000000062', '97000000-0000-0000-0000-000000000061', 'in_transit', 'Departed  facility',
+  'NORTH HUB', 'posti:departed', '2026-10-23T06:07:00Z', '2026-10-23T06:00:00Z', '{}'),
+ ('97000000-0000-0000-0000-000000000063', '97000000-0000-0000-0000-000000000061', 'in_transit', 'Departed Facility, North Hub',
+  'North Hub', 'unknown:first-time', '2026-10-23T05:39:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000064', '97000000-0000-0000-0000-000000000061', 'in_transit', 'departed facility',
+  null, 'unknown:later', '2026-10-23T07:00:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000065', '97000000-0000-0000-0000-000000000061', 'in_transit', 'Departed facility early',
+  null, 'unknown:other-words', '2026-10-23T05:40:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000066', '97000000-0000-0000-0000-000000000061', 'customs', 'Departed facility',
+  'NORTH HUB', 'unknown:other-stage', '2026-10-23T05:41:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000067', '97000000-0000-0000-0000-000000000061', 'in_transit', 'Departed facility',
+  'NORTH HUB', 'unknown:too-early', '2026-10-23T04:59:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}');
+do $$ begin
+  if not public.hidden_provider_copy('97000000-0000-0000-0000-000000000063')
+    or not public.hidden_provider_copy('97000000-0000-0000-0000-000000000064') then
+    raise exception 'A copy within an hour in the carrier scan''s words was not hidden';
+  end if;
+  if public.hidden_provider_copy('97000000-0000-0000-0000-000000000065')
+    or public.hidden_provider_copy('97000000-0000-0000-0000-000000000066')
+    or public.hidden_provider_copy('97000000-0000-0000-0000-000000000067') then
+    raise exception 'A provider row in other words, another stage or over an hour away was hidden';
+  end if;
+end; $$;
 reset role;
 rollback;

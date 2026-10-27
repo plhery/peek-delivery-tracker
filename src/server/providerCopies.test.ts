@@ -27,6 +27,25 @@ describe('providerCopies', () => {
     expect([...providerCopies(row)].sort()).toEqual(['u1', 'u2', 'u3']);
   });
 
+  it('leaves out a provider\'s copy within an hour in the scan\'s words, alone or followed by its place, and only that', () => {
+    const departed = { description: 'Departed  facility', location: 'NORTH HUB' };
+    const row = {
+      carrier_data: confirmed,
+      tracking_events: [
+        scan('c1', 'posti', '2026-10-23T06:07:00Z', departed),
+        // The time the carrier first gave the departure, with the place after its words.
+        scan('u1', 'unknown', '2026-10-23T05:39:00Z', { ...named, description: 'Departed Facility, North Hub', location: 'North Hub' }),
+        // Later in the hour, in its words.
+        scan('u2', 'unknown', '2026-10-23T07:00:00Z', { ...named, description: 'departed facility' }),
+        // Other words, another stage, or over an hour away.
+        scan('u3', 'unknown', '2026-10-23T05:40:00Z', { ...named, description: 'Departed facility early' }),
+        scan('u4', 'unknown', '2026-10-23T05:41:00Z', { ...named, ...departed, stage: 'customs' }),
+        scan('u5', 'unknown', '2026-10-23T04:59:00Z', { ...named, ...departed }),
+      ],
+    };
+    expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c1'])], ['u2', new Set(['c1'])]]));
+  });
+
   it('keeps a provider\'s own step, the carrier\'s rows and every row without a confirmed carrier', () => {
     const events = [
       scan('c1', 'posti', '2026-10-01T11:09:18Z'),

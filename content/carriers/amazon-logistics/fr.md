@@ -1,18 +1,18 @@
 ---
 title: Amazon Logistics suivi : où suivre ton colis et que faire
-description: Suivre un colis Amazon Logistics dans Vos commandes : le numéro TBA ou FR, les statuts d'Amazon, les horaires, l'absence, les points de retrait et qui contacter.
+description: Suivre un colis Amazon Logistics dans Vos commandes : le numéro TBA ou FR, qui livre en France et en Belgique, les Amazon Locker et comment joindre Amazon.
 slug: amazon-logistics-suivi
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
-Amazon Logistics est le réseau de livraison d'Amazon : des partenaires de transport locaux et régionaux qui apportent les commandes Amazon chez toi. Il n'a pas de page de suivi publique. Ton colis se suit dans « Vos commandes » sur le site Amazon où tu as commandé (amazon.fr, amazon.com.be…), avec le bouton « Suivre le colis », qui affiche aussi le nom du transporteur et le numéro de suivi.
+Amazon Logistics est le réseau de livraison d'Amazon. En France, ce sont des entreprises de livraison indépendantes qui travaillent avec les agences de livraison de proximité d'Amazon ; Amazon confie aussi des colis au groupe [La Poste](carrier:la-poste) et à d'autres transporteurs, qui livrent avec leur propre réseau. En Belgique, Amazon Logistics travaille avec des entreprises de livraison locales, notamment depuis l'agence de livraison d'Amazon à Anvers, et Amazon continue de livrer avec [bpost](carrier:bpost), son partenaire de longue date.
+
+Amazon Logistics n'a pas de page de suivi publique : ton colis se suit dans Vos commandes, sur le site Amazon où tu as commandé (amazon.fr, amazon.com.be…).
 
 ## Numéro de suivi Amazon Logistics : TBA, FR et les autres
 
-Ouvre Vos commandes, retrouve la commande, clique sur « Suivre le colis », puis consulte toutes les mises à jour : Amazon y donne les numéros de suivi et l'avancement de la livraison. Le transporteur peut changer d'un colis à l'autre, et les articles d'une même commande peuvent avoir chacun leur date et leur suivi. Certains colis, comme les livraisons internationales standard, peuvent ne pas être traçables.
-
-Amazon ne publie pas le format de ses numéros. Voici les formes que Peek reconnaît comme Amazon Logistics, avec des chiffres inventés :
+Voici les formes que Peek reconnaît comme Amazon Logistics, avec des chiffres inventés :
 
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
@@ -22,74 +22,46 @@ Amazon ne publie pas le format de ses numéros. Voici les formes que Peek reconn
 | `TBA000000000000` | TBA et 12 chiffres. |
 | `TBC000000000000` | TBC ou TBM et 12 chiffres. |
 
-Les deux lettres ne disent pas où se trouve le colis. Majuscules, minuscules, espaces et tirets sont acceptés.
+Majuscules, minuscules, espaces et tirets sont acceptés.
 
-Deux pièges. Un numéro de commande comme `000-0000000-0000000` n'est pas un numéro de suivi. Et deux autres lettres suivies de 10 chiffres, comme `US0000000000`, ne sont pas une forme Amazon Logistics : regarde quel transporteur « Suivre le colis » indique. Pas de numéro du tout ? Lis [où trouver son numéro de suivi](guide:find-tracking-number).
+Deux pièges. Un numéro de commande comme `000-0000000-0000000` n'est pas un numéro de suivi. Et deux autres lettres suivies de 10 chiffres, comme `US0000000000`, ne sont pas une forme Amazon Logistics pour Peek. Pas de numéro du tout ? Lis [où trouver son numéro de suivi](guide:find-tracking-number).
 
-## Suivi Amazon Logistics : ce que veulent dire les statuts
+## Livraison Amazon Logistics : jour de livraison et points de retrait
 
-Amazon.fr affiche ces quatre statuts dans Vos commandes :
+Les options ci-dessous sont celles d'amazon.fr.
 
-| Statut d'Amazon | Ce que ça veut dire pour toi |
-| --- | --- |
-| `Arrivée` | Le colis est en route. Le statut est généralement suivi d'une date. |
-| `En cours de livraison` | Il doit être livré aujourd'hui. |
-| `Livré` | Il a été livré et se trouve peut-être dans ton espace sécurisé. |
-| `Non livrable` | Il n'a pas pu être livré et repart chez Amazon. Tu es remboursé automatiquement quand Amazon le reçoit. |
+**Choisir son jour.** Si tu es membre Prime, l'option « Mon Jour Amazon » te permet de choisir le jour de la semaine où tu reçois tes articles éligibles.
 
-Pas de mise à jour le jour prévu ? Amazon dit que c'est normal : selon le transporteur, les articles peuvent être expédiés le jour même de leur livraison. Et `Livré` peut arriver trop tôt : Amazon prévient que des colis sont parfois scannés comme livrés jusqu'à 48 heures avant la livraison effective. Rien devant ta porte ? Voir plus bas.
+**Amazon Locker.** Choisis une consigne Amazon Locker au moment de commander, ou ajoute-la à ton carnet d'adresses dans Vos adresses. Quand le colis est arrivé, Amazon t'envoie un e-mail de confirmation de livraison avec les instructions. Dans la plupart des Lockers, le code à six chiffres de cet e-mail suffit ; certains demandent de scanner un code-barres ou d'utiliser l'application Amazon, alors garde ton téléphone sur toi. Pour qu'une autre personne retire le colis, transfère-lui l'e-mail. Tu as trois jours calendaires : passé la date indiquée dans l'e-mail, Amazon renvoie automatiquement le colis et te rembourse.
 
-## Livraison Amazon Logistics : horaires, absence et points de retrait
+**Amazon Counter.** C'est un commerce partenaire que tu choisis comme adresse de livraison. À l'arrivée du colis, tu reçois un e-mail avec un code-barres unique, que le personnel scanne pour te remettre le colis.
 
-En France et en Belgique, Amazon Logistics livre 7 jours sur 7, entre 6 h et 21 h, heure locale. Le livreur ne frappe, ne sonne et ne te contacte qu'entre 8 h et 20 h, sauf si ta livraison est prévue dans un créneau précis. Il dépose le colis dans ta boîte aux lettres si possible, sinon dans un endroit sécurisé ou dans l'emplacement sûr de ton choix. Il prend une photo de l'endroit où il l'a laissé : elle t'est envoyée par e-mail et apparaît dans le suivi de ta commande.
-
-Quand quelqu'un doit être là, par exemple pour un mot de passe à usage unique ou une vérification d'âge, le livreur peut t'appeler ou t'envoyer un SMS depuis un numéro fixe : +33 1 87 21 77 77 en France, +32 2 700 63 42 en Belgique. Il peut aussi t'écrire par le chat de l'application Amazon pour te demander des précisions sur l'adresse.
-
-**Absent à la livraison.** Amazon t'envoie un e-mail. Choisis une nouvelle date avec « Suivre votre colis » dans Vos commandes, ou clique sur « Demander une replanification » si ta commande y a droit. Amazon fait au moins cinq tentatives, à des dates consécutives. Si la cinquième échoue, le colis repart chez Amazon et tu es remboursé.
-
-**Instructions.** Indique un code d'accès, ton interphone ou ton endroit sécurisé au moment de commander, dans Votre compte > Vos adresses > « Ajouter des instructions de livraison », ou avec « Fournir des instructions de livraison » sur la page de suivi. Dans Vos adresses, tu peux aussi dire que ton adresse est fermée aux livraisons le samedi et le dimanche.
-
-**Points de retrait.** Ouvre un Amazon Locker avec le code de retrait à 6 chiffres ou le code-barres de l'e-mail de livraison ou de « Suivre le colis ». Un Locker sans écran demande l'application Amazon Shopping avec le Bluetooth et la localisation activés. Pour qu'une autre personne retire le colis, transfère-lui l'e-mail. Un Amazon Counter utilise un code de retrait donné aux mêmes endroits. Sur amazon.fr, le colis t'attend 3 jours dans un Locker, 7 jours dans un Counter ou un point [Chronopost](carrier:chronopost), 8 jours dans un point [Mondial Relay](carrier:mondial-relay) et 14 jours à La Poste. Sur amazon.com.be, 14 jours dans un point bpost et 4 jours dans un distributeur de colis bpost. Un colis non retiré repart chez Amazon.
+**Points relais.** Amazon livre aussi dans les points de retrait de ses partenaires, comme [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis) ou La Poste.
 
 ## Colis Amazon Logistics en retard ou pas reçu
 
-**En retard.** La météo ou la circulation peuvent retarder une livraison. La plupart des colis en retard arrivent dans les 48 heures suivant la date estimée, et une commande déjà expédiée ne peut plus être annulée. Suivi bloqué depuis des jours ? Lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
+Pour un colis en retard ou marqué livré mais introuvable, contacte le service client Amazon (voir plus bas). Si l'article est vendu et expédié par un vendeur Marketplace, contacte d'abord le vendeur. Si le problème n'est pas réglé avec lui, la Garantie A à Z te permet de demander un remboursement à Amazon quand la livraison ou l'état de l'article ne te convient pas.
 
-**Livré mais pas reçu.** Amazon conseille de vérifier, dans l'ordre : l'adresse dans Vos commandes, un avis de passage dans le Centre de messagerie, ta boîte aux lettres, la photo de livraison, l'endroit prévu dans tes instructions, puis ton foyer, le concierge et tes voisins. Attends ensuite 48 heures. Toujours rien ? Pour une commande expédiée par Amazon, contacte le service client dans les 30 jours suivant la date de livraison prévue ; pour une commande vendue et expédiée par un vendeur tiers, contacte le vendeur. La marche à suivre complète est dans [colis livré mais non reçu](guide:delivered-not-received).
-
-**Perdu pendant le transport.** Amazon peut envoyer automatiquement un produit de remplacement et te prévient par e-mail. Tu peux refuser ce remplacement ou le retourner pour être remboursé ; si l'original et le remplacement arrivent tous les deux, tu retournes le colis en trop gratuitement.
-
-**Non livrable.** Une adresse erronée ou incomplète, des tentatives échouées, un refus, une étiquette illisible, un colis endommagé ou un chien qui met le livreur en danger peuvent renvoyer un colis chez Amazon. Pour les articles vendus et expédiés par Amazon, le remboursement arrive en général dans les 7 jours ouvrables. Amazon ne renvoie pas la commande : il faut en passer une nouvelle.
-
-**Vendeur Marketplace.** Contacte d'abord le vendeur. Si sa solution ne te convient pas ou s'il ne répond pas dans les 48 heures, passe par la Garantie A à Z. Qui expédie quelle commande, et les délais : [suivre une commande Amazon](guide:amazon-orders).
-
-**Colis d'une autre boutique.** Si Amazon a transporté le colis pour un autre commerçant ([Amazon Shipping](carrier:amazon-shipping), suivi sur track.amazon.fr), l'aide d'Amazon Shipping dit qu'elle ne peut t'aider que pour ces colis-là et te renvoie vers l'expéditeur pour un colis perdu ou endommagé.
+Les étapes pas à pas sont dans [colis livré mais non reçu](guide:delivered-not-received) et [suivi de colis qui ne bouge plus](guide:tracking-not-updating). Qui expédie quelle commande : [suivre une commande Amazon](guide:amazon-orders).
 
 ## Amazon Logistics contact : passer par le service client Amazon
 
-Amazon Logistics n'a pas de ligne client propre : le service client Amazon gère toutes les demandes sur les colis livrés par un partenaire de livraison. Sur sa page des coordonnées des transporteurs, amazon.fr écrit pour Amazon : « Suivez votre colis dans Votre compte. Contactez le Service client Amazon. » Lu le 11 octobre 2026 :
+Pour une question de livraison, Amazon renvoie vers son service client. Voici ce qu'en dit About Amazon, lu le 27 octobre 2026 :
 
-- **Le service client Amazon** se joint depuis la [page Service client d'amazon.fr](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GSD587LKW72HKU2V), une fois connecté : téléphone, chat, e-mail et aide en ligne, 24 h/24, 7 j/7. Ces pages n'affichent pas de numéro de téléphone public. En Belgique, passe par le service client d'amazon.com.be, où tu as commandé.
-- **Les numéros des livreurs** ci-dessus servent seulement aux appels et SMS des livreurs.
-- **Un accident de la route** avec un livreur : mets-toi en sécurité, appelle le 112 si besoin, puis contacte Amazon et demande à parler à un agent par téléphone.
+- **La page Service client** d'amazon.fr regroupe l'aide, le suivi des colis et les retours. Pour ouvrir le chat, clique sur « Autres sujets et anglais », sous la liste de tes articles commandés, puis sur « Nous contacter ». Dans l'application, ouvre « Autres sujets et anglais », puis « J'ai toujours besoin d'aide ».
+- **L'assistant virtuel** répond 24 h/24, 7 j/7 et peut passer la conversation à un conseiller.
+- **Les conseillers** répondent par chat ou par téléphone de 6 h à minuit, 7 j/7. Pour être appelé, choisis « Demander à être rappelé » dans le chat.
+- **En Belgique**, amazon.com.be a son propre service client, en français, en néerlandais ou en anglais.
 
-> Amazon prévient : un SMS venu d'un numéro inconnu ou d'un indicatif étranger, sur une commande ou une livraison que tu n'attends pas, ou avec un lien mal orthographié ou fait d'une adresse IP, ne vient pas d'Amazon. Amazon ne demande jamais par SMS tes données personnelles ou bancaires, des codes de cartes cadeaux, ni d'appeler un numéro. Signale-le avec « Signaler une arnaque ».
+> Amazon prévient : si tu reçois un message sur une commande, ne réponds pas et ne clique sur aucun lien ; vérifie dans ton compte ou dans l'application Amazon que la commande figure bien dans ton historique. Amazon ne te demandera jamais de payer par téléphone ou par e-mail, ni d'acheter une carte cadeau. N'appelle pas un numéro reçu par SMS ou par e-mail, ou trouvé sur un moteur de recherche, et signale le message avec l'outil de signalement d'Amazon. Les autres signes d'un faux message sont dans [arnaque colis par SMS](guide:delivery-scam-texts).
 
 ## Suivre un colis Amazon Logistics avec Peek
 
-[Peek](/) ne peut ni suivre ni enregistrer un colis Amazon Logistics : Amazon n'affiche son statut, son historique et sa photo que dans ton compte. Colle l'un de ces numéros, ou un lien track.amazon, et Peek vérifie d'abord le suivi public d'Amazon Shipping (track.amazon.fr pour un numéro FR ou BE). Si Amazon répond, c'est qu'il a transporté le colis pour une autre boutique, et Peek le suit sous « Amazon Shipping » : « Le suivi public est disponible avec Amazon Shipping. Peek te tiendra au courant de cette livraison. » Si Amazon ne donne plus son historique, Peek le dit et tu peux garder le colis comme référence.
+[Peek](/) ne peut ni suivre ni enregistrer un colis Amazon Logistics : Amazon n'affiche son statut, son historique et sa photo que dans ton compte. Colle l'un de ces numéros, ou un lien track.amazon, et Peek vérifie d'abord le suivi public d'Amazon Shipping (track.amazon.fr pour un numéro FR ou BE). Si Amazon répond, Peek suit le colis comme un colis [Amazon Shipping](carrier:amazon-shipping) et affiche « Le suivi public est disponible avec Amazon Shipping. Peek te tiendra au courant de cette livraison. » Si Amazon ne donne plus son historique, Peek le dit et tu peux garder le colis comme référence.
 
-Sinon, tu lis « Les livraisons Amazon Logistics se suivent généralement dans Vos commandes sur Amazon. », avec le bouton « Voir mes commandes Amazon », qui ouvre l'historique de commandes du site que désigne le numéro : amazon.fr pour FR, amazon.com.be pour BE, amazon.com pour TBA et pour les préfixes sans site associé, comme CH. Si la vérification échoue, touche « Réessayer ». Un numéro de commande donne « On dirait un numéro de commande Amazon ».
+Sinon, tu lis « Les livraisons Amazon Logistics se suivent généralement dans Vos commandes sur Amazon. », avec le bouton « Voir mes commandes Amazon », qui ouvre l'historique de commandes du site que désigne le numéro : amazon.fr pour FR, amazon.com.be pour BE, amazon.de pour CH, amazon.com pour TBA. Si la vérification échoue, touche « Réessayer ». Un numéro de commande donne « On dirait un numéro de commande Amazon ».
 
 ## Questions sur le suivi Amazon Logistics
-
-### Amazon Logistics livre-t-il le dimanche ?
-
-Oui, en France et en Belgique, Amazon Logistics livre 7 jours sur 7. Si tu ne veux pas de livraison le week-end, indique dans Vos adresses que ton adresse est fermée le samedi et le dimanche.
-
-### À quelle heure passe le livreur Amazon Logistics ?
-
-Entre 6 h et 21 h, heure locale. Il ne sonne et ne te contacte qu'entre 8 h et 20 h, sauf si ta livraison est prévue dans un créneau précis.
 
 ### Que veut dire un numéro de suivi TBC sur Amazon ?
 
@@ -97,24 +69,22 @@ C'est une forme de numéro Amazon : TBC et 12 chiffres, comme TBA ou TBM. Si Ama
 
 ### Pourquoi mon numéro de suivi Amazon ne marche pas ailleurs ?
 
-Parce qu'Amazon Logistics n'a pas de suivi public : seul Vos commandes affiche ce colis. Un numéro accepté par track.amazon.fr est un colis Amazon Shipping, transporté pour une autre boutique.
+Parce qu'Amazon Logistics n'a pas de suivi public : seul Vos commandes affiche ce colis. Un numéro accepté par track.amazon.fr est un colis Amazon Shipping, que Peek peut suivre.
 
 ### Comment contacter Amazon Logistics en Belgique ?
 
-Par le service client Amazon, depuis le site amazon.com.be. Le numéro +32 2 700 63 42 est celui d'où les livreurs t'appellent, pas une ligne client.
+Par le service client Amazon du site où tu as commandé. Celui d'amazon.com.be répond en français, en néerlandais ou en anglais.
 
 :::sources
-- [Amazon.fr : Livraisons d'Amazon Logistics](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – partenaires, 7 jours sur 7, horaires, photo, numéro des livreurs, tentatives, instructions, week-end, service client
-- [Amazon.com.be : Livraisons d'Amazon Logistics](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV&language=fr_BE) – Belgique : horaires, photo, numéro des livreurs, tentatives
-- [Amazon.fr : Suivre votre colis](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – où trouver le numéro, statuts, retards, chat des livreurs
-- [Amazon.fr : Rechercher un colis manquant qui apparaît comme livré](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – scan anticipé de 48 heures, vérifications, 30 jours
-- [Amazon.fr : Colis ne pouvant pas être livrés](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – raisons, remboursement, remplacement, Garantie A à Z
-- [Amazon.fr : Coordonnées des transporteurs](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GBPEXEXYULHB5WCH) – transporteur et numéro dans Suivre le colis, ligne Amazon
-- [Amazon.fr : Livraison en point de retrait](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – durées de garde en France, code du Counter
-- [Amazon.com.be : Livraison en point de retrait](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W&language=fr_BE) – durées de garde bpost
-- [Amazon.fr : Récupérer un colis dans un Amazon Locker](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GRQMENKQV9RQ6BWF) – code de retrait, application, colis non retirés
-- [Amazon.fr : Options d'assistance et Service Client](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GSD587LKW72HKU2V) – canaux, 24 h/24, 7 j/7
-- [Amazon.fr : Comment identifier les faux messages/SMS](https://www.amazon.fr/gp/help/customer/display.html?nodeId=T2W6VB0DExBF3oyVvx) – faux SMS, signalement
-- [Amazon Shipping : support](https://track.amazon.fr/contact-us) – colis d'autres détaillants, contacter l'expéditeur
+- [About Amazon France : Les clients Amazon mettent leurs livreurs à l'honneur](https://www.aboutamazon.fr/actualites/activite-logistique/les-clients-amazon-mettent-leurs-livreurs-a-lhonneur) – entreprises de livraison indépendantes, agences de livraison d'Amazon, groupe La Poste
+- [About Amazon (Europe) : Amazon announces plans to launch Amazon.com.be](https://www.aboutamazon.eu/news/job-creation-and-investment/amazon-announces-plans-to-launch-amazon-com-be-in-the-coming-months) – Amazon Logistics et les entreprises de livraison locales en Belgique, bpost
+- [About Amazon (Europe) : Amazon announces plans to invest over €1 billion in Belgium](https://www.aboutamazon.eu/news/job-creation-and-investment/amazon-announces-plans-to-invest-over-1-billion-to-enhance-belgian-customer-experience) – agence de livraison d'Anvers, bpost
+- [About Amazon (Europe) : Amazon.com.be launches in Belgium](https://www.aboutamazon.eu/news/amazon-prime/amazon-com-be-launches-in-belgium) – service client en français, néerlandais ou anglais
+- [About Amazon France : Garantir des livraisons fiables et efficaces](https://www.aboutamazon.fr/actualites/activite-logistique/garantir-des-livraisons-fiables-et-efficaces-pendant-les-periodes-exceptionnelles) – Mon Jour Amazon, points de retrait partenaires
+- [About Amazon France : Comment retirer un colis dans un Amazon Locker](https://www.aboutamazon.fr/actualites/activite-logistique/comment-utiliser-amazon-locker) – e-mail, code à six chiffres, trois jours, renvoi et remboursement
+- [About Amazon France : Un service de proximité très pratique](https://www.aboutamazon.fr/actualites/innovations/un-service-de-proximite-tres-pratique) – Amazon Counter, code-barres
+- [About Amazon France : La Garantie A à Z](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeur d'abord, remboursement
+- [About Amazon France : Comment contacter le service client Amazon](https://www.aboutamazon.fr/actualites/nos-boutiques/comment-contacter-le-service-client-amazon) – chat, téléphone, horaires, rappel
+- [About Amazon France : Six conseils contre les arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – faux messages, signalement
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek reconnaît et vérifie
 :::

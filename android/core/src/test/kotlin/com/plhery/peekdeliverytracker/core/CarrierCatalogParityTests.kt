@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.BeforeClass
@@ -56,5 +57,17 @@ class CarrierCatalogParityTests {
         assertNull(catalog.order("https://www.gls-pakete.de/sendungsverfolgung?trackingNumber=251015WE1ANOP9|251015WE1ANOP9"))
         assertNull(catalog.order("https://www.gls-pakete.de/sendungsverfolgung?trackingNumber=302-4571983-2294617|302-4571983-2294617"))
         assertNull(catalog.order("https://münchen.de/t/251015WE1ANOP9"))
+    }
+
+    @Test
+    fun aLineEndAfterTheNumberIsNoNumberToAskAbout() {
+        // `range(of:options: .regularExpression)` reads `$` as the end of the input, not before a final line end.
+        for (number in listOf("000000000\n", "000000000\r\n", "ABCD\r", "ABCD\u0085", "ABCD\u2028")) {
+            assertNull(number, NumberRefusals.question(CarrierId.Dhl, number, demo = false))
+        }
+        assertEquals(
+            NumberRefusalRequest(trackingNumber = "000000000", carrier = CarrierId.Dhl),
+            NumberRefusals.question(CarrierId.Dhl, "000000000", demo = false),
+        )
     }
 }

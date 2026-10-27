@@ -97,7 +97,8 @@ data class AppConfiguration(
             )
         }
 
-        private val hostName = Regex("^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$")
+        // As `range(of:options: .regularExpression)` reads it: `$` is the end of the input.
+        private val hostName = Regex("^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+\\z")
 
         /** Host names separated by spaces or commas. Anything that is not a plain host name is left out. */
         fun linkHosts(list: String): List<String> =

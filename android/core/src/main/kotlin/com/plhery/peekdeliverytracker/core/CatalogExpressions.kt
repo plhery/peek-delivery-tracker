@@ -9,8 +9,9 @@ import java.util.regex.PatternSyntaxException
  * The catalog's patterns as the iPhone app runs them. The shared patterns are JavaScript's, and iOS compiles
  * them with NSRegularExpression, which is ICU; java.util.regex is given ICU's meaning where the two differ:
  * Unicode `\d`, `\w` and `\s`, a `.` that stops at every ICU line end, ICU's `\b`, which looks through
- * combining marks and format characters, and, for Foundation's `range(of:options: .regularExpression)`,
- * ICU's `$`, which also matches before a final line end of any kind.
+ * combining marks and format characters, and, for Foundation's `replacingOccurrences` with
+ * `.regularExpression`, ICU's `$`, which also matches before a final line end of any kind. Foundation's
+ * `range(of:options: .regularExpression)` reads `$` as the end of the input, as JavaScript does.
  */
 internal object CatalogExpressions {
     /** A match with where it stands in the value, in UTF-16 offsets as NSRange counts them. */
@@ -21,8 +22,7 @@ internal object CatalogExpressions {
     // itself, whose hash the string keeps, so a lookup costs no new key.
     private val sensitive = ConcurrentHashMap<String, Optional<Pattern>>()
     private val insensitive = ConcurrentHashMap<String, Optional<Pattern>>()
-    private val foundationSensitive = ConcurrentHashMap<String, Optional<Pattern>>()
-    private val foundationInsensitive = ConcurrentHashMap<String, Optional<Pattern>>()
+    private val foundationPatterns = ConcurrentHashMap<String, Optional<Pattern>>()
 
     /** `CarrierCatalog.expression`: a shared pattern, whose `$` is the end of the input as in JavaScript. */
     fun expression(pattern: String, caseInsensitive: Boolean = false): Pattern? =
@@ -30,11 +30,9 @@ internal object CatalogExpressions {
             icu(endOfInput(pattern), icuDollar = false)
         }
 
-    /** A pattern as Foundation's `String.range(of:options: .regularExpression)` runs it, `$` included. */
-    fun foundation(pattern: String, caseInsensitive: Boolean = false): Pattern? =
-        compile(if (caseInsensitive) foundationInsensitive else foundationSensitive, pattern, caseInsensitive) {
-            icu(pattern, icuDollar = true)
-        }
+    /** A pattern as Foundation's `replacingOccurrences(of:with:options: .regularExpression)` runs it, `$` included. */
+    private fun foundation(pattern: String): Pattern? =
+        compile(foundationPatterns, pattern, caseInsensitive = false) { icu(pattern, icuDollar = true) }
 
     private inline fun compile(
         compiled: ConcurrentHashMap<String, Optional<Pattern>>,
@@ -160,9 +158,8 @@ internal object CatalogExpressions {
     fun replacing(pattern: String, value: String, template: String, caseInsensitive: Boolean = false): String? =
         expression(pattern, caseInsensitive)?.matcher(value)?.replaceAll(java.util.regex.Matcher.quoteReplacement(template))
 
-    /** Foundation's `value.range(of: pattern, options: .regularExpression) != nil`. */
-    fun foundationMatches(value: String, pattern: String): Boolean =
-        foundation(pattern)?.matcher(value)?.find() == true
+    /** Foundation's `value.range(of: pattern, options: .regularExpression) != nil`, whose `$` is the end of the input. */
+    fun foundationMatches(value: String, pattern: String): Boolean = matches(value, pattern)
 
     /** Foundation's `value.replacingOccurrences(of: pattern, with: template, options: .regularExpression)`. */
     fun foundationReplacing(value: String, pattern: String, template: String): String =

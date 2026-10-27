@@ -4,7 +4,7 @@ description: Descobre que transportadora tem a tua encomenda pelo número de seg
 slug: como-saber-qual-e-a-transportadora
 picture: Três etiquetas de seguimento divididas em partes coloridas, uma lupa sobre o código de país CH e o Pip, curioso.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 As letras e o comprimento de um número de seguimento dizem muitas vezes que transportadora tem a tua encomenda. `1Z` seguido de 16 letras e algarismos é UPS, e 13 caracteres como `RR000000005CH` (duas letras, nove algarismos, duas letras) costumam ser de um operador postal, com o país que emitiu o número nas duas últimas letras: `PT` é Portugal. Os números só com algarismos são o caso difícil: 10, 12 ou 14 algarismos podem ser de várias transportadoras, e aí quem decide é o e-mail de envio, ou um serviço de seguimento que as experimente uma a uma.
@@ -45,7 +45,7 @@ Eis o que as transportadoras, e a norma postal, dizem sobre os números que mais
 | [NACEX](carrier:nacex) | a caixa de seguimento da NACEX mostra `0000/00000000`: quatro algarismos da agência de onde a encomenda partiu, uma barra e oito algarismos do «Nº expedição»; a NACEX não fixa o comprimento |
 | [Paack](carrier:paack) | «número de pedido», no fim dos e-mails da Paack; não tem forma fixa (o próprio exemplo da Paack mistura algarismos, hífenes e letras minúsculas), por isso pode parecer de outra transportadora; a página de seguimento pede também o código postal de entrega |
 | Ecoscooting | a página de seguimento não indica um formato; nos dados de transportadoras que o Peek usa, `CNPRT` + 20 algarismos é Ecoscooting |
-| Amazon | a Amazon não publica um formato; os números `TBA` e `PT…` estão explicados mais abaixo |
+| Amazon | nos dados de transportadoras que o Peek usa, `TBA` + 12 algarismos ou `PT` + 10 algarismos; explicados mais abaixo |
 | [Cainiao](carrier:cainiao) (AliExpress) | a Cainiao não descreve os seus números; nos dados de transportadoras que o Peek usa, `LP` ou `CNG` + 14 algarismos pode ser Cainiao, e `DOFR` ou `CNFR` + 13 algarismos + `HD` é Cainiao |
 | [YunExpress](carrier:yunexpress) | `YT` + 16 algarismos (`YT` + 13 algarismos é a YTO Express) |
 | [Yanwen](carrier:yanwen) | `BYS` + 9 algarismos, ou duas letras, 9 algarismos e `YP` (`UL` e `UK` são os inícios mais comuns); a Yanwen não publica nenhum número de exemplo. `YW`, três letras e 12 algarismos é o seu serviço de entrega nos Estados Unidos |
@@ -77,7 +77,7 @@ Não há um comprimento único. Estes são os comprimentos que as transportadora
 
 ## Número que começa por TBA ou PT: é da Amazon?
 
-Se tiver o comprimento certo, sim. Nos dados de transportadoras que o Peek usa, `TBA`, `TBC` ou `TBM` seguido de 12 algarismos é [Amazon Logistics](carrier:amazon-logistics), o serviço de entregas da própria Amazon, e o mesmo vale para um código de país como `PT` ou `ES` seguido de 10 algarismos. As páginas de ajuda da Amazon não descrevem o número. A Amazon.es explica que a Amazon Logistics trabalha com parceiros de transporte locais e regionais, e que segues a encomenda em *Os meus pedidos*, onde aparece a informação desses parceiros.
+Se tiver o comprimento certo, sim. Nos dados de transportadoras que o Peek usa, `TBA`, `TBC` ou `TBM` seguido de 12 algarismos é [Amazon Logistics](carrier:amazon-logistics), o serviço de entregas da própria Amazon, e o mesmo vale para um código de país como `PT` ou `ES` seguido de 10 algarismos. Em Portugal compras na Amazon.es, e é aí que segues a encomenda, em *Os meus pedidos*.
 
 Não confundas com um código de envio dos CTT que *termina* em `PT`: esse tem 13 caracteres, duas letras no início e duas no fim.
 
@@ -153,7 +153,7 @@ Um número que não dá resultados nem sempre está mal escrito. Os CTT dão dua
 - [DHL Express Netherlands: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 algarismos, nunca letras
 - [MyDHL Express Portugal: FAQs Localização e Monitorização](https://mydhl.express.dhl/pt/pt/help-and-support/faqs/tracking-monitoring.html) – números de carta de porte reciclados
 - [UPS: sample package label](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – o número 1Z
-- [Amazon.es: Entregas de Amazon Logistics](https://www.amazon.es/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV&language=pt_PT) – parceiros de transporte locais e regionais, seguimento em Os meus pedidos
+- [About Amazon EU: Amazon Prime now available to customers in Portugal](https://www.aboutamazon.eu/news/press-lounge/amazon-prime-now-available-to-customers-in-portugal) – em Portugal compra-se na Amazon.es, também em português
 - [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – os formatos TBA, PT, ES, CNPRT, YT, LP, CNG, DOFR e CNFR, e os 16 e 23 algarismos da Correos Express, as formas 4PX e LP da 4PX, as formas BYS, YP e YW da Yanwen e os 22 e 25 algarismos da CTT Express, nos dados de transportadoras do Peek
 - [NACEX Portugal: Página inicial](https://www.nacex.pt/) – a forma 0000/00000000 na caixa «Seguimento de envio»
 - [NACEX Portugal: Seguimento](https://www.nacex.pt/irSeguimiento.do) – Agência e Nº expedição

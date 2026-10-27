@@ -4,7 +4,7 @@ description: Dal formato del codice si risale spesso al corriere: prefissi, lung
 slug: corriere-dal-numero-di-tracking
 picture: Tre codici di tracking divisi in parti colorate, una lente sul codice paese CH e Pip che osserva incuriosito.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Spesso bastano le lettere e la lunghezza del numero di tracking per capire quale corriere ha il tuo pacco. `1Z` seguito da 16 lettere e cifre è UPS, 18 cifre che iniziano con `99` sono la [Posta svizzera](carrier:swiss-post), e un codice di 13 caratteri come `RR000000005CH` (due lettere, nove cifre, due lettere) di solito è di una posta nazionale, con il Paese che l'ha emesso nelle ultime due lettere. Il caso difficile sono i codici di sole cifre: 14 cifre, per esempio, possono essere di BRT come di DPD. In quei casi l'ultima parola spetta all'e-mail di spedizione, o a un tracker che prova tutti i corrieri possibili.
@@ -42,7 +42,7 @@ Ecco cosa dicono i corrieri, e lo standard postale, sui codici che incontri più
 | [Planzer](carrier:planzer) | Planzer lo chiama numero di spedizione e non ne pubblica il formato. Nei dati dei corrieri che usa Peek: 20 cifre che iniziano con `91346097`, o 13 cifre che iniziano con `99990` per le spedizioni condivise |
 | [GLS Svizzera](carrier:gls-ch) | numero del pacco o Track ID; né GLS né la Posta svizzera, suo partner, ne pubblicano il formato. Nei dati dei corrieri che usa Peek: 11 cifre, 12 cifre con l'ultima di controllo, 8 lettere e cifre mescolate, o sei lettere |
 | [DPD Svizzera](carrier:dpd-ch) | «numero di pacco» di 14 cifre; i moduli di DPD per i mittenti chiedono che quelli svizzeri inizino con `060`. Nei dati dei corrieri che usa Peek, le 14 cifre possono essere seguite da un carattere di controllo, che le pagine svizzere di DPD non citano |
-| Amazon | Amazon non pubblica un formato; i codici `IT…` sono spiegati più sotto |
+| Amazon | nei dati dei corrieri che usa Peek, `IT` seguito da 10 cifre o `TBA` seguito da 12; spiegati più sotto |
 | [YunExpress](carrier:yunexpress) | `YT` + 16 cifre |
 | [4PX](carrier:4px) | `4PX` + 13 cifre + `CN`; 4PX non pubblica numeri di esempio, e il suo sito accetta da 5 a 50 lettere e cifre. Anche `LP` + 13 cifre + `CN` è probabilmente 4PX |
 | [Yanwen](carrier:yanwen) | Yanwen non pubblica numeri di esempio; i suoi pacchi hanno `BYS` + 9 cifre, oppure due lettere, 9 cifre e `YP` (spesso inizia con `UL` o `UK`). `YW`, tre lettere e 12 cifre è il suo servizio di consegna negli Stati Uniti |
@@ -78,7 +78,7 @@ Se cerchi il «codice tracking BRT di 18 cifre», sappi che BRT non ne parla: il
 
 ## Tracking che inizia con IT: che corriere è?
 
-Se dopo `IT` ci sono 10 cifre, di solito è Amazon. Negli stessi dati dei corrieri citati sopra, `IT` seguito da 10 cifre è [Amazon Logistics](carrier:amazon-logistics), il servizio di consegna di Amazon (o [Amazon Shipping](carrier:amazon-shipping), se Amazon ha consegnato per un altro negozio); lo stesso schema vale con altri codici paese (`DE`, `FR`, `ES`…) e con `TBA`, `TBC` o `TBM` seguiti da 12 cifre. La pagina di aiuto di Amazon.it su Amazon Logistics però non descrive il numero. Spiega invece che Amazon Logistics lavora con partner di consegna locali e regionali, e che il tuo ordine si traccia nella sezione *I miei ordini*.
+Se dopo `IT` ci sono 10 cifre, di solito è Amazon. Negli stessi dati dei corrieri citati sopra, `IT` seguito da 10 cifre è [Amazon Logistics](carrier:amazon-logistics), il servizio di consegna di Amazon (o [Amazon Shipping](carrier:amazon-shipping), se Amazon ha consegnato per un altro negozio); lo stesso schema vale con altri codici paese (`DE`, `FR`, `ES`…) e con `TBA`, `TBC` o `TBM` seguiti da 12 cifre. Per consegnare, Amazon collabora con decine di fornitori di servizi di consegna in Italia, e il tuo ordine si segue nella sezione *I miei ordini* su Amazon.
 
 Non confonderlo con un codice che *finisce* con `IT`: due lettere, nove cifre e `IT` è il formato postale con il codice dell'Italia, come l'esempio nel modulo di ricerca di Poste (`ZA123456789IT`).
 
@@ -173,7 +173,7 @@ Un codice che non dà risultati non è per forza sbagliato. Le poste portoghesi 
 - [Yanwen: YW Tracking (in inglese)](https://track.yw56.com.cn/en/index) – il tracking di Yanwen, senza numeri di esempio
 - [Cainiao: Help centre](https://global.cainiao.com/helpDoc.htm) – niente tracking dopo la consegna al corriere locale con le spedizioni economiche, chiedere al venditore
 - [Cainiao: Tracciamento espresso globale](https://global.cainiao.com/) – il numero postale di esempio
-- [Amazon.it: Consegne effettuate tramite Amazon Logistics](https://www.amazon.it/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – partner di consegna locali e regionali, tracking in I miei ordini
+- [About Amazon Italia: L'impegno di Amazon verso i dipendenti e i fornitori di servizi](https://www.aboutamazon.it/notizie/lavorare-ad-amazon/il-nostro-impegno-nei-confronti-dei-dipendenti-e-degli-autisti-dei-fornitori-di-servizi-di-consegna) – decine di fornitori di servizi di consegna in Italia
 - [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – i formati IT, TBA, LP, 5P e YT, e quelli di Poste Italiane (RA, 1UW, 3UW, 2IMA, 5P e i codici in stile SDA), 4PX, Yanwen (BYS, YP e YW), la Posta svizzera (98 e 99), Cainiao, Quickpac, Planzer, GLS Svizzera e DPD Svizzera, nei dati dei corrieri di Peek
 - [bpost: Puis-je suivre mon colis en ligne ?](https://www.bpost.be/fr/faq/puis-je-suivre-mon-colis-en-ligne) – i codici che iniziano con U non si possono seguire
 - [CTT: Encontrar o código de envio](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/encontrar-o-codigo-de-envio) – codici PT per invii dall'estero, codici che non danno risultati, contattare il mittente

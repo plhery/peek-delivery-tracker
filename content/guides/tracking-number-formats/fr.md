@@ -4,7 +4,7 @@ description: Lettres du début, nombre de chiffres, format postal : reconnais le
 slug: quel-transporteur-numero-de-suivi
 picture: Trois étiquettes de numéros de suivi découpées en parties colorées, une loupe sur le code pays CH et Pip, curieux.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Les lettres et la longueur d'un numéro de suivi suffisent souvent à savoir quel transporteur a ton colis. `1Z` suivi de 16 lettres et chiffres, c'est UPS ; 18 chiffres qui commencent par `99`, c'est [La Poste suisse](carrier:swiss-post) ; 13 caractères construits comme `RR000000005CH` (deux lettres, neuf chiffres, deux lettres) viennent en général d'une poste nationale, et les deux dernières lettres donnent le pays qui a émis le numéro. Les numéros composés uniquement de chiffres sont plus délicats : 10, 12 ou 14 chiffres correspondent à plusieurs transporteurs, et c'est alors l'e-mail d'expédition, ou un outil qui teste chaque candidat, qui tranche.
@@ -53,7 +53,7 @@ Voici ce que disent les transporteurs et la norme postale sur les numéros que t
 | [Yanwen](carrier:yanwen) | Yanwen ne publie aucun exemple ; ses colis portent `BYS` suivi de 9 chiffres, ou deux lettres, 9 chiffres et `YP` (`UL` et `UK` sont des débuts fréquents). `YW`, trois lettres et 12 chiffres, c'est son service de livraison aux États-Unis |
 | AliExpress, [Cainiao](carrier:cainiao) | Cainiao ne décrit pas ses numéros ; dans les données de transporteurs de Peek, `DOFR` ou `CNFR` suivi de 13 chiffres et de `HD` ; `LP` ou `CNG` suivi de 14 chiffres, probablement Cainiao, sans certitude (un `CNG` qui finit comme un code postal français peut aussi être Colis Privé) |
 | [China Post](carrier:china-post), EMS | format postal qui finit par `CN` ; les numéros EMS internationaux commencent par `E` |
-| Amazon | Amazon ne publie aucun format ; les numéros en `FR` et en `TBA` sont expliqués plus bas |
+| Amazon | dans les données de transporteurs de Peek, `FR` suivi de 10 chiffres ou `TBA` suivi de 12 chiffres, expliqués plus bas |
 
 ### Numéro qui commence par 99 ou 3232 : La Poste suisse ou bpost
 
@@ -85,7 +85,7 @@ Le numéro seul ne suffit pas toujours. Mondial Relay, Colis Privé et [Heppner]
 
 ## À qui appartient un numéro qui commence par FR ou TBA ?
 
-En général à Amazon. Dans les données de transporteurs qu'utilise Peek, `FR` suivi de 10 chiffres désigne [Amazon Logistics](carrier:amazon-logistics), le service de livraison d'Amazon, ou [Amazon Shipping](carrier:amazon-shipping) quand Amazon livre pour une autre boutique. Même chose avec un autre code pays européen devant 10 chiffres, comme `BE` ou `CH`, et avec `TBA`, `TBC` ou `TBM` suivi de 12 chiffres. Les pages d'aide d'Amazon, elles, ne décrivent pas ces numéros. Amazon.fr explique qu'Amazon Logistics travaille avec des partenaires de livraison locaux et régionaux, et que tu suis ta commande dans « Vos commandes », qui affiche les informations de ces partenaires.
+En général à Amazon. Dans les données de transporteurs qu'utilise Peek, `FR` suivi de 10 chiffres désigne [Amazon Logistics](carrier:amazon-logistics), le service de livraison d'Amazon, ou [Amazon Shipping](carrier:amazon-shipping) quand Amazon livre pour une autre boutique. Même chose avec un autre code pays européen devant 10 chiffres, comme `BE` ou `CH`, et avec `TBA`, `TBC` ou `TBM` suivi de 12 chiffres. Pour livrer en France, Amazon travaille aussi avec le groupe La Poste, d'autres spécialistes du dernier kilomètre et une centaine d'entreprises de livraison indépendantes. Ta commande, elle, se suit dans « Vos commandes » sur Amazon.
 
 Attention aux sosies. Avec ses 12 caractères, un numéro en `FR` a aussi la forme d'un numéro Colis Privé (lettres et chiffres). Et un numéro La Poste qui finit par `FR` en a 13, avec deux lettres au début et deux à la fin : c'est aussi le cas d'un colis [Delivengo](carrier:delivengo), qu'une boutique française envoie à l'étranger par La Poste. Dans le doute, l'e-mail d'expédition tranche.
 
@@ -176,7 +176,7 @@ Un numéro « non reconnu » n'est pas forcément mal tapé. Chez Colis Privé, 
 - [La Poste suisse : Barcode for Business Customers (en anglais)](https://handbuch.post.ch/-/media/post/gk/dokumente/1864-Anleitung-Barcodes-GK.pdf) – 18 chiffres, 99, licence d'affranchissement et numéro d'envoi, points pour la lecture
 - [UPS : exemple d'étiquette (en anglais)](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – le numéro 1Z
 - [DHL Express Pays-Bas : DHL Express or DHL eCommerce number (en anglais)](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 chiffres
-- [Amazon.fr : Livraisons d'Amazon Logistics](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – partenaires de livraison, suivi dans Vos commandes
+- [About Amazon France : Les clients Amazon mettent leurs livreurs à l'honneur](https://www.aboutamazon.fr/actualites/activite-logistique/les-clients-amazon-mettent-leurs-livreurs-a-lhonneur) – le groupe La Poste, d'autres spécialistes du dernier kilomètre et une centaine d'entreprises de livraison indépendantes (2022)
 - [Universal Parcel Scraper : catalogue des transporteurs](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – les formes FR, TBA, LP, CNG, DOFR, CNFR et YT (16 chiffres pour YunExpress, 13 pour YTO Express), 44 pour Quickpac, 91346097 et 99990 pour Planzer, les formes de GLS en Suisse, le caractère de contrôle de DPD Suisse, les formes 4PX et LP de 4PX, `CC` pour Relais Colis, 98 ou 99 pour La Poste suisse, BYS, YP et YW pour Yanwen, et la clé des numéros de DPD France et de GLS France dans les données de Peek
 - [Quickpac : FAQ (en anglais)](https://quickpac.ch/en/faq) – numéro de colis à 18 chiffres
 - [YunExpress : YunTrack](https://www.yuntrack.com/) – numéros commençant par YT

@@ -4,7 +4,7 @@ description: An Anfang, Länge und Endung der Sendungsnummer erkennst du oft den
 slug: sendungsnummer-welcher-paketdienst
 picture: Drei Etiketten mit Sendungsnummern, in farbige Teile zerlegt, eine Lupe auf dem Ländercode CH, und Pip schaut neugierig zu.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Buchstaben und Länge einer Sendungsnummer verraten oft, welcher Paketdienst dein Paket hat. Beginnt sie mit `1Z` und hat 18 Zeichen, ist es UPS. 18 Ziffern ab `99`, gedruckt wie `99.34.123456.12345678`, kommen von der [Schweizerischen Post](carrier:swiss-post), und 13 Zeichen wie `RR000000005CH` (zwei Buchstaben, neun Ziffern, zwei Buchstaben) stammen meist von einer nationalen Post, deren Land in den letzten zwei Buchstaben steht. Schwierig wird es bei reinen Ziffern: 10, 14 oder 22 Stellen passen jeweils zu mehreren Paketdiensten. Dann entscheidet die Versandmail oder ein Tracker, der die infrage kommenden Paketdienste durchprobiert.
@@ -45,7 +45,7 @@ Das schreiben die Paketdienste selbst und der internationale Poststandard über 
 | Schweizerische Post | 18 Ziffern ab `98` oder `99`, mit oder ohne Punkte und Leerzeichen: die Barcode-Nummer für Sendungen innerhalb der Schweiz, auf Paketen von Geschäftskunden gedruckt wie `99.34.123456.12345678`; oder das Postformat mit `CH` am Ende |
 | [Quickpac](carrier:quickpac) | 18 Ziffern, sagt Quickpac, aber nicht, wie sie beginnen. In Peeks Paketdienst-Daten: ab `44` |
 | [Planzer](carrier:planzer) | kein Format veröffentlicht. In Peeks Paketdienst-Daten 20 Ziffern ab `91346097`, eine geteilte Planzer-Sendung 13 Ziffern ab `99990` |
-| Amazon | kein Format veröffentlicht, mehr dazu weiter unten |
+| Amazon | in Peeks Paketdienst-Daten `TBA`, `TBC` oder `TBM` plus 12 Ziffern oder ein Ländercode plus 10 Ziffern, mehr dazu weiter unten |
 | [YunExpress](carrier:yunexpress) | `YT` + 16 Ziffern; `YT` + 13 Ziffern ist YTO Express |
 | [4PX](carrier:4px) | `4PX` + 13 Ziffern + `CN`. Ein Beispiel veröffentlicht 4PX nicht, seine Tracking-Seite nimmt 5 bis 50 Buchstaben und Ziffern an. `LP` + 13 Ziffern + `CN` ist wahrscheinlich auch 4PX |
 | [Yanwen](carrier:yanwen) | `BYS` + 9 Ziffern, oder zwei Buchstaben, 9 Ziffern und `YP`, oft ab `UL` oder `UK`. Ein Beispiel veröffentlicht Yanwen nicht. `YW`, drei Buchstaben und 12 Ziffern ist Yanwens eigener Zustelldienst in den USA |
@@ -75,7 +75,7 @@ Eine feste Länge gibt es nicht. Hier die Längen, die die Paketdienste selbst n
 
 ## Sendungsnummer beginnt mit TBA oder DE: Ist das Amazon?
 
-Wenn die Länge stimmt, ja. In Peeks Paketdienst-Daten steht `TBA`, `TBC` oder `TBM` plus 12 Ziffern für [Amazon Logistics](carrier:amazon-logistics), Amazons eigenen Lieferdienst, oder für [Amazon Shipping](carrier:amazon-shipping), wenn Amazon das Paket für einen anderen Shop bringt. Dasselbe gilt für einen Ländercode wie `DE`, `AT` oder `CH` plus 10 Ziffern. Amazon selbst beschreibt diese Nummern auf seinen Hilfeseiten nicht. Laut Amazon.de verfolgst du solche Bestellungen unter „Meine Bestellungen“, wo die Informationen der Lieferpartner angezeigt werden.
+Wenn die Länge stimmt, ja. In Peeks Paketdienst-Daten steht `TBA`, `TBC` oder `TBM` plus 12 Ziffern für [Amazon Logistics](carrier:amazon-logistics), Amazons eigenen Lieferdienst, oder für [Amazon Shipping](carrier:amazon-shipping), wenn Amazon das Paket für einen anderen Shop bringt. Dasselbe gilt für einen Ländercode wie `DE`, `AT` oder `CH` plus 10 Ziffern. In Amazons eigener Anleitung zur Sendungsverfolgung kommen diese Nummern nicht vor: Du wählst unter „Meine Bestellungen“ die Bestellung aus und klickst auf „Lieferung verfolgen“.
 
 ## Das Postformat: zwei Buchstaben, neun Ziffern, zwei Buchstaben
 
@@ -153,7 +153,7 @@ Findet die Sendungsverfolgung nichts, ist die Nummer nicht unbedingt falsch abge
 - [Schweizerische Post: Anleitung Barcode für Geschäftskunden](https://www.post.ch/-/media/post/gk/dokumente/1864-anleitung-barcodes-gk.pdf?sc_lang=de) – 18 Ziffern ab 99, die Punkte im Klartext
 - [Quickpac: FAQ (auf Englisch)](https://quickpac.ch/en/faq) – jedes Paket hat eine 18-stellige Nummer
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 Ziffern
-- [Amazon.de: Lieferungen von Amazon Logistics](https://www.amazon.de/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – Sendungsverfolgung unter Meine Bestellungen
+- [About Amazon Deutschland: Amazon-Lieferung: einfache Bestellung und Verfolgung](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-lieferoptionen-sendung-verfolgen) – Sendungsverfolgung unter „Meine Bestellungen“ mit „Lieferung verfolgen“
 - [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – JJD, JD, 0034043, H, TBA und Ländercode plus 10 Ziffern in Peeks Paketdienst-Daten, dazu YT + 16 Ziffern (YunExpress), YT + 13 Ziffern (YTO Express), 44 (Quickpac), 91346097 und 99990 (Planzer), DOFR, CNFR, LP und CNG (Cainiao), 4PX und LP + 13 Ziffern + CN (4PX), 98 und 99 (Schweizerische Post), BYS, YP und YW (Yanwen), die Formen von GLS Deutschland und GLS Schweiz sowie das Prüfzeichen hinter DPD-Nummern
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – Nummern ab YT
 - [4PX: Global Order Tracking](https://track.4px.com/) – 5 bis 50 Buchstaben und Ziffern

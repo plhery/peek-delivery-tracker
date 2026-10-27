@@ -4,7 +4,7 @@ description: Cómo saber de qué empresa es un número de seguimiento por sus le
 slug: que-empresa-es-numero-de-seguimiento
 picture: Tres etiquetas con números de seguimiento divididos en colores, una lupa sobre el código de país CH y Pip, curioso.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Las letras y la longitud de un número de seguimiento suelen decirte qué empresa tiene tu paquete. `1Z` seguido de 16 letras y cifras es UPS, y un código de 13 caracteres como `RR000000005CH` (dos letras, nueve cifras, dos letras) suele ser de Correos o de otro operador postal: las dos últimas letras dicen qué país lo emitió, y `ES` es España. Los números que solo llevan cifras son el caso difícil: 12, 14 o 22 cifras encajan con varias empresas, así que la última palabra la tiene el correo de envío de la tienda, o una web de seguimiento que pruebe con todas las candidatas.
@@ -52,7 +52,7 @@ Esto es lo que dicen las empresas y la norma postal sobre los números que más 
 | AliExpress, [Cainiao](carrier:cainiao) | Cainiao no describe sus números; según esos datos, `DOFR` o `CNFR`, 13 cifras y `HD` es de Cainiao, y `LP` y `CNG` se explican justo abajo |
 | [YunExpress](carrier:yunexpress) | Yuntrack pide el número que empieza por `YT`, sin decir cuántas cifras lleva; según esos datos, `YT` y 16 cifras. `YT` y 13 cifras es YTO Express; `YT`, 9 cifras y `GB` es un envío postal de Royal Mail |
 | [China Post](carrier:china-post), EMS | el formato postal acabado en `CN`; los números EMS internacionales empiezan por `E` |
-| Amazon | Amazon no publica ningún formato; `ES` y `TBA` se explican más abajo |
+| Amazon | en los datos de transportistas de Peek, `ES` seguido de 10 cifras o `TBA` seguido de 12; se explican más abajo |
 
 ### Número de seguimiento que empieza por PQ, PK, LP o CNG
 
@@ -79,7 +79,7 @@ A veces el número no basta. GLS, TIPSA y Paack piden también el código postal
 
 ## Número de seguimiento que empieza por ES o TBA: Amazon
 
-En los datos de transportistas que usa Peek, `ES` seguido de 10 cifras es [Amazon Logistics](carrier:amazon-logistics), el servicio de reparto de Amazon, o [Amazon Shipping](carrier:amazon-shipping) si Amazon lo lleva por encargo de otra tienda. Lo mismo vale con el código de otro país europeo delante, como `FR` o `PT`, y con `TBA`, `TBC` o `TBM` seguidos de 12 cifras. Las páginas de ayuda de Amazon no describen estos números; Amazon.es te dice que sigas el pedido en «Mis pedidos».
+En los datos de transportistas que usa Peek, `ES` seguido de 10 cifras es [Amazon Logistics](carrier:amazon-logistics), el servicio de reparto de Amazon, o [Amazon Shipping](carrier:amazon-shipping) si Amazon lo lleva por encargo de otra tienda. Lo mismo vale con el código de otro país europeo delante, como `FR` o `PT`, y con `TBA`, `TBC` o `TBM` seguidos de 12 cifras. El pedido se sigue en «Mis pedidos» de Amazon.
 
 Cuenta los caracteres para no confundirlo con un número postal: `ES` y 10 cifras suman 12, y un número postal tiene 13, con dos letras al principio y dos al final. Puede acabar en `ES`, si es de Correos, y hasta empezar por `ES`, porque la serie `E` es la de los envíos EMS.
 
@@ -136,7 +136,7 @@ Un paquete que cruza una frontera suele cambiar de manos, y cada empresa puede i
 :::
 
 - **Los envíos postales** son el caso fácil: la UPU solo permite un número S10 por envío, así que el mismo número suele funcionar en la web del correo de origen y en la de Correos.
-- **Amazon:** Amazon Logistics trabaja con socios de transporte locales y regionales, y en «Mis pedidos» verás la información de esos socios.
+- **Amazon:** reparte la última milla desde sus estaciones logísticas con ayuda de sus proveedores de transporte.
 - **Paack:** se presenta como empresa de paquetería para empresas y tiendas online, presente en España, Portugal, Francia e Italia. Cuando tu pedido entra en sus instalaciones, te manda su propio enlace de seguimiento, y su formulario pide el número de seguimiento y el código postal de entrega.
 - **AliExpress con envío económico:** Cainiao dice que el seguimiento termina al entregar el paquete al transportista local, y que el vendedor puede decirte cómo contactar con ese transportista. Más en [seguir un paquete que viene de China](guide:tracking-from-china).
 
@@ -163,7 +163,7 @@ Un número que no devuelve nada no siempre está mal escrito. Correos Express av
 - [Paack: ¿Dónde estamos?](https://paack.co/es/donde-estamos/) – presente en España, Francia, Italia y Portugal
 - [Paack: Track your order](https://paack.co/shipments/tracking) – número de pedido y código postal
 - [Paack Support: Otras preguntas](https://help.paack.co/es/support/solutions/folders/44001208240) – número de seguimiento y código postal
-- [Amazon.es: Entregas de Amazon Logistics](https://www.amazon.es/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – socios de transporte, seguimiento en Mis pedidos
+- [About Amazon España: ¿Cómo llegan los paquetes de Amazon a su destino?](https://www.aboutamazon.es/noticias/inversiones-y-creacion-de-empleo/como-llegan-los-paquetes-de-amazon-a-su-destino) – estaciones logísticas y proveedores de transporte en la última milla
 - [UPS: ejemplo de etiqueta](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – el número 1Z
 - [DHL Express Países Bajos: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 cifras
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – el número de seguimiento no es un número de pedido

@@ -4,7 +4,7 @@ description: PX i 10 cyfr to Poczta Polska, 24 cyfry to InPost, 1Z to UPS: jak r
 slug: jaki-kurier-po-numerze-przesylki
 picture: Trzy etykiety z numerami przesyłek podzielonymi na kolorowe części, lupa na kodzie kraju CH i zaciekawiony Pip.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Litery i długość numeru przesyłki często zdradzają, który przewoźnik ma Twoją paczkę. `1Z` i 16 liter lub cyfr to UPS, `PX` i 10 cyfr to [Poczta Polska](carrier:poczta-polska), numer [InPost](carrier:inpost) ma 24 cyfry, a 13 znaków w układzie `RR000000005CH` (dwie litery, dziewięć cyfr, dwie litery) to zwykle numer pocztowy, w którym dwie ostatnie litery wskazują kraj poczty, która go nadała. Najtrudniej jest z samymi cyframi: 10 albo 14 cyfr pasuje do kilku firm, więc rozstrzyga e-mail o wysyłce albo narzędzie, które sprawdzi numer u wszystkich pasujących przewoźników.
@@ -40,7 +40,7 @@ Oto, co przewoźnicy i standard pocztowy mówią o numerach, które w Polsce spo
 | [Packeta](carrier:packeta) | litera `Z` i 10 cyfr, np. `Z1234567890`: „Numer śledzenia musi zaczynać się od litery 'Z' i składać się z 10 cyfr” |
 | [ORLEN Paczka](carrier:orlen-paczka) | numer paczki to 13 cyfr spod kodu kreskowego na etykiecie, zaczynających się od `21`, `23` albo `26` (`2101234567890`); wyszukiwarka przyjmuje też 10-cyfrowy kod nadania |
 | [UPS](carrier:ups) | `1Z` i 16 liter lub cyfr, razem 18 znaków, np. `1Z999AA10123456784`, przykładowy numer z poprawną cyfrą kontrolną UPS |
-| Amazon | Amazon nie publikuje formatu, więcej niżej |
+| Amazon | w danych przewoźników Peek `TBA` i 12 cyfr albo kod kraju i 10 cyfr, więcej niżej |
 | [YunExpress](carrier:yunexpress) | `YT` i 16 cyfr; `YT` i 13 cyfr to YTO Express |
 | [Cainiao](carrier:cainiao) (AliExpress) | Cainiao nie publikuje jednego formatu. W danych przewoźników, z których korzysta Peek, `DOFR` albo `CNFR`, 13 cyfr i `HD` to Cainiao; `LP` albo `CNG` i 14 cyfr to prawdopodobnie Cainiao, ale nie na pewno |
 | [Yanwen](carrier:yanwen) | `BYS` i 9 cyfr albo dwie litery, 9 cyfr i `YP` (często od `UL` albo `UK`); Yanwen nie publikuje przykładowego numeru. `YW`, trzy litery i 12 cyfr to własna usługa doręczeń Yanwen w USA |
@@ -78,7 +78,7 @@ Dwa ostatnie wiersze przydadzą się przy zakupach z Niemiec: 14 cyfr może wted
 
 ## Numer zaczyna się od TBA albo PL: czy to Amazon?
 
-Jeśli zgadza się długość, najpewniej tak. W danych przewoźników, z których korzysta Peek, `TBA`, `TBC` lub `TBM` i 12 cyfr to [Amazon Logistics](carrier:amazon-logistics), czyli dostawy samego Amazona. To samo oznacza kod kraju, np. `PL` albo `DE`, z 10 cyframi. Nie myl tego z numerem Poczty Polskiej, który na `PL` się kończy, a nie zaczyna. Sam Amazon nie opisuje swoich numerów na stronach pomocy. Na Amazon.pl przesyłkę śledzisz w sekcji „Moje zamówienia”: wybierasz zamówienie i klikasz „Śledź przesyłkę”. Paczkę wysłaną z centrum logistycznego za granicą zobaczysz w śledzeniu dopiero wtedy, gdy dotrze do centrum dystrybucyjnego przewoźnika w Polsce.
+Jeśli zgadza się długość, najpewniej tak. W danych przewoźników, z których korzysta Peek, `TBA`, `TBC` lub `TBM` i 12 cyfr to [Amazon Logistics](carrier:amazon-logistics), czyli dostawy samego Amazona. To samo oznacza kod kraju, np. `PL` albo `DE`, z 10 cyframi. Nie myl tego z numerem Poczty Polskiej, który na `PL` się kończy, a nie zaczyna. Zamówienie z Amazon.pl śledzisz na stronie zamówień w swoim koncie, w aplikacji Amazon Shopping albo w przeglądarce.
 
 ## Format pocztowy: dwie litery, dziewięć cyfr, dwie litery
 
@@ -159,8 +159,9 @@ Numer, który nic nie pokazuje, nie zawsze jest źle wpisany. Mój DHL wśród p
 - [Yanwen: YW Tracking (po angielsku)](https://track.yw56.com.cn/en/index) – strona śledzenia Yanwen, bez przykładowego numeru
 - [Allegro: Program dostaw Allegro Delivery – informacje dla kupujących](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/program-dostaw-allegro-delivery-informacje-dla-kupujacych-Bvw1bwrMmIz) – partnerzy i metody dostawy programu
 - [Allegro: Gdzie sprawdzisz numer i status swojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/gdzie-sprawdzisz-numer-i-status-swojej-przesylki-LvP7agrzOhw) – numer oferty i numer przesyłki w szczegółach zakupu
-- [Amazon.pl: Śledzenie paczki](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – Moje zamówienia i Śledź przesyłkę, paczki z centrów logistycznych za granicą
-- [Amazon: Amazon Logistics](https://www.amazon.com/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – usługa dostaw samego Amazona
+- [About Amazon Polska: 5 sposobów na bezpieczne zakupy z Amazon. Nie daj się oszustom!](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-sposobow-na-bezpieczne-zakupy-z-amazon-nie-daj-sie-oszustom) – historię zamówień śledzisz na stronie zamówień w swoim koncie
+- [About Amazon Polska: Amazon.pl startuje w Polsce](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-pl-startuje-w-polsce) – śledzenie zamówień w aplikacji Amazon Shopping i w przeglądarce (2021)
+- [About Amazon Polska: Amazon unowocześnia dostawy w Europie](https://www.aboutamazon.pl/wiadomosci/miejsca-pracy-i-inwestycje/amazon-unowoczesnia-dostawy-w-europie) – własna sieć dostaw ostatniej mili Amazona w Europie
 - [UPS: sample package label](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – numer 1Z
 - [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – PX, LP, TBA oraz PL i 10 cyfr, numery Cainiao (`DOFR`, `CNFR`, `CNG`), a także YunExpress (`YT` i 16 cyfr) i YTO Express (`YT` i 13 cyfr), numery DPD Polska (13 cyfr i litera albo 14 cyfr od 13) 4PX (`4PX` i `LP`, 13 cyfr i `CN`), Yanwen (`BYS`, `YP` i `YW`), Poczty Polskiej (19 i 20 cyfr) oraz ORLEN Paczki (13 cyfr od `21`, `23` i `26`) w danych przewoźników, z których korzysta Peek
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – numery od YT

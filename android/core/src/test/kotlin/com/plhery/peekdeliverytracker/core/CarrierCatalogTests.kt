@@ -349,7 +349,7 @@ class CarrierCatalogTests {
         )
         assertEquals(listOf("00000000000001", "H0000000000001"), reference.trackingNumbers.map { it.number })
         assertEquals(listOf(false, true), reference.trackingNumbers.map { it.tracksAs })
-        val localizer = Localizer()
+        val localizer = Localizer(AppLanguage.En)
         val originalLanguage = localizer.language
         try {
             localizer.language = AppLanguage.En

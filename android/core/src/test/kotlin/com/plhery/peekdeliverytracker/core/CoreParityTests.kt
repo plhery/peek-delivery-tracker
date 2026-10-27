@@ -31,6 +31,25 @@ class CoreParityTests {
     }
 
     @Test
+    fun theLanguageIsTheSavedOneElseTheFirstOfTheDevicesTheAppSpeaks() {
+        val expected = listOf(
+            Triple(null, listOf("nl-NL", "de-DE"), AppLanguage.De),
+            Triple("fr", listOf("de"), AppLanguage.Fr),
+            Triple("", listOf("it-IT"), AppLanguage.It),
+            Triple("xx", listOf("pt-BR"), AppLanguage.Pt),
+            Triple("DE", listOf("it"), AppLanguage.It),
+            Triple(null, listOf("PL-pl"), AppLanguage.Pl),
+            Triple(null, listOf("-es"), AppLanguage.Es),
+            Triple(null, listOf("zh-Hans-CN", "nl"), AppLanguage.En),
+            Triple(null, listOf(""), AppLanguage.En),
+            Triple(null, emptyList<String>(), AppLanguage.En),
+        )
+        for ((saved, preferred, language) in expected) {
+            assertEquals("$saved $preferred", language, AppLanguage.current(saved, preferred))
+        }
+    }
+
+    @Test
     fun aZeroWidthSpaceIsWhitespaceToFoundation() {
         assertEquals("AB 12", "​ AB 12​​".trimmingWhitespaces())
         assertEquals("AB", "​\nAB​ ".trimmingWhitespacesAndNewlines())
@@ -39,8 +58,7 @@ class CoreParityTests {
 
     /** An amount as the import charges line writes it: `formatted(.currency(code:).locale(_:))` on iOS. */
     private fun money(language: AppLanguage, code: String, amount: Double): String? {
-        val localizer = Localizer()
-        localizer.language = language
+        val localizer = Localizer(language)
         val id = UUID.randomUUID()
         val parcel = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, "2026-10-20T10:00:00Z")))
             .copy(carrierData = CarrierData(importCharges = ImportCharges(currency = code, customs = amount)))

@@ -28,8 +28,7 @@ class ParcelLogicFormattingTests {
     fun estimatesKeepTodayAndWindowsWhileOutForDeliveryAndHideObsoleteDates() {
         val id = UUID.randomUUID()
         val now = DateParser.date("2026-09-07T12:00:00Z")!!
-        val localizer = Localizer()
-        localizer.language = AppLanguage.Fr
+        val localizer = Localizer(AppLanguage.Fr)
         for (stage in listOf(TrackingStage.Delivered, TrackingStage.Returned, TrackingStage.FailedAttempt, TrackingStage.ReadyForPickup, TrackingStage.Exception)) {
             val parcel = makeParcel(id, events = listOf(event(id, stage, "2026-09-07T10:00:00Z"))).copy(expectedDelivery = "2026-09-07")
             assertNull(localizer.parcelDeliveryEstimate(parcel, now))
@@ -48,8 +47,7 @@ class ParcelLogicFormattingTests {
 
     @Test
     fun completionDatesUseRelativeLabelsForFinalEvents() {
-        val localizer = Localizer()
-        localizer.language = AppLanguage.En
+        val localizer = Localizer(AppLanguage.En)
         val now = DateParser.deliveryDate("2026-09-09")!!
         val id = UUID.randomUUID()
         for (stage in listOf(TrackingStage.Delivered, TrackingStage.Returned)) {
@@ -66,8 +64,7 @@ class ParcelLogicFormattingTests {
 
     @Test
     fun aLinksCardSaysWhenAParcelArrivesAndAGiftNoMoreThanThat() {
-        val localizer = Localizer()
-        localizer.language = AppLanguage.En
+        val localizer = Localizer(AppLanguage.En)
         val id = UUID.randomUUID()
         val now = Instant.now()
         val today = LocalDate.ofInstant(now, ZoneId.systemDefault()).toString()
@@ -89,8 +86,7 @@ class ParcelLogicFormattingTests {
 
     @Test
     fun importChargesReadTheirAmountTheLowerOnlinePriceWhileItCanBePaidAndWhetherTheyArePaid() {
-        val localizer = Localizer()
-        localizer.language = AppLanguage.En
+        val localizer = Localizer(AppLanguage.En)
         val id = UUID.randomUUID()
         fun line(charges: ImportCharges?, stage: TrackingStage = TrackingStage.InTransit): ImportChargesLine? {
             val parcel = makeParcel(id, events = listOf(event(id, stage, "2026-10-20T10:00:00Z")))
@@ -119,8 +115,7 @@ class ParcelLogicFormattingTests {
 
     @Test
     fun aScanDatedByItsDayAloneShowsThatDayAndNoClockTime() {
-        val localizer = Localizer()
-        localizer.language = AppLanguage.En
+        val localizer = Localizer(AppLanguage.En)
         val id = UUID.randomUUID()
         val today = DateParser.deliveryDate("2026-09-21")!!
         val now = today.plusSeconds(15 * 3_600L)
@@ -146,8 +141,7 @@ class ParcelLogicFormattingTests {
 
     @Test
     fun dayKeysAndEstimatesAreStableAcrossRepeatedFormatting() {
-        val localizer = Localizer()
-        localizer.language = AppLanguage.En
+        val localizer = Localizer(AppLanguage.En)
         val day = DateParser.deliveryDate("2026-09-12")!!
         assertEquals("2026-09-12", ParcelOrganizer.dayKey(day))
         assertNull(DateParser.date("2026-09-12"))

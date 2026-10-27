@@ -143,28 +143,28 @@ enum class AppLanguage(val rawValue: String) {
         fun fromRawValue(rawValue: String): AppLanguage? = entries.firstOrNull { it.rawValue == rawValue }
 
         /**
-         * The chosen language, saved under `storageKey`, else the first of the device's languages (BCP 47 tags, in
-         * the order the device prefers them) the app speaks, else English.
+         * The chosen language, the value saved under `storageKey`, else the first of the device's languages the app
+         * speaks, else English. The device's languages are BCP 47 tags in the order it prefers them, all of
+         * `LocaleList.getDefault()` as `Locale.preferredLanguages` gives them on iOS: a phone set to Dutch, then
+         * German, gets German.
          */
-        fun resolve(saved: String?, preferredLanguages: List<String>): AppLanguage {
+        fun current(saved: String?, preferredLanguages: List<String>): AppLanguage {
             val preferred = preferredLanguages.firstNotNullOfOrNull {
                 fromRawValue(it.split('-').firstOrNull { part -> part.isNotEmpty() }?.lowercase() ?: "")
             }
             return saved?.let(::fromRawValue) ?: preferred ?: En
         }
-
-        /** The device's language when the app speaks it, else English; the app resolves a saved choice with `resolve`. */
-        val current: AppLanguage get() = resolve(null, listOf(Locale.getDefault().toLanguageTag()))
     }
 }
 
 /**
  * The app's copy in its languages (Localization.json) and its date, time and money formats. Where Core.swift's
- * Localizer saves each language chosen (UserDefaults, and the widget's app group), the app saves it from
- * `languageFlow`.
+ * Localizer starts from `AppLanguage.current` and saves each language chosen (UserDefaults, and the widget's app
+ * group), the app passes `AppLanguage.current` of its saved choice and the device's languages, and saves the
+ * language from `languageFlow`.
  */
 class Localizer(
-    language: AppLanguage = AppLanguage.current,
+    language: AppLanguage,
     /** Where the copy names the device, a variant such as `ipad` replaces the key when it has one. */
     private val variant: String? = null,
 ) {

@@ -87,7 +87,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/guides</loc>
@@ -99,7 +99,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/guides</loc>
@@ -111,7 +111,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/guides</loc>
@@ -123,7 +123,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/guides</loc>
@@ -135,7 +135,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/guides</loc>
@@ -147,7 +147,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pl/guides</loc>
@@ -159,7 +159,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/guides/tracking-number-formats-by-carrier</loc>
@@ -3016,6 +3016,90 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-leroy-merlin" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/leroy-merlin-order-tracking" />
 <lastmod>2026-10-26</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/guides/back-market-order-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/back-market-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/back-market-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-back-market" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-back-market" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-back-market" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-back-market" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-back-market" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/back-market-order-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/guides/back-market-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/back-market-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/back-market-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-back-market" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-back-market" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-back-market" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-back-market" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-back-market" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/back-market-order-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/guides/suivi-commande-back-market</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/back-market-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/back-market-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-back-market" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-back-market" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-back-market" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-back-market" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-back-market" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/back-market-order-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/guides/tracciamento-ordine-back-market</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/back-market-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/back-market-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-back-market" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-back-market" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-back-market" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-back-market" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-back-market" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/back-market-order-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/guides/seguimiento-pedido-back-market</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/back-market-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/back-market-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-back-market" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-back-market" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-back-market" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-back-market" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-back-market" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/back-market-order-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/guides/seguimento-encomenda-back-market</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/back-market-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/back-market-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-back-market" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-back-market" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-back-market" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-back-market" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-back-market" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/back-market-order-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/guides/sledzenie-zamowienia-back-market</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/guides/back-market-order-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/guides/back-market-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/guides/suivi-commande-back-market" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/guides/tracciamento-ordine-back-market" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/guides/seguimiento-pedido-back-market" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/guides/seguimento-encomenda-back-market" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/guides/sledzenie-zamowienia-back-market" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/guides/back-market-order-tracking" />
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/guides/how-to-find-tracking-number</loc>

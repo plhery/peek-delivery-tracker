@@ -52,7 +52,8 @@ Clients show the earliest next-check eligibility; polling windows can delay the 
 ## Source order
 
 1. **The carrier's own adapter**, when it has one. Cainiao (`aliexpress`) is an aggregator
-   too, but it is only queried for AliExpress-style numbers and the Swiss Post handoff.
+   too, but it is only queried for AliExpress-style numbers (also beside another carrier's
+   partial answer or label alone, below) and the Swiss Post handoff.
 2. **Carriers that recognize the number**, when the filed carrier cannot track it (see
    Carrier recognition below).
 3. **Universal providers**, by default ParcelsApp → Ship24 → 17TRACK → UPU.
@@ -258,6 +259,10 @@ providers follow the legs before. Only a provider's progress replaces that answe
 has any, the providers are asked again every 6 h, each within its own backoff, so a number they
 do not know is still asked once a day. A younger label stands alone, and progress the parcel
 has shown stays (Older or regressing result, under Scenarios).
+
+When detection also lists Cainiao for the number (GoFo's `GFUS` numbers), Cainiao is asked
+before the providers for either answer. Its own movement, not behind the parcel's, files the
+parcel under Cainiao; its label alone or a miss leaves the rest to the providers.
 
 **Rate limits (429).** If the last successful retrieval is recent (under 1 h by day, 3 h
 overnight), the parcel keeps its progress and skips fallback until that window or the

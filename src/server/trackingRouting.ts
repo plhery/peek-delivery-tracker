@@ -1176,6 +1176,13 @@ export class TrackingRouter {
       const value = await tryDirect(candidate, true);
       if (value) return persistResult(value, candidate);
     }
+    // Beside the filed carrier's partial answer or label alone, Cainiao, an aggregator, is asked for
+    // the rest before the universals when detection lists it for the number (GoFo's GFUS numbers).
+    // Its movement, not a label of its own, files the parcel under it.
+    if (partialDirect && primary !== 'aliexpress' && detected.candidates.includes('aliexpress')) {
+      const value = await tryDirect('aliexpress', true, undefined, true);
+      if (value) return persistResult(value, 'aliexpress');
+    }
     // A carrier chosen by hand that has its own adapter comes first from now on:
     // the one confirmed before it is set aside unless it just tracked the number.
     if (changed && directCarrier(declared) && state.confirmed_number === number && state.confirmed_carrier !== declared) {

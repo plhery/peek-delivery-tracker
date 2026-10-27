@@ -1808,6 +1808,37 @@ describe('persistent tracking routing', () => {
       expect(result.sourceCarrierId).toBe(partner);
       expect(universal).not.toHaveBeenCalled();
     });
+
+    describe('a number detection also lists Cainiao for', () => {
+      // A GoFo number in the shape detection lists Cainiao and GoFo for.
+      const gofo = () => parcel({ carrier: 'gofo', tracking_number: 'GFUS01000000000001' });
+      const cainiao = (result: CarrierResult): RoutedResult => ({ sourceCarrierId: 'aliexpress', swissPostReady: null, handoffFallbackErrorType: null, result });
+
+      it('asks Cainiao before the providers, and files the parcel under it once it shows movement', async () => {
+        fixedPlan('ParcelsApp');
+        const { router, direct, universal } = setup();
+        direct.mockImplementation(async (_parcel, carrier) => carrier === 'gofo' ? label(undefined, 'gofo') : cainiao(journey()));
+        const result = await router.fetch(gofo(), false);
+        expect(direct.mock.calls.map(([, carrier]) => carrier)).toEqual(['gofo', 'aliexpress']);
+        expect(result).toMatchObject({ sourceCarrierId: 'aliexpress', correction: { carrier: 'aliexpress' } });
+        expect(routingOf(result)).toMatchObject({ configured_carrier: 'aliexpress', confirmed_carrier: 'aliexpress' });
+        expect(universal).not.toHaveBeenCalled();
+      });
+
+      it.each([
+        ['holds a label of its own', () => cainiao({ ...label().result })],
+        ['does not know the number', () => { throw new NotFoundError('aliexpress'); }],
+      ] as const)('leaves the rest to the providers when Cainiao %s', async (_case, answer) => {
+        fixedPlan('ParcelsApp');
+        const { router, direct, universal } = setup();
+        direct.mockImplementation(async (_parcel, carrier) => carrier === 'gofo' ? label(undefined, 'gofo') : answer());
+        universal.mockResolvedValue({ ...journey(), discovered_carrier: 'gofo' });
+        const result = await router.fetch(gofo(), false);
+        expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', carrier_answered: true });
+        expect(routingOf(result)).toMatchObject({ configured_carrier: 'gofo', confirmed_carrier: 'gofo' });
+        expect(universal).toHaveBeenCalledOnce();
+      });
+    });
   });
   describe('China Post partial history backfills', () => {
     const input = (extra: JsonObject = {}) => parcel({ carrier: 'china-post', tracking_number: 'ZA00000000001', current_stage: 'in_transit', ...extra });

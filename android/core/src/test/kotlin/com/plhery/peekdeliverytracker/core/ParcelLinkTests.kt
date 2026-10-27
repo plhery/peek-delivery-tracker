@@ -36,6 +36,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -235,6 +236,24 @@ class ParcelLinkTests {
         assertNull(ParcelLinkClaim(response = ClaimParcelsResponse(results = emptyList()), linkId = linkId))
     }
 
+    /** Swift compares link ids canonically: one written with the Kelvin sign, U+212A, is the same link. */
+    @Test
+    fun aLinkIdWrittenWithTheKelvinSignIsTheSameLink() {
+        val plain = "k7Qm2xHd9RtK"
+        val kelvin = "k7Qm2xHd9Rt\u212A"
+        val response = ApiJson.decodeFromString(ClaimParcelsResponse.serializer(), """{"results":[{"id":"$plain","outcome":"quota"}]}""")
+        assertEquals(ParcelLinkClaim.Full, ParcelLinkClaim(response = response, linkId = kelvin))
+
+        // The link kept for after sign-in is settled by the same link written the other way.
+        val store = ParcelLinkStore(defaults = MemoryDefaults(), read = { _, _ -> null })
+        store.open(ParcelLinkRoute(plain))
+        store.rememberForSignIn()
+        assertEquals(plain, store.remembered?.id)
+        store.open(ParcelLinkRoute(kelvin))
+        store.close()
+        assertNull(store.remembered)
+    }
+
     @Test
     fun anAddedParcelClosesTheSheetAndReachesTheListOnceItHasGone() {
         val store = ParcelLinkStore(defaults = MemoryDefaults(), read = { _, _ -> null })
@@ -356,6 +375,28 @@ class ParcelLinkTests {
         assertEquals("error.rateLimited", ParcelLinkFailure.RateLimited.messageKey)
         assertNull(ParcelLinkFailure(CancellationException()))
         assertNull(ParcelLinkFailure(CancellationException("Canceled")))
+    }
+
+    /** Swift compares routes canonically: words the service writes another way leave the route as it is. */
+    @Test
+    fun wordsWrittenAnotherWayLeaveTheRouteAsItIs() = runTest {
+        var answer = fixture().publicParcel
+        val events = answer.parcel.trackingEvents
+        answer = answer.copy(
+            parcel = answer.parcel.copy(trackingEvents = listOf(events[0].copy(stage = TrackingStage.Delivered)) + events.drop(1)),
+            link = answer.link.copy(gift = true, giftWords = GiftWords(name = "Cafe\u0301 lamp", note = "Bonne anne\u0301e", from = "Zoe\u0308")),
+        )
+        val store = ParcelLinkStore(defaults = MemoryDefaults(), read = { _, _ -> answer })
+        val opened = ParcelLinkRoute(linkId, name = "Caf\u00E9 lamp", note = "Bonne ann\u00E9e", from = "Zo\u00EB")
+        store.open(opened)
+        store.load()
+        assertSame(opened, store.route)
+        assertSame(opened, store.routeFlow.value)
+
+        answer = answer.copy(link = answer.link.copy(giftWords = GiftWords(name = "Cafe lamp", note = "Bonne anne\u0301e", from = "Zoe\u0308")))
+        store.load()
+        assertEquals("Cafe lamp", store.route?.name)
+        assertEquals("Bonne anne\u0301e", store.route?.note)
     }
 
     /** The app's API client stands in for `DeliveryAPIClient.publicParcel`, failing as a request to links.test would. */

@@ -155,7 +155,7 @@ sealed class ParcelLinkClaim {
     companion object {
         /** Nil when the answer says nothing about this link. */
         operator fun invoke(response: ClaimParcelsResponse, linkId: String): ParcelLinkClaim? {
-            val result = response.results.firstOrNull { it.id == linkId } ?: return null
+            val result = response.results.firstOrNull { it.id.equalsCanonically(linkId) } ?: return null
             return when (result.outcome) {
                 ClaimParcelResultOutcome.Kept -> Added(result.packageId)
                 ClaimParcelResultOutcome.Already -> Already(result.packageId)
@@ -331,7 +331,8 @@ class ParcelLinkStore(
                 if (response.gift != ParcelLinkGift.Wrapped && words != null) {
                     next = ParcelLinkRoute(id = route.id, name = words.name, note = words.note, from = words.from, key = next.key)
                 }
-                if (next != route) this.route = next
+                // Swift compares the words canonically: the same words written another way keep the route.
+                if (!next.equalsCanonically(route)) this.route = next
                 phase = Phase.Shown(response)
             } else {
                 gone()
@@ -427,7 +428,7 @@ class ParcelLinkStore(
     /** A remembered link is dropped once this link is settled; another link's stays. */
     private fun forget() {
         val route = route ?: return
-        if (remembered?.id != route.id) return
+        if (!remembered?.id.equalsCanonically(route.id)) return
         defaults.removeObject(forKey = storageKey)
     }
 

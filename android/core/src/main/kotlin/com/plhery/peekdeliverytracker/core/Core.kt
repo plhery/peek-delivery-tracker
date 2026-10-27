@@ -548,7 +548,8 @@ object DateParser {
 /**
  * Swift's `JSONEncoder`: the bytes the iPhone app writes for a value. Nil properties are left out (but for the types
  * in `typesEncodingNil`, whose own `encode(to:)` writes them as null), a UUID is its `uuidString` in capitals, `/` is
- * written `\/`, control characters are escaped and the rest written as it is, and numbers as Swift prints a Double.
+ * written `\/`, control characters are escaped and the rest written as it is (a lone surrogate, which a Swift String
+ * cannot hold, as U+FFFD), and numbers as Swift prints a Double.
  * The keys follow the declaration unless sorted, by their Unicode scalars: Swift's own unsorted order is a hash order no
  * two runs share.
  */
@@ -610,7 +611,7 @@ class JsonEncoder(private val sortedKeys: Boolean = false) {
 
     private fun StringBuilder.quote(text: String) {
         append('"')
-        for (char in text) {
+        for (char in text.wellFormed()) {
             when (char) {
                 '"' -> append("\\\"")
                 '\\' -> append("\\\\")
@@ -635,8 +636,8 @@ class JsonEncoder(private val sortedKeys: Boolean = false) {
             var i = 0
             var j = 0
             while (i < left.length && j < right.length) {
-                val a = left.codePointAt(i)
-                val b = right.codePointAt(j)
+                val a = left.scalarAt(i)
+                val b = right.scalarAt(j)
                 if (a != b) return@Comparator a.compareTo(b)
                 i += Character.charCount(a)
                 j += Character.charCount(b)

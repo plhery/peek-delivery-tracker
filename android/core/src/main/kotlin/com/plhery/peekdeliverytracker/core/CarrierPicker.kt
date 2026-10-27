@@ -2,7 +2,6 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
-import java.text.Normalizer
 
 // The logic of CarrierPicker.swift that the carrier catalog's tests cover.
 
@@ -28,7 +27,7 @@ object CarrierPickerSearch {
     fun fold(value: String): String = value.characters().joinToString("") { character ->
         // Foundation's diacritic- and case-insensitive folding: marks dropped from the decomposed form, then
         // full case folding, which upper-then-lower casing gives for the letters it changes.
-        val folded = combiningMarks.replace(Normalizer.normalize(character, Normalizer.Form.NFD), "").uppercase().lowercase()
+        val folded = combiningMarks.replace(character.nfd(), "").uppercase().lowercase()
         if (folded.characterCount == 1) folded else character
     }
 

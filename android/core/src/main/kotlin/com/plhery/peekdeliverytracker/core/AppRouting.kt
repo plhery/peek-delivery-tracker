@@ -150,17 +150,19 @@ data class ParcelLinkWords(
 
         /**
          * One line without control characters, at most `limit` long. Whole characters only, so a cut never leaves
-         * half an emoji. `length` measures a Character; by default its Unicode scalars.
+         * half an emoji. `length` measures a Character; by default its Unicode scalars. A lone surrogate becomes
+         * U+FFFD.
          */
         fun clean(value: String, limit: Int, length: (String) -> Int = { it.codePointCount(0, it.length) }): String? {
             val line = StringBuilder()
             var gap = false
             var index = 0
             while (index < value.length) {
-                val scalar = value.codePointAt(index)
+                // A lone surrogate is U+FFFD, as the Swift String holds it.
+                val scalar = value.scalarAt(index)
                 index += Character.charCount(scalar)
-                val category = Character.getType(scalar).toByte()
-                if (hasWhiteSpaceProperty(scalar) || category == Character.CONTROL || category == Character.FORMAT) {
+                // Swift's categories, from its Unicode version: a phone's ICU may not know the newer format characters.
+                if (hasWhiteSpaceProperty(scalar) || isControlScalar(scalar) || isFormatScalar(scalar)) {
                     gap = line.isNotEmpty()
                 } else {
                     if (gap) line.append(' ')
@@ -215,14 +217,29 @@ class ParcelLinkRoute(
 
     override fun hashCode(): Int = listOf(id, name, note, from, key).hashCode()
 
+    /**
+     * Swift's `==`, which compares each String canonically. `equals` compares them as they are, so a StateFlow holding
+     * a route still takes the same words written another way.
+     */
+    internal fun equalsCanonically(other: ParcelLinkRoute): Boolean =
+        id.equalsCanonically(other.id) && name.equalsCanonically(other.name) && note.equalsCanonically(other.note) &&
+            from.equalsCanonically(other.from) && key.equalsCanonically(other.key)
+
     /** Swift's `description` and `debugDescription`: the id alone, never the key. */
     override fun toString(): String = "ParcelLinkRoute($id)"
 
     companion object {
         private const val alphabet = "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
-        // Twelve Characters of the alphabet are twelve of its ASCII letters and digits.
-        fun validId(value: String): Boolean = value.length == 12 && value.all { it in alphabet }
+        /**
+         * Twelve Characters of the alphabet. Swift compares Characters canonically, so one equivalent to a letter of
+         * the alphabet is that letter: U+212A, the Kelvin sign, is K.
+         */
+        fun validId(value: String): Boolean {
+            if (value.length == 12 && value.all { it in alphabet }) return true
+            val characters = value.characters()
+            return characters.size == 12 && characters.all { character -> character.nfc().let { it.length == 1 && it[0] in alphabet } }
+        }
 
         /** An id in the format the service gives a link, for a demo that has no service. */
         fun madeUpId(random: Random = Random.Default): String = String(CharArray(12) { alphabet[random.nextInt(alphabet.length)] })

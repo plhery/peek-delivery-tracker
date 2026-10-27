@@ -478,6 +478,51 @@ class ParcelShareTests {
         assertTrue(model.shown.gift)
     }
 
+    /** Swift compares the words canonically: while only how they are written changes, the device keeps them as they were. */
+    @Test
+    fun wordsWrittenAnotherWayAreNotKeptAgain() = runTest {
+        val defaults = MemoryDefaults()
+        val notes = ParcelShareNotes(defaults)
+        val service = Service()
+        service.link = ParcelShare(id = linkId, showNumber = false, gift = true, createdAt = "2026-10-01T08:00:00.000Z")
+        val parcelId = UUID.randomUUID()
+        val model = model(service, parcelId = parcelId, defaults = defaults)
+        model.load()
+        model.words = model.words.copy(note = "Bonne ann\u00E9e")
+        assertEquals("Bonne ann\u00E9e", notes.words(parcelId)?.note)
+        model.words = model.words.copy(note = "Bonne anne\u0301e")
+        assertEquals("What is typed shows as typed", "Bonne anne\u0301e", model.words.note)
+        assertEquals("Bonne ann\u00E9e", notes.words(parcelId)?.note)
+        model.words = model.words.copy(note = "Bonne anne\u0301e!")
+        assertEquals("Bonne anne\u0301e!", notes.words(parcelId)?.note)
+    }
+
+    @Serializable
+    private class Note(val note: String)
+
+    /** A Swift String cannot hold a lone surrogate: what is typed and what is sent hold U+FFFD in its place. */
+    @Test
+    fun aLoneSurrogateIsTheReplacementCharacter() = runTest {
+        assertEquals(ParcelShareWords(note = "a\uFFFDb", from = "\uFFFD"), ParcelShareWords(note = "a\uD800b", from = "\uDC00").limited)
+        assertEquals("\uFFFD".repeat(60), ParcelShareWords(from = "\uDC00".repeat(70)).limited.from)
+
+        val service = Service()
+        service.link = ParcelShare(id = linkId, showNumber = false, gift = true, createdAt = "2026-10-01T08:00:00.000Z")
+        val parcelId = UUID.randomUUID()
+        val defaults = MemoryDefaults()
+        val model = model(service, parcelId = parcelId, defaults = defaults)
+        model.load()
+        model.words = model.words.copy(note = "a\uD800b")
+        assertEquals("a\uFFFDb", model.words.note)
+        assertEquals("a\uFFFDb", ParcelShareNotes(defaults).words(parcelId)?.note)
+
+        // Swift's JSONEncoder writes it as UTF-8: EF BF BD.
+        val bytes = JsonEncoder.deliveryTracker.encode(Note.serializer(), Note("a\uD800b"))
+        assertEquals(listOf(0x61, 0xEF, 0xBF, 0xBD, 0x62), bytes.drop(9).take(5).map { it.toInt() and 0xFF })
+        assertEquals("{\"note\":\"a\uFFFDb\"}", bytes.decodeToString())
+        assertEquals("{\"note\":\"a\uFFFDb\"}", JsonEncoder.deliveryTracker.encode(Note.serializer(), Note("a\uDC00b")).decodeToString())
+    }
+
     @Test
     fun theLinkCarriesTheNameOnlyWhenAskedAndAGiftsWordsOnlyForAGift() = runTest {
         val defaults = MemoryDefaults()

@@ -4,7 +4,6 @@ import java.math.BigDecimal
 import java.math.MathContext
 import java.math.RoundingMode
 import java.text.Collator
-import java.text.Normalizer
 import java.util.Locale
 import kotlin.math.abs
 
@@ -28,6 +27,41 @@ internal fun isWhitespaceScalar(scalar: Int): Boolean =
 internal fun hasWhiteSpaceProperty(scalar: Int): Boolean = when (scalar) {
     in 0x09..0x0D, 0x20, 0x85, 0xA0, 0x1680, in 0x2000..0x200A, 0x2028, 0x2029, 0x202F, 0x205F, 0x3000 -> true
     else -> false
+}
+
+/** General_Category=Control, which Unicode never changes: U+0000 to U+001F and U+007F to U+009F. */
+internal fun isControlScalar(scalar: Int): Boolean = scalar in 0x00..0x1F || scalar in 0x7F..0x9F
+
+/**
+ * General_Category=Format as Swift's standard library has it (ScalarData.kt). The phone's ICU is as old as the phone:
+ * Android 12 does not know U+0890 or U+13439 to U+1343F.
+ */
+internal fun isFormatScalar(scalar: Int): Boolean {
+    val index = ScalarData.format.binarySearch(scalar)
+    // The ranges' bounds alternate: a first scalar, then the one after the last.
+    return if (index >= 0) index % 2 == 0 else (-index - 1) % 2 == 1
+}
+
+/**
+ * The scalar at a UTF-16 offset, as a Swift String has it: a lone surrogate, which a Swift String cannot hold, is
+ * U+FFFD, the replacement character, as bridging makes it. Either takes one UTF-16 unit.
+ */
+internal fun String.scalarAt(index: Int): Int {
+    val scalar = codePointAt(index)
+    return if (scalar in 0xD800..0xDFFF) 0xFFFD else scalar
+}
+
+/** The text as a Swift String holds it: each lone surrogate replaced by U+FFFD. */
+internal fun String.wellFormed(): String {
+    if (none { it.isSurrogate() }) return this
+    val text = StringBuilder(length)
+    var index = 0
+    while (index < length) {
+        val scalar = scalarAt(index)
+        text.appendCodePoint(scalar)
+        index += Character.charCount(scalar)
+    }
+    return text.toString()
 }
 
 /** `trimmingCharacters(in:)`: the scalars in the set dropped from both ends. */
@@ -93,12 +127,15 @@ internal fun String.splitOnCharacter(separator: String): List<String> {
     return pieces
 }
 
-/** Swift's `==` on Strings: canonically equivalent, as NFC compares them. */
-internal fun String.equalsCanonically(other: String): Boolean =
-    this == other || Normalizer.normalize(this, Normalizer.Form.NFC) == Normalizer.normalize(other, Normalizer.Form.NFC)
+/**
+ * Swift's `==` on Strings, optional or not: canonically equivalent, as NFC compares them at Swift's Unicode version
+ * (Normalization.kt). Nil equals nil alone.
+ */
+internal fun String?.equalsCanonically(other: String?): Boolean =
+    this == other || (this != null && other != null && nfc() == other.nfc())
 
 /** A hash code that agrees with `equalsCanonically`, for a type that compares a String as Swift does. */
-internal fun String.canonicalHashCode(): Int = Normalizer.normalize(this, Normalizer.Form.NFC).hashCode()
+internal fun String.canonicalHashCode(): Int = nfc().hashCode()
 
 /** Swift's `lowercased()`: each scalar's full lowercase mapping on its own, so a final Σ is σ, not ς. */
 internal fun String.lowercased(): String {
@@ -176,7 +213,7 @@ internal fun String.splitOnWhitespace(): List<String> {
 internal fun String.equalsFoldingCase(other: String): Boolean = foldedCase() == other.foldedCase()
 
 private fun String.foldedCase(): String {
-    val decomposed = Normalizer.normalize(this, Normalizer.Form.NFD)
+    val decomposed = nfd()
     val folded = StringBuilder(decomposed.length)
     var index = 0
     while (index < decomposed.length) {
@@ -186,7 +223,7 @@ private fun String.foldedCase(): String {
         folded.append(if (scalar == 0x131) text else text.lowercase(Locale.ROOT).uppercase(Locale.ROOT).lowercase(Locale.ROOT))
         index += Character.charCount(scalar)
     }
-    return Normalizer.normalize(folded, Normalizer.Form.NFD)
+    return folded.toString().nfd()
 }
 
 /** Foundation's localized comparisons, by the options they are given, as ICU collation (`Icu.collators`). */

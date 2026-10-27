@@ -30,6 +30,10 @@ data class ParcelShareWords(
     val note: String = "",
     val from: String = "",
 ) {
+    /** Swift's `==`, which compares the note and who it is from canonically. */
+    internal fun equalsCanonically(other: ParcelShareWords): Boolean =
+        name == other.name && note.equalsCanonically(other.note) && from.equalsCanonically(other.from)
+
     /** The words as a link may carry them: one line each, within their limits. */
     val cleaned: ParcelShareWords
         get() = ParcelShareWords(
@@ -43,8 +47,9 @@ data class ParcelShareWords(
         get() = ParcelShareWords(name = name, note = limit(note, ParcelLinkWords.noteLimit), from = limit(from, ParcelLinkWords.fromLimit))
 
     private companion object {
-        /** Whole Characters while their Unicode scalars fit. */
-        fun limit(text: String, limit: Int): String {
+        /** Whole Characters while their Unicode scalars fit. A lone surrogate is U+FFFD, as in a Swift String. */
+        fun limit(typed: String, limit: Int): String {
+            val text = typed.wellFormed()
             if (text.codePointCount(0, text.length) <= limit) return text
             val kept = StringBuilder()
             var used = 0
@@ -401,7 +406,7 @@ class ParcelShareModel(
 
     /** Takes the link as the service describes it. */
     private fun adopt(answer: ParcelShare) {
-        val known = link?.id == answer.id
+        val known = link?.id.equalsCanonically(answer.id)
         link = answer
         settings = Settings(showNumber = answer.showNumber, gift = answer.gift)
         if (known) return
@@ -422,7 +427,9 @@ class ParcelShareModel(
     private fun remember() {
         if (link == null) return
         val cleaned = words.cleaned
-        if (cleaned == remembered) return
+        // Swift compares the words canonically. `ParcelShareWords.equals` does not, so the StateFlow holding what is
+        // typed takes every edit.
+        if (remembered?.let(cleaned::equalsCanonically) == true) return
         remembered = cleaned
         notes.remember(cleaned, parcelId)
     }

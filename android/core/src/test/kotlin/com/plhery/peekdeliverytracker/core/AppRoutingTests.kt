@@ -465,4 +465,42 @@ class AppRoutingTests {
         assertTrue(OAuthFlow.validCustomProvider("custom:" + "a".repeat(43)))
         assertTrue(OAuthFlow.validCustomProvider("custom:my-provider:v2"))
     }
+
+    // Unicode as Swift has it. The expected answers are Swift's on macOS 27.
+
+    /** Format characters as Swift's Unicode has them: Android 12's ICU does not know U+0890 or U+13439 to U+1343F. */
+    @Test
+    fun aLinksWordsDropFormatCharactersAsSwiftsUnicodeHasThem() {
+        assertEquals("a b", ParcelLinkWords.clean("a\u0890b", limit = 60))
+        assertEquals("x y", ParcelLinkWords.clean("x\u0891\u0891y", limit = 60))
+        assertNull(ParcelLinkWords.clean("\uD80D\uDC39", limit = 60))
+        assertNull(ParcelLinkWords.clean("\uD80D\uDC3F", limit = 60))
+        assertEquals("a b", ParcelLinkWords.clean("a\uD80D\uDC3Fb", limit = 60))
+        assertEquals("Hieroglyphs after U+1343F stay", "\uD80D\uDC40a", ParcelLinkWords.clean("\uD80D\uDC40a", limit = 60))
+        assertEquals("a", ParcelLinkWords.clean("\uD80D\uDC3Aa", limit = 60))
+        assertEquals("Moon lamp", ParcelLinkWords(fragment = "n=Moon%E0%A2%90lamp").name)
+    }
+
+    /** A Swift String cannot hold a lone surrogate: bridged, it is U+FFFD, the replacement character. */
+    @Test
+    fun aLoneSurrogateIsTheReplacementCharacter() {
+        assertEquals("a\uFFFDb", ParcelLinkWords.clean("a\uD800b", limit = 60))
+        assertEquals("a\uFFFDb", ParcelLinkWords.clean("a\uDC00b", limit = 60))
+        assertEquals("\uFFFD", ParcelLinkWords.clean("\uDBFF", limit = 60))
+        assertEquals("Each counts as one scalar", "\uFFFD\uFFFD", ParcelLinkWords.clean("\uDC00\uD800\uD800", limit = 2))
+        assertEquals("a\uD83C\uDF81b", ParcelLinkWords.clean("a\uD83C\uDF81b", limit = 60))
+    }
+
+    /** Swift compares Characters canonically: U+212A, the Kelvin sign, is K, which the alphabet has. */
+    @Test
+    fun aLinkIdMayBeWrittenWithTheKelvinSign() {
+        assertTrue(ParcelLinkRoute.validId("k7Qm2xHd9RtK"))
+        assertTrue(ParcelLinkRoute.validId("k7Qm2xHd9Rt\u212A"))
+        assertTrue(ParcelLinkRoute.validId("\u212A".repeat(12)))
+        assertEquals("k7Qm2xHd9Rt\u212A", route("peekdeliverytracker://p/k7Qm2xHd9Rt%E2%84%AA", baseUrl = "https://peektracker.com")?.id)
+        assertEquals("k7Qm2xHd9Rt\u212A", route("https://peektracker.com/p/k7Qm2xHd9Rt%E2%84%AA", baseUrl = "https://peektracker.com")?.id)
+        for (id in listOf("k7Qm2xHd9RtK\u0301", "k7Qm2xHd9Rt\u212A\u0301", "k7Qm2xHd9Rt", "k7Qm2xHd9RtI", "k7Qm2xHd9Rt\uFF2B")) {
+            assertFalse(id, ParcelLinkRoute.validId(id))
+        }
+    }
 }

@@ -126,11 +126,49 @@ val Localizer.deliveryUpdatesPlace: String
     get() = "${text("settings.title")} › ${text("settings.deliveryUpdates")}"
 
 /**
- * UNAuthorizationStatus. On Android the app reads it from the notification permission: granted and notifications on
- * is `Authorized`, never asked is `NotDetermined`, refused or turned off is `Denied`. `Provisional` and `Ephemeral`
- * are iOS's own.
+ * UNAuthorizationStatus. On Android the app reads it from the notification permission with [fromAndroid].
+ * `Provisional` (quiet notifications iOS delivers before the user has been asked) and `Ephemeral` (an App Clip's, for
+ * a while) are iOS's own, and Android never has them; the policies below count `Provisional` as authorized and
+ * `Ephemeral` as not, as the iPhone app does.
  */
-enum class NotificationAuthorizationStatus { NotDetermined, Denied, Authorized, Provisional, Ephemeral }
+enum class NotificationAuthorizationStatus {
+    NotDetermined, Denied, Authorized, Provisional, Ephemeral;
+
+    companion object {
+        /**
+         * What iOS would report, from what Android tells the app about its notifications.
+         *
+         * From Android 13 (API 33), posting notifications is a permission the app asks for (POST_NOTIFICATIONS):
+         * - granted, with the app's notifications on, is `Authorized`;
+         * - never asked is `NotDetermined`, as on iOS before the first request;
+         * - refused while the system would still ask, which it shows by asking for a rationale after a first
+         *   refusal, is `NotDetermined` too, so the app asks again rather than sending the user to Settings;
+         * - refused for good, asked before and no rationale (the system stops asking after a second refusal), is
+         *   `Denied`, as is granted with the app's notifications turned off: only Settings can turn them on, as on iOS.
+         *
+         * Android 12 (API 31 and 32) has no such permission: an app's notifications are on until the user turns them
+         * off, so on is `Authorized` and off is `Denied`, and the permission's facts are not read.
+         *
+         * @param sdkInt `Build.VERSION.SDK_INT`.
+         * @param granted Whether POST_NOTIFICATIONS is granted.
+         * @param askedBefore Whether the app has asked for POST_NOTIFICATIONS before, which Android does not keep.
+         * @param shouldShowRationale `shouldShowRequestPermissionRationale(POST_NOTIFICATIONS)`.
+         * @param areNotificationsEnabled `NotificationManagerCompat.areNotificationsEnabled()`.
+         */
+        fun fromAndroid(
+            sdkInt: Int,
+            granted: Boolean,
+            askedBefore: Boolean,
+            shouldShowRationale: Boolean,
+            areNotificationsEnabled: Boolean,
+        ): NotificationAuthorizationStatus = when {
+            sdkInt < 33 -> if (areNotificationsEnabled) Authorized else Denied
+            granted -> if (areNotificationsEnabled) Authorized else Denied
+            !askedBefore || shouldShowRationale -> NotDetermined
+            else -> Denied
+        }
+    }
+}
 
 object NotificationDevicePolicy {
     fun isAuthorized(status: NotificationAuthorizationStatus): Boolean =

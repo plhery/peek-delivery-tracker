@@ -145,6 +145,67 @@ class NotificationLogicTests {
         )
     }
 
+    private fun androidStatus(
+        sdkInt: Int = 33,
+        granted: Boolean = false,
+        askedBefore: Boolean = false,
+        shouldShowRationale: Boolean = false,
+        areNotificationsEnabled: Boolean = granted,
+    ): NotificationAuthorizationStatus =
+        NotificationAuthorizationStatus.fromAndroid(sdkInt, granted, askedBefore, shouldShowRationale, areNotificationsEnabled)
+
+    /** Android's own: the notification permission of Android 13 and later, as iOS would report it. */
+    @Test
+    fun notificationPermissionReadsAsIosWouldFromAndroid13() {
+        for (sdkInt in listOf(33, 34, 36)) {
+            assertEquals(NotificationAuthorizationStatus.NotDetermined, androidStatus(sdkInt))
+            // Refused once: the system asks for a rationale and would still ask.
+            assertEquals(
+                NotificationAuthorizationStatus.NotDetermined,
+                androidStatus(sdkInt, askedBefore = true, shouldShowRationale = true),
+            )
+            // Refused for good: only Settings can turn notifications on.
+            assertEquals(NotificationAuthorizationStatus.Denied, androidStatus(sdkInt, askedBefore = true))
+            assertEquals(NotificationAuthorizationStatus.Authorized, androidStatus(sdkInt, granted = true, askedBefore = true))
+            // Granted without the app asking, as when the phone moved up from Android 12.
+            assertEquals(NotificationAuthorizationStatus.Authorized, androidStatus(sdkInt, granted = true))
+            assertEquals(
+                NotificationAuthorizationStatus.Denied,
+                androidStatus(sdkInt, granted = true, askedBefore = true, areNotificationsEnabled = false),
+            )
+        }
+    }
+
+    /** Android's own: before Android 13 an app's notifications are on until the user turns them off. */
+    @Test
+    fun notificationsOnOrOffReadAsIosWouldOnAndroid12() {
+        for (sdkInt in 31..32) {
+            assertEquals(NotificationAuthorizationStatus.Authorized, androidStatus(sdkInt, areNotificationsEnabled = true))
+            assertEquals(NotificationAuthorizationStatus.Denied, androidStatus(sdkInt, areNotificationsEnabled = false))
+            // The permission's facts are Android 13's, and not read.
+            assertEquals(
+                NotificationAuthorizationStatus.Denied,
+                androidStatus(sdkInt, granted = true, askedBefore = true, areNotificationsEnabled = false),
+            )
+        }
+    }
+
+    @Test
+    fun androidNeverReportsIosOwnPermissionStates() {
+        val facts = listOf(false, true)
+        val statuses = (31..36).flatMap { sdkInt ->
+            facts.flatMap { granted ->
+                facts.flatMap { asked ->
+                    facts.flatMap { rationale -> facts.map { enabled -> androidStatus(sdkInt, granted, asked, rationale, enabled) } }
+                }
+            }
+        }
+        assertEquals(
+            setOf(NotificationAuthorizationStatus.NotDetermined, NotificationAuthorizationStatus.Denied, NotificationAuthorizationStatus.Authorized),
+            statuses.toSet(),
+        )
+    }
+
     @Test
     fun invitationWaitsForPermissionCheckAndARealAccountWithParcels() {
         assertTrue(invitation())

@@ -11,9 +11,10 @@ interface SessionPersistence {
     /** Throws when the value could not be saved. */
     fun save(data: ByteArray)
 
-    /** Nil when nothing is saved. */
+    /** Nil when nothing is saved, or when it cannot be read (a Keystore key lost, say): it never throws for that. */
     fun load(): ByteArray?
 
+    /** Never throws: nothing left to delete is no failure. */
     fun delete()
 }
 

@@ -27,6 +27,7 @@ import com.plhery.peekdeliverytracker.core.api.UuidSerializer
 import java.time.Instant
 import java.util.Locale
 import java.util.UUID
+import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.DeserializationStrategy
@@ -66,6 +67,9 @@ data class DeviceParcel(
     val alertToken: String? = null,
 ) {
     val isViewer: Boolean get() = viewer == true
+
+    /** Leaves out the link id, which opens the parcel to anyone, and the device token. */
+    override fun toString(): String = "DeviceParcel(parcel=${parcel.id}, viewer=$viewer, archived=${archivedAt != null})"
 }
 
 /** How the service answered when this phone asked for a parcel's notifications. */
@@ -276,7 +280,10 @@ interface DeviceParcelStorage {
     fun save(parcels: List<DeviceParcel>, keys: Map<String, String>)
 
     /** The parcels, and the owner keys by link id. */
-    data class Contents(val parcels: List<DeviceParcel>, val keys: Map<String, String>)
+    data class Contents(val parcels: List<DeviceParcel>, val keys: Map<String, String>) {
+        /** Leaves out the keys, which are credentials. */
+        override fun toString(): String = "Contents(parcels=$parcels, keys=${keys.size})"
+    }
 }
 
 /**
@@ -286,7 +293,11 @@ interface DeviceParcelStorage {
  * `filesDir/DeviceParcels/parcels.json`, its folder made when it is first written.
  */
 interface DeviceParcelFile {
-    /** The file's bytes, or nil when there is no file or it cannot be read. */
+    /**
+     * The file's bytes, or nil when there is no file or it cannot be read; read through the same `AtomicFile`
+     * (`readFully`). Neither this file nor the keys' secret store goes into a backup (`dataExtractionRules`): a file
+     * brought back without its keys holds parcels this phone can neither read nor forget.
+     */
     fun read(): ByteArray?
 
     /**
@@ -308,14 +319,16 @@ interface DeviceParcelFile {
  */
 class DeviceParcelFiles(private val keychain: SessionPersistence, private val file: DeviceParcelFile) : DeviceParcelStorage {
     override fun load(): DeviceParcelStorage.Contents {
-        val keys = keychain.load()?.let { data ->
+        // As KeychainStore's and Data(contentsOf:)'s `try?`: a store or file that cannot be read reads as empty, so a
+        // lost Keystore key or a broken file never stops the app from opening.
+        val keys = quietly { keychain.load() }?.let { data ->
             try {
                 decodeJson(keysSerializer, data)
             } catch (_: Exception) {
                 null
             }
         } ?: emptyMap()
-        val parcels = file.read()?.let { data ->
+        val parcels = quietly { file.read() }?.let { data ->
             try {
                 decodeSwiftKeys(parcelsSerializer, data)
             } catch (_: Exception) {
@@ -327,16 +340,13 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
 
     override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {
         if (parcels.isEmpty()) {
-            keychain.delete()
-            try {
-                file.delete()
-            } catch (_: Exception) {
-            }
+            quietly { keychain.delete() }
+            quietly { file.delete() }
             return
         }
         // The keys go first: a parcel on file always has its key.
         if (keys.isEmpty()) {
-            keychain.delete()
+            quietly { keychain.delete() }
         } else {
             try {
                 keychain.save(JsonEncoder.deliveryTracker.encode(keysSerializer, keys))
@@ -344,10 +354,13 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
                 return
             }
         }
-        try {
-            file.write(encoder.encode(parcelsSerializer, parcels))
-        } catch (_: Exception) {
-        }
+        quietly { file.write(encoder.encode(parcelsSerializer, parcels)) }
+    }
+
+    private inline fun <T> quietly(block: () -> T): T? = try {
+        block()
+    } catch (_: Exception) {
+        null
     }
 
     companion object {
@@ -537,6 +550,8 @@ class DeviceParcels(
         for (entry in entries) {
             try {
                 forget(entry.parcel.id)
+            } catch (cancellation: CancellationException) {
+                throw cancellation
             } catch (error: Exception) {
                 trouble = error
             }
@@ -707,6 +722,10 @@ class DeviceParcels(
      * launch, and again when the token or the language changes. A parcel that arrived needs none. A round is short and
      * quiet: a few parcels at most, and it ends at the first sign that the service wants a pause or sends no
      * notifications. A link that leads nowhere, has no room or is no longer shared is left until the next launch.
+     *
+     * On Android: the service takes APNs tokens alone (`ParcelAppAlertRequest`: 32 to 512 hex digits), so the app
+     * calls this once the service accepts FCM tokens, and from the main thread (`FirebaseMessagingService.onNewToken`
+     * runs on another).
      */
     suspend fun registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = NativePushEnvironment.current(debug)) {
         val asked = "$token ${locale.rawValue}"
@@ -722,6 +741,8 @@ class DeviceParcels(
                         entry.linkId, keys.keyOf(entry.linkId),
                         ParcelAppAlertRequest(token = token, environment = environment, preset = preset, locale = locale),
                     )
+                } catch (cancellation: CancellationException) {
+                    throw cancellation
                 } catch (_: Exception) {
                     break
                 }
@@ -790,10 +811,15 @@ class DeviceParcels(
     }
 }
 
-/** Swift's `try?` on a call whose failure changes nothing: whatever it throws, a cancellation too, is let go. */
+/**
+ * Swift's `try?` on a call whose failure changes nothing: whatever it throws is let go, but a cancellation, which ends
+ * the caller as it would any other call.
+ */
 private inline fun attempt(block: () -> Unit) {
     try {
         block()
+    } catch (cancellation: CancellationException) {
+        throw cancellation
     } catch (_: Exception) {
     }
 }

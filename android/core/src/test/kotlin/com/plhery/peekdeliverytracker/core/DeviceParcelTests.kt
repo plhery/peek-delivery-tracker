@@ -23,6 +23,7 @@ import java.io.IOException
 import java.time.Instant
 import java.util.Locale
 import java.util.UUID
+import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -861,6 +862,75 @@ class DeviceParcelTests {
             countries += code
         }
         assertEquals(setOf("CN", "DE", "CH"), countries)
+    }
+
+    // Android alone: the platform's stores can fail where the iPhone's `try?` reads nothing, and a cancellation ends the
+    // caller rather than being let go.
+
+    @Test
+    fun storesThatCannotBeReadOpenEmptyRatherThanStopTheApp() = runTest {
+        val lostKeystore = object : SessionPersistence {
+            override fun save(data: ByteArray) = throw java.security.GeneralSecurityException("Keystore key lost")
+            override fun load(): ByteArray = throw java.security.GeneralSecurityException("Keystore key lost")
+            override fun delete() = throw IllegalStateException("Keystore key lost")
+        }
+        val brokenFile = object : DeviceParcelFile {
+            override fun read(): ByteArray = throw IOException("Unreadable")
+            override fun write(data: ByteArray) = throw IOException("Unwritable")
+            override fun delete() = throw IOException("Undeletable")
+        }
+        val storage = DeviceParcelFiles(lostKeystore, brokenFile)
+        assertEquals(DeviceParcelStorage.Contents(emptyList(), emptyMap()), storage.load())
+        storage.save(emptyList(), emptyMap())
+        storage.save(listOf(parcel("22222222222A", "", UUID.randomUUID())), mapOf("22222222222A" to key))
+        assertTrue(device(client(Calls()), storage, this).isEmpty)
+    }
+
+    @Test
+    fun aCancelledRoundOfNotificationRequestsEndsInItsCancellation() = runTest {
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "", UUID.randomUUID()))
+        val calls = Calls()
+        var cancelled = true
+        val device = device(client(calls, alert = { if (cancelled) throw CancellationException("Left") else DeviceAlertAnswer.On }), storage, this)
+        try {
+            device.registerAlerts(token = "token1", locale = NativePushLocale.En)
+            fail("The round went on as though nothing happened")
+        } catch (_: CancellationException) {
+        }
+        // The round is over: the next one asks again.
+        cancelled = false
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En)
+        assertEquals(2, calls.all.size)
+        assertEquals(listOf("token1"), storage.parcels.mapNotNull { it.alertToken })
+    }
+
+    @Test
+    fun aParcelWhoseForgettingIsCancelledStaysOnThePhone() = runTest {
+        val storage = Memory()
+        val id = UUID.randomUUID()
+        storage.parcels = listOf(parcel("33333333333A", "", id).copy(viewer = true, alertToken = "token1"))
+        val base = client(Calls())
+        val leaving = DeviceParcelClient(
+            lookup = base.lookup, read = base.read, forget = base.forget, update = base.update, detect = base.detect,
+            removeAlert = { _, _ -> throw CancellationException("Left") },
+        )
+        val device = device(leaving, storage, this)
+        try {
+            device.forget(id = id)
+            fail("The parcel was forgotten though its forgetting was cancelled")
+        } catch (_: CancellationException) {
+        }
+        assertEquals(listOf(id), device.list().map { it.id })
+        assertEquals(1, storage.parcels.size)
+    }
+
+    @Test
+    fun keysAndTokensStayOutOfWhatIsLogged() {
+        val entry = parcel("22222222222A", "", UUID.randomUUID()).copy(alertToken = "token1")
+        val written = "$entry ${DeviceParcelStorage.Contents(listOf(entry), mapOf("22222222222A" to key))}"
+        assertFalse(written, written.contains(key) || written.contains("token1") || written.contains("22222222222A"))
     }
 
     private companion object {

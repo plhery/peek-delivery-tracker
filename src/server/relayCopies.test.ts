@@ -150,6 +150,46 @@ describe('relayCopies', () => {
       .toEqual(new Map([['posted-message', 'posted'], ['departed', 'copy']]));
   });
 
+  it('pairs the earlier carrier\'s placeless row with the new carrier\'s one to three whole hours away, to the second', () => {
+    // CTT Express tells CTT's scans an hour early, to the millisecond and with no place.
+    const placed = (id: string, source: string, stage: string, at: string, location?: string, created_at?: string) =>
+      ({ ...scan(id, source, stage, at, created_at), location });
+    const parcel = (tracking_events: object[]) => ({
+      carrier: 'ctt-express', carrier_data: { original_carrier: 'ctt-express', active_tracking_carrier: 'ctt' }, tracking_events,
+    });
+    const rows = [
+      placed('announced-early', 'ctt-express', 'registered', '2026-10-20T08:12:31.250Z', undefined, '2026-10-20T10:00:00Z'),
+      placed('announced', 'ctt', 'registered', '2026-10-20T09:12:31Z', 'Lisboa', '2026-10-20T09:30:00Z'),
+      // In any stage, at a minute's first second when the earlier row keeps milliseconds, and after the scan too.
+      placed('round-early', 'ctt-express', 'out_for_delivery', '2026-10-22T07:40:00.004Z'),
+      placed('at-office', 'ctt', 'ready_for_pickup', '2026-10-22T08:40:00Z', 'Lisboa'),
+      placed('missed', 'ctt', 'failed_attempt', '2026-10-21T10:05:44Z', 'Lisboa'),
+      placed('missed-late', 'ctt-express', 'pending', '2026-10-21T13:05:44.120Z'),
+    ];
+    expect(relayCopies(parcel(rows)))
+      .toEqual(new Map([['announced-early', 'announced'], ['round-early', 'at-office'], ['missed-late', 'missed']]));
+    // The earlier row stored second announces nothing.
+    expect(relayRepeats(parcel(rows.slice(0, 2)))).toEqual(new Set(['announced-early']));
+    // A placed row, one on a minute's first second, four hours or a second off whole hours, half an hour away, a
+    // provider's row, and a parcel of one carrier stay on their own.
+    expect(relayCopies(parcel([
+      placed('placed', 'ctt-express', 'in_transit', '2026-10-23T08:12:31.250Z', 'Madrid'),
+      placed('sorted', 'ctt', 'in_transit', '2026-10-23T09:12:31Z', 'Lisboa'),
+      placed('minute', 'ctt-express', 'in_transit', '2026-10-24T07:40:00Z'),
+      placed('minute-scan', 'ctt', 'in_transit', '2026-10-24T08:40:00Z', 'Lisboa'),
+      placed('far', 'ctt-express', 'in_transit', '2026-10-25T04:12:31.250Z'),
+      placed('off', 'ctt-express', 'in_transit', '2026-10-23T07:12:32.250Z'),
+      placed('half', 'ctt-express', 'in_transit', '2026-10-23T08:42:31.250Z'),
+      placed('provider', 'unknown', 'in_transit', '2026-10-25T05:12:31Z'),
+      placed('far-scan', 'ctt', 'in_transit', '2026-10-25T08:12:31Z', 'Lisboa'),
+    ]))).toEqual(new Map());
+    expect(relayCopies({ carrier: 'ctt', carrier_data: {}, tracking_events: rows })).toEqual(new Map());
+    // A copy within a minute pairs first.
+    expect(relayCopies(parcel([...rows.slice(0, 2),
+      placed('copy', 'ctt-express', 'registered', '2026-10-20T09:12:00Z')])))
+      .toEqual(new Map([['copy', 'announced']]));
+  });
+
   it('pairs with a universal provider\'s row of the new leg, and only in a parcel that was handed over', () => {
     const rows = [
       scan('in-france', 'unknown', 'in_transit', '2026-10-06T05:18:36Z'),

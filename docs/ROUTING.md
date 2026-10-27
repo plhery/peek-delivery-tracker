@@ -677,7 +677,11 @@ A parcel often changes carrier at the border. The origin history is always kept.
   the earlier carrier delivers in, and the new carrier does not, is served with `relay_of` the
   earlier carrier's latest row of its stage when it follows every such row by up to three
   hours. A gap of whole hours, to the second when both keep seconds, is one record read on two
-  clocks, a scraper's to fix, and pairs nothing. The apps show the words of the row with
+  clocks, a scraper's to fix, and pairs nothing. One exception the scraper cannot set right: a row of
+  the earlier carrier that names no place, dated to the second (off a minute's first second, or
+  with milliseconds), one to three whole hours to the second from a row of the new carrier, in
+  any stage, is that row on another clock (CTT Express tells CTT's scans an hour early), and is
+  served with `relay_of` its id after every other pairing. The apps show the words of the row with
   `relay_of` as a line under the other row instead of a step of its own. Of a pair, the row
   stored second announces no push or link alert, nor the copy of a pair stored together, unless
   the copy alone tells a problem: then the other row is the one left out. The delivered email quotes the row

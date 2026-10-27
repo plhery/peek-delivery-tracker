@@ -34,6 +34,12 @@
  * keep seconds, is one record read on two clocks, which is the scraper's to
  * fix, and is no such pair.
  *
+ * One exception: the earlier carrier may tell the new carrier's scan on another
+ * clock, with no place, which the scraper cannot set right (CTT Express tells
+ * CTT's scans an hour early). Its row that names no place, dated to the second
+ * (off a minute's first second, or with milliseconds), one to three whole hours
+ * to the second from the new carrier's row, in any stage, goes under that row.
+ *
  * The earlier carrier also publishes some of its own scans late, after the
  * new carrier's later ones are stored (trackingSync.ts asks it again for a day
  * after the handoff). Those announce nothing either.
@@ -47,6 +53,8 @@ import { isRecord, type JsonObject } from './types';
 const RELAY_WINDOW_MS = 60_000;
 /** A step the new carrier learnt from the earlier one's message is stamped up to this long after the earlier one's scan. */
 const EXCHANGE_WINDOW_MS = 3 * 60 * 60_000;
+/** The earlier carrier tells the new one's scan on another clock up to this many whole hours away. */
+const TWIN_HOURS = 3;
 const SECOND_MS = 1000;
 const MINUTE_MS = 60_000;
 const HOUR_MS = 60 * MINUTE_MS;
@@ -72,6 +80,12 @@ function wholeHours(at: number, other: number): boolean {
   const seconds = (time: number) => Math.floor(time / SECOND_MS) % 60 !== 0;
   const unit = seconds(at) && seconds(other) ? SECOND_MS : MINUTE_MS;
   return (Math.floor(at / unit) - Math.floor(other / unit)) * unit % HOUR_MS === 0;
+}
+
+/** Whether two times lie one to `TWIN_HOURS` whole hours apart, to the second. */
+function twinHours(at: number, other: number): boolean {
+  const gap = Math.abs(Math.floor(at / SECOND_MS) - Math.floor(other / SECOND_MS)) * SECOND_MS;
+  return gap >= HOUR_MS && gap <= TWIN_HOURS * HOUR_MS && gap % HOUR_MS === 0;
 }
 
 /** The countries a carrier delivers in under its own name. */
@@ -113,7 +127,9 @@ function sameSecond(copy: { at: number; words: string[] }, scan: { at: number; w
  * pairs first. Then, in any stage, a row on a minute's first second repeats one with seconds within that minute
  * (`sameMinuteScan`, which the sync's `relayedScans` shares). Then a row of the new carrier placed only in a country
  * the earlier carrier delivers in, and the new carrier does not, repeats the earlier carrier's latest scan of its
- * stage, when it follows every such scan by up to three hours but not by whole hours.
+ * stage, when it follows every such scan by up to three hours but not by whole hours. Last, a row of the earlier
+ * carrier that names no place and is dated to the second repeats the new carrier's row one to three whole hours away,
+ * to the second, in any stage.
  * A scan is in one pair at most, so two scans of one minute that the earlier carrier tells once stay two rows.
  */
 export function relayCopies(row: JsonObject): Map<string, string> {
@@ -124,6 +140,7 @@ export function relayCopies(row: JsonObject): Map<string, string> {
     .map((event) => ({
       id: String(event.id), stage: event.stage, source: source(event), at: Date.parse(String(event.occurred_at)),
       country: countryOnly(event.location), words: placeWords(event),
+      placed: typeof event.location === 'string' && event.location.trim() !== '',
     }))
     .filter((scan) => Number.isFinite(scan.at) && scan.source !== '' && scan.source !== 'app');
   const candidates = scans.filter((copy) => copy.source === earlier).flatMap((copy) => scans
@@ -141,8 +158,11 @@ export function relayCopies(row: JsonObject): Map<string, string> {
     return scan && copy.at > scan.at && copy.at - scan.at <= EXCHANGE_WINDOW_MS && !wholeHours(copy.at, scan.at)
       ? [{ copy, scan, gap: copy.at - scan.at }] : [];
   });
+  const twins = scans.filter((copy) => copy.source === earlier && !copy.placed && copy.at % MINUTE_MS !== 0)
+    .flatMap((copy) => scans.filter((scan) => scan.source === current && twinHours(copy.at, scan.at))
+      .map((scan) => ({ copy, scan, gap: Math.abs(scan.at - copy.at) })));
   const paired = new Set<string>();
-  for (const list of [candidates, minutes, exchanged]) {
+  for (const list of [candidates, minutes, exchanged, twins]) {
     list.sort((a, b) => a.gap - b.gap || a.copy.at - b.copy.at
       || a.copy.id.localeCompare(b.copy.id) || a.scan.id.localeCompare(b.scan.id));
     for (const { copy, scan } of list) {

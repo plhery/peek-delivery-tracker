@@ -1,6 +1,6 @@
 ---
-title: MediaMarkt Sendungsverfolgung: Wo ist meine Bestellung?
-description: Wer MediaMarkt-Bestellungen in Deutschland, Österreich und der Schweiz liefert, wo die Sendungsverfolgung steht und was tun, wenn nichts ankommt.
+title: MediaMarkt-Bestellung verfolgen: Status und Sendungsnummer
+description: Wie du den Bestellstatus unter „Meine Käufe“ oder als Gast prüfst, wo der Tracking-Link steht, wer in DE, AT und CH liefert und was tun, wenn nichts ankommt.
 slug: mediamarkt-sendungsverfolgung
 picture: Ein flacher Fernseher-Karton und ein kleines Paket neben einem Lieferwagen, ein fröhlicher Pip und ein Markt mit Abholschild.
 published: 2026-10-17

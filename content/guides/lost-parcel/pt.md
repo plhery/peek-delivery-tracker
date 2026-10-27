@@ -1,6 +1,6 @@
 ---
-title: Encomenda perdida: o que fazer e como pedir indemnização
-description: Encomenda perdida ou extraviada? Quando reclamar, quem te deve o dinheiro, quanto pagam os CTT, a DPD e a InPost, e como pedir o reembolso à loja ou à plataforma.
+title: Encomenda extraviada ou perdida: o que fazer e quem paga
+description: Encomenda extraviada nos CTT, na DPD ou na InPost? Quanto tempo esperar, a quem reclamar, quanto pagam as transportadoras e como pedir o reembolso à loja.
 slug: encomenda-perdida-o-que-fazer
 picture: Uma prateleira de um centro de triagem com caixas e um espaço vazio tracejado, uma lupa por cima e o Pip ao lado de uma lanterna que ilumina o espaço vazio.
 published: 2026-10-14

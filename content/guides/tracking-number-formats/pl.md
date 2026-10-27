@@ -1,6 +1,6 @@
 ---
-title: Jaki kurier po numerze przesyłki? Jak to rozpoznać
-description: Jak rozpoznać kuriera po numerze przesyłki: jak wyglądają i ile cyfr mają numery InPost, DPD, DHL, Poczty Polskiej i paczek z zagranicy.
+title: Jaki kurier po numerze przesyłki? PX, 1Z, InPost, DPD i inne
+description: PX i 10 cyfr to Poczta Polska, 24 cyfry to InPost, 1Z to UPS: jak rozpoznać kuriera po numerze paczki i ile cyfr mają numery DPD, DHL i przesyłek z zagranicy.
 slug: jaki-kurier-po-numerze-przesylki
 picture: Trzy etykiety z numerami przesyłek podzielonymi na kolorowe części, lupa na kodzie kraju CH i zaciekawiony Pip.
 published: 2026-10-09

@@ -14,12 +14,12 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "tracking-statuses",
       "slug": "tracking-status-meanings",
-      "title": "Tracking status meanings: from label created to delivered"
+      "title": "What does my tracking status mean? Every stage explained"
     },
     {
       "id": "tracking-not-updating",
       "slug": "tracking-not-updating",
-      "title": "Tracking not updating? Why, and when to worry"
+      "title": "Package tracking not updating? Why, and when to worry"
     },
     {
       "id": "delivered-not-received",
@@ -331,7 +331,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "mediamarkt-orders",
       "slug": "mediamarkt-sendungsverfolgung",
-      "title": "MediaMarkt Sendungsverfolgung: Wo ist meine Bestellung?"
+      "title": "MediaMarkt-Bestellung verfolgen: Status und Sendungsnummer"
     },
     {
       "id": "fnac-orders",
@@ -725,7 +725,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "tracking-statuses",
       "slug": "stati-spedizione-cosa-significano",
-      "title": "Stati della spedizione: cosa significano, uno per uno"
+      "title": "Stati della spedizione e del tracking: cosa significano"
     },
     {
       "id": "tracking-not-updating",
@@ -1052,7 +1052,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "el-corte-ingles-orders",
       "slug": "seguimiento-pedido-el-corte-ingles",
-      "title": "Pedido de El Corte Inglés: seguimiento y entregas"
+      "title": "Seguimiento de pedidos de El Corte Inglés: estado y entregas"
     },
     {
       "id": "cdiscount-orders",
@@ -1394,7 +1394,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "lost-parcel",
       "slug": "encomenda-perdida-o-que-fazer",
-      "title": "Encomenda perdida: o que fazer e como pedir indemnização"
+      "title": "Encomenda extraviada ou perdida: o que fazer e quem paga"
     },
     {
       "id": "delivery-scam-texts",
@@ -1431,7 +1431,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "tracking-number-formats",
       "slug": "jaki-kurier-po-numerze-przesylki",
-      "title": "Jaki kurier po numerze przesyłki? Jak to rozpoznać"
+      "title": "Jaki kurier po numerze przesyłki? PX, 1Z, InPost, DPD i inne"
     },
     {
       "id": "tracking-statuses",
@@ -1486,7 +1486,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "zalando-orders",
       "slug": "sledzenie-zamowienia-zalando",
-      "title": "Śledzenie zamówienia Zalando: przewoźnicy i opóźnienia"
+      "title": "Zamówienie z Zalando: jaki kurier i jak je śledzić?"
     },
     {
       "id": "allegro-orders",

@@ -1,6 +1,6 @@
 ---
-title: Pedido de El Corte Inglés: seguimiento y entregas
-description: Cómo te llega un pedido de El Corte Inglés en España, dónde ver su estado y su seguimiento, cuánto cuesta el envío y qué hacer si el paquete no llega.
+title: Seguimiento de pedidos de El Corte Inglés: estado y entregas
+description: Dónde ver el estado de tu pedido de El Corte Inglés en «Mis compras», quién lo entrega, la Entrega en el día, la recogida en tienda y qué hacer si no llega.
 slug: seguimiento-pedido-el-corte-ingles
 picture: Unos grandes almacenes con un toldo verde, una furgoneta de reparto en la puerta y Pip junto a una caja envuelta para regalo.
 published: 2026-10-17

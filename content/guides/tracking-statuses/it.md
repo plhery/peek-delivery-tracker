@@ -1,6 +1,6 @@
 ---
-title: Stati della spedizione: cosa significano, uno per uno
-description: Da «etichetta creata» a «consegnato»: cosa vuol dire ogni stato del tracking, in ordine, con gli esempi di Poste, BRT, UPS e La Posta, e quando tocca a te.
+title: Stati della spedizione e del tracking: cosa significano
+description: Cosa vuol dire ogni stato del tracking, da «etichetta creata» a «consegnato», anche per i pacchi dall'estero («consegnato al corriere locale») e quando tocca a te.
 slug: stati-spedizione-cosa-significano
 picture: Un percorso tortuoso con tappe spuntate (etichetta, deposito, aereo), un furgone alla tappa attuale, una casa ancora davanti e Pip che corre.
 published: 2026-10-09

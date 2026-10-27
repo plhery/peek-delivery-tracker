@@ -1,5 +1,5 @@
 ---
-title: Tracking not updating? Why, and when to worry
+title: Package tracking not updating? Why, and when to worry
 description: Why parcel tracking stops updating, how long a gap is normal at each stage, when a parcel counts as lost, and whether to contact the seller or the carrier.
 slug: tracking-not-updating
 picture: A calendar with several days crossed out, a progress line that stops halfway, and Pip waiting, a little bored.

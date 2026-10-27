@@ -1,6 +1,6 @@
 ---
-title: Tracking status meanings: from label created to delivered
-description: What each tracking status means, in the order your parcel meets it, with USPS, Royal Mail and Australia Post wording, and the few that need you to act.
+title: What does my tracking status mean? Every stage explained
+description: What each tracking status means, from "label created" to "delivered", international parcels included, and what Royal Mail's "Internal exception occurred" means.
 slug: tracking-status-meanings
 picture: A winding route with ticked stops (label, depot, plane), a van at the current stop, a house ahead and Pip hurrying.
 published: 2026-10-09

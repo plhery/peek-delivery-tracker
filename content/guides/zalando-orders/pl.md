@@ -1,6 +1,6 @@
 ---
-title: Śledzenie zamówienia Zalando: przewoźnicy i opóźnienia
-description: Kto doręcza twoje zamówienie z Zalando w Polsce, gdzie jest numer przesyłki, dlaczego przychodzi kilka paczek i co zrobić, gdy paczka nie dotarła.
+title: Zamówienie z Zalando: jaki kurier i jak je śledzić?
+description: Jaki kurier wiezie zamówienie z Zalando w Polsce (InPost, DPD, DHL, UPS), gdzie jest numer przesyłki, czemu paczek bywa kilka i co zrobić, gdy paczka nie dotarła.
 slug: sledzenie-zamowienia-zalando
 picture: Paczka z metką w kształcie wieszaka, kurierska furgonetka i Pip gotowy do przymiarki.
 published: 2026-10-17

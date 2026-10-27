@@ -3,7 +3,7 @@ title: SPX Express Brazil tracking: Shopee orders and statuses
 description: Track an SPX Express parcel from a Shopee order in Brazil: where to follow it, what BR numbers and SPX's Portuguese statuses mean, Agência Shopee pickup and refunds.
 slug: spx-express-brazil-tracking
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 SPX Express (Shopee Xpress) is Shopee's own logistics network in Brazil. It collects orders from sellers and brings them to your door or to an Agência Shopee, a partner shop where you pick parcels up. Shopee calls the service Entrega Padrão (standard delivery), and says you track it in the Shopee app, where the order, its delivery date and any refund live. spx.com.br has a tracking box too, or you can paste the number in the box above.
@@ -95,7 +95,7 @@ Shopee says you can't contact the carrier directly about tracking or delivery: S
 
 Peek reads the same tracking spx.com.br does and shows the status, SPX's own lines (in Portuguese, a few in English), the place SPX gives for scans at its centres, hubs and ports, and the delivery time. There's no expected delivery date, weight, pickup point or delivering partner, and Peek drops the name of whoever took the parcel. The order, its keyword, the Agência PIN and refunds stay in the Shopee app.
 
-Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and hourly overnight. It can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact SPX or Shopee for you.
+Peek checks every 10 minutes from 8:00 to 22:00 Swiss time (about 4:00 to 18:00 Brasília time), every 2 in those hours once the parcel is out for delivery, and hourly the rest of the time. It can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact SPX or Shopee for you.
 
 ## Questions about SPX Express Brazil tracking
 

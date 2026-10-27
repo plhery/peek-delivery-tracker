@@ -4,8 +4,11 @@ import java.io.ByteArrayOutputStream
 import java.nio.Buffer
 import java.nio.ByteBuffer
 import java.util.zip.Inflater
+import kotlin.math.abs
 import kotlin.math.acos
+import kotlin.math.asin
 import kotlin.math.floor
+import kotlin.math.pow
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -23,8 +26,7 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 
-// From WorldDetail.swift, the tiles a close-up shows and the store that reads them. MapPainter's drawing of them is
-// :app's.
+// From WorldDetail.swift, the tiles a close-up shows, the store that reads them, and how MapPainter draws them.
 
 // MARK: - Tiles
 
@@ -317,6 +319,123 @@ data class MapDetail(
     val tiles: Map<String, DetailTile>,
     val need: (List<String>) -> Unit,
 )
+
+// MARK: - Drawing
+
+/**
+ * Draws the tiles over the land: built-up areas, then roads, then water. A shape the view cannot hold is
+ * skipped whole. The shapes are drawn for a far wider view than the closest one, so their corners are
+ * rounded: a river bends, it does not turn.
+ */
+fun MapPainter.drawDetail(tiles: List<DetailTile>, camera: GlobeCamera, size: Size, palette: MapPalette): List<MapDrawing> {
+    val kilometres = WorldDetailPack.spanKilometres(camera, size)
+    val strengths = WorldDetailPack.strengths(kilometres)
+    if (tiles.isEmpty() || !(strengths[0] > 0)) return emptyList()
+    val context = ArrayList<MapDrawing>()
+    val projection = GlobeProjection(camera)
+    val view = asin(swiftMin(1.0, reach(camera, size))) + 0.01
+    val points = TracedPoints()
+
+    /** Every shape of one level of a layer that the view holds, as one path. */
+    fun path(layer: (DetailTile) -> List<DetailTile.Shape>, level: Int, closed: Boolean): MapPath {
+        val path = MapPath()
+        for (tile in tiles) {
+            for (shape in layer(tile)) {
+                // Shapes come sorted by level, and one too small to see is not worth its points.
+                if (shape.level > level) break
+                if (shape.level != level || (closed && shape.radius * camera.scale < 0.6) ||
+                    !(acos(swiftMax(-1.0, swiftMin(1.0, shape.center.dot(projection.forward)))) - shape.radius < view)
+                ) {
+                    continue
+                }
+                trace(path, shape, projection, closed, points)
+            }
+        }
+        return path
+    }
+
+    /** One path for each level of a layer, as strong as the level shows. */
+    fun layer(layer: (DetailTile) -> List<DetailTile.Shape>, closed: Boolean, paint: (MapPath, Int, Double) -> MapDrawing) {
+        for (level in strengths.indices) {
+            if (!(strengths[level] > 0)) continue
+            val shapes = path(layer, level, closed)
+            if (shapes.isEmpty) continue
+            context.add(paint(shapes, level, strengths[level]))
+        }
+    }
+    // Lines grow a little as the map closes in, like the map itself.
+    val zoom = swiftMax(1.0, swiftMin(1.8, (260 / kilometres).pow(0.4)))
+    val line = { width: Double -> StrokeStyle(width * zoom, StrokeStyle.LineCap.Butt, StrokeStyle.LineJoin.Bevel) }
+    layer(DetailTile::urban, closed = true) { shapes, _, strength -> MapDrawing.Fill(shapes, palette.urban, opacity = strength) }
+    layer(DetailTile::roads, closed = false) { shapes, level, strength ->
+        MapDrawing.Stroke(shapes, palette.road, line(listOf(1.15, 0.85, 0.65)[level]), opacity = strength)
+    }
+    // On a see-through map, water is cut out of the land.
+    val cut = palette.ocean == null
+    val colour = palette.ocean ?: black
+    layer(DetailTile::rivers, closed = false) { shapes, level, strength ->
+        MapDrawing.Stroke(shapes, colour, line(listOf(1.4, 1.05, 0.8)[level]), opacity = strength, cut = cut)
+    }
+    layer(DetailTile::lakes, closed = true) { shapes, _, strength -> MapDrawing.Fill(shapes, colour, opacity = strength, cut = cut) }
+    return context
+}
+
+/** The points of a shape on screen, and whether each is a corner of the tile's cut: kept from one shape to the next. */
+private class TracedPoints {
+    var x = DoubleArray(64)
+    var y = DoubleArray(64)
+    var sharp = BooleanArray(64)
+    var count = 0
+
+    fun add(x: Double, y: Double, sharp: Boolean) {
+        if (count == this.x.size) {
+            this.x = this.x.copyOf(count * 2)
+            this.y = this.y.copyOf(count * 2)
+            this.sharp = this.sharp.copyOf(count * 2)
+        }
+        this.x[count] = x
+        this.y[count] = y
+        this.sharp[count] = sharp
+        count++
+    }
+}
+
+/** One shape, each corner rounded between the middles of the two sides that meet there. */
+private fun trace(path: MapPath, shape: DetailTile.Shape, projection: GlobeProjection, closed: Boolean, points: TracedPoints) {
+    points.count = 0
+    val last = shape.points.size - 1
+    // A point that falls on the one before it adds nothing to the line: a wide view keeps one point in three.
+    for (index in shape.points.indices) {
+        val vector = shape.points[index]
+        val x = projection.screenX(vector)
+        val y = projection.screenY(vector)
+        val cut = shape.cut[index]
+        val previous = points.count - 1
+        if (previous >= 0 && !cut && index < last && abs(x - points.x[previous]) + abs(y - points.y[previous]) < 1.6) continue
+        points.add(x, y, cut)
+    }
+    val count = points.count
+    if (count < (if (closed) 3 else 2)) return
+    val xs = points.x
+    val ys = points.y
+    // The middle of each side, where one corner's curve hands over to the next.
+    if (closed) path.move((xs[count - 1] + xs[0]) / 2, (ys[count - 1] + ys[0]) / 2) else path.move(xs[0], ys[0])
+    // An open line keeps its two ends as they are.
+    var index = if (closed) 0 else 1
+    while (index < (if (closed) count else count - 1)) {
+        val following = (index + 1) % count
+        val nextX = (xs[index] + xs[following]) / 2
+        val nextY = (ys[index] + ys[following]) / 2
+        if (points.sharp[index]) {
+            path.addLine(xs[index], ys[index])
+            path.addLine(nextX, nextY)
+        } else {
+            path.addQuadCurve(nextX, nextY, xs[index], ys[index])
+        }
+        index += 1
+    }
+    if (closed) path.closeSubpath() else path.addLine(xs[count - 1], ys[count - 1])
+}
 
 // MARK: - JSON
 

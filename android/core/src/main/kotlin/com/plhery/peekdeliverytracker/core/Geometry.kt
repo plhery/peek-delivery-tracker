@@ -214,9 +214,10 @@ class Vector3(val x: Double, val y: Double, val z: Double) {
 }
 
 /**
- * SwiftUI's Path, built the way the map builds one: moves, lines, quadratic curves, arcs of a circle and ellipses. It
- * is a builder, filled in place as Swift fills an `inout Path`; :app draws it by replaying it into its own path. Arcs
- * and ellipses are kept whole rather than as CoreGraphics' Bézier pieces, so each platform draws them its own way.
+ * SwiftUI's Path, built the way the map builds one: moves, lines, quadratic curves, arcs of a circle, ellipses and
+ * rounded rectangles. It is a builder, filled in place as Swift fills an `inout Path`; :app draws it by replaying it
+ * into its own path. Arcs, ellipses and rounded rectangles are kept whole rather than as CoreGraphics' Bézier pieces,
+ * so each platform draws them its own way.
  * The map rebuilds its paths each frame, so they hold plain numbers rather than an object per point.
  */
 class MapPath {
@@ -234,6 +235,13 @@ class MapPath {
 
         /** `Path(ellipseIn:)`: a closed subpath of its own, starting at the rectangle's right middle. */
         fun ellipse(x: Double, y: Double, width: Double, height: Double)
+
+        /**
+         * `Path(roundedRect:cornerRadius:)`: a closed subpath of its own, starting at the rectangle's right middle. Its
+         * corners are SwiftUI's continuous ones, which ease into the sides rather than meet them as quarter circles.
+         */
+        fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double)
+
         fun close()
     }
 
@@ -315,6 +323,7 @@ class MapPath {
                 QUAD -> sink.quadCurve(n[at], n[at + 1], n[at + 2], n[at + 3])
                 ARC -> sink.relativeArc(n[at], n[at + 1], n[at + 2], n[at + 3], n[at + 4])
                 ELLIPSE -> sink.ellipse(n[at], n[at + 1], n[at + 2], n[at + 3])
+                ROUNDED -> sink.roundedRect(n[at], n[at + 1], n[at + 2], n[at + 3], n[at + 4])
                 else -> sink.close()
             }
             at += COUNTS[verbs[index].toInt()]
@@ -345,6 +354,11 @@ class MapPath {
                 }
 
                 override fun ellipse(x: Double, y: Double, width: Double, height: Double) {
+                    start = Point(x + width, y + height / 2)
+                    current = start
+                }
+
+                override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) {
                     start = Point(x + width, y + height / 2)
                     current = start
                 }
@@ -446,6 +460,24 @@ class MapPath {
                 begin(points.first())
             }
 
+            // Corners as quarter circles, near enough to the continuous ones to tell what a fill covers.
+            override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) {
+                val radius = min(cornerRadius, min(width, height) / 2)
+                val points = begin(Point(x + width, y + height / 2))
+                val corners = listOf(
+                    Point(x + width - radius, y + height - radius), Point(x + radius, y + height - radius),
+                    Point(x + radius, y + radius), Point(x + width - radius, y + radius),
+                )
+                for ((index, corner) in corners.withIndex()) {
+                    for (step in 0..8) {
+                        val angle = PI / 2 * (index + step / 8.0)
+                        points.add(Point(corner.x + radius * cos(angle), corner.y + radius * sin(angle)))
+                    }
+                }
+                points.add(points.first())
+                begin(points.first())
+            }
+
             // Closing draws back to the subpath's start, where whatever follows starts.
             override fun close() {
                 val back = start ?: return
@@ -466,9 +498,29 @@ class MapPath {
         private const val ARC: Byte = 3
         private const val ELLIPSE: Byte = 4
         private const val CLOSE: Byte = 5
+        private const val ROUNDED: Byte = 6
 
         /** How many numbers each verb takes. */
-        private val COUNTS = intArrayOf(2, 2, 4, 5, 4, 0)
+        private val COUNTS = intArrayOf(2, 2, 4, 5, 4, 0, 5)
+
+        /** `Path(_: CGRect)`: from the top left corner, clockwise on screen. */
+        fun rect(rect: Rect): MapPath = MapPath().also {
+            it.move(rect.minX, rect.minY)
+            it.addLine(rect.maxX, rect.minY)
+            it.addLine(rect.maxX, rect.maxY)
+            it.addLine(rect.minX, rect.maxY)
+            it.closeSubpath()
+        }
+
+        /** `Path(roundedRect:cornerRadius:)`, with SwiftUI's continuous corners. */
+        fun roundedRect(rect: Rect, cornerRadius: Double): MapPath = MapPath().also {
+            it.add(ROUNDED, 5)
+            it.numbers[it.numberCount++] = rect.minX
+            it.numbers[it.numberCount++] = rect.minY
+            it.numbers[it.numberCount++] = rect.width
+            it.numbers[it.numberCount++] = rect.height
+            it.numbers[it.numberCount++] = cornerRadius
+        }
 
         fun ellipse(rect: Rect): MapPath = MapPath().also {
             it.add(ELLIPSE, 4)

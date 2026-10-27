@@ -28,9 +28,9 @@ import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 
-// From WorldMap.swift, everything but the drawing: the map data, the camera and its projection, the outlines it fills,
-// the palettes and the layout of what is drawn over the land. MapPainter's drawing, WorldMapView and PulsingHalo are
-// :app's.
+// From WorldMap.swift, everything but the views: the map data, the camera and its projection, the outlines it fills,
+// the palettes, the layout of what is drawn over the land, and what MapPainter draws, as steps for :app's canvas to
+// carry out. WorldMapView and PulsingHalo are :app's.
 
 // MARK: - Map data
 
@@ -883,8 +883,187 @@ fun interface TextMeasurer {
     fun width(text: String, font: MapFont): Double
 }
 
-/** MapPainter's arithmetic that the layout shares; its drawing is :app's. */
+// MARK: - Drawing
+
+/**
+ * One step of drawing the map: what MapPainter draws with SwiftUI's GraphicsContext on the iPhone, as data for :app's
+ * canvas to carry out in order. `opacity` is the context's, over the whole step, times the colour's own.
+ */
+sealed interface MapDrawing {
+    val opacity: Double
+
+    /**
+     * Fills a path, by the even-odd rule or else the nonzero one. A cut takes out what is under it, whatever its colour
+     * (`.destinationOut`), rather than painting.
+     */
+    class Fill(
+        val path: MapPath,
+        val color: AdaptiveColor,
+        val evenOdd: Boolean = false,
+        override val opacity: Double = 1.0,
+        val cut: Boolean = false,
+    ) : MapDrawing
+
+    class Stroke(
+        val path: MapPath,
+        val color: AdaptiveColor,
+        val style: StrokeStyle,
+        override val opacity: Double = 1.0,
+        val cut: Boolean = false,
+    ) : MapDrawing
+
+    /** Fills a path with a radial gradient around `center`: clear out to `startRadius`, `color` from `endRadius`. */
+    class Shade(
+        val path: MapPath,
+        val color: AdaptiveColor,
+        val center: Point,
+        val startRadius: Double,
+        val endRadius: Double,
+        override val opacity: Double,
+    ) : MapDrawing
+
+    /** `drawLayer`: steps drawn in a layer of their own, then onto the map, so a cut there takes out only what they drew. */
+    class Layer(val steps: List<MapDrawing>) : MapDrawing {
+        override val opacity: Double get() = 1.0
+    }
+
+    /** A line of text, drawn at its size whatever the reader's (dp, not sp), the middle of its leading edge at `at`. */
+    class Text(
+        val text: String,
+        val font: MapFont,
+        val color: AdaptiveColor,
+        val at: Point,
+        val tracking: Double = 0.0,
+        override val opacity: Double = 1.0,
+    ) : MapDrawing
+}
+
+/** SwiftUI's StrokeStyle: butt ends and mitred corners unless it says otherwise; a dash of nothing draws a solid line. */
+data class StrokeStyle(
+    val lineWidth: Double,
+    val lineCap: LineCap = LineCap.Butt,
+    val lineJoin: LineJoin = LineJoin.Miter,
+    val dash: List<Double> = emptyList(),
+) {
+    enum class LineCap { Butt, Round, Square }
+    enum class LineJoin { Miter, Round, Bevel }
+}
+
 object MapPainter {
+    internal val black = AdaptiveColor(RgbaColor(0.0, 0.0, 0.0))
+
+    /**
+     * Space, ocean, land, visited countries, lakes, night, borders and the globe's shading.
+     * Up close, `tiles` add what the wide map leaves out; `tiled` says that every tile of the view has come.
+     */
+    fun drawBase(
+        size: Size,
+        atlas: WorldAtlas,
+        route: ParcelRoute,
+        camera: GlobeCamera,
+        palette: MapPalette,
+        night: Instant?,
+        tiles: List<DetailTile> = emptyList(),
+        tiled: Boolean = false,
+    ): List<MapDrawing> {
+        val context = ArrayList<MapDrawing>()
+        val projection = GlobeProjection(camera)
+        val span = swiftMin(size.width, size.height) / camera.scale
+        val detail = if (span < 0.45) WorldAtlas.Detail.Fine else WorldAtlas.Detail.Coarse
+        val layer = atlas.layer(detail)
+        val reach = reach(camera, size)
+        // Only shapes whose cap reaches the view: a close-up draws a few countries, not all of them.
+        val view = if (reach >= 1) PI / 2 else asin(reach) + 0.02
+        val inView = { part: WorldAtlas.Part ->
+            acos(swiftMax(-1.0, swiftMin(1.0, part.center.dot(projection.forward)))) - part.radius < view
+        }
+        // 0 in a close-up, 1 once the curve of the Earth shows.
+        val globe = swiftMax(0.0, swiftMin(1.0, (span - 0.5) / 0.9))
+        val bounds = Rect(0.0, 0.0, size.width, size.height)
+        val disk = MapPath.ellipse(Rect(camera.offset.x - camera.scale, camera.offset.y - camera.scale, camera.scale * 2, camera.scale * 2))
+
+        palette.space?.let { context.add(MapDrawing.Fill(MapPath.rect(bounds), it)) }
+        palette.ocean?.let { context.add(MapDrawing.Fill(if (reach < 1) MapPath.rect(bounds) else disk, it)) }
+        val grid = palette.grid
+        if (globe > 0 && grid != null) {
+            val lines = MapPath()
+            for (line in MapGeometry.graticule) MapGeometry.addLine(lines, line, projection)
+            context.add(MapDrawing.Stroke(lines, grid, StrokeStyle(0.6), opacity = globe))
+        }
+        val visited = swiftMax(0.0, swiftMin(1.0, (span * GeoPoint.EARTH_KILOMETRES - 800) / 1600))
+        val land = ArrayList<MapDrawing>()
+        val shapes = MapPath()
+        for (part in layer.land) if (inView(part)) MapGeometry.addPart(shapes, part, projection, disk)
+        land.add(MapDrawing.Fill(shapes, palette.land, evenOdd = true))
+        // Countries the parcel passed through, once the view is wide enough to hold several.
+        if (visited > 0) {
+            val countries = MapPath()
+            for (code in route.countries) {
+                for (part in layer.byCode[code]?.parts.orEmpty()) if (inView(part)) MapGeometry.addPart(countries, part, projection, disk)
+            }
+            land.add(MapDrawing.Fill(countries, palette.visited, evenOdd = true, opacity = visited))
+        }
+        // Up close the tiles draw every lake, in finer lines than the wide map's.
+        val tilesDrawLakes = tiled && (WorldDetailPack.strengths(span * GeoPoint.EARTH_KILOMETRES).firstOrNull() ?: 0.0) >= 1
+        if (detail == WorldAtlas.Detail.Fine && !tilesDrawLakes) {
+            val lakes = MapPath()
+            for (part in atlas.lakes) if (inView(part)) MapGeometry.addPart(lakes, part, projection, disk)
+            val ocean = palette.ocean
+            land.add(
+                if (ocean != null) MapDrawing.Fill(lakes, ocean, evenOdd = true) else MapDrawing.Fill(lakes, black, evenOdd = true, cut = true),
+            )
+        }
+        context.add(MapDrawing.Layer(land))
+        context.addAll(drawDetail(tiles, camera, size, palette))
+        val shadow = palette.night
+        if (night != null && globe > 0 && shadow != null) {
+            // The night side darkens over 24° past the terminator, like dusk: twenty rings, each drawn
+            // once at its own depth, since stacking twenty faint fills rounds them away.
+            val sun = GlobeCamera.subsolarPoint(night)
+            val antipode = GeoPoint(longitude = sun.longitude + 180, latitude = -sun.latitude).vector
+            for (band in 0 until 20) {
+                val outer = (92 - 1.2 * band.toDouble()) * PI / 180
+                val ring = MapGeometry.cap(antipode, outer, projection, disk)
+                if (band < 19) ring.addPath(MapGeometry.cap(antipode, outer - 1.2 * PI / 180, projection, disk))
+                context.add(MapDrawing.Fill(ring, shadow, evenOdd = true, opacity = globe * (band + 1).toDouble() / 20))
+            }
+        }
+        val borders = MapPath()
+        for (part in layer.borders) {
+            if (!inView(part)) continue
+            for (line in part.rings) MapGeometry.addLine(borders, line, projection)
+        }
+        context.add(MapDrawing.Stroke(borders, palette.border, StrokeStyle(if (detail == WorldAtlas.Detail.Fine) 0.8 else 0.55)))
+        val shade = palette.shade
+        if (globe > 0 && shade != null) {
+            // A soft falloff toward the rim makes the globe read as a sphere.
+            context.add(MapDrawing.Shade(disk, shade, camera.offset, startRadius = camera.scale * 0.55, endRadius = camera.scale, opacity = globe))
+        }
+        val limb = palette.limb
+        if (globe > 0 && limb != null) context.add(MapDrawing.Stroke(disk, limb, StrokeStyle(1.0), opacity = globe))
+        return context
+    }
+
+    /** How far the view's farthest corner lies from the globe's center, in globe radii. */
+    internal fun reach(camera: GlobeCamera, size: Size): Double {
+        val corners = listOf(Point(0.0, 0.0), Point(size.width, 0.0), Point(0.0, size.height), Point(size.width, size.height))
+        return corners.map { hypot(it.x - camera.offset.x, it.y - camera.offset.y) }.reduce { a, b -> swiftMax(a, b) } / camera.scale
+    }
+
+    /** A quiet route is a thin line, as part of the picture. */
+    fun drawLegs(overlay: MapOverlay, palette: MapPalette, quiet: Boolean = false): List<MapDrawing> = overlay.legs.map { leg ->
+        when (leg.kind) {
+            MapOverlay.LegKind.Travelled, MapOverlay.LegKind.Approximate -> MapDrawing.Stroke(
+                leg.path, palette.route,
+                StrokeStyle(if (quiet) 0.9 else 1.8, StrokeStyle.LineCap.Round, StrokeStyle.LineJoin.Round),
+            )
+            MapOverlay.LegKind.Remaining -> MapDrawing.Stroke(
+                leg.path, palette.routeMuted,
+                StrokeStyle(if (quiet) 0.8 else 1.4, StrokeStyle.LineCap.Round, StrokeStyle.LineJoin.Round, dash = listOf(3.0, 5.0)),
+            )
+        }
+    }
+
     /** How large a place is marked: the parcel's own place largest, a stop on the way smallest. A quiet route marks them all smaller. */
     fun dotRadius(kind: MapOverlay.DotKind, quiet: Boolean): Double {
         val radius = when (kind) {
@@ -894,6 +1073,90 @@ object MapPainter {
             MapOverlay.DotKind.LastKnown, MapOverlay.DotKind.Area, MapOverlay.DotKind.Destination -> 4.5
         }
         return if (quiet) radius * 0.64 else radius
+    }
+
+    /**
+     * Stops, place names and pointers. Faint names and pointers wait for the camera to land. `measurer` is the one the
+     * overlay was laid out with: a pointer's detail follows its name.
+     */
+    fun drawMarks(
+        overlay: MapOverlay,
+        palette: MapPalette,
+        moving: Boolean,
+        quiet: Boolean = false,
+        measurer: TextMeasurer,
+    ): List<MapDrawing> {
+        val context = ArrayList<MapDrawing>()
+        val fonts = MapOverlay.Fonts
+        for (dot in overlay.dots) {
+            val radius = dotRadius(dot.kind, quiet)
+            val circle = MapPath.ellipse(Rect(dot.point.x - radius, dot.point.y - radius, radius * 2, radius * 2))
+            fun ring(color: AdaptiveColor, width: Double) = context.add(MapDrawing.Stroke(circle, color, StrokeStyle(width)))
+            when (dot.kind) {
+                MapOverlay.DotKind.Current -> {
+                    context.add(MapDrawing.Fill(circle, palette.accent))
+                    ring(palette.currentRing, if (quiet) 1.2 else 2.0)
+                }
+                MapOverlay.DotKind.LastKnown -> {
+                    context.add(MapDrawing.Fill(circle, palette.currentRing))
+                    ring(palette.accent, if (quiet) 1.2 else 2.0)
+                }
+                MapOverlay.DotKind.Destination -> {
+                    context.add(MapDrawing.Fill(circle, palette.dotRing))
+                    ring(palette.routeMuted, if (quiet) 1.1 else 1.5)
+                }
+                MapOverlay.DotKind.Area ->
+                    context.add(MapDrawing.Stroke(circle, palette.route, StrokeStyle(if (quiet) 1.1 else 1.4, dash = listOf(1.6, 2.4))))
+                MapOverlay.DotKind.Origin, MapOverlay.DotKind.Stop -> {
+                    context.add(MapDrawing.Fill(circle, palette.route))
+                    ring(palette.dotRing, if (quiet) 1.1 else 1.5)
+                }
+            }
+        }
+        for (label in overlay.labels) {
+            if (moving && (label.kind == MapOverlay.LabelKind.Context || label.kind == MapOverlay.LabelKind.City)) continue
+            val frame = label.frame
+            val middle = frame.midY
+            when (label.kind) {
+                MapOverlay.LabelKind.Current, MapOverlay.LabelKind.End, MapOverlay.LabelKind.Stop -> {
+                    context.add(MapDrawing.Fill(MapPath.roundedRect(frame, 7.0), palette.labelBackground))
+                    val color = if (label.kind == MapOverlay.LabelKind.Current) palette.labelStrong else palette.label
+                    context.add(MapDrawing.Text(label.text, fonts.label, color, Point(frame.minX + 7, middle)))
+                }
+                MapOverlay.LabelKind.Area ->
+                    context.add(MapDrawing.Text(label.text, fonts.area, palette.label, Point(frame.minX + 5, middle), tracking = 0.84))
+                MapOverlay.LabelKind.Context -> context.add(
+                    MapDrawing.Text(label.text, fonts.context, palette.label.opacity(0.72), Point(frame.minX + 4, middle), tracking = 0.95),
+                )
+                MapOverlay.LabelKind.City -> {
+                    context.add(MapDrawing.Fill(MapPath.ellipse(Rect(frame.minX + 1, frame.minY + 6, 4.0, 4.0)), palette.label.opacity(0.44)))
+                    context.add(MapDrawing.Text(label.text, fonts.city, palette.label.opacity(0.8), Point(frame.minX + 9, middle)))
+                }
+            }
+        }
+        if (moving) return context
+        for (pointer in overlay.pointers) {
+            val frame = Rect(pointer.center.x - pointer.width / 2, pointer.center.y - 13, pointer.width, 26.0)
+            context.add(MapDrawing.Fill(MapPath.roundedRect(frame, 13.0), palette.labelBackground))
+            val transform = AffineTransform.translation(frame.minX + 13.5, frame.midY)
+                .rotated(pointer.angle)
+                .scaledBy(11.0 / 12, 11.0 / 12)
+                .translatedBy(-6.0, -6.0)
+            val arrow = MapPath()
+            arrow.move(Point(2.0, 6.0).applying(transform))
+            arrow.addLine(Point(10.0, 6.0).applying(transform))
+            arrow.move(Point(7.0, 3.0).applying(transform))
+            arrow.addLine(Point(10.0, 6.0).applying(transform))
+            arrow.addLine(Point(7.0, 9.0).applying(transform))
+            context.add(
+                MapDrawing.Stroke(arrow, palette.label, StrokeStyle(1.6, StrokeStyle.LineCap.Round, StrokeStyle.LineJoin.Round)),
+            )
+            val nameX = frame.minX + 24
+            context.add(MapDrawing.Text(pointer.name, fonts.pointerName, palette.labelStrong, Point(nameX, frame.midY)))
+            val detailX = nameX + fonts.width(pointer.name, fonts.pointerName, measurer) + fonts.width(" ", fonts.pointerDetail, measurer)
+            context.add(MapDrawing.Text(pointer.detail, fonts.pointerDetail, palette.label, Point(detailX, frame.midY)))
+        }
+        return context
     }
 }
 

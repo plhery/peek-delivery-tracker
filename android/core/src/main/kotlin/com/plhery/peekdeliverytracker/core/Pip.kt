@@ -157,14 +157,33 @@ object PipGeometry {
 
         /** The barcode's bars, down from 20 to 34. */
         val bars = listOf(6.0, 8.2, 11.2, 12.8, 16.2, 18.2, 21.2, 22.6, 26.2, 28.2, 30.8, 32.6, 35.8, 37.8, 40.2, 43.2, 44.8)
+        const val BARS_TOP = 20.0
+        const val BARS_BOTTOM = 34.0
         const val BAR_WIDTH = 1.05
         const val NUMBER_BASELINE = 43.0
         const val NUMBER_SIZE = 5.6
         const val NUMBER_SPACING = 0.3
 
+        /** The truck's view box, drawn at half its size. */
+        val truckSize = Size(32.0, 21.0)
+
+        /** How wide the name's line and the number's may be. */
+        val nameRoom = size.width - nameStart.x - 4
+        val numberRoom = size.width - 2 * MARGIN
+
+        /** The label's paper, light in either appearance, and the ink of its bars and number. */
+        val paper = RgbaColor.hex("#FFFEFA")
+        val ink = RgbaColor.hex("#20251E")
+
         /** A point of the label, in Pip's frame. */
         fun point(x: Double, y: Double): Point = Point(x * SCALE, y * SCALE).applying(labelPlane)
+
+        /** A line too long for its room is set narrower: the share of its width it keeps. */
+        fun narrowing(width: Double, room: Double): Double = if (width > room) room / width else 1.0
     }
+
+    /** SmallPip's crop of the frame: the kraft parcel at sticker size, cropped to the box. */
+    val stickerCrop = Rect(48.0, 88.0, 204.0, 196.0)
 
     val inside = points(55.0 to 142.0, 150.0 to 95.0, 245.0 to 142.0, 150.0 to 190.0)
     val leftSide = points(55.0 to 142.0, 150.0 to 190.0, 150.0 to 277.0, 55.0 to 229.0)

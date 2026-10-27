@@ -327,6 +327,9 @@ class ParcelRouteTests {
                     pieces.add("A $centerX $centerY $radius $startAngle $delta")
                 }
                 override fun ellipse(x: Double, y: Double, width: Double, height: Double) { pieces.add("E $x $y $width $height") }
+                override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) {
+                    pieces.add("R $x $y $width $height $cornerRadius")
+                }
                 override fun close() { pieces.add("Z") }
             })
             return pieces
@@ -339,12 +342,21 @@ class ParcelRouteTests {
         path.addRelativeArc(Point(8.0, 9.0), radius = 10.0, startAngle = 0.5, delta = -1.5)
         // A rectangle given from its far corner is drawn from its near one, as CGRect stands it.
         path.addPath(MapPath.ellipse(Rect(30.0, 40.0, -20.0, -10.0)))
+        path.addPath(MapPath.roundedRect(Rect(1.0, 2.0, 30.0, 12.0), cornerRadius = 7.0))
+        path.addPath(MapPath.rect(Rect(0.0, 0.0, 4.0, 3.0)))
         assertEquals(
-            (0 until 20).map { "L $it.0 1.0" } +
-                listOf("Z", "M 2.0 3.0", "Q 4.0 5.0 6.0 7.0", "A 8.0 9.0 10.0 0.5 -1.5", "E 10.0 30.0 20.0 10.0"),
+            (0 until 20).map { "L $it.0 1.0" } + listOf(
+                "Z", "M 2.0 3.0", "Q 4.0 5.0 6.0 7.0", "A 8.0 9.0 10.0 0.5 -1.5", "E 10.0 30.0 20.0 10.0", "R 1.0 2.0 30.0 12.0 7.0",
+                "M 0.0 0.0", "L 4.0 0.0", "L 4.0 3.0", "L 0.0 3.0", "Z",
+            ),
             replayed(path),
         )
-        assertEquals(Point(30.0, 35.0), path.currentPoint)
+        assertEquals(Point(0.0, 0.0), path.currentPoint)
+        // A rounded rectangle covers its middle but not its corners.
+        val label = MapPath.roundedRect(Rect(0.0, 0.0, 40.0, 20.0), cornerRadius = 7.0)
+        assertTrue(label.containsEvenOdd(Point(20.0, 10.0)))
+        assertFalse(label.containsEvenOdd(Point(0.5, 0.5)))
+        assertEquals(Point(40.0, 10.0), label.currentPoint)
         path.rewind()
         assertTrue(path.isEmpty)
         assertNull(path.currentPoint)
@@ -353,34 +365,100 @@ class ParcelRouteTests {
     }
 
     /**
-     * The pixels wait for :app's MapPainter. What it fills is checked here: drawBase shades the night in twenty rings
-     * around the sun's antipode, 1.2° wide from 92° in, ring `b` at an opacity of (b + 1) / 20 of the night colour.
+     * The pixels wait for :app's canvas. What MapPainter.drawBase draws for the night is checked here: twenty rings around
+     * the sun's antipode, each filled once at its own depth, over the land and under the borders.
      */
     @Test
     fun theNightSideIsDrawnWhereItIsNight() {
         val camera = GlobeCamera(center = GeoPoint(70.0, 30.0), scale = 180.0, offset = Point(200.0, 200.0))
-        val projection = GlobeProjection(camera)
-        val disk = MapPath.ellipse(Rect(camera.offset.x - camera.scale, camera.offset.y - camera.scale, camera.scale * 2, camera.scale * 2))
+        // The real, faint night colour, without the rim's shading.
+        val palette = MapPalette.map(accent = AdaptiveColor(RgbaColor(1.0, 0.0, 0.0))).copy(shade = null, limb = null, grid = null)
         // 03:53 UTC: the sun is over China, and Europe is in the dark.
         val time = checkNotNull(DateParser.date("2026-09-29T03:53:00Z"))
-        val sun = GlobeCamera.subsolarPoint(time)
-        val antipode = GeoPoint(sun.longitude + 180, -sun.latitude).vector
-        fun night(place: GeoPoint): Double {
-            val point = projection.project(place)
-            return (0 until 20).sumOf { band ->
-                val outer = (92 - 1.2 * band.toDouble()) * PI / 180
-                val ring = MapGeometry.cap(antipode, outer, projection, disk)
-                if (band < 19) ring.addPath(MapGeometry.cap(antipode, outer - 1.2 * PI / 180, projection, disk))
-                if (ring.containsEvenOdd(point)) (band + 1) / 20.0 else 0.0
-            }
+        val route = ParcelRoute(listOf(kyoto, zurich))
+        val steps = MapPainter.drawBase(Size(400.0, 400.0), atlas, route, camera, palette, night = time)
+        val projection = GlobeProjection(camera)
+        val night = steps.filterIsInstance<MapDrawing.Fill>().filter { it.color == palette.night }
+        assertEquals(20, night.size)
+        assertTrue(night.all { it.evenOdd && !it.cut })
+        assertTrue(steps.indexOf(night.first()) > steps.indexOfFirst { it is MapDrawing.Layer })
+        assertTrue(steps.indexOf(night.last()) < steps.indexOfLast { it is MapDrawing.Stroke && it.color == palette.border })
+        // How dark a place is: the depth of the one ring that covers it.
+        fun darkness(place: GeoPoint): Double {
+            val covering = night.filter { it.path.containsEvenOdd(projection.project(place)) }
+            assertTrue(covering.size <= 1)
+            return covering.sumOf { it.opacity }
         }
-        val africa = night(GeoPoint(3.0, 28.0))
-        val europe = night(GeoPoint(30.0, 50.0))
-        val china = night(GeoPoint(105.0, 35.0))
+        val africa = darkness(GeoPoint(3.0, 28.0))
+        val europe = darkness(GeoPoint(30.0, 50.0))
+        val china = darkness(GeoPoint(105.0, 35.0))
         // Deep night over the Sahara, dusk over Eastern Europe, day in China.
         assertEquals("Africa $africa", 1.0, africa, 1e-12)
         assertTrue("Europe $europe", europe > 0 && europe < 1)
         assertEquals("China $china", 0.0, china, 0.0)
+        // Without a time, or once the view is too close to show the Earth's curve, there is no night.
+        assertTrue(MapPainter.drawBase(Size(400.0, 400.0), atlas, route, camera, palette, night = null).none { it is MapDrawing.Fill && it.color == palette.night })
+        val close = camera.copy(scale = 1_000.0)
+        assertTrue(MapPainter.drawBase(Size(400.0, 400.0), atlas, route, close, palette, night = time).none { it is MapDrawing.Fill && it.color == palette.night })
+    }
+
+    // Not an iPhone test: what drawBase draws, and how, as the view closes in, as Swift's drawBase draws it.
+    @Test
+    fun theMapIsDrawnInTheSameStepsAsOnTheIphone() {
+        val palette = MapPalette.map(accent = AdaptiveColor(RgbaColor(1.0, 0.0, 0.0)))
+        val route = ParcelRoute(listOf(kyoto, leipzig, zurich))
+        val size = Size(400.0, 300.0)
+        fun camera(kilometres: Double) =
+            GlobeCamera(center = zurich.point, scale = 300 / (kilometres / GeoPoint.EARTH_KILOMETRES), offset = Point(200.0, 150.0))
+        fun name(color: AdaptiveColor, stroke: Boolean): String {
+            // The map strokes its borders in the ocean's colour.
+            if (stroke && color === palette.border) return "border"
+            val names = listOf(
+                "space" to palette.space, "ocean" to palette.ocean, "grid" to palette.grid, "land" to palette.land,
+                "visited" to palette.visited, "urban" to palette.urban, "road" to palette.road, "limb" to palette.limb,
+            )
+            return names.firstOrNull { it.second === color }?.first ?: "?"
+        }
+        fun summary(steps: List<MapDrawing>): List<String> = steps.map { step ->
+            val opacity = "%.3f".format(Locale.ROOT, step.opacity)
+            when (step) {
+                is MapDrawing.Fill -> "fill ${name(step.color, stroke = false)} $opacity${if (step.evenOdd) " eo" else ""}${if (step.cut) " cut" else ""}"
+                is MapDrawing.Stroke -> "stroke ${name(step.color, stroke = true)} $opacity ${step.style.lineWidth}"
+                is MapDrawing.Shade -> "shade $opacity ${"%.2f".format(Locale.ROOT, step.startRadius / step.endRadius)}"
+                is MapDrawing.Layer -> "layer ${summary(step.steps)}"
+                is MapDrawing.Text -> "text"
+            }
+        }
+        fun drawn(kilometres: Double, tiles: List<DetailTile> = emptyList(), tiled: Boolean = false) =
+            summary(MapPainter.drawBase(size, atlas, route, camera(kilometres), palette, night = null, tiles = tiles, tiled = tiled))
+        // The whole Earth: the grid, the parcel's countries, coarse borders, and the globe's shading and rim.
+        assertEquals(
+            listOf(
+                "fill space 1.000", "fill ocean 1.000", "stroke grid 1.000 0.6", "layer [fill land 1.000 eo, fill visited 1.000 eo]",
+                "stroke border 1.000 0.55", "shade 1.000 0.55", "stroke limb 1.000 1.0",
+            ),
+            drawn(20_000.0),
+        )
+        // Once the view is under 1.4 globe radii across, the globe's curve fades out.
+        assertEquals(
+            listOf(
+                "fill space 1.000", "fill ocean 1.000", "stroke grid 0.316 0.6", "layer [fill land 1.000 eo, fill visited 1.000 eo]",
+                "stroke border 1.000 0.55", "shade 0.316 0.55", "stroke limb 0.316 1.0",
+            ),
+            drawn(5_000.0),
+        )
+        // Under 0.45 globe radii across, the fine outlines and the lakes; under 2,400 km the parcel's countries fade out.
+        assertEquals("stroke border 1.000 0.55", drawn(2_900.0).last())
+        assertEquals(
+            listOf("fill space 1.000", "fill ocean 1.000", "layer [fill land 1.000 eo, fill visited 0.500 eo, fill ocean 1.000 eo]", "stroke border 1.000 0.8"),
+            drawn(1_600.0),
+        )
+        // Up close the tiles draw the lakes, once every tile has come and they show fully.
+        val pack = WorldDetailPack(SharedResources.open("WorldDetail.pack").use { it.readBytes() })
+        val tiles = pack.keys(camera(300.0), size).mapNotNull { pack.tile(it) }
+        assertEquals("layer [fill land 1.000 eo]", drawn(300.0, tiles, tiled = true)[2])
+        assertEquals("layer [fill land 1.000 eo, fill ocean 1.000 eo]", drawn(300.0, tiles, tiled = false)[2])
+        assertEquals("layer [fill land 1.000 eo, fill ocean 1.000 eo]", drawn(480.0, tiles, tiled = true)[2])
     }
 
     @Test
@@ -623,10 +701,36 @@ class ParcelRouteTests {
     /** The pixels of the label on SmallPip and UnwrappingParcel wait for :app; the clear patch they are read at is checked here. */
     @Test
     fun theCarriersLabelSitsOnTheBoxsRightSideClosedAndOpen() {
+        val label = PipGeometry.Label
         // A clear patch of the label's paper, right of its barcode, as a point of Pip's frame.
-        val patch = PipGeometry.Label.point(62.0, 28.0)
+        val (x, y) = 62.0 to 28.0
+        val patch = label.point(x, y)
         assertEquals(220.14, patch.x, 0.01)
         assertEquals(205.77, patch.y, 0.01)
+        // The iPhone test reads the drawn pixel there; here, what the label draws stays clear of it. The paper's
+        // rounded corners, the truck and the name's line above, the barcode left of it and the number below.
+        assertTrue(x > label.CORNER_RADIUS && x < label.size.width - label.CORNER_RADIUS)
+        assertTrue(y > label.CORNER_RADIUS && y < label.size.height - label.CORNER_RADIUS)
+        assertTrue(x > label.truck.x + label.truckSize.width / 2 && y > label.truck.y + label.truckSize.height / 2)
+        assertTrue(y > label.nameStart.y + label.NAME_SIZE / 2)
+        assertTrue(x > label.bars.max() + label.BAR_WIDTH / 2)
+        assertTrue(y < label.NUMBER_BASELINE - label.NUMBER_SIZE)
+        // The whole label on the box's right side, and nothing else of the box over the patch, closed or open.
+        for (corner in listOf(0.0 to 0.0, label.size.width to 0.0, 0.0 to label.size.height, label.size.width to label.size.height)) {
+            assertEquals(0.0, PipGeometry.distance(label.point(corner.first, corner.second), PipGeometry.rightSide), 0.0)
+        }
+        assertTrue(PipGeometry.distance(patch, PipGeometry.tape) > 1)
+        for (flap in listOf(PipGeometry.frontRight, PipGeometry.frontLeft)) {
+            for (at in listOf(0.0, 0.5, 1.0)) assertTrue("$at", PipGeometry.distance(patch, flap.points(at)) > 1)
+        }
+        for (glint in PipGeometry.glints) {
+            assertTrue(hypot(patch.x - glint.center.x, patch.y - glint.center.y) > glint.size)
+        }
+        // The sticker is cut to the closed box; the opening parcel fills the frame.
+        assertTrue(PipGeometry.stickerCrop.contains(patch))
+        // Kraft paper without a label, the label's own paper with one.
+        for (dark in listOf(false, true)) assertTrue(PipPalette.kraft.right.resolve(dark).blue < 200.0 / 255)
+        for (channel in listOf(label.paper.red, label.paper.green, label.paper.blue)) assertTrue(channel > 240.0 / 255)
     }
 
     @Test

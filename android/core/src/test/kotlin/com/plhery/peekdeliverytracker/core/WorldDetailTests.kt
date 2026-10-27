@@ -7,6 +7,7 @@ import java.util.Locale
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 import kotlin.math.acos
+import kotlin.math.hypot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -257,12 +258,109 @@ class WorldDetailTests {
         assertNotNull(show(edge, PipRequest(PipMood.Look, inset = true)).pip)
     }
 
-    /** The pixels wait for :app's MapPainter; the tiles a 200 km close-up is drawn with are checked here. */
+    /**
+     * The iPhone test counts the pixels the tiles change; the canvas is :app's, so this one sums what the tiles' steps
+     * cover: each stroke's length in the view times its width, and each fill's area, sampled every 4 points.
+     */
     @Test
     fun upCloseTheTilesAreDrawnOverTheLand() {
         val pack = pack()
+        val route = ParcelRoute(listOf(zurich))
+        val frame = Rect(0.0, 0.0, small.width, small.height)
+        fun steps(kilometres: Double, tiles: List<DetailTile>, palette: MapPalette = MapPalette.map(AdaptiveColor(RgbaColor(1.0, 0.0, 0.0)))) =
+            MapPainter.drawBase(small, atlas, route, close(kilometres, small), palette, night = null, tiles = tiles, tiled = tiles.isNotEmpty())
+        // What the tiles add: the steps after the land's layer and before the borders.
+        fun detail(steps: List<MapDrawing>): List<MapDrawing> {
+            assertTrue(steps.last() is MapDrawing.Stroke)
+            return steps.subList(steps.indexOfFirst { it is MapDrawing.Layer } + 1, steps.size - 1)
+        }
+        fun covered(step: MapDrawing): Double = when (step) {
+            is MapDrawing.Stroke -> length(lines(step.path), frame) * step.style.lineWidth
+            is MapDrawing.Fill -> area(lines(step.path), frame)
+            else -> 0.0
+        }
         val tiles = pack.keys(close(200.0, small), small).mapNotNull { pack.tile(it) }
         assertFalse(tiles.isEmpty())
+        // Rivers, roads and built-up areas take a fair share of a close-up, and more of a closer one.
+        for (kilometres in listOf(200.0, 100.0)) {
+            assertTrue(detail(steps(kilometres, emptyList())).isEmpty())
+            val drawn = detail(steps(kilometres, tiles))
+            assertTrue("$kilometres", drawn.sumOf { covered(it) } > 2_000)
+        }
+        // A wide view is drawn as it always was.
+        val wideWith = steps(700.0, tiles)
+        val wideWithout = steps(700.0, emptyList())
+        assertTrue(detail(wideWith).isEmpty())
+        assertEquals(wideWithout.map { it::class to it.opacity }, wideWith.map { it::class to it.opacity })
+        // On a see-through map, water is cut out of the land rather than painted over it.
+        val ink = AdaptiveColor(RgbaColor(0.2, 0.1, 0.4))
+        val white = AdaptiveColor(RgbaColor(1.0, 1.0, 1.0))
+        val cut = detail(steps(200.0, tiles, MapPalette.tint(ink, surface = white))).filter {
+            (it as? MapDrawing.Fill)?.cut ?: (it as? MapDrawing.Stroke)?.cut ?: false
+        }
+        assertTrue(cut.sumOf { covered(it) } > 500)
+    }
+
+    /** A path's lines, each subpath closed or not, a curve taken as eight straight steps. */
+    private fun lines(path: MapPath): List<List<Point>> {
+        val lines = ArrayList<MutableList<Point>>()
+        path.replay(object : MapPath.Sink {
+            override fun move(x: Double, y: Double) {
+                lines.add(mutableListOf(Point(x, y)))
+            }
+
+            override fun line(x: Double, y: Double) {
+                lines.last().add(Point(x, y))
+            }
+
+            override fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double) {
+                val from = lines.last().last()
+                for (index in 1..8) {
+                    val t = index / 8.0
+                    val u = 1 - t
+                    lines.last().add(Point(u * u * from.x + 2 * u * t * controlX + t * t * x, u * u * from.y + 2 * u * t * controlY + t * t * y))
+                }
+            }
+
+            override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) =
+                throw AssertionError("The tiles draw no arcs")
+
+            override fun ellipse(x: Double, y: Double, width: Double, height: Double) = throw AssertionError("The tiles draw no ellipses")
+
+            override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) =
+                throw AssertionError("The tiles draw no rectangles")
+
+            override fun close() {
+                lines.last().add(lines.last().first())
+            }
+        })
+        return lines
+    }
+
+    /** How long lines are inside `frame`, each step counted where its middle lies. */
+    private fun length(lines: List<List<Point>>, frame: Rect): Double = lines.sumOf { line ->
+        line.zipWithNext().sumOf { (a, b) -> if (frame.contains(Point((a.x + b.x) / 2, (a.y + b.y) / 2))) hypot(b.x - a.x, b.y - a.y) else 0.0 }
+    }
+
+    /** How much of `frame` the lines fill by the even-odd rule, sampled every 4 points. */
+    private fun area(lines: List<List<Point>>, frame: Rect): Double {
+        var cells = 0
+        for (row in 0 until (frame.height / 4).toInt()) {
+            val y = frame.minY + row * 4.0 + 2
+            val crossings = ArrayList<Double>()
+            for (line in lines) {
+                for (index in line.indices) {
+                    val a = line[index]
+                    val b = line[(index + 1) % line.size]
+                    if ((a.y > y) != (b.y > y)) crossings.add(a.x + (y - a.y) / (b.y - a.y) * (b.x - a.x))
+                }
+            }
+            for (column in 0 until (frame.width / 4).toInt()) {
+                val x = frame.minX + column * 4.0 + 2
+                if (crossings.count { it > x } % 2 == 1) cells++
+            }
+        }
+        return cells * 16.0
     }
 
     /** Waits for what the store reads off the main thread, up to five seconds. */

@@ -74,7 +74,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "temu-orders",
       "slug": "temu-order-tracking",
-      "title": "Temu order tracking: carriers, statuses and late parcels"
+      "title": "Temu order tracking: order number or tracking number?"
     },
     {
       "id": "shein-orders",
@@ -321,7 +321,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "temu-orders",
       "slug": "temu-sendungsverfolgung",
-      "title": "Temu-Sendungsverfolgung: Paketdienst, Status, Verspätung"
+      "title": "Temu-Sendungsverfolgung: Bestellnummer oder Sendungsnummer?"
     },
     {
       "id": "shein-orders",
@@ -568,7 +568,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "temu-orders",
       "slug": "suivi-commande-temu",
-      "title": "Suivi de commande Temu\u00a0: transporteurs, statuts, retards"
+      "title": "Suivi de commande Temu\u00a0: numéro de commande ou de suivi\u202f?"
     },
     {
       "id": "shein-orders",
@@ -815,7 +815,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "temu-orders",
       "slug": "tracciare-ordine-temu",
-      "title": "Tracciare un ordine Temu: codice, ritardi e rimborsi"
+      "title": "Tracciare un ordine Temu: codice, corriere e ritardi"
     },
     {
       "id": "shein-orders",
@@ -1062,7 +1062,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "temu-orders",
       "slug": "seguimiento-pedido-temu",
-      "title": "Seguimiento de pedidos Temu: número, retrasos y reembolsos"
+      "title": "Seguimiento de pedidos Temu: número, reparto y retrasos"
     },
     {
       "id": "shein-orders",
@@ -1309,7 +1309,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "temu-orders",
       "slug": "rastrear-encomenda-temu",
-      "title": "Rastrear uma encomenda Temu: número, atrasos e reembolsos"
+      "title": "Rastrear uma encomenda Temu: número, CTT e atrasos"
     },
     {
       "id": "shein-orders",
@@ -1556,7 +1556,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "temu-orders",
       "slug": "sledzenie-zamowienia-temu",
-      "title": "Śledzenie zamówienia Temu: numer, opóźnienia i zwroty"
+      "title": "Śledzenie zamówienia Temu: numer, przewoźnik i opóźnienia"
     },
     {
       "id": "shein-orders",

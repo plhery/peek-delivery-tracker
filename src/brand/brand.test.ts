@@ -62,7 +62,7 @@ describe('carrier brand', () => {
     ['dhl-ecommerce-uk', 'dhl'], ['dpd-fr', 'dpd'], ['amazon-shipping', 'amazon-logistics'],
     ['swiss-post-cargo', 'swiss-post'], ['postlogistics', 'swiss-post'],
     ['dpd-de', 'dpd'], ['dpd-uk', 'dpd'], ['evri-uk', 'evri'], ['delivengo', 'la-poste'],
-    ['gofo-fr', 'gofo'], ['gofo-it', 'gofo'], ['gofo-nl', 'gofo'],
+    ['gofo-ca', 'gofo'], ['gofo-fr', 'gofo'], ['gofo-it', 'gofo'], ['gofo-nl', 'gofo'],
   ])('shares %s branding with %s', (id, owner) => {
     expect(carrierBrandFamily(id)).toBe(owner);
     expect(carrierDecal(id)).toBe(carrierDecal(owner));

@@ -792,7 +792,7 @@ and [`truck.json`](truck.json).
 | `four-px` | White slanted 4PX beside an orange spark on blue; the orange is an approximation | [4px.com](https://www.4px.com/) |
 | `planzer` | White capitals on red | [planzer.ch](https://www.planzer.ch/) |
 | `tipsa` | White capitals between four orange corners on navy | [tip-sa.com](https://www.tip-sa.com/) |
-| `gofo` (`gofo`, `gofo-fr`, `gofo-it`, `gofo-nl`) | White capitals on orange | [gofo.com](https://www.gofo.com/us/) |
+| `gofo` (`gofo`, `gofo-ca`, `gofo-fr`, `gofo-it`, `gofo-nl`) | White capitals on orange | [gofo.com](https://www.gofo.com/us/) |
 | `dachser` | Blue capitals on a yellow panel across a blue truck; the yellow is an approximation | [dachser.com](https://www.dachser.com/) |
 | `asendia` | White lowercase name over a yellow line on teal | [asendia.com](https://www.asendia.com/) |
 | `colis-prive` | Dark pin and purple exclamation mark on lilac | [colisprive.fr](https://www.colisprive.fr/) |

@@ -4,7 +4,7 @@ description: Encomenda extraviada nos CTT, na DPD ou na InPost? Quanto tempo esp
 slug: encomenda-perdida-o-que-fazer
 picture: Uma prateleira de um centro de triagem com caixas e um espaço vazio tracejado, uma lupa por cima e o Pip ao lado de uma lanterna que ilumina o espaço vazio.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Se compraste numa loja, a reclamação de uma encomenda perdida faz-se à loja, não à transportadora. Passado o prazo da transportadora (na InPost, por exemplo, uma encomenda pode ser dada como perda total 30 dias depois da notificação de envio), pede à loja outro artigo ou o reembolso: foi ela que contratou a transportadora, é a ela que a transportadora indemniza e, em Portugal, a encomenda viaja por conta e risco dela até a teres na mão. Reclamar à transportadora serve sobretudo a quem enviou.
@@ -14,7 +14,7 @@ Se compraste numa loja, a reclamação de uma encomenda perdida faz-se à loja, 
 :::steps
 - Espera o prazo da transportadora | Antes disso, a encomenda está atrasada, não perdida.
 - Fala com a loja | Por escrito, com o número da encomenda e o número de seguimento. Pede outro artigo ou o reembolso.
-- Abre um caso na plataforma | A Amazon, o eBay ou a Vinted reembolsam-te se o vendedor não resolver, dentro do prazo deles.
+- Abre um caso na plataforma | O eBay, a Etsy ou a Vinted reembolsam-te se o vendedor não resolver, dentro do prazo deles.
 - Reclama à transportadora | Se foste tu a enviar. Nos CTT, quem recebe só é indemnizado se o remetente lhe passar o direito. Junta a prova de envio e a do valor.
 - Por fim, o cartão ou o PayPal | É o último recurso: um estorno pode fechar o caso na plataforma.
 :::
@@ -23,7 +23,7 @@ A loja pode pedir-te que esperes enquanto a transportadora procura a encomenda, 
 
 Aparece como entregue e não está lá? Vê [encomenda dada como entregue mas não recebi](guide:delivered-not-received). Chegou partida ou amassada? Vê [encomenda danificada](guide:damaged-parcel).
 
-> Não comeces pelo estorno no banco. Depois de o pedires, a Amazon deixa de reembolsar pela Garantia de A a Z e o eBay pode fechar o teu caso.
+> Não comeces pelo estorno no banco. Depois de o pedires, o eBay pode fechar o teu caso.
 
 ## Quanto tempo esperar antes de dar a encomenda como perdida?
 
@@ -55,14 +55,14 @@ Se o vendedor não ajudar, a plataforma pode fazê-lo, desde que tenhas pago atr
 
 | Plataforma | Quando abrir um caso | Prazo |
 | --- | --- | --- |
-| Amazon, enviado pela Amazon | 48 horas depois da data prevista de entrega | 30 dias depois dessa data |
-| Amazon, Garantia de A a Z (vendedores do Marketplace) | 3 dias depois da data prevista mais recente, se contactaste o vendedor e ele não respondeu em 48 horas nem resolveu | A última data de entrega tem 90 dias ou menos |
 | eBay | Quando passa a data de entrega prevista; o vendedor tem 3 dias úteis para responder | 30 dias depois dessa data |
 | Etsy | Data de entrega estimada já passada e vendedor contactado há mais de 48 horas | 30 dias depois da data estimada |
 | Vinted (etiqueta da Vinted) | `A encomenda aparenta ter-se perdido`, ou 25 dias úteis depois de `enviado` | 2 dias depois do aviso da Vinted |
 | AliExpress | A partir do 11.º dia depois do envio; se o seguimento ainda mexe, só quando acaba o prazo de entrega | 15 dias depois de acabar o prazo de entrega |
 | Temu | Encomenda perdida em trânsito | 90 dias depois da compra |
 | Shein | Não chegou no prazo estimado | 45 dias depois do pagamento |
+
+Na Amazon.es, a Garantia de A a Z cobre também as compras a vendedores externos: se tiveres problemas com o prazo de entrega, podes reclamar diretamente à Amazon para encontrar uma solução.
 
 Na Vinted, carrega em «Tenho um problema» no ecrã da conversa. A Vinted pode ter de investigar com a transportadora, o que pode demorar várias semanas, e reembolsa-te se a perda se confirmar: o preço do artigo, a taxa da Vinted e os portes. A Etsy exclui atrasos por greves ou mau tempo e encomendas retidas porque recusaste pagar as taxas alfandegárias. Mais sobre o AliExpress, a Temu e a Shein em [como seguir uma encomenda da China](guide:tracking-from-china).
 
@@ -123,8 +123,7 @@ Pagaste por transferência? Pede ao vendedor que reclame à transportadora e te 
 - [InPost: Fala connosco](https://www.inpost.pt/fala-connosco) – 5 e 30 dias, contacto com o remetente em 7 dias, seguro de 25 €, nível mais alto
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – contacto
 - [Correos: Extravío internacional](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales/extravio-internacional) – 1 DTS = 1,2119 € em 2026
-- [Amazon.es: Entregas atrasadas](https://www.amazon.es/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6&language=pt_PT) – 48 horas, 30 dias
-- [Amazon.es: O que é a Garantia A-to-Z?](https://www.amazon.es/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV&language=pt_PT) – 3 dias, 48 horas, 90 dias, estornos
+- [About Amazon España: Diez cosas de Amazon que mejoran tu experiencia de compra (em espanhol)](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantia de A a Z nas compras a vendedores externos, prazo de entrega, reclamação à Amazon
 - [eBay.es: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 dias, 3 dias úteis, devolução de cargo
 - [eBay: Money Back Guarantee](https://www.ebay.com/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – pagamento no eBay, vendedores particulares
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 horas, 30 dias, greves e mau tempo

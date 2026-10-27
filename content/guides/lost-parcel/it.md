@@ -4,7 +4,7 @@ description: Pacco smarrito? Quando si considera perso, chi paga, quanto rimbors
 slug: pacco-smarrito-rimborso
 picture: Uno scaffale di un centro di smistamento pieno di scatole con un vuoto tratteggiato, una lente d'ingrandimento sopra e Pip accanto a una torcia che illumina il vuoto.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Se hai comprato da un negozio, per un pacco smarrito il rimborso lo chiedi al venditore, non al corriere. Passato il tempo d'attesa del corriere (con Poste Delivery Standard il reclamo si può fare dal 6° giorno lavorativo dopo la spedizione), chiedi al venditore un nuovo invio o i soldi indietro: il corriere l'ha scelto lui, l'indennizzo va a lui e in Italia il pacco viaggia a suo rischio finché non lo hai in mano. Il reclamo al corriere serve soprattutto a chi ha spedito. In Ticino la legge ti tutela meno, ma con la [Posta svizzera](carrier:swiss-post) la ricerca puoi aprirla anche tu.
@@ -23,7 +23,7 @@ Il venditore può chiederti di aspettare mentre il corriere cerca il pacco, ma n
 
 Il tracking dice consegnato ma il pacco non c'è? Leggi [pacco consegnato ma non ricevuto](guide:delivered-not-received). È arrivato rotto? Leggi [pacco danneggiato](guide:damaged-parcel).
 
-> Non partire dallo storno della carta. Una volta chiesto, Amazon non ti rimborsa più con la Garanzia dalla A alla Z, Etsy non ti lascia aprire un caso ed eBay può chiudere la tua richiesta.
+> Non partire dallo storno della carta. Una volta chiesto, Etsy non ti lascia aprire un caso ed eBay può chiudere la tua richiesta.
 
 ## Quando puoi dichiarare un pacco smarrito?
 
@@ -46,13 +46,13 @@ Se il venditore non ti aiuta, può farlo la piattaforma, se hai pagato tramite l
 
 | Piattaforma | Da quando | Fino a quando |
 | --- | --- | --- |
-| Amazon, spedito da Amazon | 48 ore dopo la data di consegna prevista | 30 giorni dalla data di consegna prevista, contattando il Servizio Clienti |
-| Amazon, Garanzia dalla A alla Z (venditori del Marketplace) | 3 giorni dopo l'ultima data di consegna prevista, se il venditore non ha risposto entro 48 ore né risolto | Fino a 90 giorni dopo l'ultima data di consegna prevista |
 | eBay (Garanzia cliente eBay) | Passata la data di consegna prevista; il venditore ha 3 giorni lavorativi per rispondere | 30 giorni di calendario dopo quella data |
 | Etsy | Passata la data prevista, se hai scritto al venditore da più di 48 ore | 30 giorni dopo la data di consegna prevista |
 | Vinted (etichetta generata su Vinted) | Quando il tracciamento dice `Il pacco sembra essere stato smarrito`, o 25 giorni lavorativi dopo `spedito` | 2 giorni di calendario dall'avviso di Vinted |
 | AliExpress | Dall'11° giorno dopo la spedizione, o a tempo di consegna scaduto se il tracking si muove ancora | 15 giorni dopo la fine del tempo di consegna |
 | Temu | Pacco smarrito durante il trasporto | 90 giorni dall'acquisto |
+
+Su Amazon, la Garanzia dalla A alla Z copre ogni prodotto comprato nel suo negozio, che lo venda Amazon o un altro venditore: se non arriva, chiedi il rimborso all'assistenza clienti di Amazon. Se l'ha venduto un altro venditore, prova prima a risolvere con lui; se non ci riesci, chiedi il rimborso direttamente ad Amazon.
 
 Su Vinted premi *Ho un problema*: Vinted può dover indagare con il corriere, «questo può richiedere diverse settimane», e ti rimborsa se la perdita viene confermata. Etsy esclude i ritardi dovuti a scioperi o maltempo, e i pacchi bloccati perché non hai voluto pagare i dazi. AliExpress, Temu e Shein li trovi anche in [come tracciare un pacco dalla Cina](guide:tracking-from-china).
 
@@ -118,8 +118,8 @@ Hai pagato con un bonifico? Chiedi a chi vende di fare reclamo al corriere e di 
 - [Brocardi: Codice civile, art. 1510](https://brocardi.it/codice-civile/libro-quarto/titolo-iii/capo-i/sezione-ii/art1510.html) – consegna al vettore
 - [Fedlex: Codice delle obbligazioni, art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/it#art_185) – utili e rischi, merce da spedire
 - [Stiftung für Konsumentenschutz: Paket gestohlen oder beschädigt, wer haftet?](https://www.konsumentenschutz.ch/online-ratgeber/paket-gestohlen-oder-beschaedigt-wer-haftet/) – rischio del mittente fino al corriere, limiti della Posta
-- [Amazon.it: Consegne in ritardo](https://www.amazon.it/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – 48 ore, 30 giorni
-- [Amazon.it: Che cos'è la Garanzia dalla A alla Z?](https://www.amazon.it/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 giorni, 48 ore, 90 giorni, storno di addebito
+- [About Amazon Italia: Come evitare le truffe basate sui furti di identità](https://www.aboutamazon.it/notizie/company-news/come-evitare-le-truffe-basate-sui-furti-di-identita-di-amazon-in-questo-periodo-festivo) – Garanzia dalla A alla Z per ogni prodotto, venduto da Amazon o da un'impresa indipendente, rimborso dall'assistenza clienti se non arriva
+- [About Amazon Italia: Garanzia dalla A alla Z](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prima il venditore, poi il rimborso da Amazon
 - [eBay.it: Garanzia cliente eBay](https://www.ebay.it/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 giorni, 3 giorni lavorativi, pagamento su eBay.it, storno
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 ore, 30 giorni, scioperi e maltempo, storno
 - [Etsy: Purchase Protection Programme](https://help.etsy.com/hc/en-gb/articles/7471925990807-Etsy-s-Purchase-Protection-Programme) – dazi non pagati

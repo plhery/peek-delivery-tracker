@@ -4,7 +4,7 @@ description: Paquete perdido o extraviado: cuándo se da por perdido, a quién r
 slug: paquete-perdido-como-reclamar
 picture: Una estantería de un centro de clasificación con cajas y un hueco vacío de línea discontinua, una lupa encima y Pip junto a una linterna que ilumina el hueco.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Si compraste en una tienda, la reclamación de un paquete perdido va al vendedor, no al transportista. Cuando haya pasado el plazo del transportista (con Correos, 4 días desde la admisión para un Paq Estándar), pide a la tienda que te lo reenvíe o te devuelva el dinero: ella contrató el envío, es quien cobra la indemnización y, en España, el paquete viaja a su riesgo hasta que lo tienes en tus manos. Reclamar al transportista es sobre todo cosa del remitente.
@@ -23,7 +23,7 @@ La tienda puede pedirte que esperes mientras el transportista lo busca, o que co
 
 ¿El seguimiento pone «Entregado» pero no tienes nada? Mira [paquete entregado pero no recibido](guide:delivered-not-received). ¿Ha llegado roto? Mira [paquete dañado](guide:damaged-parcel).
 
-> No empieces pidiendo al banco que te devuelva el cargo de la tarjeta. Si lo haces, Amazon ya no te reembolsa con la Garantía de la A a la Z, Etsy no te deja abrir un caso (y cierra el que tengas) y eBay puede cerrar el tuyo.
+> No empieces pidiendo al banco que te devuelva el cargo de la tarjeta. Si lo haces, Etsy no te deja abrir un caso (y cierra el que tengas) y eBay puede cerrar el tuyo.
 
 ## ¿Cuándo se considera perdido un paquete?
 
@@ -53,14 +53,14 @@ Si el vendedor no te ayuda, la plataforma puede hacerlo, siempre que pagaras des
 
 | Plataforma | Cuándo puedes reclamar | Hasta |
 | --- | --- | --- |
-| Amazon, enviado por Amazon | 48 horas después de la fecha de entrega estimada | 30 días después de esa fecha |
-| Amazon, Garantía de la A a la Z (otros vendedores) | 3 días después de la última fecha de entrega estimada o de la entrega confirmada, lo que ocurra primero, si escribiste al vendedor y no respondió en 48 horas ni lo resolvió | 90 días después de la última fecha de entrega |
 | eBay | En cuanto pasa la fecha de entrega prevista; el vendedor tiene 3 días laborables para responder | 30 días naturales después de esa fecha |
 | Etsy | Pasada la fecha estimada y 48 horas después de escribir al vendedor | 30 días después de la fecha estimada |
 | Vinted (etiqueta de Vinted) | Cuando el seguimiento pone `Parece que se ha perdido el paquete`, o 25 días laborables después de `Enviado` | 2 días naturales después del aviso de Vinted |
 | Wallapop (Wallapop Envíos) | Más de 20 días desde la admisión sin cambios en el seguimiento: contacta con Wallapop | No da plazo; te reembolsa si el transportista declara el paquete extraviado |
 | AliExpress | Desde el día 11 después de que el vendedor lo envíe, o al acabar el plazo de entrega si el seguimiento se mueve con normalidad | 15 días después de que acabe el plazo de entrega |
 | Temu | Artículo perdido en tránsito | 90 días después de la compra |
+
+En Amazon, la Garantía de la A a la Z cubre también las compras a vendedores externos: si tienes problemas con el plazo de entrega y no has podido resolverlo con el vendedor, puedes reclamar directamente a Amazon y pedir el reembolso.
 
 Vinted te devuelve el dinero cuando se confirma la pérdida, y eso puede tardar «varias semanas»; el reembolso incluye el artículo, la tasa de Vinted y el envío. Wallapop paga también al vendedor. Etsy excluye los retrasos por huelgas de transportistas o mal tiempo grave. Más sobre AliExpress, Temu y Shein en [cómo seguir un paquete que viene de China](guide:tracking-from-china).
 
@@ -119,8 +119,8 @@ Sí, como último recurso. En PayPal tienes que abrir la disputa por artículo n
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 66 bis y 66 ter
 - [EUR-Lex: Directiva 2011/83/UE](https://eur-lex.europa.eu/eli/dir/2011/83/oj?locale=es) – transmisión del riesgo (art. 20)
 - [Ministerio de Derechos Sociales, Consumo y Agenda 2030: Reclamaciones](https://www.dsca.gob.es/es/consumo/como-reclamar-conflicto-consumo) – nada entre particulares, Wallapop, OMIC, Centro Europeo del Consumidor
-- [Amazon.es: Entregas con retraso](https://www.amazon.es/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – 48 horas, 30 días
-- [Amazon.es: ¿Qué es la Garantía de la A a la Z?](https://www.amazon.es/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 días, 48 horas, 90 días, devolución de cargo
+- [About Amazon España: Diez cosas de Amazon que mejoran tu experiencia de compra](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z en las compras a vendedores externos, plazo de entrega, reclamación a Amazon
+- [About Amazon España: Amazon amplía la Garantía de la A a la Z en España](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primero el vendedor, después el reembolso de Amazon
 - [eBay.es: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 días naturales, 3 días laborables, pago en eBay, devolución de cargo
 - [Etsy: Cómo abrir un caso](https://help.etsy.com/hc/es/articles/5745586898199) – 48 horas, 30 días, huelgas y mal tiempo, el caso se cierra al reclamar el cargo
 - [Vinted: Política de reembolso](https://www.vinted.es/help/465) – «Parece que se ha perdido el paquete», 25 días laborables, 2 días, varias semanas, qué incluye el reembolso, «Comprar ahora»

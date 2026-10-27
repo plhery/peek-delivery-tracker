@@ -4,7 +4,7 @@ description: How a lost parcel claim works: when a parcel counts as lost, who ow
 slug: lost-parcel-claim
 picture: A sorting-centre shelf of boxes with one empty dashed gap, a magnifying glass over it, and Pip beside a torch that lights the gap.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 If you bought it from a shop, your lost parcel claim goes to the seller, not the carrier: ask it for a replacement or a refund once the carrier's waiting time has passed (7 days after mailing for a USPS search, 10 working days after the due date for Royal Mail 1st or 2nd Class). The seller booked the carrier, so the carrier's compensation goes to the seller. In the UK and the EU, the parcel stays the seller's responsibility until you have it.
@@ -23,7 +23,7 @@ The seller may ask you to wait while the carrier searches, or to sign a declarat
 
 Tracking says delivered but nothing came? See [delivered but not received](guide:delivered-not-received). Arrived broken? See [damaged parcel](guide:damaged-parcel).
 
-> Don't start with a chargeback. Once you've filed one, Amazon won't give an A-to-z refund, Etsy won't let you open a case, and eBay may close yours.
+> Don't start with a chargeback. Once you've filed one, Etsy won't let you open a case, and eBay may close yours.
 
 ## How long before you can claim for a lost parcel?
 
@@ -58,13 +58,13 @@ If the seller doesn't help, the marketplace can, if you paid through its checkou
 
 | Platform | Open a case | Deadline |
 | --- | --- | --- |
-| Amazon, shipped by Amazon | 48 hours after the estimated delivery date | 30 days after that date |
-| Amazon A-to-z Guarantee (other sellers) | 3 days after the latest estimated date, if you contacted the seller over 48 hours ago and it hasn't solved it | 90 days after the last possible delivery date |
 | eBay | Once the estimated date has passed; the seller has 3 business days to answer | 30 days after that date |
 | Etsy | Estimated date passed and the seller contacted over 48 hours ago | 30 days after the estimated date |
 | Vinted (its label) | `Parcel seems to be lost`, or 25 business days after `shipped` | 2 days after Vinted's notice |
 | AliExpress | From the 11th day after dispatch, or once the delivery time is over if tracking still moves | 15 days after the delivery time ends |
 | Temu | Lost in transit | 90 days after purchase |
+
+On Amazon, the A-to-z Guarantee covers delivery problems with anything bought in its stores, whether Amazon or another seller sold it: Amazon refunds or replaces it. If another seller shipped it, contact that seller first; if it hasn't replied within 48 hours, Amazon UK says you can claim from Amazon, which decides on the refund.
 
 Vinted refunds once the loss is confirmed, which can take weeks. Etsy won't cover a delay caused by a strike or severe weather, or a parcel you refused to pay customs charges on. More on AliExpress, Temu and Shein in [tracking a parcel from China](guide:tracking-from-china).
 
@@ -144,8 +144,8 @@ On PayPal, open an Item Not Received dispute within 180 days of paying, and esca
 - [CCPC: Non-delivery](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – replace or refund, business responsible with a courier
 - [FTC: Mail Order Rule](https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule) – insurance charges
 - [Ontario: Consumer rights](https://ontario.ca/page/your-rights-under-consumer-protection-act) – 30 days
-- [Amazon: Late deliveries](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – 48 hours, 30 days
-- [Amazon: A-to-z Guarantee](https://www.amazon.com/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3, 90 days, chargebacks
+- [About Amazon UK: 7 tips to avoid scams impersonating Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-avoid-scams-impersonating-amazon-this-holiday-season) – A-to-z Guarantee on every product, delivery problems, refund or replacement
+- [About Amazon UK: How to contact a third-party seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – seller first, 48 hours, claim from Amazon
 - [eBay: Money Back Guarantee](https://www.ebay.com/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 days, 3 business days, checkout, chargebacks
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 hours, 30 days, strikes and weather, chargebacks
 - [Etsy: Purchase Protection Programme](https://help.etsy.com/hc/en-gb/articles/7471925990807-Etsy-s-Purchase-Protection-Programme) – charges refused on delivery

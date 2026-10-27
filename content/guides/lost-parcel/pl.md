@@ -4,7 +4,7 @@ description: Paczka zaginęła? Kiedy uznaje się ją za zaginioną, kto odpowia
 slug: zaginiona-paczka
 picture: Regał w sortowni z paczkami i jednym pustym, przerywanym miejscem, lupa nad nim i Pip obok latarki, która je oświetla.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Jeśli paczka zaginęła, a zakup był w sklepie, reklamację składasz u sprzedawcy, a nie u kuriera. Gdy minie termin przewoźnika ([Poczta Polska](carrier:poczta-polska) przyjmuje reklamację zaginionej paczki pocztowej po 14 dniach roboczych od nadania, a [DPD](carrier:dpd-pl) uznaje paczkę za utraconą 30 dni po terminie doręczenia), poproś sprzedawcę o ponowną wysyłkę albo zwrot pieniędzy. To on zamówił kuriera i to jemu przewoźnik wypłaci odszkodowanie, a w Polsce paczka podróżuje na ryzyko sklepu, dopóki jej nie dostaniesz. Reklamacja u przewoźnika to głównie sprawa nadawcy.
@@ -23,11 +23,11 @@ Sprzedawca może poprosić, żebyś poczekał, aż przewoźnik zakończy poszuki
 
 Śledzenie pokazuje „doręczona”, a paczki nie ma? Zajrzyj do poradnika [paczka doręczona, a jej nie ma](guide:delivered-not-received). Przyszła, ale zniszczona? Przeczytaj, co zrobić z [uszkodzoną paczką](guide:damaged-parcel).
 
-> Nie zaczynaj od banku. Jeśli zlecisz obciążenie zwrotne, Amazon nie przyjmie wniosku w ramach Gwarancji od A do Z, a Allegro nie wypłaci rekompensaty, gdy pieniądze odzyskasz już z innego źródła.
+> Nie zaczynaj od banku. Allegro nie wypłaci rekompensaty, gdy pieniądze odzyskasz już z innego źródła.
 
 ## Po ilu dniach paczka jest uznana za zaginioną?
 
-Każdy przewoźnik ma własny termin i liczy go od nadania albo od terminu doręczenia, a nie od ostatniego skanu. Większość „zaginionych” paczek jest tylko spóźniona: Amazon pisze, że większość opóźnionych przesyłek dociera w ciągu 48 godzin od podanej daty dostawy. Dlaczego śledzenie milknie, wyjaśnia poradnik [status przesyłki się nie zmienia](guide:tracking-not-updating).
+Każdy przewoźnik ma własny termin i liczy go od nadania albo od terminu doręczenia, a nie od ostatniego skanu. Zanim ten termin minie, paczka jest spóźniona, a nie zaginiona. Dlaczego śledzenie milknie, wyjaśnia poradnik [status przesyłki się nie zmienia](guide:tracking-not-updating).
 
 | Przewoźnik | Kiedy złożysz reklamację | Termin na reklamację | Kto ją składa |
 | --- | --- | --- | --- |
@@ -49,10 +49,10 @@ Jeśli sprzedawca nie pomoże, może to zrobić platforma, o ile płatność prz
 | Platforma | Kiedy zgłosić | Do kiedy |
 | --- | --- | --- |
 | Allegro (Allegro Ochrona Kupujących) | Najpierw zgłoś problem sprzedającemu: reklamacja albo Dyskusja. Wniosek o rekompensatę od 14. dnia po zakupie albo 7 dni po zgłoszeniu, że produkt nie dotarł | 2 lata od zakupu. Do 20 000 zł |
-| Amazon, wysyłka przez Amazon | Paczki nie ma 48 godzin po spodziewanej dacie dostawy | 30 dni od spodziewanej daty dostawy |
-| Amazon, sprzedawca z platformy Marketplace (Gwarancja od A do Z) | 3 dni po ostatniej przewidywanej dacie dostawy, jeśli sprzedawca przez ponad 48 godzin od Twojej wiadomości nie rozwiązał problemu | 90 dni od ostatniej możliwej daty dostawy |
 | Vinted (etykieta z Vinted) | Status `Paczka wydaje się zaginiona` albo 25 dni roboczych od oznaczenia zamówienia jako wysłanego | 2 dni kalendarzowe od powiadomienia Vinted, przycisk „Mam problem” |
 | AliExpress | Od 11. dnia po wysłaniu, a gdy paczka normalnie jedzie, dopiero po upływie czasu dostawy | 15 dni po upływie czasu dostawy |
+
+Na Amazon.pl każdy produkt, czy sprzedaje go Amazon, czy niezależny sprzedawca, jest objęty Gwarancją od A do Z: jeśli masz problem z terminową dostawą, Amazon zwróci Ci pieniądze albo wymieni produkt. Gdy kupujesz od innego sprzedawcy, najpierw spróbuj rozwiązać problem z nim, a jeśli się nie uda, skontaktuj się bezpośrednio z Amazonem i poproś o zwrot pieniędzy.
 
 Allegro zwykle rozpatruje wniosek w 2–3 dni robocze i wypłaca pieniądze w 3–7 dni roboczych, ale rekompensata nie zawsze pokrywa 100% kosztów. Jeśli sprzedający odda Ci pieniądze później, musisz zwrócić je Allegro w ciągu 7 dni. Na Vinted po naciśnięciu „Mam problem” dostajesz zwrot środków, a sprzedający odszkodowanie. Terminy Temu i Shein znajdziesz w poradniku o [śledzeniu paczki z Chin](guide:tracking-from-china).
 
@@ -119,9 +119,8 @@ Gdy nie pomoże ani sprzedawca, ani platforma, zostaje obciążenie zwrotne (cha
 - [InPost: Reklamacja przesyłki nadanej do automatu Paczkomat](https://inpost.pl/reklamacje/przesylka-nadana-do-paczkomatu) – nadawca, adresat lub płatnik, utrata przesyłki pocztowej
 - [DPD Polska: Regulamin Świadczenia Usług w Obrocie Krajowym](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – § 15 zwykła i zadeklarowana wartość, § 20 utrata po 30 dniach, § 21 kto składa, 12 miesięcy, dokumenty, 14 dni
 - [Allegro: Jak działa Allegro Ochrona Kupujących](https://allegro.pl/pomoc/dla-kupujacych/allegro-ochrona-kupujacych/jak-dziala-allegro-ochrona-kupujacych-qzdAg2Klbsl) – 20 000 zł, 14 i 7 dni, 2 lata, 2–3 i 3–7 dni roboczych, nie zawsze 100%, Allegro Lokalnie, wyłączenia, zwrot w 7 dni
-- [Amazon.pl: Odnajdywanie zaginionej przesyłki, która została oznaczona jako dostarczona](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – wysyłka przez Amazon, 48 godzin, 30 dni od spodziewanej daty dostawy
-- [Amazon.pl: Śledzenie paczki](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – większość opóźnionych paczek w 48 godzin
-- [Amazon.pl: Gwarancja od A do Z](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 dni, 48 godzin, 90 dni, obciążenie zwrotne
+- [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – Gwarancja od A do Z dla każdego produktu, problem z terminową dostawą, zwrot pieniędzy albo wymiana
+- [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, potem zwrot pieniędzy od Amazona
 - [Vinted: Paczka nie dotarła](https://www.vinted.pl/help/658) – 25 dni roboczych, „Mam problem”, zwrot i odszkodowanie dla sprzedającego
 - [Vinted: Polityka Zwrotów](https://www.vinted.pl/help/465) – „Paczka wydaje się zaginiona”, „Kup teraz”, zaginięcie, 2 dni kalendarzowe, płatność poza Vinted
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 11. dzień po wysłaniu, 15 dni

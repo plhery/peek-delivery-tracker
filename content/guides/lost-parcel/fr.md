@@ -4,7 +4,7 @@ description: Colis perdu ? Quand il est considéré comme perdu, qui doit te rem
 slug: colis-perdu-remboursement
 picture: Une étagère de centre de tri chargée de cartons, avec un vide en pointillés, une loupe dessus, et Pip à côté d'une lampe torche qui éclaire le vide.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Si tu as commandé à une boutique, c'est elle qui te rembourse, pas le transporteur. Une fois passé le délai du transporteur (48 heures sans nouveau statut chez Chronopost, délai d'acheminement dépassé de plus de deux jours chez La Poste suisse), demande au vendeur un nouvel envoi ou un remboursement : c'est lui qui a choisi le transporteur et qui touche son indemnisation, et en France comme en Belgique, le colis voyage à ses risques jusqu'à ce que tu l'aies en main. Réclamer au transporteur, c'est surtout l'affaire de l'expéditeur.
@@ -23,7 +23,7 @@ Le vendeur peut te demander d'attendre le résultat de l'enquête, ou de confirm
 
 Le suivi dit « livré » mais tu n'as rien ? Lis plutôt [colis livré mais non reçu](guide:delivered-not-received). Arrivé cassé ? Voir [colis endommagé](guide:damaged-parcel).
 
-> Ne commence pas par ta banque. Une fois la rétrofacturation demandée, Amazon refuse la Garantie A à Z, Etsy ne te laisse plus ouvrir de litige et eBay peut clôturer le tien.
+> Ne commence pas par ta banque. Une fois la rétrofacturation demandée, Etsy ne te laisse plus ouvrir de litige et eBay peut clôturer le tien.
 
 ## Au bout de combien de temps un colis est-il considéré comme perdu ?
 
@@ -53,13 +53,13 @@ Si le vendeur ne fait rien, la plateforme peut te rembourser, si tu as payé par
 
 | Plateforme | Tu peux agir | Jusqu'à |
 | --- | --- | --- |
-| Amazon, expédié par Amazon | 48 heures après la date de livraison estimée | 30 jours après cette date |
-| Amazon, vendeur tiers (Garantie A à Z) | 3 jours après la dernière date de livraison estimée, si tu as contacté le vendeur il y a plus de 48 heures sans solution | 90 jours après la dernière date de livraison possible |
 | eBay (Garantie client eBay) | Dès que la date de livraison estimée est passée ; le vendeur a 3 jours ouvrés pour répondre | 30 jours calendaires après cette date |
 | Etsy | Date de livraison estimée passée et vendeur contacté il y a plus de 48 heures | 30 jours après la date de livraison estimée |
 | Vinted (envoi intégré) | Statut « semble perdu », ou 25 jours ouvrés après l'envoi : « J'ai un problème » | 2 jours après l'avis de Vinted |
 | AliExpress | À partir du 11e jour après l'expédition, ou à la fin du délai de livraison si le colis avance encore | 15 jours après la fin du délai de livraison |
 | Temu | Article perdu pendant le transport | 90 jours après l'achat |
+
+Sur Amazon, la garantie A à Z couvre chaque produit acheté dans ses boutiques, qu'il soit vendu par Amazon ou par un vendeur indépendant : en cas de livraison retardée, Amazon rembourse ou remplace l'article. Si c'est un vendeur tiers qui te l'a vendu, essaie d'abord de régler le problème avec lui. Si tu n'y arrives pas, tu peux demander un remboursement à Amazon.
 
 Sur Vinted, tu es remboursé « si la perte est confirmée » : l'enquête avec le transporteur « peut prendre plusieurs semaines », et ton paiement est conservé en attendant. Pour une étiquette Mondial Relay achetée sur Vinted, Leboncoin ou Rakuten, c'est le service client de la plateforme qui indemnise, après une enquête « généralement traitée sous 30 jours ». Etsy exclut les retards dus à une grève, à des intempéries graves ou à des événements comparables, et les colis bloqués parce que tu as refusé de payer les frais de douane. AliExpress, Temu et Shein en détail : [suivre un colis venu de Chine](guide:tracking-from-china).
 
@@ -133,8 +133,8 @@ En dernier recours seulement. Sur PayPal, ouvre un litige « Objet non reçu » 
 - [Assemblée nationale : question écrite n° 10528](https://www.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE10528) – art. L221-15, vente entre particuliers
 - [Justel : Code de droit économique](https://www.ejustice.just.fgov.be/eli/loi/2013/02/28/2013A11134/justel) – art. VI.44
 - [Konsumentenschutz : Paket gestohlen oder beschädigt (en allemand)](https://www.konsumentenschutz.ch/online-ratgeber/paket-gestohlen-oder-beschaedigt-wer-haftet/) – art. 185 CO, risque jusqu'à la remise au transporteur
-- [Amazon.fr : Livraisons en retard](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – 48 heures, 30 jours
-- [Amazon.fr : Garantie A à Z](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 jours, 48 heures, 90 jours, rétrofacturation
+- [About Amazon France : Six conseils contre les arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – garantie A à Z sur chaque produit, livraison retardée, remboursement ou remplacement
+- [About Amazon France : La Garantie A à Z](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeur d'abord, puis remboursement par Amazon
 - [eBay.fr : Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 jours, 3 jours ouvrés, paiement par eBay, rétrofacturation
 - [Etsy : L'ouverture d'un litige (copie archivée)](https://web.archive.org/web/20260504151748/https://help.etsy.com/hc/fr/articles/5745586898199-L-ouverture-d-un-litige) – 48 heures, 30 jours, rétrofacturation
 - [Etsy : How to Open a Case (en anglais)](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – grèves et intempéries

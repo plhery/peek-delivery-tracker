@@ -4,7 +4,7 @@ description: Paket verloren? Ab wann es als verloren gilt, wer haftet, was DHL, 
 slug: paket-verloren-was-tun
 picture: Ein Regal im Paketzentrum voller Kartons mit einer leeren, gestrichelten Lücke, eine Lupe darüber und Pip neben einer Taschenlampe, die die Lücke anleuchtet.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Ist ein bestelltes Paket verloren gegangen, holst du dir Ersatz oder dein Geld beim Händler, nicht beim Paketdienst. Melde dich, sobald die Frist des Paketdienstes vorbei ist: bei [DHL](carrier:dhl) nach mehr als 5 Werktagen ohne neuen Status, bei der [Schweizerischen Post](carrier:swiss-post) mehr als zwei Tage nach der erwarteten Laufzeit. Der Händler hat den Paketdienst beauftragt und bekommt dessen Entschädigung, und in Deutschland und Österreich trägt er das Risiko, bis du das Paket in den Händen hältst. In der Schweiz entscheiden die AGB des Shops.
@@ -23,7 +23,7 @@ Der Händler darf dich bitten, die Nachforschung beim Paketdienst abzuwarten. An
 
 Laut Sendungsverfolgung zugestellt, aber nichts da? Dann lies [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received). Kaputt angekommen? Dann hilft [Paket beschädigt](guide:damaged-parcel).
 
-> Fang nicht mit einer Rückbuchung an. Hast du eine Zahlung zurückbuchen lassen oder eine Lastschrift widerrufen, gibt es bei Amazon keine A-bis-z-Erstattung mehr, bei Etsy kannst du keinen Fall mehr eröffnen, und eBay kann deinen Fall schließen.
+> Fang nicht mit einer Rückbuchung an. Hast du eine Zahlung zurückbuchen lassen, kannst du bei Etsy keinen Fall mehr eröffnen, und eBay kann deinen Fall schließen.
 
 ## Wann gilt ein Paket als verloren?
 
@@ -54,13 +54,13 @@ Hilft der Verkäufer nicht, kann der Marktplatz einspringen, wenn du über seine
 
 | Plattform | Fall öffnen ab | Frist |
 | --- | --- | --- |
-| Amazon, Versand durch Amazon | 48 Stunden nach dem voraussichtlichen Lieferdatum | 30 Tage nach der erwarteten Zustellung |
-| Amazon A-bis-z-Garantie (Marketplace-Verkäufer) | 3 Tage nach dem letzten voraussichtlichen Lieferdatum, wenn der Verkäufer nicht innerhalb von 48 Stunden geantwortet oder das Problem gelöst hat | Solange das letzte mögliche Lieferdatum höchstens 90 Tage zurückliegt |
 | eBay (eBay-Käuferschutz) | Sobald das Ca.-Lieferdatum verstrichen ist. Der Verkäufer hat dann 3 Werktage | 30 Kalendertage danach |
 | Etsy | Liefertermin verstrichen und Verkäufer vor mehr als 48 Stunden kontaktiert | 30 Tage ab dem angesetzten Liefertermin |
 | Vinted (mit Vinted-Versandschein) | Status `Sendung scheint verloren gegangen zu sein` oder mehr als 25 Werktage nach „verschickt“ | 2 Kalendertage nach dem Hinweis von Vinted |
 | AliExpress | Ab dem 11. Tag nach dem Versand. Bewegt sich das Paket normal, erst nach Ende der Lieferzeit | 15 Tage nach Ende der Lieferzeit |
 | Temu | Paket beim Transport verloren | 90 Tage nach dem Kauf |
+
+Bei Amazon gilt die A-bis-z-Garantie für alles, was du in den Amazon-Stores kaufst, ob Amazon oder ein anderer Verkäufer es verkauft: Kommt die Lieferung nicht pünktlich, ersetzt oder erstattet Amazon den Kauf. Hat ein Marketplace-Verkäufer selbst versendet, wendest du dich zuerst an ihn. Löst er das Problem nicht, machst du den Anspruch bei Amazon geltend, und Amazon entscheidet über die Erstattung.
 
 Vinted erstattet, sobald der Verlust bestätigt ist, und das kann mehrere Wochen dauern. Nicht abgedeckt sind bei Etsy Verspätungen durch Streik oder Unwetter und Pakete, die feststecken, weil du die Zollgebühren nicht zahlen wolltest. Mehr zu AliExpress, Temu und Shein steht unter [Paket aus China verfolgen](guide:tracking-from-china).
 
@@ -140,9 +140,9 @@ Hilft weder der Händler noch die Plattform, bleibt der Zahlungsweg, und den geh
 - [Konsumentenschutz: Paket gestohlen oder beschädigt: Wer haftet?](https://www.konsumentenschutz.ch/online-ratgeber/paket-gestohlen-oder-beschaedigt-wer-haftet/) – Händler haftet bis zur Übergabe an den Paketdienst
 - [Weltpostverein: Vollzugsordnung zum Weltpostvertrag](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/05-actsRegulationsConventionAndPostalPayment/POC-REGL-2025-1%E2%94%80Doc-1.pdf) – 40 SZR plus 4,50 SZR je kg, pauschal 130 SZR nach Vereinbarung
 - [Correos: Extravío internacional](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales/extravio-internacional) – 1 SZR = 1,2119 € für 2026
-- [Amazon.de: Sendung verfolgen](https://www.amazon.de/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – 48 Stunden
-- [Amazon.de: Ein fehlendes Paket finden](https://www.amazon.de/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – 30 Tage
-- [Amazon.de: A-bis-z-Garantie](https://www.amazon.de/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 Tage, 48 Stunden, 90 Tage, Lastschrift und Rückbuchung
+- [About Amazon: 5 praktische Tipps gegen Betrugsmaschen](https://www.aboutamazon.de/news/amazon-prime-und-shopping/5-praktische-tipps-die-dir-helfen-sicher-bei-amazon-einzukaufen-und-betrugsmaschen-zu-verhindern) – A-bis-Z-Garantie für jedes Produkt, pünktliche Lieferung, Ersatz oder Erstattung
+- [About Amazon: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – Marketplace-Verkäufer, rechtzeitige Lieferung, Amazon entscheidet über die Erstattung
+- [About Amazon: A-bis-z-Garantie bei Sach- und Personenschäden](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst der Verkäufer, dann Amazon
 - [eBay.de: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – Ca.-Lieferdatum, 3 Werktage, 30 Kalendertage, Zahlung über eBay, Rückbelastung
 - [Etsy: Einen Fall eröffnen](https://help.etsy.com/hc/de/articles/5745586898199) – 48 Stunden, 30 Tage, Rückbuchung
 - [Etsy: Purchase Protection Programme](https://help.etsy.com/hc/en-gb/articles/7471925990807-Etsy-s-Purchase-Protection-Programme) – Streik, Unwetter, nicht bezahlte Zollgebühren

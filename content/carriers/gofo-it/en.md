@@ -21,7 +21,7 @@ GOFO says its Italian numbers usually start with `CIIT` or `GFIT`, followed by 1
 
 The shop gives you the number in its order confirmation or shipping email. If it's missing, or GOFO's tracking calls it invalid, GOFO asks you to contact the seller. See also [how to find a tracking number](guide:find-tracking-number).
 
-The two letters after `GF` or `CI` name the country. `GFFR` and `CIFR` numbers belong to [GOFO France](carrier:gofo-fr), and `GFUS` with 14 digits to [GOFO Express](carrier:gofo) in the United States, a separate network. If your number starts with `GFIT` but has 12 or 15 digits, it's mistyped or isn't a GOFO Italy number.
+The two letters after `GF` or `CI` name the country. `GFFR` and `CIFR` numbers belong to [GOFO France](carrier:gofo-fr), `GFUS` with 14 digits to [GOFO Express](carrier:gofo) in the United States, a separate network, and `GFCA` with 14 digits to GOFO Canada. If your number starts with `GFIT` but has 12 or 15 digits, it's mistyped or isn't a GOFO Italy number.
 
 ## GOFO tracking statuses: what the Italian words mean
 

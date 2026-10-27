@@ -22,7 +22,7 @@ Some parcels carry both a GFUS waybill number and a CR tracking number. GOFO's p
 
 **Where to find it.** GOFO's support page sends you to the sender: the order confirmation email (shipping details), your account on the shop's site under Orders or Purchase History, or the shipping notification sent after dispatch. Still nothing? See [how to find a tracking number](guide:find-tracking-number).
 
-**Numbers that look alike.** GOFO also runs networks in other countries. `GFFR` and `CIFR` numbers belong to [GOFO France](carrier:gofo-fr), `GFIT` and `CIIT` numbers to [GOFO Italy](carrier:gofo-it). Type one into GOFO's US tracker and it offers a link to the right country's site. A `YT` number is [YunExpress](carrier:yunexpress)'s, even when GOFO does the final delivery.
+**Numbers that look alike.** GOFO also runs networks in other countries. `GFFR` and `CIFR` numbers belong to [GOFO France](carrier:gofo-fr), `GFIT` and `CIIT` numbers to [GOFO Italy](carrier:gofo-it). Type one into GOFO's US tracker and it offers a link to the right country's site. A `GFCA` number with 14 digits belongs to GOFO Canada; Peek recognises and tracks it too. A `YT` number is [YunExpress](carrier:yunexpress)'s, even when GOFO does the final delivery.
 
 ## GOFO tracking statuses explained
 
@@ -97,7 +97,7 @@ GOFO says delivery is typically completed within 1–2 calendar days once the pa
 
 ### Why is my GOFO tracking number not working?
 
-Check that it's a US GOFO number, which typically begins with GFUS; a `GFFR` or `GFIT` number belongs to GOFO's French or Italian site. If it still finds nothing, ask the shop that shipped it, which can open an inquiry with GOFO.
+Check that it's a US GOFO number, which typically begins with GFUS; a `GFFR`, `GFIT` or `GFCA` number belongs to GOFO's French, Italian or Canadian site. If it still finds nothing, ask the shop that shipped it, which can open an inquiry with GOFO.
 
 :::sources
 - [GOFO: Package Tracking](https://www.gofo.com/us/track) – current status labels, scan wordings, waybill and tracking number, several numbers per search, POD and ZIP code, estimated delivery, other countries' sites

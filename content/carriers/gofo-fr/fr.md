@@ -21,7 +21,7 @@ Selon GOFO, le numéro « doit commencer par « CIFR » ou « GFFR », suivi de 
 
 C'est l'expéditeur qui te donne le numéro. Pour un achat en ligne, GOFO t'envoie vers l'e-mail de confirmation de commande ou la notification d'expédition ; s'il n'y est pas, demande-le à la boutique. Sur sa page de suivi, GOFO affiche deux numéros, le `Numéro de Bordereau` et le `Numéro de Suivi`. Si le suivi te répond que ton numéro n'est pas valide, GOFO te conseille de contacter la boutique qui l'a envoyé.
 
-GOFO travaille dans plusieurs pays, et les lettres après `GF` ou `CI` donnent le pays. Un numéro en `GFIT` ou `CIIT` appartient à GOFO Italie. Un `GFUS` suivi de 14 chiffres, ou `GF` suivi de 13 chiffres seulement, appartient à GOFO Express aux États-Unis, un autre réseau. Les numéros des autres pays de GOFO, comme `GFNL` (Pays-Bas) ou `GFES` (Espagne), ne sont pas non plus des numéros de GOFO France. Pour comparer les formes : [à quel transporteur appartient un numéro](guide:tracking-number-formats).
+GOFO travaille dans plusieurs pays, et les lettres après `GF` ou `CI` donnent le pays. Un numéro en `GFIT` ou `CIIT` appartient à GOFO Italie. Un `GFUS` suivi de 14 chiffres, ou `GF` suivi de 13 chiffres seulement, appartient à GOFO Express aux États-Unis, un autre réseau. Les numéros des autres pays de GOFO, comme `GFNL` (Pays-Bas), `GFES` (Espagne) ou `GFCA` (Canada), ne sont pas non plus des numéros de GOFO France. Pour comparer les formes : [à quel transporteur appartient un numéro](guide:tracking-number-formats).
 
 ## Suivi GOFO : ce que veut dire chaque statut
 

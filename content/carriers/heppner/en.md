@@ -10,7 +10,7 @@ Heppner is a French road freight company, from small parcels to pallets and full
 
 ## Heppner tracking number: where it is and what it looks like
 
-Heppner says the tracking number "can be found in the notifications sent by Heppner (if applicable)"; it also calls it the receipt number. Its form asks for that number, the delivery postcode and the delivery country (France preselected; Switzerland and Belgium are in the list). An optional field takes the shop's order reference. If you have neither, Heppner says: "Contact your shipper directly." See [how to find your tracking number](guide:find-tracking-number).
+Heppner says the tracking number "can be found in the notifications sent by Heppner (if applicable)"; it also calls it the receipt number. Its form asks for that number, the delivery postcode and the delivery country (France preselected; Switzerland and Belgium are in the list). The number field also takes the shop's order reference, which Heppner says "is normally available from your supplier". If you have neither, Heppner says: "Contact your shipper directly." See [how to find your tracking number](guide:find-tracking-number).
 
 Heppner publishes no format. Peek takes 8 digits for Heppner (digits invented):
 
@@ -51,7 +51,7 @@ The confusing ones:
 
 With Heppner CONNECT, private recipients get an email or SMS at each step and can give instructions on the tracking page at any time:
 
-- **"I'm having it delivered"**: choose the date. Daytime is between 8:30 and 18:00; Heppner confirms a 2-hour slot on the day of delivery. Evenings (18:00 to 21:00) and Saturdays are offered only if the sender paid for Heppner's EXTENT option.
+- **"I'm having it delivered"**: choose the date. Daytime is between 8:30 and 18:00; Heppner confirms a 2-hour slot on the day of delivery. Evenings and Saturdays (8:30 to 18:00) are offered only if the sender paid for Heppner's EXTENT option. An evening slot ends at 21:00; it starts at 18:00 according to the tracking page, at 18:30 according to Heppner's EXTENT page.
 - **"I collect my package"**: pick it up at your local Heppner branch. The page gives a date until which it's kept.
 
 You can change the date until the order is on its way; after that, the page gives the delivery branch's phone number. If no slot is free, it asks you to call.
@@ -60,7 +60,7 @@ You can change the date until the order is on its way; after that, the page give
 
 **No pickup points or lockers.** The only place to collect is the Heppner branch.
 
-**Missed delivery.** The tracking shows it as rescheduled. Heppner doesn't publish how many attempts it makes or how long a branch keeps your order, so book a new date quickly.
+**Missed delivery.** The tracking shows it as rescheduled. Heppner doesn't publish how many attempts it makes. Its EXTENT page gives a free storage period of 5 days, or 7 with EXTENT, so book a new date quickly.
 
 ## Heppner delivery late, damaged or lost
 
@@ -68,7 +68,7 @@ Your contract is with the shop; Heppner's claims sheet and terms address senders
 
 **No update for days.** Check whether the page is `Waiting for instructions`: nothing moves until you choose a date or collection. Otherwise see [tracking not updating](guide:tracking-not-updating).
 
-**Damaged or incomplete at delivery.** Check the goods in front of the driver and write precise reservations on the delivery receipt ("1 item, reference X, stained, unfit for sale"). Heppner refuses vague ones such as "subject to unpacking". In France, a reservation that isn't precise ("parcel wet") must be confirmed within 72 hours of delivery; a precise one needs no confirmation. For international deliveries it has to be precise on receipt.
+**Damaged or incomplete at delivery.** Check the goods in front of the driver and write precise reservations on the delivery receipt ("1 item, reference X, stained, unfit for sale"). Heppner refuses vague ones such as "subject to unpacking". In France, a reservation that isn't precise ("parcel wet") must be confirmed within 72 hours of delivery; a precise one needs no confirmation. For international deliveries there's no 72-hour window: Heppner's French sheet says the reservation must be precise on receipt, and its English one that it must reach Heppner's customer service directly upon delivery.
 
 **Lost.** Heppner treats goods as lost 30 days after the agreed delivery date in France, and 60 days for international road transport. A claim needs the receipt number, the amount with proof, the reservations, the packing list, the weight and photos; Heppner's terms bar any action one year after the service. Give these to the shop, who claims from Heppner.
 
@@ -115,6 +115,7 @@ A family-owned French transport company based in Strasbourg, independent for a c
 - [Heppner: tracking portal, English texts](https://myportal.heppner-group.com/assets/i18n/en.json) – English wordings, delivery choice, slots, branch pickup
 - [Heppner: tracking portal, French texts](https://myportal.heppner-group.com/assets/i18n/fr.json) – French wordings behind the English ones
 - [Heppner: Heppner Connect](https://www.heppner-group.com/en/overland-solutions/heppner-connect/) – private recipients, 30 kg, 24/7 changes, EXTENT, INHOME
+- [Heppner: Extent & Inhome](https://www.heppner-group.com/en/overland-solutions/solutions-de-messagerie-b2c/) – evening 18:30 to 21:00, Saturday, free storage 5 or 7 days
 - [Heppner: Track your shipments](https://www.heppner-group.com/en/overland-solutions/track-your-shipments/) – email and SMS notifications
 - [Heppner: Report a loss or a damage](https://www.heppner-group.com/wp-content/uploads/2024/10/Compensation_Heppner_EN.pdf) – reservations, presumed loss, claim contents, emails
 - [Heppner: Déclarer une perte ou une avarie](https://www.heppner-group.com/wp-content/uploads/2024/10/FicheIndemnisation_Heppner_FR-2024.pdf) – 72 hours, vague reservations

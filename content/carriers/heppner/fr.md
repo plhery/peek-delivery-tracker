@@ -10,7 +10,7 @@ Heppner est un transporteur routier français, « du petit colis au camion compl
 
 ## Numéro de suivi Heppner : où le trouver
 
-Heppner indique que « le numéro de suivi d'expédition se retrouve dans les notifications envoyées par Heppner (si applicable) ». Son portail l'appelle aussi « numéro de récépissé ». Le formulaire demande ce numéro, le code postal de livraison et le pays de livraison (France présélectionnée, Suisse et Belgique dans la liste). Un champ facultatif accepte le numéro d'expédition ou la référence de commande, qui est « normalement disponible auprès de votre fournisseur ». Si tu n'as ni l'un ni l'autre, Heppner répond : « Contactez directement votre expéditeur. » Lis aussi [où trouver son numéro de suivi](guide:find-tracking-number).
+Heppner indique que « le numéro de suivi d'expédition se retrouve dans les notifications envoyées par Heppner (si applicable) ». Son portail l'appelle aussi « numéro de récépissé ». Le formulaire demande ce numéro, le code postal de livraison et le pays de livraison (France présélectionnée, Suisse et Belgique dans la liste). Ce champ accepte aussi la référence de commande (« N° d'expédition ou de référence commande »), qui est « normalement disponible auprès de votre fournisseur ». Si tu n'as ni l'un ni l'autre, Heppner répond : « Contactez directement votre expéditeur. » Lis aussi [où trouver son numéro de suivi](guide:find-tracking-number).
 
 Heppner ne publie aucun format ; Peek attend 8 chiffres pour Heppner. Quelques exemples inventés :
 
@@ -52,7 +52,7 @@ Ceux qui prêtent à confusion :
 
 Avec Heppner CONNECT, les particuliers reçoivent un e-mail ou un SMS à chaque étape, de la prise en charge à la livraison. Sur la page de suivi, tu peux à tout moment voir où en est ta livraison et donner tes instructions, 24 heures sur 24 :
 
-- **« Je me fais livrer »** : tu choisis la date. En journée, la livraison a lieu « entre 8h30 et 18h00 », et Heppner te confirme un créneau de 2 heures le jour même. Le soir (de 18 h à 21 h) et le samedi ne sont proposés que si l'expéditeur a pris l'option EXTENT.
+- **« Je me fais livrer »** : tu choisis la date. En journée, la livraison a lieu « entre 8h30 et 18h00 », et Heppner te confirme un créneau de 2 heures le jour même. Le soir et le samedi (de 8h30 à 18h) ne sont proposés que si l'expéditeur a pris l'option EXTENT. Le créneau du soir finit à 21 h ; il commence à 18 h selon la page de suivi, à 18h30 selon la page de Heppner sur EXTENT.
 - **« Je récupère mon colis »** : tu vas le chercher à ton agence Heppner. La page indique la date jusqu'à laquelle il y reste.
 
 Tu peux changer la date tant que la commande n'est pas partie. Ensuite, la page affiche « votre rendez-vous ne peut plus être modifié » avec le numéro de ton agence de livraison. Si aucun créneau n'est libre, elle te demande d'appeler, numéro de suivi en main.
@@ -61,7 +61,7 @@ Tu peux changer la date tant que la commande n'est pas partie. Ensuite, la page 
 
 **Pas de point relais ni de consigne.** Le seul endroit où retirer ta commande est l'agence Heppner.
 
-**Livraison manquée.** Le suivi l'affiche comme reprogrammée. Heppner ne publie ni le nombre de passages ni la durée de garde en agence : choisis vite une nouvelle date.
+**Livraison manquée.** Le suivi l'affiche comme reprogrammée. Heppner ne publie pas le nombre de passages. Sa page sur EXTENT donne un délai de stockage gratuit de 5 jours, 7 avec EXTENT : choisis vite une nouvelle date.
 
 ## Colis Heppner en retard, abîmé ou perdu
 
@@ -119,6 +119,7 @@ Une entreprise de transport française basée à Strasbourg, qui se présente co
 - [Heppner : Destinataire, suivez votre marchandise](https://www.heppner-group.com/destinataire-suivez-votre-marchandise/) – champs du formulaire, où est le numéro, messages d'erreur, pays, lien de contact
 - [Heppner : portail de suivi, textes en français](https://myportal.heppner-group.com/assets/i18n/fr.json) – étapes et messages, choix de livraison, créneaux, retrait en agence
 - [Heppner : Heppner Connect, livraison aux particuliers](https://www.heppner-group.com/solutions-terrestres/heppner-connect-livraison-aux-particuliers/) – particuliers, 30 kilos, instructions 24/7, EXTENT, INHOME
+- [Heppner : Extent et Inhome](https://www.heppner-group.com/solutions-terrestres/solutions-de-messagerie-b2c/) – soirée de 18h30 à 21h, samedi, stockage gratuit de 5 ou 7 jours
 - [Heppner : Suivre vos envois](https://www.heppner-group.com/solutions-terrestres/suivre-une-expedition/) – notifications par e-mail et SMS
 - [Heppner : Déclarer une perte ou une avarie](https://www.heppner-group.com/wp-content/uploads/2024/10/FicheIndemnisation_Heppner_FR-2024.pdf) – réserves, 72 heures, perte présumée, pièces, e-mails
 - [Heppner : Conditions générales de vente 2025](https://www.heppner-group.com/wp-content/uploads/2025/10/CGV-integrales-2025.pdf) – réserves, frais de refus, délai d'un an

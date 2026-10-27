@@ -16,9 +16,10 @@ The shapes known as Asendia's, with invented digits:
 
 | Number | Whose it is |
 | --- | --- |
-| `ASE1234567890` | ASE, then 8 to 37 letters and digits: Asendia. |
-| `AS123456789US` | AS, 9 digits, US: Asendia. |
-| `AHOY12345678` | AHOY, then 8 letters and digits: Asendia. |
+| `ASE00000000` | ASE, then 8 to 37 letters and digits: Asendia. |
+| `AS000000000US` | AS, 9 digits, US: Asendia. |
+| `AHOY00000000` | AHOY, then 8 letters and digits: Asendia. |
+| `ESUS000000000` | ESUS and 9 digits: Asendia or [DHL eCommerce](carrier:dhl-ecommerce). |
 | `RR000000005CH` | An international postal number: the post that issued it, here [Swiss Post](carrier:swiss-post). |
 | `LA000000005FR` | The same for France: [La Poste / Colissimo](carrier:la-poste). |
 | `EEUS000000000US0` | An eBay International Shipping reference: no carrier from the number alone. |
@@ -42,7 +43,7 @@ Asendia USA's A1 tracker writes its scans in English only, and relays the delive
 | `Arrived at USPS Regional Facility` | The US delivery partner has it. |
 | `airline misroute – under investigation with airline` | The flight took it the wrong way; the airline is looking into it. |
 
-The global site, track.asendia.com, shows broader milestones: `Information Received`, `Handed to Asendia`, `Departed from Asendia`, `Arrived at Destination`, `Customs`, `In delivery` and `Delivered`. `Exception` flags a problem, and `Pending` means nothing is known yet.
+The global site, track.asendia.com, shows broader milestones: `Information Received`, `Handed to Asendia`, `Departed from Asendia`, `Arrived at Destination`, `Customs`, `In delivery` and `Delivered`. `Exception` flags a problem.
 
 Two things confuse people. It may appear in a city or country you didn't expect: Asendia says its parcels are routed through transit centres in many countries. And a status that stays the same for days doesn't mean the parcel has stopped: Asendia says there can be several days between scans in transit.
 
@@ -52,7 +53,7 @@ The delivery company in your country makes the attempts, not Asendia, and the tr
 
 Asendia says most of its partners make two or three attempts and leave a card each time, physical or electronic, telling you how to rearrange delivery or collect the parcel from a local post office where available. Some Asendia services let you reschedule; if not, the partner tries again or leaves the parcel at the nearest post office or pickup point. Asendia USA says that second attempt comes the next business day. Some partners offer to change the address after a first failed attempt.
 
-How long the parcel waits is the partner's rule. Swiss Post usually keeps international consignments for 15 days; La Poste keeps a Colissimo parcel for 15 calendar days from the day after the notice, then returns it. Asendia has no lockers or pickup points of its own. Parcels nobody collects go back, by a process that depends on the country.
+How long the parcel waits is the partner's rule. Swiss Post usually keeps international consignments for 15 days; La Poste keeps a Colissimo parcel for 15 calendar days from the day after the notice, then returns it. Parcels nobody collects go back, by a process that depends on the country.
 
 ## Asendia parcel not moving, missing or not delivered
 
@@ -77,7 +78,7 @@ Asendia deals with shops, not shoppers, so the shop is usually the one who can a
 
 ## Tracking an Asendia parcel with Peek
 
-[Peek](/) names Asendia straight away for `ASE`, `AS…US` and `AHOY` numbers. You can also paste a link from track.asendia.com or from A1 tracking. A postal number goes to the post that issued it; if the shop calls it Asendia's, or gives a reference that names no carrier, choose Asendia with "Change".
+[Peek](/) names Asendia straight away for `ASE`, `AS…US` and `AHOY` numbers, and asks both Asendia and DHL eCommerce about an `ESUS` number. You can also paste a link from track.asendia.com or from A1 tracking. A postal number goes to the post that issued it; if the shop calls it Asendia's, or gives a reference that names no carrier, choose Asendia with "Change".
 
 It asks Asendia USA's A1 tracker first and, when A1 doesn't answer, opens track.asendia.com, the site of Asendia's European companies, in a browser. That site shows the scans only with the delivery postcode, an optional field when you add the parcel; without it, Peek reads the current status there and takes the history from universal tracking services when they have it.
 

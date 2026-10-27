@@ -21,7 +21,7 @@ GOFO says its number starts with `CIFR` or `GFFR`, followed by 13 or 14 digits, 
 
 The sender gives you the number. For an online order, GOFO points you to the order confirmation email or the shipping notification; if neither has it, ask the shop. GOFO's tracking page labels two numbers, `Waybill Number` and `Tracking Number`. If GOFO's tracking says your number is invalid, GOFO asks you to contact the shop that sent it.
 
-GOFO works in several countries, and the letters after `GF` or `CI` name the country. `GFIT` or `CIIT` numbers belong to [GOFO Italy](carrier:gofo-it), and `GFUS` with 14 digits to [GOFO Express](carrier:gofo) in the United States, a separate network. A number of `GF` and only 13 digits is a US one too. Numbers from GOFO's other countries, such as `GFNL` (Netherlands) or `GFES` (Spain), aren't GOFO France ones either. More on telling shapes apart: [tracking number formats](guide:tracking-number-formats).
+GOFO works in several countries, and the letters after `GF` or `CI` name the country. `GFIT` or `CIIT` numbers belong to [GOFO Italy](carrier:gofo-it), and `GFUS` with 14 digits to [GOFO Express](carrier:gofo) in the United States, a separate network. A number of `GF` and only 13 digits is a US one too. Numbers from GOFO's other countries, such as `GFNL` (Netherlands), `GFES` (Spain) or `GFCA` (Canada), aren't GOFO France ones either. More on telling shapes apart: [tracking number formats](guide:tracking-number-formats).
 
 ## GOFO tracking statuses: what the French words mean
 

@@ -21,7 +21,7 @@ Secondo GOFO, i codici italiani iniziano di solito con `CIIT` o `GFIT`, seguiti 
 
 Il codice lo fornisce il mittente o il negozio online, nell'e-mail di conferma dell'ordine o nella notifica di spedizione. Se non lo trovi, o se il tracciamento di GOFO lo dà come non valido, GOFO ti chiede di contattare direttamente il venditore. Altri posti dove cercarlo: [codice tracking, dove si trova](guide:find-tracking-number).
 
-Le due lettere dopo `GF` o `CI` indicano il Paese. I codici `GFFR` e `CIFR` sono di GOFO France, e `GFUS` con 14 cifre è di GOFO Express negli Stati Uniti, una rete diversa. Se il tuo codice inizia con `GFIT` ma ha 12 o 15 cifre, c'è un errore di battitura oppure non è un codice di GOFO Italy.
+Le due lettere dopo `GF` o `CI` indicano il Paese. I codici `GFFR` e `CIFR` sono di GOFO France, `GFUS` con 14 cifre è di GOFO Express negli Stati Uniti, una rete diversa, e `GFCA` con 14 cifre è di GOFO Canada. Se il tuo codice inizia con `GFIT` ma ha 12 o 15 cifre, c'è un errore di battitura oppure non è un codice di GOFO Italy.
 
 ## Stati del tracking GOFO: cosa vogliono dire
 

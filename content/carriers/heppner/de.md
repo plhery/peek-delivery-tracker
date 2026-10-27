@@ -12,8 +12,7 @@ Heppner ist ein Transportunternehmen aus Straßburg und fährt alles vom kleinen
 
 Laut Heppner steht die Sendungsverfolgungsnummer „in den von Heppner gesendeten Benachrichtigungen (falls zutreffend)“, also in der E-Mail oder SMS zu deiner Lieferung. Das Formular „Empfänger, verfolgen Sie Ihre Bestellung“ fragt nach:
 
-- **Sendungsnummer:** Pflicht.
-- **Versand- oder Bestellreferenznummer:** freiwillig. Die Bestellnummer bekommst du laut Heppner „in der Regel bei Ihrem Lieferanten“, also beim Shop.
+- **Sendungsnummer:** Pflicht. Der Hinweis am Feld lautet „Versand- oder Bestellreferenznummer“: Es nimmt also auch die Bestellnummer, die du laut Heppner „in der Regel bei Ihrem Lieferanten“ bekommst, also beim Shop.
 - **Postleitzahl der Zustellung:** Pflicht.
 - **Lieferland:** Auf der deutschen Seite ist Deutschland vorgewählt. Stell es auf Schweiz.
 

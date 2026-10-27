@@ -387,7 +387,7 @@ fun Parcel.awaitingHandover(now: Instant = Instant.now()): Boolean {
 }
 
 private val expectedDayPattern: Pattern =
-    Pattern.compile("^(\\d{4}-\\d{2}-\\d{2})(?:$|[ T])", Pattern.UNICODE_CHARACTER_CLASS)
+    Pattern.compile("^(\\d{4}-\\d{2}-\\d{2})(?:$|[ T])", unicodeCharacterClass)
 
 val Parcel.expectedDayKey: String?
     get() {
@@ -552,7 +552,7 @@ data class ParcelSection(val kind: ParcelSectionKind, val parcels: List<Parcel>)
 }
 
 object ParcelOrganizer {
-    private val separators = Regex("(?U)[\\s.-]")
+    private val separators = Pattern.compile("[\\s.-]", unicodeCharacterClass).toRegex()
 
     fun visible(
         parcels: List<Parcel>,

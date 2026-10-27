@@ -487,7 +487,7 @@ class Localizer(
 
         val deliveryWindowPattern: Pattern = Pattern.compile(
             "^(\\d{4}-\\d{2}-\\d{2})[ T]+(\\d{2}:\\d{2})(?:[–-](\\d{2}:\\d{2}))?$",
-            Pattern.UNICODE_CHARACTER_CLASS,
+            unicodeCharacterClass,
         )
 
         val formatters = ConcurrentHashMap<String, DateTimeFormatter>()

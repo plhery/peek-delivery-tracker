@@ -6,6 +6,18 @@ import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
 
 /**
+ * `Pattern.UNICODE_CHARACTER_CLASS` where java.util.regex takes it, as on the JVM the tests run on, where it reads `\d`,
+ * `\w`, `\s` and `\b` as ICU does. Android's java.util.regex is ICU itself, Unicode-aware whatever the flags, and
+ * refuses this one (and an inline `(?U)`) with an exception.
+ */
+internal val unicodeCharacterClass: Int = try {
+    Pattern.compile("", Pattern.UNICODE_CHARACTER_CLASS)
+    Pattern.UNICODE_CHARACTER_CLASS
+} catch (_: IllegalArgumentException) {
+    0
+}
+
+/**
  * The catalog's patterns as the iPhone app runs them. The shared patterns are JavaScript's, and iOS compiles
  * them with NSRegularExpression, which is ICU; java.util.regex is given ICU's meaning where the two differ:
  * Unicode `\d`, `\w` and `\s`, a `.` that stops at every ICU line end, ICU's `\b`, which looks through
@@ -41,7 +53,7 @@ internal object CatalogExpressions {
         source: () -> String,
     ): Pattern? {
         compiled[key]?.let { return it.orElse(null) }
-        var flags = Pattern.UNICODE_CHARACTER_CLASS
+        var flags = unicodeCharacterClass
         if (caseInsensitive) flags = flags or Pattern.CASE_INSENSITIVE or Pattern.UNICODE_CASE
         val pattern = try {
             Pattern.compile(source(), flags)

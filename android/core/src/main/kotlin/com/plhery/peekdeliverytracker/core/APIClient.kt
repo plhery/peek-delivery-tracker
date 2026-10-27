@@ -28,7 +28,8 @@ sealed class DeliveryApiError(message: String) : Exception(message) {
 }
 
 object DeliveryApiClient {
-    private val decimal = Regex("^[+-]?(?:\\d+\\.?\\d*|\\.\\d+)(?:[eE][+-]?\\d+)?$")
+    // ASCII digits, as `TimeInterval(_:)` reads them: Android's regular expressions are ICU's, whose `\d` is any digit.
+    private val decimal = Regex("^[+-]?(?:[0-9]+\\.?[0-9]*|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$")
     private val httpDate = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US)
 
     /** A `Retry-After` header in seconds, given either as seconds or as an HTTP date. */

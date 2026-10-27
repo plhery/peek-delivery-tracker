@@ -141,15 +141,18 @@ function stagesAgree(copy: JsonObject, scan: JsonObject): boolean {
   return copy.stage === scan.stage || ['', 'pending'].includes(String(copy.stage ?? ''));
 }
 
-/** Whether `copy` tells `scan` in its words, alone or followed by the copy's place. */
+/**
+ * Whether `copy` tells `scan` in its words, alone or followed by the copy's place, or in any words when the scan
+ * announces the parcel: a provider tells that notice in its own language (17TRACK's English for Swiss Post's French).
+ */
 function inScanWords(copy: JsonObject, scan: JsonObject): boolean {
   const words = wording(scan);
-  return words !== '' && [words, `${words}, ${place(copy)}`].includes(wording(copy));
+  return scan.stage === 'registered' || (words !== '' && [words, `${words}, ${place(copy)}`].includes(wording(copy)));
 }
 
 /**
  * Whether `copy` repeats the carrier's `scan`: at its minute, or in its stage close to it, within an
- * hour in its words or whole hours from it, or whole hours from it to the second when that second is not a minute's first (a
+ * hour in its words (any words for the parcel's announcement) or whole hours from it, or whole hours from it to the second when that second is not a minute's first (a
  * provider reads the carrier's seconds on another clock, in its own words and stage). A scan dated
  * by its day is repeated at its wall clock in some zone: in its stage and words, or at that second
  * when it is not a minute's first, or at the wall clock itself, read as UTC, to the second, in its stage.

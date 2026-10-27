@@ -299,5 +299,31 @@ do $$ begin
     raise exception 'A provider row in other words, another stage or over an hour away was hidden';
   end if;
 end; $$;
+-- A provider's announcement within an hour of the carrier's is a copy in any words; one over an hour away, or
+-- another step in other words, stays.
+insert into public.packages(id, user_id, tracking_number, label, carrier, current_stage, carrier_data)
+values ('97000000-0000-0000-0000-000000000071', '97000000-0000-0000-0000-000000000001', 'COPYTEST7', 'Announcement',
+  'posti', 'in_transit', '{"routing": {"confirmed_carrier": "posti"}}');
+insert into public.tracking_events(id, package_id, stage, description, location, provider_event_id, occurred_at, created_at, raw_data)
+values
+ ('97000000-0000-0000-0000-000000000072', '97000000-0000-0000-0000-000000000071', 'registered', 'Votre envoi sera bientôt transmis',
+  null, 'posti:announced', '2026-10-26T12:44:00Z', '2026-10-26T13:00:00Z', '{}'),
+ ('97000000-0000-0000-0000-000000000073', '97000000-0000-0000-0000-000000000071', 'in_transit', 'Trip arrived',
+  null, 'posti:arrived', '2026-10-27T09:10:00Z', '2026-10-27T09:30:00Z', '{}'),
+ ('97000000-0000-0000-0000-000000000074', '97000000-0000-0000-0000-000000000071', 'registered', 'Registered',
+  null, 'unknown:announced', '2026-10-26T12:10:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "17TRACK"}'),
+ ('97000000-0000-0000-0000-000000000075', '97000000-0000-0000-0000-000000000071', 'registered', 'Registered',
+  null, 'unknown:too-early', '2026-10-26T11:43:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "Ship24"}'),
+ ('97000000-0000-0000-0000-000000000076', '97000000-0000-0000-0000-000000000071', 'in_transit', 'Bag added to trip',
+  null, 'unknown:other-step', '2026-10-27T08:51:00Z', '2026-10-27T09:30:00Z', '{"universal_provider": "ParcelsApp"}');
+do $$ begin
+  if not public.hidden_provider_copy('97000000-0000-0000-0000-000000000074') then
+    raise exception 'A provider''s announcement within an hour of the carrier''s, in other words, was not hidden';
+  end if;
+  if public.hidden_provider_copy('97000000-0000-0000-0000-000000000075')
+    or public.hidden_provider_copy('97000000-0000-0000-0000-000000000076') then
+    raise exception 'An announcement over an hour away, or another step in other words, was hidden';
+  end if;
+end; $$;
 reset role;
 rollback;

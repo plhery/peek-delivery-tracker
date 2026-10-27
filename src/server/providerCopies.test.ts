@@ -46,6 +46,23 @@ describe('providerCopies', () => {
     expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c1'])], ['u2', new Set(['c1'])]]));
   });
 
+  it('leaves out a provider\'s announcement within an hour of the carrier\'s, in any words, and no other step in other words', () => {
+    const row = {
+      carrier_data: confirmed,
+      tracking_events: [
+        scan('c1', 'posti', '2026-10-26T12:44:00Z', { stage: 'registered', description: 'Votre envoi sera bientôt transmis' }),
+        scan('c2', 'posti', '2026-10-27T09:10:00Z', { description: 'Trip arrived' }),
+        // The announcement in the provider's language.
+        scan('u1', 'unknown', '2026-10-26T12:10:00Z', { ...named, stage: 'registered', description: 'Registered' }),
+        // Over an hour away, another step in other words, or the next step of the carrier's in its stage.
+        scan('u2', 'unknown', '2026-10-26T11:43:00Z', { ...named, stage: 'registered', description: 'Registered' }),
+        scan('u3', 'unknown', '2026-10-26T13:20:00Z', { ...named, stage: 'in_transit', description: 'Accepted' }),
+        scan('u4', 'unknown', '2026-10-27T08:51:00Z', { ...named, description: 'Bag added to trip' }),
+      ],
+    };
+    expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c1'])]]));
+  });
+
   it('keeps a provider\'s own step, the carrier\'s rows and every row without a confirmed carrier', () => {
     const events = [
       scan('c1', 'posti', '2026-10-01T11:09:18Z'),

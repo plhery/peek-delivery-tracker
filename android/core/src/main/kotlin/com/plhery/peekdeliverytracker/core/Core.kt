@@ -5,10 +5,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.io.IOException
-import java.time.DateTimeException
 import java.time.Instant
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.chrono.IsoChronology
@@ -506,12 +503,6 @@ internal fun Instant.timeIntervalSince(other: Instant): Double =
     (epochSecond - other.epochSecond) + (nano - other.nano) / 1_000_000_000.0
 
 object DateParser {
-    /**
-     * ISO8601DateFormatter's internet date-time, with or without fractional seconds, which it reads to the
-     * millisecond.
-     */
-    private val timestamp = Regex("^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})(?:\\.(\\d+))?(Z|[+-]\\d{2}:\\d{2})$")
-    private val dayShape = Regex("^(\\d{4})-(\\d{1,2})-(\\d{1,2})$")
     private val unparsed = Instant.MIN
 
     // Rendering asks for the same event timestamps repeatedly. Day-only estimates such as "2026-09-27" never parse
@@ -520,37 +511,17 @@ object DateParser {
 
     fun date(value: String): Instant? {
         parsedDates[value]?.let { return if (it == unparsed) null else it }
-        val date = parse(value)
+        val date = FoundationDates.internetDateTime(value, fractionalSeconds = true)
+            ?: FoundationDates.internetDateTime(value, fractionalSeconds = false)
         if (parsedDates.size >= 4_096) parsedDates.clear()
         parsedDates[value] = date ?: unparsed
         return date
     }
 
-    private fun parse(value: String): Instant? {
-        val match = timestamp.matchEntire(value) ?: return null
-        val parts = match.groupValues
-        return try {
-            val millis = parts[7].takeIf { it.isNotEmpty() }?.padEnd(3, '0')?.take(3)?.toInt() ?: 0
-            val offset = if (parts[8] == "Z") ZoneOffset.UTC else ZoneOffset.of(parts[8])
-            LocalDateTime.of(parts[1].toInt(), parts[2].toInt(), parts[3].toInt(), parts[4].toInt(), parts[5].toInt(), parts[6].toInt(), millis * 1_000_000)
-                .toInstant(offset)
-        } catch (_: DateTimeException) {
-            null
-        }
-    }
-
     /** A timestamp, or the start of the local day a date names in its first ten characters. */
-    fun deliveryDate(value: String): Instant? {
-        date(value)?.let { return it }
-        val match = dayShape.matchEntire(value.characterPrefix(10)) ?: return null
-        val (year, month, day) = match.destructured
-        return try {
-            // Days are local, so follow a time zone change while the app runs.
-            LocalDate.of(year.toInt(), month.toInt(), day.toInt()).atStartOfDay(ZoneId.systemDefault()).toInstant()
-        } catch (_: DateTimeException) {
-            null
-        }
-    }
+    fun deliveryDate(value: String): Instant? =
+        // Days are local, so follow a time zone change while the app runs.
+        date(value) ?: FoundationDates.day(value.characterPrefix(10), ZoneId.systemDefault())
 
     private val isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).withZone(ZoneOffset.UTC)
 

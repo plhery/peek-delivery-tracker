@@ -5,6 +5,8 @@ import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.makeParcel
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.Instant
+import java.time.ZoneId
 import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.BeforeClass
@@ -138,5 +140,92 @@ class CoreParityTests {
         assertEquals("¥2", money(AppLanguage.En, "JPY", 2.5))
         assertEquals("€2.34", money(AppLanguage.En, "EUR", 2.345))
         assertEquals("-€3.50", money(AppLanguage.En, "EUR", -3.5))
+    }
+
+    /** The instant to the millisecond, as the iOS output was printed. */
+    private fun Instant.toMillisecond(): Instant = Instant.ofEpochSecond(epochSecond, Math.round(nano / 1e6) * 1_000_000)
+
+    // java.time writes dates in the proleptic Gregorian calendar, so a Julian date before 15 October 1582 shows
+    // ten days later, and two days earlier in year 26.
+
+    @Test
+    fun aTimestampIsReadAsISO8601DateFormatterReadsIt() {
+        val expected = listOf(
+            "2026-09-27T10:00:00+0200" to "2026-09-27T08:00:00Z",
+            "2026-09-27T10:00:00+02" to "2026-09-27T08:00:00Z",
+            "2026-09-27T10:00:00+2:00" to "2026-09-26T14:00:00Z",
+            "2026-09-27T10:00:00-02:30" to "2026-09-27T12:30:00Z",
+            "2026-09-27T10:00:00GMT+0260" to "2026-09-27T08:00:00Z",
+            "2026-09-27T10:00:00UTC+0260" to "2026-09-27T09:34:00Z",
+            "2026-09-27T10:00:00GMT+02:00" to "2026-09-27T08:00:00Z",
+            "2026-09-27T10:00:00UTC+5" to "2026-09-27T05:00:00Z",
+            "2026-09-27T10:00:00GMT-3" to "2026-09-27T13:00:00Z",
+            "2026-09-27T10:00:00UTC" to "2026-09-27T10:00:00Z",
+            "2026-09-27T10:00:00UT" to "2026-09-27T10:00:00Z",
+            "2026-09-27T10:00:00GMT" to "2026-09-27T10:00:00Z",
+            "2026-9-7T1:2:3Z" to "2026-09-07T01:02:03Z",
+            "2026-09-27T24:00:00Z" to "2026-09-28T00:00:00Z",
+            "2026-02-30T10:00:00Z" to "2026-03-02T10:00:00Z",
+            "2026-09-27T10:00:00Z[Europe/Paris]" to "2026-09-27T10:00:00Z",
+            "2026-09-27T10:00:00+02:00 junk" to "2026-09-27T08:00:00Z",
+            "2026/09/27T10:00:00Z" to "2026-09-27T10:00:00Z",
+            "2026.09.27T10.00.00Z" to "2026-09-27T10:00:00Z",
+            "2026-Sep-27T10:00:00Z" to "2026-09-27T10:00:00Z",
+            "2026-SEPTEMBER-27T10:00:00Z" to "2026-09-27T10:00:00Z",
+            "２０２６-٠٩-27T10:00:00Z" to "2026-09-27T10:00:00Z",
+            "‎2026-09-27T10:00:00Z" to "2026-09-27T10:00:00Z",
+            "2026-09-27T10:00:00.5Z" to "2026-09-27T10:00:00.500Z",
+            "2026-09-27T10:00:00.123456Z" to "2026-09-27T10:00:00.123Z",
+            "2026-09-27T1e1:00:00Z" to "2026-09-27T10:00:00Z",
+            "NaN-09-27T10:00:00Z" to "0000-09-25T10:00:00Z",
+            "1582-10-04T12:00:00Z" to "1582-10-14T12:00:00Z",
+            "1582-10-10T12:00:00Z" to "1582-10-20T12:00:00Z",
+            "1582-10-15T12:00:00Z" to "1582-10-15T12:00:00Z",
+            "26-09-27T10:00:00Z" to "0026-09-25T10:00:00Z",
+            "12050-01-01T00:00:00Z" to "1950-01-01T00:00:00Z",
+            "2026-09-27T10:00:00" + " ".repeat(1004) + "Z" to "2026-09-27T10:00:00Z",
+            "2026-09-27T10:00:00" + " ".repeat(1005) + "Z" to null,
+            "2026-09-27 10:00:00Z" to null,
+            "2026-09-27t10:00:00z" to null,
+            "2026-Sept-27T10:00:00Z" to null,
+            "2026-13-01T10:00:00Z" to null,
+            "2026-09-27T25:00:00Z" to null,
+            "2026-09-27T10:00:60Z" to null,
+            "2026-09-27T10:00:00" to null,
+            "2026-09-27T10:00:00.Z" to null,
+        )
+        for ((value, date) in expected) {
+            assertEquals(value.take(40), date?.let(Instant::parse), DateParser.date(value)?.toMillisecond())
+        }
+    }
+
+    /** `deliveryDate` of a day, in the zone given rather than the system's. */
+    private fun day(value: String, zone: String): Instant? = FoundationDates.day(value.characterPrefix(10), ZoneId.of(zone))
+
+    @Test
+    fun aDayIsReadAsTheDayFormatterReadsIt() {
+        val expected = listOf(
+            "2026-02-30" to "2026-03-02T00:00:00Z",
+            "2026-9-7" to "2026-09-07T00:00:00Z",
+            " 2026-9-7" to "2026-09-07T00:00:00Z",
+            "2026-9-7\t " to "2026-09-07T00:00:00Z",
+            "2026-9-7​" to "2026-09-07T00:00:00Z",
+            "2026-9-7　" to "2026-09-07T00:00:00Z",
+            "2026-09-27x" to "2026-09-27T00:00:00Z",
+            "2026/09/27" to "2026-09-27T00:00:00Z",
+            "2026-Sep-7" to "2026-09-07T00:00:00Z",
+            "26-09-27" to "0026-09-25T00:00:00Z",
+            "1582-10-10" to "1582-10-20T00:00:00Z",
+            "12049-12-31" to "2049-12-03T00:00:00Z",
+            "2026-9-7 x" to null,
+            "2026-9-7\n" to null,
+            "2026-9-7T1" to null,
+            "2026-09-00" to null,
+        )
+        for ((value, date) in expected) assertEquals(value, date?.let(Instant::parse), day(value, "UTC"))
+        assertEquals(Instant.parse("2026-03-01T23:00:00Z"), day("2026-02-30", "Europe/Paris"))
+        // Midnight falls in the gap when the clocks go forward, and the day starts by the offset before it.
+        assertEquals(Instant.parse("2026-03-08T05:00:00Z"), day("2026-03-08", "America/Havana"))
+        assertEquals(Instant.parse("2026-09-06T04:00:00Z"), day("2026-09-06", "America/Santiago"))
     }
 }

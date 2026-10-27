@@ -1370,6 +1370,41 @@ describe('TrackingSyncService', () => {
     });
   });
 
+  describe('rows the carrier lists past the scan it puts first', () => {
+    // JCEX read its copies of a partner's scans hours late, past the delivery it lists first; wording and clocks are invented.
+    const transit = { time: '2026-10-27T06:00:00Z', description: 'Departed', stage: 'in_transit' };
+    const copy = { time: '2026-10-27T12:50:00Z', description: 'Partner sort', stage: 'in_transit' };
+    const answer = (status: CarrierResult['status'], ...events: Array<{ time: string; description: string; stage: string }>): CarrierResult =>
+      ({ status, current_stage: events[0]!.stage, last_status_text: events[0]!.description, last_update: events[0]!.time, events });
+    const parcel = () => {
+      const store = eventStore();
+      let saved: JsonObject = { id: 'late-copies', carrier: 'jcex', tracking_number: 'TEST1234', current_stage: 'pending',
+        created_at: '2026-10-26T09:00:00Z' };
+      return async (at: string, carrier: CarrierResult) => {
+        const adapter = { fetch: vi.fn().mockResolvedValue(carrier), fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+        await new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at))
+          .syncPackage({ ...saved, [STORED_EVENT_IDENTITIES]: store.identities() });
+        saved = { ...saved, ...store.client.applyTrackingSync.mock.calls.at(-1)![1] };
+        return saved;
+      };
+    };
+
+    it('takes a delivery that still lists them, and holds an older history that lists none', async () => {
+      const delivered = { time: '2026-10-27T10:08:00Z', description: 'Delivered', stage: 'delivered' };
+      const check = parcel();
+      expect(await check('2026-10-27T13:00:00Z', answer('in_transit', copy, transit))).toMatchObject({ current_stage: 'in_transit' });
+      expect(await check('2026-10-27T14:00:00Z', answer('delivered', delivered, copy, transit)))
+        .toMatchObject({ current_stage: 'delivered', last_status_text: 'Delivered' });
+      // A reused number's earlier shipment, delivered before these scans, is still an older answer.
+      const reused = parcel();
+      await reused('2026-10-27T13:00:00Z', answer('in_transit', copy, transit));
+      const held = await reused('2026-10-27T14:00:00Z', answer('delivered',
+        { time: '2026-08-01T10:00:00Z', description: 'Delivered', stage: 'delivered' },
+        { time: '2026-07-30T06:00:00Z', description: 'Departed', stage: 'in_transit' }));
+      expect(held).toMatchObject({ current_stage: 'in_transit', carrier_data: { routing: { last_event_at: '2026-10-27T12:50:00.000Z' } } });
+    });
+  });
+
   describe('a provider\'s notice after the carrier\'s newest scan', () => {
     // A BRT import whose origin printed its label again after BRT's pre-advice; numbers, wording and clocks are invented.
     const own: CarrierResult = { status: 'pending', current_stage: 'registered', last_status_text: 'Shipping info sent to BRT',

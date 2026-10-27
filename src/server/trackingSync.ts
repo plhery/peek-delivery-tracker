@@ -2048,8 +2048,12 @@ export class TrackingSyncService {
       // stored rows are only a provider's notices of a stage it shows (noticesOnlyPast): the saved
       // watermark stays, so the provider repeating them in an outage takes the summary back no more.
       const noticesPast = ownAnswer === answered && returnedEventTime < previousEventTime && noticesOnlyPast(answered, ahead);
+      // Nor is an answer that still lists every stored row past its newest scan: rows it reads later
+      // than the scan it puts first set the watermark (JCEX's copies of a partner's scans, read hours
+      // late, past its delivery). A reused number's older history lists none of the newer rows.
+      const listsAhead = ahead.length > 0 && ahead.every((row) => shown.has(String(row.provider_event_id)));
       const olderSnapshot = Number.isFinite(previousEventTime) && Number.isFinite(returnedEventTime)
-        && returnedEventTime < previousEventTime && !retracted && !disputedRows.length && !noticesPast;
+        && returnedEventTime < previousEventTime && !retracted && !disputedRows.length && !noticesPast && !listsAhead;
       // UPU wall time cannot prove freshness against another source. It may
       // establish initial progress, or update its own saved local-time summary.
       const unprovenUpuSummary = result.tracking_provider === 'UPU' && (

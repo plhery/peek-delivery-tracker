@@ -1352,21 +1352,10 @@
   },
   {
     "input": "00159007733123456789",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "poczta-polska",
+    "confidence": "high",
     "candidates": [
-      "poczta-polska",
-      "swiss-post-cargo",
-      "usps",
-      "nz-post"
-    ],
-    "preferred": [
       "poczta-polska"
-    ],
-    "asked": [
-      "poczta-polska",
-      "swiss-post-cargo",
-      "nz-post"
     ]
   },
   {
@@ -1467,6 +1456,14 @@
     "asked": [
       "hermes-de",
       "brt"
+    ]
+  },
+  {
+    "input": "00259007738012753571",
+    "carrier": "poczta-polska",
+    "confidence": "high",
+    "candidates": [
+      "poczta-polska"
     ]
   },
   {
@@ -2688,6 +2685,14 @@
     ]
   },
   {
+    "input": "00559007730000939814",
+    "carrier": "poczta-polska",
+    "confidence": "high",
+    "candidates": [
+      "poczta-polska"
+    ]
+  },
+  {
     "input": "005731156836",
     "carrier": "unknown",
     "confidence": "low",
@@ -2934,21 +2939,10 @@
   },
   {
     "input": "00759007734752893152",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "poczta-polska",
+    "confidence": "high",
     "candidates": [
-      "poczta-polska",
-      "swiss-post-cargo",
-      "usps",
-      "nz-post"
-    ],
-    "preferred": [
       "poczta-polska"
-    ],
-    "asked": [
-      "poczta-polska",
-      "swiss-post-cargo",
-      "nz-post"
     ]
   },
   {
@@ -3439,6 +3433,97 @@
     "confidence": "high",
     "candidates": [
       "ecoscooting"
+    ]
+  },
+  {
+    "input": "0100823022421737",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pin-ag",
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "preferred": [
+      "pin-ag"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "0100825007324406",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pin-ag",
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "preferred": [
+      "pin-ag"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "0100825013458399",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pin-ag",
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "preferred": [
+      "pin-ag"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "0100825019891198",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pin-ag",
+      "dhl-ecommerce",
+      "tnt"
+    ],
+    "preferred": [
+      "pin-ag"
+    ],
+    "asked": [
+      "tnt",
+      "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "0100825028333010",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pin-ag",
+      "dhl-ecommerce",
+      "correos-express",
+      "canada-post",
+      "tnt",
+      "evri-uk"
+    ],
+    "preferred": [
+      "pin-ag"
+    ],
+    "asked": [
+      "correos-express",
+      "evri-uk",
+      "canada-post",
+      "tnt",
+      "dhl-ecommerce"
     ]
   },
   {
@@ -18266,17 +18351,9 @@
   },
   {
     "input": "159007730000000011",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "poczta-polska",
+    "confidence": "high",
     "candidates": [
-      "poczta-polska",
-      "bpost",
-      "ecoscooting"
-    ],
-    "preferred": [
-      "poczta-polska"
-    ],
-    "asked": [
       "poczta-polska"
     ]
   },
@@ -40468,6 +40545,14 @@
     ]
   },
   {
+    "input": "459007731134862958",
+    "carrier": "poczta-polska",
+    "confidence": "high",
+    "candidates": [
+      "poczta-polska"
+    ]
+  },
+  {
     "input": "459073686609",
     "carrier": "unknown",
     "confidence": "low",
@@ -49561,6 +49646,44 @@
       "geniki-taxydromiki",
       "packeta",
       "dhl-ecommerce-es"
+    ]
+  },
+  {
+    "input": "630710456880381131954548",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "inpost",
+      "ciblex",
+      "bpost",
+      "austrian-post"
+    ],
+    "preferred": [
+      "inpost"
+    ],
+    "asked": [
+      "inpost",
+      "austrian-post",
+      "ciblex"
+    ]
+  },
+  {
+    "input": "632437537911500122716494",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "inpost",
+      "ciblex",
+      "bpost",
+      "austrian-post"
+    ],
+    "preferred": [
+      "inpost"
+    ],
+    "asked": [
+      "inpost",
+      "austrian-post",
+      "ciblex"
     ]
   },
   {
@@ -92416,6 +92539,14 @@
     ]
   },
   {
+    "input": "TUSK0COA8D56NUP0",
+    "carrier": "tusk-logistics",
+    "confidence": "high",
+    "candidates": [
+      "tusk-logistics"
+    ]
+  },
+  {
     "input": "TW240743518370H",
     "carrier": "unknown",
     "confidence": "low",
@@ -93316,10 +93447,20 @@
     "candidates": []
   },
   {
+    "input": "UR06250000000000351",
+    "carrier": "uniuni",
+    "confidence": "high",
+    "candidates": [
+      "uniuni"
+    ]
+  },
+  {
     "input": "UR07270000003615622",
-    "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "carrier": "uniuni",
+    "confidence": "high",
+    "candidates": [
+      "uniuni"
+    ]
   },
   {
     "input": "URE6VI",

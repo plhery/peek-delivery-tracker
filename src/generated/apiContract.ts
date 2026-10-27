@@ -2236,7 +2236,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:20|52|6[2456]|8[02])\\d{22}$",
+        "pattern": "^(?:20|52|6[2-6]|8[02])\\d{22}$",
         "confidence": "low",
         "preferred": true
       },
@@ -3409,6 +3409,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^U9999\\d{11}$",
+        "confidence": "high"
+      },
+      {
+        "pattern": "^UR\\d{17}$",
         "confidence": "high"
       },
       {
@@ -4670,15 +4674,13 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^00\\d5900773\\d{10}$",
-        "confidence": "low",
-        "checksum": "poczta-polska",
-        "preferred": true
+        "confidence": "high",
+        "checksum": "poczta-polska"
       },
       {
         "pattern": "^\\d5900773\\d{10}$",
-        "confidence": "low",
-        "checksum": "gs1",
-        "preferred": true
+        "confidence": "high",
+        "checksum": "gs1"
       },
       {
         "pattern": "^PX\\d{10}$",
@@ -7744,7 +7746,18 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "sameday",
       "recognitionRank": 370
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "sameday.ro",
+          "sameday.bg"
+        ],
+        "params": [
+          "awb"
+        ],
+        "fragment": "^awb=([A-Za-z0-9]+)"
+      }
+    ],
     "detectionRules": [
       {
         "pattern": "^1[A-Z]{3,5}\\d{9,12}$",
@@ -31683,6 +31696,74 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ]
+  },
+  "pin-ag": {
+    "displayName": "PIN AG",
+    "aliases": [
+      "PIN Mail",
+      "PIN Mail AG",
+      "PIN Mail Berlin"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#003366",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "link-only",
+      "adapter": null
+    },
+    "trackingUrlTemplate": "https://sendungsverfolgung.pin-ag.de/?sendung={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "sendungsverfolgung.pin-ag.de"
+        ],
+        "params": [
+          "sendung"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^0100\\d{12}$",
+        "confidence": "low",
+        "preferred": true
+      }
+    ],
+    "trackingSearchUrl": "https://sendungsverfolgung.pin-ag.de/"
+  },
+  "tusk-logistics": {
+    "displayName": "Tusk Logistics",
+    "countries": [
+      "US"
+    ],
+    "color": "#0f7a47",
+    "selectable": true,
+    "timezone": "America/Chicago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://shipmenttracking.tusklogistics.com/?trackingNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "shipmenttracking.tusklogistics.com"
+        ],
+        "params": [
+          "trackingNumber"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^TUSK[0-9A-Z]{12}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://www.tusklogistics.com/track-your-shipment"
   }
 } as const;
 
@@ -32535,7 +32616,9 @@ export const CARRIER_IDS = [
   "maersk-ecommerce",
   "dpd-hu",
   "fedex-international-connect",
-  "pengyou"
+  "pengyou",
+  "pin-ag",
+  "tusk-logistics"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

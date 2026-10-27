@@ -805,7 +805,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "cyprus-post",
       "catalog": "cyprus-post",
       "slug": "cyprus-post-tracking",
-      "title": "Cyprus Post tracking: numbers, statuses and collection",
+      "title": "Cyprus Post tracking: numbers, statuses and customs",
       "name": "Cyprus Post",
       "color": "#e4a50e"
     },
@@ -3175,7 +3175,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "cyprus-post",
       "catalog": "cyprus-post",
       "slug": "kypriaka-tachydromeia-entopismos-dematos",
-      "title": "Κυπριακά Ταχυδρομεία: εντοπισμός δέματος, κωδικός, Parcel24",
+      "title": "Κυπριακά Ταχυδρομεία: εντοπισμός δέματος, κωδικός, τελωνείο",
       "name": "Cyprus Post",
       "color": "#e4a50e"
     }

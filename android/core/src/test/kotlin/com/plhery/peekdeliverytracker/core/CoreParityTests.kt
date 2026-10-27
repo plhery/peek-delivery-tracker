@@ -324,4 +324,27 @@ class CoreParityTests {
             JsonEncoder.deliveryTracker.encode(ListSerializer(Double.serializer()), numbers).decodeToString(),
         )
     }
+
+    /**
+     * Swift's descriptions on macOS 27, at the edges of the decimals that read back as a Double. 1e23 is the midpoint
+     * between the Doubles either side of it: the one below, whose significand is even, takes it.
+     */
+    @Test
+    fun doublesAreDescribedByTheShortestDecimalThatReadsBackAsThem() {
+        for ((bits, description) in listOf(
+            0x0000000000000001L to "5e-324",
+            0x000FFFFFFFFFFFFFL to "2.225073858507201e-308",
+            0x0010000000000000L to "2.2250738585072014e-308",
+            0x3FB999999999999AL to "0.1",
+            0x4340000000000000L to "9007199254740992.0",
+            0x4340000000000001L to "9.007199254740994e+15",
+            0x44B52D02C7E14AF5L to "9.999999999999997e+22",
+            0x44B52D02C7E14AF6L to "1e+23",
+            0x44B52D02C7E14AF7L to "1.0000000000000001e+23",
+            0x7FEFFFFFFFFFFFFFL to "1.7976931348623157e+308",
+        )) {
+            assertEquals(description, Double.fromBits(bits).swiftDescription())
+            assertEquals("-$description", (-Double.fromBits(bits)).swiftDescription())
+        }
+    }
 }

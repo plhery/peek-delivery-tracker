@@ -234,10 +234,23 @@ internal fun Double.swiftDescription(): String {
     // Android, is not always the shortest.
     val magnitude = abs(this)
     val exact = BigDecimal(magnitude)
+    // The decimals that read back as the value, exactly: those between the midpoints to its neighbours, and the
+    // midpoints themselves when its significand is even, as a tie rounds to it. Past the largest Double the midpoint is
+    // as far above as the one below.
+    val below = BigDecimal(Math.nextDown(magnitude))
+    val above = if (magnitude == Double.MAX_VALUE) exact + (exact - below) else BigDecimal(Math.nextUp(magnitude))
+    val low = (below + exact).divide(BigDecimal.valueOf(2))
+    val high = (exact + above).divide(BigDecimal.valueOf(2))
+    val closed = magnitude.toRawBits() and 1L == 0L
+    fun readsBack(decimal: BigDecimal): Boolean {
+        val fromLow = decimal.compareTo(low)
+        val toHigh = decimal.compareTo(high)
+        return if (closed) fromLow >= 0 && toHigh <= 0 else fromLow > 0 && toHigh < 0
+    }
     val decimal = (1..17).firstNotNullOf { length ->
         sequenceOf(RoundingMode.HALF_EVEN, RoundingMode.DOWN, RoundingMode.UP)
             .map { exact.round(MathContext(length, it)) }
-            .firstOrNull { it.toString().toDouble() == magnitude }
+            .firstOrNull(::readsBack)
     }.stripTrailingZeros()
     val digits = decimal.unscaledValue().toString()
     // The value is 0.digits × 10^exponent.

@@ -4299,7 +4299,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers</loc>
@@ -5928,14 +5928,14 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhl-ecommerce-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dhl-ecommerce-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/dhl-ecommerce-sendungsverfolgung</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/dhl-ecommerce-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/dhl-ecommerce-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/dhl-ecommerce-tracking" />
-<lastmod>2026-10-11</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/allegro-one-tracking</loc>
@@ -7297,7 +7297,7 @@
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
-<lastmod>2026-10-13</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers/seguimiento-correos</loc>
@@ -7305,7 +7305,7 @@
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
-<lastmod>2026-10-13</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers/correos-espanha-rastreio</loc>
@@ -7313,7 +7313,7 @@
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/royal-mail-tracking</loc>

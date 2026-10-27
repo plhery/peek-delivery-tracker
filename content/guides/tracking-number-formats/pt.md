@@ -36,11 +36,11 @@ Eis o que as transportadoras, e a norma postal, dizem sobre os números que mais
 | DPD | «número de encomenda» de 14 algarismos; o Track & Trace da DPD também aceita o teu número de referência |
 | GLS | «número de encomenda» ou «ID de Rastreamento», que vem em cada cartão de notificação; a GLS não indica o comprimento |
 | [InPost](carrier:inpost) | «número de expedição»; o exemplo da página de seguimento tem 8 caracteres |
-| [Mondial Relay](carrier:mondial-relay) | «n° d'expédition» de 8 algarismos, no topo da etiqueta; o site belga aceita também 10 algarismos (um código da loja e o número de expedição) e 12 (o mesmo, mais o número de ordem do volume); o código de barras da etiqueta tem 26 algarismos, com o número de expedição nos algarismos 3 a 10; em Portugal, segue-se agora no inpost.pt |
+| [Mondial Relay](carrier:mondial-relay) | número de expedição de 8 algarismos; o site belga aceita também 10 e 12 algarismos, que nos dados de transportadoras que o Peek usa são um código da loja e o número de expedição, mais o número de ordem do volume nos de 12; o código de barras da etiqueta tem 26 algarismos; em Portugal, segue-se agora no inpost.pt |
 | DHL | [DHL Express](carrier:dhl-express): 10 algarismos, nunca letras |
 | [UPS](carrier:ups) | `1Z` + 16 letras e algarismos, 18 caracteres no total, como `1Z999AA10123456784`, um exemplo com um dígito de controlo UPS válido |
 | [Correos Express](carrier:correos-express) | a Correos Express não publica um formato; nos dados de transportadoras que o Peek usa, 16 algarismos (também DHL eCommerce, Canada Post, TNT e Evri UK) ou 23 algarismos, ambos terminados num dígito de controlo; com 000 nas posições 15 a 17, o Peek toma um número de 23 algarismos pela Australia Post |
-| [SEUR](carrier:seur) | a SEUR não publica o formato; o seguimento pede o «Identificador de envío». Costuma ter 14 ou 21 algarismos, e um código de 7 também funciona; os de 14 são partilhados com a DPD, a Relais Colis, a BRT e outras |
+| [SEUR](carrier:seur) | nos dados de transportadoras que o Peek usa, costuma ter 14 ou 21 algarismos, e um código de 7 também funciona; os de 14 são partilhados com a DPD, a BRT e outras |
 | [MRW](carrier:mrw) | «Núm. expedição»; na etiqueta de exemplo da MRW, 12 algarismos por baixo do código de barras e, ao lado de «N.º Etiqueta», 5 algarismos, uma barra e 7 algarismos: tira a barra antes de o seguir. Cinco algarismos, uma letra e seis algarismos é uma forma vista em encomendas MRW, embora as páginas da MRW não a mostrem |
 | [NACEX](carrier:nacex) | a caixa de seguimento da NACEX mostra `0000/00000000`: quatro algarismos da agência de onde a encomenda partiu, uma barra e oito algarismos do «Nº expedição»; a NACEX não fixa o comprimento |
 | [Paack](carrier:paack) | número de pedido da loja ou código de barras da etiqueta, com o código postal de entrega; nos dados de transportadoras que o Peek usa, a maior parte destes números não tem forma fixa, por isso podem parecer de outra transportadora; as exceções são `PK` + 18 algarismos, que é da Paack (encomendas que entrega para a Evri International), `5340` + 14 algarismos, que aponta primeiro para a Paack, e um número de encomenda da SHEIN (`C` ou `E`, uma data de seis algarismos e mais 8), que pode ser da Paack |
@@ -71,7 +71,7 @@ Não há um comprimento único. Estes são os comprimentos que as transportadora
 | 10 algarismos | DHL Express; [DHL eCommerce Iberia](carrier:dhl-ecommerce-es); Mondial Relay |
 | 12 algarismos | MRW, na sua etiqueta de exemplo; Mondial Relay; [FedEx](carrier:fedex) Ground Economy, nos EUA |
 | 13 caracteres | o formato postal dos CTT e dos outros operadores postais |
-| 14 algarismos | DPD; SEUR; La Poste, em França |
+| 14 algarismos | DPD; SEUR e La Poste (em França), nos dados de transportadoras que o Peek usa |
 | 22 algarismos | CTT e CTT Express, só algarismos; USPS, nos EUA |
 | 25 algarismos | CTT e CTT Express, só algarismos |
 
@@ -137,7 +137,7 @@ Uma encomenda que atravessa uma fronteira muda muitas vezes de mãos, e cada emp
 - **Nos envios que os CTT mandam para fora**, depois de saírem de Portugal o Seguir objeto só mostra o que os países de trânsito e de destino passam aos CTT, e essa informação pode chegar tarde ou nem chegar.
 - **Nos envios económicos do AliExpress**, a Cainiao diz que o seguimento acaba na entrega à transportadora local, e que o vendedor te pode dizer como contactar essa transportadora. Mais em [como seguir uma encomenda da China](guide:tracking-from-china).
 
-Um número que não dá resultados nem sempre está mal escrito. Os CTT dão duas razões: o número pode servir apenas para [fins aduaneiros](guide:customs), ou o envio pode ser entregue em Portugal por outra empresa. Em qualquer dos casos, dizem para contactares o remetente. E a DHL Express avisa que recicla periodicamente os números de carta de porte, por isso o seguimento pode, de vez em quando, misturar dados de dois envios com o mesmo número. Se um número válido simplesmente ainda não se mexeu, lê [porque é que o tracking não atualiza](guide:tracking-not-updating).
+Um número que não dá resultados nem sempre está mal escrito. Os CTT dão duas razões: o número pode servir apenas para [fins aduaneiros](guide:customs), ou o envio pode ser entregue em Portugal por outra empresa. Em qualquer dos casos, dizem para contactares o remetente. Se um número válido simplesmente ainda não se mexeu, lê [porque é que o tracking não atualiza](guide:tracking-not-updating).
 
 :::sources
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – o formato postal, as letras, o dígito de controlo, o código de país, o código acrescentado no destino
@@ -151,26 +151,22 @@ Um número que não dá resultados nem sempre está mal escrito. Os CTT dão dua
 - [InPost Portugal: Contactos e Apoio ao Cliente](https://www.inpost.pt/fala-connosco) – o PIN que abre o cacifo
 - [Ecoscooting: seguimento](https://ecoscooting.com/) – o campo pede o número de seguimento, sem indicar formato
 - [DHL Express Netherlands: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 algarismos, nunca letras
-- [MyDHL Express Portugal: FAQs Localização e Monitorização](https://mydhl.express.dhl/pt/pt/help-and-support/faqs/tracking-monitoring.html) – números de carta de porte reciclados
-- [UPS: sample package label](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – o número 1Z
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – os números 1Z e o seu dígito de controlo
 - [About Amazon EU: Amazon Prime now available to customers in Portugal](https://www.aboutamazon.eu/news/press-lounge/amazon-prime-now-available-to-customers-in-portugal) – em Portugal compra-se na Amazon.es, também em português
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – os formatos TBA, PT, ES, CNPRT, YT, LP, CNG, DOFR e CNFR, e os 16 e 23 algarismos da Correos Express, as formas 4PX e LP da 4PX, as formas BYS, YP e YW da Yanwen e os 22 e 25 algarismos da CTT Express, nos dados de transportadoras do Peek
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – os formatos TBA, PT, ES, CNPRT, YT, LP, CNG, DOFR e CNFR, e os 16 e 23 algarismos da Correos Express, as formas 4PX e LP da 4PX, as formas BYS, YP e YW da Yanwen, os 22 e 25 algarismos da CTT Express e os 14 algarismos da SEUR e da La Poste, nos dados de transportadoras do Peek
 - [NACEX Portugal: Página inicial](https://www.nacex.pt/) – a forma 0000/00000000 na caixa «Seguimento de envio»
 - [NACEX Portugal: Seguimento](https://www.nacex.pt/irSeguimiento.do) – Agência e Nº expedição
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – números que começam por YT
 - [Cainiao: Help centre](https://global.cainiao.com/helpDoc.htm) – sem seguimento depois da entrega à transportadora local nos envios económicos
 - [bpost: Puis-je suivre mon colis en ligne ?](https://www.bpost.be/fr/faq/puis-je-suivre-mon-colis-en-ligne) – os códigos começados por U não se podem seguir
 - [Mondial Relay Belgium: Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 ou 12 algarismos
-- [Mondial Relay: Où retrouver mon numéro de colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/ou-trouver-mon-numero-de-colis/) – o número de expedição, na etiqueta
-- [Mondial Relay: Étiquette](https://storage.mondialrelay.fr/etiquette-mondial-relay-v-24.pdf) – o código de barras de 26 algarismos
+- [Universal Parcel Scraper: Mondial Relay](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/mondial-relay) – o número de expedição de 8 algarismos, o código da loja e o número de ordem do volume, o código de barras de 26 algarismos, o seguimento no inpost.pt
 - [InPost: Empresa de Encomendas InPost](https://www.mondialrelay.pt/) – o mondialrelay.pt leva ao inpost.pt
 - [Universal Parcel Scraper: Paack](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/paack/README.md) – número de pedido ou código de barras da etiqueta, código postal, números sem forma fixa, exceto `PK`, `5340` e números de encomenda da SHEIN
-- [SEUR: miSEUR, Mis envíos](https://www.seur.com/miseur/mis-envios) – o identificador de envío
 - [MRW: ¿Cómo localizar su número de envío?](https://www.mrw.es/includes/numero_de_envio.html) – a etiqueta de exemplo, 12 algarismos e a forma com barra
 - [4PX: Global Order Tracking](https://track.4px.com/) – 5 a 50 letras e algarismos
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – o seguimento da Yanwen, sem número de exemplo
 - [CTT Express: Localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) – o código de envio
-- [La Poste: Comment suivre mon colis ou ma lettre](https://aide.laposte.fr/professionnel/contenu/comment-suivre-mon-colis-ou-ma-lettre) – 14 algarismos
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 algarismos
 - [FedEx Developer: FedEx Ground Economy announcement](https://developer.fedex.com/api/en-us/announcements/Apr2022-FGEAnnouncements.html) – 12 algarismos
 :::

@@ -18,7 +18,7 @@ Quatre vérifications, dans cet ordre :
 
 :::steps
 - Lis les lettres | Ce sont elles qui en disent le plus. `1Z` au début, c'est UPS ; deux lettres à la fin désignent en général une poste.
-- Compte les caractères | La longueur tranche rarement à elle seule, mais elle élimine des transporteurs. Ne compte pas les espaces : ils ne servent qu'à la lecture, et La Poste comme [Mondial Relay](carrier:mondial-relay) demandent de saisir le numéro sans espace.
+- Compte les caractères | La longueur tranche rarement à elle seule, mais elle élimine des transporteurs. Ne compte pas les espaces : ils ne servent qu'à la lecture, et la page de suivi belge de [Mondial Relay](carrier:mondial-relay) demande de saisir le numéro sans espace.
 - Regarde l'e-mail | L'e-mail ou le SMS d'expédition de la boutique nomme en général le transporteur, ou renvoie vers sa page de suivi. C'est plus fiable que n'importe quelle déduction.
 - Teste les candidats | Saisis le numéro sur le site de chaque transporteur possible. Celui qui affiche des scans pour ce numéro a ton colis.
 :::
@@ -31,9 +31,9 @@ Voici ce que disent les transporteurs et la norme postale sur les numéros que t
 
 | Transporteur | À quoi ressemble le numéro |
 | --- | --- |
-| [La Poste](carrier:la-poste), Colissimo | « numéro d'envoi » (ou numéro de suivi) de 13 à 15 caractères : 1 chiffre, 1 lettre et 11 chiffres (`8D00432154789`) ; 2 lettres et 11 chiffres ; le format postal qui finit par `FR` ; ou 14 chiffres |
-| [Chronopost](carrier:chronopost) | 13 caractères (2 lettres, 9 chiffres, 2 lettres), ou 15 caractères (14 chiffres et une lettre de contrôle) pour un colis venu de l'étranger, à saisir sans espace ; se suit aussi sur le site et dans l'app La Poste, comme un Colissimo |
-| Mondial Relay | « n° d'expédition » de 8 chiffres, à saisir avec le code postal du destinataire ; sa page belge accepte aussi, sans espace, 10 chiffres (un code d'enseigne, puis ce numéro) et 12 (plus le rang du colis) ; le code-barres de 26 chiffres de l'étiquette est propre à Mondial Relay |
+| [La Poste](carrier:la-poste), Colissimo | dans les données de transporteurs de Peek, 13 caractères : 1 chiffre, 1 lettre et 11 chiffres (`8G12345678905`), 2 lettres et 11 chiffres, ou le format postal qui finit par `FR` ; ou 14 chiffres, suivis parfois d'un caractère de contrôle (15 caractères) |
+| [Chronopost](carrier:chronopost) | dans les données de transporteurs de Peek, 13 caractères (2 lettres, 9 chiffres, 2 lettres), ou 15 caractères (14 chiffres et un caractère de contrôle). Un numéro de 13 caractères qui commence par `XT`, `XR`, `XU`, `XW`, `XY` ou `PZ` et finit par `FR`, ou qui finit par `TS`, `JF` ou `JB`, est Chronopost |
+| Mondial Relay | numéro de 8, 10 ou 12 chiffres, à saisir sans espace avec le code postal de destination, d'après sa page belge. Dans les données de transporteurs de Peek, celui de 10 chiffres est un code d'enseigne suivi du numéro d'expédition de 8 chiffres, celui de 12 y ajoute le rang du colis, et le code-barres de 26 chiffres de l'étiquette est reconnu comme Mondial Relay grâce à ses deux chiffres de contrôle |
 | [Colis Privé](carrier:colis-prive) | 12 caractères, lettres et chiffres, à saisir avec ton code postal |
 | [Relais Colis](carrier:relais-colis) | « numéro de colis » de 12 à 16 caractères d'après son formulaire de suivi, dont l'exemple commence par `CC` (`CC` puis 10 à 14 chiffres) ; 10 à 16 caractères pour une livraison à domicile |
 | [Paack](carrier:paack) | son suivi demande le numéro de commande de la boutique ou le code-barres de l'étiquette, avec le code postal de livraison ; dans les données de transporteurs de Peek, la plupart de ces numéros n'ont pas de forme fixe, si bien qu'ils peuvent ressembler à ceux d'un autre transporteur. Trois exceptions : `PK` suivi de 18 chiffres est Paack (colis livrés pour Evri International), `5340` suivi de 14 chiffres désigne d'abord Paack, et un numéro de colis SHEIN (`C` ou `E`, une date en six chiffres puis 8 chiffres) peut être Paack |
@@ -63,18 +63,18 @@ En Belgique, un numéro de 18 ou 24 chiffres qui commence par `3232`, ou de 24 c
 
 ## Combien de chiffres compte un numéro de suivi ?
 
-Il n'y a pas de longueur standard. Voici celles que les transporteurs indiquent sur leurs propres pages. Les recoupements montrent pourquoi un numéro composé uniquement de chiffres peut correspondre à plusieurs transporteurs :
+Il n'y a pas de longueur standard. Voici celles que les transporteurs indiquent sur leurs propres pages ou, à défaut, celles des données de transporteurs de Peek. Les recoupements montrent pourquoi un numéro composé uniquement de chiffres peut correspondre à plusieurs transporteurs :
 
 | Longueur | Qui l'utilise |
 | --- | --- |
 | 8 chiffres | Mondial Relay |
 | 10 chiffres | DHL Express ; Mondial Relay |
-| 11 chiffres | GLS en France ; l'avis de passage de La Poste |
+| 11 chiffres | GLS en France |
 | 12 chiffres | Mondial Relay ; DPD en France (12 à 15) ; GLS en France, sur l'étiquette (11 chiffres et une clé) |
 | 12 caractères | Colis Privé |
 | 13 caractères | le format postal (`…FR`, `…BE`, `…CH`) ; La Poste (2 caractères, puis 11 chiffres) ; Chronopost |
 | 14 chiffres | La Poste ; DPD en Belgique, en France et en Suisse |
-| 15 caractères | le numéro « partenaire » d'un envoi international chez La Poste ; DPD en France ; Chronopost, pour un colis venu de l'étranger |
+| 15 caractères | La Poste (14 chiffres et un caractère de contrôle) ; DPD en France ; Chronopost |
 | 18 chiffres | La Poste suisse (`98…` ou `99…`) ; Quickpac (`44…`) ; bpost (`3232…`) |
 | 24 chiffres | bpost |
 | 26 chiffres | Mondial Relay, pour le code-barres de l'étiquette |
@@ -127,7 +127,7 @@ S'il compte 13 caractères et finit par deux lettres, `CN` par exemple, c'est un
 
 ## Les numéros qui ne sont pas ton numéro de suivi
 
-Le numéro de commande est celui de la boutique, pas du transporteur : chez Colis Privé Store, par exemple, il commence en général par `HS` ou `2R` et ne se suit que sur le site du Colis Privé Store. Quant à la mention « SD », imprimée à côté de certains numéros La Poste, elle ne fait pas partie du numéro : ne la saisis pas. Pour trouver le bon, dans ta commande ou sur un avis de passage, lis [où trouver ton numéro de suivi](guide:find-tracking-number).
+Le numéro de commande est celui de la boutique, pas du transporteur : chez Colis Privé Store, par exemple, il commence en général par `HS` ou `2R` et ne se suit que sur le site du Colis Privé Store. Pour trouver le bon, dans ta commande ou sur un avis de passage, lis [où trouver ton numéro de suivi](guide:find-tracking-number).
 
 ## Pourquoi le numéro de suivi peut changer en route
 
@@ -142,7 +142,6 @@ Un colis qui franchit une frontière passe souvent de main en main, et chaque so
 :::
 
 - **Les envois postaux** sont le cas simple : l'UPU n'autorise qu'un numéro S10 par envoi, qui fonctionne donc en général sur les sites des deux postes.
-- **La Poste** accepte aussi le numéro « partenaire » d'un envoi international, s'il lui a été transmis : 15 caractères, soit 15 chiffres, soit 14 chiffres et une lettre.
 - **DPD :** certains colis expédiés de l'étranger par une autre filiale DPD sont pris en charge par Chronopost à leur arrivée en France. Si le site de DPD France ne reconnaît pas le numéro, il te renvoie vers le suivi Chronopost.
 - **AliExpress en livraison économique :** Cainiao indique que le suivi s'arrête à la remise au transporteur local, et que le vendeur peut te dire comment joindre ce transporteur. Plus de détails dans [suivre un colis venu de Chine](guide:tracking-from-china).
 
@@ -150,14 +149,11 @@ Un numéro « non reconnu » n'est pas forcément mal tapé. Chez Colis Privé, 
 
 :::sources
 - [UPU : norme S10, Identification of postal items (en anglais)](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – le format postal, ses lettres, le chiffre de contrôle, le code pays et le code-barres ajouté à destination
-- [La Poste : Comment suivre mon colis ou ma lettre ?](https://aide.laposte.fr/professionnel/contenu/comment-suivre-mon-colis-ou-ma-lettre) – les quatre formes du numéro d'envoi, la mention SD, l'avis de passage à 11 chiffres, le numéro partenaire à 15 caractères, la saisie sans espace
-- [La Poste : Où trouver le numéro de mon courrier Suivi ?](https://aide.laposte.fr/contenu/ou-trouver-le-numero-de-mon-courrier-suivi) – 13 à 15 caractères
-- [La Poste : Suivre une lettre, un Colissimo ou un Chronopost](https://www.laposte.fr/conseils-pratiques/suivre-une-lettre-un-colissimo-un-envoi-express) – Chronopost suivi sur le site et dans l'app La Poste
-- [Mondial Relay : Où retrouver mon numéro de colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/ou-trouver-mon-numero-de-colis/) – le n° d'expédition à 8 chiffres
-- [Mondial Relay : Étiquette](https://storage.mondialrelay.fr/etiquette-mondial-relay-v-24.pdf) – le code-barres de 26 chiffres
+- [Universal Parcel Scraper : La Poste](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – les formes des numéros La Poste et Colissimo à 13, 14 et 15 caractères, leur clé de contrôle
+- [Universal Parcel Scraper : Chronopost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/chronopost) – les formes à 13 et 15 caractères, les préfixes et suffixes propres à Chronopost
+- [Universal Parcel Scraper : Mondial Relay](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/mondial-relay) – le numéro d'expédition à 8 chiffres, le code d'enseigne et le rang du colis, le code-barres de 26 chiffres et ses deux chiffres de contrôle
 - [Mondial Relay Belgique : Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 ou 12 chiffres, sans espace, avec le code postal de destination
 - [Colis Privé : Comment suivre mon colis ?](https://colisprive.fr/aide/comment-suivre-mon-colis-3/) – 12 caractères, code postal, commandes HS ou 2R, statut « Colis attendu par Colis Privé »
-- [Chronopost : Où trouver mon numéro de colis ?](https://www.chronopost.fr/fr/faq/destinataire/ou-trouver-mon-numero-de-colis) – 13 ou 15 caractères, sans espace
 - [Relais Colis : Comment suivre mon colis ?](https://www.relaiscolis.com/faq/question/comment-suivre-mon-colis) – 12 à 16 caractères
 - [Relais Colis : Livraison à domicile, comment suivre mon colis ?](https://www.relaiscolis.com/faq/question/comment-suivre-mon-colis-livraison-a-domicile) – 10 à 16 caractères, enseigne et nom du destinataire
 - [Universal Parcel Scraper : Paack](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/paack/README.md) – numéro de commande ou code-barres de l'étiquette, code postal, numéros sans forme fixe, sauf `PK`, `5340` et numéros de colis SHEIN
@@ -173,7 +169,7 @@ Un numéro « non reconnu » n'est pas forcément mal tapé. Chez Colis Privé, 
 - [bpost : Puis-je suivre mon colis en ligne ?](https://www.bpost.be/fr/faq/puis-je-suivre-mon-colis-en-ligne) – les codes-barres en U ne se suivent pas
 - [La Poste suisse : Suivre un envoi](https://www.post.ch/fr/reception/suivi-des-envois) – le numéro d'envoi
 - [La Poste suisse : Barcode for Business Customers (en anglais)](https://handbuch.post.ch/-/media/post/gk/dokumente/1864-Anleitung-Barcodes-GK.pdf) – 18 chiffres, 99, licence d'affranchissement et numéro d'envoi, points pour la lecture
-- [UPS : exemple d'étiquette (en anglais)](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – le numéro 1Z
+- [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – les numéros 1Z et leur chiffre de contrôle
 - [DHL Express Pays-Bas : DHL Express or DHL eCommerce number (en anglais)](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 chiffres
 - [About Amazon France : Les clients Amazon mettent leurs livreurs à l'honneur](https://www.aboutamazon.fr/actualites/activite-logistique/les-clients-amazon-mettent-leurs-livreurs-a-lhonneur) – le groupe La Poste, d'autres spécialistes du dernier kilomètre et une centaine d'entreprises de livraison indépendantes (2022)
 - [Universal Parcel Scraper : catalogue des transporteurs](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – les formes FR, TBA, LP, CNG, DOFR, CNFR et YT (16 chiffres pour YunExpress, 13 pour YTO Express), 44 pour Quickpac, 91346097 et 99990 pour Planzer, les formes de GLS en Suisse, le caractère de contrôle de DPD Suisse, les formes 4PX et LP de 4PX, `CC` pour Relais Colis, 98 ou 99 pour La Poste suisse, BYS, YP et YW pour Yanwen, et la clé des numéros de DPD France et de GLS France dans les données de Peek

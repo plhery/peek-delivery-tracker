@@ -13,7 +13,7 @@ Se il tracking non si aggiorna, di solito vuol dire solo che nessuno ha scansion
 
 Il tracking mostra le scansioni, non gli spostamenti, e un pacco viene scansionato solo in certi punti:
 
-- **Nessuna scansione tra un hub e l'altro.** [UPS](carrier:ups) spiega che un pacco che fa molta strada probabilmente non verrà scansionato di nuovo prima dell'hub di destinazione. Il centro di smistamento dove il tuo pacco risulta «fermo» è il luogo dell'ultima scansione, non per forza quello dove si trova adesso. [Poste Italiane](carrier:poste-italiane) avverte anche che, per fare prima, il pacco può passare da tappe intermedie che sembrano fuori strada rispetto a partenza e arrivo.
+- **Nessuna scansione tra un hub e l'altro.** Il centro di smistamento dove il tuo pacco risulta «fermo» è il luogo dell'ultima scansione, non per forza quello dove si trova adesso. [Poste Italiane](carrier:poste-italiane) avverte che, per fare prima, il pacco può passare da tappe intermedie che sembrano fuori strada rispetto a partenza e arrivo.
 - **Fine settimana e festivi.** I tempi dei corrieri si contano quasi sempre in giorni lavorativi. Poste Delivery Standard non consegna a domicilio il sabato e nei festivi, e il sabato non entra nel conto dei giorni di consegna. Anche i 25 giorni lavorativi di Vinted sono «esclusi i fine settimana e i giorni festivi».
 - **Maltempo e periodi di punta.** Secondo la DHL tedesca, maltempo, traffico, incidenti e malattie possono ritardare una consegna, e in Germania prima di Natale un pacco può metterci di più.
 - **Un'etichetta che le macchine non leggono.** La DHL tedesca cita CAP sbagliati, numeri civici mancanti, scritte a mano poco leggibili, etichette staccate e imballi danneggiati: il pacco può finire nel posto sbagliato o essere smistato a mano, con qualche giorno di ritardo. La Posta svizzera ha perfino un evento apposta, `Errore di avviamento`: capita per esempio con un numero postale di avviamento sbagliato, e può far perdere tempo.
@@ -37,9 +37,9 @@ Da qualche ora a qualche giorno. Se il tracking è fermo alla prima riga, il cor
 
 - **Poste Italiane:** `Presa in carico` vuol dire che Poste ha accettato la spedizione, che a breve entrerà nel ciclo di lavorazione. Per un codice molto recente Poste mostra `Tracciatura non disponibile` e consiglia di riprovare dopo qualche ora.
 - **[BRT](carrier:brt):** se il codice è giusto ma compare `BRTcode non riconosciuto`, «la spedizione potrebbe non esserci ancora stata affidata», e BRT consiglia di riprovare più tardi.
-- **UPS:** `Etichetta creata` vuol dire che UPS ha i dati della spedizione dal mittente, ma non ancora il pacco.
+- **[UPS](carrier:ups):** la scansione in inglese `Shipper created a label, UPS has not received the package yet.` vuol dire che il mittente ha creato l'etichetta, ma UPS non ha ancora il pacco.
 - **La Posta (Svizzera):** `Notifica dell'invio da parte dello speditore (inoltro dei dati)` vuol dire che il mittente ha creato il numero d'invio e trasmesso i dati. Di norma, in quel momento il pacco non è ancora alla Posta.
-- **DHL:** gli aggiornamenti compaiono di solito 24-48 ore dopo che hai ricevuto il codice, quando il pacco arriva in una struttura DHL. In Germania un pacco può metterci fino a 24 ore a comparire nel tracking.
+- **DHL:** in Germania un pacco può metterci fino a 24 ore a comparire nel tracking.
 - **Vinted:** possono volerci fino a 48 ore perché il tracciamento sia visibile su Vinted.
 - **Zalando:** il link di tracking si attiva solo quando il corriere ha ricevuto il pacco.
 
@@ -134,9 +134,7 @@ Il pacco forse non è ancora stato scansionato, il codice può essere di un altr
 - [La Posta: FAQ su importazione, dogana e IVA](https://www.post.ch/it/soluzioni-commerciali/esportazione-importazione-e-sdoganamento/importazione/faq-su-importazione-dogana-e-iva) – sdoganamento in tre o quattro giorni lavorativi
 - [La Posta: Modulo di ricerca per invii nazionali](https://www.post.ch/it/pages/moduli-di-contatto/ricerca-nazionale) – mittente o destinatario, due giorni
 - [La Posta: Eventi «Monitorare gli invii»](https://www.post.ch/it/ricezione/monitorare-gli-invii/eventi-monitorare-gli-invii) – notifica dell'invio, errore di avviamento
-- [UPS: Understanding tracking status](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – niente scansioni tra gli hub
-- [UPS Italia: Informazioni sullo stato del tracking](https://www.ups.com/it/it/support/tracking-support/where-is-my-package/understanding-tracking-status) – Etichetta creata
-- [DHL Italia: Tracciabilità](https://www.dhl.com/it-it/home/tracking.html) – aggiornamenti dopo 24-48 ore, quando il pacco arriva in una struttura DHL
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – Shipper created a label, UPS has not received the package yet.
 - [DHL: Problems with tracking](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – 24 ore in Germania
 - [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – stato fermo, tracking del Paese di destinazione
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – sdoganamento

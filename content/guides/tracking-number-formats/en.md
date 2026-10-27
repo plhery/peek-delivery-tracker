@@ -65,7 +65,7 @@ There's no single length. These are the lengths carriers give on their own pages
 | --- | --- |
 | 10 digits | DHL Express; Mondial Relay (8, 10 or 12) |
 | 12 digits | FedEx Ground Economy; Canada Post Priority Worldwide; Mondial Relay |
-| 14 digits | DPD in Austria and Belgium (DPD Germany says 14 characters); [La Poste](carrier:la-poste) in France |
+| 14 digits | DPD in Austria and Belgium (DPD Germany says 14 characters); [La Poste](carrier:la-poste) in France, in Peek's carrier data |
 | 15 digits | FedEx Ground numbers: FedEx told Ground Economy shippers receiving them that the length would change from 31 May 2022; Canada Post's Delivery Notice Card |
 | 16 digits | Canada Post online labels; Evri (16 characters) |
 | 22 digits | USPS; Portugal's CTT; Austrian Post; TIPSA |
@@ -119,7 +119,6 @@ Other numbers travel with a parcel. Some lead back to it, some don't:
 
 - **Order number.** The shop's own reference. DHL reminds you that a tracking number is not an order number.
 - **Missed-delivery cards.** A FedEx door tag (`DT` + 12 digits, US and Canada only), an Evri calling card (8 digits), a Canada Post Delivery Notice Card (15 digits) and the barcode on a USPS PS Form 3849 all lead back to the parcel in their carrier's tracking. [What to do after a missed delivery](guide:missed-delivery) depends on the carrier.
-- **An Post's Trans Ref ID.** It only records your transaction with An Post and tracks nothing.
 
 Have only an order number? [Where to find a tracking number](guide:find-tracking-number) shows where to look in your order.
 
@@ -147,7 +146,7 @@ A number that returns nothing isn't always mistyped. Portugal's CTT gives two re
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – the postal format, its letters, check digit and country code
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 and 26 digits, 92 to 95, the hidden 420 and ZIP Code
 - [USPS: How to find your tracking number](https://faq.usps.com/s/article/How-to-find-your-tracking-number) – the PS Form 3849 barcode
-- [UPS: sample package label](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – the 1Z number
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z numbers and their check digit
 - [FedEx Developer: FedEx Ground Economy announcement](https://developer.fedex.com/api/en-us/announcements/Apr2022-FGEAnnouncements.html) – 12 and 15 digits, the USPS number alongside
 - [FedEx Developer: Track API](https://developer.fedex.com/api/en-us/catalog/track/docs.html) – door tag numbers
 - [DHL Express Netherlands: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 digits
@@ -161,7 +160,6 @@ A number that returns nothing isn't always mistyped. Portugal's CTT gives two re
 - [Canada Post: How to use Track](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/how-to-use-track.page) – 16 digits, 13 characters, the Delivery Notice Card
 - [Canada Post: Find your tracking number](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/find-your-tracking-number.page) – lengths by product
 - [Australia Post: Help with tracking](https://auspost.com.au/help/parcel-tracking/tracking-support/help-with-tracking) – tracking number or article ID
-- [An Post: Track a parcel](https://www.anpost.com/Post-Parcels/Track/Search) – the format and the Trans Ref ID
 - [Austrian Post: FAQ](https://www.post.at/en/p/c/faq) – 22 digits starting 10
 - [XDP: Track](https://xdp.co.uk/track/) – consignment number and postcode
 - [APC: APC Choice tracking and FAQ](https://apcchoice.apc-overnight.com/track-parcel) – 7-digit consignment number and postcode
@@ -175,7 +173,6 @@ A number that returns nothing isn't always mistyped. Portugal's CTT gives two re
 - [bpost: Puis-je suivre mon colis en ligne ?](https://www.bpost.be/fr/faq/puis-je-suivre-mon-colis-en-ligne) – barcodes starting with U cannot be tracked
 - [CTT: Encontrar o código de envio](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/encontrar-o-codigo-de-envio) – 22 digits, PT codes from abroad, codes that return nothing
 - [Mondial Relay Belgium: Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 or 12 digits
-- [La Poste: Comment suivre mon colis ou ma lettre](https://aide.laposte.fr/professionnel/contenu/comment-suivre-mon-colis-ou-ma-lettre) – 14 digits
 - [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – Your Orders, then Track Package
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – the TBA, YT, LP and CNG shapes in Peek's carrier data, InPost's JD, JJD and 8YDR shapes, 4PX's 4PX and LP shapes, Yanwen's BYS, YP and YW shapes, XDP's ZDB shape, APC's 22-digit shape, and Royal Mail's and Parcelforce's shapes
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – the TBA, YT, LP and CNG shapes in Peek's carrier data, InPost's JD, JJD and 8YDR shapes, 4PX's 4PX and LP shapes, Yanwen's BYS, YP and YW shapes, XDP's ZDB shape, APC's 22-digit shape, Royal Mail's and Parcelforce's shapes, An Post's shape ending IE and La Poste's 14 digits
 :::

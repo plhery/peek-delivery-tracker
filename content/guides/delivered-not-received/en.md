@@ -99,7 +99,6 @@ Sometimes, but [compensation usually goes to the sender](guide:lost-parcel), so 
 | Carrier | What you can do | Deadline |
 | --- | --- | --- |
 | USPS | After one postal business day, send your local Post Office a service request. Insured items: you or the sender can claim, with the mailing receipt | Lost: from 15 days (7 for Priority Mail Express) to 60 days after mailing |
-| [UPS](carrier:ups) | File as a guest, unless the shipper blocked it or you let the driver release it. Payment goes to the shipper | Within 60 days of the scheduled delivery |
 | FedEx | "Report Missing Package" in Manage Delivery, or file a claim yourself | Within 9 months of the shipment date |
 | Royal Mail | Claim as the sender or the recipient, except for Tracked 24 and 48: the sender only | Within 80 days of posting (6 months if sent abroad) |
 | DPD UK | None: "only the contract holder can register a claim" | Not stated |
@@ -133,7 +132,6 @@ You can, though none of the rules above require it for a refund. Citizens Advice
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's safe place or neighbour
 - [USPS: Where is my package?](https://faq.usps.com/articles/FAQ/Where-is-my-package) – business day, lockers
 - [USPS: Claims](https://www.usps.com/help/claims.htm) – 15 to 60 days
-- [UPS: File a claim](https://www.ups.com/us/en/support/file-a-claim) – 60 days, guests, driver release
 - [FedEx: Delivered but missing](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/fedex-says-delivered-but-no-package.html) – photo
 - [FedEx: Claims](https://www.fedex.com/en-us/customer-support/claims.html) – 9 months
 - [Evri: Terms and conditions](https://www.evri.com/terms-and-conditions) – Safe Place

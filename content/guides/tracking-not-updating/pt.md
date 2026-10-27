@@ -13,7 +13,7 @@ Quando o tracking não atualiza, normalmente é porque ninguém leu a etiqueta d
 
 O seguimento mostra leituras, não movimento, e uma encomenda só é lida em certos pontos:
 
-- **Sem leituras entre centros.** A [UPS](carrier:ups) explica que uma encomenda que vai para longe provavelmente só volta a ser lida no centro de destino. A GLS avisa que trabalha com centros de distribuição e que, por isso, o percurso nem sempre parece direto. Nos CTT, o estado `Em trânsito` aparece várias vezes ao longo do caminho, porque o envio pode passar por vários centros operacionais.
+- **Sem leituras entre centros.** A GLS avisa que trabalha com centros de distribuição e que, por isso, o percurso nem sempre parece direto. Nos CTT, o estado `Em trânsito` aparece várias vezes ao longo do caminho, porque o envio pode passar por vários centros operacionais.
 - **Fins de semana e feriados.** A GLS [entrega de segunda a sexta-feira, em horário comercial](guide:delivery-times). Na DPD, a entrega ao sábado é um serviço à parte, até às 13h. Os CTT dão os prazos em dias úteis.
 - **Ilhas, mau tempo e épocas altas.** Para os Açores e a Madeira, os CTT avisam que os prazos podem alargar-se por limitações de transporte. Na Alemanha, a DHL aponta o mau tempo, o trânsito, os acidentes e as doenças como causas de atraso, e avisa que antes do [Natal](guide:christmas-posting-dates) uma encomenda pode demorar mais.
 - **Uma etiqueta que as máquinas não leem.** A DHL aponta códigos postais mal escritos, números de porta em falta, letra difícil de ler, etiquetas descoladas e embalagens danificadas. A encomenda pode ir parar ao sítio errado ou ser triada à mão, com vários dias de atraso.
@@ -36,8 +36,8 @@ Nenhuma transportadora dá um número único para o tempo que o seguimento pode 
 Horas ou dias. Muitas vezes a etiqueta já existe, mas a transportadora ainda não tem a encomenda: essa primeira linha costuma vir do programa com que a loja imprime a etiqueta, não de uma leitura.
 
 - **CTT:** `Aguarda entrada nos CTT` quer dizer que os CTT receberam a informação eletrónica do envio, mas a encomenda ainda não entrou na rede deles: o expedidor pode ainda estar a prepará-la. Quando a recebem, o estado passa a `Aceite`. Se o código não der resultados, pode ser de um envio sem seguimento, cujo código só serve para a alfândega, ou de um envio entregue em Portugal por outra empresa: os CTT mandam contactar o remetente.
-- **UPS:** `Etiqueta Criada` quer dizer que a UPS recebeu os detalhes do envio do remetente, mas ainda não tem a encomenda.
-- **DHL:** os eventos aparecem «normalmente 24 a 48 horas» depois de receberes o número de localização. Na Alemanha, a [DHL Paket](carrier:dhl) fala de até 24 horas.
+- **[UPS](carrier:ups):** a leitura em inglês `Shipper created a label, UPS has not received the package yet.` quer dizer que o remetente criou a etiqueta, mas a UPS ainda não tem a encomenda.
+- **[DHL Paket](carrier:dhl):** na Alemanha, uma encomenda pode demorar até 24 horas a aparecer no seguimento.
 - **Vinted:** a informação de envio pode demorar até 48 horas a aparecer pela primeira vez. Com a InPost, quem vende tem 5 dias úteis para imprimir a etiqueta, colá-la e entregar a encomenda num Ponto Pack.
 
 Os outros estados estão explicados em [o que querem dizer os estados do seguimento](guide:tracking-statuses).
@@ -135,9 +135,7 @@ A encomenda pode ainda não ter sido lida, o número pode ser de outra transport
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – 24 horas, dias de entrega, centros de distribuição, contacto
 - [InPost: Fala connosco](https://www.inpost.pt/fala-connosco) – 5 e 30 dias, remetente
 - [InPost: Vinted](https://www.inpost.pt/recebe-a-tua-encomenda/os-nossos-clientes/vinted) – 5 dias úteis para entregar
-- [UPS: Understanding tracking status](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – sem leituras entre centros
-- [UPS Portugal: Compreender o Estado de Seguimento](https://www.ups.com/pt/pt/support/tracking-support/where-is-my-package/understanding-tracking-status) – Etiqueta Criada
-- [DHL Portugal: Localização](https://www.dhl.com/pt-pt/home/tracking.html) – 24 a 48 horas
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – Shipper created a label, UPS has not received the package yet.
 - [DHL: Problems with tracking](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – 24 horas
 - [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – estado parado, seguimento do país de destino
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – desalfandegamento

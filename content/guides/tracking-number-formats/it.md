@@ -53,7 +53,7 @@ Ecco cosa dicono i corrieri, e lo standard postale, sui codici che incontri più
 
 Sono i prefissi che si cercano di più:
 
-- `1Z`: UPS, come mostrano le sue etichette.
+- `1Z`: UPS, se seguono 16 lettere e cifre, l'ultima delle quali è una cifra di controllo.
 - `YT`: YunExpress, se seguono 16 cifre; il suo sito di tracking chiede proprio un numero che inizia con YT. Ma nei dati dei corrieri che usa Peek `YT` + 13 cifre è YTO Express, e `YT` + nove cifre + `GB` è un codice postale della Royal Mail britannica.
 - `LP`: negli stessi dati, `LP` seguito da 14 cifre è un possibile codice AliExpress/Cainiao, e `LP` + 13 cifre + `CN` un possibile codice 4PX. Cainiao non descrive il formato sul suo sito, quindi prendilo solo come un indizio.
 - `5P`: negli stessi dati, `5P` seguito da 11 lettere e cifre è Poste Italiane. Il modulo di ricerca di Poste però non parla di questo formato.
@@ -143,7 +143,7 @@ Un pacco che attraversa un confine passa spesso di mano, e ogni azienda può sta
 - **Il numero aggiunto all'arrivo** può avere tutt'altra forma. Nell'esempio dello standard UPU, la posta di destinazione ha messo accanto al codice d'origine il numero `98.00.802077.23271453` e ha collegato i due nel suo sistema: 18 cifre con i punti, come i numeri della Posta svizzera. Se sul pacco compare un secondo numero così, prova anche quello.
 - **Spedizioni economiche di AliExpress:** Cainiao dice che il tracking si ferma alla consegna al corriere locale, e che il venditore può dirti come contattarlo. Di più in [seguire un pacco dalla Cina](guide:tracking-from-china).
 
-Un codice che non dà risultati non è per forza sbagliato. Le poste portoghesi CTT danno due motivi: il codice serve solo per la dogana, oppure l'invio lo consegna un'altra azienda, e in questi casi consigliano di sentire il mittente. Un codice può perfino mostrare una destinazione sbagliata: DHL Express spiega che ricicla periodicamente i numeri delle lettere di vettura, e che a volte due spedizioni viaggiano con lo stesso numero, anche se il pacco va comunque dove deve. Se un codice valido semplicemente non si muove ancora, leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
+Un codice che non dà risultati non è per forza sbagliato. Le poste portoghesi CTT danno due motivi: il codice serve solo per la dogana, oppure l'invio lo consegna un'altra azienda, e in questi casi consigliano di sentire il mittente. Se un codice valido semplicemente non si muove ancora, leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
 :::sources
 - [UPU: standard S10, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – il formato postale, le lettere, la cifra di controllo, il codice paese, il numero aggiunto a destinazione
@@ -163,11 +163,10 @@ Un codice che non dà risultati non è per forza sbagliato. Le poste portoghesi 
 - [DPD Svizzera: Responsabilità per il mittente](https://www.dpd.com/ch/it/centro-supporto/tutto-sulla-responsabilita/mittente/) – i numeri svizzeri iniziano con 060
 - [DHL Express Netherlands: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 cifre
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – da 10 a 39 caratteri, non è un numero d'ordine
-- [MyDHL Express Svizzera: FAQ Ricerca e Monitoraggio](https://mydhl.express.dhl/ch/it/help-and-support/faqs/tracking-monitoring.html) – numeri delle lettere di vettura riciclati
 - [DPD Germany: Wo finde ich meine Paketnummer?](https://www.dpd.com/de/de/faq/wo-finde-ich-meine-paketnummer/) – 14 caratteri
 - [DPD Austria: Wo finde ich die Paketnummer?](https://www.dpd.com/at/de/faq/wo-finde-ich-die-paketnummer-2/) – 14 cifre
 - [DPD Belgium: Where do I find the parcel number?](https://www.dpd.com/be/en/faq/where-do-i-find-the-parcel-number-2/) – 14 cifre
-- [UPS: sample package label](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – il numero 1Z
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – i numeri 1Z e la loro cifra di controllo
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – numeri che iniziano con YT
 - [4PX: Global Order Tracking](https://track.4px.com/) – da 5 a 50 lettere e cifre
 - [Yanwen: YW Tracking (in inglese)](https://track.yw56.com.cn/en/index) – il tracking di Yanwen, senza numeri di esempio

@@ -56,7 +56,7 @@ Bei Hermes merkst du sofort, wenn die Länge nicht stimmt. Die Sendungsverfolgun
 
 ### Sendungsnummer beginnt mit JJD, 0034 oder H?
 
-Auf seinen Hilfeseiten nennt DHL nur die Länge, kein Format. Die Entwicklerdokumentation der DHL-Sendungsverfolgung arbeitet aber mit 20-stelligen Testnummern, die alle mit `00340434` beginnen. In den Paketdienst-Daten, die Peek nutzt, gehören zu DHL: Nummern ab `JJD` (folgen genau 16 Ziffern, kommt auch InPost infrage), `JD` plus 18 Ziffern und 20 Ziffern ab `00340433`, `00340434` oder `00340435`. `H` plus 16 bis 19 Ziffern ist dort Hermes. Beginnt die Nummer mit `DE`, lies den Abschnitt zu Amazon.
+Auf seinen Hilfeseiten nennt DHL nur die Länge, kein Format. In den Paketdienst-Daten, die Peek nutzt, gehören aber zu DHL: Nummern ab `JJD` (folgen genau 16 Ziffern, kommt auch InPost infrage), `JD` plus 18 Ziffern und 20 Ziffern ab `00340433`, `00340434` oder `00340435`. `H` plus 16 bis 19 Ziffern ist dort Hermes. Beginnt die Nummer mit `DE`, lies den Abschnitt zu Amazon.
 
 ## Wie viele Stellen hat eine Sendungsnummer?
 
@@ -68,7 +68,7 @@ Eine feste Länge gibt es nicht. Hier die Längen, die die Paketdienste selbst n
 | 13 Zeichen | jede Post im Postformat, etwa `RR000000005CH` |
 | 14 Stellen | DPD; auch bei Hermes möglich |
 | 18 Ziffern | Schweizerische Post, ab `98` oder `99`; Quickpac |
-| 20 Ziffern | DHL, etwa seine Testnummern ab `00340434` |
+| 20 Ziffern | DHL, in Peeks Paketdienst-Daten ab `00340433`, `00340434` oder `00340435` |
 | 22 Ziffern | Österreichische Post, ab `10`; USPS bei Paketen aus den USA |
 | 14 bis 20 Zeichen | Hermes |
 | 10 bis 39 Stellen | DHL |
@@ -140,7 +140,6 @@ Findet die Sendungsverfolgung nichts, ist die Nummer nicht unbedingt falsch abge
 :::sources
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – das Postformat, seine Buchstaben, Prüfziffer und Ländercode, die zusätzliche Nummer der Zielpost
 - [DHL: Hilfe bei Problemen mit Sendungsverfolgung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – 10 bis 39 Stellen, keine Bestellnummer, Päckchen, Briefprodukte mit Sendungsverfolgung, Gründe für „ungültig“
-- [DHL Developer: DHL Parcel DE Tracking (Post & Parcel Germany)](https://developer.dhl.com/api-reference/dhl-parcel-de-shipment-tracking-post-parcel-germany) – Testnummern ab 00340434
 - [DHL Express Niederlande: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 Ziffern
 - [Deutsche Post: Sendungsverfolgung für Briefe und Pakete](https://www.deutschepost.de/de/s/sendungsverfolgung.html) – Einschreiben, Basis-Sendungsverfolgung mit der Post & DHL App
 - [Hermes: Sendungsverfolgung](https://www.myhermes.de/empfangen/sendungsverfolgung/) – 14 bis 20 Zeichen
@@ -148,13 +147,13 @@ Findet die Sendungsverfolgung nichts, ist die Nummer nicht unbedingt falsch abge
 - [DPD Österreich: Wo finde ich die Paketnummer?](https://www.dpd.com/at/de/faq/wo-finde-ich-die-paketnummer-2/) – 14 Stellen
 - [DPD Schweiz: Haftung für Versender](https://www.dpd.com/ch/de/supportcenter/alles-ueber-haftung/haftung-versender/) – Paketnummer mit 060
 - [GLS Österreich: Sendungsverfolgung](https://gls-group.com/AT/de/paket-verfolgen/) – Paketnummer und Track-ID auf der Benachrichtigungskarte
-- [UPS: sample package label](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – die 1Z-Nummer
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z-Nummern und ihre Prüfziffer
 - [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – 22 Ziffern ab 10 oder Postformat mit AT
 - [Schweizerische Post: Anleitung Barcode für Geschäftskunden](https://www.post.ch/-/media/post/gk/dokumente/1864-anleitung-barcodes-gk.pdf?sc_lang=de) – 18 Ziffern ab 99, die Punkte im Klartext
 - [Quickpac: FAQ (auf Englisch)](https://quickpac.ch/en/faq) – jedes Paket hat eine 18-stellige Nummer
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 Ziffern
 - [About Amazon Deutschland: Amazon-Lieferung: einfache Bestellung und Verfolgung](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-lieferoptionen-sendung-verfolgen) – Sendungsverfolgung unter „Meine Bestellungen“ mit „Lieferung verfolgen“
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – JJD, JD, 0034043, H, TBA und Ländercode plus 10 Ziffern in Peeks Paketdienst-Daten, dazu YT + 16 Ziffern (YunExpress), YT + 13 Ziffern (YTO Express), 44 (Quickpac), 91346097 und 99990 (Planzer), DOFR, CNFR, LP und CNG (Cainiao), 4PX und LP + 13 Ziffern + CN (4PX), 98 und 99 (Schweizerische Post), BYS, YP und YW (Yanwen), die Formen von GLS Deutschland und GLS Schweiz sowie das Prüfzeichen hinter DPD-Nummern
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – JJD, JD, 00340433 bis 00340435, H, TBA und Ländercode plus 10 Ziffern in Peeks Paketdienst-Daten, dazu YT + 16 Ziffern (YunExpress), YT + 13 Ziffern (YTO Express), 44 (Quickpac), 91346097 und 99990 (Planzer), DOFR, CNFR, LP und CNG (Cainiao), 4PX und LP + 13 Ziffern + CN (4PX), 98 und 99 (Schweizerische Post), BYS, YP und YW (Yanwen), die Formen von GLS Deutschland und GLS Schweiz sowie das Prüfzeichen hinter DPD-Nummern
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – Nummern ab YT
 - [4PX: Global Order Tracking](https://track.4px.com/) – 5 bis 50 Buchstaben und Ziffern
 - [Yanwen: YW Tracking (auf Englisch)](https://track.yw56.com.cn/en/index) – Yanwens Tracking-Seite, kein Beispiel veröffentlicht

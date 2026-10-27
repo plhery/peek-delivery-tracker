@@ -85,8 +85,6 @@ struct DeliveryWidgetCardView: View {
     let art: DeliveryWidgetCardArt
     /// A small widget, half a medium one, or a whole medium one.
     let shape: DeliveryWidgetPicture
-    /// What a whole medium card says at its top right, as Next up does in the app.
-    var badge: String?
     /// The end of the top row is left to the widget's next button.
     var leavesNext = false
 
@@ -106,15 +104,6 @@ struct DeliveryWidgetCardView: View {
                     .frame(height: Self.markHeight(shape))
                     .accessibilityLabel(parcel.carrier)
                 Spacer(minLength: 0)
-                if let badge {
-                    Text(badge)
-                        .font(.caption2)
-                        .textCase(.uppercase)
-                        .tracking(1.2)
-                        .foregroundStyle(ink.opacity(0.75))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.7)
-                }
                 if leavesNext { Color.clear.frame(width: DeliveryWidgetNextMark.size, height: 1) }
             }
             Spacer(minLength: 4)

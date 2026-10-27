@@ -151,9 +151,7 @@ private struct DeliveryWidgetView: View {
         if let only = cards.first, cards.count == 1 {
             let shape: DeliveryWidgetPicture = family == .systemMedium ? .wide : .small
             DeliveryWidgetCardView(
-                parcel: only.parcel, card: only.card, art: only.art, shape: shape,
-                badge: family == .systemMedium && entry.isFirstPage && only.parcel.deliveredAt == nil ? copy.text("app.nextUp") : nil,
-                leavesNext: entry.next != nil
+                parcel: only.parcel, card: only.card, art: only.art, shape: shape, leavesNext: entry.next != nil
             )
             .deliveryWidgetNext(markHeight: DeliveryWidgetCardView.markHeight(shape)) { nextButton(on: only.card) }
             .containerBackground(for: .widget) { DeliveryWidgetCardBackground(card: only.card, art: only.art) }
@@ -311,9 +309,7 @@ private struct DeliveryWidgetView: View {
             Image(systemName: parcel.isOutForDelivery ? "bicycle" : delivered ? "checkmark.circle.fill" : "arrow.right.circle.fill")
                 .imageScale(.small)
                 .accessibilityHidden(true)
-            // Next up is the first parcel's alone: the others are on their way after it.
-            Text(copy.text(parcel.isOutForDelivery ? "stage.out_for_delivery" : delivered ? "stage.delivered"
-                : entry.isFirstPage ? "app.nextUp" : "app.onTheWaySection"))
+            Text(copy.text(parcel.isOutForDelivery ? "stage.out_for_delivery" : delivered ? "stage.delivered" : "app.onTheWaySection"))
                 .minimumScaleFactor(0.7)
         }
         .font(.caption2.weight(.heavy))

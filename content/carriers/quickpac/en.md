@@ -1,6 +1,6 @@
 ---
-title: Quickpac tracking: find your parcel and what to do next
-description: Track a Quickpac parcel in Switzerland: where the 18-digit number is, why Shipped means delivered and who to contact about missed, late or lost parcels.
+title: Quickpac tracking: 18-digit number, statuses and contact
+description: Track a Quickpac parcel with its 18-digit number. On Planzer's English tracking, Shipped means delivered. For help, call Planzer Paket or use its contact form.
 slug: quickpac-tracking
 published: 2026-10-10
 updated: 2026-10-10

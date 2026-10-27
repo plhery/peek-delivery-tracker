@@ -13,7 +13,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "quickpac",
       "catalog": "quickpac",
       "slug": "quickpac-tracking",
-      "title": "Quickpac tracking: find your parcel and what to do next",
+      "title": "Quickpac tracking: 18-digit number, statuses and contact",
       "name": "Quickpac",
       "color": "#ed1c24"
     },
@@ -293,7 +293,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "yanwen",
       "catalog": "yanwen",
       "slug": "yanwen-tracking",
-      "title": "Yanwen tracking: numbers, statuses and who to contact",
+      "title": "Yanwen tracking number: UL…YP format and who delivers",
       "name": "Yanwen",
       "color": "#8cbe1e"
     },
@@ -1529,7 +1529,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "suivi-dpd-suisse",
-      "title": "DPD Suisse suivi colis\u00a0: statuts, livraison et contact",
+      "title": "DPD Suisse\u00a0: suivre un colis, points relais et contact",
       "name": "DPD Switzerland",
       "color": "#dc0032"
     },
@@ -2343,7 +2343,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "cainiao",
       "catalog": "aliexpress",
       "slug": "cainiao-rastreio",
-      "title": "Cainiao rastreio: números, estados e contactos em Portugal",
+      "title": "Cainiao em Portugal: rastreio, estados e contactos",
       "name": "Cainiao",
       "color": "#e62e04"
     },

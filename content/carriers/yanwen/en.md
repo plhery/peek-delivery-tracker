@@ -1,6 +1,6 @@
 ---
-title: Yanwen tracking: numbers, statuses and who to contact
-description: Track a Yanwen parcel from China: what a Yanwen number looks like, what each status means, who delivers it in your country and who to ask when it stalls.
+title: Yanwen tracking number: UL…YP format and who delivers
+description: Two letters (often UL or UK), 9 digits, then YP: that's a Yanwen tracking number. Track it here, see what each status means and who delivers it in your country.
 slug: yanwen-tracking
 published: 2026-10-11
 updated: 2026-10-11

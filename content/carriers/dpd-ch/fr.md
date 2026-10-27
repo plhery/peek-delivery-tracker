@@ -1,6 +1,6 @@
 ---
-title: DPD Suisse suivi colis : statuts, livraison et contact
-description: Suivre un colis DPD en Suisse romande : le numéro à 14 chiffres, le sens des statuts de myDPD, les points relais, une livraison manquée et qui contacter.
+title: DPD Suisse : suivre un colis, points relais et contact
+description: Suivre un colis DPD Suisse : le numéro à 14 chiffres qui commence par 060, les statuts de myDPD, les points relais, utilisables le samedi, et le téléphone de DPD.
 slug: suivi-dpd-suisse
 published: 2026-10-11
 updated: 2026-10-11

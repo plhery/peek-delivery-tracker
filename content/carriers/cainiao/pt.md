@@ -1,6 +1,6 @@
 ---
-title: Cainiao rastreio: números, estados e contactos em Portugal
-description: Rastreio Cainiao em Portugal: que números são da Cainiao, o que quer dizer cada estado em inglês, entregas falhadas, pontos de recolha e a quem perguntar.
+title: Cainiao em Portugal: rastreio, estados e contactos
+description: A Cainiao é o grupo de logística da Alibaba. Vê os seus números e estados, como saber quem entrega em Portugal e os contactos da Cainiao e da Ecoscooting.
 slug: cainiao-rastreio
 published: 2026-10-11
 updated: 2026-10-11

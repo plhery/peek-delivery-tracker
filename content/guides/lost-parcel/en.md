@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-10-27
 ---
 
-If you bought it from a shop, your lost parcel claim goes to the seller, not the carrier: ask it for a replacement or a refund once the carrier's waiting time has passed (7 days after mailing for a USPS search, 10 working days after the due date for Royal Mail 1st or 2nd Class). The seller booked the carrier, so the carrier's compensation goes to the seller. In the UK and the EU, the parcel stays the seller's responsibility until you have it.
+If you bought it from a shop, your lost parcel claim goes to the seller, not the carrier: ask it for a replacement or a refund once the carrier's waiting time has passed (7 days after mailing for a USPS search, 11 working days after posting for Royal Mail 1st Class). The seller booked the carrier, so the carrier's compensation goes to the seller. In the UK and the EU, the parcel stays the seller's responsibility until you have it.
 
 ## How do I claim for a lost parcel and get my money back?
 
@@ -34,7 +34,7 @@ Carriers count from posting or the due date, not from the last scan. Most "lost"
 | [USPS](carrier:usps) | Search: 7 days after mailing. Insured claim: 15 days (7 for Priority Mail Express) | 60 days after mailing | Sender or recipient, with the mailing receipt |
 | [UPS](carrier:ups) | No day count | 60 days after scheduled delivery | You, unless the shipper blocks it; the shipper is paid |
 | [FedEx](carrier:fedex) | No day count | 9 months after shipping | You, or the merchant |
-| [Royal Mail](carrier:royal-mail) | Days after the due date: 10 working (1st, 2nd Class), 7 (Tracked 24, 48), 5 (Special Delivery by 1pm) | 80 days after posting; 6 months abroad | Sender or recipient, sender first. Tracked 24 and 48: sender only |
+| [Royal Mail](carrier:royal-mail) | Working days after posting: 11 (1st Class), 14 (2nd Class). Special Delivery: 5 after the due date | 80 days after posting; 6 months abroad | Sender or recipient. Tracked 24 and 48: sender only |
 | [Evri](carrier:evri) | Over 7 days with Evri: tell the sender | 28 days after the order (45 abroad), recommended | The sender |
 | [DPD UK](carrier:dpd-uk) | The sender reports it within 14 days of despatch | 1 year | The sender |
 | [An Post](carrier:an-post) | 5 working days after posting (15 days international) | 3 months after posting (6 international) | Sender or recipient |
@@ -76,7 +76,7 @@ Not much. Included cover is capped and pays only the value you can prove, usuall
 | --- | --- | --- |
 | USPS | Up to $100 on Priority Mail Express, Priority Mail, Ground Advantage | Insurance to $5,000; Registered Mail $50,000 |
 | UPS, FedEx | $100 | Declared value |
-| Royal Mail | 1st, 2nd Class £20; Tracked 24, 48 £75; Special Delivery by 1pm £750 | Special Delivery to £2,500 |
+| Royal Mail | 1st, 2nd Class £20; Tracked 24, 48 £75; Special Delivery by 1pm £750 | More on Special Delivery with extra insurance |
 | Evri | £20 | Full Cover |
 | Canada Post | CAN$100 on Priority, Xpresspost, Expedited Parcel; none on Regular Parcel | CAN$5,000 in Canada, CAN$1,000 abroad |
 | Australia Post | Up to A$100 on most services | Extra Cover to A$5,000 |
@@ -85,15 +85,15 @@ Not much. Included cover is capped and pays only the value you can prove, usuall
 
 Between two national posts, a lost 2 kg parcel pays at most 49 SDR plus postage, about €59 at the UPU's 2026 rate of €1.2119 per SDR (Correos), unless the posts agreed a flat 130 SDR.
 
-Declared value isn't insurance: you pay UPS to raise its limit, and UPS says it "does not receive any form of insurance". Royal Mail pays nothing for jewellery or money outside Special Delivery, or for badly packed items.
+Declared value isn't insurance: you pay UPS to raise its limit, and UPS says it "does not receive any form of insurance".
 
 ## How do I file a claim with USPS, Royal Mail or another carrier?
 
 On the carrier's own site, before the deadline in the first table, with:
 
 - **Tracking number and history.** Screenshot it, because tracking pages expire. [Peek](/) shows every scan on the parcel's page, but can't file the claim for you.
-- **Proof of posting.** USPS needs the original mailing receipt for insured mail. Royal Mail needs a certificate of posting for international items, from the Post Office counter.
-- **Proof of value.** Invoice, receipt, bank statement or PayPal record. USPS accepts an online transaction printout showing buyer, seller, price, date and item. Without proof of value, Royal Mail refunds only the postage.
+- **Proof of posting.** USPS needs the original mailing receipt for insured mail. Royal Mail wants your Post Office receipt or certificate of posting.
+- **Proof of value.** Invoice, receipt, bank statement or PayPal record; Royal Mail wants the original. USPS accepts an online transaction printout showing buyer, seller, price, date and item.
 - **Contents and both addresses.**
 
 USPS usually decides within 5 to 10 days, UPS in 8 to 10 business days, Royal Mail within 30 days.
@@ -122,12 +122,7 @@ On PayPal, open an Item Not Received dispute within 180 days of paying, and esca
 - [UPS: Terms of Service](https://www.ups.com/assets/resources/webcontent/en_US/terms_service_us.pdf) – $100, declared value
 - [FedEx: Claims](https://www.fedex.com/en-us/customer-support/claims.html) – 9 months
 - [FedEx: Declared value](https://www.fedex.com/en-us/shipping/declared-value.html) – $100
-- [Royal Mail: Compensation for loss](https://www.royalmail.com/retail-compensation-policy-loss) – timing, £20, evidence
-- [Royal Mail: Item hasn't arrived](https://www.royalmail.com/help/lost-items-parcels-letters) – waiting times
-- [Royal Mail: Tracked 24](https://www.royalmail.com/sending/uk/tracked-24) – £75
-- [Royal Mail: Special Delivery](https://www.royalmail.com/sending/uk/special-delivery-guaranteed-1pm) – £750, £2,500
-- [Royal Mail: International compensation](https://www.royalmail.com/international-compensation) – 6 months
-- [Citizens Advice: Royal Mail claims](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – Tracked senders
+- [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – waiting times, 80 days, 6 months, who claims, £20, £75, £750, extra insurance, proof of posting and value, 30 days
 - [Evri: Parcel not received](https://www.evri.com/faqs/receiving-a-parcel/what-can-i-do-if-i-havent-received-my-parcel) – 7 days
 - [Evri: Terms](https://www.evri.com/terms-and-conditions) – £20, deadlines
 - [DPD UK: Standard Terms and Conditions of Carriage](https://www.dpd.co.uk/pdf/dpd-stcc.pdf) – 14 days, 1 year

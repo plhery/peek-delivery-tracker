@@ -75,7 +75,7 @@ Several carriers list parcels heading your way once you prove the address, email
 | Canada | Canada Post automatic tracking, free | Personal accounts only, no business or PO box addresses, ID checked. No guarantee every parcel is added |
 | Australia | MyPost account, free | [Australia Post](carrier:australia-post) adds parcels "if we have the information required" |
 
-We found nothing like this for [Royal Mail](carrier:royal-mail), Evri or [An Post](carrier:an-post): with them, you need the number. To follow parcels from every carrier in one list, see [universal parcel tracking](guide:universal-tracker).
+We found nothing like this for Evri or [An Post](carrier:an-post): with them, you need the number. To follow parcels from every carrier in one list, see [universal parcel tracking](guide:universal-tracker).
 
 ### Track by the sender's reference
 
@@ -85,7 +85,6 @@ If the sender tells you their own reference (a purchase order or invoice number)
 
 No, not on a carrier's tracking page, and not by phone either. The carriers say so:
 
-- **Royal Mail**: "We can't use any other information like a name or address to track items."
 - **Canada Post**: "For privacy reasons, we don't keep records of shipments by address or name."
 - **Australia Post**: name or address "can't be used to locate items".
 - **USPS**: Post Offices and Care Center agents "do not have a way to find an item's tracking number".
@@ -98,19 +97,18 @@ The nearest thing is a carrier account like those above, once you've proved the 
 
 Waiting for a parcel? Search your inbox again or reopen the order; failing that, ask the sender to resend it.
 
-Sent the parcel yourself? The number is on what the counter gave you. Keep that slip until the parcel arrives: USPS says its Post Offices and Care Center "do not have a way to recover lost tracking numbers", Royal Mail can't help without it either, and Australia Post says a name or address "can't be used to locate items".
+Sent the parcel yourself? The number is on what the counter gave you. Keep that slip until the parcel arrives: USPS says its Post Offices and Care Center "do not have a way to recover lost tracking numbers", and Australia Post says a name or address "can't be used to locate items".
 
 | Carrier | Where to look |
 | --- | --- |
 | USPS | Your sales or mailing receipt, your online label record (Click-N-Ship, eBay), or under the barcode on the parcel |
-| Royal Mail | The label, or your Post Office receipt, where it "may be called a barcode or a reference" |
 | An Post | The "Track ID number" on your receipt; the "trans ref ID" is "not a tracking number" |
 | Canada Post | The bottom of your tracking receipt; for US and international items, your copy of the label and receipt |
 | Australia Post | Your counter receipt "in many cases"; on a prepaid satchel, the barcode and/or the removable sticker |
 
 ### Can I track a parcel I sent without a tracking number?
 
-No: "without a reference number, you won't be able to track your item," says Royal Mail. If you paid for a tracked service, though, the number is on your receipt or label (table above).
+No: as the carriers above say, a name or address won't find it. If you paid for a tracked service, though, the number is on your receipt or label (table above).
 
 ## Is the order number the same as the tracking number?
 
@@ -132,7 +130,7 @@ Usually because it's new: the label exists, but the carrier hasn't scanned the p
 Past that wait, check the number itself:
 
 - **Is it a tracking number?** An order number won't work on a carrier's site, nor will a UPS package release code (4 to 6 digits from the shipper). A sender's reference works only in the courier's reference search.
-- **Is it this carrier's?** Royal Mail asks you to check the item went with Royal Mail, on a tracked service; Australia Post, that it's an Australia Post parcel.
+- **Is it this carrier's?** Australia Post, for one, asks you to check that it's an Australia Post parcel.
 - **Is it typed right?** DHL reads a space, comma, semicolon or tab as the start of another number, so paste it without them.
 
 Still nothing? Ask the sender or the shop, as DHL advises. For each status, see [what tracking statuses mean](guide:tracking-statuses).
@@ -152,7 +150,6 @@ Still nothing? Ask the sender or the shop, as DHL advises. For each status, see 
 - [DHL Express: Track by reference](https://mydhl.express.dhl/us/en/tracking.html#/track-by-reference) – reference search
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – not an order number
 - [DHL: Tracking FAQ](https://www.dhl.com/de-en/home/tracking.html) – 24 to 48 hours, separators
-- [Royal Mail: Help with tracking reference numbers](https://help.royalmail.com/personal/s/article/Help-with-tracking-reference-numbers) – receipts, no name or address, numbers not recognised
 - [Evri: Track a parcel](https://www.evri.com/track-a-parcel) – calling card, ask the sender
 - [Evri: How do I track my parcel](https://www.evri.com/faqs/receiving-a-parcel/how-do-i-track-my-parcel) – a few days
 - [DPD UK: The DPD app](https://www.dpd.co.uk/lp/app/index.html) – automatic matching

@@ -17,7 +17,7 @@ Parcels get delivered any time from early morning to late evening, and almost no
 | [UPS](carrier:ups) (US) | Homes 9 a.m. to 7 p.m., occasionally later; businesses by close of business | Yes, no extra fee for ground residential | Its pages disagree: none, or some areas |
 | [FedEx](carrier:fedex) (US) | 8 a.m. to 8 p.m. | Homes | Homes |
 | [Amazon](carrier:amazon-logistics) (UK, Ireland) | UK Same-Day orders by 7 p.m. or 10 p.m. | Ireland: yes | Ireland: "seven days a week" |
-| [Royal Mail](carrier:royal-mail) (UK) | Aims for 4.30 p.m.; parcels as late as 6 p.m. when busy, some scheduled ones in the evening | Yes, as normal | Some Tracked 24 and Special Delivery parcels, up to 7.30 p.m. in some areas |
+| [Royal Mail](carrier:royal-mail) (UK) | Usually by 4.30 p.m.; a parcel due at a specific time may come later | Yes, as normal | In some areas |
 | [Parcelforce](carrier:parcelforce) (UK) | By 6 p.m. | By 6 p.m., when a Saturday delivery is expected | No Sunday service listed |
 | [Evri](carrier:evri) (UK) | 8 a.m. to 8 p.m. | Yes, as normal | Uncommon |
 | Yodel, now [InPost](carrier:inpost) (UK) | 7 a.m. to 9 p.m. | 7 a.m. to 9 p.m. in mainland UK | Busy periods only |
@@ -39,7 +39,7 @@ Two things the table can't show:
 **Sunday** is the exception, and each "some" in the table comes with conditions:
 
 - **UPS:** one of its pages says no Sunday deliveries, another says "in select areas". Don't count on it.
-- **Royal Mail:** only Tracked 24 and Special Delivery Guaranteed parcels bought through Click & Drop or a business account, not in every postcode, and never for anything posted at a Post Office.
+- **Royal Mail:** only in some areas.
 - **USPS:** Priority Mail Express can come on a Sunday or holiday in many large cities, for a fee the sender pays.
 - **Couriers:** Evri rarely delivers on a Sunday, InPost only in busy periods, and DPD UK only as a Predict upgrade.
 
@@ -58,7 +58,6 @@ It's the time span in which the carrier expects to reach you, worked out from th
 | Amazon | A 2- to 4-hour "Estimated Delivery Window" in the US; a live map in the UK and US | The map once your parcel is 10 stops away |
 | FedEx | 4 hours | In tracking, when available |
 | UPS | An estimated time; a 2-hour window from the 4-hour estimate is a paid option | The paid window can be picked from two days before |
-| Royal Mail | An indicative time | Only if the sender passed on your email or mobile number |
 
 USPS, Canada Post and An Post describe no window on their help pages: expect a day, not an hour.
 
@@ -102,9 +101,9 @@ Peek checks every 2 minutes once a parcel is out for delivery with the carriers 
 
 ## Do parcels get delivered on bank holidays?
 
-Usually not. Royal Mail doesn't deliver on UK bank holidays, Canada Post on statutory holidays, and UPS on "UPS holidays". Australia Post stops all deliveries on national public holidays, and local ones on state and local holidays.
+Usually not. Royal Mail doesn't deliver on bank holidays, Canada Post on statutory holidays, and UPS on "UPS holidays". Australia Post stops all deliveries on national public holidays, and local ones on state and local holidays.
 
-Holidays don't count towards delivery times either: a "3 business days" estimate skips them. Before Christmas, Royal Mail parcels can come as late as 6 p.m.; for the deadlines, see the [last posting dates](guide:christmas-posting-dates).
+Holidays don't count towards delivery times either: a "3 business days" estimate skips them. For the Christmas deadlines, see the [last posting dates](guide:christmas-posting-dates).
 
 ## Can I collect my parcel outside delivery hours?
 
@@ -133,10 +132,7 @@ One catch: a locker you can open at any hour is only filled on delivery days, so
 - [About Amazon EU: Amazon's €25 billion commitment to Ireland](https://www.aboutamazon.eu/news/job-creation-and-investment/amazons-25-billion-commitment-to-ireland-creating-jobs-driving-growth-and-building-infrastructure) – delivery across Ireland seven days a week
 - [About Amazon: 10 tips to protect your Amazon packages from porch pirates](https://www.aboutamazon.com/news/operations/amazon-porch-pirate-prevention-tips) – 2- to 4-hour Estimated Delivery Window (US)
 - [About Amazon: How to track your packages](https://www.aboutamazon.com/news/retail/track-amazon-package) – live map from 10 stops away (US)
-- [Royal Mail: What time, what days do you deliver?](https://help.royalmail.com/personal/s/article/What-time-what-days-do-you-deliver) – 4.30 p.m., evenings, remote areas
-- [Royal Mail: Weekday and weekend delivery times](https://www.royalmail.com/receiving/delivery-times) – 6 p.m., Saturday, bank holidays
-- [Royal Mail: Sunday parcel deliveries](https://www.royalmail.com/business/shipping/uk-services/sunday-parcel-deliveries) – Tracked 24, Special Delivery, 7.30 p.m.
-- [Royal Mail: Parcels user guide](https://www.royalmail.com/sites/royalmail.com/files/2026-10/royal-mail-parcels-user-guide-october-2026.pdf) – indicative delivery times
+- [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – 4.30 p.m., later for timed parcels, Saturday, Sunday in some areas, bank holidays
 - [Parcelforce: Delivery times](https://www.parcelforce.com/help-and-advice/receiving/delivery-times) – 6 p.m., Saturday
 - [Evri: Next Day delivery](https://www.evri.com/our-services/next-day-parcel-delivery) – 8 a.m. to 8 p.m., one-hour window
 - [Evri: Expected delivery time](https://www.evri.com/faqs/receiving-a-parcel/expected-delivery-time) – an ETA can't be changed

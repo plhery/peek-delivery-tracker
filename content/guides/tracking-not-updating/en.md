@@ -7,14 +7,14 @@ published: 2026-10-09
 updated: 2026-10-27
 ---
 
-Tracking not updating usually means nobody has scanned your parcel (or package) lately, not that it has stopped moving. Carriers scan at depots and borders, not on the road, so a long drive, a flight, customs or a weekend can leave days without a new line. Worry only once the carrier's own waiting time has passed (7 days after mailing for a [USPS](carrier:usps) search, 10 working days after the due date for a [Royal Mail](carrier:royal-mail) 1st or 2nd Class claim), and even then, ask the seller first: it's the carrier's customer.
+Tracking not updating usually means nobody has scanned your parcel (or package) lately, not that it has stopped moving. Carriers scan at depots and borders, not on the road, so a long drive, a flight, customs or a weekend can leave days without a new line. Worry only once the carrier's own waiting time has passed (7 days after mailing for a [USPS](carrier:usps) search, 11 working days after posting for a [Royal Mail](carrier:royal-mail) 1st Class claim), and even then, ask the seller first: it's the carrier's customer.
 
 ## Why has my tracking not updated in 3 days?
 
 Tracking shows scans, not movement, and a parcel is scanned only at certain points:
 
 - **No scan between hubs.** [UPS](carrier:ups) says a parcel going a long way likely won't be scanned again until its destination hub. [Canada Post](carrier:canada-post) typically scans a parcel when it's mailed and when it goes out for delivery, and says several days can pass in between.
-- **Weekends and holidays.** USPS delivers Monday to Saturday; on Sunday, only Priority Mail Express and Amazon parcels. Royal Mail counts Saturday as a working day for 1st and 2nd Class, but not Sunday or public holidays. Around Christmas, check [carriers' days off](guide:christmas-posting-dates).
+- **Weekends and holidays.** USPS delivers Monday to Saturday; on Sunday, only Priority Mail Express and Amazon parcels. Royal Mail delivers 1st and 2nd Class parcels Monday to Saturday, but no post on bank holidays. Around Christmas, check [carriers' days off](guide:christmas-posting-dates).
 - **Weather and busy seasons.** DHL names bad weather, traffic jams, accidents and illness, and says parcels in Germany can take longer before Christmas.
 - **A label the machines can't read.** DHL names postcode typos, missing house numbers, hard-to-read handwriting, labels that came off and damaged packaging. The parcel may then be misrouted or sorted by hand, delaying it several days.
 
@@ -38,7 +38,7 @@ Hours to days. If yours is stuck on `Label Created`, the carrier may not have th
 - **DHL:** scans usually appear 24 to 48 hours after you get the number (up to 24 hours in Germany).
 - **USPS:** `Shipping Label Created, USPS Awaiting Item` means the parcel "has not yet been given to USPS".
 - **UPS:** `Label Created` changes once UPS has the parcel.
-- **Royal Mail:** a number it doesn't recognise may be for an item not handed in yet. Try again later.
+- **Royal Mail:** `Sender preparing item` or `Sender has despatched item` comes from the sender's notice, before Royal Mail has the parcel.
 - **[Evri](carrier:evri):** after the sender's dispatch notice, it can take a few days for Evri to receive the parcel.
 - **[Australia Post](carrier:australia-post):** a number it doesn't recognise may not be scanned yet: try again in 24 hours. After more than a week on `Pending`, ask the sender whether it was really sent.
 - **Vinted:** tracking can take up to 48 hours to first appear.
@@ -68,14 +68,14 @@ There's no single day. Most carriers say when they'll start looking, counted fro
 | USPS (US) | 7 days after mailing (Missing Mail search) | You or the sender |
 | UPS (US) | No day count; claims up to 60 days after the scheduled delivery | The shipper, or you unless the shipper blocked it |
 | [FedEx](carrier:fedex) (US) | No day count; lost parcels up to 9 months after shipping | The seller, or you |
-| Royal Mail (UK) | 10 working days after the due date (1st and 2nd Class), 7 (Tracked 24 and 48), 5 (Special Delivery Guaranteed) | The sender. For 1st, 2nd Class and Special Delivery you can too, but the sender's claim comes first |
+| Royal Mail (UK) | Working days after posting: 11 (1st Class), 14 (2nd Class). Special Delivery: 5 working days after the due date | The sender or you. Tracked 24 and 48: the sender only |
 | Evri (UK) | More than 7 days with Evri | The sender, once you tell them |
 | [DPD](carrier:dpd-uk) (UK) | No waiting time given; the sender must report a loss within 14 days of despatch | The sender |
 | [An Post](carrier:an-post) (Ireland) | Standard post: 5 working days after posting; international post: 15 days | You, online or at the post office |
 | Canada Post | Once the expected delivery date has passed | You or the sender; only the sender can claim |
 | Australia Post | Domestic: 10 business days after the expected delivery date | You or the sender, with a free MyPost account |
 
-Royal Mail doesn't process [early claims](guide:lost-parcel), and wants 1st Class, 2nd Class and Special Delivery claims within 80 calendar days of posting.
+Royal Mail takes no [claim](guide:lost-parcel) before those waiting times, and none later than 80 days after posting (6 months for an item sent abroad).
 
 ## Should I contact the seller or the carrier?
 
@@ -114,7 +114,7 @@ Etsy lets you open a case up to 30 days after the estimated delivery date; AliEx
 
 ### Is it normal for a package to be in transit for 7 days?
 
-Within one country, it's slow: USPS gives Ground Advantage 2 to 5 business days, not guaranteed, and Evri typically 1 to 3 days once it has the parcel. From abroad, a week can be part of the plan: Royal Mail's International Tracked aims at 5 to 7 working days outside Europe.
+Within one country, it's slow: USPS gives Ground Advantage 2 to 5 business days, not guaranteed, and Evri typically 1 to 3 days once it has the parcel. From abroad, a week can be part of the plan: customs alone can take up to 15 days for items coming into Australia, says Australia Post.
 
 ### Can I make tracking update sooner?
 
@@ -131,9 +131,9 @@ The parcel may not be scanned yet, the number may belong to another carrier, or 
 - [UPS: Understanding tracking status](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – scans, transfer to the post office
 - [UPS: File a claim](https://www.ups.com/us/en/support/file-a-claim) – 60 days, who claims
 - [FedEx: File a claim](https://www.fedex.com/en-us/customer-support/claims.html) – 9 months, who files
-- [Royal Mail: Help with tracking reference numbers](https://help.royalmail.com/personal/s/article/Help-with-tracking-reference-numbers) – number not recognised
-- [Royal Mail: My item hasn't arrived yet](https://www.royalmail.com/help/lost-items-parcels-letters) – waiting times, international aims
-- [Royal Mail: Retail compensation policy for loss](https://www.royalmail.com/retail-compensation-policy-loss) – working days, 80 days
+- [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – working days, who claims, 80 days, 6 months
+- [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – Monday to Saturday, bank holidays
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail status wordings
 - [Evri: How do I track my parcel?](https://www.evri.com/faqs/receiving-a-parcel/how-do-i-track-my-parcel) – first scan, delivery time
 - [Evri: What can I do if I haven't received my parcel?](https://www.evri.com/faqs/receiving-a-parcel/what-can-i-do-if-i-havent-received-my-parcel) – 7 days, via the sender
 - [DPD UK: Terms and conditions of carriage](https://www.dpd.co.uk/content/terms-and-conditions.jsp) – 14 days

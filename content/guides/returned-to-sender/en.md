@@ -24,15 +24,14 @@ The reason is usually in the latest scan, and the carrier marks it on the parcel
 | Customs charges unpaid or paperwork incomplete | An Post: charges not paid by the "pay by date", or the sender's customs declaration incomplete |
 | Postage or label problem | Canada Post: not enough postage, an improper label, a reused tracking number |
 | Not allowed in the post | USPS `Returned to Sender, Mailpiece Contains Nonmailable Contents` |
-| The sender asked for it back | [Royal Mail](carrier:royal-mail) tells you when a business sender has used Stop and Return |
 
 Post sent abroad often comes back with the reason in French, as the Universal Postal Union's rules have it: `Inconnu` (unknown), `Refusé` (refused), `Non réclamé` (unclaimed).
 
-Some statuses hide a return, such as Australia Post's `Contact sender` and Royal Mail's `Forwarded to Returns Centre`: [tracking statuses](guide:tracking-statuses) explains them. If the reason was a customs charge, [parcels held at customs](guide:customs) covers what was owed and how to claim duties back.
+Some statuses hide a return, such as Australia Post's `Contact sender`: [tracking statuses](guide:tracking-statuses) explains them. If the reason was a customs charge, [parcels held at customs](guide:customs) covers what was owed and how to claim duties back.
 
 ## Can I stop my parcel from being returned to sender?
 
-Once it has turned back, no. Before that, usually only the sender can. "Once the return process starts, we can't stop it," says Canada Post. DHL says the same, even for a parcel you refused. [UPS](carrier:ups) can't retrieve a parcel that's back with the sender, and Royal Mail's Stop and Return can't touch an item already scanned as Return to Sender.
+Once it has turned back, no. Before that, usually only the sender can. "Once the return process starts, we can't stop it," says Canada Post. DHL says the same, even for a parcel you refused. [UPS](carrier:ups) can't retrieve a parcel that's back with the sender.
 
 The stop services that exist belong to the sender, and some need a business account:
 
@@ -40,7 +39,6 @@ The stop services that exist belong to the sender, and some need a business acco
 | --- | --- | --- | --- |
 | USPS | Package Intercept | The sender or their authorised agent, with a USPS.com account | $19.45 per piece, charged only if the parcel is found; US only; not once it's out for delivery |
 | UPS | Delivery Intercept, `Return to Sender` | The shipper | Before delivery; "fees may apply", charged only if it works |
-| Royal Mail | Stop and Return | Business accounts (Click & Drop, Online Business Account) | Tracked, Special Delivery and [Parcelforce](carrier:parcelforce) express; UK only; not once at a collection point; Tracked and Parcelforce charged at the outbound rate, Special Delivery already includes it |
 | Australia Post | Recall or redirect | Business credit account holders | eParcel and Parcel Send to a street address; the return charge in the sender's contract |
 
 So while the parcel is still on its way to you, the seller is the one to ask. If you only need it delivered somewhere else, see [change the delivery address](guide:change-delivery-address).
@@ -83,7 +81,6 @@ The sender pays the carrier, and how much depends on the service:
 
 - **USPS** returns Priority Mail Express, Priority Mail, First-Class Mail and Ground Advantage "at no additional charge".
 - **Canada Post** charges the sender for an uncollected parcel's return; for international returns, usually the original postage again.
-- **Royal Mail** sends it back by the same service it was sent with.
 - **Australia Post** charges business senders the return fee in their contract.
 
 In the UK and EU, the shop can pass that cost on to you only as the "direct cost of returning the goods", if it told you before you ordered and once you've cancelled. It may also keep the extra you paid for faster delivery.
@@ -107,7 +104,7 @@ The parcel goes back along much the same route, and the tracking runs backwards:
 
 ## How long does a return to sender take?
 
-**The wait.** A refused item usually goes back at once: the Universal Postal Union's rules return refused letters and small packets "forthwith", and USPS returns items it can't carry "immediately". An uncollected parcel waits out its holding period first: 5 working days at An Post, 15 calendar days at Canada Post, 18 days at Royal Mail. [Parcel not collected](guide:uncollected-parcel) lists each carrier's wait and how to get more time.
+**The wait.** A refused item usually goes back at once: the Universal Postal Union's rules return refused letters and small packets "forthwith", and USPS returns items it can't carry "immediately". An uncollected parcel waits out its holding period first: 5 working days at An Post, 15 calendar days at Canada Post, and about 3 weeks at [Royal Mail](carrier:royal-mail) or [Parcelforce](carrier:parcelforce) when a customs bill is unpaid. [Parcel not collected](guide:uncollected-parcel) lists each carrier's wait and how to get more time.
 
 **The trip back.** No carrier we checked publishes a return transit time. Vinted warns that a returned parcel "may take up to 25 business days to reach the seller".
 
@@ -119,18 +116,13 @@ From abroad it's slower. Under the UPU's rules, a parcel waiting to be collected
 
 DHL says a return after a refusal can't be stopped, so ask the shop to send it again once it's back. Canada Post asks you to report a return you think it made by mistake.
 
-### What if there's no return address on it?
-
-In the UK, Royal Mail sends it to its National Returns Centre, which opens it to find the sender's address. If none is found, it may be held for a month in case someone asks, then disposed of.
-
 :::sources
 - [USPS: Domestic Mail Manual 507](https://pe.usps.com/text/dmm300/507.htm) – reasons, free returns
 - [USPS: Package Intercept, the basics](https://faq.usps.com/s/article/USPS-Package-Intercept-The-Basics) – who, conditions
 - [USPS: Notice 123, price list](https://pe.usps.com/text/dmm300/notice123.htm) – Package Intercept $19.45
 - [UPS: Delivery Intercept](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – shipper, fees
 - [UPS: Returned to the sender](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – can't retrieve
-- [Royal Mail: What happens if we can't deliver](https://help.royalmail.com/personal/s/article/What-happens-if-Royal-Mail-can-t-deliver) – 18 and 21 days, returns centre
-- [Royal Mail: Stop and Return](https://www.royalmail.com/business/shipping/uk-services/stop-and-return) – conditions, cost
+- [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – about 3 weeks, then back to the sender
 - [Canada Post: Why was my item returned? (French)](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/recevoir/faq-livraison/votre-courrier-a-t-il-ete-renvoye.page) – reasons, mistakes
 - [Canada Post: Can I refuse delivery of a parcel?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/can-i-refuse-delivery-of-a-parcel.page) – 15 days, return charge
 - [Canada Post: Return to sender](https://www.canadapost-postescanada.ca/cpc/en/support/articles/parcel-services-us-international/return-to-sender.page) – international fee

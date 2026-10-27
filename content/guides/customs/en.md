@@ -4,22 +4,21 @@ description: What "held at customs" means, how long it can last, what you pay in
 slug: parcel-held-at-customs
 picture: A customs booth with a striped barrier, a stamped document with a tick, and Pip waiting patiently before the barrier.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 "Held at customs" usually means your parcel (or package) is in the routine import check for goods from abroad, not that it was seized. If it stays held, the carrier may be waiting for you to pay a charge or send an invoice. Check the carrier's own website or app, never a link in a text.
 
 ## What does "held at customs" mean?
 
-Every parcel crossing a customs border is presented to customs: by law, [Royal Mail](carrier:royal-mail) presents every item from outside the UK to Border Force, and [Canada Post](carrier:canada-post) presents every incoming international parcel to the Canada Border Services Agency (CBSA). In Ireland, that means parcels from outside the EU, Great Britain included.
+Every parcel crossing a customs border is presented to customs. In the UK, the parcel or courier company, such as [Royal Mail](carrier:royal-mail) or [Parcelforce](carrier:parcelforce), takes it through; [Canada Post](carrier:canada-post) presents every incoming international parcel to the Canada Border Services Agency (CBSA). In Ireland, that means parcels from outside the EU, Great Britain included.
 
 Customs checks the sender's declaration (contents, value), may open the parcel, works out any tax and duty, then releases it to the carrier. Carriers word this stage differently:
 
 | Status | Meaning |
 | --- | --- |
 | `In customs` (Royal Mail) | Passing through customs |
-| `OE` in a Royal Mail scan | Office of Exchange: it reached the import customs office |
-| `Fee to pay` or `Held with fee to pay` (Royal Mail) | A customs charge (or missing postage) must be paid before delivery |
+| `Customs charges raised` (Royal Mail) | A charge is due: Royal Mail sends you a bill stating which fees to pay |
 | `Item held by customs` (Canada Post) | Standard for every international parcel, says Canada Post |
 
 None of these is a seizure. A real one comes in writing: Ireland's Revenue says you get a written notification with the customs office's details, and Australian Border Force (ABF) sends an information sheet saying what it holds and why.
@@ -30,7 +29,7 @@ Often nothing. To find out:
 
 :::steps
 - Open the carrier's own tracking | Type its address or open its app, never a link from a text or email.
-- Look for a request | A `Fee to pay` status, a Pay button or a request for documents means it's waiting for you. Otherwise, nothing to do yet.
+- Look for a request | A charge to pay, a Pay button or a request for documents means it's waiting for you. Otherwise, nothing to do yet.
 - Do what it asks | Pay on its own site or at the counter, or send the invoice or order confirmation it wants.
 - Ask the carrier, then the seller | Still stuck? Revenue sends you to the courier, postal operator or seller about delays, not to customs.
 :::
@@ -56,7 +55,7 @@ Don't leave it too long:
 
 | Country | How long it waits |
 | --- | --- |
-| UK | Royal Mail, [Parcelforce](carrier:parcelforce) or the courier "normally" hold it about 3 weeks, then return it |
+| UK | Royal Mail, Parcelforce or the courier "normally" hold it about 3 weeks, then return it |
 | Ireland | [An Post](carrier:an-post) asks you to pay within 10 working days |
 | Australia | Over AUD 1,000: with no action 30 days after Australia Post's First Notice, it may go back |
 | US | A mail parcel without the required entry or bond stays with U.S. Customs and Border Protection (CBP) until they are filed |
@@ -87,7 +86,7 @@ Where you pay depends on the checkout:
 
 | Country | Free at the door if | Otherwise you pay |
 | --- | --- | --- |
-| UK | Goods you bought for £135 or less (the seller adds VAT), or a gift worth £39 or less. Never alcohol, tobacco or vapes: they pay duty at any value | VAT, plus duty above £135. Royal Mail adds £8, Parcelforce £12, both £25 for goods over £900; couriers set their own |
+| UK | Goods you bought for £135 or less (the seller adds VAT), or a gift worth £39 or less. Never alcohol, tobacco or vapes: they pay duty at any value | VAT, plus duty above £135, and any delivery charges: Royal Mail, Parcelforce or the courier sends you the bill |
 | Ireland | The shop charged it all at checkout, or a gift worth €45 or less | VAT and duty, even on goods from Great Britain, plus the carrier's fee (An Post: €6.95) |
 | Canada | Worth CAD 20 or less (CAD 40 by courier from the US or Mexico), or a gift up to CAD 60 | Duty and sales taxes. Canada Post adds CAD 9.95, only when something is owed |
 | Australia | Worth AUD 1,000 or less (the shop may have charged GST), except alcohol and tobacco | Over AUD 1,000: an Import Declaration, then duty and taxes to ABF |
@@ -120,7 +119,6 @@ Real charges can come by text or email too, but each carrier's rules give most f
 
 | Carrier | What its real messages look like |
 | --- | --- |
-| Royal Mail, Parcelforce | A `Fee to pay` card, letter, SMS or email, whose details you enter on Royal Mail's "Pay a fee" page |
 | An Post | Post, text or email, but "never" a message containing any links |
 | [USPS](carrier:usps) | Texts or emails only if you asked for tracking with your number, and never with a link |
 | Canada Post | The E14 form on the parcel, or the Pay button in its own tracking or app |
@@ -152,9 +150,8 @@ In the UK and Ireland, an unpaid parcel [goes back to the sender](guide:returned
 - **Ireland:** the €3 duty is refunded only on faulty goods, and the €2 fee never.
 
 :::sources
-- [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – £135, £39, about 3 weeks, refund forms
-- [Royal Mail: Pay a fee](https://www.royalmail.com/receiving-mail/pay-a-fee) – Border Force, £8, £12, £25
-- [Royal Mail: Postage tracking terms explained](https://www.royalmail.com/help/postage-tracking-terms-explained) – status wording
+- [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad) – the parcel or courier company takes goods through customs
+- [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – £135, £39, the bill, about 3 weeks, refund forms
 - [GOV.UK: Report suspicious emails, websites and text messages](https://www.gov.uk/report-suspicious-emails-websites-phishing) – 7726
 - [Revenue: Removal of the de minimis relief](https://www.revenue.ie/en/customs/individuals/relief-low-value-consignments/index.aspx) – €3 per item
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 fee, checkout price, refunds
@@ -176,4 +173,5 @@ In the UK and Ireland, an unpaid parcel [goes back to the sender](guide:returned
 - [ABF: Buying online](https://www.abf.gov.au/buying-online/buying-online) – AUD 1,000, GST at checkout, alcohol and tobacco at any value
 - [ABF: Contact us, Offices](https://www.abf.gov.au/help-and-support/contact-us/offices) – scam calls from Regional Office numbers
 - [Australia Post: Scam alerts](https://auspost.com.au/about-us/about-our-site/online-security-scams-fraud/scam-alerts) – never asks for payment, iDCare
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail status wordings
 :::

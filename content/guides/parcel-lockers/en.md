@@ -1,6 +1,6 @@
 ---
 title: Parcel lockers: collection codes, time limits and problems
-description: How Amazon, InPost, USPS, Royal Mail, An Post and Australia Post lockers work: where your code is, how long the parcel waits, and what if the locker is full.
+description: How Amazon, InPost, Evri, USPS, An Post and Australia Post lockers work: where your code is, how long the parcel waits, and what if the locker is full.
 slug: parcel-locker-collection-code
 picture: A bank of parcel lockers with one door open, a phone showing a code, and Pip stepping out.
 published: 2026-10-17
@@ -20,7 +20,7 @@ Usually you pick the locker when you order. The carrier brings the parcel, puts 
 - home | You | Open the door with the code or the app and take it
 :::
 
-A parcel can also land in a locker you didn't pick. [InPost](carrier:inpost) and [Australia Post](carrier:australia-post) may leave a parcel they couldn't deliver at home in a nearby locker. [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post) and [Evri](carrier:evri) let you redirect a parcel to one. Other options: [missed delivery](guide:missed-delivery).
+A parcel can also land in a locker you didn't pick. [InPost](carrier:inpost) and [Australia Post](carrier:australia-post) may leave a parcel they couldn't deliver at home in a nearby locker. [USPS](carrier:usps), [An Post](carrier:an-post) and [Evri](carrier:evri) let you redirect a parcel to one. Other options: [missed delivery](guide:missed-delivery).
 
 ## Which locker networks are there in the US, UK, Ireland, Canada and Australia?
 
@@ -30,14 +30,12 @@ A parcel can also land in a locker you didn't pick. [InPost](carrier:inpost) and
 | USPS Smart Locker (US) | USPS, in Post Office lobbies | QR code or access code by email | 5 days, then 10 at the counter |
 | InPost Lockers (UK) | InPost | QR code and code by app, email and text | 3 days |
 | Evri Lockers (UK) | Evri, serviced by partners | Barcode sent when it's ready | 3 days |
-| Royal Mail Parcel Lockers (UK) | Royal Mail | Collection or QR code by email or text | 3 days, then 18 at a Customer Service Point |
 | An Post Parcel Lockers (Ireland) | An Post | PIN by text | 48 hours, then 5 days at the depot |
 | Canada Post parcel lockers (Canada) | Canada Post, in apartment buildings | A key in your mailbox | Up to 5 days, then the post office |
 | Australia Post Parcel Lockers (Australia) | Australia Post | Access code by email, text or app | 2 business days, then 10 at a Post Office |
 
 A few things the table can't hold:
 
-- **Royal Mail** lockers are mainly for sending and returns. A parcel goes there when you book a free redelivery, 48 working hours ahead.
 - **[DPD UK](carrier:dpd-uk)** delivers to lockers you pick from its notifications, opened with a one-time PIN or QR code. It doesn't say how long they wait.
 - **Australia Post** lockers need a free MyPost account, which gives you a Parcel Locker address to use at checkout.
 - **Canada Post** lockers, in apartment buildings and community mailboxes, take only Canada Post parcels and open with a key.
@@ -63,7 +61,7 @@ Not long: from 48 hours at An Post to 5 days at USPS and Canada Post, and 3 days
 
 What happens at the deadline depends on the network:
 
-- **A counter takes over.** USPS moves the parcel to the Post Office retail window, where you show ID. Royal Mail sends it to your Customer Service Point. An Post moves it to the delivery depot: bring photo ID and the removal notice. Australia Post takes it to the nearest Post Office. Canada Post leaves a delivery notice card for the post office.
+- **A counter takes over.** USPS moves the parcel to the Post Office retail window, where you show ID. An Post moves it to the delivery depot: bring photo ID and the removal notice. Australia Post takes it to the nearest Post Office. Canada Post leaves a delivery notice card for the post office.
 - **It goes back.** Amazon returns it and refunds you automatically. InPost sends it back to the seller, and any refund is up to the shop.
 
 What happens next, and how to get your money back: [parcel not collected](guide:uncollected-parcel).
@@ -79,7 +77,7 @@ Wherever the carrier could put it, and the tracking says where. Follow the track
 - **Australia Post:** if the parcel can't go into the locker, it tries again later. If that fails too, the parcel goes to a nearby Parcel Collect point, where you collect it over the counter.
 - **Canada Post:** a parcel needing a signature or too big for a compartment comes to your door. If you're out, you get a notice card for the post office.
 
-Some parcels never go into a locker. Royal Mail keeps signature items and age or ID checks out of its Parcel Lockers, and Australia Post can keep out parcels that need an ID or age check, or have an amount to pay.
+Some parcels never go into a locker. Australia Post can keep out parcels that need an ID or age check, or have an amount to pay.
 
 ## Can someone else collect it, or can I collect without the app?
 
@@ -93,7 +91,7 @@ Collecting without the app:
 
 - **Amazon:** write down the 6-digit code from the confirmation email. Some lockers need the barcode scanned or the app, so Amazon suggests taking your phone anyway.
 - **InPost UK:** the code also comes by email and text. Type your phone number, without the first 0, and the code on the screen.
-- **USPS, Royal Mail, An Post and Australia Post:** the code comes by email or text, so you don't need the app.
+- **USPS, An Post and Australia Post:** the code comes by email or text, so you don't need the app.
 - **Canada Post:** no app and no code, just the key left in your mailbox.
 
 ## What does the tracking say at each step?
@@ -105,7 +103,7 @@ Each carrier words it differently, but the steps are the same:
 - In the locker, code sent | The parcel is in a compartment. The code, the locker address and the deadline come by text, email or app.
 - Reminder | Some carriers nudge you: USPS every day, InPost and An Post with 24 hours left.
 - Time's up | The deadline passes and the carrier takes the parcel out of the compartment.
-- Back to the sender or a counter | Amazon and InPost send it back. USPS, Royal Mail, An Post and Australia Post hold it at a counter first.
+- Back to the sender or a counter | Amazon and InPost send it back. USPS, An Post and Australia Post hold it at a counter first.
 :::
 
 If the locker was full, an extra step appears: the parcel heads to another locker or a counter. The exact words for each carrier are in [tracking statuses](guide:tracking-statuses). If the tracking says collected and you didn't collect it, see [delivered but not received](guide:delivered-not-received).
@@ -115,7 +113,7 @@ If the locker was full, an extra step appears: the parcel heads to another locke
 Often, yes, without queuing at a counter:
 
 - **InPost UK:** returns with a QR code at any locker, no label to print.
-- **Royal Mail:** its Parcel Lockers take Tracked Returns and 1st and 2nd Class parcels, around the clock.
+- **[Royal Mail](carrier:royal-mail):** when a sender drops an item at one of its Parcel Lockers, the tracking says `Sender advised item dropped off at parcel locker`.
 - **USPS:** drop a return at a Smart Locker with a Label Broker QR code.
 - **An Post and Australia Post:** you can send and return from their lockers. At An Post, you scan the label.
 
@@ -153,8 +151,6 @@ An Amazon order delivered by Amazon itself shows its tracking only in your Amazo
 - [InPost: How do I return with InPost?](https://inpost.co.uk/help/how-do-i-return-with-inpost) – QR code returns
 - [Evri: Can I get my parcel delivered to a Locker?](https://www.evri.com/faqs/lockers/can-i-get-my-parcel-delivered-to-a-locker) – barcode, 3 days, diverting to a locker
 - [Evri: I'm having trouble with the Locker](https://www.evri.com/faqs/lockers/im-having-trouble-with-the-locker-what-can-i-do) – help button, partner companies
-- [Royal Mail: Parcel Lockers](https://www.royalmail.com/locations/parcel-locker) – sending and returns
-- [Royal Mail: Redelivery](https://www.royalmail.com/receiving-mail/redelivery) – redelivery to a locker, 3 and 18 days, codes, excluded items
 - [DPD UK: First UK smart lockers](https://www.dpd.co.uk/content/about_dpd/press_centre/dpd-adds-more-choice-and-convenience-with-first-uk-smart-lockers.jsp) – choosing a locker, PIN or QR code
 - [An Post: Parcel Lockers](https://www.anpost.com/Post-Parcels/Receiving/Parcel-Lockers) – PIN by text, 48 hours, depot, too big, sending and returns
 - [Canada Post: Parcel lockers](https://www.canadapost-postescanada.ca/cpc/en/personal/mailboxes-and-lockers/parcel-lockers.page) – key, 5 days, notice card, Canada Post only
@@ -162,4 +158,5 @@ An Amazon order delivered by Amazon itself shows its tracking only in your Amazo
 - [Australia Post: Parcel Lockers](https://auspost.com.au/personal/receiving/parcel-deliveries/parcel-lockers) – MyPost account, access code, 2 and 10 business days, sending and returns
 - [Australia Post: MyPost Deliveries terms of use](https://auspost.com.au/content/dam/auspost_corp/media/documents/mypost-consumer-deliveries-terms-of-use.pdf) – code kept confidential, second attempt, Parcel Collect, refused parcels
 - [Australia Post: Missed parcel deliveries](https://auspost.com.au/personal/receiving/parcel-deliveries/missed-parcel-deliveries) – lockers after a missed delivery, nominating someone
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail status wordings
 :::

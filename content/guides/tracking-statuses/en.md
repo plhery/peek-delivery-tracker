@@ -4,7 +4,7 @@ description: What each tracking status means, from "label created" to "delivered
 slug: tracking-status-meanings
 picture: A winding route with ticked stops (label, depot, plane), a van at the current stop, a house ahead and Pip hurrying.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 A tracking status is the carrier's latest scan in a few words, and most ask nothing of you. "Label created" means the carrier doesn't have your parcel yet, "in transit" means it's somewhere between two scans, and "out for delivery" means it's on today's van. Only a few need you: a missed delivery, a parcel waiting for pickup, a customs charge and a "delivered" with nothing at the door.
@@ -32,10 +32,10 @@ Same stages, different words:
 | --- | --- | --- | --- |
 | Label created | `Shipping Label Created, USPS Awaiting Item` | `We're expecting it` | `Processing` |
 | Picked up | `USPS in Possession of Item` | `We've got it` | `We've got it` |
-| In transit | `In Transit` | `On its way` | `It's on its way` |
-| Out for delivery | `Out for Delivery` | `Ready for delivery` (still at the office) | `It's coming today` |
-| Ready for pickup | `Available for Pickup` | `Ready for collection` | `Awaiting collection` |
-| Delivered | `Delivered` | `Your item was delivered` | `Delivered` |
+| In transit | `In Transit` | `In transit` | `It's on its way` |
+| Out for delivery | `Out for Delivery` | `Due to be delivered today` | `It's coming today` |
+| Ready for pickup | `Available for Pickup` | `Available for Redelivery or Collection` | `Awaiting collection` |
+| Delivered | `Delivered` | `Delivered` | `Delivered` |
 
 ## "Label created" or "pre-shipment": does the carrier have it?
 
@@ -51,7 +51,6 @@ Between hubs, silence is normal:
 
 - FedEx calls more than 24 hours without a scan "not unusual".
 - UPS may not scan a long-distance parcel again before the destination hub.
-- [Royal Mail](carrier:royal-mail) scans Signed For items only when it gets them and when it delivers.
 
 ### How long will a parcel be in transit?
 
@@ -59,8 +58,8 @@ Evri typically delivers 1 to 3 days after receiving a parcel, while Australia Po
 
 ## Parcels from abroad: left the country, customs, local carrier
 
-- **Left the country.** It's booked onto a flight, ship or train. For a parcel heading to Germany, DHL warns the next update can be several days away. Royal Mail's `OE` (Office of Exchange) means it reached import customs. On an item from abroad, Australia Post's `It's on its way` means it's in Australia.
-- **Customs.** `In customs` (Royal Mail) or `Item held by customs` ([Canada Post](carrier:canada-post)) is usually routine: Canada Post calls it standard for every international parcel, screened by the Canada Border Services Agency, and can't step in. DHL speaks of several business days; none of these carriers gives a general maximum. Once released, Canada Post's tracking says it has cleared customs. Act only on a request, such as Royal Mail's `Fee to pay`; see [parcels held at customs](guide:customs).
+- **Left the country.** It's booked onto a flight, ship or train. For a parcel heading to Germany, DHL warns the next update can be several days away. On an item from abroad, Australia Post's `It's on its way` means it's in Australia.
+- **Customs.** `In customs` ([Royal Mail](carrier:royal-mail)) or `Item held by customs` ([Canada Post](carrier:canada-post)) is usually routine: Canada Post calls it standard for every international parcel, screened by the Canada Border Services Agency, and can't step in. DHL speaks of several business days; none of these carriers gives a general maximum. Once released, Canada Post's tracking says it has cleared customs. Act only on a request, such as Royal Mail's `Customs charges raised`; see [parcels held at customs](guide:customs).
 - **Local carrier.** UPS's `Transferred to Post Office for Delivery` means the post office does the last leg: allow an extra day or two. DHL points you to the destination carrier's tracking. The local carrier can give the parcel [a number of its own](guide:tracking-number-formats). Ordered from AliExpress, Temu or Shein? See [tracking a parcel from China](guide:tracking-from-china), and [Cainiao's own wordings](carrier:cainiao) for AliExpress parcels.
 
 ## Does "out for delivery" mean it arrives today?
@@ -72,7 +71,7 @@ Usually, yes:
 - **FedEx:** generally 8 a.m. to 8 p.m.
 - **Australia Post:** `It's coming today` once the postie has loaded it, and it may text you a 2-hour window.
 
-Two look-alikes: Royal Mail's `Ready for delivery` means it has reached your local delivery office, not the van. And at [DHL](carrier:dhl) in Germany, a loading scan shown more than once means the round wasn't finished: a delay of 1 to 2 days is possible.
+Two look-alikes: Peek counts Royal Mail's `Ready for delivery` as in transit, not out for delivery. And at [DHL](carrier:dhl) in Germany, a loading scan shown more than once means the round wasn't finished: a delay of 1 to 2 days is possible.
 
 [Peek](/) checks up to every 2 minutes once a parcel is out for delivery, and its notifications can be set to delivery day only.
 
@@ -92,7 +91,7 @@ This one needs you: [nobody could take the parcel](guide:missed-delivery), or th
 | USPS (US) | `Notice Left`: no automatic second try; book a redelivery or collect | Signature mail "usually 15 days"; Priority Mail Express 5 calendar days |
 | UPS (US) | Up to three attempts, or a UPS Access Point | 7 calendar days at an Access Point |
 | FedEx (US) | Next-day reattempt, or a nearby FedEx location | 7 days |
-| Royal Mail (UK) | Another try the next working day, then a 'Something for you' card | 18 days, 21 with a customs charge |
+| Royal Mail (UK) | `Due for Redelivery the Next Working Day`, or a red card naming where to collect | About 3 weeks with a customs bill to pay |
 | Evri (UK) | Three attempts and a calling card; no depot collection | If sent to a ParcelShop, 10 days; a locker, 3 |
 | An Post (IE) | At least one attempt, then a "sorry we missed you" notice | 5 working days, 16 from abroad |
 | Canada Post | `Notice left`: a card naming the post office | 15 calendar days |
@@ -110,7 +109,7 @@ Wait for this status or the carrier's message before going: USPS makes items ava
 
 Not always. It means the driver scanned it as handed over or left:
 
-- **With a neighbour.** Royal Mail's `Your item was delivered` covers one, named in the message, with a card left.
+- **With a neighbour.** Royal Mail's `Delivered to Neighbour/Reception by` goes on to name who took it in.
 - **Somewhere safe.** Without a signature, UPS picks a spot out of sight and weather: front porch, side door, back porch, garage. USPS adds the mailbox, back entrance and others at home; a key in your mail compartment means a parcel locker. Canada Post's `Delivered as a safe drop` usually comes with a photo.
 
 Australia Post also shows `Delivered` once you've collected it from a Post Office or Parcel Locker. Nothing there? Check the full tracking for a photo, a name or a place, then see [delivered but not received](guide:delivered-not-received).
@@ -129,7 +128,6 @@ The carriers' reasons: not collected in time, a wrong or incomplete address, a r
 
 - **USPS** `Insufficient Address`: it's already heading back, and the sender must post it again with new postage.
 - **Australia Post** `Contact sender`: a return, after wrong details or 10 business days uncollected.
-- **Royal Mail** `Forwarded to Returns Centre`: with no return address on it, the centre opens it to find one.
 
 Don't count on stopping it: "Once the return process starts, we can't stop it," says Canada Post. Ask the seller to [send it again or refund you](guide:returned-to-sender).
 
@@ -143,8 +141,10 @@ Don't count on stopping it: "Once the return process starts, we can't stop it," 
 - [FedEx: Package not moving](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/package-not-moving.html) – 24 hours
 - [FedEx: Missed delivery](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/missed-delivery.html) – 7 days
 - [FedEx: Reattempt delivery](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/reattempt-delivery.html) – next day, hours
-- [Royal Mail: Tracking terms explained](https://www.royalmail.com/help/postage-tracking-terms-explained) – statuses
-- [Royal Mail: What happens if we can't deliver](https://help.royalmail.com/personal/s/article/What-happens-if-Royal-Mail-can-t-deliver) – 18 and 21 days, returns centre
+- [Royal Mail: Tracking terms explained](https://www.royalmail.com/help/postage-tracking-terms-explained) – Internal exception occurred
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail status wordings
+- [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's red card
+- [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – about 3 weeks with a bill to pay
 - [Evri: How do I track my parcel?](https://www.evri.com/faqs/receiving-a-parcel/how-do-i-track-my-parcel) – 1 to 3 days, card
 - [Evri: Can I collect my parcel?](https://www.evri.com/faqs/receiving-a-parcel/can-i-collect-my-parcel) – three attempts
 - [Evri: ParcelShop delivery](https://www.evri.com/our-services/parcelshop-delivery) – 10 days

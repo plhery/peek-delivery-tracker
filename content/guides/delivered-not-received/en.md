@@ -11,9 +11,8 @@ If tracking says delivered but you haven't received the parcel, don't assume it'
 
 ## Why does it say delivered when there's no package?
 
-Because "delivered" records where the driver left the parcel, not that you have it. Three things can explain it:
+Because "delivered" records where the driver left the parcel, not that you have it. Two things can explain it:
 
-- **It was scanned by mistake.** It happens: [Royal Mail](carrier:royal-mail) mentions "a rare scanning error".
 - **It's somewhere you haven't looked.** A neighbour, a safe place, a locker or a mailroom all count as delivered.
 - **It went astray.** A wrong address on the order, the wrong door, or a thief.
 
@@ -22,7 +21,7 @@ Where each carrier may leave it:
 | Carrier | Also counts as delivered |
 | --- | --- |
 | [USPS](carrier:usps) | A parcel locker (key in your mailbox), building management, a porch, garage or back entrance, under a mat |
-| Royal Mail | A neighbour, your chosen Safeplace, or the post room at work |
+| [Royal Mail](carrier:royal-mail) | A safe place or a neighbour, automatically if you don't answer the door |
 | [Evri](carrier:evri) | A neighbour, or a Safe Place, which must not be "an exposed doorstep or otherwise in public view" |
 | [DPD UK](carrier:dpd-uk) | A neighbour, automatically if you're out, or a safe place you asked for |
 | [Canada Post](carrier:canada-post) | A parcel locker (key in your mailbox), a concierge or a mailroom |
@@ -35,7 +34,7 @@ Tracking never said delivered? See [why tracking stops updating](guide:tracking-
 :::steps
 - Read the proof | Look for a photo, who signed or a neighbour's name, and check the address on your order.
 - Search the usual spots | Ask everyone at home. Check the letterbox, neighbours, porch, bins and mailroom, and look for a locker key or a card.
-- Give it a day | An extra day for Royal Mail, one postal business day for USPS.
+- Give it a day | USPS, for one, asks you to wait one postal business day.
 - Report it to the seller | Give the [order and tracking numbers](guide:find-tracking-number) and what you checked. Ask for a trace, then a resend or refund.
 - Open a case in time | On a marketplace, before the window closes: 2 days on Vinted (14 from a Pro seller), 30 on eBay and Etsy.
 - Then your card | If nobody sorts it out, dispute the payment within your card issuer's time limit.
@@ -45,7 +44,7 @@ Tracking never said delivered? See [why tracking stops updating](guide:tracking-
 
 ## Who is responsible: the seller, the carrier or you?
 
-If you bought from a business, deal with the seller: most carriers send recipients back to the sender anyway. Royal Mail puts it plainly: "If you're the recipient please contact the sender".
+If you bought from a business, deal with the seller: most carriers send recipients back to the sender anyway. Citizens Advice puts it plainly: contact the seller before the delivery company, as "you'll usually get a better result".
 
 :::journey
 - shop | Seller | Books and pays the carrier: it's the carrier's customer.
@@ -72,10 +71,10 @@ It's on you instead when:
 ## What proof of delivery can you ask for?
 
 - **A photo.** Evri, DPD UK and [FedEx](carrier:fedex) show one when the driver took one. In the US, Amazon's Photo-on-Delivery shows parcels left by its delivery partners' drivers.
-- **A name or signature.** Royal Mail asks if you "recognise the name of the person who accepted the item"; Canada Post's tracking shows who signed, if anyone did.
+- **A name or signature.** Royal Mail's `Delivered to Neighbour/Reception by` goes on to name who took it in; Canada Post's tracking shows who signed, if anyone did.
 - **Rarely a GPS pin.** Of the carriers whose pages we read, only [Planzer](carrier:planzer), in Switzerland, says its proof photo is GPS-tagged; USPS speaks of a recorded "delivery location".
 
-If you dispute it, you may be asked to sign a statement: a "Denial of Receipt" at DPD UK, a "declaration of non-receipt" at Royal Mail.
+If you dispute it, you may be asked to sign a statement, such as a "Denial of Receipt" at DPD UK.
 
 ## How long do eBay, Etsy and Vinted give you?
 
@@ -102,7 +101,7 @@ Sometimes, but [compensation usually goes to the sender](guide:lost-parcel), so 
 | USPS | After one postal business day, send your local Post Office a service request. Insured items: you or the sender can claim, with the mailing receipt | Lost: from 15 days (7 for Priority Mail Express) to 60 days after mailing |
 | [UPS](carrier:ups) | File as a guest, unless the shipper blocked it or you let the driver release it. Payment goes to the shipper | Within 60 days of the scheduled delivery |
 | FedEx | "Report Missing Package" in Manage Delivery, or file a claim yourself | Within 9 months of the shipment date |
-| Royal Mail | Claim for 1st and 2nd Class, Signed For and Special Delivery (a sender's claim comes first). Tracked 24 and 48: the sender only | Within 80 days of posting |
+| Royal Mail | Claim as the sender or the recipient, except for Tracked 24 and 48: the sender only | Within 80 days of posting (6 months if sent abroad) |
 | DPD UK | None: "only the contract holder can register a claim" | Not stated |
 | Australia Post | Make an enquiry, with a free MyPost account | Domestic: from 10 business days after the expected date |
 
@@ -130,9 +129,8 @@ No. [Peek](/) shows only what the carrier publishes and can't contact a carrier 
 You can, though none of the rules above require it for a refund. Citizens Advice says the police may not recover the parcel, but a report is worth mentioning in a claim. In the US, report mail theft to the Postal Inspection Service: 1-877-876-2455.
 
 :::sources
-- [Royal Mail: Delivered but not received](https://www.royalmail.com/help/item-shown-as-delivered-but-has-not-been) – extra day, name, sender
-- [Royal Mail: Compensation for loss](https://www.royalmail.com/retail-compensation-policy-loss) – who claims, 80 days
-- [Citizens Advice: Claiming from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – Tracked 24/48
+- [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – who claims, Tracked 24/48, 80 days, 6 months
+- [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's safe place or neighbour
 - [USPS: Where is my package?](https://faq.usps.com/articles/FAQ/Where-is-my-package) – business day, lockers
 - [USPS: Claims](https://www.usps.com/help/claims.htm) – 15 to 60 days
 - [UPS: File a claim](https://www.ups.com/us/en/support/file-a-claim) – 60 days, guests, driver release
@@ -161,7 +159,7 @@ You can, though none of the rules above require it for a refund. Citizens Advice
 - [CCPC: Chargeback](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/disputed-card-transactions-chargeback) – 90 to 120 days
 - [Citizens Advice: Order not arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – agreed places
 - [Citizens Advice: Card or PayPal](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/getting-your-money-back-if-you-paid-by-card-or-paypal/) – section 75
-- [Citizens Advice: Lost or delayed post](https://www.citizensadvice.org.uk/consumer/post-and-parcels/damaged-lost-delayed-post-or-parcel/) – police
+- [Citizens Advice: Lost or delayed post](https://www.citizensadvice.org.uk/consumer/post-and-parcels/damaged-lost-delayed-post-or-parcel/) – seller first, police
 - [FTC: Mail Order Rule](https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule) – reshipping
 - [FTC: Billed for things you never got](https://consumer.ftc.gov/articles/what-do-if-youre-billed-things-you-never-got-or-you-get-unordered-products) – 60 days
 - [Cornell LII: 15 U.S.C. § 1666](https://www.law.cornell.edu/uscode/text/15/1666) – goods sent
@@ -171,4 +169,5 @@ You can, though none of the rules above require it for a refund. Citizens Advice
 - [Consumer Affairs Victoria: Missing in transit](https://www.consumer.vic.gov.au/consumers-and-businesses/products-and-services/problems-with-a-product/products-missing-or--damaged-in-transit) – seller's job
 - [ACCC: Not receiving what you paid for](https://www.accc.gov.au/consumers/buying-products-and-services/not-receiving-products-or-services-that-are-paid-for) – supply on time
 - [ACCC: Buying online](https://www.accc.gov.au/consumers/buying-products-and-services/buying-online) – time limits
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail status wordings
 :::

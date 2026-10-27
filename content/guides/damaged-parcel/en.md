@@ -4,7 +4,7 @@ description: What to do if a parcel arrives damaged: the photos to take, when to
 slug: parcel-arrived-damaged
 picture: A dented box with a torn corner and its tape peeling off, a phone photographing it with a flash, and a worried Pip with a plaster stuck on him.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 If a parcel arrives damaged, photograph it before you unpack any further, keep the box and everything in it, and tell the seller the same day. If you bought from a business in the UK, Ireland or the EU, the seller owes you an item in good condition, and claiming from the carrier is their job. If the box is already crushed, torn or wet at the door, you can usually refuse it.
@@ -49,7 +49,7 @@ Most carriers deal only with the sender, so your claim usually goes through the 
 | [USPS](carrier:usps) | Sender or recipient, insured items only | 60 days after mailing | Nothing if uninsured |
 | [UPS](carrier:ups) | Shipper; recipient as a guest unless the shipper blocks it | 60 days after the scheduled delivery | – (paid to the shipper) |
 | [FedEx](carrier:fedex) (US) | Shipper or recipient | 60 calendar days after shipment (21 international) | – |
-| [Royal Mail](carrier:royal-mail) | Sender or recipient; Tracked 24 and 48: sender only | 80 days after posting; 30 for Tracked 24 and 48 | Up to £20 (1st, 2nd Class, Signed For), £75 (Tracked 24 and 48) |
+| [Royal Mail](carrier:royal-mail) | Sender or recipient; Tracked 24 and 48: sender only | 80 days after posting (6 months if sent abroad) | Up to £20 (1st, 2nd Class, Signed For), £75 (Tracked 24 and 48) |
 | [Evri](carrier:evri) | Sender | 28 days after the order (binding on business senders) | Up to £20 |
 | [DPD UK](carrier:dpd-uk) | Sender | 14 days after despatch | Up to £100 |
 | [An Post](carrier:an-post), business senders | Sender | 30 days after posting | Nothing for standard parcels |
@@ -60,9 +60,9 @@ Many carriers on the Continent give about a week from delivery: 7 days at [DHL P
 
 ### How to claim for a damaged parcel from Royal Mail
 
-Sender or recipient can claim, but the sender's claim comes first and only one of you is paid. You need photos of how the parcel looked on arrival, and the packaging with its postmark proves posting.
+Sender or recipient can claim, except for Tracked 24 and 48, where only the sender can. You need photos of how the parcel looked when it arrived, and the packaging with its postmark proves posting. To be paid more for a valuable item, you need original proof of its value, such as a receipt or a repair quote.
 
-Royal Mail pays the repair cost or the item's value for damage that "reasonably impairs the material function or contents", and answers within 30 days. If you disagree, Citizens Advice points to the Postal Review Panel, then POSTRS, an independent scheme.
+Royal Mail answers within 30 days (90 for an item sent abroad). If you disagree, Citizens Advice points to the Postal Review Panel, then POSTRS, an independent scheme.
 
 ### How to claim for a damaged package from USPS
 
@@ -82,7 +82,7 @@ Yes, to the shipper, and it pays the shipper. You can file as a guest within 60 
 
 Usually, yes, at the door or the pickup counter. The parcel goes back to the sender, who deals with the carrier, and a shop still owes you a sound item or your money back. Its trip back is in [returned to sender](guide:returned-to-sender).
 
-Refuse when the damage has probably reached the contents: crushed, holed, soaked or opened. A scuffed corner on an intact box isn't worth the delay, and Royal Mail doesn't pay for "cosmetic damage to the envelope or packaging".
+Refuse when the damage has probably reached the contents: crushed, holed, soaked or opened. A scuffed corner on an intact box isn't worth the delay.
 
 eBay is the exception: its Money Back Guarantee covers a refused parcel only if postage was owing. For a damaged one, eBay says to accept it and report that the item doesn't match the listing.
 
@@ -108,7 +108,7 @@ Switzerland is stricter. Swiss Post says accepting a parcel without reservation 
 
 Vinted also wants every side of the packaging; USPS wants a repair estimate. Add your invoice to prove what the item was worth.
 
-Keep everything. USPS says: "Do not throw out damaged items, even after you photograph them." Royal Mail may not pay if it can't inspect the packaging and contents, and Canada Post may ask you to send the item in.
+Keep everything. USPS says: "Do not throw out damaged items, even after you photograph them." Canada Post may ask you to send the item in.
 
 ## How long do you have to report a damaged parcel?
 
@@ -132,8 +132,7 @@ If the seller won't help, a card dispute may. In the US, your written dispute mu
 - [UPS: File a claim](https://www.ups.com/us/en/support/file-a-claim) – 60 days, guests, photos
 - [USPS: File a claim](https://www.usps.com/help/claims.htm) – insured items, 60 days
 - [FedEx: Claims](https://www.fedex.com/en-us/customer-support/claims.html) – 60 and 21 days
-- [Royal Mail: Compensation for damage](https://www.royalmail.com/retail-compensation-policy-damage) – 80 and 30 days, cosmetic damage
-- [Citizens Advice: Claiming from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – who claims, limits
+- [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – who claims, 80 days, 6 months, limits, photos, postmark, proof of value, 30 and 90 days
 - [Citizens Advice: Damaged, lost or delayed post](https://www.citizensadvice.org.uk/consumer/post-and-parcels/damaged-lost-delayed-post-or-parcel/) – seller first, POSTRS
 - [Evri: Terms and conditions](https://www.evri.com/terms-and-conditions) – 28 days, £20
 - [DPD UK: Standard Terms and Conditions of Carriage](https://www.dpd.co.uk/pdf/dpd-stcc.pdf) – 14 days, £100

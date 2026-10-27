@@ -54,7 +54,7 @@ What each carrier lets you change, and what it costs:
 | [USPS](carrier:usps) (Delivery Instructions) | A spot at your address, a neighbour on the same street and route, Hold for Pickup at your Post Office, another address or Post Office | Free, except another address or Post Office: you pay the postage |
 | [UPS](carrier:ups) My Choice (US) | Your neighbour, a safe place, another day, another address, a UPS Access Point | Basic is free; each change costs $9.99 for another day, $14.99 for another address, $5.99 for an Access Point. Premium ($19.99 a year) includes them |
 | [FedEx](carrier:fedex) Delivery Manager (US) | A FedEx retail location, another residence, an evening or 2-hour window | Pickup free; another residence within 120 miles $5.55, further $14.50 to $33.50 |
-| [Royal Mail](carrier:royal-mail) | Another day, one named neighbour, a Safeplace where offered, your local Post Office or Delivery Office. No new address before a first attempt | No fee stated |
+| [Royal Mail](carrier:royal-mail) | Another day, depending on what's being delivered. If you don't answer, your safe place (set in its app; Parcelforce uses it too) or a neighbour | No fee stated |
 | Evri | A neighbour, a safe place, a ParcelShop or Evri Locker where offered. No new address: "contact your sender or retailer" | No fee stated |
 | [DPD UK](carrier:dpd-uk) | Another day, a safe place, a neighbour, a Pickup shop. A new address goes through the sender | No fee stated |
 | [DPD Ireland](carrier:dpd-ie) | Another address up to the day before, another date, a safe place, a Pickup Point | No fee stated |
@@ -73,7 +73,7 @@ At Canada Post, redirecting a parcel is a business service for senders ($13 plus
 
 ## Can I reschedule the delivery day?
 
-Often, and more easily than the address. UPS charges $9.99 per parcel on My Choice Basic. Royal Mail, DPD UK and DPD Ireland let you pick another date online. FedEx sells a 5 to 8 p.m. slot on the planned day for $5.55, or a 2-hour window up to 7 days after the original date for $11.50.
+Often, and more easily than the address. UPS charges $9.99 per parcel on My Choice Basic. DPD UK and DPD Ireland let you pick another date online, and Royal Mail may let you, depending on what's being delivered. FedEx sells a 5 to 8 p.m. slot on the planned day for $5.55, or a 2-hour window up to 7 days after the original date for $11.50.
 
 Going away? USPS Hold Mail keeps everything at your Post Office for 3 to 30 days, and FedEx Delivery Manager has a free vacation hold of up to 14 days.
 
@@ -85,7 +85,7 @@ A missing or greyed-out option usually means one of these:
 
 - **The sender switched them off.** Australia Post says so: "the sender has opted out of allowing redirect requests".
 - **It's out for delivery.** USPS, Canada Post and Australia Post ("onboard for delivery") stop there. Evri lets you divert "up until the courier reaches your doorstep".
-- **It needs a signature or ID.** USPS excludes items needing a delivery signature, Royal Mail Special Delivery has no Safeplace or neighbour, and Canada Post's preference skips signature and proof-of-age parcels.
+- **It needs a signature or ID.** USPS excludes items needing a delivery signature, and Canada Post's preference skips signature and proof-of-age parcels.
 - **Cash or duty is due.** USPS excludes Collect on Delivery, and in Canada a parcel with duty and taxes owed goes to the post office.
 - **It's international or headed far away.** USPS Delivery Instructions don't cover international mail, and Royal Mail changes the address only after a missed delivery, within the same postcode district (SE21, not SE22).
 - **The carrier doesn't do new addresses.** Evri and DPD UK send you back to the sender.
@@ -118,7 +118,7 @@ Often, if the carrier has lockers and the sender allows it: Evri where available
 
 Check the address before you pay, or choose a pickup point or locker at checkout. Give the shop your email and mobile number: An Post and Australia Post need them to offer you options, and DPD Ireland to send its notices. Turn on notifications in [Peek](/) or the carrier's app, so you can act before the parcel is out for delivery.
 
-Standing preferences help: a Royal Mail Safeplace, Evri's MyPlaces, or a UPS My Choice Access Point preference, which sends every parcel to an Access Point at no charge.
+Standing preferences help: a safe place set in the Royal Mail app, Evri's MyPlaces, or a UPS My Choice Access Point preference, which sends every parcel to an Access Point at no charge.
 
 :::sources
 - [About Amazon UK: How to change your delivery address on Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-change-your-delivery-address-on-amazon) – no change on Amazon's own orders, cancel and reorder, 30 minutes for third-party sellers on desktop, the carrier after dispatch
@@ -132,7 +132,7 @@ Standing preferences help: a Royal Mail Safeplace, Evri's MyPlaces, or a UPS My 
 - [UPS: UPS My Choice](https://www.ups.com/us/en/track/ups-my-choice) – Basic and Premium fees
 - [UPS: Change My Delivery](https://www.ups.com/us/en/track/change-delivery) – passcode
 - [FedEx: Delivery Manager](https://www.fedex.com/en-us/delivery-manager.html) – fees, holds, shipper restrictions
-- [Royal Mail: Change your delivery options](https://www.royalmail.com/receiving/change-your-delivery-options) – options, services
+- [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's other date, safe place in the app, neighbour
 - [Royal Mail Help: Change delivery options](https://help.royalmail.com/personal/s/article/Change-delivery-options) – sender's choices, no new address before a card, same postcode district
 - [Royal Mail: Redirection](https://www.royalmail.com/personal/receiving-mail/redirection) – price and durations
 - [Post Office: Redirection](https://www.postoffice.co.uk/mail/redirection) – £45.00 for 3 months, £95.00 for 12

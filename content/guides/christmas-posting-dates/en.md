@@ -4,12 +4,12 @@ description: When to send for Christmas with Royal Mail, Evri, USPS, UPS, FedEx,
 slug: christmas-posting-dates
 picture: A December calendar page with one day circled, a van carrying a red-ribboned parcel through falling snow, and Pip hurrying alongside.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Royal Mail hasn't published its 2026 Christmas dates yet: in 2025, the last days to post in the UK were Wednesday 17 December for 2nd Class, Saturday 20 December for 1st Class and Tuesday 23 December for Special Delivery Guaranteed. In the US, USPS says to send by Thursday 17 December 2026 with Ground Advantage or First-Class Mail, and by Saturday 19 December with Priority Mail Express. The tables below give each carrier's own deadline as checked on Friday 9 October 2026, with last year's date where this year's is not out yet.
 
-## United Kingdom: Royal Mail, Parcelforce, Evri and InPost
+## United Kingdom: Royal Mail, Evri and InPost
 
 UK carriers haven't put their 2026 dates on their own pages yet (Royal Mail: "Last posting dates coming soon"), so most dates here are last year's, for UK addresses.
 
@@ -20,14 +20,11 @@ UK carriers haven't put their 2026 dates on their own pages yet (Royal Mail: "La
 | Royal Mail | 1st Class, 1st Class Signed For | Not announced yet (2025: Saturday 20 December) |
 | Royal Mail | Tracked 24 | Not announced yet (2025: Sunday 21 December) |
 | Royal Mail | Special Delivery Guaranteed | Not announced yet (2025: Tuesday 23 December) |
-| Royal Mail | Letters to Santa, for a reply | Wednesday 9 December |
-| [Parcelforce](carrier:parcelforce) | express48 | Not announced yet (2025: Friday 19 December) |
-| Parcelforce | express10, expressAM, express24 | Not announced yet (2025: Monday 22 December) |
 | [Evri](carrier:evri) | Standard, UK mainland | Not announced yet (2025: Friday 19 December) |
 | Evri | Next Day, UK mainland, drop-off by 11am | Not announced yet (2025: Saturday 20 December) |
 | [InPost](carrier:inpost) | Drop-off at a locker or shop | Not announced yet (2025: Saturday 20 December) |
 
-Royal Mail and Parcelforce say their dates can change. Parcelforce's own page names "expressPM" where Royal Mail's 2025 leaflet names "expressAM", with the same date. [DPD UK](carrier:dpd-uk)'s pages show no Christmas cut-off for UK deliveries.
+[DPD UK](carrier:dpd-uk)'s pages show no Christmas cut-off for UK deliveries.
 
 ## United States: USPS, UPS and FedEx
 
@@ -96,7 +93,7 @@ USPS notes that Hanukkah, from Friday 4 to Saturday 12 December, is earlier this
 
 ## Sending a parcel abroad for Christmas
 
-International dates come earlier, and carriers ask you to post as early as you can. Royal Mail and Parcelforce give no Christmas date per country, and warn that recent changes to customs procedures may slow gifts to the USA.
+International dates come earlier than domestic ones.
 
 | From | Carrier and service | Send by |
 | --- | --- | --- |
@@ -126,8 +123,8 @@ Sent after the last date? Australia Post delivers such items as quickly as it ca
 
 | Carrier | Days off, Christmas 2026 |
 | --- | --- |
-| Royal Mail | No collections or deliveries on Friday 25, Saturday 26 and Monday 28 December |
-| DPD UK | Closed the same three days in Great Britain |
+| Royal Mail | No post on bank holidays: Friday 25 and Monday 28 December |
+| DPD UK | Closed Friday 25, Saturday 26 and Monday 28 December in Great Britain |
 | UPS | Normal delivery on Thursday 24 December, none on Friday 25 December |
 | FedEx | Modified service on Thursday 24 December, closed on Friday 25 December |
 | Australia Post | No deliveries on Christmas Day or Boxing Day |
@@ -144,14 +141,12 @@ Waiting for a gift? Paste its number into [Peek](/) and set its notifications to
 
 :::sources
 - [Royal Mail: Christmas](https://www.royalmail.com/christmas) – 2026 dates coming soon
-- [Royal Mail: Christmas last posting dates](https://www.royalmail.com/christmas/last-posting-dates) – 2025 dates, abroad
-- [Royal Mail: Letters to Santa](https://www.royalmail.com/christmas/letters-to-santa) – 9 December 2026
-- [Royal Mail: Service update](https://www.royalmail.com/service-update) – 2026 days off
-- [Parcelforce: Christmas dates](https://www.parcelforce.com/christmas-dates) – 2025 dates, abroad
-- [Royal Mail: Christmas 2025 posting dates (PDF)](https://www.royalmail.com/sites/royalmail.com/files/2025-11/RM-and-PFW-LPDs-for-Christmas-2025-Consumer-NOV-v2.pdf) – Parcelforce expressAM
+- [Royal Mail: Christmas last posting dates](https://www.royalmail.com/christmas/last-posting-dates) – 2025 dates
+- [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – no post on bank holidays
+- [GOV.UK: UK bank holidays](https://www.gov.uk/bank-holidays) – 25 and 28 December 2026
 - [Evri: Last posting dates for Christmas 2025](https://www.evri.com/news/last-posting-dates-for-christmas-2025) – 2025 dates, service status
 - [InPost: Christmas drop-off date](https://inpost.co.uk/blog/do-they-know-its-xs-mas-time) – 2025 date
-- [DPD UK: Delivery schedule](https://www.dpd.co.uk/content/about_dpd/delivery_schedule.jsp) – 2026 days off
+- [DPD UK: Delivery schedule](https://www.dpd.co.uk/content/about_dpd/delivery_schedule.jsp) – 2026 days off in Great Britain
 - [USPS: Holiday shipping deadlines](https://www.usps.com/holiday/holiday-shipping-dates.htm) – 2026 dates, Hanukkah
 - [UPS: Holiday shipping schedule](https://www.ups.com/us/en/support/shipping-support/shipping-services/holiday-shipping-schedule) – 2026 dates, days off
 - [FedEx: Last days to ship](https://www.fedex.com/en-us/holiday/last-days-to-ship.html) – days off, service alerts

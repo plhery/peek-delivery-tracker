@@ -7,13 +7,13 @@ published: 2026-10-14
 updated: 2026-10-27
 ---
 
-If nobody collects a parcel from a post office, parcel shop or locker, it goes back to the sender once its last day has passed. Post offices hold parcels longest (Royal Mail 18 days, USPS usually 15, [Canada Post](carrier:canada-post) 15 calendar days), while many lockers give you only 2 or 3. The date on your card, text or email is the one that counts, and if you've missed it, ask the shop for a refund or to send it again.
+If nobody collects a parcel from a post office, parcel shop or locker, it goes back to the sender once its last day has passed. Post offices hold parcels longest (USPS usually 15 days, [Canada Post](carrier:canada-post) 15 calendar days), while many lockers give you only 2 or 3. The date on your card, text or email is the one that counts, and if you've missed it, ask the shop for a refund or to send it again.
 
 Locker code never came, or the locker was full? That's in [parcel lockers](guide:parcel-lockers).
 
 ## What happens if a parcel is not collected?
 
-It goes back to the sender, usually by the same service.
+It goes back to the sender.
 
 :::journey
 - home | Notice | A card, text or email gives the last day.
@@ -22,7 +22,6 @@ It goes back to the sender, usually by the same service.
 - shop | Sender | Decides whether to refund you or send it again.
 :::
 
-- **[Royal Mail](carrier:royal-mail)** returns it to the sender's address. With no return address, it goes to the National Returns Centre, which opens it to find a sender and disposes of it after a month unclaimed.
 - **[UPS](carrier:ups)** returns it "as undeliverable" after 7 calendar days at an Access Point. **[FedEx](carrier:fedex)** returns it to the shipper after up to 7 days.
 - **Canada Post** charges the sender for the return trip.
 - **[Mondial Relay](carrier:mondial-relay)** sends it back, at its own cost, to the locker or Point Relais where the sender dropped it off.
@@ -35,12 +34,10 @@ Once the parcel is on its way back, [returned to sender](guide:returned-to-sende
 | Country | Post office after a missed delivery | Parcel shop or counter | Locker |
 | --- | --- | --- | --- |
 | US | USPS: usually 15 days (Priority Mail Express 5 calendar days); FedEx location: up to 7 days | UPS Access Point: 7 calendar days | Amazon Locker: 3 calendar days |
-| UK | Royal Mail: 18 days, 21 with a customs charge; Parcelforce at a Post Office: 15 to 18 days | Evri ParcelShop: 10 days; Post Office for Amazon, DHL and DPD: 7 days | Evri: 3 days; InPost: 3 days; Amazon Locker: 3 calendar days |
+| UK | [Royal Mail](carrier:royal-mail) or [Parcelforce](carrier:parcelforce), with a customs bill to pay: about 3 weeks | [Evri](carrier:evri) ParcelShop: 10 days | Evri: 3 days; InPost: 3 days; Amazon Locker: 3 calendar days |
 | Ireland | An Post: 5 working days, 3 for registered post, 16 from abroad | – | An Post: 48 hours, then 5 more days at the depot |
 | Canada | Canada Post: 15 calendar days | – | – |
 | Australia | [Australia Post](carrier:australia-post): 10 business days | – | 2 business days, then 10 business days at a Post Office |
-
-For [Parcelforce](carrier:parcelforce), the [Post Office](https://www.postoffice.co.uk/mail/collection-services) says 18 days on two of its pages and 15 on a third, so go by the date you're sent. At a Post Office, Amazon, DHL and DPD parcels get 7 days from the day they reach the branch, and [Evri](carrier:evri) parcels get 10.
 
 A locker parcel can get a second clock. At [Australia Post](https://auspost.com.au/personal/receiving/parcel-deliveries/parcel-lockers), after 2 business days in a Parcel Locker it moves to the nearest Post Office, with a message and 10 more business days. At [An Post](carrier:an-post), it goes back to the delivery depot after 48 hours and waits 5 more days there.
 
@@ -54,13 +51,13 @@ Calendar days count weekends and holidays. Working and business days leave out S
 
 ## Why would a parcel be held at the post office?
 
-Either you chose a pickup point at checkout, or a delivery failed: nobody was in to sign, or there was something to pay. Royal Mail holds items it couldn't deliver, items with postage left to pay and, for 21 days, items with a customs charge.
+Either you chose a pickup point at checkout, or a delivery failed: nobody was in to sign, or there was something to pay. With VAT or duty to pay, Royal Mail, Parcelforce or the courier sends you a bill and holds the parcel for about 3 weeks, then returns it to the sender.
 
-The tracking then says something like `Available for Pickup` (USPS), `Ready for collection` (Royal Mail) or `Awaiting collection` (Australia Post). [Tracking statuses](guide:tracking-statuses) explains each one, and [missed delivery](guide:missed-delivery) covers the card at your door and the ID to bring. If there's a charge, [customs](guide:customs) explains who wants it and why.
+The tracking then says something like `Available for Pickup` (USPS), `Available for Redelivery or Collection` (Royal Mail) or `Awaiting collection` (Australia Post). [Tracking statuses](guide:tracking-statuses) explains each one, and [missed delivery](guide:missed-delivery) covers the card at your door and the ID to bring. If there's a charge, [customs](guide:customs) explains who wants it and why.
 
 ## What to do if you can't collect your parcel in time
 
-Extra time is rare. Royal Mail, Evri, An Post, Canada Post and Australia Post mention no extension, and InPost UK says it "cannot extend your collection time". Canada Post can't move a parcel once it's there either.
+Extra time is rare. Evri, An Post, Canada Post and Australia Post mention no extension, and InPost UK says it "cannot extend your collection time". Canada Post can't move a parcel once it's there either.
 
 A few European carriers do give more time. [Swiss Post](carrier:swiss-post) lets you [extend for free online](https://www.post.ch/en/receiving-mail/collection-note), with no account. InPost in Poland sells 24 more hours for 7.99 zł in its app, before the first 48 hours run out, and you can buy it more than once.
 
@@ -108,10 +105,9 @@ A locker or mailroom counts as delivered. See [delivered but not received](guide
 - [USPS: Redelivery, the basics](https://faq.usps.com/s/article/Redelivery-The-Basics) – usually 15 days, second notice, 2 days for redelivery
 - [UPS: How to use an InfoNotice](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – Access Point 7 calendar days, then returned
 - [FedEx: Hold at location](https://www.fedex.com/en-us/shipping/hold-at-location.html) – up to 7 days, then returned
-- [Royal Mail: What happens if Royal Mail can't deliver](https://www.royalmail.com/help/what-happens-if-royal-mail-cant-deliver) – 18 and 21 days, Redelivery, returns, National Returns Centre
-- [Post Office: Parcel collection](https://www.postoffice.co.uk/mail/collection-services) – 7 days for Amazon, DHL, DPD; 10 for Evri; 18 for Parcelforce
-- [Post Office: Missed delivery](https://www.postoffice.co.uk/mail/missed-delivery) – Royal Mail and Parcelforce 18 days
-- [Post Office: Parcel collections FAQs](https://www.postoffice.co.uk/help-support/posting/royalmail/parcel-collections-faqs) – Parcelforce 15 days
+- [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – the bill, about 3 weeks, then back to the sender
+- [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail redelivery on its website
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail status wordings
 - [Evri: ParcelShop delivery](https://www.evri.com/our-services/parcelshop-delivery) – 10 days, then returned
 - [Evri: Lockers](https://www.evri.com/faqs/lockers/can-i-get-my-parcel-delivered-to-a-locker) – 3 days, barcode
 - [InPost UK: Collect in 3 days](https://inpost.co.uk/blog/collect-in-3-days) – no extension, retailer decides

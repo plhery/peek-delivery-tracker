@@ -1,10 +1,10 @@
 ---
 title: Parcel scam texts: how to spot a fake delivery message
-description: How to tell a parcel scam text from a real one, what Royal Mail, USPS, Evri, DPD and others really send, and what to do if you clicked or paid.
+description: How to tell a parcel scam text from a real one, what USPS, Evri, DPD, An Post and other carriers really send, and what to do if you clicked or paid.
 slug: parcel-scam-text
 picture: A phone showing a text with a warning triangle and a fishing hook on its link, a crossed-out coin, and a worried Pip with a raised stop hand in his speech bubble.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 A text or email saying your parcel is on hold, needs a small fee or a corrected address, with a link to sort it out, is almost always a scam. Don't tap anything: open the carrier's website or app yourself and track the number from the shop's own shipping email. If you already typed in card details, call your bank now on the number on the back of your card (in the UK, dial 159).
@@ -13,9 +13,9 @@ A text or email saying your parcel is on hold, needs a small fee or a corrected 
 
 A fake usually shows several of these:
 
-- **You never asked for updates.** Royal Mail only texts or emails you if the sender asked for tracking updates when posting. USPS only texts if you requested tracking yourself, and [Canada Post](carrier:canada-post) only if you signed up.
-- **It wants money to deliver.** A redelivery fee, "unpaid shipping fees", a small charge to release the parcel. DPD UK says it "will never ask you to pay a 'redelivery fee' via a link", An Post never charges to redeliver, and Royal Mail never asks for an underpaid postage fee by text or email: it leaves a grey `Fee to pay` card.
-- **It hurries you.** "Within 24 hours", "within 48 hours", "or your parcel will be returned". As Royal Mail puts it: "Scammers often create urgency. Royal Mail does not." An Post says it never tells you to "act now".
+- **You never asked for updates.** USPS only texts if you requested tracking yourself, and [Canada Post](carrier:canada-post) only if you signed up.
+- **It wants money to deliver.** A redelivery fee, "unpaid shipping fees", a small charge to release the parcel. DPD UK says it "will never ask you to pay a 'redelivery fee' via a link", An Post never charges to redeliver, and Evri never asks for payment to reschedule a delivery.
+- **It hurries you.** "Within 24 hours", "within 48 hours", "or your parcel will be returned". An Post says it never tells you to "act now".
 - **The link isn't the carrier's own.** Shortened links (bit.ly), look-alikes such as `fedx.com` or `unitedparcelservices.com` (FedEx's and UPS's own examples), and new endings like `.shop`, which FedEx currently warns about.
 - **The sender is a mobile number or an email address.** Evri texts only ever come from "Evri", and DPD UK's usually show "DPD UK", "DPD Local" or "DPDgroup UK". DPD UK says a random number or an address like random123@icloud.com in their place means a scam.
 - **It asks you to reply "Y", call a number or install an app,** or greets you as "Dear Customer", which DPD UK says it never writes.
@@ -36,7 +36,7 @@ Scam links often start with the carrier's name. What counts is the end of the ad
 
 Even if a link looks right, type the carrier's address yourself.
 
-## Do Royal Mail, USPS, Evri and DPD send texts?
+## Do USPS, Evri, DPD and other carriers send texts?
 
 Yes, most do, which is why fakes work. Here's what each says it sends, and what it never does:
 
@@ -45,20 +45,19 @@ Yes, most do, which is why fakes work. Here's what each says it sends, and what 
 | [USPS](carrier:usps) | Only if you asked for tracking; Text Tracking uses short code 28777 | Put a link in those texts, or charge for the service |
 | [UPS](carrier:ups) | Emails with an "epackage" link, which always starts with `https://ftp2.ups.com` | Ask for payment or personal details unprompted |
 | [FedEx](carrier:fedex) | May send a secure link to pay duties on an international parcel | Ask for payment or personal details to release a parcel |
-| [Royal Mail](carrier:royal-mail) | Only if the sender asked for tracking updates | Ask for an underpaid fee, bank details or passwords by text or email |
 | [Evri](carrier:evri) | Texts from "Evri" with a link to evri.com only | Ask you to reschedule or pay, or to install an app |
 | [DPD UK](carrier:dpd-uk) | Texts usually from "DPD UK", "DPD Local" or "DPDgroup UK" | Ask for a redelivery fee through a link |
 | [An Post](carrier:an-post) | Post Alert texts and emails, using details the shop gave | Send a link asking for payment, or charge to redeliver |
 | Canada Post | Short codes 272727 or 55555, only if you signed up | Ask for card details or payment by text or email |
 | Australia Post | Texts from its registered sender name | Text, email or call to ask for payment or card details |
 
-Real carriers do send links, so a link alone proves nothing either way. The few real payment requests are nearly all for import charges, such as FedEx's link to pay duties or Royal Mail's customs fee text: the [customs guide](guide:customs) shows how carriers really ask for them.
+Real carriers do send links, so a link alone proves nothing either way. The few real payment requests are nearly all for import charges, such as FedEx's link to pay duties: the [customs guide](guide:customs) shows how carriers really ask for them.
 
 ## What do fake delivery texts say?
 
 Fakes recycle a few scripts. These are quoted from carriers' warning pages:
 
-- **Missed delivery, pay to rebook.** "We couldn't deliver your package — please pay a fee" (Royal Mail).
+- **Missed delivery, pay to rebook.** A fake "missed parcel" message, often badly worded: "is missed delivery" (Evri).
 - **Address problem.** "Shipment has been suspended due to missing house number", "Update your correct address", "verify your postcode within 48 hours" (Australia Post).
 - **Parcel on hold.** "On hold due to unpaid shipping fees", with a link to pay (Canada Post).
 - **"Reply Y."** Evri and Australia Post explain the trick: replying makes your phone trust the sender, so the link becomes clickable.
@@ -104,7 +103,7 @@ Report a fake delivery text even if you didn't click, then delete it.
 
 | Country | Report the message | Lost money or details |
 | --- | --- | --- |
-| UK | Forward texts to 7726 (free); emails to report@phishing.gov.uk; Royal Mail fakes also to reportascam@royalmail.com (a screenshot, for a text) | Report Fraud, reportfraud.police.uk or 0300 123 2040 (England, Wales, Northern Ireland); Police Scotland on 101 |
+| UK | Forward texts to 7726 (free); emails to report@phishing.gov.uk | Report Fraud, reportfraud.police.uk or 0300 123 2040 (England, Wales, Northern Ireland); Police Scotland on 101 |
 | US | Forward texts to 7726; USPS fakes to spam@uspis.gov with a screenshot; ReportFraud.ftc.gov | Your bank; the FBI's IC3 at ic3.gov |
 | Ireland | To check one with An Post, send an image of it by private message on Facebook or on X (@Postvox) | Your bank, then your local Garda station |
 | Canada | Forward texts to 7726 | Your local police and the Canadian Anti-Fraud Centre, online or 1-888-495-8501 |
@@ -113,12 +112,11 @@ Report a fake delivery text even if you didn't click, then delete it.
 On an iPhone, an iMessage from someone not in your contacts shows **Report Junk** under it; in Google Messages on Android, use **Block and report spam**.
 
 :::sources
-- [Royal Mail: Scam advice](https://www.royalmail.com/help/scam-protection) – when it texts, Fee to pay card, scripts, reporting
 - [U.S. Postal Inspection Service: Smishing](https://www.uspis.gov/news/scam-article/smishing-package-tracking-text-scams) – texts on request, no links, spam@uspis.gov
 - [USPS: Text Tracking FAQ](https://www.usps.com/text-tracking/) – short code 28777
 - [UPS: Protect yourself from fraud](https://www.ups.com/us/en/support/shipping-support/legal-terms-conditions/fight-fraud) – no unsolicited requests, links, callers
 - [FedEx: Report fraud](https://www.fedex.com/en-us/report-fraud.html) – look-alikes, .shop, duties exception
-- [Evri: How to spot and report fraud](https://www.evri.com/cyber-security) – sender, links, reply Y
+- [Evri: How to spot and report fraud](https://www.evri.com/cyber-security) – sender, links, reply Y, no payment to reschedule, missed-parcel wording
 - [DPD UK: Phishing](https://www.dpd.co.uk/content/about_dpd/phishing.jsp) – senders, no redelivery fee, iMessage
 - [An Post: Security](https://www.anpost.com/Security) – no payment links or redelivery fee, reporting
 - [Canada Post: Spam and fraudulent messages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/company-policies/privacy-security/what-do-to-if-you-get-suspicious-email) – short codes, scripts, notice card

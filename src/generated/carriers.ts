@@ -1292,6 +1292,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-sendungsverfolgung",
+      "title": "Packeta Sendungsverfolgung: Z-Nummer, Status und Abholung",
+      "name": "Packeta",
+      "color": "#ba1b02"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "4px-sendungsverfolgung",
@@ -2080,6 +2088,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Hermes seguimiento: paquetes de Alemania a España",
       "name": "Hermes",
       "color": "#0091cd"
+    },
+    {
+      "id": "inpost",
+      "catalog": "inpost",
+      "slug": "inpost-seguimiento",
+      "title": "InPost seguimiento: estados, PIN, Locker y Punto Pack",
+      "name": "InPost",
+      "color": "#ffcc05"
     },
     {
       "id": "paack",

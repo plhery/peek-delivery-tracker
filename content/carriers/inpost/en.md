@@ -3,7 +3,7 @@ title: InPost tracking: numbers, statuses and locker pickup
 description: Track an InPost parcel in the UK, Poland, Italy or Portugal: what the number looks like, what each update means, how long lockers keep it and who to call.
 slug: inpost-tracking
 published: 2026-10-11
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 InPost is a parcel locker network that began in Poland and delivers to lockers, shops and homes in the UK, Poland, Italy, Portugal and beyond. Track a parcel on InPost's site for your country, such as [inpost.co.uk/tracking](https://inpost.co.uk/tracking), or paste the number in the box above. The number comes from the shop or seller; the locker code is something else.
@@ -17,6 +17,7 @@ InPost Italy says the number is in the shop's order emails and InPost's pickup e
 | `JD0000000000000000` | JD and 16 digits: UK. |
 | `JJD0000000000000000` | JJD and 16 digits: UK. |
 | `8YDR000000000` | 8YDR and 9 digits: UK. |
+| `00XXX0000000A000` | Two digits, three letters, seven digits, `A` and three digits: a Yodel label number, UK. |
 | `012345678901234567890123` | 24 digits: Poland and Italy. [bpost](carrier:bpost) and [Ciblex](carrier:ciblex) use it too. |
 | `12345678` | 8 digits: inpost.pl and inpost.pt accept it. Also fits [Mondial Relay](carrier:mondial-relay). |
 
@@ -78,9 +79,11 @@ As listed on 10 October 2026:
 
 ## Tracking an InPost parcel with Peek
 
-[Peek](/) recognises `8YDR` numbers at once. For 24-digit, `JJD` and `JD` numbers it asks InPost whether it knows them (and bpost and Ciblex for 24 digits). Other shapes, 8 digits included, aren't read as InPost's even if you pick InPost by hand; only universal tracking services are then asked. No InPost link can be pasted, and only the number is needed.
+[Peek](/) recognises `8YDR` numbers at once. For 24-digit, `JJD`, `JD` and Yodel label numbers it asks InPost whether it knows them (and Austrian Post and Ciblex for 24 digits). Other shapes, 8 digits included, aren't read as InPost's even if you pick InPost by hand; only universal tracking services are then asked. Links from inpost.pl's tracking page can be pasted, not inpost.co.uk's, and only the number is needed.
 
-It reads InPost's service at inposteasy.com, not yet confirmed to answer for UK `JD`, `JJD` and `8YDR` numbers. You see the status, the newest 20 scans with each town or hub and country on a map, the delivery time and the destination country; InPost gives no expected date. For a 24-digit parcel waiting in a Paczkomat or pickup point, the point's name and address appear once InPost's Polish tracking confirms them, never your code. Statuses come as InPost's service sends them, Polish for Polish parcels, and a parcel waiting at an Italian point may not show "Ready for pickup". Scans without a time zone are left out, and your name, address and phone are never read.
+In Spain, Peek follows InPost under its [Mondial Relay](carrier:mondial-relay) entry (search "InPost Spain") and reads `FV` numbers (FV and 8 digits) on inpost.es. For an 8-, 10- or 12-digit Spanish number, press "Change" and pick Mondial Relay; Peek then searches Mondial Relay's French site, not confirmed to find InPost Spain's parcels.
+
+It reads InPost's service at inposteasy.com, not yet confirmed to answer for UK numbers. You see the status, the newest 20 scans with each town or hub and country on a map, the delivery time and the destination country; InPost gives no expected date. For a 24-digit parcel waiting in a Paczkomat or pickup point, the point's name and address appear once InPost's Polish tracking confirms them, never your code. Peek asks InPost's service for its English wordings, and a parcel waiting at an Italian point may not show "Ready for pickup". Scans without a time zone are left out, and your name, address and phone are never read.
 
 Peek doesn't follow the parcel to another carrier. It checks every 10 minutes by day, every 2 once out for delivery, and hourly overnight, and can notify you of each change.
 

@@ -3,7 +3,7 @@ title: Mondial Relay seguimiento: estados, Punto Pack e InPost
 description: Sigue tu paquete de Mondial Relay en España: dónde está el número, qué significan sus estados en francés, cuánto espera en un Punto Pack y a quién llamar.
 slug: mondial-relay-seguimiento
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Mondial Relay es una empresa francesa de paquetería del grupo InPost que entrega en puntos de recogida, taquillas y a domicilio; en España, InPost adquirió Mondial Relay en 2021 y mondialrelay.es lleva ahora a inpost.es. Para seguir tu paquete, escribe el número de envío de 8 cifras y el código postal del destinatario en [el seguimiento de Mondial Relay](https://www.mondialrelay.fr/suivi-de-colis/), usa [el de InPost](https://www.inpost.es/seguimiento-del-envio/) si te lo envían con InPost España, o pega el número en la casilla de arriba. El número está en la etiqueta y en los correos de Mondial Relay y del remitente.
@@ -25,7 +25,7 @@ Si el correo de la tienda nombra otra empresa, el número seguramente es suyo: m
 
 ## Seguimiento de paquete Mondial Relay: qué significa cada estado
 
-Mondial Relay publica el seguimiento en francés (o en neerlandés, en su web belga), sin versión en español, y Peek muestra tal cual los textos en francés. Los textos del seguimiento de InPost en España no se han podido comprobar. Las líneas más habituales, en orden:
+Mondial Relay publica el seguimiento en francés (o en neerlandés, en su web belga), sin versión en español, y Peek muestra tal cual los textos en francés. Los de InPost España están en español y los explica [la página de InPost](carrier:inpost). Las líneas más habituales, en orden:
 
 | Mondial Relay escribe | Qué significa para ti |
 | --- | --- |
@@ -71,7 +71,7 @@ El contrato lo tiene el remitente, tienda o particular, y Mondial Relay e InPost
 
 Datos consultados el 10 de octubre de 2026:
 
-- **España (InPost):** teléfono gratuito 900 900 137 y +34 938 16 62 34 desde cualquier país, de lunes a viernes de 8:30 a 20:00 y los sábados de 9:00 a 13:00; WhatsApp 692 84 49 95; asistente virtual 24/7 y formulario en [Atención al Cliente de InPost](https://www.inpost.es/contacta-con-nosotros).
+- **España (InPost):** teléfono gratuito 900 900 137 y +34 938 16 62 34 desde cualquier país, de lunes a viernes de 8:30 a 20:00 y los sábados de 9:00 a 13:00; asistente virtual 24/7 y formulario en [Atención al Cliente de InPost](https://www.inpost.es/contacta-con-nosotros).
 - **Francia (Mondial Relay, web solo en francés):** el Chatbot Timo, 24 horas al día, que puede darte el código de recogida; un formulario en [Nous contacter](https://www.mondialrelay.fr/nous-contacter/), y el 09 69 32 23 32 (precio de una llamada local en Francia), de lunes a viernes de 8:00 a 19:00 y los sábados de 8:00 a 18:00.
 
 > Mondial Relay avisa de que nunca te pedirá llamar a un número de tarificación adicional, pagar un suplemento de franqueo ni dar tus datos de acceso o bancarios, y de que sus SMS solo llevan a mrcolis.fr. Los mensajes falsos se denuncian en phishing@inpost-group.com.
@@ -80,7 +80,7 @@ Datos consultados el 10 de octubre de 2026:
 
 [Peek](/) reconoce enseguida el código de barras de 26 cifras, aunque lo escribas con espacios. Con 8, 10 o 12 cifras puede que no nombre a Mondial Relay por sí solo, porque otras empresas usan esas longitudes y no puede preguntar a Mondial Relay si conoce un número: pulsa «Cambiar» y elige Mondial Relay, o pega un enlace de seguimiento de mondialrelay.fr, .be, .nl o .com. Los enlaces de mondialrelay.es o inpost.es no se leen.
 
-Un número de 8 cifras pide además el «Código postal de entrega»: escribe el número solo y luego el código postal en su campo (el de un enlace no se usa). Admite códigos de cualquier país, pero solo se han probado los franceses, y uno equivocado hace que el paquete no aparezca. Se envía a Mondial Relay y, si hace falta, a servicios de seguimiento. Con un número de 8 cifras de InPost España, Peek propone Mondial Relay, no InPost, y consulta la web francesa: no se ha comprobado que así encuentre esos envíos, así que síguelos también en inpost.es.
+Un número de 8 cifras pide además el «Código postal de entrega»: escribe el número solo y luego el código postal en su campo (el de un enlace no se usa). Admite códigos de cualquier país, pero solo se han probado los franceses, y uno equivocado hace que el paquete no aparezca. Se envía a Mondial Relay y, si hace falta, a servicios de seguimiento. Con un número de 8 cifras de InPost España, Peek propone Mondial Relay, no InPost, y consulta la web francesa: no se ha comprobado que así encuentre esos envíos, así que síguelos también en inpost.es. Los números FV (FV y 8 cifras) sí los lee en inpost.es, con sus textos en español: pégalo tal cual y verás «Mondial Relay tiene este paquete.»; si inpost.es pide el código postal, Peek no puede leerlo.
 
 Muestra los textos franceses de Mondial Relay tal cual, el centro logístico de cada escaneo en un mapa y, cuando la web de Mondial Relay los da, el día de entrega previsto, la hora de entrega y el país de destino. Mientras el paquete espera, enseña el nombre y la dirección del punto o la taquilla, nunca su horario ni tu código. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada hora por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Mondial Relay reutiliza números, así que uno antiguo puede mostrar un paquete posterior. No sigue el paquete si pasa a otra empresa, y no puede reclamar ni hablar con Mondial Relay por ti.
 

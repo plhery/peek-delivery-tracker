@@ -3,7 +3,7 @@ title: Packeta tracking: Z numbers, statuses and pickup points
 description: Track a Packeta (Zásilkovna) parcel: what the Z number looks like, what each status means, how long pickup points keep parcels and how to reach Packeta.
 slug: packeta-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Packeta is the group brand behind Zásilkovna, its Czech name, and ships to 33 countries. Track a parcel on [Packeta's tracking page](https://tracking.packeta.com/en/), in the Packeta app or in the box above. The number is a `Z` and ten digits, found in Packeta's email, its SMS or the app.
@@ -35,12 +35,11 @@ These are Packeta's English step sentences, in the order a parcel meets them; "�
 | `The parcel has been handed over to the carrier…` | Passed to the company that delivers it, often a partner carrier abroad. |
 | `…on its way to you…` | Out for delivery. |
 | `The parcel is ready for pickup…` | Waiting at the pickup point or Z-BOX. Use your pick-up code. |
-| `Last day to pick up your parcel.` | Today is the last day to collect it: extend storage if the page offers it, or it goes back to the sender. |
-| `The package has been delivered` | Picked up or delivered. |
+| `The parcel is with you…` | Picked up or delivered. |
 | `…investigating the status of the parcel…` | Something went wrong and Packeta is looking into it. |
-| `Return (on the way back)` | On its way back to the sender. |
+| `We have returned the parcel back to the sender.` | Back with the sender. |
 
-`The parcel has been handed over to the carrier…` means another company now has it: a partner carrier abroad or, in Romania, FAN Courier (FANbox lockers) or Poșta Română. On the last day the tracking page shows `Last day to pick up your parcel.` with a button to extend storage, or `Your parcel will wait for you only today!` once storage can't be extended any more. A finished return reads `We have returned the parcel back to the sender.` or `Returned to sender`.
+Packeta also gives an overall status: `The package has been delivered` (picked up or delivered), `Return (on the way back)` (on its way back to the sender) or `Returned to sender`. `The parcel has been handed over to the carrier…` means another company now has it: a partner carrier abroad or, in Romania, FAN Courier (FANbox lockers) or Poșta Română. On the last day the tracking page shows `Last day to pick up your parcel.` with a button to extend storage, or `Your parcel will wait for you only today!` once storage can't be extended any more.
 
 `Parcel not found` means Packeta doesn't know the number, or no longer shows an old one. Check the `Z` and ten digits.
 
@@ -50,7 +49,7 @@ Packeta says you have 7 days to pick a parcel up, with the code from the SMS or 
 
 **Z-BOX lockers** (Czechia, Slovakia, Romania) open 24/7 with the app over Bluetooth; Hungary's became FOXPOST Z-BOXes in 2026, and the FOXPOST app has replaced Packeta's there; in Czechia a six-digit code typed on the keypad opens them too. In Czechia a parcel waits 2 calendar days, plus 1 if extended; in Romania the terms say 48 hours, the FAQ 2 days plus 1.
 
-**Home delivery.** In Czechia and Slovakia Packeta's own drivers send a delivery window (Slovakia's site gives an estimated time to the minute and live tracking for the last hour); if they miss you, the parcel can go to the nearest pickup point. In Czechia the driver calls you twice on arrival and tries the address once: a missed parcel goes to the nearest pickup point with room, where you can collect it the same day. In Romania packeta.ro says "our courier" contacts you beforehand; elsewhere a partner carrier may deliver.
+**Home delivery.** Packeta's own drivers deliver in Czechia and Slovakia, says packeta.com, though packeta.de's FAQ names own drivers in Czechia only and partners elsewhere. They send a delivery window (Slovakia's site gives an estimated time to the minute and live tracking for the last hour); if they miss you, the parcel can go to the nearest pickup point. In Czechia the driver calls you twice on arrival and tries the address once: a missed parcel goes to the nearest pickup point with room, where you can collect it the same day. In Romania packeta.ro says "our courier" contacts you beforehand; elsewhere a partner carrier may deliver.
 
 **Not picked up?** In Czechia it goes back to the sender automatically.
 
@@ -82,7 +81,7 @@ As read on 11 October 2026:
 
 [Peek](/) recognises a `Z` and ten digits as Packeta at once. Ten digits without the `Z` fit several carriers, so Peek asks them, Packeta among them unless the first digit is 0, and names the one that knows the number; you can also pick Packeta with "Change". Links from tracking.packeta.com work, and packeta.com links with `id=`; zasilkovna.cz links only with the `Z` number inside. No postcode needed.
 
-Peek reads Packeta in English and shows its sentences as written (`Returned to sender` in Peek's words): the status, the newest 20 scans, the shop that sent it, the delivery time and the pickup point or Z-BOX address when the parcel heads there (none for home delivery or returns). It drops your name, address, phone and signature.
+Peek reads Packeta in English and shows its wording as written: the overall status, the newest 20 scans, the shop that sent it, the delivery time and the pickup point or Z-BOX address when the parcel heads there (none for home delivery or returns). It drops your name, address, phone and signature.
 
 Scans that name a depot or pickup point show it as the place, and those naming a town go on the map. Packeta gives no expected delivery. Times are Prague time (Romanian depot scans may be an hour off). When a scan links a partner carrier's tracker Peek knows, Peek names that partner as the one delivering and, when Peek can track the partner itself, follows the parcel there once it shows fresh progress. It checks Packeta every 10 minutes by day and hourly overnight, and can notify you of changes.
 
@@ -137,5 +136,6 @@ Yes, as Packeta Poland, with its own phone line and pickup points; Z-BOX lockers
 - [Packeta Hungary: Általános Szerződési Feltételek](https://files.packeta.com/web/files/packetahu/2026/FoxPost_ASZF-20260826.pdf) – Hungary: FoxPost Kft., storage times, who claims, damage deadlines
 - [Packeta.sk: Reklamačný poriadok](https://files.packeta.com/web/files/SK_Reklamacny_poriadok_20_10_2026.pdf) – Slovakia: the recipient may claim, hidden damage by the next working day
 - [Packeta.sk: Doručenie domov](https://www.packeta.sk/domov) – Slovakia: estimated time, live tracking for the last hour
+- [Packeta.de: Support, häufige Fragen](https://www.packeta.de/support/suche) – own drivers in Czechia, partners elsewhere
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

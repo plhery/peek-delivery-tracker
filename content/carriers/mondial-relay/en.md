@@ -3,7 +3,7 @@ title: Mondial Relay tracking: statuses in English and pickup
 description: Track a Mondial Relay parcel: where the 8-digit number is, what the French statuses mean in English, how long a Point Relais keeps it and who to contact.
 slug: mondial-relay-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-27
 ---
 
 Mondial Relay is a French parcel carrier in the InPost group that delivers to Points Relais (local shops acting as pickup points), lockers and homes. Track a parcel on [Mondial Relay's tracking page](https://www.mondialrelay.fr/suivi-de-colis/) with the 8-digit shipment number and the recipient's postcode, or paste the number in the box above. It's on the label and in the emails from Mondial Relay and the sender.
@@ -74,7 +74,7 @@ As listed on 10 October 2026; none is in English.
 
 An 8-digit number also needs the "Delivery postcode": type the number alone, then the postcode in its field. Peek compares it with the recipient's as typed, in any country's format, and a wrong one reads as not found. It's sent to Mondial Relay and, when needed, to tracking services.
 
-Peek shows Mondial Relay's French wordings as written and each scan's logistics site on a map, plus the expected day, delivery time and destination country when given. While the parcel waits, it shows the Point Relais or locker's name and address, never your pickup code or name. It checks every 10 minutes by day, every few minutes once out for delivery, and hourly overnight, and can notify you of each change. Peek doesn't follow parcels to other carriers, and can't promise to find InPost's Spanish or Portuguese parcels.
+Peek shows Mondial Relay's French wordings as written and each scan's logistics site on a map, plus the expected day, delivery time and destination country when given. While the parcel waits, it shows the Point Relais or locker's name and address, never your pickup code or name. It checks every 10 minutes by day, every few minutes once out for delivery, and hourly overnight, and can notify you of each change. Peek doesn't follow parcels to other carriers. It reads InPost Spain's `FV` numbers on inpost.es, but can't promise to find InPost's other Spanish or Portuguese parcels.
 
 ## Questions about Mondial Relay tracking
 

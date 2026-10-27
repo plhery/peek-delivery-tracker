@@ -87,9 +87,9 @@ Relevé sur les pages de Heppner le 12 octobre 2026 :
 
 [Peek](/) ne peut pas demander à Heppner, Mondial Relay ou Colisweb s'ils connaissent un numéro à 8 chiffres : ce numéro seul ne lui donne donc aucun transporteur. Si aucun service de suivi ne nomme Heppner, appuie sur « Changer » et choisis-le. Les liens Heppner ne lui apprennent rien : colle ou tape les chiffres.
 
-Peek demande alors le code postal de livraison et ne suit rien sans lui : 5 chiffres sont cherchés en France, 4 en Suisse. Les codes postaux belges ont aussi 4 chiffres et sont traités comme suisses : Peek ne peut donc pas suivre une livraison en Belgique. Un mauvais code postal ressemble à un numéro inconnu.
+Peek demande alors le code postal de livraison et ne suit rien sans lui : 5 chiffres sont cherchés en France ; 4 chiffres d'abord en Suisse, puis en Belgique et au Luxembourg. Un mauvais code postal ressemble à un numéro inconnu.
 
-Il affiche le statut et l'historique, à l'heure exacte, et nomme chaque étape avec ses propres mots : « Colis pris en charge », « En transit », « Colis acheminé », « En livraison », « Livré », « Retourné à l’expéditeur », « En attente d’instructions de livraison », « Problème avec le colis ». L'attente d'instructions et l'anomalie de prise en charge comptent comme des problèmes. Le message de Heppner qui annonce une livraison à une nouvelle adresse, sous une nouvelle référence, apparaît comme « Retourné à l’expéditeur ». Pas de lieu pour les scans, pas de date prévue ni de point de retrait ; l'expéditeur, ton nom, ton adresse et les instructions de livraison ne sont pas repris.
+Il affiche le statut et l'historique, à l'heure exacte, et nomme chaque étape avec ses propres mots : « Colis pris en charge », « En transit », « Colis acheminé », « En livraison », « Livré », « Retourné à l’expéditeur », « En attente d’instructions de livraison », « Problème avec le colis ». L'attente d'instructions, l'anomalie de prise en charge et une expédition annulée (« Shipment cancelled », en anglais) comptent comme des problèmes. Le message de Heppner qui annonce une livraison à une nouvelle adresse, sous une nouvelle référence, apparaît en anglais (« Forwarded to a new address under a new reference ») et le colis reste en transit. Pas de lieu pour les scans, pas de date prévue ni de point de retrait ; l'expéditeur, ton nom, ton adresse et les instructions de livraison ne sont pas repris.
 
 Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois la commande en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut pas réserver ton créneau : fais-le sur la page de Heppner.
 
@@ -109,7 +109,7 @@ Non. Heppner n'a ni point relais ni consigne : si tu ne te fais pas livrer, tu c
 
 ### Peut-on suivre un colis Heppner en Belgique ?
 
-Sur la page de Heppner, oui : la Belgique est dans sa liste de pays. Dans Peek, non, car un code postal à 4 chiffres y est toujours lu comme suisse.
+Oui. La Belgique est dans la liste de pays de la page de Heppner, et Peek cherche un code postal à 4 chiffres d'abord en Suisse, puis en Belgique et au Luxembourg.
 
 ### Qui est Heppner ?
 

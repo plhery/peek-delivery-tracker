@@ -1396,6 +1396,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "heppner",
+      "catalog": "heppner",
+      "slug": "heppner-sendungsverfolgung",
+      "title": "Heppner Sendungsverfolgung: Nummer, PLZ und Liefertermin",
+      "name": "Heppner",
+      "color": "#005baa"
+    },
+    {
       "id": "swiss-post-cargo",
       "catalog": "swiss-post-cargo",
       "slug": "swiss-post-cargo-sendungsverfolgung",
@@ -1966,6 +1974,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SpeedPAK tracking: pacchi eBay, stati e chi consegna",
       "name": "SpeedPAK",
       "color": "#ee7532"
+    },
+    {
+      "id": "asendia",
+      "catalog": "asendia",
+      "slug": "asendia-tracking",
+      "title": "Asendia tracking: stati, consegna in Italia e contatti",
+      "name": "Asendia",
+      "color": "#005d69"
     },
     {
       "id": "sunyou",
@@ -2822,6 +2838,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL eCommerce pakket volgen: status, ServicePoint, klacht",
       "name": "DHL eCommerce Netherlands",
       "color": "#ffcc00"
+    },
+    {
+      "id": "heppner",
+      "catalog": "heppner",
+      "slug": "heppner-zending-volgen",
+      "title": "Heppner zending volgen: nummer, postcode en leverafspraak",
+      "name": "Heppner",
+      "color": "#005baa"
     },
     {
       "id": "postnl",

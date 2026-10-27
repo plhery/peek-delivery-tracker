@@ -24,7 +24,7 @@ Canpar's own tracking tool also takes these, and a sender's reference with the d
 
 No results? Canpar says this usually means the shop has made the label but hasn't handed the parcel over yet. If nothing shows within 24 hours of getting the number, contact the shop.
 
-A full 22-character Canpar number fits no other carrier, and it's the only Canpar number Peek tracks. For any other Canpar number or reference, use Canpar's own tracker.
+A full 22-character Canpar number fits no other carrier. Peek tracks Canpar's other numbers too once you pick Canpar (see below); for a sender's reference, use Canpar's own tracker.
 
 ## What Canpar's tracking statuses mean
 
@@ -84,7 +84,7 @@ Have the barcode or W number ready.
 
 ## Tracking Canpar parcels with Peek
 
-[Peek](/) names Canpar as soon as you paste a full 22-character number, or a canpar.com link containing it. It doesn't track shorter barcodes, references, delivery notice (W) numbers, pickup tags or return tags: paste the full tracking number from the email or label, or look the others up on Canpar's own tracker.
+[Peek](/) names Canpar as soon as you paste a full 22-character number, or a canpar.com link containing it. For a shorter barcode, a delivery notice (W) number or a pickup or return tag, pick Canpar with "Change": Peek tracks those too, and asks for the destination postal code when Canpar needs it to find a shorter barcode. It doesn't track a sender's reference: look that up on Canpar's own tracker.
 
 It shows Canpar's status in Canpar's English words, the expected delivery day and the service name. A SMARTSpot parcel shows as ready for pickup, without the shop's name or address. It drops the proof of delivery, recipient, addresses and references. A handoff to a local partner shows as in transit; the partner isn't followed.
 
@@ -94,7 +94,7 @@ Canpar's scan times carry no time zone: Peek reads each on the clock of the scan
 
 ### How many digits is a Canpar tracking number?
 
-Current numbers are one letter followed by 21 digits, such as the invented `D123456789012345678901`. Canpar's FAQ also lists shorter ones, 8 to 20 digits, which its own tracker finds with the destination postal code; Peek takes only the 22-character kind.
+Current numbers are one letter followed by 21 digits, such as the invented `D123456789012345678901`. Canpar's FAQ also lists shorter ones, 8 to 20 digits, which its own tracker finds with the destination postal code. Peek takes them too: pick Canpar with "Change" and give the postal code if Peek asks for it.
 
 ### Does Canpar deliver on weekends?
 

@@ -93,7 +93,7 @@ Garde ton code à barres ou le numéro W de ton avis sous la main.
 
 ## Suivre un colis Canpar avec Peek
 
-[Peek](/) reconnaît Canpar dès que tu colles un code à barres complet, une lettre et 21 chiffres, ou un lien canpar.com qui le contient. Il ne suit ni les références, ni les numéros d'avis (W), ni les étiquettes de ramassage ou de retour : colle le code à barres du courriel ou de l'étiquette.
+[Peek](/) reconnaît Canpar dès que tu colles un code à barres complet, une lettre et 21 chiffres, ou un lien canpar.com qui le contient. Pour un code à barres plus court, un numéro d'avis (W) ou une étiquette de ramassage ou de retour, choisis Canpar avec « Changer » : Peek les suit aussi et, pour un code court, te demande le code postal de destination si Canpar en a besoin. Il ne suit pas les références de l'expéditeur : cherche-les dans Repérer un colis.
 
 Peek affiche le statut dans l'anglais de Canpar, chaque scan avec sa ville et sa province sur une carte, la date de livraison prévue et le service. Un colis au SMARTSpot apparaît comme « Prêt à être retiré », sans le nom ni l'adresse du comptoir : vois-les sur canpar.com. Peek laisse de côté la preuve de livraison, le destinataire, les adresses et les références. Un colis confié à un livreur partenaire reste « En transit » : Peek ne suit pas ce partenaire. Il ne peut ni réacheminer le colis ni joindre Canpar pour toi.
 
@@ -103,7 +103,7 @@ Les heures des scans de Canpar n'ont pas de fuseau horaire : Peek lit chacune à
 
 ### Combien de chiffres a un numéro de suivi Canpar ?
 
-Le code à barres complet a une lettre et 21 chiffres, comme l'exemple inventé `D000000000000000000000` ; c'est celui que Peek reconnaît. La FAQ de Canpar parle aussi de codes plus courts, de 8 à 20 chiffres.
+Le code à barres complet a une lettre et 21 chiffres, comme l'exemple inventé `D000000000000000000000` ; c'est celui que Peek reconnaît tout seul. La FAQ de Canpar parle aussi de codes plus courts, de 8 à 20 chiffres : Peek les suit si tu choisis Canpar, avec le code postal de destination au besoin.
 
 ### Canpar livre-t-il la fin de semaine ?
 

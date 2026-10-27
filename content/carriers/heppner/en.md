@@ -85,9 +85,9 @@ As listed on Heppner's pages on 12 October 2026:
 
 [Peek](/) can't ask Heppner, Mondial Relay or Colisweb whether they know an 8-digit number, so the number alone names no carrier: press "Change" and pick Heppner. Heppner links give it nothing; type the digits.
 
-It then asks for the delivery postcode and tracks nothing without it: 5 digits are looked up in France, 4 in Switzerland. Belgian postcodes also have 4 digits and are sent as Swiss, so Peek can't track Belgian deliveries. A wrong postcode reads like an unknown number.
+It then asks for the delivery postcode and tracks nothing without it: 5 digits are looked up in France; 4 digits in Switzerland first, then in Belgium and Luxembourg. A wrong postcode reads like an unknown number.
 
-It shows the status and history with exact times, every step in Peek's own words: Shipment collected, In transit, Shipment forwarded, Out for delivery, Delivered, Returned to sender, Awaiting delivery instructions, Shipment exception. Awaiting instructions and an inbound-scan issue count as problems. Heppner's message that your order will go to a new address under a new reference shows as Returned to sender. There are no scan places, expected date or pickup point, and it leaves out the sender, your name, address and delivery instructions.
+It shows the status and history with exact times, every step in Peek's own words: Shipment collected, In transit, Shipment forwarded, Out for delivery, Delivered, Returned to sender, Awaiting delivery instructions, Shipment exception. Awaiting instructions, an inbound-scan issue and a cancelled shipment ("Shipment cancelled") count as problems. Heppner's message that your order will go to a new address under a new reference shows as "Forwarded to a new address under a new reference", still in transit. There are no scan places, expected date or pickup point, and it leaves out the sender, your name, address and delivery instructions.
 
 Peek checks every 10 minutes by day, every 2 once the order is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only. It can't book your slot: do that on Heppner's page.
 
@@ -103,7 +103,7 @@ Only if the sender bought Heppner's EXTENT option. Otherwise you choose a weekda
 
 ### Can I track a Heppner delivery in Belgium?
 
-On Heppner's own page, yes: Belgium is in its country list. In Peek, no, because a 4-digit postcode is always read as Swiss.
+Yes. Belgium is in the country list on Heppner's own page, and Peek looks a 4-digit postcode up in Switzerland first, then in Belgium and Luxembourg.
 
 ### Who is Heppner?
 

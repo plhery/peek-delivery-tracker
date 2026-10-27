@@ -174,7 +174,9 @@ handed over meanwhile queue instead of replacing one another, so none shows as c
 When its turn comes, in the wait or in the Deploy job, a run stands down and says why if a
 newer commit has passed since. GitHub's list of CI's runs sometimes leaves a run out, so the commit's own
 runs are read from the repository's list too. To deploy the newest tested commit at once, run
-`gh workflow run deploy.yml`.
+`gh workflow run deploy.yml`. Run it too after changing the app's environment in Coolify, instead
+of Coolify's Redeploy: it redeploys the live commit with the new values, and the smoke test and
+the Sentry release follow.
 
 The deploy asks the database, with the publishable key, which of the commit's migrations
 it lacks, and stops if any are missing: apply them, then re-run the Deploy job. It then

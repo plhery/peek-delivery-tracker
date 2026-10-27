@@ -73,7 +73,7 @@ Se não consegues ir a tempo:
 
 Nos CTT, a nova entrega ou o levantamento noutra Loja CTT pedem-se até 3 dias úteis depois da data do aviso, e numa encomenda custam 3,40 € (outra loja) ou 4,15 € (nova entrega, na mesma morada ou noutra), mais IVA. Não deixes para o fim: passados esses 3 dias úteis, já não podes pedir.
 
-Um cacifo dá-te 5 dias, por isso um aviso que te escape pode custar-te a encomenda. O [Peek](/) pode mandar-te uma notificação quando o seguimento diz que a encomenda está à tua espera, com a opção «Só as importantes». Mas não mexe no prazo: isso só a transportadora ou a loja podem fazer.
+Num cacifo, o prazo é curto: 5 dias num Locky ou num Locker da InPost, só 72 horas num locker da DPD. Um aviso que te escape pode custar-te a encomenda. O [Peek](/) pode mandar-te uma notificação quando o seguimento diz que a encomenda está à tua espera, com a opção «Só as importantes». Mas não mexe no prazo: isso só a transportadora ou a loja podem fazer.
 
 ## Se não levantar a encomenda, tenho direito a reembolso?
 

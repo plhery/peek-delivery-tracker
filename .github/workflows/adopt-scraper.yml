@@ -67,6 +67,7 @@ env:
     ios/PeekDeliveryTracker/Resources/CarrierCatalog.json
     ios/PeekDeliveryTracker/Resources/DetectionGolden.json
     ios/PeekDeliveryTracker/Resources/ChecksumVectors.json
+    ios/PeekDeliveryTracker/Resources/Reading.json
 
 jobs:
   # A scheduled run, or one a CI run on main started, adopts when no run but

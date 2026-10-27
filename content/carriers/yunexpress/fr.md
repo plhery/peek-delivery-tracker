@@ -6,11 +6,11 @@ published: 2026-10-10
 updated: 2026-10-27
 ---
 
-YunExpress, aussi écrit Yun Express, est une société de logistique de Shenzhen qui expédie depuis la Chine les petits colis de vendeurs en ligne, notamment de vendeurs présents sur Amazon, Temu, SHEIN ou la Fnac. Pour suivre ton colis, saisis le numéro qui commence par YT sur [yuntrack.com](https://www.yuntrack.com/), le site de suivi de YunExpress, ou colle-le dans le champ ci-dessus. YunExpress ne décrit aucun SMS ni e-mail aux destinataires : le numéro se trouve dans l'e-mail d'expédition de la boutique ou sur la page de ta commande.
+YunExpress, aussi écrit Yun Express, est une société de logistique chinoise, basée à Shenzhen, qui expédie depuis la Chine les petits colis de vendeurs en ligne, notamment de vendeurs présents sur Amazon, Temu, SHEIN ou la Fnac. Pour suivre ton colis, saisis le numéro qui commence par YT sur [yuntrack.com](https://www.yuntrack.com/), le site de suivi de YunExpress, ou colle-le dans le champ ci-dessus. YunExpress ne décrit aucun SMS ni e-mail aux destinataires : le numéro se trouve dans l'e-mail d'expédition de la boutique ou sur la page de ta commande.
 
 ## Numéro de suivi YunExpress : YT et 16 chiffres
 
-Yuntrack demande « your YunExpress tracking number (starting with YT) », sans en donner la longueur. Peek reconnaît comme YunExpress les numéros formés de YT et de 16 chiffres. Avec des chiffres inventés :
+Yuntrack demande « your YunExpress tracking number (starting with YT) », sans en donner la longueur. Peek reconnaît comme YunExpress les numéros formés de YT et de 16 chiffres, soit 18 caractères en tout. Avec des chiffres inventés :
 
 | Numéro | À qui il appartient |
 | --- | --- |
@@ -21,7 +21,7 @@ Yuntrack demande « your YunExpress tracking number (starting with YT) », sans 
 
 Pas de numéro dans les messages de la boutique ? Lis [où trouver son numéro de suivi](guide:find-tracking-number). Un numéro d'une autre forme ? Vois [à quel transporteur il appartient](guide:tracking-number-formats).
 
-Quand un transporteur local prend le relais, le colis peut recevoir un second numéro : yuntrack l'affiche dans la colonne « Last Mile Tracking ». Si yuntrack répond `Not Found`, vérifie le YT et les 16 chiffres, puis demande à la boutique de confirmer le numéro.
+Sur yuntrack, colle ton numéro YT et clique sur « Track » ; sépare plusieurs numéros par une virgule, un espace ou un retour à la ligne. Un second numéro, celui du transporteur local, peut ensuite apparaître dans la colonne « Last Mile Tracking ». Ton colis est classé `Not Found` ? Yuntrack n'affiche aucun scan pour ce numéro, et YunExpress ne dit pas au bout de combien de temps un nouveau numéro reçoit son premier scan. Vérifie le YT et les 16 chiffres, puis demande à la boutique de confirmer le numéro.
 
 ## Suivi colis YunExpress : ce que veulent dire les statuts
 
@@ -47,11 +47,15 @@ Le statut qui trompe le plus, c'est `Delivered to local carrier` : YunExpress a 
 
 ## Qui livre les colis YunExpress en France, en Belgique et en Suisse
 
-YunExpress fait voler les colis depuis la Chine, les fait dédouaner, puis les remet à un transporteur local. Ce trajet est détaillé, étape par étape, dans [suivre un colis venu de Chine](guide:tracking-from-china). Il a, selon lui, des lignes vers la France depuis 2016 et vers la Suisse depuis 2020, et ses lignes desservent aussi la Belgique. Mais ses pages ne nomment aucun partenaire de livraison dans ces pays. Tu as peut-être lu que [Colissimo](carrier:la-poste) ou [Colis Privé](carrier:colis-prive) livrent les colis YunExpress : aucune page de YunExpress ne le confirme. Des lignes de bpost et de DHL apparaissent dans des historiques YunExpress, sans que le pays soit noté. Pour savoir qui a ton colis, regarde les lignes après `Delivered to local carrier` et la colonne « Last Mile Tracking ».
+YunExpress fait voler les colis depuis la Chine, les fait dédouaner, puis les remet à un transporteur local. Ce trajet est détaillé, étape par étape, dans [suivre un colis venu de Chine](guide:tracking-from-china).
 
-En France, ses lignes « 云选 » couvrent selon lui 95 % des codes postaux, une liste que le transporteur local met à jour. Ses lignes standard ne livrent pas les îles rattachées aux pays d'Europe. En Suisse, sa ligne économique livre dans tout le pays.
+**Pour savoir qui livre ton colis**, ouvre-le sur yuntrack : la colonne « Last Mile Tracking » donne le numéro du transporteur local, l'encadré « Additional Notes » peut renvoyer vers son site, et les lignes après `Delivered to local carrier` viennent de lui. Dans Peek, quand yuntrack renvoie vers un transporteur que Peek connaît et que le numéro lui correspond, la fiche du colis affiche « Livraison par » suivi de son nom, avec ce numéro et un lien vers son suivi.
 
-Sur les tentatives de livraison, l'avis de passage, la durée de garde ou une nouvelle date, YunExpress ne publie rien pour les destinataires. Livraison manquée : regarde quel transporteur local est nommé dans le suivi et consulte ses propres règles de livraison.
+YunExpress a lancé ses lignes dédiées à la France en 2016 et à la Suisse en 2020, et ses lignes desservent aussi la Belgique. En janvier 2023, son groupe, Zongteng, a ouvert une ligne cargo Shenzhen–Paris-Charles-de-Gaulle avec son propre Boeing 777F. Mais ses pages ne nomment aucun partenaire de livraison dans ces pays : le groupe dit seulement travailler avec des partenaires logistiques locaux. Tu as peut-être lu que [Colissimo](carrier:la-poste) ou [Colis Privé](carrier:colis-prive) livrent les colis YunExpress : aucune page de YunExpress ne le confirme. Des lignes de DPD, de [bpost](carrier:bpost) et de DHL Parcel aux Pays-Bas apparaissent dans des historiques YunExpress, sans que le pays de destination soit noté.
+
+En France, ses lignes « 云选 » couvrent selon lui 95 % des codes postaux, une liste que le transporteur local met à jour. Une de ses lignes standard et sa ligne économique ne livrent pas les îles rattachées aux pays d'Europe. En Suisse, sa ligne économique livre dans tout le pays.
+
+Livraison le samedi, tentatives, avis de passage, durée de garde, nouvelle date : YunExpress ne publie rien de tout cela pour les destinataires. Regarde quel transporteur local est nommé dans le suivi et consulte ses propres règles de livraison.
 
 **Points relais et consignes.** Pour l'Europe, YunExpress propose aux vendeurs deux lignes de retrait : sur l'une, il choisit le point relais ou la consigne le plus proche de l'acheteur, dans un rayon de 3 km, et bloque la commande s'il n'y en a pas ; sur l'autre, l'acheteur choisit. Selon un article non daté, le colis arrive au point en 6 à 10 jours calendaires en moyenne, et le suivi affiche l'adresse du point. YunExpress ne dit pas quels réseaux de relais il utilise.
 
@@ -65,7 +69,7 @@ Marqué livré mais rien reçu ? La page de suivi peut proposer une preuve de li
 
 ## YunExpress contact en France : téléphone et e-mail
 
-Relevé le 10 octobre 2026 : YunExpress ne donne ni téléphone, ni formulaire, ni bureau pour les destinataires en France, en Belgique ou en Suisse. Aucune page en français n'a été trouvée : le choix de langue de yunexpress.com ne propose que l'anglais, et yunexpress.fr ne mène nulle part. Il publie :
+Relevé le 27 octobre 2026 : YunExpress ne donne ni téléphone, ni formulaire, ni bureau pour les destinataires en France, en Belgique ou en Suisse. Une de ses actualités mentionne bien « YunExpress France », mais sans adresse ni contact. Aucune page en français n'a été trouvée : le choix de langue de yunexpress.com ne propose que l'anglais et le chinois. Il publie :
 
 - **E-mail :** info@yunexpress.com, sous « Customer Service » en bas de yunexpress.com, de 8 h à 23 h, sans fuseau horaire. Rien ne dit que les destinataires y sont servis ; la page d'accueil promet des réponses en anglais et en chinois.
 - **Téléphone :** 400-8575-500 sur yunexpress.cn, un numéro de Chine continentale. Rien ne dit qu'il fonctionne depuis l'étranger.
@@ -83,7 +87,11 @@ Quand YunExpress donne le numéro du transporteur local sous une forme connue, P
 
 ### YunExpress, c'est quoi ?
 
-Une société de logistique pour le commerce en ligne depuis la Chine : Shenzhen Qianhai YunExpress Logistics Co., Ltd., fondée à Shenzhen en 2014. Elle se dit partenaire logistique recommandé d'Amazon depuis 2017 et partenaire officiel de la Fnac depuis 2020.
+Une société chinoise de logistique pour le commerce en ligne : Shenzhen Qianhai YunExpress Logistics Co., Ltd., fondée à Shenzhen en 2014. Elle dit desservir plus de 220 pays et régions depuis la Chine, et être devenue partenaire logistique recommandé d'Amazon en 2017, puis partenaire officiel de la Fnac en 2020.
+
+### Yuntrack, c'est quoi ?
+
+Le site de suivi officiel de YunExpress, sa « Track & Trace Platform » : le lien « Tracking » et le champ de suivi de yunexpress.com y mènent. En anglais et sans compte, il prend jusqu'à 100 numéros YT par recherche.
 
 ### Combien de temps met un colis YunExpress pour arriver en France ?
 
@@ -93,31 +101,30 @@ Selon les estimations de YunExpress pour les vendeurs, 3 à 5 jours ouvrés avec
 
 Parce que certains vendeurs Amazon expédient eux-mêmes depuis la Chine avec YunExpress : selon lui, son service FBM Ship+, pensé pour eux, est ouvert notamment sur le site Amazon français. En cas de problème, adresse-toi au vendeur ou à Amazon.
 
-### YunExpress livre-t-il le samedi ?
-
-YunExpress ne le dit pas : il ne publie ni jours ni horaires de livraison pour les destinataires. C'est le transporteur local nommé dans le suivi qui livre ; regarde ses jours de livraison.
-
 ### Peut-on retirer un colis YunExpress en point relais ?
 
 Oui, si le vendeur a choisi une ligne de retrait de YunExpress : le suivi affiche alors l'adresse du point relais ou de la consigne. Sinon, après une livraison manquée, demande au transporteur local nommé dans le suivi où ton colis t'attend.
 
 :::sources
-- [YunExpress : Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – numéro YT, anglais uniquement, Feedback
-- [YunExpress : code de la page de résultats Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – onglets, Last Mile Tracking, Last Event, Not Found
-- [YunExpress : code de la page Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, Returned, barre de progression, preuve de livraison
-- [YunExpress : the Best Logistics Service Provider](https://www.yunexpress.com/) – société, e-mail, horaires, langues
-- [YunExpress : About Us](https://www.yunexpress.com/about-us) – 2014, lignes France et Suisse, Amazon, Fnac
+- [YunExpress : Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – site de suivi de YunExpress, numéro YT, anglais uniquement
+- [YunExpress : code de l'accueil Yuntrack](https://www.yuntrack.com/static/js/1.3908b8f5c10e76577a6e.js) – bouton Track, séparateurs, 100 numéros par recherche
+- [YunExpress : code de la page de résultats Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – onglets, Last Mile Tracking, Last Event, Not Found, 100 numéros sans compte
+- [YunExpress : code de la page Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, Returned, barre de progression, Additional Notes, preuve de livraison, Feedback
+- [YunExpress : the Best Logistics Service Provider](https://www.yunexpress.com/) – société, e-mail, horaires, langues (EN, CN), lien Tracking et champ de suivi vers yuntrack
+- [YunExpress : About Us](https://www.yunexpress.com/about-us) – 2014, plus de 220 pays et régions, lignes France 2016 et Suisse 2020, Amazon, Fnac
+- [YunExpress : Zongteng Group welcomes its Boeing 777F freighter to Paris Charles de Gaulle International Airport](https://www.yunexpress.com/newsroom/detail/5) – ligne Shenzhen–Paris, YunExpress France, partenaires locaux
+- [YunExpress : Zongteng Group Announces Its Acquisition of the First Boeing 777F](https://www.yunexpress.com/newsroom/detail/6) – Zongteng, groupe de YunExpress
 - [YunExpress : Privacy Policy](https://www.yunexpress.com/privacy-policy) – le vendeur, client sous contrat
 - [YunExpress : Partners](https://www.yunexpress.com/yun-ecosystem/partners) – marketplaces
 - [YunExpress : 独家！FBM Ship+服务上线](https://www.yunexpress.com/newsroom/detail/4) – FBM Ship+ sur Amazon France
 - [YunExpress : Standard Express](https://www.yunexpress.com/our-solutions/b2c/33) – délais vers la France
 - [YunExpress : 全球云选专线挂号（带电/普货）](https://www.yunexpress.com/our-solutions/b2c/1) – codes postaux en France
 - [YunExpress : 全球专线挂号（标快带电）](https://www.yunexpress.com/our-solutions/b2c/5) – Belgique, îles
-- [YunExpress : 全球专线挂号（特惠带电）](https://www.yunexpress.com/our-solutions/b2c/7) – ligne économique, Suisse
+- [YunExpress : 全球专线挂号（特惠带电）](https://www.yunexpress.com/our-solutions/b2c/7) – ligne économique, Suisse, îles
 - [YunExpress : 最高省21%！云途自提服务上线](https://www.yunexpress.com/newsroom/detail/3) – lignes de retrait en Europe
 - [YunExpress : EU Customs Reform 2026 & YunExpress Service Updates](https://www.yunexpress.com/newsroom/detail/13) – droit provisoire de l'UE
 - [YunExpress : 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – contrôles douaniers
 - [YunExpress : 云途物流YunExpress](https://www.yunexpress.cn/) – numéro en Chine
 - [YunExpress : Contact Us](https://sg.yunexpress.com/contact/) – contacts régionaux
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formes de numéros reconnues par Peek, ce que Peek lit et affiche, lignes bpost, DHL et DPD
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formes de numéros reconnues par Peek, ce que Peek lit et affiche, Not Found sans scan, transporteur local tiré des Additional Notes, lignes bpost, DHL Parcel et DPD
 :::

@@ -2044,14 +2044,14 @@ class CarrierCatalogTests {
     /** The shared engine's patterns and separators are JavaScript's. */
     @Test
     fun patternsAndSeparatorsReadAsInTheSharedEngine() {
-        assertEquals("AB12345", CarrierCatalog.normalize("﻿ab 12.3-4　5\u000B"))
+        assertEquals("AB12345", CarrierCatalog.normalize("\uFEFFab 12.3-4\u30005\u000B"))
         assertEquals("AB\u008512", CarrierCatalog.normalize("AB\u008512"))
         assertTrue(CarrierCatalog.hasMod7CheckDigit("000000000011"))
         assertFalse(CarrierCatalog.hasMod7CheckDigit("000000000011\n"))
         assertTrue(CarrierCatalog.isValidSscc("00000000000000000017"))
         assertFalse(CarrierCatalog.isValidSscc("00000000000000000017\n"))
         // S10 normalizes its own input, separators and the final line break included.
-        assertTrue(CarrierCatalog.isValidS10("﻿RR 473 124 829 CH\n"))
+        assertTrue(CarrierCatalog.isValidS10("\uFEFFRR 473 124 829 CH\n"))
     }
 
     /** A label prints its SSCC behind the bracketed GS1 identifier; carriers track the twenty digits. */

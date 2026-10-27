@@ -110,7 +110,7 @@ class ParcelLogicFormattingTests {
         assertNull(line(null))
 
         localizer.language = AppLanguage.It
-        assertEquals("34,41 € (31,50 € pagando online)", line(listed)?.text)
+        assertEquals("34,41\u00A0€ (31,50\u00A0€ pagando online)", line(listed)?.text)
     }
 
     @Test

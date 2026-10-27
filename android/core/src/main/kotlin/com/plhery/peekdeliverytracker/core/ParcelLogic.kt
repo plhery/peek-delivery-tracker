@@ -38,7 +38,7 @@ data class PickupPoint(val name: String, val address: String?) {
         }
 
     companion object {
-        private val newlines = Regex("[\n\u000B\u000C\r\u0085  ]")
+        private val newlines = Regex("[\n\u000B\u000C\r\u0085\u2028\u2029]")
         private val mapsAllowed = UrlComponents.URL_QUERY_ALLOWED - setOf('&', '=', '+', '?', '#')
 
         /** Swift's failable `init?(_ text:)`: none without a line that names the place. */

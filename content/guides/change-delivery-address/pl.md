@@ -1,13 +1,13 @@
 ---
 title: Zmiana adresu dostawy i przekierowanie paczki: jak to zrobić
-description: Jak zmienić adres dostawy albo przekierować paczkę: co zmienisz w Amazon.pl, Temu i Vinted, a co w InPost, DPD, DHL, GLS i Poczcie Polskiej, i ile to kosztuje.
+description: Jak zmienić adres dostawy albo przekierować paczkę: co zmienisz w Temu i na Vinted, a co w InPost, DPD, DHL, GLS i Poczcie Polskiej, i ile to kosztuje.
 slug: zmiana-adresu-dostawy-przekierowanie-paczki
 picture: Droga rozwidla się przy drogowskazie, jedna odnoga prowadzi do domu, druga do automatu paczkowego, furgonetka skręca w nową stronę, a Pip patrzy wzdłuż drogi w tamtym kierunku.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Dopóki zamówienie nie wyszło z magazynu, adres dostawy zmieniasz w sklepie: na Amazon.pl do chwili przekazania do wysyłki, a na Vinted przez anulowanie i ponowny zakup. Gdy paczka jest już w drodze, przewoźnik często pozwala ją przekierować do automatu paczkowego, punktu odbioru lub sąsiada albo przesunąć doręczenie na inny dzień. Na zupełnie nowy adres nie zawsze się da: InPost przekierowuje tylko w pobliże, a nadawca może takie zmiany wyłączyć. A gdy paczka jest już wydana do doręczenia, na zmiany jest przeważnie za późno.
+Dopóki zamówienie nie wyszło z magazynu, adres dostawy zmieniasz w sklepie: w Temu w szczegółach zamówienia, a na Vinted przez anulowanie i ponowny zakup. Gdy paczka jest już w drodze, przewoźnik często pozwala ją przekierować do automatu paczkowego, punktu odbioru lub sąsiada albo przesunąć doręczenie na inny dzień. Na zupełnie nowy adres nie zawsze się da: InPost przekierowuje tylko w pobliże, a nadawca może takie zmiany wyłączyć. A gdy paczka jest już wydana do doręczenia, na zmiany jest przeważnie za późno.
 
 ## Czy mogę zmienić adres dostawy po zamówieniu?
 
@@ -15,12 +15,10 @@ Tak, dopóki paczka nie opuściła magazynu. Zrobisz to w sklepie, nie u przewo�
 
 | Sklep | Jak zmienić adres | Do kiedy |
 | --- | --- | --- |
-| Amazon.pl (wysyłka przez Amazon) | **Moje zamówienia** → **Szczegóły zamówienia** → **Zmień** obok adresu dostawy | Dopóki zamówienie nie zostało przekazane do wysyłki |
-| Amazon.pl (sprzedawca z Marketplace) | **Moje zamówienia** → **Szczegóły zamówienia**, a po 30 minutach **Skontaktuj się ze sprzedawcą** | 30 minut od złożenia zamówienia, potem anuluj i zamów ponownie, dopóki nie wysłano |
 | Temu | W szczegółach zamówienia, przez edycję adresu dostawy | Zanim zamówienie zostanie spakowane lub wysłane: sprawdź w zamówieniu |
 | Vinted | Daj znać sprzedającemu, uzgodnij z nim anulowanie, popraw adres w ustawieniach wysyłki i kup ponownie | Zanim sprzedający wyśle paczkę |
 
-Amazon.pl uprzedza, że po złożeniu zamówienia sprzedawcy zewnętrzni nie mogą zmienić adresu wysyłki w Twoim imieniu. Jeśli produkt nie został jeszcze wysłany, radzi anulować zamówienie i złożyć je ponownie. Na Vinted przedmiot kupisz drugi raz dopiero wtedy, gdy sprzedający znów go wystawi, a anulowanie lepiej z nim najpierw uzgodnić, żeby nie dostać negatywnej opinii.
+Na Vinted przedmiot kupisz drugi raz dopiero wtedy, gdy sprzedający znów go wystawi, a anulowanie lepiej z nim najpierw uzgodnić, żeby nie dostać negatywnej opinii.
 
 Na Allegro i w innych sklepach napisz do sprzedającego jak najszybciej i poproś o poprawienie adresu, zanim nada paczkę.
 
@@ -127,7 +125,6 @@ Sprawdź adres przed zapłatą albo od razu wybierz automat lub punkt odbioru. P
 Nie. Peek śledzi paczkę i pokazuje, gdzie jest. Przekierować ją może tylko sklep albo przewoźnik.
 
 :::sources
-- [Amazon.pl: Zmiana informacji o zamówieniu](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GSWAYSNV7RBSTND9) – zmiana do przekazania do wysyłki, 30 minut przy Marketplace, anulowanie i ponowne zamówienie
 - [Temu: How do I update my shipping address?](https://www.temu.com/uk/support/c3/how-do-i-update-my-shipping-address-f-48-s-150.html) – zmiana adresu, zanim zamówienie zostanie spakowane
 - [Vinted: Adres dostawy jest nieprawidłowy](https://www.vinted.pl/help/660) – anulowanie z osobą sprzedającą, ponowny zakup, przekierowanie w niektórych przypadkach
 - [InPost: Co to jest Dynamiczne Przekierowanie paczek kurierskich?](https://inpost.pl/pomoc-co-jest-dynamiczne-przekierowanie-paczek-kurierskich) – bezpłatnie, Paczkomat, PaczkoPunkt, sąsiad, 10 km, przycisk „Przekieruj”, brak zmiany miejscowości

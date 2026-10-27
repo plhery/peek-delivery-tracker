@@ -4,28 +4,28 @@ description: Change a delivery address before or after shipping: what Amazon, eB
 slug: change-delivery-address
 picture: A road forking at a signpost, one way to a house and the other to a parcel locker, a van taking the new turn, and Pip looking along the road towards it.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Before your order ships, change the address with the shop: Amazon lets you edit it until the order enters dispatch, and on eBay you ask the seller to cancel so you can buy again. Once it has shipped, ask the carrier: with your tracking number you can usually pick a neighbour, a safe place, a pickup point or another day. A new street address is often off the table, because the sender decides what you may change. Once the parcel is out for delivery, it's usually too late.
+Before your order ships, deal with the shop: Amazon.co.uk lets you edit a third-party seller's order for 30 minutes, and on eBay you ask the seller to cancel so you can buy again. Once it has shipped, ask the carrier: with your tracking number you can usually pick a neighbour, a safe place, a pickup point or another day. A new street address is often off the table, because the sender decides what you may change. Once the parcel is out for delivery, it's usually too late.
 
 ## Can I change the delivery address after ordering on Amazon?
 
-Usually, until the order is packed or dispatched.
+Only for 30 minutes, on a third-party seller's order. An order sold and dispatched by Amazon you cancel before it ships, then place again. Elsewhere, you can usually fix it until the order is packed or dispatched.
 
 | Shop | How to change the address | Until when |
 | --- | --- | --- |
-| Amazon (shipped by Amazon) | **Your Orders** → **Order Details** → **Change** next to the address | Until the order "enters the shipping process" |
-| Amazon (other sellers) | UK: edit in **Your Orders** within 30 minutes of ordering, then **Contact seller**. US: contact the seller | Before it ships. If the seller can't, cancel and order again before it ships |
+| Amazon.co.uk (sold and dispatched by Amazon) | Amazon can't change it: request a cancellation in **Your Orders**, then place a new order | Before the order ships |
+| Amazon.co.uk (third-party sellers) | On the desktop site, **Your Orders** → **View Order Details** → **Change** next to the address. Later, ask through **Contact Seller** | 30 minutes after ordering, then through the seller |
 | eBay | Sellers "generally can't change" it. Ask the seller to cancel, then buy again with the right address | Before the seller sends it |
 | Temu | **Your orders** → the order → **Edit** next to the address | Before it is packed or shipped: check the order page |
 | Vinted | Tell the seller, cancel together, fix your address, buy again | Before the seller sends it |
 
-Amazon.com won't change the address from a phone: use the desktop site.
+On a phone, Amazon.co.uk only lets you cancel the order: the 30-minute change works on the desktop site.
 
 ## Can you change the delivery address after it has shipped?
 
-Sometimes, through the carrier rather than the shop. Amazon says so: once an order has shipped, "contact the carrier directly". The sender is the carrier's customer, though, so the sender chooses which changes you may make. FedEx warns that "some shippers may restrict certain delivery options", and [Evri](carrier:evri) says its options "will depend on the sender's chosen delivery service".
+Sometimes, through the carrier rather than the shop. Amazon says so: once an order it manages has shipped, you can ask "the carrier in charge of the delivery" to change your address. The sender is the carrier's customer, though, so the sender chooses which changes you may make. FedEx warns that "some shippers may restrict certain delivery options", and [Evri](carrier:evri) says its options "will depend on the sender's chosen delivery service".
 
 :::journey
 - shop | Ordered | The shop can still change the address
@@ -121,8 +121,7 @@ Check the address before you pay, or choose a pickup point or locker at checkout
 Standing preferences help: a Royal Mail Safeplace, Evri's MyPlaces, or a UPS My Choice Access Point preference, which sends every parcel to an Access Point at no charge.
 
 :::sources
-- [Amazon: Change Your Order Information](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GSWAYSNV7RBSTND9) – edits until dispatch, 30 minutes, then the carrier
-- [Amazon.com: Change Your Order Information](https://www.amazon.com/gp/help/customer/display.html?nodeId=GSWAYSNV7RBSTND9) – no address change on mobile
+- [About Amazon UK: How to change your delivery address on Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-change-your-delivery-address-on-amazon) – no change on Amazon's own orders, cancel and reorder, 30 minutes for third-party sellers on desktop, the carrier after dispatch
 - [eBay: Changing delivery details after purchase](https://www.ebay.co.uk/help/buying/postage-delivery/changing-delivery-details-purchase?id=4028) – cancel and buy again
 - [Temu: How do I update my shipping address?](https://www.temu.com/uk/support/c3/how-do-i-update-my-shipping-address-f-48-s-150.html) – edit before the order is packed
 - [Vinted: Delivery address is wrong](https://www.vinted.co.uk/help/660) – cancel, reroute

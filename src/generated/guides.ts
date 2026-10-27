@@ -1464,7 +1464,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "change-delivery-address",
       "slug": "mudar-morada-encomenda",
-      "title": "Mudar a morada de uma encomenda: CTT, Amazon, DPD e GLS"
+      "title": "Mudar a morada de uma encomenda: CTT, DPD, GLS e InPost"
     },
     {
       "id": "returned-to-sender",

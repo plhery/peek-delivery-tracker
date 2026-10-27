@@ -1,13 +1,13 @@
 ---
 title: Changer l'adresse de livraison d'un colis : comment faire
-description: Changer l'adresse de livraison d'un colis : ce que permettent Amazon, eBay et Vinted, puis Colissimo, Chronopost, Mondial Relay, bpost et La Poste suisse.
+description: Changer l'adresse de livraison d'un colis : ce que permettent eBay, Temu et Vinted, puis Colissimo, Chronopost, Mondial Relay, bpost et La Poste suisse.
 slug: changer-adresse-livraison-colis
 picture: Une route qui se divise à un panneau, un côté vers une maison et l'autre vers une consigne à colis, une camionnette qui prend le nouveau virage, et Pip qui regarde la route dans cette direction.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Tant que ta commande n'est pas expédiée, change l'adresse dans la boutique : Amazon te laisse la modifier tant que l'expédition n'a pas commencé, et sur eBay ou Vinted, tu demandes au vendeur d'annuler pour racheter avec la bonne adresse. Une fois le colis parti, adresse-toi au transporteur avec ton numéro de suivi : il propose souvent un autre jour, un voisin, un lieu sûr ou un point relais près de chez toi. Une adresse dans une autre ville, en revanche, est rarement possible : c'est l'expéditeur qui décide de ce que tu peux modifier. Et une fois le colis en cours de livraison, il est en général trop tard.
+Tant que ta commande n'est pas expédiée, change l'adresse dans la boutique : chez Temu, tu la modifies dans ta commande, et sur eBay ou Vinted, tu demandes au vendeur d'annuler pour racheter avec la bonne adresse. Une fois le colis parti, adresse-toi au transporteur avec ton numéro de suivi : il propose souvent un autre jour, un voisin, un lieu sûr ou un point relais près de chez toi. Une adresse dans une autre ville, en revanche, est rarement possible : c'est l'expéditeur qui décide de ce que tu peux modifier. Et une fois le colis en cours de livraison, il est en général trop tard.
 
 ## Peut-on changer l'adresse de livraison après commande ?
 
@@ -15,17 +15,13 @@ Souvent, tant que la commande n'est pas préparée ou expédiée.
 
 | Boutique | Comment changer l'adresse | Jusqu'à quand |
 | --- | --- | --- |
-| Amazon (expédié par Amazon) | **Vos commandes** → **Détails de la commande** → **Modifier** à côté de l'adresse | Tant que la commande n'a pas « débuté le processus d'expédition » |
-| Amazon (vendeur Marketplace) | Modifiable dans **Vos commandes** pendant 30 minutes après la commande, puis **Contacter le vendeur** | Avant l'expédition. Ensuite, les vendeurs « ne sont pas en mesure de modifier l'adresse d'expédition » : annule et repasse commande tant que l'article n'est pas parti |
 | eBay | En général, le vendeur ne peut pas la modifier. Demande-lui d'annuler la transaction, puis rachète l'objet avec la bonne adresse | Avant que le vendeur envoie l'objet |
 | Temu | Dans ta commande, l'option de modification à côté de l'adresse | Avant que la commande soit emballée ou expédiée : regarde la page de ta commande |
 | Vinted | Préviens le vendeur, annule la commande après t'être mis d'accord avec lui, corrige ton adresse dans tes paramètres de livraison, puis rachète | Avant que le vendeur envoie le colis |
 
-Sur mobile, Amazon.fr te laisse seulement annuler la commande : pour changer l'adresse, passe par un ordinateur. Si l'article n'est pas encore expédié mais que l'adresse ne se modifie pas, Amazon conseille de demander une annulation et de repasser commande.
-
 ## Changer l'adresse de livraison après expédition
 
-C'est parfois possible, mais c'est au transporteur qu'il faut demander de rediriger le colis, plus à la boutique. Amazon.fr le dit lui-même : pour une commande déjà expédiée, les changements d'adresse « peuvent être directement demandés au transporteur ». Seulement, le client du transporteur, c'est l'expéditeur : c'est lui qui choisit ce que tu as le droit de changer. [La Poste suisse](carrier:swiss-post) prévient que certains services peuvent manquer « en fonction de directives de l'expéditeur », et [FedEx](carrier:fedex) n'accepte un changement d'adresse que si « l'expéditeur n'a pas fixé de conditions ».
+C'est parfois possible, mais c'est au transporteur qu'il faut demander de rediriger le colis, plus à la boutique. Seulement, le client du transporteur, c'est l'expéditeur : c'est lui qui choisit ce que tu as le droit de changer. [La Poste suisse](carrier:swiss-post) prévient que certains services peuvent manquer « en fonction de directives de l'expéditeur », et [FedEx](carrier:fedex) n'accepte un changement d'adresse que si « l'expéditeur n'a pas fixé de conditions ».
 
 :::journey
 - shop | Commande passée | La boutique peut encore changer l'adresse
@@ -120,7 +116,6 @@ Vérifie l'adresse avant de payer, ou choisis un point relais ou une consigne à
 Non. Peek suit ton colis et te montre où il en est ; seuls la boutique ou le transporteur peuvent le rediriger.
 
 :::sources
-- [Amazon.fr : Modifier votre commande](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GSWAYSNV7RBSTND9) – jusqu'au début de l'expédition, mobile, 30 minutes pour le Marketplace, transporteur après expédition
 - [eBay : Modifier les informations de livraison après l'achat](https://www.ebay.fr/help/buying/livraison/modifier-informations-livraison-apres-achat?id=4028) – annuler et racheter
 - [Temu : How do I update my shipping address? (en anglais)](https://www.temu.com/uk/support/c3/how-do-i-update-my-shipping-address-f-48-s-150.html) – modification avant l'emballage
 - [Vinted : L'adresse de livraison est incorrecte](https://www.vinted.fr/help/660) – prévenir le vendeur, annuler, réacheminement en cours de livraison

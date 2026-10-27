@@ -4,10 +4,10 @@ description: Paket umleiten oder Adresse ändern: was Amazon, eBay und Temu erla
 slug: paket-umleiten-lieferadresse-aendern
 picture: Eine Straße gabelt sich an einem Wegweiser, ein Weg führt zu einem Haus, der andere zu einer Packstation, ein Lieferwagen nimmt die neue Abzweigung, und Pip schaut die Straße entlang dorthin.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Ist deine Bestellung noch nicht verschickt, änderst du die Lieferadresse im Shop: Bei Amazon geht das bis zum Versand, bei eBay bittest du den Verkäufer, den Kauf abzubrechen, und kaufst neu. Ist das Paket schon unterwegs, leitest du es beim Paketdienst um, meist an eine Packstation, eine Filiale, einen Paketshop, einen Nachbarn oder einen Ablageort, oder du wählst einen anderen Liefertag. Eine ganz neue Adresse ist selten drin, denn der Absender bestimmt, was du ändern darfst, und liegt das Paket erst im Zustellfahrzeug, ist es meist zu spät.
+Ist deine Bestellung noch nicht verschickt, änderst du die Lieferadresse im Shop: Bei Drittanbietern auf Amazon hast du dafür 30 Minuten, bei eBay bittest du den Verkäufer, den Kauf abzubrechen, und kaufst neu. Ist das Paket schon unterwegs, leitest du es beim Paketdienst um, meist an eine Packstation, eine Filiale, einen Paketshop, einen Nachbarn oder einen Ablageort, oder du wählst einen anderen Liefertag. Eine ganz neue Adresse ist selten drin, denn der Absender bestimmt, was du ändern darfst, und liegt das Paket erst im Zustellfahrzeug, ist es meist zu spät.
 
 ## Wie ändere ich die Lieferadresse bei Amazon, eBay oder Temu?
 
@@ -15,17 +15,17 @@ Im Shop, solange das Paket das Lager noch nicht verlassen hat.
 
 | Shop | So änderst du die Adresse | Bis wann |
 | --- | --- | --- |
-| Amazon (von Amazon versendet) | **Meine Bestellungen** → **Diese Bestellung anzeigen oder bearbeiten** → **Bearbeiten** neben der Adresse | Solange die Bestellung noch nicht versandt ist |
-| Amazon Marketplace (andere Verkäufer) | In **Meine Bestellungen** selbst ändern, danach über **Verkäufer kontaktieren** | In den ersten 30 Minuten nach der Bestellung, danach nur über den Verkäufer |
+| Amazon (von Amazon versendet) | In **Meine Bestellungen** → **Bestellung ansehen oder ändern** die Artikel stornieren, dann mit der richtigen Adresse neu bestellen | Solange die Bestellung noch nicht versandt ist |
+| Amazon Marketplace (Drittanbieter) | In **Meine Bestellungen** die Bestellung auswählen → **Adresse ändern**, danach den Verkäufer kontaktieren | In den ersten 30 Minuten nach der Bestellung, danach nur über den Verkäufer |
 | eBay | Laut eBay können Verkäufer die Lieferadresse in der Regel nicht ändern. Bitte den Verkäufer, die Transaktion abzubrechen, und kauf mit der richtigen Adresse neu | Bevor der Verkäufer das Paket verschickt |
 | Temu | In deinen Bestellungen die Bestellung öffnen und die Adresse bearbeiten | Bevor sie verpackt oder verschickt ist: sieh in der Bestellung nach |
 | Vinted | Dem Verkäufer Bescheid geben, die Bestellung gemeinsam stornieren, Adresse korrigieren, neu kaufen | Bevor der Verkäufer das Paket verschickt |
 
-Lässt sich eine noch nicht versandte Amazon-Bestellung nicht bearbeiten, rät Amazon, sie zu stornieren und neu zu bestellen. Hat ein eBay-Verkäufer schon verschickt, kann er laut eBay nichts mehr ändern, und das Paket geht an die ursprüngliche Adresse. Dann bleibt dir nur der Paketdienst, oder jemand an der alten Adresse nimmt es für dich an.
+Die 30-Minuten-Änderung bei Drittanbietern geht laut Amazon nur auf dem Desktop. Hat ein eBay-Verkäufer schon verschickt, kann er laut eBay nichts mehr ändern, und das Paket geht an die ursprüngliche Adresse. Dann bleibt dir nur der Paketdienst, oder jemand an der alten Adresse nimmt es für dich an.
 
 ## Paket nachträglich umleiten: Geht das noch?
 
-Manchmal, und dann fragst du den Paketdienst, nicht den Shop. Amazon sagt es selbst: Ist die Bestellung versendet, „kannst du das Transportunternehmen bitten, die Lieferadresse zu ändern“. Kunde des Paketdienstes ist aber der Absender, und er legt fest, was du ändern darfst. [DHL](carrier:dhl) nennt als Grund für eine gescheiterte Umleitung ausdrücklich: „Der Versender hat den Service Paketumleitung für seine Sendungen ausgeschlossen.“ Auch die Schweizerische Post zeigt dir nur die Optionen, die der Bearbeitungsstand und die Vorgaben des Absenders erlauben.
+Manchmal, und dann fragst du den Paketdienst, nicht den Shop. Kunde des Paketdienstes ist aber der Absender, und er legt fest, was du ändern darfst. [DHL](carrier:dhl) nennt als Grund für eine gescheiterte Umleitung ausdrücklich: „Der Versender hat den Service Paketumleitung für seine Sendungen ausgeschlossen.“ Auch die Schweizerische Post zeigt dir nur die Optionen, die der Bearbeitungsstand und die Vorgaben des Absenders erlauben.
 
 :::journey
 - shop | Bestellt | Der Shop kann die Adresse noch ändern
@@ -130,7 +130,8 @@ Prüf die Adresse, bevor du bezahlst, bei eBay im Feld „Lieferadresse“, oder
 Nein. Peek verfolgt dein Paket und zeigt, wo es ist. Umleiten können es nur der Shop oder der Paketdienst.
 
 :::sources
-- [Amazon.de: Bestellinformationen ändern](https://www.amazon.de/gp/help/customer/display.html?nodeId=GSWAYSNV7RBSTND9&language=de_DE) – Bearbeiten bis zum Versand, 30 Minuten bei Marketplace, danach Transportunternehmen
+- [About Amazon Deutschland: Amazon Lieferadresse ändern](https://www.aboutamazon.de/news/amazon-prime-und-shopping/lieferadresse-auf-amazon-aendern) – Drittanbieter: 30 Minuten, nur auf dem Desktop, „Adresse ändern“, danach den Verkäufer kontaktieren
+- [About Amazon Deutschland: Amazon Bestellung stornieren](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-bestellung-stornieren) – „Bestellung ansehen oder ändern“, stornieren nur vor dem Versand
 - [eBay: Lieferangaben nach einem Kauf ändern](https://www.ebay.de/help/buying/postage-delivery/changing-delivery-details-purchase?id=4028) – Verkäufer können die Adresse nicht ändern, Kauf abbrechen und neu kaufen, Feld „Lieferadresse“
 - [Temu: How do I update my shipping address?](https://www.temu.com/uk/support/c3/how-do-i-update-my-shipping-address-f-48-s-150.html) – Adresse ändern, bevor die Bestellung verpackt ist
 - [Vinted: Die Lieferadresse ist falsch](https://www.vinted.de/help/660) – mit dem Verkäufer stornieren, neu kaufen, Umleitung unterwegs in manchen Fällen

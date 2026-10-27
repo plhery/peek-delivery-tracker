@@ -1,32 +1,30 @@
 ---
-title: Mudar a morada de uma encomenda: CTT, Amazon, DPD e GLS
-description: Como mudar a morada ou o dia de entrega de uma encomenda: o que a Amazon, a Temu e a Vinted deixam, o que os CTT, a DPD, a GLS e a InPost permitem, e quanto custa.
+title: Mudar a morada de uma encomenda: CTT, DPD, GLS e InPost
+description: Como mudar a morada ou o dia de entrega de uma encomenda: o que a Temu e a Vinted deixam, o que os CTT, a DPD, a GLS e a InPost permitem, e quanto custa.
 slug: mudar-morada-encomenda
 picture: Uma estrada que se divide junto a uma placa, para uma casa de um lado e para um cacifo do outro, uma carrinha a tomar o novo caminho e o Pip a olhar pela estrada nessa direção.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
-Antes de a encomenda sair, muda a morada na loja: na Amazon.es podes alterá-la em **Os meus pedidos** até o pedido entrar no processo de envio, e na Vinted cancelas com quem vende e voltas a comprar. Depois de enviada, é com a transportadora: os CTT, a DPD e a GLS deixam-te escolher outro dia, um ponto de recolha e, às vezes, outra morada, a partir do número de seguimento ou do e-mail que te mandam. Mas é o remetente que decide o que podes mudar, e algumas alterações pagam-se.
+Antes de a encomenda sair, muda a morada na loja: na Temu podes editá-la na própria encomenda, e na Vinted cancelas com quem vende e voltas a comprar. Depois de enviada, é com a transportadora: os CTT, a DPD e a GLS deixam-te escolher outro dia, um ponto de recolha e, às vezes, outra morada, a partir do número de seguimento ou do e-mail que te mandam. Mas é o remetente que decide o que podes mudar, e algumas alterações pagam-se.
 
-## Como mudar a morada antes do envio: Amazon, Temu e Vinted
+## Como mudar a morada antes do envio: Temu e Vinted
 
 Na loja, enquanto a encomenda não sair do armazém.
 
 | Loja | Como mudar a morada | Até quando |
 | --- | --- | --- |
-| Amazon.es (enviado pela Amazon) | **Os meus pedidos** → **Detalhes do pedido** → **Alterar** ao lado da morada | Até o pedido «entrar no processo de envio» |
-| Amazon.es (vendedores do Marketplace) | Em **Os meus pedidos**, nos primeiros 30 minutos; depois, **Contactar o vendedor** | Antes do envio; senão, cancela e volta a encomendar |
 | Temu | Na lista de encomendas da tua conta, abre a encomenda e edita a morada | Antes de ser embalada ou enviada: vê a página da encomenda |
 | Vinted | Avisa quem vende, cancela o pedido, corrige a morada nas definições de envio e volta a comprar | Antes de quem vende enviar |
 
-Se a encomenda ainda não foi enviada mas não consegues mudar a morada, a Amazon diz para pedires o cancelamento e voltares a encomendar com a morada certa. Na Vinted, combina o cancelamento com quem vende antes de cancelares o pedido, para evitar uma avaliação negativa.
+Na Vinted, combina o cancelamento com quem vende antes de cancelares o pedido, para evitar uma avaliação negativa.
 
 Na Shein e noutras lojas, procura a opção na página da encomenda. Se não estiver lá, fala com o apoio ao cliente da loja quanto antes: depois do envio, a loja já não manda na encomenda.
 
 ## Como mudar a morada de uma encomenda que já foi enviada
 
-Às vezes dá, e quem trata é a transportadora, não a loja. A própria Amazon o diz: se o pedido já foi enviado, «contacte diretamente a transportadora». Só que o cliente da transportadora é o remetente, e é ele que escolhe o que podes alterar. Para mudar a morada, a GLS manda usar o «FlexDeliveryService fornecido pelo remetente da encomenda», e a DPD explica que as opções a cinzento não estão disponíveis «por causa do serviço que foi selecionado».
+Às vezes dá, e quem trata é a transportadora, não a loja. Só que o cliente da transportadora é o remetente, e é ele que escolhe o que podes alterar. Para mudar a morada, a GLS manda usar o «FlexDeliveryService fornecido pelo remetente da encomenda», e a DPD explica que as opções a cinzento não estão disponíveis «por causa do serviço que foi selecionado».
 
 :::journey
 - shop | Encomendada | A loja ainda pode mudar a morada
@@ -115,7 +113,6 @@ Confirma a morada antes de pagar, ou escolhe um ponto de recolha ou um cacifo na
 Não. O Peek segue a encomenda e mostra onde ela está; só a loja ou a transportadora a podem redirecionar.
 
 :::sources
-- [Amazon.es: Alterar informações do pedido](https://www.amazon.es/gp/help/customer/display.html?nodeId=GSWAYSNV7RBSTND9&language=pt_PT) – Os meus pedidos, até ao processo de envio, transportadora depois do envio, 30 minutos no Marketplace, cancelar e voltar a pedir
 - [Temu: How do I update my shipping address?](https://www.temu.com/uk/support/c3/how-do-i-update-my-shipping-address-f-48-s-150.html) – editar a morada antes de a encomenda ser embalada
 - [Vinted: A morada de entrega está incorreta](https://www.vinted.pt/help/660) – cancelar com quem vende, definições de envio, redirecionamento em trânsito
 - [CTT: Alterar entrega de encomenda Expresso](https://www.ctt.pt/particulares/receber/seguir-ou-alterar-uma-entrega/alterar-uma-entrega-expresso) – códigos começados por D, o que se altera, preços para clientes sem contrato (incluindo 5,01 € por outro dia), até 5 dias úteis

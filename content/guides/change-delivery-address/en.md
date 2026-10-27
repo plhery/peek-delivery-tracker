@@ -1,6 +1,6 @@
 ---
 title: How to change a delivery address, before or after shipping
-description: Change a delivery address before or after shipping: what Amazon, eBay and Temu allow, what UPS, USPS, Royal Mail and Evri let you change, and the fees.
+description: Change a delivery address before or after shipping: what Amazon, eBay and Temu allow, what USPS, Royal Mail, Evri and DPD let you change, and the fees.
 slug: change-delivery-address
 picture: A road forking at a signpost, one way to a house and the other to a parcel locker, a van taking the new turn, and Pip looking along the road towards it.
 published: 2026-10-14
@@ -45,14 +45,13 @@ Can't find the number, or need one of the free carrier accounts some changes req
 
 > A text asking you to "update your address" or pay a small fee before delivery is the classic scam: [how to spot a fake delivery text](guide:delivery-scam-texts).
 
-## How to change the delivery address with UPS, Royal Mail, An Post and others
+## How to change the delivery address with USPS, Royal Mail, An Post and others
 
 What each carrier lets you change, and what it costs:
 
 | Carrier | Where it can go instead | Cost |
 | --- | --- | --- |
 | [USPS](carrier:usps) (Delivery Instructions) | A spot at your address, a neighbour on the same street and route, Hold for Pickup at your Post Office, another address or Post Office | Free, except another address or Post Office: you pay the postage |
-| [UPS](carrier:ups) My Choice (US) | Your neighbour, a safe place, another day, another address, a UPS Access Point | Basic is free; each change costs $9.99 for another day, $14.99 for another address, $5.99 for an Access Point. Premium ($19.99 a year) includes them |
 | [FedEx](carrier:fedex) Delivery Manager (US) | A FedEx retail location, another residence, an evening or 2-hour window | Pickup free; another residence within 120 miles $5.55, further $14.50 to $33.50 |
 | [Royal Mail](carrier:royal-mail) | Another day, depending on what's being delivered. If you don't answer, your safe place (set in its app; Parcelforce uses it too) or a neighbour | No fee stated |
 | Evri | A neighbour, a safe place, a ParcelShop or Evri Locker where offered. No new address: "contact your sender or retailer" | No fee stated |
@@ -65,15 +64,14 @@ What each carrier lets you change, and what it costs:
 A few catches:
 
 - **USPS:** Delivery Instructions need a USPS.com account, show under the tracking status only for eligible items, and are final once submitted.
-- **UPS:** without an account, **Change My Delivery** on the tracking page emails you a one-time passcode. UPS may add transport charges.
 - **FedEx:** fees depend on location, so check the total before you confirm.
 - **Australia Post:** redirects only if the sender passed on your email, mobile number or other details matching your MyPost account.
 
-At Canada Post, redirecting a parcel is a business service for senders ($13 plus shipping). USPS Package Intercept ($19.45) and UPS Delivery Intercept are sender tools too: if the shop agrees to call a parcel back, see [returned to sender](guide:returned-to-sender).
+At Canada Post, redirecting a parcel is a business service for senders ($13 plus shipping). USPS Package Intercept ($19.45) is a sender tool too: if the shop agrees to call a parcel back, see [returned to sender](guide:returned-to-sender).
 
 ## Can I reschedule the delivery day?
 
-Often, and more easily than the address. UPS charges $9.99 per parcel on My Choice Basic. DPD UK and DPD Ireland let you pick another date online, and Royal Mail may let you, depending on what's being delivered. FedEx sells a 5 to 8 p.m. slot on the planned day for $5.55, or a 2-hour window up to 7 days after the original date for $11.50.
+Often, and more easily than the address. DPD UK and DPD Ireland let you pick another date online, and Royal Mail may let you, depending on what's being delivered. FedEx sells a 5 to 8 p.m. slot on the planned day for $5.55, or a 2-hour window up to 7 days after the original date for $11.50.
 
 Going away? USPS Hold Mail keeps everything at your Post Office for 3 to 30 days, and FedEx Delivery Manager has a free vacation hold of up to 14 days.
 
@@ -106,19 +104,15 @@ Don't count on it. Some posts don't forward even their own parcels, and most exc
 
 ## Quick answers
 
-### Do I need UPS My Choice Premium to change the address?
-
-No. Free Basic members pay per parcel ($14.99 to another address in the US); Premium ($19.99 a year) includes it.
-
 ### Can I redirect a parcel to a parcel locker?
 
-Often, if the carrier has lockers and the sender allows it: Evri where available, An Post (free, chosen by text), Australia Post through MyPost, or a UPS Access Point ($5.99 on My Choice Basic).
+Often, if the carrier has lockers and the sender allows it: Evri where available, An Post (free, chosen by text) or Australia Post through MyPost.
 
 ### How do I stop this happening next time?
 
 Check the address before you pay, or choose a pickup point or locker at checkout. Give the shop your email and mobile number: An Post and Australia Post need them to offer you options, and DPD Ireland to send its notices. Turn on notifications in [Peek](/) or the carrier's app, so you can act before the parcel is out for delivery.
 
-Standing preferences help: a safe place set in the Royal Mail app, Evri's MyPlaces, or a UPS My Choice Access Point preference, which sends every parcel to an Access Point at no charge.
+Standing preferences help: a safe place set in the Royal Mail app or Evri's MyPlaces.
 
 :::sources
 - [About Amazon UK: How to change your delivery address on Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-change-your-delivery-address-on-amazon) – no change on Amazon's own orders, cancel and reorder, 30 minutes for third-party sellers on desktop, the carrier after dispatch
@@ -128,9 +122,7 @@ Standing preferences help: a safe place set in the Royal Mail app, Evri's MyPlac
 - [USPS: Delivery Instructions, the basics](https://faq.usps.com/s/article/USPS-Delivery-Instructions-The-Basics) – options, fees, exclusions
 - [USPS: Package Intercept](https://www.usps.com/manage/package-intercept.htm) – sender tool, $19.45
 - [USPS: Hold Mail](https://www.usps.com/manage/hold-mail.htm) – 3 to 30 days
-- [USPS: Forward mail and change of address](https://www.usps.com/manage/forward.htm) – $1.25, 12 months, parcels forwarded
-- [UPS: UPS My Choice](https://www.ups.com/us/en/track/ups-my-choice) – Basic and Premium fees
-- [UPS: Change My Delivery](https://www.ups.com/us/en/track/change-delivery) – passcode
+- [USPS: Forward mail and change of address](https://www.usps.com/manage/forward.htm) – $1.25, 12 months, parcels forwarded, an address change with the Post Office only
 - [FedEx: Delivery Manager](https://www.fedex.com/en-us/delivery-manager.html) – fees, holds, shipper restrictions
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's other date, safe place in the app, neighbour
 - [Royal Mail Help: Change delivery options](https://help.royalmail.com/personal/s/article/Change-delivery-options) – sender's choices, no new address before a card, same postcode district

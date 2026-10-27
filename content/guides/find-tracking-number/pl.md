@@ -46,7 +46,6 @@ Zamawiasz z AliExpress albo innego chińskiego sklepu? Zajrzyj do poradnika o [�
 - **Poczta Polska, eINFO:awizo**: tę bezpłatną usługę zamówisz przez profil zaufany albo w placówce, która doręcza Ci przesyłki. Od następnego dnia powiadomienie o awizowanej przesyłce przyjdzie SMS-em albo e-mailem, z jej numerem, terminem odbioru i adresem placówki. Wyjątek: zawiadomienia o pismach w postępowaniach karnych, cywilnych, administracyjnych czy podatkowych nadal przychodzą na papierze.
 - **GLS**: numer Track-ID z awiza działa w śledzeniu GLS.
 - **[FedEx](carrier:fedex)**: wyszukiwarka przyjmuje „numery etykiet awizo”.
-- **[UPS](carrier:ups)**: w wybranych krajach kurier zostawia przy pierwszej próbie doręczenia powiadomienie UPS InfoNotice. Są na nim, jak pisze UPS, informacje, „które pozwolą Ci zlokalizować Twoją paczkę”.
 
 ## Jak śledzić paczkę bez numeru przesyłki?
 
@@ -71,13 +70,12 @@ Kilku przewoźników samo pokazuje w aplikacji albo na koncie paczki, które do 
 | InPost Mobile | Nadane na numer telefonu zarejestrowany w aplikacji | Tylko polskie numery (+48). Inną paczkę dodasz żółtym przyciskiem z plusem, wpisując 24-cyfrowy numer przesyłki |
 | DPD Mobile | Przypisane do numeru telefonu lub adresu e-mail podanego przy rejestracji konta | Dane w aplikacji muszą się zgadzać z tymi na liście przewozowym |
 | Pocztex Mobile (Poczta Polska) | Przesyłki rejestrowane, do których przypisano Twój numer telefonu | Zwykłych, nierejestrowanych listów tu nie zobaczysz |
-| UPS My Choice, bezpłatnie | Przesyłki UPS przychodzące i wychodzące, bez „wprowadzania numerów monitorowania” | Historia z ostatnich czterech miesięcy i przesyłki zaplanowane do doręczenia, w kalendarzu |
 
 Paczki nie ma na liście? InPost radzi najpierw sprawdzić, czy na pewno nadano ją na numer z aplikacji. Jeśli nadawca podał inny numer albo inny e-mail, i tak potrzebujesz numeru przesyłki.
 
 ### Śledź po numerze referencyjnym nadawcy
 
-Jeśli nadawca poda Ci swój numer referencyjny, na przykład numer faktury, w niektórych firmach kurierskich wyszukasz paczkę właśnie po nim: UPS ma **Monitoruj poprzez numer referencyjny**, FedEx **Śledzenie według informacji referencyjnych**, a [DHL Express](carrier:dhl-express) **Monitoruj według referencji**. UPS prosi też o zakres dat i uprzedza, że szczegóły śledzenia „zostaną zastąpione podstawowymi danymi”. W wyszukiwarce Poczty Polskiej takiej opcji nie ma.
+Jeśli nadawca poda Ci swój numer referencyjny, na przykład numer faktury, w niektórych firmach kurierskich wyszukasz paczkę właśnie po nim: FedEx ma **Śledzenie według informacji referencyjnych**, a [DHL Express](carrier:dhl-express) **Monitoruj według referencji**. W wyszukiwarce Poczty Polskiej takiej opcji nie ma.
 
 ## Czy można śledzić paczkę po nazwisku, adresie albo numerze telefonu?
 
@@ -125,7 +123,7 @@ Jeśli czekasz dłużej, sprawdź sam numer:
 
 - **Czy to numer przesyłki?** Numer zamówienia i numer oferty z Allegro należą do sklepu, więc u przewoźnika nie zadziałają.
 - **Czy to nie kod?** Kod odbioru, który wpisujesz w Paczkomacie razem z numerem telefonu, i 10-cyfrowy kod zwrotu InPost to nie numer przesyłki. Numer InPost ma 24 cyfry.
-- **Czy to nie referencja nadawcy?** Numer faktury czy inny numer referencyjny nadawcy zadziała tylko w wyszukiwaniu po referencji u UPS, FedEx i DHL Express.
+- **Czy to nie referencja nadawcy?** Numer faktury czy inny numer referencyjny nadawcy zadziała tylko w wyszukiwaniu po referencji u FedEx i DHL Express.
 - **Czy to ten przewoźnik?** Numer od `AD` (Allegro Delivery) nic nie pokaże na stronie [ORLEN Paczki](carrier:orlen-paczka): taką paczkę śledzisz tylko w Allegro. Nazwę przewoźnika zwykle znajdziesz w e-mailu o wysyłce albo w szczegółach zakupu.
 - **Czy to jeden numer?** Wklej jeden numer naraz, bez spacji i nawiasów, jak prosi Poczta Polska. Wyszukiwarka na stronie głównej inpost.pl przy ciągu innej długości prosi: `Podaj jeden numer przesyłki zawierający 24 cyfry`.
 
@@ -156,10 +154,7 @@ Nadal nic? Zapytaj nadawcę albo sklep. Co znaczy każdy status, wyjaśnia [pora
 - [App Store: Pocztex Mobile](https://apps.apple.com/pl/app/pocztex-mobile/id1661761150) – przesyłki rejestrowane przypisane do numeru telefonu
 - [DHL eCommerce Polska: Śledzenie paczek krajowych i zagranicznych](https://mojdhl.pl/sprawdz) – kontakt z nadawcą
 - [ORLEN Paczka: Śledź paczkę](https://www.orlenpaczka.pl/sledz-paczke/) – paczki Allegro Delivery z numerem od AD tylko w Allegro
-- [UPS: UPS My Choice](https://www.ups.com/pl/pl/track/ups-my-choice) – bezpłatnie, przesyłki przychodzące i wychodzące, cztery miesiące
-- [UPS: Monitorowanie](https://www.ups.com/track?loc=pl_PL) – Monitoruj poprzez numer referencyjny, zakres dat, podstawowe dane
-- [UPS: UPS InfoNotice](https://www.ups.com/pl/pl/support/tracking-support/where-is-my-package/how-to-use-infonotice) – informacje do zlokalizowania paczki
-- [UPS: Tracking Support](https://www.ups.com/us/en/support/tracking-support) – powiadomienie przy pierwszej próbie doręczenia, w wybranych krajach
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numery 1Z i ich cyfra kontrolna
 - [FedEx Polska: Monitorowanie przesyłki](https://www.fedex.com/pl-pl/tracking.html) – numery etykiet awizo, śledzenie według informacji referencyjnych
 - [DHL Express: Monitoruj według referencji](https://mydhl.express.dhl/pl/pl/tracking.html#/track-by-reference) – wyszukiwanie po referencji
 - [DHL Niemcy: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – numer przesyłki to nie numer zamówienia, śledzenie tylko z ważnym numerem, obsługa klienta

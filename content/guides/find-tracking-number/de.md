@@ -77,13 +77,12 @@ Mehrere Paketdienste zeigen oder melden dir Pakete, die zu dir unterwegs sind, s
 | DE | Hermes, Benachrichtigung per Mail | Lässt sich in der Hermes-Sendungsverfolgung dauerhaft für alle künftigen Hermes-Sendungen einrichten |
 | AT | Post Account und Post App der Österreichischen Post | Neue Sendungen landen automatisch in deinem Konto, wenn deine Daten beim Shop und im Post Account übereinstimmen, etwa E-Mail-Adresse und Schreibweise von Name und Adresse |
 | CH | „Meine Sendungen“ der Schweizerischen Post, kostenlos | Automatisch alle ankommenden Sendungen an die Adresse in deinem Kundenkonto bei „Meine Post“. Nachrichten in der Regel bei der Anmeldung durch den Absender, bei der Sortierung und nach der Zustellung |
-| DE, AT, CH | UPS My Choice, kostenlos | UPS-Sendungen an dich und von dir: angekündigte und die der letzten vier Monate. UPS wirbt mit „Keine Notwendigkeit für Sendungsverfolgungsnummern“ |
 
 Fehlt ein Paket in der Liste, brauchst du doch wieder die Nummer. Bei der Schweizerischen Post etwa fügst du es von Hand hinzu, und dafür brauchst du die Sendungsnummer.
 
 ### Mit der Referenz des Absenders verfolgen
 
-Nennt dir der Absender seine eigene Referenz, etwa eine Auftrags- oder Rechnungsnummer, können die Expressdienste danach suchen. DHL Express beantwortet die Frage „Kann ich auch ohne Sendungsnummer meine Express-Sendung verfolgen?“ mit „Ja, unter bestimmten Voraussetzungen“: mit der Referenznummer des Versenders in der Referenzsuche. Bei [UPS](carrier:ups) heißt das **Sendungsverfolgung anhand der Referenznummer** und verlangt zusätzlich einen Zeitraum, bei FedEx **Sendungsverfolgung nach Referenz**. UPS warnt, dass die Angaben dann „größtenteils ausgeblendet“ werden. Bei DHL Paket gibt es diesen Weg nicht.
+Nennt dir der Absender seine eigene Referenz, etwa eine Auftrags- oder Rechnungsnummer, können die Expressdienste danach suchen. DHL Express beantwortet die Frage „Kann ich auch ohne Sendungsnummer meine Express-Sendung verfolgen?“ mit „Ja, unter bestimmten Voraussetzungen“: mit der Referenznummer des Versenders in der Referenzsuche. Bei FedEx heißt das **Sendungsverfolgung nach Referenz**. Bei DHL Paket gibt es diesen Weg nicht.
 
 ## Kann man ein Paket nur mit Namen oder Adresse verfolgen?
 
@@ -131,7 +130,7 @@ Danach lohnt ein Blick auf die Nummer selbst:
 
 - **Ist es die Bestellnummer?** Die funktioniert nur im Shop, nicht beim Paketdienst (siehe oben).
 - **Ist es ein anderer Code des Paketdienstes?** Die Postnummer, die du für Packstation und Filiale in die Lieferadresse schreibst, ist laut DHL deine persönliche Kundennummer und gehört zu dir, nicht zu einem Paket.
-- **Ist es die Referenz des Absenders?** Eine Auftrags- oder Rechnungsnummer findet nur die Referenzsuche von DHL Express, UPS oder FedEx (siehe oben), nicht die normale Sendungsverfolgung.
+- **Ist es die Referenz des Absenders?** Eine Auftrags- oder Rechnungsnummer findet nur die Referenzsuche von DHL Express oder FedEx (siehe oben), nicht die normale Sendungsverfolgung.
 - **Bist du beim richtigen Paketdienst?** Ist eine Nummer bei DHL ungültig, kann sie laut DHL zu einer Express- oder Briefsendung mit eigener Sendungsverfolgung gehören oder zu einem ganz anderen Paketdienst.
 - **Steht nur diese eine Nummer im Feld?** Kopierst du aus einer Mail, rutschen leicht die Bestellnummer, ein Wort oder eine zweite Sendungsnummer mit hinein. Prüf außerdem jedes Zeichen: DHL nennt Zahlendreher, [DPD](carrier:dpd-de) verwechselte Zeichen wie 0 und O.
 
@@ -153,10 +152,7 @@ Immer noch nichts? Dann frag den Absender, meist also den Online-Shop: Von ihm k
 - [Schweizerische Post: Sendungen verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Meine Sendungen, verfolgbare Briefe, Sendungen von Hand hinzufügen
 - [Schweizerische Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – Abholcode, Fristen
 - [Schweizerische Post: Fragen und Antworten zum Versenden](https://www.post.ch/de/hilfe-und-kontakt/versenden) – Nachforschung nur mit Barcode, Kopie der Aufgabequittung
-- [UPS Deutschland: UPS My Choice](https://www.ups.com/de/de/track/ups-my-choice) – kostenlos, ohne Sendungsnummer, vier Monate
-- [UPS Österreich: UPS My Choice](https://www.ups.com/at/de/track/ups-my-choice) – auch in Österreich
-- [UPS Schweiz: UPS My Choice](https://www.ups.com/ch/de/track/ups-my-choice) – auch in der Schweiz
-- [UPS: Sendungsverfolgung](https://www.ups.com/track?loc=de_DE) – Suche anhand der Referenznummer, Angaben ausgeblendet
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z-Nummern und ihre Prüfziffer
 - [FedEx: Sendungsverfolgung](https://www.fedex.com/de-de/tracking.html) – Benachrichtigungskartennummer, Suche nach Referenz
 - [About Amazon Deutschland: Amazon-Lieferung: einfache Bestellung und Verfolgung](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-lieferoptionen-sendung-verfolgen) – Meine Bestellungen, Lieferung verfolgen
 - [About Amazon Deutschland: Amazon A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst der Verkaufspartner, dann Amazon

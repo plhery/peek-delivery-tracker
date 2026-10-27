@@ -43,7 +43,6 @@ Ordered from AliExpress or another shop in China? See [tracking a parcel from Ch
 ### On a missed-delivery card
 
 - **USPS** PS Form 3849: search its barcode number on USPS.com "as you would use a tracking number".
-- **[UPS](carrier:ups)** Delivery Notice, left on the first delivery attempt in select countries: its 12-digit reference number works in UPS tracking.
 - **[FedEx](carrier:fedex)** door tag: its number goes straight into FedEx tracking.
 - **Canada Post** Delivery Notice Card: 15 digits that serve "the same purpose as a tracking number".
 - **[Evri](carrier:evri)** calling card: its 8-digit number works on Evri's tracking page.
@@ -69,7 +68,6 @@ Several carriers list parcels heading your way once you prove the address, email
 | Where | Service | Good to know |
 | --- | --- | --- |
 | US | USPS Informed Delivery, free | USPS parcels to your address, by daily email and dashboard. Starts "within three business days", rarely up to 7. Some apartment addresses can't join; the email won't always list every parcel |
-| US, UK, Ireland, Canada, Australia | UPS My Choice, free to join | UPS parcels to and from you, coming up or from the past four months. In the US and Canada, a code may come by post in about 7 to 14 days |
 | US | FedEx Delivery Manager, free | Deliveries to your home, address checked by a texted code. FedEx doesn't say parcels without a number will appear |
 | UK | DPD app | [DPD](carrier:dpd-uk) and DPD Local parcels, matched to "your mobile phone number or email address and your delivery address" |
 | Canada | Canada Post automatic tracking, free | Personal accounts only, no business or PO box addresses, ID checked. No guarantee every parcel is added |
@@ -79,7 +77,7 @@ We found nothing like this for Evri or [An Post](carrier:an-post): with them, yo
 
 ### Track by the sender's reference
 
-If the sender tells you their own reference (a purchase order or invoice number), couriers can search by it: UPS **Track by Reference Number**, FedEx **Track by reference** and [DHL Express](carrier:dhl-express) **Track By Reference**. Canada Post's Track takes the reference with the shipping date. UPS warns the details will be "mostly masked".
+If the sender tells you their own reference (a purchase order or invoice number), couriers can search by it: FedEx **Track by reference** and [DHL Express](carrier:dhl-express) **Track By Reference**. Canada Post's Track takes the reference with the shipping date.
 
 ## Can you track a parcel with just a name or address?
 
@@ -129,7 +127,7 @@ Usually because it's new: the label exists, but the carrier hasn't scanned the p
 
 Past that wait, check the number itself:
 
-- **Is it a tracking number?** An order number won't work on a carrier's site, nor will a UPS package release code (4 to 6 digits from the shipper). A sender's reference works only in the courier's reference search.
+- **Is it a tracking number?** An order number won't work on a carrier's site. A sender's reference works only in the courier's reference search.
 - **Is it this carrier's?** Australia Post, for one, asks you to check that it's an Australia Post parcel.
 - **Is it typed right?** DHL reads a space, comma, semicolon or tab as the start of another number, so paste it without them.
 
@@ -138,12 +136,7 @@ Still nothing? Ask the sender or the shop, as DHL advises. For each status, see 
 :::sources
 - [USPS: How to find your tracking number](https://faq.usps.com/s/article/How-to-find-your-tracking-number) – sender, PS Form 3849, receipts
 - [USPS: Informed Delivery, the basics](https://faq.usps.com/s/article/Informed-Delivery-The-Basics) – conditions and limits
-- [UPS: Tracking support](https://www.ups.com/us/en/support/tracking-support) – Delivery Notice, 1Z
-- [UPS: How to use InfoNotice](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – tracking by notice number, release code
-- [UPS: Track](https://www.ups.com/track?loc=en_US) – track by reference
-- [UPS: Understanding tracking status](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – Label Created
-- [UPS: UPS My Choice](https://www.ups.com/us/en/track/ups-my-choice) – free, four months, letter
-- [UPS Canada: UPS My Choice](https://www.ups.com/ca/en/track/ups-my-choice) – letter with activation code in Canada
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z numbers and their check digit, a label created before UPS has the parcel
 - [FedEx: Tracking](https://www.fedex.com/en-us/tracking.html) – door tags, reference
 - [FedEx: Delivery Manager](https://www.fedex.com/en-us/delivery-manager.html) – free, home deliveries
 - [FedEx: How to register for Delivery Manager](https://www.fedex.com/en-us/delivery-manager/registering.html) – address verified by a texted code

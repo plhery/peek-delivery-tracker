@@ -17,7 +17,7 @@ Ton numéro de suivi se trouve en général dans l'e-mail ou le SMS d'expéditio
 - Tes e-mails et SMS | Cherche « expédié », « expédition », « suivi » ou le nom de la boutique, sans oublier les spams.
 - La page de ta commande | À un clic du numéro de commande (voir le tableau ci-dessous).
 - L'avis de passage | Chez La Poste, bpost et La Poste suisse, il porte un numéro que tu peux taper dans le suivi.
-- Le compte du transporteur | La Poste suisse, bpost et UPS listent les colis qui t'arrivent.
+- Le compte du transporteur | La Poste suisse et bpost listent les colis qui t'arrivent.
 - L'expéditeur | « Contactez l'expéditeur pour qu'il vous communique le numéro », conseille Mondial Relay.
 :::
 
@@ -68,13 +68,12 @@ Certains transporteurs affichent d'eux-mêmes les colis qui te sont destinés, u
 | Belgique | App My bpost | Les colis bpost liés à tes adresses e-mail s'ajoutent tout seuls. Il en manque un ? Il a sans doute été commandé avec une autre adresse : ajoute-la dans **Mes adresses e-mail** |
 | France, Belgique | App Mondial Relay, gratuite | Jusqu'à 5 adresses e-mail et 5 numéros de mobile dans ton profil, pour tes colis et ceux de tes proches. Un colis manque ? Ajoute-le avec « + » et son numéro |
 | France | La Poste, « Mes suivis » dans l'Espace client | Pas tous les colis à ton adresse : les envois que tu affranchis sur laposte.fr ou au guichet en t'identifiant et, si tu l'actives dans **Gérer les paramètres**, tes achats sur des sites partenaires comme la Fnac ou Zalando |
-| France, Belgique, Suisse | UPS My Choice, inscription gratuite | « Pas besoin de numéros de suivi » : tes envois UPS entrants et sortants, ceux à venir et ceux des quatre derniers mois |
 
 Chez La Poste, un colis commandé ailleurs ne s'ajoute à « Mes suivis » qu'avec son numéro.
 
 ### Suis le colis avec la référence de l'expéditeur
 
-Si l'expéditeur te donne sa propre référence (bon de commande, numéro de facture), les transporteurs express peuvent retrouver l'envoi grâce à elle : **Suivi par numéro de référence** chez [UPS](carrier:ups), **Suivre par référence** chez FedEx et chez [DHL Express](carrier:dhl-express). UPS prévient que les détails de suivi seront alors « pour la plupart masqués ». Chez La Poste, bpost ou La Poste suisse, nous n'avons pas trouvé de recherche publique par référence.
+Si l'expéditeur te donne sa propre référence (bon de commande, numéro de facture), les transporteurs express peuvent retrouver l'envoi grâce à elle : **Suivre par référence** chez FedEx et chez [DHL Express](carrier:dhl-express). Chez La Poste, bpost ou La Poste suisse, nous n'avons pas trouvé de recherche publique par référence.
 
 ## Peut-on suivre un colis avec son nom, son adresse ou son téléphone ?
 
@@ -126,7 +125,7 @@ Passé ce délai, vérifie le numéro lui-même :
 
 - **Est-ce le numéro de commande ?** Celui de la boutique ne marche pas sur le site du transporteur (voir plus haut).
 - **Est-ce un code qui accompagne le numéro ?** La mention « SD » imprimée à côté de certains numéros La Poste n'en fait pas partie. Un code-barres bpost qui commence par « U » sert seulement à la douane : il ne se suit pas.
-- **Est-ce la référence de l'expéditeur ?** Un bon de commande ou un numéro de facture ne marche que dans la recherche par référence d'UPS, de FedEx ou de DHL Express.
+- **Est-ce la référence de l'expéditeur ?** Un bon de commande ou un numéro de facture ne marche que dans la recherche par référence de FedEx ou de DHL Express.
 - **Es-tu sur le site du bon transporteur ?** Sur celui d'un autre, le numéro ne donnera rien. Mondial Relay et Colis Privé demandent aussi le code postal du destinataire.
 - **As-tu collé plusieurs numéros ensemble ?** DHL lit une tabulation, une virgule, un espace ou un point-virgule comme le début d'un autre numéro. Chez La Poste, tape le numéro sans espace et en majuscules.
 
@@ -149,8 +148,7 @@ Toujours rien ? Demande à l'expéditeur ou à la boutique, comme le conseille D
 - [La Poste suisse : Suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois) – « Mes envois », envois suivis, suivi vers l'étranger
 - [La Poste suisse : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – code de retrait
 - [La Poste suisse : Questions et réponses, expédier](https://www.post.ch/fr/aide-et-contact/expedier) – recherches
-- [UPS : UPS My Choice](https://www.ups.com/fr/fr/track/ups-my-choice) – gratuit, quatre mois
-- [UPS : Suivi](https://www.ups.com/track?loc=fr_FR) – suivi par référence
+- [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numéros 1Z et leur clé de contrôle
 - [FedEx : Comment puis-je localiser mon colis sans numéro de suivi ?](https://www.fedex.com/fr-fr/customer-support/faq/receiving/tracking-questions/how-to-track-a-package-without-a-tracking-number.html) – suivi par référence
 - [DHL Express : Suivre par référence](https://mydhl.express.dhl/fr/fr/tracking.html#/track-by-reference) – suivi par référence
 - [DHL : Suivi](https://www.dhl.com/fr-fr/home/suivi.html) – expéditeur, 24 à 48 heures, séparateurs entre plusieurs numéros

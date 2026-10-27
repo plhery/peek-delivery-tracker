@@ -66,7 +66,6 @@ Algumas transportadoras mostram-te numa conta ou numa app as encomendas que vêm
 
 | Serviço | O que mostra | A ter em conta |
 | --- | --- | --- |
-| UPS My Choice, gratuito | Envios UPS recebidos e enviados nas moradas da tua conta: os dos últimos quatro meses e os agendados para entrega, numa vista de calendário | «Sem Necessidade de Números de Seguimento», promete a página portuguesa |
 | App My GLS | Pões o teu número de telemóvel e recebes informação automática sobre os teus envios GLS | Notificações push sempre que o envio muda de estado |
 | App myDPD | Segundo a página da app na App Store, depois do registo vai buscar automaticamente todas as tuas encomendas DPD | A DPD não diz com que dados as associa a ti |
 
@@ -74,7 +73,7 @@ Os CTT não anunciam nada parecido. Na App CTT e na área de cliente, segues um 
 
 ### Segue pela referência do remetente
 
-Se o remetente te disser a referência dele (o número de uma nota de encomenda ou de uma fatura, por exemplo), algumas transportadoras deixam-te procurar por ela: a DPD em **Procurar por referência**, no Track & Trace; a [UPS](carrier:ups) em **Seguir por Número de Referência**; a FedEx em **Rastrear por referência**; e a [DHL Express](carrier:dhl-express) em **Localização por referência de Expedidor**. A UPS avisa que os detalhes vão aparecer «sobretudo mascarados», ou seja, quase todos escondidos.
+Se o remetente te disser a referência dele (o número de uma nota de encomenda ou de uma fatura, por exemplo), algumas transportadoras deixam-te procurar por ela: a DPD em **Procurar por referência**, no Track & Trace; a FedEx em **Rastrear por referência**; e a [DHL Express](carrier:dhl-express) em **Localização por referência de Expedidor**.
 
 ## Dá para seguir uma encomenda pelo nome ou pela morada?
 
@@ -129,8 +128,8 @@ Se o número é novo, pode ser só cedo: a etiqueta existe, mas a transportadora
 Passado esse tempo, confirma que tens o número certo:
 
 - **É o número da encomenda?** O número que vem com a palavra «encomenda» ou «pedido» costuma ser da loja e não funciona no site da transportadora (secção anterior).
-- **É outro código?** Os CTT avisam que alguns códigos só servem para a alfândega e não dão resultados. E no aviso que, em alguns países, a UPS deixa quando não te encontra à primeira tentativa, o código de 4 a 6 algarismos para libertar a encomenda (*package release code*) vem do remetente e não é o número de seguimento.
-- **É a referência do remetente?** Só funciona na pesquisa por referência da DPD, da UPS, da FedEx ou da DHL Express (vê acima).
+- **É outro código?** Os CTT avisam que alguns códigos só servem para a alfândega e não dão resultados.
+- **É a referência do remetente?** Só funciona na pesquisa por referência da DPD, da FedEx ou da DHL Express (vê acima).
 - **É da transportadora certa?** No site de outra transportadora, o número não dá nada. Os CTT lembram que um código sem resultados pode ser de um envio entregue em Portugal por outra empresa.
 - **Colaste mais do que um número?** Cola só um de cada vez, sem espaços: segundo a norma S10 da UPU, os espaços impressos não fazem parte do número.
 
@@ -152,10 +151,7 @@ Continua sem nada? Pergunta ao remetente, como mandam os CTT. Para perceberes ca
 - [DHL Portugal: Localização](https://www.dhl.com/pt-pt/home/tracking.html) – primeira leitura 24 a 48 horas depois, contactar o expedidor
 - [MyDHL Express Portugal: FAQs Localização e Monitorização](https://mydhl.express.dhl/pt/pt/help-and-support/faqs/tracking-monitoring.html) – guardar o número, localização por referência de expedidor
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – o número de envio não é um número de encomenda
-- [UPS Portugal: UPS My Choice](https://www.ups.com/pt/pt/track/ups-my-choice) – gratuito, sem números de seguimento, quatro meses, moradas associadas à conta
-- [UPS: How to use InfoNotice (em inglês)](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – código de libertação de 4 a 6 algarismos, diferente do número de seguimento
-- [UPS: Tracking support (em inglês)](https://www.ups.com/us/en/support/tracking-support) – aviso deixado à primeira tentativa de entrega, em alguns países
-- [UPS Portugal: Seguimento](https://www.ups.com/track?loc=pt_PT) – Seguir por Número de Referência, detalhes mascarados
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – números 1Z e o seu algarismo de controlo
 - [FedEx Portugal: Rastrear a sua expedição](https://www.fedex.com/pt-pt/tracking.html) – avisos de passagem, Rastrear por referência
 - [Shein Portugal: Como rastrear meu pedido](https://m.shein.com/pt/How-to-track-my-order-a-496.html) – Meus pedidos, Rastrear
 - [Temu: How to track my order](https://www.temu.com/uk/support/c3/how-to-track-my-order-f-48-s-153.html) – botão de seguimento, 1 a 3 dias úteis no armazém

@@ -4,7 +4,7 @@ description: Cómo cambiar la dirección o el día de entrega de un paquete: qu�
 slug: cambiar-direccion-de-entrega
 picture: Una carretera que se bifurca en un poste indicador, hacia una casa por un lado y hacia un locker por el otro, una furgoneta que toma el nuevo desvío y Pip mirando la carretera hacia allí.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Si el pedido aún no ha salido, cambia la dirección en la tienda: Amazon te deja modificarla hasta que el pedido entra en el proceso de envío, y en eBay le pides al vendedor que cancele para volver a comprar. Si ya va de camino, el transportista suele dejarte elegir otro día, un vecino, un punto de recogida o una oficina desde el enlace de su SMS o su web. Mandarlo a una dirección lejana casi nunca es posible, porque quien decide qué puedes cambiar es el remitente, y cuando el paquete ya está en reparto suele ser tarde.
@@ -41,7 +41,7 @@ A veces, y se lo pides al transportista, no a la tienda. Amazon lo dice tal cual
 - Revisa las condiciones y confirma | Algunos cambios solo se pueden hacer una vez.
 :::
 
-¿No encuentras el número, o algún cambio te pide una cuenta gratuita del transportista? [Cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number) explica las dos cosas, de miSEUR a UPS My Choice.
+¿No encuentras el número? [Cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number) te dice dónde buscarlo.
 
 > Un SMS que te pide «actualizar tu dirección» o pagar una pequeña cantidad antes de la entrega es la estafa de siempre. Las opciones de verdad están en la web o la app del transportista, a partir de tu número de seguimiento: [cómo saber si un SMS de paquete es falso](guide:delivery-scam-texts).
 
@@ -55,7 +55,6 @@ Casi todos te dejan acercar el paquete a donde estés, pero no mandarlo lejos.
 | SEUR (SEUR Predict) | Un punto SEUR Pickup, otra fecha u otra dirección | El día antes de la entrega y la mañana del reparto. No vale para todos los envíos |
 | GLS | Otra dirección del mismo código postal, un vecino, un Parcel Shop | Gratis. Para otro código postal, lo pide la tienda |
 | [DHL eCommerce](carrier:dhl-ecommerce-es) | Otra dirección de tu provincia, un ServicePoint, un vecino o el conserje, otra fecha | Un solo cambio. En reparto, solo vecino o conserje |
-| [UPS](carrier:ups) My Choice | Otra dirección u otra fecha, un vecino, un UPS Access Point | Registro gratis. Según el destino, pueden aplicarse tarifas de transporte |
 | InPost | Otro Punto Pack o Locker, solo si su seguimiento lo ofrece | Una vez admitido el paquete, InPost no puede cambiar el punto de entrega |
 
 **Correos.** Te manda un SMS o un correo con la fecha de entrega y un enlace para hacer los cambios; también puedes hacerlos en la App de Correos. En una oficina, el envío te espera 15 días, o lo que haya fijado el remitente. Correos vuelve a etiquetar el paquete con cada cambio y no indica ningún coste.
@@ -72,7 +71,7 @@ Si la tienda prefiere recuperar el paquete y enviarlo de nuevo, [paquete devuelt
 
 ## ¿Puedo cambiar la fecha de entrega de un paquete?
 
-Muchas veces sí, y suele ser más fácil que cambiar la dirección. SEUR te deja cambiar la fecha desde el aviso del día antes o el de la mañana del reparto. DHL eCommerce te deja aplazar la entrega hasta 7 días laborables. GLS dice que con FlexDeliveryService eliges o modificas el día de entrega, y UPS My Choice incluye cambiar la fecha. Correos Modify, en cambio, no incluye otro día entre sus opciones: solo otra dirección, una oficina o un Citypaq.
+Muchas veces sí, y suele ser más fácil que cambiar la dirección. SEUR te deja cambiar la fecha desde el aviso del día antes o el de la mañana del reparto. DHL eCommerce te deja aplazar la entrega hasta 7 días laborables. GLS dice que con FlexDeliveryService eliges o modificas el día de entrega. Correos Modify, en cambio, no incluye otro día entre sus opciones: solo otra dirección, una oficina o un Citypaq.
 
 ¿Te vas unos días? Manda el paquete a un sitio donde te espere: una oficina de Correos lo guarda 15 días, un ServicePoint de DHL eCommerce 10 días naturales y un Parcel Shop de GLS 7 días naturales. Si tardas más, mira [qué pasa con un paquete no recogido](guide:uncollected-parcel).
 
@@ -110,7 +109,7 @@ Correos no dice que su reenvío cubra los envíos de SEUR, GLS, DHL, InPost o Am
 
 ### ¿Necesito una cuenta para cambiar la entrega?
 
-No siempre. Con Correos, GLS y DHL eCommerce te basta el enlace del aviso o tu número de envío. UPS reúne las opciones en UPS My Choice, y registrarse es gratis, pero «Entrega a otra dirección» no funciona hasta que la cuenta está verificada. Si UPS te lo pide, la verificas con un código de activación que te llega por correo postal entre 7 y 14 días después de inscribirte.
+Con Correos, GLS y DHL eCommerce, no: te basta el enlace del aviso o tu número de envío.
 
 ### ¿Puedo mandar el paquete a un locker o a un punto de recogida?
 
@@ -140,5 +139,4 @@ No. Peek sigue el paquete y te enseña cada escaneo; solo la tienda o el transpo
 - [DHL eCommerce España: Opciones para modificar la entrega](https://www.dhl.com/es-es/ecommerce/home/private-shipments/modify-the-delivery/options-for-changing-the-delivery.html) – misma provincia, en reparto solo vecino o conserje
 - [DHL eCommerce España: Entrega modificada a ServicePoint](https://www.dhl.com/es-es/ecommerce/home/private-shipments/modify-the-delivery/deliveries-at-collection-points.html) – un solo cambio, 10 días, 7 días laborables, reembolso y medidas
 - [InPost: Atención al Cliente](https://inpost.es/contacta-con-nosotros) – no se cambia el Punto Pack o Locker una vez admitido
-- [UPS: UPS My Choice](https://www.ups.com/es/es/track/ups-my-choice) – registro gratis, cambiar dirección o fecha, vecino, Access Point, tarifas de transporte, código de activación
 :::

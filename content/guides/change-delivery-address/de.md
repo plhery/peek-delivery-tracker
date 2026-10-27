@@ -55,7 +55,6 @@ Wohin ein Paket stattdessen gehen kann, regelt jeder Paketdienst anders. Eine ne
 | [Hermes](carrier:hermes-de) (WunschZustellung) | WunschPaketShop, WunschNachbar, WunschAblageort, WunschTag. Keine neue Adresse | Kostenlos, alle vier WunschServices |
 | [DPD](carrier:dpd-de) | Abstell-Okay, Wunsch-Nachbar, Pickup Paketshop, anderer Tag | Kein Preis genannt |
 | [GLS](carrier:gls-de) (FlexDeliveryService) | Neue Adresse, Wunschtermin, Abstellerlaubnis, GLS Paketshop, Abholung im Depot, nur wenn der Absender den Service gebucht hat | Kein Preis genannt |
-| [UPS](carrier:ups) My Choice | Eine andere Adresse, ein Nachbar, ein UPS Access Point, ein anderes Datum | Anmeldung kostenlos. Ob eine Änderung etwas kostet, prüfst du vor dem Bestätigen |
 | [Österreichische Post](carrier:austrian-post) | Wunsch-Platz, Poststation, Wunschnachbar, Filiale, Post Partner oder Hermes PaketShop | Empfangsoptionen kostenlos |
 | [Schweizerische Post](carrier:swiss-post) | My Post 24-Automat, PickPost-Stelle, andere Adresse in der Schweiz oder in Liechtenstein, Nachbar im selben Gebäude oder auf dem Nachbargrundstück, Abstell- oder Zustellgenehmigung | Umleiten kostenlos, solange das Paket unterwegs ist. Nach einer Benachrichtigung CHF 8.– |
 
@@ -145,7 +144,6 @@ Nein. Peek verfolgt dein Paket und zeigt, wo es ist. Umleiten können es nur der
 - [DPD: Pakete empfangen](https://www.dpd.com/de/de/empfangen/) – Abstell-Okay, Nachbar, Pickup Paketshop, Tag ändern
 - [DPD: What options do I have if I am not at home?](https://www.dpd.com/de/en/faq/what-options-do-i-have-if-i-am-not-at-home/) – Änderungen bis kurz vor der Zustellung
 - [GLS: Zustelloptionen beim FlexDeliveryService](https://www.gls-pakete.de/geschaeftlich-versenden/faq/de/welche-zustelloptionen-stehen-empfaengern-beim-flexdeliveryservice-zur-verfuegung-q-467913-c-347420) – neue Adresse, Wunschtermin, Paketshop, nur wenn gebucht
-- [UPS Deutschland: UPS My Choice](https://www.ups.com/de/de/track/ups-my-choice) – kostenlose Anmeldung, andere Adresse, Nachbar, Access Point, Datum
 - [Österreichische Post: Pakete umleiten](https://www.post.at/p/a/paketumleitung) – Empfangsoptionen, kostenlos, 3 Werktage
 - [Österreichische Post: Empfangsoptionen](https://www.post.at/p/a/empfangsoptionen) – einmalige Umleitung in Meine Sendungen und der Post App
 - [Österreichische Post: Abstellgenehmigung](https://www.post.at/p/a/abstellgenehmigung) – Ausnahmen wie Inkasso und eigenhändige Sendungen

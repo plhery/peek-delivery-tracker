@@ -73,17 +73,16 @@ Alcuni corrieri ti mostrano i pacchi diretti a te, una volta che ti sei registra
 | Svizzera | La Posta, «I miei invii», gratis | Ricevi in automatico le informazioni su tutti gli invii in arrivo all'indirizzo registrato nel Login clienti Posta: di norma quando il mittente registra il pacco, allo smistamento e dopo il recapito. Con un account verificato su «La mia Posta» vedi l'elenco degli invii più recenti |
 | Italia | Poste Italiane, PostePlus, gratis | Per chi risiede in Italia. Ricevi una notifica ogni volta che Poste prende in carico una spedizione indirizzata a te, ma solo se il mittente ha abilitato il pacco o la raccomandata al servizio |
 | Italia | [InPost](carrier:inpost), app gratuita | Una volta attivato l'account, l'app mostra «tutte le spedizioni collegate al tuo numero di telefono o indirizzo email», senza inserire codici |
-| Italia e Svizzera | UPS My Choice, iscrizione gratuita | «Non serve nessun numero di ricerca»: vedi i pacchi UPS degli ultimi quattro mesi e quelli in arrivo. In Svizzera la pagina c'è in tedesco e in francese, non in italiano |
 
 Per BRT e [GLS](carrier:gls-it) non abbiamo trovato una pagina che spieghi se e come i pacchi in arrivo compaiano da soli nelle loro app: con loro conviene avere il codice.
 
 ### Cerca con il riferimento del mittente
 
-Se il mittente ti dà un suo riferimento, per esempio il numero di un ordine d'acquisto o di una fattura, alcuni corrieri cercano anche con quello: [UPS](carrier:ups) con **Ricerca per numero di riferimento**, FedEx con **Monitorare tramite il numero di riferimento**, [DHL Express](carrier:dhl-express) con **Ricerca per Riferimento**, GLS con il numero del documento di trasporto (**Rif. DDT**). UPS avverte che i dettagli «saranno perlopiù nascosti», e DHL Express dice che senza numero si può cercare solo «a determinate condizioni».
+Se il mittente ti dà un suo riferimento, per esempio il numero di un ordine d'acquisto o di una fattura, alcuni corrieri cercano anche con quello: FedEx con **Monitorare tramite il numero di riferimento**, [DHL Express](carrier:dhl-express) con **Ricerca per Riferimento**, GLS con il numero del documento di trasporto (**Rif. DDT**). DHL Express precisa che senza numero si può cercare solo «a determinate condizioni».
 
 ## Si può tracciare un pacco con nome e cognome?
 
-No, non sulle pagine di tracking: Poste, BRT, GLS, DHL, UPS e la Posta chiedono tutti un codice. E il codice serve anche al telefono: l'Assistenza Clienti di Poste ti dice a che punto è una spedizione, ma ti chiede il codice invio.
+No, non sulle pagine di tracking: Poste, BRT, GLS, DHL e la Posta chiedono tutti un codice. E il codice serve anche al telefono: l'Assistenza Clienti di Poste ti dice a che punto è una spedizione, ma ti chiede il codice invio.
 
 L'unica cosa simile è un account del corriere come quelli qui sopra, legato ai tuoi dati. Nemmeno i [tracker universali](guide:universal-tracker) possono farlo, Peek compreso: per chiedere al corriere serve un codice.
 
@@ -125,7 +124,6 @@ Per distinguerli: un numero accanto alla parola «ordine» è del negozio (eBay,
 | BRT | BRTcode, di 14 o 19 cifre, oppure numero spedizione, di 12 o 14 |
 | GLS | riferimento spedizione; c'è anche l'ID collo |
 | DHL Express | numero di lettera di vettura |
-| UPS | numero di ricerca |
 | FedEx | numero di monitoraggio |
 | La Posta | numero d'invio |
 | eBay.it | codice della spedizione |
@@ -163,10 +161,7 @@ Ancora niente? Chiedi al mittente o al negozio di ricontrollare codice e corrier
 - [La Posta: Invito di ritiro](https://www.post.ch/it/ricezione/invito-di-ritiro) – codice di ritiro, sette giorni (15 per gli invii internazionali), proroga
 - [Planzer Pacchi: Contatti](https://www.planzer-paket.ch/it/contatti/) – messaggio con il numero di spedizione, codice di consegna sull'avviso
 - [Quickpac: FAQ](https://quickpac.ch/en/faq) – numero di 18 cifre, scheda per il ritiro
-- [UPS Italia: UPS My Choice](https://www.ups.com/it/it/track/ups-my-choice) – iscrizione gratuita, nessun numero di ricerca, ultimi quattro mesi
-- [UPS Svizzera: UPS My Choice](https://www.ups.com/ch/de/track/ups-my-choice) – la pagina svizzera in tedesco
-- [UPS Italia: Ricerca pacco](https://www.ups.com/track?loc=it_IT) – ricerca per numero di riferimento, dettagli perlopiù nascosti
-- [UPS Italia: Informazioni sullo stato del tracking](https://www.ups.com/it/it/support/tracking-support/where-is-my-package/understanding-tracking-status) – Etichetta creata: il codice esiste prima che UPS abbia il pacco
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – codici 1Z e la loro cifra di controllo, l'etichetta creata prima che UPS abbia il pacco
 - [FedEx Italia: Monitoraggio delle spedizioni](https://www.fedex.com/it-it/tracking.html) – numero di monitoraggio, avvisi di tentata consegna, numero di riferimento
 - [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z per includere le richieste di risarcimento per danni alla proprietà e alle persone](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prima il partner di vendita, poi il rimborso da Amazon
 - [eBay.it: Controllare lo stato della spedizione dell'oggetto](https://www.ebay.it/help/buying/spedizione-consegna/tracciare-oggetto?id=4027) – Cronologia acquisti, Ordine confermato, codice non ancora caricato

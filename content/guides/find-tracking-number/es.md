@@ -70,13 +70,12 @@ Algunos transportistas te enseñan los envíos que vienen hacia ti si te registr
 | miSEUR | Tus envíos de SEUR como remitente o destinatario | Al registrarte, recupera automáticamente «los envíos asociados a tu email o móvil» |
 | App de GLS (My GLS) | Los envíos de GLS que llevan tu teléfono de registro | GLS pide que pongas bien el móvil al comprar online. Sin registrarte, necesitas el número y el código postal |
 | App de Correos | Envíos como remitente o destinatario, «sin necesidad de introducir ningún código de envío», también los de Vinted y Wallapop | Correos no explica con qué datos los relaciona. Correos ID usa tu correo o tu teléfono, verificados con un código |
-| UPS My Choice, gratis | Los envíos de UPS que te llegan y los que mandas: los programados y los de los últimos cuatro meses | Su web dice que «no es necesario contar con números de seguimiento», pero no explica con qué datos te asocia los envíos |
 
 La app de InPost en España, en cambio, solo habla de seguir tus envíos introduciendo el número.
 
 ### Busca con la referencia del remitente
 
-Si el remitente te da su propia referencia (su número de pedido interno o el de la factura, por ejemplo), algunas empresas de mensajería te dejan buscar el envío con ella: [UPS](carrier:ups) en **Realiza el seguimiento por número de referencia**, FedEx en **Seguimiento por referencia** y [DHL Express](carrier:dhl-express) en **Seguimiento por Referencia**. UPS te pide también un intervalo de fechas y avisa de que los detalles «estarán enmascarados en su mayoría». DHL añade que otros números de referencia del envío pueden servir en el sistema de seguimiento de la división que lo lleva, como DHL Express o DHL Freight.
+Si el remitente te da su propia referencia (su número de pedido interno o el de la factura, por ejemplo), algunas empresas de mensajería te dejan buscar el envío con ella: FedEx en **Seguimiento por referencia** y [DHL Express](carrier:dhl-express) en **Seguimiento por Referencia**. DHL añade que otros números de referencia del envío pueden servir en el sistema de seguimiento de la división que lo lleva, como DHL Express o DHL Freight.
 
 ## ¿Se puede localizar un envío por nombre, DNI o teléfono?
 
@@ -128,8 +127,8 @@ Casi siempre porque es nuevo: la etiqueta ya existe, pero el transportista aún 
 
 Pasado ese plazo, revisa el número:
 
-- **¿Es el de seguimiento?** El número de pedido de la tienda no sirve en la web del transportista. Tampoco el código de liberación de UPS (*package release code*), de 4 a 6 cifras: lo da el remitente, y UPS avisa de que es distinto del número de seguimiento.
-- **¿Es una referencia del remitente?** Su número de pedido interno o el de su factura solo sirven en la búsqueda por referencia de UPS, FedEx o DHL Express (mira arriba).
+- **¿Es el de seguimiento?** El número de pedido de la tienda no sirve en la web del transportista.
+- **¿Es una referencia del remitente?** Su número de pedido interno o el de su factura solo sirven en la búsqueda por referencia de FedEx o DHL Express (mira arriba).
 - **¿Es de este transportista?** En la web de otro no encontrarás el número. Busca el nombre del transportista en el correo de envío y, en GLS, comprueba también el código postal de destino.
 - **¿Has copiado un solo número?** El correo de envío suele traer varios. Copia solo el de seguimiento, sin el texto de alrededor, y revísalo carácter a carácter, o pega el correo entero en Peek para que encuentre el bueno.
 
@@ -148,9 +147,7 @@ Pasado ese plazo, revisa el número:
 - [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – número de expedición, remitente, prueba de admisión, Mis Envíos
 - [App Store: InPost, Rastrea tu pedido](https://apps.apple.com/es/app/inpost-rastrea-tu-pedido/id6748218565) – seguimiento introduciendo el número
 - [MRW: Seguimiento de envíos](https://www.mrw.es/seguimiento/) – «número de envío», en el justificante de la oficina
-- [UPS: UPS My Choice](https://www.ups.com/es/es/track/ups-my-choice) – gratis, entrantes y salientes, cuatro meses, sin números de seguimiento
-- [UPS: Seguimiento](https://www.ups.com/track?loc=es_ES) – seguimiento por número de referencia, intervalo de fechas, detalles enmascarados
-- [UPS: How to use InfoNotice](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – el código de liberación, de 4 a 6 cifras, lo da el remitente y no es el número de seguimiento (en inglés)
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – números 1Z y su dígito de control
 - [FedEx: Seguimiento del envío](https://www.fedex.com/es-es/tracking.html) – etiquetas de puerta, seguimiento por referencia
 - [DHL Express: Seguimiento por Referencia](https://mydhl.express.dhl/es/es/tracking.html#/track-by-reference) – búsqueda por referencia
 - [DHL: Seguimiento, preguntas frecuentes](https://www.dhl.com/es-es/home/seguimiento.html) – 24 a 48 horas, remitente, otras referencias

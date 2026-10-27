@@ -79,7 +79,7 @@ data class AppConfiguration(
                 return if (trimmed.contains("$(")) "" else trimmed
             }
             // `URL(string:)`: nothing for an empty value, invalid characters encoded.
-            fun url(key: String): String? = value(key).nonEmpty?.let { UrlComponents.parseEncodingInvalidCharacters(it)?.url }
+            fun url(key: String): String? = value(key).nonEmpty?.let { UrlComponents.parse(it)?.url }
             val baseUrl = url("SDTAPIBaseURL")
             val supabase = url("SDTSupabaseURL")
             return AppConfiguration(

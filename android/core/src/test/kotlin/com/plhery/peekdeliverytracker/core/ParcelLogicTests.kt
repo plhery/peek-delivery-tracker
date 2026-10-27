@@ -37,10 +37,17 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
+import org.junit.BeforeClass
 import org.junit.Test
 
 /** ParcelLogicTests.swift: a parcel's state, history and attention, and the list's order. */
 class ParcelLogicTests {
+    companion object {
+        @JvmStatic
+        @BeforeClass
+        fun installIcu() = TestIcu.install()
+    }
+
     @Test
     fun pickupPointSplitsNameFromAddressAndOpensAppleMaps() {
         val shop = PickupPoint(" Corner shop & café \n12 Main Street\n\n1000 Town ")

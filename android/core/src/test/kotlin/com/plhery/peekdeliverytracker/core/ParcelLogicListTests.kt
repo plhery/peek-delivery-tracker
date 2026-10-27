@@ -13,10 +13,17 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
+import org.junit.BeforeClass
 import org.junit.Test
 
 /** ParcelLogicTests.swift: the deliveries' list, its cards, the parcel shown beside it, its keys and menus. */
 class ParcelLogicListTests {
+    companion object {
+        @JvmStatic
+        @BeforeClass
+        fun installIcu() = TestIcu.install()
+    }
+
     @Test
     fun deliveredHoldKeepsTheListAsItWasUntilItsCardsLeave() {
         val tea = UUID.randomUUID()

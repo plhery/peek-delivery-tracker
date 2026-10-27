@@ -703,10 +703,11 @@ class CarrierCatalog private constructor(
             val number = data?.activeTrackingNumber?.nonEmpty ?: parcel.trackingNumber
             val definition = info(carrier, language)
             // Replace obsolete generated links saved by earlier app versions.
-            val savedPostNLUrl = parcel.trackingUrl?.let { UrlComponents.parseEncodingInvalidCharacters(it) }
+            val savedPostNLUrl = parcel.trackingUrl?.let { UrlComponents.parse(it) }
+            // `URL.path` drops the slashes that end the path.
             val obsoletePostNLLink = parcel.carrier == CarrierId.SpringGDS &&
                 savedPostNLUrl?.host?.lowercase() == "postnl.post" &&
-                savedPostNLUrl.path.startsWith("/details/")
+                savedPostNLUrl.path.trimEnd('/').startsWith("/details/")
             val savedUrl = if (requiresAmazonAccount(carrier, number) || carrier == CarrierId.InternationalPost ||
                 obsoletePostNLLink || carrier != parcel.carrier || number != parcel.trackingNumber
             ) null else parcel.trackingUrl

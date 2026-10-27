@@ -1,121 +1,101 @@
 ---
-title: UPS tracking : suivi de colis, statuts et contact
-description: Suivre un colis UPS : où trouver le numéro 1Z, ce que veulent dire « Anomalie » et les autres statuts, l'avis InfoNotice, les points Access Point et le contact UPS.
+title: UPS tracking : suivi de colis, statuts et livraison
+description: Suivre un colis UPS : à quoi ressemble le numéro 1Z, ce que veulent dire Exception et les autres scans, Access Point, frais de douane et tes droits en cas de perte.
 slug: ups-tracking-suivi-colis
 published: 2026-10-13
 updated: 2026-10-27
 ---
 
-UPS (United Parcel Service) est le transporteur américain de colis et d'express, présent en France, en Belgique et en Suisse. Pour suivre ton colis, saisis son numéro sur ups.com, ouvre le lien des e-mails de UPS ou colle le numéro dans le champ ci-dessus. Il figure sur l'étiquette et dans l'e-mail d'expédition de la boutique, et commence en général par `1Z`.
+Les numéros de suivi UPS (United Parcel Service) commencent en général par `1Z`. Pour suivre ton colis, colle le numéro ou un lien de suivi UPS dans le champ ci-dessus ; la page de suivi de UPS elle-même se trouve sur ups.com.
 
 ## Numéro de suivi UPS : où le trouver et à quoi il ressemble
 
-Regarde dans l'e-mail d'expédition de la boutique ou sur la page de ta commande, dans les e-mails de UPS (ils contiennent un lien de suivi) et sur l'étiquette. Si le livreur t'a manqué, l'avis de passage porte un numéro d'avis de livraison (Delivery Notice) : UPS l'accepte pour modifier la livraison sans compte. Toujours rien ? Voir [où trouver son numéro de suivi](guide:find-tracking-number).
-
-UPS liste ces formes sur ses pages d'aide au suivi (chiffres inventés) :
+C'est la boutique qui t'envoie le numéro, en général dans l'e-mail d'expédition ou sur la page de ta commande. Un lien de suivi ups.com le contient aussi, après `tracknum=`. Toujours rien ? Voir [où trouver son numéro de suivi](guide:find-tracking-number).
 
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
-| `1Z1234567812345674` | Le numéro de colis habituel : `1Z` puis 16 lettres et chiffres, 18 caractères en tout. Le dernier est une clé de contrôle. |
-| `000000000000` | 12 chiffres. Aux États-Unis, c'est aussi la longueur de la référence imprimée sur l'avis de passage. |
-| `T1234567890` | `T` puis 10 chiffres. |
-| `000000000` | 9 chiffres. |
+| `1Z1234567812345674` | Le numéro de colis UPS : `1Z` puis 16 lettres et chiffres, 18 caractères en tout. Le dernier chiffre est une clé de contrôle calculée sur les 15 caractères qui le précèdent. |
+| `H1234567890` | Une lettre (H, J, K ou V) et 10 chiffres. Ça peut être un numéro UPS, mais d'autres transporteurs utilisent la même forme. |
 
-Le code de 4 à 6 chiffres que certains expéditeurs te donnent pour retirer le colis n'est pas un numéro de suivi : UPS précise qu'il est différent. Un numéro à 12 chiffres peut aussi venir de [FedEx](carrier:fedex) ou de transporteurs comme [Mondial Relay](carrier:mondial-relay), Colis Privé ou DPD France. Si ups.com ne trouve rien, regarde quel transporteur la boutique nomme dans son e-mail.
+## Statuts du suivi UPS : « Exception », « Out for Delivery » et les autres
 
-## Statuts du suivi UPS : « Anomalie », « En livraison » et les autres
+La page de suivi anglaise de UPS affiche une barre de progression (`Label Created`, `We Have Your Package`, `On the Way`, `Out for Delivery`, `Delivered`) et, en dessous, les scans. Peek lit ces scans en anglais et affiche à côté le statut en français. Voici les principaux, à peu près dans l'ordre où un colis les rencontre :
 
-Sur ups.com en français, les statuts s'affichent en français. Peek, lui, lit UPS en anglais et affiche ses mots anglais, d'où la deuxième colonne. Voici les principaux, dans l'ordre où un colis les rencontre :
-
-| UPS écrit | En anglais | Ce que ça veut dire pour toi |
+| UPS écrit | Peek affiche | Ce que ça veut dire pour toi |
 | --- | --- | --- |
-| `Étiquette créée` | `Label Created` | L'expéditeur a imprimé une étiquette et envoyé les informations à UPS. UPS n'a pas encore le colis. |
-| `Expédié/en chemin` | `On the Way` | UPS a le colis, il circule dans son réseau et a désormais une date de livraison prévue. |
-| `Anomalie` | `Exception` | Un imprévu est survenu et la date de livraison peut changer. |
-| `En livraison` | `Out For Delivery` | Le centre UPS local l'a confié à un livreur pour la livraison finale. |
-| `Livré en relais UPS Access Point` | `Delivered to UPS Access Point™ location and awaiting customer pickup.` | Le point UPS Access Point choisi a reçu le colis. |
-| `En attente d’enlèvement par le client` | `Awaiting Customer Collection` | Il est prêt : tu peux aller le retirer. |
-| `Livré` | `Delivered` | Livré, avec l'heure. Sans signature exigée, le livreur l'a laissé dans un endroit sûr. |
+| `Shipper created a label, UPS has not received the package yet.` | Étiquette créée | L'expéditeur a créé une étiquette. UPS n'a pas encore le colis. |
+| `Drop-Off`, `Pickup Scan` | Pris en charge | UPS a le colis : l'expéditeur l'a déposé dans un point Access Point, ou UPS est venu le chercher. Le premier `Arrived at Facility` compte aussi ici. |
+| `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | En transit | Il circule dans le réseau de UPS. `Export Scan` et `Import Scan` marquent le passage d'une frontière. |
+| `Your package is prepared for clearance.` | À la douane | Il passe la douane. |
+| `Duties or taxes are due on this package.` | À la douane | Tu dois payer des frais d'importation avant que UPS livre (voir plus bas). |
+| `Loaded on Delivery Vehicle`, `Out For Delivery Today` | En livraison | Un livreur l'a avec lui. |
+| `The receiver was not available at the time of the final delivery attempt.` | Tentative de livraison | La dernière tentative a échoué. |
+| `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Prêt à être retiré | Il t'attend dans un point UPS Access Point. |
+| `DELIVERED` | Livré | Livré, ou retiré par toi dans un point Access Point. |
+| `Return to Sender` | Retourné à l’expéditeur | Il repart chez l'expéditeur. |
 
-S'y ajoutent des messages anglais comme `Delivery Attempted` (tentative de livraison sans succès) et `Return to Sender` (le colis repart chez l'expéditeur).
+`Exception` est le statut générique de UPS, et il peut ne signaler qu'un simple retard. Lis le scan en dessous : `We're sorry this package may experience a temporary delay.` annonce juste un retard, alors que `The company or receiver name is incorrect. This will delay delivery.` veut dire que la livraison attend tes coordonnées (Peek affiche alors « Problème signalé »). Peek se fie au scan le plus récent, pas au statut générique.
 
-`Expédié/en chemin` peut rester affiché plusieurs jours sans nouveau scan. Selon UPS, un colis qui parcourt une longue distance n'est souvent scanné à nouveau qu'à son centre de destination.
+## Livraison UPS manquée et point Access Point
 
-`Anomalie` est le statut que l'on cherche en anglais sous le nom de « delivery exception ». Ça sonne grave, mais c'est un imprévu qui peut décaler la livraison. UPS en note la raison dans la section « Progression de l'envoi » de la page de suivi, et affiche la nouvelle date dès qu'elle change.
+Quand le livreur ne peut pas livrer, le scan indique que le destinataire était absent ou l'entreprise fermée, et UPS fait une nouvelle tentative. Après la dernière, un autre scan dit la suite : UPS garde le colis, le dépose dans un point Access Point ou le renvoie à l'expéditeur. Plus d'infos dans [avis de passage : que faire](guide:missed-delivery).
 
-`En livraison` (la page d'aide de UPS écrit aussi `En cours de livraison`), mais rien n'est arrivé ? UPS dit qu'il tentera une nouvelle livraison le jour ouvrable suivant.
+UPS peut aussi déposer le colis dans un point UPS Access Point. Une fois qu'il y est, les scans indiquent `Delivered to UPS Access Point™`, puis `UPS Access Point™ possession`, et Peek affiche le nom et l'adresse du point. Ne traîne pas : quand un colis non retiré repart, le scan indique `The UPS Access Point™ location has prepared the package for return to UPS or pickup by UPS.` Si un point Access Point ferme, UPS récupère ses colis et le scan annonce une livraison dans un autre point. Voir [colis non retiré](guide:uncollected-parcel).
 
-## Livraison UPS manquée, avis InfoNotice et point relais Access Point
+## Frais de douane sur un colis UPS
 
-UPS livre du lundi au vendredi, et le samedi dans certaines zones. Sauf si l'expéditeur a choisi un service à heure garantie, les particuliers sont livrés en général entre 9 h et 19 h (parfois plus tard), les entreprises avant la fermeture. UPS peut faire jusqu'à trois tentatives de livraison. Après la dernière, un colis non livrable repart chez l'expéditeur.
+Un colis venu de l'extérieur de l'UE, ou de l'étranger pour la Suisse, peut demander des frais d'importation avant que UPS le livre. Le suivi affiche alors `Duties or taxes are due on this package.` et `Your package is being held until duties and taxes are paid. Awaiting customer action.`
 
-Quand la première tentative échoue, le livreur laisse un avis de passage UPS InfoNotice. UPS conseille de suivre d'abord ton colis. Ensuite, tu peux :
+- **France et Belgique** : comme partout dans l'UE depuis le 1er juillet 2026, une commande de 150 € ou moins venue de l'extérieur de l'UE paie un droit de douane forfaitaire de 3 € par article (les articles semblables comptent ensemble), en plus de la TVA ; c'est le vendeur ou le transporteur qui le perçoit. En France métropolitaine, la douane précise que la TVA est due dès le premier euro et que le transporteur peut te demander ces taxes à la réception, en y ajoutant ses propres frais de dédouanement, sans lien avec ce que perçoit la douane.
+- **Suisse** : selon l'OFDF, dans le trafic postal et de courrier rapide, c'est le transporteur (UPS, La Poste, etc.) qui dédouane, et lui seul peut t'aider à rechercher ton envoi. Il perçoit des frais de dédouanement pour ce travail, en général facturés au destinataire avec les droits de douane et la TVA ; pour leur montant, renseigne-toi auprès de lui.
 
-- **Signer l'avis** à l'endroit « Votre signature » et le remettre là où le livreur l'a laissé, sauf si le colis exige la signature d'un adulte de plus de 18 ans.
-- **Modifier la livraison** depuis la page de suivi : UPS t'envoie par e-mail un code d'accès à usage unique, et sans compte, le numéro d'avis de livraison suffit. Certaines options peuvent manquer : l'expéditeur peut limiter les modifications, et les objets de valeur ou les importations peuvent en être exclus. Une modification demandée par téléphone coûte 6 € hors TVA, selon les pages de contact de UPS France et Suisse.
-- **Retirer le colis dans un centre clients UPS**, si ta demande arrive avant 19 h.
-
-UPS peut aussi déposer le colis dans un point UPS Access Point près de chez toi. Sa page InfoNotice dit qu'il y reste 7 jours civils, puis repart chez l'expéditeur. Son aide au suivi parle de 5 à 7 jours : ne traîne pas. Avant d'y aller, vérifie que le suivi affiche `En attente d’enlèvement par le client`. Apporte une pièce d'identité et ton numéro de suivi. Si quelqu'un y va à ta place, UPS renvoie à ses conditions d'identification supplémentaires.
-
-Pour payer des frais à la livraison, les livreurs acceptent la carte bancaire via SumUp. En point Access Point, les moyens de paiement dépendent du commerce.
+Plus d'infos dans [colis bloqué en douane](guide:customs).
 
 ## Colis UPS bloqué, en retard, perdu ou abîmé
 
-Quelques jours sans scan pendant `Expédié/en chemin`, c'est normal sur un long trajet. Pour savoir quand t'inquiéter, lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
+Si le suivi ne bouge plus, lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
 
-Livré mais introuvable ? Regarde la photo du lieu de livraison sur ups.com/track, puis demande aux personnes de ton foyer, à la loge ou aux voisins. Sinon, UPS conseille de contacter le vendeur pour lancer une réclamation. Voir aussi [colis livré mais non reçu](guide:delivered-not-received).
+Si tu as acheté dans une boutique, c'est à elle de te faire parvenir le colis, même quand UPS le transporte : dans l'UE, selon Your Europe, le commerçant répond des dommages subis par la marchandise de l'expédition jusqu'à la réception.
 
-En cas de perte ou de dommage, c'est en général l'expéditeur qui réclame : UPS lui verse l'indemnisation, et certains expéditeurs (UPS cite Amazon, Dell et Apple) bloquent les réclamations des destinataires. Dans ce cas, adresse-toi à la boutique. Si tu peux déclarer toi-même, UPS dit que la déclaration en tant qu'invité est plus rapide. Le délai pour signaler une perte ou un dommage dépend des conditions du pays d'origine de l'expéditeur. UPS traite une réclamation en 8 à 15 jours ouvrables en général.
+- **France** : selon Service-Public.fr, quand la livraison passe par le transporteur proposé par le vendeur, le vendeur est seul responsable : s'il ne peut pas prouver que tu as reçu le produit et que tu le contestes, la perte est pour lui. Sans date convenue, il doit livrer au plus tard 30 jours après la commande. Passé ce délai, demande-lui par lettre recommandée avec avis de réception ou par e-mail de livrer dans un délai supplémentaire raisonnable. S'il ne livre toujours pas, tu peux annuler la commande, et il doit te rembourser tout ce que tu as payé sous 14 jours.
+- **Belgique** : le SPF Économie conseille de contacter le vendeur, pas l'entreprise de livraison. Si la livraison dépasse largement le délai convenu, tu peux le mettre en demeure, de préférence par e-mail ou lettre recommandée. Le livreur ne peut signer l'accusé de réception à ta place et laisser le colis devant ta porte que si tu l'as autorisé ; sinon, préviens le vendeur et le livreur et conteste l'accusé de réception. En cas de litige, adresse-toi au Service de médiation pour le secteur postal.
 
-## Contacter UPS : téléphone et service client
-
-Pages de contact de UPS, lues le 13 octobre 2026 :
-
-- **France** : 01 73 00 66 61 (service gratuit + prix d'un appel), du lundi au vendredi de 8 h à 19 h, le samedi de 8 h à 17 h ; depuis l'étranger, +33 1 73 00 66 61. Le 0821 233 877 coûte 0,12 €/min + prix d'un appel. Un formulaire e-mail existe aussi, mais la réponse peut prendre plusieurs jours.
-- **Belgique** : +32 (0)78 250 877 (tarif local), du lundi au vendredi de 8 h à 18 h, le samedi de 8 h à 17 h ; e-mail à custsvcbefr@ups.com.
-- **Suisse** : +41 (0) 44 200 41 00, du lundi au vendredi de 8 h à 18 h 30 ; e-mail à custsvcchfr@ups.com.
-
-> UPS met en garde contre les faux messages qui annoncent un colis en attente. UPS ne demande jamais, sans que tu l'aies sollicité, de paiement, de données bancaires, de pièce d'identité ni de mot de passe. Si un message te demande de payer, suis d'abord le colis toi-même sur ups.com et paie seulement là, avec « pay now ».
+Marqué `DELIVERED` mais introuvable ? La page de UPS peut indiquer où le colis a été laissé (par exemple `Left at: Front Door`) et donner une preuve de livraison, que Peek ne conserve pas. Vérifie sur ups.com, puis contacte la boutique. En France, si le vendeur affirme avoir livré, Service-Public.fr dit de le mettre en demeure de t'envoyer le colis, par lettre recommandée avec accusé de réception. Plus d'infos dans [colis livré mais non reçu](guide:delivered-not-received) et [colis perdu](guide:lost-parcel).
 
 ## Suivre un colis UPS avec Peek
 
 [Peek](/) reconnaît UPS tout de suite pour un numéro `1Z` dont la clé de contrôle est bonne. Si elle est fausse, seul UPS est proposé, et UPS refuse le numéro comme mal saisi. Tu peux aussi coller un lien ups.com, ou n'importe quel lien qui contient un numéro `1Z`. Peek n'interroge UPS qu'avec des numéros `1Z` : les autres formes, comme `H1234567890`, ne sont suivies que par des services de suivi, même après « Changer de transporteur ».
 
-Pour lire le suivi, le serveur de Peek ouvre la page de suivi de ups.com dans un navigateur, toutes les 10 minutes en journée, toutes les 5 minutes une fois le colis en livraison, et toutes les une à deux heures la nuit. Si UPS refuse, ou si seul le statut est lisible, des services de suivi complètent l'historique. Tu vois le statut, chaque scan sur une carte avec son lieu et son heure exacte, le jour de livraison prévu (jamais un créneau horaire), l'heure de livraison, le service, le pays de destination et, tant que le colis attend, le nom et l'adresse du point Access Point. Peek peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Pour lire le suivi, le serveur de Peek ouvre la page de suivi de ups.com dans un navigateur, toutes les 10 minutes en journée, toutes les 5 minutes une fois le colis en livraison, et toutes les une à deux heures la nuit. Si UPS refuse, ou si seul le statut est lisible, des services de suivi complètent l'historique. Tu vois le statut, chaque scan sur une carte avec son lieu et son heure exacte, le jour de livraison prévu (jamais un créneau horaire), l'heure de livraison, le pays de destination et, tant que le colis attend, le nom et l'adresse du point Access Point. Peek peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 
-Peek ne reprend ni le nom de la personne qui a signé, ni ton adresse, ni la preuve de livraison, ni l'endroit où le colis a été déposé, ni les horaires du point Access Point. Il n'affiche pas la photo de livraison, et UPS ne lui donne ni le poids ni l'expéditeur. Les scans apparaissent en anglais, tels que UPS les écrit, quelle que soit ta langue : une livraison se lit « DELIVERED ». Aux États-Unis, quand UPS confie un colis Ground Saver à la poste américaine et donne son numéro, Peek suit la suite chez USPS (« Livraison par USPS »). Pour modifier une livraison ou réclamer, adresse-toi à UPS ou à l'expéditeur.
+Peek ne reprend ni le nom de la personne qui a signé, ni ton adresse, ni la preuve de livraison, ni l'endroit où le colis a été déposé, ni les horaires du point Access Point. Il n'affiche pas la photo de livraison, et UPS ne lui donne ni le poids ni l'expéditeur. Les scans apparaissent en anglais, tels que UPS les écrit, quelle que soit ta langue : une livraison se lit « DELIVERED ». Aux États-Unis, quand UPS confie un colis Ground Saver à la poste américaine et donne son numéro, Peek suit la suite chez USPS (« Livraison par USPS »).
 
 ## Questions sur le suivi UPS
 
-### Que veut dire « delivery exception » chez UPS ?
-
-C'est le statut anglais `Exception`, affiché `Anomalie` sur ups.com en français. Un imprévu peut décaler la date de livraison, et UPS en note la raison dans la progression de l'envoi.
-
-### Le numéro de UPS France est-il gratuit ?
-
-Le 01 73 00 66 61 est un « service gratuit + prix d'un appel » : tu ne paies que ta communication. Le 0821 233 877, lui, coûte 0,12 €/min en plus.
-
-### Combien de temps UPS garde un colis en point relais ?
-
-Sa page InfoNotice parle de 7 jours civils dans un point UPS Access Point, son aide au suivi de 5 à 7 jours. Ensuite, le colis repart chez l'expéditeur.
-
 ### Pourquoi mon numéro de suivi UPS est-il refusé ?
 
-Le plus souvent, il est mal saisi : le dernier caractère d'un numéro `1Z` est une clé de contrôle, et une seule erreur le rend invalide. Il peut aussi appartenir à un autre transporteur.
+Le plus souvent, il est mal saisi : le dernier caractère d'un numéro `1Z` est une clé de contrôle, une seule erreur la rend en général fausse, et UPS refuse le numéro. Il peut aussi appartenir à un autre transporteur : regarde lequel l'e-mail de la boutique nomme.
+
+### Au bout de combien de temps le suivi UPS s'affiche-t-il ?
+
+Le premier scan, `Shipper created a label, UPS has not received the package yet.`, apparaît dès que l'expéditeur a créé l'étiquette. Le suivi n'avance qu'une fois que l'expéditeur a déposé le colis ou que UPS est venu le chercher (`Drop-Off`, `Pickup Scan`).
+
+### Puis-je modifier une livraison UPS dans Peek ?
+
+Non : Peek ne fait que lire le suivi de UPS. Les changements que tu fais auprès de UPS apparaissent dans les scans, par exemple `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
+
+### Un SMS de UPS, c'est une arnaque ?
+
+Ça peut l'être. Cybermalveillance.gouv.fr signale de faux SMS et e-mails au nom de transporteurs, UPS compris, qui annoncent un problème de livraison ou des frais à payer (frais de port, TVA, frais de douane) et renvoient vers un faux site qui demande ta carte bancaire. Ne clique pas sur le lien : vérifie le vrai suivi toi-même, sur ups.com ou dans Peek, ou contacte directement le transporteur. De vrais frais d'importation apparaissent dans le suivi, sous forme de scans de douane. En France, signale le SMS au 33700 (gratuit). Plus d'infos dans [arnaque colis par SMS](guide:delivery-scam-texts).
 
 :::sources
-- [UPS : Comprendre le statut de suivi (France)](https://www.ups.com/fr/fr/support/tracking-support/where-is-my-package/understanding-tracking-status) – statuts en français et leur sens, horaires de livraison, photo
-- [UPS : UPS InfoNotice (France)](https://www.ups.com/fr/fr/support/tracking-support/where-is-my-package/how-to-use-infonotice) – jours de livraison, trois tentatives, signature, 19 h, 7 jours civils, pièce d'identité, En attente d’enlèvement par le client
-- [UPS : Assistance suivi (France)](https://www.ups.com/fr/fr/support/tracking-support) – 5 à 7 jours, nouvelle tentative le jour ouvrable suivant, SumUp
-- [UPS : Réclamation (France)](https://www.ups.com/fr/fr/support/file-a-claim) – Amazon, Dell et Apple, conditions du pays de l'expéditeur, 8 à 15 jours ouvrables
-- [UPS : Contactez-nous (France)](https://www.ups.com/fr/fr/support/contact-us) – numéros, horaires, formulaire, 6 €
-- [UPS : Nous contacter (Belgique)](https://www.ups.com/be/fr/support/contact-us) – téléphone, horaires, e-mail
-- [UPS : Contactez-nous (Suisse)](https://www.ups.com/ch/fr/support/contact-us) – téléphone, horaires, e-mail, 6 €
-- [UPS: Tracking Support (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support) – formes de numéro, lien des e-mails, livré introuvable, paiement en point Access Point, « pay now »
-- [UPS: Tracking Support (United States)](https://www.ups.com/us/en/support/tracking-support) – formes de numéro, référence à 12 chiffres de l'avis de passage
-- [UPS: UPS InfoNotice (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – code de retrait de 4 à 6 chiffres, Awaiting Customer Collection
-- [UPS: Change a Delivery (United Kingdom)](https://www.ups.com/gb/en/track/change-delivery) – code d'accès, numéro d'avis de livraison, restrictions
-- [UPS: File a Claim (United Kingdom)](https://www.ups.com/gb/en/support/file-a-claim) – déclaration en tant qu'invité, paiement à l'expéditeur
-- [UPS: Fight Fraud (United Kingdom)](https://www.ups.com/gb/en/support/shipping-support/legal-terms-conditions/fight-fraud) – ce que UPS ne demande jamais, faux messages
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit chez UPS
+- [Douane : Droit de douane forfaitaire de 3 euros sur les ventes à distance de biens importés](https://www.douane.gouv.fr/fiche/droit-de-douane-forfaitaire-de-3-euros-sur-les-ventes-distance-de-biens-importes) – 3 € par article jusqu'à 150 €, règlement de l'UE en vigueur depuis le 1er juillet 2026
+- [Douane : Vous achetez sur internet](https://www.douane.gouv.fr/demarche/vous-achetez-sur-internet) – TVA dès le premier euro hors UE, taxes demandées par le transporteur, ses frais de dédouanement
+- [Service-Public.fr : Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – vendeur seul responsable, preuve de réception, 30 jours, délai supplémentaire, annulation, remboursement sous 14 jours, mise en demeure
+- [SPF Économie : Achats en ligne : voici vos droits !](https://news.economie.fgov.be/245209-achats-en-ligne-voici-vos-droits/) – contacter le vendeur, mise en demeure, accusé de réception contesté, Service de médiation pour le secteur postal (Belgique)
+- [Your Europe : Expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_fr.htm) – 3 € par article dans l'UE, perçu par le vendeur ou le transporteur, responsabilité du commerçant jusqu'à la réception
+- [OFDF : Frais de dédouanement et suivi des colis](https://www.bazg.admin.ch/fr/frais-dedouanement-et-suivi-des-colis) – dédouanement par le transporteur (UPS, La Poste…), recherche de l'envoi, frais de dédouanement (Suisse)
+- [OFDF : Achats sur Internet, envois postaux et par coursier](https://www.bazg.admin.ch/fr/achat-internet-envois-postaux-importation-suisse-cout-douane-tva) – frais du transporteur facturés au destinataire avec les droits et la TVA
+- [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – faux SMS au nom de transporteurs dont UPS, vérifier le vrai suivi, 33700
+- [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formes de numéro, clé de contrôle, scans de UPS, ce que Peek lit chez UPS
 :::

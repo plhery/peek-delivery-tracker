@@ -6,7 +6,7 @@ published: 2026-10-10
 updated: 2026-10-27
 ---
 
-Colis Privé est un transporteur de colis français pour les boutiques en ligne, qui livre en France, en Belgique et au Luxembourg, à domicile ou en point relais. Pour suivre ton colis, saisis son numéro de 12 caractères et le code postal de livraison sur [colisprive.fr](https://colisprive.fr/) (France) ou [colisprive.be](https://colisprive.be/) (Belgique, Luxembourg). Le numéro arrive dans l'e-mail de la boutique ou dans les notifications de Colis Privé.
+Colis Privé est un transporteur de colis français pour les boutiques en ligne, qui livre en France, en Belgique et au Luxembourg, à domicile ou en point relais. Pour suivre ton colis, saisis son numéro de 12 caractères et le code postal de livraison sur [colisprive.fr](https://colisprive.fr/) (France) ou [colisprive.be](https://colisprive.be/) (Belgique, Luxembourg). Le numéro arrive dans l'e-mail de la boutique ou dans les notifications de Colis Privé. Rapprochés à l'été 2026, Colis Privé et [Paack](carrier:paack) passent sous une marque commune, Paack, déployée progressivement à partir de janvier 2027 ; d'ici là, la livraison et le suivi des colis continuent comme d'habitude, selon l'annonce de Colis Privé du 16 octobre 2026.
 
 ## Numéro de suivi Colis Privé : où le trouver
 
@@ -102,6 +102,7 @@ Le service est gratuit, mais l'appel est payant : le 0 806 000 250 est affiché 
 :::sources
 - [Colis Privé : Comment suivre mon colis ?](https://colisprive.fr/aide/comment-suivre-mon-colis-3/) – numéro, code postal, statuts, HS et 2R
 - [Colis Privé : Accueil](https://colisprive.fr/) – pays, 24/48h, relais
+- [Colis Privé : Colis Privé et Paack s'unissent sous une marque commune : Paack](https://colisprive.fr/blog/colis-prive-et-paack-sunissent-sous-une-marque-commune-paack/) – annonce du 16 octobre 2026, rapprochement, marque Paack à partir de janvier 2027, livraison et suivi inchangés
 - [Colis Privé : Les horaires de livraison](https://colisprive.fr/aide/les-horaires-de-livraison/) – horaires, avis de passage
 - [Colis Privé : J'ai eu un avis de passage](https://colisprive.fr/aide/jai-eu-un-avis-de-passage/) – relais ou nouvelle date
 - [Colis Privé : Reprogrammer une livraison](https://colisprive.fr/reprogrammer-une-livraison/) – délais, 12 h à 21 h

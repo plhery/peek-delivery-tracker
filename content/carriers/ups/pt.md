@@ -1,131 +1,93 @@
 ---
 title: UPS tracking: número 1Z, estados e entregas em Portugal
-description: UPS tracking em Portugal: onde está o número 1Z, o que quer dizer «Exceção» e os outros estados, InfoNotice, Access Point, reclamações e contactos da UPS.
+description: UPS tracking em Portugal: como é o número 1Z, o que querem dizer Exception e as outras leituras, os Access Point, a alfândega e os teus direitos.
 slug: ups-tracking
 published: 2026-10-13
 updated: 2026-10-27
 ---
 
-A UPS (United Parcel Service) é a transportadora americana a que muitas lojas, em Portugal e no estrangeiro, confiam as encomendas. Para seguir a tua, introduz o número no ups.com, abre o link dos e-mails da UPS ou cola o número na caixa acima. O número vem na etiqueta e no e-mail de envio da loja, e começa normalmente por `1Z`.
+Os números de seguimento da UPS (United Parcel Service) começam normalmente por `1Z`. Cola o número, ou um link de seguimento da UPS, na caixa acima para seguires a encomenda; a página de seguimento da própria UPS está no ups.com.
 
 ## Número de seguimento UPS: onde está e que formato tem
 
-Procura no e-mail de envio ou na página da encomenda da loja, nos e-mails de notificação da UPS (trazem um link de seguimento) e na etiqueta. Não encontras nada? Vê [onde encontrar o número de seguimento da encomenda](guide:find-tracking-number).
-
-Estas são as formas que a UPS indica nas páginas de ajuda (algarismos inventados):
+Quem te dá o número é a loja que envia a encomenda, normalmente no e-mail de envio ou na página da encomenda. Um link de seguimento do ups.com também o traz, a seguir a `tracknum=`. Não encontras nada? Vê [onde encontrar o número de seguimento da encomenda](guide:find-tracking-number).
 
 | Número (inventado) | O que é |
 | --- | --- |
-| `1Z1234567812345674` | O número de encomenda habitual: `1Z` seguido de 16 letras e algarismos, 18 caracteres ao todo. |
-| `000000000000` | 12 algarismos. |
-| `T1234567890` | `T` seguido de 10 algarismos. |
-| `000000000` | 9 algarismos. |
+| `1Z1234567812345674` | O número de encomenda da UPS: `1Z` seguido de 16 letras e algarismos, 18 caracteres ao todo. O último é um algarismo de controlo calculado a partir dos 15 anteriores. |
+| `H1234567890` | Uma letra (H, J, K ou V) seguida de 10 algarismos. Pode ser um número da UPS, mas outras transportadoras usam o mesmo formato. |
 
-Nos Estados Unidos, o aviso deixado depois de uma entrega falhada (UPS Delivery Notice) traz uma referência de 12 algarismos que, segundo a UPS, também serve para seguir a encomenda. O código de libertação de 4 a 6 algarismos que alguns remetentes dão não é um número de seguimento.
+## Estados do UPS tracking: o que quer dizer «Exception»
 
-Doze algarismos também é o tamanho dos números da [FedEx](carrier:fedex) e de outras transportadoras. Se o ups.com não encontrar nada, confirma no e-mail da loja qual é a transportadora.
+A página de seguimento da UPS em inglês tem uma barra de progresso (`Label Created`, `We Have Your Package`, `On the Way`, `Out for Delivery`, `Delivered`) e, por baixo, as leituras. O Peek lê essas leituras em inglês e mostra por cima o estado em português. As principais, mais ou menos pela ordem em que a encomenda passa por elas:
 
-## Estados do UPS tracking: o que quer dizer «Exceção»
-
-No ups.com em português os estados aparecem em português. O Peek lê a UPS em inglês, por isso mostra as palavras inglesas. Os principais, pela ordem em que a encomenda os encontra:
-
-| A UPS escreve | Em inglês | O que quer dizer para ti |
+| A UPS escreve | O Peek mostra | O que quer dizer para ti |
 | --- | --- | --- |
-| `Etiqueta Criada` | `Label Created` | O remetente imprimiu a etiqueta e enviou os dados à UPS. A UPS ainda não tem a encomenda. |
-| `Enviado/A Caminho` | `On the Way` | A UPS já tem a encomenda, que circula na rede e já tem data de entrega prevista. |
-| `Exceção` | `Exception` | Houve um imprevisto e a data de entrega pode mudar. |
-| `Saiu para Entrega` | `Out For Delivery` | O centro UPS local entregou-a a um estafeta para a entrega final. |
-| `Entregue a um local UPS Access Point` | `Delivered to UPS Access Point™ location and awaiting customer pickup.` | Está num ponto UPS Access Point à tua espera. |
-| `A Aguardar Recolha pelo Cliente` | `Awaiting Customer Pickup` | Está pronta: podes ir levantá-la. |
-| `Entregue` | `Delivered` | Entregue, com data e hora registadas. |
+| `Shipper created a label, UPS has not received the package yet.` | Etiqueta criada | O remetente criou a etiqueta. A UPS ainda não tem a encomenda. |
+| `Drop-Off`, `Pickup Scan` | Aceite pela transportadora | A UPS já a tem: o remetente deixou-a num Access Point ou a UPS foi buscá-la. O primeiro `Arrived at Facility` também conta aqui. |
+| `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | Em trânsito | Circula na rede da UPS. `Export Scan` e `Import Scan` marcam a passagem de uma fronteira. |
+| `Your package is prepared for clearance.` | Na alfândega | Está a ser desalfandegada. |
+| `Duties or taxes are due on this package.` | Na alfândega | Tens de pagar encargos de importação antes de a UPS a entregar (ver abaixo). |
+| `Loaded on Delivery Vehicle`, `Out For Delivery Today` | Em distribuição | Vai com um estafeta. |
+| `The receiver was not available at the time of the final delivery attempt.` | Tentativa de entrega | Também a última tentativa de entrega falhou. |
+| `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Pronta para levantamento | Está à tua espera num UPS Access Point. |
+| `DELIVERED` | Entregue | Entregue, ou levantada por ti num Access Point. |
+| `Return to Sender` | Devolvida ao remetente | Vai voltar ao remetente. |
 
-Em inglês há ainda `Delivery Attempted` (o estafeta não conseguiu entregar) e `Return to Sender` (a encomenda volta ao remetente). A ajuda portuguesa da UPS também escreve «Saída para Entrega» em vez de `Saiu para Entrega`: é o mesmo estado.
+`Exception` é o estado genérico da UPS e pode indicar só um atraso. O que conta é a leitura por baixo: `We're sorry this package may experience a temporary delay.` é isso mesmo, enquanto `The company or receiver name is incorrect. This will delay delivery.` quer dizer que a entrega depende dos teus dados (o Peek mostra «Problema reportado»). O Peek guia-se pela leitura mais recente, não pelo estado genérico.
 
-`Enviado/A Caminho` pode ficar parado vários dias. A UPS explica que, em trajetos longos, a encomenda muitas vezes só volta a ser lida quando chega ao centro de destino.
+## Entrega UPS falhada e Access Point
 
-`Exceção` assusta, mas o motivo está no seguimento: a UPS anota-o na secção de progresso do envio e, quando a data muda, mostra a nova.
+Quando o estafeta não consegue entregar, a leitura diz que o destinatário não estava ou que o estabelecimento estava fechado, e a UPS tenta outra vez. Depois da última tentativa, uma nova leitura mostra o que acontece: a UPS guarda a encomenda, leva-a a um Access Point ou devolve-a ao remetente. Mais em [encomenda não entregue](guide:missed-delivery).
 
-`Entregue` sem assinatura quer dizer que o estafeta deixou a encomenda num local seguro. No ups.com/track vês uma fotografia do sítio exato.
+A UPS também pode levar a encomenda a um UPS Access Point. Aí as leituras dizem `Delivered to UPS Access Point™` e depois `UPS Access Point™ possession`, e o Peek mostra o nome e a morada do ponto. Não esperes demasiado: quando uma encomenda que ninguém levantou volta para trás, a leitura diz `The UPS Access Point™ location has prepared the package for return to UPS or pickup by UPS.` Se um Access Point fechar, a UPS recolhe as encomendas e a leitura indica que a entrega noutro ponto está pendente. Vê [quanto tempo tens para levantar uma encomenda](guide:uncollected-parcel).
 
-## Entrega UPS falhada: InfoNotice, alterar a entrega e Access Point
+## Alfândega: o que pagas numa encomenda UPS
 
-A UPS entrega de segunda a sexta e ao sábado em áreas específicas. Se o remetente não escolheu um serviço com hora marcada, as casas recebem normalmente entre as 9:00 e as 19:00, às vezes mais tarde. Se a encomenda estava em `Saiu para Entrega` e não chegou, a UPS tenta outra vez no dia útil seguinte. Faz até três tentativas e, depois da última, a encomenda que não foi entregue volta ao remetente.
+Uma encomenda que chega de fora da UE pode ter encargos de importação a pagar antes de a UPS a entregar; o seguimento mostra então `Duties or taxes are due on this package.` e `Your package is being held until duties and taxes are paid. Awaiting customer action.`
 
-Quando não te encontra, o estafeta deixa um aviso UPS InfoNotice. O primeiro conselho da UPS é seguir a encomenda. Depois podes:
-
-- **Assinar o aviso** no campo «Assinatura» e deixá-lo onde o estafeta o deixou, para a encomenda ser entregue sem ti. Não serve se for precisa a assinatura de um adulto.
-- **Alterar a entrega:** no seguimento escolhe «Change My Delivery» (na página inglesa) e a UPS manda-te por e-mail um código de uso único. Sem conta, podes usar o número do aviso. Algumas opções podem faltar: o remetente pode ter limitado as alterações, e artigos de valor elevado ou importações podem não ser elegíveis. As páginas de contacto do Reino Unido, França e Espanha indicam uma taxa de 6 € sem IVA pelas alterações pedidas por telefone; a portuguesa não fala nisso.
-- **Levantá-la num centro de clientes UPS**, se o pedido chegar até às 19:00.
-
-A UPS também pode levar a encomenda a um UPS Access Point perto de casa. A página portuguesa do InfoNotice diz que fica lá 7 dias consecutivos e depois volta ao remetente; a ajuda ao seguimento fala em 5 a 7 dias, por isso não esperes. Antes de ires, confirma que o seguimento mostra `A Aguardar Recolha pelo Cliente`. Leva um documento de identificação oficial e o número de seguimento. Quem levantar por ti leva a nota informativa ou o formulário de emissão.
-
-Se houver algo a pagar à porta, os estafetas da UPS aceitam cartão de débito ou crédito pelo SumUp. Num Access Point, as formas de pagamento dependem da loja.
-
-No Reino Unido, a adesão ao UPS My Choice é gratuita e dá aos membros uma estimativa da janela de entrega.
+Segundo a Autoridade Tributária e Aduaneira, desde 1 de julho de 2026 as compras online importadas numa remessa até 150 € pagam, além do IVA, 3 € de direitos aduaneiros por adição, ou seja, por tipo de produto: uma remessa de 100 € com uma camisa e um chapéu paga 6 €. Encomendas feitas e enviadas em separado contam como remessas distintas, mesmo que cheguem no mesmo dia. Segundo o portal Your Europe da UE, cobrar este direito cabe ao vendedor ou à transportadora, e pode já vir incluído no que pagas online. Mais em [encomenda retida na alfândega](guide:customs).
 
 ## Encomenda UPS parada, atrasada ou perdida
 
-Alguns dias sem novidades em `Enviado/A Caminho` são normais em trajetos longos. Quando te deves preocupar está em [porque é que o tracking não atualiza](guide:tracking-not-updating).
+Se o seguimento parou, vê [porque é que o tracking não atualiza](guide:tracking-not-updating).
 
-**Diz entregue mas não está cá?** Vê a fotografia da entrega no ups.com/track e pergunta em casa, na portaria ou aos vizinhos. Se mesmo assim não a encontrares, a UPS diz para contactares o vendedor. Os passos seguintes estão em [encomenda dada como entregue mas não recebi](guide:delivered-not-received).
+Se compraste numa loja, é ela que responde pela entrega, mesmo que seja a UPS a levar a encomenda. Segundo o Your Europe, o vendedor é responsável por qualquer dano desde a expedição até à entrega. Salvo acordo para outro prazo, tem 30 dias para entregar; se não entregar, avisa-o e dá-lhe um prazo suplementar razoável. Se também não o cumprir, podes rescindir o contrato e ser reembolsado o mais rapidamente possível.
 
-**Perdida ou danificada?** Normalmente reclama o remetente: a UPS paga a indemnização a quem enviou. Alguns remetentes não deixam os destinatários abrir reclamação (a UPS dá o exemplo da Amazon, da Dell e da Apple); nesse caso, fala com eles. Quando podes reclamar tu, como convidado é mais rápido. Na Europa não há um prazo único: a UPS remete para as condições do país de onde parte o envio. Uma reclamação resolve-se, em regra, entre 8 e 15 dias úteis.
+Para reclamar, a Direção-Geral do Consumidor aconselha a contactar primeiro o profissional por um meio que deixe prova (carta registada com aviso de receção ou e-mail com aviso de leitura), a explicar o problema e a pedir resposta num prazo. Se o conflito continuar, podes recorrer a um Centro de Informação Autárquico ao Consumidor ou a um centro de arbitragem de conflitos de consumo.
 
-## UPS Portugal: contacto e apoio ao cliente
-
-Assim estava a página de contacto da UPS Portugal a 13 de outubro de 2026:
-
-- **Assistência ao Cliente:** 21 125 29 00, ou (+351) 21 125 29 00 do estrangeiro. A página não indica horário.
-- **E-mail:** custsvcpten@ups.com, com o número de seguimento na linha do assunto.
-- **Reclamações:** a mesma página tem a opção «Apresentar uma Reclamação».
-
-A empresa indicada é a UPS de Portugal, no Prior Velho.
-
-> A UPS avisa contra mensagens falsas que dizem que uma encomenda está à espera. A UPS não pede pagamentos, dados pessoais ou bancários, documentos de identificação nem palavras-passe em mensagens ou chamadas não solicitadas. Se te pedirem para pagar uma encomenda, segue-a tu no ups.com e usa lá «pay now».
+**Diz entregue mas não está cá?** A página da UPS pode mostrar onde a encomenda ficou (`Left at: Front Door`, por exemplo) e uma prova de entrega, que o Peek não guarda. Vê no ups.com e depois fala com a loja. Mais em [encomenda dada como entregue mas não recebi](guide:delivered-not-received) e [encomenda extraviada ou perdida](guide:lost-parcel).
 
 ## Seguir uma encomenda UPS com o Peek
 
 O [Peek](/) reconhece logo a UPS num número `1Z` cujo último algarismo passa no controlo da UPS. Se não passar, propõe só a UPS, que o recusa por estar mal escrito. O Peek só procura números `1Z` na UPS: outras formas, como `H1234567890`, ficam para serviços de seguimento, mesmo depois de «Alterar transportadora». Também podes colar um link do ups.com ou qualquer link com um número `1Z`.
 
-O servidor do Peek abre a página de seguimento do ups.com num navegador e lê a resposta, de 10 em 10 minutos durante o dia, de 5 em 5 minutos quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite. Se a UPS recusar, ou se só der para ler o estado, serviços de seguimento preenchem o histórico. Vês o estado, cada leitura num mapa com o local e a hora exata, o dia de entrega previsto (nunca uma janela horária), a hora da entrega, o serviço, o país de destino e, enquanto a encomenda espera, o nome e a morada do Access Point. As notificações escolhes tu: todas as atualizações, só as importantes ou só no dia da entrega.
+O servidor do Peek abre a página de seguimento do ups.com num navegador e lê a resposta, de 10 em 10 minutos durante o dia, de 5 em 5 minutos quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite. Se a UPS recusar, ou se só der para ler o estado, serviços de seguimento preenchem o histórico. Vês o estado, cada leitura num mapa com o local e a hora exata, o dia de entrega previsto (nunca uma janela horária), a hora da entrega, o país de destino e, enquanto a encomenda espera, o nome e a morada do Access Point. As notificações escolhes tu: todas as atualizações, só as importantes ou só no dia da entrega.
 
 Não vês quem assinou, a tua morada, a prova de entrega, onde ficou a encomenda nem a fotografia; peso e remetente, a UPS não os dá. As leituras aparecem no inglês da UPS e a entrega lê-se «DELIVERED». Nos Estados Unidos, quando a UPS passa uma encomenda Ground Saver ao correio americano (USPS) e indica o número, o Peek segue-a lá assim que o USPS mostra progresso e indica que é o USPS a entregar.
 
 ## Perguntas sobre o UPS tracking
 
-### O que significa «delivery exception» na UPS?
-
-É o estado inglês `Exception`, em português `Exceção`: um imprevisto pode mudar a data de entrega. A UPS indica o motivo no progresso do envio e mostra a nova data quando ela muda.
-
-### Qual é o telefone da UPS Portugal?
-
-O número da Assistência ao Cliente é o 21 125 29 00, ou (+351) 21 125 29 00 de fora de Portugal. Também podes escrever para custsvcpten@ups.com.
-
 ### Quantos caracteres tem um número de seguimento UPS?
 
-O mais habitual tem 18: `1Z` e mais 16 letras e algarismos, como `1Z1234567812345674`. O último algarismo serve de controlo, por isso um número mal copiado costuma ser recusado.
+O mais habitual tem 18: `1Z` e mais 16 letras e algarismos, como `1Z1234567812345674`. O último algarismo serve de controlo, por isso um número mal copiado costuma ser recusado. Se a UPS não o reconhecer, confirma também se o e-mail da loja indica outra transportadora.
 
-### Quanto tempo fica uma encomenda UPS num Access Point?
+### Quanto tempo demora a aparecer o seguimento da UPS?
 
-Segundo a página portuguesa do InfoNotice, 7 dias consecutivos; a ajuda ao seguimento fala em 5 a 7 dias. Depois, volta ao remetente.
+A primeira leitura, `Shipper created a label, UPS has not received the package yet.`, aparece assim que o remetente cria a etiqueta. Só avança quando o remetente entrega a encomenda ou a UPS a vai buscar (`Drop-Off`, `Pickup Scan`).
+
+### Posso alterar a entrega UPS no Peek?
+
+Não: o Peek só lê o seguimento da UPS. As alterações que fizeres com a UPS aparecem nas leituras, como `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
+
+### Uma SMS a pedir para pagar uma encomenda UPS é verdadeira?
+
+Desconfia. O Gabinete Cibercrime da Procuradoria-Geral da República alertou, em julho de 2023, para mensagens falsas em nome dos CTT que dizem haver uma encomenda pendente e pedem uma pequena taxa, de 2 ou 3 euros, antes da entrega; o link abre uma página falsa que pede os dados do cartão e, a seguir, o código recebido por SMS. Lembra também que os serviços de entrega têm sido terreno fértil para este esquema. Ignora e apaga estas mensagens, sem responder, e confirma a encomenda tu mesmo no ups.com ou no Peek. Se já deste os dados do cartão, contacta o banco e cancela-o. Mais em [SMS ou e-mail falso: como saber se é burla](guide:delivery-scam-texts).
 
 :::sources
-- [UPS: Apoio ao seguimento (Portugal)](https://www.ups.com/pt/pt/support/tracking-support) – entrega até às 19:00, nova tentativa no dia útil seguinte, 5 a 7 dias, «Saída para Entrega», contactar o vendedor, SumUp
-- [UPS: estado de seguimento (Portugal)](https://www.ups.com/pt/pt/support/tracking-support/where-is-my-package/understanding-tracking-status) – estados em português, horário de entrega, fotografia da entrega
-- [UPS: InfoNotice (Portugal)](https://www.ups.com/pt/pt/support/tracking-support/where-is-my-package/how-to-use-infonotice) – dias de entrega, três tentativas, assinatura, 19:00, 7 dias consecutivos, documento, «A Aguardar Recolha pelo Cliente»
-- [UPS: Contacte-nos (Portugal)](https://www.ups.com/pt/pt/support/contact-us) – telefone, e-mail, reclamação, empresa
-- [UPS: Reclamação (Portugal)](https://www.ups.com/pt/pt/support/file-a-claim) – condições do país do remetente, Amazon, Dell e Apple, 8 a 15 dias úteis
-- [UPS: Tracking (Portugal)](https://www.ups.com/track?loc=pt_PT) – estado «Entregue» no seguimento em português
-- [UPS: Tracking Support (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support) – formas do número, link nos e-mails, pagamento num Access Point, «pay now»
-- [UPS: Tracking Support (United States)](https://www.ups.com/us/en/support/tracking-support) – formas do número, referência do Delivery Notice
-- [UPS: UPS InfoNotice (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – código de libertação, horário e mapa do Access Point
-- [UPS: Understanding Tracking Status (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – leituras em trajetos longos, entrega sem assinatura
-- [UPS: Change a Delivery (United Kingdom)](https://www.ups.com/gb/en/track/change-delivery) – código de uso único, número do aviso, limites às alterações
-- [UPS: UPS My Choice (United Kingdom)](https://www.ups.com/gb/en/track/ups-my-choice) – adesão gratuita, estimativa da janela de entrega
-- [UPS: Contact Us (United Kingdom)](https://www.ups.com/gb/en/support/contact-us) – 6 € por alterações pedidas por telefone
-- [UPS: Contactez-nous (France)](https://www.ups.com/fr/fr/support/contact-us) – 6 € por alterações pedidas por telefone
-- [UPS: Contacto (España)](https://www.ups.com/es/es/support/contact-us) – 6 € por alterações pedidas por telefone
-- [UPS: File a Claim (United Kingdom)](https://www.ups.com/gb/en/support/file-a-claim) – reclamação como convidado, pagamento ao remetente
-- [UPS: Fight Fraud (United Kingdom)](https://www.ups.com/gb/en/support/shipping-support/legal-terms-conditions/fight-fraud) – o que a UPS nunca pede, mensagens falsas
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra da UPS
+- [Autoridade Tributária e Aduaneira: Mercadorias eCommerce](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/Mercadorias_eCommerce.aspx) – 3 € por adição desde 1 de julho de 2026, remessas até 150 €, exemplo de 6 €, encomendas separadas
+- [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo suplementar, rescisão e reembolso, responsabilidade do vendedor, quem cobra os 3 €
+- [Direção-Geral do Consumidor: Conflitos de consumo](https://www.consumidor.gov.pt/consumidor_4/direitos-dos-consumidores1/conflitos-de-consumo) – contactar o profissional com prova, centros de informação e de arbitragem
+- [Ministério Público, Gabinete Cibercrime: alerta de 5 de julho de 2023](https://cibercrime.ministeriopublico.pt/sites/default/files/documentos/pdf/2023.07.05_alerta_phishing_ctt_visa_4.pdf) – mensagens falsas de encomenda pendente, taxa de 2 ou 3 euros, o que fazer
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formatos do número, algarismo de controlo, leituras da UPS, o que o Peek lê da UPS
 :::

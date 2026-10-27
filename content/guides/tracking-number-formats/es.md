@@ -27,7 +27,7 @@ Si prefieres ahorrarte el trabajo de detective, pega el número, un enlace del t
 
 ## El formato del número de seguimiento en cada empresa
 
-Cada empresa lo llama a su manera: «código de envío» en Correos, «número de envío» en [MRW](carrier:mrw) y [TIPSA](carrier:tipsa), «número de expedición» en InPost, «número de seguimiento» en [GLS](carrier:gls-es), Correos Express y Paack. Todos hablan de lo mismo: el número con el que se sigue tu paquete.
+Cada empresa lo llama a su manera: «código de envío» en Correos, «número de envío» en [MRW](carrier:mrw) y [TIPSA](carrier:tipsa), «número de expedición» en InPost, «número de seguimiento» en [GLS](carrier:gls-es) y Correos Express. Todos hablan de lo mismo: el número con el que se sigue tu paquete.
 
 Esto es lo que dicen las empresas y la norma postal sobre los números que más vas a ver en España. Cuando la empresa no publica el formato, la tabla da el que reconocen los datos de transportistas que usa Peek: sirve de pista, no de prueba.
 
@@ -44,7 +44,7 @@ Esto es lo que dicen las empresas y la norma postal sobre los números que más 
 | [Mondial Relay](carrier:mondial-relay) | «n° d'expédition» (número de envío): 8 cifras, que su seguimiento pide junto con el código postal del destinatario; su web belga acepta también 10 cifras (un código de marca y ese número) y 12 (más el número de bulto). El código de barras de 26 cifras de la etiqueta solo es de Mondial Relay |
 | InPost (Punto Pack, Locker) | «número de expedición»; el ejemplo de su localizador tiene 8 caracteres. La web de Mondial Relay en España ya lleva a la de InPost |
 | Ecoscooting | según esos datos, `CNESP` y 20 cifras |
-| [Paack](carrier:paack) | su seguimiento pide el «Número de pedido» (sus preguntas frecuentes lo llaman número de seguimiento) junto con el código postal de entrega. Paack no publica ningún formato y su propio ejemplo mezcla cifras, guiones y minúsculas, así que puede parecerse al número de otra empresa: cópialo tal cual, sin espacios y respetando mayúsculas y minúsculas |
+| [Paack](carrier:paack) | su seguimiento pide el número de pedido o el del código de barras de la etiqueta, junto con el código postal de entrega. Según esos datos, casi siempre es el número de pedido de la tienda o el código de barras, sin formato fijo, así que puede parecerse al número de otra empresa. Hay tres excepciones: `PK` y 18 cifras es de Paack (paquetes que entrega para Evri International), `5340` y 14 cifras apunta primero a Paack, y un número de paquete de SHEIN (`C` o `E`, una fecha de seis cifras y 8 cifras más) puede ser de Paack |
 | [UPS](carrier:ups) | `1Z` y 16 letras o cifras, 18 caracteres en total, como `1Z999AA10123456784`, un ejemplo con un dígito de control de UPS válido |
 | [DHL Express](carrier:dhl-express) | 10 cifras, nunca letras, según DHL Express en los Países Bajos |
 | [4PX](carrier:4px) | `4PX`, 13 cifras y `CN`; 4PX no publica ningún número de ejemplo, y su web acepta de 5 a 50 letras y cifras. `LP`, 13 cifras y `CN` es probablemente de 4PX |
@@ -137,7 +137,7 @@ Un paquete que cruza una frontera suele cambiar de manos, y cada empresa puede i
 
 - **Los envíos postales** son el caso fácil: la UPU solo permite un número S10 por envío, así que el mismo número suele funcionar en la web del correo de origen y en la de Correos.
 - **Amazon:** reparte la última milla desde sus estaciones logísticas con ayuda de sus proveedores de transporte.
-- **Paack:** se presenta como empresa de paquetería para empresas y tiendas online, presente en España, Portugal, Francia e Italia. Cuando tu pedido entra en sus instalaciones, te manda su propio enlace de seguimiento, y su formulario pide el número de seguimiento y el código postal de entrega.
+- **Paack:** a los paquetes que le pasa Evri International les da un número propio, `PK` y 18 cifras, que Evri International también conoce. Su propio seguimiento pide el número y el código postal de entrega.
 - **AliExpress con envío económico:** Cainiao dice que el seguimiento termina al entregar el paquete al transportista local, y que el vendedor puede decirte cómo contactar con ese transportista. Más en [seguir un paquete que viene de China](guide:tracking-from-china).
 
 Un número que no devuelve nada no siempre está mal escrito. Correos Express avisa de que un envío recién registrado puede tardar unas horas en mostrar información, y te pide comprobar que el número «corresponde a Correos Express». CTT, en Portugal, da otros dos motivos: el código solo existe para la [aduana](guide:customs), u otra empresa entrega el envío. Si un número válido simplemente no se mueve todavía, lee [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
@@ -158,11 +158,7 @@ Un número que no devuelve nada no siempre está mal escrito. Correos Express av
 - [Mondial Relay: Suivi de colis](https://www.mondialrelay.fr/suivi-de-colis/) – número de envío y código postal
 - [Mondial Relay: Étiquette](https://storage.mondialrelay.fr/etiquette-mondial-relay-v-24.pdf) – código de barras de 26 cifras
 - [Mondial Relay Bélgica: Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 o 12 cifras
-- [Paack: Seguimiento de mi pedido](https://paack.co/es/seguimiento-mi-pedido/) – enlace de seguimiento propio, número y código postal de entrega
-- [Paack: Empresa de paquetería para empresas](https://paack.co/es/) – envíos para empresas y tiendas online
-- [Paack: ¿Dónde estamos?](https://paack.co/es/donde-estamos/) – presente en España, Francia, Italia y Portugal
-- [Paack: Track your order](https://paack.co/shipments/tracking) – número de pedido y código postal
-- [Paack Support: Otras preguntas](https://help.paack.co/es/support/solutions/folders/44001208240) – número de seguimiento y código postal
+- [Universal Parcel Scraper: Paack](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/paack) – número de pedido o código de barras con el código postal de entrega, sin formato fijo; `PK` y 18 cifras en los paquetes de Evri International, `5340` y 14 cifras, números de paquete de SHEIN
 - [About Amazon España: ¿Cómo llegan los paquetes de Amazon a su destino?](https://www.aboutamazon.es/noticias/inversiones-y-creacion-de-empleo/como-llegan-los-paquetes-de-amazon-a-su-destino) – estaciones logísticas y proveedores de transporte en la última milla
 - [UPS: ejemplo de etiqueta](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – el número 1Z
 - [DHL Express Países Bajos: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 cifras

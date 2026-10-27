@@ -1,121 +1,93 @@
 ---
-title: UPS Sendungsverfolgung: Status, Zustellung und Kontakt
-description: UPS-Paket verfolgen: wo die 1Z-Trackingnummer steht, was Status wie „Ausnahme“ heißen, wie InfoNotice und Access Point funktionieren und wie du UPS erreichst.
+title: UPS Sendungsverfolgung: Nummer, Status und Zustellung
+description: UPS-Paket verfolgen: wie die 1Z-Trackingnummer aussieht, was Scans wie „Exception“ bedeuten, Access Point, Zollgebühren und deine Rechte bei Verlust.
 slug: ups-sendungsverfolgung
 published: 2026-10-13
 updated: 2026-10-27
 ---
 
-UPS (United Parcel Service) ist der US-amerikanische Paket- und Expressdienst, mit dem viele Shops in Deutschland, Österreich und der Schweiz verschicken. Dein Paket verfolgst du auf ups.com, über den Link in UPS' E-Mail-Benachrichtigungen oder indem du die Nummer oben ins Feld einfügst. Sie steht auf dem Etikett und in der Versand-E-Mail des Shops und beginnt meist mit `1Z`.
+UPS-Sendungsnummern (UPS steht für United Parcel Service) beginnen meist mit `1Z`. Füg die Nummer oder einen UPS-Tracking-Link oben ins Feld ein, um dein Paket zu verfolgen. UPS' eigene Sendungsverfolgung findest du auf ups.com.
 
 ## UPS Trackingnummer: wo sie steht und wie sie aussieht
 
-Schau in die Versandbestätigung des Shops oder auf die Bestellseite, in die E-Mails von UPS (sie enthalten einen Tracking-Link) und aufs Etikett. Nichts gefunden? Mehr in [Sendungsnummer finden](guide:find-tracking-number).
-
-Diese Formen nennt UPS auf seinen Hilfeseiten (Ziffern erfunden):
+Die Nummer bekommst du vom Shop, der das Paket verschickt, meist in der Versandbestätigung oder auf der Bestellseite. Ein Tracking-Link von ups.com enthält sie ebenfalls, hinter `tracknum=`. Nichts gefunden? Mehr in [Sendungsnummer finden](guide:find-tracking-number).
 
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
-| `1Z1234567812345674` | Die übliche Paketnummer: `1Z` und 16 Buchstaben und Ziffern, 18 Zeichen. Das letzte Zeichen ist eine Prüfziffer. |
-| `000000000000` | 12 Ziffern. In manchen Ländern hat auch die Referenz auf UPS' Benachrichtigungskarte diese Länge. |
-| `T1234567890` | `T` und 10 Ziffern. |
-| `000000000` | 9 Ziffern. |
+| `1Z1234567812345674` | UPS' Paketnummer: `1Z` und 16 Buchstaben und Ziffern, 18 Zeichen. Das letzte Zeichen ist eine Prüfziffer, berechnet aus den 15 Zeichen davor. |
+| `H1234567890` | Ein Buchstabe (H, J, K oder V) und 10 Ziffern. Das kann eine UPS-Nummer sein, andere Paketdienste nutzen aber dieselbe Form. |
 
-Der 4- bis 6-stellige Freigabecode, den dir mancher Versender schickt, ist keine Sendungsnummer. 12 Ziffern vergeben auch [FedEx](carrier:fedex) und mehrere europäische Paketdienste wie BRT, Colis Privé oder Mondial Relay. Findet ups.com zu so einer Nummer nichts, schau in der Versand-E-Mail nach, welchen Paketdienst der Shop nennt.
+## UPS Status: was „Exception“, „Out for Delivery“ und Co. bedeuten
 
-## UPS Status: was „Ausnahme“, „Zustellung läuft“ und Co. bedeuten
+UPS' englische Tracking-Seite zeigt einen Fortschrittsbalken (`Label Created`, `We Have Your Package`, `On the Way`, `Out for Delivery`, `Delivered`) und darunter die Scans. Peek liest diese Scans auf Englisch und zeigt darüber den Stand auf Deutsch. Hier die wichtigsten, ungefähr in der Reihenfolge, in der ein Paket sie durchläuft:
 
-UPS' Tracking-Seite gibt es pro Land und Sprache. Auf ups.com/de liest du die deutschen Status, Peek zeigt die englischen (mehr dazu unten). Hier die wichtigsten, in der Reihenfolge, in der ein Paket sie durchläuft:
-
-| UPS schreibt | Auf Englisch | Was es für dich heißt |
+| UPS schreibt | Peek zeigt | Was es für dich heißt |
 | --- | --- | --- |
-| `Etikett erstellt` | `Label Created` | Der Versender hat ein Etikett gedruckt und UPS die Daten geschickt. UPS hat das Paket noch nicht. |
-| `Versendet/Auf dem Weg` | `On the Way` | UPS hat das Paket, es ist unterwegs und hat jetzt ein geplantes Zustelldatum. |
-| `Ausnahme` | `Exception` | Etwas Unerwartetes ist passiert, das Zustelldatum kann sich ändern. |
-| `Zustellung läuft` | `Out For Delivery` | Das UPS-Center vor Ort hat es einem Fahrer zur Zustellung gegeben. |
-| `Zustellung an einen UPS Access Point` | `Delivered to UPS Access Point™ location and awaiting customer pickup.` | Das Paket liegt in einem UPS Access Point und wartet auf dich. |
-| `Zugestellt` | `Delivered` | Zugestellt, mit Uhrzeit. Ohne Unterschrift kann es an einem sicheren Ort abgestellt worden sein, ups.com/track zeigt dann ein Foto. |
+| `Shipper created a label, UPS has not received the package yet.` | Angekündigt | Der Versender hat ein Etikett erstellt. UPS hat das Paket noch nicht. |
+| `Drop-Off`, `Pickup Scan` | Beim Paketdienst eingegangen | UPS hat das Paket: Der Versender hat es in einem Access Point abgegeben, oder UPS hat es abgeholt. Das erste `Arrived at Facility` zählt auch dazu. |
+| `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | Unterwegs | Es ist in UPS' Netz unterwegs. `Export Scan` und `Import Scan` markieren eine Grenze. |
+| `Your package is prepared for clearance.` | Beim Zoll | Es wird verzollt. |
+| `Duties or taxes are due on this package.` | Beim Zoll | Du musst Einfuhrabgaben zahlen, bevor UPS zustellt (siehe unten). |
+| `Loaded on Delivery Vehicle`, `Out For Delivery Today` | In Zustellung | Ein Fahrer hat es dabei. |
+| `The receiver was not available at the time of the final delivery attempt.` | Zustellversuch | Auch der letzte Zustellversuch ist gescheitert. |
+| `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Abholbereit | Es liegt in einem UPS Access Point und wartet auf dich. |
+| `DELIVERED` | Zugestellt | Zugestellt oder von dir im Access Point abgeholt. |
+| `Return to Sender` | Zurück an Absender | Es geht zurück an den Versender. |
 
-Dazu kommen englische Meldungen wie `Delivery Attempted` (Zustellversuch ohne Erfolg) und `Return to Sender` (das Paket geht zurück an den Versender).
+`Exception` ist UPS' allgemeiner Status und kann eine bloße Verspätung bedeuten. Entscheidend ist der Scan darunter: `We're sorry this package may experience a temporary delay.` heißt genau das, `The company or receiver name is incorrect. This will delay delivery.` dagegen, dass die Zustellung an deinen Angaben hängt (Peek zeigt dann „Problem gemeldet“). Peek richtet sich nach dem neuesten Scan, nicht nach dem allgemeinen Status.
 
-`Versendet/Auf dem Weg` kann tagelang stehen bleiben. Laut UPS werden Pakete auf langen Strecken oft erst im Zielverteilzentrum wieder gescannt.
+## UPS Zustellung verpasst und Access Point
 
-`Ausnahme` klingt dramatisch, ist aber oft nur eine Verzögerung. Den Grund vermerkt UPS im Abschnitt „Sendungsfortschritt“, und sobald sich das Datum ändert, zeigt die Sendungsverfolgung das neue.
+Trifft der Fahrer dich nicht an, steht im Scan, dass der Empfänger nicht da oder das Geschäft geschlossen war, und UPS versucht es erneut. Nach dem letzten Versuch zeigt ein weiterer Scan, wie es weitergeht: UPS behält das Paket, bringt es in einen Access Point oder schickt es an den Versender zurück. Mehr in [Paket verpasst](guide:missed-delivery).
 
-`Zustellung läuft`, aber nichts kam? Laut UPS folgt dann am nächsten Werktag ein neuer Zustellversuch.
+UPS kann das Paket auch in einen UPS Access Point bringen. Dort lauten die Scans `Delivered to UPS Access Point™`, dann `UPS Access Point™ possession`, und Peek zeigt Name und Adresse des Access Points. Lass es nicht zu lange liegen: Geht ein nicht abgeholtes Paket zurück, lautet der Scan `The UPS Access Point™ location has prepared the package for return to UPS or pickup by UPS.` Schließt ein Access Point, holt UPS seine Pakete ab, und der Scan kündigt die Zustellung an einen anderen Access Point an. Mehr in [Paket nicht abgeholt](guide:uncollected-parcel).
 
-## UPS Zustellung verpasst, ändern oder im Access Point abholen
+## Zollgebühren bei UPS-Paketen
 
-UPS stellt montags bis freitags zu und samstags in ausgewählten Gebieten, außer an UPS-Feiertagen. UPS-Standard-Pakete kommen laut UPS Deutschland in der Regel zwischen 9.00 und 19.00 Uhr, samstags bis 14.00 Uhr, wenn gebucht. Um die Feiertage kann es auch später werden. UPS macht nach eigenem Ermessen bis zu drei Zustellversuche. Danach geht ein unzustellbares Paket an den Versender zurück.
+Kommt ein Paket aus einem Nicht-EU-Staat, können Einfuhrabgaben fällig werden, bevor UPS zustellt. Die Sendungsverfolgung zeigt dann `Duties or taxes are due on this package.` und `Your package is being held until duties and taxes are paid. Awaiting customer action.`
 
-Verpasst dich der Fahrer, hinterlässt er eine UPS InfoNotice. UPS rät: Verfolge zuerst dein Paket. Dann hast du diese Möglichkeiten:
-
-- **Unterschreiben:** Unterschreib die InfoNotice bei „Ihre Unterschrift“ und leg sie dorthin zurück, wo der Fahrer sie hinterlassen hat. Das geht nicht, wenn das Paket die Unterschrift einer Person über 18 braucht.
-- **Zustellung ändern:** Wähle in der Sendungsverfolgung „Meine Lieferung ändern“, dann schickt dir UPS einen einmaligen Passcode per E-Mail. Eine andere Zustelladresse kostet laut UPS eine zusätzliche Gebühr. Manche Optionen fehlen: Der Versender kann Änderungen sperren, und wertvolle Waren oder Importe sind teils ausgenommen. Änderungen per Telefon kosten 6 € ohne MwSt.
-- **Selbst abholen:** In einem UPS-Kundencenter, wenn deine Anfrage bis 19 Uhr eingeht.
-
-UPS kann das Paket auch in einen UPS Access Point in deiner Nähe bringen. Die InfoNotice-Seite nennt 7 Kalendertage, die Tracking-Hilfe 5 bis 7 Tage, danach geht es an den Versender zurück. Warte also nicht zu lange. Schau vorher in der Sendungsverfolgung nach, ob es zur Abholung bereit ist. Bring einen amtlichen Lichtbildausweis und die Sendungsnummer mit. Holt jemand anderes das Paket für dich ab, gelten laut UPS zusätzliche Regeln zur Identifizierung.
-
-Musst du an der Tür etwas zahlen, nehmen UPS-Fahrer laut UPS bevorzugt Debit- oder Kreditkarte über SumUp, bar geht auch. Im Access Point hängt die Zahlungsart vom Laden ab.
+In Deutschland übernimmt laut Zoll in den meisten Fällen der Post- oder Kurierdienst die Zollanmeldung und legt die Einfuhrabgaben aus. Du zahlst sie in der Regel bei der Zustellung, dazu meist eine Servicepauschale, deren Höhe in den AGB des Dienstes steht. Seit dem 1. Juli 2026 fällt für Sendungen aus Nicht-EU-Staaten bis 150 € ein pauschaler Zoll von 3 € je Warenkategorie an, dazu wie bisher die Einfuhrumsatzsteuer von 19 bzw. 7 %. Dieser Pauschalzoll gilt laut dem EU-Portal „Ihr Europa“ in der ganzen EU, also auch in Österreich. Mehr in [Paket beim Zoll](guide:customs).
 
 ## UPS Paket kommt nicht an, ist verspätet oder beschädigt
 
-Ruhige Tage bei `Versendet/Auf dem Weg` sind normal. Wann du dir Sorgen machen solltest, steht in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+Steht die Sendungsverfolgung still, lies [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Zugestellt, aber nicht da?** Der Fahrer stellt Pakete an einem sicheren Ort ab, manchmal auch bei Nachbarn oder in einem Access Point. Auf ups.com siehst du, wo es liegt, und gegebenenfalls ein Foto. Findest du es nicht, sagt UPS: Wende dich an den Verkäufer, damit er einen Ersatzanspruch stellt. Mehr in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
+Hast du bei einem Händler bestellt, ist er dein Ansprechpartner, auch wenn UPS das Paket bringt. Laut „Ihr Europa“ haftet er für Schäden an der Ware vom Versand bis zur Übergabe an dich. Ist nichts anderes vereinbart, muss er innerhalb von 30 Tagen liefern. Kommt nichts, setz ihm eine angemessene Nachfrist; hält er auch die nicht ein, kannst du vom Vertrag zurücktreten und bekommst dein Geld zurück. Das gilt in der ganzen EU.
 
-**Verloren oder beschädigt?** Meist meldet der Versender den Schaden, und UPS zahlt an ihn. Manche großen Versender sperren Ansprüche von Empfängern, UPS nennt Amazon, Dell und Apple: Dann wendest du dich an sie. Wo du selbst melden darfst, geht es als Gast am schnellsten. Eine einheitliche Frist gibt es in Europa nicht: Laut UPS gelten die Geschäftsbedingungen im Herkunftsland des Versenders. Ein Ersatzanspruch ist laut UPS in der Regel in 8 bis 15 Werktagen erledigt.
+In Deutschland gilt laut Verbraucherzentrale außerdem: Du musst nichts bezahlen, solange du die Ware nicht erhalten hast. Stellt der Paketdienst das Paket einfach vor die Tür und es wird gestohlen, oder gibt er es einem Hausbewohner, den du nicht bevollmächtigt hast, trägt der Verkäufer den Verlust. Du kannst Absender und Lieferdienst eine Frist zur Zustellung setzen.
 
-## UPS Kontakt: Telefonnummer und E-Mail
+Ist ein verlorenes, gestohlenes oder beschädigtes Paket mit dem Paketdienst nicht zu klären, kannst du bei der Schlichtungsstelle Post der Bundesnetzagentur eine gebührenfreie Schlichtung beantragen. Voraussetzung: Du hast vorher vergeblich eine Einigung versucht, und es geht um 10 bis 2.500 €. Stellst du den Antrag als Verbraucher, muss das Postunternehmen teilnehmen. Im Anbieterverzeichnis Post der Bundesnetzagentur steht UPS als „UPS Management LLC“ mit Sitz in Neuss.
 
-So stand es am 13. Oktober 2026 auf UPS' Kontaktseiten:
-
-- **Deutschland:** +49 (0)69 66 40 50 60 (Ortstarif), Montag bis Freitag 7.00 bis 19.00 Uhr, Samstag 8.00 bis 17.00 Uhr. E-Mail an custsvcdede@ups.com mit der Sendungsnummer im Betreff, Antwort montags bis freitags innerhalb von 24 Stunden. Dazu ein Kontaktformular.
-- **Österreich:** +43 (0) 159 914 2030, Montag bis Freitag 7.00 bis 19.00 Uhr, Samstag 8.00 bis 14.00 Uhr, E-Mail an custsvcatde@ups.com.
-- **Schweiz:** +41 (0) 44 200 41 00, Montag bis Freitag 8.00 bis 18.30 Uhr, E-Mail an custsvcchde@ups.com.
-
-> UPS warnt vor gefälschten E-Mails und SMS, die ein Paket zur Zustellung ankündigen und eine Vorauszahlung oder persönliche Daten verlangen. UPS fordert nie unaufgefordert Zahlungen, Kontodaten, Ausweise oder Passwörter an. Klick keine Links darin an. Sollst du für ein Paket zahlen, verfolge es selbst auf ups.com und zahl nur dort über „pay now“.
+**Zugestellt, aber nicht da?** UPS' Seite kann zeigen, wo das Paket abgestellt wurde (etwa `Left at: Front Door`), und einen Zustellnachweis. Peek speichert beides nicht. Schau also auf ups.com nach und wende dich dann an den Händler. Mehr in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received) und [Paket verloren](guide:lost-parcel).
 
 ## UPS-Paket mit Peek verfolgen
 
-[Peek](/) erkennt UPS sofort an einer `1Z`-Nummer, deren letzte Ziffer UPS' Prüfung besteht. Fällt sie durch, wird nur UPS angeboten, und UPS lehnt sie als vertippt ab. Bei UPS selbst fragt Peek nur `1Z`-Nummern ab. Die anderen Formen aus der Tabelle oben und Nummern wie `H1234567890` (Buchstabe und 10 Ziffern) gehen deshalb nie an UPS: Wählst du über „Paketdienst ändern“ UPS, liefern nur Tracking-Dienste den Verlauf. Links von ups.com mit einer Nummer kannst du ebenso einfügen wie jeden Link, in dem eine `1Z`-Nummer steckt.
+[Peek](/) erkennt UPS sofort an einer `1Z`-Nummer, deren letzte Ziffer UPS' Prüfung besteht. Fällt sie durch, wird nur UPS angeboten, und UPS lehnt sie als vertippt ab. Bei UPS selbst fragt Peek nur `1Z`-Nummern ab. Andere Formen wie `H1234567890` aus der Tabelle oben gehen deshalb nie an UPS: Wählst du über „Paketdienst ändern“ UPS, liefern nur Tracking-Dienste den Verlauf. Links von ups.com mit einer Nummer kannst du ebenso einfügen wie jeden Link, in dem eine `1Z`-Nummer steckt.
 
-Peeks Server öffnet dafür UPS' Tracking-Seite in einem Browser, tagsüber alle 10 Minuten, ab der Zustellung alle 5 Minuten und nachts alle ein bis zwei Stunden. Blockt UPS den Abruf oder ist nur der Status lesbar, liefern Tracking-Dienste den Verlauf. Du siehst den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den geplanten Zustelltag (nie ein Zeitfenster), die Zustellzeit, den Service, das Zielland und, solange das Paket wartet, Name und Adresse des Access Points. Mitteilungen bekommst du auf Wunsch bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind, wer unterschrieben hat, deine Adresse, der Zustellnachweis, der Ablageort und das Zustellfoto. Gewicht und Absender gibt UPS nicht heraus.
+Peeks Server öffnet dafür UPS' Tracking-Seite in einem Browser, tagsüber alle 10 Minuten, ab der Zustellung alle 5 Minuten und nachts alle ein bis zwei Stunden. Blockt UPS den Abruf oder ist nur der Status lesbar, liefern Tracking-Dienste den Verlauf. Du siehst den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den geplanten Zustelltag (nie ein Zeitfenster), die Zustellzeit, das Zielland und, solange das Paket wartet, Name und Adresse des Access Points. Mitteilungen bekommst du auf Wunsch bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind, wer unterschrieben hat, deine Adresse, der Zustellnachweis, der Ablageort und das Zustellfoto. Gewicht und Absender gibt UPS nicht heraus.
 
-Die Scans erscheinen in jeder Sprache in UPS' englischer Fassung: Zugestellt heißt dort „DELIVERED“. Übergibt UPS in den USA ein Ground-Saver-Paket an die US-Post und nennt deren Nummer, geht die Verfolgung dort weiter („Zustellung durch USPS“), sobald USPS das Paket bewegt. Zustellung ändern oder Schäden melden geht nur bei UPS oder beim Versender.
+Die Scans erscheinen in jeder Sprache in UPS' englischer Fassung: Zugestellt heißt dort „DELIVERED“. Übergibt UPS in den USA ein Ground-Saver-Paket an die US-Post und nennt deren Nummer, geht die Verfolgung dort weiter („Zustellung durch USPS“), sobald USPS das Paket bewegt.
 
 ## Fragen zur UPS Sendungsverfolgung
 
 ### Warum funktioniert die UPS Sendungsverfolgung nicht?
 
-Prüf zuerst die Nummer: Das letzte Zeichen einer `1Z`-Nummer ist eine Prüfziffer, ein falsches Zeichen macht sie ungültig. Steht nur `Etikett erstellt`, hat UPS das Paket noch nicht. Findet ups.com gar nichts, kann die Nummer zu einem anderen Paketdienst gehören.
+Prüf zuerst die Nummer: Das letzte Zeichen einer `1Z`-Nummer ist eine Prüfziffer, ein falsches Zeichen macht sie meist ungültig, und UPS lehnt sie ab. Steht nur `Shipper created a label, UPS has not received the package yet.`, hat UPS das Paket noch nicht: Weiter geht es erst, wenn der Versender es abgibt oder UPS es abholt (`Drop-Off`, `Pickup Scan`). Oder die Nummer gehört zu einem anderen Paketdienst: Schau, welchen die Versand-E-Mail nennt.
 
-### Was bedeutet „Delivery Exception“ bei UPS?
+### Kann ich die UPS-Zustellung in Peek ändern?
 
-Es ist UPS' englischer Status `Exception`, auf Deutsch `Ausnahme`: Ein unerwartetes Ereignis kann das Zustelldatum verschieben. Den Grund nennt UPS im Sendungsfortschritt.
+Nein, Peek liest UPS' Sendungsverfolgung nur mit. Änderungen, die du bei UPS vornimmst, erscheinen in den Scans, etwa `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
 
-### Stellt UPS samstags zu?
+### Ist eine SMS von UPS echt?
 
-Nur in ausgewählten Gebieten: UPS stellt montags bis freitags zu und samstags dort, wo es das anbietet, außer an UPS-Feiertagen.
-
-### Wie lange bleibt ein UPS-Paket im Access Point?
-
-Laut UPS' InfoNotice-Seite 7 Kalendertage, die Tracking-Hilfe nennt 5 bis 7 Tage. Danach geht es an den Versender zurück.
+Nicht unbedingt. Die Verbraucherzentralen warnen vor SMS angeblicher Paketdienste, in denen du auf einen Link tippen sollst: Die Folge können schädliche Apps, Massen-SMS oder Abofallen sein. Tipp den Link nicht an, installier keine App, antworte nicht und lösch die SMS. Erwartest du ein Paket, gib die Sendungsnummer selbst auf ups.com oder in Peek ein. Zollgebühren zahlst du in der Regel bei der Zustellung, nicht vorab über eine Internetseite. Bietet ein Paketdienst die Zahlung vorab an, musst du dich dafür registriert haben, und seine Nachrichten nennen immer Sendungsnummer und Absender. Mehr in [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 
 :::sources
-- [UPS: Unterstützung bei der Sendungsverfolgung (Deutschland)](https://www.ups.com/de/de/support/tracking-support) – Zustellzeiten, nächster Werktag, Abstellen mit Foto, Verkäufer, SumUp und Barzahlung, 5 bis 7 Tage
-- [UPS: Status verstehen (Deutschland)](https://www.ups.com/de/de/support/tracking-support/where-is-my-package/understanding-tracking-status) – deutsche Status und ihre Bedeutung
-- [UPS: InfoNotice-Leitfaden (Deutschland)](https://www.ups.com/de/de/support/tracking-support/where-is-my-package/how-to-use-infonotice) – Zustelltage, drei Versuche, Unterschrift, 19 Uhr, 7 Kalendertage, Ausweis
-- [UPS: Eine Zustellung ändern (Deutschland)](https://www.ups.com/de/de/track/change-delivery) – Passcode, Gebühren, Einschränkungen
-- [UPS: Einen Ersatzanspruch anmelden (Deutschland)](https://www.ups.com/de/de/support/file-a-claim) – Herkunftsland des Versenders, 8 bis 15 Werktage, Amazon, Dell und Apple
-- [UPS: Kontakt (Deutschland)](https://www.ups.com/de/de/support/contact-us) – Telefon, Zeiten, E-Mail
-- [UPS: Kontakt (Österreich)](https://www.ups.com/at/de/support/contact-us) – Telefon, Zeiten, E-Mail, 6 €
-- [UPS: Kontakt (Schweiz)](https://www.ups.com/ch/de/support/contact-us) – Telefon, Zeiten, E-Mail, 6 €
-- [UPS: Betrug bekämpfen (Deutschland)](https://www.ups.com/de/de/support/shipping-support/legal-terms-conditions/fight-fraud) – gefälschte Nachrichten, was UPS nie verlangt
-- [UPS: Live-Tracking (Deutschland)](https://www.ups.com/track?loc=de_DE) – deutscher Status `Zugestellt`
-- [UPS: Tracking Support (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support) – Nummernformen, „pay now“
-- [UPS: Tracking Support (United States)](https://www.ups.com/us/en/support/tracking-support) – Nummernformen, Referenz der Benachrichtigungskarte
-- [UPS: UPS InfoNotice (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – Freigabecode
-- [UPS: File a Claim (United Kingdom)](https://www.ups.com/gb/en/support/file-a-claim) – Gast, Zahlung an den Versender
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek bei UPS liest
+- [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – Kurierdienst meldet an und legt aus, Zahlung bei Zustellung, Servicepauschale, 3 € seit 1. Juli 2026, 19 bzw. 7 %
+- [Ihr Europa: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – 30 Tage, Nachfrist, Rücktritt, Haftung des Händlers, 3 € je Position in der EU
+- [Verbraucherzentrale: Was tun, wenn meine Online-Bestellung nach dem Versand nicht ankommt?](https://www.verbraucherzentrale.de/wissen/digitale-welt/onlinehandel/was-tun-wenn-meine-onlinebestellung-nach-dem-versand-nicht-ankommt-28083) – nichts zahlen ohne Ware, Fehler des Zustellers, Frist
+- [Verbraucherzentrale: Paketdienst-SMS: Vorsicht, Abzocke!](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/paketdienstsms-vorsicht-abzocke-58988) – Fake-SMS, Zollgebühren bei Zustellung, Nummer selbst eingeben
+- [Bundesnetzagentur: Schlichtungsstelle Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/start.html) – gebührenfrei, Voraussetzungen, 10 bis 2.500 €, Teilnahmepflicht
+- [Bundesnetzagentur: Anbieterverzeichnis Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/Anbieterverzeichnis/PostAnbieterverzeichnis.html) – UPS (UPS Management LLC, Neuss) als Postdienstleister eingetragen
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – Nummernformen, Prüfziffer, UPS' Scans, was Peek bei UPS liest
 :::

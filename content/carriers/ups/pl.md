@@ -1,119 +1,97 @@
 ---
-title: UPS tracking: śledzenie paczki, statusy i kontakt
-description: Śledzenie paczki UPS: gdzie jest numer 1Z, co znaczą statusy jak „Wydarzenie wyjątkowe”, awizo InfoNotice, punkty UPS Access Point i infolinia UPS Polska.
+title: UPS tracking: śledzenie paczki w Polsce, statusy, reklamacje
+description: Śledzenie paczki UPS: jak wygląda numer 1Z, co znaczą Exception i inne skany, punkty Access Point, cło od paczek spoza UE i reklamacja w UPS Polska.
 slug: ups-tracking-sledzenie-paczki
 published: 2026-10-13
 updated: 2026-10-27
 ---
 
-UPS (United Parcel Service) to amerykańska firma kurierska i ekspresowa, z której korzysta wiele sklepów wysyłających paczki w Polsce i z zagranicy. Paczkę śledzisz na ups.com, przez link z e-maili UPS albo wklejając numer w pole powyżej. Numer jest na etykiecie i w wiadomościach od sklepu lub UPS, a zwykle zaczyna się od `1Z`.
+Numery przesyłek UPS (United Parcel Service) zwykle zaczynają się od `1Z`. Wklej numer albo link do śledzenia UPS w pole powyżej, żeby śledzić paczkę; własne śledzenie UPS znajdziesz na ups.com.
 
 ## UPS tracking number: gdzie jest numer przesyłki i jak wygląda
 
-Szukaj w e-mailu sklepu o wysyłce albo na stronie zamówienia, w e-mailach UPS (mają link do śledzenia) i na etykiecie. UPS podaje też, że numerem z awiza (Delivery Notice) możesz śledzić paczkę i zmienić doręczenie. Nadal nic? Zobacz, [gdzie jeszcze szukać numeru przesyłki](guide:find-tracking-number).
-
-Takie kształty numerów UPS podaje na swoich stronach pomocy (cyfry wymyślone):
+Numer dostajesz od sklepu, który wysyła paczkę, zwykle w e-mailu o wysyłce albo na stronie zamówienia. Link do śledzenia z ups.com też go zawiera, po `tracknum=`. Nadal nic? Zobacz, [gdzie jeszcze szukać numeru przesyłki](guide:find-tracking-number).
 
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
-| `1Z1234567812345674` | Zwykły numer paczki: `1Z` i 16 liter i cyfr. Ostatni znak to cyfra kontrolna. |
-| `000000000000` | 12 cyfr: inny numer UPS. Tyle cyfr ma też numer z awiza Delivery Notice, które UPS zostawia w niektórych krajach. |
-| `T1234567890` | `T` i 10 cyfr. |
-| `000000000` | 9 cyfr. |
+| `1Z1234567812345674` | Numer paczki UPS: `1Z` i 16 liter i cyfr, razem 18 znaków. Ostatni znak to cyfra kontrolna wyliczana z 15 znaków przed nią. |
+| `H1234567890` | Litera (H, J, K lub V) i 10 cyfr. To może być numer UPS, ale taki sam kształt mają numery innych przewoźników. |
 
-Kod zwolnienia paczki (4 do 6 cyfr), który dają niektórzy nadawcy, nie jest numerem przesyłki. Dwanaście cyfr mają też numery [FedEx](carrier:fedex) i kilku europejskich firm kurierskich. Jeśli ups.com nic nie znajduje, sprawdź w e-mailu od sklepu, jakiego przewoźnika podaje.
+## Statusy UPS: co znaczy „Exception” i inne
 
-## Statusy UPS: co znaczy „Wydarzenie wyjątkowe” i inne
+Angielska strona śledzenia UPS ma pasek postępu (`Label Created`, `We Have Your Package`, `On the Way`, `Out for Delivery`, `Delivered`), a pod nim skany. Peek czyta te skany po angielsku i pokazuje nad nimi status po polsku. Oto najważniejsze, mniej więcej w kolejności, w jakiej spotyka je paczka:
 
-Strona UPS i jej śledzenie działają osobno dla każdego kraju i języka. Na ups.com po polsku zobaczysz polskie statusy, a Peek pokazuje angielskie (więcej niżej). Oto najważniejsze, w kolejności, w jakiej spotyka je paczka:
-
-| UPS pisze | Po angielsku | Co to znaczy dla Ciebie |
+| UPS pisze | Peek pokazuje | Co to znaczy dla Ciebie |
 | --- | --- | --- |
-| `Utworzono etykietę` | `Label Created` | Nadawca wydrukował etykietę i wysłał UPS dane. UPS nie ma jeszcze paczki. |
-| `Wysyłka/W drodze` | `On the Way` | UPS ma paczkę, jest w drodze i ma już planowaną datę doręczenia. |
-| `Przekazano do doręczenia` | `Out For Delivery` | Paczka jest dziś u kuriera, w drodze do Ciebie. |
-| `Wydarzenie wyjątkowe` | `Exception` | Stało się coś nieoczekiwanego i data doręczenia może się zmienić. |
-| `Dostarczone do punktu UPS Access Point` | `Delivered to UPS Access Point™ location and awaiting customer pickup.` | Paczka jest w punkcie UPS Access Point i czeka na odbiór. |
-| `Oczekiwanie na odbiór przez klienta` | `Awaiting Customer Pickup` | Możesz iść po paczkę do punktu. |
-| `Doręczono` | `Delivered` | Doręczona, z godziną. Bez podpisu mogła zostać w bezpiecznym miejscu, a zdjęcie jest na ups.com/track. |
+| `Shipper created a label, UPS has not received the package yet.` | Zarejestrowana | Nadawca utworzył etykietę. UPS nie ma jeszcze paczki. |
+| `Drop-Off`, `Pickup Scan` | Przyjęta przez przewoźnika | UPS ma paczkę: nadawca nadał ją w punkcie Access Point albo UPS ją od niego odebrał. Pierwszy skan `Arrived at Facility` też się tu liczy. |
+| `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | W transporcie | Paczka jedzie przez sieć UPS. `Export Scan` i `Import Scan` oznaczają przekroczenie granicy. |
+| `Your package is prepared for clearance.` | W urzędzie celnym | Trwa odprawa celna. |
+| `Duties or taxes are due on this package.` | W urzędzie celnym | Musisz zapłacić należności przywozowe, zanim UPS doręczy paczkę (więcej niżej). |
+| `Loaded on Delivery Vehicle`, `Out For Delivery Today` | W doręczeniu | Paczkę wiezie kurier. |
+| `The receiver was not available at the time of the final delivery attempt.` | Próba doręczenia | Ostatnia próba doręczenia też się nie udała. |
+| `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Do odbioru | Paczka czeka na Ciebie w punkcie UPS Access Point. |
+| `DELIVERED` | Dostarczona | Doręczona albo odebrana przez Ciebie w punkcie Access Point. |
+| `Return to Sender` | Zwrócona nadawcy | Paczka wraca do nadawcy. |
 
-Do tego dochodzą angielskie komunikaty, takie jak `Delivery Attempted` (nieudana próba doręczenia, z awizem) i `Return to Sender` (paczka wraca do nadawcy).
+`Exception` to ogólny status UPS i może oznaczać zwykłe opóźnienie. Liczy się skan pod nim: `We're sorry this package may experience a temporary delay.` oznacza właśnie opóźnienie, a `The company or receiver name is incorrect. This will delay delivery.` – że doręczenie czeka na Twoje dane (Peek pokazuje wtedy „Zgłoszono problem”). Peek kieruje się najnowszym skanem, nie ogólnym statusem.
 
-`Przekazano do doręczenia` brzmi jak przekazanie gdzieś dalej, ale to angielskie „Out for Delivery”: paczka jest już w samochodzie kuriera. Jeśli tego dnia nie dotrze, UPS spróbuje doręczyć ją w następnym dniu roboczym.
+## Kurier UPS Cię nie zastał i punkty Access Point
 
-`Wysyłka/W drodze` potrafi stać kilka dni. Według UPS paczki na długich trasach zwykle nie są skanowane aż do centrum docelowego.
+Gdy kurier nie może doręczyć paczki, skan mówi, że odbiorcy nie było albo firma była zamknięta, a UPS próbuje ponownie. Po ostatniej próbie kolejny skan pokazuje, co dalej: UPS przechowuje paczkę, zawozi ją do punktu Access Point albo odsyła nadawcy. Więcej w poradniku [awizo i nieudana próba doręczenia](guide:missed-delivery).
 
-`Wydarzenie wyjątkowe` to angielskie „Exception”: coś nieoczekiwanego może przesunąć datę doręczenia. Powód UPS zapisuje w historii przesyłki, a gdy data się zmieni, śledzenie pokaże nową.
+UPS może też zawieźć paczkę do punktu UPS Access Point. Wtedy skany brzmią `Delivered to UPS Access Point™`, a potem `UPS Access Point™ possession`, a Peek pokazuje nazwę i adres punktu. Nie zwlekaj z odbiorem: gdy nieodebrana paczka wraca, skan brzmi `The UPS Access Point™ location has prepared the package for return to UPS or pickup by UPS.` Gdy punkt Access Point się zamyka, UPS zabiera z niego paczki, a skan informuje, że paczka czeka na doręczenie do innego punktu. Zobacz też [nieodebrana paczka](guide:uncollected-parcel).
 
-## Kurier UPS Cię nie zastał: awizo, ponowne doręczenie i Access Point
+## Cło za paczkę UPS spoza UE
 
-UPS doręcza od poniedziałku do piątku, a w wybranych obszarach także w soboty. Jeśli nadawca nie wybrał usługi z doręczeniem na określoną godzinę, do domów paczki trafiają zwykle między 9:00 a 19:00 (czasem później), a do firm do końca godzin pracy. UPS może według własnego uznania podjąć do trzech prób doręczenia, a po ostatniej paczka, której nie da się doręczyć, wraca do nadawcy.
+Jeśli w śledzeniu pojawi się `Duties or taxes are due on this package.`, UPS doręczy paczkę dopiero, gdy zapłacisz należności przywozowe; zaraz potem zwykle widać `Your package is being held until duties and taxes are paid. Awaiting customer action.`
 
-Gdy kurier Cię nie zastanie, zostawia awizo UPS InfoNotice. UPS radzi najpierw sprawdzić śledzenie. Potem możesz:
+Według Krajowej Administracji Skarbowej od 1 lipca 2026 r. zakupy internetowe spoza UE nie korzystają już ze zwolnienia z cła dla przesyłek do 150 EUR. Zamiast niego obowiązuje ryczałtowe cło 3 EUR za każdą pozycję towarową w zgłoszeniu celnym: dwie bawełniane koszulki to jedna pozycja, koszulka i etui na telefon – dwie. Tego cła nie płaci konsument, tylko sprzedawca, platforma internetowa lub ich przedstawiciel, ale sprzedawca może je doliczyć do ceny lub kosztów dostawy. Po zwrocie towaru cło i VAT nie są zwracane. Więcej w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 
-- **Podpisać awizo** w wyznaczonym miejscu i zostawić je tam, gdzie zostawił je kurier. Nie dotyczy to paczek, które wymagają podpisu osoby dorosłej.
-- **Zmienić doręczenie** w śledzeniu na ups.com: UPS wyśle Ci e-mailem jednorazowy kod. Możesz na przykład przekierować paczkę do punktu Access Point. Nadawca może jednak zablokować zmiany, a cenne towary czy przesyłki z importu bywają wyłączone. Z bezpłatnym kontem UPS My Choice dostajesz powiadomienia i przekładasz kilka paczek naraz.
+## Paczka UPS opóźniona, zaginiona lub uszkodzona
 
-UPS może też zawieźć paczkę do punktu UPS Access Point blisko Ciebie. Polska strona o awizie mówi, że czeka tam 7 dni kalendarzowych, pomoc do śledzenia podaje 5 do 7 dni, więc nie zwlekaj; potem wraca do nadawcy. Zanim pójdziesz, sprawdź w śledzeniu, czy ma status `Oczekiwanie na odbiór przez klienta`: tam są też godziny otwarcia i mapa. Weź ważny dokument tożsamości ze zdjęciem i numer przesyłki. Jeśli odbiera ktoś za Ciebie, potrzebuje awizo albo kodu zwolnienia paczki.
+Jeśli status stoi w miejscu, zajrzyj do poradnika [status przesyłki się nie zmienia](guide:tracking-not-updating).
 
-Jeśli przy doręczeniu trzeba zapłacić, kurier przyjmuje kartę przez SumUp (to forma, którą UPS woli). Gdy na awizie zaznaczono pole o płatności tylko gotówką, tak polecił nadawca. Kwotę możesz też zapłacić wcześniej online, jeśli nadawca podał UPS Twoje dane kontaktowe. W punkcie Access Point formy płatności zależą od sklepu.
+Przy zakupach w sklepie to sprzedawca odpowiada za to, żeby paczka do Ciebie dotarła, nawet gdy wiezie ją UPS. Według unijnego portalu Your Europe sprzedawca odpowiada za uszkodzenia towaru od wysyłki aż do chwili, gdy go otrzymasz. Jeśli nie umówiliście się inaczej, musi dostarczyć towar w ciągu 30 dni; gdy go nie ma, przypomnij sprzedawcy o zamówieniu i wyznacz mu dodatkowy, rozsądny termin. Jeśli i tego nie dotrzyma, możesz rozwiązać umowę i odzyskać pieniądze.
 
-## UPS śledzenie przesyłki nie działa, paczka opóźniona lub zaginiona
+UPS Polska Sp. z o.o. jest wpisana do rejestru operatorów pocztowych, który prowadzi Prezes UKE. O reklamacjach usług pocztowych UKE pisze tak: reklamację może złożyć nadawca albo adresat – gdy przesyłka zostanie mu doręczona albo gdy nadawca zrzeknie się na jego rzecz prawa dochodzenia roszczeń. Można to zrobić pisemnie, elektronicznie (np. przez formularz na stronie operatora) lub ustnie, w ciągu 12 miesięcy od dnia nadania. Operator ma 30 dni na odpowiedź; jeśli nie odpowie w terminie, reklamacja zostaje uznana. Od odmowy możesz się odwołać w ciągu 14 dni. Gdy odpowiedź Cię nie zadowala, zostaje interwencja Prezesa UKE, bezpłatne pozasądowe rozwiązywanie sporów konsumenckich albo sąd.
 
-Kilka cichych dni przy `Wysyłka/W drodze` to norma. Kiedy zacząć się martwić, wyjaśnia poradnik [status przesyłki się nie zmienia](guide:tracking-not-updating).
+**Paczka przyszła uszkodzona?** Według UKE podstawą reklamacji jest protokół spisany w obecności pracownika operatora, który ją doręczył. Uszkodzenia, których nie było widać z zewnątrz przy odbiorze, trzeba zgłosić operatorowi najpóźniej 7 dni po otrzymaniu przesyłki. Więcej w poradniku [uszkodzona paczka](guide:damaged-parcel).
 
-Status `Doręczono`, a paczki nie ma? Zapytaj domowników, sąsiadów i recepcję, sprawdź zdjęcie doręczenia na ups.com. Jeśli to nie pomoże, UPS pisze: skontaktuj się ze sprzedawcą. Więcej w poradniku [paczka doręczona, a jej nie ma](guide:delivered-not-received).
-
-Przy zgubionej lub uszkodzonej paczce reklamację składa zwykle nadawca. UPS pisze, że odbiorca, który chce informacji, ma się zwrócić do tego, kto nadał paczkę. Wielu dużych nadawców (UPS wymienia Amazon, Dell i Apple) blokuje reklamacje odbiorców, a odszkodowanie UPS i tak wypłaca nadawcy. Jeśli możesz złożyć reklamację sam, szybciej pójdzie jako gość. Termin zgłoszenia zależy od warunków kraju, z którego paczka wyszła; jednego europejskiego terminu UPS nie podaje. Rozpatrzenie zajmuje według UPS zwykle 8 do 15 dni roboczych.
-
-## UPS kontakt: infolinia UPS Polska
-
-Strona kontaktowa UPS Polska, stan na 13 października 2026:
-
-- **Dział wsparcia klienta:** +48 22 489 48 77, od poniedziałku do piątku 7:30–20:00, w sobotę 8:00–17:00.
-- **E-mail:** formularz na stronie kontaktowej; UPS uprzedza, że odpowiedź może zająć nawet kilka dni.
-
-> UPS ostrzega przed fałszywymi wiadomościami, które piszą, że paczka na coś czeka. UPS nie prosi z własnej inicjatywy o płatności, dane osobowe ani numery kont. Nie klikaj takich linków: jeśli masz coś zapłacić, wyszukaj paczkę w śledzeniu na ups.com i zapłać tam.
+**Status `DELIVERED`, a paczki nie ma?** Strona UPS może pokazać, gdzie zostawiono paczkę (np. `Left at: Front Door`), i potwierdzenie doręczenia; Peek tego nie zapisuje. Sprawdź to na ups.com, a potem skontaktuj się ze sprzedawcą. Więcej w poradnikach [paczka doręczona, a jej nie ma](guide:delivered-not-received) i [zaginiona paczka](guide:lost-parcel).
 
 ## Śledzenie paczki UPS w Peek
 
-[Peek](/) od razu rozpoznaje UPS po numerze `1Z`, którego ostatnia cyfra przechodzi kontrolę UPS. Jeśli nie przechodzi, proponuje tylko UPS, a UPS odrzuca numer jako błędnie wpisany. W samym UPS sprawdza tylko numery `1Z`. Pozostałe numery UPS, takie jak `H1234567890` (H, J, K lub V i 10 cyfr) czy numery z samych cyfr, dostają więc odpowiedź tylko od serwisów śledzenia przesyłek, także po „Zmień przewoźnika”. Możesz wkleić link z ups.com z numerem, a także każdy link, w którym jest numer `1Z`.
+[Peek](/) od razu rozpoznaje UPS po numerze `1Z`, którego ostatnia cyfra przechodzi kontrolę UPS. Jeśli nie przechodzi, proponuje tylko UPS, a UPS odrzuca numer jako błędnie wpisany. W samym UPS sprawdza tylko numery `1Z`. Inne kształty, takie jak `H1234567890`, dostają więc odpowiedź tylko od serwisów śledzenia przesyłek, także po „Zmień przewoźnika”. Możesz wkleić link z ups.com z numerem, a także każdy link, w którym jest numer `1Z`.
 
-Serwer Peek otwiera w dzień stronę śledzenia ups.com w przeglądarce co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu; w nocy co godzinę lub dwie. Gdy UPS odmówi albo da się odczytać tylko status, historię uzupełniają serwisy śledzenia. Widzisz status, każdy skan z miejscem i dokładną godziną na mapie, planowany dzień doręczenia (nigdy przedział godzin), godzinę doręczenia, usługę, kraj docelowy i, dopóki paczka czeka, nazwę i adres punktu Access Point. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zobaczysz tam, kto podpisał, ani Twojego adresu, potwierdzenia doręczenia, miejsca pozostawienia czy zdjęcia. Wagi ani nadawcy UPS nie przekazuje.
+Serwer Peek otwiera w dzień stronę śledzenia ups.com w przeglądarce co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu; w nocy co godzinę lub dwie. Gdy UPS odmówi albo da się odczytać tylko status, historię uzupełniają serwisy śledzenia. Widzisz status, każdy skan z miejscem i dokładną godziną na mapie, planowany dzień doręczenia (nigdy przedział godzin), godzinę doręczenia, kraj docelowy i, dopóki paczka czeka, nazwę i adres punktu Access Point. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zobaczysz tam, kto podpisał, ani Twojego adresu, potwierdzenia doręczenia, miejsca pozostawienia czy zdjęcia. Wagi ani nadawcy UPS nie przekazuje.
 
-Skany są w każdym języku po angielsku, tak jak pisze je UPS: doręczenie to „DELIVERED”. Gdy w USA UPS przekaże paczkę Ground Saver poczcie amerykańskiej i poda jej numer, śledzenie przechodzi tam, gdy USPS pokaże postęp („Doręcza: USPS”). Zmianę doręczenia i reklamację załatwisz tylko w UPS albo u nadawcy.
+Skany są w każdym języku po angielsku, tak jak pisze je UPS: doręczenie to „DELIVERED”. Gdy w USA UPS przekaże paczkę Ground Saver poczcie amerykańskiej i poda jej numer, śledzenie przechodzi tam, gdy USPS pokaże postęp („Doręcza: USPS”).
 
 ## Pytania o UPS tracking
 
-### Jaki jest numer infolinii UPS w Polsce?
+### Dlaczego UPS odrzuca mój numer przesyłki?
 
-+48 22 489 48 77, od poniedziałku do piątku od 7:30 do 20:00, w sobotę od 8:00 do 17:00 (stan na 13 października 2026). Możesz też napisać przez formularz na stronie kontaktowej UPS Polska.
+Najczęściej przez literówkę: jeden błędny znak w numerze `1Z` zwykle psuje cyfrę kontrolną i UPS odrzuca numer. Albo numer należy do innego przewoźnika: sprawdź, którego wymienia e-mail od sklepu.
 
-### Czy można śledzić paczkę UPS po numerze telefonu?
+### Kiedy pojawia się śledzenie paczki UPS?
 
-Nie: UPS śledzi po numerze przesyłki, a numeru telefonu nie ma wśród numerów, które wymienia. Poza numerem `1Z` UPS przyjmuje m.in. numer z awiza.
+Pierwszy skan, `Shipper created a label, UPS has not received the package yet.`, pojawia się, gdy nadawca utworzy etykietę. Dalej status ruszy dopiero, gdy nadawca nada paczkę albo UPS ją odbierze (`Drop-Off`, `Pickup Scan`).
 
-### Co znaczy „delivery exception” w UPS?
+### Czy mogę zmienić doręczenie UPS w Peek?
 
-To angielski status `Exception`, po polsku `Wydarzenie wyjątkowe`: nieoczekiwane zdarzenie może przesunąć datę doręczenia. Powód UPS podaje w historii przesyłki.
+Nie: Peek tylko odczytuje śledzenie UPS. Zmiany, które zlecisz w UPS, pojawią się w skanach, np. `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
 
-### Ile dni paczka UPS czeka w punkcie Access Point?
+### Czy SMS od UPS z prośbą o dopłatę jest prawdziwy?
 
-Według polskiej strony UPS o awizie 7 dni kalendarzowych, pomoc do śledzenia mówi o 5 do 7 dniach. Potem paczka wraca do nadawcy.
+Może to być oszustwo. CERT Polska (CSIRT NASK) ostrzegał przed SMS-ami, w których przestępcy podszywają się pod firmy kurierskie: piszą o problemie z doręczeniem, a link prowadzi do fałszywej strony, gdzie pod pretekstem dopłaty wyłudzają dane karty. Nie klikaj linku: numer przesyłki wpisz sam na ups.com albo w Peek, a w razie wątpliwości skontaktuj się z firmą przez numer lub adres z jej oficjalnej strony, nie z SMS-a. Podejrzany SMS przekaż w całości, bez wycinania linku, na bezpłatny numer 8080. Jeśli dane karty trafiły już na fałszywą stronę, od razu zadzwoń do banku. Pamiętaj też, że według KAS ryczałtowego cła 3 EUR nie płaci konsument. Więcej w poradniku [oszustwo na paczkę](guide:delivery-scam-texts).
 
 :::sources
-- [UPS: Wsparcie monitorowania (Polska)](https://www.ups.com/pl/pl/support/tracking-support) – do 19:00, „Przekazano do doręczenia”, następny dzień roboczy, 5–7 dni, SumUp
-- [UPS: Co oznaczają statusy monitorowania?](https://www.ups.com/pl/pl/support/tracking-support/where-is-my-package/understanding-tracking-status) – polskie statusy i ich znaczenie, godziny doręczeń, zdjęcie doręczenia
-- [UPS: InfoNotice (Polska)](https://www.ups.com/pl/pl/support/tracking-support/where-is-my-package/how-to-use-infonotice) – dni doręczeń, trzy próby, 7 dni kalendarzowych, dokument, kod zwolnienia, płatność kartą lub gotówką, „Oczekiwanie na odbiór przez klienta”
-- [UPS: Reklamacja (Polska)](https://www.ups.com/pl/pl/support/file-a-claim) – odbiorca pyta nadawcę, blokada reklamacji u dużych nadawców
-- [UPS: Skontaktuj się z nami (Polska)](https://www.ups.com/pl/pl/support/contact-us) – telefon, godziny, formularz, czas odpowiedzi
-- [UPS: Tracking Support (United States)](https://www.ups.com/us/en/support/tracking-support) – kształty numerów, Delivery Notice
-- [UPS: Change a Delivery (United Kingdom)](https://www.ups.com/gb/en/track/change-delivery) – jednorazowy kod, numer z awiza, ograniczenia zmian
-- [UPS: InfoNotice (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – podpisanie awiza, najpierw śledzenie, godziny otwarcia i mapa punktu
-- [UPS: Tracking Support (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support) – zapłata przez „pay now” w śledzeniu
-- [UPS: Delivery Notice (United States)](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – numer z awiza do śledzenia
-- [UPS: UPS My Choice (United Kingdom)](https://www.ups.com/gb/en/track/ups-my-choice) – bezpłatne konto
-- [UPS: File a UPS Claim (United Kingdom)](https://www.ups.com/gb/en/support/file-a-claim) – warunki kraju nadania, 8–15 dni roboczych, reklamacja jako gość
-- [UPS: Fight Fraud](https://www.ups.com/gb/en/support/shipping-support/legal-terms-conditions/fight-fraud) – fałszywe wiadomości
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje z UPS
+- [Krajowa Administracja Skarbowa: Zmiany w e-commerce od 1 lipca 2026 r.](https://www.gov.pl/web/kas/zmiany-w-e-commerce-od-1-lipca-2026-r) – koniec zwolnienia do 150 EUR, 3 EUR za pozycję towarową, cła nie płaci konsument, brak zwrotu cła i VAT
+- [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – 30 dni, dodatkowy termin, rozwiązanie umowy, odpowiedzialność sprzedawcy za uszkodzenia
+- [UKE: Rejestr operatorów pocztowych, UPS Polska Sp. z o.o.](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=1&rejestr=B-00044) – wpis B-00044 od 17.12.2004
+- [UKE, Centrum Informacji Konsumenckiej: Reklamacje](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, 12 miesięcy, 30 dni, odwołanie, interwencja Prezesa UKE, ADR
+- [UKE, Centrum Informacji Konsumenckiej: Reklamacje i odszkodowania](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – protokół szkody, 7 dni na ukryte uszkodzenia
+- [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fałszywe SMS-y o przesyłce, dopłata, numer 8080, bank
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – kształty numerów, cyfra kontrolna, skany UPS, co Peek odczytuje z UPS
 :::

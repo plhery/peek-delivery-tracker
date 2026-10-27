@@ -1431,7 +1431,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-sendungsverfolgung",
-      "title": "UPS Sendungsverfolgung: Status, Zustellung und Kontakt",
+      "title": "UPS Sendungsverfolgung: Nummer, Status und Zustellung",
       "name": "UPS",
       "color": "#351c15"
     },
@@ -1769,7 +1769,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking-suivi-colis",
-      "title": "UPS tracking\u00a0: suivi de colis, statuts et contact",
+      "title": "UPS tracking\u00a0: suivi de colis, statuts et livraison",
       "name": "UPS",
       "color": "#351c15"
     },
@@ -2035,7 +2035,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking",
-      "title": "UPS tracking: stato del pacco, consegna e contatti",
+      "title": "UPS tracking: numero, stati del pacco e consegna",
       "name": "UPS",
       "color": "#351c15"
     },
@@ -2301,7 +2301,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-seguimiento",
-      "title": "UPS seguimiento: estado del paquete, entrega y teléfono",
+      "title": "UPS seguimiento en España: número 1Z, estados y aduanas",
       "name": "UPS",
       "color": "#351c15"
     },
@@ -2769,7 +2769,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "ups",
       "catalog": "ups",
       "slug": "ups-tracking-sledzenie-paczki",
-      "title": "UPS tracking: śledzenie paczki, statusy i kontakt",
+      "title": "UPS tracking: śledzenie paczki w Polsce, statusy, reklamacje",
       "name": "UPS",
       "color": "#351c15"
     },

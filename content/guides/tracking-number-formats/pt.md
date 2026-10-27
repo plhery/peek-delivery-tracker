@@ -43,7 +43,7 @@ Eis o que as transportadoras, e a norma postal, dizem sobre os números que mais
 | [SEUR](carrier:seur) | a SEUR não publica o formato; o seguimento pede o «Identificador de envío». Costuma ter 14 ou 21 algarismos, e um código de 7 também funciona; os de 14 são partilhados com a DPD, a Relais Colis, a BRT e outras |
 | [MRW](carrier:mrw) | «Núm. expedição»; na etiqueta de exemplo da MRW, 12 algarismos por baixo do código de barras e, ao lado de «N.º Etiqueta», 5 algarismos, uma barra e 7 algarismos: tira a barra antes de o seguir. Cinco algarismos, uma letra e seis algarismos é uma forma vista em encomendas MRW, embora as páginas da MRW não a mostrem |
 | [NACEX](carrier:nacex) | a caixa de seguimento da NACEX mostra `0000/00000000`: quatro algarismos da agência de onde a encomenda partiu, uma barra e oito algarismos do «Nº expedição»; a NACEX não fixa o comprimento |
-| [Paack](carrier:paack) | «número de pedido», no fim dos e-mails da Paack; não tem forma fixa (o próprio exemplo da Paack mistura algarismos, hífenes e letras minúsculas), por isso pode parecer de outra transportadora; a página de seguimento pede também o código postal de entrega |
+| [Paack](carrier:paack) | número de pedido da loja ou código de barras da etiqueta, com o código postal de entrega; nos dados de transportadoras que o Peek usa, a maior parte destes números não tem forma fixa, por isso podem parecer de outra transportadora; as exceções são `PK` + 18 algarismos, que é da Paack (encomendas que entrega para a Evri International), `5340` + 14 algarismos, que aponta primeiro para a Paack, e um número de encomenda da SHEIN (`C` ou `E`, uma data de seis algarismos e mais 8), que pode ser da Paack |
 | Ecoscooting | a página de seguimento não indica um formato; nos dados de transportadoras que o Peek usa, `CNPRT` + 20 algarismos é Ecoscooting |
 | Amazon | nos dados de transportadoras que o Peek usa, `TBA` + 12 algarismos ou `PT` + 10 algarismos; explicados mais abaixo |
 | [Cainiao](carrier:cainiao) (AliExpress) | a Cainiao não descreve os seus números; nos dados de transportadoras que o Peek usa, `LP` ou `CNG` + 14 algarismos pode ser Cainiao, e `DOFR` ou `CNFR` + 13 algarismos + `HD` é Cainiao |
@@ -164,8 +164,7 @@ Um número que não dá resultados nem sempre está mal escrito. Os CTT dão dua
 - [Mondial Relay: Où retrouver mon numéro de colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/ou-trouver-mon-numero-de-colis/) – o número de expedição, na etiqueta
 - [Mondial Relay: Étiquette](https://storage.mondialrelay.fr/etiquette-mondial-relay-v-24.pdf) – o código de barras de 26 algarismos
 - [InPost: Empresa de Encomendas InPost](https://www.mondialrelay.pt/) – o mondialrelay.pt leva ao inpost.pt
-- [Paack: Track your order](https://paack.co/shipments/tracking?lng=pt) – número de pedido e código postal
-- [Paack Support: Outras questões](https://help.paack.co/pt-PT/support/solutions/folders/44001208240) – número e código postal
+- [Universal Parcel Scraper: Paack](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/paack/README.md) – número de pedido ou código de barras da etiqueta, código postal, números sem forma fixa, exceto `PK`, `5340` e números de encomenda da SHEIN
 - [SEUR: miSEUR, Mis envíos](https://www.seur.com/miseur/mis-envios) – o identificador de envío
 - [MRW: ¿Cómo localizar su número de envío?](https://www.mrw.es/includes/numero_de_envio.html) – a etiqueta de exemplo, 12 algarismos e a forma com barra
 - [4PX: Global Order Tracking](https://track.4px.com/) – 5 a 50 letras e algarismos

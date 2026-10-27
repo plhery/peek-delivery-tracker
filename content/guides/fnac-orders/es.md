@@ -4,7 +4,7 @@ description: Quién entrega tu pedido de Fnac en España (SEUR, GLS, Paack o Cel
 slug: seguimiento-pedido-fnac
 picture: Un punto de recogida con un cartel de paquetes, Pip en la acera, y la caja, los libros y el juego que contenía.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Fnac vende en línea en Francia, Bélgica, Suiza, España y Portugal. En España (fnac.es), lo que vende Fnac llega a casa con SEUR, Paack o GLS, espera en un Punto Celeritas o lo recoges en una tienda Fnac, y Tamdis entrega los televisores. Tus pedidos están en «Mi cuenta», en «Mis pedidos». Lo que venden los vendedores del Marketplace lo envía cada vendedor, con su transportista y su propio número.
@@ -45,16 +45,16 @@ Fnac y sus transportistas te avisan en varios sitios:
 
 - **«Mi cuenta».** En «Mis pedidos», abre «Detalles del pedido». Ahí está cada pedido de fnac.es, y desde ahí también pides una devolución.
 - **La app de Fnac.** Según su ficha en la App Store, sigues el estado de tu pedido desde el móvil, y fnac.es la presenta con «tus pedidos y tarjeta de socio a un click».
-- **El transportista.** Paack te envía un enlace de seguimiento cuando admite el paquete en sus instalaciones. Con GLS, sigues el envío con su número de seguimiento y el código postal de entrega. Tamdis te contacta para acordar el día y la franja del televisor.
+- **El transportista.** Con GLS o con Paack, sigues el envío con su número y el código postal de entrega. Tamdis te contacta para acordar el día y la franja del televisor.
 - **El aviso con el PIN.** Cuando el pedido llega a la tienda o al Punto Celeritas, recibes un correo con un PIN para recogerlo.
 
-Si GLS o Paack no tienen aún tu paquete, los dos te remiten al vendedor, que en un pedido de fnac.es es Fnac. En otras tiendas: [encontrar el número de seguimiento](guide:find-tracking-number).
+Si GLS no tiene aún tu paquete, te remite al vendedor, que en un pedido de fnac.es es Fnac. En otras tiendas: [encontrar el número de seguimiento](guide:find-tracking-number).
 
 Los números de estos transportistas tienen esta forma (las cifras son inventadas):
 
 | Transportista | Cómo es el número |
 | --- | --- |
-| Paack | `PK` y 18 cifras, como `PK123456789012345678` |
+| Paack | casi siempre el número de pedido o el código de barras de la etiqueta, sin formato fijo; `PK` y 18 cifras, como `PK123456789012345678`, es de Paack, y `5340` y 14 cifras apunta primero a Paack |
 | SEUR | 14 cifras, entre otras formas de solo cifras |
 
 ¿No sabes de quién es? Escríbelo aquí:
@@ -113,7 +113,7 @@ Primero busca, luego reclama. En este orden:
 
 :::steps
 - Revisa el seguimiento | Abre «Mis pedidos» en tu cuenta o en la app, y el enlace o el aviso del transportista. Para una tienda o un Punto Celeritas, busca el correo con el PIN: el paquete espera 30 días en tienda y 15 en Celeritas.
-- Busca y pregunta | Si no estabas, Paack lo intenta otra vez al día siguiente laborable y puede dejarlo con tu vecino más cercano o en la conserjería, salvo que dijeras que no. Con algunos servicios, GLS lo lleva a su Parcel Shop más cercano. Pregunta en casa y a los vecinos.
+- Busca y pregunta | Si no estabas, con algunos servicios GLS lo lleva a su Parcel Shop más cercano. Pregunta en casa y a los vecinos.
 - Contacta con Fnac | Llama al 91 800 12 78 o escribe a ayuda@clientes.fnac.es. Si el embalaje o el producto llegan dañados, anótalo en la prueba de entrega del transportista y avisa cuanto antes al mismo teléfono o a desistimiento@clientes.fnac.es.
 - Fnac investiga | Según las condiciones de venta de fnac.es, si el producto llega dañado por el transporte, Fnac paga su recogida y te envía el que pediste. Según la página del Marketplace, el vendedor atiende tu reclamación en 48 horas como máximo, y el equipo de Fnac la sigue de cerca e interviene cuando hace falta.
 - Reembolso o artículo nuevo | La ley de consumidores dice que el riesgo es de la tienda hasta que tú, u otra persona que indicaste y que no sea el transportista, tenéis el paquete. Si no aparece, pide el reembolso o un nuevo envío.
@@ -121,7 +121,7 @@ Primero busca, luego reclama. En este orden:
 
 Con un artículo del Marketplace, escribe primero al vendedor desde el pedido en tu cuenta de fnac.es. Los productos viajan «a coste y riesgo del Vendedor». En «Mi cuenta» puedes reclamar en un plazo de 21 días naturales por «Producto no recibido», «Producto erróneo» o «Producto dañado a la entrega»; lo resolvéis tú y el vendedor, con un nuevo envío o el reembolso.
 
-Si GLS te trae un paquete con el embalaje dañado, puedes rechazarlo: GLS lo devuelve e informa al remitente. Si Paack no consigue entregarlo tras varios intentos, lo devuelve al vendedor. GLS, si tampoco lo entrega en el segundo intento, lo guarda en su agencia y lo devuelve al remitente 7 días naturales después del primer intento. Si no llegas a un acuerdo con Fnac, está adherida a Confianza Online, que resuelve reclamaciones de consumo. Más: [paquete entregado pero no recibido](guide:delivered-not-received), [paquete perdido](guide:lost-parcel) y [paquete dañado](guide:damaged-parcel).
+Si GLS te trae un paquete con el embalaje dañado, puedes rechazarlo: GLS lo devuelve e informa al remitente. Si no consigue entregarlo en el segundo intento, lo guarda en su agencia y lo devuelve al remitente 7 días naturales después del primer intento. Si no llegas a un acuerdo con Fnac, está adherida a Confianza Online, que resuelve reclamaciones de consumo. Más: [paquete entregado pero no recibido](guide:delivered-not-received), [paquete perdido](guide:lost-parcel) y [paquete dañado](guide:damaged-parcel).
 
 ## Devolver un pedido de Fnac
 
@@ -145,9 +145,8 @@ Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos 
 - [Fnac: Fnac: Compras Online (App Store)](https://apps.apple.com/es/app/fnac-compras-online/id377379474) – estado del pedido, ventajas de Socio
 - [Fnac: portada de fnac.es](https://www.fnac.es/) – envío gratis para Socios, 4,90 €, Socio Tech+Cultura, devolución gratuita, webs de Fnac en otros países
 - [Fnac Darty: Fnac Darty dans le monde](https://www.fnacdarty.com/le-groupe/fnac-darty-dans-le-monde/) – países y webs de Fnac
-- [Paack: Centro de ayuda](https://help.paack.co/es/support/home) – enlace de seguimiento, segundo intento, vecino, conserjería, devolución al vendedor
 - [GLS: Recibir paquetes, preguntas frecuentes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – «Etiqueta creada», número y código postal, segundo intento, Parcel Shop, 7 días naturales, embalaje dañado
 - [Celeritas: Contacto](https://celeritastransporte.com/contacto/) – aviso por correo o SMS, 15 días, PIN
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – art. 66 bis, 30 días naturales; art. 66 ter, transmisión del riesgo
-- [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, transportistas que conoce Peek
+- [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, número y código postal de entrega de Paack, transportistas que conoce Peek
 :::

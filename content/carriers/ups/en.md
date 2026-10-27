@@ -1,123 +1,100 @@
 ---
 title: UPS tracking: numbers, statuses and missed deliveries
-description: Track a UPS parcel: where to find the 1Z tracking number, what Exception and other UPS statuses mean, InfoNotice, Access Points, claims and UPS contacts.
+description: Track a UPS parcel: what the 1Z tracking number looks like, what Exception and other UPS scans mean, Access Points, customs charges and your rights if it's lost.
 slug: ups-tracking
 published: 2026-10-13
 updated: 2026-10-27
 ---
 
-UPS (United Parcel Service) is the American parcel carrier that many shops in the UK, Ireland, the US and the rest of Europe hand their parcels to. Track a parcel on ups.com, with the link in UPS's email notifications or by pasting the number in the box above. The number is on the label and in the shop's shipping email, and usually starts with `1Z`.
+UPS (United Parcel Service) tracking numbers usually start with `1Z`. Paste the number, or a UPS tracking link, in the box above to follow the parcel; UPS's own tracking page is on ups.com.
 
 ## UPS tracking number: where to find it and what it looks like
 
-Look in the shop's shipping email or order page, in UPS's email notifications and on the label. The US Delivery Notice left after a missed delivery carries a 12-digit reference that also works. Still nothing? See [where else to find a tracking number](guide:find-tracking-number).
-
-UPS lists these shapes on its tracking help pages (digits invented):
+The shop that sent the parcel gives you the number, usually in its shipping email or on your order page. A ups.com tracking link carries it too, after `tracknum=`. Still nothing? See [where else to find a tracking number](guide:find-tracking-number).
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `1Z1234567812345674` | The usual parcel number: `1Z` and 16 letters and digits, 18 characters in all. |
-| `000000000000` | 12 digits, also the length of the Delivery Notice reference. |
-| `T1234567890` | `T` and 10 digits. |
-| `000000000` | 9 digits. |
+| `1Z1234567812345674` | UPS's parcel number: `1Z` and 16 letters and digits, 18 characters in all. The last digit is a check digit worked out from the 15 characters before it. |
+| `H1234567890` | A letter (H, J, K or V) and 10 digits. It can be a UPS number, but other carriers use the same shape. |
 
-The 4 to 6 digit release code some senders give you isn't a tracking number. Twelve digits also fit [FedEx](carrier:fedex) and several European couriers, so if ups.com finds nothing, check which carrier the shop's email names.
+## What UPS tracking statuses mean, including Exception
 
-## What UPS tracking statuses mean, including delivery exception
+UPS's tracking page has a progress bar (`Label Created`, `We Have Your Package`, `On the Way`, `Out for Delivery`, `Delivered`) and the scans underneath. These are the scan wordings Peek reads from UPS, in English, roughly in the order a parcel meets them, with the status Peek shows for each.
 
-These are UPS's English wordings, in the order a parcel usually meets them.
+| UPS's scan | Peek shows | What it means |
+| --- | --- | --- |
+| `Shipper created a label, UPS has not received the package yet.` | Label created | The sender has made a label. UPS doesn't have the parcel yet. |
+| `Drop-Off`, `Pickup Scan` | Received by carrier | UPS has it: the sender handed it in at an access point, or UPS collected it. The first `Arrived at Facility` counts here too. |
+| `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | In transit | It's moving through UPS's network. `Export Scan` and `Import Scan` mark a border. |
+| `Your package is prepared for clearance.` | At customs | It's going through customs. |
+| `Duties or taxes are due on this package.` | At customs | You have to pay import charges before UPS delivers it (see below). |
+| `Loaded on Delivery Vehicle`, `Out For Delivery Today` | Out for delivery | A driver has it. |
+| `The receiver was not available at the time of the final delivery attempt.` | Delivery attempted | The last try failed. |
+| `Delivered to UPS Access Point™`, `UPS Access Point™ possession` | Ready for pickup | It's waiting for you at a UPS Access Point. |
+| `DELIVERED` | Delivered | Delivered, or collected by you from an access point. |
+| `Return to Sender` | Returned to sender | It's going back to the sender. |
 
-| UPS's status | What it means for you |
-| --- | --- |
-| `Label Created` | The sender has printed a label and sent UPS the details. UPS doesn't have the parcel yet. |
-| `Shipped/On the Way` | UPS has it, it's moving and it now has a scheduled delivery date. |
-| `Exception` | Something unexpected happened and the delivery date may change. |
-| `Out for Delivery` | The local UPS facility has given it to a driver for delivery. |
-| `Transferred to Post Office for Delivery` | US only: the local post office finishes the delivery. |
-| `Delivery Attempted` | The driver couldn't deliver. |
-| `Delivered to a UPS Access Point` | It's at a UPS Access Point shop, waiting for you. |
-| `Awaiting Customer Collection` | The UK wording once you can go and pick it up (the US says `Awaiting Customer Pickup`). |
-| `Delivered` | Without a signature, it's left in a safe place; ups.com/track shows a photo. |
-| `Return to Sender` | It's going back to the sender. |
+`Exception` is UPS's generic status, and it can mean a mere delay. Read the scan under it: `We're sorry this package may experience a temporary delay.` is just that, while `The company or receiver name is incorrect. This will delay delivery.` means the delivery waits on your details (Peek shows "Needs attention"). Peek goes by the newest scan, not the generic status.
 
-`Shipped/On the Way` can stay put for days. UPS says parcels travelling long distances often aren't scanned again until they reach the destination hub.
+## Missed UPS delivery and Access Points
 
-`Exception` is often just a delay. UPS notes the reason under Shipment Progress and shows the new date once it changes.
+When the driver can't deliver, the scan says the receiver wasn't available or the business was closed, and UPS tries again. After the final attempt, a later scan shows what happens next: UPS holds the parcel, takes it to an access point or sends it back to the sender. More in [missed deliveries](guide:missed-delivery).
 
-`Transferred to Post Office for Delivery` is US Ground Saver: allow an extra day or two, says UPS.
+UPS can also take the parcel to a UPS Access Point. Once it's there, the scans read `Delivered to UPS Access Point™`, then `UPS Access Point™ possession`, and Peek shows the access point's name and address. Don't leave it too long: when an uncollected parcel goes back, the scan reads `The UPS Access Point™ location has prepared the package for return to UPS or pickup by UPS.` If an access point closes, UPS collects its parcels and the scan says delivery to another access point is pending. See [uncollected parcels](guide:uncollected-parcel).
 
-## Missed UPS delivery, InfoNotice and Access Points
+## Customs charges on UPS parcels
 
-UPS delivers Monday to Friday, plus Saturday in select areas (and Sunday in some US areas), excluding UPS holidays. Unless the sender paid for a time-definite service, homes are typically served [between 9 a.m. and 7 p.m.](guide:delivery-times), occasionally later; in the US, UPS says as late as 9 p.m. UPS may make up to three attempts. After the last one, an undeliverable parcel goes back to the sender.
+A parcel from outside the UK, or from outside the EU for Ireland, may need import charges paid before UPS delivers it; the tracking then shows `Duties or taxes are due on this package.` and `Your package is being held until duties and taxes are paid. Awaiting customer action.`
 
-When the first attempt fails, the driver leaves a UPS InfoNotice (a Delivery Notice or door tag in the US). Track the parcel first, then you can:
+- **UK**: GOV.UK says the courier contacts you with a bill for any VAT, duty or delivery charges, and normally holds the parcel for about 3 weeks. Unpaid, it goes back to the sender.
+- **Ireland**: since 1 July 2026, most parcels worth €150 or less from outside the EU owe €3 customs duty per item. If the shop didn't collect it at checkout, Revenue says the courier will ask you for it before delivering, and couriers charge their own administration fee on top.
 
-- **Sign the notice** where it says "Your Signature" and put it back where the driver left it, unless the parcel needs an adult's signature (18+ in the UK, 21+ in the US).
-- **Change the delivery**: on the tracking page, select "Change My Delivery" and UPS emails you a one-time passcode; as a guest you can use the Delivery Notice number. Some options may be missing: the sender may block changes, and high-value items or imports may not qualify. Changing by phone costs €6 plus VAT, or the equivalent in local currency, says UPS's UK contact page.
-- **Pick it up at a UPS customer centre**: ask by 7 p.m.
+More in [customs charges](guide:customs).
 
-UPS may instead take it to a nearby UPS Access Point. Its InfoNotice page says the parcel waits there 7 calendar days, then goes back to the sender; its tracking help says 5 to 7 days, so don't wait. Check that tracking shows `Awaiting Customer Collection`, along with the shop's hours and a map. Bring government-issued photo ID and your tracking number. Someone picking it up for you brings the InfoNotice or a release form.
+## UPS parcel late, lost or marked delivered
 
-UPS My Choice is free in the UK and gives members a delivery window estimate.
+If the tracking has stopped moving, see [tracking that isn't updating](guide:tracking-not-updating).
 
-## UPS tracking not updating, delayed or lost
+If you live in Great Britain or Ireland and bought from a shop, the shop is responsible for getting the parcel to you, even when UPS carries it:
 
-Quiet days during `Shipped/On the Way` are normal on long journeys; see [tracking that isn't updating](guide:tracking-not-updating) for when to worry.
+- **England, Scotland and Wales**: Citizens Advice says the seller should chase the courier, not you. If the item hasn't arrived within 30 days of buying it, you can cancel and ask for your money back. If it was left somewhere you didn't agree to and went missing, the seller has to sort it out.
+- **Ireland**: the CCPC says that without an agreed date, the order must arrive within 30 days of purchase. If it doesn't, arrange a new delivery date with the business; if that passes too, you're entitled to a full refund. A parcel damaged or lost in transit should be replaced, and the business stays responsible until you, or someone you nominate, have the parcel in hand, even if the courier says it was delivered.
 
-Marked delivered but not there? Check the delivery photo on ups.com/track, then ask your household, a concierge or a neighbour. If it's still missing, UPS says to contact the seller to start a claim. More in [delivered but not received](guide:delivered-not-received).
-
-For loss or damage, the sender usually claims: UPS pays claims to the shipper, and some shippers (UPS names Amazon, Dell and Apple) block recipients' claims. Where you can file, filing as a guest is faster. In Europe, the deadline follows the terms of the shipper's country, and UPS typically settles in 8 to 15 business days. In the US, UPS's claim page says to start within 60 days of the scheduled delivery and settles in 8 to 10 business days; its help centre encourages a loss investigation within 30 days of the expected delivery date. Ground Saver claims stop once the parcel has been handed to the post office.
-
-## How to contact UPS customer service
-
-UPS's contact pages, read on 13 October 2026:
-
-- **United Kingdom**: +44 (0)3457 877 877, Monday to Friday 8 a.m. to 8 p.m., Saturday 8 a.m. to 5 p.m.; the page also offers a virtual assistant.
-- **Ireland**: +353 1 52 45446, Monday to Friday 8 a.m. to 8 p.m., Saturday 8 a.m. to 2 p.m.
-- **United States**: 1-800-742-5877, Monday to Friday 7 a.m. to 11 p.m. ET, Saturday 8 a.m. to 8 p.m. ET; hearing impaired 1-800-833-0056; international shipping support 1-800-782-7892, around the clock.
-
-> UPS warns about fake messages claiming a parcel is waiting. It never asks for payments, personal or financial details unprompted. Real UPS texts come from 75137 (or 24031 in the US). If a message asks you to pay, track the parcel on ups.com first and use "pay now" there.
+Marked `DELIVERED` but not there? UPS's page can show where the parcel was left (`Left at: Front Door`, for example) and a proof of delivery, which Peek doesn't keep. Check ups.com, then contact the shop. More in [delivered but not received](guide:delivered-not-received) and [lost parcels](guide:lost-parcel).
 
 ## Tracking UPS parcels with Peek
 
 [Peek](/) names UPS at once for a `1Z` number whose check digit is right; with a wrong one, UPS refuses it as mistyped. Links holding a `1Z` number work too. Peek looks up only `1Z` numbers at UPS: other shapes go to tracking services.
 
-Peek opens ups.com's tracking page in a browser on its own server and reads the reply, every 10 minutes by day, every 5 minutes once the parcel is out for delivery, and every hour or two overnight. If UPS refuses, or only the status can be read, tracking services fill in the history. It shows the status, each scan on a map with its exact time, the scheduled delivery day (never a time window), the delivered time, the service and, while the parcel waits, the Access Point's name and address. It can notify you at every scan, at important steps or on delivery day only.
+Peek opens ups.com's tracking page in a browser on its own server and reads the reply, every 10 minutes by day, every 5 minutes once the parcel is out for delivery, and every hour or two overnight. If UPS refuses, or only the status can be read, tracking services fill in the history. It shows the status, each scan on a map with its exact time, the scheduled delivery day (never a time window), the delivered time and, while the parcel waits, the Access Point's name and address. It can notify you at every scan, at important steps or on delivery day only.
 
 It drops the signatory, your address, proof of delivery and where the parcel was left, and shows no delivery photo or weight. Scans appear in UPS's English; delivery reads "DELIVERED". When UPS hands a Ground Saver parcel to the [US Postal Service](carrier:usps) and names its number, Peek follows it there once USPS shows progress ("Delivery with USPS").
 
 ## Questions about UPS tracking
 
-### How late can a UPS package arrive?
-
-Usually by 7 p.m. at homes, occasionally later. In the US, UPS says Ground parcels to homes can come as late as 9 p.m.
-
 ### Why is my UPS tracking number invalid?
 
-Most often it was mistyped: one wrong character in a `1Z` number breaks its check digit. Or it belongs to another carrier.
+Most often it was mistyped: one wrong character in a `1Z` number usually breaks its check digit, and UPS rejects it. Or the number belongs to another carrier: check which one the shop's email names.
 
 ### How long does UPS tracking take to show up?
 
-Once the sender has sent UPS the shipment details, the number shows `Label Created`. It only moves on once UPS has the parcel and it is moving in its network.
+The first scan, `Shipper created a label, UPS has not received the package yet.`, appears once the sender has made the label. It only moves on when the sender drops the parcel off or UPS picks it up (`Drop-Off`, `Pickup Scan`).
+
+### Can I change a UPS delivery in Peek?
+
+No: Peek only reads UPS's tracking. Changes you make with UPS show up in the scans, such as `The package will be delivered to the UPS Access Point™ location requested by the receiver.`
 
 ### Is a UPS delivery text a scam?
 
-It can be. UPS never asks for payment or personal details unprompted, and [its real texts](guide:delivery-scam-texts) come from 75137 (or 24031 in the US), so track the parcel on ups.com instead of tapping the link.
+It can be. Citizens Advice says a message asking you to pay to get a parcel or to reschedule its delivery is usually a scam, and delivery companies won't ask you to pay through a link in a text or email. Real import charges show up in the tracking as customs scans, so check the number on ups.com or in Peek instead of tapping the link. In the UK, forward the text to 7726 for free. In the US, the FTC says to contact the shipping company through a website or phone number you know is real. More in [delivery scam texts](guide:delivery-scam-texts).
 
 :::sources
-- [UPS: Tracking Support (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support) – number shapes, 5 to 7 days, 7 p.m., delivered not found, card payments, texts from 75137
-- [UPS: Tracking Support (United States)](https://www.ups.com/us/en/support/tracking-support) – number shapes, Delivery Notice, as late as 9 p.m., texts from 24031
-- [UPS: Understanding Tracking Status (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – status meanings, delivery hours, delivery photo
-- [UPS: Understanding Tracking Status (United States)](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – status meanings, post office transfer
-- [UPS: UPS InfoNotice (United Kingdom)](https://www.ups.com/gb/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – delivery days, three attempts, signing, 7 p.m., 7 calendar days, ID, cash only
-- [UPS: UPS Delivery Notice (United States)](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/how-to-use-infonotice) – Delivery Notice number, 21+, release code, Awaiting Customer Pickup
-- [UPS: Change a Delivery (United Kingdom)](https://www.ups.com/gb/en/track/change-delivery) – passcode, guests, restrictions, phone fee
-- [UPS: UPS My Choice (United Kingdom)](https://www.ups.com/gb/en/track/ups-my-choice) – free, delivery window, holding times
-- [UPS: File a Claim (United Kingdom)](https://www.ups.com/gb/en/support/file-a-claim) – guest claims, shipper restrictions, shipper-country terms, 8 to 15 days
-- [UPS: File a Claim (United States)](https://www.ups.com/us/en/support/file-a-claim) – 60 days, 8 to 10 days, Ground Saver
-- [UPS: Contact Us (United Kingdom)](https://www.ups.com/gb/en/support/contact-us) – phone, hours, €6 fee
-- [UPS: Contact Us (Ireland)](https://www.ups.com/ie/en/support/contact-us) – phone, hours
-- [UPS: Help and Support Center (United States)](https://www.ups.com/us/en/support/contact-us) – phone numbers, hours, 30-day advice
-- [UPS: Fight Fraud (United Kingdom)](https://www.ups.com/gb/en/support/shipping-support/legal-terms-conditions/fight-fraud) – what UPS never asks, fake messages
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from UPS
+- [Citizens Advice: If something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – seller's responsibility, 30 days, agreed place, scam messages (same advice for England, Scotland and Wales)
+- [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – the courier's bill, about 3 weeks, return to sender
+- [GOV.UK: Report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – forward scam texts to 7726
+- [CCPC: Your consumer rights if your order is not delivered](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – 30 days, new date, refund, responsible until you have it (Ireland)
+- [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 per item since 1 July 2026, paid to the courier before delivery
+- [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – couriers' administration fee
+- [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – contact the shipping company through a website or number you know
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – number shapes, check digit, UPS's scan wordings, what Peek reads from UPS
 :::

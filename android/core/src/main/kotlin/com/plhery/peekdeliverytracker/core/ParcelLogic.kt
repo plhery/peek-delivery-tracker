@@ -727,44 +727,33 @@ object ParcelOrganizer {
 /**
  * A parcel delivered since the list was last shown does not jump to the past deliveries: its card first says so
  * where it stands, then travels there. Until then the list keeps the arrangement it had, whatever else the same news
- * changed. A value, as the Swift struct is: `copy()` keeps one as it stands.
+ * changed. A value, as the Swift struct is: each change gives a new one, and the list need only update when it isn't
+ * equal to the one it has.
  */
-class DeliveredHold {
+class DeliveredHold private constructor(
     /** The parcels that have just arrived. */
-    var ids: Set<UUID> = emptySet()
-        private set
-
+    val ids: Set<UUID>,
     /** Every parcel as the list showed it before they did. */
-    private var shown: Map<UUID, Parcel> = emptyMap()
+    private val shown: Map<UUID, Parcel>,
+) {
+    constructor() : this(emptySet(), emptyMap())
 
     val isEmpty: Boolean get() = ids.isEmpty()
     fun holds(id: UUID): Boolean = id in ids
 
     /** The list is about to show `next` where it showed `shown`. A list that nobody is looking at holds nothing, and changes at once. */
-    fun receive(shown: List<Parcel>, next: List<Parcel>, watching: Boolean) {
-        if (!watching) {
-            release()
-            return
-        }
+    fun receive(shown: List<Parcel>, next: List<Parcel>, watching: Boolean): DeliveredHold {
+        if (!watching) return release()
         val current = next.firstById { it.id }
         // A held parcel stays in its place for as long as it is still a delivery to show.
         val holding = ids.filterTo(LinkedHashSet()) { id -> current[id]?.let { !it.isArchived && it.isDelivered } ?: false }
         val arrivals = ParcelOrganizer.justDelivered(shown, next)
-        if (holding.isEmpty() && arrivals.isNotEmpty()) {
-            this.shown = shown.firstById { it.id }
-        }
+        val before = if (holding.isEmpty() && arrivals.isNotEmpty()) shown.firstById { it.id } else this.shown
         holding.addAll(arrivals.map { it.id })
-        if (holding.isEmpty()) {
-            release()
-        } else if (holding != ids) {
-            ids = holding
-        }
+        return if (holding.isEmpty()) release() else DeliveredHold(holding, before)
     }
 
-    fun release() {
-        if (ids.isNotEmpty()) ids = emptySet()
-        if (shown.isNotEmpty()) shown = emptyMap()
-    }
+    fun release(): DeliveredHold = DeliveredHold()
 
     /** The parcels as the list arranges them: as they were shown, but for one archived or brought back since. */
     fun arranged(parcels: List<Parcel>): List<Parcel> {
@@ -773,11 +762,6 @@ class DeliveredHold {
             val was = shown[parcel.id]
             if (was == null || was.isArchived != parcel.isArchived) parcel else was
         }
-    }
-
-    fun copy(): DeliveredHold = DeliveredHold().also {
-        it.ids = ids
-        it.shown = shown
     }
 
     override fun equals(other: Any?): Boolean = other is DeliveredHold && ids == other.ids && shown == other.shown
@@ -860,15 +844,16 @@ object PassportSpread {
 /**
  * The parcel the deliveries show, over the list or beside it, and whether someone chose it. Every way a parcel
  * opens comes through here: its card, a notification, a link, the widget, Add finding it followed already. A value,
- * as the Swift struct is: `copy()` keeps one as it stands.
+ * as the Swift struct is: each change gives a new one, and the screen need only update when it isn't equal to the
+ * one it has.
  */
-class DeliveriesNavigation(
+class DeliveriesNavigation private constructor(
     /** The parcels open over the list, the last on top. Beside the list, the last is the one shown. */
-    var path: List<UUID> = emptyList(),
-) {
+    val path: List<UUID>,
     /** The parcel shown beside the list that nobody chose, so that the column isn't empty. */
-    var automaticPick: UUID? = null
-        private set
+    val automaticPick: UUID?,
+) {
+    constructor(path: List<UUID> = emptyList()) : this(path, null)
 
     val shown: UUID? get() = path.lastOrNull()
     val shownAutomatically: Boolean get() = automaticPick != null && automaticPick == path.lastOrNull()
@@ -876,11 +861,11 @@ class DeliveriesNavigation(
     /** The parcel someone opened, if the one shown is theirs. */
     val chosen: UUID? get() = if (shownAutomatically) null else shown
 
+    /** The navigation once the system has moved along `path` itself, as going back does. */
+    fun copy(path: List<UUID> = this.path): DeliveriesNavigation = DeliveriesNavigation(path, automaticPick)
+
     /** Opens the parcel someone asked for: over the list, or beside it in place of the one shown there. */
-    fun open(parcelId: UUID) {
-        path = listOf(parcelId)
-        automaticPick = null
-    }
+    fun open(parcelId: UUID): DeliveriesNavigation = DeliveriesNavigation(listOf(parcelId), null)
 
     /**
      * Takes the window's arrangement and the list's `cards`, in order, with the archive's rows after them while they
@@ -888,29 +873,23 @@ class DeliveriesNavigation(
      * the list shows neither. A parcel shown by itself gives way to the first card once it leaves the cards. Over the
      * list, nothing opens by itself, and a parcel shown by itself goes back into the list: one chosen stays open over it.
      */
-    fun settle(arrangement: DeliveriesArrangement, cards: List<UUID>) {
-        when (arrangement) {
-            DeliveriesArrangement.Stacked -> {
-                if (shownAutomatically) path = emptyList()
-                automaticPick = null
-            }
-            DeliveriesArrangement.SideBySide -> {
-                val shown = shown
-                if (shown != null && (!shownAutomatically || shown in cards)) return
-                pick(cards.firstOrNull())
-            }
+    fun settle(arrangement: DeliveriesArrangement, cards: List<UUID>): DeliveriesNavigation = when (arrangement) {
+        DeliveriesArrangement.Stacked -> DeliveriesNavigation(if (shownAutomatically) emptyList() else path, null)
+        DeliveriesArrangement.SideBySide -> {
+            val shown = shown
+            if (shown != null && (!shownAutomatically || shown in cards)) this else pick(cards.firstOrNull())
         }
     }
 
     /**
-     * Opens the parcel that was open when the system last closed the app, once the parcels are back. True once that's
-     * settled: the parcel is open, it's gone, or someone opened another first. False while there are none yet.
+     * Opens the parcel that was open when the system last closed the app, once the parcels are back. The navigation
+     * once that's settled: the parcel is open, it's gone, or someone opened another first. Null while there are none
+     * yet, and nothing changes.
      */
-    fun restore(parcelId: UUID, among: List<UUID>): Boolean {
-        if (chosen != null) return true
-        if (among.isEmpty()) return false
-        if (parcelId in among) open(parcelId)
-        return true
+    fun restore(parcelId: UUID, among: List<UUID>): DeliveriesNavigation? {
+        if (chosen != null) return this
+        if (among.isEmpty()) return null
+        return if (parcelId in among) open(parcelId) else this
     }
 
     /**
@@ -918,25 +897,24 @@ class DeliveriesNavigation(
      * from its card, and the card after it shows instead: the one before it for the last, the first for one that had
      * none. `cards` is the list as it was before the parcel left.
      */
-    fun leave(parcelId: UUID, cards: List<UUID>) {
-        if (shown != parcelId) return
+    fun leave(parcelId: UUID, cards: List<UUID>): DeliveriesNavigation {
+        if (shown != parcelId) return this
         val index = cards.indexOf(parcelId).takeIf { it >= 0 }
         val after = index?.let { cards.getOrNull(it + 1) }
         val before = index?.let { cards.getOrNull(it - 1) }
-        pick(after ?: before ?: cards.firstOrNull { it != parcelId })
+        return pick(after ?: before ?: cards.firstOrNull { it != parcelId })
     }
 
     /**
      * Opens beside the list the card `offset` cards on from the parcel shown, in the list's `cards`, as ↑ and ↓ do,
      * and as a tap on that card would: from a parcel with no card, or none, the first card going down and the last
-     * going up. Returns the card, null past either end, where the parcel shown stays.
+     * going up. The navigation with that card shown, or null past either end, where the parcel shown stays.
      */
-    fun step(offset: Int, through: List<UUID>): UUID? {
+    fun step(offset: Int, through: List<UUID>): DeliveriesNavigation? {
         val shown = shown
         val index = if (shown != null) through.indexOf(shown) else -1
         val card = if (index >= 0) through.getOrNull(index + offset) else if (offset > 0) through.firstOrNull() else through.lastOrNull()
-        if (card != null) open(card)
-        return card
+        return card?.let(::open)
     }
 
     /**
@@ -949,12 +927,7 @@ class DeliveriesNavigation(
         return if (shown == null && after.chosen != null) "deliveries" else null
     }
 
-    private fun pick(parcelId: UUID?) {
-        path = listOfNotNull(parcelId)
-        automaticPick = parcelId
-    }
-
-    fun copy(): DeliveriesNavigation = DeliveriesNavigation(path).also { it.automaticPick = automaticPick }
+    private fun pick(parcelId: UUID?): DeliveriesNavigation = DeliveriesNavigation(listOfNotNull(parcelId), parcelId)
 
     override fun equals(other: Any?): Boolean =
         other is DeliveriesNavigation && path == other.path && automaticPick == other.automaticPick

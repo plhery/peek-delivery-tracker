@@ -114,41 +114,33 @@ class ParcelLogicTests {
 
     @Test
     fun arrivalTiltFiltersJitterAndBoundsLargeMovements() {
-        val tilt = ArrivalTilt()
-        tilt.follow(roll = 0.44, pitch = -0.44)
+        var tilt = ArrivalTilt().follow(roll = 0.44, pitch = -0.44)
         assertEquals(0.22, tilt.x, 0.0001)
         assertEquals(-0.22, tilt.y, 0.0001)
-        repeat(100) { tilt.follow(roll = 50.0, pitch = -50.0) }
+        repeat(100) { tilt = tilt.follow(roll = 50.0, pitch = -50.0) }
         assertTrue(tilt.x <= 1)
         assertTrue(tilt.y >= -1)
-        val prior = tilt.copy()
-        tilt.follow(roll = Double.NaN, pitch = Double.POSITIVE_INFINITY)
-        assertEquals(prior, tilt)
+        assertEquals(tilt, tilt.follow(roll = Double.NaN, pitch = Double.POSITIVE_INFINITY))
     }
 
     @Test
     fun arrivalTiltFollowsScreenOrientationAndSettlesAtRest() {
-        val portrait = ArrivalTilt()
-        val landscape = ArrivalTilt()
-        portrait.follow(roll = 0.44, pitch = 0.0)
-        landscape.follow(roll = 0.44, pitch = 0.0, quarterTurns = 1)
+        val portrait = ArrivalTilt().follow(roll = 0.44, pitch = 0.0)
+        var landscape = ArrivalTilt().follow(roll = 0.44, pitch = 0.0, quarterTurns = 1)
         assertEquals(0.0, landscape.x, 0.0001)
         assertEquals(-portrait.x, landscape.y, 0.0001)
-        repeat(40) { landscape.follow(roll = 0.0, pitch = 0.0) }
+        repeat(40) { landscape = landscape.follow(roll = 0.0, pitch = 0.0) }
         assertEquals(0.0, landscape.y, 0.0001)
     }
 
     @Test
     fun arrivalTiltRespondsGentlyToAccelerationAndRejectsInvalidSamples() {
-        val tilt = ArrivalTilt()
-        tilt.follow(roll = 0.0, pitch = 0.0, accelerationX = 0.35, accelerationY = 0.35)
+        var tilt = ArrivalTilt().follow(roll = 0.0, pitch = 0.0, accelerationX = 0.35, accelerationY = 0.35)
         assertTrue(tilt.x > 0)
         assertTrue(tilt.y < 0)
         assertTrue(Math.abs(tilt.x) + Math.abs(tilt.y) < 0.1)
-        val previous = tilt.copy()
-        tilt.follow(roll = 0.0, pitch = 0.0, accelerationX = Double.NaN)
-        assertEquals(previous, tilt)
-        repeat(60) { tilt.follow(roll = 0.0, pitch = 0.0) }
+        assertEquals(tilt, tilt.follow(roll = 0.0, pitch = 0.0, accelerationX = Double.NaN))
+        repeat(60) { tilt = tilt.follow(roll = 0.0, pitch = 0.0) }
         assertEquals(0.0, tilt.x, 0.0001)
         assertEquals(0.0, tilt.y, 0.0001)
     }

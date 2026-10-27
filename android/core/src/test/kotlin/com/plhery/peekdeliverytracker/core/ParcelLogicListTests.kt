@@ -42,8 +42,7 @@ class ParcelLogicListTests {
         fun layout(parcels: List<Parcel>): DeliveryListLayout =
             DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Priority, featuresNext = true)
 
-        val hold = DeliveredHold()
-        hold.receive(shown = shown, next = now, watching = true)
+        var hold = DeliveredHold().receive(shown = shown, next = now, watching = true)
         assertEquals(setOf(tea), hold.ids)
         assertTrue(hold.holds(tea))
         val held = layout(hold.arranged(now))
@@ -60,22 +59,23 @@ class ParcelLogicListTests {
         assertEquals(DeliveryCardKind.Next, changes[lamp]?.becomes)
 
         // More news for a held parcel keeps it held; archiving it lets it go, and it is arranged as it is.
-        hold.receive(shown = now, next = now, watching = true)
+        hold = hold.receive(shown = now, next = now, watching = true)
         assertEquals(setOf(tea), hold.ids)
         val archived = now.toMutableList()
         archived[0] = archived[0].copy(archivedAt = lately)
         assertTrue(hold.arranged(archived)[0].isArchived)
-        hold.receive(shown = now, next = archived, watching = true)
+        hold = hold.receive(shown = now, next = archived, watching = true)
         assertTrue(hold.isEmpty)
         assertEquals(now, hold.arranged(now))
 
         // A list that nobody is looking at holds nothing, and one that stops being looked at lets go.
-        val unseen = DeliveredHold()
-        unseen.receive(shown = shown, next = now, watching = false)
+        var unseen = DeliveredHold().receive(shown = shown, next = now, watching = false)
         assertTrue(unseen.isEmpty)
-        unseen.receive(shown = shown, next = now, watching = true)
+        unseen = unseen.receive(shown = shown, next = now, watching = true)
         assertFalse(unseen.isEmpty)
-        unseen.release()
+        // News that changes nothing gives an equal hold, which the list need not take.
+        assertEquals(unseen, unseen.receive(shown = now, next = now, watching = true))
+        unseen = unseen.release()
         assertTrue(unseen.isEmpty)
         assertEquals(DeliveredHold(), unseen)
     }
@@ -190,18 +190,17 @@ class ParcelLogicListTests {
     fun everyWayAParcelOpensShowsItAsChosen() {
         val first = UUID.randomUUID()
         val second = UUID.randomUUID()
-        var navigation = DeliveriesNavigation()
-        navigation.open(first)
+        var navigation = DeliveriesNavigation().open(first)
         assertEquals(listOf(first), navigation.path)
         assertEquals(first, navigation.chosen)
         // Another opened from beside the list, or from a notification over another, takes its place.
-        navigation.open(second)
+        navigation = navigation.open(second)
         assertEquals(listOf(second), navigation.path)
         // A parcel the app showed by itself becomes the person's once they open it.
         navigation = DeliveriesNavigation()
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(first, second))
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(first, second))
         assertTrue(navigation.shownAutomatically)
-        navigation.open(first)
+        navigation = navigation.open(first)
         assertFalse(navigation.shownAutomatically)
         assertEquals(first, navigation.chosen)
     }
@@ -211,30 +210,31 @@ class ParcelLogicListTests {
         val next = UUID.randomUUID()
         val other = UUID.randomUUID()
         val later = UUID.randomUUID()
-        val navigation = DeliveriesNavigation()
+        var navigation = DeliveriesNavigation()
         // Nothing to show while the list shows no card.
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = emptyList())
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = emptyList())
         assertNull(navigation.shown)
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(next, other))
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(next, other))
         assertEquals(next, navigation.shown)
         assertTrue(navigation.shownAutomatically)
         assertNull(navigation.chosen)
         // It stays while its card stays, wherever the card goes, and gives way to the first once it leaves.
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(other, next))
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(other, next))
         assertEquals(next, navigation.shown)
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(other, later))
+        // Settling again changes nothing: an equal navigation, which the screen need not take.
+        assertEquals(navigation, navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(other, next)))
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(other, later))
         assertEquals(other, navigation.shown)
         assertTrue(navigation.shownAutomatically)
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = emptyList())
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = emptyList())
         assertNull(navigation.shown)
         // A parcel someone chose stays, even once a search hides its card.
-        navigation.open(later)
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(next))
+        navigation = navigation.open(later)
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(next))
         assertEquals(later, navigation.shown)
         assertEquals(later, navigation.chosen)
         // Over the list, nothing opens by itself.
-        val stacked = DeliveriesNavigation()
-        stacked.settle(DeliveriesArrangement.Stacked, cards = listOf(next, other))
+        val stacked = DeliveriesNavigation().settle(DeliveriesArrangement.Stacked, cards = listOf(next, other))
         assertNull(stacked.shown)
     }
 
@@ -242,18 +242,17 @@ class ParcelLogicListTests {
     fun aFoldKeepsTheParcelSomeoneChoseAndPutsBackOneShownByItself() {
         val next = UUID.randomUUID()
         val other = UUID.randomUUID()
-        val navigation = DeliveriesNavigation()
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(next, other))
-        navigation.settle(DeliveriesArrangement.Stacked, cards = listOf(next, other))
+        var navigation = DeliveriesNavigation().settle(DeliveriesArrangement.SideBySide, cards = listOf(next, other))
+        navigation = navigation.settle(DeliveriesArrangement.Stacked, cards = listOf(next, other))
         assertEquals(emptyList<UUID>(), navigation.path)
         assertFalse(navigation.shownAutomatically)
         // Unfolded again, the first card shows by itself once more.
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(next, other))
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(next, other))
         assertEquals(next, navigation.shown)
-        navigation.open(other)
-        navigation.settle(DeliveriesArrangement.Stacked, cards = listOf(next, other))
+        navigation = navigation.open(other)
+        navigation = navigation.settle(DeliveriesArrangement.Stacked, cards = listOf(next, other))
         assertEquals(listOf(other), navigation.path)
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(next, other))
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(next, other))
         assertEquals(other, navigation.chosen)
     }
 
@@ -263,23 +262,23 @@ class ParcelLogicListTests {
         val other = UUID.randomUUID()
         var navigation = DeliveriesNavigation()
         // The parcels aren't back yet: it waits.
-        assertFalse(navigation.restore(open, among = emptyList()))
+        assertNull(navigation.restore(open, among = emptyList()))
         assertNull(navigation.shown)
-        assertTrue(navigation.restore(open, among = listOf(other, open)))
+        navigation = navigation.restore(open, among = listOf(other, open))!!
         assertEquals(open, navigation.chosen)
         // It takes the place of the one shown by itself beside the list.
         navigation = DeliveriesNavigation()
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(other, open))
-        assertTrue(navigation.restore(open, among = listOf(other, open)))
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = listOf(other, open))
+        navigation = navigation.restore(open, among = listOf(other, open))!!
         assertEquals(open, navigation.chosen)
         // Gone since, it opens nothing.
         navigation = DeliveriesNavigation()
-        assertTrue(navigation.restore(open, among = listOf(other)))
+        navigation = navigation.restore(open, among = listOf(other))!!
         assertNull(navigation.shown)
         // A parcel someone opened first, from a notification or a link, stays.
         navigation = DeliveriesNavigation()
-        navigation.open(other)
-        assertTrue(navigation.restore(open, among = listOf(other, open)))
+        navigation = navigation.open(other)
+        navigation = navigation.restore(open, among = listOf(other, open))!!
         assertEquals(other, navigation.chosen)
     }
 
@@ -289,26 +288,25 @@ class ParcelLogicListTests {
         val b = UUID.randomUUID()
         val c = UUID.randomUUID()
         val cards = listOf(a, b, c)
-        val navigation = DeliveriesNavigation()
-        navigation.open(b)
-        navigation.leave(b, cards = cards)
+        var navigation = DeliveriesNavigation().open(b)
+        navigation = navigation.leave(b, cards = cards)
         assertEquals(c, navigation.shown)
         // Nobody chose the next one: a fold puts it back into the list, and no parcel view is counted.
         assertTrue(navigation.shownAutomatically)
-        navigation.open(c)
-        navigation.leave(c, cards = cards)
+        navigation = navigation.open(c)
+        navigation = navigation.leave(c, cards = cards)
         assertEquals("the last card gives way to the one before it", b, navigation.shown)
         // One brought back from the archive had no card: the first shows.
         val archived = UUID.randomUUID()
-        navigation.open(archived)
-        navigation.leave(archived, cards = cards)
+        navigation = navigation.open(archived)
+        navigation = navigation.leave(archived, cards = cards)
         assertEquals(a, navigation.shown)
-        navigation.open(a)
-        navigation.leave(a, cards = listOf(a))
+        navigation = navigation.open(a)
+        navigation = navigation.leave(a, cards = listOf(a))
         assertNull("the only card leaves nothing to show", navigation.shown)
         // A page that is no longer the one shown changes nothing.
-        navigation.open(a)
-        navigation.leave(b, cards = cards)
+        navigation = navigation.open(a)
+        navigation = navigation.leave(b, cards = cards)
         assertEquals(a, navigation.chosen)
     }
 
@@ -329,12 +327,11 @@ class ParcelLogicListTests {
         assertEquals(emptyList<UUID>(), archived.cards)
         val rows = archived.rows(archiveOpen = true)
         assertEquals(setOf(older.id, newer.id), rows.toSet())
-        val navigation = DeliveriesNavigation()
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = rows)
+        var navigation = DeliveriesNavigation().settle(DeliveriesArrangement.SideBySide, cards = rows)
         assertEquals(rows.firstOrNull(), navigation.shown)
         assertTrue(navigation.shownAutomatically)
         // Leaving the filter, the first card takes its place.
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = all.rows(archiveOpen = false))
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = all.rows(archiveOpen = false))
         assertEquals(onTheWay.id, navigation.shown)
     }
 
@@ -345,34 +342,33 @@ class ParcelLogicListTests {
         val c = UUID.randomUUID()
         val archived = UUID.randomUUID()
         val cards = listOf(a, b, c)
-        var navigation = DeliveriesNavigation()
-        navigation.open(b)
-        assertEquals(c, navigation.step(1, through = cards))
+        var navigation = DeliveriesNavigation().open(b)
+        assertEquals(c, navigation.step(1, through = cards)?.also { navigation = it }?.shown)
         // It opens, as a tap on its card does: it stays open through a fold, and comes back after a relaunch.
         assertEquals(c, navigation.chosen)
-        assertEquals(b, navigation.step(-1, through = cards))
-        assertEquals(a, navigation.step(-1, through = cards))
+        assertEquals(b, navigation.step(-1, through = cards)?.also { navigation = it }?.shown)
+        assertEquals(a, navigation.step(-1, through = cards)?.also { navigation = it }?.shown)
         assertEquals(a, navigation.chosen)
         // From the first card shown by itself, ↓ opens the second.
         navigation = DeliveriesNavigation()
-        navigation.settle(DeliveriesArrangement.SideBySide, cards = cards)
+        navigation = navigation.settle(DeliveriesArrangement.SideBySide, cards = cards)
         assertTrue(navigation.shownAutomatically)
-        assertEquals(b, navigation.step(1, through = cards))
+        assertEquals(b, navigation.step(1, through = cards)?.also { navigation = it }?.shown)
         assertEquals(b, navigation.chosen)
-        navigation.open(a)
+        navigation = navigation.open(a)
         // Past either end, the parcel shown stays.
         assertNull(navigation.step(-1, through = cards))
         assertEquals(a, navigation.chosen)
-        navigation.open(c)
+        navigation = navigation.open(c)
         assertNull(navigation.step(1, through = cards))
         assertEquals(c, navigation.chosen)
         // From a parcel with no card, or none, to the first card going down and the last going up.
-        navigation.open(archived)
-        assertEquals(a, navigation.step(1, through = cards))
-        navigation.open(archived)
-        assertEquals(c, navigation.step(-1, through = cards))
+        navigation = navigation.open(archived)
+        assertEquals(a, navigation.step(1, through = cards)?.also { navigation = it }?.shown)
+        navigation = navigation.open(archived)
+        assertEquals(c, navigation.step(-1, through = cards)?.also { navigation = it }?.shown)
         navigation = DeliveriesNavigation()
-        assertEquals(c, navigation.step(-1, through = cards))
+        assertEquals(c, navigation.step(-1, through = cards)?.also { navigation = it }?.shown)
         // No card, nowhere to go.
         navigation = DeliveriesNavigation()
         assertNull(navigation.step(1, through = emptyList()))
@@ -383,10 +379,8 @@ class ParcelLogicListTests {
     fun theDeliveriesKeysActOnlyOnWhatIsInFront() {
         val a = UUID.randomUUID()
         val b = UUID.randomUUID()
-        val automatic = DeliveriesNavigation()
-        automatic.settle(DeliveriesArrangement.SideBySide, cards = listOf(a, b))
-        val chosen = DeliveriesNavigation()
-        chosen.open(a)
+        val automatic = DeliveriesNavigation().settle(DeliveriesArrangement.SideBySide, cards = listOf(a, b))
+        val chosen = DeliveriesNavigation().open(a)
         fun keys(
             free: Boolean = true,
             searching: Boolean = false,
@@ -435,28 +429,22 @@ class ParcelLogicListTests {
         val a = UUID.randomUUID()
         val b = UUID.randomUUID()
         val list = DeliveriesNavigation()
-        val opened = list.copy()
-        opened.open(a)
+        val opened = list.open(a)
         assertEquals("parcel", opened.screen(after = list))
         assertNull(opened.screen(after = opened))
         assertEquals("deliveries", list.screen(after = opened))
-        val other = opened.copy()
-        other.open(b)
+        val other = opened.open(b)
         assertEquals("parcel", other.screen(after = opened))
         // Shown by itself, beside the list.
-        val automatic = list.copy()
-        automatic.settle(DeliveriesArrangement.SideBySide, cards = listOf(a, b))
+        val automatic = list.settle(DeliveriesArrangement.SideBySide, cards = listOf(a, b))
         assertNull(automatic.screen(after = list))
-        val chosen = automatic.copy()
-        chosen.open(a)
+        val chosen = automatic.open(a)
         assertEquals("parcel", chosen.screen(after = automatic))
         // After archiving, the next parcel shows by itself beside the list, which was there all along.
-        val next = chosen.copy()
-        next.leave(a, cards = listOf(a, b))
+        val next = chosen.leave(a, cards = listOf(a, b))
         assertNull(next.screen(after = chosen))
         // Folded, it goes back into the list, which was in view already.
-        val folded = next.copy()
-        folded.settle(DeliveriesArrangement.Stacked, cards = listOf(b))
+        val folded = next.settle(DeliveriesArrangement.Stacked, cards = listOf(b))
         assertNull(folded.screen(after = next))
     }
 

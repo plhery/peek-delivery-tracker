@@ -1340,6 +1340,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "bpost",
+      "catalog": "bpost",
+      "slug": "bpost-sendungsverfolgung",
+      "title": "bpost Sendungsverfolgung: Status, Abholung, bbox, Zoll",
+      "name": "bpost",
+      "color": "#ef2637"
+    },
+    {
       "id": "speedpak",
       "catalog": "speedpak",
       "slug": "speedpak-sendungsverfolgung",
@@ -1844,6 +1852,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi China Post\u00a0: numéro, statuts chinois et livraison",
       "name": "China Post",
       "color": "#006d46"
+    },
+    {
+      "id": "tnt",
+      "catalog": "tnt",
+      "slug": "tnt-suivi-colis",
+      "title": "TNT suivi colis\u00a0: bon de transport, statuts et livraison",
+      "name": "TNT",
+      "color": "#ff6600"
     }
   ],
   "it": [

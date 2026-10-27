@@ -4,7 +4,7 @@ description: Jak działają Paczkomaty InPost, One Box, ORLEN Paczka, DPD i Pocz
 slug: paczkomat-kod-odbioru-terminy
 picture: Rząd skrytek automatu paczkowego z jednymi otwartymi drzwiczkami, telefon z kodem i Pip wychodzący ze skrytki.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Automat paczkowy to punkt odbioru bez okienka: ściana skrytek, które otwierasz kodem albo w aplikacji przewoźnika. Śledzenie pokazuje, kiedy paczka jest w środku, przewoźnik wysyła ci kod odbioru, a od tej chwili masz mało czasu, często tylko 48 godzin. Jeśli nie zdążysz, paczka wraca do nadawcy.
@@ -34,9 +34,9 @@ Przy automacie nikt nie sprawdza dokumentów. InPost uznaje za upoważnioną ka�
 | DPD Pickup automat | [DPD](carrier:dpd-pl) | Kod w mailu albo aplikacja DPD Mobile | 2 dni robocze |
 | Pocztex AUTOMAT | [Poczta Polska](carrier:poczta-polska) | SMS z kodem, mail, jeśli nadawca go podał | 72 godziny |
 
-Pocztex AUTOMAT stoją przy placówkach pocztowych, na stacjach paliw, przy sklepach, np. Biedronce, i na osiedlach. Allegro Delivery dowozi nie tylko do One Box, ale też do automatów ORLEN Paczki, DHL BOX 24/7 i DPD. Na stronie punktów odbioru Amazon.pl nie ma Amazon Lockerów: są Paczkomaty InPost oraz DHL BOX 24/7 i DHL POP.
+Pocztex AUTOMAT stoją przy placówkach pocztowych, na stacjach paliw, przy sklepach, np. Biedronce, i na osiedlach. Allegro Delivery dowozi nie tylko do One Box, ale też do automatów ORLEN Paczki, DHL BOX 24/7 i DPD. Amazon.pl dowozi do automatów Paczkomat i do tysięcy punktów odbioru w całej Polsce.
 
-Termin zależy też od sklepu. Paczka z Allegro czeka w DHL BOX 24/7 2 dni robocze, a z Amazon.pl 3; w Paczkomacie Amazon.pl liczy 2 dni kalendarzowe. Rozstrzyga data w powiadomieniu.
+Termin zależy też od sklepu: paczka z Allegro czeka w DHL BOX 24/7 2 dni robocze. Rozstrzyga data w powiadomieniu.
 
 Kupujesz od osób prywatnych? Zobacz [Przesyłkę OLX i Allegro Lokalnie](guide:second-hand-orders) oraz [paczki z Vinted](guide:vinted-orders).
 
@@ -148,6 +148,6 @@ Numer InPost ma zwykle 24 cyfry, a Allegro One zaczyna się od `A0` lub `AD`; po
 - [ORLEN Paczka: FAQ](https://www.orlenpaczka.pl/faq/) – 3 dni robocze, kod 5- lub 6-cyfrowy, przekazanie kodu, Otwórz zdalnie, błędny numer, infolinia
 - [DPD Polska: FAQ](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – kod w mailu, DPD Mobile, 2 dni robocze bez przedłużenia, inna osoba z kodem, problemy z otwarciem
 - [Poczta Polska: Odbiór w punkcie, FAQ](https://odbiorwpunkcie.poczta-polska.pl/faq/) – lokalizacje, SMS i mail z kodem, 3 SMS-y, Pocztex Mobile, 72 godziny, przekazanie kodu, status doręczono
-- [Amazon.pl: Dostawa do punktu odbioru](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – Paczkomat 2 dni kalendarzowe, DHL BOX 24/7 i DHL POP 3 dni robocze
+- [About Amazon Polska: Pozwól sobie nie pamiętać](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/pozwol-sobie-nie-pamietac-w-sklepie-amazon-pl-niskie-ceny-kazdego-dnia-oraz-szybka-i-darmowa-dostawa-to-mniej-stresu-przy-codziennych-zakupach) – dostawa Amazon.pl do automatów Paczkomat i punktów odbioru
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – wzory numerów
 :::

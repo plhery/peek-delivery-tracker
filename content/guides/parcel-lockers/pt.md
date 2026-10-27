@@ -4,7 +4,7 @@ description: Como funcionam os cacifos Locky dos CTT, da InPost e da DPD: onde e
 slug: cacifo-encomendas-codigo-levantamento
 picture: Uma fila de cacifos com uma porta aberta, um telemóvel que mostra um código e o Pip a sair de um compartimento.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Um cacifo é um ponto de levantamento sem ninguém ao balcão: uma parede de compartimentos que se abre com um código ou com a app da transportadora. O rastreio diz-te quando a encomenda está lá dentro, a transportadora envia-te o código para abrir e, a partir daí, tens poucos dias, normalmente 5 e às vezes só 3. Se não passares a tempo, a encomenda volta para quem a enviou.
@@ -34,8 +34,6 @@ Ao cacifo ninguém te pede documentos nem assinatura: a InPost diz que no Locker
 
 Os Locky recebem encomendas CTT Expresso e Nacex. Não recebem correspondência, Encomenda Postal, envios à cobrança nem envios com entrega ao próprio.
 
-Para Portugal, a página de pontos de recolha da Amazon.es não lista Amazon Lockers: entrega em cacifos dos CTT, com um código de levantamento por e-mail e 5 dias de calendário para levantar.
-
 A InPost dá 5 dias de calendário a partir do aviso, mas uma resposta da mesma página fala em 8: conta com 5. Para OLX, Wallapop e outras compras entre particulares, vê [encomendas em segunda mão](guide:second-hand-orders).
 
 ## Onde está o meu código para levantar, e se não chegar?
@@ -46,7 +44,6 @@ Onde procurar:
 
 - **CTT Locky.** SMS ou e-mail com a data-limite e o PIN, que escreves no ecrã tátil do cacifo.
 - **InPost.** PIN de 6 dígitos por e-mail, SMS ou os dois, e também na app InPost. No Locker serve o PIN ou o QR.
-- **Amazon com cacifo CTT.** Código de levantamento no e-mail da Amazon.
 
 O código não chegou? Segue esta ordem:
 
@@ -63,7 +60,6 @@ Menos do que numa loja CTT ou num ponto com pessoal.
 - **CTT Locky.** 5 dias. Conforme o tipo de envio, podes prolongar o prazo até 5 dias úteis. Se ninguém levantar, a encomenda volta ao remetente.
 - **InPost.** 5 dias de calendário a partir do aviso, em envios nacionais. Depois volta ao remetente.
 - **DPD.** Nos Lockers, 72 horas, ou seja, 3 dias.
-- **Amazon com cacifo CTT.** 5 dias de calendário depois da entrega.
 
 O que acontece a seguir e como recuperas o dinheiro: [encomenda não levantada](guide:uncollected-parcel) e [devolvida ao remetente](guide:returned-to-sender).
 
@@ -132,6 +128,5 @@ Um número dos CTT tem 2 letras, 9 algarismos e `PT`; os outros formatos estão 
 - [InPost: Como recolher](https://www.inpost.pt/recebe-a-tua-encomenda/como-recolher) – PIN de 6 dígitos por e-mail ou SMS e na app, PIN ou QR sem documentos, 5 e 8 dias de calendário
 - [InPost: Obtém a app](https://www.inpost.pt/obtem-a-app) – abrir à distância a uns 70 metros
 - [DPD Portugal: Pickup](https://www.dpd.com/pt/pt/ajuda/faq/pickup/) – alerta por SMS, 72 horas nos Lockers
-- [Amazon.es: Entrega en punto de recogida](https://www.amazon.es/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – cacifo CTT em Portugal, código por e-mail, 5 dias de calendário
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formatos dos números
 :::

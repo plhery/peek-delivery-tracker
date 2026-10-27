@@ -4,7 +4,7 @@ description: Cómo funcionan las taquillas Citypaq, InPost, SEUR y Amazon: dónd
 slug: taquilla-paquetes-codigo-recogida
 picture: Una fila de taquillas con una puerta abierta, un móvil que muestra un código y Pip saliendo de un casillero.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Una taquilla es un punto de recogida sin nadie detrás del mostrador: una pared de casilleros que se abre con un código o con la app del transportista. El seguimiento te dice cuándo está dentro el paquete, el transportista te manda el código para abrirlo y desde ese momento tienes pocos días, normalmente 5 y a veces solo 3. Si no pasas a tiempo, el paquete vuelve a quien lo envió.
@@ -31,9 +31,9 @@ En la taquilla nadie te pide el DNI ni una firma. Correos lo dice tal cual: en C
 | Citypaq | [Correos](carrier:correos-spain) | PIN de 8 cifras por email, SMS o aviso de la app | 5 días naturales |
 | InPost Locker | [InPost](carrier:mondial-relay) | PIN de 6 cifras por email o SMS, también en la app | 5 días naturales |
 | SEUR Locker | [SEUR](carrier:seur) | Código de apertura en el aviso de SEUR | 5 días |
-| Amazon Locker | [Amazon](carrier:amazon-logistics) | Código de 6 cifras o código de barras por email | 3 días naturales |
+| Amazon Locker | [Amazon](carrier:amazon-logistics) | Código único por email, a mano o con su código de barras | 3 días |
 
-Los Citypaq están en centros comerciales, estaciones, supermercados y oficinas de Correos. SEUR tiene unos 2.000 Lockers en España, abiertos las 24 horas. Las taquillas de Mondial Relay ahora son de InPost: InPost compró Mondial Relay en 2021 y mondialrelay.es lleva a inpost.es. Y Amazon no solo usa sus Lockers: también entrega en Citypaq, con un código de barras y un código de recogida por email y 5 días naturales para recoger.
+Los Citypaq están en centros comerciales, estaciones, supermercados y oficinas de Correos. SEUR tiene unos 2.000 Lockers en España, abiertos las 24 horas. Las taquillas de Mondial Relay ahora son de InPost: InPost compró Mondial Relay en 2021 y mondialrelay.es lleva a inpost.es.
 
 Los plazos de InPost son los de envíos nacionales. Si te dan otra fecha, manda la del aviso. Para Wallapop, Milanuncios y otras compras entre particulares, mira [pedidos de segunda mano](guide:second-hand-orders).
 
@@ -46,7 +46,7 @@ Dónde buscarlo:
 - **Correos Citypaq.** PIN numérico de 8 cifras por email, SMS o notificación de la app de Correos, que guarda los códigos.
 - **InPost.** PIN de 6 cifras por email, SMS o ambos, y también en la app InPost. En el Locker vale el PIN o el QR.
 - **SEUR.** El aviso de SEUR con el código de apertura y la fecha máxima de recogida.
-- **Amazon.** El email de confirmación de entrega, con el código de 6 cifras y el código de barras, y la página de seguimiento del pedido en Mis pedidos.
+- **Amazon.** El email que te llega en cuanto el paquete está en el Locker, con el código único, la dirección y el horario.
 
 ¿No te ha llegado? Ve por orden:
 
@@ -63,7 +63,7 @@ Menos que una oficina de Correos o un punto con personal.
 - **Citypaq.** 5 días naturales.
 - **InPost.** 5 días naturales desde el aviso en envíos nacionales. Después, el paquete vuelve solo al remitente.
 - **SEUR Locker.** Hasta 5 días, con un recordatorio el tercer día.
-- **Amazon Locker.** 3 días naturales desde la entrega. Después vuelve a Amazon.
+- **Amazon Locker.** 3 días desde que llega el paquete. Después vuelve a Amazon.
 
 Qué pasa después y cómo se recupera el dinero: [paquete no recogido](guide:uncollected-parcel) y [devuelto al remitente](guide:returned-to-sender).
 
@@ -84,7 +84,7 @@ Sí a las dos cosas, con algún límite.
 - **Correos Citypaq.** La taquilla no identifica a quien recoge: abre con el PIN. Sin app, eliges «RECOGER» en la pantalla y escribes el PIN o escaneas el código de barras.
 - **InPost.** En el Locker basta el PIN o el QR, sin documentos. La autorización por escrito con NIF que pide InPost es para el Punto Pack, donde hay alguien detrás del mostrador. La app abre el casillero a distancia, con «Abrir casillero», si estás a menos de unos 70 metros.
 - **SEUR.** Escribes el código de apertura en la pantalla. No hace falta app.
-- **Amazon.** Reenvía el email de confirmación de entrega a quien vaya a recoger. Las taquillas con pantalla abren con el código o el código de barras. Las que no tienen pantalla piden la app de Amazon con el Bluetooth: «Iniciar recogida» y después «Abrir taquilla».
+- **Amazon.** Escribes el código a mano o escaneas el código de barras. Algunas taquillas tienen pantalla táctil y otras se abren desde la app de Amazon Compras.
 
 Manda el código solo a gente de confianza. Un SMS que no esperabas con un enlace para «desbloquear» un paquete no viene de la taquilla: mira [SMS falsos de paquetería](guide:delivery-scam-texts).
 
@@ -139,7 +139,7 @@ Un número de Correos puede ser `PR` + 15 cifras + `C`; el resto de formatos, en
 - [InPost: Consigue la app](https://www.inpost.es/consigue-la-app) – abrir el casillero a unos 70 metros
 - [SEUR: Lockers](https://www.seur.com/es/puntos-pickup/lockers/?business_unit=seur) – 2.000 Lockers, 24 horas, hasta 5 días, devoluciones
 - [SEUR: Recoge tus envíos en un locker](https://blog.seur.com/recoge-tus-envios-en-un-locker/) – código de apertura y fecha máxima, recordatorio el tercer día, cambio a Locker, devolución con etiqueta
-- [Amazon.es: Recoger un paquete en un Amazon Locker](https://www.amazon.es/gp/help/customer/display.html?nodeId=GRQMENKQV9RQ6BWF) – código de 6 cifras y código de barras, taquillas sin pantalla, reenviar el email, vuelta a Amazon
-- [Amazon.es: Entrega en punto de recogida](https://www.amazon.es/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – 3 días naturales en Amazon Locker, 5 en Citypaq
+- [About Amazon España: Amazon Lockers](https://www.aboutamazon.es/noticias/innovacion/amazon-lockers) – código único por email al llegar el paquete, código a mano o código de barras, 3 días, vuelta a Amazon (artículo de 2017)
+- [About Amazon España: 15 cosas sobre Amazon que aún no sabías](https://www.aboutamazon.es/noticias/noticias-de-la-compania/15-cosas-sobre-amazon-que-aun-no-sabias) – taquillas con pantalla táctil o con la app de Amazon Compras
 - [Universal Parcel Scraper: datos de los transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formatos de número
 :::

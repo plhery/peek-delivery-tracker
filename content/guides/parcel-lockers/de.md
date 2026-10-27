@@ -4,7 +4,7 @@ description: So funktionieren Packstation, Amazon Locker, DPD-Paketstation, Herm
 slug: paketautomat-abholcode
 picture: Eine Wand voller Paketfächer mit einer offenen Tür, ein Handy mit einem Code und Pip, der herausspringt.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Ein Paketautomat ist eine Abholstelle ohne Schalter: eine Wand aus Fächern, die sich mit einem Code oder der App des Paketdiensts öffnet. Die Sendungsverfolgung zeigt, wann dein Paket drin liegt, der Paketdienst schickt dir den Code, und ab dann hast du nur wenige Tage, bei Amazon, DPD und Hermes nur 3. Holst du es nicht rechtzeitig ab, geht es meist zurück an den Absender.
@@ -27,10 +27,10 @@ Ein Paket kann auch in einem Automaten landen, den du nicht gewählt hast. Nach 
 | Automat | Betreiber | Dein Code | Wie lange er wartet |
 | --- | --- | --- | --- |
 | Packstation (DE) | DHL | Abholcode in der Post & DHL App oder per E-Mail, sonst die Benachrichtigungskarte | 7 Kalendertage, nach verpasster Zustellung 9 |
-| Amazon Locker (DE) | Amazon | 6-stelliger Abholcode und Barcode per E-Mail, oder die Amazon-App | 3 Kalendertage |
+| Amazon Locker (DE) | Amazon | 6-stelliger Code aus der Bestätigungs-E-Mail, Barcode oder die Amazon Shopping-App | 3 Kalendertage |
 | DPD Paketstation (DE) | DPD | Abholcode oder QR-Code per E-Mail oder SMS | 3 Tage |
 | Hermes Box (DE) | Hermes | Abhol-TAN, die du in der Sendungsverfolgung anforderst | 3 Kalendertage |
-| Poststation (AT) | Österreichische Post | Gelber Zettel oder E-Mail, digitaler Abholcode in der Post App | Mindestens 14 Kalendertage, manche Absender 5 Werktage, Amazon 7 Kalendertage |
+| Poststation (AT) | Österreichische Post | Gelber Zettel oder E-Mail, digitaler Abholcode in der Post App | Mindestens 14 Kalendertage, manche Absender 5 Werktage |
 | My Post 24 (CH) | Schweizerische Post | QR-Code oder Abhollink per E-Mail oder SMS | 10 Tage, aus dem Ausland meist 15 |
 
 Was nicht in die Tabelle passt:
@@ -47,7 +47,7 @@ Der Code, der das Fach öffnet, ist nicht deine Sendungsnummer. Die Sendungsnumm
 Wo du ihn findest:
 
 - **Packstation:** In der Post & DHL App, im Bereich Packstation, und nur auf deinem aktivierten Gerät. Er erneuert sich alle 120 Sekunden: ein QR-Code oder ein zehnstelliger Code, der mit A beginnt. DHL schickt ihn nicht erneut. Hast du ohne Anmeldung bei einem Shop bestellt, steht der Code in der E-Mail von DHL. Liegt das Paket nach einem verpassten Zustellversuch dort, reicht die Benachrichtigungskarte.
-- **Amazon:** In der Lieferbestätigung per E-Mail oder unter „Paket verfolgen“ in deinen Bestellungen.
+- **Amazon:** In der Bestätigungs-E-Mail.
 - **Hermes Box:** Du forderst die Abhol-TAN selbst an, in der Sendungsverfolgung auf myhermes.de, mit Sendungsnummer, Postleitzahl der Box und deiner E-Mail-Adresse.
 - **Poststation:** Auf dem gelben Zettel oder in der elektronischen Benachrichtigung per E-Mail oder Post App. Mit Login zeigt die Post App einen digitalen Abholcode.
 - **My Post 24:** In der E-Mail oder SMS, die kommt, sobald die Sendung da ist.
@@ -84,7 +84,7 @@ Die Post Empfangsbox im Wohnhaus nimmt keine Pakete an, die zu groß sind oder f
 
 Den Code weitergeben ist mal erlaubt, mal nicht:
 
-- **Amazon:** Leite die Bestätigungs-E-Mail weiter. Bei einem Locker ohne Bildschirm braucht die andere Person ihr eigenes Smartphone mit der Amazon-App.
+- **Amazon:** Leite die Bestätigungs-E-Mail mit den Anweisungen weiter.
 - **DPD:** Wer für dich abholt, braucht an der Paketstation nur den Abholcode oder den QR-Code aus der Benachrichtigungs-E-Mail.
 - **Packstation:** Die Postnummer ist „nicht übertragbar“, und der Abholcode erscheint nur auf deinem aktivierten Gerät.
 - **My Post 24:** „Nein, grundsätzlich“, sagt die Post: Abholen darfst nur du. Den QR-Code kannst du weiterleiten, „allerdings auf eigenes Risiko“.
@@ -92,7 +92,7 @@ Den Code weitergeben ist mal erlaubt, mal nicht:
 Ohne App:
 
 - **Packstation:** Ein Paket an deine Postnummer bekommst du ohne die Post & DHL App nicht heraus. Ohne App klappt es nur an Packstationen mit Bildschirm: mit dem Code aus der DHL-E-Mail, wenn der Shop die Packstation ohne Anmeldung anbietet, oder mit der Benachrichtigungskarte. Liegt ein Paket nach verpasster Zustellung in einer Packstation ohne Bildschirm, kannst du ohne App eine zweite Zustellung beauftragen.
-- **Amazon:** Ein Locker mit Bildschirm nimmt den 6-stelligen Code. Ein Locker ohne Bildschirm öffnet nur über die Amazon-App, mit Standort und Bluetooth.
+- **Amazon:** Notier dir den 6-stelligen Code aus der Bestätigungs-E-Mail. Manche Locker verlangen aber einen Barcode-Scan oder die Amazon-App.
 - **Poststation, Hermes Box und DPD:** Der Code kommt auf Papier, per E-Mail oder SMS, oder du forderst ihn auf der Website an.
 - **My Post 24:** Automaten mit Bildschirm lesen den QR-Code aus der E-Mail oder SMS, Automaten ohne Bildschirm öffnest du mit der Post-App.
 
@@ -140,9 +140,7 @@ Eine Amazon-Bestellung, die Amazon selbst liefert, siehst du nur in deinem Amazo
 - [DHL: Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/probleme-loesungen.html) – volle Packstation, defekt, ohne App, zweite Zustellung
 - [DHL: Allgemeine Fragen zur Packstation](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/allgemein.html) – Registrierung, Postnummer nicht übertragbar, Retouren
 - [DHL: Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Status bei nicht abgeholten Sendungen
-- [Amazon.de: Lieferung an eine Abholstation](https://www.amazon.de/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – 3 Kalendertage am Locker, 7 in Österreich
-- [Amazon.de: Paket an einem Amazon Locker abholen](https://www.amazon.de/gp/help/customer/display.html?nodeId=GRQMENKQV9RQ6BWF) – Abholcode, Barcode, Locker ohne Bildschirm, andere Person
-- [Amazon.de: Abholorte](https://www.amazon.de/ulp/view) – Rückerstattung bei nicht abgeholten Paketen
+- [About Amazon: Amazon Locker: bequem Pakete abholen](https://www.aboutamazon.de/news/amazon-prime-und-shopping/so-funktioniert-amazon-locker) – Code, Barcode oder Amazon Shopping-App, 6-stelliger Code aus der Bestätigungs-E-Mail, drei Kalendertage, automatische Rücksendung und Rückerstattung, E-Mail weiterleiten
 - [DPD: Paket abholen](https://www.dpd.com/de/de/support/empfaenger/paket-abholen/) – Paketstation 3 Tage, E-Mail oder SMS, Abholung durch andere
 - [Hermes: Hermes Box](https://www.myhermes.de/hermesbox/) – Auswahl beim Bestellen, Abhol-TAN, drei Kalendertage, Rücksendungen
 - [Hermes: Nutzungsbedingungen Hermes Box](https://www.myhermes.de/content/pdf/hermesbox_nutzungsbedingungen.pdf) – keine Umleitung nach dem Versand, volle oder defekte Box

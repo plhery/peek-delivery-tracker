@@ -4,7 +4,7 @@ description: How Amazon, InPost, USPS, Royal Mail, An Post and Australia Post lo
 slug: parcel-locker-collection-code
 picture: A bank of parcel lockers with one door open, a phone showing a code, and Pip stepping out.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 A parcel locker is a pickup point with no one behind a counter: a wall of doors that opens with a code or with the carrier's app. The tracking tells you when your parcel is inside, the carrier sends you the code, and from then on you have a few days, often only 3. Miss them and the parcel moves to a post office counter or goes back to the sender.
@@ -26,7 +26,7 @@ A parcel can also land in a locker you didn't pick. [InPost](carrier:inpost) and
 
 | Network | Run by | Your code | How long it waits |
 | --- | --- | --- | --- |
-| Amazon Locker (US, UK, Canada, Australia) | Amazon | 6-digit code and barcode in the email, or the Amazon app | 3 days in the US and UK; elsewhere, see your email |
+| Amazon Locker (US, UK, Canada, Australia) | Amazon | 6-digit code or barcode in the email, or the Amazon app | 3 days |
 | USPS Smart Locker (US) | USPS, in Post Office lobbies | QR code or access code by email | 5 days, then 10 at the counter |
 | InPost Lockers (UK) | InPost | QR code and code by app, email and text | 3 days |
 | Evri Lockers (UK) | Evri, serviced by partners | Barcode sent when it's ready | 3 days |
@@ -46,20 +46,20 @@ A few things the table can't hold:
 
 The code that opens the locker is not your tracking number. The tracking number follows the parcel from the shop to you. The collection code (a PIN, a QR code or a barcode) opens one door, once, and comes only after the parcel is in the locker. Before that, there's nothing to find.
 
-The table shows where each network sends it. In the UK, Amazon's Text Trace also sends it by text, and USPS shows the QR code in Informed Delivery.
+The table shows where each network sends it. USPS also shows the QR code in Informed Delivery.
 
 No code yet? Work through these:
 
 1. **Check the tracking.** If the parcel isn't in the locker yet, no code exists.
 2. **Check your spam and the details you gave the shop.** InPost texts the phone number the shop passed on, so a typo there means no text.
-3. **Use the app or your account.** InPost's app has Remote Opening, which opens the door with no PIN or QR code. Amazon shows the code under Track Package in Your Orders.
+3. **Use the app or your account.** InPost's app has Remote Opening, which opens the door with no PIN or QR code.
 4. **Contact the carrier** with your tracking number. InPost points you to its Customer Care.
 
 Codes come from the carrier or the shop, and they're free. A text asking for a small fee to release your parcel is almost always a scam: see [delivery scam texts](guide:delivery-scam-texts).
 
 ## How long will the locker keep my parcel?
 
-Not long: from 48 hours at An Post to 5 days at USPS and Canada Post, and 3 days at most UK networks (see the table). Outside the US and UK, Amazon puts the deadline in your confirmation email. Asked about an extension, InPost says "Sadly not."
+Not long: from 48 hours at An Post to 5 days at USPS and Canada Post, and 3 days at Amazon Lockers and most UK networks (see the table). Asked about an extension, InPost says "Sadly not."
 
 What happens at the deadline depends on the network:
 
@@ -85,13 +85,13 @@ Some parcels never go into a locker. Royal Mail keeps signature items and age or
 
 Sharing the code is fine with some networks and forbidden by others:
 
-- **Amazon:** forward the delivery confirmation email. For a locker without a screen, the other person needs their own smartphone with the Amazon app.
+- **Amazon:** forward the delivery confirmation email.
 - **InPost UK:** share the QR code or the 9-digit collection code.
 - **Australia Post:** no. Its terms say you must keep the access code confidential and not give it to anyone. Once the parcel has moved to a Post Office, you may be able to nominate someone in the app ("let someone collect this parcel") and they bring ID.
 
 Collecting without the app:
 
-- **Amazon:** a locker with a screen takes the 6-digit code, so writing it down is enough. Some lockers need the barcode scanned or the app.
+- **Amazon:** write down the 6-digit code from the confirmation email. Some lockers need the barcode scanned or the app, so Amazon suggests taking your phone anyway.
 - **InPost UK:** the code also comes by email and text. Type your phone number, without the first 0, and the code on the screen.
 - **USPS, Royal Mail, An Post and Australia Post:** the code comes by email or text, so you don't need the app.
 - **Canada Post:** no app and no code, just the key left in your mailbox.
@@ -137,11 +137,10 @@ An Amazon order delivered by Amazon itself shows its tracking only in your Amazo
 :::
 
 :::sources
-- [Amazon: Pickup locations](https://www.amazon.com/ulp/view) – 3 days in the US, automatic refund and return, forwarding the email
-- [Amazon: How to use Amazon Locker](https://www.aboutamazon.com/news/operations/how-to-use-amazon-locker) – code, barcode or app, full lockers, phone number on every locker
-- [Amazon: Collect a Package at an Amazon Locker](https://www.amazon.com/gp/help/customer/display.html?nodeId=GRQMENKQV9RQ6BWF) – 6-digit code, lockers without a screen, someone else collecting
-- [Amazon.co.uk: Pickup Point Delivery](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – 3 calendar days, Text Trace
-- [Amazon.ca: Pickup locations](https://www.amazon.ca/ulp/view) – pickup windows in the confirmation email
+- [About Amazon: How to use Amazon Locker](https://www.aboutamazon.com/news/operations/how-to-use-amazon-locker) – US: code, barcode or app, three calendar days, automatic return and refund, forwarding the email, writing down the 6-digit code, full lockers, phone number on every locker
+- [About Amazon UK: How to use Amazon Locker](https://www.aboutamazon.co.uk/news/operations/how-to-use-amazon-locker) – UK: three calendar days, automatic return and refund, forwarding the email, 6-digit code, barcode or app
+- [About Amazon Australia: How to use Amazon Locker](https://www.aboutamazon.com.au/news/retail/how-to-use-amazon-locker) – Australia: code or barcode by email or app, three calendar days, automatic return and refund
+- [Amazon Press Center: Amazon Counter Launches in Canada](https://press.aboutamazon.com/2021/12/amazon-counter-launches-in-canada-convenient-package-pickup-option-giving-customers-more-flexibility-and-control-over-their-shopping-and-delivery-experience) – Canada, 2021: barcode, 6-digit code or app by email, three days at a locker
 - [USPS: Smart Locker](https://faq.usps.com/articles/Knowledge/USPS-Smart-Locker) – code by email, 5 days, daily reminders, 10 days at the counter, redelivery, returns
 - [InPost: How do I pick up my parcel from an InPost Locker?](https://inpost.co.uk/help/how-do-i-pick-up-my-parcel-from-an-inpost-locker) – code by app, email and text, 3 days
 - [InPost: I didn't receive my collection code](https://inpost.co.uk/help/i-didnt-receive-my-collection-code) – Remote Opening, phone number from the shop, spam

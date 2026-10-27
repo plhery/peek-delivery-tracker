@@ -4,7 +4,7 @@ description: Lockers Mondial Relay, consignes Pickup, Amazon Locker, Bbox et My 
 slug: consigne-colis-code-retrait
 picture: Une rangée de consignes à colis avec une porte ouverte, un téléphone qui affiche un code, et Pip qui en sort.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Une consigne à colis (ou locker) est un point de retrait sans personne au comptoir : un mur de casiers qui s'ouvre avec un code ou l'appli du transporteur. Le suivi te dit quand ton colis est dedans, le transporteur t'envoie le code, et à partir de là tu as quelques jours, souvent 5. Passé ce délai, il repart en général chez l'expéditeur.
@@ -28,7 +28,7 @@ Ton colis peut aussi finir dans une autre consigne que celle choisie, si elle es
 | --- | --- | --- | --- |
 | Lockers Mondial Relay (France, Belgique) | Mondial Relay | Code à 6 chiffres par e-mail, SMS et dans l'appli | 5 jours calendaires |
 | Consignes Pickup (France) | Pickup, pour Colissimo et Chronopost | Pickup Pass (QR code) ou codes de retrait par e-mail ou SMS | 5 jours maximum |
-| Amazon Locker (France) | Amazon | Code à 6 chiffres et code-barres par e-mail, ou l'appli Amazon | 3 jours calendaires |
+| Amazon Locker (France) | Amazon | Code à 6 chiffres de l'e-mail, code-barres ou appli Amazon | 3 jours calendaires |
 | Bbox (Belgique) | bpost | QR code par e-mail ou dans l'appli My bpost | 5 jours calendaires |
 | My Post 24 (Suisse) | La Poste suisse | QR code ou lien de retrait par SMS ou e-mail | 10 jours, en général 15 depuis l'étranger |
 
@@ -47,7 +47,7 @@ Où le trouver :
 
 - **Mondial Relay :** dans l'e-mail, le SMS et l'appli (« Plus d'infos » sur ton colis). Sur l'écran, touche « Retirer un colis » et tape le code, ou scanne ton QR code.
 - **Pickup :** la notification par e-mail ou SMS contient l'adresse, les horaires, le Pickup Pass, les codes et le délai. À la consigne, scanne le QR code ou choisis « Retrait client », puis « Saisie manuelle ».
-- **Amazon :** dans l'e-mail de confirmation de livraison, ou dans « Suivre le colis » de Vos commandes.
+- **Amazon :** dans l'e-mail de confirmation de livraison.
 - **Bbox :** dans l'e-mail ou l'appli My bpost. Si tu as choisi la Bbox directement, un code à 6 chiffres figure sous le QR code.
 - **My Post 24 :** dans le SMS ou l'e-mail reçu dès l'arrivée de l'envoi.
 
@@ -65,7 +65,7 @@ Peu : 3 jours chez Amazon, 5 chez Mondial Relay, Pickup et bpost, 10 à un My Po
 
 Prolonger ? Non. « Il n'est pas possible de prolonger le délai de garde », dit Mondial Relay, et bpost : « aucune prolongation possible ».
 
-Ensuite, le colis repart. Mondial Relay et Pickup le retournent automatiquement à l'expéditeur, bpost le renvoie le 6e jour, Amazon le récupère. La suite et ton remboursement : [colis non retiré](guide:uncollected-parcel).
+Ensuite, le colis repart. Mondial Relay et Pickup le retournent automatiquement à l'expéditeur, bpost le renvoie le 6e jour, Amazon le récupère et te rembourse automatiquement. La suite et ton remboursement : [colis non retiré](guide:uncollected-parcel).
 
 ## La consigne était pleine ou en panne : où est mon colis ?
 
@@ -84,14 +84,14 @@ Partager le code, c'est permis chez certains, déconseillé chez d'autres :
 
 - **Mondial Relay :** la personne doit avoir ton code de retrait. Tu peux le partager avec un proche.
 - **Pickup :** elle présente ton Pickup Pass ou tes codes. La pièce d'identité ne vaut qu'en relais, et les procurations écrites ne sont pas acceptées.
-- **Amazon :** transfère-lui l'e-mail de confirmation de livraison. Pour un casier qui s'ouvre au smartphone, il lui faut un smartphone avec Bluetooth et la dernière version de l'appli Amazon.
+- **Amazon :** transfère-lui l'e-mail de confirmation de livraison, qui contient les instructions.
 - **Bbox :** « Quiconque dispose du code-barres de votre colis » peut le retirer.
 - **My Post 24 :** « Non, en principe », dit La Poste suisse. Tu peux transmettre le QR code, « mais à vos propres risques ».
 
 Sans l'appli :
 
 - **Mondial Relay et Pickup :** le code arrive aussi par e-mail et SMS. Seule l'ouverture à distance de Mondial Relay passe par l'appli.
-- **Amazon :** un casier avec écran prend le code à 6 chiffres. Un casier sans écran s'ouvre seulement avec l'appli Amazon, localisation et Bluetooth activés.
+- **Amazon :** dans la plupart des casiers, il suffit de noter le code à 6 chiffres de l'e-mail de confirmation. Certains demandent le code-barres ou l'appli Amazon, alors garde ton téléphone sur toi.
 - **Bbox et My Post 24 :** un automate avec écran lit le QR code de l'e-mail ou du SMS. Sans écran, il te faut l'appli My bpost (avec Bluetooth et localisation) ou la Post-App.
 
 ## Que dit le suivi à chaque étape ?
@@ -145,8 +145,7 @@ Une commande livrée par Amazon lui-même ne se suit que dans ton compte Amazon 
 - [Mondial Relay : Je souhaite retourner une commande](https://www.mondialrelay.fr/faq/recevoir-un-colis/je-souhaite-retourner-une-commande-comment-faire/) – retour par l'expéditeur
 - [Pickup : Les consignes](https://www.pickup.fr/consignes/) – 7 000 consignes, emplacements
 - [Pickup : FAQ particulier](https://www.pickup.fr/faq-particulier/) – Pickup Pass, codes, 5 jours, retrait par un tiers, redirection, panne, dépôt
-- [Amazon.fr : Livraison en point de retrait](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – 3 jours calendaires
-- [Amazon.fr : Récupérer un colis dans un Amazon Locker](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GRQMENKQV9RQ6BWF) – code à 6 chiffres, casier sans écran, autre personne, renvoi à Amazon
+- [About Amazon France : Comment retirer un colis dans un Amazon Locker](https://www.aboutamazon.fr/actualites/activite-logistique/comment-utiliser-amazon-locker) – code, code-barres ou appli Amazon, code à six chiffres de l'e-mail, trois jours calendaires, renvoi automatique et remboursement, e-mail à transférer
 - [bpost : Retirer des colis dans un Bbox](https://www.bpost.be/fr/bbox/retirer-des-colis) – 2 500 Bbox, QR code, 5 jours, préférence de livraison
 - [bpost : Bbox](https://www.bpost.be/fr/bbox) – envoi 24 h/24
 - [bpost : Comment récupérer un colis dans un distributeur bbox ?](https://www.bpost.be/fr/faq/comment-recuperer-un-colis-dans-un-distributeur-de-colis-0) – code à 6 chiffres, sans écran, pas de prolongation, 6e jour

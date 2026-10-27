@@ -1255,6 +1255,26 @@ function Refurb() {
   </>;
 }
 
+function Market() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    <Truck x={40} y={172} tone="ochre" scale={4} />
+    <path d="M186 150C204 126 220 118 236 120" stroke="var(--ochre)" strokeWidth="4" strokeLinecap="round" strokeDasharray="3 12" />
+    {/* A shopping basket full of parcels, and Pip on the tallest one. */}
+    <Box x={318} y={150} width={70} height={44} />
+    <Box x={394} y={136} width={60} height={58} />
+    <Box x={460} y={156} width={66} height={38} />
+    <path d="M306 186H538L524 248H320Z" fill={paper} />
+    <path d="M306 186H538L524 248H320Z" fill="var(--ochre)" opacity=".25" />
+    {[346, 382, 418, 454, 490].map((x) => <path key={x} d={`M${x} 190V246`} stroke="var(--ochre)" strokeWidth="4" strokeLinecap="round" />)}
+    <path d="M312 212H532M316 232H528" stroke="var(--ochre)" strokeWidth="4" strokeLinecap="round" />
+    <path d="M306 186H538L524 248H320Z" stroke="var(--ochre)" strokeWidth="5" strokeLinejoin="round" />
+    <rect x="296" y="178" width="252" height="14" rx="7" fill="var(--ochre)" />
+    <path d="M306 168C306 150 326 150 326 168V180M518 168C518 150 538 150 538 168V180" stroke="var(--ochre)" strokeWidth="6" strokeLinecap="round" />
+    <Pip x={424} ground={136} width={84} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1291,6 +1311,7 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'lidl-orders': { tone: 'blue', draw: Crate },
   'leroy-merlin-orders': { tone: 'green', draw: Paint },
   'back-market-orders': { tone: 'lilac', draw: Refurb },
+  'kaufland-orders': { tone: 'ochre', draw: Market },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },

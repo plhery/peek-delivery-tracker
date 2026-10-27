@@ -182,6 +182,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Back Market order tracking: delivery, returns and problems"
     },
     {
+      "id": "kaufland-orders",
+      "slug": "kaufland-order-tracking",
+      "title": "Kaufland order tracking: sellers, delivery and problems"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "how-to-find-tracking-number",
       "title": "How to find your tracking number, or track without one"
@@ -422,6 +427,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "back-market-orders",
       "slug": "back-market-sendungsverfolgung",
       "title": "Back Market Sendungsverfolgung: Versand, Rückgabe, Hilfe"
+    },
+    {
+      "id": "kaufland-orders",
+      "slug": "kaufland-sendungsverfolgung",
+      "title": "Kaufland Sendungsverfolgung: Verkäufer, Lieferung, Probleme"
     },
     {
       "id": "find-tracking-number",
@@ -666,6 +676,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Suivi de commande Back Market\u00a0: livraison, retours, SAV"
     },
     {
+      "id": "kaufland-orders",
+      "slug": "suivi-commande-kaufland",
+      "title": "Suivi de commande Kaufland\u00a0: vendeurs, livraison, problèmes"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "ou-trouver-numero-de-suivi",
       "title": "Où trouver son numéro de suivi, et comment faire sans"
@@ -906,6 +921,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "back-market-orders",
       "slug": "tracciamento-ordine-back-market",
       "title": "Tracciamento ordine Back Market: consegna, resi e problemi"
+    },
+    {
+      "id": "kaufland-orders",
+      "slug": "tracciamento-ordine-kaufland",
+      "title": "Tracciamento ordine Kaufland: venditori e consegne"
     },
     {
       "id": "find-tracking-number",
@@ -1150,6 +1170,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimiento de pedidos Back Market: envío y devoluciones"
     },
     {
+      "id": "kaufland-orders",
+      "slug": "seguimiento-pedido-kaufland",
+      "title": "Seguimiento de pedidos Kaufland: vendedores y entregas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "localizar-paquete-sin-numero-de-seguimiento",
       "title": "Cómo localizar un paquete sin número de seguimiento"
@@ -1392,6 +1417,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "title": "Seguimento de encomendas Back Market: envio e devoluções"
     },
     {
+      "id": "kaufland-orders",
+      "slug": "seguimento-encomenda-kaufland",
+      "title": "Encomendas Kaufland: vendedores, entrega e problemas"
+    },
+    {
       "id": "find-tracking-number",
       "slug": "onde-encontrar-numero-de-seguimento",
       "title": "Onde encontrar o número de seguimento da encomenda"
@@ -1632,6 +1662,11 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
       "id": "back-market-orders",
       "slug": "sledzenie-zamowienia-back-market",
       "title": "Śledzenie zamówienia Back Market: dostawa, zwroty, problemy"
+    },
+    {
+      "id": "kaufland-orders",
+      "slug": "sledzenie-zamowienia-kaufland",
+      "title": "Śledzenie zamówienia Kaufland: sprzedawcy i dostawa"
     },
     {
       "id": "find-tracking-number",

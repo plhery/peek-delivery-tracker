@@ -51,7 +51,7 @@ Amazon's UK tracker shows these in English. The French, Italian and Spanish trac
 
 **Proof of delivery.** A driver can photograph a parcel left in a safe place; once it passes Amazon's checks, the photo appears in the tracking. Some parcels need a 6-digit passcode, sent by email or text on the delivery day.
 
-**Delivery to Counter (UK).** Amazon sends an email or SMS with a pickup barcode when the parcel arrives. Show it, or the manual code from the SMS, at the counter. You have 7 calendar days to pick it up, then it goes back to the retailer. Amazon Shipping publishes no locker service for these parcels.
+**Delivery to Counter (UK).** Amazon sends an email or SMS with a pickup barcode when the parcel arrives. Show it, or the manual code from the SMS, at the counter. You have 7 calendar days to pick it up, then it goes back to the retailer. Its help describes no locker pickup, but the tracker can give a locker as the place of delivery: "Your package was left in the locker".
 
 ## Amazon Shipping parcel not delivered, missing or lost
 
@@ -95,7 +95,7 @@ The tracker's headline gives the expected day. Amazon Shipping sells Next-Day an
 - [Amazon Shipping: Track a Package](https://track.amazon.co.uk/) – what Amazon Shipping is, how it works, how to track, languages of the trackers
 - [Amazon Shipping: Help](https://track.amazon.co.uk/faq) – tracking email, hours, attempts, rescheduling, instructions, photo, passcode, Delivery to Counter, damaged and returned parcels
 - [Amazon Shipping: Contact us](https://track.amazon.co.uk/contact-us) – form, email or callback, reply times, other retailers only, contact the sender
-- [Amazon Shipping: Tracking page texts](https://track.amazon.co.uk/getLocalizedStrings) – status wordings, "Now arriving", contact-the-sender banner
+- [Amazon Shipping: Tracking page texts](https://track.amazon.co.uk/getLocalizedStrings) – status wordings, "Now arriving", contact-the-sender banner, delivery places such as the locker
 - [Amazon Shipping UK: Customer experience tools and support](https://shipping.amazon.co.uk/resources/getting-started-guide/customer-experience-tools-and-support) – seven-day hold, pickup points, photo, tracking link
 - [Amazon Shipping UK: Help](https://shipping.amazon.co.uk/help) – 28-day shipper claims, seven-day delivery
 - [Amazon Shipping UK](https://shipping.amazon.co.uk/) – Next-Day and Two-Day delivery, seven days a week

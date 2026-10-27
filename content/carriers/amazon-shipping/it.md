@@ -52,7 +52,7 @@ Su track.amazon.it gli stati sono in italiano, e dal menu della lingua puoi pass
 
 **Prova di consegna.** Il corriere può fotografare il pacco lasciato in un posto sicuro: superati i controlli di Amazon, la foto compare nel tracciamento. Per alcuni pacchi serve un codice di 6 cifre, che ricevi per e-mail o SMS il giorno della consegna e vedi anche sul sito di tracciamento.
 
-**Punti di ritiro e locker.** L'Aiuto italiano non ne parla: il ritiro al banco (Delivery to Counter) è un servizio del Regno Unito, e Amazon Shipping non pubblica un servizio di locker per questi pacchi.
+**Punti di ritiro e locker.** L'Aiuto italiano non ne parla: il ritiro al banco (Delivery to Counter) è un servizio del Regno Unito.
 
 ## Pacco Amazon Shipping non consegnato, in ritardo o smarrito
 

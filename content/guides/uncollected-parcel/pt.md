@@ -4,7 +4,7 @@ description: Quanto tempo fica uma encomenda nos CTT, num cacifo Locky ou num Po
 slug: quanto-tempo-tenho-para-levantar-encomenda
 picture: Um cacifo de encomendas com uma porta aberta e o Pip à espera lá dentro, e um calendário com os dois últimos dias assinalados.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Depende de onde está a encomenda: nos CTT tens 10 dias úteis para levantar uma Encomenda Postal numa Loja ou Ponto CTT (15 se vier do estrangeiro), mas só 5 dias num cacifo Locky ou num Locker da InPost. O que conta é a data-limite do aviso, do SMS ou do e-mail. Passado esse dia, a encomenda volta para o remetente, e é a loja que decide se te reembolsa ou se a envia outra vez.
@@ -48,8 +48,6 @@ A DPD dá 7 dias úteis numa resposta e 10 noutra, e diz que podem ser ajustados
 
 ### Porque é que a tua data pode ser diferente da tabela
 
-A loja pode ter o seu próprio prazo. Nas encomendas da [Amazon](carrier:amazon-logistics) (a Amazon.es entrega em Portugal), um cacifo CTT guarda a encomenda 5 dias seguidos e um balcão CTT 7, ao passo que os próprios CTT dão 10 dias úteis a uma Encomenda Postal numa loja.
-
 Os dias úteis não contam fins de semana nem feriados; os dias seguidos contam. A data do teu aviso vale mais do que qualquer tabela, incluindo esta.
 
 ## Porque é que a encomenda está «em espera» ou para levantar?
@@ -79,9 +77,7 @@ Um cacifo dá-te 5 dias, por isso um aviso que te escape pode custar-te a encome
 
 ## Se não levantar a encomenda, tenho direito a reembolso?
 
-Depende de quem ta vendeu. A Amazon.es diz que uma encomenda não levantada a tempo volta para a Amazon e que emite o reembolso, com um e-mail quando a recebe e outro quando te reembolsa. Nos artigos vendidos e enviados pela Amazon, o reembolso costuma sair em sete dias úteis. Se ainda a quiseres, fazes um pedido novo. Se foi um vendedor do Marketplace a enviar, fala primeiro com ele.
-
-Na Vinted, uma encomenda não levantada a tempo volta para quem a vendeu, com o estado `A devolver ao remetente`. Se o vendedor não a receber, ou não a marcar como entregue, em 14 dias úteis, a Vinted inicia o reembolso automaticamente. Sem reembolso ao fim de 25 dias úteis, contacta a Vinted.
+Depende de quem ta vendeu. Na Vinted, uma encomenda não levantada a tempo volta para quem a vendeu, com o estado `A devolver ao remetente`. Se o vendedor não a receber, ou não a marcar como entregue, em 14 dias úteis, a Vinted inicia o reembolso automaticamente. Sem reembolso ao fim de 25 dias úteis, contacta a Vinted.
 
 Noutra loja online, aplica-se a lei da livre resolução (Decreto-Lei n.º 24/2014):
 
@@ -125,9 +121,6 @@ O seguimento pode dar a encomenda como entregue logo que ela entra no cacifo. V�
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – GLS Point, 10 dias úteis, devolução ao expedidor
 - [DPD Portugal: Perguntas frequentes sobre pontos Pickup](https://www.dpd.com/pt/pt/ajuda/faq/pickup/) – 7 e 10 dias úteis, locker 72 horas, SMS 2 dias antes, devolução à origem
 - [Mondial Relay: Combien de jours ai-je pour retirer mon colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – 8 dias em Portugal, em locker ou ponto de recolha (em francês)
-- [Amazon.es: Entrega no ponto de recolha](https://www.amazon.es/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W&language=pt_PT) – cacifo CTT 5 dias, balcão CTT 7 dias
-- [Amazon.es: Levantar uma encomenda num ponto de recolha](https://www.amazon.es/gp/help/customer/display.html?nodeId=GGK32QDZBRJH3ZXD&language=pt_PT) – devolução à Amazon e reembolso se não levantares, novo pedido
-- [Amazon.es: Encomendas que não podem ser entregues](https://www.amazon.es/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX&language=pt_PT) – reembolso em sete dias úteis, vendedores do Marketplace
 - [Vinted: A minha encomenda está a ser devolvida ao remetente](https://www.vinted.pt/help/1447) – não levantada a tempo, reembolso automático, 14 e 25 dias úteis
 - [PGDL: Decreto-Lei n.º 24/2014](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=2062&tabela=leis) – artigos 10.º a 13.º, livre resolução, reembolso, custos de devolução, devolução em dobro
 :::

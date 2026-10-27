@@ -4,7 +4,7 @@ description: En France, ton colis reste 15 jours à la poste, 9 chez Relais Coli
 slug: colis-non-retire
 picture: Une consigne à colis avec une porte ouverte, Pip qui attend dans le casier, et un calendrier aux deux derniers jours entourés.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Un colis non retiré au bureau de poste, en point relais ou en consigne repart chez l'expéditeur une fois son dernier jour passé. Les bureaux de poste et les points de retrait le gardent le plus longtemps (15 jours calendaires au bureau de poste en France, 14 dans un Point d'enlèvement bpost), les consignes souvent 5 jours seulement, et c'est la date de ton avis de passage, de ton SMS ou de ton e-mail qui compte. Si tu l'as raté, demande à la boutique de te rembourser ou de te le renvoyer.
@@ -47,8 +47,6 @@ Pour un colis Mondial Relay envoyé à l'étranger, le délai change avec le pay
 
 ### Pourquoi ta date peut différer du tableau
 
-La boutique peut fixer sa propre durée. [Amazon](carrier:amazon-logistics) a ses propres délais pour les points de retrait : Amazon.fr laisse 8 jours dans un point Mondial Relay, là où Mondial Relay en annonce 5, et Amazon.com.be laisse 4 jours dans un distributeur bpost, là où bpost en annonce 5.
-
 Les jours calendaires comptent les week-ends et les jours fériés ; les jours ouvrés, non. La date de ton avis passe avant n'importe quel tableau, celui-ci compris.
 
 ## Pourquoi mon colis est-il en instance ou en attente de retrait ?
@@ -78,7 +76,7 @@ Avec 5 jours seulement en consigne, une notification lue trop tard peut suffire 
 
 ## Colis non retiré : suis-je remboursé ?
 
-Ça dépend de qui te l'a vendu. Amazon.fr rembourse un article vendu par Amazon qui lui revient faute d'avoir été livré, en général sous 7 jours ouvrables. Amazon.com.be rembourse une fois le retour reçu, ce qui peut prendre jusqu'à 14 jours.
+Ça dépend de qui te l'a vendu. Si tu ne retires pas ton colis d'un Amazon Locker avant la date indiquée dans l'e-mail de confirmation de livraison, [Amazon](carrier:amazon-logistics) le renvoie automatiquement et te rembourse, sans que tu aies à le demander.
 
 Sur Vinted, un colis non récupéré repart chez le vendeur. Si le vendeur ne l'a pas reçu ou ne l'a pas signalé comme reçu dans les 14 jours ouvrés, Vinted lance le remboursement tout seul, sans rien à faire de ton côté. Toujours rien après 25 jours ouvrés : contacte Vinted.
 
@@ -125,10 +123,7 @@ Le suivi indique souvent « livré » dès que le colis est dans la consigne. Li
 - [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – « Disponible dans votre Point Relais »
 - [La Poste suisse : CG PickPost et My Post 24](https://www.post.ch/-/media/post/agb/agb-pickpost-mypost24.pdf) – automate My Post 24, 10 jours
 - [La Poste suisse : CG « Mes envois »](https://www.post.ch/-/media/post/agb/agb-meine-sendungen.pdf) – prolongation, pas pour les actes judiciaires ; réexpédition vers un autre point de retrait
-- [Amazon.fr : Livraison en point de retrait](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – Locker 3 jours, Counter 7, Chronopost 7, La Poste 14, Mondial Relay 8
-- [Amazon.fr : Colis non livrables](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – remboursement en général sous 7 jours ouvrés
-- [Amazon.com.be : Livraison en point de retrait](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – bpost Counter 14 jours, bpost Locker 4
-- [Amazon.com.be : Colis non livrables](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – remboursement jusqu'à 14 jours après le retour
+- [About Amazon France : Comment retirer un colis dans un Amazon Locker](https://www.aboutamazon.fr/actualites/activite-logistique/comment-utiliser-amazon-locker) – trois jours calendaires, renvoi automatique et remboursement
 - [Vinted : Que faire si ton colis est renvoyé à l'expéditeur ?](https://www.vinted.fr/help/1447) – colis non récupéré à temps, remboursement automatique après 14 jours ouvrés, 25 jours ouvrés
 - [Service-public.gouv.fr : Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – 14 jours dès le lendemain de la réception, déclaration nécessaire, remboursement, coûts de renvoi, majorations
 - [Justel : Code de droit économique, livre VI](https://www.ejustice.just.fgov.be/eli/loi/2013/02/28/2013A11134/justel) – art. VI.47, VI.49, VI.50, VI.51 et VI.61/2

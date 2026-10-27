@@ -4,7 +4,7 @@ description: Co się dzieje z nieodebraną paczką z paczkomatu, punktu albo poc
 slug: paczka-nie-odebrana
 picture: Automat paczkowy z jedną otwartą skrytką, w której czeka Pip, i kalendarz z zakreślonymi dwoma ostatnimi dniami.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Nieodebrana paczka z automatu, punktu albo poczty wraca do nadawcy, gdy minie ostatni dzień odbioru. Najdłużej czeka na poczcie (przesyłka polecona Poczty Polskiej 14 dni od dnia po pierwszym awizo), najkrócej w automacie: w Paczkomacie InPost 48 godzin. Liczy się termin z Twojego SMS-a, e-maila albo awizo. Potem to sklep decyduje, czy odda Ci pieniądze, czy wyśle paczkę jeszcze raz.
@@ -27,7 +27,6 @@ Wraca do nadawcy. Zwykle odwozi ją ta sama firma, która ją przywiozła.
 - **[ORLEN Paczka](carrier:orlen-paczka)** odsyła paczkę ze sklepu internetowego do nadawcy, a paczkę od osoby prywatnej, na przykład z Vinted, do punktu nadania. Nadawca ma potem 3 dni, żeby ją stamtąd odebrać.
 - **[DPD](carrier:dpd-pl)** po terminie odsyła paczkę z punktu albo automatu DPD Pickup do nadawcy.
 - **[Allegro One](carrier:allegro-one)** i inni przewoźnicy z programu Allegro Delivery odsyłają paczkę do sprzedającego, a w szczegółach zakupu zobaczysz status „Odesłano nadawcy”.
-- **[Amazon](carrier:amazon-logistics)** dostaje paczkę z powrotem i sam zwraca Ci pieniądze (więcej niżej).
 
 Przewoźnik nie wyśle Ci jej drugi raz sam z siebie: o ponownej wysyłce albo zwrocie pieniędzy decyduje sklep. Gdy paczka jest już w drodze powrotnej, poradnik [paczka wraca do nadawcy](guide:returned-to-sender) opisuje tę drogę i to, o co poprosić sprzedawcę.
 
@@ -42,7 +41,7 @@ W automacie krótko, na poczcie długo.
 | InPost | – | PaczkoPunkt: 3 dni (po awizo kuriera 3 dni robocze) | Paczkomat: 48 godzin |
 | DPD | – | DPD Pickup: 2 pełne dni robocze | DPD Pickup: 2 pełne dni robocze |
 | ORLEN Paczka | – | 3 dni robocze od pierwszego SMS-a lub e-maila z kodem | 3 dni robocze, tak samo |
-| DHL | – | DHL POP: 2 dni kalendarzowe po awizo albo przekierowaniu; przy zamówieniu 2 dni robocze (Allegro), 3 (Amazon.pl) | DHL BOX 24/7: tak samo |
+| DHL | – | DHL POP: 2 dni kalendarzowe po awizo albo przekierowaniu; przy zamówieniu przez Allegro 2 dni robocze | DHL BOX 24/7: tak samo |
 | Allegro One | – | One Punkt: 2 dni robocze | One Box: 2 dni kalendarzowe |
 | Mondial Relay w Polsce | – | 72 godziny | 48 godzin (72 w automacie wewnątrz budynku) |
 
@@ -54,7 +53,7 @@ Potocznie każdy automat to „paczkomat”, ale terminy zależą od firmy: Pacz
 
 ### Dlaczego Twój termin może być inny niż w tabeli
 
-Sklep może ustalić własny termin. Amazon.pl daje 2 dni kalendarzowe od dostawy w Paczkomacie InPost, tyle samo co InPost, ale 3 dni robocze (od poniedziałku do piątku) w DHL BOX 24/7 i punktach DHL POP, na przykład w Żabce albo Inmedio. Allegro przy tych samych punktach i automatach [DHL](carrier:dhl-ecommerce-pl) podaje 2 dni robocze.
+Sklep może ustalić własny termin. [DHL](carrier:dhl-ecommerce-pl) daje w punkcie DHL POP 2 dni kalendarzowe po awizo albo przekierowaniu, a Allegro przy punktach i automatach DHL podaje 2 dni robocze.
 
 Firmy też liczą różnie: InPost i Pocztex AUTOMAT w godzinach, DPD i ORLEN Paczka w dniach roboczych, Poczta Polska w dniach. Jeśli automat Pocztex stoi w budynku zamkniętym w dni ustawowo wolne od pracy, tych dni się nie liczy. Termin z powiadomienia jest ważniejszy od każdej tabeli, także tej.
 
@@ -89,9 +88,7 @@ InPost przypomina o paczce statusem `Przypomnienie o czekającej paczce.`, gdy z
 
 ## Czy dostanę zwrot pieniędzy za nieodebraną paczkę?
 
-Amazon zwraca je sam. Amazon.pl pisze, że nieodebrana paczka wraca do Amazonu, a pieniądze oddaje automatycznie w ciągu 14 dni.
-
-W innych sklepach decyduje [ustawa o prawach konsumenta](https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001244), ale tylko przy zakupie od firmy. Kupując od osoby prywatnej, nie masz ustawowego prawa odstąpienia od umowy.
+Decyduje o tym sklep, a przy zakupie od firmy także [ustawa o prawach konsumenta](https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001244). Kupując od osoby prywatnej, nie masz ustawowego prawa odstąpienia od umowy.
 
 | Pytanie | Co mówi prawo |
 | --- | --- |
@@ -141,7 +138,6 @@ Przy automacie taki status zwykle znaczy, że paczkę ktoś wyjął. Co wtedy zr
 - [ORLEN Paczka: FAQ](https://www.orlenpaczka.pl/faq/) – 3 dni robocze od pierwszego SMS-a lub e-maila, zwrot do nadawcy albo punktu nadania
 - [Mondial Relay: Combien de jours ai-je pour retirer mon colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – Polska: automat 48 godzin (72 wewnątrz budynku), punkt 72 godziny
 - [Allegro: Program dostaw Allegro Delivery, informacje dla kupujących](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/allegro-one-informacje-dla-kupujacych-8dZv6Dv2KtL) – One Punkt 2 dni robocze, One Box 2 dni kalendarzowe, DHL 2 dni robocze, zwrot do sprzedającego, „Odesłano nadawcy”, darmowe przedłużenie o 24 godziny raz
-- [Amazon.pl: Dostawa do punktu odbioru](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – Paczkomat InPost 2 dni kalendarzowe, DHL BOX i DHL POP 3 dni robocze, automatyczny zwrot w ciągu 14 dni
 - [ISAP: Ustawa o prawach konsumenta, tekst jednolity Dz.U. 2026 poz. 1244](https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001244) – art. 1, 27, 28, 30, 32, 33, 34: zakres, początek terminu, oświadczenie, zwrot płatności, koszty
 - [UOKiK: Odstąpienie od umowy](https://prawakonsumenta.uokik.gov.pl/zakupy-w-internecie/odstapienie-od-umowy/) – termin od odbioru z paczkomatu, odstąpienie przed odbiorem, najtańsza dostawa, oświadczenie na piśmie
 :::

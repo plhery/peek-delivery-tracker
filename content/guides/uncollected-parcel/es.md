@@ -4,7 +4,7 @@ description: Paquete no recogido en Correos, InPost, SEUR o un Amazon Locker: cu
 slug: paquete-no-recogido
 picture: Un locker de paquetes con una puerta abierta y Pip esperando dentro, y un calendario con los dos últimos días rodeados.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Un paquete que nadie recoge en una oficina, una tienda o un locker vuelve al remitente cuando se acaba el plazo. Correos lo guarda 15 días en la oficina; en un locker sueles tener 5 días o menos (3 en un Amazon Locker). La fecha que manda es la de tu aviso, SMS o email. Después, la tienda o la plataforma decide si te devuelve el dinero o te lo vuelve a enviar.
@@ -25,9 +25,9 @@ Vuelve al remitente, normalmente con el mismo transportista, no a tu casa.
 - **[Correos](carrier:correos-spain)** lo dice así en su aviso de llegada: «Finalizado este plazo, el envío se devolverá al remitente». En el seguimiento lo verás como `Finalizado plazo retirada`.
 - **[GLS](carrier:gls-es)**: si también falla el segundo intento de entrega (cuando el servicio lo incluye), el paquete se queda en la agencia y vuelve al remitente 7 días naturales después del primer intento.
 - **InPost**, que es como se llama ahora [Mondial Relay](carrier:mondial-relay) en España (mondialrelay.es lleva a inpost.es), devuelve el paquete al remitente cuando se acaba el plazo en el Locker o el Punto Pack, sea una tienda online, un vendedor o un particular.
-- **[Amazon](carrier:amazon-logistics)** recupera el paquete y te devuelve el dinero (los detalles, más abajo).
+- **[Amazon](carrier:amazon-logistics)**: un paquete que no recoges de un Amazon Locker en 3 días vuelve a Amazon (qué pasa con tu dinero, más abajo).
 
-Amazon.es avisa de que no puede volver a enviar el pedido: tienes que hacer uno nuevo. Cuando el paquete ya va de vuelta, [paquete devuelto al remitente](guide:returned-to-sender) explica el viaje y qué pedirle a la tienda.
+Cuando el paquete ya va de vuelta, [paquete devuelto al remitente](guide:returned-to-sender) explica el viaje y qué pedirle a la tienda.
 
 ## ¿Cuánto tiempo guarda Correos un paquete?
 
@@ -39,7 +39,7 @@ Los lockers dan poco tiempo; las oficinas, mucho más.
 | InPost | Punto Pack: 5 días naturales en envíos nacionales | Locker: 5 días naturales en envíos nacionales |
 | SEUR | – | Locker: 5 días desde que lo depositan |
 | GLS | Agencia: vuelve 7 días naturales después del primer intento | – |
-| Amazon.es | Amazon Counter (estancos y administraciones de lotería): 7 días naturales; mostrador de Correos: 14; mostrador de SEUR: 10 | Amazon Locker: 3 días naturales; Citypaq: 5 |
+| Amazon | – | Amazon Locker: 3 días |
 
 En el aviso en papel, Correos indica el tiempo de permanencia según el producto, así que manda lo que ponga ahí. Si pediste la entrega en una oficina, Correos te manda recordatorios cuando quedan 10 y 5 días; [SEUR](carrier:seur) te avisa al tercer día en su locker.
 
@@ -47,7 +47,7 @@ Con InPost, mejor no apurar: su página da 5 días naturales en envíos nacional
 
 ### Por qué tu fecha puede ser otra
 
-La tienda puede fijar su propio plazo. Con su Paq Estándar, Correos deja a los remitentes con contrato decidir cuánto tiempo estará el envío en la oficina, hasta un máximo de 30 días. Amazon fija sus propios plazos, que no siempre coinciden con los del transportista: en un Citypaq da 5 días naturales, igual que Correos, pero en un mostrador de Correos da 14 desde la entrega, no los 15 de Correos.
+La tienda puede fijar su propio plazo. Con su Paq Estándar, Correos deja a los remitentes con contrato decidir cuánto tiempo estará el envío en la oficina, hasta un máximo de 30 días.
 
 Los días naturales cuentan fines de semana y festivos; los laborables dejan fuera los domingos y festivos, y a menudo también los sábados. La fecha de tu aviso vale más que cualquier tabla, incluida esta.
 
@@ -72,13 +72,13 @@ Si no vas a llegar a tiempo:
 - Habla con la tienda | Antes del plazo si ya no lo quieres; después si se te ha pasado.
 :::
 
-El enlace de Correos Modify llega en el SMS o el email que te avisa de la entrega, y también puedes usarlo desde la app de Correos; la tienda puede desactivar algunas opciones. En InPost, quien vaya por ti lleva su documento original, el NIF del titular (vale una copia) y una autorización firmada por ti con el nombre y el NIF de los dos y el número de expedición. Con Amazon, el código de recogida está en el email de confirmación, en la app y en Mi cuenta, y Amazon.es te pide que te pongas en contacto con él si no vas a poder recogerlo a tiempo.
+El enlace de Correos Modify llega en el SMS o el email que te avisa de la entrega, y también puedes usarlo desde la app de Correos; la tienda puede desactivar algunas opciones. En InPost, quien vaya por ti lleva su documento original, el NIF del titular (vale una copia) y una autorización firmada por ti con el nombre y el NIF de los dos y el número de expedición. En un Amazon Locker, el código único te llega por email en cuanto el paquete está en la taquilla.
 
 ## Paquete no recogido: ¿me devuelven el dinero?
 
-Amazon te lo devuelve sin que lo pidas. Según Amazon.es, si no recoges el paquete en el plazo indicado, vuelve a Amazon y te devuelve el dinero; te manda un email cuando le llega el paquete y otro cuando emite el reembolso. Para productos vendidos y gestionados por Amazon, suele emitir el reembolso en un plazo de 7 días laborables.
+Con Amazon, el paquete que no recoges de un Amazon Locker vuelve a Amazon, y para cualquier problema con un pedido, Amazon dice que puedes pedir a su atención al cliente un reemplazo o un reembolso.
 
-Si el pedido lo vendió y envió un vendedor externo de Amazon, habla primero con él; si no responde en 48 horas o no te convence su solución, tienes la Garantía de la A a la Z. Con las plataformas entre particulares y con el resto de tiendas, depende de dónde hayas comprado.
+Si el pedido lo vendió un vendedor externo de Amazon, habla primero con él; si no llegáis a un acuerdo, puedes pedirle el reembolso a Amazon con la Garantía de la A a la Z. Con las plataformas entre particulares y con el resto de tiendas, depende de dónde hayas comprado.
 
 | Dónde has comprado | Qué pasa con tu dinero si no lo recoges |
 | --- | --- |
@@ -117,9 +117,9 @@ El seguimiento suele dar el paquete por entregado en cuanto está en el locker. 
 - [InPost España: mondialrelay.es](https://www.mondialrelay.es/) – mondialrelay.es lleva ahora a inpost.es
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – 7 días naturales tras el primer intento, «Depositado en Parcel Shop»
 - [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – A disposición del destinatario, Finalizado plazo retirada
-- [Amazon.es: Entrega en punto de recogida](https://www.amazon.es/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – plazos de Locker, Counter, Correos, Citypaq y SEUR
-- [Amazon.es: Recoger un pedido en un punto de recogida](https://www.amazon.es/gp/help/customer/display.html?nodeId=GGK32QDZBRJH3ZXD) – reembolso automático si no lo recoges, emails, código de recogida, contactar si no llegas a tiempo
-- [Amazon.es: Paquetes que no se han podido entregar](https://www.amazon.es/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – reembolso en 7 días laborables, no se reenvía, vendedores y Garantía de la A a la Z
+- [About Amazon España: Amazon Lockers](https://www.aboutamazon.es/noticias/innovacion/amazon-lockers) – código único por email al llegar el paquete, 3 días, vuelta a Amazon (artículo de 2017)
+- [About Amazon España: A un 62 % de los españoles no le importaría recibir sus pedidos sin embalaje adicional](https://www.aboutamazon.es/noticias/sostenibilidad/a-un-62-de-los-espanoles-no-le-importaria-recibir-sus-pedidos-online-sin-embalaje-adicional) – problema con un pedido: atención al cliente, reemplazo o reembolso
+- [About Amazon España: Amazon amplía la Garantía de la A a la Z en España](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primero el vendedor, después el reembolso de Amazon
 - [Vinted: Recoger un paquete](https://www.vinted.es/help/3/1601-recoger-un-paquete) – vuelve al vendedor, cancelación y reembolso
 - [Wallapop: Condiciones específicas sobre el monedero](https://about.wallapop.com/condiciones-especificas-sobre-el-monedero/) – reembolso si vuelve al vendedor, 2 a 5 días hábiles con tarjeta
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 104, 106, 107 y 108: plazo, comunicación, reembolso, costes de devolución; art. 76: reembolso tardío, el doble

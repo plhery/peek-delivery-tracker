@@ -4,7 +4,7 @@ description: Paket nicht abgeholt? Wie lange es in Filiale, Paketshop oder Packs
 slug: paket-nicht-abgeholt
 picture: Eine Packstation mit einer offenen Tür, in deren Fach Pip wartet, und ein Kalender mit den letzten zwei Tagen eingekreist.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Holt niemand ein Paket aus der Filiale, dem Paketshop oder der Packstation ab, geht es nach Ablauf der Abholfrist an den Absender zurück. Bei DHL und Hermes in Deutschland sind das meist 7 Werktage, bei der Österreichischen Post läuft die Frist bis zum dritten Montag nach der Benachrichtigung, bei der Schweizerischen Post in der Regel 7 Tage, die du kostenlos verlängern kannst. Es zählt das Datum auf deiner Benachrichtigung, in der SMS oder E-Mail. Ist es vorbei, frag den Shop, ob er dir das Geld erstattet oder das Paket noch einmal schickt.
@@ -25,7 +25,7 @@ Es geht zurück an den Absender, nicht noch einmal zu dir.
 - **[DHL](carrier:dhl)** schickt das Paket nach den 7 Werktagen an den Absender zurück. In der Sendungsverfolgung steht dann `Die Sendung wurde nicht abgeholt und wird zurückgesandt.`
 - **[Hermes](carrier:hermes-de)** schickt ein nicht abgeholtes Paket aus dem PaketShop ebenfalls an den Absender zurück.
 - **[Österreichische Post](carrier:austrian-post)**: Ist ein zurückgeschicktes Paket beim Absender angekommen, zeigt die Sendungsverfolgung `Sendung zugestellt`. Gemeint ist dann die Zustellung an den Versender, nicht an dich.
-- **[Amazon](carrier:amazon-logistics)** lässt das Paket zu sich zurückgehen und veranlasst die Erstattung (mehr dazu unten).
+- **[Amazon](carrier:amazon-logistics)** schickt ein Paket, das du nicht rechtzeitig aus einem Amazon Locker holst, automatisch zurück und erstattet dir den Betrag (mehr dazu unten).
 
 Ob du die Ware doch noch bekommst, klärst du mit dem Shop, nicht mit dem Paketdienst. Ist das Paket schon unterwegs zurück, erklärt [Paket zurück an Absender](guide:returned-to-sender) den Rückweg und was du den Shop fragen solltest.
 
@@ -47,7 +47,7 @@ Bei der [Schweizerischen Post](carrier:swiss-post) gilt für den My Post 24-Auto
 
 ### Warum dein Datum anders sein kann
 
-Der Absender kann die Frist mitbestimmen. In Österreich dürfen Versandhändler eine kürzere Lagerfrist von 5 Werktagen festlegen. Amazon.de nennt eigene Fristen, die von denen der Paketdienste abweichen: 10 Tage am Hermes- oder DPD-Counter, während Hermes selbst 7 Werktage und DPD 7 Tage nennt.
+Der Absender kann die Frist mitbestimmen. In Österreich dürfen Versandhändler eine kürzere Lagerfrist von 5 Werktagen festlegen.
 
 Kalendertage zählen Wochenenden und Feiertage mit, Werktage nicht. Bei DHL ist auch der Samstag ein Werktag, 7 Werktage sind also etwas mehr als eine Woche. Am Ende zählt das Datum auf deiner Benachrichtigung, nicht diese Tabelle.
 
@@ -78,7 +78,7 @@ An einer DPD Paketstation oder einem Amazon Locker hast du nur 3 Tage, da kann d
 
 ## Paket nicht abgeholt: Bekomme ich mein Geld zurück?
 
-Bei Amazon passiert das von selbst. Ein nicht abgeholtes Paket geht laut Amazon.de an Amazon zurück, und Amazon veranlasst die Erstattung. Hast du vier Wochen nach dem voraussichtlichen Liefertermin noch keine Bestätigung der Rücksendung, schau unter „Meine Bestellungen“ nach.
+Bei einem Amazon Locker passiert das von selbst. Holst du dein Paket nicht innerhalb von drei Tagen ab, wird Amazon es laut aboutamazon.de „automatisch zurücksenden und dir eine Rückerstattung gewähren“.
 
 Bei anderen Shops kommt es darauf an, wo du wohnst.
 
@@ -127,8 +127,7 @@ Ein Paket in der Packstation oder im Paketshop kann für den Paketdienst schon a
 - [Schweizerische Post: AGB «Meine Sendungen»](https://www.post.ch/-/media/post/agb/agb-meine-sendungen.pdf) – Abholfrist verlängern, nicht für Gerichtsurkunden
 - [Schweizerische Post: AGB PickPost und My Post 24](https://www.post.ch/-/media/post/agb/agb-pickpost-mypost24.pdf) – My Post 24 10 Tage, Abholcode per SMS
 - [Schweizerische Post: Welche Lieferoptionen habe ich für meine Bestellungen?](https://international.post.ch/de/knowledge/welche-lieferoptionen-habe-ich-fuer-meine-bestellungen) – Abholfrist verlängern auf bis zu 30 Tage
-- [Amazon.de: Lieferung an eine Abholstation](https://www.amazon.de/gp/help/customer/display.html?nodeId=GZTXM2L3YLZFSQ6W) – Fristen für Locker, Counter, Packstation, Hermes und DPD
-- [Amazon.de: Nicht zustellbare Bestellungen](https://www.amazon.de/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – Rücksendung, Erstattung, vier Wochen
+- [About Amazon: Amazon Locker: bequem Pakete abholen](https://www.aboutamazon.de/news/amazon-prime-und-shopping/so-funktioniert-amazon-locker) – drei Kalendertage, automatische Rücksendung und Rückerstattung
 - [BGB § 355: Widerrufsrecht](https://www.gesetze-im-internet.de/bgb/__355.html) – Erklärung, eindeutig, Risiko der Rücksendung
 - [BGB § 356: Widerrufsfrist](https://www.gesetze-im-internet.de/bgb/__356.html) – Frist ab Erhalt der Ware
 - [BGB § 356a: Widerrufsfunktion](https://www.gesetze-im-internet.de/bgb/__356a.html) – Schaltfläche „Vertrag widerrufen“

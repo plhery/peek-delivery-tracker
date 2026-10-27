@@ -26,22 +26,22 @@ Każda paczka mija te same przystanki, a paczka z zagranicy jeszcze trzy.
 
 ## Co oznaczają statusy InPost i FedEx?
 
-Te same etapy, inne słowa. Peek odczytuje statusy [InPost](carrier:inpost) po angielsku i takie widzisz w tabeli:
+Te same etapy, inne słowa. Tabela pokazuje statusy [InPost](carrier:inpost) i globalnego śledzenia [FedEx](carrier:fedex) tak, jak Peek odczytuje je po angielsku:
 
-| Etap | InPost (tak czyta je Peek) | FedEx |
+| Etap | InPost (tak czyta je Peek) | FedEx (tak czyta je Peek) |
 | --- | --- | --- |
-| Etykieta gotowa | `Shipment Created` | `Utworzono etykietę` |
-| Nadana | `Sent through Parcel Locker/Parcel Point` albo `Collected by the Courier` (po polsku InPost pisze `Paczka nadana w automacie Paczkomat.`, `Nadana w PaczkoPunkcie.` albo `Odebrana od Nadawcy.`) | `Mamy Twoją paczkę` |
-| W drodze | `Accepted at the Logistics Centre`, `On the way`, `Dispatched from the Logistics Centre` | `W drodze`, `W oddziale` |
-| Wydana do doręczenia | `Handed over for delivery` (pod drzwi albo do automatu Paczkomat) | `Wydano do doręczenia` |
-| Gotowa do odbioru | `Ready for collection` | – |
-| Doręczona | `Delivered` | – |
+| Etykieta gotowa | `Shipment Created` | `Shipment information sent to FedEx` |
+| Nadana | `Sent through Parcel Locker/Parcel Point` albo `Collected by the Courier` (po polsku InPost pisze `Paczka nadana w automacie Paczkomat.`, `Nadana w PaczkoPunkcie.` albo `Odebrana od Nadawcy.`) | `Picked up` albo `Tendered at FedEx location` |
+| W drodze | `Accepted at the Logistics Centre`, `On the way`, `Dispatched from the Logistics Centre` | `On the way`, `At local FedEx facility` |
+| Wydana do doręczenia | `Handed over for delivery` (pod drzwi albo do automatu Paczkomat) | `On FedEx vehicle for delivery` |
+| Gotowa do odbioru | `Ready for collection` | `Ready for pickup` |
+| Doręczona | `Delivered` | `Delivered` |
 
-Polski słowniczek FedEx nie opisuje statusów „gotowa do odbioru” i „doręczona”, dlatego w tych wierszach jest kreska.
+Krajowe przesyłki [FedEx Polska](carrier:fedex-pl) (dawniej Opek) mają 13-cyfrowe numery i osobne śledzenie, w którym statusy są po polsku, na przykład `Przesyłka w oddziale FedEx.`
 
 ## „Przesyłka utworzona” albo „przygotowana przez nadawcę”: co to znaczy?
 
-Tylko tyle, że przewoźnik ma dane Twojej paczki, ale nie samą paczkę. U InPost `Przesyłka utworzona.` znaczy, że przesyłka „nie jest gotowa do nadania”, a `Przygotowana przez Nadawcę.`, że „wkrótce zostanie przekazana w nasze ręce”. [FedEx](carrier:fedex) przy `Utworzono etykietę` wyjaśnia, że nadawca dopiero przygotowuje paczkę do przekazania. Status zmienia się na `Mamy Twoją paczkę`, gdy kurier FedEx ją odbierze albo nadawca zostawi ją w oddziale.
+Tylko tyle, że przewoźnik ma dane Twojej paczki, ale nie samą paczkę. U InPost `Przesyłka utworzona.` znaczy, że przesyłka „nie jest gotowa do nadania”, a `Przygotowana przez Nadawcę.`, że „wkrótce zostanie przekazana w nasze ręce”. W globalnym śledzeniu FedEx ten etap to `Shipment information sent to FedEx`, a gdy paczka trafi już do FedEx, pojawia się `Picked up` albo `Tendered at FedEx location`.
 
 Jeśli pierwszy status długo się nie zmienia, napisz do sprzedawcy, nie do przewoźnika: paczka wciąż jest u sprzedawcy. Tak samo radzi [Cainiao](carrier:cainiao) przy zamówieniach z Chin bez danych śledzenia: zamówienie „jest przetwarzane”, a po szczegóły trzeba się zwrócić do sprzedawcy.
 
@@ -49,12 +49,9 @@ Paczka nadana w automacie też nie od razu rusza: po `Sent through Parcel Locker
 
 ## Przesyłka w trasie albo w tranzycie: co to znaczy?
 
-Przewoźnik ma Twoją paczkę gdzieś w swojej sieci. Nie znaczy to, że akurat jedzie: według FedEx paczka `W drodze` jest „w jednym z naszych pojazdów lub placówek”. U InPost na tym etapie zobaczysz w Peek `Accepted at the Logistics Centre`, `Dispatched from the Logistics Centre` i `On the way`.
+Przewoźnik ma Twoją paczkę gdzieś w swojej sieci, ale nie znaczy to, że akurat jedzie. U InPost na tym etapie zobaczysz w Peek `Accepted at the Logistics Centre`, `Dispatched from the Logistics Centre` i `On the way`.
 
-Między skanami cisza jest normalna:
-
-- FedEx uważa ponad 24 godziny bez skanu za nic niezwykłego.
-- [Poczta Polska](carrier:poczta-polska) przy listach poleconych pokazuje tylko dzień nadania i dzień doręczenia, bez drogi przesyłki.
+Między skanami cisza jest normalna: [Poczta Polska](carrier:poczta-polska) przy listach poleconych pokazuje tylko dzień nadania i dzień doręczenia, bez drogi przesyłki.
 
 ### Ile paczka jest w drodze?
 
@@ -73,7 +70,6 @@ Cisza dłuższa niż czas podany przez przewoźnika? Zobacz, [dlaczego status pr
 Zwykle tak, ale przewoźnicy ujmują to różnie:
 
 - **InPost, paczka kurierska:** `W doręczeniu.` znaczy, że paczka jest „na ostatnim etapie podróży”, u kuriera.
-- **FedEx:** `Wydano do doręczenia` to paczka zeskanowana i umieszczona w pojeździe „w celu doręczenia tego dnia”, a przedział godzin pokazuje strona śledzenia.
 - **DPD:** po wydaniu paczki do doręczenia w aplikacji DPD Mobile i na tt.dpd.com.pl pojawia się numer telefonu kuriera. Gdy przy zamówieniu był wybór przedziału godzin, paczka przyjedzie w wybranym. W sobotę DPD doręcza tylko paczki z usługą Sobota.
 
 Uwaga: `W doręczeniu.` pojawia się u InPost także wtedy, gdy kurier Cię nie zastał: w opisie zobaczysz wtedy, że kolejna próba będzie w następnym dniu roboczym.
@@ -121,15 +117,15 @@ Nie zawsze. Znaczy, że kurier zeskanował ją jako wydaną albo zostawioną:
 
 Nie ma paczki? Sprawdź w pełnej historii śledzenia, gdzie i komu ją wydano, a potem przeczytaj poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
-## „Opóźnienie” albo „wyjątek w doręczeniu”: czy paczka zaginęła?
+## Opóźnienie w doręczeniu: czy paczka zaginęła?
 
-Nie. FedEx przy `Wyjątek w doręczeniu` pisze, że doręczenie opóźnia nieprzewidziane zdarzenie, na przykład opóźnienie w odprawie, zła pogoda, strajk albo nieobecność odbiorcy, i że „w tej chwili nie musisz podejmować żadnych działań”. `Opóźnienie` znaczy u FedEx, że paczka najprawdopodobniej nie dotrze przed szacowaną datą. U InPost `Possible delivery delay` to komunikat, a nie ruch paczki, więc Peek zostawia ją na dotychczasowym etapie.
+Nie. U InPost `Possible delivery delay` to komunikat, a nie ruch paczki, więc Peek zostawia ją na dotychczasowym etapie.
 
 Inaczej jest, gdy chodzi o adres: jeśli jest zły, napisz od razu do sprzedawcy.
 
 ## Zwrot do nadawcy: dlaczego paczka wraca?
 
-Przewoźnicy podają takie powody: paczka nieodebrana w terminie, odmowa przyjęcia, nieopłacone należności, uszkodzenie. Zwrot nie zawsze tak się nazywa: FedEx `W trakcie zwrotu do oddziału FedEx` znaczy, że odbiorca odmówił przyjęcia, na przykład z powodu uszkodzenia albo braku możliwości zapłaty; o dalszym losie paczki decyduje nadawca.
+Przewoźnicy podają takie powody: paczka nieodebrana w terminie, odmowa przyjęcia, nieopłacone należności.
 
 Odmowa działa od razu: w Pocztex odmówiona paczka wraca do nadawcy niezwłocznie, a odmowa zapłaty należności za przesyłkę liczy się jak odmowa przyjęcia. Przy paczce spoza Unii Poczta Polska też przypomina, że możesz odmówić jej przyjęcia. Przesyłka nieodebrana z poczty w terminie [wraca do nadawcy](guide:returned-to-sender). Gdy paczka już wraca, poproś sprzedawcę o ponowną wysyłkę albo zwrot pieniędzy.
 
@@ -148,8 +144,8 @@ Odmowa działa od razu: w Pocztex odmówiona paczka wraca do nadawcy niezwłoczn
 - [Rozporządzenie w sprawie warunków wykonywania usług powszechnych (Dz.U. 2020 poz. 1026)](https://api.sejm.gov.pl/eli/acts/DU/2020/1026/text.html) – awizo, 14 dni, paczki powyżej 2000 g, miasta powyżej 100 000 mieszkańców
 - [Rozporządzenie zmieniające (Dz.U. 2024 poz. 1745)](https://api.sejm.gov.pl/eli/acts/DU/2024/1745/text.html) – termin odbioru, wskaźniki D+3 i D+5
 - [KAS: Informacja dla odbiorców przesyłek pocztowych spoza Unii Europejskiej](https://www.mazowieckie.kas.gov.pl/mazowiecki-urzad-celno-skarbowy-w-warszawie/wiadomosci/komunikaty/-/asset_publisher/i3dT/content/informacja-dla-odbiorcow-przesylek-pocztowych-spoza-unii-europejskiej) – zgłoszenie celne każdej przesyłki, próg 150 euro, należności przy doręczeniu
-- [FedEx: Co oznacza mój status monitorowania?](https://www.fedex.com/pl-pl/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – statusy po polsku
-- [FedEx: Package not moving](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/package-not-moving.html) – 24 godziny bez skanu
+- [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – statusy FedEx, które czyta Peek (po angielsku)
+- [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – krajowe przesyłki FedEx w Polsce (dawniej Opek): 13 cyfr, osobne śledzenie, statusy po polsku
 - [Mondial Relay Belgia: ile dni masz na odbiór paczki z automatu lub punktu (FAQ po francusku)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – Polska 48 i 72 godziny
 - [Cainiao: teksty strony śledzenia po polsku](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – wysyłka ekonomiczna, brak danych
 :::

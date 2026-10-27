@@ -33,7 +33,7 @@ Here's what the carriers and the postal standard say about the numbers you're mo
 | --- | --- |
 | [UPS](carrier:ups) | `1Z` + 16 letters and digits, 18 characters in all, such as `1Z999AA10123456784`, an example that passes UPS's check digit |
 | [USPS](carrier:usps) | 22 digits starting `92`, `93`, `94` or `95`, printed in groups of four, such as `9212 3912 3456 7812 3456 70`; 26 digits on some labels; international items can carry the postal format ending `US` |
-| [FedEx](carrier:fedex) | 12 digits on FedEx Ground Economy labels since 2022, where some shippers used to get 15-digit Ground numbers |
+| [FedEx](carrier:fedex) | 12 digits, or 15 for FedEx Ground, the last one a check digit: when it checks out, Peek puts FedEx first among the carriers that length fits. In Peek's carrier data, 20 digits starting `6129` or `7489` is FedEx Ground Economy when its check digit passes |
 | DHL | [DHL Express](carrier:dhl-express): 10 digits, never letters. [DHL in Germany](carrier:dhl): 10 to 39 characters |
 | [Royal Mail](carrier:royal-mail), [Parcelforce](carrier:parcelforce) | the postal format ending `GB`. In Peek's carrier data, those starting `E` and any letter, `CP` or `GI` are Parcelforce's, and so is `PB` + two letters + 10 digits, 14 characters in all, such as `PBAB1234567890`; Royal Mail also has 16- or 21-character references made of digits and the letters A to F |
 | [Evri](carrier:evri) | 16 characters (Evri's page says both "16 digit" and "16 character") |
@@ -64,9 +64,9 @@ There's no single length. These are the lengths carriers give on their own pages
 | Length | Who uses it |
 | --- | --- |
 | 10 digits | DHL Express; Mondial Relay (8, 10 or 12) |
-| 12 digits | FedEx Ground Economy; Canada Post Priority Worldwide; Mondial Relay |
+| 12 digits | FedEx, in Peek's carrier data; Canada Post Priority Worldwide; Mondial Relay |
 | 14 digits | DPD in Austria and Belgium (DPD Germany says 14 characters); [La Poste](carrier:la-poste) in France, in Peek's carrier data |
-| 15 digits | FedEx Ground numbers: FedEx told Ground Economy shippers receiving them that the length would change from 31 May 2022; Canada Post's Delivery Notice Card |
+| 15 digits | FedEx Ground, in Peek's carrier data; Canada Post's Delivery Notice Card |
 | 16 digits | Canada Post online labels; Evri (16 characters) |
 | 22 digits | USPS; Portugal's CTT; Austrian Post; TIPSA |
 | 26 digits | USPS, on some labels |
@@ -118,7 +118,7 @@ If it has 13 characters and ends in two letters, such as `CN`, it's a postal num
 Other numbers travel with a parcel. Some lead back to it, some don't:
 
 - **Order number.** The shop's own reference. DHL reminds you that a tracking number is not an order number.
-- **Missed-delivery cards.** A FedEx door tag (`DT` + 12 digits, US and Canada only), an Evri calling card (8 digits), a Canada Post Delivery Notice Card (15 digits) and the barcode on a USPS PS Form 3849 all lead back to the parcel in their carrier's tracking. [What to do after a missed delivery](guide:missed-delivery) depends on the carrier.
+- **Missed-delivery cards.** An Evri calling card (8 digits), a Canada Post Delivery Notice Card (15 digits) and the barcode on a USPS PS Form 3849 all lead back to the parcel in their carrier's tracking. [What to do after a missed delivery](guide:missed-delivery) depends on the carrier.
 
 Have only an order number? [Where to find a tracking number](guide:find-tracking-number) shows where to look in your order.
 
@@ -135,7 +135,7 @@ A parcel that crosses a border often changes hands, and each company can print i
 :::
 
 - **Postal items** are the easy case: the UPU allows only one S10 number per item, so it usually works on both posts' sites.
-- **FedEx Ground Economy** shipments in the US get a 12-digit FedEx number and a USPS tracking number as well.
+- **FedEx Ground Economy** in the US can hand a parcel to USPS for the last leg. Once a scan shows USPS has it, Peek adds the USPS number: the one the scan names, or, for a 20-digit Ground Economy number whose check digit passes, that number with `92` in front. On most Ground Economy parcels, though, the scans say FedEx Ground delivers.
 - **AliExpress economy shipping:** Cainiao says tracking stops at the handover to the local carrier, and that the seller can tell you how to reach that carrier. More in [tracking a parcel from China](guide:tracking-from-china).
 
 Some trackers join the two numbers once the first carrier's data shows the new one: see [universal parcel tracking](guide:universal-tracker).
@@ -147,8 +147,7 @@ A number that returns nothing isn't always mistyped. Portugal's CTT gives two re
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 and 26 digits, 92 to 95, the hidden 420 and ZIP Code
 - [USPS: How to find your tracking number](https://faq.usps.com/s/article/How-to-find-your-tracking-number) – the PS Form 3849 barcode
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z numbers and their check digit
-- [FedEx Developer: FedEx Ground Economy announcement](https://developer.fedex.com/api/en-us/announcements/Apr2022-FGEAnnouncements.html) – 12 and 15 digits, the USPS number alongside
-- [FedEx Developer: Track API](https://developer.fedex.com/api/en-us/catalog/track/docs.html) – door tag numbers
+- [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – 12- and 15-digit numbers and their check digit, 20-digit Ground Economy numbers, the USPS hand-off
 - [DHL Express Netherlands: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 digits
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – 10 to 39 characters, not an order number
 - [Evri: Track a parcel](https://www.evri.com/track-a-parcel) – 16 characters and the calling card

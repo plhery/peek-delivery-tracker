@@ -69,7 +69,7 @@ Não há um comprimento único. Estes são os comprimentos que as transportadora
 | --- | --- |
 | 8 caracteres | InPost, no exemplo da sua página de seguimento; Mondial Relay (8, 10 ou 12 algarismos) |
 | 10 algarismos | DHL Express; [DHL eCommerce Iberia](carrier:dhl-ecommerce-es); Mondial Relay |
-| 12 algarismos | MRW, na sua etiqueta de exemplo; Mondial Relay; [FedEx](carrier:fedex) Ground Economy, nos EUA |
+| 12 algarismos | MRW, na sua etiqueta de exemplo; Mondial Relay; [FedEx](carrier:fedex), nos dados de transportadoras que o Peek usa |
 | 13 caracteres | o formato postal dos CTT e dos outros operadores postais |
 | 14 algarismos | DPD; SEUR e La Poste (em França), nos dados de transportadoras que o Peek usa |
 | 22 algarismos | CTT e CTT Express, só algarismos; USPS, nos EUA |
@@ -153,7 +153,7 @@ Um número que não dá resultados nem sempre está mal escrito. Os CTT dão dua
 - [DHL Express Netherlands: DHL Express or DHL eCommerce number](https://www.dhlexpress.nl/en/consumer/faq/express-account-zendingsnummer/my-shipment-number-dhl-express-or-dhl-ecommerce) – 10 algarismos, nunca letras
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – os números 1Z e o seu dígito de controlo
 - [About Amazon EU: Amazon Prime now available to customers in Portugal](https://www.aboutamazon.eu/news/press-lounge/amazon-prime-now-available-to-customers-in-portugal) – em Portugal compra-se na Amazon.es, também em português
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – os formatos TBA, PT, ES, CNPRT, YT, LP, CNG, DOFR e CNFR, e os 16 e 23 algarismos da Correos Express, as formas 4PX e LP da 4PX, as formas BYS, YP e YW da Yanwen, os 22 e 25 algarismos da CTT Express e os 14 algarismos da SEUR e da La Poste, nos dados de transportadoras do Peek
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – os formatos TBA, PT, ES, CNPRT, YT, LP, CNG, DOFR e CNFR, e os 16 e 23 algarismos da Correos Express, as formas 4PX e LP da 4PX, as formas BYS, YP e YW da Yanwen, os 22 e 25 algarismos da CTT Express, os 12 algarismos da FedEx e os 14 algarismos da SEUR e da La Poste, nos dados de transportadoras do Peek
 - [NACEX Portugal: Página inicial](https://www.nacex.pt/) – a forma 0000/00000000 na caixa «Seguimento de envio»
 - [NACEX Portugal: Seguimento](https://www.nacex.pt/irSeguimiento.do) – Agência e Nº expedição
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – números que começam por YT
@@ -168,5 +168,4 @@ Um número que não dá resultados nem sempre está mal escrito. Os CTT dão dua
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – o seguimento da Yanwen, sem número de exemplo
 - [CTT Express: Localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) – o código de envio
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 algarismos
-- [FedEx Developer: FedEx Ground Economy announcement](https://developer.fedex.com/api/en-us/announcements/Apr2022-FGEAnnouncements.html) – 12 algarismos
 :::

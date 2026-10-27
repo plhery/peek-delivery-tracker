@@ -42,18 +42,15 @@ As leituras da UPS estão em inglês, tal como o Peek as lê. Os estados em espa
 
 ## «Aguarda entrada nos CTT»: a transportadora já tem a encomenda?
 
-Não: a loja imprimiu uma etiqueta e mandou os dados, mais nada. Os CTT explicam que receberam informação eletrónica sobre o envio, que este «pode ainda estar a ser preparado pelo expedidor» e que ainda não entrou na rede dos CTT. A InPost diz o mesmo de `Preparado pelo remetente`: a etiqueta existe, mas a encomenda ainda não saiu, e é normal ficar assim algumas horas. Na [UPS](carrier:ups), a primeira leitura diz que o remetente criou a etiqueta e que a UPS ainda não tem a encomenda, e na FedEx `Etiqueta criada` quer dizer que o expedidor ainda está a preparar o volume.
+Não: a loja imprimiu uma etiqueta e mandou os dados, mais nada. Os CTT explicam que receberam informação eletrónica sobre o envio, que este «pode ainda estar a ser preparado pelo expedidor» e que ainda não entrou na rede dos CTT. A InPost diz o mesmo de `Preparado pelo remetente`: a etiqueta existe, mas a encomenda ainda não saiu, e é normal ficar assim algumas horas. Na [UPS](carrier:ups), a primeira leitura diz que o remetente criou a etiqueta e que a UPS ainda não tem a encomenda, e na [FedEx](carrier:fedex) esta etapa chama-se, em inglês, `Shipment information sent to FedEx`.
 
 Os CTT não dão um prazo para este estado. Se nada mudar, fala com a loja, não com a transportadora: a encomenda ainda está do lado de quem a vendeu.
 
 ## O que significa uma encomenda estar em trânsito?
 
-A transportadora já tem a encomenda, algures na rede dela. Isso não quer dizer que esteja a andar: na [FedEx](carrier:fedex), com `A caminho`, o volume tanto pode ir num veículo como estar numa das instalações da FedEx. Nos CTT, `Em trânsito` aparece várias vezes ao longo do percurso: quando o carteiro ou distribuidor recolhe o envio e sempre que é transportado ou tratado num centro de distribuição ou operacional. Um envio internacional pode ainda passar por vários países.
+A transportadora já tem a encomenda, algures na rede dela, o que não quer dizer que esteja a andar. Nos CTT, `Em trânsito` aparece várias vezes ao longo do percurso: quando o carteiro ou distribuidor recolhe o envio e sempre que é transportado ou tratado num centro de distribuição ou operacional. Um envio internacional pode ainda passar por vários países.
 
-Entre centros, o silêncio é normal:
-
-- A FedEx diz que não é invulgar passar mais de 24 horas sem uma leitura.
-- A GLS avisa que trabalha com centros de distribuição, por isso o percurso nem sempre parece direto.
+Entre centros, o percurso pode dar algumas voltas: a GLS avisa que trabalha com centros de distribuição, por isso o caminho nem sempre parece direto.
 
 ### Quanto tempo fica uma encomenda em trânsito?
 
@@ -70,7 +67,6 @@ A GLS entrega geralmente em 24 horas dentro de Portugal, e entre 24 e 96 horas n
 Normalmente, sim:
 
 - **CTT:** `Em entrega` quer dizer que o carteiro ou distribuidor já está no percurso diário para entregar o envio.
-- **FedEx:** `Em distribuição` quer dizer que o volume foi lido e posto num veículo para ser entregue nesse dia; a página de rastreio mostra uma janela de entrega estimada.
 - **DPD:** com o serviço Predict, avisa-te no dia da entrega da hora exata a que a encomenda chega, e nesse dia podes segui-la em tempo real.
 - **GLS:** entrega de segunda a sexta-feira, em horário comercial.
 
@@ -119,9 +115,7 @@ Nada à porta? Procura no seguimento completo um nome, uma fotografia ou um loca
 
 ## «Em espera», exceção ou atraso: a encomenda perdeu-se?
 
-Não. Nos CTT, `Em espera` quer dizer que o envio aguarda instruções ou o dia agendado para a entrega, e que podem contactar-te se precisarem de ti. Na FedEx, `Exceção de entrega` é um imprevisto que está a atrasar a entrega (a alfândega, o mau tempo, uma greve ou ninguém em casa, por exemplo), e não te pede nada. Na UPS, `Exception` é o estado genérico e pode indicar só um atraso: o que conta é a leitura por baixo.
-
-Na FedEx, `Atrasado` quer dizer que a encomenda provavelmente não chega antes da data ou hora estimada.
+Não. Nos CTT, `Em espera` quer dizer que o envio aguarda instruções ou o dia agendado para a entrega, e que podem contactar-te se precisarem de ti. Na UPS, `Exception` é o estado genérico e pode indicar só um atraso: o que conta é a leitura por baixo.
 
 Olha com mais atenção quando o problema é um documento ou um pagamento. No Portal de Desalfandegamento dos CTT, `Documentação insuficiente` pede-te documentos, e `Desalfandegamento suspenso` (suspeita de objetos proibidos) não tem prazo previsto: não são os CTT que decidem. Já `Cancelado` quer dizer que o processo de envio foi cancelado e a entrega não vai acontecer: fala com a loja.
 
@@ -133,7 +127,6 @@ As razões que as transportadoras dão: não foi levantada a tempo, não foi pos
 - **CTT, alfândega:** se o desalfandegamento não ficar concluído em 20 dias desde a chegada a Portugal, a encomenda volta ao remetente «sem possibilidade de retrocesso».
 - **InPost:** `Devolução em curso` aparece quando o prazo de levantamento passou ou não foi possível entregar; se precisares de reorganizar a entrega, a InPost pede-te que a contactes.
 - **GLS:** depois de uma segunda tentativa falhada, devolve ao expedidor ao fim de 10 dias úteis de armazenagem. Se recusares uma encomenda com a embalagem danificada, volta ao armazém e a GLS informa o expedidor.
-- **FedEx:** `A regressar à instalação da FedEx` quer dizer que o destinatário recusou o volume (parecia danificado, ou não podia pagar a taxa de entrega); a FedEx contacta o expedidor para decidir o que fazer.
 
 Não contes travá-la a meio. Os CTT mandam-te falar com o remetente para ver se há reenvio ou reembolso.
 
@@ -153,8 +146,7 @@ Não contes travá-la a meio. Os CTT mandam-te falar com o remetente para ver se
 - [DPD Portugal: Perguntas frequentes sobre pontos Pickup](https://www.dpd.com/pt/pt/ajuda/faq/pickup/) – 7 e 10 dias úteis, 72 horas, SMS
 - [DPD Portugal: Receber encomendas](https://www.dpd.com/pt/pt/receber-encomenda/) – Predict, Live-Tracking, alterar data ou local
 - [DPD Portugal: Perguntas frequentes, receber encomendas](https://www.dpd.com/pt/pt/ajuda/faq/receber-encomendas/) – aviso de passagem, redirecionar, entregue mas não recebida
-- [FedEx Portugal: O que significa o meu estado de rastreio?](https://www.fedex.com/pt-pt/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – estados da FedEx em português
-- [FedEx: Package not moving](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/package-not-moving.html) – 24 horas sem leitura
+- [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – leituras da FedEx que o Peek lê, em inglês: informação do envio enviada à FedEx
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – leituras da UPS que o Peek lê, em inglês: etiqueta, aceitação, trânsito, entrega, Access Point, «Left at», «Exception»
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – seguimento da transportadora de destino
 :::

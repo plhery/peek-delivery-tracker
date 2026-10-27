@@ -41,13 +41,13 @@ Bei [Hermes](carrier:hermes-de) heißen die Schritte `Die Sendung wurde angekün
 
 ## „Elektronisch angekündigt“: Hat der Paketdienst mein Paket schon?
 
-Nein. Der Absender hat einen Versandaufkleber gedruckt und die Daten an den Paketdienst geschickt, mehr nicht. Bei [DHL](carrier:dhl) ist `Die Sendung wurde elektronisch angekündigt.` meist der allererste Status. Hermes hat bei `Die Sendung wurde angekündigt` „physisch noch kein Paket“ erhalten. Bei [FedEx](carrier:fedex) heißt dieser Schritt `Etikett erstellt`, bei [UPS](carrier:ups) `Shipper created a label, UPS has not received the package yet.`: Der Versender hat ein Etikett erstellt, UPS hat das Paket noch nicht. Noch früher zeigt DHL manchmal `Wir erwarten Ihre Sendungsdaten in Kürze.`: Bis der Absender die Daten schickt oder das Paket übergibt, können bis zu 24 Stunden vergehen.
+Nein. Der Absender hat einen Versandaufkleber gedruckt und die Daten an den Paketdienst geschickt, mehr nicht. Bei [DHL](carrier:dhl) ist `Die Sendung wurde elektronisch angekündigt.` meist der allererste Status. Hermes hat bei `Die Sendung wurde angekündigt` „physisch noch kein Paket“ erhalten. Auf Englisch heißt dieser Schritt bei [FedEx](carrier:fedex) `Shipment information sent to FedEx`, bei [UPS](carrier:ups) `Shipper created a label, UPS has not received the package yet.`: Der Versender hat ein Etikett erstellt, UPS hat das Paket noch nicht. Noch früher zeigt DHL manchmal `Wir erwarten Ihre Sendungsdaten in Kürze.`: Bis der Absender die Daten schickt oder das Paket übergibt, können bis zu 24 Stunden vergehen.
 
 Bei der [Österreichischen Post](carrier:austrian-post) steht die Ankündigung in der Regel nur wenige Werktage da. Ändert sie sich nicht, frag den Absender, nicht den Paketdienst: Das rät die Post selbst. Und hat Hermes das Paket übernommen, siehst du den neuen Status spätestens nach 5 Stunden.
 
 ## Was heißt „in transit“ bei einem Paket?
 
-„In transit“ ist Englisch für unterwegs: Der Paketdienst hat dein Paket, irgendwo in seinem Netz. Das heißt aber nicht, dass es gerade fährt. FedEx schreibt zu `Auf dem Weg` ausdrücklich: in einem fahrenden Wagen oder in einer Niederlassung. Und `Die Sendung wurde von DHL bearbeitet …` heißt: Das Paket ist im Paketzentrum in der Region des Absenders eingegangen und wird für den Weitertransport vorbereitet.
+„In transit“ ist Englisch für unterwegs: Der Paketdienst hat dein Paket, irgendwo in seinem Netz. Das heißt aber nicht, dass es gerade fährt: `Die Sendung wurde von DHL bearbeitet …` heißt zum Beispiel, dass das Paket im Paketzentrum in der Region des Absenders eingegangen ist und für den Weitertransport vorbereitet wird.
 
 Zwischen zwei Scans ist Funkstille normal:
 
@@ -119,7 +119,7 @@ Nicht immer. Es heißt, der Zusteller hat es als übergeben oder abgelegt gescan
 
 ## „Ausnahme“ oder „Verzögerung“: Ist mein Paket verloren?
 
-Meistens nicht. `Exception` ist bei UPS der allgemeine Status und kann eine bloße Verspätung bedeuten: Entscheidend ist der Scan darunter. FedEx nennt bei `Zustellausnahme` als Beispiele Zollverzögerungen, schlechtes Wetter, Streiks und einen Empfänger, der nicht zu Hause war. Weder dort noch bei `Verspätet` musst du laut FedEx etwas tun.
+Meistens nicht. `Exception` ist bei UPS der allgemeine Status und kann eine bloße Verspätung bedeuten: Entscheidend ist der Scan darunter.
 
 Auch DHL und die Post sprechen meist von kurzen Verzögerungen. `Verzögerung wegen Fehlverteilung` heißt bei der Österreichischen Post: kleine Verspätung, du musst dich um nichts kümmern. Eine `Fehlleitung` bei der Schweizerischen Post, etwa wegen einer falschen Postleitzahl, hat „nicht zwingend eine Verspätung zur Folge“. Bei DHL kostet `Die Sendung wurde im Paketzentrum manuell nachbearbeitet.` (unleserliches oder abgelöstes Etikett, unvollständige Adresse, offene Verpackung) 1 bis 2 Tage, `Die Sendung wurde falsch vorsortiert …` bis zu 5 Tage. Taucht `Die Sendung ist in der Region des Empfängers angekommen …` mehrmals auf, wurde das Paket vermutlich ebenfalls von Hand nachbearbeitet: wieder 1 bis 2 Tage.
 
@@ -147,7 +147,6 @@ Rechne nicht damit, sie aufzuhalten. Bei internationalen Sendungen schreibt DHL:
 - [DPD: Wie lange dauert der Versand in Deutschland?](https://www.dpd.com/de/de/faq/wie-lange-dauert-der-versand-in-deutschland/) – 1 bis 2 Werktage, Predict
 - [DPD: Was passiert, wenn ich für eine Zustellung nicht zu Hause bin?](https://www.dpd.com/de/de/faq/was-passiert-wenn-ich-fuer-eine-zustellung-nicht-zu-hause-bin/) – Paketinfokarte, umleiten
 - [DPD: Wie lange habe ich Zeit, mein Paket im Paketshop abzuholen?](https://www.dpd.com/de/de/faq/wie-lange-habe-ich-zeit-mein-paket-im-paketshop-abzuholen/) – 7 und 3 Kalendertage
-- [FedEx: Was bedeutet mein Sendungsverfolgungsstatus?](https://www.fedex.com/de-de/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – Etikett erstellt, Auf dem Weg, Zustellausnahme, Verspätet
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Status, Abholfrist, Poststation, Empfangsbox, Rücksendung
 - [Schweizerische Post: Ereignisse „Sendungen verfolgen“](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Status, Zoll, Fehlleitung, Rücksendegründe
 - [Schweizerische Post: Statustexte der Sendungsverfolgung](https://service.post.ch/ekp-web/core/rest/translations/de/shipment-text-messages) – Verlad in Zustellfahrzeug
@@ -155,4 +154,5 @@ Rechne nicht damit, sie aufzuhalten. Bei internationalen Sendungen schreibt DHL:
 - [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Meine Sendungen, Zeitfenster von 40 bis 90 Minuten
 - [Schweizerische Post: FAQ Import, Zoll und MWST](https://www.post.ch/de/geschaeftsloesungen/export-import-und-verzollung/import/faq-import-zoll-und-mwst) – drei bis vier Arbeitstage bei vollständigen Angaben
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – UPS-Scans, die Peek liest: Etikett erstellt, Access Point, „Left at“, „Exception“
+- [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – FedEx-Scans, die Peek liest: Sendungsdaten an FedEx übermittelt
 :::

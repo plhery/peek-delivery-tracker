@@ -70,7 +70,7 @@ It's on you instead when:
 
 ## What proof of delivery can you ask for?
 
-- **A photo.** Evri, DPD UK and [FedEx](carrier:fedex) show one when the driver took one. In the US, Amazon's Photo-on-Delivery shows parcels left by its delivery partners' drivers.
+- **A photo.** Evri and DPD UK show one when the driver took one. In the US, Amazon's Photo-on-Delivery shows parcels left by its delivery partners' drivers.
 - **A name or signature.** Royal Mail's `Delivered to Neighbour/Reception by` goes on to name who took it in; Canada Post's tracking shows who signed, if anyone did.
 - **Rarely a GPS pin.** Of the carriers whose pages we read, only [Planzer](carrier:planzer), in Switzerland, says its proof photo is GPS-tagged; USPS speaks of a recorded "delivery location".
 
@@ -99,7 +99,6 @@ Sometimes, but [compensation usually goes to the sender](guide:lost-parcel), so 
 | Carrier | What you can do | Deadline |
 | --- | --- | --- |
 | USPS | After one postal business day, send your local Post Office a service request. Insured items: you or the sender can claim, with the mailing receipt | Lost: from 15 days (7 for Priority Mail Express) to 60 days after mailing |
-| FedEx | "Report Missing Package" in Manage Delivery, or file a claim yourself | Within 9 months of the shipment date |
 | Royal Mail | Claim as the sender or the recipient, except for Tracked 24 and 48: the sender only | Within 80 days of posting (6 months if sent abroad) |
 | DPD UK | None: "only the contract holder can register a claim" | Not stated |
 | Australia Post | Make an enquiry, with a free MyPost account | Domestic: from 10 business days after the expected date |
@@ -132,8 +131,6 @@ You can, though none of the rules above require it for a refund. Citizens Advice
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's safe place or neighbour
 - [USPS: Where is my package?](https://faq.usps.com/articles/FAQ/Where-is-my-package) – business day, lockers
 - [USPS: Claims](https://www.usps.com/help/claims.htm) – 15 to 60 days
-- [FedEx: Delivered but missing](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/fedex-says-delivered-but-no-package.html) – photo
-- [FedEx: Claims](https://www.fedex.com/en-us/customer-support/claims.html) – 9 months
 - [Evri: Terms and conditions](https://www.evri.com/terms-and-conditions) – Safe Place
 - [DPD UK: How can we help](https://www.dpd.co.uk/content/how-can-we-help/index.jsp) – neighbour, safe place
 - [DPD UK: FAQ](https://send.dpd.co.uk/FAQ) – photo, Denial of Receipt, claims

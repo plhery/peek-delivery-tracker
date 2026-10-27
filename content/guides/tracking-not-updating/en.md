@@ -66,7 +66,6 @@ There's no single day. Most carriers say when they'll start looking, counted fro
 | Carrier | When you can ask | Who asks |
 | --- | --- | --- |
 | USPS (US) | 7 days after mailing (Missing Mail search) | You or the sender |
-| [FedEx](carrier:fedex) (US) | No day count; lost parcels up to 9 months after shipping | The seller, or you |
 | Royal Mail (UK) | Working days after posting: 11 (1st Class), 14 (2nd Class). Special Delivery: 5 working days after the due date | The sender or you. Tracked 24 and 48: the sender only |
 | Evri (UK) | More than 7 days with Evri | The sender, once you tell them |
 | [DPD](carrier:dpd-uk) (UK) | No waiting time given; the sender must report a loss within 14 days of despatch | The sender |
@@ -126,7 +125,6 @@ The parcel may not be scanned yet, the number may belong to another carrier, or 
 - [USPS: Missing Mail](https://www.usps.com/help/missing-mail.htm) – 7 days after mailing
 - [USPS: Tracking status help](https://faq.usps.com/s/article/Where-is-my-package) – label created, last-mile statuses
 - [USPS: Delayed mail and packages?](https://faq.usps.com/s/article/Delayed-Mail-and-Packages) – delivery days and standards
-- [FedEx: File a claim](https://www.fedex.com/en-us/customer-support/claims.html) – 9 months, who files
 - [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – working days, who claims, 80 days, 6 months
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – Monday to Saturday, bank holidays
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail and UPS status wordings, UPS's hand-off to USPS

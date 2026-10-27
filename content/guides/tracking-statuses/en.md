@@ -45,9 +45,7 @@ No: the seller has printed a label and sent the details, nothing more. [USPS](ca
 
 ## What does "in transit" mean?
 
-The carrier has your parcel, somewhere in its network. That doesn't mean it's moving: [FedEx](carrier:fedex)'s `On the way` can mean in a vehicle or at a facility. `Arrived at` and `Departed` lines are hub scans, which USPS says can repeat from one facility on different days.
-
-Between hubs, silence is normal: FedEx calls more than 24 hours without a scan "not unusual".
+The carrier has your parcel, somewhere in its network. `Arrived at` and `Departed` lines are hub scans, which USPS says can repeat from one facility on different days.
 
 ### How long will a parcel be in transit?
 
@@ -64,7 +62,6 @@ Evri typically delivers 1 to 3 days after receiving a parcel, while Australia Po
 Usually, yes:
 
 - **USPS:** `Out for Delivery` means today, perhaps [at a different time from your usual mail](guide:delivery-times). No delivery recorded by 9 pm? It becomes `Awaiting Delivery Scan` (or `Delivery Status Not Updated`), and USPS expects it the next business day.
-- **FedEx:** generally 8 a.m. to 8 p.m.
 - **Australia Post:** `It's coming today` once the postie has loaded it, and it may text you a 2-hour window.
 
 Two look-alikes: Peek counts Royal Mail's `Ready for delivery` as in transit, not out for delivery. And at [DHL](carrier:dhl) in Germany, a loading scan shown more than once means the round wasn't finished: a delay of 1 to 2 days is possible.
@@ -86,7 +83,7 @@ This one needs you: [nobody could take the parcel](guide:missed-delivery), or th
 | --- | --- | --- |
 | USPS (US) | `Notice Left`: no automatic second try; book a redelivery or collect | Signature mail "usually 15 days"; Priority Mail Express 5 calendar days |
 | UPS (US) | The scan says you weren't available or the business was closed, and UPS tries again; after the final attempt it holds the parcel, takes it to an Access Point or sends it back | – |
-| FedEx (US) | Next-day reattempt, or a nearby FedEx location | 7 days |
+| [FedEx](carrier:fedex) | `Customer not available or business closed` | – |
 | Royal Mail (UK) | `Due for Redelivery the Next Working Day`, or a red card naming where to collect | About 3 weeks with a customs bill to pay |
 | Evri (UK) | Three attempts and a calling card; no depot collection | If sent to a ParcelShop, 10 days; a locker, 3 |
 | An Post (IE) | `We attempted to deliver your item` | – |
@@ -110,17 +107,17 @@ Not always. It means the driver scanned it as handed over or left:
 
 Australia Post also shows `Delivered` once you've collected it from a Post Office or Parcel Locker. Nothing there? Check the full tracking for a photo, a name or a place, then see [delivered but not received](guide:delivered-not-received).
 
-## Does a delivery exception mean it's lost?
+## Does an exception or a delay mean it's lost?
 
-No. FedEx says a `Delivery exception` "doesn't necessarily mean" the parcel will be late, and asks nothing of you; its examples include a customs delay and "recipient wasn't home". UPS's `Exception` is a generic status and can mean a mere delay: read the scan under it.
+No. UPS's `Exception` is a generic status and can mean a mere delay: read the scan under it.
 
-FedEx's `Running late` means it will likely miss its estimated date. As for how long, Australia Post says most items flagged `Delayed` arrive within 5 business days of the expected date.
+Australia Post says most items flagged `Delayed` arrive within 5 business days of the expected date.
 
 Look closer when the reason is an address or a payment: Canada Post's `Verifying recipient's address; Possible delay` ends in a return if the address can't be confirmed. Royal Mail's `Internal exception occurred` is a website error, not your parcel.
 
 ## Why was my parcel returned to sender?
 
-The carriers' reasons: not collected in time, a wrong or incomplete address, a refusal, unpaid customs charges, damage. Some returns don't say so:
+The carriers' reasons: not collected in time, a wrong or incomplete address, unpaid customs charges. Some returns don't say so:
 
 - **USPS** `Insufficient Address`: it's already heading back, and the sender must post it again with new postage.
 - **Australia Post** `Contact sender`: a return, after wrong details or 10 business days uncollected.
@@ -130,13 +127,8 @@ Don't count on stopping it: "Once the return process starts, we can't stop it," 
 :::sources
 - [USPS: Where is my package?](https://faq.usps.com/s/article/Where-is-my-package) – statuses, 9 pm rule
 - [USPS: Redelivery, the basics](https://faq.usps.com/s/article/Redelivery-The-Basics) – holding periods
-- [FedEx: Tracking status meanings](https://www.fedex.com/en-gb/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – statuses
-- [FedEx: Delivery exception](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/delivery-exception.html) – not necessarily late
-- [FedEx: Package not moving](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/package-not-moving.html) – 24 hours
-- [FedEx: Missed delivery](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/missed-delivery.html) – 7 days
-- [FedEx: Reattempt delivery](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/reattempt-delivery.html) – next day, hours
 - [Royal Mail: Tracking terms explained](https://www.royalmail.com/help/postage-tracking-terms-explained) – Internal exception occurred
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail, UPS and An Post status wordings
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail, UPS, An Post and FedEx status wordings
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's red card
 - [Citizens Advice: If something you ordered hasn't been delivered](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – pay-by-link messages
 - [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – about 3 weeks with a bill to pay

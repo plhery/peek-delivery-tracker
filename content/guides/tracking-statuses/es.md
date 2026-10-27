@@ -51,10 +51,7 @@ Si lleva varios días sin cambiar, pregunta a la tienda, no al transportista. GL
 
 Que el transportista tiene tu paquete en algún punto de su red. No quiere decir que se esté moviendo ahora mismo, ni que ya vaya con el repartidor: para eso está «en reparto». En SEUR, `EL ENVÍO ESTÁ EN TRÁNSITO. PRÓXIMAMENTE LLEGARÁ A LAS INSTALACIONES DE DESTINO.` indica que aún no ha llegado a las instalaciones de destino. En Correos, `En tránsito` aparece al salir del centro logístico de origen y otra vez cuando va hacia la unidad que lo entregará; entre medias, `Clasificado` quiere decir que lo han clasificado y asignado a un transporte.
 
-Entre centros, el silencio (y algún rodeo) es normal:
-
-- GLS explica que usa varios centros de distribución, así que la ruta no siempre es directa.
-- Para [FedEx](carrier:fedex), pasar más de 24 horas sin un escaneo no es raro.
+Entre un centro y otro puede haber algún rodeo: GLS explica que usa varios centros de distribución, así que la ruta no siempre es directa.
 
 ### ¿Cuánto tarda un paquete en tránsito?
 
@@ -143,6 +140,5 @@ Si ya [va de vuelta](guide:returned-to-sender), habla con la tienda: pídele que
 - [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – textos en mayúsculas, en tránsito, ausencia, retraso, entregado a un vecino
 - [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – 3 días laborables, 5 días naturales, avisos, documentos, ausencia
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – escaneos de UPS que lee Peek: «Left at», «Exception»
-- [FedEx: Package not moving](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/package-not-moving.html) – 24 horas sin escaneos
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – contenedores, aduana, seguimiento del transportista de destino
 :::

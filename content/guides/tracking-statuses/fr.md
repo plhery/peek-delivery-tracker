@@ -39,7 +39,7 @@ Mêmes étapes, autres mots. Pour [Mondial Relay](carrier:mondial-relay), ce son
 
 ## « En préparation chez l'expéditeur » ou « étiquette créée » : le colis est-il parti ?
 
-Non : le vendeur a créé une étiquette et transmis les données, rien de plus. Chez [FedEx](carrier:fedex), `Étiquette créée` ne change qu'une fois le colis remis au transporteur, et le premier scan d'[UPS](carrier:ups), `Shipper created a label, UPS has not received the package yet.`, dit qu'UPS n'a pas encore le colis. À [La Poste suisse](carrier:swiss-post), `Transmission des données par l'expéditeur` veut dire que l'envoi ne lui a normalement pas encore été remis ; chez [Colis Privé](carrier:colis-prive), `Colis attendu par Colis Privé`, qu'il n'a pas encore reçu le colis.
+Non : le vendeur a créé une étiquette et transmis les données, rien de plus. Chez [FedEx](carrier:fedex), cette étape s'intitule en anglais `Shipment information sent to FedEx`, et le premier scan d'[UPS](carrier:ups), `Shipper created a label, UPS has not received the package yet.`, dit qu'UPS n'a pas encore le colis. À [La Poste suisse](carrier:swiss-post), `Transmission des données par l'expéditeur` veut dire que l'envoi ne lui a normalement pas encore été remis ; chez [Colis Privé](carrier:colis-prive), `Colis attendu par Colis Privé`, qu'il n'a pas encore reçu le colis.
 
 Chez [bpost](carrier:bpost), `en préparation` a deux sens : soit l'expéditeur prépare encore le colis, soit bpost l'a déjà mais doit encore le trier. Selon bpost, la plupart des colis sont traités dans les 5 jours après que l'expéditeur l'a choisi.
 
@@ -47,7 +47,7 @@ Si rien ne bouge, demande au vendeur, pas au transporteur : Colis Privé te renv
 
 ## Que veut dire « en cours d'acheminement » ou « en transit » ?
 
-Le transporteur a ton colis, quelque part dans son réseau. Ça ne veut pas dire qu'il roule : chez FedEx, `En transit` désigne un colis dans un véhicule ou dans l'un de ses sites. Une ligne comme `L'envoi a été trié en vue de son acheminement` (La Poste suisse) est un passage en centre de tri.
+Le transporteur a ton colis, quelque part dans son réseau. Ça ne veut pas dire qu'il roule : une ligne comme `L'envoi a été trié en vue de son acheminement` (La Poste suisse) est un passage en centre de tri.
 
 Entre deux centres, le silence est normal : en Belgique, Mondial Relay te propose de le contacter si le colis n'est pas arrivé au Point Relais une fois passé son délai moyen.
 
@@ -63,14 +63,11 @@ En Belgique, Mondial Relay compte en moyenne 3 jours ouvrés après la prise en 
 
 ## « En cours de livraison » : le colis arrive-t-il aujourd'hui ?
 
-En général, oui :
-
-- **FedEx :** `En cours de livraison` veut dire livraison le jour même, et la page de suivi donne le créneau estimé.
-- **bpost :** l'app My bpost te laisse changer tes préférences de livraison jusqu'à 5 minutes avant la livraison.
+En général, oui. Chez bpost, l'app My bpost te laisse changer tes préférences de livraison jusqu'à 5 minutes avant la livraison.
 
 Deux statuts prêtent à confusion. Chez La Poste, `Votre colis est sur son site de distribution. Nous le préparons pour le mettre en livraison.` a l'air d'une attente, mais c'est le tri pour la tournée du jour : Peek affiche « En livraison », et dans les suivis qu'il lit, la livraison ou une tentative suit le jour même. Et `L'envoi a été trié en vue de sa Distribution` (La Poste suisse) est un tri en centre de traitement, pas la camionnette.
 
-Toujours rien le soir ? Regarde si la date a bougé : chez FedEx, `Livraison mise à jour` signale une nouvelle date ou une nouvelle adresse, et chez [Chronopost](carrier:chronopost), `Livraison reportée de 24h` veut dire que l'agence garde le colis un jour sans tenter de le livrer, puis reprend la livraison d'elle-même.
+Toujours rien le soir ? Regarde si la date a bougé : chez [Chronopost](carrier:chronopost), `Livraison reportée de 24h` veut dire que l'agence garde le colis un jour sans tenter de le livrer, puis reprend la livraison d'elle-même.
 
 [Peek](/) vérifie un colis jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes sur le dernier kilomètre. Tu peux régler ses notifications sur « Jour de livraison uniquement ».
 
@@ -110,11 +107,11 @@ Pas toujours. Ça veut dire que le livreur l'a scanné comme remis ou déposé :
 
 Sur le suivi en anglais de [Planzer](carrier:planzer), qui sert aussi aux colis [Quickpac](carrier:quickpac), `Shipped` veut dire livré, pas expédié. Rien à la porte ? Cherche dans le suivi complet une photo, un nom ou un lieu, puis lis [colis livré mais non reçu](guide:delivered-not-received).
 
-## « Anomalie » ou « exception de livraison » : le colis est-il perdu ?
+## « Anomalie » ou « exception » : le colis est-il perdu ?
 
-Non. FedEx range sous `Exception de livraison` tout imprévu qui retarde la livraison, d'une retenue en douane à l'absence du destinataire, et précise que tu n'as rien à faire. Chez UPS, `Exception` est le statut générique, et il peut ne signaler qu'un simple retard : lis le scan en dessous.
+Non. Chez UPS, `Exception` est le statut générique, et il peut ne signaler qu'un simple retard : lis le scan en dessous.
 
-Chez FedEx, `En retard` veut dire que le colis n'arrivera probablement pas à la date estimée. Chez La Poste, Peek affiche « Problème signalé » quand le scan parle d'incident, d'anomalie, d'avarie, de colis endommagé ou refusé, ou d'adresse incorrecte. Et `Erreur d'acheminement` (La Poste suisse) signale un envoi parti au mauvais endroit, par exemple à cause d'un NPA (code postal) erroné : il est réacheminé, avec un retard possible.
+Chez La Poste, Peek affiche « Problème signalé » quand le scan parle d'incident, d'anomalie, d'avarie, de colis endommagé ou refusé, ou d'adresse incorrecte. Et `Erreur d'acheminement` (La Poste suisse) signale un envoi parti au mauvais endroit, par exemple à cause d'un NPA (code postal) erroné : il est réacheminé, avec un retard possible.
 
 Regarde de plus près quand le problème touche l'adresse, comme `Tentative de distribution, adresse incorrecte` à La Poste suisse : chez La Poste aussi, le suivi cite l'adresse incorrecte parmi les raisons d'un retour.
 
@@ -146,7 +143,7 @@ Et ensuite ? Contacte l'expéditeur (le site marchand) pour [un nouvel envoi ou 
 - [La Poste suisse : événements du suivi](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – libellés
 - [La Poste suisse : invitation à retirer](https://www.post.ch/fr/reception/invitation-a-retirer) – délais, tarifs
 - [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – scans d'UPS que lit Peek : étiquette créée, Access Point, « Left at », « Exception »
-- [FedEx : statut de suivi](https://www.fedex.com/fr-fr/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – statuts
+- [Universal Parcel Scraper : FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – scans de FedEx que lit Peek : informations d'envoi transmises à FedEx
 - [La Poste suisse : FAQ Importation](https://www.post.ch/fr/solutions-commerciales/exportation-importation-et-dedouanement/importation/faq-importation-droits-de-douane-et-tva) – trois à quatre jours ouvrés
 - [Peek : page d'accueil](https://peektracker.com/fr) – jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes sur le dernier kilomètre
 :::

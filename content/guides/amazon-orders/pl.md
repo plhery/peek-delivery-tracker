@@ -1,6 +1,6 @@
 ---
 title: Śledzenie zamówienia Amazon: Amazon, sprzedawcy, przewoźnicy
-description: Kto wysyła twoje zamówienie z Amazon.pl, który przewoźnik je doręcza, czemu numer śledzenia się zmienia lub go nie ma i jak działa Gwarancja od A do Z.
+description: Kto wysyła Twoje zamówienie z Amazon.pl, który przewoźnik je doręcza, czemu numer śledzenia się zmienia lub go nie ma i jak działa Gwarancja od A do Z.
 slug: sledzenie-zamowienia-amazon
 picture: Telefon pokazuje postęp zamówienia, dwie furgonetki przekazują sobie paczkę, a Pip się przygląda.
 published: 2026-10-16

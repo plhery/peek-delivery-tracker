@@ -890,7 +890,9 @@ Import [the Scraper Health dashboard](../ops/sentry/scraper-health-dashboard.jso
 your project ID.
 
 A step failure is recorded immediately, but the `transport_fallback` warning is sent when
-the recovery step completes. An interrupted recovery may never send it.
+the recovery step completes. An interrupted recovery may never send it. A step that falls
+back from an answer (China Post's prompt for phone digits, DPD Germany placing a parcel
+abroad) sends none; the fallback is still counted.
 
 **Prometheus** metrics are served at `GET /api/metrics` when `METRICS_TOKEN` (16+ chars) is
 set, sent as a bearer token. Labels never contain tracking data, link ids or client

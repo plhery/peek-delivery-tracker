@@ -15,7 +15,7 @@ import {
  * Metric and log names are the ones the Sentry "Scraper Health" dashboard
  * reads: a step is a `phase`, a lookup is `phase:total`, and a recovery step
  * also counts a fallback and records a `transport_fallback` breadcrumb before
- * the result is known.
+ * the result is known, unless the step it falls back from answered.
  */
 
 function metric(operation: () => void): void {
@@ -27,6 +27,15 @@ function metric(operation: () => void): void {
 
 /** Answers about the number rather than failures: the carrier or provider was reached and replied. */
 const ANSWERS = new Set(['not_found', 'no_history', 'input_required', 'invalid_input', 'handed_off']);
+
+/**
+ * Whether the step a recovery falls back from answered: China Post's prompt for phone digits, or DPD Germany placing
+ * the parcel abroad. The next step follows the answer, so there is no failure to warn of.
+ */
+function fellBackFromAnswer(record: StepRecord): boolean {
+  return record.fallbackReason === 'ok'
+    || (record.fallbackReason !== null && ANSWERS.has(stepOutcome(record.fallbackReason, record.fallbackError)));
+}
 
 function outcomeLabel(record: StepRecord | LookupRecord): string {
   if (record.outcome === 'ok') return 'success';
@@ -41,12 +50,14 @@ export const sentryStepRecorder: StepRecorder = {
     };
     if (record.fallbackFrom) {
       // Report before-fallback evidence even when the recovery ultimately succeeds.
-      try {
-        reportRoutingEvent('transport_fallback', {
-          carrier: record.carrier, provider: record.carrier, category: record.step,
-          errorClass: record.fallbackErrorType ?? 'none', error: record.fallbackError,
-        });
-      } catch { /* Recovery reporting is best effort. */ }
+      if (!fellBackFromAnswer(record)) {
+        try {
+          reportRoutingEvent('transport_fallback', {
+            carrier: record.carrier, provider: record.carrier, category: record.step,
+            errorClass: record.fallbackErrorType ?? 'none', error: record.fallbackError,
+          });
+        } catch { /* Recovery reporting is best effort. */ }
+      }
       metric(() => Sentry.metrics.count('tracking.scrape.fallbacks', 1, {
         attributes: { carrier: record.carrier, from_phase: record.fallbackFrom!, to_phase: record.step, error_type: record.fallbackErrorType ?? 'none' },
       }));

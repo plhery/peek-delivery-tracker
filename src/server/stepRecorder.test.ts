@@ -47,6 +47,21 @@ describe('sentryStepRecorder', () => {
     });
   });
 
+  it('counts a fallback but warns of none after a step that answered', () => {
+    const recovery = { carrier: 'china-post', step: 'browser', attempt: 2, outcome: 'ok', errorType: null, durationMs: 4000, fallbackFrom: 'direct' } as const;
+    sentryStepRecorder.step({ ...recovery, fallbackReason: 'input_required', fallbackErrorType: 'InputRequiredError' });
+    sentryStepRecorder.step({
+      ...recovery, carrier: 'dpd-de', step: 'abroad', fallbackFrom: 'app', fallbackReason: 'indeterminate', fallbackErrorType: 'IndeterminateError',
+      fallbackError: new IndeterminateError('DPD Germany', 'Activity abroad', { reason: 'other_country' }),
+    });
+    expect(observability.reportRoutingEvent).not.toHaveBeenCalled();
+    expect(metrics.count.mock.calls.filter(([name]) => name === 'tracking.scrape.fallbacks')).toHaveLength(2);
+    sentryStepRecorder.step({
+      ...recovery, fallbackReason: 'indeterminate', fallbackErrorType: 'IndeterminateError', fallbackError: new IndeterminateError('ups', 'Odd page'),
+    });
+    expect(observability.reportRoutingEvent).toHaveBeenCalledTimes(1);
+  });
+
   it('records lookups as the total phase with the serving step', () => {
     sentryStepRecorder.lookup({ carrier: 'ups', finalStep: 'trawl', outcome: 'ok', errorType: null, durationMs: 3200, attempts: 2 });
     expect(observability.logOperationalEvent).toHaveBeenCalledWith('tracking_scrape', {

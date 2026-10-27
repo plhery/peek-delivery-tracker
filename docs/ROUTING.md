@@ -805,7 +805,7 @@ detection or the adapters could act on: each check saves them for the hourly rev
 
 | `decision` | Meaning |
 | --- | --- |
-| `transport_fallback` | A direct path needed browser/TRAWL recovery, even if it then succeeded |
+| `transport_fallback` | A direct path needed browser/TRAWL recovery, even if it then succeeded; not after a step that answered |
 | `provider_failed` | A provider failed for a parcel: `category` `rate_limited` needs less traffic, `schema` parser work, `invalid_input` a number the source refuses |
 | `all_providers_unavailable` | Uncovered parcel or broad outage |
 | `health_store_unavailable` | Migration or database coordination problem (Sentry issue) |

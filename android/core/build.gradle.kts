@@ -55,3 +55,8 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
 }
+
+tasks.test {
+    // Dates are shown in the device's zone, as on the iPhone. CI runs in UTC; TEST_TIME_ZONE checks other zones.
+    providers.environmentVariable("TEST_TIME_ZONE").orNull?.let { systemProperty("user.timezone", it) }
+}

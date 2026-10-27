@@ -4311,7 +4311,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers</loc>
@@ -7318,14 +7318,14 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/canada-post-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/canada-post-suivi" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/canada-post-tracking" />
-<lastmod>2026-10-15</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/canada-post-suivi</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/canada-post-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/canada-post-suivi" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/canada-post-tracking" />
-<lastmod>2026-10-15</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/purolator-tracking</loc>
@@ -7339,63 +7339,79 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/purolator-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/purolator-suivi" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/purolator-tracking" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/intelcom-dragonfly-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/intelcom-dragonfly-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/intelcom-dragonfly-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/intelcom-dragonfly-tracking" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/intelcom-dragonfly-suivi-colis</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/intelcom-dragonfly-tracking" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/intelcom-dragonfly-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/intelcom-dragonfly-tracking" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/canpar-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/canpar-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/canpar-suivi" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/canpar-tracking" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/canpar-suivi</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/canpar-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/canpar-suivi" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/canpar-tracking" />
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/uniuni-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/uniuni-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/uniuni-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/uniuni-tracking" />
-<lastmod>2026-10-15</lastmod>
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/uniuni-suivi-colis</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/uniuni-tracking" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/uniuni-suivi-colis" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/uniuni-tracking" />
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/ontrac-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/ontrac-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/ontrac-tracking" />
-<lastmod>2026-10-15</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/lso-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/lso-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/lso-tracking" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/gofo-express-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gofo-express-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gofo-express-tracking" />
-<lastmod>2026-10-15</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/speedx-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/speedx-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/speedx-tracking" />
-<lastmod>2026-10-15</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/australia-post-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/australia-post-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/australia-post-tracking" />
-<lastmod>2026-10-17</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/aramex-australia-tracking</loc>
@@ -7407,13 +7423,13 @@
 <loc>https://peektracker.com/carriers/couriersplease-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/couriersplease-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/couriersplease-tracking" />
-<lastmod>2026-10-22</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/nz-post-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/nz-post-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/nz-post-tracking" />
-<lastmod>2026-10-15</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/aramex-new-zealand-tracking-number</loc>
@@ -7439,7 +7455,7 @@
 <loc>https://peektracker.com/carriers/shiprocket-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/shiprocket-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/shiprocket-tracking" />
-<lastmod>2026-10-21</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/first-line-tracking</loc>
@@ -7505,7 +7521,7 @@
 <loc>https://peektracker.com/carriers/jt-express-australia-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jt-express-australia-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jt-express-australia-tracking" />
-<lastmod>2026-10-21</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/china-post-tracking</loc>
@@ -7624,7 +7640,7 @@
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/imile-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/imile-seguimiento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/imile-tracking" />
-<lastmod>2026-10-26</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/imile-sendungsverfolgung</loc>
@@ -7741,20 +7757,20 @@
 <loc>https://peektracker.com/carriers/sf-express-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/sf-express-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/sf-express-tracking" />
-<lastmod>2026-10-23</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/straightship-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/straightship-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/straightship-tracking" />
-<lastmod>2026-10-24</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/correios-brazil-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/correios-brazil-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/correios-brasil-seguimiento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correios-brazil-tracking" />
-<lastmod>2026-10-23</lastmod>
+<lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers/correios-brasil-seguimiento</loc>

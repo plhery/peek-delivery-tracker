@@ -31880,6 +31880,30 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.yfhex.com/"
+  },
+  "eushipments": {
+    "displayName": "euShipments",
+    "aliases": [
+      "eu Shipments"
+    ],
+    "countries": [
+      "BG",
+      "RO",
+      "HR",
+      "SI",
+      "SK"
+    ],
+    "color": "#0a8fcf",
+    "selectable": true,
+    "timezone": "Europe/Sofia",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "eushipments"
+    },
+    "trackingUrlTemplate": "https://eushipments.com/tracking",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://eushipments.com/tracking"
   }
 } as const;
 
@@ -32737,7 +32761,8 @@ export const CARRIER_IDS = [
   "tusk-logistics",
   "gofo-ca",
   "topyou",
-  "yfhex"
+  "yfhex",
+  "eushipments"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

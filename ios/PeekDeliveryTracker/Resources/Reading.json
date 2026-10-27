@@ -472,8 +472,12 @@
   ],
   "candidates": [
     {
-      "source": "\\b(?:(?:FR|DE|BE|UK|GB|IT|ES|NL|AT|IE|PL|SE|PT|LU|DK|FI|CZ|SK|HU|RO|HR|SI|EE|LV|LT|GR|CY|MT|CH|NO|IS|LI|TR)(?:[\\s.-]*[0-9]){10}|TB[ACM](?:[\\s.-]*[0-9]){12})\\b",
+      "source": "\\b(?![A-Z]{2}[\\s.-])(?:(?:FR|DE|BE|UK|GB|IT|ES|NL|AT|IE|PL|SE|PT|LU|DK|FI|CZ|SK|HU|RO|HR|SI|EE|LV|LT|GR|CY|MT|CH|NO|IS|LI|TR)(?:[\\s.-]*[0-9]){10}|TB[ACM](?:[\\s.-]*[0-9]){12})\\b",
       "flags": "gi"
+    },
+    {
+      "source": "\\b(?![A-Z]{2}\\.)(?:(?:FR|DE|BE|UK|GB|IT|ES|NL|AT|IE|PL|SE|PT|LU|DK|FI|CZ|SK|HU|RO|HR|SI|EE|LV|LT|GR|CY|MT|CH|NO|IS|LI|TR)(?:[\\s.-]*[0-9]){10}|TB[ACM](?:[\\s.-]*[0-9]){12})\\b",
+      "flags": "g"
     },
     {
       "source": "\\b\\d{4}\\/\\d{8}\\b",

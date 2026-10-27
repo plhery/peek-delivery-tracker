@@ -47,13 +47,13 @@ Quello che confonde di più è `Delivered to local carrier`: «delivered» qui v
 
 ## YunExpress consegna in Italia: chi porta il pacco
 
-YunExpress porta i pacchi in aereo fuori dalla Cina, li fa sdoganare nel Paese di destinazione e poi li affida a un corriere locale. Dice di avere una linea dedicata verso l'Italia dal 2017 e verso la Svizzera dal 2020. Sulle sue pagine però non nomina nessun partner per la consegna in Italia o in Ticino, solo in generale «premium global carrier networks».
+YunExpress porta i pacchi in aereo fuori dalla Cina, li fa sdoganare nel Paese di destinazione e poi li affida a un corriere locale. Dice di aver lanciato una linea dedicata verso l'Italia nel 2017 e una verso la Svizzera nel 2020. Sulle sue pagine però non nomina nessun partner per la consegna in Italia o in Ticino, solo in generale «premium global carrier networks».
 
 Nelle cronologie YunExpress compaiono righe di Poste Italiane e di GOFO in Italia, un corriere dell'ultimo miglio nato nel 2023, ma YunExpress non li presenta come partner. Chi ha il tuo pacco lo dicono le righe dopo `Delivered to local carrier` e la colonna «Last Mile Tracking». Come passano di mano i pacchi dalla Cina lo spiega la guida [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 Su tentativi di consegna, avvisi, giacenza o nuova data, YunExpress non pubblica nulla per i destinatari. Se non eri in casa, guarda quale corriere compare nel tracking: valgono le sue regole per avviso, giacenza e ritiro.
 
-Sulle linee standard, YunExpress non consegna nelle isole minori dei Paesi europei, ma non dice quali siano in Italia. In Svizzera, sempre secondo YunExpress, la linea economica consegna in tutto il Paese.
+Su una delle sue linee standard e sulla linea economica, YunExpress non consegna nelle isole minori dei Paesi europei, ma non dice quali siano in Italia. In Svizzera, sempre secondo YunExpress, la linea economica consegna in tutto il Paese.
 
 **Punti di ritiro e locker.** In un articolo senza data YunExpress descrive due linee con ritiro in Europa. In una sceglie YunExpress il punto di ritiro o il locker più vicino all'acquirente, entro 3 km, e blocca l'ordine se non ne trova uno adatto; nell'altra lo sceglie l'acquirente. In media il pacco arriva al punto da 6 a 10 giorni di calendario dopo la presa in carico, e il tracking mostra l'indirizzo del punto. Quali negozi o locker siano, YunExpress non lo dice.
 
@@ -69,7 +69,7 @@ Risulta consegnato ma non c'è? La pagina di tracciamento può offrire una prova
 
 ## YunExpress contatti: telefono, e-mail e servizio clienti
 
-A ottobre 2026 YunExpress non indica né un numero di telefono né un modulo né un ufficio per chi riceve un pacco in Italia o in Svizzera. Non ha un sito in italiano: yunexpress.com è solo in inglese e yunexpress.it non porta a nessun sito. Pubblica:
+A ottobre 2026 YunExpress non indica né un numero di telefono né un modulo né un ufficio per chi riceve un pacco in Italia o in Svizzera. Non ha un sito in italiano: yunexpress.com è solo in inglese e in cinese, e yunexpress.it non porta a nessun sito. Pubblica:
 
 - **E-mail** info@yunexpress.com, come «Customer Service» nel piè di pagina di yunexpress.com, dalle 8.00 alle 23.00 senza fuso orario. Non dice se risponde anche ai destinatari; la home promette risposte in inglese e in cinese.
 - **Telefono** 400-8575-500 su yunexpress.cn, un numero della Cina continentale: non dice se funziona dall'estero.
@@ -118,7 +118,7 @@ Non ne indica: la sede è a Shenzhen, in Cina, e per l'Italia YunExpress non pub
 - [YunExpress: 云途物流与PayPal打通轨迹信息对接](https://www.yunexpress.com/newsroom/detail/2) – app PayPal, contestazioni
 - [YunExpress: Standard Express](https://www.yunexpress.com/our-solutions/b2c/33) – tempi per l'Italia
 - [YunExpress: 全球专线挂号（标快带电）](https://www.yunexpress.com/our-solutions/b2c/5) – niente isole minori
-- [YunExpress: 全球专线挂号（特惠带电）](https://www.yunexpress.com/our-solutions/b2c/7) – linea economica, Italia e Svizzera
+- [YunExpress: 全球专线挂号（特惠带电）](https://www.yunexpress.com/our-solutions/b2c/7) – linea economica, niente isole minori, Italia e Svizzera
 - [YunExpress: 最高省21%！云途自提服务上线](https://www.yunexpress.com/newsroom/detail/3) – linee con ritiro in Europa, articolo rivolto ai venditori
 - [YunExpress: EU Customs Reform 2026 & YunExpress Service Updates](https://www.yunexpress.com/newsroom/detail/13) – dazio UE provvisorio dal 1° luglio 2026
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – durata dei controlli doganali

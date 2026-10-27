@@ -95,7 +95,7 @@ YunExpress's own tracking site, its "Track & Trace Platform". YunExpress links i
 
 ### Is YunExpress legit?
 
-Yes, it's a real logistics company: Shenzhen Qianhai YunExpress Logistics Co., Ltd., founded in Shenzhen in 2014. By its own account, it has been an Amazon recommended logistics partner since 2017 and an official AliExpress one since April 2025.
+Yes, it's a real logistics company: Shenzhen Qianhai YunExpress Logistics Co., Ltd., founded in Shenzhen in 2014. By its own account, it became an Amazon recommended logistics partner in 2017 and an official AliExpress one in April 2025.
 
 ### Where is YunExpress located?
 

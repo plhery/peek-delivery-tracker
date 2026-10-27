@@ -47,7 +47,7 @@ El que más confunde es `Delivered to local carrier`, en español «entregado al
 
 ## Quién entrega YunExpress en España y dónde recoger el paquete
 
-YunExpress recoge los paquetes del vendedor en China, los despacha en la aduana del país de destino y luego se los entrega a un transportista local. Según su propia historia, tiene línea a España desde 2017, pero sus páginas no nombran ninguna empresa de reparto en España: solo hablan de «premium global carrier networks». Quién lleva el tuyo lo dicen las líneas que siguen a `Delivered to local carrier` y la columna «Last Mile Tracking».
+YunExpress recoge los paquetes del vendedor en China, los despacha en la aduana del país de destino y luego se los entrega a un transportista local. Según su propia historia, abrió su línea a España en 2017, pero sus páginas no nombran ninguna empresa de reparto en España: solo hablan de «premium global carrier networks». Quién lleva el tuyo lo dicen las líneas que siguen a `Delivered to local carrier` y la columna «Last Mile Tracking».
 
 En 2021, CTT, el correo portugués, y Zongteng, el grupo de YunExpress, anunciaron una empresa conjunta para gestionar una red de taquillas de paquetes en Portugal y España. No está confirmado qué ha sido de esa red.
 
@@ -69,7 +69,7 @@ YunExpress no da a los destinatarios pasos, formulario ni plazo para un paquete 
 
 ## YunExpress España: teléfono, contacto y atención al cliente
 
-En octubre de 2026, YunExpress no publica para destinatarios en España ningún teléfono (ni gratuito ni de pago), formulario u oficina, y no tiene web en español: yunexpress.com solo está en inglés. Lo que publica:
+En octubre de 2026, YunExpress no publica para destinatarios en España ningún teléfono (ni gratuito ni de pago), formulario u oficina, y no tiene web en español: yunexpress.com solo está en inglés y en chino. Lo que publica:
 
 - **Correo:** info@yunexpress.com, como «Customer Service» en el pie de página de yunexpress.com, de 8:00 a 23:00 sin indicar la zona horaria. No dice si atiende a destinatarios, y su portada promete respuestas en inglés y en chino.
 - **Teléfono:** 400-8575-500, en yunexpress.cn, un número de atención de China continental. No dice si se puede llamar desde el extranjero.
@@ -99,7 +99,7 @@ Es `Delivered to local carrier`: YunExpress ha pasado el paquete a la empresa qu
 
 ### ¿Es fiable YunExpress?
 
-Nadie mide su fiabilidad de forma oficial; lo que sí consta es quién es: Shenzhen Qianhai YunExpress Logistics Co., Ltd., fundada en Shenzhen en 2014 y marca del grupo Zongteng. Según ella misma, es socio logístico recomendado por Amazon desde 2017, y su página de socios cita plataformas como Temu, SHEIN o eBay.
+Nadie mide su fiabilidad de forma oficial; lo que sí consta es quién es: Shenzhen Qianhai YunExpress Logistics Co., Ltd., fundada en Shenzhen en 2014 y marca del grupo Zongteng. Según ella misma, en 2017 pasó a ser socio logístico recomendado por Amazon, y su página de socios cita plataformas como Temu, SHEIN o eBay.
 
 ### ¿Tiene YunExpress oficinas en España?
 
@@ -110,7 +110,7 @@ No publica ninguna, ni en Madrid ni en Barcelona ni en otra ciudad. Según su hi
 - [YunExpress: código de la página de resultados de Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – pestañas, Last Mile Tracking, Not Found
 - [YunExpress: código de la página de Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, barra de progreso, prueba de entrega
 - [YunExpress: the Best Logistics Service Provider](https://www.yunexpress.com/) – empresa, correo y horario, inglés y chino, puerta a puerta, redes de transportistas
-- [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, línea a España desde 2017, sede europea, Amazon
+- [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, línea a España abierta en 2017, sede europea, Amazon
 - [YunExpress: Zongteng Group Announces Its Acquisition of the First Boeing 777F](https://www.yunexpress.com/newsroom/detail/6) – YunExpress, marca del grupo Zongteng
 - [YunExpress: Privacy Policy](https://www.yunexpress.com/privacy-policy) – la tienda como cliente
 - [YunExpress: Partners](https://www.yunexpress.com/yun-ecosystem/partners) – plataformas

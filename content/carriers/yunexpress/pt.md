@@ -69,7 +69,7 @@ Dada como entregue e não a tens? A página de seguimento pode oferecer uma prov
 
 ## YunExpress Portugal contactos: telefone e e-mail
 
-A 10 de outubro de 2026, a YunExpress não publicava telefone, formulário nem escritório para quem recebe em Portugal, nem tinha site em português: o yunexpress.com só existe em inglês e o endereço yunexpress.pt não abre. O que publica:
+A 10 de outubro de 2026, a YunExpress não publicava telefone, formulário nem escritório para quem recebe em Portugal, nem tinha site em português: o yunexpress.com só existe em inglês e em chinês, e o endereço yunexpress.pt não abre. O que publica:
 
 - **E-mail:** info@yunexpress.com, como «Customer Service» no rodapé do yunexpress.com, das 8:00 às 23:00, sem fuso horário. Não diz se responde a destinatários, e a página inicial promete respostas em inglês e em chinês («EN/CN»).
 - **Telefone:** 400-8575-500, no yunexpress.cn, um número de apoio da China continental. Não diz se funciona a partir do estrangeiro.
@@ -87,7 +87,7 @@ Quando a YunExpress indica a transportadora local e o número dela, pode seguir 
 
 ### A YunExpress é confiável?
 
-É uma empresa de logística real: a Shenzhen Qianhai YunExpress Logistics Co., Ltd., fundada em Shenzhen em 2014 e marca do grupo Zongteng. Os CTT chamam-lhe parceira e cliente, e, segundo a própria YunExpress, é parceira logística recomendada pela Amazon desde 2017.
+É uma empresa de logística real: a Shenzhen Qianhai YunExpress Logistics Co., Ltd., fundada em Shenzhen em 2014 e marca do grupo Zongteng. Os CTT chamam-lhe parceira e cliente, e, segundo a própria YunExpress, tornou-se parceira logística recomendada pela Amazon em 2017.
 
 ### Quanto tempo demora a YunExpress a chegar a Portugal?
 

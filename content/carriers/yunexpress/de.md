@@ -47,9 +47,9 @@ Am verwirrendsten ist `Delivered to local carrier`: „Delivered“ heißt hier 
 
 ## YunExpress Zustellung in Deutschland, Österreich und der Schweiz
 
-YunExpress fliegt die Pakete aus China ins Zielland, lässt sie im Zielland verzollen und übergibt sie dann einem Paketdienst vor Ort. Eigene Linien hat es nach eigenen Angaben seit 2015 nach Deutschland, seit 2018 nach Österreich und seit 2020 in die Schweiz. Einen Zustellpartner für diese Länder nennt es auf seinen Seiten nicht, nur allgemein „premium global carrier networks“. In YunExpress-Verläufen tauchen DHL (`Shipment in transit to DHL`) und Zeilen von DPD auf; aus welchem Land, ist nicht festgehalten. Wer dein Paket hat, zeigen die Zeilen nach `Delivered to local carrier` und die Spalte „Last Mile Tracking“. Wie die ganze Reise aus China abläuft, zeigt [Paket aus China verfolgen](guide:tracking-from-china).
+YunExpress fliegt die Pakete aus China ins Zielland, lässt sie im Zielland verzollen und übergibt sie dann einem Paketdienst vor Ort. Nach eigenen Angaben hat es 2015 eine eigene Linie nach Deutschland gestartet, 2018 eine nach Österreich und 2020 eine in die Schweiz. Einen Zustellpartner für diese Länder nennt es auf seinen Seiten nicht, nur allgemein „premium global carrier networks“. In YunExpress-Verläufen tauchen DHL (`Shipment in transit to DHL`) und Zeilen von DPD auf; aus welchem Land, ist nicht festgehalten. Wer dein Paket hat, zeigen die Zeilen nach `Delivered to local carrier` und die Spalte „Last Mile Tracking“. Wie die ganze Reise aus China abläuft, zeigt [Paket aus China verfolgen](guide:tracking-from-china).
 
-Die Standardlinie Standard Express nimmt Packstation-Adressen an, wenn das Paket höchstens 60 × 30 × 30 cm misst (sonst sind bis 60 × 40 × 35 cm erlaubt). Auf vorgelagerte Inseln europäischer Länder liefern die Standardlinien laut YunExpress nicht. In der Schweiz stellt die Sparlinie laut YunExpress im ganzen Land zu.
+Die Standardlinie Standard Express nimmt Packstation-Adressen an, wenn das Paket höchstens 60 × 30 × 30 cm misst (sonst sind bis 60 × 40 × 35 cm erlaubt). Eine der Standardlinien und die Sparlinie liefern laut YunExpress nicht auf vorgelagerte Inseln europäischer Länder. In der Schweiz stellt die Sparlinie laut YunExpress im ganzen Land zu.
 
 Zustellversuche, Benachrichtigungskarten, Lagerfristen oder einen neuen Termin regelt YunExpress für Empfänger nirgends. Hast du die Zustellung verpasst, schau, welcher Paketdienst im Tracking steht, und frag dort nach, wie er dich benachrichtigt, wie lange er Pakete aufbewahrt und wo du sie abholen kannst.
 
@@ -67,7 +67,7 @@ Als zugestellt markiert, aber nichts da? Die Tracking-Seite kann einen Zustellna
 
 ## YunExpress Kontakt: Telefonnummer und E-Mail
 
-Stand Oktober 2026 nennt YunExpress für Empfänger in Deutschland, Österreich und der Schweiz weder Telefonnummer noch Formular noch Büro. Eine deutsche Website hat es nicht: yunexpress.com gibt es nur auf Englisch, und yunexpress.de gehört nicht zu YunExpress. Veröffentlicht sind:
+Stand Oktober 2026 nennt YunExpress für Empfänger in Deutschland, Österreich und der Schweiz weder Telefonnummer noch Formular noch Büro. Eine deutsche Website hat es nicht: yunexpress.com gibt es nur auf Englisch und Chinesisch, und yunexpress.de gehört nicht zu YunExpress. Veröffentlicht sind:
 
 - **E-Mail:** info@yunexpress.com, als „Customer Service“ in der Fußzeile von yunexpress.com, 8:00 bis 23:00 Uhr ohne Angabe der Zeitzone. Ob Empfänger dort Antwort bekommen, steht nicht da; die Startseite verspricht Antworten auf Englisch und Chinesisch.
 - **Telefon:** 400-8575-500 auf yunexpress.cn, eine Servicenummer in Festlandchina. Ob sie aus dem Ausland erreichbar ist, steht nirgends.
@@ -85,7 +85,7 @@ Nennt YunExpress die Nummer des Paketdiensts vor Ort in einer Form, die Peek ken
 
 ### Was ist YunExpress?
 
-Ein Logistikunternehmen für den Onlinehandel aus China: die Shenzhen Qianhai YunExpress Logistics Co., Ltd., nach eigenen Angaben 2014 in Shenzhen gegründet. Es verschickt für Onlinehändler Pakete in über 220 Länder und Regionen und ist laut eigener Aussage seit 2017 von Amazon empfohlener Logistikpartner.
+Ein Logistikunternehmen für den Onlinehandel aus China: die Shenzhen Qianhai YunExpress Logistics Co., Ltd., nach eigenen Angaben 2014 in Shenzhen gegründet. Es verschickt für Onlinehändler Pakete in über 220 Länder und Regionen und wurde laut eigener Aussage 2017 ein von Amazon empfohlener Logistikpartner.
 
 ### Wie lange braucht YunExpress nach Deutschland?
 
@@ -115,7 +115,7 @@ Ja, wenn der Händler eine der Abhollinien von YunExpress gebucht hat: Dann zeig
 - [YunExpress: 云途物流与PayPal打通轨迹信息对接](https://www.yunexpress.com/newsroom/detail/2) – PayPal-App, Konflikte
 - [YunExpress: Standard Express](https://www.yunexpress.com/our-solutions/b2c/33) – Laufzeiten nach Deutschland und Österreich, Packstation
 - [YunExpress: 全球专线挂号（标快带电）](https://www.yunexpress.com/our-solutions/b2c/5) – keine vorgelagerten Inseln
-- [YunExpress: 全球专线挂号（特惠带电）](https://www.yunexpress.com/our-solutions/b2c/7) – Sparlinie, ganze Schweiz
+- [YunExpress: 全球专线挂号（特惠带电）](https://www.yunexpress.com/our-solutions/b2c/7) – Sparlinie, keine vorgelagerten Inseln, ganze Schweiz
 - [YunExpress: 最高省21%！云途自提服务上线](https://www.yunexpress.com/newsroom/detail/3) – Abhollinien in Europa
 - [YunExpress: EU Customs Reform 2026 & YunExpress Service Updates](https://www.yunexpress.com/newsroom/detail/13) – vorläufiger EU-Zoll ab 1. Juli 2026
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – Dauer von Zollkontrollen

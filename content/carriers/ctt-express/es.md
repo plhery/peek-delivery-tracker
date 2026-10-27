@@ -10,7 +10,7 @@ CTT Express es la filial española de paquetería urgente del grupo portugués C
 
 ## Número de seguimiento CTT Express: dónde está
 
-El localizador de CTT Express pide «el código de envío», una ristra larga de cifras. CTT Express dice que lo encontrarás en su SMS o en el correo de confirmación; si compraste en una tienda online, mira también el correo de envío o la página del pedido. Las formas que conoce el catálogo de Peek, con cifras inventadas:
+El localizador de CTT Express pide «el código de envío», normalmente una ristra larga de cifras. CTT Express dice que lo encontrarás en su SMS o en el correo de confirmación; si compraste en una tienda online, mira también el correo de envío o la página del pedido. Las formas que conoce el catálogo de Peek, con cifras inventadas:
 
 | Número | De quién es |
 | --- | --- |
@@ -73,7 +73,7 @@ Las páginas de CTT Express no dan un plazo para reclamar una pérdida o un retr
 
 Así lo indicaban las páginas de CTT Express el 27 de octubre de 2026:
 
-- **Teléfono gratuito:** 900 841 352, de lunes a viernes de 9:00 a 19:00, salvo festivos.
+- **Teléfono gratuito:** 900 841 352, el que dan sus páginas de ayuda; su artículo sobre aduanas del 27 de octubre de 2026 da en cambio el 900 110 898. De lunes a viernes de 9:00 a 19:00, salvo festivos.
 - **Otro teléfono:** 916 602 200, con tarifa normal, en el mismo horario.
 - **Correo electrónico:** ccaweb@cttexpress.com.
 - **Formulario:** en la [página de contacto](https://www.cttexpress.com/contacto-atc), con opciones como un envío que no entra en la red o un paquete que pone entregado y no tienes.
@@ -104,7 +104,7 @@ Solo en campaña de Navidad. El resto del año reparte de lunes a viernes.
 
 ### ¿Cuál es el teléfono gratuito de CTT Express?
 
-El 900 841 352, de lunes a viernes de 9:00 a 19:00. El 916 602 200 tiene tarifa normal. Si prefieres escribir, el correo electrónico de atención al cliente es ccaweb@cttexpress.com.
+El 900 841 352, según sus páginas de ayuda (su artículo sobre aduanas del 27 de octubre de 2026 da el 900 110 898), de lunes a viernes de 9:00 a 19:00. El 916 602 200 tiene tarifa normal. Si prefieres escribir, el correo electrónico de atención al cliente es ccaweb@cttexpress.com.
 
 ### ¿Qué significa «pendiente de entrada en red» en CTT Express?
 
@@ -132,6 +132,7 @@ Así llaman las preguntas frecuentes de CTT Express a un envío que sigue en `Pe
 - [CTT Express: Qué significa «aceptado por la última milla»](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – significado de los estados
 - [CTT Express: Nota de prensa sobre envíos](https://www.cttexpress.com/zona-de-prensa/notas-de-prensa/como-localizo-mi-paquete-con-ctt-express-y-otras-preguntas-frecuentes-sobre-envios) – «en tránsito», compras en marketplaces internacionales
 - [CTT Express: ¿Cómo contactar con CTT Express?](https://www.cttexpress.com/preguntas-frecuentes/como-contactar-con-ctt) – teléfonos, horario, correo, Madrid, aviso sobre los 807
+- [CTT Express: ¿Qué hacer si mi paquete ha quedado retenido en aduanas?](https://www.cttexpress.com/blog/expansion-internacional/que-hacer-si-mi-paquete-ha-quedado-retenido-en-aduanas) – artículo del 27 de octubre de 2026, 900 110 898
 - [CTT Express: Contacto y Atención al Cliente](https://www.cttexpress.com/contacto-atc) – formulario de contacto y sus opciones
 - [CTT Express: ¿Qué es Phishing y cómo evitar sufrirlo?](https://www.cttexpress.com/blog/actualidad/como-evitar-phishing) – SMS y correos falsos
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek

@@ -47,7 +47,7 @@ Najwięcej zamieszania robi `Delivered to local carrier`: „Delivered” znaczy
 
 ## Kto doręcza paczki YunExpress w Polsce
 
-YunExpress wiezie paczki z Chin samolotem, a po odprawie celnej w kraju docelowym przekazuje je lokalnemu przewoźnikowi. Według własnych danych ma linię do Polski od 2018 roku, a od 2020 roku jest oficjalnym partnerem logistycznym Allegro. Kto doręcza w Polsce, na swoich stronach nie podaje; pisze tylko ogólnie o „premium global carrier networks”. W historiach YunExpress pojawiają się linie DHL (`Shipment in transit to DHL`) i DPD, ale bez zapisu, z którego kraju. Kto ma Twoją paczkę, pokazują linie po `Delivered to local carrier` i kolumna „Last Mile Tracking”. Jak śledzić paczkę dalej u przewoźnika w Polsce, opisuje poradnik o [śledzeniu paczki z Chin](guide:tracking-from-china).
+YunExpress wiezie paczki z Chin samolotem, a po odprawie celnej w kraju docelowym przekazuje je lokalnemu przewoźnikowi. Według własnych danych uruchomił linię do Polski w 2018 roku, a w 2020 roku został oficjalnym partnerem logistycznym Allegro. Kto doręcza w Polsce, na swoich stronach nie podaje; pisze tylko ogólnie o „premium global carrier networks”. W historiach YunExpress pojawiają się linie DHL (`Shipment in transit to DHL`) i DPD, ale bez zapisu, z którego kraju. Kto ma Twoją paczkę, pokazują linie po `Delivered to local carrier` i kolumna „Last Mile Tracking”. Jak śledzić paczkę dalej u przewoźnika w Polsce, opisuje poradnik o [śledzeniu paczki z Chin](guide:tracking-from-china).
 
 Liczby prób doręczenia, awizo, czasu przechowania ani zmiany terminu YunExpress dla odbiorców nigdzie nie opisuje. Jeśli kurier Cię nie zastał, sprawdź zasady awizowania, przechowania i odbioru u lokalnego przewoźnika, którego nazwa stoi w śledzeniu.
 
@@ -67,7 +67,7 @@ Status mówi, że doręczona, a paczki nie ma? Strona śledzenia może pokazać 
 
 ## YunExpress kontakt: e-mail i telefon
 
-Stan na 10 października 2026: YunExpress nie podaje dla odbiorców w Polsce ani numeru telefonu, ani formularza, ani biura. Polskiej strony nie ma: yunexpress.com jest tylko po angielsku, a adres yunexpress.pl nie działa. Opublikowane są:
+Stan na 10 października 2026: YunExpress nie podaje dla odbiorców w Polsce ani numeru telefonu, ani formularza, ani biura. Polskiej strony nie ma: yunexpress.com jest tylko po angielsku i chińsku, a adres yunexpress.pl nie działa. Opublikowane są:
 
 - **E-mail:** info@yunexpress.com, jako „Customer Service” w stopce yunexpress.com, w godzinach 8:00–23:00, bez strefy czasowej. Nie wiadomo, czy odpowiada też odbiorcom. Strona główna obiecuje odpowiedzi po angielsku i chińsku, więc pisz po angielsku.
 - **Telefon:** 400-8575-500 na yunexpress.cn, numer z Chin kontynentalnych. Nigdzie nie ma informacji, czy działa z zagranicy.
@@ -85,7 +85,7 @@ Gdy YunExpress podaje lokalnego przewoźnika i jego numer, Peek może śledzić 
 
 ### Co to za firma YunExpress?
 
-To chińska firma logistyczna dla handlu internetowego: Shenzhen Qianhai YunExpress Logistics Co., Ltd., według własnych danych założona w 2014 roku w Shenzhen. Wysyła paczki sprzedawców do ponad 220 krajów i regionów, a od 2017 roku jest, jak podaje, polecanym partnerem logistycznym Amazona.
+To chińska firma logistyczna dla handlu internetowego: Shenzhen Qianhai YunExpress Logistics Co., Ltd., według własnych danych założona w 2014 roku w Shenzhen. Wysyła paczki sprzedawców do ponad 220 krajów i regionów, a w 2017 roku, jak podaje, została polecanym partnerem logistycznym Amazona.
 
 ### Ile idzie paczka YunExpress do Polski?
 
@@ -104,7 +104,7 @@ DHL przejmuje ostatni odcinek: linia `Shipment in transit to DHL` znaczy, że pa
 - [YunExpress: kod strony wyników Yuntrack](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – zakładki, Last Mile Tracking, Not Found
 - [YunExpress: kod strony Yuntrack](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – Alert, pasek postępu, Additional Notes, potwierdzenie doręczenia
 - [YunExpress: the Best Logistics Service Provider](https://www.yunexpress.com/) – firma, e-mail i godziny, angielski i chiński, sieci przewoźników
-- [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, ponad 220 krajów, linia do Polski od 2018, Allegro od 2020, Amazon od 2017
+- [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, ponad 220 krajów, linia do Polski uruchomiona w 2018, Allegro w 2020, Amazon w 2017
 - [YunExpress: Privacy Policy](https://www.yunexpress.com/privacy-policy) – sprzedawca jako klient z umową
 - [YunExpress: Partners](https://www.yunexpress.com/yun-ecosystem/partners) – platformy sprzedażowe
 - [YunExpress: 云途物流与PayPal打通轨迹信息对接](https://www.yunexpress.com/newsroom/detail/2) – aplikacja PayPal, spory

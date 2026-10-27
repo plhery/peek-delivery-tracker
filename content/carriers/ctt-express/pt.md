@@ -10,7 +10,7 @@ A CTT Express é a empresa de encomendas expresso do grupo CTT em Espanha (a ant
 
 ## Número de rastreio CTT Express: 22 ou 25 algarismos
 
-O localizador da CTT Express pede o «código de envio», uma sequência longa de algarismos. A CTT Express diz que o encontras no SMS ou no email de confirmação. Os CTT explicam que os códigos numéricos de 22 ou 25 algarismos são de envios de clientes com contrato que vêm de outros países, como Espanha ou a China. As formas que o catálogo do Peek conhece (exemplos inventados):
+O localizador da CTT Express pede o «código de envio», normalmente uma sequência longa de algarismos. A CTT Express diz que o encontras no SMS ou no email de confirmação. Os CTT explicam que os códigos numéricos de 22 ou 25 algarismos são de envios de clientes com contrato que vêm de outros países, como Espanha ou a China. As formas que o catálogo do Peek conhece (exemplos inventados):
 
 | Número | De quem é |
 | --- | --- |
@@ -19,7 +19,7 @@ O localizador da CTT Express pede o «código de envio», uma sequência longa d
 | `0000100012345678901234` | 22 algarismos a começar por `00001000`: pode ser da CTT Express, mas também da TIPSA, da Austrian Post e de outras. |
 | `DA000000005PT` | Duas letras, nove algarismos e `PT`: um código dos [CTT](carrier:ctt), seguido no ctt.pt. |
 
-Não confundas com o CTT Expresso, o serviço expresso dos CTT em Portugal: as encomendas Expresso nacionais têm códigos dos CTT com letras (`DA`, `EA`, `EN` e outras) e seguem-se no ctt.pt, não no cttexpress.com.
+Não confundas com o CTT Expresso, o serviço expresso dos CTT em Portugal: as encomendas Expresso nacionais têm códigos dos CTT com letras (`DA`, `EA`, `EN` e outras) e seguem-se no ctt.pt. Ainda assim, os dois seguimentos cruzam-se: o seguimento da própria CTT Express, só em espanhol, dá um código terminado em `PT` como um dos seus dois exemplos. Se um site não encontrar nada, experimenta o outro.
 
 Não tens número? Pede-o à loja ou lê [onde encontrar o número de seguimento](guide:find-tracking-number).
 
@@ -83,7 +83,7 @@ Quem tem o contrato com a CTT Express é o remetente. Para reembolso ou novo env
 Como os sites da CTT Express e dos CTT os listavam a 11 de outubro de 2026:
 
 - **Portugal:** a versão portuguesa do cttexpress.com manda «Contactar CTT» para o [ctt.pt/ajuda](https://www.ctt.pt/ajuda). A linha dos CTT é o 21 047 16 16 (preço de uma chamada para a rede fixa; +351 21 047 16 16 do estrangeiro), nos dias úteis das 8h30 às 19h30, e há o formulário em ctt.pt/ajuda/contacto. Por carta: CTT Expresso, Avenida dos Combatentes nº 43, 14º Piso, 1643-001 Lisboa.
-- **Espanha (CTT Express):** 900 841 352 (grátis em Espanha) ou +34 916 602 200, de segunda a sexta, das 9h00 às 19h00, exceto feriados. Email ccaweb@cttexpress.com ou o [formulário de contacto](https://www.cttexpress.com/contacto-atc). O apoio fica em Madrid, só por telefone ou email, e costuma responder em 24 horas úteis. As páginas da CTT Express não indicam chat nem WhatsApp.
+- **Espanha (CTT Express):** 900 841 352 (grátis em Espanha; é o número das páginas de ajuda da CTT Express, mas o seu artigo sobre alfândegas de 27 de outubro de 2026 dá o 900 110 898) ou +34 916 602 200, de segunda a sexta, das 9h00 às 19h00, exceto feriados. Email ccaweb@cttexpress.com ou o [formulário de contacto](https://www.cttexpress.com/contacto-atc). O apoio fica em Madrid, só por telefone ou email, e costuma responder em 24 horas úteis. As páginas da CTT Express não indicam chat nem WhatsApp.
 
 ## Rastrear CTT Express com o Peek
 
@@ -120,7 +120,7 @@ São do mesmo grupo, mas não são iguais. A CTT Express é a filial espanhola d
 - [CTT: Procedimentos para Alertas de Phishing](https://www.ctt.pt/transversais/alertas-de-phishing) – SMS falsos da CTT Expresso
 - [CTT Express: Empresa de Transporte de Encomendas](https://www.cttexpress.com/?language_code=pt) – site em português, ligação aos contactos CTT
 - [CTT Express: Localizador de envios](https://www.cttexpress.com/localizador-de-envios/?language_code=pt) – seguimento em Portugal pelo Seguir objeto
-- [CTT Express: Seguimiento de envíos](https://shipping-tracking.production.cloud2.cttexpress.com/) – seguimento só em espanhol, passos, textos das leituras, motivos de incidência
+- [CTT Express: Seguimiento de envíos](https://shipping-tracking.production.cloud2.cttexpress.com/) – seguimento só em espanhol, passos, textos das leituras, motivos de incidência, exemplo de código `PT`
 - [CTT Express: Empresa de Paquetería y Mensajería](https://www.cttexpress.com/) – cobertura, entregas em menos de 24 horas
 - [CTT Express: Quiénes somos](https://www.cttexpress.com/nosotros/quienes-somos) – grupo CTT, Tourline Express
 - [CTT Express: FAQs sobre los estados de envío](https://www.cttexpress.com/preguntas-frecuentes/estados-envio) – estados, entregue mas não recebida, danos
@@ -132,6 +132,7 @@ São do mesmo grupo, mas não são iguais. A CTT Express é a filial espanhola d
 - [CTT Express: Preguntas frecuentes Puntos Collectt Express](https://www.cttexpress.com/preguntas-frecuentes/puntos-collectt-express) – PIN, mudança grátis para um ponto
 - [CTT Express: Nota de prensa sobre envíos](https://www.cttexpress.com/zona-de-prensa/notas-de-prensa/como-localizo-mi-paquete-con-ctt-express-y-otras-preguntas-frecuentes-sobre-envios) – encomendas de marketplaces internacionais
 - [CTT Express: Cómo contactar con CTT Express](https://www.cttexpress.com/preguntas-frecuentes/como-contactar-con-ctt) – telefones, horário, email, números 807
+- [CTT Express: ¿Qué hacer si mi paquete ha quedado retenido en aduanas?](https://www.cttexpress.com/blog/expansion-internacional/que-hacer-si-mi-paquete-ha-quedado-retenido-en-aduanas) – artigo de 27 de outubro de 2026, 900 110 898
 - [CTT Express: Contacto y Atención al Cliente](https://www.cttexpress.com/contacto-atc) – formulário de contacto
 - [CTT Express: Qué es Phishing](https://www.cttexpress.com/blog/actualidad/como-evitar-phishing) – SMS e emails falsos
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra

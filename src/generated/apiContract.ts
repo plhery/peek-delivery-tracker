@@ -1286,7 +1286,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       },
       {
-        "pattern": "^(?:86[56]|87[05]|88[05])\\d{11}[0-9A-Z]$",
+        "pattern": "^(?:86[3-6]|87[05]|88[05])\\d{11}[0-9A-Z]$",
         "confidence": "high",
         "checksum": "dpd"
       },
@@ -1295,7 +1295,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
-        "pattern": "^(?:86[56]|87[05]|88[05])\\d{11}$",
+        "pattern": "^(?:86[3-6]|87[05]|88[05])\\d{11}$",
         "confidence": "low"
       },
       {
@@ -2833,7 +2833,15 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       },
       {
+        "pattern": "^2IVC\\d{4}[0-9A-Z]\\d{5}$",
+        "confidence": "high"
+      },
+      {
         "pattern": "^JF\\d{11}$",
+        "confidence": "high"
+      },
+      {
+        "pattern": "^(?:E[FG]|JG|LF)\\d{11}$",
         "confidence": "high"
       },
       {
@@ -2857,6 +2865,11 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
+        "pattern": "^X[A-QSVXZ]\\d{9}IT$",
+        "confidence": "low",
+        "preferred": true
+      },
+      {
         "pattern": "^(?:\\d{6}[A-Z]\\d{6}|[139]C\\d{4}[A-Z]\\d{6}|\\d{3}[A-Z]\\d{8}[A-Z])$",
         "confidence": "low"
       },
@@ -2870,8 +2883,7 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^GF\\d{11}$",
-        "confidence": "low",
-        "preferred": true
+        "confidence": "high"
       },
       {
         "pattern": "^\\d{12}$",
@@ -4364,7 +4376,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?!MA\\d{19}$)(?:\\d{2})?[A-Z0-9]{3}\\d{9}000\\d{6}$",
+        "pattern": "^(?!MA\\d{19}$|JJD\\d{18}$)(?:\\d{2})?[A-Z0-9]{3}\\d{9}000\\d{6}$",
         "confidence": "high"
       },
       {
@@ -4692,7 +4704,9 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Polish Post",
       "Poland Post",
-      "Pocztex"
+      "Pocztex",
+      "Allegro Pocztex",
+      "Pocztex Kurier"
     ]
   },
   "bring-posten": {
@@ -4877,7 +4891,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       },
       {
-        "pattern": "^(?:[PD][A-Z]|CD)[A-Z0-9]{4}\\d{16}[A-Z]$",
+        "pattern": "^[A-Z][A-Z0-9]{5}\\d{16}[A-Z]$",
         "confidence": "high",
         "checksum": "correos-spain"
       },
@@ -5370,7 +5384,7 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "evri-uk",
       "recognitionRank": 615,
-      "recognitionPattern": "^(?:[HT][0-9A-Z]{5}|C00HHA)\\d{10}$"
+      "recognitionPattern": "^(?:(?:[HT][0-9A-Z]{5}|C00HHA)\\d{10}|\\d{16})$"
     },
     "trackingUrlTemplate": "https://www.evri.com/track/parcel/{trackingNumber}/details",
     "linkRules": [
@@ -5396,7 +5410,8 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^\\d{16}$",
-        "confidence": "low"
+        "confidence": "low",
+        "checksum": "gs1"
       },
       {
         "pattern": "^C00HHA\\d{10}$",
@@ -5838,7 +5853,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "DHL Parcel Poland",
       "DHL Parcel Polska",
-      "DHL eCommerce Polska"
+      "DHL eCommerce Polska",
+      "DHL Poland"
     ],
     "countries": [
       "PL"

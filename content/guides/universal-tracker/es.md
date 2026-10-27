@@ -4,7 +4,7 @@ description: Qué es un localizador universal de envíos, de dónde saca los dat
 slug: seguimiento-universal-de-paquetes
 picture: Cinco furgonetas de distintos colores cuyos caminos punteados llegan a una sola lista en un móvil, y Pip asoma radiante de una caja abierta.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 El seguimiento universal de paquetes reúne todos tus envíos en una sola web o app, sea cual sea el transportista: el localizador averigua de quién es cada número, recoge sus escaneos y los guarda en una lista. Solo enseña lo que el transportista ha registrado, así que nunca va por delante de él. Unos y otros se diferencian en lo que te piden a cambio: una cuenta, acceso a tu correo, una suscripción para las notificaciones o paciencia con los anuncios.
@@ -30,7 +30,7 @@ Empieza por lo que ya te dan los transportistas con los que más tratas. Cada un
 | GLS | En su app, con una cuenta My GLS, los envíos de GLS que llevan tu número de teléfono aparecen solos, con notificaciones de cómo van | Registrarte con tu móvil y escribirlo bien cuando compras. Sin cuenta, el número de seguimiento y el código postal |
 | SEUR | miSEUR recupera en tu perfil los pedidos asociados a tu email o a tu móvil, con notificaciones del estado de cada envío | Registrarte en miSEUR |
 | InPost | Su app sigue envíos a domicilio, a Lockers y a Punto Pack, y te envía notificaciones cuando cambian de estado | El número de seguimiento de cada envío |
-| Amazon | Sus pedidos se siguen en «Mis pedidos», con la información de sus socios de entrega | Tu cuenta de Amazon |
+| Amazon | Sus entregas se siguen en «Mis pedidos» | Tu cuenta de Amazon |
 
 Otras opciones, con sus límites:
 
@@ -144,7 +144,6 @@ Sí, y suele traer un enlace. Correos cuenta que pedir un pago o completar la di
 - [App Store: GLS](https://apps.apple.com/es/app/id1581091038) – My GLS, envíos ligados a tu teléfono
 - [SEUR: nota de prensa sobre miSEUR (2023)](https://saladeprensa.seur.com/2023/10/30/seur-estrena-el-entorno-digital-miseur-una-plataforma-pionera-y-unica-para-la-gestion-de-envios/) – pedidos asociados a tu email o móvil
 - [App Store: InPost](https://apps.apple.com/es/app/id6748218565) – seguimiento y notificaciones
-- [Amazon.es: Entregas de Amazon Logistics](https://www.amazon.es/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – Mis pedidos
 - [Correos Express: Seguimiento y entrega](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio) – unas horas para aparecer
 - [Correos: Qué es el phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – excusas habituales, sin pagos por SMS
 - [Correos: Verificador de email](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/verificador-de-email) – código en cada correo
@@ -179,5 +178,5 @@ Sí, y suele traer un enlace. Correos cuenta que pedir un pago o completar la di
 - [Ayuda de Play Console: preparar una aplicación para su revisión](https://support.google.com/googleplay/android-developer/answer/9859455?hl=es) – etiqueta «Contiene anuncios», declarada por el desarrollador
 - [UPS: ejemplo de etiqueta (en inglés)](https://www.pld-certify.ups.com/CerttoolHelp/PLD0200/WebHelp_pld0200/LeadPackage.htm) – números 1Z
 - [UPU: normas (en inglés)](https://www.upu.int/en/postal-solutions/programmes-services/standards) – 13 caracteres
-- [Universal Parcel Scraper: catálogo de transportistas](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – números de 14 cifras
+- [Universal Parcel Scraper: catálogo de transportistas](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – números de 14 cifras; Amazon Logistics, sin seguimiento público, se sigue en el historial de pedidos
 :::

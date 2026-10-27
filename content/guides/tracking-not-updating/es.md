@@ -13,7 +13,7 @@ Si el seguimiento no se actualiza, casi siempre es porque nadie ha escaneado tu 
 
 El seguimiento muestra escaneos, no movimiento, y un paquete solo se escanea en ciertos puntos:
 
-- **Sin escaneos entre centros.** [UPS](carrier:ups) avisa de que, si un envío recorre una distancia larga, es probable que no se vuelva a escanear hasta llegar a su centro de destino. [GLS](carrier:gls-es) recuerda que usa varios centros de distribución, así que la ruta no siempre es directa.
+- **Sin escaneos entre centros.** [GLS](carrier:gls-es) recuerda que usa varios centros de distribución, así que la ruta no siempre es directa.
 - **Fines de semana y festivos.** GLS reparte de lunes a viernes (los sábados, solo con su servicio Express Saturday), e InPost no lleva paquetes a sus Punto Pack y Lockers ni sábados, ni domingos, ni festivos. Muchos plazos se cuentan en días laborables: los 25 días de Vinted, por ejemplo, no incluyen fines de semana ni festivos.
 - **Mal tiempo y temporada alta.** Según DHL, el mal tiempo, los atascos, los accidentes o las bajas por enfermedad pueden retrasar una entrega, y en Alemania un paquete puede tardar más [antes de Navidad](guide:christmas-posting-dates).
 - **Direcciones y etiquetas con problemas.** DHL cita códigos postales mal escritos, números de portal que faltan, etiquetas escritas a mano que no se leen bien, etiquetas despegadas y embalajes dañados: el paquete puede acabar donde no toca o quedar apartado para clasificarlo a mano, con varios días de retraso. Correos llama «envío estacionado» al que no puede entregar por una incidencia: datos del destinatario insuficientes, una dirección incorrecta o un paquete roto. Lo deja estacionado 5 días naturales a la espera de que se corrijan los datos, y puedes corregirlos tú en «Gestión de estacionados» con el número de envío y el PIN que te manda por SMS o correo electrónico.
@@ -37,8 +37,7 @@ De unas horas a unos días. Si no sale nada o sigue atascado en la primera líne
 
 - **Correos:** `Pre-admisión` significa que el número ya existe, pero el paquete está «pendiente de ser entregado a Correos». Si la tienda no le ha transmitido los datos del envío (el «prerregistro»), el paquete queda estacionado y Correos lo entrega cuando los recibe.
 - **GLS:** si tu envío lleva varios días en `Etiqueta creada`, el remitente le ha pasado los datos a GLS, pero todavía no le ha entregado el paquete. GLS te sugiere preguntar a la tienda, porque no puede darte plazos hasta tenerlo físicamente.
-- **UPS:** `Etiqueta creada` significa que UPS tiene los datos del envío que le dio el remitente; el estado cambia cuando tiene el paquete.
-- **DHL:** los eventos de seguimiento «suelen aparecer entre 24 y 48 horas» después de recibir el número, en general en cuanto el envío llega a sus instalaciones.
+- **[UPS](carrier:ups):** la primera línea, `Shipper created a label, UPS has not received the package yet.`, dice justo eso: el remitente ha creado la etiqueta y UPS todavía no tiene el paquete.
 - **Vinted:** el seguimiento puede tardar hasta 48 horas en aparecer en la app.
 - **Zalando:** el enlace de seguimiento no funciona «hasta que el transportista no haya recibido tu paquete». Si no se actualiza en 5 o 6 días laborables, contacta con el transportista.
 
@@ -138,8 +137,7 @@ Puede que el paquete aún no se haya escaneado, que el número sea de otro trans
 - [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – 5, 15 y 30 días, 3 y 3 a 6 días laborables, Locker y Punto Pack, reparto de lunes a viernes
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Etiqueta creada, centros de distribución, 24 horas, lunes a viernes, intentos, 7 días
 - [GLS: Hoja de reclamaciones](https://gls-group.com/ES/es/hoja-de-reclamaciones/) – respuesta en 30 días
-- [UPS: Descripción del estado de seguimiento](https://www.ups.com/es/es/support/tracking-support/where-is-my-package/understanding-tracking-status) – Etiqueta creada, sin escaneos en trayectos largos
-- [DHL: Seguimiento, preguntas frecuentes](https://www.dhl.com/es-es/home/seguimiento.html) – 24 a 48 horas
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – primera línea de UPS que lee Peek
 - [Zalando: ¿Dónde está mi pedido?](https://www.zalando.es/faq/where-is-my-parcel.html) – enlace sin activar hasta que el transportista tiene el paquete, 5-6 días laborables
 - [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – estado sin cambios, huecos, seguimiento del país de destino
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – despacho de aduanas

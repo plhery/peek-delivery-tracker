@@ -13,7 +13,7 @@ Tracking not updating usually means nobody has scanned your parcel (or package) 
 
 Tracking shows scans, not movement, and a parcel is scanned only at certain points:
 
-- **No scan between hubs.** [UPS](carrier:ups) says a parcel going a long way likely won't be scanned again until its destination hub. [Canada Post](carrier:canada-post) typically scans a parcel when it's mailed and when it goes out for delivery, and says several days can pass in between.
+- **No scan between hubs.** [Canada Post](carrier:canada-post) typically scans a parcel when it's mailed and when it goes out for delivery, and says several days can pass in between.
 - **Weekends and holidays.** USPS delivers Monday to Saturday; on Sunday, only Priority Mail Express and Amazon parcels. Royal Mail delivers 1st and 2nd Class parcels Monday to Saturday, but no post on bank holidays. Around Christmas, check [carriers' days off](guide:christmas-posting-dates).
 - **Weather and busy seasons.** DHL names bad weather, traffic jams, accidents and illness, and says parcels in Germany can take longer before Christmas.
 - **A label the machines can't read.** DHL names postcode typos, missing house numbers, hard-to-read handwriting, labels that came off and damaged packaging. The parcel may then be misrouted or sorted by hand, delaying it several days.
@@ -35,9 +35,9 @@ No carrier gives one figure for how long tracking can stay quiet. Before the del
 
 Hours to days. If yours is stuck on `Label Created`, the carrier may not have the parcel yet: that first line usually comes from the seller's label software, not a scan.
 
-- **DHL:** scans usually appear 24 to 48 hours after you get the number (up to 24 hours in Germany).
+- **DHL:** in Germany, it can take up to 24 hours for a parcel to appear in tracking.
 - **USPS:** `Shipping Label Created, USPS Awaiting Item` means the parcel "has not yet been given to USPS".
-- **UPS:** `Label Created` changes once UPS has the parcel.
+- **[UPS](carrier:ups):** `Shipper created a label, UPS has not received the package yet.` means just that.
 - **Royal Mail:** `Sender preparing item` or `Sender has despatched item` comes from the sender's notice, before Royal Mail has the parcel.
 - **[Evri](carrier:evri):** after the sender's dispatch notice, it can take a few days for Evri to receive the parcel.
 - **[Australia Post](carrier:australia-post):** a number it doesn't recognise may not be scanned yet: try again in 24 hours. After more than a week on `Pending`, ask the sender whether it was really sent.
@@ -51,7 +51,7 @@ DHL says it's completely normal, depending on the destination country, for a par
 
 - **Customs:** several working days, depending on the paperwork, says DHL. For items coming into Australia, Australia Post says it may take up to 15 days, longer if duties are payable. More in [parcels held at customs](guide:customs).
 - **A local carrier takes over:** DHL warns of gaps in tracking and suggests trying the same number on the destination country's tracker.
-- **UPS hands it to the post:** after `Transferred to Post Office for Delivery`, allow an extra day or two.
+- **UPS hands it to the post:** in the US, `Package transferred to post office` means a Ground Saver parcel has gone to USPS for the last leg, and UPS's tracking page then gives its USPS number.
 
 Ordered from AliExpress, Temu or Shein? See [tracking a parcel from China](guide:tracking-from-china), and [Cainiao's tracking](carrier:cainiao) for AliExpress parcels.
 
@@ -66,12 +66,10 @@ There's no single day. Most carriers say when they'll start looking, counted fro
 | Carrier | When you can ask | Who asks |
 | --- | --- | --- |
 | USPS (US) | 7 days after mailing (Missing Mail search) | You or the sender |
-| UPS (US) | No day count; claims up to 60 days after the scheduled delivery | The shipper, or you unless the shipper blocked it |
 | [FedEx](carrier:fedex) (US) | No day count; lost parcels up to 9 months after shipping | The seller, or you |
 | Royal Mail (UK) | Working days after posting: 11 (1st Class), 14 (2nd Class). Special Delivery: 5 working days after the due date | The sender or you. Tracked 24 and 48: the sender only |
 | Evri (UK) | More than 7 days with Evri | The sender, once you tell them |
 | [DPD](carrier:dpd-uk) (UK) | No waiting time given; the sender must report a loss within 14 days of despatch | The sender |
-| [An Post](carrier:an-post) (Ireland) | Standard post: 5 working days after posting; international post: 15 days | You, online or at the post office |
 | Canada Post | Once the expected delivery date has passed | You or the sender; only the sender can claim |
 | Australia Post | Domestic: 10 business days after the expected delivery date | You or the sender, with a free MyPost account |
 
@@ -128,16 +126,13 @@ The parcel may not be scanned yet, the number may belong to another carrier, or 
 - [USPS: Missing Mail](https://www.usps.com/help/missing-mail.htm) – 7 days after mailing
 - [USPS: Tracking status help](https://faq.usps.com/s/article/Where-is-my-package) – label created, last-mile statuses
 - [USPS: Delayed mail and packages?](https://faq.usps.com/s/article/Delayed-Mail-and-Packages) – delivery days and standards
-- [UPS: Understanding tracking status](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – scans, transfer to the post office
-- [UPS: File a claim](https://www.ups.com/us/en/support/file-a-claim) – 60 days, who claims
 - [FedEx: File a claim](https://www.fedex.com/en-us/customer-support/claims.html) – 9 months, who files
 - [Citizens Advice: Claiming compensation from Royal Mail](https://www.citizensadvice.org.uk/consumer/post-and-parcels/claiming-compensation-from-royal-mail/) – working days, who claims, 80 days, 6 months
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – Monday to Saturday, bank holidays
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail status wordings
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail and UPS status wordings, UPS's hand-off to USPS
 - [Evri: How do I track my parcel?](https://www.evri.com/faqs/receiving-a-parcel/how-do-i-track-my-parcel) – first scan, delivery time
 - [Evri: What can I do if I haven't received my parcel?](https://www.evri.com/faqs/receiving-a-parcel/what-can-i-do-if-i-havent-received-my-parcel) – 7 days, via the sender
 - [DPD UK: Terms and conditions of carriage](https://www.dpd.co.uk/content/terms-and-conditions.jsp) – 14 days
-- [An Post: Receiving post and parcels](https://www.anpost.com/Post-Parcels/Receiving/Receiving-Post) – 5 and 15 days
 - [Canada Post: Why is my tracking status not updating?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-status-not-updating.page) – when it scans
 - [Canada Post: Missing packages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/missing-packages.page) – inquiries, claims
 - [Australia Post: Lost or late items](https://auspost.com.au/personal/receiving/parcel-deliveries/lost-late-items) – 5 and 10 business days
@@ -145,7 +140,6 @@ The parcel may not be scanned yet, the number may belong to another carrier, or 
 - [Australia Post: Taking longer than expected](https://auspost.com.au/help/parcel-tracking/taking-longer-than-expected) – Pending
 - [Australia Post: International missing or lost item](https://auspost.com.au/help/parcel-tracking/international-parcel/missing-or-lost-item) – customs
 - [DHL: Problems with tracking](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – 24 hours
-- [DHL: Tracking FAQ](https://www.dhl.com/de-en/home/tracking.html) – 24 to 48 hours
 - [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – static status, destination tracking
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – customs clearance
 - [DHL: Why are there delays?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – label problems

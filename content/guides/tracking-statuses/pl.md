@@ -4,7 +4,7 @@ description: „Przesyłka utworzona” (np. w InPost) znaczy, że przewoźnik n
 slug: statusy-przesylek-co-oznaczaja
 picture: Kręta trasa z odhaczonymi przystankami (etykieta z kodem kreskowym, magazyn, samolot), furgonetka na obecnym przystanku, dom jeszcze przed nią i pędzący Pip.
 published: 2026-10-09
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 Status przesyłki to ostatni skan przewoźnika w kilku słowach i zwykle niczego od Ciebie nie wymaga. „Przesyłka utworzona” albo „przygotowana przez nadawcę” znaczy, że przewoźnik nie ma jeszcze Twojej paczki, „w trasie” albo „w tranzycie”, że jest gdzieś między dwoma skanami, a „wydana do doręczenia”, że jedzie już do Ciebie. Działać musisz tylko w kilku sytuacjach: po nieudanej próbie doręczenia, gdy paczka czeka w automacie albo punkcie, gdy trzeba zapłacić należności celne i gdy status brzmi „doręczona”, a paczki nie ma.
@@ -26,16 +26,16 @@ Każda paczka mija te same przystanki, a paczka z zagranicy jeszcze trzy.
 
 ## Co oznaczają statusy InPost i FedEx?
 
-Te same etapy, inne słowa. [InPost](carrier:inpost) inaczej opisuje paczkę do automatu Paczkomat, a inaczej paczkę kurierską:
+Te same etapy, inne słowa. Peek odczytuje statusy [InPost](carrier:inpost) po angielsku i takie widzisz w tabeli:
 
-| Etap | InPost, paczka do automatu Paczkomat | InPost, paczka kurierska | FedEx |
-| --- | --- | --- | --- |
-| Etykieta gotowa | `Przygotowana przez Nadawcę.` | jak obok | `Utworzono etykietę` |
-| Nadana | `Paczka nadana w automacie Paczkomat.`, `Nadana w PaczkoPunkcie.` albo `Odebrana od Nadawcy.` | jak obok | `Mamy Twoją paczkę` |
-| W drodze | `Przyjęta w oddziale InPost.`, `W trasie.`, `Przyjęta w Sortowni.` | jak obok | `W drodze`, `W oddziale` |
-| Wydana do doręczenia | `Przekazano do doręczenia.` | `W doręczeniu.` | `Wydano do doręczenia` |
-| Gotowa do odbioru | `Umieszczona w automacie Paczkomat (odbiorczym).` | `Oczekuje na odbiór.` (w PaczkoPunkcie, po awizo kuriera) | – |
-| Doręczona | `Dostarczona.` | `Dostarczona.` | – |
+| Etap | InPost (tak czyta je Peek) | FedEx |
+| --- | --- | --- |
+| Etykieta gotowa | `Shipment Created` | `Utworzono etykietę` |
+| Nadana | `Sent through Parcel Locker/Parcel Point` albo `Collected by the Courier` (po polsku InPost pisze `Paczka nadana w automacie Paczkomat.`, `Nadana w PaczkoPunkcie.` albo `Odebrana od Nadawcy.`) | `Mamy Twoją paczkę` |
+| W drodze | `Accepted at the Logistics Centre`, `On the way`, `Dispatched from the Logistics Centre` | `W drodze`, `W oddziale` |
+| Wydana do doręczenia | `Handed over for delivery` (pod drzwi albo do automatu Paczkomat) | `Wydano do doręczenia` |
+| Gotowa do odbioru | `Ready for collection` | – |
+| Doręczona | `Delivered` | – |
 
 Polski słowniczek FedEx nie opisuje statusów „gotowa do odbioru” i „doręczona”, dlatego w tych wierszach jest kreska.
 
@@ -43,27 +43,24 @@ Polski słowniczek FedEx nie opisuje statusów „gotowa do odbioru” i „dor�
 
 Tylko tyle, że przewoźnik ma dane Twojej paczki, ale nie samą paczkę. U InPost `Przesyłka utworzona.` znaczy, że przesyłka „nie jest gotowa do nadania”, a `Przygotowana przez Nadawcę.`, że „wkrótce zostanie przekazana w nasze ręce”. [FedEx](carrier:fedex) przy `Utworzono etykietę` wyjaśnia, że nadawca dopiero przygotowuje paczkę do przekazania. Status zmienia się na `Mamy Twoją paczkę`, gdy kurier FedEx ją odbierze albo nadawca zostawi ją w oddziale.
 
-Ile może to trwać, InPost w opisach tych statusów nie podaje. Etykieta może jednak stracić ważność albo zostać anulowana: wtedy status zmienia się na `Anulowano etykietę.`, a InPost dopisuje, że przesyłka „nie została wysłana do Odbiorcy”.
+Jeśli pierwszy status długo się nie zmienia, napisz do sprzedawcy, nie do przewoźnika: paczka wciąż jest u sprzedawcy. Tak samo radzi [Cainiao](carrier:cainiao) przy zamówieniach z Chin bez danych śledzenia: zamówienie „jest przetwarzane”, a po szczegóły trzeba się zwrócić do sprzedawcy.
 
-Jeśli pierwszy status długo się nie zmienia albo etykietę anulowano, napisz do sprzedawcy, nie do przewoźnika: paczka wciąż jest u sprzedawcy. Tak samo radzi [Cainiao](carrier:cainiao) przy zamówieniach z Chin bez danych śledzenia: zamówienie „jest przetwarzane”, a po szczegóły trzeba się zwrócić do sprzedawcy.
-
-Paczka nadana w automacie też nie od razu rusza: `Paczka nadana w automacie Paczkomat.` znaczy, że czeka, aż doręczyciel wyjmie ją ze skrytki i zawiezie do oddziału InPost.
+Paczka nadana w automacie też nie od razu rusza: po `Sent through Parcel Locker/Parcel Point` przychodzi `Collected by the Courier`, gdy kurier odbierze ją z automatu (ten sam status pojawia się, gdy odbiera ją od nadawcy).
 
 ## Przesyłka w trasie albo w tranzycie: co to znaczy?
 
-Przewoźnik ma Twoją paczkę gdzieś w swojej sieci. Nie znaczy to, że akurat jedzie: według FedEx paczka `W drodze` jest „w jednym z naszych pojazdów lub placówek”. InPost opisuje tę część po kolei: `Przyjęta w oddziale InPost.` znaczy, że paczka dotarła do jednego z centrów logistycznych, `W trasie.` to przejazd między oddziałami, `Przyjęta w Sortowni.` to postój w Sortowni Głównej, gdzie „zatrzymuje się na chwilę większość przesyłek InPost”, a `Przyjęta w Oddziale Docelowym.` znaczy, że paczka jest już w Twoim mieście.
+Przewoźnik ma Twoją paczkę gdzieś w swojej sieci. Nie znaczy to, że akurat jedzie: według FedEx paczka `W drodze` jest „w jednym z naszych pojazdów lub placówek”. U InPost na tym etapie zobaczysz w Peek `Accepted at the Logistics Centre`, `Dispatched from the Logistics Centre` i `On the way`.
 
 Między skanami cisza jest normalna:
 
 - FedEx uważa ponad 24 godziny bez skanu za nic niezwykłego.
-- [UPS](carrier:ups) na długich trasach może nie zeskanować paczki aż do sortowni docelowej.
 - [Poczta Polska](carrier:poczta-polska) przy listach poleconych pokazuje tylko dzień nadania i dzień doręczenia, bez drogi przesyłki.
 
 ### Ile paczka jest w drodze?
 
 [DPD](carrier:dpd-pl) podaje, że krajową paczkę standardowo doręcza następnego dnia roboczego, a gwarantuje 3 dni robocze; wiele zależy od usługi wybranej przez nadawcę. Poczta Polska, operator wyznaczony do 2035 roku, ma w rozporządzeniu cele dla zwykłych paczek pocztowych: 93% paczek najszybszej kategorii ma dotrzeć w terminie D+3, a 98% pozostałych w terminie D+5, gdzie D to dzień nadania.
 
-Status `Przyjęta w Oddziale Docelowym.` to dobry znak: według InPost paczka „wkrótce trafi do rąk doręczyciela”. Cisza dłuższa niż czas podany przez przewoźnika? Zobacz, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
+Cisza dłuższa niż czas podany przez przewoźnika? Zobacz, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
 ## Paczka z zagranicy: „opuściła kraj nadania”, cło i przewoźnik w Polsce
 
@@ -75,12 +72,11 @@ Status `Przyjęta w Oddziale Docelowym.` to dobry znak: według InPost paczka �
 
 Zwykle tak, ale przewoźnicy ujmują to różnie:
 
-- **InPost, paczka do automatu Paczkomat:** `Przekazano do doręczenia.` znaczy, że przesyłka trafi do Ciebie „najpóźniej w najbliższym dniu roboczym”. Doręczyciele rozwożą paczki nawet do późnych godzin wieczornych, więc miej włączony telefon.
 - **InPost, paczka kurierska:** `W doręczeniu.` znaczy, że paczka jest „na ostatnim etapie podróży”, u kuriera.
 - **FedEx:** `Wydano do doręczenia` to paczka zeskanowana i umieszczona w pojeździe „w celu doręczenia tego dnia”, a przedział godzin pokazuje strona śledzenia.
 - **DPD:** po wydaniu paczki do doręczenia w aplikacji DPD Mobile i na tt.dpd.com.pl pojawia się numer telefonu kuriera. Gdy przy zamówieniu był wybór przedziału godzin, paczka przyjedzie w wybranym. W sobotę DPD doręcza tylko paczki z usługą Sobota.
 
-Dwa statusy łatwo pomylić. `Przyjęta w Oddziale Docelowym.` znaczy, że paczka jest w Twoim mieście, ale jeszcze nie u doręczyciela. A `W doręczeniu.` pojawia się u InPost także wtedy, gdy kurier Cię nie zastał: w opisie zobaczysz wtedy, że kolejna próba będzie w następnym dniu roboczym.
+Uwaga: `W doręczeniu.` pojawia się u InPost także wtedy, gdy kurier Cię nie zastał: w opisie zobaczysz wtedy, że kolejna próba będzie w następnym dniu roboczym.
 
 [Peek](/) sprawdza paczkę nawet co 2 minuty, gdy jest już na ostatnim odcinku, a powiadomienia możesz ograniczyć do dnia doręczenia (ustawienie „Tylko w dniu dostawy”).
 
@@ -90,31 +86,28 @@ Tu musisz coś zrobić: [nikt nie odebrał paczki albo kurier nie mógł jej dor
 
 :::steps
 - Przeczytaj powiadomienie | SMS, e-mail, aplikacja albo awizo w skrzynce: gdzie jest paczka i do kiedy czeka.
-- Sprawdź termin | Od 48 godzin w automacie Paczkomat do 14 dni na poczcie, liczonych w godzinach, dniach albo dniach roboczych.
+- Sprawdź termin | Od 48 godzin w automacie paczkowym do 14 dni na poczcie, liczonych w godzinach, dniach albo dniach roboczych.
 - Zmień dostawę | Tylko na stronie lub w aplikacji przewoźnika: inny dzień, adres, sąsiad, automat paczkowy albo punkt.
 - Odbierz paczkę | Kodem odbioru albo w aplikacji. W DPD z Twoim kodem odbierze ją też ktoś inny, jeśli nie trzeba nic podpisywać.
 :::
 
 | Przewoźnik | Po nieudanej próbie | Jak długo czeka |
 | --- | --- | --- |
-| InPost, kurier | Druga próba w następnym dniu roboczym, potem zwrot do nadawcy. Wcześniej możesz za darmo przekierować paczkę do automatu Paczkomat | – |
-| InPost, PaczkoPunkt | `Oczekuje na odbiór.`, czyli awizo w PaczkoPunkcie | 3 dni robocze |
-| InPost, automat Paczkomat | – | 48 godzin; dodatkowe 24 godziny za 7,99 zł w aplikacji InPost Mobile |
 | DPD | W DPD Mobile albo na mojapaczka.dpd.com.pl: inna data (do 3 dni roboczych), adres, sąsiad, safeplace albo DPD Pickup | Punkt i automat DPD Pickup: 2 pełne dni robocze, bez przedłużenia |
 | Poczta Polska, kurier Pocztex | SMS, e-mail albo powiadomienie w aplikacji (bez tych danych awizo w skrzynce), przypomnienie drugiego dnia | 7 dni na poczcie, potem zwrot |
 | Poczta Polska, paczka pocztowa | Awizo w skrzynce; w miastach powyżej 100 000 mieszkańców paczkę odbierzesz od następnego dnia | 14 dni, licząc od dnia po zostawieniu awizo |
 | Pocztex PUNKT i AUTOMAT | – | Placówka pocztowa 7 dni, punkt w sklepie (np. Żabka) 3 dni, automat 72 godziny, bez przedłużenia |
 | Mondial Relay w Polsce | – | Automat 48 godzin (72 w środku budynku), punkt 72 godziny |
 
-Przy paczce pocztowej cięższej niż 2 kg albo przesyłce z należnościami celnymi rozporządzenie pozwala Poczcie Polskiej od razu zostawić awizo, bez próby doręczenia do drzwi. [Przedłużenie w InPost](guide:uncollected-parcel) kupisz tylko przed końcem pierwotnych 48 godzin: żółty przycisk Przedłuż pojawia się w aplikacji 12 godzin przed terminem (24 godziny w punktach z ograniczonymi godzinami otwarcia).
+Przy paczce pocztowej cięższej niż 2 kg albo przesyłce z należnościami celnymi rozporządzenie pozwala Poczcie Polskiej od razu zostawić awizo, bez próby doręczenia do drzwi.
 
-> SMS o nieudanej próbie doręczenia z linkiem do „ustalenia nowego terminu” albo do dopłaty to znany schemat oszustwa. InPost zapewnia, że nigdy nie wysyła SMS-ów o dopłatach, a Pocztex, że nie wysyła linków do płatności i nie prosi SMS-em o dane karty. Zmieniaj dostawę tylko na stronie lub w aplikacji przewoźnika, a podejrzany SMS prześlij na numer 8080 (CERT Polska).
+> SMS o nieudanej próbie doręczenia z linkiem do „ustalenia nowego terminu” albo do dopłaty to znany schemat oszustwa. Pocztex zapewnia, że nie wysyła linków do płatności i nie prosi SMS-em o dane karty. Zmieniaj dostawę tylko na stronie lub w aplikacji przewoźnika, a podejrzany SMS prześlij na numer 8080 (CERT Polska).
 
 ## „Gotowa do odbioru”: gdzie jest paczka?
 
-W automacie paczkowym, punkcie albo na poczcie, do terminu z tabeli wyżej. InPost pisze `Umieszczona w automacie Paczkomat (odbiorczym).` i wysyła e-mail oraz powiadomienie w aplikacji InPost Mobile albo SMS z kodem odbioru. W PaczkoPunkcie zobaczysz `Czeka na odbiór w PaczkoPunkcie.` i prośbę o odbiór w ciągu 3 dni. Pocztex przysyła SMS z numerem przesyłki, adresem punktu, terminem odbioru i jednorazowym kodem odbioru. Paczkę z DPD Pickup odbierzesz w aplikacji DPD Mobile albo kodem z e-maila.
+W automacie paczkowym, punkcie albo na poczcie, do [terminu z tabeli wyżej](guide:uncollected-parcel). U InPost Peek pokazuje wtedy `Ready for collection`, a gdy paczka dalej czeka, `Reminder of a waiting parcel`. Pocztex przysyła SMS z numerem przesyłki, adresem punktu, terminem odbioru i jednorazowym kodem odbioru. Paczkę z DPD Pickup odbierzesz w aplikacji DPD Mobile albo kodem z e-maila.
 
-Gdy w wybranym automacie Paczkomat nie ma miejsca, kurier zostawia paczkę w automacie tymczasowym, najdalej 2 km w linii prostej od wybranego (`Paczka magazynowana w tymczasowym automacie Paczkomat`). Czeka tam 1 pełny dzień kalendarzowy, a jeśli jej nie odbierzesz, jedzie do pierwotnie wybranego automatu (`Paczka w drodze do pierwotnie wybranego automatu Paczkomat`).
+Gdy w wybranym automacie Paczkomat nie ma miejsca, paczka czeka w pobliskim automacie tymczasowym i odbierzesz ją tym samym kodem (`Stored Parcel - Temporary Parcel Locker`). Jeśli nie odbierzesz jej tam na czas, InPost zawozi ją do wybranego automatu (`The storage period has expired`).
 
 Nie idź po paczkę przed tym statusem albo powiadomieniem od przewoźnika: dopiero wtedy masz kod i znasz adres.
 
@@ -128,29 +121,21 @@ Nie zawsze. Znaczy, że kurier zeskanował ją jako wydaną albo zostawioną:
 
 Nie ma paczki? Sprawdź w pełnej historii śledzenia, gdzie i komu ją wydano, a potem przeczytaj poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
-## „Możliwe opóźnienie” albo „brak możliwości doręczenia”: czy paczka zaginęła?
+## „Opóźnienie” albo „wyjątek w doręczeniu”: czy paczka zaginęła?
 
-Nie. FedEx przy `Wyjątek w doręczeniu` pisze, że doręczenie opóźnia nieprzewidziane zdarzenie, na przykład opóźnienie w odprawie, zła pogoda, strajk albo nieobecność odbiorcy, i że „w tej chwili nie musisz podejmować żadnych działań”. `Opóźnienie` znaczy u FedEx, że paczka najprawdopodobniej nie dotrze przed szacowaną datą. InPost przy `Możliwe opóźnienie doręczenia.` przeprasza i zapowiada nowy termin w kolejnych wiadomościach.
+Nie. FedEx przy `Wyjątek w doręczeniu` pisze, że doręczenie opóźnia nieprzewidziane zdarzenie, na przykład opóźnienie w odprawie, zła pogoda, strajk albo nieobecność odbiorcy, i że „w tej chwili nie musisz podejmować żadnych działań”. `Opóźnienie` znaczy u FedEx, że paczka najprawdopodobniej nie dotrze przed szacowaną datą. U InPost `Possible delivery delay` to komunikat, a nie ruch paczki, więc Peek zostawia ją na dotychczasowym etapie.
 
-Przyjrzyj się bliżej, gdy chodzi o adres albo pieniądze. `Brak możliwości doręczenia.` u InPost dotyczy dnia dzisiejszego i zwykle podaje powód: błędne lub niepełne dane adresowe, nieznany odbiorca, odbiorca nie mieszka pod adresem, brak skrzynki pocztowej albo brak gotówki na pobranie. Jeśli zamiast powodu opis mówi, że paczka wyruszyła w drogę powrotną, to już zwrot. Jeśli adres jest zły, napisz od razu do sprzedawcy.
+Inaczej jest, gdy chodzi o adres: jeśli jest zły, napisz od razu do sprzedawcy.
 
 ## Zwrot do nadawcy: dlaczego paczka wraca?
 
-Przewoźnicy podają takie powody: paczka nieodebrana w terminie, błędny lub niepełny adres, odmowa przyjęcia, nieopłacone należności, uszkodzenie. Zwrot nie zawsze tak się nazywa:
+Przewoźnicy podają takie powody: paczka nieodebrana w terminie, odmowa przyjęcia, nieopłacone należności, uszkodzenie. Zwrot nie zawsze tak się nazywa: FedEx `W trakcie zwrotu do oddziału FedEx` znaczy, że odbiorca odmówił przyjęcia, na przykład z powodu uszkodzenia albo braku możliwości zapłaty; o dalszym losie paczki decyduje nadawca.
 
-- **InPost `Upłynął termin odbioru.`** Paczka wróci do nadawcy, ale możesz ją jeszcze odebrać, jeśli dotrzesz do automatu przed doręczycielem.
-- **InPost `Powrót do oddziału.`** Kurier drugi raz Cię nie zastał i paczka jest już w drodze powrotnej.
-- **FedEx `W trakcie zwrotu do oddziału FedEx`.** Odbiorca odmówił przyjęcia, na przykład z powodu uszkodzenia albo braku możliwości zapłaty; o dalszym losie paczki decyduje nadawca.
-
-Odmowa działa od razu: w Pocztex odmówiona paczka wraca do nadawcy niezwłocznie, a odmowa zapłaty należności za przesyłkę liczy się jak odmowa przyjęcia. Przy paczce spoza Unii Poczta Polska też przypomina, że możesz odmówić jej przyjęcia. Przesyłka nieodebrana z poczty w terminie [wraca do nadawcy](guide:returned-to-sender), a zwrot InPost trafia do miejsca nadania albo na adres zwrotny. Gdy paczka już wraca, poproś sprzedawcę o ponowną wysyłkę albo zwrot pieniędzy.
+Odmowa działa od razu: w Pocztex odmówiona paczka wraca do nadawcy niezwłocznie, a odmowa zapłaty należności za przesyłkę liczy się jak odmowa przyjęcia. Przy paczce spoza Unii Poczta Polska też przypomina, że możesz odmówić jej przyjęcia. Przesyłka nieodebrana z poczty w terminie [wraca do nadawcy](guide:returned-to-sender). Gdy paczka już wraca, poproś sprzedawcę o ponowną wysyłkę albo zwrot pieniędzy.
 
 :::sources
-- [InPost: statusy przesyłek (API ShipX)](https://api-shipx-pl.easypack24.net/v1/statuses?lang=pl_PL) – nazwy i opisy statusów
-- [InPost: Jak przedłużyć czas odbioru paczki z automatu Paczkomat?](https://inpost.pl/pomoc-jak-przedluzyc-termin-odbioru-paczki-w-paczkomacie) – 48 godzin, 24 godziny za 7,99 zł
-- [InPost: Co się stanie, jeśli nie odbiorę paczki od kuriera InPost?](https://inpost.pl/pomoc-co-sie-stanie-jesli-nie-odbiore-paczki-od-kuriera-inpost) – druga próba, przekierowanie
-- [InPost: Czym jest magazynowanie w automacie Paczkomat?](https://inpost.pl/pomoc-czym-jest-magazynowanie-w-automacie-paczkomat) – tymczasowy automat
-- [InPost: Co się stanie, jeżeli Odbiorca nie odbierze mojej paczki?](https://inpost.pl/pomoc-co-sie-stanie-jezeli-odbiorca-nie-odbierze-mojej-paczki) – dokąd wraca zwrot
-- [InPost: Uwaga, cyberzagrożenie](https://inpost.pl/aktualnosci-uwaga-cyberzagrozenie-0) – SMS-y o dopłatach
+- [InPost: statusy przesyłek (API ShipX)](https://api-shipx-pl.easypack24.net/v1/statuses?lang=pl_PL) – „Przesyłka utworzona”, „Przygotowana przez Nadawcę”, „Paczka nadana w automacie Paczkomat”, „Nadana w PaczkoPunkcie”, „Odebrana od Nadawcy”, „W doręczeniu”
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku), automat tymczasowy, możliwe opóźnienie
 - [DPD Polska: najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – czas doręczenia, numer kuriera, zmiana dostawy, DPD Pickup
 - [DPD Polska: Regulamin świadczenia usług w obrocie krajowym](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – doręczenie domownikowi
 - [Poczta Polska: Regulamin usługi Pocztex w obrocie krajowym dla klienta biznesowego od 24 sierpnia 2026](https://www.poczta-polska.pl/wp-content/uploads/2026/08/Regulamin-swiadczenia-uslugi-Pocztex-w-obrocie-krajowym-dla-klienta-biznesowego-obowiazuje-od-24.08.2026-r.pdf) – awizo kuriera, PUNKT, AUTOMAT, odmowa, dyspozycja telefoniczna
@@ -165,7 +150,6 @@ Odmowa działa od razu: w Pocztex odmówiona paczka wraca do nadawcy niezwłoczn
 - [KAS: Informacja dla odbiorców przesyłek pocztowych spoza Unii Europejskiej](https://www.mazowieckie.kas.gov.pl/mazowiecki-urzad-celno-skarbowy-w-warszawie/wiadomosci/komunikaty/-/asset_publisher/i3dT/content/informacja-dla-odbiorcow-przesylek-pocztowych-spoza-unii-europejskiej) – zgłoszenie celne każdej przesyłki, próg 150 euro, należności przy doręczeniu
 - [FedEx: Co oznacza mój status monitorowania?](https://www.fedex.com/pl-pl/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – statusy po polsku
 - [FedEx: Package not moving](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/package-not-moving.html) – 24 godziny bez skanu
-- [UPS: Understanding tracking status](https://www.ups.com/us/en/support/tracking-support/where-is-my-package/understanding-tracking-status) – długie trasy
-- [Mondial Relay: ile dni masz na odbiór paczki z automatu lub punktu (FAQ po francusku)](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – Polska 48 i 72 godziny
+- [Mondial Relay Belgia: ile dni masz na odbiór paczki z automatu lub punktu (FAQ po francusku)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – Polska 48 i 72 godziny
 - [Cainiao: teksty strony śledzenia po polsku](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – wysyłka ekonomiczna, brak danych
 :::

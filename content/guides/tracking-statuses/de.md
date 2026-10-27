@@ -4,7 +4,7 @@ description: Von „elektronisch angekündigt“ bis „zugestellt“: was die S
 slug: sendungsstatus-bedeutung-aller-meldungen
 picture: Eine kurvige Route mit abgehakten Stationen (Strichcode-Etikett, Depot, Flugzeug), ein Lieferwagen an der aktuellen Station, weiter vorn ein Haus und Pip, der eilig mitläuft.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Ein Sendungsstatus fasst den letzten Scan des Paketdienstes in ein paar Worten zusammen, und meistens musst du nichts tun. „Elektronisch angekündigt“ heißt, dass der Paketdienst dein Paket noch gar nicht hat, „in transit“ oder „unterwegs“, dass es irgendwo zwischen zwei Scans steckt, und „in Zustellung“, dass es heute im Zustellfahrzeug liegt. Gefragt bist du nur in wenigen Fällen: nach einem verpassten Zustellversuch, wenn ein Paket zur Abholung bereitliegt, wenn der Zoll etwas verlangt und wenn „zugestellt“ dasteht, aber nichts da ist.
@@ -41,7 +41,7 @@ Bei [Hermes](carrier:hermes-de) heißen die Schritte `Die Sendung wurde angekün
 
 ## „Elektronisch angekündigt“: Hat der Paketdienst mein Paket schon?
 
-Nein. Der Absender hat einen Versandaufkleber gedruckt und die Daten an den Paketdienst geschickt, mehr nicht. Bei [DHL](carrier:dhl) ist `Die Sendung wurde elektronisch angekündigt.` meist der allererste Status. Hermes hat bei `Die Sendung wurde angekündigt` „physisch noch kein Paket“ erhalten. Bei [UPS](carrier:ups) und [FedEx](carrier:fedex) heißt dieser Schritt `Etikett erstellt`; UPS ändert den Status erst, wenn es die Sendung tatsächlich hat. Noch früher zeigt DHL manchmal `Wir erwarten Ihre Sendungsdaten in Kürze.`: Bis der Absender die Daten schickt oder das Paket übergibt, können bis zu 24 Stunden vergehen.
+Nein. Der Absender hat einen Versandaufkleber gedruckt und die Daten an den Paketdienst geschickt, mehr nicht. Bei [DHL](carrier:dhl) ist `Die Sendung wurde elektronisch angekündigt.` meist der allererste Status. Hermes hat bei `Die Sendung wurde angekündigt` „physisch noch kein Paket“ erhalten. Bei [FedEx](carrier:fedex) heißt dieser Schritt `Etikett erstellt`, bei [UPS](carrier:ups) `Shipper created a label, UPS has not received the package yet.`: Der Versender hat ein Etikett erstellt, UPS hat das Paket noch nicht. Noch früher zeigt DHL manchmal `Wir erwarten Ihre Sendungsdaten in Kürze.`: Bis der Absender die Daten schickt oder das Paket übergibt, können bis zu 24 Stunden vergehen.
 
 Bei der [Österreichischen Post](carrier:austrian-post) steht die Ankündigung in der Regel nur wenige Werktage da. Ändert sie sich nicht, frag den Absender, nicht den Paketdienst: Das rät die Post selbst. Und hat Hermes das Paket übernommen, siehst du den neuen Status spätestens nach 5 Stunden.
 
@@ -53,7 +53,6 @@ Zwischen zwei Scans ist Funkstille normal:
 
 - **DHL:** Ein solcher Status kann Stunden oder Tage unverändert bleiben. Die Sendung sei trotzdem „permanent in Bewegung“.
 - **Hermes:** Der Status ändert sich nicht ständig, weil nicht alle Transportschritte aufgeführt sind.
-- **UPS:** Über große Entfernungen wird eine Sendung wahrscheinlich erst am Bestimmungsort wieder gescannt.
 - **Österreichische Post:** Bei `Sendung in Verteilung` durchläuft das Paket mehrere Stationen in Österreich. Die angezeigte Postleitzahl gehört zum aktuellen Logistikzentrum, nicht zu dir.
 
 ### Wie lange ist ein Paket unterwegs?
@@ -73,7 +72,6 @@ Meistens, ja:
 - **DHL:** Nach `Die Sendung wurde in das Zustellfahrzeug geladen.` kommt das Paket in der Regel noch am selben Tag. Eine voraussichtliche Uhrzeit nennt die Paketankündigung, wenn du bei DHL registriert bist.
 - **Hermes:** Bei `Die Sendung befindet sich in der Zustellung` ist der Bote unterwegs, [Montag bis Samstag zwischen 8 und 20 Uhr](guide:delivery-times).
 - **DPD:** Mit Predict siehst du am Zustelltag die genaue Lieferzeit.
-- **UPS:** Bei `Zustellung läuft` kommt das Paket an Wohnadressen in der Regel zwischen 9 und 19 Uhr, gelegentlich auch später.
 - **Österreichische Post:** Bei `Sendung in Zustellung` kommt die Sendung voraussichtlich heute.
 - **Schweizerische Post:** Bei `Verlad in Zustellfahrzeug` ist das Paket in Zustellung. Mit „Meine Sendungen“ bekommst du in immer mehr Gebieten der Schweiz am Liefertag Nachrichten und meist ein Zeitfenster von 40 bis 90 Minuten.
 
@@ -106,7 +104,7 @@ Ob der Code auf der Karte auch als Sendungsnummer taugt, steht unter [Sendungsnu
 
 ## „Zur Abholung bereit“: Wo liegt mein Paket?
 
-In einer Filiale, einem Paketshop, einer Packstation oder, in Österreich, einer Poststation, [bis die Frist aus der Tabelle oben abläuft](guide:uncollected-parcel). Bei der Österreichischen Post heißt das `Sendung abholbereit`: In der Post-Geschäftsstelle holst du es zu den Öffnungszeiten ab, aus der Poststation jederzeit mit dem Benachrichtigungscode. Bei `Sendung in Post Empfangsbox eingelangt` kannst du es aus der Post Empfangsbox nehmen. Die Schweizerische Post zeigt mit `Ankunft an der Abhol-/Zustellstelle`, ab wann das Paket in der Filiale bereitliegt. Bei UPS heißt es `Zustellung an einen UPS Access Point`.
+In einer Filiale, einem Paketshop, einer Packstation oder, in Österreich, einer Poststation, [bis die Frist aus der Tabelle oben abläuft](guide:uncollected-parcel). Bei der Österreichischen Post heißt das `Sendung abholbereit`: In der Post-Geschäftsstelle holst du es zu den Öffnungszeiten ab, aus der Poststation jederzeit mit dem Benachrichtigungscode. Bei `Sendung in Post Empfangsbox eingelangt` kannst du es aus der Post Empfangsbox nehmen. Die Schweizerische Post zeigt mit `Ankunft an der Abhol-/Zustellstelle`, ab wann das Paket in der Filiale bereitliegt. Bei UPS lautet der Scan `Delivered to UPS Access Point™`.
 
 Schau in die Sendungsverfolgung, bevor du losgehst. Bei DHL kann das Paket in Ausnahmefällen woanders landen als auf der Karte vermerkt. Der tatsächliche Ort steht in der Sendungsverfolgung. Stimmen beide überein, warst du vielleicht zu früh dran: Prüf die Uhrzeit auf der Karte. In der Schweiz lässt du dir das Paket mit einem Login bei „Meine Sendungen“ auch nochmals zustellen: kostenlos zum Deponieren oder an den Nachbarn, CHF 3.30 auf die Etage, CHF 7.00 am Samstag. Weiterleiten kostet CHF 8.00 von Montag bis Freitag.
 
@@ -115,13 +113,13 @@ Schau in die Sendungsverfolgung, bevor du losgehst. Bei DHL kann das Paket in Au
 Nicht immer. Es heißt, der Zusteller hat es als übergeben oder abgelegt gescannt:
 
 - **An jemand anderen.** Bei DHL steht im Feld „Empfänger“, wer angenommen hat: Original-Empfänger, Familienangehörige, Mitarbeiter, Nachbar, sonstige Person oder Briefkasten. Den Namen zeigt dir die Sendungsverfolgung, wenn du die Detailangaben öffnest und deine Postleitzahl eingibst. Kennst du den Nachbarn nicht, warte zwei Tage, ob er sich meldet, dann wende dich an den DHL-Kundenservice.
-- **An einem Ablageort.** Ein DHL-Ablageort muss auf deinem Grundstück liegen, wettergeschützt, für Dritte nicht einsehbar und für den Zusteller frei zugänglich sein. Muss niemand unterschreiben, stellt UPS das Paket an einem sicheren Ort ab, etwa am Seiteneingang oder bei der Garage. Ein Foto vom genauen Ort zeigt UPS auf ups.com/track. Bei der Schweizerischen Post heißt `Zugestellt im Ablagefach/Briefkasten`, dass das Paket im Ablagefach (Milchkasten) liegt.
+- **An einem Ablageort.** Ein DHL-Ablageort muss auf deinem Grundstück liegen, wettergeschützt, für Dritte nicht einsehbar und für den Zusteller frei zugänglich sein. Bei UPS kann die Sendungsverfolgung zeigen, wo das Paket abgestellt wurde (etwa `Left at: Front Door`). Bei der Schweizerischen Post heißt `Zugestellt im Ablagefach/Briefkasten`, dass das Paket im Ablagefach (Milchkasten) liegt.
 
 `Zugestellt am Schalter` meldet die Schweizerische Post, wenn du das Paket in einer Filiale oder PickPost-Stelle bekommen hast. Bei der Österreichischen Post steht `Sendung zugestellt` auch auf Rücksendungen: Dann hat der Absender sein Paket zurück. Und bei [Planzer](carrier:planzer) und [Quickpac](carrier:quickpac) heißt das englische `Shipped` zugestellt, nicht verschickt. Nichts da? Schau im vollständigen Verlauf nach einem Namen oder Ort, dann lies [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
 ## „Ausnahme“ oder „Verzögerung“: Ist mein Paket verloren?
 
-Meistens nicht. Bei UPS heißt `Ausnahme`: Die Sendung ist im UPS-Netz, aber ein unerwarteter Fehler kann den geplanten Zustelltermin ändern. Den Grund findest du bei UPS im Abschnitt „Sendungsfortschritt“. FedEx nennt bei `Zustellausnahme` als Beispiele Zollverzögerungen, schlechtes Wetter, Streiks und einen Empfänger, der nicht zu Hause war. Weder dort noch bei `Verspätet` musst du laut FedEx etwas tun.
+Meistens nicht. `Exception` ist bei UPS der allgemeine Status und kann eine bloße Verspätung bedeuten: Entscheidend ist der Scan darunter. FedEx nennt bei `Zustellausnahme` als Beispiele Zollverzögerungen, schlechtes Wetter, Streiks und einen Empfänger, der nicht zu Hause war. Weder dort noch bei `Verspätet` musst du laut FedEx etwas tun.
 
 Auch DHL und die Post sprechen meist von kurzen Verzögerungen. `Verzögerung wegen Fehlverteilung` heißt bei der Österreichischen Post: kleine Verspätung, du musst dich um nichts kümmern. Eine `Fehlleitung` bei der Schweizerischen Post, etwa wegen einer falschen Postleitzahl, hat „nicht zwingend eine Verspätung zur Folge“. Bei DHL kostet `Die Sendung wurde im Paketzentrum manuell nachbearbeitet.` (unleserliches oder abgelöstes Etikett, unvollständige Adresse, offene Verpackung) 1 bis 2 Tage, `Die Sendung wurde falsch vorsortiert …` bis zu 5 Tage. Taucht `Die Sendung ist in der Region des Empfängers angekommen …` mehrmals auf, wurde das Paket vermutlich ebenfalls von Hand nachbearbeitet: wieder 1 bis 2 Tage.
 
@@ -149,7 +147,6 @@ Rechne nicht damit, sie aufzuhalten. Bei internationalen Sendungen schreibt DHL:
 - [DPD: Wie lange dauert der Versand in Deutschland?](https://www.dpd.com/de/de/faq/wie-lange-dauert-der-versand-in-deutschland/) – 1 bis 2 Werktage, Predict
 - [DPD: Was passiert, wenn ich für eine Zustellung nicht zu Hause bin?](https://www.dpd.com/de/de/faq/was-passiert-wenn-ich-fuer-eine-zustellung-nicht-zu-hause-bin/) – Paketinfokarte, umleiten
 - [DPD: Wie lange habe ich Zeit, mein Paket im Paketshop abzuholen?](https://www.dpd.com/de/de/faq/wie-lange-habe-ich-zeit-mein-paket-im-paketshop-abzuholen/) – 7 und 3 Kalendertage
-- [UPS: Pakettracking, Status verstehen](https://www.ups.com/de/de/support/tracking-support/where-is-my-package/understanding-tracking-status) – Etikett erstellt, große Entfernungen, Zustellzeiten, Ablageort, Ausnahme
 - [FedEx: Was bedeutet mein Sendungsverfolgungsstatus?](https://www.fedex.com/de-de/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – Etikett erstellt, Auf dem Weg, Zustellausnahme, Verspätet
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Status, Abholfrist, Poststation, Empfangsbox, Rücksendung
 - [Schweizerische Post: Ereignisse „Sendungen verfolgen“](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Status, Zoll, Fehlleitung, Rücksendegründe
@@ -157,4 +154,5 @@ Rechne nicht damit, sie aufzuhalten. Bei internationalen Sendungen schreibt DHL:
 - [Schweizerische Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – 7 und 15 Tage, Verlängerung, Preise
 - [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Meine Sendungen, Zeitfenster von 40 bis 90 Minuten
 - [Schweizerische Post: FAQ Import, Zoll und MWST](https://www.post.ch/de/geschaeftsloesungen/export-import-und-verzollung/import/faq-import-zoll-und-mwst) – drei bis vier Arbeitstage bei vollständigen Angaben
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – UPS-Scans, die Peek liest: Etikett erstellt, Access Point, „Left at“, „Exception“
 :::

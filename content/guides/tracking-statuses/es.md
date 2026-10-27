@@ -4,7 +4,7 @@ description: «Alta en la unidad de reparto» no quiere decir que vaya en la fur
 slug: estados-de-envio-significado
 picture: Una ruta con curvas y paradas ya completadas (etiqueta, almacén, avión), una furgoneta en la parada actual, una casa más adelante y Pip corriendo.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Un estado de seguimiento es el último escaneo del transportista resumido en pocas palabras, y casi ninguno te pide nada. «Pre-admisión» o «Etiqueta creada» quieren decir que el transportista aún no tiene tu paquete; «En tránsito», que está en algún punto entre dos escaneos, y «En reparto», que va hoy con el repartidor. Solo unos pocos te necesitan: un intento de entrega fallido, un paquete que te espera en una oficina o un punto de recogida, un pago de aduanas y un «Entregado» cuando a ti no te ha llegado nada.
@@ -43,18 +43,17 @@ Las mismas fases, con otras palabras:
 
 No: la tienda ha impreso una etiqueta y ha mandado los datos, nada más. Correos explica que `Pre-admisión` se genera cuando se prerregistra el envío: ya existe el número, pero el paquete está «pendiente de ser entregado a Correos». En el seguimiento también puede salir como `Prerregistrado`. [GLS](carrier:gls-es) dice lo mismo de `Etiqueta creada`: tiene el prerregistro, pero el paquete todavía no está en su red ni en ninguna de sus instalaciones.
 
-En SEUR pueden pasar hasta 48 horas desde que recibe el paquete hasta que ves su estado en la web. Y también ocurre al revés: si a Correos le llega un paquete sin prerregistro, lo deja «estacionado» y lo entrega cuando la empresa que lo envía le pasa los datos.
+También ocurre al revés: si a Correos le llega un paquete sin prerregistro, lo deja «estacionado» y lo entrega cuando la empresa que lo envía le pasa los datos.
 
-Si lleva varios días sin cambiar, pregunta a la tienda, no al transportista. GLS no puede darte plazos hasta tener el paquete físicamente, y tanto GLS como SEUR te dicen que hables con el remitente.
+Si lleva varios días sin cambiar, pregunta a la tienda, no al transportista. GLS no puede darte plazos hasta tener el paquete físicamente, y te dice que hables con el remitente.
 
 ## ¿Qué significa «en tránsito»?
 
-Que el transportista tiene tu paquete en algún punto de su red. No quiere decir que se esté moviendo ahora mismo: el `En tránsito` de SEUR puede significar que va camino de la delegación que reparte en tu zona o que ya está allí, esperando a salir a reparto. Tampoco es «en reparto»: ese estado solo sale cuando el paquete ya va con el repartidor. En Correos, `En tránsito` aparece al salir del centro logístico de origen y otra vez cuando va hacia la unidad que lo entregará; entre medias, `Clasificado` quiere decir que lo han clasificado y asignado a un transporte.
+Que el transportista tiene tu paquete en algún punto de su red. No quiere decir que se esté moviendo ahora mismo, ni que ya vaya con el repartidor: para eso está «en reparto». En SEUR, `EL ENVÍO ESTÁ EN TRÁNSITO. PRÓXIMAMENTE LLEGARÁ A LAS INSTALACIONES DE DESTINO.` indica que aún no ha llegado a las instalaciones de destino. En Correos, `En tránsito` aparece al salir del centro logístico de origen y otra vez cuando va hacia la unidad que lo entregará; entre medias, `Clasificado` quiere decir que lo han clasificado y asignado a un transporte.
 
 Entre centros, el silencio (y algún rodeo) es normal:
 
 - GLS explica que usa varios centros de distribución, así que la ruta no siempre es directa.
-- [UPS](carrier:ups) avisa de que, en trayectos largos, es probable que no lo vuelva a escanear hasta el centro de destino.
 - Para [FedEx](carrier:fedex), pasar más de 24 horas sin un escaneo no es raro.
 
 ### ¿Cuánto tarda un paquete en tránsito?
@@ -73,8 +72,6 @@ Normalmente, sí:
 
 - **Correos:** `En reparto` quiere decir que el repartidor ya está haciendo su ruta. Si te llega un SMS de entrega en domicilio, Correos cuenta con entregarlo entre 24 y 72 horas después, según el producto.
 - **GLS:** reparte de lunes a viernes, más o menos de 9 a 20 h; los sábados, antes de mediodía, solo con Express Saturday. Con `En reparto`, su seguimiento muestra una franja estimada, y cuando quedan menos de 10 paradas se activa el seguimiento en tiempo real.
-- **SEUR:** con SEUR Predict te avisa el mismo día, por email o SMS, de una franja estimada de 1 hora, y todavía puedes cambiar la fecha o la dirección, o pedir que lo dejen en una tienda SEUR Pickup.
-- **UPS:** salvo que el remitente haya contratado una entrega con horario definido, reparte en domicilios normalmente entre las 9:00 y las 19:00, y a veces más tarde.
 
 Ojo con un estado que despista: en una entrega a domicilio, `Alta en la unidad de reparto` significa que el paquete ha llegado a la unidad de Correos que lo entregará «en cuanto sea posible», no que ya vaya en la furgoneta.
 
@@ -94,7 +91,6 @@ Este sí te necesita: [no había nadie para recibir el paquete](guide:missed-del
 | Transportista | Tras un intento fallido | Tiempo para recogerlo |
 | --- | --- | --- |
 | Correos | Aviso de llegada en el buzón, o SMS o email. Si el envío incluye dos intentos, el segundo es en 24 horas; si no hay segundo o también falla, va a una oficina | 15 días en la oficina si te avisa por SMS, desde el día siguiente al mensaje; con aviso en papel, el plazo que indica el aviso. 5 días naturales en un Citypaq |
-| SEUR | Normalmente, a la tienda SEUR Pickup más cercana | 7 días en tienda Pickup y 5 en locker, desde el aviso |
 | GLS | Con EconomyParcel, un solo intento y luego al Parcel Shop más cercano; según el servicio, un segundo intento | Si el segundo falla, se queda en la agencia y vuelve al remitente 7 días naturales después del primer intento |
 | InPost | A domicilio, su agencia de reparto se pone en contacto contigo para concertar una nueva cita | 5 días naturales en Locker y Punto Pack (envíos nacionales) |
 
@@ -102,16 +98,16 @@ Este sí te necesita: [no había nadie para recibir el paquete](guide:missed-del
 
 ## «A disposición del destinatario» o «para recoger»: ¿dónde está?
 
-En una oficina, una tienda o un locker, [hasta que acabe el plazo](guide:uncollected-parcel) de la tabla de arriba. Correos usa `A disposición del destinatario` tanto para la oficina como para la taquilla Citypaq; GLS, `Depositado en Parcel Shop`. InPost te manda un email o un SMS cuando el paquete llega al Punto Pack o al Locker, y SEUR te manda por email o SMS el PIN del locker en cuanto lo deposita.
+En una oficina, una tienda o un locker, [hasta que acabe el plazo](guide:uncollected-parcel) de la tabla de arriba. Correos usa `A disposición del destinatario` tanto para la oficina como para la taquilla Citypaq; GLS, `Depositado en Parcel Shop`. InPost te manda un email o un SMS cuando el paquete llega al Punto Pack o al Locker.
 
-Espera a ese estado o al aviso antes de ir: en Correos, el envío no está en la oficina hasta el día siguiente al SMS, o hasta el siguiente día laborable si te dejaron el aviso en papel. En un Punto Pack de InPost puedes enseñar el DNI, el pasaporte o el carnet de conducir. En SEUR puede ir otra persona si le pasas la notificación con el código QR o el PIN.
+Espera a ese estado o al aviso antes de ir: en Correos, el envío no está en la oficina hasta el día siguiente al SMS, o hasta el siguiente día laborable si te dejaron el aviso en papel. En un Punto Pack de InPost puedes enseñar el DNI, el pasaporte o el carnet de conducir.
 
 ## ¿«Entregado» significa que lo tienes tú?
 
 No siempre. Significa que el repartidor lo ha escaneado como entregado:
 
-- **A otra persona.** SEUR avisa de que puede haberlo dado a otra persona en la dirección que indicó el remitente, y su seguimiento tiene hasta un estado para eso: `EL ENVÍO HA SIDO ENTREGADO A UN VECINO.` Si nadie lo tiene, su teléfono gratuito de Atención al Consumidor es el 800 00 95 84.
-- **En un lugar seguro.** Si no hacía falta firma, el repartidor de UPS lo deja en un sitio resguardado, como una puerta lateral o una zona de aparcamiento, y en ups.com/track puedes ver una foto del sitio exacto.
+- **A otra persona.** El seguimiento de SEUR tiene hasta un estado para eso: `EL ENVÍO HA SIDO ENTREGADO A UN VECINO.`
+- **En un lugar seguro.** La página de [UPS](carrier:ups) puede mostrar dónde se dejó el paquete (`Left at: Front Door`, por ejemplo).
 - **En una tienda.** Si elegiste recogerlo en un Parcel Shop de GLS, GLS te dice que vayas cuando el seguimiento marque `Depositado en Parcel Shop` o `Entregado`: ahí, «entregado» quiere decir que está en la tienda, no en tus manos. Lleva un documento oficial.
 
 ¿No está? Revisa el historial completo por si da un nombre o un lugar, y después mira [paquete entregado pero no recibido](guide:delivered-not-received).
@@ -120,7 +116,7 @@ No siempre. Significa que el repartidor lo ha escaneado como entregado:
 
 No. Correos llama «envío estacionado» al que tiene una incidencia que impide entregarlo: un paquete roto o dañado, datos del destinatario insuficientes, una dirección incorrecta o desconocida, que nadie se haga cargo o que falte el prerregistro. Lo guarda 5 días naturales a la espera de que se corrijan los datos, y puedes corregirlos tú en «Gestión de estacionados» con el [número de envío](guide:find-tracking-number) y el PIN que te manda por SMS o email. Si no tienes PIN, habla con la empresa que te lo envía: ella se encarga del trámite.
 
-En SEUR, `EL ENVÍO HA SUFRIDO UN RETRASO Y ES POSIBLE QUE SE DEMORE LA ENTREGA…` avisa de un retraso, no de una pérdida. UPS usa `Excepción` cuando algo inesperado puede cambiar la fecha de entrega, y da el motivo en «Progreso del envío», dentro del detalle del seguimiento.
+En SEUR, `EL ENVÍO HA SUFRIDO UN RETRASO Y ES POSIBLE QUE SE DEMORE LA ENTREGA…` avisa de un retraso, no de una pérdida. `Exception` es el estado genérico de UPS y puede indicar un simple retraso: lo que cuenta es el escaneo de debajo.
 
 Eso sí, fíjate bien si el motivo es la dirección o un pago. En Correos, corrige un estacionado dentro de esos 5 días naturales; si te lo envía un particular, es él quien tiene que llamar a Atención al Cliente antes de que pasen.
 
@@ -132,7 +128,7 @@ Los motivos que dan los transportistas: no lo recogiste a tiempo, la dirección 
 - **GLS:** si el segundo intento falla, el paquete se queda en la agencia y vuelve 7 días naturales después del primer intento.
 - **InPost:** pasados los 5 días en el Locker o el Punto Pack, vuelve al remitente (tienda online, vendedor o particular).
 
-Si ya [va de vuelta](guide:returned-to-sender), habla con la tienda: SEUR, por ejemplo, te dice que contactes con el remitente para cualquier gestión. Pídele que te lo vuelva a enviar o que te devuelva el dinero.
+Si ya [va de vuelta](guide:returned-to-sender), habla con la tienda: pídele que te lo vuelva a enviar o que te devuelva el dinero.
 
 :::sources
 - [Correos: Sigue tu paquete con el Localizador de Envíos](https://www.correos.es/es/es/actualidad/2023/sigue-tu-paquete-en-tiempo-real-con-nuestra-herramienta-de-local) – estados y fases
@@ -144,10 +140,9 @@ Si ya [va de vuelta](guide:returned-to-sender), habla con la tienda: SEUR, por e
 - [Correos: Qué es el phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – nunca pide datos ni pagos por SMS o email
 - [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – Prerregistrado, oficina de cambio, tramitación aduanera, Intento de entrega. Ausente, Finalizado plazo retirada
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – estados, plazos, horario, intentos, 7 días, Parcel Shop
-- [SEUR: Ayuda](https://www.seur.com/miseur/ayuda) – En tránsito, 48 horas, Pickup, 7 y 5 días, Predict, QR o PIN, entregado a otra persona, devoluciones
-- [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – textos en mayúsculas, ausencia, retraso, entregado a un vecino
+- [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – textos en mayúsculas, en tránsito, ausencia, retraso, entregado a un vecino
 - [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – 3 días laborables, 5 días naturales, avisos, documentos, ausencia
-- [UPS: Descripción del estado de seguimiento](https://www.ups.com/es/es/support/tracking-support/where-is-my-package/understanding-tracking-status) – trayectos largos, horario de reparto, lugar seguro y foto, Excepción
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – escaneos de UPS que lee Peek: «Left at», «Exception»
 - [FedEx: Package not moving](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/package-not-moving.html) – 24 horas sin escaneos
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – contenedores, aduana, seguimiento del transportista de destino
 :::

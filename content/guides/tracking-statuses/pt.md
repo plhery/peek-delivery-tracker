@@ -4,7 +4,7 @@ description: «Aguarda entrada nos CTT», «Em trânsito», «Em entrega», «En
 slug: estados-da-encomenda-significado
 picture: Um percurso sinuoso com paragens marcadas com um visto (etiqueta, armazém, avião), uma carrinha na paragem atual, uma casa mais à frente e o Pip a correr.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Um estado de seguimento é a última leitura da transportadora resumida em poucas palavras, e a maioria não te pede nada. `Aguarda entrada nos CTT` quer dizer que os [CTT](carrier:ctt) ainda não têm a tua encomenda, `Em trânsito` que está algures entre duas leituras, e `Em entrega` que já vai no percurso de hoje. Só alguns precisam de ti: uma entrega não conseguida, uma encomenda à espera de ser levantada, taxas da alfândega para pagar e um «Entregue» sem nada à porta.
@@ -30,19 +30,19 @@ As mesmas etapas, com outras palavras:
 
 | Etapa | CTT | InPost | UPS |
 | --- | --- | --- | --- |
-| Etiqueta criada | `Aguarda entrada nos CTT` | `Preparado pelo remetente` | `Etiqueta Criada` |
-| Aceite | `Aceite` | `Recolhido pela InPost` | `Enviado/A Caminho` |
-| Em trânsito | `Em trânsito` | `Em trânsito` | `Enviado/A Caminho` |
-| Perto do destino | `Em trânsito` (repete-se) | `Chegada ao centro local de distribuição` | `Enviado/A Caminho`, até sair para entrega |
-| Em entrega | `Em entrega` | Não vem na lista da [InPost](carrier:inpost) | `Saiu para Entrega` |
-| Para levantar | `No ponto de entrega` (o aviso diz onde e até quando) | `Colocada no Locker ou Ponto Pack` | `Entregue a um local UPS Access Point` |
-| Entregue | `Entregue` | `Entregue` | `Entregue` |
+| Etiqueta criada | `Aguarda entrada nos CTT` | `Preparado pelo remetente` | `Shipper created a label, UPS has not received the package yet.` |
+| Aceite | `Aceite` | `Recolhido pela InPost` | `Drop-Off`, `Pickup Scan` |
+| Em trânsito | `Em trânsito` | `Em trânsito` | `Arrived at Facility`, `Departed from Facility` |
+| Perto do destino | `Em trânsito` (repete-se) | `Chegada ao centro local de distribuição` | – |
+| Em entrega | `Em entrega` | Não vem na lista da [InPost](carrier:inpost) | `Loaded on Delivery Vehicle`, `Out For Delivery Today` |
+| Para levantar | `No ponto de entrega` (o aviso diz onde e até quando) | `Colocada no Locker ou Ponto Pack` | `Delivered to UPS Access Point™` |
+| Entregue | `Entregue` | `Entregue` | `DELIVERED` |
 
-Os estados em espanhol da [Correos Express](carrier:correos-express) e da [NACEX](carrier:nacex) estão traduzidos nas páginas delas. Os da [Cainiao](carrier:cainiao) e da [YunExpress](carrier:yunexpress), em inglês, também.
+As leituras da UPS estão em inglês, tal como o Peek as lê. Os estados em espanhol da [Correos Express](carrier:correos-express) e da [NACEX](carrier:nacex) estão traduzidos nas páginas delas. Os da [Cainiao](carrier:cainiao) e da [YunExpress](carrier:yunexpress), em inglês, também.
 
 ## «Aguarda entrada nos CTT»: a transportadora já tem a encomenda?
 
-Não: a loja imprimiu uma etiqueta e mandou os dados, mais nada. Os CTT explicam que receberam informação eletrónica sobre o envio, que este «pode ainda estar a ser preparado pelo expedidor» e que ainda não entrou na rede dos CTT. A InPost diz o mesmo de `Preparado pelo remetente`: a etiqueta existe, mas a encomenda ainda não saiu, e é normal ficar assim algumas horas. Na [UPS](carrier:ups), `Etiqueta Criada` só muda quando o envio já anda na rede da UPS, e na FedEx `Etiqueta criada` quer dizer que o expedidor ainda está a preparar o volume.
+Não: a loja imprimiu uma etiqueta e mandou os dados, mais nada. Os CTT explicam que receberam informação eletrónica sobre o envio, que este «pode ainda estar a ser preparado pelo expedidor» e que ainda não entrou na rede dos CTT. A InPost diz o mesmo de `Preparado pelo remetente`: a etiqueta existe, mas a encomenda ainda não saiu, e é normal ficar assim algumas horas. Na [UPS](carrier:ups), a primeira leitura diz que o remetente criou a etiqueta e que a UPS ainda não tem a encomenda, e na FedEx `Etiqueta criada` quer dizer que o expedidor ainda está a preparar o volume.
 
 Os CTT não dão um prazo para este estado. Se nada mudar, fala com a loja, não com a transportadora: a encomenda ainda está do lado de quem a vendeu.
 
@@ -53,7 +53,6 @@ A transportadora já tem a encomenda, algures na rede dela. Isso não quer dizer
 Entre centros, o silêncio é normal:
 
 - A FedEx diz que não é invulgar passar mais de 24 horas sem uma leitura.
-- Na UPS, um envio que vai para longe pode não voltar a ser lido antes do centro operacional de destino.
 - A GLS avisa que trabalha com centros de distribuição, por isso o percurso nem sempre parece direto.
 
 ### Quanto tempo fica uma encomenda em trânsito?
@@ -72,7 +71,6 @@ Normalmente, sim:
 
 - **CTT:** `Em entrega` quer dizer que o carteiro ou distribuidor já está no percurso diário para entregar o envio.
 - **FedEx:** `Em distribuição` quer dizer que o volume foi lido e posto num veículo para ser entregue nesse dia; a página de rastreio mostra uma janela de entrega estimada.
-- **UPS:** com `Saiu para Entrega`, a entrega em casa é feita normalmente entre as 9h e as 19h (por vezes mais tarde), a não ser que o remetente tenha escolhido uma entrega com hora definida.
 - **DPD:** com o serviço Predict, avisa-te no dia da entrega da hora exata a que a encomenda chega, e nesse dia podes segui-la em tempo real.
 - **GLS:** entrega de segunda a sexta-feira, em horário comercial.
 
@@ -104,7 +102,7 @@ Este já te pede alguma coisa: [não estava ninguém para receber a encomenda](g
 
 ## Encomenda para levantar: onde está e quando posso ir?
 
-Está numa Loja CTT, num Ponto CTT, num Agente Payshop, num cacifo ou no ponto de recolha de outra transportadora, [até ao fim do prazo](guide:uncollected-parcel) da tabela acima. Nos CTT, o seguimento mostra `No ponto de entrega`; a InPost escreve `Colocada no Locker ou Ponto Pack` e, perto do fim, `Último aviso: falta pouco para a recolha`. Na UPS, `Entregue a um local UPS Access Point` quer dizer que está pronta para a levantares lá.
+Está numa Loja CTT, num Ponto CTT, num Agente Payshop, num cacifo ou no ponto de recolha de outra transportadora, [até ao fim do prazo](guide:uncollected-parcel) da tabela acima. Nos CTT, o seguimento mostra `No ponto de entrega`; a InPost escreve `Colocada no Locker ou Ponto Pack` e, perto do fim, `Último aviso: falta pouco para a recolha`. Na UPS, `Delivered to UPS Access Point™` quer dizer que está pronta para a levantares lá.
 
 Espera pelo aviso antes de ir: os CTT pedem-te que confirmes primeiro que o envio já está disponível. O SMS ou e-mail dos CTT só chega quando o envio já está à tua espera, e diz o local e a data-limite; um aviso em papel indica a partir de que dia e hora podes levantar. A InPost avisa por e-mail ou SMS quando a encomenda chega ao ponto, e a DPD manda um SMS quando chega ao ponto Pickup e outro 2 dias antes de o prazo acabar.
 
@@ -114,14 +112,14 @@ Nem sempre. Quer dizer que o estafeta a registou como entregue ou deixada:
 
 - **Com alguém na morada.** Nos CTT, uma Encomenda Postal com Entrega ao Domicílio ou uma Encomenda Expresso é entregue em mão a quem estiver na morada, desde que não seja menor.
 - **Com um vizinho.** Se não estiveres em casa, a GLS tenta primeiro um vizinho, que assina por ti.
-- **Num sítio seguro.** Na UPS, sem assinatura, o estafeta deixa o envio num local seguro, como o alpendre, uma porta lateral ou a garagem, e ups.com/track pode mostrar uma fotografia do sítio exato.
+- **Num sítio seguro.** Na UPS, a página de seguimento pode mostrar onde a encomenda ficou (`Left at: Front Door`, por exemplo).
 - **No ponto de recolha.** Na InPost, `Entregue` quer dizer que a encomenda foi entregue ou levantada.
 
 Nada à porta? Procura no seguimento completo um nome, uma fotografia ou um local. A DPD pede-te que uses o formulário de contacto dela. Depois, lê [encomenda entregue mas não recebida](guide:delivered-not-received).
 
 ## «Em espera», exceção ou atraso: a encomenda perdeu-se?
 
-Não. Nos CTT, `Em espera` quer dizer que o envio aguarda instruções ou o dia agendado para a entrega, e que podem contactar-te se precisarem de ti. Na FedEx, `Exceção de entrega` é um imprevisto que está a atrasar a entrega (a alfândega, o mau tempo, uma greve ou ninguém em casa, por exemplo), e não te pede nada. Na UPS, `Exceção` quer dizer que um erro inesperado pode mudar a data de entrega: a razão aparece em Progresso do Envio e, se a data mudar, o estado mostra a nova.
+Não. Nos CTT, `Em espera` quer dizer que o envio aguarda instruções ou o dia agendado para a entrega, e que podem contactar-te se precisarem de ti. Na FedEx, `Exceção de entrega` é um imprevisto que está a atrasar a entrega (a alfândega, o mau tempo, uma greve ou ninguém em casa, por exemplo), e não te pede nada. Na UPS, `Exception` é o estado genérico e pode indicar só um atraso: o que conta é a leitura por baixo.
 
 Na FedEx, `Atrasado` quer dizer que a encomenda provavelmente não chega antes da data ou hora estimada.
 
@@ -157,6 +155,6 @@ Não contes travá-la a meio. Os CTT mandam-te falar com o remetente para ver se
 - [DPD Portugal: Perguntas frequentes, receber encomendas](https://www.dpd.com/pt/pt/ajuda/faq/receber-encomendas/) – aviso de passagem, redirecionar, entregue mas não recebida
 - [FedEx Portugal: O que significa o meu estado de rastreio?](https://www.fedex.com/pt-pt/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – estados da FedEx em português
 - [FedEx: Package not moving](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/package-not-moving.html) – 24 horas sem leitura
-- [UPS Portugal: Compreender o estado de seguimento](https://www.ups.com/pt/pt/support/tracking-support/where-is-my-package/understanding-tracking-status) – estados, horário, local seguro, exceção
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – leituras da UPS que o Peek lê, em inglês: etiqueta, aceitação, trânsito, entrega, Access Point, «Left at», «Exception»
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – seguimento da transportadora de destino
 :::

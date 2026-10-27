@@ -4,7 +4,7 @@ description: Cosa vuol dire ogni stato del tracking, da «etichetta creata» a �
 slug: stati-spedizione-cosa-significano
 picture: Un percorso tortuoso con tappe spuntate (etichetta, deposito, aereo), un furgone alla tappa attuale, una casa ancora davanti e Pip che corre.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Uno stato della spedizione è l'ultima scansione del corriere riassunta in poche parole, e quasi sempre non ti chiede niente. «Etichetta creata» vuol dire che il corriere il pacco non ce l'ha ancora, «in transito» che è da qualche parte tra due scansioni, «in consegna» che è sul furgone di oggi. Solo pochi stati ti chiedono di fare qualcosa: una mancata consegna, un pacco in giacenza da ritirare, qualcosa da pagare in dogana e un «consegnato» quando alla porta non c'è niente.
@@ -30,18 +30,18 @@ Stesse tappe, parole diverse:
 
 | Fase | Poste Italiane | UPS | La Posta (Svizzera) |
 | --- | --- | --- | --- |
-| Etichetta creata | `Tracciatura non disponibile` (codice appena creato) | `Etichetta creata` | `Notifica dell'invio da parte dello speditore (inoltro dei dati)` |
-| Preso in carico | `Presa in carico` | `Spedito/In transito` | `Momento dell'impostazione del proprio invio` |
-| In transito | `In transito` | `Spedito/In transito` | `L'invio è stato spartito e inoltrato` |
-| In consegna | `In consegna` | `In consegna` | `L'invio è stato spartito per il recapito` (smistato verso la tua località) |
-| Pronto per il ritiro | Può restare `In consegna` | `Consegnato a una sede UPS Access Point` | `Arrivo al punto di ritiro / ufficio di recapito` |
-| Consegnato | `la spedizione è stata consegnata` | `Consegnato` | `Recapitato da` |
+| Etichetta creata | `Tracciatura non disponibile` (codice appena creato) | `Shipper created a label, UPS has not received the package yet.` | `Notifica dell'invio da parte dello speditore (inoltro dei dati)` |
+| Preso in carico | `Presa in carico` | `Drop-Off`, `Pickup Scan` | `Momento dell'impostazione del proprio invio` |
+| In transito | `In transito` | `Arrived at Facility`, `Departed from Facility` | `L'invio è stato spartito e inoltrato` |
+| In consegna | `In consegna` | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | `L'invio è stato spartito per il recapito` (smistato verso la tua località) |
+| Pronto per il ritiro | Può restare `In consegna` | `Delivered to UPS Access Point™` | `Arrivo al punto di ritiro / ufficio di recapito` |
+| Consegnato | `la spedizione è stata consegnata` | `DELIVERED` | `Recapitato da` |
 
-In Svizzera, nel tracking inglese di [Planzer](carrier:planzer) e [Quickpac](carrier:quickpac), `Shipped` vuol dire già consegnato, non spedito.
+Le scansioni di UPS sono in inglese, così come le legge Peek. In Svizzera, nel tracking inglese di [Planzer](carrier:planzer) e [Quickpac](carrier:quickpac), `Shipped` vuol dire già consegnato, non spedito.
 
 ## «Etichetta creata»: il corriere ha già il pacco?
 
-No: il venditore ha stampato un'etichetta e mandato i dati al corriere, niente di più. [FedEx](carrier:fedex) lo dice chiaro: con `Etichetta creata` il mittente sta ancora preparando il collo, e lo stato si aggiorna quando il collo arriva a FedEx. [UPS](carrier:ups) cambia il suo `Etichetta creata` solo quando ha il pacco e lo ha messo in viaggio nella sua rete. Per la [Posta svizzera](carrier:swiss-post), con `Notifica dell'invio da parte dello speditore (inoltro dei dati)` il mittente ha generato il numero d'invio, ma di norma il pacco non è ancora alla Posta. Diciture come «spedizione generata, in attesa di ritiro» vogliono dire la stessa cosa.
+No: il venditore ha stampato un'etichetta e mandato i dati al corriere, niente di più. [FedEx](carrier:fedex) lo dice chiaro: con `Etichetta creata` il mittente sta ancora preparando il collo, e lo stato si aggiorna quando il collo arriva a FedEx. La prima scansione di [UPS](carrier:ups) dice che il mittente ha creato l'etichetta e che UPS non ha ancora il pacco. Per la [Posta svizzera](carrier:swiss-post), con `Notifica dell'invio da parte dello speditore (inoltro dei dati)` il mittente ha generato il numero d'invio, ma di norma il pacco non è ancora alla Posta. Diciture come «spedizione generata, in attesa di ritiro» vogliono dire la stessa cosa.
 
 Su [Poste](carrier:poste-italiane) un codice appena creato dà `Tracciatura non disponibile`: Poste consiglia di riprovare dopo qualche ora. Se l'etichetta resta l'unica riga per giorni, scrivi al venditore, non al corriere: il pacco ce l'ha ancora lui.
 
@@ -51,7 +51,6 @@ Il corriere ha il tuo pacco, da qualche parte nella sua rete. Non vuol dire che 
 
 Tra un hub e l'altro, il silenzio è normale:
 
-- Su un tragitto lungo, UPS probabilmente non scansiona il pacco fino all'hub di destinazione.
 - Per FedEx non è insolito passare più di 24 ore senza scansioni, soprattutto sulle tratte lunghe.
 - In Germania, DHL avverte che uno stato di smistamento può restare uguale per ore o giorni mentre il pacco continua a viaggiare.
 
@@ -70,7 +69,6 @@ In Italia, di solito poco. L'obiettivo di Poste per il Poste Delivery Standard �
 Di solito sì:
 
 - **Poste:** `In consegna` vuol dire che il pacco è stato affidato a chi lo consegna. Ma anche con questo stato, per Poste la data prevista è solo indicativa.
-- **UPS:** salvo servizi con orario definito, a casa consegna di solito [tra le 9 e le 19](guide:delivery-times), a volte più tardi.
 - **FedEx:** il collo è stato caricato su un veicolo per la consegna in giornata; la fascia oraria stimata la trovi nella pagina di tracking.
 
 Due diciture ingannano. Su Poste, `In consegna` può restare anche dopo che il pacco è stato consegnato, o quando ti aspetta già in un ufficio postale o in un Punto Poste; se la consegna non riesce, torna `In transito`. E `L'invio è stato spartito per il recapito` della Posta vuol dire che un centro l'ha smistato verso la tua località: non è detto che sia già sul furgone. Quanto a «fuori per la consegna», che si legge su alcuni tracking tradotti dall'inglese, è semplicemente «in consegna».
@@ -94,7 +92,7 @@ Questo stato invece ti chiede di muoverti: [non c'era nessuno a ricevere il pacc
 | Poste Delivery Express | Avviso di mancata consegna | 10 giorni lavorativi, sabato compreso; torna al mittente solo se l'ha chiesto, altrimenti è abbandonato |
 | BRT | Avviso via e-mail, SMS o carta; secondo tentativo, poi la filiale ti telefona | In giacenza in filiale: torna indietro se il mittente non dà istruzioni scritte entro 10 giorni |
 | [GLS](carrier:gls-it) | «Avviso di passaggio»; primo e secondo tentativo | In giacenza alla sede GLS: 10 giorni lavorativi (8 per i pacchi dall'estero) secondo la Carta dei Servizi, poi senza istruzioni torna al mittente |
-| UPS | Avviso UPS InfoNotice; fino a tre tentativi, o una sede UPS Access Point | 7 giorni all'Access Point, poi torna al mittente |
+| UPS | La scansione dice che non c'eri o che l'attività era chiusa, e UPS riprova; dopo l'ultimo tentativo tiene il pacco, lo porta in un Access Point o lo rimanda al mittente | – |
 | Mondial Relay (Italia) | Il pacco è già indirizzato a un Point Relais o a un locker | 7 giorni, senza proroga; poi torna al mittente |
 | La Posta (Svizzera) | Invito di ritiro | 7 giorni, 15 per i pacchi dall'estero; proroga gratuita, anche senza account |
 
@@ -104,25 +102,25 @@ Con BRT, il BRTcode lo trovi negli SMS, nelle e-mail o sul tagliando del corrier
 
 ## «Disponibile per il ritiro»: dove si trova il pacco?
 
-In un ufficio postale, in un punto di ritiro o in un locker, fino alla scadenza della tabella qui sopra. UPS lo segnala con `Consegnato a una sede UPS Access Point`; per la Posta il pacco è disponibile da quando compare `Arrivo al punto di ritiro / ufficio di recapito`.
+In un ufficio postale, in un punto di ritiro o in un locker, fino alla scadenza della tabella qui sopra. UPS lo segnala con `Delivered to UPS Access Point™`; per la Posta il pacco è disponibile da quando compare `Arrivo al punto di ritiro / ufficio di recapito`.
 
 Su Poste, invece, lo stato può restare `In consegna` anche se il pacco ti aspetta già in un ufficio postale, in un Punto Poste o in un Punto Poste Da Te. Se è all'ufficio postale, nel Cerca spedizioni compare il pulsante «Prenota»: scegli giorno e ora per ritirarlo, entro la giacenza.
 
-Prima di uscire, controlla che sia davvero pronto. UPS chiede di verificare nel tracking che il pacco sia `In attesa di ritiro da parte del cliente`, dove trovi anche orari e mappa del punto, e di portare un documento d'identità con foto e il numero di tracking. Su Poste, l'avviso riporta la data da cui puoi ritirarlo.
+Prima di uscire, controlla che sia davvero pronto: su Poste, l'avviso riporta la data da cui puoi ritirarlo.
 
 ## «Consegnato» vuol dire che ce l'hai tu?
 
 Non sempre. Vuol dire che il corriere l'ha scansionato come consegnato o lasciato:
 
 - **A qualcun altro.** Per le condizioni generali di Poste possono ricevere un invio al tuo domicilio anche i familiari, i conviventi, i collaboratori familiari e il portiere, se c'è. Con BRT puoi indicare tu un vicino a cui lasciarlo, purché abiti allo stesso indirizzo.
-- **In un posto sicuro.** Se non serve una firma, UPS lascia il pacco in un luogo sicuro e protetto, come una porta laterale o l'area di un garage. Su ups.com/track puoi vedere una foto del punto esatto.
+- **In un posto sicuro.** La pagina di UPS può indicare dove ha lasciato il pacco (per esempio `Left at: Front Door`).
 - **Nella cassetta o allo sportello.** La Posta distingue `Recapitato da` (a domicilio), `Recapitato nello scomparto di deposito / cassetta delle lettere` (la cassetta del latte) e `Recapitato allo sportello` (una filiale, una filiale in partenariato o un punto PickPost).
 
 Non c'è niente? Cerca nel tracking una foto, un nome o un luogo, poi leggi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
 ## «Eccezione di consegna»: il pacco è perso?
 
-No. Per FedEx, `Eccezione di consegna` vuol dire che un imprevisto impedisce la consegna: ritardi doganali, maltempo, scioperi, destinatario non trovato o restrizioni di sicurezza. E aggiunge che non devi fare nulla. `Eccezione` di UPS vuol dire che un imprevisto potrebbe spostare la data di consegna: il motivo è in «Avanzamento spedizione», e quando la data cambia lo stato mostra quella nuova.
+No. Per FedEx, `Eccezione di consegna` vuol dire che un imprevisto impedisce la consegna: ritardi doganali, maltempo, scioperi, destinatario non trovato o restrizioni di sicurezza. E aggiunge che non devi fare nulla. `Exception` è lo stato generico di UPS e può voler dire anche solo un ritardo: conta la scansione sotto.
 
 `In ritardo` di FedEx vuol dire che probabilmente il collo non arriverà entro la data stimata. La Posta ha `Ritardo` ed `Errore di avviamento`: per esempio, un numero postale di avviamento (il CAP svizzero) sbagliato manda il pacco all'ufficio sbagliato, e può esserci un ritardo, ma non è detto.
 
@@ -150,11 +148,10 @@ A quel punto decide il venditore: chiedigli di [rispedirtelo o di rimborsarti](g
 - [BRT: Carta dei Servizi](https://www.brt.it/wp-content/uploads/sites/275/2026/03/Carta-dei-Servizi_marzo_2026.pdf) – avviso, secondo tentativo, telefonata, consegna al vicino, 10 giorni, 96%
 - [GLS: La consegna e le possibili opzioni](https://gls-group.com/IT/it/spedire-ricevere/opzioni-consegna/) – avviso di passaggio, due tentativi, giacenza in sede
 - [GLS Italia: Carta dei Servizi Postali](https://gls-group.com/IT/media/downloads/CARTA_DEI_SERVIZI_POSTALI_AGGIORNATAallegati_09.06.26_def.pdf) – 10 giorni lavorativi di giacenza, 8 per i pacchi dall'estero
-- [UPS: Informazioni sullo stato del tracking](https://www.ups.com/it/it/support/tracking-support/where-is-my-package/understanding-tracking-status) – stati, orari, luogo sicuro, foto, eccezione
-- [UPS: InfoNotice UPS](https://www.ups.com/it/it/support/tracking-support/where-is-my-package/how-to-use-infonotice) – tre tentativi, Access Point, 7 giorni, documento
+- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – scansioni UPS che legge Peek: etichetta, presa in carico, transito, consegna, mancata consegna, Access Point, «Left at», «Exception»
 - [FedEx: Cosa indica lo stato della spedizione?](https://www.fedex.com/it-it/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – etichetta creata, in transito, in consegna, eccezione, in ritardo
 - [FedEx: Package not moving](https://www.fedex.com/en-us/customer-support/faqs/receiving/tracking-questions/package-not-moving.html) – 24 ore senza scansioni
-- [Mondial Relay: Combien de jours pour retirer mon colis](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – Italia 7 giorni, nessuna proroga, ritorno al mittente
+- [Mondial Relay Belgio: Quel est le délai de garde d'un colis en Locker ou Point Relais ? (in francese)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – Italia 7 giorni, nessuna proroga, ritorno al mittente
 - [La Posta: Eventi «Monitorare gli invii»](https://www.post.ch/it/ricezione/monitorare-gli-invii/eventi-monitorare-gli-invii) – stati, dogana, recapito, errore di avviamento, rinvio
 - [La Posta: FAQ su importazione, dogana e IVA](https://www.post.ch/it/soluzioni-commerciali/esportazione-importazione-e-sdoganamento/importazione/faq-su-importazione-dogana-e-iva) – sdoganamento in tre o quattro giorni lavorativi
 - [La Posta: Invito di ritiro](https://www.post.ch/it/ricezione/invito-di-ritiro) – 7 e 15 giorni, proroga, secondo recapito, inoltro, prezzi

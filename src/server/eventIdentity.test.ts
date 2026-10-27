@@ -346,7 +346,7 @@ describe('a scan whose source\'s feeds put different offsets on its wall clock',
     expect(sameInstantIdentities([mobile], [portal, { ...portal, provider_event_id: 'dhl-express:twin' }], 'dhl-express').size).toBe(0);
     expect(sameInstantIdentities([mobile, { ...mobile, provider_event_id: 'dhl-express:twin' }], [portal], 'dhl-express').size).toBe(0);
     const as = (source: string, row: Record<string, unknown>) => ({ ...row, provider_event_id: String(row.provider_event_id).replace('dhl-express', source) });
-    for (const source of ['dpd', 'india-post', 'ups']) {
+    for (const source of ['dpd', 'india-post', 'la-poste']) {
       expect(sameInstantIdentities([as(source, mobile)], [as(source, portal)], source).size).toBe(0);
     }
   });

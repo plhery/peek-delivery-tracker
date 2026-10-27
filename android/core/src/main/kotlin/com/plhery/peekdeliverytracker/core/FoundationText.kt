@@ -51,15 +51,15 @@ internal fun String.trimmingWhitespacesAndNewlines(): String = trimmingScalars(:
 /** `trimmingCharacters(in: .whitespaces)`. */
 internal fun String.trimmingWhitespaces(): String = trimmingScalars(::isWhitespaceScalar)
 
-/** The string's Characters: its extended grapheme clusters. */
+/** The string's Characters: its extended grapheme clusters, as Swift finds them (GraphemeBreaking.kt). */
 internal fun String.characters(): List<String> {
     if (all { it.code < 0x80 && it != '\r' }) return map { it.toString() }
     var start = 0
-    return Icu.characterBreaks.ends(this).map { end -> substring(start, end).also { start = end } }
+    return characterEnds(this).map { end -> substring(start, end).also { start = end } }
 }
 
 /** `count`: how many Characters the string has. */
-internal fun String.characterCount(): Int = if (all { it.code < 0x80 && it != '\r' }) length else Icu.characterBreaks.ends(this).size
+internal fun String.characterCount(): Int = if (all { it.code < 0x80 && it != '\r' }) length else characterEnds(this).size
 
 /**
  * Swift's `hasPrefix`, which compares Characters: the prefix must end where a Character does, so "n=\u0301" does not
@@ -68,7 +68,7 @@ internal fun String.characterCount(): Int = if (all { it.code < 0x80 && it != '\
 internal fun String.hasCharacterPrefix(prefix: String): Boolean {
     if (!startsWith(prefix)) return false
     if (length == prefix.length || this[prefix.length].code < 0x80) return true
-    return Icu.characterBreaks.ends(this).binarySearch(prefix.length) >= 0
+    return characterEnds(this).binarySearch(prefix.length) >= 0
 }
 
 /**

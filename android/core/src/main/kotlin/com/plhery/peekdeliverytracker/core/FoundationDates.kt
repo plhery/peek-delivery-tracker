@@ -75,6 +75,167 @@ internal object FoundationDates {
         return instant(fields, RulesZone(zone.rules))
     }
 
+    private val weekdays = listOf(
+        listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"),
+        listOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"),
+        listOf("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"),
+        listOf("S", "M", "T", "W", "T", "F", "S"),
+    )
+
+    /** A zone name "zzz" reads in English: a fixed offset in milliseconds, and the zone that stands for it. */
+    private class ZoneName(val name: String, hours: Int, val zone: String) {
+        val offset = hours * HOUR_MILLIS
+    }
+
+    private val zoneNames = listOf(
+        ZoneName("pst", -8, "America/Los_Angeles"), ZoneName("pdt", -7, "America/Los_Angeles"),
+        ZoneName("mst", -7, "America/Denver"), ZoneName("mdt", -6, "America/Denver"),
+        ZoneName("cst", -6, "America/Chicago"), ZoneName("cdt", -5, "America/Chicago"),
+        ZoneName("est", -5, "America/New_York"), ZoneName("edt", -4, "America/New_York"),
+        ZoneName("akst", -9, "America/Anchorage"), ZoneName("akdt", -8, "America/Anchorage"),
+        ZoneName("hast", -10, "America/Adak"), ZoneName("hadt", -9, "America/Adak"),
+        ZoneName("hst", -10, "Pacific/Honolulu"),
+        ZoneName("ast", -4, "America/Halifax"), ZoneName("adt", -3, "America/Halifax"),
+    )
+
+    /** The largest year the formatter's strict calendar takes. */
+    private const val MAX_STRICT_YEAR = 144_683
+
+    /**
+     * `date(from:)` of an en_US_POSIX DateFormatter in GMT with the format "EEE, dd MMM yyyy HH:mm:ss zzz", as the
+     * seconds since 2001 the Date holds. Unlike the formatters above, its calendar is strict: 31 September, 24:00
+     * and the year 0 read as nothing, while a weekday that is not the date's own passes unchecked. Names and
+     * separators are read as SimpleDateFormat reads them in strict mode ("Monday", "mon" or "M" for the weekday,
+     * "September" for "Sep", a missing comma), and the zone is GMT, UTC or UT with or without an offset, an ISO
+     * offset, or one of the North American names English has for a zone (PST, EDT…), each read as its fixed offset.
+     */
+    fun httpDate(value: String): Double? {
+        val text = value.take(MAX_LENGTH)
+        var position = fieldStart(text, 0) ?: return null
+        position = weekday(text, position) ?: return null
+        position = matchLiterals(text, position, ", ", Field.Day) ?: return null
+        val day = number(text, fieldStart(text, position) ?: return null) ?: return null
+        position = matchLiterals(text, day.end, " ", Field.Month) ?: return null
+        val (month, monthEnd) = monthName(text, fieldStart(text, position) ?: return null) ?: return null
+        position = matchLiterals(text, monthEnd, " ", Field.Year) ?: return null
+        val year = number(text, fieldStart(text, position) ?: return null) ?: return null
+        position = matchLiterals(text, year.end, " ", Field.Hour) ?: return null
+        val hour = number(text, fieldStart(text, position) ?: return null) ?: return null
+        position = matchLiterals(text, hour.end, ":", Field.Minute) ?: return null
+        val minute = number(text, fieldStart(text, position) ?: return null) ?: return null
+        position = matchLiterals(text, minute.end, ":", Field.Second) ?: return null
+        val second = number(text, fieldStart(text, position) ?: return null) ?: return null
+        position = matchLiterals(text, second.end, " ", Field.Zone) ?: return null
+        val zoneStart = fieldStart(text, position) ?: return null
+        // GMT and its offsets first, then the names, then ISO offsets, as TimeZoneFormat tries them.
+        val gmt = localizedGmtOffset(text, zoneStart)
+        val named = if (gmt == null) zoneName(text, zoneStart) else null
+        val (offset, end) = gmt ?: named?.let { (name, end) -> name.offset to end } ?: isoOffset(text, zoneStart) ?: return null
+        // DateFormatter takes the date only when nothing but whitespace follows it.
+        if ((end until value.length).any { !isWhitespaceScalar(value[it].code) }) return null
+        if (year.value !in 1..MAX_STRICT_YEAR || day.value !in 1..monthLength(year.value, month)) return null
+        if (hour.value !in 0..23 || minute.value !in 0..59 || second.value !in 0..59) return null
+        val millisInDay = ((hour.value * 60.0 + minute.value) * 60.0 + second.value) * 1000.0
+        val time = time(year.value, month, day.value, millisInDay, FixedZone(offset)) ?: return null
+        // A name leaves its zone, daylight saving time and all, to the calendar that reads a two-digit year.
+        return absoluteTime(time, named?.let { RulesZone(ZoneId.of(it.first.zone).rules) } ?: FixedZone(offset))
+    }
+
+    /** The days in a month, of the Julian calendar before 1582 as ICU's Gregorian one has it. */
+    private fun monthLength(year: Int, month: Int): Int {
+        val leap = year % 4 == 0 && (year < CUTOVER_YEAR || year % 100 != 0 || year % 400 == 0)
+        val starts = if (leap) leapMonthStarts else monthStarts
+        val next = if (month == 11) (if (leap) 366 else 365) else starts[month + 1]
+        return next - starts[month]
+    }
+
+    /** Where a field starts: SimpleDateFormat passes over whitespace and the left-to-right and right-to-left marks. */
+    private fun fieldStart(text: String, from: Int): Int? {
+        var start = from
+        while (true) {
+            if (start >= text.length) return null
+            val scalar = text.codePointAt(start)
+            if (!hasWhiteSpaceProperty(scalar) && scalar != 0x200E && scalar != 0x200F) return start
+            start += Character.charCount(scalar)
+        }
+    }
+
+    /** A weekday by name, which the date's own day overrides: wide, abbreviated, short, then narrow names. */
+    private fun weekday(text: String, start: Int): Int? {
+        for (names in weekdays) {
+            val length = names.maxOf { foldedPrefixLength(text, start, it) }
+            if (length > 0) return start + length
+        }
+        return null
+    }
+
+    /** Pattern_White_Space, which a literal's whitespace also matches. */
+    private fun isPatternWhiteSpace(char: Char): Boolean =
+        char in '\t'..'\r' || char == ' ' || char == '\u0085' || char == '\u200E' || char == '\u200F' ||
+            char == '\u2028' || char == '\u2029'
+
+    /**
+     * A run of literal text in strict mode. Whitespace in the pattern needs some in the text, of any length, bidi
+     * marks passed over; any other character must be there, unless both it and the character found are ones the
+     * next field lets stand in (any letter will do for the one found), which ends the run after skipping those:
+     * "Mon. 21" and "Mon 21" pass for "Mon, 21", while "Mon,21" and "Mon; 21" do not.
+     */
+    private fun matchLiterals(text: String, start: Int, literal: String, next: Field): Int? {
+        var t = start
+        var p = 0
+        while (p < literal.length && t < text.length) {
+            var needWhitespace = false
+            while (p < literal.length && isPatternWhiteSpace(literal[p])) {
+                needWhitespace = true
+                p++
+            }
+            if (needWhitespace) {
+                // The Arabic letter mark may stand anywhere in the run, which still needs whitespace of its own.
+                var found = false
+                while (t < text.length) {
+                    val space = hasWhiteSpaceProperty(text[t].code) || isPatternWhiteSpace(text[t])
+                    if (!space && !isBidiMark(text[t])) break
+                    found = found || space
+                    t++
+                }
+                if (!found) return null
+                if (p >= literal.length) break
+            }
+            var index = t
+            while (index < text.length && isBidiMark(text[index])) index++
+            if (index < text.length && text[index] == literal[p]) {
+                t = index + 1
+                p++
+                continue
+            }
+            val found = if (index < text.length) text[index] else '\uFFFF'
+            if (!ignorable(next, literal[p].code) || !(ignorable(next, found.code) || Character.isLetter(found))) return null
+            while (t < text.length && (isBidiMark(text[t]) || ignorable(next, text[t].code))) t++
+            return t
+        }
+        return if (p < literal.length) null else t
+    }
+
+    /** One of `zoneNames`, matched without regard to case as ICU folds it, the longest first, and where it ends. */
+    private fun zoneName(text: String, start: Int): Pair<ZoneName, Int>? {
+        var best: ZoneName? = null
+        for (zone in zoneNames) {
+            if (start + zone.name.length > text.length) continue
+            val matches = zone.name.indices.all {
+                val char = text[start + it]
+                val folded = when (char) {
+                    '\u017F' -> 's'
+                    '\u212A' -> 'k'
+                    in 'A'..'Z' -> char + 32
+                    else -> char
+                }
+                folded == zone.name[it]
+            }
+            if (matches && zone.name.length > (best?.name?.length ?: 0)) best = zone
+        }
+        return best?.let { it to start + it.name.length }
+    }
+
     private fun parse(text: String, pattern: List<Part>): Pair<Fields, Int>? {
         val fields = Fields()
         var position = 0
@@ -115,13 +276,7 @@ internal object FoundationDates {
     }
 
     private fun parseField(text: String, from: Int, field: Field, fields: Fields): Int? {
-        var start = from
-        while (true) {
-            if (start >= text.length) return null
-            val scalar = text.codePointAt(start)
-            if (!hasWhiteSpaceProperty(scalar) && scalar != 0x200E && scalar != 0x200F) break
-            start += Character.charCount(scalar)
-        }
+        val start = fieldStart(text, from) ?: return null
         if (field == Field.Zone) {
             val (offset, end) = zone(text, start) ?: return null
             fields.offset = offset
@@ -684,13 +839,17 @@ internal object FoundationDates {
         return CivilDate(year, month, dayOfMonth, millisInDay)
     }
 
+    /** CFAbsoluteTime, the seconds since 2001 a Date holds, of ICU's time once CoreFoundation has seen to its year. */
+    private fun absoluteTime(time: Double, zone: DateZone): Double? {
+        val date = civilDate(time, zone) ?: return null
+        val adjusted = if (date.yearOfEra in 12_000..12_099) twoDigitYear(date, zone) ?: return null else time
+        return adjusted / 1000.0 - REFERENCE_DATE
+    }
+
     private fun instant(fields: Fields, zone: DateZone): Instant? {
         val millisInDay = ((fields.hour * 60.0 + fields.minute) * 60.0 + fields.second) * 1000.0 + fields.millisecond
-        var time = time(fields.year, fields.month, fields.dayOfMonth, millisInDay, zone) ?: return null
-        val date = civilDate(time, zone) ?: return null
-        if (date.yearOfEra in 12_000..12_099) time = twoDigitYear(date, zone) ?: return null
-        // CFAbsoluteTime, the seconds since 2001 a Date holds.
-        val absolute = time / 1000.0 - REFERENCE_DATE
+        val time = time(fields.year, fields.month, fields.dayOfMonth, millisInDay, zone) ?: return null
+        val absolute = absoluteTime(time, zone) ?: return null
         val seconds = floor(absolute)
         // A Date reaches further than an Instant, past the year one billion either way.
         if (seconds + REFERENCE_DATE !in Instant.MIN.epochSecond.toDouble()..Instant.MAX.epochSecond.toDouble()) return null

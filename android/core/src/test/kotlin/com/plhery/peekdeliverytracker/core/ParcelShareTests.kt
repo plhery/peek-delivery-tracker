@@ -39,6 +39,7 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Test
 
 /** ParcelShareTests.swift. A sheet's `Client` is a stand-in service here, as on iOS. */
@@ -307,6 +308,25 @@ class ParcelShareTests {
         store.load()
         assertEquals(ParcelLinkStore.Phase.Stopped, store.phase)
         assertNull(store.remembered)
+    }
+
+    @Test
+    fun theServiceAnswersGoneForAStoppedLink() = runTest {
+        val configuration = AppConfiguration(
+            mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://share.test", supabaseUrl = "https://share.test", supabasePublishableKey = "public",
+            googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true, appGroupIdentifier = "share.test",
+        )
+        var response = jsonResponse(410, """{"error":"Parcel not shared"}""")
+        val transport = RecordingTransport { response }
+        try {
+            DeliveryApiClient.publicParcel(linkId, configuration = configuration, transport = transport)
+            fail("Expected a stopped link")
+        } catch (error: Exception) {
+            assertTrue(error is ParcelLinkStopped)
+        }
+        response = jsonResponse(404, """{"error":"Parcel unavailable"}""")
+        val gone = DeliveryApiClient.publicParcel(linkId, configuration = configuration, transport = transport)
+        assertNull(gone)
     }
 
     // The share sheet

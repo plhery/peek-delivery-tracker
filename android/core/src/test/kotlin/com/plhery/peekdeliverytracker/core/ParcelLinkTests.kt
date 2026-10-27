@@ -36,20 +36,29 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.yield
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.builtins.serializer
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Test
 
 /**
- * ParcelLinkTests.swift. The tests that go through `DeliveryAPIClient`, `ParcelStore` or `DeviceParcelClient` over
- * HTTP keep here what does not need the app: the bodies those calls send and how their answers read.
+ * ParcelLinkTests.swift. `DeliveryAPIClient`'s requests go through a recording transport, as through the Swift tests'
+ * URL protocol. The tests that go through `ParcelStore` or `DeviceParcelClient` over HTTP keep here what does not need
+ * the app: the bodies those calls send and how their answers read.
  */
 class ParcelLinkTests {
     private val linkId = "k7Qm2xHd9RtW"
+
+    private val linkConfiguration = AppConfiguration(
+        mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://links.test", supabaseUrl = "https://links.test", supabasePublishableKey = "public",
+        googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true, appGroupIdentifier = "links.test",
+    )
 
     @Serializable
     private class Fixture(val publicParcel: PublicParcelResponse, val publicLookup: PublicLookupResponse)
@@ -462,29 +471,75 @@ class ParcelLinkTests {
         assertEquals(ParcelLinkStore.Phase.Unavailable, store.phase)
     }
 
-    /** The request itself is the app's (OkHttp); this keeps how its answers read. */
     @Test
-    fun theLinkIsReadWithoutSignInCookiesOrAnOwnerKey() {
+    fun theLinkIsReadWithoutSignInCookiesOrAnOwnerKey() = runTest {
         val served = JsonEncoder.deliveryTracker.encode(PublicParcelResponse.serializer(), fixture().publicParcel)
-        val shown = ApiJson.decodeFromString(PublicParcelResponse.serializer(), served.decodeToString())
-        assertEquals(fixture().publicParcel, shown)
-        assertEquals(linkId, shown.link.id)
-        assertEquals("••• 3456", shown.parcel.numberHint?.masked)
+        var response = HttpResponse(200, body = served)
+        val transport = RecordingTransport { response }
 
-        assertEquals(12.0, DeliveryApiClient.retryAfterSeconds("12"), 0.0)
-        for (error in listOf(DeliveryApiError.ServiceFailed(503), DeliveryApiError.InvalidResponse())) {
-            assertEquals(ParcelLinkFailure.Service, ParcelLinkFailure(error))
+        val shown = DeliveryApiClient.publicParcel(linkId, configuration = linkConfiguration, transport = transport)
+        assertEquals(fixture().publicParcel, shown)
+        assertEquals(linkId, shown?.link?.id)
+        assertEquals("••• 3456", shown?.parcel?.numberHint?.masked)
+        val request = transport.requests.first()
+        assertEquals("GET", request.method)
+        assertEquals("https://links.test/api/public/parcels/$linkId", request.url)
+        assertFalse(request.handlesCookies)
+        for (header in listOf("Authorization", "Cookie", "X-Parcel-Key")) {
+            assertNull(header, request.header(header))
+        }
+
+        response = jsonResponse(404, """{"error":"Parcel unavailable"}""")
+        val gone = DeliveryApiClient.publicParcel(linkId, configuration = linkConfiguration, transport = transport)
+        assertNull(gone)
+
+        response = jsonResponse(429, """{"error":"Too many requests. Try again shortly."}""", mapOf("Retry-After" to "12"))
+        try {
+            DeliveryApiClient.publicParcel(linkId, configuration = linkConfiguration, transport = transport)
+            fail("Expected a rate limit")
+        } catch (error: DeliveryApiError.RateLimited) {
+            assertEquals(12.0, error.retryAfter, 0.0)
+        }
+
+        for ((status, data) in listOf(503 to "", 200 to "{}")) {
+            response = jsonResponse(status, data)
+            try {
+                DeliveryApiClient.publicParcel(linkId, configuration = linkConfiguration, transport = transport)
+                fail("Expected a failure")
+            } catch (error: Exception) {
+                assertEquals(ParcelLinkFailure.Service, ParcelLinkFailure(error))
+            }
         }
     }
 
-    /** The request itself is the app's (OkHttp); this keeps the body it sends. */
     @Test
-    fun aRefusalIsAskedWithoutSignInOrCookies() {
+    fun aRefusalIsAskedWithoutSignInOrCookies() = runTest {
+        var response = jsonResponse(200, """{"refused":true}""")
+        val transport = RecordingTransport { response }
         val question = NumberRefusalRequest(trackingNumber = "SYNTHREFUSAL01", carrier = CarrierId.NzCouriers)
-        assertEquals(
-            """{"carrier":"nz-couriers","trackingNumber":"SYNTHREFUSAL01"}""",
-            body(JsonEncoder.deliveryTracker.encode(NumberRefusalRequest.serializer(), question)),
-        )
+
+        val refused = DeliveryApiClient.numberRefusal(question, configuration = linkConfiguration, transport = transport)
+        assertTrue(refused)
+        val request = transport.requests.first()
+        assertEquals("POST", request.method)
+        assertEquals("https://links.test/api/public/refusal", request.url)
+        assertFalse(request.handlesCookies)
+        for (header in listOf("Authorization", "Cookie", "X-Parcel-Key")) {
+            assertNull(header, request.header(header))
+        }
+        val sent = ApiJson.decodeFromString(MapSerializer(String.serializer(), String.serializer()), body(request.body!!))
+        assertEquals(mapOf("carrier" to "nz-couriers", "trackingNumber" to "SYNTHREFUSAL01"), sent)
+        // As JSONEncoder.deliveryTracker writes it, keys sorted.
+        assertEquals("""{"carrier":"nz-couriers","trackingNumber":"SYNTHREFUSAL01"}""", body(request.body))
+
+        for ((status, data) in listOf(429 to "", 200 to "{}")) {
+            response = jsonResponse(status, data)
+            try {
+                DeliveryApiClient.numberRefusal(question, configuration = linkConfiguration, transport = transport)
+                fail("Expected a failure")
+            } catch (_: DeliveryApiError) {
+            }
+        }
     }
 
     /** Keeping is `ParcelStore.keep`, which comes with the store's port; this keeps its request and how it reads the answer. */
@@ -628,6 +683,21 @@ class ParcelLinkTests {
         assertNull(store.route?.key)
         store.load()
         assertEquals(listOf(key, key, null), sent)
+    }
+
+    @Test
+    fun aHandedOverLinkSendsItsKeyInAHeaderAlone() = runTest {
+        val served = JsonEncoder.deliveryTracker.encode(PublicParcelResponse.serializer(), fixture().publicParcel)
+        val transport = RecordingTransport { HttpResponse(200, body = served) }
+        val key = "K".repeat(43)
+
+        DeliveryApiClient.publicParcel(linkId, key, configuration = linkConfiguration, transport = transport)
+
+        val request = transport.requests.first()
+        assertEquals("https://links.test/api/public/parcels/$linkId", request.url)
+        assertEquals(key, request.header("X-Parcel-Key"))
+        assertFalse(request.handlesCookies)
+        assertNull(request.header("Authorization"))
     }
 
     /** Alerts are `DeviceParcelClient`'s, over OkHttp in the app; this keeps the bodies it sends. */

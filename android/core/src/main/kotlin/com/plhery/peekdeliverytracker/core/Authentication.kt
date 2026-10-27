@@ -1,6 +1,21 @@
 package com.plhery.peekdeliverytracker.core
 
-// From Authentication.swift, the errors the localizer explains. The session store comes with its own port.
+// From Authentication.swift, the errors the localizer explains and where a secret is kept. The session store comes
+// with its own port.
+
+/**
+ * Where a secret is kept on this device: the Keychain on the iPhone (KeychainStore), the app's encrypted storage on
+ * Android. The value is held as the bytes JsonEncoder.deliveryTracker writes, and read back with ApiJson.
+ */
+interface SessionPersistence {
+    /** Throws when the value could not be saved. */
+    fun save(data: ByteArray)
+
+    /** Nil when nothing is saved. */
+    fun load(): ByteArray?
+
+    fun delete()
+}
 
 sealed class AuthenticationError(message: String) : Exception(message) {
     class NotConfigured : AuthenticationError("Authentication is not configured.")

@@ -6,15 +6,18 @@ published: 2026-10-15
 updated: 2026-10-27
 ---
 
-NZ Post is New Zealand's state-owned postal service, and its CourierPost courier services are tracked the same way. Track a parcel in the tracking tool on [nzpost.co.nz](https://www.nzpost.co.nz/tools/tracking), in the NZ Post app or by pasting the number in the box above. The number comes from the sender: the shop's shipping email or order page, or your PostShop receipt if you posted it yourself.
+NZ Post is New Zealand's state-owned postal service, and its CourierPost courier services are tracked the same way. You can follow a parcel with NZ Post's [Track a parcel](https://www.nzpost.co.nz/tools/tracking) tool on nzpost.co.nz, in the [NZ Post app](https://www.nzpost.co.nz/personal/app) or by pasting the number in the box above.
+
+The app needs a free My NZ Post account and can send push notifications as the parcel moves; on the website, sign in to turn on email notifications. If a shop sends by Courier and passes on your email or mobile number, you may also get an email or text when it's picked up, out for delivery, delivered or missed.
 
 ## NZ Post tracking number: where to find it and what it looks like
 
 Where to find it:
 
 - **Bought online:** the shop's shipping confirmation or order page. If you can't find it, ask the sender to give it again.
-- **Posted at a PostShop with a tracked service:** printed at the bottom of your receipt. The same PostShop may print a duplicate receipt within 90 days.
-- **Untracked services** have no number and can't be tracked at all.
+- **Sent it yourself with a tracked service:** at the bottom of your NZ Post store (PostShop) receipt, on the removable sticker from your sending ticket or on the barcode of your NZ Post bag. The same store may print a duplicate receipt within 90 days.
+- **Tracked services:** Economy, Courier Economy and Courier parcels within New Zealand; Courier, Express and, where available, Economy overseas.
+- **Untracked services** have no number and can't be tracked: Standard Mail letters and cards, and Economy parcels paid with stamps. To track a letter, send it by Courier or Courier Economy.
 
 Type it without spaces or brackets. Invented examples of the shapes:
 
@@ -32,7 +35,7 @@ NZ Post's site and tracking are in English only. These are the statuses most par
 
 | NZ Post's status | What it means for you |
 | --- | --- |
-| `Tracking number allocated to parcel` | The sender has made a label. NZ Post doesn't have the parcel yet. |
+| `Tracking number allocated to parcel` | The sender has made a label. NZ Post hasn't scanned the parcel yet. |
 | `Collected from sender` | A courier driver picked it up from the sender, or it was dropped at an NZ Post outlet. |
 | `International arrival` | A parcel from abroad has arrived in New Zealand. |
 | `Held for clearance` | Waiting for a border agency: it may need an MPI inspection or Customs charges. |
@@ -45,7 +48,7 @@ NZ Post's site and tracking are in English only. These are the statuses most par
 | `Handed over` | After a missed delivery: it will be ready for collection soon. |
 | `Ready to collect` | Waiting for you at a collection location. |
 
-Parcels dropped in a post box, at a store or with a Rural Delivery driver may skip `Collected from sender`.
+Parcels dropped in a post box, at a store or with a Rural Delivery driver may skip `Collected from sender`. Economy parcels get fewer scans than Courier ones: often just `Collected from sender`, `With courier for delivery` and `Delivered`.
 
 `Handed over` is not delivered. It follows a missed delivery, when the parcel moves to the place on your card. `Delivered` can also mean left in a safe place, not handed to you.
 
@@ -71,7 +74,7 @@ Marked `Delivered` but not there? Check hidden spots, your reception or front de
 
 Damaged: photograph the items, packaging and barcode labels for the damaged parcel enquiry.
 
-From abroad, any parcel can be inspected by NZ Customs and MPI. NZ Customs says goods bought from overseas websites for NZ$1000 or less pay no duty and the overseas seller collects the GST (tobacco and alcohol excepted). Once released, delivery takes 1 to 3 working days; NZ Post can't speed Customs up. More in [parcels held at customs](guide:customs).
+If a parcel from abroad shows nothing in NZ Post's tracking yet, check the sender's tracking or the postal service in the country it came from. Any parcel from abroad can be inspected by NZ Customs and MPI. NZ Customs says goods bought from overseas websites for NZ$1000 or less pay no duty and the overseas seller collects the GST (tobacco and alcohol excepted). Once released, delivery takes 1 to 3 working days; NZ Post can't speed Customs up. More in [parcels held at customs](guide:customs).
 
 ## NZ Post tracking contact number
 
@@ -94,23 +97,34 @@ It checks every 10 minutes from 8am to 10pm Swiss time, about 8pm to 10am in New
 
 ## Questions about NZ Post tracking
 
+### What does "Tracking number allocated to parcel" mean?
+
+The sender has made a label and given your parcel its number, but NZ Post hasn't scanned the parcel yet. Some parcels show `Label created` instead. NZ Post gives no time frame for this status. The next scan is usually `Collected from sender`, when a driver picks the parcel up or it's handed in at a store, though parcels from a post box or Rural Delivery may skip it. If nothing moves, ask the sender whether it has been sent, and how.
+
 ### How long is an NZ Post tracking number?
 
 13 characters for a postal number (`RR000000005NZ`) and 20 digits for most courier parcels. Some courier labels carry 24 characters ending in `NZ`.
 
 ### Does NZ Post deliver on Saturdays?
 
-Only when the sender adds Saturday delivery to a Courier or Express parcel. It isn't available for rural (RD) addresses.
+Only when it's paid for. The sender can add Saturday delivery to a Courier or Express parcel, except to rural (RD) addresses, and the NZ Post app may let you pay by card for Saturday or evening delivery.
 
 ### Can I track an NZ Post parcel without a tracking number?
 
 No. NZ Post can't trace a parcel by your name, address or phone number, so ask the sender for the number.
 
 :::sources
-- [NZ Post: Tracking](https://www.nzpost.co.nz/tools/tracking) – tracking tool, English only
-- [NZ Post: What does my tracking status mean?](https://support.nzpost.co.nz/s/article/What-does-my-tracking-status-mean?language=en_US) – status glossary, number formats, customs statuses
-- [NZ Post: When is my parcel tracking updated?](https://support.nzpost.co.nz/s/article/When-is-my-parcel-tracking-updated?language=en_US) – updates per service, app, spaces, skipped scans
+- [NZ Post: Tracking](https://www.nzpost.co.nz/tools/tracking) – Track a parcel tool, English only
+- [NZ Post: Mobile app](https://www.nzpost.co.nz/personal/app) – My NZ Post account, push notifications, Saturday and evening delivery
+- [NZ Post: Parcel notifications](https://www.nzpost.co.nz/business/ecommerce/parcel-notifications) – emails and texts for Courier parcels
+- [NZ Post: What does my tracking status mean?](https://support.nzpost.co.nz/s/article/What-does-my-tracking-status-mean?language=en_US) – status glossary, label created, number formats, customs statuses
+- [NZ Post: When is my parcel tracking updated?](https://support.nzpost.co.nz/s/article/When-is-my-parcel-tracking-updated?language=en_US) – updates per service, app, email notifications, spaces, skipped scans
+- [NZ Post: Tracking your international Parcel](https://support.nzpost.co.nz/s/article/Tracking-your-international-Parcel) – nothing in NZ Post's tracking: sender or origin post
 - [NZ Post: Can I track my parcel without a tracking number?](https://support.nzpost.co.nz/s/article/Can-I-track-my-parcel-without-a-tracking-number?language=en_US) – receipt, duplicate within 90 days, no name lookup
+- [NZ Post: Parcel enquiry](https://www.nzpost.co.nz/contact-support/parcel-enquiry) – sticker, bag barcode, letters with stamps
+- [NZ Post: Sending within New Zealand](https://www.nzpost.co.nz/personal/sending-in-nz) – tracked services, stamps untracked, Economy scans
+- [NZ Post: Sending letters within NZ](https://www.nzpost.co.nz/personal/sending-in-nz/letters) – Standard Mail, tracked letters
+- [NZ Post: Sending internationally](https://www.nzpost.co.nz/personal/sending-internationally) – tracked international services
 - [NZ Post: I have Missed my Parcel](https://support.nzpost.co.nz/s/article/I-have-Missed-my-Parcel?language=en_US) – card, CTC number, 10 days
 - [NZ Post: My item shows Undeliverable](https://support.nzpost.co.nz/s/article/My-item-shows-Undeliverable?language=en_US) – collection with card and photo ID
 - [NZ Post: Redirecting your parcels using the NZ Post Tracking tool](https://support.nzpost.co.nz/s/article/Redirecting-your-parcels-using-the-NZ-Post-Tracking-tool?language=en_US) – fee, 75 km, cut-off
@@ -124,7 +138,7 @@ No. NZ Post can't trace a parcel by your name, address or phone number, so ask t
 - [NZ Post: My parcel has been received with missing contents](https://support.nzpost.co.nz/s/article/My-parcel-has-been-received-with-missing-contents) – search times
 - [NZ Post: My item shows Import Duty and Tax Payable](https://support.nzpost.co.nz/s/article/My-item-shows-Import-Duty-and-Tax-Payable) – invoice, release, 1 to 3 working days
 - [NZ Post: Is Customs holding my parcel?](https://support.nzpost.co.nz/s/article/Is-Customs-holding-my-parcel) – NZ Customs and MPI inspection
-- [NZ Post: Shipping in NZ](https://www.nzpost.co.nz/business/shipping-in-nz) – CourierPost services, Saturday delivery
+- [NZ Post: Shipping in NZ](https://www.nzpost.co.nz/business/shipping-in-nz) – CourierPost services, Saturday delivery, not for RD addresses
 - [NZ Post: Contact and support](https://www.nzpost.co.nz/contact-support) – phone numbers, hours, postal address
 - [NZ Post: How can we help?](https://www.nzpost.co.nz/contact-support/assistance/form) – parcel enquiry forms
 - [NZ Post: Scams & fraud](https://www.nzpost.co.nz/contact-support/scams-and-fraud) – fake texts, 7726, reporting address

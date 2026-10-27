@@ -10,7 +10,7 @@ NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en Esp
 
 ## Número de envío NACEX: cómo es y dónde encontrarlo
 
-La casilla de la portada de NACEX muestra el ejemplo `0000/00000000`, cuatro cifras y ocho, y su página de [Seguimiento](https://www.nacex.es/irSeguimiento.do) pide las dos partes por separado, en el bloque «Expedición». NACEX no publica una longitud fija: ese formulario admite hasta 5 caracteres en la agencia y hasta 10 cifras en el albarán. Con cifras inventadas, en la forma de la casilla:
+La casilla de la portada de NACEX muestra el ejemplo `0000/00000000`, cuatro cifras y ocho, y la página [Seguimiento de envíos](https://www.nacex.es/irSeguimiento.do) de su menú «Envíos» pide las dos partes por separado, en el bloque «Expedición». NACEX no publica una longitud fija: ese formulario admite hasta 5 caracteres en la agencia y hasta 10 cifras en el albarán. Con cifras inventadas, en la forma de la casilla:
 
 :::anatomy 0123 / 45678901
 - 0123 | Agencia: la franquicia NACEX de la que salió el envío
@@ -18,7 +18,7 @@ La casilla de la portada de NACEX muestra el ejemplo `0000/00000000`, cuatro cif
 - 45678901 | Albarán: el número de la expedición
 :::
 
-NACEX no dice dónde aparece el número ni con qué nombre firma sus SMS. Busca en el correo de envío de la tienda o en la página de tu pedido, o mira [otros sitios donde puede estar](guide:find-tracking-number). Las demás búsquedas del formulario piden datos que solo tiene el remitente.
+NACEX no dice dónde aparece el número ni con qué nombre firma sus SMS. Busca en el correo de envío de la tienda o en la página de tu pedido, o mira [otros sitios donde puede estar](guide:find-tracking-number). Las demás búsquedas del formulario piden datos del remitente: la «Referencia» solo vale con su agencia y su código de «Cliente», y el «Nº solicitud» es el de una petición de recogida.
 
 | Lo que tienes | Qué es |
 | --- | --- |
@@ -76,7 +76,7 @@ La página de Reclamaciones de NACEX se dirige a su cliente, quien contrató el 
 
 ¿El seguimiento dice `Entregado` y no tienes nada? Mira [paquete entregado pero no recibido](guide:delivered-not-received).
 
-## NACEX teléfono y atención al cliente
+## NACEX teléfono, atención al cliente y recogidas
 
 Así lo indicaban las webs de NACEX en octubre de 2026. Ningún canal publica horario, así que NACEX no anuncia un teléfono 24 horas:
 
@@ -87,6 +87,8 @@ Así lo indicaban las webs de NACEX en octubre de 2026. Ningún canal publica ho
 - **Reclamaciones:** la [página de Reclamaciones](https://www.nacex.es/irReclamaciones.do).
 
 Para Andorra, NACEX no da canales propios: usa los de España. En Portugal, su número gratuito es el 800 200 077. Ninguna página de NACEX da un número de WhatsApp.
+
+**Pedir una recogida.** Si eres tú quien envía, la FAQ de NACEX da tres vías: el formulario [Solicitar Recogida](https://www.nacex.es/irRecogida.do) de su web; el 900 100 000 o atencion.cliente@nacex.com, que te ponen en contacto con la franquicia de tu zona; o la franquicia más cercana al punto de recogida. El formulario pide tus datos (NIF incluido), la fecha y tu horario de mañana o de tarde, las direcciones de recogida y de entrega, el servicio, los bultos, el peso y las medidas. Sin cuenta en una franquicia, se paga en efectivo; con el formulario web, en el momento de la recogida. NACEX lleva hasta 40 kg por bulto y menos de 200 cm sumando largo, alto y ancho; si te pasas, consulta antes con la agencia de tu zona. O llévalo a un punto NACEX.shop, donde también se hacen envíos. Para seguir tu petición, usa el bloque «Solicitud de envío» de la página de seguimiento, con la agencia y el «Nº solicitud».
 
 ## Seguir un envío NACEX con Peek
 
@@ -114,24 +116,25 @@ Si NACEX responde «No existe ningún albarán introducido en el sistema cumplie
 
 ### ¿Cómo devuelvo un paquete NACEX?
 
-Según lo que diga la tienda: NACEX pide consultar las condiciones de devolución en la tienda online donde compraste. Si la tienda lo ofrece, la red NACEX.shop sirve también para devolver compras online.
+Según lo que diga la tienda: NACEX pide consultar las condiciones de devolución en la tienda online donde compraste. Si la tienda lo ofrece, la red NACEX.shop sirve también para devolver compras online. Para un cambio de producto, la tienda puede pedir NACEX cambio, que recoge tu producto y entrega el nuevo a la vez.
 
 :::sources
 - [NACEX: Inicio](https://www.nacex.es/) – Logista, franquicias, casilla de seguimiento
-- [NACEX: Seguimiento](https://www.nacex.es/irSeguimiento.do) – agencia y albarán, referencia alternativa
+- [NACEX: Seguimiento de envíos](https://www.nacex.es/irSeguimiento.do) – agencia y albarán, referencia alternativa, referencia con agencia y cliente, nº de solicitud
 - [NACEX: Formulario de Seguimiento](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) – envío no encontrado
-- [NACEX: FAQS](https://www.nacex.es/irFaqs.do) – contacto, ausencia, 15 días, dirección, rehúse
+- [NACEX: FAQS](https://www.nacex.es/irFaqs.do) – contacto, ausencia, 15 días, dirección, rehúse, recogidas, pago, 40 kg, destinos
 - [NACEX: FAQ sobre entregas](https://www.nacex.es/visualizarfaq.do?category=900) – nota de aviso, recogida en la agencia
 - [NACEX: FAQ sobre servicios](https://www.nacex.es/visualizarfaq.do?category=901) – prealerta, sábados
 - [NACEX: Contacto](https://www.nacex.es/irContactenosContacto.do) – teléfono, correo, chat
+- [NACEX: Solicitar Recogida](https://www.nacex.es/irRecogida.do) – formulario, franjas, pago en la recogida
 - [NACEX: Reclamaciones](https://www.nacex.es/irReclamaciones.do) – quién reclama, plazos
-- [NACEX: NACEX.shop](https://www.nacex.es/irEnvioSostenible.do) – al día siguiente desde las 9:00
+- [NACEX: NACEX.shop](https://www.nacex.es/irEnvioSostenible.do) – al día siguiente desde las 9:00, envíos desde un punto
 - [NACEX: Localizador de Puntos NACEX](https://www.nacex.es/irCerca.do) – puntos y franquicias
 - [NACEX: Mi Entrega Preferida](https://www.nacex.es/irServicioNacional.do?seccion=mep) – cambios con la prealerta
 - [NACEX: Alertas de información](https://www.nacex.es/pages/img/servicios/valor/Alertas_informacion_ES.pdf) – Prealerta
 - [NACEX: Urgentes](https://www.nacex.es/irServicioNacional.do?seccion=urgentes) – 19:00 H, sábados, Canarias
 - [NACEX: Portugal](https://www.nacex.es/irServicioNacional.do?seccion=portugal) – Azores y Madeira
-- [NACEX: e-COMMERCE](https://www.nacex.es/irServicioNacional.do?seccion=ecommerce) – devoluciones
+- [NACEX: e-COMMERCE](https://www.nacex.es/irServicioNacional.do?seccion=ecommerce) – devoluciones, NACEX cambio
 - [NACEX: Complementarios](https://www.nacex.es/irServicioNacional.do?seccion=complementarios) – Entrega concertada
 - [NACEX: Servicios y condiciones de transporte 2026](https://www.nacex.es/pages/img/servicios/condiciones_tramitaciones/condiciones-generales-2026-ES.pdf) – segunda entrega, 50 km, sábados, Navidad
 - [NACEX: ¿Quiénes somos?](https://www.nacex.es/irEmpresaQuienes.do) – NACEX.shop, comercios y lockers

@@ -4,7 +4,7 @@ description: Der Status hängt seit Tagen? Die häufigsten Gründe, wie lange Wa
 slug: sendungsverfolgung-aktualisiert-sich-nicht
 picture: Ein Kalender mit mehreren durchgestrichenen Tagen, eine Fortschrittslinie, die auf halbem Weg abbricht, und Pip wartet ein bisschen gelangweilt.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Wenn sich die Sendungsverfolgung nicht aktualisiert, hat meist nur niemand dein Paket gescannt. Stehen geblieben ist es deshalb nicht: Paketdienste scannen in Paketzentren und an Grenzen, nicht auf der Straße, und eine lange Fahrt, ein Flug, der Zoll oder ein Wochenende können Tage ohne neuen Eintrag bedeuten. Sorgen machen musst du dir erst, wenn die Frist des Paketdienstes abgelaufen ist (bei [DHL](carrier:dhl) mehr als 5 Werktage ohne neuen Status, bei der [Schweizerischen Post](carrier:swiss-post) im Inland mehr als zwei Tage über der erwarteten Laufzeit). Und auch dann fragst du zuerst den Händler: Er ist der Kunde des Paketdienstes.
@@ -87,7 +87,7 @@ So gehst du vor:
 - Paketdienst prüfen | Seine Sendungsverfolgung, dazu die des Ziellands, falls die dortige Post das Paket übernommen hat.
 - Händler fragen | Ob er das Paket wirklich verschickt hat, an die richtige Adresse, und wann es ankommen soll.
 - Frist abgelaufen | Der Händler gibt die Nachforschung in Auftrag. Bei DHL und bei der Schweizerischen Post im Inland darfst du sie auch selbst anstoßen.
-- Frist der Plattform beachten | Öffne den Fall bei Amazon, eBay oder Vinted, bevor ihre Frist abläuft.
+- Frist der Plattform beachten | Öffne den Fall bei eBay oder Vinted, bevor ihre Frist abläuft.
 :::
 
 ## Wann kannst du ein verspätetes Paket bei Amazon, eBay oder Vinted reklamieren?
@@ -96,10 +96,10 @@ Ein Marktplatz kann dir das Geld zurückgeben, aber nur innerhalb seiner Frist:
 
 | Plattform | Ab wann | Bis wann |
 | --- | --- | --- |
-| Amazon, Versand durch Amazon | Wenn auch ein bis zwei Werktage nach dem voraussichtlichen Lieferdatum nichts Neues kommt. Die meisten verspäteten Pakete kommen laut Amazon innerhalb von 48 Stunden | Amazon bittet, nach 48 Stunden zu melden. Helfen kann es nur innerhalb von 30 Tagen nach der erwarteten Zustellung |
-| Amazon, Verkauf und Versand durch einen Marketplace-Verkäufer (A-bis-z-Garantie) | 3 Tage nach dem letzten voraussichtlichen Lieferdatum, wenn der Verkäufer nicht innerhalb von 48 Stunden geantwortet oder das Problem gelöst hat | Solange das letzte mögliche Lieferdatum höchstens 90 Tage zurückliegt |
 | eBay (eBay-Käuferschutz) | Sobald das Ca.-Lieferdatum verstrichen ist | 30 Kalendertage danach |
 | Vinted | Mit Vinted-Versandschein: nach 25 Werktagen ab „verschickt“. Individueller Versand: Nach 21 Werktagen wird die Bestellung als „geliefert“ markiert | 2 Tage nach dem Hinweis von Vinted oder der Markierung als „geliefert“ |
+
+Bei Amazon deckt die A-bis-z-Garantie die rechtzeitige Lieferung von Artikeln ab, die externe Verkäufer auf dem Marketplace anbieten und versenden. Kannst du das Problem nicht direkt mit dem Verkäufer lösen, beantragst du die Erstattung bei Amazon.
 
 Bei Etsy kannst du bis 30 Tage nach dem angesetzten Liefertermin einen Fall eröffnen, bei AliExpress einen Streitfall bis 15 Tage nach Ende der Lieferzeit.
 
@@ -133,10 +133,8 @@ Vielleicht wurde das Paket noch nicht gescannt (bei DHL Paket kann es bis zu 24 
 - [Schweizerische Post: Kontaktformular für Nachforschungen](https://customer-service.post.ch/public/e/l/nachforschung?lang=de&shortcut=national-enquiry-de) – Absender oder Empfänger
 - [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Nachrichten bei Anmeldung und Sortierung
 - [Schweizerische Post: Ereignisse der Sendungsverfolgung](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Dateneinlieferung
-- [Amazon.de: Sendung verfolgen](https://www.amazon.de/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – Wetter und Verkehr, 48 Stunden
-- [Amazon.de: Fehlende Details zum Sendungsverlauf](https://www.amazon.de/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – ein oder zwei Werktage
-- [Amazon.de: Ein fehlendes Paket finden, das laut Sendungsverfolgung zugestellt wurde](https://www.amazon.de/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – 30 Tage
-- [Amazon.de: A-bis-z-Garantie](https://www.amazon.de/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 Tage, 48 Stunden, 90 Tage
+- [About Amazon: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – A-bis-z-Garantie: rechtzeitige Lieferung bei externen Verkäufern, Erstattung
+- [About Amazon: A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst mit dem Verkaufspartner klären, dann an Amazon wenden
 - [eBay.de: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – Ca.-Lieferdatum, 30 Kalendertage
 - [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – bis zu 48 Stunden
 - [Zalando: Wo ist mein Paket?](https://www.zalando.ch/faq/where-is-my-parcel.html) – Link erst aktiv, wenn das Paket beim Zusteller ist

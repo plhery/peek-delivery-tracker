@@ -15,8 +15,8 @@ Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt
 
 - **Między sortowniami nikt nie skanuje.** [InPost](carrier:inpost) opisuje drogę paczki tak: kurier zabiera ją do oddziału, stamtąd jedzie do sortowni, a potem w trasę do miasta docelowego. Paczki, które jadą daleko, trafiają jeszcze do Sortowni Głównej, czyli wielkiego centrum logistycznego. Gdy paczka już jedzie, następny skan pojawi się dopiero w kolejnym z tych miejsc.
 - **Weekendy i święta.** Kurierzy DPD doręczają w soboty tylko paczki z usługą dodatkową Sobota. Poczta Polska, odliczając 14 dni do reklamacji, pomija dni ustawowo wolne od pracy, a Vinted liczy dni robocze bez weekendów i świąt. Przerwy świąteczne przewoźników znajdziesz w poradniku [do kiedy wysłać paczkę przed świętami](guide:christmas-posting-dates).
-- **Pogoda i korki.** Amazon pisze, że pogoda i ruch drogowy mogą opóźnić dostawę.
-- **Spóźniona aktualizacja.** Wśród powodów, dla których brakuje informacji o śledzeniu, Amazon wymienia opóźnienie w aktualizacji bazy danych. Vinted uprzedza, że status u niego bywa inny niż na stronie przewoźnika.
+- **Pogoda i korki.** Niemiecki DHL wymienia złą pogodę, korki, wypadki i choroby, a w Niemczech przed Bożym Narodzeniem paczka może iść dłużej.
+- **Status na platformie.** Vinted uprzedza, że status u niego bywa inny niż na stronie przewoźnika.
 - **Etykieta, której maszyna nie odczyta.** Niemiecki DHL wymienia literówkę w kodzie pocztowym, brak numeru domu, nieczytelne pismo, odklejoną etykietę i uszkodzone opakowanie. Paczka może wtedy pojechać nie tam, gdzie trzeba, albo trafić do ręcznego sortowania, a to potrafi ją opóźnić o kilka dni.
 
 ## Paczka stoi w miejscu: ile dni to jeszcze normalne?
@@ -43,7 +43,6 @@ Od kilku godzin do kilku dni. Jeśli śledzenie pokazuje tylko utworzenie etykie
 - **Allegro:** `Oczekuje na nadanie` znaczy, że sprzedający jeszcze nie nadał paczki u przewoźnika. W zakładce „Moje przesyłki” śledzisz paczkę, gdy Allegro ma już jej numer przewozowy. Jeśli nie widzisz tam zamówienia, sprawdź w „Moich zakupach” dane dostawy i to, czy sprzedający dostał wpłatę, a potem poproś go o numer do śledzenia albo potwierdzenie nadania.
 - **Vinted:** może minąć do 48 godzin, zanim zobaczysz tam pierwsze informacje o statusie.
 - **Zalando:** link do śledzenia z e-maila zadziała dopiero wtedy, gdy paczkę odbierze przewoźnik.
-- **Amazon:** paczkę wysłaną z centrum logistycznego za granicą zobaczysz w śledzeniu dopiero wtedy, gdy dotrze do centrum dystrybucyjnego przewoźnika w Polsce.
 
 Co znaczą pozostałe statusy, wyjaśnia [poradnik o statusach przesyłki](guide:tracking-statuses).
 
@@ -58,11 +57,11 @@ Zamówienie z AliExpress, Temu albo Shein? Zobacz, jak [śledzić paczkę z Chin
 
 ### Wydana do doręczenia, a potem cisza
 
-Na Amazonie status `W trakcie dostawy` oznacza, że paczka prawdopodobnie dotrze dziś. Amazon dodaje, że jeśli paczka ma przyjść dziś lub jutro, a status się nie zmienił, to normalne: przesyłki bywają [doręczane późnym wieczorem](guide:delivery-times). Gdy DPD wyda paczkę do doręczenia, numer telefonu do kuriera znajdziesz w aplikacji DPD Mobile. Jeśli kurier nie zastał Cię w domu, Allegro radzi skontaktować się bezpośrednio z przewoźnikiem i sprawdzić, czy w SMS-ie albo e-mailu od niego nie ma numeru do kuriera, który wiezie Twoją paczkę. Jeśli status pokazuje, że paczka jest doręczona, a jej nie ma, przeczytaj poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
+Gdy DPD wyda paczkę do doręczenia, numer telefonu do kuriera znajdziesz w aplikacji DPD Mobile. Jeśli kurier nie zastał Cię w domu, Allegro radzi skontaktować się bezpośrednio z przewoźnikiem i sprawdzić, czy w SMS-ie albo e-mailu od niego nie ma numeru do kuriera, który wiezie Twoją paczkę. Jeśli status pokazuje, że paczka jest doręczona, a jej nie ma, przeczytaj poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
 ## Kiedy paczkę uznaje się za zaginioną?
 
-Nie ma jednego dnia. Przewoźnicy podają, od kiedy przyjmą reklamację albo [uznają paczkę za utraconą](guide:lost-parcel), i liczą to od nadania albo od terminu doręczenia, a nie od ostatniego skanu. Spóźniona paczka zwykle dociera dużo wcześniej: Amazon pisze, że większość opóźnionych przesyłek dociera w ciągu 48 godzin od podanej daty dostawy.
+Nie ma jednego dnia. Przewoźnicy podają, od kiedy przyjmą reklamację albo [uznają paczkę za utraconą](guide:lost-parcel), i liczą to od nadania albo od terminu doręczenia, a nie od ostatniego skanu.
 
 | Przewoźnik | Kiedy możesz działać | Kto składa reklamację |
 | --- | --- | --- |
@@ -88,7 +87,7 @@ Co robić po kolei:
 - Sprawdź przewoźnika | Jego śledzenie i komunikaty, a jeśli paczkę przejął inny przewoźnik, także jego stronę.
 - Napisz do sprzedawcy | Niech potwierdzi, że wysłał paczkę na właściwy adres, poda numer przesyłki albo potwierdzenie nadania i powie, kiedy ma dotrzeć.
 - Termin minął | Sprzedawca składa reklamację u przewoźnika. W Poczcie Polskiej możesz ją złożyć Ty, jeśli nadawca zrzeknie się roszczeń na Twoją rzecz.
-- Pilnuj terminu platformy | Otwórz Dyskusję na Allegro albo zgłoś problem na Amazonie lub Vinted, zanim minie ich termin.
+- Pilnuj terminu platformy | Otwórz Dyskusję na Allegro albo zgłoś problem na Vinted, zanim minie ich termin.
 :::
 
 ## Kiedy zgłosić spóźnioną paczkę na Allegro, Amazonie i Vinted?
@@ -98,9 +97,9 @@ Platforma może oddać Ci pieniądze, ale tylko w swoim terminie:
 | Platforma | Od kiedy | Do kiedy |
 | --- | --- | --- |
 | Allegro (Allegro Ochrona Kupujących) | Dyskusja z powodem „nie otrzymałem produktu”: najwcześniej godzinę po zakupie, sprzedający ma 24 godziny na odpowiedź. Wniosek o rekompensatę: od 14. dnia po zakupie albo 7 dni po zgłoszeniu problemu | 2 lata od zakupu. Zwrot do 20 000 zł |
-| Amazon, każde zamówienie | Data dostawy minęła, a śledzenie stoi: Amazon prosi, by poczekać jeszcze dzień lub dwa, a problem ze śledzeniem zgłosić zaraz po upływie 48 godzin | Amazon pomoże tylko w ciągu 30 dni od daty dostawy |
-| Amazon, sprzedawca z platformy Marketplace (Gwarancja od A do Z) | 3 dni po ostatniej przewidywanej dacie dostawy, jeśli sprzedawca przez ponad 48 godzin od Twojej wiadomości nie odpowiedział lub nie rozwiązał problemu | 90 dni od ostatniej możliwej daty dostawy |
 | Vinted | Etykieta wygenerowana na Vinted: po 25 dniach roboczych od chwili, gdy zamówienie oznaczono jako wysłane. Wysyłka indywidualna: po 21 dniach roboczych zamówienie zostaje oznaczone jako doręczone | 2 dni od powiadomienia od Vinted albo od zmiany statusu na „Doręczono” |
+
+Na Amazonie każdy produkt, także od niezależnego sprzedawcy, jest objęty Gwarancją od A do Z. Jeśli masz problem z terminową dostawą, Amazon obiecuje zwrot pieniędzy albo wymianę produktu. Gdy sprzedaje ktoś inny niż Amazon, najpierw spróbuj rozwiązać problem bezpośrednio ze sprzedawcą.
 
 AliExpress pozwala otworzyć spór najpóźniej 15 dni po upływie czasu dostawy zamówienia.
 
@@ -138,10 +137,8 @@ Paczka może nie mieć jeszcze pierwszego skanu, numer może należeć do innego
 - [Poczta Polska: Śledzenie przesyłek](https://www.poczta-polska.pl/sledzenie-przesylek/) – komunikat o błędnym numerze
 - [DHL eCommerce Polska: Śledzenie paczek krajowych i zagranicznych](https://mojdhl.pl/sprawdz) – komunikat Brak informacji o przesyłce i jego powody, kontakt z nadawcą
 - [Zalando: Gdzie jest moja paczka?](https://www.zalando.pl/faq/where-is-my-parcel.html) – link do śledzenia działa po odbiorze paczki przez przewoźnika
-- [Amazon.pl: Śledzenie paczki](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – centra logistyczne za granicą, W trakcie dostawy, pogoda i ruch drogowy, 48 godzin, dzień lub dwa
-- [Amazon.pl: Brak informacji o śledzeniu](https://www.amazon.pl/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – opóźnienie aktualizacji bazy danych
-- [Amazon.pl: Odnajdywanie zaginionej przesyłki, która została oznaczona jako dostarczona](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – problemy ze śledzeniem zgłaszane po 48 godzinach, pomoc w ciągu 30 dni od daty dostawy
-- [Amazon.pl: Gwarancja od A do Z](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 dni, 48 godzin, 90 dni
+- [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – Gwarancja od A do Z dla każdego produktu, terminowa dostawa, zwrot pieniędzy albo wymiana
+- [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw rozmowa ze sprzedawcą, potem zwrot pieniędzy od Amazon
 - [Vinted: Paczka nie dotarła](https://www.vinted.pl/help/658) – 5 i 7 dni roboczych, 25 i 21 dni roboczych, 2 dni
 - [Vinted: Status przesyłki nie jest aktualizowany](https://www.vinted.pl/help/1368) – status inny niż u przewoźnika, dni robocze bez weekendów i świąt
 - [Vinted: Śledzenie przesyłki](https://www.vinted.pl/help/100) – 48 godzin, „Mam problem” w ciągu dwóch dni
@@ -151,6 +148,7 @@ Paczka może nie mieć jeszcze pierwszego skanu, numer może należeć do innego
 - [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – status bez zmian, przerwy w śledzeniu, śledzenie w kraju docelowym
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – odprawa celna w kilka dni roboczych
 - [DHL: Why are there delays?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – błędy w adresie i etykiecie
+- [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – pogoda, korki, wypadki, okres przed Bożym Narodzeniem
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 dni
 - [Sejm RP: Kodeks cywilny, tekst jednolity Dz.U. 2026 poz. 795](https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf) – art. 22¹, art. 543¹, art. 548 § 3
 :::

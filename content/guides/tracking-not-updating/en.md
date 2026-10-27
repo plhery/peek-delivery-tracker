@@ -4,7 +4,7 @@ description: Why parcel tracking stops updating, how long a gap is normal at eac
 slug: tracking-not-updating
 picture: A calendar with several days crossed out, a progress line that stops halfway, and Pip waiting, a little bored.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Tracking not updating usually means nobody has scanned your parcel (or package) lately, not that it has stopped moving. Carriers scan at depots and borders, not on the road, so a long drive, a flight, customs or a weekend can leave days without a new line. Worry only once the carrier's own waiting time has passed (7 days after mailing for a [USPS](carrier:usps) search, 10 working days after the due date for a [Royal Mail](carrier:royal-mail) 1st or 2nd Class claim), and even then, ask the seller first: it's the carrier's customer.
@@ -15,7 +15,7 @@ Tracking shows scans, not movement, and a parcel is scanned only at certain poin
 
 - **No scan between hubs.** [UPS](carrier:ups) says a parcel going a long way likely won't be scanned again until its destination hub. [Canada Post](carrier:canada-post) typically scans a parcel when it's mailed and when it goes out for delivery, and says several days can pass in between.
 - **Weekends and holidays.** USPS delivers Monday to Saturday; on Sunday, only Priority Mail Express and Amazon parcels. Royal Mail counts Saturday as a working day for 1st and 2nd Class, but not Sunday or public holidays. Around Christmas, check [carriers' days off](guide:christmas-posting-dates).
-- **Weather and busy seasons.** Amazon's common reasons for late deliveries include bad weather, heavy traffic, holiday demand and customs.
+- **Weather and busy seasons.** DHL names bad weather, traffic jams, accidents and illness, and says parcels in Germany can take longer before Christmas.
 - **A label the machines can't read.** DHL names postcode typos, missing house numbers, hard-to-read handwriting, labels that came off and damaged packaging. The parcel may then be misrouted or sorted by hand, delaying it several days.
 
 ## How long can a parcel be stuck in transit?
@@ -92,7 +92,7 @@ What to do, in order:
 - Check the carrier | Its tracking and service alerts, plus the local carrier's site if the parcel changed hands.
 - Ask the seller | To confirm it sent the parcel, to the right address, and when it should arrive.
 - Past the waiting time | The seller opens a search or claim. USPS and Canada Post let you start a search too.
-- Mind the platform's clock | Open a case on Amazon, eBay or Vinted before its window closes.
+- Mind the platform's clock | Open a case on eBay or Vinted before its window closes.
 :::
 
 ## When can you claim a late parcel on Amazon, eBay or Vinted?
@@ -101,10 +101,10 @@ A marketplace can refund you, but only inside its window:
 
 | Platform | You can act | Until |
 | --- | --- | --- |
-| Amazon, shipped by Amazon | 48 hours after the estimated delivery date | 30 days after that date |
-| Amazon, sold and shipped by another seller (A-to-z Guarantee) | 3 days after the latest estimated delivery date, if the seller hasn't answered or solved it within 48 hours | 90 days after the last possible delivery date |
 | eBay | Once the estimated delivery date has passed | 30 calendar days after it |
 | Vinted | Vinted label: after up to 25 business days from `shipped`. Your own label: at 21 business days the order is marked delivered | 2 days after Vinted's notice or the delivered mark |
+
+On Amazon, the A-to-z Guarantee covers on-time delivery of items sold and shipped by a third-party seller. If you can't sort it out with the seller (on Amazon.co.uk, if it hasn't answered within 48 hours), you claim a refund from Amazon directly. For any other late Amazon order, Customer Service can help you track it and resolve the delay.
 
 Etsy lets you open a case up to 30 days after the estimated delivery date; AliExpress, a dispute up to 15 days after the delivery time ends.
 
@@ -149,8 +149,10 @@ The parcel may not be scanned yet, the number may belong to another carrier, or 
 - [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – static status, destination tracking
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – customs clearance
 - [DHL: Why are there delays?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – label problems
-- [Amazon: Late deliveries](https://www.amazon.com/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – causes, 48 hours, 30 days
-- [Amazon: A-to-z Guarantee](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 and 90 days
+- [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – weather, traffic jams, before Christmas
+- [About Amazon UK: How to contact a seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – A-to-z Guarantee, on-time delivery, 48 hours
+- [About Amazon: Amazon's product guarantee](https://www.aboutamazon.com/news/policy-news-views/amazon-guarantee-backs-all-products-purchased-in-store) – refund from Amazon if the seller can't resolve a delivery problem
+- [About Amazon: How to contact Amazon customer service](https://www.aboutamazon.com/news/company-news/contact-amazon-customer-service) – late deliveries
 - [eBay: Money Back Guarantee](https://www.ebay.co.uk/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 days
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 30 days
 - [Vinted: Tracking a parcel](https://www.vinted.co.uk/help/100-tracking-a-parcel) – 48 hours

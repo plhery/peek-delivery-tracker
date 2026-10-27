@@ -4,7 +4,7 @@ description: O seguimento da encomenda não atualiza há dias? Vê as causas mai
 slug: tracking-nao-atualiza-encomenda-parada
 picture: Um calendário com vários dias riscados, uma linha de progresso interrompida a meio e o Pip à espera, um pouco aborrecido.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Quando o tracking não atualiza, normalmente é porque ninguém leu a etiqueta da tua encomenda nos últimos dias, não porque ela tenha parado. As transportadoras registam leituras nos centros operacionais e nas fronteiras, não na estrada: uma viagem longa, um voo, a alfândega ou um fim de semana podem deixar-te dias sem uma linha nova. Só vale a pena preocupares-te quando passar o prazo da própria transportadora (os [CTT](carrier:ctt) indicam cerca de 3 dias úteis para uma Encomenda Postal no continente; a [InPost](carrier:inpost) aceita uma reclamação por atraso passados mais de 5 dias desde a notificação de envio) e, mesmo assim, fala primeiro com a loja: foi ela que contratou a transportadora.
@@ -15,7 +15,7 @@ O seguimento mostra leituras, não movimento, e uma encomenda só é lida em cer
 
 - **Sem leituras entre centros.** A [UPS](carrier:ups) explica que uma encomenda que vai para longe provavelmente só volta a ser lida no centro de destino. A GLS avisa que trabalha com centros de distribuição e que, por isso, o percurso nem sempre parece direto. Nos CTT, o estado `Em trânsito` aparece várias vezes ao longo do caminho, porque o envio pode passar por vários centros operacionais.
 - **Fins de semana e feriados.** A GLS [entrega de segunda a sexta-feira, em horário comercial](guide:delivery-times). Na DPD, a entrega ao sábado é um serviço à parte, até às 13h. Os CTT dão os prazos em dias úteis.
-- **Ilhas, mau tempo e épocas altas.** Para os Açores e a Madeira, os CTT avisam que os prazos podem alargar-se por limitações de transporte. Entre as causas habituais de atraso, a Amazon aponta o mau tempo, o trânsito, a procura nas [épocas festivas](guide:christmas-posting-dates) e a alfândega.
+- **Ilhas, mau tempo e épocas altas.** Para os Açores e a Madeira, os CTT avisam que os prazos podem alargar-se por limitações de transporte. Na Alemanha, a DHL aponta o mau tempo, o trânsito, os acidentes e as doenças como causas de atraso, e avisa que antes do [Natal](guide:christmas-posting-dates) uma encomenda pode demorar mais.
 - **Uma etiqueta que as máquinas não leem.** A DHL aponta códigos postais mal escritos, números de porta em falta, letra difícil de ler, etiquetas descoladas e embalagens danificadas. A encomenda pode ir parar ao sítio errado ou ser triada à mão, com vários dias de atraso.
 
 ## Quanto tempo pode uma encomenda ficar parada?
@@ -38,7 +38,6 @@ Horas ou dias. Muitas vezes a etiqueta já existe, mas a transportadora ainda n�
 - **CTT:** `Aguarda entrada nos CTT` quer dizer que os CTT receberam a informação eletrónica do envio, mas a encomenda ainda não entrou na rede deles: o expedidor pode ainda estar a prepará-la. Quando a recebem, o estado passa a `Aceite`. Se o código não der resultados, pode ser de um envio sem seguimento, cujo código só serve para a alfândega, ou de um envio entregue em Portugal por outra empresa: os CTT mandam contactar o remetente.
 - **UPS:** `Etiqueta Criada` quer dizer que a UPS recebeu os detalhes do envio do remetente, mas ainda não tem a encomenda.
 - **DHL:** os eventos aparecem «normalmente 24 a 48 horas» depois de receberes o número de localização. Na Alemanha, a [DHL Paket](carrier:dhl) fala de até 24 horas.
-- **Amazon:** o número pode faltar porque a encomenda ainda vai a caminho da transportadora. Aparece em **Os meus pedidos** depois da primeira leitura.
 - **Vinted:** a informação de envio pode demorar até 48 horas a aparecer pela primeira vez. Com a InPost, quem vende tem 5 dias úteis para imprimir a etiqueta, colá-la e entregar a encomenda num Ponto Pack.
 
 Os outros estados estão explicados em [o que querem dizer os estados do seguimento](guide:tracking-statuses).
@@ -87,17 +86,15 @@ O que fazer, por esta ordem:
 - Vê a transportadora | O seguimento e os avisos dela, e o site da transportadora local se a encomenda mudou de mãos.
 - Fala com a loja | Para confirmar que enviou a encomenda, para a morada certa, e quando deve chegar.
 - Passado o prazo | A loja pede à transportadora que procure a encomenda ou abre uma reclamação. Na InPost, também podes reclamar tu.
-- Atenção ao prazo da plataforma | Abre um caso na Amazon, no eBay ou na Vinted antes de o prazo acabar.
+- Atenção ao prazo da plataforma | Abre um caso no eBay ou na Vinted antes de o prazo acabar.
 :::
 
-## Encomenda atrasada: quando reclamar na Amazon, no eBay ou na Vinted?
+## Encomenda atrasada: quando reclamar no eBay ou na Vinted?
 
 Uma plataforma pode devolver-te o dinheiro, mas só dentro do prazo dela:
 
 | Plataforma | Podes agir | Até |
 | --- | --- | --- |
-| Amazon, enviado pela Amazon | 48 horas depois da data prevista de entrega, sem tentativa de entrega nem atualizações | Só pode ajudar nos 30 dias a contar da data de entrega |
-| Amazon, vendido e enviado por um vendedor do Marketplace (Garantia de A a Z) | 3 dias depois da data prevista de entrega mais recente, se o vendedor não respondeu em 48 horas nem resolveu o problema | Até 90 dias depois da última data de entrega possível |
 | eBay | Quando passa a data de entrega prevista | 30 dias de calendário depois dela |
 | Vinted | Etiqueta gerada na Vinted: espera até 25 dias úteis desde `enviado`. Envio personalizado: aos 21 dias úteis, a compra é marcada como `entregue` | 2 dias depois do aviso da Vinted ou da marcação como entregue |
 
@@ -143,11 +140,7 @@ A encomenda pode ainda não ter sido lida, o número pode ser de outra transport
 - [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – estado parado, seguimento do país de destino
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – desalfandegamento
 - [DHL: Why are there delays?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – morada e etiqueta
-- [Amazon: Late deliveries](https://www.amazon.com/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – causas de atraso
-- [Amazon.es: Entregas atrasadas](https://www.amazon.es/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6&language=pt_PT) – 48 horas, 30 dias
-- [Amazon.es: Informações de referência indisponíveis](https://www.amazon.es/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER&language=pt_PT) – número ainda sem primeira leitura, Os meus pedidos
-- [Amazon.es: O que é a Garantia A-to-Z?](https://www.amazon.es/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV&language=pt_PT) – 3 dias, 48 horas, 90 dias
-- [Amazon.pl: Odnajdywanie zaginionej przesyłki (em polaco)](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – avisar logo após 48 horas, ajuda só nos 30 dias a contar da data de entrega
+- [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – mau tempo, trânsito, acidentes, antes do Natal
 - [eBay: Money Back Guarantee](https://www.ebay.co.uk/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 dias
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 30 dias
 - [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/658) – 5 e 7 dias úteis, 25, 21, 2 e 14 dias

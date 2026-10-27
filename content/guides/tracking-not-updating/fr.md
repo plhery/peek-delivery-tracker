@@ -4,7 +4,7 @@ description: Ton suivi n'avance plus depuis des jours ? Les raisons, combien de 
 slug: suivi-colis-ne-bouge-plus
 picture: Un calendrier aux jours barrés, une ligne de progression arrêtée à mi-chemin et Pip qui attend, l'air de s'ennuyer.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Un suivi qui ne bouge plus veut en général dire que personne n'a scanné ton colis ces derniers temps, pas qu'il s'est arrêté. Les transporteurs scannent dans les centres de tri et aux frontières, pas sur la route : un long trajet, un vol, la douane ou un week-end peuvent laisser plusieurs jours sans nouvelle ligne. Ne t'inquiète qu'une fois passé le délai du transporteur lui-même (chez [Chronopost](carrier:chronopost), plus de 48 heures sans changement ; chez [bpost](carrier:bpost), au moins 5 jours ouvrables pour un envoi vers un pays voisin ; chez [La Poste suisse](carrier:swiss-post), plus de deux jours de retard sur le délai habituel), et même là, contacte d'abord le vendeur : c'est lui, le client du transporteur.
@@ -15,7 +15,7 @@ Le suivi montre des scans, pas des déplacements, et un colis n'est scanné qu'�
 
 - **Pas de scan entre deux centres de tri.** [UPS](carrier:ups) prévient qu'un colis qui parcourt une longue distance risque de ne plus être scanné avant d'arriver à son centre de destination.
 - **Les week-ends et les jours fériés.** On compte en jours ouvrables ou ouvrés : [Colissimo](carrier:la-poste) annonce « 48h soit 2 jours ouvrables » vers la France métropolitaine et Monaco. Chronopost ne compte ni les week-ends ni les jours fériés dans son seuil de 48 heures, et Vinted non plus dans ses jours ouvrés. Les jours sans service autour de Noël sont listés dans [les dates limites d'envoi des fêtes](guide:christmas-posting-dates).
-- **La météo, les pics d'activité, l'actualité.** Amazon cite les intempéries, la circulation dense, la forte demande pendant les vacances et les pannes de véhicule ; [Colis Privé](carrier:colis-prive), la météo défavorable et les problèmes logistiques. Vers l'international et l'outre-mer, Colissimo se dit « fortement dépendant du contexte géopolitique et des capacités de transport international ».
+- **La météo, les pics d'activité, l'actualité.** [Colis Privé](carrier:colis-prive) cite la météo défavorable et les problèmes logistiques. DHL ajoute les embouteillages, les accidents et les cas de maladie, et prévient qu'en Allemagne, un colis peut mettre plus longtemps avant Noël. Vers l'international et l'outre-mer, Colissimo se dit « fortement dépendant du contexte géopolitique et des capacités de transport international ».
 - **Une adresse fausse ou une étiquette illisible.** Colis Privé cite l'erreur dans l'adresse de livraison. DHL détaille : faute de frappe dans le code postal, numéro de rue manquant, étiquette manuscrite difficile à lire, étiquette décollée, emballage ouvert ou abîmé qu'il faut refaire. Le colis peut alors partir au mauvais endroit ou être trié à la main, avec plusieurs jours de retard.
 
 ## Combien de temps un colis peut-il rester bloqué en transit ?
@@ -57,7 +57,7 @@ Commande passée sur AliExpress, Temu ou Shein ? Lis [comment suivre un colis ve
 
 ### En cours de livraison, puis plus rien
 
-Attends la fin de la journée : UPS livre en général les particuliers [entre 9 h et 19 h](guide:delivery-times), parfois plus tard. En cas d'imprévu, la date peut glisser. Chez UPS, l'imprévu apparaît comme une `Anomalie` et le suivi affiche la nouvelle date de livraison ; Chronopost reconnaît qu'il ne peut pas toujours tenir la date annoncée. Amazon demande d'attendre 48 heures après la date de livraison estimée, car le colis est peut-être sur le point d'arriver. Si le suivi indique « livré » et que tu n'as rien reçu, lis [colis livré mais pas reçu](guide:delivered-not-received).
+Attends la fin de la journée : UPS livre en général les particuliers [entre 9 h et 19 h](guide:delivery-times), parfois plus tard. En cas d'imprévu, la date peut glisser. Chez UPS, l'imprévu apparaît comme une `Anomalie` et le suivi affiche la nouvelle date de livraison ; Chronopost reconnaît qu'il ne peut pas toujours tenir la date annoncée. Si le suivi indique « livré » et que tu n'as rien reçu, lis [colis livré mais pas reçu](guide:delivered-not-received).
 
 ## Au bout de combien de temps un colis est-il déclaré perdu ?
 
@@ -92,7 +92,7 @@ Que faire, dans l'ordre :
 - Vérifie le transporteur | Son suivi et ses annonces de perturbations, et le site du transporteur local si le colis a changé de mains.
 - Écris au vendeur | Demande-lui de confirmer l'envoi, la bonne adresse et la date d'arrivée prévue.
 - Passé le délai | Le vendeur ouvre l'enquête ou la réclamation. Chronopost, Colis Privé, La Poste et le formulaire de La Poste suisse acceptent aussi ta demande.
-- Surveille le délai de la plateforme | Ouvre un litige sur Amazon, eBay ou Vinted avant qu'il soit trop tard.
+- Surveille le délai de la plateforme | Ouvre un litige sur eBay ou Vinted avant qu'il soit trop tard.
 :::
 
 ## Colis en retard : quand réclamer sur Amazon, eBay ou Vinted ?
@@ -101,10 +101,10 @@ Une plateforme peut te rembourser, mais seulement dans les délais qu'elle fixe 
 
 | Plateforme | Tu peux agir | Jusqu'à |
 | --- | --- | --- |
-| Amazon, expédié par Amazon | 48 heures après la date de livraison estimée | 30 jours après cette date |
-| Amazon, vendu et expédié par un vendeur tiers (garantie A à Z) | 3 jours après la dernière date de livraison estimée, si tu as contacté le vendeur il y a plus de 48 heures sans solution | 90 jours après la dernière date de livraison possible |
 | eBay (garantie client eBay) | Dès que la date de livraison estimée est passée | 30 jours calendaires après cette date |
 | Vinted | Envoi intégré (bordereau Vinted) : 25 jours ouvrés après le passage en « expédiée ». Envoi personnalisé : au bout de 21 jours ouvrés, la commande est indiquée comme livrée | 2 jours après l'avis de Vinted ou le passage en livrée |
+
+Sur Amazon, la garantie A à Z couvre les articles vendus et expédiés par un vendeur tiers : si la livraison pose problème et que tu n'arrives pas à le régler directement avec le vendeur, tu peux demander un remboursement à Amazon.
 
 AliExpress te laisse ouvrir un litige jusqu'à 15 jours après la fin du délai de livraison de la commande.
 
@@ -145,10 +145,10 @@ Peut-être que le colis n'a pas encore été scanné, que le numéro appartient 
 - [DHL : Suivi](https://www.dhl.com/fr-fr/home/suivi.html) – 24 à 48 heures
 - [UPS : Comprendre le statut de suivi](https://www.ups.com/fr/fr/support/tracking-support/where-is-my-package/understanding-tracking-status) – scans espacés, « Étiquette créée », 9 h à 19 h, « Anomalie »
 - [DHL : Why are there delays? (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – problèmes d'adresse et d'étiquette
+- [DHL : My shipment has not been delivered yet (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – intempéries, embouteillages, accidents, période avant Noël
 - [DHL : International shipments (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – statut figé normal, suivi du pays de destination
 - [DHL : What does my international shipment status mean? (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – dédouanement en plusieurs jours ouvrables
-- [Amazon.fr : Livraisons en retard](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – causes, 48 heures, 30 jours
-- [Amazon.fr : Qu'est-ce que la Garantie A à Z ?](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 jours, 48 heures, 90 jours
+- [About Amazon France : Amazon étend les protections apportées par la Garantie A à Z en France](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeurs tiers, remboursement par Amazon si le problème de livraison n'est pas réglé avec le vendeur
 - [eBay.fr : Règlement de la Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 jours calendaires
 - [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/658) – 5, 7, 21 et 25 jours ouvrés, 2 jours, vendeurs Pro
 - [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – 48 heures avant l'affichage du suivi, jours ouvrés hors week-ends et jours fériés

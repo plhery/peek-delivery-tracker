@@ -4,7 +4,7 @@ description: Pacco fermo da giorni? Perché il tracking non si aggiorna, quanto 
 slug: tracking-non-si-aggiorna
 picture: Un calendario con diversi giorni barrati, una linea di avanzamento che si ferma a metà e Pip che aspetta, un po' annoiato.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Se il tracking non si aggiorna, di solito vuol dire solo che nessuno ha scansionato il pacco di recente, non che si è fermato. I corrieri lo scansionano nei centri di smistamento e alle frontiere, non lungo la strada: un viaggio lungo, un volo, la dogana o un fine settimana possono lasciarti per giorni senza aggiornamenti. Preoccupati solo quando è passato il termine del corriere (con Poste Delivery Standard il reclamo si può fare dal 6° giorno lavorativo dopo la spedizione; con la [Posta svizzera](carrier:swiss-post), per un invio nazionale, la ricerca si chiede quando il tempo di consegna abituale è superato di oltre due giorni). E anche allora scrivi prima al venditore: il cliente del corriere è lui.
@@ -15,7 +15,7 @@ Il tracking mostra le scansioni, non gli spostamenti, e un pacco viene scansiona
 
 - **Nessuna scansione tra un hub e l'altro.** [UPS](carrier:ups) spiega che un pacco che fa molta strada probabilmente non verrà scansionato di nuovo prima dell'hub di destinazione. Il centro di smistamento dove il tuo pacco risulta «fermo» è il luogo dell'ultima scansione, non per forza quello dove si trova adesso. [Poste Italiane](carrier:poste-italiane) avverte anche che, per fare prima, il pacco può passare da tappe intermedie che sembrano fuori strada rispetto a partenza e arrivo.
 - **Fine settimana e festivi.** I tempi dei corrieri si contano quasi sempre in giorni lavorativi. Poste Delivery Standard non consegna a domicilio il sabato e nei festivi, e il sabato non entra nel conto dei giorni di consegna. Anche i 25 giorni lavorativi di Vinted sono «esclusi i fine settimana e i giorni festivi».
-- **Maltempo e periodi di punta.** Tra i motivi più comuni dei ritardi, Amazon.it cita il maltempo, il traffico intenso, la forte richiesta di consegne durante le festività, i ritardi doganali e i guasti ai veicoli.
+- **Maltempo e periodi di punta.** Secondo la DHL tedesca, maltempo, traffico, incidenti e malattie possono ritardare una consegna, e in Germania prima di Natale un pacco può metterci di più.
 - **Un'etichetta che le macchine non leggono.** La DHL tedesca cita CAP sbagliati, numeri civici mancanti, scritte a mano poco leggibili, etichette staccate e imballi danneggiati: il pacco può finire nel posto sbagliato o essere smistato a mano, con qualche giorno di ritardo. La Posta svizzera ha perfino un evento apposta, `Errore di avviamento`: capita per esempio con un numero postale di avviamento sbagliato, e può far perdere tempo.
 
 ## Pacco fermo in transito: quanto è normale aspettare?
@@ -92,7 +92,7 @@ Cosa fare, in ordine:
 - Controlla il corriere | Il suo tracking e i suoi avvisi di disservizio, più il sito del corriere locale se il pacco è passato di mano.
 - Scrivi al venditore | Chiedigli di confermarti che ha spedito, all'indirizzo giusto, e quando dovrebbe arrivare il pacco.
 - Passato il termine | Il venditore apre la ricerca o il reclamo. Con Poste, e con la Posta svizzera per gli invii nazionali, puoi farlo anche tu.
-- Occhio al termine della piattaforma | Apri una segnalazione su Amazon, eBay o Vinted prima che scada.
+- Occhio al termine della piattaforma | Apri una segnalazione su eBay o Vinted prima che scada.
 :::
 
 ## Pacco in ritardo: quando chiedere il rimborso su Amazon, eBay o Vinted?
@@ -101,12 +101,12 @@ Una piattaforma può rimborsarti, ma solo entro i suoi termini:
 
 | Piattaforma | Da quando | Fino a quando |
 | --- | --- | --- |
-| Amazon, spedito da Amazon | 48 ore dopo la data di consegna prevista | 30 giorni dalla data di consegna, contattando il Servizio Clienti |
-| Amazon, venduto e spedito da un venditore del Marketplace (Garanzia dalla A alla Z) | 3 giorni dopo l'ultima data di consegna prevista, se il venditore non ha risposto entro 48 ore né risolto il problema | Fino a 90 giorni dopo l'ultima data di consegna possibile |
 | eBay (Garanzia cliente eBay) | Passata la data di consegna prevista | 30 giorni di calendario dopo quella data |
 | Vinted | Etichetta generata su Vinted: quando Vinted ti avvisa che il pacco sembra smarrito, o passati 25 giorni lavorativi da quando l'ordine è segnato come `spedito`, con *Ho un problema*. Spedizione personalizzata: dopo 21 giorni lavorativi da `spedito`, quando l'ordine viene segnato come `consegnato` | 2 giorni di calendario dall'avviso di Vinted o da quando l'ordine risulta consegnato, 14 con un Seller Pro |
 
-Su Amazon la richiesta parte da *I miei ordini*, con *Problema con l'ordine*. Su Etsy puoi aprire un caso fino a 30 giorni dopo la data di consegna stimata; su AliExpress una controversia fino a 15 giorni dopo la fine del tempo di consegna.
+Su Amazon, se un prodotto venduto e spedito da un partner di vendita arriva in ritardo e non riesci a risolvere il problema direttamente con lui, puoi chiedere il rimborso ad Amazon con la Garanzia dalla A alla Z.
+
+Su Etsy puoi aprire un caso fino a 30 giorni dopo la data di consegna stimata; su AliExpress una controversia fino a 15 giorni dopo la fine del tempo di consegna.
 
 > Su Vinted, se l'ordine risulta consegnato e non segnali un problema entro 2 giorni (14 con un Seller Pro), l'ordine si conclude e il pagamento va a chi vende. Non aspettare che il tracking si svegli.
 
@@ -141,8 +141,8 @@ Il pacco forse non è ancora stato scansionato, il codice può essere di un altr
 - [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – stato fermo, tracking del Paese di destinazione
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – sdoganamento
 - [DHL: Why are there delays?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – problemi di indirizzo ed etichetta
-- [Amazon.it: Consegne in ritardo](https://www.amazon.it/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – motivi dei ritardi, 48 ore, 30 giorni
-- [Amazon.it: Che cos'è la Garanzia dalla A alla Z?](https://www.amazon.it/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 giorni, 48 ore, 90 giorni
+- [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – maltempo, traffico, incidenti, prima di Natale
+- [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prodotti dei partner di vendita, rimborso da Amazon se il problema di consegna non si risolve con il venditore
 - [eBay.it: Garanzia cliente eBay](https://www.ebay.it/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 giorni
 - [Vinted: Il pacco non è arrivato](https://www.vinted.it/help/658) – 5 e 7 giorni, 25 e 21 giorni lavorativi, 2 e 14 giorni
 - [Vinted: Politica di rimborso](https://www.vinted.it/help/465) – 2 giorni di calendario dall'avviso di Vinted

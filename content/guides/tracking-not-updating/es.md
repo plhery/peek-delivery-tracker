@@ -4,7 +4,7 @@ description: Por qué el seguimiento de un paquete deja de actualizarse, cuánto
 slug: seguimiento-no-se-actualiza
 picture: Un calendario con varios días tachados, una línea de progreso que se queda a medias y Pip esperando, un poco aburrido.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Si el seguimiento no se actualiza, casi siempre es porque nadie ha escaneado tu paquete últimamente, no porque esté parado. Los transportistas lo escanean en sus centros y al cruzar fronteras, no en la carretera: un trayecto largo, un vuelo, la aduana o un fin de semana pueden dejarte días sin una línea nueva. Preocúpate solo cuando haya pasado el plazo del propio transportista ([Correos](carrier:correos-spain) acepta reclamaciones por un Paq Estándar a partir de 4 días desde que lo admitió; InPost, por demora, si el pedido tarda más de 5 días desde el aviso de envío), y aun entonces, escribe primero a la tienda: es ella quien contrató el envío.
@@ -15,7 +15,7 @@ El seguimiento muestra escaneos, no movimiento, y un paquete solo se escanea en 
 
 - **Sin escaneos entre centros.** [UPS](carrier:ups) avisa de que, si un envío recorre una distancia larga, es probable que no se vuelva a escanear hasta llegar a su centro de destino. [GLS](carrier:gls-es) recuerda que usa varios centros de distribución, así que la ruta no siempre es directa.
 - **Fines de semana y festivos.** GLS reparte de lunes a viernes (los sábados, solo con su servicio Express Saturday), e InPost no lleva paquetes a sus Punto Pack y Lockers ni sábados, ni domingos, ni festivos. Muchos plazos se cuentan en días laborables: los 25 días de Vinted, por ejemplo, no incluyen fines de semana ni festivos.
-- **Mal tiempo y temporada alta.** Entre los motivos más habituales de retraso, Amazon cita el mal tiempo, las retenciones de tráfico, los [picos de demanda en fiestas](guide:christmas-posting-dates) y los retrasos en aduana de los paquetes internacionales.
+- **Mal tiempo y temporada alta.** Según DHL, el mal tiempo, los atascos, los accidentes o las bajas por enfermedad pueden retrasar una entrega, y en Alemania un paquete puede tardar más [antes de Navidad](guide:christmas-posting-dates).
 - **Direcciones y etiquetas con problemas.** DHL cita códigos postales mal escritos, números de portal que faltan, etiquetas escritas a mano que no se leen bien, etiquetas despegadas y embalajes dañados: el paquete puede acabar donde no toca o quedar apartado para clasificarlo a mano, con varios días de retraso. Correos llama «envío estacionado» al que no puede entregar por una incidencia: datos del destinatario insuficientes, una dirección incorrecta o un paquete roto. Lo deja estacionado 5 días naturales a la espera de que se corrijan los datos, y puedes corregirlos tú en «Gestión de estacionados» con el número de envío y el PIN que te manda por SMS o correo electrónico.
 
 ## Mi paquete lleva días en tránsito: ¿cuánto es normal?
@@ -93,7 +93,7 @@ Qué hacer, por orden:
 - Revisa la web del transportista | Su seguimiento y sus avisos de incidencias, y también la del transportista local si el paquete ha cambiado de manos.
 - Escribe a la tienda | Para que te confirme que lo envió, a la dirección correcta, y cuándo debería llegar.
 - Pasado el plazo | La tienda abre la búsqueda o la reclamación. Con InPost también puedes reclamar tú por demora.
-- Vigila el plazo de la plataforma | Abre la reclamación en Amazon, Vinted o AliExpress antes de que se acabe.
+- Vigila el plazo de la plataforma | Abre la reclamación en Vinted o AliExpress antes de que se acabe.
 :::
 
 ## Paquete con retraso en Amazon, Vinted o AliExpress: ¿cuándo puedes reclamar?
@@ -102,10 +102,10 @@ Una plataforma puede devolverte el dinero, pero solo dentro de su plazo:
 
 | Plataforma | Puedes reclamar | Hasta |
 | --- | --- | --- |
-| Amazon, enviado por Amazon | 48 horas después de la fecha de entrega estimada | 30 días después de esa fecha |
-| Amazon, vendido y enviado por otro vendedor (Garantía de la A a la Z) | 3 días después de la última fecha de entrega estimada o de la entrega confirmada, lo que ocurra primero, si el vendedor no ha respondido en 48 horas ni lo ha resuelto | 90 días después de la última fecha de entrega |
 | Vinted | Etiqueta generada en Vinted: tras esperar hasta 25 días laborables desde `Enviado`. Envío personalizado: a los 21 días laborables, cuando el pedido se marca como `Entregado` | 2 días naturales después del aviso de Vinted o de que el pedido se marque como entregado; 14 días si el vendedor es Pro |
 | AliExpress | Por lo general, desde el día 11 después de que el vendedor lo envíe. Si el seguimiento se mueve con normalidad, solo cuando acabe el plazo de entrega | 15 días después de que acabe el plazo de entrega o de que confirmes la recepción |
+
+En Amazon, la Garantía de la A a la Z cubre también las compras a vendedores externos: si tienes problemas con el plazo de entrega y no consigues resolverlos con el vendedor, puedes reclamar directamente a Amazon.
 
 En eBay puedes avisar de que no ha llegado en cuanto pasa la fecha de entrega prevista, y hasta 30 días naturales después; en Etsy, abrir un caso hasta 30 días después de la fecha de entrega estimada.
 
@@ -144,8 +144,9 @@ Puede que el paquete aún no se haya escaneado, que el número sea de otro trans
 - [DHL: International shipments](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – estado sin cambios, huecos, seguimiento del país de destino
 - [DHL: What does my international shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – despacho de aduanas
 - [DHL: Why are there delays?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – dirección y etiqueta
-- [Amazon.es: Entregas con retraso](https://www.amazon.es/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – motivos, 48 horas, 30 días
-- [Amazon.es: ¿Qué es la Garantía de la A a la Z?](https://www.amazon.es/gp/help/customer/display.html?nodeId=GQ37ZCNECJKTFYQV) – 3 días y 90 días
+- [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – mal tiempo, atascos, accidentes, antes de Navidad
+- [About Amazon España: Diez cosas de Amazon que no sabías](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z para vendedores externos, problemas con el tiempo de entrega
+- [About Amazon España: Amazon amplía la Garantía de la A a la Z en España](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – reembolso de Amazon si no se resuelve con el vendedor
 - [Vinted: El paquete no llega](https://www.vinted.es/help/658) – 7, 25, 21 y 2 días
 - [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – 48 horas
 - [Vinted: La información de seguimiento no se actualiza](https://www.vinted.es/help/1368) – días laborables sin festivos

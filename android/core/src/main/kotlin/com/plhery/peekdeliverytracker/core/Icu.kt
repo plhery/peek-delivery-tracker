@@ -147,6 +147,25 @@ fun interface CurrencyFormatter {
     fun format(value: Double, code: String, locale: Locale, fractionDigits: Int?): String
 }
 
+/**
+ * The grouping Foundation's ICU gives a locale. A phone's ICU may be older: Android 12's still groups a four-digit
+ * Italian number ("1.234,50 €"), which the iPhone's CLDR leaves whole, as it does in Spanish, Polish and Portuguese.
+ * Asking for it by name keeps every Android version on the iPhone's; English, German and French group from four
+ * digits on any ICU, and other locales keep ICU's own.
+ */
+internal class IcuGrouping(packageName: String) {
+    private val strategyClass = Class.forName("$packageName.number.NumberFormatter\$GroupingStrategy")
+    private val grouping = Class.forName("$packageName.number.LocalizedNumberFormatter").getMethod("grouping", strategyClass)
+    private val leavesFourDigitsWhole = strategyClass.getField("MIN2").get(null)
+
+    fun apply(formatter: Any, locale: Locale): Any =
+        if (locale.language in setOf("it", "es", "pl") || (locale.language == "pt" && locale.country == "PT")) {
+            grouping.invoke(formatter, leavesFourDigitsWhole)
+        } else {
+            formatter
+        }
+}
+
 /** ICU's `NumberFormatter` (android.icu.number, com.ibm.icu.number), found by name. */
 internal class IcuCurrencies private constructor(val packageName: String) : CurrencyFormatter {
     private val localized = Class.forName("$packageName.number.LocalizedNumberFormatter")
@@ -157,9 +176,10 @@ internal class IcuCurrencies private constructor(val packageName: String) : Curr
     private val fixedFraction = precisionClass.getMethod("fixedFraction", Int::class.javaPrimitiveType)
     private val format = localized.getMethod("format", Double::class.javaPrimitiveType)
     private val currency = Class.forName("$packageName.util.Currency").getMethod("getInstance", String::class.java)
+    private val grouping = IcuGrouping(packageName)
 
     override fun format(value: Double, code: String, locale: Locale, fractionDigits: Int?): String {
-        var formatter = unit.invoke(withLocale.invoke(null, locale), currency.invoke(null, code))
+        var formatter = grouping.apply(unit.invoke(withLocale.invoke(null, locale), currency.invoke(null, code)), locale)
         if (fractionDigits != null) formatter = precision.invoke(formatter, fixedFraction.invoke(null, fractionDigits))
         return format.invoke(formatter, value).toString()
     }
@@ -215,13 +235,17 @@ internal class IcuLengths private constructor(val packageName: String) : LengthF
     private val kilometre = measureUnitClass.getField("KILOMETER").get(null)
     private val short = unitWidthClass.getField("SHORT").get(null)
     private val whole = precisionClass.getMethod("integer").invoke(null)
+    private val grouping = IcuGrouping(packageName)
 
     /** A formatter for each locale met: ICU's are immutable, so threads share them. */
     private val formatters = ConcurrentHashMap<Locale, Any>()
 
     override fun kilometres(value: Double, locale: Locale): String {
         val formatter = formatters.getOrPut(locale) {
-            precision.invoke(unitWidth.invoke(unit.invoke(withLocale.invoke(null, locale), kilometre), short), whole)
+            grouping.apply(
+                precision.invoke(unitWidth.invoke(unit.invoke(withLocale.invoke(null, locale), kilometre), short), whole),
+                locale,
+            )
         }
         return format.invoke(formatter, value).toString()
     }

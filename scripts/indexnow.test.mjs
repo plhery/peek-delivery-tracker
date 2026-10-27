@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { after, describe, it } from 'node:test';
+import { fileURLToPath } from 'node:url';
 import {
-  DEFAULT_ENDPOINT, INDEXNOW_KEY, MAX_URLS_PER_REQUEST, decodeXml, pagesToSubmit, parseSitemap, readSubmitted, requestBodies, run, submit,
+  DEFAULT_ENDPOINT, INDEXNOW_KEY, MAX_URLS_PER_REQUEST, decodeXml, frontMatter, pagesToSubmit, parseSitemap, readHeads, readSubmitted,
+  requestBodies, retitledPaths, run, submit,
 } from './indexnow.mjs';
 
 const origin = 'https://peek.example.test';
@@ -16,6 +18,12 @@ const sitemap = pages => '<?xml version="1.0" encoding="UTF-8"?>\n'
   + pages.map(({ url, lastmod }) => `<url>\n<loc>${url}</loc>\n<xhtml:link rel="alternate" hreflang="de" href="${url}/de" />\n`
     + (lastmod ? `<lastmod>${lastmod}</lastmod>\n` : '') + '</url>\n').join('')
   + '</urlset>\n';
+/** Writes a page of `content` below `root`, as content/guides/<folder>/<language>.md. */
+const writePage = (root, file, { title, description = 'What it says.', slug }) => {
+  mkdirSync(path.dirname(path.join(root, 'content', file)), { recursive: true });
+  writeFileSync(path.join(root, 'content', file),
+    `---\ntitle: ${title}\ndescription: ${description}\nslug: ${slug}\npublished: 2026-10-01\nupdated: 2026-10-17\n---\n\nWhat the page says.\n`);
+};
 
 /** A fetch that serves `xml` as the live sitemap and answers IndexNow with `status`. */
 function engine(xml, status = 200) {
@@ -93,6 +101,56 @@ describe('choosing the pages', () => {
 
   it('submits every page of the host without a sitemap to compare with', () => {
     assert.equal(pagesToSubmit(afterDeploy, null, host).length, 5);
+  });
+
+  it('submits a page whose title or description changed, though its date did not', () => {
+    assert.deepEqual(pagesToSubmit(afterDeploy, before, host, new Set(['/guides/a'])), [
+      `${origin}/guides/a`, `${origin}/guides/b`, `${origin}/guides/new`, `${origin}/carriers/undated`,
+    ]);
+  });
+});
+
+describe('reading the titles', () => {
+  it('reads the fields of a front matter, and nothing below it', () => {
+    assert.deepEqual(frontMatter('---\ntitle: InPost: statuses\ndescription:  Track it. \nslug: inpost\n---\n\ntitle: not this\n'),
+      { title: 'InPost: statuses', description: 'Track it.', slug: 'inpost' });
+    assert.deepEqual(frontMatter('---\r\ntitle: A\r\n---\r\n'), { title: 'A' });
+    assert.deepEqual(frontMatter('# No front matter\ntitle: A\n'), {});
+  });
+
+  it('keys each carrier\'s page and guide by its address, leaving other files out', () => {
+    const root = mkdtempSync(path.join(tmpdir(), 'indexnow-heads-'));
+    after(() => rmSync(root, { recursive: true, force: true }));
+    assert.equal(readHeads(root), null);
+    writePage(root, 'carriers/inpost/en.md', { title: 'InPost tracking', slug: 'inpost' });
+    writePage(root, 'carriers/inpost/es.md', { title: 'InPost seguimiento', description: 'Sigue tu paquete.', slug: 'inpost-seguimiento' });
+    writePage(root, 'guides/a/de.md', { title: 'A', slug: 'a-de' });
+    writePage(root, 'guides/a/notes.md', { title: 'Notes', slug: 'notes' });
+    writeFileSync(path.join(root, 'content/guides/README.md'), '# Guides\n');
+    assert.deepEqual(readHeads(root), {
+      '/carriers/inpost': 'InPost tracking\nWhat it says.',
+      '/de/guides/a-de': 'A\nWhat it says.',
+      '/es/carriers/inpost-seguimiento': 'InPost seguimiento\nSigue tu paquete.',
+    });
+  });
+
+  it('reads a title, a description and an address for every page of the site', () => {
+    const root = fileURLToPath(new URL('..', import.meta.url));
+    const heads = readHeads(root);
+    const files = ['carriers', 'guides'].flatMap(section => readdirSync(path.join(root, 'content', section), { withFileTypes: true })
+      .filter(folder => folder.isDirectory())
+      .flatMap(folder => readdirSync(path.join(root, 'content', section, folder.name)).filter(file => /^[a-z]{2}\.md$/.test(file))));
+    assert.equal(Object.keys(heads).length, files.length);
+    for (const [address, head] of Object.entries(heads)) {
+      assert.match(address, /^(\/[a-z]{2})?\/(carriers|guides)\/[^/]+$/);
+      assert.match(head, /^.+\n.+$/, address);
+    }
+  });
+
+  it('finds the pages retitled since, leaving out the new and the gone', () => {
+    assert.deepEqual([...retitledPaths({ '/a': 'A\nx', '/b': 'B\nx', '/new': 'N\nx' }, { '/a': 'A\nx', '/b': 'B\ny', '/gone': 'G\nx' })], ['/b']);
+    assert.deepEqual([...retitledPaths({ '/a': 'A\nx' }, null)], []);
+    assert.deepEqual([...retitledPaths(null, { '/a': 'A\nx' })], []);
   });
 });
 
@@ -199,6 +257,35 @@ describe('the command', () => {
     const moved = atOrigin();
     const again = await command([`--since=${ref}`, origin], live, 200, clone);
     assert.deepEqual([again.code, again.posts.length, again.lines.at(-1), atOrigin()], [0, 0, 'Nothing to submit.', moved]);
+  });
+
+  it('submits a page whose title or description changed, and keeps the titles with the ref', async () => {
+    const { clone, atOrigin } = repository();
+    writePage(clone, 'guides/a/en.md', { title: 'A', slug: 'a' });
+    await command([`--since=${ref}`, origin], live, 200, clone);
+    assert.deepEqual(readSubmitted(ref, clone)?.heads, { '/guides/a': 'A\nWhat it says.' });
+    writePage(clone, 'guides/a/en.md', { title: 'A', description: 'What it says now.', slug: 'a' });
+    const { code, lines, posts } = await command([`--since=${ref}`, origin], live, 200, clone);
+    assert.equal(code, 0);
+    assert.ok(lines.includes(`${origin}/sitemap.xml lists 3 pages, 1 of them new, redated or retitled since ${ref}.`));
+    assert.deepEqual(posts.map(post => post.body.urlList), [[`${origin}/guides/a`]]);
+    assert.deepEqual(readSubmitted(ref, clone)?.heads, { '/guides/a': 'A\nWhat it says now.' });
+    const moved = atOrigin();
+    const again = await command([`--since=${ref}`, origin], live, 200, clone);
+    assert.deepEqual([again.posts.length, atOrigin()], [0, moved]);
+  });
+
+  it('keeps the titles with the ref that lacks them, though nothing is submitted', async () => {
+    const { clone, git, atOrigin } = repository();
+    await command([`--since=${ref}`, origin], live, 200, clone);
+    const start = atOrigin();
+    assert.equal(readSubmitted(ref, clone)?.heads, null);
+    writePage(clone, 'guides/a/en.md', { title: 'A', slug: 'a' });
+    const { code, lines, posts } = await command([`--since=${ref}`, origin], live, 200, clone);
+    assert.deepEqual([code, posts.length], [0, 0]);
+    assert.ok(lines.includes('Nothing to submit.'));
+    assert.deepEqual(readSubmitted(ref, clone), { commit: atOrigin(), xml: live, heads: { '/guides/a': 'A\nWhat it says.' } });
+    assert.equal(git('rev-parse', `${atOrigin()}^`), start);
   });
 
   it('lists the pages without sending them or moving the ref on a dry run', async () => {

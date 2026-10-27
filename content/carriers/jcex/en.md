@@ -3,7 +3,7 @@ title: JCEX tracking: JCZ numbers, statuses and who delivers
 description: Track a JCEX parcel from China: what a JCZ waybill number looks like, what each status means, who delivers it in your country and who to ask when it stalls.
 slug: jcex-tracking
 published: 2026-10-21
-updated: 2026-10-23
+updated: 2026-10-27
 ---
 
 JCEX (佳成国际, Jiacheng International Logistics) is a logistics company in Hangzhou, China, that ships parcels abroad for online sellers and hands them to a carrier in your country for the last stretch, such as [USPS](carrier:usps) in the United States or Colissimo in France. Track the number on JCEX's tracker, [track.jcex.com](https://track.jcex.com/), or in the box above. The shop gives it with your order's shipping details.
@@ -80,7 +80,7 @@ Its contact page also lists branches across China, which serve sellers, and no c
 
 [Peek](/) names JCEX at once from a `JCZ…DH` number, which no other carrier in its catalog shares. A track.jcex.com link with `?nums=` and the number can be pasted too. Peek tracks JCEX's JCZ waybill numbers only: for an order number, ask the seller for the waybill.
 
-Peek reads JCEX's own tracking and shows the status, the history with each scan's place on a map, the delivery time and the destination country. It shows a line's English text where JCEX has one (JCEX's page shows the Chinese, such as `签收` for `Delivered`), and the delivering carrier's lines as it wrote them, except exact matches such as `Delivered`, which appear in Peek's own words. `Arrive at the delivery point` and the handover to the depot count as in transit, not as ready to collect or delivered. Scan times keep the clock of their place, China's and then your country's.
+Peek reads JCEX's own tracking and shows the status, the history with each scan's place on a map, the delivery time and the destination country. It shows a line's English text where JCEX has one (JCEX's page shows the Chinese, such as `签收` for `Delivered`), and the delivering carrier's lines as it wrote them, except exact matches such as `Delivered`, which appear in Peek's own words. `Arrive at the delivery point` and the handover to the depot count as in transit, not as ready to collect or delivered. Each scan's time is read on the clock JCEX gives it, China's or your country's, and shown in your own time zone.
 
 As JCEX names no delivering carrier and no second number, Peek follows the JCEX number to the end rather than switching to USPS or Colissimo, whose scans arrive through JCEX's history. It shows no expected delivery date, service or proof of delivery for JCEX.
 

@@ -29,8 +29,6 @@ track.amazon.fr affiche les statuts en français, avec une option en anglais. Il
 | Le mot d'Amazon Shipping | Ce que ça veut dire pour toi |
 | --- | --- |
 | `Étiquette créée` | La boutique a créé l'étiquette. Amazon n'a pas encore le colis. |
-| `Expédié, mais la collecte a été retardé` | L'étiquette existe, mais Amazon n'est pas encore passé prendre le colis chez la boutique. |
-| `Colis collecté` | Amazon a récupéré le colis chez la boutique. |
 | `Le colis est arrivé sur le site logistique du transporteur` | Il est arrivé dans un site de tri d'Amazon. |
 | `Le colis a quitté le site logistique du transporteur` | Il a quitté un site. Juste après `En cours de livraison`, c'est la camionnette qui part. |
 | `Le colis est arrivé au point de transit/centre de livraison final` | Il est au centre qui va te le livrer. |
@@ -41,7 +39,7 @@ track.amazon.fr affiche les statuts en français, avec une option en anglais. Il
 | `Prêt pour la collecte` | Le colis t'attend pour que tu viennes le chercher. |
 | `Retour à l'expéditeur` | Il repart vers la boutique. |
 
-Deux mots prêtent à confusion. `Étiquette créée` seul pendant des jours veut dire, le plus souvent, que la boutique n'a pas encore remis le colis : demande à la boutique, pas à Amazon. Et « collecte » sert à deux choses sur le site français : `Colis collecté` veut dire qu'Amazon a pris le colis chez le vendeur, alors que `Prêt pour la collecte` et `Vous avez collecté ce colis` parlent de toi qui viens le chercher. Quand un colis en retard reçoit une nouvelle date, le titre au-dessus de l'historique l'annonce avec cette date.
+`Étiquette créée` seul pendant des jours veut dire, le plus souvent, que la boutique n'a pas encore remis le colis : demande à la boutique, pas à Amazon. Une fois le colis récupéré, le titre au-dessus de l'historique affiche `Vous avez collecté ce colis`. Quand un colis en retard reçoit une nouvelle date, ce titre l'annonce avec cette date.
 
 ## Livraison Amazon Shipping : horaires, absence et reprogrammation
 
@@ -53,7 +51,7 @@ Deux mots prêtent à confusion. `Étiquette créée` seul pendant des jours veu
 
 **Preuve de livraison.** Le livreur peut photographier un colis déposé dans un endroit sûr ; si la photo passe les contrôles d'Amazon, elle apparaît dans le suivi. Certains colis demandent un code à 6 chiffres, envoyé par e-mail ou SMS le jour de la livraison et visible aussi sur le site de suivi ; le livreur peut le renvoyer.
 
-**Point relais.** L'aide française d'Amazon Shipping ne décrit ni point relais ni casier pour ces colis. Les consignes Amazon Locker et Counter de Vos commandes valent pour les commandes Amazon, pas forcément pour Amazon Shipping.
+**Point relais.** L'aide française d'Amazon Shipping ne décrit ni point relais ni casier pour ces colis.
 
 ## Colis Amazon Shipping non reçu, perdu ou abîmé
 
@@ -69,9 +67,9 @@ Le site de suivi le dit clairement : pour une modification de livraison, un remb
 
 ## Amazon Shipping contact et service client
 
-Lu le 12 octobre 2026. La [page Contactez-nous d'Amazon Shipping](https://track.amazon.fr/contact-us) propose un formulaire « Décrivez-nous votre problème » et précise : « Contactez-nous par e-mail pour obtenir de l'aide. » Cette équipe ne traite que les colis expédiés par Amazon pour d'autres vendeurs ; une commande amazon.fr passe par Vos commandes, et pour le reste il faut contacter l'expéditeur. Amazon Shipping n'indique ni numéro de téléphone ni horaires. Il n'existe pas de site Amazon Shipping belge ou suisse : c'est la même page pour toi.
+Lu le 27 octobre 2026. La [page Contactez-nous d'Amazon Shipping](https://track.amazon.fr/contact-us) propose un formulaire « Décrivez-nous votre problème », avec une réponse par e-mail ou, une fois connecté, un rappel téléphonique. Amazon dit répondre en général en une minute par téléphone et sous vingt-quatre heures par e-mail. Cette équipe ne traite que les colis expédiés par Amazon pour d'autres vendeurs ; une commande amazon.fr passe par Vos commandes, et pour un colis égaré ou endommagé il faut contacter l'expéditeur. Amazon Shipping n'indique ni numéro de téléphone ni horaires. Il n'existe pas de site Amazon Shipping belge ou suisse : c'est la même page pour toi.
 
-> Amazon prévient : un SMS venu d'un numéro inconnu ou d'un indicatif étranger, qui parle d'une commande ou d'une livraison que tu n'attends pas, ou qui contient un lien mal orthographié ou une adresse IP, ne vient pas d'Amazon. Amazon ne demande jamais par SMS tes données personnelles ou bancaires, des codes de carte cadeau, ni d'appeler un numéro. Amazon Shipping envoie bien de vrais SMS et e-mails de suivi, d'où l'intérêt de vérifier.
+> Amazon prévient : si un message parle d'un achat, ne réponds pas et ne clique sur aucun lien. Amazon ne te demandera jamais de payer par téléphone ou par e-mail, ni d'acheter une carte cadeau ; n'appelle pas un numéro reçu par SMS ou par e-mail, ou trouvé sur un moteur de recherche, et signale le message avec l'outil de signalement d'Amazon. Amazon Shipping envoie bien de vrais SMS et e-mails de suivi, d'où l'intérêt de vérifier. Les autres signes d'un faux message sont dans [arnaque colis par SMS](guide:delivery-scam-texts).
 
 ## Suivre un colis Amazon Shipping avec Peek
 
@@ -95,16 +93,16 @@ Le titre du site de suivi donne le jour prévu. Amazon Shipping propose aux entr
 
 ### Comment joindre Amazon Shipping par téléphone ?
 
-Amazon Shipping ne publie aucun numéro de téléphone pour les destinataires. Sa page de contact propose un formulaire et l'e-mail ; pour un colis perdu ou abîmé, c'est l'expéditeur qu'il faut contacter.
+Amazon Shipping ne publie aucun numéro de téléphone pour les destinataires. Sa page de contact propose un formulaire, avec une réponse par e-mail ou un rappel téléphonique si tu te connectes ; pour un colis perdu ou abîmé, c'est l'expéditeur qu'il faut contacter.
 
 :::sources
 - [Amazon Shipping : Suivre un colis](https://track.amazon.fr/) – ce qu'est Amazon Shipping, comment ça marche, comment suivre, langues du site
-- [Amazon Shipping : Aide](https://track.amazon.fr/help) – e-mail de suivi, horaires, tentatives, reprogrammation, instructions, photo, code, rattacher un colis, colis abîmé ou non livrable
-- [Amazon Shipping : Contactez-nous](https://track.amazon.fr/contact-us) – formulaire et e-mail, autres vendeurs seulement, contacter l'expéditeur
-- [Amazon Shipping : Textes du site de suivi](https://track.amazon.fr/getLocalizedStrings) – libellés des statuts, bandeau « contacter l'expéditeur »
+- [Amazon Shipping : Aide](https://track.amazon.fr/faq) – e-mail de suivi, horaires, tentatives, reprogrammation, instructions, photo, code, rattacher un colis, colis abîmé ou non livrable
+- [Amazon Shipping : Contactez-nous](https://track.amazon.fr/contact-us) – formulaire, e-mail ou rappel, délais de réponse, autres vendeurs seulement, contacter l'expéditeur
+- [Amazon Shipping : Textes du site de suivi](https://track.amazon.fr/getLocalizedStrings) – libellés des statuts et du titre, bandeau « contacter l'expéditeur »
 - [Amazon Shipping France : Expérience client, outils et assistance](https://shipping.amazon.fr/ressources/guide-de-demarrage/experience-client-outils-et-assistance) – conservation d'environ sept jours, nouvelle livraison, lien de suivi
 - [Amazon Shipping France](https://shipping.amazon.fr/) – livraison en 24-48 h, 7 jours sur 7, notifications SMS et e-mail
 - [Amazon Shipping UK : Help](https://shipping.amazon.co.uk/help) – réclamations des expéditeurs sous 28 jours
-- [Amazon.fr : Comment identifier les faux messages/SMS](https://www.amazon.fr/gp/help/customer/display.html?nodeId=T2W6VB0DExBF3oyVvx) – faux SMS
+- [About Amazon France : Six conseils contre les arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – messages sur un achat, paiement, carte cadeau, numéros à ne pas appeler, signalement
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek reconnaît et lit
 :::

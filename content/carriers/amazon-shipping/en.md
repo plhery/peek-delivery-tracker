@@ -29,8 +29,6 @@ Amazon's UK tracker shows these in English. The French, Italian and Spanish trac
 | Amazon Shipping's wording | What it means for you |
 | --- | --- |
 | `Label Created` | The shop has made the label. Amazon doesn't have the parcel yet. |
-| `Shipped, but pickup was delayed` | The label exists, but Amazon hasn't collected the parcel from the shop yet. |
-| `Package picked up` | Amazon has collected it from the shop. |
 | `Package arrived at the carrier facility` | It reached an Amazon sorting site. |
 | `Package has left the carrier facility` | It left a site. Right after `Out for delivery`, it's the van leaving. |
 | `Package arrived at the final hub/delivery station` | It's at the station that delivers it. |
@@ -69,9 +67,9 @@ Amazon Shipping's tracker says it plainly: for delivery changes, refunds or othe
 
 ## Amazon Shipping customer service and contact
 
-Read on 12 October 2026. Amazon Shipping's [Contact us page](https://track.amazon.co.uk/contact-us) has a form to describe your issue and offers email support. That team only helps with parcels Amazon shipped for other retailers; Amazon.co.uk orders go through Your Orders, and lost or damaged parcels go to the sender. Amazon Shipping lists no phone number and no opening hours.
+Read on 27 October 2026. Amazon Shipping's [Contact us page](https://track.amazon.co.uk/contact-us) has a form to describe your issue, answered by email or, once you log in, by a phone callback. Amazon says it typically replies within a minute by phone and within 24 hours by email. That team only helps with parcels Amazon shipped for other retailers; Amazon.co.uk orders go through Your Orders, and lost or damaged parcels go to the sender. Amazon Shipping lists no phone number and no opening hours.
 
-> Amazon warns that texts from unknown numbers or a foreign country code, about orders or deliveries you aren't expecting, or with misspelt or IP-address links are not from Amazon. Amazon never asks by text for personal or payment details, gift card codes or to call a number. Report them with "Report a Scam".
+> If a message mentions a purchase, Amazon says not to reply or click any link. It won't ask for payment by phone or email, never asks you to buy a gift card, and tells you not to call numbers sent by text or email or found in search results. Report anything suspicious with Amazon's self-service tool. More in [delivery scam texts](guide:delivery-scam-texts).
 
 ## Tracking Amazon Shipping parcels with Peek
 
@@ -87,7 +85,7 @@ It's Amazon's network delivering for other shops: you track it on track.amazon.c
 
 ### Is Amazon Shipping legit?
 
-Yes. It's Amazon's delivery service for other businesses, and it sends genuine email and SMS updates. A text about a delivery you aren't expecting, from an unknown number or with an odd link, is another matter: Amazon says it isn't from Amazon.
+Yes. It's Amazon's delivery service for other businesses, and you can sign up on its tracker for genuine email or SMS updates. A text about an order you don't recognise is another matter: Amazon advises not to reply, click its links or call a number it gives.
 
 ### How long does Amazon Shipping take?
 
@@ -95,13 +93,13 @@ The tracker's headline gives the expected day. Amazon Shipping sells Next-Day an
 
 :::sources
 - [Amazon Shipping: Track a Package](https://track.amazon.co.uk/) – what Amazon Shipping is, how it works, how to track, languages of the trackers
-- [Amazon Shipping: Help](https://track.amazon.co.uk/help) – tracking email, hours, attempts, rescheduling, instructions, photo, passcode, Delivery to Counter, damaged and returned parcels
-- [Amazon Shipping: Contact us](https://track.amazon.co.uk/contact-us) – form and email, other retailers only, contact the sender
-- [Amazon Shipping: Tracking page texts](https://track.amazon.co.uk/getLocalizedStrings) – status wordings, contact-the-sender banner
+- [Amazon Shipping: Help](https://track.amazon.co.uk/faq) – tracking email, hours, attempts, rescheduling, instructions, photo, passcode, Delivery to Counter, damaged and returned parcels
+- [Amazon Shipping: Contact us](https://track.amazon.co.uk/contact-us) – form, email or callback, reply times, other retailers only, contact the sender
+- [Amazon Shipping: Tracking page texts](https://track.amazon.co.uk/getLocalizedStrings) – status wordings, "Now arriving", contact-the-sender banner
 - [Amazon Shipping UK: Customer experience tools and support](https://shipping.amazon.co.uk/resources/getting-started-guide/customer-experience-tools-and-support) – seven-day hold, pickup points, photo, tracking link
 - [Amazon Shipping UK: Help](https://shipping.amazon.co.uk/help) – 28-day shipper claims, seven-day delivery
 - [Amazon Shipping UK](https://shipping.amazon.co.uk/) – Next-Day and Two-Day delivery, seven days a week
 - [Amazon Shipping developer docs: UK tracking ID format update](https://developer-docs.shipping.amazon.com/apis/changelog/pre-launch-announcement-amazon-shipping-tracking-id-format-update-for-uk) – UK tracking ID formats
-- [Amazon.co.uk: How to identify fake text messages/SMS](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=T2W6VB0DExBF3oyVvx) – fake texts, Report a Scam
+- [About Amazon UK: 7 tips to avoid scams impersonating Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-avoid-scams-impersonating-amazon-this-holiday-season) – messages about a purchase, payment, gift cards, numbers not to call, reporting
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek recognises and reads
 :::

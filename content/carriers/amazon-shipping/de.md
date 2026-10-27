@@ -12,7 +12,7 @@ Amazon Shipping ist Amazons Lieferdienst für andere Unternehmen: Ein Shop, der 
 
 Sobald der Händler deine Bestellung verschickt hat, bekommst du laut Amazon eine Versandbestätigung per E-Mail mit einem Link zur Sendungsverfolgung. Amazon nennt die Nummer „tracking ID“ oder „tracking number“. Auf dem Tracker tippst du sie oben ins Suchfeld und klickst auf „Track“ (auf der französischen Seite „Suivre“). Eine Postleitzahl braucht es nicht.
 
-Eine deutsche Version gibt es nicht: Amazon betreibt öffentliche Amazon-Shipping-Tracker nur für Großbritannien (track.amazon.co.uk), Frankreich (track.amazon.fr), Italien, Spanien und Indien, dazu track.amazon.com für die USA. Welchen davon die Mail eines Shops für ein Paket nach Deutschland, Österreich oder in die Schweiz verlinkt, nennt Amazon nicht. Der Link aus der Mail ist deshalb der sicherste Weg.
+Eine deutsche Version gibt es nicht: Amazon betreibt öffentliche Amazon-Shipping-Tracker nur für Großbritannien (track.amazon.co.uk), Frankreich (track.amazon.fr), Italien, Spanien und Indien. Welchen davon die Mail eines Shops für ein Paket nach Deutschland, Österreich oder in die Schweiz verlinkt, nennt Amazon nicht. Der Link aus der Mail ist deshalb der sicherste Weg.
 
 Ein Nummernformat veröffentlicht Amazon nur für Großbritannien: seit Oktober 2024 ein Länderkürzel und 10 Ziffern. Diese Formen erkennt Peek (alle Ziffern erfunden):
 
@@ -30,8 +30,6 @@ Amazons Tracker spricht kein Deutsch. track.amazon.co.uk zeigt nur Englisch, tra
 | Amazons Status | Was er für dich bedeutet |
 | --- | --- |
 | `Label Created` | Der Shop hat das Etikett erstellt. Amazon hat das Paket noch nicht. |
-| `Shipped, but pickup was delayed` | Das Etikett gibt es, aber Amazon hat das Paket beim Shop noch nicht abgeholt. |
-| `Package picked up` | Amazon hat das Paket beim Shop abgeholt. |
 | `Package arrived at the carrier facility` | Es ist in einem Sortierzentrum von Amazon angekommen. |
 | `Package has left the carrier facility` | Es hat einen Standort verlassen. Direkt nach `Out for delivery` ist es der Lieferwagen, der losfährt. |
 | `Package arrived at the final hub/delivery station` | Es liegt in der Station, die es ausliefert. |
@@ -56,7 +54,7 @@ Steht tagelang nur `Label Created` da, hat der Shop das Paket meist noch nicht �
 
 **Nachweis.** Legt der Fahrer das Paket an einem sicheren Ort ab, kann er es fotografieren. Besteht das Foto Amazons Prüfung, erscheint es in der Sendungsverfolgung. Für manche Pakete braucht der Fahrer einen 6-stelligen Einmalcode, den du am Liefertag per E-Mail oder SMS bekommst und auch auf der Tracking-Seite siehst.
 
-**Abholstellen.** Eine Abholung am Counter mit Barcode und 7 Tagen Frist beschreibt Amazon Shipping nur für Großbritannien. Eine Seite zu Lockern veröffentlicht Amazon Shipping nicht. Was Amazon.de zu Amazon Locker und Counter schreibt, gilt für Amazon-Bestellungen.
+**Abholstellen.** Eine Abholung am Counter mit Barcode und 7 Tagen Frist beschreibt Amazon Shipping nur für Großbritannien. Eine Seite zu Lockern veröffentlicht Amazon Shipping nicht.
 
 ## Amazon Shipping Paket nicht angekommen oder verloren
 
@@ -72,9 +70,9 @@ Amazons Tracker sagt es selbst: Für Änderungen an der Lieferung, Erstattungen 
 
 ## Amazon Shipping Kontakt
 
-So stand es am 12. Oktober 2026 auf Amazons Seiten. Eine deutsche Kontaktseite gibt es nicht. Die Kontaktseiten der Tracker, etwa [track.amazon.fr/contact-us](https://track.amazon.fr/contact-us) (Französisch oder Englisch) oder die britische, bieten ein Formular für dein Problem und Hilfe per E-Mail. Das Team hilft nur bei Paketen, die Amazon für andere Händler verschickt hat. Amazon-Bestellungen laufen über „Meine Bestellungen“, verlorene oder beschädigte Pakete über den Absender. Eine Telefonnummer und Servicezeiten nennt Amazon Shipping nicht.
+So stand es am 27. Oktober 2026 auf Amazons Seiten. Eine deutsche Kontaktseite gibt es nicht. Die Kontaktseiten der Tracker, etwa [track.amazon.fr/contact-us](https://track.amazon.fr/contact-us) (Französisch oder Englisch) oder die britische, bieten ein Formular für dein Problem. Die Antwort kommt per E-Mail oder, wenn du angemeldet bist, als Rückruf; laut Amazon meist innerhalb einer Minute am Telefon und innerhalb von 24 Stunden per E-Mail. Das Team hilft nur bei Paketen, die Amazon für andere Händler verschickt hat. Amazon-Bestellungen laufen über „Meine Bestellungen“, verlorene oder beschädigte Pakete über den Absender. Eine Telefonnummer und Servicezeiten nennt Amazon Shipping nicht.
 
-> Amazon warnt: SMS von unbekannten Nummern oder mit ausländischer Vorwahl, zu Bestellungen oder Lieferungen, die du nicht erwartest, oder mit falsch geschriebenen Links oder IP-Adressen stammen nicht von Amazon. Amazon fragt per SMS nie nach persönlichen Daten, Zahlungsdaten oder Geschenkgutscheincodes und bittet dich nie, eine Nummer anzurufen.
+> Amazon warnt: Bekommst du eine Nachricht zu einem Kauf, antworte nicht und klick auf keinen Link. Amazon fordert dich nicht per Telefon oder E-Mail zu Zahlungen auf und nie zum Kauf einer Geschenkkarte. Ruf keine Nummern an, die du per SMS oder E-Mail bekommst oder in der Online-Suche findest. Verdächtiges meldest du mit Amazons Selfservice-Tool. Mehr dazu: [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 
 ## Amazon Shipping Paket mit Peek verfolgen
 
@@ -90,11 +88,11 @@ Es ist Amazons Netz, das für andere Shops liefert: Du verfolgst das Paket über
 
 ### Gibt es Amazon Shipping in Deutschland?
 
-Eine deutsche Website oder einen deutschen Tracker von Amazon Shipping gibt es nicht. Öffentliche Tracker gibt es nur für Großbritannien, Frankreich, Italien, Spanien, Indien und die USA; Peek fragt für Nummern mit `DE`, `AT` oder `CH` den französischen.
+Eine deutsche Website oder einen deutschen Tracker von Amazon Shipping gibt es nicht. Öffentliche Tracker gibt es nur für Großbritannien, Frankreich, Italien, Spanien und Indien; Peek fragt für Nummern mit `DE`, `AT` oder `CH` den französischen.
 
 ### Hat Amazon Shipping eine Telefonnummer?
 
-Nein, Amazon Shipping nennt auf seinen Seiten keine Telefonnummer und keine Servicezeiten. Empfänger erreichen das Team per Formular und E-Mail über die Kontaktseite des Trackers.
+Nein, Amazon Shipping nennt auf seinen Seiten keine Telefonnummer und keine Servicezeiten. Empfänger schreiben dem Team über das Formular auf der Kontaktseite des Trackers und bekommen die Antwort per E-Mail oder, nach der Anmeldung, als Rückruf.
 
 ### Wie lange dauert Amazon Shipping?
 
@@ -103,17 +101,17 @@ Den erwarteten Liefertag zeigt die Überschrift auf der Tracking-Seite. Amazon v
 :::sources
 - [Amazon Shipping: Suivre un colis](https://track.amazon.fr/) – was Amazon Shipping ist, wie es funktioniert, Sprachen des Trackers, Liste der Tracker
 - [Amazon Shipping: Track a Package](https://track.amazon.co.uk/) – wie man verfolgt, Sprachen
-- [Amazon Shipping: Aide](https://track.amazon.fr/help) – Versandmail, Zeiten, Zustellversuche, neuer Termin, Anweisungen, Foto, Einmalcode, beschädigte und zurückgeschickte Pakete
-- [Amazon Shipping: Help](https://track.amazon.co.uk/help) – dieselben Themen, Delivery to Counter
-- [Amazon Shipping: Contactez-nous](https://track.amazon.fr/contact-us) – Formular und E-Mail, nur andere Händler, Absender kontaktieren
+- [Amazon Shipping: Aide](https://track.amazon.fr/faq) – Versandmail, Zeiten, Zustellversuche, neuer Termin, Anweisungen, Foto, Einmalcode, beschädigte und zurückgeschickte Pakete
+- [Amazon Shipping: Help](https://track.amazon.co.uk/faq) – dieselben Themen, Delivery to Counter
+- [Amazon Shipping: Contactez-nous](https://track.amazon.fr/contact-us) – Formular, E-Mail oder Rückruf, Antwortzeiten, nur andere Händler, Absender kontaktieren
 - [Amazon Shipping: Contact us](https://track.amazon.co.uk/contact-us) – dasselbe auf Englisch
-- [Amazon Shipping: Tracking page texts](https://track.amazon.co.uk/getLocalizedStrings) – englische Statustexte, Hinweis auf den Absender
+- [Amazon Shipping: Tracking page texts](https://track.amazon.co.uk/getLocalizedStrings) – englische Statustexte, „Now arriving“, Hinweis auf den Absender
 - [Amazon Shipping: Textes du suivi](https://track.amazon.fr/getLocalizedStrings) – französische Statustexte
 - [Amazon Shipping France: Expérience client, outils et assistance](https://shipping.amazon.fr/ressources/guide-de-demarrage/experience-client-outils-et-assistance) – sieben Tage in der Lieferstation, neue Zustellung
 - [Amazon Shipping UK: Customer experience tools and support](https://shipping.amazon.co.uk/resources/getting-started-guide/customer-experience-tools-and-support) – sieben Tage, Foto, Tracking-Link
 - [Amazon Shipping UK: Help](https://shipping.amazon.co.uk/help) – 28 Tage für Reklamationen der Versender
 - [Amazon Shipping France](https://shipping.amazon.fr/) – Zustellung in 24 bis 48 Stunden
 - [Amazon Shipping developer docs: UK tracking ID format update](https://developer-docs.shipping.amazon.com/apis/changelog/pre-launch-announcement-amazon-shipping-tracking-id-format-update-for-uk) – Nummernformat in Großbritannien
-- [Amazon.de: So erkennst du gefälschte Textnachrichten/SMS](https://www.amazon.de/gp/help/customer/display.html?nodeId=T2W6VB0DExBF3oyVvx) – gefälschte SMS
+- [About Amazon: 5 praktische Tipps gegen Betrugsmaschen](https://www.aboutamazon.de/news/amazon-prime-und-shopping/5-praktische-tipps-die-dir-helfen-sicher-bei-amazon-einzukaufen-und-betrugsmaschen-zu-verhindern) – Nachrichten zu einem Kauf, Zahlungen, Geschenkkarten, Nummern, Verdächtiges melden
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek erkennt und liest
 :::

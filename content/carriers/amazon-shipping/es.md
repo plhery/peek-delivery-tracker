@@ -29,8 +29,6 @@ track.amazon.es muestra los estados en español, con opción de verlos en inglé
 | Estado de Amazon Shipping | Qué significa para ti |
 | --- | --- |
 | `Etiqueta creada` | La tienda ha hecho la etiqueta. Amazon todavía no tiene el paquete. |
-| `Enviado, pero la entrega se ha retrasado` | Hay etiqueta, pero Amazon aún no ha recogido el paquete en la tienda. |
-| `Paquete recogido` | Amazon ya lo ha recogido en la tienda. |
 | `El paquete ha llegado a las instalaciones del transportista` | Ha llegado a un centro de clasificación de Amazon. |
 | `El paquete ha salido de las instalaciones del transportista` | Ha salido de un centro. Justo después de `En camino para la entrega`, es la furgoneta que sale. |
 | `El paquete llegó al centro/estación de entrega final` | Está en la estación que lo reparte. |
@@ -41,7 +39,7 @@ track.amazon.es muestra los estados en español, con opción de verlos en inglé
 | `Listo para recoger` | Te espera en un punto de recogida. |
 | `Devolviendo al remitente` | Vuelve a la tienda. |
 
-`Enviado, pero la entrega se ha retrasado` confunde: la versión inglesa dice que lo que se retrasa es la recogida en la tienda, no la entrega en tu casa. Y `Etiqueta creada` durante días suele significar que la tienda aún no ha entregado el paquete, así que pregunta a la tienda, no a Amazon. Cuando hay retraso con fecha nueva, el titular encima del historial muestra esa fecha, por ejemplo `Llegará mañana`.
+`Etiqueta creada` durante días suele significar que la tienda aún no ha entregado el paquete, así que pregunta a la tienda, no a Amazon. Cuando hay retraso con fecha nueva, el titular encima del historial pasa a decir `Llegará` con esa fecha.
 
 ## Entrega de Amazon Shipping: horario, intentos y punto de recogida
 
@@ -53,7 +51,7 @@ track.amazon.es muestra los estados en español, con opción de verlos en inglé
 
 **Prueba de entrega.** El repartidor puede fotografiar el paquete que deja en un lugar seguro; si la foto pasa los controles de Amazon, aparece en el seguimiento. Algunos paquetes piden un código de 6 cifras, que te llega por correo o SMS el día de la entrega y también puedes ver en la web de seguimiento.
 
-**Punto de recogida.** La ayuda española de Amazon Shipping no habla de puntos de recogida ni de lockers. Los lockers y los plazos de recogida de Amazon.es son para los pedidos de Amazon, y Amazon no dice que valgan para estos paquetes.
+**Punto de recogida.** La ayuda española de Amazon Shipping no habla de puntos de recogida ni de lockers.
 
 ## Paquete de Amazon Shipping no entregado o perdido: reclamación
 
@@ -69,9 +67,9 @@ El seguimiento de Amazon Shipping lo dice claro: para cambios en la entrega, ree
 
 ## Amazon Shipping: teléfono, contacto y atención al cliente
 
-Consultado el 12 de octubre de 2026. La [página de contacto de Amazon Shipping](https://track.amazon.es/contact-us) tiene un formulario («Explícanos tu problema») y ofrece ayuda por correo electrónico. Ese equipo solo atiende paquetes que Amazon envió para otras tiendas: los pedidos de Amazon.es van por Mis pedidos, y para un paquete perdido o dañado te pide que contactes con el remitente. Amazon Shipping no publica ningún teléfono ni horario de atención.
+Consultado el 27 de octubre de 2026. La [página de contacto de Amazon Shipping](https://track.amazon.es/contact-us) tiene un formulario («Explícanos tu problema»): te contestan por correo electrónico o, si inicias sesión, te llaman por teléfono. Amazon dice que suele responder en 1 minuto por teléfono y en 24 horas por correo. Ese equipo solo atiende paquetes que Amazon envió para otras tiendas: los pedidos de Amazon.es van por Mis pedidos, y para un paquete perdido o dañado te pide que contactes con el remitente. Amazon Shipping no publica ningún número de teléfono ni horario de atención.
 
-> Amazon avisa de que no son suyos los SMS de números desconocidos o con prefijo extranjero, sobre pedidos o entregas que no esperas, o con enlaces mal escritos o con una dirección IP. Amazon nunca te pide por SMS datos personales o de pago, códigos de tarjetas regalo ni que llames a un número. Puedes denunciarlos ante Amazon.
+> Amazon nunca te pedirá por teléfono datos de tu forma de pago ni que compres tarjetas regalo. Desconfía de las prisas: los estafadores quieren que actúes de inmediato. Revisa los enlaces por si tienen errores ortográficos o caracteres repetidos; los sitios web legítimos de Amazon terminan en «amazon.es». Si recibes una llamada, un SMS o un correo sospechoso, avisa a Amazon con el enlace «Denunciar algo sospechoso». Más en [estafa del paquete por SMS](guide:delivery-scam-texts).
 
 ## Seguimiento de Amazon Shipping en Peek
 
@@ -99,12 +97,11 @@ El titular del seguimiento te da el día previsto. Amazon Shipping ofrece a las 
 
 :::sources
 - [Amazon Shipping: Seguimiento de paquetes de Amazon Shipping](https://track.amazon.es/) – qué es Amazon Shipping, cómo funciona, cómo seguir un paquete, idiomas
-- [Amazon Shipping: Ayuda](https://track.amazon.es/help) – correo de envío, horario, intentos, reprogramar, instrucciones, foto, código, paquetes dañados y devueltos
-- [Amazon Shipping: Contacta con nosotros](https://track.amazon.es/contact-us) – formulario y correo, solo paquetes de otras tiendas, contactar con el remitente
-- [Amazon Shipping: Textos del seguimiento](https://track.amazon.es/getLocalizedStrings) – estados, aviso de contactar con el remitente
-- [Amazon Shipping: Textos del seguimiento en inglés](https://track.amazon.co.uk/getLocalizedStrings) – sentido de la recogida retrasada
+- [Amazon Shipping: Ayuda](https://track.amazon.es/faq) – correo de envío, horario, intentos, reprogramar, instrucciones, foto, código, paquetes dañados y devueltos
+- [Amazon Shipping: Contacta con nosotros](https://track.amazon.es/contact-us) – formulario, correo o llamada, plazos de respuesta, solo paquetes de otras tiendas, contactar con el remitente
+- [Amazon Shipping: Textos del seguimiento](https://track.amazon.es/getLocalizedStrings) – estados y titular, aviso de contactar con el remitente
 - [Amazon Shipping España](https://shipping.amazon.es/) – entrega en 24 horas, siete días a la semana
 - [Amazon Shipping UK: Help](https://shipping.amazon.co.uk/help) – las reclamaciones las presenta quien envía
-- [Amazon.es: Cómo identificar mensajes de texto o SMS falsos](https://www.amazon.es/gp/help/customer/display.html?nodeId=T2W6VB0DExBF3oyVvx) – SMS falsos
+- [About Amazon España: 6 consejos para comprar online de forma segura](https://www.aboutamazon.es/noticias/politicas-publicas/6-consejos-para-comprar-online-de-forma-segura) – pagos, tarjetas regalo, prisas, enlaces, «Denunciar algo sospechoso»
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – qué reconoce y consulta Peek
 :::

@@ -372,8 +372,8 @@ check at its cadence, daily rather than weekly after 7 days, since someone is lo
 that left the schedule unseen, or the daily check of one with an alert on, contacts one
 universal provider at most, picked as for an account's recheck (below). One whose links nobody opened in the last hour and that has no alert
 on is checked every 3 hours by day and waits for the morning overnight: nobody reads it,
-and a number no carrier is known for asks every provider in turn. A scheduled run checks at most ten of them, after every
-account's share, the least recently checked first. Their own checks queue behind every account's
+and a number no carrier is known for asks every provider in turn. A scheduled run checks at most ten of them, three in a run overnight
+(about as many an hour as by one run an hour), after every account's share, the least recently checked first. Their own checks queue behind every account's
 refresh and the scheduled run. A delivered or returned one is not checked, but for a
 delivery only a provider reported (above).
 

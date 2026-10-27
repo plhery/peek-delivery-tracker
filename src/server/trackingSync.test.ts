@@ -2376,7 +2376,7 @@ describe('TrackingSyncService', () => {
     expect(client.completeSyncAttempt.mock.calls[0][1]).not.toMatchObject({ outcome: 'interrupted' });
   });
 
-  it('follows one-off parcels opened in the last 24 hours, after the accounts and ten at most', async () => {
+  it('follows one-off parcels opened in the last 24 hours, after the accounts, ten at most a run by day and three overnight', async () => {
     const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       last_synced_at: '2026-09-09T09:00:00Z', sync_status: 'ok' };
     const owned = [
@@ -2403,6 +2403,12 @@ describe('TrackingSyncService', () => {
     ]);
     // The scheduled reconciliation is the account-wide one; it never names a parcel without an owner.
     expect(client.autoLinkPackages).toHaveBeenCalledExactlyOnceWith(undefined);
+    // Overnight, a run every 20 minutes takes three of them. 01:00 in Zurich.
+    client.startSyncAttempt.mockClear();
+    now.setTime(Date.parse('2026-09-09T23:00:00Z'));
+    await service.sync();
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
+      .toEqual(['a1', 'b1', 'legacy', 'one-off-1', 'one-off-2', 'one-off-3']);
   });
 
   it('asks once for the copies of a number in a run and keeps them on one route', async () => {

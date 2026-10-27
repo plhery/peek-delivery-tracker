@@ -358,7 +358,7 @@ See [OBSERVABILITY.md](OBSERVABILITY.md) for verification monitoring.
   database. A write is refused when a browser says a page of another site sent it.
 - **Quotas** (enforced in the database): 50 active and 500 total parcels per account.
   Scheduled sync processes at most five due parcels per account per run (nine in the
-  overnight runs, every 20 minutes), and ten followed without an account. Treat changes to these limits as security-sensitive.
+  overnight runs, every 20 minutes), and ten followed without an account (three overnight). Treat changes to these limits as security-sensitive.
 - **Queue**: `public.sync_jobs`, deduplicated. Finished jobs are kept for 30 days.
 - **Backups**: back up Postgres independently and regularly test restoring Auth, parcels,
   events and push tables together.

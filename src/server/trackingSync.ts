@@ -83,6 +83,8 @@ const MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC = 9;
 const SCHEDULED_RUN_BUDGET_MS = 4 * 60_000;
 /** One-off parcels have no owner: a scheduled run checks this many of them, all together. */
 const MAX_ONE_OFF_PACKAGES_PER_SYNC = 10;
+/** Overnight, when a run comes every 20 minutes, it checks three: about as many an hour as one run an hour did. */
+const MAX_ONE_OFF_PACKAGES_PER_OVERNIGHT_SYNC = 3;
 /** A scheduled run rechecks at most this many accounts' parcels whose number nobody has answered (unseenRecheckDue). */
 const MAX_UNSEEN_RECHECKS_PER_SYNC = 3;
 /** A one-off parcel stays on the schedule this long after one of its links was last opened. */
@@ -1233,10 +1235,12 @@ export class TrackingSyncService {
       // other parcel and lookup, within its account's share, a few a run.
       const rechecks = new Set(owned.filter((parcel) => unseenRecheckDue(parcel, now) !== undefined));
       const hour = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' }).hour;
+      const daytime = hour >= 8 && hour < 22;
       const shares = fairSyncPackages([...owned.filter((parcel) => !rechecks.has(parcel)), ...rechecks],
-        hour >= 8 && hour < 22 ? MAX_PACKAGES_PER_OWNER_PER_SYNC : MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC);
+        daytime ? MAX_PACKAGES_PER_OWNER_PER_SYNC : MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC);
       const parcels = [...shares.filter((parcel) => !rechecks.has(parcel)),
-        ...await this.oneOffPackages(due(true), due(true, true), now, context.signal),
+        ...await this.oneOffPackages(due(true), due(true, true), now,
+          daytime ? MAX_ONE_OFF_PACKAGES_PER_SYNC : MAX_ONE_OFF_PACKAGES_PER_OVERNIGHT_SYNC, context.signal),
         ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)];
       // Copies of one number, in several accounts or followed without one, share their lookups.
       const lookups = new SharedLookups(parcels);
@@ -1403,6 +1407,7 @@ export class TrackingSyncService {
     followedDue: (parcel: JsonObject) => boolean,
     unfollowedDue: (parcel: JsonObject) => boolean,
     now: Date,
+    limit: number,
     signal?: AbortSignal,
   ): Promise<JsonObject[]> {
     const list = async (operation: string, read: () => Promise<JsonObject[]>) => {
@@ -1419,7 +1424,7 @@ export class TrackingSyncService {
     const unfiled = await list('list_unfiled_one_off_packages',
       () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS), PROVIDER_TRACKED_CARRIERS));
     return [...followed.filter(followedDue), ...unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel))]
-      .slice(0, MAX_ONE_OFF_PACKAGES_PER_SYNC);
+      .slice(0, limit);
   }
 
   /**

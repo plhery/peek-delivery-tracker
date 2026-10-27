@@ -61,6 +61,8 @@
   ],
   "families": {
     "amazon-shipping": "amazon-logistics",
+    "aramex-au": "aramex",
+    "aramex-nz": "aramex",
     "delivengo": "la-poste",
     "dhl-ecommerce": "dhl",
     "dhl-ecommerce-es": "dhl",
@@ -76,6 +78,7 @@
     "dpd-hu": "dpd",
     "dpd-ie": "dpd",
     "dpd-nl": "dpd",
+    "dpd-pl": "dpd",
     "dpd-pt": "dpd",
     "dpd-ro": "dpd",
     "dpd-uk": "dpd",
@@ -101,7 +104,9 @@
     "mng-kargo": "dhl",
     "pickupp-sg": "pickupp",
     "postlogistics": "swiss-post",
-    "swiss-post-cargo": "swiss-post"
+    "swiss-post-cargo": "swiss-post",
+    "tnt-it": "tnt",
+    "zto-international": "zto"
   },
   "palettes": {
     "a1-post": {
@@ -631,6 +636,8 @@
     "apc-postal-logistics": "apc-postal-logistics",
     "apple-express": "apple-express",
     "aramex": "aramex",
+    "aramex-au": "aramex",
+    "aramex-nz": "aramex",
     "aras-kargo": "aras-kargo",
     "arrow-xl": "arrow-xl",
     "asendia": "asendia",
@@ -780,6 +787,7 @@
     "dpd-hu": "dpd",
     "dpd-ie": "dpd",
     "dpd-nl": "dpd",
+    "dpd-pl": "dpd",
     "dpd-pt": "dpd",
     "dpd-ro": "dpd",
     "dpd-uk": "dpd",
@@ -1282,6 +1290,7 @@
     "tirupati-courier": "tirupati-courier",
     "tmm-express": "tmm-express",
     "tnt": "tnt",
+    "tnt-it": "tnt",
     "today-kr": "today-kr",
     "toptrans": "toptrans",
     "torrestir": "torrestir",
@@ -1355,7 +1364,8 @@
     "zheldor": "zheldor",
     "zoom-ve": "zoom-ve",
     "zr-express": "zr-express",
-    "zto": "zto"
+    "zto": "zto",
+    "zto-international": "zto"
   },
   "truck": {
     "viewBox": {

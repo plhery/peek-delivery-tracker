@@ -153,6 +153,12 @@
   "aramex": {
     "decal": "aramex"
   },
+  "aramex-au": {
+    "family": "aramex"
+  },
+  "aramex-nz": {
+    "family": "aramex"
+  },
   "aras-kargo": {
     "decal": "aras-kargo"
   },
@@ -672,6 +678,9 @@
     "family": "dpd"
   },
   "dpd-nl": {
+    "family": "dpd"
+  },
+  "dpd-pl": {
     "family": "dpd"
   },
   "dpd-pt": {
@@ -2342,6 +2351,9 @@
   "tnt": {
     "decal": "tnt"
   },
+  "tnt-it": {
+    "family": "tnt"
+  },
   "today-kr": {
     "decal": "today-kr"
   },
@@ -2612,5 +2624,8 @@
   },
   "zto": {
     "decal": "zto"
+  },
+  "zto-international": {
+    "family": "zto"
   }
 }

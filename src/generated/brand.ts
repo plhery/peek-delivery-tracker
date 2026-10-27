@@ -6,6 +6,8 @@ export const DEFAULT_CARRIER_COLOR = "#8e8e93";
 
 export const CARRIER_FAMILIES: Record<string, string> = {
   "amazon-shipping": "amazon-logistics",
+  "aramex-au": "aramex",
+  "aramex-nz": "aramex",
   "delivengo": "la-poste",
   "dhl-ecommerce": "dhl",
   "dhl-ecommerce-es": "dhl",
@@ -21,6 +23,7 @@ export const CARRIER_FAMILIES: Record<string, string> = {
   "dpd-hu": "dpd",
   "dpd-ie": "dpd",
   "dpd-nl": "dpd",
+  "dpd-pl": "dpd",
   "dpd-pt": "dpd",
   "dpd-ro": "dpd",
   "dpd-uk": "dpd",
@@ -46,7 +49,9 @@ export const CARRIER_FAMILIES: Record<string, string> = {
   "mng-kargo": "dhl",
   "pickupp-sg": "pickupp",
   "postlogistics": "swiss-post",
-  "swiss-post-cargo": "swiss-post"
+  "swiss-post-cargo": "swiss-post",
+  "tnt-it": "tnt",
+  "zto-international": "zto"
 };
 
 export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
@@ -578,6 +583,8 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "apc-postal-logistics": "apc-postal-logistics",
   "apple-express": "apple-express",
   "aramex": "aramex",
+  "aramex-au": "aramex",
+  "aramex-nz": "aramex",
   "aras-kargo": "aras-kargo",
   "arrow-xl": "arrow-xl",
   "asendia": "asendia",
@@ -727,6 +734,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "dpd-hu": "dpd",
   "dpd-ie": "dpd",
   "dpd-nl": "dpd",
+  "dpd-pl": "dpd",
   "dpd-pt": "dpd",
   "dpd-ro": "dpd",
   "dpd-uk": "dpd",
@@ -1229,6 +1237,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "tirupati-courier": "tirupati-courier",
   "tmm-express": "tmm-express",
   "tnt": "tnt",
+  "tnt-it": "tnt",
   "today-kr": "today-kr",
   "toptrans": "toptrans",
   "torrestir": "torrestir",
@@ -1302,7 +1311,8 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "zheldor": "zheldor",
   "zoom-ve": "zoom-ve",
   "zr-express": "zr-express",
-  "zto": "zto"
+  "zto": "zto",
+  "zto-international": "zto"
 };
 
 export const CARRIER_TRUCK: TruckGeometry = {

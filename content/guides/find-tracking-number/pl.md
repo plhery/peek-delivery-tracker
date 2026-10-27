@@ -17,7 +17,7 @@ GLS mówi to wprost: paczkę śledzisz po numerze, „który przekazał Ci Nadaw
 - Skrzynka mailowa i SMS-y | Wyszukaj w e-mailach „przesyłka”, „wysłane”, „numer przesyłki” albo nazwę sklepu. Zajrzyj też do spamu.
 - Zamówienie w sklepie | O jedno kliknięcie dalej niż numer zamówienia (tabela niżej).
 - Awizo | Na wielu awizach jest numer, który przyjmie wyszukiwarka przewoźnika.
-- Aplikacja przewoźnika | [InPost](carrier:inpost), [DPD](carrier:dpd-pl) i Pocztex same pokazują paczki wysłane na Twój numer telefonu (DPD także na e-mail).
+- Aplikacja przewoźnika | [DPD](carrier:dpd-pl) i Pocztex same pokazują paczki wysłane na Twój numer telefonu (DPD także na e-mail).
 - Nadawca | Allegro radzi poprosić sprzedającego o numer przesyłki „lub potwierdzenie nadania”.
 :::
 
@@ -32,9 +32,8 @@ Masz e-maila, ale nie wiesz, który numer jest który? Wklej całą wiadomość 
 | Vinted | Okno rozmowy dotyczącej zamówienia → **Śledź przesyłkę**. Stamtąd skopiujesz numer |
 | Zalando | Link do śledzenia w e-mailu z potwierdzeniem wysyłki, a także zakładka **Moje konto** |
 | Shein | **Moje zamówienia** → **Śledź**. Numer śledzenia widać przy zamówieniu |
-| Temu | Lista zamówień → przycisk śledzenia obok zamówienia. Zobaczysz tam przewoźnika i numer przesyłki |
 
-Nie widzisz numeru? Może jeszcze nie powstał albo przesyłka w ogóle go nie ma. Allegro nic nie pokaże, jeśli „sprzedający nie dodał do zamówienia numeru listu przewozowego”. Shein pisze, że brak numeru oznacza, że zamówienie jest jeszcze w magazynie, a Temu prosi o 1 do 3 dni roboczych na obsługę zamówienia w magazynie.
+Nie widzisz numeru? Może jeszcze nie powstał albo przesyłka w ogóle go nie ma. Allegro nic nie pokaże, jeśli „sprzedający nie dodał do zamówienia numeru listu przewozowego”. Shein pisze, że brak numeru oznacza, że zamówienie jest jeszcze w magazynie.
 
 Kto dostarcza dla każdego sklepu i co zrobić, gdy śledzenie stoi w miejscu: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) i [OLX](guide:second-hand-orders).
 
@@ -63,15 +62,14 @@ Kupujesz na Allegro, Amazonie czy Vinted? Pisz do sprzedawcy przez platformę. J
 
 ### Sprawdź w aplikacji przewoźnika, czy idzie do Ciebie paczka
 
-Kilku przewoźników samo pokazuje w aplikacji albo na koncie paczki, które do Ciebie jadą, o ile dane podane przez nadawcę zgadzają się z Twoimi. Każda aplikacja widzi tylko paczki swojego przewoźnika.
+Niektórzy przewoźnicy sami pokazują w aplikacji albo na koncie paczki, które do Ciebie jadą, o ile dane podane przez nadawcę zgadzają się z Twoimi. Każda aplikacja widzi tylko paczki swojego przewoźnika.
 
 | Usługa | Jakie paczki pokazuje | Warto wiedzieć |
 | --- | --- | --- |
-| InPost Mobile | Nadane na numer telefonu zarejestrowany w aplikacji | Tylko polskie numery (+48). Inną paczkę dodasz żółtym przyciskiem z plusem, wpisując 24-cyfrowy numer przesyłki |
 | DPD Mobile | Przypisane do numeru telefonu lub adresu e-mail podanego przy rejestracji konta | Dane w aplikacji muszą się zgadzać z tymi na liście przewozowym |
 | Pocztex Mobile (Poczta Polska) | Przesyłki rejestrowane, do których przypisano Twój numer telefonu | Zwykłych, nierejestrowanych listów tu nie zobaczysz |
 
-Paczki nie ma na liście? InPost radzi najpierw sprawdzić, czy na pewno nadano ją na numer z aplikacji. Jeśli nadawca podał inny numer albo inny e-mail, i tak potrzebujesz numeru przesyłki.
+Paczki nie ma na liście? Jeśli nadawca podał inny numer telefonu albo inny e-mail, i tak potrzebujesz numeru przesyłki.
 
 ### Śledź po numerze referencyjnym nadawcy
 
@@ -79,7 +77,7 @@ Jeśli nadawca poda Ci swój numer referencyjny, na przykład numer faktury, w n
 
 ## Czy można śledzić paczkę po nazwisku, adresie albo numerze telefonu?
 
-Po nazwisku i adresie się nie da. Wyszukiwarki Poczty Polskiej, InPost i DPD przyjmują tylko numer przesyłki (DPD także kod nadania, numer referencyjny i numer zlecenia). Niemiecki DHL pisze wprost, że śledzenie jest możliwe tylko z ważnym numerem przesyłki, a bez niego statusu nie sprawdzi nawet obsługa klienta.
+Po nazwisku i adresie się nie da. Wyszukiwarki Poczty Polskiej i DPD przyjmują tylko numer przesyłki (DPD także kod nadania, numer referencyjny i numer zlecenia). Niemiecki DHL pisze wprost, że śledzenie jest możliwe tylko z ważnym numerem przesyłki, a bez niego statusu nie sprawdzi nawet obsługa klienta.
 
 Po numerze telefonu: tylko w aplikacji przewoźnika i tylko paczki wysłane na numer, na który masz w niej konto (tabela wyżej). [Trackery paczek](guide:universal-tracker) też nie szukają po nazwisku, Peek również: żeby zapytać przewoźnika o paczkę, potrzebuje jej numeru.
 
@@ -95,7 +93,6 @@ Nadajesz paczkę? Numer jest na potwierdzeniu nadania albo w aplikacji, w które
 | --- | --- |
 | Poczta Polska | Na potwierdzeniu nadania. Śledzić można tylko przesyłki rejestrowane, czyli te, które mają dowód nadania |
 | DPD | To 14-znakowy numer przesyłki albo 9-znakowy kod nadania (jeden z nich piszesz na paczce, gdy nadajesz bez etykiety). Wyszukiwarka DPD przyjmuje oba, a paczkę nadaną w punkcie DPD Pickup śledzisz też w aplikacji DPD Mobile |
-| InPost | W aplikacji InPost Mobile: InPost pisze, że wszystkie informacje o Twoich paczkach znajdziesz na ekranie startowym |
 | Vinted | Sprzedajesz? Okno rozmowy z kupującym → **Śledź przesyłkę**. Stamtąd skopiujesz numer |
 
 ### Czy mogę śledzić wysłaną paczkę bez numeru?
@@ -113,7 +110,7 @@ To dwa różne numery. DHL pisze wprost, że numer przesyłki to nie numer zamó
 - home | Nieudane doręczenie | Awizo często ma numer, który też działa
 :::
 
-Jak je odróżnić? Numer opisany jako „zamówienie” należy do sklepu i u przewoźnika nie zadziała. Numer przesyłki zwykle stoi obok nazwy przewoźnika albo linku do jego śledzenia. Numer InPost ma 24 cyfry, `1Z999AA10123456784` to numer UPS, a wiele przesyłek pocztowych ma międzynarodowy format 13 znaków, jak `RR000000005CH`. Do którego przewoźnika należy numer, podpowie poradnik [jaki kurier po numerze przesyłki](guide:tracking-number-formats).
+Jak je odróżnić? Numer opisany jako „zamówienie” należy do sklepu i u przewoźnika nie zadziała. Numer przesyłki zwykle stoi obok nazwy przewoźnika albo linku do jego śledzenia. Numer [InPost](carrier:inpost) ma zwykle 24 cyfry, `1Z999AA10123456784` to numer UPS, a wiele przesyłek pocztowych ma międzynarodowy format 13 znaków, jak `RR000000005CH`. Do którego przewoźnika należy numer, podpowie poradnik [jaki kurier po numerze przesyłki](guide:tracking-number-formats).
 
 ## Dlaczego numer przesyłki nic nie pokazuje?
 
@@ -122,10 +119,9 @@ Najczęściej dlatego, że jest nowy: etykieta już jest, ale przewoźnik jeszcz
 Jeśli czekasz dłużej, sprawdź sam numer:
 
 - **Czy to numer przesyłki?** Numer zamówienia i numer oferty z Allegro należą do sklepu, więc u przewoźnika nie zadziałają.
-- **Czy to nie kod?** Kod odbioru, który wpisujesz w Paczkomacie razem z numerem telefonu, i 10-cyfrowy kod zwrotu InPost to nie numer przesyłki. Numer InPost ma 24 cyfry.
 - **Czy to nie referencja nadawcy?** Numer faktury czy inny numer referencyjny nadawcy zadziała tylko w wyszukiwaniu po referencji u FedEx i DHL Express.
 - **Czy to ten przewoźnik?** Numer od `AD` (Allegro Delivery) nic nie pokaże na stronie [ORLEN Paczki](carrier:orlen-paczka): taką paczkę śledzisz tylko w Allegro. Nazwę przewoźnika zwykle znajdziesz w e-mailu o wysyłce albo w szczegółach zakupu.
-- **Czy to jeden numer?** Wklej jeden numer naraz, bez spacji i nawiasów, jak prosi Poczta Polska. Wyszukiwarka na stronie głównej inpost.pl przy ciągu innej długości prosi: `Podaj jeden numer przesyłki zawierający 24 cyfry`.
+- **Czy to jeden numer?** Wklej jeden numer naraz, bez spacji i nawiasów, jak prosi Poczta Polska.
 
 Nadal nic? Zapytaj nadawcę albo sklep. Co znaczy każdy status, wyjaśnia [poradnik o statusach przesyłki](guide:tracking-statuses).
 
@@ -139,14 +135,6 @@ Nadal nic? Zapytaj nadawcę albo sklep. Co znaczy każdy status, wyjaśnia [pora
 - [Zalando: Gdzie jest moja paczka?](https://www.zalando.pl/faq/where-is-my-parcel.html) – e-mail z potwierdzeniem wysyłki, Moje konto
 - [SHEIN: Jak śledzić moje zamówienie](https://pl.shein.com/How-to-track-my-order-a-496.html) – Moje zamówienia, Śledź, numer śledzenia
 - [SHEIN: Where is my order?](https://m.shein.com/pl/faq/detail?id=21338) – brak numeru, gdy zamówienie jest w magazynie
-- [Temu: How to track my order](https://www.temu.com/uk/support/c3/how-to-track-my-order-f-48-s-153.html) – przycisk śledzenia, przewoźnik i numer, 1 do 3 dni roboczych
-- [InPost: Nie widzę swojej paczki na liście śledzenia przesyłek w aplikacji mobilnej](https://inpost.pl/pomoc-nie-widze-swojej-paczki-na-liscie-sledzenia-przesylek-w-aplikacji-mobilnej-co-moge-zrobic) – numer telefonu zarejestrowany w aplikacji
-- [InPost: Chcę dodać cudzą paczkę, aby móc ją obserwować](https://inpost.pl/pomoc-chce-dodac-cudza-paczke-aby-moc-ja-obserwowac-w-aplikacji-mobilnej-jak-moge-zrobic) – żółty przycisk z plusem, 24-cyfrowy numer
-- [InPost: Używam zagranicznego numeru telefonu](https://inpost.pl/pomoc-uzywam-zagranicznego-numeru-telefonu-inny-niz-kierunkowy-48-czy-moge-korzystac-z-aplikacji) – tylko polskie numery
-- [InPost: Aplikacja mobilna](https://inpost.pl/aplikacja-mobilna) – lista przesyłek aktualizowana automatycznie, ekran startowy
-- [InPost: Śledzenie przesyłek](https://inpost.pl/sledzenie-przesylek) – wyszukiwarka po numerze przesyłki
-- [InPost: Śledź paczkę, wyszukiwarka na stronie głównej](https://inpost.pl/) – komunikat przy numerze innej długości niż 24 cyfry
-- [InPost: Kontakt i pomoc](https://inpost.pl/kontakt) – kod odbioru wpisywany w Paczkomacie z numerem telefonu, 10-cyfrowy kod zwrotu
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – DPD Mobile, telefon lub e-mail z rejestracji, list przewozowy, 14-znakowy numer, 9-znakowy kod nadania, DPD Pickup
 - [Poczta Polska: Śledzenie przesyłek](https://www.poczta-polska.pl/sledzenie-przesylek/) – potwierdzenie nadania, bez spacji i nawiasów, przesyłki rejestrowane, listy polecone
 - [Poczta Polska: Elektroniczna zapowiedź doręczenia przesyłek rejestrowanych](https://www.poczta-polska.pl/news/poczta-polska-wprowadza-elektroniczna-zapowiedz-doreczenia-przesylek-rejestrowanych/) – telefon lub e-mail od nadawcy, numer z SMS-a wystarczy do odbioru
@@ -154,6 +142,7 @@ Nadal nic? Zapytaj nadawcę albo sklep. Co znaczy każdy status, wyjaśnia [pora
 - [App Store: Pocztex Mobile](https://apps.apple.com/pl/app/pocztex-mobile/id1661761150) – przesyłki rejestrowane przypisane do numeru telefonu
 - [DHL eCommerce Polska: Śledzenie paczek krajowych i zagranicznych](https://mojdhl.pl/sprawdz) – kontakt z nadawcą
 - [ORLEN Paczka: Śledź paczkę](https://www.orlenpaczka.pl/sledz-paczke/) – paczki Allegro Delivery z numerem od AD tylko w Allegro
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – 24-cyfrowy format numerów InPost
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numery 1Z i ich cyfra kontrolna
 - [FedEx Polska: Monitorowanie przesyłki](https://www.fedex.com/pl-pl/tracking.html) – numery etykiet awizo, śledzenie według informacji referencyjnych
 - [DHL Express: Monitoruj według referencji](https://mydhl.express.dhl/pl/pl/tracking.html#/track-by-reference) – wyszukiwanie po referencji

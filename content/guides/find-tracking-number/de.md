@@ -30,10 +30,9 @@ Die Mail ist da, aber welche Nummer ist die richtige? Füge einfach die ganze Ma
 | Amazon.de | **Meine Bestellungen** → die Bestellung → **Lieferung verfolgen** |
 | eBay.de | **Mein eBay: Käufe**, als Link neben dem Artikel. Als Gast: die Mail „Bestellung bestätigt“ → **Einzelheiten zum Kauf aufrufen** → **Versanddetails anzeigen** |
 | Zalando | Link zur Sendungsverfolgung in der Mail, die nach dem Versand kommt, außerdem unter **Mein Konto** |
-| Temu | **Deine Bestellungen** → **Verfolgen**, neben der Bestellung |
 | Vinted | Im Chat zur Bestellung → **Sendung verfolgen**. Dort kannst du die Sendungsnummer auch kopieren |
 
-Keine Nummer zu sehen? Vielleicht gibt es noch keine oder überhaupt keine. Temu schreibt: „Die Bearbeitung durch das Lager kann 1-3 Werktage in Anspruch nehmen.“ Und bei eBay siehst du eine Nummer nur, wenn der Verkäufer einen Versandservice mit Sendungsverfolgung nutzt und die Nummer bei eBay hochlädt. Auf den österreichischen und Schweizer Seiten der Shops können die Menünamen leicht abweichen.
+Keine Nummer zu sehen? Vielleicht gibt es noch keine oder überhaupt keine. Bei eBay siehst du eine Nummer nur, wenn der Verkäufer einen Versandservice mit Sendungsverfolgung nutzt und die Nummer bei eBay hochlädt. Auf den österreichischen und Schweizer Seiten der Shops können die Menünamen leicht abweichen.
 
 Wer für welchen Shop zustellt und was du tust, wenn das Tracking stockt: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) und [Kleinanzeigen, willhaben oder Ricardo](guide:second-hand-orders).
 
@@ -159,6 +158,5 @@ Immer noch nichts? Dann frag den Absender, meist also den Online-Shop: Von ihm k
 - [eBay: Sendung für Ihren Artikel nachverfolgen](https://www.ebay.de/help/buying/versand-lieferung/sendungsverfolgung?id=4027) – Mein eBay: Käufe, Gastkauf, Verkäufer kontaktieren
 - [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – Sendung verfolgen, individueller Versand
 - [Zalando: Wo ist mein Paket?](https://www.zalando.ch/faq/where-is-my-parcel.html) – Link in der Mail, Mein Konto
-- [Temu: Wie verfolge ich meine Bestellung?](https://www.temu.com/support/c3/how-to-track-my-order-f-48-s-153.html) – Deine Bestellungen, 1 bis 3 Werktage
 - [Weltpostverein: S10-Standard](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – das internationale Format mit 13 Zeichen
 :::

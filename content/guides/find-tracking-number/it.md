@@ -11,14 +11,14 @@ Di solito il codice tracking è nell'e-mail o nell'SMS di spedizione, oppure nel
 
 ## Dove si trova il codice tracking?
 
-Il codice lo riceve il mittente, e a te arriva quasi sempre tramite lui. DHL lo dice chiaro: in genere è il mittente, o il negozio online, a dartelo. Cerca in quest'ordine:
+Il codice lo riceve il mittente, e a te arriva quasi sempre tramite lui. Cerca in quest'ordine:
 
 :::steps
 - E-mail e SMS | Cerca «spedito», «spedizione», «tracking» o il nome del negozio, e guarda anche nello spam.
 - La pagina dell'ordine | Un clic dopo il numero d'ordine (tabella qui sotto).
 - L'avviso del corriere | Il tagliando di BRT o l'invito di ritiro della [Posta](carrier:swiss-post) hanno un codice che il tracking accetta.
 - L'account del corriere | Alcuni corrieri elencano i pacchi in arrivo al tuo indirizzo.
-- Il mittente | «Se non hai il numero di spedizione, ti consigliamo di contattare il mittente», scrive DHL.
+- Il mittente | Se il codice non ce l'hai, chiedilo a chi ti ha spedito il pacco.
 :::
 
 Hai trovato l'e-mail ma non capisci quale numero è quello giusto? Incollala tutta in [Peek](/): trova da solo il codice e il corriere.
@@ -30,12 +30,11 @@ Hai trovato l'e-mail ma non capisci quale numero è quello giusto? Incollala tut
 | Amazon.it | **I miei ordini**, da dove di solito si seguono le consegne Amazon |
 | eBay.it | **Cronologia acquisti**, come link accanto all'oggetto. Se hai comprato senza account: l'e-mail «Ordine confermato» → **Vedi i dettagli dell'ordine** → **Mostra i dettagli della spedizione** |
 | Shein | **I miei ordini** → l'ordine → **Tracciare il mio ordine**, quando l'ordine è già stato spedito |
-| Temu | **I tuoi ordini** → **Traccia**, accanto all'ordine |
 | AliExpress | **My Orders** → l'ordine → **Tracking**; AliExpress ti rimanda anche al tracking di [Cainiao](carrier:cainiao) |
 | Vinted | Nella conversazione dell'ordine → **Traccia il pacco**, dove puoi anche copiare il numero di tracciamento |
 | Zalando | Il link di tracking nell'e-mail di conferma della spedizione, oppure nella sezione **Il mio account** |
 
-Il codice non c'è? Forse non c'è ancora, o non ci sarà proprio. Per Temu la lavorazione in magazzino richiede di solito da 1 a 3 giorni lavorativi, e Shein spiega che, se il codice non compare, l'ordine è ancora nel suo magazzino. Su eBay, se il codice manca, forse il venditore non l'ha ancora caricato.
+Il codice non c'è? Forse non c'è ancora, o non ci sarà proprio. Shein spiega che, se il codice non compare, l'ordine è ancora nel suo magazzino. Su eBay, se il codice manca, forse il venditore non l'ha ancora caricato.
 
 Chi consegna per ogni negozio e cosa fare quando il tracciamento si ferma: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaWorld](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) e [Subito](guide:second-hand-orders).
 
@@ -56,7 +55,7 @@ Ci sono tre strade, e nessuna è una ricerca per nome.
 
 ### Chiedi al mittente
 
-I corrieri che spiegano cosa fare senza codice ti rimandano tutti a lui. Chiedigli:
+Il codice ce l'ha lui. Chiedigli:
 
 - **Il nome del corriere.** Sul sito del corriere sbagliato il codice non dà risultati.
 - **Il codice esattamente com'è stampato.** Poste lo vuole «senza interruzioni e senza trattino».
@@ -82,7 +81,7 @@ Se il mittente ti dà un suo riferimento, per esempio il numero di un ordine d'a
 
 ## Si può tracciare un pacco con nome e cognome?
 
-No, non sulle pagine di tracking: Poste, BRT, GLS, DHL e la Posta chiedono tutti un codice. E il codice serve anche al telefono: l'Assistenza Clienti di Poste ti dice a che punto è una spedizione, ma ti chiede il codice invio.
+No, non sulle pagine di tracking: Poste, BRT, GLS e la Posta chiedono tutti un codice. E il codice serve anche al telefono: l'Assistenza Clienti di Poste ti dice a che punto è una spedizione, ma ti chiede il codice invio.
 
 L'unica cosa simile è un account del corriere come quelli qui sopra, legato ai tuoi dati. Nemmeno i [tracker universali](guide:universal-tracker) possono farlo, Peek compreso: per chiedere al corriere serve un codice.
 
@@ -132,7 +131,7 @@ Per distinguerli: un numero accanto alla parola «ordine» è del negozio (eBay,
 
 ## Codice tracking non trovato: è il numero giusto?
 
-Di solito il codice è solo nuovo: l'etichetta esiste, ma il corriere non ha ancora scansionato il pacco. DHL parla di 24-48 ore, Vinted di «fino a 48 ore», e l'attesa di ogni corriere la trovi in [perché il tracking non si aggiorna](guide:tracking-not-updating).
+Di solito il codice è solo nuovo: l'etichetta esiste, ma il corriere non ha ancora scansionato il pacco. Vinted parla di «fino a 48 ore», e l'attesa di ogni corriere la trovi in [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
 Passata l'attesa, controlla il numero:
 
@@ -145,7 +144,6 @@ Passata l'attesa, controlla il numero:
 Ancora niente? Chiedi al mittente o al negozio di ricontrollare codice e corriere. Cosa vuol dire ogni stato te lo spiega la guida agli [stati della spedizione](guide:tracking-statuses).
 
 :::sources
-- [DHL Italia: Tracciabilità](https://www.dhl.com/it-it/home/tracking.html) – il numero lo forniscono mittente o negozio, contattare il mittente, aggiornamenti dopo 24-48 ore
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – il numero di spedizione non è un numero d'ordine
 - [MyDHL+ Italia: Ricerca per Riferimento](https://mydhl.express.dhl/it/it/tracking.html#/track-by-reference) – ricerca con il riferimento della spedizione
 - [MyDHL+ Italia: FAQ Ricerca e Monitoraggio](https://mydhl.express.dhl/it/it/help-and-support/faqs/tracking-monitoring.html) – senza numero solo a determinate condizioni, numero di lettera di vettura
@@ -169,7 +167,6 @@ Ancora niente? Chiedi al mittente o al negozio di ricontrollare codice e corrier
 - [Zalando.it: Dov'è il mio pacco?](https://www.zalando.it/faq/where-is-my-parcel.html) – link nell'e-mail, Il mio account
 - [Shein Italia: Come tracciare il mio ordine](https://m.shein.com/it/How-to-track-my-order-a-496.html) – I miei ordini, Tracciare il mio ordine
 - [Shein: Where is my order?](https://m.shein.com/it/faq/detail?id=21338) – senza codice l'ordine è ancora in magazzino
-- [Temu Italia: Come tracciare il mio ordine?](https://www.temu.com/it/support/c3/how-to-track-my-order-f-48-s-153.html) – I tuoi ordini, Traccia, da 1 a 3 giorni lavorativi
 - [AliExpress: How to track my package?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063468&language=it) – My Orders, Tracking
 - [AliExpress: Delivered but not received](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – tracking sul sito di Cainiao
 - [App Store: myBRT](https://apps.apple.com/it/app/mybrt/id6670557801) – cosa fa l'app di BRT, senza parlare di pacchi in arrivo aggiunti da soli

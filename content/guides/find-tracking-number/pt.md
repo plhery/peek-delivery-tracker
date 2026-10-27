@@ -29,11 +29,10 @@ Encontraste o e-mail, mas não sabes qual dos números é o certo? Cola-o inteir
 | --- | --- |
 | Amazon.es | **Os meus pedidos**, onde geralmente se acompanham as entregas da Amazon |
 | Shein | **Meus pedidos** → **Rastrear**, quando a encomenda já aparece como «Enviado» |
-| Temu | Na lista de encomendas da tua conta, o botão de seguimento ao lado da encomenda mostra a transportadora e o número |
 | Vinted | O ecrã da conversa com quem vende → **Acompanhar encomenda**, onde podes copiar o código |
 | Worten | A **área de cliente**, onde a Worten diz para acompanhares a encomenda. No Marketplace, quem envia é o vendedor parceiro |
 
-Não está lá número nenhum? Pode ainda não existir, ou nunca vir a existir. A Temu avisa que o armazém pode levar 1 a 3 dias úteis a processar a encomenda antes de haver número. Na Vinted, só há seguimento para artigos comprados com o botão «Comprar agora» e enviados segundo as instruções da app.
+Não está lá número nenhum? Pode ainda não existir, ou nunca vir a existir. Na Vinted, só há seguimento para artigos comprados com o botão «Comprar agora» e enviados segundo as instruções da app.
 
 Quem entrega para cada loja e o que fazer quando o seguimento para: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt/Darty](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) e [OLX](guide:second-hand-orders).
 
@@ -52,7 +51,7 @@ Há três caminhos, e nenhum passa pelo teu nome ou pela tua morada.
 
 ### Pede o número ao remetente
 
-As transportadoras que explicam o que fazer sem número (os CTT, a InPost, a DHL) mandam-te todas falar com o remetente. Pede-lhe:
+As transportadoras que explicam o que fazer sem número (os CTT e a InPost) mandam-te falar com o remetente. Pede-lhe:
 
 - **O nome da transportadora.** No site da transportadora errada, o número não dá resultados. Os CTT lembram que um código sem resultados pode ser de um envio entregue em Portugal por outra empresa.
 - **O número tal como está impresso.**
@@ -81,7 +80,6 @@ Não. Os sites de seguimento das transportadoras partem sempre de um número:
 
 - **DPD:** «Damos a cada encomenda um número próprio. Com base neste número, pode acompanhar a entrega da sua encomenda no site ou na app myDPD.»
 - **GLS:** pede o «número de encomenda (Track ID) que lhe foi fornecido pelo expedidor ou pela GLS», e que o tenhas à mão quando a contactas.
-- **DHL:** «Se não tiver o seu número de localização, recomenda-se que contacte o expedidor.»
 - **CTT:** pesquisas o envio pelo código, em **Seguir objeto**. Só depois, com sessão iniciada, é que os teus dados de registo te podem mostrar mais informação.
 
 O mais parecido são as contas e as apps da secção anterior, ligadas ao teu telemóvel ou ao teu registo. Os sites e as apps que seguem encomendas de várias transportadoras também não conseguem, e o Peek não é exceção: precisa de um número para perguntar à transportadora.
@@ -148,13 +146,11 @@ Continua sem nada? Pergunta ao remetente, como mandam os CTT. Para perceberes ca
 - [GLS Portugal: FAQ Receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – Track ID dado pelo expedidor ou pela GLS, aviso de passagem, 10 dias úteis
 - [GLS Portugal: App My GLS](https://gls-group.com/PT/pt/informacao-gls/app-my-gls/) – número de telemóvel e informação automática
 - [InPost Portugal: Rastrear encomenda](https://www.inpost.pt/seguimento-do-envio/) – pedir o número de expedição ao remetente
-- [DHL Portugal: Localização](https://www.dhl.com/pt-pt/home/tracking.html) – primeira leitura 24 a 48 horas depois, contactar o expedidor
 - [MyDHL Express Portugal: FAQs Localização e Monitorização](https://mydhl.express.dhl/pt/pt/help-and-support/faqs/tracking-monitoring.html) – guardar o número, localização por referência de expedidor
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – o número de envio não é um número de encomenda
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – números 1Z e o seu algarismo de controlo
 - [FedEx Portugal: Rastrear a sua expedição](https://www.fedex.com/pt-pt/tracking.html) – avisos de passagem, Rastrear por referência
 - [Shein Portugal: Como rastrear meu pedido](https://m.shein.com/pt/How-to-track-my-order-a-496.html) – Meus pedidos, Rastrear
-- [Temu: How to track my order](https://www.temu.com/uk/support/c3/how-to-track-my-order-f-48-s-153.html) – botão de seguimento, 1 a 3 dias úteis no armazém
 - [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – Acompanhar encomenda, até 48 horas, Comprar agora, envio personalizado
 - [Worten: Política de Entregas](https://www.worten.pt/worten-entregas/seguir-encomenda) – seguir na área de cliente, Marketplace, contactar o vendedor ou a Worten
 - [UPU: S10 standard](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – o formato postal de 13 caracteres, os espaços não fazem parte do número

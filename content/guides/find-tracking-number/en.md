@@ -23,18 +23,17 @@ You'll usually find your tracking number in the shop's shipping email or text, o
 
 Found the email but can't tell which number is which? Paste the whole thing into [Peek](/): it picks out the tracking number and the carrier.
 
-### In your order on Amazon, eBay, Temu and other shops
+### In your order on Amazon, eBay, Etsy and other shops
 
 | Shop | Where the tracking number is |
 | --- | --- |
 | Amazon (US, UK) | **Returns & Orders** (app: **Your Orders**) → **Track Package**, where Amazon deliveries are tracked |
 | eBay | **Purchase history**, as a link next to the item. As a guest: the "Order Confirmed" email → **View order details** → **Show delivery details** (US: **Show shipping details**) |
 | Etsy | **Your account** → **Purchases and reviews** (app: **You** → **Purchases**). No tracking button? Look under **View Receipt** |
-| Temu | **Your orders** → **Track**, next to the order |
 | Shein | **My orders** → the order → **Track** |
 | Vinted | The order's conversation → **Track parcel**, where you can copy the number |
 
-No number there? There may be none yet, or none at all. Temu asks you to allow "1-3 business days for warehouse processing" first, and eBay shows a number only if the seller used a tracked service and uploaded it.
+No number there? There may be none yet, or none at all: eBay shows a number only if the seller used a tracked service and uploaded it.
 
 Who delivers for each shop, and what to do when its tracking stalls: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders), and second-hand apps such as [Depop, Mercari or Poshmark](guide:second-hand-orders).
 
@@ -123,15 +122,14 @@ To tell them apart: a number labelled "Order" is the shop's own and won't work o
 
 ## Why does my tracking number show nothing?
 
-Usually because it's new: the label exists, but the carrier hasn't scanned the parcel yet. DHL says scans usually appear 24 to 48 hours after you get the number, Vinted allows up to 48 hours, and Evri can take a few days to receive a parcel. Each carrier's wait is in [why tracking stops updating](guide:tracking-not-updating).
+Usually because it's new: the label exists, but the carrier hasn't scanned the parcel yet. Vinted allows up to 48 hours, and Evri can take a few days to receive a parcel. Each carrier's wait is in [why tracking stops updating](guide:tracking-not-updating).
 
 Past that wait, check the number itself:
 
 - **Is it a tracking number?** An order number won't work on a carrier's site. A sender's reference works only in the courier's reference search.
 - **Is it this carrier's?** Australia Post, for one, asks you to check that it's an Australia Post parcel.
-- **Is it typed right?** DHL reads a space, comma, semicolon or tab as the start of another number, so paste it without them.
 
-Still nothing? Ask the sender or the shop, as DHL advises. For each status, see [what tracking statuses mean](guide:tracking-statuses).
+Still nothing? Ask the sender or the shop. For each status, see [what tracking statuses mean](guide:tracking-statuses).
 
 :::sources
 - [USPS: How to find your tracking number](https://faq.usps.com/s/article/How-to-find-your-tracking-number) – sender, PS Form 3849, receipts
@@ -142,7 +140,6 @@ Still nothing? Ask the sender or the shop, as DHL advises. For each status, see 
 - [FedEx: How to register for Delivery Manager](https://www.fedex.com/en-us/delivery-manager/registering.html) – address verified by a texted code
 - [DHL Express: Track by reference](https://mydhl.express.dhl/us/en/tracking.html#/track-by-reference) – reference search
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – not an order number
-- [DHL: Tracking FAQ](https://www.dhl.com/de-en/home/tracking.html) – 24 to 48 hours, separators
 - [Evri: Track a parcel](https://www.evri.com/track-a-parcel) – calling card, ask the sender
 - [Evri: How do I track my parcel](https://www.evri.com/faqs/receiving-a-parcel/how-do-i-track-my-parcel) – a few days
 - [DPD UK: The DPD app](https://www.dpd.co.uk/lp/app/index.html) – automatic matching
@@ -158,7 +155,6 @@ Still nothing? Ask the sender or the shop, as DHL advises. For each status, see 
 - [eBay: Tracking your item](https://www.ebay.co.uk/help/buying/postage-delivery/tracking-item?id=4027) – purchase history, Show delivery details
 - [eBay US: Tracking your item](https://www.ebay.com/help/buying/shipping-delivery/tracking-item?id=4027) – Show shipping details
 - [Etsy: What's the status of my order](https://help.etsy.com/hc/en-us/articles/115015521948-What-s-the-Status-of-My-Order) – Purchases, View Receipt
-- [Temu: How to track my order](https://www.temu.com/uk/support/c3/how-to-track-my-order-f-48-s-153.html) – Track, 1 to 3 days
 - [Shein: Where is my order](https://m.shein.com/us/faq/detail?id=21338) – My orders
 - [AliExpress: How to track my package?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063468&language=en) – My Orders, Tracking
 - [Vinted: Tracking a parcel](https://www.vinted.co.uk/help/100-tracking-a-parcel) – Track parcel, 48 hours

@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-10-27
 ---
 
-Lo normal es que el número de seguimiento esté en el correo o el SMS que te manda la tienda cuando envía el pedido, o en el propio pedido, en su web o su app, a un clic del número de pedido. Si el paquete lo has enviado tú, está en el recibo o el justificante que te dieron al dejarlo. Ni [Correos](carrier:correos-spain) ni [SEUR](carrier:seur) ni GLS buscan envíos por nombre o DNI, pero aún puedes seguir el paquete con el aviso de llegada, con la cuenta de algunos transportistas o pidiéndole el número al remitente.
+Lo normal es que el número de seguimiento esté en el correo o el SMS que te manda la tienda cuando envía el pedido, o en el propio pedido, en su web o su app, a un clic del número de pedido. Si el paquete lo has enviado tú, está en el recibo o el justificante que te dieron al dejarlo. Ni [Correos](carrier:correos-spain) ni GLS buscan envíos por nombre o DNI, pero aún puedes seguir el paquete con el aviso de llegada, con la cuenta de algunos transportistas o pidiéndole el número al remitente.
 
 ## ¿Dónde encuentro mi número de seguimiento?
 
@@ -17,25 +17,24 @@ El número de seguimiento se crea para el remitente, y si te llega es gracias a 
 - Tu correo y tus SMS | Busca «enviado», «envío», «seguimiento» o el nombre de la tienda, y mira también en la carpeta de spam.
 - La página del pedido | A un clic del número de pedido (mira la tabla de abajo).
 - El aviso de llegada | El de Correos lleva el número de envío en «Datos del envío».
-- Tu cuenta del transportista | miSEUR y la app de [GLS](carrier:gls-es) te muestran automáticamente los envíos asociados a tu móvil.
-- El remitente | Si no tienes el número, «debes ponerte en contacto con el remitente para que te lo proporcione», dice SEUR.
+- Tu cuenta del transportista | La app de [GLS](carrier:gls-es) te muestra los envíos que llevan tu teléfono de registro.
+- El remitente | Si no tienes el número, pídeselo a quien te envía el paquete.
 :::
 
 No siempre se llama igual: Correos habla de «código de envío» o «número de envío», [MRW](carrier:mrw) de «número de envío», InPost de «número de expedición» y casi todas las tiendas de «número de seguimiento»; [NACEX](carrier:nacex) lo pide en dos partes, «Agencia» y «Albarán». ¿Tienes el correo pero no sabes cuál de todos los números es el bueno? Pega el correo entero en [Peek](/) y él se encarga de encontrar el número de seguimiento y el transportista.
 
-### En tu pedido de Amazon, Temu, Shein y otras tiendas
+### En tu pedido de Amazon, eBay, Shein y otras tiendas
 
 | Tienda | Dónde está el número de seguimiento |
 | --- | --- |
 | Amazon.es | **Mis pedidos**, desde donde suelen seguirse las entregas de Amazon |
 | eBay | **Historial de compras**, como enlace junto al artículo. Si compraste como invitado: el correo «Pedido confirmado» → **Ver detalles del pedido** → **Mostrar datos de envío** |
 | Etsy | En tu cuenta, **Compras y reseñas** (en la app: **Tú** → **Compras**). ¿No hay botón **Seguir paquete**? Míralo en **Ver el recibo** |
-| Temu | **Tus pedidos** → **Rastrear**, junto al pedido |
 | Shein | **Mis Pedidos** → el pedido → **Seguir**, cuando ya ponga «Enviado» |
 | Vinted | La conversación del pedido → **Rastrear paquete**, donde también puedes copiar el número |
 | Zalando | El enlace del correo que te manda cuando el pedido sale del almacén, o el apartado **Mi cuenta** |
 
-¿No hay número? Puede que todavía no lo haya, o que no vaya a haberlo nunca. Temu pide esperar de 1 a 3 días hábiles a que su almacén prepare el pedido. eBay solo lo muestra si el vendedor usa un servicio con seguimiento y añade el número en eBay. Y Vinted no rastrea los paquetes con envío personalizado: en esos pedidos, es el vendedor quien debería pasarte el número.
+¿No hay número? Puede que todavía no lo haya, o que no vaya a haberlo nunca. eBay solo lo muestra si el vendedor usa un servicio con seguimiento y añade el número en eBay. Y Vinted no rastrea los paquetes con envío personalizado: en esos pedidos, es el vendedor quien debería pasarte el número.
 
 Quién reparte para cada tienda y qué hacer si el seguimiento se para: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) y [Wallapop](guide:second-hand-orders).
 
@@ -53,7 +52,7 @@ Hay tres caminos, y ninguno pasa por tu nombre o tu DNI.
 
 ### Pregúntale al remitente
 
-Correos, SEUR, GLS, InPost y DHL dicen lo mismo: si te falta el número, pregunta al remitente. Pídele:
+Correos, GLS e InPost dicen lo mismo: si te falta el número, pregunta al remitente. Pídele:
 
 - **El nombre del transportista.** En la web de otro no encontrarás el número.
 - **El número tal y como está impreso.**
@@ -67,7 +66,6 @@ Algunos transportistas te enseñan los envíos que vienen hacia ti si te registr
 
 | Servicio | Qué muestra | Ten en cuenta |
 | --- | --- | --- |
-| miSEUR | Tus envíos de SEUR como remitente o destinatario | Al registrarte, recupera automáticamente «los envíos asociados a tu email o móvil» |
 | App de GLS (My GLS) | Los envíos de GLS que llevan tu teléfono de registro | GLS pide que pongas bien el móvil al comprar online. Sin registrarte, necesitas el número y el código postal |
 | App de Correos | Envíos como remitente o destinatario, «sin necesidad de introducir ningún código de envío», también los de Vinted y Wallapop | Correos no explica con qué datos los relaciona. Correos ID usa tu correo o tu teléfono, verificados con un código |
 
@@ -75,18 +73,17 @@ La app de InPost en España, en cambio, solo habla de seguir tus envíos introdu
 
 ### Busca con la referencia del remitente
 
-Si el remitente te da su propia referencia (su número de pedido interno o el de la factura, por ejemplo), algunas empresas de mensajería te dejan buscar el envío con ella: FedEx en **Seguimiento por referencia** y [DHL Express](carrier:dhl-express) en **Seguimiento por Referencia**. DHL añade que otros números de referencia del envío pueden servir en el sistema de seguimiento de la división que lo lleva, como DHL Express o DHL Freight.
+Si el remitente te da su propia referencia (su número de pedido interno o el de la factura, por ejemplo), algunas empresas de mensajería te dejan buscar el envío con ella: FedEx en **Seguimiento por referencia** y [DHL Express](carrier:dhl-express) en **Seguimiento por Referencia**.
 
 ## ¿Se puede localizar un envío por nombre, DNI o teléfono?
 
 Por nombre o DNI, no: las webs de seguimiento piden el número. Por teléfono, solo dentro de tu propia cuenta. Esto dicen los transportistas:
 
 - **Correos:** su Localizador de envíos tiene un único campo, «Nº de seguimiento de envío».
-- **SEUR:** el número es «imprescindible» para seguir el envío y para que SEUR pueda darte cualquier información.
 - **GLS:** para saber dónde está tu paquete pide «el número de seguimiento de GLS y el código postal de destino»; sin número, te manda a la tienda.
 - **InPost:** «Si no dispones de número de expedición, puedes contactar con el remitente para que te lo comunique».
 
-Lo más parecido son las cuentas de arriba: miSEUR y la app de GLS te muestran los envíos asociados a tu móvil, pero solo los suyos y solo en tu cuenta. Las [apps de seguimiento](guide:universal-tracker), Peek incluido, tampoco pueden: necesitan un número para preguntárselo al transportista.
+Lo más parecido son las apps de arriba: la de GLS te muestra los envíos que llevan tu teléfono de registro, pero solo los suyos y solo en tu cuenta. Las [apps de seguimiento](guide:universal-tracker), Peek incluido, tampoco pueden: necesitan un número para preguntárselo al transportista.
 
 > Si una web promete encontrar todos los paquetes enviados a tu nombre, a tu DNI o a tu dirección, no está usando el seguimiento de ningún transportista: ninguno ofrece eso al público. No le des tus datos.
 
@@ -94,19 +91,18 @@ Lo más parecido son las cuentas de arriba: miSEUR y la app de GLS te muestran l
 
 ¿Estás esperando un paquete? Vuelve a buscar en tu correo o abre otra vez el pedido; si no aparece, pide al remitente que te lo reenvíe.
 
-¿Lo has enviado tú? El número está en el recibo o el justificante que te dieron al dejarlo. Guárdalo hasta que el paquete llegue: sin él, SEUR no puede darte ninguna información del envío.
+¿Lo has enviado tú? El número está en el recibo o el justificante que te dieron al dejarlo. Guárdalo hasta que el paquete llegue.
 
 | Transportista | Dónde mirar |
 | --- | --- |
 | Correos | El recibo que te dan en la oficina, o el correo de confirmación que te llega al hacer el envío |
 | MRW | El justificante que te dan en la oficina |
 | InPost | El correo de prueba de admisión, que llega cuando el Punto Pack escanea la etiqueta, o **Mi Perfil** → **Mis Envíos** |
-| SEUR | miSEUR, donde ves tus envíos como remitente o destinatario |
 | Vinted | La conversación con el comprador → **Rastrear paquete**, igual que quien compra |
 
 ### He enviado un paquete y no tengo el número: ¿puedo seguirlo?
 
-En la web del transportista, no: SEUR dice que el número es «imprescindible». Si pagaste un envío con seguimiento, el número está en el recibo, el justificante o el correo de confirmación (mira la tabla de arriba). Eso sí, en la app de Correos y en miSEUR tus envíos como remitente pueden aparecer sin que tengas que teclearlo.
+En la web del transportista, no: el Localizador de Correos, por ejemplo, solo tiene el campo del número. Si pagaste un envío con seguimiento, el número está en el recibo, el justificante o el correo de confirmación (mira la tabla de arriba). Eso sí, en la app de Correos tus envíos como remitente pueden aparecer sin que tengas que teclearlo.
 
 ## ¿El número de pedido es el número de seguimiento?
 
@@ -123,7 +119,7 @@ Para distinguirlos: el número que aparece como «Pedido» es el de la tienda (e
 
 ## ¿Por qué no sale nada con mi número de seguimiento?
 
-Casi siempre porque es nuevo: la etiqueta ya existe, pero el transportista aún no tiene el paquete. DHL dice que los eventos de seguimiento suelen aparecer entre 24 y 48 horas después de recibir el número, y Vinted, que pueden tardar hasta 48 horas; lo que tarda cada transportista lo tienes en [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
+Casi siempre porque es nuevo: la etiqueta ya existe, pero el transportista aún no tiene el paquete. Vinted avisa de que el seguimiento puede tardar hasta 48 horas en aparecer; lo que tarda cada transportista lo tienes en [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
 
 Pasado ese plazo, revisa el número:
 
@@ -141,7 +137,6 @@ Pasado ese plazo, revisa el número:
 - [Correos: Sigue tu paquete con el Localizador de Envíos](https://www.correos.es/es/es/actualidad/2023/sigue-tu-paquete-en-tiempo-real-con-nuestra-herramienta-de-local) – recibo de la oficina, correo de confirmación
 - [Correos: Correos ID](https://www.correos.es/es/es/atencion-al-cliente/otras-consultas/correos-id) – correo o teléfono como identificador, código de verificación
 - [App Store: Correos, Envío y seguimiento](https://apps.apple.com/es/app/correos-env%C3%ADo-y-seguimiento/id6478281790) – sin introducir el código, Vinted y Wallapop
-- [SEUR: miSEUR, preguntas frecuentes](https://www.seur.com/miseur/ayuda) – sin número, contactar con el remitente; número imprescindible; envíos como remitente o destinatario, asociados a tu email o móvil
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – número y código postal, nota de paso, proveedor
 - [App Store: GLS, Envía y recibe paquetes](https://apps.apple.com/es/app/gls-env%C3%ADa-y-recibe-paquetes/id1581091038) – My GLS, envíos con tu teléfono de registro, teléfono correcto al comprar online, número y código postal sin registrarte
 - [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – número de expedición, remitente, prueba de admisión, Mis Envíos
@@ -150,13 +145,11 @@ Pasado ese plazo, revisa el número:
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – números 1Z y su dígito de control
 - [FedEx: Seguimiento del envío](https://www.fedex.com/es-es/tracking.html) – etiquetas de puerta, seguimiento por referencia
 - [DHL Express: Seguimiento por Referencia](https://mydhl.express.dhl/es/es/tracking.html#/track-by-reference) – búsqueda por referencia
-- [DHL: Seguimiento, preguntas frecuentes](https://www.dhl.com/es-es/home/seguimiento.html) – 24 a 48 horas, remitente, otras referencias
 - [DHL: Hilfe bei Problemen mit Sendungsverfolgung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – el número de pedido lo asigna la tienda y no es un número de seguimiento (en alemán)
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primero el vendedor, después Amazon
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – reclamación directa a Amazon por la entrega de un vendedor externo
 - [eBay.es: Realizar el seguimiento de un artículo](https://www.ebay.es/help/buying/envio-entrega/seguimiento-articulo?id=4027) – Historial de compras, Pedido confirmado, servicio con seguimiento, pedir al vendedor que añada la información
 - [Etsy: ¿Cuál es el estado de mi pedido?](https://help.etsy.com/hc/es/articles/115015521948) – Compras y reseñas, Seguir paquete, Ver el recibo, Ayuda con el pedido, no todos los métodos de envío tienen seguimiento
-- [Temu: ¿Cómo rastrear mi pedido?](https://www.temu.com/es/support/c3/how-to-track-my-order-f-48-s-153.html) – Tus pedidos, Rastrear, 1 a 3 días hábiles
 - [SHEIN: Cómo rastrear el pedido](https://m.shein.com/es/How-to-track-my-order-a-496.html) – Mis Pedidos, Seguir cuando el pedido diga «Enviado»
 - [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – Rastrear paquete, 48 horas, envío personalizado
 - [Zalando: ¿Dónde está mi pedido?](https://www.zalando.es/faq/where-is-my-parcel.html) – correo al salir del almacén, Mi cuenta

@@ -210,6 +210,26 @@ class ParcelRouteTests {
         assertEquals("9.300 km", text(9_321.0, "de"))
     }
 
+    /** Foundation's distances in each of the app's languages, from ICU as a phone has it and from a plain JVM's stand-in. */
+    @Test
+    fun distancesAreWrittenInEachLanguageAsFoundationWritesThem() {
+        val written = mapOf(
+            "en" to listOf("8 km", "1,200 km", "12,000 km", "1,234,500 km"),
+            "de" to listOf("8 km", "1.200 km", "12.000 km", "1.234.500 km"),
+            "fr" to listOf("8\u202Fkm", "1\u202F200\u202Fkm", "12\u202F000\u202Fkm", "1\u202F234\u202F500\u202Fkm"),
+            "it" to listOf("8 km", "1200 km", "12.000 km", "1.234.500 km"),
+            "es" to listOf("8 km", "1200 km", "12.000 km", "1.234.500 km"),
+            "pt-PT" to listOf("8 km", "1200 km", "12\u00A0000 km", "1\u00A0234\u00A0500 km"),
+            "pl" to listOf("8 km", "1200 km", "12\u00A0000 km", "1\u00A0234\u00A0500 km"),
+        )
+        for (formatter in listOf(Icu.lengths, JdkLengths)) {
+            for ((language, texts) in written) {
+                val locale = Locale.forLanguageTag(language)
+                assertEquals(texts, listOf(8.0, 1_200.0, 12_000.0, 1_234_500.0).map { formatter.kilometres(it, locale) })
+            }
+        }
+    }
+
     @Test
     fun theCameraFramesTheRouteAndSeesWhatItShows() {
         val box = Rect(20.0, 20.0, 360.0, 260.0)

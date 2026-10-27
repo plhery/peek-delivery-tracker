@@ -1,12 +1,15 @@
 package com.plhery.peekdeliverytracker.core
 
 import java.lang.reflect.Method
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.net.IDN
 import java.text.BreakIterator
 import java.text.Collator
 import java.text.NumberFormat
 import java.util.Currency
 import java.util.Locale
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * The ICU services Foundation reads host names and sorts with, which a JVM has its own version of. A phone has
@@ -217,8 +220,13 @@ internal class IcuLengths private constructor(packageName: String) : LengthForma
     private val short = unitWidthClass.getField("SHORT").get(null)
     private val whole = precisionClass.getMethod("integer").invoke(null)
 
+    /** A formatter for each locale met: ICU's are immutable, so threads share them. */
+    private val formatters = ConcurrentHashMap<Locale, Any>()
+
     override fun kilometres(value: Double, locale: Locale): String {
-        val formatter = precision.invoke(unitWidth.invoke(unit.invoke(withLocale.invoke(null, locale), kilometre), short), whole)
+        val formatter = formatters.getOrPut(locale) {
+            precision.invoke(unitWidth.invoke(unit.invoke(withLocale.invoke(null, locale), kilometre), short), whole)
+        }
         return format.invoke(formatter, value).toString()
     }
 
@@ -233,10 +241,38 @@ internal class IcuLengths private constructor(packageName: String) : LengthForma
     }
 }
 
-/** java.text's whole numbers, which group as the JDK's locale data says, and the unit after a no-break space. */
-private object JdkLengths : LengthFormatter {
-    override fun kilometres(value: Double, locale: Locale): String =
-        NumberFormat.getIntegerInstance(locale).format(value) + "\u00A0km"
+/**
+ * The app's seven languages written out as Foundation writes them, for a JVM with no ICU, whose own locale data groups
+ * differently. Italian, Spanish, Portuguese (pt-PT, the app's) and Polish leave a four-digit number whole ("1200 km");
+ * French puts a narrow no-break space between the groups and before the unit, the others a plain space before it.
+ * Another language is written as English is.
+ */
+internal object JdkLengths : LengthFormatter {
+    private class Style(val separator: String, val groupsFourDigits: Boolean, val space: String)
+
+    private val styles = mapOf(
+        "en" to Style(",", groupsFourDigits = true, space = " "),
+        "de" to Style(".", groupsFourDigits = true, space = " "),
+        "fr" to Style("\u202F", groupsFourDigits = true, space = "\u202F"),
+        "it" to Style(".", groupsFourDigits = false, space = " "),
+        "es" to Style(".", groupsFourDigits = false, space = " "),
+        "pt" to Style("\u00A0", groupsFourDigits = false, space = " "),
+        "pl" to Style("\u00A0", groupsFourDigits = false, space = " "),
+    )
+
+    override fun kilometres(value: Double, locale: Locale): String {
+        val style = styles[locale.language] ?: styles.getValue("en")
+        if (!value.isFinite()) return (if (value.isNaN()) "NaN" else if (value > 0) "\u221E" else "-\u221E") + style.space + "km"
+        // Whole kilometres, halves to even, as ICU rounds.
+        val whole = BigDecimal(value).setScale(0, RoundingMode.HALF_EVEN)
+        val digits = whole.toBigInteger().abs().toString()
+        val grouped = if (digits.length < 4 || (digits.length == 4 && !style.groupsFourDigits)) {
+            digits
+        } else {
+            digits.reversed().chunked(3).joinToString(style.separator).reversed()
+        }
+        return (if (whole.signum() < 0) "-" else "") + grouped + style.space + "km"
+    }
 }
 
 /** Where a string's Characters end: the UTF-16 offset after each one, in order, the last being the string's length. */

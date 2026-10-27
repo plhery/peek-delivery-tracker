@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
+import java.nio.ByteBuffer
 import java.util.Locale
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
@@ -98,6 +99,52 @@ class WorldDetailTests {
         }
         assertNull(pack.tile("nowhere"))
         assertThrows(IllegalArgumentException::class.java) { WorldDetailPack("no first line".toByteArray()) }
+    }
+
+    /** :app maps the pack as an uncompressed asset, as the iPhone maps it: the tiles read from a buffer are the same. */
+    @Test
+    fun aMappedPackReadsTheSameTiles() {
+        val bytes = SharedResources.open("WorldDetail.pack").use { it.readBytes() }
+        // A buffer off the heap, holding the pack after some other bytes, as a mapped file's region may.
+        val buffer = ByteBuffer.allocateDirect(bytes.size + 7)
+        buffer.put(ByteArray(7) { 0x0A }).put(bytes).flip()
+        buffer.position(7)
+        val mapped = WorldDetailPack(buffer)
+        val read = pack()
+        assertEquals(read.keys, mapped.keys)
+        assertEquals(7, buffer.position())
+        for (key in listOf("37_27", "0_15", "71_14")) {
+            val a = checkNotNull(read.tile(key))
+            val b = checkNotNull(mapped.tile(key))
+            assertEquals(a.towns, b.towns)
+            assertEquals(a.rivers.flatMap { it.points }, b.rivers.flatMap { it.points })
+        }
+    }
+
+    /** As JSONDecoder reads them: a quoted number, a fraction where an Int goes or a number where a name goes is no pack or tile. */
+    @Test
+    fun aPackOrTileWithNumbersWrittenWronglyIsNotRead() {
+        fun pack(header: String) = WorldDetailPack("$header\n".toByteArray())
+        assertEquals(setOf("1_2"), pack("""{"degrees":5,"precision":1e3,"tiles":{"1_2":[0,1.0]}}""").keys)
+        for (header in listOf(
+            """{"degrees":"5","precision":1000,"tiles":{}}""",
+            """{"degrees":5,"precision":1000,"tiles":{"1_2":["0",1]}}""",
+            """{"degrees":5,"precision":1000,"tiles":{"1_2":[0,1.5]}}""",
+            """{"degrees":5,"precision":1000,"tiles":{"1_2":[00,1]}}""",
+            """{"degrees":5,"precision":1e400,"tiles":{}}""",
+        )) {
+            assertThrows(header, Exception::class.java) { pack(header) }
+        }
+        fun tile(json: String) = DetailTile(json.toByteArray(), precision = 1_000.0, degrees = 5.0)
+        val town = """"towns":[[8724,47506,"Winterthur",112]]"""
+        assertEquals(1, tile("""{"rivers":[[1,8540,47370]],"lakes":[],"urban":[],"roads":[],$town}""").rivers.size)
+        for (json in listOf(
+            """{"rivers":[[1,"8540",47370]],"lakes":[],"urban":[],"roads":[],$town}""",
+            """{"rivers":[],"lakes":[],"urban":[],"roads":[],"towns":[[8724,47506,1,112]]}""",
+            """{"rivers":[],"lakes":[],"urban":[],"roads":[],"towns":[[8724,47506,"Winterthur",+112]]}""",
+        )) {
+            assertThrows(json, Exception::class.java) { tile(json) }
+        }
     }
 
     @Test

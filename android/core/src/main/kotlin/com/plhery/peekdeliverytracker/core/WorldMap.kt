@@ -22,14 +22,10 @@ import kotlin.math.sqrt
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.double
-import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 
 // From WorldMap.swift, everything but the drawing: the map data, the camera and its projection, the outlines it fills,
 // the palettes and the layout of what is drawn over the land. MapPainter's drawing, WorldMapView and PulsingHalo are
@@ -84,16 +80,16 @@ class WorldAtlas(data: ByteArray) {
     /** The file stores shared arcs once, so neighbouring borders always line up. */
     init {
         val file = Json.parseToJsonElement(data.decodeToString()).jsonObject
-        val precision = file.getValue("precision").jsonPrimitive.double
+        val precision = file.getValue("precision").decodedDouble()
         val arcsByDetail = file.getValue("arcs").jsonObject.mapValues { (_, arcs) -> arcs.jsonArray.map(::ints) }
         val borderIndexes = ints(file.getValue("borders"))
         val entries = file.getValue("countries").jsonArray.map { element ->
             val entry = element.jsonObject
             Entry(
-                code = entry["code"]?.takeUnless { it is JsonNull }?.jsonPrimitive?.content,
-                name = entry.getValue("name").jsonPrimitive.content,
-                label = entry["label"]?.takeUnless { it is JsonNull }?.jsonArray?.map { it.jsonPrimitive.double },
-                rank = entry.getValue("rank").jsonPrimitive.int,
+                code = entry["code"]?.takeUnless { it is JsonNull }?.decodedString(),
+                name = entry.getValue("name").decodedString(),
+                label = entry["label"]?.takeUnless { it is JsonNull }?.jsonArray?.map(JsonElement::decodedDouble),
+                rank = entry.getValue("rank").decodedInt(),
                 polygons = entry.getValue("polygons").jsonArray.map { polygon -> polygon.jsonArray.map(::ints) },
             )
         }
@@ -101,9 +97,9 @@ class WorldAtlas(data: ByteArray) {
         val cityEntries = file.getValue("cities").jsonArray.map { element ->
             val values = element.jsonArray
             City(
-                point = GeoPoint(longitude = values[0].jsonPrimitive.double, latitude = values[1].jsonPrimitive.double),
-                name = values[2].jsonPrimitive.content,
-                rank = values[3].jsonPrimitive.int,
+                point = GeoPoint(longitude = values[0].decodedDouble(), latitude = values[1].decodedDouble()),
+                name = values[2].decodedString(),
+                rank = values[3].decodedInt(),
             )
         }
 
@@ -161,14 +157,17 @@ class WorldAtlas(data: ByteArray) {
 
     companion object {
         private val loaded: WorldAtlas? by lazy {
-            runCatching { WorldAtlas(SharedResources.open("World.json").use { it.readBytes() }) }.getOrNull()
+            try {
+                WorldAtlas(SharedResources.open("World.json").use { it.readBytes() })
+            } catch (_: Exception) {
+                null
+            }
         }
 
         /** Parsed once, off the main thread, when a map first needs it. */
         suspend fun bundled(): WorldAtlas? = withContext(Dispatchers.Default) { loaded }
 
-        private fun ints(element: kotlinx.serialization.json.JsonElement): List<Int> =
-            (element as JsonArray).map { it.jsonPrimitive.int }
+        private fun ints(element: JsonElement): List<Int> = element.jsonArray.map(JsonElement::decodedInt)
 
         private fun part(rings: List<List<Vector3>>, outline: List<Vector3>): Part {
             val sum = outline.fold(Vector3.Zero) { sum, point -> sum + point }

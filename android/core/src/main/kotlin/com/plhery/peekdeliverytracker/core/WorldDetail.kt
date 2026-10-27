@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.core
 
 import java.io.ByteArrayOutputStream
+import java.nio.Buffer
+import java.nio.ByteBuffer
 import java.util.zip.Inflater
 import kotlin.math.acos
 import kotlin.math.floor
@@ -14,13 +16,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.double
-import kotlinx.serialization.json.int
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 
 // From WorldDetail.swift, the tiles a close-up shows and the store that reads them. MapPainter's drawing of them is
 // :app's.
@@ -92,7 +93,7 @@ class DetailTile(
                 val radius = points.fold(0.0) { radius, point -> swiftMax(radius, acos(swiftMax(-1.0, swiftMin(1.0, center.dot(point))))) }
                 Shape(level = flat.firstOrNull() ?: 0, points = points, cut = cut, center = center, radius = radius)
             }
-            val layer = { name: String -> file.getValue(name).jsonArray.map { shape(ints(it)) } }
+            val layer = { name: String -> file.getValue(name).jsonArray.map { shape(it.jsonArray.map(JsonElement::decodedInt)) } }
             rivers = layer("rivers")
             lakes = layer("lakes")
             urban = layer("urban")
@@ -101,42 +102,45 @@ class DetailTile(
                 val values = element.jsonArray
                 Town(
                     point = GeoPoint(
-                        longitude = values[0].jsonPrimitive.int.toDouble() / precision,
-                        latitude = values[1].jsonPrimitive.int.toDouble() / precision,
+                        longitude = values[0].decodedInt().toDouble() / precision,
+                        latitude = values[1].decodedInt().toDouble() / precision,
                     ),
-                    name = values[2].jsonPrimitive.content,
-                    thousands = values[3].jsonPrimitive.int,
+                    name = values[2].decodedString(),
+                    thousands = values[3].decodedInt(),
                 )
             }
         }
-    }
-
-    private companion object {
-        fun ints(element: JsonElement): List<Int> = element.jsonArray.map { it.jsonPrimitive.int }
     }
 }
 
 /**
  * The tiles as they ship with the app, in `WorldDetail.pack`: a first line that says where each tile starts,
  * then the tiles the web map reads one by one, each one compressed. A close-up reads the few it shows, so
- * showing it asks no map service anything.
+ * showing it asks no map service anything. `data` may map the file, as the iPhone does: a tile's bytes are copied
+ * out only when it is read, and tiles may be read on several threads at once.
  */
-class WorldDetailPack(private val data: ByteArray) {
+class WorldDetailPack(data: ByteBuffer) {
+    constructor(data: ByteArray) : this(ByteBuffer.wrap(data))
+
+    /** The pack from the buffer's position to its limit, with a position of its own that is never moved. */
+    private val data: ByteBuffer = data.asReadOnlyBuffer()
+
     val degrees: Double
     val precision: Double
 
     /** The tiles there are: the open sea has none. */
     val keys: Set<String>
     private val start: Int
-    private val index: Map<String, List<Int>>
+    private val index: Map<String, List<Long>>
 
     init {
-        val end = data.indexOf(0x0A.toByte())
-        if (end < 0) throw IllegalArgumentException("The pack has no header line")
-        val header = Json.parseToJsonElement(data.decodeToString(0, end)).jsonObject
-        degrees = header.getValue("degrees").jsonPrimitive.double
-        precision = header.getValue("precision").jsonPrimitive.double
-        index = header.getValue("tiles").jsonObject.mapValues { (_, place) -> place.jsonArray.map { it.jsonPrimitive.int } }
+        val first = this.data.position()
+        val end = (first until this.data.limit()).firstOrNull { this.data.get(it) == 0x0A.toByte() }
+            ?: throw IllegalArgumentException("The pack has no header line")
+        val header = Json.parseToJsonElement(bytes(first, end - first).decodeToString()).jsonObject
+        degrees = header.getValue("degrees").decodedDouble()
+        precision = header.getValue("precision").decodedDouble()
+        index = header.getValue("tiles").jsonObject.mapValues { (_, place) -> place.jsonArray.map(JsonElement::decodedLong) }
         keys = index.keys
         start = end + 1
     }
@@ -144,9 +148,18 @@ class WorldDetailPack(private val data: ByteArray) {
     /** One tile, or nil where there is none. It throws for a tile that cannot be read. */
     fun tile(key: String): DetailTile? {
         val place = index[key] ?: return null
-        if (!(place.size == 2 && place[0] >= 0 && place[1] > 0 && start.toLong() + place[0] + place[1] <= data.size)) return null
-        val json = inflate(data, start + place[0], place[1])
+        if (!(place.size == 2 && place[0] >= 0 && place[1] > 0 && start + place[0] + place[1] <= data.limit())) return null
+        val json = inflate(bytes((start + place[0]).toInt(), place[1].toInt()))
         return DetailTile(json = json, precision = precision, degrees = degrees)
+    }
+
+    /** `count` bytes of the pack from `offset`, read through a view of their own so threads never share a position. */
+    private fun bytes(offset: Int, count: Int): ByteArray {
+        val view = data.duplicate()
+        // Through Buffer, where Android declares it: built with JDK 9 or later, this would call ByteBuffer's override,
+        // which older Android versions lack.
+        (view as Buffer).position(offset)
+        return ByteArray(count).also { view.get(it) }
     }
 
     /** The tiles a close-up shows; none while the view is too wide for them. */
@@ -175,7 +188,11 @@ class WorldDetailPack(private val data: ByteArray) {
         private val levels: List<Pair<Double, Double>> = listOf(CLOSE_UP_KILOMETRES to 440.0, 400.0 to 320.0, 230.0 to 170.0)
 
         private val loaded: WorldDetailPack? by lazy {
-            runCatching { WorldDetailPack(SharedResources.open("WorldDetail.pack").use { it.readBytes() }) }.getOrNull()
+            try {
+                WorldDetailPack(SharedResources.open("WorldDetail.pack").use { it.readBytes() })
+            } catch (_: Exception) {
+                null
+            }
         }
 
         /** Read once, off the main thread, when an opened map first closes in. */
@@ -190,11 +207,11 @@ class WorldDetailPack(private val data: ByteArray) {
             levels.map { (from, full) -> swiftMax(0.0, swiftMin(1.0, (from - kilometres) / (from - full))) }
 
         /** `NSData.decompressed(using: .zlib)`, which reads raw DEFLATE data with no zlib header. */
-        private fun inflate(data: ByteArray, offset: Int, length: Int): ByteArray {
+        private fun inflate(data: ByteArray): ByteArray {
             val inflater = Inflater(true)
             try {
-                inflater.setInput(data, offset, length)
-                val output = ByteArrayOutputStream(length * 4)
+                inflater.setInput(data)
+                val output = ByteArrayOutputStream(data.size * 4)
                 val buffer = ByteArray(16_384)
                 while (!inflater.finished()) {
                     val count = inflater.inflate(buffer)
@@ -300,3 +317,64 @@ data class MapDetail(
     val tiles: Map<String, DetailTile>,
     val need: (List<String>) -> Unit,
 )
+
+// MARK: - JSON
+
+// JSONDecoder's rules for the numbers and strings of the atlas and the tiles, stricter than kotlinx's tree, which takes
+// any unquoted word as a literal and reads a quoted number as one: a number is unquoted and written as JSON writes one,
+// an Int has nothing left after its point, and a string is quoted.
+
+internal fun JsonElement.decodedLong(): Long {
+    val text = number()
+    text.toLongOrNull()?.let { return it }
+    // 1.0 and 1e2 are whole numbers too.
+    val value = text.toDouble()
+    if (value == floor(value) && value >= Long.MIN_VALUE.toDouble() && value < -Long.MIN_VALUE.toDouble()) return value.toLong()
+    throw SerializationException("Expected an Int, found $text")
+}
+
+/** An Int as the 32-bit index and coordinates here hold it, where Swift's Int has 64 bits. */
+internal fun JsonElement.decodedInt(): Int {
+    val value = decodedLong()
+    if (value < Int.MIN_VALUE || value > Int.MAX_VALUE) throw SerializationException("Expected a 32-bit Int, found $value")
+    return value.toInt()
+}
+
+internal fun JsonElement.decodedDouble(): Double =
+    number().toDouble().takeIf { it.isFinite() } ?: throw SerializationException("Expected a Double, found $this")
+
+internal fun JsonElement.decodedString(): String {
+    val primitive = this as? JsonPrimitive
+    if (primitive == null || !primitive.isString) throw SerializationException("Expected a String, found $this")
+    return primitive.content
+}
+
+private fun JsonElement.number(): String {
+    val primitive = this as? JsonPrimitive
+    if (primitive == null || primitive.isString || !isJsonNumber(primitive.content)) {
+        throw SerializationException("Expected a number, found $this")
+    }
+    return primitive.content
+}
+
+/** JSON's grammar for a number: an optional minus, no leading zero, then optional fraction and exponent digits. */
+private fun isJsonNumber(text: String): Boolean {
+    var index = 0
+    fun digits(): Boolean {
+        val from = index
+        while (index < text.length && text[index] in '0'..'9') index++
+        return index > from
+    }
+    if (index < text.length && text[index] == '-') index++
+    if (index < text.length && text[index] == '0') index++ else if (!digits()) return false
+    if (index < text.length && text[index] == '.') {
+        index++
+        if (!digits()) return false
+    }
+    if (index < text.length && (text[index] == 'e' || text[index] == 'E')) {
+        index++
+        if (index < text.length && (text[index] == '+' || text[index] == '-')) index++
+        if (!digits()) return false
+    }
+    return index == text.length
+}

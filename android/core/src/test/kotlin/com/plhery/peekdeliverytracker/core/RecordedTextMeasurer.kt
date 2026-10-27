@@ -3,8 +3,9 @@ package com.plhery.peekdeliverytracker.core
 /**
  * The map's names as wide as the iPhone's system font writes them, so the layout tests see the collisions the iPhone
  * tests do. `map-text-widths.tsv` holds `(text as NSString).size(withAttributes:).width` for every name the tests
- * measure, recorded with AppKit's system font on a Mac: size, weight, text and width, with invisible characters
- * written as `\uXXXX`. A name it does not hold fails the test rather than being guessed.
+ * measure, recorded on a Mac by android/tools/MapTextWidths.swift (AppKit's system font writes them as wide as UIKit's):
+ * size, weight, text and width, with invisible characters written as `\uXXXX`. A name it does not hold fails the test
+ * rather than being guessed.
  */
 class RecordedTextMeasurer(lines: Sequence<String>) : TextMeasurer {
     private val widths = HashMap<String, Double>()

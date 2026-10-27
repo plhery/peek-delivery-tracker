@@ -210,15 +210,23 @@ class ParcelRoute(places: List<RoutePlace?>, deliveries: Int = 0, destination: R
     }
 
     /** A parcel's scans, in the journal's order. Country-only places take the reader's name for the country. */
-    constructor(events: List<TrackingEvent>, destination: RoutePlace? = null, countryName: (String) -> String) : this(
-        places = journal(events).asReversed().map { event ->
+    constructor(events: List<TrackingEvent>, destination: RoutePlace? = null, countryName: (String) -> String) :
+        this(Journal(events), destination, countryName)
+
+    private constructor(journal: Journal, destination: RoutePlace?, countryName: (String) -> String) : this(
+        places = journal.newestFirst.asReversed().map { event ->
             val place = event.place ?: return@map null
             val located = RoutePlace(place)
             if (located.isCountry) located.copy(name = countryName(located.country)) else located
         },
-        deliveries = journal(events).takeWhile { it.stage == TrackingStage.Delivered }.size,
+        deliveries = journal.newestFirst.takeWhile { it.stage == TrackingStage.Delivered }.size,
         destination = destination,
     )
+
+    /** A generated track's places are left out: the route ends where the parcel really was last. */
+    private class Journal(events: List<TrackingEvent>) {
+        val newestFirst: List<TrackingEvent> = GeneratedTrack.without(events).sortedWith(eventOrderComparator)
+    }
 
     /** Both views only make sense when part of the journey, travelled or still to go, lies outside the close-up. */
     val hasNearView: Boolean get() = near.size < stops.size || (remainingKilometres ?: 0.0) >= NEAR_KILOMETRES
@@ -235,10 +243,6 @@ class ParcelRoute(places: List<RoutePlace?>, deliveries: Int = 0, destination: R
     companion object {
         /** Places closer than this to the current one belong to the close-up. */
         const val NEAR_KILOMETRES = 400.0
-
-        /** A generated track's places are left out: the route ends where the parcel really was last. Newest first. */
-        private fun journal(events: List<TrackingEvent>): List<TrackingEvent> =
-            GeneratedTrack.without(events).sortedWith(eventOrderComparator)
 
         /** Kilometres rounded the way a journey is told: "8 km", "450 km", "9,300 km". */
         fun formattedKilometres(kilometres: Double, locale: Locale): String {

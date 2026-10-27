@@ -4,7 +4,7 @@ description: A encomenda volta a quem a enviou por causa da morada, de uma recus
 slug: encomenda-devolvida-ao-remetente
 picture: Uma carrinha com uma encomenda com um carimbo redondo de devolução volta para uma loja ao longo de uma seta curva, e o Pip fica a vê-la partir.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 «Devolvida ao remetente» quer dizer que a transportadora não te conseguiu entregar a encomenda e está a levá-la de volta a quem a enviou: por causa da morada, de uma recusa, de um prazo de levantamento que passou ou de um desalfandegamento por concluir. Depois de a devolução começar, os CTT dizem que não a podem cancelar. Escreve já à loja e diz-lhe, por escrito, se queres que volte a enviar a encomenda ou que te devolva o dinheiro.
@@ -17,14 +17,14 @@ A razão costuma estar na última leitura do seguimento, e a transportadora marc
 
 | Motivo | O que dizem a transportadora ou a loja |
 | --- | --- |
-| Morada errada ou incompleta | Amazon.es: «Morada incorreta, incompleta ou desatualizada»; Vinted: não foi possível entregá-la «na morada fornecida ou ao destinatário» |
+| Morada errada ou incompleta | Vinted: não foi possível entregá-la «na morada fornecida ou ao destinatário» |
 | Ninguém em casa | [CTT](carrier:ctt): numa Encomenda Expresso, o que acontece depende da «instrução do remetente», que pode ser devolver; no serviço Envios Online, quem envia pode escolher «Devolver de imediato a encomenda ao Remetente» |
 | Não foi levantada a tempo | CTT: passado o prazo na Loja CTT, no Ponto CTT ou no cacifo Locky; [InPost](carrier:inpost) `Devolução em curso`: «O prazo de levantamento passou ou não foi possível fazer a entrega» |
 | Duas tentativas falhadas | GLS: sem GLS Point por perto, ou numa encomenda à cobrança, devolve ao expedidor depois da segunda tentativa e de 10 dias úteis no armazém |
-| Recusada à porta | Amazon.es: «O destinatário recusou a entrega»; GLS: se recusares uma encomenda danificada por fora, volta ao armazém e a GLS informa o expedidor |
+| Recusada à porta | GLS: se recusares uma encomenda danificada por fora, volta ao armazém e a GLS informa o expedidor |
 | Desalfandegamento por concluir | CTT: desalfandegamento não concluído em 20 dias, a encomenda é «devolvida ao remetente sem possibilidade de retrocesso»; se pagaste o IVA na compra mas não os direitos, os CTT não conseguem submeter o processo e a encomenda é devolvida |
 | Encomenda fora das regras | InPost: dimensões, embalagem ou peso não conformes, volta ao Ponto Pack ou Locker de origem |
-| Danificada em trânsito | Amazon.es: «A encomenda foi danificada em trânsito»; Vinted: «Foi entregue danificada» e recusaste-a |
+| Danificada em trânsito | Vinted: «Foi entregue danificada» e recusaste-a |
 
 As encomendas devolvidas para o estrangeiro, ou que de lá voltam, trazem muitas vezes a razão em francês, como mandam as regras postais internacionais: `Inconnu` (desconhecido), `Refusé` (recusado), `Non réclamé` (não reclamado).
 
@@ -59,7 +59,6 @@ Enquanto a encomenda ainda vem a caminho, fala com a loja. Nos CTT, se o envio e
 
 Normalmente, sim, quando ela chega à loja. As plataformas têm regras próprias:
 
-- **Amazon.es**: a encomenda volta para a Amazon e o reembolso é processado. Nos artigos vendidos e enviados pela Amazon, sai geralmente em sete dias úteis. A Amazon não reenvia: se ainda queres o artigo, fazes uma encomenda nova. Se foi um vendedor do Marketplace, contacta-o; sem resposta em 48 horas, ou com uma solução que não te serve, usa a Garantia de A a Z.
 - **eBay**: a Money Back Guarantee do eBay devolve o preço e os portes de um artigo que não chegou à morada indicada na compra, mas não se deste uma morada errada, se o recusaste (a não ser por portes mal pagos pelo vendedor) ou se não pagaste os encargos de importação.
 - **Vinted**: quando o pedido passa a «A devolver ao remetente» e a Vinted confirma que a encomenda está a voltar, cancela a compra e dá-te um reembolso total, «o preço do artigo, incluindo as taxas de envio e as taxas da Vinted». Se quem vendeu não a receber, ou não a marcar como recebida, em 14 dias úteis, o reembolso começa sozinho. Sem dinheiro ao fim de 25 dias úteis, contacta a Vinted.
 
@@ -134,7 +133,6 @@ Nos Envios Online dos CTT, quando não é possível entregar nem devolver, a CTT
 - [UPS: Delivery Intercept](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – só o expedidor, taxas
 - [UPS: The package was returned to the sender](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – não recupera uma encomenda já devolvida
 - [União Postal Universal: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – menções em francês, devolução imediata, retenção, via menos prioritária, encargos, abandono
-- [Amazon.es: Encomendas que não podem ser entregues](https://www.amazon.es/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX&language=pt_PT) – motivos, sete dias úteis, sem reenvio, 48 horas, Garantia de A a Z
 - [eBay: Money Back Guarantee](https://www.ebay.com/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – o que está coberto
 - [Vinted: A encomenda foi devolvida ao remetente](https://www.vinted.pt/help/730) – reembolso total, motivos
 - [Vinted: A minha encomenda está a ser devolvida ao remetente](https://www.vinted.pt/help/1447) – 14 e 25 dias úteis

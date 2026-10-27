@@ -4,7 +4,7 @@ description: Perché un pacco torna al mittente, se puoi fermarlo, quanto ci met
 slug: pacco-rispedito-al-mittente
 picture: Un furgone con un pacco con un timbro rotondo di ritorno torna indietro lungo una freccia curva verso un negozio, e Pip lo guarda andare via.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 Un pacco rispedito al mittente è un pacco che il corriere non è riuscito a consegnarti e che sta riportando a chi l'ha spedito: per l'indirizzo, per un rifiuto, perché nessuno l'ha ritirato in tempo o perché c'erano spese da pagare. Quando il pacco ha preso la via del ritorno, di solito non si ferma più: DHL in Germania, per esempio, lo dice chiaramente. Scrivi subito al venditore e digli, per iscritto, se vuoi che te lo rispedisca o se vuoi il rimborso.
@@ -22,8 +22,7 @@ Il motivo di solito è nell'ultima scansione ed è scritto anche sul pacco, cos�
 | Non ritirato in tempo | La Posta `Non ritirato`; Poste: la raccomandata torna «per compiuta giacenza»; [InPost](carrier:inpost): dopo circa 3 giorni nel locker il pacco riparte da solo |
 | Rifiutato alla consegna | La Posta `Il destinatario ha rifiutato l'invio`, oppure `Respinto`; BRT: «il destinatario ha rifiutato la merce» |
 | Dazio e IVA non pagati | La Posta: se il destinatario non paga i costi di sdoganamento, l'invio torna al mittente, a spese del mittente |
-| Etichetta illeggibile | Amazon.it: «L'etichetta dell'indirizzo è diventata illeggibile durante il trasporto» |
-| Danneggiato in viaggio | La Posta `Invio di ritorno al mittente per danneggiamento`; Amazon.it: «Il pacco è stato danneggiato durante il trasporto» |
+| Danneggiato in viaggio | La Posta `Invio di ritorno al mittente per danneggiamento` |
 | L'ha chiesto il mittente | La Posta `Rinvio diretto su istruzione del mittente` e `Rinvio con disposizione preliminare` |
 
 I pacchi dall'estero tornano spesso con un timbro in francese, la lingua della posta internazionale: `Inconnu` (sconosciuto), `Refusé` (rifiutato), `Non réclamé` (non ritirato).
@@ -58,7 +57,7 @@ Poste Italiane e la Posta, nelle pagine per i clienti, non presentano un servizi
 
 Di solito arriva quando il pacco è di nuovo dal venditore. I marketplace hanno regole proprie:
 
-- **Amazon.it** non rispedisce l'ordine: se lo vuoi ancora, lo ordini di nuovo. Per gli articoli venduti e gestiti da Amazon, il rimborso viene emesso «generalmente» entro 7 giorni lavorativi e lo segui da «I miei ordini». Se vende e spedisce un venditore del Marketplace, scrivi a lui; se non risponde entro 48 ore, c'è la Garanzia dalla A alla Z.
+- **Amazon.it**: se vende e spedisce un partner di vendita del Marketplace, scrivi prima a lui. Se non riuscite a risolvere il problema di consegna, con la Garanzia dalla A alla Z puoi chiedere il rimborso direttamente ad Amazon.
 - **eBay**, con la Garanzia cliente eBay, ti rimborsa tutto, spedizione compresa, se l'oggetto non arriva all'indirizzo che hai dato al pagamento. Non vale se hai dato un indirizzo sbagliato, se hai rifiutato la consegna (salvo che il venditore avesse messo un'affrancatura insufficiente), se non eri a casa al momento della consegna, se non l'hai ritirato in tempo al punto di ritiro o se non hai pagato le spese di importazione.
 - **Vinted** annulla l'ordine quando ha la conferma che il pacco sta tornando a chi vende (lo stato diventa «Rispedito al mittente») e ti rimborsa «l'importo totale dell'acquisto», cioè articolo, spedizione e commissioni Vinted. Se chi vende non segna il pacco come ricevuto entro 14 giorni lavorativi, il rimborso parte da solo; se dopo 25 giorni lavorativi non hai ancora niente, contatta Vinted.
 
@@ -133,7 +132,7 @@ La Posta può aprire il pacco per risalire al mittente; se non ci riesce, ne dis
 - [UPS: Returned to the sender](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – pacco tornato non recuperabile
 - [Posta austriaca: FAQ](https://www.post.at/p/c/faq-privat) – «consegnato» al mittente nei ritorni
 - [Unione postale universale: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – ritorno immediato dei rifiutati, giacenza, via meno prioritaria
-- [Amazon.it: Pacchi non consegnabili](https://www.amazon.it/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – motivi, 7 giorni lavorativi, nessuna nuova spedizione, 48 ore
+- [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prodotti dei partner di vendita, rimborso da Amazon se il problema di consegna non si risolve con il venditore
 - [eBay: Garanzia cliente eBay](https://www.ebay.it/help/policies/ebay-money-back-guarantee-policy/garanzia-cliente-ebay?id=4210) – cosa è coperto e cosa no (rifiuto, assenza, mancato ritiro, spese di importazione)
 - [Vinted: Il pacco è stato rispedito al mittente](https://www.vinted.it/help/730) – rimborso totale
 - [Vinted: Il mio pacco sta per essere restituito al mittente](https://www.vinted.it/help/1447) – 14 e 25 giorni lavorativi

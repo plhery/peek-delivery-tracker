@@ -4,7 +4,7 @@ description: Dlaczego paczka wraca do nadawcy, czy da się zatrzymać zwrot, po 
 slug: paczka-wraca-do-nadawcy
 picture: Furgonetka z paczką z okrągłą pieczątką zwrotu jedzie po zakrzywionej strzałce z powrotem do sklepu, a Pip patrzy, jak odjeżdża.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 „Zwrot do nadawcy” znaczy, że przewoźnik nie mógł Ci wydać paczki i wiezie ją z powrotem do tego, kto ją wysłał. Powodem bywa błędny adres, odmowa przyjęcia, minięty termin odbioru albo nieopłacone należności. Gdy paczka już jedzie z powrotem, nie zatrzymasz jej, a wcześniej może to zrobić zwykle tylko nadawca. Napisz od razu do sprzedawcy i powiedz na piśmie, czy chcesz ponownej wysyłki, czy zwrotu pieniędzy.
@@ -58,7 +58,7 @@ Dopóki paczka jedzie do Ciebie, pytaj sprzedawcę. Jeśli wolisz odebrać ją g
 
 Zwykle tak, gdy paczka wróci do sprzedawcy. Platformy mają własne zasady:
 
-- **Amazon.pl** nie wysyła ponownie zamówienia, które przewoźnik zwrócił jako niemożliwe do dostarczenia: składasz nowe. Za produkty wysyłane przez Amazon pieniądze wracają „zazwyczaj w ciągu 72 godzin”. Przy sprzedawcy z Marketplace najpierw piszesz do niego, a jeśli nie odpowie w ciągu dwóch dni roboczych, korzystasz z Gwarancji od A do Z.
+- **Amazon.pl** obejmuje Gwarancją od A do Z każdy produkt, także od niezależnego sprzedawcy, i przy problemie z terminową dostawą obiecuje zwrot pieniędzy albo wymianę. Przy sprzedawcy z Marketplace najpierw piszesz do niego; jeśli nie uda się rozwiązać problemu, o zwrot pieniędzy prosisz bezpośrednio Amazon.
 - **Allegro** przy Allegro Smart! daje darmową dostawę tylko raz w danej transakcji. Jeśli paczka wróciła do sprzedającego, bo jej nie odebrano, za ponowną wysyłkę zapłacisz; szczegóły ustalasz bezpośrednio ze sprzedającym.
 - **Vinted** anuluje zamówienie, gdy potwierdzi, że paczka jest w drodze powrotnej, i oddaje „pełną kwotę (tj. cenę przedmiotu, w tym koszt wysyłki i opłaty Vinted)”. Jeśli sprzedający nie dostanie paczki albo nie oznaczy jej w ciągu 14 dni roboczych, zwrot rusza sam. Gdy po 25 dniach roboczych nadal nic nie masz, napisz do Vinted.
 
@@ -131,7 +131,8 @@ Po zwrocie nieodebranej przesyłki poleconej Poczta Polska może Ci podać nazw�
 - [Poczta Polska: Regulamin obsługi przesyłek zagranicznych w zakresie przedstawienia do kontroli i zgłoszenia do procedury celnej](https://www.poczta-polska.pl/wp-content/uploads/2025/09/Regulamin-obslugi-przesylek-zagranicznych-w-zakresie-przedstawienia-do-kontroli-i-zgloszenia-do-procedury-celnej.pdf) – odmowa zapłaty, 14 dni na pełnomocnictwo, zwrot
 - [Allegro: Program dostaw Allegro Delivery, informacje dla kupujących](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/allegro-one-informacje-dla-kupujacych-8dZv6Dv2KtL) – „Odesłano nadawcy”, uszkodzona paczka wraca do sprzedającego
 - [Allegro: Zakupy z Allegro Smart!, najczęściej zadawane pytania](https://allegro.pl/pomoc/dla-kupujacych/dostawa-z-allegro-smart/czy-zaplace-za-ponowna-przesylke-allegro-smart-jesli-nie-udalo-mi-sie-jej-odebrac-i-wrocila-do-nadawcy-gRAreBqoDUz) – płatna ponowna wysyłka
-- [Amazon.pl: Przesyłki, których nie można dostarczyć](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – bez ponownej wysyłki, 72 godziny, dwa dni robocze, Gwarancja od A do Z
+- [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – Gwarancja od A do Z dla każdego produktu, terminowa dostawa, zwrot pieniędzy albo wymiana
+- [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw rozmowa ze sprzedawcą, potem zwrot pieniędzy od Amazon
 - [Vinted: Paczka wróciła do nadawcy](https://www.vinted.pl/help/730) – pełny zwrot z wysyłką i opłatami Vinted
 - [Vinted: Moja paczka wraca do nadawcy. Co teraz?](https://www.vinted.pl/help/1447) – 14 i 25 dni roboczych
 - [Vinted: Moja przesyłka trafiła pod niewłaściwy adres](https://www.vinted.pl/help/1450) – zwrot do 25 dni roboczych

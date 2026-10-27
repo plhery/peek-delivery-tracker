@@ -4,7 +4,7 @@ description: Qué significa que un paquete sea devuelto al remitente, si se pued
 slug: paquete-devuelto-al-remitente
 picture: Una furgoneta con un paquete con un sello redondo de devolución vuelve hacia una tienda siguiendo una flecha curva, y Pip la mira alejarse.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 «Devuelto al remitente» significa que el transportista no ha podido entregarte el paquete y se lo lleva de vuelta a quien lo envió: por la dirección, porque lo rehusaste, porque no lo recogiste a tiempo o porque quedaron aduanas sin pagar. Cuando la devolución ya ha empezado, transportistas como DHL dicen que no se puede parar. Escribe hoy mismo al vendedor y dile por escrito si quieres que te lo vuelva a enviar o que te devuelva el dinero.
@@ -17,12 +17,12 @@ El motivo suele estar en el último escaneo. Además, el Reglamento postal oblig
 
 | Motivo | Lo que verás |
 | --- | --- |
-| Dirección incorrecta o incompleta | [Correos](carrier:correos-spain) lo deja «estacionado» si los datos del destinatario no bastan o la dirección es incorrecta o desconocida; [Amazon](carrier:amazon-logistics) habla de una dirección «incorrecta, incompleta o desactualizada» |
+| Dirección incorrecta o incompleta | [Correos](carrier:correos-spain) lo deja «estacionado» si los datos del destinatario no bastan o la dirección es incorrecta o desconocida |
 | Nadie te conoce en esa dirección, o te has mudado | Correos `Destinatario desconocido`; el Reglamento postal habla de destinatario «desconocido» o «ausentado sin dejar señas» |
 | No lo recogiste a tiempo | Correos `Finalizado plazo retirada`; [Correos Express](carrier:correos-express) `EL PERIODO DE RECOGIDA DEL ENVÍO EN EL PUNTO DE CONVENIENCIA SELECCIONADO HA FINALIZADO Y SE PROCEDERÁ A SU DEVOLUCIÓN A ORIGEN` |
-| Lo rehusaste | El Reglamento postal lo llama «rehusado»; Amazon.es: «Un destinatario ha rechazado la entrega» |
-| Aduanas sin pagar o papeles incompletos | Correos `En proceso de devolución`; Amazon.es: «El paquete está retenido en la aduana», y para Canarias, Ceuta o Melilla te pide el NIF en la dirección de envío |
-| Llegó dañado | Correos lo estaciona por «rotura o avería»; Amazon.es: «El paquete se ha dañado durante el transporte» |
+| Lo rehusaste | El Reglamento postal lo llama «rehusado» |
+| Aduanas sin pagar o papeles incompletos | Correos `En proceso de devolución` |
+| Llegó dañado | Correos lo estaciona por «rotura o avería» |
 | No se puede enviar por correo | Un objeto prohibido vuelve a la oficina de origen, que avisa al remitente; algunos, como el dinero sin declarar, se retienen y nunca vuelven |
 | Lo pidió el remitente | Correos usa también `En proceso de devolución` cuando el remitente pide que se lo devuelvan |
 
@@ -59,7 +59,7 @@ Mientras el paquete siga de camino hacia ti, pídeselo a la tienda. Si lo que qu
 
 Normalmente sí, cuando el paquete llega al vendedor. Las plataformas tienen sus propias reglas:
 
-- **Amazon.es** recupera el paquete y te lo reembolsa. Si lo vendió y lo gestionó Amazon, suele emitir el reembolso en 7 días laborables. No vuelve a enviar el pedido: tienes que hacer uno nuevo. Si lo vendió un vendedor externo, habla primero con él; si no responde en 48 horas, tienes la Garantía de la A a la Z.
+- **Amazon.es**: si lo vendió un vendedor externo, habla primero con él. Si no consigues resolver el problema de entrega, la Garantía de la A a la Z te permite reclamar directamente a Amazon.
 - **eBay**, con su Garantía al cliente, te devuelve el importe, con el envío original, si el artículo no llega a la dirección que diste al pagar. No cubre una dirección incorrecta, una entrega que rehusaste (salvo que el vendedor pagara de menos el envío), que no estuvieras en casa ni unas tasas de importación sin pagar.
 - **Vinted** cancela el pedido en cuanto confirma que el paquete va de vuelta y te hace un reembolso completo: «el precio del artículo, incluidos los gastos de envío y las comisiones de Vinted». Si el vendedor no lo recibe o no lo marca en 14 días laborables, el reembolso empieza solo; si a los 25 días laborables sigues sin nada, escríbeles.
 - **Wallapop** te reembolsa el importe si no es posible entregar el paquete y vuelve al vendedor.
@@ -139,7 +139,8 @@ El Reglamento postal solo prevé devolverlo «cuando conste la dirección» del 
 - [UPS: Delivery Intercept (en inglés)](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – remitente, antes de la entrega, cargos
 - [UPS: Paquete devuelto al remitente (en inglés)](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – no se puede recuperar
 - [Unión Postal Universal: Manual del Convenio (en inglés)](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – motivos en francés, plazos de espera, vía de vuelta, gastos del remitente
-- [Amazon.es: Paquetes que no se han podido entregar](https://www.amazon.es/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – motivos, NIF para Canarias, Ceuta y Melilla, 7 días laborables, no se reenvía, 48 horas, Garantía de la A a la Z
+- [About Amazon España: Diez cosas de Amazon que no sabías](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z para vendedores externos, problemas con el tiempo de entrega
+- [About Amazon España: Amazon amplía la Garantía de la A a la Z en España](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – reembolso de Amazon si no se resuelve con el vendedor
 - [eBay: Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – qué cubre y qué no
 - [Vinted: Paquete devuelto al remitente](https://www.vinted.es/help/730) – reembolso completo
 - [Vinted: Se va a devolver mi paquete al remitente](https://www.vinted.es/help/1447) – 14 y 25 días laborables

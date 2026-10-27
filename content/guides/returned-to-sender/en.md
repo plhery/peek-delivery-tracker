@@ -4,7 +4,7 @@ description: Why a parcel is returned to sender, whether the return can be stopp
 slug: returned-to-sender
 picture: A van carrying a parcel with a round return stamp drives back along a curved arrow to a shop, and Pip watches it go.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 "Returned to sender" means the carrier couldn't hand your parcel (or package) over and is taking it back to whoever sent it, because of the address, a refusal, a missed pickup deadline or unpaid charges. Once a return has started, carriers such as [Canada Post](carrier:canada-post) and DHL say they can't stop it. Message the seller straight away and say, in writing, whether you want it sent again or your money back.
@@ -59,7 +59,7 @@ So while the parcel is still on its way to you, the seller is the one to ask. If
 
 Usually, once it's back with the seller. Marketplaces have their own rules:
 
-- **Amazon US** can't reship a returned order and refunds "within 7 business days after the return is received", plus 3 to 5 business days at your bank. **Amazon UK** generally refunds within five business days; **Amazon Australia** cancels and refunds in full, delivery included. For a third-party seller, contact the seller first, then use the A-to-z Guarantee if there's no answer within two business days (48 hours on Amazon UK).
+- **Amazon** orders can't be cancelled once shipped, but you can refuse the delivery, says Amazon UK; Amazon Australia gives a refund or replacement for a refused parcel it fulfilled. For a third-party seller, contact the seller first: on Amazon UK, if you want a refund and it hasn't answered within 48 hours, most orders are covered by the A-to-z Guarantee, and you claim from Amazon directly.
 - **eBay**'s Money Back Guarantee refunds an item that never reached your checkout address, postage included, but not if you gave a wrong address, refused it (unless the postage was underpaid) or didn't pay import charges.
 - **Vinted** cancels the order once the parcel is on its way back and refunds "the item's price, including shipping and Vinted fees". If the seller doesn't mark it received within 14 business days, the refund starts on its own; still nothing after 25 business days, contact Vinted.
 
@@ -142,9 +142,9 @@ In the UK, Royal Mail sends it to its National Returns Centre, which opens it to
 - [DHL: Help with a return](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/hilfe-ruecksendung.html) – can't stop a return
 - [Austrian Post: FAQ](https://www.post.at/p/c/faq-privat) – delivered to the sender
 - [Universal Postal Union: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – ownership, retention, route
-- [Amazon US: Undeliverable orders](https://www.amazon.com/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – 7 business days
-- [Amazon UK: Undeliverable orders](https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – five business days
-- [Amazon Australia: Undeliverable orders](https://www.amazon.com.au/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – full refund
+- [About Amazon UK: How to cancel an order on Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-cancel-an-amazon-order) – shipped orders, refusing the delivery
+- [About Amazon Australia: How to cancel Amazon orders](https://www.aboutamazon.com.au/news/shopping/how-to-cancel-your-order-on-amazon-australia) – refused parcel, refund or replacement (2023)
+- [About Amazon UK: How to contact a seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – 48 hours, A-to-z Guarantee
 - [eBay: Money Back Guarantee](https://www.ebay.com/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – what is covered
 - [Vinted: Parcel was sent back to sender](https://www.vinted.co.uk/help/730) – full refund
 - [Vinted: My parcel is returning to the sender](https://www.vinted.co.uk/help/1447) – 14 and 25 business days

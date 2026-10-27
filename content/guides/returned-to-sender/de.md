@@ -4,7 +4,7 @@ description: Paket geht zurück an den Absender? Warum, ob du die Rücksendung s
 slug: paket-zurueck-an-absender
 picture: Ein Lieferwagen mit einem Paket mit rundem Rücksendestempel fährt einen gebogenen Pfeil entlang zurück zu einem Laden, und Pip schaut ihm nach.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 „Zurück an Absender“ heißt: Der Paketdienst konnte dir das Paket nicht übergeben und schickt es an den Absender zurück. Meist liegt es an der Adresse, an einer verweigerten Annahme, an einer verpassten Abholfrist oder an unbezahlten Gebühren. Hat die Rücksendung einmal begonnen, lässt sie sich bei DHL nicht mehr stoppen. Schreib dem Shop deshalb sofort und sag ihm schriftlich, ob er das Paket neu schicken oder dir das Geld zurückgeben soll.
@@ -60,7 +60,7 @@ Solange das Paket noch zu dir unterwegs ist, frag den Shop. Soll es woanders hin
 
 Meist ja, sobald das Paket beim Verkäufer ist. Die großen Plattformen haben eigene Regeln:
 
-- **Amazon.de** lässt ein unzustellbares Paket an Amazon zurückgehen und bearbeitet die Erstattung. Neu schicken kann Amazon nicht, du bestellst einfach noch einmal. Den Stand siehst du unter „Meine Bestellungen“ bei „Status der Rücksendung/Erstattung“. Hast du vier Wochen nach dem voraussichtlichen Lieferdatum keine Bestätigung der Rücksendung, schau dort nach deinen Optionen. Bei einem Marketplace-Verkäufer wendest du dich zuerst an ihn. Antwortet er nicht innerhalb von 48 Stunden, hilft die A-bis-z-Garantie.
+- **Amazon.de**: Bei einem Marketplace-Verkäufer wendest du dich zuerst an ihn. Kannst du das Problem nicht mit ihm lösen, hilft die A-bis-z-Garantie, die auch die rechtzeitige Lieferung abdeckt: Du wendest dich an Amazon, und Amazon entscheidet über die Erstattung.
 - **eBay** erstattet über den eBay-Käuferschutz einen Artikel, der nicht angekommen ist, samt den ursprünglichen Versandkosten. Nicht gedeckt: eine falsche Adresse beim Kauf, eine verweigerte Annahme (außer der Verkäufer hat zu wenig frankiert) und Einfuhrabgaben, die du nicht bezahlt hast.
 - **Vinted** storniert die Bestellung, sobald das Paket auf dem Rückweg ist, und erstattet „den Preis des Artikels, einschließlich Versand und Vinted-Gebühren“. Erhält der Verkäufer das Paket nicht innerhalb von 14 Werktagen oder markiert es nicht, startet die Erstattung von selbst. Ist nach 25 Werktagen noch kein Geld da, melde dich bei Vinted.
 
@@ -123,7 +123,8 @@ In der Schweiz darf die Post eine Rücksendung öffnen, um den Absender zu finde
 - [Schweizerische Post: Ereignisse „Sendungen verfolgen“](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Rücksendegründe, Vorverfügung
 - [Schweizerische Post: AGB Postdienstleistungen Privatkunden (PDF)](https://www.post.ch/-/media/post/agb/agb-postdienstleistungen-pk.pdf?sc_lang=de&hash=08F60BAF4C103EFE69B277ED052B1CEE) – Verweigerung, Kosten des Absenders, Öffnen, Zoll
 - [Weltpostverein: Convention Manual (PDF, Englisch)](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – Rückzug, Vorbehalt Österreichs, Lagerfrist, Rückweg
-- [Amazon.de: Nicht zustellbare Sendungen](https://www.amazon.de/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – Erstattung, kein Neuversand, vier Wochen, 48 Stunden
+- [About Amazon: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – A-bis-z-Garantie: rechtzeitige Lieferung bei externen Verkäufern, Erstattung
+- [About Amazon: A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst mit dem Verkaufspartner klären, dann an Amazon wenden
 - [eBay: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – Versandkosten, Ausschlüsse
 - [Vinted: Die Sendung wurde zum Absender zurückgeschickt](https://www.vinted.de/help/730) – volle Rückerstattung
 - [Vinted: Meine Sendung ist auf dem Rückweg zum Absender. Wie geht’s jetzt weiter?](https://www.vinted.de/help/1447) – 14 und 25 Werktage

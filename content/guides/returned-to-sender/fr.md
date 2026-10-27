@@ -4,7 +4,7 @@ description: Pourquoi un colis est retourné à l'expéditeur, si on peut annule
 slug: colis-retourne-expediteur
 picture: Une camionnette chargée d'un colis au tampon rond de retour repart le long d'une flèche courbe vers une boutique, et Pip la regarde s'éloigner.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-27
 ---
 
 « Retourné à l'expéditeur » veut dire que le transporteur n'a pas pu te remettre ton colis et le rapporte à celui qui l'a envoyé : adresse incomplète, colis refusé, délai de retrait dépassé ou frais de douane impayés. Une fois lancé, un retour va en pratique jusqu'au bout : seul l'expéditeur peut rappeler un colis, et seulement avant. Écris tout de suite au vendeur, et dis-lui par écrit si tu veux un nouvel envoi ou un remboursement.
@@ -60,7 +60,7 @@ C'est aussi ce que conseillent Chronopost et bpost : contacter l'expéditeur pou
 
 En général oui, une fois qu'il est rentré chez le vendeur. Les plateformes ont leurs propres règles :
 
-- **Amazon.fr** ne peut pas renvoyer la commande : il faut en passer une nouvelle. Pour un article vendu et expédié par Amazon, le remboursement se fait « en règle générale » dans les 7 jours ouvrables. **Amazon.com.be** rembourse une fois le retour reçu, ce qui peut prendre jusqu'à 14 jours. Pour un vendeur Marketplace, contacte d'abord le vendeur, puis passe par la Garantie A à Z s'il ne répond pas dans les 48 heures.
+- **Amazon** : pour un article vendu et expédié par un vendeur Marketplace, contacte d'abord le vendeur. Si tu n'arrives pas à régler le problème de livraison avec lui, la Garantie A à Z te permet de demander un remboursement à Amazon.
 - **eBay** rembourse, frais de livraison compris, un objet qui n'est pas arrivé, avec sa Garantie client eBay. Elle ne couvre pas une adresse incorrecte donnée à l'achat, une livraison refusée (sauf si le vendeur avait mal affranchi le colis), des frais d'importation impayés ou un objet pas retiré à temps au point de retrait.
 - **Vinted** annule la commande quand le colis repart et te rembourse « intégralement (c'est-à-dire le prix de l'article, les frais de port et les frais Vinted inclus) ». Si le vendeur ne l'a pas reçu ou pas signalé comme reçu dans les 14 jours ouvrés, le remboursement part tout seul ; toujours rien après 25 jours ouvrés, contacte Vinted.
 
@@ -142,8 +142,8 @@ La Poste suisse peut ouvrir un colis renvoyé pour trouver son expéditeur. Si e
 - [UPS : Delivery Intercept (en anglais)](https://www.ups.com/us/en/support/tracking-support/change-delivery-options/delivery-intercept) – expéditeur, frais
 - [UPS : Colis renvoyé à l'expéditeur (en anglais)](https://www.ups.com/us/en/fragments/support-portal-fragments/receiver-fragments/package-was-returned-to-the-sender-ss) – impossible de le récupérer
 - [Union postale universelle : Manuel de la Convention (en anglais)](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – propriété de l'expéditeur, motifs en français, garde, voie de retour
-- [Amazon.fr : Colis ne pouvant pas être livrés](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – 7 jours ouvrables, pas de renvoi, Garantie A à Z après 48 heures
-- [Amazon.com.be : Colis non livrables](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GCC7G9HKYQBZT5FX) – jusqu'à 14 jours après le retour
+- [About Amazon France : Amazon étend les protections apportées par la Garantie A à Z en France](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeurs tiers, remboursement par Amazon si le problème de livraison n'est pas réglé avec le vendeur
+- [About Amazon (Europe) : Amazon expands A-to-z Guarantee in Europe](https://www.aboutamazon.eu/news/customer-trust/amazon-expands-a-to-z-guarantee-in-europe-to-include-property-damage-and-personal-injury-claims) – Belgique, remboursement par Amazon si le problème n'est pas réglé avec le vendeur
 - [eBay : Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/garantie-client-ebay?id=4210) – ce qui est couvert et exclu, affranchissement insuffisant
 - [Vinted : Le colis a été retourné à l'expéditeur](https://www.vinted.fr/help/730) – remboursement intégral
 - [Vinted : Que faire si ton colis est renvoyé à l'expéditeur ?](https://www.vinted.fr/help/1447) – 14 et 25 jours ouvrés, article à republier

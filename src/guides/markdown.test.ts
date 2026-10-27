@@ -129,6 +129,9 @@ describe('a guide’s Markdown', () => {
     expect(() => parseBlocks(':::anatomy RR 5 CH\n- RR | Registered\n- CH | Switzerland\n:::')).toThrow(/must name its parts in order/);
     expect(() => parseBlocks(':::sources\n- Not a link\n:::')).toThrow(/a source starts with its link/);
     expect(() => parseBlocks(':::sources\n- [A](https://a.example) | more\n:::')).toThrow(/a source is one line/);
+    expect(() => parseBlocks('See [a site](http://plain.example/).')).toThrow(/leads to an https address/);
+    expect(parseBlocks(':::sources\n- [A site](http://plain.example/about.php) – its line\n:::')[0])
+      .toMatchObject({ items: [[{ type: 'link', href: 'http://plain.example/about.php' }, { text: ' – its line' }]] });
   });
 
   it('finds the guides a guide links, wherever the link stands', () => {

@@ -91,7 +91,7 @@ A carrier in your country that Techlink doesn't name. Its tracker holds that car
 The scans seen on Techlink's tracker so far all come before the parcel leaves China. What happens after the handover shows on the local carrier's tracking, so ask the seller for that carrier and its number, and contact the seller if the parcel is late.
 
 :::sources
-- [Techlink: 智禾官网 (home)](https://web.archive.org/web/20261022054957/http://www.techlinksz.cn/) – company name, small-parcel lines to Europe and America, Amazon, Walmart, TK and independent shops, DDU and DDP door-to-door, customs clearance abroad and the 2023 company, delivery accounts at destination, contact link with no target (saved copy of the live page, which is plain HTTP)
-- [Techlink: 轨迹跟踪 (tracking)](https://web.archive.org/web/20261022054824/http://www.techlinksz.cn/trajectory) – up to 40 numbers, Chinese page, countries, status signs, answer for an unknown number (saved copy of the live page, which is plain HTTP)
+- [Techlink: 智禾官网 (home)](http://www.techlinksz.cn/) – company name, small-parcel lines to Europe and America, Amazon, Walmart, TK and independent shops, DDU and DDP door-to-door, customs clearance abroad and the 2023 company, delivery accounts at destination, contact link with no target
+- [Techlink: 轨迹跟踪 (tracking)](http://www.techlinksz.cn/trajectory) – up to 40 numbers, Chinese page, countries, status signs, answer for an unknown number
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ZHPHD number shape, scan wordings in English and Chinese, the tracker's answers and the delivering carrier's number, what Peek shows
 :::

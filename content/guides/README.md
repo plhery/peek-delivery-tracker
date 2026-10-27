@@ -45,7 +45,8 @@ Text.
 - `## ` and `### ` headings, paragraphs, `- ` and `1. ` lists, a `> ` note, and tables
   with a `| --- |` line under their heading.
 - `**bold**`, `*italics*`, `` `code` `` for tracking numbers and a carrier's exact words.
-- Links to an `https://` page, to the tracker as `[Peek](/)`, which leads to the landing in
+- Links to an `https://` page (in `:::sources`, `http://` too, for a site that only answers
+  over plain http), to the tracker as `[Peek](/)`, which leads to the landing in
   the guide's language, and to another guide by id as `[customs](guide:customs)`, which
   leads to that guide in the guide's language. A guide does not link itself.
 - A backslash before `*`, `[`, `]`, `|` or `!` writes the character itself. There are no

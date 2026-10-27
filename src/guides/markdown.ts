@@ -79,15 +79,16 @@ export function anchorOf(text: string): string {
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-function linkTarget(target: string, children: Inline[], where: string): Inline {
+/** A source may be a site that only answers over plain http: it is the page its facts were read on. Elsewhere a link is https. */
+function linkTarget(target: string, children: Inline[], where: string, plainHttp: boolean): Inline {
   for (const type of ['guide', 'carrier'] as const) {
     if (!target.startsWith(`${type}:`)) continue;
     const id = target.slice(type.length + 1);
     if (!GUIDE_SLUG.test(id)) throw new Error(`${where}: "${target}" does not name a ${type}`);
     return { type, id, children };
   }
-  if (target !== '/' && !/^https:\/\/[^\s<>"]+$/.test(target)) {
-    throw new Error(`${where}: a link leads to an https address, to "/", to "guide:<id>" or to "carrier:<id>", not "${target}"`);
+  if (target !== '/' && !(plainHttp ? /^https?:\/\/[^\s<>"]+$/ : /^https:\/\/[^\s<>"]+$/).test(target)) {
+    throw new Error(`${where}: a link leads to an https address (http too in the sources), to "/", to "guide:<id>" or to "carrier:<id>", not "${target}"`);
   }
   return { type: 'link', href: target, children };
 }
@@ -96,7 +97,7 @@ function linkTarget(target: string, children: Inline[], where: string): Inline {
  * One block's text: bold, italics, code and links. A backslash keeps the next
  * character as it is, so `\*` and `\|` can be written.
  */
-export function parseInline(source: string, where = 'guide'): Inline[] {
+export function parseInline(source: string, where = 'guide', { plainHttp = false } = {}): Inline[] {
   let at = 0;
   const fail = (message: string): never => { throw new Error(`${where}: ${message} in "${source}"`); };
 
@@ -137,7 +138,7 @@ export function parseInline(source: string, where = 'guide'): Inline[] {
         const children = until('](');
         const end = source.indexOf(')', at);
         if (end < 0) fail('a link is not closed');
-        nodes.push(linkTarget(source.slice(at, end), children, where));
+        nodes.push(linkTarget(source.slice(at, end), children, where, plainHttp));
         at = end + 1;
         continue;
       }
@@ -217,7 +218,7 @@ function directive(name: Directive, argument: string, lines: string[], where: st
       return {
         type: 'sources',
         items: rows.map(([item]) => {
-          const nodes = inline(item);
+          const nodes = parseInline(item, where, { plainHttp: true });
           if (nodes[0]?.type !== 'link') throw new Error(`${where}: a source starts with its link: "${item}"`);
           return nodes;
         }),

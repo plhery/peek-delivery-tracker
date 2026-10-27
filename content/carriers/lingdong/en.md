@@ -99,12 +99,12 @@ On Lingdong's tracker, through the 快件查询 box on lingdong56.com, or in Pee
 The seller you ordered from: it booked the parcel with Lingdong and holds the contract. Lingdong lists two Chinese mobile numbers and a QQ chat, but nothing for recipients.
 
 :::sources
-- [Lingdong: 深圳市领东国际货运代理有限公司 (home)](https://web.archive.org/web/20260821032734/http://www.lingdong56.com/) – tracking box and the tracker it opens, services for sellers, phones, QQ chat buttons (saved copy, same as the live page, which is plain HTTP)
-- [Lingdong: 公司介绍 (about)](https://web.archive.org/web/20260211064149/http://www.lingdong56.com/gsjs.html) – freight forwarding, small parcels, express, air freight (saved copy, same as the live page)
-- [Lingdong: 主营业务 (main services)](https://web.archive.org/web/20260214185302/http://lingdong56.com/zyyw.html) – lines by country, ePacket, PostNL, China Post large parcels, China Post's 200 countries and transport modes (saved copy, same as the live page)
-- [Lingdong: 快递业务 (express)](https://web.archive.org/web/20260211070653/http://www.lingdong56.com/kdyw.html) – UPS, DHL and FedEx agent (saved copy, same as the live page)
-- [Lingdong: 联系我们 (contact)](https://web.archive.org/web/20260211063049/http://www.lingdong56.com/lxwm.html) – address, phones (saved copy, same as the live page)
-- [Lingdong: 运输条款 (terms of carriage)](https://web.archive.org/web/20260211055234/http://www.lingdong56.com/ystk.html) – the page holds no terms (saved copy, same as the live page)
-- [Lingdong: 各国海关政策 (customs policies)](https://web.archive.org/web/20260211052350/http://www.lingdong56.com/hgzc.html) – customs notes for sellers, EU €22 threshold (saved copy, same as the live page)
+- [Lingdong: 深圳市领东国际货运代理有限公司 (home)](http://www.lingdong56.com/) – tracking box and the tracker it opens, services for sellers, phones, QQ chat buttons
+- [Lingdong: 公司介绍 (about)](http://www.lingdong56.com/gsjs.html) – freight forwarding, small parcels, express, air freight
+- [Lingdong: 主营业务 (main services)](http://www.lingdong56.com/zyyw.html) – lines by country, ePacket, PostNL, China Post large parcels, China Post's 200 countries and transport modes
+- [Lingdong: 快递业务 (express)](http://www.lingdong56.com/kdyw.html) – UPS, DHL and FedEx agent
+- [Lingdong: 联系我们 (contact)](http://www.lingdong56.com/lxwm.html) – address, phones
+- [Lingdong: 运输条款 (terms of carriage)](http://www.lingdong56.com/ystk.html) – the page holds no terms
+- [Lingdong: 各国海关政策 (customs policies)](http://www.lingdong56.com/hgzc.html) – customs notes for sellers, EU €22 threshold
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – SZLD number shape, scan wordings, the tracker's answers, what Peek shows
 :::

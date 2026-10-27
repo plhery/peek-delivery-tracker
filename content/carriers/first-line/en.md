@@ -66,9 +66,10 @@ FIRST LINE publishes no rules for delivery attempts, notice cards or pickup poin
 
 ## FIRST LINE contact number and customer service
 
-As read on 27 October 2026, at the foot of every page of FIRST LINE's website, in Chinese:
+As read on 27 October 2026 on FIRST LINE's website, in Chinese:
 
-- **Hotline** (客服热线): 13823642553, a mobile number in China (+86 138 2364 2553 from abroad).
+- **Customer service centre** (客维中心): 17875867292, a mobile number in China (+86 178 7586 7292 from abroad), on its contact page.
+- **Hotline** (客服热线): 13823642553, also a mobile number (+86 138 2364 2553 from abroad), at the foot of every page.
 - **Address:** 3rd floor, Building 36, Zone 5, Cuigang Industrial Park, Huaide, Fuyong, Bao'an District, Shenzhen, China.
 
 No hours or languages are given. The 1ST group's site lists 0755-2977 8100 (+86 755 2977 8100) and has a complaints form (投诉建议) asking for a phone number, an email address and the message.
@@ -102,11 +103,13 @@ The number may be mistyped, not registered yet, or belong to another of the 1ST 
 FIRST LINE quotes sellers 7 to 16 days door to door by air and 19 to 31 days by sea. These are sales figures, not a date for your order.
 
 :::sources
-- [FIRST LINE: 壹号专线 (home)](https://web.archive.org/web/20260812015458/http://www.firstline56.com/) – tracking link (追踪单号), Chinese site, hotline and address in the footer (saved copy, same as the live page, which is plain HTTP)
-- [FIRST LINE: 公司简介 (about)](https://web.archive.org/web/20260909032902/http://www.firstline56.com/aboutus.php) – company name, a Shenzhen forwarder for cross-border sellers, its US and Canada lines (saved copy, same as the live page)
-- [FIRST LINE: 美国小包 (US parcel line)](https://web.archive.org/web/20260606160404/https://www.firstline56.com/business.php?id=4) – route, delivering carriers, carrier names for marketplaces, delivery times and area, DDP, returns, claims, delivered but not received (saved copy, same as the live page)
-- [FIRST LINE: 美国海运小包 (US sea parcel line)](https://web.archive.org/web/20260606171358/https://www.firstline56.com/business.php?id=5) – Matson, FedEx and USPS, 19 to 31 days (saved copy, same as the live page)
-- [FIRST LINE: 加拿大小包 (Canada parcel line)](https://web.archive.org/web/20260308233024/https://www.firstline56.com/business.php?id=6) – Vancouver or Toronto, Canada Post, delivery time, DDP (saved copy, same text as the live page but for its footer's phone number)
+- [FIRST LINE: 壹号专线 (home)](http://www.firstline56.com/) – tracking box, Chinese site, hotline and address in the footer
+- [FIRST LINE: 追踪单号 (tracking)](http://www.firstline56.com/track.php) – the tracker the home page's box opens
+- [FIRST LINE: 公司简介 (about)](http://www.firstline56.com/aboutus.php) – company name, a Shenzhen forwarder for cross-border sellers, its US and Canada lines
+- [FIRST LINE: 联系我们 (contact)](http://www.firstline56.com/contact.php) – customer service centre number
+- [FIRST LINE: 美国小包 (US parcel line)](http://www.firstline56.com/business.php?id=4) – route, delivering carriers, carrier names for marketplaces, delivery times and area, DDP, returns, claims, delivered but not received
+- [FIRST LINE: 美国海运小包 (US sea parcel line)](http://www.firstline56.com/business.php?id=5) – Matson, FedEx and USPS, 19 to 31 days
+- [FIRST LINE: 加拿大小包 (Canada parcel line)](http://www.firstline56.com/business.php?id=6) – Vancouver or Toronto, Canada Post, delivery time, DDP
 - [1ST: Business](https://www.1st56.com/group/groupbusiness/en/) – the group's four companies, FIRST LINE's English name
 - [一代国际集团: 关于我们 (about)](https://www.1st56.com/group/aboutus/) – group companies, phone, email
 - [一代国际集团: 首页 (home)](https://www.1st56.com/group/index/) – complaints form

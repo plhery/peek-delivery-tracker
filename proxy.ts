@@ -99,6 +99,6 @@ export const config = {
     { source: '/carriers/:path*' },
     { source: '/:language(de|fr|it|es|pt|pl)/carriers/:path*' },
     // The languages with pages alone (`PAGE_ONLY_LANGUAGES`), written out: the matcher is read before the app runs.
-    { source: '/:language(nl|sv|da|nb|fi|cs|sk|hu|ro|bg|el|hr|sl|lt|lv|et|uk)/carriers/:path*' },
+    { source: '/:language(nl|sv|da|nb|fi|cs|sk|hu|ro|bg|el|hr|sl|lt|lv|et|uk|sr)/carriers/:path*' },
   ],
 };

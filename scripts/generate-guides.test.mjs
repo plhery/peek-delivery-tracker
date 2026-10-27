@@ -263,7 +263,7 @@ test('a page in a language with pages alone is listed under its language, and li
     const written = carriersModule(readCarriers(directory));
     assert.match(written, /export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink\[\]>/);
     const links = JSON.parse(written.slice(written.indexOf('= {') + 2, written.lastIndexOf(';')));
-    assert.deepEqual(Object.keys(links), ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl', 'nl', 'sv', 'da', 'nb', 'fi', 'cs', 'sk', 'hu', 'ro', 'bg', 'el', 'hr', 'sl', 'lt', 'lv', 'et', 'uk']);
+    assert.deepEqual(Object.keys(links), ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl', 'nl', 'sv', 'da', 'nb', 'fi', 'cs', 'sk', 'hu', 'ro', 'bg', 'el', 'hr', 'sl', 'lt', 'lv', 'et', 'uk', 'sr']);
     assert.deepEqual(links.fi.filter(({ id }) => id === carrier.id).map(({ id, slug }) => ({ id, slug })), [{ id: carrier.id, slug: 'lahetysten-seuranta' }]);
     // A language no carrier is written in lists none.
     for (const language of Object.keys(links).filter((language) => language !== 'fi' && !index.some(({ languages }) => languages.includes(language)))) {

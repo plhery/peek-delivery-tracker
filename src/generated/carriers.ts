@@ -3231,5 +3231,15 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "name": "Nova Poshta",
       "color": "#e30613"
     }
+  ],
+  "sr": [
+    {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "posta-srbije-pracenje-posiljke",
+      "title": "Praćenje pošiljke Pošte Srbije: statusi, rokovi i kontakt",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
+    }
   ]
 };

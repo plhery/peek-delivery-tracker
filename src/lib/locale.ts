@@ -45,6 +45,7 @@ export const PAGE_ONLY_LANGUAGES = {
   lv: { name: 'Latviešu', preview: 'lv_LV' },
   et: { name: 'Eesti', preview: 'et_EE' },
   uk: { name: 'Українська', preview: 'uk_UA' },
+  sr: { name: 'Srpski', preview: 'sr_RS' },
 } as const satisfies Record<string, { name: string; preview: string }>;
 export type PageOnlyLanguage = keyof typeof PAGE_ONLY_LANGUAGES;
 /** A language a page can be written in: Peek's own, or one with pages alone. */

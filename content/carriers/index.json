@@ -87,7 +87,7 @@
   { "id": "slovenska-posta", "catalog": "slovenska-posta", "name": "Slovenská pošta", "languages": ["en", "sk"] },
   { "id": "posta-slovenije", "catalog": "posta-slovenije", "name": "Pošta Slovenije", "languages": ["en", "sl"] },
   { "id": "hrvatska-posta", "catalog": "hrvatska-posta", "name": "Hrvatska pošta", "languages": ["en", "hr"] },
-  { "id": "posta-srbije", "catalog": "posta-srbije", "name": "Pošta Srbije", "languages": ["en"] },
+  { "id": "posta-srbije", "catalog": "posta-srbije", "name": "Pošta Srbije", "languages": ["en", "sr"] },
   { "id": "venipak", "catalog": "venipak", "name": "Venipak", "languages": ["en", "lt", "lv", "et"] },
   { "id": "lietuvos-pastas", "catalog": "lietuvos-pastas", "name": "Lietuvos paštas", "languages": ["en", "lt"] },
   { "id": "latvijas-pasts", "catalog": "latvijas-pasts", "name": "Latvijas Pasts", "languages": ["en"] },

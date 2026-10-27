@@ -31818,6 +31818,33 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.gofo.com/ca/track"
+  },
+  "topyou": {
+    "displayName": "TopYou",
+    "aliases": [
+      "通邮",
+      "通邮集团",
+      "深圳市通邮物流科技（集团）股份有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#045cd7",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://track.szty56.com/",
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^TYZR[A-Z]\\d{10}YQ$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://track.szty56.com/"
   }
 } as const;
 
@@ -32673,7 +32700,8 @@ export const CARRIER_IDS = [
   "pengyou",
   "pin-ag",
   "tusk-logistics",
-  "gofo-ca"
+  "gofo-ca",
+  "topyou"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

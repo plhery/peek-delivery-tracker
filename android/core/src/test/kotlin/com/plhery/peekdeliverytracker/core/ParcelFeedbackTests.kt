@@ -12,6 +12,7 @@ import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
+import java.util.Locale
 import java.util.UUID
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CompletableDeferred
@@ -907,7 +908,10 @@ class ParcelFeedbackTests {
             NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
             TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
         )
-        val device = DeviceParcels(DeviceParcelClient.api(configuration, transport, verification), storage, PostcodeMemory(MemoryDefaults()), this)
+        val device = DeviceParcels(
+            DeviceParcelClient.api(configuration, transport, verification, region = { Locale.UK }), storage, PostcodeMemory(MemoryDefaults()), this,
+            region = { Locale.UK },
+        )
         val answer = ParcelFeedbackRequest.wrong(
             reasons = setOf(ParcelFeedbackReason.Status), asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.It, app = ios,
         )

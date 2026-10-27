@@ -24,16 +24,23 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 
-// NativeVerification.swift. App Attest is a `DeviceAttestation` the app gives (Play Integrity on Android) and the
-// browser check a `TurnstilePresenter` (a WebView, by NativeTurnstilePresenter's rules); what is asked, signed and
-// sent, and in which order, is here.
+// NativeVerification.swift. App Attest is a `DeviceAttestation` the app gives (none that the server accepts on Android
+// yet) and the browser check a `TurnstilePresenter` (a WebView, by NativeTurnstilePresenter's rules); what is asked,
+// signed and sent, and in which order, is here.
 
 class NativeVerificationFailed : Exception()
 
 /**
  * The device's attestation service, which keeps the private key on the device: DCAppAttestService on the iPhone.
  * A key the device no longer has (a reinstall) or refuses fails with `InvalidKey`, and is dropped.
+ *
+ * The server verifies Apple App Attest alone. On Android `supported()` returns false until it accepts an Android
+ * attestation (Play Integrity is the one planned): before then it refuses every registration and assertion, and each
+ * refusal pauses attestation for 10 minutes, so the requests and attestations are spent for nothing and lookups reach
+ * the browser check no sooner.
  */
 interface DeviceAttestation {
     /** Whether this installation attests: the build enables it and the device supports it. */
@@ -87,6 +94,10 @@ fun interface TurnstilePresenter {
  * Serialize signing through the response: assertions arriving out of order invalidate their counters. `records` are
  * the keys this installation registered, by base URL, as `save` last kept them; `language` is the app's
  * (`AppLanguage.current`), which the browser check is shown in.
+ *
+ * The app makes one, as the iPhone's `NativeVerification.shared`, and gives that one to every client
+ * (`DeliveryApiClient`, `DeviceParcelClient.api`): its lock is what keeps assertions in order, and its records are
+ * the installation's, so a second instance would sign alongside it, out of order, and save over its records.
  */
 class NativeVerification(
     private val provider: DeviceAttestation,
@@ -105,8 +116,8 @@ class NativeVerification(
         now: () -> Instant = Instant::now,
     ) : this(
         provider, present,
-        persistence.load()?.let { runCatching { decodeJson(recordsFormat, it) }.getOrNull() } ?: emptyMap(),
-        { runCatching { persistence.save(JsonEncoder.deliveryTracker.encode(recordsFormat, it)) } },
+        savedRecords(persistence),
+        { persistence.save(JsonEncoder.deliveryTracker.encode(recordsFormat, it)) },
         language, now,
     )
 
@@ -119,7 +130,9 @@ class NativeVerification(
     @Serializable
     private class Proof(val proof: String, val expiresAt: Double)
 
-    private val records = ConcurrentHashMap(records)
+    // Changed and saved under its own monitor, never across a suspension: a signed-in request drops a refused key
+    // without waiting for `lock`, which a browser check may hold for minutes.
+    private val records = HashMap(records)
     private val configurations = ConcurrentHashMap<String, Pair<Configuration, Instant>>()
     private val proofs = ConcurrentHashMap<String, Proof>()
     private val pauseAttestUntil = ConcurrentHashMap<String, Instant>()
@@ -135,6 +148,9 @@ class NativeVerification(
             try {
                 val config = configuration(baseUrl, using)
                 config.appAttestAppId?.let { registeredKey(baseUrl, it, using) }
+            } catch (error: CancellationException) {
+                // Unlike the iPhone, where a cancelled launch pauses attestation as a failure would.
+                throw error
             } catch (error: Exception) {
                 forgetInvalidKey(error, baseUrl)
                 pauseAttestUntil[baseUrl] = now().plusSeconds(600)
@@ -152,7 +168,7 @@ class NativeVerification(
                 if (proof.expiresAt > millisecondsSince1970(now()) + 5_000) request = request.setting("X-Lookup-Proof", proof.proof)
             }
             val appId = configurations[base]?.first?.appAttestAppId
-            if (appId != null && records[base]?.appId == appId && records[base]?.registered == true && provider.supported() && mayAttest(base)) {
+            if (appId != null && record(base)?.let { it.appId == appId && it.registered } == true && provider.supported() && mayAttest(base)) {
                 try {
                     request = signed(request, baseUrl, appId, transport)
                 } catch (error: CancellationException) {
@@ -175,8 +191,7 @@ class NativeVerification(
                     val result = transport.data(request)
                     if (!needsVerification(result)) return result
                     // A reinstall, expired registry entry or rejected key gets a new key after a short backoff.
-                    records.remove(base)
-                    save(records.toMap())
+                    changeRecords { it.remove(base) }
                 } catch (error: CancellationException) {
                     throw error
                 } catch (error: Exception) {
@@ -217,10 +232,7 @@ class NativeVerification(
         if (!needsVerification(first.response)) return first.response
         currentCoroutineContext().ensureActive()
         val second = attemptSignedIn(original, baseUrl, limit, using)
-        if (second.signed && needsVerification(second.response)) {
-            records.remove(baseUrl)
-            save(records.toMap())
-        }
+        if (second.signed && needsVerification(second.response)) changeRecords { it.remove(baseUrl) }
         return second.response
     }
 
@@ -263,13 +275,20 @@ class NativeVerification(
             return
         }
         lock.lock()
-        // Once the deadline has sent the request unsigned, no assertion is spent on it.
-        if (accountWaiters.containsKey(id)) {
-            val signed = accountSignature(request, baseUrl, transport)
-            if (signed != null && answer(id, signed)) return
+        // Handed over with the signature, the lock is the request's to release after its response.
+        var handedOver = false
+        try {
+            // Once the deadline has sent the request unsigned, no assertion is spent on it.
+            if (accountWaiters.containsKey(id)) {
+                val signed = accountSignature(request, baseUrl, transport)
+                handedOver = signed != null && answer(id, signed)
+            }
+        } finally {
+            if (!handedOver) {
+                answer(id, null)
+                lock.unlock()
+            }
         }
-        answer(id, null)
-        lock.unlock()
     }
 
     private suspend fun accountSignature(request: HttpRequest, baseUrl: String, transport: HttpTransport): HttpRequest? {
@@ -280,7 +299,7 @@ class NativeVerification(
         } catch (_: Exception) {
             null
         } ?: return null
-        val record = records[base]
+        val record = record(base)
         if (record?.appId != appId || !record.registered) return null
         return try {
             signed(request, baseUrl, appId, transport)
@@ -298,9 +317,19 @@ class NativeVerification(
     }
 
     private fun forgetInvalidKey(error: Exception, base: String) {
-        if (error is DeviceAttestation.InvalidKey) {
-            records.remove(base)
-            save(records.toMap())
+        if (error is DeviceAttestation.InvalidKey) changeRecords { it.remove(base) }
+    }
+
+    private fun record(base: String): NativeAttestRecord? = synchronized(records) { records[base] }
+
+    /** Changes the records and saves them at once. A save that fails keeps them in memory, as the iPhone's `try?` does. */
+    private fun changeRecords(change: (MutableMap<String, NativeAttestRecord>) -> Unit) {
+        synchronized(records) {
+            change(records)
+            try {
+                save(records.toMap())
+            } catch (_: Exception) {
+            }
         }
     }
 
@@ -327,12 +356,12 @@ class NativeVerification(
 
     private suspend fun registeredKey(baseUrl: String, appId: String, transport: HttpTransport): String {
         val base = baseUrl
-        if (records[base]?.appId != appId) records.remove(base)
-        if (records[base] == null) {
-            records[base] = NativeAttestRecord(keyId = provider.generateKey(), appId = appId, registered = false)
-            save(records.toMap())
+        synchronized(records) { if (records[base]?.appId != appId) records.remove(base) }
+        if (record(base) == null) {
+            val keyId = provider.generateKey()
+            changeRecords { it[base] = NativeAttestRecord(keyId = keyId, appId = appId, registered = false) }
         }
-        var record = records[base] ?: throw NativeVerificationFailed()
+        var record = record(base) ?: throw NativeVerificationFailed()
         if (!record.registered) {
             val nonce = challenge(baseUrl, record.keyId, "attestation", transport)
             val attestation = provider.attest(record.keyId, sha256(nonce.wellFormed().toByteArray(Charsets.UTF_8)))
@@ -342,8 +371,7 @@ class NativeVerification(
                 transport,
             )
             record = record.copy(registered = true)
-            records[base] = record
-            save(records.toMap())
+            changeRecords { it[base] = record }
         }
         return record.keyId
     }
@@ -376,6 +404,10 @@ class NativeVerification(
     companion object {
         private val recordsFormat = MapSerializer(String.serializer(), NativeAttestRecord.serializer())
 
+        /** The records as the iPhone's Keychain store reads them, with `JSONDecoder.deliveryTracker`; none if unreadable. */
+        internal fun savedRecords(persistence: SessionPersistence): Map<String, NativeAttestRecord> =
+            persistence.load()?.let { runCatching { decodeSwiftKeys(recordsFormat, it) }.getOrNull() } ?: emptyMap()
+
         /** What an assertion signs: the challenge, the method, the URL's path and the SHA-256 of the body, in hex. */
         fun payload(request: HttpRequest, challenge: String): String {
             val hash = sha256(request.body ?: ByteArray(0)).joinToString("") { "%02x".format(it) }
@@ -397,7 +429,21 @@ class NativeVerification(
  * whatever is in front: only an https page opens, one sheet at a time; only a message from the page's own main frame
  * counts; and the sheet goes nowhere but its own page and the check's frames. After `timeoutSeconds` it fails, as does
  * a page that does not load or whose renderer goes away (NativeVerificationFailed); Cancel, or closing the sheet,
- * throws a CancellationException. The page posts its messages as `peekVerification`.
+ * throws a CancellationException.
+ *
+ * The page is the iPhone's, as the server serves it, and posts each message only through
+ * `window.webkit.messageHandlers.peekVerification.postMessage({type, token})`. So in the WebView:
+ * - Messages: `WebViewCompat.addWebMessageListener` adds an object, say `peekBridge`, and
+ *   `WebViewCompat.addDocumentStartJavaScript` a script that defines the handler on it, both for the page's origin
+ *   alone: `window.webkit={messageHandlers:{peekVerification:{postMessage:m=>peekBridge.postMessage(JSON.stringify(m))}}}`.
+ *   Without `WebViewFeature.WEB_MESSAGE_LISTENER` and `DOCUMENT_START_SCRIPT` the check fails at once. The listener
+ *   gives `answer` its `sourceOrigin`'s scheme and host, `isMainFrame` and `body(message.data)`, and for the frame's
+ *   URL, which Android does not report, `webView.url` read there on the main thread: the main frame's document, the
+ *   only frame whose messages count. `answer` ignores a message whose frame URL is nil or has a path not the page's.
+ * - Navigation: `shouldOverrideUrlLoading` lets the main frame go only where `allows(page, url, true)`. It does not see
+ *   a frame's own loads (an iframe's first, for one), so `shouldInterceptRequest` answers every request not for the
+ *   main frame that `allows(page, url, false)` refuses with an empty 403: what the page and the check load comes from
+ *   challenges.cloudflare.com. Multiple windows stay off.
  */
 object NativeTurnstilePresenter {
     const val timeoutSeconds = 90L
@@ -424,6 +470,15 @@ object NativeTurnstilePresenter {
         if (body["type"] as? String == "token" && token != null && token.isNotEmpty() && token.characterCount <= 2048) return Answer.Token(token)
         if (body["type"] as? String == "error") return Answer.Failed
         return null
+    }
+
+    /**
+     * A message's body as the iPhone's WebKit gives it, from the JSON the page's handler forwards: an object's strings
+     * are Strings, its other values something else; nil for anything but an object.
+     */
+    fun body(message: String?): Map<String, Any?>? {
+        val value = message?.let { runCatching { ApiJson.parseToJsonElement(it) }.getOrNull() } as? JsonObject ?: return null
+        return value.mapValues { (_, item) -> if (item is JsonPrimitive && item.isString) item.content else item }
     }
 
     /** Whether the sheet may load `url`, in its main frame or (`targetIsMainFrame` false) in a frame of the page; nil is a new window. */

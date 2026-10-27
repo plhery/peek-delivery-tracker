@@ -28,6 +28,7 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.time.Instant
+import java.util.Locale
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.awaitCancellation
@@ -708,7 +709,7 @@ class ParcelLinkTests {
             NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
             TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
         )
-        val client = DeviceParcelClient.api(configuration = linkConfiguration, transport = transport, verification = verification)
+        val client = DeviceParcelClient.api(configuration = linkConfiguration, transport = transport, verification = verification, region = { Locale.UK })
         val key = "K".repeat(43)
         val alert = ParcelAppAlertRequest(
             token = "a1b2c3d4", environment = NativePushEnvironment.Production, preset = ParcelAlertPreset.All, locale = NativePushLocale.Fr,

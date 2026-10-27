@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
+import java.io.IOException
 import java.security.MessageDigest
 import java.time.Instant
 import java.util.Base64
@@ -12,6 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.currentTime
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.builtins.MapSerializer
@@ -384,6 +386,116 @@ class NativeVerificationTests {
         val results = awaitAll(first, second)
         assertEquals(listOf(201, 201), results.map { it.statusCode })
         assertEquals(1, server.maximumConcurrent)
+    }
+
+    // Android-only
+
+    /** Unlike the iPhone, where a cancelled launch pauses App Attest for ten minutes, the next lookup attests. */
+    @Test
+    fun aCancelledPreparationLeavesAttestationFree() = runTest {
+        val server = NativeTestServer(paid = true, challengeDelay = 1.seconds)
+        val provider = NativeAttestProvider(
+            supported = { true }, generateKey = { "synthetic-key" }, attest = { _, _ -> "synthetic-attestation".toByteArray() },
+            assert = { _, _ -> "synthetic-assertion".toByteArray() },
+        )
+        val verifier = verification(provider, unexpectedCheck())
+        val preparing = launch { verifier.prepare(base, server.transport) }
+        delay(500.milliseconds)
+        preparing.cancel()
+        preparing.join()
+
+        val result = verifier.send(lookup(), base, using = server.transport)
+        assertEquals(201, result.statusCode)
+        assertEquals(base64("synthetic-assertion"), server.requests.last().header("X-App-Attest-Assertion"))
+        assertTrue(server.presented.isEmpty())
+    }
+
+    /** A save that throws keeps the records in memory, as Swift's `try?` does, and lets the signing lock go. */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun aSaveThatFailsNeitherHoldsTheLockNorStopsTheRequest() = runTest(timeout = 10.seconds) {
+        val server = NativeTestServer(paid = true, initialStatus = 202)
+        val provider = NativeAttestProvider(
+            supported = { true }, generateKey = { "synthetic-key" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> throw DeviceAttestation.InvalidKey() },
+        )
+        var saves = 0
+        val verifier = verification(
+            provider, unexpectedCheck(), registered,
+            save = {
+                saves += 1
+                throw IOException("The keychain is unavailable.")
+            },
+        )
+        val started = currentTime
+        assertEquals(202, verifier.sendSignedIn(refresh(), base, using = server.transport).statusCode)
+        assertTrue(currentTime - started < 2_000)
+        assertEquals(1, saves)
+        assertEquals(202, verifier.send(lookup(), base, using = server.transport).statusCode)
+        // A lock still held would keep the next signer waiting until the two-second deadline.
+        val again = currentTime
+        assertEquals(202, verifier.sendSignedIn(refresh(), base, using = server.transport).statusCode)
+        assertTrue(currentTime - again < 2_000)
+        assertEquals(1, server.requests.count { it.path == "/api/public/native/challenge" })
+        assertTrue(server.requests.none { it.header("X-App-Attest-Assertion") != null })
+    }
+
+    /** An answer that cannot be read leaves no trace of itself in the error, which may reach a log. */
+    @Test
+    fun anUnreadableProofQuotesNoneOfIt() = runTest {
+        val secret = "synthetic-secret-proof"
+        val transport = HttpTransport { request ->
+            when (request.path) {
+                "/api/public/native/verification" -> HttpResponse(200, body = """{"appAttestAppId":null,"turnstile":true}""".toByteArray())
+                "/api/public/verification" -> HttpResponse(200, body = """{"proof":"$secret","expiresAt":"soon"}""".toByteArray())
+                else -> HttpResponse(403, mapOf("X-Lookup-Verification" to "required"))
+            }
+        }
+        try {
+            verification(unsupported, TurnstilePresenter { "synthetic-turnstile-token" }).send(lookup(), base, using = transport)
+            fail("Expected a decoding error")
+        } catch (error: DecodingError) {
+            assertNull(error.cause)
+            assertFalse(error.stackTraceToString().contains(secret))
+        }
+    }
+
+    /** The keychain item is read as KeychainStore reads it, with JSONDecoder.deliveryTracker. */
+    @Test
+    fun keyRecordsAreReadAsTheKeychainStoreReadsThem() {
+        val record = NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Peek", registered = true)
+        val cases = listOf(
+            """{"https://peek.example":{"keyID":"synthetic-key","appID":"TESTTEAM01.com.example.Peek","registered":true}}""" to mapOf(base to record),
+            """{"https://peek_example":{"keyID":"synthetic-key","appID":"TESTTEAM01.com.example.Peek","registered":true}}""" to
+                mapOf("https://peek_example" to record),
+            """{"https://peek.example":{"key_id":"synthetic-key","app_id":"TESTTEAM01.com.example.Peek","registered":true}}""" to emptyMap(),
+            """{"https://peek.example":{"keyID":"synthetic-key","appID":"TESTTEAM01.com.example.Peek","registered":"true"}}""" to emptyMap(),
+            "garbage" to emptyMap(),
+        )
+        for ((saved, expected) in cases) {
+            val persistence = MemorySessionPersistence().apply { data = saved.toByteArray() }
+            assertEquals(saved, expected, NativeVerification.savedRecords(persistence))
+        }
+    }
+
+    /** What the WebView's message listener gives `answer`: the body the page's handler forwards, as WebKit would give it. */
+    @Test
+    fun theBrowserChecksMessagesReadAsWebKitGivesThem() {
+        val page = "https://peek.example/api/public/native/turnstile?language=en"
+        fun answer(message: String?, frameUrl: String? = page, isMainFrame: Boolean = true, host: String = "peek.example") =
+            NativeTurnstilePresenter.answer(page, isMainFrame, "https", host, frameUrl, NativeTurnstilePresenter.body(message))
+
+        assertEquals(mapOf("type" to "token", "token" to "abc"), NativeTurnstilePresenter.body("""{"type":"token","token":"abc"}"""))
+        assertEquals(NativeTurnstilePresenter.Answer.Token("abc"), answer("""{"type":"token","token":"abc"}"""))
+        // `send('error')` posts no token, which JSON.stringify leaves out.
+        assertEquals(NativeTurnstilePresenter.Answer.Failed, answer("""{"type":"error"}"""))
+        for (message in listOf("""{"type":"token","token":12}""", """{"type":"token","token":""}""", """{"type":"token"}""", "\"token\"", "[1]", "garbage", null)) {
+            assertNull(message, answer(message))
+        }
+        // The frame's URL is the WebView's: nil, or another page's, is ignored, as is a frame or an origin not the page's.
+        assertNull(answer("""{"type":"token","token":"abc"}""", frameUrl = null))
+        assertNull(answer("""{"type":"token","token":"abc"}""", frameUrl = "https://peek.example/elsewhere"))
+        assertNull(answer("""{"type":"token","token":"abc"}""", isMainFrame = false))
+        assertNull(answer("""{"type":"token","token":"abc"}""", host = "challenges.cloudflare.com"))
     }
 }
 

@@ -8,10 +8,19 @@ import java.security.MessageDigest
 import java.time.Instant
 import java.util.Locale
 import java.util.UUID
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.currentTime
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
@@ -19,6 +28,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Test
 
 /**
@@ -49,8 +59,9 @@ class APIClientTests {
         session: TestSession,
         verification: NativeVerification = verification(),
         now: () -> Instant = Instant::now,
+        region: Locale = Locale.forLanguageTag("de-DE"),
     ) = DeliveryApiClient(
-        configuration, session, transport, verification, deviceName = "Synthetic phone", lookupCountry = { "DE" },
+        configuration, session, transport, verification, deviceName = "Synthetic phone", region = { region },
         analytics = { event, outcome -> analytics += "$event ${outcome.rawValue}" }, now = now,
     )
 
@@ -76,8 +87,9 @@ class APIClientTests {
         is ParcelLinkStopped -> "stopped"
         is NativeVerificationFailed -> "verificationFailed"
         is IOException -> "network"
-        // Swift's DecodingError.
-        is SerializationException -> "decoding"
+        // Swift's DecodingError, which quotes nothing of what it read.
+        is DecodingError -> "decoding"
+        is SerializationException -> "decoding that quotes the answer: ${error.message}"
         else -> "other ${error::class.simpleName}"
     }
 
@@ -139,6 +151,27 @@ class APIClientTests {
         assertNull(request.header("X-App-Attest-Assertion"))
         assertEquals("""{"lookupCountryHint":"DE","trackingNumber":"SYNTHETIC123"}""", request.body?.decodeToString())
         assertEquals(emptyList<String>(), analytics)
+    }
+
+    /** Android-only: the region is the device's, which the app gives, whatever default the app's language sets. */
+    @Test
+    fun aDetectionSendsTheDevicesRegionWhateverTheAppsLanguage() = runTest {
+        val language = Locale.getDefault()
+        try {
+            Locale.setDefault(Locale.JAPAN)
+            val cases = listOf(
+                "fr-CH" to """{"lookupCountryHint":"CH","trackingNumber":"SYNTHETIC123"}""",
+                "en-US-u-rg-gbzzzz" to """{"lookupCountryHint":"GB","trackingNumber":"SYNTHETIC123"}""",
+                "en-001" to """{"trackingNumber":"SYNTHETIC123"}""",
+            )
+            for ((region, sent) in cases) {
+                val transport = serving(jsonResponse(200, """{"trackingNumber":"SYNTHETIC123","carrier":"dhl"}"""))
+                client(transport, TestSession(), region = Locale.forLanguageTag(region)).detectCarrier("SYNTHETIC123")
+                assertEquals(region, sent, transport.requests.single().body?.decodeToString())
+            }
+        } finally {
+            Locale.setDefault(language)
+        }
     }
 
     @Test
@@ -271,6 +304,69 @@ class APIClientTests {
             // The request succeeded; only its answer could not be read.
             assertEquals(listOf("parcel-rename success"), analytics)
         }
+    }
+
+    /**
+     * Each answer goes through the decoder the iPhone reads it with: JSONDecoder.deliveryTracker (keys as
+     * convertFromSnakeCase reads them, the first of two alike winning, no number or Bool in quotes) or, for an error,
+     * the plain JSONDecoder.
+     */
+    @Test
+    fun answersAreReadWithTheIPhonesDecoders() = runTest {
+        val number = "993412345612345678"
+        val parcels = listOf(
+            parcel.replace("\"tracking_number\"", "\"trackingNumber\"") to "ok $number",
+            parcel.replace("\"tracking_number\"", "\"TRACKING_NUMBER\"") to "ok $number",
+            parcel.replace("\"tracking_number\"", "\"_tracking_number\"") to "invalidResponse",
+            parcel.replace("\"notifications_muted\":false", "\"notifications_muted\":\"false\"") to "invalidResponse",
+            parcel.dropLast(1) + ",\"trackingNumber\":\"SYNTHETIC-OTHER\"}" to "ok $number",
+            "{\"trackingNumber\":\"SYNTHETIC-OTHER\"," + parcel.drop(1) to "ok SYNTHETIC-OTHER",
+        )
+        for ((body, expected) in parcels) {
+            val transport = serving(jsonResponse(200, body))
+            assertEquals(body, expected, outcome { client(transport, TestSession()).rename(parcelId, "New name").trackingNumber })
+        }
+        val packageId = "40000000-0000-0000-0000-000000000005"
+        val errors = listOf(
+            jsonResponse(409, """{"error":"Duplicate","package_id":"$packageId"}""") to "service(Duplicate)",
+            jsonResponse(409, """{"error":"Duplicate","packageId":"$packageId","package_id":"not-a-uuid"}""") to "duplicateTracking($packageId)",
+            jsonResponse(400, """{"Error":"Bad"}""") to "serviceFailed(400)",
+        )
+        for ((answer, expected) in errors) {
+            assertEquals(expected, outcome { client(serving(answer), TestSession()).archive(parcelId) })
+        }
+        val previews = listOf(
+            """{"preview_nickname":"Sam"}""" to "ok Sam",
+            """{"previewNickname":"Max","preview_nickname":"Sam"}""" to "ok Max",
+            """{"PREVIEW_NICKNAME":"Sam"}""" to "ok Sam",
+        )
+        for ((body, expected) in previews) {
+            assertEquals(expected, outcome { DeliveryApiClient.invitationPreview("SYNTH-CODE", configuration, serving(jsonResponse(200, body))) })
+        }
+        val question = NumberRefusalRequest(trackingNumber = "SYNTHREFUSAL01", carrier = CarrierId.NzCouriers)
+        for (body in listOf("""{"refused":"true"}""", """{"Refused":true}""")) {
+            assertEquals("invalidResponse", outcome { DeliveryApiClient.numberRefusal(question, configuration, serving(jsonResponse(200, body))) })
+        }
+    }
+
+    /** Android-only: an answer that cannot be read leaves no trace of itself in the error, which may reach a log. */
+    @Test
+    fun anUnreadableAnswerQuotesNoneOfIt() = runTest {
+        val secret = "synthetic-secret-value"
+        for (body in listOf("""{"previewNickname":"$secret""", """{"previewNickname":["$secret"]}""", """{"previewNickname":"$secret"}x""")) {
+            try {
+                DeliveryApiClient.invitationPreview("SYNTH-CODE", configuration, serving(jsonResponse(200, body)))
+                fail("Expected a decoding error")
+            } catch (error: DecodingError) {
+                assertEquals("The data couldn’t be read because it isn’t in the correct format.", error.message)
+                assertNull(error.cause)
+                assertFalse(error.stackTraceToString().contains(secret))
+            }
+        }
+        val token = "f".repeat(64)
+        val registration = LiveActivityRevocations.Registration(ownerId = parcelId, installationId = parcelId, revocationToken = token, pending = true)
+        assertFalse(registration.toString().contains(token))
+        assertTrue(registration.toString().contains("pending=true"))
     }
 
     /** UTF-16LE of every unit as it is, lone surrogates included, which the JDK's encoder would replace. */
@@ -472,15 +568,19 @@ class APIClientTests {
     @Test
     fun theTransportNamesTheAppUnlessTheRequestDoes() = runTest {
         val transport = RecordingTransport()
-        val named = transport.identifying("PeekDeliveryTracker-Android/1")
+        val android = "PeekDeliveryTracker/42 okhttp/4.12.0 Android/16"
+        val named = transport.identifying(android)
         named.data(HttpRequest("https://peek.example/api/packages"))
         named.data(HttpRequest("https://peek.example/api/packages", headers = mapOf("user-agent" to "Own/1")))
-        assertEquals(listOf("PeekDeliveryTracker-Android/1", "Own/1"), transport.requests.map { it.header("User-Agent") })
+        assertEquals(listOf(android, "Own/1"), transport.requests.map { it.header("User-Agent") })
 
-        // The iPhone's, which the server reads as the app's (NATIVE_USER_AGENT in src/server/nativeVerification.ts).
+        // The iPhone's, which the server reads as the app's (NATIVE_USER_AGENT in src/server/nativeVerification.ts);
+        // the Android app's does not match it, so the server never takes it for an iPhone that failed to sign.
+        val native = Regex("^PeekDeliveryTracker/\\S+ CFNetwork/\\S+ Darwin/\\S+$")
         val iphone = iosUserAgent(build = "42", cfNetwork = "3826.400.120", darwin = "25.0.0")
         assertEquals("PeekDeliveryTracker/42 CFNetwork/3826.400.120 Darwin/25.0.0", iphone)
-        assertTrue(Regex("^PeekDeliveryTracker/\\S+ CFNetwork/\\S+ Darwin/\\S+$").matches(iphone))
+        assertTrue(native.matches(iphone))
+        assertFalse(native.matches(android))
     }
 
     // Pure rules
@@ -568,5 +668,80 @@ class APIClientTests {
         assertFalse(NativeVerification.needsVerification(HttpResponse(403, mapOf("X-Lookup-Verification" to "Required"))))
         assertFalse(NativeVerification.needsVerification(HttpResponse(429, mapOf("X-Lookup-Verification" to "required"))))
         assertFalse(NativeVerification.needsVerification(HttpResponse(403)))
+    }
+
+    // Live Activity revocations
+
+    private val revocationFormat = ListSerializer(LiveActivityRevocations.Registration.serializer())
+
+    /** Android-only: a retry in a scope already cancelled starts nothing, and leaves the next one free to. */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun aRetryInAScopeAlreadyCancelledLeavesTheNextOneFree() = runTest {
+        val persistence = MemorySessionPersistence()
+        val transport = RecordingTransport { jsonResponse(200, """{"ok":true}""") }
+        val revocations = LiveActivityRevocations(configuration, transport, persistence)
+        revocations.registration(ownerId = UUID.randomUUID(), installationId = UUID.randomUUID())
+        revocations.queue()
+
+        revocations.retry(CoroutineScope(Job().apply { cancel() }))
+        runCurrent()
+        assertEquals(0, transport.requests.size)
+
+        // So does one whose scope ends while it waits to try again.
+        transport.handler = { throw IOException("offline") }
+        val ending = CoroutineScope(coroutineContext + Job())
+        revocations.retry(ending)
+        runCurrent()
+        assertEquals(1, transport.requests.size)
+        ending.cancel()
+        runCurrent()
+
+        transport.handler = { jsonResponse(200, """{"ok":true}""") }
+        revocations.retry(backgroundScope)
+        runCurrent()
+        assertEquals(listOf("/api/live-activities/revoke", "/api/live-activities/revoke"), transport.requests.map { it.path })
+        assertEquals(emptyList<LiveActivityRevocations.Registration>(), decodeSwiftKeys(revocationFormat, persistence.data!!))
+    }
+
+    /** Android-only: registrations made on other threads while a drain sends are all kept. */
+    @Test
+    fun registrationsMadeWhileADrainRunsAreAllKept() = runBlocking {
+        val persistence = MemorySessionPersistence()
+        val transport = RecordingTransport { jsonResponse(200, """{"ok":true}""") }
+        val revocations = LiveActivityRevocations(configuration, transport, persistence)
+        val installation = UUID.randomUUID()
+        repeat(100) { revocations.registration(ownerId = UUID.randomUUID(), installationId = installation) }
+        revocations.queue()
+        val owners = List(200) { UUID.randomUUID() }
+
+        withContext(Dispatchers.Default) {
+            launch { revocations.drain() }
+            for (chunk in owners.chunked(10)) launch { for (owner in chunk) revocations.registration(ownerId = owner, installationId = installation) }
+        }
+
+        assertEquals(100, transport.requests.size)
+        val saved = decodeSwiftKeys(revocationFormat, persistence.data!!)
+        assertEquals(owners.toSet(), saved.map { it.ownerId }.toSet())
+        assertTrue(saved.none { it.pending })
+    }
+
+    /** The saved revocations are read as KeychainStore reads them, with JSONDecoder.deliveryTracker. */
+    @Test
+    fun savedRevocationsAreReadAsTheKeychainStoreReadsThem() = runTest {
+        val owner = "40000000-0000-0000-0000-000000000006"
+        val installation = "40000000-0000-0000-0000-000000000008"
+        val token = "a".repeat(64)
+        val cases = listOf(
+            """[{"ownerID":"$owner","installationID":"$installation","revocation_token":"$token","pending":true}]""" to 1,
+            """[{"owner_id":"$owner","installation_id":"$installation","revocation_token":"$token","pending":true}]""" to 0,
+            """[{"ownerID":"$owner","installationID":"$installation","revocationToken":"$token","pending":"true"}]""" to 0,
+        )
+        for ((saved, sent) in cases) {
+            val persistence = MemorySessionPersistence().apply { data = saved.toByteArray() }
+            val transport = RecordingTransport { jsonResponse(500) }
+            LiveActivityRevocations(configuration, transport, persistence).drain()
+            assertEquals(saved, sent, transport.requests.size)
+        }
     }
 }

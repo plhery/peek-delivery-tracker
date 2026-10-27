@@ -719,31 +719,48 @@ private fun String.capitalizedWord(): String {
 }
 
 /**
+ * Swift's `DecodingError`, which says what could not be read without quoting it. kotlinx's own messages quote the
+ * JSON they read, where a token, a proof or a name may be: none of it reaches a log or a crash report through this.
+ */
+class DecodingError : SerializationException("The data couldn’t be read because it isn’t in the correct format.")
+
+/**
  * `JSONDecoder.deliveryTracker`: each key, `convertFromSnakeCase`, finds the property whose serial name converts to the
  * same, so the server's answers and what the iPhone app writes with its models' keys (`JsonEncoder`'s `swiftKeys`) read
  * alike. A key of no property is skipped, as the decoder skips it, and of two keys that convert alike the first is
- * read; the values are then read as ApiJson reads them.
+ * read; the values are then read as ApiJson reads them. The keys of a map stay as they are, as the decoder leaves a
+ * dictionary's. Data it cannot read throws a `DecodingError`.
  */
-internal fun <T> decodeSwiftKeys(deserializer: DeserializationStrategy<T>, data: ByteArray): T {
-    val text = jsonText(data) ?: throw SerializationException("The data is not text.")
-    return ApiJson.decodeFromJsonElement(deserializer, ApiJson.parseToJsonElement(text).withSerialNames(deserializer.descriptor))
+internal fun <T> decodeSwiftKeys(deserializer: DeserializationStrategy<T>, data: ByteArray): T =
+    decoding(deserializer, data, ::convertFromSnakeCase)
+
+/** `JSONDecoder()`: as `decodeSwiftKeys`, but each key must be the property's own serial name. */
+internal fun <T> decodeJson(deserializer: DeserializationStrategy<T>, data: ByteArray): T = decoding(deserializer, data) { it }
+
+private fun <T> decoding(deserializer: DeserializationStrategy<T>, data: ByteArray, key: (String) -> String): T {
+    val text = jsonText(data) ?: throw DecodingError()
+    return try {
+        ApiJson.decodeFromJsonElement(deserializer, ApiJson.parseToJsonElement(text).withSerialNames(deserializer.descriptor, key))
+    } catch (_: Exception) {
+        throw DecodingError()
+    }
 }
 
-private fun JsonElement.withSerialNames(descriptor: SerialDescriptor): JsonElement = when {
+private fun JsonElement.withSerialNames(descriptor: SerialDescriptor, key: (String) -> String): JsonElement = when {
     this is JsonObject && descriptor.kind == StructureKind.CLASS -> {
         val names = HashMap<String, Int>()
-        for (index in 0 until descriptor.elementsCount) names[convertFromSnakeCase(descriptor.getElementName(index))] = index
+        for (index in 0 until descriptor.elementsCount) names[key(descriptor.getElementName(index))] = index
         val fields = LinkedHashMap<String, JsonElement>()
-        for ((key, value) in this) {
-            val index = names[convertFromSnakeCase(key)] ?: continue
+        for ((field, value) in this) {
+            val index = names[key(field)] ?: continue
             val name = descriptor.getElementName(index)
-            if (name !in fields) fields[name] = value.withSerialNames(descriptor.getElementDescriptor(index))
+            if (name !in fields) fields[name] = value.withSerialNames(descriptor.getElementDescriptor(index), key)
         }
         JsonObject(fields)
     }
     this is JsonObject && descriptor.kind == StructureKind.MAP ->
-        JsonObject(mapValues { it.value.withSerialNames(descriptor.getElementDescriptor(1)) })
-    this is JsonArray && descriptor.kind == StructureKind.LIST -> JsonArray(map { it.withSerialNames(descriptor.getElementDescriptor(0)) })
+        JsonObject(mapValues { it.value.withSerialNames(descriptor.getElementDescriptor(1), key) })
+    this is JsonArray && descriptor.kind == StructureKind.LIST -> JsonArray(map { it.withSerialNames(descriptor.getElementDescriptor(0), key) })
     // A number or a Bool in quotes is a string to JSONDecoder, where ApiJson would read what the quotes hold.
     this is JsonPrimitive && isString && descriptor.kind is PrimitiveKind && descriptor.kind != PrimitiveKind.STRING ->
         throw SerializationException("Expected ${descriptor.serialName}, found a string.")

@@ -157,7 +157,8 @@ class DeviceParcelTests {
         scope: CoroutineScope,
         postcodes: PostcodeMemory = PostcodeMemory(MemoryDefaults()),
         now: () -> Instant = Instant::now,
-    ) = DeviceParcels(client, storage, postcodes, scope, now)
+        region: Locale = Locale.forLanguageTag("fr-CH"),
+    ) = DeviceParcels(client, storage, postcodes, scope, region = { region }, now = now)
 
     private fun parcel(linkId: String, label: String, id: UUID, at: Double = date(), pkg: PublicPackage = pkg(id)) =
         DeviceParcel(linkId = linkId, label = label, archivedAt = null, parcel = Parcel(shared = pkg), checkedAt = at)
@@ -232,7 +233,8 @@ class DeviceParcelTests {
         assertEquals(nextId, parcel.id)
         assertEquals("Moon lamp", parcel.label)
         assertEquals(CarrierId.Dpd, parcel.carrier)
-        assertEquals(listOf(ParcelLookupCountry.hint()), calls.lookupCountries)
+        // The region the app gives, here French in Switzerland.
+        assertEquals(listOf<String?>("CH"), calls.lookupCountries)
         assertEquals(listOf("lookup TESTPARCEL123789 dpd", "forget 22222222222A"), calls.all)
         assertEquals(listOf(previousId), storage.parcels.map { it.replaced })
         assertNull(storage.keys["22222222222A"])

@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker.core
 
-import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -56,12 +55,12 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
@@ -117,22 +116,41 @@ class HttpResponse(val statusCode: Int, headers: Map<String, String> = emptyMap(
  * URLSession's `data(for:)`, which the app implements with OkHttp. Every status is an answer, never an exception. A
  * request that could not be sent, a network failure and a connection that timed out throw an `IOException` (Swift's
  * `URLError`); a call the app cancelled ends in a `CancellationException`.
+ *
+ * What the OkHttp transport must do:
+ * - Send a POST, PUT or PATCH whose `body` is null (`queueRefreshAll`, `refresh`, `restore`) with an empty body:
+ *   OkHttp's `method("POST", null)` throws an IllegalArgumentException, which is no IOException.
+ * - Make each body without a media type (`body.toRequestBody(null)`, or an empty one), so the request's own
+ *   `Content-Type`, or none, is what goes.
+ * - Time out in the transport, by `timeout` as connect, read and write timeouts, so a timeout is an IOException. A
+ *   `withTimeout` around a client call ends in a TimeoutCancellationException instead, which is a cancellation: not
+ *   counted as an analytics error, where the iPhone counts `URLError.timedOut`.
+ * - Redact `Authorization`, `X-Parcel-Key`, `X-App-Attest-Key-Id`, `X-App-Attest-Challenge`, `X-App-Attest-Assertion`
+ *   and `X-Lookup-Proof` in any logging (`HttpLoggingInterceptor.redactHeader`), and log no body: the browser check's
+ *   token and the push and revocation tokens go in bodies.
  */
 fun interface HttpTransport {
     suspend fun data(request: HttpRequest): HttpResponse
 }
 
 /**
- * The transport with URLSession's own `User-Agent` on each request that sets none. The server tells the app's
- * requests from a browser's by it (`NATIVE_USER_AGENT` in src/server/nativeVerification.ts), for counting and, once
- * enforced, for asking an app request for its attestation.
+ * The transport with the app's `User-Agent` on each request that sets none, as URLSession adds its own. The server
+ * tells the app's requests from a browser's by it, for counting and, once enforced, for asking an app request for its
+ * attestation: `NATIVE_USER_AGENT` in src/server/nativeVerification.ts matches the iPhone's alone
+ * (`PeekDeliveryTracker/<build> CFNetwork/<version> Darwin/<version>`), whose requests must carry App Attest. The
+ * Android app sends its own, which must not match that pattern, or its account requests would be counted, and once
+ * enforced refused, as an iPhone's that never signs: `PeekDeliveryTracker/<versionCode> okhttp/<version>
+ * Android/<release>`, say.
  */
 fun HttpTransport.identifying(userAgent: String): HttpTransport = HttpTransport { request ->
     data(if (request.header("User-Agent") == null) request.setting("User-Agent", userAgent) else request)
 }
 
-/** The `User-Agent` URLSession sends for the iPhone app: its bundle's name and build, then CFNetwork's and Darwin's versions. */
-fun iosUserAgent(build: String, cfNetwork: String, darwin: String): String =
+/**
+ * The `User-Agent` URLSession sends for the iPhone app: its bundle's name and build, then CFNetwork's and Darwin's
+ * versions. Never the Android app's (see `identifying`); the tests and the differential harness compare with it.
+ */
+internal fun iosUserAgent(build: String, cfNetwork: String, darwin: String): String =
     "PeekDeliveryTracker/$build CFNetwork/$cfNetwork Darwin/$darwin"
 
 /** The device's country preference helps order carrier queries; it does not select a carrier. */
@@ -146,10 +164,13 @@ object ParcelLookupCountry {
     private val aliases = mapOf("CS" to "RS", "TP" to "TL", "UK" to "GB", "YU" to "RS")
 
     /**
-     * `Locale.current.region`: the first two characters of an `rg` extension of three or more ("gbzzzz" is GB, "ukzzzz"
-     * is UK, which is no country), else the locale's own region, retired codes read as their successors.
+     * `locale.region` on the iPhone's `Locale.current`: the first two characters of an `rg` extension of three or more
+     * ("gbzzzz" is GB, "ukzzzz" is UK, which is no country), else the locale's own region, retired codes read as their
+     * successors. `locale` is the device's region, which the app gives: on the iPhone it is the Region setting, which
+     * the app's own language leaves alone, so on Android it is the system's first locale
+     * (`Resources.getSystem().configuration.locales[0]`), never `Locale.getDefault()`, which follows a per-app language.
      */
-    fun hint(locale: Locale = Locale.getDefault()): String? {
+    fun hint(locale: Locale): String? {
         val override = locale.getUnicodeLocaleType("rg")?.takeIf { it.length > 2 }?.substring(0, 2)?.uppercase(Locale.ROOT)
         val country = override ?: locale.country.uppercase(Locale.ROOT).let { aliases[it] ?: it }
         if (!country.all { it in 'A'..'Z' } || country !in countries) return null
@@ -176,9 +197,10 @@ sealed class DeliveryApiError(message: String) : Exception(message) {
 
 /**
  * The account's requests. Used from the main thread, as the iPhone's client is `@MainActor`; a large answer is read
- * off it. `deviceName` is the name the account's device list shows for this one (`UIDevice.current.name`); `debug`
- * says the build's push tokens are development ones (`#if DEBUG`); `analytics` counts the catalog's operations
- * (`DeliveryAnalytics.shared.action`).
+ * off it. `deviceName` is the name the account's device list shows for this one (`UIDevice.current.name`); `region`
+ * the device's region at the moment, whose country a detection sends (`ParcelLookupCountry.hint` says which locale);
+ * `debug` says the build's push tokens are development ones (`#if DEBUG`); `analytics` counts the catalog's
+ * operations (`DeliveryAnalytics.shared.action`). `verification` is the app's one NativeVerification.
  */
 class DeliveryApiClient(
     private val configuration: AppConfiguration,
@@ -186,8 +208,8 @@ class DeliveryApiClient(
     private val transport: HttpTransport,
     private val verification: NativeVerification,
     private val deviceName: String,
+    private val region: () -> Locale,
     private val debug: Boolean = false,
-    private val lookupCountry: () -> String? = { ParcelLookupCountry.hint() },
     private val analytics: (event: String, outcome: DeliveryAnalytics.Outcome) -> Unit = { _, _ -> },
     private val now: () -> Instant = Instant::now,
 ) {
@@ -245,7 +267,10 @@ class DeliveryApiClient(
 
     suspend fun detectCarrier(trackingNumber: String): CarrierDetectionResponse = request(
         "/api/carriers/detect", CarrierDetectionResponse.serializer(), "POST",
-        encode(CarrierDetectionRequest.serializer(), CarrierDetectionRequest(trackingNumber = trackingNumber, lookupCountryHint = lookupCountry())),
+        encode(
+            CarrierDetectionRequest.serializer(),
+            CarrierDetectionRequest(trackingNumber = trackingNumber, lookupCountryHint = ParcelLookupCountry.hint(region())),
+        ),
     )
 
     suspend fun add(input: CreatePackageRequest): CreatePackageResponse =
@@ -428,7 +453,7 @@ class DeliveryApiClient(
         val data = rawRequest(path, method, body).body
         return try {
             // A full parcel list with its histories is large; decode it off the main thread.
-            withContext(Dispatchers.Default) { decodeJson(response, data) }
+            withContext(Dispatchers.Default) { decodeSwiftKeys(response, data) }
         } catch (error: CancellationException) {
             throw error
         } catch (error: Exception) {
@@ -471,6 +496,7 @@ class DeliveryApiClient(
         }
         if (result.statusCode !in 200 until 300) {
             if (result.statusCode == 429) throw DeliveryApiError.RateLimited(retryAfterSeconds(result.header("Retry-After"), now()))
+            // The plain JSONDecoder, as on the iPhone: the keys exactly as the contract names them.
             val error = try {
                 decodeJson(ErrorResponse.serializer(), result.body)
             } catch (_: Exception) {
@@ -509,8 +535,8 @@ class DeliveryApiClient(
             val response = transport.data(request)
             if (response.statusCode == 400 || response.statusCode == 404) throw DeliveryApiError.Service("Invitation unavailable")
             if (response.statusCode != 200) throw DeliveryApiError.ServiceFailed(response.statusCode)
-            // As in Swift, an answer that is not one throws the decoder's error.
-            val result = decodeJson(FriendsActionResponse.serializer(), response.body)
+            // As in Swift, an answer that is not one throws the decoder's error: a DecodingError, which quotes nothing.
+            val result = decodeSwiftKeys(FriendsActionResponse.serializer(), response.body)
             val name = result.previewNickname
             if (name == null || name.isEmpty() || name.codePointCount(0, name.length) > 24) throw DeliveryApiError.InvalidResponse()
             return name
@@ -532,7 +558,7 @@ class DeliveryApiClient(
             val response = transport.data(request)
             if (response.statusCode != 200) throw DeliveryApiError.ServiceFailed(response.statusCode)
             return try {
-                decodeJson(NumberRefusalResponse.serializer(), response.body).refused
+                decodeSwiftKeys(NumberRefusalResponse.serializer(), response.body).refused
             } catch (_: Exception) {
                 throw DeliveryApiError.InvalidResponse()
             }
@@ -555,7 +581,7 @@ class DeliveryApiClient(
             val response = transport.data(request)
             return when (response.statusCode) {
                 200 -> try {
-                    decodeJson(PublicParcelResponse.serializer(), response.body)
+                    decodeSwiftKeys(PublicParcelResponse.serializer(), response.body)
                 } catch (_: Exception) {
                     throw DeliveryApiError.InvalidResponse()
                 }
@@ -616,7 +642,9 @@ suspend fun DeliveryApiClient.Session.checkGeneration(expected: UUID) {
 
 /**
  * Contains only a capability to DELETE one registration, never login credentials. Persist before sending
- * registration so even an interrupted response is recoverable. Used from the main thread, as on the iPhone.
+ * registration so even an interrupted response is recoverable. Used from the main thread, as on the iPhone, where an
+ * actor keeps it to one thread; here each change of the registrations is made under a lock, which no request is sent
+ * under, so a drain or retry on another thread loses none.
  */
 class LiveActivityRevocations(
     private val configuration: AppConfiguration,
@@ -629,35 +657,47 @@ class LiveActivityRevocations(
         @SerialName("installationID") @Serializable(with = UuidSerializer::class) val installationId: UUID,
         val revocationToken: String,
         val pending: Boolean,
-    )
+    ) {
+        /** The token is a capability: it never goes in a log. */
+        override fun toString(): String =
+            "Registration(ownerId=$ownerId, installationId=$installationId, revocationToken=<redacted>, pending=$pending)"
+    }
 
     private val format = ListSerializer(Registration.serializer())
+    private val lock = Any()
+
+    // Read as KeychainStore reads it, with JSONDecoder.deliveryTracker.
     private var registrations: List<Registration> =
-        persistence.load()?.let { data -> runCatching { decodeJson(format, data) }.getOrNull() } ?: emptyList()
+        persistence.load()?.let { data -> runCatching { decodeSwiftKeys(format, data) }.getOrNull() } ?: emptyList()
     private var retryTask: Job? = null
 
     fun registration(ownerId: UUID, installationId: UUID): Registration {
-        registrations.firstOrNull { !it.pending && it.ownerId == ownerId && it.installationId == installationId }?.let { return it }
-        val token = (UUID.randomUUID().uuidString + UUID.randomUUID().uuidString).replace("-", "").lowercase(Locale.ROOT)
-        val value = Registration(ownerId = ownerId, installationId = installationId, revocationToken = token, pending = false)
-        persist(registrations + value)
-        return value
+        synchronized(lock) {
+            registrations.firstOrNull { !it.pending && it.ownerId == ownerId && it.installationId == installationId }?.let { return it }
+            val token = (UUID.randomUUID().uuidString + UUID.randomUUID().uuidString).replace("-", "").lowercase(Locale.ROOT)
+            val value = Registration(ownerId = ownerId, installationId = installationId, revocationToken = token, pending = false)
+            persist(registrations + value)
+            return value
+        }
     }
 
     fun queue(except: UUID? = null) {
-        val queued = registrations.map { if (it.ownerId != except) it.copy(pending = true) else it }
-        // Polls with Live Activities off ask again every time; skip the Keychain write.
-        if (queued == registrations) return
-        persist(queued)
+        synchronized(lock) {
+            val queued = registrations.map { if (it.ownerId != except) it.copy(pending = true) else it }
+            // Polls with Live Activities off ask again every time; skip the Keychain write.
+            if (queued == registrations) return
+            persist(queued)
+        }
     }
 
+    /** Under the lock. */
     private fun persist(values: List<Registration>) {
         persistence.save(JsonEncoder.deliveryTracker.encode(format, values))
         registrations = values
     }
 
     suspend fun drain() {
-        for (value in registrations.filter { it.pending }) {
+        for (value in synchronized(lock) { registrations.filter { it.pending } }) {
             if (!currentCoroutineContext().isActive) return
             try {
                 val request = HttpRequest(
@@ -672,29 +712,38 @@ class LiveActivityRevocations(
                 )
                 val response = transport.data(request)
                 if (response.statusCode !in 200..299) continue
-                persist(registrations.filter { it.revocationToken != value.revocationToken })
+                synchronized(lock) { persist(registrations.filter { it.revocationToken != value.revocationToken }) }
             } catch (_: Exception) {
                 // Keep the durable revocation for a later network opportunity.
             }
         }
     }
 
-    /** Drains now and every 30 seconds while anything is pending, in `scope` (Swift's `Task`, on the main actor). */
+    /**
+     * Drains now and every 30 seconds while anything is pending, in `scope` (Swift's `Task`, on the main actor): the
+     * app's own, on the main thread, which nothing cancels while the app runs (`ProcessLifecycleOwner`'s
+     * `lifecycleScope`, or a `MainScope()` the application keeps). However the loop ends, a scope cancelled before it
+     * began included, the next call may start another.
+     */
     fun retry(scope: CoroutineScope) {
-        if (retryTask != null || registrations.none { it.pending }) return
-        // Started once kept, so a drain that finishes at once still leaves the next retry free to start.
-        val task = scope.launch(start = CoroutineStart.LAZY) {
-            try {
+        val task = synchronized(lock) {
+            if (retryTask != null || registrations.none { it.pending }) return
+            scope.launch(start = CoroutineStart.LAZY) {
                 while (isActive) {
                     drain()
-                    if (registrations.none { it.pending }) break
+                    // Seen and let go at once, so a revocation queued meanwhile never finds a loop about to end.
+                    val done = synchronized(lock) {
+                        registrations.none { it.pending }.also { done -> if (done && retryTask === coroutineContext.job) retryTask = null }
+                    }
+                    if (done) break
                     delay(30.seconds)
                 }
-            } finally {
-                retryTask = null
+            }.also { task ->
+                retryTask = task
+                task.invokeOnCompletion { synchronized(lock) { if (retryTask === task) retryTask = null } }
             }
         }
-        retryTask = task
+        // Started outside the lock: a dispatcher that runs it at once would otherwise send under it.
         task.start()
     }
 }
@@ -709,10 +758,6 @@ fun NativePushLocale(language: AppLanguage): NativePushLocale = NativePushLocale
 /** `JSONSerialization.data(withJSONObject:)` for an object of strings, in the order given. */
 internal fun jsonObject(values: Map<String, String>): ByteArray =
     JsonEncoder().encode(MapSerializer(String.serializer(), String.serializer()), values)
-
-/** JSONDecoder's reading of a body, its keys the contract's as ApiJson reads them. */
-internal fun <T> decodeJson(deserializer: DeserializationStrategy<T>, data: ByteArray): T =
-    ApiJson.decodeFromString(deserializer, jsonText(data) ?: throw SerializationException("The data is not text."))
 
 private fun ByteArray.startsWith(vararg prefix: Int): Boolean =
     size >= prefix.size && prefix.indices.all { this[it].toInt() and 0xFF == prefix[it] }

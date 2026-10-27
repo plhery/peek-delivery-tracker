@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import java.io.IOException
+import java.util.Locale
 import java.util.UUID
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.builtins.ListSerializer
@@ -21,7 +22,10 @@ class SessionIsolationTests {
         googleAuthEnabled = false, appleAuthEnabled = true, emailOtpEnabled = true, appGroupIdentifier = "session.test",
     )
 
-    /** Adapted: a signed-in `TestSession` stands in for a SessionStore signed in through the test server. */
+    /**
+     * Adapted: a signed-in `TestSession` stands in for a SessionStore signed in through the test server, and its log
+     * for the refresh requests the Swift test's request log would show.
+     */
     @Test
     fun appAttestRefusalOfASignedInRequestKeepsTheSession() = runTest {
         val session = TestSession()
@@ -32,7 +36,7 @@ class SessionIsolationTests {
         val transport = RecordingTransport {
             jsonResponse(403, """{"error":"Please verify this device and try again."}""", mapOf("X-Lookup-Verification" to "required"))
         }
-        val client = DeliveryApiClient(configuration, session, transport, verification, deviceName = "Synthetic phone")
+        val client = DeliveryApiClient(configuration, session, transport, verification, deviceName = "Synthetic phone", region = { Locale.UK })
         try {
             client.queueRefreshAll()
             fail("Expected the refusal")
@@ -40,6 +44,8 @@ class SessionIsolationTests {
         }
         assertTrue(session.signedIn)
         assertEquals(listOf("/api/sync", "/api/sync"), transport.requests.map { it.path })
+        // Nor is the token refreshed: the Swift test's request log holds no request for one.
+        assertEquals(listOf("token"), session.log)
     }
 
     @Test

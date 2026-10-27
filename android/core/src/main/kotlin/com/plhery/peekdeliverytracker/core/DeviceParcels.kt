@@ -25,6 +25,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.api.UpdateParcelLinkRequest
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
 import java.time.Instant
+import java.util.Locale
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -167,13 +168,15 @@ class DeviceParcelClient(
          * The service's public parcel API, as the iPhone app calls it. Every request asks for JSON past any cache, with a
          * 30-second timeout, no cookies (none sent, none kept) and no `Authorization`; `X-Parcel-Key` carries the owner
          * key, only when there is one. A lookup and a detection go through `verification`, and a lookup alone may
-         * present the browser check. `lookupCountry` is the device's region, which a detection sends.
+         * present the browser check. A detection sends `region`'s country as its hint: the device's region,
+         * `Resources.getSystem().configuration.locales[0]`, which the app's own language leaves as it is (never
+         * `Locale.getDefault()`).
          */
         fun api(
             configuration: AppConfiguration,
             transport: HttpTransport,
             verification: NativeVerification,
-            lookupCountry: () -> String? = { ParcelLookupCountry.hint() },
+            region: () -> Locale,
         ): DeviceParcelClient {
             suspend fun send(path: String, method: String, key: String? = null, body: ByteArray? = null): HttpResponse {
                 val headers = linkedMapOf("Accept" to "application/json")
@@ -233,7 +236,7 @@ class DeviceParcelClient(
                 detect = { trackingNumber, prefixOfSaved ->
                     val body = encoder.encode(
                         CarrierDetectionRequest.serializer(),
-                        CarrierDetectionRequest(trackingNumber = trackingNumber, lookupCountryHint = lookupCountry(), prefixOfSaved = if (prefixOfSaved) true else null),
+                        CarrierDetectionRequest(trackingNumber = trackingNumber, lookupCountryHint = ParcelLookupCountry.hint(region()), prefixOfSaved = if (prefixOfSaved) true else null),
                     )
                     val response = send("api/public/detect", "POST", body = body)
                     if (response.statusCode != 200) throw failure(response)
@@ -382,10 +385,13 @@ class DeviceParcels(
     /** The postcodes its lookups were given, kept apart from the parcels. */
     val postcodes: PostcodeMemory,
     private val scope: CoroutineScope,
+    /**
+     * The device's region, whose country a carrier change sends as its lookup's hint:
+     * `Resources.getSystem().configuration.locales[0]`, never `Locale.getDefault()`, which follows the app's language.
+     */
+    private val region: () -> Locale,
     private val now: () -> Instant = Instant::now,
     private val debug: Boolean = false,
-    /** The device's region, which a carrier change sends as its lookup's country hint. */
-    private val lookupCountry: () -> String? = { ParcelLookupCountry.hint() },
 ) {
     private var entries: List<DeviceParcel>
     private var keys: Map<String, String>
@@ -547,7 +553,7 @@ class DeviceParcels(
             CreatePackageRequest(
                 trackingNumber = entry.parcel.trackingNumber, label = entry.label, carrier = carrier,
                 trackingUrl = trackingUrl, dpdPostcode = dpdPostcode, dpdPostcodeCountry = dpdPostcodeCountry,
-                lookupCountryHint = lookupCountry(),
+                lookupCountryHint = ParcelLookupCountry.hint(region()),
             ),
             replacing = id,
         )

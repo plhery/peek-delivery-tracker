@@ -3,10 +3,10 @@ title: YunExpress tracking: YT numbers, statuses and who delivers
 description: Track a YunExpress (Yun Express) parcel from China: the YT number, what each status means, who delivers in the UK or US and who to ask when it stalls.
 slug: yunexpress-tracking
 published: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
-YunExpress, also written Yun Express, is a Shenzhen logistics company that ships small parcels from China for online sellers, including sellers on Amazon, Temu, SHEIN and AliExpress. Track a parcel on its site, [yuntrack.com](https://www.yuntrack.com/), with the number starting with YT, or paste it in the box above. YunExpress's site doesn't mention texts or emails to recipients, so look in the shop's shipping email or your order page.
+YunExpress, also written Yun Express, is a Shenzhen logistics company that ships small parcels from China for online sellers, including sellers on Amazon, Temu, SHEIN and AliExpress. A tracking number made of YT and 16 digits is a YunExpress number. Track it on [yuntrack.com](https://www.yuntrack.com/), YunExpress's own tracking site, or paste it in the box above. YunExpress's site doesn't mention texts or emails to recipients, so look in the shop's shipping email or your order page.
 
 ## YunExpress tracking number: YT and 16 digits
 
@@ -15,13 +15,15 @@ Yuntrack asks for "your YunExpress tracking number (starting with YT)" and gives
 | Number | Peek reads it as |
 | --- | --- |
 | `YT1234567890123456` | YunExpress (YT and 16 digits). |
-| `YT1234567890123` | YTO Express, another carrier (YT and 13 digits). |
+| `YT1234567890123` | [YTO Express](carrier:yto), another carrier (YT and 13 digits). |
 | `YT123456789012345` | Not YunExpress (YT and 15 digits): look for a missing digit. |
 | `LP12345678901234` | An AliExpress logistics reference (LP and 14 digits), see [Cainiao](carrier:cainiao). |
 
+Starts with YT2 or YT22? It's still a YunExpress number: YT, then 16 digits, whatever they start with. YunExpress doesn't say what the digits stand for, so count them rather than read anything into them.
+
 Can't find it in the shop's messages? See [how to find your tracking number](guide:find-tracking-number).
 
-Once a local carrier takes over, the parcel's detail page on yuntrack can show that carrier's own number under "Additional Notes". If yuntrack answers `Not Found`, check the YT and all 16 digits, then ask the shop to confirm it.
+Yuntrack takes up to 100 numbers per search, separated by commas, spaces or line breaks. Once a local carrier takes over, the parcel's detail page can show that carrier's own number under "Additional Notes". YunExpress gives no time for a new number to show up; if yuntrack answers `Not Found`, check the YT and all 16 digits, then ask the shop to confirm it.
 
 ## What YunExpress tracking statuses mean
 
@@ -43,11 +45,15 @@ Yuntrack is in English only. It files each parcel under a tab (`Processing`, `Tr
 
 `Transit` means on the way; the latest scan gives the step. YunExpress doesn't explain `Alert`, its tab for parcels with a problem: read the line under it and ask the shop if nothing changes.
 
-After `Delivered to local carrier`, the local carrier's own lines follow, in English too ([what they mean](guide:tracking-statuses)). DPD's `Sender goods issue` is a data record filed while the parcel is still in China, not a problem with your goods. Yuntrack's page code also has a progress line (`Pickup`, `Departed from origin`, `Arrived at destination`, `Local carrier on the way`, `Delivered successfully`); its `Pickup` is the collection from the seller, not a pickup point.
+After `Delivered to local carrier`, the local carrier's own lines follow, in English too ([what they mean](guide:tracking-statuses)). DPD's `Sender goods issue` is a data record filed while the parcel is still in China, not a problem with your goods. Yuntrack's page code also has a progress line (`Pickup`, `Departed from origin`, `Arrived at destination`, `Local carrier on the way`, `Delivered successfully`); its `Pickup` is the collection from the seller, not a pickup point. For some parcels, yuntrack also shows an `Estimated delivery time`.
 
 ## Who delivers YunExpress parcels in the UK and US
 
-YunExpress flies parcels out of China, has them cleared through customs, then hands them to a local carrier, [the usual route for parcels from China](guide:tracking-from-china). Its pages name no delivery partner for the UK or Ireland; for the US, its Chinese site offers sellers a last-mile service, CIRRO-E-COMMERCE, without saying which parcels it carries. The lines after `Delivered to local carrier` sometimes name the carrier that has yours. In the US, some scans name GOFO, a last-mile carrier.
+YunExpress flies parcels out of China, has them cleared through customs, then hands them to a local carrier, [the usual route for parcels from China](guide:tracking-from-china). The lines after `Delivered to local carrier` sometimes name the carrier that has yours.
+
+**UK and Ireland.** YunExpress launched a dedicated UK line in 2016, but its pages name no delivery partner in the UK or Ireland, and no office or phone line for recipients there: for delivery, ask the carrier named in your tracking. One of its lines delivers across the UK, including islands within it, but not to offshore islands such as Jersey and Guernsey. Its pages say nothing to UK buyers about VAT or duty; see [what you may pay](guide:customs).
+
+**US.** YunExpress's Chinese site offers sellers a last-mile service, CIRRO-E-COMMERCE, without saying which parcels it carries. It also launched a "US Standard Postal Service" line in 2020, but doesn't say which local carrier delivers a given US parcel. Some US scans name [GOFO](carrier:gofo), a last-mile carrier founded in August 2023. Neither company's site says they're the same company, and GOFO's doesn't mention YunExpress.
 
 YunExpress says nothing to recipients about delivery attempts, cards, holding times or rescheduling; for those, check the local carrier named in the tracking.
 
@@ -79,6 +85,14 @@ When YunExpress names the local carrier and its number, Peek can follow the parc
 
 ## Questions about YunExpress tracking
 
+### What carrier uses YT tracking numbers?
+
+YunExpress, when YT is followed by 16 digits, 18 characters in all, including numbers that start with YT2 or YT22. Both YunExpress's site and yuntrack ask for a number "starting with YT". YT and 13 digits is [YTO Express](carrier:yto), another Chinese carrier. Track a YunExpress number on yuntrack.com or paste it in the box above; once a local carrier takes over, the tracking can show that carrier's number too.
+
+### What is yuntrack.com?
+
+YunExpress's own tracking site, its "Track & Trace Platform". YunExpress links it as "Tracking" from yunexpress.com, and the tracking box on yunexpress.com opens your results there. It's in English, takes YT numbers, up to 100 per search, and needs no account.
+
 ### Is YunExpress legit?
 
 Yes, it's a real logistics company: Shenzhen Qianhai YunExpress Logistics Co., Ltd., founded in Shenzhen in 2014. By its own account, it has been an Amazon recommended logistics partner since 2017 and an official AliExpress one since April 2025.
@@ -89,26 +103,19 @@ In Longgang District, Shenzhen, China. It lists no office for recipients in the 
 
 ### How long does YunExpress take to deliver?
 
-By YunExpress's own estimates for sellers, Standard Express takes 3 to 5 business days to the UK, 5 to 8 to the US, 8 to 10 to Canada and 4 to 7 to Australia. A Chinese-language product page for another line gives 5 to 8 working days to the UK, 6 to 10 to Ireland and 8 to 15 to the US. You usually can't tell which line the seller chose, and customs checks add time.
-
-### Is YunExpress the same company as GOFO?
-
-Neither company's site says so. GOFO, a last-mile carrier founded in August 2023, doesn't mention YunExpress on its site, though it appears in YunExpress's US scans.
-
-### Is YunExpress delivered by USPS?
-
-YunExpress doesn't say which local carrier delivers a given US parcel. It launched a "US Standard Postal Service" line in 2020; the tracking may name the carrier that has yours.
+By YunExpress's own estimates for sellers, Standard Express takes 3 to 5 business days to the UK, 5 to 8 to the US, 8 to 10 to Canada and 4 to 7 to Australia. Priority Express, launched in 2024 and covering the UK and US, gives the same 3 to 5 days to the UK, remote postcodes aside, and 5 to 8 to the US. A Chinese-language product page for another line gives 5 to 8 working days to the UK, 6 to 10 to Ireland and 8 to 15 to the US. You usually can't tell which line the seller chose, and customs checks add time.
 
 :::sources
-- [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – YT numbers, English only, Feedback
-- [YunExpress: Tracking Results, Yuntrack](https://www.yuntrack.com/parcelTracking?id=YT1234567890123456) – tabs, Last Mile Tracking, Not Found (invented number)
-- [YunExpress: Yuntrack page code](https://www.yuntrack.com/static/js/app.239f901b375358352522.js) – Alert, progress line, Additional Notes, proof of delivery
-- [YunExpress: the Best Logistics Service Provider](https://www.yunexpress.com/) – company, address, email, hours
-- [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, US postal line, Amazon
+- [YunExpress: Track & Trace Platform, Yuntrack](https://www.yuntrack.com/) – YunExpress's tracking site, YT numbers, English only, Feedback
+- [YunExpress: Yuntrack page code](https://www.yuntrack.com/static/js/0.38a2ccebfb56bd50819e.js) – "starting with YT", separators, tabs, Alert, progress line, Additional Notes, proof of delivery, estimated delivery time
+- [YunExpress: Yuntrack results page code](https://www.yuntrack.com/static/js/6.9b7c1a51737b2bcaa67c.js) – tabs, Not Found, Last Mile Tracking, 100 numbers per search, no account needed
+- [YunExpress: the Best Logistics Service Provider](https://www.yunexpress.com/) – company, address, email, hours, "starting with YT", tracking box and "Tracking" link to yuntrack
+- [YunExpress: About Us](https://www.yunexpress.com/about-us) – 2014, UK line 2016, US postal line 2020, Priority Express 2024, Amazon
 - [YunExpress: Privacy Policy](https://www.yunexpress.com/privacy-policy) – contract holder as customer, Hong Kong company
 - [YunExpress: Partners](https://www.yunexpress.com/yun-ecosystem/partners) – marketplaces
 - [YunExpress: Standard Express](https://www.yunexpress.com/our-solutions/b2c/33) – standard times
-- [YunExpress: 全球专线挂号（特惠带电）](https://www.yunexpress.com/our-solutions/b2c/7) – another line's times
+- [YunExpress: Priority Express](https://www.yunexpress.com/our-solutions/b2c/priority-express) – UK and US lines, times, remote postcodes
+- [YunExpress: 全球专线挂号（特惠带电）](https://www.yunexpress.com/our-solutions/b2c/7) – another line's times, UK coverage without Jersey or Guernsey
 - [YunExpress: 最高省21%！云途自提服务上线](https://www.yunexpress.com/newsroom/detail/3) – pickup-point lines
 - [YunExpress: 云途物流成为速卖通官方物流合作伙伴](https://www.yunexpress.com/newsroom/detail/1) – AliExpress partner
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – customs checks

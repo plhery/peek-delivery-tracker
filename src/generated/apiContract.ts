@@ -4857,7 +4857,7 @@ export const CARRIER_CAPABILITIES = {
         "domains": [
           "tnt.com"
         ],
-        "pathPattern": "^/express/[a-z]{2}_[a-z]{2}/site/shipping-tools/tracking\\.html$",
+        "pathPattern": "^/express/[a-z]{2}_[a-z]{2}/site/(?:shipping-tools/tracking|herramientas-envio/seguimiento|outils-expedition/suivi|strumenti-spedizione/tracking)\\.html$",
         "params": [
           "cons"
         ],

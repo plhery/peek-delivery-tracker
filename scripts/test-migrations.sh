@@ -317,6 +317,8 @@ psql "$database_url" -X -v ON_ERROR_STOP=1 \
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/a_tu_hora_postcode.sql"
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
+  -f "$repo_root/supabase/tests/canpar_postcode.sql"
+psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/stone3pl.sql"
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/client_access.sql"

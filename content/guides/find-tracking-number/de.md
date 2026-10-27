@@ -4,7 +4,7 @@ description: Wo die Sendungsnummer steht – in der Versandmail, auf der Quittun
 slug: sendungsnummer-finden-paket-ohne-nummer
 picture: Eine Versandmail, in der die Sendungsnummer RR000000005CH gelb markiert ist, daneben ein Etikett mit Strichcode, und Pip lächelt.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Deine Sendungsnummer steht meist in der Versandmail oder SMS des Shops. Sonst findest du sie in deiner Bestellung auf der Website oder in der App des Shops, meist nur einen Klick von der Bestellnummer entfernt. Hast du das Paket selbst verschickt, steht sie auf der Quittung, die du bei der Abgabe bekommen hast. Nach deinem Namen oder deiner Adresse sucht kein Paketdienst. Weiterhelfen können dir aber eine Benachrichtigungskarte, das kostenlose Kundenkonto mancher Paketdienste oder der Absender.
@@ -27,13 +27,13 @@ Die Mail ist da, aber welche Nummer ist die richtige? Füge einfach die ganze Ma
 
 | Shop | Wo die Sendungsnummer steht |
 | --- | --- |
-| Amazon.de | **Meine Bestellungen** → **Sendung verfolgen** neben der Bestellung → alle Updates ansehen. Dort steht die Sendungsnummer |
+| Amazon.de | **Meine Bestellungen** → die Bestellung → **Lieferung verfolgen** |
 | eBay.de | **Mein eBay: Käufe**, als Link neben dem Artikel. Als Gast: die Mail „Bestellung bestätigt“ → **Einzelheiten zum Kauf aufrufen** → **Versanddetails anzeigen** |
 | Zalando | Link zur Sendungsverfolgung in der Mail, die nach dem Versand kommt, außerdem unter **Mein Konto** |
 | Temu | **Deine Bestellungen** → **Verfolgen**, neben der Bestellung |
 | Vinted | Im Chat zur Bestellung → **Sendung verfolgen**. Dort kannst du die Sendungsnummer auch kopieren |
 
-Keine Nummer zu sehen? Vielleicht gibt es noch keine oder überhaupt keine. Temu schreibt: „Die Bearbeitung durch das Lager kann 1-3 Werktage in Anspruch nehmen.“ Laut Amazon.de sind „Großbriefe der Deutschen Post und internationale Standardlieferungen“ nicht verfolgbar. Und bei eBay siehst du eine Nummer nur, wenn der Verkäufer einen Versandservice mit Sendungsverfolgung nutzt und die Nummer bei eBay hochlädt. Auf den österreichischen und Schweizer Seiten der Shops können die Menünamen leicht abweichen.
+Keine Nummer zu sehen? Vielleicht gibt es noch keine oder überhaupt keine. Temu schreibt: „Die Bearbeitung durch das Lager kann 1-3 Werktage in Anspruch nehmen.“ Und bei eBay siehst du eine Nummer nur, wenn der Verkäufer einen Versandservice mit Sendungsverfolgung nutzt und die Nummer bei eBay hochlädt. Auf den österreichischen und Schweizer Seiten der Shops können die Menünamen leicht abweichen.
 
 Wer für welchen Shop zustellt und was du tust, wenn das Tracking stockt: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) und [Kleinanzeigen, willhaben oder Ricardo](guide:second-hand-orders).
 
@@ -64,7 +64,7 @@ Die Nummer hat der Absender. Lass dir von ihm sagen:
 - **Die Nummer, genau so, wie sie gedruckt ist.**
 - **Ob die Sendung überhaupt verfolgbar ist.** Für DHL Päckchen ist eine Sendungsverfolgung „grundsätzlich nicht möglich“, außer bei DHL Päckchen International mit dem Service „Versicherung“. Bei Briefen der Deutschen Post nennt DHL nur Einschreiben, Nachnahme, PRIO, Wert National und Briefmarken mit Matrixcode als verfolgbar. Bei der Schweizerischen Post lassen sich Briefe etwa als Einschreiben, A-Post Plus oder mit Letter ID verfolgen.
 
-Auf einem Marktplatz gekauft? Dann frag über die Plattform. Bei Amazon wählst du unter **Meine Bestellungen** deinen Marketplace-Artikel und dann **Problem bei Bestellung**, um dem Verkäufer zu schreiben. Bei eBay wählst du **Verkäufer kontaktieren** und bittest ihn, die Sendungsnummer hochzuladen. Und bei Vinted soll dir der Verkäufer die Nummer mitteilen, wenn er mit individuellem Versand verschickt hat.
+Auf einem Marktplatz gekauft? Dann frag über die Plattform. Bei Amazon klärst du ein Lieferproblem zuerst mit dem Verkaufspartner. Gelingt das nicht, kannst du dich direkt an Amazon wenden und eine Rückerstattung beantragen. Bei eBay wählst du **Verkäufer kontaktieren** und bittest ihn, die Sendungsnummer hochzuladen. Und bei Vinted soll dir der Verkäufer die Nummer mitteilen, wenn er mit individuellem Versand verschickt hat.
 
 ### Lass dir ankommende Pakete vom Paketdienst anzeigen
 
@@ -158,9 +158,8 @@ Immer noch nichts? Dann frag den Absender, meist also den Online-Shop: Von ihm k
 - [UPS Schweiz: UPS My Choice](https://www.ups.com/ch/de/track/ups-my-choice) – auch in der Schweiz
 - [UPS: Sendungsverfolgung](https://www.ups.com/track?loc=de_DE) – Suche anhand der Referenznummer, Angaben ausgeblendet
 - [FedEx: Sendungsverfolgung](https://www.fedex.com/de-de/tracking.html) – Benachrichtigungskartennummer, Suche nach Referenz
-- [Amazon.de: Sendung verfolgen](https://www.amazon.de/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – Meine Bestellungen, Sendung verfolgen, alle Updates
-- [Amazon.de: Fehlende Details zum Sendungsverlauf](https://www.amazon.de/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – Großbriefe, internationale Standardlieferungen
-- [Amazon.de: Einen Marketplace-Verkäufer kontaktieren](https://www.amazon.de/gp/help/customer/display.html?nodeId=GLC8ZMBWMBTR6QZZ) – Problem bei Bestellung
+- [About Amazon Deutschland: Amazon-Lieferung: einfache Bestellung und Verfolgung](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-lieferoptionen-sendung-verfolgen) – Meine Bestellungen, Lieferung verfolgen
+- [About Amazon Deutschland: Amazon A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst der Verkaufspartner, dann Amazon
 - [eBay: Sendung für Ihren Artikel nachverfolgen](https://www.ebay.de/help/buying/versand-lieferung/sendungsverfolgung?id=4027) – Mein eBay: Käufe, Gastkauf, Verkäufer kontaktieren
 - [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – Sendung verfolgen, individueller Versand
 - [Zalando: Wo ist mein Paket?](https://www.zalando.ch/faq/where-is-my-parcel.html) – Link in der Mail, Mein Konto

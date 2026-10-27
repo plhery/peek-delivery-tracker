@@ -4,7 +4,7 @@ description: E-mail d'expédition, commande, avis de passage, preuve de dépôt 
 slug: ou-trouver-numero-de-suivi
 picture: Un e-mail d'expédition où le numéro RR000000005CH est surligné en jaune, une étiquette à code-barres à côté, et Pip qui sourit.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Ton numéro de suivi se trouve en général dans l'e-mail ou le SMS d'expédition de la boutique, ou dans le détail de ta commande sur son site ou son app, à un clic du numéro de commande. Si c'est toi qui as envoyé le colis, il figure sur ta preuve de dépôt ou ton bordereau. Aucun transporteur ne retrouve un colis à partir de ton nom ou de ton adresse, mais un avis de passage, le compte gratuit de certains transporteurs ou l'expéditeur peuvent quand même te permettre de le suivre.
@@ -27,12 +27,12 @@ Tu as l'e-mail, mais tu ne sais pas quel numéro est le bon ? Colle l'e-mail en 
 
 | Boutique | Où trouver le numéro de suivi |
 | --- | --- |
-| Amazon (France, Belgique) | **Vos commandes** → la commande → **Suivre le colis**. Sur amazon.fr, le lien **toutes les mises à jour** affiche ensuite les numéros de suivi |
+| Amazon | **Vos commandes**, sur ton compte ou dans l'app : c'est là que se suivent en général les livraisons Amazon |
 | Vinted | La conversation avec le vendeur → **Suivre le colis**, où tu peux aussi copier le numéro |
 | eBay | **Historique des achats** : le numéro s'affiche sous forme de lien. Sans compte : l'e-mail « Commande confirmée » → **Afficher les détails de la commande** → **Afficher les informations sur la livraison** |
 | Zalando | Le lien de suivi dans l'e-mail de confirmation d'expédition, ou la rubrique **Mon compte** |
 
-Pas de numéro ? Il n'y en a peut-être pas encore, ou pas du tout. Amazon prévient que « certaines expéditions, comme les expéditions internationales standard, ne sont pas traçables ». Chez un vendeur tiers sur Amazon, comme sur eBay, le suivi n'apparaît que si l'envoi est suivi et que le vendeur a transmis le numéro.
+Pas de numéro ? Il n'y en a peut-être pas encore, ou pas du tout. Sur eBay, le suivi n'apparaît que si l'envoi est suivi et que le vendeur a transmis le numéro.
 
 Qui livre pour chaque boutique, et que faire quand le suivi ne bouge plus : [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) et [Leboncoin](guide:second-hand-orders).
 
@@ -155,9 +155,7 @@ Toujours rien ? Demande à l'expéditeur ou à la boutique, comme le conseille D
 - [DHL Express : Suivre par référence](https://mydhl.express.dhl/fr/fr/tracking.html#/track-by-reference) – suivi par référence
 - [DHL : Suivi](https://www.dhl.com/fr-fr/home/suivi.html) – expéditeur, 24 à 48 heures, séparateurs entre plusieurs numéros
 - [DHL : Sendungsverfolgung, Probleme und Lösungen (en allemand)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – numéro de commande, numéro valide
-- [Amazon.fr : Suivre votre colis](https://www.amazon.fr/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – Vos commandes, vendeurs tiers
-- [Amazon.fr : Informations de suivi manquantes](https://www.amazon.fr/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – envois non traçables
-- [Amazon.com.be : Suivre votre colis](https://www.amazon.com.be/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW&language=fr_BE) – Belgique
+- [About Amazon France : Six conseils pratiques pour se protéger des tentatives d'arnaques par usurpation d'identité](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – historique des commandes sur le compte ou l'application
 - [eBay : Suivre l'acheminement d'un objet](https://www.ebay.fr/help/buying/livraison/suivre-objet?id=4027) – Historique des achats, envoi suivi, ajout du numéro par le vendeur
 - [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – conversation, 48 h, mode d'envoi personnalisé
 - [Zalando : Où se trouve mon colis ?](https://www.zalando.fr/faq/where-is-my-parcel.html) – lien de suivi

@@ -4,7 +4,7 @@ description: Where to find your tracking number in a shipping email, order page 
 slug: how-to-find-tracking-number
 picture: A shipping email with the tracking number RR000000005CH highlighted in yellow, a barcode label beside it, and a smiling Pip.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 You'll usually find your tracking number in the shop's shipping email or text, or in your order on its website or app, one click past the order number. If you sent the parcel yourself, it's on your post office receipt. No carrier will track a package by your name or address, but a [missed-delivery card](guide:missed-delivery), some carriers' free accounts for incoming parcels, or the sender can still get you tracking.
@@ -27,14 +27,14 @@ Found the email but can't tell which number is which? Paste the whole thing into
 
 | Shop | Where the tracking number is |
 | --- | --- |
-| Amazon (US, UK, Canada, Australia) | **Your Orders** → the order → **Track package** → **All updates** |
+| Amazon (US, UK) | **Returns & Orders** (app: **Your Orders**) → **Track Package**, where Amazon deliveries are tracked |
 | eBay | **Purchase history**, as a link next to the item. As a guest: the "Order Confirmed" email → **View order details** → **Show delivery details** (US: **Show shipping details**) |
 | Etsy | **Your account** → **Purchases and reviews** (app: **You** → **Purchases**). No tracking button? Look under **View Receipt** |
 | Temu | **Your orders** → **Track**, next to the order |
 | Shein | **My orders** → the order → **Track** |
 | Vinted | The order's conversation → **Track parcel**, where you can copy the number |
 
-No number there? There may be none yet, or none at all. Temu asks you to allow "1-3 business days for warehouse processing" first. Amazon warns that "standard international deliveries" might not be trackable, and eBay shows a number only if the seller used a tracked service and uploaded it.
+No number there? There may be none yet, or none at all. Temu asks you to allow "1-3 business days for warehouse processing" first, and eBay shows a number only if the seller used a tracked service and uploaded it.
 
 Who delivers for each shop, and what to do when its tracking stalls: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders), and second-hand apps such as [Depop, Mercari or Poshmark](guide:second-hand-orders).
 
@@ -60,7 +60,7 @@ Every carrier that writes about missing numbers sends you back to the sender. As
 - **The number exactly as printed.**
 - **Whether it was tracked at all.** USPS First-Class letters and flats without an extra service have no number, nor do some Marketing Mail parcels.
 
-Bought on a marketplace? Ask through it. On Amazon, use **Your Orders** → **Problem with Order** → **Contact Seller**, then "allow two days for the seller to respond". On eBay, ask the seller to upload the tracking number.
+Bought on a marketplace? Ask through it. On Amazon UK, go to **Your Orders** → **View Your Item** → **Contact Seller**; sellers "should respond to your query within two business days". On eBay, ask the seller to upload the tracking number.
 
 ### Let the carrier list parcels coming to you
 
@@ -162,8 +162,9 @@ Still nothing? Ask the sender or the shop, as DHL advises. For each status, see 
 - [Canada Post: Automatic tracking](https://www.canadapost-postescanada.ca/cpc/en/personal/manage-mail/automatic-tracking.page) – conditions
 - [Australia Post: Lost tracking number](https://auspost.com.au/help/parcel-tracking/tracking-support/lost-tracking-number) – receipts, numbers not recognised
 - [Australia Post: Tracking service](https://auspost.com.au/personal/receiving/tracking-service) – MyPost
-- [Amazon: Tracking your package](https://www.amazon.com/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – Your Orders, untracked international deliveries
-- [Amazon: Missing tracking information](https://www.amazon.com/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – contact the seller, two days
+- [About Amazon: How to track your packages](https://www.aboutamazon.com/news/retail/track-amazon-package) – Returns & Orders, Your Orders, Track Package
+- [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – the same steps in the UK
+- [About Amazon UK: How to contact a seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – View Your Item, Contact Seller, two business days
 - [eBay: Tracking your item](https://www.ebay.co.uk/help/buying/postage-delivery/tracking-item?id=4027) – purchase history, Show delivery details
 - [eBay US: Tracking your item](https://www.ebay.com/help/buying/shipping-delivery/tracking-item?id=4027) – Show shipping details
 - [Etsy: What's the status of my order](https://help.etsy.com/hc/en-us/articles/115015521948-What-s-the-Status-of-My-Order) – Purchases, View Receipt

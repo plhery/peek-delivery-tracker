@@ -4,7 +4,7 @@ description: Onde está o número de seguimento no e-mail, na conta da loja ou n
 slug: onde-encontrar-numero-de-seguimento
 picture: Um e-mail de envio com o número RR000000005CH destacado a amarelo, uma etiqueta com código de barras ao lado e o Pip a sorrir.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 O número de seguimento costuma vir no e-mail ou no SMS que a loja te manda quando a encomenda sai, ou está na página da encomenda, no site ou na app, a um clique do número da encomenda. Se foste tu a enviar, está no talão que te deram ao balcão. Nenhuma transportadora procura uma encomenda pelo teu nome ou pela tua morada, mas o aviso deixado na caixa do correio, a app de algumas transportadoras ou o próprio remetente podem ajudar-te a segui-la.
@@ -27,13 +27,13 @@ Encontraste o e-mail, mas não sabes qual dos números é o certo? Cola-o inteir
 
 | Loja | Onde está o número de seguimento |
 | --- | --- |
-| Amazon.es, em português | **Os meus pedidos** → a encomenda → **Acompanhar embalagem** → **todas as atualizações**, onde aparecem os «números de referência» |
+| Amazon.es | **Os meus pedidos**, onde geralmente se acompanham as entregas da Amazon |
 | Shein | **Meus pedidos** → **Rastrear**, quando a encomenda já aparece como «Enviado» |
 | Temu | Na lista de encomendas da tua conta, o botão de seguimento ao lado da encomenda mostra a transportadora e o número |
 | Vinted | O ecrã da conversa com quem vende → **Acompanhar encomenda**, onde podes copiar o código |
 | Worten | A **área de cliente**, onde a Worten diz para acompanhares a encomenda. No Marketplace, quem envia é o vendedor parceiro |
 
-Não está lá número nenhum? Pode ainda não existir, ou nunca vir a existir. A Temu avisa que o armazém pode levar 1 a 3 dias úteis a processar a encomenda antes de haver número. A Amazon diz que algumas embalagens, «como entregas internacionais padrão», poderão não ser rastreáveis, e só mostra o seguimento de um vendedor externo se ele o partilhar e se tiveres escolhido uma opção de entrega rastreável. Na Vinted, só há seguimento para artigos comprados com o botão «Comprar agora» e enviados segundo as instruções da app.
+Não está lá número nenhum? Pode ainda não existir, ou nunca vir a existir. A Temu avisa que o armazém pode levar 1 a 3 dias úteis a processar a encomenda antes de haver número. Na Vinted, só há seguimento para artigos comprados com o botão «Comprar agora» e enviados segundo as instruções da app.
 
 Quem entrega para cada loja e o que fazer quando o seguimento para: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt/Darty](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) e [OLX](guide:second-hand-orders).
 
@@ -58,7 +58,7 @@ As transportadoras que explicam o que fazer sem número (os CTT, a InPost, a DHL
 - **O número tal como está impresso.**
 - **Se o envio tinha seguimento.** Os CTT avisam que alguns envios não têm código e que, nesses casos, não é possível acompanhar o percurso.
 
-Compraste num marketplace? Pergunta através da própria plataforma. Na Amazon, vai a **Os meus pedidos** → **Problema com o pedido** → **Contactar o vendedor** e dá-lhe 48 horas para responder. Na Vinted, se o artigo seguiu pelo método de envio personalizado, é quem vende que te deve mandar o número por mensagem. No Marketplace da Worten, contacta o vendedor ou a Worten.
+Compraste num marketplace? Pergunta através da própria plataforma. Na Vinted, se o artigo seguiu pelo método de envio personalizado, é quem vende que te deve mandar o número por mensagem. No Marketplace da Worten, contacta o vendedor ou a Worten.
 
 ### Deixa a transportadora mostrar-te o que vem a caminho
 
@@ -118,7 +118,7 @@ Não. A DHL alemã di-lo claramente: o número da encomenda é dado pela loja e 
 - home | Entrega não conseguida | O aviso que fica na caixa do correio traz muitas vezes um número que também serve
 :::
 
-Para os distinguir: no e-mail da loja, um número com a palavra «encomenda» ou «pedido» ao lado costuma ser da loja e não funciona no site da transportadora; o número de seguimento vem com o nome de uma transportadora ou com uma ligação para a página de seguimento dela. Mas atenção às palavras, porque nem todos as usam da mesma maneira: na DPD, o «número de encomenda» é precisamente o número de seguimento, e a Amazon.es, em português, chama «números de referência» aos números de seguimento.
+Para os distinguir: no e-mail da loja, um número com a palavra «encomenda» ou «pedido» ao lado costuma ser da loja e não funciona no site da transportadora; o número de seguimento vem com o nome de uma transportadora ou com uma ligação para a página de seguimento dela. Mas atenção às palavras, porque nem todos as usam da mesma maneira: na DPD, o «número de encomenda» é precisamente o número de seguimento.
 
 Quanto ao aspeto: `1Z999AA10123456784` é um número da UPS, o da DPD tem 14 algarismos, o da [NACEX](carrier:nacex) tem quatro algarismos, uma barra e oito algarismos, e os CTT usam normalmente o formato postal internacional de 13 caracteres, com 2 letras, 9 algarismos e 2 letras, o mesmo de `RR000000005CH`. Em [como saber qual é a transportadora](guide:tracking-number-formats) vês a que transportadora pertence cada número.
 
@@ -157,8 +157,6 @@ Continua sem nada? Pergunta ao remetente, como mandam os CTT. Para perceberes ca
 - [UPS: Tracking support (em inglês)](https://www.ups.com/us/en/support/tracking-support) – aviso deixado à primeira tentativa de entrega, em alguns países
 - [UPS Portugal: Seguimento](https://www.ups.com/track?loc=pt_PT) – Seguir por Número de Referência, detalhes mascarados
 - [FedEx Portugal: Rastrear a sua expedição](https://www.fedex.com/pt-pt/tracking.html) – avisos de passagem, Rastrear por referência
-- [Amazon.es: Fazer o seguimento da embalagem](https://www.amazon.es/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW&language=pt_PT) – Os meus pedidos, Acompanhar embalagem, entregas internacionais padrão
-- [Amazon.es: Informações de referência indisponíveis](https://www.amazon.es/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER&language=pt_PT) – Contactar o vendedor, 48 horas
 - [Shein Portugal: Como rastrear meu pedido](https://m.shein.com/pt/How-to-track-my-order-a-496.html) – Meus pedidos, Rastrear
 - [Temu: How to track my order](https://www.temu.com/uk/support/c3/how-to-track-my-order-f-48-s-153.html) – botão de seguimento, 1 a 3 dias úteis no armazém
 - [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – Acompanhar encomenda, até 48 horas, Comprar agora, envio personalizado

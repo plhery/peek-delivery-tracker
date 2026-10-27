@@ -4,7 +4,7 @@ description: Dónde encontrar el número de seguimiento de un pedido y cómo loc
 slug: localizar-paquete-sin-numero-de-seguimiento
 picture: Un correo de envío con el número RR000000005CH resaltado en amarillo, una etiqueta con código de barras al lado y Pip sonriendo.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-27
 ---
 
 Lo normal es que el número de seguimiento esté en el correo o el SMS que te manda la tienda cuando envía el pedido, o en el propio pedido, en su web o su app, a un clic del número de pedido. Si el paquete lo has enviado tú, está en el recibo o el justificante que te dieron al dejarlo. Ni [Correos](carrier:correos-spain) ni [SEUR](carrier:seur) ni GLS buscan envíos por nombre o DNI, pero aún puedes seguir el paquete con el aviso de llegada, con la cuenta de algunos transportistas o pidiéndole el número al remitente.
@@ -27,7 +27,7 @@ No siempre se llama igual: Correos habla de «código de envío» o «número de
 
 | Tienda | Dónde está el número de seguimiento |
 | --- | --- |
-| Amazon.es | **Mis pedidos** → el pedido → **Localiza tu paquete** → **todas las actualizaciones** |
+| Amazon.es | **Mis pedidos**, desde donde suelen seguirse las entregas de Amazon |
 | eBay | **Historial de compras**, como enlace junto al artículo. Si compraste como invitado: el correo «Pedido confirmado» → **Ver detalles del pedido** → **Mostrar datos de envío** |
 | Etsy | En tu cuenta, **Compras y reseñas** (en la app: **Tú** → **Compras**). ¿No hay botón **Seguir paquete**? Míralo en **Ver el recibo** |
 | Temu | **Tus pedidos** → **Rastrear**, junto al pedido |
@@ -35,7 +35,7 @@ No siempre se llama igual: Correos habla de «código de envío» o «número de
 | Vinted | La conversación del pedido → **Rastrear paquete**, donde también puedes copiar el número |
 | Zalando | El enlace del correo que te manda cuando el pedido sale del almacén, o el apartado **Mi cuenta** |
 
-¿No hay número? Puede que todavía no lo haya, o que no vaya a haberlo nunca. Temu pide esperar de 1 a 3 días hábiles a que su almacén prepare el pedido. Amazon avisa de que algunos paquetes, «como los envíos internacionales estándar», pueden no tener seguimiento. eBay solo lo muestra si el vendedor usa un servicio con seguimiento y añade el número en eBay. Y Vinted no rastrea los paquetes con envío personalizado: en esos pedidos, es el vendedor quien debería pasarte el número.
+¿No hay número? Puede que todavía no lo haya, o que no vaya a haberlo nunca. Temu pide esperar de 1 a 3 días hábiles a que su almacén prepare el pedido. eBay solo lo muestra si el vendedor usa un servicio con seguimiento y añade el número en eBay. Y Vinted no rastrea los paquetes con envío personalizado: en esos pedidos, es el vendedor quien debería pasarte el número.
 
 Quién reparte para cada tienda y qué hacer si el seguimiento se para: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) y [Wallapop](guide:second-hand-orders).
 
@@ -59,7 +59,7 @@ Correos, SEUR, GLS, InPost y DHL dicen lo mismo: si te falta el número, pregunt
 - **El número tal y como está impreso.**
 - **Si el envío llevaba seguimiento.** Como recuerda Etsy, «no todos los métodos de envío incluyen información de seguimiento».
 
-¿Has comprado en una plataforma? Pregunta desde la propia plataforma. En Amazon, si no te sale el seguimiento de un pedido de un vendedor externo: **Mis pedidos** → **Problema con el pedido** → **Ponerse en contacto con el vendedor**. Amazon pide esperar 48 horas a que el vendedor conteste. En eBay, pide al vendedor que añada la información de seguimiento; en Etsy, usa **Ayuda con el pedido** desde tus compras.
+¿Has comprado en una plataforma? Pregunta desde la propia plataforma. En Amazon, si el pedido es de un vendedor externo, intenta resolver primero el problema con él; si no lo consigues, puedes reclamar directamente a Amazon con la Garantía de la A a la Z. En eBay, pide al vendedor que añada la información de seguimiento; en Etsy, usa **Ayuda con el pedido** desde tus compras.
 
 ### Deja que el transportista te muestre los paquetes que te llegan
 
@@ -120,7 +120,7 @@ No. DHL lo deja claro: el número de pedido lo asigna la tienda, y no es un núm
 - home | Entrega fallida | El aviso que te dejan suele traer un número que también sirve
 :::
 
-Para distinguirlos: el número que aparece como «Pedido» es el de la tienda (Amazon lo muestra en **Mis pedidos**, eBay lo manda en el correo «Pedido confirmado») y no sirve en la web del transportista; el de seguimiento viene con el nombre de un transportista o con un enlace a su página. `1Z999AA10123456784` es un número de UPS; muchos envíos postales llevan el formato internacional de 13 caracteres, como `RR000000005CH`. Para saber de qué transportista es un número, mira [los formatos de los números de seguimiento](guide:tracking-number-formats).
+Para distinguirlos: el número que aparece como «Pedido» es el de la tienda (eBay, por ejemplo, lo manda en el correo «Pedido confirmado») y no sirve en la web del transportista; el de seguimiento viene con el nombre de un transportista o con un enlace a su página. `1Z999AA10123456784` es un número de UPS; muchos envíos postales llevan el formato internacional de 13 caracteres, como `RR000000005CH`. Para saber de qué transportista es un número, mira [los formatos de los números de seguimiento](guide:tracking-number-formats).
 
 ## ¿Por qué no sale nada con mi número de seguimiento?
 
@@ -155,8 +155,8 @@ Pasado ese plazo, revisa el número:
 - [DHL Express: Seguimiento por Referencia](https://mydhl.express.dhl/es/es/tracking.html#/track-by-reference) – búsqueda por referencia
 - [DHL: Seguimiento, preguntas frecuentes](https://www.dhl.com/es-es/home/seguimiento.html) – 24 a 48 horas, remitente, otras referencias
 - [DHL: Hilfe bei Problemen mit Sendungsverfolgung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – el número de pedido lo asigna la tienda y no es un número de seguimiento (en alemán)
-- [Amazon.es: Localizar un paquete](https://www.amazon.es/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – Mis pedidos, Localiza tu paquete, todas las actualizaciones, envíos internacionales estándar
-- [Amazon.es: Información de seguimiento no disponible](https://www.amazon.es/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – Problema con el pedido, 48 horas
+- [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primero el vendedor, después Amazon
+- [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – reclamación directa a Amazon por la entrega de un vendedor externo
 - [eBay.es: Realizar el seguimiento de un artículo](https://www.ebay.es/help/buying/envio-entrega/seguimiento-articulo?id=4027) – Historial de compras, Pedido confirmado, servicio con seguimiento, pedir al vendedor que añada la información
 - [Etsy: ¿Cuál es el estado de mi pedido?](https://help.etsy.com/hc/es/articles/115015521948) – Compras y reseñas, Seguir paquete, Ver el recibo, Ayuda con el pedido, no todos los métodos de envío tienen seguimiento
 - [Temu: ¿Cómo rastrear mi pedido?](https://www.temu.com/es/support/c3/how-to-track-my-order-f-48-s-153.html) – Tus pedidos, Rastrear, 1 a 3 días hábiles

@@ -4,7 +4,7 @@ description: Gdzie znaleźć numer przesyłki: e-mail, SMS, zamówienie w sklepi
 slug: gdzie-znalezc-numer-przesylki
 picture: E-mail o wysyłce z numerem przesyłki RR000000005CH zaznaczonym na żółto, obok etykieta z kodem kreskowym i uśmiechnięty Pip.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Numer przesyłki zwykle znajdziesz w e-mailu lub SMS-ie o wysyłce albo w szczegółach zamówienia na stronie czy w aplikacji sklepu, o jedno kliknięcie dalej niż numer zamówienia. Jeśli to Ty nadajesz paczkę, numer jest na potwierdzeniu nadania. Żaden przewoźnik nie wyszuka paczki po nazwisku ani adresie, ale numer może Ci dać awizo albo nadawca, a aplikacja przewoźnika sama pokaże paczki wysłane na Twój numer telefonu.
@@ -28,13 +28,13 @@ Masz e-maila, ale nie wiesz, który numer jest który? Wklej całą wiadomość 
 | Gdzie kupujesz | Gdzie jest numer przesyłki |
 | --- | --- |
 | Allegro | **Moje przesyłki** albo **Moje zakupy** → **szczegóły zakupu**, a także e-mail, który Allegro wysyła po zakupie. W aplikacji do **Moich przesyłek** prowadzi ikona samochodu w prawym górnym rogu |
-| Amazon.pl | **Moje zamówienia** → zamówienie → **Śledź przesyłkę** |
+| Amazon.pl | Historia zamówień na Twoim koncie, na Amazon.pl lub w aplikacji Amazon. Tam zwykle śledzi się dostawy Amazon |
 | Vinted | Okno rozmowy dotyczącej zamówienia → **Śledź przesyłkę**. Stamtąd skopiujesz numer |
 | Zalando | Link do śledzenia w e-mailu z potwierdzeniem wysyłki, a także zakładka **Moje konto** |
 | Shein | **Moje zamówienia** → **Śledź**. Numer śledzenia widać przy zamówieniu |
 | Temu | Lista zamówień → przycisk śledzenia obok zamówienia. Zobaczysz tam przewoźnika i numer przesyłki |
 
-Nie widzisz numeru? Może jeszcze nie powstał albo przesyłka w ogóle go nie ma. Allegro nic nie pokaże, jeśli „sprzedający nie dodał do zamówienia numeru listu przewozowego”. Amazon.pl uprzedza, że niektórych przesyłek, „takich jak standardowe przesyłki międzynarodowe”, nie da się śledzić. Shein pisze, że brak numeru oznacza, że zamówienie jest jeszcze w magazynie, a Temu prosi o 1 do 3 dni roboczych na obsługę zamówienia w magazynie.
+Nie widzisz numeru? Może jeszcze nie powstał albo przesyłka w ogóle go nie ma. Allegro nic nie pokaże, jeśli „sprzedający nie dodał do zamówienia numeru listu przewozowego”. Shein pisze, że brak numeru oznacza, że zamówienie jest jeszcze w magazynie, a Temu prosi o 1 do 3 dni roboczych na obsługę zamówienia w magazynie.
 
 Kto dostarcza dla każdego sklepu i co zrobić, gdy śledzenie stoi w miejscu: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) i [OLX](guide:second-hand-orders).
 
@@ -60,7 +60,7 @@ Przewoźnicy, którzy piszą o braku numeru, odsyłają do nadawcy. GLS: „popr
 - **Numer dokładnie tak, jak jest wydrukowany.** Poczta Polska prosi, żeby wpisywać go „bez spacji oraz nawiasów”.
 - **To, czy przesyłka w ogóle ma śledzenie.** Poczta Polska pokazuje tylko przesyłki rejestrowane, a przy listach poleconych tylko dzień nadania i doręczenia. Vinted śledzi tylko zamówienia złożone przyciskiem „Kup teraz”.
 
-Kupujesz na Allegro, Amazonie czy Vinted? Pisz do sprzedawcy przez platformę. Jeśli sprzedający na Allegro nie odpowiada, załóż Dyskusję i jako powód wybierz „nie otrzymałem produktu”. Możesz to zrobić najwcześniej godzinę po zakupie, a sprzedający ma 24 godziny na odpowiedź. Na Amazon.pl wejdź w **Moje zamówienia**, znajdź produkt od sprzedawcy Marketplace i wybierz **Problem z zamówieniem**. Amazon podaje, że sprzedawcy odpowiadają w ciągu 48 godzin. Na Vinted przy wysyłce indywidualnej sprzedający sam powinien podać Ci numer przesyłki.
+Kupujesz na Allegro, Amazonie czy Vinted? Pisz do sprzedawcy przez platformę. Jeśli sprzedający na Allegro nie odpowiada, załóż Dyskusję i jako powód wybierz „nie otrzymałem produktu”. Możesz to zrobić najwcześniej godzinę po zakupie, a sprzedający ma 24 godziny na odpowiedź. Na Amazon.pl problem z dostawą wyjaśnij najpierw ze sprzedawcą. Jeśli się nie uda, możesz poprosić Amazon bezpośrednio o zwrot pieniędzy. Na Vinted przy wysyłce indywidualnej sprzedający sam powinien podać Ci numer przesyłki.
 
 ### Sprawdź w aplikacji przewoźnika, czy idzie do Ciebie paczka
 
@@ -135,9 +135,8 @@ Nadal nic? Zapytaj nadawcę albo sklep. Co znaczy każdy status, wyjaśnia [pora
 - [GLS Polska: FAQ](https://gls-group.com/PL/pl/faq/) – numer od nadawcy, Track-ID na awizie
 - [Allegro: Gdzie sprawdzisz numer i status swojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/gdzie-sprawdzisz-numer-i-status-swojej-przesylki-LvP7agrzOhw) – Moje przesyłki, Moje zakupy, aplikacja, e-mail, numer oferty, brak numeru listu przewozowego
 - [Allegro: Co możesz zrobić, gdy czekasz na przesyłkę zbyt długo](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/co-mozesz-zrobic-gdy-czekasz-na-przesylke-zbyt-dlugo-xG71gn36qC4) – kontakt ze sprzedającym, numer lub potwierdzenie nadania, Dyskusja
-- [Amazon.pl: Śledzenie paczki](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – Moje zamówienia, Śledź przesyłkę
-- [Amazon.pl: Brak informacji o śledzeniu](https://www.amazon.pl/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – standardowe przesyłki międzynarodowe
-- [Amazon.pl: Skontaktuj się ze sprzedawcą zewnętrznym](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GLC8ZMBWMBTR6QZZ) – Problem z zamówieniem, 48 godzin
+- [About Amazon Polska: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon i unikać ich](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – historia zamówień na Amazon.pl lub w aplikacji
+- [About Amazon Polska: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, potem zwrot pieniędzy od Amazon
 - [Vinted: Śledzenie przesyłki](https://www.vinted.pl/help/100) – okno rozmowy, Śledź przesyłkę, Kup teraz, wysyłka indywidualna
 - [Zalando: Gdzie jest moja paczka?](https://www.zalando.pl/faq/where-is-my-parcel.html) – e-mail z potwierdzeniem wysyłki, Moje konto
 - [SHEIN: Jak śledzić moje zamówienie](https://pl.shein.com/How-to-track-my-order-a-496.html) – Moje zamówienia, Śledź, numer śledzenia

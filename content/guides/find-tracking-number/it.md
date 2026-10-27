@@ -4,7 +4,7 @@ description: Dove si trova il codice tracking tra e-mail, ordine, SMS e ricevuta
 slug: dove-si-trova-il-codice-tracking
 picture: Un'e-mail di spedizione con il codice RR000000005CH evidenziato in giallo, un'etichetta con il codice a barre accanto e Pip che sorride.
 published: 2026-10-09
-updated: 2026-10-11
+updated: 2026-10-27
 ---
 
 Di solito il codice tracking è nell'e-mail o nell'SMS di spedizione, oppure nel tuo ordine sul sito o nell'app del negozio, un clic dopo il numero d'ordine. Se il pacco l'hai spedito tu, è sulla ricevuta dello sportello o nell'e-mail di conferma. Nessun corriere cerca un pacco per nome e cognome, ma puoi seguirlo lo stesso con l'avviso lasciato dal corriere, con l'account gratuito che alcuni corrieri offrono per i pacchi in arrivo o chiedendo il codice al mittente.
@@ -27,7 +27,7 @@ Hai trovato l'e-mail ma non capisci quale numero è quello giusto? Incollala tut
 
 | Negozio | Dove trovi il codice |
 | --- | --- |
-| Amazon.it | **I miei ordini** → l'ordine → **Traccia il mio pacco** → **tutti gli aggiornamenti**, dove compaiono i numeri di tracciamento |
+| Amazon.it | **I miei ordini**, da dove di solito si seguono le consegne Amazon |
 | eBay.it | **Cronologia acquisti**, come link accanto all'oggetto. Se hai comprato senza account: l'e-mail «Ordine confermato» → **Vedi i dettagli dell'ordine** → **Mostra i dettagli della spedizione** |
 | Shein | **I miei ordini** → l'ordine → **Tracciare il mio ordine**, quando l'ordine è già stato spedito |
 | Temu | **I tuoi ordini** → **Traccia**, accanto all'ordine |
@@ -35,7 +35,7 @@ Hai trovato l'e-mail ma non capisci quale numero è quello giusto? Incollala tut
 | Vinted | Nella conversazione dell'ordine → **Traccia il pacco**, dove puoi anche copiare il numero di tracciamento |
 | Zalando | Il link di tracking nell'e-mail di conferma della spedizione, oppure nella sezione **Il mio account** |
 
-Il codice non c'è? Forse non c'è ancora, o non ci sarà proprio. Per Temu la lavorazione in magazzino richiede di solito da 1 a 3 giorni lavorativi, e Shein spiega che, se il codice non compare, l'ordine è ancora nel suo magazzino. Amazon avverte che alcuni pacchi, «come le consegne internazionali standard, potrebbero non essere tracciabili». Su eBay, se il codice manca, forse il venditore non l'ha ancora caricato.
+Il codice non c'è? Forse non c'è ancora, o non ci sarà proprio. Per Temu la lavorazione in magazzino richiede di solito da 1 a 3 giorni lavorativi, e Shein spiega che, se il codice non compare, l'ordine è ancora nel suo magazzino. Su eBay, se il codice manca, forse il venditore non l'ha ancora caricato.
 
 Chi consegna per ogni negozio e cosa fare quando il tracciamento si ferma: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaWorld](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) e [Subito](guide:second-hand-orders).
 
@@ -62,7 +62,7 @@ I corrieri che spiegano cosa fare senza codice ti rimandano tutti a lui. Chiedig
 - **Il codice esattamente com'è stampato.** Poste lo vuole «senza interruzioni e senza trattino».
 - **Se la spedizione era tracciata.** Non tutto lo è. Con Poste, una Posta1 o una Postapriority internazionale senza l'etichetta con il codice 2DComm non si può seguire. In Svizzera, tra le lettere si seguono per esempio la raccomandata e la Posta A Plus, mentre una normale lettera in Posta A o B non è nell'elenco degli invii tracciabili.
 
-Hai comprato su un marketplace? Chiedi da lì. Su Amazon.it vai in **I miei ordini**, trova l'articolo del venditore terzo e scegli **Problema con l'ordine**: se il venditore ha scelto una spedizione non tracciabile, Amazon ti dice di contattarlo direttamente. Su eBay puoi chiedere al venditore di aggiungere il codice della spedizione. Su Vinted una spedizione personalizzata non si traccia nell'app: il numero dovrebbe mandartelo chi vende, con un messaggio.
+Hai comprato su un marketplace? Chiedi da lì. Su Amazon.it, se l'articolo è di un venditore terzo, prova prima a risolvere il problema con lui; se non ci riesci, puoi chiedere un rimborso direttamente ad Amazon. Su eBay puoi chiedere al venditore di aggiungere il codice della spedizione. Su Vinted una spedizione personalizzata non si traccia nell'app: il numero dovrebbe mandartelo chi vende, con un messaggio.
 
 ### Fatti mostrare dal corriere i pacchi in arrivo
 
@@ -117,7 +117,7 @@ Solo dentro il negozio, non sul sito del corriere. DHL lo spiega senza giri di p
 - home | Consegna mancata | Anche l'avviso lasciato dal corriere spesso ha un numero che funziona
 :::
 
-Per distinguerli: un numero accanto alla parola «ordine» è del negozio (Amazon li raccoglie in **I miei ordini**, eBay li manda nell'e-mail «Ordine confermato») e sul sito del corriere non funziona. Il codice tracking, invece, arriva con il nome del corriere o con un link alla sua pagina di tracking. A complicare le cose, ogni corriere lo chiama a modo suo:
+Per distinguerli: un numero accanto alla parola «ordine» è del negozio (eBay, per esempio, li manda nell'e-mail «Ordine confermato») e sul sito del corriere non funziona. Il codice tracking, invece, arriva con il nome del corriere o con un link alla sua pagina di tracking. A complicare le cose, ogni corriere lo chiama a modo suo:
 
 | Chi | Come chiama il codice |
 | --- | --- |
@@ -128,7 +128,7 @@ Per distinguerli: un numero accanto alla parola «ordine» è del negozio (Amazo
 | UPS | numero di ricerca |
 | FedEx | numero di monitoraggio |
 | La Posta | numero d'invio |
-| Amazon.it, eBay.it | numeri di tracciamento, codice della spedizione |
+| eBay.it | codice della spedizione |
 
 `1Z999AA10123456784` è un codice UPS; molti invii postali hanno il formato internazionale di 13 caratteri, come `RR000000005CH`. Per capire di chi è un codice, leggi [come capire il corriere dal numero di tracking](guide:tracking-number-formats).
 
@@ -168,9 +168,7 @@ Ancora niente? Chiedi al mittente o al negozio di ricontrollare codice e corrier
 - [UPS Italia: Ricerca pacco](https://www.ups.com/track?loc=it_IT) – ricerca per numero di riferimento, dettagli perlopiù nascosti
 - [UPS Italia: Informazioni sullo stato del tracking](https://www.ups.com/it/it/support/tracking-support/where-is-my-package/understanding-tracking-status) – Etichetta creata: il codice esiste prima che UPS abbia il pacco
 - [FedEx Italia: Monitoraggio delle spedizioni](https://www.fedex.com/it-it/tracking.html) – numero di monitoraggio, avvisi di tentata consegna, numero di riferimento
-- [Amazon.it: Traccia il tuo pacco](https://www.amazon.it/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – I miei ordini, Traccia il mio pacco, consegne internazionali standard
-- [Amazon.it: Informazioni di tracciabilità mancanti](https://www.amazon.it/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – spedizione non tracciabile, contattare il venditore
-- [Amazon.it: Contatta un venditore del Marketplace](https://www.amazon.it/gp/help/customer/display.html?nodeId=GLC8ZMBWMBTR6QZZ) – Problema con l'ordine
+- [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z per includere le richieste di risarcimento per danni alla proprietà e alle persone](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prima il partner di vendita, poi il rimborso da Amazon
 - [eBay.it: Controllare lo stato della spedizione dell'oggetto](https://www.ebay.it/help/buying/spedizione-consegna/tracciare-oggetto?id=4027) – Cronologia acquisti, Ordine confermato, codice non ancora caricato
 - [Vinted.it: Tracciare un pacco](https://www.vinted.it/help/100) – Traccia il pacco, fino a 48 ore, spedizione personalizzata
 - [Zalando.it: Dov'è il mio pacco?](https://www.zalando.it/faq/where-is-my-parcel.html) – link nell'e-mail, Il mio account

@@ -5838,6 +5838,7 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/asendia-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/asendia-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/asendia-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/asendia-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/asendia-tracking" />
 <lastmod>2026-10-27</lastmod>
 </url>
@@ -5846,6 +5847,7 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/asendia-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/asendia-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/asendia-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/asendia-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/asendia-tracking" />
 <lastmod>2026-10-27</lastmod>
 </url>
@@ -5854,6 +5856,16 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/asendia-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/asendia-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/asendia-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/asendia-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/asendia-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/asendia-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/asendia-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/asendia-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/asendia-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/asendia-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/asendia-tracking" />
 <lastmod>2026-10-27</lastmod>
 </url>
@@ -6358,14 +6370,36 @@
 <url>
 <loc>https://peektracker.com/carriers/heppner-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/heppner-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/heppner-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/heppner-suivi" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/heppner-zending-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/heppner-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/carriers/heppner-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/heppner-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/heppner-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/heppner-suivi" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/heppner-zending-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/heppner-tracking" />
 <lastmod>2026-10-27</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers/heppner-suivi</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/heppner-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/heppner-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/heppner-suivi" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/heppner-zending-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/heppner-tracking" />
+<lastmod>2026-10-27</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/nl/carriers/heppner-zending-volgen</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/heppner-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/heppner-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/heppner-suivi" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/heppner-zending-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/heppner-tracking" />
 <lastmod>2026-10-27</lastmod>
 </url>

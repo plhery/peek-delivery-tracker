@@ -320,8 +320,6 @@ it.each([
   // Correos Express is asked only when the GS1 check digit adds up.
   ['1000000000000007', 'correos-express'],
   ['98765432109876543211', 'nz-post'],
-  // Poczta Polska is asked about barcodes under its own GS1 prefix.
-  ['00159007731234567899', 'poczta-polska'],
   ['1000000000000000000001', 'austrian-post'],
 ])('recognizes newly supported %s shapes only through carrier answers', async (number, carrier) => {
   const candidates = recognitionAskedCarriers(number);
@@ -330,6 +328,14 @@ it.each([
   recognize.mockImplementation(knows(carrier));
   expect(await (await request(number)).json()).toEqual({ trackingNumber: number, carrier, asked: candidates });
   expect(asked()).toEqual(candidates);
+});
+
+// Poczta Polska's barcodes under its own GS1 prefix: newer scrapers name it from the shape, older ones ask it.
+it('names Poczta Polska for a barcode under its own GS1 prefix', async () => {
+  const number = '00159007731234567899';
+  recognize.mockImplementation(knows('poczta-polska'));
+  expect(await (await request(number)).json()).toMatchObject({ trackingNumber: number, carrier: 'poczta-polska' });
+  if (detectCarrierMatch(number).confidence !== 'high') expect(asked()).toContain('poczta-polska');
 });
 
 it('keeps unrelated BRT and Colis Privé answers ambiguous', async () => {

@@ -4,7 +4,7 @@ description: Perché il tracking di AliExpress, Temu e Shein resta fermo o cambi
 slug: tracciare-pacco-dalla-cina
 picture: Un aereo traccia un arco tratteggiato sul globo, da una puntina rossa a quella verde di casa, e Pip viaggia tra due furgoni.
 published: 2026-10-09
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Un pacco AliExpress, Temu o Shein passa di mano più volte: un'azienda logistica cinese lo manda in aereo verso l'Europa, la dogana lo controlla e alla fine te lo consegnano [Poste Italiane](carrier:poste-italiane), un corriere o, in Ticino, [la Posta](carrier:swiss-post), spesso con un codice nuovo. Ognuno scansiona solo il suo tratto, quindi metti in conto fino a 11 giorni prima del primo aggiornamento, nessuna notizia durante il volo e un'attesa dopo «arrivato nel paese di destinazione». Segui il tracking del negozio, poi quello del corriere locale: con le spedizioni più economiche il tracking può fermarsi lì per sempre. Un articolo spedito da un magazzino nell'UE salta il volo e, in Italia, anche la dogana.
@@ -30,7 +30,7 @@ Quando un ordine sembra fermo in transito, di solito il pacco sta passando da un
 
 - **Prima del primo aggiornamento.** AliExpress e Cainiao dicono che di solito il tracking compare al massimo 11 giorni dopo che il venditore ha spedito; nel frattempo Cainiao mostra `Not Found` o, sul sito in italiano, `Nessun aggiornamento di tracciamento`. A 12 giorni dalla spedizione ancora niente? Scrivi al venditore.
 - **In dogana.** Appena atterrato, il pacco aspetta lo sdoganamento (te lo spieghiamo nella prossima sezione).
-- **Con la spedizione economica.** Cainiao lo scrive chiaro: quando il pacco passa al corriere del Paese di destinazione, «l'aggiornamento degli stati logistici successivi non rientra nell'ambito di questo servizio». Temu avverte che l'ultimo tratto può essere affidato a un corriere locale e che il tracking potrebbe non coprire ogni passaggio. E Shein Svizzera scrive che, per ora, la spedizione Economy non riceve informazioni di tracking.
+- **Con la spedizione economica.** Cainiao lo scrive chiaro: quando il pacco passa al corriere del Paese di destinazione, «l'aggiornamento degli stati logistici successivi non rientra nell'ambito di questo servizio». E Shein Svizzera scrive che, per ora, la spedizione Economy non riceve informazioni di tracking.
 - **Durante le feste cinesi.** In Cina i giorni festivi, come il Capodanno cinese (tra fine gennaio e febbraio) e la festa nazionale (la prima settimana di ottobre), possono rallentare la lavorazione e lo sdoganamento. Per le feste di ottobre 2026, SF International aveva avvisato che alcune dogane cinesi avrebbero sospeso lo sdoganamento degli invii personali.
 
 Il tracking si muove, ma il pacco è in ritardo? Se il tempo di consegna del tuo ordine è già passato, vai alla sezione sul rimborso, più sotto. Per gli altri buchi del tracking: [perché il tracking non si aggiorna](guide:tracking-not-updating).
@@ -61,12 +61,12 @@ Qui sotto trovi gli stati come li scrive Cainiao in inglese; se il tuo tracking 
 
 Altre righe di Cainiao, come `Carrier update`, le spiega la [pagina sul tracking Cainiao](carrier:cainiao). «In consegna» e gli altri stati di tutti i giorni: [cosa vogliono dire gli stati della spedizione](guide:tracking-statuses).
 
-## Perché il codice di tracking AliExpress o Temu è cambiato?
+## Perché il codice di tracking è cambiato?
 
 Di solito per uno di questi tre motivi:
 
 - **AliExpress ha unito i tuoi ordini.** Secondo AliExpress, un codice condiviso da più ordini vuol dire che il loro metodo di spedizione è stato migliorato e che puoi ritirare i pacchi insieme.
-- **Un ordine, più pacchi.** Temu indica un tempo di consegna per ogni pacco e ti dà il codice quando è pronto. Shein Svizzera avverte che i pacchi di uno stesso ordine possono partire da magazzini diversi, con tempi diversi.
+- **Un ordine, più pacchi.** Shein Svizzera avverte che i pacchi di uno stesso ordine possono partire da magazzini diversi, con tempi diversi.
 - **È subentrato un corriere locale** con la sua etichetta e il suo codice. Cainiao mostra quel codice sulla sua pagina di tracking quando lo pubblica; da lì in poi, controlla sul sito del corriere.
 
 Con i codici delle poste è diverso. L'Unione postale universale prevede un solo codice S10 per invio, quindi un codice China Post di solito funziona anche su Cerca spedizioni di Poste Italiane o nel tracciamento degli invii della Posta. Poste però avverte che per i pacchi il suo tracking parte solo dalla presa in carico in Italia: il tratto nel Paese d'origine spetta all'operatore estero.
@@ -99,7 +99,7 @@ Dipende dalla linea di spedizione:
 
 ## Spedito da un magazzino in Europa: cosa cambia?
 
-Non tutto parte dalla Cina. Sulla sua pagina delle spedizioni per l'Italia, Temu cita gli articoli spediti da magazzini locali, che non hanno un minimo d'ordine. Temu accoglie anche venditori locali: in Europa dal 2024, anche in Italia, e oggi il suo programma per loro è aperto in più di 35 mercati. Su Shein Italia, l'etichetta «Magazzino UE» vuol dire che l'articolo può partire da un magazzino in Europa. Altrimenti parte da fuori Europa, e Shein avverte che può arrivare in ritardo.
+Non tutto parte dalla Cina. Su Shein Italia, l'etichetta «Magazzino UE» vuol dire che l'articolo può partire da un magazzino in Europa. Altrimenti parte da fuori Europa, e Shein avverte che può arrivare in ritardo.
 
 Per il tracking, un pacco che parte da un magazzino nell'UE non prende l'aereo dalla Cina e non passa dalla dogana. I due lunghi silenzi descritti sopra spariscono, e il tracking comincia in Europa.
 
@@ -115,7 +115,6 @@ Dipende dalla linea che hai pagato. Cainiao conta i giorni di calendario, Shein 
 | --- | --- |
 | AliExpress | Un tempo di consegna per ogni ordine, sulla pagina del prodotto e dell'ordine |
 | Linee Cainiao | Premium 5-10 giorni verso Paesi come Spagna, Paesi Bassi e Belgio; Standard 10-18 giorni (nei casi più veloci 7, verso Francia e Germania); Economy 20-45 giorni |
-| Temu | 1-3 giorni per preparare l'ordine, poi un tempo di consegna per ogni pacco spedito |
 | Shein Italia | Standard 6-12 giorni lavorativi, locker o punto di ritiro 6-12, express 6-11 |
 | Shein Svizzera | Standard 6-8 giorni lavorativi |
 
@@ -142,7 +141,6 @@ Procedi in quest'ordine:
 | Piattaforma | Non arrivato | Risulta consegnato, ma non c'è |
 | --- | --- | --- |
 | AliExpress | Controversia dall'11° giorno dopo la spedizione fino a 15 giorni dopo la fine del tempo di consegna | Prima chiedi al corriere locale, poi apri la controversia |
-| Temu | Contatta il servizio clienti entro 90 giorni dalla data dell'ordine | Stessa regola |
 | Shein | Entro 45 giorni dalla data del pagamento | Entro 30 giorni dalla data di consegna indicata nel tracking |
 
 Se un ordine Shein arriva dopo la data prevista, la «Garanzia di consegna puntuale» ti dà 200 punti SHEIN in Italia e 500 in Svizzera. Sugli articoli con l'etichetta «Consegna rapida», AliExpress aggiunge un coupon per il ritardo e un rimborso dopo un certo numero di giorni. Senza l'etichetta, il rimborso arriva dopo 60, 75, 90 o 120 giorni, secondo le condizioni di consegna.
@@ -165,9 +163,6 @@ Schermate, stati, crediti e reclami di ogni negozio: [tracciare un ordine AliExp
 - [AliExpress: Delivered but not received (in inglese)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – prima il corriere locale, tracking su Cainiao
 - [AliExpress: Impegno AliExpress](https://it.aliexpress.com/p/service-mindset/index.html) – etichetta «Consegna rapida», coupon, rimborso, 60–120 giorni
 - [AliExpress: Do I have to pay for customs and import taxes? (in inglese)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – magazzino nel tuo Paese, niente dazi né tasse in più
-- [Temu: Shipping info (in inglese)](https://www.temu.com/uk/shipping-info.html) – preparazione, tempi per pacco, tracking incompleto, 90 giorni
-- [Temu Italia: Informazioni sulla spedizione](https://www.temu.com/it/shipping-info.html) – magazzini locali senza minimo d'ordine
-- [Temu: Temu Helps European Small Businesses Expand Internationally (in inglese)](https://www.temu.com/about_temu/temu-small-business-insights-report-2026.html) – venditori locali in Europa dal 2024, anche in Italia, più di 35 mercati
 - [Shein Italia: Informazioni sulla spedizione](https://it.shein.com/Shipping-Info-a-280.html) – I miei ordini, tempi, Magazzino UE, 45 e 30 giorni, 200 punti
 - [Shein Svizzera: Versandinformationen (in tedesco)](https://ch.shein.com/Shipping-Info-a-280.html) – Economy senza tracking, magazzini diversi, 6-8 giorni, 500 punti
 - [Yanwen: sito ufficiale (in cinese)](https://www.yw56.com.cn/) – linee Temu e AliExpress
@@ -180,7 +175,7 @@ Schermate, stati, crediti e reclami di ogni negozio: [tracciare un ordine AliExp
 - [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – sdoganamento degli invii postali, 3 € per articolo, IVA, tracking dalla presa in carico in Italia
 - [Poste Italiane: Cerca spedizioni, legenda degli stati](https://www.poste.it/cerca/views/risultati-spedizioni.html) – In attesa di sdoganamento
 - [Supply Chain Italy: Poste Italiane e Temu potenziano la collaborazione](https://www.supplychainitaly.it/2025/11/19/poste-italiane-e-temu-potenziano-la-collaborazione-in-italia/) – protocollo d'intesa
-- [ADM: Spedizioni di modico valore da Paesi extra-UE](https://www.adm.gov.it/portale/dazi-spedizioni-modico-valore) – 3 € per voce doganale
+- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce doganale, non per pezzo
 - [Commissione europea: Buying goods online coming from a non-EU country (in inglese)](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – merce già nell'UE: niente formalità doganali, IVA nel prezzo
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026
 - [La Posta: Sdoganamento all'importazione](https://www.post.ch/it/ricezione/sdoganamento-all-importazione) – rete GLS, prezzo di sdoganamento

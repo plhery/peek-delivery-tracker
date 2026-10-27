@@ -39,7 +39,7 @@ En retard plutôt que muet ? Une fois le délai de livraison passé, va voir la 
 
 Ça dépend de ta douane et de ton transporteur local. `Arrive at Destination` veut dire, selon Cainiao, que le colis est arrivé dans le pays, mais qu'il doit encore être dédouané avant d'être livré.
 
-Si plus rien ne bouge après ce scan, Cainiao explique qu'en général, le suivi n'est simplement pas encore à jour dans ton pays, et conseille de demander à ton bureau de poste. En France, quand [La Poste](carrier:la-poste) a le colis, son suivi affiche pendant ce temps `Les formalités d'importation sont en cours` : un contrôle qui « peut parfois prendre quelques jours ». En Belgique, [bpost](carrier:bpost) prévient aussi que la procédure « peut prendre plusieurs jours ». Pour savoir combien de temps la douane peut garder un colis : [colis bloqué en douane](guide:customs).
+Si plus rien ne bouge après ce scan, Cainiao explique qu'en général, le suivi n'est simplement pas encore à jour dans ton pays, et conseille de demander à ton bureau de poste. En France, quand [La Poste](carrier:la-poste) a le colis, son suivi indique pendant ce temps que les formalités import/export sont en cours. Selon la douane française, un suivi figé pendant plusieurs jours ne veut pas forcément dire que le colis est bloqué par ses services. En Belgique, [bpost](carrier:bpost) prévient aussi que la procédure « peut prendre plusieurs jours ». Pour savoir combien de temps la douane peut garder un colis : [colis bloqué en douane](guide:customs).
 
 ### Que veulent dire les autres statuts ?
 
@@ -98,7 +98,7 @@ Colle l'un ou l'autre numéro dans [Peek](/) : il retrouve le transporteur parmi
 
 ## Expédié depuis un entrepôt en Europe : qu'est-ce qui change ?
 
-Tout ne vient pas de Chine. Sur ses pages de livraison pour la France et la Belgique, Temu cite les produits expédiés par des entrepôts locaux, qui n'ont pas de minimum de commande. Et il en prévoit davantage : Temu a ouvert sa place de marché aux vendeurs locaux en Belgique et dans le reste de l'Europe en 2024, et prévoit que les vendeurs locaux et la logistique locale représenteront jusqu'à 80 % de ses ventes européennes. Chez Shein France et Belgique, ce sont les articles marqués « Entrepôt UE » : ils peuvent partir d'un entrepôt en Europe ; sinon, Shein prévient qu'ils peuvent arriver en retard.
+Tout ne vient pas de Chine. D'après un communiqué de bpostgroup de novembre 2025, Temu a ouvert sa place de marché aux vendeurs locaux en Belgique et dans le reste de l'Europe en 2024, et prévoit qu'à l'avenir, les vendeurs locaux et la logistique locale représenteront jusqu'à 80 % de ses ventes européennes. Chez Shein France et Belgique, ce sont les articles marqués « Entrepôt UE » : ils peuvent partir d'un entrepôt en Europe ; sinon, Shein prévient qu'ils peuvent arriver en retard.
 
 Côté suivi, un colis qui part d'un entrepôt dans l'UE ne prend pas l'avion depuis la Chine et ne passe pas la douane. Les deux longs silences décrits plus haut disparaissent, et le suivi commence en Europe.
 
@@ -164,8 +164,6 @@ Les écrans, statuts, crédits et réclamations propres à chaque boutique : [su
 - [AliExpress : Delivered but not received (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – transporteur local d'abord
 - [AliExpress : L'engagement AliExpress](https://fr.aliexpress.com/p/service-mindset/index.html) – Choice, « Livraison rapide », 60 à 120 jours
 - [AliExpress : Do I have to pay for customs and import taxes? (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – entrepôt dans ton pays, pas de droits ni de taxes en plus
-- [Temu France : Informations de livraison](https://www.temu.com/fr/shipping-info.html) – entrepôts locaux sans minimum de commande
-- [Temu Belgique : Informations de livraison](https://www.temu.com/be/shipping-info.html) – entrepôts locaux sans minimum de commande
 - [Shein France : Livraison](https://fr.shein.com/Shipping-Info-a-280.html) – délais, Entrepôt UE, Mondial Relay, délais de réclamation, points
 - [Shein Belgique : Livraison](https://fr.shein.com/be/Shipping-Info-a-280.html) – délais Belgique, Entrepôt UE
 - [Shein Suisse : Livraison](https://ch.shein.com/fr/Shipping-Info-a-280.html) – délais, entrepôts, réclamations, points
@@ -178,9 +176,7 @@ Les écrans, statuts, crédits et réclamations propres à chaque boutique : [su
 - [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes de numéros, libellés
 - [La Poste Groupe : Accord La Poste-Temu, ce qu'il faut savoir](https://www.lapostegroupe.com/fr/actualite/accord-la-poste-temu-ce-qu-il-faut-savoir) – Temu depuis 2023, accord, part de Colissimo
 - [bpostgroup : Temu signe un protocole d'entente avec bpostgroup](https://press.bnode.com/temu-signe-un-protocole-dentente-avec-bpostgroup-pour-renforcer-leur-collaboration-logistique-internationale) – collaboration en Belgique, vendeurs locaux depuis 2024, jusqu'à 80 % des ventes européennes
-- [La Poste : Formalités d'importation en cours ou suspendues](https://aide.laposte.fr/contenu/que-signifie-les-statuts-les-formalites-d-importation-sont-en-cours-suspendues) – statut, quelques jours
-- [La Poste : Droits et taxes à payer à l'importation](https://aide.laposte.fr/contenu/de-l-etranger-et-l-outre-mer-vers-la-metropole-quels-sont-les-droits-et-taxes-a-payer-a-l-importation) – à l'achat ou à l'arrivée
-- [La Poste : Frais de gestion à l'importation](https://aide.laposte.fr/contenu/pourquoi-la-poste-applique-des-frais-de-gestion-a-l-importation) – seulement si des droits sont dus
+- [Douane : Nos conseils avant d'acheter sur internet](https://www.douane.gouv.fr/fiche/nos-conseils-avant-dacheter-sur-internet) – le transporteur, La Poste par exemple, facture à la livraison les droits et taxes avancés et ses frais ; suivi inchangé plusieurs jours
 - [Service-Public.fr : La taxe française sur les petits colis remplacée par un droit de douane européen](https://www.service-public.gouv.fr/particuliers/actualites/A18985) – 3 € par catégorie d'articles
 - [Commission européenne : Questions et réponses sur le droit de douane de 3 euros](https://ec.europa.eu/commission/presscorner/detail/fr/qanda_26_1492) – 3 € par article, colis jusqu'à 150 €
 - [Commission européenne : Buying goods online coming from a non-EU country (en anglais)](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – articles déjà dans l'UE : pas de formalités douanières, TVA comprise

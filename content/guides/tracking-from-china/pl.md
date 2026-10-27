@@ -1,10 +1,10 @@
 ---
 title: Śledzenie paczki z Chin: AliExpress, Temu, Shein
-description: Jak śledzić paczkę z Chin: czemu numer się zmienia, kto doręcza w Polsce, ile idzie paczka z AliExpress, Temu i Shein i kiedy zapłacisz cło.
+description: Jak śledzić paczkę z Chin: czemu numer się zmienia, kto doręcza w Polsce, ile idzie paczka z AliExpress i Shein i kiedy zapłacisz cło.
 slug: sledzenie-paczki-z-chin
 picture: Samolot leci przerywanym łukiem nad kulą ziemską, od czerwonej pinezki do zielonej, oznaczającej dom, a Pip podróżuje między dwiema furgonetkami.
 published: 2026-10-09
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Paczka z AliExpress, Temu albo Shein przechodzi z rąk do rąk: chińska firma logistyczna wysyła ją samolotem, celnicy ją sprawdzają, a w Polsce doręcza ją [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost) albo inny przewoźnik, często pod nowym numerem. Każda z tych firm skanuje tylko swój odcinek. Licz się więc z tym, że pierwszy skan pojawi się nawet po 11 dniach, w czasie lotu śledzenie zamilknie, a po statusie „arrived at destination country” paczka jeszcze trochę poczeka. Śledź najpierw numer ze sklepu, a potem numer polskiego przewoźnika. Przy najtańszej wysyłce śledzenie może się urwać na dobre właśnie przy tym przekazaniu. Paczka z magazynu w UE omija lot z Chin i odprawę celną.
@@ -30,7 +30,7 @@ Gdy zamówienie wisi „w tranzycie”, czyli w drodze, paczka jest zwykle międ
 
 - **Przed pierwszym skanem.** AliExpress i Cainiao piszą, że informacje o śledzeniu pojawiają się zwykle najpóźniej 11 dni po tym, jak sprzedawca wyśle paczkę. Do tego czasu Cainiao pokazuje `Not Found`. Po 12 dniach nadal nic? Napisz do sprzedawcy.
 - **Na odprawie celnej.** Po wylądowaniu paczka czeka na odprawę (o tym w następnej części).
-- **Przy wysyłce ekonomicznej.** Polska strona śledzenia Cainiao pisze wprost: „Śledzenie ekonomicznej przesyłki jest aktualizowane tylko do etapu przekazania do przewoźnika w kraju/regionie docelowym”. Temu uprzedza, że ostatni odcinek mogą obsługiwać lokalni przewoźnicy, więc śledzenie nie musi działać na każdym etapie.
+- **Przy wysyłce ekonomicznej.** Polska strona śledzenia Cainiao pisze wprost: „Śledzenie ekonomicznej przesyłki jest aktualizowane tylko do etapu przekazania do przewoźnika w kraju/regionie docelowym”.
 - **Wokół chińskich świąt.** Święta w Chinach, takie jak chiński Nowy Rok (pod koniec stycznia albo w lutym) i Święto Narodowe (pierwszy tydzień października), mogą spowolnić obsługę przesyłek i odprawę celną. Na święta w październiku 2026 r. SF International zapowiedział, że niektóre porty wstrzymają odprawę prywatnych przesyłek pocztowych.
 
 Minął już czas dostawy podany w zamówieniu? Przejdź do części o zwrocie pieniędzy. Więcej o przerwach w śledzeniu: [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
@@ -62,7 +62,7 @@ Status „wydana do doręczenia” i inne codzienne statusy wyjaśnia [poradnik 
 Zwykle z jednego z trzech powodów:
 
 - **AliExpress połączył Twoje zamówienia.** Według AliExpress wspólny numer kilku zamówień oznacza, że ich wysyłkę zmieniono na szybszą i odbierzesz je razem. W Polsce AliExpress oznacza w wynikach wyszukiwania ikoną „Combine Delivery” produkty, które łączy w jedną wysyłkę, gdy zamawiasz je naraz za ponad 5 USD.
-- **Jedno zamówienie, kilka paczek.** Temu podaje czas dostawy osobno dla każdej paczki, a [numer przesyłki](guide:find-tracking-number) dopiero wtedy, gdy jest gotowy.
+- **Jedno zamówienie, kilka paczek.** W Shein część produktów z zamówienia może przyjść z magazynu w Europie, a część spoza Europy, w osobnych paczkach ([gdzie znaleźć numer każdej z nich](guide:find-tracking-number)).
 - **Paczkę przejął przewoźnik w Polsce** z własną etykietą i numerem. Cainiao pokazuje ten numer na swojej stronie śledzenia, o ile go udostępni. Od tej chwili sprawdzaj stronę tego przewoźnika.
 
 Wyjątkiem są numery pocztowe. Światowy Związek Pocztowy dopuszcza tylko jeden numer S10 na przesyłkę, więc numer China Post zwykle działa też w śledzeniu Poczty Polskiej.
@@ -90,7 +90,7 @@ To zależy od linii wysyłki:
 
 | Sklep | Kogo możesz zobaczyć na ostatnim odcinku |
 | --- | --- |
-| AliExpress | Pocztę Polską przy numerach pocztowych. InPost, który w 2019 r. ogłosił, że przy AliExpress Standard Shipping i zakupach powyżej 5 USD Paczkomat wybierzesz w koszyku. Cainiao ma też w Polsce własne automaty paczkowe. |
+| AliExpress | Pocztę Polską przy numerach pocztowych. Cainiao ma też w Polsce własne automaty paczkowe. |
 | Temu | Pocztę Polską, która w czerwcu 2025 r. ogłosiła „partnerstwo strategiczne” z Temu. W grudniu 2025 r. Poczta podała, że przesyłki Temu są nadawane głównie jako paczki Pocztex. |
 | Shein | Shein nie podaje przewoźnika na stronie o wysyłce do Polski. Do wyboru masz wysyłkę standardową albo do automatu paczkowego lub punktu odbioru. |
 
@@ -98,7 +98,7 @@ Gdy w śledzeniu pojawi się nazwa polskiego przewoźnika albo jego numer, dalej
 
 ## Wysyłka z magazynu w Europie: co się zmienia?
 
-Nie wszystko leci z Chin. Na stronie o wysyłce do Polski Temu wspomina o produktach wysyłanych z lokalnych magazynów, które nie mają minimalnej wartości zamówienia. W Shein produkty z etykietą „Magazyn w UE” mogą wyjść z magazynu w Europie. Jeśli to niemożliwe, idą z magazynu poza Europą, a Shein uprzedza, że to może opóźnić dostawę. W jednym zamówieniu część produktów może więc przyjść z Europy, a część spoza Europy, w osobnych paczkach.
+Nie wszystko leci z Chin. W Shein produkty z etykietą „Magazyn w UE” mogą wyjść z magazynu w Europie. Jeśli to niemożliwe, idą z magazynu poza Europą, a Shein uprzedza, że to może opóźnić dostawę. W jednym zamówieniu część produktów może więc przyjść z Europy, a część spoza Europy, w osobnych paczkach.
 
 Dla śledzenia oznacza to, że paczka z magazynu w UE nie leci samolotem z Chin i nie czeka w Polsce na odprawę celną. Komisja Europejska przypomina, że towar odprawiony w jednym kraju UE może swobodnie trafić do innych bez dodatkowych kontroli. Dwie długie przerwy w śledzeniu, opisane wyżej, znikają, a śledzenie zaczyna się już w Europie.
 
@@ -112,7 +112,6 @@ To zależy od linii, za którą płacisz. Cainiao liczy dni kalendarzowe, a Shei
 | --- | --- |
 | AliExpress | Czas dostawy dla każdego zamówienia, na stronie produktu i zamówienia |
 | Linie Cainiao | Premium: 5–10 dni do krajów takich jak Hiszpania czy Holandia. Standard: 10–18 dni (do Francji i Niemiec najszybciej w 7). Economy: 20–45 dni. Polski Cainiao w tych przykładach nie wymienia |
-| Temu | 1–3 dni na przygotowanie, potem czas dostawy dla każdej paczki, gdy zostanie wysłana |
 | Shein Polska | 1–3 dni na przygotowanie, potem przedział dat. Dla zamówienia z 7 października 2026 r.: 14–19 października |
 
 ## Czy przy odbiorze paczki z Chin coś dopłacisz?
@@ -139,7 +138,6 @@ Działaj po kolei:
 | Platforma | Nie dotarła | Doręczona, a jej nie ma |
 | --- | --- | --- |
 | AliExpress | Spór od 11. dnia po wysyłce do 15 dni po upływie czasu dostawy | Najpierw zapytaj przewoźnika w Polsce, potem otwórz spór |
-| Temu | Napisz do obsługi klienta w ciągu 90 dni od daty zamówienia | Tak samo |
 | Shein | W ciągu 45 dni od daty płatności | W ciągu 30 dni od daty doręczenia podanej w śledzeniu |
 
 Przy produktach z etykietą „Szybka dostawa” AliExpress daje kupon za spóźnienie, a po określonej liczbie dni zwrot pieniędzy. Bez tej etykiety zwrot przysługuje po 60, 75, 90 albo 120 dniach, zależnie od warunków dostawy.
@@ -163,8 +161,6 @@ Ekrany, statusy, rekompensaty i reklamacje w każdym sklepie: [śledzenie zamów
 - [AliExpress: Delivered but not received](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – najpierw przewoźnik w kraju docelowym
 - [AliExpress: Gwarancja AliExpress](https://pl.aliexpress.com/p/service-mindset/index.html) – etykieta „Szybka dostawa”, kupon, zwrot pieniędzy, 60–120 dni
 - [AliExpress: Do I have to pay for customs and import taxes?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – magazyn w Twoim kraju, bez dodatkowego cła i podatków
-- [Temu: Shipping info](https://www.temu.com/uk/shipping-info.html) – przygotowanie, czas dla każdej paczki, lokalni przewoźnicy, 90 dni (strona brytyjska)
-- [Temu Polska: Informacje o wysyłce](https://www.temu.com/pl/shipping-info.html) – lokalne magazyny bez minimalnej wartości zamówienia
 - [Shein Polska: Informacje o wysyłce](https://pl.shein.com/Shipping-Info-a-280.html) – przygotowanie, przedział dat, Magazyn w UE, automat paczkowy lub punkt odbioru, 45 i 30 dni
 - [Yanwen: strona główna](https://www.yw56.com.cn/) – linie z Temu i AliExpress w nazwie
 - [SF International: komunikaty](https://www.sf-international.com/cn/sc) – święta w Chinach w 2026 r.
@@ -172,7 +168,6 @@ Ekrany, statusy, rekompensaty i reklamacje w każdym sklepie: [śledzenie zamów
 - [CSIRO: Happy Lunar New Year](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – chiński Nowy Rok między 21 stycznia a 20 lutego
 - [UPU: standard S10](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – jeden numer na przesyłkę
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, brzmienie statusów
-- [InPost: InPost rozpoczyna strategiczną współpracę z AliExpress!](https://inpost.pl/aktualnosci-inpost-rozpoczyna-strategiczna-wspolprace-z-aliexpress-0) – Paczkomaty przy AliExpress Standard Shipping powyżej 5 USD (2019)
 - [Bankier.pl: Poczta Polska nawiązuje współpracę z Temu](https://www.bankier.pl/wiadomosc/Poczta-Polska-nawiazuje-wspolprace-z-platforma-handlu-elektronicznego-Temu-8954086.html) – partnerstwo strategiczne (czerwiec 2025)
 - [Telepolis: To nie koniec takich przesyłek z TEMU, chociaż Poczta Polska zmienia zasady](https://www.telepolis.pl/wiadomosci/poczta-polska-temu-koniec-wspolpracy) – oświadczenie Poczty Polskiej o paczkach Pocztex (grudzień 2025)
 - [Poczta Polska: Zmiany w opłatach dla przesyłek spoza Unii Europejskiej od 1 lipca 2026 r.](https://www.poczta-polska.pl/news/zmiany-w-oplatach-dla-przesylek-spoza-unii-europejskiej-od-1-lipca-2026-r/) – 3 euro za rodzaj produktu, pobranie przy doręczeniu

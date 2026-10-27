@@ -4,7 +4,7 @@ description: Como seguir uma encomenda do AliExpress, da Temu ou da Shein até P
 slug: rastrear-encomenda-da-china
 picture: Um avião traça um arco pontilhado sobre o globo, de um marcador vermelho até ao marcador verde de casa, e o Pip viaja entre duas carrinhas.
 published: 2026-10-09
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Uma encomenda do AliExpress, da Temu ou da Shein muda de mãos pelo caminho: uma empresa de logística chinesa leva-a de avião, a alfândega verifica-a à chegada e os [CTT](carrier:ctt) ou outra transportadora entregam-na, muitas vezes com um número novo. Cada empresa só regista leituras no seu troço do percurso. Por isso, conta com até 11 dias sem nenhuma leitura no início, silêncio durante o voo e uma espera depois de «arrived at destination country». Segue primeiro o tracking da loja e depois o da transportadora local. No envio mais barato, o seguimento pode acabar de vez nessa troca. O que sai de um armazém na UE poupa o voo e a alfândega.
@@ -31,7 +31,7 @@ Quando uma encomenda parece presa «em trânsito», normalmente está a passar d
 - **Antes da primeira leitura.** O AliExpress e a Cainiao dizem que o seguimento costuma demorar até 11 dias a aparecer depois de o vendedor enviar. Entretanto, a Cainiao mostra `Not Found`. Ao fim de 12 dias continua sem nada? Contacta o vendedor.
 - **Em `Aguarda entrada nos CTT`.** Os CTT já receberam a informação eletrónica do envio, mas a encomenda ainda não entrou na rede deles: o expedidor pode ainda estar a prepará-la. O estado seguinte, `Aceite`, pode querer dizer que entrou nos serviços postais do país de origem, e não nos CTT.
 - **Na alfândega.** Depois de aterrar, espera pelo desalfandegamento (secção seguinte).
-- **No envio económico.** A Cainiao não deixa dúvidas: o envio económico não tem seguimento depois de a encomenda passar para a transportadora do país de destino. A Temu avisa que, como o último troço pode ficar com transportadoras locais, o seguimento pode não estar disponível em todas as etapas.
+- **No envio económico.** A Cainiao não deixa dúvidas: o envio económico não tem seguimento depois de a encomenda passar para a transportadora do país de destino.
 - **À volta dos feriados chineses.** Os feriados na China, como o Ano Novo chinês (no fim de janeiro ou em fevereiro) e o Dia Nacional (na primeira semana de outubro), podem atrasar o tratamento e o desalfandegamento. Para os feriados de outubro de 2026, a SF International avisou que alguns portos deixariam de desalfandegar envios postais de particulares.
 
 Mais atrasada do que parada? Se o prazo de entrega da encomenda já passou, vê a parte dos reembolsos, mais abaixo. Mais sobre estes silêncios em [porque é que o tracking não atualiza](guide:tracking-not-updating).
@@ -62,10 +62,9 @@ Se os CTT te pedirem para a desalfandegar, tens 20 dias desde a chegada a Portug
 
 ## Porque é que o meu número de seguimento mudou?
 
-Há três razões habituais:
+Há duas razões habituais:
 
 - **O AliExpress juntou as tuas encomendas.** Segundo o AliExpress, um número partilhado por várias encomendas quer dizer que o envio delas passou a um serviço melhor.
-- **Uma encomenda, vários volumes.** A Temu dá a cada volume o seu prazo de entrega e, quando está pronto, o seu número de seguimento.
 - **Passou para uma transportadora local**, com etiqueta e número próprios. A Cainiao mostra esse número na página de seguimento quando o publica. A partir daí, segue-a no site dessa transportadora. Alguns [serviços de seguimento](guide:universal-tracker) juntam os dois números quando o novo aparece nos dados da primeira transportadora.
 
 Os números postais são a exceção. A União Postal Universal só permite um identificador S10 por objeto, por isso um número dos correios chineses costuma funcionar também no «Seguir objeto» dos CTT.
@@ -102,7 +101,7 @@ Se a encomenda chegar pela [Ecoscooting](carrier:ecoscooting), a página dela ex
 
 ## Enviado de um armazém na Europa: o que muda?
 
-Nem tudo sai da China. Na página de envios para Portugal, a Temu fala dos produtos enviados de armazéns locais, que não têm valor mínimo de encomenda. E quer mais: segundo um comunicado dos CTT, a Temu começou a convidar vendedores locais em vários países europeus e espera que até 80 % das vendas na Europa venham deste modelo local-para-local. Na Shein Portugal, a etiqueta «Entregue em 5 dias úteis/Envio Rápido» marca os artigos que podem sair de um armazém na Europa. Os outros saem de fora da Europa, e a Shein avisa que isso pode atrasar a encomenda.
+Nem tudo sai da China. Segundo um comunicado dos CTT de fevereiro de 2025, a Temu tinha começado a convidar vendedores locais em vários países europeus e esperava que até 80 % das vendas na Europa viessem desse modelo local-para-local. Na Shein Portugal, a etiqueta «Entregue em 5 dias úteis/Envio Rápido» marca os artigos que podem sair de um armazém na Europa. Os outros saem de fora da Europa, e a Shein avisa que isso pode atrasar a encomenda.
 
 No seguimento, uma encomenda que sai de um armazém na UE não apanha o avião da China nem passa pela alfândega. Os dois longos silêncios descritos acima desaparecem, e o seguimento começa logo na Europa.
 
@@ -116,7 +115,6 @@ Depende da linha que pagaste. A Cainiao conta dias seguidos; a Shein conta dias 
 | --- | --- |
 | AliExpress | Um prazo para cada encomenda, na página do produto e da encomenda |
 | Linhas da Cainiao | Premium de 5 a 10 dias para países como Espanha; Standard de 10 a 18 dias; Economy de 20 a 45 dias |
-| Temu | 1 a 3 dias para preparar e depois um prazo para cada volume, quando é enviado |
 | Shein Portugal | Envio padrão de 6 a 10 dias úteis, Ponto Pickup de 6 a 11. A etiqueta «Entregue em 5 dias úteis/Envio Rápido» quer dizer que o artigo pode sair de um armazém na Europa |
 
 É um presente de Natal? Vê também [os prazos de envio no Natal](guide:christmas-posting-dates).
@@ -144,7 +142,6 @@ Por esta ordem:
 | Plataforma | Não chegou | Aparece como entregue, mas não está |
 | --- | --- | --- |
 | AliExpress | Abre uma disputa a partir do 11.º dia depois do envio e até 15 dias depois de acabar o prazo de entrega | Fala primeiro com a transportadora local e depois abre a disputa |
-| Temu | Contacta o apoio ao cliente até 90 dias depois da data da encomenda | Igual |
 | Shein | Até 45 dias depois da data de pagamento | Até 30 dias depois da data de entrega que aparece no seguimento |
 
 Nos artigos com a etiqueta «Entrega rápida», o AliExpress dá um cupão por atraso e um reembolso ao fim de um certo número de dias. Sem a etiqueta, o reembolso chega ao fim de 60, 75, 90 ou 120 dias, conforme as condições de entrega. Na Shein Portugal, se a encomenda não chegar na data prevista, a garantia gratuita de entrega no prazo dá-te 500 pontos SHEIN.
@@ -167,8 +164,6 @@ Ecrãs, estados, créditos e reclamações de cada loja: [rastrear uma encomenda
 - [AliExpress: AliExpress Commitment (em inglês)](https://pt.aliexpress.com/p/service-mindset/index.html) – cupão, reembolso, 60–120 dias
 - [AliExpress: Política de Entrega Rápida do Aliexpress](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=pt_PT&m_station=BuyerHelp&questionId=k01000000000000000000000000014mi) – etiqueta «Entrega rápida»
 - [AliExpress: Do I have to pay for customs and import taxes? (em inglês)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – armazém no teu país, sem direitos nem impostos a mais
-- [Temu: Shipping info (em inglês)](https://www.temu.com/uk/shipping-info.html) – preparação, prazo e número por volume, transportadoras locais, 90 dias
-- [Temu Portugal: Informações de envio](https://www.temu.com/pt/shipping-info.html) – armazéns locais sem valor mínimo de encomenda
 - [Shein Portugal: Informação de envio](https://pt.shein.com/Shipping-Info-a-280.html) – prazos, Ponto Pickup, armazém na Europa, 45 e 30 dias, 500 pontos
 - [CTT: Resultados que podem aparecer na pesquisa do «Seguir objeto»](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/resultados-que-podem-aparecer-na-pesquisa-do-seguir-objeto) – Aguarda entrada nos CTT, Aceite, Em importação, Em entrega
 - [CTT: Desalfandegar encomendas](https://www.ctt.pt/particulares/receber/desalfandegar/desalfandegar-encomendas) – aviso antecipado, adiantar o processo

@@ -107,9 +107,7 @@ Das hängt von der Versandlinie ab, die der Verkäufer bucht. Den Namen des Pake
 
 ## Versand aus einem Lager in der EU: Was ändert sich?
 
-Nicht jedes Temu-Paket kommt aus China: Temu lädt auch Verkäufer aus Deutschland, Österreich und anderen europäischen Ländern ein, deren Bestellungen über lokale Lagerhäuser laufen. Auf den Versandseiten für Deutschland und Österreich nennt Temu Produkte aus lokalen Lagern ausdrücklich, für sie gilt kein Mindestbestellwert. Es sollen mehr werden: Temu erwartet, dass bis zu 80 Prozent seines Umsatzes in Europa künftig aus diesem Local-to-Local-Modell kommen, mit schnelleren Lieferungen. Laut seiner Absichtserklärung mit Temu soll DHL auch dieses Modell unterstützen.
-
-Für die Sendungsverfolgung heißt das: Ein Paket aus einem Lager in der EU spart sich den Flug aus China und den Zoll. Die zwei langen Funkstillen von oben fallen weg, die Sendungsverfolgung beginnt in Europa.
+Nicht jedes Paket kommt aus China. Für die Sendungsverfolgung heißt das: Ein Paket aus einem Lager in der EU spart sich den Flug aus China und den Zoll. Die zwei langen Funkstillen von oben fallen weg, die Sendungsverfolgung beginnt in Europa.
 
 Auch beim Geld ändert sich etwas. Für Waren, die beim Kauf schon in der EU liegen, gibt es laut EU-Kommission keine Zollformalitäten, und die Mehrwertsteuer steckt schon im Preis. AliExpress sagt dasselbe über Verkäufer, die aus einem Lager in deinem Land verschicken: Dann musst du keine zusätzlichen Zölle und Steuern zahlen.
 
@@ -173,8 +171,6 @@ Bildschirme, Status, Gutschriften und Reklamationen der Shops selbst: [AliExpres
 - [AliExpress: Shows delivered, not received](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – erst der Paketdienst im Zielland
 - [AliExpress: AliExpress-Verpflichtung](https://de.aliexpress.com/p/service-mindset/index.html) – Choice 6 bis 8 Tage, „Schnelle Lieferung“, 60 bis 120 Tage
 - [AliExpress: Do I have to pay for customs and import taxes?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – Lager im eigenen Land, keine zusätzlichen Zölle und Steuern
-- [Temu Deutschland: Versandinformationen](https://www.temu.com/de/shipping-info.html) – lokale Lager ohne Mindestbestellwert
-- [Temu Österreich: Versandinformationen](https://www.temu.com/at/shipping-info.html) – lokale Lager ohne Mindestbestellwert
 - [Shein Deutschland: Versandinformation](https://de.shein.com/Shipping-Info-a-280.html) – Lieferzeitraum, verschiedene Lager, 45 und 30 Tage
 - [Shein Österreich: Versandinformation](https://at.shein.com/Shipping-Info-a-280.html) – 6 bis 9 Werktage, 45 und 30 Tage
 - [Shein Schweiz: Versandinformation](https://ch.shein.com/Shipping-Info-a-280.html) – 6 bis 8 Werktage, Economy ohne Tracking, 45 und 30 Tage
@@ -184,9 +180,9 @@ Bildschirme, Status, Gutschriften und Reklamationen der Shops selbst: [AliExpres
 - [CSIRO: Happy Lunar New Year](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Neujahrsfest zwischen 21. Januar und 20. Februar
 - [UPU: S10-Standard](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – eine Nummer pro Sendung
 - [Universal Parcel Scraper: Paketdienst-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Nummernformen, Statustexte
-- [DHL Group: Absichtserklärung mit Temu](https://www.prnewswire.co.uk/news-releases/dhl-group-and-temu-sign-memorandum-of-understanding-to-support-local-businesses-302419680.html) – Luftfracht und Zustellung für Temu, Unterstützung des Local-to-Local-Modells
+- [DHL Group: Absichtserklärung mit Temu](https://www.prnewswire.co.uk/news-releases/dhl-group-and-temu-sign-memorandum-of-understanding-to-support-local-businesses-302419680.html) – Luftfracht und Zustellung für Temu
 - [echo24: Pakete von Temu und Co.](https://www.echo24.de/welt/lawinenartiges-wachstum-bei-paketen-von-temu-und-co-auch-deutschland-betroffen-zr-93477021.html) – Hermes-Sprecherin zum Etikett mit vier Barcodes
-- [APA-OTS: Temu und die Österreichische Post](https://www.ots.at/presseaussendung/OTS_20250731_OTS0021/temu-und-die-austrian-post-vertiefen-ihre-partnerschaft-und-fuehren-einen-abhol-und-zustelldienst-ein) – Zusammenarbeit seit 2023, lokale Verkäufer und Lagerhäuser, bis zu 80 Prozent
+- [APA-OTS: Temu und die Österreichische Post](https://www.ots.at/presseaussendung/OTS_20250731_OTS0021/temu-und-die-austrian-post-vertiefen-ihre-partnerschaft-und-fuehren-einen-abhol-und-zustelldienst-ein) – Temu-Pressemitteilung, Zusammenarbeit seit 2023
 - [DHL: Bedeutung des Sendungsstatus](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Weitertransport zu DHL
 - [DHL: Sendungsstatus international](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Zollabfertigung, einige Werktage
 - [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – 3 € je Warenart, meist schon im Shop

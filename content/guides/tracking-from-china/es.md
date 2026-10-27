@@ -4,7 +4,7 @@ description: Qué significan los estados de Cainiao, por qué se para el seguimi
 slug: seguimiento-paquete-de-china
 picture: Un avión traza un arco punteado sobre el globo, de un marcador rojo al marcador verde de casa, y Pip viaja entre dos furgonetas.
 published: 2026-10-09
-updated: 2026-10-17
+updated: 2026-10-27
 ---
 
 Un paquete de AliExpress, Temu o Shein cambia de manos por el camino: una empresa logística china lo saca del país, la Aduana lo revisa al llegar y [Correos](carrier:correos-spain) u otra empresa de reparto te lo entrega, a menudo con otro número. Cada una solo escanea su tramo, así que es normal pasar hasta 11 días sin un primer escaneo, no ver nada durante el vuelo y volver a esperar cuando ya ha llegado al país de destino. Sigue primero el número de la tienda y luego el de la empresa de reparto. Con el envío más barato, el seguimiento puede cortarse ahí para siempre. Lo que sale de un almacén en la UE se ahorra el vuelo desde China y el arancel.
@@ -30,7 +30,7 @@ Cuando un pedido parece atascado «en tránsito», el paquete suele estar entre 
 
 - **Antes del primer escaneo.** AliExpress y Cainiao dicen que el seguimiento suele tardar hasta 11 días en aparecer desde que el vendedor lo envía. Mientras tanto, Cainiao muestra `Not Found`. ¿Han pasado 12 días desde el envío y nada? Escribe al vendedor.
 - **En la aduana.** Una vez aterrizado, espera al despacho (siguiente apartado).
-- **Con envío económico.** La web de Cainiao en español lo deja claro: «El seguimiento con envío económico solo se actualiza a la entrega al transportista del país/región de destino». A partir de ahí, te pide que preguntes a ese transportista. Temu avisa de que el último tramo puede hacerlo una empresa local y de que, por eso, quizá no haya seguimiento en todos los pasos.
+- **Con envío económico.** La web de Cainiao en español lo deja claro: «El seguimiento con envío económico solo se actualiza a la entrega al transportista del país/región de destino». A partir de ahí, te pide que preguntes a ese transportista.
 - **En los festivos chinos.** Los días festivos en China, como el Año Nuevo chino (a finales de enero o en febrero) y la Fiesta Nacional (la primera semana de octubre), pueden retrasar la gestión y el despacho de aduanas. Para las fiestas de octubre de 2026, SF International avisó de que algunos puertos dejarían de despachar envíos postales de particulares.
 
 ¿Más que parado, va con retraso? Cuando pase el plazo de entrega de tu pedido, mira más abajo cuándo pedir el reembolso. Más sobre estos huecos en [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
@@ -61,10 +61,9 @@ Así los escriben Cainiao y las empresas chinas, en inglés:
 
 ## ¿Por qué ha cambiado mi número de seguimiento?
 
-Hay tres motivos habituales:
+Hay dos motivos habituales:
 
 - **AliExpress ha agrupado tus pedidos.** Según AliExpress, si varios pedidos pasan a compartir un número nuevo es que les han mejorado el envío.
-- **Un pedido, varios paquetes.** Temu da a cada paquete su propio plazo de entrega, y su número de seguimiento cuando está listo.
 - **Una empresa de aquí ha tomado el relevo** con su propia etiqueta y su propio número. Cainiao muestra ese número en su página de seguimiento cuando lo publica. A partir de ahí, consulta la web de esa empresa.
 
 Los números postales son la excepción. La Unión Postal Universal solo permite un identificador S10 por envío, así que un número de China Post suele funcionar también en el localizador de Correos.
@@ -100,7 +99,7 @@ Si en el seguimiento aparece una empresa de reparto de aquí, como [Ecoscooting]
 
 ## Enviado desde un almacén en Europa: ¿qué cambia?
 
-No todo sale de China. En su página de envíos para España, Temu menciona los productos enviados por almacenes locales, que no tienen un importe mínimo por pedido. Temu acepta además vendedores locales: en Europa desde 2024, también en España, y hoy su programa para ellos está abierto en más de 35 mercados. Shein marca con «Almacén UE» los artículos que pueden salir de un almacén en Europa. Lo demás sale de fuera de Europa, y Shein avisa de que eso puede retrasar el pedido.
+No todo sale de China. Shein marca con «Almacén UE» los artículos que pueden salir de un almacén en Europa. Lo demás sale de fuera de Europa, y Shein avisa de que eso puede retrasar el pedido.
 
 Para el seguimiento, un paquete que sale de un almacén en Europa no hace el vuelo desde China. Ese largo silencio desaparece y el seguimiento empieza ya en Europa.
 
@@ -114,7 +113,6 @@ Depende del envío que hayas pagado. Cainiao cuenta días naturales; Shein, día
 | --- | --- |
 | AliExpress | Un plazo para cada pedido, en la página del producto y en la del pedido |
 | Líneas de Cainiao | Premium, de 5 a 10 días a países como España; Standard, de 10 a 18; Economy, de 20 a 45 |
-| Temu | De 1 a 3 días para preparar el pedido, y luego un plazo para cada paquete cuando sale |
 | Shein España | De 1 a 3 días para preparar el pedido. Luego, Estándar, de 8 a 11 días laborables; Exprés, de 7 a 10; punto de recogida, de 8 a 11; Económico, de 10 a 12 |
 
 ¿Es un regalo de Navidad? Pídelo pronto y mira [las fechas límite de Navidad](guide:christmas-posting-dates).
@@ -142,7 +140,6 @@ Sigue este orden:
 | Tienda | No ha llegado | Pone entregado, pero no lo tienes |
 | --- | --- | --- |
 | AliExpress | Abre una disputa desde el día 11 tras el envío hasta 15 días después de que acabe el plazo de entrega | Pregunta primero a la empresa de reparto y luego abre la disputa |
-| Temu | Contacta con atención al cliente en los 90 días siguientes a la fecha del pedido | Igual |
 | Shein | En los 45 días siguientes a la fecha de pago | En los 30 días siguientes a la fecha de entrega que muestra el seguimiento |
 
 En los artículos que llevan en su ficha la etiqueta «Entrega rápida», AliExpress te da un cupón si el pedido se retrasa y el reembolso si no llega en cierto número de días. Sin la etiqueta, el reembolso llega a los 60, 75, 90 o 120 días, según las condiciones de entrega.
@@ -165,9 +162,6 @@ Pantallas, estados, créditos y reclamaciones de cada tienda: [seguimiento de pe
 - [AliExpress: Delivered but not received (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – primero la empresa de reparto
 - [AliExpress: Compromiso de AliExpress](https://es.aliexpress.com/p/service-mindset/index.html) – etiqueta «Entrega rápida», cupón, reembolso, 60–120 días
 - [AliExpress: Do I have to pay for customs and import taxes? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – almacén en tu país, sin aranceles ni impuestos de más
-- [Temu: Shipping info (en inglés)](https://www.temu.com/uk/shipping-info.html) – preparación, plazo por paquete, empresas locales, 90 días
-- [Temu España: Información de envío](https://www.temu.com/es/shipping-info.html) – almacenes locales sin importe mínimo
-- [Temu: Temu Helps European Small Businesses Expand Internationally (en inglés)](https://www.temu.com/about_temu/temu-small-business-insights-report-2026.html) – vendedores locales en Europa desde 2024, también en España, más de 35 mercados
 - [Shein España: Información de envío](https://es.shein.com/Shipping-Info-a-280.html) – preparación y plazos, Almacén UE, Mis Pedidos, 45 y 30 días
 - [Correos: Nota de prensa con AliExpress y Cainiao (2019)](https://www.correos.com/wp-content/uploads/2019/03/2019_03_19-NP-Correos-AliExpress-Cainiao.pdf) – principal operador logístico en España
 - [Xataka Móvil: Temu y Correos](https://www.xatakamovil.com/mercado/temu-ha-encontrado-aliado-perfecto-para-ofrecer-entregas-rapidas-espana-correos) – acuerdo de 2025, cobertura, oficinas

@@ -32,3 +32,27 @@ object AddParcelView {
         return SuggestionLabel(text.toString(), number, marked)
     }
 }
+
+/**
+ * The postcode a field was filled with from those given before. While the field still holds it, it can be forgotten;
+ * then no other fills the field until its details are prepared again. A value, as the Swift struct is: each change
+ * gives a new one.
+ */
+data class PostcodeFill(val postcode: String? = null, val forgotten: Boolean = false) {
+    /** What may fill the field: nothing just after a postcode was forgotten in it. */
+    fun offering(suggestion: String?): String? = if (forgotten) null else suggestion
+
+    /** Filled with `suggestion`, which the field takes as it is. */
+    fun fill(suggestion: String): PostcodeFill = copy(postcode = suggestion)
+
+    fun holds(field: String): Boolean = field.isNotEmpty() && postcode.equalsCanonically(field)
+
+    /** The postcode to forget, when the field still holds it, and the fill once it is forgotten. */
+    fun forget(field: String): Pair<String, PostcodeFill>? {
+        val postcode = postcode?.takeIf { holds(field) } ?: return null
+        return postcode to copy(postcode = null, forgotten = true)
+    }
+
+    /** Another carrier's details: what was given before may fill the field again. */
+    fun prepare(): PostcodeFill = copy(forgotten = false)
+}

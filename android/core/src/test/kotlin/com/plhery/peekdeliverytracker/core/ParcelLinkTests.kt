@@ -48,8 +48,8 @@ import org.junit.Assert.fail
 import org.junit.Test
 
 /**
- * ParcelLinkTests.swift. `DeliveryAPIClient`'s requests go through a recording transport, as through the Swift tests'
- * URL protocol. The tests that go through `ParcelStore` or `DeviceParcelClient` over HTTP keep here what does not need
+ * ParcelLinkTests.swift. `DeliveryAPIClient`'s and `DeviceParcelClient`'s requests go through a recording transport, as
+ * through the Swift tests' URL protocol. The tests that go through `ParcelStore` over HTTP keep here what does not need
  * the app: the bodies those calls send and how their answers read.
  */
 class ParcelLinkTests {
@@ -700,19 +700,54 @@ class ParcelLinkTests {
         assertNull(request.header("Authorization"))
     }
 
-    /** Alerts are `DeviceParcelClient`'s, over OkHttp in the app; this keeps the bodies it sends. */
     @Test
-    fun appAlertsGoWithTheKeyOnlyForTheOwnerAndStopWithTheTokenAlone() {
+    fun appAlertsGoWithTheKeyOnlyForTheOwnerAndStopWithTheTokenAlone() = runTest {
+        var status = 204
+        val transport = RecordingTransport { HttpResponse(status) }
+        val verification = NativeVerification(
+            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
+            TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
+        )
+        val client = DeviceParcelClient.api(configuration = linkConfiguration, transport = transport, verification = verification)
+        val key = "K".repeat(43)
         val alert = ParcelAppAlertRequest(
             token = "a1b2c3d4", environment = NativePushEnvironment.Production, preset = ParcelAlertPreset.All, locale = NativePushLocale.Fr,
         )
-        assertEquals(
-            """{"environment":"production","locale":"fr","preset":"all","token":"a1b2c3d4"}""",
-            body(JsonEncoder.deliveryTracker.encode(ParcelAppAlertRequest.serializer(), alert)),
-        )
-        assertEquals(
-            """{"token":"a1b2c3d4"}""",
-            body(JsonEncoder.deliveryTracker.encode(DeleteParcelAppAlertRequest.serializer(), DeleteParcelAppAlertRequest(token = "a1b2c3d4"))),
-        )
+
+        val owned = client.setAlert(linkId, key, alert)
+        val read = client.setAlert(linkId, null, alert)
+
+        assertEquals(listOf(DeviceAlertAnswer.On, DeviceAlertAnswer.On), listOf(owned, read))
+        assertEquals(listOf("PUT", "PUT"), transport.requests.map { it.method })
+        assertEquals(setOf("https://links.test/api/public/parcels/$linkId/app-alerts"), transport.requests.map { it.url }.toSet())
+        assertEquals(listOf(key, null), transport.requests.map { it.header("X-Parcel-Key") })
+        for (request in transport.requests) {
+            assertFalse(request.handlesCookies)
+            assertNull(request.header("Authorization"))
+            // The bytes the iPhone sends: its keys sorted.
+            assertEquals("""{"environment":"production","locale":"fr","preset":"all","token":"a1b2c3d4"}""", body(request.body ?: ByteArray(0)))
+        }
+
+        for ((code, expected) in listOf(
+            404 to DeviceAlertAnswer.Gone, 409 to DeviceAlertAnswer.Full, 410 to DeviceAlertAnswer.Stopped, 503 to DeviceAlertAnswer.Unavailable,
+        )) {
+            status = code
+            assertEquals("$code", expected, client.setAlert(linkId, null, alert))
+        }
+        status = 429
+        try {
+            client.setAlert(linkId, null, alert)
+            fail("Expected a rate limit")
+        } catch (_: DeliveryApiError.RateLimited) {
+        }
+
+        status = 204
+        val asked = transport.requests.size
+        client.removeAlert(linkId, DeleteParcelAppAlertRequest(token = "a1b2c3d4"))
+        val removal = transport.requests[asked]
+        assertEquals("DELETE", removal.method)
+        assertEquals("https://links.test/api/public/parcels/$linkId/app-alerts", removal.url)
+        assertNull(removal.header("X-Parcel-Key"))
+        assertEquals("""{"token":"a1b2c3d4"}""", body(removal.body ?: ByteArray(0)))
     }
 }

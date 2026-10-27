@@ -150,6 +150,72 @@ internal fun String.lowercased(): String {
     return result.toString()
 }
 
+/**
+ * Swift's `uppercased()`: each scalar's full uppercase mapping on its own (ß is SS), as Swift's standard library has
+ * them (ScalarData.kt) rather than the phone's ICU.
+ */
+internal fun String.uppercased(): String {
+    if (all { it.code < 0x80 }) return uppercase(Locale.ROOT)
+    val result = StringBuilder(length)
+    var index = 0
+    while (index < length) {
+        // A lone surrogate is U+FFFD, as a Swift String holds it.
+        appendUppercase(result, scalarAt(index))
+        index += Character.charCount(codePointAt(index))
+    }
+    return result.toString()
+}
+
+private val uppercaseSpecial: Map<Int, IntArray> by lazy {
+    val entries = ScalarData.uppercaseSpecial
+    val mappings = HashMap<Int, IntArray>()
+    var index = 0
+    while (index < entries.size) {
+        val count = entries[index + 1]
+        mappings[entries[index]] = entries.copyOfRange(index + 2, index + 2 + count)
+        index += 2 + count
+    }
+    mappings
+}
+
+private fun appendUppercase(result: StringBuilder, scalar: Int) {
+    uppercaseSpecial[scalar]?.let { mapping ->
+        mapping.forEach(result::appendCodePoint)
+        return
+    }
+    val runs = ScalarData.uppercaseRuns
+    // The last run that starts at or before the scalar.
+    var low = 0
+    var high = runs.size / 4 - 1
+    var run = -1
+    while (low <= high) {
+        val middle = (low + high) ushr 1
+        if (runs[middle * 4] <= scalar) {
+            run = middle
+            low = middle + 1
+        } else {
+            high = middle - 1
+        }
+    }
+    val first = if (run >= 0) runs[run * 4] else 0
+    if (run >= 0 && scalar <= runs[run * 4 + 1] && (scalar - first) % runs[run * 4 + 2] == 0) {
+        result.appendCodePoint(scalar + runs[run * 4 + 3])
+    } else {
+        result.appendCodePoint(scalar)
+    }
+}
+
+/**
+ * Swift's `hasPrefix` for any prefix: Character by Character, each canonically equivalent to the one it stands for, so
+ * "e\u0301x" does not start with "e" and "\u212AAB" (the Kelvin sign) starts with "K".
+ */
+internal fun String.hasCanonicalPrefix(prefix: String): Boolean {
+    if (prefix.isEmpty()) return true
+    val characters = characters()
+    val start = prefix.characters()
+    return start.size <= characters.size && start.indices.all { characters[it].equalsCanonically(start[it]) }
+}
+
 /** `String.count`. */
 internal val String.characterCount: Int
     get() = if (all { it.code < 0x80 && it != '\r' }) length else characters().size
@@ -301,5 +367,29 @@ internal fun Double.swiftDescription(): String {
         exponent <= 0 -> "0." + "0".repeat(-exponent) + digits
         exponent >= digits.length -> digits + "0".repeat(exponent - digits.length) + ".0"
         else -> digits.substring(0, exponent) + "." + digits.substring(exponent)
+    }
+}
+
+// ASCII digits alone, as Swift reads them: `\d` would take any script's.
+private val swiftDecimal = Regex("^[+-]?(?:[0-9]+\\.?[0-9]*|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$")
+// A lowercase x only; the exponent is optional.
+private val swiftHexadecimal = Regex("^[+-]?0x(?:[0-9a-fA-F]+\\.?[0-9a-fA-F]*|\\.[0-9a-fA-F]+)(?:[pP][+-]?[0-9]+)?$")
+private val swiftInfinity = Regex("^[+-]?[iI][nN][fF](?:[iI][nN][iI][tT][yY])?$")
+// Any case, with a payload of decimal digits, or of hexadecimal ones after a lowercase 0x.
+private val swiftNan = Regex("^[+-]?[sS]?[nN][aA][nN](?:\\((?:[0-9]*|0x[0-9a-fA-F]*)\\))?$")
+
+/**
+ * Swift's `Double(_:)` on a String: the text up to any NUL, whole, without spaces; decimal or hexadecimal (`0x1.8p1`),
+ * inf, infinity, nan and snan in any case. Too large a number is infinite and too small one zero, rather than nil.
+ */
+internal fun swiftDouble(value: String): Double? {
+    val text = value.substringBefore('\u0000')
+    return when {
+        swiftDecimal.matches(text) -> text.toDouble()
+        // The JVM wants an exponent on a hexadecimal number.
+        swiftHexadecimal.matches(text) -> (if ('p' in text || 'P' in text) text else text + "p0").toDouble()
+        swiftInfinity.matches(text) -> if (text.startsWith('-')) Double.NEGATIVE_INFINITY else Double.POSITIVE_INFINITY
+        swiftNan.matches(text) -> Double.NaN
+        else -> null
     }
 }

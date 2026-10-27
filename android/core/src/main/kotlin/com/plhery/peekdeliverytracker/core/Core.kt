@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
@@ -17,13 +18,17 @@ import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 import java.util.regex.Pattern
+import kotlin.math.floor
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.StructureKind
 import kotlinx.serialization.json.Json
@@ -541,8 +546,14 @@ object DateParser {
 
     private val isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).withZone(ZoneOffset.UTC)
 
-    /** ISO8601DateFormatter's default: whole seconds, in UTC. */
-    fun isoString(date: Instant): String = isoFormatter.format(date)
+    /**
+     * ISO8601DateFormatter's default: whole seconds, in UTC. The formatter first takes the date to its nearest
+     * millisecond, a half going up, so 0.9995 s past a second writes the next one.
+     */
+    fun isoString(date: Instant): String {
+        val milliseconds = floor((date.timeIntervalSinceReferenceDate + 978_307_200.0) * 1000.0 + 0.5).toLong()
+        return isoFormatter.format(Instant.ofEpochMilli(milliseconds))
+    }
 }
 
 /**
@@ -551,9 +562,11 @@ object DateParser {
  * written `\/`, control characters are escaped and the rest written as it is (a lone surrogate, which a Swift String
  * cannot hold, as U+FFFD), and numbers as Swift prints a Double.
  * The keys follow the declaration unless sorted, by their Unicode scalars: Swift's own unsorted order is a hash order no
- * two runs share.
+ * two runs share. With `swiftKeys` they are the Swift models' own names, which the iPhone app writes to its files: the
+ * contract's snake_case names `convertFromSnakeCase` (`tracking_url` is `trackingUrl`), where the serial names are the
+ * server's.
  */
-class JsonEncoder(private val sortedKeys: Boolean = false) {
+class JsonEncoder(private val sortedKeys: Boolean = false, private val swiftKeys: Boolean = false) {
     fun <T> encode(serializer: SerializationStrategy<T>, value: T): ByteArray {
         val element = tree.encodeToJsonElement(serializer, value).asSwiftWrites(serializer.descriptor)
         return StringBuilder().also { it.write(element) }.toString().toByteArray(Charsets.UTF_8)
@@ -566,7 +579,8 @@ class JsonEncoder(private val sortedKeys: Boolean = false) {
             for (index in 0 until descriptor.elementsCount) {
                 val name = descriptor.getElementName(index)
                 val field = this[name]
-                if (field != null) fields[name] = field.asSwiftWrites(descriptor.getElementDescriptor(index)) else if (nil) fields[name] = JsonNull
+                val key = if (swiftKeys) convertFromSnakeCase(name) else name
+                if (field != null) fields[key] = field.asSwiftWrites(descriptor.getElementDescriptor(index)) else if (nil) fields[key] = JsonNull
             }
             JsonObject(fields)
         }
@@ -650,4 +664,88 @@ class JsonEncoder(private val sortedKeys: Boolean = false) {
             explicitNulls = false
         }
     }
+}
+
+/**
+ * Foundation's `convertFromSnakeCase` on a key: "tracking_url" is "trackingUrl". The underscores at either end stay, a
+ * key with none between its words is left as it is, the first word is lowercased and each word after it capitalized.
+ */
+internal fun convertFromSnakeCase(key: String): String {
+    if ('_' !in key) return key
+    val characters = key.characters()
+    val first = characters.indexOfFirst { it != "_" }
+    if (first < 0) return key
+    var last = characters.size - 1
+    while (last > first && characters[last] == "_") last--
+    val words = mutableListOf<String>()
+    val word = StringBuilder()
+    for (character in characters.subList(first, last + 1)) {
+        if (character != "_") {
+            word.append(character)
+        } else if (word.isNotEmpty()) {
+            words += word.toString()
+            word.setLength(0)
+        }
+    }
+    if (word.isNotEmpty()) words += word.toString()
+    if (words.size == 1) return key
+    val joined = words[0].lowercased() + words.drop(1).joinToString("") { it.capitalizedWord() }
+    return characters.subList(0, first).joinToString("") + joined + characters.subList(last + 1, characters.size).joinToString("")
+}
+
+/**
+ * Foundation's `capitalized` on one word of a key: each run of letters starts with its capital and goes on in lower
+ * case, so a digit or a dot starts another ("b2c" is "B2C"). Keys outside ASCII follow the JVM's case mappings.
+ */
+private fun String.capitalizedWord(): String {
+    val result = StringBuilder(length)
+    var inWord = false
+    var index = 0
+    while (index < length) {
+        val scalar = codePointAt(index)
+        val text = String(Character.toChars(scalar))
+        result.append(
+            when {
+                inWord -> text.lowercase(Locale.ROOT)
+                scalar == 0xDF -> "Ss"
+                else -> String(Character.toChars(Character.toTitleCase(scalar)))
+            },
+        )
+        val type = Character.getType(scalar).toByte()
+        inWord = Character.isLetter(scalar) || (inWord && (type == Character.NON_SPACING_MARK || type == Character.COMBINING_SPACING_MARK))
+        index += Character.charCount(scalar)
+    }
+    return result.toString()
+}
+
+/**
+ * `JSONDecoder.deliveryTracker`: each key, `convertFromSnakeCase`, finds the property whose serial name converts to the
+ * same, so the server's answers and what the iPhone app writes with its models' keys (`JsonEncoder`'s `swiftKeys`) read
+ * alike. A key of no property is skipped, as the decoder skips it, and of two keys that convert alike the first is
+ * read; the values are then read as ApiJson reads them.
+ */
+internal fun <T> decodeSwiftKeys(deserializer: DeserializationStrategy<T>, data: ByteArray): T {
+    val text = jsonText(data) ?: throw SerializationException("The data is not text.")
+    return ApiJson.decodeFromJsonElement(deserializer, ApiJson.parseToJsonElement(text).withSerialNames(deserializer.descriptor))
+}
+
+private fun JsonElement.withSerialNames(descriptor: SerialDescriptor): JsonElement = when {
+    this is JsonObject && descriptor.kind == StructureKind.CLASS -> {
+        val names = HashMap<String, Int>()
+        for (index in 0 until descriptor.elementsCount) names[convertFromSnakeCase(descriptor.getElementName(index))] = index
+        val fields = LinkedHashMap<String, JsonElement>()
+        for ((key, value) in this) {
+            val index = names[convertFromSnakeCase(key)] ?: continue
+            val name = descriptor.getElementName(index)
+            if (name !in fields) fields[name] = value.withSerialNames(descriptor.getElementDescriptor(index))
+        }
+        JsonObject(fields)
+    }
+    this is JsonObject && descriptor.kind == StructureKind.MAP ->
+        JsonObject(mapValues { it.value.withSerialNames(descriptor.getElementDescriptor(1)) })
+    this is JsonArray && descriptor.kind == StructureKind.LIST -> JsonArray(map { it.withSerialNames(descriptor.getElementDescriptor(0)) })
+    // A number or a Bool in quotes is a string to JSONDecoder, where ApiJson would read what the quotes hold.
+    this is JsonPrimitive && isString && descriptor.kind is PrimitiveKind && descriptor.kind != PrimitiveKind.STRING ->
+        throw SerializationException("Expected ${descriptor.serialName}, found a string.")
+    else -> this
 }

@@ -3,8 +3,9 @@
 // phone's (Unicode 13 on Android 12, the oldest the app runs on). General_Category=Format, which
 // `ParcelLinkWords.clean` drops, and what Normalization.kt needs to normalize text as Swift compares it: every scalar's
 // canonical combining class, the scalars whose normalization Unicode 13 does not know, and the canonical
-// decompositions added since. The categories, classes and ages are the standard library's own; the decompositions,
-// which it does not show, come from its version's data files and are checked against its `==`.
+// decompositions added since; and each scalar's full uppercase mapping, which `String.uppercased()` joins. The
+// categories, classes, ages and mappings are the standard library's own; the decompositions, which it does not show,
+// come from its version's data files and are checked against its `==`.
 //
 // Run it on a Mac from the repository root: `swift android/tools/ScalarData.swift`. It downloads the data files from
 // unicode.org. Run it again after each major macOS release, whose Swift is that year's iOS one, as GraphemeData.swift;
@@ -125,6 +126,56 @@ for composite in added {
     if excluded.contains(composite) { exclusions.append(String(format: "0x%05X", composite)) }
 }
 
+// Every scalar's full uppercase mapping where it is not the scalar itself. One scalar to one is written as runs: the
+// scalars from a first to a last, every one or every other, each the same distance from its capital. Nothing else that
+// has a mapping lies inside a run, so a lookup finds the last run starting at or before the scalar. The rest map to
+// more than one scalar.
+var upperRuns: [(first: Int, last: Int, stride: Int, delta: Int)] = []
+var upperSpecial: [(scalar: Int, mapping: [Int])] = []
+var upperSingle: [(scalar: Int, delta: Int)] = []
+var mapped = Set<Int>()
+for value in 0...0x10FFFF {
+    guard let scalar = Unicode.Scalar(value) else { continue }
+    let mapping = scalar.properties.uppercaseMapping.unicodeScalars.map { Int($0.value) }
+    if mapping == [value] { continue }
+    mapped.insert(value)
+    if mapping.count == 1 { upperSingle.append((value, mapping[0] - value)) } else { upperSpecial.append((value, mapping)) }
+}
+var single = 0
+while single < upperSingle.count {
+    let first = upperSingle[single]
+    var last = first.scalar
+    var stride = 0
+    var next = single + 1
+    while next < upperSingle.count, upperSingle[next].delta == first.delta {
+        let step = upperSingle[next].scalar - last
+        guard step == 1 || step == 2, stride == 0 || step == stride else { break }
+        stride = step
+        last = upperSingle[next].scalar
+        next += 1
+    }
+    upperRuns.append((first.scalar, last, max(stride, 1), first.delta))
+    single = next
+}
+// Check the runs against the standard library, scalar by scalar, looked up as FoundationText.kt does.
+let specials = Dictionary(uniqueKeysWithValues: upperSpecial.map { ($0.scalar, $0.mapping) })
+for value in 0...0x10FFFF {
+    guard let scalar = Unicode.Scalar(value) else { continue }
+    let expected = scalar.properties.uppercaseMapping.unicodeScalars.map { Int($0.value) }
+    var found: [Int] = [value]
+    var low = 0, high = upperRuns.count - 1, run = -1
+    while low <= high {
+        let middle = (low + high) / 2
+        if upperRuns[middle].first <= value { run = middle; low = middle + 1 } else { high = middle - 1 }
+    }
+    if let special = specials[value] {
+        found = special
+    } else if run >= 0, value <= upperRuns[run].last, (value - upperRuns[run].first) % upperRuns[run].stride == 0 {
+        found = [value + upperRuns[run].delta]
+    }
+    if found != expected { fatalError("The uppercase runs give \(hex(value)) the wrong mapping") }
+}
+
 func lines(_ items: [String], perLine: Int) -> String {
     stride(from: 0, to: items.count, by: perLine)
         .map { "        " + items[$0..<min($0 + perLine, items.count)].joined(separator: ", ") + "," }
@@ -173,8 +224,22 @@ internal object ScalarData {
 
     /** Those of them that never compose (Full_Composition_Exclusion). */
     val compositionExclusions = intArrayOf(\(exclusions.joined(separator: ", ")))
+
+    /**
+     * Each scalar's full uppercase mapping (`properties.uppercaseMapping`) where it is one scalar other than itself, as
+     * runs in order, four numbers each: the first scalar, the last, the step between them (1, or 2 for every other
+     * one) and what is added to each to make its capital. No other scalar with a mapping lies inside a run.
+     */
+    val uppercaseRuns = intArrayOf(
+\(lines(upperRuns.map { String(format: "0x%05X, 0x%05X, %d, %d", $0.first, $0.last, $0.stride, $0.delta) }, perLine: 3))
+    )
+
+    /** The scalars whose uppercase mapping is more than one scalar, in order: the scalar, how many, then those. */
+    val uppercaseSpecial = intArrayOf(
+\(lines(upperSpecial.map { ([String(format: "0x%05X", $0.scalar), "\($0.mapping.count)"] + $0.mapping.map { String(format: "0x%05X", $0) }).joined(separator: ", ") }, perLine: 4))
+    )
 }
 
 """
 try source.write(to: output, atomically: true, encoding: .utf8)
-print("Wrote Unicode \(version) to \(output.path): \(format.count / 2) format ranges, \(classRuns.count) class runs, \(delta.count) delta scalars, \(added.count) decompositions")
+print("Wrote Unicode \(version) to \(output.path): \(format.count / 2) format ranges, \(classRuns.count) class runs, \(delta.count) delta scalars, \(added.count) decompositions, \(upperRuns.count) uppercase runs, \(upperSpecial.count) longer uppercase mappings")

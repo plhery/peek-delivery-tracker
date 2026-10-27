@@ -979,12 +979,13 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// the entry. German and Dutch join theirs into one word: Abholcode, Sendungsnummer. French,
     /// Spanish, Italian and Portuguese name what the number tracks after a preposition ("N° de suivi",
     /// "número de seguimiento", "numero di tracciamento"), Polish after the word ("numer przesyłki"),
-    /// and the tracking word can stand alone ("Suivi"). "N°" can touch its digits.
+    /// and the tracking word can stand alone ("Suivi"), as can a courier's word for its waybill ("AWB",
+    /// "Guía"). An abbreviated "No." can follow the label ("AWB No."), and "N°" can touch its digits.
     private static let entryLabelPattern: String = {
-        let tracked = "suivi|seguimiento|tracciamento|rastreio|rastreamento|tracking"
+        let tracked = "suivi|seguimiento|rastreo|tracciamento|rastreio|rastreamento|tracking|waybill|awb|guía|guia"
         return "^(?:\\p{L}+\\s+)?(?:(?:\\p{L}*(?:code|nummer)|number|numer|numero|número|numéro|nr|n\\.?[°º]|kod|codice|codigo|código)"
             + "(?:\\s+(?:(?:de|du|del|di|do|da)\\s+(?:\(tracked)|colis|envío|envio|spedizione)|przesyłki|paczki))?|\(tracked))"
-            + "(?:[.:#\\s]+|(?<=[°º]))(?=[0-9])([\\s\\S]*)"
+            + "(?:\\s+(?:no|nr)\\.)?(?:[.:#\\s]+|(?<=[°º]))(?=[0-9])([\\s\\S]*)"
     }()
 
     /// The number a short entry holds whole, groups a label prints apart included, as in
@@ -1677,14 +1678,14 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         return readings.filter { matches($0, pattern: "^(?:91[0-9]{2}9|92[0-9]{3}9|93[0-9]{3}[0-8]|9[45])") }.count == 1
     }
 
-    /// A number introduced by a "tracking number:" style label, as the web engine reads it.
+    /// A number introduced by a "tracking number:" or "Waybill No." style label, as the web engine reads it.
     /// "No" and "ID" also start numbers, so they belong to the label only when they stand
     /// apart from what follows. The token holds a digit, so a label followed by a plain
     /// word does not end the search.
     private static let labelledNumberPattern: String = {
         let suffix = "(?:numbers?(?![A-Z])|no\\.|(?:no|id)(?![A-Z0-9.]))"
         return "(?:track(?:ing)?(?:\\s*\(suffix)|(?![A-Z]))"
-            + "|(?:parcel|shipment)(?:\\s+(?:tracking(?![A-Z])|\(suffix))|(?![A-Z])))"
+            + "|(?:parcel|shipment|waybill|awb)(?:\\s+(?:tracking(?![A-Z])|\(suffix))|(?![A-Z])))"
             + "(?:\\s+is(?![A-Z0-9]))?\\s*[:#-]?\\s*"
             + "((?=[A-Z0-9.-]{0,39}\\d)[A-Z0-9][A-Z0-9.-]{3,39})"
     }()

@@ -757,6 +757,10 @@ final class CarrierCatalogTests: XCTestCase {
             ("numero di tracciamento 12345678", "12345678"),
             ("n.º de rastreio 12345678", "12345678"),
             ("Numer przesyłki 12345678", "12345678"),
+            ("Número de rastreo: 12345678", "12345678"),
+            ("Número de guía 12345678", "12345678"),
+            ("Guía: 12345678", "12345678"),
+            ("WAYBILL 1234567890", "1234567890"),
         ] {
             let parsed = catalog.parse(text)
             XCTAssertEqual(parsed.trackingNumber, number, text)

@@ -26943,6 +26943,22 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "a-tu-hora-express",
+      "requirements": [
+        {
+          "field": "dpdPostcode",
+          "whenTrackingNumber": "^(?:[0-9]{10}|[0-9]{16})$",
+          "validator": "internationalPostcode",
+          "optional": true,
+          "label": "Delivery postcode",
+          "type": "text",
+          "placeholder": "12345",
+          "help": "Optional. A Tu Hora Express shows a 10- or 16-digit code only with its five-digit delivery postcode. Without it, other sources are asked.",
+          "pattern": "^[0-9]{5}$",
+          "maxLength": 5,
+          "inputMode": "numeric",
+          "autoComplete": "postal-code"
+        }
+      ],
       "recognitionRank": 847,
       "recognitionPattern": "^\\d{24}$"
     },

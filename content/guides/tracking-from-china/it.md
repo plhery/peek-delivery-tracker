@@ -4,7 +4,7 @@ description: Perché il tracking di AliExpress, Temu e Shein resta fermo o cambi
 slug: tracciare-pacco-dalla-cina
 picture: Un aereo traccia un arco tratteggiato sul globo, da una puntina rossa a quella verde di casa, e Pip viaggia tra due furgoni.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Un pacco AliExpress, Temu o Shein passa di mano più volte: un'azienda logistica cinese lo manda in aereo verso l'Europa, la dogana lo controlla e alla fine te lo consegnano [Poste Italiane](carrier:poste-italiane), un corriere o, in Ticino, [la Posta](carrier:swiss-post), spesso con un codice nuovo. Ognuno scansiona solo il suo tratto, quindi metti in conto fino a 11 giorni prima del primo aggiornamento, nessuna notizia durante il volo e un'attesa dopo «arrivato nel paese di destinazione». Segui il tracking del negozio, poi quello del corriere locale: con le spedizioni più economiche il tracking può fermarsi lì per sempre. Un articolo spedito da un magazzino nell'UE salta il volo e, in Italia, anche la dogana.
@@ -86,7 +86,7 @@ Oltre a Cainiao vedrai [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Su
 | `3A5V` + 9 cifre | CNE |
 | `SF` + 13 cifre | SF Express |
 
-Incolla uno dei due codici su [Peek](/): riconosce il corriere tra più di 3.500. Per i codici in generale, leggi [come capire il corriere dal numero di tracking](guide:tracking-number-formats).
+Incolla uno dei due codici su [Peek](/), che trova il corriere tra più di 3.500. Per i codici in generale, leggi [come capire il corriere dal numero di tracking](guide:tracking-number-formats).
 
 ## Con quale corriere spediscono AliExpress, Temu e Shein?
 
@@ -94,7 +94,7 @@ Dipende dalla linea di spedizione:
 
 | Dove | Chi puoi trovare nell'ultimo tratto |
 | --- | --- |
-| Italia | Poste Italiane per gli invii postali, quelli con il codice che finisce in `CN`: li sdogana Poste e li segui su Cerca spedizioni. Secondo la stampa di settore, Poste e Temu hanno firmato un protocollo d'intesa che prevede, tra l'altro, più capacità di smistamento. Altrimenti un corriere privato, con un codice suo; su Shein puoi scegliere anche un locker o un punto di ritiro. |
+| Italia | Poste Italiane per gli invii postali, quelli con il codice che finisce in `CN`: li sdogana Poste e li segui su Cerca spedizioni. Altrimenti un corriere privato, con un codice suo; su Shein puoi scegliere anche un locker o un punto di ritiro. |
 | Ticino | La Posta, che sdogana lettere, pacchi e invii EMS arrivati per posta o attraverso la rete di [GLS](carrier:gls-ch). |
 
 ## Spedito da un magazzino in Europa: cosa cambia?
@@ -168,13 +168,12 @@ Schermate, stati, crediti e reclami di ogni negozio: [tracciare un ordine AliExp
 - [Yanwen: sito ufficiale (in cinese)](https://www.yw56.com.cn/) – linee Temu e AliExpress
 - [CNE: sito ufficiale (in cinese)](https://www.cne.com/) – Temu tra i clienti
 - [SF International: avvisi di servizio (in cinese)](https://www.sf-international.com/cn/sc) – festività 2026
-- [Consiglio di Stato cinese: festività 2026 (in cinese)](https://www.news.cn/politics/20251104/88bcffd88ae249e58c699b8772548e3d/c.html) – Capodanno cinese a febbraio, festa nazionale dal 1° al 7 ottobre
+- [Consiglio di Stato cinese: festività 2026 (in cinese)](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Capodanno cinese a febbraio, festa nazionale dal 1° al 7 ottobre
 - [CSIRO: Happy Lunar New Year (in inglese)](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Capodanno cinese tra il 21 gennaio e il 20 febbraio
 - [UPU: standard S10 (in inglese)](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – un solo codice per invio
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei codici, stati
 - [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – sdoganamento degli invii postali, 3 € per articolo, IVA, tracking dalla presa in carico in Italia
 - [Poste Italiane: Cerca spedizioni, legenda degli stati](https://www.poste.it/cerca/views/risultati-spedizioni.html) – In attesa di sdoganamento
-- [Supply Chain Italy: Poste Italiane e Temu potenziano la collaborazione](https://www.supplychainitaly.it/2025/11/19/poste-italiane-e-temu-potenziano-la-collaborazione-in-italia/) – protocollo d'intesa
 - [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce doganale, non per pezzo
 - [Commissione europea: Buying goods online coming from a non-EU country (in inglese)](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – merce già nell'UE: niente formalità doganali, IVA nel prezzo
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026

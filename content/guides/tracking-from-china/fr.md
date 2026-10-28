@@ -4,7 +4,7 @@ description: Pourquoi le suivi AliExpress, Temu ou Shein ne bouge plus ou change
 slug: suivi-colis-chine-aliexpress-temu-shein
 picture: Au-dessus du globe, un avion file en pointillés d'un repère rouge au repère vert de la maison, et Pip voyage entre deux camionnettes.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Un colis AliExpress, Temu ou Shein change de mains en route : une société logistique chinoise l'expédie hors de Chine, la douane le contrôle à l'arrivée, puis ta poste ou un transporteur local le livre, souvent sous un nouveau numéro. Chacun ne scanne que sa part du trajet. Le premier scan peut mettre jusqu'à 11 jours à apparaître, le suivi reste muet pendant le vol, et il faut encore patienter après « arrivé dans le pays de destination ». Suis le numéro donné par la boutique, puis celui du transporteur local. En livraison économique, le suivi peut s'arrêter pour de bon à ce passage de relais. Un article expédié depuis un entrepôt dans l'UE évite l'avion et, en France et en Belgique, la douane.
@@ -170,7 +170,7 @@ Les écrans, statuts, crédits et réclamations propres à chaque boutique : [su
 - [Shein Europe (Belgique) : Garantie de livraison à temps](https://euqs.shein.com/faq/detail?id=138135&language=fr) – 500 points
 - [Yanwen : accueil (en chinois)](https://www.yw56.com.cn/) – lignes par transporteur et par plateforme
 - [SF International : avis de service (en chinois)](https://www.sf-international.com/cn/sc) – fêtes de 2026
-- [Conseil des affaires d'État chinois : jours fériés 2026 (en chinois)](https://www.news.cn/politics/20251104/88bcffd88ae249e58c699b8772548e3d/c.html) – Nouvel An chinois en février, fête nationale du 1er au 7 octobre
+- [Conseil des affaires d'État chinois : jours fériés 2026 (en chinois)](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Nouvel An chinois en février, fête nationale du 1er au 7 octobre
 - [CSIRO : Happy Lunar New Year (en anglais)](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Nouvel An chinois entre le 21 janvier et le 20 février
 - [UPU : norme S10 (en anglais)](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – un seul numéro par envoi
 - [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes de numéros, libellés

@@ -4,7 +4,7 @@ description: Warum die Sendungsverfolgung aus China tagelang stehen bleibt oder 
 slug: paket-aus-china-verfolgen
 picture: Ein Flugzeug zieht einen gepunkteten Bogen über den Globus, von einer roten Stecknadel zu einer grünen am Ziel, und Pip reist zwischen zwei Lieferwagen.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Ein Paket von AliExpress, Temu oder Shein geht durch mehrere Hände: Ein chinesisches Logistikunternehmen schickt es per Flugzeug los, der Zoll prüft es, und bei dir stellt es die Post, [DHL](carrier:dhl) oder ein anderer Paketdienst zu, oft unter einer neuen Nummer. Jeder scannt nur seine eigene Etappe. Rechne also mit bis zu 11 Tagen bis zum ersten Scan, mit Funkstille während des Flugs und mit Wartezeit nach „Arrived at destination country“. Verfolge erst die Nummer aus dem Shop, dann die des Paketdienstes vor Ort. Beim billigsten Versand ist an dieser Übergabe manchmal endgültig Schluss mit der Sendungsverfolgung. Ware aus einem Lager in der EU spart sich den Flug, in Deutschland und Österreich auch den Zoll.
@@ -101,8 +101,8 @@ Das hängt von der Versandlinie ab, die der Verkäufer bucht. Den Namen des Pake
 
 | Land | Wer dir das Paket bringt |
 | --- | --- |
-| Deutschland | Postsendungen von China Post (zwei Buchstaben, neun Ziffern, `CN`) verzollt die Deutsche Post für dich und stellt sie zu. Sonst oft DHL: Laut DHL Group (2025) übernehmen ihre Sparten für Temu schon Luftfracht und Zustellung, und Yanwen verkauft eine eigene DHL-Linie nach Deutschland. Auch [Hermes](carrier:hermes-de) stellt solche Pakete zu: Ende 2024 sagte eine Hermes-Sprecherin gegenüber BuzzFeed News Deutschland, internationale Pakete von Temu, Shein und AliExpress bekämen ein eigenes Etikett mit vier Barcodes. |
-| Österreich | Postsendungen aus Nicht-EU-Ländern verzollt die Österreichische Post für dich und stellt sie zu. Laut einer Temu-Pressemitteilung von 2025 arbeiten Temu und die Post seit 2023 eng zusammen. |
+| Deutschland | Postsendungen von China Post (zwei Buchstaben, neun Ziffern, `CN`) verzollt die Deutsche Post für dich und stellt sie zu. Sonst zum Beispiel DHL: Yanwen verkauft eine eigene DHL-Linie nach Deutschland. |
+| Österreich | Postsendungen aus Nicht-EU-Ländern verzollt die Österreichische Post für dich und stellt sie zu. Im November 2023 gab die Post eine Kooperation mit Temu für die Zustellung in Österreich bekannt. |
 | Schweiz | Die Schweizerische Post verzollt alles, was per Post oder über das Netz von [GLS](carrier:gls-ch) in die Schweiz kommt. Shein-Pakete mit Economy-Versand haben derzeit keine Sendungsverfolgung. |
 
 ## Versand aus einem Lager in der EU: Was ändert sich?
@@ -176,13 +176,11 @@ Bildschirme, Status, Gutschriften und Reklamationen der Shops selbst: [AliExpres
 - [Shein Schweiz: Versandinformation](https://ch.shein.com/Shipping-Info-a-280.html) – 6 bis 8 Werktage, Economy ohne Tracking, 45 und 30 Tage
 - [Yanwen: Startseite](https://www.yw56.com.cn/) – Deutschland-DHL-Linie, Linien für Temu und AliExpress
 - [SF International: Hinweise](https://www.sf-international.com/cn/sc) – Feiertage 2026
-- [Staatsrat der Volksrepublik China: Feiertage 2026](https://www.news.cn/politics/20251104/88bcffd88ae249e58c699b8772548e3d/c.html) – Neujahrsfest im Februar, Nationalfeiertag 1. bis 7. Oktober
+- [Staatsrat der Volksrepublik China: Feiertage 2026](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Neujahrsfest im Februar, Nationalfeiertag 1. bis 7. Oktober
 - [CSIRO: Happy Lunar New Year](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Neujahrsfest zwischen 21. Januar und 20. Februar
 - [UPU: S10-Standard](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – eine Nummer pro Sendung
 - [Universal Parcel Scraper: Paketdienst-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Nummernformen, Statustexte
-- [DHL Group: Absichtserklärung mit Temu](https://www.prnewswire.co.uk/news-releases/dhl-group-and-temu-sign-memorandum-of-understanding-to-support-local-businesses-302419680.html) – Luftfracht und Zustellung für Temu
-- [echo24: Pakete von Temu und Co.](https://www.echo24.de/welt/lawinenartiges-wachstum-bei-paketen-von-temu-und-co-auch-deutschland-betroffen-zr-93477021.html) – Hermes-Sprecherin zum Etikett mit vier Barcodes
-- [APA-OTS: Temu und die Österreichische Post](https://www.ots.at/presseaussendung/OTS_20250731_OTS0021/temu-und-die-austrian-post-vertiefen-ihre-partnerschaft-und-fuehren-einen-abhol-und-zustelldienst-ein) – Temu-Pressemitteilung, Zusammenarbeit seit 2023
+- [Österreichische Post: Kooperation mit Temu für die Zustellung](https://news.post.at/presse/de/post/id/1947158/TEMU%20UND%20%C3%96STERREICHISCHE%20POST%3A%20KOOPERATION%20F%C3%9CR%20NACHHALTIGE%20UND%20QUALIT%C3%84TSVOLLE%20ZUSTELLUNG) – Post als Dienstleisterin für Temu in Österreich, November 2023
 - [DHL: Bedeutung des Sendungsstatus](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Weitertransport zu DHL
 - [DHL: Sendungsstatus international](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Zollabfertigung, einige Werktage
 - [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – 3 € je Warenart, meist schon im Shop

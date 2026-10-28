@@ -4,7 +4,7 @@ description: Warum du mit der Temu-Bestellnummer kein Paket verfolgst, wie du de
 slug: temu-sendungsverfolgung
 picture: Ein Stapel kleiner Pakete, der aus dem Frachtraum eines Flugzeugs kommt, ein Lieferwagen und Pip, der sie zählt.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Mit der Temu-Bestellnummer verfolgst du kein Paket: Dafür brauchst du die Sendungsnummer des Paketdienstes. Füg sie in [Peek](/) ein, und Peek findet den passenden unter mehr als 3.500 Paketdiensten und folgt dem Partner vor Ort, wenn der erste Paketdienst einen nennt. Fügst du stattdessen die Bestellnummer ein, sagt dir Peek, dass sie nach einer Temu-Bestellnummer aussieht und nicht nach einer Sendungsnummer.
@@ -20,7 +20,7 @@ Fügst du eine ganze Nachricht mit beiden Nummern ein, nimmt Peek die Sendungsnu
 
 ## Welcher Paketdienst liefert mein Temu-Paket?
 
-Meist verrät es die Sendungsnummer: Das Feld oben nennt den Paketdienst, auf den ihre Form zeigt, oder die wenigen, zu denen sie passen kann. Wen du auf dem letzten Stück wahrscheinlich siehst, von DHL und Hermes über die Österreichische Post bis zur Schweizerischen Post, steht in der Ländertabelle unter [Paket aus China verfolgen](guide:tracking-from-china). Ob an der Grenze noch etwas fällig wird, hängt von deinem Land ab: [Zoll](guide:customs).
+Meist verrät es die Sendungsnummer: Das Feld oben nennt den Paketdienst, auf den ihre Form zeigt, oder die wenigen, zu denen sie passen kann. Wen du auf dem letzten Stück wahrscheinlich siehst, von DHL über die Österreichische Post bis zur Schweizerischen Post, steht in der Ländertabelle unter [Paket aus China verfolgen](guide:tracking-from-china). Ob an der Grenze noch etwas fällig wird, hängt von deinem Land ab: [Zoll](guide:customs).
 
 In Deutschland und Österreich sind Online-Bestellungen von außerhalb der EU bis 150 € seit 1. Juli 2026 nicht mehr zollfrei: Jede Ware kostet 3 € Zoll, wobei „Ware“ eine Warenart meint, nicht ein Stück. Ab 1. November 2026 erhebt die EU laut EU-Kommission außerdem eine Bearbeitungsgebühr von 2 € pro Ware. Für die Schweiz gilt beides nicht.
 

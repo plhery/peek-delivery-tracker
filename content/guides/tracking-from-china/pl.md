@@ -4,7 +4,7 @@ description: Jak śledzić paczkę z Chin: czemu numer się zmienia, kto doręcz
 slug: sledzenie-paczki-z-chin
 picture: Samolot leci przerywanym łukiem nad kulą ziemską, od czerwonej pinezki do zielonej, oznaczającej dom, a Pip podróżuje między dwiema furgonetkami.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Paczka z AliExpress, Temu albo Shein przechodzi z rąk do rąk: chińska firma logistyczna wysyła ją samolotem, celnicy ją sprawdzają, a w Polsce doręcza ją [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost) albo inny przewoźnik, często pod nowym numerem. Każda z tych firm skanuje tylko swój odcinek. Licz się więc z tym, że pierwszy skan pojawi się nawet po 11 dniach, w czasie lotu śledzenie zamilknie, a po statusie „arrived at destination country” paczka jeszcze trochę poczeka. Śledź najpierw numer ze sklepu, a potem numer polskiego przewoźnika. Przy najtańszej wysyłce śledzenie może się urwać na dobre właśnie przy tym przekazaniu. Paczka z magazynu w UE omija lot z Chin i odprawę celną.
@@ -82,7 +82,7 @@ Poza Cainiao zobaczysz [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Su
 | `SY` i 11 cyfr | Sunyou |
 | `3A5V` i 9 cyfr | CNE |
 
-Wklej do [Peeka](/) którykolwiek numer, chiński albo polski, a Peek rozpozna przewoźnika spośród ponad 3500. Więcej o numerach przesyłek: [jak rozpoznać przewoźnika po numerze](guide:tracking-number-formats).
+Wklej do [Peeka](/) którykolwiek numer, chiński albo polski, a Peek znajdzie przewoźnika spośród ponad 3500. Więcej o numerach przesyłek: [jak rozpoznać przewoźnika po numerze](guide:tracking-number-formats).
 
 ## Kto dostarcza paczki z AliExpress, Temu i Shein w Polsce?
 
@@ -91,8 +91,8 @@ To zależy od linii wysyłki:
 | Sklep | Kogo możesz zobaczyć na ostatnim odcinku |
 | --- | --- |
 | AliExpress | Pocztę Polską przy numerach pocztowych. Cainiao ma też w Polsce własne automaty paczkowe. |
-| Temu | Pocztę Polską, która w czerwcu 2025 r. ogłosiła „partnerstwo strategiczne” z Temu. W grudniu 2025 r. Poczta podała, że przesyłki Temu są nadawane głównie jako paczki Pocztex. |
-| Shein | Shein nie podaje przewoźnika na stronie o wysyłce do Polski. Do wyboru masz wysyłkę standardową albo do automatu paczkowego lub punktu odbioru. |
+| Temu | Pocztę Polską, która w czerwcu 2025 r. ogłosiła dalszą współpracę logistyczną z Temu, by przyspieszyć dostawy w całej Polsce. |
+| Shein | Na stronie o wysyłce do Polski Shein nie podaje przewoźnika, ale w pomocy wśród opcji dostawy wymienia InPost Paczkomat 24/7. Do wyboru masz wysyłkę standardową albo do automatu paczkowego lub punktu odbioru. |
 
 Gdy w śledzeniu pojawi się nazwa polskiego przewoźnika albo jego numer, dalej śledź paczkę u niego. Niektóre trackery [same połączą oba numery](guide:universal-tracker), jeśli drugi pojawi się w danych pierwszego przewoźnika.
 
@@ -164,12 +164,12 @@ Ekrany, statusy, rekompensaty i reklamacje w każdym sklepie: [śledzenie zamów
 - [Shein Polska: Informacje o wysyłce](https://pl.shein.com/Shipping-Info-a-280.html) – przygotowanie, przedział dat, Magazyn w UE, automat paczkowy lub punkt odbioru, 45 i 30 dni
 - [Yanwen: strona główna](https://www.yw56.com.cn/) – linie z Temu i AliExpress w nazwie
 - [SF International: komunikaty](https://www.sf-international.com/cn/sc) – święta w Chinach w 2026 r.
-- [Rada Państwa ChRL: dni wolne w 2026 r.](https://www.news.cn/politics/20251104/88bcffd88ae249e58c699b8772548e3d/c.html) – chiński Nowy Rok w lutym, Święto Narodowe 1–7 października
+- [Rada Państwa ChRL: dni wolne w 2026 r.](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – chiński Nowy Rok w lutym, Święto Narodowe 1–7 października
 - [CSIRO: Happy Lunar New Year](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – chiński Nowy Rok między 21 stycznia a 20 lutego
 - [UPU: standard S10](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – jeden numer na przesyłkę
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, brzmienie statusów
-- [Bankier.pl: Poczta Polska nawiązuje współpracę z Temu](https://www.bankier.pl/wiadomosc/Poczta-Polska-nawiazuje-wspolprace-z-platforma-handlu-elektronicznego-Temu-8954086.html) – partnerstwo strategiczne (czerwiec 2025)
-- [Telepolis: To nie koniec takich przesyłek z TEMU, chociaż Poczta Polska zmienia zasady](https://www.telepolis.pl/wiadomosci/poczta-polska-temu-koniec-wspolpracy) – oświadczenie Poczty Polskiej o paczkach Pocztex (grudzień 2025)
+- [Shein Polska: Czy oferujecie Przyspieszone Przesyłki?](https://pl.shein.com/faq/detail?id=41177) – InPost Paczkomat 24/7
+- [Poczta Polska: Dalsza współpraca logistyczna Poczty Polskiej z platformą Temu](https://media.poczta-polska.pl/releases/dalsza-wspolpraca-logistyczna-poczty-polskiej-z-platforma-temu-poczta-polska-rozwija-obsluge-przesylek-e-commerce) – szybsze dostawy w całej Polsce (czerwiec 2025 r.)
 - [Poczta Polska: Zmiany w opłatach dla przesyłek spoza Unii Europejskiej od 1 lipca 2026 r.](https://www.poczta-polska.pl/news/zmiany-w-oplatach-dla-przesylek-spoza-unii-europejskiej-od-1-lipca-2026-r/) – 3 euro za rodzaj produktu, pobranie przy doręczeniu
 - [Poczta Polska: Przypomnienie oraz zmiany dotyczące procesu i kosztów obsługi zgłoszeń celno-podatkowych](https://www.poczta-polska.pl/news/przypomnienie-oraz-zmiany-dotyczace-procesu-i-kosztow-obslugi-zgloszen-celno-podatkowych/) – IOSS, opłata za zgłoszenie także przy IOSS
 - [Poczta Polska: Cennik opłat dodatkowych](https://www.poczta-polska.pl/wp-content/uploads/2025/04/cennik-oplat-dodatkowych.pdf) – od 1 lipca 2026 r.: 20,00 zł za zgłoszenie celne

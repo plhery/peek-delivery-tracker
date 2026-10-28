@@ -4,7 +4,7 @@ description: Why tracking from China goes quiet or changes number, who delivers 
 slug: parcel-tracking-from-china
 picture: A plane's dotted arc over the globe from a red pin to a green home pin, and Pip travelling between two vans.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 A parcel (or package) from AliExpress, Temu or Shein changes hands: a Chinese logistics firm flies it out, your country's customs checks it, and your local post or courier delivers it, often under a new number. Each company scans only its own leg, so expect up to 11 days before the first scan, silence during the flight and a wait after "arrived at destination country". Follow the shop's tracking, then the local carrier's; on the cheapest shipping, tracking can stop at that handover for good. Items shipped from a warehouse in your country (or, for Ireland, in the EU) skip the flight and customs.
@@ -178,7 +178,7 @@ Each shop's own screens, statuses, credits and claims: [AliExpress order trackin
 - [Shein Europe: On-Time Delivery Service Terms and Conditions](https://eur.shein.com/on-time-delivery-terms-and-conditions-a-3491.html) – Ireland: 500 points
 - [Yanwen: Home](https://www.yw56.com.cn/) – UK and platform lines
 - [SF International: Service notices](https://www.sf-international.com/cn/sc) – 2026 holiday arrangements
-- [State Council of China: 2026 public holidays](https://www.news.cn/politics/20251104/88bcffd88ae249e58c699b8772548e3d/c.html) – Chinese New Year in February, National Day 1 to 7 October
+- [State Council of China: 2026 public holidays (in Chinese)](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Chinese New Year in February, National Day 1 to 7 October
 - [CSIRO: Happy Lunar New Year](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Chinese New Year between 21 January and 20 February
 - [UPU: S10 standard](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – one number per item
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – number shapes, wordings

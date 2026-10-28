@@ -4,10 +4,10 @@ description: Gdzie w Temu szukać numeru śledzenia, czemu numer zamówienia go 
 slug: sledzenie-zamowienia-temu
 picture: Stos małych paczek wyjeżdżających z luku samolotu, furgonetka i Pip, który je liczy.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-W Temu numer śledzenia znajdziesz w „Twoich zamówieniach”. Numer zamówienia Temu to nie numer śledzenia: przewoźnik go nie zna. Wklej numer śledzenia do [Peek](/): rozpozna przewoźnika po kształcie numeru, a jeśli pierwszy przewoźnik poda, kto przejmuje paczkę w Polsce, przełączy się na nowego.
+W Temu numer śledzenia znajdziesz w „Twoich zamówieniach”. Numer zamówienia Temu to nie numer śledzenia: przewoźnik go nie zna. Wklej numer śledzenia do [Peek](/): znajdzie przewoźnika po kształcie numeru, a jeśli pierwszy przewoźnik poda, kto przejmuje paczkę w Polsce, przełączy się na nowego.
 
 ## Czy numer zamówienia Temu to numer śledzenia?
 
@@ -34,7 +34,7 @@ SMS w sprawie paczki prosi o dopłatę albo kliknięcie w link? Jak rozpoznać o
 
 ## Czy mogę śledzić paczkę z Temu w Peek?
 
-Tak, numerem przewoźnika. Wklej go do [Peek](/): rozpozna przewoźnika po kształcie numeru i będzie śledzić paczkę jak każdą inną.
+Tak, numerem przewoźnika. Wklej go do [Peek](/): znajdzie przewoźnika po kształcie numeru i będzie śledzić paczkę jak każdą inną.
 
 - **Kilka numerów.** Dodaj każdy: Peek śledzi każdą paczkę osobno.
 - **Kształt numeru, który ma kilku przewoźników.** Jeśli Peek zaproponuje złego przewoźnika, na przykład przy 24 cyfrach InPostu, naciśnij „Zmień” i wybierz właściwego.

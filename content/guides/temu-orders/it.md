@@ -4,10 +4,10 @@ description: Perché il numero d'ordine Temu non serve a tracciare il pacco, qua
 slug: tracciare-ordine-temu
 picture: Una pila di piccoli pacchi che esce dalla stiva di un aereo, un furgone e Pip che li conta.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-Il numero d'ordine Temu non serve a tracciare il pacco: ti serve il codice di tracciamento del corriere. Incollalo in [Peek](/): riconosce il corriere dalla forma del codice e, se il primo corriere indica chi prende in carico il pacco in Italia, passa al nuovo. Se incolli il numero d'ordine, Peek ti avvisa che sembra un numero d'ordine Temu, non un codice di tracciamento.
+Il numero d'ordine Temu non serve a tracciare il pacco: ti serve il codice di tracciamento del corriere. Incollalo in [Peek](/), che trova il corriere dalla forma del codice e, se il primo corriere indica chi prende in carico il pacco in Italia, passa al nuovo. Se incolli il numero d'ordine, Peek ti avvisa che sembra un numero d'ordine Temu, non un codice di tracciamento.
 
 ## Il numero d'ordine Temu è un codice di tracciamento?
 
@@ -34,7 +34,7 @@ Un SMS ti chiede di pagare o di cliccare un link per il tuo pacco? Come riconosc
 
 ## Posso tracciare un pacco Temu con Peek?
 
-Sì, con il codice del corriere. Incollalo in [Peek](/): riconosce il corriere dalla forma del codice e segue il pacco come qualsiasi altro.
+Sì, con il codice del corriere. Incollalo in [Peek](/), che trova il corriere dalla forma del codice e segue il pacco come qualsiasi altro.
 
 - **Più codici.** Aggiungili tutti: Peek segue ogni pacco per conto suo.
 - **Una forma condivisa da più corrieri.** Se Peek propone il corriere sbagliato, tocca "Cambia" e scegli quello giusto.

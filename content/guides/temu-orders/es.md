@@ -4,10 +4,10 @@ description: Por qué el número de pedido de Temu no sirve para seguir el paque
 slug: seguimiento-pedido-temu
 picture: Una pila de paquetes pequeños saliendo de la bodega de un avión, una furgoneta y Pip contándolos.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-El número de pedido de Temu no sirve para seguir el paquete: necesitas el número de seguimiento de la empresa de reparto. Pégalo en [Peek](/) y reconoce la empresa por la forma del número; si la primera empresa indica quién toma el relevo en España, Peek pasa a la nueva. Si pegas el número de pedido, Peek te avisa de que parece un número de pedido de Temu, no de seguimiento.
+El número de pedido de Temu no sirve para seguir el paquete: necesitas el número de seguimiento de la empresa de reparto. Pégalo en [Peek](/), que encuentra la empresa por la forma del número; si la primera empresa indica quién toma el relevo en España, Peek pasa a la nueva. Si pegas el número de pedido, Peek te avisa de que parece un número de pedido de Temu, no de seguimiento.
 
 ## ¿El número de pedido de Temu es un número de seguimiento?
 
@@ -34,7 +34,7 @@ Que un paquete pase días sin novedades es habitual en esta ruta. Por qué calla
 
 ## ¿Puedo seguir un paquete de Temu en Peek?
 
-Sí, con el número de la empresa de reparto. Pégalo en [Peek](/): reconoce la empresa por la forma del número y sigue el paquete como cualquier otro.
+Sí, con el número de la empresa de reparto. Pégalo en [Peek](/), que encuentra la empresa por la forma del número y sigue el paquete como cualquier otro.
 
 - **Varios números.** Añade cada uno: Peek sigue cada paquete por separado.
 - **Una forma que comparten varias empresas.** Si Peek propone la empresa equivocada, pulsa «Cambiar» y elige la correcta.

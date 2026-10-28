@@ -4,10 +4,10 @@ description: Porque é que o número da encomenda Temu não serve para seguir o 
 slug: rastrear-encomenda-temu
 picture: Uma pilha de pequenas encomendas a sair do porão de um avião, uma carrinha e o Pip a contá-las.
 published: 2026-10-17
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-O número da encomenda Temu não serve para seguir o volume: precisas do número de seguimento da transportadora. Cola-o no [Peek](/): reconhece a transportadora pela forma do número e, se a primeira transportadora indicar quem fica com o volume em Portugal, passa para a nova. Se colares o número da encomenda, o Peek avisa-te de que parece um número de encomenda da Temu, e não de seguimento.
+O número da encomenda Temu não serve para seguir o volume: precisas do número de seguimento da transportadora. Cola-o no [Peek](/), que descobre a transportadora pela forma do número e, se a primeira transportadora indicar quem fica com o volume em Portugal, passa para a nova. Se colares o número da encomenda, o Peek avisa-te de que parece um número de encomenda da Temu, e não de seguimento.
 
 ## O número da encomenda Temu é um número de seguimento?
 
@@ -36,7 +36,7 @@ Recebeste um SMS a pedir-te que pagues ou carregues num link por causa da tua en
 
 ## Posso seguir uma encomenda Temu no Peek?
 
-Sim, com o número da transportadora. Cola-o no [Peek](/): reconhece a transportadora pela forma do número e segue o volume como qualquer outro.
+Sim, com o número da transportadora. Cola-o no [Peek](/), que descobre a transportadora pela forma do número e segue o volume como qualquer outro.
 
 - **Vários números.** Junta cada um: o Peek segue cada volume à parte.
 - **Uma forma usada por várias transportadoras.** Se o Peek propuser a transportadora errada, toca em «Alterar» e escolhe a certa.

@@ -4,7 +4,7 @@ description: Como seguir uma encomenda do AliExpress, da Temu ou da Shein até P
 slug: rastrear-encomenda-da-china
 picture: Um avião traça um arco pontilhado sobre o globo, de um marcador vermelho até ao marcador verde de casa, e o Pip viaja entre duas carrinhas.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Uma encomenda do AliExpress, da Temu ou da Shein muda de mãos pelo caminho: uma empresa de logística chinesa leva-a de avião, a alfândega verifica-a à chegada e os [CTT](carrier:ctt) ou outra transportadora entregam-na, muitas vezes com um número novo. Cada empresa só regista leituras no seu troço do percurso. Por isso, conta com até 11 dias sem nenhuma leitura no início, silêncio durante o voo e uma espera depois de «arrived at destination country». Segue primeiro o tracking da loja e depois o da transportadora local. No envio mais barato, o seguimento pode acabar de vez nessa troca. O que sai de um armazém na UE poupa o voo e a alfândega.
@@ -177,7 +177,7 @@ Ecrãs, estados, créditos e reclamações de cada loja: [rastrear uma encomenda
 - [Comissão Europeia: Guidance on EUR 3 customs duty (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por artigo, contado por linha da declaração, qualquer valor
 - [Yanwen: página inicial (em chinês)](https://www.yw56.com.cn/) – linhas Temu e AliExpress
 - [SF International: avisos (em chinês)](https://www.sf-international.com/cn/sc) – feriados de 2026
-- [Conselho de Estado da China: feriados de 2026 (em chinês)](https://www.news.cn/politics/20251104/88bcffd88ae249e58c699b8772548e3d/c.html) – Ano Novo chinês em fevereiro, Dia Nacional de 1 a 7 de outubro
+- [Conselho de Estado da China: feriados de 2026 (em chinês)](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Ano Novo chinês em fevereiro, Dia Nacional de 1 a 7 de outubro
 - [CSIRO: Happy Lunar New Year (em inglês)](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Ano Novo chinês entre 21 de janeiro e 20 de fevereiro
 - [UPU: norma S10 (em inglês)](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – um número por objeto
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formatos dos números, Ecoscooting, textos dos estados

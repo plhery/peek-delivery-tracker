@@ -4,7 +4,7 @@ description: Qué significan los estados de Cainiao, por qué se para el seguimi
 slug: seguimiento-paquete-de-china
 picture: Un avión traza un arco punteado sobre el globo, de un marcador rojo al marcador verde de casa, y Pip viaja entre dos furgonetas.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Un paquete de AliExpress, Temu o Shein cambia de manos por el camino: una empresa logística china lo saca del país, la Aduana lo revisa al llegar y [Correos](carrier:correos-spain) u otra empresa de reparto te lo entrega, a menudo con otro número. Cada una solo escanea su tramo, así que es normal pasar hasta 11 días sin un primer escaneo, no ver nada durante el vuelo y volver a esperar cuando ya ha llegado al país de destino. Sigue primero el número de la tienda y luego el de la empresa de reparto. Con el envío más barato, el seguimiento puede cortarse ahí para siempre. Lo que sale de un almacén en la UE se ahorra el vuelo desde China y el arancel.
@@ -83,7 +83,7 @@ Además de Cainiao, verás [YunExpress](carrier:yunexpress), [4PX](carrier:4px),
 | `SF` + 13 cifras | SF Express |
 | `CNESP` + 20 cifras | Ecoscooting, una empresa de reparto que trabaja en España y Portugal |
 
-Pega cualquiera de los dos números en [Peek](/): detecta la empresa entre más de 3500. Para los números en general, mira [de qué empresa es un número de seguimiento](guide:tracking-number-formats).
+Pega cualquiera de los dos números en [Peek](/), que encuentra la empresa entre más de 3500. Para los números en general, mira [de qué empresa es un número de seguimiento](guide:tracking-number-formats).
 
 ## ¿Qué empresa reparte AliExpress, Temu y Shein en España?
 
@@ -92,7 +92,7 @@ Depende de la línea de envío:
 | Tienda | Quién puede aparecer en el último tramo |
 | --- | --- |
 | AliExpress | Correos, que en 2019 anunció que seguiría siendo el principal operador logístico de AliExpress en España. Cainiao, la empresa logística de AliExpress, reparte además con socios locales en las principales ciudades españolas y tiene sus propias taquillas en España. |
-| Temu | Correos. Temu anunció en marzo de 2025 un acuerdo con Correos para toda España, también Canarias, Baleares, Ceuta y Melilla, con la opción de recoger en sus oficinas. |
+| Temu | El grupo portugués CTT, dueño de [CTT Express](carrier:ctt-express), que en noviembre de 2023 se presentó como socio estratégico de Temu en España. |
 | Shein | Su página de envíos no nombra a las empresas de reparto. El número de seguimiento te llega por correo electrónico cuando sale el pedido, y lo tienes en «Mi Cuenta», en «Mis Pedidos». También ofrece envío a punto de recogida. |
 
 Si en el seguimiento aparece una empresa de reparto de aquí, como [Ecoscooting](carrier:ecoscooting) con un número `CNESP`, sigue el paquete en su web o en su app, con el número que te dé.
@@ -164,7 +164,7 @@ Pantallas, estados, créditos y reclamaciones de cada tienda: [seguimiento de pe
 - [AliExpress: Do I have to pay for customs and import taxes? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – almacén en tu país, sin aranceles ni impuestos de más
 - [Shein España: Información de envío](https://es.shein.com/Shipping-Info-a-280.html) – preparación y plazos, Almacén UE, Mis Pedidos, 45 y 30 días
 - [Correos: Nota de prensa con AliExpress y Cainiao (2019)](https://www.correos.com/wp-content/uploads/2019/03/2019_03_19-NP-Correos-AliExpress-Cainiao.pdf) – principal operador logístico en España
-- [Xataka Móvil: Temu y Correos](https://www.xatakamovil.com/mercado/temu-ha-encontrado-aliado-perfecto-para-ofrecer-entregas-rapidas-espana-correos) – acuerdo de 2025, cobertura, oficinas
+- [CTT: CTT são o parceiro de distribuição estratégico da Temu para a Península Ibérica (en portugués)](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-sao-o-parceiro-de-distribuicao-estrategico-da-temu-para-a-peninsula-iberica) – socio estratégico de Temu en España, noviembre de 2023
 - [Correos: Arancel para envíos de bajo valor en la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – 3 € por tipo de producto, Canarias, Ceuta y Melilla, IOSS
 - [Correos: Información aduanera](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera) – pagar para recoger los paquetes pendientes de tramitación aduanera
 - [Correos: Tramitación aduanera en la importación](https://www.correos.es/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion) – tarifa de gestión fuera de IOSS
@@ -172,7 +172,7 @@ Pantallas, estados, créditos y reclamaciones de cada tienda: [seguimiento de pe
 - [European Commission: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de 2 € desde el 1 de noviembre de 2026
 - [European Commission: Customs Guidance on EUR 3 customs duty (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € se cuenta igual que el arancel de 3 €
 - [SF International: avisos de servicio (en chino)](https://www.sf-international.com/cn/sc) – festivos de 2026
-- [Consejo de Estado de China: festivos de 2026 (en chino)](https://www.news.cn/politics/20251104/88bcffd88ae249e58c699b8772548e3d/c.html) – Año Nuevo chino en febrero, Fiesta Nacional del 1 al 7 de octubre
+- [Consejo de Estado de China: festivos de 2026 (en chino)](https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm) – Año Nuevo chino en febrero, Fiesta Nacional del 1 al 7 de octubre
 - [CSIRO: Happy Lunar New Year (en inglés)](https://www.atnf.csiro.au/daily-picture/2024/02/12/happy-lunar-new-year-2/) – Año Nuevo chino entre el 21 de enero y el 20 de febrero
 - [UPU: S10 standard (en inglés)](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – un número por envío
 - [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, textos de Cainiao y de Correos

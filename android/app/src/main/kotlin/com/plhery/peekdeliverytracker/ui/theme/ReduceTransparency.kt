@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Handler
 import android.os.PowerManager
 import android.view.WindowManager
 import androidx.compose.runtime.Composable
@@ -30,9 +31,25 @@ internal class WindowBlurs {
      */
     private var withoutSaver = true
 
-    fun reduceTransparency(enabled: Boolean, saver: Boolean): Boolean {
+    /** What `enabled` blurs read as with the saver as it is, without taking them as the blurs without it. */
+    fun reduceTransparency(enabled: Boolean, saver: Boolean): Boolean = !enabled && !(saver && withoutSaver)
+
+    /** The blur listener's news, or a read once the window manager has caught up with the saver. */
+    fun settled(enabled: Boolean, saver: Boolean): Boolean {
         if (!saver) withoutSaver = enabled
-        return !enabled && !(saver && withoutSaver)
+        return reduceTransparency(enabled, saver)
+    }
+
+    /**
+     * The saver turned on or off, with blurs read at once: what that draws, or null to read again in [SETTLE_MILLIS].
+     * The window manager may not have let blurs back yet when the saver turns off, so that read would take them as off
+     * without it; the blur listener tells when they come back, and the read later tells the blurs that stay off.
+     */
+    fun saverChanged(enabled: Boolean, saver: Boolean): Boolean? = if (saver) reduceTransparency(enabled, saver) else null
+
+    companion object {
+        /** How long after the saver turns off the window manager has surely let blurs back. */
+        const val SETTLE_MILLIS = 1_000L
     }
 }
 
@@ -44,14 +61,20 @@ fun reduceTransparencySetting(): Boolean {
     val context = LocalContext.current
     val windows = remember(context) { context.getSystemService(WindowManager::class.java) }
     val power = remember(context) { context.getSystemService(PowerManager::class.java) }
-    val off = remember(windows, power) { mutableStateOf(windows.reduceTransparency(power)) }
+    // Read, not taken in: the listener takes the same value as soon as it is added.
+    val off = remember(windows, power) { mutableStateOf(windowBlurs.reduceTransparency(windows.isCrossWindowBlurEnabled, power.isPowerSaveMode)) }
     DisposableEffect(windows, power) {
         // The listener hears the current value at once, then each change. The saver is on by the time it turns blurs
-        // off, and off by the time it lets them back.
-        val listener = Consumer<Boolean> { enabled -> off.value = windowBlurs.reduceTransparency(enabled, power.isPowerSaveMode) }
+        // off, and off by the time it lets them back. With blurs off for another reason as well, it hears nothing as
+        // the saver comes or goes: the saver's own broadcast tells.
+        val listener = Consumer<Boolean> { enabled -> off.value = windowBlurs.settled(enabled, power.isPowerSaveMode) }
+        val handler = Handler(context.mainLooper)
+        val reread = Runnable { off.value = windowBlurs.settled(windows.isCrossWindowBlurEnabled, power.isPowerSaveMode) }
         val saver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                off.value = windows.reduceTransparency(power)
+                handler.removeCallbacks(reread)
+                val now = windowBlurs.saverChanged(windows.isCrossWindowBlurEnabled, power.isPowerSaveMode)
+                if (now != null) off.value = now else handler.postDelayed(reread, WindowBlurs.SETTLE_MILLIS)
             }
         }
         windows.addCrossWindowBlurEnabledListener(context.mainExecutor, listener)
@@ -59,10 +82,8 @@ fun reduceTransparencySetting(): Boolean {
         onDispose {
             windows.removeCrossWindowBlurEnabledListener(listener)
             context.unregisterReceiver(saver)
+            handler.removeCallbacks(reread)
         }
     }
     return off.value
 }
-
-private fun WindowManager.reduceTransparency(power: PowerManager) =
-    windowBlurs.reduceTransparency(isCrossWindowBlurEnabled, power.isPowerSaveMode)

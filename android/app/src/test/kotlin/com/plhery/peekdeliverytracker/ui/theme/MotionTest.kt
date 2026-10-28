@@ -5,17 +5,131 @@ import androidx.compose.animation.core.SpringSpec
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.VectorConverter
 import com.plhery.peekdeliverytracker.core.MotionCurve
+import com.plhery.peekdeliverytracker.core.Point
 import com.plhery.peekdeliverytracker.core.Spring
 import com.plhery.peekdeliverytracker.core.UnitCurve
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-/** The springs and curves against SwiftUI's own numbers (`Spring.stiffness`, `.damping`, `.dampingRatio` on a Mac). */
+/**
+ * The springs and curves against SwiftUI's own numbers: `Spring.stiffness`, `.damping` and `.dampingRatio`, and
+ * motion/SwiftUIMotion.txt, a swiftc probe's samples of SwiftUI's springs (`value(target:initialVelocity:time:)`,
+ * `velocity(...)`, `settlingDuration`) and curves (`UnitCurve.value(at:)`, `velocity(at:)`) on a Mac.
+ */
 class MotionTest {
-    private fun assertSpring(stiffness: Double, dampingRatio: Double, spec: SpringSpec<Float>) {
+    private fun assertSpring(stiffness: Double, dampingRatio: Double, spec: SettlingSpringSpec<Float>) {
         assertEquals(stiffness.toFloat(), spec.stiffness, 0.01f)
         assertEquals(dampingRatio.toFloat(), spec.dampingRatio, 0.0001f)
+    }
+
+    private class SpringSample(val name: String, val initialVelocity: Double, val time: Double, val value: Double, val velocity: Double)
+
+    private class CurveSample(val name: String, val x: Double, val value: Double, val velocity: Double)
+
+    private val swiftUI: List<List<String>> = javaClass.getResourceAsStream("/motion/SwiftUIMotion.txt")!!.bufferedReader()
+        .readLines().filter { it.isNotBlank() && !it.startsWith("#") }.map { it.split(" ") }
+
+    private val springSamples = swiftUI.filter { it[0] == "spring" }
+        .map { SpringSample(it[1], it[2].toDouble(), it[3].toDouble(), it[4].toDouble(), it[5].toDouble()) }
+
+    private val settlingDurations = swiftUI.filter { it[0] == "settle" }.associate { it[1] to it[2].toDouble() }
+
+    private val curveSamples = swiftUI.filter { it[0] == "curve" }
+        .map { CurveSample(it[1], it[2].toDouble(), it[3].toDouble(), it[4].toDouble()) }
+
+    /** `d0.5b-0.3` is `Spring(duration: 0.5, bounce: -0.3)`, `r0.5f1.5` `Spring(response: 0.5, dampingRatio: 1.5)`. */
+    private fun spring(name: String): Spring {
+        val (kind, first, second) = Regex("([dr])([0-9.]+)[bf](-?[0-9.]+)").matchEntire(name)!!.destructured
+        return if (kind == "d") Spring(first.toDouble(), second.toDouble()) else Spring.response(first.toDouble(), second.toDouble())
+    }
+
+    private val curves = mapOf(
+        "easeIn" to UnitCurve.easeIn,
+        "easeOut" to UnitCurve.easeOut,
+        "easeInOut" to UnitCurve.easeInOut,
+        "linear" to UnitCurve.linear,
+        "bezier" to UnitCurve.bezier(Point(0.2, 0.9), Point(0.3, 1.0)),
+    )
+
+    @Test
+    fun theSamplesCoverEverySpringAndCurve() {
+        assertEquals(12, settlingDurations.size)
+        assertEquals(12 * 3 * 13, springSamples.size)
+        assertEquals(settlingDurations.keys, springSamples.map { it.name }.toSet())
+        assertEquals(curves.keys, curveSamples.map { it.name }.toSet())
+    }
+
+    /**
+     * SwiftUI's `velocity` of an overdamped spring is its speed plus the target, still the target once at rest; its
+     * `value` moves at the speed :core gives, so :core keeps the true speed.
+     */
+    @Test
+    fun coresSpringsMoveAsSwiftUIs() {
+        for (sample in springSamples) {
+            val spring = spring(sample.name)
+            val label = "${sample.name} from ${sample.initialVelocity} at ${sample.time} s"
+            assertEquals(label, sample.value, spring.value(1.0, sample.initialVelocity, sample.time), 1e-9)
+            val reported = if (spring.bounce < 0 && sample.time > 0) sample.velocity - 1 else sample.velocity
+            assertEquals(label, reported, spring.velocity(1.0, sample.initialVelocity, sample.time), 1e-8)
+        }
+    }
+
+    @Test
+    fun composesSpringsMoveAsSwiftUIs() {
+        for (sample in springSamples) {
+            val spring = spring(sample.name)
+            val spec = spring.animationSpec<Float>().vectorize(Float.VectorConverter)
+            val start = AnimationVector1D(0f)
+            val end = AnimationVector1D(1f)
+            val speed = AnimationVector1D(sample.initialVelocity.toFloat())
+            val nanos = (sample.time * 1e9).toLong()
+            val label = "${sample.name} from ${sample.initialVelocity} at ${sample.time} s"
+            assertEquals(label, sample.value.toFloat(), spec.getValueFromNanos(nanos, start, end, speed).value, 2e-4f)
+            val velocity = spring.velocity(1.0, sample.initialVelocity, sample.time)
+            assertEquals(label, velocity.toFloat(), spec.getVelocityFromNanos(nanos, start, end, speed).value, 2e-3f)
+        }
+    }
+
+    /**
+     * A spring that doesn't bounce settles where SwiftUI's does: SwiftUI's `settlingDuration` for one is the moment it
+     * comes within a thousandth of its change, rounded up to a tenth of a second.
+     */
+    @Test
+    fun springsThatDontBounceSettleWhenSwiftUIsDo() {
+        val still = settlingDurations.filterKeys { spring(it).dampingRatio >= 1 - 1e-12 }
+        assertEquals(setOf("d0.5b0", "d0.6b0", "d0.5b-0.3", "d0.4b-0.6", "r0.5f1.5", "r0.35f1.2", "r0.55f1"), still.keys)
+        for ((name, settling) in still) {
+            val spec = spring(name).animationSpec<Float>().vectorize(Float.VectorConverter)
+            val duration = spec.getDurationNanos(AnimationVector1D(0f), AnimationVector1D(1f), AnimationVector1D(0f)) / 1e9
+            assertTrue("$name settles at $duration s, SwiftUI's at $settling s", duration > settling - 0.1 - 1e-9 && duration <= settling + 1e-9)
+        }
+    }
+
+    @Test
+    fun coresCurvesAreSwiftUIs() {
+        // SwiftUI works a curve out in single precision.
+        for (sample in curveSamples) {
+            val curve = curves.getValue(sample.name)
+            assertEquals("${sample.name} at ${sample.x}", sample.value, curve.value(sample.x), 1e-6)
+            assertEquals("${sample.name} at ${sample.x}", sample.velocity, curve.velocity(sample.x), 2e-5)
+        }
+    }
+
+    @Test
+    fun composesEasingIsSwiftUIsCurve() {
+        for (sample in curveSamples) {
+            val easing = curves.getValue(sample.name).easing
+            assertEquals("${sample.name} at ${sample.x}", sample.value.toFloat(), easing.transform(sample.x.toFloat()), 5e-4f)
+        }
+    }
+
+    @Test
+    fun anOverdampedSpringKeepsItsStiffness() {
+        // SwiftUI reports Spring(response: 0.5, dampingRatio: 1.5).stiffness as 552.7, but moves with (2π / 0.5)².
+        val spec = Motion.springWithResponse<Float>(response = 0.5, dampingFraction = 1.5)
+        assertSpring(157.91367, 1.5, spec)
+        assertSpring(157.91367, 1 / 0.7, Motion.spring(duration = 0.5, bounce = -0.3))
     }
 
     @Test
@@ -99,8 +213,29 @@ class MotionTest {
         val at = 0.08 + 0.175
         val compose = easeOut.getValueFromNanos((at * 1e9).toLong(), start, end, start).value
         assertEquals(MotionCurve.EaseOut(0.35, 0.08).value(at).toFloat(), compose, 0.001f)
-        val spring = MotionCurve.SpringCurve(Spring(0.5, 0.18)).animationSpec<Float>() as SpringSpec<Float>
+        val spring = MotionCurve.SpringCurve(Spring(0.5, 0.18)).animationSpec<Float>() as SettlingSpringSpec<Float>
         assertSpring(Spring(0.5, 0.18).stiffness, 0.82, spring)
         assertTrue(spring.visibilityThreshold == null)
+        val linear = MotionCurve.Timing(UnitCurve.linear, 0.4, delay = 0.1).animationSpec<Float>().vectorize(Float.VectorConverter)
+        assertEquals(500_000_000L, linear.getDurationNanos(start, end, start))
+        assertEquals(0.5f, linear.getValueFromNanos(300_000_000L, start, end, start).value, 0.001f)
+    }
+
+    @Test
+    fun aSpringGivenAThresholdStopsThereAndOneWithoutAtAThousandthOfItsChange() {
+        val start = AnimationVector1D(0f)
+        val end = AnimationVector1D(100f)
+        val still = AnimationVector1D(0f)
+        val settling = Motion.smooth<Float>().vectorize(Float.VectorConverter)
+        val settled = settling.getDurationNanos(start, end, still)
+        // Compose estimates when a spring comes within its threshold, here to within a hundredth of it.
+        assertEquals(100f, settling.getValueFromNanos(settled, start, end, still).value, 0.101f)
+        assertTrue(100f - settling.getValueFromNanos(settled - 50_000_000L, start, end, still).value > 0.1f)
+        val coarse = Motion.smooth(visibilityThreshold = 1f).vectorize(Float.VectorConverter)
+        val reference = SpringSpec(1f, Spring().stiffness.toFloat(), 1f).vectorize(Float.VectorConverter)
+        assertEquals(reference.getDurationNanos(start, end, still), coarse.getDurationNanos(start, end, still))
+        assertTrue(coarse.getDurationNanos(start, end, still) < settled)
+        // Nothing to cover is done at once.
+        assertEquals(0L, settling.getDurationNanos(end, end, still))
     }
 }

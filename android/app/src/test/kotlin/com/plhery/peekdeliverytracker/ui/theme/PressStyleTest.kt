@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker.ui.theme
 
-import androidx.compose.animation.core.SpringSpec
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.MotionCurve
 import com.plhery.peekdeliverytracker.core.Spring
@@ -12,7 +11,7 @@ import org.junit.Test
 
 /** The press styles' numbers against the iPhone's ButtonStyles (A-AN38), and SwiftUI's way of animating them. */
 class PressStyleTest {
-    private fun assertSpring(expected: SpringSpec<Float>, actual: MotionCurve) {
+    private fun assertSpring(expected: SettlingSpringSpec<Float>, actual: MotionCurve) {
         val spring = (actual as MotionCurve.SpringCurve).spring
         assertEquals(expected.stiffness, spring.stiffness.toFloat(), 0.001f)
         assertEquals(expected.dampingRatio, spring.dampingRatio.toFloat(), 1e-6f)
@@ -116,5 +115,21 @@ class PressStyleTest {
         value.animate(0.0, null, now = 0.05)
         assertEquals(0.0, value.value(0.05), 0.0)
         assertFalse(value.isRunning(0.05))
+    }
+
+    @Test
+    fun anyTimingCurveAddsItsChangeAfterItsDelay() {
+        val value = AnimatedValue(0.0)
+        value.animate(1.0, MotionCurve.Timing(UnitCurve.linear, duration = 0.4, delay = 0.1), now = 0.0)
+        assertEquals(0.0, value.value(0.1), 1e-12)
+        assertEquals(0.5, value.value(0.3), 1e-12)
+        assertEquals(1 / 0.4, value.velocity(0.3), 1e-9)
+        // A second change runs in full beside the first.
+        value.animate(3.0, MotionCurve.Timing(UnitCurve.easeIn, duration = 0.2), now = 0.3)
+        assertEquals(0.75 + 2 * UnitCurve.easeIn.value(0.5), value.value(0.4), 1e-12)
+        assertEquals(1 / 0.4 + 2 * UnitCurve.easeIn.velocity(0.5) / 0.2, value.velocity(0.4), 1e-9)
+        assertTrue(value.isRunning(0.49))
+        assertEquals(3.0, value.value(0.51), 0.0)
+        assertFalse(value.isRunning(0.51))
     }
 }

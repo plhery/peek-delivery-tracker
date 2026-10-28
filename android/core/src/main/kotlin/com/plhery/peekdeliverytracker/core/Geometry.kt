@@ -794,17 +794,20 @@ class UnitCurve private constructor(val startControlPoint: Point, val endControl
 
 /**
  * SwiftUI's `Spring(duration:bounce:)`: a unit mass on a spring stiff and damped enough to take about `duration` seconds,
- * overshooting more the more it bounces. Only the bouncy and the critically damped springs, as the app uses no
- * negative bounce. Compose's own spring is the same model: `spring(dampingRatio, stiffness)`.
+ * overshooting more the more it bounces, and creeping in more slowly the further its bounce is below zero
+ * (overdamped). Compose's own spring is the same model: `spring(dampingRatio, stiffness)`.
+ *
+ * SwiftUI's `stiffness` of an overdamped spring reads (2 × dampingRatio² − 1) times the one here, but its own
+ * `value(target:initialVelocity:time:)` moves with the one here, (2π / duration)², as Compose's spring does.
  */
 data class Spring(val duration: Double = 0.5, val bounce: Double = 0.0) {
     init {
-        require(bounce >= 0 && bounce < 1) { "bounce $bounce" }
+        require(bounce > -1 && bounce < 1) { "bounce $bounce" }
     }
 
     val mass: Double get() = 1.0
     val stiffness: Double get() = (2 * PI / duration).let { it * it }
-    val damping: Double get() = 4 * PI * (1 - bounce) / duration
+    val damping: Double get() = if (bounce >= 0) 4 * PI * (1 - bounce) / duration else 4 * PI / (duration * (1 + bounce))
     val dampingRatio: Double get() = damping / (2 * sqrt(stiffness * mass))
 
     /**
@@ -818,7 +821,11 @@ data class Spring(val duration: Double = 0.5, val bounce: Double = 0.0) {
         val naturalFrequency = sqrt(stiffness / mass)
         val ratio = dampingRatio
         val start = -target
-        if (ratio >= 1) {
+        if (bounce < 0) {
+            val (fast, slow) = overdamped(naturalFrequency, ratio, start, initialVelocity)
+            return target + fast.amount * exp(fast.rate * time) + slow.amount * exp(slow.rate * time)
+        }
+        if (bounce == 0.0) {
             val rate = exp(-naturalFrequency * time)
             return target + rate * (start + (naturalFrequency * start + initialVelocity) * time)
         }
@@ -829,7 +836,8 @@ data class Spring(val duration: Double = 0.5, val bounce: Double = 0.0) {
 
     /**
      * `velocity(target:initialVelocity:time:)`: how fast the spring of `value` moves at `time`, in units a second;
-     * `initialVelocity` until it leaves, and still once infinitely long has passed.
+     * `initialVelocity` until it leaves, and still once infinitely long has passed. SwiftUI's own adds the target to
+     * an overdamped spring's speed; this is the speed `value` moves at.
      */
     fun velocity(target: Double, initialVelocity: Double = 0.0, time: Double): Double {
         if (!(time > 0)) return initialVelocity
@@ -837,7 +845,11 @@ data class Spring(val duration: Double = 0.5, val bounce: Double = 0.0) {
         val naturalFrequency = sqrt(stiffness / mass)
         val ratio = dampingRatio
         val start = -target
-        if (ratio >= 1) {
+        if (bounce < 0) {
+            val (fast, slow) = overdamped(naturalFrequency, ratio, start, initialVelocity)
+            return fast.amount * fast.rate * exp(fast.rate * time) + slow.amount * slow.rate * exp(slow.rate * time)
+        }
+        if (bounce == 0.0) {
             val pull = naturalFrequency * start + initialVelocity
             return exp(-naturalFrequency * time) * (initialVelocity - naturalFrequency * pull * time)
         }
@@ -846,6 +858,26 @@ data class Spring(val duration: Double = 0.5, val bounce: Double = 0.0) {
         val sine = (decay * start + initialVelocity) / frequency
         return exp(-decay * time) *
             ((sine * frequency - decay * start) * cos(frequency * time) - (start * frequency + decay * sine) * sin(frequency * time))
+    }
+
+    /** An overdamped spring's two decaying parts, from `start` away from rest at `initialVelocity`. */
+    private fun overdamped(naturalFrequency: Double, ratio: Double, start: Double, initialVelocity: Double): Pair<Decay, Decay> {
+        val spread = naturalFrequency * sqrt(ratio * ratio - 1)
+        val fastRate = -ratio * naturalFrequency - spread
+        val slowRate = -ratio * naturalFrequency + spread
+        val slowAmount = (initialVelocity - fastRate * start) / (slowRate - fastRate)
+        return Decay(start - slowAmount, fastRate) to Decay(slowAmount, slowRate)
+    }
+
+    private data class Decay(val amount: Double, val rate: Double)
+
+    companion object {
+        /**
+         * `Spring(response:dampingRatio:)`, as `.spring(response:dampingFraction:)` builds it: the duration is the
+         * response, and a damping ratio above 1 is the overdamped bounce 1 / ratio − 1.
+         */
+        fun response(response: Double, dampingRatio: Double): Spring =
+            Spring(response, if (dampingRatio <= 1) 1 - dampingRatio else 1 / dampingRatio - 1)
     }
 }
 
@@ -857,6 +889,14 @@ sealed interface MotionCurve {
     /** `.easeOut(duration:)`, after `.delay(_:)`: Compose's `tween` with `CubicBezierEasing(0f, 0f, 0.58f, 1f)`. */
     data class EaseOut(val duration: Double, val delay: Double = 0.0) : MotionCurve {
         override fun value(time: Double): Double = UnitCurve.easeOut.value((time - delay) / duration)
+    }
+
+    /**
+     * Any other timing curve over `duration` seconds after `delay`: `.linear`, `.easeIn`, `.easeInOut`,
+     * `.timingCurve`. Compose's `tween` with the curve's easing.
+     */
+    data class Timing(val curve: UnitCurve, val duration: Double, val delay: Double = 0.0) : MotionCurve {
+        override fun value(time: Double): Double = curve.value((time - delay) / duration)
     }
 
     /** `.spring(duration:bounce:)`, from rest: Compose's `spring(dampingRatio, stiffness)` with the spring's. */

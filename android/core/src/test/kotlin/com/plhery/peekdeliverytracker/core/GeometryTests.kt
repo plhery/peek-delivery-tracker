@@ -93,4 +93,45 @@ class GeometryTests {
             assertEquals(0.0, spring.velocity(sample.target, sample.initialVelocity, Double.POSITIVE_INFINITY), 0.0)
         }
     }
+
+    @Test
+    fun aBounceBelowZeroIsOverdampedAsSwiftUIs() {
+        // Spring(duration: 0.5, bounce: -0.3) and Spring(response: 0.5, dampingRatio: 1.5): SwiftUI's damping and ratio.
+        val overdamped = Spring(0.5, -0.3)
+        assertEquals(35.903916041, overdamped.damping, 1e-9)
+        assertEquals(1 / 0.7, overdamped.dampingRatio, 1e-12)
+        assertEquals(157.913670417, overdamped.stiffness, 1e-9)
+        val response = Spring.response(0.5, 1.5)
+        assertEquals(Spring(0.5, 1 / 1.5 - 1), response)
+        assertEquals(37.6991118431, response.damping, 1e-9)
+        assertEquals(1.5, response.dampingRatio, 1e-12)
+        assertEquals(0.14, Spring.response(0.42, 0.86).bounce, 1e-12)
+        assertEquals(Spring(0.55, 0.0), Spring.response(0.55, 1.0))
+        assertEquals(0.281874693577, response.value(1.0, time = 0.1), 1e-11)
+    }
+
+    /**
+     * (target, initial velocity, time, value, velocity) of `Spring(duration: 0.5, bounce: -0.3)` in SwiftUI. Its
+     * `velocity` of an overdamped spring is the speed plus the target, the target still once at rest; :core gives the
+     * speed its `value` moves at.
+     */
+    @Test
+    fun anOverdampedSpringMovesAsSwiftUIsFromAnyStartingSpeed() {
+        val spring = Spring(0.5, -0.3)
+        val samples = listOf(
+            listOf(1.0, 0.0, 0.1, 0.290825710989, 4.40276162898),
+            listOf(1.0, 3.0, 0.3, 0.767689764507, 2.19193676135),
+            listOf(2.0, 0.0, 0.3, 1.48521162544, 4.64073259697),
+            listOf(2.0, 3.0, 0.1, 0.64629614121, 8.61204755322),
+            listOf(-3.0, 3.0, 0.1, -0.807832413737, -13.4017605917),
+            listOf(-3.0, 0.0, 5.0, -2.99999999997, -3.00000000013),
+            listOf(0.0, 3.0, 0.3, 0.0250839517882, -0.128429537138),
+        )
+        for ((target, initialVelocity, time, value, velocity) in samples) {
+            val label = "to $target at $initialVelocity, $time s"
+            assertEquals(label, value, spring.value(target, initialVelocity, time), 1e-11)
+            assertEquals(label, velocity - target, spring.velocity(target, initialVelocity, time), 1e-10)
+        }
+        assertEquals(3.0, spring.velocity(2.0, 3.0, time = 0.0), 0.0)
+    }
 }

@@ -29,6 +29,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.Instant
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.util.Locale
@@ -605,8 +606,11 @@ class ParcelLogicTests {
         val nextUp = widgetParcel(label = "Next up", outForDelivery = false)
         val outForDelivery = widgetParcel(label = "Courier", outForDelivery = true)
         val later = widgetParcel(label = "Later", outForDelivery = false)
+        val parcels = DeliveryWidgetSelection.parcels(onTheWay = listOf(nextUp, outForDelivery, later), delivered = emptyList())
 
-        assertEquals(listOf(outForDelivery, nextUp), DeliveryWidgetSelection.displayParcels(listOf(nextUp, outForDelivery, later)))
+        assertEquals(listOf(outForDelivery, nextUp, later), parcels)
+        assertEquals(listOf(listOf(outForDelivery, nextUp), listOf(later)), DeliveryWidgetSelection.pages(parcels, medium = true))
+        assertEquals(listOf(listOf(outForDelivery), listOf(nextUp), listOf(later)), DeliveryWidgetSelection.pages(parcels, medium = false))
     }
 
     @Test
@@ -614,9 +618,99 @@ class ParcelLogicTests {
         val nextUp = widgetParcel(label = "Next up", outForDelivery = false)
         val first = widgetParcel(label = "Courier one", outForDelivery = true)
         val second = widgetParcel(label = "Courier two", outForDelivery = true)
+        val third = widgetParcel(label = "Courier three", outForDelivery = true)
+        val parcels = DeliveryWidgetSelection.parcels(onTheWay = listOf(nextUp, first, second, third), delivered = emptyList())
 
-        assertEquals(listOf(first, second), DeliveryWidgetSelection.displayParcels(listOf(nextUp, first, second)))
-        assertEquals(listOf(nextUp), DeliveryWidgetSelection.displayParcels(listOf(nextUp)))
+        assertEquals(listOf(listOf(first, second), listOf(third, nextUp)), DeliveryWidgetSelection.pages(parcels, medium = true))
+        assertEquals(listOf(listOf(nextUp)), DeliveryWidgetSelection.pages(listOf(nextUp), medium = true))
+    }
+
+    /** A delivered parcel comes after those on their way, for a day after it arrived, even when the app has not published since. */
+    @Test
+    fun widgetKeepsADeliveredParcelForADay() {
+        val now = Instant.ofEpochSecond(1_800_000_000)
+        val nextUp = widgetParcel(label = "Next up", outForDelivery = false)
+        val arrived = widgetParcel(label = "Arrived", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600))
+        val older = widgetParcel(label = "Older", outForDelivery = false)
+            .copy(deliveredAt = now.minusSeconds(DeliveryWidgetSelection.deliveredFor.toLong() + 1))
+        val parcels = DeliveryWidgetSelection.parcels(onTheWay = listOf(nextUp), delivered = listOf(arrived, older), now = now)
+
+        assertEquals(listOf(nextUp, arrived), parcels)
+        assertEquals(listOf(listOf(nextUp), listOf(arrived)), DeliveryWidgetSelection.pages(parcels, medium = true, now = now))
+        assertEquals(
+            listOf(listOf(nextUp)),
+            DeliveryWidgetSelection.pages(parcels, medium = false, now = now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong())),
+        )
+        val many = (0 until 12).map { widgetParcel(label = "Parcel $it", outForDelivery = false) }
+        assertEquals(DeliveryWidgetSelection.limit, DeliveryWidgetSelection.parcels(onTheWay = many, delivered = listOf(arrived), now = now).size)
+    }
+
+    /** The next button turns the widgets of one size, and for a few minutes only. */
+    @Test
+    fun widgetTurnLastsItsSpellForOneSize() {
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val at = Instant.ofEpochSecond(1_800_000_000)
+        val turn = DeliveryWidgetTurn(parcel = UUID.randomUUID(), at = at)
+
+        assertNull(store.turn(size = "small", now = at))
+        store.setTurn(turn, size = "small")
+        assertEquals(turn, store.turn(size = "small", now = at.plusSeconds(60)))
+        assertNull(store.turn(size = "medium", now = at.plusSeconds(60)))
+        assertNull(store.turn(size = "small", now = turn.ends))
+    }
+
+    /**
+     * Android's own: the widget's line for a parcel with no estimate is its status as the list says it, which names the
+     * probable carrier rather than leave its placeholder unfilled.
+     */
+    @Test
+    fun widgetNamesTheProbableCarrierOfAParcelWithoutAnEstimate() {
+        val packageId = UUID.randomUUID()
+        // A synthetic number in DPD Switzerland's depot range, which no carrier has answered for yet.
+        val json = """
+            {
+              "packages": [{
+                "id": "${packageId.uuidString}",
+                "tracking_number": "06080000000002",
+                "label": "Test parcel",
+                "carrier": "unknown",
+                "created_at": "2026-10-28T09:00:00Z",
+                "sync_status": "waiting",
+                "carrier_data": { "routing": { "likely_carrier": { "carrier": "dpd", "since": "2026-10-28T10:00:00Z" } } },
+                "notifications_muted": false,
+                "tracking_events": []
+              }]
+            }
+        """.trimIndent()
+        val parcels = ApiJson.decodeFromString(PackageListResponse.serializer(), json).packages
+        val localizer = Localizer(AppLanguage.En)
+        val now = Instant.parse("2026-10-28T12:00:00Z")
+        assertNull(localizer.parcelDeliveryEstimate(parcels.first(), now))
+
+        val next = ParcelStore.nextDeliveries(parcels, localizer, now).single()
+        assertEquals("Waiting for DPD Switzerland’s first scan", next.detail)
+        assertEquals(listOf(next), ParcelStore.widgetDeliveries(parcels, localizer, now))
+    }
+
+    /**
+     * Android's own: the store hands the widget the parcels on their way, then those delivered within the last day, the
+     * latest first, each with its arrival and its completion date for a line.
+     */
+    @Test
+    fun widgetDeliveriesFollowTheParcelsOnTheirWayWithThoseDeliveredWithinADay() {
+        val now = Instant.parse("2026-10-28T12:00:00Z")
+        val localizer = Localizer(AppLanguage.En)
+        fun delivered(at: String) = UUID.randomUUID().let { makeParcel(it, events = listOf(event(it, TrackingStage.Delivered, at))) }
+        val onTheWay = UUID.randomUUID().let { makeParcel(it, events = listOf(event(it, TrackingStage.InTransit, "2026-10-28T08:00:00Z"))) }
+        val earlier = delivered("2026-10-28T09:00:00Z")
+        val latest = delivered("2026-10-28T11:00:00Z")
+        val yesterday = delivered("2026-10-27T11:00:00Z")
+
+        val shown = ParcelStore.widgetDeliveries(listOf(earlier, yesterday, onTheWay, latest), localizer, now)
+        assertEquals(listOf(onTheWay.id, latest.id, earlier.id), shown.map { it.id })
+        assertNull(shown[0].deliveredAt)
+        assertEquals(Instant.parse("2026-10-28T11:00:00Z"), shown[1].deliveredAt)
+        assertEquals(localizer.parcelCompletionDate(latest, now), shown[1].detail)
     }
 
     @Test

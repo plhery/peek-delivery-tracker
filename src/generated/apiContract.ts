@@ -34136,6 +34136,7 @@ export interface ApiPublicLookupRequest {
   "dpdPostcode"?: string;
   "dpdPostcodeCountry"?: string;
   "lookupCountryHint"?: string;
+  "language"?: string;
 }
 
 export interface ApiPublicLookupResponse {

@@ -309,10 +309,12 @@ final class DeviceParcels {
         }) {
             throw DeliveryAPIError.duplicateTracking(existing.parcel.id)
         }
+        // A carrier that words its scans in several languages answers the parcel in the app's.
         let response = try await client.lookup(PublicLookupRequest(
             trackingNumber: request.trackingNumber, carrier: request.carrier,
             trackingURL: request.trackingURL, dpdPostcode: request.dpdPostcode,
-            dpdPostcodeCountry: request.dpdPostcodeCountry, lookupCountryHint: request.lookupCountryHint
+            dpdPostcodeCountry: request.dpdPostcodeCountry, lookupCountryHint: request.lookupCountryHint,
+            language: AppLanguage.current.rawValue
         ))
         guard ParcelLinkRoute.validID(response.link.id) else { throw DeliveryAPIError.invalidResponse }
         var entry = DeviceParcel(linkID: response.link.id, label: request.label ?? "", archivedAt: nil,

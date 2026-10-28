@@ -2504,19 +2504,21 @@ describe('TrackingSyncService', () => {
     }
   });
 
-  it("asks a number's carrier once per owner's language, and a lookup without an owner in none", async () => {
+  it("asks a number's carrier once per owner's language, and a lookup without an owner in the one it was made in", async () => {
     const parcel = (id: string, user: string | null, extra: JsonObject = {}): JsonObject => ({ id, user_id: user, carrier: 'swiss-post',
       tracking_number: 'TEST1234', current_stage: 'in_transit', created_at: '2026-09-10T08:00:00Z', last_synced_at: '2026-09-10T11:00:00Z',
       sync_status: 'ok', ...extra });
     const client = fakeClient([parcel('french', 'a', { owner_locale: 'fr' }), parcel('english', 'b', { owner_locale: 'en' }),
       parcel('also-french', 'c', { owner_locale: 'fr' })]);
-    client.listFollowedOneOffPackages.mockResolvedValue([parcel('lookup', null, { one_off: true, owner_locale: null })]);
+    client.listFollowedOneOffPackages.mockResolvedValue([parcel('lookup', null, { one_off: true, owner_locale: null }),
+      parcel('polish-lookup', null, { one_off: true, owner_locale: null, carrier_data: { lookup_language: 'pl' } }),
+      parcel('unknown-language', null, { one_off: true, owner_locale: null, carrier_data: { lookup_language: 'xx' } })]);
     const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-10T11:30:00Z',
       events: [{ time: '2026-09-10T11:30:00Z', description: 'Sorting', stage: 'in_transit', provider_code: 'SORT' }] }) };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
-    await expect(service.sync()).resolves.toMatchObject({ checked: 4 });
+    await expect(service.sync()).resolves.toMatchObject({ checked: 6 });
     // One language per parcel: the two French owners' copies share an answer, no copy takes another language's.
-    expect(adapter.fetch.mock.calls.map((call) => call[4]).sort()).toEqual(['en', 'fr', null]);
+    expect(adapter.fetch.mock.calls.map((call) => call[4]).sort()).toEqual(['en', 'fr', null, 'pl']);
     expect(adapter.fetch.mock.calls.every(([carrier, number]) => carrier === 'swiss-post' && number === 'TEST1234')).toBe(true);
   });
 

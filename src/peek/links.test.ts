@@ -173,6 +173,19 @@ describe('the API backend', () => {
     expect(JSON.parse(String(request.mock.calls[0][1]!.body))).toEqual({ trackingNumber: '993411111122222222', carrier: 'swiss-post' });
   });
 
+  it('sends the language the page is written in, so a carrier that words its scans in several answers in it', async () => {
+    const { links, request } = api(json(owner, 201), json(owner, 201), json(owner, 201));
+    try {
+      for (const [lang, language] of [['pl', 'pl'], ['pt-PT', 'pt'], ['nl', undefined]] as const) {
+        document.documentElement.lang = lang;
+        await links.lookupParcel({ trackingNumber: 'TESTPARCEL983456' });
+        expect(JSON.parse(String(request.mock.calls.at(-1)![1]!.body)).language).toBe(language);
+      }
+    } finally {
+      document.documentElement.lang = '';
+    }
+  });
+
   it('refuses a lookup answer without a usable key', async () => {
     const { links } = api(json({ ...owner, key: 'short' }, 201));
     expect((await failure(links.lookupParcel({ trackingNumber: 'TESTPARCEL983456' }))).kind).toBe('server');

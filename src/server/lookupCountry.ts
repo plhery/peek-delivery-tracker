@@ -2,6 +2,7 @@ import 'server-only';
 import { isIP } from 'node:net';
 import { captureOperationalError } from './observability';
 import { HttpError } from './api';
+import { isLocale } from '../lib/locale';
 import { withPostcodeCountry } from './postcodeCountry';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
@@ -27,13 +28,15 @@ export function lookupCountry(request: Pick<Request, 'headers'>, deviceRegion?: 
 
 /**
  * Called only for a newly created parcel, before its first sync is queued. It
- * also keeps the country of a postcode from abroad (`postcodeCountry`) with it.
+ * also keeps the country of a postcode from abroad (`postcodeCountry`) with it,
+ * and the app language a lookup without an account was made in (`lookup_language`).
  */
 export async function rememberLookupCountry(service: SupabaseServiceClient, parcel: JsonObject, request: Pick<Request, 'headers'>,
-  deviceRegion?: unknown, postcodeCountry?: string | null): Promise<void> {
+  deviceRegion?: unknown, postcodeCountry?: string | null, language?: unknown): Promise<void> {
   const country = lookupCountry(request, deviceRegion);
   const data = { ...withPostcodeCountry(parcel.carrier_data, parcel.dpd_postcode, postcodeCountry),
-    add_recognition_pending: true, ...(country ? { lookup_country_hint: country } : {}) };
+    add_recognition_pending: true, ...(country ? { lookup_country_hint: country } : {}),
+    ...(isLocale(language) ? { lookup_language: language } : {}) };
   try {
     await service.updatePackage(String(parcel.id), { carrier_data: data });
     parcel.carrier_data = data;

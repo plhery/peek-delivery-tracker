@@ -2374,6 +2374,7 @@ struct PublicLookupRequest: Codable, Equatable, Hashable, Sendable {
     var dpdPostcode: String? = nil
     var dpdPostcodeCountry: String? = nil
     var lookupCountryHint: String? = nil
+    var language: String? = nil
 
     private enum CodingKeys: String, CodingKey {
         case trackingNumber
@@ -2382,6 +2383,7 @@ struct PublicLookupRequest: Codable, Equatable, Hashable, Sendable {
         case dpdPostcode
         case dpdPostcodeCountry
         case lookupCountryHint
+        case language
     }
 }
 

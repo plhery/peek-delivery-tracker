@@ -238,6 +238,17 @@ describe('looking up a parcel without an account', () => {
     expect(await response.text()).not.toContain('add_recognition_pending');
   });
 
+  it('keeps the app language a new lookup was made in, when Peek speaks it', async () => {
+    allow(); store();
+    const update = vi.mocked(SupabaseServiceClient.prototype.updatePackage);
+    for (const language of ['xx', 'PL', 7]) {
+      expect((await lookup({ trackingNumber, language }, nextIp())).status).toBe(201);
+      expect(update.mock.lastCall![1].carrier_data).not.toHaveProperty('lookup_language');
+    }
+    expect((await lookup({ trackingNumber, language: 'pl' }, nextIp())).status).toBe(201);
+    expect(update).toHaveBeenLastCalledWith(packageId, { carrier_data: expect.objectContaining({ lookup_language: 'pl' }) });
+  });
+
   it('keeps the country of a postcode from abroad with the postcode of a new lookup', async () => {
     allow();
     const create = vi.spyOn(SupabaseServiceClient.prototype, 'createOneOffParcel').mockResolvedValue({

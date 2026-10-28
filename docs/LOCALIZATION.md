@@ -19,10 +19,12 @@ translating it (not implemented).
   `TrackingLocation` in `PassportStatistics.swift`). Passport and Friends stamps count a
   final country field, or a code that is also a state or canton once the scan was placed in
   that country ([`scanPlace.ts`](../src/lib/scanPlace.ts)).
-- Every carrier lookup sends the parcel owner's app language (`language` in `TrackingInput`,
-  the account's `locale` read through the `owner_locale` computed field). Only Swiss Post
-  reads it: it words its scans in English, French, German or Italian, and in English for
-  any other language and for a lookup without an account. One language per parcel, never
+- Every carrier lookup sends the parcel's language (`language` in `TrackingInput`): its
+  owner's app language (the account's `locale`, read through the `owner_locale` computed
+  field), else the app language a lookup without an account was made in (`lookup_language`
+  in its carrier data, which the web page and the iPhone app send). Swiss Post words its
+  scans in English, French, German or Italian, and Poczta Polska in Polish; both answer
+  any other language, or none, in English. One language per parcel, never
   per viewer, or each check would reword the stored scans back and forth; copies of a
   number whose owners read different languages don't share the carrier's answer. UPU,
   EMS, Ship24, ParcelsApp and 17TRACK are asked for English; La Poste for French. That
@@ -30,8 +32,8 @@ translating it (not implemented).
 - Event identity ([`providerEventId`](../src/server/trackingSync.ts)) hashes carrier, time,
   location and description. Rewriting stored descriptions per language would duplicate
   scans, so translation has to happen at display time. A stored scan is only reworded in
-  place, when another source reports the same scan, Swiss Post words it in its owner's
-  language (the same provider code, instant and place), or its source rewords it and no
+  place, when another source reports the same scan, Swiss Post or Poczta Polska words it in
+  the parcel's language (the same provider code, instant and place), or its source rewords it and no
   longer gives the old words (the same instant and stage)
   ([`eventIdentity.ts`](../src/server/eventIdentity.ts), [ROUTING.md](ROUTING.md)).
 - Pick tracking sources for coverage, freshness and identity, never for language. A handoff

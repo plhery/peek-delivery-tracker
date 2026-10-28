@@ -18,12 +18,15 @@ final class DeviceParcelTests: XCTestCase {
         private var log: [String] = []
         private var countryHints: [String?] = []
         private var postcodes: [String?] = []
+        private var languages: [String?] = []
         func add(_ call: String) { lock.withLock { log.append(call) } }
         func lookupCountry(_ hint: String?) { lock.withLock { countryHints.append(hint) } }
         func lookupPostcode(_ postcode: String?) { lock.withLock { postcodes.append(postcode) } }
+        func lookupLanguage(_ language: String?) { lock.withLock { languages.append(language) } }
         var all: [String] { lock.withLock { log } }
         var lookupCountries: [String?] { lock.withLock { countryHints } }
         var lookupPostcodes: [String?] { lock.withLock { postcodes } }
+        var lookupLanguages: [String?] { lock.withLock { languages } }
     }
 
     private let key = String(repeating: "k", count: 43)
@@ -58,6 +61,7 @@ final class DeviceParcelTests: XCTestCase {
                 calls.add("lookup \(request.trackingNumber) \(request.carrier?.rawValue ?? "-")")
                 calls.lookupCountry(request.lookupCountryHint)
                 calls.lookupPostcode(request.dpdPostcode)
+                calls.lookupLanguage(request.language)
                 guard let lookup else { throw DeviceLookupsSpent() }
                 return lookup
             },
@@ -132,6 +136,8 @@ final class DeviceParcelTests: XCTestCase {
         ))
 
         XCTAssertEqual(calls.lookupCountries, ["CH"])
+        // A carrier that words its scans in several languages answers the parcel in the app's.
+        XCTAssertEqual(calls.lookupLanguages, [AppLanguage.current.rawValue])
         XCTAssertEqual(calls.all, ["lookup TESTPARCEL123789 dhl"])
     }
 

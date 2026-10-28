@@ -1,5 +1,5 @@
 import catalog from '../../shared/analytics.json';
-import { isLocale, SUPPORTED_LOCALES } from './locale';
+import { pageLocale, SUPPORTED_LOCALES } from './locale';
 
 export type AnalyticsOutcome = 'success' | 'error' | 'started' | 'accepted';
 type Configuration = { endpoint: string; hostname: string; webWebsite: string; iosWebsite: string };
@@ -74,11 +74,6 @@ let arrival: { referrer?: string; campaign: string } | null = typeof window === 
     campaign: campaignQuery(location.search),
   };
 
-/** The app's language as the page declares it (`pt-PT` is `pt`), when it is one Peek speaks. */
-function appLocale(): string | undefined {
-  const language = document.documentElement.lang.toLowerCase().split('-')[0];
-  return isLocale(language) ? language : undefined;
-}
 
 export const analyticsPreferenceKey = 'sdt.analytics.enabled';
 export function analyticsEnabled() {
@@ -138,7 +133,7 @@ async function flush() {
       if (optedOut()) { queue = []; break; }
       const source = !event.name ? arrival : null;
       if (source) arrival = null;
-      const locale = appLocale();
+      const locale = pageLocale();
       try {
         const response = await fetch(config.endpoint, {
           method: 'POST', credentials: 'omit', referrerPolicy: 'no-referrer', keepalive: true,

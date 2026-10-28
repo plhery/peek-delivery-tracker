@@ -14,6 +14,13 @@ export function isLocale(value: unknown): value is Locale {
   return SUPPORTED_LOCALES.includes(value as Locale);
 }
 
+/** The app's language as the page declares it (`pt-PT` is `pt`), when it is one Peek speaks. */
+export function pageLocale(): Locale | undefined {
+  if (typeof document === 'undefined') return undefined;
+  const language = document.documentElement.lang.toLowerCase().split('-')[0];
+  return isLocale(language) ? language : undefined;
+}
+
 /**
  * The `lang` a page or an email declares in a language. Portuguese is European Portuguese, so
  * screen readers pick a voice from Portugal. Addresses, hreflang and the stored choice keep `pt`.

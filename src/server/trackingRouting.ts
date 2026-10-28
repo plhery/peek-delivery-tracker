@@ -537,7 +537,7 @@ export function earlierParcelRows(parcel: JsonObject): string[] | null {
   return oldLabel(parcel.created_at, answer) ? rows.map((row) => String(row.provider_event_id)) : null;
 }
 /** What a parcel keeps of its carrier data once it forgets a reused number's earlier parcel: what the owner gave and the number's cooldowns. */
-const KEPT_WITHOUT_EARLIER_PARCEL = ['lookup_country_hint', 'postcode_country', 'universal_input', 'add_recognition_pending', 'delivery_probe', 'earlier_checked_at'];
+const KEPT_WITHOUT_EARLIER_PARCEL = ['lookup_country_hint', 'lookup_language', 'postcode_country', 'universal_input', 'add_recognition_pending', 'delivery_probe', 'earlier_checked_at'];
 /** Routing a reused number's earlier parcel taught: where its answers came from, its watermark and what filed or confirmed it. */
 const EARLIER_PARCEL_ROUTING = ['last_event_at', 'last_success_at', 'discovered_carrier', 'preferred_provider', 'preferred_number',
   'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested', 'likely_carrier'];

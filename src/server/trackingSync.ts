@@ -4,6 +4,7 @@ import { CarrierError, carrierErrorKind, inferStage, stageSource, resultStage, r
 export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } from 'universal-parcel-scraper';
 import { AMAZON_ACCOUNT_MESSAGE, AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
 import { normalizeTrackingNumber } from '../lib/carriers';
+import { isLocale } from '../lib/locale';
 import { EVENT_STAGE_ORDER } from '../lib/stages';
 
 import { createHash } from 'node:crypto';
@@ -217,12 +218,14 @@ function handoffPostcode(parcel: JsonObject, carrier: string, partner: string, n
 }
 
 /**
- * The language a carrier that words its scans in several (Swiss Post) answers the parcel in: its
- * owner's app language, one per parcel whoever views it, or every check would reword the stored
- * scans back and forth. None for a lookup without an account, which the carrier answers in English.
+ * The language a carrier that words its scans in several (Swiss Post, Poczta Polska) answers the
+ * parcel in: its owner's app language, else the one a lookup without an account was made in, one
+ * per parcel whoever views it, or every check would reword the stored scans back and forth.
  */
 function ownerLanguage(parcel: JsonObject): string | null {
-  return typeof parcel.owner_locale === 'string' && parcel.owner_locale.trim() ? parcel.owner_locale.trim() : null;
+  if (typeof parcel.owner_locale === 'string' && parcel.owner_locale.trim()) return parcel.owner_locale.trim();
+  const lookup = isRecord(parcel.carrier_data) ? parcel.carrier_data.lookup_language : null;
+  return isLocale(lookup) ? lookup : null;
 }
 
 /**
@@ -2110,7 +2113,7 @@ export class TrackingSyncService {
       // Linked journey identity, the postcode the owner gave a provider, and the delivery partner's probe belong to the
       // parcel, not an individual carrier response: a provider answering while the origin is down keeps the probe's gap.
       if (isRecord(parcel.carrier_data)) {
-        for (const key of ['lookup_country_hint', 'postcode_country', 'universal_input', 'original_carrier', 'original_tracking_number', 'original_tracking_url', 'original_package_id', 'active_tracking_carrier', 'active_tracking_number', 'original_canonical_tracking_number', 'auto_changed_from', 'auto_changed_to', 'auto_changed_at', 'handed_over_at', 'earlier_checked_at', 'delivery_probe', 'scans_withdrawn', 'scans_withdrawn_at', 'clock_offsets', DIRECT_HISTORY]) {
+        for (const key of ['lookup_country_hint', 'lookup_language', 'postcode_country', 'universal_input', 'original_carrier', 'original_tracking_number', 'original_tracking_url', 'original_package_id', 'active_tracking_carrier', 'active_tracking_number', 'original_canonical_tracking_number', 'auto_changed_from', 'auto_changed_to', 'auto_changed_at', 'handed_over_at', 'earlier_checked_at', 'delivery_probe', 'scans_withdrawn', 'scans_withdrawn_at', 'clock_offsets', DIRECT_HISTORY]) {
           if (parcel.carrier_data[key] != null && carrierData[key] == null) carrierData[key] = parcel.carrier_data[key];
         }
       }

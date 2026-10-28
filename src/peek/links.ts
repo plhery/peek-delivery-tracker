@@ -18,6 +18,7 @@ import type { Locale } from '../i18n';
 import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
 import { isDemoBuild } from '../lib/buildMode';
 import { CARRIERS, detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
+import { pageLocale } from '../lib/locale';
 import { userErrorKey } from '../lib/userMessages';
 import type { CarrierId } from '../types';
 import { createDemoLinks } from './demoLinks';
@@ -149,6 +150,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
     async lookupParcel(input, signal) {
       // Named fields only: whatever else the caller holds, a name included, stays on the device.
       const trackingNumber = normalizeTrackingNumber(input.trackingNumber);
+      const language = pageLocale();
       const body: ApiPublicLookupRequest = {
         trackingNumber,
         // Like adding to an account: the carrier the number's shape says, unless one was chosen.
@@ -156,6 +158,8 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
         ...(input.trackingUrl?.trim() ? { trackingUrl: input.trackingUrl.trim() } : {}),
         ...(input.dpdPostcode?.trim() ? { dpdPostcode: input.dpdPostcode.trim() } : {}),
         ...(input.dpdPostcode?.trim() && input.dpdPostcodeCountry ? { dpdPostcodeCountry: input.dpdPostcodeCountry } : {}),
+        // A carrier that words its scans in several languages answers the parcel in the page's.
+        ...(language ? { language } : {}),
       };
       const response = await protectedPost('/api/public/parcels', body, signal);
       if (!response.ok) throw await failure(response);

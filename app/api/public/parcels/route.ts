@@ -58,7 +58,9 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage }): Pr
   progress.stage = 'saving';
   const key = newOwnerKey();
   const created = await service.createOneOffParcel(values, ownerKeyHash(key)!);
-  if (created.created) await rememberLookupCountry(service, created.package, context.request, body.lookupCountryHint, values.dpdPostcodeCountry);
+  if (created.created) {
+    await rememberLookupCountry(service, created.package, context.request, body.lookupCountryHint, values.dpdPostcodeCountry, body.language);
+  }
   await settleTypedSupportCases(service, values.trackingNumber);
   recordLookup(created.created ? 'created' : 'reused', context.requestId);
   try {

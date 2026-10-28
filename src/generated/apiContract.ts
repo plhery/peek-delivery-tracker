@@ -40,7 +40,8 @@ export const CARRIER_CAPABILITIES = {
       "CH",
       "LI"
     ],
-    "trackingSearchUrl": "https://www.post.ch/de/empfangen/sendung-verfolgen"
+    "trackingSearchUrl": "https://www.post.ch/de/empfangen/sendung-verfolgen",
+    "helpUrl": "https://www.post.ch/de/hilfe-und-kontakt/empfangen"
   },
   "swiss-post-cargo": {
     "displayName": "Swiss Post Cargo",
@@ -79,7 +80,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CH"
     ],
-    "trackingSearchUrl": "https://apv.swisspost-cargo.com/public/trackandtrace/"
+    "trackingSearchUrl": "https://apv.swisspost-cargo.com/public/trackandtrace/",
+    "helpUrl": "https://www.swisspost-cargo.com/ch-de/hilfe-und-kontakt"
   },
   "quickpac": {
     "displayName": "Quickpac",
@@ -119,7 +121,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CH"
     ],
-    "trackingSearchUrl": "https://www.planzer-paket.ch/de/"
+    "trackingSearchUrl": "https://www.planzer-paket.ch/de/",
+    "helpUrl": "https://www.planzer-paket.ch/de/kontakt/"
   },
   "planzer": {
     "displayName": "Planzer",
@@ -312,7 +315,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "trackingSearchUrl": "https://global.cainiao.com/detail.htm"
+    "trackingSearchUrl": "https://global.cainiao.com/detail.htm",
+    "helpUrl": "https://www.cainiao.com/en/about-us-contact-us.html"
   },
   "sunyou": {
     "displayName": "SunYou",
@@ -461,7 +465,9 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "NL"
     ],
-    "trackingSearchUrl": "https://postnl.post/track"
+    "trackingSearchUrl": "https://postnl.post/track",
+    "helpUrl": "https://www.postnl.nl/en/customer-service/",
+    "hidesDestinationLeg": "^[0-9]{18}$"
   },
   "postlogistics": {
     "displayName": "PostLogistics",
@@ -649,7 +655,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "DE"
     ],
-    "trackingSearchUrl": "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html"
+    "trackingSearchUrl": "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html",
+    "helpUrl": "https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html"
   },
   "dhl-ecommerce": {
     "displayName": "DHL eCommerce",
@@ -729,7 +736,8 @@ export const CARRIER_CAPABILITIES = {
       "DE",
       "US"
     ],
-    "trackingSearchUrl": "https://www.dhl.com/ch-en/home/tracking.html"
+    "trackingSearchUrl": "https://www.dhl.com/ch-en/home/tracking.html",
+    "helpUrl": "https://webtrack.dhlecs.com/support/customer-service"
   },
   "ups": {
     "displayName": "UPS",
@@ -770,7 +778,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "United Parcel Service"
     ],
-    "trackingSearchUrl": "https://www.ups.com/track"
+    "trackingSearchUrl": "https://www.ups.com/track",
+    "helpUrl": "https://www.ups.com/gb/en/support/contact-us"
   },
   "amazon-logistics": {
     "displayName": "Amazon Logistics",
@@ -898,7 +907,8 @@ export const CARRIER_CAPABILITIES = {
       "TR",
       "US"
     ],
-    "trackingSearchUrl": "https://track.amazon.fr/"
+    "trackingSearchUrl": "https://track.amazon.fr/",
+    "helpUrl": "https://track.amazon.fr/contact-us"
   },
   "fedex": {
     "displayName": "FedEx",
@@ -958,7 +968,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "fedex-ground-economy"
       }
     ],
-    "trackingSearchUrl": "https://www.fedex.com/en-ch/tracking.html"
+    "trackingSearchUrl": "https://www.fedex.com/en-ch/tracking.html",
+    "helpUrl": "https://www.fedex.com/customer-support/en-ch"
   },
   "gls-ch": {
     "displayName": "GLS Switzerland",
@@ -1088,7 +1099,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CH"
     ],
-    "trackingSearchUrl": "https://www.dpd.com/ch/de/"
+    "trackingSearchUrl": "https://www.dpd.com/ch/de/",
+    "helpUrl": "https://www.dpd.com/ch/de/supportcenter/anliegen-schildern/"
   },
   "dpd-fr": {
     "displayName": "DPD France",
@@ -1146,7 +1158,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "FR"
     ],
-    "trackingSearchUrl": "https://trace.dpd.fr/fr/trace"
+    "trackingSearchUrl": "https://trace.dpd.fr/fr/trace",
+    "helpUrl": "https://www.dpd.com/fr/fr/contact/service-clients/"
   },
   "mondial-relay": {
     "displayName": "Mondial Relay",
@@ -1219,7 +1232,8 @@ export const CARRIER_CAPABILITIES = {
       "InPost Spain",
       "InPost España",
       "InPost (ES)"
-    ]
+    ],
+    "helpUrl": "https://www.mondialrelay.fr/nous-contacter/"
   },
   "relais-colis": {
     "displayName": "Relais Colis",
@@ -1330,7 +1344,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "FR"
     ],
-    "trackingSearchUrl": "https://www.laposte.fr/outils/suivre-vos-envois"
+    "trackingSearchUrl": "https://www.laposte.fr/outils/suivre-vos-envois",
+    "helpUrl": "https://aide.laposte.fr/nous-contacter"
   },
   "chronopost": {
     "displayName": "Chronopost",
@@ -1392,7 +1407,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "FR"
     ],
-    "trackingSearchUrl": "https://www.chronopost.fr/fr/suivi-colis"
+    "trackingSearchUrl": "https://www.chronopost.fr/fr/suivi-colis",
+    "helpUrl": "https://www.chronopost.fr/fr/particulier/nous-contacter"
   },
   "gls-fr": {
     "displayName": "GLS France",
@@ -1508,7 +1524,8 @@ export const CARRIER_CAPABILITIES = {
       "BE",
       "LU"
     ],
-    "trackingSearchUrl": "https://colisprive.com/moncolis/pages/DetailColis.aspx"
+    "trackingSearchUrl": "https://colisprive.com/moncolis/pages/DetailColis.aspx",
+    "helpUrl": "https://colisprive.fr/aide/mon-colis-a-du-retard/"
   },
   "geodis": {
     "displayName": "GEODIS",
@@ -1757,7 +1774,8 @@ export const CARRIER_CAPABILITIES = {
       "IT",
       "GB"
     ],
-    "trackingSearchUrl": "https://mydeliveries.paack.app/tracking"
+    "trackingSearchUrl": "https://mydeliveries.paack.app/tracking",
+    "helpUrl": "https://help.paack.app/es/support/home"
   },
   "asendia": {
     "displayName": "Asendia",
@@ -1882,7 +1900,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "IN"
     ],
-    "trackingSearchUrl": "https://myspeedpost.com/track"
+    "trackingSearchUrl": "https://myspeedpost.com/track",
+    "helpUrl": "https://www.indiapost.gov.in/help&Support/contactus"
   },
   "hermes-de": {
     "displayName": "Hermes Germany",
@@ -1935,7 +1954,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "DE"
     ],
-    "trackingSearchUrl": "https://www.myhermes.de/empfangen/sendungsverfolgung/"
+    "trackingSearchUrl": "https://www.myhermes.de/empfangen/sendungsverfolgung/",
+    "helpUrl": "https://www.myhermes.de/service/fragen/empfangen/wo-ist-meine-sendung.html"
   },
   "gls-de": {
     "displayName": "GLS Germany",
@@ -2019,7 +2039,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "DE"
     ],
-    "trackingSearchUrl": "https://gls-group.eu/EU/en/parcel-tracking"
+    "trackingSearchUrl": "https://gls-group.eu/EU/en/parcel-tracking",
+    "helpUrl": "https://www.gls-pakete.de/glossar-privat/kontaktmoeglichkeiten"
   },
   "delivengo": {
     "displayName": "Delivengo",
@@ -2152,7 +2173,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "GB"
     ],
-    "trackingSearchUrl": "https://www.royalmail.com/portal/rm/track"
+    "trackingSearchUrl": "https://www.royalmail.com/portal/rm/track",
+    "helpUrl": "https://help.royalmail.com/personal/s/article/My-tracking-message-looks-wrong"
   },
   "parcelforce": {
     "displayName": "Parcelforce Worldwide",
@@ -2191,7 +2213,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://www.royalmail.com/track-your-item",
     "aliases": [
       "Parcelforce"
-    ]
+    ],
+    "helpUrl": "https://www.parcelforce.com/contact-us"
   },
   "evri": {
     "displayName": "Evri",
@@ -2291,7 +2314,8 @@ export const CARRIER_CAPABILITIES = {
       "PT",
       "GB"
     ],
-    "trackingSearchUrl": "https://inpost.pl/sledzenie-przesylek"
+    "trackingSearchUrl": "https://inpost.pl/sledzenie-przesylek",
+    "helpUrl": "https://inpost.pl/kontakt"
   },
   "an-post": {
     "displayName": "An Post",
@@ -2325,7 +2349,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "IE"
     ],
-    "trackingSearchUrl": "https://www.anpost.com/Post-Parcels/Track/Search"
+    "trackingSearchUrl": "https://www.anpost.com/Post-Parcels/Track/Search",
+    "helpUrl": "https://www.anpost.com/contactus"
   },
   "bpost": {
     "displayName": "bpost",
@@ -2385,7 +2410,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "BE"
     ],
-    "trackingSearchUrl": "https://track.bpost.cloud/"
+    "trackingSearchUrl": "https://track.bpost.cloud/",
+    "helpUrl": "https://www.bpost.be/nl/faq/mijn-pakje-lijkt-ergens-vast-te-zitten-het-beweegt-al-een-tijdje-niet-meer-op-track-trace"
   },
   "austrian-post": {
     "displayName": "Austrian Post",
@@ -2422,7 +2448,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "AT"
     ],
-    "trackingSearchUrl": "https://www.post.at/en/s/track-and-trace-search"
+    "trackingSearchUrl": "https://www.post.at/en/s/track-and-trace-search",
+    "helpUrl": "https://www.post.at/k/c/kontakt"
   },
   "postnord": {
     "displayName": "PostNord",
@@ -2491,7 +2518,8 @@ export const CARRIER_CAPABILITIES = {
       "PostNord Denmark",
       "Direct Link",
       "Direct Link Worldwide"
-    ]
+    ],
+    "helpUrl": "https://www.postnord.se/kundservice-faq/"
   },
   "posti": {
     "displayName": "Posti",
@@ -2582,7 +2610,8 @@ export const CARRIER_CAPABILITIES = {
       "Itella SmartPOST",
       "Itella Estonia",
       "Itella"
-    ]
+    ],
+    "helpUrl": "https://www.posti.fi/asiakaspalvelu"
   },
   "correos-express": {
     "displayName": "Correos Express",
@@ -2612,7 +2641,8 @@ export const CARRIER_CAPABILITIES = {
       "ES",
       "PT"
     ],
-    "trackingSearchUrl": "https://s.correosexpress.com/"
+    "trackingSearchUrl": "https://s.correosexpress.com/",
+    "helpUrl": "https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente"
   },
   "seur": {
     "displayName": "SEUR",
@@ -2660,7 +2690,8 @@ export const CARRIER_CAPABILITIES = {
       "ES",
       "PT"
     ],
-    "trackingSearchUrl": "https://www.seur.com/miseur/mis-envios"
+    "trackingSearchUrl": "https://www.seur.com/miseur/mis-envios",
+    "helpUrl": "https://www.seur.com/miseur/soporte/atencion-cliente/buscador"
   },
   "mrw": {
     "displayName": "MRW",
@@ -2687,7 +2718,8 @@ export const CARRIER_CAPABILITIES = {
       "ES",
       "PT"
     ],
-    "trackingSearchUrl": "https://www.mrw.es/seguimiento"
+    "trackingSearchUrl": "https://www.mrw.es/seguimiento",
+    "helpUrl": "https://www.mrw.es/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp"
   },
   "nacex": {
     "displayName": "NACEX",
@@ -2723,7 +2755,8 @@ export const CARRIER_CAPABILITIES = {
       "PT",
       "AD"
     ],
-    "trackingSearchUrl": "https://www.nacex.es/irSeguimiento.do"
+    "trackingSearchUrl": "https://www.nacex.es/irSeguimiento.do",
+    "helpUrl": "https://www.nacex.es/irContactenosContacto.do"
   },
   "ctt": {
     "displayName": "CTT Portugal",
@@ -2759,7 +2792,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "PT"
     ],
-    "trackingSearchUrl": "https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx"
+    "trackingSearchUrl": "https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx",
+    "helpUrl": "https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/formulario-de-contacto"
   },
   "ctt-express": {
     "displayName": "CTT Express",
@@ -2803,7 +2837,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://shipping-tracking.production.cloud2.cttexpress.com/",
     "aliases": [
       "CTT Express Tracking"
-    ]
+    ],
+    "helpUrl": "https://www.cttexpress.com/envios/incidencias"
   },
   "poste-italiane": {
     "displayName": "Poste Italiane",
@@ -2918,7 +2953,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "IT"
     ],
-    "trackingSearchUrl": "https://www.poste.it/cerca/index.html"
+    "trackingSearchUrl": "https://www.poste.it/cerca/index.html",
+    "helpUrl": "https://www.poste.it/assistenza/"
   },
   "brt": {
     "displayName": "BRT",
@@ -2974,7 +3010,8 @@ export const CARRIER_CAPABILITIES = {
       "BRT Bartolini (Parcel ID)",
       "BRT Bartolini (DPD)",
       "myBRT.it"
-    ]
+    ],
+    "helpUrl": "https://www.brt.it/it/servizio-clienti/contattaci/"
   },
   "ecoscooting": {
     "displayName": "Ecoscooting",
@@ -3027,7 +3064,8 @@ export const CARRIER_CAPABILITIES = {
       "ES",
       "PT"
     ],
-    "trackingSearchUrl": "https://ecoscooting.com/"
+    "trackingSearchUrl": "https://ecoscooting.com/",
+    "helpUrl": "https://www.ecoscooting.com/atencionCliente"
   },
   "tipsa": {
     "displayName": "TIPSA",
@@ -3068,7 +3106,8 @@ export const CARRIER_CAPABILITIES = {
       "PT",
       "AD"
     ],
-    "trackingSearchUrl": "https://www.tip-sa.com/es/localizacion-envios"
+    "trackingSearchUrl": "https://www.tip-sa.com/es/localizacion-envios",
+    "helpUrl": "https://www.tip-sa.com/es/contacto"
   },
   "ukrposhta": {
     "displayName": "Ukrposhta",
@@ -3186,7 +3225,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "US"
     ],
-    "trackingSearchUrl": "https://tools.usps.com/tracking/"
+    "trackingSearchUrl": "https://tools.usps.com/tracking/",
+    "helpUrl": "https://www.usps.com/help/missing-mail.htm"
   },
   "canada-post": {
     "displayName": "Canada Post",
@@ -3225,7 +3265,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CA"
     ],
-    "trackingSearchUrl": "https://www.canadapost-postescanada.ca/track-reperage/en/search"
+    "trackingSearchUrl": "https://www.canadapost-postescanada.ca/track-reperage/en/search",
+    "helpUrl": "https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-status-not-updating.page"
   },
   "purolator": {
     "displayName": "Purolator",
@@ -3269,7 +3310,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CA"
     ],
-    "trackingSearchUrl": "https://www.purolator.com/en/shipping/tracker"
+    "trackingSearchUrl": "https://www.purolator.com/en/shipping/tracker",
+    "helpUrl": "https://www.purolator.com/en/resources-support/contact-us"
   },
   "canpar": {
     "displayName": "Canpar",
@@ -3371,7 +3413,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://www.ontrac.com/tracking/",
     "aliases": [
       "LaserShip"
-    ]
+    ],
+    "helpUrl": "https://www.ontrac.com/support/"
   },
   "speedx": {
     "displayName": "SpeedX",
@@ -3404,7 +3447,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "US"
     ],
-    "trackingSearchUrl": "https://tracking.speedx.io/"
+    "trackingSearchUrl": "https://tracking.speedx.io/",
+    "helpUrl": "https://speedx.io/customer-service-and-support/"
   },
   "uniuni": {
     "displayName": "UniUni",
@@ -3472,7 +3516,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://www.uniuni.com/tracking/",
     "aliases": [
       "UNI Express"
-    ]
+    ],
+    "helpUrl": "https://www.uniuni.com/support/"
   },
   "landmark-global": {
     "displayName": "Landmark Global",
@@ -3632,7 +3677,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "US"
     ],
-    "trackingSearchUrl": "https://www.gofo.com/us/track"
+    "trackingSearchUrl": "https://www.gofo.com/us/track",
+    "helpUrl": "https://www.gofo.com/us/customer-service"
   },
   "estafeta": {
     "displayName": "Estafeta",
@@ -3707,7 +3753,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://rastreamento.correios.com.br/app/index.php",
     "aliases": [
       "Brazil Post"
-    ]
+    ],
+    "helpUrl": "https://www.correios.com.br/falecomoscorreios/central-de-atendimento"
   },
   "correos-chile": {
     "displayName": "Correos de Chile",
@@ -3819,7 +3866,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://track.4px.com/",
     "aliases": [
       "4PX Express"
-    ]
+    ],
+    "helpUrl": "https://track.4px.com/#/help/contact"
   },
   "blue-dart": {
     "displayName": "Blue Dart",
@@ -3998,7 +4046,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "JP"
     ],
-    "trackingSearchUrl": "https://trackings.post.japanpost.jp/services/srv/search/input?locale=en"
+    "trackingSearchUrl": "https://trackings.post.japanpost.jp/services/srv/search/input?locale=en",
+    "helpUrl": "https://www.post.japanpost.jp/question/"
   },
   "sf-express": {
     "displayName": "SF Express",
@@ -4060,7 +4109,8 @@ export const CARRIER_CAPABILITIES = {
       "CN",
       "HK"
     ],
-    "trackingSearchUrl": "https://htm.sf-express.com/tw/en/dynamic_function/waybill/"
+    "trackingSearchUrl": "https://htm.sf-express.com/tw/en/dynamic_function/waybill/",
+    "helpUrl": "https://www.sf-international.com/cn/en/about/contact"
   },
   "sto": {
     "displayName": "STO Express",
@@ -4156,7 +4206,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "trackingSearchUrl": "https://www.yto.net.cn/ytoExpress/waybill/search"
+    "trackingSearchUrl": "https://www.yto.net.cn/ytoExpress/waybill/search",
+    "helpUrl": "https://www.ytoglobal.com/rich/question/"
   },
   "zto": {
     "displayName": "ZTO Express",
@@ -4182,7 +4233,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "trackingSearchUrl": "https://www.zto.com/check"
+    "trackingSearchUrl": "https://www.zto.com/check",
+    "helpUrl": "https://www.zto.com/introduce/about/contact"
   },
   "jd-logistics": {
     "displayName": "JD Logistics",
@@ -4217,7 +4269,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "trackingSearchUrl": "https://www.jingdonglogistics.com/Tracking"
+    "trackingSearchUrl": "https://www.jingdonglogistics.com/Tracking",
+    "helpUrl": "https://www.jingdonglogistics.com/contact"
   },
   "yamato": {
     "displayName": "Yamato Transport",
@@ -4458,7 +4511,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "StarTrack",
       "Star Track Express"
-    ]
+    ],
+    "helpUrl": "https://auspost.com.au/help/parcel-tracking/taking-longer-than-expected"
   },
   "hongkong-post": {
     "displayName": "Hongkong Post",
@@ -4623,7 +4677,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://www.ems.com.cn/mailtracking/you_jian_cha_xun.html",
     "aliases": [
       "China EMS"
-    ]
+    ],
+    "helpUrl": "https://english.chinapost.com.cn/en/category/1408/3925-1.htm"
   },
   "packeta": {
     "displayName": "Packeta",
@@ -4677,7 +4732,8 @@ export const CARRIER_CAPABILITIES = {
       "RO",
       "PL"
     ],
-    "trackingSearchUrl": "https://tracking.packeta.com/en/"
+    "trackingSearchUrl": "https://tracking.packeta.com/en/",
+    "helpUrl": "https://www.zasilkovna.cz/zakaznicky-servis"
   },
   "poczta-polska": {
     "displayName": "Poczta Polska",
@@ -4741,7 +4797,8 @@ export const CARRIER_CAPABILITIES = {
       "Pocztex",
       "Allegro Pocztex",
       "Pocztex Kurier"
-    ]
+    ],
+    "helpUrl": "https://www.poczta-polska.pl/kontakt/"
   },
   "bring-posten": {
     "displayName": "Bring",
@@ -4898,7 +4955,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingUrlTemplate": "https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html?searchType=con&cons={trackingNumber}",
-    "trackingSearchUrl": "https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html"
+    "trackingSearchUrl": "https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html",
+    "helpUrl": "https://www.tnt.com/express/en_gb/site/support.html"
   },
   "correos-spain": {
     "displayName": "Correos",
@@ -4950,7 +5008,8 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "ES"
     ],
-    "trackingSearchUrl": "https://www.correos.es/es/es/herramientas/localizador/envios/detalle"
+    "trackingSearchUrl": "https://www.correos.es/es/es/herramientas/localizador/envios/detalle",
+    "helpUrl": "https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion"
   },
   "yanwen": {
     "displayName": "Yanwen",
@@ -4993,7 +5052,8 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://www.yw56.com.cn/en/",
     "aliases": [
       "Yanwen Logistics"
-    ]
+    ],
+    "helpUrl": "https://www.yw56.com.cn/webfile/ContactUs/"
   },
   "the-courier-guy": {
     "displayName": "The Courier Guy",
@@ -5203,7 +5263,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.dhl.com/gb-en/home/tracking.html"
+    "trackingSearchUrl": "https://www.dhl.com/gb-en/home/tracking.html",
+    "helpUrl": "https://mydhl.express.dhl/gb/en/help-and-support.html"
   },
   "cne": {
     "displayName": "CNE Express",
@@ -5321,7 +5382,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "dpd"
       }
     ],
-    "trackingSearchUrl": "https://www.dpd.com/de/en/empfangen/sendungsverfolgung-und-live-tracking/"
+    "trackingSearchUrl": "https://www.dpd.com/de/en/empfangen/sendungsverfolgung-und-live-tracking/",
+    "helpUrl": "https://www.dpd.com/de/de/support/empfaenger/"
   },
   "dpd-uk": {
     "displayName": "DPD UK",
@@ -5374,7 +5436,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "dpd"
       }
     ],
-    "trackingSearchUrl": "https://track.dpd.co.uk/"
+    "trackingSearchUrl": "https://track.dpd.co.uk/",
+    "helpUrl": "https://www.dpd.co.uk/content/how-can-we-help/contact.jsp"
   },
   "ekart": {
     "displayName": "Ekart",
@@ -5463,7 +5526,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.evri.com/track-a-parcel"
+    "trackingSearchUrl": "https://www.evri.com/track-a-parcel",
+    "helpUrl": "https://www.evri.com/help-and-support/help-centre/receiving/awaiting-delivery/tracking-status"
   },
   "intelcom": {
     "displayName": "Intelcom / Dragonfly",
@@ -5582,7 +5646,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://novaposhta.ua/en/tracking/"
+    "trackingSearchUrl": "https://novaposhta.ua/en/tracking/",
+    "helpUrl": "https://novaposhta.ua/more/common-questions/"
   },
   "sagawa": {
     "displayName": "Sagawa Express",
@@ -5655,7 +5720,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.orangeconnex.com/tracking"
+    "trackingSearchUrl": "https://www.orangeconnex.com/tracking",
+    "helpUrl": "https://www.ebay.com/help/buying/returns-refunds/get-help-item-hasnt-arrived?id=4042"
   },
   "spx-ph": {
     "displayName": "SPX Express Philippines",
@@ -5891,7 +5957,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://my.dhlecommerce.nl/home/tracktrace/"
+    "trackingSearchUrl": "https://my.dhlecommerce.nl/home/tracktrace/",
+    "helpUrl": "https://www.dhlecommerce.nl/nl/consument/support/ontvangen/pakket-vertraagd-zoek"
   },
   "dhl-ecommerce-pl": {
     "displayName": "DHL eCommerce Poland",
@@ -5938,7 +6005,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "dhl-ecommerce-pl"
       }
     ],
-    "trackingSearchUrl": "https://mojdhl.pl/tracking"
+    "trackingSearchUrl": "https://mojdhl.pl/tracking",
+    "helpUrl": "https://www.dhl.com/pl-pl/ecommerce/dla-ciebie/obsluga/kontakt/sledzenie.html"
   },
   "dhl-ecommerce-uk": {
     "displayName": "DHL eCommerce UK",
@@ -6042,7 +6110,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://tracktrace.dpd.com.pl/EN/findParcel"
+    "trackingSearchUrl": "https://tracktrace.dpd.com.pl/EN/findParcel",
+    "helpUrl": "https://www.dpd.com/pl/pl/obsluga-klienta/"
   },
   "emile": {
     "displayName": "Emile",
@@ -6130,7 +6199,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.gofo.com/fr/tracking-results/"
+    "trackingSearchUrl": "https://www.gofo.com/fr/tracking-results/",
+    "helpUrl": "https://www.gofo.com/fr/contact-us/"
   },
   "gofo-it": {
     "displayName": "GOFO Italy",
@@ -6175,7 +6245,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.gofo.com/it/tracking-results/"
+    "trackingSearchUrl": "https://www.gofo.com/it/tracking-results/",
+    "helpUrl": "https://www.gofo.com/it/contact-us/"
   },
   "abf-freight": {
     "displayName": "ABF Freight",
@@ -6258,7 +6329,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "mod7"
       }
     ],
-    "trackingSearchUrl": "https://cyp.acscourier.net/en/quick-access/non-registered-users/track-and-trace/"
+    "trackingSearchUrl": "https://cyp.acscourier.net/en/quick-access/non-registered-users/track-and-trace/",
+    "helpUrl": "https://www.acscourier.net/el/exypiretisi/kentro-pliroforisis/epikoinoneste-mazi-mas/"
   },
   "allegro-one": {
     "displayName": "Allegro One",
@@ -6312,7 +6384,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingUrlTemplate": "https://allegro.pl/allegrodelivery/sledzenie-paczki?numer={trackingNumber}",
-    "trackingSearchUrl": "https://allegro.pl/allegrodelivery/sledzenie-paczki"
+    "trackingSearchUrl": "https://allegro.pl/allegrodelivery/sledzenie-paczki",
+    "helpUrl": "https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/co-mozesz-zrobic-gdy-czekasz-na-przesylke-zbyt-dlugo-xG71gn36qC4"
   },
   "apc-overnight": {
     "displayName": "APC Overnight",
@@ -6430,7 +6503,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://boxnow.cy/track"
+    "trackingSearchUrl": "https://boxnow.cy/track",
+    "helpUrl": "https://www.boxnow.gr/get-in-touch"
   },
   "cdek": {
     "displayName": "CDEK",
@@ -6826,7 +6900,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://epgtrack.com/"
+    "trackingSearchUrl": "https://epgtrack.com/",
+    "helpUrl": "https://epostglobalshipping.com/contact-support"
   },
   "estes": {
     "displayName": "Estes",
@@ -6902,7 +6977,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.fancourier.ro/awb-tracking/"
+    "trackingSearchUrl": "https://www.fancourier.ro/awb-tracking/",
+    "helpUrl": "https://www.fancourier.ro/contact/"
   },
   "gebrueder-weiss": {
     "displayName": "Gebrüder Weiss",
@@ -7102,7 +7178,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://gls-group.com/IT/it/servizi-online/ricerca-spedizioni/"
+    "trackingSearchUrl": "https://gls-group.com/IT/it/servizi-online/ricerca-spedizioni/",
+    "helpUrl": "https://gls-group.com/IT/it/servizi-online/contatti/"
   },
   "jitsu": {
     "displayName": "Jitsu",
@@ -7225,7 +7302,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://www.pasts.lv/izsekot-sutijumu"
+    "trackingSearchUrl": "https://www.pasts.lv/izsekot-sutijumu",
+    "helpUrl": "https://pasts.lv/klientu-atbalsts"
   },
   "loomis-express": {
     "displayName": "Loomis Express",
@@ -7744,7 +7822,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "gs1",
         "preferred": true
       }
-    ]
+    ],
+    "helpUrl": "https://info.pochta.ru/support/popular-questions/tracking/products-location"
   },
   "saia": {
     "displayName": "Saia",
@@ -7836,7 +7915,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://sameday.ro/status-colet/"
+    "trackingSearchUrl": "https://sameday.ro/status-colet/",
+    "helpUrl": "https://sameday.ro/contact/"
   },
   "speedy": {
     "displayName": "Speedy",
@@ -8796,7 +8876,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "sscc"
       }
     ],
-    "trackingSearchUrl": "https://helthjem.no/sporing"
+    "trackingSearchUrl": "https://helthjem.no/sporing",
+    "helpUrl": "https://helthjem.no/kontakt-oss"
   },
   "hrvatska-posta": {
     "displayName": "Hrvatska pošta",
@@ -8852,7 +8933,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://posiljka.posta.hr/"
+    "trackingSearchUrl": "https://posiljka.posta.hr/",
+    "helpUrl": "https://www.posta.hr/kontakt-centar"
   },
   "instabox": {
     "displayName": "Instabox",
@@ -8968,7 +9050,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://lpexpress.lt/track"
+    "trackingSearchUrl": "https://lpexpress.lt/track",
+    "helpUrl": "https://www.post.lt/lt/kontaktai"
   },
   "maltapost": {
     "displayName": "MaltaPost",
@@ -9162,7 +9245,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "gs1"
       }
     ],
-    "trackingSearchUrl": "https://www.orlenpaczka.pl/sledz-paczke/"
+    "trackingSearchUrl": "https://www.orlenpaczka.pl/sledz-paczke/",
+    "helpUrl": "https://www.orlenpaczka.pl/kontakt/"
   },
   "osm-worldwide": {
     "displayName": "OSM Worldwide",
@@ -9410,7 +9494,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://www.posta.sk/sledovanie-zasielok"
+    "trackingSearchUrl": "https://www.posta.sk/sledovanie-zasielok",
+    "helpUrl": "https://www.posta.sk/podpora/kontakty"
   },
   "stallion-express": {
     "displayName": "Stallion Express",
@@ -9546,7 +9631,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://vintedgo.com/en/tracking?region=europe"
+    "trackingSearchUrl": "https://vintedgo.com/en/tracking?region=europe",
+    "helpUrl": "https://vintedgo.com/fr/faq?country=fr&region=europe"
   },
   "cacesa": {
     "displayName": "CACESA",
@@ -10620,7 +10706,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "s10"
       }
     ],
-    "trackingSearchUrl": "https://postserv.post.gov.tw/pstmail/main_mail.html"
+    "trackingSearchUrl": "https://postserv.post.gov.tw/pstmail/main_mail.html",
+    "helpUrl": "https://www.post.gov.tw/post/internet/Customer_service/default.jsp"
   },
   "citylink-express": {
     "displayName": "City-Link Express",
@@ -11898,7 +11985,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://www.imile.com/en/track"
+    "trackingSearchUrl": "https://www.imile.com/en/track",
+    "helpUrl": "https://help.imile.com/"
   },
   "interrapidisimo": {
     "displayName": "Inter Rapidísimo",
@@ -14876,7 +14964,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://swiftx-express.com/"
+    "trackingSearchUrl": "https://swiftx-express.com/",
+    "helpUrl": "https://swiftx-express.com/customer-service"
   },
   "thhy": {
     "displayName": "Tianhui Hengyuan",
@@ -15674,7 +15763,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.speedaf.com/cn-en/send-parcel"
+    "trackingSearchUrl": "https://www.speedaf.com/cn-en/send-parcel",
+    "helpUrl": "https://www.speedaf.com/ng-en/service/support"
   },
   "mailamericas": {
     "displayName": "MailAmericas",
@@ -15736,7 +15826,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://mailamericas.com/"
+    "trackingSearchUrl": "https://mailamericas.com/",
+    "helpUrl": "https://mailamericas.com/help-center"
   },
   "139express": {
     "displayName": "139 Express",
@@ -16189,7 +16280,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.ecmsglobal.com/en-us/tracking.html"
+    "trackingSearchUrl": "https://www.ecmsglobal.com/en-us/tracking.html",
+    "helpUrl": "https://www.ecmsglobal.com/en-us/contact-us.html"
   },
   "ecourier": {
     "displayName": "eCourier",
@@ -17900,7 +17992,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://spx.com.br/track"
+    "trackingSearchUrl": "https://spx.com.br/track",
+    "helpUrl": "https://help.shopee.com.br/portal/4/article/141507"
   },
   "sri-lanka-post": {
     "displayName": "Sri Lanka Post",
@@ -19754,7 +19847,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://track.roadie.com/"
+    "trackingSearchUrl": "https://track.roadie.com/",
+    "helpUrl": "https://support.roadie.com/support/s/contactsupport"
   },
   "rpx-indonesia": {
     "displayName": "RPX",
@@ -20196,7 +20290,8 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       }
     ],
-    "trackingSearchUrl": "https://www.tnt.it/tracking/Tracking.do"
+    "trackingSearchUrl": "https://www.tnt.it/tracking/Tracking.do",
+    "helpUrl": "https://www.tnt.com/express/it_it/site/support/numero-unico.html"
   },
   "tst-cf-express": {
     "displayName": "TST-CF Express",
@@ -22665,7 +22760,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.js-exp.com/index.php?catid=19"
+    "trackingSearchUrl": "https://www.js-exp.com/index.php?catid=19",
+    "helpUrl": "https://www.js-exp.com/EN/index.php?page=35"
   },
   "relaytech": {
     "displayName": "Relay",
@@ -24524,7 +24620,8 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "gs1"
       }
     ],
-    "trackingSearchUrl": "https://fds2tracking.emea.fedex.com/"
+    "trackingSearchUrl": "https://fds2tracking.emea.fedex.com/",
+    "helpUrl": "https://www.fedex.com/customer-support/pl-pl"
   },
   "gls-at": {
     "displayName": "GLS Austria",
@@ -25988,7 +26085,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.straightship.com/"
+    "trackingSearchUrl": "https://www.straightship.com/",
+    "helpUrl": "https://www.straightship.com/new/contact.html"
   },
   "kyoungdong": {
     "displayName": "Kyungdong Express",
@@ -30831,7 +30929,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.jtexpress.au/tracking"
+    "trackingSearchUrl": "https://www.jtexpress.au/tracking",
+    "helpUrl": "https://www.jtexpress.au/contact"
   },
   "lingdong": {
     "displayName": "Lingdong International",
@@ -30907,7 +31006,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://track.jcex.com/"
+    "trackingSearchUrl": "https://track.jcex.com/",
+    "helpUrl": "https://enjc.jcex.com/bangzhuzhongxin/lianxiwomen/index.html"
   },
   "shiprocket": {
     "displayName": "Shiprocket",
@@ -31017,7 +31117,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.jtexpress.de/tracking"
+    "trackingSearchUrl": "https://www.jtexpress.de/tracking",
+    "helpUrl": "https://www.jtexpress.de/contact"
   },
   "kun-express": {
     "displayName": "Kun Express",
@@ -31500,7 +31601,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.yanwenexpress.com/tracking.html"
+    "trackingSearchUrl": "https://www.yanwenexpress.com/tracking.html",
+    "helpUrl": "https://www.yanwenexpress.com/contactus.html"
   },
   "far-international": {
     "displayName": "FAR International",
@@ -32617,6 +32719,36 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.viadireta.pt/tracking"
+  },
+  "meso-global": {
+    "displayName": "Meso-global",
+    "aliases": [
+      "Meso Global",
+      "中际跨境",
+      "深圳市中际跨境供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#3b73e3",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "meso-global"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "mesoglobal.cc"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": []
   }
 } as const;
 
@@ -33490,7 +33622,8 @@ export const CARRIER_IDS = [
   "gofo-es",
   "j-and-t-uk",
   "logisimple",
-  "viadireta"
+  "viadireta",
+  "meso-global"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

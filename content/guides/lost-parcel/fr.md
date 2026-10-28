@@ -4,7 +4,7 @@ description: Colis perdu ? Quand il est considéré comme perdu, qui doit te rem
 slug: colis-perdu-remboursement
 picture: Une étagère de centre de tri chargée de cartons, avec un vide en pointillés, une loupe dessus, et Pip à côté d'une lampe torche qui éclaire le vide.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Si tu as commandé à une boutique, c'est elle qui te rembourse, pas le transporteur. Une fois passé le délai du transporteur (par exemple, délai d'acheminement dépassé de plus de deux jours chez La Poste suisse), demande au vendeur un nouvel envoi ou un remboursement : c'est lui qui a choisi le transporteur et qui touche son indemnisation, et en France comme en Belgique, le colis voyage à ses risques jusqu'à ce que tu l'aies en main. Réclamer au transporteur, c'est surtout l'affaire de l'expéditeur.
@@ -62,10 +62,11 @@ Sur Vinted, tu es remboursé « si la perte est confirmée » : l'enquête avec 
 
 ## Colis perdu : combien indemnise le transporteur ?
 
-Pas grand-chose. La couverture de base est plafonnée et ne paie que la valeur prouvée :
+Pas grand-chose. La couverture de base est plafonnée :
 
 | Transporteur | Couverture incluse | En option |
 | --- | --- | --- |
+| La Poste (FR), Colissimo France | 23 € par kilo en cas de perte ou d'avarie | Option Recommandation : indemnisation forfaitaire de 50 € (R1) ou 200 € (R2), ou 23 € par kilo si c'est plus favorable ; au-delà de 200 €, option ad valorem jusqu'à 1 000 € |
 | bpost (BE), en Belgique | Remboursement des frais de port seulement | « Avec garantie » : jusqu'à 500 € pour des marchandises, 15 € pour des documents |
 | bpost (BE), vers l'étranger | Standard : 40 DTS plus 4,5 DTS par kilo. Economy : rien | Garantie jusqu'à 500 € |
 | La Poste suisse (CH), en Suisse | CHF 500.– par colis | Signature CHF 1500.– ; Assurance ou Fragile CHF 5000.– |
@@ -74,7 +75,7 @@ Pas grand-chose. La couverture de base est plafonnée et ne paie que la valeur p
 
 Le DTS (droit de tirage spécial) vaut 1,2119 € en 2026, selon le taux de l'Union postale universelle que publie Correos. Un colis postal international de 2 kg perdu rapporte donc au plus 49 DTS, environ 59 €, plus les frais d'envoi. En France et en Belgique, la boutique te doit de toute façon un nouvel envoi ou un remboursement complet.
 
-Même avec une option, seule la perte prouvée est payée. La Poste suisse rembourse au plus le prix de revient du contenu, hors TVA, et ne paie rien pour un colis déposé ailleurs à ta demande. bpost exige toujours une preuve de valeur ou une facture d'achat.
+Chez La Poste suisse et bpost, même avec une option, seule la perte prouvée est payée. La Poste suisse rembourse au plus le prix de revient du contenu, hors TVA, et ne paie rien pour un colis déposé ailleurs à ta demande. bpost exige toujours une preuve de valeur ou une facture d'achat.
 
 ## Comment faire une réclamation pour colis perdu auprès de La Poste ou de bpost ?
 
@@ -104,6 +105,7 @@ En dernier recours seulement. Sur PayPal, ouvre un litige « Objet non reçu » 
 :::sources
 - [Arcep : Comment résoudre un litige avec un opérateur postal ?](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – expéditeur ou destinataire, service recours, deux mois, Médiateur, action en justice un an après le dépôt (art. L10)
 - [Service-Public.fr : Médiateur de la consommation du prestataire du service universel postal](https://www.service-public.gouv.fr/particuliers/vosdroits/F11064) – réclamation écrite et datée d'abord, deux mois, gratuit
+- [Groupe La Poste : Catalogue des offres commerciales relevant du service universel postal, 10 juillet 2026](https://www.lapostegroupe.com/assets/media/le-groupe-laposte/e_UqTygweUy3Oqfn_CatalogueduSU_10juillet2026.pdf) – envois des particuliers, Colissimo France : 23 € par kilo, option Recommandation 50 € (R1) ou 200 € (R2), ad valorem jusqu'à 1 000 €
 - [bpost : Comment introduire une plainte ?](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – seul l'expéditeur
 - [bpost : Pourquoi contacter l'expéditeur ?](https://www.bpost.be/fr/faq/pourquoi-dois-je-contacter-lexpediteur-si-mon-colis-na-pas-ete-livre) – confirmation par e-mail ou document signé
 - [bpost : Mon colis semble coincé quelque part](https://www.bpost.be/fr/faq/mon-colis-semble-coince-quelque-part-il-na-pas-bouge-sur-track-trace-depuis-un-moment) – 5 et 10 jours ouvrables

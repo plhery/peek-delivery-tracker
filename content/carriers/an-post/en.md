@@ -1,12 +1,12 @@
 ---
-title: An Post tracking: statuses, missed deliveries and contact
-description: Track an An Post parcel: what its IE tracking number looks like, what each status means, how long missed items wait and how to reach An Post.
+title: An Post tracking: statuses, customs and contact
+description: Track an An Post parcel: what its IE tracking number looks like, what each status means, how customs charges are paid and how to complain to An Post.
 slug: an-post-tracking
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-10-28
 ---
 
-An Post is Ireland's state-owned postal service. Track an item on [An Post's Track & Trace](https://www.anpost.com/Post-Parcels/Track/Search) with its tracking number, up to five at a time, or paste the number in the box above. The number comes from the sender: the shop's shipping email, or the receipt if someone posted it at a post office.
+An Post is Ireland's state-owned postal service, and ComReg, the postal regulator, says it is designated as Ireland's universal postal service provider until 1 August 2029. Paste the tracking number in the box above, or look it up on An Post's own tracking at anpost.com. The number comes from the sender, usually in the shop's shipping email.
 
 ## An Post tracking number format
 
@@ -14,75 +14,59 @@ An Post's own numbers follow the international postal format: two letters, nine 
 
 | Number (invented) | What it is |
 | --- | --- |
-| `RR000000005IE` | Registered or tracked item posted in Ireland. Peek also takes it with spaces or in lowercase: `RR 123 456 785 IE`. |
+| `RR000000005IE` | An Post's own item, ending `IE`. Peek also takes it with spaces or in lowercase: `RR 123 456 785 IE`. |
 | `CP000000005IE` | Same format with other starting letters (`CP`, `CE` and so on). |
 | `RR000000005GB` | A parcel from abroad keeps its foreign number. This one ends `GB`, so it is [Royal Mail](carrier:royal-mail)'s. |
 
-A shop puts the number in its shipping email; it may also share your phone or email with An Post, which then texts or emails you about the delivery. From someone else, ask whether they used a tracked service: untracked post has no number. A parcel from abroad shows on An Post's tracking only once An Post has scanned it in Ireland. Lost the number? See [how to find your tracking number](guide:find-tracking-number).
+An Post's tracking also follows mail that other posts send to Ireland, under its foreign number. Lost the number? See [how to find your tracking number](guide:find-tracking-number).
 
 ## An Post tracking statuses explained
 
-An Post writes its statuses in English, even on its Irish-language (Gaeilge) site. These are the ones a parcel usually meets, in order:
+An Post writes its statuses in English. These are the ones a parcel usually meets, in order:
 
 | An Post says | What it means for you |
 | --- | --- |
 | `We have received information about your incoming item from the sender` | The sender sent An Post the parcel's details. An Post doesn't have the parcel yet. |
 | `Your item has been handed to An Post` | An Post has the parcel. |
 | `We have your item and will process it for delivery` | Accepted into An Post's network. |
-| `Your item is going to a sorting office for delivery in` | On its way to the office that delivers to you. The place name is sometimes blank. |
-| `Your item is being prepared for delivery` | At the delivery office, before going out. |
-| `Your item is out for delivery` | On the van today. |
-| `We attempted to deliver your item` | Nobody could take it. Look for a "Sorry we missed you" notice. |
+| `Your item is going to a sorting office for delivery in` | Heading to a sorting office for delivery. The place name is sometimes blank. |
+| `Your item is being prepared for delivery` | The step before it goes out for delivery. |
+| `Your item is out for delivery` | Out for delivery today. |
+| `We attempted to deliver your item` | A delivery was tried, but the item wasn't delivered. |
 | `Your delivery is in …, POST OFFICE` | The parcel is at the post office named. |
 | `Your item is now available for collection` | Ready for you to pick up. |
 | `Your item has been delivered` | Delivered. |
-| `Your item has been delivered to your safe spot.` | Left at the safe spot you set. |
-| `We don't have information on your parcel yet` | An Post has no record of this number. |
+| `Your item has been delivered to your safe spot.` | Left at your safe spot. |
 
-On the website the first step can read `Sender/retailer has shared details of your item to An Post`. If tracking said An Post had the item before that message, the sender simply sent the details late, and An Post says delivery goes on as normal. If a long time passes between the details and the parcel itself, ask the shop.
+An Post's tracking answers an expired number exactly as it answers an unknown one, with no record, so an old number can look like a mistyped one. On items leaving Ireland, `Your item is being sent internationally…` means the item is on its way abroad, and `Your item arrived abroad…` that it has reached the destination country; An Post's own wording then recommends tracking it further on the receiving post's site. Scans relayed from the local delivery provider, such as `Your item is in the sorting office of the local delivery provider`, may follow.
 
-`We don't have information on your parcel yet` means An Post hasn't scanned it yet, the item isn't tracked, or another company delivers it. An expired number looks the same. On items leaving Ireland, `Your item arrived abroad...` means the destination's post tracks it from there.
+## An Post missed delivery and collection
 
-## An Post missed delivery, collection and parcel lockers
+As the universal postal service provider, An Post must collect and deliver at least once every working day to every home or premises in Ireland, says ComReg. ComReg doesn't regulate the time of day: that is An Post's decision. When a delivery fails, tracking shows `We attempted to deliver your item`.
 
-An Post tries to deliver at least once. If nobody can accept the parcel, it leaves a "Sorry we missed you" notice (also called a Docket In Box) saying how to get it. Tracking shows an attempt but there's no notice? An Post tries again in the next delivery slot, usually the next day.
-
-**Collecting.** The parcel goes back to your local Delivery Service Unit. Bring the notice and ID such as a driving licence. Someone else can collect it with the notice signed by you and their own ID. An Post holds missed items for:
-
-- 5 working days for Standard Post and Express Post
-- 3 working days for registered post
-- 16 working days for items from abroad
-
-After that, An Post tries to return the item to the sender.
-
-**Redelivery.** Free, one request per item, booked online with the notice's details when the notice offers it. It takes about 3 to 5 working days, and any customs charge must be paid first.
-
-**Safe spot.** In your An Post account or app you can set a safe, dry place out of view or a neighbour. A photo confirms where the parcel was left; you can see it for 7 calendar days when logged in. Registered post must be signed for, so it is never left there.
-
-**Parcel Lockers.** An Post may text you delivery options, including a locker, and send a PIN by SMS. The locker holds the parcel 48 hours, then it waits five more days at the depot.
+A parcel can also wait for you at a post office. `Your delivery is in …, POST OFFICE` names the office, and `Your item is now available for collection` means you can pick it up. Once you collect it there, tracking shows it as delivered. If nobody collects it in time, it reads `Your item was not collected within the specified timeframe. This item will now be returned to sender.`
 
 ## An Post parcel delayed, lost or held at customs
 
-**Not moving.** Once a parcel is in the hub, An Post asks you to allow up to 5 working days. Some UK retailers don't send the electronic customs data non-EU parcels need, which can delay or return them. See [why tracking stops updating](guide:tracking-not-updating).
+**Not moving.** If a parcel from abroad is delayed after reaching Ireland, Revenue, Ireland's customs authority, says to ask the courier, postal operator or seller for an update. If customs selects it for a check, An Post may contact you for the order confirmation or invoice; without enough information to complete the customs declaration, it may return the parcel to the sender. See [why tracking stops updating](guide:tracking-not-updating).
 
-**Customs charges.** Items from outside the EU, Great Britain included, can carry VAT, customs duty and An Post's €6.95 administration fee, all paid by you before delivery. You get a postcard, plus an email or SMS if the sender shared your details. Pay online or at any post office within 10 working days, or the item goes back to the sender. The rules change: check [An Post's customs page](https://www.anpost.com/Post-Parcels/Receiving/Customs-Information) and Peek's [customs guide](guide:customs).
+**Customs charges.** Goods bought online from outside the EU, Great Britain included, can owe customs duty and VAT if the shop didn't charge them at checkout. For goods coming by post, An Post contacts you by SMS, email and postcard about the charges, and you pay them before it releases the parcel; refuse, and the parcel is liable to go back to the sender, says Revenue. An Post can add its own administration fee for clearing the parcel: Revenue says these fees vary, so check the amount with An Post. Amounts per item, including the €2 EU handling fee from 1 November 2026, are in Peek's [customs guide](guide:customs).
 
-> An Post never sends a link by email or SMS asking you to pay for a parcel or a customs charge, and never asks for bank details, PINs or passwords. A text saying your delivery "has been stopped" is a scam.
+> Revenue says An Post will never send a link in a text message: a customs text claiming to be from An Post with a clickable payment link is a scam. Revenue itself never emails or texts you to click a link and pay customs duty.
 
-**Missing or delayed.** Use An Post's online enquiry form, or pick up an enquiry form at a post office or delivery office. Senders and recipients can both complain: within one month of receiving an item in Ireland, or six months from posting for international items. Compensation is usually paid in stamps; Registered Post covers the value declared at posting.
+**Missing or delayed.** Bought online? The CCPC, Ireland's consumer authority, says the business you ordered from is responsible for getting the goods to you, even when it uses a courier or delivery company: if the parcel is lost or damaged in transit, the business should replace the product. Sent it yourself, or the shop can't help? Complain to An Post (below). ComReg says compensation is available for lost, damaged or delayed items, depending on the service used; for standard post it is normally the cost of postage plus a small amount for extra expenses. A complaint about an item posted from abroad to Ireland must be made within six months from the day after posting.
 
-## An Post contact number and customer service
+## An Post contact number and complaints
 
-As listed on anpost.com on 11 October 2026:
+ComReg, which regulates An Post, lists these ways to lodge a complaint with An Post Customer Services:
 
-- **Phone:** +353 1 705 7600, Monday to Friday 9.00am to 5.30pm, Saturday 9.00am to 2.00pm.
-- **Webchat:** on the [Contact Us page](https://www.anpost.com/Help-Support/Contact-Us), Monday to Friday 9am to 5pm, Saturday 9am to 2pm.
-- **WhatsApp:** linked from the same page, Monday to Friday 9am to 5pm.
-- **OscarBot:** a chatbot in the Help & Support Hub, around the clock.
-- **Social:** a Facebook message or a DM to @Postvox on X.
-- **Forms:** the contact form and the enquiry form at forms.anpost.ie/enquiry.
+- **Online:** the enquiry form for missing, damaged or delayed items.
+- **Phone:** +353 1 705 7600.
+- **Post:** An Post Customer Services, General Post Office, O'Connell Street Lower, Freepost, Dublin 1, D01 F5P2.
 
-An Post lists no customer email address. An unsettled complaint can go to the An Post Customer Advocate, then ComReg.
+An Post should acknowledge a complaint within 3 working days and give you a reference number, which might start with CS or WB. It should resolve it within 30 days for items posted and delivered in Ireland, 40 days for international ones it can handle electronically and 60 days for other international complaints. If it misses these times, you may be entitled to €15.
+
+Still unhappy with the final answer? Within 30 calendar days, ask An Post's Customer Advocate for an independent review, online or by post; the Advocate must reply within 30 calendar days. After that, you can ask ComReg to help resolve the dispute: a formal process with an application form and a fee, and some services, such as express ones, are outside its remit.
 
 ## Tracking An Post parcels with Peek
 
@@ -90,36 +74,37 @@ An Post lists no customer email address. An unsettled complaint can go to the An
 
 An Post's scans carry no time zone: Peek reads them on Irish time, or on the clock of the scan's place once the item has left Ireland, and lists An Post's own history. Statuses keep An Post's English wording. Peek can notify you when the status changes.
 
-It drops your name, the signatory, references and the proof of delivery, and An Post gives no expected delivery day. Numbers ending in another country's letters go to that country's post, not An Post, and scans relayed from abroad aren't followed.
+It drops your name, the signatory, references and the proof of delivery, and An Post gives no expected delivery day. A number ending in another country's letters is followed on that country's post first. Peek also asks An Post once that post names Ireland as the destination, or names none while you're in Ireland, and switches to An Post when it shows fresh scans, keeping the earlier history. For an item leaving Ireland, the local delivery provider's scans that An Post relays stay in the history, and if you're outside Ireland, Peek can also ask your country's post with the same number and switch to it the same way.
 
 ## Questions about An Post tracking
 
-### Where is the tracking number on my An Post receipt?
-
-It is the Track ID. The trans ref ID on the same receipt only records the transaction and won't track anything.
-
-### How long does An Post keep parcels for collection?
-
-5 working days for Standard and Express Post, 3 for registered post and 16 for items from abroad. A parcel in a locker stays 48 hours, then five more days at the depot.
-
 ### Can I track a parcel from the UK with An Post?
 
-Yes, once An Post has scanned it in Ireland, under its original number. Before that, it won't show on An Post's tracking.
+Yes, under its original number: An Post's tracking also follows mail other posts send to Ireland, such as a Royal Mail item ending `GB`.
+
+### Do I pay customs on a parcel from the UK?
+
+On goods bought online and sent from Great Britain, yes: Revenue says they owe customs duty and VAT, plus the €2 EU handling fee from 1 November 2026. The shop may charge them at checkout; if not, you pay them before delivery. Goods based in Northern Ireland or another EU country when you order them owe no customs duty or handling fee.
+
+### What does "Your item arrived abroad" mean?
+
+The item has left Ireland and reached the destination country. An Post says it will aim to show tracking from the receiving post, but recommends tracking the item further on that post's site.
+
+### How do I complain to An Post about a lost parcel?
+
+Lodge it with An Post Customer Services through the enquiry form for missing, damaged or delayed items, on +353 1 705 7600 or by post. If the final answer doesn't settle it, ask the Customer Advocate within 30 calendar days, then ComReg.
 
 :::sources
-- [An Post: Track and Trace help](https://www.anpost.com/Help-Support/Track-and-Trace) – number format, receipt Track ID, status explanations, items from abroad, hub delays, customs data, texts
-- [An Post: Track posts and parcels](https://www.anpost.com/Post-Parcels/Track/Search) – tracking search, five items at a time
-- [An Post: Receiving post](https://www.anpost.com/Post-Parcels/Receiving/Receiving-Post) – Docket In Box, next slot, collection with ID, holding periods
-- [An Post: Delivery help](https://www.anpost.com/Help-Support/Delivery) – attempts, holding periods, redelivery time, OscarBot
-- [An Post: Redeliver your post](https://www.anpost.com/Post-Parcels/Manage-Your-Post/Redelivery) – free redelivery, one request, customs first
-- [An Post: My deliveries](https://www.anpost.com/Post-Parcels/Receiving/My-deliveries) – safe spot, photo for 7 days, registered post
-- [An Post: Parcel Lockers](https://www.anpost.com/Post-Parcels/Receiving/Parcel-Lockers) – SMS options, PIN, 48 hours, five more days
-- [An Post: Customs information](https://www.anpost.com/Post-Parcels/Receiving/Customs-Information) – charges, fee, notices, no payment links
-- [An Post: Pay Customs Charge](https://www.anpost.com/Post-Parcels/Receiving/Pay-Customs-Charge) – 10 working days, foreign tracking numbers
-- [An Post: Security Hub](https://www.anpost.com/Security) – scam messages
-- [An Post: Feedback & Complaints](https://www.anpost.com/Customer-Charter/Feedback-Complaints) – deadlines, timescales, compensation, Customer Advocate, ComReg
-- [An Post: Help & Support](https://www.anpost.com/Help-Support) – enquiry forms for late post
-- [An Post: Contact Us](https://www.anpost.com/Help-Support/Contact-Us) – phone, hours, webchat, WhatsApp, social
+- [ComReg: Postal overview](https://www.comreg.ie/advice-information/postal/) – universal postal service provider until 1 August 2029, one delivery every working day, delivery times not regulated
+- [ComReg: Make a complaint to your provider](https://www.comreg.ie/advice-information/postal/make-complaint-postal-service-provider/) – enquiry form, phone, post, 3 working days, reference, 30, 40 and 60 days, €15, Customer Advocate
+- [ComReg: Complaint resolution and compensation](https://www.comreg.ie/advice-information/postal/complaint-resolution-and-compensation/) – compensation for lost, damaged or delayed items, six months for items from abroad
+- [ComReg: Dispute resolution](https://www.comreg.ie/advice-information/postal/dispute-resolution/) – after the Customer Advocate, application form and fee, services outside its remit
+- [Revenue: How to pay your import charges](https://www.revenue.ie/en/customs/individuals/buying-online-personal/pay-import-charges.aspx) – SMS, email and postcard, pay before release, return to sender if refused
+- [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – administration fees vary
+- [Revenue: How to locate your goods](https://www.revenue.ie/en/customs/individuals/buying-online-personal/locate-your-goods.aspx) – delays, invoice requests, return to sender
+- [Revenue: Fraudulent emails, SMS and phone calls](https://www.revenue.ie/en/customs/individuals/buying-online-personal/fraudulent-requests.aspx) – no links in An Post texts, no Revenue payment links
+- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – Great Britain included, €2 fee from 1 November 2026, checkout or delivery, Northern Ireland and EU
+- [CCPC: Non-delivery of goods](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – the business is responsible, lost in transit
 - [Wikipedia: An Post](https://en.wikipedia.org/wiki/An_Post) – state-owned postal service of Ireland
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper: An Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/an-post) – number format and check digit, mail from other posts, status wordings, relayed partner scans, expired numbers, what Peek reads
 :::

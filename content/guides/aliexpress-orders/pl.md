@@ -4,14 +4,14 @@ description: Gdzie AliExpress pokazuje numer śledzenia, kto doręcza w Polsce, 
 slug: sledzenie-zamowienia-aliexpress
 picture: Etykieta paczki z zegarem odliczającym czas, samolot na niebie i Pip czekający pod drzwiami z telefonem.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Na AliExpress numer śledzenia jest przy zamówieniu: otwórz „Moje zamówienia”, znajdź zamówienie i kliknij „Śledź zamówienie”. Możesz go też wpisać na stronie Cainiao, firmy logistycznej grupy Alibaba, do której odsyłają strony pomocy AliExpress; ostatni odcinek w Polsce robi Poczta Polska albo inny przewoźnik. W szczegółach zamówienia biegnie też odliczanie, czyli Ochrona Kupującego: jeśli paczka nie dotrze, otwórz spór, zanim się skończy, i nie potwierdzaj odbioru, dopóki nie masz paczki w ręku.
 
 ## Kto dostarcza paczki z AliExpress w Polsce?
 
-Metody wysyłki udostępniają sprzedawcy, a Ty wybierasz jedną przy zamówieniu. Niezależnie od niej, po najnowsze skany strony pomocy AliExpress odsyłają na stronę śledzenia [Cainiao](carrier:cainiao), global.cainiao.com. Ostatni odcinek robi przewoźnik w Polsce: pomoc AliExpress wymienia [Pocztę Polską](carrier:poczta-polska), PEKAES, DHL, [DPD](carrier:dpd-pl), FedEx i UPS, a strona śledzenia zamówienia pokazuje kontakt do tego, który ma Twoją paczkę. [InPost](carrier:inpost) ogłosił w 2019 r., że przy AliExpress Standard Shipping i zakupach powyżej 5 USD Paczkomat wybierzesz w koszyku, a Cainiao podaje, że sam też doręcza paczki w Polsce.
+Metody wysyłki udostępniają sprzedawcy, a Ty wybierasz jedną przy zamówieniu. Niezależnie od niej, po najnowsze skany strony pomocy AliExpress odsyłają na stronę śledzenia [Cainiao](carrier:cainiao), global.cainiao.com. Ostatni odcinek robi przewoźnik w Polsce: pomoc AliExpress wymienia [Pocztę Polską](carrier:poczta-polska), PEKAES, DHL, [DPD](carrier:dpd-pl), FedEx i UPS, a strona śledzenia zamówienia pokazuje kontakt do tego, który ma Twoją paczkę. Cainiao podaje, że sam też doręcza paczki w Polsce.
 
 Kogo jeszcze możesz zobaczyć zależnie od linii wysyłki: tabela w poradniku [śledzenie paczki z Chin](guide:tracking-from-china). Przy tanich metodach, takich jak Cainiao Super Economy, AliExpress uprzedza, że śledzenie może przestać się aktualizować po przekazaniu paczki liniom lotniczym, po wyjeździe z kraju nadania albo po dotarciu do kraju docelowego: zwykle paczka przychodzi w ciągu 30 dni od tego statusu.
 
@@ -152,7 +152,6 @@ Peek pokazuje to, co publikują przewoźnicy. Ochronę Kupującego, spory, kupon
 - [AliExpress: How do I cancel a dispute? (po angielsku)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015101&language=en) – bez ponownego otwarcia
 - [Cainiao: About Cainiao (po angielsku)](https://www.cainiao.com/en/about-us-brief-introduction.html) – grupa Alibaba
 - [Cainiao: Global local capabilities (po angielsku)](https://www.cainiao.com/en/global-local-capabilities.html) – własne doręczenia w Polsce
-- [InPost: InPost rozpoczyna strategiczną współpracę z AliExpress!](https://inpost.pl/aktualnosci-inpost-rozpoczyna-strategiczna-wspolprace-z-aliexpress-0) – Paczkomaty przy AliExpress Standard Shipping powyżej 5 USD (2019)
 - [Komisja Europejska: EU customs reform (po angielsku)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – opłata manipulacyjna 2 euro od 1 listopada 2026 r.
 - [Komisja Europejska: Customs Guidance on EUR 3 customs duty (po angielsku)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 euro za rodzaj produktu
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, co sprawdza Peek

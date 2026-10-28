@@ -4,7 +4,7 @@ description: What "held at customs" means, how long it can last, what you pay in
 slug: parcel-held-at-customs
 picture: A customs booth with a striped barrier, a stamped document with a tick, and Pip waiting patiently before the barrier.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 "Held at customs" usually means your parcel (or package) is in the routine import check for goods from abroad, not that it was seized. If it stays held, the carrier may be waiting for you to pay a charge or send an invoice. Check the carrier's own website or app, never a link in a text.
@@ -56,7 +56,6 @@ Don't leave it too long:
 | Country | How long it waits |
 | --- | --- |
 | UK | Royal Mail, Parcelforce or the courier "normally" hold it about 3 weeks, then return it |
-| Ireland | [An Post](carrier:an-post) asks you to pay within 10 working days |
 | Australia | Over AUD 1,000: with no action 30 days after Australia Post's First Notice, it may go back |
 | US | A mail parcel without the required entry or bond stays with U.S. Customs and Border Protection (CBP) until they are filed |
 
@@ -87,7 +86,7 @@ Where you pay depends on the checkout:
 | Country | Free at the door if | Otherwise you pay |
 | --- | --- | --- |
 | UK | Goods you bought for £135 or less (the seller adds VAT), or a gift worth £39 or less. Never alcohol, tobacco or vapes: they pay duty at any value | VAT, plus duty above £135, and any delivery charges: Royal Mail, Parcelforce or the courier sends you the bill |
-| Ireland | The shop charged it all at checkout, or a gift worth €45 or less | VAT and duty, even on goods from Great Britain, plus the carrier's fee (An Post: €6.95) |
+| Ireland | The shop charged it all at checkout, or a gift worth €45 or less | VAT and duty, even on goods from Great Britain, plus the carrier's fee, which varies |
 | Canada | Worth CAD 20 or less (CAD 40 by courier from the US or Mexico), or a gift up to CAD 60 | Duty and sales taxes. Canada Post adds CAD 9.95, only when something is owed |
 | Australia | Worth AUD 1,000 or less (the shop may have charged GST), except alcohol and tobacco | Over AUD 1,000: an Import Declaration, then duty and taxes to ABF |
 | US | Only a gift worth $100 or less: the $800 duty-free limit has been suspended since 29 August 2025 | Duty. A courier's broker bills it with its fees; a mail parcel needs an entry filed by its buyer, owner or a licensed broker |
@@ -119,7 +118,7 @@ Real charges can come by text or email too, but each carrier's rules give most f
 
 | Carrier | What its real messages look like |
 | --- | --- |
-| An Post | Post, text or email, but "never" a message containing any links |
+| [An Post](carrier:an-post) | A postcard, text or email, says Revenue, but "never" a link in a text message |
 | [USPS](carrier:usps) | Texts or emails only if you asked for tracking with your number, and never with a link |
 | Canada Post | The E14 form on the parcel, or the Pay button in its own tracking or app |
 | Australia Post | It never calls, texts or emails you to request payment |
@@ -143,7 +142,7 @@ To report a fake:
 
 ## What if I don't pay, or send it back?
 
-In the UK and Ireland, an unpaid parcel [goes back to the sender](guide:returned-to-sender) after the waiting times above. In Australia, a parcel over AUD 1,000 may go back if you take no action within 30 days of the First Notice. Refunds and disputes:
+In the UK, an unpaid parcel [goes back to the sender](guide:returned-to-sender) after the waiting time above; in Ireland, Revenue says a parcel whose charges you refuse is liable to be returned. In Australia, a parcel over AUD 1,000 may go back if you take no action within 30 days of the First Notice. Refunds and disputes:
 
 - **UK:** reclaim VAT or duty after a return or overcharge with form BOR 286 (Royal Mail, Parcelforce) or C285 (other couriers).
 - **Canada:** ask for a review before paying (the parcel waits), or pay and claim afterwards, as the E14 explains.
@@ -157,8 +156,9 @@ In the UK and Ireland, an unpaid parcel [goes back to the sender](guide:returned
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 fee, checkout price, refunds
 - [Revenue: Rules for duty relief on gift consignments](https://www.revenue.ie/en/customs/individuals/relief-gifts-low-value/rules-gifts.aspx) – €45 gifts
 - [Revenue: How to locate your goods](https://www.revenue.ie/en/customs/individuals/buying-online-personal/locate-your-goods.aspx) – who to contact, seizures
-- [Revenue: Fraudulent emails, SMS and phone calls](https://www.revenue.ie/en/customs/individuals/buying-online-personal/fraudulent-requests.aspx) – no payment links
-- [An Post: Pay customs charge](https://www.anpost.com/Post-Parcels/Receiving/Pay-Customs-Charge) – €6.95, 10 working days, no links
+- [Revenue: Fraudulent emails, SMS and phone calls](https://www.revenue.ie/en/customs/individuals/buying-online-personal/fraudulent-requests.aspx) – no payment links, never a link in An Post's texts
+- [Revenue: How to pay your import charges](https://www.revenue.ie/en/customs/individuals/buying-online-personal/pay-import-charges.aspx) – An Post's postcard, SMS and email, return if you refuse to pay
+- [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – carriers' administration fees vary
 - [Canada Post: Customs duty, taxes and exemptions](https://www.canadapost-postescanada.ca/cpc/en/support/articles/customs-requirements/customs-duty-taxes-and-exemptions.page) – CAD 9.95, gifts, paying, reviews
 - [Canada Post: Tracking statuses](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-statuses.page) – Item held by customs
 - [Canada Post: My package is in customs](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/my-package-is-in-customs-what-can-i-do.page) – presentation to the CBSA, release

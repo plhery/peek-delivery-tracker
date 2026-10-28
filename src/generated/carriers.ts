@@ -301,7 +301,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "an-post",
       "catalog": "an-post",
       "slug": "an-post-tracking",
-      "title": "An Post tracking: statuses, missed deliveries and contact",
+      "title": "An Post tracking: statuses, customs and contact",
       "name": "An Post",
       "color": "#00a76a"
     },

@@ -138,6 +138,8 @@ Po zwrocie nieodebranej przesyłki poleconej Poczta Polska może Ci podać nazw�
 - [UOKiK: Skutek odstąpienia od umowy](https://prawakonsumenta.uokik.gov.pl/prawo-odstapienia-od-umowy/skutek/) – 14 dni od oświadczenia, wstrzymanie zwrotu do otrzymania rzeczy
 - [UOKiK: Koszty odstąpienia od umowy](https://prawakonsumenta.uokik.gov.pl/prawo-odstapienia-od-umowy/koszty/) – najtańsza dostawa w ofercie, bezpośrednie koszty zwrotu, obowiązek poinformowania
 - [UOKiK: Odstąpienie od umowy](https://prawakonsumenta.uokik.gov.pl/pytania-i-odpowiedzi/odstapienie-od-umowy/) – oświadczenie o odstąpieniu, odstąpienie przed otrzymaniem towaru
-- [EUR-Lex: Dyrektywa 2011/83/UE w sprawie praw konsumentów (po angielsku)](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02011L0083-20220528) – jednoznaczne oświadczenie, zwrot płatności
+- [Komisja Europejska: dyrektywa w sprawie praw konsumentów (po angielsku)](https://commission.europa.eu/law/law-topic/consumer-protection-law/consumer-contract-law/consumer-rights-directive_en) – te same zasady odstąpienia od umowy w całej UE, formularz odstąpienia
+- [Europejskie Centrum Konsumenckie w Irlandii: Deliveries – what are my rights? (po angielsku)](https://www.eccireland.ie/deliveries-what-are-my-rights/) – prawo UE: trzeba poinformować sprzedawcę, wystarczy jednoznaczne oświadczenie
+- [Your Europe: Handel elektroniczny i sprzedaż na odległość](https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/ecommerce-distance-selling/index_pl.htm) – w UE zwrot w 14 dni od informacji o odstąpieniu, wstrzymanie zwrotu do otrzymania towaru, koszt pierwotnej dostawy
 - [Światowy Związek Pocztowy: Convention Manual (PDF, po angielsku)](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – zwrot bez zwłoki, czas przechowania, droga powrotna, koszty nadawcy
 :::

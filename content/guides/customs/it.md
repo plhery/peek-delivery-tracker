@@ -146,8 +146,7 @@ Per segnalare un falso:
 - [Polizia Postale: Segnala online](https://www.commissariatodips.it/segnalazioni/segnala-online/index.html) – segnalazione di phishing
 - [Gazzetta Ufficiale n. 216 del 17 settembre 2026](https://www.gazzettaufficiale.it/eli/gu/2026/09/17/216/sg/pdf) – decreto-legge 162/2026, contributo rinviato al 1° dicembre 2026
 - [Commissione europea: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € dal 1° novembre 2026
-- [Commissione europea: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce, 2 € per articolo anche sopra i 150 €
-- [EUR-Lex: Regolamento (UE) 2026/2108, codice doganale dell'Unione](https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=OJ:L_202602108) – tassa di gestione dell'Unione, non rimborsabile (art. 20)
+- [Commissione europea: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce, 2 € per articolo anche sopra i 150 €, tassa di gestione non rimborsabile (art. 20, par. 6, del regolamento (UE) 2026/2108)
 - [La Posta: Sdoganamento all'importazione](https://www.post.ch/it/ricezione/sdoganamento-all-importazione) – prezzi, tetto di CHF 70.–, regali fino a CHF 100.–, merci soggette ad autorizzazione, telefono
 - [La Posta: FAQ su importazione, dogana e IVA](https://www.post.ch/it/soluzioni-commerciali/esportazione-importazione-e-sdoganamento/importazione/faq-su-importazione-dogana-e-iva) – 5 franchi, aliquote, tempi, documenti, CHF 20, 20 giorni, ordini in più pacchi, ricorsi
 - [La Posta: Eventi «Monitorare gli invii»](https://www.post.ch/it/ricezione/monitorare-gli-invii/eventi-monitorare-gli-invii) – stati doganali

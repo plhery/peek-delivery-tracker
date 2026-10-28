@@ -49,7 +49,7 @@ If you bought from a business, deal with the seller: most carriers send recipien
 :::journey
 - shop | Seller | Books and pays the carrier: it's the carrier's customer.
 - truck | Carrier | Answers to the seller, and usually pays only the sender.
-- home | Your door | "Delivered" is scanned. In the UK, Ireland and the EU, the risk stays with the seller until you hold it.
+- home | Your door | "Delivered" is scanned. In the UK, Ireland and the EU, the seller is responsible until you receive it.
 :::
 
 Your rights, country by country:
@@ -65,7 +65,7 @@ Your rights, country by country:
 It's on you instead when:
 
 - **You asked for it.** Citizens Advice says a neighbour or safe place you requested, or agreed to in your account terms, isn't the seller's responsibility. Left somewhere you didn't agree to, it's still the seller's.
-- **You booked the carrier yourself**, one the shop didn't offer (UK, Ireland, EU).
+- **You booked the carrier yourself**, one the shop didn't offer (UK, Ireland).
 - **You bought from a private person.** Consumer rules don't apply: in UK law, handing the parcel to the carrier normally counts as delivery to you (Sale of Goods Act 1979, s. 32), so the platform's protection is what matters.
 
 ## What proof of delivery can you ask for?
@@ -146,7 +146,7 @@ You can, though none of the rules above require it for a refund. Citizens Advice
 - [Vinted: Refund policy](https://www.vinted.co.uk/help/465-the-vinted-refund-policy) – 2 days
 - [Vinted: Parcel didn't arrive](https://www.vinted.co.uk/help/658-package-didn-t-arrive) – 2 days, 14 days for Pro sellers
 - [Vinted: Parcel wasn't delivered](https://www.vinted.co.uk/help/726) – seller paid, cancelling
-- [EU Consumer Rights Directive, art. 20](https://eur-lex.europa.eu/eli/dir/2011/83/oj/eng) – risk
+- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – EU: seller responsible for damage until you receive the goods
 - [UK Consumer Rights Act 2015, s. 29](https://www.legislation.gov.uk/ukpga/2015/15/section/29) – risk
 - [UK Sale of Goods Act 1979, s. 32](https://www.legislation.gov.uk/ukpga/1979/54/section/32) – private sales
 - [Irish Consumer Rights Act 2022](https://www.irishstatutebook.ie/eli/2022/act/37/enacted/en/print) – s. 35

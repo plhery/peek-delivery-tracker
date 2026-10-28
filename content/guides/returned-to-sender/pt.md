@@ -137,5 +137,7 @@ Nos Envios Online dos CTT, quando não é possível entregar nem devolver, a CTT
 - [Vinted: A minha encomenda está a ser devolvida ao remetente](https://www.vinted.pt/help/1447) – 14 e 25 dias úteis
 - [Vinted: A minha encomenda foi para a morada errada](https://www.vinted.pt/help/1450) – até 25 dias úteis a chegar
 - [PGDL: Decreto-Lei n.º 24/2014](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=2062&tabela=leis) – artigos 11.º a 13.º, declaração inequívoca, reembolso, dobro, custos de devolução
-- [EUR-Lex: Diretiva 2011/83/UE, direitos dos consumidores](https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:02011L0083-20220528) – declaração, reembolso
+- [Comissão Europeia: Diretiva relativa aos direitos dos consumidores (em inglês)](https://commission.europa.eu/law/law-topic/consumer-protection-law/consumer-contract-law/consumer-rights-directive_en) – as mesmas regras de livre resolução em toda a UE, formulário de resolução
+- [Centro Europeu do Consumidor da Irlanda: Deliveries – what are my rights? (em inglês)](https://www.eccireland.ie/deliveries-what-are-my-rights/) – lei da UE: avisar a loja, basta uma declaração clara
+- [Your Europe: B2C e-commerce, distance & off-premises selling (em inglês)](https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/ecommerce-distance-selling/index_en.htm) – na UE, reembolso em 14 dias a contar do aviso, a loja pode esperar pelos bens
 :::

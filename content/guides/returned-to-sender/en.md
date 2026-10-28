@@ -82,7 +82,7 @@ The sender pays the carrier, and how much depends on the service:
 - **Canada Post** charges the sender for an uncollected parcel's return; for international returns, usually the original postage again.
 - **Australia Post** charges business senders the return fee in their contract.
 
-In the UK and EU, the shop can pass that cost on to you only as the "direct cost of returning the goods", if it told you before you ordered and once you've cancelled. It may also keep the extra you paid for faster delivery.
+In the UK and EU, the shop can pass that cost on to you only as the "direct cost of returning goods", if it told you before you ordered and once you've cancelled. It may also keep the extra you paid for faster delivery.
 
 ## What happens when a parcel is returned to sender
 
@@ -141,7 +141,8 @@ DHL says a return after a refusal can't be stopped, so ask the shop to send it a
 - [legislation.gov.uk: reg. 34](https://www.legislation.gov.uk/uksi/2013/3134/regulation/34) – refund
 - [legislation.gov.uk: reg. 35](https://www.legislation.gov.uk/uksi/2013/3134/regulation/35) – return cost
 - [CCPC: Buying online](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/buying-online) – inform the trader
-- [EUR-Lex: Consumer Rights Directive](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02011L0083-20220528) – statement, refund
+- [ECC Ireland: Deliveries – what are my rights?](https://www.eccireland.ie/deliveries-what-are-my-rights/) – EU law: tell the shop, a clear statement is enough
+- [Your Europe: B2C e-commerce and distance selling](https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/ecommerce-distance-selling/index_en.htm) – EU: withdrawal form, refund within 14 days of the notice, held until the goods are back, return cost, express delivery
 - [Service-Public.fr: Right of withdrawal](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – refusing isn't enough
 - [Fedlex: Swiss Code of Obligations](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de) – no right to cancel
 - [FTC: The Cooling-Off Rule](https://consumer.ftc.gov/articles/buyers-remorse-ftcs-cooling-rule-may-help) – online sales excluded

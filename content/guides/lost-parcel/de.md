@@ -43,10 +43,10 @@ Hast du bei einem Händler gekauft, meist der Händler:
 
 - **Deutschland:** Als Verbraucher trägst du das Risiko erst, wenn du die Ware hast (§ 475 Abs. 2 BGB). Laut Verbraucherzentrale darf der Händler den Kaufpreis erst verlangen, wenn du die Ware nachweislich erhalten hast. Eine zweite Lieferung kannst du aber nicht verlangen, wenn er einen zuverlässigen Paketdienst gewählt hat: Dann bekommst du dein Geld zurück.
 - **Österreich:** Das Risiko geht erst über, wenn das Paket bei dir abgeliefert ist oder bei jemandem, den du bestimmt hast und der nicht der Paketdienst ist (§ 7b KSchG). Findet sich das Paket nicht, verlangst du laut Internet Ombudsstelle eine neue Lieferung.
-- **Bestellung aus einem anderen EU-Land:** Dieselbe Regel gilt in der ganzen EU (Richtlinie 2011/83/EU, Art. 20).
+- **Bestellung aus einem anderen EU-Land:** Laut dem EU-Portal Your Europe haftet der Händler für Schäden an der Ware, bis du sie erhalten hast. Kommt sie nicht innerhalb von 30 Tagen oder der vereinbarten Frist, setzt du ihm eine angemessene Nachfrist; liefert er auch dann nicht, kannst du vom Vertrag zurücktreten und bekommst dein Geld zurück.
 - **Schweiz:** Keine solche Verbraucherregel. Nutzen und Gefahr gehen grundsätzlich schon mit dem Vertragsschluss auf dich über, bei Ware, die erst verschickt wird, mit der Abgabe zur Versendung (Art. 185 OR). Laut Konsumentenschutz haftet der Händler, bis er das Paket dem Paketdienst übergeben hat. Lies also die AGB des Shops, und stoß die Nachforschung bei der Post im Inland ruhig selbst an.
 
-Das Risiko liegt bei dir, wenn du einen Paketdienst gebucht hast, den der Shop nicht angeboten hat, oder bei einer Privatperson gekauft hast.
+Das Risiko liegt bei dir, wenn du bei einer Privatperson gekauft hast, in Deutschland und Österreich auch dann, wenn du einen Paketdienst gebucht hast, den der Shop nicht angeboten hat.
 
 ## Paket verloren bei Amazon, eBay, Etsy, Vinted oder AliExpress
 
@@ -132,7 +132,7 @@ Hilft weder der Händler noch die Plattform, bleibt der Zahlungsweg, und den geh
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – Gefahrübergang beim Verbrauchsgüterkauf
 - [Gesetze im Internet: § 447 BGB](https://www.gesetze-im-internet.de/bgb/__447.html) – Versendungskauf
 - [RIS: Konsumentenschutzgesetz § 7b](https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10002462&Paragraf=7b) – Gefahrenübergang bei Übersendung
-- [EUR-Lex: Richtlinie 2011/83/EU](https://eur-lex.europa.eu/eli/dir/2011/83/oj) – Art. 20, Gefahrübergang
+- [Your Europe: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – Haftung des Händlers für Schäden bis zum Erhalt, 30 Tage, Nachfrist, Vertrag beenden, Erstattung
 - [Internet Ombudsstelle: Mein Paket ist nicht aufzufinden. Was tun?](https://www.ombudsstelle.at/probleme-beim-warenkauf/mein-paket-ist-nicht-aufzufinden-was-tun/) – Nachforschung durch den Shop, neue Lieferung, abwimmeln
 - [Internet Ombudsstelle: Wer haftet beim Privatkauf für Verlust der Ware am Transportweg?](https://www.ombudsstelle.at/probleme-beim-warenkauf/wer-haftet-fuer-einen-verlust-der-ware-beim-transport/) – § 905 ABGB, Abtretung
 - [Fedlex: Obligationenrecht, Art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_185) – Nutzen und Gefahr

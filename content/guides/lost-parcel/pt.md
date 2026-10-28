@@ -43,11 +43,12 @@ Os 30 dias da CTT Expresso e da DPD passam depressa: se a encomenda vem por uma 
 
 Se compraste a uma empresa, normalmente da loja:
 
-- **Risco:** só passa para ti quando tu, ou alguém que indicaste (que não o transportador), ficas fisicamente com a encomenda (Decreto-Lei n.º 84/2021, art. 11.º, n.º 12). É a mesma regra em toda a UE (Diretiva 2011/83/UE, art. 20.º).
+- **Risco:** só passa para ti quando tu, ou alguém que indicaste (que não o transportador), ficas fisicamente com a encomenda (Decreto-Lei n.º 84/2021, art. 11.º, n.º 12).
 - **Prazo:** sem data combinada, a loja tem de entregar até 30 dias depois da compra. Se não entregar, podes dar-lhe um prazo adicional e depois resolver o contrato.
 - **Reembolso:** depois de resolveres o contrato, a loja tem 14 dias para te devolver tudo o que pagaste. Se não o fizer, tens direito ao dobro.
+- **Loja de outro país da UE:** segundo o portal Your Europe, o vendedor responde pelos danos desde a expedição até à entrega, e o prazo de 30 dias e o prazo adicional valem em toda a UE.
 
-O risco é teu se escolheste uma transportadora diferente da que a loja propunha (art. 11.º, n.º 13) ou se compraste a um particular, porque esta lei só se aplica a compras a profissionais (art. 3.º). Os casos e as exceções estão em [encomenda dada como entregue mas não recebi](guide:delivered-not-received).
+Em Portugal, o risco é teu se escolheste uma transportadora diferente da que a loja propunha (Decreto-Lei n.º 84/2021, art. 11.º, n.º 13) ou se compraste a um particular, porque esta lei só se aplica a compras a profissionais (art. 3.º). Os casos e as exceções estão em [encomenda dada como entregue mas não recebi](guide:delivered-not-received).
 
 ## Encomenda extraviada na Vinted, Amazon ou Shein: como pedir o reembolso
 
@@ -113,7 +114,7 @@ Pagaste por transferência? Pede ao vendedor que reclame à transportadora e te 
 - [PGDL: Decreto-Lei n.º 84/2021, versão atualizada](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3471&tabela=leis) – art. 3.º, âmbito; art. 11.º, 30 dias, resolução, 14 dias, dobro, ónus da prova, risco
 - [PGDL: Código Civil, art. 797.º](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?artigo_id=775A0797&nid=775&tabela=leis) – promessa de envio, risco passa com a entrega ao transportador
 - [Diário da República: Decreto-Lei n.º 84/2021](https://diariodarepublica.pt/dr/detalhe/decreto-lei/84-2021-172938301) – art. 11.º, n.º 12 e 13
-- [EUR-Lex: Diretiva 2011/83/UE](https://eur-lex.europa.eu/eli/dir/2011/83/oj) – art. 20.º, risco em toda a UE
+- [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – o vendedor responde pelos danos até à entrega, 30 dias, prazo suplementar, rescisão e reembolso
 - [ANACOM: Perguntas frequentes sobre serviços postais](https://www.anacom-consumidor.pt/faq-servicos-postais) – indemnização só em registados ou com valor declarado, remetente, 20, 30 e 40 vezes, 30 e 40 DTS, correio expresso, livro de reclamações online, Direção-Geral do Consumidor
 - [CTT: Reclamações](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/reclamacoes) – canais, 1 ano e 6 meses
 - [CTT Expresso: Condições gerais de transporte](https://www.ctt.pt/transversais/condicoes-gerais-transporte-encomendas-expresso) – 30 dias, cliente, 10 € por kg, seguro especial, documentos

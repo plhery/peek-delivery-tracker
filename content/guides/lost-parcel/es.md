@@ -42,9 +42,9 @@ Si compraste a una empresa, casi siempre el vendedor:
 
 - **Compra a una tienda en España:** el paquete viaja a riesgo del vendedor hasta que tú, o alguien que hayas indicado que no sea el transportista, lo tienes en tus manos (art. 66 ter de la Ley General para la Defensa de los Consumidores y Usuarios).
 - **Sin fecha pactada:** la tienda tiene que entregar en un máximo de 30 días naturales desde la compra. Si no cumple, le das un plazo adicional y, si tampoco entrega, puedes resolver el contrato (art. 66 bis).
-- **Tienda de otro país de la UE:** la regla es la misma en toda la Unión (art. 20 de la Directiva 2011/83/UE).
+- **Tienda de otro país de la UE:** según el portal europeo Your Europe, el vendedor responde de los daños desde que envía el paquete hasta que lo recibes, y el plazo de 30 días y el plazo adicional valen en toda la Unión.
 
-El riesgo pasa a ti si encargaste tú el transporte o elegiste un transportista que la tienda no ofrecía. Si compraste a un particular, esta ley no se aplica: lo que cuenta es la protección de la plataforma (más abajo). Los detalles y las excepciones están en [paquete entregado pero no recibido](guide:delivered-not-received).
+En España, el riesgo pasa a ti si encargaste tú el transporte o elegiste un transportista que la tienda no ofrecía. Si compraste a un particular, esta ley no se aplica: lo que cuenta es la protección de la plataforma (más abajo). Los detalles y las excepciones están en [paquete entregado pero no recibido](guide:delivered-not-received).
 
 ## Reembolso de un paquete perdido en Amazon, Vinted, Wallapop, eBay y AliExpress
 
@@ -113,7 +113,7 @@ Sí, como último recurso. En PayPal tienes que abrir la disputa por artículo n
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 5, 21 y 30 días, remitente en 7 días, seguro de 25 €
 - [GLS: Hoja de reclamaciones](https://gls-group.com/ES/es/hoja-de-reclamaciones/) – respuesta en 30 días
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 66 bis y 66 ter
-- [EUR-Lex: Directiva 2011/83/UE](https://eur-lex.europa.eu/eli/dir/2011/83/oj?locale=es) – transmisión del riesgo (art. 20)
+- [Your Europe: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – el vendedor responde de los daños hasta que recibes el paquete, 30 días, plazo adicional, rescisión y reembolso
 - [Ministerio de Derechos Sociales, Consumo y Agenda 2030: Reclamaciones](https://www.dsca.gob.es/es/consumo/como-reclamar-conflicto-consumo) – nada entre particulares, Wallapop, OMIC, Centro Europeo del Consumidor
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z en las compras a vendedores externos, plazo de entrega, reclamación a Amazon
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primero el vendedor, después el reembolso de Amazon

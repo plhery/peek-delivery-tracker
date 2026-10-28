@@ -47,7 +47,7 @@ Se compraste a uma empresa, é com a loja que tratas: foi ela que contratou a tr
 :::journey
 - shop | Loja | Escolhe e paga a transportadora: a cliente é ela.
 - truck | Transportadora | Responde perante a loja e, normalmente, só indemniza o remetente.
-- home | A tua porta | Fica registado «entregue». Em Portugal, como no resto da UE, o risco é da loja até teres a encomenda na mão.
+- home | A tua porta | Fica registado «entregue». Em Portugal, como no resto da UE, a loja é responsável até receberes a encomenda.
 :::
 
 O que diz a lei, ponto por ponto (Decreto-Lei n.º 84/2021, art. 11.º):
@@ -127,7 +127,7 @@ Podes, mas nenhuma das regras acima o exige para teres o reembolso. Um furto pod
 
 :::sources
 - [PGDL: Decreto-Lei n.º 84/2021, versão atualizada](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3471&tabela=leis) – art. 3.º, âmbito; art. 11.º, risco, prova, 30 dias, 14 dias, reembolso em dobro
-- [EUR-Lex: Diretiva 2011/83/UE, versão consolidada](https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:02011L0083-20260927) – art. 20.º, a mesma regra do risco em toda a UE
+- [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – na UE, o vendedor responde pelos danos desde a expedição até à entrega
 - [PGDL: Lei n.º 24/96, de 31 de julho](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=726&tabela=leis) – art. 14.º, arbitragem necessária, taxa de justiça
 - [PGDL: Lei n.º 62/2013, de 26 de agosto](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=1974&tabela=leis) – art. 44.º, alçada de 5000 €
 - [CTT: Entrega não conseguida](https://www.ctt.pt/ajuda/particulares/receber/problemas-na-entrega/entrega-nao-conseguida) – caixa do correio, entrega em mão, menores

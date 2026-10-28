@@ -73,7 +73,7 @@ Os 30 dias da CTT Expresso e da DPD passam depressa: se a encomenda vem por uma 
 
 A loja. Foi ela que contratou o transporte, por isso é ela a cliente da transportadora.
 
-A lei está do mesmo lado quando compras a uma empresa. Se a encomenda se perder ou estragar pelo caminho, responde a loja até ela estar nas tuas mãos ou nas de alguém que indicaste, a não ser que tenhas escolhido uma transportadora que a loja não propunha: vê [encomenda entregue mas não recebida](guide:delivered-not-received).
+A lei portuguesa está do mesmo lado quando compras a uma empresa. Se a encomenda se perder ou estragar pelo caminho, responde a loja até ela estar nas tuas mãos ou nas de alguém que indicaste, a não ser que tenhas escolhido uma transportadora que a loja não propunha: vê [encomenda entregue mas não recebida](guide:delivered-not-received).
 
 Quanto ao atraso, sem data combinada a loja tem de entregar até 30 dias depois da compra (Decreto-Lei n.º 84/2021, art. 11.º). Se o produto estiver indisponível, tem de te avisar e devolver o dinheiro em 30 dias a contar do momento em que soube; se não o fizer, fica obrigada a devolver o dobro em 15 dias úteis (Decreto-Lei n.º 24/2014, art. 19.º).
 
@@ -149,7 +149,6 @@ A encomenda pode ainda não ter sido lida, o número pode ser de outra transport
 - [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – 48 horas
 - [Vinted: Política de Reembolso](https://www.vinted.pt/help/465) – 2 dias depois do aviso da Vinted
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 dias
-- [PGR Lisboa: Decreto-Lei n.º 84/2021](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3471&tabela=leis) – art. 11.º, prazo de 30 dias, transferência do risco
-- [EUR-Lex: Diretiva 2011/83/UE, versão consolidada](https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:02011L0083-20260927) – art. 20.º, transferência do risco
+- [PGR Lisboa: Decreto-Lei n.º 84/2021](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=3471&tabela=leis) – art. 11.º, prazo de 30 dias, transferência do risco, transportadora escolhida por ti
 - [PGR Lisboa: Decreto-Lei n.º 24/2014](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=2062&tabela=leis) – art. 19.º, produto indisponível, devolução em dobro
 :::

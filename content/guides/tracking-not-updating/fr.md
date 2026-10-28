@@ -72,9 +72,9 @@ Il n'y a pas de délai unique. La plupart des transporteurs disent à partir de 
 
 Le vendeur. C'est lui qui a choisi le transporteur et passé le contrat de transport : c'est lui, son client. bpost, DPD et La Poste suisse renvoient d'ailleurs les destinataires vers l'expéditeur.
 
-La loi va dans le même sens quand tu achètes à un professionnel : en France et en Belgique, le colis voyage aux risques du vendeur jusqu'à ce que toi, ou une personne que tu as désignée, l'aies en main, sauf si tu as choisi toi-même un transporteur que la boutique ne proposait pas. La Suisse a d'autres règles : tes droits, pays par pays, sont dans [colis livré mais pas reçu](guide:delivered-not-received).
+La loi va dans le même sens quand tu achètes à un professionnel : en France et en Belgique, le colis voyage aux risques du vendeur, sauf si tu as choisi toi-même un transporteur que la boutique ne proposait pas. En France, le risque ne passe à toi qu'une fois le colis entre tes mains ou celles d'une personne que tu as désignée. La Suisse a d'autres règles : tes droits, pays par pays, sont dans [colis livré mais pas reçu](guide:delivered-not-received).
 
-Pour un retard, la loi fixe aussi un délai. En France et en Belgique, sans date convenue, le vendeur doit livrer au plus tard 30 jours après la conclusion du contrat. S'il ne livre pas à temps, tu lui demandes de le faire dans un délai supplémentaire adapté aux circonstances ; s'il le manque aussi, tu peux mettre fin au contrat et te faire rembourser (directive 2011/83/UE, art. 18). En Suisse, le SECO rappelle que tu peux interpeller le vendeur, lui fixer un délai convenable, puis te départir du contrat (Code des obligations, art. 102 et 107).
+Pour un retard, la loi fixe aussi un délai. En France et en Belgique, comme dans toute l'UE, sans date convenue, le vendeur doit livrer au plus tard 30 jours après ta commande. S'il ne livre pas à temps, tu lui demandes de le faire dans un délai supplémentaire raisonnable ; s'il le manque aussi, tu peux mettre fin au contrat et te faire rembourser. En Suisse, le SECO rappelle que tu peux interpeller le vendeur, lui fixer un délai convenable, puis te départir du contrat (Code des obligations, art. 102 et 107).
 
 Acheté à un particulier sur Vinted ou Leboncoin ? C'est d'abord la protection de la plateforme qui compte, avec ses délais.
 
@@ -142,6 +142,9 @@ Peut-être que le colis n'a pas encore été scanné, que le numéro appartient 
 - [Vinted : Politique de remboursement de Vinted](https://www.vinted.fr/help/465) – 2 jours calendaires après l'avis de Vinted
 - [Zalando : Où se trouve mon colis ?](https://www.zalando.fr/faq/where-is-my-parcel.html) – lien de suivi inactif avant la prise en charge
 - [AliExpress : How to open dispute? (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 jours
-- [EUR-Lex : directive 2011/83/UE relative aux droits des consommateurs](https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:02011L0083-20260927) – art. 18 (délai de livraison) et 20 (risque)
+- [Service-Public.fr : Achat à distance, livraison du bien](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – risque jusqu'à la prise de possession par toi ou un tiers désigné, transporteur choisi par toi, 30 jours, délai supplémentaire raisonnable, annulation et remboursement
+- [SPF Economie (ConsumerConnect) : Colis endommagé ou perdu](https://consumerconnect.be/fr/themes/achat-produit-ou-service/livraison/livraison/colis-endommage-ou-perdu) – expédition aux risques du vendeur, transporteur choisi par toi
+- [SPF Economie (ConsumerConnect) : Absence de livraison ou livraison partielle](https://consumerconnect.be/fr/themes/achat-produit-ou-service/livraison/livraison/absence-de-livraison) – 30 jours, nouveau délai raisonnable, annulation et remboursement
+- [Your Europe : Expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_fr.htm) – 30 jours, délai supplémentaire raisonnable, fin du contrat et remboursement dans toute l'UE
 - [SECO : Problèmes après l'achat](https://www.seco.admin.ch/fr/problemes-apres-lachat) – défaut de livraison, art. 102 et 107 CO
 :::

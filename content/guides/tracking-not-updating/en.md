@@ -78,7 +78,7 @@ Royal Mail takes no [claim](guide:lost-parcel) before those waiting times, and n
 
 The seller. It booked the carrier, so it's the carrier's customer.
 
-The law agrees when you bought from a business. In the UK and the EU, Ireland included, goods stay at the seller's risk until they reach you or someone you named, unless you booked a carrier the shop didn't offer: see [your rights, country by country](guide:delivered-not-received). In the US, the FTC's mail order rule expects a seller to ship within the time it stated, or within 30 days if it stated none. If it can't, it must ask your consent to the delay or cancel and refund you. The rule covers shipping, not arrival.
+The law agrees when you bought from a business. In the UK and Ireland, goods stay at the seller's risk until they reach you or someone you named, unless you booked a carrier the shop didn't offer: see [your rights, country by country](guide:delivered-not-received). In the rest of the EU, Your Europe says the seller is responsible for any damage until you receive the goods. In the US, the FTC's mail order rule expects a seller to ship within the time it stated, or within 30 days if it stated none. If it can't, it must ask your consent to the delay or cancel and refund you. The rule covers shipping, not arrival.
 
 Bought from a private person on Vinted or eBay? The platform's protection is what counts.
 
@@ -152,6 +152,7 @@ The parcel may not be scanned yet, the number may belong to another carrier, or 
 - [Vinted: Refund Policy](https://www.vinted.co.uk/help/465-the-vinted-refund-policy) – 2 days after Vinted's notice
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 days
 - [legislation.gov.uk: Consumer Rights Act 2015, s. 29](https://www.legislation.gov.uk/ukpga/2015/15/section/29) – passing of risk
-- [EUR-Lex: Directive 2011/83/EU](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02011L0083-20260927) – Art. 20
+- [Irish Statute Book: Consumer Rights Act 2022, s. 35](https://www.irishstatutebook.ie/eli/2022/act/37/section/35/enacted/en/html) – passing of risk, carrier not proposed by the trader
+- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – seller responsible for damage until you receive the goods
 - [FTC: Mail Order Rule](https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule) – 30 days
 :::

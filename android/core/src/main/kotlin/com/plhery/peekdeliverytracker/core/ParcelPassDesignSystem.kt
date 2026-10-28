@@ -144,6 +144,17 @@ class CarrierVisualIdentity(id: String, carrier: CarrierDefinition) {
     val edge: RgbaColor get() = RgbaColor.hex(colors[7])
     val accent: RgbaColor get() = RgbaColor.hex(colors[8])
 
+    /** `DeliveryPostageStamp`'s paper: warm white in light mode; in dark mode the surface, 22% of the way to the ink. */
+    val stampPaper: AdaptiveColor
+        get() {
+            val tinted = surface.mix(ink, 0.22)
+            val white = RgbaColor.hex("#FFFEFA")
+            return AdaptiveColor(white, tinted.dark, white, tinted.darkHighContrast)
+        }
+
+    /** The stamp's globe: the surface, 14% of the way to the ink. */
+    val stampGlobe: AdaptiveColor get() = surface.mix(ink, 0.14)
+
     companion object {
         /** The colour of a carrier the brand data does not name (Brand.json's `defaultColor`). */
         val defaultCarrierColor: String get() = CarrierBrandAssets.shared.defaultColor
@@ -173,34 +184,9 @@ class CarrierVisualIdentity(id: String, carrier: CarrierDefinition) {
             return String.format(Locale.ROOT, "#%02x%02x%02x", channels[0], channels[1], channels[2])
         }
 
-        /**
-         * `UInt32(text.dropFirst(), radix: 16)`: what follows the first Character, as Swift reads an unsigned number:
-         * an optional sign, then ASCII hexadecimal digits only; nil when empty, negative or too large.
-         */
-        private fun hexValue(text: String): UInt? {
-            val digits = text.characters().drop(1).joinToString("")
-            var index = 0
-            var negative = false
-            if (digits.startsWith("+") || digits.startsWith("-")) {
-                negative = digits[0] == '-'
-                index = 1
-            }
-            if (index == digits.length) return null
-            var value = 0uL
-            while (index < digits.length) {
-                val digit = when (val char = digits[index]) {
-                    in '0'..'9' -> char - '0'
-                    in 'a'..'f' -> char - 'a' + 10
-                    in 'A'..'F' -> char - 'A' + 10
-                    else -> return null
-                }
-                value = value * 16u + digit.toULong()
-                if (value > UInt.MAX_VALUE.toULong()) return null
-                index++
-            }
-            if (negative && value != 0uL) return null
-            return value.toUInt()
-        }
+        /** `UInt32(text.dropFirst(), radix: 16)`: what follows the first Character, as Swift reads an unsigned number. */
+        private fun hexValue(text: String): UInt? =
+            swiftUnsignedHex(text.characters().drop(1).joinToString(""), UInt.MAX_VALUE.toULong())?.toUInt()
     }
 }
 

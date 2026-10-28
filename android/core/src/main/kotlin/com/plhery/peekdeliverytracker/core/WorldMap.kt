@@ -845,7 +845,7 @@ data class MapPalette(
          * rather than its subject.
          */
         fun quietTint(ink: AdaptiveColor, surface: AdaptiveColor): MapPalette {
-            val route = surface.mix(ink, 0.38)
+            val route = surface.mix(ink, 0.38, GradientColorSpace.Device)
             return tint(ink, surface).copy(
                 route = route, routeMuted = ink.opacity(0.24), accent = route, currentRing = surface, card = null,
             )

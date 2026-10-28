@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -248,5 +249,69 @@ class BrandParityTests {
         assertEquals(AdaptiveColor(RgbaColor.hex(CarrierTruckGeometry.hubColor)), hub.color)
         assertEquals(25.0, hub.path.boundingBoxOfPath.midX, 1e-12)
         assertEquals(1.8, hub.path.boundingBoxOfPath.width, 1e-12)
+    }
+
+    // Not an iPhone test: `Color.mix(with:by:)` mixes in OKLab unless Swift passes `.device`, each colour weighted by its
+    // opacity (SwiftUI's resolved colours, from a swiftc harness on the Mac, which keeps them in Float).
+    @Test
+    fun colorsMixAsSwiftUIMixesThemInEachSpace() {
+        fun assertColor(expected: List<Double>, actual: RgbaColor, accuracy: Double) {
+            for ((wanted, value) in expected.zip(listOf(actual.red, actual.green, actual.blue, actual.opacity))) {
+                assertEquals("$actual", wanted, value, accuracy)
+            }
+        }
+        val surface = RgbaColor.hex("#243D2E")
+        val ink = RgbaColor.hex("#9BE0B5")
+        assertColor(listOf(0.233976245, 0.366837889, 0.285870612, 1.0), surface.mix(ink, 0.22), 1e-5)
+        assertColor(listOf(0.243843138, 0.379843086, 0.296862692, 1.0), surface.mix(ink, 0.22, GradientColorSpace.Device), 1e-6)
+        val red = RgbaColor(1.0, 0.0, 0.0)
+        val blue = RgbaColor(0.0, 0.0, 1.0)
+        assertColor(listOf(0.550440967, 0.325620681, 0.636500657, 1.0), red.mix(blue, 0.5), 1e-5)
+        assertColor(listOf(0.5, 0.0, 0.5, 1.0), red.mix(blue, 0.5, GradientColorSpace.Device), 1e-6)
+        assertColor(listOf(0.388572842, 0.388572842, 0.388572842, 1.0), RgbaColor(1.0, 1.0, 1.0).mix(RgbaColor(0.0, 0.0, 0.0), 0.5), 1e-5)
+        // A clear colour lends no colour, only its opacity.
+        val clear = RgbaColor.hex("#5B794A").opacity(0.0)
+        assertColor(listOf(0.525490224, 0.0588229969, 0.14509806, 0.389999986), RgbaColor.hex("#860F25").opacity(0.5).mix(clear, 0.22), 1e-5)
+        // Each appearance mixes on its own, in the space asked for.
+        val adaptive = Brand.color(light = "#FFFFFF", dark = "#243D2E").mix(Brand.color(light = "#000000", dark = "#9BE0B5"), 0.22)
+        assertEquals(surface.mix(ink, 0.22), adaptive.dark)
+        assertEquals(RgbaColor(1.0, 1.0, 1.0).mix(RgbaColor(0.0, 0.0, 0.0), 0.22), adaptive.light)
+
+        // The stamp's paper and globe mix the livery's surface toward its ink perceptually; in light mode the paper is warm white.
+        val identity = identity("dhl")
+        assertEquals(identity.surface.mix(identity.ink, 0.14), identity.stampGlobe)
+        assertEquals(RgbaColor.hex("#FFFEFA"), identity.stampPaper.resolve(dark = false, highContrast = true))
+        assertEquals(identity.surface.dark.mix(identity.ink.dark, 0.22), identity.stampPaper.dark)
+        assertEquals(identity.surface.darkHighContrast.mix(identity.ink.darkHighContrast, 0.22), identity.stampPaper.darkHighContrast)
+        assertNotEquals(identity.surface.dark.mix(identity.ink.dark, 0.22, GradientColorSpace.Device), identity.stampPaper.dark)
+    }
+
+    // Not an iPhone test: `Color(hex:)` trims what is not a letter, mark or number from both ends, then reads ASCII
+    // hexadecimal digits only, into 64 bits; anything else is black (SwiftUI's answers, from a swiftc harness on the Mac).
+    @Test
+    fun aHexColorReadsOnlyAsciiDigits() {
+        fun bytes(hex: String): List<Long> = RgbaColor.hex(hex).let { listOf(it.red, it.green, it.blue).map { value -> Math.round(value * 255) } }
+        val black = listOf(0L, 0L, 0L)
+        assertEquals(listOf(18L, 52L, 86L), bytes("#123456"))
+        assertEquals(listOf(32L, 37L, 30L), bytes("  #20251E  "))
+        assertEquals(listOf(32L, 37L, 30L), bytes("#20251E!"))
+        assertEquals(listOf(1L, 35L, 69L), bytes("#12345"))
+        assertEquals(listOf(35L, 69L, 103L), bytes("#1234567"))
+        assertEquals(listOf(52L, 86L, 120L), bytes("#12345678"))
+        assertEquals(listOf(255L, 255L, 255L), bytes("#FFFFFFFFFFFFFFFF"))
+        assertEquals("past 64 bits", black, bytes("#FFFFFFFFFFFFFFFFF"))
+        assertEquals(black, bytes("#10000000000000000"))
+        assertEquals("a sign is trimmed with the #", listOf(0L, 0L, 18L), bytes("#+-12"))
+        assertEquals(black, bytes("#12-34"))
+        assertEquals(black, bytes("#12g"))
+        assertEquals(black, bytes(""))
+        assertEquals(black, bytes("#"))
+        assertEquals("full-width digits", black, bytes("#\uFF11\uFF12\uFF13\uFF14\uFF15\uFF16"))
+        assertEquals("Arabic-Indic digits", black, bytes("#\u0661\u0662\u0663\u0664\u0665\u0666"))
+        assertEquals("full-width letters", black, bytes("#\uFF26\uFF260000"))
+        assertEquals("superscripts", black, bytes("#\u00B2\u00B3"))
+        assertEquals("a trailing combining mark is kept, and unreadable", black, bytes("#123456\u0301"))
+        assertEquals("a zero-width space is trimmed", listOf(18L, 52L, 86L), bytes("#123456\u200B"))
+        assertEquals("an emoji is trimmed", listOf(18L, 52L, 86L), bytes("#123456\uD83D\uDE00"))
     }
 }

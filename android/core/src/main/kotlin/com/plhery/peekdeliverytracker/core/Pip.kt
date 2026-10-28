@@ -361,14 +361,14 @@ data class PipPalette(
          */
         fun ink(ink: AdaptiveColor, on: AdaptiveColor, dark: Boolean): PipPalette {
             val surface = on
-            val mix = { amount: Double -> surface.mix(ink, amount) }
-            val deep = (if (dark) surface else ink).mix(black, 0.18)
-            val paper = (if (dark) ink else surface).mix(white, 0.62)
+            val mix = { amount: Double -> surface.mix(ink, amount, GradientColorSpace.Device) }
+            val deep = (if (dark) surface else ink).mix(black, 0.18, GradientColorSpace.Device)
+            val paper = (if (dark) ink else surface).mix(white, 0.62, GradientColorSpace.Device)
             return PipPalette(
                 inside = deep, right = mix(0.84), left = mix(0.56), backLeft = mix(0.62), backRight = mix(0.40),
                 frontRight = mix(0.50), frontLeft = mix(0.36), tape = mix(0.20), seam = mix(0.70), hairline = ink,
                 highlight = paper, eyeWhite = paper, features = deep, catchlight = paper,
-                blush = mix(0.56).mix(hex("#F0707E"), 0.55),
+                blush = mix(0.56).mix(hex("#F0707E"), 0.55, GradientColorSpace.Device),
                 glints = listOf(ink, mix(0.72), mix(0.86)),
                 shadow = if (dark) black.opacity(0.26) else deep.opacity(0.14), speedLines = ink.opacity(0.32),
             )

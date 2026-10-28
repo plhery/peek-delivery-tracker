@@ -122,7 +122,8 @@ class MaterialsTest {
 
     @Test
     fun withoutTransparencyTheMaterialIsSolid() {
-        // Reduce Transparency, Increased Contrast and a missing backdrop each draw the material over the page's colour.
+        // Reduce Transparency and a missing backdrop each draw the material over the page's colour; Increase Contrast
+        // still blurs the backdrop, black here.
         val bitmap = capture {
             val backdrop = rememberMaterialBackdrop()
             Box(Modifier.testTag(SHOT).size(180.dp, 60.dp)) {
@@ -137,7 +138,8 @@ class MaterialsTest {
             }
         }
         for (case in 0..2) {
-            val expected = PeekMaterial.Thick.recipe(dark = false).over(PeekColors(dark = false, highContrast = case == 1).background)
+            val behind = if (case == 1) Color.Black else PeekColors(dark = false, highContrast = false).background
+            val expected = PeekMaterial.Thick.recipe(dark = false).over(behind)
             val pixel = bitmap.getPixel(case * 60 + 30, 30)
             assertEquals("case $case", expected.red * 255, ((pixel shr 16) and 0xFF).toFloat(), 1f)
             assertEquals("case $case", expected.green * 255, ((pixel shr 8) and 0xFF).toFloat(), 1f)
@@ -164,7 +166,7 @@ class MaterialsTest {
     @Test
     fun sheetDark() = sheet(dark = true)
 
-    /** Every material over a busy backdrop, and the glass as Reduce Transparency and Increased Contrast draw it. */
+    /** Every material over a busy backdrop, and the glass as Reduce Transparency and Increase Contrast draw it. */
     private fun sheet(dark: Boolean) {
         compose.setContent {
             PeekTheme(dark = dark, highContrast = false, reduceMotion = true, reduceTransparency = false, carrierIdentities = null) {

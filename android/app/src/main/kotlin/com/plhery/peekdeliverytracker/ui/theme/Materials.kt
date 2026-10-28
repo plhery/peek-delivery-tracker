@@ -166,9 +166,8 @@ val LocalMaterialBackdrop = staticCompositionLocalOf<MaterialBackdrop?> { null }
 /**
  * `background(material, in: shape)`: [backdrop] blurred and filtered by the material's recipe within `shape`, under
  * `content`, which is not clipped. It is drawn solid, as the material over the page's own background, where there is
- * no backdrop, under Reduce Transparency ([PeekTheme.reduceTransparency], whose recipes trade the blur for the
- * backdrop's average colour), and under Increased Contrast (iOS 26 then turns its glass mostly black or white with a
- * contrasting edge).
+ * no backdrop, and under Reduce Transparency ([PeekTheme.reduceTransparency], whose recipes trade the blur for the
+ * backdrop's average colour). Increase Contrast leaves it as it is, as it leaves the iPhone's materials.
  *
  * Vibrancy, the blend iOS gives `.primary` and `.secondary` content on a material, is not drawn: content keeps its own
  * colours.
@@ -183,7 +182,7 @@ fun MaterialSurface(
 ) {
     val colors = PeekTheme.colors
     val recipe = material.recipe(colors.dark)
-    val solid = backdrop == null || PeekTheme.reduceTransparency || colors.highContrast
+    val solid = backdrop == null || PeekTheme.reduceTransparency
     Box(modifier) {
         val fill = Modifier.matchParentSize().clip(shape)
         if (solid) {
@@ -201,7 +200,7 @@ fun MaterialSurface(
 /**
  * `glassSurface(in:)` as the iPhone draws it before iOS 26: [PeekMaterial.UltraThin] with a 0.7 pt hairline of the
  * separator at 72 %, stroked on the shape's edge over the content. iOS 26's Liquid Glass (`glassEffect(.regular)`)
- * is not recreated. Under Increased Contrast the hairline is the separator at full strength.
+ * is not recreated.
  */
 @Composable
 fun GlassSurface(
@@ -211,7 +210,7 @@ fun GlassSurface(
     content: @Composable BoxScope.() -> Unit,
 ) {
     val colors = PeekTheme.colors
-    val hairline = if (colors.highContrast) colors.separator else colors.separator.copy(alpha = colors.separator.alpha * 0.72f)
+    val hairline = colors.separator.copy(alpha = colors.separator.alpha * 0.72f)
     val edge = Modifier.drawWithContent {
         drawContent()
         drawOutline(shape.createOutline(size, layoutDirection, this), hairline, style = Stroke(GLASS_HAIRLINE.toPx()))

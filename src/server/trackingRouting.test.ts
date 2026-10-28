@@ -520,6 +520,9 @@ describe('persistent tracking routing', () => {
     const named = (routing: JsonObject = {}) => parcel({ current_stage: 'in_transit', carrier_data: { routing: state({
       discovered_carrier: 'ups', preferred_provider: 'ParcelsApp', last_event_at: '2026-09-10T11:00:00.000Z', ...routing }) } });
     const older = () => ({ ...directValue(), result: history('2026-09-10T03:00:00Z') });
+    // The next carrier of a handoff lists its pre-advice after the first carrier's scans.
+    const preAdvice = (): RoutedResult => ({ ...directValue(), result: { status: 'pending', current_stage: 'registered', last_update: '2026-09-10T11:30:00Z',
+      events: [{ time: '2026-09-10T11:30:00Z', description: 'Order created', stage: 'registered' }] } });
 
     it('takes the carrier when the copies explain the watermark', async () => {
       const withoutCopies = vi.fn().mockReturnValue(Date.parse('2026-09-10T03:00:00Z'));
@@ -578,6 +581,29 @@ describe('persistent tracking routing', () => {
       const taken = await router.fetch(named({ set_aside: setAside }), false);
       expect(taken).toMatchObject({ sourceCarrierId: 'ups', correction: { carrier: 'ups' } });
       expect(taken.result.routing).not.toHaveProperty('set_aside');
+    });
+
+    it('sets aside a label newer than the parcel\'s progress, which moves nothing, and asks the provider', async () => {
+      const { router, direct, universal } = setup();
+      direct.mockResolvedValue(preAdvice());
+      const result = await router.fetch(named(), false);
+      expect(universal).toHaveBeenCalled();
+      expect(result.correction).toBeUndefined();
+      expect(result.result.tracking_provider).toBe('ParcelsApp');
+      expect(result.result.routing).toMatchObject({ set_aside: { ups: { reason: 'no_movement' } } });
+      expect(result.result.routing).not.toHaveProperty('confirmed_carrier');
+    });
+
+    it('keeps the progress of a provider over the label of the carrier it names', async () => {
+      const { router, direct, universal } = setup();
+      universal.mockResolvedValue({ ...history(), discovered_carrier: 'ups' });
+      direct.mockResolvedValue(preAdvice());
+      const result = await router.fetch(parcel(), false);
+      expect(direct).toHaveBeenCalledWith(expect.anything(), 'ups');
+      expect(result.correction).toBeUndefined();
+      expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', current_stage: 'in_transit',
+        routing: { set_aside: { ups: { reason: 'no_movement' } } } });
+      expect(result.result.routing).not.toHaveProperty('confirmed_carrier');
     });
 
     it('records an answer without movement it sets aside, without a scan to hold against the parcel\'s', async () => {

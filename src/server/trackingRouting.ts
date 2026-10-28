@@ -1006,8 +1006,11 @@ export class TrackingRouter {
           ? captureDirectLocalHistory(value.sourceCarrierId, String(directHistoryNumber(lookupParcel, value.result)), value.result)
           : undefined;
         // A probe needs movement: a pre-advice ("Order created") proves the
-        // label, not that this carrier has the parcel yet.
-        const notYet = probe ? ['pending', 'unknown', 'registered'] : ['pending', 'unknown'];
+        // label, not that this carrier has the parcel yet. So does a candidate
+        // once the parcel or this check's provider shows progress: the next
+        // carrier of a handoff lists its pre-advice after the first one's scans.
+        const progressed = PROGRESS_STAGES.has(rereadStage(parcel)) || Boolean(provider && hasRoutingProgress(provider));
+        const notYet = probe || (candidate && progressed) ? ['pending', 'unknown', 'registered'] : ['pending', 'unknown'];
         const moved = [value.result.status, value.result.current_stage, ...(value.result.events ?? []).map((event) => event.stage)]
           .some((stage) => stage && !notYet.includes(stage));
         const confirm = () => {

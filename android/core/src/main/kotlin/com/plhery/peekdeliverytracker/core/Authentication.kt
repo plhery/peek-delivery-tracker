@@ -28,10 +28,8 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
@@ -658,7 +656,7 @@ class SessionStore(
 
     private fun accept(next: AuthSession) {
         if (next.user.isAnonymous == true) throw AuthenticationError.MissingSession()
-        // An expiry a Long can't hold would overflow: it stays at the end of the range instead, as Swift's Int does.
+        // An expiry a Long can't hold would overflow: it stays at the end of the range instead, as Swift's does at Int's.
         val expiresAt = next.expiresAt ?: try {
             Math.addExact((now().timeIntervalSinceReferenceDate + SECONDS_FROM_1970_TO_2001).toLong(), next.expiresIn)
         } catch (_: ArithmeticException) {
@@ -791,20 +789,9 @@ private class EmptyAuthResponse {
         override val descriptor: SerialDescriptor = SerialDescriptor("EmptyAuthResponse", JsonElement.serializer().descriptor)
 
         override fun deserialize(decoder: Decoder): EmptyAuthResponse {
-            if (!(decoder as JsonDecoder).decodeJsonElement().isJson) throw SerializationException("The data isn't JSON.")
+            (decoder as JsonDecoder).decodeJsonElement()
             return EmptyAuthResponse()
         }
-
-        // The tree takes any bare word. Swift's scanner takes a number's characters without checking them, as nothing
-        // reads it, and nothing else unquoted but true, false and null.
-        private val number = Regex("[-0-9][0-9.eE+-]*")
-
-        private val JsonElement.isJson: Boolean
-            get() = when (this) {
-                is JsonObject -> values.all { it.isJson }
-                is JsonArray -> all { it.isJson }
-                is JsonPrimitive -> isString || this is JsonNull || content == "true" || content == "false" || number.matches(content)
-            }
 
         override fun serialize(encoder: Encoder, value: EmptyAuthResponse) {
             encoder.encodeSerializableValue(JsonObject.serializer(), JsonObject(emptyMap()))
@@ -839,8 +826,10 @@ private class AuthErrorPayload(
             val container = (decoder as JsonDecoder).decodeJsonElement() as? JsonObject
                 ?: throw SerializationException("Expected an object.")
 
-            // `try? container.decodeIfPresent(String.self, forKey: key)`.
-            fun string(key: String): String? = (container[key] as? JsonPrimitive)?.takeIf { it.isString }?.content
+            // `try? container.decodeIfPresent(String.self, forKey: key)`, which also reads a string holding half a
+            // surrogate pair as none.
+            fun string(key: String): String? =
+                (container[key] as? JsonPrimitive)?.takeIf { it.isString }?.content?.takeIf { it.wellFormed() == it }
 
             return AuthErrorPayload(
                 code = string("errorCode") ?: string("code"),

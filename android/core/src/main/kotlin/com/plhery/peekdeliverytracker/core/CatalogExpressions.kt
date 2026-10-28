@@ -154,7 +154,9 @@ internal object CatalogExpressions {
      * The value as java.util.regex is given it. Ignoring case, ICU folds İ to "i̇" and leaves ı alone, so
      * neither is i or I, while java.util.regex lowers İ to i and raises ı to I: both become ƻ, a letter
      * without case. ICU folds the Kelvin sign to k, which `[A-Z]` holds, so it becomes K. Each stands for
-     * one UTF-16 unit, so offsets stay, and the text matched is read from the value itself.
+     * one UTF-16 unit, so offsets stay, and the text matched is read from the value itself. Two more of ICU's
+     * case-insensitive ways stay its own, as they would cost offsets: it matches the ligatures ﬅ and ﬆ as "st", and
+     * counts U+0345 as a letter. Android's java.util.regex is ICU, so they differ on the JVM alone.
      */
     private fun subject(value: String, caseInsensitive: Boolean): String {
         if (!caseInsensitive || value.none { it == '\u0130' || it == '\u0131' || it == '\u212A' }) return value

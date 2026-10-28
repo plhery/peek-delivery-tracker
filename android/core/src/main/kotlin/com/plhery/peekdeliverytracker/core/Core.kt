@@ -745,11 +745,24 @@ internal fun <T> decodeJson(deserializer: DeserializationStrategy<T>, data: Byte
 private fun <T> decoding(deserializer: DeserializationStrategy<T>, data: ByteArray, key: (String) -> String): T {
     val text = jsonText(data) ?: throw DecodingError()
     return try {
-        ApiJson.decodeFromJsonElement(deserializer, ApiJson.parseToJsonElement(text).withSerialNames(deserializer.descriptor, key))
+        val document = ApiJson.parseToJsonElement(text)
+        if (!document.isJson) throw DecodingError()
+        ApiJson.decodeFromJsonElement(deserializer, document.withSerialNames(deserializer.descriptor, key))
     } catch (_: Exception) {
         throw DecodingError()
     }
 }
+
+// The tree takes any bare word, where the decoder refuses the whole document. Its scanner takes a number's characters
+// without checking them, as a value nothing reads stays unread, and nothing else unquoted but true, false and null.
+private val jsonNumber = Regex("[-0-9][0-9.eE+-]*")
+
+private val JsonElement.isJson: Boolean
+    get() = when (this) {
+        is JsonObject -> values.all { it.isJson }
+        is JsonArray -> all { it.isJson }
+        is JsonPrimitive -> isString || this is JsonNull || content == "true" || content == "false" || jsonNumber.matches(content)
+    }
 
 private fun JsonElement.withSerialNames(descriptor: SerialDescriptor, key: (String) -> String): JsonElement = when {
     this is JsonObject && descriptor.kind == StructureKind.CLASS -> {

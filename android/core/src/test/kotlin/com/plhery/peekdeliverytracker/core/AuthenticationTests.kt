@@ -479,6 +479,9 @@ class AuthenticationTests {
             Triple(503, """{"error_description":false,"message":null,"msg":0}""", "requestFailed(503)"),
             Triple(502, "garbage", "requestFailed(502)"),
             Triple(400, """["invalid_grant"]""", "requestFailed(400)"),
+            // A bare word anywhere is no JSON, and nothing in the body is read.
+            Triple(400, """{"error_code":"invalid_grant","code":nope}""", "requestFailed(400)"),
+            Triple(400, """{"error":"invalid_grant","o":{"a":nope}}""", "requestFailed(400)"),
         )
         for ((status, body, expected) in cases) {
             val persistence = saved(savedSession)
@@ -506,6 +509,8 @@ class AuthenticationTests {
             // A field that is not a string reads as none, and leaves the others readable.
             Triple(422, """{"error_description":{"a":"b"},"message":"m"}""", "server(m)"),
             Triple(422, """{"message":5}""", "requestFailed(422)"),
+            Triple(422, """{"message":"\ud800","msg":"m"}""", "server(m)"),
+            Triple(422, """{"code":abc,"msg":"x"}""", "requestFailed(422)"),
             // Only a refresh's refusal signs out.
             Triple(401, """{"code":"invalid_grant"}""", "requestFailed(401)"),
             Triple(500, """{"message":null,"msg":"second"}""", "server(second)"),

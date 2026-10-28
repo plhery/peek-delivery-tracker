@@ -344,6 +344,7 @@ class ParcelLogicTests {
 
     @Test
     fun tellsAnOrderNumberOrAShortNumberNoCarrierAnsweredFor() {
+        // The catalog's half of the iPhone's test; Parcel.nonTrackingShape's half comes with the likely carrier.
         // Synthetic numbers: Amazon's without hyphens, AliExpress's, Temu's as a lookup stores it, a short one.
         assertEquals(NonTrackingShape.Order(shop = "amazon"), CarrierCatalog.nonTrackingShape("30245719832294617"))
         assertEquals(NonTrackingShape.Order(shop = "aliexpress"), CarrierCatalog.nonTrackingShape("3041234567890123"))

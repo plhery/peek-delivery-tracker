@@ -1,10 +1,13 @@
 # Every SF Symbol name in ios/ and the Material Symbols Rounded icon Android draws for it (X-AD38).
-# Columns: SF Symbol, Material Symbols name ("-" where Android draws none; `name#n` the icon's nth outline alone), fill
-# (1 for SF's .fill variants), where iOS draws it, and how close the match is. A use is `File:line size weight`: the
+# Columns: SF Symbol, Material Symbols name ("-" where Android draws none; `name#n` the icon's nth outline alone; `a + b`
+# and `a - b` b drawn over a or cut out of it, placed and sized as SF's inner glyph), fill (1 for SF's .fill variants),
+# where iOS draws it, and how close the match is. A use is `File:line size weight`: the
 # symbol's point size (text styles at the default size: caption2 11, caption 12, footnote 13, subheadline 15, callout
 # 16, body and headline 17, title3 20, title2 22, title 28) and SF weight; `inherited` takes the surrounding font (body,
 # regular unless noted), `menu`, `tab` and `toolbar` the system's (24 dp on Android), `phase` the widget's three phase
-# sites (20 bold, 12 bold and the Live Activity's own), `mac` the Mac app only. `small` is `.imageScale(.small)`.
+# sites (20 bold, 12 bold and the Live Activity's own), `mac` the Mac app only. `small` is `.imageScale(.small)`, and
+# `hierarchical` `.symbolRenderingMode(.hierarchical)`: the filled icon's shape at the opacity SF gives that layer, with
+# its holes filled at full over it.
 # MaterialSymbols.swift reads this file: it fetches each icon at the weights and optical sizes its uses need and writes
 # MaterialSymbolPaths.kt. Grade 0; weight is SF's (ultraLight 100 … bold 700, heavier 700); optical size is the
 # nearest of 20, 24, 40 and 48 to the point size.
@@ -12,12 +15,12 @@ archivebox	inventory_2	0	ParcelListView:2757 15 regular; ParcelLogic:922 menu	cl
 archivebox.fill	inventory_2	1	ParcelListView:1108 inherited; ParcelListView:2559 18 bold	close
 arrow.clockwise	refresh	0	PullToRefresh:243 13.5 medium; ParcelListView:953 17 regular; ParcelListView:1715 11 semibold; ParcelListView:1790 11 semibold; ParcelLinkSheet:676 11 medium; ParcelDetailView:775 12 regular	close
 arrow.right	arrow_forward	0	FriendsView:576 12 semibold	close
-arrow.right.circle.fill	arrow_circle_right	1	DeliveryWidget:247 inherited small	close
+arrow.right.circle.fill	arrow_circle_right	1	DeliveryWidget:309 11 heavy small	close
 arrow.up	arrow_upward	0	SignInView:1191 18 medium	close
 arrow.up.right	arrow_outward	0	ParcelLinkSheet:933 10 regular; SignInView:428 12 regular; ParcelDetailView:735 10 regular	close
 arrow.uturn.backward	undo	0	ParcelLogic:923 menu	close
-arrow.uturn.backward.circle	undo	0	ParcelLogic:65 15 regular	no circled U-turn: the arrow alone
-arrow.uturn.backward.circle.fill	undo	0	DeliveryWidget:408 phase	no circled U-turn: the arrow alone
+arrow.uturn.backward.circle	circle + undo	0	ParcelLogic:65 15 regular	close: Material has no circled U-turn, so the arrow sits in the ring as SF places it
+arrow.uturn.backward.circle.fill	circle - undo	1	DeliveryWidget:470 phase	close: Material has no circled U-turn, so the arrow is cut out of the disc as SF places it
 asterisk	asterisk	0	SignInView:1197 14 bold	close
 barcode	barcode	0	AddParcelView:408 12 regular	close
 barcode.viewfinder	barcode_scanner	0	FirstOpenView:500 22 regular; FirstOpenView:500 20 regular; AddParcelView:388 17 regular; FirstOpenView:747 15 regular	close
@@ -25,14 +28,14 @@ bell	notifications	0	ParcelDetailView:955 16 light; ParcelLinkSheet:180 17 semib
 bell.badge	notifications_unread	0	SettingsViews:946 mac	close
 bell.badge.fill	notifications_unread	1	SettingsViews:19 20 semibold	close
 bell.fill	notifications	1	FirstOpenView:603 9 regular	close
-bicycle	pedal_bike	0	ParcelLogic:61 15 regular; DeliveryWidget:247 inherited small; DeliveryWidget:403 phase	close
+bicycle	pedal_bike	0	ParcelLogic:61 15 regular; DeliveryWidget:309 11 heavy small; DeliveryWidget:465 phase	close
 bolt	bolt	0	PassportView:267 22 ultraLight; FriendsStore:219 22 ultraLight	close
 book.closed.fill	book	1	ParcelListView:33 tab	close
 box.truck.fill	local_shipping	1	MacMenuBar:205 mac	close
 building.columns	account_balance	0	ParcelLogic:59 15 regular	close
 checkmark	check	0	ParcelListView:1022 36 ultraLight; ParcelListView:1706 11 light; ParcelListView:1841 11 light; ParcelShareSheet:230 13 semibold; ParcelLinkSheet:910 14 regular; CarrierPicker:373 17 semibold; FriendsView:433 13 regular; FriendsView:434 12 regular; ParcelDetailView:651 15 regular; ParcelDetailView:704 14 regular	close
 checkmark.circle	check_circle	0	FriendsView:40 15 regular	close
-checkmark.circle.fill	check_circle	1	ParcelLinkSheet:257 17 regular; AddParcelView:497 20 regular; ParcelAlerts:235 inherited; ParcelListView:1118 inherited; DesignSystem:580 inherited; ParcelLogic:64 15 regular; DeliveryWidget:404 phase	close
+checkmark.circle.fill	check_circle	1	ParcelLinkSheet:257 17 regular; AddParcelView:497 20 regular; ParcelAlerts:235 inherited; ParcelListView:1118 inherited; DesignSystem:580 inherited; ParcelLogic:64 15 regular; DeliveryWidget:309 11 heavy small; DeliveryWidget:466 phase	close
 checkmark.seal.fill	verified	1	SignInView:193 23 regular	close
 checkmark.square.fill	check_box	1	FriendsView:397 17 regular	close
 chevron.down	keyboard_arrow_down	0	ParcelListView:2770 12 regular; ParcelDetailView:1485 10 regular	close
@@ -48,10 +51,10 @@ doc.on.doc	content_copy	0	ParcelShareSheet:230 13 semibold; ParcelLinkSheet:910 
 doc.text	description	0	ParcelLogic:56 15 regular	close
 ellipsis	more_horiz	0	ParcelDetailView:139 toolbar	close
 envelope	mail	0	ParcelAlerts:255 17 regular; SignInView:628 15 medium; SettingsViews:330 15 light; ParcelAlerts:81 16 regular	close
-exclamationmark.circle	error	0	ParcelFeedbackViews:733 inherited; ParcelShareSheet:367 inherited; ParcelLinkSheet:297 inherited; ParcelLinkSheet:337 34 light; ParcelLogic:60 15 regular	close
-exclamationmark.circle.fill	error	1	DeliveryWidget:406 phase	close
+exclamationmark.circle	error	0	ParcelFeedbackViews:733 inherited; ParcelShareSheet:367 inherited; ParcelLinkSheet:297 inherited; ParcelLinkSheet:340 34 light; ParcelLogic:60 15 regular	close
+exclamationmark.circle.fill	error	1	DeliveryWidget:468 phase	close
 exclamationmark.triangle	warning	0	ParcelListView:1789 11 semibold; ParcelLogic:62 15 regular; ParcelDetailView:442 11 semibold; ParcelDetailView:445 11 semibold	close
-exclamationmark.triangle.fill	warning	1	ParcelFeedbackViews:434 inherited; ParcelListView:1118 inherited; AddParcelView:707 inherited; SignInView:724 12 regular; ParcelDetailView:1211 inherited; DeliveryWidget:405 phase	close
+exclamationmark.triangle.fill	warning	1	ParcelFeedbackViews:434 inherited; ParcelListView:1118 inherited; AddParcelView:707 inherited; SignInView:724 12 regular; ParcelDetailView:1211 inherited; DeliveryWidget:467 phase	close
 gear	settings	0	SettingsViews:132 inherited	close
 gearshape	settings	0	SettingsViews:941 mac	close
 gift	featured_seasonal_and_gifts	0	ParcelShareSheet:184 16 regular; PassportView:284 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelLinkSheet:502 12 semibold; ParcelLinkSheet:778 inherited; ParcelLinkSheet:827 inherited; SignInView:1141 12 medium	close
@@ -82,21 +85,21 @@ receipt	receipt_long	0	ParcelShareSheet:177 16 regular	close
 rectangle.3.group	space_dashboard	0	SettingsViews:478 15 light	close: three panes, one tall
 rectangle.slash	web_asset_off	0	DeliveryWidget:136 20 bold	none close: a struck-out window
 shippingbox	package_2	0	PassportView:104 22 ultraLight; PassportView:261 22 ultraLight; PassportView:381 13 ultraLight; FriendsStore:219 22 ultraLight; ParcelLogic:57 15 regular; ParcelLogic:917 menu; DeliveryWidget:142 20 bold; ParcelDetailView:107 inherited; MacMenuBar:205 mac	close
-shippingbox.fill	package_2	1	ParcelListView:26 tab; ParcelListView:2854 15 regular; ParcelPassDesignSystem:241 11 bold; DeliveryWidget:231 12 bold; DeliveryWidget:409 phase	close
+shippingbox.fill	package_2	1	ParcelListView:26 tab; ParcelListView:2854 15 regular; ParcelPassDesignSystem:241 11 bold; DeliveryWidget:231 12 bold; DeliveryWidget:471 phase	close
 slider.horizontal.3	tune	0	FriendsView:136 13 regular	close
 sparkle	auto_awesome#3	1	SignInView:1324 13 medium; SignInView:1324 16 medium; SignInView:1324 18 medium; SignInView:1324 23 medium; SignInView:1324 24 medium; SignInView:1324 25 medium	close: the large star of auto_awesome alone, as SF draws one
 square	check_box_outline_blank	0	FriendsView:397 17 regular	close
 square.and.arrow.up	ios_share	0	FriendsView:430 inherited; ParcelDetailView:319 16 regular; ParcelDetailView:329 16 regular; ParcelShareSheet:147 17 semibold; ParcelLogic:919 menu; SettingsViews:650 15 light	close
 storefront	storefront	0	PassportView:282 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelLogic:63 15 regular; ParcelDetailView:598 17 regular	close
-storefront.fill	storefront	1	DeliveryWidget:407 phase	close
+storefront.fill	storefront	1	DeliveryWidget:469 phase	close
 tray.and.arrow.down	move_to_inbox	0	ShareViewController:102 inherited; ShareViewController:248 17 semibold	close
 trash	delete	0	ParcelLogic:924 menu	close
 truck.box	local_shipping	0	ParcelLogic:58 15 regular; ParcelLogic:921 menu	close
 wand.and.sparkles	auto_fix_high	0	CarrierPicker:301 inherited; AddParcelView:536 12 regular; ParcelDetailView:1153 inherited	close
 wave.3.right	sensors	0	SettingsViews:486 15 light	none close: waves to both sides
-wifi.exclamationmark	wifi_off	0	ParcelListView:748 17 semibold; ParcelLinkSheet:337 34 light	none close: Wi-Fi struck through, where SF adds an exclamation mark
+wifi.exclamationmark	android_wifi_3_bar_alert	0	ParcelListView:748 17 semibold; ParcelLinkSheet:340 34 light	close: a Wi-Fi fan with an exclamation mark at its foot, where SF's mark splits the fan
 wrench.and.screwdriver.fill	construction	1	SignInView:530 17 semibold	close
 xmark	close	0	ParcelFeedbackViews:631 13 semibold; ParcelListView:1201 11 bold; ParcelMapView:145 15 semibold; ParcelShareSheet:124 13 semibold; AddParcelView:217 17 medium; ParcelAlerts:117 13 semibold; SignInView:230 inherited; FriendsView:579 inherited	close
-xmark.circle.fill	cancel	1	ParcelListView:150 20 regular; ParcelListView:983 inherited	close
+xmark.circle.fill	cancel	1	ParcelListView:150 20 regular hierarchical; ParcelListView:983 inherited	close
 25.circle	-	0	FriendsStore:219 none	not drawn: FriendsView.swift:517 writes the stamp's 25 as text
 seal	-	0	FriendsStore:219 none	not drawn: FriendsView.swift:517 writes the stamp's 10 as text

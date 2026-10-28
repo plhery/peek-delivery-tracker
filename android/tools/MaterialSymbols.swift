@@ -8,7 +8,8 @@
 // reads only its path data. To take newer icons, set `revision` to a newer commit of that repository and run it again.
 //
 // It also measures each SF Symbol as AppKit draws it, 100 pt, regular, medium scale: the image's box and where the ink
-// lies in it (SF Symbols on a Mac are the iPhone's). And it checks material-symbols.tsv lists every SF Symbol name in
+// lies in it (SF Symbols on a Mac are the iPhone's), where its inner glyph lies for a composed outline, and the opacity
+// of its lower layer where iOS draws it hierarchical. And it checks material-symbols.tsv lists every SF Symbol name in
 // ios/, against the system's list of names.
 import AppKit
 
@@ -32,6 +33,9 @@ struct Row {
     let material: String
     let fill: Bool
     let uses: [String]
+
+    /// Whether a use is `.symbolRenderingMode(.hierarchical)`.
+    var hierarchical: Bool { uses.contains { $0.split(separator: " ").contains("hierarchical") } }
 }
 
 let rows: [Row] = try String(contentsOf: table, encoding: .utf8).split(separator: "\n").compactMap { line in
@@ -81,8 +85,8 @@ struct Subpath {
     let relative: Bool
 }
 
-// The outline's exact bounds, from SVG path data in Material Symbols' grid, and where its subpaths start.
-func parse(_ data: String) -> (bounds: CGRect, subpaths: [(start: String.Index, subpath: Subpath)]) {
+// The outline from SVG path data in Material Symbols' grid, its exact bounds, and where its subpaths start.
+func parse(_ data: String) -> (path: CGPath, bounds: CGRect, subpaths: [(start: String.Index, subpath: Subpath)]) {
     var subpaths: [(start: String.Index, subpath: Subpath)] = []
     let path = CGMutablePath()
     var scanner = data[...]
@@ -156,7 +160,29 @@ func parse(_ data: String) -> (bounds: CGRect, subpaths: [(start: String.Index, 
         }
         previous = Character(command.uppercased())
     }
-    return (path.boundingBoxOfPath, subpaths)
+    return (path, path.boundingBoxOfPath, subpaths)
+}
+
+/// `path` as SVG path data, in absolute coordinates.
+func pathData(_ path: CGPath) -> String {
+    func n(_ v: CGFloat) -> String {
+        var text = String(format: "%.2f", v)
+        while text.contains(".") && (text.hasSuffix("0") || text.hasSuffix(".")) { text.removeLast() }
+        return text == "-0" ? "0" : text
+    }
+    var data = ""
+    path.applyWithBlock { element in
+        let p = element.pointee.points
+        switch element.pointee.type {
+        case .moveToPoint: data += "M\(n(p[0].x)) \(n(p[0].y))"
+        case .addLineToPoint: data += "L\(n(p[0].x)) \(n(p[0].y))"
+        case .addQuadCurveToPoint: data += "Q\(n(p[0].x)) \(n(p[0].y)) \(n(p[1].x)) \(n(p[1].y))"
+        case .addCurveToPoint: data += "C\(n(p[0].x)) \(n(p[0].y)) \(n(p[1].x)) \(n(p[1].y)) \(n(p[2].x)) \(n(p[2].y))"
+        case .closeSubpath: data += "Z"
+        @unknown default: fatalError("path element")
+        }
+    }
+    return data
 }
 
 /// The `index`th subpath (from 1) of `data` alone, its move made absolute.
@@ -191,10 +217,10 @@ func addArc(_ path: CGMutablePath, from p0: CGPoint, to p1: CGPoint, rx: CGFloat
     path.addRelativeArc(center: .zero, radius: 1, startAngle: theta, delta: delta, transform: transform)
 }
 
-/// The image's size (SwiftUI's frame for it), its ink's rectangle from the top left, and its baseline from the top, in
-/// points at 100 pt.
-func measure(_ name: String, scale: NSImage.SymbolScale = .medium) -> [Double] {
-    let configuration = NSImage.SymbolConfiguration(pointSize: 100, weight: .regular, scale: scale)
+/// The SF Symbol `name` at 100 pt, regular, `scale`, configured further by `style`, and its drawing at 4 pixels a point.
+func render(_ name: String, scale: NSImage.SymbolScale = .medium, style: NSImage.SymbolConfiguration? = nil) -> (image: NSImage, bitmap: NSBitmapImageRep) {
+    var configuration = NSImage.SymbolConfiguration(pointSize: 100, weight: .regular, scale: scale)
+    if let style { configuration = configuration.applying(style) }
     guard let image = NSImage(systemSymbolName: name, accessibilityDescription: nil)?.withSymbolConfiguration(configuration) else {
         fatalError("no SF Symbol \(name)")
     }
@@ -207,15 +233,50 @@ func measure(_ name: String, scale: NSImage.SymbolScale = .medium) -> [Double] {
     NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)
     image.draw(in: NSRect(origin: .zero, size: size), from: .zero, operation: .sourceOver, fraction: 1)
     NSGraphicsContext.restoreGraphicsState()
+    return (image, bitmap)
+}
+
+/// The rectangle, in points from the top left, of the pixels `ink` picks.
+func inkRectangle(_ bitmap: NSBitmapImageRep, _ ink: (NSColor) -> Bool) -> CGRect {
     var minX = Int.max, minY = Int.max, maxX = -1, maxY = -1
     for y in 0..<bitmap.pixelsHigh {
-        for x in 0..<bitmap.pixelsWide where bitmap.colorAt(x: x, y: y)!.alphaComponent >= 0.5 {
+        for x in 0..<bitmap.pixelsWide where ink(bitmap.colorAt(x: x, y: y)!) {
             minX = min(minX, x); maxX = max(maxX, x); minY = min(minY, y); maxY = max(maxY, y)
         }
     }
+    precondition(maxX >= 0, "no ink")
+    let pixels = Double(bitmap.pixelsWide) / bitmap.size.width
+    return CGRect(x: Double(minX) / pixels, y: Double(minY) / pixels, width: Double(maxX + 1 - minX) / pixels, height: Double(maxY + 1 - minY) / pixels)
+}
+
+/// The image's size (SwiftUI's frame for it), its ink's rectangle from the top left, and its baseline from the top, in
+/// points at 100 pt.
+func measure(_ name: String, scale: NSImage.SymbolScale = .medium) -> [Double] {
+    let (image, bitmap) = render(name, scale: scale)
+    let ink = inkRectangle(bitmap) { $0.alphaComponent >= 0.5 }
     // The alignment rectangle runs from the baseline up the cap height: its bottom is the baseline, from the image's.
-    let baseline = size.height - image.alignmentRect.minY
-    return [size.width, size.height, Double(minX) / pixels, Double(minY) / pixels, Double(maxX + 1 - minX) / pixels, Double(maxY + 1 - minY) / pixels, baseline]
+    let baseline = image.size.height - image.alignmentRect.minY
+    return [image.size.width, image.size.height, ink.minX, ink.minY, ink.width, ink.height, baseline]
+}
+
+/// Where the symbol's inner glyph lies, in points from the top left at 100 pt: its primary layer, as palette rendering
+/// draws it.
+func innerGlyph(_ name: String) -> CGRect {
+    let palette = NSImage.SymbolConfiguration(paletteColors: [NSColor(deviceRed: 1, green: 0, blue: 0, alpha: 1), NSColor(deviceRed: 0, green: 0, blue: 1, alpha: 1), NSColor(deviceRed: 0, green: 0, blue: 1, alpha: 1)])
+    return inkRectangle(render(name, style: palette).bitmap) { $0.alphaComponent >= 0.5 && $0.redComponent >= 0.5 }
+}
+
+/// The opacity hierarchical rendering gives the symbol's lower layer: the commonest alpha between none and full.
+func lowerOpacity(_ name: String) -> Double {
+    let bitmap = render(name, style: NSImage.SymbolConfiguration(hierarchicalColor: NSColor(deviceRed: 0, green: 0, blue: 0, alpha: 1))).bitmap
+    var counts: [Int: Int] = [:]
+    for y in 0..<bitmap.pixelsHigh {
+        for x in 0..<bitmap.pixelsWide {
+            let alpha = Int((bitmap.colorAt(x: x, y: y)!.alphaComponent * 1000).rounded())
+            if alpha > 50 && alpha < 950 { counts[alpha, default: 0] += 1 }
+        }
+    }
+    return Double(counts.max { $0.value < $1.value }!.key) / 1000
 }
 
 func fetch(_ name: String, fill: Bool, weight: Int, opticalSize: Int) throws -> String {
@@ -241,6 +302,39 @@ func fetch(_ name: String, fill: Bool, weight: Int, opticalSize: Int) throws -> 
 
 func decimal(_ value: Double) -> String { String(format: "%.2f", value) + "f" }
 
+/// The outline `spec` names at a weight and optical size, as SVG path data: an icon, `name#n` its nth subpath alone, or
+/// `a + b` and `a - b`, b drawn over a or cut out of it where SF draws its inner glyph (`glyph`) within its ink (`ink`).
+func outline(_ spec: String, fill: Bool, weight: Int, opticalSize: Int, ink: CGRect, glyph: CGRect) throws -> String {
+    let terms = spec.components(separatedBy: " ")
+    if terms.count == 3 {
+        precondition(terms[1] == "+" || terms[1] == "-", "\(spec): a + b or a - b")
+        let base = parse(try outline(terms[0], fill: fill, weight: weight, opticalSize: opticalSize, ink: ink, glyph: glyph))
+        let inner = parse(try outline(terms[2], fill: fill, weight: weight, opticalSize: opticalSize, ink: ink, glyph: glyph))
+        // PeekSymbol fits the base to SF's ink, so an SF point is 1 / fit units of its grid there.
+        let fit = min(ink.width / base.bounds.width, ink.height / base.bounds.height)
+        let scale = min(glyph.width / inner.bounds.width, glyph.height / inner.bounds.height) / fit
+        var transform = CGAffineTransform(translationX: base.bounds.midX + (glyph.midX - ink.midX) / fit, y: base.bounds.midY + (glyph.midY - ink.midY) / fit)
+            .scaledBy(x: scale, y: scale).translatedBy(x: -inner.bounds.midX, y: -inner.bounds.midY)
+        let placed = inner.path.copy(using: &transform)!
+        let composed = terms[1] == "+" ? base.path.union(placed) : base.path.subtracting(placed)
+        precondition(composed.boundingBoxOfPath.insetBy(dx: -0.01, dy: -0.01).contains(base.bounds) && base.bounds.insetBy(dx: -0.01, dy: -0.01).contains(composed.boundingBoxOfPath), "\(spec): the glyph leaves the base")
+        return pathData(composed)
+    }
+    let parts = spec.split(separator: "#")
+    let data = try fetch(String(parts[0]), fill: fill, weight: weight, opticalSize: opticalSize)
+    return parts.count == 2 ? subpath(Int(parts[1])!, of: data) : data
+}
+
+/// A filled icon's layers for hierarchical rendering, back to front: its outline without its holes, then its holes
+/// filled, as SF draws a .fill symbol's inner glyph over its shape.
+func layers(_ data: String) -> [String] {
+    let subpaths = parse(data).subpaths.indices.map { subpath($0 + 1, of: data) }
+    let bounds = subpaths.map { parse($0).bounds }
+    let holes = Set(bounds.indices.filter { i in bounds.indices.contains { $0 != i && bounds[$0].contains(bounds[i]) } })
+    precondition(!holes.isEmpty && holes.count < subpaths.count, "no holes to draw")
+    return [subpaths.indices.filter { !holes.contains($0) }, holes.sorted()].map { $0.map { subpaths[$0] }.joined() }
+}
+
 var lines: [String] = []
 var drawn = 0
 var outlines = 0
@@ -249,21 +343,23 @@ for row in rows where row.material != "-" {
     for use in row.uses { if let v = variant(use), !needed.contains(where: { $0 == v }) { needed.append(v) } }
     if needed.isEmpty { continue }
     needed.sort { ($0.weight, $0.opticalSize) < ($1.weight, $1.opticalSize) }
+    precondition(!row.hierarchical || row.fill, "\(row.sf): a hierarchical symbol is drawn from a filled icon")
     drawn += 1
-    let sf = measure(row.sf).map(decimal).joined(separator: ", ")
+    let measured = measure(row.sf)
+    let ink = CGRect(x: measured[2], y: measured[3], width: measured[4], height: measured[5])
+    let glyph = row.material.contains(" ") ? innerGlyph(row.sf) : .zero
     var variants: [String] = []
     for v in needed {
-        // `name#n` takes the icon's nth subpath alone.
-        let parts = row.material.split(separator: "#")
-        var data = try fetch(String(parts[0]), fill: row.fill, weight: v.weight, opticalSize: v.opticalSize)
-        if parts.count == 2 { data = subpath(Int(parts[1])!, of: data) }
+        let data = try outline(row.material, fill: row.fill, weight: v.weight, opticalSize: v.opticalSize, ink: ink, glyph: glyph)
         let box = parse(data).bounds
-        variants.append("            MaterialOutline(\(v.weight), \(v.opticalSize), floatArrayOf(\(decimal(box.minX)), \(decimal(box.minY)), \(decimal(box.width)), \(decimal(box.height))), \"\(data)\"),")
+        let layered = row.hierarchical ? ", layerData = listOf(" + layers(data).map { "\"\($0)\"" }.joined(separator: ", ") + ")" : ""
+        variants.append("            MaterialOutline(\(v.weight), \(v.opticalSize), floatArrayOf(\(decimal(box.minX)), \(decimal(box.minY)), \(decimal(box.width)), \(decimal(box.height))), \"\(data)\"\(layered)),")
         outlines += 1
     }
+    let opacity = row.hierarchical ? ", lowerOpacity = \(decimal(lowerOpacity(row.sf)))" : ""
     lines.append("""
             "\(row.sf)" to SymbolArt(
-                "\(row.material)", fill = \(row.fill), sf = floatArrayOf(\(sf)),
+                "\(row.material)", fill = \(row.fill), sf = floatArrayOf(\(measured.map(decimal).joined(separator: ", ")))\(opacity),
                 outlines = listOf(
         \(variants.joined(separator: "\n"))
                 ),
@@ -271,15 +367,21 @@ for row in rows where row.material != "-" {
         """)
 }
 
-// How much `.imageScale(.small)` and `.large` scale a symbol, from a plain one.
+// How much `.imageScale(.small)` and `.large` scale a symbol, from a plain one, and the cap height they keep it centred
+// on: the alignment rectangle, from the baseline up, stays where the text puts it while the image grows round it.
 let medium = measure("circle")
 let small = measure("circle", scale: .small)
 let large = measure("circle", scale: .large)
+let capHeight = render("circle").image.alignmentRect.height
+for scaled in [small, large] {
+    let modelled = (medium[6] - capHeight / 2) * scaled[1] / medium[1] + capHeight / 2
+    precondition(abs(modelled - scaled[6]) < 1.5, "an image scale no longer keeps the symbol on the cap height's middle")
+}
 
 let kotlin = """
 // Generated by android/tools/MaterialSymbols.swift from android/tools/material-symbols.tsv; run it again rather than
 // editing this file. The outlines are Material Symbols Rounded from google/material-design-icons at \(revision),
-// under the Apache License 2.0 (MATERIAL-SYMBOLS-LICENSE.txt beside this file).
+// under the Apache License 2.0 (android/app/src/main/assets/MATERIAL-SYMBOLS-LICENSE.txt, which the app carries).
 package com.plhery.peekdeliverytracker.ui.symbols
 
 /** Material Symbols' revision the outlines come from. */
@@ -289,6 +391,9 @@ internal const val MATERIAL_SYMBOLS_REVISION = "\(revision)"
 internal const val SMALL_SCALE = \(decimal(small[1] / medium[1]))
 internal const val LARGE_SCALE = \(decimal(large[1] / medium[1]))
 
+/** SF's cap height at 100 pt, the height of a symbol's alignment rectangle: an image scale keeps its middle in place. */
+internal const val CAP_HEIGHT = \(decimal(capHeight))
+
 /** The SF Symbols Android draws (\(drawn)), each as its Material Symbols outlines (\(outlines)). */
 internal val materialSymbols: Map<String, SymbolArt> = mapOf(
 \(lines.joined(separator: "\n"))
@@ -296,4 +401,4 @@ internal val materialSymbols: Map<String, SymbolArt> = mapOf(
 
 """
 try kotlin.write(to: output, atomically: true, encoding: .utf8)
-print("\(drawn) symbols, \(outlines) outlines, small \(small[1] / medium[1]), large \(large[1] / medium[1])")
+print("\(drawn) symbols, \(outlines) outlines, small \(small[1] / medium[1]), large \(large[1] / medium[1]), cap height \(capHeight)")

@@ -2660,7 +2660,7 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "seur",
       "recognitionRank": 870,
-      "recognitionPattern": "^(?:\\d{14}|\\d{21,22})$"
+      "recognitionPattern": "^(?:\\d{14}|\\d{21,22}|REC\\d{12})$"
     },
     "linkRules": [
       {
@@ -2689,6 +2689,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^20\\d{2}(?:0[1-9]|[12]\\d|3[01])(?:0[1-9]|1[0-2])\\d{14}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^REC\\d{12}$",
         "confidence": "low"
       }
     ],

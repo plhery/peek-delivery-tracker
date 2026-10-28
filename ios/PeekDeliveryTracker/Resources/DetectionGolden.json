@@ -88279,10 +88279,26 @@
     ]
   },
   {
+    "input": "REC000000000017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ],
+    "asked": [
+      "seur"
+    ]
+  },
+  {
     "input": "REC000061812400",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ],
+    "asked": [
+      "seur"
+    ]
   },
   {
     "input": "REL000022726MY",

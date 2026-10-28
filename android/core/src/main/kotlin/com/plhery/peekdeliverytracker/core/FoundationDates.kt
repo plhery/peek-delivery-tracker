@@ -83,7 +83,7 @@ internal object FoundationDates {
         val time = (date.timeIntervalSinceReferenceDate + REFERENCE_DATE) * 1000.0
         val rules = RulesZone(zone.rules)
         val civil = civilDate(time, rules) ?: return null
-        return CalendarDate(Math.floorDiv((time + rules.offsetAt(time)).toLong(), DAY_MILLIS), civil.month + 1)
+        return CalendarDate(Math.floorDiv(floor(time + rules.offsetAt(time)).toLong(), DAY_MILLIS), civil.month + 1)
     }
 
     private val weekdays = listOf(
@@ -831,7 +831,8 @@ internal object FoundationDates {
 
     /** Calendar's computeFields: the wall date of a time in the zone, Julian before the cutover. */
     private fun civilDate(time: Double, zone: DateZone): CivilDate? {
-        val local = (time + zone.offsetAt(time)).toLong()
+        // ICU floors the local time to whole days: a fraction before midnight stays on the day before, 1970 or not.
+        val local = floor(time + zone.offsetAt(time)).toLong()
         val julianDayLong = Math.floorDiv(local, DAY_MILLIS) + EPOCH_JULIAN_DAY
         if (julianDayLong < Int.MIN_VALUE + EPOCH_JULIAN_DAY || julianDayLong > Int.MAX_VALUE) return null
         val julianDay = julianDayLong.toInt()

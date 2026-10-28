@@ -355,6 +355,23 @@ class CoreParityTests {
         assertEquals(Instant.parse("2026-09-06T04:00:00Z"), day("2026-09-06", "America/Santiago"))
     }
 
+    /** A moment half a millisecond before a midnight before 1970 is still on the day before, as Calendar puts it. */
+    @Test
+    fun aMomentJustBeforeMidnightBefore1970IsOnTheDayBefore() {
+        for ((zone, date) in listOf(
+            "UTC" to Instant.ofEpochSecond(-1, 999_500_000),
+            "Europe/Zurich" to Instant.ofEpochSecond(-3_601, 999_500_000),
+        )) {
+            val day = FoundationDates.calendarDate(date, ZoneId.of(zone))!!
+            assertEquals(zone, -1L, day.day)
+            assertEquals(zone, 12, day.month)
+        }
+        // 31 December 1968 at 23:59:59.75.
+        val day = FoundationDates.calendarDate(Instant.ofEpochSecond(-31_536_001, 750_000_000), ZoneId.of("UTC"))!!
+        assertEquals(-366L, day.day)
+        assertEquals(12, day.month)
+    }
+
     @Test
     fun requestsAreWrittenAsTheIphoneAppWritesThem() {
         val request = LiveActivityUpdateTokenRequest(

@@ -2,7 +2,7 @@ import catalog from '../../shared/analytics.json';
 import { pageLocale, SUPPORTED_LOCALES } from './locale';
 
 export type AnalyticsOutcome = 'success' | 'error' | 'started' | 'accepted';
-type Configuration = { endpoint: string; hostname: string; webWebsite: string; iosWebsite: string };
+type Configuration = { endpoint: string; hostname: string; webWebsite: string; iosWebsite: string; androidWebsite?: string };
 type Event = { screen: string; name?: string; outcome?: AnalyticsOutcome; mode: 'demo' | 'account' | 'anonymous' };
 let config: Configuration | null = null;
 let startup: Promise<void> | undefined;

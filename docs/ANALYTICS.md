@@ -2,13 +2,14 @@
 
 Optional, self-hosted [Umami](https://umami.is). Web and PWA share one property (tagged
 `platform=web` or `platform=pwa`); the iOS app uses a second one (`platform=iphone`,
-`ipad`, or `mac` for the iPad app on a Mac). `mode` separates anonymous, demo and account
-screens. Neither client sends a persistent identifier or account identity, so visitor
+`ipad`, or `mac` for the iPad app on a Mac). The Android app uses a third property
+(`platform=android`, `android-tablet`, or `chromebook`). `mode` separates anonymous, demo and
+account screens. No client sends a persistent identifier or account identity, so visitor
 counts are Umami's own estimates.
 
 ## Configuration
 
-Runtime environment variables, all four required:
+Runtime environment variables, the first four required:
 
 | Variable | Value |
 | --- | --- |
@@ -16,6 +17,7 @@ Runtime environment variables, all four required:
 | `UMAMI_APP_ORIGIN` | HTTPS origin of this instance |
 | `UMAMI_WEBSITE_ID` | Umami id of the web/PWA property |
 | `UMAMI_IOS_WEBSITE_ID` | Umami id of the iPhone property |
+| `UMAMI_ANDROID_WEBSITE_ID` | Umami id of the Android property; optional, Android sends nothing without it |
 
 Collection only runs with `NODE_ENV=production`. Leave these unset for local builds,
 forks, staging and previews. Simulators and demo builds never send events.
@@ -28,10 +30,11 @@ When the site has moved ([DEPLOYMENT.md](DEPLOYMENT.md)), `UMAMI_APP_ORIGIN` is 
 canonical origin. A legacy host is then answered with its own hostname, so installed apps
 that still call it keep reporting to the same properties.
 
-Both clients post to Umami's `/api/send`. The queue holds at most 30 events, and requests
+The clients post to Umami's `/api/send`. The queue holds at most 30 events, and requests
 time out after 5 s. Failures are dropped and never delay the user; nothing is stored for
 offline replay. The iPhone app uses a Safari-like user agent with a `DeliveryTracker`
-suffix, because Umami drops bare app user agents as bots.
+suffix, because Umami drops bare app user agents as bots. The Android app uses a Chrome-like
+user agent with the same suffix.
 
 ## Events
 
@@ -105,9 +108,10 @@ path, such as `/front-door`, or an action:
    `notifications` and `deliveries`).
 
 Umami's funnel report chains these steps within one property, by its own estimate of a
-visitor: neither client sends an identifier, so steps join per visit, never per person.
-`platform` separates `web`, `pwa`, `iphone`, `ipad` and `mac`, and `mode` the visitor
-(`anonymous`), the sample parcel (`demo`) and the account; signing in turns `anonymous`
+visitor: no client sends an identifier, so steps join per visit, never per person.
+`platform` separates `web`, `pwa`, `iphone`, `ipad`, `mac`, `android`, `android-tablet` and
+`chromebook`, and `mode` the visitor (`anonymous`), the sample parcel (`demo`) and the
+account; signing in turns `anonymous`
 into `account` midway.
 
 Gaps:
@@ -146,7 +150,7 @@ referrer is that assistant's site, so Umami lists it under referrers and its AI 
 
 The web sends nothing under DNT, GPC or `umami.disabled=1`, nor from a browser driven by
 automation (`navigator.webdriver`), such as a headless crawler, which still gets the same
-page. Both clients also read a
+page. The clients also read a
 stored preference (`sdt.analytics.enabled`) that turns collection off; no screen sets
 it. Retention is described in the public privacy notice.
 

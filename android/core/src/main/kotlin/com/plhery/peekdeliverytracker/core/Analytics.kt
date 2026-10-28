@@ -91,12 +91,16 @@ class DeliveryAnalytics(
         }
     }
 
-    /** What `/api/analytics/config` answers: Umami's collector and the app's property in it. Public ids, no keys. */
+    /**
+     * What `/api/analytics/config` answers: Umami's collector and the app's property in it. Public ids, no keys. Android
+     * reads its own property, `androidWebsite`, where the iPhone reads `iosWebsite`. From a server without one the
+     * decoding fails, as the iPhone's does without its own: nothing is sent, and `start` asks again next time.
+     */
     data class Configuration(
         /** A URL's string, as `URL(string:)` reads it. */
         val endpoint: String,
         val hostname: String,
-        val iosWebsite: String,
+        val androidWebsite: String,
     ) {
         /** `valid(for:)`: collected over HTTPS only, with no credentials or query, for the server the app talks to. */
         fun valid(origin: String): Boolean {
@@ -104,7 +108,7 @@ class DeliveryAnalytics(
             val origin = Url.parse(origin) ?: return false
             return endpoint.scheme == "https" && endpoint.host != null && endpoint.user == null && endpoint.password == null &&
                 endpoint.path == "/api/send" && endpoint.query == null && endpoint.fragment == null &&
-                origin.scheme == "https" && hostname.equalsCanonically(origin.host) && uuid(iosWebsite) != null
+                origin.scheme == "https" && hostname.equalsCanonically(origin.host) && uuid(androidWebsite) != null
         }
 
         companion object {
@@ -120,7 +124,7 @@ class DeliveryAnalytics(
                 val fields = JsonSerialization.stringsOfObject(data) ?: throw DecodingError()
                 val endpoint = fields["endpoint"] ?: throw DecodingError()
                 if (Url.parse(endpoint) == null) throw DecodingError()
-                return Configuration(endpoint, fields["hostname"] ?: throw DecodingError(), fields["iosWebsite"] ?: throw DecodingError())
+                return Configuration(endpoint, fields["hostname"] ?: throw DecodingError(), fields["androidWebsite"] ?: throw DecodingError())
             }
         }
     }
@@ -269,7 +273,7 @@ class DeliveryAnalytics(
             val properties = linkedMapOf<String, JsonElement>("platform" to JsonPrimitive(platform.rawValue), "mode" to JsonPrimitive(event.mode.rawValue))
             event.outcome?.let { properties["outcome"] = JsonPrimitive(it.rawValue) }
             val result = linkedMapOf<String, JsonElement>(
-                "website" to JsonPrimitive(configuration.iosWebsite), "hostname" to JsonPrimitive(configuration.hostname),
+                "website" to JsonPrimitive(configuration.androidWebsite), "hostname" to JsonPrimitive(configuration.hostname),
                 "url" to JsonPrimitive("/${event.screen}"), "title" to JsonPrimitive(event.screen),
                 "language" to JsonPrimitive(language),
                 "browser" to JsonPrimitive("Delivery Android"), "os" to JsonPrimitive(platform.os),

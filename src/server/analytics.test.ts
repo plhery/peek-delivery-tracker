@@ -35,4 +35,24 @@ describe('runtime analytics configuration', () => {
     const response = GET(new Request('https://delivery.example/api/analytics/config', { headers: { host: 'delivery.example' } }));
     expect(await response.json()).toMatchObject({ hostname: 'delivery.example', endpoint: 'https://u.example/api/send' });
   });
+
+  it('hands out the Android property when its id is a UUID', () => {
+    expect(analyticsConfiguration({ ...env, UMAMI_ANDROID_WEBSITE_ID: '3802c52e-466b-47e6-ac7f-f5a497655b1b' })).toEqual({
+      endpoint: 'https://u.example/api/send', hostname: 'delivery.example', webWebsite: env.UMAMI_WEBSITE_ID,
+      iosWebsite: env.UMAMI_IOS_WEBSITE_ID, androidWebsite: '3802c52e-466b-47e6-ac7f-f5a497655b1b' });
+  });
+  it('leaves the Android property out when its id is unset or not a UUID', () => {
+    for (const result of [analyticsConfiguration(env), analyticsConfiguration({ ...env, UMAMI_ANDROID_WEBSITE_ID: 'not-a-uuid' })]) {
+      expect(result).toEqual({ endpoint: 'https://u.example/api/send', hostname: 'delivery.example',
+        webWebsite: env.UMAMI_WEBSITE_ID, iosWebsite: env.UMAMI_IOS_WEBSITE_ID });
+      expect(result).not.toHaveProperty('androidWebsite');
+    }
+  });
+  it('keeps the Android property for a host the site moved from', () => {
+    const moved = { ...env, UMAMI_ANDROID_WEBSITE_ID: '3802c52e-466b-47e6-ac7f-f5a497655b1b', UMAMI_APP_ORIGIN: 'https://peek.example',
+      CANONICAL_ORIGIN: 'https://peek.example', LEGACY_HOSTS: 'delivery.example' };
+    expect(analyticsConfigurationFor(new Headers({ host: 'delivery.example' }), moved)).toEqual({
+      endpoint: 'https://u.example/api/send', hostname: 'delivery.example', webWebsite: env.UMAMI_WEBSITE_ID,
+      iosWebsite: env.UMAMI_IOS_WEBSITE_ID, androidWebsite: '3802c52e-466b-47e6-ac7f-f5a497655b1b' });
+  });
 });

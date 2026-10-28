@@ -26,8 +26,10 @@ class AnalyticsTests {
         googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = false, appGroupIdentifier = "analytics.test",
     )
     private val website = "6F0D6C1E-2B7A-4C55-9E21-3A1B5C7D9E0F"
+    private val web = "1802C52E-466B-47E6-AC7F-F5A497655B1B"
+    private val ios = "2802C52E-466B-47E6-AC7F-F5A497655B1B"
     private val configurationAnswer =
-        """{"endpoint":"https://analytics.example/api/send","hostname":"delivery.example","webWebsite":"$website","iosWebsite":"$website"}"""
+        """{"endpoint":"https://analytics.example/api/send","hostname":"delivery.example","webWebsite":"$web","iosWebsite":"$ios","androidWebsite":"$website"}"""
 
     @Test
     fun sharedCatalogExcludesPollingAndPrivateInputs() {
@@ -109,7 +111,8 @@ class AnalyticsTests {
         assertNull(decode(" null "))
         assertEquals("delivery.example", decode(configurationAnswer.dropLast(1) + ",\"hostname\":\"another.example\"}")!!.hostname)
         assertEquals("delivery.example", decode(configurationAnswer.dropLast(1) + ",}")!!.hostname)
-        for (body in listOf("", "[]", "{}", configurationAnswer.dropLast(1) + ",\"x\":abc}", configurationAnswer.replace("\"iosWebsite\"", "\"ios_website\""))) {
+        for (body in listOf("", "[]", "{}", configurationAnswer.dropLast(1) + ",\"x\":abc}", configurationAnswer.replace("\"androidWebsite\"", "\"android_website\""),
+            configurationAnswer.replace(",\"androidWebsite\":\"$website\"", ""))) {
             assertTrue(body, runCatching { decode(body) }.exceptionOrNull() is DecodingError)
         }
     }
@@ -243,7 +246,7 @@ class AnalyticsTests {
             jsonResponse(200, "null"),
             jsonResponse(200, configurationAnswer.replace("https://analytics", "http://analytics")),
             jsonResponse(200, configurationAnswer.replace("\"hostname\":\"delivery.example\"", "\"hostname\":\"another.example\"")),
-            jsonResponse(200, configurationAnswer.replace("\"iosWebsite\":\"$website\"", "\"iosWebsite\":\"web\"")),
+            jsonResponse(200, configurationAnswer.replace("\"androidWebsite\":\"$website\"", "\"androidWebsite\":\"web\"")),
         )
         for (refusal in refusals) {
             var refused = true

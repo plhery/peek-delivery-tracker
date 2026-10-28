@@ -11,7 +11,8 @@ export function analyticsConfiguration(env: NodeJS.ProcessEnv = process.env) {
       || url.pathname !== '/' || url.search || url.hash)) return null;
     if (!uuid.test(env.UMAMI_WEBSITE_ID ?? '') || !uuid.test(env.UMAMI_IOS_WEBSITE_ID ?? '')) return null;
     return { endpoint: `${endpoint.origin}/api/send`, hostname: origin.hostname,
-      webWebsite: env.UMAMI_WEBSITE_ID!, iosWebsite: env.UMAMI_IOS_WEBSITE_ID! };
+      webWebsite: env.UMAMI_WEBSITE_ID!, iosWebsite: env.UMAMI_IOS_WEBSITE_ID!,
+      ...(uuid.test(env.UMAMI_ANDROID_WEBSITE_ID ?? '') ? { androidWebsite: env.UMAMI_ANDROID_WEBSITE_ID! } : {}) };
   } catch { return null; }
 }
 

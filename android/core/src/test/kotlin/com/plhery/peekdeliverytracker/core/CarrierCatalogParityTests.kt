@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -194,5 +195,86 @@ class CarrierCatalogParityTests {
         val polish = CarrierCatalog.countriesByName(AppLanguage.Pl)
         val laos = polish.indexOf("LA")
         assertEquals(listOf("LA", "LS", "LB", "LR", "LY", "LI", "LT", "LU", "LV", "MK", "MG", "YT", "MO", "MW"), polish.subList(laos, laos + 14))
+    }
+
+    /**
+     * `foundationMatches` runs ICU over UTF-16 units where iOS 27 runs a Swift Regex over Characters. They agree on a
+     * pattern anchored at both ends whose body takes printable ASCII alone, scalar by scalar: no class escape (`\d`,
+     * `\w`, `\s`, `\p`, `\b`), no negated class, no flag or lookbehind, no alternation outside a group, and `.` only in
+     * a lookahead, which never decides on its own what the body takes.
+     */
+    private fun meansTheSameOverCharacters(pattern: String): Boolean {
+        if (pattern.length < 2 || !pattern.startsWith("^") || !pattern.endsWith("$")) return false
+        if (pattern.any { it.code !in 0x20..0x7E }) return false
+        val end = pattern.length - 1
+        // The groups open at `index`, each true when it is a lookahead.
+        val groups = ArrayList<Boolean>()
+        fun escapable(index: Int) = index < end && !pattern[index].isLetterOrDigit()
+        var index = 1
+        while (index < end) {
+            when (pattern[index]) {
+                '\\' -> if (escapable(index + 1)) index++ else return false
+                '[' -> {
+                    if (pattern.getOrNull(index + 1) == '^') return false
+                    index++
+                    while (index < end && pattern[index] != ']') {
+                        when (pattern[index]) {
+                            '[' -> return false
+                            '\\' -> if (escapable(index + 1)) index++ else return false
+                        }
+                        index++
+                    }
+                    if (index >= end) return false
+                }
+                '(' -> if (pattern.getOrNull(index + 1) == '?') {
+                    groups += when (pattern.getOrNull(index + 2)) {
+                        '=', '!' -> true
+                        ':' -> false
+                        else -> return false
+                    }
+                    index += 2
+                } else {
+                    groups += false
+                }
+                ')' -> groups.removeLastOrNull() ?: return false
+                '|' -> if (groups.isEmpty()) return false
+                '.' -> if (true !in groups) return false
+                '^' -> return false
+            }
+            index++
+        }
+        return index == end && groups.isEmpty()
+    }
+
+    @Test
+    fun theCatalogsPatternsMeanTheSameOverCharactersAsOverUtf16() {
+        val requirements = catalog.definitions.values.flatMap { it.tracking.requirements.orEmpty() }.mapNotNull { it.pattern?.nonEmpty }
+        assertTrue(requirements.isNotEmpty())
+        // The patterns CarrierCatalog, CarrierRecognition and CarrierRequirement give `foundationMatches` themselves.
+        val literals = listOf(
+            CarrierRequirement.anyPostcode,
+            "^[A-Z0-9]{4,40}$",
+            "^NJVTT[0-9]{11}$",
+            "^(?:NL(SG|MY|ID|PH|TH|VN)[A-Z]{1,2}[0-9]{8,10}|NV(SG|MY|ID|PH|TH|VN)(?!STAMP[A-Z0-9]{9}$)[A-Z0-9]{8,20})$",
+            "^[A-Z0-9]{11}[0-9]{5}$",
+            "^(DD|LD)[A-Z0-9]{6}$",
+            "^[0-9]{10}$",
+            "^PK[0-9]{20}$",
+            "^(?:ESP[0-9]{5}1234[0-9]{11}|PRT[0-9]{7}1234[0-9]{9})$",
+            "^(J?JD[0-9]{16}|8YDR[0-9]{9}|[0-9]{2}[A-Z]{3}[0-9]{7}A[0-9]{3})$",
+        )
+        for (pattern in requirements + literals) {
+            assertTrue(pattern, meansTheSameOverCharacters(pattern))
+            assertTrue(pattern, CatalogExpressions.expression(pattern) != null)
+        }
+
+        // Each of these could read a Character of several scalars or a line end otherwise than ICU does, or is no pattern.
+        for (pattern in listOf(
+            "^\\d{4}$", "^\\w+$", "^[0-9]\\s?[A-Z]$", "^[^ ]+$", "^.{3}$", "^[A-Z]+", "[0-9]{4}$", "^[0-9]+\\$",
+            "^a|b$", "^(?i)[a-z]+$", "^(?<=a)b$", "^[\\p{L}]+$", "^\u00E9$", "^[a-z\\n]+$", "^[0-9]{4}(?=.*)[A-Z].$",
+            "^(?=[0-9]{4}$", "^[0-9]{4}[$",
+        )) {
+            assertFalse(pattern, meansTheSameOverCharacters(pattern))
+        }
     }
 }

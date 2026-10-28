@@ -202,7 +202,14 @@ internal object CatalogExpressions {
         return result.append(value, copied, value.length).toString()
     }
 
-    /** Foundation's `value.range(of: pattern, options: .regularExpression) != nil`, whose `$` is the end of the input. */
+    /**
+     * `value.range(of: pattern, options: .regularExpression) != nil` for the patterns the catalog and its code give it.
+     * The value is a native Swift String, which iOS 27 searches with a Swift Regex over Characters, where `$` is the end
+     * of the input; this runs ICU over UTF-16 units with that `$` (`expression`). The two agree on these patterns alone:
+     * each is anchored at both ends, with ASCII literals and classes, no `\d`, `\w`, `\s` or negated class, and `.` only
+     * in a lookahead, so whatever matches is ASCII, a scalar to each Character. CarrierCatalogParityTests holds every
+     * pattern to that; another needs `nativeMatches`.
+     */
     fun foundationMatches(value: String, pattern: String): Boolean = matches(value, pattern)
 
     /**
@@ -210,6 +217,8 @@ internal object CatalogExpressions {
      * Swift Regex over Characters: a letter or a slash with a combining mark or a joiner is one character, which `.`
      * and `[^/]` take whole and no ASCII literal equals, and CR LF is one line end, which `.` does not take. For
      * patterns of ASCII literals, `.` and classes, each Character of several scalars stands as one none of them names.
+     * Not modelled: `\d`, `\w` and `\s`, which a Swift Regex asks of such a Character as a whole ("1\u20E3" is a digit
+     * to it, a decomposed "é" a word character) and which take nothing here; no pattern given here has them.
      */
     fun nativeMatches(value: String, pattern: String): Boolean {
         if (value.all { it.code < 0x80 && it != '\r' }) return matches(value, pattern)

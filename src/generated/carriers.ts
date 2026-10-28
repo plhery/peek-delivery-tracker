@@ -485,7 +485,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "amazon-shipping",
       "catalog": "amazon-shipping",
       "slug": "amazon-shipping-tracking",
-      "title": "Amazon Shipping tracking: numbers, statuses and help",
+      "title": "Amazon Shipping tracking: numbers, problems and help",
       "name": "Amazon Shipping",
       "color": "#ff9900"
     },
@@ -1527,7 +1527,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "amazon-shipping",
       "catalog": "amazon-shipping",
       "slug": "amazon-shipping-sendungsverfolgung",
-      "title": "Amazon Shipping Sendungsverfolgung: Status und Hilfe",
+      "title": "Amazon Shipping Sendungsverfolgung: Nummer und Hilfe",
       "name": "Amazon Shipping",
       "color": "#ff9900"
     },
@@ -1833,7 +1833,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "amazon-shipping",
       "catalog": "amazon-shipping",
       "slug": "amazon-shipping-suivi",
-      "title": "Amazon Shipping suivi\u00a0: numéro, statuts et colis non reçu",
+      "title": "Amazon Shipping suivi\u00a0: numéro de suivi et colis non reçu",
       "name": "Amazon Shipping",
       "color": "#ff9900"
     },
@@ -2405,7 +2405,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "amazon-shipping",
       "catalog": "amazon-shipping",
       "slug": "amazon-shipping-seguimiento",
-      "title": "Amazon Shipping seguimiento: estados, entrega y contacto",
+      "title": "Amazon Shipping seguimiento: número y qué hacer si no llega",
       "name": "Amazon Shipping",
       "color": "#ff9900"
     },

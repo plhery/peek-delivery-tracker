@@ -1,76 +1,39 @@
 ---
 title: Amazon Shipping tracking: dov'è il pacco e chi contattare
-description: Amazon Shipping: dove trovi l'ID di tracciamento, cosa vogliono dire gli stati, consegne non riuscite, come riprogrammare e chi contattare se il pacco non arriva.
+description: Amazon Shipping: com'è fatto l'ID di tracciamento, quale tracker lo conosce e chi contattare se il pacco non arriva, arriva danneggiato o risulta consegnato.
 slug: amazon-shipping-tracking
 published: 2026-10-12
 updated: 2026-10-27
 ---
 
-Amazon Shipping è Amazon che consegna pacchi per conto di altri negozi online: un e-commerce che non è Amazon può spedirti l'ordine con la rete di Amazon. Lo segui sul tracker pubblico di Amazon Shipping, [track.amazon.it](https://track.amazon.it/), con l'ID di tracciamento che trovi nell'e-mail di spedizione del negozio, dove c'è anche il link diretto. Gli ordini fatti su Amazon.it invece si seguono da I miei ordini.
+Amazon Shipping è Amazon che consegna pacchi per conto di altri negozi online: un e-commerce che non è Amazon può spedirti l'ordine con la rete di Amazon. Lo segui con il suo ID di tracciamento sul tracker pubblico di Amazon Shipping (track.amazon.it per i numeri italiani). Gli ordini fatti su Amazon.it invece si seguono da I miei ordini.
 
-## Numero di tracking Amazon Shipping: dove trovarlo e com'è fatto
+## Numero di tracking Amazon Shipping: com'è fatto
 
-Quando il venditore spedisce l'ordine ti manda un'e-mail di conferma della spedizione, con il link per seguire il pacco. Il tracker lo chiama «tracking ID» o «ID di tracciamento»: scrivilo nella casella di ricerca e premi «Cerca». Non serve il CAP.
-
-Amazon pubblica il formato degli ID solo per il Regno Unito, non per l'Italia. Le forme che Peek riconosce come numeri Amazon sono queste (cifre inventate):
+Le forme che Peek riconosce come numeri Amazon sono queste (cifre inventate):
 
 | Forma | Che cos'è |
 | --- | --- |
 | `IT0000000000` | Un codice di Paese europeo e 10 cifre (`IT`, `CH`, `FR`, `DE`, `UK` e altri). |
 | `TBA123456789012` | `TBA`, `TBC` o `TBM` e 12 cifre. |
 
-Attenzione: Amazon Logistics, che consegna gli ordini fatti su Amazon, usa esattamente le stesse forme. Solo il tracker di Amazon Shipping le distingue, perché i pacchi di Amazon Logistics non li trova. Se il tracker non trova nulla e hai comprato su Amazon.it, leggi [il tracking di Amazon Logistics](carrier:amazon-logistics). Un numero come `000-0000000-0000000` è un numero d'ordine Amazon, non di tracciamento. Niente e-mail? Il numero ce l'ha il negozio: vedi [dove trovare il codice tracking](guide:find-tracking-number).
-
-## Tracciamento Amazon Shipping: cosa significano gli stati
-
-Su track.amazon.it gli stati sono in italiano, e dal menu della lingua puoi passare all'inglese. Ecco quelli che si vedono più spesso, nell'ordine in cui arrivano:
-
-| Stato su track.amazon.it | Cosa vuol dire per te |
-| --- | --- |
-| `Etichetta creata` | Il negozio ha preparato l'etichetta. Amazon non ha ancora il pacco. |
-| `Il pacco è arrivato presso la sede del corriere` | È arrivato in un centro di smistamento Amazon. |
-| `Il pacco ha lasciato la sede del corriere` | È ripartito da un centro. Subito dopo `In consegna` è il furgone che parte. |
-| `Il pacco è arrivato all'hub/alla stazione di consegna finale` | È nella stazione che te lo consegna. |
-| `In consegna` | Oggi è con il corriere. |
-| `Pacco consegnato` | Consegnato. |
-| `In transito, ma in ritardo` | È in ritardo, ma la data prevista non è cambiata. |
-| `Tentativo di consegna effettuato` | Il corriere non è riuscito a consegnare. La pagina di tracciamento ti dice se devi fare qualcosa. |
-| `Non consegnabile` | Amazon non riesce a consegnarlo. |
-| `Restituzione al mittente` | Il pacco torna al negozio. |
-
-`Etichetta creata` da sola per giorni vuol dire che il negozio non ha ancora consegnato il pacco ad Amazon: chiedi al negozio, non ad Amazon. Quando sei tu a ritirare il pacco, il titolo sopra la cronologia scrive `Hai ritirato il pacco`. Se il ritardo sposta la data, lo stesso titolo diventa «In arrivo» con il nuovo giorno.
-
-## Consegna non riuscita, riprogrammare la spedizione e giacenza
-
-**Orari.** Secondo l'Aiuto di track.amazon.it, Amazon Shipping consegna tra le 8:00 e le 22:00 tutti i giorni, sabato e domenica compresi; nei giorni festivi può cambiare. Non può darti una fascia oraria.
-
-**Consegna non riuscita.** Amazon fa più di un tentativo, senza dire quanti. Un tentativo fallisce per un indirizzo sbagliato o incompleto, nessun posto sicuro, l'accesso impossibile o un codice di verifica che non hai potuto confermare. Se devi fare qualcosa, lo trovi sulla pagina di tracciamento.
-
-**Giacenza.** Nessuna pagina italiana di Amazon Shipping dice quanto resta fermo un pacco dopo un tentativo non riuscito. Le guide per i mittenti del Regno Unito e della Francia parlano di circa sette giorni nella stazione di consegna locale, in cui puoi chiedere una nuova consegna o il ritiro; se nessuno si fa vivo, il pacco torna al magazzino del venditore.
-
-**Riprogrammare.** Inserisci l'ID di tracciamento e accedi al tracker: in «Gestisci la spedizione», «Riprogramma» sposta la consegna a un'altra data entro 7 giorni da quella originale, ma solo prima del primo tentativo. Puoi anche aggiungere note per il corriere, un posto sicuro o un vicino. L'indirizzo invece non si può cambiare dopo l'ordine. In «Ricevi aggiornamenti sulla consegna» ti iscrivi agli aggiornamenti via e-mail o SMS. Se il pacco è stato ordinato con un'altra e-mail o un altro numero, puoi rivendicarlo con un codice temporaneo che ricevi via SMS o e-mail.
-
-**Prova di consegna.** Il corriere può fotografare il pacco lasciato in un posto sicuro: superati i controlli di Amazon, la foto compare nel tracciamento. Per alcuni pacchi serve un codice di 6 cifre, che ricevi per e-mail o SMS il giorno della consegna e vedi anche sul sito di tracciamento.
-
-**Punti di ritiro e locker.** L'Aiuto italiano non ne parla: il ritiro al banco (Delivery to Counter) è un servizio del Regno Unito.
+Attenzione: Amazon Logistics, che consegna gli ordini fatti su Amazon, usa esattamente le stesse forme. Solo il tracker di Amazon Shipping le distingue, perché i pacchi di Amazon Logistics non li trova. Se il tracker non trova nulla e hai comprato su Amazon.it, leggi [il tracking di Amazon Logistics](carrier:amazon-logistics). Un numero come `000-0000000-0000000` è un numero d'ordine Amazon, non di tracciamento. Niente numero? Ce l'ha il negozio: vedi [dove trovare il codice tracking](guide:find-tracking-number).
 
 ## Pacco Amazon Shipping non consegnato, in ritardo o smarrito
 
-Il tracker lo scrive chiaro: per modifiche alla consegna, rimborsi o altro aiuto, contatta direttamente il mittente. Il cliente di Amazon Shipping è il negozio.
+Il tuo interlocutore è il negozio da cui hai comprato: il cliente di Amazon Shipping è lui. Nell'UE, secondo Your Europe, il commerciante è responsabile della consegna e di eventuali danni alla merce, dal momento della spedizione fino a quello della consegna.
 
-**Consegnato ma non ricevuto.** Prima di scrivere al venditore, Amazon consiglia di controllare l'indirizzo, cercare un avviso di tentata consegna, guardare intorno al punto di consegna, chiedere chi altro può averlo preso (un vicino) e controllare la cassetta delle lettere, perché alcuni pacchi passano per più corrieri. Altri passi in [pacco consegnato ma non ricevuto](guide:delivered-not-received).
+**Consegnato ma non ricevuto.** Spetta al commerciante contattare il servizio di consegna e dimostrare che l'articolo è stato consegnato. Se non è in grado di farlo, deve inviarti un articolo identico o rimborsarti. Altri passi in [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
-**Danneggiato.** Contatta il venditore per un rimborso o una sostituzione e mandagli le foto.
+**Danneggiato.** Il commerciante risponde dei danni durante il trasporto: deve riparare o sostituire l'articolo, o rimborsarti.
 
-**Tornato al mittente.** Un pacco restituito al venditore non può essere rispedito: chiedi al venditore un rimborso o una sostituzione.
-
-**Smarrito o fermo.** Contatta il mittente: il reclamo verso Amazon Shipping lo fa lui. Amazon non dice dopo quanto tempo un tracciamento fermo vada considerato un problema; i motivi più comuni sono in [perché il tracking non si aggiorna](guide:tracking-not-updating).
+**Smarrito o fermo.** Se non hai concordato un'altra data, la merce va consegnata entro 30 giorni. Se non arriva, sollecita il venditore e concedigli un'ulteriore proroga ragionevole. Se non la rispetta, puoi annullare l'ordine e avere il rimborso. Se è fermo solo il tracciamento, i motivi più comuni sono in [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
 ## Amazon Shipping contatti e servizio clienti
 
-Letto il 27 ottobre 2026. La pagina [Contattaci](https://track.amazon.it/contact-us) di track.amazon.it ha un modulo, «Parlaci del tuo problema»: la risposta arriva via e-mail o, se hai fatto il login, con una richiamata telefonica. Amazon dice di rispondere in genere entro un minuto per telefono ed entro 24 ore via e-mail. Quel team aiuta solo con i pacchi che Amazon spedisce per altri negozi; gli ordini di Amazon.it passano da I miei ordini, e per pacchi smarriti o danneggiati rimanda al mittente. Amazon Shipping non indica un numero di telefono né orari, e su nessuna sua pagina c'è un numero verde. In Ticino vale lo stesso: non esiste un sito Amazon Shipping svizzero.
+Se il pacco non arriva o arriva danneggiato, il tuo interlocutore è il negozio, come spiegato sopra.
 
-> Se ricevi un messaggio su un acquisto, Amazon consiglia di non rispondere e di non cliccare sui link. Amazon non ti chiede di pagare al telefono o via e-mail, né di dare al telefono i dati di pagamento, nemmeno per una carta regalo. Non chiamare numeri ricevuti via e-mail o SMS o trovati nei risultati di ricerca, e segnala i messaggi sospetti dalla pagina «Segnala una truffa» di Amazon. Amazon Shipping manda però aggiornamenti veri via e-mail e SMS. Altri consigli in [truffa pacco via SMS](guide:delivery-scam-texts).
+> Se ricevi un messaggio su un acquisto, Amazon consiglia di non rispondere e di non cliccare sui link. Amazon non ti chiede di pagare al telefono o via e-mail, né di dare al telefono i dati di pagamento, nemmeno per una carta regalo. Non chiamare numeri ricevuti via e-mail o SMS o trovati nei risultati di ricerca, e segnala i messaggi sospetti dalla pagina «Segnala una truffa» di Amazon. Altri consigli in [truffa pacco via SMS](guide:delivery-scam-texts).
 
 ## Tracciare un pacco Amazon Shipping con Peek
 
@@ -82,31 +45,21 @@ Peek mostra lo stato, la cronologia con città, regione e Paese di ogni scansion
 
 ### Amazon Shipping cos'è?
 
-È il servizio di consegna di Amazon per altri e-commerce: compri su un sito qualsiasi, il venditore crea la spedizione e Amazon Shipping ritira il pacco da lui e lo porta a te. Per i problemi ti rivolgi al negozio, non ad Amazon.it.
+È il servizio con cui Amazon mette la sua rete di consegna dell'ultimo miglio a disposizione dei venditori che gestiscono da sé le spedizioni: compri su un altro sito e Amazon porta il pacco a te. Per i problemi ti rivolgi al negozio, non ad Amazon.it.
 
-### Amazon Shipping consegna di sabato e di domenica?
+### Chi contatto se il pacco Amazon Shipping non arriva?
 
-Sì: secondo il suo Aiuto consegna tutti i giorni tra le 8:00 e le 22:00, sabato e domenica compresi. Nei giorni festivi gli orari possono cambiare. Il sito per le aziende precisa però che nel fine settimana consegna solo nelle zone coperte dalla rete Amazon Logistics.
-
-### Amazon Shipping ha un numero verde?
-
-No, non ne indica nessuno. Per chi riceve un pacco c'è solo la pagina Contattaci di track.amazon.it, con il modulo e la risposta via e-mail o con una richiamata dopo il login, e per smarrimenti o danni rimanda al mittente.
+Il negozio da cui hai comprato: nell'UE, secondo Your Europe, il commerciante è responsabile della consegna e, se non dimostra di aver consegnato, deve inviarti un articolo identico o rimborsarti.
 
 ### In quanto tempo consegna Amazon Shipping?
 
-Il titolo sopra la cronologia dà il giorno previsto. Ai negozi Amazon Shipping promette la consegna il giorno successivo in tutta Italia, ma è il negozio a scegliere il servizio e quando affidargli il pacco.
+Se il tracker di Amazon dà un giorno di consegna previsto, Peek lo mostra, tranne per i numeri `TBA`, `TBC` e `TBM`. Se con il negozio non hai concordato un'altra data, nell'UE l'ordine va consegnato entro 30 giorni, secondo Your Europe.
 
 :::sources
-- [Amazon Shipping: Traccia il tuo pacco Amazon Shipping](https://track.amazon.it/) – cos'è, come funziona, come cercare il numero, lingue
-- [Amazon Shipping: Aiuto](https://track.amazon.it/faq) – e-mail di spedizione, orari, tentativi, Riprogramma, istruzioni, aggiornamenti, foto, codice, danni e resi
-- [Amazon Shipping: Contattaci](https://track.amazon.it/contact-us) – modulo, e-mail o richiamata, tempi di risposta, solo altri negozi, contatta il mittente
-- [Amazon Shipping: Testi della pagina di tracciamento](https://track.amazon.it/getLocalizedStrings) – diciture degli stati e del titolo, invito a contattare il mittente
-- [Amazon Shipping Italia](https://shipping.amazon.it/) – consegna il giorno successivo in tutta Italia, 7 giorni su 7, fine settimana solo nelle zone coperte
-- [Amazon Shipping: Help](https://track.amazon.co.uk/faq) – Delivery to Counter nel Regno Unito
-- [Amazon Shipping UK: Customer experience tools and support](https://shipping.amazon.co.uk/resources/getting-started-guide/customer-experience-tools-and-support) – circa sette giorni nella stazione di consegna
-- [Amazon Shipping France: Expérience client, outils et assistance](https://shipping.amazon.fr/ressources/guide-de-demarrage/experience-client-outils-et-assistance) – circa sette giorni, nuova consegna o ritiro
-- [Amazon Shipping developer docs: UK tracking ID format update](https://developer-docs.shipping.amazon.com/apis/changelog/pre-launch-announcement-amazon-shipping-tracking-id-format-update-for-uk) – formato pubblicato solo per il Regno Unito
+- [About Amazon Italia: Lettera agli azionisti dal CEO Andy Jassy - 2024](https://www.aboutamazon.it/notizie/company-news/lettera-agli-azionisti-dal-ceo-andy-jassy-2024) – cos'è Amazon Shipping: la rete di consegna dell'ultimo miglio di Amazon per i venditori che gestiscono da sé le spedizioni
+- [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – commerciante responsabile dei danni fino alla consegna, 30 giorni, proroga, rimborso
+- [Your Europe: FAQ su spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_it.htm) – commerciante responsabile della consegna, prova della consegna, articolo identico o rimborso, annullare l'ordine
 - [About Amazon Italia: Come evitare le truffe basate sui furti di identità](https://www.aboutamazon.it/notizie/company-news/come-evitare-le-truffe-basate-sui-furti-di-identita-di-amazon-in-questo-periodo-festivo) – messaggi su un acquisto, pagamenti, numeri da non chiamare
 - [About Amazon Italia: Un'alleanza pubblico-privato contro le truffe](https://www.aboutamazon.it/news/customer-trust/unalleanza-pubblico-privato-per-contrastare-le-truffe-basate-sui-furti-didentita) – dati di pagamento e carte regalo al telefono, Segnala una truffa
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa riconosce e mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa riconosce e mostra Peek, quale tracker conosce quali numeri, ordini Amazon solo nell'account
 :::

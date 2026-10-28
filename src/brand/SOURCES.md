@@ -339,6 +339,7 @@ and [`truck.json`](truck.json).
 | `j-and-t-cn` | [jtexpress.com.cn](https://www.jtexpress.com.cn/css/base.css) — site CSS --swiper-theme-color #e62019; logo PNG #e50113 |
 | `j-and-t-middle-east` | [jtexpress.me](https://www.jtexpress.me/KSA) — site script #e60000 |
 | `j-and-t-mx` | [jtexpress.mx](https://www.jtexpress.mx/icons/favicon-128x128.png) — favicon fill #e60012 |
+| `j-and-t-uk` | [jtexpress.uk](https://www.jtexpress.uk/) — tab logo SVG fill #e60000 |
 | `jadlog` | [jadlog.com.br](https://www.jadlog.com.br/jadlog/img/logo_home.png) — logo cube #dc0032 (approximate), same red in site CSS |
 | `jamaica-post` | [jamaicapost.gov.jm](https://jamaicapost.gov.jm/wp-content/uploads/2021/09/jp_logo.png) — logo PNG red #e3352e (approximate) |
 | `janio` | [janio.asia](https://www.janio.asia/brand/janio-icon.png) — brand icon and logo navy #0a1f5c (flat PNG); the j dot is teal #1fceca |
@@ -394,6 +395,7 @@ and [`truck.json`](truck.json).
 | `lion-parcel` | [lionparcel.com](https://stg-website-lionparcel.s3.ap-southeast-1.amazonaws.com/assets/logo/lp_logo_footer_new.svg) — logo SVG fill #ff0000 |
 | `logen` | [ilogen.com](https://www.ilogen.com/static/css/style.css) — site CSS main colour #ffa200; logo swoosh #61553e (footer_logo.png, approximate) |
 | `loggi` | [commons.wikimedia.org](https://commons.wikimedia.org/wiki/File:Logologgi.png) — logo #00baff, also in loggi.com CSS (approximate) |
+| `logisimple` | [logisimple.pt](https://logisimple.pt/) — site theme CSS #e27900, its primary colour (buttons, icons, separators, active tabs; 19 rules); the customer portal's [logo SVG](https://portal.logisimple.pt/assets/img/logo/logo.svg) and [favicon](https://portal.logisimple.pt/favicon.png) are #f17c00, with the SI of the LOGISIMPLE wordmark in navy #08397b |
 | `logistiq` | [logistiq.io](https://logistiq.io/wp-content/uploads/2022/05/Logo-1.svg) — logo SVG fill #2e65f3 |
 | `logoix` | [logoix.com](https://www.logoix.com/favicon.svg) — favicon SVG fill #EA5B0C |
 | `loomis-express` | [loomisexpress.com](https://loomisexpress.com/loomship/wp-content/themes/canpar/dist/styles/main.css) — main.css: `--primary: #004B8E`, logo letters #004B8E, swoosh #D93835 |
@@ -696,6 +698,7 @@ and [`truck.json`](truck.json).
 | `venipak` | [logo SVG](https://venipak.com/wp-content/uploads/venipak-logo-mob.svg) |
 | `vestovoy` | [vestovoi.ru](https://vestovoi.ru/images/images/main-logo.svg) — logo SVG fill #0E7AA5 (tagline and rule, also the site footer); letter in the logo name fill #E96066 |
 | `via-cargo` | [viacargo.com.ar](https://viacargo.com.ar/wp-content/uploads/2024/01/viacargo.svg) — logo green #589b50 of Vía (approximate, PNG inside the SVG); site CSS also uses #7fc53b and #1e8d34 |
+| `viadireta` | [viadireta.pt](https://www.viadireta.pt/) — theme-color meta #0d3a6d, also the header bar behind the white logo and the most used colour of the [site CSS](https://www.viadireta.pt/css/site.css) after white (59 uses); the CSS's second blue #1668b3 colours links and buttons; the [colour icon](https://www.viadireta.pt/images/iconcolor-192.png) is blue #346cbb with a navy #224375 stroke |
 | `viettel-post` | [viettelpost.com.vn](https://viettelpost.com.vn/) — site CSS #ee0033 (40 uses); white logo on a red header |
 | `vimenpaq` | [vimenpaq.do](https://www.vimenpaq.do/media/14229/nuevo-logo-vimenpaq-horizontal.png) — logo PNG flat blue #013ca6, red #f42434 (approximate) |
 | `vinted-go` | [vintedgo.com](https://vintedgo.com/) (header background, CSS --primary-dark 0,70,84; the favicon background #004755) |
@@ -804,7 +807,7 @@ and [`truck.json`](truck.json).
 | `four-px` | White slanted 4PX beside an orange spark on blue; the orange is an approximation | [4px.com](https://www.4px.com/) |
 | `planzer` | White capitals on red | [planzer.ch](https://www.planzer.ch/) |
 | `tipsa` | White capitals between four orange corners on navy | [tip-sa.com](https://www.tip-sa.com/) |
-| `gofo` (`gofo`, `gofo-ca`, `gofo-fr`, `gofo-it`, `gofo-nl`) | White capitals on orange | [gofo.com](https://www.gofo.com/us/) |
+| `gofo` (`gofo`, `gofo-ca`, `gofo-es`, `gofo-fr`, `gofo-it`, `gofo-nl`) | White capitals on orange | [gofo.com](https://www.gofo.com/us/) |
 | `dachser` | Blue capitals on a yellow panel across a blue truck; the yellow is an approximation | [dachser.com](https://www.dachser.com/) |
 | `asendia` | White lowercase name over a yellow line on teal | [asendia.com](https://www.asendia.com/) |
 | `colis-prive` | Dark pin and purple exclamation mark on lilac | [colisprive.fr](https://www.colisprive.fr/) |
@@ -1104,7 +1107,7 @@ and [`truck.json`](truck.json).
 | `tracx-logis` | White X of two back-to-back arcs on blue | [tracxlogis.com](https://www.tracxlogis.com/image/home/logo_tracxlogis.svg) — the X of TRACX LOGIS, two opposed arcs; also the site icon |
 | `quantium-solutions` | Lime corner arrow with a starburst on dark teal | [quantiumsolutions.com](https://www.quantiumsolutions.com/homesource/Quantium_Solutions_Logo.png) — logo symbol: lime cut square pointing up-right with an eight-point burst |
 | `janio` | White disc with a triangle cut out on navy | [janio.asia](https://www.janio.asia/brand/janio-icon.png) — brand icon: the o of janio, a disc split by a triangular cut |
-| `j-and-t-cn` (`j-and-t-cn`, `j-and-t-au`, `j-and-t-br`, `j-and-t-de`, `j-and-t-middle-east`, `j-and-t-mx`) | White slanted J&T on red, the J on its foot | [jtexpress.com.cn](https://www.jtexpress.com.cn/images/v3/index/logo_red@2x.png) — J&T wordmark, drawn as the fleet's j-and-t truck |
+| `j-and-t-cn` (`j-and-t-cn`, `j-and-t-au`, `j-and-t-br`, `j-and-t-de`, `j-and-t-middle-east`, `j-and-t-mx`, `j-and-t-uk`) | White slanted J&T on red, the J on its foot | [jtexpress.com.cn](https://www.jtexpress.com.cn/images/v3/index/logo_red@2x.png) — J&T wordmark, drawn as the fleet's j-and-t truck |
 | `equick` | White E with a double chevron on dark red | [equick.cn](http://www.equick.cn/favicon.ico) — favicon: white Equick wordmark with a double chevron on dark red; the E is the logo's large rounded capital |
 | `pfc-express` | White crown over PFC on blue | [pfctrack.com](https://www.pfctrack.com/images/logo.png) — logo: white crown above bold PFC on blue |
 | `ecms-express` | White italic ECMS on green | [ecmsglobal.com](https://www.ecmsglobal.com/static/img/logo.638720d1.png) — green ECMS wordmark beside a navy runner carrying a red parcel |
@@ -1464,3 +1467,5 @@ and [`truck.json`](truck.json).
 | `dealersend` | Navy five-pointed star holding a red eagle head with a white beak, facing right, with navy and red speed dashes on its left, all inside a white outline, on red | [dealer-send.com](https://dealer-send.com/ds_logo_square_bg-tran_600x600.png) — the mark above the DealerSend wordmark of the square logo in the site's structured data: a navy star, a red eagle head with a white beak set off from the star by a thin white line, and four rows of speed dashes; traced from the 600 px PNG, the eagle and its red dash in the truck's red, inside a white outline as on the header's logo; the wordmark is left out |
 | `pactic` | White rounded square outline holding two smaller rounded square outlines that share its bottom-left corner, on purple | [pactic.com](https://cdn.prod.website-files.com/603f6d31482011fc8cb6dabf/6040efaa67d54e16e4f5b8d8_Pactic_log%C3%B3_emb%C3%A9lma_feh%C3%A9r.svg) — the emblem before the pactic wordmark: three nested rounded square outlines growing from one corner, in a purple to cyan gradient in the navbar logo and white in the footer and on the app icon; drawn from the white footer emblem's path; the wordmark is left out |
 | `express-one-bg` | White double loop, each loop running into a broad band that rises to the upper right, on orange | [expressone.bg](https://expressone.bg/build/images/common/logo.7dfca86b503b681bae3fbeaf638b3488.png) — the mark before the EXPRESS ONE wordmark: an outer and an inner open loop, each running into a band rising to the upper right; drawn from the vector paths of the same artwork in the [Express One header logo SVG](https://expressone.hu/assets/images/logo-black.svg) and checked against the site's 192 px icon; the wordmark is left out |
+| `logisimple` | White P whose bowl holds a right-pointing arrow cut in from the left, on orange | [portal.logisimple.pt](https://portal.logisimple.pt/favicon.png) — the customer portal's favicon: the P of the LOGISIMPLE wordmark alone, in orange, with an arrow notch cut into its bowl through the band that splits the wordmark; drawn from the P's path in the portal's [logo SVG](https://portal.logisimple.pt/assets/img/logo/logo.svg); the rest of the wordmark is left out |
+| `viadireta` | White V whose right stroke rises into a chevron closing a D over a separate base bar, on navy | [viadireta.pt](https://www.viadireta.pt/images/logohz.svg) — the mark before the VIADIRETA lettering of the header logo, white on the navy header: a V whose right stroke runs into the top of a D drawn as a right-pointing chevron, with the D's base bar set off by a slit; drawn from the SVG's four mark paths merged into one outline; the lettering is left out |

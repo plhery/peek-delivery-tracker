@@ -1052,6 +1052,9 @@
   "gofo-ca": {
     "family": "gofo"
   },
+  "gofo-es": {
+    "family": "gofo"
+  },
   "gofo-fr": {
     "family": "gofo"
   },
@@ -1285,6 +1288,9 @@
   "j-and-t-mx": {
     "decal": "j-and-t-cn"
   },
+  "j-and-t-uk": {
+    "family": "j-and-t-cn"
+  },
   "jadlog": {
     "decal": "jadlog"
   },
@@ -1465,6 +1471,9 @@
   },
   "loggi": {
     "decal": "loggi"
+  },
+  "logisimple": {
+    "decal": "logisimple"
   },
   "logistiq": {
     "decal": "logistiq"
@@ -2536,6 +2545,9 @@
   },
   "via-cargo": {
     "decal": "via-cargo"
+  },
+  "viadireta": {
+    "decal": "viadireta"
   },
   "viettel-post": {
     "decal": "viettel-post"

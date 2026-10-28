@@ -41,12 +41,14 @@ export const CARRIER_FAMILIES: Record<string, string> = {
   "gls-it": "gls",
   "gls-pl": "gls",
   "gofo-ca": "gofo",
+  "gofo-es": "gofo",
   "gofo-fr": "gofo",
   "gofo-it": "gofo",
   "gofo-nl": "gofo",
   "hermes-at": "hermes",
   "j-and-t-au": "j-and-t-cn",
   "j-and-t-de": "j-and-t-cn",
+  "j-and-t-uk": "j-and-t-cn",
   "mng-kargo": "dhl",
   "pickupp-sg": "pickupp",
   "postlogistics": "swiss-post",
@@ -848,6 +850,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "gobolt": "gobolt",
   "gofo": "gofo",
   "gofo-ca": "gofo",
+  "gofo-es": "gofo",
   "gofo-fr": "gofo",
   "gofo-it": "gofo",
   "gofo-nl": "gofo",
@@ -917,6 +920,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "j-and-t-de": "j-and-t-cn",
   "j-and-t-middle-east": "j-and-t-cn",
   "j-and-t-mx": "j-and-t-cn",
+  "j-and-t-uk": "j-and-t-cn",
   "jadlog": "jadlog",
   "jamaica-post": "jamaica-post",
   "janio": "janio",
@@ -974,6 +978,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "lion-parcel": "lion-parcel",
   "logen": "logen",
   "loggi": "loggi",
+  "logisimple": "logisimple",
   "logistiq": "logistiq",
   "logoix": "logoix",
   "loomis-express": "loomis-express",
@@ -1293,6 +1298,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "venipak": "venipak",
   "vestovoy": "vestovoy",
   "via-cargo": "via-cargo",
+  "viadireta": "viadireta",
   "viettel-post": "viettel-post",
   "vimenpaq": "vimenpaq",
   "vinted-go": "vinted-go",
@@ -15154,6 +15160,20 @@ export const CARRIER_TRUCK: TruckGeometry = {
       {
         "type": "polygon",
         "d": "M9.91 9.5L9.45 10.07L9.03 10.45L8.55 10.73L8.08 10.83L7.6 10.78L7.37 10.71L7.09 10.57L6.84 10.37L6.67 10.2L6.49 9.94L6.39 9.72L6.31 9.41L6.28 9.1L6.31 8.76L6.39 8.48L6.52 8.21L6.69 7.97L6.94 7.74L7.2 7.57L7.59 7.42L7.9 7.37L8.22 7.37L8.62 7.47L8.99 7.67L9.24 7.87L9.5 8.19L9.67 8.57L10.48 7.44L10.2 7.07L9.92 6.81L9.61 6.59L9.28 6.4L8.93 6.26L8.56 6.17L8.18 6.13L7.8 6.13L7.42 6.18L7.05 6.28L6.7 6.42L6.37 6.61L6.07 6.84L5.8 7.11L5.56 7.41L5.37 7.73L5.22 8.08L5.11 8.45L5.05 8.82L5.04 9.2L5.08 9.58L5.16 9.95L5.3 10.31L5.47 10.65L5.69 10.96L5.95 11.24L6.24 11.48L6.56 11.69L6.9 11.86L7.26 11.98L7.63 12.05L8.14 12.07L8.54 12.03L8.98 11.92L9.64 11.61L10.3 11.14L11.09 10.44L11.98 9.54L12.94 8.47L13.84 7.37L14.63 6.32L15.74 4.74L13.33 4.74Z",
+        "fill": "accent"
+      }
+    ],
+    "logisimple": [
+      {
+        "type": "polygon",
+        "d": "M11.31 4.05L7.5 4.05L7.5 6.66L11.25 6.66L11.25 5.76L13.13 7.42L11.26 9.07L11.26 8.17L7.5 8.17L7.5 13.85L9.6 13.85L9.62 10.67L11.31 10.67L11.97 10.61L12.58 10.42L13.12 10.13L13.59 9.74L13.97 9.26L14.26 8.7L14.44 8.06L14.5 7.36L14.44 6.66L14.26 6.02L13.97 5.46L13.59 4.98L13.12 4.59L12.58 4.29L11.97 4.11Z",
+        "fill": "accent"
+      }
+    ],
+    "viadireta": [
+      {
+        "type": "polygon",
+        "d": "M18.49 9.04L18.49 8.96L15.56 4.46L15.49 4.43L12.76 4.43L12.7 4.46L8.02 11.63L6.17 8.96L6.11 8.93L3.57 8.93L3.51 8.97L3.51 9.04L6.44 13.54L6.51 13.57L9.23 13.57L9.29 13.54L14.13 6.59L15.81 9L14.18 11.34L11.35 11.34L11.29 11.37L9.84 13.46L9.84 13.53L9.9 13.57L15.49 13.57L15.56 13.54Z",
         "fill": "accent"
       }
     ]

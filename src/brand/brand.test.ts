@@ -216,6 +216,8 @@ describe('carrier brand', () => {
       'dealersend',
       'pactic',
       'express-one-bg',
+      'logisimple',
+      'viadireta',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

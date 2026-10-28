@@ -38,7 +38,8 @@ import kotlinx.serialization.Serializable
 
 /**
  * The phone's notifications as the store reaches them: UNUserNotificationCenter, UIApplication's registration and
- * AppDelegate's token on the iPhone. Called on the main thread.
+ * AppDelegate's token on the iPhone. Called on the main thread; `currentDeviceToken` is set on the main thread too
+ * (Firebase's callbacks come on others), and `authorizationStatus` never throws.
  *
  * On Android, the permission is POST_NOTIFICATIONS with NotificationManagerCompat, and the token Firebase Cloud
  * Messaging's. The service takes APNs tokens alone for now (`/api/push/devices` and the parcels' app alerts): FCM
@@ -85,7 +86,8 @@ fun interface WidgetCenter {
 /**
  * Where an account's export is written for the share sheet: the iPhone's temporary folder. On Android a file in the
  * app's cache (`cacheDir/exports/<name>`, replacing one of the same name) that a FileProvider hands to the share
- * intent. Throws when it cannot be written.
+ * intent, written whole beside it and renamed over it (`AtomicFile`), as Swift's `.atomic` write: a half-written file
+ * is never shared. Throws when it cannot be written.
  */
 fun interface ExportFiles {
     suspend fun write(name: String, data: ByteArray): File
@@ -137,8 +139,14 @@ class DeviceNotificationAccess(
  *
  * Used from the main thread, as the iPhone's store is `@MainActor`; each `…Flow` publishes its property as it
  * changes. What the iPhone leaves to a `Task` runs in `scope`, the app's own on the main thread, which nothing cancels
- * while the app runs (a `MainScope()` the application keeps). Its dispatcher must not be `Main.immediate`: a Swift
- * `Task` starts once the code that made it has returned, never inside it.
+ * while the app runs (the one `MainScope()` the application keeps and gives every store). Its dispatcher must not be
+ * `Main.immediate`: a Swift `Task` starts once the code that made it has returned, never inside it. The store lives as
+ * long as the process, as the iPhone's does: it never stops following the session's identity.
+ *
+ * `parcelsFlow` publishes a list once it is shown, and an equal list not at all, where the iPhone's `$parcels` sends the
+ * next list before it is shown, on every assignment. A collector that compares what changed (the delivered postmark,
+ * the open parcel kept on screen: ParcelListView's `onReceive(store.$parcels)`) keeps the last list it received and
+ * compares the new one with that, never with `parcels`, which already holds the new one.
  *
  * The app makes one, as the iPhone's app makes its ParcelStore, from the session, the account's client, the device's
  * parcels and the Live Activity revocations it gives everything else. `defaults` is the standard UserDefaults

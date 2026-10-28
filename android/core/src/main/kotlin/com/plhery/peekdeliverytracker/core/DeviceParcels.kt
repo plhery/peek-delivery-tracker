@@ -388,8 +388,8 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
  *
  * Used from the main thread, as the iPhone's store is `@MainActor`. What the iPhone leaves to a `Task` (telling the
  * service a replaced or released parcel's notifications and link are no longer this phone's) runs in `scope`, which
- * nothing cancels: the app's own, on the main thread with a `SupervisorJob` (`ProcessLifecycleOwner`'s
- * `lifecycleScope`, or a `MainScope()` the application keeps). A build without a server has no `client` and follows
+ * nothing cancels: the one `MainScope()` the application keeps and gives every store (`Dispatchers.Main` with a
+ * `SupervisorJob`, never `Main.immediate`: a Swift `Task` starts once the code that made it has returned). A build without a server has no `client` and follows
  * nothing. `debug` says whether this is a debug build, whose notification tokens are development ones.
  */
 class DeviceParcels(

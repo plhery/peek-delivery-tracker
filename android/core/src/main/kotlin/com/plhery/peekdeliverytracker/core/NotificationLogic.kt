@@ -207,7 +207,7 @@ object NotificationInvitationPolicy {
 
 /** The UserDefaults calls the logic makes, under the iPhone app's keys. The app keeps them in its own preferences. */
 interface UserDefaults {
-    /** False when nothing is saved under the key. */
+    /** False when nothing, or something other than a boolean, is saved under the key (`getBoolean` would throw). */
     fun bool(forKey: String): Boolean
 
     fun set(value: Boolean, forKey: String)

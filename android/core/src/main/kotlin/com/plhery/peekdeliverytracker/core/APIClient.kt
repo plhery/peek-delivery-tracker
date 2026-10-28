@@ -721,8 +721,8 @@ class LiveActivityRevocations(
 
     /**
      * Drains now and every 30 seconds while anything is pending, in `scope` (Swift's `Task`, on the main actor): the
-     * app's own, on the main thread, which nothing cancels while the app runs (`ProcessLifecycleOwner`'s
-     * `lifecycleScope`, or a `MainScope()` the application keeps). However the loop ends, a scope cancelled before it
+     * app's own, on the main thread, which nothing cancels while the app runs (the `MainScope()` the application keeps
+     * and gives every store). However the loop ends, a scope cancelled before it
      * began included, the next call may start another.
      */
     fun retry(scope: CoroutineScope) {

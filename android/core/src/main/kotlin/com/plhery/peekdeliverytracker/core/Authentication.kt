@@ -260,9 +260,9 @@ fun interface AppleSignInAuthorizing {
 /**
  * The account's session, and whether the app opens on the welcome, the demo or an account. The UI calls it from the
  * main thread, as the iPhone's store is `@MainActor`; `stateFlow` publishes `state` as it changes. `scope` is the
- * app's own, on the main thread, which nothing cancels while the app runs (`ProcessLifecycleOwner`'s
- * `lifecycleScope`, on `Dispatchers.Main.immediate`, so that a call already on the main thread goes on at once). A
- * refresh of the session is shared by every request that needs one and runs there, as the iPhone's `Task` does on the
+ * app's own, on the main thread, which nothing cancels while the app runs: the one `MainScope()` the application keeps
+ * and gives every store (`Dispatchers.Main`, never `Main.immediate`: a Swift `Task` starts once the code that made it
+ * has returned, never inside it). A refresh of the session is shared by every request that needs one and runs there, as the iPhone's `Task` does on the
  * main actor.
  *
  * The API client may run on any thread (a push token's renewal, a background job), where Swift's compiler holds every

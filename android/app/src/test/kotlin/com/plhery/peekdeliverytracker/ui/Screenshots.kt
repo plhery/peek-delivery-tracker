@@ -15,9 +15,10 @@ const val SHOT = "shot"
 
 /**
  * At most a thousandth of a shot's pixels may differ from the baseline beyond Roborazzi's colour tolerance. The
- * baselines are recorded on a Mac (arm64) and checked on Linux CI (x86-64), whose builds of Robolectric's native
- * graphics round anti-aliased edges and blurs slightly differently. A thousandth is less than any change the shots
- * check: a one-pixel line across the tallest shot (796 px) is 1/796 of it.
+ * baselines are recorded on a Mac with Apple silicon and checked on one in CI (macos-26), as Robolectric's native
+ * graphics round anti-aliased edges and blurs differently on Linux x86-64. Even on a Mac a few edge pixels of a shot
+ * can come out unlike the recording, so the margin stays. It hides nothing: a thousandth is less than any change the
+ * shots check, as a one-pixel line across the tallest shot (844 px) is 1/844 of it.
  *
  * Robolectric's Roboto has no 600 or 800 weight: semibold text shows as Medium (500), a little lighter and narrower
  * than on a phone, and heavy as Black (900).

@@ -3,7 +3,7 @@ title: Correos rastreio: encomendas de Espanha para Portugal
 description: Rastreio Correos (Espanha): como é o número, o que querem dizer os estados, quem entrega em Portugal, quanto tempo a encomenda espera e os contactos úteis.
 slug: correos-espanha-rastreio
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 A Correos é o correio nacional de Espanha. Não é a mesma empresa que a [Correos Express](carrier:correos-express), a transportadora expresso do Grupo Correos, que tem números próprios. Esta página é sobretudo para quem está em Portugal à espera de uma encomenda enviada de Espanha com a Correos; mais abaixo há uma parte para quem vive em Espanha. Segues a encomenda com o número no [localizador da Correos](https://www.correos.es/es/es/herramientas/localizador/envios), em espanhol ou inglês, ou colando-o na caixa acima. O número chega por email ou SMS, ou vem no aviso de chegada; as lojas põem-no no email de envio.
@@ -51,11 +51,10 @@ Depende do produto que o remetente escolheu.
 
 **Paq Premium e Paq Estándar.** São produtos nacionais da Correos que também servem Portugal continental: a Correos chama-lhe «Portugal (peninsular)». Para Portugal, as regras são outras:
 
-- Só há entrega em casa: duas tentativas, sem a encomenda ficar à espera numa estação de correios.
-- Se as duas falharem, volta para o remetente 7 dias de calendário depois da última tentativa.
-- Não há entrega em Citypaq, e o remetente não pode juntar extras como a cobrança contra reembolso; só um seguro.
+- Só há entrega em casa, com duas tentativas: não há entrega em Citypaq nem numa estação de correios à escolha.
+- No Paq Estándar, se as duas falharem, a encomenda volta para o remetente 7 dias de calendário depois da última tentativa.
 
-As páginas da Correos não dizem que empresa faz a entrega em Portugal. Segue a encomenda no localizador e, se falhares uma tentativa, fala logo com o remetente, porque não há prazo para a ires buscar.
+As páginas da Correos não dizem que empresa faz a entrega em Portugal. Segue a encomenda no localizador e, se falhares uma tentativa, fala logo com o remetente.
 
 **Envios internacionais (código acabado em `ES`).** É o caso do Paquete Internacional Premium, Estándar ou Económico e do Paq Light Internacional. Do Premium, a Correos diz que viaja pela rede EMS, prestada pelo correio de cada país: em Portugal, os [CTT](carrier:ctt). Nos outros, o aviso ou o SMS que recebes dizem-te quem tem a encomenda. Os CTT seguem códigos criados por outro correio, com o sufixo do país de origem. Se for com os CTT:
 
@@ -118,7 +117,7 @@ Depende do produto: para a Europa, a Correos aponta 3 a 6 dias no Paq Light Inte
 
 ### Quanto tempo tenho para levantar uma encomenda da Correos em Portugal?
 
-Com o Paq Premium ou o Paq Estándar, não há levantamento: duas tentativas em casa e, se falharem, a encomenda volta 7 dias depois. Num envio internacional entregue pelos CTT, 15 dias úteis numa Loja ou num Ponto CTT.
+Com o Paq Premium ou o Paq Estándar, só há entrega em casa, com duas tentativas; no Paq Estándar, se falharem, a encomenda volta para o remetente 7 dias depois da última. Num envio internacional entregue pelos CTT, 15 dias úteis numa Loja ou num Ponto CTT.
 
 ### A Correos é a mesma coisa que a Correos Express?
 
@@ -131,7 +130,7 @@ Não. As duas são do Grupo Correos, mas a Correos Express é a empresa de encom
 - [Correos: Paquete Estándar](https://www.correos.es/es/es/particulares/enviar/envios-nacionales/envios-economicos/paquete-estandar) – Portugal peninsular, duas tentativas, devolução 7 dias depois, sem Citypaq para Portugal, 15 dias na estação, trâmites aduaneiros nas Canárias, Ceuta e Melilla
 - [Correos: Paq Premium](https://www.correos.es/es/es/particulares/enviar/envios-nacionales/envio-rapido/paq-premium) – Portugal peninsular
 - [Correos: Paquete Premium para empresas](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paquete-premium) – entrega em casa, a única para Portugal
-- [Correos: Condiciones de los servicios de paquetería nacional](https://www.correos.es/content/dam/correos/documentos/productos/condicionados/Condicionado_Paqueteria_Nacional_202002.pdf) – sem permanência em estação, devolução, só seguro para Portugal
+- [Correos: Paquete Estándar para empresas](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paquete-estandar) – entrega em casa, a única para Portugal
 - [Correos: Paquete Internacional Premium](https://www.correos.es/es/es/particulares/enviar/enviar-al-extranjero/paquetes-al-extranjero/paquete-internacional-premium) – rede EMS dos correios de cada país, auto de danos, prazos de reclamação, tabela de prazos com Açores e Madeira
 - [Correos: Paquete Internacional Estándar](https://www.correos.es/es/es/particulares/enviar/enviar-al-extranjero/paquetes-al-extranjero/paquete-internacional-standard) – prazo de reclamação por perda
 - [Correos: Paq Light Internacional](https://www.correos.es/es/es/particulares/enviar/enviar-al-extranjero/paquetes-al-extranjero/paquete-internacional-light) – 3 a 6 dias na Europa, sem indemnização

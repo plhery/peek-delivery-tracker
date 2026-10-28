@@ -1328,6 +1328,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "BYHD tracking: BYHD numbers, scans and who delivers",
       "name": "BYHD",
       "color": "#084282"
+    },
+    {
+      "id": "zto-international",
+      "catalog": "zto-international",
+      "slug": "zto-international-tracking",
+      "title": "ZTO International tracking: 771 numbers and statuses",
+      "name": "ZTO International",
+      "color": "#3a8eff"
+    },
+    {
+      "id": "mayiyinfu",
+      "catalog": "mayiyinfu",
+      "slug": "mayi-yinfu-tracking",
+      "title": "Mayi Yinfu tracking: MY numbers, flight lines and DHL",
+      "name": "Mayi Yinfu",
+      "color": "#000000"
     }
   ],
   "de": [

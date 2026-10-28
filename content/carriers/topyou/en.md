@@ -39,6 +39,15 @@ TopYou writes its scans in English. In the order a parcel gets them:
 | `Departed from customs of` | Your country's customs have released it. TopYou leaves the country after "of" blank, and Peek drops the "of". | "In transit" |
 | `At U.S. Postal Service facility, Accepted by U.S. Postal Service` | In the US: USPS has taken the parcel over from TopYou after the flight. It isn't a new shipment. | "In transit" |
 
+**Newer waybills.** TopYou words some of the same steps differently on its newer waybills:
+
+| TopYou says | What it means for you | Peek shows |
+| --- | --- | --- |
+| `Carrier received the shipment` | TopYou has the parcel in China: its first scan. | "Received by carrier" |
+| `Shipment arrived at a carrier facility` | Moving on from TopYou's first warehouse. The parcel isn't being accepted again. | "In transit" |
+| `Shipment started the customs clearance process at origin` | China's export customs, before the flight. Not your country's import customs. | "At customs" |
+| `Shipment arrived in the destination country` | It has reached your country. | "In transit" |
+
 **USPS's scans.** For parcels to the United States, TopYou's tracker goes on with USPS's scans in USPS's words, each with its place, such as `Out for delivery, Out for delivery with the U.S. Postal Service` ("Out for delivery" in Peek) and `Delivered, Package delivered by U.S. Postal Service to addressee` ("Delivered").
 
 ## Who delivers TopYou parcels
@@ -71,7 +80,7 @@ Peek reads TopYou's own tracker and shows the status, each scan in the words of 
 
 Until a hand-over, Peek shows the TopYou number only. When TopYou's record holds the delivering carrier's number, Peek tries it with your country's post if it is an international postal number (two letters, nine digits, two letters), or else with the one carrier its layout surely belongs to, as long as Peek reads that carrier's own tracker. Once that carrier shows a scan at least as recent as TopYou's latest, Peek follows the parcel there and shows both numbers, with TopYou's scans kept in the history. A number Peek can't pin to one carrier, such as 20 digits alone, which USPS and others use, isn't tried: Peek stays with TopYou's tracker, which shows USPS's scans on a US parcel anyway.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". "Important only" (delivery, pickup, customs, missed attempts and returns) alerts you to `Awaiting the import declaration` and the delivery, not to the flight or the customs release. Peek can't contact TopYou or the seller for you.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". "Important only" (delivery, pickup, customs, missed attempts and returns) alerts you to the customs lines (`Awaiting the import declaration`, and `Shipment started the customs clearance process at origin` on newer waybills) and the delivery, not to the flight or the customs release. Peek can't contact TopYou or the seller for you.
 
 ## Questions about TopYou tracking
 

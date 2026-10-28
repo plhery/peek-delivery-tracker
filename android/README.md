@@ -2,7 +2,8 @@
 
 The app reads the data the iPhone app bundles (brand, carrier catalog, copy, map) from its assets: `:app` packages
 the files `:core` reads, synced from `ios/PeekDeliveryTracker/Resources` along with its own country names, under
-`peek/`, and `SharedResources` reads them there.
+`peek/`, and `SharedResources` reads them there. The contract fixtures, read only by debug previews, ship in debug
+builds alone.
 
 ## App tests and screenshots
 

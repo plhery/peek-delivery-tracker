@@ -20,6 +20,7 @@ class SharedDataTest {
     @Test
     fun theAppCarriesEverySharedFileAsAnAsset() {
         val assets = context.assets.list("peek")!!.toSet()
+        // A debug build's: a release build leaves out ContractFixtures.json, which only the debug previews read.
         val expected = setOf(
             "Analytics.json", "Brand.json", "CarrierCatalog.json", "ContractFixtures.json", "CountryNames.json",
             "DeliveryDemo.json", "FriendsDemo.json", "Localization.json", "PostcodeExamples.json", "Reading.json",

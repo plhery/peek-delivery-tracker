@@ -50,22 +50,39 @@ roborazzi {
 
 // The data the iPhone app bundles, as assets under peek/: the files :core syncs from ios/PeekDeliveryTracker/Resources
 // (see core/build.gradle.kts) and its committed country names. SharedResources reads them through the AssetManager.
+val coreSharedResources by configurations.creating {
+    isCanBeConsumed = false
+    isCanBeResolved = true
+}
+
 val sharedAssets = tasks.register<Sync>("sharedAssets") {
-    dependsOn(":core:syncSharedResources")
-    from(rootDir.resolve("core/build/generated/sharedResources/main"))
+    from(coreSharedResources) {
+        exclude("peek/ContractFixtures.json")
+    }
     from(rootDir.resolve("core/src/main/resources")) {
         include("peek/CountryNames.json")
+    }
+}
+
+// The contract fixtures feed only the debug previews (ParcelLinkStore.debugPreview), so only debug builds carry them.
+val debugSharedAssets = tasks.register<Sync>("debugSharedAssets") {
+    from(coreSharedResources) {
+        include("peek/ContractFixtures.json")
     }
 }
 
 androidComponents {
     onVariants { variant ->
         variant.sources.assets?.addGeneratedSourceDirectory(sharedAssets) { it.destinationDirectory }
+        if (variant.buildType == "debug") {
+            variant.sources.assets?.addGeneratedSourceDirectory(debugSharedAssets) { it.destinationDirectory }
+        }
     }
 }
 
 dependencies {
     implementation(project(":core"))
+    coreSharedResources(project(path = ":core", configuration = "sharedResources"))
     implementation(libs.kotlinx.coroutines.core)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)

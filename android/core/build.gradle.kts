@@ -12,6 +12,8 @@ kotlin {
 // adoption reaches Android without a second copy in git.
 val iosResources = rootDir.resolve("../ios/PeekDeliveryTracker/Resources")
 
+val sharedResourcesDir = layout.buildDirectory.dir("generated/sharedResources/main")
+
 val syncSharedResources by tasks.registering(Sync::class) {
     from(iosResources) {
         include(
@@ -29,7 +31,17 @@ val syncSharedResources by tasks.registering(Sync::class) {
             "WorldDetail.pack",
         )
     }
-    into(layout.buildDirectory.dir("generated/sharedResources/main/peek"))
+    into(sharedResourcesDir.map { it.dir("peek") })
+}
+
+// The same files for :app's assets, as this build's output rather than a path into its build directory.
+val sharedResources by configurations.creating {
+    isCanBeConsumed = true
+    isCanBeResolved = false
+}
+
+artifacts {
+    add(sharedResources.name, sharedResourcesDir) { builtBy(syncSharedResources) }
 }
 
 val syncSharedTestResources by tasks.registering(Sync::class) {

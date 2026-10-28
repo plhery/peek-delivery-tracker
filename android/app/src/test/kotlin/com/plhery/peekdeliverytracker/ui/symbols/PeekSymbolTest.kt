@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.symbols
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,12 +17,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsProperties
-import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.getAlignmentLinePosition
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createComposeRule
@@ -162,13 +161,17 @@ class PeekSymbolTest {
         assertEquals(0, monochrome.getPixel(centreX, discY) and 0xFF)
     }
 
-    /** The node tagged box as drawn, the window drawn again first as Robolectric may keep an older drawing. */
+    /**
+     * The node tagged box, drawn now in software: Robolectric's hardware capture may return the drawing of the frame
+     * before.
+     */
     private fun capture(): Bitmap {
-        compose.waitForIdle()
         val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
-        compose.runOnUiThread { view.rootView.invalidate() }
         compose.waitForIdle()
-        return compose.onNodeWithTag("box").captureToImage().asAndroidBitmap()
+        val bounds = compose.onNodeWithTag("box").fetchSemanticsNode().boundsInRoot
+        val whole = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        compose.runOnUiThread { view.draw(Canvas(whole)) }
+        return Bitmap.createBitmap(whole, bounds.left.toInt(), bounds.top.toInt(), bounds.width.toInt(), bounds.height.toInt())
     }
 
     @Test

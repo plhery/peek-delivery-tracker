@@ -13177,7 +13177,8 @@ export const CARRIER_CAPABILITIES = {
       "Пошта на Северна Македонија",
       "North Macedonia Post",
       "Macedonian Post",
-      "Makedonska Pošta"
+      "Makedonska Pošta",
+      "Macedonia Post"
     ],
     "countries": [
       "MK"
@@ -32795,7 +32796,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "jifan"
     },
     "trackingUrlTemplate": "https://www.szjf56.cn/index/tracknumber/track?nos={trackingNumber}",
     "linkRules": [
@@ -32852,6 +32853,43 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ]
+  },
+  "fastbox": {
+    "displayName": "Fastbox",
+    "aliases": [
+      "FASTBOX",
+      "패스트박스"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#f47f39",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://fastbox.co.kr/DHUB/tracking.php?fb_invoice_no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "fastbox.co.kr",
+          "www.fastbox.co.kr"
+        ],
+        "pathPattern": "^/DHUB/tracking\\.php$",
+        "params": [
+          "fb_invoice_no"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^FB\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{10}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://fastbox.co.kr/en/"
   }
 } as const;
 
@@ -33728,7 +33766,8 @@ export const CARRIER_IDS = [
   "viadireta",
   "meso-global",
   "jifan",
-  "youbang-express"
+  "youbang-express",
+  "fastbox"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -75572,6 +75572,30 @@
     ]
   },
   {
+    "input": "FB1709150187001586",
+    "carrier": "fastbox",
+    "confidence": "high",
+    "candidates": [
+      "fastbox"
+    ]
+  },
+  {
+    "input": "FB2012110544001009",
+    "carrier": "fastbox",
+    "confidence": "high",
+    "candidates": [
+      "fastbox"
+    ]
+  },
+  {
+    "input": "FB2607111988000015",
+    "carrier": "fastbox",
+    "confidence": "high",
+    "candidates": [
+      "fastbox"
+    ]
+  },
+  {
     "input": "FC2404051641097",
     "carrier": "unknown",
     "confidence": "low",

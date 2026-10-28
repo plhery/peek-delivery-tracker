@@ -1,6 +1,8 @@
 // Writes android/core/src/main/resources/peek/CountryNames.json: the regions and region names the iPhone app
 // gets from Foundation (`Locale.Region.isoRegions`, `Locale.localizedString(forRegionCode:)`), in each of the
 // app's languages, for Android, whose CLDR names differ in places ("Hong Kong SAR China", "China mainland").
+// `readingNames` holds the names of a bare language code whose locale is not the app's: TrackingLocation reads a
+// location's country by `Locale(identifier: "pt")`'s names, Brazil's, where the app shows pt-PT's.
 //
 // Run it on a Mac from the repository root: `swift android/tools/CountryNames.swift`. Run it again when the app
 // gains a language, and after each major macOS release, whose names are the ones that year's iOS shows.
@@ -15,12 +17,18 @@ let letters = (UInt8(ascii: "A")...UInt8(ascii: "Z")).map { String(UnicodeScalar
 // Every code a name can be asked for: the ISO regions, and the other two-letter codes Foundation names (UK, SU).
 let codes = Set(regions + letters.flatMap { first in letters.map { first + $0 } }).sorted()
 
-var names: [String: [String: String]] = [:]
-for language in languages {
-    let locale = locale(language)
-    names[language] = Dictionary(uniqueKeysWithValues: codes.compactMap { code in
+func regionNames(_ locale: Locale) -> [String: String] {
+    Dictionary(uniqueKeysWithValues: codes.compactMap { code in
         locale.localizedString(forRegionCode: code).map { (code, $0) }
     })
+}
+
+var names: [String: [String: String]] = [:]
+var readingNames: [String: [String: String]] = [:]
+for language in languages {
+    names[language] = regionNames(locale(language))
+    let bare = regionNames(Locale(identifier: language))
+    if bare != names[language] { readingNames[language] = bare }
 }
 
 let output = URL(fileURLWithPath: #filePath)
@@ -28,7 +36,7 @@ let output = URL(fileURLWithPath: #filePath)
     .appendingPathComponent("../core/src/main/resources/peek/CountryNames.json")
     .standardizedFileURL
 let data = try JSONSerialization.data(
-    withJSONObject: ["regions": regions, "names": names],
+    withJSONObject: ["regions": regions, "names": names, "readingNames": readingNames],
     options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
 )
 try (data + Data("\n".utf8)).write(to: output)

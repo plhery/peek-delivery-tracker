@@ -36,8 +36,10 @@ internal fun isControlScalar(scalar: Int): Boolean = scalar in 0x00..0x1F || sca
  * General_Category=Format as Swift's standard library has it (ScalarData.kt). The phone's ICU is as old as the phone:
  * Android 12 does not know U+0890 or U+13439 to U+1343F.
  */
-internal fun isFormatScalar(scalar: Int): Boolean {
-    val index = ScalarData.format.binarySearch(scalar)
+internal fun isFormatScalar(scalar: Int): Boolean = inRanges(ScalarData.format, scalar)
+
+private fun inRanges(ranges: IntArray, scalar: Int): Boolean {
+    val index = ranges.binarySearch(scalar)
     // The ranges' bounds alternate: a first scalar, then the one after the last.
     return if (index >= 0) index % 2 == 0 else (-index - 1) % 2 == 1
 }
@@ -237,6 +239,24 @@ private val String.firstScalar: Int get() = codePointAt(0)
 /** `Character.isWhitespace`. */
 internal val String.isWhitespaceCharacter: Boolean get() = isNotEmpty() && hasWhiteSpaceProperty(firstScalar)
 
+/**
+ * `Character.isUppercase`, by Swift's own Cased and Changes_When_Lowercased (ScalarData.kt): a single scalar is uppercase
+ * when it is cased and its own capital (ĸ, ª, ʰ and 𝐀 are), several when uppercasing leaves them as they are and
+ * lowercasing does not.
+ */
+internal val String.isUppercaseCharacter: Boolean
+    get() {
+        if (isEmpty() || !uppercased().equalsCanonically(this)) return false
+        val first = scalarAt(0)
+        if (Character.charCount(codePointAt(0)) == length) return inRanges(ScalarData.cased, first)
+        var index = 0
+        while (index < length) {
+            if (inRanges(ScalarData.changesWhenLowercased, scalarAt(index))) return true
+            index += Character.charCount(codePointAt(index))
+        }
+        return false
+    }
+
 /** `Character.isLetter`: the first scalar is Alphabetic. */
 internal val String.isLetterCharacter: Boolean get() = isNotEmpty() && Character.isAlphabetic(firstScalar)
 
@@ -290,6 +310,78 @@ private fun String.foldedCase(): String {
         index += Character.charCount(scalar)
     }
     return folded.toString().nfd()
+}
+
+/**
+ * `folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US_POSIX"))`, as
+ * CoreFoundation folds a scalar and the marks (Grapheme_Cluster_Break=Extend as Swift's standard library has it) that
+ * follow it, each scalar decomposed where that makes a letter below U+0510 (Latin, Greek, Cyrillic): such a letter,
+ * or one that folds to such letters (ﬁ, ẞ), loses all of its marks and has its case folded in full (ẞ is ss, the
+ * Kelvin sign k, ı stays ı). Above it, a scalar case folding changes keeps its marks, and one it leaves alone (’, क)
+ * loses only a first mark below U+0510; the marks kept are put in order of their combining classes. A mark the text
+ * starts with, or one after NUL, stands for its letter, in that order too. Case is folded as the phone's Java does, which knows the
+ * letters no country name has as Foundation does, but for the odd one Unicode added since (Ɤ) or Foundation leaves.
+ */
+internal fun String.foldingCaseAndDiacritics(): String {
+    val folded = StringBuilder(length)
+    // What becomes of the marks after the last letter: 0 none yet, 1 all dropped, 2 a first one below U+0510
+    // dropped, 3 all kept.
+    var marks = 0
+    var marksSeen = 0
+    val kept = mutableListOf<Int>()
+    fun appendKept() {
+        kept.sortedBy(::combiningClass).forEach(folded::appendCodePoint)
+        kept.clear()
+    }
+    var index = 0
+    while (index < length) {
+        val scalar = scalarAt(index)
+        index += Character.charCount(codePointAt(index))
+        val text = String(Character.toChars(scalar))
+        // Decomposed when that makes a letter below U+0510 (Å, ǘ, the Kelvin sign), not otherwise (가, が).
+        val decomposed = if (scalar < 0xC0) text else text.nfd().takeIf { it.codePointAt(0) < 0x510 } ?: text
+        var at = 0
+        while (at < decomposed.length) {
+            val part = decomposed.codePointAt(at)
+            at += Character.charCount(part)
+            if (marks != 0 && isGraphemeExtend(part)) {
+                if (marks == 3 || (marks == 2 && (marksSeen > 0 || part >= 0x510))) kept += part
+                marksSeen += 1
+                continue
+            }
+            appendKept()
+            val letter = String(Character.toChars(part))
+            // Lowered, raised and lowered again, the way full case folding takes ẞ to ss; ı has no folding.
+            val caseFolded = if (part == 0x131) letter else letter.lowercase(Locale.ROOT).uppercase(Locale.ROOT).lowercase(Locale.ROOT)
+            // A mark without a letter is ordered with the marks after it.
+            if (isGraphemeExtend(part)) caseFolded.codePoints().forEach(kept::add) else folded.append(caseFolded)
+            marks = when {
+                part == 0 -> 0
+                part < 0x510 || caseFolded.codePointAt(0) < 0x510 -> 1
+                caseFolded == letter -> 2
+                else -> 3
+            }
+            marksSeen = 0
+        }
+    }
+    appendKept()
+    return folded.toString()
+}
+
+/** Swift's `<` on Strings: their NFC forms' scalars in order, where Kotlin's `compareTo` compares UTF-16 units. */
+internal val swiftStringOrder: Comparator<String> = Comparator { left, right ->
+    val a = left.nfc()
+    val b = right.nfc()
+    var i = 0
+    var j = 0
+    while (i < a.length && j < b.length) {
+        val x = a.scalarAt(i)
+        val y = b.scalarAt(j)
+        if (x != y) return@Comparator x.compareTo(y)
+        i += Character.charCount(a.codePointAt(i))
+        j += Character.charCount(b.codePointAt(j))
+    }
+    (a.length - i).compareTo(b.length - j)
 }
 
 /** Foundation's localized comparisons, by the options they are given, as ICU collation (`Icu.collators`). */

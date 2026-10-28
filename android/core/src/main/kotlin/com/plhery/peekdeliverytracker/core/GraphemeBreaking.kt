@@ -74,6 +74,9 @@ private fun graphemeBreakProperty(scalar: Int): Int = when (scalar) {
     else -> dataProperties(scalar) and 0x7
 }
 
+/** Grapheme_Cluster_Break=Extend, as Swift's standard library has it: the marks Foundation's diacritic folding drops. */
+internal fun isGraphemeExtend(scalar: Int): Boolean = graphemeBreakProperty(scalar) == EXTEND
+
 private fun isExtendedPictographic(scalar: Int): Boolean = scalar >= 0xA9 && dataProperties(scalar) and 0x8 != 0
 
 private fun isConjunctConsonant(scalar: Int): Boolean = dataProperties(scalar) and 0x10 != 0

@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.core
 
 import com.ibm.icu.lang.UCharacter
 import com.ibm.icu.lang.UCharacterCategory
+import com.ibm.icu.lang.UProperty
 import com.ibm.icu.text.Normalizer2
 import com.ibm.icu.util.VersionInfo
 import org.junit.Assert.assertEquals
@@ -10,7 +11,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * ScalarData.kt and Normalization.kt. The data is Unicode 17, as Swift's standard library has it; ICU4J 76's is Unicode
+ * ScalarData.kt and Normalization.kt, and the FoundationText.kt helpers that read them. The data is Unicode 17, as Swift's standard library has it; ICU4J 76's is Unicode
  * 16: they must agree on every scalar ICU4J knows. The expected answers for Unicode 17's scalars are Swift's on macOS 27.
  */
 class ScalarDataTests {
@@ -139,5 +140,78 @@ class ScalarDataTests {
         for ((left, right) in different) assertFalse("${hex(left)} != ${hex(right)}", left.equalsCanonically(right))
         assertEquals(text(0xE1, 0x1ADD), text(0x61, 0x1ADD, 0x301).nfc())
         assertEquals(text(0x61, 0x1ADD, 0x301), text(0xE1, 0x1ADD).nfd())
+    }
+
+    /** Unicode 17 made ʕ (U+0295) a letter without case, which it is in ICU4J's Unicode 16. */
+    @Test
+    fun casedAndLoweringAreUnicodes() {
+        val cased = known.filter { isCased(it) != UCharacter.hasBinaryProperty(it, UProperty.CASED) }
+        assertEquals(listOf("U+0295"), cased.map(::hex))
+        assertFalse(isCased(0x295))
+        val lowering = known.filter { changesWhenLowercased(it) != UCharacter.hasBinaryProperty(it, UProperty.CHANGES_WHEN_LOWERCASED) }
+        assertEquals(emptyList<String>(), lowering.map(::hex))
+    }
+
+    private fun isCased(scalar: Int) = ScalarData.cased.inRange(scalar)
+
+    private fun changesWhenLowercased(scalar: Int) = ScalarData.changesWhenLowercased.inRange(scalar)
+
+    private fun IntArray.inRange(scalar: Int): Boolean {
+        val index = binarySearch(scalar)
+        return if (index >= 0) index % 2 == 0 else (-index - 1) % 2 == 1
+    }
+
+    /** `Character.isUppercase` on macOS 27: a cased scalar that is its own capital, or a cluster only lowering changes. */
+    @Test
+    fun charactersAreUppercaseAsSwiftsAre() {
+        val uppercase = listOf(
+            "\u0138", "\u00AA", "\u02B0", text(0x1D400), text(0x1D44E), "E\u0301", "A", "\u212A", "\u01C4", "\u03D2",
+            "\u2160", "\u24B6", text(0x1F130), text(0x10D50), "\u1E9E", "\u0130", "I\u0307", "\u01C4\u0301",
+        )
+        for (character in uppercase) assertTrue(hex(character), character.isUppercaseCharacter)
+        for (character in listOf("e\u0301", "a", "1", "\u01C5", "\u00DF", text(0x1F1E9, 0x1F1EA), "")) {
+            assertFalse(hex(character), character.isUppercaseCharacter)
+        }
+    }
+
+    /** `folding(options: [.caseInsensitive, .diacriticInsensitive], locale: en_US_POSIX)` on macOS 27. */
+    @Test
+    fun textFoldsAsFoundationFoldsIt() {
+        val folds = listOf(
+            "C\u00F4te d\u2019Ivoire" to "cote d\u2019ivoire",
+            "\u0130stanbul" to "istanbul",
+            "\u1E9Etra\u00DFe" to "sstrasse",
+            "\u212Aiel" to "kiel",
+            "\u212Bngstr\u00F6m" to "angstrom",
+            "\uFB01nland" to "finland",
+            "\u0131" to "\u0131",
+            "\u00C6" to "\u00E6",
+            "\u0149" to "\u02BCn",
+            "\u0301" to "\u0301",
+            "a\u0345" to "a",
+            "\u0345" to "\u03B9",
+            "\u2019\u0301\u0301" to "\u2019\u0301",
+            "\u2019\u094D" to "\u2019\u094D",
+            "\u0000\u0301" to "\u0000\u0301",
+            "\uAC00" to "\uAC00",
+            "\u216B\u0301" to "\u217B\u0301",
+            "\u094D\u200C" to "\u200C\u094D",
+            "\u2019\u05B0\u094D" to "\u2019\u094D\u05B0",
+            "a\u094D\uFE0F" + text(0x1F3FD) to "a",
+        )
+        for ((text, folded) in folds) assertEquals(hex(text), hex(folded), hex(text.foldingCaseAndDiacritics()))
+    }
+
+    /** Swift's `<`: NFC scalars in order, so U+FF21 comes before an emoji and the Kelvin sign is a K. */
+    @Test
+    fun stringsOrderAsSwiftsDo() {
+        val ordered = listOf(
+            "\uFF21" to text(0x1F600), "\uE000" to text(0x10000), "\u212AR" to "KS", "Z" to "a",
+        )
+        for ((left, right) in ordered) {
+            assertTrue(hex(left), swiftStringOrder.compare(left, right) < 0)
+            assertTrue(hex(right), swiftStringOrder.compare(right, left) > 0)
+        }
+        assertEquals(0, swiftStringOrder.compare("e\u0301", "\u00E9"))
     }
 }

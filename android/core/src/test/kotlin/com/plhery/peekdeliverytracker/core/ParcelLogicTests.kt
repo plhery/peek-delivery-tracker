@@ -27,6 +27,8 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.ZoneId
+import java.time.ZoneOffset
 import java.util.Locale
 import java.util.UUID
 import kotlinx.serialization.builtins.ListSerializer
@@ -756,6 +758,280 @@ class ParcelLogicTests {
         val archived = ParcelOrganizer.sections(listOf(older, newer)).firstOrNull { it.kind == ParcelSectionKind.Archived }
 
         assertEquals(listOf(newerId, olderId), archived?.parcels?.map { it.id })
+    }
+
+    @Test
+    fun passportNewStampsUseExplicitScansAndLocalCompletionDates() {
+        fun shipment(vararg scans: Triple<TrackingStage, String, String?>): Parcel {
+            val id = UUID.randomUUID()
+            return makeParcel(id, events = scans.map { (stage, date, location) -> event(id, stage, date).copy(location = location) })
+        }
+        val international = shipment(
+            Triple(TrackingStage.Accepted, "2026-10-31T12:00:00Z", "Berlin, Germany"),
+            Triple(TrackingStage.ReadyForPickup, "2026-11-30T12:00:00Z", "Zurich, Switzerland"),
+            Triple(TrackingStage.Delivered, "2026-12-01T08:00:00Z", "Zurich, Switzerland"),
+            Triple(TrackingStage.Delivered, "2026-12-01T08:10:00Z", "Zurich, Switzerland"),
+        ).copy(archivedAt = "2026-12-02T12:00:00Z")
+        val parcels = listOf(
+            international,
+            shipment(Triple(TrackingStage.Accepted, "2026-11-29T12:00:00Z", "CH"), Triple(TrackingStage.Delivered, "2026-12-01T09:00:00Z", "CH")),
+            shipment(Triple(TrackingStage.Delivered, "2026-11-30T23:30:00Z", null)),
+        )
+        val stats = PassportStatistics(parcels, timeZone = ZoneId.of("Europe/Zurich"))
+        assertEquals(1, stats.crossBorderCount)
+        assertEquals(1, stats.domesticDeliveryCount)
+        assertEquals(1, stats.longWaitDeliveryCount)
+        assertEquals(1, stats.pickupDeliveryCount)
+        assertEquals(3, stats.decemberDeliveryCount)
+        assertEquals(3, stats.maxDeliveriesInOneDay)
+        val utc = PassportStatistics(parcels, timeZone = ZoneOffset.UTC)
+        assertEquals(2, utc.decemberDeliveryCount)
+        assertEquals(2, utc.maxDeliveriesInOneDay)
+    }
+
+    @Test
+    fun passportNewStampsRejectUnprovenJourneys() {
+        fun shipment(vararg scans: Triple<TrackingStage, String, String?>): Parcel {
+            val id = UUID.randomUUID()
+            return makeParcel(id, events = scans.map { (stage, date, location) -> event(id, stage, date).copy(location = location) })
+        }
+        val stats = PassportStatistics(
+            listOf(
+                shipment(
+                    Triple(TrackingStage.Registered, "2026-11-01T00:00:00Z", "DE"), Triple(TrackingStage.Accepted, "2026-11-02T00:00:00Z", null),
+                    Triple(TrackingStage.Delivered, "2026-11-03T00:00:00Z", "CH"),
+                ),
+                shipment(Triple(TrackingStage.Accepted, "2026-11-01T00:00:00Z", "Wilmington, DE"), Triple(TrackingStage.Delivered, "2026-11-03T00:00:00Z", "Geneva, GE")),
+                shipment(
+                    Triple(TrackingStage.Accepted, "2026-11-01T00:00:00Z", "DE"), Triple(TrackingStage.ReadyForPickup, "2026-11-01T00:00:00Z", "CH"),
+                    Triple(TrackingStage.Delivered, "2026-11-01T00:00:00Z", "CH"),
+                ),
+                shipment(Triple(TrackingStage.Accepted, "2026-11-01T00:00:00Z", "DE"), Triple(TrackingStage.ReadyForPickup, "2026-12-02T00:00:00Z", "CH")),
+                shipment(
+                    Triple(TrackingStage.Accepted, "2026-11-01T00:00:00Z", "DE"), Triple(TrackingStage.Delivered, "2026-12-02T00:00:00Z", "CH"),
+                    Triple(TrackingStage.Returned, "2026-12-03T00:00:00Z", null),
+                ),
+                shipment(Triple(TrackingStage.Accepted, "invalid", "DE"), Triple(TrackingStage.Delivered, "2026-12-02T00:00:00Z", "CH")),
+            ),
+            timeZone = ZoneOffset.UTC,
+        )
+        assertEquals(0, stats.crossBorderCount)
+        assertEquals(0, stats.domesticDeliveryCount)
+        assertEquals(0, stats.longWaitDeliveryCount)
+        assertEquals(0, stats.pickupDeliveryCount)
+        assertEquals(0, stats.decemberDeliveryCount)
+    }
+
+    @Test
+    fun passportCountsAStateCodeOnlyInTheCountryTheScanWasPlacedIn() {
+        class Scan(val stage: TrackingStage, val date: String, val location: String?, val placed: String?)
+        fun shipment(vararg scans: Scan): Parcel {
+            val id = UUID.randomUUID()
+            return makeParcel(
+                id,
+                events = scans.map { scan ->
+                    event(id, scan.stage, scan.date).copy(
+                        location = scan.location,
+                        place = scan.placed?.let { EventPlace(latitude = 0.0, longitude = 0.0, precision = EventPlacePrecision.Country, country = it, name = it) },
+                    )
+                },
+            )
+        }
+        val stats = PassportStatistics(
+            listOf(
+                shipment(Scan(TrackingStage.Accepted, "2026-08-04T10:00:00Z", "Haiger, DE", "DE"), Scan(TrackingStage.Delivered, "2026-08-05T10:00:00Z", "Koblenz, DE", "DE")),
+                shipment(Scan(TrackingStage.Accepted, "2026-08-04T10:00:00Z", "Toronto, CA", "CA"), Scan(TrackingStage.Delivered, "2026-08-06T10:00:00Z", null, null)),
+                // Delaware and California, placed in the United States, and a code nobody placed: none of them a country.
+                shipment(Scan(TrackingStage.Accepted, "2026-08-04T10:00:00Z", "Wilmington, DE", "US"), Scan(TrackingStage.Delivered, "2026-08-06T10:00:00Z", "Los Angeles, CA", "US")),
+                shipment(Scan(TrackingStage.Accepted, "2026-08-04T10:00:00Z", "Hannover, DE", null), Scan(TrackingStage.Delivered, "2026-08-06T10:00:00Z", null, null)),
+            ),
+        )
+        assertEquals(setOf("CA", "DE"), stats.originCountries.map { it.code }.toSet())
+        assertEquals(listOf(1, 1), stats.originCountries.map { it.count })
+        assertEquals(1, stats.domesticDeliveryCount)
+        assertEquals(0, stats.crossBorderCount)
+    }
+
+    @Test
+    fun passportWaitingStampRequiresMoreThanThirtyDays() {
+        val id = UUID.randomUUID()
+        val start = event(id, TrackingStage.Accepted, "2026-11-01T00:00:00Z")
+        val exact = makeParcel(id, events = listOf(start, event(id, TrackingStage.Delivered, "2026-12-01T00:00:00Z")))
+        val longer = makeParcel(id, events = listOf(start, event(id, TrackingStage.Delivered, "2026-12-01T00:00:00.001Z")))
+        assertEquals(0, PassportStatistics(listOf(exact)).longWaitDeliveryCount)
+        assertEquals(1, PassportStatistics(listOf(longer)).longWaitDeliveryCount)
+    }
+
+    @Test
+    fun emptyPassportHasNoInventedRecordsOrCountries() {
+        val statistics = PassportStatistics(emptyList())
+        assertEquals(0, statistics.trackedCount)
+        assertEquals(0, statistics.deliveredCount)
+        assertEquals(0, statistics.activeCount)
+        assertEquals(0, statistics.durationSampleCount)
+        assertNull(statistics.averageDeliveryDuration)
+        assertNull(statistics.fastestDelivery)
+        assertTrue(statistics.originCountries.isEmpty())
+        assertEquals(0, statistics.unknownOriginCount)
+        assertEquals(1, statistics.nextMilestoneCount)
+        assertEquals(0.0, statistics.milestoneProgress, 0.0)
+    }
+
+    @Test
+    fun passportUsesCarrierJourneyTimesAndIncludesArchivedDeliveries() {
+        val firstId = UUID.randomUUID()
+        val first = makeParcel(
+            firstId,
+            events = listOf(
+                event(firstId, TrackingStage.Registered, "2026-08-01T10:00:00Z"),
+                event(firstId, TrackingStage.Accepted, "2026-08-06T10:00:00Z"),
+                event(firstId, TrackingStage.Delivered, "2026-08-08T10:00:00Z"),
+            ),
+        ).copy(archivedAt = "2026-08-09T10:00:00Z")
+        val secondId = UUID.randomUUID()
+        val second = makeParcel(
+            secondId,
+            events = listOf(
+                event(secondId, TrackingStage.InTransit, "2026-08-07T10:00:00Z"),
+                event(secondId, TrackingStage.Delivered, "2026-08-08T10:00:00Z"),
+                event(secondId, TrackingStage.Pending, "2026-08-09T10:00:00Z"),
+            ),
+        )
+            // A parcel added after delivery still has a valid carrier journey.
+            .copy(createdAt = "2026-08-10T10:00:00Z")
+        val returnedId = UUID.randomUUID()
+        val returned = makeParcel(
+            returnedId,
+            events = listOf(
+                event(returnedId, TrackingStage.Accepted, "2026-08-05T10:00:00Z"),
+                event(returnedId, TrackingStage.Delivered, "2026-08-06T10:00:00Z"),
+                event(returnedId, TrackingStage.Returned, "2026-08-08T10:00:00Z"),
+            ),
+        )
+        val statistics = PassportStatistics(listOf(first, second, returned, makeParcel()))
+        assertEquals(4, statistics.trackedCount)
+        assertEquals(2, statistics.deliveredCount)
+        assertEquals(1, statistics.activeCount)
+        assertEquals(2, statistics.durationSampleCount)
+        assertEquals(36.0 * 3_600, statistics.averageDeliveryDuration!!, 0.001)
+        assertEquals(secondId, statistics.fastestDelivery?.parcelId)
+        assertEquals(24.0 * 3_600, statistics.fastestDelivery!!.duration, 0.0)
+        assertEquals(DateParser.date("2026-08-08T10:00:00Z"), statistics.fastestDelivery?.deliveredAt)
+    }
+
+    @Test
+    fun passportOrdersActualInstantsAcrossTimeZones() {
+        val id = UUID.randomUUID()
+        val parcel = makeParcel(
+            id,
+            events = listOf(
+                // Lexical order incorrectly puts the accepted scan last.
+                event(id, TrackingStage.Accepted, "2026-08-08T12:00:00+03:00"),
+                event(id, TrackingStage.Delivered, "2026-08-08T11:00:00Z"),
+            ),
+        )
+        val statistics = PassportStatistics(listOf(parcel))
+        assertEquals(1, statistics.deliveredCount)
+        assertEquals(0, statistics.activeCount)
+        assertEquals(2.0 * 3_600, statistics.averageDeliveryDuration!!, 0.001)
+    }
+
+    @Test
+    fun passportDoesNotInventDurationsFromPartialOrInvalidHistories() {
+        val histories = listOf(
+            listOf(TrackingStage.Delivered to "2026-08-08T10:00:00Z"),
+            listOf(TrackingStage.Registered to "2026-08-07T10:00:00Z", TrackingStage.Delivered to "2026-08-08T10:00:00Z"),
+            listOf(TrackingStage.OutForDelivery to "2026-08-08T09:00:00Z", TrackingStage.Delivered to "2026-08-08T10:00:00Z"),
+            listOf(TrackingStage.Accepted to "invalid", TrackingStage.Delivered to "2026-08-08T10:00:00Z"),
+            listOf(TrackingStage.Accepted to "2026-08-08T10:00:00Z", TrackingStage.Delivered to "invalid"),
+            listOf(TrackingStage.Accepted to "2026-08-09T10:00:00Z", TrackingStage.Delivered to "2026-08-08T10:00:00Z"),
+            listOf(TrackingStage.Accepted to "2026-08-08T10:00:00Z", TrackingStage.Delivered to "2026-08-08T10:00:00Z"),
+        )
+        for (history in histories) {
+            val id = UUID.randomUUID()
+            val parcel = makeParcel(id, events = history.map { event(id, it.first, it.second) })
+            val statistics = PassportStatistics(listOf(parcel))
+            assertEquals("Unexpected duration for $history", 0, statistics.durationSampleCount)
+            assertNull(statistics.averageDeliveryDuration)
+            assertNull(statistics.fastestDelivery)
+        }
+    }
+
+    @Test
+    fun passportCountryRanksRequireExplicitFirstPhysicalScanCountry() {
+        fun originParcel(location: String?): Parcel {
+            val id = UUID.randomUUID()
+            val scan = event(id, TrackingStage.Accepted, "2026-08-06T10:00:00Z").copy(location = location)
+            // Neither the international identifier nor UPS's headquarters is evidence.
+            return makeParcel(id, trackingNumber = "RR123456785US", events = listOf(scan))
+        }
+        val statistics = PassportStatistics(
+            listOf(
+                originParcel("Milano, IT"), originParcel("Roma, Italy"),
+                originParcel("Berlin (Germany)"), originParcel("Paris, France"),
+                originParcel("Buchs AG"), originParcel(null), originParcel("Europe"),
+            ),
+        )
+        assertEquals(listOf("IT", "DE", "FR"), statistics.originCountries.map { it.code })
+        assertEquals(listOf(2, 1, 1), statistics.originCountries.map { it.count })
+        assertEquals("🇮🇹", statistics.originCountries.firstOrNull()?.flag)
+        assertEquals(4, statistics.knownOriginCount)
+        assertEquals(3, statistics.unknownOriginCount)
+    }
+
+    @Test
+    fun passportNeverPromotesLaterDestinationScanToOrigin() {
+        val id = UUID.randomUUID()
+        val registered = event(id, TrackingStage.Registered, "2026-08-05T10:00:00Z").copy(location = "London, GB")
+        val accepted = event(id, TrackingStage.Accepted, "2026-08-06T10:00:00Z")
+        val transit = event(id, TrackingStage.InTransit, "2026-08-07T10:00:00Z").copy(location = "Zürich, CH")
+        val unknown = PassportStatistics(listOf(makeParcel(id, events = listOf(registered, accepted, transit))))
+        assertTrue(unknown.originCountries.isEmpty())
+        assertEquals(1, unknown.unknownOriginCount)
+
+        // Registration's location is ignored; the first physical scan supplies evidence.
+        val locatedAccepted = accepted.copy(location = "Paris, Frankreich")
+        val known = PassportStatistics(listOf(makeParcel(id, events = listOf(registered, locatedAccepted, transit))))
+        assertEquals(listOf("FR"), known.originCountries.map { it.code })
+
+        val customs = event(id, TrackingStage.Customs, "2026-08-06T10:00:00Z").copy(location = "Basel, CH")
+        assertTrue(PassportStatistics(listOf(makeParcel(id, events = listOf(customs, transit)))).originCountries.isEmpty())
+    }
+
+    @Test
+    fun passportDoesNotMistakeStateOrCantonCodesForCountries() {
+        for (location in listOf("Los Angeles, CA", "Bern, BE", "Dover, DE", "Fribourg (FR)", "St. John's, NL")) {
+            val id = UUID.randomUUID()
+            val scan = event(id, TrackingStage.Accepted, "2026-08-06T10:00:00Z").copy(location = location)
+            val statistics = PassportStatistics(listOf(makeParcel(id, events = listOf(scan))))
+            assertTrue("Ambiguous address: $location", statistics.originCountries.isEmpty())
+        }
+        for ((location, code) in listOf("Toronto, Canada" to "CA", "Brussels, Belgium" to "BE", "DE" to "DE")) {
+            val id = UUID.randomUUID()
+            val scan = event(id, TrackingStage.Accepted, "2026-08-06T10:00:00Z").copy(location = location)
+            val statistics = PassportStatistics(listOf(makeParcel(id, events = listOf(scan))))
+            assertEquals(code, statistics.originCountries.firstOrNull()?.code)
+        }
+    }
+
+    @Test
+    fun passportTiesAndMilestonesAreStableWhenParcelOrderChanges() {
+        val parcels = (1..5).map { index ->
+            val id = UUID.fromString("00000000-0000-0000-0000-%012d".format(index))
+            makeParcel(
+                id,
+                events = listOf(
+                    event(id, TrackingStage.Accepted, "2026-08-06T10:00:00Z"),
+                    event(id, TrackingStage.Delivered, "2026-08-07T10:00:00Z"),
+                ),
+            )
+        }
+        val forward = PassportStatistics(parcels)
+        val reverse = PassportStatistics(parcels.reversed())
+        assertEquals(forward.fastestDelivery, reverse.fastestDelivery)
+        assertEquals(parcels.firstOrNull()?.id, forward.fastestDelivery?.parcelId)
+        assertEquals(10, forward.nextMilestoneCount)
+        assertEquals(0.5, forward.milestoneProgress, 0.0)
     }
 
     @Test

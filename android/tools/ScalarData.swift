@@ -3,8 +3,9 @@
 // phone's (Unicode 13 on Android 12, the oldest the app runs on). General_Category=Format, which
 // `ParcelLinkWords.clean` drops, and what Normalization.kt needs to normalize text as Swift compares it: every scalar's
 // canonical combining class, the scalars whose normalization Unicode 13 does not know, and the canonical
-// decompositions added since; and each scalar's full uppercase mapping, which `String.uppercased()` joins. The
-// categories, classes, ages and mappings are the standard library's own; the decompositions, which it does not show,
+// decompositions added since; each scalar's full uppercase mapping, which `String.uppercased()` joins; and the Cased
+// and Changes_When_Lowercased properties, which `Character.isUppercase` reads. The categories, classes, ages,
+// properties and mappings are the standard library's own; the decompositions, which it does not show,
 // come from its version's data files and are checked against its `==`.
 //
 // Run it on a Mac from the repository root: `swift android/tools/ScalarData.swift`. It downloads the data files from
@@ -84,6 +85,8 @@ func isNew(_ scalar: Int) -> Bool {
 }
 
 var format: [Int] = []
+var cased: [Int] = []
+var lowercasing: [Int] = []
 var classRuns: [String] = []
 var previousClass = -1
 var delta = Set<Int>()
@@ -91,6 +94,13 @@ for value in 0...0x10FFFF {
     let properties = Unicode.Scalar(value)?.properties
     // Format ranges: the first scalar of each, and the scalar after its last.
     if (properties?.generalCategory == .format) != (format.count % 2 == 1) { format.append(value) }
+    if (properties?.isCased == true) != (cased.count % 2 == 1) { cased.append(value) }
+    if (properties?.changesWhenLowercased == true) != (lowercasing.count % 2 == 1) { lowercasing.append(value) }
+    // FoundationText.kt reads a one-scalar Character as uppercase when it is cased and its capital is itself.
+    if let scalar = Unicode.Scalar(value),
+       Character(scalar).isUppercase != (scalar.properties.isCased && scalar.properties.uppercaseMapping == String(scalar)) {
+        fatalError("Character(\(hex(value))).isUppercase is not that it is cased and its own capital")
+    }
     let combiningClass = Int(properties?.canonicalCombiningClass.rawValue ?? 0)
     if combiningClass != previousClass {
         classRuns.append(String(format: "0x%08X", value << 8 | combiningClass))
@@ -108,6 +118,8 @@ for value in 0...0x10FFFF {
     }
 }
 if format.count % 2 == 1 { format.append(0x110000) }
+if cased.count % 2 == 1 { cased.append(0x110000) }
+if lowercasing.count % 2 == 1 { lowercasing.append(0x110000) }
 
 // The decompositions added since, which the standard library must find equivalent; the new scalars they are made of
 // join the delta, so text holding them is normalized here and composes.
@@ -238,8 +250,18 @@ internal object ScalarData {
     val uppercaseSpecial = intArrayOf(
 \(lines(upperSpecial.map { ([String(format: "0x%05X", $0.scalar), "\($0.mapping.count)"] + $0.mapping.map { String(format: "0x%05X", $0) }).joined(separator: ", ") }, perLine: 4))
     )
+
+    /** Cased (`properties.isCased`), as ranges in order: the first scalar of each, then the scalar after its last. */
+    val cased = intArrayOf(
+\(lines(cased.map { String(format: "0x%05X", $0) }, perLine: 8))
+    )
+
+    /** Changes_When_Lowercased (`properties.changesWhenLowercased`), as ranges as `cased` has them. */
+    val changesWhenLowercased = intArrayOf(
+\(lines(lowercasing.map { String(format: "0x%05X", $0) }, perLine: 8))
+    )
 }
 
 """
 try source.write(to: output, atomically: true, encoding: .utf8)
-print("Wrote Unicode \(version) to \(output.path): \(format.count / 2) format ranges, \(classRuns.count) class runs, \(delta.count) delta scalars, \(added.count) decompositions, \(upperRuns.count) uppercase runs, \(upperSpecial.count) longer uppercase mappings")
+print("Wrote Unicode \(version) to \(output.path): \(format.count / 2) format ranges, \(classRuns.count) class runs, \(delta.count) delta scalars, \(added.count) decompositions, \(upperRuns.count) uppercase runs, \(upperSpecial.count) longer uppercase mappings, \(cased.count / 2) cased ranges, \(lowercasing.count / 2) lowercasing ranges")

@@ -75,6 +75,17 @@ internal object FoundationDates {
         return instant(fields, RulesZone(zone.rules))
     }
 
+    /** A date's day, as a number that counts days, and its month (1 to 12), in a Gregorian `Calendar` in the zone. */
+    class CalendarDate(val day: Long, val month: Int)
+
+    /** Where Foundation's Gregorian calendar puts a date in the zone: Julian before October 1582. */
+    fun calendarDate(date: Instant, zone: ZoneId): CalendarDate? {
+        val time = (date.timeIntervalSinceReferenceDate + REFERENCE_DATE) * 1000.0
+        val rules = RulesZone(zone.rules)
+        val civil = civilDate(time, rules) ?: return null
+        return CalendarDate(Math.floorDiv((time + rules.offsetAt(time)).toLong(), DAY_MILLIS), civil.month + 1)
+    }
+
     private val weekdays = listOf(
         listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"),
         listOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"),

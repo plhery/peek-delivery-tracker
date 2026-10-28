@@ -938,10 +938,7 @@ class DeviceParcelTests {
         assertEquals("CN", last.stampOrigin)
     }
 
-    /**
-     * `TrackingLocation.place` reads a location's country from its last part; it comes with the passport's port, so this
-     * checks that last part is the country's name as the history writes it.
-     */
+    /** The iPhone's `Localizer()` on an English device. */
     @Test
     fun theSampleOpensOnItsWholeStory() {
         val localizer = Localizer(AppLanguage.En)
@@ -955,17 +952,12 @@ class DeviceParcelTests {
         assertNotNull(delivered.carrierData?.senderName)
         assertEquals("CN", delivered.stampOrigin)
         // Every scan has its own words, and every placed one a country the history flags.
-        val countries = mutableSetOf<String>()
         for (event in delivered.trackingEvents) {
             assertFalse(event.description.isEmpty())
             assertFalse(event.description, event.description.startsWith("sample."))
-            val location = event.location ?: continue
-            val code = event.place?.country
-            assertNotNull(location, code)
-            assertEquals(location, TrackingLocation.countryName(code!!, AppLanguage.En), location.substringAfterLast(", "))
-            countries += code
+            event.location?.let { assertNotNull(it, TrackingLocation.place(it).country) }
         }
-        assertEquals(setOf("CN", "DE", "CH"), countries)
+        assertEquals(setOf("CN", "DE", "CH"), delivered.trackingEvents.mapNotNull { it.location }.mapNotNull { TrackingLocation.place(it).country }.toSet())
     }
 
     // Android alone: the platform's stores can fail where the iPhone's `try?` reads nothing, and a cancellation ends the

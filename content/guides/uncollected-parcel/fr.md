@@ -120,8 +120,8 @@ Le suivi indique souvent « livré » dès que le colis est dans la consigne. Li
 - [La Poste suisse : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – 7 jours en général, 15 pour les envois de l'étranger, prolongation gratuite et sans compte
 - [La Poste suisse : Événements du suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – libellé « Annoncé pour retrait (invitation à retirer un envoi) »
 - [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – « Disponible dans votre Point Relais »
-- [La Poste suisse : CG PickPost et My Post 24](https://www.post.ch/-/media/post/agb/agb-pickpost-mypost24.pdf) – automate My Post 24, 10 jours
-- [La Poste suisse : CG « Mes envois »](https://www.post.ch/-/media/post/agb/agb-meine-sendungen.pdf) – prolongation, pas pour les actes judiciaires ; réexpédition vers un autre point de retrait
+- [La Poste suisse : CG PickPost et My Post 24](https://www.post.ch/-/media/post/agb/agb-pickpost-mypost24.pdf?sc_lang=fr) – automate My Post 24, 10 jours
+- [La Poste suisse : CG « Mes envois »](https://www.post.ch/-/media/post/agb/agb-meine-sendungen.pdf?sc_lang=fr) – prolongation, pas pour les actes judiciaires ; réexpédition vers un autre point de retrait
 - [About Amazon France : Comment retirer un colis dans un Amazon Locker](https://www.aboutamazon.fr/actualites/activite-logistique/comment-utiliser-amazon-locker) – trois jours calendaires, renvoi automatique et remboursement
 - [Vinted : Que faire si ton colis est renvoyé à l'expéditeur ?](https://www.vinted.fr/help/1447) – colis non récupéré à temps, remboursement automatique après 14 jours ouvrés, 25 jours ouvrés
 - [Service-public.gouv.fr : Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – 14 jours dès le lendemain de la réception, déclaration nécessaire, remboursement, coûts de renvoi, majorations

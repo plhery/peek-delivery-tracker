@@ -3,7 +3,7 @@ title: Tracking China Post: codice, stati in cinese e consegna
 description: Tracking China Post: com'è fatto un codice che finisce con CN, cosa vogliono dire gli stati in cinese, quando passa a Poste Italiane e cosa fare se si blocca.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-10-26
+updated: 2026-10-28
 ---
 
 China Post è la posta statale cinese, ed EMS è il suo marchio espresso. Se il tuo ordine su AliExpress, Temu, Shein o un altro negozio ha un codice che finisce con `CN`, l'ha assegnato China Post. In Italia di solito il pacco passa a [Poste Italiane](carrier:poste-italiane), che lo consegna con lo stesso codice. Puoi seguirlo sul sito di China Post, ems.com.cn, o nel box qui sopra. Il codice è nei dettagli di spedizione del tuo ordine.
@@ -19,7 +19,7 @@ Un codice China Post ha due lettere, nove cifre e `CN`: è il formato postale in
 | `CP000000005CN` | C: un pacco. |
 | `EA000000005CN` | E: EMS, il servizio espresso di China Post. |
 | `UA000000005CN` | U: un piccolo pacchetto con merce che, per l'UPU, non ha un tracciamento per il cliente. Non contare su scansioni in Italia. |
-| `ZS12345678901` | ZS, ZC o ZA e 11 cifre: anche questi codici li conosce il tracking di China Post. La Poste usa forme simili. |
+| `ZS12345678901` | ZS, ZC o ZA e 11 cifre: anche questi codici li conosce il tracking di China Post. I codici di La Poste hanno la stessa lunghezza, ma non se ne conosce nessuno che inizi così. |
 | `LP12345678901234` | Non è China Post, ma un riferimento logistico di [Cainiao](carrier:cainiao) (AliExpress). |
 | `YT1234567890123456` | Non è China Post, ma [YunExpress](carrier:yunexpress). |
 
@@ -94,7 +94,7 @@ China Post non dice in che lingue rispondono. Su ems.com.cn c'è anche un'assist
 
 ## Tracking China Post con Peek
 
-[Peek](/) riconosce subito due lettere, nove cifre e `CN` come China Post, se la cifra di controllo è giusta. Con una cifra sbagliata Peek non lo prende per China Post, e se scegli China Post a mano ti mostra che China Post non emette codici come questo: controlla il codice nell'e-mail del negozio. Un codice ZS, ZC o ZA ha anche la forma di La Poste. Incollalo lo stesso: Peek segue più di 3.500 corrieri e chiede prima a China Post. Se sceglie il corriere sbagliato, scegli China Post con «Cambia».
+[Peek](/) riconosce subito due lettere, nove cifre e `CN` come China Post, se la cifra di controllo è giusta. Con una cifra sbagliata Peek non lo prende per China Post, e se scegli China Post a mano ti mostra che China Post non emette codici come questo: controlla il codice nell'e-mail del negozio. Anche un codice ZS, ZC o ZA con 11 cifre lo riconosce subito come China Post. Qualsiasi altro codice incollalo lo stesso: Peek segue più di 3.500 corrieri. Se sceglie il corriere sbagliato, scegli China Post con «Cambia».
 
 Peek legge il tracking di China Post. Quando China Post chiede le cifre del telefono, Peek prova invece l'anteprima pubblica su ems.com.cn. Peek non ti chiede mai quelle cifre. Se le chiede anche l'anteprima, o non si apre, e nessun servizio di tracciamento ha il pacco, Peek dice che servono più informazioni: cerca allora il codice sul sito di China Post con le quattro cifre. China Post mostra ai visitatori solo le sue tre scansioni più recenti. Per questo Peek aggiunge la data di accettazione quando China Post la dà, e prende una cronologia più completa da un servizio di tracciamento, se ne ha una.
 

@@ -3,7 +3,7 @@ title: China Post rastreio: número, estados e entrega em Portugal
 description: Rastreio China Post: como é o número que acaba em CN, o que querem dizer os estados em chinês, quando a encomenda passa para os CTT e porque é que o seguimento para.
 slug: china-post-rastreio
 published: 2026-10-22
-updated: 2026-10-26
+updated: 2026-10-28
 ---
 
 A China Post, os Correios da China, é o correio nacional chinês, uma empresa do Estado, e a EMS é a sua marca de correio expresso. Se a tua encomenda do AliExpress, da Temu, da Shein ou de outra loja veio com um número de rastreio que acaba em `CN`, foi a China Post que o criou, e em Portugal quem a entrega são os [CTT](carrier:ctt), com esse mesmo número. Podes segui-la no site da China Post, o ems.com.cn, no Seguir objeto dos CTT depois de chegar a Portugal, ou na caixa acima. O número está nos detalhes de envio da encomenda, na loja onde compraste.
@@ -19,7 +19,7 @@ Um número da China Post tem duas letras, nove algarismos e `CN`: é o formato p
 | `CP000000005CN` | C: uma encomenda postal. Os CTT chamam-lhe Encomenda Postal Internacional. |
 | `EA000000005CN` | E: EMS, o serviço expresso da China Post. |
 | `UA000000005CN` | U: um pacote pequeno com mercadoria que, segundo a UPU, não tem seguimento para o cliente. Não contes com leituras em Portugal. |
-| `ZS12345678901` | ZS, ZC ou ZA e 11 algarismos: o seguimento da China Post também responde. A La Poste francesa usa formas parecidas. |
+| `ZS12345678901` | ZS, ZC ou ZA e 11 algarismos: o seguimento da China Post também responde. Os números da La Poste têm o mesmo comprimento, mas não se conhece nenhum que comece assim. |
 | `RR000000005PT` | Acaba em PT: um número criado pelos CTT, não pela China Post. |
 | `LP12345678901234` | Não é da China Post: é uma referência logística da [Cainiao](carrier:cainiao), a logística do AliExpress. |
 | `YT1234567890123456` | Não é da China Post: é da [YunExpress](carrier:yunexpress). |
@@ -94,7 +94,7 @@ O pedido formal à China Post tem de vir do remetente, por isso a loja responde 
 
 ## Rastrear encomenda China Post com o Peek
 
-O [Peek](/) reconhece logo como China Post um número com duas letras, nove algarismos e `CN` quando o algarismo de controlo está certo. Se estiver errado, o Peek não o toma pela China Post e, se escolheres a China Post, avisa que ela «não emite números como este»: confirma o número no e-mail da loja. Um número ZS, ZC ou ZA também serve à La Poste, por isso cola-o na mesma: o Peek segue mais de 3.500 transportadoras e pergunta primeiro à China Post. Se escolher a transportadora errada, escolhe a China Post em «Alterar».
+O [Peek](/) reconhece logo como China Post um número com duas letras, nove algarismos e `CN` quando o algarismo de controlo está certo. Se estiver errado, o Peek não o toma pela China Post e, se escolheres a China Post, avisa que ela «não emite números como este»: confirma o número no e-mail da loja. Um número ZS, ZC ou ZA com 11 algarismos também é reconhecido logo como China Post. Qualquer outro número, cola-o na mesma: o Peek segue mais de 3.500 transportadoras. Se escolher a transportadora errada, escolhe a China Post em «Alterar».
 
 O Peek lê o seguimento da própria China Post. Quando a China Post pede os algarismos do telefone, o Peek tenta em vez disso a pré-visualização pública do ems.com.cn; o Peek nunca tos pede. Se também essa recusar e nenhum serviço de seguimento tiver a encomenda, o Peek diz que são necessários mais dados: procura o número no site da China Post, com os quatro algarismos. A China Post só mostra a quem visita as três leituras mais recentes, por isso o Peek junta a data de aceitação quando a China Post a dá, e vai buscar um histórico mais completo a um serviço de seguimento quando algum o tem.
 

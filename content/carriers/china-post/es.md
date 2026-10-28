@@ -3,7 +3,7 @@ title: China Post seguimiento: número, estados y entrega en España
 description: Seguimiento de China Post: cómo es un número acabado en CN, qué significan los estados en chino, cuándo pasa a Correos y por qué se queda parado el seguimiento.
 slug: china-post-seguimiento
 published: 2026-10-22
-updated: 2026-10-26
+updated: 2026-10-28
 ---
 
 China Post, el correo de China, es el operador postal nacional chino, una empresa del Estado, y EMS es su marca urgente. Si tu pedido de AliExpress, Temu, Shein u otra tienda llegó con un número de seguimiento que acaba en `CN`, lo creó China Post, y en España lo entrega [Correos](carrier:correos-spain) con ese mismo número. Puedes seguirlo en la web de China Post, ems.com.cn, en el localizador de Correos cuando ya esté en España o en la casilla de arriba. El número está en los datos de envío de tu pedido, en la web de la tienda.
@@ -19,7 +19,7 @@ Un número de China Post tiene dos letras, nueve cifras y `CN`: es el formato po
 | `CP000000005CN` | C: un paquete postal. |
 | `EA000000005CN` | E: EMS, el servicio urgente de China Post. |
 | `UA000000005CN` | U: un paquete pequeño con mercancía que, según la UPU, no tiene seguimiento para el cliente. No cuentes con lecturas en España. |
-| `ZS12345678901` | ZS, ZC o ZA y 11 cifras: el seguimiento de China Post también lo contesta. La Poste francesa usa formas parecidas. |
+| `ZS12345678901` | ZS, ZC o ZA y 11 cifras: el seguimiento de China Post también lo contesta. Los números de La Poste tienen la misma longitud, pero no se le conoce ninguno que empiece así. |
 | `RR000000005ES` | Acaba en ES: un número de Correos, no de China Post. |
 | `LP12345678901234` | No es de China Post: es una referencia logística de [Cainiao](carrier:cainiao), la logística de AliExpress. |
 | `YT1234567890123456` | No es de China Post: es de [YunExpress](carrier:yunexpress). |
@@ -89,7 +89,7 @@ La investigación formal en China Post la pide el remitente, así que la tienda 
 
 ## Seguir un envío de China Post con Peek
 
-[Peek](/) reconoce al momento como China Post un número de dos letras, nueve cifras y `CN` cuando la cifra de control es correcta. Si no lo es, Peek no lo toma por China Post y, si eliges China Post, avisa de que «no emite números como este»: revisa el número en el correo de la tienda. Un número ZS, ZC o ZA encaja también con La Poste, así que pégalo igualmente: Peek sigue más de 3.500 transportistas y pregunta primero a China Post. Si se queda con el transportista equivocado, elige China Post con «Cambiar».
+[Peek](/) reconoce al momento como China Post un número de dos letras, nueve cifras y `CN` cuando la cifra de control es correcta. Si no lo es, Peek no lo toma por China Post y, si eliges China Post, avisa de que «no emite números como este»: revisa el número en el correo de la tienda. Un número ZS, ZC o ZA con 11 cifras también lo reconoce al momento como China Post. Cualquier otro número, pégalo igualmente: Peek sigue más de 3.500 transportistas. Si se queda con el transportista equivocado, elige China Post con «Cambiar».
 
 Peek lee el seguimiento de la propia China Post. Cuando China Post pide las cifras del teléfono, Peek prueba en su lugar la vista previa pública de ems.com.cn; Peek nunca te las pide. Si esa vista también se niega y ningún servicio de seguimiento tiene el paquete, Peek te dice que faltan datos para consultar el envío: busca entonces el número en la web de China Post, con las cuatro cifras. China Post solo enseña a los visitantes sus tres lecturas más recientes, así que Peek añade la fecha de admisión cuando China Post la da, y toma un historial más completo de un servicio de seguimiento cuando alguno lo tiene.
 

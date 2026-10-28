@@ -3,7 +3,7 @@ title: China Post tracking: number, statuses and who delivers
 description: Track a China Post parcel: what a CN number looks like, what the Chinese statuses mean, which post delivers it in your country and why tracking goes quiet.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 China Post is China's state-owned national post, and EMS is its express brand. If your order from AliExpress, Temu, Shein or another shop came with a tracking number ending in `CN`, China Post issued it, and your own country's post delivers the parcel under that same number. Track it on China Post's site, ems.com.cn, or in the box above. The number is in the shop's shipping details for your order.
@@ -19,7 +19,7 @@ A China Post number has two letters, nine digits and `CN`: the international pos
 | `CP000000005CN` | C: a parcel. |
 | `EA000000005CN` | E: EMS, China Post's express service. |
 | `UA000000005CN` | U: a small packet with goods "without customer-oriented tracking", in the UPU's words. Don't count on scans in your country. |
-| `ZS12345678901` | ZS, ZC or ZA and 11 digits: also answered by China Post's tracking. La Poste uses similar shapes. |
+| `ZS12345678901` | ZS, ZC or ZA and 11 digits: also answered by China Post's tracking. La Poste's numbers have the same length, but none is known to start this way. |
 | `LP12345678901234` | Not China Post: a [Cainiao](carrier:cainiao) (AliExpress) logistics reference. |
 | `YT1234567890123456` | Not China Post but [YunExpress](carrier:yunexpress). |
 
@@ -88,7 +88,7 @@ China Post doesn't say which languages they speak. ems.com.cn also has an online
 
 ## Track a China Post parcel with Peek
 
-[Peek](/) recognises two letters, nine digits and `CN` as China Post straight away when the check digit is right. With a wrong one, Peek doesn't take it for China Post, and if you pick China Post it says China Post "doesn't issue numbers like this one": check the number in the shop's email. A ZS, ZC or ZA number fits La Poste too, so paste it all the same: Peek follows more than 3,500 carriers and asks China Post first. If it settles on the wrong carrier, pick China Post with "Change".
+[Peek](/) recognises two letters, nine digits and `CN` as China Post straight away when the check digit is right. With a wrong one, Peek doesn't take it for China Post, and if you pick China Post it says China Post "doesn't issue numbers like this one": check the number in the shop's email. A ZS, ZC or ZA number with 11 digits is recognised as China Post straight away too. Paste any other number all the same: Peek follows more than 3,500 carriers. If it settles on the wrong carrier, pick China Post with "Change".
 
 Peek reads China Post's own tracking. When China Post asks for phone digits, Peek tries the public preview on ems.com.cn instead; Peek never asks you for them. If the preview refuses too and no tracking service has the parcel, Peek says more information is needed: look the number up on China Post's site with the four digits. China Post gives visitors only its three newest scans, so Peek adds the acceptance date when China Post gives one, and takes a fuller history from tracking services when one has it.
 

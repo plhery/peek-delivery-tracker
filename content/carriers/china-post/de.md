@@ -3,7 +3,7 @@ title: China Post Sendungsverfolgung: Nummer, Status, Zustellung
 description: China-Post-Paket verfolgen: wie die CN-Nummer aussieht, was die chinesischen Status bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: china-post-sendungsverfolgung
 published: 2026-10-22
-updated: 2026-10-26
+updated: 2026-10-28
 ---
 
 China Post ist die staatliche Post Chinas, EMS ihre Expressmarke. Kam deine Bestellung bei AliExpress, Temu, Shein oder einem anderen Shop mit einer Nummer, die auf `CN` endet, hat China Post sie vergeben. In Deutschland, Österreich und der Schweiz übernimmt meist die Post vor Ort das Paket und stellt es unter derselben Nummer zu. Verfolgen kannst du es auf China Posts Seite ems.com.cn oder oben im Feld. Die Nummer steht in den Versanddetails deiner Bestellung.
@@ -19,7 +19,7 @@ Eine China-Post-Nummer hat zwei Buchstaben, neun Ziffern und `CN`. Das ist das i
 | `CP000000005CN` | C: ein Paket. |
 | `EA000000005CN` | E: EMS, der Expressdienst von China Post. |
 | `UA000000005CN` | U: ein Päckchen mit Ware, laut UPU ohne Sendungsverfolgung für den Kunden. Rechne nicht mit Scans in deinem Land. |
-| `ZS12345678901` | ZS, ZC oder ZA und 11 Ziffern: Auch diese Nummern kennt China Posts Sendungsverfolgung. La Poste nutzt ähnliche Formen. |
+| `ZS12345678901` | ZS, ZC oder ZA und 11 Ziffern: Auch diese Nummern kennt China Posts Sendungsverfolgung. La-Poste-Nummern sind gleich lang, aber keine bekannte beginnt so. |
 | `LP12345678901234` | Keine China-Post-Nummer, sondern eine Logistiknummer von [Cainiao](carrier:cainiao) (AliExpress). |
 | `YT1234567890123456` | Keine China-Post-Nummer, sondern [YunExpress](carrier:yunexpress). |
 
@@ -94,7 +94,7 @@ Welche Sprachen man dort spricht, sagt China Post nicht. Auf ems.com.cn gibt es 
 
 ## China Post Paket verfolgen mit Peek
 
-[Peek](/) erkennt zwei Buchstaben, neun Ziffern und `CN` sofort als China Post, wenn die Prüfziffer stimmt. Mit falscher Prüfziffer hält Peek die Nummer nicht für China Post, und wählst du China Post von Hand, zeigt Peek, dass China Post keine Nummern wie diese vergibt: Prüf sie in der E-Mail des Shops. Eine ZS-, ZC- oder ZA-Nummer passt auch zu La Poste. Füg sie trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste und fragt zuerst China Post. Landet sie beim falschen Dienst, wähl China Post mit „Ändern“.
+[Peek](/) erkennt zwei Buchstaben, neun Ziffern und `CN` sofort als China Post, wenn die Prüfziffer stimmt. Mit falscher Prüfziffer hält Peek die Nummer nicht für China Post, und wählst du China Post von Hand, zeigt Peek, dass China Post keine Nummern wie diese vergibt: Prüf sie in der E-Mail des Shops. Eine ZS-, ZC- oder ZA-Nummer mit 11 Ziffern erkennt Peek ebenfalls sofort als China Post. Jede andere Nummer füg trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Landet sie beim falschen Dienst, wähl China Post mit „Ändern“.
 
 Peek liest China Posts eigene Sendungsverfolgung. Will China Post Telefonziffern, versucht Peek stattdessen die öffentliche Vorschau auf ems.com.cn. Nach den Ziffern fragt Peek dich nie. Verlangt auch die Vorschau sie oder klappt sie nicht und hat kein Tracking-Dienst das Paket, meldet Peek, dass mehr Angaben nötig sind: Such die Nummer dann mit den vier Ziffern auf China Posts Seite. China Post zeigt Besuchern nur die drei neuesten Scans. Peek ergänzt deshalb das Annahmedatum, wenn China Post eines nennt, und holt einen volleren Verlauf von Tracking-Diensten, wenn einer ihn hat.
 

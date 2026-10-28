@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
+import java.io.IOException
 import java.time.Instant
 import java.util.Collections
 import java.util.UUID
@@ -27,9 +28,8 @@ import org.junit.Test
 /**
  * Authentication.swift has no tests of its own. These hold what it does with the auth service's requests and answers,
  * its addresses, digests, saved sessions and expiry: each expected value is what Authentication.swift gives for the
- * same input, built with swiftc on macOS for this port. The exceptions are deliberate differences, each said where it
- * is tested: the auth service's legacy error shape, which Swift cannot read; a refresh once the account changed under
- * another; and what the API client asks from another thread.
+ * same input, built with swiftc on macOS for this port. The one exception is a deliberate difference, said where it is
+ * tested: what the API client asks from another thread.
  */
 class AuthenticationTests {
     private val configuration = AppConfiguration(
@@ -148,6 +148,12 @@ class AuthenticationTests {
         for (request in requests) {
             assertEquals("pk", request.header("apikey"))
             assertEquals("application/json", request.header("Content-Type"))
+            assertEquals("2024-01-01", request.header("X-Supabase-Api-Version"))
+            // Set in Swift's order: the version after the key, and before the bearer.
+            assertEquals(
+                listOf("Content-Type", "apikey", "X-Supabase-Api-Version") + listOfNotNull(request.header("Authorization")?.let { "Authorization" }),
+                request.headers.keys.toList(),
+            )
             assertEquals(30.0, request.timeout, 0.0)
             assertTrue(request.handlesCookies)
         }
@@ -341,6 +347,92 @@ class AuthenticationTests {
     }
 
     @Test
+    fun signingOutInTheSessionsLastMinuteRefreshesItForTheServerAndIgnoresWhatFails() = runTest {
+        val refreshed = sessionAnswer.replace("tok-a", "tok-b")
+        // The session's expiry, the refresh's answer (nil: none is asked for) and the token the logout is sent with.
+        val cases = listOf<Triple<Long, (suspend () -> HttpResponse)?, String>>(
+            Triple(1_900_000_060, null, "tok-a"),
+            Triple(1_900_000_059, { jsonResponse(200, refreshed) }, "tok-b"),
+            Triple(1_899_996_400, { jsonResponse(200, refreshed) }, "tok-b"),
+            // Only the answer's token is used: whichever account it is for, nothing of it is kept.
+            Triple(1_900_000_059, { jsonResponse(200, answer(otherUserId, "tok-c")) }, "tok-c"),
+            Triple(1_900_000_059, { jsonResponse(200, refreshed.replace("\"is_anonymous\":false", "\"is_anonymous\":true")) }, "tok-b"),
+            Triple(1_900_000_059, { jsonResponse(400, """{"code":"refresh_token_not_found","message":"Invalid Refresh Token"}""") }, "tok-a"),
+            Triple(1_900_000_059, { jsonResponse(503, """{"message":"Unavailable"}""") }, "tok-a"),
+            Triple(1_900_000_059, { jsonResponse(200, "garbage") }, "tok-a"),
+            Triple(1_900_000_059, { throw IOException("The Internet connection appears to be offline.") }, "tok-a"),
+        )
+        val logouts = listOf<suspend () -> HttpResponse>(
+            { jsonResponse(204) },
+            { jsonResponse(500, """{"message":"Down"}""") },
+            { throw IOException("The Internet connection appears to be offline.") },
+        )
+        for ((expiresAt, refresh, bearer) in cases) {
+            for (logout in logouts) {
+                val transport = RecordingTransport { request ->
+                    when (request.path) {
+                        "/auth/v1/verify" -> jsonResponse(200, answer(userId, "tok-a", expiresAt = expiresAt))
+                        "/auth/v1/logout" -> logout()
+                        else -> refresh!!()
+                    }
+                }
+                val persistence = MemorySessionPersistence()
+                val session = store(transport, persistence)
+                session.verifyCode(email = "person@example.test", code = "123456")
+                session.signOut()
+                assertEquals(AuthenticationState.Welcome, session.state)
+                assertNull(persistence.data)
+                val requests = transport.requests.drop(1)
+                assertEquals(
+                    "$expiresAt",
+                    listOfNotNull(refresh?.let { "/auth/v1/token?grant_type=refresh_token - " + """{"refresh_token":"ref-tok-a"}""" }) +
+                        """/auth/v1/logout?scope=local Bearer $bearer {}""",
+                    requests.map { "${it.path}?${Url.parse(it.url)?.query} ${it.header("Authorization") ?: "-"} ${it.body!!.decodeToString()}" },
+                )
+            }
+        }
+    }
+
+    @Test
+    fun anExpiryALongCannotHoldStaysAtTheEndOfItsRangeAndTheSessionIsKept() = runTest {
+        // The clock, `expires_in`, and the expiry kept: Swift's `Int(Date().timeIntervalSince1970)` plus `expires_in`,
+        // or the end of the range it overflows.
+        val cases = listOf(
+            Triple(Instant.ofEpochSecond(1_900_000_000), Long.MAX_VALUE - 1_900_000_001, Long.MAX_VALUE - 1),
+            Triple(Instant.ofEpochSecond(1_900_000_000), Long.MAX_VALUE - 1_900_000_000, Long.MAX_VALUE),
+            Triple(Instant.ofEpochSecond(1_900_000_000), Long.MAX_VALUE - 1_899_999_999, Long.MAX_VALUE),
+            Triple(Instant.ofEpochSecond(1_900_000_000), Long.MAX_VALUE, Long.MAX_VALUE),
+            Triple(Instant.ofEpochSecond(1_900_000_000, 999_999_999), Long.MAX_VALUE - 1_900_000_000, Long.MAX_VALUE),
+            Triple(Instant.ofEpochSecond(1_900_000_000), Long.MIN_VALUE, Long.MIN_VALUE + 1_900_000_000),
+            // Before 1970 a negative `expires_in` can pass the start of the range. The seconds are truncated towards zero.
+            Triple(Instant.ofEpochSecond(-10), Long.MIN_VALUE + 11, Long.MIN_VALUE + 1),
+            Triple(Instant.ofEpochSecond(-10), Long.MIN_VALUE + 10, Long.MIN_VALUE),
+            Triple(Instant.ofEpochSecond(-10), Long.MIN_VALUE + 9, Long.MIN_VALUE),
+            Triple(Instant.ofEpochSecond(-10), Long.MIN_VALUE, Long.MIN_VALUE),
+            Triple(Instant.ofEpochSecond(-11, 500_000_000), Long.MIN_VALUE + 10, Long.MIN_VALUE),
+            Triple(Instant.ofEpochSecond(-11, 500_000_000), Long.MIN_VALUE + 9, Long.MIN_VALUE),
+            Triple(Instant.ofEpochSecond(-10), Long.MAX_VALUE, Long.MAX_VALUE - 10),
+        )
+        for ((clock, expiresIn, expiresAt) in cases) {
+            val answer = sessionAnswer.replace("\"expires_in\":3600,\"expires_at\":1900003600", "\"expires_in\":$expiresIn")
+            val transport = RecordingTransport { jsonResponse(200, answer) }
+            val persistence = MemorySessionPersistence()
+            val session = store(transport, persistence, clock = { clock })
+            session.verifyCode(email = "person@example.test", code = "123456")
+            assertEquals("$clock $expiresIn", UUID.fromString(userId), session.user?.id)
+            val saved = decodeSwiftKeys(AuthSession.serializer(), persistence.data!!)
+            assertEquals("$clock $expiresIn", expiresIn, saved.expiresIn)
+            assertEquals("$clock $expiresIn", expiresAt, saved.expiresAt)
+        }
+        // A session that far out is used without a refresh.
+        val transport = RecordingTransport { jsonResponse(200, sessionAnswer.replace("\"expires_in\":3600,\"expires_at\":1900003600", "\"expires_in\":${Long.MAX_VALUE}")) }
+        val session = store(transport)
+        session.verifyCode(email = "person@example.test", code = "123456")
+        assertEquals("tok-a", session.accessToken())
+        assertEquals(listOf("/auth/v1/verify"), transport.requests.map { it.path })
+    }
+
+    @Test
     fun reopeningTheSavedAccountIsAnnouncedAsSuch() = runTest {
         val session = store(RecordingTransport { throw AssertionError("Unexpected request") }, saved(savedSession))
         val announced = mutableListOf<String>()
@@ -366,19 +458,27 @@ class AuthenticationTests {
             Triple(500, "", "requestFailed(500)"),
             Triple(503, """{"message":"Unavailable"}""", "server(Unavailable)"),
             Triple(422, """{"error_description":"d","message":"m","msg":"g"}""", "server(d)"),
-            // The legacy shape, whose numeric code makes the whole error unreadable to Swift, its message too: read
-            // here (see AuthErrorPayload), its `error_code` taking the numeric code's place.
+            // The older shape, whose `code` is the HTTP status: `error_code` is the code, and comes before `code`.
             Triple(400, """{"code":400,"msg":"numeric code"}""", "server(numeric code)"),
             Triple(400, """{"code":400,"error_code":"invalid_grant","msg":"Invalid Refresh Token"}""", "missingSession"),
             Triple(400, """{"code":4e2,"error_code":"user_banned"}""", "missingSession"),
             Triple(400, """{"code":400,"error_code":"other","msg":"Nope"}""", "server(Nope)"),
-            Triple(400, """{"code":"other","error_code":"invalid_grant"}""", "requestFailed(400)"),
+            Triple(400, """{"code":"other","error_code":"invalid_grant"}""", "missingSession"),
+            Triple(400, """{"code":"invalid_grant","error_code":"other"}""", "requestFailed(400)"),
+            Triple(400, """{"code":"invalid_grant","error_code":null}""", "missingSession"),
+            Triple(400, """{"errorCode":"session_not_found"}""", "missingSession"),
             Triple(400, """{"code":null,"error_code":"session_expired","error":"other"}""", "missingSession"),
-            // Any other code is as unreadable here as it is to Swift.
-            Triple(400, """{"code":true,"error_code":"invalid_grant","msg":"Bool"}""", "requestFailed(400)"),
-            Triple(400, """{"code":[400],"msg":"List"}""", "requestFailed(400)"),
-            Triple(400, """{"code":400,"error_code":5,"msg":"Number"}""", "requestFailed(400)"),
+            // A field that is not a string reads as none, and leaves the others readable.
+            Triple(400, """{"code":true,"error_code":"invalid_grant","msg":"Bool"}""", "missingSession"),
+            Triple(400, """{"code":[400],"msg":"List"}""", "server(List)"),
+            Triple(400, """{"code":400,"error_code":5,"msg":"Number"}""", "server(Number)"),
+            Triple(400, """{"code":"refresh_token_not_found","error_code":{"a":1}}""", "missingSession"),
+            Triple(400, """{"code":{"x":"invalid_grant"},"error":"user_not_found"}""", "missingSession"),
+            Triple(400, """{"error":5,"error_description":"Five"}""", "server(Five)"),
+            Triple(503, """{"error_description":5,"message":["m"],"msg":"g"}""", "server(g)"),
+            Triple(503, """{"error_description":false,"message":null,"msg":0}""", "requestFailed(503)"),
             Triple(502, "garbage", "requestFailed(502)"),
+            Triple(400, """["invalid_grant"]""", "requestFailed(400)"),
         )
         for ((status, body, expected) in cases) {
             val persistence = saved(savedSession)
@@ -400,8 +500,12 @@ class AuthenticationTests {
     fun otherAuthAnswersMapAsTheSwiftMapsThem() = runTest {
         val cases = listOf(
             Triple(429, """{"code":"over_email_send_rate_limit","msg":"Too many"}""", "server(Too many)"),
-            // The legacy shape, which Swift cannot read: its message is read here (see AuthErrorPayload).
+            // The older shape, whose `code` is the HTTP status.
             Triple(429, """{"code":429,"msg":"Too many"}""", "server(Too many)"),
+            Triple(429, """{"code":429,"error_code":"over_email_send_rate_limit","msg":"Too many"}""", "server(Too many)"),
+            // A field that is not a string reads as none, and leaves the others readable.
+            Triple(422, """{"error_description":{"a":"b"},"message":"m"}""", "server(m)"),
+            Triple(422, """{"message":5}""", "requestFailed(422)"),
             // Only a refresh's refusal signs out.
             Triple(401, """{"code":"invalid_grant"}""", "requestFailed(401)"),
             Triple(500, """{"message":null,"msg":"second"}""", "server(second)"),
@@ -428,11 +532,7 @@ class AuthenticationTests {
         }
     }
 
-    /**
-     * A deliberate difference: the auth service answers in its legacy shape, as neither app sends
-     * `X-Supabase-Api-Version`, which Swift cannot read, so the refused refresh keeps there a session that can never
-     * refresh again. Here it signs out, as Swift does for the 2024-01-01 shape.
-     */
+    /** The auth service's two shapes: the 2024-01-01 one `X-Supabase-Api-Version` asks for, and the older one. */
     @Test
     fun aRefusedRefreshSignsOutInEitherShapeOfTheAuthServicesError() = runTest {
         for (code in listOf("refresh_token_not_found", "session_not_found", "refresh_token_already_used")) {
@@ -461,10 +561,7 @@ class AuthenticationTests {
         }
     }
 
-    /**
-     * A deliberate difference: Swift cannot read the legacy shape the auth service answers in, and shows the bare
-     * status. Its message is read here, and shown as Swift shows it for the 2024-01-01 shape.
-     */
+    /** The server's message, in either shape of the auth service's error, shown as the iPhone shows it. */
     @Test
     fun aWrongCodeAndARateLimitShowTheServersMessageInEitherShape() = runTest {
         val localizer = Localizer(AppLanguage.En)
@@ -629,10 +726,7 @@ class AuthenticationTests {
         assertEquals(listOf("ref-a"), refresh.transport.refreshTokens())
     }
 
-    /**
-     * A deliberate difference: Swift leaves the finished refresh of the account that was signed in for every later
-     * refresh to join (Authentication.swift:398–399), which then ends as cancelled and sends nothing until a sign-out.
-     */
+    /** The previous account's refresh, answered once the account changed, leaves no task for later refreshes to join. */
     @Test
     fun aRefreshAnsweredAfterTheAccountChangedLeavesTheNextAccountsRefreshesWorking() = runTest {
         val refresh = HeldRefresh("ref-a") { request ->
@@ -658,10 +752,7 @@ class AuthenticationTests {
         assertTrue(persistence.data!!.decodeToString().contains("tok-b2"))
     }
 
-    /**
-     * A deliberate difference: Swift's next account would join the refresh still under way for the previous one and
-     * end as cancelled with it. Here it refreshes on its own, whatever the previous one's refresh is answered.
-     */
+    /** The next account never joins the refresh still under way for the previous one, whatever that one is answered. */
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun theNextAccountRefreshesOnItsOwnWhileThePreviousOnesRefreshIsUnderWay() = runTest {

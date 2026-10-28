@@ -25,6 +25,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonArray
@@ -305,9 +306,6 @@ class SessionStore(
             val oldValue = stateValue.value
             stateValue.value = value
             if (oldValue.identity != value.identity) {
-                // A refresh under way is the previous account's, and ends as cancelled: the new one's starts its
-                // own. Swift leaves it to be joined (see refreshSession).
-                refreshTask = null
                 generation = UUID.randomUUID()
                 identityChanges.send()
             }
@@ -331,8 +329,10 @@ class SessionStore(
     private val emailLanguageKey = "sdt.native.email-language.v1"
     private var session: AuthSession? = null
 
-    /** What the refresh under way failed with, nil when it succeeded. */
-    private var refreshTask: Deferred<Exception?>? = null
+    /** The refresh under way, which gives what it failed with (nil when it succeeded), and the generation it began in. */
+    private var refreshTask: RefreshTask? = null
+
+    private class RefreshTask(val task: Deferred<Exception?>, val generation: UUID)
 
     val user: AuthUser?
         get() = (state as? AuthenticationState.SignedIn)?.user
@@ -580,19 +580,30 @@ class SessionStore(
 
     suspend fun signOut() {
         analytics("sign-out", null)
-        val token = session?.accessToken
+        val ending = session
         clearLocalSession()
         showWelcome()
-        if (token != null) {
+        if (ending == null) return
+        // The server ends a session only for an access token it still accepts.
+        var token = ending.accessToken
+        if (ending.secondsUntilExpiration(now()) < 60) {
             tryQuietly {
-                authRequest(
-                    path = "logout?scope=local",
+                token = authRequest(
+                    path = "token?grant_type=refresh_token",
                     method = "POST",
-                    jsonObject = JsonObject(emptyMap()),
-                    response = EmptyAuthResponse.serializer(),
-                    bearer = token,
-                )
+                    jsonObject = buildJsonObject { put("refresh_token", ending.refreshToken) },
+                    response = AuthSession.serializer(),
+                ).accessToken
             }
+        }
+        tryQuietly {
+            authRequest(
+                path = "logout?scope=local",
+                method = "POST",
+                jsonObject = JsonObject(emptyMap()),
+                response = EmptyAuthResponse.serializer(),
+                bearer = token,
+            )
         }
     }
 
@@ -605,12 +616,13 @@ class SessionStore(
     }
 
     private suspend fun refreshSession() {
-        refreshTask?.let { task ->
-            task.await()?.let { throw it }
+        val generation = generation
+        // A refresh begun before the account changed is not this account's to wait for.
+        refreshTask?.takeIf { it.generation == generation }?.let { refresh ->
+            refresh.task.await()?.let { throw it }
             return
         }
         val refreshToken = session?.refreshToken ?: throw AuthenticationError.MissingSession()
-        val generation = generation
         val task = scope.async {
             try {
                 val refreshed = authRequest(
@@ -629,7 +641,7 @@ class SessionStore(
                 error
             }
         }
-        refreshTask = task
+        refreshTask = RefreshTask(task, generation)
         try {
             // Swift's `task.value` waits for the refresh even once the caller is cancelled, so what it found is
             // always seen to here.
@@ -640,20 +652,17 @@ class SessionStore(
             }
             throw error
         } finally {
-            // Swift clears it only while the account is unchanged (Authentication.swift:398–399): once the account
-            // changes under a refresh, every later one joins that finished task and ends as cancelled, sending
-            // nothing, until a sign-out. A deliberate difference: this clears it while it is still this refresh's.
-            if (refreshTask === task) refreshTask = null
+            if (refreshTask?.task === task) refreshTask = null
         }
     }
 
     private fun accept(next: AuthSession) {
         if (next.user.isAnonymous == true) throw AuthenticationError.MissingSession()
-        // Swift traps on an expiry past a 64-bit number; an answer that far out is no session.
+        // An expiry a Long can't hold would overflow: it stays at the end of the range instead, as Swift's Int does.
         val expiresAt = next.expiresAt ?: try {
             Math.addExact((now().timeIntervalSinceReferenceDate + SECONDS_FROM_1970_TO_2001).toLong(), next.expiresIn)
         } catch (_: ArithmeticException) {
-            throw AuthenticationError.InvalidResponse()
+            if (next.expiresIn < 0) Long.MIN_VALUE else Long.MAX_VALUE
         }
         val saved = next.copy(expiresAt = expiresAt)
         try {
@@ -667,7 +676,7 @@ class SessionStore(
     }
 
     private fun clearLocalSession() {
-        refreshTask?.cancel()
+        refreshTask?.task?.cancel()
         refreshTask = null
         session = null
         quietly { keychain.delete() }
@@ -698,19 +707,19 @@ class SessionStore(
         val base = configuration.supabaseUrl ?: throw AuthenticationError.NotConfigured()
         val url = base.resolving("auth/v1/$path") ?: throw AuthenticationError.InvalidResponse()
         val headers = linkedMapOf("Content-Type" to "application/json", "apikey" to configuration.supabasePublishableKey)
+        // Without it Supabase Auth answers errors in its older shape, with the HTTP status as `code`.
+        headers["X-Supabase-Api-Version"] = "2024-01-01"
         if (bearer != null) headers["Authorization"] = "Bearer $bearer"
         // JSONSerialization's bytes, the members in the order given where Swift's follow its dictionary's hash order.
         val request = HttpRequest(url, method, headers, JsonEncoder().encode(JsonObject.serializer(), jsonObject), timeout = 30.0)
         val http = transport.data(request)
         if (http.statusCode !in 200 until 300) {
             val payload = try {
-                decodeSwiftKeys(AuthErrorPayload.serializer(), http.body)
+                decodeSwiftKeys(AuthErrorPayload.Reader, http.body)
             } catch (_: Exception) {
                 null
             }
-            // The 2024-01-01 shape's code, else the legacy shape's (see AuthErrorPayload), else an OAuth error's.
-            val code = payload?.code?.text ?: payload?.errorCode ?: payload?.error
-            if (path == "token?grant_type=refresh_token" && invalidRefresh(http.statusCode, code)) {
+            if (path == "token?grant_type=refresh_token" && invalidRefresh(http.statusCode, payload?.code ?: payload?.error)) {
                 throw AuthenticationError.MissingSession()
             }
             (payload?.errorDescription ?: payload?.message ?: payload?.msg)?.let { throw AuthenticationError.Server(it) }
@@ -804,47 +813,42 @@ private class EmptyAuthResponse {
 }
 
 /**
- * An error as the auth service answers it. Neither app sends `X-Supabase-Api-Version`, so it answers in its legacy
- * shape, `{"code":400,"error_code":"…","msg":"…"}`, where `code` is the HTTP status; the 2024-01-01 shape is
- * `{"code":"…","message":"…"}`. Swift's payload takes `code` as a string only (Authentication.swift:591), so a legacy
- * error reads as nothing there (:454): a refused refresh is `requestFailed(400)` and keeps a session that can never
- * refresh again, and a wrong code or a rate limit loses the server's message. A deliberate difference from that iOS
- * bug: both shapes are read here.
+ * An error as the auth service answers it: `{"code":"…","message":"…"}` in the 2024-01-01 shape, which
+ * `X-Supabase-Api-Version` asks for, and `{"code":400,"error_code":"…","msg":"…"}` in the older one. Each field is read
+ * on its own, as Swift's `try?` reads it: a value that is not a string reads as none and leaves the others readable.
  */
-@Serializable
 private class AuthErrorPayload(
-    val code: AuthErrorCode? = null,
-    val errorCode: String? = null,
-    val error: String? = null,
-    val message: String? = null,
-    val msg: String? = null,
-    val errorDescription: String? = null,
-)
-
-/**
- * `code`: the error code, a string, in the 2024-01-01 shape, and the HTTP status, a number, in the legacy one, which
- * reads as no code. Any other value leaves the whole error unreadable, as it is to Swift.
- */
-@Serializable(with = AuthErrorCode.Serializer::class)
-private class AuthErrorCode(val text: String?) {
-    object Serializer : KSerializer<AuthErrorCode> {
-        // JsonElement's kind: decodeSwiftKeys hands the value over as it is.
-        override val descriptor: SerialDescriptor = SerialDescriptor("AuthErrorCode", JsonElement.serializer().descriptor)
-
-        private val number = Regex("-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?")
-
-        override fun deserialize(decoder: Decoder): AuthErrorCode {
-            val value = (decoder as JsonDecoder).decodeJsonElement()
-            return when {
-                value is JsonNull -> AuthErrorCode(null)
-                value is JsonPrimitive && value.isString -> AuthErrorCode(value.content)
-                value is JsonPrimitive && number.matches(value.content) -> AuthErrorCode(null)
-                else -> throw SerializationException("Expected a string or a number.")
+    /** The error code: `code` in the 2024-01-01 shape, `error_code` in the older one, whose `code` is the HTTP status. */
+    val code: String?,
+    val error: String?,
+    val message: String?,
+    val msg: String?,
+    val errorDescription: String?,
+) {
+    /** Swift's `init(from:)`. The payload is only ever read. */
+    object Reader : DeserializationStrategy<AuthErrorPayload> {
+        // A class's kind, so that decodeSwiftKeys finds each key's property, and JsonElement's for each value, which it
+        // then hands over as it is.
+        override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AuthErrorPayload") {
+            for (key in listOf("code", "errorCode", "error", "message", "msg", "errorDescription")) {
+                element(key, JsonElement.serializer().descriptor, isOptional = true)
             }
         }
 
-        override fun serialize(encoder: Encoder, value: AuthErrorCode) {
-            encoder.encodeSerializableValue(JsonElement.serializer(), value.text?.let(::JsonPrimitive) ?: JsonNull)
+        override fun deserialize(decoder: Decoder): AuthErrorPayload {
+            val container = (decoder as JsonDecoder).decodeJsonElement() as? JsonObject
+                ?: throw SerializationException("Expected an object.")
+
+            // `try? container.decodeIfPresent(String.self, forKey: key)`.
+            fun string(key: String): String? = (container[key] as? JsonPrimitive)?.takeIf { it.isString }?.content
+
+            return AuthErrorPayload(
+                code = string("errorCode") ?: string("code"),
+                error = string("error"),
+                message = string("message"),
+                msg = string("msg"),
+                errorDescription = string("errorDescription"),
+            )
         }
     }
 }

@@ -807,4 +807,118 @@ class SessionIsolationTests {
         assertNull(store.notificationPreferences?.emailOnDelivery)
         assertTrue(transport.requests.isEmpty())
     }
+
+    @Test
+    fun refusedRefreshTokenSignsOutInEitherErrorShape() = runTest {
+        // Supabase Auth's answer with X-Supabase-Api-Version, and its older one, whose `code` is the HTTP status.
+        val answers = listOf(
+            """{"code":"refresh_token_not_found","message":"Invalid Refresh Token: Refresh Token Not Found"}""",
+            """{"code":400,"error_code":"refresh_token_not_found","msg":"Invalid Refresh Token: Refresh Token Not Found"}""",
+        )
+        for (answer in answers) {
+            val transport = RecordingTransport()
+            val persistence = MemorySessionPersistence()
+            val session = sessionStore(transport, persistence)
+            authorize(session, transport, expired = true)
+            val versions = mutableListOf<String?>()
+            transport.handler = { request ->
+                versions += request.header("X-Supabase-Api-Version")
+                jsonResponse(400, answer)
+            }
+            try {
+                session.accessToken()
+                fail("Expected the refusal")
+            } catch (_: AuthenticationError.MissingSession) {
+            }
+            assertNull(session.user)
+            assertNull(persistence.data)
+            assertEquals(listOf<String?>("2024-01-01"), versions)
+        }
+    }
+
+    @Test
+    fun authErrorInTheOlderShapeKeepsItsMessage() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        transport.respond("""{"code":403,"error_code":"otp_expired","msg":"Token has expired or is invalid"}""", status = 403)
+        try {
+            session.verifyCode(email = "test@example.com", code = "123456")
+            fail("Expected the refusal")
+        } catch (error: AuthenticationError.Server) {
+            assertEquals("Token has expired or is invalid", error.serverMessage)
+        }
+    }
+
+    @Test
+    fun refreshBegunBeforeTheAccountChangedDoesNotHoldUpLaterOnes() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        val id = UUID.randomUUID()
+        authorize(session, transport, id = id, expired = true)
+        val started = CompletableDeferred<Unit>()
+        val complete = CompletableDeferred<HttpResponse>()
+        transport.handler = {
+            started.complete(Unit)
+            complete.await()
+        }
+        val stale = async { runCatching { session.accessToken() } }
+        started.await()
+        // The account changes while the refresh is under way, without the session being cleared first.
+        session.showSignIn()
+        authorize(session, transport, id = id, expired = true)
+        val fresh = json(
+            AuthSession.serializer(),
+            AuthSession(
+                accessToken = "fresh", tokenType = "bearer", expiresIn = 3600, expiresAt = now.epochSecond + 3600, refreshToken = "next",
+                user = AuthUser(id = id, email = "test@example.com", isAnonymous = false),
+            ),
+        )
+        complete.complete(jsonResponse(200, fresh))
+        val failure = stale.await().exceptionOrNull()
+        assertTrue("Expected the stale refresh to give way, got $failure", failure is CancellationException)
+        transport.respond(fresh)
+        val token = session.accessToken()
+        assertEquals("fresh", token)
+    }
+
+    @Test
+    fun signingOutWithAnExpiredTokenRefreshesItForTheServer() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        val id = UUID.randomUUID()
+        authorize(session, transport, id = id, expired = true)
+        val fresh = json(
+            AuthSession.serializer(),
+            AuthSession(
+                accessToken = "fresh", tokenType = "bearer", expiresIn = 3600, expiresAt = now.epochSecond + 3600, refreshToken = "next",
+                user = AuthUser(id = id, email = "test@example.com", isAnonymous = false),
+            ),
+        )
+        val calls = mutableListOf<String>()
+        transport.handler = { request ->
+            val query = Url.parse(request.url)?.query
+            calls += "${request.path}?${query ?: ""} ${request.header("Authorization") ?: "-"}"
+            if (query == "grant_type=refresh_token") jsonResponse(200, fresh) else jsonResponse(204)
+        }
+        session.signOut()
+        assertNull(session.user)
+        assertEquals(listOf("/auth/v1/token?grant_type=refresh_token -", "/auth/v1/logout?scope=local Bearer fresh"), calls)
+    }
+
+    @Test
+    fun aSessionWhoseExpiryAnIntCannotHoldIsKept() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
+        transport.respond(
+            json(
+                AuthSession.serializer(),
+                AuthSession(accessToken = "access", tokenType = "bearer", expiresIn = Long.MAX_VALUE, expiresAt = null, refreshToken = "refresh", user = user),
+            ),
+        )
+        session.verifyCode(email = "test@example.com", code = "123456")
+        assertEquals(user.id, session.user?.id)
+        val token = session.accessToken()
+        assertEquals("access", token)
+    }
 }

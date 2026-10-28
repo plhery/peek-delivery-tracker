@@ -4,7 +4,7 @@ description: Qui livre ta commande Zalando en France, en Belgique et en Suisse, 
 slug: suivi-commande-zalando
 picture: Un colis avec une étiquette en forme de cintre, une camionnette de livraison et Pip prêt à essayer ce qu'il contient.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Dès qu'un colis quitte l'entrepôt, Zalando t'envoie un e-mail de confirmation d'expédition avec le numéro de suivi et le lien vers la page du transporteur. Tu retrouves la même chose dans ton compte, rubrique « Mes commandes ». Une commande peut arriver en plusieurs colis, chacun avec son numéro, surtout quand un partenaire Zalando en expédie une partie lui-même.
@@ -109,7 +109,7 @@ Le conseil de Zalando tient en deux phrases : vérifie si un voisin a pris le co
 - Vérifie le suivi | Ouvre le lien de l'e-mail d'expédition et lis le dernier statut. Le colis attend peut-être en Point Relais, en Locker ou au bureau de poste.
 - Cherche et demande autour de toi | Demande d'abord aux voisins : Zalando pense que le colis a pu être déposé chez l'un d'eux.
 - Contacte Zalando | Rien une semaine après l'expédition, ou un suivi figé depuis 5 à 6 jours ouvrables : écris au service clientèle.
-- Zalando enquête | Zalando ou le partenaire a confié le colis au transporteur, c'est donc à l'expéditeur de réclamer. Chez bpost, « si vous êtes le destinataire du colis, vous ne pouvez pas introduire vous-même une plainte ». Chez Colissimo, seul l'expéditeur est indemnisé.
+- Zalando enquête | Zalando ou le partenaire a confié le colis au transporteur, c'est donc à l'expéditeur de réclamer. Chez bpost, « si vous êtes le destinataire du colis, vous ne pouvez pas introduire vous-même une plainte ».
 - Remboursement ou nouvel article | Un colis qui n'a pas pu être livré est considéré comme retourné : Zalando te rembourse, ce qui peut prendre jusqu'à 14 jours après son retour, et ne le réexpédie pas. Repasse commande si tu veux toujours les articles.
 :::
 
@@ -158,6 +158,5 @@ Peek affiche ce que publie le transporteur. Un remboursement, la vérification d
 - [Zalando Suisse : Puis-je faire livrer mon colis à un point PickPost ?](https://fr.zalando.ch/faq/Delivery/can-i-have-my-parcel-delivered-to-a-pick-up-point.html) – PickPost, post.ch
 - [Zalando Suisse : Dans quels pays Zalando livre-t-il ?](https://fr.zalando.ch/faq/Delivery/which-countries-does-zalando-deliver-to.html) – livraison en Suisse
 - [bpost : Comment introduire une plainte ?](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – le destinataire ne peut pas porter plainte lui-même
-- [La Poste : Garanties et indemnisations Colissimo](https://aide.laposte.fr/contenu/quelles-sont-les-garanties-et-indemnisations-pour-un-envoi-avec-colissimo) – seul l'expéditeur est indemnisé
 - [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes de numéros, code postal Mondial Relay, ce que Peek vérifie
 :::

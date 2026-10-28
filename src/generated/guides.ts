@@ -693,7 +693,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "christmas-posting-dates",
       "slug": "date-limite-envoi-colis-noel",
-      "title": "Date limite d'envoi des colis de Noël\u00a0: La Poste, Colissimo"
+      "title": "Colis de Noël\u00a0: date limite d'envoi par transporteur"
     },
     {
       "id": "uncollected-parcel",

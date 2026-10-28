@@ -1,13 +1,13 @@
 ---
 title: Colis non retiré : combien de temps est-il gardé, et après ?
-description: En France, ton colis reste 15 jours à la poste, 9 chez Relais Colis, 7 en relais Chronopost, 5 chez Mondial Relay : peux-tu prolonger, es-tu remboursé ?
+description: Combien de jours ton colis reste en point relais, au bureau de poste ou en consigne, en France, en Belgique et en Suisse : peux-tu prolonger, es-tu remboursé ?
 slug: colis-non-retire
 picture: Une consigne à colis avec une porte ouverte, Pip qui attend dans le casier, et un calendrier aux deux derniers jours entourés.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-Un colis non retiré au bureau de poste, en point relais ou en consigne repart chez l'expéditeur une fois son dernier jour passé. Les bureaux de poste et les points de retrait le gardent le plus longtemps (15 jours calendaires au bureau de poste en France, 14 dans un Point d'enlèvement bpost), les consignes souvent 5 jours seulement, et c'est la date de ton avis de passage, de ton SMS ou de ton e-mail qui compte. Si tu l'as raté, demande à la boutique de te rembourser ou de te le renvoyer.
+Un colis non retiré au bureau de poste, en point relais ou en consigne repart chez l'expéditeur une fois son dernier jour passé. Les bureaux de poste et les points de retrait le gardent le plus longtemps (14 jours calendaires dans un Point d'enlèvement bpost, par exemple), les consignes souvent 5 jours seulement, et c'est la date de ton avis de passage, de ton SMS ou de ton e-mail qui compte. Si tu l'as raté, demande à la boutique de te rembourser ou de te le renvoyer.
 
 Pas reçu de code, ou la consigne était pleine ? C'est dans [consigne à colis](guide:parcel-lockers).
 
@@ -22,8 +22,8 @@ Il repart chez l'expéditeur, en général par le même réseau, pas chez toi.
 - shop | Expéditeur | Il décide de te rembourser ou de le renvoyer.
 :::
 
-- **[La Poste](carrier:la-poste) (Colissimo)** le renvoie à l'expéditeur après 15 jours au bureau de poste. **[Chronopost](carrier:chronopost)** le retourne « à l'expéditeur (site marchand) ».
-- **[Mondial Relay](carrier:mondial-relay)** le renvoie automatiquement, à ses frais, au Locker ou au Point Relais où il a été déposé. **[Relais Colis](carrier:relais-colis)** le renvoie aussi au relais de dépôt.
+- Chez **[La Poste](carrier:la-poste) (Colissimo)**, le suivi peut annoncer le retour ainsi : « Votre colis vous a attendu dans votre point de retrait jusqu'à la date limite. Nous sommes contraints de le renvoyer à l'expéditeur. »
+- **[Mondial Relay](carrier:mondial-relay)**, en Belgique, le renvoie automatiquement, à ses frais, au Point Relais où il a été déposé. **[Relais Colis](carrier:relais-colis)** le renvoie aussi au relais de dépôt.
 - **[bpost](carrier:bpost)** le renvoie à l'expéditeur, tout comme **[DPD](carrier:dpd-fr)** en France et en Belgique.
 - **Sur Vinted**, un colis « non récupéré au point relais à temps » repart chez le vendeur, et Vinted s'occupe du remboursement (voir plus bas).
 
@@ -33,17 +33,17 @@ Le renvoyer ou te rembourser, c'est ensuite l'affaire de la boutique, pas du tra
 
 Les consignes te laissent peu de temps, les bureaux de poste bien plus.
 
-| Pays | Bureau de poste ou agence, après un avis de passage | Point relais ou commerçant | Consigne |
+| Pays | Bureau de poste, après un avis de passage | Point relais ou commerçant | Consigne |
 | --- | --- | --- | --- |
-| France | La Poste : 15 jours calendaires dès le lendemain de l'avis ; Chronopost : 14 jours en bureau de poste ou en agence | Point de retrait La Poste : 14 jours ; relais Pickup Chronopost : 7 jours calendaires ; Relais Colis : 9 jours calendaires ; Relais Pickup DPD : 9 jours calendaires ; Mondial Relay : 5 jours calendaires | Pick Up Station La Poste : 5 jours ; consigne Chronopost : 5 jours ; Locker Mondial Relay : 5 jours calendaires ; Amazon Locker : 3 jours calendaires |
-| Belgique | – | Point d'enlèvement bpost : 14 jours calendaires ; DPD Pickup : 5 jours calendaires ; Mondial Relay : 5 jours | Distributeur de colis bpost : 5 jours calendaires ; Locker Mondial Relay : 5 jours |
+| France | La Poste : délai parfois indiqué dans le suivi (voir sous le tableau) | Relais Colis : 9 jours calendaires ; Relais Pickup DPD : 9 jours calendaires | Amazon Locker : 3 jours calendaires |
+| Belgique | – | Point d'enlèvement bpost : 14 jours calendaires ; DPD Pickup : 5 jours calendaires ; Mondial Relay : 5 jours calendaires | Distributeur de colis bpost : 5 jours calendaires ; Locker Mondial Relay : 5 jours calendaires |
 | Suisse | La Poste suisse : 7 jours en général, 15 pour les colis venus de l'étranger, prolongeable | – | Automate My Post 24 : 10 jours |
+
+Chez La Poste, le message du suivi peut donner le délai quand le colis arrive au point de retrait, par exemple « … pendant un délai de 15 jours calendaires » ou « Le délai de retrait est de 5 jours ».
 
 Chez [Relais Colis](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis), les 9 jours calendaires correspondent à 7 jours ouvrés. Chez DPD France, les 9 jours comptent dès le jour où le colis arrive au relais.
 
-Un même transporteur peut avoir plusieurs délais selon l'endroit. À La Poste, c'est 15 jours au bureau de poste après un avis de passage, 14 dans un point de retrait choisi à la commande et 5 en consigne Pick Up Station. Chez Chronopost, 14 jours en bureau de poste ou en agence, 7 en relais Pickup (retour le 8e jour) et 5 en consigne.
-
-Pour un colis Mondial Relay envoyé à l'étranger, le délai change avec le pays : 8 jours en Espagne et au Portugal, 7 en Italie, et 48 heures dans un Locker en Pologne (72 heures dans un Locker en intérieur).
+Un même transporteur peut avoir plusieurs délais selon l'endroit : chez bpost, 14 jours au Point d'enlèvement, mais 5 au distributeur de colis.
 
 ### Pourquoi ta date peut différer du tableau
 
@@ -51,13 +51,13 @@ Les jours calendaires comptent les week-ends et les jours fériés ; les jours o
 
 ## Pourquoi mon colis est-il en instance ou en attente de retrait ?
 
-En général parce que la livraison n'a pas pu se faire : il fallait une signature, le colis ne rentrait pas dans la boîte aux lettres ou il y avait des droits et taxes de douane à payer. C'est dans ces cas que La Poste laisse un avis de passage. Ou alors, tu as choisi un point relais ou une consigne à la commande.
+En général parce que la livraison n'a pas pu se faire, ou parce que tu as choisi un point relais ou une consigne à la commande. Après un passage manqué, le suivi de La Poste peut l'annoncer ainsi : « Nous sommes passés mais nous n'avons pu vous remettre votre colis. Il va être acheminé vers votre point de retrait. »
 
-Dans le suivi, Mondial Relay affiche alors `Disponible dans votre Point Relais` et [La Poste suisse](carrier:swiss-post) `Annoncé pour retrait (invitation à retirer un envoi)`. [Les étapes du suivi](guide:tracking-statuses) expliquent chacun de ces statuts. L'avis de passage et la pièce d'identité à présenter sont expliqués dans [que faire après un avis de passage](guide:missed-delivery). S'il y a des frais à payer, [le guide sur les frais de douane](guide:customs) explique qui les réclame et pourquoi.
+Une fois qu'il est arrivé, La Poste peut écrire que le colis `vous attend dans votre point de retrait`, Mondial Relay affiche `Disponible dans votre Point Relais` et [La Poste suisse](carrier:swiss-post) `Annoncé pour retrait (invitation à retirer un envoi)`. [Les étapes du suivi](guide:tracking-statuses) expliquent chacun de ces statuts. L'avis de passage et la pièce d'identité à présenter sont expliqués dans [que faire après un avis de passage](guide:missed-delivery). S'il y a des frais à payer avant de le retirer, [le guide sur les frais de douane](guide:customs) explique qui les réclame et pourquoi.
 
 ## Que faire si tu ne peux pas retirer ton colis à temps ?
 
-Obtenir plus de temps est rare. Mondial Relay l'écrit noir sur blanc : « Il n'est pas possible de prolonger le délai de garde ». La Poste, bpost et DPD ne parlent d'aucune prolongation.
+Obtenir plus de temps est rare. Mondial Relay l'écrit noir sur blanc sur son site belge : « Il n'est pas possible de prolonger le délai de garde de votre colis ». bpost et DPD ne parlent d'aucune prolongation.
 
 La Poste suisse est l'exception : tu peux [prolonger le délai gratuitement](https://www.post.ch/fr/reception/invitation-a-retirer) en ligne, sans compte. Sa page ne dit pas de combien de jours. Ça ne marche pas pour les actes judiciaires.
 
@@ -65,12 +65,12 @@ Ailleurs, si tu ne peux pas y aller à temps :
 
 :::steps
 - Trouve le dernier jour | Il est sur l'avis de passage, le SMS ou l'e-mail.
-- Choisis une autre livraison | La Poste te laisse choisir une nouvelle date ou un autre point de retrait en ligne, le jour même de l'avis.
-- Envoie quelqu'un | Donne ton code de retrait, ou une procuration et ta pièce d'identité en plus de la sienne.
+- Fais-le suivre | Si le transporteur le propose, vers un autre point de retrait.
+- Envoie quelqu'un | Donne ton code de retrait, ou une procuration.
 - Préviens la boutique | Avant le délai si tu n'en veux plus, après si tu l'as raté.
 :::
 
-Chez La Poste, ce choix se fait avec l'outil de modification de livraison, jusqu'à minuit le jour où tu reçois l'avis, le SMS ou l'e-mail (jusqu'au dimanche minuit si la notification arrive un samedi) : ne traîne pas. Chez Chronopost, une procuration permet à quelqu'un de retirer le colis avec sa pièce d'identité et la tienne. La Poste suisse peut aussi faire suivre un envoi vers une autre filiale, un point PickPost ou un automate My Post 24, si tu es inscrit à ce service.
+La Poste suisse peut aussi faire suivre un envoi vers une autre filiale, ou vers un point PickPost ou un automate My Post 24 si tu es inscrit à ce service.
 
 Avec 5 jours seulement en consigne, une notification lue trop tard peut suffire à te le faire rater. [Peek](/) peut t'envoyer une notification quand le suivi indique que ton colis attend d'être retiré, avec le réglage « Importantes uniquement ». Il ne peut pas prolonger le délai : seuls le transporteur ou la boutique le peuvent.
 
@@ -94,7 +94,7 @@ Avec une autre boutique, ça dépend du pays.
 
 ### Le dimanche compte-t-il dans le délai ?
 
-Souvent, oui. Mondial Relay compte en jours calendaires, « dimanches et jours fériés inclus » : un colis arrivé un mercredi peut être retiré jusqu'au lundi suivant inclus. La Poste, bpost, DPD et Chronopost en relais comptent aussi en jours calendaires.
+Souvent, oui. En Belgique, Mondial Relay compte en jours calendaires, « dimanches et jours fériés inclus » : un colis arrivé un mercredi peut être retiré jusqu'au lundi suivant inclus. bpost, DPD et Relais Colis comptent aussi en jours calendaires.
 
 ### Quelqu'un d'autre peut-il retirer mon colis ?
 
@@ -109,11 +109,10 @@ Ne pas le retirer à temps est l'une des raisons ; une adresse erronée ou un co
 Le suivi indique souvent « livré » dès que le colis est dans la consigne. Lis [colis livré mais non reçu](guide:delivered-not-received).
 
 :::sources
-- [La Poste : Comment et sous quel délai puis-je récupérer mes lettres recommandées et Colissimo en point de retrait postal ?](https://aide.laposte.fr/contenu/comment-et-sous-quel-delai-puis-je-recuperer-mes-lettres-recommandees-et-colissimo-en-point-de-retrait-postal) – 15 jours calendaires au bureau de poste, 14 en point de retrait, 5 en Pick Up Station, procuration
-- [La Poste : Comment demander une modification de livraison ?](https://aide.laposte.fr/contenu/comment-demander-une-modification-de-livraison) – signature, taille, droits de douane ; nouvelle date ou autre point jusqu'à minuit le jour de l'avis
-- [Chronopost : Combien de temps mon colis peut-il rester au point de proximité ?](https://www.chronopost.fr/fr/faq/destinataire/combien-de-temps-mon-colis-peut-il-rester-au-point-de-proximite) – 14, 7 et 5 jours, procuration, retour au site marchand
-- [Mondial Relay : Combien de jours ai-je pour retirer mon colis en Locker ou Point Relais ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – 5 jours calendaires, dimanches et jours fériés inclus, délais à l'étranger, pas de prolongation
-- [Mondial Relay : Le destinataire n'est pas venu chercher son colis, que se passe-t-il ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – retour au point de dépôt, aux frais de Mondial Relay
+- [Universal Parcel Scraper : libellés La Poste](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/la-poste/statuses.json) – « vous attend dans votre point de retrait », passage manqué
+- [Universal Parcel Scraper : messages La Poste lus dans le suivi](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/la-poste/adapter.test.ts) – « Nous sommes passés mais nous n'avons pu vous remettre votre colis… », délais de 15 jours calendaires et de 5 jours, renvoi à l'expéditeur après la date limite
+- [Mondial Relay Belgique : Quel est le délai pour retirer mon colis en Locker ou en Point Relais ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires en Belgique, dimanches et jours fériés inclus, retour automatique, pas de prolongation
+- [Mondial Relay Belgique : Le destinataire n'est pas venu chercher son colis, que se passe-t-il ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – retour au Point Relais de dépôt, aux frais de Mondial Relay
 - [Relais Colis : Combien de jours mon colis est-il gardé en Relais Colis ?](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 9 jours calendaires, soit 7 jours ouvrés, retour au relais de dépôt
 - [DPD France : Pendant combien de temps mon colis est-il gardé en relais Pickup ?](https://www.dpd.com/fr/fr/faq/pendant-combien-de-temps-mon-colis-est-il-garde-en-relais-pickup/) – 9 jours calendaires dès le dépôt au relais, puis retour
 - [bpost : Combien de temps mon colis reste-t-il disponible au Point d'enlèvement ?](https://www.bpost.be/fr/faq/combien-de-temps-mon-colis-reste-t-il-disponible-au-point-denlevement) – 14 jours calendrier, 5 en distributeur de colis, puis retour

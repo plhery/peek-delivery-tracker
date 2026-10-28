@@ -4,7 +4,7 @@ description: Le suivi dit « livré » mais rien n'est arrivé ? Où chercher, c
 slug: colis-livre-mais-non-recu
 picture: Une porte fermée, une notification avec une coche verte, la silhouette d'un colis en pointillés sur le paillasson et Pip, inquiet.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Si le suivi indique « livré » mais que tu n'as rien reçu, ne considère pas encore le colis comme perdu : « livré » est un scan sur le terminal du livreur, pas la preuve que le colis est entre tes mains. Cherche une photo ou un nom dans le suivi, fais le tour des endroits habituels et laisse passer un jour. S'il manque toujours, adresse-toi au vendeur, pas au transporteur : en France et en Belgique, un colis acheté à un professionnel reste à ses risques tant que tu ne l'as pas en main.
@@ -20,7 +20,7 @@ Où chaque transporteur peut le laisser :
 
 | Transporteur | Compte aussi comme livré |
 | --- | --- |
-| [Colissimo](carrier:la-poste) (FR) | Dans ta boîte aux lettres, ou remis à « toute personne présente » à ton adresse, gardien ou concierge compris. Au-delà de 5 kg, contre signature ou contre un code reçu par SMS ou e-mail |
+| [Colissimo](carrier:la-poste) (FR) | Dans ta boîte aux lettres |
 | [Colis Privé](carrier:colis-prive) (FR) | Dans ta boîte aux lettres, ou remis à un gardien, un voisin ou « un tiers de confiance » |
 | [bpost](carrier:bpost) (BE) | Dans ta boîte aux lettres, sans sonner, pour un petit colis. Ou selon tes préférences : Point d'enlèvement, lieu sûr, voisin |
 | La Poste suisse | Remis à toute personne présente à ton domicile, ou à un voisin si personne n'est là. Trop grand pour la boîte, déposé dans « un lieu sûr et protégé des intempéries », sauf si tu as choisi « Pas de dépôt » |
@@ -73,8 +73,8 @@ En revanche, le risque est pour toi quand :
 En France, le vendeur. S'il dit avoir livré, « c'est à lui d'en apporter la preuve : signature, remise contre code, photo », rappelle l'INC. Ce que les transporteurs peuvent montrer :
 
 - **Une photo.** bpost montre la photo du lieu sûr dans l'app My bpost ou dans Track & Trace. La Poste suisse photographie les colis déposés (« preuve de dépôt » dans « Mes envois »), pour l'instant dans certaines régions seulement.
-- **Une signature ou un code.** Au-delà de 5 kg, Colissimo livre contre signature ou contre un code confidentiel, dont la concordance « vaut signature ».
-- **Un simple scan.** Jusqu'à 5 kg, Colissimo ne demande aucune signature : l'enregistrement dans son système fait preuve de la distribution. Les conditions de La Poste suisse disent la même chose de ses scans.
+- **Une signature.** Pour un colis avec la prestation Signature, Assurance ou Remise en main propre, La Poste suisse fait signer la personne qui le reçoit.
+- **Un simple scan.** Dans les conditions de La Poste suisse, la clientèle reconnaît les événements de distribution enregistrés électroniquement comme « une preuve de la distribution ».
 - **Rarement une position GPS.** Parmi les transporteurs dont nous avons lu les pages, seul Planzer joint ses données GPS à la photo qui sert de preuve.
 
 Si tu contestes, l'expéditeur d'un envoi bpost avec garantie peut te demander de confirmer par e-mail ou par un document signé que tu n'as rien reçu. La Poste suisse lance une recherche si le destinataire confirme, oralement ou par écrit, ne pas avoir reçu l'envoi.
@@ -101,15 +101,15 @@ Parfois, mais [l'indemnisation va en général à l'expéditeur](guide:lost-parc
 
 | Transporteur | Ce que tu peux faire | Délai |
 | --- | --- | --- |
-| Colissimo, La Poste (FR) | Tout le monde peut réclamer, au 3631 ou sur laposte.fr. Seul l'expéditeur est indemnisé : jusqu'à 23 € par kilo en France métropolitaine | 1 an après le dépôt (6 mois pour l'international) ; réponse sous 21 jours en France métropolitaine |
+| Colissimo, La Poste (FR) | Expéditeur comme destinataire peuvent réclamer, gratuitement, au 3631, sur laposte.fr, par courrier ou dans un point de contact postal ; leurs droits ne sont pas tout à fait les mêmes | Action en justice : 1 an à compter du lendemain du dépôt |
 | Colis Privé (FR) | « Déposer une réclamation » sur son site, avec ton numéro de colis et ton code postal | Réponse sous 48 heures ouvrées |
-| [Mondial Relay](carrier:mondial-relay) (FR) | Fais chercher le colis au point relais à ton nom, puis remplis le formulaire de contact. Colis perdu : contacte l'expéditeur | Non indiqué |
+| [Mondial Relay](carrier:mondial-relay) (BE) | Vérifie le suivi, puis contacte l'expéditeur si besoin. Colis perdu : c'est avec l'expéditeur que Mondial Relay règle l'indemnisation | Non indiqué |
 | bpost (BE) | Rien en ton nom : seul l'expéditeur peut demander une enquête | Non indiqué |
 | La Poste suisse | Envoi national : lance toi-même une recherche, comme l'expéditeur. Responsabilité jusqu'à CHF 500.– pour un colis sans prestation complémentaire | 1 an après le dépôt |
 
 ### Et si personne ne te répond ?
 
-- **France :** chez La Poste, si la réponse ne te convient pas, forme un recours au 3631 ou par e-mail, puis, si besoin ou sans réponse sous deux mois, saisis le Médiateur du groupe La Poste, gratuit. Contre le vendeur, l'INC cite SignalConso, puis deux recours gratuits : le médiateur de la consommation du vendeur et le conciliateur de justice.
+- **France :** chez La Poste, si la réponse ne te convient pas, forme un recours par les mêmes canaux. Si la réponse au recours ne te convient pas non plus, ou sans réponse deux mois après le recours, saisis le Médiateur du groupe La Poste, gratuit. Contre le vendeur, l'INC cite SignalConso, puis deux recours gratuits : le médiateur de la consommation du vendeur et le conciliateur de justice.
 - **Belgique :** l'ombudsman poste, gratuit, intervient après un premier contact infructueux avec le transporteur. Pour un litige avec un vendeur en ligne belge, c'est le Service de Médiation pour le Consommateur.
 - **Suisse :** Ombud-PostCom intervient si tu as d'abord cherché une solution avec le prestataire postal, pour CHF 20.–.
 
@@ -139,12 +139,13 @@ Tu peux, mais aucune des règles ci-dessus n'en fait une condition pour être re
 - [Justel : Code de droit économique](https://www.ejustice.just.fgov.be/eli/loi/2013/02/28/2013A11134/justel) – art. VI.44
 - [Fedlex : Code des obligations](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr#art_185) – art. 185
 - [Konsumentenschutz : Paket gestohlen oder beschädigt (en allemand)](https://www.konsumentenschutz.ch/online-ratgeber/paket-gestohlen-oder-beschaedigt-wer-haftet/) – responsabilités, plainte, assurance ménage
-- [La Poste : Conditions générales de vente](https://www.laposte.fr/ecom/occ/smartedit/medias/sys_master/pdf/h46/h8a/32305317117982/CGV-PART-22-09-26/CGV-PART-22-09-26.pdf) – distribution Colissimo, 5 kg, code
-- [La Poste : CGV Courrier-Colis](https://www.laposte.fr/ecom/occ/smartedit/medias/sys_master/pdf/hfb/ha1/31823066595358/CGV_COURRIER_COLIS_07-07-2026/CGV-COURRIER-COLIS-07-07-2026.pdf) – réclamation, délais, recours, Médiateur
-- [La Poste : Garanties et indemnisations Colissimo](https://aide.laposte.fr/contenu/quelles-sont-les-garanties-et-indemnisations-pour-un-envoi-avec-colissimo) – 23 € par kilo, expéditeur seul
+- [Universal Parcel Scraper : libellés La Poste](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/la-poste/statuses.json) – livraison en boîte aux lettres
+- [Arcep : La résolution des litiges postaux](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – expéditeur ou destinataire, réclamation gratuite, 3631, point de contact postal, recours, Médiateur, un an
+- [DGE : Procédure de réclamation auprès de La Poste](https://www.entreprises.gouv.fr/la-direction-generale-des-entreprises/nos-missions/postes-comm-electroniques/la-poste/reclamation) – expéditeurs comme destinataires, 3631, recours dans les mêmes conditions
+- [Médiateur du groupe La Poste : Foire aux questions](https://mediateur.groupelaposte.com/pages/foire-aux-questions) – deux mois après la réclamation de second niveau, service gratuit
 - [Colis Privé : Colis déclaré livré mais non reçu](https://colisprive.fr/aide/mon-colis-est-declare-livre-alors-que-je-ne-lai-pas-recu/) – lieux de remise, réclamation
-- [Mondial Relay : Mon colis n'est pas au Point Relais](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-colis-n-est-pas-au-point-relais-que-dois-je-faire/) – recherche à ton nom
-- [Mondial Relay : Colis perdu](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-faire-si-mon-colis-est-perdu/) – contacter l'expéditeur
+- [Mondial Relay Belgique : Mon colis n'est pas au Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/mon-colis-n-est-pas-au-point-relais-que-dois-je-faire/) – vérifier le suivi, contacter l'expéditeur
+- [Mondial Relay Belgique : Colis perdu](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/que-faire-si-mon-colis-est-perdu/) – indemnisation avec l'expéditeur
 - [bpost : Colis livré mais rien reçu](https://www.bpost.be/fr/faq/je-recois-un-message-indiquant-que-mon-colis-ete-livre-mais-je-nai-rien-recu-que-faire) – boîte aux lettres, préférences, photo
 - [bpost : Pourquoi contacter l'expéditeur ?](https://www.bpost.be/fr/faq/pourquoi-dois-je-contacter-lexpediteur-si-mon-colis-na-pas-ete-livre) – expéditeur seul, confirmation
 - [ombudsman poste : Colis perdu ou non reçu](https://www.ombudsmanposte.be/fr/infos/actualites/colis-perdu-ou-non-recu-en-belgique-voici-comment-reagir/) – vendeur responsable, autorisation de dépôt

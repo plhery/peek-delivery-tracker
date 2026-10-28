@@ -23,7 +23,7 @@ It goes back to the sender.
 :::
 
 - **Canada Post** charges the sender for the return trip.
-- **[Mondial Relay](carrier:mondial-relay)** sends it back, at its own cost, to the Point Relais where the sender dropped it off, its Belgian site says.
+- **[Mondial Relay](carrier:mondial-relay)** sends a private sender's parcel back, at its own cost, to the Locker or Point Relais where it was dropped off, and a shop's parcel back to the seller, its Belgian site says.
 - **[InPost](carrier:inpost)** UK says redelivery or a refund is up to the retailer.
 
 Once the parcel is on its way back, [returned to sender](guide:returned-to-sender) covers the trip and what to ask the shop.
@@ -39,7 +39,7 @@ Once the parcel is on its way back, [returned to sender](guide:returned-to-sende
 
 A locker parcel can get a second clock. At [Australia Post](https://auspost.com.au/personal/receiving/parcel-deliveries/parcel-lockers), after 2 business days in a Parcel Locker it moves to the nearest Post Office, with a message and 10 more business days.
 
-In Europe, a [DHL](carrier:dhl) Packstation in Germany holds a parcel 7 calendar days (9 after a missed delivery), and Mondial Relay 5 days in France or Belgium.
+In Europe, a [DHL](carrier:dhl) Packstation in Germany holds a parcel 7 calendar days (9 after a missed delivery), and Mondial Relay 5 calendar days in Belgium.
 
 ### Why your date may differ from the table
 
@@ -116,8 +116,8 @@ A locker or mailroom counts as delivered. See [delivered but not received](guide
 - [About Amazon UK: What is an Amazon Counter and how does it work?](https://www.aboutamazon.co.uk/news/retail/how-to-use-amazon-counter) – automatic refund and return from a Counter
 - [About Amazon Australia: How to use Amazon Locker](https://www.aboutamazon.com.au/news/retail/how-to-use-amazon-locker) – three calendar days, automatic return and refund
 - [DHL: Packstation](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/empfangen.html) – 7 calendar days
-- [Mondial Relay Belgium: Collection period (in French)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 days in France and Belgium
-- [Mondial Relay Belgium: The recipient didn't collect the parcel (in French)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – back to the drop-off point, at Mondial Relay's cost
+- [Mondial Relay Belgium: Collection period (in French)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 calendar days in Belgium
+- [Mondial Relay Belgium: How long the Point Relais or Locker keeps a parcel (in French)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/pendant-combien-de-temps-mon-colis-sera-garde-par-le-point-relais/) – a private sender's parcel back to its drop-off Locker or Point Relais at Mondial Relay's cost, a shop's back to the seller
 - [Swiss Post: Collection note](https://www.post.ch/en/receiving-mail/collection-note) – free extension
 - [Consumer Contracts Regulations 2013, reg. 30](https://www.legislation.gov.uk/uksi/2013/3134/regulation/30) – when the 14 days start
 - [legislation.gov.uk: reg. 32](https://www.legislation.gov.uk/uksi/2013/3134/regulation/32) – a clear statement is needed

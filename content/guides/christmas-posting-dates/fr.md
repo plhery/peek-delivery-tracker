@@ -86,7 +86,7 @@ Ces dates valent pour un colis déjà remis au transporteur : la date limite de 
 
 Un colis venu de hors de l'Union européenne (de l'étranger, pour la Suisse) passe aussi par la douane, qui peut le retenir. Depuis la Chine, le trajet peut prendre des semaines : commande tôt et fie-toi au délai annoncé par la boutique. Les délais que [Cainiao](carrier:cainiao) et [YunExpress](carrier:yunexpress) annoncent aux vendeurs figurent sur leurs pages. Pour la suite, lis [suivre un colis venu de Chine](guide:tracking-from-china) et [colis bloqué en douane](guide:customs).
 
-Tu pars pour les fêtes ? Mondial Relay garde un colis 5 jours en Point Relais ou en Locker, en France comme en Belgique, sans prolongation possible, d'après son site belge. Pour bpost ou La Poste suisse, vois [leurs délais de retrait](guide:tracking-statuses).
+Tu pars pour les fêtes ? En Belgique, Mondial Relay garde un colis 5 jours calendaires en Point Relais ou en Locker, jours fériés compris, sans prolongation possible. Pour bpost ou La Poste suisse, vois [leurs délais de retrait](guide:tracking-statuses).
 
 ## Ton colis de Noël est en retard : que faire ?
 
@@ -109,7 +109,7 @@ Pas encore envoyé et la date est passée ? Un service plus rapide ferme souvent
 Tu attends un cadeau ? Colle son numéro dans [Peek](/) et choisis les notifications « Livraison seulement » : il vérifie le suivi jusqu'à toutes les 2 minutes une fois le colis en cours de livraison, sans pouvoir le faire arriver plus tôt. Indiqué livré, mais rien à ta porte ? Lis [colis livré mais non reçu](guide:delivered-not-received).
 
 :::sources
-- [Mondial Relay Belgique : Délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours en France et en Belgique, sans prolongation
+- [Mondial Relay Belgique : Délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires en Belgique, jours fériés compris, sans prolongation
 - [Colis Privé : Actualités](https://colisprive.fr/nos-actualites/) – pas de date
 - [bpost : Changes to bpost services (en anglais)](https://www.bpost.be/en/changes-bpost-services) – 25 décembre
 - [bpost : End-of-year tariffs (en anglais)](https://www.bpost.be/en/faq/why-does-bpost-apply-revised-tariffs-parcels-sent-end-year) – 1 € par colis

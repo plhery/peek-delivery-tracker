@@ -87,7 +87,6 @@ Questo stato invece ti chiede di muoverti: [non c'era nessuno a ricevere il pacc
 | BRT | Avviso via e-mail, SMS o carta; secondo tentativo, poi la filiale ti telefona | In giacenza in filiale: torna indietro se il mittente non dà istruzioni scritte entro 10 giorni |
 | [GLS](carrier:gls-it) | «Avviso di passaggio»; primo e secondo tentativo | In giacenza alla sede GLS: 10 giorni lavorativi (8 per i pacchi dall'estero) secondo la Carta dei Servizi, poi senza istruzioni torna al mittente |
 | UPS | La scansione dice che non c'eri o che l'attività era chiusa, e UPS riprova; dopo l'ultimo tentativo tiene il pacco, lo porta in un Access Point o lo rimanda al mittente | – |
-| Mondial Relay (Italia) | Il pacco è già indirizzato a un Point Relais o a un locker | 7 giorni, senza proroga; poi torna al mittente |
 | La Posta (Svizzera) | Invito di ritiro | 7 giorni, 15 per i pacchi dall'estero; proroga gratuita, anche senza account |
 
 Con BRT, il BRTcode lo trovi negli SMS, nelle e-mail o sul tagliando del corriere: con quello cambi data e fascia oraria, scegli un BRT-fermopoint o sblocchi la giacenza. Con la Posta, dopo il login a «I miei invii», puoi chiedere un secondo recapito (gratis se il pacco viene depositato o dato a un vicino, CHF 3.30 al piano, CHF 7.00 il sabato) o un inoltro (CHF 8.00 dal lunedì al venerdì). Hai perso l'avviso di Poste? Chiama il Servizio Clienti e il portalettere te ne porta un duplicato.
@@ -127,7 +126,6 @@ I motivi dei corrieri: non ritirato in tempo, indirizzo sbagliato o incompleto, 
 - **Poste** `Resa al mittente`: dal tracking segui il viaggio di ritorno con «Segui la spedizione di ritorno al mittente». Se poi non si riesce a restituirlo nemmeno al mittente, il pacco viene distrutto o dato in beneficenza.
 - **La Posta** `Rinvio`, con il motivo: `Non ritirato`, `Respinto`, trasloco con l'ordine di rispedizione scaduto (di norma dopo un anno), destinatario irreperibile all'indirizzo indicato.
 - **BRT:** un pacco in giacenza torna indietro dopo 10 giorni dall'avviso di giacenza mandato al mittente, se lui non dà istruzioni scritte.
-- **Mondial Relay:** un pacco non ritirato entro 7 giorni torna in automatico al mittente.
 
 A quel punto decide il venditore: chiedigli di [rispedirtelo o di rimborsarti](guide:returned-to-sender).
 
@@ -144,7 +142,6 @@ A quel punto decide il venditore: chiedigli di [rispedirtelo o di rimborsarti](g
 - [GLS Italia: Carta dei Servizi Postali](https://gls-group.com/IT/media/downloads/CARTA_DEI_SERVIZI_POSTALI_AGGIORNATAallegati_09.06.26_def.pdf) – 10 giorni lavorativi di giacenza, 8 per i pacchi dall'estero
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – scansioni UPS che legge Peek: etichetta, presa in carico, transito, consegna, mancata consegna, Access Point, «Left at», «Exception»
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – scansioni FedEx che legge Peek: dati della spedizione inviati a FedEx
-- [Mondial Relay Belgio: Quel est le délai de garde d'un colis en Locker ou Point Relais ? (in francese)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – Italia 7 giorni, nessuna proroga, ritorno al mittente
 - [La Posta: Eventi «Monitorare gli invii»](https://www.post.ch/it/ricezione/monitorare-gli-invii/eventi-monitorare-gli-invii) – stati, dogana, recapito, errore di avviamento, rinvio
 - [La Posta: FAQ su importazione, dogana e IVA](https://www.post.ch/it/soluzioni-commerciali/esportazione-importazione-e-sdoganamento/importazione/faq-su-importazione-dogana-e-iva) – sdoganamento in tre o quattro giorni lavorativi
 - [La Posta: Invito di ritiro](https://www.post.ch/it/ricezione/invito-di-ritiro) – 7 e 15 giorni, proroga, secondo recapito, inoltro, prezzi

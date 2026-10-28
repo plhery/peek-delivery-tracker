@@ -131,7 +131,7 @@ Na co jeszcze uważać:
 
 - **Inna waluta.** Poczta Polska ostrzega, że nie stosuje wiadomości z żądaniem dopłaty do przesyłki, zwłaszcza w innej walucie niż złoty. Nawet cło 3 euro przelicza na złote.
 - **Skrócony link.** Fałszywe SMS-y zaczynają się od słów „Poczta Polska” i prowadzą przez skrócony link na stronę spoza oficjalnej domeny Poczty.
-- **„Dopłata 3 euro”.** Po 1 lipca 2026 r. Poczta Polska ostrzegała przed SMS-ami o takiej dopłacie i przypominała, że nie wysyła SMS-ów z linkami do płatności za przesyłki.
+- **Dopłata celna.** Przed wejściem w życie cła 3 euro Poczta Polska uprzedzała, że oszuści mogą wykorzystać tę zmianę w SMS-ach o rzekomej dopłacie do paczki, i przypominała, że nie wysyła SMS-ów z linkami do płatności za przesyłki. W październiku 2026 r. opisała taką kampanię: link z SMS-a o dopłacie celnej prowadził na fałszywą stronę, która wyłudzała dane kart płatniczych.
 
 Najbezpieczniej postąpisz jak w kroku 1: samodzielnie otwórz stronę albo aplikację przewoźnika. Poczta Polska podaje dwa oficjalne adresy śledzenia: poczta-polska.pl/sledzenie-przesylek i pocztex.pl/sledzenie-przesylek.
 
@@ -165,7 +165,8 @@ Gdy odmówisz przyjęcia paczki albo zapłaty, Poczta Polska odsyła ją do nada
 - [Poczta Polska: Uwaga! Oszuści podszywają się pod Pocztę Polską](https://www.poczta-polska.pl/news/uwaga-oszusci-podszywaja-sie-pod-poczte-polska-2/) – skrócone linki, 8080
 - [Poczta Polska: Poczta Polska ostrzega przed nowymi próbami oszustw i kampaniami phishingowymi](https://media.poczta-polska.pl/releases/poczta-polska-ostrzega-przed-nowymi-probami-oszustw-i-kampaniami-phishingowymi) – żądania dopłaty w innej walucie
 - [Poczta Polska: CERT Pocztowy](https://www.poczta-polska.pl/kontakt/cert-pocztowy/) – incydent@poczta-polska.pl
-- [money.pl: Dostałeś SMS o dopłacie 3 euro do paczki?](https://direct.money.pl/artykuly/porady/dostales-sms-o-doplacie-3-euro-do-paczki-poczta-polska-ostrzega-przed-oszustwem) – ostrzeżenie Poczty Polskiej z lipca 2026
+- [Poczta Polska: Uwaga na cyberprzestępców! Możliwy wzrost ryzyka wyłudzeń przez SMS](https://media.poczta-polska.pl/releases/uwaga-na-cyberprzestepcow-mozliwy-wzrost-ryzyka-wyludzen-przez-sms) – 29 czerwca 2026: cło 3 euro, SMS-y o rzekomej dopłacie, brak SMS-ów z linkami do płatności
+- [Poczta Polska: Uwaga na nowe kampanie cyberoszustów](https://media.poczta-polska.pl/releases/poczta-polska-ostrzega-uwaga-na-nowe-kampanie-cyberoszustow) – 16 października 2026: SMS o dopłacie celnej, fałszywa strona, dane kart
 - [gov.pl: Coraz więcej prób wyłudzenia przez tzw. fałszywe SMS-y](https://www.gov.pl/web/baza-wiedzy/coraz-wiecej-prob-wyludzenia-przez-tzw-falszywe-sms-y-zachowaj-czujnosc) – 8080 bezpłatnie, opcja „Przekaż”, incydent.cert.pl, cert@cert.pl
 - [System Zastrzegania Kart: zastrzegam.pl](https://zastrzegam.pl/) – 828 828 828, bezpłatnie, całą dobę, banki uczestniczące w systemie
 :::

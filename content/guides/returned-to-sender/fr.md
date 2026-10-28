@@ -79,7 +79,7 @@ Les boutiques en ligne doivent désormais proposer cette fonction de rétractati
 
 L'expéditeur paie le transporteur, selon les règles de chaque service :
 
-- **Mondial Relay**, d'après sa FAQ belge, renvoie un colis non retiré au Point Relais où il a été déposé, et prend en charge le coût de cette réexpédition.
+- **Mondial Relay**, d'après sa FAQ belge, renvoie à ses frais vers le Locker ou le Point Relais de dépôt le colis non retiré qu'un particulier a envoyé ; celui d'une boutique repart chez le vendeur.
 - **La Poste suisse** renvoie un colis non distribuable à l'expéditeur, à ses frais, sans lui rembourser l'affranchissement payé au départ.
 - **Depuis l'étranger**, les règles de l'Union postale universelle font payer à l'expéditeur le trajet du retour et les frais restés dus à l'arrivée.
 
@@ -104,7 +104,7 @@ C'est le piège : à la fin d'un retour, La Poste comme La Poste suisse marquent
 
 ## Retour à l'expéditeur : quel délai ?
 
-**L'attente.** Un colis refusé repart en général tout de suite : les règles de l'Union postale universelle renvoient sans délai les lettres et petits paquets refusés. Un colis non retiré attend d'abord la fin de son délai de garde, de 5 jours chez Mondial Relay, en France comme en Belgique, à 14 jours dans un Point d'enlèvement bpost. [Colis non retiré](guide:uncollected-parcel) donne le délai de chaque transporteur.
+**L'attente.** Un colis refusé repart en général tout de suite : les règles de l'Union postale universelle renvoient sans délai les lettres et petits paquets refusés. Un colis non retiré attend d'abord la fin de son délai de garde, de 5 jours chez Mondial Relay en Belgique à 14 jours dans un Point d'enlèvement bpost. [Colis non retiré](guide:uncollected-parcel) donne le délai de chaque transporteur.
 
 **Le trajet retour.** Aucun transporteur consulté ne publie de délai de retour. Vinted prévient qu'il faut « parfois jusqu'à 25 jours ouvrés pour qu'un colis retourné soit livré au vendeur ».
 
@@ -125,8 +125,8 @@ En Belgique, bpost te demande de signaler un retour fait par erreur avec le form
 La Poste suisse peut ouvrir un colis renvoyé pour trouver son expéditeur. Si elle n'y arrive pas, elle en dispose librement.
 
 :::sources
-- [Mondial Relay Belgique : Le destinataire n'est pas venu chercher son colis](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – retour au Point Relais de dépôt, à ses frais
-- [Mondial Relay Belgique : Délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours en France et en Belgique, puis retour à l'expéditeur
+- [Mondial Relay Belgique : Pendant combien de temps mon colis sera gardé par le Point Relais ou le Locker ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/pendant-combien-de-temps-mon-colis-sera-garde-par-le-point-relais/) – colis d'un particulier : retour au Locker ou au Point Relais de dépôt, à ses frais ; colis d'une boutique : retour au vendeur
+- [Mondial Relay Belgique : Délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours en Belgique, puis retour à l'expéditeur
 - [Mondial Relay Belgique : Modifier le Point Relais de livraison](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/je-souhaite-modifier-le-point-relais-de-livraison-est-ce-possible/) – plus de changement de Point Relais une fois le colis pris en charge
 - [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – « Retour à l'expéditeur », « Colis refusé »
 - [Universal Parcel Scraper : libellés Chronopost](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/chronopost/statuses.json) – « Colis en retour expéditeur »

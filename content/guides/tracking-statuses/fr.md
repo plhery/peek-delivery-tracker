@@ -85,7 +85,7 @@ Là, il faut agir : [personne n'a pu prendre le colis](guide:missed-delivery), o
 | Transporteur | Après une livraison manquée | Délai de retrait |
 | --- | --- | --- |
 | Colis Privé (FR) | Soit un relais proche (adresse et date par e-mail ou SMS), soit une seconde présentation à choisir : chez toi, chez un tiers ou en relais | Pas de délai chiffré dans son aide |
-| Mondial Relay (FR, BE) | Livraison en Point Relais ou en Locker | 5 jours (calendaires en Belgique, dimanches et jours fériés compris), sans prolongation |
+| Mondial Relay (BE) | Livraison en Point Relais ou en Locker | 5 jours calendaires (dimanches et jours fériés compris), sans prolongation |
 | bpost (BE) | Avis papier seulement si bpost ne peut pas te joindre par e-mail ou dans l'app | 14 jours calendaires en Point d'enlèvement, 5 en distributeur de colis |
 | La Poste suisse (CH) | `Annoncé pour retrait (invitation à retirer un envoi)` ; avec un login « Mes envois », deuxième distribution (gratuite devant la porte ou chez un voisin, CHF 3.30 à l'étage, CHF 7.– le samedi) ou réexpédition (CHF 8.– en semaine) | 7 jours en général, 15 pour les envois internationaux ; prolongation gratuite, sans compte |
 
@@ -119,7 +119,7 @@ Regarde de plus près quand le problème touche l'adresse, comme `Tentative de d
 
 Les raisons que donnent les transporteurs : colis non retiré à temps, adresse incorrecte, destinataire introuvable ou déménagé, refus, documents d'importation non conformes. Certains retours ne se reconnaissent pas au premier coup d'œil :
 
-- **Mondial Relay :** un colis non retiré dans le délai repart automatiquement vers l'expéditeur.
+- **Mondial Relay :** en Belgique, un colis non retiré dans le délai repart automatiquement vers l'expéditeur.
 - **Chronopost :** `Colis en retour expéditeur` ouvre le retour ; si le suivi affiche ensuite `Livraison effectuée`, c'est l'expéditeur qui a reçu le colis.
 - **La Poste suisse :** `Renvoi`, avec le motif : `Envoi non retiré`, `Refusé`, `Destinataire introuvable à l'adresse indiquée` ou `Destinataire a déménagé, délai de réexpédition expiré`.
 
@@ -132,7 +132,7 @@ Et ensuite ? Contacte l'expéditeur (le site marchand) pour [un nouvel envoi ou 
 - [Colis Privé : suivre mon colis](https://colisprive.fr/aide/comment-suivre-mon-colis-3/) – colis attendu
 - [Colis Privé : avis de passage](https://colisprive.fr/aide/jai-eu-un-avis-de-passage/) – relais, seconde présentation
 - [Mondial Relay Belgique : délai moyen de livraison](https://www.mondialrelay.be/fr-be/faq/envoyer-un-colis/quel-est-le-delai-moyen-de-livraison/) – 3 jours ouvrés en Belgique, 3 à 6 à l'international
-- [Mondial Relay Belgique : délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours en France et en Belgique, sans prolongation, retour à l'expéditeur
+- [Mondial Relay Belgique : délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires en Belgique, sans prolongation, retour à l'expéditeur
 - [Mondial Relay Belgique : retard de livraison](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/que-faire-en-cas-de-retard-de-livraison/) – contact après le délai moyen
 - [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – libellés relevés dans des suivis
 - [bpost : colis « en préparation »](https://www.bpost.be/fr/faq/mon-colis-reste-en-preparation-quest-ce-que-cela-signifie-et-que-puis-je-faire) – deux sens, 5 jours

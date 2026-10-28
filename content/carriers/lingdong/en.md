@@ -72,7 +72,7 @@ Lingdong lists no email and no office outside China. For anything about your ord
 
 Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country and service name when Lingdong's record gives them. All three wordings show as Lingdong writes them, the Chinese line included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
 
-As Lingdong's record names no delivery carrier or second number, Peek doesn't hand the parcel over to another carrier: its history stops where Lingdong's does. If the seller gives you the local carrier's number, add it as a parcel of its own.
+Unless Lingdong's record names a delivery carrier Peek can hand the parcel over to, the parcel's history in Peek stops where Lingdong's does. If the seller gives you the local carrier's number, add it as a parcel of its own.
 
 Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact Lingdong or the seller for you.
 

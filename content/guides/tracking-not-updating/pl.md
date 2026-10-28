@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-10-27
 ---
 
-Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt ostatnio nie zeskanował Twojej paczki, a nie że stoi w miejscu. Przewoźnicy skanują paczki w sortowniach i na granicach, nie w trasie, więc długi przejazd, lot, odprawa celna albo weekend to czasem kilka dni bez nowego wpisu. Martw się dopiero wtedy, gdy minie termin podany przez samego przewoźnika ([Poczta Polska](carrier:poczta-polska) przyjmuje reklamację zaginionej paczki pocztowej po 14 dniach od nadania, a [DPD](carrier:dpd-pl) uznaje paczkę za utraconą 30 dni po terminie doręczenia). I nawet wtedy najpierw napisz do sprzedawcy: to on jest klientem przewoźnika.
+Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt ostatnio nie zeskanował Twojej paczki, a nie że stoi w miejscu. Przewoźnicy skanują paczki w sortowniach i na granicach, nie w trasie, więc długi przejazd, lot, odprawa celna albo weekend to czasem kilka dni bez nowego wpisu. Martw się dopiero wtedy, gdy minie termin podany przez samego przewoźnika ([Poczta Polska](carrier:poczta-polska) przyjmuje reklamację zaginionej paczki pocztowej po 14 dniach od nadania, nie licząc dni ustawowo wolnych od pracy, a [DPD](carrier:dpd-pl) uznaje paczkę za utraconą 30 dni po terminie doręczenia). I nawet wtedy najpierw napisz do sprzedawcy: to on jest klientem przewoźnika.
 
 ## Dlaczego status przesyłki nie zmienia się od kilku dni?
 

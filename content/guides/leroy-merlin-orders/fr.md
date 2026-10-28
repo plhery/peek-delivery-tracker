@@ -1,54 +1,43 @@
 ---
 title: Suivi de commande Leroy Merlin : livraison et problèmes
-description: Où suivre ta commande Leroy Merlin, qui la livre, combien coûte la livraison et que faire si un colis manque, arrive abîmé ou doit repartir en retour.
+description: Où suivre ta commande Leroy Merlin, ce que la loi impose au vendeur, et que faire si le colis a du retard, manque, arrive abîmé ou doit repartir en retour.
 slug: suivi-commande-leroy-merlin
 picture: Un pot de peinture et un rouleau sur une pile de planches en bois à côté d'une camionnette de livraison, et Pip debout sur les planches.
 published: 2026-10-26
 updated: 2026-10-28
 ---
 
-Tu suis ta commande Leroy Merlin dans ton espace client, rubrique « Commandes et retours », avec « Suivre mon colis ». Les petits colis livrés par Colissimo ou Mondial Relay ont un numéro de suivi envoyé par e-mail, les produits volumineux arrivent avec un transporteur spécialisé qui t'appelle pour fixer un jour, et le retrait en magasin est gratuit. Si un article manque ou arrive abîmé, déclare-le dans les 3 jours ouvrés suivant la livraison.
+Pour suivre ta commande Leroy Merlin, pars de ton espace client sur leroymerlin.fr et des e-mails reçus pour la commande ; les pages du site donnent aussi ses modes de livraison, ses tarifs et ses conditions de retour. La loi rend le vendeur responsable de la livraison qu'il organise jusqu'à ce que tu aies la marchandise en main : il doit livrer à la date annoncée, ou dans les 30 jours s'il n'en a pas donné, et tu peux changer d'avis sur la plupart des articles dans les 14 jours suivant leur réception.
 
 ## Où Leroy Merlin livre-t-il ?
 
-Leroy Merlin livre en France métropolitaine. Sa page des modes de livraison exclut la Corse et les DOM-TOM, alors que ses conditions générales de vente ajoutent La Réunion : vérifie au moment de payer si ton adresse est desservie.
+Pour savoir si ton adresse est desservie, vérifie la zone de livraison dans les conditions générales de vente de Leroy Merlin, sur leroymerlin.fr.
 
-La livraison à l'étranger n'est pas disponible. En Belgique, en Suisse ou au Luxembourg, Leroy Merlin propose de te faire livrer dans un point de retrait en France ou de retirer ta commande dans le magasin Leroy Merlin le plus proche.
+Tu habites en Belgique ou au Luxembourg ? D'après le portail européen Your Europe, un commerçant dont les conditions limitent la livraison à un pays n'est pas obligé de te livrer dans le tien. Les règles de l'UE contre le géoblocage l'empêchent en revanche de te refuser un service comme le « click and collect » au seul motif que tu vis dans un autre pays de l'UE.
 
 ## Qui livre ma commande Leroy Merlin ?
 
-Tout dépend de la taille de ta commande et de qui la vend. Sur chaque produit, tu vois « Vendu par Leroy Merlin » ou « Vendu par » suivi du nom d'un vendeur de la Marketplace :
+Les modes de livraison de Leroy Merlin sont décrits sur sa page de livraison, sur leroymerlin.fr. Quel que soit ton choix, la loi fixe le cadre. Le vendeur, Leroy Merlin ou un vendeur de la Marketplace, doit t'indiquer clairement, avant et au moment de la commande, comment et dans quel délai il livre. Il doit ensuite respecter le mode de livraison prévu au contrat, par exemple la livraison à domicile ou en point relais. S'il n'a donné aucune date, il doit livrer au plus tard 30 jours après ta commande.
 
-| Ce que tu choisis | Qui livre | Quand |
-| --- | --- | --- |
-| Retrait en magasin | Le magasin, parfois dans un locker | À partir de 2 heures après la commande, sur le créneau réservé |
-| Livraison en point retrait | [Mondial Relay](carrier:mondial-relay) ou [Colissimo](carrier:la-poste) | Numéro de suivi par e-mail |
-| Livraison à domicile, petits colis | Par voie postale | 2 à 4 jours pour la majorité des produits |
-| Livraison à domicile, produits volumineux | Un transporteur spécialisé que Leroy Merlin ne nomme pas | Il appelle pour convenir d'un jour, du lundi au vendredi, de 8 h à 18 h |
-| Livraison en 24h | Non précisé | Articles marqués « Livraison dès demain à domicile » |
-| Un article de la Marketplace | Le transporteur du vendeur | Selon les délais du vendeur |
+Quand le transporteur est celui proposé par le vendeur, le vendeur est seul responsable de la livraison. Le risque de perte ou d'avarie ne passe chez toi qu'au moment où toi, ou la personne que tu as désignée, prends physiquement possession du bien. Si tu as choisi toi-même un autre transporteur, le risque passe dès la remise du colis à ce transporteur, et c'est contre lui que tu agis en cas de dommage.
 
-Leroy Merlin choisit le transporteur selon le poids et le volume de toute ta commande. Un transporteur spécialisé décharge en pied de camion : il ne monte rien et ne rentre rien chez toi. À toi de prévoir un accès facile pour un camion de 19 à 38 tonnes.
-
-Les vendeurs de la Marketplace expédient depuis leurs propres entrepôts, à domicile ou selon les cas en point relais, jamais en magasin, et déposent la marchandise à la porte extérieure de la résidence, au pied de la rue ou au point le plus accessible. Une commande mixte arrive en plusieurs livraisons : les articles Leroy Merlin d'un côté, ceux de chaque vendeur de l'autre.
+Leroy Merlin a une Marketplace sur son site français : certains articles viennent de vendeurs partenaires. Sur une place de marché, l'offre doit indiquer qui vend, si le vendeur est un professionnel ou non, le prix total avec la livraison, et les modalités de livraison et de règlement des litiges. Les droits décrits dans ce guide sont ceux d'un achat auprès d'un professionnel.
 
 :::journey
-- warehouse | Entrepôt ou magasin Leroy Merlin | Les vendeurs Marketplace expédient eux-mêmes
-- truck | Colissimo, Mondial Relay ou un transporteur spécialisé | Produits volumineux : le transporteur appelle avant
-- shop | Retrait en magasin | En 2 heures, ou dans un locker avec un code
-- home | Toi | Vérifie la marchandise avant le départ du livreur
+- warehouse | Le vendeur | Leroy Merlin ou un vendeur de la Marketplace
+- truck | Le transporteur choisi par le vendeur | Le vendeur répond de la marchandise jusqu'à ce que tu l'aies
+- shop | Un point relais | Seulement si c'est le mode de livraison choisi
+- home | Toi | Vérifie la marchandise en présence du livreur
 :::
 
 ## Où trouver le suivi de ma commande Leroy Merlin ?
 
 Regarde à ces endroits :
 
-- **Ton espace client.** Sur le site ou dans l'application, ouvre « Commandes et retours » et choisis la commande. « Suivre mon colis » ouvre le suivi. Ton numéro de commande y figure aussi, sous la date d'achat, et dans l'e-mail de confirmation, envoyé 24 heures après la commande.
-- **L'e-mail d'expédition.** Quand Colissimo ou Mondial Relay livre, Leroy Merlin t'envoie un numéro de suivi par e-mail au départ du colis. Les conditions générales de vente précisent qu'un numéro de colis peut être attribué ; à défaut, la livraison se suit avec ton numéro de commande.
-- **Produits volumineux.** Le transporteur spécialisé te contacte pour fixer le jour.
-- **Vendeurs de la Marketplace.** Le vendeur t'écrit une première fois pour confirmer la commande, puis une seconde à l'expédition, avec le lien de suivi. Si le lien ne marche pas, contacte le vendeur.
-- **Retrait en magasin.** Un SMS ou un e-mail te prévient quand la commande est prête. Pour un locker, tu reçois les deux, avec son emplacement et un code unique de retrait.
-- **Commande passée en magasin.** Suis-la dans ton espace client, ou sans compte sur la page « Mes commandes en magasin », avec ton numéro de commande, ton numéro client et le numéro du magasin. Un SMS te prévient de son arrivée en magasin ; tu choisis alors un créneau de retrait dans les 14 jours suivants.
+- **Ta commande.** Commence par la commande dans ton espace client sur leroymerlin.fr et par les e-mails que Leroy Merlin t'a envoyés à son sujet.
+- **L'e-mail d'expédition.** Le numéro de suivi d'un colis vient du transporteur : repère le nom du transporteur à côté.
+- **Articles de la Marketplace.** Demande au vendeur indiqué dans ta commande.
+- **Un suivi sans surcoût.** Le vendeur peut te proposer un numéro d'assistance au prix d'un appel local, mais les moyens qu'il te donne pour suivre ta commande ne peuvent pas être surtaxés.
 
 Pour d'autres boutiques : [trouver son numéro de suivi](guide:find-tracking-number). Pas sûr du numéro que tu as ? Tape-le ici :
 
@@ -57,88 +46,66 @@ Pour d'autres boutiques : [trouver son numéro de suivi](guide:find-tracking-num
 
 ## Pourquoi ma commande Leroy Merlin est en retard, ou pourquoi le suivi ne bouge pas ?
 
-Quand rien ne bouge, c'est souvent l'une de ces raisons :
+Pour savoir quand attendre encore : [le suivi ne se met pas à jour](guide:tracking-not-updating) et [délais de livraison](guide:delivery-times). Ce qui compte juridiquement, c'est la date de livraison que Leroy Merlin ou le vendeur t'a donnée à la commande, ou 30 jours après la commande s'il n'y en avait pas. Une fois cette date passée :
 
-- **Seulement les jours ouvrés.** Les délais se comptent en jours ouvrés, hors week-ends et jours fériés, à partir du lendemain du paiement par carte. Pas de livraison le week-end, sauf si le récapitulatif de ta commande l'indique.
-- **Un produit volumineux.** Le transporteur spécialisé fixe un jour avec toi, sans heure précise, avant la date limite indiquée dans ta confirmation de commande.
-- **Une commande en plusieurs morceaux.** Les articles d'une même commande peuvent voyager séparément, et ceux de la Marketplace le font toujours. Vérifie chaque lien de suivi.
-- **Un point relais fermé.** Si ton point relais est fermé ou refuse le colis, celui-ci part dans un autre point proche.
-- **Un vendeur de la Marketplace.** Chaque vendeur choisit son transporteur et ses délais.
+- **Demande un nouveau délai par écrit.** Fixe au vendeur un délai supplémentaire raisonnable, par lettre recommandée avec demande d'avis de réception ou sur un autre support durable, comme un e-mail.
+- **Annule si rien n'arrive.** Annule la commande de la même manière, par lettre recommandée ou par écrit.
+- **Annule tout de suite** si le vendeur refuse de livrer, ou si la date était essentielle, par exemple parce que la commande était liée à un événement précis et que tu l'avais signalé à la commande.
+- **Fais-toi rembourser.** Après l'annulation, le vendeur doit te rembourser la totalité des sommes versées dans les 14 jours. S'il rembourse en retard, la somme est majorée de 10 % jusqu'à 30 jours après l'annulation, de 20 % jusqu'à 60 jours, puis de 50 %.
 
-Leroy Merlin s'engage à te prévenir s'il apprend un retard. Si la date limite est dépassée, tu peux lui fixer par écrit un délai supplémentaire raisonnable, puis annuler si la commande n'arrive toujours pas, comme le prévoit l'article L.216-6 du Code de la consommation ; Leroy Merlin te rembourse alors sous 14 jours. Pour savoir quand attendre encore : [le suivi ne se met pas à jour](guide:tracking-not-updating) et [délais de livraison](guide:delivery-times).
+Ces règles figurent aux articles L216-1 à L216-8 du Code de la consommation, et Service-Public.fr propose un modèle de lettre pour annuler une commande livrée en retard.
 
 ## Combien coûte la livraison Leroy Merlin ?
 
-Le prix dépend du poids et des dimensions de ta commande, et ton panier affiche le montant exact avant le paiement. Quelques tarifs de Leroy Merlin :
+Les tarifs de livraison de Leroy Merlin sont sur sa page de livraison, sur leroymerlin.fr. D'après les règles de l'UE, le commerçant doit t'indiquer le prix total, livraison comprise, avant le paiement. Tu n'as pas à payer de frais de livraison ou d'autres frais qui n'étaient pas clairement indiqués avant la commande. Une case pré-cochée ne vaut pas accord pour une option comme la livraison express, et tu peux te faire rembourser ce qui a été prélevé ainsi.
 
-| Colis | Point retrait | Devant chez toi | En 24h |
-| --- | --- | --- | --- |
-| Jusqu'à 30 kg et 200 cm (longueur + largeur + hauteur), comme une perceuse | 1,90 € | 4,90 € | 8,90 € |
-| De 30 à 50 kg, jusqu'à 400 cm, comme du carrelage | 19,90 € | 29,90 € | 39,90 € |
-| De 100 à 200 kg | 39,90 € | 49,90 € | 59,90 € |
-| Entre 500 kg et 1,2 t, comme un portail ou un abri de jardin | Non disponible | 99,90 € | 119,90 € |
-
-Les colis plus longs ou plus lourds coûtent davantage, jusqu'à 199 € à partir de 5 t. Pour la plupart des colis de 30 kg à 1,2 t, la livraison dans la pièce de ton choix coûte 30 € de plus.
-
-**Retrait en magasin.** Gratuit jusqu'à 1,2 t : réserve un créneau de retrait, et tu peux en choisir un différent pour chaque produit. Les commandes volumineuses sont déposées au pied de ton véhicule, et c'est toi qui charges. Un proche peut retirer la commande avec ta pièce d'identité et le numéro de commande. Si tu ne viens pas, Leroy Merlin te relance, puis annule la commande au bout de 15 jours. Un locker garde ta commande 3 jours.
-
-**Points relais.** Prends une pièce d'identité et ne tarde pas : un colis non retiré à temps repart chez Leroy Merlin, qui te rembourse. Pour aller plus loin : [consignes et points relais](guide:parcel-lockers) et [colis non retiré](guide:uncollected-parcel).
-
-**Modifications.** Pour changer l'adresse d'une commande en cours, passe par le formulaire de contact ; s'il est trop tard et que la nouvelle adresse est proche, Leroy Merlin essaie de s'arranger avec le transporteur. Le bouton « annuler ma commande » n'apparaît dans « Commandes et retours » que tant que l'annulation reste possible. Pour aller plus loin : [changer l'adresse de livraison](guide:change-delivery-address).
+Pour changer l'adresse d'une commande en cours ou l'annuler, contacte le Service Client de Leroy Merlin, ou le vendeur pour un article de la Marketplace. Pour aller plus loin : [changer l'adresse de livraison](guide:change-delivery-address), [consignes et points relais](guide:parcel-lockers) et [colis non retiré](guide:uncollected-parcel).
 
 ## Colis Leroy Merlin manquant, abîmé ou marqué livré : que faire ?
 
 Cherche d'abord, signale ensuite. Dans l'ordre :
 
 :::steps
-- Vérifie le suivi | Ouvre « Commandes et retours » et chaque lien « Suivre mon colis ». Les commandes en plusieurs morceaux et les articles de la Marketplace arrivent dans des colis séparés : vérifie-les tous.
-- Cherche et demande | Un petit colis peut t'être remis en main propre ou déposé dans ta boîte aux lettres : regarde-la et demande à ton foyer et à tes voisins.
-- Contacte Leroy Merlin | Appelle le 03 59 57 46 04 (appel gratuit), du lundi au samedi de 8 h à 19 h, ou passe par le formulaire de contact ou le chat, avec ton numéro de commande. Pour un achat en magasin, appelle ton magasin. Pour un article de la Marketplace, clique sur « Échanger avec le marchand » dans la commande.
-- Déclare un problème de livraison | C'est le nom de la démarche chez Leroy Merlin : un article ou une pièce manquante, un article cassé ou endommagé, un article différent de celui commandé. Déclare-le dans les 3 jours ouvrés suivant la livraison avec le formulaire de contact, photos à l'appui. Passé ce délai, utilise « Déclarer un SAV » pour un dommage, le Service Client pour un manque ou une erreur. Article de la Marketplace : préviens le vendeur, idéalement dans les 3 jours ; si Leroy Merlin l'a livré, utilise le formulaire de Leroy Merlin.
-- Remboursement ou nouvel article | Si le problème est confirmé, Leroy Merlin réexpédie les articles dans la limite des stocks, ou les annule et te rembourse sous 14 jours, et prend en charge les frais de retour.
+- Vérifie le suivi | Ouvre le suivi du transporteur pour chaque numéro de colis de ta commande, ou colle-les dans Peek, et regarde le dernier scan.
+- Cherche et demande | Regarde dans ta boîte aux lettres, devant ta porte et dans tout lieu de dépôt, et demande à ton foyer et à tes voisins.
+- Contacte Leroy Merlin | Passe par le Service Client sur leroymerlin.fr avec ton numéro de commande ; pour un article de la Marketplace, contacte le vendeur. Si le transporteur du vendeur a livré et que le vendeur ne peut pas prouver que tu as reçu le colis, la perte est pour lui, et tu n'as pas à prouver une faute.
+- Mets-le par écrit | Si le vendeur affirme avoir livré et que tu n'as rien, mets-le en demeure par lettre recommandée avec accusé de réception de t'envoyer le colis. Si la marchandise arrive abîmée, tu peux la refuser et réclamer par lettre recommandée un bien en parfait état.
+- Réparation, remplacement ou remboursement | Le vendeur répond des dommages subis pendant le transport : il doit réparer ou remplacer la marchandise, ou, si c'est impossible, baisser le prix ou te rembourser.
 :::
 
-**Livraisons volumineuses : vérifie avant de signer.** Ouvre et contrôle la marchandise, quantités comprises, avant le départ du livreur. Note des réserves précises sur le bon de livraison, par exemple casse, erreur de produit ou manquants, prends des photos, puis refuse la livraison ou accepte-la en l'état, et confirme sous 3 jours ouvrés. D'après les conditions générales de vente de Leroy Merlin, la mention « sous réserve de déballage » n'a aucune valeur juridique, et sans réserves précises Leroy Merlin peut refuser un échange ou un remboursement. Si le livreur ne te laisse pas le temps de vérifier, note-le sur le bon et fais-le contresigner.
+**Vérifie avant le départ du livreur.** Your Europe conseille de vérifier l'état de la marchandise en présence du livreur, pour que le vendeur ne puisse pas prétendre que le dommage est apparu après. Si tu acceptes une livraison abîmée, note tes remarques sur le bon de livraison ou sur la facture et contacte vite le service client du vendeur. Une clause qui t'impose de vérifier la marchandise immédiatement est abusive, donc non valide.
 
-**Marketplace.** Leroy Merlin demande de régler tout incident, retard ou colis abîmé compris, avec le vendeur, et pas via ses formulaires de contact. Il précise aussi qu'il peut intervenir en tant que tiers de confiance : garde donc tes échanges dans ton espace client. Pour aller plus loin : [colis marqué livré mais pas reçu](guide:delivered-not-received), [colis perdu](guide:lost-parcel) et [colis endommagé](guide:damaged-parcel).
+**Si tu as choisi le transporteur.** Si tu as pris un autre transporteur que celui proposé par le vendeur, agis contre lui par lettre recommandée dans les 3 jours suivant la livraison, jours fériés non compris, ou dans les 10 jours s'il ne t'a pas laissé vérifier l'état du colis.
+
+Pour aller plus loin : [colis marqué livré mais pas reçu](guide:delivered-not-received), [colis perdu](guide:lost-parcel) et [colis endommagé](guide:damaged-parcel).
 
 ## Retourner une commande Leroy Merlin
 
-Leroy Merlin reprend ses propres articles jusqu'à 6 mois après l'achat, ou 12 mois pour les membres de son programme de fidélité Leroy&Moi. Pour une commande en ligne, tu peux aussi te rétracter dans les 14 jours suivant la réception, et Leroy Merlin paie le retour.
+Les conditions de retour propres à Leroy Merlin sont sur sa page de retours, sur leroymerlin.fr. Pour une commande en ligne, la loi te donne en plus ces droits :
 
-- **En ligne.** Dans « Commandes et retours », clique sur « Retourner un produit » et télécharge l'étiquette de retour. Une étiquette pour La Poste ou un point relais comporte un numéro pour suivre le retour. Pour un article encombrant, un transporteur t'appelle dans les 3 jours ouvrés pour fixer un enlèvement, du lundi au vendredi, de 8 h à 18 h.
-- **En magasin.** Apporte l'article neuf, non utilisé et dans son emballage d'origine dans le magasin de ton choix, avec ton ticket de caisse, ta facture ou ta carte de fidélité.
-- **Non repris.** Les produits sur mesure comme un plan de travail découpé, les plantes, les produits descellés qui ne peuvent revenir pour des raisons d'hygiène ou de sécurité, comme un abattant WC ou un pot de peinture ouvert, les produits vendus en vrac ou au mètre, les produits d'exposition et les commandes spéciales.
-- **Remboursement.** Dans les 14 jours suivant la réception du retour en entrepôt, sur le moyen de paiement utilisé, avec un e-mail une fois le remboursement fait. Pour un retour en magasin, une carte à débit immédiat est recréditée sous 72 heures, une carte à débit différé en fin de mois.
-- **Marketplace.** Tu as 14 jours à compter de la livraison, et le vendeur peut prolonger ce délai. Fais la demande dans « Commandes et retours » : le vendeur t'indique la méthode et le transporteur, et les frais de retour sont à ta charge sauf mention contraire dans ses conditions. Ces articles ne se rapportent pas en magasin.
+- **14 jours pour changer d'avis.** Le délai part du lendemain de la réception, ou de la réception du dernier article si la commande arrive en plusieurs fois. Le vendeur peut t'accorder plus. Si le vendeur ne t'a pas informé de ce droit, le délai peut être prolongé jusqu'à 12 mois.
+- **Dis-le, ne te contente pas de renvoyer.** Avant la fin du délai, envoie le formulaire de rétractation ou une autre déclaration écrite. Renvoyer l'article ou refuser la livraison ne suffit pas. Tu n'as pas à te justifier.
+- **Renvoie la marchandise dans les 14 jours** suivant l'envoi de ta rétractation. Les frais directs de retour sont à ta charge, sauf si le vendeur les prend en charge ou ne t'a pas prévenu qu'ils étaient pour toi. Si le retour est à tes frais et qu'un article est trop gros pour partir par la Poste, le vendeur doit t'en indiquer le coût avant la commande.
+- **Remboursement sous 14 jours** après ta rétractation, frais de livraison standard compris, avec le moyen de paiement utilisé. Pour un bien, le vendeur peut attendre de l'avoir récupéré ou que tu lui aies fourni une preuve d'expédition.
+- **Exceptions.** Pas de rétractation pour les biens faits sur mesure ou nettement personnalisés, comme un meuble sur mesure, les biens qui se détériorent rapidement, les articles que tu as ouverts et qui ne peuvent pas être renvoyés pour des raisons d'hygiène ou de protection de la santé, ni les biens devenus indissociables d'autres articles. Choisir une couleur ou une finition dans une gamme standard ne rend pas un article personnalisé.
 
-Pour suivre un retour : [suivi des retours](guide:returns-tracking).
+Un article défectueux est couvert par la garantie légale pendant au moins 2 ans, gratuitement, que tu l'aies acheté en ligne ou en magasin. Pour suivre un retour : [suivi des retours](guide:returns-tracking).
 
 ## Puis-je suivre un colis Leroy Merlin dans Peek ?
 
-Oui, avec le numéro de suivi du transporteur, pris dans l'e-mail d'expédition ou dans « Suivre mon colis » : colle-le dans [Peek](/). Peek reconnaît à leur seule forme la plupart des numéros Colissimo d'un chiffre, une lettre et 11 chiffres, comme `6A12345678905` (exemple inventé).
+Oui, avec le numéro de suivi du transporteur, pris dans l'e-mail d'expédition ou dans ta commande : colle-le dans [Peek](/). Peek reconnaît à leur seule forme la plupart des numéros Colissimo d'un chiffre, une lettre et 11 chiffres, comme `6A12345678905` (exemple inventé).
 
-Les numéros Mondial Relay de 8, 10 ou 12 chiffres partagent leur forme avec ceux d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un transporteur spécialisé, une livraison en 24h ou le transporteur d'un vendeur de la Marketplace, colle son numéro quand même : Peek suit plus de 3 500 transporteurs. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
+Les numéros Mondial Relay de 8, 10 ou 12 chiffres partagent leur forme avec ceux d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour tout autre transporteur, colle son numéro quand même : Peek suit plus de 3 500 transporteurs. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
 
 Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours se font chez Leroy Merlin ou chez le vendeur.
 
 :::sources
-- [Leroy Merlin : Nos retraits et modes de livraison](https://www.leroymerlin.fr/services/service-client/nos-retraits-et-modes-de-livraison.html) – modes de livraison, transporteurs, 2 à 4 jours, tarifs, pièce de ton choix, zone de livraison
-- [Leroy Merlin FAQ : Modes de livraison](https://www.leroymerlin.fr/foire-aux-questions.html?question=quels-sont-les-modes-de-livraison) – retrait en 2 heures, livraison en 24h, choix du transporteur, chargement, commandes mixtes, pas de livraison à l'étranger, pays frontaliers
-- [Leroy Merlin FAQ : Suivre ma commande](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-suivre-ma-commande) – espace client, e-mail d'expédition, e-mails des vendeurs, commandes en magasin, numéro de commande
-- [Leroy Merlin FAQ : Déclarer un problème de livraison](https://www.leroymerlin.fr/foire-aux-questions.html?question=declarer-un-probleme-de-livraison) – 3 jours ouvrés, formulaire, SAV, Marketplace
-- [Leroy Merlin FAQ : Le locker](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-fonctionne-le-locker-chez-leroy-merlin) – code, 3 jours
-- [Leroy Merlin FAQ : Rendez-vous de retrait](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-modifier-un-rendez-vous-de-retrait-en-magasin) – réserver un créneau, commandes en magasin, 14 jours
-- [Leroy Merlin FAQ : Retirer plusieurs colis à différentes dates](https://www.leroymerlin.fr/foire-aux-questions.html?question=puis-je-venir-retirer-plusieurs-colis-une-commande-differentes-dates-magasin) – un créneau par produit
-- [Leroy Merlin FAQ : Retrait par une autre personne](https://www.leroymerlin.fr/foire-aux-questions.html?question=est-ce-qu-une-autre-personne-peut-venir-retirer-ma-commande) – pièce d'identité et numéro de commande
-- [Leroy Merlin FAQ : Modifier l'adresse de livraison](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-modifier-adresse-livraison-de-facturation) – formulaire, transporteur
-- [Leroy Merlin FAQ : Annuler une commande](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-annuler-une-commande) – bouton d'annulation
-- [Leroy Merlin FAQ : Effectuer un retour](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-effectuer-un-retour-en-ligne-ou-en-magasin) – 6 et 12 mois, retour en magasin, articles non repris
-- [Leroy Merlin FAQ : Suivre un remboursement](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-suivre-un-remboursement) – 72 heures, fin de mois
-- [Leroy Merlin : Aide et contact](https://www.leroymerlin.fr/aide-et-contact/) – téléphone, horaires, achats en magasin
-- [Leroy Merlin : Retour et remboursement](https://www.leroymerlin.fr/services/service-client/retour-et-remboursement.html) – étiquette de retour, remboursement sous 14 jours, moyen de paiement
-- [Leroy Merlin : Conditions générales de vente](https://www.leroymerlin.fr/cgu-cgv-et-politique-de-donnees-personnelles/conditions-generales-de-vente.html) – zone de livraison, jours ouvrés, numéro de colis, points relais, transporteur spécialisé, réserves, retard, rétractation, suivi du retour
-- [Leroy Merlin : La Marketplace](https://www.leroymerlin.fr/explication-marketplace.html) – livraisons des vendeurs, lien de suivi, contact du vendeur, retours
-- [Leroy Merlin : Informations réglementaires Marketplace](https://www.leroymerlin.fr/reglementations-marketplace.html) – tiers de confiance
+- [ADEO : La marketplace ADEO](https://www.adeo.com/news/la-marketplace-adeo/) – la Marketplace de Leroy Merlin France, lancée en mai 2020
+- [ADEO : présentation 2026 (en anglais)](https://www.adeo.com/en/press/2026-adeo-presentation/) – la Marketplace d'ADEO, présente dans sept pays dont la France
+- [Service-Public.fr : Achat à distance, livraison du bien](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – date et mode de livraison, 30 jours, suivi non surtaxé, transporteur du vendeur et transfert des risques, retard, annulation, remboursement et majorations, colis non reçu, marchandise abîmée, clause de vérification immédiate, transporteur choisi par toi, articles L216-1 à L216-8, modèles de lettres
+- [Service-Public.fr : Achat à distance, droit de rétractation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – 14 jours, point de départ, 12 mois, exercer la rétractation, frais de retour, remboursement, exceptions
+- [Service-Public.fr : Achat à distance, information avant la signature du contrat](https://www.service-public.gouv.fr/particuliers/vosdroits/F10483) – places de marché, coût de retour des biens volumineux
+- [Your Europe : Expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_fr.htm) – prix total, cases pré-cochées, dommages pendant le transport, garantie de 2 ans
+- [Your Europe : FAQ Expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_fr.htm) – livraison limitée à un pays, géoblocage, vérifier la marchandise à la livraison, frais supplémentaires
 - [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes de numéros, transporteurs connus de Peek
 :::

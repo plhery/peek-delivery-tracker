@@ -1,53 +1,43 @@
 ---
 title: Leroy-Merlin-Bestellung verfolgen: Lieferung und Probleme
-description: Leroy Merlin hat keinen Onlineshop in Deutschland, Österreich oder der Schweiz. So laufen Lieferung, Sendungsverfolgung und Rückgabe bei leroymerlin.fr.
+description: Leroy Merlin hat keinen Onlineshop in Deutschland, Österreich oder der Schweiz. Bestellung bei leroymerlin.fr verfolgen und deine Rechte, wenn etwas schiefgeht.
 slug: leroy-merlin-bestellung-verfolgen
 picture: Eine Farbdose und eine Farbrolle auf einem Stapel Holzbretter neben einem Lieferwagen, und Pip steht auf den Brettern.
 published: 2026-10-26
 updated: 2026-10-28
 ---
 
-Leroy Merlin, die Baumarktkette, verkauft nicht in Deutschland, Österreich oder der Schweiz, und ihre französische Seite liefert nicht ins Ausland. Bei leroymerlin.fr bekommst du für kleine Pakete eine Sendungsnummer per E-Mail, wenn Colissimo oder Mondial Relay liefert, sperrige Ware bringt eine Spedition, die vorher anruft und einen Tag ausmacht, und die Abholung im Markt ist kostenlos. Fehlt etwas oder ist etwas kaputt, meldest du es innerhalb von 3 Werktagen nach der Lieferung.
+Leroy Merlin, die Baumarktkette, verkauft nicht in Deutschland, Österreich oder der Schweiz. In Frankreich verkauft sie online über leroymerlin.fr; Versandarten, Preise und Rückgabebedingungen stehen dort auf ihren eigenen Seiten. Nach französischem Recht haftet der Verkäufer für die Lieferung, die er organisiert, bis du die Ware in den Händen hältst: Er muss bis zu dem Datum liefern, das er dir genannt hat, ohne Datum innerhalb von 30 Tagen, und bei den meisten Artikeln kannst du es dir innerhalb von 14 Tagen nach Erhalt anders überlegen.
 
 ## Wo verkauft Leroy Merlin online?
 
 Leroy Merlin gehört zu ADEO, einer Baumarktgruppe. Auf ADEOs Liste seiner Länder stehen weder Deutschland noch Österreich noch die Schweiz, sondern Frankreich, Spanien, Italien, Portugal, Polen, Griechenland, Zypern, Rumänien, die Ukraine, Brasilien, Südafrika, China und Vietnam. Einen Marktplatz betreibt ADEO auf seinen Seiten von Leroy Merlin und Tecnomat in sieben davon: Brasilien, Frankreich, Südafrika, Italien, Spanien, Portugal und Polen.
 
-Die französische Seite leroymerlin.fr schreibt, dass eine Lieferung ins Ausland nicht möglich ist, und rät Kunden in Belgien, der Schweiz und Luxemburg, an eine französische Abholstelle liefern zu lassen oder im nächsten Leroy-Merlin-Markt abzuholen. Der Rest dieses Ratgebers erklärt leroymerlin.fr, mit den französischen Bezeichnungen und einer Übersetzung.
+Du wohnst in einem anderen EU-Land und möchtest bei leroymerlin.fr bestellen? Laut dem EU-Portal Your Europe muss ein Shop, dessen Bedingungen die Lieferung auf ein Land beschränken, nicht zu dir liefern; ob Leroy Merlin zu dir liefert, prüfst du in seinen AGB auf leroymerlin.fr. Die EU-Regeln gegen Geoblocking verbieten einem Shop aber, dir einen Dienst wie Click & Collect zu verweigern, nur weil du in einem anderen EU-Land wohnst. Der Rest dieses Ratgebers gilt für Bestellungen mit Lieferung in Frankreich.
 
 ## Wer liefert meine Leroy-Merlin-Bestellung?
 
-Das hängt von der Größe deiner Bestellung ab und davon, wer verkauft. Auf den Produkten steht „Vendu par Leroy Merlin“ (verkauft von Leroy Merlin) oder „Vendu par“ und der Name eines Marktplatz-Verkäufers:
+Die Versandarten von Leroy Merlin findest du auf seiner Versandseite bei leroymerlin.fr. Was du auch wählst, den Rahmen setzt das französische Recht. Der Verkäufer, also Leroy Merlin oder ein Marktplatz-Verkäufer, muss dir vor und bei der Bestellung klar sagen, wie und bis wann er liefert. Danach muss er sich an die Lieferart in deinem Vertrag halten, etwa Lieferung nach Hause oder an eine Abholstelle. Hat er kein Datum genannt, muss er innerhalb von 30 Tagen nach deiner Bestellung liefern.
 
-| Was du wählst | Wer liefert | Wann |
-| --- | --- | --- |
-| „Retrait en magasin“ (Abholung im Markt) | Der Markt, manchmal in ein Schließfach | Ab 2 Stunden nach der Bestellung, im gebuchten Zeitfenster |
-| „Livraison en point retrait“ (Abholstelle) | Mondial Relay oder Colissimo | Sendungsnummer per E-Mail |
-| „Livraison à domicile“ (Lieferung nach Hause), kleine Pakete | Per Post | 2 bis 4 Tage für die meisten Produkte |
-| Lieferung nach Hause, sperrige Ware | Eine Spedition, die Leroy Merlin nicht nennt | Ruft an und macht einen Tag aus, Montag bis Freitag, 8 bis 18 Uhr |
-| „Livraison en 24h“ (Lieferung am nächsten Tag) | Nicht genannt | Artikel mit „Livraison dès demain à domicile“ |
-| Ein Marktplatz-Artikel | Der Paketdienst des Verkäufers | Nach den Fristen des Verkäufers |
+Hat der Verkäufer den Paketdienst ausgesucht, haftet er allein für die Lieferung. Das Risiko für Verlust oder Beschädigung geht erst auf dich über, wenn du oder jemand, den du benannt hast, die Ware tatsächlich in Empfang nimmt. Hast du selbst einen anderen Paketdienst gewählt, geht das Risiko schon mit der Übergabe an diesen Dienst über, und Ansprüche wegen Schäden richtest du an ihn.
 
-Leroy Merlin wählt den Dienst nach Gewicht und Volumen der ganzen Bestellung. Eine Spedition lädt am Lkw ab und trägt nichts ins Haus. Du musst einem Lkw von 19 bis 38 Tonnen einen einfachen Zugang ermöglichen.
-
-Marktplatz-Verkäufer verschicken aus ihren eigenen Lagern, nach Hause oder manchmal an eine Abholstelle, nie in einen Markt, und stellen die Ware an deine Haustür nach draußen, an die Straße oder an die nächste erreichbare Stelle. Eine gemischte Bestellung kommt in getrennten Lieferungen: die Artikel von Leroy Merlin getrennt von denen jedes Verkäufers.
+Manche Artikel auf leroymerlin.fr stammen von Marktplatz-Verkäufern. Auf einem Marktplatz muss das Angebot zeigen, wer verkauft, ob gewerblich oder privat, was es samt Versand insgesamt kostet und wie Lieferung und Streitfälle geregelt sind. Die Rechte in diesem Ratgeber hast du, wenn du bei einem gewerblichen Verkäufer kaufst.
 
 :::journey
-- warehouse | Lager oder Markt von Leroy Merlin | Marktplatz-Verkäufer verschicken selbst
-- truck | Colissimo, Mondial Relay oder eine Spedition | Sperrige Ware: Die Spedition ruft vorher an
-- shop | Abholung im Markt | Nach 2 Stunden, oder ein Schließfach mit Code
-- home | Du | Ware prüfen, bevor der Fahrer geht
+- warehouse | Der Verkäufer | Leroy Merlin oder ein Marktplatz-Verkäufer
+- truck | Der Paketdienst des Verkäufers | Der Verkäufer haftet, bis du die Ware hast
+- shop | Eine Abholstelle | Nur wenn du diese Lieferart gewählt hast
+- home | Du | Ware prüfen, solange der Fahrer da ist
 :::
 
 ## Wo finde ich meine Leroy-Merlin-Sendungsnummer?
 
 Schau hier nach:
 
-- **Dein Kundenkonto.** Auf der Seite oder in der App öffnest du „Commandes et retours“ (Bestellungen und Rücksendungen) und wählst die Bestellung. „Suivre mon colis“ (mein Paket verfolgen) öffnet die Sendungsverfolgung. Dort steht auch deine Bestellnummer, unter dem Kaufdatum, und in der Bestellbestätigung.
-- **Die Versand-E-Mail.** Liefert Colissimo oder Mondial Relay, schickt dir Leroy Merlin beim Versand eine Sendungsnummer per E-Mail. Laut den AGB von Leroy Merlin kann eine Lieferung eine Paketnummer bekommen; sonst erkennt man sie an deiner Bestellnummer.
-- **Sperrige Ware.** Die Spedition meldet sich bei dir, um den Tag festzulegen.
-- **Marktplatz-Verkäufer.** Der Verkäufer schreibt dir einmal zur Bestätigung und noch einmal beim Versand, mit einem Link zur Sendungsverfolgung. Geht der Link nicht, frag den Verkäufer.
-- **Abholung im Markt.** Eine SMS oder eine E-Mail sagt dir, wann die Bestellung bereitliegt. Bei einem Schließfach bekommst du beides, mit dessen Standort und einem Abholcode.
+- **Deine Bestellung.** Fang mit der Bestellung in deinem Kundenkonto auf leroymerlin.fr an und mit den E-Mails, die Leroy Merlin dir dazu geschickt hat.
+- **Die Versand-E-Mail.** Die Sendungsnummer eines Pakets kommt vom Paketdienst, also achte auf den Namen des Dienstes daneben.
+- **Marktplatz-Artikel.** Frag den Verkäufer, der in deiner Bestellung steht.
+- **Keine Sondertarife.** Ein Verkäufer darf dir eine Hotline zum Preis eines Ortsgesprächs anbieten, aber nichts, womit du deine Bestellung verfolgst, darf zu einem Sondertarif abgerechnet werden.
 
 Andere Shops: [Sendungsnummer finden](guide:find-tracking-number). Nicht sicher, wessen Nummer du hast? Gib sie hier ein:
 
@@ -56,68 +46,56 @@ Andere Shops: [Sendungsnummer finden](guide:find-tracking-number). Nicht sicher,
 
 ## Warum dauert meine Leroy-Merlin-Bestellung so lange, oder warum bewegt sich die Sendungsverfolgung nicht?
 
-Wenn sich nichts bewegt, liegt es meist an einem dieser Punkte:
+Wann Warten noch normal ist: [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Lieferzeiten](guide:delivery-times). Rechtlich zählt das Lieferdatum, das dir Leroy Merlin oder der Verkäufer bei der Bestellung genannt hat, oder 30 Tage nach der Bestellung, wenn es keins gab. Ist dieses Datum vorbei:
 
-- **Nur Werktage.** Lieferzeiten zählen in Werktagen, ohne Wochenenden und französische Feiertage, ab dem Tag nach der Kartenzahlung. Am Wochenende wird nicht geliefert, außer deine Bestellübersicht sagt es ausdrücklich.
-- **Sperrige Ware.** Die Spedition macht mit dir einen Tag aus, ohne feste Uhrzeit, vor der Frist in deiner Bestellbestätigung.
-- **Eine geteilte Bestellung.** Artikel einer Bestellung können getrennt reisen, Marktplatz-Artikel tun es immer. Prüf jeden Link zur Sendungsverfolgung.
-- **Eine geschlossene Abholstelle.** Ist deine Abholstelle zu oder nimmt sie das Paket nicht an, geht es an eine andere in der Nähe.
-- **Ein Marktplatz-Verkäufer.** Jeder Verkäufer legt seinen Paketdienst und seine Lieferzeiten selbst fest.
+- **Schriftlich eine neue Frist setzen.** Gib dem Verkäufer eine angemessene Nachfrist, per Einschreiben mit Rückschein oder auf einem anderen dauerhaften Datenträger, etwa per E-Mail.
+- **Zurücktreten, wenn die Ware immer noch nicht kommt.** Storniere die Bestellung auf dieselbe Weise, per Einschreiben oder schriftlich.
+- **Sofort zurücktreten**, wenn der Verkäufer die Lieferung verweigert oder wenn das Datum entscheidend war, zum Beispiel weil die Bestellung für einen bestimmten Anlass war und du das bei der Bestellung gesagt hast.
+- **Geld zurück.** Nach dem Rücktritt muss dir der Verkäufer alles, was du bezahlt hast, innerhalb von 14 Tagen erstatten. Zahlt er zu spät, erhöht sich der Betrag um 10 % bis 30 Tage nach dem Rücktritt, um 20 % bis 60 Tage und danach um 50 %.
 
-Leroy Merlin schreibt, dass es dich warnt, wenn es von einer Verspätung erfährt. Ist die Frist vorbei, kannst du nach französischem Recht schriftlich eine angemessene Nachfrist setzen und, wenn die Bestellung dann immer noch nicht kommt, vom Kauf zurücktreten; Leroy Merlin erstattet dir das Geld dann innerhalb von 14 Tagen. Wann Warten noch normal ist: [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Lieferzeiten](guide:delivery-times).
+Service-Public.fr, die Informationsseite der französischen Regierung, hat einen Musterbrief für den Rücktritt von einer verspäteten Bestellung.
 
-## Leroy Merlin: Versandarten und Kosten
+## Leroy Merlin: Versandkosten
 
-Leroy Merlin liefert ins französische Mutterland. Die Versandseite nimmt Korsika und die Überseegebiete aus, die AGB nennen zusätzlich La Réunion: Ob deine Adresse beliefert wird, siehst du an der Kasse. Den genauen Preis zeigt dir der Warenkorb vor dem Bezahlen. Einige Preise von Leroy Merlin:
+Die Versandpreise von Leroy Merlin findest du auf seiner Versandseite bei leroymerlin.fr. Nach EU-Recht muss dir ein Shop vor dem Bezahlen den Gesamtpreis zeigen, Versand inklusive. Versandkosten oder andere Kosten, die vor der Bestellung nicht klar angegeben waren, musst du nicht zahlen. Ein vorangekreuztes Kästchen gilt nicht als Zustimmung zu einem Extra wie Expressversand, und was so berechnet wurde, bekommst du zurück.
 
-| Paket | Abholstelle | Bis vor die Tür | Nächster Tag |
-| --- | --- | --- | --- |
-| Bis 30 kg und 200 cm (Länge + Breite + Höhe) | 1,90 € | 4,90 € | 8,90 € |
-| 30–50 kg, bis 400 cm | 19,90 € | 29,90 € | 39,90 € |
-| 100–200 kg | 39,90 € | 49,90 € | 59,90 € |
-| 500 kg bis 1,2 t | Nicht möglich | 99,90 € | 119,90 € |
-
-Längere oder schwerere Pakete kosten mehr, bis zu 199 € für 5 t oder mehr. Für die meisten Pakete von 30 kg bis 1,2 t kostet die Lieferung in den Raum deiner Wahl 30 € extra.
-
-**Abholung im Markt.** Kostenlos bis 1,2 t: Buch ein Zeitfenster zum Abholen. Sperrige Bestellungen stellt das Personal an dein Fahrzeug, und du lädst sie selbst ein. Jemand anderes kann mit deinem Ausweis und der Bestellnummer abholen. Kommst du nicht, erinnert dich Leroy Merlin und storniert die Bestellung nach 15 Tagen. Ein Schließfach hält deine Bestellung 3 Tage.
-
-**Abholstellen.** Nimm deinen Ausweis mit und hol das Paket bald ab: Ein Paket, das nicht rechtzeitig abgeholt wird, geht zurück, und du bekommst dein Geld wieder. Mehr: [Paketstationen und Abholstellen](guide:parcel-lockers) und [nicht abgeholte Pakete](guide:uncollected-parcel).
-
-**Änderungen.** Um die Adresse einer laufenden Bestellung zu ändern, nimmst du das Kontaktformular; ist es zu spät und liegt die neue Adresse in der Nähe, versucht Leroy Merlin, es mit dem Paketdienst zu regeln. „Annuler ma commande“ (meine Bestellung stornieren) erscheint unter „Commandes et retours“ nur, solange das noch geht. Mehr: [Lieferadresse ändern](guide:change-delivery-address).
+Um die Adresse einer laufenden Bestellung zu ändern oder sie zu stornieren, wendest du dich an den Kundenservice von Leroy Merlin, bei einem Marktplatz-Artikel an den Verkäufer. Mehr: [Lieferadresse ändern](guide:change-delivery-address), [Paketstationen und Abholstellen](guide:parcel-lockers) und [nicht abgeholte Pakete](guide:uncollected-parcel).
 
 ## Leroy-Merlin-Paket fehlt, ist beschädigt oder als zugestellt markiert: was tun
 
 Erst suchen, dann melden. Der Reihe nach:
 
 :::steps
-- Sendung prüfen | Öffne „Commandes et retours“ und jeden Link „Suivre mon colis“. Geteilte Bestellungen und Marktplatz-Artikel kommen in getrennten Paketen, also prüf alle.
-- Umsehen und nachfragen | Ein kleines Paket kann dir übergeben oder in den Briefkasten gelegt werden: Schau dort nach und frag Mitbewohner und Nachbarn.
-- Leroy Merlin kontaktieren | Ruf 03 59 57 46 04 an (kostenlos), Montag bis Samstag 8 bis 19 Uhr, oder nimm das Kontaktformular oder den Chat, mit deiner Bestellnummer. Für einen Kauf im Markt rufst du den Markt an. Für einen Marktplatz-Artikel nimmst du „Échanger avec le marchand“ (mit dem Verkäufer schreiben) bei der Bestellung.
-- Lieferproblem melden | Leroy Merlin nennt das „déclarer un problème de livraison“: ein Artikel oder Teil fehlt, ein Artikel ist kaputt oder es ist der falsche. Melde es innerhalb von 3 Werktagen nach der Lieferung über das Kontaktformular, mit Fotos. Danach nimmst du „Déclarer un SAV“ (Online-Kundendienst) für Schäden und den Kundenservice für fehlende oder falsche Artikel. Marktplatz-Artikel: Sag es dem Verkäufer, am besten innerhalb von 3 Tagen; hat Leroy Merlin geliefert, nimm das Formular von Leroy Merlin.
-- Geld zurück oder neue Ware | Bestätigt sich das Problem, schickt Leroy Merlin die Artikel neu, solange der Vorrat reicht, oder storniert sie und erstattet dir das Geld innerhalb von 14 Tagen, und trägt die Rücksendung.
+- Sendung prüfen | Öffne die Sendungsverfolgung des Paketdienstes für jede Paketnummer deiner Bestellung, oder füg sie in Peek ein, und lies den letzten Scan.
+- Umsehen und nachfragen | Schau in den Briefkasten, vor die Tür und an jeden Ablageort, und frag Mitbewohner und Nachbarn.
+- Leroy Merlin kontaktieren | Wende dich mit deiner Bestellnummer an den Kundenservice auf leroymerlin.fr, bei einem Marktplatz-Artikel an den Verkäufer. Hat der Paketdienst des Verkäufers geliefert und kann der Verkäufer nicht beweisen, dass du das Paket bekommen hast, trägt er den Verlust, und du musst niemandem ein Verschulden nachweisen.
+- Schriftlich nachhaken | Sagt der Verkäufer, das Paket sei zugestellt, und du hast nichts, fordere ihn per Einschreiben mit Rückschein förmlich auf, dir das Paket zu schicken. Kommt die Ware beschädigt an, kannst du sie ablehnen und per Einschreiben Ware in einwandfreiem Zustand verlangen.
+- Reparatur, Ersatz oder Geld zurück | Der Verkäufer haftet für Transportschäden: Er muss die Ware reparieren oder ersetzen oder, wenn beides nicht geht, den Preis senken oder dir das Geld erstatten.
 :::
 
-**Sperrige Lieferungen: prüfen, bevor du unterschreibst.** Öffne und prüf die Ware, auch die Menge, bevor der Fahrer geht. Schreib genaue Vorbehalte auf den Lieferschein, etwa kaputte, falsche oder fehlende Artikel, mach Fotos, dann lehnst du die Ware ab oder nimmst sie so an, und bestätigst innerhalb von 3 Werktagen. Laut den AGB von Leroy Merlin hat „sous réserve de déballage“ (unter Vorbehalt des Auspackens) keinen rechtlichen Wert, und ohne genaue Vorbehalte kann Leroy Merlin einen Umtausch oder eine Erstattung ablehnen. Wartet der Fahrer nicht, bis du geprüft hast, schreib das auf den Lieferschein und lass es gegenzeichnen.
+**Prüfen, bevor der Fahrer geht.** Your Europe rät, die Ware zu prüfen, solange der Zusteller noch da ist, damit der Verkäufer nicht behaupten kann, der Schaden sei erst danach entstanden. Nimmst du eine beschädigte Lieferung an, schreib deine Anmerkungen auf den Lieferschein oder die Rechnung und melde dich schnell beim Kundenservice des Verkäufers. Nach französischem Recht ist eine Klausel, die dich zur sofortigen Prüfung der Ware verpflichtet, missbräuchlich und unwirksam.
 
-**Marktplatz.** Leroy Merlin schreibt, dass du jedes Problem, auch eine verspätete oder beschädigte Lieferung, mit dem Verkäufer klärst, nicht über seine Kontaktformulare. Es schreibt auch, dass es als vertrauenswürdiger Dritter eingreifen kann; behalte den Austausch also in deinem Konto. Mehr: [als zugestellt markiert, aber nicht erhalten](guide:delivered-not-received), [verlorenes Paket](guide:lost-parcel) und [beschädigtes Paket](guide:damaged-parcel).
+**Wenn du den Paketdienst gewählt hast.** Hast du einen anderen Dienst genommen als den, den der Verkäufer angeboten hat, wendest du dich per Einschreiben an diesen Dienst, innerhalb von 3 Tagen nach der Lieferung, Feiertage nicht mitgezählt, oder innerhalb von 10 Tagen, wenn er dich das Paket nicht prüfen ließ.
+
+Mehr: [als zugestellt markiert, aber nicht erhalten](guide:delivered-not-received), [verlorenes Paket](guide:lost-parcel) und [beschädigtes Paket](guide:damaged-parcel).
 
 ## Eine Leroy-Merlin-Bestellung zurückschicken
 
-Leroy Merlin nimmt seine eigenen Artikel 6 Monate nach dem Kauf zurück, oder 12 Monate für Mitglieder seines Treueprogramms Leroy&Moi. Bei einer Online-Bestellung kannst du außerdem innerhalb von 14 Tagen nach Erhalt widerrufen, und Leroy Merlin zahlt die Rücksendung.
+Die eigenen Rückgabebedingungen von Leroy Merlin findest du auf der Rückgabeseite von leroymerlin.fr. Bei einer Online-Bestellung gibt dir das französische Recht außerdem diese Rechte:
 
-- **Online.** Unter „Commandes et retours“ klickst du auf „Retourner un produit“ (ein Produkt zurückgeben) und lädst das Rücksendeetikett herunter. Ein Etikett für die Post oder eine Abholstelle trägt eine Nummer, mit der du die Rücksendung verfolgst. Bei einem großen Artikel ruft innerhalb von 3 Werktagen eine Spedition an und macht einen Abholtermin aus, Montag bis Freitag, 8 bis 18 Uhr.
-- **Im Markt.** Bring den Artikel neu, unbenutzt und in der Originalverpackung in einen beliebigen Markt, mit Kassenbon, Rechnung oder Kundenkarte.
-- **Nicht zurücknehmbar.** Maßanfertigungen wie eine zugeschnittene Arbeitsplatte, Pflanzen, geöffnete Artikel, die aus Hygiene- oder Sicherheitsgründen nicht zurückgehen, etwa ein WC-Sitz oder eine offene Farbdose, lose oder als Meterware verkaufte Ware, Ausstellungsstücke und Sonderbestellungen.
-- **Erstattung.** Innerhalb von 14 Tagen, nachdem die Rücksendung im Lager von Leroy Merlin ankommt, auf das Zahlungsmittel, mit dem du bezahlt hast, mit einer E-Mail, sobald sie erledigt ist. Eine Rückgabe im Markt kommt auf eine Karte mit Sofortabbuchung innerhalb von 72 Stunden, auf eine mit späterer Abbuchung zum Monatsende.
-- **Marktplatz.** Du hast 14 Tage ab der Lieferung, und ein Verkäufer kann mehr geben. Frag unter „Commandes et retours“ an: Der Verkäufer nennt Weg und Paketdienst, und du zahlst das Porto, wenn seine Bedingungen nichts anderes sagen. Marktplatz-Artikel kannst du nicht in einem Markt zurückgeben.
+- **14 Tage zum Umentscheiden.** Die Frist beginnt am Tag nach dem Erhalt der Ware, bei einer Bestellung in mehreren Teilen nach dem Erhalt des letzten Artikels. Ein Verkäufer kann dir mehr Zeit geben. Hat dich der Verkäufer nicht über dieses Recht informiert, verlängert sich die Frist um bis zu 12 Monate.
+- **Sag es, schick nicht nur zurück.** Schick vor Fristende das Widerrufsformular oder eine andere schriftliche Erklärung. Die Ware einfach zurückzuschicken oder die Annahme zu verweigern, reicht allein nicht. Einen Grund musst du nicht nennen.
+- **Ware innerhalb von 14 Tagen zurückschicken**, nachdem du den Verkäufer informiert hast. Die unmittelbaren Kosten der Rücksendung zahlst du, außer der Verkäufer übernimmt sie oder hat dir nicht gesagt, dass du sie trägst. Zahlst du die Rücksendung und ist ein Artikel zu groß für die Post, muss dir der Verkäufer vor der Bestellung sagen, was sie kostet.
+- **Erstattung innerhalb von 14 Tagen** nach deinem Widerruf, Standardversand inklusive, auf das Zahlungsmittel, mit dem du bezahlt hast. Bei Waren darf der Verkäufer warten, bis er sie zurückhat oder du nachweist, dass du sie abgeschickt hast.
+- **Ausnahmen.** Kein Widerruf bei Maßanfertigungen oder deutlich personalisierter Ware, etwa Möbeln nach Maß, bei Ware, die schnell verdirbt, bei geöffneten Artikeln, die aus Hygiene- oder Gesundheitsgründen nicht zurückgehen können, und bei Ware, die sich nicht mehr von anderen Artikeln trennen lässt. Eine Farbe oder Ausführung aus dem Standardangebot zu wählen, macht einen Artikel nicht zur personalisierten Ware.
 
-Rücksendung verfolgen: [Rücksendungen verfolgen](guide:returns-tracking).
+Für einen fehlerhaften Artikel gilt die gesetzliche Gewährleistung mindestens 2 Jahre lang, kostenlos, egal ob du online oder im Geschäft gekauft hast. Rücksendung verfolgen: [Rücksendungen verfolgen](guide:returns-tracking).
 
 ## Kann ich ein Leroy-Merlin-Paket mit Peek verfolgen?
 
-Ja, mit der Sendungsnummer des Paketdienstes aus der Versand-E-Mail oder aus „Suivre mon colis“: Füg sie in [Peek](/) ein. Die meisten Colissimo-Nummern aus einer Ziffer, einem Buchstaben und 11 Ziffern erkennt Peek allein an ihrer Form, etwa `6A12345678905` (erfunden).
+Ja, mit der Sendungsnummer des Paketdienstes aus der Versand-E-Mail oder aus deiner Bestellung: Füg sie in [Peek](/) ein. Die meisten Colissimo-Nummern aus einer Ziffer, einem Buchstaben und 11 Ziffern erkennt Peek allein an ihrer Form, etwa `6A12345678905` (erfunden).
 
-Die Nummern von Mondial Relay mit 8, 10 oder 12 Ziffern teilen sich ihre Form mit Nummern anderer Dienste. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für eine Spedition, die Lieferung am nächsten Tag oder den Paketdienst eines Marktplatz-Verkäufers füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
+Die Nummern von Mondial Relay mit 8, 10 oder 12 Ziffern teilen sich ihre Form mit Nummern anderer Dienste. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für jeden anderen Paketdienst füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
 
 Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, behält Peek den Verlauf von Anfang an und folgt dem neuen Dienst. Peek zeigt, was der Paketdienst veröffentlicht. Reklamationen, Erstattungen und Rückgaben laufen über Leroy Merlin oder den Verkäufer.
 
@@ -125,21 +103,11 @@ Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, 
 - [ADEO: ADEO in the world](https://www.adeo.com/en/adeo-in-the-world/) – die Länder von ADEO
 - [ADEO: Startseite](https://www.adeo.com/en/) – Leroy Merlin als Marke von ADEO
 - [ADEO: Präsentation 2026](https://www.adeo.com/en/press/2026-adeo-presentation/) – der Marktplatz in sieben Ländern
-- [Leroy Merlin Frankreich: Nos retraits et modes de livraison](https://www.leroymerlin.fr/services/service-client/nos-retraits-et-modes-de-livraison.html) – Versandarten, Paketdienste, 2 bis 4 Tage, Preise, Raum deiner Wahl, Liefergebiet
-- [Leroy Merlin Frankreich FAQ: Versandarten](https://www.leroymerlin.fr/foire-aux-questions.html?question=quels-sont-les-modes-de-livraison) – Abholung nach 2 Stunden, nächster Tag, Wahl des Dienstes, Einladen, gemischte Bestellungen, keine Lieferung ins Ausland
-- [Leroy Merlin Frankreich FAQ: Bestellung verfolgen](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-suivre-ma-commande) – Kundenkonto, Versand-E-Mail, E-Mails der Verkäufer, Bestellnummer
-- [Leroy Merlin Frankreich FAQ: Lieferproblem melden](https://www.leroymerlin.fr/foire-aux-questions.html?question=declarer-un-probleme-de-livraison) – 3 Werktage, Formular, Kundendienst, Marktplatz
-- [Leroy Merlin Frankreich FAQ: Das Schließfach](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-fonctionne-le-locker-chez-leroy-merlin) – Code, 3 Tage
-- [Leroy Merlin Frankreich FAQ: Abholtermin im Markt](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-modifier-un-rendez-vous-de-retrait-en-magasin) – Zeitfenster buchen
-- [Leroy Merlin Frankreich FAQ: Abholung durch jemand anderen](https://www.leroymerlin.fr/foire-aux-questions.html?question=est-ce-qu-une-autre-personne-peut-venir-retirer-ma-commande) – Ausweis und Bestellnummer
-- [Leroy Merlin Frankreich FAQ: Lieferadresse ändern](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-modifier-adresse-livraison-de-facturation) – Formular, Paketdienst
-- [Leroy Merlin Frankreich FAQ: Bestellung stornieren](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-annuler-une-commande) – Stornieren-Schaltfläche
-- [Leroy Merlin Frankreich FAQ: Rückgabe](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-effectuer-un-retour-en-ligne-ou-en-magasin) – 6 und 12 Monate, Rückgabe im Markt, ausgeschlossene Artikel
-- [Leroy Merlin Frankreich FAQ: Erstattung verfolgen](https://www.leroymerlin.fr/foire-aux-questions.html?question=comment-suivre-un-remboursement) – 72 Stunden, Monatsende
-- [Leroy Merlin Frankreich: Aide et contact](https://www.leroymerlin.fr/aide-et-contact/) – Telefon, Zeiten, Käufe im Markt
-- [Leroy Merlin Frankreich: Retour et remboursement](https://www.leroymerlin.fr/services/service-client/retour-et-remboursement.html) – Rücksendeetikett, Erstattung in 14 Tagen, Zahlungsmittel
-- [Leroy Merlin Frankreich: AGB](https://www.leroymerlin.fr/cgu-cgv-et-politique-de-donnees-personnelles/conditions-generales-de-vente.html) – Liefergebiet, Werktage, Paketnummer, Abholstellen, Speditionen, Vorbehalte, Verspätung, Widerruf, Verfolgung der Rücksendung
-- [Leroy Merlin Frankreich: Der Marktplatz](https://www.leroymerlin.fr/explication-marketplace.html) – Lieferungen der Verkäufer, Link zur Sendungsverfolgung, Kontakt zum Verkäufer, Rückgabe
-- [Leroy Merlin Frankreich: Marktplatz-Informationen](https://www.leroymerlin.fr/reglementations-marketplace.html) – vertrauenswürdiger Dritter
+- [ADEO: The ADEO marketplace](https://www.adeo.com/en/news/the-adeo-marketplace/) – der Marktplatz bei Leroy Merlin France seit Mai 2020
+- [Service-Public.fr: Fernabsatz, Lieferung (auf Französisch)](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – Liefertermin und Lieferart, 30 Tage, Verfolgung ohne Sondertarif, Paketdienst des Verkäufers und Risiko, Verspätung, Rücktritt, Erstattung und Zuschläge, nicht erhaltenes Paket, beschädigte Ware, Klausel zur sofortigen Prüfung, selbst gewählter Paketdienst, Musterbriefe
+- [Service-Public.fr: Fernabsatz, Widerrufsrecht (auf Französisch)](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – 14 Tage, Fristbeginn, 12 Monate, Widerruf erklären, Rücksendekosten, Erstattung, Ausnahmen
+- [Service-Public.fr: Informationen vor einem Fernabsatzkauf (auf Französisch)](https://www.service-public.gouv.fr/particuliers/vosdroits/F10483) – Marktplätze, Rücksendekosten sperriger Ware
+- [Your Europe: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – Gesamtpreis, vorangekreuzte Kästchen, Transportschäden, 2 Jahre Gewährleistung
+- [Your Europe: Versand und Lieferung, Fragen und Antworten](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_de.htm) – Lieferung nur in ein Land, Geoblocking, Ware bei der Lieferung prüfen, Zusatzkosten
 - [Universal Parcel Scraper: Carrier-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Nummernformen, Dienste, die Peek kennt
 :::

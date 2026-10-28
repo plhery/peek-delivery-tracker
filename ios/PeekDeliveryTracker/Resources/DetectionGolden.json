@@ -86013,6 +86013,49 @@
     ]
   },
   {
+    "input": "PKG00620250923006486209",
+    "carrier": "quick-rabbit",
+    "confidence": "high",
+    "candidates": [
+      "quick-rabbit"
+    ]
+  },
+  {
+    "input": "PKG00620250928024675758",
+    "carrier": "quick-rabbit",
+    "confidence": "high",
+    "candidates": [
+      "quick-rabbit"
+    ]
+  },
+  {
+    "input": "PKG00620251013008998518",
+    "carrier": "quick-rabbit",
+    "confidence": "high",
+    "candidates": [
+      "quick-rabbit"
+    ]
+  },
+  {
+    "input": "PKG00620251019000305561",
+    "carrier": "quick-rabbit",
+    "confidence": "high",
+    "candidates": [
+      "quick-rabbit"
+    ]
+  },
+  {
+    "input": "PKG006261001ES9900000000001A",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "quick-rabbit"
+    ],
+    "asked": [
+      "quick-rabbit"
+    ]
+  },
+  {
     "input": "PKG700534051001",
     "carrier": "unknown",
     "confidence": "low",
@@ -94831,6 +94874,12 @@
       "aramex-au",
       "aramex-nz"
     ]
+  },
+  {
+    "input": "WT2527401177023677",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "WX6Z9T",

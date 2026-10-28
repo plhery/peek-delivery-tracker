@@ -32163,6 +32163,47 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ]
+  },
+  "quick-rabbit": {
+    "displayName": "Quick Rabbit",
+    "aliases": [
+      "Quick Rabbit Logistic"
+    ],
+    "countries": [
+      "ES"
+    ],
+    "color": "#f6851f",
+    "selectable": true,
+    "timezone": "Europe/Madrid",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "quick-rabbit",
+      "recognitionRank": 68
+    },
+    "trackingUrlTemplate": "https://web.quickrabbit.es/es/tracking?ref={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "web.quickrabbit.es",
+          "quickrabbit.es"
+        ],
+        "pathPattern": "^/(?:[a-z]{2}/)?tracking/?$",
+        "params": [
+          "ref"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^PKG\\d{3}20\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{9}$",
+        "confidence": "high"
+      },
+      {
+        "pattern": "^PKG\\d{5}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])ES\\d{13}[A-Z]$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://web.quickrabbit.es/es/tracking"
   }
 } as const;
 
@@ -33028,7 +33069,8 @@ export const CARRIER_IDS = [
   "boxtal",
   "e-commerce-international",
   "mhi",
-  "huaya-express"
+  "huaya-express",
+  "quick-rabbit"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

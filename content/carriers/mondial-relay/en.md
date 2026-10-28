@@ -6,11 +6,11 @@ published: 2026-10-11
 updated: 2026-10-27
 ---
 
-Mondial Relay is a French parcel carrier in the InPost group that delivers to Points Relais (local shops acting as pickup points), lockers and homes. Track a parcel on [Mondial Relay's tracking page](https://www.mondialrelay.fr/suivi-de-colis/) with the 8-digit shipment number and the recipient's postcode, or paste the number in the box above. It's on the label and in the emails from Mondial Relay and the sender.
+Mondial Relay is a French parcel carrier in the InPost group that delivers to Points Relais (local shops acting as pickup points), lockers and homes. Track a parcel on [Mondial Relay's Belgian tracking page](https://www.mondialrelay.be/fr-be/suivi-de-colis/) with the 8-digit shipment number and the destination postcode, or paste the number in the box above. You get it by email or SMS once the parcel ships, and the sender has it too.
 
 ## Mondial Relay tracking number: where to find it
 
-Mondial Relay calls it the "n° d'expédition": 8 digits, at the top of the label in the "Information" box and in its tracking email. No number? Check the sender's confirmation email, then ask the sender, or see [how to find your tracking number](guide:find-tracking-number). Its Belgian and Dutch sites also take 10 and 12 digits.
+Mondial Relay calls it the "numéro d'expédition": 8 digits, in the tracking email or SMS. No number? Ask the sender, who can also follow the parcel, or see [how to find your tracking number](guide:find-tracking-number). Its Belgian and Dutch sites also take 10 and 12 digits.
 
 | Number (invented) | What it is |
 | --- | --- |
@@ -31,42 +31,42 @@ Mondial Relay's tracking is in French (or Dutch on its Belgian site), with no En
 | `Prise en charge` | The sender has handed it in at a Point Relais or locker. |
 | `Prise en charge de votre colis sur notre site logistique`, `Colis expédié depuis le site` | At, then leaving, the logistics site named. |
 | `Colis en route vers le point de livraison` | Heading for your Point Relais, locker or address. |
-| `Sollicitation Client pour replace colis` | Your relay can't take it: Mondial Relay emails you to pick another. |
+| `Sollicitation Client pour replace colis` | Your relay can't take it: you're asked to pick another. |
 | `Relais de substitution choisi` | Another relay will hold it: check its address. |
 | `En cours de livraison` | Out for delivery to your home. |
 | `Disponible dans votre Point Relais`, `Disponible dans votre locker` | Ready for pickup. |
 | `Retiré par le destinataire`, `Colis livré au destinataire` | Picked up by you, or delivered to your home. |
 | `Retour à l'expéditeur` | Going back to the sender. |
 
-After `Prise en charge`, nothing can be changed. On a relay delivery, `En cours de livraison` is dated when the parcel heads for the relay: wait for `Disponible…`. `Échec de livraison` means a home delivery failed, and `Votre colis a été livré à l'enseigne.` that a return reached the shop.
+On a relay delivery, wait for `Disponible…` before you go. `Échec de livraison` means a home delivery failed, and `Votre colis a été livré à l'enseigne.` that a return reached the shop.
 
 ## Mondial Relay parcel shops, lockers and missed deliveries
 
-**Picking it up.** At a Point Relais, show ID or give the pickup code Mondial Relay sent you by email or SMS; at a locker, type that 6-digit code or scan the QR code. Someone else can pick it up at a French Point Relais with their original ID and yours, or at a locker with the code.
+**Picking it up.** In Belgium, show ID or give the PIN code from Mondial Relay's email or SMS at a Point Relais; at a locker, type the 6-digit code from the email, SMS or app. Someone else can pick it up with your code, or at a Point Relais with their original ID and yours.
 
-**How long it waits.** In France, 5 calendar days, holidays included, with no extension: a parcel arriving on Wednesday waits until Monday, then goes back to the sender. Mondial Relay's table gives Belgium and Luxembourg 5 days, Spain and Portugal 8. InPost's pages say 5 for domestic parcels there, though one Portuguese page says 8.
+**How long it waits.** In Belgium, 5 calendar days, Sundays and holidays included, with no extension: a parcel arriving on Wednesday waits until Monday, then goes back to the sender. A Dutch Point Relais also keeps it 5 days. InPost's pages say 5 for domestic parcels in Spain and Portugal, though one Portuguese page says 8. For France, see Mondial Relay's French site.
 
-**Changing the relay.** Not possible once the label exists. If your relay is full or closed, Mondial Relay moves the parcel to a nearby point or emails you to choose one; with no reply, it chooses.
+**Changing the relay.** In Belgium, not possible once Mondial Relay has the parcel. If your relay is closed or can't take it, you're emailed or texted to wait or pick another; with no reply, Mondial Relay may choose one nearby.
 
-**Missed home delivery.** The driver uses your letterbox or a neighbour, or contacts you to arrange delivery or a nearby Mondial Relay point. After 3 failed attempts, or a refusal, it goes back to the sender.
+**Missed home delivery.** Under Mondial Relay's Dutch terms for private senders, the driver uses your letterbox, hands it to you or anyone at the address, or follows your instructions. If the first attempt fails, it goes to a Point Relais or locker and you're emailed. A refused parcel goes back to the sender.
 
 ## Mondial Relay parcel lost, stuck or damaged
 
-The sender, shop or private seller, holds the contract, so loss and damage go through them.
+In Belgium, Mondial Relay compensates the sender, shop or private seller, so loss and damage go through them.
 
-- **Stuck:** if the tracking hasn't moved for 5 days, Mondial Relay France asks you to use its contact form. See [why tracking stops updating](guide:tracking-not-updating).
-- **Lost:** contact the sender. For Vinted, Leboncoin and Rakuten parcels, the platform compensates after the investigation, usually completed within 30 days. A status of `avarie` means Mondial Relay's investigation is over and leads to a refund; it isn't the everyday "damaged".
+- **Stuck:** not at the Point Relais after the usual 3 to 6 working days? In Belgium, email customerservice@mondialrelay.be or call +32 2 340 06 10 with its number. See [why tracking stops updating](guide:tracking-not-updating).
+- **Lost:** contact the sender; Mondial Relay contacts them within 10 days of the loss report, and pays according to the insurance taken out. For a parcel sent through Vinted or another partner site, that site compensates under its own rules once the investigation declares it lost.
 - **Damaged:** refuse it at the Point Relais, as Mondial Relay rejects claims made after you've taken it.
 
 ## Mondial Relay customer service and contact number
 
-As listed on 10 October 2026; none is in English.
+As listed on 10 October 2026.
 
-- **France:** Chatbot Timo around the clock (it can give your pickup code), a form on [Nous contacter](https://www.mondialrelay.fr/nous-contacter/) and 09 69 32 23 32 at local-call rates, Monday to Friday 8:00–19:00, Saturday 8:00–18:00.
-- **Belgium:** +32 2 340 06 10 at the same hours, or customerservice@mondialrelay.be.
+- **France:** see the contact page on Mondial Relay's French site.
+- **Belgium:** +32 2 340 06 10 at local-call rates, Monday to Friday 8:00–19:00, Saturday 8:00–18:00, or customerservice@mondialrelay.be.
 - **Spain and Portugal:** now InPost, on 900 900 137 (Spain, free) and 211 245 624 (Portugal).
 
-> Mondial Relay never asks you to call a premium number, pay extra postage or share bank or login details. Its texts link only to mrcolis.fr. Report fakes to phishing@inpost-group.com.
+> Mondial Relay never asks you to call a premium number, pay extra fees or make a bank transfer, says its Belgian site. Its own emails come from noreply@mondialrelay.fr or noreply@mondialrelay.com. Report fakes to abuse@mondialrelay.fr.
 
 ## Tracking a Mondial Relay parcel with Peek
 
@@ -80,11 +80,11 @@ Peek shows Mondial Relay's French wordings as written and each scan's logistics 
 
 ### Where is my Mondial Relay parcel?
 
-The latest tracking line says: a logistics site's name means it's travelling, and `Disponible dans votre Point Relais` means it's waiting for you. Nothing new for 5 days? Use Mondial Relay's contact form.
+The latest tracking line says: a logistics site's name means it's travelling, and `Disponible dans votre Point Relais` means it's waiting for you. Not at your Point Relais after 3 to 6 working days, the usual time in Belgium and the Netherlands? Contact the sender or Mondial Relay's customer service.
 
 ### How long does Mondial Relay take to deliver?
 
-Mondial Relay gives 3 to 5 working days from hand-in in mainland France, where it delivers Tuesday to Saturday, and 3 to 6 to other countries.
+Mondial Relay aims for an average of 3 working days from hand-in to a Point Relais in Belgium, where Points Relais get parcels Tuesday to Saturday.
 
 ### Is Mondial Relay the same as InPost?
 
@@ -95,30 +95,29 @@ It's part of the InPost group. In Spain and Portugal, InPost took over Mondial R
 Yes: Mondial Relay SASU is a French company based in Villeneuve-d'Ascq. Fake messages use its name, though: check them against the warning above.
 
 :::sources
-- [Mondial Relay: Suivi de colis](https://www.mondialrelay.fr/suivi-de-colis/) – form, postcode
-- [Mondial Relay: Numéro de colis](https://www.mondialrelay.fr/faq/recevoir-un-colis/ou-trouver-mon-numero-de-colis/) – label, email
-- [Mondial Relay: Acheminement](https://www.mondialrelay.fr/faq/recevoir-un-colis/comment-suivre-l-acheminement-de-mon-colis/) – no number
-- [Mondial Relay: Délai de retrait](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – holding times
-- [Mondial Relay: Retirer mon colis](https://www.mondialrelay.fr/faq/recevoir-un-colis/comment-retirer-mon-colis/) – ID or code
-- [Mondial Relay: Retrait en Locker](https://www.mondialrelay.fr/faq/recevoir-un-colis/comment-retirer-un-colis-dans-un-lockers-mondial-relay/) – code, QR
-- [Mondial Relay: Une autre personne](https://www.mondialrelay.fr/faq/recevoir-un-colis/une-autre-personne-peut-elle-venir-chercher-mon-colis-en-lockers-ou-dans-un-point-relais/) – someone else
-- [Mondial Relay: Modifier le Point Relais](https://www.mondialrelay.fr/faq/recevoir-un-colis/je-souhaite-modifier-le-point-relais-de-livraison-est-ce-possible/) – no changes
-- [Mondial Relay: Point Relais fermé](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-point-relais-est-ferme-ou-mon-colis-va-t-il-etre-livre/) – substitute relays
-- [Mondial Relay: Délai moyen](https://www.mondialrelay.fr/faq/envoyer-un-colis/quel-est-le-delai-moyen-de-livraison/) – delivery times
-- [Mondial Relay: Jours de livraison](https://www.mondialrelay.fr/faq/recevoir-un-colis/quels-sont-les-jours-ou-le-livreur-passe-au-point-relais-pour-y-deposer-les-colis/) – delivery days
-- [Mondial Relay: Livraison échouée](https://www.mondialrelay.fr/faq/domicile/livraison-%C3%A0-domicile-que-se-passe-t-il-si-ma-livraison-%C3%A9choue/) – attempts
-- [Mondial Relay: Retard](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-faire-en-cas-de-retard-de-livraison/) – 5 days
-- [Mondial Relay: Colis perdu](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-faire-si-mon-colis-est-perdu/) – the sender
-- [Mondial Relay: Vinted ou Leboncoin](https://www.mondialrelay.fr/faq/envoyer-un-colis/un-colis-envoye-via-un-site-partenaire-vinted-leboncoin-rakuten-est-declare-perdu-que-faire/) – platforms
-- [Mondial Relay: Avarie](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-signifie-lexpression-en-avarie/) – refund
-- [Mondial Relay: Colis abîmé](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-colis-est-abime-que-faire/) – refusal
-- [Mondial Relay: Nous contacter](https://www.mondialrelay.fr/nous-contacter/) – chatbot, phone
-- [Mondial Relay: Arnaques](https://www.mondialrelay.fr/faq/recevoir-un-colis/e-mail-arnaque-mondial-relay/) – InPost group, scams
-- [Mondial Relay: Mentions légales](https://www.mondialrelay.fr/mentions-legales/) – company
-- [Mondial Relay: Étiquette](https://storage.mondialrelay.fr/etiquette-mondial-relay-v-24.pdf) – barcode
-- [Mondial Relay Belgique: Suivi](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 10, 12 digits
+- [Mondial Relay Belgique: Suivi](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10, 12 digits, destination postcode, email or SMS, ask the sender
+- [Mondial Relay Belgique: Suivre l'acheminement](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/comment-suivre-l-acheminement-de-mon-colis/) – numéro d'expédition, the sender
 - [Mondial Relay: Mijn Mondial Relay pakket volgen](https://www.mondialrelay.nl/mijn-mondial-relay-pakket-volgen/) – 8, 10, 12 digits in the Netherlands
-- [Mondial Relay Belgique: Contact](https://www.mondialrelay.be/fr-be/nous-contacter/) – phone, email
+- [Mondial Relay Belgique: Retirer mon colis](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/comment-retirer-mon-colis/) – ID or PIN code, PIN for someone else
+- [Mondial Relay Belgique: Retrait en Locker](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/comment-retirer-un-colis-dans-un-lockers-mondial-relay/) – 6-digit code
+- [Mondial Relay Belgique: Lockers](https://www.mondialrelay.be/fr-be/consignes-lockers/) – sharing the code
+- [Mondial Relay Belgique: Une autre personne](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/une-autre-personne-peut-elle-venir-chercher-mon-colis/) – both IDs
+- [Mondial Relay Belgique: Délai de garde](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 days in Belgium, no extension
+- [Mondial Relay: Hoe lang wordt mijn pakket bewaard?](https://www.mondialrelay.nl/faq/een-pakket-ontvangen/hoe-lang-wordt-mijn-pakje-bewaard-door-de-afhaalpunt/) – 5 days in the Netherlands
+- [Mondial Relay Belgique: Modifier le Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/je-souhaite-modifier-le-point-relais-de-livraison-est-ce-possible/) – no changes
+- [Mondial Relay Belgique: Point Relais fermé](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/mon-point-relais-est-ferme-ou-mon-colis-va-t-il-etre-livre/) – another relay
+- [Mondial Relay: Algemene verkoopvoorwaarden](https://www.mondialrelay.nl/algemene-verkoopvoorwaarden/) – home delivery, refusal (Dutch terms)
+- [Mondial Relay Belgique: Délai moyen](https://www.mondialrelay.be/fr-be/faq/envoyer-un-colis/quel-est-le-delai-moyen-de-livraison/) – delivery times
+- [Mondial Relay Belgique: Jours de livraison](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quels-sont-les-jours-ou-le-livreur-passe-au-point-relais-pour-y-deposer-les-colis/) – delivery days
+- [Mondial Relay Belgique: Retard](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/que-faire-en-cas-de-retard-de-livraison/) – 3 to 6 working days, email, phone
+- [Mondial Relay Belgique: Colis pas au Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/mon-colis-n-est-pas-au-point-relais-que-dois-je-faire/) – the sender
+- [Mondial Relay Belgique: Colis perdu](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/que-faire-si-mon-colis-est-perdu/) – the sender, 10 days, insurance
+- [Mondial Relay Belgique: Site partenaire](https://www.mondialrelay.be/fr-be/faq/envoyer-un-colis/un-colis-envoye-via-un-site-partenaire-vinted-est-d%C3%A9clare-perdu-que-faire/) – Vinted and other platforms
+- [Mondial Relay Belgique: Colis abîmé](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/mon-colis-est-abime-que-faire/) – refusal
+- [Mondial Relay Belgique: Contact](https://www.mondialrelay.be/fr-be/nous-contacter/) – phone, rates, hours
+- [Mondial Relay Belgique: Information fraude](https://www.mondialrelay.be/fr-be/informations-fraude/) – scams, sender addresses
+- [Mondial Relay: Fraude-informatie](https://www.mondialrelay.nl/fraude-informatie/) – reporting address
+- [Mondial Relay Belgique: Mentions légales](https://www.mondialrelay.be/fr-be/mentions-legales/) – company
 - [InPost: Mondial Relay Nederland maakt plaats voor InPost](https://inpost.nl/) – move to the InPost brand in the Netherlands
 - [InPost: Quiénes somos](https://www.inpost.es/quienes-somos) – takeover in Spain
 - [InPost: Quem somos](https://www.inpost.pt/quem-somos) – takeover in Portugal

@@ -6,11 +6,11 @@ published: 2026-10-11
 updated: 2026-10-27
 ---
 
-A Mondial Relay é uma transportadora francesa do grupo InPost que entrega em pontos de levantamento, em Lockers (cacifos) e em casa; em Portugal, a InPost ficou com ela em 2021 e o mondialrelay.pt leva agora ao inpost.pt. Para rastrear a encomenda, escreve o número na página [Rastrear Encomenda da InPost](https://www.inpost.pt/seguimento-do-envio/), que só pede o número, ou cola-o na caixa acima. O número vem no e-mail de confirmação do remetente e, na etiqueta da Mondial Relay, é o «n° d'expédition» de 8 algarismos.
+A Mondial Relay é uma transportadora francesa do grupo InPost que entrega em pontos de levantamento, em Lockers (cacifos) e em casa; em Portugal, a InPost ficou com ela em 2021 e o mondialrelay.pt leva agora ao inpost.pt. Para rastrear a encomenda, escreve o número na página [Rastrear Encomenda da InPost](https://www.inpost.pt/seguimento-do-envio/), que só pede o número, ou cola-o na caixa acima.
 
 ## Número de rastreio Mondial Relay: onde o encontrar
 
-A Mondial Relay chama-lhe «n° d'expédition» (número de expedição): 8 algarismos, no topo da etiqueta, no quadro «Information», e também no seu e-mail de seguimento. O [seguimento da Mondial Relay francesa](https://www.mondialrelay.fr/suivi-de-colis/) pede-o juntamente com o código postal do destinatário, e o site belga aceita ainda 10 e 12 algarismos. Não tens número? Procura no e-mail de confirmação do remetente, pergunta-lhe ou vê [onde encontrar o número de seguimento da encomenda](guide:find-tracking-number).
+O número de expedição da Mondial Relay tem 8 algarismos. O site belga chama-lhe «numéro d'expédition», pede-o no [seu seguimento](https://www.mondialrelay.be/fr-be/suivi-de-colis/) juntamente com o código postal de destino e aceita ainda 10 e 12 algarismos. Não tens número? Pede-o ao remetente, que também tem acesso ao seguimento, ou vê [onde encontrar o número de seguimento da encomenda](guide:find-tracking-number).
 
 | Número (inventado) | O que é |
 | --- | --- |
@@ -31,7 +31,7 @@ O seguimento da Mondial Relay está em francês (ou em neerlandês, no site belg
 | `Prise en charge`, `Colis pris en charge en Locker` | O remetente entregou-a num ponto ou num Locker. |
 | `Prise en charge de votre colis sur notre site logistique`, `Colis expédié depuis le site` | Chegou ao centro logístico indicado e depois saiu de lá. |
 | `Colis en route vers le point de livraison` | Vai a caminho do teu ponto, do Locker ou da tua morada. |
-| `Sollicitation Client pour replace colis` | O ponto escolhido não a pode receber: a Mondial Relay escreve-te para escolheres outro. |
+| `Sollicitation Client pour replace colis` | O ponto escolhido não a pode receber: pedem-te que escolhas outro. |
 | `Relais de substitution choisi` | Outro ponto vai guardá-la: confirma a morada dele. |
 | `En cours de livraison` | Em distribuição para a tua morada. |
 | `Disponible dans votre Point Relais`, `Disponible dans votre locker` | Pronta para levantamento. |
@@ -39,7 +39,7 @@ O seguimento da Mondial Relay está em francês (ou em neerlandês, no site belg
 | `Retiré par le destinataire`, `Colis livré au destinataire` | Levantaste-a, ou foi entregue em casa. |
 | `Retour à l'expéditeur` | Volta para o remetente. |
 
-Depois de `Prise en charge`, já nada pode ser alterado. Numa entrega num ponto, «Colis en cours de livraison» tem a data em que a encomenda sai para o ponto: espera por `Disponible dans votre Point Relais` antes de ir buscá-la. `Échec de livraison` quer dizer que uma entrega em casa falhou, e `Votre colis a été livré à l'enseigne.` que uma devolução chegou à loja. `avarie` quer dizer que a investigação da Mondial Relay terminou e leva a um reembolso, não que a encomenda chegou estragada.
+Numa entrega num ponto, espera por `Disponible dans votre Point Relais` antes de ir buscá-la. `Échec de livraison` quer dizer que uma entrega em casa falhou, e `Votre colis a été livré à l'enseigne.` que uma devolução chegou à loja.
 
 ## Mondial Relay perto de mim: Pontos Pack, Lockers e entregas falhadas
 
@@ -49,17 +49,17 @@ Depois de `Prise en charge`, já nada pode ser alterado. Numa entrega num ponto,
 
 **Levantar.** Num Locker, basta o PIN ou o código QR, sem documento. Num Ponto Pack, dás o PIN, mostras o «Cartão de Cidadão ou NIF» e assinas eletronicamente. Se for outra pessoa a levantá-la, essa pessoa leva o original ou uma cópia do teu NIF, o documento original dela e uma autorização assinada com os nomes e os NIF das duas e o número do envio.
 
-**Quanto tempo espera.** A InPost diz 5 dias de calendário nos envios nacionais, mas a FAQ da sua página de levantamento fala em 8 dias a contar da notificação, tal como a tabela da Mondial Relay para Portugal. Para não arriscar, levanta-a nos primeiros 5 dias: depois do prazo, volta automaticamente ao remetente. Em França, são 5 dias de calendário, sem prolongamento.
+**Quanto tempo espera.** A InPost diz 5 dias de calendário nos envios nacionais, mas a FAQ da sua página de levantamento fala em 8 dias a contar da notificação. Para não arriscar, levanta-a nos primeiros 5 dias: depois do prazo, volta automaticamente ao remetente.
 
-**Mudar o ponto.** A InPost não aceita mudanças depois de a encomenda ser admitida na rede, mas, conforme o estado, a opção pode aparecer no seguimento ou na app. Se o ponto escolhido estiver cheio ou fechado, a Mondial Relay manda a encomenda para um ponto próximo ou pede-te por e-mail que escolhas outro; sem resposta, escolhe ela.
+**Mudar o ponto.** A InPost não aceita mudanças depois de a encomenda ser admitida na rede, mas, conforme o estado, a opção pode aparecer no seguimento ou na app. Se o Ponto Pack ou o Locker estiver fechado, a InPost envia-te um e-mail e um SMS para decidires se esperas que reabra ou se escolhes outro; se não responderes, pode escolher automaticamente um ponto disponível perto de tua casa.
 
-**Entrega em casa falhada.** Se não estiveres, a agência de distribuição da InPost contacta-te para combinar uma nova data. Em França, ao fim de 3 tentativas sem entrega, a encomenda volta ao remetente.
+**Entrega em casa falhada.** Se não estiveres, a agência de distribuição da InPost contacta-te para combinar uma nova data.
 
 ## Encomenda Mondial Relay parada, perdida ou danificada: reclamação
 
-O contrato com a transportadora é de quem enviou, a loja ou o vendedor particular: em caso de perda ou dano, a Mondial Relay e a InPost mandam o destinatário falar primeiro com o remetente. Os prazos que a InPost indica na sua página de contacto:
+Os prazos que a InPost indica na sua página de contacto:
 
-- **Parada:** a InPost trata a reclamação num prazo máximo de 15 dias, pelo formulário. Em França, a Mondial Relay pede-te que preenchas o formulário de contacto quando a encomenda está parada no mesmo sítio há 5 dias. Vê também [porque é que o tracking não atualiza](guide:tracking-not-updating).
+- **Parada:** a InPost trata a reclamação num prazo máximo de 15 dias, pelo formulário. Vê também [porque é que o tracking não atualiza](guide:tracking-not-updating).
 - **Atrasada:** pode reclamar-se se a encomenda demorar mais de 5 dias depois do aviso de envio, até 21 dias depois de ficar disponível ou ser entregue. Se 30 dias depois do aviso de envio ainda não a tiveres recebido, podes reclamá-la como perda total.
 - **Perdida:** a InPost contacta o remetente nos 7 dias seguintes à declaração de perda, para a indemnização conforme o seguro contratado.
 - **Danificada:** num Ponto Pack, recusa uma embalagem estragada antes de dares o PIN. Danos visíveis reportam-se nas primeiras 24 horas depois da entrega; danos ocultos ou um artigo errado, em 7 dias de calendário; uma encomenda que não está no cacifo indicado, em 24 horas. Outra resposta da mesma página manda contactar a loja em 1 dia (danos visíveis) ou 7 dias (ocultos).
@@ -69,10 +69,10 @@ O contrato com a transportadora é de quem enviou, a loja ou o vendedor particul
 Tal como os sites os indicavam a 10 de outubro de 2026:
 
 - **Portugal (InPost):** assistente virtual «Disponível 24/7», formulário na página [Fala connosco](https://www.inpost.pt/fala-connosco) e o 211 245 624, de segunda a sexta-feira das 8:30 às 20:00 e ao sábado das 9:00 às 13:00, mais um serviço em língua gestual. A página não mostra número internacional nem WhatsApp.
-- **França:** o Chatbot Timo, 24 horas por dia, um formulário e o 09 69 32 23 32 (preço de uma chamada local), de segunda a sexta-feira das 8:00 às 19:00 e ao sábado das 8:00 às 18:00, em francês.
-- **Bélgica:** +32 2 340 06 10, nos mesmos horários, ou customerservice@mondialrelay.be.
+- **França:** vê a página de contacto do site francês da Mondial Relay.
+- **Bélgica:** +32 2 340 06 10 (preço de uma chamada local), de segunda a sexta-feira das 8:00 às 19:00 e ao sábado das 8:00 às 18:00, ou customerservice@mondialrelay.be.
 
-> A Mondial Relay avisa que nunca te pede para ligar para um número de valor acrescentado, pagar portes extra ou dar dados de acesso ou bancários, e que os seus SMS só levam a mrcolis.fr. Reencaminha mensagens falsas para phishing@inpost-group.com.
+> Em Portugal, a InPost avisa que nunca te pede para ligares para um número de tarifa adicional, pagares taxas por um link enviado por SMS, fazeres uma transferência para libertar uma encomenda nem dares palavras-passe ou dados do cartão, e que as suas comunicações vêm de endereços @inpost.pt. Reencaminha mensagens suspeitas para a equipa de segurança da InPost, em fraude@inpost.es.
 
 ## Seguir encomenda Mondial Relay com o Peek
 
@@ -98,29 +98,20 @@ Em Portugal, os pontos Mondial Relay são agora os Pontos Pack e Lockers da InPo
 
 ### Como fazer uma reclamação à Mondial Relay?
 
-Em Portugal, pelo formulário da InPost na página Fala connosco. Para perdas e danos, fala primeiro com a loja ou com quem te enviou a encomenda, que tem o contrato; danos visíveis reportam-se nas primeiras 24 horas.
+Em Portugal, pelo formulário da InPost na página Fala connosco; danos visíveis reportam-se nas primeiras 24 horas. Para danos que encontres depois de levantares a encomenda, a InPost manda-te também contactar a loja.
 
 :::sources
-- [InPost: Quem Somos](https://www.inpost.pt/quem-somos) – compra da Mondial Relay em 2021
+- [InPost: Quem Somos](https://www.inpost.pt/quem-somos) – compra da Mondial Relay em 2021; Locker, ponto de conveniência e entrega ao domicílio
 - [InPost: Empresa de Encomendas InPost](https://www.mondialrelay.pt/) – o mondialrelay.pt leva ao inpost.pt
-- [InPost: Rastrear Encomenda](https://www.inpost.pt/seguimento-do-envio/) – só o número
+- [InPost: Rastrear Encomenda](https://www.inpost.pt/seguimento-do-envio/) – só o número, de 8 caracteres; sem número, pede-o ao remetente
 - [InPost: Como Recolher uma Encomenda](https://www.inpost.pt/recebe-a-tua-encomenda/como-recolher) – PIN, QR, documentos, 5 ou 8 dias
 - [InPost: Procurar InPost Ponto Pack e Locker](https://www.inpost.pt/encontrar-um-ponto-pack-proximo-de-minha-casa/) – ponto mais próximo, Lockers 24 horas
-- [InPost: Contactos e Apoio ao Cliente](https://www.inpost.pt/fala-connosco) – telefone, horários, mudanças, ausência, prazos de reclamação
-- [Mondial Relay: Suivi de colis](https://www.mondialrelay.fr/suivi-de-colis/) – número e código postal
-- [Mondial Relay: Où retrouver mon numéro de colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/ou-trouver-mon-numero-de-colis/) – etiqueta, e-mail
-- [Mondial Relay: Comment suivre l'acheminement de mon colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/comment-suivre-l-acheminement-de-mon-colis/) – e-mail do remetente
-- [Mondial Relay: Délai de retrait](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – 5 dias em França, 8 em Portugal
-- [Mondial Relay: Modifier le Point Relais](https://www.mondialrelay.fr/faq/recevoir-un-colis/je-souhaite-modifier-le-point-relais-de-livraison-est-ce-possible/) – sem alterações
-- [Mondial Relay: Point Relais fermé](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-point-relais-est-ferme-ou-mon-colis-va-t-il-etre-livre/) – ponto de substituição
-- [Mondial Relay: Livraison à domicile échouée](https://www.mondialrelay.fr/faq/domicile/livraison-%C3%A0-domicile-que-se-passe-t-il-si-ma-livraison-%C3%A9choue/) – 3 tentativas
-- [Mondial Relay: Retard de livraison](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-faire-en-cas-de-retard-de-livraison/) – 5 dias
-- [Mondial Relay: Colis perdu](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-faire-si-mon-colis-est-perdu/) – o remetente
-- [Mondial Relay: Avarie](https://www.mondialrelay.fr/faq/recevoir-un-colis/que-signifie-lexpression-en-avarie/) – reembolso
-- [Mondial Relay: Nous contacter](https://www.mondialrelay.fr/nous-contacter/) – chatbot, telefone
-- [Mondial Relay: Arnaques](https://www.mondialrelay.fr/faq/recevoir-un-colis/e-mail-arnaque-mondial-relay/) – grupo InPost, mensagens falsas
-- [Mondial Relay: Étiquette](https://storage.mondialrelay.fr/etiquette-mondial-relay-v-24.pdf) – código de barras
-- [Mondial Relay Belgique: Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 10 e 12 algarismos
-- [Mondial Relay Belgique: Nous contacter](https://www.mondialrelay.be/fr-be/nous-contacter/) – telefone, e-mail
+- [InPost: Contactos e Apoio ao Cliente](https://www.inpost.pt/fala-connosco) – ponto fechado, mudanças, ausência, telefone, horários, prazos de reclamação
+- [InPost: Pagamentos Seguros e Prevenção de Fraudes](https://www.inpost.pt/faz-um-envio/como-enviar/pagamento-seguro/informacao-sobre-fraude) – o que a InPost nunca pede, e-mails @inpost.pt, fraude@inpost.es
+- [Mondial Relay Belgique: Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – código postal de destino, 8, 10 ou 12 algarismos
+- [Mondial Relay Belgique: Suivre l'acheminement](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/comment-suivre-l-acheminement-de-mon-colis/) – numéro d'expédition de 8 algarismos
+- [Mondial Relay Belgique: Nous contacter](https://www.mondialrelay.be/fr-be/nous-contacter/) – telefone, preço de uma chamada local, horários
+- [Mondial Relay Belgique: Retard](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/que-faire-en-cas-de-retard-de-livraison/) – customerservice@mondialrelay.be
+- [Mondial Relay Belgique: Mentions légales](https://www.mondialrelay.be/fr-be/mentions-legales/) – Mondial Relay S.A.S.U., RCS Lille Métropole, sede em Villeneuve-d'Ascq
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

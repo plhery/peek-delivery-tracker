@@ -82,7 +82,7 @@ Tu musisz coś zrobić: [nikt nie odebrał paczki albo kurier nie mógł jej dor
 
 :::steps
 - Przeczytaj powiadomienie | SMS, e-mail, aplikacja albo awizo w skrzynce: gdzie jest paczka i do kiedy czeka.
-- Sprawdź termin | Od 48 godzin w automacie paczkowym do 14 dni na poczcie, liczonych w godzinach, dniach albo dniach roboczych.
+- Sprawdź termin | Od 2 dni roboczych w automacie paczkowym do 14 dni na poczcie, liczonych w godzinach, dniach albo dniach roboczych.
 - Zmień dostawę | Tylko na stronie lub w aplikacji przewoźnika: inny dzień, adres, sąsiad, automat paczkowy albo punkt.
 - Odbierz paczkę | Kodem odbioru albo w aplikacji. W DPD z Twoim kodem odbierze ją też ktoś inny, jeśli nie trzeba nic podpisywać.
 :::
@@ -93,7 +93,6 @@ Tu musisz coś zrobić: [nikt nie odebrał paczki albo kurier nie mógł jej dor
 | Poczta Polska, kurier Pocztex | SMS, e-mail albo powiadomienie w aplikacji (bez tych danych awizo w skrzynce), przypomnienie drugiego dnia | 7 dni na poczcie, potem zwrot |
 | Poczta Polska, paczka pocztowa | Awizo w skrzynce; w miastach powyżej 100 000 mieszkańców paczkę odbierzesz od następnego dnia | 14 dni, licząc od dnia po zostawieniu awizo |
 | Pocztex PUNKT i AUTOMAT | – | Placówka pocztowa 7 dni, punkt w sklepie (np. Żabka) 3 dni, automat 72 godziny, bez przedłużenia |
-| Mondial Relay w Polsce | – | Automat 48 godzin (72 w środku budynku), punkt 72 godziny |
 
 Przy paczce pocztowej cięższej niż 2 kg albo przesyłce z należnościami celnymi rozporządzenie pozwala Poczcie Polskiej od razu zostawić awizo, bez próby doręczenia do drzwi.
 
@@ -146,6 +145,5 @@ Odmowa działa od razu: w Pocztex odmówiona paczka wraca do nadawcy niezwłoczn
 - [KAS: Informacja dla odbiorców przesyłek pocztowych spoza Unii Europejskiej](https://www.mazowieckie.kas.gov.pl/mazowiecki-urzad-celno-skarbowy-w-warszawie/wiadomosci/komunikaty/-/asset_publisher/i3dT/content/informacja-dla-odbiorcow-przesylek-pocztowych-spoza-unii-europejskiej) – zgłoszenie celne każdej przesyłki, próg 150 euro, należności przy doręczeniu
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – statusy FedEx, które czyta Peek (po angielsku)
 - [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – krajowe przesyłki FedEx w Polsce (dawniej Opek): 13 cyfr, osobne śledzenie, statusy po polsku
-- [Mondial Relay Belgia: ile dni masz na odbiór paczki z automatu lub punktu (FAQ po francusku)](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – Polska 48 i 72 godziny
 - [Cainiao: teksty strony śledzenia po polsku](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – wysyłka ekonomiczna, brak danych
 :::

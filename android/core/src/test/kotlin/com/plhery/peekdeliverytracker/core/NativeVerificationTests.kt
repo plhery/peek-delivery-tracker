@@ -409,6 +409,7 @@ class NativeVerificationTests {
         assert = { _, _ -> "synthetic-assertion".toByteArray() },
     )
 
+    /** Adapted: the transport ends in a CancellationException, as HttpTransport's cancelled call does, for URLError.cancelled. */
     @Test
     fun cancelledLookupLeavesAppAttestOn() = runTest {
         val server = NativeTestServer(paid = true)
@@ -463,8 +464,8 @@ class NativeVerificationTests {
     // Android-only
 
     /**
-     * Once its coroutine is cancelled, a call may end in an error of its own rather than a CancellationException (an
-     * IOException from OkHttp interrupted under `runInterruptible`): App Attest stays on all the same.
+     * Once its coroutine is cancelled, a call may end in an error of its own rather than a CancellationException (the
+     * IOException OkHttp ends a cancelled call with): App Attest stays on all the same.
      */
     @Test
     fun aCancellationEndingInAnotherErrorLeavesAppAttestOn() = runTest {

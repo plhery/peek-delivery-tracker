@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
+import java.io.IOException
 import java.security.MessageDigest
 import java.time.Instant
 import java.util.Base64
@@ -13,6 +14,7 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
@@ -411,12 +413,12 @@ class NativeVerification(
         }
 
         /**
-         * A cancelled request ends as a cancellation. Once its coroutine is cancelled, a call may end in an error of its
-         * own, as URLSession ends one with URLError.cancelled rather than CancellationError.
+         * A cancelled request ends as a cancellation, as does one whose coroutine was cancelled while its call ended in
+         * OkHttp's IOException, as URLSession ends one in URLError.cancelled. A timeout of the call's own is a failure.
          */
         private suspend fun throwIfCancelled(error: Exception) {
-            if (error is CancellationException) throw error
-            currentCoroutineContext().ensureActive()
+            if (error is CancellationException || error is IOException) currentCoroutineContext().ensureActive()
+            if (error is CancellationException && error !is TimeoutCancellationException) throw error
         }
 
         fun needsVerification(response: HttpResponse): Boolean =

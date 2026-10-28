@@ -115,7 +115,8 @@ class HttpResponse(val statusCode: Int, headers: Map<String, String> = emptyMap(
 /**
  * URLSession's `data(for:)`, which the app implements with OkHttp. Every status is an answer, never an exception. A
  * request that could not be sent, a network failure and a connection that timed out throw an `IOException` (Swift's
- * `URLError`); a call the app cancelled ends in a `CancellationException`.
+ * `URLError`); a call the app cancelled ends in a `CancellationException`, or in the IOException OkHttp ends it with once
+ * its coroutine is cancelled.
  *
  * What the OkHttp transport must do:
  * - Send a POST, PUT or PATCH whose `body` is null (`queueRefreshAll`, `refresh`, `restore`) with an empty body:

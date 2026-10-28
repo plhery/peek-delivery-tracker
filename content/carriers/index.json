@@ -151,5 +151,7 @@
   { "id": "yto", "catalog": "yto", "name": "YTO Express", "languages": ["en"] },
   { "id": "spx-br", "catalog": "spx-br", "name": "SPX Express Brazil", "languages": ["en"] },
   { "id": "eushipments", "catalog": "eushipments", "name": "euShipments", "languages": ["en"] },
-  { "id": "mhi", "catalog": "mhi", "name": "MHI", "languages": ["en"] }
+  { "id": "mhi", "catalog": "mhi", "name": "MHI", "languages": ["en"] },
+  { "id": "pengyou", "catalog": "pengyou", "name": "Pengyou", "languages": ["en"] },
+  { "id": "linhan", "catalog": "linhan", "name": "LinHan International", "languages": ["en"] }
 ]

@@ -1232,6 +1232,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "MHI tracking: Trackmail statuses and who delivers",
       "name": "MHI",
       "color": "#00075c"
+    },
+    {
+      "id": "pengyou",
+      "catalog": "pengyou",
+      "slug": "pengyou-tracking",
+      "title": "Pengyou tracking: PY numbers, scans and who to ask",
+      "name": "Pengyou",
+      "color": "#043a82"
+    },
+    {
+      "id": "linhan",
+      "catalog": "linhan",
+      "slug": "linhan-tracking",
+      "title": "LinHan International tracking: LHGJ numbers and statuses",
+      "name": "LinHan International",
+      "color": "#eb5c20"
     }
   ],
   "de": [

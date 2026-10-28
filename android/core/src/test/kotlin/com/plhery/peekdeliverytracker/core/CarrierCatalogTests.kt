@@ -1287,7 +1287,9 @@ class CarrierCatalogTests {
         assertEquals(listOf(CarrierId.Tnt), catalog.detect("123456785").preferred)
         assertFalse(catalog.detect("123456789").candidates.contains(CarrierId.Tnt))
         assertTrue(catalog.detect("1234567890123456").candidates.contains(CarrierId.Tnt))
-        assertEquals(listOf(CarrierId.PocztaPolska), catalog.detect("00159007731234567899").preferred)
+        val polish = catalog.detect("00159007731234567899")
+        assertEquals(CarrierId.PocztaPolska, polish.carrier)
+        assertEquals(CarrierMatch.Confidence.High, polish.confidence)
         assertFalse(catalog.detect("12345678901234567891").candidates.contains(CarrierId.PocztaPolska))
         assertTrue(catalog.detect("1234567890123456789").candidates.contains(CarrierId.PocztaPolska))
     }
@@ -2045,6 +2047,11 @@ class CarrierCatalogTests {
         assertFalse(CarrierCatalog.isValidSscc("00000000000000000017\n"))
         // S10 normalizes its own input, separators and the final line break included.
         assertTrue(CarrierCatalog.isValidS10("\uFEFFRR 473 124 829 CH\n"))
+        // A NO LIMIT shipment number drops its slashes; any other slash stays.
+        assertEquals("P1234LABC2026", CarrierCatalog.normalize("p/1234/labc/2026"))
+        assertEquals("P1234LABC2026", CarrierCatalog.normalize("P/1234/LABC2026"))
+        assertEquals("P/1234/LABC/1999", CarrierCatalog.normalize("P/1234/LABC/1999"))
+        assertEquals("AB/12", CarrierCatalog.normalize("AB/12"))
     }
 
     /** A label prints its SSCC behind the bracketed GS1 identifier; carriers track the twenty digits. */

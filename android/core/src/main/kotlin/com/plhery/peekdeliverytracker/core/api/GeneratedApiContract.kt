@@ -860,6 +860,30 @@ value class CarrierId(val rawValue: String) {
         val DpdHu = CarrierId("dpd-hu")
         val FedexInternationalConnect = CarrierId("fedex-international-connect")
         val Pengyou = CarrierId("pengyou")
+        val PinAg = CarrierId("pin-ag")
+        val TuskLogistics = CarrierId("tusk-logistics")
+        val GofoCa = CarrierId("gofo-ca")
+        val Topyou = CarrierId("topyou")
+        val Yfhex = CarrierId("yfhex")
+        val Eushipments = CarrierId("eushipments")
+        val NoLimit = CarrierId("no-limit")
+        val StarlinksGlobal = CarrierId("starlinks-global")
+        val TimelyTitan = CarrierId("timely-titan")
+        val Boxtal = CarrierId("boxtal")
+        val ECommerceInternational = CarrierId("e-commerce-international")
+        val Mhi = CarrierId("mhi")
+        val HuayaExpress = CarrierId("huaya-express")
+        val QuickRabbit = CarrierId("quick-rabbit")
+        val Dealersend = CarrierId("dealersend")
+        val ExpressOneBg = CarrierId("express-one-bg")
+        val Pactic = CarrierId("pactic")
+        val GofoEs = CarrierId("gofo-es")
+        val JAndTUk = CarrierId("j-and-t-uk")
+        val Logisimple = CarrierId("logisimple")
+        val Viadireta = CarrierId("viadireta")
+        val MesoGlobal = CarrierId("meso-global")
+        val Jifan = CarrierId("jifan")
+        val YoubangExpress = CarrierId("youbang-express")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -1664,6 +1688,30 @@ value class CarrierId(val rawValue: String) {
             DpdHu,
             FedexInternationalConnect,
             Pengyou,
+            PinAg,
+            TuskLogistics,
+            GofoCa,
+            Topyou,
+            Yfhex,
+            Eushipments,
+            NoLimit,
+            StarlinksGlobal,
+            TimelyTitan,
+            Boxtal,
+            ECommerceInternational,
+            Mhi,
+            HuayaExpress,
+            QuickRabbit,
+            Dealersend,
+            ExpressOneBg,
+            Pactic,
+            GofoEs,
+            JAndTUk,
+            Logisimple,
+            Viadireta,
+            MesoGlobal,
+            Jifan,
+            YoubangExpress,
         )
     }
 }
@@ -1728,6 +1776,12 @@ data class ImportCharges(
     @SerialName("carrier_fee_online") val carrierFeeOnline: Double? = null,
     val paid: Boolean? = null,
     @SerialName("status_code") val statusCode: String? = null,
+)
+
+@Serializable
+data class LikelyCarrier(
+    val carrier: CarrierId,
+    val since: String,
 )
 
 @Serializable
@@ -2235,6 +2289,7 @@ data class PublicLookupRequest(
     val dpdPostcode: String? = null,
     val dpdPostcodeCountry: String? = null,
     val lookupCountryHint: String? = null,
+    val language: String? = null,
 )
 
 @Serializable
@@ -2572,6 +2627,7 @@ data class PublicPackageCarrierData(
     @SerialName("weight_kg") val weightKg: Double? = null,
     @SerialName("import_charges") val importCharges: ImportCharges? = null,
     @SerialName("destination_country") val destinationCountry: String? = null,
+    @SerialName("likely_carrier") val likelyCarrier: LikelyCarrier? = null,
 )
 
 @Serializable
@@ -2624,6 +2680,7 @@ data class CarrierDataRouting(
     @SerialName("input_needed") val inputNeeded: CarrierInputNeeded? = null,
     @SerialName("postcode_refused") val postcodeRefused: CarrierPostcodeRefused? = null,
     @SerialName("input_suggested") val inputSuggested: CarrierInputSuggested? = null,
+    @SerialName("likely_carrier") val likelyCarrier: LikelyCarrier? = null,
     @SerialName("provider_input_needed") val providerInputNeeded: ProviderInputNeeded? = null,
     @SerialName("next_check_at") val nextCheckAt: String? = null,
 )

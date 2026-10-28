@@ -981,11 +981,22 @@ class CarrierCatalog private constructor(
 
         /** Capitals without separators. A label prints its SSCC behind the bracketed GS1 identifier,
          * "(00) 3 7012345 678901234 7", which carriers track as the twenty digits without brackets; other
-         * bracketed identifiers stay as typed, since (420), for one, carries a ZIP. */
+         * bracketed identifiers stay as typed, since (420), for one, carries a ZIP. A NO LIMIT shipment number,
+         * P/1234/LABC/2026, reads the same without its slashes, which are dropped. */
         fun normalize(raw: String): String {
             val value = raw.uppercase()
             val compact = CatalogExpressions.replacing(separatorPattern, value, "") ?: return value
-            return if (matches(compact, "^\\(00\\)[0-9]{18}$")) "00" + compact.substring(4) else compact
+            if (matches(compact, "^\\(00\\)[0-9]{18}$")) return "00" + compact.substring(4)
+            if ('/' in compact) noLimitShipmentNumber(compact)?.let { return it }
+            return compact
+        }
+
+        /** A NO LIMIT shipment number without its slashes (`noLimitShipmentNumber`): P and a serial, L and the
+         * branch's three letters, and the year. */
+        private fun noLimitShipmentNumber(value: String): String? {
+            val matcher = CatalogExpressions.expression("^P/?([0-9]{1,6})/?L([A-Z]{3})/?(20[0-9]{2})$")?.matcher(value)
+            if (matcher == null || !matcher.find()) return null
+            return "P${matcher.group(1)}L${matcher.group(2)}${matcher.group(3)}"
         }
 
         /** Six digits and nothing else, normalized: the code that opens a parcel locker or collects a parcel at

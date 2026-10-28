@@ -1017,7 +1017,7 @@ class ParcelLogicTests {
     @Test
     fun passportTiesAndMilestonesAreStableWhenParcelOrderChanges() {
         val parcels = (1..5).map { index ->
-            val id = UUID.fromString("00000000-0000-0000-0000-%012d".format(index))
+            val id = UUID.fromString("00000000-0000-0000-0000-%012d".format(Locale.ROOT, index))
             makeParcel(
                 id,
                 events = listOf(

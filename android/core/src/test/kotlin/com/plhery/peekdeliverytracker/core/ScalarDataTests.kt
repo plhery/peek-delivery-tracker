@@ -9,6 +9,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.util.Locale
 
 /**
  * ScalarData.kt and Normalization.kt, and the FoundationText.kt helpers that read them. The data is Unicode 17, as Swift's standard library has it; ICU4J 76's is Unicode
@@ -25,9 +26,9 @@ class ScalarDataTests {
 
     private fun text(vararg scalars: Int) = String(scalars, 0, scalars.size)
 
-    private fun hex(scalar: Int) = "U+%04X".format(scalar)
+    private fun hex(scalar: Int) = "U+%04X".format(Locale.ROOT, scalar)
 
-    private fun hex(text: String) = text.codePoints().toArray().joinToString(" ") { "%04X".format(it) }
+    private fun hex(text: String) = text.codePoints().toArray().joinToString(" ") { "%04X".format(Locale.ROOT, it) }
 
     @Test
     fun theDataIsSwiftsUnicode() {

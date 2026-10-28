@@ -99,7 +99,7 @@ class APIClientTests {
         describe(error)
     }
 
-    private fun hex(data: ByteArray): String = data.joinToString("") { "%02x".format(it) }
+    private fun hex(data: ByteArray): String = data.joinToString("") { "%02x".format(Locale.ROOT, it) }
 
     // Requests
 

@@ -5,6 +5,7 @@ import com.ibm.icu.lang.UCharacter.GraphemeClusterBreak
 import com.ibm.icu.lang.UProperty
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.util.Locale
 
 /**
  * GraphemeBreaking.kt and GraphemeData.kt. The data is Unicode 17, ICU4J 76's is Unicode 16: they must agree but for what
@@ -31,7 +32,7 @@ class GraphemeBreakingTests {
 
     private fun text(vararg scalars: Int) = String(scalars, 0, scalars.size)
 
-    private fun hex(scalar: Int) = "U+%04X".format(scalar)
+    private fun hex(scalar: Int) = "U+%04X".format(Locale.ROOT, scalar)
 
     @Test
     fun breakPropertiesInTheDataAreUnicodes() {

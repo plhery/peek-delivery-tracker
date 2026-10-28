@@ -9,6 +9,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -30,7 +31,7 @@ class ParcelLogicFormattingTests {
         parcel = parcel.copy(expectedDelivery = "2026-09-07 14:00–16:00")
         assertEquals("aujourd’hui, 14:00–16:00", localizer.parcelDeliveryEstimate(parcel, now))
         parcel = parcel.copy(expectedDelivery = "2026-09-07T12:30:00Z")
-        val formatter = DateTimeFormatter.ofPattern("HH:mm").withZone(ZoneId.systemDefault())
+        val formatter = DateTimeFormatter.ofPattern("HH:mm", Locale.ROOT).withZone(ZoneId.systemDefault())
         val time = formatter.format(DateParser.date(parcel.expectedDelivery!!)!!)
         assertEquals("aujourd’hui, $time", localizer.parcelDeliveryEstimate(parcel, now))
         parcel = parcel.copy(expectedDelivery = "2026-09-06")

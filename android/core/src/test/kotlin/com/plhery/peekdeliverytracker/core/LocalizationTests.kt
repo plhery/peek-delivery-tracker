@@ -70,7 +70,8 @@ class LocalizationTests {
             for (variant in variants) {
                 val key = variant.dropLast(".ipad".length)
                 assertEquals("$language.$key", messages[variant], pad.text(key))
-                assertFalse("$language.$key", pad.text(key).contains("iPhone"))
+                // "iPhon", not "iPhone": Polish declines it ("na tym iPhonie").
+                assertFalse("$language.$key", pad.text(key).contains("iPhon"))
                 assertEquals("$language.$key", messages[key], phone.text(key))
             }
         }

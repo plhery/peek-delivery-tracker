@@ -159,6 +159,7 @@ describe('carrier mark', () => {
     'express-one-bg',
     'logisimple',
     'viadireta',
+    'meso-global',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

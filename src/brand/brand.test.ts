@@ -218,6 +218,7 @@ describe('carrier brand', () => {
       'express-one-bg',
       'logisimple',
       'viadireta',
+      'meso-global',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

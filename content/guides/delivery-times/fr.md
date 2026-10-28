@@ -4,17 +4,17 @@ description: Jusqu'à quelle heure livrent Colissimo, Chronopost, Mondial Relay,
 slug: a-quelle-heure-livre-colissimo
 picture: Une horloge qui marque huit heures du soir sous un croissant de lune, un calendrier aux week-ends marqués, une camionnette phares allumés, et Pip qui regarde par la fenêtre.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteur ne te promet une heure. La Poste ne publie aucun horaire pour Colissimo, et Chronopost propose avec Chrono Precise des créneaux jusqu'à 22 h. Le samedi, Chronopost livre comme un jour normal ; le dimanche dépend presque toujours du service que l'expéditeur a payé.
+Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteur ne te promet une heure. La Poste ne publie aucun horaire pour Colissimo. Le samedi, Chronopost livre comme un jour normal ; le dimanche dépend presque toujours du service que l'expéditeur a payé.
 
 ## Jusqu'à quelle heure livre chaque transporteur ?
 
 | Transporteur | En semaine | Samedi | Dimanche |
 | --- | --- | --- | --- |
 | [Colissimo](carrier:la-poste) (France) | Aucun horaire publié ; un e-mail 24 h avant la livraison | – | – |
-| [Chronopost](carrier:chronopost) (France) | Aucun horaire publié ; avec Chrono Precise, créneaux de 8 h à 22 h | Oui | – |
+| [Chronopost](carrier:chronopost) (France) | – | Oui | – |
 | [bpost](carrier:bpost) (Belgique) | Une heure indicative, sans horaire général publié | En point d'enlèvement ou distributeur de colis, de 8 h à 17 h, si l'expéditeur a un accord avec bpost | À domicile, de 9 h à 19 h, même condition |
 | [Mondial Relay](carrier:mondial-relay) (Belgique) | Livraison en Point Relais du mardi au samedi | Oui, en Point Relais | Pas en Point Relais |
 | [La Poste suisse](carrier:swiss-post) | Du lundi au vendredi, sans horaire publié ; en option, le matin (7 h à 9 h) ou le soir (16 h 30 à 21 h) | En option, CHF 3.80 | Non pour le PostPac Priority |
@@ -61,7 +61,7 @@ Parce que ton adresse n'est pas le seul arrêt. « En cours de livraison » veut
 - home | Ta porte | À n'importe quelle heure, jusqu'à la dernière du transporteur.
 :::
 
-Les heures les plus tardives sont normales : 21 h pour la distribution du soir de La Poste suisse, 22 h pour Chrono Precise. Un colis livré à 20 h 30, c'est une journée normale. Pour le sens de chaque statut du suivi, lis [les étapes du suivi d'un colis](guide:tracking-statuses).
+Les heures tardives sont normales : la distribution du soir de La Poste suisse va jusqu'à 21 h. Un colis livré à 20 h 30, c'est une journée normale. Pour le sens de chaque statut du suivi, lis [les étapes du suivi d'un colis](guide:tracking-statuses).
 
 « En cours de livraison au point de retrait » ne parle pas de chez toi : chez Mondial Relay, pour un colis à retirer en Point Relais, `Colis en route vers le point de livraison` veut dire qu'il roule vers le Point Relais.
 
@@ -106,7 +106,6 @@ Un piège : une consigne ouverte jour et nuit n'est remplie que les jours de liv
 :::sources
 - [La Poste : Recevoir un Colissimo à domicile](https://www.laposte.fr/conseils-pratiques/recevoir-un-colissimo-a-domicile) – e-mail 24 h avant
 - [La Poste : Livraison le samedi](https://www.laposte.fr/professionnel/expedier/livraison-colis-samedi) – Chronopost le samedi, en métropole
-- [Chronopost : Chrono Precise](https://www.chronopost.fr/fr/livraison/nos-offres/chrono-precise) – créneaux de 8 h à 22 h
 - [Universal Parcel Scraper : libellés Chronopost](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/chronopost/statuses.json) – « Livraison reportée de 24h »
 - [DPD France : Quand serai-je informé de mon créneau ?](https://www.dpd.com/fr/en/faq/quand-serai-je-informee-de-mon-creneau-horaire-de-livraison/) – créneau le jour même, aucun créneau sans Predict
 - [DPD France : Livraison à domicile Predict](https://www.dpd.com/fr/fr/expedier-des-colis/domicile-predict/) – créneau, Pickup, voisin, autre date

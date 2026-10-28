@@ -4,7 +4,7 @@ description: E-mail d'expédition, commande, avis de passage, preuve de dépôt 
 slug: ou-trouver-numero-de-suivi
 picture: Un e-mail d'expédition où le numéro RR000000005CH est surligné en jaune, une étiquette à code-barres à côté, et Pip qui sourit.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Ton numéro de suivi se trouve en général dans l'e-mail ou le SMS d'expédition de la boutique, ou dans le détail de ta commande sur son site ou son app, à un clic du numéro de commande. Si c'est toi qui as envoyé le colis, il figure sur ta preuve de dépôt ou ton bordereau. Aucun transporteur ne retrouve un colis à partir de ton nom ou de ton adresse, mais un avis de passage, le compte gratuit de certains transporteurs ou l'expéditeur peuvent quand même te permettre de le suivre.
@@ -116,7 +116,6 @@ Passé ce délai, vérifie le numéro lui-même :
 - **Est-ce le numéro de commande ?** Celui de la boutique ne marche pas sur le site du transporteur (voir plus haut).
 - **Est-ce un code douanier ?** Un code-barres bpost qui commence par « U » sert seulement à la douane : il ne se suit pas.
 - **Es-tu sur le site du bon transporteur ?** Sur celui d'un autre, le numéro ne donnera rien. Mondial Relay et Colis Privé demandent aussi le code postal du destinataire.
-- **As-tu collé plusieurs numéros ensemble ?** DHL lit une tabulation, une virgule, un espace ou un point-virgule comme le début d'un autre numéro.
 
 Toujours rien ? Demande à l'expéditeur ou à la boutique. Pour comprendre chaque statut, lis [ce que veulent dire les statuts de suivi](guide:tracking-statuses).
 
@@ -135,7 +134,6 @@ Toujours rien ? Demande à l'expéditeur ou à la boutique. Pour comprendre chaq
 - [La Poste suisse : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – code de retrait
 - [La Poste suisse : Questions et réponses, expédier](https://www.post.ch/fr/aide-et-contact/expedier) – recherches
 - [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numéros 1Z et leur clé de contrôle
-- [DHL : Suivi](https://www.dhl.com/fr-fr/home/suivi.html) – séparateurs entre plusieurs numéros
 - [DHL : Sendungsverfolgung, Probleme und Lösungen (en allemand)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – numéro de commande, numéro valide
 - [About Amazon France : Six conseils pratiques pour se protéger des tentatives d'arnaques par usurpation d'identité](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – historique des commandes sur le compte ou l'application
 - [eBay : Suivre l'acheminement d'un objet](https://www.ebay.fr/help/buying/livraison/suivre-objet?id=4027) – Historique des achats, envoi suivi, ajout du numéro par le vendeur

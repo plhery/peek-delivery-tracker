@@ -1,6 +1,6 @@
 import 'server-only';
 import { REFUSED_NUMBER } from '../lib/messages';
-import { routingState } from './trackingRouting';
+import { CANDIDATE_PROBE_WINDOW, routingState } from './trackingRouting';
 import { isRecord, type JsonObject } from './types';
 
 /**
@@ -46,7 +46,10 @@ export function unseenIntervalHours(unseen: number, opened = false): number {
  * (`carrier:refused_number`): asking it again changes nothing. So does a lookup
  * without an account while its carrier's last answer is that it has not found
  * the number or has no history for it, so it leaves the schedule as an unfiled
- * one does; the carrier's outage is no answer.
+ * one does; the carrier's outage is no answer. An account's parcel whose number
+ * points to a carrier that does not list it yet (`routing.likely_carrier`) is
+ * checked as that carrier's own parcel would be before its first scan, while
+ * recognition asks that carrier (CANDIDATE_PROBE_WINDOW).
  */
 export function unseenFor(parcel: JsonObject, now: Date): number | null {
   if (String(parcel.current_stage ?? 'pending') !== 'pending') return null;
@@ -59,7 +62,8 @@ export function unseenFor(parcel: JsonObject, now: Date): number | null {
   if (data.original_carrier || data.universal_input || routing.last_success_at || routing.last_event_at
     || routing.confirmed_carrier || routing.discovered_carrier || routing.input_needed || routing.provider_input_needed) return null;
   const added = Date.parse(String(parcel.created_at ?? ''));
-  return Number.isFinite(added) ? Math.max(0, now.getTime() - added) : 0;
+  const unseen = Number.isFinite(added) ? Math.max(0, now.getTime() - added) : 0;
+  return routing.likely_carrier && parcel.one_off !== true && unseen < CANDIDATE_PROBE_WINDOW ? null : unseen;
 }
 
 /**

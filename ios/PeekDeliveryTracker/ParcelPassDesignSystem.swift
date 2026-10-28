@@ -377,8 +377,8 @@ struct CarrierVisualIdentity {
     static let fallbackColor = CarrierBrandAssets.shared.fallbackColor
 
     let family: String
-    let name: String
-    let fullName: String
+    private(set) var name: String
+    private(set) var fullName: String
     let colors: [String]
     let decal: String
 
@@ -395,6 +395,18 @@ struct CarrierVisualIdentity {
         if let cached = cache.object(forKey: key) { return cached.identity }
         let identity = CarrierVisualIdentity(id: carrier.rawValue, carrier: definition)
         cache.setObject(Cached(identity), forKey: key)
+        return identity
+    }
+
+    /// The carrier a card or the parcel's header shows: the parcel's own, or while none is known, the one
+    /// its number points to, named as probable in the livery of no carrier.
+    @MainActor
+    static func shown(for parcel: Parcel, catalog: CarrierCatalog = .shared, localizer: Localizer) -> CarrierVisualIdentity {
+        var identity = of(parcel.displayedCarrier, catalog: catalog, language: localizer.language)
+        guard parcel.displayedCarrier == .unknown, let likely = parcel.likelyCarrier else { return identity }
+        let probable = localizer.text("link.likely.carrier", ["carrier": catalog.info(for: likely, language: localizer.language).displayName])
+        identity.name = probable
+        identity.fullName = probable
         return identity
     }
 

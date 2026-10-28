@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { deliveringCarrierId, displayedCarrierId, carrierInfo } from '../lib/carriers';
 import { localizedDatePhrase, localizedExpectedDelivery, useI18n } from '../i18n';
 import { numberToCheck } from '../lib/messages';
-import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelDisplayStatusKey, parcelHasCarrierUpdate } from '../lib/parcelStatus';
+import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel, shownCarrier } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
 import { currentEvent } from '../lib/stages';
 import { userErrorMessage } from '../lib/userMessages';
@@ -26,13 +26,13 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
   arrived?: boolean;
 }) {
   const { locale, languageTag, t } = useI18n();
-  const carrier = carrierInfo(displayedCarrierId(parcel), locale);
+  const carrier = shownCarrier(parcel, carrierInfo(displayedCarrierId(parcel), locale), t, locale);
   const deliveryCarrier = deliveringCarrierId(parcel);
   const deliveryLabel = deliveryCarrier ? t('parcel.deliveryCarrier', { carrier: carrierInfo(deliveryCarrier, locale).name }) : null;
   const current = currentEvent(parcel.events);
   const estimate = parcelDeliveryEstimate(parcel);
   const expectedDelivery = estimate ? localizedExpectedDelivery(estimate, t, languageTag) : null;
-  const statusLabel = t(parcelDisplayStatusKey(parcel));
+  const statusLabel = parcelStatusLabel(parcel, t, locale);
   const completionDate = localizedParcelCompletionDate(parcel, languageTag, t);
   // A parcel waiting for collection says where.
   const pickupPlace = current?.stage === 'ready_for_pickup' ? pickupPoint(parcel.pickupPoint)?.name : undefined;

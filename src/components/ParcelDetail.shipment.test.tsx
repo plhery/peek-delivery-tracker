@@ -329,6 +329,20 @@ describe('shipment details', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
+  it('names the probable carrier where the header names the carrier, and waits for its first scan', () => {
+    // A synthetic number in DPD Switzerland's depot range, which no carrier has answered for yet.
+    const likely = { carrier: 'dpd' as const, since: new Date(Date.now() - 3_600_000).toISOString() };
+    const view = show({ carrier: 'unknown', trackingNumber: '06080000000002', syncStatus: 'waiting', likelyCarrier: likely });
+    expect(screen.getByRole('button', { name: 'Change carrier from Probably DPD Switzerland' })).toBeInTheDocument();
+    expect(screen.getAllByText('Waiting for DPD Switzerland’s first scan').length).toBeGreaterThan(0);
+    expect(screen.queryByText('No tracking history yet')).not.toBeInTheDocument();
+    view.unmount();
+    // Once another carrier answers for the number, the parcel is filed under it and the guess goes.
+    show({ carrier: 'seur', trackingNumber: '06080000000002', syncStatus: 'waiting', likelyCarrier: likely });
+    expect(screen.getByRole('button', { name: 'Change carrier from SEUR' })).toBeInTheDocument();
+    expect(screen.queryByText(/Probably|first scan/)).not.toBeInTheDocument();
+  });
+
   it('tells an order number or a short number no carrier answered for, and offers to choose the carrier', async () => {
     // Synthetic: a bare Amazon order number and a five-digit one.
     const view = show({ carrier: 'unknown', trackingNumber: '30245719832294617' });

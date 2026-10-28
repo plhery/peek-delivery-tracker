@@ -1073,6 +1073,7 @@
   "detail.providerInputNeeded": "{{provider}} wymaga kodu pocztowego dostawy, aby sprawdzić tę przesyłkę.",
   "detail.nextCheckAfter": "Następne sprawdzenie po {{date}}",
   "status.noHistory": "Brak historii śledzenia",
+  "status.likelyCarrier": "Oczekiwanie na pierwszy skan przewoźnika {{carrier}}",
   "status.inputNeeded": "Wymagany kod pocztowy dostawy",
   "status.checkNumber": "Sprawdź numer śledzenia",
   "feedback.pip.question": "Dobrze to odczytałem?",

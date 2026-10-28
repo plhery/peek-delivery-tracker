@@ -468,8 +468,11 @@ final class Localizer: ObservableObject {
         return "\(shortDate(date)), \(clockTime(date))"
     }
 
+    /// The status line, which names the carrier a parcel probably travels with while it waits for that carrier's first scan.
     func parcelStatus(_ parcel: Parcel) -> String {
-        text(parcel.displayStatus.key)
+        let key = parcel.displayStatus.key
+        guard key == "status.likelyCarrier", let likely = parcel.likelyCarrier else { return text(key) }
+        return text(key, ["carrier": CarrierCatalog.shared.info(for: likely, language: language).displayName])
     }
 
     func parcelDeliveryEstimate(_ parcel: Parcel, now: Date = Date()) -> String? {

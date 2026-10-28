@@ -1101,7 +1101,7 @@ final class ParcelStore: ObservableObject {
             label: parcel.label.nonEmpty ?? localizer.text("common.parcel"),
             carrier: CarrierCatalog.shared.info(for: parcel.displayedCarrier, language: localizer.language).displayName,
             trackingNumber: CarrierCatalog.format(parcel.trackingNumber, carrier: parcel.carrier),
-            detail: detail ?? localizer.text(parcel.displayStatus.key),
+            detail: detail ?? localizer.parcelStatus(parcel),
             isOutForDelivery: parcel.currentStage == .outForDelivery
         )
     }
@@ -1320,7 +1320,7 @@ final class ParcelStore: ObservableObject {
         staleDate: Date? = Date().addingTimeInterval(30 * 60),
         relevanceScore: Double = 0
     ) -> ActivityContent<DeliveryActivityAttributes.ContentState> {
-        let status = localizer.text(parcel.displayStatus.key)
+        let status = localizer.parcelStatus(parcel)
         let detail = phase == .outForDelivery
             ? localizer.parcelDeliveryEstimate(parcel) ?? status
             : status

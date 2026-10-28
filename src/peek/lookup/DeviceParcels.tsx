@@ -10,7 +10,7 @@ import { carrierBrand } from '../../lib/carrierBrand';
 import { useDeliveredHold } from '../../lib/deliveredHold';
 import type { CardList } from '../../lib/deliveredMove';
 import { carrierInfo, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber } from '../../lib/carriers';
-import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelDisplayStatusKey } from '../../lib/parcelStatus';
+import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabel } from '../../lib/parcelStatus';
 import { pickupPoint } from '../../lib/pickupPoint';
 import { isFinal } from '../../lib/stages';
 import { maskedNumber } from '../links';
@@ -60,7 +60,7 @@ function DeviceParcel({ recent, arrived = false }: { recent: RecentParcel; arriv
     {placed && <CardRoute route={route} />}
     <span className="door-parcel__top"><CarrierMark carrier={carrier} />{when && <span className="door-parcel__when">{when}</span>}</span>
     <strong>{title}</strong>
-    <span className="door-parcel__state">{t(parcelDisplayStatusKey(parcel))}</span>
+    <span className="door-parcel__state">{parcelStatusLabel(parcel, t, locale)}</span>
   </a>;
 }
 

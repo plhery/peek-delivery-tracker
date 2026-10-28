@@ -1,5 +1,4 @@
 import 'server-only';
-import type { RecognitionOutcome } from 'universal-parcel-scraper';
 import { detectCarrierMatch } from '../lib/carriers';
 import { CARRIER_DEFINITIONS } from 'universal-parcel-scraper';
 import type { RoutingState } from './trackingRouting';
@@ -73,6 +72,25 @@ export function ownFormatCarrier(number: string): string | undefined {
     .some((rule) => new RegExp(rule.pattern).test(number) && fixedCharacters(rule.pattern) >= OWN_FORMAT_FIXED) ? carrier : undefined;
 }
 
+/**
+ * The carrier a number's shape shares with others but whose own range it falls in: the only one detection prefers,
+ * through a `preferred` rule of that carrier's that names at least `OWN_FORMAT_FIXED` characters, such as DPD
+ * Switzerland's 060 and 061 depots among the fourteen digits every DPD network, SEUR, BRT and Ciblex use. A
+ * preference for a check digit alone on a bare run of digits (FedEx's twelve, DHL Express's ten) names none.
+ */
+export function preferredCarrier(number: string): string | undefined {
+  const { preferred } = detectCarrierMatch(number);
+  const [carrier] = preferred;
+  if (preferred.length !== 1 || !carrier) return undefined;
+  return (CARRIER_DEFINITIONS[carrier]?.detectionRules ?? []).some((rule) => rule.preferred
+    && new RegExp(rule.pattern).test(number) && fixedCharacters(rule.pattern) >= OWN_FORMAT_FIXED) ? carrier : undefined;
+}
+
+/** The carrier a number points to: the one its format belongs to alone, else the one whose own range it falls in. */
+export function guessedCarrier(number: string): string | undefined {
+  return ownFormatCarrier(number) ?? preferredCarrier(number);
+}
+
 /** A parcel filed under no carrier, still on its way, that no carrier or provider has answered for or asked input for. */
 function unanswered(parcel: JsonObject, state: RoutingState): boolean {
   const metadata = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
@@ -81,24 +99,17 @@ function unanswered(parcel: JsonObject, state: RoutingState): boolean {
     && !state.input_needed;
 }
 
-/** The likely carrier a check keeps from the last one: while the parcel is still unanswered and its number still that carrier's format alone. */
-export function keptLikelyCarrier(parcel: JsonObject, state: RoutingState): RoutingState['likely_carrier'] {
-  const kept = state.likely_carrier;
-  return kept && unanswered(parcel, state) && ownFormatCarrier(String(parcel.tracking_number ?? '')) === kept.carrier
-    ? kept : undefined;
-}
-
 /**
- * The likely carrier after a check's recognition: the carrier the number's format belongs to alone (ownFormatCarrier),
- * once recognition asked it and it did not say it knows the number, which it may not list until the sender hands the
- * parcel over. A carrier recognition did not ask keeps the last check's answer. `since` is when a check first found it so.
+ * The carrier a parcel filed under none probably travels with: the one its number points to (guessedCarrier), once
+ * asked, by recognition or directly, without saying it knows the number, which it may not list until the sender hands
+ * the parcel over. A carrier that failed to answer recognition counts as asked; one that said it knows the number,
+ * even with no more than a pre-advice, is more than likely, and is not named. `since` is when a check first found it so.
  */
-export function likelyCarrierAfter(parcel: JsonObject, state: RoutingState, outcomes: readonly RecognitionOutcome[],
-  now: Date): RoutingState['likely_carrier'] {
-  const carrier = ownFormatCarrier(String(parcel.tracking_number ?? ''));
-  const asked = outcomes.filter((outcome) => outcome.carrier === carrier);
+export function likelyCarrier(parcel: JsonObject, state: RoutingState, now: Date): RoutingState['likely_carrier'] {
+  const carrier = guessedCarrier(String(parcel.tracking_number ?? ''));
   if (!carrier || !unanswered(parcel, state)) return undefined;
-  if (!asked.length) return keptLikelyCarrier(parcel, state);
-  if (asked.some((outcome) => outcome.status === 'known')) return undefined;
+  const probe = state.candidate_probes?.[carrier];
+  const asked = probe ? !probe.known : ['not_found', 'no_history'].includes(state.failures[carrier]?.kind ?? '');
+  if (!asked) return undefined;
   return { carrier, since: state.likely_carrier?.carrier === carrier ? state.likely_carrier.since : now.toISOString() };
 }

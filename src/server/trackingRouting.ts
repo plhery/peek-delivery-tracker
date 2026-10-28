@@ -26,7 +26,7 @@ import { providerCarrier } from './providerCarrier';
 import { normalizedLookupCountry } from './lookupCountry';
 import manifest from '../../package.json';
 import { getRecognitionPriorities } from './recognitionRanking';
-import { keptLikelyCarrier, likelyCarrierAfter } from './likelyCarrier';
+import { guessedCarrier, likelyCarrier } from './likelyCarrier';
 import { confirmationLookup } from './trackingHealth';
 
 const HOUR = 3_600_000;
@@ -80,8 +80,11 @@ export interface RoutingState extends JsonObject {
   next_check_at?: string;
   direct_retry_at?: string;
   last_probe_at?: string;
-  /** Per-candidate schedule of the recognitions that ask carriers the number points to. */
-  candidate_probes?: Record<string, { count: number; retry_at: string }>;
+  /**
+   * Per-candidate schedule of the recognitions that ask carriers the number points to. `known`: the carrier last said
+   * it knows the number, though its lookup was not adopted.
+   */
+  candidate_probes?: Record<string, { count: number; retry_at: string; known?: true }>;
   /** A carrier that knows the number but cannot track it without the user's input. */
   input_needed?: { carrier: string; field: string };
   /** The filed carrier refused the delivery postcode stored for it, until it answers. */
@@ -89,8 +92,8 @@ export interface RoutingState extends JsonObject {
   /** A carrier the number of a parcel filed under no carrier points to, which needs the user's input before it can be asked (suggestedInput). */
   input_suggested?: { carrier: string; field: 'dpdPostcode' };
   /**
-   * For a parcel filed under no carrier, the carrier its number's format belongs to alone, which recognition asked and
-   * which did not say it knows the number (likelyCarrier.ts), and when a check first found it so.
+   * For a parcel filed under no carrier, the carrier its number points to, which was asked and did not say it knows
+   * the number (likelyCarrier.ts), and when a check first found it so.
    */
   likely_carrier?: { carrier: string; since: string };
   provider_input_needed?: { provider: string; field: 'dpdPostcode' };
@@ -591,7 +594,8 @@ export function detectionExpects(number: string, carrier: string, countryHint?: 
     || recognitionCandidates(number, { countryHint })[0]?.carrier === carrier;
 }
 
-const CANDIDATE_PROBE_WINDOW = 30 * DAY;
+/** How long after a parcel is added recognition asks the carriers its number could belong to. */
+export const CANDIDATE_PROBE_WINDOW = 30 * DAY;
 /** Every recognition answer a sync waits for; later answers are ignored. */
 const RECOGNITION_BUDGET_MS = 15_000;
 /**
@@ -690,7 +694,7 @@ export class TrackingRouter {
     const suggested = suggestedInput(parcel, state);
     if (suggested) state.input_suggested = suggested;
     else delete state.input_suggested;
-    const kept = keptLikelyCarrier(parcel, state);
+    const kept = likelyCarrier(parcel, state, now());
     if (kept) state.likely_carrier = kept;
     else delete state.likely_carrier;
     let localDirectFallback: { value: RoutedResult; carrier: string } | undefined;
@@ -1320,15 +1324,21 @@ export class TrackingRouter {
       }
       // Nothing adopted: ask again after 1, 2, 4, then 6 hours, since a parcel
       // shows up once it is handed over, and daily after six misses, but by the
-      // last hourly check of a number nobody has seen. These answers decide
-      // neither the parcel's status nor the filed carrier's retry.
+      // last hourly check of a number nobody has seen. The carrier the number
+      // points to stays at 6 hours, as a parcel's own carrier is asked before
+      // its first scan. These answers decide neither the parcel's status nor
+      // the filed carrier's retry.
+      const guessed = guessedCarrier(number);
       for (const carrier of new Set(outcomes.map((outcome) => outcome.carrier))) {
         const count = Math.min(20, (state.candidate_probes?.[carrier]?.count ?? 0) + 1);
+        const longest = count > 6 && carrier !== guessed ? DAY : 6 * HOUR;
+        const known = outcomes.some((outcome) => outcome.carrier === carrier && outcome.status === 'known');
         state.candidate_probes = { ...state.candidate_probes, [carrier]: {
-          count, retry_at: iso(beforeHourlyEnd(now().getTime() + Math.min(count > 6 ? DAY : 6 * HOUR, HOUR * 2 ** (count - 1)))),
+          count, retry_at: iso(beforeHourlyEnd(now().getTime() + Math.min(longest, HOUR * 2 ** (count - 1)))),
+          ...(known ? { known: true as const } : {}),
         } };
       }
-      const likely = likelyCarrierAfter(parcel, state, outcomes, now());
+      const likely = likelyCarrier(parcel, state, now());
       if (likely) state.likely_carrier = likely;
       else delete state.likely_carrier;
     }

@@ -1,7 +1,9 @@
 import en from '../../shared/locales/en.json';
 import { describe, expect, it } from 'vitest';
 import type { ParcelWithEvents, SyncStatus } from '../types';
-import { parcelDeliveryEstimate, localizedParcelCompletionDate, parcelDisplayStatus, parcelDisplayStatusKey } from './parcelStatus';
+import { parcelDeliveryEstimate, localizedParcelCompletionDate, parcelDisplayStatus, parcelDisplayStatusKey, parcelStatusLabel, shownCarrier } from './parcelStatus';
+import { carrierInfo } from './carriers';
+import { translateMessage } from './messages';
 
 function parcel(syncStatus: SyncStatus, stage: 'pending' | 'in_transit' = 'pending'): ParcelWithEvents {
   return {
@@ -65,6 +67,22 @@ describe('parcelDisplayStatus', () => {
     for (const carrier of ['unknown', 'intl-post'] as const) {
       expect(parcelDisplayStatusKey({ ...parcel('pending'), carrier })).toBe('status.syncing');
     }
+  });
+
+  it('waits for the first scan of the carrier a number points to, until a carrier answers', () => {
+    const t = (key: Parameters<typeof translateMessage>[1], values?: Record<string, string | number>) => translateMessage('en', key, values, en);
+    const likely: ParcelWithEvents = { ...parcel('waiting'), carrier: 'unknown', trackingNumber: '06080000000002',
+      likelyCarrier: { carrier: 'dpd', since: '2026-07-16T10:00:00Z' } };
+    expect(parcelStatusLabel(likely, t)).toBe('Waiting for DPD Switzerland’s first scan');
+    expect(shownCarrier(likely, carrierInfo('unknown'), t)).toMatchObject({ id: 'unknown', name: 'Probably DPD Switzerland' });
+    // A shape nobody leads keeps the words of a number no carrier knows yet.
+    const shared = { ...likely, likelyCarrier: undefined };
+    expect(parcelStatusLabel(shared, t)).toBe('No tracking history yet');
+    expect(shownCarrier(shared, carrierInfo('unknown'), t).name).toBe('Unknown carrier');
+    // Filed under the carrier that answered, the parcel shows it.
+    const filed = { ...likely, carrier: 'seur' as const };
+    expect(parcelStatusLabel(filed, t)).toBe('Waiting for the carrier');
+    expect(shownCarrier(filed, carrierInfo('seur'), t).name).toBe('SEUR');
   });
 
   it('keeps a real carrier stage visible during later sync attempts or errors', () => {

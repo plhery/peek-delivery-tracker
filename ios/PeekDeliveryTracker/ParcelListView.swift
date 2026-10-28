@@ -1642,7 +1642,7 @@ private struct ExperimentalNextDeliveryPass: View {
     @ObservedObject private var catalog = CarrierCatalog.shared
 
     private var identity: CarrierVisualIdentity {
-        CarrierVisualIdentity.of(parcel.displayedCarrier, catalog: catalog, language: localizer.language)
+        CarrierVisualIdentity.shown(for: parcel, catalog: catalog, localizer: localizer)
     }
     /// Scans with places are drawn as a route across the top of the card, as on the opened parcel.
     private var placed: Bool { parcel.hasMappedPlace }
@@ -1768,7 +1768,7 @@ private struct ExperimentalParcelPassCard: View {
     @ObservedObject private var catalog = CarrierCatalog.shared
 
     private var identity: CarrierVisualIdentity {
-        CarrierVisualIdentity.of(parcel.displayedCarrier, catalog: catalog, language: localizer.language)
+        CarrierVisualIdentity.shown(for: parcel, catalog: catalog, localizer: localizer)
     }
     private var date: String? { localizer.parcelDeliveryEstimate(parcel) ?? localizer.parcelCompletionDate(parcel) }
     /// Scans with places are drawn as a small route at the end of the card.

@@ -8,7 +8,7 @@ import {
   type Translate,
 } from '../../lib/messages';
 import { parcelAttention, type ParcelAttention } from '../../lib/parcelPriority';
-import { parcelDeliveryEstimate, parcelDisplayStatusKey, parcelHasCarrierUpdate } from '../../lib/parcelStatus';
+import { parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel } from '../../lib/parcelStatus';
 import { currentEvent, isFinal } from '../../lib/stages';
 import type { ParcelWithEvents, Stage, TrackingEvent } from '../../types';
 
@@ -67,7 +67,7 @@ export function parcelStage(parcel: ParcelWithEvents): Stage | null {
 
 /** The headline: the parcel's status. */
 export function parcelHeadline(parcel: ParcelWithEvents, t: Translate): string {
-  return t(parcelDisplayStatusKey(parcel));
+  return parcelStatusLabel(parcel, t);
 }
 
 /**

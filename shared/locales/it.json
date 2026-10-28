@@ -1073,6 +1073,7 @@
   "detail.providerInputNeeded": "{{provider}} richiede il codice postale di consegna per cercare questo pacco.",
   "detail.nextCheckAfter": "Prossima verifica prevista: {{date}}",
   "status.noHistory": "Nessuna cronologia di tracciamento per ora",
+  "status.likelyCarrier": "In attesa della prima scansione di {{carrier}}",
   "status.inputNeeded": "Codice postale di consegna richiesto",
   "status.checkNumber": "Controlla il numero di tracciamento",
   "feedback.pip.question": "Questo l’ho azzeccato?",

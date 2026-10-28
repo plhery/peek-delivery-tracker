@@ -7679,6 +7679,19 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     await expect(checked([parcel], at)).resolves.toHaveLength(on);
   });
 
+  it('checks an account\'s parcel whose number points to a carrier as that carrier\'s own, for the month recognition asks it', async () => {
+    vi.stubEnv('TRACKING_ENABLE_UNSEEN_RECHECKS', 'true');
+    const likely = { carrier_data: { routing: { ...routing, likely_carrier: { carrier: 'dpd', since: '2026-09-01T10:00:00Z' } } } };
+    // Two days on, checked an hour and a half before: hourly, where a number nobody has seen waits for its recheck.
+    const parcel = unseen('likely', { last_synced_at: '2026-09-03T08:30:15Z', ...likely });
+    await expect(checked([parcel], '2026-09-03T10:00:00Z')).resolves.toEqual(['likely']);
+    await expect(checked([unseen('unseen', { last_synced_at: '2026-09-03T08:30:15Z' })], '2026-09-03T10:00:00Z')).resolves.toEqual([]);
+    expect(unseenFor(parcel, new Date('2026-09-03T10:00:00Z'))).toBeNull();
+    // A lookup without an account keeps leaving the schedule, and a month on, so does an account's parcel.
+    expect(unseenFor({ ...parcel, user_id: null, one_off: true }, new Date('2026-09-03T10:00:00Z'))).not.toBeNull();
+    expect(unseenFor(parcel, new Date('2026-10-02T10:00:00Z'))).not.toBeNull();
+  });
+
   it('leaves lookups without an account as they are', async () => {
     vi.stubEnv('TRACKING_ENABLE_UNSEEN_RECHECKS', 'true');
     const lookup = unseen('lookup', { user_id: null, one_off: true, last_synced_at: '2026-09-02T06:00:15Z' });

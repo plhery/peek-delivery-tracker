@@ -998,14 +998,40 @@ describe('persistent tracking routing', () => {
           last_update: '2026-09-10T15:00:00Z', events: [{ time: '2026-09-10T15:00:00Z', description: 'Order created', stage: 'registered' }] } });
       });
       expect(known.routing).not.toHaveProperty('likely_carrier');
-      // So is a provider's scan; and a shape other carriers share names none.
+      // Nor does a check that does not ask it again name it once more.
+      const after = await check(new Date('2026-09-10T16:30:00Z'), known.routing);
+      expect(after.asked).toEqual([]);
+      expect(after.routing).not.toHaveProperty('likely_carrier');
+      // So is a provider's scan.
       const scanned = await check(new Date('2026-09-10T13:30:00Z'), waiting.routing, (run) => run.universal.mockResolvedValue(history()));
       expect(scanned.routing).not.toHaveProperty('likely_carrier');
+    });
+    it('names the carrier whose own range a shared shape falls in, and none for a shape nobody leads', async () => {
+      const check = async (number: string) => {
+        const run = setup();
+        run.universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
+        const deferred = await run.router.fetch(parcel({ tracking_number: number }), false).catch((error: RoutingDeferred) => error);
+        return { asked: asked(run.recognize), routing: (deferred as RoutingDeferred).routing as JsonObject };
+      };
+      // Fourteen digits are every DPD network's, SEUR's, BRT's and Ciblex's; 060 and 061 open DPD Switzerland's depots.
+      const ranged = await check(swissDpd);
+      expect(ranged.asked[0]).toBe('dpd');
+      expect(ranged.routing.likely_carrier).toEqual({ carrier: 'dpd', since: time.toISOString() });
+      // Fourteen digits in no carrier's own range lead to none of them.
+      const shared = await check('40000000000001');
+      expect(shared.asked.length).toBeGreaterThan(1);
+      expect(shared.routing).not.toHaveProperty('likely_carrier');
+    });
+    it('asks the carrier a number points to every 6 hours after six misses, the others daily', async () => {
       const run = setup();
       run.universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
-      const shared = await run.router.fetch(parcel({ tracking_number: swissDpd }), false).catch((deferred: RoutingDeferred) => deferred);
-      expect(asked(run.recognize)).toEqual(fourteen);
-      expect((shared as RoutingDeferred).routing).not.toHaveProperty('likely_carrier');
+      const routing = { version: 1, configured_carrier: 'unknown', failures: {}, consecutive_failures: 0,
+        candidate_probes: probes(6, '2026-09-10T11:00:00.000Z') };
+      const deferred = await run.router.fetch(parcel({ tracking_number: swissDpd, carrier_data: { routing } }), false)
+        .catch((error: RoutingDeferred) => error);
+      const next = ((deferred as RoutingDeferred).routing as JsonObject & { candidate_probes: JsonObject }).candidate_probes;
+      expect(next.dpd).toEqual({ count: 7, retry_at: '2026-09-10T18:00:00.000Z' });
+      expect(next.seur).toEqual({ count: 7, retry_at: '2026-09-11T12:00:00.000Z' });
     });
     it('asks again by the last hourly check of a number nobody has seen', async () => {
       // Added at 08:20 and checked hourly until 14:20; the carrier ranked first is among those asked.

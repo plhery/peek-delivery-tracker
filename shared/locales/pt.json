@@ -1073,6 +1073,7 @@
   "detail.providerInputNeeded": "{{provider}} precisa do código postal de entrega para consultar esta encomenda.",
   "detail.nextCheckAfter": "Próxima verificação após {{date}}",
   "status.noHistory": "Ainda sem histórico de seguimento",
+  "status.likelyCarrier": "À espera do primeiro registo de {{carrier}}",
   "status.inputNeeded": "Código postal de entrega necessário",
   "status.checkNumber": "Verifica o número de seguimento",
   "feedback.pip.question": "Acertei nesta?",

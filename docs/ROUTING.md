@@ -301,7 +301,7 @@ account that nobody watches (below).
 | Without an account, filed under no carrier or one with no adapter of its own, added in the last 30 days, no link opened for a day and no alert on, once a carrier or provider answered for its number | every 6 h, not overnight |
 | Without an account, filed under no carrier or one with no adapter of its own, newest scan over 14 days old, no link opened for an hour and no alert on | daily, not overnight; opening a link queues a check at once |
 | Another carrier holds it and waits for the delivery postcode (`routing.input_needed`) | daily, not overnight; adding the postcode checks it at once |
-| Number no carrier or provider has seen (no carrier identified, no history, no input asked) | hourly for 6 h after it was added, then every 6 h, daily after 48 h, weekly after 7 days, around the clock; manual refresh still allowed. An account's parcel, with its rechecks on: 1, 3 and 7 days after it was added, then no more after 14 days (below) |
+| Number no carrier or provider has seen (no carrier identified, no history, no input asked) | hourly for 6 h after it was added, then every 6 h, daily after 48 h, weekly after 7 days, around the clock; manual refresh still allowed. An account's parcel, with its rechecks on: 1, 3 and 7 days after it was added, then no more after 14 days (below). An account's parcel whose number points to a carrier (`routing.likely_carrier`, Carrier recognition, below): hourly, as a parcel waiting for its carrier's first scan, for 30 days after it was added |
 | Archived, with a new event in the last 30 days (from when it was added), and no alert on a link shared with someone | daily around the clock; manual refresh still allowed |
 | Delivered on a provider's word alone, which the parcel's carrier did not show (below) | daily around the clock for 3 days |
 
@@ -405,7 +405,9 @@ A recheck, like a release's re-check of such a parcel, asks the carriers as any 
 and contacts one universal provider at most: the first free one with history for the
 likeliest carrier the number's detection points to, fuller first, else ParcelsApp or Ship24
 in the discovery cursor's order. Opening one of its links still checks it daily, a refresh
-asks every provider, and a first answer puts it on the regular cadence.
+asks every provider, and a first answer puts it on the regular cadence. One whose number
+points to a carrier (`routing.likely_carrier`) keeps the regular cadence for 30 days after it
+was added, as that carrier's parcel waiting for its first scan would.
 
 HTTP 429 without `Retry-After` is not retried immediately. Adapters that allow one
 transient retry honour a `Retry-After` of up to one minute; longer windows fail the attempt.
@@ -541,14 +543,21 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   (`inputSuggested`, for an unknown answer without tracking history): the postcode field is
   optional, a paste stops once to show it, and the lookup names that carrier only with the
   postcode, sent in the request body like any other.
-  When the number has one carrier's own format (detection lists that carrier alone, through
-  a rule naming at least two characters outright, so no bare run of digits) and recognition
-  asked that carrier without it saying it knows the number, `routing.likely_carrier` names
-  it, with `since` from the first such check, until a carrier answers or a scan comes. Links
-  show it as `likely_carrier`. The parcel page, its card and the app's detail say "Probably
-  <carrier>": the carrier does not list the number yet, and Peek keeps asking it. After a
-  week, the owner is asked to check the number or choose another carrier; a link's owner
-  chooses at the front door, which takes the number back with its picker open.
+  When the number points to one carrier, `routing.likely_carrier` names it once that carrier
+  was asked without saying it knows the number (recognition's answer, or a not-found or
+  no-history answer to the check), with `since` from the first such check. A number points to
+  a carrier when it has that carrier's own format (detection lists that carrier alone, through
+  a rule naming at least two characters outright, so no bare run of digits), or when detection
+  prefers that carrier alone through a preferred rule naming at least two characters outright,
+  such as DPD Switzerland's range within Geopost's shared 14 digits. A preference by check digit
+  alone, or a shared shape no carrier leads, names none. Each check works it out again, so a
+  carrier or provider that answers, a scan, a filed carrier or the carrier saying it knows the
+  number ends it. Links show it as `likely_carrier`. Where the web and the app name the
+  parcel's carrier (cards, the parcel page, the detail), they say "Probably <carrier>" in the
+  livery of no carrier, and the status says "Waiting for <carrier>'s first scan": the carrier
+  does not list the number yet, and Peek keeps asking it. After a week, the owner is asked to
+  check the number or choose another carrier; a link's owner chooses at the front door, which
+  takes the number back with its picker open.
   A number no carrier answered for that has a shop's order number shape (`shops` and
   `storedOrders` in `shared/reading.json`) or fewer than eight characters: the parcel page
   and the detail (web and iPhone) say where the tracking number is, rather than that Peek
@@ -558,7 +567,8 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
 - **Retries.** Answers are kept in `routing.candidate_probes`, not with the carrier
   failures, so they decide neither the parcel's status, nor the filed carrier's retry, nor
   the health evidence of the check. The next check waits 1, 2, 4, then 6 hours, since a
-  parcel appears once it is handed over, and a day after six misses. For a number nobody
+  parcel appears once it is handed over, and a day after six misses, but the carrier the
+  number points to (above) is asked every 6 hours. For a number nobody
   has seen, a wait that would outlast its hourly checks ends an hour before they do, half
   an hour after the ask at the soonest: the last of them asks the carriers again, those
   ranked first among them, before the checks slow down or a lookup leaves the schedule.

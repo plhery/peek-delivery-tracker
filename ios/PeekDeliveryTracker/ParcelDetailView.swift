@@ -239,7 +239,7 @@ struct ParcelDetailView: View {
     }
 
     private func identity(_ parcel: Parcel) -> CarrierVisualIdentity {
-        CarrierVisualIdentity.of(parcel.displayedCarrier, catalog: catalog, language: localizer.language)
+        CarrierVisualIdentity.shown(for: parcel, catalog: catalog, localizer: localizer)
     }
 
     /// The card and what is known of the shipment, ruled off from the history under it when `divided`.
@@ -292,9 +292,7 @@ struct ParcelDetailView: View {
                         Button { carrierEditor = CarrierEditorRequest() } label: { marks }
                             .buttonStyle(.plain)
                             .accessibilityLabel([
-                                localizer.text("detail.changeCarrierFrom", [
-                                    "carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName,
-                                ]),
+                                localizer.text("detail.changeCarrierFrom", ["carrier": branding.fullName]),
                                 deliveryLine,
                             ].compactMap { $0 }.joined(separator: ". "))
                     } else {
@@ -569,13 +567,11 @@ struct ParcelDetailView: View {
         .accessibilityElement(children: .contain)
     }
 
-    /// The carrier the number's own format points to, which does not list it yet. After a week, the
-    /// owner is asked to check the number or choose another carrier.
+    /// The carrier the number points to, which the header names as probable and which does not list it
+    /// yet. After a week, the owner is asked to check the number or choose another carrier.
     private func likelyCarrierPrompt(_ carrier: CarrierID, waited: Bool, tint: Color) -> some View {
         let name = catalog.info(for: carrier, language: localizer.language).displayName
         return VStack(alignment: .leading, spacing: 2) {
-            Text(localizer.text("link.likely.carrier", ["carrier": name]))
-                .font(.footnote.weight(.semibold))
             Text(localizer.text(waited ? "link.likely.week" : "link.likely.body", ["carrier": name]))
                 .font(.footnote)
                 .fixedSize(horizontal: false, vertical: true)

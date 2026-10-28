@@ -141,12 +141,18 @@ extension Parcel {
     /// How long a carrier may go without listing a number of its own format before the reader is asked to check it.
     static let likelyCarrierWait: TimeInterval = 7 * 24 * 60 * 60
 
-    /// Nobody has answered for the number yet, and it has one carrier's own format, which does not list
-    /// it: the carrier it probably travels with. `waited` once it has not for a week, when its owner is
-    /// asked to check the number or choose another carrier.
+    /// Nobody has answered for the number yet, and it points to a carrier that does not list it yet: the
+    /// carrier the parcel probably travels with, which its card and header name as probable.
+    var likelyCarrier: CarrierID? {
+        guard let likely = carrierData?.routing?.likelyCarrier, carrier == .unknown, !hasCarrierUpdate else { return nil }
+        return likely.carrier
+    }
+
+    /// The likely carrier, said under the header. `waited` once it has not listed the number for a week,
+    /// when its owner is asked to check the number or choose another carrier.
     func likelyCarrierPrompt(now: Date = .now) -> (carrier: CarrierID, waited: Bool)? {
         guard inputNeededPrompt == nil, inputSuggestedPrompt == nil, let likely = carrierData?.routing?.likelyCarrier,
-              carrier == .unknown, !isArchived, !hasCarrierUpdate else { return nil }
+              likelyCarrier != nil, !isArchived else { return nil }
         let since = DateParser.date(likely.since)
         return (likely.carrier, since.map { now.timeIntervalSince($0) >= Self.likelyCarrierWait } ?? false)
     }
@@ -300,7 +306,9 @@ extension Parcel {
             return ParcelDisplayStatus(key: "status.unsupported", tone: .warning, syncing: false)
         }
         if isUnannounced {
-            return ParcelDisplayStatus(key: carrierData?.routing?.providerInputNeeded != nil ? "status.inputNeeded" : carrier == .unknown ? "status.noHistory" : "status.unannounced", tone: .normal, syncing: false)
+            let key = carrierData?.routing?.providerInputNeeded != nil ? "status.inputNeeded" : carrier != .unknown ? "status.unannounced"
+                : likelyCarrier != nil ? "status.likelyCarrier" : "status.noHistory"
+            return ParcelDisplayStatus(key: key, tone: .normal, syncing: false)
         }
         guard let currentStage else {
             return ParcelDisplayStatus(key: "status.unannounced", tone: .normal, syncing: false)

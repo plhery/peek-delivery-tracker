@@ -1073,6 +1073,7 @@
   "detail.providerInputNeeded": "{{provider}} benötigt die Zustellpostleitzahl für diese Sendung.",
   "detail.nextCheckAfter": "Nächste Prüfung nach {{date}}",
   "status.noHistory": "Noch kein Sendungsverlauf",
+  "status.likelyCarrier": "Warten auf den ersten Scan von {{carrier}}",
   "status.inputNeeded": "Zustellpostleitzahl erforderlich",
   "status.checkNumber": "Sendungsnummer prüfen",
   "feedback.pip.question": "Liege ich hier richtig?",

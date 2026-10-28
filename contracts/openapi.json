@@ -36371,7 +36371,7 @@
       },
       "LikelyCarrier": {
         "type": "object",
-        "description": "A carrier a parcel filed under no carrier likely travels with: the only carrier whose own number format the number has, asked and not yet saying it knows the number. `since` is when a check first found it so.",
+        "description": "A carrier a parcel filed under no carrier likely travels with: the only carrier whose own number format the number has, or the only one detection prefers for it, asked and not yet saying it knows the number. `since` is when a check first found it so.",
         "additionalProperties": false,
         "required": [
           "carrier",
@@ -36787,7 +36787,7 @@
                     }
                   },
                   "likely_carrier": {
-                    "description": "For a parcel filed under no carrier, the carrier whose own number format the number has, which was asked and has not said it knows the number. `since` is when a check first found it so.",
+                    "description": "For a parcel filed under no carrier, the carrier whose own number format the number has, or the only one detection prefers for it, which was asked and has not said it knows the number. `since` is when a check first found it so.",
                     "$ref": "#/components/schemas/LikelyCarrier"
                   },
                   "provider_input_needed": {

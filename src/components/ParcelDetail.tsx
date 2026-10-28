@@ -33,7 +33,8 @@ import {
   localizedParcelCompletionDate,
   parcelDeliveryEstimate,
   parcelDisplayStatus,
-  parcelDisplayStatusKey,
+  parcelStatusLabel,
+  shownCarrier,
   likelyCarrier,
   parcelHasCarrierUpdate,
 } from '../lib/parcelStatus';
@@ -120,6 +121,8 @@ export function ParcelDetail({
   const { locale, languageTag, t } = useI18n();
   const carrier = carrierInfo(activeTrackingCarrierId(parcel), locale);
   const displayedCarrier = carrierInfo(displayedCarrierId(parcel), locale);
+  // While no carrier is known, the header names the one the number points to, as probable.
+  const headerCarrier = shownCarrier(parcel, displayedCarrier, t, locale);
   // Handed from one carrier to another, or about to be, the card carries both marks and says who delivers, as its card in the list does.
   const deliveryId = deliveringCarrierId(parcel);
   const delivery = deliveryId ? carrierInfo(deliveryId, locale) : null;
@@ -156,7 +159,7 @@ export function ParcelDetail({
   // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
   const claimingCarrier = parcel.syncError === REFUSED_NUMBER ? carrierClaimingNumber(parcel.trackingNumber, parcel.carrier) : null;
   const status = parcelDisplayStatus(parcel);
-  const statusLabel = t(parcelDisplayStatusKey(parcel));
+  const statusLabel = parcelStatusLabel(parcel, t, locale);
   const completionDate = localizedParcelCompletionDate(parcel, languageTag, t);
   const estimate = parcelDeliveryEstimate(parcel);
   const { numbers: trackingNumbers, loose: looseLinks } = trackingLinksByNumber(parcelTrackingNumbers(parcel), parcelTrackingLinks(parcel, locale));
@@ -511,9 +514,9 @@ export function ParcelDetail({
             type="button"
             className="detail__carrier detail__carrier--editable"
             onClick={() => setEditingCarrier(true)}
-            aria-label={[t('detail.changeCarrierFrom', { carrier: displayedCarrier.name }), deliveryLabel].filter(Boolean).join('. ')}
+            aria-label={[t('detail.changeCarrierFrom', { carrier: headerCarrier.name }), deliveryLabel].filter(Boolean).join('. ')}
           >
-            <CarrierMark carrier={displayedCarrier} />
+            <CarrierMark carrier={headerCarrier} />
             {delivery && <span ref={deliveryMark} className="detail__delivery-mark" style={carrierBrand(delivery).style}><CarrierMark carrier={delivery} /></span>}
           </button>
           <span className="detail__hero-actions">

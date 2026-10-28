@@ -545,6 +545,58 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertNil(suggested.likelyCarrierPrompt(now: since))
     }
 
+    @MainActor
+    func testNamesTheProbableCarrierWhereTheCarrierIsNamedUntilACarrierAnswers() throws {
+        let packageID = UUID()
+        // A synthetic number in DPD Switzerland's depot range, which no carrier has answered for yet.
+        let json = """
+        {
+          "packages": [{
+            "id": "\(packageID.uuidString)",
+            "tracking_number": "06080000000002",
+            "label": "Test parcel",
+            "carrier": "unknown",
+            "created_at": "2026-10-28T09:00:00Z",
+            "sync_status": "waiting",
+            "carrier_data": { "routing": { "likely_carrier": { "carrier": "dpd", "since": "2026-10-28T10:00:00Z" } } },
+            "notifications_muted": false,
+            "tracking_events": []
+          }]
+        }
+        """
+        let parcel = try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(json.utf8)).packages.first)
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        XCTAssertEqual(parcel.likelyCarrier, .dpd)
+        XCTAssertEqual(parcel.displayStatus.key, "status.likelyCarrier")
+        XCTAssertEqual(localizer.parcelStatus(parcel), "Waiting for DPD Switzerland’s first scan")
+        let identity = CarrierVisualIdentity.shown(for: parcel, localizer: localizer)
+        XCTAssertEqual(identity.name, "Probably DPD Switzerland")
+        XCTAssertEqual(identity.decal, CarrierVisualIdentity.of(.unknown, language: .en).decal)
+        // Every language names the carrier in both lines.
+        for language in AppLanguage.allCases {
+            localizer.language = language
+            XCTAssertTrue(localizer.parcelStatus(parcel).contains("DPD Switzerland"), "\(language)")
+            XCTAssertTrue(CarrierVisualIdentity.shown(for: parcel, localizer: localizer).name.contains("DPD Switzerland"), "\(language)")
+        }
+        localizer.language = .en
+
+        // A shape nobody leads keeps the words of a number no carrier knows yet.
+        var shared = parcel
+        shared.carrierData = nil
+        XCTAssertNil(shared.likelyCarrier)
+        XCTAssertEqual(shared.displayStatus.key, "status.noHistory")
+        XCTAssertEqual(CarrierVisualIdentity.shown(for: shared, localizer: localizer).name, CarrierVisualIdentity.of(.unknown, language: .en).name)
+        // Once another carrier answers for the number, the parcel is filed under it and the guess goes.
+        var filed = parcel
+        filed.carrier = .seur
+        XCTAssertNil(filed.likelyCarrier)
+        XCTAssertEqual(filed.displayStatus.key, "status.unannounced")
+        XCTAssertEqual(CarrierVisualIdentity.shown(for: filed, localizer: localizer).name, "SEUR")
+    }
+
     func testTellsAnOrderNumberOrAShortNumberNoCarrierAnsweredFor() throws {
         // Synthetic numbers: Amazon's without hyphens, AliExpress's, Temu's as a lookup stores it, a short one.
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("30245719832294617"), .order(shop: "amazon"))

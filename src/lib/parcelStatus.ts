@@ -2,7 +2,7 @@ import { scanDate } from './format';
 import { localizedDeliveryDate, numberToCheck, type MessageKey, type Translate } from './messages';
 import type { CarrierId, ParcelWithEvents } from '../types';
 import { currentEvent, stageMeta } from './stages';
-import { activeTrackingCarrierId, tracksAutomatically } from './carriers';
+import { activeTrackingCarrierId, carrierInfo, tracksAutomatically } from './carriers';
 
 export interface ParcelDisplayStatus {
   label: string;
@@ -35,8 +35,8 @@ export function parcelHasCarrierUpdate(parcel: ParcelWithEvents): boolean {
 export const LIKELY_CARRIER_WAIT_MS = 7 * 24 * 60 * 60_000;
 
 /**
- * The carrier a parcel filed under none probably travels with: the only one whose own format its number has, which
- * does not list the number yet. `waited` once it has not for a week.
+ * The carrier a parcel filed under none probably travels with: the one its number points to, which does not list the
+ * number yet. `waited` once it has not for a week.
  */
 export function likelyCarrier(parcel: ParcelWithEvents, now = Date.now()): { carrier: CarrierId; waited: boolean } | null {
   const likely = parcel.likelyCarrier;
@@ -98,8 +98,27 @@ export function parcelDisplayStatusKey(parcel: ParcelWithEvents): MessageKey {
   }
   if (!hasCarrierUpdate && parcel.syncStatus === 'error') return 'status.failed';
   if (!hasCarrierUpdate && parcel.syncStatus === 'unsupported') return 'status.unsupported';
-  if (!hasCarrierUpdate && parcel.syncStatus === 'waiting') return parcel.providerInputNeeded ? 'status.inputNeeded' : parcel.carrier === 'unknown' ? 'status.noHistory' : 'status.unannounced';
+  if (!hasCarrierUpdate && parcel.syncStatus === 'waiting') {
+    return parcel.providerInputNeeded ? 'status.inputNeeded' : parcel.carrier !== 'unknown' ? 'status.unannounced'
+      : likelyCarrier(parcel) ? 'status.likelyCarrier' : 'status.noHistory';
+  }
   return current ? (`stage.${current.stage}` as MessageKey) : 'status.unannounced';
+}
+
+/** The status line, which names the carrier a parcel probably travels with while it waits for that carrier's first scan. */
+export function parcelStatusLabel(parcel: ParcelWithEvents, t: Translate, locale?: string): string {
+  const key = parcelDisplayStatusKey(parcel);
+  const likely = key === 'status.likelyCarrier' ? likelyCarrier(parcel) : null;
+  return likely ? t(key, { carrier: carrierInfo(likely.carrier, locale).name }) : t(key);
+}
+
+/**
+ * The carrier a card or a parcel's header shows: the parcel's own, or while none is known, the one it probably travels
+ * with, named as probable, in the livery of no carrier.
+ */
+export function shownCarrier<T extends { id: CarrierId; name: string }>(parcel: ParcelWithEvents, carrier: T, t: Translate, locale?: string): T {
+  const likely = carrier.id === 'unknown' ? likelyCarrier(parcel) : null;
+  return likely ? { ...carrier, name: t('link.likely.carrier', { carrier: carrierInfo(likely.carrier, locale).name }) } : carrier;
 }
 
 /** The actual completion date shown beside a final-state status tag. */

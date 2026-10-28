@@ -4,7 +4,7 @@ import { Icon } from '../../components/Icon';
 import { localizedExpectedDelivery, useI18n } from '../../i18n';
 import { carrierBrand } from '../../lib/carrierBrand';
 import { carrierInfo, displayedCarrierId } from '../../lib/carriers';
-import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelDisplayStatusKey } from '../../lib/parcelStatus';
+import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabel } from '../../lib/parcelStatus';
 import { maskedNumber } from '../links';
 import { shortNumber } from '../lookup/DeviceParcels';
 import { watchDeviceParcels } from '../lookup/deviceList';
@@ -34,7 +34,7 @@ function OtherParcel({ recent }: { recent: RecentParcel }) {
     <CarrierTruck carrier={carrier} />
     <span>
       <strong>{recent.name ?? number}</strong>
-      <small>{[t(parcelDisplayStatusKey(parcel)), when].filter(Boolean).join(' · ')}</small>
+      <small>{[parcelStatusLabel(parcel, t, locale), when].filter(Boolean).join(' · ')}</small>
     </span>
     <Icon name="chevron" />
   </a>;

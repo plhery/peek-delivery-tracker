@@ -144,6 +144,61 @@ class AnalyticsTests {
         assertEquals(3, transport.requests.size)
     }
 
+    /**
+     * The iPhone sends `Locale.preferredLanguages.first`, its language, script and region alone: Android 14's regional
+     * preferences ride on the system's first language as extensions, which stay on the device.
+     */
+    @Test
+    fun theLanguageIsSentAsTheIphonesLanguagesWriteIt() = runTest {
+        for ((tag, sent) in listOf(
+            "en-GB-u-fw-mon-mu-celsius" to "en-GB",
+            "fr-CH-u-mu-fahrenhe-nu-latn" to "fr-CH",
+            "zh-Hant-TW" to "zh-Hant-TW",
+            "sr-Latn-RS-u-fw-sun" to "sr-Latn-RS",
+            "es-419" to "es-419",
+            "de-DE-1996" to "de-DE",
+            "pt-BR-x-private" to "pt-BR",
+            "he-IL" to "he-IL",
+        )) {
+            assertEquals(tag, sent, DeliveryAnalytics.languageTag(tag))
+        }
+        val transport = collector()
+        val analytics = analytics(transport, languages = listOf("en-GB-u-fw-mon-mu-celsius", "fr-CH"))
+        analytics.start()
+        runCurrent()
+        assertEquals("en-GB", transport.requests.last().payload.string("language"))
+        val none = collector()
+        analytics(none, languages = emptyList()).start()
+        runCurrent()
+        assertEquals("en", none.requests.last().payload.string("language"))
+    }
+
+    /** The iPhone reads `Platform.current` for each payload: a foldable opened into a tablet counts as one from then on. */
+    @Test
+    fun eachEventReportsTheFormTheDeviceHasWhenItGoes() = runTest {
+        var platform = DeliveryAnalytics.Platform.Android
+        val transport = collector()
+        val analytics = analytics(transport, platform = { platform })
+        analytics.start()
+        runCurrent()
+        platform = DeliveryAnalytics.Platform.AndroidTablet
+        analytics.action("search")
+        runCurrent()
+        platform = DeliveryAnalytics.Platform.Chromebook
+        analytics.action("search")
+        runCurrent()
+        val (open, tablet, desktop) = transport.requests.drop(1)
+        for ((request, form) in listOf(
+            open to DeliveryAnalytics.Platform.Android,
+            tablet to DeliveryAnalytics.Platform.AndroidTablet,
+            desktop to DeliveryAnalytics.Platform.Chromebook,
+        )) {
+            assertEquals(form.rawValue, request.payload["data"]!!.jsonObject.string("platform"))
+            assertEquals(form.device, request.payload.string("device"))
+            assertEquals(DeliveryAnalytics.userAgent(form, "1.2"), request.header("User-Agent"))
+        }
+    }
+
     @Test
     fun eventsWaitForTheConfigurationAndTheQueueHoldsThirty() = runTest {
         val transport = collector()
@@ -349,8 +404,9 @@ class AnalyticsTests {
         defaults: UserDefaults = MemoryDefaults(),
         app: AppConfiguration = this@AnalyticsTests.app,
         collects: Boolean = true,
-    ): DeliveryAnalytics =
-        DeliveryAnalytics(app, transport, defaults, backgroundScope, DeliveryAnalytics.Platform.Android, "1.2", { listOf("fr-CH", "en") }, collects)
+        platform: () -> DeliveryAnalytics.Platform = { DeliveryAnalytics.Platform.Android },
+        languages: List<String> = listOf("fr-CH", "en"),
+    ): DeliveryAnalytics = DeliveryAnalytics(app, transport, defaults, backgroundScope, platform, "1.2", { languages }, collects)
 
     /** The configuration, then `events` for each event sent. */
     private fun collector(events: (HttpRequest) -> HttpResponse = { HttpResponse(200) }) = RecordingTransport { request ->

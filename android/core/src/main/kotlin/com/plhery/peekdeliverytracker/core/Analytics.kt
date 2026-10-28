@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
+import java.util.IllformedLocaleException
+import java.util.Locale
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -51,10 +53,12 @@ data class AnalyticsCatalog(
  * - `transport`: its own, as URLSession's `.ephemeral` is: no cache, cookies in memory only, none shared with the API
  *   client's. A request times out after 5 s (`HttpRequest.timeout`).
  * - `defaults`: the app's preferences, where the switch is saved under `PREFERENCE_KEY`. Only this class writes it.
- * - `platform`: the device it runs on, read once (see `Platform`). `version`: the app's version name, as
- *   `AppConfiguration.version`.
+ * - `platform`: the device it runs on (see `Platform`), read as each event goes, as the iPhone reads `Platform.current`
+ *   for each payload: a foldable opened into a tablet or a Chromebook taken out of tablet mode counts as what it is
+ *   then. `version`: the app's version name, as `AppConfiguration.version`.
  * - `preferredLanguages`: the device's languages as BCP 47 tags, its first one first
- *   (`Resources.getSystem().configuration.locales`), as `Locale.preferredLanguages`; not the app's own language.
+ *   (`Resources.getSystem().configuration.locales`), as `Locale.preferredLanguages`; not the app's own language. The
+ *   first is sent as the iPhone's would be (`languageTag`).
  * - `collects`: false on an emulator, which stays out of the counts as the iPhone's simulator and the Mac's Debug build do.
  */
 class DeliveryAnalytics(
@@ -62,7 +66,7 @@ class DeliveryAnalytics(
     private val transport: HttpTransport,
     private val defaults: UserDefaults,
     private val scope: CoroutineScope,
-    private val platform: Platform,
+    private val platform: () -> Platform,
     private val version: String,
     private val preferredLanguages: () -> List<String>,
     private val collects: Boolean = true,
@@ -230,7 +234,8 @@ class DeliveryAnalytics(
                     val configuration = configuration ?: break
                     val event = queue.removeFirst()
                     try {
-                        val body = JsonObject(mapOf("type" to JsonPrimitive("event"), "payload" to payload(event, configuration)))
+                        val platform = platform()
+                        val body = JsonObject(mapOf("type" to JsonPrimitive("event"), "payload" to payload(event, configuration, platform)))
                         val request = HttpRequest(
                             url = Url.parse(configuration.endpoint)?.absoluteString ?: configuration.endpoint,
                             method = "POST",
@@ -253,8 +258,8 @@ class DeliveryAnalytics(
         }
     }
 
-    private fun payload(event: Event, configuration: Configuration): JsonObject =
-        payload(event, configuration, platform, preferredLanguages().firstOrNull() ?: "en")
+    private fun payload(event: Event, configuration: Configuration, platform: Platform): JsonObject =
+        payload(event, configuration, platform, preferredLanguages().firstOrNull()?.let(::languageTag) ?: "en")
 
     companion object {
         const val PREFERENCE_KEY = "sdt.analytics.enabled"
@@ -272,6 +277,21 @@ class DeliveryAnalytics(
             )
             event.name?.let { result["name"] = JsonPrimitive(it) }
             return JsonObject(result)
+        }
+
+        /**
+         * A device language as the iPhone's `Locale.preferredLanguages` gives it: its language, script and region alone
+         * ("en-GB", "zh-Hant-TW", "sr-Latn-RS", "es-419"). Android 14's regional preferences add extensions to the
+         * system's first language ("en-GB-u-fw-mon-mu-celsius"), which an iPhone's languages never carry, nor a variant
+         * or private use.
+         */
+        fun languageTag(tag: String): String {
+            val locale = Locale.forLanguageTag(tag)
+            return try {
+                Locale.Builder().setLanguage(locale.language).setScript(locale.script).setRegion(locale.country).build().toLanguageTag()
+            } catch (_: IllformedLocaleException) {
+                tag
+            }
         }
 
         /**

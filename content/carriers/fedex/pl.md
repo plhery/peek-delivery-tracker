@@ -17,6 +17,7 @@ Szukaj w e-mailu sklepu o wysyłce albo na stronie zamówienia. Numer zawiera te
 | `123456789012` | 12 cyfr: numer przesyłki FedEx. Ostatnia cyfra to cyfra kontrolna wyliczana z 11 poprzednich. |
 | `6123456789016` | 13 cyfr, pierwsza to `6`: krajowe przesyłki [FedEx w Polsce](carrier:fedex-pl). |
 | `123456789012343` | 15 cyfr: kształt, który Peek też przypisuje FedEx. |
+| `61290000000000000014` | 20 cyfr zaczynających się od `6129` lub `7489`: FedEx Ground Economy (dawniej SmartPost) w USA. |
 
 Dwanaście cyfr mają też numery DPD France, Mondial Relay, BRT i kilku azjatyckich firm, a piętnaście DPD France, BRT i Yunda. Numer zaczynający się od `1Z` należy do [UPS](carrier:ups), a 10 cyfr to zwykle list przewozowy [DHL Express](carrier:dhl-express). Jeśli fedex.com nie zna numeru, sprawdź w e-mailu od sklepu, jakiego przewoźnika podaje.
 

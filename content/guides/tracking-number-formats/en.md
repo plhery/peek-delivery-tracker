@@ -4,7 +4,7 @@ description: Tracking number formats for USPS, UPS, FedEx, DHL, Royal Mail, Evri
 slug: tracking-number-formats-by-carrier
 picture: Three tracking-number labels split into coloured parts, a magnifying glass on the country code CH, and a curious Pip.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 A tracking number's letters and length often tell you which carrier has your parcel or package. `1Z` followed by 16 letters and digits is UPS, 22 digits starting `92` to `95` is USPS, and 13 characters shaped like `RR000000005CH` (two letters, nine digits, two letters) usually belong to a national post, with the issuing country in the last two letters. Plain digits are the hard case: 10, 12 or 14 digits each fit several carriers, so the shipping email, or a tracker that checks the candidates, has the final word.
@@ -23,7 +23,7 @@ Four checks, in this order:
 - Try the candidates | Enter the number on each likely carrier's site. The one that shows scans for it has your parcel.
 :::
 
-If you'd rather skip the detective work, paste the number, a carrier link or the whole shipping email into [Peek](/): it picks out the number and detects the carrier among more than 3,500.
+If you'd rather skip the detective work, paste the number, a carrier link or the whole shipping email into [Peek](/): it picks out the number and follows it across more than 3,500 carriers.
 
 ## Tracking number formats by carrier
 

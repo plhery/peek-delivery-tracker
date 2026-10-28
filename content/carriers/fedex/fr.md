@@ -16,6 +16,7 @@ Regarde dans l'e-mail d'expédition ou sur la page de commande de la boutique. U
 | --- | --- |
 | `123456789012` | 12 chiffres : un numéro de suivi FedEx. Le dernier chiffre est une clé de contrôle calculée à partir des 11 précédents. |
 | `123456789012343` | 15 chiffres : une forme que Peek classe aussi chez FedEx. |
+| `61290000000000000014` | 20 chiffres commençant par `6129` ou `7489` : FedEx Ground Economy (anciennement SmartPost), aux États-Unis. |
 
 Attention aux numéros qui se ressemblent : 12 chiffres, c'est aussi la longueur des numéros de [DPD France](carrier:dpd-fr), [Mondial Relay](carrier:mondial-relay) ou [Colis Privé](carrier:colis-prive), et 15 chiffres celle de DPD France. Si fedex.com ne trouve rien, regarde quel transporteur la boutique nomme dans son e-mail.
 

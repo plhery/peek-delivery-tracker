@@ -148,10 +148,8 @@ class NativeVerification(
             try {
                 val config = configuration(baseUrl, using)
                 config.appAttestAppId?.let { registeredKey(baseUrl, it, using) }
-            } catch (error: CancellationException) {
-                // Unlike the iPhone, where a cancelled launch pauses attestation as a failure would.
-                throw error
             } catch (error: Exception) {
+                throwIfCancelled(error)
                 forgetInvalidKey(error, baseUrl)
                 pauseAttestUntil[baseUrl] = now().plusSeconds(600)
             }
@@ -171,9 +169,8 @@ class NativeVerification(
             if (appId != null && record(base)?.let { it.appId == appId && it.registered } == true && provider.supported() && mayAttest(base)) {
                 try {
                     request = signed(request, baseUrl, appId, transport)
-                } catch (error: CancellationException) {
-                    throw error
                 } catch (error: Exception) {
+                    throwIfCancelled(error)
                     forgetInvalidKey(error, base)
                     pauseAttestUntil[base] = now().plusSeconds(600)
                 }
@@ -192,9 +189,8 @@ class NativeVerification(
                     if (!needsVerification(result)) return result
                     // A reinstall, expired registry entry or rejected key gets a new key after a short backoff.
                     changeRecords { it.remove(base) }
-                } catch (error: CancellationException) {
-                    throw error
                 } catch (error: Exception) {
+                    throwIfCancelled(error)
                     forgetInvalidKey(error, base)
                     // Apple or the network can be unavailable; the browser check remains usable.
                 }
@@ -412,6 +408,15 @@ class NativeVerification(
         fun payload(request: HttpRequest, challenge: String): String {
             val hash = sha256(request.body ?: ByteArray(0)).joinToString("") { "%02x".format(it) }
             return "native-request-v1\n$challenge\n${request.method}\n${Url.parse(request.url)?.path ?: ""}\n$hash"
+        }
+
+        /**
+         * A cancelled request ends as a cancellation. Once its coroutine is cancelled, a call may end in an error of its
+         * own, as URLSession ends one with URLError.cancelled rather than CancellationError.
+         */
+        private suspend fun throwIfCancelled(error: Exception) {
+            if (error is CancellationException) throw error
+            currentCoroutineContext().ensureActive()
         }
 
         fun needsVerification(response: HttpResponse): Boolean =

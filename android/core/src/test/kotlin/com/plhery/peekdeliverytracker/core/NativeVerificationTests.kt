@@ -9,13 +9,18 @@ import kotlin.coroutines.cancellation.CancellationException
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.currentTime
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withTimeout
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import org.junit.After
@@ -388,11 +393,109 @@ class NativeVerificationTests {
         assertEquals(1, server.maximumConcurrent)
     }
 
+    // Cancelled requests
+
+    /** The provider of a build whose key is registered: it signs whatever it is given. */
+    private val signs = NativeAttestProvider(
+        supported = { true },
+        generateKey = {
+            xctFail("Unexpected new key")
+            ""
+        },
+        attest = { _, _ ->
+            xctFail("Unexpected registration")
+            ByteArray(0)
+        },
+        assert = { _, _ -> "synthetic-assertion".toByteArray() },
+    )
+
+    @Test
+    fun cancelledLookupLeavesAppAttestOn() = runTest {
+        val server = NativeTestServer(paid = true)
+        val verifier = verification(signs, unexpectedCheck(), registered)
+        var cancelChallenge = false
+        // HttpTransport ends a cancelled call with a CancellationException, where URLSession throws URLError.cancelled.
+        val send = HttpTransport { request ->
+            if (request.path == "/api/public/native/challenge" && cancelChallenge) {
+                cancelChallenge = false
+                throw CancellationException("The call was cancelled.")
+            }
+            server.transport.data(request)
+        }
+        // Cancelled first while signing after the server asked, then while signing ahead of it.
+        repeat(2) {
+            cancelChallenge = true
+            try {
+                verifier.send(lookup(), base, using = send)
+                fail("Expected cancellation")
+            } catch (_: CancellationException) {
+            }
+            val result = verifier.send(lookup(), base, using = send)
+            assertEquals(201, result.statusCode)
+        }
+        assertFalse(server.requests.any { it.path == "/api/public/verification" })
+    }
+
+    /** Adapted: `prepare` is given its transport, so one that never answers stands for the URLProtocol holding URLSession's. */
+    @Test
+    fun cancelledPreparationLeavesAppAttestOn() = runTest {
+        val base = "https://prepare.peek.example"
+        val started = CompletableDeferred<Unit>()
+        // A request to the preparation host that never gets an answer.
+        val held = HttpTransport {
+            started.complete(Unit)
+            awaitCancellation()
+        }
+        val server = NativeTestServer(paid = true)
+        val verifier = verification(
+            signs, unexpectedCheck(),
+            records = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Peek", registered = true)),
+        )
+        val preparing = launch { verifier.prepare(base, held) }
+        withTimeout(2.seconds) { started.await() }
+        preparing.cancel()
+        preparing.join()
+        val request = HttpRequest(url = base.appendingPath("api/public/parcels"), method = "POST", body = lookup().body)
+        val result = verifier.send(request, base, using = server.transport)
+        assertEquals(201, result.statusCode)
+    }
+
     // Android-only
 
-    /** Unlike the iPhone, where a cancelled launch pauses App Attest for ten minutes, the next lookup attests. */
+    /**
+     * Once its coroutine is cancelled, a call may end in an error of its own rather than a CancellationException (an
+     * IOException from OkHttp interrupted under `runInterruptible`): App Attest stays on all the same.
+     */
     @Test
-    fun aCancelledPreparationLeavesAttestationFree() = runTest {
+    fun aCancellationEndingInAnotherErrorLeavesAppAttestOn() = runTest {
+        val server = NativeTestServer(paid = true)
+        val verifier = verification(signs, unexpectedCheck(), registered)
+        var cancelAt: String? = null
+        val send = HttpTransport { request ->
+            if (request.path == cancelAt) {
+                cancelAt = null
+                currentCoroutineContext().cancel()
+                throw IOException("Canceled")
+            }
+            server.transport.data(request)
+        }
+        // Cancelled while preparing, then while signing after the server asked, then while signing ahead of it.
+        cancelAt = "/api/public/native/verification"
+        launch { verifier.prepare(base, send) }.join()
+        repeat(2) {
+            cancelAt = "/api/public/native/challenge"
+            launch {
+                verifier.send(lookup(), base, using = send)
+                xctFail("Expected cancellation")
+            }.join()
+            assertEquals(201, verifier.send(lookup(), base, using = send).statusCode)
+        }
+        assertFalse(server.requests.any { it.path == "/api/public/verification" })
+    }
+
+    /** Cancelled while it registers the key, preparation leaves that to the next lookup, which attests. */
+    @Test
+    fun aPreparationCancelledWhileRegisteringLeavesAppAttestOn() = runTest {
         val server = NativeTestServer(paid = true, challengeDelay = 1.seconds)
         val provider = NativeAttestProvider(
             supported = { true }, generateKey = { "synthetic-key" }, attest = { _, _ -> "synthetic-attestation".toByteArray() },

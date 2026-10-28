@@ -83,6 +83,7 @@ data class AdaptiveColor(
 object Brand {
     val ink = color(light = "#20251E", dark = "#F5F6F2")
     val paper = color(light = "#FFFFFF", dark = "#242824")
+    val warning = color(light = "#963E19", dark = "#FFB184")
 
     /** A colour for each appearance; with increased contrast, a little further from the middle grey. */
     fun color(light: String, dark: String): AdaptiveColor {

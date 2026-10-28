@@ -5,6 +5,7 @@ import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.ceil
 import kotlin.math.cos
+import kotlin.math.floor
 import kotlin.math.hypot
 import kotlin.math.max
 import kotlin.math.min
@@ -368,6 +369,86 @@ class MapPath {
                 }
             })
             return current
+        }
+
+    /**
+     * `boundingBoxOfPath` (SwiftUI's `boundingRect`): the smallest rectangle around every point the path passes
+     * through, curves included but not their control points; the null rectangle for an empty path.
+     */
+    val boundingBoxOfPath: Rect
+        get() {
+            var minX = Double.POSITIVE_INFINITY
+            var minY = Double.POSITIVE_INFINITY
+            var maxX = Double.NEGATIVE_INFINITY
+            var maxY = Double.NEGATIVE_INFINITY
+            fun add(x: Double, y: Double) {
+                minX = min(minX, x)
+                minY = min(minY, y)
+                maxX = max(maxX, x)
+                maxY = max(maxY, y)
+            }
+            var start = Point.Zero
+            var current = Point.Zero
+            replay(object : Sink {
+                override fun move(x: Double, y: Double) {
+                    add(x, y)
+                    start = Point(x, y)
+                    current = start
+                }
+
+                override fun line(x: Double, y: Double) {
+                    add(x, y)
+                    current = Point(x, y)
+                }
+
+                // A quadratic curve turns back at most once on each axis.
+                override fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double) {
+                    add(x, y)
+                    fun turn(from: Double, control: Double, to: Double): Double? {
+                        val t = (from - control) / (from - 2 * control + to)
+                        return if (t > 0 && t < 1) t else null
+                    }
+                    for (t in listOfNotNull(turn(current.x, controlX, x), turn(current.y, controlY, y))) {
+                        val u = 1 - t
+                        add(u * u * current.x + 2 * u * t * controlX + t * t * x, u * u * current.y + 2 * u * t * controlY + t * t * y)
+                    }
+                    current = Point(x, y)
+                }
+
+                // The arc's ends, and each quarter of the circle it passes, where it reaches furthest on an axis.
+                override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) {
+                    val first = arcPoint(centerX, centerY, radius, startAngle)
+                    add(first.x, first.y)
+                    current = arcPoint(centerX, centerY, radius, startAngle + delta)
+                    add(current.x, current.y)
+                    val quarter = PI / 2
+                    val from = ceil(min(startAngle, startAngle + delta) / quarter).toLong()
+                    val to = floor(max(startAngle, startAngle + delta) / quarter).toLong()
+                    for (k in from..to) {
+                        when (k.mod(4L)) {
+                            0L -> add(centerX + radius, centerY)
+                            1L -> add(centerX, centerY + radius)
+                            2L -> add(centerX - radius, centerY)
+                            else -> add(centerX, centerY - radius)
+                        }
+                    }
+                }
+
+                override fun ellipse(x: Double, y: Double, width: Double, height: Double) {
+                    add(x, y)
+                    add(x + width, y + height)
+                    start = Point(x + width, y + height / 2)
+                    current = start
+                }
+
+                override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) = ellipse(x, y, width, height)
+
+                override fun close() {
+                    current = start
+                }
+            })
+            if (minX > maxX) return Rect.Null
+            return Rect(minX, minY, maxX - minX, maxY - minY)
         }
 
     /** Whether a filled path covers a point, by the even-odd rule (`contains(_:eoFill: true)`). */

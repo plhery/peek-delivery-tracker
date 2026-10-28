@@ -4,7 +4,7 @@ description: Quién entrega los pedidos de Allegro, si allegro.pl envía a Espa�
 slug: seguimiento-pedido-allegro
 picture: Un paquete en una taquilla One Box abierta, un móvil que muestra un pedido y Pip corriendo a recogerlo.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Allegro es un marketplace polaco: sus condiciones nombran allegro.pl, allegro.cz, allegro.sk y allegro.hu, y no hay ningún sitio para España. Los vendedores de allegro.pl pueden enviarte el pedido a España con Allegro Kurier DPD o Allegro Kurier DHL, si lo ofrecen en el anuncio. El número de seguimiento está en tu cuenta de Allegro, en «Moje przesyłki» (Mis envíos) y «Moje zakupy» (Mis compras), y en el correo que Allegro te envía cuando se añade el número.

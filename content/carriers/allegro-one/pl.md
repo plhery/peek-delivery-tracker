@@ -3,7 +3,7 @@ title: Allegro One śledzenie przesyłki: statusy i odbiór paczki
 description: Allegro One śledzenie: gdzie jest numer przesyłki, co znaczą statusy, ile czeka paczka w One Box i One Punkt, opóźnienia, reklamacja i kontakt.
 slug: allegro-one-sledzenie
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Allegro One to własna sieć dostaw Allegro: automaty paczkowe Allegro One Box, punkty odbioru Allegro One Punkt i kurier Allegro One Kurier, wszystkie w ramach Allegro Delivery. Paczkę śledzisz w „Moich przesyłkach” na allegro.pl i w aplikacji Allegro, na stronie śledzenia Allegro albo po wklejeniu numeru w pole powyżej. Numer przesyłki znajdziesz w szczegółach zakupu, w aplikacji i w e-mailu, który Allegro wysyła, gdy numer zostanie dodany.

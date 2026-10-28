@@ -4,7 +4,7 @@ description: Wer Allegro-Pakete liefert, ob allegro.pl nach Deutschland, Österr
 slug: allegro-sendungsverfolgung
 picture: Ein Paket in einem offenen One-Box-Automaten, ein Handy mit einer Bestellung und Pip, der losläuft, um es abzuholen.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Allegro ist ein polnischer Marktplatz: Seine Bedingungen nennen allegro.pl, allegro.cz, allegro.sk und allegro.hu, einen Shop für Deutschland, Österreich oder die Schweiz gibt es nicht. Händler auf allegro.pl können dir per Allegro Kurier DPD oder Allegro Kurier DHL nach Deutschland und Österreich liefern, in die Schweiz nicht. Die Sendungsnummer steht in deinem Allegro-Konto unter „Moje przesyłki“ (Meine Sendungen) und „Moje zakupy“ (Meine Käufe) und in der Mail, die Allegro dir schickt, sobald die Nummer eingetragen ist.

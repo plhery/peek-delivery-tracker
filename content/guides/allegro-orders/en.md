@@ -4,7 +4,7 @@ description: Who delivers your Allegro order, where the tracking number is, how 
 slug: allegro-order-tracking
 picture: A parcel in an open One Box locker, a phone showing an order, and Pip running to collect it.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Allegro shows your tracking number and carrier under "Moje przesyłki" (my parcels) and in the purchase details under "Moje zakupy" (my purchases). The carrier is the one in the delivery method you chose: Allegro One, InPost, DPD, DHL, ORLEN Paczka or Poczta Polska. If the parcel doesn't come, write to the seller, then report a "problem z zakupem" (purchase problem), and Allegro's buyer protection can refund you. Allegro's terms name four marketplaces, allegro.pl, allegro.cz, allegro.sk and allegro.hu, so there's no Allegro site for the US, UK, Ireland, Canada or Australia.

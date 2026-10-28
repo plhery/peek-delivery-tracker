@@ -1551,7 +1551,7 @@ export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
     {
       "id": "allegro-orders",
       "slug": "sledzenie-przesylki-allegro",
-      "title": "Śledzenie przesyłki Allegro: numer, przewoźnik, Dyskusja"
+      "title": "Śledzenie przesyłki Allegro: przewoźnik i problem z zakupem"
     },
     {
       "id": "temu-orders",

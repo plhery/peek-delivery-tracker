@@ -78,14 +78,14 @@ As páginas da TIPSA não falam de um seguimento que deixa de avançar. Se o est
 
 **Devolvida.** Uma encomenda que ninguém levanta nos 15 dias em que fica na delegação volta ao remetente, e o seguimento pode mostrar `Devolver a Origen`. Combina com a loja um novo envio ou o reembolso; mais em [encomenda devolvida ao remetente](guide:returned-to-sender).
 
-**Devolver uma compra.** Numa compra à distância podes desistir em 14 dias seguidos, sem encargos nem justificação, ou em 12 meses se a loja não te informou desse direito, segundo a Direção-Geral do Consumidor. A loja diz-te como devolver; para enviares tu, a FAQ da TIPSA indica a MANDALOXTIPSA ou uma delegação.
+**Devolver uma compra.** Numa compra à distância podes desistir no prazo de 14 dias a contar da entrega, sem dar justificação; os portes da devolução ficam por tua conta, a não ser que a loja se ofereça para os pagar ou não te tenha avisado deles antes da compra, segundo o Your Europe. A loja diz-te como devolver; para enviares tu, a FAQ da TIPSA indica a MANDALOXTIPSA ou uma delegação.
 
 ## Reclamar em Portugal: Livro de Reclamações e arbitragem
 
 Tenta primeiro resolver com a TIPSA ou com a loja: o Livro de Reclamações diz que não é obrigatório, mas que deves tentar sempre uma solução amigável.
 
 - **Livro de Reclamações.** O livro físico é obrigatório nos estabelecimentos fixos com atendimento ao público; o eletrónico, em [livroreclamacoes.pt](https://www.livroreclamacoes.pt/Inicio/), também nas empresas com atividade através de um site. Reclamar é grátis e basta um email válido, sem registo. A empresa tem 15 dias úteis para te responder por email, e a reclamação segue também para a entidade reguladora. O site português da TIPSA não tem ligação para o livro; se a TIPSA não estiver na plataforma, reclama no livro físico ou diretamente à entidade reguladora ou fiscalizadora.
-- **Arbitragem.** Os centros de arbitragem de consumo são gratuitos ou de custo muito reduzido, resolvem em até 90 dias, aceitam reclamações online e dispensam advogado, diz a Direção-Geral do Consumidor. Mas, fora dos setores em que a lei a impõe, a empresa só fica obrigada à arbitragem se tiver aderido a um centro ou se concordar com ela nesse conflito. O [CNIACC](https://www.cniacc.pt/pt), de âmbito nacional, atua onde os outros centros não têm competência, com mediação, conciliação e arbitragem.
+- **Arbitragem.** Os organismos de resolução alternativa de litígios ajudam a custo reduzido e procuram uma solução em 90 dias, diz o Your Europe; em Portugal, são os centros de arbitragem de conflitos de consumo. Segundo o CNIACC, nos serviços públicos essenciais e nos conflitos de consumo até 5000 € a arbitragem é necessária, e a empresa não a pode recusar; entre 5000 € e 30 000 €, só fica obrigada se tiver aderido plenamente ao centro ou se aceitar a arbitragem nesse conflito. O [CNIACC](https://www.cniacc.pt/pt), de âmbito nacional, atua onde os outros centros não têm competência, com mediação, conciliação e arbitragem.
 
 ## Encomendas de fora da UE: alfândega
 
@@ -150,7 +150,9 @@ Diz que sim, com pontos e cacifos, mas não diz onde ficam nem quanto tempo lá 
 - [TIPSA: Puntos Pickup](https://aplicaciones.tip-sa.com/puntospickup/) – localizador só em espanhol
 - [TIPSA: Nota legal](https://www.tip-sa.com/pt/tipsa-nota-legal) – nome e sede
 - [Livro de Reclamações: Perguntas frequentes](https://www.livroreclamacoes.pt/Inicio/PerguntasFrequentes) – livro físico e eletrónico, 15 dias úteis
-- [Direção-Geral do Consumidor: Perguntas frequentes](https://www.consumidor.gov.pt/consumidor_4/perguntas-frequentes1) – arbitragem, desistência em 14 dias
+- [Your Europe: Devoluções](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pt.htm) – desistência em 14 dias a contar da entrega, portes da devolução
+- [Your Europe: Resolução extrajudicial de litígios](https://europa.eu/youreurope/citizens/consumers/consumers-dispute-resolution/informal-alternative-dispute-resolution/index_pt.htm) – custo reduzido, solução em 90 dias
+- [CNIACC: O que é a adesão plena](https://www.cniacc.pt/pt/o-que-e-adesao-plena) – arbitragem necessária até 5000 € e nos serviços públicos essenciais; adesão plena ou arbitragem voluntária até 30 000 €
 - [CNIACC: Competências](https://www.cniacc.pt/pt/competencias-cniacc) – centro nacional supletivo
 - [Portal das Finanças: Mercadorias eCommerce – Alterações para 1 de julho de 2026](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/Mercadorias_eCommerce.aspx) – 3 € por adição, IVA
 - [Comissão Europeia: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de 2 € a partir de novembro

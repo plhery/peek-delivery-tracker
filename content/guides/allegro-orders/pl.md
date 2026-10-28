@@ -1,10 +1,10 @@
 ---
-title: Śledzenie przesyłki Allegro: numer, przewoźnik, Dyskusja
+title: Śledzenie przesyłki Allegro: przewoźnik i problem z zakupem
 description: Kto doręcza zamówienie z Allegro, gdzie jest numer przesyłki, ile czekać na wysyłkę, jak działa Smart! i co zrobić, gdy paczka nie dotarła.
 slug: sledzenie-przesylki-allegro
 picture: Paczka w otwartej skrytce One Box, telefon z zamówieniem i Pip, który biegnie ją odebrać.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Numer przesyłki z Allegro jest w „Moich przesyłkach” i w szczegółach zakupu w „Moich zakupach”, razem z nazwą przewoźnika. Paczkę wiezie firma z metody dostawy wybranej przy zakupie: Allegro One, InPost, DPD, DHL, ORLEN Paczka albo Poczta Polska. Gdy paczka nie dociera, piszesz do sprzedającego, potem zgłaszasz problem z zakupem, a jeśli to nie pomoże, Allegro może oddać ci pieniądze w ramach Allegro Ochrony Kupujących.

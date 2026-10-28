@@ -4,7 +4,7 @@ description: Chi consegna gli ordini Allegro, se allegro.pl spedisce in Italia, 
 slug: tracciare-ordine-allegro
 picture: Un pacco in un locker One Box aperto, un telefono che mostra un ordine e Pip che corre a ritirarlo.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Allegro è un marketplace polacco: le sue condizioni nominano allegro.pl, allegro.cz, allegro.sk e allegro.hu, e non c'è nessun sito per l'Italia. I venditori di allegro.pl possono spedirti in Italia con Allegro Kurier DPD o Allegro Kurier DHL, se li offrono nell'annuncio. Il codice di tracking è nel tuo account Allegro, in «Moje przesyłki» (Le mie spedizioni) e «Moje zakupy» (I miei acquisti), e nell'e-mail che Allegro ti manda quando il codice viene aggiunto.

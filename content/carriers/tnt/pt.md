@@ -83,7 +83,7 @@ Segundo o Centro de Ajuda da TNT Portugal, consultado a 23 de outubro de 2026:
 
 **Livro de Reclamações.** O site da TNT Portugal tem ligação ao Livro de Reclamações Eletrónico. Em livroreclamacoes.pt, escolhes o perfil «Consumidor(a) / Utente» e depois «Fazer Reclamação»; em «Consultar Reclamação» vês em que ponto está.
 
-**Arbitragem.** Se marcaste tu o envio com a TNT como consumidor e não chegas a acordo, a TNT diz que podes levar o litígio a um centro de arbitragem de conflitos de consumo. Os centros atuais estão no [consumidor.gov.pt](https://www.consumidor.gov.pt/resolucaoalternativalitigiosdeconsumo/centros-de-arbitragem2/como-funcionam), onde a Direção-Geral do Consumidor explica as três fases: mediação, conciliação e, sem acordo, arbitragem, com uma sentença arbitral. Se compraste numa loja, o contrato é com a loja: começa por ela.
+**Arbitragem.** Se marcaste tu o envio com a TNT como consumidor e não chegas a acordo, a TNT diz que podes levar o litígio a um centro de arbitragem de conflitos de consumo. A lista dos centros da rede de arbitragem de consumo está no [site do CNIACC](https://www.cniacc.pt/pt/rede-de-arbitragem-de-consumo); os centros tentam primeiro um acordo, por mediação e conciliação; sem acordo, o processo pode seguir para arbitragem, que termina com uma sentença arbitral. Se compraste numa loja, o contrato é com a loja: começa por ela.
 
 ## Seguir uma encomenda TNT com o Peek
 
@@ -122,8 +122,10 @@ Para um envio para outro país, a TNT diz que depende do serviço pedido e dos l
 - [TNT Portugal: Dicas para o desalfandegamento](https://www.tnt.com/express/pt_pt/site/how-to/clear-customs.html) – data prevista no Localizador
 - [TNT Portugal: Fraude Internet](https://www.tnt.com/express/pt_pt/site/support/fraud.html) – custódia de bens, Western Union, e-crime@fedex.com
 - [TNT Portugal: Resolução Alternativa de Litígios de Consumo](https://www.tnt.com/express/pt_pt/site/support/tnt-locations-portugal.html) – o consumidor pode recorrer a um centro de arbitragem
-- [Direção-Geral do Consumidor: Centros de arbitragem, como funcionam](https://www.consumidor.gov.pt/resolucaoalternativalitigiosdeconsumo/centros-de-arbitragem2/como-funcionam) – mediação, conciliação, arbitragem, centros atuais
-- [Direção-Geral do Consumidor: Quem pode recorrer](https://www.consumidor.gov.pt/resolucaoalternativalitigiosdeconsumo/ral/quem-pode-recorrertipos-de-conflitos-abrangidos) – consumidores com contrato de compra ou de serviço
+- [CNIACC: Rede de arbitragem de consumo](https://www.cniacc.pt/pt/rede-de-arbitragem-de-consumo) – centros da rede: informação, mediação, conciliação e arbitragem
+- [CNIACC: O que são centros de arbitragem](https://www.cniacc.pt/pt/o-que-sao-centros-de-arbitragem) – fases: mediação, conciliação, arbitragem, sentença arbitral
+- [CNIACC: O que é a adesão plena](https://www.cniacc.pt/pt/o-que-e-adesao-plena) – tentativa de mediação, acordo entre as partes
+- [CNIACC: Competências](https://www.cniacc.pt/pt/competencias-cniacc) – conflitos de consumo: bens e serviços para uso não profissional
 - [Livro de Reclamações Eletrónico](https://www.livroreclamacoes.pt/Inicio/) – perfil, fazer e consultar reclamação
 - [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € desde 1 de julho de 2026, 2 € a partir de 1 de novembro de 2026
 - [Comissão Europeia: Guidance on EUR 3 customs duty (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – por tipo de artigo

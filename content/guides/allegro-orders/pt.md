@@ -4,7 +4,7 @@ description: Quem entrega as encomendas do Allegro, se o allegro.pl envia para P
 slug: seguir-encomenda-allegro
 picture: Uma encomenda num cacifo One Box aberto, um telemóvel com uma encomenda no ecrã e o Pip a correr para a levantar.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 O Allegro é um marketplace polaco: as suas condições referem o allegro.pl, o allegro.cz, o allegro.sk e o allegro.hu, e não há nenhum site para Portugal. Os vendedores do allegro.pl podem enviar-te a encomenda para Portugal com Allegro Kurier DPD ou Allegro Kurier DHL, se o oferecerem no anúncio. O número de seguimento está na tua conta Allegro, em «Moje przesyłki» (As minhas encomendas) e «Moje zakupy» (As minhas compras), e no e-mail que o Allegro te envia quando o número é adicionado.

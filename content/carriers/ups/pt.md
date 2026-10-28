@@ -54,7 +54,7 @@ Se o seguimento parou, vê [porque é que o tracking não atualiza](guide:tracki
 
 Se compraste numa loja, é ela que responde pela entrega, mesmo que seja a UPS a levar a encomenda. Segundo o Your Europe, o vendedor é responsável por qualquer dano desde a expedição até à entrega. Salvo acordo para outro prazo, tem 30 dias para entregar; se não entregar, avisa-o e dá-lhe um prazo suplementar razoável. Se também não o cumprir, podes rescindir o contrato e ser reembolsado o mais rapidamente possível.
 
-Para reclamar, a Direção-Geral do Consumidor aconselha a contactar primeiro o profissional por um meio que deixe prova (carta registada com aviso de receção ou e-mail com aviso de leitura), a explicar o problema e a pedir resposta num prazo. Se o conflito continuar, podes recorrer a um Centro de Informação Autárquico ao Consumidor ou a um centro de arbitragem de conflitos de consumo.
+Para reclamar, o Your Europe aconselha a tentar primeiro resolver o problema diretamente com a empresa, com documentos que sustentem o pedido, como recibos ou faturas. Se não chegares a acordo, podes recorrer a um organismo de resolução alternativa de litígios: em Portugal, um centro de arbitragem de conflitos de consumo.
 
 **Diz entregue mas não está cá?** A página da UPS pode mostrar onde a encomenda ficou (`Left at: Front Door`, por exemplo) e uma prova de entrega, que o Peek não guarda. Vê no ups.com e depois fala com a loja. Mais em [encomenda dada como entregue mas não recebi](guide:delivered-not-received) e [encomenda extraviada ou perdida](guide:lost-parcel).
 
@@ -87,7 +87,8 @@ Desconfia. O Gabinete Cibercrime da Procuradoria-Geral da República alertou, em
 :::sources
 - [Autoridade Tributária e Aduaneira: Mercadorias eCommerce](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/Mercadorias_eCommerce.aspx) – 3 € por adição desde 1 de julho de 2026, remessas até 150 €, exemplo de 6 €, encomendas separadas
 - [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo suplementar, rescisão e reembolso, responsabilidade do vendedor, quem cobra os 3 €
-- [Direção-Geral do Consumidor: Conflitos de consumo](https://www.consumidor.gov.pt/consumidor_4/direitos-dos-consumidores1/conflitos-de-consumo) – contactar o profissional com prova, centros de informação e de arbitragem
+- [Your Europe: Resolução extrajudicial de litígios](https://europa.eu/youreurope/citizens/consumers/consumers-dispute-resolution/informal-alternative-dispute-resolution/index_pt.htm) – resolver primeiro com a empresa, com documentos; depois resolução alternativa de litígios
+- [CNIACC: Rede de arbitragem de consumo](https://www.cniacc.pt/pt/rede-de-arbitragem-de-consumo) – os centros de arbitragem de conflitos de consumo
 - [Ministério Público, Gabinete Cibercrime: alerta de 5 de julho de 2023](https://cibercrime.ministeriopublico.pt/sites/default/files/documentos/pdf/2023.07.05_alerta_phishing_ctt_visa_4.pdf) – mensagens falsas de encomenda pendente, taxa de 2 ou 3 euros, o que fazer
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – formatos do número, algarismo de controlo, leituras da UPS, o que o Peek lê da UPS
 :::

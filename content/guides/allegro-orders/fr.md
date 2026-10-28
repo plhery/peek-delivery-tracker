@@ -4,7 +4,7 @@ description: Qui livre ta commande Allegro, si allegro.pl livre en France, en Be
 slug: suivi-commande-allegro
 picture: Un colis dans une consigne One Box ouverte, un téléphone qui affiche une commande et Pip qui court le chercher.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Allegro est une place de marché polonaise : ses conditions citent allegro.pl, allegro.cz, allegro.sk et allegro.hu, et il n'y a pas de site pour la France, la Belgique ou la Suisse. Les vendeurs d'allegro.pl peuvent te livrer en Belgique avec Allegro Kurier DPD ou Allegro Kurier DHL. Pour la France et la Suisse, les pages d'aide d'Allegro ne citent ni l'un ni l'autre. Le numéro de suivi est dans ton compte Allegro, sous « Moje przesyłki » (Mes envois) et « Moje zakupy » (Mes achats), et dans l'e-mail qu'Allegro t'envoie dès que le numéro est ajouté.

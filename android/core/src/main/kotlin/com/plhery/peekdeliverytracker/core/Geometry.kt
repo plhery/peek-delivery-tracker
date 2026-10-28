@@ -5,6 +5,7 @@ import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.ceil
 import kotlin.math.cos
+import kotlin.math.exp
 import kotlin.math.floor
 import kotlin.math.hypot
 import kotlin.math.max
@@ -655,5 +656,58 @@ class UnitCurve private constructor(start: Point, end: Point) {
         fun bezier(startControlPoint: Point, endControlPoint: Point): UnitCurve = UnitCurve(startControlPoint, endControlPoint)
 
         val easeInOut = bezier(Point(0.42, 0.0), Point(0.58, 1.0))
+
+        /** The curve of `.easeOut` animations. */
+        val easeOut = bezier(Point(0.0, 0.0), Point(0.58, 1.0))
+    }
+}
+
+/**
+ * SwiftUI's `Spring(duration:bounce:)`: a unit mass on a spring stiff and damped enough to take about `duration` seconds,
+ * overshooting more the more it bounces. Only the bouncy and the critically damped springs, as the app uses no
+ * negative bounce. Compose's own spring is the same model: `spring(dampingRatio, stiffness)`.
+ */
+data class Spring(val duration: Double = 0.5, val bounce: Double = 0.0) {
+    init {
+        require(bounce >= 0 && bounce < 1) { "bounce $bounce" }
+    }
+
+    val mass: Double get() = 1.0
+    val stiffness: Double get() = (2 * PI / duration).let { it * it }
+    val damping: Double get() = 4 * PI * (1 - bounce) / duration
+    val dampingRatio: Double get() = damping / (2 * sqrt(stiffness * mass))
+
+    /**
+     * `value(target:initialVelocity:time:)`: where the spring is `time` seconds after leaving zero toward `target`,
+     * moving at `initialVelocity`; zero until it leaves.
+     */
+    fun value(target: Double, initialVelocity: Double = 0.0, time: Double): Double {
+        if (!(time > 0)) return 0.0
+        val naturalFrequency = sqrt(stiffness / mass)
+        val ratio = dampingRatio
+        val start = -target
+        if (ratio >= 1) {
+            val rate = exp(-naturalFrequency * time)
+            return target + rate * (start + (naturalFrequency * start + initialVelocity) * time)
+        }
+        val frequency = naturalFrequency * sqrt(1 - ratio * ratio)
+        val sine = (ratio * naturalFrequency * start + initialVelocity) / frequency
+        return target + exp(-ratio * naturalFrequency * time) * (start * cos(frequency * time) + sine * sin(frequency * time))
+    }
+}
+
+/** A SwiftUI animation as numbers, for :app to run on its own clock. */
+sealed interface MotionCurve {
+    /** How far along the change is `time` seconds after it starts: 0 before, 1 once done, past 1 as a spring overshoots. */
+    fun value(time: Double): Double
+
+    /** `.easeOut(duration:)`, after `.delay(_:)`: Compose's `tween` with `CubicBezierEasing(0f, 0f, 0.58f, 1f)`. */
+    data class EaseOut(val duration: Double, val delay: Double = 0.0) : MotionCurve {
+        override fun value(time: Double): Double = UnitCurve.easeOut.value((time - delay) / duration)
+    }
+
+    /** `.spring(duration:bounce:)`, from rest: Compose's `spring(dampingRatio, stiffness)` with the spring's. */
+    data class SpringCurve(val spring: Spring) : MotionCurve {
+        override fun value(time: Double): Double = spring.value(1.0, time = time)
     }
 }

@@ -730,12 +730,36 @@ class UnitCurve private constructor(val startControlPoint: Point, val endControl
     private fun y(t: Double): Double = ((ay * t + by) * t + cy) * t
     private fun slope(t: Double): Double = (3 * ax * t + 2 * bx) * t + cx
 
-    fun value(progress: Double): Double {
+    private fun ySlope(t: Double): Double = (3 * ay * t + 2 * by) * t + cy
+
+    fun value(progress: Double): Double = y(solve(swiftMin(1.0, swiftMax(0.0, progress))))
+
+    /**
+     * `velocity(at:)`: how fast the curve rises where it is `progress` across, its height per unit across. A curve
+     * whose control points lie on the diagonal is the straight line, 1 everywhere. At an end whose control point sits
+     * on that end the slope is 0 / 0, which SwiftUI reads as 1 at the start and 0 at the finish (`.easeOut` starts at
+     * 1, `.easeIn` ends at 0); a slope with nowhere to go across there is infinite, as SwiftUI's.
+     */
+    fun velocity(progress: Double): Double {
+        if (startControlPoint.x == startControlPoint.y && endControlPoint.x == endControlPoint.y) return 1.0
         val x = swiftMin(1.0, swiftMax(0.0, progress))
+        val (across, up) = if (x == 0.0) {
+            3 * startControlPoint.x to 3 * startControlPoint.y
+        } else if (x == 1.0) {
+            3 * (1 - endControlPoint.x) to 3 * (1 - endControlPoint.y)
+        } else {
+            solve(x).let { slope(it) to ySlope(it) }
+        }
+        if (across == 0.0 && up == 0.0) return if (x == 0.0) 1.0 else 0.0
+        return up / across
+    }
+
+    /** The curve's parameter where it is `x` across: Newton's method, then halving where that does not settle. */
+    private fun solve(x: Double): Double {
         var t = x
         repeat(16) {
             val error = x(t) - x
-            if (abs(error) < 1e-14) return y(t)
+            if (abs(error) < 1e-14) return t
             val slope = slope(t)
             if (abs(slope) < 1e-12) return@repeat
             t -= error / slope
@@ -745,11 +769,11 @@ class UnitCurve private constructor(val startControlPoint: Point, val endControl
         t = x
         repeat(200) {
             val error = x(t) - x
-            if (abs(error) < 1e-14) return y(t)
+            if (abs(error) < 1e-14) return t
             if (error > 0) high = t else low = t
             t = (low + high) / 2
         }
-        return y(t)
+        return t
     }
 
     companion object {
@@ -801,6 +825,27 @@ data class Spring(val duration: Double = 0.5, val bounce: Double = 0.0) {
         val frequency = naturalFrequency * sqrt(1 - ratio * ratio)
         val sine = (ratio * naturalFrequency * start + initialVelocity) / frequency
         return target + exp(-ratio * naturalFrequency * time) * (start * cos(frequency * time) + sine * sin(frequency * time))
+    }
+
+    /**
+     * `velocity(target:initialVelocity:time:)`: how fast the spring of `value` moves at `time`, in units a second;
+     * `initialVelocity` until it leaves, and still once infinitely long has passed.
+     */
+    fun velocity(target: Double, initialVelocity: Double = 0.0, time: Double): Double {
+        if (!(time > 0)) return initialVelocity
+        if (time == Double.POSITIVE_INFINITY) return 0.0
+        val naturalFrequency = sqrt(stiffness / mass)
+        val ratio = dampingRatio
+        val start = -target
+        if (ratio >= 1) {
+            val pull = naturalFrequency * start + initialVelocity
+            return exp(-naturalFrequency * time) * (initialVelocity - naturalFrequency * pull * time)
+        }
+        val decay = ratio * naturalFrequency
+        val frequency = naturalFrequency * sqrt(1 - ratio * ratio)
+        val sine = (decay * start + initialVelocity) / frequency
+        return exp(-decay * time) *
+            ((sine * frequency - decay * start) * cos(frequency * time) - (start * frequency + decay * sine) * sin(frequency * time))
     }
 }
 

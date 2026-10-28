@@ -1869,6 +1869,23 @@ class CarrierCatalogTests {
         assertNull(catalog.searchLink(parcel, AppLanguage.Fr))
     }
 
+    @Test
+    fun aQuietParcelLinksItsCarriersHelpAndSaysWhatItsTrackingLeavesOut() {
+        var parcel = parcel("100000000000000001", "Parcel", CarrierId.SpringGDS, "2026-09-07T13:00:00Z")
+        // PostNL's tracker names no carrier abroad for Spring's 18-digit numbers.
+        assertTrue(catalog.hidesDestinationLeg(parcel))
+        assertEquals("PostNL", catalog.helpLink(parcel, AppLanguage.En)?.name)
+        parcel = parcel.copy(trackingNumber = "RR123456785NL")
+        assertFalse(catalog.hidesDestinationLeg(parcel))
+        // Swiss Post's help page follows the reader's language.
+        parcel = parcel.copy(carrier = CarrierId.SwissPost)
+        val help = catalog.helpLink(parcel, AppLanguage.It)
+        assertNotNull(help)
+        assertEquals("https://www.post.ch/de/hilfe-und-kontakt/empfangen?lang=it", help!!.url)
+        parcel = parcel.copy(carrier = CarrierId.Yunexpress)
+        assertNull(catalog.helpLink(parcel, AppLanguage.En))
+    }
+
     // The scraper's goldens and the front door's examples.
 
     @Serializable

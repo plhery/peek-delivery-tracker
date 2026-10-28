@@ -248,6 +248,9 @@ class CarrierCatalogParityTests {
     fun theCatalogsPatternsMeanTheSameOverCharactersAsOverUtf16() {
         val requirements = catalog.definitions.values.flatMap { it.tracking.requirements.orEmpty() }.mapNotNull { it.pattern?.nonEmpty }
         assertTrue(requirements.isNotEmpty())
+        // `hidesDestinationLeg` gives the catalog's own to `foundationMatches` too.
+        val destinationLegs = catalog.definitions.values.mapNotNull { it.hidesDestinationLeg }
+        assertTrue(destinationLegs.isNotEmpty())
         // The patterns CarrierCatalog, CarrierRecognition and CarrierRequirement give `foundationMatches` themselves.
         val literals = listOf(
             CarrierRequirement.anyPostcode,
@@ -261,7 +264,7 @@ class CarrierCatalogParityTests {
             "^(?:ESP[0-9]{5}1234[0-9]{11}|PRT[0-9]{7}1234[0-9]{9})$",
             "^(J?JD[0-9]{16}|8YDR[0-9]{9}|[0-9]{2}[A-Z]{3}[0-9]{7}A[0-9]{3})$",
         )
-        for (pattern in requirements + literals) {
+        for (pattern in requirements + destinationLegs + literals) {
             assertTrue(pattern, meansTheSameOverCharacters(pattern))
             assertTrue(pattern, CatalogExpressions.expression(pattern) != null)
         }

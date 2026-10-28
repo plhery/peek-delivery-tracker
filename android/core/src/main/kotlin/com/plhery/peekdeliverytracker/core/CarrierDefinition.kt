@@ -145,6 +145,10 @@ data class CarrierDefinition(
     val trackingUrlTemplate: String? = null,
     /** The carrier's page for typing a number in, linked when a parcel link hides the number. */
     val trackingSearchUrl: String? = null,
+    /** The carrier's own help and contact page for someone receiving a parcel, linked once it stops moving. */
+    val helpUrl: String? = null,
+    /** The numbers whose journey in the destination country the carrier's tracking leaves out. */
+    val hidesDestinationLeg: String? = null,
     val linkRules: List<LinkRule>,
     val detectionRules: List<DetectionRule>,
 ) {

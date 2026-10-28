@@ -52,6 +52,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
+import kotlin.time.Duration.Companion.nanoseconds
 
 // Pip's views (Pip.swift): :core's PipArtwork drawn on a canvas, clocked as the iPhone clocks it. Each is decorative,
 // hidden from accessibility (A-AX16).
@@ -258,7 +259,7 @@ internal class InkPipFrame(val time: Double?, val opening: PipOpening?, val befo
 /**
  * InkPip's clock: the date he is drawn at in seconds since 1 January 2001, as his bob keeps time on the iPhone (two
  * Pips bob together), and the news of his parcel's arrival. While he moves it goes on 30 times a second, asleep
- * between two frames, and at every frame while his box opens.
+ * between two frames, and at every frame while his box opens. Still, it stands; it starts again at the wall's time.
  */
 @Stable
 internal class InkPipClock(private var mood: PipMood, reduceMotion: Boolean, private val wall: () -> Double) {
@@ -277,7 +278,10 @@ internal class InkPipClock(private var mood: PipMood, reduceMotion: Boolean, pri
 
     /** `onChange(of: mood)`: the news of an arrival opens his box, unless motion is reduced; any other change ends it. */
     fun show(mood: PipMood, reduceMotion: Boolean) {
-        moves = moves(mood, reduceMotion)
+        val moving = moves(mood, reduceMotion)
+        // His first frame on the move is at the wall's time, as a TimelineView that starts again is, not where he stopped.
+        if (moving && !moves) nanos = nanos(wall())
+        moves = moving
         if (mood == this.mood) return
         unboxing = if (mood == PipMood.Joy && this.mood != PipMood.Joy && !reduceMotion) Unboxing(this.mood) else null
         this.mood = mood
@@ -295,14 +299,21 @@ internal class InkPipClock(private var mood: PipMood, reduceMotion: Boolean, pri
             // The flaps swing faster than he bobs. The iPhone keeps every frame for as long as he stays joyful after
             // the news (Pip.swift's `interval`); only the opening needs them.
             val opening = news?.at?.let { nanos - it < OPENING_NANOS } == true
-            frame = if (opening) withFrameNanos { it } else nextFrame(after = frame)
+            frame = if (opening) withFrameNanos { it } else nextFrame(first, after = frame)
         }
     }
 
-    /** The first frame a 30th of a second after `after`, asleep until just before it. */
-    private suspend fun nextFrame(after: Long): Long {
-        val due = after + INTERVAL_NANOS
-        delay((INTERVAL_NANOS - WAKE_NANOS) / 1_000_000)
+    /**
+     * The first frame at the next 30th of a second after `after`, counted from `first`, asleep until just before it.
+     * Each frame aims at its own 30th rather than a 30th after the last, so a display whose frames don't fall on
+     * them, or a frame that comes late, still draws 30 a second.
+     */
+    private suspend fun nextFrame(first: Long, after: Long): Long {
+        var tick = (after - first + EARLY_NANOS) * 30 / SECOND_NANOS + 1
+        while (tickNanos(first, tick) - EARLY_NANOS <= after) tick++
+        val due = tickNanos(first, tick) - EARLY_NANOS
+        val sleep = due - WAKE_NANOS - after
+        if (sleep > 0) delay(sleep.nanoseconds)
         var frame = withFrameNanos { it }
         while (frame < due) frame = withFrameNanos { it }
         return frame
@@ -321,8 +332,13 @@ internal class InkPipClock(private var mood: PipMood, reduceMotion: Boolean, pri
     }
 
     private companion object {
-        /** TimelineView's `.animation(minimumInterval: 1 / 30)`, 2 ms early for the display's jitter. */
-        const val INTERVAL_NANOS = 1_000_000_000L / 30 - 2_000_000L
+        const val SECOND_NANOS = 1_000_000_000L
+
+        /** TimelineView's `.animation(minimumInterval: 1 / 30)`: his `tick`th 30th of a second from `first`. */
+        fun tickNanos(first: Long, tick: Long): Long = first + tick * SECOND_NANOS / 30
+
+        /** How early a frame may come and still count for a 30th: the display's jitter. */
+        const val EARLY_NANOS = 2_000_000L
 
         /**
          * How long before a frame is due he wakes to ask for one: late enough that at 120 Hz the next frame is the one

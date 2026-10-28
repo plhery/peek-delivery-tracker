@@ -77,16 +77,33 @@ class PipClockTest {
     /** The test's wall: seconds since 2001 as the frame clock counts them, from an arbitrary moment. */
     private val wall = { 800_000_000.0 + compose.mainClock.currentTime / 1000.0 }
 
-    /** A display drawing a frame every `period` ms on the test's clock, at whole periods, counting the frames asked for. */
-    private class Display(private val period: Long, private val scheduler: TestCoroutineScheduler) : MonotonicFrameClock {
+    /**
+     * A display drawing a frame `hz` times a second on the test's clock, counting the frames asked for. The frames
+     * numbered in `late` don't come: their callbacks run at the next, as a frame that runs late does.
+     */
+    private class Display(private val hz: Long, private val scheduler: TestCoroutineScheduler, private val late: Set<Long> = emptySet()) : MonotonicFrameClock {
         var wakes = 0
             private set
+        private var last = 0L
+
+        /** The time of the display's `n`th frame from the test's start, in nanoseconds. */
+        fun frame(n: Long): Long = n * 1_000_000_000L / hz
 
         override suspend fun <R> withFrameNanos(onFrame: (frameTimeNanos: Long) -> R): R {
-            delay(period - scheduler.currentTime % period)
+            var n = next()
+            while (n in late) n++
+            // The callback runs in the millisecond the frame falls in, with the frame's own time.
+            delay(millis(n) - scheduler.currentTime)
+            last = n
             wakes++
-            return onFrame(scheduler.currentTime * 1_000_000)
+            return onFrame(frame(n))
         }
+
+        /** The display's next frame from now. */
+        fun next(): Long = maxOf(last + 1, scheduler.currentTime * 1_000_000 * hz / 1_000_000_000L + 1)
+
+        /** The millisecond the display's `n`th frame's callback runs in. */
+        fun millis(n: Long): Long = (frame(n) + 999_999) / 1_000_000
     }
 
     /** The test's wall on the test's own clock. */
@@ -106,26 +123,55 @@ class PipClockTest {
         return Pair(dates, display.wakes - wakes)
     }
 
-    @Test
-    fun eagerHeBobsThirtyTimesASecondAndWakesOnlyForThoseFrames() = runTest {
-        // At 60 and 125 Hz, a frame every 32 ms from the display's first, on the wall's time, each its own wake-up.
-        for ((period, frames) in listOf(16L to 31, 8L to 32)) {
-            val display = Display(period, testScheduler)
-            val first = testScheduler.currentTime + period
-            val clock = InkPipClock(PipMood.Eager, reduceMotion = false, testWall())
-            val pip = launch(display) { clock.run() }
-            val (dates, wakes) = watch(clock, display, 1_000)
-            pip.cancel()
-            assertEquals(frames, dates.size)
-            assertEquals(frames, wakes)
-            assertEquals(800_000_000.0 + first / 1000.0, dates.first(), 1e-6)
-            for ((earlier, later) in dates.zipWithNext()) assertEquals(0.032, later - earlier, 1e-6)
+    /**
+     * Each of `dates` after the first is the display's first frame at its own 30th of a second from the first, or up
+     * to 2 ms before it for the display's jitter: none skipped, none twice.
+     */
+    private fun assertThirtiethsFrom(first: Double, dates: List<Double>, hz: Long, start: Int = 0) {
+        for ((index, date) in dates.withIndex()) {
+            val since = date - first
+            val due = (start + index) / 30.0 - 0.002
+            assertTrue("$hz Hz, frame ${start + index} at $since", since > due - 1e-6 && since < due + 1.0 / hz + 1e-6)
         }
     }
 
     @Test
+    fun eagerHeBobsThirtyTimesASecondAtAnyRefreshRateAndSleepsBetween() = runTest {
+        for (hz in listOf(48L, 60L, 90L, 120L, 144L)) {
+            val display = Display(hz, testScheduler)
+            val firstMillis = display.millis(display.next())
+            val clock = InkPipClock(PipMood.Eager, reduceMotion = false, testWall())
+            val pip = launch(display) { clock.run() }
+            val (dates, wakes) = watch(clock, display, 2_000)
+            pip.cancel()
+            // His first frame is the display's first, on the wall's time.
+            assertEquals(800_000_000.0 + firstMillis / 1000.0, dates.first(), 1e-6)
+            assertThirtiethsFrom(dates.first(), dates, hz)
+            assertTrue("$hz Hz: ${dates.size} frames", dates.size >= 60)
+            // Asleep in between: a wake-up a frame where the display's frames fall on the 30ths, two for a frame whose
+            // display frame before falls just before it is due, and always fewer than the display's own frames.
+            if (hz % 30 == 0L) assertEquals("$hz Hz", dates.size, wakes)
+            assertTrue("$hz Hz: $wakes wakes", wakes <= 2 * dates.size && wakes < 2 * hz)
+        }
+    }
+
+    @Test
+    fun aLateFrameDoesNotPushBackTheOnesAfterIt() = runTest {
+        // At 60 Hz his 30ths are every other frame from the display's first; his third, its 7th, comes a frame late.
+        val display = Display(60, testScheduler, late = setOf(7L))
+        val clock = InkPipClock(PipMood.Eager, reduceMotion = false, testWall())
+        val pip = launch(display) { clock.run() }
+        val (dates, wakes) = watch(clock, display, 1_000)
+        pip.cancel()
+        assertEquals(0.1 + 1.0 / 60, dates[3] - dates[0], 1e-6)
+        assertThirtiethsFrom(dates[0], dates.take(3), 60)
+        assertThirtiethsFrom(dates[0], dates.drop(4), 60, start = 4)
+        assertEquals(dates.size, wakes)
+    }
+
+    @Test
     fun heWakesAtEveryFrameOnlyWhileHisBoxOpens() = runTest {
-        val display = Display(8, testScheduler)
+        val display = Display(125, testScheduler)
         val clock = InkPipClock(PipMood.Eager, reduceMotion = false, testWall())
         var pip = launch(display) { clock.run() }
         watch(clock, display, 500)
@@ -138,12 +184,33 @@ class PipClockTest {
         assertEquals(125, opening.size)
         assertEquals(125, wakes)
         for ((earlier, later) in opening.zipWithNext()) assertEquals(0.008, later - earlier, 1e-6)
-        // Open, he jumps 30 times a second, as eager he bobbed.
+        // Open, he jumps 30 times a second, as eager he bobbed, on the 30ths from his first frame after the news.
         val (jumps, rest) = watch(clock, display, 1_000)
-        assertEquals(32, jumps.size)
-        assertEquals(32, rest)
+        assertEquals(30, jumps.size)
+        assertThirtiethsFrom(opening.first(), jumps, 125, start = 30)
+        assertTrue("$rest", rest <= 2 * jumps.size)
         assertTrue(checkNotNull(clock.frame(PipMood.Joy).time) > PipOpening.DURATION)
         pip.cancel()
+    }
+
+    @Test
+    fun heStartsToMoveAtTheWallsTimeNotWhereHeStopped() = runTest {
+        val wall = testWall()
+        val display = Display(60, testScheduler)
+        // Still when he shows, eager five seconds later: his first frame, before his clock runs, is at the wall's time.
+        val clock = InkPipClock(PipMood.Look, reduceMotion = false, wall)
+        testScheduler.advanceTimeBy(5_000)
+        clock.show(PipMood.Eager, reduceMotion = false)
+        assertEquals(wall(), checkNotNull(clock.frame(PipMood.Eager).time), 1e-6)
+        // The same when Reduce Motion has held him still for three seconds.
+        val pip = launch(display) { clock.run() }
+        watch(clock, display, 500)
+        pip.cancel()
+        clock.show(PipMood.Eager, reduceMotion = true)
+        assertNull(clock.frame(PipMood.Eager).time)
+        testScheduler.advanceTimeBy(3_000)
+        clock.show(PipMood.Eager, reduceMotion = false)
+        assertEquals(wall(), checkNotNull(clock.frame(PipMood.Eager).time), 1e-6)
     }
 
     @Test

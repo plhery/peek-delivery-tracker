@@ -24,7 +24,7 @@ begin
     end;
   end loop;
   begin
-    perform test_support.add_parcel('GFES0000000000003', 'Unknown region', 'gofo-es');
+    perform test_support.add_parcel('GFZZ0000000000003', 'Unknown region', 'gofo-zz');
     raise exception 'Unknown carrier was accepted';
   exception when sqlstate '22023' then null;
   end;

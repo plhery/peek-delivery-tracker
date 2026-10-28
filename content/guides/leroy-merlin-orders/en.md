@@ -4,7 +4,7 @@ description: Leroy Merlin has no online shop in the UK or the US. How delivery, 
 slug: leroy-merlin-order-tracking
 picture: A paint tin and a roller on a stack of wooden planks beside a delivery van, and Pip standing on the planks.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-10-28
 ---
 
 Leroy Merlin, the DIY and home-improvement chain, doesn't sell in the UK, Ireland, the US, Canada or Australia, and its French site doesn't deliver abroad. At leroymerlin.fr, small parcels come with a tracking number by email when Colissimo or Mondial Relay delivers them, bulky goods come by a freight carrier who calls to book a day, and store pickup is free. If something is missing or damaged, report it within 3 working days of delivery.
@@ -81,7 +81,7 @@ Longer or heavier parcels cost more, up to €199 for 5 t or more. For most parc
 
 **Store pickup.** Free up to 1.2 t: book a pickup slot. Staff put bulky orders at the foot of your vehicle and you load them. Someone else can collect with your ID and the order number. If you don't come, Leroy Merlin reminds you, then cancels the order after 15 days. A locker keeps your order 3 days.
 
-**Pickup points.** Bring ID and collect soon: Mondial Relay keeps parcels 5 calendar days, Colissimo 14. An uncollected parcel goes back and you're refunded. More: [parcel lockers and pickup points](guide:parcel-lockers) and [uncollected parcels](guide:uncollected-parcel).
+**Pickup points.** Bring ID and collect soon: a parcel not collected in time goes back and you're refunded. More: [parcel lockers and pickup points](guide:parcel-lockers) and [uncollected parcels](guide:uncollected-parcel).
 
 **Changes.** To change the address of an order on its way, use the contact form; if it's too late and the new address is close by, Leroy Merlin tries to arrange it with the carrier. "Annuler ma commande" (cancel my order) shows under "Commandes et retours" only while cancelling is still possible. More: [change the delivery address](guide:change-delivery-address).
 
@@ -91,7 +91,7 @@ Look first, then report. In order:
 
 :::steps
 - Check the tracking | Open "Commandes et retours" and each "Suivre mon colis" link. Split orders and marketplace items come in separate parcels, so check them all.
-- Look around and ask | A small parcel can be handed over or left in your letterbox, so check it and ask your household and neighbours. After a missed-delivery notice, you have 15 days for a new delivery or a post office pickup.
+- Look around and ask | A small parcel can be handed over or left in your letterbox, so check it and ask your household and neighbours.
 - Contact Leroy Merlin | Call 03 59 57 46 04 (free), Monday to Saturday 8:00 to 19:00, or use the contact form or chat, with your order number. For a store purchase, call the store. For a marketplace item, use "Échanger avec le marchand" (talk to the seller) on the order.
 - Report a delivery problem | Leroy Merlin calls this "déclarer un problème de livraison": an item or part missing, a broken item or the wrong one. Report it within 3 working days of delivery with the contact form and photos. After that, use "Déclarer un SAV" (online after-sales) for damage, customer service for missing or wrong items. Marketplace item: tell the seller, ideally within 3 days; if Leroy Merlin delivered it, use Leroy Merlin's form.
 - Refund or new item | If the problem is confirmed, Leroy Merlin ships the items again while stock lasts, or cancels them and refunds you within 14 days, and pays for the return.
@@ -141,7 +141,5 @@ If a parcel changes carrier on the way and the first carrier names the one takin
 - [Leroy Merlin France: Terms of sale](https://www.leroymerlin.fr/cgu-cgv-et-politique-de-donnees-personnelles/conditions-generales-de-vente.html) – delivery area, working days, parcel number, pickup points, freight carriers, reservations, late delivery, withdrawal, return tracking
 - [Leroy Merlin France: The marketplace](https://www.leroymerlin.fr/explication-marketplace.html) – seller deliveries, tracking link, contacting the seller, returns
 - [Leroy Merlin France: Marketplace information](https://www.leroymerlin.fr/reglementations-marketplace.html) – trusted third party
-- [Mondial Relay: Collection times](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – 5 calendar days in France
-- [La Poste: Colissimo at a pickup point](https://aide.laposte.fr/contenu/comment-et-sous-quel-delai-puis-je-recuperer-mes-lettres-recommandees-et-colissimo-en-point-de-retrait-postal) – 14 days, 15 at the post office
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – number shapes, carriers Peek knows
 :::

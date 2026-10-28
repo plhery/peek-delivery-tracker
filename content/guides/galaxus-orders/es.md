@@ -4,7 +4,7 @@ description: Galaxus no envía a España: dónde entrega, quién reparte en Suiz
 slug: seguimiento-pedido-galaxus
 picture: Altas estanterías de almacén llenas de cajas de todos los tamaños, una furgoneta de reparto y Pip en el estante de arriba.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Galaxus no tiene web para España y no envía allí: cada tienda Galaxus entrega solo en su propio país. Si vives en Suiza, galaxus.ch y digitec.ch envían desde su almacén con Swiss Post, el correo suizo, o con Planzer, y la «Bestellübersicht» (resumen de pedidos) de tu cuenta muestra siempre la fecha de entrega actual.
@@ -101,7 +101,7 @@ En este orden:
 - Revisa el seguimiento | Mira la fecha en la «Bestellübersicht» y el último estado del transportista. Planzer entrega sin firma: el paquete depositado cuenta como entregado, y la prueba es una foto con datos GPS.
 - Busca y pregunta | Mira en el buzón y donde suelen dejarlo, y pregunta a los vecinos. Planzer lo intenta una vez: con la «Zustellkarte» (tarjeta de aviso) pides un segundo intento en 7 días naturales; si no, el paquete vuelve tras al menos 7 días laborables.
 - Contacta con Galaxus | Pregunta a Galaxus Assistant «Wo ist meine Lieferung?». En la sección de devoluciones y problemas hay una opción para cuando el seguimiento dice entregado y no tienes nada (en la web en inglés, «Your order didn't arrive?»). Si falta un producto o no es el tuyo, elige «Falschlieferung anmelden» (notificar un envío erróneo) en el pedido. Daños, errores y faltas, también de comerciantes, se avisan en 5 días naturales.
-- Pide una búsqueda | Con Swiss Post, también el destinatario puede pedir una «Nachforschung» (búsqueda), online o en una oficina, hasta un año después del envío: si falta el estado «Sendung zugestellt» (envío entregado), el plazo de entrega se ha superado en más de dos días y confirmas que no lo recibiste. Con DHL puedes pedir una búsqueda si el estado lleva más de 5 días laborables sin cambiar, pero DHL pide a quien espera un pedido de una tienda online que hable antes con el remitente, es decir, con Galaxus. En Austria, Francia y Bélgica solo el remitente puede reclamar al correo: habla con Galaxus.
+- Pide una búsqueda | Con Swiss Post, también el destinatario puede pedir una «Nachforschung» (búsqueda), online o en una oficina, hasta un año después del envío: si falta el estado «Sendung zugestellt» (envío entregado), el plazo de entrega se ha superado en más de dos días y confirmas que no lo recibiste. Con DHL puedes pedir una búsqueda si el estado lleva más de 5 días laborables sin cambiar, pero DHL pide a quien espera un pedido de una tienda online que hable antes con el remitente, es decir, con Galaxus. En Austria y Bélgica solo el remitente puede reclamar al correo: habla con Galaxus.
 - Reembolso o artículo nuevo | Las compras en galaxus.ch se rigen por el derecho suizo, no por el español. Salvo pacto en contra, el riesgo pasa a ti cuando la mercancía se entrega para su envío (art. 185 del Código de Obligaciones). Pero las condiciones de Galaxus dicen que, si la entrega se retrasa, puedes desistir a partir del día 30 tras la fecha prevista, salvo en pedidos especiales, y Galaxus te devuelve lo pagado.
 :::
 
@@ -160,7 +160,6 @@ Peek muestra lo que publica el transportista. Los casos, los reembolsos y las de
 - [Planzer Paket: AGB](https://cms.planzer.ch/doc/agb-pp/?lang=de) – un intento, «Zustellkarte», 7 días, entrega sin firma, foto con GPS
 - [DHL: My shipment hasn't been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – búsqueda tras más de 5 días laborables, hablar primero con la tienda online
 - [Österreichische Post: Nachforschung](https://www.post.at/p/a/nachforschung) – solo reclama el remitente
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – solo reclama el remitente
 - [bpost: Comment introduire une plainte](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – el destinatario no puede reclamar
 - [Fedlex: Code des obligations, art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr#art_185) – beneficios y riesgos
 - [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de número, transportistas que conoce Peek

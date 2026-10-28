@@ -4,7 +4,7 @@ description: Where Galaxus and Digitec deliver, who brings your order in Switzer
 slug: galaxus-order-tracking
 picture: Tall warehouse shelves stacked with boxes of every size, a delivery van, and Pip on the top shelf.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 In Switzerland, Galaxus and Digitec ship from their own warehouse with Swiss Post or Planzer, and your order overview always shows the current delivery date. Each Galaxus site delivers only within its own country: galaxus.ch and digitec.ch to Switzerland and Liechtenstein, the others to one EU country each. There's no Galaxus site for the UK, the US, Ireland, Canada or Australia.
@@ -101,7 +101,7 @@ In this order:
 - Check the tracking | Check the date in your order overview and the carrier's latest status. Planzer leaves parcels without a signature: once left, a parcel counts as delivered, and a photo with GPS data is the proof.
 - Look around and ask | Check your letter box and drop-off place, and ask your neighbours. Planzer tries once: ask for a second attempt with the delivery card within seven calendar days, or the parcel goes back after at least seven working days.
 - Contact Galaxus | Ask Galaxus Assistant "Where's my delivery?". If tracking says delivered but you have nothing, go to "Returns or problems" and choose "Your order didn't arrive?". If an item is missing or wrong, choose "The delivery was wrong?". Report damage, wrong or incomplete deliveries within 5 calendar days, merchants' too.
-- Start an enquiry | With Swiss Post, the recipient can start one too, online or at a branch, up to a year after posting: when "Consignment delivered" is missing, the delivery time has passed by more than two days and you confirm you didn't get it. With DHL, you can request one once the status hasn't changed for more than 5 working days, but DHL asks the recipient of an online order to contact the sender first: that's Galaxus. In Austria, France and Belgium, only the sender can file with the post, so contact Galaxus.
+- Start an enquiry | With Swiss Post, the recipient can start one too, online or at a branch, up to a year after posting: when "Consignment delivered" is missing, the delivery time has passed by more than two days and you confirm you didn't get it. With DHL, you can request one once the status hasn't changed for more than 5 working days, but DHL asks the recipient of an online order to contact the sender first: that's Galaxus. In Austria and Belgium, only the sender can file with the post, so contact Galaxus.
 - Refund or new item | Under Swiss law, unless agreed otherwise, the risk passes to you once the goods are handed over for shipping (Art. 185 of the Code of Obligations). Galaxus's terms add that if delivery is late, you can cancel from the 30th day after the scheduled date, except for special orders, and Galaxus refunds what you paid.
 :::
 
@@ -169,7 +169,6 @@ Peek shows what the carrier publishes. Cases, refunds and returns stay in your G
 - [Planzer Parcel: General terms and conditions](https://cms.planzer.ch/doc/agb-pp/?lang=en) – one delivery attempt, seven calendar days, left without signature, photo with GPS data
 - [DHL: My shipment hasn't been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – investigation after more than 5 working days, contact the online shop first
 - [Austrian Post: Enquiry](https://www.post.at/p/a/nachforschung) – only the sender starts an enquiry
-- [La Poste: Lost Colissimo parcel](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – only the sender files the claim
 - [bpost: How to file a complaint about a parcel](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – the recipient can't file a complaint
 - [Fedlex: Code of Obligations, art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/en#art_185) – benefit and risk
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – number shapes, carriers Peek knows

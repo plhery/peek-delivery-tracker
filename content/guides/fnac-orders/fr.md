@@ -4,7 +4,7 @@ description: Qui livre ta commande Fnac en France, ce que proposent les sites be
 slug: suivi-commande-fnac
 picture: Un point relais avec une enseigne colis, Pip sur le trottoir, et le carton, les livres et le jeu qu'il contenait.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Ta commande Fnac se suit dans ton compte client, sous « Mes commandes ». Ce que Fnac vend lui-même arrive avec un transporteur de colis comme Colissimo ou Chronopost, t'attend dans un Relais Colis ou se retire en magasin ; pour une livraison avec installation, c'est Darty qui apporte le téléviseur ou l'appareil, sur rendez-vous. Les articles des vendeurs de la marketplace Fnac partent avec le transporteur du vendeur, sous leur propre numéro de suivi quand l'envoi est suivi.
@@ -42,7 +42,6 @@ Sur la marketplace Fnac Darty, plus de 3 000 vendeurs sont actifs, et chacun exp
 - **Ton compte client.** Dans « Mes commandes », ouvre « Détails de la commande » : c'est là que Fnac affiche le suivi, y compris pour une livraison en point relais.
 - **L'appli Fnac.** Elle suit tes commandes et tes colis depuis ton compte client, et affiche sur sa page d'accueil le code de retrait à présenter en magasin.
 - **Tes e-mails et SMS.** Fnac te prévient par e-mail ou SMS quand le colis est disponible au point relais. Pour une livraison Darty, un SMS la veille donne un créneau de 2 heures, et un autre annonce l'arrivée du livreur.
-- **La Poste.** Avec un compte laposte.fr, « Mes suivis » peut afficher automatiquement les colis de sites partenaires comme la Fnac, si tu l'actives dans « Gérer les paramètres ».
 
 Sur la page de contact, l'« expert commande » répond aussi aux questions sur une commande, un délai ou un suivi une fois que tu es connecté. Pour les autres boutiques : [trouver son numéro de suivi](guide:find-tracking-number).
 
@@ -119,7 +118,7 @@ Vérifie d'abord, puis signale. Dans cet ordre :
 - Vérifier le suivi | Ouvre « Mes commandes », puis « Détails de la commande ». En point relais, regarde l'e-mail ou le SMS de mise à disposition : le colis t'attend 9 jours.
 - Regarder autour et demander | Un petit colis peut être dans ta boîte aux lettres ; un plus grand est remis à toute personne présente à l'adresse. Vérifie la boîte et demande à qui était là.
 - Contacter Fnac | À partir du 5e jour, clique sur « Colis non livré » dans le détail de la commande. Le service client répond aussi par chat, Messenger ou téléphone, du lundi au samedi de 9 h à 19 h 30.
-- Fnac enquête | Ta demande ouvre une enquête auprès du transporteur de Fnac ; le service client t'écrit le résultat par e-mail sous 7 à 10 jours. La Poste et Relais Colis renvoient eux aussi le destinataire vers l'expéditeur ou la boutique.
+- Fnac enquête | Ta demande ouvre une enquête auprès du transporteur de Fnac ; le service client t'écrit le résultat par e-mail sous 7 à 10 jours. Relais Colis renvoie lui aussi le destinataire vers la boutique.
 - Remboursement ou nouvel article | Tant que ni toi ni une personne que tu as désignée n'avez pris le colis en main, le risque reste chez le vendeur. S'il reste introuvable, demande le remboursement ou un nouvel envoi.
 :::
 
@@ -157,8 +156,6 @@ Peek affiche ce que publie le transporteur. L'enquête « Colis non livré », l
 - [Fnac Darty Marketplace : Quels modes de livraison puis-je proposer ?](https://marketplace.fnacdarty.com/s/article/Quels-modes-de-livraison-puis-je-proposer) – mode « Normale » sans suivi, suivie, recommandée
 - [Fnac Darty Marketplace : Comment gérer les messages et les réclamations ?](https://marketplace.fnacdarty.com/s/article/Comment-g%C3%A9rer-les-messages-et-les-r%C3%A9clamations) – 2 jours ouvrés, 8 jours ouvrés
 - [Fnac Darty Marketplace : Quelles sont mes obligations envers mes clients ?](https://marketplace.fnacdarty.com/s/article/Quelles-sont-mes-obligations-envers-mes-clients) – vendeur responsable, signature, attestation sur l'honneur
-- [La Poste : Comment accéder au détail d'un suivi dans mon Espace client ?](https://aide.laposte.fr/contenu/comment-acceder-au-detail-d-un-suivi-dans-mon-espace-client) – « Mes suivis », Fnac parmi les sites partenaires
-- [La Poste : Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – seul l'expéditeur fait la réclamation
 - [Relais Colis : Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – commande en ligne : réclamation auprès de l'enseigne
 - [Relais Colis : Combien de jours mon colis est-il gardé ?](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 9 jours calendaires, 7 jours ouvrés
 - [Service Public : Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – au moins 14 jours

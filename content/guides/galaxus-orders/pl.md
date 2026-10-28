@@ -4,7 +4,7 @@ description: Galaxus nie wysyła do Polski: gdzie dostarcza, kto doręcza w Szwa
 slug: sledzenie-zamowienia-galaxus
 picture: Wysokie regały magazynowe pełne kartonów różnej wielkości, furgonetka kurierska i Pip na najwyższej półce.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Galaxus nie ma sklepu dla Polski i nie wysyła do Polski: każdy sklep Galaxus dostarcza tylko we własnym kraju. Jeśli mieszkasz w Szwajcarii, galaxus.ch i digitec.ch wysyłają ze swojego magazynu Pocztą Szwajcarską (Die Post) albo przez Planzer, a „Bestellübersicht” (przegląd zamówień) na twoim koncie zawsze pokazuje aktualną datę dostawy.
@@ -101,7 +101,7 @@ Po kolei:
 - Sprawdź śledzenie | Zobacz datę w „Bestellübersicht” i ostatni status u przewoźnika. Planzer doręcza bez podpisu: zostawiona paczka liczy się jako doręczona, a dowodem jest zdjęcie z danymi GPS.
 - Rozejrzyj się i zapytaj | Zajrzyj do skrzynki i w miejsce, gdzie zostawia się paczki, zapytaj sąsiadów. Planzer próbuje raz: kartą „Zustellkarte” (awizo) zamówisz drugą próbę w ciągu 7 dni kalendarzowych, inaczej paczka wraca po co najmniej 7 dniach roboczych.
 - Skontaktuj się z Galaxus | Zapytaj Galaxus Assistant „Wo ist meine Lieferung?”. W dziale zwrotów i problemów jest opcja na sytuację, gdy według śledzenia paczka jest doręczona, a ty nic nie masz (w angielskiej wersji strony „Your order didn't arrive?”). Jeśli czegoś brakuje albo przyszedł zły produkt, wybierz w zamówieniu „Falschlieferung anmelden” (zgłoś błędną dostawę). Uszkodzenia, pomyłki i braki, także od sprzedawców, zgłaszasz w ciągu 5 dni kalendarzowych.
-- Zleć poszukiwanie | Na Poczcie Szwajcarskiej także odbiorca może zlecić „Nachforschung” (poszukiwanie), online albo w placówce, do roku od nadania: gdy brakuje statusu „Sendung zugestellt” (przesyłka doręczona), termin minął ponad dwa dni temu i potwierdzasz, że przesyłka do ciebie nie dotarła. W DHL możesz zlecić poszukiwanie, gdy status nie zmienia się od ponad 5 dni roboczych, ale DHL prosi osoby czekające na zamówienie ze sklepu internetowego, żeby najpierw skontaktowały się z nadawcą, czyli z Galaxus. W Austrii, Francji i Belgii reklamację na poczcie składa tylko nadawca: skontaktuj się z Galaxus.
+- Zleć poszukiwanie | Na Poczcie Szwajcarskiej także odbiorca może zlecić „Nachforschung” (poszukiwanie), online albo w placówce, do roku od nadania: gdy brakuje statusu „Sendung zugestellt” (przesyłka doręczona), termin minął ponad dwa dni temu i potwierdzasz, że przesyłka do ciebie nie dotarła. W DHL możesz zlecić poszukiwanie, gdy status nie zmienia się od ponad 5 dni roboczych, ale DHL prosi osoby czekające na zamówienie ze sklepu internetowego, żeby najpierw skontaktowały się z nadawcą, czyli z Galaxus. W Austrii i Belgii reklamację na poczcie składa tylko nadawca: skontaktuj się z Galaxus.
 - Zwrot pieniędzy albo nowy produkt | Zakupy na galaxus.ch podlegają prawu szwajcarskiemu, nie polskiemu. Jeśli nie umówiono inaczej, ryzyko przechodzi na ciebie, gdy towar zostanie nadany do wysyłki (art. 185 Kodeksu zobowiązań). Ale warunki Galaxus mówią, że przy opóźnieniu możesz odstąpić od umowy od 30. dnia po zapowiedzianym terminie, poza zamówieniami specjalnymi, a Galaxus zwróci ci zapłaconą kwotę.
 :::
 
@@ -160,7 +160,6 @@ Peek pokazuje to, co publikuje przewoźnik. Zgłoszenia, zwroty pieniędzy i zwr
 - [Planzer Paket: AGB](https://cms.planzer.ch/doc/agb-pp/?lang=de) – jedna próba, „Zustellkarte”, 7 dni, doręczenie bez podpisu, zdjęcie z GPS
 - [DHL: My shipment hasn't been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – poszukiwanie po ponad 5 dniach roboczych, najpierw kontakt ze sklepem internetowym
 - [Österreichische Post: Nachforschung](https://www.post.at/p/a/nachforschung) – poszukiwanie zleca tylko nadawca
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – reklamację składa tylko nadawca
 - [bpost: Comment introduire une plainte](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – odbiorca nie może złożyć reklamacji
 - [Fedlex: Code des obligations, art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr#art_185) – korzyści i ryzyko
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, przewoźnicy znani Peek

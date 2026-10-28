@@ -4,7 +4,7 @@ description: Se a Cdiscount entrega em Portugal, que transportadora leva a tua e
 slug: seguimento-encomenda-cdiscount
 picture: Uma fila de cacifos de encomendas, uma pilha de caixas de todos os tamanhos e o Pip a espreitar de um cacifo aberto.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 A Cdiscount vende online em cdiscount.com, um site em francês, e entrega em França continental e em mais nove países europeus, Portugal incluído. O seguimento está na tua conta de cliente, em «Mes commandes» (as minhas encomendas), e o e-mail de envio indica a transportadora. As encomendas da Cdiscount seguem com a Colissimo, a Chronopost, a DPD, a Mondial Relay ou a Relais Colis, ou com marcação se forem grandes. Os vendedores do Marketplace que enviam eles próprios usam a sua transportadora, com número de seguimento só se o envio for seguido.
@@ -133,7 +133,7 @@ Quem contactar depende de quem envia:
 | «Vendu par *vendedor* et expédié par Cdiscount» | Cdiscount | Cdiscount |
 | «Vendu et expédié par *vendedor*» | O vendedor, a partir de «Mes commandes» | Cdiscount |
 
-O vendedor não responde em 2 dias úteis, ou a resposta não te convence? Em «Mes messages», carrega em «Demandez l'intervention de Cdiscount» (pede a intervenção da Cdiscount). O vendedor tem então mais 2 dias úteis; se não resolver, a Cdiscount pode ligar-te. A La Poste e a Relais Colis também remetem o destinatário para o remetente ou para a loja. Último recurso: o mediador de consumo da FEVAD, a que a Cdiscount aderiu.
+O vendedor não responde em 2 dias úteis, ou a resposta não te convence? Em «Mes messages», carrega em «Demandez l'intervention de Cdiscount» (pede a intervenção da Cdiscount). O vendedor tem então mais 2 dias úteis; se não resolver, a Cdiscount pode ligar-te. A Relais Colis também remete o destinatário para a loja. Último recurso: o mediador de consumo da FEVAD, a que a Cdiscount aderiu.
 
 Um telemóvel, um portátil ou um tablet podem chegar com um código enviado por e-mail: depois de o usares, já não podes reclamar a entrega. Encomenda danificada? Escreve reservas na guia de entrega ou recusa-a, e avisa a Cdiscount, de preferência em 14 dias, para que investigue com a transportadora. Segundo as regras da UE, os danos desde o envio até receberes a encomenda são da responsabilidade do vendedor.
 
@@ -174,7 +174,6 @@ Se a encomenda de um vendedor mudar de transportadora pelo caminho e a primeira 
 - [Cdiscount Marketplace: página inicial](https://marketplace.cdiscount.com/) – 10 000 vendedores
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – venda fora de França em cinco países, também para os artigos enviados pela Cdiscount, só ao domicílio, apoio em francês, prazos de fora da Europa
 - [Cdiscount Marketplace: Fulfillment Cdiscount](https://marketplace.cdiscount.com/service/octopia-fulfillment/) – artigos enviados pela Cdiscount: França, Espanha, Itália, Alemanha, Bélgica e Luxemburgo
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – só o remetente reclama
 - [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – compras online: reclama-se à loja
 - [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo adicional e cancelamento, danos até à receção
 - [Your Europe: Devoluções](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pt.htm) – 14 dias a contar da entrega

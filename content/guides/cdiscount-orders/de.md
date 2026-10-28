@@ -4,7 +4,7 @@ description: Wohin Cdiscount liefert, welcher Paketdienst deine Bestellung bring
 slug: cdiscount-bestellung-verfolgen
 picture: Eine Reihe Paketstationen, ein Stapel Kartons in allen Größen und Pip, der aus einem offenen Fach lugt.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Cdiscount verkauft online auf cdiscount.com, einer Seite nur auf Französisch, und liefert nach Frankreich und in neun weitere europäische Länder, darunter Deutschland und Österreich, aber nicht in die Schweiz. Die Sendungsverfolgung steht in deinem Kundenkonto unter „Mes commandes“ (meine Bestellungen), und die Versand-E-Mail nennt den Paketdienst. Die eigenen Pakete von Cdiscount bringen Colissimo, Chronopost, DPD, Mondial Relay oder Relais Colis, sperrige Artikel kommen mit Termin. Marktplatz-Verkäufer, die selbst verschicken, nehmen ihren eigenen Paketdienst, mit Sendungsnummer nur bei einem Versand mit Sendungsverfolgung.
@@ -133,7 +133,7 @@ Wen du kontaktierst, hängt davon ab, wer verschickt:
 | „Vendu par *Verkäufer* et expédié par Cdiscount“ | Cdiscount | Cdiscount |
 | „Vendu et expédié par *Verkäufer*“ | Der Verkäufer, über „Mes commandes“ | Cdiscount |
 
-Antwortet der Verkäufer nicht innerhalb von 2 Werktagen, oder passt dir seine Antwort nicht? Klick in „Mes messages“ auf „Demandez l'intervention de Cdiscount“ (Cdiscount um Eingreifen bitten). Der Verkäufer hat dann noch 2 Werktage; danach kann Cdiscount dich anrufen. Auch La Poste und Relais Colis verweisen Empfänger an den Absender oder den Shop. Als letzter Schritt bleibt die Verbraucherschlichtung der FEVAD, der Cdiscount angehört.
+Antwortet der Verkäufer nicht innerhalb von 2 Werktagen, oder passt dir seine Antwort nicht? Klick in „Mes messages“ auf „Demandez l'intervention de Cdiscount“ (Cdiscount um Eingreifen bitten). Der Verkäufer hat dann noch 2 Werktage; danach kann Cdiscount dich anrufen. Auch Relais Colis verweist Empfänger an den Shop. Als letzter Schritt bleibt die Verbraucherschlichtung der FEVAD, der Cdiscount angehört.
 
 Ein Handy, Laptop oder Tablet kann mit einem per E-Mail geschickten Code kommen: Ist der Code benutzt, ist keine Reklamation zur Lieferung mehr möglich. Paket beschädigt? Vermerke Vorbehalte auf dem Lieferschein oder lehne es ab, und melde es Cdiscount möglichst innerhalb von 14 Tagen, damit Cdiscount beim Paketdienst nachforscht.
 
@@ -173,7 +173,6 @@ Wechselt das Paket eines Verkäufers unterwegs den Paketdienst und nennt der ers
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – Versand durch Verkäufer oder Cdiscount, Eingreifen von Cdiscount, Schlichtung der FEVAD
 - [Cdiscount Marketplace: Startseite](https://marketplace.cdiscount.com/) – 10.000 Verkäufer
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – Verkauf ins Ausland, Marktplatz-Länder, nur an die Haustür, Seite auf Französisch, Lieferzeiten von außerhalb Europas
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – nur der Absender reklamiert
 - [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – Online-Bestellungen: Reklamation beim Shop
 - [Service Public: Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – mindestens 14 Tage
 - [Service Public: Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – 30 Tage ohne Datum, Risiko bis zur Übergabe

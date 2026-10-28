@@ -4,7 +4,7 @@ description: A Galaxus não entrega em Portugal: onde entrega, quem leva a encom
 slug: seguimento-encomenda-galaxus
 picture: Prateleiras altas de armazém cheias de caixas de todos os tamanhos, uma carrinha de entregas e o Pip na prateleira de cima.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 A Galaxus não tem loja para Portugal e não entrega cá: cada loja Galaxus só entrega no seu próprio país. Se vives na Suíça, a galaxus.ch e a digitec.ch enviam do armazém delas pelos correios suíços (Die Post) ou pela Planzer, e a «Bestellübersicht» (resumo das encomendas) da tua conta mostra sempre a data de entrega atual.
@@ -101,7 +101,7 @@ Por esta ordem:
 - Vê o seguimento | Confirma a data na «Bestellübersicht» e o último estado na transportadora. A Planzer entrega sem assinatura: a encomenda deixada à porta conta como entregue, e a prova é uma foto com dados GPS.
 - Procura e pergunta | Vê na caixa do correio e no sítio onde costumam deixar encomendas, e pergunta aos vizinhos. A Planzer tenta uma vez: com a «Zustellkarte» (aviso de entrega) pedes nova tentativa em 7 dias de calendário; senão, a encomenda volta passados pelo menos 7 dias úteis.
 - Contacta a Galaxus | Pergunta ao Galaxus Assistant «Wo ist meine Lieferung?». Na secção de devoluções e problemas há uma opção para quando o seguimento diz entregue e não tens nada (no site em inglês, «Your order didn't arrive?»). Se faltar um produto ou vier o errado, escolhe «Falschlieferung anmelden» (comunicar entrega errada) na encomenda. Danos, erros e faltas, também de comerciantes, comunicam-se em 5 dias de calendário.
-- Pede uma investigação | Nos correios suíços, também o destinatário pode pedir uma «Nachforschung» (investigação), online ou numa estação de correios, até um ano depois do envio: se faltar o estado «Sendung zugestellt» (envio entregue), o prazo tiver passado há mais de dois dias e confirmares que não recebeste. Com a DHL, podes pedir uma investigação se o estado estiver há mais de 5 dias úteis sem mudar, mas a DHL pede a quem espera uma compra online que fale primeiro com o remetente, ou seja, com a Galaxus. Na Áustria, em França e na Bélgica, só o remetente pode reclamar junto dos correios: fala com a Galaxus.
+- Pede uma investigação | Nos correios suíços, também o destinatário pode pedir uma «Nachforschung» (investigação), online ou numa estação de correios, até um ano depois do envio: se faltar o estado «Sendung zugestellt» (envio entregue), o prazo tiver passado há mais de dois dias e confirmares que não recebeste. Com a DHL, podes pedir uma investigação se o estado estiver há mais de 5 dias úteis sem mudar, mas a DHL pede a quem espera uma compra online que fale primeiro com o remetente, ou seja, com a Galaxus. Na Áustria e na Bélgica, só o remetente pode reclamar junto dos correios: fala com a Galaxus.
 - Reembolso ou artigo novo | As compras na galaxus.ch regem-se pela lei suíça, não pela portuguesa. Salvo acordo em contrário, o risco passa para ti quando a mercadoria é entregue para envio (art. 185 do Código das Obrigações). Mas as condições da Galaxus dizem que, se a entrega se atrasar, podes desistir a partir do 30.º dia depois da data prevista, exceto em encomendas especiais, e a Galaxus devolve-te o que pagaste.
 :::
 
@@ -160,7 +160,6 @@ O Peek mostra o que a transportadora publica. Os casos, os reembolsos e as devol
 - [Planzer Paket: AGB](https://cms.planzer.ch/doc/agb-pp/?lang=de) – uma tentativa, «Zustellkarte», 7 dias, entrega sem assinatura, foto com GPS
 - [DHL: My shipment hasn't been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – investigação após mais de 5 dias úteis, falar primeiro com a loja online
 - [Österreichische Post: Nachforschung](https://www.post.at/p/a/nachforschung) – só o remetente reclama
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – só o remetente reclama
 - [bpost: Comment introduire une plainte](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – o destinatário não pode reclamar
 - [Fedlex: Code des obligations, art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr#art_185) – benefícios e riscos
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de número, transportadoras que o Peek conhece

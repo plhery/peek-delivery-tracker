@@ -4,7 +4,7 @@ description: Where Fnac sells online, who delivers your order, where the trackin
 slug: fnac-order-tracking
 picture: A pickup point with a parcel sign, Pip on the pavement, and the box, books and game it held.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Fnac sells online in France, Belgium, Switzerland, Spain and Portugal. In France, your order's tracking is in your customer account under "Mes commandes" (my orders). What Fnac sells itself comes with a parcel carrier such as Colissimo or Chronopost, waits at a Relais Colis pickup point or is collected in store, and Darty brings a TV or appliance booked with installation. Items from Fnac marketplace sellers come with the seller's carrier, under their own tracking number when the shipping is tracked.
@@ -45,12 +45,11 @@ On the Fnac Darty marketplace, more than 3,000 sellers are active, and each one 
 
 ## Where is my Fnac tracking number?
 
-In four places:
+In three places:
 
 - **Your customer account.** In "Mes commandes", open "Détails de la commande" (order details). That's where Fnac shows the tracking, for pickup point deliveries too.
 - **The Fnac app.** It tracks your orders and parcels from your account, and shows the pickup code for store collection on its home page.
 - **Emails and text messages.** Fnac tells you by email or text message when the parcel is ready at the pickup point. For a Darty delivery, a text message the day before gives a 2-hour slot, and another one says the driver is on the way.
-- **La Poste.** In a laposte.fr account, "Mes suivis" (my tracking) can show Fnac parcels automatically: turn it on in "Gérer les paramètres" (manage settings).
 
 Once you're logged in, the "expert commande" (order expert) on the contact page also answers tracking questions. Other shops: [find your tracking number](guide:find-tracking-number).
 
@@ -121,7 +120,7 @@ Look first, then report. In this order:
 - Check the tracking | Open "Mes commandes", then "Détails de la commande". For a pickup point, look for the email or text message saying it's ready: the parcel waits 9 days.
 - Look around and ask | A small parcel may be in your letterbox; a bigger one is handed to anyone at the address. Check the letterbox and ask whoever was in.
 - Contact Fnac | From the 5th day, click "Colis non livré" (parcel not delivered) in the order details. Customer service also answers by chat, Messenger or phone, Monday to Saturday from 9 am to 7:30 pm.
-- Fnac investigates | Your request opens an investigation with Fnac's carrier; customer service emails you the result within 7 to 10 days. La Poste and Relais Colis also send recipients back to the sender or the shop.
+- Fnac investigates | Your request opens an investigation with Fnac's carrier; customer service emails you the result within 7 to 10 days. Relais Colis also sends recipients back to the shop.
 - Refund or new item | Until you, or someone you named, have the parcel in hand, the seller carries the risk under French law. If it stays lost, ask for a refund or a new shipment.
 :::
 
@@ -159,8 +158,6 @@ Peek shows what the carrier publishes. The "Colis non livré" investigation, ref
 - [Fnac Darty Marketplace: Quels modes de livraison puis-je proposer ?](https://marketplace.fnacdarty.com/s/article/Quels-modes-de-livraison-puis-je-proposer) – "Normale" without tracking
 - [Fnac Darty Marketplace: Comment gérer les messages et les réclamations ?](https://marketplace.fnacdarty.com/s/article/Comment-g%C3%A9rer-les-messages-et-les-r%C3%A9clamations) – 2 working days, 8 working days
 - [Fnac Darty Marketplace: Quelles sont mes obligations envers mes clients ?](https://marketplace.fnacdarty.com/s/article/Quelles-sont-mes-obligations-envers-mes-clients) – seller responsible, signature, statement
-- [La Poste: Comment accéder au détail d'un suivi dans mon Espace client ?](https://aide.laposte.fr/contenu/comment-acceder-au-detail-d-un-suivi-dans-mon-espace-client) – "Mes suivis", Fnac among partner sites
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – only the sender files a claim
 - [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – online orders: claim with the shop
 - [Relais Colis: Combien de jours mon colis est-il gardé ?](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 9 calendar days, 7 working days
 - [Service Public: Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – at least 14 days

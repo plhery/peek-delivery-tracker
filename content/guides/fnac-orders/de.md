@@ -4,7 +4,7 @@ description: Wo Fnac online verkauft, wer deine Bestellung liefert, wo die Sendu
 slug: fnac-bestellung-verfolgen
 picture: Eine Abholstelle mit Paketschild, Pip auf dem Gehweg und der Karton samt den Büchern und dem Spiel, die er enthielt.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Fnac hat Online-Shops in Frankreich, Belgien, der Schweiz, Spanien und Portugal, aber keinen in Deutschland oder Österreich. In Frankreich findest du die Sendungsverfolgung in deinem Kundenkonto unter „Mes commandes“ (meine Bestellungen). Was Fnac selbst verkauft, bringt ein Paketdienst wie Colissimo oder Chronopost, oder es wartet in einem Relais-Colis-Paketshop oder im Geschäft auf dich. Fernseher und Geräte mit Installation liefert Darty. Artikel von Verkäufern auf dem Fnac-Marktplatz kommen mit dem Paketdienst des Verkäufers und, bei einem Versand mit Sendungsverfolgung, eigener Sendungsnummer.
@@ -45,12 +45,11 @@ Auf dem Marktplatz von Fnac Darty sind mehr als 3.000 Händler aktiv, und jeder 
 
 ## Wo finde ich die Sendungsnummer meiner Fnac-Bestellung?
 
-An vier Stellen:
+An drei Stellen:
 
 - **Dein Kundenkonto.** Öffne in „Mes commandes“ die „Détails de la commande“ (Bestelldetails). Dort zeigt Fnac die Sendungsverfolgung, auch bei Lieferung an einen Paketshop.
 - **Die Fnac-App.** Sie verfolgt deine Bestellungen und Pakete aus deinem Konto und zeigt auf der Startseite den Abholcode fürs Geschäft.
 - **E-Mails und SMS.** Fnac sagt dir per E-Mail oder SMS Bescheid, wenn das Paket im Paketshop liegt. Bei einer Darty-Lieferung nennt eine SMS am Vortag ein 2-Stunden-Fenster, eine weitere kündigt den Fahrer an.
-- **La Poste.** In einem Konto auf laposte.fr kann „Mes suivis“ (meine Sendungen) Fnac-Pakete automatisch anzeigen: Schalte es unter „Gérer les paramètres“ (Einstellungen verwalten) ein.
 
 Wenn du angemeldet bist, beantwortet auf der Kontaktseite auch der „expert commande“ (Bestellexperte) Fragen zur Sendungsverfolgung. Andere Shops: [Sendungsnummer finden](guide:find-tracking-number).
 
@@ -121,7 +120,7 @@ Erst nachsehen, dann melden. In dieser Reihenfolge:
 - Sendung prüfen | Öffne „Mes commandes“ und dann „Détails de la commande“. Bei einem Paketshop such die E-Mail oder SMS, dass es bereitliegt: Das Paket wartet 9 Tage.
 - Umsehen und nachfragen | Ein kleines Paket kann im Briefkasten liegen; ein größeres wird jeder Person an der Adresse übergeben. Schau in den Briefkasten und frag, wer zu Hause war.
 - Fnac kontaktieren | Ab dem 5. Tag klickst du in den Bestelldetails auf „Colis non livré“ (Paket nicht geliefert). Der Kundenservice antwortet auch per Chat, Messenger oder Telefon, montags bis samstags von 9 bis 19:30 Uhr.
-- Fnac forscht nach | Deine Meldung startet eine Nachforschung beim Paketdienst von Fnac; der Kundenservice schickt dir das Ergebnis innerhalb von 7 bis 10 Tagen per E-Mail. Auch La Poste und Relais Colis verweisen Empfänger an den Absender oder den Shop.
+- Fnac forscht nach | Deine Meldung startet eine Nachforschung beim Paketdienst von Fnac; der Kundenservice schickt dir das Ergebnis innerhalb von 7 bis 10 Tagen per E-Mail. Auch Relais Colis verweist Empfänger an den Shop.
 - Geld zurück oder neuer Artikel | Bis du oder eine von dir benannte Person das Paket in der Hand hat, trägt nach französischem Recht der Verkäufer das Risiko. Bleibt es verschwunden, verlang eine Erstattung oder einen neuen Versand.
 :::
 
@@ -159,8 +158,6 @@ Peek zeigt, was der Paketdienst veröffentlicht. Die Nachforschung „Colis non 
 - [Fnac Darty Marketplace: Quels modes de livraison puis-je proposer ?](https://marketplace.fnacdarty.com/s/article/Quels-modes-de-livraison-puis-je-proposer) – „Normale“ ohne Sendungsverfolgung
 - [Fnac Darty Marketplace: Comment gérer les messages et les réclamations ?](https://marketplace.fnacdarty.com/s/article/Comment-g%C3%A9rer-les-messages-et-les-r%C3%A9clamations) – 2 Werktage, 8 Werktage
 - [Fnac Darty Marketplace: Quelles sont mes obligations envers mes clients ?](https://marketplace.fnacdarty.com/s/article/Quelles-sont-mes-obligations-envers-mes-clients) – Verkäufer verantwortlich, Unterschrift, Erklärung
-- [La Poste: Comment accéder au détail d'un suivi dans mon Espace client ?](https://aide.laposte.fr/contenu/comment-acceder-au-detail-d-un-suivi-dans-mon-espace-client) – „Mes suivis“, Fnac unter den Partnerseiten
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – nur der Absender reklamiert
 - [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – Online-Bestellungen: Reklamation beim Shop
 - [Relais Colis: Combien de jours mon colis est-il gardé ?](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 9 Kalendertage, 7 Werktage
 - [Service Public: Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – mindestens 14 Tage

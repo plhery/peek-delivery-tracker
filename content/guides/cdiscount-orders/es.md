@@ -4,7 +4,7 @@ description: Si Cdiscount envía a España, qué transportista lleva tu pedido, 
 slug: seguimiento-pedido-cdiscount
 picture: Una fila de taquillas de paquetes, una pila de cajas de todos los tamaños y Pip asomándose por una taquilla abierta.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Cdiscount vende en línea en cdiscount.com, una web en francés, y entrega en Francia continental y en otros nueve países europeos, España incluida. El seguimiento está en tu cuenta de cliente, en «Mes commandes» (mis pedidos), y el correo de envío nombra al transportista. Los paquetes de Cdiscount viajan con Colissimo, Chronopost, DPD, Mondial Relay o Relais Colis, o con cita si son grandes. Los vendedores del Marketplace que envían ellos mismos usan su propio transportista, con número de seguimiento solo si el envío lo lleva.
@@ -133,7 +133,7 @@ Quién te atiende depende de quién envía:
 | «Vendu par *vendedor* et expédié par Cdiscount» | Cdiscount | Cdiscount |
 | «Vendu et expédié par *vendedor*» | El vendedor, desde «Mes commandes» | Cdiscount |
 
-¿El vendedor no contesta en 2 días laborables o su respuesta no te convence? En «Mes messages», pulsa «Demandez l'intervention de Cdiscount» (pide que intervenga Cdiscount). El vendedor tiene entonces 2 días laborables más; si no, Cdiscount puede llamarte. La Poste y Relais Colis también remiten al destinatario al remitente o a la tienda. Último recurso: el mediador de consumo de la FEVAD, al que está adherida Cdiscount.
+¿El vendedor no contesta en 2 días laborables o su respuesta no te convence? En «Mes messages», pulsa «Demandez l'intervention de Cdiscount» (pide que intervenga Cdiscount). El vendedor tiene entonces 2 días laborables más; si no, Cdiscount puede llamarte. Relais Colis también remite al destinatario a la tienda. Último recurso: el mediador de consumo de la FEVAD, al que está adherida Cdiscount.
 
 Un móvil, un portátil o una tableta pueden llegar con un código enviado por correo: una vez usado, ya no puedes reclamar la entrega. ¿Paquete dañado? Escribe reservas en el albarán de entrega o recházalo, y avisa a Cdiscount, mejor en 14 días, para que investigue con el transportista. Según las normas de la UE, los daños desde el envío hasta que recibes el paquete son responsabilidad del vendedor.
 
@@ -173,7 +173,6 @@ Si el paquete de un vendedor cambia de transportista en el camino y el primero n
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – envío por el vendedor o por Cdiscount, intervención de Cdiscount, mediador FEVAD
 - [Cdiscount Marketplace: portada](https://marketplace.cdiscount.com/) – 10 000 vendedores
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – venta fuera de Francia en cinco países, también lo que envía Cdiscount, solo a domicilio, de 2 a 7 días, atención en francés, plazos desde fuera de Europa
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – solo el remitente reclama
 - [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – compras en línea: se reclama a la tienda
 - [Your Europe: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – 30 días, plazo extra y anulación, daños hasta la recepción
 - [Your Europe: Devoluciones](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_es.htm) – 14 días desde la entrega

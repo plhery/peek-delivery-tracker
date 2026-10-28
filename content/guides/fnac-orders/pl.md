@@ -4,7 +4,7 @@ description: Gdzie Fnac sprzedaje online, czy Fnac jest w Polsce, kto dostarcza 
 slug: sledzenie-zamowienia-fnac
 picture: Punkt odbioru z szyldem z paczką, Pip na chodniku, a obok karton, książki i gra, które w nim były.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 W Polsce nie ma Fnac: ani sklepów, ani polskiej strony. Fnac sprzedaje online we Francji, w Belgii, Szwajcarii, Hiszpanii i Portugalii. We Francji śledzenie zamówienia znajdziesz na swoim koncie klienta, w „Mes commandes” (moje zamówienia). To, co Fnac sprzedaje sam, przywozi firma kurierska, na przykład Colissimo albo Chronopost, czeka w punkcie Relais Colis albo odbierasz to w sklepie, a telewizor lub sprzęt AGD zamówiony z instalacją przywozi Darty. Artykuły sprzedawców z marketplace’u Fnac przyjeżdżają z przewoźnikiem sprzedawcy, pod osobnym numerem przesyłki, jeśli wysyłka jest śledzona.
@@ -47,12 +47,11 @@ Na marketplace’ie Fnac Darty działa ponad 3000 sprzedawców i każdy wysyła 
 
 ## Gdzie jest numer przesyłki z Fnac?
 
-W czterech miejscach:
+W trzech miejscach:
 
 - **Twoje konto klienta.** W „Mes commandes” otwórz „Détails de la commande” (szczegóły zamówienia). Tam Fnac pokazuje śledzenie, także przy dostawie do punktu odbioru.
 - **Aplikacja Fnac.** Śledzi zamówienia i paczki z twojego konta, a na ekranie głównym pokazuje kod odbioru w sklepie.
 - **E-maile i SMS-y.** Fnac zawiadamia e-mailem albo SMS-em, gdy paczka czeka w punkcie odbioru. Przy dostawie Darty SMS dzień wcześniej podaje 2-godzinne okno, a kolejny mówi, że kierowca jest w drodze.
-- **La Poste.** Na koncie laposte.fr „Mes suivis” (moje przesyłki) może sam pokazywać paczki z Fnac: włączasz to w „Gérer les paramètres” (zarządzaj ustawieniami).
 
 Po zalogowaniu na pytania o śledzenie odpowiada też „expert commande” (ekspert od zamówień) na stronie kontaktowej. Inne sklepy: [jak znaleźć numer przesyłki](guide:find-tracking-number).
 
@@ -123,7 +122,7 @@ Najpierw szukaj, potem zgłaszaj. W tej kolejności:
 - Sprawdź śledzenie | Otwórz „Mes commandes”, potem „Détails de la commande”. Przy punkcie odbioru szukaj e-maila albo SMS-a, że paczka czeka: czeka 9 dni.
 - Rozejrzyj się i zapytaj | Mała paczka może być w skrzynce, a większą kurier oddaje każdemu, kto jest pod adresem. Sprawdź skrzynkę i zapytaj domowników.
 - Skontaktuj się z Fnac | Od 5. dnia kliknij „Colis non livré” (paczka niedostarczona) w szczegółach zamówienia. Obsługa klienta odpowiada też na czacie, przez Messengera i telefonicznie, od poniedziałku do soboty od 9:00 do 19:30.
-- Fnac wyjaśnia | Według pomocy fnac.com twoje zgłoszenie otwiera dochodzenie u przewoźnika Fnac; obsługa klienta przysyła wynik e-mailem w ciągu 7–10 dni. La Poste i Relais Colis też odsyłają odbiorców do nadawcy albo do sklepu.
+- Fnac wyjaśnia | Według pomocy fnac.com twoje zgłoszenie otwiera dochodzenie u przewoźnika Fnac; obsługa klienta przysyła wynik e-mailem w ciągu 7–10 dni. Relais Colis też odsyła odbiorców do sklepu.
 - Zwrot pieniędzy albo nowy artykuł | Dopóki ty albo wskazana przez ciebie osoba nie macie paczki w rękach, ryzyko według prawa francuskiego ponosi sprzedawca. Jeśli paczka się nie znajdzie, poproś o zwrot pieniędzy albo ponowną wysyłkę.
 :::
 
@@ -164,8 +163,6 @@ Peek pokazuje to, co publikuje przewoźnik. Dochodzenie „Colis non livré”, 
 - [Fnac Darty Marketplace: Quels modes de livraison puis-je proposer ?](https://marketplace.fnacdarty.com/s/article/Quels-modes-de-livraison-puis-je-proposer) – „Normale” bez śledzenia
 - [Fnac Darty Marketplace: Comment gérer les messages et les réclamations ?](https://marketplace.fnacdarty.com/s/article/Comment-g%C3%A9rer-les-messages-et-les-r%C3%A9clamations) – 2 dni robocze, 8 dni roboczych
 - [Fnac Darty Marketplace: Quelles sont mes obligations envers mes clients ?](https://marketplace.fnacdarty.com/s/article/Quelles-sont-mes-obligations-envers-mes-clients) – odpowiedzialność sprzedawcy, podpis, oświadczenie
-- [La Poste: Comment accéder au détail d'un suivi dans mon Espace client ?](https://aide.laposte.fr/contenu/comment-acceder-au-detail-d-un-suivi-dans-mon-espace-client) – „Mes suivis”, Fnac wśród stron partnerskich
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – reklamację składa tylko nadawca
 - [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – zamówienia online: reklamacja w sklepie
 - [Relais Colis: Combien de jours mon colis est-il gardé ?](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 9 dni kalendarzowych, 7 roboczych
 - [Service Public: Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – co najmniej 14 dni

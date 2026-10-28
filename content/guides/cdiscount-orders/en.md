@@ -4,7 +4,7 @@ description: Where Cdiscount delivers, which carrier brings your order, where th
 slug: cdiscount-order-tracking
 picture: A bank of parcel lockers, a pile of boxes of every size, and Pip peeking out of an open locker.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Cdiscount sells online on cdiscount.com, a French-language site, and delivers to mainland France and nine other European countries, Ireland included. Your order's tracking is in your customer account under "Mes commandes" (my orders), and the shipping email names the carrier. Cdiscount's own parcels go with Colissimo, Chronopost, DPD, Mondial Relay or Relais Colis, or by appointment for large items. Marketplace sellers who ship themselves use their own carrier, with a tracking number only when the shipping is tracked.
@@ -135,7 +135,7 @@ Who to contact depends on who ships:
 | "Vendu par *seller* et expédié par Cdiscount" | Cdiscount | Cdiscount |
 | "Vendu et expédié par *seller*" | The seller, from "Mes commandes" | Cdiscount |
 
-Seller silent for 2 working days, or not happy with the answer? In "Mes messages", click "Demandez l'intervention de Cdiscount" (ask Cdiscount to step in). The seller then has 2 more working days; failing that, Cdiscount may call you. La Poste and Relais Colis also send recipients back to the sender or the shop. Last resort: the FEVAD consumer mediator, which Cdiscount belongs to.
+Seller silent for 2 working days, or not happy with the answer? In "Mes messages", click "Demandez l'intervention de Cdiscount" (ask Cdiscount to step in). The seller then has 2 more working days; failing that, Cdiscount may call you. Relais Colis also sends recipients back to the shop. Last resort: the FEVAD consumer mediator, which Cdiscount belongs to.
 
 A phone, laptop or tablet may come with a code sent by email: once the code is used, you can't make a delivery claim. Damaged parcel? Write reservations on the delivery slip or refuse it, and tell Cdiscount, preferably within 14 days, so it can investigate with the carrier.
 
@@ -175,7 +175,6 @@ If a seller's parcel changes carrier on the way and the first carrier names the 
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – shipping by seller or Cdiscount, Cdiscount stepping in, FEVAD mediator
 - [Cdiscount Marketplace: home page](https://marketplace.cdiscount.com/) – 10,000 sellers
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – selling abroad, marketplace countries, door delivery only, French-language site, times from outside Europe
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – only the sender files a claim
 - [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – online orders: claim with the shop
 - [Service Public: Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – at least 14 days
 - [Service Public: Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – 30 days without a date, risk until you have the parcel

@@ -4,7 +4,7 @@ description: Qui livre les commandes Galaxus et Digitec en Suisse, en France et 
 slug: suivi-commande-galaxus
 picture: De hautes étagères d'entrepôt chargées de cartons de toutes tailles, une camionnette de livraison et Pip sur l'étagère du haut.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Le statut de ta commande Galaxus ou Digitec est dans ton compte client : l'aperçu de commande affiche la date de livraison prévue. En Suisse, La Poste ou Planzer livrent les colis. En France et en Belgique, DHL les expédie depuis l'Allemagne et les remet à La Poste / Colissimo ou à bpost. Chaque boutique Galaxus ne livre que son propre pays.
@@ -97,9 +97,9 @@ Dans l'ordre :
 
 :::steps
 - Vérifie le suivi | Regarde la date dans l'aperçu de commande et le dernier statut chez le transporteur. Planzer livre en principe sans signature : le colis déposé compte comme livré, avec une photo géolocalisée comme preuve.
-- Cherche et demande | Regarde dans ta boîte aux lettres et à l'endroit de dépôt, et demande aux voisins. Planzer ne passe qu'une fois : avec l'avis de passage, tu demandes un second passage dans les 7 jours, sinon le colis peut repartir après au moins 7 jours ouvrables. En France, cherche un avis de passage : le colis attend 15 jours au bureau de poste.
+- Cherche et demande | Regarde dans ta boîte aux lettres et à l'endroit de dépôt, et demande aux voisins. Planzer ne passe qu'une fois : avec l'avis de passage, tu demandes un second passage dans les 7 jours, sinon le colis peut repartir après au moins 7 jours ouvrables.
 - Contacte Galaxus | Dans le Galaxus Assistant, choisis « Où est ma commande ? ». S'il manque un produit, clique sur « Signaler une erreur de livraison » dans ta commande. En Suisse, tu signales dommages, erreurs et livraisons incomplètes, même d'un commerçant, dans les 5 jours civils, depuis ton compte client.
-- Demande de recherche | À La Poste suisse, le destinataire peut lui aussi lancer une recherche, en ligne ou en filiale, jusqu'à un an après le dépôt : si « Envoi distribué » manque dans le suivi, que le délai est dépassé de plus de 2 jours et que tu confirmes ne pas avoir reçu le colis. En France, seul l'expéditeur fait la réclamation Colissimo, et en Belgique, le destinataire ne peut pas porter plainte chez bpost : là, passe par Galaxus, l'expéditeur.
+- Demande de recherche | À La Poste suisse, le destinataire peut lui aussi lancer une recherche, en ligne ou en filiale, jusqu'à un an après le dépôt : si « Envoi distribué » manque dans le suivi, que le délai est dépassé de plus de 2 jours et que tu confirmes ne pas avoir reçu le colis. En France, passe par Galaxus, l'expéditeur ; en Belgique aussi, car chez bpost, le destinataire ne peut pas porter plainte.
 - Remboursement ou nouvel article | En France, le risque ne passe à toi qu'au moment où tu prends physiquement possession du colis (Code de la consommation, art. L216-2), en Belgique aussi (Code de droit économique, art. VI.44). En Suisse, selon l'art. 185 CO, il passe en principe à l'expédition, sauf accord contraire. Les CGV de galaxus.ch te permettent toutefois de te retirer du contrat dès le 30e jour civil après la date annoncée, sauf commande spéciale, et Galaxus te rembourse ce que tu as déjà payé.
 :::
 
@@ -151,7 +151,6 @@ Peek montre ce que publie le transporteur. Demandes, remboursements et retours r
 - [La Poste suisse : Questions et réponses concernant la réception de lettres et de colis](https://www.post.ch/fr/aide-et-contact/reception) – notification la veille par SMS, e-mail ou Post-App, boîte aux lettres ou voisins
 - [Planzer Colis : CGV](https://cms.planzer.ch/doc/agb-pp/?lang=fr) – une tentative, 7 jours, dépôt sans confirmation de réception, photo avec données GPS
 - [DHL : My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – numéro donné par l'expéditeur
-- [La Poste : Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – seul l'expéditeur fait la réclamation, avis de passage, 15 jours
 - [bpost : Comment introduire une plainte concernant un colis](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – pas de plainte du destinataire, colis de l'étranger abîmé, 7 jours
 - [Légifrance : Code de la consommation, art. L216-1 à L216-8](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069565/LEGISCTA000032221247/) – art. L216-2, transfert du risque
 - [Justel : Code de droit économique](https://www.ejustice.just.fgov.be/eli/loi/2013/02/28/2013A11134/justel) – art. VI.44

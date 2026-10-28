@@ -4,7 +4,7 @@ description: Qui livre ta commande Cdiscount, où trouver le suivi, quels délai
 slug: suivi-commande-cdiscount
 picture: Une rangée de consignes à colis, une pile de cartons de toutes les tailles, et Pip qui sort la tête d'une consigne ouverte.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Ta commande Cdiscount se suit dans ton Espace client, rubrique « Mes commandes », et l'e-mail d'expédition nomme le transporteur. Ce que Cdiscount expédie part avec Colissimo, Chronopost, DPD, Mondial Relay ou Relais Colis, ou sur rendez-vous pour un gros colis. Un article vendu et expédié par un vendeur de la marketplace part avec le transporteur du vendeur, sous son propre numéro quand l'envoi est suivi.
@@ -131,7 +131,7 @@ Qui contacter dépend de qui expédie :
 | « Vendu par *vendeur* et expédié par Cdiscount » | Cdiscount | Cdiscount |
 | « Vendu et expédié par *vendeur* » | Le vendeur, depuis « Mes commandes » | Cdiscount |
 
-Le vendeur ne répond pas sous 2 jours ouvrés, ou sa réponse ne te convient pas ? Dans « Mes messages », clique sur « Demandez l'intervention de Cdiscount ». Le vendeur a alors encore 2 jours ouvrés ; sans solution valable, Cdiscount peut t'appeler. La Poste et Relais Colis renvoient eux aussi vers l'expéditeur ou la boutique. En dernier recours, il y a le médiateur de la FEVAD, auquel Cdiscount adhère.
+Le vendeur ne répond pas sous 2 jours ouvrés, ou sa réponse ne te convient pas ? Dans « Mes messages », clique sur « Demandez l'intervention de Cdiscount ». Le vendeur a alors encore 2 jours ouvrés ; sans solution valable, Cdiscount peut t'appeler. Relais Colis renvoie lui aussi vers la boutique. En dernier recours, il y a le médiateur de la FEVAD, auquel Cdiscount adhère.
 
 Un smartphone, un ordinateur ou une tablette peut arriver avec un code envoyé par e-mail : une fois le code utilisé, plus de réclamation possible sur la livraison. Colis abîmé ? Note des réserves sur le bon de livraison ou refuse-le, et préviens Cdiscount de préférence sous 14 jours, pour qu'il enquête auprès du transporteur.
 
@@ -171,7 +171,6 @@ Si le colis d'un vendeur change de transporteur en route et que le premier nomme
 - [Cdiscount : Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – modes d'expédition, intervention de Cdiscount, médiateur FEVAD
 - [Cdiscount Marketplace : accueil](https://marketplace.cdiscount.com/) – 10 000 vendeurs
 - [Cdiscount Marketplace : FAQ](https://marketplace.cdiscount.com/faqs/) – vente à l'étranger, délais hors d'Europe
-- [La Poste : Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – seul l'expéditeur fait la réclamation
 - [Relais Colis : Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – commande en ligne : réclamation auprès de l'enseigne
 - [Service Public : Achat à distance : droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – au moins 14 jours
 - [Service Public : Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – 30 jours sans date, risque jusqu'à la prise en main

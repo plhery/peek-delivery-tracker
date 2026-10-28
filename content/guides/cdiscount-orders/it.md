@@ -4,7 +4,7 @@ description: Se Cdiscount spedisce in Italia, quale corriere porta il tuo ordine
 slug: tracciare-ordine-cdiscount
 picture: Una fila di locker per pacchi, una pila di scatole di ogni misura e Pip che spunta da uno sportello aperto.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Cdiscount vende online su cdiscount.com, un sito in francese, e consegna nella Francia continentale e in altri nove paesi europei, Italia compresa. Il tracciamento è nel tuo account cliente, in «Mes commandes» (i miei ordini), e l'email di spedizione indica il corriere. I pacchi di Cdiscount viaggiano con Colissimo, Chronopost, DPD, Mondial Relay o Relais Colis, oppure su appuntamento se sono grandi. I venditori del marketplace che spediscono da sé usano il loro corriere, con un codice di tracciamento solo se la spedizione è tracciata.
@@ -133,7 +133,7 @@ Chi contattare dipende da chi spedisce:
 | «Vendu par *venditore* et expédié par Cdiscount» | Cdiscount | Cdiscount |
 | «Vendu et expédié par *venditore*» | Il venditore, da «Mes commandes» | Cdiscount |
 
-Il venditore non risponde entro 2 giorni lavorativi, o la sua risposta non ti soddisfa? In «Mes messages» clicca «Demandez l'intervention de Cdiscount» (chiedi l'intervento di Cdiscount). Il venditore ha allora altri 2 giorni lavorativi; se non basta, Cdiscount può chiamarti. Anche La Poste e Relais Colis rimandano il destinatario al mittente o al negozio. Ultima risorsa: il mediatore dei consumatori della FEVAD, a cui Cdiscount aderisce.
+Il venditore non risponde entro 2 giorni lavorativi, o la sua risposta non ti soddisfa? In «Mes messages» clicca «Demandez l'intervention de Cdiscount» (chiedi l'intervento di Cdiscount). Il venditore ha allora altri 2 giorni lavorativi; se non basta, Cdiscount può chiamarti. Anche Relais Colis rimanda il destinatario al negozio. Ultima risorsa: il mediatore dei consumatori della FEVAD, a cui Cdiscount aderisce.
 
 Uno smartphone, un portatile o un tablet possono arrivare con un codice inviato via email: una volta usato il codice, non puoi più fare reclami sulla consegna. Pacco danneggiato? Scrivi le riserve sulla bolla di consegna o rifiutalo, e avvisa Cdiscount, preferibilmente entro 14 giorni, perché indaghi con il corriere. Secondo le regole dell'UE, i danni dalla spedizione fino a quando ricevi il pacco sono responsabilità del venditore.
 
@@ -173,7 +173,6 @@ Se il pacco di un venditore cambia corriere durante il viaggio e il primo corrie
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – spedizione del venditore o di Cdiscount, intervento di Cdiscount, mediatore FEVAD
 - [Cdiscount Marketplace: home page](https://marketplace.cdiscount.com/) – 10.000 venditori
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – vendita fuori dalla Francia in cinque paesi, anche per gli articoli spediti da Cdiscount, solo a domicilio, da 2 a 7 giorni, assistenza in francese, tempi da fuori Europa
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – il reclamo lo fa solo il mittente
 - [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – ordini online: reclamo al negozio
 - [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – 30 giorni, termine supplementare e annullamento, danni fino alla ricezione
 - [Your Europe: Restituzioni](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_it.htm) – 14 giorni dalla consegna

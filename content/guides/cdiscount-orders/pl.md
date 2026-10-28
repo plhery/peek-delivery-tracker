@@ -4,7 +4,7 @@ description: Czy Cdiscount wysyła do Polski, który przewoźnik dostarcza zamó
 slug: sledzenie-zamowienia-cdiscount
 picture: Rząd skrytek automatu paczkowego, stos kartonów różnej wielkości i Pip wyglądający z otwartej skrytki.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 Cdiscount sprzedaje online na cdiscount.com, stronie po francusku, i dostarcza do Francji kontynentalnej i do dziewięciu innych krajów Europy. Polski wśród nich nie ma: do takich krajów Cdiscount odsyła do ColisExpat, swojego partnera od dalszej wysyłki. Śledzenie znajdziesz na koncie klienta, w „Mes commandes” (moje zamówienia), a e-mail o wysyłce podaje przewoźnika. Paczki Cdiscount wożą Colissimo, Chronopost, DPD, Mondial Relay albo Relais Colis, a duże przedmioty przyjeżdżają po umówieniu terminu. Sprzedawcy z marketplace’u, którzy wysyłają sami, korzystają z własnego przewoźnika, a numer przesyłki dają tylko przy wysyłce śledzonej.
@@ -133,7 +133,7 @@ Z kim się kontaktować, zależy od tego, kto wysyła:
 | „Vendu par *sprzedawca* et expédié par Cdiscount” | Cdiscount | Cdiscount |
 | „Vendu et expédié par *sprzedawca*” | Sprzedawca, przez „Mes commandes” | Cdiscount |
 
-Sprzedawca nie odpowiada przez 2 dni robocze albo jego odpowiedź cię nie zadowala? W „Mes messages” kliknij „Demandez l'intervention de Cdiscount” (poproś o interwencję Cdiscount). Sprzedawca ma wtedy jeszcze 2 dni robocze; jeśli nie znajdzie rozwiązania, Cdiscount może do ciebie zadzwonić. La Poste i Relais Colis też odsyłają odbiorców do nadawcy albo do sklepu. Ostateczność: mediator konsumencki FEVAD, do którego należy Cdiscount.
+Sprzedawca nie odpowiada przez 2 dni robocze albo jego odpowiedź cię nie zadowala? W „Mes messages” kliknij „Demandez l'intervention de Cdiscount” (poproś o interwencję Cdiscount). Sprzedawca ma wtedy jeszcze 2 dni robocze; jeśli nie znajdzie rozwiązania, Cdiscount może do ciebie zadzwonić. Relais Colis też odsyła odbiorców do sklepu. Ostateczność: mediator konsumencki FEVAD, do którego należy Cdiscount.
 
 Telefon, laptop albo tablet mogą przyjść z kodem wysłanym e-mailem: po użyciu kodu nie złożysz już reklamacji dostawy. Uszkodzona paczka? Wpisz zastrzeżenia w dokumencie dostawy albo odmów przyjęcia i daj znać Cdiscount, najlepiej w ciągu 14 dni, żeby Cdiscount mógł to wyjaśnić z przewoźnikiem. Według przepisów UE za szkody od wysyłki do chwili, gdy dostaniesz paczkę, odpowiada sprzedawca.
 
@@ -173,7 +173,6 @@ Jeśli paczka sprzedawcy zmieni po drodze przewoźnika, a pierwszy przewoźnik w
 - [Cdiscount: Conditions générales d'utilisation de la Marketplace](https://www.cdiscount.com/odr/ImagesOK/CommercialOffer/conditions_114643202601151048214108.pdf) – wysyłka przez sprzedawcę albo Cdiscount, interwencja Cdiscount, mediator FEVAD
 - [Cdiscount Marketplace: strona główna](https://marketplace.cdiscount.com/) – 10 000 sprzedawców
 - [Cdiscount Marketplace: FAQ](https://marketplace.cdiscount.com/faqs/) – sprzedaż za granicę do pięciu krajów, także artykuły wysyłane przez Cdiscount, tylko pod drzwi, obsługa po francusku, czasy dostawy w Europie i spoza Europy
-- [La Poste: Colis perdu Colissimo](https://www.laposte.fr/envoyer/colis-perdu-colissimo) – reklamację składa tylko nadawca
 - [Relais Colis: Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – zamówienia online: reklamacja w sklepie
 - [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – 30 dni, dodatkowy termin i odstąpienie, szkody do chwili odbioru
 - [Your Europe: Zwrot towarów](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pl.htm) – 14 dni od dostawy

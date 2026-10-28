@@ -1264,6 +1264,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CTTYEX tracking: CTTY numbers, scans and Beijing time",
       "name": "CTTYEX",
       "color": "#0068AC"
+    },
+    {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "speedaf-tracking",
+      "title": "Speedaf Express tracking: numbers, statuses and contacts",
+      "name": "Speedaf",
+      "color": "#ff8300"
+    },
+    {
+      "id": "yilong-logistics",
+      "catalog": "yilong-logistics",
+      "slug": "yilong-logistics-tracking",
+      "title": "Yilong Logistics tracking: YIL numbers and statuses",
+      "name": "Yilong Logistics",
+      "color": "#ec0307"
     }
   ],
   "de": [

@@ -68,12 +68,12 @@ Dans une boutique en ligne ordinaire, c'est la loi de ton pays qui décide :
 | Où | Refuser ou ne pas retirer le colis, ça annule la commande ? | Remboursement |
 | --- | --- | --- |
 | France | Non : « Le simple renvoi du bien sans déclaration ou le refus de prendre livraison ne suffisent pas », dit Service-Public.fr | Le prix et la livraison standard, dans les 14 jours suivant ta déclaration ; le vendeur peut attendre d'avoir récupéré le colis. Un remboursement en retard est automatiquement majoré |
-| Belgique | Non : il faut le formulaire ou « une autre déclaration dénuée d'ambiguïté » | Comme en France : 14 jours après ta déclaration, le vendeur pouvant attendre le colis |
+| Belgique | Non : il faut le formulaire ou « une déclaration dénuée d'ambiguïté » | Comme en France : 14 jours après ta déclaration, le vendeur pouvant attendre le colis |
 | Suisse | Pas de droit de retour légal pour un achat en ligne, rappelle ch.ch | Les conditions générales de vente (CGV) de la boutique |
 
 > Refuser un colis ou le laisser au point relais, ce n'est pas annuler. En France et en Belgique, écris à la boutique ou utilise son formulaire ou sa fonction de rétractation en ligne, et garde une copie : c'est ce message qui l'oblige à te rembourser.
 
-Les boutiques en ligne doivent désormais proposer cette fonction de rétractation : en France, gratuitement, depuis le 19 juin 2026 ; en Belgique depuis le 14 août 2026, avec la mention « renoncer au contrat ici » ou une formule tout aussi claire. [Que devient un colis non retiré](guide:uncollected-parcel) explique quand courent les 14 jours de rétractation.
+Les boutiques en ligne doivent désormais proposer cette fonction de rétractation : en France, gratuitement, depuis le 19 juin 2026 ; en Belgique depuis le 14 août 2026, par exemple sous la forme d'un bouton ou d'un lien facile à trouver. [Que devient un colis non retiré](guide:uncollected-parcel) explique quand courent les 14 jours de rétractation.
 
 ## Qui paie le retour d'un colis à l'expéditeur ?
 
@@ -144,6 +144,7 @@ La Poste suisse peut ouvrir un colis renvoyé pour trouver son expéditeur. Si e
 - [Vinted : Que faire si ton colis a été livré à une mauvaise adresse ?](https://www.vinted.fr/help/1450) – jusqu'à 25 jours ouvrés pour revenir au vendeur
 - [Service-Public.fr : Achat à distance, droit de rétractation du consommateur](https://www.service-public.gouv.fr/particuliers/vosdroits/F10485) – refuser ne suffit pas, remboursement, coûts de renvoi, majorations
 - [Légifrance : Code de la consommation, art. L221-18 et suivants](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069565/LEGISCTA000032221365/2026-10-13) – fonctionnalité de rétractation depuis le 19 juin 2026
-- [Justel : Code de droit économique, livre VI](https://www.ejustice.just.fgov.be/cgi_loi/change_lg.pl?language=fr&la=F&cn=2013022819&table_name=loi) – art. VI.49, VI.50, VI.51 et VI.61/2
+- [SPF Economie : Le droit de rétractation dans les contrats à distance (PDF)](https://economie.fgov.be/sites/default/files/Files/Ventes/Information-droit-retractation-consommateur-vente-a-distance.pdf) – art. VI.47 et suivants : point de départ, formulaire ou déclaration dénuée d'ambiguïté, remboursement, coûts de renvoi
+- [SPF Economie : Un achat impulsif ? Vous pouvez changer d'avis](https://news.economie.fgov.be/270126-un-achat-impulsif-vous-pouvez-changer-d-avis/) – fonction de rétractation en ligne obligatoire depuis le 14 août 2026
 - [ch.ch : Retourner ou échanger des produits](https://www.ch.ch/fr/securite-et-droit/retourner-ou-echanger-des-produits/) – pas de droit de retour légal, CGV
 :::

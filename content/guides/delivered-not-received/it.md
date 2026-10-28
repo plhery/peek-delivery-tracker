@@ -48,7 +48,7 @@ Se hai comprato da un'azienda, devi rivolgerti al venditore: è lui il cliente d
 :::journey
 - shop | Venditore | Sceglie e paga il corriere: il cliente è lui.
 - truck | Corriere | Risponde al venditore e di solito indennizza solo il mittente.
-- home | La tua porta | Scatta la scansione «consegnato». In Italia, come nel resto dell'UE, il rischio resta del venditore finché non hai il pacco in mano.
+- home | La tua porta | Scatta la scansione «consegnato». In Italia il rischio resta del venditore finché non hai il pacco in mano.
 :::
 
 I tuoi diritti in Italia e in Svizzera:

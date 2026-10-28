@@ -132,7 +132,7 @@ Si le vendeur ne fait rien, ta banque ou PayPal peuvent aider. La rétrofacturat
 - [SPF Economie : Achats en ligne, vos droits](https://news.economie.fgov.be/245209-achats-en-ligne-voici-vos-droits/) – colis endommagé, vendeur, particuliers
 - [SPF Economie : Garantie légale](https://news.economie.fgov.be/214975-garantie-legale-le-consommateur-mieux-protege/) – deux ans, preuve, deux mois
 - [SPF Economie : Garantie, plus de droits](https://news.economie.fgov.be/270576-garantie-vous-avez-plus-de-droits-que-vous-ne-le-pensez/) – boîte jetée
-- [Justel : Code de droit économique](https://www.ejustice.just.fgov.be/eli/loi/2013/02/28/2013A11134/justel) – art. VI.44
+- [SPF Economie : Livraison et transfert de risque](https://economie.fgov.be/fr/themes/ventes/contrats/livraison-et-transfert-de) – art. VI.44 du Code de droit économique, transfert du risque, transporteur non proposé
 - [Fedlex : Code des obligations](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr) – art. 185, 201, en français
 - [La Poste suisse : Détérioration ou perte](https://www.post.ch/fr/expedier-des-colis/dommage-ou-perte) – huit jours, app, procès-verbal
 - [La Poste suisse : CG clientèle privée](https://www.post.ch/-/media/post/agb/agb-postdienstleistungen-pk.pdf?vs=24&sc_lang=fr&hash=84B987128A5FDC7FD6E9EA6641A5CEBB) – acceptation sans réserve, plafonds, paiement

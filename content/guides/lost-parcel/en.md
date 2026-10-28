@@ -43,7 +43,7 @@ Carriers count from posting or the due date, not from the last scan. Most "lost"
 If you bought from a business, the seller, in most places:
 
 - **UK:** goods stay at the trader's risk until you, or someone you named, physically have them (Consumer Rights Act 2015, s. 29).
-- **Ireland and the EU:** the same rule. The CCPC says the business stays responsible when it uses a courier: it should replace a parcel "lost in transit", or refund you in full if it can't deliver.
+- **Ireland and the EU:** the trader is "responsible for any damage to your goods from the time they are dispatched until you receive them", says Your Europe. The CCPC says the business stays responsible when it uses a courier: it should replace a parcel "lost in transit", or refund you in full if it can't deliver.
 - **US:** no federal rule; the terms of sale decide. The FTC says a seller charging you for "insurance" implies it "will honor any claim of nondelivery".
 - **Australia:** Australia Post tells buyers to contact the seller, "best placed to provide you with a replacement item".
 
@@ -123,6 +123,7 @@ On PayPal, open an Item Not Received dispute within 180 days of paying, and esca
 - [Consumer Rights Act 2015, s. 29](https://www.legislation.gov.uk/ukpga/2015/15/section/29) – risk
 - [Sale of Goods Act 1979, s. 32](https://www.legislation.gov.uk/ukpga/1979/54/section/32) – private sales
 - [CCPC: Non-delivery](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – replace or refund, business responsible with a courier
+- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – EU: trader responsible from dispatch until you receive the goods
 - [FTC: Mail Order Rule](https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule) – insurance charges
 - [Ontario: Consumer rights](https://ontario.ca/page/your-rights-under-consumer-protection-act) – 30 days
 - [About Amazon UK: 7 tips to avoid scams impersonating Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-avoid-scams-impersonating-amazon-this-holiday-season) – A-to-z Guarantee on every product, delivery problems, refund or replacement

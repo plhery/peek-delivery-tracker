@@ -57,7 +57,7 @@ Tes droits, pays par pays :
 | Pays | La règle |
 | --- | --- |
 | France | Le vendeur à distance est « responsable de plein droit » de la livraison, même confiée à un transporteur (code de la consommation, art. L221-15). Le risque ne passe à toi qu'à la prise de possession physique du colis, par toi ou un tiers que tu as désigné (art. L216-2). Si le vendeur ne peut pas prouver la livraison, « cette responsabilité est automatique », précise Service-Public.fr |
-| Belgique | Le risque passe quand toi, « ou un tiers désigné par le consommateur et autre que le transporteur », prends physiquement possession du bien (Code de droit économique, art. VI.44). Le vendeur est donc responsable jusqu'à la réception, résume l'ombudsman poste |
+| Belgique | Le risque passe quand toi, ou un tiers que tu as désigné et qui n'est pas le transporteur, prends physiquement possession du bien (Code de droit économique, art. VI.44). Le vendeur est donc responsable jusqu'à la réception, résume l'ombudsman poste |
 | Suisse | Pas de règle de ce genre. Les risques passent à l'acheteur dès la conclusion du contrat, sauf circonstances ou accord contraire (Code des obligations, art. 185 al. 1) ; pour une marchandise seulement définie par son genre, il faut aussi qu'elle soit mise de côté et, si elle doit être expédiée, remise au transporteur (al. 2). Le transporteur répond ensuite envers l'expéditeur jusqu'à la livraison correcte, explique la Stiftung für Konsumentenschutz |
 
 En France, si le vendeur affirme avoir livré, Service-Public.fr indique qu'il faut le mettre en demeure de t'envoyer le colis, par lettre recommandée avec accusé de réception, et propose un modèle de lettre. Si la commande est finalement annulée, il doit te rembourser sous 14 jours, sinon la somme est majorée de 10 % à 50 % selon le retard.
@@ -136,7 +136,7 @@ Tu peux, mais aucune des règles ci-dessus n'en fait une condition pour être re
 - [INC : Colis perdu, qui est responsable ?](https://www.inc-conso.fr/content/colis-perdu-qui-est-responsable-et-comment-se-faire-rembourser-avec-lalldc) – preuve, SignalConso, médiateur, conciliateur
 - [INC : Délivrance et transfert de risques](https://www.inc-conso.fr/sites/default/files/pdf/vi-delivrance-fourniture-transfert-risque.pdf) – art. L216-2 et L216-3
 - [Assemblée nationale : question écrite n° 10528](https://www.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE10528) – art. L221-15, vente entre particuliers
-- [Justel : Code de droit économique](https://www.ejustice.just.fgov.be/eli/loi/2013/02/28/2013A11134/justel) – art. VI.44
+- [SPF Economie : Livraison et transfert de risque](https://economie.fgov.be/fr/themes/ventes/contrats/livraison-et-transfert-de) – art. VI.44 du Code de droit économique, transfert du risque, transporteur non proposé
 - [Fedlex : Code des obligations](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr#art_185) – art. 185
 - [Konsumentenschutz : Paket gestohlen oder beschädigt (en allemand)](https://www.konsumentenschutz.ch/online-ratgeber/paket-gestohlen-oder-beschaedigt-wer-haftet/) – responsabilités, plainte, assurance ménage
 - [Universal Parcel Scraper : libellés La Poste](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/la-poste/statuses.json) – livraison en boîte aux lettres

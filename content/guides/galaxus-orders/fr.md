@@ -153,7 +153,7 @@ Peek montre ce que publie le transporteur. Demandes, remboursements et retours r
 - [DHL : My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – numéro donné par l'expéditeur
 - [bpost : Comment introduire une plainte concernant un colis](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – pas de plainte du destinataire, colis de l'étranger abîmé, 7 jours
 - [Légifrance : Code de la consommation, art. L216-1 à L216-8](https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069565/LEGISCTA000032221247/) – art. L216-2, transfert du risque
-- [Justel : Code de droit économique](https://www.ejustice.just.fgov.be/eli/loi/2013/02/28/2013A11134/justel) – art. VI.44
+- [SPF Economie : Livraison et transfert de risque](https://economie.fgov.be/fr/themes/ventes/contrats/livraison-et-transfert-de) – art. VI.44 du Code de droit économique, transfert du risque, transporteur non proposé
 - [Fedlex : Code des obligations, art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/fr#art_185) – profits et risques
 - [Universal Parcel Scraper : données des transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes des numéros, ce que Peek reconnaît
 :::

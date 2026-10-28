@@ -40,7 +40,7 @@ Chaque transporteur fixe son propre délai, compté depuis le dépôt ou le dern
 Si tu as acheté à un professionnel, en général le vendeur :
 
 - **France :** le risque ne passe à toi qu'à la prise de possession physique du colis, par toi ou par un tiers que tu as désigné (code de la consommation, art. L216-2). Sans preuve de livraison, Service-Public.fr indique que le vendeur reste responsable.
-- **Belgique :** même règle. Le risque passe quand toi, ou un tiers que tu as désigné « et autre que le transporteur », prends physiquement possession du bien (Code de droit économique, art. VI.44).
+- **Belgique :** même règle. Le risque passe quand toi, ou un tiers que tu as désigné et qui n'est pas le transporteur, prends physiquement possession du bien (Code de droit économique, art. VI.44).
 - **Suisse :** pas de règle de ce genre. Selon le Code des obligations (art. 185), les risques passent à l'acheteur au plus tard quand le vendeur remet le colis au transporteur, sauf accord contraire. Lis les conditions générales de la boutique : beaucoup renvoient l'article ou remboursent quand même.
 
 Le risque est pour toi si tu as choisi un transporteur que la boutique ne proposait pas (art. L216-3 en France), ou si tu as acheté à un particulier. Le détail, pays par pays, est dans [colis livré mais non reçu](guide:delivered-not-received).
@@ -118,7 +118,7 @@ En dernier recours seulement. Sur PayPal, ouvre un litige « Objet non reçu » 
 - [Service-Public.fr : Achat à distance, livraison du bien](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – risque, preuve de livraison, transporteur choisi par toi
 - [INC : Délivrance et transfert de risques](https://www.inc-conso.fr/sites/default/files/pdf/vi-delivrance-fourniture-transfert-risque.pdf) – art. L216-2 et L216-3
 - [Assemblée nationale : question écrite n° 10528](https://www.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE10528) – art. L221-15, vente entre particuliers
-- [Justel : Code de droit économique](https://www.ejustice.just.fgov.be/eli/loi/2013/02/28/2013A11134/justel) – art. VI.44
+- [SPF Economie : Livraison et transfert de risque](https://economie.fgov.be/fr/themes/ventes/contrats/livraison-et-transfert-de) – art. VI.44 du Code de droit économique, transfert du risque, transporteur non proposé
 - [Konsumentenschutz : Paket gestohlen oder beschädigt (en allemand)](https://www.konsumentenschutz.ch/online-ratgeber/paket-gestohlen-oder-beschaedigt-wer-haftet/) – art. 185 CO, risque jusqu'à la remise au transporteur
 - [About Amazon France : Six conseils contre les arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – garantie A à Z sur chaque produit, livraison retardée, remboursement ou remplacement
 - [About Amazon France : La Garantie A à Z](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeur d'abord, puis remboursement par Amazon

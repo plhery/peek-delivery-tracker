@@ -29,14 +29,20 @@ enum class NotificationPreset(val rawValue: String) {
             DeliveryDay -> listOf(NotificationStage.OutForDelivery, NotificationStage.Delivered)
         }
 
+    /** The website's names for the presets: "Every scan", "Important steps", "Delivery only". */
     val titleKey: String
         get() = when (this) {
-            All -> "notifications.preset.all"
-            Important -> "notifications.preset.important"
-            DeliveryDay -> "notifications.preset.deliveryDay"
+            All -> "alerts.preset.all"
+            Important -> "alerts.preset.important"
+            DeliveryDay -> "alerts.preset.delivery"
         }
 
-    val descriptionKey: String get() = "${titleKey}Description"
+    val descriptionKey: String
+        get() = when (this) {
+            All -> "notifications.preset.allDescription"
+            Important -> "notifications.preset.importantDescription"
+            DeliveryDay -> "notifications.preset.deliveryDayDescription"
+        }
 
     companion object {
         fun matching(stages: List<NotificationStage>): NotificationPreset {

@@ -117,6 +117,20 @@ class LocalizationTests {
     }
 
     @Test
+    fun notificationPresetsAreNamedAsOnTheWebsite() {
+        val localizer = Localizer(AppLanguage.En)
+        assertEquals(
+            listOf("Every scan", "Important steps", "Delivery only"),
+            NotificationPreset.entries.map { localizer.text(it.titleKey) },
+        )
+        localizer.language = AppLanguage.Fr
+        assertEquals(
+            listOf("Chaque scan", "Étapes importantes", "Livraison seulement"),
+            NotificationPreset.entries.map { localizer.text(it.titleKey) },
+        )
+    }
+
+    @Test
     fun deliveryEmailCopyFillsItsVariablesInEveryLanguage() {
         val localizer = Localizer(AppLanguage.En)
         val address = "alex@example.com"

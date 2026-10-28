@@ -3,7 +3,7 @@ title: Landmark Global seguimiento: estados, entrega y contacto
 description: Sigue tu paquete de Landmark Global en España: dónde está el número LTN, qué significa cada estado, quién lo entrega, qué se paga en aduana y a quién reclamar.
 slug: landmark-global-seguimiento
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Landmark Global lleva pedidos de tiendas online de un país a otro. Forma parte de Bnode, la empresa matriz de bpost, el operador postal de Bélgica, y para el último tramo suele dejar tu paquete en manos de una empresa de reparto local. Para seguirlo necesitas el número LTN que te da la tienda: escríbelo en [la web de seguimiento de Landmark](https://track.landmarkglobal.com/?lang=es) o pégalo en la casilla de arriba.
@@ -62,7 +62,7 @@ Para compras de hasta 150 €, la Agencia Tributaria lo explica así en su pági
 - **Arancel.** Desde el 1 de julio de 2026 son 3 € por cada categoría de artículos. Lo normal es que lo cobre la tienda al comprar; si no, el transportista te lo puede pedir, junto con el IVA, antes de entregarte el paquete.
 - **Tasa de tramitación.** La Comisión Europea la ha aprobado y se aplicará desde el 1 de noviembre de 2026: 2 € por categoría de artículos, que se pagan con el arancel y con las mismas reglas.
 
-Una noticia de Landmark para tiendas, del 19 de octubre de 2026, todavía daba esa tasa como una estimación de unos 2 € por línea de artículo, con el importe pendiente de confirmar. En Canarias se paga IGIC en vez de IVA, según un artículo de Landmark de agosto de 2026. Lo demás, con ejemplos y las reglas de Canarias, está en [paquete retenido en aduanas](guide:customs).
+Una noticia de Landmark para tiendas, del 19 de octubre de 2026, todavía daba esa tasa como una estimación de unos 2 € por línea de artículo, con el importe pendiente de confirmar. En Canarias se paga IGIC en vez de IVA, pero las compras de hasta 150 € están exentas, salvo el alcohol, los perfumes y el tabaco; el arancel y la tasa de tramitación, en cambio, también se aplican allí a lo que llega de fuera de la UE. Lo demás, con ejemplos y las reglas de Canarias, está en [paquete retenido en aduanas](guide:customs).
 
 ## Paquete de Landmark Global parado, perdido o dañado
 
@@ -129,7 +129,9 @@ No publica ninguno. Puedes escribir a ClientservicesEU@landmarkglobal-group.com,
 - [Landmark Global: Principales destinos de envío](https://landmarkglobal.com/eu/es/destinations/) – socios locales para la última milla
 - [Landmark Global: Parcel delivery to Spain, en inglés](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-spain/) – transportistas locales sin nombre, 4-5 días, más de 7.000 puntos, prueba de entrega
 - [Landmark Global: Reforma aduanera de la UE de 2026](https://landmarkglobal.com/eu/es/noticias/gastos-gestion-ue-noviembre-2026/) – tasa de tramitación estimada en 2 € por línea, pendiente de confirmar (19 de octubre de 2026)
-- [Landmark Global: Impacto del IGIC en los envíos a las Islas Canarias](https://landmarkglobal.com/eu/es/noticias/impacto-del-igic-en-los-envios-a-las-islas-canarias/) – IGIC en lugar del IVA (19 de agosto de 2026)
+- [Agencia Tributaria Canaria: Formulario simplificado de importación para personas físicas](https://www3.gobiernodecanarias.org/tributos/atc/w/formulario-simplificado-de-importacion-para-personas-fisicas) – IGIC solo por encima de 150 €
+- [BOE: Ley 20/1991, del Régimen Económico Fiscal de Canarias](https://www.boe.es/buscar/act.php?id=BOE-A-1991-14463) – artículo 14.11: sin IGIC hasta 150 €, salvo alcohol, perfumes y tabaco
+- [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – arancel y tasa también en Canarias
 - [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – IOSS, 21 %, arancel de 3 €, tasa de 2 € aprobada desde el 1 de noviembre, quién cobra (actualizada el 23 de octubre de 2026)
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formas del número, estados, empresa de reparto, devoluciones, horas y lo que lee Peek
 :::

@@ -4,7 +4,7 @@ description: Qué significa que un paquete esté retenido en aduanas, cuánto pu
 slug: paquete-retenido-en-aduanas
 picture: Una caseta de aduanas con una barrera a rayas, un documento con un sello redondo y una marca de verificación, y Pip esperando con paciencia ante la barrera.
 published: 2026-10-09
-updated: 2026-10-10
+updated: 2026-10-28
 ---
 
 «Retenido en aduanas» casi siempre significa que tu paquete está en el trámite normal que pasa todo lo que llega de fuera de la UE, no que te lo hayan incautado. Si no avanza, puede que el transportista esté esperando a que pagues el IVA y el arancel o a que le mandes la factura. Compruébalo en su web o en su app, nunca en un enlace que te llegue por SMS.
@@ -47,7 +47,7 @@ Un paquete se queda más tiempo cuando:
 
 - falta la factura o el justificante de pago. Correos dice que son fundamentales; si no tienes factura, Correos Aduanas te pide una declaración jurada con la descripción y el valor de lo que llega;
 - vale más de 150 €, o lleva alcohol, tabaco o productos sujetos a controles de sanidad o farmacia: entonces va por DUA ordinario, con documentos y un presupuesto previo;
-- hay algo sin pagar: Correos no lo entrega sin cobrar antes el arancel, y DHL tampoco sin cobrar lo que adelantó por ti;
+- hay algo sin pagar: Correos no lo entrega sin cobrar antes el arancel;
 - la mercancía no se puede importar o necesita un permiso sanitario, veterinario o comercial, según la AEAT.
 
 No lo dejes para más tarde:
@@ -56,7 +56,6 @@ No lo dejes para más tarde:
 | --- | --- |
 | Correos, hasta 150 € | Puedes pagar en la App o en Mi Oficina hasta que sale a reparto; después, al cartero o en la oficina. Si no estás, se queda en la oficina el plazo que indica el aviso (15 días si te avisan por SMS) y luego vuelve al remitente |
 | Correos, más de 150 € | Te deja un «Aviso de llegada» con los pasos en correosaduanas.es y no lo despacha hasta que pagas el presupuesto. Si pagas por transferencia sin poner el número de presupuesto y adjuntar el justificante, lo devuelve al origen |
-| [DHL Express](carrier:dhl-express) | No te lo entrega hasta que pagas los aranceles y tasas que adelantó |
 | Mercancía prohibida | La AEAT puede reexpedirla al origen o destruirla |
 
 Para no estar recargando la página, pega el número en [Peek](/): lo consulta hasta una vez cada 10 minutos y te envía una notificación cuando cambia el estado, aunque no puede pagar por ti ni acelerar la aduana. Si no se mueve en mucho tiempo y nadie te pide nada, mira [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
@@ -85,10 +84,10 @@ Dónde pagas depende de la compra:
 
 | Caso | Qué no pagas en la puerta | Qué pagas |
 | --- | --- | --- |
-| Compra de hasta 150 € | Lo que la tienda ya cobró: el IVA si va por IOSS, y el arancel si la compra lo incluye | Lo que falte: el 21 % de IVA, 3 € por tipo de producto y, si no va por IOSS, la gestión. Correos cobra 2,99 € si pagas en la App o en Mi Oficina antes de que salga a reparto, y de 6,05 € a 16,76 € según el valor si pagas al cartero o en la oficina |
-| Compra de más de 150 € | Nada, si la tienda lo pagó todo por adelantado (entrega con derechos pagados) | Arancel según el producto e IVA. Si Correos tramita el DUA: 26,39 €, más 6,27 € de manipulación |
+| Compra de hasta 150 € | Lo que la tienda ya cobró: el IVA si va por IOSS, y el arancel si la compra lo incluye | Lo que falte: el 21 % de IVA, 3 € por tipo de producto y, si no va por IOSS, la gestión del transportista |
+| Compra de más de 150 € | Nada, si la tienda lo pagó todo por adelantado (entrega con derechos pagados) | Arancel según el producto e IVA. Si Correos tramita el DUA, también sus tarifas por el DUA, la presentación en aduana y la manipulación, que verás antes en su presupuesto |
 | Regalo de un particular | Nada, si vale 45 € o menos sin contar el envío y no lo has pagado tú. Aun así, se declara en aduana | IVA y arancel, si vale más |
-| Envío a Canarias | El IGIC, hasta 150 € y salvo excepciones | El arancel de 3 € por tipo de producto, si la tienda no lo cobró. Todo lo que entra en Canarias se declara en aduana, aunque venga de la Península o de otro país de la UE |
+| Envío a Canarias | El IGIC, hasta 150 € y salvo excepciones | El arancel de 3 € por tipo de producto, si viene de fuera de la UE y la tienda no lo cobró. Todo lo que entra en Canarias se declara en aduana, aunque venga de la Península o de otro país de la UE |
 | Envío a Ceuta o Melilla | El arancel de 3 € | Los impuestos locales, como el IPSI, si corresponden. Todo lo que entra se declara en aduana, aunque venga de la Península o de otro país de la UE |
 
 ### Qué significa «3 € por tipo de producto»
@@ -110,9 +109,9 @@ Depende de desde dónde se envía el pedido y de lo que diga la compra:
 - **Precio con arancel incluido:** el transportista no te cobrará arancel al entregarlo.
 - **Solo con el IVA incluido (IOSS):** Correos puede cobrarte igualmente los 3 € del arancel, que es independiente del IVA.
 - **Sin nada incluido:** el transportista puede pedirte el 21 % de IVA, el arancel y su gestión antes de entregártelo.
-- **En Canarias:** sigue sin haber IGIC hasta 150 €, pero pagas el arancel.
+- **En Canarias:** sigue sin haber IGIC hasta 150 €, pero pagas el arancel si el pedido sale de fuera de la UE.
 
-DHL lo resume así: los aranceles y tasas normalmente no están incluidos en las compras online, aunque el precio incluya el transporte. Para seguir estos pedidos, mira [cómo seguir un paquete que viene de China](guide:tracking-from-china). Las páginas de [Cainiao](carrier:cainiao) y [YunExpress](carrier:yunexpress) explican qué significan sus estados de aduana en inglés. Si el despacho lo hace el agente de aduanas [CACESA](carrier:cacesa), su página explica sus estados y sus avisos.
+Si tu pedido de AliExpress, Shein o Temu ya está en camino, mira [cómo seguir un paquete que viene de China](guide:tracking-from-china). Las páginas de [Cainiao](carrier:cainiao) y [YunExpress](carrier:yunexpress) explican qué significan sus estados de aduana en inglés. Si el despacho lo hace el agente de aduanas [CACESA](carrier:cacesa), su página explica sus estados y sus avisos.
 
 ## ¿Es una estafa el SMS de Correos que pide pagar aduanas?
 
@@ -150,9 +149,8 @@ Si lo devuelves a la tienda:
 - [Correos: Gestión aduanera](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera) – qué pasa por aduana, paquetes pendientes de tramitación aduanera
 - [Correos: Tramitación aduanera en la importación](https://www.correos.es/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion) – factura, tarifa fuera de IOSS, IVA, IGIC e IPSI, Reino Unido
 - [Correos: Importación en Península y Baleares](https://www.correos.es/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion/importacion-en-peninsula-y-baleares) – trámite para cualquier envío, H7 y DUA ordinario
-- [Correos: DUA ordinario Península y Baleares](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/dua-importacion/importacion-en-peninsula-y-baleares/dua-ordinario) – Aviso de llegada, documentos, presupuesto
+- [Correos: DUA ordinario Península y Baleares](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/dua-importacion/importacion-en-peninsula-y-baleares/dua-ordinario) – Aviso de llegada, documentos, tarifas del DUA, la presentación y la manipulación, presupuesto
 - [Correos: DUA simplificado Península y Baleares](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/dua-importacion/importacion-en-peninsula-y-baleares/dua-simplificado) – regalos de hasta 45 €, inspección y retención
-- [Correos: Tarifas 2026 Península y Baleares](https://www.correos.es/content/dam/correos/documentos/atc/tarifas/2026/Tarifas_Correos_2026_Peninsula_y_Baleares.pdf) – 2,99 €, de 6,05 € a 16,76 €, 26,39 € y 6,27 €
 - [Correos: Aviso de llegada y SMS](https://www.correos.es/es/es/atencion-al-cliente/recibir/aviso-de-llegada) – plazo en oficina, 15 días, 24 a 72 horas
 - [Correos: Phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – no pide datos ni pagos por SMS ni por correo electrónico
 - [Correos: Gestiona tus trámites de aduanas a través de la app](https://www.correos.es/es/es/actualidad/2022/gestiona-facilmente-tus-tramites-de-aduanas-a-traves-de-la-app) – pagos de aduana en la App o la web de aduanas
@@ -165,10 +163,11 @@ Si lo devuelves a la tienda:
 - [Agencia Tributaria: Folleto Compras por Internet](https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Aduanas/Comerc_electron_PIPE/compras_internet/foll_compint.pdf) – lo que cobra la AEAT, reexpedición, destrucción, expediente
 - [Agencia Tributaria: Casos de suplantación](https://sede.agenciatributaria.gob.es/Sede/ayuda/consultas-informaticas/informacion-casos-phishing.html) – no pide datos por correo, SMS o Bizum
 - [Agencia Tributaria: Seminario sobre los cambios de noviembre](https://sede.agenciatributaria.gob.es/Sede/aduanas/novedades/2026/septiembre/25/seminario-web-operadores-sobre-cambios-producto_.html) – tasa de tramitación
+- [Agencia Tributaria Canaria: Formulario simplificado de importación para personas físicas](https://www3.gobiernodecanarias.org/tributos/atc/w/formulario-simplificado-de-importacion-para-personas-fisicas) – lo que entra en Canarias desde la Península, la UE o fuera de ella; IGIC solo por encima de 150 €
+- [BOE: Ley 20/1991, del Régimen Económico Fiscal de Canarias](https://www.boe.es/buscar/act.php?id=BOE-A-1991-14463) – artículo 14.11: sin IGIC hasta 150 €, salvo alcohol, perfumes y tabaco
 - [Comisión Europea: Preguntas y respuestas sobre los derechos de aduana de 3 EUR](https://ec.europa.eu/commission/presscorner/detail/es/qanda_26_1492) – por artículo, camisetas y reloj
 - [Comisión Europea: EU Customs Reform, en inglés](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de 2 € desde el 1 de noviembre de 2026
 - [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € por línea y a cualquier valor
-- [DHL Express: Preguntas frecuentes sobre aranceles e impuestos](https://mydhl.express.dhl/es/es/help-and-support/faqs/duties-and-taxes.html) – entrega tras el pago, compras online
 - [INCIBE: SMS fraudulentos que suplantan a Correos](https://www.incibe.es/ciudadania/avisos/circulan-sms-fraudulentos-que-suplantan-correos-solicitandote-dinero) – tasas de aduana, 1,79 €, banco, denuncia
 - [INCIBE: SMS que suplantan a Correos y Correos Express](https://www.incibe.es/ciudadania/avisos/suplantadas-por-sms-empresas-de-paqueteria-como-correos-y-correos-express) – 2,64 €
 - [INCIBE: Tu Ayuda en Ciberseguridad](https://www.incibe.es/linea-de-ayuda-en-ciberseguridad) – 017, horario

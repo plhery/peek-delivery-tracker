@@ -30,26 +30,26 @@ W Allegro Delivery paczki wożą też ORLEN Paczka, DHL i DPD. Takie paczki maj�
 
 ## Statusy Allegro One: co znaczą
 
-Serwis śledzenia Allegro podaje komunikaty po polsku albo po angielsku. Peek pokazuje je po angielsku; oto najczęstsze, w kolejności, w jakiej spotyka je paczka:
+Serwis śledzenia Allegro podaje komunikaty po polsku albo po angielsku. Gdy korzystasz z Peek po polsku, widzisz je po polsku; oto najczęstsze, w kolejności, w jakiej spotyka je paczka:
 
-| Allegro One pisze (po angielsku) | Co to znaczy dla Ciebie |
+| Allegro One pisze | Co to znaczy dla Ciebie |
 | --- | --- |
-| `Parcel has been prepared by the sender` | Nadawca przygotował etykietę. Allegro One jeszcze nie ma paczki. |
-| `Parcel has been dispatched` | Nadawca nadał paczkę. |
-| `Parcel has been accepted at the sorting center` | Paczka jest w sortowni. |
-| `Parcel has been dispatched to its destination point` | Paczka jedzie do automatu, punktu albo oddziału, który ją do Ciebie dowiezie. |
-| `Parcel has been released for delivery` | Paczka jest w doręczeniu, także gdy jedzie do One Boxa. |
-| `No space in the parcel locker` | Automat był pełny: nieudana próba. Kurier zabrał paczkę z powrotem. |
-| `Parcel is awaiting pick-up` | Paczka czeka w One Boxie albo w One Punkcie. |
-| `Parcel is awaiting pick-up — pick-up deadline is about to expire` | Przypomnienie: czas na odbiór zaraz minie. |
-| `Time for pick-up has been extended` | Czas na odbiór przedłużono. |
-| `Time for parcel pick-up has expired` | Paczka nie została odebrana na czas i wraca do sprzedającego. |
-| `Parcel has been returned to the sender` | Paczka jest w drodze powrotnej do nadawcy. Mimo brzmienia komunikatu nadawca jeszcze jej nie ma. |
-| `Parcel has been delivered` | Paczka doręczona albo odebrana przez Ciebie. |
+| `Przesyłka została przygotowana przez nadawcę` | Nadawca przygotował etykietę. Allegro One jeszcze nie ma paczki. |
+| `Przesyłka została nadana` | Nadawca nadał paczkę. |
+| `Przesyłka została przyjęta w sortowni` | Paczka jest w sortowni. |
+| `Przesyłka wyjechała w drogę do punktu docelowego` | Paczka jedzie do automatu, punktu albo oddziału, który ją do Ciebie dowiezie. |
+| `Przesyłka została wydana do doręczenia` | Paczka jest w doręczeniu, także gdy jedzie do One Boxa. |
+| `Brak miejsca w maszynie` | Automat był pełny: nieudana próba. Kurier zabrał paczkę z powrotem. |
+| `Przesyłka oczekuje na odbiór` | Paczka czeka w One Boxie albo w One Punkcie. |
+| `Przesyłka oczekuje na odbiór - zbliża się termin odbioru paczki` | Przypomnienie: czas na odbiór zaraz minie. |
+| `Czas na odbiór został przedłużony` | Czas na odbiór przedłużono. |
+| `Skończył się czas na odbiór przesyłki` | Paczka nie została odebrana na czas i wraca do sprzedającego. |
+| `Przesyłka została zwrócona do nadawcy` | Paczka jest w drodze powrotnej do nadawcy. Mimo brzmienia komunikatu nadawca jeszcze jej nie ma. |
+| `Przesyłka została doręczona` | Paczka doręczona albo odebrana przez Ciebie. |
 
-`Parcel has been delivered` pojawia się także wtedy, gdy sam odbierzesz paczkę z One Boxa albo z One Punktu: osobnego statusu „odebrana” nie ma.
+`Przesyłka została doręczona` pojawia się także wtedy, gdy sam odbierzesz paczkę z One Boxa albo z One Punktu: osobnego statusu „odebrana” nie ma.
 
-Kilka komunikatów brzmi groźniej, niż jest. `Parcel may be delivered with delay` i `Parcel delivery time has been arranged with the recipient` to tylko informacje, paczka jedzie dalej. `Parcel has been redirected to a different point` widzisz, gdy sam wybierzesz inny punkt. Po `No parcel`, a nawet po `Parcel has been lost`, mogą przyjść kolejne skany, które paczkę odnajdują.
+Kilka komunikatów brzmi groźniej, niż jest. `Przesyłka może zostać doręczona z opóźnieniem` i `Termin doręczenia przesyłki został ustalony z odbiorcą` to tylko informacje, paczka jedzie dalej. `Przesyłka została przekierowana do innego punktu` widzisz, gdy sam wybierzesz inny punkt. Po `Brak przesyłki`, a nawet po `Przesyłka została zagubiona`, mogą przyjść kolejne skany, które paczkę odnajdują.
 
 ## Odbiór z Allegro One Box i One Punkt, dostawa One Kurier
 
@@ -57,11 +57,11 @@ Kilka komunikatów brzmi groźniej, niż jest. `Parcel may be delivered with del
 
 **W One Boxie** wpisz kod odbioru, sam albo z numerem telefonu, użyj kodu QR z SMS-a lub e-maila albo otwórz skrytkę w aplikacji Allegro. **W One Punkcie** podaj numer przesyłki i kod odbioru.
 
-**Ile czeka paczka.** W One Boxie 2 dni kalendarzowe (48 godzin), w One Punkcie 2 dni robocze. W wybranych automatach i punktach Allegro może pozwolić przedłużyć czas na odbiór, na zasadach z osobnego regulaminu; status brzmi wtedy `Time for pick-up has been extended`. Nieodebrana paczka wraca do sprzedającego.
+**Ile czeka paczka.** W One Boxie 2 dni kalendarzowe (48 godzin), w One Punkcie 2 dni robocze. W wybranych automatach i punktach Allegro może pozwolić przedłużyć czas na odbiór, na zasadach z osobnego regulaminu; status brzmi wtedy `Czas na odbiór został przedłużony`. Nieodebrana paczka wraca do sprzedającego.
 
 **Pełny albo zamknięty automat.** Allegro może umieścić paczkę w innym automacie, najwyżej 3 km dalej (na terenach wiejskich 6 km), i informuje Cię, gdzie i do kiedy ją odbierzesz.
 
-**One Kurier** dowozi paczki pod adres z zamówienia w wybranych miastach. Allegro może pozwolić Ci raz przekierować paczkę kurierską, jeśli pozwala na to jej rozmiar, do automatu albo punktu obsługującego przekierowania w obrębie oddziału, który doręcza paczkę. Zlecisz to w aplikacji Allegro lub na allegro.pl, od nadania do chwili, gdy paczka zostanie wydana do doręczenia; dostawa wydłuży się wtedy o dzień roboczy, a paczek za pobraniem przekierować nie można. Gdy kurier nikogo nie zastanie, zostawia awizo (`Notice`): paczkę odbierzesz w ciągu 48 godzin we wskazanym miejscu albo umówisz płatne ponowne doręczenie.
+**One Kurier** dowozi paczki pod adres z zamówienia w wybranych miastach. Allegro może pozwolić Ci raz przekierować paczkę kurierską, jeśli pozwala na to jej rozmiar, do automatu albo punktu obsługującego przekierowania w obrębie oddziału, który doręcza paczkę. Zlecisz to w aplikacji Allegro lub na allegro.pl, od nadania do chwili, gdy paczka zostanie wydana do doręczenia; dostawa wydłuży się wtedy o dzień roboczy, a paczek za pobraniem przekierować nie można. Gdy kurier nikogo nie zastanie, zostawia awizo (`Awizo`): paczkę odbierzesz w ciągu 48 godzin we wskazanym miejscu albo umówisz płatne ponowne doręczenie.
 
 ## Paczka Allegro One opóźniona, zaginiona lub uszkodzona
 
@@ -87,7 +87,7 @@ Obsługę klienta przy paczkach Allegro Delivery, także Allegro One, prowadzi A
 
 [Peek](/) od razu rozpoznaje Allegro One po numerze `A0` albo `AD` z 8 literami lub cyframi. Numery przewoźników, z którymi Allegro też wysyła paczki, takich jak [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL czy Poczta Polska, nigdy nie mają tego kształtu. Przy numerze `ALE` z 12 cyframi wybierz Allegro One przez „Zmień przewoźnika”.
 
-Peek odczytuje śledzenie Allegro w wersji angielskiej, więc komunikaty widzisz po angielsku, tak jak w tabeli powyżej. Pokazuje historię z dokładnymi godzinami i czas doręczenia. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy.
+Peek odczytuje śledzenie Allegro po polsku, gdy korzystasz z Peek po polsku (stąd komunikaty jak w tabeli powyżej), a w każdym innym języku po angielsku. Pokazuje historię z dokładnymi godzinami i czas doręczenia. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy.
 
 Peek sprawdza śledzenie w dzień co 10 minut, a gdy paczka jest w doręczeniu, co 2 minuty; w nocy co godzinę lub dwie. Może Cię powiadomić o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy.
 
@@ -107,7 +107,7 @@ Do One Boxa i One Punktu trafiają paczki do 20 kg i do 64 × 41 × 38 cm. One K
 
 ### Co się dzieje z nieodebraną paczką z Allegro One Box?
 
-Po upływie czasu na odbiór, także przedłużonego, paczka wraca do sprzedającego, a w śledzeniu pojawia się `Time for parcel pick-up has expired`.
+Po upływie czasu na odbiór, także przedłużonego, paczka wraca do sprzedającego, a w śledzeniu pojawia się `Skończył się czas na odbiór przesyłki`.
 
 :::sources
 - [Allegro: Program dostaw Allegro Delivery – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – One Box, One Punkt, One Kurier w wybranych miastach, partnerzy, czas na odbiór, infolinia automatu, obsługa klienta, cena dostawy, wymiary

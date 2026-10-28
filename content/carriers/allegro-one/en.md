@@ -30,7 +30,7 @@ Allegro Delivery also uses ORLEN Paczka, DHL and DPD. Their Allegro Delivery par
 
 ## Allegro One tracking statuses explained
 
-Allegro's tracking service words each scan in Polish or English. These are its English wordings, the ones Peek shows, in the order a parcel meets them:
+Allegro's tracking service words each scan in Polish or English. These are its English wordings, the ones Peek shows unless you use it in Polish, in the order a parcel meets them:
 
 | Allegro One's status | What it means for you |
 | --- | --- |
@@ -83,7 +83,7 @@ Allegro handles customer service for Allegro Delivery parcels, Allegro One's inc
 
 [Peek](/) names Allegro One at once for `A0` or `AD` and 8 letters or digits. For `ALE` and 12 digits, pick Allegro One with "Change".
 
-It reads Allegro's tracking in English and shows the wordings above as written, with the history and the delivery time. Allegro gives no places, so there's nothing to pin on the map, and no pickup point name, expected delivery, weight or sender.
+It reads Allegro's tracking in English, or in Polish if you use Peek in Polish, and shows the wordings as written, with the history and the delivery time. Allegro gives no places, so there's nothing to pin on the map, and no pickup point name, expected delivery, weight or sender.
 
 It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only, or on delivery day only.
 

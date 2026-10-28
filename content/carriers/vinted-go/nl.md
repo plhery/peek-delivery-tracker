@@ -108,7 +108,7 @@ Zo stond het op 25 oktober 2026 op de Nederlandstalige pagina's van Vinted en Vi
 
 Een nummer dat met VGS begint, herkent Peek meteen als Vinted Go. Bij 16 cijfers die met 17 of 18 beginnen, vraagt Peek aan Vinted Go, DHL eCommerce en TNT of ze het nummer kennen, en kiest Vinted Go als dat het pakket kent. Een code met UW vraagt Peek bij Vinted Go na. Noemt Peek Vinted Go niet, druk dan op 'Change' en kies Vinted Go, of plak de trackinglink van vintedgo.com: daaraan herkent Peek Vinted Go meteen.
 
-Overdag kijkt Peek elke 10 minuten, elk uur zodra er 48 uur geen nieuwe scan is, en 's nachts elk uur of om de twee uur. Je kiest zelf je meldingen: 'All tracking updates', 'Important only' of 'Delivery day only'. Geeft Vinted Go het pakket met een nieuwe trackingcode door aan een andere vervoerder, dan volgt Peek het daar verder als Peek die vervoerder rechtstreeks leest. Peek kan geen contact opnemen met Vinted of Vinted Go en geen probleem voor je melden.
+Overdag kijkt Peek elke 10 minuten, elk uur zodra er 48 uur geen nieuwe scan is, en 's nachts elk uur of om de twee uur. Je kiest zelf je meldingen: 'Every scan', 'Important steps' of 'Delivery only'. Geeft Vinted Go het pakket met een nieuwe trackingcode door aan een andere vervoerder, dan volgt Peek het daar verder als Peek die vervoerder rechtstreeks leest. Peek kan geen contact opnemen met Vinted of Vinted Go en geen probleem voor je melden.
 
 ## Veelgestelde vragen over Vinted Go
 

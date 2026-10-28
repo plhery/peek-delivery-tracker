@@ -96,7 +96,7 @@ Zo stond het op 26 oktober 2026 op de Nederlandstalige pagina's van DHL eCommerc
 
 Peek vraagt het pakket zonder postcode op bij DHL, dus zie je geen ontvanger, adres, handtekening of afhaalpunt. Je ziet de status, de scans (zonder plaats), de verwachte bezorging (een tijdvak of moment, als DHL er een plant) en het tijdstip van bezorging. Peek toont de scans met de Engelse teksten van DHL, zoals `Delivered at DHL ServicePoint` voor `Bezorgd bij DHL ServicePoint`, en zet er een eigen kop boven, zoals 'Ready for pickup' of 'Delivered'. Bij een vertraging (`Delivery interrupted, delivery date changed`) staat er 'Needs attention', ook al hoef je volgens DHL meestal alleen te wachten.
 
-Overdag kijkt Peek elke 10 minuten, en elke 2 minuten zodra de bezorger onderweg is (met een tijdvak pas vanaf een halfuur ervoor). Na 48 uur zonder nieuwe scan kijkt Peek elk uur, en 's nachts elk uur of om de twee uur. Meldingen kies je zelf: 'All tracking updates', 'Important only' of 'Delivery day only'. Een Belgisch pakket dat naar bpost gaat, volgt Peek daar niet verder. Peek kan geen contact opnemen met DHL of de webshop.
+Overdag kijkt Peek elke 10 minuten, en elke 2 minuten zodra de bezorger onderweg is (met een tijdvak pas vanaf een halfuur ervoor). Na 48 uur zonder nieuwe scan kijkt Peek elk uur, en 's nachts elk uur of om de twee uur. Meldingen kies je zelf: 'Every scan', 'Important steps' of 'Delivery only'. Een Belgisch pakket dat naar bpost gaat, volgt Peek daar niet verder. Peek kan geen contact opnemen met DHL of de webshop.
 
 ## Vragen over DHL eCommerce track en trace
 

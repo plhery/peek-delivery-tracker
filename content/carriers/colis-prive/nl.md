@@ -91,7 +91,7 @@ Zo stond het op de Nederlandstalige pagina's van Colis Privé op 26 oktober 2026
 
 Typ in [Peek](/) het pakketnummer, kies Colis Privé als vervoerder met ‘Change’ en vul ‘Delivery postcode’ in: vier cijfers in België, L en vier cijfers in Luxemburg. Of zet je postcode met een B ervoor achter het nummer, zoals `AB0000000000 B1000` (verzonnen): dan vraagt Peek het alleen aan Colis Privé. Zonder die B vindt Peek Colis Privé niet vanzelf. Je kan ook een trackinglink van colisprive.com plakken.
 
-Peek haalt de tracking rechtstreeks bij Colis Privé, toont een verwachte leverdag zodra een regel een afspraak of een dag in het afhaalpunt aankondigt, en laat je naam en adres weg. Overdag controleert Peek elke 10 minuten, op de dag van de ronde elke 2 minuten, 's nachts elk uur of om de twee uur. Meldingen kies je zelf: ‘All tracking updates’, ‘Important only’ of ‘Delivery day only’. Peek kan geen klacht indienen en Colis Privé of de webshop niet voor je contacteren.
+Peek haalt de tracking rechtstreeks bij Colis Privé, toont een verwachte leverdag zodra een regel een afspraak of een dag in het afhaalpunt aankondigt, en laat je naam en adres weg. Overdag controleert Peek elke 10 minuten, op de dag van de ronde elke 2 minuten, 's nachts elk uur of om de twee uur. Meldingen kies je zelf: ‘Every scan’, ‘Important steps’ of ‘Delivery only’. Peek kan geen klacht indienen en Colis Privé of de webshop niet voor je contacteren.
 
 ## Vragen over Colis Privé pakket volgen
 

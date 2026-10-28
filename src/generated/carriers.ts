@@ -1216,6 +1216,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SPX Express Brazil tracking: Shopee orders and statuses",
       "name": "SPX Express Brazil",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "eushipments",
+      "catalog": "eushipments",
+      "slug": "eushipments-tracking",
+      "title": "euShipments tracking: statuses and who delivers your parcel",
+      "name": "euShipments",
+      "color": "#0a8fcf"
+    },
+    {
+      "id": "mhi",
+      "catalog": "mhi",
+      "slug": "mhi-tracking",
+      "title": "MHI tracking: Trackmail statuses and who delivers",
+      "name": "MHI",
+      "color": "#00075c"
     }
   ],
   "de": [

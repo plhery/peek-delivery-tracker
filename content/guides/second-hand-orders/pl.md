@@ -23,7 +23,7 @@ Sprzedający ma 72 godziny na potwierdzenie sprzedaży. Wtedy dostaje etykietę 
 - home | Ty | Sprawdzasz i w 48 godzin potwierdzasz albo zgłaszasz problem
 :::
 
-Na Allegro Lokalnie logujesz się kontem Allegro. Ogłoszenia z dostawą do Allegro One Box albo do Paczkomatu InPost mogą mieć Smart!, czyli darmową dostawę przy zakupach u jednego sprzedającego od określonej kwoty. Zakupy w sklepach na allegro.pl opisujemy w poradniku o [paczkach z Allegro](guide:allegro-orders).
+Allegro Lokalnie to wydzielona część Allegro, w której sprzedają osoby z kontem zwykłym, czyli prywatnym. Allegro organizuje tam dostawę metodą „Allegro Paczkomaty InPost”: sprzedający dostaje etykietę albo 9-cyfrowy kod nadania i nadaje paczkę w Paczkomacie InPost, a Ty płacisz za dostawę najwyżej 10,95 zł. Zakupy w sklepach na allegro.pl opisujemy w poradniku o [paczkach z Allegro](guide:allegro-orders).
 
 ## Który przewoźnik dowozi paczkę?
 
@@ -37,11 +37,11 @@ Na OLX dostępni przewoźnicy zależą od kategorii. Wybierasz ich przy zakupie,
 | [ORLEN Paczka](carrier:orlen-paczka) | Kiosk Ruch, punkt partnerski, automat albo wybrana stacja ORLEN |
 | [Poczta Polska](carrier:poczta-polska) | Urząd pocztowy, stacja ORLEN, kiosk Ruch, Delikatesy Centrum, Lewiatan, ABC, Biedronka |
 
-Na Allegro Lokalnie Smart! obejmuje dostawę do [Allegro One](carrier:allegro-one) Box i do Paczkomatu [InPost](carrier:inpost).
+Na Allegro Lokalnie paczkę wysłaną metodą „Allegro Paczkomaty InPost” wiezie [InPost](carrier:inpost).
 
 ## Gdzie jest numer przesyłki i jak wygląda?
 
-Na OLX zaloguj się i wejdź w **Twoje przesyłki** → **Kupujesz**. Kliknij strzałkę przy zamówieniu, a potem numer przesyłki. Ten sam numer wpiszesz na stronie przewoźnika. Na Allegro Lokalnie szczegóły zamówienia znajdziesz w zakładce **Kupione**. Gdzie numer pokazują inne sklepy, opisuje [poradnik o numerze przesyłki](guide:find-tracking-number).
+Na OLX zaloguj się i wejdź w **Twoje przesyłki** → **Kupujesz**. Kliknij strzałkę przy zamówieniu, a potem numer przesyłki. Ten sam numer wpiszesz na stronie przewoźnika. Na Allegro Lokalnie numer przesyłki, jeśli go ma, znajdziesz po zalogowaniu w zakładce **Kupione**. Gdzie numer pokazują inne sklepy, opisuje [poradnik o numerze przesyłki](guide:find-tracking-number).
 
 Dwa kody to nie numer przesyłki. 9-cyfrowy kod nadania służy sprzedającemu do nadania paczki w Paczkomacie. Kod odbioru dostajesz SMS-em albo e-mailem, a przy InPost także w aplikacji InPost Mobile, gdy paczka czeka w punkcie. Kształty, które zna Peek:
 
@@ -51,7 +51,6 @@ Dwa kody to nie numer przesyłki. 9-cyfrowy kod nadania służy sprzedającemu d
 | DPD | 13 cyfr i litera albo 14 cyfr od `13`, czasem z jeszcze jednym znakiem |
 | ORLEN Paczka | `210` i 10 cyfr |
 | Poczta Polska | 19 cyfr, 20 cyfr od `00`, `PX` i 10 cyfr albo 2 litery, 9 cyfr i `PL` |
-| Allegro One | `A0` albo `AD` i 8 liter lub cyfr, albo `AD0` i 14 znaków |
 
 Nie wiesz, czyj to numer? Wpisz go tutaj:
 
@@ -114,7 +113,7 @@ Po rozpakowaniu wejdź w **Twoje przesyłki** → **Kupujesz**. Jeśli wszystko 
 - **Paczka zaginęła.** Zaginięcie zgłasza sprzedający. Przy ORLEN Paczce, Poczcie Polskiej i DPD może to zrobić 30 dni po nadaniu.
 - **Minęło 48 godzin.** W ramach Pakietu Ochronnego jest już za późno. Napisz do sprzedającego; jeśli podejrzewasz oszustwo, OLX radzi zgłosić sprawę na policję.
 
-Zgłoszenie wstrzymuje wypłatę dla sprzedającego do wyjaśnienia sprawy. Na Allegro Lokalnie problem zgłaszasz w Dyskusji: najwcześniej godzinę po zaksięgowaniu wpłaty u sprzedającego, najpóźniej 180 dni po zakupie. Sprzedający powinien odpowiedzieć w ciągu 24 godzin w dni robocze. Jeśli nie odpowie albo się nie dogadacie, poproś Allegro o pomoc i złóż wniosek o rekompensatę w ramach Allegro Ochrony Kupujących. Od osoby prywatnej nie przysługuje Ci tam odstąpienie od umowy: zwrot jest możliwy tylko, jeśli sprzedający się zgodzi.
+Zgłoszenie wstrzymuje wypłatę dla sprzedającego do wyjaśnienia sprawy. Na Allegro Lokalnie problem zgłaszasz w Dyskusji, najwcześniej godzinę po zakupie. Sprzedający powinien odpowiedzieć w ciągu 24 godzin, nie licząc sobót, niedziel i dni ustawowo wolnych od pracy; jeśli milczy, Allegro na Twoją prośbę może włączyć się do Dyskusji. Allegro Ochrona Kupujących obejmuje tam tylko ogłoszenia „Kup Teraz” i licytacje, z wyjątkiem transakcji, w których płacisz przy odbiorze osobistym. Od osoby prywatnej nie przysługuje Ci prawo odstąpienia od umowy.
 
 Więcej: [paczka doręczona, ale jej nie ma](guide:delivered-not-received), [uszkodzona paczka](guide:damaged-parcel) i [zaginiona paczka](guide:lost-parcel).
 
@@ -128,7 +127,7 @@ Więcej przykładów: [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
 
 ## Czy mogę śledzić paczkę poza aplikacją?
 
-Tak. Skopiuj numer z **Twoje przesyłki** i wklej go do [Peeka](/). Peek rozpoznaje po numerze InPost, DPD, ORLEN Paczkę, Pocztę Polską i Allegro One. Gdy kształt jest wspólny dla kilku firm, jak 24 cyfry albo `210` i 10 cyfr, Peek pyta te firmy i pokazuje, która ma paczkę; jeśli kilka, wybierasz przewoźnika, którego podaje OLX, a **Zmień przewoźnika** przy paczce pozwala to później poprawić. Potwierdzenie odbioru, zgłoszenie problemu i zwrot pieniędzy zostają w OLX.
+Tak. Skopiuj numer z **Twoje przesyłki** i wklej go do [Peeka](/). Peek rozpoznaje po numerze InPost, DPD, ORLEN Paczkę i Pocztę Polską. Gdy kształt jest wspólny dla kilku firm, jak 24 cyfry albo `210` i 10 cyfr, Peek pyta te firmy i pokazuje, która ma paczkę; jeśli kilka, wybierasz przewoźnika, którego podaje OLX, a **Zmień przewoźnika** przy paczce pozwala to później poprawić. Potwierdzenie odbioru, zgłoszenie problemu i zwrot pieniędzy zostają w OLX.
 
 :::sources
 - [OLX: Jak działa Przesyłka OLX?](https://pomoc.olx.pl/olxplhelp/s/article/jak-dzia%C5%82a-przesy%C5%82ka-olx-V1-olx) – przewoźnicy, Pakiet Ochronny, Kup z Przesyłką OLX, 72 godziny, Twoje przesyłki, Mam problem, wypłata w 3 dni robocze
@@ -148,8 +147,8 @@ Tak. Skopiuj numer z **Twoje przesyłki** i wklej go do [Peeka](/). Peek rozpozn
 - [OLX: Przesyłka OLX uszkodzona w transporcie](https://pomoc.olx.pl/olxplhelp/s/article/co-je%C5%9Bli-kupuj%C4%85cy-zg%C5%82osi%C5%82-%C5%BCe-paczka-zagin%C4%99%C5%82adotar%C5%82a-uszkodzona-V4-olx) – odmowa przyjęcia poza automatami, protokół szkody, 7 dni
 - [OLX: Przesyłka OLX zaginęła](https://pomoc.olx.pl/olxplhelp/s/article/paczka-zagin%C4%99%C5%82a-lub-zosta%C5%82a-uszkodzona-co-teraz-V3-olx) – zgłasza sprzedający
 - [OLX: Centrum pomocy](https://pomoc.olx.pl/olxplhelp/s/) – OLX nie generuje linków do opłacenia zakupu, sprawdzanie linku
-- [Allegro: Jak działa Allegro Smart! na Allegro Lokalnie](https://allegro.pl/pomoc/dla-kupujacych/allegro-smart-na-allegro-lokalnie/jak-dziala-allegro-smart-na-allegro-lokalnie-GRoGokAxeHG) – Allegro One Box i Paczkomaty, darmowa dostawa od określonej kwoty u jednego sprzedającego
-- [Allegro: Jak kupować w ogłoszeniach na Allegro Lokalnie](https://allegro.pl/pomoc/dla-kupujacych/zakupy-na-allegro-lokalnie/jak-kupowac-w-ogloszeniach-na-allegro-lokalnie-0KBgn0eejH8) – logowanie kontem Allegro, zakładka Kupione
-- [Allegro: Produkt kupiony na Allegro Lokalnie nie dotarł lub jest niezgodny z opisem](https://allegro.pl/pomoc/dla-kupujacych/zakupy-na-allegro-lokalnie/produkt-kupiony-na-allegro-lokalnie-nie-dotarl-lub-jest-niezgodny-z-opisem-co-moge-zrobic-K6qzy67wvhl) – Dyskusja od godziny po wpłacie do 180 dni, 24 godziny na odpowiedź, Allegro Ochrona Kupujących, brak odstąpienia od umowy u osób prywatnych
+- [Allegro: Regulamin Allegro](https://policies.allegro.com/doc/f86a1a793dc4f5bc4b695b0ff0d54d974badab4169f5aaaddad89585c2c90690) – Konto Zwykłe; art. 7.4 zakładka „Kupione”; art. 10.2 odpowiedź w Dyskusji w 24 godziny bez sobót, niedziel i świąt; załącznik nr 13: Allegro Lokalnie dla kont zwykłych, Ochrona Kupujących dla „Kup Teraz” i licytacji bez zapłaty przy odbiorze osobistym; załącznik nr 16A: Allegro Paczkomaty InPost, dostawca InPost, etykieta albo 9-cyfrowy kod nadania, najwyżej 10,95 zł
+- [Allegro: Czym są i jak działają Dyskusje, informacje dla sprzedających](https://help.allegro.com/pl/sell/a/czym-sa-i-jak-dzialaja-dyskusje-informacje-dla-sprzedajacych-k1wRjeRw2I8) – Dyskusja godzinę po zakupie, także na Allegro Lokalnie, Allegro na prośbę kupującego
+- [Your Europe: Zwrot towarów i prawo do odstąpienia od umowy](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pl.htm) – brak prawa odstąpienia przy zakupie od osoby prywatnej
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów
 :::

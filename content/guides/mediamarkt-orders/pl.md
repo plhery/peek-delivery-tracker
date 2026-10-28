@@ -146,7 +146,6 @@ Peek pokazuje to, co publikuje przewoźnik. Reklamacje, zwroty i zwrot pieniędz
 - [MediaMarkt: Regulamin sklepu internetowego](https://mediamarkt.pl/pl/legal/regulamin) – Nowe Zamówienie, Potwierdzenie Zamówienia i 7 dni, status w mailach, Potwierdzenie Zamówienia – gotowe do odbioru, 2 dni, kod QR, dowód tożsamości, podmiot trzeci przy dostawie
 - [MediaMarkt: Regulamin Marketplace](https://mediamarkt.pl/pl/legal/regulamin-marketplace) – umowa ze sprzedawcą, kontakt ze sprzedawcą albo przez operatora, kroki prawne, reklamacje w 14 dni
 - [MediaMarkt: Marketplace](https://mediamarkt.pl/pl/specials/marketplace) – sprzedawcy wysyłają z krajów UE, 1 dzień na wysyłkę
-- [UOKiK: Odpowiedzialność za przesyłkę](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/odpowiedzialnosc-sprzedawcy-za-przesylke/) – ryzyko sklepu, reklamacja u sprzedawcy, roszczenia wobec firmy kurierskiej
-- [Sejm RP: Kodeks cywilny, tekst jednolity Dz.U. 2026 poz. 795](https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf) – art. 548 § 3
+- [UOKiK: Odpowiedzialność za przesyłkę](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/odpowiedzialnosc-sprzedawcy-za-przesylke/) – ryzyko sklepu, reklamacja u sprzedawcy, roszczenia wobec firmy kurierskiej, art. 548 § 3 Kodeksu cywilnego
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, linki śledzenia, przewoźnicy znani Peek
 :::

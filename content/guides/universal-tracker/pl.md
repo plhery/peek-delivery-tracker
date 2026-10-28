@@ -28,7 +28,7 @@ Zacznij od darmowych aplikacji, które same przypisują Ci paczki, także gdy [n
 | --- | --- | --- |
 | DPD Mobile | Paczki w sieci [DPD Polska](carrier:dpd-pl) przypisane do numeru telefonu lub adresu e-mail z Twojego konta w aplikacji. Te dane muszą się zgadzać z listem przewozowym | W aplikacji i e-mailem, na bieżąco o statusie doręczenia |
 | Pocztex Mobile ([Poczta Polska](carrier:poczta-polska)) | Wszystkie przesyłki rejestrowane, „do których został przypisany Twój numer telefonu” | O zmianach statusu przesyłek |
-| Allegro | Zakładka „Moje przesyłki”: paczki z Twoich zakupów, od oczekiwania na nadanie aż do odbioru. Nic nie zobaczysz, jeśli sprzedający nie dodał numeru listu przewozowego | W aplikacji i e-mailem, gdy przesyłka się opóźnia |
+| Allegro | Zakładka „Moje zakupy” albo „Kupione” na koncie: numery przesyłek z Twoich zakupów, które przekazał przewoźnik albo sprzedający, a przy metodach dostawy ze śledzeniem także status | E-mailem, gdy numer pojawi się w zakupach: z nazwą przewoźnika i linkiem do śledzenia |
 
 Inne możliwości i ich ograniczenia:
 
@@ -115,7 +115,7 @@ Niczego, czego przewoźnik nie opublikował. ParcelsApp mówi to wprost: nie stw
 - [DHL Paket](carrier:dhl) w Niemczech podaje, że nowa przesyłka może się pojawić w jego śledzeniu nawet po 24 godzinach.
 - Parcel podaje, że jego aplikacja jest opóźniona względem strony przewoźnika nawet o 90 minut (średnio o 45).
 
-**Paczki Allegro Delivery śledzisz w Allegro.** ORLEN Paczka pisze, że jej przesyłki wysłane metodą Allegro Delivery „można śledzić i odbierać wyłącznie w aplikacji i na stronie Allegro”, numerem zaczynającym się od `AD`. Jeśli taki numer nic nie pokazuje w trackerze, zajrzyj do zakładki „Moje przesyłki” w Allegro.
+**Paczki Allegro Delivery śledzisz pod numerem Allegro.** Numer od `AD` nadaje Allegro także wtedy, gdy paczkę wiezie partner, na przykład ORLEN Paczka, więc na stronie ORLEN Paczki jej nie znajdziesz. Jeśli taki numer nic nie pokazuje w trackerze, zajrzyj do zakupów na swoim koncie Allegro.
 
 Tracker nie załatwi też niczego za Ciebie: żeby zmienić dostawę, zapłacić należność albo zgłosić zaginięcie paczki, ParcelsApp odsyła na stronę przewoźnika. Jeśli status od kilku dni stoi w miejscu, przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating). Jeśli status brzmi „doręczona”, a paczki nie ma, zajrzyj do poradnika [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
@@ -137,9 +137,10 @@ Tak. W kwietniu 2026 roku CERT Polska ostrzegał przed [SMS-ami podszywającymi 
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – paczki przypisane do telefonu lub e-maila z konta w DPD Mobile, powiadomienia, 14-znakowy numer
 - [App Store: DPD Mobile](https://apps.apple.com/pl/app/dpd-mobile/id1593210812) – automatyczne śledzenie paczek w sieci DPD Polska, darmowa aplikacja
 - [App Store: Pocztex Mobile](https://apps.apple.com/pl/app/pocztex-mobile/id1661761150) – przesyłki przypisane do numeru telefonu, powiadomienia, darmowa aplikacja
-- [Allegro: Gdzie sprawdzisz numer i status swojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/gdzie-sprawdzisz-numer-i-status-swojej-przesylki-LvP7agrzOhw) – Moje przesyłki, brak numeru od sprzedającego, powiadomienia o opóźnieniu
+- [Allegro: Regulamin Allegro](https://policies.allegro.com/doc/f86a1a793dc4f5bc4b695b0ff0d54d974badab4169f5aaaddad89585c2c90690) – art. 7.4: numer od przewoźnika lub sprzedającego w zakładce „Kupione”, e-mail z przewoźnikiem, numerem i linkiem; art. 11.11: status przesyłki w zakładce „Moje zakupy”
 - [Poczta Polska: Śledzenie przesyłek](https://emonitoring.poczta-polska.pl/) – listy polecone bez drogi przesyłki, usługa sieciowa do śledzenia
-- [ORLEN Paczka: Śledź paczkę](https://www.orlenpaczka.pl/sledz-paczke/) – paczki Allegro Delivery tylko w Allegro, numery od AD
+- [Universal Parcel Scraper: ORLEN Paczka](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/orlen-paczka) – paczki Allegro Delivery z numerem od AD śledzi się w Allegro
+- [Universal Parcel Scraper: Allegro One](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/allegro-one) – Allegro Delivery: partnerzy, m.in. ORLEN Paczka, wiozą paczki pod numerem Allegro
 - [Gmail: Śledzenie przesyłki w Gmailu](https://support.google.com/mail/answer/13073650?hl=pl) – tylko kurierzy w USA, funkcje inteligentne, udostępniany tylko numer
 - [Gmail: Inteligentne funkcje](https://support.google.com/mail/answer/15604322?hl=pl) – domyślnie wyłączone w EOG
 - [Apple: Śledzenie zamówień i zakupów w aplikacji Portfel Apple](https://support.apple.com/pl-pl/105065) – uczestniczące aplikacje i witryny, informacje od sprzedawcy

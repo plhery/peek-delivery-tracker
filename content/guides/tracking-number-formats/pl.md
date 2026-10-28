@@ -19,7 +19,7 @@ Ten numer bywa różnie nazywany: numer przesyłki, numer paczki, numer listu pr
 :::steps
 - Spójrz na litery | To one najbardziej zawężają wybór. `1Z` na początku to UPS, `PX` to Poczta Polska, a dwie litery na końcu zwykle oznaczają pocztę.
 - Policz znaki | Sama długość rzadko przesądza sprawę, ale wyklucza część firm. Spacji nie licz: są tylko dla wygody czytania. Poczta Polska wprost prosi, żeby wpisywać numer „bez spacji oraz nawiasów”.
-- Sprawdź e-maila | E-mail albo SMS o wysyłce zwykle podaje przewoźnika albo link do jego strony śledzenia. Na Allegro przewoźnika i numer przesyłki znajdziesz w szczegółach zakupu. To pewniejsze niż zgadywanie.
+- Sprawdź e-maila | E-mail albo SMS o wysyłce zwykle podaje przewoźnika albo link do jego strony śledzenia. Allegro, gdy numer pojawi się w Twoich zakupach, wysyła e-mail z nazwą przewoźnika, numerem przesyłki i linkiem do śledzenia. To pewniejsze niż zgadywanie.
 - Wypróbuj przewoźników | Wpisz numer na stronie każdego przewoźnika, który wchodzi w grę. Ten, u którego pojawi się historia przesyłki, ma Twoją paczkę.
 :::
 
@@ -38,7 +38,7 @@ Oto, co przewoźnicy i standard pocztowy mówią o numerach, które w Polsce spo
 | [DHL Express](carrier:dhl-express) | 10 cyfr, bez liter, według DHL Express w Holandii |
 | GLS | numer paczki od nadawcy albo Track-ID z awiza; długości GLS nie podaje |
 | [Packeta](carrier:packeta) | litera `Z` i 10 cyfr, np. `Z1234567890`: „Numer śledzenia musi zaczynać się od litery 'Z' i składać się z 10 cyfr” |
-| [ORLEN Paczka](carrier:orlen-paczka) | numer paczki to 13 cyfr spod kodu kreskowego na etykiecie, zaczynających się od `21`, `23` albo `26` (`2101234567890`); wyszukiwarka przyjmuje też 10-cyfrowy kod nadania |
+| [ORLEN Paczka](carrier:orlen-paczka) | 13 cyfr od `210` (`2101234567890`): tak wynika z danych przewoźników, z których korzysta Peek. Wyszukiwarka ORLEN Paczki przyjmuje też 7- albo 10-cyfrowy kod nadania |
 | [UPS](carrier:ups) | `1Z` i 16 liter lub cyfr, razem 18 znaków, np. `1Z999AA10123456784`, przykładowy numer z poprawną cyfrą kontrolną UPS |
 | Amazon | w danych przewoźników Peek `TBA` i 12 cyfr albo kod kraju i 10 cyfr, więcej niżej |
 | [YunExpress](carrier:yunexpress) | `YT` i 16 cyfr; `YT` i 13 cyfr to YTO Express |
@@ -50,7 +50,7 @@ Oto, co przewoźnicy i standard pocztowy mówią o numerach, które w Polsce spo
 ### Numer zaczyna się od PX, AD albo LP: jaki to kurier?
 
 - **`PX` i 10 cyfr** to Poczta Polska, np. `PX1234567890`.
-- **`AD`** spotkasz przy przesyłkach Allegro Delivery. ORLEN Paczka pisze, że swoje paczki z Allegro Delivery da się śledzić wyłącznie w aplikacji i na stronie Allegro, numerem zaczynającym się od `AD`. Na stronie ORLEN Paczki ich nie znajdziesz.
+- **`AD`** spotkasz przy przesyłkach Allegro Delivery: `AD0` i 14 znaków albo, w starszych numerach, `AD` i 8 liter lub cyfr. Takie paczki śledzisz w Allegro, także te, które wiezie ORLEN Paczka. Na stronie ORLEN Paczki ich nie znajdziesz.
 - **`LP` i 14 cyfr** może oznaczać AliExpress i Cainiao. Tak wynika z danych przewoźników, z których korzysta Peek, choć sam Cainiao tego formatu na swoich stronach nie opisuje.
 
 ## Ile cyfr ma numer przesyłki?
@@ -118,7 +118,7 @@ Jeśli ma 13 znaków i kończy się dwiema literami, np. `CN`, to numer pocztowy
 
 ## Numery, które nie są numerem przesyłki
 
-Numer zamówienia i numer oferty z Allegro należą do sklepu. Do paczki prowadzi za to kod nadania DPD i ORLEN Paczki. Masz tylko numer zamówienia? Przeczytaj, [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
+Numer zamówienia i numer oferty należą do sklepu. Do paczki prowadzi za to kod nadania DPD i ORLEN Paczki. Masz tylko numer zamówienia? Przeczytaj, [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
 ## Dlaczego numer przesyłki może się zmienić po drodze
 
@@ -133,7 +133,7 @@ Paczka, która przekracza granicę, często zmienia przewoźnika, a każda firma
 :::
 
 - **Przesyłki pocztowe** to najprostszy przypadek: UPU pozwala na jeden numer S10 na przesyłkę, więc zwykle działa on na stronach poczt obu krajów.
-- **Allegro Delivery** to, jak pisze Allegro, program dostaw realizowany przez [Allegro One](carrier:allegro-one) razem z ORLEN Paczką i DHL, a wśród jego metod są też automaty, punkty i kurier DPD. Paczkę wiezie więc jeden z partnerów, a śledzić ją możesz w Allegro. Przesyłek ORLEN Paczki z tego programu nie znajdziesz na jej stronie, tylko w Allegro, pod numerem od `AD`.
+- **Allegro Delivery** to, jak pisze Allegro, program dostaw realizowany metodami [Allegro One](carrier:allegro-one) i z partnerami: ORLEN Paczką, DHL i DPD. Paczkę wiezie więc jedna z tych firm, ale numer od `AD` nadaje Allegro i to w Allegro go śledzisz. Przesyłek ORLEN Paczki z tego programu nie znajdziesz na jej stronie.
 - **AliExpress, tania wysyłka:** Cainiao pisze, że śledzenie kończy się po przekazaniu paczki lokalnemu przewoźnikowi, a o kontakt do niego możesz zapytać sprzedawcę. Więcej w poradniku o [śledzeniu paczki z Chin](guide:tracking-from-china).
 
 Numer, który nic nie pokazuje, nie zawsze jest źle wpisany. Mój DHL wśród powodów braku informacji podaje też numer innej firmy i paczkę z zagranicy, która nie dotarła jeszcze do Polski. Co znaczy pusta strona u innych przewoźników, ile czekać na pierwszy skan i co robić, gdy paczka po prostu stoi w miejscu, przeczytasz w poradniku [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
@@ -151,16 +151,16 @@ Numer, który nic nie pokazuje, nie zawsze jest źle wpisany. Mój DHL wśród p
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – od 10 do 39 znaków w Niemczech
 - [Hermes: Sendungsverfolgung](https://www.myhermes.de/empfangen/sendungsverfolgung/) – od 14 do 20 znaków
 - [GLS Polska: FAQ](https://gls-group.com/PL/pl/faq/) – numer paczki od nadawcy, Track-ID na awizie
-- [ORLEN Paczka: Śledź paczkę](https://www.orlenpaczka.pl/sledz-paczke/) – numer paczki lub kod nadania, numery od AD w Allegro Delivery
-- [ORLEN Paczka: Reklamacje](https://www.orlenpaczka.pl/reklamacje/) – „Numer paczki (EAN)”
+- [Universal Parcel Scraper: ORLEN Paczka](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/orlen-paczka) – 13 cyfr od `210` z cyfrą kontrolną GS1, 7- i 10-cyfrowe kody nadania w wyszukiwarce, paczki Allegro Delivery z numerem od AD śledzone w Allegro
+- [Universal Parcel Scraper: Allegro One](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/allegro-one) – numery Allegro Delivery: `AD0` i 14 znaków, starsze `AD` i 8 znaków; partnerzy wiozą paczki pod numerem Allegro
 - [Yanwen: YW Tracking (po angielsku)](https://track.yw56.com.cn/en/index) – strona śledzenia Yanwen, bez przykładowego numeru
-- [Allegro: Program dostaw Allegro Delivery – informacje dla kupujących](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/program-dostaw-allegro-delivery-informacje-dla-kupujacych-Bvw1bwrMmIz) – partnerzy i metody dostawy programu
-- [Allegro: Gdzie sprawdzisz numer i status swojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/gdzie-sprawdzisz-numer-i-status-swojej-przesylki-LvP7agrzOhw) – numer oferty i numer przesyłki w szczegółach zakupu
+- [Allegro: Program dostaw Allegro Delivery, informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – Allegro One oraz partnerzy ORLEN Paczka, DHL i DPD
+- [Allegro: Regulamin Allegro](https://policies.allegro.com/doc/f86a1a793dc4f5bc4b695b0ff0d54d974badab4169f5aaaddad89585c2c90690) – art. 7.4: e-mail z nazwą przewoźnika, numerem przesyłki i linkiem do śledzenia
 - [About Amazon Polska: 5 sposobów na bezpieczne zakupy z Amazon. Nie daj się oszustom!](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-sposobow-na-bezpieczne-zakupy-z-amazon-nie-daj-sie-oszustom) – historię zamówień śledzisz na stronie zamówień w swoim koncie
 - [About Amazon Polska: Amazon.pl startuje w Polsce](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-pl-startuje-w-polsce) – śledzenie zamówień w aplikacji Amazon Shopping i w przeglądarce (2021)
 - [About Amazon Polska: Amazon unowocześnia dostawy w Europie](https://www.aboutamazon.pl/wiadomosci/miejsca-pracy-i-inwestycje/amazon-unowoczesnia-dostawy-w-europie) – własna sieć dostaw ostatniej mili Amazona w Europie
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numery 1Z i ich cyfra kontrolna
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – PX, LP, TBA oraz PL i 10 cyfr, numery InPost (24 cyfry od `20`, `52`, `62`–`66`, `80` i `82`), numery Cainiao (`DOFR`, `CNFR`, `CNG`), a także YunExpress (`YT` i 16 cyfr) i YTO Express (`YT` i 13 cyfr), numery DPD Polska (13 cyfr i litera albo 14 cyfr od 13) 4PX (`4PX` i `LP`, 13 cyfr i `CN`), Yanwen (`BYS`, `YP` i `YW`), Poczty Polskiej (19 i 20 cyfr) oraz ORLEN Paczki (13 cyfr od `21`, `23` i `26`) w danych przewoźników, z których korzysta Peek
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – PX, LP, TBA oraz PL i 10 cyfr, numery InPost (24 cyfry od `20`, `52`, `62`–`66`, `80` i `82`), numery Cainiao (`DOFR`, `CNFR`, `CNG`), a także YunExpress (`YT` i 16 cyfr) i YTO Express (`YT` i 13 cyfr), numery DPD Polska (13 cyfr i litera albo 14 cyfr od 13) 4PX (`4PX` i `LP`, 13 cyfr i `CN`), Yanwen (`BYS`, `YP` i `YW`), Poczty Polskiej (19 i 20 cyfr) oraz ORLEN Paczki (13 cyfr od `210`) w danych przewoźników, z których korzysta Peek
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – numery od YT
 - [Cainiao: Help centre](https://global.cainiao.com/helpDoc.htm) – przy taniej wysyłce brak śledzenia po przekazaniu lokalnemu przewoźnikowi
 - [Cainiao: Guidance](https://global.cainiao.com/helpDoc.htm?slug=ofzig4) – numery Cainiao bez opisu formatu, tylko litery i cyfry

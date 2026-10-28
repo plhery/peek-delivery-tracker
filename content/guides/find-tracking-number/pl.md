@@ -18,7 +18,7 @@ GLS mówi to wprost: paczkę śledzisz po numerze, „który przekazał Ci Nadaw
 - Zamówienie w sklepie | O jedno kliknięcie dalej niż numer zamówienia (tabela niżej).
 - Awizo | Na wielu awizach jest numer, który przyjmie wyszukiwarka przewoźnika.
 - Aplikacja przewoźnika | [DPD](carrier:dpd-pl) i Pocztex same pokazują paczki wysłane na Twój numer telefonu (DPD także na e-mail).
-- Nadawca | Allegro radzi poprosić sprzedającego o numer przesyłki „lub potwierdzenie nadania”.
+- Nadawca | Napisz do sklepu albo sprzedawcy i poproś o numer przesyłki.
 :::
 
 Masz e-maila, ale nie wiesz, który numer jest który? Wklej całą wiadomość do [Peeka](/): wyłowi z niej numer przesyłki i rozpozna przewoźnika.
@@ -27,13 +27,13 @@ Masz e-maila, ale nie wiesz, który numer jest który? Wklej całą wiadomość 
 
 | Gdzie kupujesz | Gdzie jest numer przesyłki |
 | --- | --- |
-| Allegro | **Moje przesyłki** albo **Moje zakupy** → **szczegóły zakupu**, a także e-mail, który Allegro wysyła po zakupie. W aplikacji do **Moich przesyłek** prowadzi ikona samochodu w prawym górnym rogu |
+| Allegro | Po zalogowaniu na konto, w zakładce **Moje zakupy** albo **Kupione**. Gdy numer się tam pojawi, Allegro wyśle Ci też e-mail z nazwą przewoźnika, numerem przesyłki i linkiem do śledzenia |
 | Amazon.pl | Historia zamówień na Twoim koncie, na Amazon.pl lub w aplikacji Amazon. Tam zwykle śledzi się dostawy Amazon |
 | Vinted | Okno rozmowy dotyczącej zamówienia → **Śledź przesyłkę**. Stamtąd skopiujesz numer |
 | Zalando | Link do śledzenia w e-mailu z potwierdzeniem wysyłki, a także zakładka **Moje konto** |
 | Shein | **Moje zamówienia** → **Śledź**. Numer śledzenia widać przy zamówieniu |
 
-Nie widzisz numeru? Może jeszcze nie powstał albo przesyłka w ogóle go nie ma. Allegro nic nie pokaże, jeśli „sprzedający nie dodał do zamówienia numeru listu przewozowego”. Shein pisze, że brak numeru oznacza, że zamówienie jest jeszcze w magazynie.
+Nie widzisz numeru? Może jeszcze nie powstał albo przesyłka w ogóle go nie ma. Na Allegro numer przekazuje przewoźnik albo sprzedający: dopóki tego nie zrobią, w zakupie go nie zobaczysz. Shein pisze, że brak numeru oznacza, że zamówienie jest jeszcze w magazynie.
 
 Kto dostarcza dla każdego sklepu i co zrobić, gdy śledzenie stoi w miejscu: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) i [OLX](guide:second-hand-orders).
 
@@ -57,7 +57,7 @@ Przewoźnicy, którzy piszą o braku numeru, odsyłają do nadawcy. GLS: „popr
 - **Numer dokładnie tak, jak jest wydrukowany.** Poczta Polska prosi, żeby wpisywać go „bez spacji oraz nawiasów”.
 - **To, czy przesyłka w ogóle ma śledzenie.** Poczta Polska pokazuje tylko przesyłki rejestrowane, a przy listach poleconych tylko dzień nadania i doręczenia. Vinted śledzi tylko zamówienia złożone przyciskiem „Kup teraz”.
 
-Kupujesz na Allegro, Amazonie czy Vinted? Pisz do sprzedawcy przez platformę. Jeśli sprzedający na Allegro nie odpowiada, załóż Dyskusję i jako powód wybierz „nie otrzymałem produktu”. Możesz to zrobić najwcześniej godzinę po zakupie, a sprzedający ma 24 godziny na odpowiedź. Na Amazon.pl problem z dostawą wyjaśnij najpierw ze sprzedawcą. Jeśli się nie uda, możesz poprosić Amazon bezpośrednio o zwrot pieniędzy. Na Vinted przy wysyłce indywidualnej sprzedający sam powinien podać Ci numer przesyłki.
+Kupujesz na Allegro, Amazonie czy Vinted? Pisz do sprzedawcy przez platformę. Jeśli sprzedający na Allegro nie odpowiada, zgłoś problem z zakupem (na Allegro Lokalnie i przy zamówieniach z Magazynu Allegro nadal zakładasz Dyskusję). Możesz to zrobić już godzinę po opłaceniu zamówienia, a sprzedający ma 24 godziny na odpowiedź, nie licząc sobót, niedziel i dni wolnych od pracy. Na Amazon.pl problem z dostawą wyjaśnij najpierw ze sprzedawcą. Jeśli się nie uda, możesz poprosić Amazon bezpośrednio o zwrot pieniędzy. Na Vinted przy wysyłce indywidualnej sprzedający sam powinien podać Ci numer przesyłki.
 
 ### Sprawdź w aplikacji przewoźnika, czy idzie do Ciebie paczka
 
@@ -82,7 +82,7 @@ Po numerze telefonu: tylko w aplikacji przewoźnika i tylko paczki wysłane na n
 
 Czekasz na paczkę? Przeszukaj jeszcze raz skrzynkę mailową albo otwórz zamówienie. Jeśli nic nie znajdziesz, poproś nadawcę, żeby wysłał Ci numer jeszcze raz.
 
-Nadajesz paczkę? Numer jest na potwierdzeniu nadania albo w aplikacji, w której nadajesz. Zachowaj potwierdzenie, aż paczka dotrze: bez numeru nie sprawdzisz, gdzie jest, a kupujący z Allegro może poprosić Cię właśnie o numer „lub potwierdzenie nadania”.
+Nadajesz paczkę? Numer jest na potwierdzeniu nadania albo w aplikacji, w której nadajesz. Zachowaj potwierdzenie, aż paczka dotrze: bez numeru nie sprawdzisz, gdzie jest.
 
 | Gdzie nadajesz | Gdzie szukać numeru |
 | --- | --- |
@@ -96,7 +96,7 @@ Nie. Poczta Polska prosi o numer „podany na potwierdzeniu nadania”, a niemie
 
 ## Numer zamówienia a numer przesyłki: czym się różnią?
 
-To dwa różne numery. DHL pisze wprost, że numer przesyłki to nie numer zamówienia: ten drugi nadaje sklep. Numer przesyłki powstaje dopiero wtedy, gdy ktoś wydrukuje etykietę. W szczegółach zakupu na Allegro zobaczysz obok siebie numer oferty i numer przesyłki: u przewoźnika zadziała tylko ten drugi.
+To dwa różne numery. DHL pisze wprost, że numer przesyłki to nie numer zamówienia: ten drugi nadaje sklep. Numer przesyłki powstaje dopiero wtedy, gdy ktoś wydrukuje etykietę.
 
 :::journey
 - shop | Zamówienie złożone | Sklep daje Ci numer zamówienia
@@ -113,16 +113,16 @@ Najczęściej dlatego, że jest nowy: etykieta już jest, ale przewoźnik jeszcz
 
 Jeśli czekasz dłużej, sprawdź sam numer:
 
-- **Czy to numer przesyłki?** Numer zamówienia i numer oferty z Allegro należą do sklepu, więc u przewoźnika nie zadziałają.
-- **Czy to ten przewoźnik?** Numer od `AD` (Allegro Delivery) nic nie pokaże na stronie [ORLEN Paczki](carrier:orlen-paczka): taką paczkę śledzisz tylko w Allegro. Nazwę przewoźnika zwykle znajdziesz w e-mailu o wysyłce albo w szczegółach zakupu.
+- **Czy to numer przesyłki?** Numer zamówienia i numer oferty należą do sklepu, więc u przewoźnika nie zadziałają.
+- **Czy to ten przewoźnik?** Numer od `AD` to numer Allegro Delivery: taką paczkę śledzisz w Allegro, nie na stronie [ORLEN Paczki](carrier:orlen-paczka), nawet jeśli to ORLEN Paczka ją wiezie. Nazwę przewoźnika zwykle znajdziesz w e-mailu o wysyłce albo w szczegółach zakupu.
 - **Czy to jeden numer?** Wklej jeden numer naraz, bez spacji i nawiasów, jak prosi Poczta Polska.
 
 Nadal nic? Zapytaj nadawcę albo sklep. Co znaczy każdy status, wyjaśnia [poradnik o statusach przesyłki](guide:tracking-statuses).
 
 :::sources
 - [GLS Polska: FAQ](https://gls-group.com/PL/pl/faq/) – numer od nadawcy, Track-ID na awizie
-- [Allegro: Gdzie sprawdzisz numer i status swojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/gdzie-sprawdzisz-numer-i-status-swojej-przesylki-LvP7agrzOhw) – Moje przesyłki, Moje zakupy, aplikacja, e-mail, numer oferty, brak numeru listu przewozowego
-- [Allegro: Co możesz zrobić, gdy czekasz na przesyłkę zbyt długo](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/co-mozesz-zrobic-gdy-czekasz-na-przesylke-zbyt-dlugo-xG71gn36qC4) – kontakt ze sprzedającym, numer lub potwierdzenie nadania, Dyskusja
+- [Allegro: Regulamin Allegro](https://policies.allegro.com/doc/f86a1a793dc4f5bc4b695b0ff0d54d974badab4169f5aaaddad89585c2c90690) – art. 7.4: numer od przewoźnika lub sprzedającego, zakładka „Kupione”, e-mail z przewoźnikiem, numerem i linkiem; art. 11.11: zakładka „Moje zakupy”
+- [Allegro: Jak rozwiązywać problemy z zakupem w zakładce Wiadomości w Sales Center lub w Centrum Wiadomości](https://help.allegro.com/pl/sell/a/jak-rozwiazywac-problemy-z-zakupem-w-zakladce-wiadomosci-w-sales-center-lub-w-centrum-wiadomosci-x5ZVrvzXPuP) – od 28 października 2026 problem z zakupem zamiast Dyskusji, Dyskusje nadal na Allegro Lokalnie i u sprzedających z Magazynu Allegro, godzinę po opłaceniu zamówienia, 24 godziny bez sobót, niedziel i dni wolnych od pracy
 - [About Amazon Polska: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon i unikać ich](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – historia zamówień na Amazon.pl lub w aplikacji
 - [About Amazon Polska: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, potem zwrot pieniędzy od Amazon
 - [Vinted: Śledzenie przesyłki](https://www.vinted.pl/help/100) – okno rozmowy, Śledź przesyłkę, Kup teraz, wysyłka indywidualna
@@ -135,7 +135,8 @@ Nadal nic? Zapytaj nadawcę albo sklep. Co znaczy każdy status, wyjaśnia [pora
 - [gov.pl: Otrzymuj wiadomości o nadejściu przesyłki (awizo) w formie SMS lub na adres e-mail](https://www.gov.pl/web/gov/otrzymuj-wiadomosci-o-nadejsciu-przesylki-awizo-w-formie-sms-lub-na-adres-e-mail) – eINFO:awizo, profil zaufany, bezpłatnie, od następnego dnia, wyjątki dla pism w postępowaniach
 - [App Store: Pocztex Mobile](https://apps.apple.com/pl/app/pocztex-mobile/id1661761150) – przesyłki rejestrowane przypisane do numeru telefonu
 - [DHL eCommerce Polska: Śledzenie paczek krajowych i zagranicznych](https://mojdhl.pl/sprawdz) – kontakt z nadawcą
-- [ORLEN Paczka: Śledź paczkę](https://www.orlenpaczka.pl/sledz-paczke/) – paczki Allegro Delivery z numerem od AD tylko w Allegro
+- [Universal Parcel Scraper: ORLEN Paczka](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/orlen-paczka) – paczki Allegro Delivery z numerem od AD śledzi się w Allegro
+- [Universal Parcel Scraper: Allegro One](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/allegro-one) – Allegro Delivery: partnerzy, m.in. ORLEN Paczka, wiozą paczki pod numerem Allegro
 - [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – 24-cyfrowy format numerów InPost
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numery 1Z i ich cyfra kontrolna
 - [DHL Niemcy: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – numer przesyłki to nie numer zamówienia, śledzenie tylko z ważnym numerem, obsługa klienta

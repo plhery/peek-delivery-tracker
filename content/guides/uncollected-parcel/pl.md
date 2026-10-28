@@ -25,7 +25,7 @@ Wraca do nadawcy. Zwykle odwozi ją ta sama firma, która ją przywiozła.
 - **[InPost](carrier:inpost):** gdy paczka wraca, Peek pokazuje `On the way back to the Sender`, a na końcu `Returned to Sender` (statusy InPost czyta po angielsku).
 - **[Poczta Polska](carrier:poczta-polska)** zwraca nadawcy przesyłkę poleconą, której nikt nie odebrał w ciągu 14 dni. Nieodebraną paczkę Pocztex zwraca nadawcy na jego koszt.
 - **[DPD](carrier:dpd-pl)** po terminie odsyła paczkę z punktu albo automatu DPD Pickup do nadawcy.
-- **[Allegro One](carrier:allegro-one)** i inni przewoźnicy z programu Allegro Delivery odsyłają paczkę do sprzedającego, a w szczegółach zakupu zobaczysz status „Odesłano nadawcy”.
+- **[Allegro One](carrier:allegro-one)** i inni przewoźnicy z programu Allegro Delivery odsyłają paczkę do sprzedającego.
 
 Przewoźnik nie wyśle Ci jej drugi raz sam z siebie: o ponownej wysyłce albo zwrocie pieniędzy decyduje sklep. Gdy paczka jest już w drodze powrotnej, poradnik [paczka wraca do nadawcy](guide:returned-to-sender) opisuje tę drogę i to, o co poprosić sprzedawcę.
 
@@ -38,7 +38,7 @@ W automacie krótko, na poczcie długo.
 | Poczta Polska, przesyłka polecona i paczka pocztowa | 14 dni od dnia po pierwszym awizo (7 dni, powtórne awizo, kolejne 7) | – | – |
 | Poczta Polska, Pocztex | Kurier Pocztex: 7 dni w placówce od dnia po awizo | Pocztex PUNKT: placówka pocztowa 7 dni, inny punkt (np. Żabka) 3 dni | Pocztex AUTOMAT: 72 godziny |
 | DPD | – | DPD Pickup: 2 pełne dni robocze | DPD Pickup: 2 pełne dni robocze |
-| [DHL](carrier:dhl-ecommerce-pl), przy zamówieniu z Allegro | – | 2 dni robocze | 2 dni robocze |
+| [DHL](carrier:dhl-ecommerce-pl) w programie Allegro Delivery | – | DHL POP: 2 dni robocze | DHL BOX 24/7: 2 dni robocze |
 | Allegro One | – | One Punkt: 2 dni robocze | One Box: 2 dni kalendarzowe |
 
 Termin w Paczkomacie i PaczkoPunkcie InPost sprawdź w aplikacji InPost Mobile albo na stronie InPost, a w punktach i automatach [ORLEN Paczka](carrier:orlen-paczka) na stronie ORLEN Paczki.
@@ -65,18 +65,15 @@ U InPost Peek pokaże wtedy `Ready for collection`, a co znaczą poszczególne s
 
 Rzadko się da. DPD pisze wprost, że czasu w punkcie i automacie DPD Pickup nie można wydłużyć, a Poczta Polska to samo o Pocztex PUNKT i AUTOMAT. Paczki Pocztex nie przekierujesz też do innego punktu.
 
-Dwie firmy dają więcej czasu:
+Inaczej jest na poczcie: Poczta Polska przechowa przesyłkę poleconą albo paczkę pocztową do 14 dni po terminie, jeśli złożysz [zlecenie przechowywania](https://eformularze.poczta-polska.pl/zlecenie-przechowywania/). Przez internet zlecenie jest bezpłatne, na poczcie kosztuje 6,00 zł, a samo przechowanie paczki pocztowej 2,00 zł za każdy dzień. Nie dotyczy to Pocztex, PACZKI24, PACZKI48 ani Paczki+, a placówka może odmówić, gdy brakuje jej miejsca.
 
-- **Poczta Polska:** przechowa przesyłkę poleconą albo paczkę pocztową do 14 dni po terminie, jeśli złożysz [zlecenie przechowywania](https://eformularze.poczta-polska.pl/zlecenie-przechowywania/). Przez internet zlecenie jest bezpłatne, na poczcie kosztuje 6,00 zł, a samo przechowanie paczki pocztowej 2,00 zł za każdy dzień. Nie dotyczy to Pocztex, PACZKI24, PACZKI48 ani Paczki+, a placówka może odmówić, gdy brakuje jej miejsca.
-- **Allegro:** czas na odbiór z One Box albo One Punkt przedłużysz [za darmo o 24 godziny](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/allegro-one-informacje-dla-kupujacych-8dZv6Dv2KtL), raz na przesyłkę. W „Moich przesyłkach” wybierz „Przedłuż czas na odbiór za darmo”; opcja pojawia się na 24 godziny przed końcem terminu.
-
-Czy i jak przedłużysz czas w Paczkomacie InPost, sprawdź w aplikacji InPost Mobile.
+Czy i jak przedłużysz czas w Paczkomacie InPost, sprawdź w aplikacji InPost Mobile. Allegro może dać Ci możliwość przedłużenia czasu na odbiór paczki z Allegro Delivery w wybranych punktach i automatach, na zasadach z osobnego regulaminu: sprawdź to na Allegro.
 
 Jeśli i tak nie zdążysz:
 
 :::steps
 - Sprawdź termin | Jest w SMS-ie, e-mailu, aplikacji albo na awizo.
-- Przedłuż, jeśli się da | Allegro One: plus 24 godziny w „Moich przesyłkach”; Poczta Polska: płatne przechowywanie przesyłki poleconej.
+- Przedłuż, jeśli się da | Poczta Polska: płatne przechowywanie przesyłki poleconej.
 - Wyślij kogoś | Na poczcie odbierze ją Twój pełnomocnik; przy automatach i punktach zasady zależą od firmy.
 - Napisz do sklepu | Przed terminem, jeśli już jej nie chcesz, a po terminie, jeśli Ci umknął.
 :::
@@ -85,7 +82,7 @@ InPost może przypomnieć o czekającej paczce statusem `Reminder of a waiting p
 
 ## Czy dostanę zwrot pieniędzy za nieodebraną paczkę?
 
-Decyduje o tym sklep, a przy zakupie od firmy także [ustawa o prawach konsumenta](https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001244). Kupując od osoby prywatnej, nie masz ustawowego prawa odstąpienia od umowy.
+Decyduje o tym sklep, a przy zakupie od firmy także [ustawa o prawach konsumenta](https://eli.gov.pl/eli/DU/2026/1244/ogl). Kupując od osoby prywatnej, nie masz ustawowego prawa odstąpienia od umowy.
 
 | Pytanie | Co mówi prawo |
 | --- | --- |
@@ -128,7 +125,8 @@ Przy automacie taki status zwykle znaczy, że paczkę ktoś wyjął. Co wtedy zr
 - [Poczta Polska: Cennik opłat dodatkowych](https://cennik.poczta-polska.pl/plik,1/cennik_oplat_dodatkowych_01112025.pdf) – poz. 7: zlecenie przez internet bez opłat, w placówce 6,00 zł, paczka pocztowa 2,00 zł za dzień, bez Pocztex
 - [Poczta Polska: Odbiór w punkcie, FAQ](https://odbiorwpunkcie.poczta-polska.pl/faq/) – 3 dni w punktach, 72 godziny w automatach, bez przedłużenia i przekierowania
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – DPD Pickup 2 pełne dni robocze, bez przedłużenia, zwrot do nadawcy
-- [Allegro: Program dostaw Allegro Delivery, informacje dla kupujących](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/allegro-one-informacje-dla-kupujacych-8dZv6Dv2KtL) – One Punkt 2 dni robocze, One Box 2 dni kalendarzowe, DHL 2 dni robocze, zwrot do sprzedającego, „Odesłano nadawcy”, darmowe przedłużenie o 24 godziny raz
-- [ISAP: Ustawa o prawach konsumenta, tekst jednolity Dz.U. 2026 poz. 1244](https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001244) – art. 1, 27, 28, 30, 32, 33, 34: zakres, początek terminu, oświadczenie, zwrot płatności, koszty
+- [Allegro: Program dostaw Allegro Delivery, informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – czas na odbiór: One Punkt 2 dni robocze, One Box 2 dni kalendarzowe, DHL POP i DHL BOX 2 dni robocze; nieodebrana przesyłka wraca do sprzedającego
+- [Allegro: Regulamin usługi Allegro Delivery](https://policies.allegro.com/doc/e5cf7a904b3b08d908db62830a8bdac17b22cf354baf748e7853adff00fea84c) – § 9 ust. 16: przedłużenie czasu odbioru w wybranych punktach i automatach na osobnych zasadach; § 12: przesyłki nieodebrane w terminie wracają do nadawcy
+- [Dziennik Ustaw: Ustawa o prawach konsumenta, tekst jednolity Dz.U. 2026 poz. 1244](https://eli.gov.pl/eli/DU/2026/1244/ogl) – art. 1, 27, 28, 30, 32, 33, 34: zakres, początek terminu, oświadczenie, zwrot płatności, koszty
 - [UOKiK: Odstąpienie od umowy](https://prawakonsumenta.uokik.gov.pl/zakupy-w-internecie/odstapienie-od-umowy/) – termin od odbioru z paczkomatu, odstąpienie przed odbiorem, najtańsza dostawa, oświadczenie na piśmie
 :::

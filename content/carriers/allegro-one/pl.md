@@ -6,17 +6,17 @@ published: 2026-10-11
 updated: 2026-10-27
 ---
 
-Allegro One to własna sieć dostaw Allegro: automaty paczkowe Allegro One Box, punkty odbioru Allegro One Punkt i kurier Allegro One Kurier, wszystkie w ramach Allegro Delivery. Paczkę śledzisz w „Moich przesyłkach” na allegro.pl i w aplikacji Allegro, na stronie śledzenia Allegro albo po wklejeniu numeru w pole powyżej. Numer przesyłki znajdziesz w szczegółach zakupu, w e-mailu od Allegro po zakupie i w aplikacji.
+Allegro One to własna sieć dostaw Allegro: automaty paczkowe Allegro One Box, punkty odbioru Allegro One Punkt i kurier Allegro One Kurier, wszystkie w ramach Allegro Delivery. Paczkę śledzisz w „Moich przesyłkach” na allegro.pl i w aplikacji Allegro, na stronie śledzenia Allegro albo po wklejeniu numeru w pole powyżej. Numer przesyłki znajdziesz w szczegółach zakupu, w aplikacji i w e-mailu, który Allegro wysyła, gdy numer zostanie dodany.
 
 ## Gdzie jest numer przesyłki Allegro One
 
 Allegro pokazuje przewoźnika, numer przesyłki i jej aktualny status w kilku miejscach:
 
-- **„Moje przesyłki”** na allegro.pl i w aplikacji (ikona samochodu w prawym górnym rogu), od statusu „oczekuje na nadanie” aż do odbioru.
+- **„Moje przesyłki”** na allegro.pl i w aplikacji, od chwili, gdy paczka czeka na nadanie, aż do odbioru.
 - **„Moje zakupy”**, w szczegółach zakupu.
-- **E-mail**, który Allegro wysyła po zakupie.
+- **E-mail**, który dostajesz, gdy sprzedający doda numer przesyłki.
 
-Allegro nie publikuje formatu numeru ani przykładowego numeru. Katalog Peek i serwis śledzenia Allegro znają takie kształty (numery wymyślone):
+Katalog Peek zna takie kształty (numery wymyślone):
 
 | Kształt | Co to jest |
 | --- | --- |
@@ -24,76 +24,70 @@ Allegro nie publikuje formatu numeru ani przykładowego numeru. Katalog Peek i s
 | `AD00000000` | Allegro Delivery: `AD` i 8 liter lub cyfr, też przypisany do Allegro One. |
 | `ALE000000000000` | Starszy format numeru Allegro One: `ALE` i 12 cyfr. |
 
-Nie widzisz numeru? Według Allegro może go brakować, gdy formularz dostawy wypełniono błędnie, sprzedający nie dodał numeru listu przewozowego albo zakup został ukryty. Więcej w poradniku [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
+Nie widzisz numeru? Dodaje go sprzedający, chyba że Allegro pobiera go automatycznie od przewoźnika zintegrowanego z Allegro. Więcej w poradniku [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
-W Allegro Delivery paczki wożą też ORLEN Paczka, DHL i DPD. Taka paczka ma numer swojego przewoźnika, a nie numer zaczynający się od `A0`, i śledzisz ją u niego, na przykład w [ORLEN Paczce](carrier:orlen-paczka) albo w [DPD Polska](carrier:dpd-pl). Przy dostawie spoza Allegro Delivery Allegro radzi śledzić paczkę na stronie przewoźnika.
+W Allegro Delivery paczki wożą też ORLEN Paczka, DHL i DPD. Takie paczki mają numer Allegro i śledzisz je w Allegro, a skany partnera przychodzą w tym samym brzmieniu. Paczka, którą sprzedający wysyła poza Allegro Delivery, na własnej umowie z przewoźnikiem, ma numer tego przewoźnika i śledzisz ją u niego, na przykład w [ORLEN Paczce](carrier:orlen-paczka) albo w [DPD Polska](carrier:dpd-pl). Gdy przewoźnik nie jest zintegrowany z Allegro, Allegro nie widzi statusów takiej paczki i śledzisz ją sam, na przykład na stronie przewoźnika.
 
 ## Statusy Allegro One: co znaczą
 
-Na allegro.pl śledzenie Allegro One jest po polsku. Najczęstsze komunikaty, w kolejności, w jakiej spotyka je paczka:
+Serwis śledzenia Allegro podaje komunikaty po polsku albo po angielsku. Peek pokazuje je po angielsku; oto najczęstsze, w kolejności, w jakiej spotyka je paczka:
 
-| Allegro One pisze | Co to znaczy dla Ciebie |
+| Allegro One pisze (po angielsku) | Co to znaczy dla Ciebie |
 | --- | --- |
-| `Przesyłka została przygotowana przez nadawcę` | Nadawca przygotował etykietę. Allegro One jeszcze nie ma paczki. |
-| `Przesyłka została nadana` | Nadawca nadał paczkę. |
-| `Przesyłka została przyjęta w sortowni` | Paczka jest w sortowni. |
-| `Przesyłka wyjechała w drogę do punktu docelowego` | Paczka jedzie do automatu, punktu albo oddziału, który ją do Ciebie dowiezie. |
-| `Przesyłka została wydana do doręczenia` | Paczka jest w doręczeniu, także gdy jedzie do One Boxa. |
-| `Brak miejsca w maszynie` | Automat był pełny: nieudana próba. Allegro kieruje paczkę do innego punktu w pobliżu. |
-| `Przesyłka oczekuje na odbiór` | Paczka czeka w One Boxie albo w One Punkcie. |
-| `Przesyłka oczekuje na odbiór - zbliża się termin odbioru paczki` | Przypomnienie: czas na odbiór zaraz minie. |
-| `Czas na odbiór został przedłużony` | Czas na odbiór wydłużono o darmowe 24 godziny. |
-| `Skończył się czas na odbiór przesyłki` | Paczka nie została odebrana na czas i wraca do sprzedającego. |
-| `Przesyłka została zwrócona do nadawcy` | Paczka jest w drodze powrotnej do nadawcy. Mimo brzmienia komunikatu nadawca jeszcze jej nie ma. |
-| `Przesyłka została doręczona` | Paczka doręczona albo odebrana przez Ciebie. |
+| `Parcel has been prepared by the sender` | Nadawca przygotował etykietę. Allegro One jeszcze nie ma paczki. |
+| `Parcel has been dispatched` | Nadawca nadał paczkę. |
+| `Parcel has been accepted at the sorting center` | Paczka jest w sortowni. |
+| `Parcel has been dispatched to its destination point` | Paczka jedzie do automatu, punktu albo oddziału, który ją do Ciebie dowiezie. |
+| `Parcel has been released for delivery` | Paczka jest w doręczeniu, także gdy jedzie do One Boxa. |
+| `No space in the parcel locker` | Automat był pełny: nieudana próba. Kurier zabrał paczkę z powrotem. |
+| `Parcel is awaiting pick-up` | Paczka czeka w One Boxie albo w One Punkcie. |
+| `Parcel is awaiting pick-up — pick-up deadline is about to expire` | Przypomnienie: czas na odbiór zaraz minie. |
+| `Time for pick-up has been extended` | Czas na odbiór przedłużono. |
+| `Time for parcel pick-up has expired` | Paczka nie została odebrana na czas i wraca do sprzedającego. |
+| `Parcel has been returned to the sender` | Paczka jest w drodze powrotnej do nadawcy. Mimo brzmienia komunikatu nadawca jeszcze jej nie ma. |
+| `Parcel has been delivered` | Paczka doręczona albo odebrana przez Ciebie. |
 
-`Przesyłka została doręczona` pojawia się także wtedy, gdy sam odbierzesz paczkę z One Boxa albo z One Punktu: osobnego statusu „odebrana” nie ma.
+`Parcel has been delivered` pojawia się także wtedy, gdy sam odbierzesz paczkę z One Boxa albo z One Punktu: osobnego statusu „odebrana” nie ma.
 
-Kilka komunikatów brzmi groźniej, niż jest. `Przesyłka może zostać doręczona z opóźnieniem` i `Termin doręczenia przesyłki został ustalony z odbiorcą` to tylko informacje, paczka jedzie dalej. `Przesyłka została przekierowana do innego punktu` widzisz po własnym przekierowaniu albo gdy automat lub punkt był pełny czy zamknięty. Po `Brak przesyłki`, a nawet po `Przesyłka została zagubiona`, mogą przyjść kolejne skany, które paczkę odnajdują.
-
-W „Moich przesyłkach” i „Moich zakupach” Allegro pokazuje też własne, krótsze etykiety: `Oczekuje na nadanie`, `Nadana`, `W drodze`, `Odbierz przesyłkę`, a przy spóźnionej paczce `Przesyłka opóźniona`.
+Kilka komunikatów brzmi groźniej, niż jest. `Parcel may be delivered with delay` i `Parcel delivery time has been arranged with the recipient` to tylko informacje, paczka jedzie dalej. `Parcel has been redirected to a different point` widzisz, gdy sam wybierzesz inny punkt. Po `No parcel`, a nawet po `Parcel has been lost`, mogą przyjść kolejne skany, które paczkę odnajdują.
 
 ## Odbiór z Allegro One Box i One Punkt, dostawa One Kurier
 
-**Kod odbioru.** Gdy paczka dotrze do automatu albo punktu, Allegro wysyła kod e-mailem, w powiadomieniu na allegro.pl lub w aplikacji, SMS-em, jeśli nie używasz aplikacji, i pokazuje go w „Moich przesyłkach”.
+**Powiadomienie.** Gdy paczka dotrze do automatu albo punktu, Allegro lub jego partner informuje Cię e-mailem, SMS-em albo powiadomieniem w aplikacji Allegro, gdzie i do kiedy możesz ją odebrać.
 
-**W One Boxie** wpisz kod na ekranie, zeskanuj kod QR albo otwórz skrytkę zdalnie w aplikacji Allegro. Zdalne otwarcie nie zadziała, gdy masz wyłączoną lokalizację, stoisz przy innym automacie albo za daleko: wtedy użyj kodu. **W One Punkcie** podaj kod pracownikowi. Kodem możesz się podzielić w aplikacji („udostępnij kod odbioru”), a wtedy odpowiadasz za to, komu go dajesz.
+**W One Boxie** wpisz kod odbioru, sam albo z numerem telefonu, użyj kodu QR z SMS-a lub e-maila albo otwórz skrytkę w aplikacji Allegro. **W One Punkcie** podaj numer przesyłki i kod odbioru.
 
-**Ile czeka paczka.** W One Boxie 2 dni kalendarzowe (48 godzin), w One Punkcie 2 dni robocze. Dzień później Allegro wysyła przypomnienie. W „Moich przesyłkach” wybierz „Przedłuż czas na odbiór za darmo”, zaznacz obie zgody i potwierdź: dostaniesz 24 godziny więcej. Opcja pojawia się dopiero na 24 godziny przed końcem terminu i działa raz na paczkę. Nieodebrana paczka wraca do sprzedającego, a zakup dostaje status `Odesłano nadawcy`.
+**Ile czeka paczka.** W One Boxie 2 dni kalendarzowe (48 godzin), w One Punkcie 2 dni robocze. W wybranych automatach i punktach Allegro może pozwolić przedłużyć czas na odbiór, na zasadach z osobnego regulaminu; status brzmi wtedy `Time for pick-up has been extended`. Nieodebrana paczka wraca do sprzedającego.
 
-**Pełny albo zamknięty automat.** Allegro przekierowuje paczkę do najbliższego innego punktu lub automatu i daje Ci znać.
+**Pełny albo zamknięty automat.** Allegro może umieścić paczkę w innym automacie, najwyżej 3 km dalej (na terenach wiejskich 6 km), i informuje Cię, gdzie i do kiedy ją odbierzesz.
 
-**One Kurier.** Paczkę kurierską dostaniesz tylko pod adres z zamówienia, nie odbierzesz jej w punkcie. Możesz ją raz i za darmo przekierować do pobliskiego One Boxa lub One Punktu: „Moje przesyłki” > „Przekieruj przesyłkę”. Działa to, gdy paczka była opłacona z góry, nie jest zwrotem, sprzedający już ją nadał i nie jest jeszcze w doręczeniu; dostawa może się wtedy wydłużyć o dzień roboczy. Zmianę punktu albo terminu w innych przypadkach załatwisz tylko ze sprzedającym, przed nadaniem. Gdy w szczegółach zamówienia widzisz nieudaną próbę doręczenia, Allegro radzi skontaktować się z przewoźnikiem; bezpośredni numer kuriera bywa w jego SMS-ie lub e-mailu.
+**One Kurier** dowozi paczki pod adres z zamówienia w wybranych miastach. Allegro może pozwolić Ci raz przekierować paczkę kurierską, jeśli pozwala na to jej rozmiar, do automatu albo punktu obsługującego przekierowania w obrębie oddziału, który doręcza paczkę. Zlecisz to w aplikacji Allegro lub na allegro.pl, od nadania do chwili, gdy paczka zostanie wydana do doręczenia; dostawa wydłuży się wtedy o dzień roboczy, a paczek za pobraniem przekierować nie można. Gdy kurier nikogo nie zastanie, zostawia awizo (`Notice`): paczkę odbierzesz w ciągu 48 godzin we wskazanym miejscu albo umówisz płatne ponowne doręczenie.
 
 ## Paczka Allegro One opóźniona, zaginiona lub uszkodzona
 
-**Paczka nie dotarła.** Sprawdź status w „Moich przesyłkach”. Gdy paczka się spóźni, Allegro informuje o tym tam, w „Moich zakupach” (`Przesyłka opóźniona`), e-mailem i w aplikacji, a gdy paczka jest już w drodze, podaje nową datę. Paczki nie ma w ogóle? W „Moich zakupach” sprawdź, czy formularz dostawy jest poprawny i czy sprzedający dostał płatność, potem poproś go o numer przesyłki albo dowód nadania. Gdy status stoi w miejscu, zajrzyj też do poradnika [status przesyłki się nie zmienia](guide:tracking-not-updating).
+**Paczka nie dotarła.** Sprawdź status w „Moich przesyłkach”. Paczki nie ma w ogóle? Poproś sprzedającego o numer przesyłki. Gdy status stoi w miejscu, zajrzyj też do poradnika [status przesyłki się nie zmienia](guide:tracking-not-updating).
 
 **Sprzedający nie pomaga.** Zgłoś problem z zakupem, od godziny do 2 lat po zakupie. Sprzedający ma 24 godziny na odpowiedź na Twoją pierwszą wiadomość, nie licząc sobót, niedziel i dni wolnych od pracy, a jeśli chcesz, żeby do rozmowy włączyło się Allegro, kliknij „Pomoc Allegro”. Przy opóźnieniu, zagubieniu albo braku produktu w przesyłce sprzedający ma 7 dni na rozwiązanie zgłoszenia. Jeśli po tym czasie Allegro nie widzi, że problem rozwiązano, zapyta Cię o to, a gdy odpowiesz, że nadal występuje, zaproponuje Ci wniosek w ramach Allegro Ochrony Kupujących. Na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal zakładasz Dyskusję.
 
-**Doręczona, a jej nie ma.** Allegro radzi sprawdzić, czy paczki nie odebrał ktoś z domowników, sąsiad albo recepcja w firmie. Dalsze kroki w poradniku [paczka doręczona, a jej nie ma](guide:delivered-not-received).
+**Doręczona, a jej nie ma.** Sprawdź, czy paczki nie odebrał ktoś z domowników, sąsiad albo recepcja w firmie. Dalsze kroki w poradniku [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
-**Reklamacja.** Reklamacje dostawy przyjmuje Allegro, przy każdej metodzie Allegro Delivery: „Moje zakupy” > szczegóły zakupu > „Zgłoś reklamację lub problem”. Powodem może być zaginięcie, uszkodzenie w transporcie, spóźnienie albo źle wykonana usługa. Reklamację złożysz, gdy paczka do Ciebie dotarła, albo gdy nie dotarła, a sprzedający przekazał Ci prawo do reklamacji. Ukryte zaginięcie lub uszkodzenie zgłaszasz w ciągu 7 dni od przyjęcia paczki, w innych przypadkach masz do 12 miesięcy od nadania. Allegro zwykle odpowiada w ciągu 7 dni, najpóźniej w ciągu 30.
+**Reklamacja.** Reklamacje dostawy przyjmuje Allegro jako operator Allegro Delivery: elektronicznie, po zalogowaniu na konto Allegro albo po potwierdzeniu danych przesyłki, lub w inny sposób przewidziany w Prawie pocztowym. Powodem może być zaginięcie, uszkodzenie, spóźnienie albo źle wykonana usługa. Reklamację złożysz, gdy paczka do Ciebie dotarła, albo gdy nie dotarła, a sprzedający przekazał Ci prawo do reklamacji. Ukryte ubytki lub uszkodzenia zgłaszasz w ciągu 7 dni od przyjęcia paczki, w innych przypadkach masz do 12 miesięcy od nadania. Allegro odpowiada najpóźniej w ciągu 30 dni.
 
-**Uszkodzona paczka.** W One Punkcie możesz jej nie przyjąć albo przyjąć i spisać z pracownikiem protokół szkody. Przy One Boxie zgłoś szkodę w aplikacji przez „reklamuj dostawę” w szczegółach zakupu.
+**Uszkodzona paczka.** Przy odbiorze możesz jej nie przyjąć, a wtedy wraca do nadawcy, albo przyjąć ją i spisać protokół szkody, który będzie podstawą reklamacji.
 
 ## Allegro One kontakt i infolinia
 
-Według polskich stron pomocy Allegro, stan na 12 października 2026 roku. Allegro nie podaje publicznego numeru telefonu ani adresu e-mail Allegro One dla odbiorców.
+Obsługę klienta przy paczkach Allegro Delivery, także Allegro One, prowadzi Allegro.
 
-- **Reklamacja:** „Zgłoś reklamację lub problem” w „Moich zakupach” albo, bez logowania, [formularz reklamacji](https://allegro.pl/pomoc/last-mile/zloz-reklamacje).
-- **Pytania**, także o niejasny status: link „Skontaktuj się z nami” pod artykułami pomocy Allegro.
-- **One Box się nie otwiera:** infolinia techniczna, której numer jest pod ekranem automatu.
-- **Sprzedający:** zmiany przed nadaniem i spóźnione paczki; kontakt jest w e-mailu z potwierdzeniem zakupu.
-- **Nieudana dostawa kurierem:** przewoźnik albo numer kuriera z jego SMS-a lub e-maila.
-
-Allegro radzi nie otwierać linków ani załączników z wątpliwego e-maila lub SMS-a, dopóki nie masz pewności, kto go wysłał.
+- **Reklamacja:** do Allegro, jak wyżej.
+- **One Box się nie otwiera:** infolinia techniczna, której numer jest na automacie.
+- **Sprzedający:** przy spóźnionej paczce zgłoś problem z zakupem, jak wyżej.
 
 ## Śledzenie Allegro One w Peek
 
-[Peek](/) od razu rozpoznaje Allegro One po numerze `A0` albo `AD` z 8 literami lub cyframi. Numery przewoźników, z którymi Allegro też wysyła paczki, takich jak [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL czy Poczta Polska, nigdy nie mają tego kształtu. Przy numerze `ALE` z 12 cyframi wybierz Allegro One przez „Zmień przewoźnika” albo wklej link śledzenia z allegro.pl (`/allegrodelivery/sledzenie-paczki` z `numer=`).
+[Peek](/) od razu rozpoznaje Allegro One po numerze `A0` albo `AD` z 8 literami lub cyframi. Numery przewoźników, z którymi Allegro też wysyła paczki, takich jak [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL czy Poczta Polska, nigdy nie mają tego kształtu. Przy numerze `ALE` z 12 cyframi wybierz Allegro One przez „Zmień przewoźnika”.
 
-Peek odczytuje śledzenie Allegro w wersji angielskiej, więc komunikaty widzisz po angielsku, tak jak pisze je Allegro: na przykład `Parcel is awaiting pick-up` to `Przesyłka oczekuje na odbiór`, a `Parcel has been delivered` to `Przesyłka została doręczona`. Pokazuje historię z dokładnymi godzinami i czas doręczenia. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy. Przy numerach `AD` śledzenie Allegro nie pokazało dotąd żadnych skanów, więc Peek może pokazać tylko to, co dają uniwersalne serwisy śledzenia.
+Peek odczytuje śledzenie Allegro w wersji angielskiej, więc komunikaty widzisz po angielsku, tak jak w tabeli powyżej. Pokazuje historię z dokładnymi godzinami i czas doręczenia. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy.
 
 Peek sprawdza śledzenie w dzień co 10 minut, a gdy paczka jest w doręczeniu, co 2 minuty; w nocy co godzinę lub dwie. Może Cię powiadomić o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy.
 
@@ -101,29 +95,26 @@ Peek sprawdza śledzenie w dzień co 10 minut, a gdy paczka jest w doręczeniu, 
 
 ### Co to jest Allegro One Box?
 
-To własny automat paczkowy Allegro. Działa całą dobę na bateriach, niektóre także na panelach słonecznych, i jest dostosowany do osób niewidomych i słabowidzących.
+To własny automat paczkowy Allegro, część sieci Allegro One obok punktów One Punkt i kurierów One Kurier. Paczki trafiają do niego w ramach Allegro Delivery, a wozi je Allegro One albo DPD, DHL i ORLEN Paczka.
 
 ### Ile kosztuje dostawa Allegro One?
 
-Poza Allegro Smart! Allegro podaje 10,49 zł za One Box i One Punkt oraz 14,99 zł za One Kurier. Ze Smart! dostawa jest darmowa.
+Cenę dostawy ustala sprzedający w cenniku oferty i może ustawić ją na 0 zł. Z Allegro Smart! na obecnych warunkach dostawa do automatów, punktów i kurierem jest darmowa przy zakupach od 49,90 zł u jednego sprzedającego.
 
 ### Jaka jest największa paczka do Allegro One Box?
 
-Do automatów i punktów trafiają paczki do 20 kg i do 41 × 38 × 64 cm. Kurier wozi paczki do 31,5 kg, o długości do 120 cm i sumie wymiarów do 220 cm.
+Do One Boxa i One Punktu trafiają paczki do 20 kg i do 64 × 41 × 38 cm. One Kurier wozi paczki do 31,5 kg, o długości do 120 cm i sumie trzech boków do 220 cm.
 
 ### Co się dzieje z nieodebraną paczką z Allegro One Box?
 
-Po upływie czasu na odbiór, także przedłużonego, paczka wraca do sprzedającego, a zakup dostaje status `Odesłano nadawcy`.
+Po upływie czasu na odbiór, także przedłużonego, paczka wraca do sprzedającego, a w śledzeniu pojawia się `Time for parcel pick-up has expired`.
 
 :::sources
-- [Allegro Pomoc: Program dostaw Allegro Delivery – informacje dla kupujących](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/program-dostaw-allegro-delivery-informacje-dla-kupujacych-Bvw1bwrMmIz) – metody dostawy, partnerzy, ceny, kody odbioru, czas na odbiór, przedłużenie, przekierowanie, reklamacje, wymiary
-- [Allegro Pomoc: Gdzie sprawdzisz numer i status swojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/gdzie-sprawdzisz-numer-i-status-swojej-przesylki-LvP7agrzOhw) – gdzie jest numer, brakujący numer, etykiety statusów, informacje o opóźnieniu
-- [Allegro Pomoc: Co możesz zrobić, gdy czekasz na przesyłkę zbyt długo](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/co-mozesz-zrobic-gdy-czekasz-na-przesylke-zbyt-dlugo-xG71gn36qC4) – spóźniona paczka, nieudana dostawa kurierem, doręczona, a jej nie ma
+- [Allegro: Program dostaw Allegro Delivery – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – One Box, One Punkt, One Kurier w wybranych miastach, partnerzy, czas na odbiór, infolinia automatu, obsługa klienta, cena dostawy, wymiary
+- [Allegro: Jak poprawnie nadawać przesyłki z zamówieniami](https://help.allegro.com/pl/sell/a/jak-poprawnie-nadawac-przesylki-z-zamowieniami-poradnik-dla-sprzedajacych-AgbzAwmGMcY) – gdzie kupujący widzi przesyłkę, numery pobierane automatycznie, śledzenie u przewoźnika
+- [Allegro: Regulamin Allegro](https://policies.allegro.com/doc/f86a1a793dc4f5bc4b695b0ff0d54d974badab4169f5aaaddad89585c2c90690) – e-mail z przewoźnikiem, numerem i linkiem do śledzenia
+- [Allegro: Regulamin Allegro Delivery](https://policies.allegro.com/doc/e5cf7a904b3b08d908db62830a8bdac17b22cf354baf748e7853adff00fea84c) – powiadomienie, kod, QR i aplikacja, automat zastępczy, przedłużenie, przekierowanie, awizo, zwrot do sprzedającego, protokół szkody, reklamacje
 - [Allegro: Jak rozwiązywać problemy z zakupem w zakładce Wiadomości w Sales Center lub w Centrum Wiadomości](https://help.allegro.com/pl/sell/a/jak-rozwiazywac-problemy-z-zakupem-w-zakladce-wiadomosci-w-sales-center-lub-w-centrum-wiadomosci-x5ZVrvzXPuP) – od 28 października 2026 problem z zakupem zamiast Dyskusji, od godziny do 2 lat, 24 godziny na pierwszą wiadomość bez sobót, niedziel i dni wolnych od pracy, przycisk Pomoc Allegro, 7 dni przy opóźnieniu, zagubieniu i braku produktu w przesyłce, wniosek w ramach Allegro Ochrony Kupujących, Dyskusje nadal na Allegro Lokalnie i u sprzedających z Magazynu Allegro
-- [Allegro Pomoc: Jak wysyłać z Allegro Delivery z One Boxa do One Boxa](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/jak-wysylac-z-allegro-delivery-z-one-boxa-do-one-boxa-v86mAEbavHK) – 48 godzin w One Boxie, odbiór kodem QR, infolinia automatu
-- [Allegro Pomoc: Poznaj Allegro One Box – nasze automaty paczkowe](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/poznaj-allegro-one-box-nasze-automaty-paczkowe-WvdAXq3jwso) – własne automaty i punkty, cechy automatów
-- [Allegro: Śledzenie paczki](https://allegro.pl/allegrodelivery/sledzenie-paczki) – strona śledzenia Allegro Delivery
-- [Allegro: serwis śledzenia Allegro One](https://edge.allegro.pl/one/tracking) – brzmienie statusów po polsku i po angielsku
-- [Allegro Pomoc: Jak zachować bezpieczeństwo w sieci](https://allegro.pl/pomoc/dla-kupujacych/bezpieczenstwo-zasady-i-naruszenia/jak-zachowac-bezpieczenstwo-w-sieci-Pg2jyOnG2hR) – ostrożność wobec linków w SMS-ach i e-mailach
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje
+- [Allegro: Zmieniliśmy regulamin Allegro Smart! dla kupujących](https://help.allegro.com/pl/sell/a/zmienilismy-regulamin-allegro-smart-dla-kupujacych-GREoO0LKbfg) – darmowa dostawa od 49,90 zł u jednego sprzedającego
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – kształty numerów, brzmienie i języki statusów, paczki partnerów pod numerem Allegro, co Peek odczytuje
 :::

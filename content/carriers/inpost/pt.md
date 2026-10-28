@@ -70,13 +70,13 @@ Segundo a página [Fala connosco](https://www.inpost.pt/fala-connosco), consulta
 - **Telefone:** 211 245 624, de segunda a sexta-feira das 8h30 às 20h00 e aos sábados das 9h00 às 13h00.
 - **Língua gestual:** de segunda a sexta-feira, das 8h00 às 22h00.
 
-> A InPost Polska avisa que nunca envia SMS sobre pagamentos adicionais e que os seus e-mails verdadeiros nunca trazem anexos. Para comunicar mensagens suspeitas, escreve para cybersecurity@inpost-group.com.
+> A InPost Portugal avisa que nunca te pedirá para pagar um serviço diretamente por SMS nem para descarregares anexos de serviços como Dropbox ou WeTransfer. Em caso de dúvida, contacta-a pelos seus canais oficiais.
 
 ## Seguir uma encomenda InPost com o Peek
 
-O [Peek](/) reconhece de imediato os números `8YDR` do Reino Unido. Para os de 24 algarismos e os `JJD` e `JD`, pergunta à InPost se os conhece (e, nos de 24 algarismos, também à bpost e à Ciblex). Os números de 8 caracteres do inpost.pt e qualquer outra forma não são lidos como da InPost, nem que a escolhas em «Alterar transportadora»: nesse caso, o Peek pergunta só a serviços universais de seguimento. Com 8 algarismos, não escolhe sozinho nenhuma transportadora e nunca propõe a InPost. Não dá para colar uma ligação da InPost; de resto, basta o número, sem código postal.
+O [Peek](/) reconhece de imediato os números `8YDR` do Reino Unido. Para os de 24 algarismos e os `JJD` e `JD`, pergunta à InPost se os conhece (nos de 24 algarismos, pergunta ao mesmo tempo à Austrian Post e à Ciblex e, se começarem por 3232 ou 3299, também à bpost). Os números de 8 caracteres do inpost.pt e qualquer outra forma não são lidos como da InPost, nem que a escolhas em «Alterar transportadora»: nesse caso, o Peek pergunta só a serviços universais de seguimento. Com 8 algarismos, não escolhe sozinho nenhuma transportadora e nunca propõe a InPost. Podes colar uma ligação da página de seguimento do inpost.pl, mas não do inpost.pt; de resto, basta o número, sem código postal.
 
-Lê o serviço de seguimento da InPost em inposteasy.com (não está confirmado que responda pelos números `JJD`, `JD` e `8YDR`) e mostra o estado, as 20 leituras mais recentes com a cidade ou o centro e o país de cada uma num mapa, a hora de entrega e o país de destino; a InPost não dá data de entrega prevista. Cada passo aparece com o título que esse serviço envia, ou com o código interno da InPost quando não tem título, e alguns códigos ficam sem etapa. O Peek não pede uma língua ao serviço: o único registo lido assim veio em polaco, e não se sabe em que língua aparece uma encomenda portuguesa.
+Lê o serviço de seguimento da InPost em inposteasy.com (não está confirmado que responda pelos números `JJD`, `JD` e `8YDR`) e mostra o estado, as 20 leituras mais recentes com a cidade ou o centro e o país de cada uma num mapa, a hora de entrega e o país de destino; a InPost não dá data de entrega prevista. Cada passo aparece com o título que esse serviço envia, ou com o código interno da InPost quando não tem título, e alguns códigos ficam sem etapa. O Peek pede ao serviço os textos em inglês, ou em polaco a quem usa o Peek em polaco; por isso, os passos de uma encomenda portuguesa aparecem-te em inglês.
 
 O nome e a morada do Locker ou ponto só aparecem em números de 24 algarismos, quando o seguimento polaco da InPost os confirma, o que na prática é provável que só aconteça com encomendas polacas. O horário do ponto e o teu PIN nunca aparecem. As leituras sem fuso horário ficam de fora, e o Peek nunca lê o teu nome, morada, telefone ou assinatura, nem segue a encomenda noutra transportadora. Verifica o seguimento de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações: «Todas as leituras», «Passos importantes» ou «Só a entrega».
 
@@ -96,7 +96,7 @@ Nos Lockers e Pontos Pack, não: a InPost Portugal distribui de segunda a sexta-
 
 ### A InPost tem WhatsApp ou e-mail?
 
-Em Portugal, não: a página Fala connosco não mostra WhatsApp nem endereço de e-mail. Os canais são o assistente virtual, disponível 24/7, os formulários de contacto e o telefone 211 245 624; o assistente no WhatsApp é da InPost na Polónia.
+Em Portugal, não: a página Fala connosco não mostra WhatsApp nem endereço de e-mail. Os canais são o assistente virtual, disponível 24/7, os formulários de contacto e o telefone 211 245 624.
 
 :::sources
 - [InPost Portugal: Rastrear Encomenda](https://www.inpost.pt/seguimento-do-envio) – campo único, exemplo de 8 caracteres, sem código postal
@@ -106,10 +106,8 @@ Em Portugal, não: a página Fala connosco não mostra WhatsApp nem endereço de
 - [InPost Portugal: Quem Somos](https://www.inpost.pt/quem-somos) – Polónia, Mondial Relay em 2021, entrega ao domicílio
 - [InPost Portugal: Procurar InPost Ponto Pack e Locker](https://www.inpost.pt/encontrar-um-ponto-pack-proximo-de-minha-casa/) – o que são Ponto Pack e Locker, ponto mais próximo
 - [InPost Italia: Contatti e assistenza](https://inpost.it/contatti-e-assistenza) – código de 24 caracteres em Itália
-- [InPost Polska: Śledzenie przesyłek](https://inpost.pl/sledzenie-przesylek) – números de 24 algarismos na Polónia
-- [InPost Polska: Kontakt](https://inpost.pl/kontakt) – assistente no WhatsApp
-- [InPost Polska: Bezpieczeństwo z InPost](https://inpost.pl/bezpieczenstwo-z-inpost) – mensagens falsas
+- [InPost Portugal: Pagamentos Seguros e Prevenção de Fraudes](https://www.inpost.pt/faz-um-envio/como-enviar/pagamento-seguro/informacao-sobre-fraude) – sem pagamentos por SMS nem anexos, canais oficiais
 - [InPost UK: Yodel by InPost help](https://inpost.co.uk/yodel-help) – números começados por JD, JJD ou 8
 - [InPost Easy: Parcel Form](https://inposteasy.com/en) – o serviço que o Peek lê
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra, números de 24 algarismos na Polónia, língua dos passos, ligações do inpost.pl
 :::

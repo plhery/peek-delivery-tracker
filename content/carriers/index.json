@@ -161,5 +161,7 @@
   { "id": "quick-rabbit", "catalog": "quick-rabbit", "name": "Quick Rabbit", "languages": ["en"] },
   { "id": "huaya-express", "catalog": "huaya-express", "name": "Huaya Express", "languages": ["en"] },
   { "id": "gofo-ca", "catalog": "gofo-ca", "name": "GOFO Canada", "languages": ["en"] },
-  { "id": "metropolitan-warehouse", "catalog": "metropolitan-warehouse", "name": "Metropolitan Warehouse & Delivery", "languages": ["en"] }
+  { "id": "metropolitan-warehouse", "catalog": "metropolitan-warehouse", "name": "Metropolitan Warehouse & Delivery", "languages": ["en"] },
+  { "id": "topyou", "catalog": "topyou", "name": "TopYou", "languages": ["en"] },
+  { "id": "byhd", "catalog": "byhd", "name": "BYHD", "languages": ["en"] }
 ]

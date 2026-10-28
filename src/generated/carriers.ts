@@ -1312,6 +1312,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Metropolitan Warehouse tracking (MWD): furniture delivery",
       "name": "Metropolitan Warehouse & Delivery",
       "color": "#0062b7"
+    },
+    {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-tracking",
+      "title": "TopYou tracking: TYZR numbers, scans and who delivers",
+      "name": "TopYou",
+      "color": "#045cd7"
+    },
+    {
+      "id": "byhd",
+      "catalog": "byhd",
+      "slug": "byhd-tracking",
+      "title": "BYHD tracking: BYHD numbers, scans and who delivers",
+      "name": "BYHD",
+      "color": "#084282"
     }
   ],
   "de": [

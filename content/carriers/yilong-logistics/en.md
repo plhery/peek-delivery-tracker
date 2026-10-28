@@ -62,7 +62,7 @@ There's no email address, no street address and nothing addressed to recipients:
 
 ## Track a Yilong Logistics parcel with Peek
 
-Paste a YIL…WL number into [Peek](/) and it goes straight to Yilong Logistics: no other carrier Peek knows issues that layout. Peek follows more than 3,500 carriers, but a seller's order reference has no shape to go by. Add it anyway, press "Change" and choose Yilong Logistics (searching 一龙物流 or YXHL finds it too), or pick "Change carrier" on a parcel already in your list. If Yilong's tracker knows the reference, Peek also shows the order's YIL number.
+Paste a YIL…WL number into [Peek](/) and it goes straight to Yilong Logistics: no other carrier Peek knows issues that layout. Peek follows more than 3,500 carriers, but a seller's order reference has no shape to go by. Add it anyway, press "Change" and choose Yilong Logistics (searching 一龙物流 or YXHL finds it too), or pick "Change carrier" on a parcel already in your list. If Yilong's tracker knows the reference, Peek also shows the order's YIL number. Peek drops dashes, though, so look up a reference with dashes in Yilong's own box.
 
 Peek reads Yilong's tracker directly. It shows each line in Yilong's words, the Chinese one included, the place on the two warehouse lines, and the service name and destination country when the record holds them. The warehouse receipt counts as received by the carrier; the departure, export clearance and airline lines count as in transit. Yilong's Beijing times appear in your device's time zone. Names, address, postcodes, weight, fees, the seller's reference, signature and proof of delivery on the record stay out of Peek, and there's no expected delivery date, as Yilong gives none.
 

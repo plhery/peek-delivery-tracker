@@ -134,6 +134,13 @@ class CarrierVisualIdentity private constructor(
     /** The same livery under other names: Swift's `private(set) var name, fullName`. */
     private fun copy(name: String, fullName: String) = CarrierVisualIdentity(family, name, fullName, colors, decal)
 
+    /** A value, as the Swift struct is: `shown` makes a new one for each call. */
+    override fun equals(other: Any?): Boolean =
+        other is CarrierVisualIdentity && family == other.family && name == other.name && fullName == other.fullName &&
+            colors == other.colors && decal == other.decal
+
+    override fun hashCode(): Int = listOf(family, name, fullName, colors, decal).hashCode()
+
     /** One of the livery's named colours (`truck`, `accent`…), or else a colour literal. */
     fun paint(value: String): RgbaColor {
         val index = CarrierBrandAssets.shared.properties.indexOf(value)

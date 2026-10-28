@@ -904,8 +904,7 @@ class CarrierCatalog private constructor(
 
         /** Where the app keeps the refreshed catalog in its caches directory. The cache is re-encoded from the
          * decoded classes, so a file written by a build that did not know a catalog field has lost it. Bump
-         * the name when one is added: v6 for helpUrl and hidesDestinationLeg, which the iPhone added under v5, so its
-         * cache lacks them until the catalog changes. */
+         * the name when one is added. */
         fun cacheFile(cachesDirectory: File): File =
             File(File(cachesDirectory, "delivery-tracker"), "carrier-catalog-v6.json")
 

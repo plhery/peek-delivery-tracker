@@ -128,19 +128,25 @@ class PeekMarkTests {
         val mark = PeekMark(size = 64.0)
         assertEquals(0.125, mark.scale, 0.0)
         assertEquals(PeekMarkArtwork.draw().size, mark.drawing.size)
-        var clip: List<Double>? = null
-        mark.clip.replay(object : MapPath.Sink {
-            override fun move(x: Double, y: Double) = error("move")
-            override fun line(x: Double, y: Double) = error("line")
-            override fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double) = error("curve")
-            override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) = error("arc")
-            override fun ellipse(x: Double, y: Double, width: Double, height: Double) = error("ellipse")
-            override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) {
-                clip = listOf(x, y, width, height, cornerRadius)
-            }
-            override fun close() = error("close")
-        })
-        assertEquals(listOf(0.0, 0.0, 64.0, 64.0, 14.5), clip)
+        // RoundedRectangle(cornerRadius: 14.5) in 64 points, as SwiftUI gives its path (from a swiftc harness on the Mac).
+        assertPathElements(
+            listOf(
+                "M 64 32", "L 64 41.834358274936676",
+                "C 64 48.216894865036011 64 51.408098340034485 62.913784690201283 54.843337208032608",
+                "C 61.548629902303219 58.59405180811882 58.59405180811882 61.548629902303219 54.843337208032608 62.913784690201283",
+                "C 51.408098340034485 64 48.216894865036011 64 41.834358274936676 64", "L 22.165641725063324 64",
+                "C 15.783105134963989 64 12.591901659965515 64 9.156662791967392 62.913784690201283",
+                "C 5.4059481918811798 61.548629902303219 2.4513700976967812 58.59405180811882 1.0862153097987175 54.843337208032608",
+                "C 0 51.408098340034485 0 48.216894865036011 0 41.834358274936676", "L 0 22.165641725063324",
+                "C 0 15.783105134963989 0 12.591901659965515 1.0862153097987175 9.156662791967392",
+                "C 2.4513700976967812 5.4059481918811798 5.4059481918811798 2.4513700976967812 9.156662791967392 1.0862153097987175",
+                "C 12.591901659965515 0 15.783105134963989 0 22.165641725063324 0", "L 41.834358274936676 0",
+                "C 48.216894865036011 0 51.408098340034485 0 54.843337208032608 1.0862153097987175",
+                "C 58.59405180811882 2.4513700976967812 61.548629902303219 5.4059481918811798 62.913784690201283 9.156662791967392",
+                "C 64 12.591901659965515 64 15.783105134963989 64 22.165641725063324", "Z",
+            ),
+            mark.clip,
+        )
     }
 
     /** Points around the edge of a round layer. */

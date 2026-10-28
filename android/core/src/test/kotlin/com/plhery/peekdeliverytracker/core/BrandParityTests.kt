@@ -211,9 +211,34 @@ class BrandParityTests {
         val body = steps[0] as MapDrawing.Fill
         assertEquals(AdaptiveColor(identity.truck), body.color)
         assertEquals(CarrierTruckGeometry.body, body.path.boundingBoxOfPath)
+        // `Path(roundedRect:cornerRadius:)`, continuous, as SwiftUI gives it (from a swiftc harness on the Mac).
+        assertPathElements(
+            listOf(
+                "M 20 9.5", "L 20 14.012735569477082",
+                "C 20 14.584962987899781 20 14.871070885658265 19.902615179121494 15.179057818651199",
+                "C 19.780221991240978 15.51532878279686 19.51532878279686 15.780221991240978 19.179057818651199 15.902615179121494",
+                "C 18.871070885658263 16 18.584962987899779 16 18.01273556947708 16", "L 3.9872644305229188 16",
+                "C 3.4150370121002198 16 3.1289291143417359 16 2.8209421813488005 15.902615179121494",
+                "C 2.4846712172031404 15.780221991240978 2.2197780087590218 15.51532878279686 2.0973848208785055 15.179057818651199",
+                "C 2 14.871070885658265 2 14.584962987899781 2 14.012735569477082", "L 2 4.9872644305229183",
+                "C 2 4.4150370121002194 2 4.1289291143417355 2.0973848208785055 3.8209421813488005",
+                "C 2.2197780087590218 3.4846712172031404 2.4846712172031404 3.2197780087590218 2.8209421813488005 3.0973848208785055",
+                "C 3.1289291143417359 3 3.4150370121002198 3 3.9872644305229188 3", "L 18.01273556947708 3",
+                "C 18.584962987899779 3 18.871070885658263 3 19.179057818651199 3.0973848208785055",
+                "C 19.51532878279686 3.2197780087590218 19.780221991240978 3.4846712172031404 19.902615179121494 3.8209421813488005",
+                "C 20 4.1289291143417355 20 4.4150370121002194 20 4.9872644305229183", "Z",
+            ),
+            body.path,
+        )
         val outline = steps[1] as MapDrawing.Stroke
         assertEquals(AdaptiveColor(identity.edge), outline.color)
         assertEquals(CarrierTruckGeometry.strokeWidth, outline.style.lineWidth, 0.0)
+        // Every outline mitres its corners up to 10 line widths before it bevels, as CoreGraphics does, rather than at
+        // Android's own limit of 4.
+        for (step in steps.filterIsInstance<MapDrawing.Stroke>()) {
+            assertEquals(StrokeStyle.LineJoin.Miter, step.style.lineJoin)
+            assertEquals(10.0, step.style.miterLimit, 0.0)
+        }
         assertEquals(AdaptiveColor(RgbaColor.hex(CarrierTruckGeometry.windshieldColor)), (steps[4] as MapDrawing.Fill).color)
         for ((index, shape) in decals.withIndex()) {
             val step = steps[5 + index]

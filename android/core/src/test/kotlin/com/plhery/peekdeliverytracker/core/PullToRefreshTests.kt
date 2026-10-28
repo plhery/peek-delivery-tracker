@@ -214,7 +214,7 @@ class PullToRefreshTests {
             override fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double) = error("curve")
             override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) = error("arc")
             override fun ellipse(x: Double, y: Double, width: Double, height: Double) = error("ellipse")
-            override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) = error("rect")
+            override fun curve(x: Double, y: Double, control1X: Double, control1Y: Double, control2X: Double, control2Y: Double) = error("curve")
             override fun close() = error("close")
         })
         assertEquals(listOf(Point(3.125, 7.5), Point(5.625, 10.0), Point(11.875, 3.75)), points)

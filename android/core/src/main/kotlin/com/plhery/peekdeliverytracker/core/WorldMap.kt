@@ -938,11 +938,16 @@ sealed interface MapDrawing {
     ) : MapDrawing
 }
 
-/** SwiftUI's StrokeStyle: butt ends and mitred corners unless it says otherwise; a dash of nothing draws a solid line. */
+/**
+ * SwiftUI's StrokeStyle: butt ends and mitred corners unless it says otherwise; a dash of nothing draws a solid line.
+ * A mitre longer than `miterLimit` line widths is bevelled. The limit is CoreGraphics' 10, which no iPhone stroke
+ * changes, where Android's Paint and Compose's Stroke default to 4: :app passes it on rather than keep its own.
+ */
 data class StrokeStyle(
     val lineWidth: Double,
     val lineCap: LineCap = LineCap.Butt,
     val lineJoin: LineJoin = LineJoin.Miter,
+    val miterLimit: Double = 10.0,
     val dash: List<Double> = emptyList(),
 ) {
     enum class LineCap { Butt, Round, Square }

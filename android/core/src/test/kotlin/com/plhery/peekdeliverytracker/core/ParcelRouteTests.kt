@@ -326,13 +326,13 @@ class ParcelRouteTests {
                 override fun move(x: Double, y: Double) { pieces.add("M $x $y") }
                 override fun line(x: Double, y: Double) { pieces.add("L $x $y") }
                 override fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double) { pieces.add("Q $x $y $controlX $controlY") }
+                override fun curve(x: Double, y: Double, control1X: Double, control1Y: Double, control2X: Double, control2Y: Double) {
+                    pieces.add("C $x $y $control1X $control1Y $control2X $control2Y")
+                }
                 override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) {
                     pieces.add("A $centerX $centerY $radius $startAngle $delta")
                 }
                 override fun ellipse(x: Double, y: Double, width: Double, height: Double) { pieces.add("E $x $y $width $height") }
-                override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) {
-                    pieces.add("R $x $y $width $height $cornerRadius")
-                }
                 override fun close() { pieces.add("Z") }
             })
             return pieces
@@ -345,11 +345,11 @@ class ParcelRouteTests {
         path.addRelativeArc(Point(8.0, 9.0), radius = 10.0, startAngle = 0.5, delta = -1.5)
         // A rectangle given from its far corner is drawn from its near one, as CGRect stands it.
         path.addPath(MapPath.ellipse(Rect(30.0, 40.0, -20.0, -10.0)))
-        path.addPath(MapPath.roundedRect(Rect(1.0, 2.0, 30.0, 12.0), cornerRadius = 7.0))
+        path.addCurve(Point(11.0, 12.0), control1 = Point(13.0, 14.0), control2 = Point(15.0, 16.0))
         path.addPath(MapPath.rect(Rect(0.0, 0.0, 4.0, 3.0)))
         assertEquals(
             (0 until 20).map { "L $it.0 1.0" } + listOf(
-                "Z", "M 2.0 3.0", "Q 4.0 5.0 6.0 7.0", "A 8.0 9.0 10.0 0.5 -1.5", "E 10.0 30.0 20.0 10.0", "R 1.0 2.0 30.0 12.0 7.0",
+                "Z", "M 2.0 3.0", "Q 4.0 5.0 6.0 7.0", "A 8.0 9.0 10.0 0.5 -1.5", "E 10.0 30.0 20.0 10.0", "C 11.0 12.0 13.0 14.0 15.0 16.0",
                 "M 0.0 0.0", "L 4.0 0.0", "L 4.0 3.0", "L 0.0 3.0", "Z",
             ),
             replayed(path),
@@ -360,11 +360,67 @@ class ParcelRouteTests {
         assertTrue(label.containsEvenOdd(Point(20.0, 10.0)))
         assertFalse(label.containsEvenOdd(Point(0.5, 0.5)))
         assertEquals(Point(40.0, 10.0), label.currentPoint)
+        assertEquals(Rect(0.0, 0.0, 40.0, 20.0), label.boundingBoxOfPath)
         path.rewind()
         assertTrue(path.isEmpty)
         assertNull(path.currentPoint)
         path.move(Point(1.0, 2.0))
         assertEquals(listOf("M 1.0 2.0"), replayed(path))
+    }
+
+    // Not an iPhone test: the labels' rounded rectangles are SwiftUI's `Path(roundedRect:cornerRadius:)`, element for
+    // element (SwiftUI's own, from a swiftc harness on the Mac).
+    @Test
+    fun aRoundedRectangleHasSwiftUIsContinuousCorners() {
+        // The short sides leave each corner 3 units past its radius, short of the 3.7 it takes, so their curves draw in.
+        assertPathElements(
+            listOf(
+                "M 100 10", "L 100 9.9999997615814209",
+                "C 100 12.550861716270447 100 13.985306262969971 99.475620195269585 15.579542100429535",
+                "C 98.816579952836037 17.390231907367706 97.390231907367706 18.816579952836037 95.579542100429535 19.475620195269585",
+                "C 93.921150922775269 20 92.380569934844971 20 89.299345374107361 20", "L 10.700654625892639 20",
+                "C 7.6194300651550293 20 6.0788490772247314 20 4.4204578995704651 19.475620195269585",
+                "C 2.6097680926322937 18.816579952836037 1.1834200471639633 17.390231907367706 0.52437980473041534 15.579542100429535",
+                "C 0 13.985306262969971 0 12.550861716270447 0 9.9999997615814209", "L 0 10.000000238418579",
+                "C 0 7.4491382837295532 0 6.0146937370300293 0.52437980473041534 4.4204578995704651",
+                "C 1.1834200471639633 2.6097680926322937 2.6097680926322937 1.1834200471639633 4.4204578995704651 0.52437980473041534",
+                "C 6.0788490772247314 0 7.6194300651550293 0 10.700654625892639 0", "L 89.299345374107361 0",
+                "C 92.380569934844971 0 93.921150922775269 0 95.579542100429535 0.52437980473041534",
+                "C 97.390231907367706 1.1834200471639633 98.816579952836037 2.6097680926322937 99.475620195269585 4.4204578995704651",
+                "C 100 6.0146937370300293 100 7.4491382837295532 100 10.000000238418579", "Z",
+            ),
+            MapPath.roundedRect(Rect(0.0, 0.0, 100.0, 20.0), cornerRadius = 7.0),
+        )
+        // The capsule: its sides meet in the middle, with room to spare across but none up and down.
+        assertPathElements(
+            listOf(
+                "M 40 13", "L 40 13",
+                "C 40 13.520000278949738 40 15.340000092983246 39.026151791214943 17.790578186511993",
+                "C 37.802219912409782 21.153287827968597 35.153287827968597 23.802219912409782 31.790578186511993 25.026151791214943",
+                "C 28.710708856582642 26 25.849629878997803 26 20.127355694770813 26", "L 19.872644305229187 26",
+                "C 14.150370121002197 26 11.289291143417358 26 8.2094218134880066 25.026151791214943",
+                "C 4.8467121720314026 23.802219912409782 2.1977800875902176 21.153287827968597 0.97384820878505707 17.790578186511993",
+                "C 0 15.340000092983246 0 13.520000278949738 0 13", "L 0 13",
+                "C 0 12.479999721050262 0 10.659999907016754 0.97384820878505707 8.2094218134880066",
+                "C 2.1977800875902176 4.8467121720314026 4.8467121720314026 2.1977800875902176 8.2094218134880066 0.97384820878505707",
+                "C 11.289291143417358 0 14.150370121002197 0 19.872644305229187 0", "L 20.127355694770813 0",
+                "C 25.849629878997803 0 28.710708856582642 0 31.790578186511993 0.97384820878505707",
+                "C 35.153287827968597 2.1977800875902176 37.802219912409782 4.8467121720314026 39.026151791214943 8.2094218134880066",
+                "C 40 10.659999907016754 40 12.479999721050262 40 13", "Z",
+            ),
+            MapPath.roundedRect(Rect(0.0, 0.0, 40.0, 26.0), cornerRadius = 13.0),
+        )
+        // No radius is the plain rectangle, a negative one or no width the four sides from the right middle; a rectangle
+        // given from its far corner is drawn from its near one.
+        assertPathElements(listOf("M 1 4", "L 4 4", "L 4 6", "L 1 6", "Z"), MapPath.roundedRect(Rect(4.0, 6.0, -3.0, -2.0), cornerRadius = 0.0))
+        assertPathElements(
+            listOf("M 10 5", "L 10 10", "L 0 10", "L 0 0", "L 10 0", "Z"),
+            MapPath.roundedRect(Rect(0.0, 0.0, 10.0, 10.0), cornerRadius = -1.0),
+        )
+        assertPathElements(
+            listOf("M 3 9", "L 3 14", "L 3 14", "L 3 4", "L 3 4", "Z"),
+            MapPath.roundedRect(Rect(3.0, 4.0, 0.0, 10.0), cornerRadius = 5.0),
+        )
     }
 
     /**

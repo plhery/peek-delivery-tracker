@@ -216,10 +216,10 @@ class Vector3(val x: Double, val y: Double, val z: Double) {
 }
 
 /**
- * SwiftUI's Path, built the way the map builds one: moves, lines, quadratic curves, arcs of a circle, ellipses and
- * rounded rectangles. It is a builder, filled in place as Swift fills an `inout Path`; :app draws it by replaying it
- * into its own path. Arcs, ellipses and rounded rectangles are kept whole rather than as CoreGraphics' Bézier pieces,
- * so each platform draws them its own way.
+ * SwiftUI's Path, built the way the map builds one: moves, lines, quadratic and cubic curves, arcs of a circle and
+ * ellipses. It is a builder, filled in place as Swift fills an `inout Path`; :app draws it by replaying it into its own
+ * path. Arcs and ellipses are kept whole rather than as CoreGraphics' Bézier pieces, so each platform draws them its
+ * own way; a rounded rectangle is SwiftUI's own curves, as no platform has its continuous corners.
  * The map rebuilds its paths each frame, so they hold plain numbers rather than an object per point.
  */
 class MapPath {
@@ -229,6 +229,9 @@ class MapPath {
         fun line(x: Double, y: Double)
         fun quadCurve(x: Double, y: Double, controlX: Double, controlY: Double)
 
+        /** `addCurve(to:control1:control2:)`: a cubic Bézier curve from the current point. */
+        fun curve(x: Double, y: Double, control1X: Double, control1Y: Double, control2X: Double, control2Y: Double)
+
         /**
          * `addRelativeArc(center:radius:startAngle:delta:)`: a line from the current point to the arc's start, then
          * the arc, `delta` radians from `startAngle`, positive toward screen y.
@@ -237,12 +240,6 @@ class MapPath {
 
         /** `Path(ellipseIn:)`: a closed subpath of its own, starting at the rectangle's right middle. */
         fun ellipse(x: Double, y: Double, width: Double, height: Double)
-
-        /**
-         * `Path(roundedRect:cornerRadius:)`: a closed subpath of its own, starting at the rectangle's right middle. Its
-         * corners are SwiftUI's continuous ones, which ease into the sides rather than meet them as quarter circles.
-         */
-        fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double)
 
         fun close()
     }
@@ -293,6 +290,19 @@ class MapPath {
 
     fun addQuadCurve(to: Point, control: Point) = addQuadCurve(to.x, to.y, control.x, control.y)
 
+    fun addCurve(x: Double, y: Double, control1X: Double, control1Y: Double, control2X: Double, control2Y: Double) {
+        add(CURVE, 6)
+        numbers[numberCount++] = x
+        numbers[numberCount++] = y
+        numbers[numberCount++] = control1X
+        numbers[numberCount++] = control1Y
+        numbers[numberCount++] = control2X
+        numbers[numberCount++] = control2Y
+    }
+
+    fun addCurve(to: Point, control1: Point, control2: Point) =
+        addCurve(to.x, to.y, control1.x, control1.y, control2.x, control2.y)
+
     fun addRelativeArc(center: Point, radius: Double, startAngle: Double, delta: Double) {
         add(ARC, 5)
         numbers[numberCount++] = center.x
@@ -325,7 +335,7 @@ class MapPath {
                 QUAD -> sink.quadCurve(n[at], n[at + 1], n[at + 2], n[at + 3])
                 ARC -> sink.relativeArc(n[at], n[at + 1], n[at + 2], n[at + 3], n[at + 4])
                 ELLIPSE -> sink.ellipse(n[at], n[at + 1], n[at + 2], n[at + 3])
-                ROUNDED -> sink.roundedRect(n[at], n[at + 1], n[at + 2], n[at + 3], n[at + 4])
+                CURVE -> sink.curve(n[at], n[at + 1], n[at + 2], n[at + 3], n[at + 4], n[at + 5])
                 else -> sink.close()
             }
             at += COUNTS[verbs[index].toInt()]
@@ -351,16 +361,15 @@ class MapPath {
                     current = Point(x, y)
                 }
 
+                override fun curve(x: Double, y: Double, control1X: Double, control1Y: Double, control2X: Double, control2Y: Double) {
+                    current = Point(x, y)
+                }
+
                 override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) {
                     current = arcPoint(centerX, centerY, radius, startAngle + delta)
                 }
 
                 override fun ellipse(x: Double, y: Double, width: Double, height: Double) {
-                    start = Point(x + width, y + height / 2)
-                    current = start
-                }
-
-                override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) {
                     start = Point(x + width, y + height / 2)
                     current = start
                 }
@@ -416,6 +425,31 @@ class MapPath {
                     current = Point(x, y)
                 }
 
+                // A cubic curve turns back at most twice on each axis, where its derivative, a quadratic, is zero.
+                override fun curve(x: Double, y: Double, control1X: Double, control1Y: Double, control2X: Double, control2Y: Double) {
+                    add(x, y)
+                    fun turns(from: Double, control1: Double, control2: Double, to: Double): List<Double> {
+                        val a = to - 3 * control2 + 3 * control1 - from
+                        val b = 2 * (from - 2 * control1 + control2)
+                        val c = control1 - from
+                        val roots = if (a == 0.0) {
+                            if (b == 0.0) emptyList() else listOf(-c / b)
+                        } else {
+                            val discriminant = b * b - 4 * a * c
+                            if (discriminant < 0) emptyList() else sqrt(discriminant).let { listOf((-b + it) / (2 * a), (-b - it) / (2 * a)) }
+                        }
+                        return roots.filter { it > 0 && it < 1 }
+                    }
+                    for (t in turns(current.x, control1X, control2X, x) + turns(current.y, control1Y, control2Y, y)) {
+                        val u = 1 - t
+                        add(
+                            u * u * u * current.x + 3 * u * u * t * control1X + 3 * u * t * t * control2X + t * t * t * x,
+                            u * u * u * current.y + 3 * u * u * t * control1Y + 3 * u * t * t * control2Y + t * t * t * y,
+                        )
+                    }
+                    current = Point(x, y)
+                }
+
                 // The arc's ends, and each quarter of the circle it passes, where it reaches furthest on an axis.
                 override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) {
                     val first = arcPoint(centerX, centerY, radius, startAngle)
@@ -441,8 +475,6 @@ class MapPath {
                     start = Point(x + width, y + height / 2)
                     current = start
                 }
-
-                override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) = ellipse(x, y, width, height)
 
                 override fun close() {
                     current = start
@@ -524,6 +556,22 @@ class MapPath {
                 }
             }
 
+            override fun curve(x: Double, y: Double, control1X: Double, control1Y: Double, control2X: Double, control2Y: Double) {
+                val points = run ?: return
+                val from = points.last()
+                val steps = 32
+                for (step in 1..steps) {
+                    val t = step.toDouble() / steps
+                    val u = 1 - t
+                    points.add(
+                        Point(
+                            u * u * u * from.x + 3 * u * u * t * control1X + 3 * u * t * t * control2X + t * t * t * x,
+                            u * u * u * from.y + 3 * u * u * t * control1Y + 3 * u * t * t * control2Y + t * t * t * y,
+                        ),
+                    )
+                }
+            }
+
             override fun relativeArc(centerX: Double, centerY: Double, radius: Double, startAngle: Double, delta: Double) {
                 val first = arcPoint(centerX, centerY, radius, startAngle)
                 val points = run?.also { it.add(first) } ?: begin(first)
@@ -539,24 +587,6 @@ class MapPath {
                     val angle = 2 * PI * step / steps
                     points.add(Point(rect.midX + rect.width / 2 * cos(angle), rect.midY + rect.height / 2 * sin(angle)))
                 }
-                begin(points.first())
-            }
-
-            // Corners as quarter circles, near enough to the continuous ones to tell what a fill covers.
-            override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) {
-                val radius = min(cornerRadius, min(width, height) / 2)
-                val points = begin(Point(x + width, y + height / 2))
-                val corners = listOf(
-                    Point(x + width - radius, y + height - radius), Point(x + radius, y + height - radius),
-                    Point(x + radius, y + radius), Point(x + width - radius, y + radius),
-                )
-                for ((index, corner) in corners.withIndex()) {
-                    for (step in 0..8) {
-                        val angle = PI / 2 * (index + step / 8.0)
-                        points.add(Point(corner.x + radius * cos(angle), corner.y + radius * sin(angle)))
-                    }
-                }
-                points.add(points.first())
                 begin(points.first())
             }
 
@@ -580,10 +610,34 @@ class MapPath {
         private const val ARC: Byte = 3
         private const val ELLIPSE: Byte = 4
         private const val CLOSE: Byte = 5
-        private const val ROUNDED: Byte = 6
+        private const val CURVE: Byte = 6
 
         /** How many numbers each verb takes. */
-        private val COUNTS = intArrayOf(2, 2, 4, 5, 4, 0, 5)
+        private val COUNTS = intArrayOf(2, 2, 4, 5, 4, 0, 6)
+
+        // SwiftUI's continuous corner, in its own single-precision numbers and in radii: where the corner leaves a side
+        // and its first two control points, on a side with room to spare (FULL) and on one with none (TIGHT), and the
+        // ends and control points of its middle curve.
+        private val CORNER_STRETCH = 1.528665f.toDouble() - 1
+        private val FULL_CONTROL1 = 1.08849f.toDouble()
+        private val FULL_CONTROL2 = 0.868407f.toDouble()
+        private val TIGHT_CONTROL1 = 0.96f.toDouble()
+        private val TIGHT_CONTROL2 = 0.82f.toDouble()
+        private val MIDDLE_END1 = 0.0749114f.toDouble()
+        private val MIDDLE_END2 = 0.631494f.toDouble()
+        private val MIDDLE_CONTROL1 = 0.16906f.toDouble()
+        private val MIDDLE_CONTROL2 = 0.372824f.toDouble()
+
+        private fun single(value: Double): Double = value.toFloat().toDouble()
+
+        /** A continuous corner's reach along one side, in radii, for a side `half` long from its middle to the corner. */
+        private class CornerReach(half: Double, radius: Double) {
+            // How much of its full length the side gives the corner, from 0 to 1, in Float as SwiftUI works it out.
+            private val room = swiftMin(1.0, ((half.toFloat() - radius.toFloat()) / (radius.toFloat() * CORNER_STRETCH.toFloat())).toDouble())
+            val start = single(1 + CORNER_STRETCH * room)
+            val control1 = single(TIGHT_CONTROL1 + (FULL_CONTROL1 - TIGHT_CONTROL1) * room)
+            val control2 = single(TIGHT_CONTROL2 + (FULL_CONTROL2 - TIGHT_CONTROL2) * room)
+        }
 
         /** `Path(_: CGRect)`: from the top left corner, clockwise on screen. */
         fun rect(rect: Rect): MapPath = MapPath().also {
@@ -594,14 +648,60 @@ class MapPath {
             it.closeSubpath()
         }
 
-        /** `Path(roundedRect:cornerRadius:)`, with SwiftUI's continuous corners. */
-        fun roundedRect(rect: Rect, cornerRadius: Double): MapPath = MapPath().also {
-            it.add(ROUNDED, 5)
-            it.numbers[it.numberCount++] = rect.minX
-            it.numbers[it.numberCount++] = rect.minY
-            it.numbers[it.numberCount++] = rect.width
-            it.numbers[it.numberCount++] = rect.height
-            it.numbers[it.numberCount++] = cornerRadius
+        /**
+         * `Path(roundedRect:cornerRadius:)` and `RoundedRectangle(cornerRadius:)`, whose corners are continuous unless
+         * Swift asks for `.circular`: each corner eases into its sides through three cubic curves rather than meeting
+         * them as a quarter circle. The elements are SwiftUI's own, in its order: from the right middle, down, then
+         * round clockwise on screen. The radius stops at half the shorter side, and on a side with less than about
+         * 1.53 radii from its middle to a corner, that side's curves draw in toward a quarter circle. A radius of exactly
+         * 0 gives `Path(_: CGRect)`; a negative one, or no width or height, the four sides from the right middle.
+         */
+        fun roundedRect(rect: Rect, cornerRadius: Double): MapPath {
+            if (cornerRadius == 0.0) return MapPath.rect(rect)
+            val minX = rect.minX
+            val minY = rect.minY
+            val maxX = rect.maxX
+            val maxY = rect.maxY
+            val midY = (minY + maxY) / 2
+            val radius = swiftMin(cornerRadius, swiftMin(rect.width, rect.height) / 2)
+            val path = MapPath()
+            path.move(maxX, midY)
+            if (!(radius > 0)) {
+                path.addLine(maxX, maxY)
+                path.addLine(minX, maxY)
+                path.addLine(minX, minY)
+                path.addLine(maxX, minY)
+                path.closeSubpath()
+                return path
+            }
+            val x = CornerReach(rect.width / 2, radius)
+            val y = CornerReach(rect.height / 2, radius)
+            fun right(reach: Double) = maxX - radius * reach
+            fun left(reach: Double) = minX + radius * reach
+            fun bottom(reach: Double) = maxY - radius * reach
+            fun top(reach: Double) = minY + radius * reach
+            val end1 = MIDDLE_END1
+            val end2 = MIDDLE_END2
+            val control1 = MIDDLE_CONTROL1
+            val control2 = MIDDLE_CONTROL2
+            path.addLine(maxX, bottom(y.start))
+            path.addCurve(right(end1), bottom(end2), maxX, bottom(y.control1), maxX, bottom(y.control2))
+            path.addCurve(right(end2), bottom(end1), right(control1), bottom(control2), right(control2), bottom(control1))
+            path.addCurve(right(x.start), maxY, right(x.control2), maxY, right(x.control1), maxY)
+            path.addLine(left(x.start), maxY)
+            path.addCurve(left(end2), bottom(end1), left(x.control1), maxY, left(x.control2), maxY)
+            path.addCurve(left(end1), bottom(end2), left(control2), bottom(control1), left(control1), bottom(control2))
+            path.addCurve(minX, bottom(y.start), minX, bottom(y.control2), minX, bottom(y.control1))
+            path.addLine(minX, top(y.start))
+            path.addCurve(left(end1), top(end2), minX, top(y.control1), minX, top(y.control2))
+            path.addCurve(left(end2), top(end1), left(control1), top(control2), left(control2), top(control1))
+            path.addCurve(left(x.start), minY, left(x.control2), minY, left(x.control1), minY)
+            path.addLine(right(x.start), minY)
+            path.addCurve(right(end2), top(end1), right(x.control1), minY, right(x.control2), minY)
+            path.addCurve(right(end1), top(end2), right(control2), top(control1), right(control1), top(control2))
+            path.addCurve(maxX, top(y.start), maxX, top(y.control2), maxX, top(y.control1))
+            path.closeSubpath()
+            return path
         }
 
         fun ellipse(rect: Rect): MapPath = MapPath().also {

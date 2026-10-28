@@ -322,8 +322,8 @@ class WorldDetailTests {
 
             override fun ellipse(x: Double, y: Double, width: Double, height: Double) = throw AssertionError("The tiles draw no ellipses")
 
-            override fun roundedRect(x: Double, y: Double, width: Double, height: Double, cornerRadius: Double) =
-                throw AssertionError("The tiles draw no rectangles")
+            override fun curve(x: Double, y: Double, control1X: Double, control1Y: Double, control2X: Double, control2Y: Double) =
+                throw AssertionError("The tiles draw no cubic curves")
 
             override fun close() {
                 lines.last().add(lines.last().first())

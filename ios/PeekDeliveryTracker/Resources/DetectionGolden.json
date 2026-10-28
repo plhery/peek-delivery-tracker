@@ -65808,6 +65808,19 @@
     ]
   },
   {
+    "input": "9C0000J000001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "aliexpress",
+      "poste-italiane"
+    ],
+    "asked": [
+      "poste-italiane",
+      "aliexpress"
+    ]
+  },
+  {
     "input": "9C1000A000001",
     "carrier": "unknown",
     "confidence": "low",
@@ -80566,11 +80579,27 @@
     ]
   },
   {
-    "input": "KTDWE9900000001",
-    "carrier": "ktd",
-    "confidence": "high",
+    "input": "KTDWE0000000001",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "dhlink",
       "ktd"
+    ],
+    "asked": [
+      "dhlink"
+    ]
+  },
+  {
+    "input": "KTDWE9900000001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhlink",
+      "ktd"
+    ],
+    "asked": [
+      "dhlink"
     ]
   },
   {

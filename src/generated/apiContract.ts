@@ -271,6 +271,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^9C\\d{4}J\\d{6}$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^RTZ5P\\d{2}D\\d{8}$",
         "confidence": "low"
       },
@@ -14630,6 +14634,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^YF\\d{10}CN$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^KTDWE\\d{10}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://www.dhlink.com/trackQuery"
@@ -14830,7 +14838,7 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^KTDWE\\d{10}$",
-        "confidence": "high"
+        "confidence": "low"
       }
     ]
   },

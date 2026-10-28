@@ -270,6 +270,10 @@
           "confidence": "low"
         },
         {
+          "pattern": "^9C\\d{4}J\\d{6}$",
+          "confidence": "low"
+        },
+        {
           "pattern": "^RTZ5P\\d{2}D\\d{8}$",
           "confidence": "low"
         },
@@ -14629,6 +14633,10 @@
         {
           "pattern": "^YF\\d{10}CN$",
           "confidence": "low"
+        },
+        {
+          "pattern": "^KTDWE\\d{10}$",
+          "confidence": "low"
         }
       ],
       "trackingSearchUrl": "https://www.dhlink.com/trackQuery"
@@ -14829,7 +14837,7 @@
       "detectionRules": [
         {
           "pattern": "^KTDWE\\d{10}$",
-          "confidence": "high"
+          "confidence": "low"
         }
       ]
     },

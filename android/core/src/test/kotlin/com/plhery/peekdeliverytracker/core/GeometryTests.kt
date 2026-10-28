@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.core
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
@@ -133,5 +135,30 @@ class GeometryTests {
             assertEquals(label, velocity - target, spring.velocity(target, initialVelocity, time), 1e-10)
         }
         assertEquals(3.0, spring.velocity(2.0, 3.0, time = 0.0), 0.0)
+    }
+
+    @Test
+    fun aPathIsKnownAgainByWhatItHolds() {
+        fun box(side: Double) = MapPath().apply {
+            move(0.0, 0.0)
+            addLine(side, -0.0)
+            addRelativeArc(Point(side, side), side, 0.0, 1.0)
+            closeSubpath()
+        }
+        val box = box(2.0)
+        val again = box(2.0).apply { rewind() }.apply { addPath(box(2.0)) }
+        assertTrue(box.sameAs(again))
+        assertEquals(box.contentHash(), again.contentHash())
+        // -0.0 is 0.0.
+        val zero = MapPath().apply { move(0.0, 0.0); addLine(2.0, 0.0); addRelativeArc(Point(2.0, 2.0), 2.0, 0.0, 1.0); closeSubpath() }
+        assertTrue(box.sameAs(zero))
+        assertEquals(box.contentHash(), zero.contentHash())
+        assertFalse(box.sameAs(box(3.0)))
+        assertFalse(box.sameAs(MapPath().apply { addPath(box); closeSubpath() }))
+        // A copy keeps what the path held.
+        val copy = box.copy()
+        box.closeSubpath()
+        assertTrue(copy.sameAs(again))
+        assertFalse(copy.sameAs(box))
     }
 }

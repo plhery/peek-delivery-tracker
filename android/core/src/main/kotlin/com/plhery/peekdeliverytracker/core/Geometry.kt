@@ -333,6 +333,26 @@ class MapPath {
         numberCount += path.numberCount
     }
 
+    /** A path holding what this one holds now, whatever is later added to either. */
+    fun copy(): MapPath = MapPath().also { it.addPath(this) }
+
+    /** Whether `other` holds the same pieces with the same numbers, so either draws the same platform path. */
+    fun sameAs(other: MapPath): Boolean {
+        if (verbCount != other.verbCount || numberCount != other.numberCount) return false
+        for (index in 0 until verbCount) if (verbs[index] != other.verbs[index]) return false
+        for (index in 0 until numberCount) if (numbers[index] != other.numbers[index]) return false
+        return true
+    }
+
+    /** A hash of the pieces and their numbers, equal for paths that are [sameAs] each other. */
+    fun contentHash(): Int {
+        var hash = verbCount
+        for (index in 0 until verbCount) hash = 31 * hash + verbs[index]
+        // Plus 0.0 makes -0.0 hash as 0.0, which it equals.
+        for (index in 0 until numberCount) hash = 31 * hash + (numbers[index] + 0.0).hashCode()
+        return hash
+    }
+
     fun replay(sink: Sink) {
         var at = 0
         val n = numbers

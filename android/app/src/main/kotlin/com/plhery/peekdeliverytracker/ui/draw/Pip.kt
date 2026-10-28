@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
@@ -27,6 +28,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -64,15 +66,16 @@ private val FRAME = PipGeometry.frame
 fun PipCanvas(modifier: Modifier = Modifier, draw: (MapDrawingContext) -> Unit) {
     val measurer = rememberTextMeasurer()
     val colors = PeekTheme.colors
+    val cache = remember { MapDrawingCache() }
     Canvas(modifier.clearAndSetSemantics {}) {
         scale(density, density, pivot = Offset.Zero) {
-            drawPip(draw, colors.dark, measurer)
+            drawPip(draw, colors.dark, measurer, cache)
         }
     }
 }
 
-private fun DrawScope.drawPip(draw: (MapDrawingContext) -> Unit, dark: Boolean, measurer: TextMeasurer?) {
-    drawMapDrawings(MapDrawingContext().also(draw).drawing, dark, textMeasurer = measurer)
+private fun DrawScope.drawPip(draw: (MapDrawingContext) -> Unit, dark: Boolean, measurer: TextMeasurer?, cache: MapDrawingCache) {
+    drawMapDrawings(MapDrawingContext().also(draw).drawing, dark, textMeasurer = measurer, cache = cache)
 }
 
 /**
@@ -84,9 +87,10 @@ private fun DrawScope.drawPip(draw: (MapDrawingContext) -> Unit, dark: Boolean, 
 fun KraftPipFace(happy: Double, modifier: Modifier = Modifier, smile: Double = 1.0) {
     val blink = rememberPipBlinkClock(blinks = !PeekTheme.reduceMotion && happy == 0.0)
     val dark = PeekTheme.colors.dark
+    val cache = remember { MapDrawingCache() }
     Canvas(modifier.size(FRAME.width.dp, FRAME.height.dp).clearAndSetSemantics {}) {
         scale(density, density, pivot = Offset.Zero) {
-            drawPip({ PipArtwork.kraftFace(it, k = 1.0, happy = happy, blink = blink.time, smile = smile) }, dark, null)
+            drawPip({ PipArtwork.kraftFace(it, k = 1.0, happy = happy, blink = blink.time, smile = smile) }, dark, null, cache)
         }
     }
 }
@@ -102,12 +106,13 @@ fun SmallPip(modifier: Modifier = Modifier, label: PipLabel? = null, happy: Doub
     val blink = rememberPipBlinkClock(blinks = blinks && !PeekTheme.reduceMotion && happy == 0.0)
     val measurer = rememberTextMeasurer()
     val dark = PeekTheme.colors.dark
+    val cache = remember { MapDrawingCache() }
     val crop = PipGeometry.stickerCrop
     Canvas(modifier.aspectRatio((crop.width / crop.height).toFloat()).clearAndSetSemantics {}) {
         val scale = (size.width / crop.width).toFloat()
         scale(scale, scale, pivot = Offset.Zero) {
             translate(-crop.minX.toFloat(), -crop.minY.toFloat()) {
-                drawPip({ PipArtwork.sticker(it, label, happy, blink.time) }, dark, measurer)
+                drawPip({ PipArtwork.sticker(it, label, happy, blink.time) }, dark, measurer, cache)
             }
         }
     }
@@ -124,6 +129,7 @@ fun InkPip(mood: PipMood, side: Int, below: Boolean, ink: Color, surface: Color,
     val reduceMotion = PeekTheme.reduceMotion
     val palette = remember(ink, surface, dark) { PipPalette.ink(AdaptiveColor(ink.toRgba()), AdaptiveColor(surface.toRgba()), dark) }
     val clock = rememberInkPipClock(mood, reduceMotion)
+    val cache = remember { MapDrawingCache() }
     val arrival = remember { Animatable(if (reduceMotion) 1f else 0f) }
     LaunchedEffect(Unit) {
         if (reduceMotion) arrival.snapTo(1f) else arrival.animateTo(1f, Motion.spring(duration = 0.6))
@@ -140,14 +146,14 @@ fun InkPip(mood: PipMood, side: Int, below: Boolean, ink: Color, surface: Color,
         val frame = clock.frame(mood)
         val scale = (size.width / FRAME.width).toFloat()
         scale(scale, scale, pivot = Offset.Zero) {
-            drawPip({ PipArtwork.ink(it, palette, mood, side, below, frame.time, frame.opening, frame.before) }, dark, null)
+            drawPip({ PipArtwork.ink(it, palette, mood, side, below, frame.time, frame.opening, frame.before) }, dark, null, cache)
         }
     }
 }
 
 /**
  * Told where Pip shows in the window, by a card that has something come out of his box (`pipSight`): his bounds in
- * pixels.
+ * points (dp) from the window's top left, as iOS gives his frame in its global space.
  */
 val LocalPipSight = staticCompositionLocalOf<((Rect) -> Unit)?> { null }
 
@@ -161,15 +167,19 @@ val LocalPipSight = staticCompositionLocalOf<((Rect) -> Unit)?> { null }
 fun MapPip(place: PipPlacement, dot: Point?, ink: Color, surface: Color, modifier: Modifier = Modifier) {
     val reduceMotion = PeekTheme.reduceMotion
     val sight = LocalPipSight.current
+    val pixelsPerPoint = LocalDensity.current.density
     val anchor = dot ?: place.origin
     val x = place.origin.x - anchor.x
     val y = place.origin.y - anchor.y
-    // Where he stands from the dot, to the half point: the camera's own arithmetic is not a move.
-    val stand = Triple((x * 2).roundToInt() / 2.0, (y * 2).roundToInt() / 2.0, place.width)
-    val offset = remember { Animatable(Offset(x.toFloat(), y.toFloat()), Offset.VectorConverter) }
+    // Where he stands from the dot, to the half point: the camera's own arithmetic is not a move. He springs from
+    // one stand to the next, and goes the rest of the way at once, as SwiftUI offsets him without animation then.
+    val standX = (x * 2).roundToInt() / 2.0
+    val standY = (y * 2).roundToInt() / 2.0
+    val stand = Triple(standX, standY, place.width)
+    val offset = remember { Animatable(Offset(standX.toFloat(), standY.toFloat()), Offset.VectorConverter) }
     val width = remember { Animatable(place.width.toFloat()) }
     LaunchedEffect(stand) {
-        val to = Offset(x.toFloat(), y.toFloat())
+        val to = Offset(standX.toFloat(), standY.toFloat())
         if (reduceMotion) {
             offset.snapTo(to)
             width.snapTo(place.width.toFloat())
@@ -184,10 +194,15 @@ fun MapPip(place: PipPlacement, dot: Point?, ink: Color, surface: Color, modifie
             val pipHeight = (width.value * FRAME.height / FRAME.width).toFloat().dp.roundToPx()
             val pip = measurable.measure(Constraints.fixed(pipWidth, pipHeight))
             layout(0, 0) {
-                pip.place(((anchor.x + offset.value.x) * density).roundToInt(), ((anchor.y + offset.value.y) * density).roundToInt())
+                val left = anchor.x + offset.value.x + (x - standX)
+                val top = anchor.y + offset.value.y + (y - standY)
+                pip.place((left * density).roundToInt(), (top * density).roundToInt())
             }
         }
-        .onGloballyPositioned { sight?.invoke(it.boundsInWindow()) }
+        .onGloballyPositioned { coordinates ->
+            val bounds = coordinates.boundsInWindow()
+            sight?.invoke(Rect(bounds.left / pixelsPerPoint, bounds.top / pixelsPerPoint, bounds.right / pixelsPerPoint, bounds.bottom / pixelsPerPoint))
+        }
     InkPip(place.mood, place.side, place.below, ink, surface, placed)
 }
 
@@ -198,10 +213,10 @@ fun MapPip(place: PipPlacement, dot: Point?, ink: Color, surface: Color, modifie
  * frame of each blink and still between two, when it sleeps. Null while it doesn't blink. Read it while drawing.
  */
 @Stable
-internal class PipBlinkClock {
+internal class PipBlinkClock(blinks: Boolean) {
     internal var appeared: Long? = null
     private var shown by mutableDoubleStateOf(0.0)
-    internal var blinks by mutableStateOf(false)
+    internal var blinks by mutableStateOf(blinks)
 
     val time: Double? get() = if (blinks) shown else null
 
@@ -225,8 +240,8 @@ internal class PipBlinkClock {
 
 @Composable
 internal fun rememberPipBlinkClock(blinks: Boolean): PipBlinkClock {
-    val clock = remember { PipBlinkClock() }
-    clock.blinks = blinks
+    val clock = remember { PipBlinkClock(blinks) }
+    SideEffect { clock.blinks = blinks }
     // Its clock starts when it shows, whether it blinks yet or not.
     LaunchedEffect(Unit) {
         withFrameNanos { if (clock.appeared == null) clock.appeared = it }
@@ -242,11 +257,11 @@ internal class InkPipFrame(val time: Double?, val opening: PipOpening?, val befo
 
 /**
  * InkPip's clock: the date he is drawn at in seconds since 1 January 2001, as his bob keeps time on the iPhone (two
- * Pips bob together), and the news of his parcel's arrival. While he moves it goes on with the frames, at most 30
- * times a second, and at every frame once his box has opened.
+ * Pips bob together), and the news of his parcel's arrival. While he moves it goes on 30 times a second, asleep
+ * between two frames, and at every frame while his box opens.
  */
 @Stable
-internal class InkPipClock(private var mood: PipMood, private val wall: () -> Double) {
+internal class InkPipClock(private var mood: PipMood, reduceMotion: Boolean, private val wall: () -> Double) {
     /** When the news came, as his next frame's date in nanoseconds, and the mood he was in. */
     internal class Unboxing(val from: PipMood) {
         var at: Long? = null
@@ -257,30 +272,40 @@ internal class InkPipClock(private var mood: PipMood, private val wall: () -> Do
     val date: Double get() = nanos / 1e9
     var unboxing by mutableStateOf<Unboxing?>(null)
         private set
-    internal var moves by mutableStateOf(false)
+    internal var moves by mutableStateOf(moves(mood, reduceMotion))
+        private set
 
     /** `onChange(of: mood)`: the news of an arrival opens his box, unless motion is reduced; any other change ends it. */
     fun show(mood: PipMood, reduceMotion: Boolean) {
-        moves = !reduceMotion && (mood == PipMood.Eager || mood == PipMood.Joy)
+        moves = moves(mood, reduceMotion)
         if (mood == this.mood) return
         unboxing = if (mood == PipMood.Joy && this.mood != PipMood.Joy && !reduceMotion) Unboxing(this.mood) else null
         this.mood = mood
     }
 
     /** Moves the date on with the frames, from the wall's time at the first. */
-    internal suspend fun run(everyFrame: Boolean) {
+    internal suspend fun run() {
         val first = withFrameNanos { it }
         val start = nanos(wall())
-        var last: Long? = null
         var frame = first
         while (true) {
-            if (everyFrame || last == null || frame - last >= INTERVAL_NANOS) {
-                last = frame
-                nanos = start + (frame - first)
-                unboxing?.let { if (it.at == null) it.at = nanos }
-            }
-            frame = withFrameNanos { it }
+            nanos = start + (frame - first)
+            val news = unboxing
+            if (news != null && news.at == null) news.at = nanos
+            // The flaps swing faster than he bobs. The iPhone keeps every frame for as long as he stays joyful after
+            // the news (Pip.swift's `interval`); only the opening needs them.
+            val opening = news?.at?.let { nanos - it < OPENING_NANOS } == true
+            frame = if (opening) withFrameNanos { it } else nextFrame(after = frame)
         }
+    }
+
+    /** The first frame a 30th of a second after `after`, asleep until just before it. */
+    private suspend fun nextFrame(after: Long): Long {
+        val due = after + INTERVAL_NANOS
+        delay((INTERVAL_NANOS - WAKE_NANOS) / 1_000_000)
+        var frame = withFrameNanos { it }
+        while (frame < due) frame = withFrameNanos { it }
+        return frame
     }
 
     /** `draw`: his jump starts with the news, as his box does, which is open a second after it. */
@@ -299,7 +324,17 @@ internal class InkPipClock(private var mood: PipMood, private val wall: () -> Do
         /** TimelineView's `.animation(minimumInterval: 1 / 30)`, 2 ms early for the display's jitter. */
         const val INTERVAL_NANOS = 1_000_000_000L / 30 - 2_000_000L
 
+        /**
+         * How long before a frame is due he wakes to ask for one: late enough that at 120 Hz the next frame is the one
+         * due, early enough for a frame's own work to run late.
+         */
+        const val WAKE_NANOS = 6_000_000L
+
+        val OPENING_NANOS = nanos(PipOpening.DURATION)
+
         fun nanos(seconds: Double): Long = (seconds * 1e9).roundToLong()
+
+        fun moves(mood: PipMood, reduceMotion: Boolean) = !reduceMotion && (mood == PipMood.Eager || mood == PipMood.Joy)
     }
 }
 
@@ -308,11 +343,11 @@ private fun secondsSinceReferenceDate(): Double = (System.currentTimeMillis() - 
 
 @Composable
 internal fun rememberInkPipClock(mood: PipMood, reduceMotion: Boolean, wall: () -> Double = ::secondsSinceReferenceDate): InkPipClock {
-    val clock = remember { InkPipClock(mood, wall) }
-    clock.show(mood, reduceMotion)
-    val everyFrame = clock.unboxing != null
-    LaunchedEffect(clock.moves, everyFrame) {
-        if (clock.moves) clock.run(everyFrame)
+    val clock = remember { InkPipClock(mood, reduceMotion, wall) }
+    // Before the frame draws, so the news never finds his box drawn open first.
+    SideEffect { clock.show(mood, reduceMotion) }
+    LaunchedEffect(mood, reduceMotion) {
+        if (clock.moves) clock.run()
     }
     return clock
 }

@@ -140,13 +140,16 @@ private class ComposePathSink(private val path: Path) : MapPath.Sink {
 }
 
 /** A CGAffineTransform as Compose's matrix: x' = a x + c y + tx, y' = b x + d y + ty. */
-fun AffineTransform.toMatrix(): Matrix = Matrix().also {
-    it.values[Matrix.ScaleX] = a.toFloat()
-    it.values[Matrix.SkewY] = b.toFloat()
-    it.values[Matrix.SkewX] = c.toFloat()
-    it.values[Matrix.ScaleY] = d.toFloat()
-    it.values[Matrix.TranslateX] = tx.toFloat()
-    it.values[Matrix.TranslateY] = ty.toFloat()
+fun AffineTransform.toMatrix(): Matrix = Matrix().also { into(it) }
+
+/** Writes the transform into `matrix`, whose other entries stay the identity's. */
+private fun AffineTransform.into(matrix: Matrix) {
+    matrix.values[Matrix.ScaleX] = a.toFloat()
+    matrix.values[Matrix.SkewY] = b.toFloat()
+    matrix.values[Matrix.SkewX] = c.toFloat()
+    matrix.values[Matrix.ScaleY] = d.toFloat()
+    matrix.values[Matrix.TranslateX] = tx.toFloat()
+    matrix.values[Matrix.TranslateY] = ty.toFloat()
 }
 
 /** `context.concatenate(transform)` for the steps drawn in `block`. */
@@ -162,42 +165,126 @@ inline fun DrawScope.clipToMapPath(path: MapPath, evenOdd: Boolean = false, bloc
 
 /**
  * Carries out `steps` in order, each colour as it is in this appearance. A cut at the top level clears only what these
- * steps drew, as on the iPhone's canvas, never what lies behind. Text steps need a measurer.
+ * steps drew, as on the iPhone's canvas, never what lies behind. Text steps need a measurer. A drawing drawn again
+ * at each frame passes the same `cache` each time.
  */
 fun DrawScope.drawMapDrawings(
     steps: List<MapDrawing>,
     dark: Boolean,
     highContrast: Boolean = false,
     textMeasurer: TextMeasurer? = null,
+    cache: MapDrawingCache? = null,
 ) {
-    val painter = MapDrawingPainter(dark, highContrast, textMeasurer)
+    val painter = MapDrawingPainter(dark, highContrast, textMeasurer, cache)
     if (steps.any { it.isCut }) painter.layer(this, steps) else painter.draw(this, steps)
+    cache?.endDrawing()
+}
+
+/**
+ * The Compose paths and strokes of a drawing drawn again at each frame (Pip moving), found again by what they hold:
+ * :core records its paths anew for each frame, mostly the same shapes under another transform, and a path is far
+ * dearer for Android to build than to find. Each drawing keeps only what it used. For one canvas, on the main thread.
+ */
+class MapDrawingCache {
+    private class CachedPath(val source: MapPath, val evenOdd: Boolean, val path: Path) {
+        var drawing = 0
+    }
+
+    private class CachedStroke(val stroke: Stroke) {
+        var drawing = 0
+    }
+
+    private val paths = HashMap<Int, ArrayList<CachedPath>>()
+    private val strokes = HashMap<StrokeStyle, CachedStroke>()
+    private var drawing = 0
+
+    internal fun path(source: MapPath, evenOdd: Boolean): Path {
+        val bucket = paths.getOrPut(31 * source.contentHash() + if (evenOdd) 1 else 0) { ArrayList(1) }
+        val found = bucket.firstOrNull { it.evenOdd == evenOdd && it.source.sameAs(source) }
+            ?: CachedPath(source.copy(), evenOdd, source.toComposePath(evenOdd)).also { bucket += it }
+        found.drawing = drawing
+        return found.path
+    }
+
+    internal fun stroke(style: StrokeStyle): Stroke {
+        val found = strokes.getOrPut(style) { CachedStroke(style.toStroke()) }
+        found.drawing = drawing
+        return found.stroke
+    }
+
+    internal fun endDrawing() {
+        val buckets = paths.values.iterator()
+        while (buckets.hasNext()) {
+            val bucket = buckets.next()
+            for (index in bucket.lastIndex downTo 0) if (bucket[index].drawing != drawing) bucket.removeAt(index)
+            if (bucket.isEmpty()) buckets.remove()
+        }
+        val cached = strokes.values.iterator()
+        while (cached.hasNext()) if (cached.next().drawing != drawing) cached.remove()
+        drawing++
+    }
 }
 
 private val MapDrawing.isCut: Boolean
     get() = (this is MapDrawing.Fill && cut) || (this is MapDrawing.Stroke && cut)
 
-private class MapDrawingPainter(val dark: Boolean, val highContrast: Boolean, val textMeasurer: TextMeasurer?) {
+/** CoreGraphics' stroke: its own mitre limit (10, where Compose's default is 4) and dashes, starting at 0. */
+private fun StrokeStyle.toStroke(): Stroke {
+    val pattern = if (dash.size % 2 == 1) dash + dash else dash
+    val effect = if (pattern.isNotEmpty() && pattern.sum() > 0) {
+        PathEffect.dashPathEffect(FloatArray(pattern.size) { pattern[it].toFloat() }, 0f)
+    } else {
+        null
+    }
+    return Stroke(
+        width = lineWidth.toFloat(),
+        miter = miterLimit.toFloat(),
+        cap = when (lineCap) {
+            StrokeStyle.LineCap.Butt -> StrokeCap.Butt
+            StrokeStyle.LineCap.Round -> StrokeCap.Round
+            StrokeStyle.LineCap.Square -> StrokeCap.Square
+        },
+        join = when (lineJoin) {
+            StrokeStyle.LineJoin.Miter -> StrokeJoin.Miter
+            StrokeStyle.LineJoin.Round -> StrokeJoin.Round
+            StrokeStyle.LineJoin.Bevel -> StrokeJoin.Bevel
+        },
+        pathEffect = effect,
+    )
+}
+
+private class MapDrawingPainter(
+    val dark: Boolean,
+    val highContrast: Boolean,
+    val textMeasurer: TextMeasurer?,
+    val cache: MapDrawingCache?,
+) {
+    /** One matrix for every transform: the canvas takes its values as it is concatenated. */
+    private val matrix = Matrix()
+
     /** Carries out `steps`, each at `fade` times its own opacity (a transformed context's opacity). */
     fun draw(scope: DrawScope, steps: List<MapDrawing>, fade: Double = 1.0) {
         for (step in steps) {
             val opacity = step.opacity * fade
             when (step) {
                 is MapDrawing.Fill -> scope.drawPath(
-                    path = step.path.toComposePath(step.evenOdd),
+                    path = path(step.path, step.evenOdd),
                     color = color(step.color, opacity),
                     style = Fill,
                     blendMode = if (step.cut) BlendMode.DstOut else BlendMode.SrcOver,
                 )
                 is MapDrawing.Stroke -> scope.drawPath(
-                    path = step.path.toComposePath(),
+                    path = path(step.path, evenOdd = false),
                     color = color(step.color, opacity),
-                    style = stroke(step.style),
+                    style = cache?.stroke(step.style) ?: step.style.toStroke(),
                     blendMode = if (step.cut) BlendMode.DstOut else BlendMode.SrcOver,
                 )
                 is MapDrawing.Shade -> shade(scope, step, opacity)
                 is MapDrawing.Layer -> layer(scope, step.steps, fade)
-                is MapDrawing.Transformed -> scope.withAffineTransform(step.transform) { draw(this, step.steps, opacity) }
+                is MapDrawing.Transformed -> {
+                    step.transform.into(matrix)
+                    scope.withTransform({ transform(matrix) }) { draw(this, step.steps, opacity) }
+                }
                 is MapDrawing.Text -> text(scope, step, opacity)
                 is MapDrawing.TextLine -> textLine(scope, step, opacity)
             }
@@ -212,34 +299,11 @@ private class MapDrawingPainter(val dark: Boolean, val highContrast: Boolean, va
         canvas.restoreToCount(saved)
     }
 
+    fun path(path: MapPath, evenOdd: Boolean): Path = cache?.path(path, evenOdd) ?: path.toComposePath(evenOdd)
+
     fun color(color: AdaptiveColor, opacity: Double): Color {
         val resolved = color.resolve(dark, highContrast).toColor()
         return resolved.copy(alpha = resolved.alpha * opacity.coerceIn(0.0, 1.0).toFloat())
-    }
-
-    /** CoreGraphics' stroke: its own mitre limit (10, where Compose's default is 4) and dashes, starting at 0. */
-    fun stroke(style: StrokeStyle): Stroke {
-        val dash = if (style.dash.size % 2 == 1) style.dash + style.dash else style.dash
-        val effect = if (dash.isNotEmpty() && dash.sum() > 0) {
-            PathEffect.dashPathEffect(FloatArray(dash.size) { dash[it].toFloat() }, 0f)
-        } else {
-            null
-        }
-        return Stroke(
-            width = style.lineWidth.toFloat(),
-            miter = style.miterLimit.toFloat(),
-            cap = when (style.lineCap) {
-                StrokeStyle.LineCap.Butt -> StrokeCap.Butt
-                StrokeStyle.LineCap.Round -> StrokeCap.Round
-                StrokeStyle.LineCap.Square -> StrokeCap.Square
-            },
-            join = when (style.lineJoin) {
-                StrokeStyle.LineJoin.Miter -> StrokeJoin.Miter
-                StrokeStyle.LineJoin.Round -> StrokeJoin.Round
-                StrokeStyle.LineJoin.Bevel -> StrokeJoin.Bevel
-            },
-            pathEffect = effect,
-        )
     }
 
     /**
@@ -259,7 +323,7 @@ private class MapDrawingPainter(val dark: Boolean, val highContrast: Boolean, va
             radius = end,
             tileMode = TileMode.Clamp,
         )
-        scope.drawPath(step.path.toComposePath(), brush, alpha = opacity.coerceIn(0.0, 1.0).toFloat())
+        scope.drawPath(path(step.path, evenOdd = false), brush, alpha = opacity.coerceIn(0.0, 1.0).toFloat())
     }
 
     /**

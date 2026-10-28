@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.draw
 
+import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,6 +10,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.PipBlinkSchedule
 import com.plhery.peekdeliverytracker.core.PipMood
 import com.plhery.peekdeliverytracker.core.PipOpening
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.TestCoroutineScheduler
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -70,21 +77,73 @@ class PipClockTest {
     /** The test's wall: seconds since 2001 as the frame clock counts them, from an arbitrary moment. */
     private val wall = { 800_000_000.0 + compose.mainClock.currentTime / 1000.0 }
 
-    @Test
-    fun eagerHeBobsThirtyTimesASecond() {
-        compose.mainClock.autoAdvance = false
-        lateinit var clock: InkPipClock
-        compose.setContent { clock = rememberInkPipClock(PipMood.Eager, reduceMotion = false, wall = wall) }
-        val times = mutableListOf<Double>()
-        repeat(60) {
-            compose.mainClock.advanceTimeByFrame()
-            val time = checkNotNull(clock.frame(PipMood.Eager).time)
-            if (times.lastOrNull() != time) times += time
+    /** A display drawing a frame every `period` ms on the test's clock, at whole periods, counting the frames asked for. */
+    private class Display(private val period: Long, private val scheduler: TestCoroutineScheduler) : MonotonicFrameClock {
+        var wakes = 0
+            private set
+
+        override suspend fun <R> withFrameNanos(onFrame: (frameTimeNanos: Long) -> R): R {
+            delay(period - scheduler.currentTime % period)
+            wakes++
+            return onFrame(scheduler.currentTime * 1_000_000)
         }
-        // On the wall's time, every other 16 ms frame.
-        assertTrue(times.first() > 800_000_000)
-        assertEquals(30, times.size)
-        for ((earlier, later) in times.zipWithNext()) assertEquals(0.032, later - earlier, 1e-6)
+    }
+
+    /** The test's wall on the test's own clock. */
+    private fun TestScope.testWall(): () -> Double = { 800_000_000.0 + testScheduler.currentTime / 1000.0 }
+
+    /** The dates the clock drew in the next `millis`, looked at each ms, and how often it woke for a frame meanwhile. */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun TestScope.watch(clock: InkPipClock, display: Display, millis: Int): Pair<List<Double>, Int> {
+        val wakes = display.wakes
+        val dates = mutableListOf<Double>()
+        repeat(millis) {
+            val last = clock.date
+            testScheduler.advanceTimeBy(1)
+            testScheduler.runCurrent()
+            if (clock.date != last) dates += clock.date
+        }
+        return Pair(dates, display.wakes - wakes)
+    }
+
+    @Test
+    fun eagerHeBobsThirtyTimesASecondAndWakesOnlyForThoseFrames() = runTest {
+        // At 60 and 125 Hz, a frame every 32 ms from the display's first, on the wall's time, each its own wake-up.
+        for ((period, frames) in listOf(16L to 31, 8L to 32)) {
+            val display = Display(period, testScheduler)
+            val first = testScheduler.currentTime + period
+            val clock = InkPipClock(PipMood.Eager, reduceMotion = false, testWall())
+            val pip = launch(display) { clock.run() }
+            val (dates, wakes) = watch(clock, display, 1_000)
+            pip.cancel()
+            assertEquals(frames, dates.size)
+            assertEquals(frames, wakes)
+            assertEquals(800_000_000.0 + first / 1000.0, dates.first(), 1e-6)
+            for ((earlier, later) in dates.zipWithNext()) assertEquals(0.032, later - earlier, 1e-6)
+        }
+    }
+
+    @Test
+    fun heWakesAtEveryFrameOnlyWhileHisBoxOpens() = runTest {
+        val display = Display(8, testScheduler)
+        val clock = InkPipClock(PipMood.Eager, reduceMotion = false, testWall())
+        var pip = launch(display) { clock.run() }
+        watch(clock, display, 500)
+        // The news, as rememberInkPipClock passes it on: his clock starts again.
+        pip.cancel()
+        clock.show(PipMood.Joy, reduceMotion = false)
+        pip = launch(display) { clock.run() }
+        // Every frame of the display for the second the box takes to open, from his first after the news.
+        val (opening, wakes) = watch(clock, display, 1_000)
+        assertEquals(125, opening.size)
+        assertEquals(125, wakes)
+        for ((earlier, later) in opening.zipWithNext()) assertEquals(0.008, later - earlier, 1e-6)
+        // Open, he jumps 30 times a second, as eager he bobbed.
+        val (jumps, rest) = watch(clock, display, 1_000)
+        assertEquals(32, jumps.size)
+        assertEquals(32, rest)
+        assertTrue(checkNotNull(clock.frame(PipMood.Joy).time) > PipOpening.DURATION)
+        pip.cancel()
     }
 
     @Test
@@ -127,12 +186,12 @@ class PipClockTest {
         assertEquals(0.0, times.first(), 0.0)
         for ((earlier, later) in times.zipWithNext()) assertEquals(0.016, later - earlier, 1e-6)
         assertEquals(PipOpening.at(times.last()), clock.frame(PipMood.Joy).opening)
-        // Open after a second: drawn open, and still jumping from the news.
+        // Open after a second: drawn open, and still jumping from the news, at most a 30th of a second behind.
         compose.mainClock.advanceTimeBy(800)
         frame = clock.frame(PipMood.Joy)
         assertNull(frame.opening)
         assertEquals(PipMood.Look, frame.before)
-        assertEquals(times.last() + 0.8, checkNotNull(frame.time), 1e-6)
+        assertEquals(times.last() + 0.8 - 1.0 / 60, checkNotNull(frame.time), 1.0 / 60)
         // Any other change ends it.
         change { mood = PipMood.Eager }
         compose.mainClock.advanceTimeByFrame()

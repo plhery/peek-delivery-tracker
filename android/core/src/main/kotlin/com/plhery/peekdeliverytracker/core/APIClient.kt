@@ -213,7 +213,7 @@ class DeliveryApiClient(
     private val analytics: (event: String, outcome: DeliveryAnalytics.Outcome) -> Unit = { _, _ -> },
     private val now: () -> Instant = Instant::now,
 ) {
-    /** What the client needs of SessionStore. */
+    /** What the client needs of SessionStore, which answers on its own thread whichever thread asks. */
     interface Session {
         /** A new value each time the signed-in identity changes: work begun for one never finishes for another. */
         val generation: UUID
@@ -224,8 +224,8 @@ class DeliveryApiClient(
         /** Nil without a session; refreshed when it is close to expiring, or always with `forceRefresh`. */
         suspend fun accessToken(forceRefresh: Boolean = false): String?
 
-        /** Forgets the session on this device at once, without asking the server. */
-        fun forceSignOut()
+        /** Forgets the session on this device, without asking the server: done before it returns. */
+        suspend fun forceSignOut()
     }
 
     suspend fun friendsSnapshot(): FriendsSnapshot = request("/api/friends", FriendsSnapshot.serializer())

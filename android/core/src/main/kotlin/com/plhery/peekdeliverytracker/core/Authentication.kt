@@ -7,6 +7,8 @@ import java.time.Instant
 import java.util.Base64
 import java.util.UUID
 import java.util.concurrent.CopyOnWriteArrayList
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -51,11 +53,18 @@ data class AuthUser(
     data class Identity(val provider: String, val identityData: IdentityData? = null)
 
     @Serializable
-    data class IdentityData(val sub: String? = null)
+    data class IdentityData(val sub: String? = null) {
+        /** The Apple user ID never goes in a log. */
+        override fun toString(): String = "IdentityData(sub=${sub?.let { "<redacted>" }})"
+    }
 
     /** The Apple user IDs the account signs in with. */
     val appleSubjects: List<String>
         get() = (identities ?: emptyList()).filter { it.provider == "apple" }.mapNotNull { it.identityData?.sub }
+
+    /** The email and the Apple user IDs never go in a log, nor do the session and the state that print the user. */
+    override fun toString(): String =
+        "AuthUser(id=$id, email=${email?.let { "<redacted>" }}, isAnonymous=$isAnonymous, identities=$identities)"
 }
 
 /**
@@ -126,15 +135,20 @@ sealed class AuthenticationState {
  * Android Keystore, in the app's own credential-encrypted storage, one entry per service, left out of backups and
  * device transfers (`dataExtractionRules`), as a value tied to this device's key would be unreadable elsewhere. The
  * session store's service is "com.plhery.PeekDeliveryTracker.auth".
+ *
+ * `save` and `delete` are done once they return, as the Keychain's are: SharedPreferences' `commit()` or a file
+ * written and synced, never `apply()` or an asynchronous DataStore write. Otherwise a sign-out followed by the app
+ * being killed reopens the account at the next launch, and a refreshed session lost that way leaves the refresh token
+ * already used, which the auth service then refuses.
  */
 interface SessionPersistence {
-    /** Throws when the value could not be saved. */
+    /** Throws when the value could not be saved; written to storage once it returns. */
     fun save(data: ByteArray)
 
     /** Nil when nothing is saved, or when it cannot be read (a Keystore key lost, say): it never throws for that. */
     fun load(): ByteArray?
 
-    /** Never throws: nothing left to delete is no failure. */
+    /** Never throws: nothing left to delete is no failure. Gone from storage once it returns. */
     fun delete()
 }
 
@@ -181,7 +195,10 @@ class PassthroughSignal {
  * Tabs. The address comes back as an intent: an activity whose intent filter takes `callbackScheme` with the host
  * `OAuthFlow.callbackHost` (BROWSABLE and DEFAULT, `singleTop` or a transparent one that finishes at once) hands its
  * `intent.data` to the call under way, which returns it as a string. That host is this call's alone: NativeRoute and
- * the invitation links leave it alone.
+ * the invitation links leave it alone, and the app's other `peekdeliverytracker://` intent filters each name their
+ * host, as one with the scheme alone also takes `auth-callback` and Android would offer both activities in a chooser.
+ * A custom scheme is no app's own on Android, where another app may claim it too; PKCE makes that harmless here, as
+ * the code is worth nothing without the verifier SessionStore keeps.
  * - Closed without the address (the tab dismissed, Back, or the app brought forward from elsewhere while the call is
  *   under way and no address came): throw `AuthenticationError.OauthCancelled`, as Swift maps `.canceledLogin`, which
  *   the sign-in screen shows as no error.
@@ -227,8 +244,9 @@ class AppleSignInCredential(
  * https `redirect_uri` registered with it. The answer is the `code` and `id_token` the browser posts to that address;
  * the user ID is the `sub` of the identity token's payload. What the server needs for it, none of which it has yet:
  * - The Services ID with its return address in Apple's developer account, and a page at that address that takes
- *   Apple's form post and hands `code`, `id_token` and `state` back to the app (a redirect to an App Link, or to the
- *   app's scheme with them in the fragment).
+ *   Apple's form post and hands `code`, `id_token` and `state` back to the app through a verified https App Link
+ *   (`autoVerify`), never the app's custom scheme, which any app may claim: the identity token carries the person's
+ *   email and Apple user ID.
  * - The Services ID among the Apple provider's client IDs in Supabase Auth beside the bundle ID, so that the
  *   `id_token` grant SessionStore makes takes a token whose audience is the Services ID.
  * - For account deletion, a code from the web sign-in redeemed as the Services ID with the same `redirect_uri`:
@@ -240,11 +258,16 @@ fun interface AppleSignInAuthorizing {
 }
 
 /**
- * The account's session, and whether the app opens on the welcome, the demo or an account. Used from the main thread,
- * as the iPhone's store is `@MainActor`; `stateFlow` publishes `state` as it changes. A refresh of the session is
- * shared by every request that needs one and runs in `scope`, as the iPhone's `Task` does on the main actor: the
+ * The account's session, and whether the app opens on the welcome, the demo or an account. The UI calls it from the
+ * main thread, as the iPhone's store is `@MainActor`; `stateFlow` publishes `state` as it changes. `scope` is the
  * app's own, on the main thread, which nothing cancels while the app runs (`ProcessLifecycleOwner`'s
- * `lifecycleScope`, or a `MainScope()` the application keeps).
+ * `lifecycleScope`, on `Dispatchers.Main.immediate`, so that a call already on the main thread goes on at once). A
+ * refresh of the session is shared by every request that needs one and runs there, as the iPhone's `Task` does on the
+ * main actor.
+ *
+ * The API client may run on any thread (a push token's renewal, a background job), where Swift's compiler holds every
+ * caller to the main actor: what it asks of the store (`accessToken`, `forceSignOut`) moves to the dispatcher of
+ * `scope` first, so the store's state only ever changes on that one thread. `state` and `generation` read from any.
  *
  * The app makes one, as the iPhone's app makes its `SessionStore`, and gives it to every client: the session is
  * `persistence` under the service "com.plhery.PeekDeliveryTracker.auth"; `defaults` the standard UserDefaults stand-in,
@@ -266,6 +289,11 @@ class SessionStore(
     private val random: (count: Int) -> ByteArray = ::secureRandomBytes,
 ) : DeliveryApiClient.Session {
     private val keychain = persistence
+
+    /** The one thread the store's state changes on: the dispatcher of `scope`. */
+    private val storeContext: CoroutineContext =
+        requireNotNull(scope.coroutineContext[ContinuationInterceptor]) { "SessionStore's scope needs a dispatcher." }
+
     private val stateValue = MutableStateFlow<AuthenticationState>(AuthenticationState.Loading)
 
     /** `$state`. */
@@ -277,11 +305,15 @@ class SessionStore(
             val oldValue = stateValue.value
             stateValue.value = value
             if (oldValue.identity != value.identity) {
+                // A refresh under way is the previous account's, and ends as cancelled: the new one's starts its
+                // own. Swift leaves it to be joined (see refreshSession).
+                refreshTask = null
                 generation = UUID.randomUUID()
                 identityChanges.send()
             }
         }
 
+    @Volatile
     override var generation: UUID = UUID.randomUUID()
         private set
 
@@ -533,16 +565,17 @@ class SessionStore(
         }
     }
 
-    override suspend fun accessToken(forceRefresh: Boolean): String? {
-        if (configuration.mode != AppConfiguration.Mode.Api) return null
+    /** On the store's thread, whichever thread asks. */
+    override suspend fun accessToken(forceRefresh: Boolean): String? = withContext(storeContext) {
+        if (configuration.mode != AppConfiguration.Mode.Api) return@withContext null
         val session = session
-        if (user == null || session == null) return null
+        if (user == null || session == null) return@withContext null
         val generation = generation
         if (forceRefresh || session.secondsUntilExpiration(now()) < 60) {
             refreshSession()
         }
         checkGeneration(generation)
-        return this.session?.accessToken
+        this@SessionStore.session?.accessToken
     }
 
     suspend fun signOut() {
@@ -563,8 +596,12 @@ class SessionStore(
         }
     }
 
-    override fun forceSignOut() {
-        clearLocalSession()
+    /**
+     * On the store's thread, whichever thread asks, and done before it returns, as Swift's synchronous call is: even
+     * for a caller cancelled meanwhile.
+     */
+    override suspend fun forceSignOut() {
+        withContext(storeContext + NonCancellable) { clearLocalSession() }
     }
 
     private suspend fun refreshSession() {
@@ -603,7 +640,10 @@ class SessionStore(
             }
             throw error
         } finally {
-            if (this.generation == generation) refreshTask = null
+            // Swift clears it only while the account is unchanged (Authentication.swift:398–399): once the account
+            // changes under a refresh, every later one joins that finished task and ends as cancelled, sending
+            // nothing, until a sign-out. A deliberate difference: this clears it while it is still this refresh's.
+            if (refreshTask === task) refreshTask = null
         }
     }
 
@@ -668,7 +708,9 @@ class SessionStore(
             } catch (_: Exception) {
                 null
             }
-            if (path == "token?grant_type=refresh_token" && invalidRefresh(http.statusCode, payload?.code ?: payload?.error)) {
+            // The 2024-01-01 shape's code, else the legacy shape's (see AuthErrorPayload), else an OAuth error's.
+            val code = payload?.code?.text ?: payload?.errorCode ?: payload?.error
+            if (path == "token?grant_type=refresh_token" && invalidRefresh(http.statusCode, code)) {
                 throw AuthenticationError.MissingSession()
             }
             (payload?.errorDescription ?: payload?.message ?: payload?.msg)?.let { throw AuthenticationError.Server(it) }
@@ -761,11 +803,48 @@ private class EmptyAuthResponse {
     }
 }
 
+/**
+ * An error as the auth service answers it. Neither app sends `X-Supabase-Api-Version`, so it answers in its legacy
+ * shape, `{"code":400,"error_code":"…","msg":"…"}`, where `code` is the HTTP status; the 2024-01-01 shape is
+ * `{"code":"…","message":"…"}`. Swift's payload takes `code` as a string only (Authentication.swift:591), so a legacy
+ * error reads as nothing there (:454): a refused refresh is `requestFailed(400)` and keeps a session that can never
+ * refresh again, and a wrong code or a rate limit loses the server's message. A deliberate difference from that iOS
+ * bug: both shapes are read here.
+ */
 @Serializable
 private class AuthErrorPayload(
-    val code: String? = null,
+    val code: AuthErrorCode? = null,
+    val errorCode: String? = null,
     val error: String? = null,
     val message: String? = null,
     val msg: String? = null,
     val errorDescription: String? = null,
 )
+
+/**
+ * `code`: the error code, a string, in the 2024-01-01 shape, and the HTTP status, a number, in the legacy one, which
+ * reads as no code. Any other value leaves the whole error unreadable, as it is to Swift.
+ */
+@Serializable(with = AuthErrorCode.Serializer::class)
+private class AuthErrorCode(val text: String?) {
+    object Serializer : KSerializer<AuthErrorCode> {
+        // JsonElement's kind: decodeSwiftKeys hands the value over as it is.
+        override val descriptor: SerialDescriptor = SerialDescriptor("AuthErrorCode", JsonElement.serializer().descriptor)
+
+        private val number = Regex("-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?")
+
+        override fun deserialize(decoder: Decoder): AuthErrorCode {
+            val value = (decoder as JsonDecoder).decodeJsonElement()
+            return when {
+                value is JsonNull -> AuthErrorCode(null)
+                value is JsonPrimitive && value.isString -> AuthErrorCode(value.content)
+                value is JsonPrimitive && number.matches(value.content) -> AuthErrorCode(null)
+                else -> throw SerializationException("Expected a string or a number.")
+            }
+        }
+
+        override fun serialize(encoder: Encoder, value: AuthErrorCode) {
+            encoder.encodeSerializableValue(JsonElement.serializer(), value.text?.let(::JsonPrimitive) ?: JsonNull)
+        }
+    }
+}

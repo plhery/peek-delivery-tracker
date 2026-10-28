@@ -1,11 +1,22 @@
 package com.plhery.peekdeliverytracker.core
 
 import java.time.Instant
+import java.util.Collections
 import java.util.UUID
+import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -16,7 +27,9 @@ import org.junit.Test
 /**
  * Authentication.swift has no tests of its own. These hold what it does with the auth service's requests and answers,
  * its addresses, digests, saved sessions and expiry: each expected value is what Authentication.swift gives for the
- * same input, built with swiftc on macOS for this port.
+ * same input, built with swiftc on macOS for this port. The exceptions are deliberate differences, each said where it
+ * is tested: the auth service's legacy error shape, which Swift cannot read; a refresh once the account changed under
+ * another; and what the API client asks from another thread.
  */
 class AuthenticationTests {
     private val configuration = AppConfiguration(
@@ -25,6 +38,7 @@ class AuthenticationTests {
     )
     private val now = Instant.ofEpochSecond(1_900_000_000)
     private val userId = "0B5E6F1A-1111-4222-8333-944455556666"
+    private val otherUserId = "0B5E6F1A-1111-4222-8333-944455556667"
 
     /** The auth service's session, snake_case. */
     private val sessionAnswer = """{"access_token":"tok-a","token_type":"bearer","expires_in":3600,"expires_at":1900003600,"refresh_token":"ref-a",""" +
@@ -34,6 +48,11 @@ class AuthenticationTests {
     /** The same session as the Keychain keeps it. */
     private val savedSession = """{"accessToken":"tok-a","expiresAt":1900003600,"expiresIn":3600,"refreshToken":"ref-a","tokenType":"bearer",""" +
         """"user":{"email":"person@example.test","id":"$userId","identities":[{"identityData":{"sub":"apple.sub.1"},"provider":"apple"}],"isAnonymous":false}}"""
+
+    /** Another session the auth service answers, `ref-<access token>` its refresh token. */
+    private fun answer(user: String, accessToken: String, expiresAt: Long = 1_900_003_600) =
+        """{"access_token":"$accessToken","token_type":"bearer","expires_in":3600,"expires_at":$expiresAt,""" +
+            """"refresh_token":"ref-$accessToken","user":{"id":"$user"}}"""
 
     private val bytes0To47 = ByteArray(48) { it.toByte() }
     private val verifier0To47 = "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4v"
@@ -57,11 +76,16 @@ class AuthenticationTests {
         apple: AppleSignInAuthorizing = StubAppleSignIn(),
         web: WebAuthenticating = WebAuthenticating { url, _ -> throw AssertionError("Unexpected browser sign-in at $url") },
         analytics: (String, DeliveryAnalytics.Outcome?) -> Unit = { _, _ -> },
+        clock: () -> Instant = { now },
     ) = testSessionStore(
-        configuration, backgroundScope, persistence, transport, apple, defaults, web, analytics, now = { now }, random = { bytes0To47.copyOf(it) },
+        configuration, backgroundScope, persistence, transport, apple, defaults, web, analytics, now = clock, random = { bytes0To47.copyOf(it) },
     )
 
     private fun saved(text: String) = MemorySessionPersistence().apply { data = text.toByteArray() }
+
+    /** The refresh token each refresh sent. */
+    private fun RecordingTransport.refreshTokens(): List<String> =
+        requests.filter { it.url.endsWith("grant_type=refresh_token") }.map { it.jsonBody().jsonObject["refresh_token"]!!.jsonPrimitive.content }
 
     @Test
     fun everyAuthCallSendsWhatTheSwiftSends() = runTest {
@@ -78,7 +102,7 @@ class AuthenticationTests {
         val apple = StubAppleSignIn()
         apple.result = Result.success(AppleSignInCredential(identityToken = "id.token.synthetic", authorizationCode = "auth-code-1", user = "apple.sub.1"))
         val events = mutableListOf<String>()
-        val session = store(transport, persistence, defaults, apple) { event, outcome -> events += listOfNotNull(event, outcome?.name).joinToString(" ") }
+        val session = store(transport, persistence, defaults, apple, analytics = { event, outcome -> events += listOfNotNull(event, outcome?.name).joinToString(" ") })
 
         session.bootstrap()
         assertEquals(AuthenticationState.Welcome, session.state)
@@ -273,6 +297,22 @@ class AuthenticationTests {
     }
 
     @Test
+    fun theAccountsEmailAndAppleIdStayOutOfLogs() {
+        val session = decodeSwiftKeys(AuthSession.serializer(), sessionAnswer.toByteArray())
+        for (text in listOf(session.user.toString(), session.toString(), AuthenticationState.SignedIn(session.user).toString())) {
+            assertFalse(text, text.contains("person@example.test"))
+            assertFalse(text, text.contains("apple.sub.1"))
+            assertTrue(text, text.contains(userId.lowercase()))
+        }
+        assertEquals(
+            "AuthUser(id=${userId.lowercase()}, email=<redacted>, isAnonymous=false, " +
+                "identities=[Identity(provider=apple, identityData=IdentityData(sub=<redacted>))])",
+            session.user.toString(),
+        )
+        assertEquals("AuthUser(id=${userId.lowercase()}, email=null, isAnonymous=null, identities=null)", AuthUser(UUID.fromString(userId)).toString())
+    }
+
+    @Test
     fun expiryIsADatesArithmeticAndASessionRefreshesInItsLastMinute() {
         fun seconds(expiresAt: Long?, nanos: Long = 0) = AuthSession(
             accessToken = "tok", tokenType = "bearer", expiresIn = 3600, expiresAt = expiresAt, refreshToken = "ref",
@@ -326,8 +366,18 @@ class AuthenticationTests {
             Triple(500, "", "requestFailed(500)"),
             Triple(503, """{"message":"Unavailable"}""", "server(Unavailable)"),
             Triple(422, """{"error_description":"d","message":"m","msg":"g"}""", "server(d)"),
-            // A numeric code makes the whole error unreadable to the Swift's decoder, its message too.
-            Triple(400, """{"code":400,"msg":"numeric code"}""", "requestFailed(400)"),
+            // The legacy shape, whose numeric code makes the whole error unreadable to Swift, its message too: read
+            // here (see AuthErrorPayload), its `error_code` taking the numeric code's place.
+            Triple(400, """{"code":400,"msg":"numeric code"}""", "server(numeric code)"),
+            Triple(400, """{"code":400,"error_code":"invalid_grant","msg":"Invalid Refresh Token"}""", "missingSession"),
+            Triple(400, """{"code":4e2,"error_code":"user_banned"}""", "missingSession"),
+            Triple(400, """{"code":400,"error_code":"other","msg":"Nope"}""", "server(Nope)"),
+            Triple(400, """{"code":"other","error_code":"invalid_grant"}""", "requestFailed(400)"),
+            Triple(400, """{"code":null,"error_code":"session_expired","error":"other"}""", "missingSession"),
+            // Any other code is as unreadable here as it is to Swift.
+            Triple(400, """{"code":true,"error_code":"invalid_grant","msg":"Bool"}""", "requestFailed(400)"),
+            Triple(400, """{"code":[400],"msg":"List"}""", "requestFailed(400)"),
+            Triple(400, """{"code":400,"error_code":5,"msg":"Number"}""", "requestFailed(400)"),
             Triple(502, "garbage", "requestFailed(502)"),
         )
         for ((status, body, expected) in cases) {
@@ -350,7 +400,8 @@ class AuthenticationTests {
     fun otherAuthAnswersMapAsTheSwiftMapsThem() = runTest {
         val cases = listOf(
             Triple(429, """{"code":"over_email_send_rate_limit","msg":"Too many"}""", "server(Too many)"),
-            Triple(429, """{"code":429,"msg":"Too many"}""", "requestFailed(429)"),
+            // The legacy shape, which Swift cannot read: its message is read here (see AuthErrorPayload).
+            Triple(429, """{"code":429,"msg":"Too many"}""", "server(Too many)"),
             // Only a refresh's refusal signs out.
             Triple(401, """{"code":"invalid_grant"}""", "requestFailed(401)"),
             Triple(500, """{"message":null,"msg":"second"}""", "server(second)"),
@@ -374,6 +425,274 @@ class AuthenticationTests {
                 describe(error)
             }
             assertEquals("$status $body", expected, result)
+        }
+    }
+
+    /**
+     * A deliberate difference: the auth service answers in its legacy shape, as neither app sends
+     * `X-Supabase-Api-Version`, which Swift cannot read, so the refused refresh keeps there a session that can never
+     * refresh again. Here it signs out, as Swift does for the 2024-01-01 shape.
+     */
+    @Test
+    fun aRefusedRefreshSignsOutInEitherShapeOfTheAuthServicesError() = runTest {
+        for (code in listOf("refresh_token_not_found", "session_not_found", "refresh_token_already_used")) {
+            for (body in listOf(
+                """{"code":400,"error_code":"$code","msg":"Invalid Refresh Token: $code"}""",
+                """{"code":"$code","message":"Invalid Refresh Token: $code"}""",
+            )) {
+                val persistence = saved(savedSession)
+                val session = store(RecordingTransport { jsonResponse(400, body) }, persistence)
+                session.bootstrap()
+                try {
+                    session.accessToken(forceRefresh = true)
+                    fail("Expected the refusal for $body")
+                } catch (_: AuthenticationError.MissingSession) {
+                }
+                assertEquals(body, AuthenticationState.SignedOut, session.state)
+                assertNull(body, persistence.data)
+
+                // The same refusal of the refresh a launch makes in the session's last minute.
+                val expiring = saved(savedSession.replace("1900003600", "1900000030"))
+                val relaunched = store(RecordingTransport { jsonResponse(400, body) }, expiring)
+                relaunched.bootstrap()
+                assertEquals(body, AuthenticationState.SignedOut, relaunched.state)
+                assertNull(body, expiring.data)
+            }
+        }
+    }
+
+    /**
+     * A deliberate difference: Swift cannot read the legacy shape the auth service answers in, and shows the bare
+     * status. Its message is read here, and shown as Swift shows it for the 2024-01-01 shape.
+     */
+    @Test
+    fun aWrongCodeAndARateLimitShowTheServersMessageInEitherShape() = runTest {
+        val localizer = Localizer(AppLanguage.En)
+        val wrongCode = "Token has expired or is invalid"
+        val rateLimit = "Email rate limit exceeded"
+        val tooSoon = "For security purposes, you can only request this after 37 seconds."
+        val cases = listOf(
+            Triple("verify", 403, """{"code":403,"error_code":"otp_expired","msg":"$wrongCode"}""") to (wrongCode to "error.invalidCode"),
+            Triple("verify", 403, """{"code":"otp_expired","message":"$wrongCode"}""") to (wrongCode to "error.invalidCode"),
+            Triple("send", 429, """{"code":429,"error_code":"over_email_send_rate_limit","msg":"$rateLimit"}""") to (rateLimit to "error.rateLimited"),
+            Triple("send", 429, """{"code":"over_email_send_rate_limit","message":"$rateLimit"}""") to (rateLimit to "error.rateLimited"),
+            Triple("send", 429, """{"code":429,"error_code":"over_email_send_rate_limit","msg":"$tooSoon"}""") to (tooSoon to "auth.verifyFailed"),
+            Triple("send", 429, """{"code":"over_email_send_rate_limit","message":"$tooSoon"}""") to (tooSoon to "auth.verifyFailed"),
+        )
+        for ((request, expected) in cases) {
+            val (call, status, body) = request
+            val persistence = MemorySessionPersistence()
+            val session = store(RecordingTransport { jsonResponse(status, body) }, persistence)
+            val error = try {
+                if (call == "verify") session.verifyCode(email = "person@example.test", code = "000000") else session.sendCode(to = "person@example.test", language = AppLanguage.En)
+                null
+            } catch (error: AuthenticationError.Server) {
+                error
+            }
+            assertEquals(body, expected.first, error?.serverMessage)
+            assertEquals(body, localizer.text(expected.second), localizer.errorMessage(error!!))
+            assertNull(body, session.user)
+            assertNull(body, persistence.data)
+        }
+    }
+
+    /**
+     * A deliberate difference: Swift's store is held to the main actor by its compiler, where the API client may ask
+     * from any thread on Android. What it asks is done on the store's thread, the test's here.
+     */
+    @Test
+    fun whatTheClientAsksFromAnotherThreadIsDoneOnTheStoresThread() = runTest {
+        val storeThread = Thread.currentThread()
+        val elsewhere = Collections.synchronizedList(mutableListOf<String>())
+        fun note(what: String) {
+            if (Thread.currentThread() !== storeThread) elsewhere += "$what on ${Thread.currentThread().name}"
+        }
+        val persistence = object : SessionPersistence {
+            var data: ByteArray? = savedSession.toByteArray()
+
+            override fun save(data: ByteArray) {
+                note("save")
+                this.data = data
+            }
+
+            override fun load(): ByteArray? = data.also { note("load") }
+
+            override fun delete() {
+                note("delete")
+                data = null
+            }
+        }
+        val transport = RecordingTransport { jsonResponse(200, sessionAnswer.replace("tok-a", "tok-b")) }
+        val session = store(transport, persistence, clock = { note("now"); now })
+        session.bootstrap()
+        val client: DeliveryApiClient.Session = session
+        withContext(Dispatchers.Default) {
+            assertEquals("tok-a", client.accessToken())
+            assertEquals("tok-b", client.accessToken(forceRefresh = true))
+            client.forceSignOut()
+            // Done before the call returned, as Swift's synchronous call is.
+            assertFalse(client.signedIn)
+            assertNull(persistence.data)
+        }
+        assertEquals(emptyList<String>(), elsewhere)
+        assertEquals(AuthenticationState.SignedOut, session.state)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun refreshesAskedAtOnceFromAnotherThreadAndTheMainOneAreOneRefresh() = runTest {
+        val started = CompletableDeferred<Unit>()
+        val held = CompletableDeferred<HttpResponse>()
+        val transport = RecordingTransport {
+            started.complete(Unit)
+            held.await()
+        }
+        val session = store(transport, saved(savedSession))
+        session.bootstrap()
+        // One of Default's threads at a time, in turn: once a later call there has run, an earlier one has reached the store.
+        val other = Dispatchers.Default.limitedParallelism(1)
+        val fromOther = async(other) { session.accessToken(forceRefresh = true) }
+        val fromMain = async { session.accessToken(forceRefresh = true) }
+        started.await()
+        val laterFromOther = async(other) { session.accessToken(forceRefresh = true) }
+        withContext(other) {}
+        // The store takes the call handed to it, which waits for the refresh under way.
+        runCurrent()
+        held.complete(jsonResponse(200, sessionAnswer.replace("tok-a", "tok-b")))
+        assertEquals(listOf("tok-b", "tok-b", "tok-b"), listOf(fromOther, fromMain, laterFromOther).awaitAll())
+        assertEquals(listOf("ref-a"), transport.refreshTokens())
+    }
+
+    /** Requests answered at once, and the refreshes sent with `held`'s refresh token held until the test answers them. */
+    private class HeldRefresh(val held: String, val answer: suspend (HttpRequest) -> HttpResponse) {
+        val started = CompletableDeferred<Unit>()
+        val response = CompletableDeferred<HttpResponse>()
+        val transport = RecordingTransport { request ->
+            if (request.url.endsWith("grant_type=refresh_token") && request.body!!.decodeToString().contains("\"$held\"")) {
+                started.complete(Unit)
+                response.await()
+            } else {
+                answer(request)
+            }
+        }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun callersAtOnceShareOneRefresh() = runTest {
+        val refresh = HeldRefresh("ref-a") { throw AssertionError("Unexpected request ${it.url}") }
+        // A session in its last minute: the launch refreshes it.
+        val session = store(refresh.transport, saved(savedSession.replace("1900003600", "1900000030")))
+        val launch = async { session.bootstrap() }
+        refresh.started.await()
+        val second = async { session.accessToken() }
+        val third = async { session.accessToken(forceRefresh = true) }
+        runCurrent()
+        refresh.response.complete(jsonResponse(200, sessionAnswer.replace("tok-a", "tok-b")))
+        launch.await()
+        assertEquals(listOf("tok-b", "tok-b"), listOf(second, third).awaitAll())
+        assertEquals(listOf("ref-a"), refresh.transport.refreshTokens())
+    }
+
+    @Test
+    fun aCancelledCallerThatStartedARefusedRefreshStillSignsOut() = runTest {
+        for (body in listOf("""{"code":400,"error_code":"refresh_token_not_found","msg":"x"}""", """{"code":"refresh_token_not_found","message":"x"}""")) {
+            val refresh = HeldRefresh("ref-a") { throw AssertionError("Unexpected request ${it.url}") }
+            val persistence = saved(savedSession)
+            val session = store(refresh.transport, persistence)
+            session.bootstrap()
+            val caller = async { runCatching { session.accessToken(forceRefresh = true) } }
+            refresh.started.await()
+            caller.cancel()
+            refresh.response.complete(jsonResponse(400, body))
+            caller.join()
+            assertTrue(caller.isCancelled)
+            assertEquals(body, AuthenticationState.SignedOut, session.state)
+            assertNull(body, persistence.data)
+        }
+    }
+
+    @Test
+    fun aForcedSignOutDuringARefreshCancelsItsCallerAndKeepsNothing() = runTest {
+        val refresh = HeldRefresh("ref-a") { throw AssertionError("Unexpected request ${it.url}") }
+        val persistence = saved(savedSession)
+        val session = store(refresh.transport, persistence)
+        session.bootstrap()
+        val caller = async { runCatching { session.accessToken(forceRefresh = true) } }
+        refresh.started.await()
+        session.forceSignOut()
+        refresh.response.complete(jsonResponse(200, sessionAnswer.replace("tok-a", "tok-b")))
+        val result = caller.await()
+        assertTrue(result.toString(), result.exceptionOrNull() is CancellationException)
+        assertEquals(AuthenticationState.SignedOut, session.state)
+        assertNull(persistence.data)
+        assertEquals(listOf("ref-a"), refresh.transport.refreshTokens())
+    }
+
+    /**
+     * A deliberate difference: Swift leaves the finished refresh of the account that was signed in for every later
+     * refresh to join (Authentication.swift:398–399), which then ends as cancelled and sends nothing until a sign-out.
+     */
+    @Test
+    fun aRefreshAnsweredAfterTheAccountChangedLeavesTheNextAccountsRefreshesWorking() = runTest {
+        val refresh = HeldRefresh("ref-a") { request ->
+            if (request.path == "/auth/v1/verify") {
+                // In its last minute: its next token refreshes it.
+                jsonResponse(200, answer(otherUserId, "tok-b1", expiresAt = 1_900_000_030))
+            } else {
+                jsonResponse(200, answer(otherUserId, "tok-b2"))
+            }
+        }
+        val persistence = saved(savedSession)
+        val session = store(refresh.transport, persistence)
+        session.bootstrap()
+        val first = async { runCatching { session.accessToken(forceRefresh = true) } }
+        refresh.started.await()
+        session.verifyCode(email = "other@example.test", code = "123456")
+        refresh.response.complete(jsonResponse(200, sessionAnswer.replace("tok-a", "tok-a2")))
+        assertTrue(first.await().exceptionOrNull() is CancellationException)
+        assertEquals("tok-b2", session.accessToken())
+        assertEquals("tok-b2", session.accessToken(forceRefresh = true))
+        assertEquals(listOf("ref-a", "ref-tok-b1", "ref-tok-b2"), refresh.transport.refreshTokens())
+        assertEquals(UUID.fromString(otherUserId), session.user?.id)
+        assertTrue(persistence.data!!.decodeToString().contains("tok-b2"))
+    }
+
+    /**
+     * A deliberate difference: Swift's next account would join the refresh still under way for the previous one and
+     * end as cancelled with it. Here it refreshes on its own, whatever the previous one's refresh is answered.
+     */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun theNextAccountRefreshesOnItsOwnWhileThePreviousOnesRefreshIsUnderWay() = runTest {
+        val late = listOf(
+            jsonResponse(200, sessionAnswer.replace("tok-a", "tok-a2")),
+            jsonResponse(400, """{"code":400,"error_code":"refresh_token_not_found","msg":"x"}"""),
+        )
+        for (lateAnswer in late) {
+            val refresh = HeldRefresh("ref-a") { request ->
+                jsonResponse(200, answer(otherUserId, if (request.path == "/auth/v1/verify") "tok-b1" else "tok-b2"))
+            }
+            val persistence = saved(savedSession)
+            val session = store(refresh.transport, persistence)
+            session.bootstrap()
+            val first = async { runCatching { session.accessToken(forceRefresh = true) } }
+            refresh.started.await()
+            session.verifyCode(email = "other@example.test", code = "123456")
+            val next = async { session.accessToken(forceRefresh = true) }
+            runCurrent()
+            // Answered at once: joined to the previous account's refresh, it would wait for that one's answer.
+            val refreshedAlone = next.isCompleted
+            refresh.response.complete(lateAnswer)
+            assertTrue("The next account's refresh waited for the previous one's", refreshedAlone)
+            assertEquals("tok-b2", next.await())
+            val failure = first.await().exceptionOrNull()
+            // A refusal of the previous account's refresh is no reason to sign the next one out.
+            if (lateAnswer.statusCode == 200) assertTrue("$failure", failure is CancellationException) else assertTrue("$failure", failure is AuthenticationError.MissingSession)
+            assertEquals(UUID.fromString(otherUserId), session.user?.id)
+            assertEquals("tok-b2", session.accessToken())
+            assertTrue(persistence.data!!.decodeToString().contains("tok-b2"))
+            assertEquals(listOf("ref-a", "ref-tok-b1"), refresh.transport.refreshTokens())
         }
     }
 }

@@ -53,7 +53,7 @@ internal class TestSession(
         return refreshed
     }
 
-    override fun forceSignOut() {
+    override suspend fun forceSignOut() {
         log += "signOut"
         user = null
         generation = UUID.randomUUID()
@@ -81,7 +81,7 @@ internal class StubAppleSignIn : AppleSignInAuthorizing {
     var result: Result<AppleSignInCredential> = Result.success(
         AppleSignInCredential(identityToken = "apple-identity-token", authorizationCode = "apple-code", user = "apple-user"),
     )
-    var beforeReturning: (() -> Unit)? = null
+    var beforeReturning: (suspend () -> Unit)? = null
 
     override suspend fun credential(nonce: String): AppleSignInCredential {
         nonces += nonce

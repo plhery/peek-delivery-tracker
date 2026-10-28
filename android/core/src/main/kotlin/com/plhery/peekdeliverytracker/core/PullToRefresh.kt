@@ -110,7 +110,7 @@ class PullToRefreshModel(private val scope: CoroutineScope) {
     /**
      * Counts refreshes, so the seal pops once each time one starts. :app also plays a light impact each time it changes,
      * as `.sensoryFeedback(.impact(weight: .light), trigger:)` does, and not for the value it is first composed with:
-     * `HapticFeedbackConstants.GESTURE_THRESHOLD_ACTIVATE` from API 34, `HapticFeedbackConstants.CONTEXT_CLICK` before.
+     * a full-intensity light impact, `HapticFeedbackConstants.CONTEXT_CLICK` on every release (Haptics.kt).
      */
     var starts: Int
         get() = startsState.value

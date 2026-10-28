@@ -594,6 +594,17 @@ describe('persistent tracking routing', () => {
       expect(result.result.routing).not.toHaveProperty('confirmed_carrier');
     });
 
+    it('sets aside the label of the carrier confirmed for a parcel still filed unknown, and asks the provider', async () => {
+      const { router, direct, universal } = setup();
+      direct.mockResolvedValue(preAdvice());
+      const result = await router.fetch(named({ confirmed_carrier: 'ups', confirmed_number: 'TEST1234' }), false);
+      expect(direct).toHaveBeenCalledWith(expect.anything(), 'ups');
+      expect(universal).toHaveBeenCalled();
+      expect(result.correction).toBeUndefined();
+      expect(result.result.tracking_provider).toBe('ParcelsApp');
+      expect(result.result.routing).toMatchObject({ set_aside: { ups: { reason: 'no_movement' } } });
+    });
+
     it('keeps the progress of a provider over the label of the carrier it names', async () => {
       const { router, direct, universal } = setup();
       universal.mockResolvedValue({ ...history(), discovered_carrier: 'ups' });

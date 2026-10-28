@@ -10,8 +10,8 @@ permissions:
   actions: read
 
 # Only a pull request's newest commit is worth testing. On main a run in progress finishes,
-# and the newest push waits for it: one that only changes content then compares with it and
-# skips the native suites (scripts/ci-changes.mjs), instead of restarting them.
+# and the newest push waits for it, then compares with the nearest main commit whose run
+# passed: one that only changes content skips the native suites (scripts/ci-changes.mjs).
 concurrency:
   group: ios-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}

@@ -14,9 +14,9 @@ change meant to show.
 
 ## CI
 
-`.github/workflows/android.yml` runs when the app, the data it copies or the API contract changes. On Linux it checks
-that the generated Kotlin contract is current, runs `:core:test` in UTC and in Europe/Zurich, then `:app:lintDebug` and
-`:app:assembleDebug`. The app's tests and `:app:verifyRoborazziDebug` run on a Mac with Apple silicon, where the
+`.github/workflows/android.yml` runs for the changes [docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md) lists. On Linux it
+checks that the generated Kotlin contract is current, runs `:core:test` in UTC and in Europe/Zurich, then lints and
+builds the app and `:coredevice`. The app's tests and `:app:verifyRoborazziDebug` run on a Mac with Apple silicon, where the
 screenshots are recorded: Robolectric draws text edges and blurs a little differently on Linux x86-64. A failed run
 keeps the reports, and each differing screenshot's `_actual` and `_compare` images, as artifacts.
 

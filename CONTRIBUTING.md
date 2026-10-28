@@ -38,7 +38,8 @@ npm run test:pwa
 The browser tests use the fictional demo data at desktop and mobile sizes.
 
 For an Android change, run `./gradlew :core:test :app:verifyRoborazziDebug :app:lintDebug :app:assembleDebug`
-in `android/` ([android/README.md](android/README.md)).
+in `android/` ([android/README.md](android/README.md)). The screenshots match only on a Mac with Apple silicon;
+elsewhere, run `:app:testDebugUnitTest` instead of `:app:verifyRoborazziDebug` and leave the screenshots to CI.
 
 - **Database changes** are new, append-only migrations, with assertions in
   `supabase/tests/assertions.sql`.

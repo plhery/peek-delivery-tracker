@@ -10,7 +10,8 @@ permissions:
   actions: read
 
 # Only a pull request's newest commit is worth testing. On main a run in progress finishes,
-# and the newest push waits for it, then compares with it (scripts/ci-changes.mjs).
+# and the newest push waits for it, then compares with the nearest main commit whose run
+# passed (scripts/ci-changes.mjs).
 concurrency:
   group: android-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -69,9 +70,9 @@ jobs:
         env:
           TEST_TIME_ZONE: Europe/Zurich
         run: ./gradlew :core:test
-      - name: Lint and build the app
+      - name: Lint and build the app and the core's device tests
         working-directory: android
-        run: ./gradlew :app:lintDebug :app:assembleDebug
+        run: ./gradlew :app:lintDebug :app:assembleDebug :coredevice:lintDebug :coredevice:assembleDebugAndroidTest
       - name: Keep the reports
         if: failure()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -81,6 +82,7 @@ jobs:
             android/core/build/reports/tests/
             android/core/build/test-results/
             android/app/build/reports/lint-results-debug.*
+            android/coredevice/build/reports/lint-results-debug.*
           retention-days: 7
 
   # The screenshots are recorded on a Mac with Apple silicon. Robolectric's graphics draw text

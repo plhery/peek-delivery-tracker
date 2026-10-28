@@ -14750,6 +14750,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^KTDWE\\d{10}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^YHKJ\\d{10}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://www.dhlink.com/trackQuery"
@@ -32779,7 +32783,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": []
+    "detectionRules": [
+      {
+        "pattern": "^ZJKJ\\d{10}$",
+        "confidence": "high"
+      }
+    ]
   },
   "jifan": {
     "displayName": "Jifan",
@@ -32868,7 +32877,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Seoul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fastbox"
     },
     "trackingUrlTemplate": "https://fastbox.co.kr/DHUB/tracking.php?fb_invoice_no={trackingNumber}",
     "linkRules": [

@@ -95811,6 +95811,17 @@
     "candidates": []
   },
   {
+    "input": "YHKJ1000000017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhlink"
+    ],
+    "asked": [
+      "dhlink"
+    ]
+  },
+  {
     "input": "YIL990000001WL",
     "carrier": "yilong-logistics",
     "confidence": "high",
@@ -96630,6 +96641,14 @@
     "confidence": "high",
     "candidates": [
       "techlink"
+    ]
+  },
+  {
+    "input": "ZJKJ1000000017",
+    "carrier": "meso-global",
+    "confidence": "high",
+    "candidates": [
+      "meso-global"
     ]
   },
   {

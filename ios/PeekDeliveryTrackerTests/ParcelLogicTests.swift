@@ -2817,6 +2817,71 @@ extension SessionIsolationTests {
         let token = try await session.accessToken()
         XCTAssertEqual(token, "access")
     }
+
+    @MainActor func testLateNotificationAnswersForThePreviousAccountShowNoError() async throws {
+        for path in ["/api/push/preferences", "/api/push/devices"] {
+            let transport = transport()
+            defer { transport.invalidateAndCancel() }
+            let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+            defer { session.forceSignOut() }
+            try await authorize(session)
+            let store = store(session, transport)
+            let started = expectation(description: "The first account's request started")
+            nonisolated(unsafe) var complete: ((Result<(Int, Data), Error>) -> Void)?
+            SessionTestURLProtocol.handler = { request, callback in
+                if request.url?.path == path {
+                    complete = callback
+                    started.fulfill()
+                } else { callback(.success((200, Data("{}".utf8)))) }
+            }
+            // A change of account turns this device's notifications off; the token goes only while they are on.
+            UserDefaults.standard.removeObject(forKey: "sdt.notificationsDeviceOptOut")
+            let pending = Task {
+                if path == "/api/push/preferences" { await store.loadNotificationPreferences() }
+                else { await store.forwardNativePushToken("synthetic-token", language: .en) }
+            }
+            await fulfillment(of: [started], timeout: 2)
+            session.forceSignOut()
+            try await authorize(session, id: UUID())
+            complete?(.success((500, Data(#"{"error":"Unavailable"}"#.utf8))))
+            await pending.value
+            XCTAssertNil(store.notificationError, path)
+        }
+    }
+
+    @MainActor func testFailedAccountDeletionKeepsWatchingTheNextChecks() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        // An account without Apple deletes without signing in again.
+        let user = AuthUser(id: UUID(), email: "test@example.com", isAnonymous: false, identities: [.init(provider: "email")])
+        respond(try JSONEncoder.deliveryTracker.encode(AuthSession(accessToken: "access", tokenType: "bearer", expiresIn: 3600,
+            expiresAt: Int(Date().timeIntervalSince1970) + 3600, refreshToken: "refresh", user: user)))
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        let store = store(session, transport)
+        let added = try JSONEncoder.deliveryTracker.encode(CreatePackageResponse(package: parcel(), jobIDs: [UUID()]))
+        nonisolated(unsafe) var watched: [XCTestExpectation] = []
+        SessionTestURLProtocol.handler = { request, callback in
+            switch (request.httpMethod, request.url?.path) {
+            case ("POST", "/api/packages"): callback(.success((201, added)))
+            // The checks never finish: only whether they are watched counts.
+            case ("GET", "/api/sync/jobs"): if !watched.isEmpty { watched.removeFirst().fulfill() }
+            case ("DELETE", "/api/account"): callback(.success((500, Data(#"{"error":"Unavailable"}"#.utf8))))
+            default: callback(.success((200, Data("{}".utf8))))
+            }
+        }
+        for attempt in 0..<2 {
+            let watching = expectation(description: "Checks watched \(attempt)")
+            watched = [watching]
+            _ = try await store.add(trackingNumber: "TESTPARCEL123789", label: "", carrier: .dhl, trackingURL: nil, dpdPostcode: nil)
+            await fulfillment(of: [watching], timeout: 3)
+            if attempt == 0 {
+                do { try await store.deleteAccount(confirmation: "DELETE"); XCTFail("Expected the refusal") } catch {}
+                XCTAssertNotNil(session.user)
+            }
+        }
+    }
 }
 
 extension ParcelLogicTests {

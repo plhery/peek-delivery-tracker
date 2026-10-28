@@ -810,6 +810,7 @@ final class ParcelStore: ObservableObject {
         deliveryLiveActivityRegistrationRemovalPending = true
         stopDeliveryLiveActivityObservers()
         jobMonitoringTask?.cancel()
+        jobMonitoringTask = nil
         pendingJobIDs.removeAll()
         try await api.deleteAccount(confirmation: confirmation, appleAuthorizationCode: appleAuthorizationCode)
         try session.checkGeneration(generation)
@@ -836,6 +837,7 @@ final class ParcelStore: ObservableObject {
         deliveryLiveActivityGeneration += 1
         deliveryLiveActivityRegistrationRemovalPending = true
         jobMonitoringTask?.cancel()
+        jobMonitoringTask = nil
         pendingJobIDs.removeAll()
         if let token = AppDelegate.currentDeviceToken, !isDemo {
             try? await api.unregisterNativePushToken(token)
@@ -965,6 +967,7 @@ final class ParcelStore: ObservableObject {
         // Alerts belong to an account.
         guard !isGuest else { return }
         let saves = notificationPreferenceSaves
+        let generation = session.generation
         do {
             let loaded = isDemo
                 ? demo.notificationPreferences
@@ -974,6 +977,8 @@ final class ParcelStore: ObservableObject {
             notificationPreferences = loaded
             notificationError = nil
         } catch {
+            // An answer for the account before this one says nothing about this one.
+            guard generation == session.generation, !(error is CancellationError) else { return }
             notificationError = localizer.errorMessage(error)
         }
     }
@@ -1017,6 +1022,7 @@ final class ParcelStore: ObservableObject {
               !notificationEnableInProgress,
               !UserDefaults.standard.bool(forKey: notificationOptOutKey) else { return }
         let generation = nativePushGeneration
+        let sessionGeneration = session.generation
         do {
             _ = try await api.registerNativePushToken(
                 token,
@@ -1034,6 +1040,7 @@ final class ParcelStore: ObservableObject {
             notificationsEnabledOnDevice = session.isAuthenticated
             notificationError = nil
         } catch {
+            guard sessionGeneration == session.generation, !(error is CancellationError) else { return }
             notificationError = localizer.errorMessage(error)
         }
     }

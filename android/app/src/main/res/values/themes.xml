@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The window behind the app: iOS's LaunchBackground, whatever the appearance. -->
+    <style name="Theme.Peek" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/launch_background</item>
+    </style>
+
+    <!-- The launch: the same blank background and no icon, as iOS's UILaunchScreen. -->
+    <style name="Theme.Peek.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/launch_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/launch_blank</item>
+        <item name="postSplashScreenTheme">@style/Theme.Peek</item>
+    </style>
+</resources>

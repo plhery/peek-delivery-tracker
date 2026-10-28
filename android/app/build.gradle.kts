@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.activity.compose)
+    implementation(libs.core.splashscreen)
     implementation(libs.lifecycle.runtime.compose)
     // The iPhone's materials: a blur of what lies behind (Materials.kt).
     implementation(libs.haze)

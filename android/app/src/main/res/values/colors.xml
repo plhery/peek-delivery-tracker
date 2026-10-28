@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- iOS's LaunchBackground colour set, Brand.background in light. -->
+    <color name="launch_background">#F4F5F1</color>
+</resources>

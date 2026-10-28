@@ -4930,10 +4930,15 @@ export const CARRIER_CAPABILITIES = {
         "domains": [
           "tnt.com"
         ],
-        "pathPattern": "^/express/[a-z]{2}_[a-z]{2}/site/(?:shipping-tools/tracking|herramientas-envio/seguimiento|outils-expedition/suivi|strumenti-spedizione/tracking)\\.html$",
-        "params": [
-          "cons"
+        "pathPattern": "^/(?:track|express/[a-z]{2}_[a-z]{2}/site/(?:shipping-tools/tracking|herramientas-envio/seguimiento|outils-expedition/suivi|strumenti-spedizione/tracking)\\.html)$",
+        "query": "^(?!(?:.*&)?searchType=ref(?:&|$))(?:.*&)?cons=(\\d{8})(?=&|$)"
+      },
+      {
+        "domains": [
+          "tnt.com"
         ],
+        "pathPattern": "^/(?:track|express/[a-z]{2}_[a-z]{2}/site/(?:shipping-tools/tracking|herramientas-envio/seguimiento|outils-expedition/suivi|strumenti-spedizione/tracking)\\.html)$",
+        "query": "^(?!(?:.*&)?searchType=ref(?:&|$))(?:.*&)?cons=([^&]+)",
         "ownNumbersOnly": true
       }
     ],
@@ -6972,6 +6977,11 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [
+      {
+        "pattern": "^7000\\d{9}$",
+        "confidence": "low",
+        "preferred": true
+      },
       {
         "pattern": "^(?:[24]\\d{12}|7000\\d{9})$",
         "confidence": "low"
@@ -18847,7 +18857,8 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^68800[125]\\d{8}(?:\\d{2})?$",
-        "confidence": "low"
+        "confidence": "low",
+        "preferred": true
       }
     ],
     "trackingSearchUrl": "https://www.cityexpress.rs/pracenje-posiljke"
@@ -24614,6 +24625,12 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [
+      {
+        "pattern": "^623\\d{10}$",
+        "confidence": "low",
+        "checksum": "gs1",
+        "preferred": true
+      },
       {
         "pattern": "^6\\d{12}$",
         "confidence": "low",

@@ -49433,10 +49433,13 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fedex-pl",
       "la-poste",
       "correos-chile",
       "yunda",
-      "korea-post",
+      "korea-post"
+    ],
+    "preferred": [
       "fedex-pl"
     ],
     "asked": [
@@ -49449,11 +49452,14 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fedex-pl",
       "la-poste",
       "correos-chile",
       "delhivery",
       "yunda",
-      "korea-post",
+      "korea-post"
+    ],
+    "preferred": [
       "fedex-pl"
     ],
     "asked": [
@@ -49467,11 +49473,14 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fedex-pl",
       "la-poste",
       "correos-chile",
       "delhivery",
       "yunda",
-      "korea-post",
+      "korea-post"
+    ],
+    "preferred": [
       "fedex-pl"
     ],
     "asked": [
@@ -49485,11 +49494,14 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fedex-pl",
       "la-poste",
       "correos-chile",
       "delhivery",
       "yunda",
-      "korea-post",
+      "korea-post"
+    ],
+    "preferred": [
       "fedex-pl"
     ],
     "asked": [
@@ -49503,11 +49515,14 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fedex-pl",
       "la-poste",
       "correos-chile",
       "delhivery",
       "yunda",
-      "korea-post",
+      "korea-post"
+    ],
+    "preferred": [
       "fedex-pl"
     ],
     "asked": [
@@ -49521,11 +49536,14 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fedex-pl",
       "la-poste",
       "correos-chile",
       "delhivery",
       "yunda",
-      "korea-post",
+      "korea-post"
+    ],
+    "preferred": [
       "fedex-pl"
     ],
     "asked": [
@@ -49539,11 +49557,14 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fedex-pl",
       "la-poste",
       "correos-chile",
       "delhivery",
       "yunda",
-      "korea-post",
+      "korea-post"
+    ],
+    "preferred": [
       "fedex-pl"
     ],
     "asked": [
@@ -49557,11 +49578,14 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fedex-pl",
       "la-poste",
       "correos-chile",
       "delhivery",
       "yunda",
-      "korea-post",
+      "korea-post"
+    ],
+    "preferred": [
       "fedex-pl"
     ],
     "asked": [
@@ -51807,11 +51831,11 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "city-express-rs",
       "dpd",
       "ciblex",
       "seur",
       "brt",
-      "city-express-rs",
       "dhl-ecommerce-uk",
       "dpd-be",
       "dpd-de",
@@ -51820,12 +51844,15 @@
       "dpd-pt",
       "dpd-uk"
     ],
+    "preferred": [
+      "city-express-rs"
+    ],
     "asked": [
+      "city-express-rs",
       "dpd-be",
       "dpd",
       "dpd-nl",
-      "dpd-de",
-      "seur"
+      "dpd-de"
     ]
   },
   {
@@ -51833,19 +51860,22 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "city-express-rs",
       "dhl-ecommerce",
       "correos-express",
       "canada-post",
       "tnt",
-      "city-express-rs",
       "evri-uk"
     ],
+    "preferred": [
+      "city-express-rs"
+    ],
     "asked": [
+      "city-express-rs",
       "correos-express",
       "evri-uk",
       "canada-post",
-      "tnt",
-      "city-express-rs"
+      "tnt"
     ]
   },
   {
@@ -52459,16 +52489,19 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fan-courier",
       "la-poste",
       "correos-chile",
       "delhivery",
-      "yunda",
+      "yunda"
+    ],
+    "preferred": [
       "fan-courier"
     ],
     "asked": [
+      "fan-courier",
       "la-poste",
-      "delhivery",
-      "fan-courier"
+      "delhivery"
     ]
   },
   {
@@ -52562,16 +52595,19 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "fan-courier",
       "la-poste",
       "correos-chile",
       "delhivery",
-      "yunda",
+      "yunda"
+    ],
+    "preferred": [
       "fan-courier"
     ],
     "asked": [
+      "fan-courier",
       "la-poste",
-      "delhivery",
-      "fan-courier"
+      "delhivery"
     ]
   },
   {

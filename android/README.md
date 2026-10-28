@@ -12,6 +12,14 @@ are kept in `app/src/test/snapshots`: `./gradlew :app:verifyRoborazziDebug` fail
 shot's pixels differ (see `Screenshots.kt`), and `./gradlew :app:recordRoborazziDebug` records them again after a
 change meant to show.
 
+## CI
+
+`.github/workflows/android.yml` runs when the app, the data it copies or the API contract changes. On Linux it checks
+that the generated Kotlin contract is current, runs `:core:test` in UTC and in Europe/Zurich, then `:app:lintDebug` and
+`:app:assembleDebug`. The app's tests and `:app:verifyRoborazziDebug` run on a Mac with Apple silicon, where the
+screenshots are recorded: Robolectric draws text edges and blurs a little differently on Linux x86-64. A failed run
+keeps the reports, and each differing screenshot's `_actual` and `_compare` images, as artifacts.
+
 ## Core tests on a device
 
 `./gradlew :core:test` runs the core's JUnit tests on the JVM, with ICU4J standing in for the phone's ICU.

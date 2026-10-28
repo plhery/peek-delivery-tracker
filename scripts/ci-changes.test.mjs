@@ -8,11 +8,14 @@ import { runInNewContext } from 'node:vm';
 import { planChanges, selectSuites, successfulBaseline } from './ci-changes.mjs';
 import { BY_HAND_TITLE, RELEASE_STEPS } from './adopt-scraper.mjs';
 
-const none = { web: false, migrations: false, ios: false };
+const none = { web: false, migrations: false, ios: false, android: false };
 const web = { ...none, web: true };
 const ios = { ...none, ios: true };
+const android = { ...none, android: true };
+const native = { ...ios, android: true };
 const both = { ...web, ios: true };
-const all = { web: true, migrations: true, ios: true };
+const clients = { ...both, android: true };
+const all = { web: true, migrations: true, ios: true, android: true };
 const sha = digit => digit.repeat(40);
 const successful = (head, overrides = {}) => ({
   id: 1, head_sha: head, head_branch: 'main', event: 'push', conclusion: 'success', ...overrides,
@@ -21,7 +24,7 @@ const successful = (head, overrides = {}) => ({
 describe('test suite boundaries', () => {
   it('skips application suites for documentation, including native documentation', () => {
     assert.deepEqual(selectSuites([
-      'README.md', 'docs/DEPLOYMENT.md', 'docs/assets/hero-light.webp', 'ios/README.md',
+      'README.md', 'docs/DEPLOYMENT.md', 'docs/assets/hero-light.webp', 'ios/README.md', 'android/README.md',
       'AGENTS.md', '.github/ISSUE_TEMPLATE/bug_report.yml', '.github/pull_request_template.md',
     ]), none);
   });
@@ -32,10 +35,24 @@ describe('test suite boundaries', () => {
     }
   });
 
-  it('runs native tests for native code, build configuration and generated resources', () => {
+  it('runs native tests for native code and build configuration', () => {
     for (const file of ['ios/PeekDeliveryTracker/Parcel.swift', 'ios/Configuration/Shared.xcconfig',
-      'ios/PeekDeliveryTracker/Resources/CarrierCatalog.json']) {
-      assert.deepEqual(selectSuites([file]), ios);
+      'ios/PeekDeliveryTracker/GeneratedAPIContract.swift',
+      'ios/PeekDeliveryTracker/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png',
+      'ios/PeekDeliveryTracker/Resources/en.lproj/InfoPlist.strings']) {
+      assert.deepEqual(selectSuites([file]), ios, file);
+    }
+    for (const file of ['android/app/src/main/kotlin/com/example/Parcel.kt', 'android/core/build.gradle.kts',
+      'android/gradle/libs.versions.toml', 'android/app/src/test/snapshots/marks_light.png',
+      'android/core/src/main/kotlin/com/plhery/peekdeliverytracker/core/api/GeneratedApiContract.kt']) {
+      assert.deepEqual(selectSuites([file]), android, file);
+    }
+  });
+
+  it('runs both native apps for the generated data the Android build copies from the iPhone app', () => {
+    for (const file of ['ios/PeekDeliveryTracker/Resources/CarrierCatalog.json',
+      'ios/PeekDeliveryTracker/Resources/WorldDetail.pack', 'ios/PeekDeliveryTracker/Resources/DetectionGolden.json']) {
+      assert.deepEqual(selectSuites([file]), native, file);
     }
   });
 
@@ -52,7 +69,11 @@ describe('test suite boundaries', () => {
     for (const file of ['package.json', 'package-lock.json', 'shared/locales/en.json',
       'contracts/openapi.json', 'src/brand/identities.json', 'src/components/map/world.json',
       'src/components/map/detail.json', 'public/atlas/37_27.bin', 'scripts/generate-api-contract.mjs',
-      'scripts/generate-ios-resources.mjs', 'scripts/generate-icons.mjs', 'scripts/prepare-personal-ios-project.mjs']) {
+      'scripts/generate-ios-resources.mjs', 'scripts/generate-icons.mjs']) {
+      assert.deepEqual(selectSuites([file]), clients, file);
+    }
+    for (const file of ['scripts/prepare-personal-ios-project.mjs', 'scripts/validate-ios-install.mjs',
+      'scripts/check-mac-entitlements.mjs', 'scripts/refresh-ios-app.sh']) {
       assert.deepEqual(selectSuites([file]), both, file);
     }
   });
@@ -60,8 +81,9 @@ describe('test suite boundaries', () => {
   it('combines every area in the range and runs everything for unknown paths or CI policy changes', () => {
     assert.deepEqual(selectSuites(['docs/SCRAPER.md', 'ios/Parcel.swift', 'supabase/tests/assertions.sql']),
       { ...ios, migrations: true });
+    assert.deepEqual(selectSuites(['android/app/build.gradle.kts', 'src/client.ts']), { ...web, android: true });
     for (const file of ['new-runtime/worker.js', '.github/workflows/ci.yml', '.github/workflows/ios.yml',
-      'scripts/ci-changes.mjs', 'scripts/ci-changes.test.mjs']) {
+      '.github/workflows/android.yml', 'scripts/ci-changes.mjs', 'scripts/ci-changes.test.mjs']) {
       assert.deepEqual(selectSuites([file]), all);
     }
   });
@@ -137,6 +159,17 @@ describe('Git range selection', () => {
       ] });
       assert.equal(plan.base, baseline);
       assert.deepEqual(plan.suites, ios);
+    });
+  });
+
+  it('compares an Android run with the last one of its own workflow that passed', () => {
+    withRepository(({ git, commit }) => {
+      const baseline = commit('README.md');
+      commit('android/core/build.gradle.kts');
+      const target = commit('docs/DEPLOYMENT.md');
+      const plan = pushPlan({ git, target, baseline, workflow: 'android.yml' });
+      assert.equal(plan.base, baseline);
+      assert.deepEqual(plan.suites, android);
     });
   });
 

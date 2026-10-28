@@ -37,6 +37,9 @@ npm run test:pwa
 
 The browser tests use the fictional demo data at desktop and mobile sizes.
 
+For an Android change, run `./gradlew :core:test :app:verifyRoborazziDebug :app:lintDebug :app:assembleDebug`
+in `android/` ([android/README.md](android/README.md)).
+
 - **Database changes** are new, append-only migrations, with assertions in
   `supabase/tests/assertions.sql`.
 - **API changes** start in `contracts/openapi.json`; regenerate the types from it.

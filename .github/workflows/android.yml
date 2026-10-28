@@ -1,0 +1,118 @@
+name: Android app
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+  actions: read
+
+# Only a pull request's newest commit is worth testing. On main a run in progress finishes,
+# and the newest push waits for it, then compares with it (scripts/ci-changes.mjs).
+concurrency:
+  group: android-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  changes:
+    name: Select Android tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      android: ${{ steps.select.outputs.android }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
+      - run: node --test scripts/ci-changes.test.mjs
+      - id: select
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/ci-changes.mjs android.yml
+
+  # The runner's Android SDK has the platform the app compiles against and the build tools AGP
+  # uses; AGP would download either if an image lacked it.
+  build:
+    name: Core tests, lint and build
+    needs: changes
+    if: needs.changes.outputs.android == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 26
+          cache: npm
+      - run: npm ci
+      # The generated Kotlin contract, with the web and iPhone ones.
+      - run: npm run test:contract
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6
+        with:
+          cache-provider: basic
+      - name: Test the core in UTC
+        working-directory: android
+        env:
+          TEST_TIME_ZONE: UTC
+        run: ./gradlew :core:test
+      - name: Test the core in Zurich
+        working-directory: android
+        env:
+          TEST_TIME_ZONE: Europe/Zurich
+        run: ./gradlew :core:test
+      - name: Lint and build the app
+        working-directory: android
+        run: ./gradlew :app:lintDebug :app:assembleDebug
+      - name: Keep the reports
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: android-core-and-lint-reports
+          path: |
+            android/core/build/reports/tests/
+            android/core/build/test-results/
+            android/app/build/reports/lint-results-debug.*
+          retention-days: 7
+
+  # The screenshots are recorded on a Mac with Apple silicon. Robolectric's graphics draw text
+  # edges and blurs a little differently on Linux x86-64, so they are checked on the same platform.
+  # verifyRoborazziDebug runs the app's unit tests with the screenshots checked.
+  screenshots:
+    name: App tests and screenshots
+    needs: changes
+    if: needs.changes.outputs.android == 'true'
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6
+        with:
+          cache-provider: basic
+      - name: Test the app and check its screenshots
+        working-directory: android
+        run: ./gradlew :app:testDebugUnitTest :app:verifyRoborazziDebug
+      # A screenshot that differs leaves <name>_actual.png and <name>_compare.png in outputs/roborazzi.
+      - name: Keep the reports and screenshot differences
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: android-app-reports
+          path: |
+            android/app/build/reports/tests/testDebugUnitTest/
+            android/app/build/test-results/
+            android/app/build/outputs/roborazzi/
+            android/app/build/reports/roborazzi/
+          retention-days: 7

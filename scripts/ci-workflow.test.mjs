@@ -20,8 +20,8 @@ it('runs the browser journeys in the image of the installed Playwright', () => {
 });
 
 // A push to main that only changes content would otherwise cancel the native tests in progress.
-it('lets a run on main finish in CI and the iPhone app, and replaces only a pull request\'s', () => {
-  for (const workflow of ['ci.yml', 'ios.yml']) {
+it('lets a run on main finish in CI and the native apps, and replaces only a pull request\'s', () => {
+  for (const workflow of ['ci.yml', 'ios.yml', 'android.yml']) {
     assert.match(read(`.github/workflows/${workflow}`), /\nconcurrency:\n {2}group: [a-z]+-\$\{\{ github\.event\.pull_request\.number \|\| github\.ref \}\}\n {2}cancel-in-progress: \$\{\{ github\.event_name == 'pull_request' \}\}\n/,
       `${workflow} must not cancel a run in progress on main`);
   }
@@ -71,6 +71,25 @@ for (const repository of [
     }
   });
 }
+
+// The screenshots are recorded on a Mac with Apple silicon, and Linux x86-64 draws text edges and
+// blurs a little differently. GitHub's macos-<version> runners are Apple silicon.
+it('checks the Android screenshots on a Mac with Apple silicon, and the core in two time zones', () => {
+  const workflow = read('.github/workflows/android.yml');
+  assert.match(job(workflow, 'changes'), /\n {8}run: node scripts\/ci-changes\.mjs android\.yml\n/);
+  const screenshots = job(workflow, 'screenshots');
+  assert.match(screenshots, /\n {4}runs-on: macos-\d+\n/);
+  assert.match(screenshots, /\n {8}run: \.\/gradlew :app:testDebugUnitTest :app:verifyRoborazziDebug\n/);
+  assert.equal(workflow.match(/run: .*Roborazzi/g).length, 1, 'only the Mac checks the screenshots');
+  const build = job(workflow, 'build');
+  for (const zone of ['UTC', 'Europe/Zurich']) {
+    assert.match(build, new RegExp(`\n {10}TEST_TIME_ZONE: ${zone}\n {8}run: \\./gradlew :core:test\n`), zone);
+  }
+  assert.match(build, /\n {6}- run: npm run test:contract\n/);
+  for (const id of ['build', 'screenshots']) {
+    assert.match(job(workflow, id), /\n {4}if: needs\.changes\.outputs\.android == 'true'\n/, id);
+  }
+});
 
 // An outage of the audit endpoint skips the audit; a vulnerability still fails the job.
 it('audits the production dependencies through the script that tells the two apart', () => {

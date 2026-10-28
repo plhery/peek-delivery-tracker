@@ -209,9 +209,9 @@ jobs:
           fi
 
   # Runs only where an instance has set it up: DEPLOY_ENABLED and DEPLOY_URL as repository
-  # variables, and the DEPLOY_SSH_* secrets. The iPhone app is tested in its own workflow.
-  # The Deploy workflow (deploy.yml) puts the commit in production, unless a newer commit
-  # being tested replaces it.
+  # variables, and the DEPLOY_SSH_* secrets. The iPhone and Android apps are tested in their
+  # own workflows. The Deploy workflow (deploy.yml) puts the commit in production, unless a
+  # newer commit being tested replaces it.
   deploy:
     name: Request the deploy
     # always() lets an intentionally skipped SQL suite through; every selected

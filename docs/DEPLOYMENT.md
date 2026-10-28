@@ -151,18 +151,19 @@ in the repository:
 [Suite selection](../scripts/ci-changes.mjs) compares each target with the nearest
 successful `main` ancestor of that workflow, or with the pull request base. This includes
 changes from canceled and replaced runs. Without a trusted baseline, every suite runs.
-Documentation skips application tests. SQL changes run migration tests; native changes
-run iPhone tests; web changes run web checks, unit tests, browser journeys and the image
-build. Dependencies and shared client data run both web and iPhone tests. Scraper updates
-keep browser journeys because the package supplies browser code too.
+Documentation skips application tests. SQL changes run migration tests; iPhone and Android
+changes run their app's tests, and the data files the Android app copies from the iPhone
+app's resources run both; web changes run web checks, unit tests, browser journeys and the
+image build. Dependencies and shared client data run web, iPhone and Android tests. Scraper
+updates keep browser journeys because the package supplies browser code too.
 
-Runs on `main` go one at a time, in CI and in the iPhone app's workflow; of the pushes that
+Runs on `main` go one at a time, in CI and in the native apps' workflows; of the pushes that
 arrive during a run, only the newest is tested next. So a push that only changes content
 waits for the native tests in progress, then skips them, instead of restarting them. For web changes, once all selected checks have passed, CI hands the commit
 to the Deploy workflow (`.github/workflows/deploy.yml`). Intentionally skipped migration
 tests allow this; failures and canceled checks block it. Documentation, native-only and
-SQL-only changes do not deploy the web image. The iPhone app is tested in its own workflow
-and does not hold a deploy back.
+SQL-only changes do not deploy the web image. The iPhone and Android apps are tested in
+their own workflows and do not hold a deploy back.
 
 Every deploy restarts the server, and pushes often come a few minutes apart. So a handed
 over commit waits while CI tests a newer one pushed before the oldest commit still waiting

@@ -3,20 +3,27 @@ import { appendFileSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const allSuites = { web: true, migrations: true, ios: true };
+const allSuites = { web: true, migrations: true, ios: true, android: true };
 const documentation = new Set([
   'README.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'SECURITY.md', 'AGENTS.md',
-  'LICENSE', 'ios/README.md', 'ops/sentry/README.md',
+  'LICENSE', 'ios/README.md', 'android/README.md', 'ops/sentry/README.md',
 ]);
+// The generators of the data both native apps read.
 const nativeInputs = new Set([
   'scripts/generate-api-contract.mjs', 'scripts/generate-brand.mjs', 'scripts/generate-icons.mjs',
   'scripts/generate-ios-resources.mjs', 'scripts/localization-catalog.mjs',
   'scripts/native-localization.mjs', 'scripts/native-localization.test.mjs',
+  'src/components/map/world.json', 'src/components/map/detail.json',
+]);
+const iosTooling = new Set([
   'scripts/prepare-personal-ios-project.mjs', 'scripts/prepare-personal-ios-project.test.mjs',
   'scripts/validate-ios-install.mjs', 'scripts/validate-ios-install.test.mjs', 'scripts/refresh-ios-app.sh',
   'scripts/check-mac-entitlements.mjs', 'scripts/check-mac-entitlements.test.mjs',
-  'src/components/map/world.json', 'src/components/map/detail.json',
 ]);
+// The Android build copies its data from the files at the top of the iPhone app's resources
+// (android/core/build.gradle.kts); the folders below them are the iPhone's own.
+const iosResources = 'ios/PeekDeliveryTracker/Resources/';
+const isSharedResource = file => file.startsWith(iosResources) && !file.slice(iosResources.length).includes('/');
 const webConfiguration = new Set([
   'Dockerfile', '.dockerignore', '.env.example', 'next.config.ts', 'next-env.d.ts',
   'tsconfig.json', 'eslint.config.js', 'vitest.config.ts', 'vitest.server.config.ts',
@@ -26,18 +33,27 @@ const webConfiguration = new Set([
 
 /** Unknown paths run everything. Only known, independent areas can skip suites. */
 export function selectSuites(files) {
-  const suites = { web: false, migrations: false, ios: false };
+  const suites = { web: false, migrations: false, ios: false, android: false };
   for (const file of files) {
     if (file === 'scripts/ci-changes.mjs' || file === 'scripts/ci-changes.test.mjs') return { ...allSuites };
     if (documentation.has(file) || file.startsWith('docs/')
       || file.startsWith('.github/ISSUE_TEMPLATE/') || file === '.github/pull_request_template.md') continue;
     if (file.startsWith('supabase/') || file === 'scripts/test-migrations.sh') {
       suites.migrations = true;
+    } else if (isSharedResource(file)) {
+      suites.ios = true;
+      suites.android = true;
     } else if (file.startsWith('ios/')) {
       suites.ios = true;
+    } else if (file.startsWith('android/')) {
+      suites.android = true;
     } else if (file === 'package.json' || file === 'package-lock.json'
       || file.startsWith('shared/') || file.startsWith('contracts/')
       || file.startsWith('src/brand/') || file.startsWith('public/atlas/') || nativeInputs.has(file)) {
+      suites.web = true;
+      suites.ios = true;
+      suites.android = true;
+    } else if (iosTooling.has(file)) {
       suites.web = true;
       suites.ios = true;
     } else if (file.startsWith('app/') || file.startsWith('src/') || file.startsWith('content/')
@@ -72,7 +88,7 @@ function execute(program, args) {
 export function planChanges({ eventName, event, sha, runId, repository, workflow, command = execute }) {
   const full = reason => ({ base: null, reason, files: [], suites: { ...allSuites } });
   try {
-    if (!['ci.yml', 'ios.yml'].includes(workflow) || !/^[a-f0-9]{40}$/.test(sha)
+    if (!['ci.yml', 'ios.yml', 'android.yml'].includes(workflow) || !/^[a-f0-9]{40}$/.test(sha)
       || command('git', ['rev-parse', 'HEAD']).trim() !== sha) {
       return full('The checked-out target or workflow could not be verified.');
     }

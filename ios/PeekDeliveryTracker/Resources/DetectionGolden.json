@@ -67068,6 +67068,42 @@
     ]
   },
   {
+    "input": "ASO1000GB02486320001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
+      "fedex-international-connect"
+    ]
+  },
+  {
+    "input": "ASO1002GB00827959001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
+      "fedex-international-connect"
+    ]
+  },
+  {
+    "input": "ASO1004GB04198255001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
+      "fedex-international-connect"
+    ]
+  },
+  {
     "input": "AT0000000001",
     "carrier": "amazon-logistics",
     "confidence": "high",
@@ -67830,6 +67866,18 @@
     "asked": [
       "slovenska-posta",
       "chronopost"
+    ]
+  },
+  {
+    "input": "BEA0015GB00168070001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
+      "fedex-international-connect"
     ]
   },
   {
@@ -74624,6 +74672,18 @@
     "confidence": "high",
     "candidates": [
       "equick"
+    ]
+  },
+  {
+    "input": "EQU0014GB00010556001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
+      "fedex-international-connect"
     ]
   },
   {
@@ -84150,9 +84210,13 @@
   },
   {
     "input": "NOR0012GB00002606001",
-    "carrier": "fedex-international-connect",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
       "fedex-international-connect"
     ]
   },
@@ -84685,6 +84749,14 @@
     ]
   },
   {
+    "input": "P/11309/LPOZ/2026",
+    "carrier": "no-limit",
+    "confidence": "high",
+    "candidates": [
+      "no-limit"
+    ]
+  },
+  {
     "input": "P004159319",
     "carrier": "unknown",
     "confidence": "low",
@@ -85064,9 +85136,13 @@
   },
   {
     "input": "PAR3450DK74052034501",
-    "carrier": "fedex-international-connect",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
       "fedex-international-connect"
     ]
   },
@@ -88128,6 +88204,18 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "RIV0010GB00024069001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
+      "fedex-international-connect"
+    ]
   },
   {
     "input": "RJ004718684ZA",
@@ -92037,6 +92125,18 @@
     ]
   },
   {
+    "input": "TAL0011GB00007763001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
+      "fedex-international-connect"
+    ]
+  },
+  {
     "input": "TB0000672740",
     "carrier": "unknown",
     "confidence": "low",
@@ -92464,6 +92564,18 @@
     "candidates": []
   },
   {
+    "input": "THG0012GB00602247001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
+      "fedex-international-connect"
+    ]
+  },
+  {
     "input": "THUMA4869178",
     "carrier": "unknown",
     "confidence": "low",
@@ -92637,6 +92749,14 @@
     ],
     "asked": [
       "chronopost"
+    ]
+  },
+  {
+    "input": "TT2600303503680CN",
+    "carrier": "timely-titan",
+    "confidence": "high",
+    "candidates": [
+      "timely-titan"
     ]
   },
   {
@@ -94454,6 +94574,18 @@
     ]
   },
   {
+    "input": "WHI0014GB00105267001",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
+      "fedex-international-connect"
+    ]
+  },
+  {
     "input": "WM00AK560100067361529",
     "carrier": "unknown",
     "confidence": "none",
@@ -96122,9 +96254,13 @@
   },
   {
     "input": "ZZZ0000GB00000000017",
-    "carrier": "fedex-international-connect",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "fedex-international-connect",
+      "starlinks-global"
+    ],
+    "preferred": [
       "fedex-international-connect"
     ]
   },

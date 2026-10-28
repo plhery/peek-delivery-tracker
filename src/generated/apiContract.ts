@@ -31683,7 +31683,8 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^[A-Z]{3}\\d{4}[A-Z]{2}\\d{11}$",
-        "confidence": "high"
+        "confidence": "low",
+        "preferred": true
       }
     ],
     "trackingSearchUrl": "https://fictracking.fedex.com/"
@@ -31904,6 +31905,110 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://eushipments.com/tracking"
+  },
+  "no-limit": {
+    "displayName": "No Limit",
+    "aliases": [
+      "Nolimit",
+      "No Limit Logistics"
+    ],
+    "countries": [
+      "PL"
+    ],
+    "color": "#ffd900",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "no-limit"
+    },
+    "trackingUrlTemplate": "https://follow.nolimit.pl/",
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^P\\d{1,6}L[A-Z]{3}20\\d{2}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://follow.nolimit.pl/"
+  },
+  "starlinks-global": {
+    "displayName": "Starlinks Global",
+    "aliases": [
+      "Starlinks Global Ltd"
+    ],
+    "countries": [
+      "GB"
+    ],
+    "color": "#00a0af",
+    "selectable": true,
+    "timezone": "Europe/London",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "starlinks-global"
+    },
+    "trackingUrlTemplate": "https://starlinks.app/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "starlinks.app",
+          "www.starlinks.app"
+        ],
+        "path": "^/track/([^/?#]+)/?$",
+        "ownNumbersOnly": true
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^[A-Z]{3}\\d{4}[A-Z]{2}\\d{11}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://starlinks.app/track"
+  },
+  "timely-titan": {
+    "displayName": "Timely Titan Express",
+    "aliases": [
+      "Timely Titan",
+      "TimelyTitan",
+      "Timely Titan International",
+      "TT Express",
+      "泰坦国际速递",
+      "Titan泰坦国际速递"
+    ],
+    "countries": [
+      "NL",
+      "BE",
+      "LU",
+      "CN"
+    ],
+    "color": "#00bcd4",
+    "selectable": true,
+    "timezone": "Europe/Amsterdam",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "timely-titan"
+    },
+    "trackingUrlTemplate": "https://timelytitan.com/tracking.html?number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "timelytitan.com",
+          "www.timelytitan.com"
+        ],
+        "pathPattern": "^/tracking\\.html$",
+        "params": [
+          "number"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^TT\\d{13}CN$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://timelytitan.com/tracking.html"
   }
 } as const;
 
@@ -32762,7 +32867,10 @@ export const CARRIER_IDS = [
   "gofo-ca",
   "topyou",
   "yfhex",
-  "eushipments"
+  "eushipments",
+  "no-limit",
+  "starlinks-global",
+  "timely-titan"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

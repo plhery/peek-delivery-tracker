@@ -204,6 +204,13 @@ describe('carrier brand', () => {
       'pengyou',
       'pin-ag',
       'tusk-logistics',
+      'eushipments',
+      'timely-titan',
+      'no-limit',
+      'starlinks-global',
+      'mhi',
+      'e-commerce-international',
+      'boxtal',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

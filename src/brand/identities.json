@@ -259,6 +259,9 @@
   "box-now": {
     "decal": "box-now"
   },
+  "boxtal": {
+    "decal": "boxtal"
+  },
   "bpost": {
     "decal": "bpost"
   },
@@ -719,6 +722,9 @@
   "dynalogic": {
     "decal": "dynalogic"
   },
+  "e-commerce-international": {
+    "decal": "e-commerce-international"
+  },
   "early-bird": {
     "decal": "early-bird"
   },
@@ -813,6 +819,9 @@
   },
   "europochta": {
     "decal": "europochta"
+  },
+  "eushipments": {
+    "decal": "eushipments"
   },
   "evdemo-lojistik": {
     "decal": "evdemo-lojistik"
@@ -1526,6 +1535,9 @@
   "metropolitan-warehouse": {
     "decal": "metropolitan-warehouse"
   },
+  "mhi": {
+    "decal": "mhi"
+  },
   "micro-express": {
     "decal": "micro-express"
   },
@@ -1604,6 +1616,12 @@
   },
   "nippon-express": {
     "decal": "nippon-express"
+  },
+  "no-limit": {
+    "decal": "no-limit",
+    "palette": {
+      "accent": "#1d1d1b"
+    }
   },
   "noest": {
     "decal": "noest"
@@ -2239,6 +2257,9 @@
   "starlinks": {
     "decal": "starlinks"
   },
+  "starlinks-global": {
+    "decal": "starlinks-global"
+  },
   "steadfast": {
     "decal": "steadfast"
   },
@@ -2341,6 +2362,9 @@
   },
   "tiki": {
     "decal": "tiki"
+  },
+  "timely-titan": {
+    "decal": "timely-titan"
   },
   "tipsa": {
     "palette": {

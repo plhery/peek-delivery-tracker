@@ -140,7 +140,9 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'ait-worldwide' | 'team-worldwide' | 'huahan' | 'anserx' | 'chukou1' | 'jumppoint'
   | 'ycs-logistics' | 'lingdong' | 'jcex' | 'shiprocket' | 'first-line' | 'kun-express'
   | 'juxi-express' | 'techlink' | 'dayone' | 'shouwu' | 'ywe' | 'far-international'
-  | 'intel-valley' | 'pengyou' | 'pin-ag' | 'tusk-logistics';
+  | 'intel-valley' | 'pengyou' | 'pin-ag' | 'tusk-logistics'
+  | 'eushipments' | 'timely-titan' | 'no-limit' | 'starlinks-global' | 'mhi'
+  | 'e-commerce-international' | 'boxtal';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.draw
 
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,12 +16,10 @@ import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
-import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
@@ -209,11 +208,15 @@ class PipScreenshotTest {
         }
     }
 
+    /** The shot as the view draws it now, in software: a hardware capture can come back a frame behind, which a
+     * test of what changes from one frame to the next can't have. */
     private fun capture(): Bitmap {
         val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
-        compose.runOnUiThread { view.rootView.invalidate() }
         compose.waitForIdle()
-        return compose.onNodeWithTag(SHOT).captureToImage().asAndroidBitmap()
+        val bounds = compose.onNodeWithTag(SHOT).fetchSemanticsNode().boundsInRoot
+        val whole = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        compose.runOnUiThread { view.draw(Canvas(whole)) }
+        return Bitmap.createBitmap(whole, bounds.left.toInt(), bounds.top.toInt(), bounds.width.toInt(), bounds.height.toInt())
     }
 
 }

@@ -159,5 +159,7 @@
   { "id": "speedaf", "catalog": "speedaf", "name": "Speedaf", "languages": ["en"] },
   { "id": "yilong-logistics", "catalog": "yilong-logistics", "name": "Yilong Logistics", "languages": ["en"] },
   { "id": "quick-rabbit", "catalog": "quick-rabbit", "name": "Quick Rabbit", "languages": ["en"] },
-  { "id": "huaya-express", "catalog": "huaya-express", "name": "Huaya Express", "languages": ["en"] }
+  { "id": "huaya-express", "catalog": "huaya-express", "name": "Huaya Express", "languages": ["en"] },
+  { "id": "gofo-ca", "catalog": "gofo-ca", "name": "GOFO Canada", "languages": ["en"] },
+  { "id": "metropolitan-warehouse", "catalog": "metropolitan-warehouse", "name": "Metropolitan Warehouse & Delivery", "languages": ["en"] }
 ]

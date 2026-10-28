@@ -1296,6 +1296,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Huaya Express tracking: HYYT numbers and where they stop",
       "name": "Huaya Express",
       "color": "#e60013"
+    },
+    {
+      "id": "gofo-ca",
+      "catalog": "gofo-ca",
+      "slug": "gofo-canada-tracking",
+      "title": "GOFO Canada tracking: GFCA numbers, statuses, contact",
+      "name": "GOFO Canada",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "metropolitan-warehouse",
+      "catalog": "metropolitan-warehouse",
+      "slug": "metropolitan-warehouse-tracking",
+      "title": "Metropolitan Warehouse tracking (MWD): furniture delivery",
+      "name": "Metropolitan Warehouse & Delivery",
+      "color": "#0062b7"
     }
   ],
   "de": [

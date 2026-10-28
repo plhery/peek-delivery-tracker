@@ -464,8 +464,8 @@ internal class Url private constructor(internal val components: UrlComponents) {
     val fragment: String? get() = components.percentEncodedFragment
 
     companion object {
-        /** `URL(string:)`. */
-        fun parse(string: String): Url? = UrlComponents.parse(string)?.let(::Url)
+        /** `URL(string:)`: nil for an empty string too, which URLComponents reads. */
+        fun parse(string: String): Url? = if (string.isEmpty()) null else UrlComponents.parse(string)?.let(::Url)
     }
 }
 

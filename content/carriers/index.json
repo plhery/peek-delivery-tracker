@@ -153,5 +153,7 @@
   { "id": "eushipments", "catalog": "eushipments", "name": "euShipments", "languages": ["en"] },
   { "id": "mhi", "catalog": "mhi", "name": "MHI", "languages": ["en"] },
   { "id": "pengyou", "catalog": "pengyou", "name": "Pengyou", "languages": ["en"] },
-  { "id": "linhan", "catalog": "linhan", "name": "LinHan International", "languages": ["en"] }
+  { "id": "linhan", "catalog": "linhan", "name": "LinHan International", "languages": ["en"] },
+  { "id": "mtscn", "catalog": "mtscn", "name": "Meiteshun Logistics", "languages": ["en"] },
+  { "id": "cttyex", "catalog": "cttyex", "name": "CTTYEX", "languages": ["en"] }
 ]

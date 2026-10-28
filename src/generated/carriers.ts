@@ -1248,6 +1248,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "LinHan International tracking: LHGJ numbers and statuses",
       "name": "LinHan International",
       "color": "#eb5c20"
+    },
+    {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-tracking",
+      "title": "Meiteshun tracking: AMTS numbers, scans and who to ask",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "cttyex-tracking",
+      "title": "CTTYEX tracking: CTTY numbers, scans and Beijing time",
+      "name": "CTTYEX",
+      "color": "#0068AC"
     }
   ],
   "de": [

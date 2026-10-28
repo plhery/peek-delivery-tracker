@@ -324,8 +324,8 @@ interface DeviceParcelFile {
  */
 class DeviceParcelFiles(private val keychain: SessionPersistence, private val file: DeviceParcelFile) : DeviceParcelStorage {
     override fun load(): DeviceParcelStorage.Contents {
-        // As KeychainStore's and Data(contentsOf:)'s `try?`: a store or file that cannot be read reads as empty, so a
-        // lost Keystore key or a broken file never stops the app from opening.
+        // As KeychainStore's and Data(contentsOf:)'s `try?`: a store or file the system fails to read reads as missing,
+        // so a lost Keystore key or a broken disk never stops the app from opening.
         val keys = quietly { keychain.load() }?.let { data ->
             try {
                 decodeJson(keysSerializer, data)
@@ -371,7 +371,7 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
         internal val encoder = JsonEncoder(sortedKeys = true, swiftKeys = true)
 
         /**
-         * The parcels on file, with their keys. A file this build can't read keeps every key, so the service can be
+         * The parcels on file, with their keys. A file this build can't decode keeps every key, so the service can be
          * asked to forget their links.
          */
         fun opened(file: ByteArray?, keys: Map<String, String>): DeviceParcelStorage.Contents {
@@ -432,8 +432,8 @@ class DeviceParcels(
     private var forgotten: List<DeviceParcel>
 
     /**
-     * The tokens and languages rounds of notification requests are under way for, as Swift's `Set<String>` holds them:
-     * each in its canonical (NFC) form, so canonically equivalent spellings are one round.
+     * The tokens and languages rounds of notification requests are under way for, kept in NFC so that canonically
+     * equivalent spellings are one round, as Swift's `Set<String>` compares them.
      */
     private val alertRounds = mutableSetOf<String>()
 
@@ -520,11 +520,17 @@ class DeviceParcels(
     suspend fun refresh(all: Boolean = false, only: UUID? = null) {
         val client = client ?: return
         stopForgottenAlerts(client)
-        // Keys without their parcel, left by a file that couldn't be read: the service forgets those links too.
-        for ((linkId, key) in keys) {
-            if (entries.any { it.linkId.equalsCanonically(linkId) }) continue
-            if (!succeeds { client.forget(linkId, key) } || entries.any { it.linkId.equalsCanonically(linkId) }) continue
-            keys = keys.setting(linkId, null)
+        // Keys without their parcel, left by a file that couldn't be decoded: the service forgets those links too.
+        try {
+            for ((linkId, key) in keys) {
+                if (entries.any { it.linkId.equalsCanonically(linkId) }) continue
+                if (!succeeds { client.forget(linkId, key) } || entries.any { it.linkId.equalsCanonically(linkId) }) continue
+                keys = keys.setting(linkId, null)
+            }
+        } catch (cancellation: CancellationException) {
+            // The links already forgotten stay so on file, as the parcels' round keeps what it read.
+            save()
+            throw cancellation
         }
         var trouble: Exception? = null
         for (entry in entries) {

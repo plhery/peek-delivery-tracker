@@ -1192,6 +1192,24 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun aRefreshCancelledAmongKeysKeepsTheLinksItForgotForgotten() = runTest {
+        val storage = Memory()
+        storage.keys = mapOf("22222222222C" to key, "22222222222D" to key)
+        val calls = Calls()
+        val leaving = client(calls).replacing(forget = { linkId, _ ->
+            calls.add("forget $linkId")
+            if (linkId == "22222222222D") throw CancellationException("Left")
+        })
+        try {
+            device(leaving, storage, this).refresh()
+            fail("The refresh went on as though nothing happened")
+        } catch (_: CancellationException) {
+        }
+        assertEquals(listOf("forget 22222222222C", "forget 22222222222D"), calls.all)
+        assertEquals(mapOf("22222222222D" to key), storage.keys)
+    }
+
+    @Test
     fun keysAndTokensStayOutOfWhatIsLogged() {
         val entry = parcel("22222222222A", "", UUID.randomUUID()).copy(alertToken = "token1")
         val written = "$entry ${DeviceParcelStorage.Contents(listOf(entry), mapOf("22222222222A" to key))}"

@@ -852,6 +852,7 @@
     "far-international": "far-international",
     "fargo-courier": "fargo-courier",
     "fargo-uz": "fargo-uz",
+    "fastbox": "fastbox",
     "fastdrop": "fastdrop",
     "fastfrate": "fastfrate",
     "fedex": "fedex",
@@ -43671,6 +43672,40 @@
           ],
           "stroke": "accent",
           "strokeWidth": 0.45
+        }
+      ],
+      "fastbox": [
+        {
+          "type": "polygon",
+          "d": "M11 4.05L15.72 6.77L15.72 12.22L11 14.95L6.28 12.23L6.28 6.78Z",
+          "points": [
+            [11, 4.05],
+            [15.72, 6.77],
+            [15.72, 12.22],
+            [11, 14.95],
+            [6.28, 12.23],
+            [6.28, 6.78]
+          ],
+          "fill": "accent"
+        },
+        {
+          "type": "polygon",
+          "d": "M11 6.16L13.9 7.83L13.9 11.17L11 12.84L8.1 11.17L8.1 7.83Z",
+          "points": [[11, 6.16], [13.9, 7.83], [13.9, 11.17], [11, 12.84], [8.1, 11.17], [8.1, 7.83]],
+          "fill": "truck"
+        },
+        {
+          "type": "polygon",
+          "d": "M9.22 7.18L9.22 7.38L11.65 8.85L9.9 9.94L8.1 8.92L8.1 7.83Z",
+          "points": [[9.22, 7.18], [9.22, 7.38], [11.65, 8.85], [9.9, 9.94], [8.1, 8.92], [8.1, 7.83]],
+          "fill": "accent"
+        },
+        {
+          "type": "line",
+          "d": "M15.94 6.65L13.68 7.95M6.06 12.35L8.32 11.05",
+          "segments": [[[15.94, 6.65], [13.68, 7.95]], [[6.06, 12.35], [8.32, 11.05]]],
+          "stroke": "truck",
+          "strokeWidth": 0.35
         }
       ]
     }

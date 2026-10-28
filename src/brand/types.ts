@@ -147,7 +147,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'dealersend' | 'pactic' | 'express-one-bg'
   | 'logisimple' | 'viadireta'
   | 'meso-global'
-  | 'jifan' | 'youbang-express';
+  | 'jifan' | 'youbang-express'
+  | 'fastbox';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

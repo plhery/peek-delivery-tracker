@@ -221,6 +221,7 @@ describe('carrier brand', () => {
       'meso-global',
       'jifan',
       'youbang-express',
+      'fastbox',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

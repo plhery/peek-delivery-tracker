@@ -169,9 +169,19 @@ data class AdaptiveColor(
 }
 
 object Brand {
+    /** Postal yellow, the same in every appearance. */
+    val accent = AdaptiveColor(RgbaColor.hex("#F3CF48"))
+    val accentBright = accent
+    val onAccent = AdaptiveColor(RgbaColor.hex("#20251E"))
     val ink = color(light = "#20251E", dark = "#F5F6F2")
+    val inkSoft = color(light = "#657060", dark = "#AFB9A9")
+    val cream = color(light = "#F0F0E9", dark = "#292C28")
     val paper = color(light = "#FFFFFF", dark = "#242824")
     val warning = color(light = "#963E19", dark = "#FFB184")
+
+    /** The tray behind a swiped card. */
+    val warningSoft = color(light = "#FFDDC7", dark = "#4C3123")
+    val background = color(light = "#F4F5F1", dark = "#151915")
 
     /** A colour for each appearance; with increased contrast, a little further from the middle grey. */
     fun color(light: String, dark: String): AdaptiveColor {

@@ -18,6 +18,17 @@ class SharedResourcesTest {
     }
 
     @Test
+    fun anInstalledReaderComesFirstAndTheClassPathCoversWhatItLacks() {
+        try {
+            SharedResources.install { name -> if (name == "Probe.json") "{}".byteInputStream() else null }
+            assertEquals("{}", SharedResources.text("Probe.json"))
+            assertTrue(SharedResources.text("Reading.json").isNotEmpty())
+        } finally {
+            SharedResources.install { null }
+        }
+    }
+
+    @Test
     fun carrierCatalogListsCarriers() {
         val catalog = Json.parseToJsonElement(SharedResources.text("CarrierCatalog.json")).jsonObject
         assertTrue(catalog.getValue("x-carriers").jsonObject.size > 100)

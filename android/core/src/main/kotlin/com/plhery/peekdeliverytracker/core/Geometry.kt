@@ -718,12 +718,12 @@ class MapPath {
  * SwiftUI's UnitCurve for a cubic Bézier from (0, 0) to (1, 1): the curve's height where it is `progress` across,
  * found by Newton's method, then by halving where that does not settle.
  */
-class UnitCurve private constructor(start: Point, end: Point) {
-    private val cx = 3 * start.x
-    private val bx = 3 * (end.x - start.x) - cx
+class UnitCurve private constructor(val startControlPoint: Point, val endControlPoint: Point) {
+    private val cx = 3 * startControlPoint.x
+    private val bx = 3 * (endControlPoint.x - startControlPoint.x) - cx
     private val ax = 1 - cx - bx
-    private val cy = 3 * start.y
-    private val by = 3 * (end.y - start.y) - cy
+    private val cy = 3 * startControlPoint.y
+    private val by = 3 * (endControlPoint.y - startControlPoint.y) - cy
     private val ay = 1 - cy - by
 
     private fun x(t: Double): Double = ((ax * t + bx) * t + cx) * t
@@ -757,8 +757,14 @@ class UnitCurve private constructor(start: Point, end: Point) {
 
         val easeInOut = bezier(Point(0.42, 0.0), Point(0.58, 1.0))
 
+        /** The curve of `.easeIn` animations. */
+        val easeIn = bezier(Point(0.42, 0.0), Point(1.0, 1.0))
+
         /** The curve of `.easeOut` animations. */
         val easeOut = bezier(Point(0.0, 0.0), Point(0.58, 1.0))
+
+        /** The curve of `.linear` animations: its height is how far across it is. */
+        val linear = bezier(Point(0.0, 0.0), Point(1.0, 1.0))
     }
 }
 

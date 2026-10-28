@@ -565,6 +565,9 @@
   "dayton-freight": {
     "decal": "dayton-freight"
   },
+  "dealersend": {
+    "decal": "dealersend"
+  },
   "delhivery": {
     "decal": "delhivery"
   },
@@ -855,6 +858,9 @@
   },
   "express-one": {
     "decal": "express-one"
+  },
+  "express-one-bg": {
+    "decal": "express-one-bg"
   },
   "fan-courier": {
     "decal": "fan-courier"
@@ -1728,6 +1734,9 @@
   },
   "packs": {
     "decal": "packs"
+  },
+  "pactic": {
+    "decal": "pactic"
   },
   "pakistan-post": {
     "decal": "pakistan-post"

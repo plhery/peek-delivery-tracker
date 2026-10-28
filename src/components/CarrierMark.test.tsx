@@ -154,6 +154,9 @@ describe('carrier mark', () => {
     'boxtal',
     'huaya-express',
     'quick-rabbit',
+    'dealersend',
+    'pactic',
+    'express-one-bg',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

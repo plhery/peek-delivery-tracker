@@ -143,7 +143,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'intel-valley' | 'pengyou' | 'pin-ag' | 'tusk-logistics'
   | 'eushipments' | 'timely-titan' | 'no-limit' | 'starlinks-global' | 'mhi'
   | 'e-commerce-international' | 'boxtal'
-  | 'huaya-express' | 'quick-rabbit';
+  | 'huaya-express' | 'quick-rabbit'
+  | 'dealersend' | 'pactic' | 'express-one-bg';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -213,6 +213,9 @@ describe('carrier brand', () => {
       'boxtal',
       'huaya-express',
       'quick-rabbit',
+      'dealersend',
+      'pactic',
+      'express-one-bg',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

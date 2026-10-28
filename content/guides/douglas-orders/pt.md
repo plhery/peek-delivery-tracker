@@ -1,49 +1,46 @@
 ---
 title: Seguimento de encomendas Douglas: envio, trocas e problemas
-description: Quem entrega a tua encomenda da douglas.pt, onde está o seguimento, quanto custa o envio e o que fazer se atrasar, não chegar ou vier danificada.
+description: Como seguir a tua encomenda da douglas.pt, os teus direitos de devolução e garantia, e o que fazer se atrasar, não chegar ou vier danificada.
 slug: seguimento-encomenda-douglas
 picture: Um frasco de perfume alto e um batom ao lado de uma pequena caixa de presente e de uma carrinha de entregas, e o Pip de pé em cima da caixa de presente.
 published: 2026-10-26
 updated: 2026-10-26
 ---
 
-Em Portugal, a Douglas vende online na douglas.pt e só entrega em Portugal continental e nas ilhas. As encomendas seguem pela ViaDirecta, em 1 a 3 dias úteis no continente, com envio grátis para compras acima de 35 €, e o email de confirmação de envio traz o link para as seguires. Se a encomenda vier incompleta ou danificada, contacta a Douglas pelo 800 500 481 ou por web@douglas.pt.
+Em Portugal, a Douglas vende online na douglas.pt. Se a encomenda atrasar, vier incompleta ou danificada, fala com o apoio ao cliente da Douglas, pelos contactos indicados na douglas.pt, com o número da encomenda. A lei dá-te 14 dias para devolver uma compra online sem justificação e 3 anos de garantia, com reparação ou troca sem custos, para um produto com defeito.
 
 ## Onde vende a Douglas online?
 
 A Douglas tem um site próprio em cada país onde vende online: a lista de países do grupo inclui Portugal, Espanha, Itália, Polónia, Alemanha, Áustria, Suíça, Bélgica, Países Baixos e outros países europeus. Em França e no Mónaco, o grupo vende com a Nocibé, que tem a sua própria loja online.
 
-Em Portugal compras na douglas.pt, da Perfumaria Douglas Portugal. A loja só envia para o território nacional: «Não é possível o envio para outros Países. Apenas efectuamos entregas em Portugal Continental e Ilhas.» Se vives noutro país, compra no site Douglas desse país.
-
-Também podes ver se um produto está disponível numa loja Douglas e reservá-lo diretamente, ou encomendá-lo online e recebê-lo na loja que quiseres, com envio grátis.
+Em Portugal compras na douglas.pt. Se vives noutro país, compra no site Douglas desse país.
 
 ## Quem entrega a minha encomenda Douglas?
 
-A Douglas diz-o na página de envios: «As nossas encomendas são enviadas pela ViaDirecta - Distribuição e Estafetagem, Lda». A Douglas entrega na morada que indicas no formulário de compra, depois de pagares a encomenda e, se for o caso, os portes, antes ou no momento da entrega. A encomenda sai no dia útil seguinte à receção do pedido pela Douglas, e as entregas fazem-se em horário comercial, das 9h às 19h, conforme a transportadora e a rota.
+As fontes que este guia cita não dizem que transportadora entrega as encomendas da douglas.pt. O número de seguimento dá-te uma pista: escreve-o no verificador mais abaixo para veres de que transportadora pode ser, ou cola-o no Peek, que pergunta às mais prováveis qual delas o conhece. Se não tiveres número, pergunta à Douglas.
 
-| O que escolhes na douglas.pt | Quem entrega | Prazo |
-| --- | --- | --- |
-| Envio Normal, Portugal continental | ViaDirecta | 1 a 3 dias úteis, após a confirmação do pagamento |
-| Entrega em Loja | Uma loja Douglas | Pode somar 1 ou 2 dias úteis |
-| Envio Normal, Madeira | ViaDirecta | Até 10 dias úteis |
-| Envio Normal, Açores | ViaDirecta | De 14 a 25 dias úteis, conforme a ilha |
+As regras europeias para compras online valem na mesma:
 
-Para mais informação, ou para marcar a entrega, falas diretamente com a ViaDirecta: na página de seguimento dela, pedes informação com o número de envio, no formulário «Pedir Informação».
+| Momento | O que diz a lei europeia |
+| --- | --- |
+| O prazo | Salvo acordo explícito sobre outro prazo, o vendedor tem 30 dias para entregar |
+| O transporte | O vendedor responde por qualquer dano desde a expedição até à entrega |
+| O preço | Tens de saber o preço total, com as despesas de porte e outros custos, antes de comprar |
 
 :::journey
-- warehouse | Armazém da Douglas | Sai no dia útil seguinte ao pedido
-- truck | ViaDirecta | 1 a 3 dias úteis no continente
-- locker | Uma loja Douglas | Entrega em Loja, grátis
-- home | Tu | Grátis acima de 35 € no continente
+- warehouse | Douglas | Prepara e expede a tua encomenda
+- truck | A transportadora | 30 dias no máximo, salvo acordo
+- locker | Ponto de recolha | Se a encomenda for para um, espera o aviso
+- home | Tu | 14 dias para devolver
 :::
 
 ## Onde está o número de seguimento da minha encomenda Douglas?
 
 Procura nestes sítios:
 
-- **O email de confirmação de envio.** Quando a encomenda é expedida, a Douglas manda-te um email com o link da transportadora, onde vês a qualquer momento o estado da entrega.
-- **A ViaDirecta.** Com o número de envio desse email, podes pedir-lhe mais informação ou marcar a entrega, no formulário «Pedir Informação».
-- **O formulário de contacto da Douglas.** Num dos motivos, «Estado da minha encomenda», preenches o número da encomenda e a Douglas responde-te.
+- **Os emails da encomenda.** Procura um número ou um link de seguimento nos emails da Douglas sobre a encomenda, também na pasta de spam.
+- **O apoio ao cliente da Douglas.** Se não o encontrares, pergunta à Douglas pelos contactos indicados na douglas.pt, com o número da encomenda.
+- **Vários números.** Se tiveres mais do que um, a encomenda vem em vários pacotes: segue cada um.
 
 Para outras lojas: [onde está o número de seguimento](guide:find-tracking-number). Tens um número e não sabes de quem é? Escreve-o aqui:
 
@@ -52,39 +49,26 @@ Para outras lojas: [onde está o número de seguimento](guide:find-tracking-numb
 
 ## Porque é que a minha encomenda Douglas atrasa, ou o seguimento não mexe?
 
-Quando nada se mexe, costuma ser uma destas:
+Quando nada se mexe, pode ser que a encomenda ainda não tenha saído ou que a transportadora ainda não tenha atualizado o seguimento. O que diz a lei europeia:
 
-- **O pagamento ainda não está confirmado.** Os prazos de entrega contam a partir da confirmação do pagamento.
-- **Falta de stock.** O prazo de entrega pode variar conforme a disponibilidade dos artigos que encomendaste.
-- **Épocas festivas.** Na Black Friday e no Natal, os prazos podem ser maiores do que o normal.
-- **Entrega nas ilhas.** Na Madeira, até 10 dias úteis; nos Açores, de 14 a 25, conforme a ilha.
-- **Entrega em Loja.** Pode somar 1 ou 2 dias úteis ao prazo de entrega.
-- **Ninguém em casa.** As entregas são em horário comercial, das 9h às 19h. Para marcar a entrega para quando estiveres, fala com a ViaDirecta.
-- **Uma morada errada.** Se te enganaste na morada, altera-a na tua conta de cliente, em «Modificar o endereço de entrega», ou contacta a Douglas pelo 800 500 481 ou por web@douglas.pt. Mais: [mudar a morada de entrega](guide:change-delivery-address).
+- **Até 30 dias.** Salvo acordo explícito sobre outro prazo, o vendedor tem 30 dias para entregar.
+- **Um prazo suplementar.** Se a encomenda não chegar nos 30 dias ou no prazo combinado, avisa a Douglas e dá-lhe um prazo suplementar razoável: se te disser que a entrega atrasou uma semana por problemas com os fornecedores, é razoável dar-lhe essa semana.
+- **Depois, rescindir.** Se a Douglas não cumprir esse prazo, tens direito a rescindir o contrato e a receber o reembolso o mais rapidamente possível.
+- **Sem prazo suplementar.** Não tens de dar mais tempo se o vendedor se recusar a entregar, ou se o prazo de entrega era crucial, por exemplo para um evento, e o avisaste antes.
 
-Se a Douglas não conseguir entregar a encomenda em 14 dias, devolve-te o que pagaste, pelo mesmo meio de pagamento. Quando esperar ainda é normal: [o seguimento não atualiza](guide:tracking-not-updating) e [prazos de entrega](guide:delivery-times).
+**Uma morada errada.** Se te enganaste na morada, contacta logo a Douglas. Mais: [mudar a morada de entrega](guide:change-delivery-address).
 
-**Cancelar a encomenda.** Podes cancelar até a encomenda sair da loja online: pede-o por web@douglas.pt ou pelo 800 500 481. A Douglas não te cobra nada; se já pagaste, o apoio ao cliente contacta-te para te devolver o dinheiro, o que pode levar até 5 dias úteis.
+Quando esperar ainda é normal: [o seguimento não atualiza](guide:tracking-not-updating) e [prazos de entrega](guide:delivery-times).
 
-## Opções e custos de envio da Douglas
+## Custos de envio da Douglas
 
-A página de envios diz que o envio é grátis para compras superiores a 35 € no continente, e acima de 50 € nas ilhas. A oferta dos portes vale só para o Envio Normal em Portugal continental: se escolheres entrega pós-laboral, pagas os portes.
+As fontes que este guia cita não indicam os portes da douglas.pt: vês o custo da tua encomenda antes de pagar. O que diz a lei:
 
-| Destino ou opção | Custo | Prazo |
-| --- | --- | --- |
-| Portugal continental, Envio Normal | 2,95 € abaixo de 35 €; grátis acima | 1 a 3 dias úteis |
-| Entrega em Loja | Grátis | Mais 1 ou 2 dias úteis |
-| Madeira | 4,95 € abaixo de 50 €; grátis acima | Até 10 dias úteis |
-| São Miguel, Terceira e Faial | 4,95 € abaixo de 50 €; grátis acima | Até 14 dias úteis |
-| Santa Maria, Pico, São Jorge, Graciosa e Flores | 4,95 € abaixo de 50 €; grátis acima | Até 20 dias úteis |
-| Corvo | 4,95 € abaixo de 50 €; grátis acima | Até 25 dias úteis |
-| Pagamento na entrega | Mais 2 € | O estafeta cobra por Multibanco ou em dinheiro |
-
-**Entrega em Loja.** Encomendas online e a Douglas entrega na loja que escolheres, sem portes. Só vale para encomendas pagas na loja online, não com pagamento na entrega. O horário de levantamento é o da loja, que pode mudar sem aviso. Para levantar a encomenda, mostras um documento de identificação válido e assinas o comprovativo de entrega.
-
-**Pagamento.** Pagas por referência Multibanco, MB Way, PayPal, cartão VISA ou Mastercard, Apple Pay, Google Pay ou na entrega.
-
-**Amostras e embrulho.** As encomendas acima de 50 € levam 3 amostras grátis, e o embrulho para oferta não tem custo. Os 50 € que vês no rodapé do site são das amostras, não dos portes do continente.
+| Tema | O que diz a lei |
+| --- | --- |
+| Preço total | Tens de saber o preço total, com as despesas de porte e outros custos |
+| Extras | Um envio expresso ou um embrulho para oferta só se cobram com o teu consentimento explícito; uma casa pré-assinalada não conta, e tens direito ao reembolso do que pagaste assim |
+| Livre resolução | O vendedor devolve-te também os custos de entrega, menos o custo extra de uma entrega mais cara que tenhas pedido em vez da normal |
 
 Mais: [cacifos e pontos de recolha](guide:parcel-lockers) e [encomenda não levantada](guide:uncollected-parcel).
 
@@ -93,32 +77,28 @@ Mais: [cacifos e pontos de recolha](guide:parcel-lockers) e [encomenda não leva
 Primeiro vê, depois avisa. Por ordem:
 
 :::steps
-- Vê o seguimento | Abre o link da transportadora no email de confirmação de envio. Para saber mais ou marcar a entrega, usa o formulário «Pedir Informação» da página de seguimento da ViaDirecta.
-- Procura e pergunta | Marcada como entregue e não está: se escolheste Entrega em Loja, pergunta na loja; senão, pergunta aos vizinhos, na portaria e a quem estava em casa. Ao receber, confere a caixa e o conteúdo: se a caixa tiver sinais de dano, escreve-o na guia do transportador e reclama logo ao estafeta.
-- Contacta a Douglas | Liga para o 800 500 481, grátis da rede nacional, em dias úteis das 9h às 19h e aos sábados das 10h às 19h, ou escreve para web@douglas.pt. Tem à mão o número da encomenda.
-- Apresenta uma reclamação | Se faltar um artigo, diz à linha de apoio qual é, por web@douglas.pt ou pelo 800 500 481, com o número da encomenda: as perguntas frequentes mandam para aí as encomendas incompletas e os artigos danificados. A página «Reclamações» da Douglas tem um formulário, e também recebe reclamações pelo 800 500 481. Para um artigo danificado, regista a troca na linha de apoio nos 30 dias seguintes à receção, com o número da encomenda, os produtos e o motivo. O site tem ainda um link para o Livro de Reclamações online.
-- Reembolso ou artigo novo | Se o produto ou a embalagem chegaram danificados, a Douglas troca o produto por outro igual ou, se pedires, por outro de valor igual ou superior, e paga o envio da troca. Devolve-o na embalagem original, com a fatura, as ofertas e o formulário. Quando há dinheiro a devolver, chega em 14 dias depois de a Douglas verificar o artigo. A maquilhagem não selada não se troca.
+- Vê o seguimento | Abre o seguimento de cada número que tiveres. Se a encomenda vier em vários pacotes, vê todos antes de dar algo por perdido.
+- Procura e pergunta | Marcada como entregue e não está: vê no ponto de recolha, se escolheste um, e pergunta aos vizinhos, na portaria e a quem estava em casa.
+- Contacta a Douglas | Usa os contactos de apoio ao cliente indicados na douglas.pt e tem à mão o número da encomenda.
+- Apresenta uma reclamação | Diz à Douglas o que falta ou o que chegou danificado, com o número da encomenda. Guarda a caixa e tira fotografias de um frasco partido ou a verter: o vendedor responde por qualquer dano desde a expedição até à entrega. Se não chegarem a acordo, antes de ires a tribunal podes tentar resolver o problema num Centro de Arbitragem de Conflitos de Consumo: por norma, é mais rápido e mais barato.
+- Reembolso ou artigo novo | Para um produto com defeito, podes escolher entre a reparação e a substituição, ou seja, a troca por um novo, salvo se for impossível ou desproporcionado para o vendedor. Não pagas nada, e não deve demorar mais de 30 dias. Se não ficar resolvido, podes pedir a redução do preço ou cancelar a compra. Em Portugal, a garantia é de 3 anos, e nos 2 primeiros presume-se que o defeito já existia. Precisas da fatura ou do recibo.
 :::
 
-**Trocas.** A troca faz-se por correio. Quando a registas, diz logo que produto queres em troca. Sem a fatura de compra ou sem toda a documentação pedida, a Douglas não aceita a troca.
-
-Mais: [encomenda entregue mas não recebida](guide:delivered-not-received), [encomenda perdida](guide:lost-parcel) e [encomenda danificada](guide:damaged-parcel).
+Para mais informações ou ajuda, a Direção-Geral da Defesa do Consumidor, Comércio e Serviços (DGC) atende pelo 213 564 600, em dias úteis das 10h às 13h, e por dgc@dg.consumidor.pt. Mais: [encomenda entregue mas não recebida](guide:delivered-not-received), [encomenda perdida](guide:lost-parcel) e [encomenda danificada](guide:damaged-parcel).
 
 ## Devolver uma encomenda Douglas
 
-Os termos e condições dão 14 dias desde a receção da encomenda; a página «Trocas e devoluções» e as perguntas frequentes falam de 15. Devolve em 14 dias, para cumprir as duas.
+Numa compra online, a lei dá-te 14 dias, a contar da entrega, para cancelar a compra sem justificação (direito de livre resolução) e recuperar o que pagaste. Se o último dia não for dia útil, o prazo passa para o dia útil seguinte. A exceção são os produtos selados que, por razões de saúde ou de higiene, não se podem devolver depois de abertos: se abriste o selo depois da entrega, já não tens este direito.
 
-- **Primeiro, regista a devolução.** Contacta a linha de apoio por web@douglas.pt ou pelo 800 500 481, com o número da encomenda, os produtos a devolver e o motivo.
-- **Depois, envia.** Preenche o formulário de devolução, que está na página «Trocas e devoluções», e manda os artigos para a morada indicada nele. Os portes da devolução são teus.
-- **Em que estado.** Em bom estado, sem terem sido experimentados, na embalagem original e inviolada, com a fatura, as ofertas e o formulário preenchido. Sem toda a documentação, a devolução não é aceite. Por qualidade e higiene, a Douglas não aceita maquilhagem que não esteja selada, nem produtos selados de saúde ou higiene que abriste depois da entrega.
-
-**Reembolsos.** Não recebes uma fatura nova: a Douglas devolve o valor pelo mesmo meio de pagamento, depois de verificar os artigos. Os termos dizem 10 dias e as perguntas frequentes 15: se ao fim de 15 dias o dinheiro não chegou, contacta a Douglas. Se pagaste na entrega, dás o teu NIB.
+- **Primeiro, contacta a Douglas.** Pede-lhe, com o número da encomenda, as instruções e a morada para a devolução.
+- **Os portes da devolução.** Por norma, pagas tu a embalagem e o envio, exceto se o vendedor se propuser pagar ou não te tiver informado desses custos antes da compra.
+- **O reembolso.** O vendedor tem de te devolver tudo o que pagaste, incluindo os custos de entrega. Se pediste uma entrega mais cara do que a normal, não tem de te devolver o custo extra.
 
 Onde está o número de seguimento da devolução: [seguimento de devoluções](guide:returns-tracking).
 
 ## Posso seguir uma encomenda Douglas no Peek?
 
-Sim, com o número de seguimento do email de confirmação de envio: cola-o no [Peek](/). Para a ViaDirecta, cola o número na mesma: o Peek segue mais de 3500 transportadoras. Se o número tiver a mesma forma que os de outras transportadoras, o Peek pergunta às prováveis e mostra a que conhece o número. Se o conhecerem várias, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa.
+Sim, com o número de seguimento da transportadora: cola-o no [Peek](/). Se o número tiver a mesma forma que os de outras transportadoras, o Peek pergunta às prováveis e mostra a que conhece o número. Se o conhecerem várias, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa. O Peek segue mais de 3500 transportadoras, por isso cola o número mesmo que não saibas de quem é.
 
 Se a devolução tiver número de seguimento, cola-o da mesma maneira. Se a encomenda vier em vários pacotes, adiciona cada número.
 
@@ -127,15 +107,9 @@ Se um pacote muda de transportadora pelo caminho e a primeira nomeia a que fica 
 :::sources
 - [Douglas Group: lista de países](https://douglas.group/en/) – onde a Douglas vende online
 - [Douglas Group: The Group](https://douglas.group/en/the-group) – Nocibé em França
-- [Douglas Portugal: Envios e entregas](https://www.douglas.pt/envios-e-entregas) – só território nacional, ViaDirecta, custos, prazos, ilhas, Entrega em Loja, épocas festivas, entregas pós-laboral
-- [Douglas Portugal: FAQ](https://www.douglas.pt/faq) – email de confirmação de envio, encomenda incompleta ou danificada, 15 dias, reembolso, NIB, morada de entrega, levantamento em loja, só Portugal
-- [Douglas Portugal: Trocas e devoluções](https://www.douglas.pt/trocas-e-devolucoes) – guia do transportador, troca em 30 dias, devolução em 15 dias, estado dos artigos, formulário
-- [Douglas Portugal: Termos e condições gerais de venda](https://www.douglas.pt/termos-e-condicoes-gerais-de-venda) – 14 dias, morada e pagamento, horário de entrega, envio no dia útil seguinte, trocas por correio e custos, devoluções em 14 dias, reembolso em 10 dias, maquilhagem, cancelamento
-- [Douglas Portugal: Meios de pagamento](https://www.douglas.pt/meios-de-pagamento) – meios de pagamento, pagamento na entrega por mais 2 €
-- [Douglas Portugal: Reclamações](https://www.douglas.pt/reclamacoes) – formulário, telefone e horário
-- [Douglas Portugal: Contactar a Douglas online](https://www.douglas.pt/formulario-de-contacto) – «Estado da minha encomenda»
-- [Douglas Portugal: Loja online](https://www.douglas.pt/) – envio grátis acima de 35 €, exceto ilhas, amostras e embrulho, Livro de Reclamações online
-- [Douglas Portugal: Serviços](https://www.douglas.pt/c/servicos/) – reserva em loja, entrega na loja grátis
-- [ViaDireta: Seguir envio](https://www.viadireta.pt/tracking) – formulário «Pedir Informação» com o número de envio
-- [Universal Parcel Scraper: dados de transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas dos números, transportadoras que o Peek conhece
+- [gov.pt: Garantia de produtos comprados em Portugal](https://www.gov.pt/guias/garantia-de-produtos-comprados-em-portugal) – 3 anos, presunção de 2 anos, reparação ou substituição sem custos e em 30 dias, redução do preço ou cancelamento, fatura ou recibo, arbitragem, livre resolução em 14 dias, custos de entrega, DGC
+- [Diário da República: Lei n.º 10/2023, com a republicação do Decreto-Lei n.º 24/2014 (PDF)](https://files.dre.pt/1s/2023/03/04500/0001100039.pdf) – produtos selados de saúde ou higiene (art. 17.º), custos extra de entrega no reembolso (art. 12.º)
+- [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo suplementar, rescisão, preço total, extras, danos desde a expedição até à entrega
+- [Your Europe: Devoluções e direito de retratação](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pt.htm) – 14 dias desde a entrega, dia útil seguinte, portes da devolução
+- [Universal Parcel Scraper: dados de transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – transportadoras que o Peek segue
 :::

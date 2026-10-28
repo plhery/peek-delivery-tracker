@@ -910,7 +910,7 @@ class ParcelFeedbackTests {
         )
         val device = DeviceParcels(
             DeviceParcelClient.api(configuration, transport, verification, region = { Locale.UK }), storage, PostcodeMemory(MemoryDefaults()), this,
-            region = { Locale.UK },
+            region = { Locale.UK }, language = { AppLanguage.En },
         )
         val answer = ParcelFeedbackRequest.wrong(
             reasons = setOf(ParcelFeedbackReason.Status), asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.It, app = ios,

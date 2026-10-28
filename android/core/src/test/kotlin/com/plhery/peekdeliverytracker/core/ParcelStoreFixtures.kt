@@ -92,7 +92,7 @@ internal fun testParcelStore(
     region: () -> Locale = { Locale.UK },
     device: DeviceParcels = DeviceParcels(
         if (configuration.mode == AppConfiguration.Mode.Api) DeviceParcelClient.api(configuration, transport, verificationWithoutAppAttest(), region) else null,
-        MemoryDeviceParcelStorage(), PostcodeMemory(defaults), scope, region,
+        MemoryDeviceParcelStorage(), PostcodeMemory(defaults), scope, region, language = { localizer.language },
     ),
     notifications: PushNotifications = StubPushNotifications(),
     deviceNotifications: DeviceNotificationAccess = DeviceNotificationAccess.system(notifications),

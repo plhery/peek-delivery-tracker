@@ -65,6 +65,11 @@ data class DeviceParcel(
     val alertPreset: ParcelAlertPreset? = null,
     /** The device token the service last answered about for this parcel's notifications. */
     val alertToken: String? = null,
+    /**
+     * Someone else's parcel forgotten here before its notifications could be turned off: out of the list, and kept only
+     * until they are.
+     */
+    val forgotten: Boolean? = null,
 ) {
     val isViewer: Boolean get() = viewer == true
 
@@ -328,18 +333,11 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
                 null
             }
         } ?: emptyMap()
-        val parcels = quietly { file.read() }?.let { data ->
-            try {
-                decodeSwiftKeys(parcelsSerializer, data)
-            } catch (_: Exception) {
-                null
-            }
-        } ?: return DeviceParcelStorage.Contents(emptyList(), emptyMap())
-        return matched(parcels, keys)
+        return opened(quietly { file.read() }, keys)
     }
 
     override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {
-        if (parcels.isEmpty()) {
+        if (parcels.isEmpty() && keys.isEmpty()) {
             quietly { keychain.delete() }
             quietly { file.delete() }
             return
@@ -354,6 +352,8 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
                 return
             }
         }
+        // Keys alone are those of a file that couldn't be read, which stays until their links are forgotten.
+        if (parcels.isEmpty()) return
         quietly { file.write(encoder.encode(parcelsSerializer, parcels)) }
     }
 
@@ -369,6 +369,20 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
 
         /** The iPhone's JSONEncoder.deliveryTracker on its own models: keys sorted, as the Swift models name them. */
         internal val encoder = JsonEncoder(sortedKeys = true, swiftKeys = true)
+
+        /**
+         * The parcels on file, with their keys. A file this build can't read keeps every key, so the service can be
+         * asked to forget their links.
+         */
+        fun opened(file: ByteArray?, keys: Map<String, String>): DeviceParcelStorage.Contents {
+            if (file == null) return DeviceParcelStorage.Contents(emptyList(), emptyMap())
+            val parcels = try {
+                decodeSwiftKeys(parcelsSerializer, file)
+            } catch (_: Exception) {
+                return DeviceParcelStorage.Contents(emptyList(), keys)
+            }
+            return matched(parcels, keys)
+        }
 
         /**
          * A parcel of this phone's own without its key cannot be read or forgotten, and a key without its parcel opens
@@ -403,14 +417,25 @@ class DeviceParcels(
      * `Resources.getSystem().configuration.locales[0]`, never `Locale.getDefault()`, which follows the app's language.
      */
     private val region: () -> Locale,
+    /**
+     * The app's language as it is now, which a lookup asks carriers to word its scans in: `AppLanguage.current` on the
+     * iPhone, the Localizer's language here.
+     */
+    private val language: () -> AppLanguage,
     private val now: () -> Instant = Instant::now,
     private val debug: Boolean = false,
 ) {
     private var entries: List<DeviceParcel>
     private var keys: Map<String, String>
 
-    /** The token and language a round of notification requests is under way for. */
-    private var alertRound: String? = null
+    /** Parcels forgotten here whose notifications are still to be turned off, on file beside the others. */
+    private var forgotten: List<DeviceParcel>
+
+    /**
+     * The tokens and languages rounds of notification requests are under way for, as Swift's `Set<String>` holds them:
+     * each in its canonical (NFC) form, so canonically equivalent spellings are one round.
+     */
+    private val alertRounds = mutableSetOf<String>()
 
     /**
      * The token and language each parcel's notifications were asked for since launch. Each launch asks again, in case
@@ -420,7 +445,8 @@ class DeviceParcels(
 
     init {
         val loaded = storage.load()
-        entries = loaded.parcels
+        entries = loaded.parcels.filter { it.forgotten != true }
+        forgotten = loaded.parcels.filter { it.forgotten == true }
         keys = loaded.keys
     }
 
@@ -450,11 +476,13 @@ class DeviceParcels(
             it.parcel.id != replacing && it.parcel.trackingNumber.equalsCanonically(request.trackingNumber) &&
                 it.parcel.carrier.rawValue.equalsCanonically(request.carrier?.rawValue)
         }?.let { existing -> throw DeliveryApiError.DuplicateTracking(existing.parcel.id) }
+        // A carrier that words its scans in several languages answers the parcel in the app's.
         val response = client.lookup(
             PublicLookupRequest(
                 trackingNumber = request.trackingNumber, carrier = request.carrier,
                 trackingUrl = request.trackingUrl, dpdPostcode = request.dpdPostcode,
                 dpdPostcodeCountry = request.dpdPostcodeCountry, lookupCountryHint = request.lookupCountryHint,
+                language = language().rawValue,
             ),
         )
         if (!ParcelLinkRoute.validId(response.link.id)) throw DeliveryApiError.InvalidResponse()
@@ -491,6 +519,13 @@ class DeviceParcels(
      */
     suspend fun refresh(all: Boolean = false, only: UUID? = null) {
         val client = client ?: return
+        stopForgottenAlerts(client)
+        // Keys without their parcel, left by a file that couldn't be read: the service forgets those links too.
+        for ((linkId, key) in keys) {
+            if (entries.any { it.linkId.equalsCanonically(linkId) }) continue
+            if (!succeeds { client.forget(linkId, key) } || entries.any { it.linkId.equalsCanonically(linkId) }) continue
+            keys = keys.setting(linkId, null)
+        }
         var trouble: Exception? = null
         for (entry in entries) {
             if (only != null && entry.parcel.id != only) continue
@@ -529,19 +564,36 @@ class DeviceParcels(
 
     /**
      * The service forgets the parcel, then the device does. Someone else's parcel is forgotten here alone: its
-     * notifications on this phone stop, and its link goes on working for others.
+     * notifications on this phone stop, and its link goes on working for others. When the service can't be told yet,
+     * it leaves the list and each refresh tells it again.
      */
     suspend fun forget(id: UUID) {
         val entry = entries.firstOrNull { it.parcel.id == id } ?: return
         val client = client
+        var alerting = false
         if (client != null && entry.alertToken != null) {
-            attempt { client.removeAlert(entry.linkId, DeleteParcelAppAlertRequest(token = entry.alertToken)) }
+            alerting = !succeeds { client.removeAlert(entry.linkId, DeleteParcelAppAlertRequest(token = entry.alertToken)) }
         }
         val key = keys.keyOf(entry.linkId)
         if (client != null && key != null) client.forget(entry.linkId, key)
         entries = entries.filter { !it.linkId.equalsCanonically(entry.linkId) }
         keys = keys.setting(entry.linkId, null)
+        // A forgotten link of this phone's own takes its notifications with it; someone else's goes on.
+        if (alerting && entry.isViewer) forgotten = forgotten + entry.copy(forgotten = true)
         save()
+    }
+
+    /**
+     * Turns off the notifications of parcels forgotten while the service couldn't be told. The first trouble ends the
+     * round; the rest wait for the next.
+     */
+    private suspend fun stopForgottenAlerts(client: DeviceParcelClient) {
+        for (entry in forgotten) {
+            val token = entry.alertToken
+            if (token != null && !succeeds { client.removeAlert(entry.linkId, DeleteParcelAppAlertRequest(token = token)) }) return
+            forgotten = forgotten.filter { !(it.linkId.equalsCanonically(entry.linkId) && it.alertToken.equalsCanonically(entry.alertToken)) }
+            save()
+        }
     }
 
     /** Forgets every parcel. The ones the service could not be told about stay, and the trouble is thrown. */
@@ -702,6 +754,11 @@ class DeviceParcels(
             linkId = linkId, label = label?.nonEmpty ?: "", archivedAt = null,
             parcel = Parcel(shared = response.parcel), checkedAt = now().timeIntervalSinceReferenceDate,
         )
+        // Followed again before its notifications were turned off: they go on, and are its own again.
+        forgotten.firstOrNull { it.linkId.equalsCanonically(linkId) }?.let { left ->
+            entry = entry.copy(alertToken = left.alertToken, alertPreset = left.alertPreset)
+            forgotten = forgotten.filter { !it.linkId.equalsCanonically(linkId) }
+        }
         if (key != null) {
             keys = keys.setting(linkId, key)
         } else {
@@ -730,8 +787,8 @@ class DeviceParcels(
     suspend fun registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = NativePushEnvironment.current(debug)) {
         val asked = "$token ${locale.rawValue}"
         val client = client ?: return
-        if (alertRound.equalsCanonically(asked)) return
-        alertRound = asked
+        val round = asked.nfc()
+        if (!alertRounds.add(round)) return
         try {
             val due = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && it.parcel.currentStage?.isFinal != true }.take(alertsPerRound)
             for (entry in due) {
@@ -759,7 +816,7 @@ class DeviceParcels(
                 }
             }
         } finally {
-            alertRound = null
+            alertRounds.remove(round)
         }
     }
 
@@ -775,7 +832,7 @@ class DeviceParcels(
         entries = entries.toMutableList().also { it[index] = change(it[index]) }
     }
 
-    private fun save() = storage.save(entries, keys)
+    private fun save() = storage.save(entries + forgotten, keys)
 
     companion object {
         /**
@@ -823,6 +880,17 @@ private inline fun attempt(block: () -> Unit) {
     } catch (_: Exception) {
     }
 }
+
+/** Swift's `(try? …) != nil`: whether the call went through. A cancellation ends the caller, as in `attempt`. */
+private inline fun succeeds(block: () -> Unit): Boolean =
+    try {
+        block()
+        true
+    } catch (cancellation: CancellationException) {
+        throw cancellation
+    } catch (_: Exception) {
+        false
+    }
 
 /** Swift's `keys[linkID]`: a Dictionary finds the key canonically equivalent to the one asked for. */
 private fun Map<String, String>.keyOf(linkId: String): String? = this[linkId] ?: entries.firstOrNull { it.key.equalsCanonically(linkId) }?.value

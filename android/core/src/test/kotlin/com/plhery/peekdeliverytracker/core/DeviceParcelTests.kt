@@ -9,6 +9,7 @@ import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
+import com.plhery.peekdeliverytracker.core.api.ParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLink
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkKind
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
@@ -25,13 +26,17 @@ import java.time.Instant
 import java.util.Locale
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
@@ -70,13 +75,16 @@ class DeviceParcelTests {
         private val log = mutableListOf<String>()
         private val countryHints = mutableListOf<String?>()
         private val postcodes = mutableListOf<String?>()
+        private val languages = mutableListOf<String?>()
 
         fun add(call: String) = synchronized(this) { log += call }
         fun lookupCountry(hint: String?) = synchronized(this) { countryHints += hint }
         fun lookupPostcode(postcode: String?) = synchronized(this) { postcodes += postcode }
+        fun lookupLanguage(language: String?) = synchronized(this) { languages += language }
         val all: List<String> get() = synchronized(this) { log.toList() }
         val lookupCountries: List<String?> get() = synchronized(this) { countryHints.toList() }
         val lookupPostcodes: List<String?> get() = synchronized(this) { postcodes.toList() }
+        val lookupLanguages: List<String?> get() = synchronized(this) { languages.toList() }
     }
 
     private val key = "k".repeat(43)
@@ -115,11 +123,13 @@ class DeviceParcelTests {
         lookup: PublicLookupResponse? = null,
         read: (String) -> PublicParcelResponse? = { null },
         alert: (String) -> DeviceAlertAnswer = { DeviceAlertAnswer.On },
+        unalert: (String) -> Unit = {},
     ) = DeviceParcelClient(
         lookup = { request ->
             calls.add("lookup ${request.trackingNumber} ${request.carrier?.rawValue ?: "-"}")
             calls.lookupCountry(request.lookupCountryHint)
             calls.lookupPostcode(request.dpdPostcode)
+            calls.lookupLanguage(request.language)
             lookup ?: throw DeviceLookupsSpent()
         },
         read = { linkId, key ->
@@ -151,8 +161,17 @@ class DeviceParcelTests {
             )
             alert(linkId)
         },
-        removeAlert = { linkId, request -> calls.add("unalert $linkId ${request.token}") },
+        removeAlert = { linkId, request ->
+            calls.add("unalert $linkId ${request.token}")
+            unalert(linkId)
+        },
     )
+
+    /** Swift's `var client = …` with one of its calls set anew: the same client, the calls given replaced. */
+    private fun DeviceParcelClient.replacing(
+        forget: suspend (String, String) -> Unit = this.forget,
+        setAlert: suspend (String, String?, ParcelAppAlertRequest) -> DeviceAlertAnswer = this.setAlert,
+    ) = DeviceParcelClient(lookup, read, forget, update, detect, feedback, setAlert, removeAlert)
 
     private fun device(
         client: DeviceParcelClient?,
@@ -161,7 +180,8 @@ class DeviceParcelTests {
         postcodes: PostcodeMemory = PostcodeMemory(MemoryDefaults()),
         now: () -> Instant = Instant::now,
         region: Locale = Locale.forLanguageTag("fr-CH"),
-    ) = DeviceParcels(client, storage, postcodes, scope, region = { region }, now = now)
+        language: AppLanguage = AppLanguage.En,
+    ) = DeviceParcels(client, storage, postcodes, scope, region = { region }, language = { language }, now = now)
 
     private fun parcel(linkId: String, label: String, id: UUID, at: Double = date(), pkg: PublicPackage = pkg(id)) =
         DeviceParcel(linkId = linkId, label = label, archivedAt = null, parcel = Parcel(shared = pkg), checkedAt = at)
@@ -220,11 +240,17 @@ class DeviceParcelTests {
     @Test
     fun aNewGuestLookupForwardsItsCountryHint() = runTest {
         val calls = Calls()
-        val device = device(client(calls, lookup = PublicLookupResponse(link = link("22222222222A"), key = key, parcel = pkg(UUID.randomUUID()))), Memory(), this)
+        // The app's language, here Polish, as the iPhone's AppLanguage.current.
+        val device = device(
+            client(calls, lookup = PublicLookupResponse(link = link("22222222222A"), key = key, parcel = pkg(UUID.randomUUID()))), Memory(), this,
+            language = AppLanguage.Pl,
+        )
 
         device.add(CreatePackageRequest(trackingNumber = "TESTPARCEL123789", carrier = CarrierId.Dhl, lookupCountryHint = "CH"))
 
         assertEquals(listOf<String?>("CH"), calls.lookupCountries)
+        // A carrier that words its scans in several languages answers the parcel in the app's.
+        assertEquals(listOf<String?>(AppLanguage.Pl.rawValue), calls.lookupLanguages)
         assertEquals(listOf("lookup TESTPARCEL123789 dhl"), calls.all)
     }
 
@@ -764,6 +790,54 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun aFileThatCannotBeReadKeepsItsKeysUntilTheirLinksAreForgotten() = runTest {
+        val unreadable = DeviceParcelFiles.opened("""[{"linkID":42}]""".toByteArray(), keys = mapOf("22222222222C" to key))
+        assertTrue(unreadable.parcels.isEmpty())
+        assertEquals(mapOf("22222222222C" to key), unreadable.keys)
+        assertEquals("No file, no parcels to forget", emptyMap<String, String>(), DeviceParcelFiles.opened(null, keys = mapOf("22222222222C" to key)).keys)
+
+        // Offline, the key stays for the next try.
+        val storage = Memory()
+        storage.keys = unreadable.keys
+        val calls = Calls()
+        val offline = client(calls).replacing(forget = { linkId, _ ->
+            calls.add("forget $linkId")
+            throw IOException("The Internet connection appears to be offline.")
+        })
+        device(offline, storage, this).refresh()
+        assertEquals(mapOf("22222222222C" to key), storage.keys)
+
+        device(client(calls), storage, this).refresh()
+        assertEquals(listOf("forget 22222222222C", "forget 22222222222C"), calls.all)
+        assertTrue(storage.keys.isEmpty())
+    }
+
+    @Test
+    fun aRoundEndingLeavesAnotherUnderWayMarked() = runTest {
+        val calls = Calls()
+        val gate = AlertGate()
+        val held = client(calls, lookup = PublicLookupResponse(link = link("22222222222A"), key = key, parcel = pkg(UUID.randomUUID())))
+            .replacing(setAlert = { linkId, _, request ->
+                calls.add("alert $linkId ${request.token}")
+                gate.pass(request.token)
+                DeviceAlertAnswer.On
+            })
+        val device = device(held, Memory(), this)
+        device.add(CreatePackageRequest(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dhl))
+        val first = launch { device.registerAlerts(token = "old-token", locale = NativePushLocale.En) }
+        gate.arrived("old-token")
+        val second = launch { device.registerAlerts(token = "new-token", locale = NativePushLocale.En) }
+        gate.arrived("new-token")
+        gate.release("old-token")
+        first.join()
+        // The second round is still under way: the same round does not start again beside it.
+        device.registerAlerts(token = "new-token", locale = NativePushLocale.En)
+        gate.release("new-token")
+        second.join()
+        assertEquals(listOf("alert 22222222222A old-token", "alert 22222222222A new-token"), calls.all.filter { it.startsWith("alert") })
+    }
+
+    @Test
     fun aHandedOverKeyMakesTheParcelThisIPhonesOwn() = runTest {
         val id = UUID.randomUUID()
         val storage = Memory()
@@ -846,6 +920,45 @@ class DeviceParcelTests {
         relaunched.release(setOf("22222222222A"))
         advanceUntilIdle()
         assertEquals("unalert 22222222222A token2", calls.all.last())
+    }
+
+    @Test
+    fun someoneElsesParcelLeavesTheListAtOnceAndItsNotificationsStopWhenTheServiceCanBeTold() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        val calls = Calls()
+        val shown = PublicParcelResponse(link = reader("33333333333B"), parcel = pkg(id))
+        val offline = device(client(calls, unalert = { throw DeliveryApiError.ServiceFailed(503) }), storage, this)
+        offline.follow(shown, key = null, label = "Books for Ana")
+        offline.registerAlerts(token = "token1", locale = NativePushLocale.Fr, environment = NativePushEnvironment.Development)
+
+        // The service can't turn its notifications off yet: the parcel leaves the list all the same,
+        // an account can't take it over, and each refresh asks again.
+        offline.forget(id = id)
+        assertTrue(offline.list().isEmpty())
+        assertEquals(emptyList<ClaimParcelLink>(), offline.claims)
+        assertNull(offline.parcelId(linkId = "33333333333B"))
+        assertFalse(offline.hasParcelsOnTheirWay)
+        offline.refresh(all = true)
+        // Followed again meanwhile, it keeps the notifications it still has, and forgetting it asks again.
+        assertTrue(offline.follow(shown, key = null, label = "Books for Ana").added)
+        offline.forget(id = id)
+        assertEquals(
+            listOf(
+                "alert 33333333333B - important token1 fr development",
+                "unalert 33333333333B token1", "unalert 33333333333B token1", "unalert 33333333333B token1",
+            ),
+            calls.all,
+        )
+
+        // After a restart it is still gone, and the next refresh turns them off for good.
+        val relaunched = device(client(calls), storage, this)
+        assertTrue(relaunched.list().isEmpty())
+        relaunched.refresh()
+        relaunched.refresh()
+        assertEquals(5, calls.all.size)
+        assertEquals("unalert 33333333333B token1", calls.all.last())
+        assertTrue(storage.parcels.isEmpty())
     }
 
     @Test
@@ -960,8 +1073,9 @@ class DeviceParcelTests {
         assertEquals(setOf("CN", "DE", "CH"), delivered.trackingEvents.mapNotNull { it.location }.mapNotNull { TrackingLocation.place(it).country }.toSet())
     }
 
-    // Android alone: the platform's stores can fail where the iPhone's `try?` reads nothing, and a cancellation ends the
-    // caller rather than being let go.
+    // Android alone: the stores the app gives DeviceParcelFiles, which the iPhone's tests can't reach (its Keychain is
+    // real) and which can fail where the iPhone's `try?` reads nothing; and a cancellation ends the caller rather than
+    // being let go.
 
     @Test
     fun storesThatCannotBeReadOpenEmptyRatherThanStopTheApp() = runTest {
@@ -1023,13 +1137,108 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun keysWithoutTheirParcelsAreSavedAloneAndLeaveTheFileTheyCameFrom() {
+        val keys = mapOf("22222222222C" to key)
+        val keychain = MemorySessionPersistence()
+        keychain.save(JsonEncoder.deliveryTracker.encode(MapSerializer(String.serializer(), String.serializer()), keys))
+        assertEquals("No file, no parcels to forget", DeviceParcelStorage.Contents(emptyList(), emptyMap()), DeviceParcelFiles(keychain, MemoryFile(null)).load())
+
+        val unreadable = """[{"linkID":42}]""".toByteArray()
+        val file = MemoryFile(unreadable)
+        val storage = DeviceParcelFiles(keychain, file)
+        assertEquals(DeviceParcelStorage.Contents(emptyList(), keys), storage.load())
+        storage.save(emptyList(), keys)
+        assertEquals(unreadable.toList(), file.data?.toList())
+        assertEquals(keys, storage.load().keys)
+
+        // Once their links are forgotten, neither is left.
+        storage.save(emptyList(), emptyMap())
+        assertNull(file.data)
+        assertNull(keychain.data)
+    }
+
+    @Test
+    fun aCancelledRefreshEndsInItsCancellationAndLeavesWhatItHadToTell() = runTest {
+        val storage = Memory()
+        storage.keys = mapOf("22222222222C" to key)
+        storage.parcels = listOf(parcel("33333333333B", "", UUID.randomUUID()).copy(viewer = true, alertToken = "token1", forgotten = true))
+        val calls = Calls()
+        var unalertLeaves = true
+        var forgetLeaves = true
+        val leaving = client(calls, unalert = { if (unalertLeaves) throw CancellationException("Left") }).replacing(forget = { linkId, _ ->
+            calls.add("forget $linkId")
+            if (forgetLeaves) throw CancellationException("Left")
+        })
+        val device = device(leaving, storage, this)
+        suspend fun cancelledRefresh() {
+            try {
+                device.refresh()
+                fail("The refresh went on as though nothing happened")
+            } catch (_: CancellationException) {
+            }
+        }
+
+        cancelledRefresh()
+        assertEquals(listOf("unalert 33333333333B token1"), calls.all)
+        unalertLeaves = false
+        cancelledRefresh()
+        assertEquals(listOf("unalert 33333333333B token1", "unalert 33333333333B token1", "forget 22222222222C"), calls.all)
+        assertTrue(storage.parcels.isEmpty())
+        assertEquals(mapOf("22222222222C" to key), storage.keys)
+        forgetLeaves = false
+        device.refresh()
+        assertEquals("forget 22222222222C", calls.all.last())
+        assertTrue(storage.keys.isEmpty())
+    }
+
+    @Test
     fun keysAndTokensStayOutOfWhatIsLogged() {
         val entry = parcel("22222222222A", "", UUID.randomUUID()).copy(alertToken = "token1")
         val written = "$entry ${DeviceParcelStorage.Contents(listOf(entry), mapOf("22222222222A" to key))}"
         assertFalse(written, written.contains(key) || written.contains("token1") || written.contains("22222222222A"))
     }
 
+    /** A DeviceParcelFile in memory. */
+    private class MemoryFile(var data: ByteArray?) : DeviceParcelFile {
+        override fun read(): ByteArray? = data
+
+        override fun write(data: ByteArray) {
+            this.data = data
+        }
+
+        override fun delete() {
+            data = null
+        }
+    }
+
     private companion object {
         val parcels = ListSerializer(DeviceParcel.serializer())
     }
+}
+
+/**
+ * Holds the first notification request on each token until it is released; later ones go through. The test's one
+ * thread stands for the Swift actor.
+ */
+private class AlertGate {
+    private val seen = mutableSetOf<String>()
+    private val held = mutableMapOf<String, CompletableDeferred<Unit>>()
+    private val arrivals = mutableMapOf<String, CompletableDeferred<Unit>>()
+
+    suspend fun pass(token: String) {
+        if (!seen.add(token)) return
+        val release = CompletableDeferred<Unit>()
+        held[token] = release
+        arrival(token).complete(Unit)
+        release.await()
+    }
+
+    /** Returns once the first request on the token is held. */
+    suspend fun arrived(token: String) = arrival(token).await()
+
+    fun release(token: String) {
+        held.remove(token)?.complete(Unit)
+    }
+
+    private fun arrival(token: String): CompletableDeferred<Unit> = arrivals.getOrPut(token) { CompletableDeferred() }
 }

@@ -237,6 +237,140 @@ class CoreParityTests {
         }
     }
 
+    /** What android/tools/FormatData.swift took from Foundation, so a table written again from another one shows here. */
+    @Test
+    fun eachLanguagesTableHoldsWhatFoundationWrites() {
+        val tables = AppLanguage.entries.map { FormatData.language(it) }
+        fun symbols(code: String) = tables.map { it.currencySymbols[code] ?: code }
+        assertEquals(listOf("Sun", "So.", "dim.", "dom", "dom", "domingo", "niedz."), tables.map { it.weekdays[0] })
+        assertEquals(listOf("Sat", "Sa.", "sam.", "sab", "sáb", "sábado", "sob."), tables.map { it.weekdays[6] })
+        assertEquals(listOf("Mar", "März", "mars", "mar", "mar", "mar.", "mar"), tables.map { it.months[2] })
+        assertEquals(listOf("Sep", "Sept.", "sept.", "set", "sept", "set.", "wrz"), tables.map { it.months[8] })
+        assertEquals(listOf("", ".", "", "", "", "", ""), tables.map { it.dayPeriod })
+        assertEquals(listOf(".", ",", ",", ",", ",", ",", ","), tables.map { it.money.decimal })
+        assertEquals(listOf(",", ".", " ", ".", ".", " ", " "), tables.map { it.money.group })
+        assertEquals(listOf(4, 4, 4, 5, 5, 5, 5), tables.map { it.money.groupingFrom })
+        assertEquals(List(7) { "-" }, tables.map { it.money.minus })
+        assertEquals(listOf(true, false, false, false, false, false, false), tables.map { it.currencyFirst })
+        assertEquals(List(7) { "€" }, symbols("EUR"))
+        assertEquals(listOf("\$", "\$", "\$US", "USD", "US\$", "US\$", "USD"), symbols("USD"))
+        assertEquals(listOf("£", "£", "£GB", "£", "GBP", "£", "GBP"), symbols("GBP"))
+        assertEquals(listOf("¥", "¥", "JPY", "JPY", "JPY", "JP¥", "JPY"), symbols("JPY"))
+        assertEquals(listOf("PLN", "PLN", "PLN", "PLN", "PLN", "PLN", "zł"), symbols("PLN"))
+        assertEquals(listOf("‎⃁ ") + List(6) { "⃁" }, symbols("SAR"))
+        assertEquals(setOf("XAF", "XCG", "XOF", "XPF"), tables[0].spacedSymbols)
+        assertEquals(listOf("", "", "", "", "", "", ""), tables.map { it.distances.decimal })
+        assertEquals(listOf(" km", " km", " km", " km", " km", " km", " km"), tables.map { it.kilometres })
+        assertEquals(161, FormatData.currencyCodes.size)
+        assertEquals(
+            listOf(3, 3, 0, 0, null),
+            listOf("BHD", "KWD", "JPY", "HUF", "EUR").map { FormatData.fractionDigits[it] },
+        )
+    }
+
+    /** Amounts at the edges of rounding, sign, grouping and symbol spacing, each as Foundation writes it. */
+    @Test
+    fun amountsAreRoundedSignedAndSpacedAsFoundationWritesThem() {
+        val negativeNaN = Double.fromBits(Double.NaN.toRawBits() or Long.MIN_VALUE)
+        val amounts = listOf(
+            0.015 to "EUR", 0.005 to "EUR", 1.125 to "EUR", Math.scalb(1.0, 60) to "EUR", -0.0 to "EUR",
+            -0.001 to "EUR", 1.0005 to "BHD", 1234.5 to "HUF", 12345.678 to "KWD", 7.0 to "SAR",
+            Double.POSITIVE_INFINITY to "SAR", Double.POSITIVE_INFINITY to "CHF", negativeNaN to "EUR", 7.0 to "XOF",
+            1234.5 to "XCG", 99_999.5 to "JPY",
+        )
+        val expected = mapOf(
+            AppLanguage.En to listOf(
+                "€0.02", "€0.00", "€1.12", "€1,152,921,504,606,847,000.00", "-€0.00",
+                "-€0.00", "BHD 1.000", "HUF 1,234", "KWD 12,345.678", "‎⃁ 7.00",
+                "‎⃁ ∞", "CHF∞", "-€NaN", "F CFA 7", "Cg. 1,234.50",
+                "¥100,000",
+            ),
+            AppLanguage.De to listOf(
+                "0,02 €", "0,00 €", "1,12 €", "1.152.921.504.606.847.000,00 €",
+                "-0,00 €", "-0,00 €", "1,000 BHD", "1.234 HUF", "12.345,678 KWD",
+                "7,00 ⃁", "∞ ⃁", "∞ CHF", "-NaN €", "7 F CFA",
+                "1.234,50 Cg.", "100.000 ¥",
+            ),
+            AppLanguage.Fr to listOf(
+                "0,02 €", "0,00 €", "1,12 €",
+                "1 152 921 504 606 847 000,00 €", "-0,00 €",
+                "-0,00 €", "1,000 BHD", "1 234 HUF", "12 345,678 KWD",
+                "7,00 ⃁", "∞ ⃁", "∞ CHF", "-NaN €", "7 F CFA",
+                "1 234,50 Cg.", "100 000 JPY",
+            ),
+            AppLanguage.It to listOf(
+                "0,02 €", "0,00 €", "1,12 €", "1.152.921.504.606.847.000,00 €",
+                "-0,00 €", "-0,00 €", "1,000 BHD", "1234 HUF", "12.345,678 KWD",
+                "7,00 ⃁", "∞ ⃁", "∞ CHF", "-NaN €", "7 F CFA",
+                "1234,50 Cf", "100.000 JPY",
+            ),
+            AppLanguage.Es to listOf(
+                "0,02 €", "0,00 €", "1,12 €", "1.152.921.504.606.847.000,00 €",
+                "-0,00 €", "-0,00 €", "1,000 BHD", "1234 HUF", "12.345,678 KWD",
+                "7,00 ⃁", "∞ ⃁", "∞ CHF", "-NaN €", "7 XOF",
+                "1234,50 Cg.", "100.000 JPY",
+            ),
+            AppLanguage.Pt to listOf(
+                "0,02 €", "0,00 €", "1,12 €",
+                "1 152 921 504 606 847 000,00 €", "-0,00 €",
+                "-0,00 €", "1,000 BHD", "1234 HUF", "12 345,678 KWD", "7,00 ⃁",
+                "∞ ⃁", "∞ CHF", "-NaN €", "7 F CFA", "1234,50 Cg.",
+                "100 000 JP¥",
+            ),
+            AppLanguage.Pl to listOf(
+                "0,02 €", "0,00 €", "1,12 €",
+                "1 152 921 504 606 847 000,00 €", "-0,00 €",
+                "-0,00 €", "1,000 BHD", "1234 HUF", "12 345,678 KWD", "7,00 ⃁",
+                "∞ ⃁", "∞ CHF", "-NaN €", "7 F CFA", "1234,50 XCG",
+                "100 000 JPY",
+            ),
+        )
+        for ((language, texts) in expected) {
+            val localizer = Localizer(language)
+            assertEquals("$language", texts, amounts.map { (value, code) -> localizer.money(value, code) })
+        }
+    }
+
+    private fun referenceDate(seconds: Double): Instant {
+        val whole = Math.floor(seconds)
+        return Instant.ofEpochSecond(978_307_200 + whole.toLong(), Math.round((seconds - whole) * 1e9))
+    }
+
+    /**
+     * Before the Gregorian reform the iPhone's Gregorian calendar is Julian, and past ICU's range it holds the date at
+     * the bound, where a clock time on the locale's own calendar is empty.
+     */
+    @Test
+    fun datesBeforeTheReformAndPastICUsRangeAreWrittenAsTheIphoneWritesThem() {
+        val dates = listOf(
+            DateParser.date("1582-10-04T12:00:00Z")!!, DateParser.date("1582-10-15T12:00:00Z")!!,
+            DateParser.date("1000-02-29T12:00:00Z")!!, DateParser.date("0001-01-01T12:00:00Z")!!,
+            referenceDate(1e15), referenceDate(-1e15),
+        )
+        val expected = mapOf(
+            AppLanguage.En to listOf("Thu 4 Oct", "Fri 15 Oct", "Thu 29 Feb", "Sat 1 Jan", "Tue 20 Dec", "Sun 20 Sep", "Sun 1 Mar"),
+            AppLanguage.De to listOf("Do 4. Okt", "Fr 15. Okt", "Do 29. Feb", "Sa 1. Jan", "Di 20. Dez", "So 20. Sept", "So 1. März"),
+            AppLanguage.Fr to listOf("jeu 4 oct", "ven 15 oct", "jeu 29 févr", "sam 1 janv", "mar 20 déc", "dim 20 sept", "dim 1 mars"),
+            AppLanguage.It to listOf("gio 4 ott", "ven 15 ott", "gio 29 feb", "sab 1 gen", "mar 20 dic", "dom 20 set", "dom 1 mar"),
+            AppLanguage.Es to listOf("jue 4 oct", "vie 15 oct", "jue 29 feb", "sáb 1 ene", "mar 20 dic", "dom 20 sept", "dom 1 mar"),
+            AppLanguage.Pt to listOf(
+                "quinta 4 out", "sexta 15 out", "quinta 29 fev", "sábado 1 jan", "terça 20 dez", "domingo 20 set",
+                "domingo 1 mar",
+            ),
+            AppLanguage.Pl to listOf("czw 4 paź", "pt 15 paź", "czw 29 lut", "sob 1 sty", "wt 20 gru", "niedz 20 wrz", "niedz 1 mar"),
+        )
+        val now = referenceDate(8e8)
+        for ((language, texts) in expected) {
+            val localizer = Localizer(language)
+            assertEquals("$language", texts.dropLast(1), dates.map { localizer.shortDate(it) })
+            assertEquals("$language", texts.last(), localizer.expectedDelivery("1500-03-01", now))
+            assertEquals("$language", texts.last(), localizer.expectedDelivery("1500-03-01T12:00:00Z", now).substringBefore(", "))
+            assertEquals("$language", "", localizer.clockTime(referenceDate(1e15)))
+            assertEquals("$language", "", localizer.clockTime(referenceDate(183_881_190_614_400.25)))
+            assertEquals("$language", 5, localizer.clockTime(referenceDate(183_881_190_614_400.0)).length)
+        }
+    }
+
     @Test
     fun polishCountsTakeTheirFewAndManyForms() {
         val localizer = Localizer(AppLanguage.Pl)

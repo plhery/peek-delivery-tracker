@@ -205,7 +205,10 @@ class ParcelRouteTests {
         assertEquals("9.300 km", text(9_321.0, "de"))
     }
 
-    /** Foundation's distances in each of the app's languages, from ICU as a phone has it and from a plain JVM's stand-in. */
+    /**
+     * Foundation's distances in each of the app's languages: from the app's own table, from ICU as a phone has it for
+     * other locales, and from a plain JVM's stand-in.
+     */
     @Test
     fun distancesAreWrittenInEachLanguageAsFoundationWritesThem() {
         val written = mapOf(
@@ -222,6 +225,11 @@ class ParcelRouteTests {
                 val locale = Locale.forLanguageTag(language)
                 assertEquals(texts, listOf(8.0, 1_200.0, 12_000.0, 1_234_500.0).map { formatter.kilometres(it, locale) })
             }
+        }
+        for (language in AppLanguage.entries) {
+            val texts = written.getValue(language.locale.toLanguageTag())
+            val formatted = listOf(8.0, 1_200.0, 12_000.0, 1_234_500.0).map { ParcelRoute.formattedKilometres(it, language.locale) }
+            assertEquals(language.rawValue, texts, formatted)
         }
     }
 

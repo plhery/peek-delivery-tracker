@@ -10,10 +10,7 @@ import java.io.IOException
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZoneOffset
-import java.time.chrono.IsoChronology
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatterBuilder
-import java.time.format.FormatStyle
 import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
@@ -310,15 +307,21 @@ class Localizer(
         return relativeTime(from = of.occurredAt, now = now)
     }
 
-    /** One formatter per pattern and language: patterns are parsed once, and the time zone is the current one. */
-    private fun format(pattern: String, date: Instant, posix: Boolean = false): String {
-        val key = "${if (posix) "posix" else language.rawValue}|$pattern"
-        val formatter = formatters.getOrPut(key) { DateTimeFormatter.ofPattern(pattern, if (posix) Locale.US else language.locale) }
-        return formatter.format(date.atZone(ZoneId.systemDefault()))
-    }
+    /**
+     * A date's fields in the current zone as the iPhone's formatters write them: a Gregorian calendar, Julian before
+     * October 1582, where java.time's is Gregorian all the way back.
+     */
+    private fun fields(date: Instant): FoundationDates.DateFields = FoundationDates.dateFields(date, ZoneId.systemDefault())
 
-    /** Hours and minutes in the app language, as event rows show them. */
-    fun clockTime(date: Instant): String = format("HH:mm", date)
+    /**
+     * Hours and minutes in the app language, as event rows show them: "HH:mm", in ASCII digits in every language. The
+     * formatter keeps the language's own calendar, which writes nothing for a date ICU's calendar does not hold.
+     */
+    fun clockTime(date: Instant): String {
+        if (!FoundationDates.calendarHolds(date)) return ""
+        val fields = fields(date)
+        return "${twoDigits(fields.hour)}:${twoDigits(fields.minute)}"
+    }
 
     fun expectedDelivery(value: String, now: Instant = Instant.now()): String {
         val match = deliveryWindowPattern?.matcher(value)
@@ -332,7 +335,8 @@ class Localizer(
         val date = DateParser.deliveryDate(value) ?: return value
         if (value.contains("T")) {
             DateParser.date(value)?.let { timestamp ->
-                val day = format("yyyy-MM-dd", timestamp, posix = true)
+                // "yyyy-MM-dd" in en_US_POSIX: the year of the era, of four digits at least.
+                val day = fields(timestamp).let { "${it.yearOfEra.toString().padStart(4, '0')}-${twoDigits(it.month)}-${twoDigits(it.dayOfMonth)}" }
                 return "${expectedDelivery(day, now)}, ${clockTime(timestamp)}"
             }
         }
@@ -352,24 +356,15 @@ class Localizer(
     /**
      * Compact dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept". Names keep the
      * language's own case, since the date often sits mid-sentence, and the day keeps the period German writes after it.
+     * The names and the period are the iPhone's "EEE", "MMM" and "dMMM" (FormatData.kt), not the phone's CLDR.
      */
     fun shortDate(date: Instant): String {
-        val weekday = format("EEE", date).replace(".", "")
-        val day = format("d", date)
-        val month = format("MMM", date).replace(".", "")
-        return "$weekday $day$dayPeriod $month"
+        val fields = fields(date)
+        val format = FormatData.language(language)
+        val weekday = format.weekdays[fields.weekday - 1].replace(".", "")
+        val month = format.months[fields.month - 1].replace(".", "")
+        return "$weekday ${fields.dayOfMonth}${format.dayPeriod} $month"
     }
-
-    /**
-     * The period the language's own day-and-month pattern puts after the day, as German "12. Sept" does. java.time
-     * cannot look up the `dMMM` template Swift reads, so the long date pattern, which writes the day as it does,
-     * stands in for it.
-     */
-    private val dayPeriod: String
-        get() = dayPeriods.getOrPut(language) {
-            val pattern = DateTimeFormatterBuilder.getLocalizedDateTimePattern(FormatStyle.LONG, null, IsoChronology.INSTANCE, language.locale)
-            if (pattern.contains("d.")) "." else ""
-        }
 
     fun dateTime(value: String): String {
         val date = DateParser.date(value) ?: return value
@@ -437,15 +432,15 @@ class Localizer(
      * `value.formatted(.currency(code:).locale(_:))`: ICU's currency format in the app language. Foundation hands
      * ICU the code inside a number skeleton, where it is three of ICU's invariant characters in either case, up
      * to the white space that ends the option; anything else is no currency, and the number is written as Swift
-     * describes it.
+     * describes it. A currency in use is written from Foundation's own tables (`foundationCurrency`); the phone's
+     * ICU, whose CLDR may be older, writes only one they do not hold, a former currency or a code nobody has.
      */
-    private fun money(value: Double, code: String): String {
+    internal fun money(value: Double, code: String): String {
         val match = currencyCode.matcher(code)
         if (!match.matches()) return value.swiftDescription()
         val token = match.group(1).uppercase(Locale.ROOT)
-        if (token.all { it in 'A'..'Z' }) {
-            return Icu.currencies.format(value, token, language.locale, if (token in wholeCurrencies) 0 else null)
-        }
+        foundationCurrency(value, token, language)?.let { return it }
+        if (token.all { it in 'A'..'Z' }) return Icu.currencies.format(value, token, language.locale, null)
         // ICU's Currency takes letters alone; any other code is one ICU has no data for, written as it is given,
         // which ICU keeps apart from the digits unless it ends in a symbol ("EU+34.41").
         val text = Icu.currencies.format(value, unknownCurrency, language.locale, null).replace(unknownCurrency, token)
@@ -461,9 +456,6 @@ class Localizer(
     private companion object {
         val currencyCode: Pattern =
             Pattern.compile("([\"%&'()*+,\\-.0-9:;<=>?A-Z_a-z]{3})[\\t\\n\\x{0B}\\f\\r \\x{85}\\x{200E}\\x{200F}\\x{2028}\\x{2029}]*")
-
-        // Apple writes these without decimals, where CLDR gives them two.
-        val wholeCurrencies = setOf("COP", "HUF", "IDR", "PKR")
 
         // A code no currency has, which ICU writes as it is.
         const val unknownCurrency = "QQQ"
@@ -508,8 +500,7 @@ class Localizer(
         val deliveryWindowPattern: Pattern? =
             CatalogExpressions.icuExpression("^(\\d{4}-\\d{2}-\\d{2})[ T]+(\\d{2}:\\d{2})(?:[–-](\\d{2}:\\d{2}))?$")
 
-        val formatters = ConcurrentHashMap<String, DateTimeFormatter>()
-        val dayPeriods = ConcurrentHashMap<AppLanguage, String>()
+        fun twoDigits(value: Int): String = value.toString().padStart(2, '0')
     }
 }
 

@@ -39,6 +39,10 @@ internal object FoundationDates {
     private const val CUTOVER_YEAR = 1582
     private const val REFERENCE_DATE = 978_307_200L
 
+    // The times ICU's Calendar holds (Calendar::MIN_MILLIS, MAX_MILLIS), in milliseconds since 1970.
+    private const val MIN_MILLIS = -184_303_902_528_000_000.0
+    private const val MAX_MILLIS = 183_882_168_921_600_000.0
+
     /** The formatters' two-digit start date, 1 January 1950 UTC, in milliseconds. */
     private const val TWO_DIGIT_START = -631_152_000_000.0
     private val monthStarts = intArrayOf(0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334)
@@ -80,11 +84,41 @@ internal object FoundationDates {
 
     /** Where Foundation's Gregorian calendar puts a date in the zone: Julian before October 1582. */
     fun calendarDate(date: Instant, zone: ZoneId): CalendarDate? {
-        val time = (date.timeIntervalSinceReferenceDate + REFERENCE_DATE) * 1000.0
+        val time = milliseconds(date)
         val rules = RulesZone(zone.rules)
         val civil = civilDate(time, rules) ?: return null
         return CalendarDate(Math.floorDiv(floor(time + rules.offsetAt(time)).toLong(), DAY_MILLIS), civil.month + 1)
     }
+
+    /**
+     * A date's fields as a Gregorian DateFormatter writes them in a zone: the year of its era, the month (1 to 12), the
+     * day of the month, the weekday (1 for Sunday to 7), the hour and the minute.
+     */
+    class DateFields(val yearOfEra: Int, val month: Int, val dayOfMonth: Int, val weekday: Int, val hour: Int, val minute: Int)
+
+    /**
+     * Where a DateFormatter given a Gregorian `Calendar` puts a date in the zone, Julian before October 1582. ICU's
+     * calendar holds a time only within some 5.8 million years of 1970 (`calendarHolds`), and that one takes a time
+     * beyond as the nearest it holds.
+     */
+    fun dateFields(date: Instant, zone: ZoneId): DateFields {
+        val time = milliseconds(date).coerceIn(MIN_MILLIS, MAX_MILLIS)
+        val civil = checkNotNull(civilDate(time, RulesZone(zone.rules)))
+        return DateFields(
+            yearOfEra = civil.yearOfEra,
+            month = civil.month + 1,
+            dayOfMonth = civil.dayOfMonth,
+            weekday = Math.floorMod(civil.julianDay + 1, 7) + 1,
+            hour = civil.millisInDay / HOUR_MILLIS,
+            minute = civil.millisInDay / MINUTE_MILLIS % 60,
+        )
+    }
+
+    /** Whether ICU's calendar holds the date: a DateFormatter left on its locale's own calendar writes nothing else. */
+    fun calendarHolds(date: Instant): Boolean = milliseconds(date) in MIN_MILLIS..MAX_MILLIS
+
+    /** ICU's UDate: the milliseconds since 1970 of a Date's seconds since 2001. */
+    private fun milliseconds(date: Instant): Double = (date.timeIntervalSinceReferenceDate + REFERENCE_DATE) * 1000.0
 
     private val weekdays = listOf(
         listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"),
@@ -825,7 +859,7 @@ internal object FoundationDates {
         return wall - zone.offsetFromLocal(wall)
     }
 
-    private class CivilDate(val extendedYear: Int, val month: Int, val dayOfMonth: Int, val millisInDay: Int) {
+    private class CivilDate(val julianDay: Int, val extendedYear: Int, val month: Int, val dayOfMonth: Int, val millisInDay: Int) {
         val yearOfEra: Int get() = if (extendedYear < 1) 1 - extendedYear else extendedYear
     }
 
@@ -839,7 +873,7 @@ internal object FoundationDates {
         val millisInDay = Math.floorMod(local, DAY_MILLIS).toInt()
         if (julianDay >= CUTOVER_JULIAN_DAY) {
             val date = LocalDate.ofEpochDay((julianDay - EPOCH_JULIAN_DAY).toLong())
-            return CivilDate(date.year, date.monthValue - 1, date.dayOfMonth, millisInDay)
+            return CivilDate(julianDay, date.year, date.monthValue - 1, date.dayOfMonth, millisInDay)
         }
         val julianEpochDay = julianDay - (JANUARY_1_YEAR_1_JULIAN_DAY - 2)
         val year = Math.floorDiv(4L * julianEpochDay + 1464, 1461L).toInt()
@@ -848,7 +882,7 @@ internal object FoundationDates {
         val correction = if (dayOfYear >= (if (leap) 60 else 59)) (if (leap) 1 else 2) else 0
         val month = (12 * (dayOfYear + correction) + 6) / 367
         val dayOfMonth = dayOfYear - (if (leap) leapMonthStarts else monthStarts)[month] + 1
-        return CivilDate(year, month, dayOfMonth, millisInDay)
+        return CivilDate(julianDay, year, month, dayOfMonth, millisInDay)
     }
 
     /** CFAbsoluteTime, the seconds since 2001 a Date holds, of ICU's time once CoreFoundation has seen to its year. */

@@ -244,7 +244,10 @@ class ParcelRoute(places: List<RoutePlace?>, deliveries: Int = 0, destination: R
         /** Places closer than this to the current one belong to the close-up. */
         const val NEAR_KILOMETRES = 400.0
 
-        /** Kilometres rounded the way a journey is told: "8 km", "450 km", "9,300 km". */
+        /**
+         * Kilometres rounded the way a journey is told: "8 km", "450 km", "9,300 km". In the app's languages, as the
+         * iPhone writes them (`foundationKilometres`); another locale is the phone's ICU's.
+         */
         fun formattedKilometres(kilometres: Double, locale: Locale): String {
             val rounded = if (kilometres < 100) {
                 kilometres.rounded()
@@ -253,7 +256,9 @@ class ParcelRoute(places: List<RoutePlace?>, deliveries: Int = 0, destination: R
             } else {
                 (kilometres / 100).rounded() * 100
             }
-            return Icu.lengths.kilometres(swiftMax(rounded, 1.0), locale)
+            val language = AppLanguage.entries.firstOrNull { it.locale == locale }
+            val value = swiftMax(rounded, 1.0)
+            return if (language != null) foundationKilometres(value, language) else Icu.lengths.kilometres(value, locale)
         }
     }
 }

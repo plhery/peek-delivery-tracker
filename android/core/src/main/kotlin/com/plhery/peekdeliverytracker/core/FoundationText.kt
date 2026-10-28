@@ -425,9 +425,29 @@ internal fun Double.swiftDescription(): String {
     if (isInfinite()) return if (this > 0) "inf" else "-inf"
     if (this == 0.0) return if (1.0 / this < 0) "-0.0" else "0.0"
     val sign = if (this < 0) "-" else ""
+    val decimal = shortestDecimal(abs(this))
+    val digits = decimal.unscaledValue().toString()
+    // The value is 0.digits × 10^exponent.
+    val exponent = digits.length - decimal.scale()
+    if (exponent < -3 || abs(this) > 9007199254740992.0) {
+        val power = exponent - 1
+        val mantissa = if (digits.length == 1) digits else digits[0] + "." + digits.substring(1)
+        return sign + mantissa + "e" + (if (power < 0) "-" else "+") + abs(power).toString().padStart(2, '0')
+    }
+    return sign + when {
+        exponent <= 0 -> "0." + "0".repeat(-exponent) + digits
+        exponent >= digits.length -> digits + "0".repeat(exponent - digits.length) + ".0"
+        else -> digits.substring(0, exponent) + "." + digits.substring(exponent)
+    }
+}
+
+/**
+ * The shortest decimal that reads back as a positive finite Double, the nearest of them when several do, without
+ * trailing zeros: Swift's description and ICU's number formats start from it.
+ */
+internal fun shortestDecimal(magnitude: Double): BigDecimal {
     // Rounded from the exact value: Double.toString keeps two digits (4.9E-324 for 5e-324), and before JDK 19, as on
     // Android, is not always the shortest.
-    val magnitude = abs(this)
     val exact = BigDecimal(magnitude)
     // The decimals that read back as the value, exactly: those between the midpoints to its neighbours, and the
     // midpoints themselves when its significand is even, as a tie rounds to it. Past the largest Double the midpoint is
@@ -442,24 +462,60 @@ internal fun Double.swiftDescription(): String {
         val toHigh = decimal.compareTo(high)
         return if (closed) fromLow >= 0 && toHigh <= 0 else fromLow > 0 && toHigh < 0
     }
-    val decimal = (1..17).firstNotNullOf { length ->
+    return (1..17).firstNotNullOf { length ->
         sequenceOf(RoundingMode.HALF_EVEN, RoundingMode.DOWN, RoundingMode.UP)
             .map { exact.round(MathContext(length, it)) }
             .firstOrNull(::readsBack)
     }.stripTrailingZeros()
-    val digits = decimal.unscaledValue().toString()
-    // The value is 0.digits × 10^exponent.
-    val exponent = digits.length - decimal.scale()
-    if (exponent < -3 || abs(this) > 9007199254740992.0) {
-        val power = exponent - 1
-        val mantissa = if (digits.length == 1) digits else digits[0] + "." + digits.substring(1)
-        return sign + mantissa + "e" + (if (power < 0) "-" else "+") + abs(power).toString().padStart(2, '0')
+}
+
+/**
+ * `value.formatted(.currency(code:).locale(language.locale))` from Foundation's own tables (FormatData.kt), or null
+ * for a currency they do not hold, which a phone's ICU then writes. The number is ICU's (`foundationNumber`) with the
+ * currency's fraction digits, after a minus for any value whose sign bit is set, -0.0 and -NaN too. A symbol after the
+ * number follows a no-break space; one before it is kept from digits by one where ICU puts it, but not from infinity
+ * or NaN ("CHF∞").
+ */
+internal fun foundationCurrency(value: Double, code: String, language: AppLanguage): String? {
+    if (code !in FormatData.currencyCodes) return null
+    val format = FormatData.language(language)
+    val symbol = format.currencySymbols[code] ?: code
+    val sign = if (value.toRawBits() < 0) format.money.minus else ""
+    val number = foundationNumber(value, FormatData.fractionDigits[code] ?: 2, format.money)
+    if (!format.currencyFirst) return "$sign$number\u00A0$symbol"
+    val spaced = value.isFinite() && (symbol == code || code in format.spacedSymbols)
+    return sign + symbol + (if (spaced) "\u00A0" else "") + number
+}
+
+/**
+ * `Measurement(value:unit: .kilometers).formatted(.measurement(width: .abbreviated, usage: .asProvided,
+ * numberFormatStyle: .number.precision(.fractionLength(0))).locale(language.locale))`, from Foundation's tables.
+ */
+internal fun foundationKilometres(value: Double, language: AppLanguage): String {
+    val format = FormatData.language(language)
+    val sign = if (value.toRawBits() < 0) format.distances.minus else ""
+    return sign + foundationNumber(value, 0, format.distances) + format.kilometres
+}
+
+/**
+ * A number without its sign as ICU writes it: ∞, NaN, or the shortest decimal that reads back as it rounded half to
+ * even to `fractionDigits` ("0.015" is 0.02 although the Double is a little less), its whole digits grouped by
+ * three from the language's `groupingFrom`.
+ */
+private fun foundationNumber(value: Double, fractionDigits: Int, digits: FormatData.Digits): String {
+    if (value.isNaN()) return "NaN"
+    if (value.isInfinite()) return "\u221E"
+    val magnitude = abs(value)
+    val decimal = if (magnitude == 0.0) BigDecimal.ZERO else shortestDecimal(magnitude)
+    val text = decimal.setScale(fractionDigits, RoundingMode.HALF_EVEN).toPlainString()
+    val whole = text.substringBefore('.')
+    val grouped = if (whole.length < digits.groupingFrom) {
+        whole
+    } else {
+        val head = (whole.length - 1) % 3 + 1
+        (listOf(whole.take(head)) + whole.drop(head).chunked(3)).joinToString(digits.group)
     }
-    return sign + when {
-        exponent <= 0 -> "0." + "0".repeat(-exponent) + digits
-        exponent >= digits.length -> digits + "0".repeat(exponent - digits.length) + ".0"
-        else -> digits.substring(0, exponent) + "." + digits.substring(exponent)
-    }
+    return if (fractionDigits > 0) grouped + digits.decimal + text.substringAfter('.') else grouped
 }
 
 // ASCII digits alone, as Swift reads them: `\d` would take any script's.

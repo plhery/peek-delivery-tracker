@@ -10,7 +10,7 @@ internal const val MATERIAL_SYMBOLS_REVISION = "10ecc14790612ca8fd164e3f4ffe9c16
 internal const val SMALL_SCALE = 0.79f
 internal const val LARGE_SCALE = 1.27f
 
-/** The SF Symbols Android draws (83), each as its Material Symbols outlines (131). */
+/** The SF Symbols Android draws (84), each as its Material Symbols outlines (132). */
 internal val materialSymbols: Map<String, SymbolArt> = mapOf(
     "archivebox" to SymbolArt(
         "inventory_2", fill = false, sf = floatArrayOf(122.00f, 108.00f, 12.50f, 9.25f, 96.50f, 90.00f, 89.00f),
@@ -177,6 +177,12 @@ internal val materialSymbols: Map<String, SymbolArt> = mapOf(
         "keyboard_arrow_down", fill = false, sf = floatArrayOf(109.00f, 66.00f, 12.50f, 9.50f, 83.75f, 47.75f, 66.00f),
         outlines = listOf(
             MaterialOutline(400, 20, floatArrayOf(254.48f, -610.00f, 451.52f, 262.00f), "M479.8-348q-7.2 0-13.5-2.5T455-358L265.34-547.66Q254-559 254.5-573.5T266-599q11-11 25.5-11t25.5 11l163 164 164-164q11-11 25.5-10.5T695-598q11 11 11 25.5t-11.34 25.78L505-358q-5.4 5-11.7 7.5-6.3 2.5-13.5 2.5Z"),
+        ),
+    ),
+    "chevron.forward" to SymbolArt(
+        "keyboard_arrow_right", fill = false, sf = floatArrayOf(73.00f, 103.00f, 18.75f, 9.50f, 47.75f, 84.75f, 87.00f),
+        outlines = listOf(
+            MaterialOutline(700, 20, floatArrayOf(324.00f, -729.00f, 308.00f, 497.51f), "M490-480 342-628q-18-18-18-41.5t18-41.5q18-18 41.5-18t41.84 18.34L614-522q8 8.4 13 19.7 5 11.3 5 22.5t-5 22.5q-5 11.3-13 19.3L425.34-249.34Q407-231 384-231.5q-23-.5-41-18.5t-18-41.5q0-23.5 18-41.5l147-147Z"),
         ),
     ),
     "chevron.left" to SymbolArt(

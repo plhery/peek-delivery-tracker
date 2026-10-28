@@ -36,6 +36,7 @@ checkmark.circle.fill	check_circle	1	ParcelLinkSheet:257 17 regular; AddParcelVi
 checkmark.seal.fill	verified	1	SignInView:193 23 regular	close
 checkmark.square.fill	check_box	1	FriendsView:397 17 regular	close
 chevron.down	keyboard_arrow_down	0	ParcelListView:2770 12 regular; ParcelDetailView:1485 10 regular	close
+chevron.forward	keyboard_arrow_right	0	DeliveryWidgetCards:137 8 bold	close: chevron.right, as no language the app speaks is right to left
 chevron.left	keyboard_arrow_left	0	SignInView:393 inherited; SignInView:915 inherited	close
 chevron.right	keyboard_arrow_right	0	ParcelListView:2876 11 bold; ParcelLinkSheet:279 12 semibold; SettingsViews:827 10 light; DeliveryWidget:335 12 bold	close
 chevron.up	keyboard_arrow_up	0	ParcelDetailView:1485 10 regular	close

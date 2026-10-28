@@ -128,9 +128,9 @@ private class PressEffectNode(
     private var clock: Job? = null
     private val paint = Paint()
 
-    /** The layer's colour filter and the brightness it adds, made again only when that changes. */
+    /** The layer's colour filter and what it adds to each channel, made again only when that changes. */
     private var filter: ColorMatrixColorFilter? = null
-    private var filterBrightness = 0f
+    private var filterAdd = 0
 
     override fun onAttach() {
         // A press that came before the node was attached, or one cut off when it was last detached.
@@ -188,8 +188,8 @@ private class PressEffectNode(
     override fun ContentDrawScope.draw() {
         val look = style.appearance(shown, currentValueOf(LocalReduceMotion))
         val offset = look.offsetY.toPx()
-        val layer = look.opacity < 1f || look.brightness != 0f
-        if (!layer && look.scale == 1f && offset == 0f) {
+        val layer = paint.of(look)
+        if (layer == null && look.scale == 1f && offset == 0f) {
             drawContent()
             return
         }
@@ -197,29 +197,44 @@ private class PressEffectNode(
             translate(top = offset)
             scale(look.scale, look.scale, center)
         }) {
-            // The layer is the content's bounds where they now stand. Left to the clip, it would be the whole enclosing
-            // node, a list row or the window, at each frame. Like Compose's own alpha, it cuts what the content draws
-            // past its bounds while it shows.
+            // SwiftUI fades and shades all a button draws, a shadow past its bounds too. The layer is the content where
+            // it now stands with room for the farthest shadow, cut to the canvas's clip: left to the clip alone, it
+            // would be the whole enclosing node, a list row or the window, at each frame.
             val canvas = drawContext.canvas.nativeCanvas
-            val saved = if (layer) canvas.saveLayer(0f, 0f, size.width, size.height, paint.of(look)) else null
+            val reach = SHADOW_REACH.toPx()
+            val saved = layer?.let { canvas.saveLayer(-reach, -reach, size.width + reach, size.height + reach, it) }
             this@draw.drawContent()
             saved?.let { canvas.restoreToCount(it) }
         }
     }
 
-    /** The layer's paint: its opacity, and the brightness added to each channel before the colour is premultiplied. */
-    private fun Paint.of(look: PressAppearance): Paint {
+    /**
+     * The layer's paint: its opacity, and the brightness added to each channel before the colour is premultiplied.
+     * Null when it would draw the content as it is.
+     */
+    private fun Paint.of(look: PressAppearance): Paint? {
         alpha = (look.opacity * 255).roundToInt()
-        colorFilter = if (look.brightness == 0f) null else brightness(look.brightness)
-        return this
+        colorFilter = brightness(look.brightness)
+        return takeIf { alpha < 255 || colorFilter != null }
     }
 
-    private fun brightness(amount: Float): ColorMatrixColorFilter {
-        filter?.let { if (filterBrightness == amount) return it }
-        val add = amount * 255
-        val made = ColorMatrixColorFilter(ColorMatrix(floatArrayOf(1f, 0f, 0f, 0f, add, 0f, 1f, 0f, 0f, add, 0f, 0f, 1f, 0f, add, 0f, 0f, 0f, 1f, 0f)))
+    /** The brightness to the 255th, as a channel is written, so a press's frames share a few filters. */
+    private fun brightness(amount: Float): ColorMatrixColorFilter? {
+        val add = (amount * 255).roundToInt()
+        if (add == 0) return null
+        filter?.let { if (filterAdd == add) return it }
+        val shift = add.toFloat()
+        val made = ColorMatrixColorFilter(ColorMatrix(floatArrayOf(1f, 0f, 0f, 0f, shift, 0f, 1f, 0f, 0f, shift, 0f, 0f, 1f, 0f, shift, 0f, 0f, 0f, 1f, 0f)))
         filter = made
-        filterBrightness = amount
+        filterAdd = add
         return made
+    }
+
+    private companion object {
+        /**
+         * How far past a button its layer reaches: a little beyond the farthest any of the iPhone's shadows shows, 41
+         * points below what casts `radius: 18, y: 6` at 12 % black.
+         */
+        val SHADOW_REACH = 48.dp
     }
 }

@@ -1,7 +1,11 @@
 package com.plhery.peekdeliverytracker.ui.theme
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,9 +14,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.movableContentOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.ViewRootForTest
@@ -22,6 +35,7 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -34,8 +48,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
+import kotlin.math.roundToInt
 
-/** The press styles drawn by Android: a finger's press through the indication, the shade's colour, and a sheet. */
+/**
+ * The press styles drawn by Android: a finger's press through the indication and away, what a button draws past its
+ * bounds, the shade's colour, and a sheet.
+ */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(qualifiers = PHONE)
@@ -46,13 +64,23 @@ class PressEffectTest {
     private val grey = Color(0.5f, 0.5f, 0.5f)
 
     /** The centre pixel of the swatch tagged `tag`, as 0…255 channels. */
-    private fun centre(tag: String): IntArray {
-        // Robolectric may keep a drawing from before the last frame: draw the window again first.
+    private fun centre(tag: String): IntArray = channels(tag) { bitmap -> bitmap.getPixel(bitmap.width / 2, bitmap.height / 2) }
+
+    /** The pixel `x` and `y` from the top left of the node tagged `tag`, as 0…255 channels. */
+    private fun pixel(tag: String, x: Dp, y: Dp): IntArray = channels(tag) { bitmap ->
+        val density = compose.density.density
+        bitmap.getPixel((x.value * density).roundToInt(), (y.value * density).roundToInt())
+    }
+
+    private fun channels(tag: String, read: (Bitmap) -> Int): IntArray {
+        // Robolectric may keep a drawing from before the last frame, now and then even after one more: draw the window
+        // again twice first.
         val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
-        compose.runOnUiThread { view.rootView.invalidate() }
-        compose.waitForIdle()
-        val bitmap = compose.onNodeWithTag(tag).captureToImage().asAndroidBitmap()
-        val pixel = bitmap.getPixel(bitmap.width / 2, bitmap.height / 2)
+        repeat(2) {
+            compose.runOnUiThread { view.rootView.invalidate() }
+            compose.waitForIdle()
+        }
+        val pixel = read(compose.onNodeWithTag(tag).captureToImage().asAndroidBitmap())
         return intArrayOf(pixel shr 16 and 0xFF, pixel shr 8 and 0xFF, pixel and 0xFF)
     }
 
@@ -79,6 +107,57 @@ class PressEffectTest {
         compose.onNodeWithTag("button").performTouchInput { up() }
         compose.mainClock.advanceTimeBy(400)
         assertChannels(0, centre("frame"))
+    }
+
+    @Test
+    fun aButtonTakenAwayWhilePressedComesBackAtRest() {
+        compose.mainClock.autoAdvance = false
+        val source = MutableInteractionSource()
+        var first by mutableStateOf(true)
+        compose.setContent {
+            PeekTheme(dark = false, highContrast = false, reduceMotion = false, carrierIdentities = null) {
+                // The same button moved from one place to another, its style kept: detached, then attached again.
+                val button = remember {
+                    movableContentOf { Box(Modifier.testTag("button").size(80.dp).indication(source, PressStyle.Tactile).background(Color.Black)) }
+                }
+                Row {
+                    Box(Modifier.testTag("first").background(Color.White).padding(20.dp)) { if (first) button() }
+                    Box(Modifier.testTag("second").background(Color.White).padding(20.dp).size(80.dp)) { if (!first) button() }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(100)
+        compose.runOnIdle { check(source.tryEmit(PressInteraction.Press(Offset.Zero))) }
+        compose.mainClock.advanceTimeBy(400)
+        assertChannels(15, centre("first"))
+        // Moved while pressed, it never hears the press end: it comes back at rest from its first frame.
+        compose.runOnIdle {
+            first = false
+            Snapshot.sendApplyNotifications()
+        }
+        compose.mainClock.advanceTimeByFrame()
+        assertChannels(0, centre("second"))
+    }
+
+    @Test
+    fun whatAPressedButtonDrawsPastItsBoundsShowsWithIt() {
+        compose.setContent {
+            PeekTheme(dark = false, highContrast = false, reduceMotion = true, carrierIdentities = null) {
+                Box(Modifier.testTag("frame").background(Color.White).padding(start = 10.dp, top = 10.dp, end = 10.dp, bottom = 60.dp)) {
+                    Box(
+                        Modifier
+                            .size(40.dp)
+                            .pressEffect(PressStyle.Tactile, pressed = true)
+                            // A card's shadow, as far down as the iPhone's reach: a band 30 to 40 points below it.
+                            .drawBehind { drawRect(Color.Black, Offset(0f, size.height + 30.dp.toPx()), Size(size.width, 10.dp.toPx())) }
+                            .background(Color.Black),
+                    )
+                }
+            }
+        }
+        // Faded with the button: black at 0.94 over white, beside it and below it.
+        assertChannels(15, pixel("frame", x = 30.dp, y = 30.dp))
+        assertChannels(15, pixel("frame", x = 30.dp, y = 85.dp))
     }
 
     @Test

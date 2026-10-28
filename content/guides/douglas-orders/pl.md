@@ -36,7 +36,7 @@ Kurier DHL dowozi paczkę bezpośrednio pod dowolny adres w Polsce. Produkty Par
 :::journey
 - warehouse | Magazyn Douglas | Produkty Partnerów jadą osobno
 - truck | DHL, InPost lub ORLEN Paczka | Zwykle 1–2 dni robocze
-- locker | Paczkomat InPost | 48 godzin na odbiór z kodem
+- locker | Paczkomat InPost | Albo punkt ORLEN Paczka lub perfumeria
 - home | Ty | Dostawa 0 zł od 199 zł
 :::
 
@@ -46,7 +46,7 @@ Szukaj tutaj:
 
 - **E-mail z potwierdzeniem wysłania.** Douglas wysyła go, gdy towar wyjdzie z magazynu. Jeśli zamówienie przychodzi w częściach, możesz dostać kilka takich e-maili, po jednym na każdą część.
 - **Strona przewoźnika.** Na stronie dostawy Douglas linkuje śledzenie każdego przewoźnika, a dla ORLEN Paczki stronę orlenpaczka.pl/sledz-paczke.
-- **Powiadomienie z Paczkomatu.** Gdy paczka dotrze do Paczkomatu, dostajesz SMS, e-mail albo powiadomienie w aplikacji InPost Mobile z 6-cyfrowym kodem odbioru i kodem QR. Przy Paczkomacie skanujesz kod QR albo wpisujesz numer telefonu i kod; w aplikacji możesz też otworzyć skrytkę zdalnie.
+- **Status paczki do odbioru.** Gdy paczka czeka w Paczkomacie, Peek pokazuje status InPost `Ready for collection` (statusy InPost czyta po angielsku), a przy ORLEN Paczce `Twoja paczka czeka na odbiór w punkcie`. Jak odebrać paczkę z Paczkomatu, sprawdzisz w aplikacji InPost Mobile.
 - **SMS od DHL i e-mail z perfumerii.** Przy odbiorze w perfumerii DHL wysyła SMS z datą doręczenia, a Douglas e-mail, gdy zamówienie jest gotowe do odbioru. Przy Click&Collect zamiast e-maila o wysyłce dostajesz informację, że możesz odebrać zamówienie.
 - **Twoje konto.** W zakładce „Moje zamówienia” znajdziesz swoje zamówienia i tam zgłosisz zwrot.
 
@@ -84,9 +84,9 @@ Koszt dostawy zobaczysz w koszyku przed złożeniem zamówienia. Strona dostawy 
 
 Baner sklepu obiecuje dostawę za 0 zł od 199 zł lub przy zakupie z Douglas Collection, a strona dostawy wiąże Douglas Collection tylko z Paczkomatami. Jeśli liczysz na darmową dostawę, sprawdź koszt w koszyku przed zapłatą.
 
-**Paczkomat InPost.** Paczkomaty stoją między innymi na stacjach benzynowych, przy hipermarketach i centrach handlowych oraz na całodobowych parkingach strzeżonych, i działają 24 godziny na dobę, 7 dni w tygodniu. Przy zamówieniu podajesz numer telefonu i adres e-mail. Na odbiór masz 48 godzin od powiadomienia, a jeśli Paczkomat działa w ograniczonych godzinach, 72 godziny; potem InPost zwraca paczkę nadawcy. W aplikacji InPost Mobile przedłużysz ten czas o 24 godziny, za opłatą. Paczkomat nie prosi o dokumenty, więc jeśli nie masz czasu, paczkę może odebrać zaufana osoba z Twoim kodem.
+**Paczkomat InPost.** Przy zamówieniu podajesz numer telefonu i adres e-mail. Ile czasu masz na odbiór i czy możesz go przedłużyć, sprawdzisz w aplikacji InPost Mobile.
 
-**ORLEN Paczka.** Ponad 12 000 punktów: automaty paczkowe, stacje ORLEN, sklepy i kioski RUCH. Kod odbioru dostajesz SMS-em, e-mailem i w aplikacji ORLEN Paczka, a na odbiór masz 3 dni robocze od powiadomienia.
+**ORLEN Paczka.** Według ORLEN sieć liczy ponad 15 tys. automatów i punktów odbioru w Polsce, a na odbiór masz do 3 dni roboczych. Jak odebrać przesyłkę, sprawdzisz na stronie ORLEN Paczki.
 
 **Odbiór w perfumerii.** W polu adresu dostawy zaznacz „w perfumerii Douglas” i wyszukaj perfumerię po kodzie pocztowym lub miejscowości. Lista pokazuje dokładne adresy i godziny otwarcia; kliknij „wybierz perfumerię”. Zamówienie odbierasz w godzinach otwarcia perfumerii. Zamówienie czeka 5 dni od powiadomienia; potem Douglas je anuluje. Weź potwierdzenie z numerem zamówienia. Za zamówienie możesz zapłacić przy odbiorze w perfumerii.
 
@@ -148,10 +148,7 @@ Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmu
 - [Douglas Polska: Kontakt](https://www.douglas.pl/pl/cp/helpcontact/help-contact) – telefon, godziny, e-mail
 - [Douglas Polska: Karta podarunkowa przy zwrocie](https://www.douglas.pl/pl/cp/helpv2whenireturnhowdoigetmygiftcardback/help-when-i-return-how-do-i-get-my-gift-card-back) – e-karta podarunkowa
 - [Douglas Polska: Sklep internetowy](https://www.douglas.pl/pl) – dostawa 0 zł od 199 zł, zwrot do 30 dni, 1–2 dni robocze, przewoźnicy w stopce, aplikacja; teksty zamówienia i czatu: liczba paczek, status po 24 godzinach, oświadczenie klienta przy braku, etykiety zwrotne Partnerów
-- [InPost: Jak odebrać paczkę z urządzenia Paczkomat](https://inpost.pl/jak-odebrac-paczke-w-paczkomacie) – kod odbioru, kod QR, numer telefonu, aplikacja
-- [InPost: Regulamin usługi InPost Paczkomat 24/7 (PDF)](https://inpost.pl/sites/default/files/docs/regulaminy/regulamin-swiadczenia-uslugi-inpost-paczkomatr-247-przez-inpost-sp-z-oo-obowiazujacy-od-24072025.pdf) – 48 i 72 godziny na odbiór, zwrot do nadawcy
-- [InPost: Przedłużenie czasu odbioru paczki](https://inpost.pl/przedluzenie-czasu-odbioru-paczki) – 24 godziny więcej w InPost Mobile
-- [ORLEN Paczka: Śledź paczkę](https://www.orlenpaczka.pl/sledz-paczke/) – kod odbioru, 3 dni robocze na odbiór
+- [ORLEN: Automaty ORLEN Paczki zasilane energią słoneczną](https://www.orlen.pl/pl/o-firmie/media/komunikaty-prasowe/biezace/2026/kwieciec-2026/automaty-orlen-paczki-zasilane-energia-sloneczna-) – ponad 15 tys. automatów i punktów odbioru w Polsce, do trzech dni roboczych na odbiór
 - [Your Europe: Gwarancje na towary zakupione w UE](https://europa.eu/youreurope/citizens/consumers/shopping/guarantees/index_pl.htm) – naprawa lub wymiana, zwrot pieniędzy, co najmniej 2 lata
-- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, przewoźnicy, których zna Peek
+- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, przewoźnicy, których zna Peek, statusy InPost i ORLEN Paczki
 :::

@@ -35,14 +35,12 @@ Nei locker i tempi sono brevi, negli uffici postali più lunghi.
 
 | Dove | Ufficio postale o filiale | Punto di ritiro | Locker |
 | --- | --- | --- | --- |
-| Italia | Poste Delivery Standard ed Express: 10 giorni lavorativi (per l'Express sabato compreso); raccomandata: 30 giorni (Raccomandata 1: 15); GLS in sede: 10 giorni lavorativi, 8 per i pacchi dall'estero | BRT-fermopoint: 10 giorni; InPost Point: circa 3 giorni; Mondial Relay: 7 giorni | InPost: circa 3 giorni; Mondial Relay: 7 giorni; Amazon Locker: 3 giorni |
+| Italia | Poste Delivery Standard ed Express: 10 giorni lavorativi (per l'Express sabato compreso); raccomandata: 30 giorni (Raccomandata 1: 15); GLS in sede: 10 giorni lavorativi, 8 per i pacchi dall'estero | BRT-fermopoint: 10 giorni; InPost Point: circa 3 giorni | InPost: circa 3 giorni; Amazon Locker: 3 giorni |
 | Ticino | La Posta: 7 giorni, 15 per i pacchi dall'estero, prorogabili | – | My Post 24: 10 giorni per i pacchi, di norma 15 dall'estero |
 
 Il giorno da cui si conta cambia da corriere a corriere. Per Poste Delivery Express i 10 giorni partono dal giorno lavorativo dopo la data scritta sull'avviso di mancata consegna. GLS conta anche il giorno in cui apre la giacenza. InPost parte da quando ricevi la notifica di consegna nel locker, e ti dice di controllare la scadenza esatta nella sua e-mail. Per un Amazon Locker, i tre giorni partono dall'e-mail con le istruzioni e le credenziali per il ritiro, che arriva quando il corriere ha lasciato il pacco.
 
 Lo stesso pacco può avere scadenze diverse a seconda del servizio e del paese. Con [la Posta svizzera](carrier:swiss-post), i pacchi dall'estero hanno di norma 15 giorni: in filiale invece di 7, allo sportello automatico My Post 24 invece di 10. Se sei tu a spedire all'estero con Poste Delivery International Standard, nel paese di destinazione il pacco resta in giacenza da 15 giorni a un mese, e in casi eccezionali fino a due mesi.
-
-Altrove in Europa i tempi cambiano ancora: in Polonia, per esempio, un locker InPost tiene il pacco solo 48 ore.
 
 ### Perché la tua data può essere diversa dalla tabella
 
@@ -60,7 +58,7 @@ Cosa vuol dire ogni stato, da «in giacenza» a «pronto per il ritiro», lo tro
 
 In Italia quasi mai. InPost Italia dice che, scaduti i 3 giorni, non ci sono altri tentativi né «prolungamenti del periodo di giacenza». Le pagine di Poste Italiane, BRT e GLS non parlano di proroghe.
 
-In Ticino invece sì. La Posta ti lascia [prolungare il termine di ritiro](https://www.post.ch/it/ricezione/invito-di-ritiro) online, con un servizio gratuito disponibile anche senza account. In Polonia InPost vende 24 ore in più per 7,99 zł nella sua app, prima che finiscano le prime 48 ore, e puoi comprarle più di una volta.
+In Ticino invece sì. La Posta ti lascia [prolungare il termine di ritiro](https://www.post.ch/it/ricezione/invito-di-ritiro) online, con un servizio gratuito disponibile anche senza account.
 
 Se non riesci ad arrivare in tempo:
 
@@ -117,8 +115,6 @@ Per il corriere, un pacco nel locker è consegnato. Leggi [pacco consegnato ma n
 - [GLS Italia: Carta dei Servizi Postali](https://gls-group.com/IT/media/downloads/CARTA_DEI_SERVIZI_POSTALI_AGGIORNATAallegati_09.06.26_def.pdf) – 10 giorni lavorativi, 8 dall'estero, giorno di apertura compreso, «scaduti termini», nessun costo
 - [InPost Italia: Giacenza, come funziona con InPost](https://inpost.it/news-giacenza-come-funziona-con-inpost) – circa 3 giorni, nessuna proroga, ritorno gratuito, costi della nuova spedizione
 - [InPost Italia: Come ritirare un pacco da un locker InPost](https://inpost.it/news-come-ritirare-un-pacco-da-un-locker-inpost-tutto-quello-che-devi-sapere) – il tempo dipende dal sito di acquisti, codice QR o PIN a un'altra persona
-- [InPost Polonia: Come prolungare il ritiro](https://inpost.pl/pomoc-jak-przedluzyc-termin-odbioru-paczki-w-paczkomacie) – 24 ore in più per 7,99 zł
-- [Mondial Relay: Combien de jours pour retirer mon colis](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – Italia: 7 giorni in Point Relais e locker
 - [About Amazon Italia: Il volto gentile dietro gli Amazon Locker](https://www.aboutamazon.it/notizie/lavorare-ad-amazon/il-volto-gentile-dietro-gli-amazon-locker) – e-mail con le credenziali per il ritiro, tre giorni, ritorno ad Amazon e rimborso totale automatico (articolo del 2018)
 - [Vinted: Ritirare un pacco](https://www.vinted.it/help/3/1601-hamta-upp-ett-paket) – scadenza nel messaggio del corriere, ritorno a chi vende, annullamento e rimborso automatici
 - [La Posta: Invito di ritiro](https://www.post.ch/it/ricezione/invito-di-ritiro) – 7 e 15 giorni, proroga gratuita anche senza account

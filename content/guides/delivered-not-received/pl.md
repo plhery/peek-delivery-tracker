@@ -11,9 +11,9 @@ Jeśli śledzenie pokazuje „doręczona”, a paczki nie ma, nie zakładaj od r
 
 ## Dlaczego paczka ma status „doręczona”, skoro jej nie ma?
 
-Bo ten status mówi tylko, że kurier gdzieś zostawił paczkę, a nie, że trafiła do Ciebie. Każda firma nazywa go trochę inaczej: [InPost](carrier:inpost) pisze `Dostarczona`, a Vinted „Doręczono”. Są dwa możliwe wyjaśnienia:
+Bo ten status mówi tylko, że kurier gdzieś zostawił paczkę, a nie, że trafiła do Ciebie. Każda firma nazywa go trochę inaczej: u [InPost](carrier:inpost) Peek pokazuje `Delivered`, u DPD `Parcel delivered`, a Vinted pisze „Doręczono”. Są dwa możliwe wyjaśnienia:
 
-- **Leży tam, gdzie nikt jeszcze nie zajrzał.** Gdy paczka ma status odebranej, a jej nie masz, Allegro radzi sprawdzić, czy nie odebrał jej ktoś inny: domownik, sąsiad, a przy zamówieniu do firmy recepcja albo ochrona budynku.
+- **Leży tam, gdzie nikt jeszcze nie zajrzał.** Mógł ją odebrać ktoś inny: domownik, sąsiad, a przy zamówieniu do pracy recepcja.
 - **Naprawdę zginęła.** Błędny adres w zamówieniu, kurier pomylił drzwi albo ktoś ją ukradł.
 
 Gdzie przewoźnik może ją zostawić:
@@ -23,7 +23,7 @@ Gdzie przewoźnik może ją zostawić:
 | [Poczta Polska](carrier:poczta-polska) | Pełnoletni domownik, chyba że złożysz w placówce pocztowej zastrzeżenie. Miejsce uzgodnione z Pocztą przez Ciebie albo nadawcę. Przesyłka nierejestrowana może trafić do Twojej skrzynki na listy |
 | [DPD Polska](carrier:dpd-pl) | Dorosły domownik, chyba że nadawca zaznaczył doręczenie do rąk własnych. Sąsiad albo safeplace, jeśli wybierzesz je w aplikacji DPD Mobile lub na mojapaczka.dpd.com.pl. W automacie lub punkcie DPD Pickup paczkę odbierze każdy, kto ma kod odbioru |
 | GLS | Ktoś z rodziny albo inny domownik. Sąsiad, ale tylko za Twoją zgodą. Wskazane przez Ciebie miejsce bez podpisu, jeśli wybierzesz tę opcję w usłudze FlexDeliveryService |
-| InPost | Paczka wyjęta z automatu Paczkomat. Gdy do niego trafia, ma status `Umieszczona w automacie Paczkomat (odbiorczym)`, a kod odbioru przychodzi e-mailem oraz w aplikacji InPost Mobile albo SMS-em. `Dostarczona` oznacza, że podróż paczki się zakończyła |
+| InPost | `Delivered` znaczy tylko, że droga paczki do odbiorcy się skończyła. Paczka, która czeka w automacie Paczkomat, ma w Peek status `Ready for collection` |
 
 Śledzenie nigdy nie pokazało „doręczona”? Zobacz, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating) albo [co znaczą statusy przesyłki](guide:tracking-statuses).
 
@@ -34,7 +34,7 @@ Gdzie przewoźnik może ją zostawić:
 - Rozejrzyj się | Zapytaj domowników i sąsiadów, a w pracy recepcję. Zajrzyj do skrzynki, poszukaj awizo, SMS-a lub e-maila od przewoźnika.
 - Odczekaj dzień lub dwa | Jeśli paczkę odebrał domownik, sąsiad albo recepcja, może Ci ją oddać dopiero po jakimś czasie.
 - Napisz do sprzedawcy | Podaj numer zamówienia i numer przesyłki oraz to, co już udało Ci się sprawdzić. Poproś, żeby wyjaśnił sprawę z przewoźnikiem, a potem wysłał paczkę jeszcze raz albo oddał pieniądze.
-- Zgłoś problem na czas | Na platformie, zanim minie termin: Vinted daje 2 dni, a Allegro 2 lata od zakupu.
+- Zgłoś problem na czas | Na platformie, zanim minie termin: Vinted daje 2 dni, a Allegro 730 dni od zakupu.
 - Na końcu bank | Jeśli nikt nie pomoże, złóż w banku reklamację transakcji kartą albo otwórz spór w PayPal, zanim miną terminy.
 :::
 
@@ -54,55 +54,55 @@ Twoje prawa w Polsce:
 
 | Sytuacja | Zasada |
 | --- | --- |
-| Kupujesz od firmy | Ryzyko utraty lub uszkodzenia przechodzi na Ciebie dopiero z chwilą wydania Ci rzeczy. Postanowienia mniej korzystne dla Ciebie są nieważne (art. 548 § 3 Kodeksu cywilnego) |
+| Kupujesz od firmy | Ryzyko utraty lub uszkodzenia przechodzi na Ciebie dopiero z chwilą wydania Ci rzeczy (art. 548 § 3 Kodeksu cywilnego). Według UOKiK sklep nie może się z tego zwolnić w regulaminie |
 | Sklep proponuje sposoby dostawy | Według UOKiK sprzedawca ma wpływ na wybór przewoźnika, gdy sam go rekomenduje albo daje Ci wybór spośród kilku swoich metod dostawy. Wtedy odpowiada za paczkę, dopóki jej nie otrzymasz |
-| Paczka w ogóle nie dociera | Sprzedawca musi wydać rzecz niezwłocznie, najpóźniej 30 dni od zawarcia umowy, chyba że umowa mówi inaczej. Gdy się spóźnia, możesz wyznaczyć mu dodatkowy termin, a po jego upływie odstąpić od umowy (art. 543¹ Kodeksu cywilnego) |
-| Kupujesz od osoby prywatnej | Przepisy konsumenckie Cię wtedy nie chronią, bo konsumentem jest się tylko w umowie z przedsiębiorcą (art. 22¹). W razie wątpliwości wydanie następuje już wtedy, gdy sprzedawca powierzy rzecz przewoźnikowi (art. 544 § 1), a z wydaniem ryzyko przechodzi na kupującego (art. 548 § 1 Kodeksu cywilnego) |
+| Paczka w ogóle nie dociera | Sprzedawca musi wydać rzecz niezwłocznie, najpóźniej 30 dni od zawarcia umowy, chyba że umowa mówi inaczej. Gdy się spóźnia, możesz wyznaczyć mu dodatkowy termin, a po jego upływie odstąpić od umowy |
+| Kupujesz od osoby prywatnej | Przepisy konsumenckie Cię wtedy nie chronią: według UOKiK konsumentem jest się w umowie z przedsiębiorcą |
 
 Ryzyko jest po Twojej stronie, gdy:
 
 - **Wybierasz przewoźnika spoza oferty sklepu.** UOKiK podaje przykład listu ekonomicznego albo kuriera, którego sprzedawca nie proponował: wtedy sklep odpowiada tylko do nadania.
 - **Wysyłasz znajomego po odbiór osobisty.** Jeśli sprzedawca nie proponował takiej metody, odpowiada tylko do chwili, w której wręczy mu rzecz, pisze UOKiK.
-- **Kupujesz od osoby prywatnej**, co często zdarza się na Vinted, OLX czy Allegro Lokalnie. Wtedy najwięcej daje ochrona kupujących na samej platformie: Allegro Ochrona Kupujących obejmuje też Allegro Lokalnie, a na Vinted ochrona dotyczy zakupów przyciskiem „Kup teraz”.
+- **Kupujesz od osoby prywatnej**, co często zdarza się na Vinted, OLX czy Allegro Lokalnie. Wtedy najwięcej daje ochrona kupujących na samej platformie: Allegro Ochrona Kupujących obejmuje też zakupy na Allegro Lokalnie, a na Vinted ochrona dotyczy zakupów przyciskiem „Kup teraz”.
 
 ## O jaki dowód doręczenia możesz poprosić?
 
-- **Kto i kiedy przyjął paczkę.** Według Prawa pocztowego paczkę doręcza się za pokwitowaniem odbioru, a przy przesyłce kurierskiej rejestruje się też dzień i godzinę doręczenia. DPD uznaje za skuteczne doręczenie do rąk dorosłego domownika, chyba że nadawca zaznaczył doręczenie do rąk własnych. Zapytaj więc, kto pokwitował odbiór i o której.
-- **Kod odbioru.** W automacie lub punkcie DPD Pickup paczkę odbierze każdy, kto ma kod odbioru, a DPD wysyła go e-mailem. InPost wysyła kod e-mailem oraz w aplikacji albo SMS-em. Sprawdź, kto w domu ma dostęp do tych wiadomości.
+- **Kto i kiedy przyjął paczkę.** Przy przesyłce kurierskiej operator pocztowy co do zasady musi uzyskać pokwitowanie odbioru, pisze UKE. DPD uznaje za skuteczne doręczenie do rąk dorosłego domownika, chyba że nadawca zaznaczył doręczenie do rąk własnych. Zapytaj więc, kto pokwitował odbiór i kiedy.
+- **Kod odbioru.** W automacie lub punkcie DPD Pickup paczkę odbierze każdy, kto ma kod odbioru, a DPD wysyła go e-mailem. Sprawdź, kto w domu ma dostęp do takich wiadomości.
 - **Nie pinezka GPS.** Żadna strona przewoźnika, którą przeczytaliśmy, nie obiecuje współrzędnych jako dowodu doręczenia.
 
 Dowód doręczenia może też zadziałać przeciwko Tobie. PayPal pisze, że jeśli sprzedający przedstawi dowód dostawy, może rozstrzygnąć spór na jego korzyść, nawet jeśli twierdzisz, że paczka do Ciebie nie dotarła.
 
-Gdy zgłaszasz brak paczki, przygotuj szczegóły. Vinted prosi między innymi o adres dostawy (punkt, automat paczkowy albo dom), przewidywaną datę dostawy, [numer śledzenia](guide:find-tracking-number) i opis zamówienia. Allegro może poprosić o dokument z wynikiem reklamacji, o potwierdzenie płatności, gdy zakup był opłacony poza Allegro albo przy odbiorze, a w wyjątkowych sytuacjach o zgłoszenie sprawy organom ścigania.
+Gdy zgłaszasz brak paczki, przygotuj szczegóły. Vinted prosi między innymi o adres dostawy (punkt, automat paczkowy albo dom), przewidywaną datę dostawy, [numer śledzenia](guide:find-tracking-number) i opis zamówienia. Do wniosku o rekompensatę z Allegro dołączasz dowód wpłaty, jeśli nie płaciłeś przez Allegro, i zdjęcie dokumentu tożsamości, chyba że Allegro z niego zrezygnuje. Allegro może też poprosić o dodatkowe dokumenty, a w szczególnych przypadkach o potwierdzenie, że zawiadomiłeś organy ścigania o przestępstwie sprzedającego.
 
 ## Ile czasu dają Ci Allegro i Vinted?
 
 | Platforma | Co zrobić | Termin |
 | --- | --- | --- |
-| Allegro (Allegro Ochrona Kupujących) | Załóż Dyskusję z powodem „nie otrzymałem produktu”. Sprzedający ma 24 godziny na odpowiedź, potem wybierz „poproś o pomoc Allegro”. Jeśli nie dojdziecie do porozumienia, oznacz Dyskusję jako nierozwiązaną, a Allegro przyśle link do wniosku o rekompensatę | Dyskusja od 1 godziny do 2 lat po zakupie. Wniosek o rekompensatę od 14. dnia do 2 lat od zakupu albo 7 dni po zgłoszeniu, że produkt nie dotarł. Do 20 000 zł |
+| Allegro (Allegro Ochrona Kupujących) | Załóż Dyskusję z powodem „nie otrzymałem produktu”. Sprzedający ma 24 godziny na odpowiedź (bez weekendów i świąt); jeśli milczy, możesz poprosić Allegro, żeby włączyło się do Dyskusji. Jeśli w ciągu 7 dni nie dojdziecie do porozumienia, oznacz Dyskusję jako nierozwiązaną (nie dotyczy Allegro Lokalnie): sprawa trafi do Allegro | Dyskusja najwcześniej godzinę po zakupie. Wniosek o rekompensatę przy nieotrzymanym towarze: nie wcześniej niż po 7 dniach i nie później niż 730 dni od zakupu. Do 20 000 zł |
 | Vinted | „Mam problem” w oknie rozmowy | 2 dni kalendarzowe od zmiany statusu na „Doręczono” |
 
-Rekompensata z Allegro nie zawsze pokrywa 100% poniesionych kosztów. Jeśli paczka dotrze już po założeniu Dyskusji i nie masz zastrzeżeń, Allegro zamknie Dyskusję po 24 godzinach.
+Rekompensata z Allegro pokrywa szkodę najwyżej do ceny towaru, a koszt przesyłki tylko wtedy, gdy płaciłeś przez Allegro. Regulamin obejmuje sytuację, gdy zapłaciłeś, a towaru nie dostałeś, ale wyłącza towar zniszczony lub zagubiony podczas transportu z winy przewoźnika. Allegro pisze też sprzedającym, że gdy przesyłka ma status „dostarczona”, odrzuci Twój wniosek, jeśli sprzedający pokaże potwierdzenie doręczenia od przewoźnika albo złożenia u niego reklamacji. Jeśli paczka dotrze już po założeniu Dyskusji i nie masz zastrzeżeń, Allegro zamknie Dyskusję po 24 godzinach.
 
 Na Amazon.pl każdy produkt, czy sprzedaje go Amazon, czy niezależny sprzedawca, jest objęty Gwarancją od A do Z: jeśli masz problem z terminową dostawą, Amazon zwróci Ci pieniądze albo wymieni produkt. Gdy kupujesz od innego sprzedawcy, najpierw spróbuj rozwiązać problem z nim, a jeśli się nie uda, skontaktuj się bezpośrednio z Amazonem i poproś o zwrot pieniędzy.
 
-Nie zaczynaj od banku: Allegro nie wypłaci rekompensaty, jeśli pieniądze odzyskasz już z innego źródła, na przykład z ubezpieczenia karty kredytowej albo od sprzedającego.
+Nie zaczynaj od banku: Allegro nie wypłaci rekompensaty, jeśli stratę pokryło Ci już coś innego, na przykład zwrot pieniędzy od sprzedającego.
 
 Zamówienie z AliExpress, Temu albo Shein? Ich terminy znajdziesz w poradniku o [śledzeniu paczki z Chin](guide:tracking-from-china). Jeśli paczkę wiózł [Cainiao](carrier:cainiao) albo [YunExpress](carrier:yunexpress), zobacz też, kogo wtedy pytać.
 
 ## Kto składa reklamację u przewoźnika: nadawca czy odbiorca?
 
-Zwykle nadawca, bo to on zawarł umowę z przewoźnikiem. Według Prawa pocztowego adresat może to zrobić tylko wtedy, gdy nadawca zrzeknie się na jego rzecz roszczeń albo gdy przesyłkę mu doręczono. Dlatego szybciej załatwisz to przez sprzedawcę.
+Zwykle nadawca, bo to on zawarł umowę z przewoźnikiem. Według UKE adresat może to zrobić tylko wtedy, gdy nadawca zrzeknie się na jego rzecz roszczeń albo gdy przesyłkę mu doręczono. Dlatego szybciej załatwisz to przez sprzedawcę.
 
 | Przewoźnik | Co możesz zrobić | Termin |
 | --- | --- | --- |
-| InPost | Formularz na stronie, infolinia 722 444 000 lub 746 600 000 albo list z dopiskiem „Dział Reklamacji”. Przy skradzionej paczce InPost prosi o niezwłoczny telefon na infolinię | 12 miesięcy od nadania. Odpowiedź do 30 dni kalendarzowych, na odwołanie masz 14 dni |
+| InPost | Reklamacja na piśmie, elektronicznie albo ustnie. To ogólne zasady UKE dla każdego operatora pocztowego, a nie regulamin InPost: InPost figuruje w prowadzonym przez UKE rejestrze operatorów pocztowych | 12 miesięcy od nadania. Odpowiedź do 30 dni, a jej brak oznacza uznanie reklamacji. Na odwołanie masz 14 dni od odpowiedzi |
 | Poczta Polska | Adresat składa reklamację, gdy paczkę mu doręczono albo gdy nadawca zrzekł się na jego rzecz roszczeń. Formularz online albo druk w placówce | Utrata paczki pocztowej: po 14 dniach od nadania, nie licząc dni ustawowo wolnych od pracy, i najpóźniej 12 miesięcy od nadania. Odpowiedź w ciągu 30 dni |
 | DPD Polska | Reklamację składa zleceniodawca, czyli zwykle sklep. Ty możesz, gdy sklep zrzeknie się roszczeń na Twoją rzecz, gdy przesyłkę Ci doręczono albo gdy jako konsument masz prawo nią rozporządzać | 12 miesięcy od nadania przesyłki kurierskiej. Decyzja do 30 dni kalendarzowych od złożenia kompletnej reklamacji |
 
 ### Co, jeśli przewoźnik odrzuci reklamację?
 
-Gdy operator pocztowy odmówi uznania reklamacji albo nie zapłaci w ciągu 30 dni od jej uznania, droga reklamacyjna jest wyczerpana. Wtedy nadawca albo adresat może złożyć do Prezesa UKE wniosek o pozasądowe rozwiązanie sporu albo pójść do sądu. W sporze ze sklepem pomoże Ci bezpłatnie miejski albo powiatowy rzecznik konsumentów: udziela porad, pomaga napisać reklamację i może wystąpić z powództwem w Twoim imieniu. Na początek możesz też zadzwonić na infolinię konsumencką: 801 440 220 lub 222 66 76 76, w dni robocze od 10.00 do 18.00.
+Gdy operator pocztowy odmówi uznania reklamacji, masz 14 dni na odwołanie. Jeśli odpowiedź operatora Cię nie zadowala, UKE wskazuje też interwencję Prezesa UKE, bezpłatne pozasądowe rozwiązanie sporu (ADR) albo sąd. W sporze ze sklepem pomoże Ci bezpłatnie miejski albo powiatowy rzecznik konsumentów: udziela porad, pomaga napisać reklamację i może wystąpić z powództwem w Twoim imieniu. Na początek możesz też zadzwonić na infolinię konsumencką: 801 440 220 lub 222 66 76 76, w dni robocze od 10.00 do 18.00.
 
 ## Czy odzyskasz pieniądze przez bank lub PayPal?
 
@@ -119,32 +119,35 @@ Nie. [Peek](/), jak [każdy tracker](guide:universal-tracker), pokazuje tylko to
 
 ### Czy zgłaszać kradzież paczki na policję?
 
-Możesz. Zwykle nie jest to warunek zwrotu pieniędzy, ale Allegro w wyjątkowych sytuacjach prosi o zgłoszenie sprawy organom ścigania, a PayPal może poprosić o raport policyjny. Allegro dodaje, że na Twój wniosek policja lub prokuratura wyda potwierdzenie złożenia zawiadomienia, a w ciągu 6 tygodni powinna przysłać postanowienie o wszczęciu albo odmowie wszczęcia postępowania. Zachowaj numer sprawy (RSD albo Ds.).
+Możesz. Zwykle nie jest to warunek zwrotu pieniędzy, ale PayPal może poprosić o raport policyjny, a Allegro w szczególnych przypadkach prosi o potwierdzenie, że zawiadomiłeś organy ścigania o przestępstwie sprzedającego, i o numer sprawy (RSD albo Ds.). Zachowaj te dokumenty.
 
 ### Kurier zostawił paczkę pod drzwiami i jej nie ma?
 
-Sprawdź, czy ktoś wskazał to miejsce: safeplace w aplikacji DPD Mobile, miejsce bez podpisu w usłudze FlexDeliveryService GLS albo inne miejsce uzgodnione z przewoźnikiem. Prawo pocztowe uznaje wydanie paczki w miejscu, które adresat albo nadawca uzgodnił z operatorem, za doręczenie (art. 37). Jeśli nikt takiego miejsca nie wybierał, napisz do sprzedawcy: przy zakupie od firmy odpowiada on za paczkę, dopóki jej nie dostaniesz.
+Sprawdź, czy ktoś wskazał to miejsce: safeplace w aplikacji DPD Mobile, miejsce bez podpisu w usłudze FlexDeliveryService GLS albo inne miejsce uzgodnione z przewoźnikiem. Według UKE wydanie paczki w miejscu, które adresat albo nadawca uzgodnił z operatorem, to doręczenie (art. 37 Prawa pocztowego). Jeśli nikt takiego miejsca nie wybierał, napisz do sprzedawcy: przy zakupie od firmy odpowiada on za paczkę, dopóki jej nie dostaniesz.
 
 ### Ktoś odebrał moją paczkę z Paczkomatu?
 
-Zadzwoń na infolinię InPost, 722 444 000 lub 746 600 000: przy skradzionej paczce InPost prosi o kontakt niezwłocznie. Sprawdź też, kto ma dostęp do Twojej skrzynki e-mail, SMS-ów albo aplikacji InPost Mobile, bo tam przychodzi kod odbioru. Potem napisz do sprzedawcy, tak jak przy [każdej zaginionej paczce](guide:lost-parcel).
+Zgłoś to od razu w aplikacji InPost Mobile albo przez stronę InPost. Sprawdź też, kto ma dostęp do Twoich SMS-ów, e-maili i aplikacji, w których dostajesz kody odbioru. Potem napisz do sprzedawcy, tak jak przy [każdej zaginionej paczce](guide:lost-parcel).
 
 :::sources
 - [UOKiK: Odpowiedzialność za przesyłkę](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/odpowiedzialnosc-sprzedawcy-za-przesylke/) – ryzyko do otrzymania przesyłki, wpływ na wybór przewoźnika, list ekonomiczny, znajomy, reklamacja do sprzedawcy
 - [UOKiK: Wydanie towaru](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/wydanie-towaru/) – 30 dni, dodatkowy termin, odstąpienie
-- [Sejm RP: Kodeks cywilny, tekst jednolity Dz.U. 2026 poz. 795](https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf) – art. 22¹, art. 543¹, art. 544 § 1, art. 548 § 1 i § 3
-- [Sejm RP: Prawo pocztowe, tekst jednolity Dz.U. 2026 poz. 558](https://api.sejm.gov.pl/eli/acts/DU/2026/558/text.pdf) – art. 3 pkt 14, 19 i 23 (pokwitowanie odbioru), art. 37, art. 92 do 95
+- [UOKiK: Słownik](https://prawakonsumenta.uokik.gov.pl/slownik/) – konsument to osoba w umowie z przedsiębiorcą
+- [UKE: Jakie są zasady doręczania przesyłek pocztowych?](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/korzystanie-z-uslug-pocztowych/jakie-sa-zasady-doreczania-przesylek-pocztowych,7.html) – art. 37 Prawa pocztowego: skrzynka, miejsce uzgodnione, pełnoletni domownik, zastrzeżenie, pokwitowanie odbioru przesyłki kurierskiej
+- [UKE: Reklamacje usług pocztowych](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, forma, 12 miesięcy, 30 dni, odwołanie 14 dni, Prezes UKE, ADR, sąd
+- [UKE: Odbieram paczkę – jakie mam prawa?](https://uke.gov.pl/blog/odbieram-paczke-jakie-mam-prawa,8.html) – adresat reklamuje po doręczeniu albo po zrzeczeniu się roszczeń przez nadawcę
+- [UKE: Rejestr operatorów pocztowych, InPost Sp. z o.o.](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=1&rejestr=B-00562) – InPost w rejestrze operatorów pocztowych
 - [Poczta Polska: eReklamacje, paczka pocztowa](https://ereklamacje.poczta-polska.pl/sub/reklamacje-krajowe/paczka-pocztowa) – kto składa reklamację, 14 dni, 12 miesięcy, odpowiedź w 30 dni
-- [InPost: Reklamacje](https://inpost.pl/reklamacja) – formularz, infolinia, list, 12 miesięcy, kradzież
-- [InPost: W jaki sposób mogę złożyć reklamację?](https://inpost.pl/pomoc-w-jaki-sposob-moge-zlozyc-reklamacje) – 30 dni kalendarzowych, 14 dni na odwołanie
-- [InPost: Lista statusów przesyłek](https://api-shipx-pl.easypack24.net/v1/statuses?lang=pl_PL) – „Umieszczona w automacie Paczkomat”, „Dostarczona”, kod odbioru e-mailem, w aplikacji lub SMS-em
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku): gotowa do odbioru, doręczona, koniec drogi do odbiorcy
+- [Universal Parcel Scraper: DPD Polska](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dpd-pl) – status doręczenia DPD, który czyta Peek (po angielsku)
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – sąsiad, safeplace, kod odbioru e-mailem, decyzja w 30 dni
 - [DPD Polska: Regulamin Świadczenia Usług w Obrocie Krajowym](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – § 11 ust. 2 dorosły domownik, § 21 kto składa reklamację, 12 miesięcy
 - [GLS Polska: Co jeśli nie odbiorę paczki od kuriera?](https://gls-group.com/PL/pl/blog/co-jesli-mnie-nie-ma-w-domu/) – domownik, sąsiad za zgodą, FlexDeliveryService, miejsce bez podpisu
 - [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – Gwarancja od A do Z dla każdego produktu, problem z terminową dostawą, zwrot pieniędzy albo wymiana
 - [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, potem zwrot pieniędzy od Amazona
-- [Allegro: Jak działa Allegro Ochrona Kupujących](https://allegro.pl/pomoc/dla-kupujacych/allegro-ochrona-kupujacych/jak-dziala-allegro-ochrona-kupujacych-qzdAg2Klbsl) – 20 000 zł, 7 i 14 dni, 2 lata, wyłączenia, potwierdzenie płatności, organy ścigania, 6 tygodni
-- [Allegro: Co możesz zrobić, gdy czekasz na przesyłkę zbyt długo](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/co-mozesz-zrobic-gdy-czekasz-na-przesylke-zbyt-dlugo-xG71gn36qC4) – Dyskusja, 24 godziny, paczka odebrana przez domownika, sąsiada lub recepcję
+- [Allegro: Allegro Ochrona Kupujących, regulamin (załącznik nr 9)](https://policies.allegro.com/doc/ccca669b9c6b6723bfdb781db6a9773d0e0c61281a448151bfaa75843e1d55c8) – najpierw Dyskusja, 7 i 730 dni, do 20 000 zł, do ceny towaru, koszt przesyłki, nieotrzymany towar i wyłączenia, dowód wpłaty, dokument tożsamości, dodatkowe dokumenty, zawiadomienie organów ścigania, RSD i Ds.
+- [Allegro: Czym są i jak działają Dyskusje – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/czym-sa-i-jak-dzialaja-dyskusje-informacje-dla-sprzedajacych-k1wRjeRw2I8) – godzina po zakupie, 24 godziny na odpowiedź, Allegro włącza się na prośbę kupującego, 7 dni, nierozwiązana Dyskusja, zamknięcie po 24 godzinach
+- [Allegro: Czym jest Allegro Ochrona Kupujących i co zrobić, gdy mój klient ubiega się o rekompensatę](https://help.allegro.com/pl/sell/a/czym-jest-allegro-ochrona-kupujacych-i-co-zrobic-gdy-moj-klient-ubiega-sie-o-rekompensate-rj9eVqwM8iz) – ochrona obejmuje Allegro i Allegro Lokalnie, odrzucenie wniosku przy statusie „dostarczona”
 - [Vinted: Śledzenie przesyłki](https://www.vinted.pl/help/100) – „Mam problem” w ciągu dwóch dni od „Doręczono”
 - [Vinted: Paczka nie została doręczona](https://www.vinted.pl/help/726) – dane do zgłoszenia, zakończenie problemu, gdy paczka dotrze
 - [Vinted: Polityka Zwrotów](https://www.vinted.pl/help/465) – 2 dni kalendarzowe, płatność dla sprzedającego, „Kup teraz”

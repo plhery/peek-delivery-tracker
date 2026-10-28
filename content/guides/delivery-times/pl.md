@@ -1,31 +1,29 @@
 ---
 title: O której dostarczają paczki? Godziny kurierów i soboty
-description: O której przyjedzie kurier DPD, Allegro One, GLS czy Pocztex, kto dostarcza w sobotę i w niedzielę i dlaczego paczka przychodzi wieczorem.
+description: O której przyjedzie kurier DPD, GLS czy Pocztex, kto dostarcza w sobotę i w niedzielę i od czego zależy pora dostawy paczki.
 slug: o-ktorej-dostarczaja-paczki
 picture: Zegar wskazujący ósmą wieczorem pod sierpem księżyca, kalendarz z zaznaczonymi weekendami, furgonetka z zapalonymi światłami i Pip patrzący przez okno.
 published: 2026-10-14
 updated: 2026-10-28
 ---
 
-Kurierzy dostarczają paczki od rana do późnego wieczoru i prawie żaden nie obiecuje Ci konkretnej godziny. Allegro One Kurier większość paczek wozi między 18:00 a 22:00, a DPD dokładny czas dostawy podaje Ci SMS-em lub e-mailem. W tygodniu jeżdżą wszyscy, a sobota i niedziela zwykle zależą od usługi, którą wykupił nadawca.
+Kurierzy rozwożą paczki przez cały dzień i prawie żaden nie obiecuje Ci konkretnej godziny. DPD dokładny czas dostawy podaje Ci SMS-em lub e-mailem. W tygodniu jeżdżą wszyscy, a sobota i niedziela zwykle zależą od usługi, którą wykupił nadawca.
 
 ## O której przyjedzie kurier? Godziny przewoźników
 
 | Przewoźnik | Poniedziałek–piątek | Sobota | Niedziela |
 | --- | --- | --- | --- |
 | [DPD](carrier:dpd-pl) | Godzin nie podaje; dokładny czas dostawy dostajesz SMS-em lub e-mailem | Tylko paczki z usługą dodatkową Sobota | Strona o niej nie wspomina |
-| [Allegro One](carrier:allegro-one) Kurier | Ponad 80% paczek wieczorem, między 18:00 a 22:00 | Tak, do Allegro One Box i na adres | Strona o niej nie wspomina |
 | GLS | Następny dzień roboczy; ExpressParcel przed 10:00 albo 12:00 | Doręczenie w soboty jako usługa | Strona o niej nie wspomina |
 | [Poczta Polska](carrier:poczta-polska), Pocztex | Godzin nie podaje; terminy liczy w dniach roboczych, od poniedziałku do piątku | Regulamin dla klientów indywidualnych nie przewiduje | Nie przewiduje |
 
-Godziny kurierów [InPost](carrier:inpost) i [DHL eCommerce](carrier:dhl-ecommerce-pl) sprawdź na stronie przewoźnika.
+Godziny kurierów [InPost](carrier:inpost), [Allegro One](carrier:allegro-one) i [DHL eCommerce](carrier:dhl-ecommerce-pl) sprawdź na stronie przewoźnika.
 
 ## Czy kurier dostarcza w sobotę i w niedzielę?
 
 **Sobota** to dla większości przewoźników dodatkowa usługa, a nie zwykły dzień pracy:
 
 - **DPD:** w soboty kurierzy doręczają wyłącznie paczki z usługą dodatkową Sobota. Czy Twoja ją ma, sprawdzisz u nadawcy albo w aplikacji DPD Mobile.
-- **Allegro One Kurier** dowozi paczki także w soboty, do Allegro One Box i na adres.
 - **Pocztex:** regulamin dla klientów indywidualnych liczy dni robocze od poniedziałku do piątku i nie ma opcji weekendowej.
 
 **Niedziela** to w Polsce ustawowo dzień wolny od pracy i żaden przewoźnik z tabeli nie obiecuje w nią dostaw. Niedziela handlowa niczego tu nie zmienia: w regulaminach InPost i Pocztex dzień roboczy to zawsze poniedziałek–piątek.
@@ -56,7 +54,7 @@ Zwykle dziś, ale o godzinie decyduje trasa. „Wydana do doręczenia” znaczy,
 - home | Twoje drzwi | O dowolnej porze, aż do najpóźniejszej godziny przewoźnika.
 :::
 
-U Allegro One Kuriera wieczór trwa do 22:00, więc kurier pod Twoimi drzwiami o 21:30 ma zupełnie normalny dzień. Co znaczą poszczególne statusy po drodze, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses).
+Kurier, który dzwoni do drzwi wieczorem, wcale więc nie musi być spóźniony: po prostu jesteś dalej na jego trasie. Co znaczą poszczególne statusy po drodze, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses).
 
 ## Paczka wydana do doręczenia, a kurier nie przyjechał: co teraz?
 
@@ -91,7 +89,6 @@ Tak, jeśli paczka jedzie do automatu albo punktu odbioru. Sprawdź tylko godzin
 - [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku): „Handed over for delivery”, paczka u kuriera, pod drzwi albo do automatu
 - [DPD Polska: najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – usługa Sobota, wybrany przedział czasowy, numer do kuriera, 3 dni robocze, godziny punktów DPD Pickup
 - [DPD Polska: Odbieram paczkę](https://www.dpd.com/pl/pl/odbieram-paczke/) – czas dostawy SMS-em lub e-mailem, kurier na mapie, zmiana adresu i czasu doręczenia
-- [Allegro: Allegro One Kurier](https://allegro.pl/kampania/one/kurier) – ponad 80% przesyłek w godzinach 18:00–22:00, dostawa w soboty
 - [GLS Polska: Przesyłki krajowe](https://gls-group.com/PL/pl/wysylanie-paczek/przesylki-krajowe/) – doręczenie w soboty, ExpressParcel przed 10:00 lub 12:00, e-mail z terminem w FlexDeliveryService
 - [Poczta Polska: Regulamin usługi Pocztex dla klienta detalicznego od 24 sierpnia 2026](https://www.poczta-polska.pl/wp-content/uploads/2026/08/Regulamin-swiadczenia-uslugi-Pocztex-w-obrocie-krajowym-dla-klienta-detalicznego-obowiazuje-od-24.08.2026-r.pdf) – dzień roboczy od poniedziałku do piątku bez sobót i dni ustawowo wolnych od pracy, brak opcji weekendowej, Kurier do piątego (2XL i niestandardowe do siódmego) dnia roboczego, godziny graniczne, Doręczenie do 12:00
 - [Zielona Linia: Praca w niedziele i święta](https://zielonalinia.gov.pl/praca-w-niedziele-i-swieta/) – art. 151⁹ § 1 Kodeksu pracy: niedziele i święta dniami wolnymi od pracy

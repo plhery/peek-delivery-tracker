@@ -26,7 +26,7 @@ Ton colis peut aussi finir dans une autre consigne que celle choisie, si elle es
 
 | Consigne | Gérée par | Ton code | Combien de temps elle attend |
 | --- | --- | --- | --- |
-| Lockers Mondial Relay (France, Belgique) | Mondial Relay | Code à 6 chiffres par e-mail, SMS et dans l'appli | 5 jours calendaires |
+| Lockers Mondial Relay (Belgique) | Mondial Relay | Code à 6 chiffres par e-mail, SMS et dans l'appli | 5 jours calendaires |
 | Consignes Pickup (France) | Pickup, pour Colissimo et Chronopost | Pickup Pass (QR code) ou codes de retrait par e-mail ou SMS | 5 jours maximum |
 | Amazon Locker (France) | Amazon | Code à 6 chiffres de l'e-mail, code-barres ou appli Amazon | 3 jours calendaires |
 | Bbox (Belgique) | bpost | QR code par e-mail ou dans l'appli My bpost | 5 jours calendaires |
@@ -34,7 +34,7 @@ Ton colis peut aussi finir dans une autre consigne que celle choisie, si elle es
 
 Ce que le tableau ne dit pas :
 
-- **[Mondial Relay](carrier:mondial-relay)** compte plus de 12 000 Lockers en France. Ils sont ouverts 24 h/24.
+- **[Mondial Relay](carrier:mondial-relay)** : en Belgique, ses Lockers sont ouverts 24 h/24 et 7 j/7, mais certains sont sur des parkings fermés la nuit. Les règles de Mondial Relay données ici sont celles de son site belge ; pour un Locker en France, vérifie sur mondialrelay.fr ou dans l'appli Mondial Relay.
 - **Pickup** a 7 000 consignes en France, dans des bureaux de poste, des supermarchés et des gares. [Colissimo](carrier:la-poste) et [Chronopost](carrier:chronopost) y livrent.
 - **Bbox** : plus de 2 500 en Belgique, sans compte ni abonnement.
 - **My Post 24** est réservé aux particuliers domiciliés en Suisse. Tu t'inscris dans « Ma Poste » et tu mets « My Post 24 » avec ton User-ID dans l'adresse.
@@ -45,7 +45,7 @@ Le code qui ouvre la consigne n'est pas ton numéro de suivi. Le numéro de suiv
 
 Où le trouver :
 
-- **Mondial Relay :** dans l'e-mail, le SMS et l'appli (« Plus d'infos » sur ton colis). Sur l'écran, touche « Retirer un colis » et tape le code, ou scanne ton QR code.
+- **Mondial Relay (Belgique) :** dans l'e-mail, le SMS et l'appli Mondial Relay. Sur l'écran du Locker, touche « Retirer un colis » et tape le code.
 - **Pickup :** la notification par e-mail ou SMS contient l'adresse, les horaires, le Pickup Pass, les codes et le délai. À la consigne, scanne le QR code ou choisis « Retrait client », puis « Saisie manuelle ».
 - **Amazon :** dans l'e-mail de confirmation de livraison.
 - **Bbox :** dans l'e-mail ou l'appli My bpost. Si tu as choisi la Bbox directement, un code à 6 chiffres figure sous le QR code.
@@ -53,25 +53,25 @@ Où le trouver :
 
 Toujours pas de code ? Dans l'ordre :
 
-1. **Regarde le suivi.** Tant que le colis n'est pas dans la consigne, il n'y a pas de code. Mondial Relay l'envoie « uniquement lorsque votre colis sera mis à disposition dans le Locker ».
+1. **Regarde le suivi.** Tant que le colis n'est pas dans la consigne, il n'y a pas de code.
 2. **Regarde tes spams.** Pickup et bpost le conseillent. Certaines Bbox n'ont même pas besoin de QR code : lis bien l'e-mail.
 3. **Demande-le.** Pickup te renvoie vers le transporteur (Colissimo, Chronopost ou DPD) et propose un formulaire pour renvoyer la notification. Si la consigne Pickup est dans un relais Pickup, demande tes codes à l'accueil. Chez bpost, appelle le 02 320 23 90.
 
-Les codes viennent du transporteur ou de la boutique, gratuitement. Mondial Relay conseille son appli, vu les nombreux SMS et e-mails frauduleux. Un SMS qui réclame quelques euros pour libérer ton colis est presque toujours une arnaque : voir [arnaque colis par SMS](guide:delivery-scam-texts).
+Les codes viennent du transporteur ou de la boutique, gratuitement. Mondial Relay indique qu'il « ne vous demandera jamais de payer des frais additionnels », rapporte Cybermalveillance.gouv.fr. Un SMS qui réclame quelques euros pour libérer ton colis est presque toujours une arnaque : voir [arnaque colis par SMS](guide:delivery-scam-texts).
 
 ## Combien de temps la consigne garde-t-elle mon colis ?
 
-Peu : 3 jours chez Amazon, 5 chez Mondial Relay, Pickup et bpost, 10 à un My Post 24 (voir le tableau). Chez Pickup et bpost, la date limite figure dans la notification.
+Peu : 3 jours chez Amazon, 5 chez Pickup et bpost comme chez Mondial Relay en Belgique, 10 à un My Post 24 (voir le tableau). Chez Pickup et bpost, la date limite figure dans la notification. Chez Mondial Relay, le suivi peut afficher les « jours restants pour retirer le colis ».
 
-Prolonger ? Non. « Il n'est pas possible de prolonger le délai de garde », dit Mondial Relay, et bpost : « aucune prolongation possible ».
+Prolonger ? Non. « Il n'est pas possible de prolonger le délai de garde », dit Mondial Relay sur son site belge, et bpost : « aucune prolongation possible ».
 
-Ensuite, le colis repart. Mondial Relay et Pickup le retournent automatiquement à l'expéditeur, bpost le renvoie le 6e jour, Amazon le récupère et te rembourse automatiquement. La suite et ton remboursement : [colis non retiré](guide:uncollected-parcel).
+Ensuite, le colis repart. Pickup le retourne automatiquement à l'expéditeur, tout comme Mondial Relay en Belgique ; bpost le renvoie le 6e jour, Amazon le récupère et te rembourse automatiquement. La suite et ton remboursement : [colis non retiré](guide:uncollected-parcel).
 
 ## La consigne était pleine ou en panne : où est mon colis ?
 
 Là où le transporteur a pu le mettre, et le suivi te dit où. Suis le suivi, pas la consigne choisie au départ.
 
-- **Mondial Relay :** si la consigne est saturée ou fermée, le colis va automatiquement au Point Relais ou Locker le plus proche, ou Mondial Relay t'envoie un e-mail pour en choisir un autre. Locker en panne avec ton colis dedans ? Appelle, une fois devant, le numéro inscrit dessus (de 8 h à 21 h en semaine, de 8 h à 19 h le samedi).
+- **Mondial Relay :** en Belgique, si le colis ne peut pas être livré au Point Relais choisi, tu reçois un e-mail ou un SMS pour attendre sa réouverture ou en choisir un autre ; sans réponse, Mondial Relay peut en choisir un lui-même, près du premier. Le suivi peut alors afficher « Relais de substitution choisi ».
 - **Pickup :** un colis peut être redirigé vers un autre point Pickup, faute de place ou si le point est fermé. Il ne peut pas revenir au point initial. Consigne éteinte ou en panne : contacte le service client Pickup sur sa plateforme d'assistance. Une consigne solaire en veille se réveille avec le bouton « Réveillez-moi ».
 - **Bbox :** pleine, hors service, ou colis trop lourd ou trop grand : bpost livre dans un autre Point d'enlèvement proche et l'indique dans le suivi et l'appli. La porte ne s'ouvre pas ? Vérifie l'adresse et le numéro de la Bbox dans l'e-mail, puis appelle le 02 320 23 90 (Bbox avec écran) ou le 02 278 50 87 (sans écran), 24 h/24.
 - **My Post 24 :** sans casier à la bonne taille, ou si l'automate est en panne, l'envoi part à la filiale la plus proche.
@@ -82,7 +82,7 @@ Certains colis ne vont jamais en Bbox : les recommandés et les envois à payer 
 
 Partager le code, c'est permis chez certains, déconseillé chez d'autres :
 
-- **Mondial Relay :** la personne doit avoir ton code de retrait. Tu peux le partager avec un proche.
+- **Mondial Relay (Belgique) :** partage ton code avec un proche, il retire le colis à ta place.
 - **Pickup :** elle présente ton Pickup Pass ou tes codes. La pièce d'identité ne vaut qu'en relais, et les procurations écrites ne sont pas acceptées.
 - **Amazon :** transfère-lui l'e-mail de confirmation de livraison, qui contient les instructions.
 - **Bbox :** « Quiconque dispose du code-barres de votre colis » peut le retirer.
@@ -90,7 +90,7 @@ Partager le code, c'est permis chez certains, déconseillé chez d'autres :
 
 Sans l'appli :
 
-- **Mondial Relay et Pickup :** le code arrive aussi par e-mail et SMS. Seule l'ouverture à distance de Mondial Relay passe par l'appli.
+- **Pickup et Mondial Relay (Belgique) :** le code arrive aussi par e-mail et SMS.
 - **Amazon :** dans la plupart des casiers, il suffit de noter le code à 6 chiffres de l'e-mail de confirmation. Certains demandent le code-barres ou l'appli Amazon, alors garde ton téléphone sur toi.
 - **Bbox et My Post 24 :** un automate avec écran lit le QR code de l'e-mail ou du SMS. Sans écran, il te faut l'appli My bpost (avec Bluetooth et localisation) ou la Post-App.
 
@@ -103,7 +103,7 @@ Chaque transporteur a ses mots, mais les étapes sont les mêmes :
 - Dans la consigne, code envoyé | Le colis est dans un casier. Le code, l'adresse et la date limite arrivent par SMS, e-mail ou appli.
 - Rappel | La date limite est dans la notification, et chez bpost aussi dans l'appli My bpost. Note-la.
 - Délai écoulé | Le délai est passé, le transporteur reprend le colis dans le casier.
-- Retour à l'expéditeur ou à un guichet | Mondial Relay, Pickup et bpost le renvoient à l'expéditeur. Amazon le récupère.
+- Retour à l'expéditeur ou à un guichet | Pickup et bpost le renvoient à l'expéditeur, comme Mondial Relay en Belgique. Amazon le récupère.
 :::
 
 Si la consigne était pleine, une étape s'ajoute : le colis part vers une autre consigne ou un point relais. Les mots exacts de chaque transporteur sont dans [étapes du suivi](guide:tracking-statuses). Le suivi dit retiré et tu n'as rien ? Voir [colis livré mais non reçu](guide:delivered-not-received).
@@ -112,7 +112,7 @@ Si la consigne était pleine, une étape s'ajoute : le colis part vers une autre
 
 Souvent, oui, sans faire la queue :
 
-- **Mondial Relay :** dépose ton colis dans un Locker 24 h/24, avec l'étiquette ou, sans imprimer, avec le QR code carré de ta commande. Pour retourner un achat, l'expéditeur te dit comment faire.
+- **Mondial Relay (Belgique) :** dépose ton colis dans un Locker, le plus souvent accessible 24 h/24. Scanne le code-barres de l'étiquette ou, sans imprimer, écris au crayon le numéro de colis à 8 chiffres sur l'emballage et scanne le QR code reçu à la commande. Pour retourner un achat, contacte l'expéditeur : il te dit comment faire.
 - **Pickup :** certaines consignes acceptent les colis entre particuliers transportés par Chronopost ou Shop2Shop, d'autres ceux de Colissimo. Cherche la mention « Envoi » sur la carte.
 - **Bbox :** tu peux aussi y envoyer tes colis 24 h/24.
 
@@ -134,15 +134,14 @@ Une commande livrée par Amazon lui-même ne se suit que dans ton compte Amazon 
 :::
 
 :::sources
-- [Mondial Relay : Quel est le délai pour retirer mon colis en Locker ou en Point Relais ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – 5 jours en France et en Belgique, pas de prolongation, retour à l'expéditeur
-- [Mondial Relay : Comment retirer un colis dans les Lockers Mondial Relay ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/comment-retirer-un-colis-dans-un-lockers-mondial-relay/) – code à 6 chiffres, QR code, ouverture à distance
-- [Mondial Relay : Je n'ai pas reçu mon code de retrait](https://www.mondialrelay.fr/faq/recevoir-un-colis/je-nai-pas-recu-mon-code-de-retrait/) – e-mail, SMS, appli, code envoyé au dépôt
-- [Mondial Relay : Le Locker où je dois récupérer mon colis est en panne](https://www.mondialrelay.fr/faq/recevoir-un-colis/le-locker-o%C3%B9-je-dois-r%C3%A9cup%C3%A9rer-mon-colis-est-en-panne/) – numéro sur le Locker, horaires
-- [Mondial Relay : Une autre personne peut-elle venir chercher mon colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/une-autre-personne-peut-elle-venir-chercher-mon-colis-en-lockers-ou-dans-un-point-relais/) – code de retrait
-- [Mondial Relay : Pourquoi mon colis a été livré dans un autre Point Relais ou Locker ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/pourquoi-mon-colis-a-ete-livre-dans-un-autre-point-relais-ou-locker/) – consigne saturée
-- [Mondial Relay : Mon Point Relais ou Locker est fermé](https://www.mondialrelay.fr/faq/recevoir-un-colis/mon-point-relais-est-ferme-ou-mon-colis-va-t-il-etre-livre/) – point de substitution
-- [Mondial Relay : Comment déposer un colis dans les Lockers Mondial Relay ?](https://www.mondialrelay.fr/faq/envoyer-un-colis/comment-deposer-un-colis-dans-les-lockers-mondial-relay/) – 12 000 Lockers, dépôt, partager le code
-- [Mondial Relay : Je souhaite retourner une commande](https://www.mondialrelay.fr/faq/recevoir-un-colis/je-souhaite-retourner-une-commande-comment-faire/) – retour par l'expéditeur
+- [Mondial Relay Belgique : Quel est le délai pour retirer mon colis en Locker ou en Point Relais ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires en Belgique, pas de prolongation, retour automatique à l'expéditeur
+- [Mondial Relay Belgique : Comment retirer un colis dans les Lockers Mondial Relay ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/comment-retirer-un-colis-dans-un-lockers-mondial-relay/) – code à 6 chiffres par e-mail, SMS et dans l'appli, « Retirer un colis »
+- [Mondial Relay Belgique : Comment utiliser les Lockers Mondial Relay](https://www.mondialrelay.be/fr-be/consignes-lockers/) – 24 h/24 et 7 j/7, parkings fermés la nuit, code à partager avec un proche
+- [Mondial Relay Belgique : Mon Point Relais est fermé, où mon colis va-t-il être livré ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/mon-point-relais-est-ferme-ou-mon-colis-va-t-il-etre-livre/) – e-mail ou SMS pour attendre ou choisir un autre Point Relais, sinon choix par Mondial Relay
+- [Mondial Relay Belgique : Comment déposer un colis dans les Locker Mondial Relay ?](https://www.mondialrelay.be/fr-be/faq/envoyer-un-colis/comment-deposer-un-colis-dans-les-locker-mondial-relay/) – code-barres de l'étiquette, ou numéro à 8 chiffres et QR code sans imprimer, le plus souvent 24 h/24
+- [Mondial Relay Belgique : Je souhaite retourner une commande](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/je-souhaite-retourner-une-commande-comment-faire/) – l'expéditeur indique la marche à suivre
+- [Universal Parcel Scraper : libellés Mondial Relay](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mondial-relay/statuses.json) – « jours restants pour retirer le colis », « Relais de substitution choisi »
+- [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – Mondial Relay indique qu'il « ne vous demandera jamais de payer des frais additionnels »
 - [Pickup : Les consignes](https://www.pickup.fr/consignes/) – 7 000 consignes, emplacements
 - [Pickup : FAQ particulier](https://www.pickup.fr/faq-particulier/) – Pickup Pass, codes, 5 jours, retrait par un tiers, redirection, panne, dépôt
 - [About Amazon France : Comment retirer un colis dans un Amazon Locker](https://www.aboutamazon.fr/actualites/activite-logistique/comment-utiliser-amazon-locker) – code, code-barres ou appli Amazon, code à six chiffres de l'e-mail, trois jours calendaires, renvoi automatique et remboursement, e-mail à transférer

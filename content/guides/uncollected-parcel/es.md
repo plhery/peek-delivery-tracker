@@ -1,6 +1,6 @@
 ---
 title: Paquete no recogido: qué pasa y cuánto tiempo lo guardan
-description: Paquete no recogido en Correos, InPost, SEUR o un Amazon Locker: cuántos días lo guardan, qué hacer si no llegas a tiempo y si te devuelven el dinero.
+description: Paquete no recogido en Correos, InPost, GLS o un Amazon Locker: cuántos días lo guardan, qué hacer si no llegas a tiempo y si te devuelven el dinero.
 slug: paquete-no-recogido
 picture: Un locker de paquetes con una puerta abierta y Pip esperando dentro, y un calendario con los dos últimos días rodeados.
 published: 2026-10-14
@@ -37,13 +37,12 @@ Los lockers dan poco tiempo; las oficinas, mucho más.
 | --- | --- | --- |
 | Correos | Oficina: 15 días tras un intento fallido, desde el día siguiente al SMS | Citypaq: 5 días naturales |
 | InPost | Punto Pack: 5 días naturales en envíos nacionales | Locker: 5 días naturales en envíos nacionales |
-| SEUR | – | Locker: 5 días desde que lo depositan |
 | GLS | Agencia: vuelve 7 días naturales después del primer intento | – |
 | Amazon | – | Amazon Locker: 3 días |
 
-En el aviso en papel, Correos indica el tiempo de permanencia según el producto, así que manda lo que ponga ahí. Si pediste la entrega en una oficina, Correos te manda recordatorios cuando quedan 10 y 5 días; [SEUR](carrier:seur) te avisa al tercer día en su locker.
+En el aviso en papel, Correos indica el tiempo de permanencia según el producto, así que manda lo que ponga ahí. Si pediste la entrega en una oficina, Correos te manda recordatorios cuando quedan 10 y 5 días.
 
-Con InPost, mejor no apurar: su página da 5 días naturales en envíos nacionales, mientras que la página francesa de Mondial Relay da 8 para España en su tabla internacional. Ninguna explica la diferencia, así que cuenta con 5 o con la fecha de tu aviso.
+Los 5 días naturales de InPost son para envíos nacionales: si el paquete viene de otro país, guíate por la fecha de tu aviso.
 
 ### Por qué tu fecha puede ser otra
 
@@ -61,7 +60,7 @@ El seguimiento dirá entonces algo como `A disposición del destinatario` en Cor
 
 ## No puedo recoger el paquete a tiempo: ¿qué hago?
 
-Conseguir más días es raro. Ni Correos ni InPost, SEUR o GLS explican en su ayuda cómo ampliar el plazo de un paquete que ya te está esperando. Lo que existe se decide antes: el remitente con contrato puede pedir a Correos hasta 30 días en oficina, y Correos Modify te deja cambiar el destino cuando te avisa de que tu envío está listo para entregarse.
+Conseguir más días es raro. Ni Correos ni InPost ni GLS explican en su ayuda cómo ampliar el plazo de un paquete que ya te está esperando. Lo que existe se decide antes: el remitente con contrato puede pedir a Correos hasta 30 días en oficina, y Correos Modify te deja cambiar el destino cuando te avisa de que tu envío está listo para entregarse.
 
 Si no vas a llegar a tiempo:
 
@@ -112,8 +111,7 @@ El seguimiento suele dar el paquete por entregado en cuanto está en el locker. 
 - [Correos: Paquete Estándar para empresas](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paquete-estandar) – 15 días en oficina, Plazo de Permanencia en Lista hasta 30 días
 - [Correos: Correos Modify](https://www.correos.es/es/es/actualidad/2024/descubre-correos-modify-para-que-tus-envios-siempre-se-adapten-a) – otra dirección de la provincia, oficina o Citypaq, enlace por SMS o email y en la app
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 5 días naturales en Locker y Punto Pack, devolución al remitente, autorización, PIN
-- [SEUR: Recoge tus envíos en un locker](https://blog.seur.com/recoge-tus-envios-en-un-locker/) – 5 días desde que se deposita, recordatorio al tercer día
-- [Mondial Relay Francia: Plazo de recogida en Locker o Point Relais](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – 8 días para España en su tabla internacional
+- [InPost España: Sobre nosotros](https://www.inpost.es/quienes-somos) – 2021: «Adquisición de Mondial Relay. Nuevo nombre, misma misión.»
 - [InPost España: mondialrelay.es](https://www.mondialrelay.es/) – mondialrelay.es lleva ahora a inpost.es
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – 7 días naturales tras el primer intento, «Depositado en Parcel Shop»
 - [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – A disposición del destinatario, Finalizado plazo retirada

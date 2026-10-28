@@ -11,7 +11,7 @@ updated: 2026-10-10
 
 ## Co znaczy „paczka zatrzymana przez urząd celny”?
 
-Każdą przesyłkę pocztową spoza UE trzeba zgłosić do urzędu celnego, bez względu na wartość towaru, przypomina Krajowa Administracja Skarbowa (KAS). Paczkę do 150 euro Poczta Polska zgłasza za Ciebie na podstawie tak zwanego pełnomocnictwa domyślnego, chyba że z niego zrezygnujesz. Przy wartości od 150 do 1000 euro potrzebuje Twojego pełnomocnictwa, udzielonego w placówce pocztowej. Kurier, na przykład DHL Express, sam zajmuje się odprawą: zwykle płaci cło i podatki w Twoim imieniu, a potem żąda ich zwrotu od Ciebie.
+Każdą przesyłkę pocztową spoza UE trzeba zgłosić do urzędu celnego, bez względu na wartość towaru, przypomina Krajowa Administracja Skarbowa (KAS). Paczkę do 150 euro Poczta Polska zgłasza za Ciebie na podstawie tak zwanego pełnomocnictwa domyślnego, chyba że z niego zrezygnujesz. Przy wartości od 150 do 1000 euro potrzebuje Twojego pełnomocnictwa, udzielonego w placówce pocztowej. Przy przesyłce kurierskiej formalności celne zwykle załatwia kurier i pobiera za to opłatę, a VAT, którego nie zapłaciłeś w sklepie, może pobrać od Ciebie przy doręczeniu, pisze Komisja Europejska.
 
 Urząd celny sprawdza deklarację nadawcy (zawartość, wartość), może skontrolować paczkę, ustala należności, a potem zwalnia ją do doręczenia. Na tym etapie możesz zobaczyć:
 
@@ -20,7 +20,7 @@ Urząd celny sprawdza deklarację nadawcy (zawartość, wartość), może skontr
 | Paczka leży w magazynie pocztowo-celnym | Odprawa wymaga dodatkowego sprawdzenia, na przykład brakuje danych albo opis towaru jest niejednoznaczny |
 | Powiadomienie od Poczty Polskiej w sprawie pełnomocnictwa, elektroniczne albo w przesyłce rejestrowanej | Paczka jest warta od 150 do 1000 euro, a Poczta może ją zgłosić dopiero z Twoim pełnomocnictwem |
 | Informacja, że musisz zgłosić paczkę we własnym zakresie | Paczka jest warta ponad 1000 euro albo zawiera towary akcyzowe lub objęte ograniczeniami, na przykład leki. Zgłaszasz ją samodzielnie albo przez agencję celną |
-| [DHL Express](carrier:dhl-express) prosi o zapłatę cła | Kurier zapłacił już za Ciebie cło i podatki. Zasadniczo nie doręczy paczki, dopóki mu ich nie zwrócisz |
+| Kurier, na przykład [DHL Express](carrier:dhl-express), prosi o zapłatę | Kurier załatwił formalności celne. Pobiera VAT, jeśli nie zapłaciłeś go w sklepie, i swoją opłatę za odprawę |
 
 Nic z tego nie oznacza konfiskaty. Inaczej jest tylko z towarami, których przywóz do Polski jest zakazany: Poczta Polska przekazuje takie paczki do dyspozycji KAS i według swojego regulaminu nie zawiadamia wtedy odbiorcy o ich nadejściu.
 
@@ -54,7 +54,7 @@ Paczka czeka dłużej, gdy:
 - urząd celny chce zobaczyć dokumenty, na przykład fakturę albo paragon;
 - jest warta od 150 do 1000 euro, a Poczta Polska czeka na Twoje pełnomocnictwo;
 - jest warta ponad 1000 euro albo zawiera towary akcyzowe lub objęte ograniczeniami, więc musisz ją zgłosić we własnym zakresie;
-- należności nie są zapłacone: DHL Express zasadniczo nie doręcza paczki, dopóki nie zapłacisz.
+- nie zapłacono jeszcze cła i podatków: do tego czasu urząd celny może ją zatrzymać.
 
 Nie zwlekaj zbyt długo:
 
@@ -76,7 +76,7 @@ Płacisz to, czego nie pobrano przy zakupie, a Poczta Polska dolicza swoją opł
 
 1. **VAT**: należy się państwu. W Polsce stawka podstawowa to 23%, obniżone to 8 i 5%.
 2. **Cło**: też dla państwa. Od 1 lipca 2026 r. przy paczkach do 150 euro to 3 euro za każdy rodzaj produktu, przeliczane na złote. Poczta Polska tylko je pobiera i przekazuje do KAS.
-3. **Opłata przewoźnika** za zgłoszenie celne: to zapłata za usługę, nie podatek. W cenniku Poczty Polskiej obowiązującym od 1 lipca 2026 r. to 20,00 zł. DHL Express wymienia wśród możliwych opłat „dopłatę za zaliczkę opłaconą przez DHL”.
+3. **Opłata przewoźnika** za zgłoszenie celne: to zapłata za usługę, nie podatek. W cenniku Poczty Polskiej obowiązującym od 1 lipca 2026 r. to 20,00 zł. Kurierzy pobierają własną opłatę, a jej wysokość zależy od firmy.
 
 To, gdzie płacisz, zależy od tego, co sklep pobrał przy zamówieniu:
 
@@ -125,7 +125,6 @@ Prawdziwe powiadomienia też przychodzą e-mailem czy SMS-em, ale zasady przewo�
 | Kto | Jak wyglądają prawdziwe wiadomości i płatności |
 | --- | --- |
 | Poczta Polska, Pocztex | O pełnomocnictwie lub zgłoszeniu powiadamia drogą elektroniczną albo przesyłką rejestrowaną, a należności pobiera przy doręczeniu lub w placówce. Pocztex nie wysyła linków do płatności i nie prosi SMS-em o dane karty |
-| [InPost](carrier:inpost) | Nigdy nie wysyła SMS-ów z informacją o dopłatach, a tym bardziej z linkami zewnętrznymi. Rozliczenia widać tylko w Managerze Paczek albo na fakturze |
 | KAS | Przy paczkach zgłoszonych przez Pocztę Polską należności celne pobierają pracownicy Poczty podczas doręczenia |
 
 Na co jeszcze uważać:
@@ -158,7 +157,7 @@ Gdy odmówisz przyjęcia paczki albo zapłaty, Poczta Polska odsyła ją do nada
 - [Poczta Polska: Regulamin obsługi przesyłek zagranicznych w zakresie przedstawienia do kontroli i zgłoszenia do procedury celnej](https://www.poczta-polska.pl/wp-content/uploads/2025/09/Regulamin-obslugi-przesylek-zagranicznych-w-zakresie-przedstawienia-do-kontroli-i-zgloszenia-do-procedury-celnej.pdf) – 14 dni, placówki bez agencji, magazyn pocztowo-celny, towary zakazane, IOSS, zwrot i umorzenie, pokwitowanie, PZC, reklamacje, infolinia
 - [KAS: Informacja dla odbiorców przesyłek pocztowych spoza Unii Europejskiej](https://www.mazowieckie.kas.gov.pl/mazowiecki-urzad-celno-skarbowy-w-warszawie/wiadomosci/komunikaty/-/asset_publisher/i3dT/content/informacja-dla-odbiorcow-przesylek-pocztowych-spoza-unii-europejskiej) – zgłoszenie każdej przesyłki, progi wartości, kontakty do magazynu pocztowo-celnego, cło pobierane przy doręczeniu
 - [Poczta Polska: Instrukcja pobrania poświadczonego zgłoszenia celnego](https://emonitoring.poczta-polska.pl/instrukcja_pobrania_poswiadczonego_zgloszenia_celnego.pdf) – PZC, numer przesyłki, kwota bez opłaty
-- [DHL Express: Cła i podatki, najczęstsze pytania](https://mydhl.express.dhl/pl/pl/help-and-support/faqs/duties-and-taxes.html) – DHL zwykle płaci za odbiorcę, doręczenie po zapłacie, dopłata za zaliczkę
+- [Komisja Europejska: Buying goods online coming from a non-European Union country](https://taxation-customs.ec.europa.eu/customs/customs-procedures-import-and-export/importation/buying-goods-online-coming-non-european-union-country_en) – kurier pobiera VAT przy doręczeniu i opłatę za odprawę, różną w każdej firmie, paczka zatrzymana do zapłaty należności
 - [Your Europe: Przepisy i stawki VAT](https://europa.eu/youreurope/business/finance-and-tax/vat/vat-rules-rates/index_pl.htm) – 23%, 8% i 5%
 - [Komisja Europejska: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 euro od 1 listopada 2026
 - [Komisja Europejska: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 euro także przy IOSS, 2 euro za pozycję przy każdej wartości
@@ -167,7 +166,6 @@ Gdy odmówisz przyjęcia paczki albo zapłaty, Poczta Polska odsyła ją do nada
 - [Poczta Polska: Poczta Polska ostrzega przed nowymi próbami oszustw i kampaniami phishingowymi](https://media.poczta-polska.pl/releases/poczta-polska-ostrzega-przed-nowymi-probami-oszustw-i-kampaniami-phishingowymi) – żądania dopłaty w innej walucie
 - [Poczta Polska: CERT Pocztowy](https://www.poczta-polska.pl/kontakt/cert-pocztowy/) – incydent@poczta-polska.pl
 - [money.pl: Dostałeś SMS o dopłacie 3 euro do paczki?](https://direct.money.pl/artykuly/porady/dostales-sms-o-doplacie-3-euro-do-paczki-poczta-polska-ostrzega-przed-oszustwem) – ostrzeżenie Poczty Polskiej z lipca 2026
-- [InPost: Uwaga cyberzagrożenie](https://inpost.pl/aktualnosci-uwaga-cyberzagrozenie-0) – brak SMS-ów o dopłatach, rozliczenia w Managerze Paczek
 - [gov.pl: Coraz więcej prób wyłudzenia przez tzw. fałszywe SMS-y](https://www.gov.pl/web/baza-wiedzy/coraz-wiecej-prob-wyludzenia-przez-tzw-falszywe-sms-y-zachowaj-czujnosc) – 8080 bezpłatnie, opcja „Przekaż”, incydent.cert.pl, cert@cert.pl
 - [System Zastrzegania Kart: zastrzegam.pl](https://zastrzegam.pl/) – 828 828 828, bezpłatnie, całą dobę, banki uczestniczące w systemie
 :::

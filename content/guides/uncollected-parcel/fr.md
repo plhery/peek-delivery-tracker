@@ -23,7 +23,7 @@ Il repart chez l'expéditeur, en général par le même réseau, pas chez toi.
 :::
 
 - Chez **[La Poste](carrier:la-poste) (Colissimo)**, le suivi peut annoncer le retour ainsi : « Votre colis vous a attendu dans votre point de retrait jusqu'à la date limite. Nous sommes contraints de le renvoyer à l'expéditeur. »
-- **[Mondial Relay](carrier:mondial-relay)**, en Belgique, le renvoie automatiquement, à ses frais, au Point Relais où il a été déposé. **[Relais Colis](carrier:relais-colis)** le renvoie aussi au relais de dépôt.
+- **[Mondial Relay](carrier:mondial-relay)**, en Belgique, le renvoie à l'expéditeur : à ses frais au Locker ou au Point Relais de dépôt s'il a été envoyé par un particulier, au vendeur s'il vient d'une enseigne, d'un site e-commerce ou d'une marketplace. **[Relais Colis](carrier:relais-colis)** le renvoie au relais de dépôt.
 - **[bpost](carrier:bpost)** le renvoie à l'expéditeur, tout comme **[DPD](carrier:dpd-fr)** en France et en Belgique.
 - **Sur Vinted**, un colis « non récupéré au point relais à temps » repart chez le vendeur, et Vinted s'occupe du remboursement (voir plus bas).
 
@@ -113,6 +113,7 @@ Le suivi indique souvent « livré » dès que le colis est dans la consigne. Li
 - [Universal Parcel Scraper : messages La Poste lus dans le suivi](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/la-poste/adapter.test.ts) – « Nous sommes passés mais nous n'avons pu vous remettre votre colis… », délais de 15 jours calendaires et de 5 jours, renvoi à l'expéditeur après la date limite
 - [Mondial Relay Belgique : Quel est le délai pour retirer mon colis en Locker ou en Point Relais ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires en Belgique, dimanches et jours fériés inclus, retour automatique, pas de prolongation
 - [Mondial Relay Belgique : Le destinataire n'est pas venu chercher son colis, que se passe-t-il ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/le-destinataire-n-est-pas-venu-chercher-son-colis-que-se-passe-t-il/) – retour au Point Relais de dépôt, aux frais de Mondial Relay
+- [Mondial Relay Belgique : Pendant combien de temps mon colis sera gardé par le Point Relais® ou le Locker ?](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/pendant-combien-de-temps-mon-colis-sera-garde-par-le-point-relais/) – retour à l'expéditeur : Locker ou Point Relais d'origine aux frais de Mondial Relay pour un envoi de particulier, vendeur pour une enseigne, un site e-commerce ou une marketplace
 - [Relais Colis : Combien de jours mon colis est-il gardé en Relais Colis ?](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 9 jours calendaires, soit 7 jours ouvrés, retour au relais de dépôt
 - [DPD France : Pendant combien de temps mon colis est-il gardé en relais Pickup ?](https://www.dpd.com/fr/fr/faq/pendant-combien-de-temps-mon-colis-est-il-garde-en-relais-pickup/) – 9 jours calendaires dès le dépôt au relais, puis retour
 - [bpost : Combien de temps mon colis reste-t-il disponible au Point d'enlèvement ?](https://www.bpost.be/fr/faq/combien-de-temps-mon-colis-reste-t-il-disponible-au-point-denlevement) – 14 jours calendrier, 5 en distributeur de colis, puis retour

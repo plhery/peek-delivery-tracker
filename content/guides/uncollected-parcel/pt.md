@@ -44,7 +44,7 @@ Os cacifos dão pouco tempo, as Lojas CTT dão mais.
 
 Nos CTT, o prazo começa a contar no dia útil seguinte à data do aviso, mesmo que a encomenda já esteja disponível no próprio dia da tentativa de entrega. Para as encomendas internacionais, uma das páginas dos CTT fala em 15 dias seguidos, e não úteis: vai pela data do aviso.
 
-A DPD dá 7 dias úteis numa resposta e 10 noutra, e diz que podem ser ajustados «de acordo com os requisitos do cliente». Manda um segundo SMS 2 dias antes de o prazo acabar. A InPost também avisa perto do fim, com o estado `Último aviso: falta pouco para a recolha`, e um artigo do seu blogue fala em «até 8 dias», mais do que os 5 da sua página de ajuda. A [Mondial Relay](carrier:mondial-relay) também dá 8 dias, num locker ou ponto de recolha em Portugal, às encomendas que envia a partir de França.
+A DPD dá 7 dias úteis numa resposta e 10 noutra, e diz que podem ser ajustados «de acordo com os requisitos do cliente». Manda um segundo SMS 2 dias antes de o prazo acabar. A InPost também avisa perto do fim, com o estado `Último aviso: falta pouco para a recolha`, e um artigo do seu blogue fala em «até 8 dias», mais do que os 5 da sua página de ajuda. Em Portugal, a rede da [Mondial Relay](carrier:mondial-relay) usa agora o nome InPost (mondialrelay.pt leva a inpost.pt).
 
 ### Porque é que a tua data pode ser diferente da tabela
 
@@ -120,7 +120,8 @@ O seguimento pode dar a encomenda como entregue logo que ela entra no cacifo. V�
 - [Universal Parcel Scraper: tabelas de estados por transportadora](https://github.com/plhery/universal-parcel-scraper) – «No ponto de entrega» dos CTT, visto em seguimentos reais
 - [GLS Portugal: Perguntas frequentes, receber encomendas](https://gls-group.com/PT/pt/faq/faq-receber-encomendas/) – GLS Point, 10 dias úteis, devolução ao expedidor
 - [DPD Portugal: Perguntas frequentes sobre pontos Pickup](https://www.dpd.com/pt/pt/ajuda/faq/pickup/) – 7 e 10 dias úteis, locker 72 horas, SMS 2 dias antes, devolução à origem
-- [Mondial Relay: Combien de jours ai-je pour retirer mon colis ?](https://www.mondialrelay.fr/faq/recevoir-un-colis/combien-de-jours-ai-je-pour-retirer-mon-colis-en-locker-ou-point-relais/) – 8 dias em Portugal, em locker ou ponto de recolha (em francês)
+- [InPost Portugal: Quem somos](https://www.inpost.pt/quem-somos) – 2021: «Aquisição da Mondial Relay. Novo nome, mesma missão.»
+- [InPost Portugal: mondialrelay.pt](https://www.mondialrelay.pt/) – mondialrelay.pt leva agora a inpost.pt
 - [Vinted: A minha encomenda está a ser devolvida ao remetente](https://www.vinted.pt/help/1447) – não levantada a tempo, reembolso automático, 14 e 25 dias úteis
 - [PGDL: Decreto-Lei n.º 24/2014](https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=2062&tabela=leis) – artigos 10.º a 13.º, livre resolução, reembolso, custos de devolução, devolução em dobro
 :::

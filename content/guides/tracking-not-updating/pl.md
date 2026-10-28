@@ -13,7 +13,7 @@ Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt
 
 Śledzenie pokazuje skany, a nie ruch paczki. A paczkę skanuje się tylko w niektórych miejscach:
 
-- **Między sortowniami nikt nie skanuje.** [InPost](carrier:inpost) opisuje drogę paczki tak: kurier zabiera ją do oddziału, stamtąd jedzie do sortowni, a potem w trasę do miasta docelowego. Paczki, które jadą daleko, trafiają jeszcze do Sortowni Głównej, czyli wielkiego centrum logistycznego. Gdy paczka już jedzie, następny skan pojawi się dopiero w kolejnym z tych miejsc.
+- **Między sortowniami nikt nie skanuje.** Na tym odcinku [InPost](carrier:inpost) odnotowuje przyjęcie paczki w centrum logistycznym i jej wyjazd stamtąd: w Peek to `Accepted at the Logistics Centre` i `Dispatched from the Logistics Centre` (Peek czyta statusy InPost po angielsku). Gdy paczka jedzie między takimi miejscami, kolejny wpis może długo nie przyjść.
 - **Weekendy i święta.** Kurierzy DPD doręczają w soboty tylko paczki z usługą dodatkową Sobota. Poczta Polska, odliczając 14 dni do reklamacji, pomija dni ustawowo wolne od pracy, a Vinted liczy dni robocze bez weekendów i świąt. Przerwy świąteczne przewoźników znajdziesz w poradniku [do kiedy wysłać paczkę przed świętami](guide:christmas-posting-dates).
 - **Pogoda i korki.** Niemiecki DHL wymienia złą pogodę, korki, wypadki i choroby, a w Niemczech przed Bożym Narodzeniem paczka może iść dłużej.
 - **Status na platformie.** Vinted uprzedza, że status u niego bywa inny niż na stronie przewoźnika.
@@ -36,11 +36,10 @@ Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt
 
 Od kilku godzin do kilku dni. Jeśli śledzenie pokazuje tylko utworzenie etykiety, przewoźnik może jeszcze nie mieć paczki: pierwszy wpis pochodzi zwykle z programu, w którym sprzedawca drukuje etykietę, a nie ze skanu. Co piszą przewoźnicy i sklepy:
 
-- **InPost:** `Przygotowana przez Nadawcę` znaczy, że paczka „wkrótce zostanie przekazana” do InPost, więc jeszcze jej tam nie ma.
+- **InPost:** `Shipment Created` znaczy tylko, że przesyłkę utworzono. Pierwszy skan pojawia się, gdy nadawca nada ją w automacie lub punkcie (`Sent through Parcel Locker/Parcel Point`) albo odbierze ją kurier (`Collected by the Courier`).
 - **Poczta Polska:** komunikat `Podany numer przesyłki jest błędny` pojawia się przy złym numerze, ale też wtedy, gdy system nie ma informacji o przesyłce.
 - **[DHL eCommerce Polska](carrier:dhl-ecommerce-pl):** `Brak informacji o przesyłce` może znaczyć, że nadawca nie przekazał jeszcze danych paczki albo że paczka z zagranicy nie dotarła jeszcze do Polski. DHL radzi skontaktować się z nadawcą albo sprawdzić później.
 - **DHL w Niemczech:** może minąć do 24 godzin, zanim paczka w ogóle pojawi się w śledzeniu.
-- **Allegro:** `Oczekuje na nadanie` znaczy, że sprzedający jeszcze nie nadał paczki u przewoźnika. W zakładce „Moje przesyłki” śledzisz paczkę, gdy Allegro ma już jej numer przewozowy. Jeśli nie widzisz tam zamówienia, sprawdź w „Moich zakupach” dane dostawy i to, czy sprzedający dostał wpłatę, a potem poproś go o numer do śledzenia albo potwierdzenie nadania.
 - **Vinted:** może minąć do 48 godzin, zanim zobaczysz tam pierwsze informacje o statusie.
 - **Zalando:** link do śledzenia z e-maila zadziała dopiero wtedy, gdy paczkę odbierze przewoźnik.
 
@@ -48,7 +47,7 @@ Co znaczą pozostałe statusy, wyjaśnia [poradnik o statusach przesyłki](guide
 
 ### Samolot, odprawa celna i zmiana przewoźnika
 
-DHL w Niemczech pisze, że zależnie od kraju docelowego to zupełnie normalne, gdy status paczki wysłanej za granicę przez jakiś czas się nie zmienia. Pomoc w poszukiwaniach oferuje dopiero po upływie standardowego czasu doręczenia. InPost uprzedza, że status paczki zagranicznej zaktualizuje się, gdy dotrze ona do kraju doręczenia.
+DHL w Niemczech pisze, że zależnie od kraju docelowego to zupełnie normalne, gdy status paczki wysłanej za granicę przez jakiś czas się nie zmienia. Pomoc w poszukiwaniach oferuje dopiero po upływie standardowego czasu doręczenia.
 
 - **Odprawa celna:** według GLS odprawa przesyłki prywatnej trwa od kilku godzin do dwóch dni roboczych, a przy komplikacjach, na przykład gdy trzeba złożyć dodatkowe wyjaśnienia, nawet do miesiąca. DHL mówi o kilku dniach roboczych, zależnie od tego, czy dokumenty i dane są kompletne. Więcej w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 - **Paczkę przejmuje inny przewoźnik:** DHL uprzedza o przerwach w śledzeniu i radzi sprawdzić ten sam numer także na stronie przewoźnika w kraju docelowym.
@@ -57,7 +56,7 @@ Zamówienie z AliExpress, Temu albo Shein? Zobacz, jak [śledzić paczkę z Chin
 
 ### Wydana do doręczenia, a potem cisza
 
-Gdy DPD wyda paczkę do doręczenia, numer telefonu do kuriera znajdziesz w aplikacji DPD Mobile. Jeśli kurier nie zastał Cię w domu, Allegro radzi skontaktować się bezpośrednio z przewoźnikiem i sprawdzić, czy w SMS-ie albo e-mailu od niego nie ma numeru do kuriera, który wiezie Twoją paczkę. Jeśli status pokazuje, że paczka jest doręczona, a jej nie ma, przeczytaj poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
+Gdy DPD wyda paczkę do doręczenia, numer telefonu do kuriera znajdziesz w aplikacji DPD Mobile. Jeśli status pokazuje, że paczka jest doręczona, a jej nie ma, przeczytaj poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
 ## Kiedy paczkę uznaje się za zaginioną?
 
@@ -67,16 +66,16 @@ Nie ma jednego dnia. Przewoźnicy podają, od kiedy przyjmą reklamację albo [u
 | --- | --- | --- |
 | Poczta Polska, paczka pocztowa | Reklamacja z tytułu utraty po 14 dniach od nadania, bez dni ustawowo wolnych od pracy. Paczkę niedoręczoną w ciągu 30 dni od nadania uważa się za utraconą | Nadawca. Adresat, jeśli nadawca zrzeknie się na jego rzecz roszczeń albo paczka została mu doręczona |
 | Pocztex Kurier (Poczta Polska) | Opóźnienie: doręczenie po szóstym dniu roboczym, licząc od dnia następnego po nadaniu. Utrata: po 30 dniach od nadania | Jak przy paczce pocztowej |
-| InPost | Strona pomocy nie podaje minimalnego terminu. Gdy paczka nie dotarła na czas, InPost prosi o reklamację na infolinii 722 444 000 lub 746 600 000 | Strona pomocy mówi o „kliencie” i nie precyzuje, czy chodzi o nadawcę, czy o odbiorcę |
+| InPost | Według UKE przy usługach pocztowych innych niż powszechne reklamację z tytułu zaginięcia składasz dzień po terminie, po którym regulamin operatora uznaje paczkę za utraconą | Nadawca. Adresat, jeśli paczkę mu doręczono albo nadawca zrzekł się na jego rzecz roszczeń |
 | DPD Polska | Paczkę, która nie dotarła w ciągu 30 dni od upływu terminu wykonania usługi, uważa się za utraconą | Zleceniodawca, czyli zwykle sklep. Odbiorca w przypadkach z § 21 regulaminu, np. gdy zleceniodawca zrzeknie się na jego rzecz roszczeń albo gdy jako konsument ma prawo rozporządzać przesyłką |
 
-Na reklamację krajową w Poczcie Polskiej, Pocztex i InPost masz 12 miesięcy od nadania. Przy międzynarodowej paczce pocztowej Poczta Polska przyjmuje reklamację od nadawcy do 6 miesięcy po nadaniu, a adresat dostanie odszkodowanie tylko wtedy, gdy nadawca na piśmie zrzeknie się na jego rzecz swoich praw.
+Na reklamację krajową w Poczcie Polskiej, Pocztex i InPost masz 12 miesięcy od nadania. Przy InPost to ogólne zasady, które UKE podaje dla wszystkich operatorów pocztowych, a nie regulamin InPost: InPost figuruje w prowadzonym przez UKE rejestrze operatorów pocztowych. Przy międzynarodowej paczce pocztowej Poczta Polska przyjmuje reklamację od nadawcy do 6 miesięcy po nadaniu, a adresat dostanie odszkodowanie tylko wtedy, gdy nadawca na piśmie zrzeknie się na jego rzecz swoich praw.
 
 ## Pisać do sprzedawcy czy do kuriera?
 
-Do sprzedawcy. To on zamówił przewóz, więc to on jest klientem przewoźnika. Widać to w zasadach reklamacji: w Poczcie Polskiej składa ją nadawca, w DPD zleceniodawca. Allegro też radzi zacząć od sprzedającego: poproś o wyjaśnienie opóźnienia, a jeśli twierdzi, że paczkę wysłał, o numer do śledzenia albo potwierdzenie nadania.
+Do sprzedawcy. To on zamówił przewóz, więc to on jest klientem przewoźnika. Widać to w zasadach reklamacji: w Poczcie Polskiej składa ją nadawca, w DPD zleceniodawca. Regulamin Allegro Ochrony Kupujących też każe zacząć od sprzedającego: zanim złożysz wniosek o rekompensatę, zgłaszasz mu problem w Dyskusji albo w reklamacji.
 
-Prawo mówi to samo, jeśli kupujesz jako konsument od firmy: paczka jest na ryzyko sprzedawcy, dopóki nie zostanie Ci wydana, chyba że sam wybrałeś przewoźnika spoza jego oferty (art. 548 § 3 Kodeksu cywilnego). Wyjątki i to, jak złożyć reklamację u przewoźnika, opisuje poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received). Jeśli umowa nie mówi inaczej, sprzedawca musi też wydać rzecz niezwłocznie, najpóźniej 30 dni od zawarcia umowy. Gdy się spóźnia, możesz wyznaczyć mu dodatkowy termin, a po jego bezskutecznym upływie odstąpić od umowy (art. 543¹ Kodeksu cywilnego).
+Prawo mówi to samo, jeśli kupujesz jako konsument od firmy: paczka jest na ryzyko sprzedawcy, dopóki nie zostanie Ci wydana, chyba że sam wybrałeś przewoźnika spoza jego oferty (art. 548 § 3 Kodeksu cywilnego). Wyjątki i to, jak złożyć reklamację u przewoźnika, opisuje poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received). Jeśli umowa nie mówi inaczej, sprzedawca musi też wydać rzecz niezwłocznie, najpóźniej 30 dni od zawarcia umowy. Gdy się spóźnia, możesz wyznaczyć mu dodatkowy termin, a po jego bezskutecznym upływie odstąpić od umowy.
 
 Kupujesz od osoby prywatnej, na przykład na Vinted, OLX albo Allegro Lokalnie? Te przepisy Cię wtedy nie chronią, więc liczy się ochrona, którą daje sama platforma.
 
@@ -96,7 +95,7 @@ Platforma może oddać Ci pieniądze, ale tylko w swoim terminie:
 
 | Platforma | Od kiedy | Do kiedy |
 | --- | --- | --- |
-| Allegro (Allegro Ochrona Kupujących) | Dyskusja z powodem „nie otrzymałem produktu”: najwcześniej godzinę po zakupie, sprzedający ma 24 godziny na odpowiedź. Wniosek o rekompensatę: od 14. dnia po zakupie albo 7 dni po zgłoszeniu problemu | 2 lata od zakupu. Zwrot do 20 000 zł |
+| Allegro (Allegro Ochrona Kupujących) | Dyskusja z powodem „nie otrzymałem produktu”: najwcześniej godzinę po zakupie, sprzedający ma 24 godziny na odpowiedź (bez weekendów i świąt). Jeśli w ciągu 7 dni nie dojdziecie do porozumienia, możesz oznaczyć Dyskusję jako nierozwiązaną (nie dotyczy Allegro Lokalnie) i sprawa trafia do Allegro | Wniosek o rekompensatę najpóźniej 730 dni od zakupu. Rekompensata do 20 000 zł |
 | Vinted | Etykieta wygenerowana na Vinted: po 25 dniach roboczych od chwili, gdy zamówienie oznaczono jako wysłane. Wysyłka indywidualna: po 21 dniach roboczych zamówienie zostaje oznaczone jako doręczone | 2 dni od powiadomienia od Vinted albo od zmiany statusu na „Doręczono” |
 
 Na Amazonie każdy produkt, także od niezależnego sprzedawcy, jest objęty Gwarancją od A do Z. Jeśli masz problem z terminową dostawą, Amazon obiecuje zwrot pieniędzy albo wymianę produktu. Gdy sprzedaje ktoś inny niż Amazon, najpierw spróbuj rozwiązać problem bezpośrednio ze sprzedawcą.
@@ -123,17 +122,15 @@ Paczka może nie mieć jeszcze pierwszego skanu, numer może należeć do innego
 - [Poczta Polska: eReklamacje, paczka pocztowa](https://ereklamacje.poczta-polska.pl/sub/reklamacje-krajowe/paczka-pocztowa) – 14 i 30 dni, dni ustawowo wolne od pracy, 12 miesięcy, kto składa reklamację
 - [Poczta Polska: eReklamacje, Kurier Pocztex](https://ereklamacje.poczta-polska.pl/sub/reklamacje-krajowe/kurier-krajowy-pocztex) – szósty dzień roboczy, utrata po 30 dniach, 12 miesięcy
 - [Poczta Polska: eReklamacje, paczka pocztowa zagraniczna](https://ereklamacje.poczta-polska.pl/sub/reklamacje-zagraniczne/paczka-pocztowa) – 6 miesięcy, nadawca, pisemne zrzeczenie się praw
-- [InPost: W jaki sposób mogę złożyć reklamację?](https://inpost.pl/pomoc-w-jaki-sposob-moge-zlozyc-reklamacje) – 12 miesięcy
-- [InPost: Co może zrobić klient, jeśli jego przesyłka zaginie?](https://inpost.pl/pomoc-co-moze-zrobic-klient-jesli-jego-przesylka-zaginie) – reklamacja na infolinii, „klient”
-- [InPost: Jaką drogę musi przejść paczka, zanim trafi do odbiorcy?](https://inpost.pl/aktualnosci-jaka-droge-musi-przejsc-paczka-zanim-trafi-do-odbiorcy) – oddział, sortownia, Sortownia Główna
-- [InPost: Śledzenie przesyłki międzynarodowej](https://inpost.pl/aktualnosci-sledzenie-przesylki-miedzynarodowej-jak-sprawdzic-status-i-lokalizacje-paczki) – aktualizacja statusu po dotarciu do kraju doręczenia
+- [UKE: Reklamacje usług pocztowych](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, 12 miesięcy od nadania
+- [UKE: Co zrobić, gdy przesyłka zaginie?](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania/co-zrobic-gdy-przesylka-zaginie,2.html) – reklamacja dzień po terminie utraty z regulaminu operatora
+- [UKE: Rejestr operatorów pocztowych, InPost Sp. z o.o.](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=1&rejestr=B-00562) – InPost w rejestrze operatorów pocztowych
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po angielsku): utworzenie przesyłki, nadanie, odbiór przez kuriera, centrum logistyczne
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – następny dzień roboczy, 3 dni robocze, usługa Sobota, numer do kuriera
 - [DPD Polska: Złóż reklamację](https://www.dpd.com/pl/pl/moje-dpd/zloz-reklamacje/) – utrata po 30 dniach od terminu wykonania usługi
 - [DPD Polska: Regulamin Świadczenia Usług w Obrocie Krajowym (od 1 stycznia 2024 r.)](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – § 20 i § 21: utrata po 30 dniach, kto może złożyć reklamację
-- [Allegro: Co możesz zrobić, gdy czekasz na przesyłkę zbyt długo](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/co-mozesz-zrobic-gdy-czekasz-na-przesylke-zbyt-dlugo-xG71gn36qC4) – Moje przesyłki, kontakt ze sprzedającym, Dyskusja, 1 godzina, 24 godziny, 2 lata, numer do kuriera
-- [Allegro: Jak działa Allegro Ochrona Kupujących](https://allegro.pl/pomoc/dla-kupujacych/allegro-ochrona-kupujacych/jak-dziala-allegro-ochrona-kupujacych-qzdAg2Klbsl) – 20 000 zł, 14 i 7 dni, 2 lata, Allegro Lokalnie
-- [Allegro: Gdzie sprawdzisz numer i status swojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/gdzie-sprawdzisz-numer-i-status-swojej-przesylki-LvP7agrzOhw) – status Oczekuje na nadanie
-- [InPost: statusy przesyłek (API ShipX)](https://api-shipx-pl.easypack24.net/v1/statuses?lang=pl_PL) – Przygotowana przez Nadawcę
+- [Allegro: Czym są i jak działają Dyskusje – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/czym-sa-i-jak-dzialaja-dyskusje-informacje-dla-sprzedajacych-k1wRjeRw2I8) – godzina po zakupie, 24 godziny na odpowiedź, 7 dni, nierozwiązana Dyskusja
+- [Allegro: Allegro Ochrona Kupujących, regulamin (załącznik nr 9)](https://policies.allegro.com/doc/ccca669b9c6b6723bfdb781db6a9773d0e0c61281a448151bfaa75843e1d55c8) – najpierw sprzedający w Dyskusji albo reklamacji, 730 dni, do 20 000 zł
 - [Poczta Polska: Śledzenie przesyłek](https://www.poczta-polska.pl/sledzenie-przesylek/) – komunikat o błędnym numerze
 - [DHL eCommerce Polska: Śledzenie paczek krajowych i zagranicznych](https://mojdhl.pl/sprawdz) – komunikat Brak informacji o przesyłce i jego powody, kontakt z nadawcą
 - [Zalando: Gdzie jest moja paczka?](https://www.zalando.pl/faq/where-is-my-parcel.html) – link do śledzenia działa po odbiorze paczki przez przewoźnika
@@ -150,5 +147,7 @@ Paczka może nie mieć jeszcze pierwszego skanu, numer może należeć do innego
 - [DHL: Why are there delays?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/wie-kommt-es-zu-verspaetungen.html) – błędy w adresie i etykiecie
 - [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – pogoda, korki, wypadki, okres przed Bożym Narodzeniem
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 dni
-- [Sejm RP: Kodeks cywilny, tekst jednolity Dz.U. 2026 poz. 795](https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf) – art. 22¹, art. 543¹, art. 548 § 3
+- [UOKiK: Odpowiedzialność za przesyłkę](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/odpowiedzialnosc-sprzedawcy-za-przesylke/) – art. 548 § 3 Kodeksu cywilnego, ryzyko sprzedawcy, przewoźnik spoza oferty
+- [UOKiK: Wydanie towaru](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/wydanie-towaru/) – 30 dni, dodatkowy termin, odstąpienie
+- [UOKiK: Słownik](https://prawakonsumenta.uokik.gov.pl/slownik/) – konsument to osoba fizyczna w umowie z przedsiębiorcą
 :::

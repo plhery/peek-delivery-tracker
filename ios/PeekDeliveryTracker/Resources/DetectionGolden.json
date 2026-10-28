@@ -32695,6 +32695,56 @@
     ]
   },
   {
+    "input": "306023140225",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sending"
+    ],
+    "asked": [
+      "poste-italiane",
+      "brt",
+      "colis-prive",
+      "j-and-t",
+      "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "306023551172",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive",
+      "j-and-t",
+      "metropolitan-warehouse"
+    ]
+  },
+  {
     "input": "306060612686",
     "carrier": "unknown",
     "confidence": "low",
@@ -69765,6 +69815,22 @@
     ]
   },
   {
+    "input": "CIES00000000000001",
+    "carrier": "gofo-es",
+    "confidence": "high",
+    "candidates": [
+      "gofo-es"
+    ]
+  },
+  {
+    "input": "CIES0000000000001",
+    "carrier": "gofo-es",
+    "confidence": "high",
+    "candidates": [
+      "gofo-es"
+    ]
+  },
+  {
     "input": "CIFR00000000000001",
     "carrier": "gofo-fr",
     "confidence": "high",
@@ -76242,6 +76308,30 @@
     ]
   },
   {
+    "input": "GFES0000000000001",
+    "carrier": "gofo-es",
+    "confidence": "high",
+    "candidates": [
+      "gofo-es"
+    ]
+  },
+  {
+    "input": "GFES26222137816984",
+    "carrier": "gofo-es",
+    "confidence": "high",
+    "candidates": [
+      "gofo-es"
+    ]
+  },
+  {
+    "input": "GFES26222140488459",
+    "carrier": "gofo-es",
+    "confidence": "high",
+    "candidates": [
+      "gofo-es"
+    ]
+  },
+  {
     "input": "GFFR0000000000001",
     "carrier": "gofo-fr",
     "confidence": "high",
@@ -79921,6 +80011,22 @@
     "confidence": "high",
     "candidates": [
       "j-and-t-middle-east"
+    ]
+  },
+  {
+    "input": "JTUK100004930604",
+    "carrier": "j-and-t-uk",
+    "confidence": "high",
+    "candidates": [
+      "j-and-t-uk"
+    ]
+  },
+  {
+    "input": "JTUK100012934232",
+    "carrier": "j-and-t-uk",
+    "confidence": "high",
+    "candidates": [
+      "j-and-t-uk"
     ]
   },
   {
@@ -94319,6 +94425,14 @@
     ]
   },
   {
+    "input": "VD307149723551",
+    "carrier": "viadireta",
+    "confidence": "high",
+    "candidates": [
+      "viadireta"
+    ]
+  },
+  {
     "input": "VDC39298794N",
     "carrier": "unknown",
     "confidence": "low",
@@ -94327,6 +94441,30 @@
     ],
     "asked": [
       "colis-prive"
+    ]
+  },
+  {
+    "input": "VDVD161225074709",
+    "carrier": "viadireta",
+    "confidence": "high",
+    "candidates": [
+      "viadireta"
+    ]
+  },
+  {
+    "input": "VDVD200126002349",
+    "carrier": "viadireta",
+    "confidence": "high",
+    "candidates": [
+      "viadireta"
+    ]
+  },
+  {
+    "input": "VDVD200526010401",
+    "carrier": "viadireta",
+    "confidence": "high",
+    "candidates": [
+      "viadireta"
     ]
   },
   {

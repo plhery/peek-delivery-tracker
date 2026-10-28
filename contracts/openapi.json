@@ -32467,6 +32467,153 @@
         }
       ],
       "trackingSearchUrl": "https://dashboard.pactic.com/tracking"
+    },
+    "gofo-es": {
+      "displayName": "GOFO Spain",
+      "aliases": [
+        "GOFO ES"
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#fc4c02",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "gofo-es",
+        "recognitionRank": 465
+      },
+      "trackingUrlTemplate": "https://www.gofo.com/es/tracking-results/?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "gofo.com"
+          ],
+          "pathPattern": "^/es(?:/|$)",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^(?:GF|CI)ES\\d{13,14}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://www.gofo.com/es/tracking-results/"
+    },
+    "j-and-t-uk": {
+      "displayName": "J&T Express UK",
+      "aliases": [
+        "J&T Express (UK)",
+        "J&T Express UK Ltd",
+        "J&T UK"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "color": "#e60000",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "j-and-t-uk",
+        "recognitionRank": 701
+      },
+      "trackingUrlTemplate": "https://www.jtexpress.uk/tracking?q={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.jtexpress.uk",
+            "jtexpress.uk"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "q"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^JTUK\\d{12}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://www.jtexpress.uk/tracking"
+    },
+    "logisimple": {
+      "displayName": "Logisimple",
+      "aliases": [
+        "Logisimple, Lda.",
+        "Logisimple - Transportes, Montagens e Mudanças"
+      ],
+      "countries": [
+        "PT"
+      ],
+      "color": "#e27900",
+      "selectable": true,
+      "timezone": "Europe/Lisbon",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "logisimple"
+      },
+      "trackingUrlTemplate": "https://portal.logisimple.pt/pt/tracking?tracking={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "portal.logisimple.pt"
+          ],
+          "pathPattern": "^/(?:pt|en)/tracking/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://portal.logisimple.pt/pt/tracking"
+    },
+    "viadireta": {
+      "displayName": "ViaDireta",
+      "aliases": [
+        "Via Directa"
+      ],
+      "countries": [
+        "PT"
+      ],
+      "color": "#0d3a6d",
+      "selectable": true,
+      "timezone": "Europe/Lisbon",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "viadireta",
+        "recognitionRank": 72
+      },
+      "trackingUrlTemplate": "https://www.viadireta.pt/tracking?codigo={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.viadireta.pt",
+            "viadireta.pt"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "codigo"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^VD\\d{12}$",
+          "confidence": "high"
+        },
+        {
+          "pattern": "^VDVD(?:0[1-9]|[12]\\d|3[01])(?:0[1-9]|1[0-2])\\d{8}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://www.viadireta.pt/tracking"
     }
   },
   "servers": [
@@ -36070,7 +36217,11 @@
           "quick-rabbit",
           "dealersend",
           "express-one-bg",
-          "pactic"
+          "pactic",
+          "gofo-es",
+          "j-and-t-uk",
+          "logisimple",
+          "viadireta"
         ]
       },
       "Stage": {

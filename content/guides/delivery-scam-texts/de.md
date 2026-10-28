@@ -42,7 +42,7 @@ Die meisten schon, und genau deshalb funktionieren die Fakes. Was die Paketdiens
 | --- | --- | --- |
 | [DHL](carrier:dhl), Deutsche Post | Mails von @dhl.de, @dhl.com, @dpdhl.com oder anderen DHL-Domains, Links nur auf eigene Seiten | Per SMS nach persönlichen Daten fragen oder zur Zahlung auffordern |
 | [Hermes](carrier:hermes-de) | Gar nicht per SMS (außer Einrichtungsservice), Links nur auf myhermes.de und hermesworld.com | Nach Zahlungsdaten fragen, Zollgebühren eintreiben, dich in sozialen Netzwerken zu Paketen anschreiben |
-| [GLS](carrier:gls-de) | Mails nur zu Paketangelegenheiten, Seiten gls-pakete.de und gls-group.com | Per Mail oder Telefon Zahlung verlangen, dich zuerst per Messenger anschreiben |
+| GLS Österreich | Mails nur zu geschäftlichen Belangen wie Versandanweisungen oder Lieferstatus, Hauptwebsite gls-group.com | Per Mail Zahlung verlangen, dich von sich aus per Messenger anschreiben |
 | [DPD](carrier:dpd-de) | SMS nur von +49 177 1787807 | Mit Neosurf, iGift oder Paysafe zusammenarbeiten |
 | [Österreichische Post](carrier:austrian-post) | Mails von @post.at, Absender „Österreichische Post AG“ oder „Meine Post“ | IBAN und BIC verlangen, um ein Paket zuzustellen |
 | [Schweizerische Post](carrier:swiss-post) | Adressen post.ch, poste.ch, posta.ch, swisspost.ch, swisspost.com | Per SMS, E-Mail oder WhatsApp nach Passwörtern, Codes oder vollständigen Kartendaten fragen |
@@ -58,11 +58,10 @@ Die Maschen wiederholen sich. Diese Beispiele stammen von den Warnseiten der Pak
 - **Paket hängt fest.** „Ihr Paket wird im Sortierzentrum aufbewahrt“ (Bundesnetzagentur), „Paket in Warteschleife“ (Österreichische Post), „Paket im Terminal festgehalten“ (Schweizerische Post).
 - **Zollgebühr.** Die Bundesnetzagentur hat vor SMS gewarnt, die eine angebliche „Zollgebühr“ verlangen. Manche Forderungen sind aber echt: Woran du sie erkennst, steht im Ratgeber [Paket beim Zoll](guide:customs).
 - **SMS-Code oder Rückrufnummer.** Die Schweizerische Post nennt Fakes, die dich einen „SMS-Code an 41414 senden“ lassen oder auf 0901-Nummern verweisen.
-- **WhatsApp statt SMS.** DHL warnt vor falschen Konten, die das Gespräch zu WhatsApp oder Telegram verlagern. GLS schreibt dich nie zuerst per Messenger an.
+- **WhatsApp statt SMS.** DHL warnt vor falschen Konten, die das Gespräch zu WhatsApp oder Telegram verlagern. GLS Österreich schreibt dich nie von sich aus per Messenger an.
 - **Gelber Zettel mit QR-Code.** Die Österreichische Post warnt vor einer gefälschten Benachrichtigung im Briefkasten mit QR-Code oder Telefonnummer, die nicht von ihr stammt.
-- **Ein Anruf.** GLS fordert am Telefon nie zur Zahlung auf und fragt nie nach Kartendaten oder Passwörtern. Im Netz stehen gefälschte GLS-Hotlines: Nimm nur Nummern von der GLS-Seite.
 - **„Kurier“ für deinen Kleinanzeigen-Verkauf.** Die Österreichische Post warnt vor einem falschen „Post-Kurier“ und „Post-Käuferschutz“, die Schweizerische Post vor gefälschten Abholaufträgen in Kleinanzeigen.
-- **Paket ohne Bestellung an der Tür.** GLS warnt vor Leuten in Zustellerkleidung, die eine unerwartete Nachnahme bringen, oft „für den Nachbarn“, mit wertlosem Inhalt. Zahl keine Nachnahme, die du nicht erwartest.
+- **Paket ohne Bestellung an der Tür.** GLS Österreich warnt vor Leuten in Zustellerkleidung, die eine unerwartete Nachnahme bringen, oft „für den Nachbarn“, mit wertlosem Inhalt. Zahl keine Nachnahme, die du nicht erwartest.
 
 ## Paket-SMS echt oder Fake? So prüfst du sie sicher
 
@@ -104,8 +103,8 @@ Melde eine Fake-SMS, auch wenn du nicht geklickt hast, und lösche sie dann.
 
 | Land | Nachricht melden | Geld oder Daten verloren |
 | --- | --- | --- |
-| Deutschland | Bundesnetzagentur, Formular „SMS oder Messenger“; Fakes im Namen von DHL als Screenshot mit Absendernummer an phishing@dhl.com, Hermes an info-paket@myhermes.de, GLS an security@gls-group.com; verdächtige Mails an phishing@verbraucherzentrale.nrw | Bank oder Sperr-Notruf 116 116, dann Strafanzeige bei der Polizei oder online bei der Onlinewache deines Bundeslandes |
-| Österreich | Watchlist Internet, Formular „Internetfalle melden“; gefälschte Post-Seiten über das Formular der Post; against-cybercrime@bmi.gv.at | Bank, dann Anzeige bei der Polizei (die Meldung an against-cybercrime ersetzt sie nicht) |
+| Deutschland | Bundesnetzagentur, Formular „SMS oder Messenger“; Fakes im Namen von DHL als Screenshot mit Absendernummer an phishing@dhl.com, Hermes an info-paket@myhermes.de; verdächtige Mails an phishing@verbraucherzentrale.nrw | Bank oder Sperr-Notruf 116 116, dann Strafanzeige bei der Polizei oder online bei der Onlinewache deines Bundeslandes |
+| Österreich | Watchlist Internet, Formular „Internetfalle melden“; gefälschte Post-Seiten über das Formular der Post; Fakes im Namen von GLS als Screenshot mit Namen und Nummer des Absenders an security@gls-group.com; against-cybercrime@bmi.gv.at | Bank, dann Anzeige bei der Polizei (die Meldung an against-cybercrime ersetzt sie nicht) |
 | Schweiz | Mails an reports@antiphishing.ch weiterleiten oder Meldeformular des Bundesamts für Cybersicherheit (BACS) | Anzeige bei der Kantonspolizei, in manchen Kantonen online über Suisse ePolice (das BACS nimmt keine Strafanzeigen entgegen) |
 
 Die Bundesnetzagentur kann Absendernummern abschalten lassen, aber keine Bußgelder für SMS-Spam verhängen. Auf dem iPhone steht unter Nachrichten von unbekannten Absendern **Spam melden**: Tipp darauf und dann auf **Spam löschen und melden**. Hast du schon geantwortet, geht das nicht mehr. In Google Messages auf Android öffnest du die Unterhaltung und wählst im Dreipunkt-Menü unter **Details** die Option **Blockieren und als Spam melden**.
@@ -113,7 +112,7 @@ Die Bundesnetzagentur kann Absendernummern abschalten lassen, aber keine Bußgel
 :::sources
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – Absenderadressen, keine Zahlung per SMS, bit.ly, WhatsApp, phishing@dhl.com
 - [Hermes: Sicherheitshinweise](https://www.myhermes.de/sicherheit/) – kein SMS-Service, keine Zusatzkosten, Druck-Beispiel, info-paket@myhermes.de
-- [GLS: Wichtige Hinweise für Ihre Sicherheit](https://www.gls-pakete.de/sicherheitshinweis) – keine Zahlung per Mail oder Telefon, Messenger, falsche Hotlines, Nachnahme, security@gls-group.com
+- [GLS Österreich: Sicherheitshinweis](https://gls-group.com/AT/de/press/gls-informs/security-advice/) – Mails nur zu geschäftlichen Belangen wie Versandanweisungen oder Lieferstatus, keine Zahlung per Mail, kein Messenger von sich aus, gls-group.com, Nachnahme an der Haustür, security@gls-group.com
 - [DPD: Sicherheit](https://www.dpd.com/de/de/sicherheit/) – SMS-Nummer, 14 Ziffern, Gebührenformular mit Folgezahlungen, Neosurf, iGift, Paysafe, Zoll außerhalb der EU, info@dpd.de
 - [Bundesnetzagentur: Archiv Hinweise und Meldungen](https://bundesnetzagentur.de/DE/Vportal/TK/Aerger/Aktuelles/Hinweise/start.html) – Warnung vor Fake-„Zollgebühr“-Nachrichten
 - [Bundesnetzagentur: Nicht verlangte SMS](https://www.bundesnetzagentur.de/DE/Vportal/TK/Aerger/Faelle/SMSSpam/start.html) – Fake-Texte, Beschwerdeformular, Abschaltung, keine Bußgelder

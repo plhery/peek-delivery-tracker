@@ -55,7 +55,7 @@ PostNL or Spring GDS carries the parcel to your country. Spring GDS says it "man
 
 - **United States**: [USPS](carrier:usps). An inquiry about an item from abroad goes through the sender, who works with their own post. For business parcels to the US mainland and Puerto Rico, the shop signs an addendum that lets PostNL clear customs and prepay the import duties for it.
 - **United Kingdom**: [Royal Mail](carrier:royal-mail), one of the local posts Spring GDS names.
-- **Ireland**: [An Post](carrier:an-post) for postal items. Its tracking shows an item from abroad once An Post has received it in Ireland. A Parcel EU barcode goes to PostNL's partner in Ireland instead, which PostNL doesn't name.
+- **Ireland**: [An Post](carrier:an-post) for postal items. A Parcel EU barcode goes to PostNL's partner in Ireland instead, which PostNL doesn't name.
 - **Canada**: [Canada Post](carrier:canada-post). If its Track tool shows nothing, Canada Post asks you to have the sender investigate with their country's post.
 - **Australia**: [Australia Post](carrier:australia-post).
 
@@ -114,7 +114,6 @@ Usually the national post. Spring GDS, PostNL's international arm, says a parcel
 - [Spring GDS: We are Spring GDS](https://www.spring-gds.com/about-us/) – part of the PostNL group, cross-border e-commerce
 - [Spring GDS: Track and Trace](https://www.spring-gds.com/track/) – local postal service, local partner, number format, first scan, transit and customs pauses, delivered not received, claims, returns, redeliveries, no consumer contact
 - [Spring GDS: Contact us](https://www.spring-gds.com/contact-us/) – tracking questions go to the webshop
-- [An Post: Track and Trace help](https://www.anpost.com/Help-Support/Track-and-Trace) – inbound items tracked once received in Ireland
 - [Canada Post: Tracking international packages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-international-packages.page) – sender investigates with their post
 - [USPS: International Inquiries – The Basics](https://faq.usps.com/s/article/International-Inquiries-The-Basics) – a non-US sender goes through their own post
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – numbering shared between posts, check digit

@@ -1,6 +1,6 @@
 ---
 title: Paquete en una taquilla: código de recogida y plazos
-description: Cómo funcionan las taquillas Citypaq, InPost, SEUR y Amazon: dónde está el código de recogida, cuánto espera el paquete y qué hacer si la taquilla está llena.
+description: Cómo funcionan las taquillas Citypaq, InPost y Amazon: dónde está el código de recogida, cuánto espera el paquete y qué hacer si la taquilla está llena.
 slug: taquilla-paquetes-codigo-recogida
 picture: Una fila de taquillas con una puerta abierta, un móvil que muestra un código y Pip saliendo de un casillero.
 published: 2026-10-17
@@ -20,7 +20,7 @@ Al pagar eliges una taquilla en lugar de tu dirección. La tienda entrega el paq
 - home | Tú | Abres con el código o con la app y te lo llevas
 :::
 
-También puedes pasarte a una taquilla con el pedido en camino. SEUR te deja cambiar la entrega a domicilio por un Locker desde su email de seguimiento. InPost permite a veces cambiar el punto de destino desde su seguimiento o desde la app InPost Iberia, según el estado del envío.
+También puedes pasarte a una taquilla con el pedido en camino. InPost permite a veces cambiar el punto de destino desde su seguimiento o desde la app InPost Iberia, según el estado del envío.
 
 En la taquilla nadie te pide el DNI ni una firma. Correos lo dice tal cual: en Citypaq se entrega «sin identificar al destinatario, sin recogida de la firma», con un PIN de un solo uso. Es cómodo, pero quiere decir que el código funciona como una llave.
 
@@ -30,10 +30,9 @@ En la taquilla nadie te pide el DNI ni una firma. Correos lo dice tal cual: en C
 | --- | --- | --- | --- |
 | Citypaq | [Correos](carrier:correos-spain) | PIN de 8 cifras por email, SMS o aviso de la app | 5 días naturales |
 | InPost Locker | [InPost](carrier:mondial-relay) | PIN de 6 cifras por email o SMS, también en la app | 5 días naturales |
-| SEUR Locker | [SEUR](carrier:seur) | Código de apertura en el aviso de SEUR | 5 días |
 | Amazon Locker | [Amazon](carrier:amazon-logistics) | Código único por email, a mano o con su código de barras | 3 días |
 
-Los Citypaq están en centros comerciales, estaciones, supermercados y oficinas de Correos. SEUR tiene unos 2.000 Lockers en España, abiertos las 24 horas. Las taquillas de Mondial Relay ahora son de InPost: InPost compró Mondial Relay en 2021 y mondialrelay.es lleva a inpost.es.
+Los Citypaq están en centros comerciales, estaciones, supermercados y oficinas de Correos. Las taquillas de Mondial Relay ahora son de InPost: InPost compró Mondial Relay en 2021 y mondialrelay.es lleva a inpost.es.
 
 Los plazos de InPost son los de envíos nacionales. Si te dan otra fecha, manda la del aviso. Para Wallapop, Milanuncios y otras compras entre particulares, mira [pedidos de segunda mano](guide:second-hand-orders).
 
@@ -45,7 +44,6 @@ Dónde buscarlo:
 
 - **Correos Citypaq.** PIN numérico de 8 cifras por email, SMS o notificación de la app de Correos, que guarda los códigos.
 - **InPost.** PIN de 6 cifras por email, SMS o ambos, y también en la app InPost. En el Locker vale el PIN o el QR.
-- **SEUR.** El aviso de SEUR con el código de apertura y la fecha máxima de recogida.
 - **Amazon.** El email que te llega en cuanto el paquete está en el Locker, con el código único, la dirección y el horario.
 
 ¿No te ha llegado? Ve por orden:
@@ -62,7 +60,6 @@ Menos que una oficina de Correos o un punto con personal.
 
 - **Citypaq.** 5 días naturales.
 - **InPost.** 5 días naturales desde el aviso en envíos nacionales. Después, el paquete vuelve solo al remitente.
-- **SEUR Locker.** Hasta 5 días, con un recordatorio el tercer día.
 - **Amazon Locker.** 3 días desde que llega el paquete. Después vuelve a Amazon.
 
 Qué pasa después y cómo se recupera el dinero: [paquete no recogido](guide:uncollected-parcel) y [devuelto al remitente](guide:returned-to-sender).
@@ -83,7 +80,6 @@ Sí a las dos cosas, con algún límite.
 
 - **Correos Citypaq.** La taquilla no identifica a quien recoge: abre con el PIN. Sin app, eliges «RECOGER» en la pantalla y escribes el PIN o escaneas el código de barras.
 - **InPost.** En el Locker basta el PIN o el QR, sin documentos. La autorización por escrito con NIF que pide InPost es para el Punto Pack, donde hay alguien detrás del mostrador. La app abre el casillero a distancia, con «Abrir casillero», si estás a menos de unos 70 metros.
-- **SEUR.** Escribes el código de apertura en la pantalla. No hace falta app.
 - **Amazon.** Escribes el código a mano o escaneas el código de barras. Algunas taquillas tienen pantalla táctil y otras se abren desde la app de Amazon Compras.
 
 Manda el código solo a gente de confianza. Un SMS que no esperabas con un enlace para «desbloquear» un paquete no viene de la taquilla: mira [SMS falsos de paquetería](guide:delivery-scam-texts).
@@ -95,7 +91,7 @@ Cada transportista usa sus palabras, pero los pasos son estos:
 :::steps
 - De camino a la taquilla | El transportista tiene el paquete y lo lleva a la taquilla elegida. Aún no hay código.
 - En la taquilla, código enviado | El paquete está en un casillero. Te llega el PIN o el QR con la dirección y la fecha límite.
-- Recordatorio | SEUR te avisa otra vez el tercer día. Mira la fecha límite del primer aviso.
+- Plazo | Tienes 5 días naturales en Citypaq e InPost, y 3 días en Amazon Locker. Mira la fecha límite del primer aviso.
 - Se acabó el plazo | Pasada la fecha límite, el transportista retira el paquete del casillero.
 - Vuelve al remitente | InPost lo devuelve solo al remitente; Amazon lo recupera.
 :::
@@ -104,11 +100,10 @@ Una taquilla fuera de servicio añade un paso: el paquete sale hacia otro punto.
 
 ## ¿Puedo enviar o devolver un paquete desde una taquilla?
 
-Sí, en las tres redes de transportista:
+Sí, en Citypaq y en InPost:
 
 - **Citypaq.** Puedes enviar, recibir y devolver paquetes nacionales o sin trámite de aduanas, de hasta 30 kg. Para una devolución, la tienda te da un código, que usas en la app de Correos (Citypaq, Devoluciones) o en la misma taquilla, sin registrarte.
 - **InPost.** Primero hablas con el remitente; después dejas el paquete en un Punto Pack o un Locker y te llega un email de confirmación.
-- **SEUR.** Puedes hacer una devolución desde un Locker si tienes la etiqueta impresa.
 
 Una devolución es un paquete más, con su número: [seguir una devolución y el reembolso](guide:returns-tracking).
 
@@ -137,8 +132,6 @@ Un número de Correos puede ser `PR` + 15 cifras + `C`; el resto de formatos, en
 - [InPost: Cómo recoger](https://www.inpost.es/recibe-con-nosotros/como-recoger) – PIN de 6 cifras por email o SMS y en la app, PIN o QR sin documentos
 - [InPost: No tengo el código o PIN de recogida](https://www.inpost.es/blog/no-tengo-el-codigo-o-pin-de-recogida-inpost-donde-verlo-y-que-hacer) – código frente a número de seguimiento, qué revisar
 - [InPost: Consigue la app](https://www.inpost.es/consigue-la-app) – abrir el casillero a unos 70 metros
-- [SEUR: Lockers](https://www.seur.com/es/puntos-pickup/lockers/?business_unit=seur) – 2.000 Lockers, 24 horas, hasta 5 días, devoluciones
-- [SEUR: Recoge tus envíos en un locker](https://blog.seur.com/recoge-tus-envios-en-un-locker/) – código de apertura y fecha máxima, recordatorio el tercer día, cambio a Locker, devolución con etiqueta
 - [About Amazon España: Amazon Lockers](https://www.aboutamazon.es/noticias/innovacion/amazon-lockers) – código único por email al llegar el paquete, código a mano o código de barras, 3 días, vuelta a Amazon (artículo de 2017)
 - [About Amazon España: 15 cosas sobre Amazon que aún no sabías](https://www.aboutamazon.es/noticias/noticias-de-la-compania/15-cosas-sobre-amazon-que-aun-no-sabias) – taquillas con pantalla táctil o con la app de Amazon Compras
 - [Universal Parcel Scraper: datos de los transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formatos de número

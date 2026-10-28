@@ -27,7 +27,7 @@ Pour les colis à destination de la Suisse, le suivi de GLS n'existe qu'en angla
 
 | Ce qu'affiche GLS | Ce que ça veut dire pour toi |
 | --- | --- |
-| `Preadvice`, `The parcel has not been handed over to GLS.` | L'expéditeur a créé l'étiquette et transmis les données, mais GLS n'a pas encore le colis. |
+| `Preadvice`, `The parcel has not been handed over to GLS.` | L'expéditeur a saisi les données du colis, mais GLS ne l'a pas encore. |
 | `The parcel was handed over to GLS.` | GLS a reçu le colis. |
 | `In transit`, `The parcel has left the parcel center` | Il roule entre deux dépôts GLS. |
 | `The parcel has reached the parcel center` | Il est arrivé dans un dépôt GLS. |
@@ -35,12 +35,12 @@ Pour les colis à destination de la Suisse, le suivi de GLS n'existe qu'en angla
 | `The parcel was released by customs.` | Dédouané, il reprend la route. |
 | `Final parcel center` | Il est au dernier centre : la livraison suit. |
 | `In delivery`, `The parcel is in delivery.` | Il est en livraison, attendu dans la journée. |
-| `Not delivered` | Pas livré, par exemple parce que l'adresse est fausse ou que le destinataire est introuvable. GLS lance alors une vérification de l'adresse. |
-| `Stored` | Revenu au dernier centre, où il est entreposé. |
+| `Not delivered` | Pas livré, par exemple parce que personne n'était là ou qu'il manque des précisions sur l'adresse. |
+| `Stored` | Entreposé au dépôt après une livraison manquée, par exemple parce que personne n'était là. |
 | `The parcel is ready for collection at the ParcelShop.` | Il t'attend dans un ParcelShop ou une consigne GLS. |
 | `The parcel has been delivered.`, `Delivered` | Livré. |
 
-`Preadvice` veut seulement dire que la boutique a envoyé les données à GLS : s'il dure des jours, demande-lui où en est ton colis. GLS écrit aussi `Delivered` pour un colis déposé dans un ParcelShop, que tu dois encore aller retirer. Et `Cancelled` ne veut pas forcément dire que ta commande est annulée : GLS l'emploie par exemple quand l'enlèvement chez l'expéditeur est annulé, le colis n'étant pas prêt à temps. Aucune page de GLS n'explique `Customs Consignment via Customs Portal` ; Peek le compte comme douane.
+`Preadvice` veut seulement dire que la boutique a envoyé les données à GLS : s'il dure des jours, demande-lui où en est ton colis. GLS écrit aussi `Delivered` pour un colis déposé dans un ParcelShop, que tu dois encore aller retirer. Aucune page de GLS n'explique `Customs Consignment via Customs Portal` ; Peek le compte comme douane. Les raisons données pour `Not delivered` et `Stored` viennent de l'aide de GLS aux Pays-Bas, où GLS livre lui-même ; en Suisse, c'est La Poste qui livre.
 
 ## Livraison GLS en Suisse : La Poste, point relais et invitation à retirer
 
@@ -118,9 +118,8 @@ Contacte la boutique : c'est elle qui a choisi GLS et qui paie le transport. GLS
 - [GLS : About us](https://gls-group.com/GROUP/en/about-us/) – entreprise
 - [GLS : Contact](https://gls-group.com/GROUP/en/contact-form/) – formulaire, hotlines nationales
 - [GLS : Security advice](https://gls-group.com/GROUP/en/security-advice/) – faux messages, site principal
-- [GLS Germany : Shipment status](https://www.gls-pakete.de/en/glossary-private/parcel-status) – sens des statuts
-- [GLS Netherlands : FAQ recipients](https://gls-group.com/NL/en/faq-recipient/) – textes des étapes, numéro donné par l'expéditeur
+- [GLS Netherlands : FAQ recipients](https://gls-group.com/NL/en/faq-recipient/) – textes des étapes et leur sens, livraison en ParcelShop, numéro donné par l'expéditeur
 - [GLS Austria : Versand in die Schweiz](https://gls-group.com/AT/de/versand-in-die-schweiz/) – La Poste livre
 - [GLS Austria : Regellaufzeiten](https://gls-group.com/AT/de/regellaufzeiten/) – 2 jours depuis l'Autriche
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit, « Delivered » pour l'arrivée en ParcelShop
 :::

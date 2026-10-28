@@ -27,19 +27,19 @@ Per i pacchi diretti in Svizzera la pagina di tracking di GLS offre solo l'ingle
 
 | GLS scrive | Cosa vuol dire per te |
 | --- | --- |
-| `Preadvice`, `The parcel has not been handed over to GLS.` | Il mittente ha creato i dati dell'etichetta, ma GLS non ha ancora il pacco. |
+| `Preadvice`, `The parcel has not been handed over to GLS.` | Il mittente ha inserito i dati del pacco, ma GLS non l'ha ancora ricevuto. |
 | `The parcel was handed over to GLS.` | GLS ha il pacco. |
 | `In transit`, `The parcel has left the parcel center` | Viaggia tra i centri pacchi di GLS. |
 | `Customs Consignment via Customs Portal`, `The parcel has not been released by customs.` | È in dogana: per i pacchi GLS lo sdoganamento in Svizzera lo fa la Posta. |
 | `The parcel was released by customs.` | Sdoganato, riparte. |
 | `Final parcel center` | È all'ultimo centro pacchi: il passo successivo è la consegna. |
 | `In delivery`, `The parcel is in delivery.` | In consegna, previsto in giornata. |
-| `Not delivered` | Non consegnato, per esempio per un indirizzo sbagliato o un destinatario non trovato. GLS avvia una verifica dell'indirizzo. |
-| `Stored` | Di nuovo al centro pacchi finale. |
+| `Not delivered` | Non consegnato, per esempio perché non c'era nessuno o mancano dati sull'indirizzo. |
+| `Stored` | In giacenza al deposito dopo una consegna non riuscita, per esempio perché non eri in casa. |
 | `The parcel is ready for collection at the ParcelShop.` | Ti aspetta in un ParcelShop o in un locker. |
 | `The parcel has been delivered.`, `Delivered` | Consegnato. |
 
-`Preadvice` vuol dire solo che il negozio ha mandato a GLS i dati dell'etichetta: se resta così per giorni, chiedi al mittente. GLS scrive `Delivered` anche per un pacco lasciato in un ParcelShop, che devi ancora ritirare. Nessuna pagina di GLS spiega `Customs Consignment via Customs Portal`: Peek lo considera una fase di dogana. I significati vengono dalle pagine d'aiuto di GLS in Germania e nei Paesi Bassi, che usano lo stesso tracking.
+`Preadvice` vuol dire solo che il negozio ha inserito i dati del pacco nel sistema di GLS: se resta così per giorni, chiedi al mittente. GLS scrive `Delivered` anche per un pacco lasciato in un ParcelShop, che devi ancora ritirare. Nessuna pagina di GLS spiega `Customs Consignment via Customs Portal`: Peek lo considera una fase di dogana. I significati vengono dalle pagine d'aiuto di GLS nei Paesi Bassi, dove consegna GLS stessa; in Svizzera consegna la Posta.
 
 ## Consegna GLS in Svizzera: la Posta e l'invito di ritiro
 
@@ -61,7 +61,7 @@ GLS l'ha scelto il mittente, che secondo le pagine GLS della Posta paga in ogni 
 
 **Dazio e IVA.** Chi paga dipende dall'Incoterm GLS scelto dal mittente. Con l'Incoterm 20 sdoganamento, dazio e IVA sono a carico dell'importatore; con il 30 e il 40 si dividono tra mittente e destinatario, e tu paghi almeno l'IVA. Per i pacchi GLS la Posta applica le stesse tariffe di sdoganamento degli altri pacchi: le cifre sono nella guida [pacco fermo in dogana](guide:customs). Se non sei d'accordo con i costi di sdoganamento, la Posta consiglia di contattare il suo Servizio clienti internazionale, al +41 848 48 48 47. Per correggere regime doganale, indirizzo o tributi hai 60 giorni dalla data della decisione d'imposizione, termine fissato dall'Ufficio federale della dogana e della sicurezza dei confini (UDSC).
 
-**Non consegnato.** Con `Not delivered` GLS verifica l'indirizzo: controlla con il negozio che quello dell'ordine sia giusto e completo.
+**Non consegnato.** Con `Not delivered` controlla con il negozio che l'indirizzo dell'ordine sia giusto e completo.
 
 **Perso o rotto.** GLS non pubblica per la Svizzera né una procedura di reclamo né termini o limiti di risarcimento: rivolgiti al negozio, che ha il contratto con GLS.
 
@@ -98,7 +98,7 @@ GLS dà una cifra solo per i pacchi dall'Austria: 2 giorni di spedizione, sia pe
 
 ### Pacco GLS non consegnato: cosa fare?
 
-Cerca nella bucalettere un invito di ritiro della Posta: indica dove ritirare il pacco. Se il tracking dice `Not delivered`, GLS sta verificando l'indirizzo, quindi scrivi al negozio.
+Cerca nella bucalettere un invito di ritiro della Posta: indica dove ritirare il pacco. Se il tracking dice `Not delivered`, scrivi al negozio.
 
 ### Quanto tempo ho per ritirare un pacco GLS?
 
@@ -121,9 +121,8 @@ Per la Svizzera né GLS né la Posta lo dicono. Dopo un invito di ritiro, però,
 - [GLS: About us](https://gls-group.com/GROUP/en/about-us/) – società, sede, 1999
 - [GLS: Contact](https://gls-group.com/GROUP/en/contact-form/) – modulo, numeri delle società nazionali
 - [GLS: Security advice](https://gls-group.com/GROUP/en/security-advice/) – truffe, sito ufficiale
-- [GLS Germany: Shipment status](https://www.gls-pakete.de/en/glossary-private/parcel-status) – significato degli stati
-- [GLS Netherlands: Frequently asked questions recipients](https://gls-group.com/NL/en/faq-recipient/) – testi degli eventi
+- [GLS Netherlands: Frequently asked questions recipients](https://gls-group.com/NL/en/faq-recipient/) – testi degli eventi e loro significato, consegna in un ParcelShop
 - [GLS Austria: Versand in die Schweiz](https://gls-group.com/AT/de/versand-in-die-schweiz/) – consegna della Posta
 - [GLS Austria: Regellaufzeiten](https://gls-group.com/AT/de/regellaufzeiten/) – tempi di consegna dall'Austria
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge Peek, «Delivered» per l'arrivo in un ParcelShop
 :::

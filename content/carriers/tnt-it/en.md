@@ -62,7 +62,7 @@ TNT Italy's Express service delivers the next working day in most Italian munici
 
 **Damaged or lost.** Under TNT's conditions you have 21 days to notify a claim, counted from delivery for damage or delay, and from the expected delivery date for a lost or undelivered parcel. Note any damage on the delivery receipt when you sign: a signature with no note is taken to mean the parcel arrived in good condition. Claims go through tnt.com or TNT's customer service; keep the box and packing, as TNT may inspect them. Within Italy, TNT's standard liability is €1 per kg unless the sender paid for more cover. See [damaged parcel](guide:damaged-parcel) and [lost parcel](guide:lost-parcel).
 
-**From outside the EU.** Italy's customs agency (ADM) says that since 1 July 2026, goods bought online from outside the EU in parcels worth up to €150 pay a flat €3 duty per item type, owed by whoever declares them to customs. From 1 November 2026 the EU will add a €2 handling fee. TNT carries such a parcel on an international consignment number: see [TNT](carrier:tnt) and [the customs guide](guide:customs).
+**From outside the EU.** The European Commission says that since 1 July 2026, goods bought online from outside the EU in parcels worth up to €150 pay a temporary flat €3 duty per item type, owed first of all by whoever declares them to customs. From 1 November 2026 the EU also charges a €2 handling fee per item, owed the same way, whatever the parcel is worth. TNT carries such a parcel on an international consignment number: see [TNT](carrier:tnt) and [the customs guide](guide:customs).
 
 ## TNT Italy customer service number and complaints
 
@@ -116,7 +116,7 @@ tnt.it says that once a shipment is handed over, it can take a few hours before 
 - [TNT Italy: Termini e condizioni](https://www.tnt.com/express/it_it/site/terms-conditions.html) – claims in 21 days, inspection
 - [TNT Italy: Servizi addizionali](https://www.tnt.com/express/it_it/site/shipping-services/optional-extras/accessori-nazionali.html) – Saturday morning at depots, €1 per kg, proof of delivery
 - [AGCOM: FAQ contenzioso tra utenti e operatori postali](https://www.agcom.it/faq-contenzioso-tra-utenti-e-operatori-postali) – complaint deadlines, Formulario CP
-- [ADM: Spedizioni di modico valore da Paesi extra-UE](https://www.adm.gov.it/portale/dazi-spedizioni-modico-valore) – €3 duty from 1 July 2026 on online purchases, paid by the declarant
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 duty per item from 1 July 2026 on online purchases up to €150, €2 handling fee from 1 November 2026
+- [European Commission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – what counts as an item, paid first by the declarant, €2 fee per item whatever the value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows
 :::

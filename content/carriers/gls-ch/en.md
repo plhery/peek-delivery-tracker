@@ -27,19 +27,19 @@ GLS's tracking for Swiss parcels is in English only, and GLS publishes no Swiss 
 
 | GLS says | What it means for you |
 | --- | --- |
-| `Preadvice`, `The parcel has not been handed over to GLS.` | The sender has created the label data. GLS doesn't have the parcel yet. |
+| `Preadvice`, `The parcel has not been handed over to GLS.` | The sender has entered the parcel's data. GLS doesn't have the parcel yet. |
 | `The parcel was handed over to GLS.` | GLS has it. |
 | `In transit`, `The parcel has left the parcel center` | Moving between GLS depots. |
 | `Customs Consignment via Customs Portal`, `The parcel has not been released by customs.` | At customs, which Swiss Post handles for GLS parcels. |
 | `The parcel was released by customs.` | Cleared and moving again. |
 | `Final parcel center` | At the last centre: delivery comes next. |
 | `In delivery`, `The parcel is in delivery.` | Out for delivery, expected during the day. |
-| `Not delivered` | Not delivered, for example because of a wrong address. GLS then checks the address. |
-| `Stored` | Back at the final parcel centre. |
+| `Not delivered` | Not delivered, for example because no one was home or address details are missing. |
+| `Stored` | Kept at the depot after a failed delivery, for example because no one was home. |
 | `The parcel is ready for collection at the ParcelShop.` | Waiting at a ParcelShop or locker for you to pick up. |
 | `The parcel has been delivered.`, `Delivered` | Delivered. |
 
-`Preadvice` only means the shop has sent GLS the label data: if it lasts for days, ask the sender. GLS also writes `Delivered` for a parcel left at a ParcelShop, which you still have to pick up.
+`Preadvice` only means the shop has entered the parcel's data in GLS's system: if it lasts for days, ask the sender. GLS also writes `Delivered` for a parcel left at a ParcelShop, which you still have to pick up. The reasons given for `Not delivered` and `Stored` come from GLS Netherlands, where GLS delivers itself; in Switzerland, Swiss Post delivers.
 
 ## GLS delivery in Switzerland: Swiss Post and collection notes
 
@@ -108,13 +108,12 @@ Yes, but fake messages use its name: see the warning above.
 - [GLS: About us](https://gls-group.com/GROUP/en/about-us/) – company
 - [GLS: Contact](https://gls-group.com/GROUP/en/contact-form/) – form, hotlines
 - [GLS: Security advice](https://gls-group.com/GROUP/en/security-advice/) – scams
-- [GLS Germany: Shipment status](https://www.gls-pakete.de/en/glossary-private/parcel-status) – status meanings
-- [GLS Netherlands: FAQ recipients](https://gls-group.com/NL/en/faq-recipient/) – event texts
+- [GLS Netherlands: FAQ recipients](https://gls-group.com/NL/en/faq-recipient/) – event texts and what they mean, delivered at a ParcelShop
 - [GLS Austria: Versand in die Schweiz](https://gls-group.com/AT/de/versand-in-die-schweiz/) – Swiss Post delivers
 - [GLS Austria: Regellaufzeiten](https://gls-group.com/AT/de/regellaufzeiten/) – transit time
 - [Swiss Post: Swiss Post GLS](https://www.post.ch/en/business-solutions/exports-imports-and-customs-clearance/exports/swiss-post-gls) – phone, email
 - [Swiss Post: Import costs](https://www.post.ch/en/business-solutions/exports-imports-and-customs-clearance/exports/swiss-post-gls/import-costs) – Incoterms, disputes
 - [Swiss Post: Importverzollung](https://www.post.ch/de/empfangen/importverzollung) – GLS clearance, fees
 - [Swiss Post: Collection note](https://www.post.ch/en/receiving-mail/collection-note) – deadlines, options
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, GLS labelling a ParcelShop arrival delivered
 :::

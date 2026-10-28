@@ -64,7 +64,7 @@ Il servizio Express di TNT consegna il giorno lavorativo dopo il ritiro nella ma
 
 **Danneggiato o smarrito.** Le condizioni di TNT danno 21 giorni per il reclamo: dalla consegna per danni o ritardi, dalla data di consegna prevista per perdita o mancata consegna. Se il pacco è rovinato, scrivilo sulla ricevuta quando firmi: se firmi senza riserve, si presume che sia arrivato in buono stato. Il reclamo si fa su tnt.com o al servizio clienti TNT; tieni scatola e imballo, perché TNT può volerli ispezionare. Per le spedizioni nazionali la responsabilità di TNT è di 1 € al kg (art. 1696 del Codice civile), salvo un'assicurazione pagata dal mittente. Vedi [pacco danneggiato](guide:damaged-parcel) e [pacco smarrito](guide:lost-parcel).
 
-**Da fuori UE.** L'Agenzia delle Dogane spiega che dal 1° luglio 2026 la merce comprata online da Paesi extra-UE, in spedizioni fino a 150 €, paga un dazio forfettario di 3 € per tipologia di articolo, a carico del dichiarante doganale. Dal 1° novembre 2026 si aggiungerà la tassa di gestione dell'Unione di 2 €. TNT li trasporta come spedizioni internazionali, con un numero di Connote: i dettagli nella [guida alla dogana](guide:customs).
+**Da fuori UE.** La Commissione europea spiega che dal 1° luglio 2026 la merce comprata online da Paesi extra-UE, in spedizioni fino a 150 €, paga un dazio forfettario temporaneo di 3 € per tipologia di articolo, a carico prima di tutto del dichiarante doganale. Dal 1° novembre 2026 si aggiunge la tassa di gestione dell'Unione di 2 € per articolo, dovuta allo stesso modo, qualunque sia il valore della spedizione. TNT trasporta questi pacchi come spedizioni internazionali, con un numero di Connote: i dettagli nella [guida alla dogana](guide:customs).
 
 ## TNT contatti: numero di telefono, modulo online e reclami
 
@@ -122,7 +122,7 @@ Dipende dal mittente. Senza sue istruzioni scritte, TNT può rimandare il pacco 
 - [TNT Italy: Termini e condizioni](https://www.tnt.com/express/it_it/site/terms-conditions.html) – reclami entro 21 giorni, ispezione
 - [TNT Italy: Servizi addizionali](https://www.tnt.com/express/it_it/site/shipping-services/optional-extras/accessori-nazionali.html) – sabato mattina in filiale, 1 €/kg, contrassegno, prova di consegna
 - [AGCOM: FAQ contenzioso tra utenti e operatori postali](https://www.agcom.it/faq-contenzioso-tra-utenti-e-operatori-postali) – 45 giorni, conciliazione, 90 giorni, Formulario CP
-- [ADM: Spedizioni di modico valore da Paesi extra-UE](https://www.adm.gov.it/portale/dazi-spedizioni-modico-valore) – dazio di 3 € dal 1° luglio 2026 sugli acquisti online, a carico del dichiarante
-- [Commissione europea: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026
+- [Commissione europea: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio temporaneo di 3 € per articolo dal 1° luglio 2026 sugli acquisti online fino a 150 €, tassa di gestione di 2 € dal 1° novembre 2026
+- [Commissione europea: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – cosa conta come articolo, a carico prima di tutto del dichiarante, 2 € per articolo qualunque sia il valore
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek
 :::

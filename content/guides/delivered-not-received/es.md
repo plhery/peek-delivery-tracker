@@ -21,7 +21,7 @@ Dónde puede estar, según quién lo lleve:
 | Transportista | Dónde puede estar |
 | --- | --- |
 | Correos | En tu buzón: el Paq Ligero se entrega «en el buzón, sin necesidad de firma» |
-| [SEUR](carrier:seur) | En un punto SEUR Pickup: en los envíos a particulares hace un solo intento en casa y luego lo lleva al Pickup más cercano |
+| [SEUR](carrier:seur) | Con un vecino, si el seguimiento pone `EL ENVÍO HA SIDO ENTREGADO A UN VECINO.` |
 | [GLS](carrier:gls-es) | En el Parcel Shop que elegiste: GLS te dice que vayas a recogerlo cuando el seguimiento ponga «Entregado». Con EconomyParcel, tras un solo intento, en el Parcel Shop más cercano |
 | InPost | En el Locker o el Punto Pack que elegiste al pedir, donde te espera 5 días naturales. Las taquillas solo se abren con el código que recibe el destinatario |
 
@@ -67,7 +67,6 @@ Te toca a ti, en cambio, cuando:
 
 ## ¿Qué prueba de entrega puedo pedir?
 
-- **La firma del albarán.** SEUR exige para entregar «la firma del albarán de entrega por el destinatario», también con herramientas electrónicas. Pide verla: así sabes quién firmó.
 - **Un código.** Las taquillas de InPost solo se abren con el código que recibe el destinatario. Y si la entrega preveía firma o clave, el Centro Europeo del Consumidor considera que, sin esa confirmación, el paquete no debería darse por entregado.
 - **Una foto, si la hay.** La red de Centros Europeos del Consumidor pide que las empresas de reparto consigan una prueba verificable, como tu firma o una foto del paquete entregado, y que te la faciliten.
 - **No un punto en el mapa.** Ninguna de las páginas de transportistas que hemos consultado ofrece coordenadas GPS como prueba.
@@ -97,7 +96,6 @@ A veces, pero la indemnización suele ir al remitente, así que por la tienda ll
 | Transportista | Qué puedes hacer | Plazo |
 | --- | --- | --- |
 | Correos | Reclamar, pero la indemnización es para el remitente, salvo que firme una solicitud para que la cobres tú. El Paq Ligero no tiene indemnización por pérdida ni robo | Paq Premium, a partir de 3 días; Paq Estándar, a partir de 4; hasta 1 año desde la admisión. Responde en 1 mes como máximo |
-| SEUR | Reclamar por cualquier medio escrito, como piden sus condiciones de transporte | Daños o faltas: 7 días desde la entrega. Retrasos: reservas por escrito en 21 días. Las acciones prescriben al año |
 | GLS | Mirar la nota de paso. Si no basta, escribir por WhatsApp o redes sociales, o llamar al 91 080 62 29, con el número de seguimiento a mano | Sus preguntas frecuentes no lo indican |
 | InPost | ¿La taquilla del Locker estaba vacía? Avisa con una foto de la taquilla. Si no, abre una incidencia con su formulario: responde en 15 días como máximo. Si se pierde, InPost indemniza al remitente según el seguro contratado | Taquilla vacía: 24 horas desde la entrega registrada. Retraso: más de 5 días desde el aviso de envío. Pérdida total: a los 30 días de ese aviso |
 
@@ -136,7 +134,7 @@ Puedes, aunque ninguna de las normas de arriba lo exige para devolverte el diner
 - [Correos: Paq Ligero](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paq-ligero) – buzón sin firma, sin indemnización
 - [Correos: Extravío, envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – indemnización al remitente, 3 y 4 días, 1 año
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – respuesta en 1 mes
-- [SEUR: Condiciones de envíos y transporte](https://www.seur.com/es/condiciones-de-transporte/) – un intento, SEUR Pickup, firma del albarán, 7 y 21 días, un año
+- [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – entregado a un vecino
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Parcel Shop, «Entregado», EconomyParcel, nota de paso, contacto
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – Locker y Punto Pack, códigos, 5 días, taquilla vacía en 24 horas, 15 días, retraso, pérdida, remitente
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 2, 66 bis y 66 ter

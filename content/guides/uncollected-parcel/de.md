@@ -35,11 +35,11 @@ Meist rund eine Woche, an manchen Automaten nur 3 Tage. Die Abholfristen der gro
 
 | Land | Filiale nach verpasster Zustellung | Paketshop | Packstation oder Automat |
 | --- | --- | --- | --- |
-| Deutschland | DHL Postfiliale: 7 Werktage (Montag bis Samstag, ohne Feiertage) | DHL Paketshop: 7 Werktage; Hermes PaketShop: 7 Werktage; DPD Paketshop: 7 Tage; GLS Paketshop: 8 Arbeitstage | DHL Packstation: 7 Kalendertage, 9 nach einer verpassten Zustellung; DPD Paketstation: 3 Tage; Amazon Locker: 3 Kalendertage |
+| Deutschland | DHL Postfiliale: 7 Werktage (Montag bis Samstag, ohne Feiertage) | DHL Paketshop: 7 Werktage; Hermes PaketShop: 7 Werktage; DPD Paketshop: 7 Tage; GLS Paketshop nach verpasster Zustellung: mindestens 7 Werktage | DHL Packstation: 7 Kalendertage, 9 nach einer verpassten Zustellung; DPD Paketstation: 3 Tage; Amazon Locker: 3 Kalendertage |
 | Österreich | Post: ab dem Folgetag bis zum dritten darauffolgenden Montag (5 Werktage, wenn der Versandhändler das so festlegt); GLS-Depot: 4 Arbeitstage | – | – |
 | Schweiz | Post: in der Regel 7 Tage, 15 bei Sendungen aus dem Ausland, verlängerbar | – | My Post 24: 10 Tage |
 
-Auch wann die Frist beginnt, ist unterschiedlich. Bei DHL beginnt sie in der Filiale einen Werktag nach dem Zustellversuch, in der Packstation zählt der Tag mit, an dem das Paket eingelegt wurde. Hermes zählt ab dem Tag, an dem das Paket im PaketShop ankommt, [GLS](carrier:gls-de) ab dem Folgetag. Die Österreichische Post startet am Tag nach der Benachrichtigung und schreibt dir den letzten Abholtag gleich auf den Zettel.
+Auch wann die Frist beginnt, ist unterschiedlich. Bei DHL beginnt sie in der Filiale einen Werktag nach dem Zustellversuch, in der Packstation zählt der Tag mit, an dem das Paket eingelegt wurde. Hermes zählt ab dem Tag, an dem das Paket im PaketShop ankommt. Die Österreichische Post startet am Tag nach der Benachrichtigung und schreibt dir den letzten Abholtag gleich auf den Zettel.
 
 Manche Paketdienste widersprechen sich selbst. [DPD](carrier:dpd-de) spricht auf derselben Seite von „Alle Tage außer gesetzliche Sonn- und Feiertage“ und von Kalendertagen. Eindeutig ist nur sein Beispiel: am Montag im Paketshop, abholen bis Montag der Folgewoche. Die DHL-Statusseite nennt auch für die Packstation 7 Werktage, die Packstation-Hilfe 7 Kalendertage, bei benachrichtigten Sendungen 9.
 
@@ -119,7 +119,7 @@ Ein Paket in der Packstation oder im Paketshop kann für den Paketdienst schon a
 - [DHL: Packstation, Sendungen empfangen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/packstation/empfangen.html) – 7 und 9 Kalendertage, Erinnerungen, keine Verlängerung, zweite Zustellung
 - [Hermes: Aufbewahrung im PaketShop](https://www.myhermes.de/service/fragen/empfangen/aufbewahrung-im-paketshop.html) – 7 Werktage ab Einlieferung, keine Verlängerung, zurück an den Absender
 - [DPD: Wie lange habe ich Zeit, mein Paket im Paketshop abzuholen?](https://www.dpd.com/de/de/faq/wie-lange-habe-ich-zeit-mein-paket-im-paketshop-abzuholen/) – 7 Tage im Paketshop, 3 an der Paketstation, Beispiel Montag bis Montag
-- [GLS: Wie lange habe ich Zeit, mein Paket im GLS PaketShop abzuholen?](https://www.gls-pakete.de/geschaeftlich-versenden/faq/wie-lange-habe-ich-zeit-mein-paket-im-gls-paketshop-abzuholen-q-468138) – 8 Arbeitstage ab dem Folgetag
+- [GLS: AGB für Geschäftskunden, Stand Januar 2025 (auf Englisch)](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – nach verpasster Zustellung mindestens 7 Werktage im PaketShop, Depot oder in der ParcelStation, nicht Abgeholtes zurück an den Absender
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – bis zum dritten Montag, 5 Werktage bei Versandhändlern, Sendung abholbereit, Sendung zugestellt bei Rücksendungen
 - [GLS Österreich: Pakete empfangen](https://gls-group.com/AT/de/faq/pakete-empfangen/) – 4 Arbeitstage im Depot
 - [Schweizerische Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – 7 und 15 Tage, Verlängerung kostenlos und ohne Konto, Einmal-Vollmacht, Preise für zweite Zustellung und Weiterleitung

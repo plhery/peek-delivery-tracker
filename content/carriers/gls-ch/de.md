@@ -35,14 +35,12 @@ Die Sendungsverfolgung von GLS für Pakete in die Schweiz gibt es nur auf Englis
 | `The parcel was released by customs.` | Verzollt, es geht weiter. |
 | `Final parcel center` | Im letzten Paketzentrum, als Nächstes kommt die Zustellung. |
 | `In delivery`, `The parcel is in delivery.` | In Zustellung, es kommt voraussichtlich im Lauf des Tages. |
-| `Not delivered` | Nicht zugestellt, etwa wegen einer falschen Adresse. GLS klärt dann die Adresse ab. |
-| `Stored` | Wieder im letzten Paketzentrum eingelagert. |
+| `Not delivered` | Nicht zugestellt, etwa weil niemand zu Hause war oder Angaben zur Adresse fehlen. |
+| `Stored` | Nach einer gescheiterten Zustellung im Depot eingelagert, etwa weil niemand zu Hause war. |
 | `The parcel is ready for collection at the ParcelShop.` | Liegt in einem ParcelShop oder einer Paketstation bereit, du holst es dort ab. |
 | `The parcel has been delivered.`, `Delivered` | Zugestellt. |
 
-`Preadvice` heißt nur, dass der Shop GLS die Daten fürs Etikett geschickt hat. Bleibt es tagelang dabei, frag den Absender. `Delivered` schreibt GLS laut dem Glossar von GLS Deutschland auch dann, wenn das Paket in einem GLS-ParcelShop angekommen ist, wo du es erst noch abholen musst. `Customs Consignment via Customs Portal` erklärt keine Seite von GLS, Peek zählt es zum Zoll.
-
-Auf gls-pakete.de nennt GLS Deutschland dieselben Schritte auf Deutsch, etwa „Datenerfassung“, „In Zustellung“ oder „Zugestellt“. Bei einem Paket in die Schweiz zeigt die Sendungsverfolgung von GLS nur englische Texte.
+`Preadvice` heißt nur, dass der Shop die Paketdaten im System von GLS erfasst hat. Bleibt es tagelang dabei, frag den Absender. `Delivered` schreibt GLS auch dann, wenn das Paket in einem GLS-ParcelShop angekommen ist, wo du es erst noch abholen musst. `Customs Consignment via Customs Portal` erklärt keine Seite von GLS, Peek zählt es zum Zoll. Die Gründe bei `Not delivered` und `Stored` stammen aus der Hilfe von GLS in den Niederlanden, wo GLS selbst zustellt. In der Schweiz stellt die Post zu.
 
 ## GLS Zustellung in der Schweiz: Post, Paketshop und Abholungseinladung
 
@@ -123,10 +121,8 @@ Keine Seite von GLS nennt einen GLS-ParcelShop oder eine GLS-Paketstation in der
 - [GLS: About us](https://gls-group.com/GROUP/en/about-us/) – Unternehmen
 - [GLS: Contact](https://gls-group.com/GROUP/en/contact-form/) – Formular, Hotline der Landesgesellschaft
 - [GLS: Security advice](https://gls-group.com/GROUP/en/security-advice/) – Zollforderungen, Betrug, Meldestelle
-- [GLS Deutschland: Sendungsstatus](https://www.gls-pakete.de/glossar-privat/sendungsstatus) – deutsche Bezeichnungen
-- [GLS Germany: Shipment status](https://www.gls-pakete.de/en/glossary-private/parcel-status) – Bedeutung der Status
-- [GLS Niederlande: FAQ recipients](https://gls-group.com/NL/en/faq-recipient/) – Statustexte
+- [GLS Niederlande: FAQ recipients](https://gls-group.com/NL/en/faq-recipient/) – Statustexte und ihre Bedeutung, Zustellung im ParcelShop
 - [GLS Österreich: Versand in die Schweiz](https://gls-group.com/AT/de/versand-in-die-schweiz/) – Post stellt zu, 48 Stunden
 - [GLS Österreich: Regellaufzeiten](https://gls-group.com/AT/de/regellaufzeiten/) – 2 Versandtage
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest, „Delivered“ für die Ankunft im ParcelShop
 :::

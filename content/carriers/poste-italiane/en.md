@@ -57,7 +57,7 @@ The notice or SMS gives the last day; Poste's pages give between 3 working days 
 
 **Changing a delivery.** If the sender activated Scegli Tu, its link lets you, once per parcel, pick another day, another address in Italy, a pickup point, a neighbour, a safe place or a holiday hold.
 
-**From outside the EU**, import charges are paid on delivery or at a post office. Poste's clearance fee for a commercial item is €3.00 up to €22, €7.00 up to €1,000 and €21.00 above, and since 1 July 2026, says Italy's customs agency (ADM), a temporary flat duty of €3 per item applies. See [parcels held at customs](guide:customs).
+**From outside the EU**, import charges are paid on delivery or at a post office. Poste's clearance fee for a commercial item is €3.00 up to €22, €7.00 up to €1,000 and €21.00 above, and since 1 July 2026, says the European Commission, a temporary flat duty of €3 per item applies to parcels worth up to €150. See [parcels held at customs](guide:customs).
 
 ## Poste Italiane lost, late or damaged parcel
 
@@ -116,6 +116,6 @@ Yes: Punto Poste lockers, chosen at the shop's checkout and opened with the PIN 
 - [Poste Italiane: Poste Delivery Express](https://www.poste.it/prodotti/poste-delivery-express.html) – delivery time
 - [Poste Italiane: Carta dei servizi postali](https://www.media.poste.it/37381c9f-a87e-4292-8b89-00e88fa53323/web/carta-servizi-non-universali) – Crono, damage, claims, Saturday
 - [Poste Italiane: Carta dei servizi postali universali](https://www.media.poste.it/c919f7cf-8236-428e-82fc-f8b2be8428b8/web/carta-servizi-universali) – Standard complaint window
-- [ADM: Dazi spedizioni modico valore](https://www.adm.gov.it/portale/en/dazi-spedizioni-modico-valore) – €3 duty per item
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 duty per item from 1 July 2026, up to €150
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

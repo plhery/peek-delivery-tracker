@@ -39,7 +39,7 @@ O número do objeto ([2 letras, 9 algarismos e 2 letras](guide:tracking-number-f
 
 ### Preciso de contactar a alfândega?
 
-Quase nunca: começa pelos CTT (passo 4). São eles que apresentam a encomenda à AT e, depois de pagares, é a AT que lhes comunica a autorização de saída. Se a encomenda vier pela [DHL Express](carrier:dhl-express), é a própria DHL que trata dos direitos e impostos em nome de quem recebe.
+Quase nunca: começa pelos CTT (passo 4). São eles que apresentam a encomenda à AT e, depois de pagares, é a AT que lhes comunica a autorização de saída.
 
 Deixaste passar o prazo? Se o Seguir objeto ainda mostra a encomenda em Portugal, contacta os CTT: podem reabrir o processo a título excecional, sem garantia.
 
@@ -95,7 +95,6 @@ Onde pagas depende da loja:
 | Compra até 150 € | A loja cobrou o IVA e os direitos na compra; o Serviço CTT fica isento | IVA, 3 € por tipo de produto e o Serviço CTT: 7 € mais IVA, ou 14 € se o produto tiver IVA reduzido |
 | Compra acima de 150 €, até 1000 € | A loja cobrou todos os encargos na compra | IVA, direitos à taxa da pauta e 14 € de Serviço CTT |
 | Oferta de um particular | Vale 45 € ou menos e marcas no portal a caixa «Pretendo solicitar franquia de direitos de importação» | Acima de 45 €: IVA e direitos, mais 14 € de Serviço CTT (até 1000 €) |
-| Pela DHL Express | O remetente pagou os direitos e impostos | O que for devido, mais uma taxa administrativa de 21 €, no mínimo, se não tiveres conta DHL |
 
 Acima de 1000 €, ou com mercadoria sujeita a restrições ou a impostos especiais de consumo, o Serviço CTT soma aos 14 € um complemento de 16 € a 116 €, mais IVA, conforme o valor.
 
@@ -175,7 +174,6 @@ Reembolsos e acertos:
 - [CTT: Alertas de phishing](https://www.ctt.pt/transversais/alertas-de-phishing) – alertas, www.ctt.pt
 - [Portal das Finanças: Alterações para 1 de julho de 2026](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/Mercadorias_eCommerce.aspx) – 3 € por adição, remessas distintas
 - [Portal das Finanças: AT alerta para e-mails e SMS fraudulentos](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/alerta-segurtanca-20260202.aspx) – sem pagamentos por links
-- [DHL Express Portugal: Serviços opcionais](https://mydhl.express.dhl/pt/pt/ship/optional-services.html) – taxa de 21 €, direitos pagos pelo remetente
 - [Conselho da UE: Regulamento delegado C(2026) 6694](https://data.consilium.europa.eu/doc/document/ST-13480-2026-INIT/pt/pdf) – 2 EUR por artigo
 - [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 1 de novembro de 2026
 - [Comissão Europeia: Guidance on EUR 3 customs duty (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por linha, base do IVA

@@ -211,6 +211,8 @@ describe('carrier brand', () => {
       'mhi',
       'e-commerce-international',
       'boxtal',
+      'huaya-express',
+      'quick-rabbit',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

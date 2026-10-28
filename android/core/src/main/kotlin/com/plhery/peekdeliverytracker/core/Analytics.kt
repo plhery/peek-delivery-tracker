@@ -29,11 +29,8 @@ data class AnalyticsCatalog(
             val action = body?.let(JsonSerialization::stringsOfObject)?.get("action") ?: return null
             return friendActions[action]
         }
-        // A Swift string's `.regularExpression` search is Swift Regex's, over characters: a letter or a slash with a
-        // combining mark is one character, which `[^/]` takes and no literal matches. The operations hold only ASCII
-        // literals and `[^/]`, so each character of several scalars stands as one none of them names.
-        val subject = path.characters().joinToString("") { if (it.codePointCount(0, it.length) > 1) "\uE000" else it }
-        return operations.firstOrNull { it.method == method && CatalogExpressions.foundationMatches(subject, it.path) }?.event
+        // The operations hold only ASCII literals and `[^/]`, searched as a Swift string is, over its Characters.
+        return operations.firstOrNull { it.method == method && CatalogExpressions.nativeMatches(path, it.path) }?.event
     }
 
     companion object {

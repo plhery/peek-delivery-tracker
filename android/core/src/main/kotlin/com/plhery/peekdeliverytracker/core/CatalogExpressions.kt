@@ -42,6 +42,9 @@ internal object CatalogExpressions {
             icu(endOfInput(pattern), icuDollar = false)
         }
 
+    /** A pattern as NSRegularExpression compiles it, ICU's `$` included. */
+    fun icuExpression(pattern: String): Pattern? = foundation(pattern)
+
     /** A pattern as Foundation's `replacingOccurrences(of:with:options: .regularExpression)` runs it, `$` included. */
     private fun foundation(pattern: String): Pattern? =
         compile(foundationPatterns, pattern, caseInsensitive = false) { icu(pattern, icuDollar = true) }
@@ -201,6 +204,24 @@ internal object CatalogExpressions {
 
     /** Foundation's `value.range(of: pattern, options: .regularExpression) != nil`, whose `$` is the end of the input. */
     fun foundationMatches(value: String, pattern: String): Boolean = matches(value, pattern)
+
+    /**
+     * `value.range(of: pattern, options: .regularExpression) != nil` on a native Swift String, which iOS 27 runs as a
+     * Swift Regex over Characters: a letter or a slash with a combining mark or a joiner is one character, which `.`
+     * and `[^/]` take whole and no ASCII literal equals, and CR LF is one line end, which `.` does not take. For
+     * patterns of ASCII literals, `.` and classes, each Character of several scalars stands as one none of them names.
+     */
+    fun nativeMatches(value: String, pattern: String): Boolean {
+        if (value.all { it.code < 0x80 && it != '\r' }) return matches(value, pattern)
+        val subject = value.characters().joinToString("") {
+            when {
+                it == "\r\n" -> "\n"
+                it.codePointCount(0, it.length) > 1 -> "\uE000"
+                else -> it
+            }
+        }
+        return matches(subject, pattern)
+    }
 
     /** Foundation's `value.replacingOccurrences(of: pattern, with: template, options: .regularExpression)`. */
     fun foundationReplacing(value: String, pattern: String, template: String): String =

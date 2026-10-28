@@ -93,11 +93,11 @@ class ExtensionLocalizerTests {
     /** Swift compares by Characters and canonical equivalence; these answers are the iPhone's, from its own code. */
     @Test
     fun languagesAndKeysAreComparedAsSwiftComparesThem() {
-        assertEquals("en", language(preferred = listOf("fr-́CA")))
+        assertEquals("en", language(preferred = listOf("fr-\u0301CA")))
         assertEquals("fr", language(preferred = listOf("-fr-CA")))
-        assertEquals("en", language(saved = "ṕl"))
+        assertEquals("en", language(saved = "p\u0301l"))
         val english = ExtensionLocalizer(languageCode = "en")
-        assertEquals(english.text("add.carrierKnownElsewhere"), english.text("add.carrierKnownElsewhere"))
-        assertEquals("missing.Key", english.text("missing.Key"))
+        assertEquals(english.text("add.carrierKnownElsewhere"), english.text("add.carrier\u212AnownElsewhere"))
+        assertEquals("missing.\u212Aey", english.text("missing.\u212Aey"))
     }
 }

@@ -163,12 +163,11 @@ enum class AppLanguage(val rawValue: String) {
          * The chosen language, the value saved under `storageKey`, else the first of the device's languages the app
          * speaks, else English. The device's languages are BCP 47 tags in the order it prefers them, all of
          * `LocaleList.getDefault()` as `Locale.preferredLanguages` gives them on iOS: a phone set to Dutch, then
-         * German, gets German.
+         * German, gets German. A tag is split on Characters, as Swift splits it: a hyphen carrying a combining mark
+         * splits nothing.
          */
         fun current(saved: String?, preferredLanguages: List<String>): AppLanguage {
-            val preferred = preferredLanguages.firstNotNullOfOrNull {
-                fromRawValue(it.split('-').firstOrNull { part -> part.isNotEmpty() }?.lowercase() ?: "")
-            }
+            val preferred = preferredLanguages.firstNotNullOfOrNull { fromRawValue(primaryLanguage(it)) }
             return saved?.let(::fromRawValue) ?: preferred ?: En
         }
     }
@@ -196,11 +195,15 @@ class Localizer(
             languageState.value = value
         }
 
-    /** The key's device variant, then its plural form for a `count`, then English, then the key itself. */
+    /**
+     * The key's device variant, then its plural form for a `count`, then English, then the key itself. Keys are found
+     * as a Swift Dictionary finds them, canonically, and a value is written and a count read as Swift describes and
+     * reads it (`Double(count.description)`): "1d" or " 1" is no count.
+     */
     fun text(key: String, variables: Map<String, Any> = emptyMap()): String {
         val messages = dictionaries[language.rawValue] ?: dictionaries["en"] ?: emptyMap()
-        val variantKey = variant?.let { if (messages["$key.$it"] != null) "$key.$it" else null } ?: key
-        val count = variables["count"]?.toString()?.toDoubleOrNull()
+        val variantKey = variant?.let { if (messages[canonical("$key.$it")] != null) "$key.$it" else null } ?: key
+        val count = variables["count"]?.let { swiftDouble(description(it)) }
         val category = if (count == 1.0) {
             "one"
         } else if (language == AppLanguage.Pl && count != null && count.isFinite() && count >= 0 &&
@@ -216,13 +219,16 @@ class Localizer(
         val baseKey = listOf("one", "few", "many").firstOrNull { variantKey.endsWith(".$it") }
             ?.let { variantKey.dropLast(it.length + 1) } ?: variantKey
         val pluralKey = "$baseKey.$category"
-        val selectedKey = if (category != "other" && messages[pluralKey] != null) pluralKey else variantKey
-        var result = messages[selectedKey] ?: dictionaries["en"]?.get(selectedKey) ?: variantKey
+        val selectedKey = if (category != "other" && messages[canonical(pluralKey)] != null) pluralKey else variantKey
+        var result = messages[canonical(selectedKey)] ?: dictionaries["en"]?.get(canonical(selectedKey)) ?: variantKey
         for ((name, value) in variables) {
-            result = result.replace("{{$name}}", value.toString())
+            result = result.replace("{{$name}}", description(value))
         }
         return result
     }
+
+    /** `CustomStringConvertible.description`: a Double as Swift writes it ("1e+16", "100000000.0"). */
+    private fun description(value: Any): String = if (value is Double) value.swiftDescription() else value.toString()
 
     /** What to tell someone about an error. A connection failure is an `IOException`, as OkHttp throws it. */
     fun errorMessage(error: Throwable): String {
@@ -262,21 +268,21 @@ class Localizer(
     }
 
     private fun serviceErrorMessage(message: String, fallback: String = "error.generic"): String {
-        val value = message.lowercase()
+        val value = message.lowercased()
         for ((pattern, key) in serviceErrorRules) {
-            if (pattern.containsMatchIn(value)) return text(key)
+            if (CatalogExpressions.nativeMatches(value, pattern)) return text(key)
         }
         return text(fallback)
     }
 
     fun eventDescription(description: String): String {
-        val event = trackingMessages.events[description] ?: return description
+        val event = trackingMessages.events[canonical(description)] ?: return description
         return text(event.key, event.variables)
     }
 
     fun trackingFailureMessage(error: String): String {
-        val kind = if (error.startsWith("carrier:")) error.removePrefix("carrier:") else ""
-        return text(trackingMessages.failures[kind] ?: "detail.trackingUnavailable")
+        val kind = if (error.hasCharacterPrefix("carrier:")) error.removePrefix("carrier:") else ""
+        return text(trackingMessages.failures[canonical(kind)] ?: "detail.trackingUnavailable")
     }
 
     fun deliveryWindow(from: String?, to: String, now: Instant = Instant.now()): String {
@@ -315,8 +321,8 @@ class Localizer(
     fun clockTime(date: Instant): String = format("HH:mm", date)
 
     fun expectedDelivery(value: String, now: Instant = Instant.now()): String {
-        val match = deliveryWindowPattern.matcher(value)
-        if (match.find()) {
+        val match = deliveryWindowPattern?.matcher(value)
+        if (match != null && match.find()) {
             val day = expectedDelivery(match.group(1), now)
             var window = match.group(2)
             match.group(3)?.let { window += "–$it" }
@@ -462,22 +468,29 @@ class Localizer(
         // A code no currency has, which ICU writes as it is.
         const val unknownCurrency = "QQQ"
 
+        /** A key as a Swift Dictionary holds it: canonically, here in NFC, which ASCII already is. */
+        fun canonical(key: String): String = if (key.all { it.code < 0x80 }) key else key.nfc()
+
         val dictionaries: Map<String, Map<String, String>> by lazy {
             runCatching {
                 Json.decodeFromString(
                     MapSerializer(String.serializer(), MapSerializer(String.serializer(), String.serializer())),
                     SharedResources.text("Localization.json"),
-                )
+                ).mapValues { (_, messages) -> messages.mapKeys { canonical(it.key) } }
             }.getOrElse { mapOf("en" to emptyMap()) }
         }
 
         val trackingMessages: TrackingMessages by lazy {
             runCatching {
-                Json { ignoreUnknownKeys = true }.decodeFromString(TrackingMessages.serializer(), SharedResources.text("TrackingMessages.json"))
+                val messages = Json { ignoreUnknownKeys = true }
+                    .decodeFromString(TrackingMessages.serializer(), SharedResources.text("TrackingMessages.json"))
+                // Carriers' own words, accents included, found as Swift finds them: canonically, so a decomposed é finds é.
+                TrackingMessages(messages.events.mapKeys { canonical(it.key) }, messages.failures.mapKeys { canonical(it.key) })
             }.getOrElse { TrackingMessages(emptyMap(), emptyMap()) }
         }
 
-        val serviceErrorRules: List<Pair<Regex, String>> = listOf(
+        // String's `.regularExpression` search, which iOS 27 runs as a Swift Regex over Characters (`nativeMatches`).
+        val serviceErrorRules: List<Pair<String, String>> = listOf(
             "rate.?limit|too many requests" to "error.rateLimited",
             "otp_expired|invalid.*(code|token)|(code|token).*expired" to "error.invalidCode",
             "email.*(invalid|valid)|invalid.*email" to "error.invalidEmail",
@@ -488,12 +501,12 @@ class Localizer(
             "tracking (number|input)|parcel number" to "error.trackingNumber",
             "80 characters|label.*long" to "error.nameTooLong",
             "package not found|parcel.*no longer" to "native.parcelMissing",
-        ).map { (pattern, key) -> Regex(pattern) to key }
-
-        val deliveryWindowPattern: Pattern = Pattern.compile(
-            "^(\\d{4}-\\d{2}-\\d{2})[ T]+(\\d{2}:\\d{2})(?:[–-](\\d{2}:\\d{2}))?$",
-            unicodeCharacterClass,
         )
+
+        // NSRegularExpression's, whose `\d` is any script's digit and whose `$` also matches before a final line end
+        // of any kind, a vertical tab or form feed included.
+        val deliveryWindowPattern: Pattern? =
+            CatalogExpressions.icuExpression("^(\\d{4}-\\d{2}-\\d{2})[ T]+(\\d{2}:\\d{2})(?:[–-](\\d{2}:\\d{2}))?$")
 
         val formatters = ConcurrentHashMap<String, DateTimeFormatter>()
         val dayPeriods = ConcurrentHashMap<AppLanguage, String>()

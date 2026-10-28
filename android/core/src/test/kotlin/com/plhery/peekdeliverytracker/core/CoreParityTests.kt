@@ -62,6 +62,57 @@ class CoreParityTests {
     }
 
     @Test
+    fun aLanguageTagIsSplitOnCharacters() {
+        assertEquals(AppLanguage.It, AppLanguage.current(null, listOf("fr-\u0301CA", "it-IT")))
+        assertEquals(AppLanguage.Fr, AppLanguage.current(null, listOf("-fr-CA")))
+    }
+
+    /**
+     * The copy as Localizer reads it on the iPhone: keys found canonically, a count read and a number written as Swift
+     * reads and writes them, a server's message searched over its Characters, and NSRegularExpression's `$`.
+     */
+    @Test
+    fun copyIsReadAsTheIphoneReadsIt() {
+        val english = Localizer(AppLanguage.En)
+        assertEquals("{{carrier}} knows this number.", english.text("add.carrier\u212AnownElsewhere"))
+        assertEquals("1e+16 d ago", english.text("time.daysAgo", mapOf("count" to 1e16)))
+        assertEquals("100000000.0 przesyłek", Localizer(AppLanguage.Pl).text("passport.parcels.many", mapOf("count" to 1e8)))
+        for (count in listOf(" 1", "1d")) {
+            assertEquals(count, "link.bring.add", english.text("link.bring.add", mapOf("count" to count)))
+        }
+        assertEquals("Add 1 parcel", english.text("link.bring.add", mapOf("count" to "0x1p0")))
+        assertEquals("Entrega cancelada", Localizer(AppLanguage.Es).eventDescription("Livraison annule\u0301e"))
+
+        val generic = "Something went wrong. Please try again."
+        val wait = "Please wait a moment before trying again."
+        for ((message, service) in listOf(
+            // A joiner or an accent makes another character of the letter before it; `.` never takes a line end.
+            "postcode\u200DHTTP 500" to generic,
+            "rate\u0301limit" to generic,
+            "complete \u000Clink" to generic,
+            "\r\ntoken \u000Cexpired" to generic,
+            "TOO MANY REQUESTS\u200DRATE_TRACKING LINK" to "Use the complete tracking link from your shipping email.",
+            "Rate-Limit exceeded" to wait,
+        )) {
+            assertEquals(message, service, english.errorMessage(DeliveryApiError.Service(message)))
+            val server = if (service == generic) "Couldn\u2019t sign you in. Check the code or request a new one." else service
+            assertEquals(message, server, english.errorMessage(AuthenticationError.Server(message)))
+        }
+
+        val now = DateParser.deliveryDate("2026-09-09")!!
+        for ((value, expected) in listOf(
+            "2026-09-10 14:00-16:00\u000B" to "tomorrow, 14:00\u201316:00",
+            "2026-09-10 14:00-16:00\u000C" to "tomorrow, 14:00\u201316:00",
+            "2026-09-10 14:00-16:00\r\n" to "tomorrow, 14:00\u201316:00",
+            "2026-09-10T14:00\u2028" to "tomorrow, 14:00",
+            "2026-09-10 14:00-16:00\n\n" to "tomorrow",
+            "2026-09-10 14:00-16:00 " to "tomorrow",
+        )) {
+            assertEquals(value, expected, english.expectedDelivery(value, now))
+        }
+    }
+
+    @Test
     fun aZeroWidthSpaceIsWhitespaceToFoundation() {
         assertEquals("AB 12", "\u200B\u2000AB 12\u200B\u200B".trimmingWhitespaces())
         assertEquals("AB", "\u200B\nAB\u200B\u2029".trimmingWhitespacesAndNewlines())

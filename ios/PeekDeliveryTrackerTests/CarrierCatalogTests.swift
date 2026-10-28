@@ -2183,6 +2183,11 @@ extension CarrierCatalogTests {
         XCTAssertFalse(CarrierCatalog.isValidSscc("00000000000000000017\n"))
         // S10 normalizes its own input, separators and the final line break included.
         XCTAssertTrue(CarrierCatalog.isValidS10("\u{FEFF}RR 473 124 829 CH\n"))
+        // A NO LIMIT shipment number drops its slashes; any other slash stays.
+        XCTAssertEqual(CarrierCatalog.normalize("p/1234/labc/2026"), "P1234LABC2026")
+        XCTAssertEqual(CarrierCatalog.normalize("P/1234/LABC2026"), "P1234LABC2026")
+        XCTAssertEqual(CarrierCatalog.normalize("P/1234/LABC/1999"), "P/1234/LABC/1999")
+        XCTAssertEqual(CarrierCatalog.normalize("AB/12"), "AB/12")
     }
 
     /// A label prints its SSCC behind the bracketed GS1 identifier; carriers track the twenty digits.

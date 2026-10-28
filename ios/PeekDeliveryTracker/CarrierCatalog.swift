@@ -1225,7 +1225,8 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
 
     /// Capitals without separators. A label prints its SSCC behind the bracketed GS1 identifier,
     /// "(00) 3 7012345 678901234 7", which carriers track as the twenty digits without brackets;
-    /// other bracketed identifiers stay as typed, since (420), for one, carries a ZIP.
+    /// other bracketed identifiers stay as typed, since (420), for one, carries a ZIP. A NO LIMIT
+    /// shipment number, P/1234/LABC/2026, reads the same without its slashes, which are dropped.
     static func normalize(_ raw: String) -> String {
         let value = raw.uppercased()
         guard let separators = expression(separatorPattern) else { return value }
@@ -1234,7 +1235,18 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             range: NSRange(value.startIndex..., in: value),
             withTemplate: ""
         )
-        return matches(compact, pattern: "^\\(00\\)[0-9]{18}$") ? "00" + compact.dropFirst(4) : compact
+        if matches(compact, pattern: "^\\(00\\)[0-9]{18}$") { return "00" + compact.dropFirst(4) }
+        if compact.contains("/"), let shipment = noLimitShipmentNumber(compact) { return shipment }
+        return compact
+    }
+
+    /// A NO LIMIT shipment number without its slashes (`noLimitShipmentNumber`): P and a serial,
+    /// L and the branch's three letters, and the year.
+    private static func noLimitShipmentNumber(_ value: String) -> String? {
+        guard let expression = expression("^P/?([0-9]{1,6})/?L([A-Z]{3})/?(20[0-9]{2})$"),
+              let match = expression.firstMatch(in: value, range: NSRange(value.startIndex..., in: value)) else { return nil }
+        let parts = (1...3).compactMap { Range(match.range(at: $0), in: value).map { String(value[$0]) } }
+        return parts.count == 3 ? "P\(parts[0])L\(parts[1])\(parts[2])" : nil
     }
 
     /// Six digits and nothing else, normalized: the code that opens a parcel locker or collects a parcel at a

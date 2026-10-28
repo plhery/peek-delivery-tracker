@@ -90,6 +90,21 @@ class PipArtworkTests {
     }
 
     @Test
+    fun beforeTheNewsHeJumpsAsAWholeJumpLater() {
+        // Pip.swift finds no key before a negative phase and traps; a time before the news draws as one a jump later.
+        val period = PipArtwork.period(PipMood.Joy)
+        for (t in sample(0.0, 2.2, 0.01) + listOf(1e-12, 0.12, 0.28, 0.58 * period)) {
+            for (before in listOf(-t, -t - period, -t - 50 * period)) {
+                val m = PipArtwork.motion(PipMood.Joy, before)
+                val expected = PipArtwork.motion(PipMood.Joy, before.mod(period))
+                for ((a, b) in listOf(m.a to expected.a, m.b to expected.b, m.c to expected.c, m.d to expected.d, m.tx to expected.tx, m.ty to expected.ty)) {
+                    assertEquals("$before", b, a, 1e-6)
+                }
+            }
+        }
+    }
+
+    @Test
     fun anEllipseIsCoreGraphicsFourCurves() {
         // The trace below writes :core's ellipses out as CoreGraphics makes them, as :app's renderer draws them.
         assertLines(golden.getValue("ellipse"), listOf("P ; " + elements(MapPath.ellipse(Rect(10.0, 20.0, 30.0, 8.0)))))

@@ -399,7 +399,9 @@ object PipArtwork {
                 up = 1.0
             }
             PipMood.Joy -> {
-                val phase = (time / period(PipMood.Joy)) % 1
+                // Within 0…1 for a time before the news too (the wall's clock set back while he held still), where the
+                // iPhone's remainder keeps the sign and finds no key before it.
+                val phase = ((time / period(PipMood.Joy)) % 1).let { if (it < 0) it + 1 else it }
                 val next = jump.indexOfFirst { it.at > phase }.let { if (it < 0) jump.size - 1 else it }
                 val from = jump[next - 1]
                 val to = jump[next]

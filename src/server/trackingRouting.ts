@@ -458,8 +458,13 @@ function latest(value: RoutedResult): number {
 // label can wait a month for the parcel, and an old delivery may be a parcel
 // looked up again. For a parcel filed under a specific carrier, so is a
 // universal history that ended a month before and names only other catalog carriers.
+// A number of eight characters or fewer that no carrier recognized recurs across
+// carriers and years, and a universal matches it to any of them: for such a parcel,
+// a history that reached a delivery or return a week before it was added is a stranger's.
 const OLD_LABEL_GAP = 90 * DAY;
 const OTHER_CARRIER_GAP = 30 * DAY;
+const SHORT_NUMBER_LENGTH = 8;
+const SHORT_NUMBER_GAP = 7 * DAY;
 /**
  * Shipping platforms a shop books other carriers through. A provider can name one beside the
  * parcel's carrier, or in its place, but no catalog entry or adapter of its own could track it.
@@ -504,8 +509,12 @@ function oldLabel(addedAt: unknown, ...results: (CarrierResult | undefined)[]): 
     && !results.some((result) => result && finished(result));
 }
 /** Whether a universal history is the number's earlier parcel, not the one filed under this carrier at this time. */
-export function foreignHistory(result: CarrierResult, carrier: string, addedAt: unknown): boolean {
+export function foreignHistory(result: CarrierResult, carrier: string, addedAt: unknown, number: string): boolean {
   if (oldLabel(addedAt, result)) return true;
+  if (carrier === 'unknown' && number.length <= SHORT_NUMBER_LENGTH && finished(result)) {
+    const newest = newestScan([result]);
+    return newest > 0 && newest < millis(addedAt) - SHORT_NUMBER_GAP;
+  }
   if (carrier === 'unknown' || carrier === 'intl-post') return false;
   const names = Array.isArray(result.reported_carriers)
     ? result.reported_carriers.filter((name): name is string => typeof name === 'string') : [];
@@ -1384,7 +1393,7 @@ export class TrackingRouter {
       const prefetched = prefetchedUniversal.get(source) ?? this.options.takePrefetchedUniversal?.(source, universalNumber, providerPostcode);
       if (prefetched) {
         const result = withoutWrittenAhead(normalizeCarrierResult(prefetched), writtenAhead);
-        if (result && usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at)) {
+        if (result && usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at, universalNumber)) {
           delete state.failures[source];
           return { result: { ...result, tracking_provider: source }, sourceCarrierId: 'unknown', swissPostReady: null, handoffFallbackErrorType: null };
         }
@@ -1427,7 +1436,7 @@ export class TrackingRouter {
           Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier))), writtenAhead);
         if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier wrote ahead`);
         if (!usable(result)) throw new TypeError('No usable universal progress');
-        if (foreignHistory(result, universalCarrier, parcel.created_at)) {
+        if (foreignHistory(result, universalCarrier, parcel.created_at, universalNumber)) {
           report('foreign_history_rejected', source);
           throw new IndeterminateError(source, `${source} returned an older parcel for this number`);
         }

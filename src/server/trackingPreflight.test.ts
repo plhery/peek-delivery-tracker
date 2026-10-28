@@ -38,6 +38,15 @@ it('takes a reused number\'s old label as no history, naming no carrier', async 
   expect(await preflightTracking('1234500024', health())).toEqual({ providers: [{ provider: 'Ship24', outcome: 'no_history' }, { provider: 'ParcelsApp', outcome: 'no_history' }] });
   expect(takePreflightHistory('ParcelsApp', '1234500024', null)).toBeUndefined();
 });
+it('takes a stranger\'s delivery a provider matched to a short number as no history, naming no carrier', async () => {
+  vi.useFakeTimers({ now: new Date('2026-10-20T17:48:00Z'), toFake: ['Date'] });
+  vi.spyOn(UniversalTracker.prototype, 'fetchSource').mockImplementation(async (source) => {
+    if (source === 'ParcelsApp') throw new NotFoundError(source);
+    return { ...history, reported_carriers: ['Example Global Mail'] };
+  });
+  expect(await preflightTracking('1234024', health())).toMatchObject({ providers: expect.arrayContaining([{ provider: 'Ship24', outcome: 'no_history' }]) });
+  expect(takePreflightHistory('Ship24', '1234024', null)).toBeUndefined();
+});
 it('keeps input requirements actionable without opening the provider circuit', async () => {
   vi.spyOn(UniversalTracker.prototype, 'fetchSource').mockImplementation(async (source) => {
     if (source === 'ParcelsApp') throw new InputRequiredError(source, 'postcode');

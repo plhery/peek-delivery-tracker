@@ -100,7 +100,7 @@ async function lookup(number: string, health: ProviderHealth, signal: AbortSigna
         kind = 'not_found'; return { provider, outcome: 'no_history' };
       }
       // A reused number's earlier parcel is no history for the one being added, as on a sync.
-      if (foreignHistory(result, 'unknown', new Date().toISOString())) { kind = 'not_found'; return { provider, outcome: 'no_history' }; }
+      if (foreignHistory(result, 'unknown', new Date().toISOString(), number)) { kind = 'not_found'; return { provider, outcome: 'no_history' }; }
       remember(state.histories, `${provider}:${number}`, { at: Date.now(), result: structuredClone(result) });
       // A carrier whose adapter refuses the number does not identify it, as on a sync.
       const named = providerCarrier(result, number);

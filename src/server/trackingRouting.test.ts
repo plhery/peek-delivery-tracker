@@ -2124,6 +2124,38 @@ describe('persistent tracking routing', () => {
     expect(result.result.routing).toMatchObject({ failures: { ParcelsApp: { kind: 'no_history' } } });
     expect(vi.mocked(monitoring.reportRoutingEvent)).toHaveBeenCalledWith('foreign_history_rejected', expect.objectContaining({ provider: 'ParcelsApp' }));
   });
+  describe('a universal\'s delivery for a short number no carrier recognized', () => {
+    // Short numbers recur across carriers: a stranger's parcel, delivered weeks before the reader added the number.
+    const delivered = (): CarrierResult => ({ status: 'delivered', current_stage: 'delivered', last_update: '2026-08-15T15:00:00Z',
+      reported_carriers: ['Example Global Mail'], events: [{ time: '2026-08-10T09:00:00Z', description: 'Accepted', stage: 'accepted' },
+        { time: '2026-08-15T15:00:00Z', description: 'Delivered', stage: 'delivered' }] });
+
+    it('is no history for the parcel, and the next provider is asked', async () => {
+      fixedPlan('Ship24', 'ParcelsApp');
+      const { router, universal } = setup();
+      universal.mockResolvedValueOnce(delivered());
+      universal.mockResolvedValueOnce(history());
+      const result = await router.fetch(parcel({ tracking_number: '1234567', created_at: '2026-09-01T00:00:00Z' }), false);
+      expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24', 'ParcelsApp']);
+      expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', last_update: '2026-09-10T11:00:00Z' });
+      expect(result.result.routing).toMatchObject({ failures: { Ship24: { kind: 'no_history' } } });
+      expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('foreign_history_rejected', expect.objectContaining({ provider: 'Ship24' }));
+    });
+
+    it.each([
+      ['added within a week of the delivery', { tracking_number: '1234567', created_at: '2026-08-20T00:00:00Z' }],
+      ['with a longer number', { tracking_number: '123456789', created_at: '2026-09-01T00:00:00Z' }],
+      ['filed under a carrier the answer names', { carrier: 'happy-post', tracking_number: '1234567', created_at: '2026-09-01T00:00:00Z' }],
+    ])('serves a parcel %s', async (_label, overrides) => {
+      fixedPlan('Ship24', 'ParcelsApp');
+      const { router, direct, universal } = setup();
+      direct.mockRejectedValue(new NotFoundError('Happy-Post'));
+      universal.mockResolvedValueOnce({ ...delivered(), reported_carriers: ['Happy-Post'] });
+      const result = await router.fetch(parcel(overrides), false);
+      expect(result.result).toMatchObject({ tracking_provider: 'Ship24', current_stage: 'delivered' });
+      expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('foreign_history_rejected', expect.anything());
+    });
+  });
   describe('the filed carrier\'s own answer for a reused number', () => {
     // Happy-Post's tracker dates its steps on wall clocks in no zone; the number and steps are invented.
     const filed = parcel({ carrier: 'happy-post', tracking_number: '12345678', created_at: '2026-09-01T00:00:00Z' });

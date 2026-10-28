@@ -60,6 +60,7 @@
 import { createHash } from 'node:crypto';
 import { DateTime, FixedOffsetZone } from 'luxon';
 import { eventTimestamp, sameInstantIdentityPolicy, trackingPlace, type SameInstantIdentityPolicy, type SameInstantScan } from 'universal-parcel-scraper/app';
+import { locatePlace } from 'universal-parcel-scraper/places';
 import { isRecord, type JsonObject } from './types';
 
 /**
@@ -630,6 +631,35 @@ export function placesConflict(left: readonly string[], right: readonly string[]
   return left.length > 0 && right.length > 0 && !left.some((word) => right.includes(word));
 }
 
+/** Each place's town, by the gazetteer's coordinates: one key for every spelling it knows ("Warsaw", "Warszawa"). */
+const towns = new Map<string, string | null>();
+
+function townOf(row: JsonObject): string | null {
+  const location = String(row.location ?? '').trim();
+  if (location === '') return null;
+  let town = towns.get(location);
+  if (town === undefined) {
+    let place = null;
+    try {
+      place = locatePlace(location);
+    } catch { /* A place the gazetteer cannot read is in no known town. */ }
+    town = place?.precision === 'city' ? `${place.country} ${place.latitude} ${place.longitude}` : null;
+    if (towns.size >= 10_000) towns.clear();
+    towns.set(location, town);
+  }
+  return town;
+}
+
+/**
+ * Two scans' places that conflict (`placesConflict`), unless the gazetteer finds both in one
+ * town: ParcelsApp's English for Poczta Polska's "Sortownia Warszawa" names no other place.
+ */
+function placesApart(row: JsonObject, other: JsonObject): boolean {
+  if (!placesConflict(placeWords(row), placeWords(other))) return false;
+  const town = townOf(row);
+  return town === null || town !== townOf(other);
+}
+
 /**
  * A provider's copy that shows a carrier's scan on the scan's wall clock under another offset, to
  * the minute, in any wording (ParcelsApp gave Maersk eCommerce's US scans their wall clock as UTC,
@@ -638,7 +668,7 @@ export function placesConflict(left: readonly string[], right: readonly string[]
 function readsWallClock(copy: JsonObject, scan: JsonObject): boolean {
   const [shown, own] = [labelledTime(copy), labelledTime(scan)];
   return shown !== null && own !== null && shown.offset !== own.offset && shown.toFormat(MINUTE_CLOCK) === own.toFormat(MINUTE_CLOCK)
-    && stagesAgree(stageOf(copy), stageOf(scan)) && codesAgree(copy, scan) && !placesConflict(placeWords(copy), placeWords(scan));
+    && stagesAgree(stageOf(copy), stageOf(scan)) && codesAgree(copy, scan) && !placesApart(copy, scan);
 }
 
 /**
@@ -661,7 +691,7 @@ function minuteClock(row: JsonObject): boolean {
 
 /** Another provider's row that can name a scan: stages that agree, places that do not conflict. */
 function alike(scan: JsonObject, row: JsonObject): boolean {
-  return stagesAgree(stageOf(scan), stageOf(row)) && !placesConflict(placeWords(scan), placeWords(row));
+  return stagesAgree(stageOf(scan), stageOf(row)) && !placesApart(scan, row);
 }
 
 /**
@@ -715,7 +745,7 @@ function heldByCarrier(row: JsonObject): boolean {
  * whatever stage it reads the scan (17TRACK's exception for UPS's out for delivery).
  */
 function copies(scan: JsonObject, row: JsonObject): boolean {
-  return instantOf(scan) === instantOf(row) && stageOf(scan) !== '' && !placesConflict(placeWords(scan), placeWords(row));
+  return instantOf(scan) === instantOf(row) && stageOf(scan) !== '' && !placesApart(scan, row);
 }
 
 /** How much later a source may restate one of its scans: a correction of the scan's time, not the next round of scans. */
@@ -954,20 +984,19 @@ export function sharedScans(
     const eligible = universal ? rows : rows.filter((row) => sourceOf(identity(row)) === UNIVERSAL);
     const exact = eligible.filter((row) => instantOf(row) === at);
     const worded = exact.filter((row) => sameWording(wordingOf(row), wording));
-    const place = placeWords(event);
     const truncated = occupied.has(at) ? [] : eligible.filter((row) => sameTruncated(at, instantOf(row)) && !shown.has(instantOf(row)));
     const minuted = truncated.filter((row) => sameWording(wordingOf(row), wording));
     // Other wording, and any stage, only for a provider's copy and a carrier's scan, one of them to the minute,
     // or both in one second (ParcelsApp's whole second of CTT Express's milliseconds).
     // An earlier carrier's relay of a delivery scan (India Post's to the minute, Nova Poshta's) is no such pair.
     const restaged = stageOf(event) === '' ? [] : truncated.filter((row) => {
-      if ((sourceOf(identity(row)) === UNIVERSAL) === universal || placesConflict(place, placeWords(row))) return false;
+      if ((sourceOf(identity(row)) === UNIVERSAL) === universal || placesApart(event, row)) return false;
       const [copy, own] = universal ? [event, row] : [row, event];
       const second = (at: number) => Math.floor(at / 1_000);
       return instantOf(copy) % MINUTE_MS === 0 || (sourceOf(identity(own)) !== relaying
         && (instantOf(own) % MINUTE_MS === 0 || second(instantOf(copy)) === second(instantOf(own))));
     });
-    const apart = occupied.has(at) ? [] : eligible.filter((row) => !shown.has(instantOf(row)) && !placesConflict(place, placeWords(row)));
+    const apart = occupied.has(at) ? [] : eligible.filter((row) => !shown.has(instantOf(row)) && !placesApart(event, row));
     const zoned = apart.filter((row) => zoneApart(at, instantOf(row)));
     const paired = (row: JsonObject) => (sourceOf(identity(row)) === UNIVERSAL) !== universal;
     const shifted = apart.filter((row) => sameWording(wordingOf(row), wording) && (zoneApart(at, instantOf(row))
@@ -1001,7 +1030,7 @@ export function sharedScans(
     // The provider's own row of a scan it gave in words no release classified then, which a fix now reads as a stage
     // (ParcelsApp's Russian Post delivery): the row takes it rather than staying pending beside the parcel's stage.
     const classified = instantOf(scan) === instantOf(row) && followsClock(row, scan) && stageOf(row) === 'pending'
-      && !['', 'pending'].includes(stageOf(scan)) && !placesConflict(placeWords(scan), placeWords(row));
+      && !['', 'pending'].includes(stageOf(scan)) && !placesApart(scan, row);
     if (sourceOf(id) !== UNIVERSAL || (offset && followsClock(row, scan)) || restated || classified) shared.reused.set(id, rowId);
     else shared.skipped.set(id, rowId);
     if (offset && !restated && !dayAlone(row) && !dayAlone(scan)) shared.shifted.add(id);
@@ -1087,7 +1116,7 @@ export function sharedScans(
     if (sourceOf(id) !== UNIVERSAL || providerOf(row) === '' || claimed.has(id) || shown.has(instantOf(row))) continue;
     const answer = events.filter((event) => followsClock(row, event));
     const copy = answer.find((event) => holders.has(identity(event)) && zoneApart(instantOf(event), instantOf(row))
-      && sameWording(wordingOf(event), wordingOf(row)) && !placesConflict(placeWords(event), placeWords(row)));
+      && sameWording(wordingOf(event), wordingOf(row)) && !placesApart(event, row));
     if (copy && answer.some((event) => event !== copy && instantOf(event) < instantOf(row))) shared.absorbed.add(id);
   }
   // A provider's copy of a carrier's row stored before a fix read the provider's clock right goes,
@@ -1247,7 +1276,7 @@ export function withStatedClocks(events: readonly JsonObject[], stored: readonly
     const wall = deducedClock(event);
     if (!wall || ['', 'app', UNIVERSAL].includes(sourceOf(identity(event))) || observedOnly(event)) return event;
     const offsets = new Set(stated.filter(({ row, clock }) => clock.toFormat(MINUTE_CLOCK) === wall
-      && sameWording(wordingOf(row), wordingOf(event)) && !placesConflict(placeWords(row), placeWords(event)))
+      && sameWording(wordingOf(row), wordingOf(event)) && !placesApart(row, event))
       .map(({ clock }) => clock.offset));
     if (offsets.size !== 1) return event;
     const time = DateTime.fromISO(localTimeOf(event), { zone: FixedOffsetZone.instance([...offsets][0]!) });

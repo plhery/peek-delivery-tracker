@@ -1053,6 +1053,18 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(sharedScans([copy], [own, { ...own, provider_event_id: 'shiprocket:sorted', description: 'Sorted' }]).skipped.size).toBe(0);
   });
 
+  it('matches a provider\'s copy to the minute that names the carrier\'s place in another language, whichever arrives first', () => {
+    // Poczta Polska keeps seconds and words its scans in Polish; ParcelsApp keeps the minute and translates both.
+    const own = { ...row('poczta-polska:sent', '2026-10-24T00:58:46+00:00', 'Wysłano z Polski', 'in_transit'), location: 'Sortownia Warszawa' };
+    const copy = { ...scan('unknown:sent', '2026-10-24T00:58:00Z', 'Sending the package from Poland', 'in_transit'), location: 'Warsaw Sorting Centre' };
+    expect(pairs(sharedScans([copy], [own]).skipped)).toEqual([['unknown:sent', 'poczta-polska:sent']]);
+    const early = sharedScans([{ ...scan('poczta-polska:sent', '2026-10-24T00:58:46Z', own.description, 'in_transit'), location: own.location }],
+      [{ ...row('unknown:sent', '2026-10-24T00:58:00+00:00', copy.description, 'in_transit'), location: copy.location }]);
+    expect(pairs(early.reused)).toEqual([['poczta-polska:sent', 'unknown:sent']]);
+    // Another town is another place.
+    expect(sharedScans([{ ...copy, location: 'Krakow Sorting Centre' }], [own]).skipped.size).toBe(0);
+  });
+
   it('matches other wording in the second the other scan falls in, one of them to the whole second, whichever arrives first', () => {
     // CTT Express keeps milliseconds; ParcelsApp keeps the whole second and words the scan its own way, unclassified.
     const at = { location: 'Example Customs Centre' };

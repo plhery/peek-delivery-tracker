@@ -13,8 +13,16 @@ const val PHONE = "w390dp-h844dp-xhdpi"
 /** The tag of the part of the screen a screenshot keeps, so each PNG holds only what it shows. */
 const val SHOT = "shot"
 
-/** No pixel may differ beyond Roborazzi's colour tolerance from the baseline. */
-val screenshotOptions = RoborazziOptions(compareOptions = RoborazziOptions.CompareOptions(changeThreshold = 0f))
+/**
+ * At most a thousandth of a shot's pixels may differ from the baseline beyond Roborazzi's colour tolerance. The
+ * baselines are recorded on a Mac (arm64) and checked on Linux CI (x86-64), whose builds of Robolectric's native
+ * graphics round anti-aliased edges and blurs slightly differently. A thousandth is less than any change the shots
+ * check: a one-pixel line across the tallest shot (796 px) is 1/796 of it.
+ *
+ * Robolectric's Roboto has no 600 or 800 weight: semibold text shows as Medium (500), a little lighter and narrower
+ * than on a phone, and heavy as Black (900).
+ */
+val screenshotOptions = RoborazziOptions(compareOptions = RoborazziOptions.CompareOptions(changeThreshold = 0.001f))
 
 /**
  * The node tagged [SHOT], saved as src/test/snapshots/[name].png: recorded with recordRoborazziDebug, checked with

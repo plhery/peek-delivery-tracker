@@ -5,11 +5,16 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.isUnspecified
+import androidx.compose.ui.unit.sp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertThrows
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -111,5 +116,48 @@ class TypographyTest {
     fun monospacedDigitsAskForTabularFigures() {
         assertEquals("tnum", TextStyle().monospacedDigit().fontFeatureSettings)
         assertEquals("smcp, tnum", TextStyle(fontFeatureSettings = "smcp").monospacedDigit().fontFeatureSettings)
+    }
+
+    @Test
+    fun letterSpacingGivesRobotoSFsWidths() {
+        // Body and headline at Large: 17 points, regular and semibold.
+        assertEquals(0.0035f, SfWidths.em(17f, FontWeight.Normal), 1e-6f)
+        assertEquals(0.0179f, SfWidths.em(17f, FontWeight.SemiBold), 1e-6f)
+        assertEquals(-0.0091f, SfWidths.em(17f, FontWeight.Normal, SfWidths.Design.Rounded), 1e-6f)
+        // Between sizes and between weights, a straight line.
+        assertEquals((0.0035f - 0.0001f) / 2, SfWidths.em(18f, FontWeight.Normal), 1e-6f)
+        assertEquals((0.0035f + 0.0112f) / 2, SfWidths.em(17f, FontWeight(450)), 1e-6f)
+        // Past the ends, the end rows and columns.
+        assertEquals(SfWidths.em(6f, FontWeight.Normal), SfWidths.em(4f, FontWeight.Normal))
+        assertEquals(SfWidths.em(80f, FontWeight.Bold), SfWidths.em(120f, FontWeight.Bold))
+        assertEquals(SfWidths.em(17f, FontWeight.Black), SfWidths.em(17f, FontWeight(1000)))
+        assertEquals(SfWidths.em(17f, FontWeight.Thin), SfWidths.em(17f, FontWeight(1)))
+
+        val type = PeekTypography(DynamicTypeSize.Large, Density(2f, fontScale = 1.3f))
+        assertEquals(0.0035f, type.body.letterSpacing.value, 1e-6f)
+        assertTrue(type.body.letterSpacing.isEm)
+        assertEquals(SfWidths.em(13f, FontWeight.Medium, SfWidths.Design.Rounded), type.fixed(13f, FontWeight.Medium, FontDesign.Rounded).letterSpacing.value)
+        // Serif and monospaced text keeps its own font's widths.
+        assertTrue(type.style(IosTextStyle.Body, design = FontDesign.Serif).letterSpacing.isUnspecified)
+        assertTrue(type.style(IosTextStyle.Body, design = FontDesign.Monospaced).letterSpacing.isUnspecified)
+    }
+
+    @Test
+    fun trackingAddsPointsOnTopOfTheFontsOwnSpacing() {
+        // At a font scale whose sp aren't dp, as Android 14's nonlinear scaling gives.
+        val type = PeekTypography(DynamicTypeSize.Large, Density(2f, fontScale = 1.3f))
+        assertEquals((0.0035f + 1.7f / 17).toDouble(), type.tracking(type.body, 1.7f).letterSpacing.value.toDouble(), 1e-6)
+        val serif = type.style(IosTextStyle.Body, design = FontDesign.Serif)
+        assertEquals((-0.5f / 17).toDouble(), type.tracking(serif, -0.5f).letterSpacing.value.toDouble(), 1e-6)
+        assertThrows(IllegalArgumentException::class.java) { type.tracking(TextStyle(fontSize = 17.sp, letterSpacing = 1.sp), 1f) }
+    }
+
+    @Test
+    fun italicKeepsTheUprightsSpacing() {
+        val body = PeekTypography(DynamicTypeSize.Large, Density(2f)).body
+        val italic = body.italic()
+        assertEquals(FontStyle.Italic, italic.fontStyle)
+        assertEquals(body.letterSpacing, italic.letterSpacing)
+        assertEquals(body.fontWeight, italic.fontWeight)
     }
 }

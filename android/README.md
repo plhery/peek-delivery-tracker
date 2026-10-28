@@ -7,8 +7,9 @@ the files `:core` reads, synced from `ios/PeekDeliveryTracker/Resources` along w
 ## App tests and screenshots
 
 `./gradlew :app:testDebugUnitTest` runs the app's tests on the JVM with Robolectric. The design system's screenshots
-are kept in `app/src/test/snapshots`: `./gradlew :app:verifyRoborazziDebug` fails on any pixel that differs, and
-`./gradlew :app:recordRoborazziDebug` records them again after a change meant to show.
+are kept in `app/src/test/snapshots`: `./gradlew :app:verifyRoborazziDebug` fails when more than a thousandth of a
+shot's pixels differ (see `Screenshots.kt`), and `./gradlew :app:recordRoborazziDebug` records them again after a
+change meant to show.
 
 ## Core tests on a device
 

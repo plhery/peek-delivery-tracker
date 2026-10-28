@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.plhery.peekdeliverytracker.core.AdaptiveColor
 import com.plhery.peekdeliverytracker.core.AffineTransform
@@ -35,6 +36,7 @@ import com.plhery.peekdeliverytracker.core.MapDrawing
 import com.plhery.peekdeliverytracker.core.MapFont
 import com.plhery.peekdeliverytracker.core.MapPath
 import com.plhery.peekdeliverytracker.core.StrokeStyle
+import com.plhery.peekdeliverytracker.ui.theme.SfWidths
 import com.plhery.peekdeliverytracker.ui.theme.toColor
 import kotlin.math.PI
 import kotlin.math.abs
@@ -266,7 +268,8 @@ private class MapDrawingPainter(val dark: Boolean, val highContrast: Boolean, va
      */
     fun text(scope: DrawScope, step: MapDrawing.Text, opacity: Double) {
         val layout = measure(step.text, step.font, color(step.color, opacity), step.tracking)
-        scope.drawText(layout, topLeft = Offset(step.at.x.toFloat(), step.at.y.toFloat() - layout.size.height / 2f))
+        val x = step.at.x.toFloat() - trackingLead(step.tracking)
+        scope.drawText(layout, topLeft = Offset(x, step.at.y.toFloat() - layout.size.height / 2f))
     }
 
     /** A line from the start of its baseline, squeezed across into its room when it is wider. */
@@ -276,29 +279,42 @@ private class MapDrawingPainter(val dark: Boolean, val highContrast: Boolean, va
         val squeeze = if (width > step.room) (step.room / width).toFloat() else 1f
         scope.translate(step.start.x.toFloat(), step.start.y.toFloat() - layout.firstBaseline) {
             scale(squeeze, 1f, pivot = Offset.Zero) {
-                drawText(layout, topLeft = Offset.Zero)
+                drawText(layout, topLeft = Offset(-trackingLead(step.tracking), 0f))
             }
         }
     }
 
-    /** One line of text in `font`, one sp to one unit of the drawing. */
+    /**
+     * One line of text in `font`, one sp to one unit of the drawing, as wide as SF's ([SfWidths]) plus the step's
+     * tracking after each character.
+     */
     private fun measure(text: String, font: MapFont, color: Color, tracking: Double): TextLayoutResult {
         val measurer = requireNotNull(textMeasurer) { "A text step needs a TextMeasurer" }
+        val weight = when (font.weight) {
+            MapFont.Weight.Regular -> FontWeight.Normal
+            MapFont.Weight.Medium -> FontWeight.Medium
+            MapFont.Weight.Semibold -> FontWeight.SemiBold
+            MapFont.Weight.Heavy -> FontWeight.ExtraBold
+        }
+        val size = font.size.toFloat()
+        val sfSpacing = if (font.monospaced) 0f else SfWidths.em(size, weight)
         val style = TextStyle(
             color = color,
-            fontSize = font.size.sp,
-            fontWeight = when (font.weight) {
-                MapFont.Weight.Regular -> FontWeight.Normal
-                MapFont.Weight.Medium -> FontWeight.Medium
-                MapFont.Weight.Semibold -> FontWeight.SemiBold
-                MapFont.Weight.Heavy -> FontWeight.ExtraBold
-            },
+            fontSize = size.sp,
+            fontWeight = weight,
             fontStyle = if (font.italic) FontStyle.Italic else FontStyle.Normal,
             fontFamily = if (font.monospaced) FontFamily.Monospace else null,
-            letterSpacing = tracking.sp,
+            letterSpacing = if (size > 0) (sfSpacing + tracking.toFloat() / size).em else 0.sp,
         )
         return measurer.measure(text, style, overflow = TextOverflow.Visible, softWrap = false, maxLines = 1, density = UNIT_DENSITY)
     }
+
+    /**
+     * How far Android sets the first character in for `tracking`: it puts half of each character's letter spacing
+     * before it, where CoreText adds tracking after each character, so the text is drawn this much earlier to start
+     * where the iPhone's does.
+     */
+    private fun trackingLead(tracking: Double): Float = tracking.toFloat() / 2
 
     companion object {
         /** One sp to one unit of the drawing, so text keeps the size the drawing gives it. */

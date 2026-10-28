@@ -30,7 +30,9 @@ enum class DynamicTypeSize {
          * Where each category starts on Android's font scale (Large is the default 1.0). Each bound lies halfway
          * between the two body sizes it separates (14, 15, 16, 17, 19, 21, 23, 28, 33, 40, 47, 53 points, over 17),
          * except xLarge at 1.1 and accessibility1 at 1.5, ScootRadar's switches (UI-134). A Pixel's steps land on
-         * xSmall (0.85), Large (1.0), xLarge (1.15), xxxLarge (1.3), accessibility1 (1.5) and accessibility2 (1.8, 2.0).
+         * xSmall (0.85), Large (1.0), xLarge (1.15), xxxLarge (1.3), accessibility1 (1.5) and accessibility2 (1.8, 2.0):
+         * Android's two largest steps both read as accessibility2, its 2.0 falling short of accessibility3's 2.15, so
+         * accessibility3 to 5 never occur and what iOS changes only from accessibility3 stays as at accessibility2.
          */
         private val lowerBounds = floatArrayOf(
             14.5f / 17,

@@ -73,7 +73,7 @@ Peek reads Pengyou's own tracker and shows the status, each scan with its place,
 
 Peek never shows a step written more than twelve hours before the time it carries, and holds back any step dated after the moment it checks, on Beijing time. It also sets aside the copies tracking services make of those steps, and goes by the scans it keeps, not by the record's summary status. An order whose steps are all written ahead has no history in Peek yet.
 
-Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Pengyou or the seller for you.
+Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact Pengyou or the seller for you.
 
 ## Questions about Pengyou tracking
 

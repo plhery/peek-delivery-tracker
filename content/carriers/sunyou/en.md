@@ -90,7 +90,7 @@ SunYou's lines show in English whatever your language, except exact matches such
 
 When SunYou gives the local carrier's number, Peek can ask that carrier (Royal Mail, DHL in Germany, Canada Post, USPS or the national post, for example) and switch to it once it shows newer progress. The parcel keeps its SunYou number, its page says "Delivery with" that carrier and lists the carrier's own number with a link. This doesn't happen for every parcel: [Meest](carrier:meest) in Greece, for one, isn't followed.
 
-It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact SunYou or the seller for you.
+It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact SunYou or the seller for you.
 
 ## Questions about SunYou tracking
 

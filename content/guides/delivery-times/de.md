@@ -87,7 +87,7 @@ DHL stellt innerhalb Deutschlands in der Regel 1 bis 2 Werktage nach dem Versand
 
 Lag eine Benachrichtigung im Briefkasten, weil du nicht da warst? Dann hilft [Paket verpasst: Was tun?](guide:missed-delivery). Kommt tagelang kein neuer Scan, lies [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-Peek fragt bei Paketdiensten, die es direkt abruft, alle 2 Minuten nach, sobald ein Paket in Zustellung ist, und schickt dir mit „Nur am Liefertag“ eine Mitteilung, wenn es in Zustellung geht und wenn es ankommt. So musst du nicht ständig neu laden.
+Peek fragt bei Paketdiensten, die es direkt abruft, alle 2 Minuten nach, sobald ein Paket in Zustellung ist, und schickt dir mit der Einstellung „Nur die Zustellung“ eine Mitteilung, wenn es in Zustellung geht und wenn es ankommt. So musst du nicht ständig neu laden.
 
 ## Liefern Paketdienste an Feiertagen?
 

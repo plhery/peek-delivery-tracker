@@ -89,7 +89,7 @@ Las líneas de SunYou aparecen en inglés, sea cual sea tu idioma, salvo coincid
 
 Cuando SunYou da el número del transportista local, Peek puede preguntar a esa empresa y cambiar a sus datos cuando muestran un avance más reciente. Con un número postal que va a España, esa empresa es Correos. El paquete conserva su número de SunYou; su página dice «Entrega con» esa empresa y muestra su número con un enlace a su seguimiento. No pasa con todos los paquetes.
 
-Peek consulta cada 10 minutos de día, cada 2 minutos cuando el paquete va en reparto y cada una o dos horas por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o «Solo el día de entrega». No puede contactar con SunYou ni con la tienda por ti.
+Peek consulta cada 10 minutos de día, cada 2 minutos cuando el paquete va en reparto y cada una o dos horas por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o «Solo la entrega». No puede contactar con SunYou ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de SunYou
 

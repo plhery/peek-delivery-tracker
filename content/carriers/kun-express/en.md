@@ -88,7 +88,7 @@ Peek reads Kun Express's own tracking every 10 minutes by day, every 2 minutes o
 
 Peek can't hand the parcel over to USPS: Kun Express's record names neither the delivery carrier nor the USPS number, so the parcel page doesn't say "Delivery with USPS", and the history goes only as far as Kun Express has copied it. If the seller gave you the USPS number too, add it as its own parcel and Peek follows it with USPS.
 
-Peek can notify you of every scan, important steps only or "Delivery day only". It can't contact Kun Express or the seller for you.
+Peek can notify you of every scan, important steps only or "Delivery only". It can't contact Kun Express or the seller for you.
 
 ## Questions about Kun Express tracking
 

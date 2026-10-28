@@ -106,7 +106,7 @@ Pas encore envoyé et la date est passée ? Un service plus rapide ferme souvent
 - Toujours bloqué après Noël ? | Lis [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
 :::
 
-Tu attends un cadeau ? Colle son numéro dans [Peek](/) et choisis les notifications « Jour de livraison uniquement » : il vérifie le suivi jusqu'à toutes les 2 minutes une fois le colis en cours de livraison, sans pouvoir le faire arriver plus tôt. Indiqué livré, mais rien à ta porte ? Lis [colis livré mais non reçu](guide:delivered-not-received).
+Tu attends un cadeau ? Colle son numéro dans [Peek](/) et choisis les notifications « Livraison seulement » : il vérifie le suivi jusqu'à toutes les 2 minutes une fois le colis en cours de livraison, sans pouvoir le faire arriver plus tôt. Indiqué livré, mais rien à ta porte ? Lis [colis livré mais non reçu](guide:delivered-not-received).
 
 :::sources
 - [Mondial Relay Belgique : Délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours en France et en Belgique, sans prolongation

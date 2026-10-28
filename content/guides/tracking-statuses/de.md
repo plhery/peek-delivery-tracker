@@ -77,7 +77,7 @@ Meistens, ja:
 
 Zwei Stolperfallen: `Sendung in Verteilung` heißt bei der Österreichischen Post noch nicht heute, sondern im Laufe der nächsten Werktage. Und taucht bei DHL der Status mit dem Zustellfahrzeug mehrmals auf, konnte der Zusteller seine Tour nicht beenden, etwa wegen einer Straßensperrung oder eines Unfalls: Dann kann es 1 bis 2 Tage länger dauern.
 
-[Peek](/) prüft bis zu alle 2 Minuten, sobald ein Paket in Zustellung ist, sonst bis zu alle 10 Minuten. Seine Mitteilungen kannst du auf „Nur am Liefertag“ stellen.
+[Peek](/) prüft bis zu alle 2 Minuten, sobald ein Paket in Zustellung ist, sonst bis zu alle 10 Minuten. Seine Mitteilungen kannst du auf „Nur die Zustellung“ stellen.
 
 ## Zustellversuch verpasst, Karte im Briefkasten: Was jetzt?
 

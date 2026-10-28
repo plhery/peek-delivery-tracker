@@ -117,7 +117,7 @@ Den letzten Termin verpasst? Ein schnellerer Dienst schließt oft später, etwa 
 - Nach Weihnachten immer noch nichts? | Lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 :::
 
-Wartest du auf ein Geschenk? Füg die Sendungsnummer in [Peek](/) ein und stell die Mitteilungen auf „Nur am Liefertag“: Sobald das Paket in Zustellung ist, prüft Peek bis zu alle 2 Minuten. Schneller ankommen lässt es das Paket allerdings nicht.
+Wartest du auf ein Geschenk? Füg die Sendungsnummer in [Peek](/) ein und stell die Mitteilungen auf „Nur die Zustellung“: Sobald das Paket in Zustellung ist, prüft Peek bis zu alle 2 Minuten. Schneller ankommen lässt es das Paket allerdings nicht.
 
 :::sources
 - [GLS: Versandfristen Weihnachten 2026](https://newsroom.de.gls-group.com/news/versandfristen-weihnachten-2026/s/4f03daaf-07d4-47bb-9cc0-a36d97901bdb) – Termine 2026, 12 Uhr, Verzögerungen, Spitzenmengen

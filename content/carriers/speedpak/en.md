@@ -87,7 +87,7 @@ eBay prints the same email with the hours in China Standard Time, on a page for 
 
 When SpeedPAK names the delivering carrier, Peek can ask that carrier and switch to it once it shows newer progress. The parcel keeps the number you added, its page says "Delivery with" that carrier, and lists the carrier's own number with a link to its tracking. This depends on what SpeedPAK publishes, so not every parcel gets it.
 
-Peek checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and every hour or two overnight, puts each scan on a map and can notify you of every scan, important steps only or "Delivery day only". It can't contact SpeedPAK or the seller, or open a claim for you.
+Peek checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and every hour or two overnight, puts each scan on a map and can notify you of every scan, important steps only or "Delivery only". It can't contact SpeedPAK or the seller, or open a claim for you.
 
 ## Questions about SpeedPAK tracking
 

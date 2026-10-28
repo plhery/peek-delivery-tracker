@@ -63,7 +63,7 @@ For any other number, Peek asks tracking services while you add it ("Checking tr
 
 Z-Leading has no tracker for Peek to read. So for a parcel filed under Z-Leading, Peek asks ParcelsApp, Ship24 and 17TRACK in turn and keeps the first one that has the parcel. It shows the status and history that service holds, in its wording. That history can lag behind the carrier's own, and for some shipments there's nothing at all. The parcel's tracking link opens that service's page for the number. When the service names a carrier Peek reads directly, Peek asks that carrier for the same number and switches to it once it shows progress as recent. Peek doesn't pass your IP address or country on to the services.
 
-Peek checks every 15 minutes by day, out for delivery too, and every hour or two overnight; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery day only". It can't contact Z-Leading or the shop for you.
+Peek checks every 15 minutes by day, out for delivery too, and every hour or two overnight; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery only". It can't contact Z-Leading or the shop for you.
 
 ## Questions about Z-Leading tracking
 

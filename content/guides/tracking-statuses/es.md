@@ -72,7 +72,7 @@ Normalmente, sí:
 
 Ojo con un estado que despista: en una entrega a domicilio, `Alta en la unidad de reparto` significa que el paquete ha llegado a la unidad de Correos que lo entregará «en cuanto sea posible», no que ya vaya en la furgoneta.
 
-[Peek](/) consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto (y hasta una vez cada 10 minutos el resto del tiempo), y puedes dejar sus notificaciones en «Solo el día de entrega».
+[Peek](/) consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto (y hasta una vez cada 10 minutos el resto del tiempo), y puedes dejar sus notificaciones en «Solo la entrega».
 
 ## «Intento de entrega» o «ausente»: ¿y ahora qué?
 

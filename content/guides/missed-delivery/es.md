@@ -108,7 +108,7 @@ Después vuelve al remitente. [Paquete no recogido](guide:uncollected-parcel) ex
 
 > Un SMS que dice que no te han podido entregar un paquete y te pide pagar una pequeña cantidad desde un enlace es la estafa de siempre. Correos nunca pide datos personales, bancarios ni pagos por SMS o email, y SEUR solo cobra un servicio en su página oficial, cuando lo pides tú. No pulses: escribe tú el número de seguimiento en la web o la app del transportista.
 
-SEUR avisa de SMS falsos que hablan de un envío no entregado «por ausencia en domicilio» y piden pagar la «gestión de nueva entrega». Más en [cómo saber si un SMS de paquete es falso](guide:delivery-scam-texts). Para enterarte de los intentos de verdad, [Peek](/) puede mandarte notificaciones con la opción «Solo importantes», que incluye los intentos fallidos; concertar otra entrega sigue siendo cosa del transportista.
+SEUR avisa de SMS falsos que hablan de un envío no entregado «por ausencia en domicilio» y piden pagar la «gestión de nueva entrega». Más en [cómo saber si un SMS de paquete es falso](guide:delivery-scam-texts). Para enterarte de los intentos de verdad, [Peek](/) puede mandarte notificaciones con la opción «Pasos importantes», que incluye los intentos fallidos; concertar otra entrega sigue siendo cosa del transportista.
 
 ## ¿Cómo reclamar un paquete no entregado?
 

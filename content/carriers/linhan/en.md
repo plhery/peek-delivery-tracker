@@ -99,7 +99,7 @@ Some lines count differently from how they sound. `Order information received` i
 
 LinHan gives no expected delivery date, weight, service name, delivering company or second number, so Peek shows none of these, and it follows the LHGJ number to the end rather than handing the parcel over to another carrier.
 
-Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact LinHan or the seller for you.
+Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact LinHan or the seller for you.
 
 ## Questions about LinHan tracking
 

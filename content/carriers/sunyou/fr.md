@@ -88,7 +88,7 @@ Peek interroge SunYou en anglais : les lignes restent en anglais, sauf les libel
 
 Quand SunYou donne le numéro du transporteur local, Peek peut l'interroger, par exemple La Poste pour un numéro postal à destination de la France, et passer à lui dès qu'il montre des étapes plus récentes. Le colis garde son numéro SunYou, sa page indique « Livraison par » ce transporteur et donne son numéro, avec un lien vers son suivi. Pas pour chaque colis : Meest en Grèce, par exemple, n'est pas suivi.
 
-Il vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut contacter ni SunYou ni le vendeur à ta place.
+Il vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni SunYou ni le vendeur à ta place.
 
 ## Questions sur le suivi SunYou
 

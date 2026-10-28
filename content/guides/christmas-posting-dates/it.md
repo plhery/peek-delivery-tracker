@@ -107,7 +107,7 @@ Hai spedito dopo l'ultima data? Nel 2025 Poste avvisava che le spedizioni affida
 - Ancora fermo dopo Natale? | Leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 :::
 
-Aspetti un regalo? Incolla il numero su [Peek](/) e scegli le notifiche «Solo giorno di consegna»: quando il pacco è in consegna lo controlla fino a ogni 2 minuti, ma non può farlo arrivare prima.
+Aspetti un regalo? Incolla il numero su [Peek](/) e scegli le notifiche «Solo la consegna»: quando il pacco è in consegna lo controlla fino a ogni 2 minuti, ma non può farlo arrivare prima.
 
 :::sources
 - [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi/) – nessuna data 2026 al 27 ottobre, sospensioni e ritardi per l'estero, Raccomandata Internazionale, Stati Uniti

@@ -76,7 +76,7 @@ As read on 11 October 2026, 4PX's tracking site lists one contact for everyone, 
 
 It reads 4PX in English and shows the status, the history with the place of each scan on a map, the delivery time, the destination country and the local carrier with its number. When that carrier is in Peek's list (USPS, for example), the parcel can be followed there once it shows newer progress. `Out for delivery` and `Delivery attempt unsuccessful` appear in Peek's own words; other lines as 4PX writes them. 4PX gives no expected delivery date, pickup point details or weight.
 
-Scan times are read in 4PX's time zones, a scan without one on the clock of its place, and shown in your device's time zone. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact 4PX or the shop for you.
+Scan times are read in 4PX's time zones, a scan without one on the clock of its place, and shown in your device's time zone. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact 4PX or the shop for you.
 
 ## Questions about 4PX tracking
 

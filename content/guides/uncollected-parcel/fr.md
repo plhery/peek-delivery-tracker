@@ -72,7 +72,7 @@ Ailleurs, si tu ne peux pas y aller à temps :
 
 La Poste suisse peut aussi faire suivre un envoi vers une autre filiale, ou vers un point PickPost ou un automate My Post 24 si tu es inscrit à ce service.
 
-Avec 5 jours seulement en consigne, une notification lue trop tard peut suffire à te le faire rater. [Peek](/) peut t'envoyer une notification quand le suivi indique que ton colis attend d'être retiré, avec le réglage « Importantes uniquement ». Il ne peut pas prolonger le délai : seuls le transporteur ou la boutique le peuvent.
+Avec 5 jours seulement en consigne, une notification lue trop tard peut suffire à te le faire rater. [Peek](/) peut t'envoyer une notification quand le suivi indique que ton colis attend d'être retiré, avec le réglage « Étapes importantes ». Il ne peut pas prolonger le délai : seuls le transporteur ou la boutique le peuvent.
 
 ## Colis non retiré : suis-je remboursé ?
 

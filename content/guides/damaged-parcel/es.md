@@ -72,7 +72,7 @@ eBay es la excepción: su Garantía al cliente no cubre un artículo si rechazas
 
 ### ¿Hasta cuándo puedes rechazar un paquete?
 
-Solo hasta que lo aceptas. Después, toca reclamar el daño. Con la opción «Solo el día de entrega», [Peek](/) te envía una notificación cuando el transportista indica que el paquete ha salido a reparto, para que estés en casa y revises la caja delante del repartidor.
+Solo hasta que lo aceptas. Después, toca reclamar el daño. Con la opción «Solo la entrega», [Peek](/) te envía una notificación cuando el transportista indica que el paquete ha salido a reparto, para que estés en casa y revises la caja delante del repartidor.
 
 ### ¿Y si ya has firmado el albarán?
 

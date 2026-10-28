@@ -83,7 +83,7 @@ It reads Landmark's English page, so wordings appear in English, partners' scans
 
 Landmark writes every scan time in US Central time. Peek reads them that way, lists Landmark's own history and shows each time in your own time zone.
 
-When the partner is one Peek tracks directly, such as Evri, UPS, bpost or Apple Express, the parcel can be followed there; its page then says "Delivery with" that carrier and lists the partner's number with a link. That doesn't happen for every parcel. Each scan goes on a map, and Peek can notify you of "All tracking updates", "Important only" or "Delivery day only".
+When the partner is one Peek tracks directly, such as Evri, UPS, bpost or Apple Express, the parcel can be followed there; its page then says "Delivery with" that carrier and lists the partner's number with a link. That doesn't happen for every parcel. Each scan goes on a map, and Peek can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Landmark Global tracking
 

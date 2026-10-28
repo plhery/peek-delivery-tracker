@@ -90,7 +90,7 @@ Peek reads Trackmail and shows the status and the history, with each scan's plac
 
 When Trackmail's link points to a courier Peek knows, the parcel's page says "Delivery with" that courier and shows its number. If Peek reads that courier's tracking itself, it asks it with that number and switches to it once it shows newer progress. A courier Peek doesn't know isn't named: use "View carrier tracking" on Trackmail. For an untracked item with a local poster number, Peek may try that number with a national post, usually the one of the country you add the parcel from, and switch the same way. Not with every post, though: an RR… number ending in AU added from Australia isn't passed to Australia Post, so check it on Australia Post's own tracking.
 
-It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery and every hour or two overnight, and can notify you of "All tracking updates", "Important only" or "Delivery day only". It can't contact MHI, the courier or the shop for you.
+It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery and every hour or two overnight, and can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact MHI, the courier or the shop for you.
 
 ## Questions about MHI tracking
 

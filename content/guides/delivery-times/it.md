@@ -84,7 +84,7 @@ Per Poste Delivery Standard, Poste Italiane prevede la consegna in 5 giorni lavo
 
 Hai trovato un avviso perché non eri in casa? Leggi [mancata consegna pacco](guide:missed-delivery). Nessuna nuova scansione da giorni? Leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
-Quando un pacco è in consegna con un corriere che Peek legge direttamente, viene ricontrollato ogni 2 minuti, e puoi impostare le notifiche su «Solo giorno di consegna»: così smetti di aggiornare la pagina.
+Quando un pacco è in consegna con un corriere che Peek legge direttamente, viene ricontrollato ogni 2 minuti, e puoi impostare le notifiche su «Solo la consegna»: così smetti di aggiornare la pagina.
 
 ## Il corriere consegna nei giorni festivi?
 

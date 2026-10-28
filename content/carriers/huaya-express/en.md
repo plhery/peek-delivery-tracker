@@ -75,7 +75,7 @@ Peek gets its updates from Huaya's own tracker: each line in Huaya's own words w
 
 Nothing in Huaya's record names the company that delivers, so Peek stays with Huaya's tracker and the history ends at the hand-over line. To follow the rest, add the local carrier's number from the seller as a second parcel.
 
-Peek counts both customs lines as in transit, since they report clearance, not a hold. So only "All tracking updates" alerts you to Huaya's lines; "Important only" (delivery, pickup, customs, missed attempts and returns) and "Delivery day only" stay quiet.
+Peek counts both customs lines as in transit, since they report clearance, not a hold. So only "Every scan" alerts you to Huaya's lines; "Important steps" (delivery, pickup, customs, missed attempts and returns) and "Delivery only" stay quiet.
 
 ## Questions about Huaya Express tracking
 

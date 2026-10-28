@@ -80,7 +80,7 @@ In Spain, Ecoscooting's FAQ lists +34 912 15 93 69, the free line +34 800 00 03 
 
 AliExpress sometimes gives you the delivery carrier's own number, such as an SDA number for a parcel to Italy, while Cainiao still has the parcel. For some of these shapes Peek asks Cainiao beside that carrier. If both know it, the parcel stays under AliExpress / Cainiao, and the delivery carrier's scans join the history once it reports the parcel.
 
-It checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and every hour or two overnight, puts each scan on a map and can notify you of every scan, important steps only or "Delivery day only". It shows the status, the history, the place of a scan when Cainiao gives one, the expected delivery as a window of days when given, the delivery time and the local carrier's number when Cainiao publishes it. It can't contact Cainiao or file a claim for you.
+It checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and every hour or two overnight, puts each scan on a map and can notify you of every scan, important steps only or "Delivery only". It shows the status, the history, the place of a scan when Cainiao gives one, the expected delivery as a window of days when given, the delivery time and the local carrier's number when Cainiao publishes it. It can't contact Cainiao or file a claim for you.
 
 ## Questions about Cainiao tracking
 

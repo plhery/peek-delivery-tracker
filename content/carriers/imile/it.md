@@ -98,7 +98,7 @@ La Carta dice che iMile aiuta gli utenti fragili ad accedere alle informazioni e
 
 Peek legge il tracking di iMile in inglese. Mostra lo stato, la cronologia con il centro o la città di ogni scansione su una mappa e il paese di destinazione, con gli orari letti sull'ora di quel paese e mostrati nel fuso orario del tuo dispositivo. Se il pacco lascia la Cina con Cainiao per conto di iMile, Peek aggiunge in testa le scansioni precedenti di Cainiao: ritiro, smistamento, esportazione, volo e importazione.
 
-Peek non mostra la data prevista di iMile, il volo programmato, la prova di consegna, chi ha firmato, i contatti né i dati di pagamento, e toglie dalle scansioni il telefono del corriere. Stati come «In consegna» o «Tentativo di consegna» sono di Peek; le righe della cronologia restano come le scrive iMile. Peek controlla ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e di notte ogni una o due ore, e ti avvisa con «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna». Non può contattare iMile o il negozio al posto tuo.
+Peek non mostra la data prevista di iMile, il volo programmato, la prova di consegna, chi ha firmato, i contatti né i dati di pagamento, e toglie dalle scansioni il telefono del corriere. Stati come «In consegna» o «Tentativo di consegna» sono di Peek; le righe della cronologia restano come le scrive iMile. Peek controlla ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e di notte ogni una o due ore, e ti avvisa con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare iMile o il negozio al posto tuo.
 
 ## Domande sul tracking iMile
 

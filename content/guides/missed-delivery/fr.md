@@ -103,7 +103,7 @@ Après, le colis repart chez l'expéditeur. [Colis non retiré](guide:uncollecte
 
 > Un SMS qui dit que tu as manqué une livraison et qu'il faut payer quelques euros via un lien, c'est l'arnaque classique. Une vraie deuxième distribution de La Poste suisse est gratuite en semaine si le colis est déposé chez toi. Ne touche pas au lien : tape toi-même ton numéro de suivi sur le site ou l'app du transporteur.
 
-Tous les signes qui trahissent l'arnaque sont dans [arnaque colis par SMS](guide:delivery-scam-texts). Pour être prévenu des vraies tentatives de livraison, [Peek](/) peut t'envoyer une notification avec le réglage « Importantes uniquement », qui couvre les tentatives de livraison échouées. Reprogrammer, en revanche, se fait toujours chez le transporteur.
+Tous les signes qui trahissent l'arnaque sont dans [arnaque colis par SMS](guide:delivery-scam-texts). Pour être prévenu des vraies tentatives de livraison, [Peek](/) peut t'envoyer une notification avec le réglage « Étapes importantes », qui couvre les tentatives de livraison échouées. Reprogrammer, en revanche, se fait toujours chez le transporteur.
 
 ## Comment faire une réclamation après un avis de passage ?
 

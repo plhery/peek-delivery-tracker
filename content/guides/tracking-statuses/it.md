@@ -67,7 +67,7 @@ Di solito sì. Su Poste, `In consegna` vuol dire che il pacco è stato affidato 
 
 Due diciture ingannano. Su Poste, `In consegna` può restare anche dopo che il pacco è stato consegnato, o quando ti aspetta già in un ufficio postale o in un Punto Poste; se la consegna non riesce, torna `In transito`. E `L'invio è stato spartito per il recapito` della Posta vuol dire che un centro l'ha smistato verso la tua località: non è detto che sia già sul furgone. Quanto a «fuori per la consegna», che si legge su alcuni tracking tradotti dall'inglese, è semplicemente «in consegna».
 
-[Peek](/) ricontrolla un pacco in consegna fino a ogni 2 minuti, e il resto del percorso fino a ogni 10 minuti. Puoi impostare le notifiche su «Solo giorno di consegna».
+[Peek](/) ricontrolla un pacco in consegna fino a ogni 2 minuti, e il resto del percorso fino a ogni 10 minuti. Puoi impostare le notifiche su «Solo la consegna».
 
 ## Tentativo di consegna fallito o pacco in giacenza: cosa fare?
 

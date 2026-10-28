@@ -86,7 +86,7 @@ Relevé sur les pages de GLS France le 11 octobre 2026 :
 
 Tu vois le statut, l'historique, le jour de livraison prévu (jusqu'à la livraison, l'arrivée en point de retrait ou un problème), le nom de l'expéditeur, l'heure de livraison et, pendant que le colis attend, le nom et l'adresse du relais, du locker ou de l'agence. GLS nomme ses sites par des codes comme `FR0012`, pas par des villes : rien ne s'affiche sur la carte. GLS France n'envoie que des codes de statut, donc les libellés sont ceux de Peek, en français. Ton nom, ton adresse, tes coordonnées, ta signature et tes instructions ne sont pas gardés, et il n'y a pas de poids.
 
-Peek consulte GLS France au plus une fois par heure, et 4 heures après une consultation qui a échoué. Notifications au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Les anciens colis disparaissent du suivi de GLS, et Peek ne suit pas un colis confié à un autre transporteur.
+Peek consulte GLS France au plus une fois par heure, et 4 heures après une consultation qui a échoué. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Les anciens colis disparaissent du suivi de GLS, et Peek ne suit pas un colis confié à un autre transporteur.
 
 ## Questions sur le suivi GLS
 

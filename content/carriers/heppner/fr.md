@@ -91,7 +91,7 @@ Peek demande alors le code postal de livraison et ne suit rien sans lui : 5 chif
 
 Il affiche le statut et l'historique, à l'heure exacte, et nomme chaque étape avec ses propres mots : « Colis pris en charge », « En transit », « Colis acheminé », « En livraison », « Livré », « Retourné à l’expéditeur », « En attente d’instructions de livraison », « Problème avec le colis ». L'attente d'instructions, l'anomalie de prise en charge et une expédition annulée (« Shipment cancelled », en anglais) comptent comme des problèmes. Le message de Heppner qui annonce une livraison à une nouvelle adresse, sous une nouvelle référence, apparaît en anglais (« Forwarded to a new address under a new reference ») et le colis reste en transit. Pas de lieu pour les scans, pas de date prévue ni de point de retrait ; l'expéditeur, ton nom, ton adresse et les instructions de livraison ne sont pas repris.
 
-Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois la commande en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut pas réserver ton créneau : fais-le sur la page de Heppner.
+Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois la commande en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut pas réserver ton créneau : fais-le sur la page de Heppner.
 
 ## Questions sur le suivi Heppner
 

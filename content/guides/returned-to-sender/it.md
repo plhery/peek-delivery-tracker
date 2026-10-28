@@ -98,7 +98,7 @@ Il pacco rifà più o meno la stessa strada, e il tracking si legge al contrario
 
 È qui che molti si confondono: la Posta austriaca spiega che in un ritorno «consegnato» significa consegnato al mittente. Con Poste, se il pacco non è stato consegnato, puoi continuare a seguirlo dal link «Segui la spedizione di ritorno al mittente». Se la cronologia si ferma, chiedi al venditore se il ritorno ha un numero nuovo, oppure leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
-[Peek](/) ti avvisa quando un pacco torna indietro, anche se scegli «Solo importanti»: i resi sono tra i passaggi importanti. Fermarlo, però, non può.
+[Peek](/) ti avvisa quando un pacco torna indietro, anche se scegli «Passaggi importanti»: i resi sono tra i passaggi importanti. Fermarlo, però, non può.
 
 ## Quanto ci mette un pacco a tornare al mittente?
 

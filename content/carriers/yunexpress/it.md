@@ -79,7 +79,7 @@ Il riquadro «Feedback» di yuntrack riguarda il sito, non il tuo pacco. Cominci
 
 ## Tracciare un pacco YunExpress con Peek
 
-[Peek](/) riconosce YT seguito da 16 cifre come YunExpress e accetta anche i link di yuntrack.com. Controlla il tracciamento ogni 10 minuti di giorno (ogni 5 quando il pacco è in consegna) e di notte ogni una o due ore, mette ogni scansione su una mappa e può mandarti notifiche quando lo stato cambia: per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Mostra lo stato, la cronologia, il luogo di ogni scansione e l'ora della consegna.
+[Peek](/) riconosce YT seguito da 16 cifre come YunExpress e accetta anche i link di yuntrack.com. Controlla il tracciamento ogni 10 minuti di giorno (ogni 5 quando il pacco è in consegna) e di notte ogni una o due ore, mette ogni scansione su una mappa e può mandarti notifiche quando lo stato cambia: per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Mostra lo stato, la cronologia, il luogo di ogni scansione e l'ora della consegna.
 
 Se YunExpress indica il numero del corriere locale in una forma che Peek conosce, Peek segue il pacco anche lì, ma non succede per ogni pacco. Per i pacchi YunExpress non mostra una data di consegna prevista né un punto di ritiro, lascia fuori i riferimenti d'ordine del venditore e non può contattare YunExpress né aprire un reclamo al posto tuo.
 

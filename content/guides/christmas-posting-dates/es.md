@@ -110,7 +110,7 @@ Para Correos, el Black Friday es «el pistoletazo de salida de la temporada más
 - ¿Sigue parado después de Navidad? | Mira [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
 :::
 
-¿Esperas un regalo? Pega su número en [Peek](/) y elige las notificaciones «Solo el día de entrega»: lo consulta hasta una vez cada 2 minutos cuando sale a reparto, aunque no puede hacer que llegue antes.
+¿Esperas un regalo? Pega su número en [Peek](/) y elige las notificaciones «Solo la entrega»: lo consulta hasta una vez cada 2 minutos cuando sale a reparto, aunque no puede hacer que llegue antes.
 
 :::sources
 - [GLS: Navidad 2025, plazos de entrega](https://gls-group.com/ES/es/navidad-plazos-de-entrega/) – fechas de 2025, festivos, pedidos, Etiqueta creada

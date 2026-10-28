@@ -88,7 +88,7 @@ Das Feld „Postleitzahl der Lieferadresse“ ist optional und nimmt Postleitzah
 
 Die Scans bleiben in DPDs Englisch, etwa `Your parcel arrived at our hub`. Der Hinweis `Your parcel will be delivered to a safe place according to your instructions` heißt, dass deine Abstellgenehmigung gilt. Von DPDs Zeilen erscheint nur das schlichte `Delivered` übersetzt, als „Zugestellt“. Wartet das Paket in einer Pickup Location (`Ready for collection`, Status in Peek „Abholbereit“), steht der Shop da, wenn DPD ihn nennt, seine Adresse meist nur, wenn du die Postleitzahl angegeben hast. Die Scans tragen DPDs Zeitzone und erscheinen zur richtigen Uhrzeit in deiner Zeit, das Zeitfenster gilt in Schweizer Zeit. Dein Name, deine Adresse und der Link zum Zustellnachweis werden nicht übernommen.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen: „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. Einem anderen Paketdienst folgt es nicht, und DPD für dich kontaktieren kann es auch nicht.
+Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Einem anderen Paketdienst folgt es nicht, und DPD für dich kontaktieren kann es auch nicht.
 
 ## Fragen zum DPD Schweiz Tracking
 

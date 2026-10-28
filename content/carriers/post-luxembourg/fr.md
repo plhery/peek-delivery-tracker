@@ -103,7 +103,7 @@ Pour un numéro en `LU` dont la clé de contrôle est valide, [Peek](/) demande 
 
 Un envoi venu de l'étranger est d'abord suivi chez la poste d'origine. Peek interroge POST quand celle-ci indique le Luxembourg comme destination, ou n'en indique aucune (voire ne répond pas) et que Peek te situe au Luxembourg, puis passe à POST dès que POST montre une étape au moins aussi récente. Tu peux aussi choisir « POST Luxembourg » avec « Changer ».
 
-Les étapes s'affichent dans l'ordre de POST et leurs libellés restent en anglais ; `Item out for delivery` fait passer le colis à « En livraison », `Final delivery` à « Livré ». Peek n'affiche ni date de livraison prévue, ni poids, ni point de retrait. En journée, Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison ; la nuit, toutes les une à deux heures. Notifications au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Les étapes s'affichent dans l'ordre de POST et leurs libellés restent en anglais ; `Item out for delivery` fait passer le colis à « En livraison », `Final delivery` à « Livré ». Peek n'affiche ni date de livraison prévue, ni poids, ni point de retrait. En journée, Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison ; la nuit, toutes les une à deux heures. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi des colis POST Luxembourg
 

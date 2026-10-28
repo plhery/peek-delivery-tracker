@@ -114,7 +114,7 @@ Nenhuma das três diz ainda se recolhe ou entrega na quinta-feira, 24, na sexta-
 
 > Nas alturas de maior tráfego, os CTT chamam a atenção para esquemas de phishing. Se um SMS te pedir um pagamento para entregar um presente, não carregues no link: abre tu o site ou a app da transportadora, e vê [como reconhecer um SMS falso](guide:customs).
 
-Estás à espera de um presente? Cola o código no [Peek](/) e escolhe nas notificações «Só no dia da entrega»: verifica o seguimento até de 2 em 2 minutos quando a encomenda sai para entrega, mas não a faz chegar mais cedo. Com vários presentes a caminho, vê [como seguir todas as encomendas num só lugar](guide:universal-tracker).
+Estás à espera de um presente? Cola o código no [Peek](/) e escolhe nas notificações «Só a entrega»: verifica o seguimento até de 2 em 2 minutos quando a encomenda sai para entrega, mas não a faz chegar mais cedo. Com vários presentes a caminho, vê [como seguir todas as encomendas num só lugar](guide:universal-tracker).
 
 :::sources
 - [CTT: Pesquisa «natal» no site](https://www.ctt.pt/home/pesquisa?q=natal) – sem datas limite de Natal

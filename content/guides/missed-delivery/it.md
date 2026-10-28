@@ -94,7 +94,7 @@ L'ultimo giorno è scritto sull'avviso. Con Poste Delivery sono 10 giorni lavora
 
 > Un SMS che dice che il pacco non è stato consegnato e che per sbloccarlo devi pagare una piccola somma da un link è la truffa classica. Il secondo tentativo di Poste e BRT è automatico e la giacenza all'ufficio postale non si paga. Poste ricorda che non ti chiede mai, in nessun modo, di trasferire denaro o di dare i dati della carta o i codici OTP. BRT segnala SMS ed e-mail falsi proprio su presunte «mancate consegne». Non toccare il link: scrivi tu il codice tracking sul sito o nell'app del corriere.
 
-Tutti i dettagli sono nella guida sulla [truffa del pacco via SMS](guide:delivery-scam-texts). Per sapere dei tentativi veri, [Peek](/) può mandarti una notifica con «Solo importanti», che comprende i tentativi non riusciti; la nuova consegna però la fissi con il corriere.
+Tutti i dettagli sono nella guida sulla [truffa del pacco via SMS](guide:delivery-scam-texts). Per sapere dei tentativi veri, [Peek](/) può mandarti una notifica con l'opzione «Passaggi importanti», che comprende i tentativi non riusciti; la nuova consegna però la fissi con il corriere.
 
 ## Reclamo per mancata consegna: a chi rivolgersi
 

@@ -100,7 +100,7 @@ Le colis repart à peu près par le même chemin, et le suivi se lit à l'envers
 
 C'est le piège : à la fin d'un retour, La Poste comme La Poste suisse marquent le colis comme livré, mais chez l'expéditeur. Si l'historique s'arrête, demande au vendeur si le retour a un nouveau numéro, ou lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
 
-[Peek](/) peut t'envoyer une notification pour les retours avec le réglage « Importantes uniquement » : tu sais quand un colis fait demi-tour. Il ne peut pas l'arrêter.
+[Peek](/) peut t'envoyer une notification pour les retours avec le réglage « Étapes importantes » : tu sais quand un colis fait demi-tour. Il ne peut pas l'arrêter.
 
 ## Retour à l'expéditeur : quel délai ?
 

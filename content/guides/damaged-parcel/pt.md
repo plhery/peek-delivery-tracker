@@ -80,7 +80,7 @@ A Vinted pede o mesmo: evita aceitar uma encomenda visivelmente danificada, se p
 
 ### Até quando podes recusar uma encomenda?
 
-Só até a aceitares. Depois disso, comunica o dano. O [Peek](/) pode enviar-te uma notificação quando a transportadora indica que a encomenda saiu para entrega (escolhe «Só no dia da entrega»), para estares em casa e veres a caixa à frente do estafeta.
+Só até a aceitares. Depois disso, comunica o dano. O [Peek](/) pode enviar-te uma notificação quando a transportadora indica que a encomenda saiu para entrega (escolhe «Só a entrega»), para estares em casa e veres a caixa à frente do estafeta.
 
 ### E se já assinei?
 

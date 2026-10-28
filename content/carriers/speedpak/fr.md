@@ -87,7 +87,7 @@ Le site ne dit pas que ces lignes servent aux destinataires, et elles sont en Ch
 
 Quand SpeedPAK nomme le transporteur qui livre, Peek peut l'interroger et passer à lui dès qu'il montre des étapes plus récentes. Le colis garde le numéro que tu as ajouté, sa page indique « Livraison par » ce transporteur et donne son numéro, avec un lien vers son suivi. Ça dépend de ce que SpeedPAK publie, donc pas pour chaque colis.
 
-Peek vérifie le suivi toutes les 10 minutes en journée (toutes les 2 minutes une fois le colis en livraison) et toutes les une à deux heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut pas contacter SpeedPAK ni le vendeur, ni ouvrir une réclamation à ta place.
+Peek vérifie le suivi toutes les 10 minutes en journée (toutes les 2 minutes une fois le colis en livraison) et toutes les une à deux heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut pas contacter SpeedPAK ni le vendeur, ni ouvrir une réclamation à ta place.
 
 ## Questions sur le suivi SpeedPAK
 

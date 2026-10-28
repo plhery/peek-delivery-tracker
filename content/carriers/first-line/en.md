@@ -82,7 +82,7 @@ These channels serve the sellers, FIRST LINE's customers; it publishes no help f
 
 Peek reads FIRST LINE's tracker and shows the status, the history (up to 100 scans), the place of each scan without its postcode, and each scan's time, read on that place's clock. Lines show as FIRST LINE writes them, relayed USPS or UniUni scans included, except an exact `Delivered`, which appears in Peek's own words. The tracker gives no expected delivery date, destination country, delivering company, last-mile number or proof of delivery, so Peek shows none. It doesn't switch to USPS or UniUni: if the seller gives you the last-mile number, add it as a parcel of its own.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact FIRST LINE or the seller for you.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact FIRST LINE or the seller for you.
 
 ## Questions about FIRST LINE tracking
 

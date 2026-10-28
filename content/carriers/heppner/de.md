@@ -105,7 +105,7 @@ Peek fragt dann nach der „Postleitzahl der Lieferadresse“ und verfolgt ohne 
 
 Du siehst Status und Verlauf mit genauer Uhrzeit in der Zeitzone deines Geräts, jeden Schritt in Peeks eigenen Worten: „Sendung übernommen“, „Unterwegs“, „Sendung weitergeleitet“, „In Zustellung“, „Zugestellt“, „Zurück an Absender“, „Warten auf Zustellanweisungen“ oder „Problem mit der Sendung“. Eine stornierte Sendung erscheint auf Englisch als „Shipment cancelled“, die Lieferung an eine neue Adresse als „Forwarded to a new address under a new reference“. Wartet Heppner auf deine Anweisungen, meldet es eine Anomalie bei der Übernahme oder ist die Sendung storniert, steht das Paket bei Peek auf „Problem gemeldet“. Orte, einen erwarteten Liefertag oder die Abholstelle zeigt Peek nicht, und den Absender, deinen Namen, deine Adresse und deine Lieferanweisungen übernimmt es nicht.
 
-Peek schaut tagsüber (8 bis 22 Uhr) alle 10 Minuten nach, alle 2 Minuten, sobald die Bestellung in Zustellung ist, und nachts alle ein bis zwei Stunden. Auf Wunsch schickt es dir Mitteilungen: „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. Einen Termin buchen oder Heppner kontaktieren kann Peek nicht, das erledigst du auf Heppners Seite.
+Peek schaut tagsüber (8 bis 22 Uhr) alle 10 Minuten nach, alle 2 Minuten, sobald die Bestellung in Zustellung ist, und nachts alle ein bis zwei Stunden. Auf Wunsch schickt es dir Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Einen Termin buchen oder Heppner kontaktieren kann Peek nicht, das erledigst du auf Heppners Seite.
 
 ## Fragen zur Heppner Sendungsverfolgung
 

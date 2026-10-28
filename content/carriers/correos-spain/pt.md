@@ -103,7 +103,7 @@ O [Peek](/) reconhece logo a Correos nos códigos de encomenda de 23 caracteres,
 
 O Peek pede os estados à Correos em inglês, por isso aparecem em inglês. Mostra os 20 eventos mais recentes (sem locais), o peso e as medidas, a hora de entrega e, enquanto a encomenda espera, o nome e a morada da estação de correios. Não guarda o teu nome, a tua morada nem a assinatura, e não mostra uma data prevista. Lê as horas da Correos como hora de Madrid e mostra-as na hora do teu telemóvel ou computador.
 
-Um número postal acabado em `ES` que consultes a partir de Portugal pode ser procurado também nos CTT, e o Peek passa a segui-lo lá quando os CTT mostrarem progresso. Um código de 23 caracteres segue-se só na Correos. O Peek consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Não consegue mudar uma entrega nem reclamar por ti.
+Um número postal acabado em `ES` que consultes a partir de Portugal pode ser procurado também nos CTT, e o Peek passa a segui-lo lá quando os CTT mostrarem progresso. Um código de 23 caracteres segue-se só na Correos. O Peek consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as leituras», «Passos importantes» ou «Só a entrega». Não consegue mudar uma entrega nem reclamar por ti.
 
 ## Perguntas sobre o rastreio Correos
 

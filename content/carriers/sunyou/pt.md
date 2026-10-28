@@ -92,7 +92,7 @@ O Peek pergunta à SunYou em inglês, por isso as linhas aparecem em inglês, sa
 
 Quando a SunYou dá o número da transportadora local e o Peek segue essa transportadora no país de destino, pergunta-lhe e passa para ela assim que mostra novidades mais recentes. A encomenda fica com o número SunYou, e a página dela mostra a transportadora que entrega e o número dela com uma ligação. Isto não acontece com todas as encomendas: a Meest, na Grécia, por exemplo, não é seguida.
 
-Verifica de 10 em 10 minutos durante o dia, de 2 em 2 minutos quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações de todas as leituras, só das importantes ou «Só no dia da entrega». Não pode contactar a SunYou nem o vendedor por ti.
+Verifica de 10 em 10 minutos durante o dia, de 2 em 2 minutos quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Não pode contactar a SunYou nem o vendedor por ti.
 
 ## Perguntas sobre o rastreamento SunYou
 

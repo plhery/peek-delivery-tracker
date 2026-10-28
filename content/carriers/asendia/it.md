@@ -101,7 +101,7 @@ Peek chiede prima ad A1 e, se A1 non trova il pacco o non risponde, apre in un b
 
 Da A1 vedi lo stato, la cronologia con città, provincia e Paese, il peso, il Paese di destinazione e il corriere che consegna con il suo numero, ma nessuna data di consegna prevista; indirizzi e codici postali restano fuori. Quando A1 nomina un corriere che Peek segue (per esempio Poste Italiane, se è lei a consegnare), la scheda del pacco dice «Consegna con» quel corriere e il tracking può passare a lui.
 
-Peek controlla ogni 10 minuti dalle 8 alle 22 (ogni 2 minuti quando il pacco è in consegna, o ogni 5 se lo legge su track.asendia.com) e di notte ogni una o due ore. Mostra le scansioni su una mappa e può avvisarti con «Tutti gli aggiornamenti», «Solo importanti» o «Solo giorno di consegna». Non può contattare Asendia o il negozio al posto tuo, né aprire un reclamo.
+Peek controlla ogni 10 minuti dalle 8 alle 22 (ogni 2 minuti quando il pacco è in consegna, o ogni 5 se lo legge su track.asendia.com) e di notte ogni una o due ore. Mostra le scansioni su una mappa e può avvisarti con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare Asendia o il negozio al posto tuo, né aprire un reclamo.
 
 ## Domande sul tracking Asendia
 

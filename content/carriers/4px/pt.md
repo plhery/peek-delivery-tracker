@@ -84,7 +84,7 @@ O [Peek](/) reconhece logo um número `4PX…CN`. Com um número LP terminado em
 
 O Peek lê a 4PX em inglês e mostra o estado, o histórico com o local de cada leitura num mapa, a hora de entrega, o país de destino e, quando a reconhece na sua lista (os USPS, por exemplo), a transportadora local com o número dela. A encomenda pode então passar a ser seguida aí, depois de lá aparecerem leituras mais recentes. `Out for delivery` e `Delivery attempt unsuccessful` aparecem com as palavras do Peek; o resto, como a 4PX escreve. O Peek não mostra data de entrega prevista, dados do ponto de levantamento nem peso.
 
-As horas são lidas nos fusos horários da 4PX (as de uma leitura sem fuso, na hora do local onde foi feita) e mostradas no fuso horário do teu dispositivo. O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só no dia da entrega». Não pode contactar a 4PX nem a loja por ti.
+As horas são lidas nos fusos horários da 4PX (as de uma leitura sem fuso, na hora do local onde foi feita) e mostradas no fuso horário do teu dispositivo. O Peek verifica de 10 em 10 minutos durante o dia, de 2 em 2 quando a encomenda sai para entrega e de hora a hora ou de duas em duas horas à noite, e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Não pode contactar a 4PX nem a loja por ti.
 
 ## Perguntas sobre o rastreio 4PX
 

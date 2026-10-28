@@ -104,7 +104,7 @@ Vuelve, más o menos, por el mismo camino, y el seguimiento va hacia atrás:
 
 Eso confunde a mucha gente: Correos cierra una devolución con `Entregado al remitente`, y [CTT Express](carrier:ctt-express) con `Devuelto a remitente`. En Correos, la devolución puede ir además con un código nuevo que empieza con `Devolución admitida`. Si el seguimiento se para, pregunta a la tienda si la devolución tiene otro número, o mira [seguimiento que no se actualiza](guide:tracking-not-updating).
 
-Con las notificaciones en «Solo importantes», [Peek](/) te avisa de las devoluciones, así que te enteras de cuándo el paquete da la vuelta. Lo que no puede es pararla.
+Con las notificaciones en «Pasos importantes», [Peek](/) te avisa de las devoluciones, así que te enteras de cuándo el paquete da la vuelta. Lo que no puede es pararla.
 
 ## ¿Cuánto tarda un paquete devuelto al remitente?
 

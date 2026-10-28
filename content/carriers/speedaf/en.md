@@ -108,7 +108,7 @@ Peek reads Speedaf's own tracking: the status, the history, the destination coun
 
 Speedaf's lines appear as written, in English or else Chinese, minus the courier's, clerk's and signer's names and the courier's phone. Peek also leaves out the proof of delivery, the duty payment link and the box count, and follows only the number you added, not a waybill's other boxes. Speedaf delivers itself, so there's no second carrier.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of every scan, important steps only or "Delivery day only". It can't pay duty, rebook a delivery or contact Speedaf or the shop for you.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of every scan, important steps only or "Delivery only". It can't pay duty, rebook a delivery or contact Speedaf or the shop for you.
 
 ## Questions about Speedaf tracking
 

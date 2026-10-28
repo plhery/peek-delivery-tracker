@@ -89,7 +89,7 @@ Steht der Paketdienst vor Ort fest, ist sein Kundenservice derjenige, der bei ei
 
 Nennt SpeedPAK den Paketdienst vor Ort, kann Peek auch diesen fragen und zu ihm wechseln, sobald er neuere Schritte zeigt. Das Paket behält die Nummer, die du eingegeben hast, seine Seite zeigt „Zustellung durch“ diesen Paketdienst und listet dessen Nummer mit einem Link zu seinem Tracking. Das hängt davon ab, was SpeedPAK veröffentlicht, und klappt nicht bei jedem Paket.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und nachts alle ein bis zwei Stunden. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei allen Updates, nur bei wichtigen Schritten oder „Nur am Liefertag“. Peek kann aber weder SpeedPAK noch den Verkäufer für dich kontaktieren und keine Reklamation einreichen.
+Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und nachts alle ein bis zwei Stunden. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder „Nur die Zustellung“. Peek kann aber weder SpeedPAK noch den Verkäufer für dich kontaktieren und keine Reklamation einreichen.
 
 ## Fragen zur SpeedPAK Sendungsverfolgung
 

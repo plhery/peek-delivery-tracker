@@ -78,7 +78,7 @@ Peek shows each line in Mayi Yinfu's words, with its place, service name and des
 
 **DHL takes over.** DHL is the only delivering company Peek takes from Mayi Yinfu's record, and only when the delivering number there has a shape Peek's catalog gives to DHL alone. The parcel then shows "Delivery with DHL" and DHL's number after yours, and Peek asks DHL whether it has the parcel. Once DHL shows a scan at least as recent as Mayi Yinfu's latest line, Peek follows the parcel at DHL and keeps Mayi Yinfu's lines in the history. Any other delivering number, a DHL one of a shape other carriers share included, doesn't show in Peek, and Peek doesn't follow the parcel under it: copy it from Mayi Yinfu's tracker and add it as a parcel of its own.
 
-Peek checks Mayi Yinfu every 10 minutes by day, every hour or two overnight, and hourly once it goes quiet. If the record still holds only its first lines two days on, Peek also asks tracking services. Of Mayi Yinfu's known lines, "Important only" (delivery, pickup, customs, missed attempts and returns) alerts you at `航班落地，拆板清关…`, out for delivery and delivery; "Delivery day only" at the last two.
+Peek checks Mayi Yinfu every 10 minutes by day, every hour or two overnight, and hourly once it goes quiet. If the record still holds only its first lines two days on, Peek also asks tracking services. Of Mayi Yinfu's known lines, "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you at `航班落地，拆板清关…`, out for delivery and delivery; "Delivery only" at the last two.
 
 ## Questions about Mayi Yinfu tracking
 

@@ -80,7 +80,7 @@ Juxi lists no contact, form or office for recipients outside China. For anything
 
 Juxi has no tracking page left for Peek to read: the tracking button on its home page no longer opens a tracker. So Peek follows Juxi parcels through tracking services and shows the status and history those services hold, in their wording. That history can lag behind the local carrier's own, and for some parcels there's nothing yet. If it gives the local carrier's number, add that number to Peek as well.
 
-Peek checks every 15 minutes by day, out for delivery too, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Juxi Express or the seller for you.
+Peek checks every 15 minutes by day, out for delivery too, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact Juxi Express or the seller for you.
 
 ## Questions about Juxi Express tracking
 

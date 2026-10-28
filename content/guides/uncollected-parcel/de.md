@@ -74,7 +74,7 @@ Schaffst du es anderswo nicht rechtzeitig, bleiben dir diese Wege:
 
 Die zweite Zustellung von DHL kommt meist 2 Werktage nach der Buchung, buch sie also früh. Bei der Schweizerischen Post ist die zweite Zustellung zum Deponieren oder an den Nachbarn kostenlos, auf die Etage kostet sie CHF 3.30, am Samstag CHF 7.–. Weiterleiten an einen My Post 24-Automaten, eine Filiale oder eine andere Adresse kostet von Montag bis Freitag CHF 8.–.
 
-An einer DPD Paketstation oder einem Amazon Locker hast du nur 3 Tage, da kann dich eine späte Nachricht das Paket kosten. [Peek](/) kann dir eine Mitteilung schicken, wenn die Sendungsverfolgung meldet, dass ein Paket zur Abholung bereitliegt: Auch die Einstellung „Nur wichtige“ meldet das. Die Frist verlängern kann Peek nicht, das können nur der Paketdienst oder der Shop.
+An einer DPD Paketstation oder einem Amazon Locker hast du nur 3 Tage, da kann dich eine späte Nachricht das Paket kosten. [Peek](/) kann dir eine Mitteilung schicken, wenn die Sendungsverfolgung meldet, dass ein Paket zur Abholung bereitliegt: Auch die Einstellung „Wichtige Schritte“ meldet das. Die Frist verlängern kann Peek nicht, das können nur der Paketdienst oder der Shop.
 
 ## Paket nicht abgeholt: Bekomme ich mein Geld zurück?
 

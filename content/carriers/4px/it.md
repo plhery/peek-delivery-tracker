@@ -76,7 +76,7 @@ All'11 ottobre 2026 il sito di tracciamento di 4PX indica un solo contatto per t
 
 Legge 4PX in inglese e mostra lo stato, la cronologia con il luogo di ogni scansione su una mappa, l'ora della consegna, il Paese di destinazione e il corriere locale con il suo numero. Quando quel corriere è tra quelli di Peek (USPS, per esempio), può seguire il pacco da lui appena mostra passi più recenti. `Out for delivery` e `Delivery attempt unsuccessful` compaiono con le parole di Peek, in italiano; le altre righe come le scrive 4PX. 4PX non dà una data di consegna prevista, né i dati del punto di ritiro, né il peso.
 
-Gli orari delle scansioni sono letti nei fusi orari di 4PX, o sull'ora del luogo per una scansione senza fuso orario, e mostrati nel fuso orario del tuo dispositivo. Il controllo avviene ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e di notte ogni una o due ore, e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Non può contattare 4PX o il negozio al posto tuo.
+Gli orari delle scansioni sono letti nei fusi orari di 4PX, o sull'ora del luogo per una scansione senza fuso orario, e mostrati nel fuso orario del tuo dispositivo. Il controllo avviene ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e di notte ogni una o due ore, e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Non può contattare 4PX o il negozio al posto tuo.
 
 ## Domande sul tracking 4PX
 

@@ -97,7 +97,7 @@ Garde ton code à barres ou le numéro W de ton avis sous la main.
 
 Peek affiche le statut dans l'anglais de Canpar, chaque scan avec sa ville et sa province sur une carte, la date de livraison prévue et le service. Un colis au SMARTSpot apparaît comme « Prêt à être retiré », sans le nom ni l'adresse du comptoir : vois-les sur canpar.com. Peek laisse de côté la preuve de livraison, le destinataire, les adresses et les références. Un colis confié à un livreur partenaire reste « En transit » : Peek ne suit pas ce partenaire. Il ne peut ni réacheminer le colis ni joindre Canpar pour toi.
 
-Les heures des scans de Canpar n'ont pas de fuseau horaire : Peek lit chacune à l'heure du lieu du scan. De 8 h à 22 h, heure de la Suisse (à peu près de 2 h à 16 h à Montréal, de 23 h à 13 h à Vancouver), il vérifie le suivi toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison ; le reste du temps, toutes les une à deux heures. Notifications au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Les heures des scans de Canpar n'ont pas de fuseau horaire : Peek lit chacune à l'heure du lieu du scan. De 8 h à 22 h, heure de la Suisse (à peu près de 2 h à 16 h à Montréal, de 23 h à 13 h à Vancouver), il vérifie le suivi toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison ; le reste du temps, toutes les une à deux heures. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi Canpar
 

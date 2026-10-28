@@ -95,7 +95,7 @@ Shopee says you can't contact the carrier directly about tracking or delivery: S
 
 Peek reads the same tracking spx.com.br does and shows the status, SPX's own lines (in Portuguese, a few in English), the place SPX gives for scans at its centres, hubs and ports, and the delivery time. There's no expected delivery date, weight, pickup point or delivering partner, and Peek drops the name of whoever took the parcel. The order, its keyword, the Agência PIN and refunds stay in the Shopee app.
 
-Peek checks every 10 minutes from 8:00 to 22:00 Swiss time (about 4:00 to 18:00 Brasília time), every 2 in those hours once the parcel is out for delivery, and every hour or two the rest of the time. It can notify you with "All tracking updates", "Important only" or "Delivery day only". It can't contact SPX or Shopee for you.
+Peek checks every 10 minutes from 8:00 to 22:00 Swiss time (about 4:00 to 18:00 Brasília time), every 2 in those hours once the parcel is out for delivery, and every hour or two the rest of the time. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact SPX or Shopee for you.
 
 ## Questions about SPX Express Brazil tracking
 

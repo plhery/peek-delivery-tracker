@@ -105,7 +105,7 @@ Peek vraagt dan de "Delivery postcode": zonder die postcode volgt het niets. Een
 
 Peek toont de status en de geschiedenis met het exacte uur, in de tijdzone van uw toestel, en noemt elke stap in zijn eigen Engelse woorden: "Shipment collected", "In transit", "Shipment forwarded", "Out for delivery", "Delivered", "Returned to sender", "Awaiting delivery instructions" of "Shipment exception". Een geannuleerde zending verschijnt als "Shipment cancelled", een levering op een nieuw adres onder een nieuwe referentie als "Forwarded to a new address under a new reference". Wacht Heppner op uw instructies of meldt het een probleem bij de afhaling bij de afzender, dan staat uw zending in Peek op "Needs attention". Plaatsen, een verwachte leveringsdag of een afhaaladres toont Peek niet, en de afzender, uw naam, adres en leveringsinstructies neemt het niet over.
 
-Overdag, van 8 tot 22 uur, kijkt Peek elke 10 minuten, en elke 2 minuten zodra uw bestelling "Out for delivery" is. 's Nachts kijkt het elk uur of om de twee uur. Meldingen kiest u zelf: "All tracking updates", "Important only" of "Delivery day only". Een afspraak maken of Heppner contacteren kan Peek niet.
+Overdag, van 8 tot 22 uur, kijkt Peek elke 10 minuten, en elke 2 minuten zodra uw bestelling "Out for delivery" is. 's Nachts kijkt het elk uur of om de twee uur. Meldingen kiest u zelf: "Every scan", "Important steps" of "Delivery only". Een afspraak maken of Heppner contacteren kan Peek niet.
 
 ## Vragen over Heppner zending volgen
 

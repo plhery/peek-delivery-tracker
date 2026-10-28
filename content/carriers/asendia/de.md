@@ -98,7 +98,7 @@ Peek fragt zuerst den A1-Tracker von Asendia USA. Antwortet A1 nicht, öffnet es
 
 Antwortet A1, siehst du den Status, den Verlauf mit Ort, Region und Land, das Gewicht, das Zielland und den Paketdienst vor Ort mit seiner eigenen Nummer. Ein voraussichtliches Lieferdatum gibt es nicht, Adressen, Postleitzahlen und Bestellreferenzen fehlen, ebenso Scans ohne Zeitzone. Die Scans stehen auf Englisch, wie A1 sie schreibt. Ist der Paketdienst vor Ort einer, den Peek verfolgt, etwa USPS, die Schweizerische Post oder La Poste, fragt es auch ihn und wechselt zu ihm, sobald er neuere Schritte zeigt; die Seite des Pakets zeigt dann „Zustellung durch“ diesen Paketdienst. Das klappt nicht bei jedem Paket.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist (alle 5, solange es track.asendia.com liest), und nachts alle ein bis zwei Stunden. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei allen Updates, nur bei wichtigen Schritten oder „Nur am Liefertag“. Asendia oder den Shop kontaktieren kann es nicht.
+Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist (alle 5, solange es track.asendia.com liest), und nachts alle ein bis zwei Stunden. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder „Nur die Zustellung“. Asendia oder den Shop kontaktieren kann es nicht.
 
 ## Fragen zur Asendia Sendungsverfolgung
 

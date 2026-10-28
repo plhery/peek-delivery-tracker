@@ -92,7 +92,7 @@ Paste the number in [Peek](/): it follows more than 3,500 carriers. It puts ZTO 
 
 Peek reads ZTO International's own tracker; each scan's place comes from ZTO's Chinese line, so it's often in Chinese. ZTO dates every scan on China's clock, even in your country, an hour ahead of Thailand, Vietnam, Cambodia and Laos; Peek shows each in your device's time zone. It leaves out couriers', scanners' and signers' names, phone numbers, bag numbers and the parcel station, and gives no expected delivery date, weight or proof of delivery. It follows the 771 number to the end, with no second carrier.
 
-Peek checks every 10 minutes from 08:00 to 22:00 Swiss time (about 14:00 to 04:00 in Bangkok, Hanoi and Phnom Penh, an hour later in China), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time, which in Southeast Asia is night and morning. It can notify you of "All tracking updates", "Important only" or "Delivery day only". It can't upload an ID, pay duty, or contact ZTO or the shop for you.
+Peek checks every 10 minutes from 08:00 to 22:00 Swiss time (about 14:00 to 04:00 in Bangkok, Hanoi and Phnom Penh, an hour later in China), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time, which in Southeast Asia is night and morning. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't upload an ID, pay duty, or contact ZTO or the shop for you.
 
 ## Questions about ZTO International tracking
 

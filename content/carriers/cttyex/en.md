@@ -91,7 +91,7 @@ Peek's status follows the newest scan it understands, and the summary only when 
 
 CTTYEX's tracker shows no delivery estimate, weight or service name, and names neither the delivering company nor a second number, so Peek has none of them either. It keeps asking CTTYEX's tracker under the CTTY number and never moves the parcel to another carrier.
 
-Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact CTTYEX or the seller for you.
+Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact CTTYEX or the seller for you.
 
 ## Questions about CTTYEX tracking
 

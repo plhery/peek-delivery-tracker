@@ -76,7 +76,7 @@ Refuse quand le carton montre des dégâts qui ont sans doute touché le contenu
 
 ### Jusqu'à quand peut-on refuser un colis ?
 
-Seulement jusqu'à ce que tu le prennes. Après, signale le dommage. [Peek](/) peut t'envoyer une notification quand ton colis est en cours de livraison (réglage « Jour de livraison uniquement »), pour être là et vérifier le carton devant le livreur.
+Seulement jusqu'à ce que tu le prennes. Après, signale le dommage. [Peek](/) peut t'envoyer une notification quand ton colis est en cours de livraison (réglage « Livraison seulement »), pour être là et vérifier le carton devant le livreur.
 
 ### Et si j'ai déjà signé ?
 

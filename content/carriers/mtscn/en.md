@@ -81,7 +81,7 @@ Peek holds back a step written more than twelve hours before the time it carries
 
 Meiteshun's records name no delivering company, so Peek follows the parcel on Meiteshun's tracker only. If the seller gives you the local carrier's number, add it as a parcel of its own.
 
-Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Meiteshun or the seller for you.
+Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact Meiteshun or the seller for you.
 
 ## Questions about Meiteshun tracking
 

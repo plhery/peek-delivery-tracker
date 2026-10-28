@@ -95,7 +95,7 @@ Juxi ne donne aucun contact, formulaire ou bureau pour les destinataires en Belg
 
 Juxi n'a plus de page de suivi que Peek pourrait lire : le bouton « 在线追踪 » (suivi en ligne) de son site n'ouvre plus rien. Peek suit donc les colis Juxi via des services de suivi et affiche le statut et l'historique qu'ils ont, dans leur formulation ; les libellés exacts qu'il connaît, comme `Delivered`, s'affichent avec ses propres mots en français. Cet historique peut être en retard sur celui du transporteur local, et pour certains colis il n'y a encore rien. S'il donne le numéro du transporteur local, ajoute aussi ce numéro dans Peek.
 
-Peek vérifie toutes les 15 minutes en journée (même quand le colis est en livraison) et toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
+Peek vérifie toutes les 15 minutes en journée (même quand le colis est en livraison) et toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
 
 ## Questions sur le suivi Juxi Express
 

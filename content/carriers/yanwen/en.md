@@ -86,7 +86,7 @@ Yanwen publishes no contact for any European country. For the order, the shop or
 
 It shows the status, the history with the town or region of each scan on a map, the delivery time, the destination country and the local carrier with its number ("Delivery with" that carrier). When Yanwen names a local carrier in Peek's list and the number fits it, Peek asks that carrier and switches to it once it shows newer progress. Yanwen gives no expected delivery date; Peek shows no pickup point and drops order references, contacts, postcodes, delivery PINs and door numbers.
 
-Scan times are read with Yanwen's GMT offsets and shown in your device's time zone, and repeated scans are removed. `Delivered` and `Out for delivery` appear in Peek's own words; other lines as written, including `Delivered.`. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery day only". It can't contact Yanwen or the shop for you.
+Scan times are read with Yanwen's GMT offsets and shown in your device's time zone, and repeated scans are removed. `Delivered` and `Out for delivery` appear in Peek's own words; other lines as written, including `Delivered.`. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact Yanwen or the shop for you.
 
 ## Questions about Yanwen tracking
 

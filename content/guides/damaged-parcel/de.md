@@ -78,7 +78,7 @@ Verweigere, wenn der Schaden wahrscheinlich den Inhalt erreicht hat. Die Verbrau
 
 ### Wie lange kannst du die Annahme verweigern?
 
-Nur, bis du das Paket annimmst. Danach meldest du den Schaden. Wird es kontaktlos zugestellt, etwa an einem Ablageort, kannst du es an der Tür gar nicht prüfen, schreibt die Verbraucherzentrale Niedersachsen. Hast du GLS Österreich eine Abstellerlaubnis gegeben, endet die Haftung von GLS, sobald das Paket am vereinbarten Ort liegt. Mit „Nur am Liefertag“ schickt dir [Peek](/) eine Mitteilung, wenn dein Paket in Zustellung geht, sofern der Paketdienst das meldet. So kannst du zu Hause sein und den Karton prüfen, solange der Zusteller noch da ist.
+Nur, bis du das Paket annimmst. Danach meldest du den Schaden. Wird es kontaktlos zugestellt, etwa an einem Ablageort, kannst du es an der Tür gar nicht prüfen, schreibt die Verbraucherzentrale Niedersachsen. Hast du GLS Österreich eine Abstellerlaubnis gegeben, endet die Haftung von GLS, sobald das Paket am vereinbarten Ort liegt. Mit der Einstellung „Nur die Zustellung“ schickt dir [Peek](/) eine Mitteilung, wenn dein Paket in Zustellung geht, sofern der Paketdienst das meldet. So kannst du zu Hause sein und den Karton prüfen, solange der Zusteller noch da ist.
 
 ### Schon unterschrieben: was jetzt?
 

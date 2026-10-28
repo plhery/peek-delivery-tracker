@@ -97,7 +97,7 @@ A encomenda faz quase o mesmo caminho de volta, e o seguimento corre ao contrár
 
 É aqui que muita gente se engana: no fim de uma devolução, a última leitura é a entrega a quem enviou, não a ti. Nos CTT, o seguimento acaba em `Devolvido`. Se o histórico parar, pergunta à loja se a devolução tem outro número de seguimento, ou vê [porque é que o tracking não atualiza](guide:tracking-not-updating).
 
-O [Peek](/) pode enviar-te uma notificação quando uma encomenda é devolvida, com a opção «Só as importantes», para saberes logo quando dá meia-volta. Mas não a consegue travar.
+O [Peek](/) pode enviar-te uma notificação quando uma encomenda é devolvida, com a opção «Passos importantes», para saberes logo quando dá meia-volta. Mas não a consegue travar.
 
 ## Quanto tempo demora uma encomenda devolvida ao remetente ou ao exterior?
 

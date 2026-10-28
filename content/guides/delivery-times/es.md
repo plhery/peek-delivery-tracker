@@ -79,7 +79,7 @@ Cada una da su propio plazo. Correos dice que, tras su SMS de entrega a domicili
 
 ¿Te han dejado un aviso porque no estabas? Mira [qué hacer si no estabas cuando pasó el repartidor](guide:missed-delivery). ¿Varios días sin un escaneo nuevo? Mira [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
-Peek consulta el seguimiento hasta una vez cada 2 minutos cuando el paquete está en reparto con las empresas que lee directamente, y puedes dejar sus notificaciones en «Solo el día de entrega» para no tener que refrescar.
+Peek consulta el seguimiento hasta una vez cada 2 minutos cuando el paquete está en reparto con las empresas que lee directamente, y puedes dejar sus notificaciones en «Solo la entrega» para no tener que refrescar.
 
 ## ¿Reparten paquetes los festivos?
 

@@ -88,7 +88,7 @@ Peek legge il tracking di SunYou in inglese, quindi su Peek le righe compaiono i
 
 Quando SunYou dà il numero del corriere locale, Peek può chiedere a quel corriere, per esempio Royal Mail o DHL in Germania, e passare a lui appena mostra passaggi più recenti. Il pacco tiene il numero SunYou e la sua pagina dice «Consegna con» seguito dal corriere, con il suo numero e un link. Non succede per ogni pacco: un numero postale diretto in Svizzera può passare alla Posta Svizzera, ma per l'Italia Peek non ha una regola che lo passi a Poste Italiane: lo segue semmai sulla posta che ha emesso il numero, se la traccia.
 
-Controlla ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e di notte ogni una o due ore, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Non può contattare SunYou o il venditore al posto tuo.
+Controlla ogni 10 minuti di giorno, ogni 2 quando il pacco è in consegna e di notte ogni una o due ore, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Non può contattare SunYou o il venditore al posto tuo.
 
 ## Domande sul tracking SunYou
 

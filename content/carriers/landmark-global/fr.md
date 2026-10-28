@@ -88,7 +88,7 @@ Peek lit la page anglaise de Landmark : tu y verras ses étapes en anglais et ce
 
 Landmark écrit l'heure de chaque scan à l'heure du centre des États-Unis : Peek la lit ainsi, affiche l'historique de Landmark et montre les heures dans le fuseau horaire de ton appareil.
 
-Quand le livreur est un transporteur que Peek suit directement, comme bpost en Belgique ou [UPS](carrier:ups) aux États-Unis, Peek peut suivre le colis chez lui : la page indique alors « Livraison par » ce transporteur, avec son numéro et un lien. Ça ne marche pas pour tous les colis. Chaque scan arrive sur une carte, et tu peux recevoir des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Quand le livreur est un transporteur que Peek suit directement, comme bpost en Belgique ou [UPS](carrier:ups) aux États-Unis, Peek peut suivre le colis chez lui : la page indique alors « Livraison par » ce transporteur, avec son numéro et un lien. Ça ne marche pas pour tous les colis. Chaque scan arrive sur une carte, et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi Landmark Global
 

@@ -110,7 +110,7 @@ Bei einer Nummer auf `LU` mit gültiger Prüfziffer fragt [Peek](/) gleichzeitig
 
 Ein Paket aus dem Ausland verfolgt Peek zuerst bei der Post des Absenderlands. Mit „Ändern“ wählst du POST Luxembourg, oder du fügst einen Link von post.lu ein. Von selbst fragt Peek bei POST nach, wenn die ausländische Postnummer eine gültige Prüfziffer hat und die Post im Ausland POST nennt oder Luxemburg als Ziel meldet. Meldet sie kein Ziel oder antwortet sie nicht, fragt Peek POST, wenn es dich in Luxemburg verortet. Zeigt POST einen datierten Schritt, der mindestens so neu ist wie der letzte aus dem Ausland, wechselt Peek zu POST. Der Verlauf aus dem Ausland bleibt erhalten.
 
-Peek zeigt die Schritte von POST jeweils unter ihrem Tag, in der Reihenfolge von POST. `Item out for delivery` setzt das Paket auf „In Zustellung“, `Final delivery` auf „Zugestellt“. Ein voraussichtliches Lieferdatum, das Gewicht oder die Abholstelle zeigt Peek nicht. Tagsüber prüft es alle 10 Minuten, in Zustellung alle 2 Minuten, nachts alle ein bis zwei Stunden. Mitteilungen wählst du selbst: „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. POST für dich kontaktieren kann Peek nicht.
+Peek zeigt die Schritte von POST jeweils unter ihrem Tag, in der Reihenfolge von POST. `Item out for delivery` setzt das Paket auf „In Zustellung“, `Final delivery` auf „Zugestellt“. Ein voraussichtliches Lieferdatum, das Gewicht oder die Abholstelle zeigt Peek nicht. Tagsüber prüft es alle 10 Minuten, in Zustellung alle 2 Minuten, nachts alle ein bis zwei Stunden. Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. POST für dich kontaktieren kann Peek nicht.
 
 ## Fragen zur Sendungsverfolgung von POST Luxembourg
 

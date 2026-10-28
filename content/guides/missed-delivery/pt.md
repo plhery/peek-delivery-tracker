@@ -106,7 +106,7 @@ A data-limite está no aviso. Nos CTT, uma Encomenda Postal fica 10 dias úteis 
 
 > Um SMS a dizer que a entrega falhou e que tens de reagendar, pagar uma pequena taxa ou corrigir a morada num link é a burla clássica. Os CTT alertam para SMS falsos sobre entregas não efetuadas que pedem reagendamento: o link não é dos CTT e serve para recolher dados pessoais. Não toques: escreve tu o número de seguimento no site ou na app da transportadora.
 
-Uma nova entrega dos CTT paga-se, sim, mas no site ou na App CTT, numa Loja ou Ponto CTT ou pela Linha de Apoio, nunca por um link num SMS. Mais em [como reconhecer uma burla CTT por SMS](guide:delivery-scam-texts). Para saberes das tentativas falhadas verdadeiras, o Peek manda-te uma notificação com a opção «Só as importantes», que inclui as tentativas falhadas; pedir a nova entrega continua a ser com a transportadora.
+Uma nova entrega dos CTT paga-se, sim, mas no site ou na App CTT, numa Loja ou Ponto CTT ou pela Linha de Apoio, nunca por um link num SMS. Mais em [como reconhecer uma burla CTT por SMS](guide:delivery-scam-texts). Para saberes das tentativas falhadas verdadeiras, o Peek manda-te uma notificação com a opção «Passos importantes», que inclui as tentativas falhadas; pedir a nova entrega continua a ser com a transportadora.
 
 ## Como reclamar de uma encomenda não entregue?
 

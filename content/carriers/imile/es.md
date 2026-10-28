@@ -90,7 +90,7 @@ Para el pedido en sí, la tienda suele ser más rápida: contrató a iMile y pue
 
 Peek consulta a iMile en inglés. Muestra el estado, el historial con el centro o la ciudad de cada escaneo en un mapa y el país de destino, con las horas leídas según el reloj de ese país y mostradas en la zona horaria de tu dispositivo. Si Cainiao saca el paquete de China para iMile, Peek añade delante los escaneos anteriores de Cainiao: recogida, clasificación, exportación, vuelo e importación.
 
-Peek no muestra la fecha prevista de iMile, el vuelo programado, la prueba de entrega, quién firmó, los contactos ni los datos de pago, y quita de los escaneos el teléfono del repartidor. Estados como «En reparto» o «Intento de entrega» son de Peek; las líneas del historial salen tal como las escribe iMile. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede avisarte con «Todas las novedades», «Solo importantes» o «Solo el día de entrega». No puede contactar con iMile ni con la tienda por ti.
+Peek no muestra la fecha prevista de iMile, el vuelo programado, la prueba de entrega, quién firmó, los contactos ni los datos de pago, y quita de los escaneos el teléfono del repartidor. Estados como «En reparto» o «Intento de entrega» son de Peek; las líneas del historial salen tal como las escribe iMile. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con iMile ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de iMile
 

@@ -91,7 +91,7 @@ Le +41 44 744 64 64 est la centrale du groupe à Dietikon, pas une ligne colis :
 
 Pour un numéro de 13 chiffres commençant par 99990, il te demande le lien partagé complet (trackandtrace.planzergroup.com/shared/…, avec son accessKey), puis n'en lit que les étapes franchies, avec leur heure, et une date de livraison prévue : ni poids, ni dimensions, ni pays.
 
-Il vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Planzer ne donne pas le lieu de ses scans : la carte n'en montre donc pas. Peek ne peut pas contacter Planzer à ta place.
+Il vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Planzer ne donne pas le lieu de ses scans : la carte n'en montre donc pas. Peek ne peut pas contacter Planzer à ta place.
 
 ## Questions sur le suivi de colis Planzer
 

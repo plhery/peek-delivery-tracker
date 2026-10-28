@@ -92,7 +92,7 @@ Garde le code-barres sous la main. bpost ne donne pas d'adresse e-mail pour son 
 
 Peek interroge bpost directement, sans code postal. Tu vois les scans de bpost avec le lieu, le poids et les dimensions ; ceux faits en Belgique sont lus à l'heure belge. Quand le colis attend dans un Point d'enlèvement ou un Distributeur de Colis, Peek affiche son nom et son adresse, même après le retrait. Pour un colis livré en Belgique, tu vois l'heure de livraison. En journée, Peek vérifie toutes les 10 minutes, et toutes les 2 minutes quand le colis est en cours de livraison ; la nuit, toutes les une à deux heures.
 
-Dans Peek, les statuts restent en anglais, tels que bpost les écrit (`Item delivered`, `Item available at Pick-up point`), et un colis rendu à l'expéditeur compte comme un retour. Peek n'affiche pas de date de livraison prévue et ne garde ni l'expéditeur, ni le destinataire, ni l'adresse du destinataire, ni les coordonnées, ni les préférences de livraison, ni la preuve de livraison. Il peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Dans Peek, les statuts restent en anglais, tels que bpost les écrit (`Item delivered`, `Item available at Pick-up point`), et un colis rendu à l'expéditeur compte comme un retour. Peek n'affiche pas de date de livraison prévue et ne garde ni l'expéditeur, ni le destinataire, ni l'adresse du destinataire, ni les coordonnées, ni les préférences de livraison, ni la preuve de livraison. Il peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi bpost
 

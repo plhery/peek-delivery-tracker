@@ -79,7 +79,7 @@ L'eccezione è eBay: per la Garanzia cliente eBay, se il pacco è stato danneggi
 
 ### Fino a quando puoi rifiutare un pacco?
 
-Solo finché non lo prendi. Dopo, puoi solo segnalare il danno. Con le notifiche «Solo giorno di consegna», [Peek](/) ti avvisa quando il corriere segna il pacco in consegna, così sei a casa a controllare la scatola davanti al corriere.
+Solo finché non lo prendi. Dopo, puoi solo segnalare il danno. Con le notifiche «Solo la consegna», [Peek](/) ti avvisa quando il corriere segna il pacco in consegna, così sei a casa a controllare la scatola davanti al corriere.
 
 ### Pacco danneggiato accettato senza riserva: e adesso?
 

@@ -89,7 +89,7 @@ Segundo as páginas dos CTT e do Citizens Advice:
 
 O [Peek](/) reconhece logo a Royal Mail num número como `RR000000005GB` com o algarismo de controlo certo; se não a reconhecer, confirma o número ou escolhe a Royal Mail em «Alterar transportadora». Com as referências de 21 e 16 caracteres, pergunta primeiro a serviços de rastreio e só no fim ao site da Royal Mail, por isso pode demorar. Os links do rastreio da Royal Mail com `trackNumber=` também funcionam.
 
-O Peek abre o site da Royal Mail num navegador no seu servidor e consulta cada encomenda no máximo uma vez por hora, mesmo no dia da entrega. Mostra o estado, cada leitura no mapa (sem códigos postais), o dia previsto, a hora de entrega e, quando a Royal Mail o indica, o país de destino. A entrega aparece como `Delivered`, sem quem assinou nem os dados do destinatário. Avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega».
+O Peek abre o site da Royal Mail num navegador no seu servidor e consulta cada encomenda no máximo uma vez por hora, mesmo no dia da entrega. Mostra o estado, cada leitura no mapa (sem códigos postais), o dia previsto, a hora de entrega e, quando a Royal Mail o indica, o país de destino. A entrega aparece como `Delivered`, sem quem assinou nem os dados do destinatário. Avisa-te com «Todas as leituras», «Passos importantes» ou «Só a entrega».
 
 Com um número `…GB` a caminho de Portugal, o Peek pode procurá-lo também nos CTT e passar a segui-lo aí quando os CTT mostrarem eventos mais recentes. O Peek não paga a alfândega nem fala com a Royal Mail, os CTT ou a loja por ti.
 

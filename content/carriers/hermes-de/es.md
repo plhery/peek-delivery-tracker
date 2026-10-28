@@ -97,7 +97,7 @@ Peek muestra el estado, el historial, el día previsto de entrega, el remitente 
 
 Los pasos en España aparecen como los demás: «En reparto», «Listo para recoger» o «Entregado». Si el paquete no se recogió y después aparece `Die Sendung wurde erfolgreich zugestellt.`, Peek lo marca como «Devuelto al remitente», no como entregado.
 
-Peek no sigue el paquete en la web de la empresa que reparte en España. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y te avisa según elijas: «Todas las novedades», «Solo importantes» o «Solo el día de entrega». Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
+Peek no sigue el paquete en la web de la empresa que reparte en España. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y te avisa según elijas: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
 
 ## Preguntas sobre el seguimiento de Hermes
 

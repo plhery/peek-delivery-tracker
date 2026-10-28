@@ -131,7 +131,7 @@ Sent after the last date? Australia Post delivers such items as quickly as it ca
 - Still stuck after Christmas? | See [why tracking stops updating](guide:tracking-not-updating).
 :::
 
-Waiting for a gift? Paste its number into [Peek](/) and set its notifications to "Delivery day only": it checks up to every 2 minutes once the parcel is out for delivery, though it can't make it arrive sooner.
+Waiting for a gift? Paste its number into [Peek](/) and set its notifications to "Delivery only": it checks up to every 2 minutes once the parcel is out for delivery, though it can't make it arrive sooner.
 
 :::sources
 - [Royal Mail: Christmas](https://www.royalmail.com/christmas) – 2026 dates coming soon

@@ -74,7 +74,7 @@ Zwykle tak, ale przewoźnicy ujmują to różnie:
 
 Uwaga: `W doręczeniu.` pojawia się u InPost także wtedy, gdy kurier Cię nie zastał: w opisie zobaczysz wtedy, że kolejna próba będzie w następnym dniu roboczym.
 
-[Peek](/) sprawdza paczkę nawet co 2 minuty, gdy jest już na ostatnim odcinku, a powiadomienia możesz ograniczyć do dnia doręczenia (ustawienie „Tylko w dniu dostawy”).
+[Peek](/) sprawdza paczkę nawet co 2 minuty, gdy jest już na ostatnim odcinku, a powiadomienia możesz ograniczyć do samego doręczenia (ustawienie „Tylko doręczenie”).
 
 ## Awizo i nieudana próba doręczenia: co teraz?
 

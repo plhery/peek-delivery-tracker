@@ -87,7 +87,7 @@ eBay riporta la stessa e-mail con gli orari nel fuso della Cina, su una pagina p
 
 Quando SpeedPAK nomina il corriere che consegna, Peek può chiedere anche a lui e passare alle sue scansioni appena mostra progressi più recenti. Il pacco resta sotto il numero che hai aggiunto, la sua pagina dice «Consegna con» e il nome del corriere, ed elenca il numero di quel corriere con un link al suo tracking. Dipende da cosa pubblica SpeedPAK, quindi non succede per ogni pacco.
 
-Peek controlla ogni 10 minuti di giorno (ogni 2 quando il pacco è in consegna) e di notte ogni una o due ore, mette ogni scansione su una mappa e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo giorno di consegna». Non può contattare SpeedPAK o il venditore, né aprire una richiesta al posto tuo.
+Peek controlla ogni 10 minuti di giorno (ogni 2 quando il pacco è in consegna) e di notte ogni una o due ore, mette ogni scansione su una mappa e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Non può contattare SpeedPAK o il venditore, né aprire una richiesta al posto tuo.
 
 ## Domande sul tracking SpeedPAK
 

@@ -87,7 +87,7 @@ Peek interroge d'abord le suivi A1 d'Asendia USA. Si A1 ne répond pas, il ouvre
 
 Quand A1 répond, tu vois le statut, l'historique avec la ville, la région et le pays, le poids, le pays de destination et le transporteur qui livre avec son propre numéro. Pas de date de livraison prévue. Peek laisse de côté les adresses, les codes postaux, le nom du service, les références de commande et tout scan sans fuseau horaire. Les lignes restent dans l'anglais d'A1. Quand le transporteur qui livre est suivi par Peek, comme La Poste, la Poste suisse ou USPS, le colis peut être suivi chez lui : sa page indique alors « Livraison par » ce transporteur. Ça ne vaut pas pour chaque colis.
 
-Peek vérifie toutes les 10 minutes en journée (une fois le colis en livraison, toutes les 2 minutes, ou toutes les 5 tant qu'il lit track.asendia.com) et toutes les une à deux heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ». Il ne peut ni contacter Asendia ou la boutique, ni faire de réclamation à ta place.
+Peek vérifie toutes les 10 minutes en journée (une fois le colis en livraison, toutes les 2 minutes, ou toutes les 5 tant qu'il lit track.asendia.com) et toutes les une à deux heures la nuit, place chaque scan sur une carte et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni contacter Asendia ou la boutique, ni faire de réclamation à ta place.
 
 ## Questions sur le suivi Asendia
 

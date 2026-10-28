@@ -69,7 +69,7 @@ Deux statuts prêtent à confusion. Chez La Poste, `Votre colis est sur son site
 
 Toujours rien le soir ? Regarde si la date a bougé : chez [Chronopost](carrier:chronopost), `Livraison reportée de 24h` veut dire que l'agence garde le colis un jour sans tenter de le livrer, puis reprend la livraison d'elle-même.
 
-[Peek](/) vérifie un colis jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes sur le dernier kilomètre. Tu peux régler ses notifications sur « Jour de livraison uniquement ».
+[Peek](/) vérifie un colis jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes sur le dernier kilomètre. Tu peux régler ses notifications sur « Livraison seulement ».
 
 ## « Destinataire absent » ou « avis de passage » : que faire ?
 

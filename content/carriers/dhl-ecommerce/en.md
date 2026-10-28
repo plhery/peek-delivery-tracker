@@ -89,7 +89,7 @@ Webtrack is asked first. When it doesn't list the parcel, Peek opens DHL's globa
 
 You see the status, each scan with its town and country on a map, the expected delivery day when DHL gives one, the sender and the delivery time; from Webtrack, also the service, the weight and the delivering carrier. Peek leaves out your address, the shop's reference and the name of whoever signed. Scans keep DHL's US English wording, and every delivered scan shows as "Delivered".
 
-When Webtrack names USPS, the parcel can be followed on USPS with its number, and its page says "Delivery with USPS". Parcels answered by DHL's global page (Europe, Asia) aren't followed to a local post. You can be notified of every scan, important steps or "Delivery day only".
+When Webtrack names USPS, the parcel can be followed on USPS with its number, and its page says "Delivery with USPS". Parcels answered by DHL's global page (Europe, Asia) aren't followed to a local post. You can be notified of every scan, important steps or "Delivery only".
 
 ## Questions about DHL eCommerce tracking
 

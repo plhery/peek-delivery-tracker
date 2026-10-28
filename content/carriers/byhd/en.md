@@ -68,7 +68,7 @@ Peek reads BYHD's own tracker and shows each line in BYHD's words with its place
 
 Once BYHD lists scans of its own, Peek stays with BYHD and asks no other company. A second number in BYHD's record, which may be the delivering company's, shows in the parcel's details under "BYHD tracks this as": add it as a parcel of its own to follow the delivery. The one exception is a record that gives [Swiss Post](carrier:swiss-post) as its channel, with a Swiss Post number, for a parcel to Switzerland: Peek then shows "Delivery with Swiss Post" and that number, and moves the parcel there the same way.
 
-Peek checks BYHD every 10 minutes by day and every hour or two overnight, and hourly once BYHD goes quiet: after 12 hours with nothing past the first line or first scan, or two days with nothing new later on. If BYHD's record still holds only its first line two days on, Peek also asks tracking services, and shows their history if it goes further. BYHD's known lines are all early steps, so only "All tracking updates" alerts you to them; "Important only" (delivery, pickup, customs, missed attempts and returns) and "Delivery day only" wait for later steps.
+Peek checks BYHD every 10 minutes by day and every hour or two overnight, and hourly once BYHD goes quiet: after 12 hours with nothing past the first line or first scan, or two days with nothing new later on. If BYHD's record still holds only its first line two days on, Peek also asks tracking services, and shows their history if it goes further. BYHD's known lines are all early steps, so only "Every scan" alerts you to them; "Important steps" (delivery, pickup, customs, missed attempts and returns) and "Delivery only" wait for later steps.
 
 ## Questions about BYHD tracking
 

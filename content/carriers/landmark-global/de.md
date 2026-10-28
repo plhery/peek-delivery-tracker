@@ -81,7 +81,7 @@ Gelesen wird Landmarks englische Seite. Die Scans stehen also auf Englisch, die 
 
 Landmark schreibt jede Scanzeit in US-Central-Zeit. Peek liest sie so, zeigt Landmarks eigenen Verlauf und jede Uhrzeit in der Zeitzone deines Geräts.
 
-Ist der Partner einer, den Peek direkt verfolgt, etwa [bpost](carrier:bpost) in Belgien oder [UPS](carrier:ups) in den USA, kann das Paket dort weiterverfolgt werden, sobald er neuere Schritte zeigt. Die Seite des Pakets zeigt dann „Zustellung durch“ diesen Paketdienst und seine Nummer mit Link. Das klappt nicht bei jedem Paket. Jeder Scan landet auf einer Karte, und Mitteilungen wählst du selbst: „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“.
+Ist der Partner einer, den Peek direkt verfolgt, etwa [bpost](carrier:bpost) in Belgien oder [UPS](carrier:ups) in den USA, kann das Paket dort weiterverfolgt werden, sobald er neuere Schritte zeigt. Die Seite des Pakets zeigt dann „Zustellung durch“ diesen Paketdienst und seine Nummer mit Link. Das klappt nicht bei jedem Paket. Jeder Scan landet auf einer Karte, und Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 ## Fragen zur Landmark Global Sendungsverfolgung
 

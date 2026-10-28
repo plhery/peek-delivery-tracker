@@ -605,6 +605,10 @@ Key JSON events:
   inconclusive answer with a reason in `UNKNOWN_ITEM_REASONS`, `src/server/trackingFailure.ts`),
   `input_required`, `invalid_input` or `handed_off` (the carrier places the parcel with its
   group's unit in another country, which the next step asks: a reason in `HANDED_OFF_REASONS`).
+  An `error` line says why: the carrier's `error_reason` when it gave one, `error_message`,
+  and `error_cause`, the wording of up to three causes. Its wording has no number to mask,
+  so addresses lose their query and number-like path segments, and every word of six
+  letters and digits or more with a digit reads as its shape (`[LX + 9 digits + PL]`).
   A `tracking_routing` line is a warning for `transport_fallback` and `provider_failed`,
   except a provider's `no_history` answer, which is info. One with an error has its
   `error_type` and, when the carrier gave one, its `error_reason` (such as `parcel_found`

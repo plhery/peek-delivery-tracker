@@ -6,7 +6,7 @@ import { combineRecorders } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
 import { prometheusStepRecorder, stepOutcome } from './metrics';
 import {
-  initObservability, logOperationalEvent, reportRoutingEvent, reportTrackingLookup, reportTrackingStep, trackingAttemptId,
+  errorDetails, initObservability, logOperationalEvent, reportRoutingEvent, reportTrackingLookup, reportTrackingStep, trackingAttemptId,
 } from './observability';
 
 /**
@@ -43,6 +43,11 @@ function outcomeLabel(record: StepRecord | LookupRecord): string {
   return ANSWERS.has(outcome) ? outcome : 'error';
 }
 
+/** A failure's line says why: the carrier's reason code and the error's wording, with each cause's. */
+function failure(outcome: string, error: unknown) {
+  return outcome === 'error' ? errorDetails(error) : {};
+}
+
 export const sentryStepRecorder: StepRecorder = {
   step(record: StepRecord) {
     const attributes = {
@@ -65,6 +70,7 @@ export const sentryStepRecorder: StepRecorder = {
     try {
       logOperationalEvent('tracking_scrape', {
         ...attributes, duration_ms: Math.round(record.durationMs), attempt_id: trackingAttemptId(),
+        ...failure(attributes.outcome, record.error),
       });
     } catch { /* Preserve the result even if logging fails. */ }
     metric(() => {
@@ -79,7 +85,7 @@ export const sentryStepRecorder: StepRecorder = {
     try {
       logOperationalEvent('tracking_scrape', {
         ...attributes, duration_ms: Math.round(record.durationMs), final_step: record.finalStep ?? 'none', attempts: record.attempts,
-        attempt_id: trackingAttemptId(),
+        attempt_id: trackingAttemptId(), ...failure(attributes.outcome, record.error),
       });
     } catch { /* Preserve the result even if logging fails. */ }
     metric(() => {

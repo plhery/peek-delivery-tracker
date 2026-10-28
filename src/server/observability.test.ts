@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   databaseUnavailable,
+  errorDetails,
   errorType,
   logOperationalEvent,
   numberPattern,
@@ -14,7 +15,7 @@ import {
   withTrackingAttempt,
 } from './observability';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { InputRequiredError } from 'universal-parcel-scraper';
+import { IndeterminateError, InputRequiredError } from 'universal-parcel-scraper';
 import { SupabaseError } from './supabase';
 import { TrackingCaptureError, SeventeenTrackLookupError, SeventeenTrackNoHistoryError } from 'universal-parcel-scraper/node';
 
@@ -88,6 +89,24 @@ describe('a number in a report', () => {
     expect(numberPattern('JJD0003-9000 7')).toBe('JJD + 9 digits');
     expect(numberPattern('ABCDEF7')).toBe('6 letters + 1 digit');
     expect(numberPattern('')).toBe('');
+  });
+});
+
+describe('why a lookup failed', () => {
+  it('gives the reason, the wording and each cause, with no address query and no word that could be a number', () => {
+    const cause = new TypeError('fetch failed for https://carrier.example/track/AB123456789CD?session=secret', {
+      cause: new Error('socket hang up on 1234567'),
+    });
+    const error = new IndeterminateError('city-express-rs', 'City Express did not open an anonymous session', { reason: 'session_rejected', cause });
+    expect(errorDetails(error)).toEqual({
+      error_reason: 'session_rejected',
+      error_message: 'City Express did not open an anonymous session',
+      error_cause: 'TypeError: fetch failed for https://carrier.example/track/:id <- Error: socket hang up on [7 digits]',
+    });
+    expect(errorDetails(new Error('Shipment AB123456789CD was not listed, HTTP 502'))).toEqual({
+      error_reason: undefined, error_message: 'Shipment [AB + 9 digits + CD] was not listed, HTTP 502', error_cause: undefined,
+    });
+    expect(errorDetails('not an error')).toEqual({});
   });
 });
 

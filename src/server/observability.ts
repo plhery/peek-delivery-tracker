@@ -276,6 +276,33 @@ function withoutNumber(text: string, number: string): string {
   return text.replace(new RegExp(number.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), pattern);
 }
 
+/** A word of six letters and digits or more, with a digit: it could be a tracking number. */
+const NUMBER_LIKE = /(?<![A-Za-z0-9])(?=[A-Za-z0-9]*\d)[A-Za-z0-9]{6,}(?![A-Za-z0-9])/g;
+
+/** Wording for a line that is given no number: addresses cut down, and each word that could be a number given as its shape. */
+function withoutNumbers(text: string): string {
+  return scrubText(text).replace(NUMBER_LIKE, (word) => `[${numberPattern(word)}]`);
+}
+
+/**
+ * Why a lookup failed, for a line that has no number to mask: the reason the carrier
+ * gave, read through the causes, its wording, and the wording of each cause.
+ */
+export function errorDetails(error: unknown): JsonObject {
+  if (!(error instanceof Error)) return {};
+  const causes: string[] = [];
+  const seen = new Set<Error>([error]);
+  for (let cause = error.cause; cause instanceof Error && !seen.has(cause) && causes.length < 3; cause = cause.cause) {
+    seen.add(cause);
+    causes.push(withoutNumbers(`${cause.name}: ${cause.message}`).slice(0, 150));
+  }
+  return {
+    error_reason: carrierErrorReason(error),
+    error_message: withoutNumbers(error.message).slice(0, 200),
+    error_cause: causes.length > 0 ? causes.join(' <- ') : undefined,
+  };
+}
+
 export function initObservability(): boolean {
   if (runtime.__deliveryObservabilityInitialized) return true;
   const dsn = process.env.SENTRY_DSN?.trim();

@@ -5,6 +5,7 @@ const metrics = { distribution: vi.fn(), count: vi.fn() };
 const observability = {
   initObservability: vi.fn(() => true), logOperationalEvent: vi.fn(), reportRoutingEvent: vi.fn(),
   trackingAttemptId: vi.fn((): string | undefined => undefined), reportTrackingStep: vi.fn(), reportTrackingLookup: vi.fn(),
+  errorDetails: vi.fn((error: unknown) => (error instanceof Error ? { error_message: error.message } : {})),
 };
 
 vi.mock('@sentry/node', () => ({ metrics }));
@@ -99,6 +100,19 @@ describe('sentryStepRecorder', () => {
     expect(metrics.count).toHaveBeenCalledWith('tracking.scrape.attempts', 1, {
       attributes: { carrier: 'ups', phase: 'total', outcome: 'not_found', error_type: 'NotFoundError' },
     });
+  });
+
+  it('says why a step or lookup failed, and not why one answered', () => {
+    const error = new IndeterminateError('city-express-rs', 'City Express did not open an anonymous session', { reason: 'session_rejected' });
+    sentryStepRecorder.step({
+      carrier: 'city-express-rs', step: 'direct', attempt: 1, outcome: 'indeterminate', errorType: 'IndeterminateError', durationMs: 900,
+      fallbackFrom: null, fallbackReason: null, fallbackErrorType: null, error,
+    });
+    const record = { carrier: 'city-express-rs', finalStep: 'direct', durationMs: 900, attempts: 1 } as const;
+    sentryStepRecorder.lookup({ ...record, outcome: 'indeterminate', errorType: 'IndeterminateError', error });
+    sentryStepRecorder.lookup({ ...record, outcome: 'not_found', errorType: 'NotFoundError', error: new Error('No such shipment') });
+    expect(observability.logOperationalEvent.mock.calls.map(([, fields]) => fields.error_message))
+      .toEqual(['City Express did not open an anonymous session', 'City Express did not open an anonymous session', undefined]);
   });
 
   it('never throws when a sink fails', () => {

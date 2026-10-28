@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.MapPath
 import com.plhery.peekdeliverytracker.core.Point
 import com.plhery.peekdeliverytracker.core.Rect
+import com.plhery.peekdeliverytracker.core.RectangleCornerRadii
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -85,8 +86,13 @@ class ShapesTest {
         }
     }
 
-    private fun outline(shape: androidx.compose.ui.graphics.Shape, width: Float, height: Float, density: Float): Path =
-        (shape.createOutline(Size(width, height), LayoutDirection.Ltr, Density(density)) as Outline.Generic).path
+    private fun outline(
+        shape: androidx.compose.ui.graphics.Shape,
+        width: Float,
+        height: Float,
+        density: Float,
+        direction: LayoutDirection = LayoutDirection.Ltr,
+    ): Path = (shape.createOutline(Size(width, height), direction, Density(density)) as Outline.Generic).path
 
     @Test
     fun aContinuousRoundedShapeIsSwiftUIsRoundedRectangle() {
@@ -96,6 +102,40 @@ class ShapesTest {
             val expected = MapPath.roundedRect(Rect(0.0, 0.0, size.width * 3.0, size.height * 3.0), radius * 3.0)
             assertSameElements(elements(expected), elements(path), tolerance = 0.001f)
         }
+    }
+
+    @Test
+    fun anUnevenShapeIsSwiftUIsUnevenRoundedRectangle() {
+        // The first-open hero's corners (38 at the bottom) and the feedback card's (5 at the bottom leading), at three
+        // pixels a point.
+        val shapes = listOf(
+            UnevenContinuousRoundedShape(bottomLeading = 38.dp, bottomTrailing = 38.dp) to RectangleCornerRadii(0.0, 114.0, 114.0, 0.0),
+            UnevenContinuousRoundedShape(18.dp, 5.dp, 18.dp, 18.dp) to RectangleCornerRadii(54.0, 15.0, 54.0, 54.0),
+        )
+        for ((shape, radii) in shapes) {
+            val expected = MapPath.unevenRoundedRect(Rect(0.0, 0.0, 1170.0, 180.0), radii)
+            assertSameElements(elements(expected), elements(outline(shape, 1170f, 180f, density = 3f)), tolerance = 0.001f)
+        }
+    }
+
+    @Test
+    fun rightToLeftSwapsLeadingAndTrailing() {
+        val shape = UnevenContinuousRoundedShape(topLeading = 24.dp, bottomLeading = 5.dp)
+        val path = outline(shape, 300f, 100f, density = 1f, direction = LayoutDirection.Rtl)
+        val expected = MapPath.unevenRoundedRect(Rect(0.0, 0.0, 300.0, 100.0), RectangleCornerRadii(topTrailing = 24.0, bottomTrailing = 5.0))
+        assertSameElements(elements(expected), elements(path))
+    }
+
+    @Test
+    fun anArcIsCoreGraphicsQuarterTurnsThenTheRest() {
+        // Three eighths of a turn: a quarter, then the eighth left, where an even split would be two curves of 3/16 each.
+        val path = MapPath().also { it.addRelativeArc(Point(0.0, 0.0), 10.0, 0.0, 3 * PI / 4) }
+        val actual = elements(path.toComposePath())
+        assertEquals("MCC", actual.joinToString("") { it.kind.toString() })
+        assertEquals(0f, actual[1].points[4], 0.0001f)
+        assertEquals(10f, actual[1].points[5], 0.0001f)
+        assertEquals(-7.0710678f, actual[2].points[4], 0.0001f)
+        assertEquals(7.0710678f, actual[2].points[5], 0.0001f)
     }
 
     @Test

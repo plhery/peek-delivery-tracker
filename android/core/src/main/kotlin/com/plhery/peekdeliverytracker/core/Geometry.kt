@@ -215,6 +215,14 @@ class Vector3(val x: Double, val y: Double, val z: Double) {
     }
 }
 
+/** SwiftUI's RectangleCornerRadii: a radius for each corner, leading and trailing as on a left-to-right screen. */
+data class RectangleCornerRadii(
+    val topLeading: Double = 0.0,
+    val bottomLeading: Double = 0.0,
+    val bottomTrailing: Double = 0.0,
+    val topTrailing: Double = 0.0,
+)
+
 /**
  * SwiftUI's Path, built the way the map builds one: moves, lines, quadratic and cubic curves, arcs of a circle and
  * ellipses. It is a builder, filled in place as Swift fills an `inout Path`; :app draws it by replaying it into its own
@@ -702,6 +710,100 @@ class MapPath {
             path.addCurve(maxX, top(y.start), maxX, top(y.control2), maxX, top(y.control1))
             path.closeSubpath()
             return path
+        }
+
+        /**
+         * `UnevenRoundedRectangle(cornerRadii:)`, continuous as SwiftUI's default: [roundedRect]'s corners, each with
+         * its own radius, from the right middle (halfway between the right side's two corners), down, then round
+         * clockwise on screen. Leading and trailing are left and right. A negative radius counts as 0. Where a side's
+         * two radii add up to more than the side, both stop at half the side when both pass it, else the larger
+         * stops at what the smaller leaves: the top and bottom sides first, then the left and right ones with the
+         * radii that leaves. Each corner then takes its radius's share of each side, and like [roundedRect]'s draws in
+         * toward a quarter circle where that share is less than about 1.53 radii. Radii of exactly 0 give
+         * `Path(_: CGRect)`; radii that all come to 0 otherwise, the four sides from the right middle. A corner of
+         * radius 0 is still a line and three curves, all to the corner.
+         */
+        fun unevenRoundedRect(rect: Rect, radii: RectangleCornerRadii): MapPath {
+            if (radii.topLeading == 0.0 && radii.bottomLeading == 0.0 && radii.bottomTrailing == 0.0 && radii.topTrailing == 0.0) {
+                return rect(rect)
+            }
+            val minX = rect.minX
+            val minY = rect.minY
+            val maxX = rect.maxX
+            val maxY = rect.maxY
+            val width = rect.width
+            val height = rect.height
+            fun given(radius: Double) = swiftMax(0.0, single(radius))
+            var topLeft = given(radii.topLeading)
+            var bottomLeft = given(radii.bottomLeading)
+            var bottomRight = given(radii.bottomTrailing)
+            var topRight = given(radii.topTrailing)
+            fun held(radius: Double, other: Double, side: Double) = swiftMin(radius, swiftMax(side / 2, side - other))
+            held(topLeft, topRight, width).let { topRight = held(topRight, topLeft, width); topLeft = it }
+            held(bottomRight, bottomLeft, width).let { bottomLeft = held(bottomLeft, bottomRight, width); bottomRight = it }
+            held(topRight, bottomRight, height).let { bottomRight = held(bottomRight, topRight, height); topRight = it }
+            held(bottomLeft, topLeft, height).let { topLeft = held(topLeft, bottomLeft, height); bottomLeft = it }
+            val path = MapPath()
+            if (topLeft == 0.0 && bottomLeft == 0.0 && bottomRight == 0.0 && topRight == 0.0) {
+                path.move(maxX, (minY + maxY) / 2)
+                path.addLine(maxX, maxY)
+                path.addLine(minX, maxY)
+                path.addLine(minX, minY)
+                path.addLine(maxX, minY)
+                path.closeSubpath()
+                return path
+            }
+            fun share(side: Double, radius: Double, other: Double) = if (radius == 0.0) 0.0 else side * radius / (radius + other)
+            path.move(maxX, (minY + topRight + maxY - bottomRight) / 2)
+            path.addUnevenCorner(bottomRight, share(width, bottomRight, bottomLeft), share(height, bottomRight, topRight), maxX, maxY, -1.0, -1.0, downFirst = true)
+            path.addUnevenCorner(bottomLeft, share(width, bottomLeft, bottomRight), share(height, bottomLeft, topLeft), minX, maxY, 1.0, -1.0, downFirst = false)
+            path.addUnevenCorner(topLeft, share(width, topLeft, topRight), share(height, topLeft, bottomLeft), minX, minY, 1.0, 1.0, downFirst = true)
+            path.addUnevenCorner(topRight, share(width, topRight, topLeft), share(height, topRight, bottomRight), maxX, minY, -1.0, 1.0, downFirst = false)
+            path.closeSubpath()
+            return path
+        }
+
+        /**
+         * One of [unevenRoundedRect]'s corners at (`cornerX`, `cornerY`), reaching into the rectangle along
+         * (`inwardX`, `inwardY`): from its side up or down when `downFirst` (the vertical side comes first), else from its
+         * top or bottom side.
+         */
+        private fun MapPath.addUnevenCorner(
+            radius: Double,
+            acrossShare: Double,
+            downShare: Double,
+            cornerX: Double,
+            cornerY: Double,
+            inwardX: Double,
+            inwardY: Double,
+            downFirst: Boolean,
+        ) {
+            val across = UnevenReach(acrossShare, radius)
+            val down = UnevenReach(downShare, radius)
+            fun x(reach: Double) = cornerX + inwardX * radius * reach
+            fun y(reach: Double) = cornerY + inwardY * radius * reach
+            if (downFirst) {
+                addLine(cornerX, y(down.start))
+                addCurve(x(MIDDLE_END1), y(MIDDLE_END2), cornerX, y(down.control1), cornerX, y(down.control2))
+                addCurve(x(MIDDLE_END2), y(MIDDLE_END1), x(MIDDLE_CONTROL1), y(MIDDLE_CONTROL2), x(MIDDLE_CONTROL2), y(MIDDLE_CONTROL1))
+                addCurve(x(across.start), cornerY, x(across.control2), cornerY, x(across.control1), cornerY)
+            } else {
+                addLine(x(across.start), cornerY)
+                addCurve(x(MIDDLE_END2), y(MIDDLE_END1), x(across.control1), cornerY, x(across.control2), cornerY)
+                addCurve(x(MIDDLE_END1), y(MIDDLE_END2), x(MIDDLE_CONTROL2), y(MIDDLE_CONTROL1), x(MIDDLE_CONTROL1), y(MIDDLE_CONTROL2))
+                addCurve(cornerX, y(down.start), cornerX, y(down.control2), cornerX, y(down.control1))
+            }
+        }
+
+        /**
+         * An uneven corner's reach along one side, in radii, for its `share` of that side: as [CornerReach], with the
+         * room worked out in Double and then rounded to Float, as SwiftUI's uneven rectangle does.
+         */
+        private class UnevenReach(share: Double, radius: Double) {
+            private val room = if (radius > 0) swiftMin(1.0, single((share - radius) / (radius * CORNER_STRETCH))) else 0.0
+            val start = single(1 + CORNER_STRETCH * room)
+            val control1 = single(TIGHT_CONTROL1 + (FULL_CONTROL1 - TIGHT_CONTROL1) * room)
+            val control2 = single(TIGHT_CONTROL2 + (FULL_CONTROL2 - TIGHT_CONTROL2) * room)
         }
 
         fun ellipse(rect: Rect): MapPath = MapPath().also {

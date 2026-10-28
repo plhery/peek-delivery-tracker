@@ -38,8 +38,8 @@ import com.plhery.peekdeliverytracker.core.StrokeStyle
 import com.plhery.peekdeliverytracker.ui.theme.toColor
 import kotlin.math.PI
 import kotlin.math.abs
-import kotlin.math.ceil
 import kotlin.math.cos
+import kotlin.math.sign
 import kotlin.math.sin
 import kotlin.math.tan
 
@@ -49,7 +49,7 @@ import kotlin.math.tan
 
 /**
  * A MapPath as a Compose path, element for element. CoreGraphics' arcs and ellipses become the cubic curves it makes
- * of them (a quarter turn at most per curve), so a full turn draws whole, which Android's own arcTo would not.
+ * of them (whole quarter turns, then what is left), so a full turn draws whole, which Android's own arcTo would not.
  */
 fun MapPath.toComposePath(evenOdd: Boolean = false): Path {
     val path = Path()
@@ -88,9 +88,16 @@ private class ComposePathSink(private val path: Path) : MapPath.Sink {
         val firstX = centerX + radius * cos(startAngle)
         val firstY = centerY + radius * sin(startAngle)
         line(firstX, firstY)
-        val pieces = ceil(abs(delta) / (PI / 2)).toInt()
-        val step = delta / pieces
-        for (piece in 0 until pieces) arcPiece(centerX, centerY, radius, radius, startAngle + step * piece, step)
+        // CGPathAddRelativeArc's split: a curve per whole quarter turn from the start, then one for the rest.
+        val quarter = PI / 2 * sign(delta)
+        var from = startAngle
+        var left = delta
+        while (abs(left) > abs(quarter) + ARC_EPSILON) {
+            arcPiece(centerX, centerY, radius, radius, from, quarter)
+            from += quarter
+            left -= quarter
+        }
+        if (abs(left) > ARC_EPSILON) arcPiece(centerX, centerY, radius, radius, from, left)
     }
 
     override fun ellipse(x: Double, y: Double, width: Double, height: Double) {
@@ -122,6 +129,11 @@ private class ComposePathSink(private val path: Path) : MapPath.Sink {
             (centerX + radiusX * cosTo).toFloat(),
             (centerY + radiusY * sinTo).toFloat(),
         )
+    }
+
+    private companion object {
+        /** Turns smaller than this are rounding, not arc: a quarter turn plus a hair is one quarter. */
+        const val ARC_EPSILON = 1e-9
     }
 }
 

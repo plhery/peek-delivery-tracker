@@ -423,6 +423,56 @@ class ParcelRouteTests {
         )
     }
 
+    // Not an iPhone test: `UnevenRoundedRectangle(cornerRadii:style: .continuous)`, element for element (SwiftUI's own,
+    // from a swiftc harness on the Mac).
+    @Test
+    fun anUnevenRoundedRectangleHasSwiftUIsCorners() {
+        // Each corner takes its radius's share of a side: 30 and 40 on a side of 100 leave the bottom right corner
+        // 42.86, short of the 45.86 it takes, so its curves draw in.
+        assertPathElements(
+            listOf(
+                "M 200 55", "L 200 57.142856121063232",
+                "C 200 68.075121641159058 200 74.22274112701416 197.75265797972679 81.055180430412292",
+                "C 194.92819979786873 88.815279603004456 188.81527960300446 94.928199797868729 181.05518043041229 97.752657979726791",
+                "C 173.94778966903687 100 167.34529972076416 100 154.14005160331726 100", "L 30.573298931121826 100",
+                "C 21.769800186157227 100 17.36814022064209 100 12.629879713058472 98.501771986484528",
+                "C 7.4564802646636963 96.618799865245819 3.3812001347541809 92.543519735336304 1.4982280135154724 87.370120286941528",
+                "C 0 82.63185977935791 0 78.230199813842773 0 69.426701068878174", "L 0 15.286649465560913",
+                "C 0 10.884900093078613 0 8.6840701103210449 0.74911400675773621 6.3149398565292358",
+                "C 1.6906000673770905 3.7282401323318481 3.7282401323318481 1.6906000673770905 6.3149398565292358 0.74911400675773621",
+                "C 8.6840701103210449 0 10.884900093078613 0 15.286649465560913 0", "L 138.85340213775635 0",
+                "C 156.46039962768555 0 165.26371955871582 0 174.74024057388306 2.9964560270309448",
+                "C 185.08703947067261 6.7624002695083618 193.23759973049164 14.912960529327393 197.00354397296906 25.259759426116943",
+                "C 200 34.369678497314453 200 42.56650447845459 200 57.142858505249023", "Z",
+            ),
+            MapPath.unevenRoundedRect(Rect(0.0, 0.0, 200.0, 100.0), RectangleCornerRadii(10.0, 20.0, 30.0, 40.0)),
+        )
+        // Two radii of 80 across 100 stop at half of it, and a corner of 0 is still a line and three curves.
+        assertPathElements(
+            listOf(
+                "M 100 50", "L 100 50", "C 100 50 100 50 100 50", "C 100 50 100 50 100 50", "C 100 50 100 50 100 50",
+                "L 0 50", "C 0 50 0 50 0 50", "C 0 50 0 50 0 50", "C 0 50 0 50 0 50", "L 0 50",
+                "C 0 47.999998927116394 0 40.999999642372131 3.745570033788681 31.574699282646179",
+                "C 8.4530003368854523 18.641200661659241 18.641200661659241 8.4530003368854523 31.574699282646179 3.745570033788681",
+                "C 40.999999642372131 0 47.999998927116394 0 50 0", "L 50 0",
+                "C 52.000001072883606 0 59.000000357627869 0 68.425300717353821 3.745570033788681",
+                "C 81.358799338340759 8.4530003368854523 91.546999663114548 18.641200661659241 96.254429966211319 31.574699282646179",
+                "C 100 40.999999642372131 100 47.999998927116394 100 50", "Z",
+            ),
+            MapPath.unevenRoundedRect(Rect(0.0, 0.0, 100.0, 50.0), RectangleCornerRadii(topLeading = 80.0, topTrailing = 80.0)),
+        )
+        // No radii are the plain rectangle; radii that come to nothing, being negative or on no width, the four sides.
+        assertPathElements(listOf("M 0 0", "L 100 0", "L 100 50", "L 0 50", "Z"), MapPath.unevenRoundedRect(Rect(0.0, 0.0, 100.0, 50.0), RectangleCornerRadii()))
+        assertPathElements(
+            listOf("M 100 25", "L 100 50", "L 0 50", "L 0 0", "L 100 0", "Z"),
+            MapPath.unevenRoundedRect(Rect(0.0, 0.0, 100.0, 50.0), RectangleCornerRadii(-5.0, -1.0, 0.0, -2.0)),
+        )
+        assertPathElements(
+            listOf("M 0 50", "L 0 100", "L 0 100", "L 0 0", "L 0 0", "Z"),
+            MapPath.unevenRoundedRect(Rect(0.0, 0.0, 0.0, 100.0), RectangleCornerRadii(10.0, 20.0, 30.0, 40.0)),
+        )
+    }
+
     /**
      * The pixels wait for :app's canvas. What MapPainter.drawBase draws for the night is checked here: twenty rings around
      * the sun's antipode, each filled once at its own depth, over the land and under the borders.

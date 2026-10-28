@@ -3,7 +3,7 @@ title: Asendia tracking: statuses, delivery and who to contact
 description: Track an Asendia parcel: where the number comes from, what Asendia's statuses mean, who delivers it in your country and who to ask when it stalls.
 slug: asendia-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Asendia, owned by La Poste and Swiss Post, carries online orders across borders for shops. It doesn't bring the parcel to your door: it gets it from the shop's warehouse abroad to your country, where a delivery company you probably know takes over. Track it with the number from the shop's shipping email, on [Asendia's tracking site](https://track.asendia.com/track) or, for Asendia USA, on [A1 tracking](https://a1.asendiausa.com/tracking/).
@@ -53,7 +53,7 @@ The delivery company in your country makes the attempts, not Asendia, and the tr
 
 Asendia says most of its partners make two or three attempts and leave a card each time, physical or electronic, telling you how to rearrange delivery or collect the parcel from a local post office where available. Some Asendia services let you reschedule; if not, the partner tries again or leaves the parcel at the nearest post office or pickup point. Asendia USA says that second attempt comes the next business day. Some partners offer to change the address after a first failed attempt.
 
-How long the parcel waits is the partner's rule. Swiss Post usually keeps international consignments for 15 days; La Poste keeps a Colissimo parcel for 15 calendar days from the day after the notice, then returns it. Parcels nobody collects go back, by a process that depends on the country.
+How long the parcel waits is the partner's rule: Swiss Post, for one, usually keeps international consignments for 15 days. Parcels nobody collects go back, by a process that depends on the country.
 
 ## Asendia parcel not moving, missing or not delivered
 
@@ -116,6 +116,5 @@ Not for shoppers. Use the "Ask Asendia" virtual assistant on its support page, t
 - [Asendia: Europe](https://www.asendia.com/destination/europe) – UK partners unnamed
 - [Asendia: Fraud Protection](https://www.asendia.com/fraud-protection) – email addresses
 - [Swiss Post: Collection note](https://www.post.ch/en/receiving-mail/collection-note) – 15 days for international consignments
-- [La Poste: Comment gérer une livraison de colis lors de mon absence](https://aide.laposte.fr/professionnel/contenu/comment-gerer-une-livraison-de-colis-lors-de-mon-absence) – 15 calendar days
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows
 :::

@@ -1,101 +1,85 @@
 ---
-title: Colissimo y La Poste seguimiento: estados, SEUR y Correos
-description: Sigue un Colissimo o un envío de La Poste: cómo es el número, qué significan los estados en francés, quién lo entrega en España (SEUR o Correos) y a quién llamar.
+title: Colissimo y La Poste seguimiento: número, estados y entrega
+description: Sigue un Colissimo o un envío de La Poste desde Francia: cómo es el número, qué significan los estados en francés, la entrega en España y a quién reclamar.
 slug: colissimo-la-poste-seguimiento
 published: 2026-10-24
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-Colissimo es el servicio de paquetes de La Poste, el correo francés. Esta página es para quien espera en España un paquete que llega de Francia, de una tienda o de la familia; más abajo hay una parte para quien vive en Francia. Lo sigues con el número en la [página de seguimiento de La Poste](https://www.laposte.fr/outils/suivre-vos-envois), en francés o en inglés, o pegándolo en la casilla de arriba. El número te lo da el remitente, o te llega en un email de La Poste.
+Colissimo es el servicio de paquetes de La Poste, el correo francés. Esta página es para quien espera en España un paquete que llega de Francia, de una tienda o de la familia. Para seguirlo, pega el número, o un enlace de seguimiento de laposte.fr, en la casilla de arriba; el seguimiento de La Poste está en laposte.fr. El número te lo da el remitente.
 
 ## Número de seguimiento de Colissimo: cómo es
 
-La Poste pide escribirlo sin espacios y en mayúsculas. Estas son las formas que indica su ayuda (los ejemplos son inventados):
-
-| Forma | Cómo es |
+| Forma (inventada) | Qué es |
 | --- | --- |
-| `6A00000000000` | 1 cifra, 1 letra y 11 cifras. |
-| `CK00000000000` | 2 letras y 11 cifras. |
-| `LA000000005FR` | 2 letras, 9 cifras y 2 letras: un número postal internacional; los de La Poste acaban en `FR`. |
-| `87000000000000` | 14 cifras. |
-| `87000000000000P` | 15 caracteres (15 cifras, o 14 y una letra): el número «partenaire», el de la empresa que lo entrega fuera de Francia, si se lo pasa a La Poste. |
+| `6A00000000000` | 1 cifra, 1 letra y 11 cifras: un Colissimo o una carta con seguimiento o certificada. La última cifra es de control. |
+| `LA000000005FR` | 2 letras, 9 cifras y `FR`: un número postal internacional creado en Francia, para un Colissimo o una carta con seguimiento o certificada. La cifra antes de `FR` es de control. |
+| `87000000000000P` | 15 caracteres que empiezan por 863 a 866, 870, 875, 880 u 885: un número Smart Data, el de las cartas con seguimiento y certificadas de La Poste. El último carácter es de control; el seguimiento de La Poste también encuentra el número sin él. |
 
-Si ves «SD» junto al número, no lo escribas: no forma parte de él. Los números postales que empiezan por XU, XR, XT, XW, XY o PZ y acaban en `FR` son de Chronopost, la mensajería urgente que también se sigue en laposte.fr. Un número de 14 cifras también puede ser de SEUR, de DPD o de otra empresa: mira qué transportista nombra el email de la tienda. ¿No lo encuentras? Mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
+Los números postales que empiezan por XU, XR, XT, XW, XY o PZ y acaban en `FR` son de Chronopost. Un número de 14 cifras también puede ser de SEUR, de DPD o de otra empresa: mira qué transportista nombra el email de la tienda. ¿No lo encuentras? Mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 
 ## Estados de La Poste: qué significan
 
-El seguimiento de La Poste está en francés o en inglés, no en español, y Peek muestra las frases en francés tal cual. Estas son las que más dudas dan; las de reparto y recogida son las de una entrega en Francia:
+Peek muestra los escaneos de La Poste en francés, tal cual, y da al paquete su propia etapa, en español, a partir del último escaneo. Estas son frases de La Poste que dan dudas, con la etapa que les da Peek; las de reparto y recogida corresponden a una entrega de La Poste en Francia:
 
-| La Poste escribe | Qué significa |
-| --- | --- |
-| `Votre colis est sur son site de distribution. Nous le préparons pour le mettre en livraison.` | Está en su centro de distribución y lo preparan para sacarlo a reparto. No es un parón: Peek ya lo marca «En reparto», porque la entrega o el intento suelen llegar ese mismo día. |
-| `nous n'avons pu vous remettre votre colis` | No han podido entregártelo. Es un trozo de una frase más larga, que sigue con el punto donde podrás recogerlo. |
-| `vous attend dans votre point de retrait` | Te espera en tu punto de recogida (también es un trozo de una frase). |
-| `Les formalités d'importation sont en cours` | Está en la aduana al llegar a Francia desde fuera de la UE, o entre Francia y Ultramar. Con `suspendues`, falta un documento o un dato. |
+| La Poste escribe | Peek muestra | Qué significa |
+| --- | --- | --- |
+| `Votre colis est sur son site de distribution. Nous le préparons pour le mettre en livraison.` | En reparto | Lo están preparando para el reparto del día. No es un parón: la entrega o el intento llegan ese mismo día. |
+| `Nous sommes passés mais nous n'avons pu vous remettre votre colis. Il va être acheminé vers votre point de retrait.` | Intento de entrega | No han podido entregártelo; va camino de un punto de recogida. |
+| `Votre Colissimo vous attend dans votre point de retrait. Le délai de retrait est de 5 jours.` | Listo para recoger | Te espera en el punto de recogida; el mensaje dice el plazo para recogerlo. |
+| `Les formalités import/export sont en cours sur votre colis.` | En aduanas | Está pasando la aduana. |
 
-En España, el último tramo lo cuenta también, en español, la empresa que lo reparte. Qué significa cada uno de sus estados lo tienes en nuestras páginas de [SEUR](carrier:seur) y de [Correos](carrier:correos-spain).
+Si en España lo reparte otra empresa, ella cuenta el último tramo en español; los estados de [Correos](carrier:correos-spain) o de [SEUR](carrier:seur), por ejemplo, los tienes explicados en nuestras páginas.
 
-## Colissimo en España: quién te lo entrega
+## Colissimo en España: la entrega
 
-La ficha de España de Colissimo, en su web para empresas, nombra dos socios de entrega, SEUR y Correos, sin decir cuál lleva cada envío. Con los dos promete seguimiento desde el depósito hasta la entrega, guarda el paquete 10 días si no te encuentran y no reparte en sábado. El plazo es a partir de J+3: como pronto, tres días después del envío.
+Cuando el paquete sale de Francia, el seguimiento de La Poste puede nombrar a la empresa que lo entrega en España y dar su número; Peek lo muestra en la tarjeta (más abajo). Si te llega un aviso o un mensaje de SEUR, de Correos o de otra empresa con su propio número, sigue el último tramo con ella.
 
-Entre Francia y la Península o Baleares no hay aduana: La Poste no pide documentos dentro de la UE, y la Agencia Tributaria recuerda que no hay derechos de aduana si lo que compras está en España o en otro país de la UE al hacer el pedido. Cuenta desde dónde sale la mercancía, no la web.
+Entre Francia y la Península o Baleares no hay aduana: la Agencia Tributaria recuerda que no hay derechos de aduana si lo que compras está en España o en otro país de la UE al hacer el pedido. Cuenta desde dónde sale la mercancía, no la web.
 
-**Si te lo entrega SEUR.** La ficha de Colissimo habla de dos intentos de entrega y de notificaciones interactivas. Sus puntos Pickup, sus lockers y cómo contactar con SEUR están en nuestra página de [SEUR](carrier:seur).
+**Si te lo entrega SEUR.** Sus puntos Pickup, sus lockers y cómo contactar con SEUR están en nuestra página de [SEUR](carrier:seur).
 
-**Si te lo entrega Correos.** La ficha de Colissimo indica un solo intento, sin notificaciones interactivas. Según Correos, si te avisa por SMS de la entrega en casa, el paquete llega entre 24 y 72 horas después. Si no estás, te deja un aviso con el número de envío y la oficina donde recogerlo, a partir del siguiente día laborable; si te avisa por SMS, tienes 15 días. Colissimo habla de 10, así que no lo dejes para el final: el aviso dice cuánto tiempo lo guardan. Lleva tu DNI; otra persona puede ir con tu autorización, su DNI y una fotocopia del tuyo. Con el número del aviso lo sigues en el [localizador de Correos](https://www.correos.es/es/es/herramientas/localizador/envios).
+**Si te lo entrega Correos.** Según Correos, si te avisa por SMS de la entrega en casa, el paquete llega entre 24 y 72 horas después. Si no estás, te deja un aviso con el número de envío y la oficina donde recogerlo, a partir del siguiente día laborable; si te avisa por SMS, tienes 15 días. Lleva tu DNI; otra persona puede ir con tu autorización, su DNI y una fotocopia del tuyo. Con el número del aviso lo sigues en el [localizador de Correos](https://www.correos.es/es/es/herramientas/localizador/envios).
 
-**Canarias, Ceuta y Melilla.** Aquí sí hay aduana. Para Canarias, Colissimo y La Poste piden que el paquete lleve 4 ejemplares del formulario CN23 y 2 de la factura: eso le toca al remitente. Correos explica que todo envío que entra en Canarias, Ceuta o Melilla pasa trámites de importación, venga de donde venga. Si te lo entrega Correos, en Canarias pagas sus tarifas por la gestión aduanera y, si proceden, tributos como el IGIC o el AIEM; en Ceuta y Melilla, el IPSI y la tarifa de Correos, en efectivo al recibirlo. Fuera de Francia, La Poste no hace estos trámites: si se atascan, habla con quien los lleva aquí. Más en [paquete retenido en aduanas](guide:customs).
-
-## Si vives en Francia: avis de passage y recogida
-
-Si no estás, el cartero puede dárselo a alguien de tu casa, al gardien (portero) o a un vecino; si no, te deja un avis de passage o te avisa por email o SMS. El avis lleva su propio número, de 11 cifras e impreso en vertical, que también sirve para seguirlo en laposte.fr.
-
-Hasta la medianoche de ese día (la del domingo si el aviso es del sábado) eliges gratis, en la web de La Poste o con el código QR del aviso: otra entrega en casa, desde el día siguiente y hasta 6 días después, o recogerlo desde el día siguiente (salvo domingos y festivos) en una oficina (bureau de poste) o una tienda relais. Si no eliges, habrá un segundo intento al día siguiente si el aviso lo indica; si no, irá a tu oficina.
-
-La Poste lo guarda 15 días naturales en la oficina, 14 en un relais y 5 en una consigna, desde el día siguiente al aviso; luego vuelve al remitente. Lleva el aviso y un documento de identidad. Otra persona puede recogerlo con el reverso del aviso relleno, tu documento y el suyo.
+**Canarias, Ceuta y Melilla.** Aquí sí hay aduana. Correos explica que todo envío que entra en Canarias, Ceuta o Melilla pasa trámites de importación, venga de donde venga. Si te lo entrega Correos, en Canarias pagas sus tarifas por la gestión aduanera y, si proceden, tributos como el IGIC o el AIEM; en Ceuta y Melilla, el IPSI y la tarifa de Correos, en efectivo al recibirlo. Más en [paquete retenido en aduanas](guide:customs).
 
 ## Colissimo parado, perdido o dañado
 
-**Parado.** Hacia España, Colissimo promete seguimiento hasta la entrega (La Poste solo lo da hacia 45 países; en los demás se corta al salir de Francia). Si tienes un aviso o un mensaje de SEUR o de Correos con su número, míralo en su web. Si nada se mueve en días, habla con el remitente. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
+**Parado.** Si tienes un aviso o un mensaje de la empresa que lo reparte en España, con su número, míralo en su web. Si nada se mueve en días, habla con el remitente. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
 
-**Perdido.** La Poste solo indemniza al remitente, nunca al destinatario: si es una compra, pide a la tienda que reclame o te devuelva el dinero. En un envío internacional, como uno de Francia a España, el remitente tiene seis meses para reclamar, contados desde el día siguiente a la admisión del paquete. Más en [paquete perdido](guide:lost-parcel).
+**Perdido o dañado.** Si es una compra, habla primero con la tienda. Según Your Europe, el vendedor responde de los daños desde que envía el pedido hasta que lo recibes, y debe entregarlo en 30 días salvo que acordarais otro plazo. Si no llega, recuérdaselo y dale un plazo adicional razonable; si aun así no lo entrega, puedes rescindir el contrato y recuperar tu dinero. Más en [paquete perdido](guide:lost-parcel) y [paquete dañado](guide:damaged-parcel).
 
-**Dañado.** Si el contenido llega roto, La Poste manda hablar con el remitente. En Francia, además, puedes rechazarlo en la puerta o pedir al cartero que deje constancia; si lo dejaron en el buzón, llévalo sin abrir a una oficina como tarde el siguiente día laborable. Mira [paquete dañado](guide:damaged-parcel).
+**Reclamar a La Poste.** Según la Arcep, el regulador postal francés, reclamar es gratis y pueden hacerlo el remitente o el destinatario, aunque sus derechos no son del todo los mismos. Usa los canales de La Poste que tienes más abajo. Si no te convence la respuesta, pide una segunda revisión al servicio de recursos de La Poste por los mismos canales. Después, o si no te contestan en dos meses, puedes acudir gratis al Médiateur du Groupe La Poste, en el plazo de un año desde tu primera reclamación escrita.
 
 **Entregado, pero no lo tienes.** Mira el historial: si SEUR escribe `EL ENVÍO HA SIDO ENTREGADO A UN VECINO.`, pregunta en tu edificio. Si no aparece, lee [paquete entregado pero no recibido](guide:delivered-not-received).
 
-**Devuelto.** Según La Poste, vuelve al remitente si nadie lo recoge a tiempo, si la dirección está mal, si tu nombre no está en el buzón o si lo pide quien lo envió. Pídele que lo reenvíe o te devuelva el dinero: [paquete no recogido](guide:uncollected-parcel) y [paquete devuelto al remitente](guide:returned-to-sender).
+**Devuelto.** El seguimiento de La Poste puede decir por qué, por ejemplo `Votre colis vous a attendu dans votre point de retrait jusqu'à la date limite. Nous sommes contraints de le renvoyer à l'expéditeur.` (nadie lo recogió a tiempo) o `Votre Colissimo n'a pas pu vous être livré en raison d'un problème d'adresse. Il va être retourné à l'expéditeur.` (problema con la dirección). Pide al remitente que lo reenvíe o te devuelva el dinero: [paquete no recogido](guide:uncollected-parcel) y [paquete devuelto al remitente](guide:returned-to-sender).
 
 ## Teléfono de La Poste y atención al cliente
 
-Canales que daban La Poste y Correos el 24 de octubre de 2026:
+Canales de La Poste según la Arcep y el directorio oficial francés de Service-Public.fr, y de Correos según su web:
 
-- **La Poste desde España:** +33 810 821 821, de lunes a viernes de 8:30 a 19:00, hora de Francia (la misma que en la Península; en Canarias, una hora menos), a 0,06 € por minuto más el precio de la llamada. Atienden en francés y en inglés.
-- **La Poste desde Francia:** 3631, de lunes a viernes de 8:30 a 19:00 y sábados de 8:30 a 13:00, salvo festivos; servicio gratuito más el precio de la llamada.
-- **La Poste en línea:** el [formulario de contacto](https://aide.laposte.fr/nous-contacter/l-envoi-ou-la-reception) y el asistente virtual, las 24 horas.
+- **La Poste desde España:** +33 810 821 821, su servicio de atención internacional, de lunes a viernes de 8:00 a 19:00, hora de Francia (la misma que en la Península; en Canarias, una hora menos).
+- **La Poste desde Francia:** 3631, de lunes a viernes de 8:30 a 19:00 y sábados de 8:30 a 13:00. El servicio es gratuito; pagas lo que cuesta una llamada a un fijo.
+- **La Poste por escrito:** en su web, laposte.fr, o por correo postal a Service consommateurs, 99 999 La Poste.
 - **Correos:** 915 197 197 o 900 400 004, de lunes a viernes no festivos de 8 a 20 h y sábados de 9 a 13 h.
 - **SEUR:** sus canales están en nuestra página de [SEUR](carrier:seur).
 
-> La Poste no te pide nunca portes para recibir un paquete o cambiar la entrega, salvo derechos e impuestos de aduana o un franqueo incorrecto; entonces el email acaba en @laposte.fr, el SMS lo firma «La Poste» y el enlace lleva a laposte.fr. Reenvía lo sospechoso a phishing@laposte.fr y mira [estafa del paquete por SMS](guide:delivery-scam-texts).
+> Según Cybermalveillance.gouv.fr, el servicio público francés de ayuda a las víctimas de ciberataques, La Poste avisa de que nunca te pedirá pagar por SMS o por email para recoger un paquete. Si dudas, no toques el enlace: mira el seguimiento real en laposte.fr o en Peek. Reenvía lo sospechoso a phishing@laposte.fr y mira [estafa del paquete por SMS](guide:delivery-scam-texts).
 
 ## Seguir un paquete de Colissimo con Peek
 
-[Peek](/) reconoce La Poste / Colissimo al momento con un número Colissimo de 13 caracteres cuya clave cuadra, con 14 cifras que empiezan por `870`, con un número «partenaire» de La Poste o con un número postal acabado en `FR` que no sea de Chronopost; estos dos, si su carácter de control es correcto. Con dos letras y 11 cifras, o con una clave que no cuadra, se lo pregunta a La Poste. Si el número también puede ser de otra empresa, como muchos de 14 cifras, pégalo igualmente: Peek sigue más de 3.500 transportistas; si no sale La Poste, elígela con «Cambiar transportista». El número del avis de passage no sirve: pega el del paquete. También vale un enlace de laposte.fr con `code=` o `idShip=`.
+[Peek](/) reconoce La Poste / Colissimo al momento con un número Colissimo de 13 caracteres cuya clave cuadra, con 14 cifras que empiezan por `870`, con un número Smart Data de 15 caracteres o con un número postal acabado en `FR` que no sea de Chronopost; estos dos, si su carácter de control es correcto. Con dos letras y 11 cifras, o con una clave que no cuadra, se lo pregunta a La Poste. Si el número también puede ser de otra empresa, como muchos de 14 cifras, pégalo igualmente: Peek sigue más de 3.500 transportistas; si no sale La Poste, elígela con «Cambiar transportista». También vale un enlace de laposte.fr con `code=` o `idShip=`.
 
 Peek muestra cada escaneo con la frase de La Poste en francés, su hora y su país, la fecha prevista, el nombre de la tienda y, si el paquete espera en una oficina, relais o consigna de La Poste, ese punto con su dirección. No guarda tu nombre ni tu dirección. Consulta cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede avisarte con «Todas las novedades», «Solo importantes» o «Solo el día de entrega».
 
-Cuando La Poste nombra a la empresa que entrega, Peek la muestra en la tarjeta («Entrega con SEUR», por ejemplo) con su número, si La Poste lo da, y con SEUR o Correos pasa a seguirlo allí en cuanto esa empresa muestra movimientos nuevos, sin perder el historial de La Poste. Si La Poste no nombra a nadie y el número es postal (acabado en `FR`), Peek lo busca en Correos con el mismo número cuando el destino es España o, si La Poste no da destino, cuando lo añades desde España. Peek no puede cambiar una entrega, responder a un aviso ni reclamar por ti.
+Cuando La Poste nombra a la empresa que entrega, Peek la muestra en la tarjeta («Entrega con» y su nombre) con su número, si La Poste lo da, y, si conoce esa empresa, pasa a seguirlo allí en cuanto muestra movimientos nuevos, sin perder el historial de La Poste. Si La Poste no nombra a nadie y el número es postal (acabado en `FR`), Peek lo busca en Correos con el mismo número cuando el destino es España o, si La Poste no da destino, cuando lo añades desde España. Peek no puede cambiar una entrega, responder a un aviso ni reclamar por ti.
 
 ## Preguntas sobre el seguimiento de Colissimo
 
 ### ¿Quién reparte Colissimo en España?
 
-SEUR o Correos, según la ficha de España de Colissimo. Cuál lleva el tuyo te lo dice el seguimiento de La Poste, si lo nombra, o el aviso que te deje el repartidor.
-
-### ¿Cuánto tarda un Colissimo de Francia a España?
-
-La ficha de Colissimo da un plazo a partir de J+3: como pronto, tres días después del envío. Para el extranjero en general, La Poste habla de 3 a 15 días, sin contar la aduana.
+Cuando el paquete sale de Francia, el seguimiento de La Poste puede nombrar a la empresa que lo entrega, y Peek la muestra en la tarjeta. Si no nombra a nadie, el número acaba en `FR` y va a España, Peek lo busca en Correos. El aviso o el mensaje que recibas también te dice quién lo tiene.
 
 ### ¿Hay que pagar aduana por un paquete de Francia?
 
@@ -103,31 +87,21 @@ A la Península y Baleares, no: dentro de la UE no hay aduana. Canarias, Ceuta y
 
 ### ¿Por qué no funciona el seguimiento de Colissimo?
 
-Escribe el número sin espacios, en mayúsculas y sin «SD». El seguimiento está disponible 12 meses desde que La Poste admite el paquete. Si SEUR o Correos ya te han dado su número, síguelo en su web.
+Compara el número con las formas de arriba: si acaba en `FR` y empieza por XU, XR, XT, XW, XY o PZ, es de Chronopost. Cuando el paquete sale de Francia, el último tramo puede llevarlo otra empresa: si ya te ha dado su número, síguelo en su web.
 
 :::sources
-- [La Poste: Suivre une lettre, un Colissimo ou un Chronopost](https://www.laposte.fr/outils/suivre-vos-envois) – seguimiento
-- [La Poste: Comment suivre mon colis ou ma lettre ?](https://aide.laposte.fr/contenu/comment-suivre-mon-colis-ou-ma-lettre) – formas del número, SD, avis, «partenaire», 45 países
-- [La Poste: How do I get help in English with La Poste ?](https://aide.laposte.fr/contenu/how-do-i-get-help-in-english-with-la-poste) – teléfono desde el extranjero
-- [La Poste: Besoin d'aide pour l'envoi ou la réception d'un courrier colis ?](https://aide.laposte.fr/nous-contacter/l-envoi-ou-la-reception) – contacto, 3631, horarios
-- [La Poste: Que signifie les statuts « Les formalités d'importation sont en cours / suspendues » ?](https://aide.laposte.fr/contenu/que-signifie-les-statuts-les-formalites-d-importation-sont-en-cours-suspendues) – aduana
-- [Colissimo: Espagne](https://www.colissimo.entreprise.laposte.fr/destination-es) – SEUR y Correos, intentos, notificaciones, 10 días, J+3, UE, Canarias
-- [La Poste: Envoyer un colis - Espagne](https://www.laposte.fr/fiche-destination/envoi-colis/espagne) – UE, Canarias
-- [La Poste: Quels sont les délais de distribution des colis ?](https://aide.laposte.fr/contenu/quels-sont-les-delais-de-distribution-des-colis) – 3 a 15 días
-- [La Poste: Pendant combien de temps mon suivi est-il accessible ?](https://aide.laposte.fr/contenu/pendant-combien-de-temps-mon-suivi-est-il-accessible) – 12 meses
-- [La Poste: Récupérez vos courriers et colis après un premier passage du facteur](https://www.laposte.fr/conseils-pratiques/recuperez-vos-courriers-et-colis-apres-un-premier-passage-du-facteur) – avis, plazos, recogida
-- [La Poste: Comment gérer une livraison de colis lors de mon absence ?](https://aide.laposte.fr/contenu/comment-gerer-une-livraison-de-colis-lors-de-mon-absence) – vecino, gardien
-- [La Poste: Quelles sont les garanties et indemnisations pour un envoi avec Colissimo ?](https://aide.laposte.fr/contenu/quelles-sont-les-garanties-et-indemnisations-pour-un-envoi-avec-colissimo) – solo el remitente
-- [La Poste: Conditions générales de vente Courrier-Colis, 7 de julio de 2026](https://www.laposte.fr/ecom/occ/smartedit/medias/sys_master/pdf/hfb/ha1/31823066595358/CGV_COURRIER_COLIS_07-07-2026/CGV-COURRIER-COLIS-07-07-2026.pdf) – seis meses para reclamar un envío internacional
-- [La Poste: Mon envoi a été livré abîmé, son contenu détérioré, que faire ?](https://aide.laposte.fr/contenu/mon-envoi-a-ete-livre-abime-son-contenu-deteriore-que-faire) – daños
-- [La Poste: Mon colis ou mon courrier a été retourné à son expéditeur, pourquoi ?](https://aide.laposte.fr/contenu/mon-colis-ou-mon-courrier-a-ete-retourne-a-son-expediteur-pourquoi) – devoluciones
-- [La Poste: Comment reconnaître une tentative de fraude ?](https://aide.laposte.fr/contenu/comment-reconnaitre-une-tentative-de-fraude) – fraude
-- [La Poste: Que faire en cas de phishing ?](https://www.laposte.fr/cybersecurite/phishing-hameconnage-definition) – dónde avisar
+- [Arcep: Comment résoudre un litige avec un opérateur postal ?](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – reclamación gratuita, remitente o destinatario, teléfonos y horarios, web, dirección postal, servicio de recursos, Médiateur
+- [Le Médiateur du Groupe La Poste: Foire aux questions](https://mediateur.groupelaposte.com/pages/foire-aux-questions) – gratuito, dos niveles de reclamación antes, dos meses, un año
+- [Service-Public.fr: Service consommateur de La Poste](https://lannuaire.service-public.gouv.fr/centres-contact/R11647) – 3631, horario y coste, atención internacional, dirección postal
+- [Your Europe: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – 30 días, plazo adicional, reembolso, el vendedor responde de los daños hasta la entrega
+- [Cybermalveillance.gouv.fr: L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – La Poste no pide pagos por SMS ni email, phishing@laposte.fr
 - [Correos: Recibir aviso de llegada de paquete por SMS](https://www.correos.es/es/es/atencion-al-cliente/recibir/aviso-de-llegada) – aviso, SMS, plazos, autorización
 - [Correos: Ayuda de gestiones de importación en Canarias](https://www.correos.es/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion/importacion-en-canarias) – trámites, tarifas, IGIC, AIEM
 - [Correos: Tramitación aduanera de importaciones desde Ceuta](https://www.correos.es/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion/importacion-en-ceuta) – IPSI, en efectivo
 - [Correos: Ayuda de gestiones de importación desde Melilla](https://www.correos.es/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion/importacion-en-melilla) – IPSI, en efectivo
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – teléfonos
 - [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – sin aduana dentro de la UE
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – estados, el de SEUR incluido, y lo que lee Peek
+- [Universal Parcel Scraper: La Poste](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – formas del número, claves de control, frases de La Poste y etapas de Peek, empresa que entrega fuera de Francia, lo que lee Peek
+- [Universal Parcel Scraper: SEUR](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/seur) – estado de SEUR para una entrega a un vecino
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Correos para números postales con destino España
 :::

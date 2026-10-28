@@ -3,7 +3,7 @@ title: Suivi colis DHL Paket : numéro, statuts et livraison
 description: Suivi DHL Paket : à quoi ressemble le numéro, ce que disent les statuts, la Packstation en Allemagne et qui livre un colis d'Allemagne en France, Belgique ou Suisse.
 slug: dhl-paket-suivi-colis
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 DHL Paket est le service colis allemand de DHL Group, sous les marques Deutsche Post et DHL. Tu suis ton colis avec son numéro sur dhl.de (en allemand ou en anglais), dans l'app Post & DHL ou en le collant dans le champ ci-dessus. Le numéro vient de l'expéditeur, en général dans l'e-mail d'expédition. Cette page sert à qui vit en Allemagne comme à qui attend en France, en Belgique ou en Suisse un colis parti d'Allemagne.
@@ -56,7 +56,7 @@ Avant la livraison, tu peux la repousser gratuitement de six jours ouvrables au 
 
 Hors d'Allemagne, DHL Paket confie le colis à un partenaire. Le suivi continue sur dhl.de avec le même numéro, mais DHL prévient que tous les pays ne renvoient pas chaque étape, et que le site du partenaire permet souvent de suivre le colis. Le lieu de retrait réel s'affiche chez ce partenaire, qui te prévient par e-mail ou SMS s'il a tes coordonnées. Un suivi immobile quelques jours après le départ d'Allemagne (dernière ligne au centre international de Francfort, par exemple) reste normal tant que le délai habituel n'est pas dépassé.
 
-**France.** Selon DHL, c'est [La Poste / Colissimo](carrier:la-poste) qui livre, du lundi au samedi, avec 2 à 4 jours ouvrables à titre indicatif. Absent, tu reçois un avis de passage, un e-mail ou un SMS, et tu choisis avant minuit le jour même une nouvelle livraison (dès le lendemain ou dans les 6 jours) ou un retrait au bureau de poste ou au relais de ton choix. La Poste le garde 15 jours calendaires en bureau de poste, 14 en relais et 5 en consigne Pick Up Station, à compter du lendemain de l'avis. Prends l'avis et ta pièce d'identité. Sur laposte.fr, le numéro à 11 chiffres de l'avis de passage permet aussi de suivre le colis.
+**France.** Selon DHL, c'est [La Poste / Colissimo](carrier:la-poste) qui livre, du lundi au samedi, avec 2 à 4 jours ouvrables à titre indicatif. Si tu es absent, le suivi de La Poste peut écrire « nous n'avons pu vous remettre votre colis », puis que ton colis « vous attend dans votre point de retrait ». Pour une nouvelle livraison ou le délai de garde, vois avec La Poste.
 
 **Belgique.** C'est [bpost](carrier:bpost) qui livre, avec 2 à 3 jours ouvrables à titre indicatif selon DHL. Si tu n'es pas là, le facteur essaie en général un voisin ou un lieu sûr, selon tes préférences de livraison ; sinon, il laisse un avis de passage et le colis t'attend au Point d'enlèvement indiqué, le temps écrit sur l'avis. Dès que le colis y est, son statut change dans le Track & Trace de bpost et tu reçois un e-mail : vérifie-le avant de te déplacer.
 
@@ -76,11 +76,11 @@ Dégât ou contenu manquant : signale-le à DHL dans les 7 jours suivant la livr
 
 ## Contact DHL Paket, La Poste et bpost
 
-Les canaux indiqués par DHL et La Poste le 22 octobre 2026, et par bpost en mai 2026 :
+Les canaux indiqués par DHL le 22 octobre 2026, par bpost en mai 2026 et, pour La Poste, par l'Arcep :
 
 - **DHL Paket, téléphone :** 0228 4333112, depuis l'étranger +49 228 4333112, du lundi au vendredi de 8 h à 20 h et le samedi de 8 h à 18 h, hors jours fériés nationaux allemands.
 - **DHL Paket, en ligne et par courrier :** la page « Kontakt zum Kundenservice DHL Paket » propose un formulaire et un chat. Courrier : DHL Paket GmbH, Kundenservice, 22795 Hamburg.
-- **La Poste (France) :** le 3631, du lundi au vendredi de 8 h 30 à 19 h et le samedi de 8 h 30 à 13 h, hors jours fériés (« Service Gratuit + prix d'appel »), ou le formulaire en ligne, 24 h/24.
+- **La Poste (France), pour une réclamation :** le 3631 (du lundi au vendredi de 8 h 30 à 19 h, le samedi de 8 h 30 à 13 h), le site de La Poste, un courrier ou un point de contact postal.
 - **bpost (Belgique) :** le 02 278 51 27, ou le chat du Track & Trace.
 - **DHL Express Suisse :** numéros et horaires sur la page [DHL Express](carrier:dhl-express).
 
@@ -131,10 +131,9 @@ Non. DHL Päckchen et Päckchen International n'ont pas de suivi : seuls les col
 - [DHL : Parcel has arrived, but there is a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – numéro depuis l'étranger
 - [DHL : Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – déclaration de dommage, dépôt en Filiale, adresse postale
 - [DHL : Security notices](https://www.dhl.de/en/toolbar/footer/sicherheitshinweise.html) – faux SMS, phishing@dhl.com
-- [La Poste : Récupérez vos courriers et colis après un premier passage du facteur](https://www.laposte.fr/conseils-pratiques/recuperez-vos-courriers-et-colis-apres-un-premier-passage-du-facteur) – choix avant minuit, nouvelle livraison, 15, 14 et 5 jours, pièce d'identité
-- [La Poste : Comment suivre mon colis ou ma lettre ?](https://aide.laposte.fr/contenu/comment-suivre-mon-colis-ou-ma-lettre) – numéro de l'avis de passage à 11 chiffres
-- [La Poste : Besoin d'aide pour l'envoi ou la réception d'un courrier colis ?](https://aide.laposte.fr/nous-contacter/l-envoi-ou-la-reception) – 3631, horaires, formulaire
+- [Arcep : La résolution des litiges postaux](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – réclamation à La Poste : 3631, horaires, site, courrier, point de contact postal
 - [bpost : Je n'étais pas chez moi, où est mon colis ?](https://www.bpost.be/fr/faq/je-netais-pas-chez-moi-lors-de-la-livraison-de-mon-colis-ou-se-trouve-t-il-present) – voisin, lieu sûr, avis, e-mail
 - [bpost : Comment contacter le service clientèle de bpost ?](https://www.bpost.be/fr/faq/comment-contacter-le-service-clientele-de-bpost) – téléphone, chat
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit chez DHL Paket
+- [Universal Parcel Scraper : La Poste](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – messages du suivi de La Poste après un passage manqué et en point de retrait
 :::

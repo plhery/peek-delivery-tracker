@@ -3,16 +3,16 @@ title: Delivengo tracking: follow a La Poste parcel from France
 description: Track a Delivengo parcel sent from France: the number, La Poste's tracking messages, who delivers it in your country and who to ask when tracking stops.
 slug: delivengo-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-Delivengo is [La Poste](carrier:la-poste)'s service for French businesses sending small, low-value parcels (up to 2 kg) abroad, so if a French shop chose it, your parcel leaves France with La Poste and your own country's post delivers it. You track it on La Poste's tracking with the number the shop gives you, or paste it in the box above.
+Delivengo is [La Poste](carrier:la-poste)'s export service for small international parcels. If a French shop chose it, your parcel leaves France with La Poste, and the post in your own country does the last mile. You track it on La Poste's tracking, on laposte.fr, with the number the shop gives you, or paste it in the box above.
 
 ## Your Delivengo tracking number
 
-Neither La Poste nor Delivengo publishes a format of its own for Delivengo. The numbers are international postal numbers: two letters, nine digits and `FR`, such as `LD000000005FR` (invented). La Poste's tracking wants them without spaces and in capitals.
+Delivengo numbers are international postal numbers: two letters, nine digits and `FR`, such as `LD000000005FR` (invented).
 
-**Where it comes from.** The shop gives it to you, in its shipping email or on your order page. La Poste emails you itself only if the shop ticked that option in its Delivengo account and entered your email address; otherwise the number comes only from the shop. If you can't find it, see [how to find your tracking number](guide:find-tracking-number).
+**Where it comes from.** The shop gives it to you, usually in its shipping email. The MyDelivengo site, mydelivengo.laposte.fr, is the shop's account area, not a place for you to look it up. If you can't find the number, see [how to find your tracking number](guide:find-tracking-number).
 
 **Numbers that look alike** (all invented):
 
@@ -20,50 +20,48 @@ Neither La Poste nor Delivengo publishes a format of its own for Delivengo. The 
 | --- | --- |
 | `LD000000005FR` | La Poste: Delivengo, Colissimo and other French postal items share this shape. |
 | `LD000000005GB` | The same shape with another country's letters belongs to that country's post (here [Royal Mail](carrier:royal-mail)), not to Delivengo. |
-| `123456789012345` | 15 digits, or 14 digits and a letter: a partner number La Poste may show for an international item, if the partner sends it. |
 
-The last two letters say which post issued the number. Nothing in a `…FR` number tells Delivengo apart from any other La Poste item, and that doesn't matter: the tracking is the same. The numbers carry a check digit, so one wrong digit makes the number invalid; Peek then takes it for a possible [Chronopost](carrier:chronopost) number. Copy the number rather than typing it.
+The last two letters say which post issued the number. Nothing in a `…FR` number tells Delivengo apart from any other La Poste item, and that doesn't matter: the tracking is the same. The numbers carry a check digit, so one wrong digit makes the number invalid, and Peek doesn't recognise it. Copy the number rather than typing it.
 
 ## Delivengo suivi: what the tracking says
 
-La Poste's tracking has a French page and an English one (laposte.fr/outils/track-a-parcel), and answers in the language you choose. La Poste publishes no list of its tracking wordings with explanations, so the only ones quoted here are those read on its tracking for a number it doesn't have yet:
+La Poste's tracking answers Delivengo numbers like any other La Poste item. Peek puts each of its scans in a stage; here is what La Poste's scan behind each of these stages means:
 
-| La Poste's words | What it means for you |
+| Stage in Peek | What La Poste's scan means |
 | --- | --- |
-| `La Poste est prête à prendre en charge votre envoi. Dès qu'il nous sera confié, vous pourrez suivre son trajet ici.` | La Poste has no scan for this number yet: the shop made the label but hasn't dropped the parcel off, or the first scan is late. A mistyped or expired number gets the same message. |
-| `Your tracking is not yet available. If you have dropped off your shipment, the tracking information may be displayed with a delay, please try again later.` | The same thing on La Poste's English tracking. |
+| `Label created` | The shipment is announced: the shop has made the label, but La Poste doesn't have the parcel yet. |
+| `Received by carrier` | La Poste has taken the parcel in charge. |
+| `In transit` | The parcel is moving: through France, ready to leave France, or arrived in or moving through your country. |
+| `At customs` | The parcel has entered customs. Once it is released, it goes back to `In transit`. |
+| `Delivered` | The parcel has been delivered. If it isn't there, see [delivered but not received](guide:delivered-not-received). |
+| `Needs attention` | Something went wrong, such as damage, a refusal or a wrong address, or the parcel is being sent back to the shop. La Poste's scan can give the reason: an incorrect address, a pickup deadline that passed or import documents that weren't in order. |
+| `Returned to sender` | The parcel is back with the shop. |
 
-The shop drops Delivengo parcels at a post office or mail centre in France, and they travel as priority items through La Poste's Roissy hub. What you see after that depends on where you live. The MyDelivengo FAQ lists 45 destinations tracked to delivery, including the UK, Ireland, the US, Canada, Australia, New Zealand, Switzerland, Norway and every EU country (other La Poste pages say 44). For other countries, tracking stops when the parcel leaves France: the last scan you see is its export, and that's by design.
+After export, the post in your country does the last mile, and La Poste's history can go quiet: the last scan you see may be the parcel leaving France or arriving in your country.
 
 ## Delivery and missed deliveries
 
-**Who delivers.** Your own country's postal service, in its usual round. La Poste says Delivengo parcels are delivered into the letterbox by the destination post's postman, and that beyond the border the local post is responsible for the parcel and for its delivery scan.
+**Who delivers.** Your own country's postal service does the last mile, not La Poste.
 
-**If you're out.** You're notified that the postman called, and you pick up the parcel at a post office. How long it is held, whether it can be redelivered and whether lockers are offered follow your local post's rules, not La Poste's.
+**If you're out.** Your local post's rules apply, not La Poste's: how it lets you know, how long it keeps the parcel and whether it tries again. See [missed delivery](guide:missed-delivery).
 
-**How long it takes.** La Poste Pro gives 4 to 6 working days within the EU and 7 to 13 working days elsewhere, as indicative times that can vary. The MyDelivengo FAQ says 3 to 6 days for the main European destinations, Switzerland included.
-
-**Customs.** Outside the EU, customs duties, local taxes and handling fees are yours to pay, and the post hands the parcel over only once they are paid, unless the shop paid them in advance with La Poste's PDDP option. The shop must warn you that these charges may be asked on delivery. See [parcel held at customs](guide:customs).
+**Customs.** Within the EU, from France to Ireland for example, there are no customs duties to pay: the EU says none are due when goods move from one EU country to another. Outside the EU, in the UK, the US, Canada or Australia, your country's rules apply; see [parcel held at customs](guide:customs).
 
 ## Delivengo parcel late, stuck or lost
 
-The shop holds the contract with La Poste, so it's the shop that can act.
+The shop sent the parcel from its Delivengo account, so start with the shop.
 
-**No update for days.** Check your country first: if it isn't on the FAQ's list, La Poste's tracking ends at the French border and the next sign of life may be the parcel itself. If it is, give it the indicative time above before worrying, then ask the shop. [Tracking that isn't updating](guide:tracking-not-updating) covers the usual reasons.
+**No update for days.** After export, La Poste's history can go quiet while your local post does the last mile. Peek can also follow some countries' posts (see below). If nothing moves, ask the shop. [Tracking that isn't updating](guide:tracking-not-updating) covers the usual reasons.
 
-**Lost or damaged.** Only the shop can claim, on its MyDelivengo account, from 72 hours after it ordered the label and for up to 6 months; it can ask La Poste's customer service to search for the parcel. Delivengo has no insurance and La Poste pays no compensation for theft, loss or missing tracking, so a refund or a new parcel is between you and the shop.
+**Lost or damaged.** Ask the shop for a new parcel or a refund. If you live in the EU, Your Europe says the trader is responsible for any damage from dispatch until you receive the goods, and that if they haven't arrived within 30 days, or the agreed time, you should remind the trader and give it a reasonable extra time; if it still doesn't deliver, you can end the contract and be refunded. See [lost parcel](guide:lost-parcel).
 
-**Returns.** Delivengo has no return service once a parcel is delivered: sending an item back follows the shop's own policy. A parcel that can't be delivered goes back to the shop.
+**Returned.** A parcel that can't be delivered goes back to the shop: Peek shows `Needs attention` while it travels back, then `Returned to sender`. Ask the shop whether it will send it again. See [returned to sender](guide:returned-to-sender).
 
 ## Delivengo contact
 
-As read on La Poste's pages on 12 October 2026:
-
-- **The shop first.** Delivengo's customer service is for business senders only, and its terms forbid shops from passing its details on to private customers.
-- **La Poste's help from abroad:** 0 810 821 821, Monday to Friday 8:30 am to 7 pm, €0.06 a minute plus the cost of the call, in English and French, or its online form, open around the clock. La Poste doesn't say this line handles Delivengo parcels.
+- **The shop first.** It sent the parcel and has the Delivengo account.
+- **La Poste, for a complaint.** Arcep, France's postal regulator, says a complaint can reach La Poste by phone on 36 31 (Monday to Friday 8:30 am to 7 pm, Saturday 8:30 am to 1 pm) or +33 810 821 821 (Monday to Friday 8 am to 7 pm), on its website, by letter or at a postal contact point. Arcep notes that the sender's and the recipient's rights are not quite the same, and doesn't say whether these channels handle Delivengo parcels.
 - **Your local post** once the parcel is in your country, with the same number.
-
-La Poste warns that it never asks you to pay a supplement or postage to receive a parcel or change its delivery, apart from customs duties and taxes, and that you should never call back a premium-rate number to receive a parcel.
 
 ## Tracking a Delivengo parcel with Peek
 
@@ -71,37 +69,29 @@ La Poste warns that it never asks you to pay a supplement or postage to receive 
 
 Peek shows what La Poste publishes: the status, the history with the country of each scan and the expected delivery when La Poste gives one. It leaves out your name and address. Statuses appear in La Poste's French, except a few common ones, such as delivered, which are shown in your language.
 
-When La Poste gives the destination country and it is the UK, the US, Canada, Australia, Japan, Switzerland, Germany, Spain, the Netherlands, Poland, Sweden, Finland or Ukraine, Peek can also ask that country's postal service, and switches to it once it shows newer progress. Ireland, Belgium, Italy, Portugal and Luxembourg aren't in that list, and La Poste's history can go quiet after export, so the last leg doesn't always show.
+When La Poste gives the destination country, Peek can also ask the post it follows there, and switches to it once it shows newer progress. It does so for every EU country, the UK, Switzerland, Norway, the US, Canada, Australia and Japan, among others. La Poste's history can still go quiet after export, so the last leg doesn't always show.
 
 Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and its notifications can cover every scan, important steps only or delivery day only.
 
 ## Questions about Delivengo tracking
 
-### What is Delivengo easy?
-
-It's La Poste's international shipping offer for businesses with a French SIRET number sending fewer than 200 parcels a month, for goods up to 2 kg, to more than 190 countries. Larger senders use Delivengo Profil.
-
 ### Is Delivengo the same as Colissimo?
 
-No, though La Poste sells both and they share its tracking. Delivengo is a separate service for small parcels sent abroad from France, with no insurance and no option such as registered post or proof of receipt.
+No, though both are La Poste's and they share its tracking. Delivengo is La Poste's export service for small international parcels.
+
+### Why has my Delivengo tracking stopped after France?
+
+Once the parcel leaves France, the post in your country does the last mile, and La Poste's history can go quiet. The parcel can still be on its way. Peek also asks some countries' posts (see above); if nothing moves, ask the shop.
 
 ### Can I track a Delivengo parcel to the USA or Canada?
 
-Yes, both are on the list of destinations tracked to delivery, with the same `…FR` number. For the US, La Poste bills customs duties to the shop and pays them to US customs for items up to USD 800.
-
-### Is Delivengo good?
-
-It suits light, low-value items: it is tracked priority post with no insurance and no compensation from La Poste, so any problem is settled with the shop. Tracking to your door depends on your country being on La Poste's list.
+Yes, with the same `…FR` number on La Poste's tracking. Once La Poste gives the destination country, Peek also asks [USPS](carrier:usps) or [Canada Post](carrier:canada-post), and switches to it when it shows newer progress.
 
 :::sources
-- [La Poste: FAQ – Delivengo easy](https://mydelivengo.laposte.fr/easy/faq/) – tracked destinations, local operator, letterbox delivery, absence notice, times, claims, no compensation, no options
-- [La Poste: Conditions spécifiques de vente Delivengo easy](https://easy.mydelivengo.laposte.fr/assets/docs/file/Q0dVQ1NWLVZlcnNpb24gMTcgLSBEZWNlbWJyZSAyMDI1LnBkZg==) – Roissy hub, email option, duties, PDDP, US customs, returns, claims, customer service
-- [La Poste Pro: Delivengo easy, petit colis international](https://www.laposte.fr/professionnel/envoi-colis/delivengo-easy-petit-colis-international) – 2 kg, 190 countries, delivery times, letterbox
-- [La Poste: Expédier à l'international vos colis et courriers](https://www.laposte.fr/entreprise-collectivites/expedier-international-vos-colis-courriers) – Delivengo easy and Profil
-- [La Poste: Track a letter, Colissimo or Chronopost](https://www.laposte.fr/outils/track-a-parcel) – English tracking page and its wording
-- [La Poste: Suivre une lettre, un Colissimo ou un Chronopost](https://www.laposte.fr/outils/suivre-vos-envois) – French tracking page and its wording
-- [La Poste: Comment suivre mon colis ou ma lettre ?](https://aide.laposte.fr/contenu/comment-suivre-mon-colis-ou-ma-lettre) – number shapes, capitals, partner number, tracked countries
-- [La Poste: Besoin d'aide pour l'envoi ou la réception](https://aide.laposte.fr/nous-contacter/l-envoi-ou-la-reception) – line from abroad, hours, form
-- [La Poste: Comment reconnaître une tentative de fraude ?](https://aide.laposte.fr/contenu/comment-reconnaitre-une-tentative-de-fraude) – scam warning
+- [Universal Parcel Scraper: Delivengo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/delivengo) – La Poste's export service, last mile by the destination post, quiet history after export, account area, no number rule of its own
+- [Universal Parcel Scraper: La Poste](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – shared tracking, number shape and check digit, what each scan means
+- [European Union: EU customs union in action](https://european-union.europa.eu/priorities-and-actions/actions-topic/customs_en) – no customs duties between EU countries
+- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – trader responsible for damage until delivery, missing delivery
+- [Arcep: La résolution des litiges postaux](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – complaints to La Poste: phone lines, hours, website, letter, postal contact point, sender and recipient rights
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

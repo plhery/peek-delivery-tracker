@@ -3,7 +3,7 @@ title: Asendia suivi : colis, statuts et qui contacter
 description: Suivre un colis Asendia : d'où vient le numéro, ce que veulent dire les statuts, qui le livre en France, en Belgique ou en Suisse et qui contacter s'il bloque.
 slug: asendia-suivi
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 Asendia, détenue par La Poste et la Poste suisse, transporte d'un pays à l'autre les commandes en ligne des boutiques. Elle ne livre pas jusqu'à ta porte : elle amène le colis de l'entrepôt du vendeur à l'étranger jusqu'à ton pays, où un transporteur que tu connais sans doute prend le relais. Pour le suivre, prends le numéro donné par la boutique dans son e-mail d'expédition et saisis-le sur [le suivi d'Asendia](https://track.asendia.com/track) ou, pour Asendia USA, sur [A1 Tracking](https://a1.asendiausa.com/tracking/).
@@ -57,7 +57,7 @@ Asendia le dit elle-même : « Nous ne disposons pas d'un propre réseau de dist
 
 Selon Asendia, la plupart de ses partenaires font deux ou trois tentatives et laissent à chaque fois un avis de passage, papier ou électronique, pour faire relivrer ou retirer le colis dans un bureau de poste proche. Certaines offres permettent de reprogrammer la livraison ; sinon, « soit une nouvelle tentative de livraison sera effectuée, soit votre colis sera livré au bureau de poste ou au point relais le plus proche ». Certains partenaires proposent aussi de changer d'adresse après une première tentative manquée.
 
-La durée de garde est celle du transporteur. Pour Colissimo, La Poste garde le colis « pendant 15 jours calendaires à compter du lendemain du dépôt de l'avis » avant de le renvoyer à l'expéditeur ; tu peux modifier la livraison en ligne jusqu'à minuit le jour de l'avis de passage. La Poste suisse indique en général 7 jours, ou 15 jours pour les envois internationaux, délai prolongeable. Asendia n'a ni consignes ni points relais à elle. Un colis non retiré repart, selon une procédure qui dépend du pays.
+La durée de garde est celle du transporteur : pour un Colissimo, renseigne-toi auprès de La Poste. La Poste suisse indique en général 7 jours, ou 15 jours pour les envois internationaux, délai prolongeable. Asendia n'a ni consignes ni points relais à elle. Un colis non retiré repart, selon une procédure qui dépend du pays.
 
 ## Colis Asendia non reçu, bloqué ou perdu
 
@@ -109,7 +109,6 @@ Une référence de 12 caractères commençant par ASD ressemble à un numéro [C
 
 :::sources
 - [Asendia Benelux : FAQ](https://www.asendiabenelux.com/fr/contact/faq/) – partenaires de livraison, reprogrammation, numéro de suivi, écarts entre les scans, demandes réservées aux entreprises, colis non reçu
-- [La Poste : Comment gérer une livraison de colis lors de mon absence](https://aide.laposte.fr/professionnel/contenu/comment-gerer-une-livraison-de-colis-lors-de-mon-absence) – 15 jours calendaires, modification jusqu'à minuit
 - [La Poste suisse : Invitation à retirer](https://www.post.ch/fr/reception/invitation-a-retirer) – 7 jours, 15 jours pour les envois internationaux
 - [Asendia : Shopper Support](https://www.asendia.com/shopper-support) – rôle d'Asendia, envois non suivis, avis de passage, retard, perte, réclamation par la boutique, assistant virtuel, douane
 - [Asendia : FAQ](https://www.asendia.com/contact/faq) – propriétaires, pays, partenaires, tentatives, reprogrammation, changement d'adresse, centres de transit, délais

@@ -2349,7 +2349,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "la-poste",
       "catalog": "la-poste",
       "slug": "colissimo-la-poste-seguimiento",
-      "title": "Colissimo y La Poste seguimiento: estados, SEUR y Correos",
+      "title": "Colissimo y La Poste seguimiento: número, estados y entrega",
       "name": "La Poste / Colissimo",
       "color": "#ffcf00"
     },

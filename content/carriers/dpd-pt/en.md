@@ -3,10 +3,10 @@ title: DPD Portugal tracking: statuses, Pickup points and contact
 description: Track a DPD Portugal parcel: the 14-digit number, what the Portuguese statuses mean, Predict, Pickup points and lockers, claims and who to call.
 slug: dpd-portugal-tracking
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-DPD Portugal is the Portuguese parcel carrier of Geopost, the parcel group behind DPD and [Chronopost](carrier:chronopost). It delivers parcels across mainland Portugal, Madeira and the Azores, and it is the delivery partner La Poste's Colissimo names for Portugal. Track a parcel on DPD's [Track & Trace](https://tracking.dpd.pt/track-and-trace) with its 14-digit number, or paste the number in the box above.
+DPD Portugal is the Portuguese parcel carrier of Geopost, the parcel group behind DPD and [Chronopost](carrier:chronopost). It delivers parcels across mainland Portugal, Madeira and the Azores. Track a parcel on DPD's [Track & Trace](https://tracking.dpd.pt/track-and-trace) with its 14-digit number, or paste the number in the box above.
 
 ## DPD Portugal tracking number: where to find it
 
@@ -93,7 +93,7 @@ For 14 digits starting 0955 to 0988, with or without the check character, [Peek]
 
 Peek reads DPD's Portuguese tracking, so the wordings stay Portuguese. Once a Pickup point takes your parcel, Peek shows its name; DPD's map, delivery window and the name of whoever signed stay on DPD's page. Peek checks every 10 minutes by day, every 2 once the parcel is out for delivery, and every hour or two overnight, and can notify you with "All tracking updates", "Important only" or "Delivery day only".
 
-When La Poste's tracking names DPD Portugal and gives its number, Peek can follow the parcel there once DPD shows progress. A Chronopost parcel stays on Chronopost: Peek doesn't move it to DPD Portugal, so if DPD emails you its own number, add that one to Peek too. Peek can't change a delivery or claim for you.
+When La Poste's tracking names DPD Portugal and gives its number, Peek can follow the parcel there once DPD shows progress. The same goes for a Chronopost parcel: when Chronopost's tracking gives the DPD number and Portugal as the delivery country, Peek names DPD Portugal as the delivering carrier, with that number, and switches to DPD Portugal once DPD shows a scan at least as recent as Chronopost's latest. Peek can't change a delivery or claim for you.
 
 ## Questions about DPD Portugal tracking
 
@@ -120,7 +120,6 @@ Yes. DPD Portugal delivers to the islands, to the door or to a Pickup point, in 
 - [DPD Portugal: Inseri um número de referência incorreto](https://www.dpd.com/pt/pt/faq/inseri-um-numero-de-referencia-incorreto-o-que-posso-fazer/) – check the number, ask the sender
 - [Geopost: Who we are](https://www.geopost.com/en/about-us/who-we-are/) – DPD, Chronopost and SEUR brands, La Poste group
 - [Geopost: DPD Portugal](https://www.geopost.com/en/about-us/our-companies-and-partners/dpd-portugal/) – part of Geopost, 2,300 Pickup points
-- [Colissimo: Portugal](https://www.colissimo.entreprise.laposte.fr/destination-pt) – DPD as delivery partner in Portugal
 - [DPD Portugal: Serviço Doméstico](https://www.dpd.com/pt/pt/enviar-encomenda/servico-domestico/) – next working day, 2 to 5 days on the islands, Saturday services
 - [DPD Portugal: Receive parcels](https://www.dpd.com/pt/en/receive-parcels/) – Predict, Live-Tracking, Pickup point, change of day, 2,000 Pickup points
 - [DPD Portugal: Inovação](https://www.dpd.com/pt/pt/empresa/inovacao/) – one-hour window, up to 5 working days later, 500 lockers, Maria

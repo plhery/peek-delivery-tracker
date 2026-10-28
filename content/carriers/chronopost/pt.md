@@ -3,10 +3,10 @@ title: Chronopost rastreio: estados e entrega em Portugal
 description: Rastreio Chronopost: como é o número, o que querem dizer os estados em francês, quem pode entregar em Portugal, os pontos Pickup e os contactos úteis.
 slug: chronopost-rastreio
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-A Chronopost é a transportadora expresso francesa da Geopost, a empresa de encomendas do grupo La Poste. Esta página é sobretudo para quem está em Portugal à espera de uma encomenda enviada de França com a Chronopost; mais abaixo há uma parte para quem vive em França. Segues a encomenda com o número na página [Suivre votre colis](https://www.chronopost.fr/fr/suivi-colis) da Chronopost, no [rastreio da La Poste](https://www.laposte.fr/outils/suivre-vos-envois), que também segue envios Chronopost, ou colando-o na caixa acima. Não tens o número? Pede-o à loja ou vê [onde encontrar o número de rastreio](guide:find-tracking-number).
+A Chronopost é a transportadora expresso francesa da Geopost, a empresa de encomendas do grupo La Poste. Esta página é sobretudo para quem está em Portugal à espera de uma encomenda enviada de França com a Chronopost; mais abaixo há uma parte para quem vive em França. Segues a encomenda com o número no chronopost.fr ou colando-o na caixa acima. O rastreio da La Poste, no laposte.fr, também responde a números Chronopost, mas pode omitir os eventos do parceiro no estrangeiro e o número dele. Não tens o número? Pede-o à loja ou vê [onde encontrar o número de rastreio](guide:find-tracking-number).
 
 ## Número de rastreio Chronopost: como é
 
@@ -44,9 +44,7 @@ Se for a [DPD Portugal](carrier:dpd-pt) a entregar, o rastreio dela mostra `EM D
 
 ## Se estás em Portugal: quem te entrega uma Chronopost
 
-A Chronopost e a DPD Portugal são duas empresas da Geopost. O aviso, o email ou o SMS que recebes dizem-te quem tem a encomenda, e o rastreio da Chronopost pode mostrar o número do parceiro que a entrega. Entre França e Portugal não há alfândega: os dois países estão na UE.
-
-**Prazos.** Para as etiquetas Chronopost compradas no site da La Poste, o prazo indicativo é de 1 a 4 dias, conforme o destino. Num envio de uma loja, o prazo depende do serviço que ela escolheu.
+A Chronopost e a DPD Portugal são duas empresas da Geopost. O aviso, o email ou o SMS que recebes dizem-te quem tem a encomenda, e o rastreio da Chronopost pode mostrar o número do parceiro que a entrega. Entre França e Portugal não há direitos aduaneiros a pagar: na UE, não se pagam quando os bens passam de um país para outro.
 
 **Se o aviso ou o email vierem da DPD Portugal**, segundo as páginas dela:
 
@@ -57,15 +55,15 @@ A Chronopost e a DPD Portugal são duas empresas da Geopost. O aviso, o email ou
 - Outra pessoa pode levantá-la com um documento de identificação e uma autorização preenchida por ti.
 - A DPD também entrega nas ilhas.
 
-## Se vives em França: avis de passage e relais Pickup
+## Se vives em França: ponto de levantamento
 
-Se a Chronopost não conseguir entregar em casa, deixa um avis de passage na caixa do correio, e a encomenda fica à tua espera no relais Pickup mais próximo, numa estação de correios (bureau de poste) ou na agência Chronopost que faz a entrega. A rede Pickup tem mais de 17.500 lojas de bairro e 6.500 cacifos.
+Se a encomenda ficar à tua espera num ponto de levantamento, o rastreio da Chronopost diz `Colis mis à disposition au point de retrait`, ou `Colis mis à disposition dans un point de retrait différent de celui prévu` se não for o ponto previsto. Quando a levantas, aparece `Colis remis au destinataire au point de retrait`. Para mudar a entrega ou saber quanto tempo a encomenda fica à espera, vê o chronopost.fr.
 
 ## Encomenda Chronopost parada, perdida ou danificada
 
 **Parada.** Se a DPD Portugal já tem a encomenda e o estado não mudar durante várias horas no dia da entrega, a DPD pede que a contactes. Se nada mexe há dias, fala com a loja. Vê também [encomenda parada](guide:tracking-not-updating).
 
-**Atrasada, perdida ou danificada.** Quem contratou o envio foi a loja, por isso a reclamação passa por ela. Segundo a ajuda da La Poste, num atraso o remetente tem 3 dias depois da entrega para reclamar num envio em França e 21 num envio internacional; numa perda ou dano, a indemnização vai até 250 € por encomenda no Chrono Express e até 23 € por quilo, no máximo 690 €, no Chrono Classic, com comprovativo. Avisa a loja depressa. Mais em [encomenda danificada](guide:damaged-parcel) e [encomenda perdida](guide:lost-parcel).
+**Atrasada, perdida ou danificada.** Quem contratou o envio foi a loja, por isso a reclamação passa por ela. Na UE, segundo o Your Europe, o vendedor é responsável por qualquer dano causado aos artigos desde a expedição até à entrega. Mais em [encomenda danificada](guide:damaged-parcel) e [encomenda perdida](guide:lost-parcel).
 
 **Dada como entregue, mas não a tens.** Se foi a DPD Portugal a entregar, usa o formulário de contacto da DPD; senão, fala com a loja. Mais em [entregue mas não recebida](guide:delivered-not-received).
 
@@ -87,17 +85,13 @@ O [Peek](/) reconhece logo a Chronopost num número de 13 caracteres começado p
 
 O Peek lê a Chronopost em francês, por isso os estados ficam em francês. Mostra no mapa o depósito de cada evento, o país de destino, a hora de entrega, o número do parceiro no estrangeiro e, enquanto a encomenda espera, o relais ou o cacifo com a morada. Não guarda a tua morada.
 
-Numa encomenda para Portugal, o Peek continua a segui-la na Chronopost, que não indica o parceiro: se a DPD Portugal te mandar o número dela, adiciona-o também ao Peek. Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Não consegue mudar uma entrega nem reclamar por ti.
+Numa encomenda para Portugal, quando o rastreio da Chronopost dá o número da DPD e Portugal como país de entrega, o Peek indica a DPD Portugal como quem entrega, com esse número, e pergunta-lhe pela encomenda. Passa a segui-la na DPD Portugal assim que esta mostrar um evento tão recente como o último da Chronopost; até lá, continua na Chronopost. Consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Não consegue mudar uma entrega nem reclamar por ti.
 
 ## Perguntas sobre o rastreio Chronopost
 
 ### Quem entrega a Chronopost em Portugal?
 
 O aviso, o email ou o SMS que recebes dizem-te que empresa tem a encomenda, e o rastreio da Chronopost pode mostrar o número dela. A DPD Portugal, tal como a Chronopost, faz parte da Geopost.
-
-### Quanto tempo demora uma Chronopost de França para Portugal?
-
-Para as etiquetas Chronopost compradas no site da La Poste, o prazo indicativo é de 1 a 4 dias, conforme o destino. Num envio de uma loja, depende do serviço que ela escolheu.
 
 ### A Chronopost é a mesma coisa que a DPD?
 
@@ -112,12 +106,8 @@ Num ponto Pickup da DPD Portugal, o prazo que vem no SMS: a DPD fala em 7 dias �
 - [Geopost: Chronopost](https://www.geopost.com/en/about-us/our-companies-and-partners/chronopost/) – transportadora expresso francesa
 - [Geopost: DPD Portugal](https://www.geopost.com/en/about-us/our-companies-and-partners/dpd-portugal/) – empresa da Geopost
 - [La Poste Groupe: Geopost](https://www.lapostegroupe.com/fr/geopost-le-colis-meme-a-l-autre-bout-du-monde) – Geopost, empresa de encomendas do grupo La Poste, com a Chronopost
-- [La Poste: Suivre une lettre, un Colissimo ou un Chronopost](https://www.laposte.fr/outils/suivre-vos-envois) – rastreio de envios Chronopost
-- [La Poste: Envoyer un colis - Portugal](https://www.laposte.fr/fiche-destination/envoi-colis/portugal) – sem documentos aduaneiros para a UE
-- [La Poste: Quelles sont les offres de Chronopost disponibles dans le comparateur ?](https://aide.laposte.fr/contenu/quelles-sont-les-offres-de-chronopost-disponibles-dans-le-comparateur-et-quels-envois-permettent-elles) – prazo indicativo de 1 a 4 dias
-- [La Poste: Quel mode de livraison choisir pour un Chronopost ?](https://aide.laposte.fr/contenu/quel-mode-de-livraison-choisir-pour-un-chronopost) – avis de passage, rede Pickup
-- [La Poste: Comment récupérer un colis Chronopost en cas d'absence ?](https://aide.laposte.fr/professionnel/contenu/comment-recuperer-un-colis-chronopost-en-cas-d-absence) – relais Pickup, estação de correios, agência Chronopost
-- [La Poste: Garanties et indemnisations pour un envoi avec Chronopost](https://aide.laposte.fr/contenu/quelles-sont-les-garanties-et-indemnisations-pour-un-envoi-avec-chronopost) – 3 e 21 dias, 250 €, 23 €/kg até 690 €
+- [União Europeia: A união aduaneira da UE em ação](https://european-union.europa.eu/priorities-and-actions/actions-topic/customs_pt) – sem direitos aduaneiros entre países da UE
+- [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – o vendedor responde pelos danos até à entrega
 - [DPD Portugal: Quem somos](https://www.dpd.com/pt/pt/empresa/) – a DPD Portugal faz parte da Geopost
 - [DPD Portugal: Receber encomendas](https://www.dpd.com/pt/pt/receber-encomenda/) – Predict, Live-Tracking, alterar data ou local, pontos Pickup
 - [DPD Portugal: Onde encontro o número da encomenda?](https://www.dpd.com/pt/pt/faq/onde-encontro-o-numero-da-encomenda/) – número por email e no aviso
@@ -134,4 +124,5 @@ Num ponto Pickup da DPD Portugal, o prazo que vem no SMS: a DPD fala em 7 dias �
 - [DPD Portugal: Ajuda](https://www.dpd.com/pt/pt/ajuda/) – alerta de phishing, sem pagamentos por mensagem, cobrança paga ao estafeta
 - [DPD Portugal: Track & Trace](https://tracking.dpd.pt/track-and-trace) – rastreio e estados da DPD Portugal
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formas do número, estados da Chronopost, o que o Peek lê e mostra
+- [Universal Parcel Scraper: La Poste](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – o rastreio da La Poste responde a números Chronopost e pode omitir os eventos do parceiro
 :::

@@ -32780,6 +32780,79 @@
         }
       ],
       "detectionRules": []
+    },
+    "jifan": {
+      "displayName": "Jifan",
+      "aliases": [
+        "Jifan International Logistics",
+        "吉凡国际物流",
+        "深圳市吉凡国际物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#c81011",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.szjf56.cn/index/tracknumber/track?nos={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "szjf56.cn",
+            "www.szjf56.cn"
+          ],
+          "pathPattern": "^/index/tracknumber/track$",
+          "params": [
+            "nos"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^JFGJ\\d{9}CN$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://www.szjf56.cn/"
+    },
+    "youbang-express": {
+      "displayName": "YouBang Express",
+      "aliases": [
+        "YBWL",
+        "佑邦国际物流",
+        "深圳市佑邦国际物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#fb5008",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "119.29.254.121"
+          ],
+          "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+          "params": [
+            "documentCode"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^YB\\d{10}CN$",
+          "confidence": "low"
+        }
+      ]
     }
   },
   "servers": [
@@ -36388,7 +36461,9 @@
           "j-and-t-uk",
           "logisimple",
           "viadireta",
-          "meso-global"
+          "meso-global",
+          "jifan",
+          "youbang-express"
         ]
       },
       "Stage": {

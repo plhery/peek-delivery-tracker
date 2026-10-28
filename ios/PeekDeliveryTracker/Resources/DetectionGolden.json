@@ -79139,6 +79139,14 @@
     ]
   },
   {
+    "input": "JFGJ131216132CN",
+    "carrier": "jifan",
+    "confidence": "high",
+    "candidates": [
+      "jifan"
+    ]
+  },
+  {
     "input": "JFV247545960",
     "carrier": "purolator",
     "confidence": "high",
@@ -95650,6 +95658,14 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "YB0000000017CN",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "youbang-express"
+    ]
   },
   {
     "input": "YCC871846",

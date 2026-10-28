@@ -128,6 +128,10 @@ private class PressEffectNode(
     private var clock: Job? = null
     private val paint = Paint()
 
+    /** The layer's colour filter and the brightness it adds, made again only when that changes. */
+    private var filter: ColorMatrixColorFilter? = null
+    private var filterBrightness = 0f
+
     override fun onAttach() {
         // A press that came before the node was attached, or one cut off when it was last detached.
         if (pending != null || shown != progress.target) clock = coroutineScope.launch { tick() }
@@ -147,6 +151,12 @@ private class PressEffectNode(
 
     override fun onDetach() {
         clock = null
+        // The presses it heard go with its collector, and a press let go meanwhile is never told: it comes back at rest.
+        if (interactionSource != null) {
+            pending = null
+            progress.animate(0.0, null, 0.0)
+            shown = 0.0
+        }
     }
 
     fun press(pressed: Boolean) {
@@ -183,26 +193,33 @@ private class PressEffectNode(
             drawContent()
             return
         }
-        val canvas = drawContext.canvas.nativeCanvas
-        val saved = if (layer) canvas.saveLayer(null, paint.of(look)) else canvas.save()
         withTransform({
             translate(top = offset)
             scale(look.scale, look.scale, center)
         }) {
+            // The layer is the content's bounds where they now stand. Left to the clip, it would be the whole enclosing
+            // node, a list row or the window, at each frame. Like Compose's own alpha, it cuts what the content draws
+            // past its bounds while it shows.
+            val canvas = drawContext.canvas.nativeCanvas
+            val saved = if (layer) canvas.saveLayer(0f, 0f, size.width, size.height, paint.of(look)) else null
             this@draw.drawContent()
+            saved?.let { canvas.restoreToCount(it) }
         }
-        canvas.restoreToCount(saved)
     }
 
     /** The layer's paint: its opacity, and the brightness added to each channel before the colour is premultiplied. */
     private fun Paint.of(look: PressAppearance): Paint {
         alpha = (look.opacity * 255).roundToInt()
-        colorFilter = if (look.brightness == 0f) {
-            null
-        } else {
-            val add = look.brightness * 255
-            ColorMatrixColorFilter(ColorMatrix(floatArrayOf(1f, 0f, 0f, 0f, add, 0f, 1f, 0f, 0f, add, 0f, 0f, 1f, 0f, add, 0f, 0f, 0f, 1f, 0f)))
-        }
+        colorFilter = if (look.brightness == 0f) null else brightness(look.brightness)
         return this
+    }
+
+    private fun brightness(amount: Float): ColorMatrixColorFilter {
+        filter?.let { if (filterBrightness == amount) return it }
+        val add = amount * 255
+        val made = ColorMatrixColorFilter(ColorMatrix(floatArrayOf(1f, 0f, 0f, 0f, add, 0f, 1f, 0f, 0f, add, 0f, 0f, 1f, 0f, add, 0f, 0f, 0f, 1f, 0f)))
+        filter = made
+        filterBrightness = amount
+        return made
     }
 }

@@ -38,7 +38,7 @@ class AnimatedValue(initial: Double) {
 
         private fun curveVelocity(curve: UnitCurve, duration: Double, delay: Double, time: Double): Double {
             val progress = (time - delay) / duration
-            return if (progress <= 0 || progress >= 1) 0.0 else delta * curve.velocity(progress) / duration
+            return if (progress < 0 || progress >= 1) 0.0 else delta * curve.velocity(progress) / duration
         }
 
         fun finished(now: Double): Boolean = when (animation) {

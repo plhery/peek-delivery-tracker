@@ -109,6 +109,17 @@ class PressStyleTest {
     }
 
     @Test
+    fun aSpringTakingOverAsACurveStartsLeavesAtTheCurvesFirstSpeed() {
+        val value = AnimatedValue(0.0)
+        value.animate(1.0, MotionCurve.EaseOut(0.16), now = 0.0)
+        // SwiftUI reads an ease-out's slope at its start as 1: it already moves, and a spring then keeps that speed.
+        assertEquals(1 / 0.16, value.velocity(0.0), 1e-9)
+        val spring = Spring(duration = 0.22, bounce = 0.15)
+        value.animate(0.0, MotionCurve.SpringCurve(spring), now = 0.0)
+        assertEquals(spring.value(0.0, 1 / 0.16, 0.05), value.value(0.05), 1e-12)
+    }
+
+    @Test
     fun withoutAnAnimationTheValueMovesAtOnce() {
         val value = AnimatedValue(0.0)
         value.animate(1.0, MotionCurve.EaseOut(0.16), now = 0.0)

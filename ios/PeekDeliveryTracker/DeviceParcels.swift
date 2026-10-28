@@ -196,9 +196,15 @@ struct DeviceParcelFiles: DeviceParcelStorage {
 
     func load() -> (parcels: [DeviceParcel], keys: [String: String]) {
         let keys: [String: String] = keychain.load() ?? [:]
-        guard let url = try? Self.fileURL(), let data = try? Data(contentsOf: url),
-              let parcels = try? JSONDecoder.deliveryTracker.decode([DeviceParcel].self, from: data) else { return ([], [:]) }
-        return Self.matched(parcels, keys: keys)
+        return Self.opened((try? Self.fileURL()).flatMap { try? Data(contentsOf: $0) }, keys: keys)
+    }
+
+    /// The parcels on file, with their keys. A file this build can't read keeps every key, so
+    /// the service can be asked to forget their links.
+    static func opened(_ file: Data?, keys: [String: String]) -> (parcels: [DeviceParcel], keys: [String: String]) {
+        guard let file else { return ([], [:]) }
+        guard let parcels = try? JSONDecoder.deliveryTracker.decode([DeviceParcel].self, from: file) else { return ([], keys) }
+        return matched(parcels, keys: keys)
     }
 
     /// A parcel of this iPhone's own without its key cannot be read or forgotten, and a key without
@@ -210,14 +216,15 @@ struct DeviceParcelFiles: DeviceParcelStorage {
 
     func save(_ parcels: [DeviceParcel], keys: [String: String]) {
         guard let url = try? Self.fileURL() else { return }
-        if parcels.isEmpty {
+        if parcels.isEmpty, keys.isEmpty {
             keychain.delete()
             try? FileManager.default.removeItem(at: url)
             return
         }
         // The keys go first: a parcel on file always has its key.
         if keys.isEmpty { keychain.delete() } else if (try? keychain.save(keys)) == nil { return }
-        guard let data = try? JSONEncoder.deliveryTracker.encode(parcels) else { return }
+        // Keys alone are those of a file that couldn't be read, which stays until their links are forgotten.
+        guard !parcels.isEmpty, let data = try? JSONEncoder.deliveryTracker.encode(parcels) else { return }
         try? data.write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
     }
 
@@ -250,8 +257,8 @@ final class DeviceParcels {
     private let now: () -> Date
     private var entries: [DeviceParcel]
     private var keys: [String: String]
-    /// The token and language a round of notification requests is under way for.
-    private var alertRound: String?
+    /// The tokens and languages rounds of notification requests are under way for.
+    private var alertRounds: Set<String> = []
     /// The token and language each parcel's notifications were asked for since launch. Each
     /// launch asks again, in case the service lost them.
     private var alertsAsked: [String: String] = [:]
@@ -331,6 +338,11 @@ final class DeviceParcels {
     /// the list keeps what the device has.
     func refresh(all: Bool = false, only id: UUID? = nil) async throws {
         guard let client else { return }
+        // Keys without their parcel, left by a file that couldn't be read: the service forgets those links too.
+        for (linkID, key) in keys where !entries.contains(where: { $0.linkID == linkID }) {
+            guard (try? await client.forget(linkID, key)) != nil, !entries.contains(where: { $0.linkID == linkID }) else { continue }
+            keys[linkID] = nil
+        }
         var trouble: Error?
         for entry in entries where id == nil || entry.parcel.id == id {
             let key = keys[entry.linkID]
@@ -539,9 +551,8 @@ final class DeviceParcels {
     /// nowhere, has no room or is no longer shared is left until the next launch.
     func registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = .current) async {
         let asked = "\(token) \(locale.rawValue)"
-        guard let client, alertRound != asked else { return }
-        alertRound = asked
-        defer { alertRound = nil }
+        guard let client, alertRounds.insert(asked).inserted else { return }
+        defer { alertRounds.remove(asked) }
         let due = entries.filter { alertsAsked[$0.linkID] != asked && $0.parcel.currentStage?.isFinal != true }.prefix(Self.alertsPerRound)
         for entry in due {
             let preset = entry.alertPreset ?? Self.alertPreset(for: entry.parcel)

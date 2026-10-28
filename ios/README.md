@@ -58,7 +58,9 @@ followed.
 The site hands a parcel it looked up over to the app with its owner key after the `#`
 (`#k=<key>`, beside the other words). The app follows it as its own, with the key in the
 keychain, as if it had looked the parcel up itself; signed in, it keeps it in the account
-with the key. The key goes into no link, share, log or analytics event.
+with the key. The key goes into no link, share, log or analytics event. When the file of
+the iPhone's parcels can't be read, their keys stay in the keychain until the service has
+forgotten their links.
 
 ## The deliveries
 

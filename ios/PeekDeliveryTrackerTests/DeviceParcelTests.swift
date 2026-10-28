@@ -624,6 +624,50 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(saved, [followed])
     }
 
+    func testAFileThatCannotBeReadKeepsItsKeysUntilTheirLinksAreForgotten() async throws {
+        let unreadable = DeviceParcelFiles.opened(Data(#"[{"linkID":42}]"#.utf8), keys: ["22222222222C": key])
+        XCTAssertTrue(unreadable.parcels.isEmpty)
+        XCTAssertEqual(unreadable.keys, ["22222222222C": key])
+        XCTAssertEqual(DeviceParcelFiles.opened(nil, keys: ["22222222222C": key]).keys, [:], "No file, no parcels to forget")
+
+        // Offline, the key stays for the next try.
+        let storage = Memory()
+        storage.keys = unreadable.keys
+        let calls = Calls()
+        var offline = client(calls)
+        offline.forget = { linkID, _ in calls.add("forget \(linkID)"); throw URLError(.notConnectedToInternet) }
+        try await DeviceParcels(client: offline, storage: storage).refresh()
+        XCTAssertEqual(storage.keys, ["22222222222C": key])
+
+        try await DeviceParcels(client: client(calls), storage: storage).refresh()
+        XCTAssertEqual(calls.all, ["forget 22222222222C", "forget 22222222222C"])
+        XCTAssertTrue(storage.keys.isEmpty)
+    }
+
+    func testARoundEndingLeavesAnotherUnderWayMarked() async throws {
+        let calls = Calls()
+        let gate = AlertGate()
+        var held = client(calls, lookup: PublicLookupResponse(link: link("22222222222A"), key: key, package: package(UUID())))
+        held.setAlert = { linkID, _, request in
+            calls.add("alert \(linkID) \(request.token)")
+            await gate.pass(request.token)
+            return .on
+        }
+        let device = DeviceParcels(client: held, storage: Memory())
+        _ = try await device.add(CreatePackageRequest(trackingNumber: "TESTPARCEL123789", label: "", carrier: .dhl))
+        let first = Task { await device.registerAlerts(token: "old-token", locale: .en) }
+        await gate.arrived("old-token")
+        let second = Task { await device.registerAlerts(token: "new-token", locale: .en) }
+        await gate.arrived("new-token")
+        await gate.release("old-token")
+        await first.value
+        // The second round is still under way: the same round does not start again beside it.
+        await device.registerAlerts(token: "new-token", locale: .en)
+        await gate.release("new-token")
+        await second.value
+        XCTAssertEqual(calls.all.filter { $0.hasPrefix("alert") }, ["alert 22222222222A old-token", "alert 22222222222A new-token"])
+    }
+
     func testAHandedOverKeyMakesTheParcelThisIPhonesOwn() async throws {
         let id = UUID()
         let storage = Memory()
@@ -848,4 +892,25 @@ private final class PostcodeTestURLProtocol: URLProtocol {
 @MainActor
 private func XCTAssertThrowsErrorAsync<T>(_ expression: @autoclosure () async throws -> T, file: StaticString = #filePath, line: UInt = #line) async {
     do { _ = try await expression(); XCTFail("No error was thrown", file: file, line: line) } catch {}
+}
+
+/// Holds the first notification request on each token until it is released; later ones go through.
+private actor AlertGate {
+    private var seen: Set<String> = []
+    private var held: [String: CheckedContinuation<Void, Never>] = [:]
+    private var arrivals: [String: [CheckedContinuation<Void, Never>]] = [:]
+
+    func pass(_ token: String) async {
+        guard seen.insert(token).inserted else { return }
+        arrivals.removeValue(forKey: token)?.forEach { $0.resume() }
+        await withCheckedContinuation { held[token] = $0 }
+    }
+
+    /// Returns once the first request on the token is held.
+    func arrived(_ token: String) async {
+        guard !seen.contains(token) else { return }
+        await withCheckedContinuation { arrivals[token, default: []].append($0) }
+    }
+
+    func release(_ token: String) { held.removeValue(forKey: token)?.resume() }
 }

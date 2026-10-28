@@ -3,7 +3,7 @@ title: bpost Sendungsverfolgung: Status, Abholung, bbox, Zoll
 description: bpost-Paket verfolgen: wo der Strichcode steht, was die Status heißen, wie lange Abholstelle und bbox warten, was der Zoll kostet und wie du bpost erreichst.
 slug: bpost-sendungsverfolgung
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 bpost ist die Post Belgiens. Dein Paket verfolgst du mit dem Strichcode, so heißt bei bpost die Sendungsnummer: in [Track & Trace](https://track.bpost.cloud/), das es auch auf Deutsch gibt, in der App My bpost oder oben im Feld. Den Strichcode schickt dir meist der Absender per E-Mail oder SMS. Er steht auch auf dem Versandetikett, dem Beleg vom Postamt und der Abwesenheitsbenachrichtigung.
@@ -90,7 +90,7 @@ Für eine Bestellung bis 150 €, ohne Versandkosten, nennt bpost diese Beträge
 | Mehrwertsteuer | meist 21 % |
 | Verwaltungskosten von bpost | 21,50 €, wenn der Webshop Mehrwertsteuer und Zoll nicht schon kassiert hat |
 
-„Pro Artikel“ heißt pro Produkttyp, beim FÖD Finanzen pro Zolltarifnummer: Ab dem 1. November kosten zwei gleiche T-Shirts 5 €, ein T-Shirt und eine Badehose 10 €. Über 150 € fallen Zoll nach Produkttyp, Mehrwertsteuer, 40 € Verwaltungskosten und die 2 € der EU an. Den Einfuhrzoll gibt es bei einer Rücksendung nicht zurück.
+„Pro Artikel“ heißt pro Produkttyp, beim FÖD Finanzen pro Zolltarifnummer: Ab dem 1. November kosten zwei gleiche T-Shirts 5 €, ein T-Shirt und eine Badehose 10 €. Über 150 € fallen Zoll nach Produkttyp, Mehrwertsteuer, 40 € Verwaltungskosten und ab dem 1. November die 2 € der EU an. Den Einfuhrzoll gibt es bei einer Rücksendung nicht zurück.
 
 Ein Geschenk von einer Privatperson an eine andere, ohne kommerziellen Charakter und bis 45 €, ist abgabenfrei, außer Alkohol, Parfüm, Eau de Toilette und Tabak.
 

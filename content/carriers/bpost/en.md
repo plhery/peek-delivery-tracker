@@ -3,7 +3,7 @@ title: bpost tracking: statuses, Pick-up points and contact
 description: Track a bpost parcel: where the barcode is, what each Track & Trace status means, how long Pick-up points and lockers keep it and how to reach bpost.
 slug: bpost-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 bpost is Belgium's postal company, the brand of the bnode group that delivers the last mile in Belgium and the Netherlands. Track a parcel on [bpost's Track & Trace](https://track.bpost.cloud/) or in the My bpost app with its barcode, or paste the number in the box above. The barcode comes from the shop's shipping email, bpost's text or email, the shipping label or the notice in your letterbox.
@@ -64,7 +64,7 @@ If you're out and set no preferences, the postman will generally try a neighbour
 
 **Delivered but not there.** Ask the neighbours, check your letterbox (small parcels go in without a ring), your preferences and the safe-place photo in the app or Track & Trace. bpost also has a form for undelivered shipments; keep the barcode and the recipient's postcode ready.
 
-**Customs.** Parcels from outside the EU must be cleared first. You pay the import costs in advance, preferably in the My bpost app or Track & Trace, within 14 days. On orders under €150, bpost lists €3 per item in import duties and, from 1 November 2026, a €2 European handling fee per item, where an item is a type of product: two identical T-shirts cost €5 in duties and fee, a T-shirt and swimming shorts €10. On top come VAT, usually 21%, and €21.50 administration costs if the shop didn't collect VAT and duties up front. Above €150 you pay duties by product type, VAT, €40 administration costs and the €2 fee. Check [bpost's page on parcels from outside the EU](https://www.bpost.be/en/shopping-outside-eu) and the [customs guide](guide:customs).
+**Customs.** Parcels from outside the EU must be cleared first. You pay the import costs in advance, preferably in the My bpost app or Track & Trace, within 14 days. On orders under €150, bpost lists €3 per item in import duties and, from 1 November 2026, a €2 European handling fee per item, where an item is a type of product: two identical T-shirts cost €5 in duties and fee, a T-shirt and swimming shorts €10. On top come VAT, usually 21%, and €21.50 administration costs if the shop didn't collect VAT and duties up front. Above €150 you pay duties by product type, VAT, €40 administration costs and, from 1 November 2026, the €2 fee. Check [bpost's page on parcels from outside the EU](https://www.bpost.be/en/shopping-outside-eu) and the [customs guide](guide:customs).
 
 > For shipments within the EU, bpost never asks you to pay while a parcel is in transit or to give personal details by email or text. Forward suspicious messages to abuse@bpost.be.
 

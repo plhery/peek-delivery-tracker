@@ -3,7 +3,7 @@ title: bpost pakje volgen: barcode, statussen en Afhaalpunt
 description: Volg je bpost-pakje: waar je de barcode vindt, wat Track & Trace toont, hoelang een Afhaalpunt of bbox-automaat je pakje bewaart en hoe je bpost bereikt.
 slug: bpost-pakje-volgen
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 bpost is het Belgische postbedrijf. Binnen de bnode-groep, tot december 2025 bpostgroup, is bpost het merk dat pakjes en post aan de deur brengt in België en Nederland. Je volgt je pakje met de barcode in [bpost Track & Trace](https://track.bpost.cloud/) of in de My bpost app, of je plakt de barcode in het veld hierboven. Die barcode staat in de verzendmail van de webshop, in de e-mail of sms van bpost, op het verzendetiket of op het afwezigheidsbericht in je brievenbus.
@@ -79,7 +79,7 @@ In Peek, en in de Engelstalige Track & Trace, lees je de scans in het Engels. Di
 
 **Terug naar de afzender.** Dat gebeurt als de afzender je adres verkeerd ingaf, als je het pakje aan de deur weigerde, of als je het niet binnen 14 dagen in het Afhaalpunt of 5 dagen in de automaat afhaalde. Vraag de afzender dan om het opnieuw te verzenden of je terug te betalen.
 
-**Douane.** Een pakje van buiten de EU gaat langs de douane. Betaalde je de btw en invoerkosten niet al bij de webshop, dan betaal je ze vooraf, bij voorkeur in de My bpost app of Track & Trace, met Bancontact, Mastercard, Visa of mobiel bankieren (geen PayPal of overschrijving). Uitzonderlijk kan het in een Postkantoor. Je hebt 14 dagen om te betalen. Voor een online aankoop van buiten de EU tot € 150 betaal je sinds 1 juli 2026, door nieuwe EU-regels, € 3 invoerrechten per productcategorie: twee identieke broeken kosten € 3, een broek en een paar schoenen € 6. Daarbovenop komen btw (meestal 21 %) en € 21,50 administratiekosten van bpost, die laatste alleen als je de btw en invoerrechten niet vooraf bij de webshop betaalde. Boven € 150 betaal je invoerrechten volgens het soort product, btw en € 40 administratiekosten. In Track & Trace zie je dan meldingen als `Betaling vereist` of `Factuur ontbreekt`. Meer in de gids over [pakjes bij de douane](guide:customs) (in het Engels).
+**Douane.** Een pakje van buiten de EU gaat langs de douane. Betaalde je de btw en invoerkosten niet al bij de webshop, dan betaal je ze vooraf, bij voorkeur in de My bpost app of Track & Trace, met Bancontact, Mastercard, Visa of mobiel bankieren (geen PayPal of overschrijving). Uitzonderlijk kan het in een Postkantoor. Je hebt 14 dagen om te betalen. Voor een online aankoop van buiten de EU tot € 150 betaal je sinds 1 juli 2026, door nieuwe EU-regels, € 3 invoerrechten per type product: twee identieke broeken kosten € 3, een broek en een paar schoenen € 6. Vanaf 1 november 2026 komen daar € 2 Europese afhandelingskosten per type product bij: de twee broeken kosten dan € 5, de broek en de schoenen € 10. Daarnaast betaal je btw (meestal 21 %) en € 21,50 administratiekosten van bpost, die laatste alleen als je de btw en invoerrechten niet vooraf bij de webshop betaalde. Boven € 150 betaal je invoerrechten volgens het soort product, btw, € 40 administratiekosten en, vanaf 1 november 2026, de € 2 afhandelingskosten. In Track & Trace zie je dan meldingen als `Betaling vereist` of `Factuur ontbreekt`. Meer in de gids over [pakjes bij de douane](guide:customs) (in het Engels).
 
 > Voor zendingen binnen de EU vraagt bpost je nooit om te betalen terwijl je pakje onderweg is, en nooit om persoonlijke gegevens via e-mail of sms. bpost dreigt ook nooit met een deurwaarder. Stuur verdachte berichten door naar abuse@bpost.be.
 
@@ -151,8 +151,8 @@ Niet echt. Track & Trace aanvaardt ook een referentie, maar toont dan om privacy
 - [bpost: Mijn pakje is terug naar de afzender](https://www.bpost.be/nl/faq/mijn-pakje-zou-thuis-geleverd-worden-maar-terug-naar-de-afzender-waarom-en-hoe-kan-ik-het-toch-nog) – redenen
 - [bpost: Een pakje ontvangen uit België](https://www.bpost.be/nl/pakje-ontvangen) – 14 dagen om invoerkosten te betalen
 - [bpost: Pakje langs de douane](https://www.bpost.be/nl/pakje-ontvangen/douane) – vooraf betalen, Postkantoor
-- [bpost: Een pakje van buiten de EU?](https://www.bpost.be/nl/shoppen-buiten-eu) – € 3, btw, € 21,50 en € 40
-- [bpost: Wanneer betaal ik € 3 per productcategorie?](https://www.bpost.be/nl/faq/wanneer-betaal-ik-eu-3-productcategorie-voor-pakjes-van-buiten-de-eu) – per productcategorie
+- [bpost: Een pakje van buiten de EU?](https://www.bpost.be/nl/shoppen-buiten-eu) – € 3 en € 2 per item, btw, € 21,50 en € 40
+- [bpost: Wanneer betaal ik € 3 en € 2 voor elk verschillend type product?](https://www.bpost.be/nl/faq/wanneer-betaal-ik-eu-3-en-eu-2-voor-elk-verschillend-type-product-voor-pakjes-van-buiten-de-eu) – per type product, broeken en schoenen
 - [bpost: Hoe kan ik de invoerkosten betalen?](https://www.bpost.be/nl/faq/hoe-kan-ik-de-invoerkosten-betalen) – betaalmiddelen
 - [bpost: Verdachte sms of e-mail](https://www.bpost.be/nl/faq/i-received-suspicious-text-message-or-email-allegedly-bpost-what-should-i-do) – phishing
 - [bpost: Hoe contacteer ik de klantendienst van bpost?](https://www.bpost.be/nl/faq/how-do-i-contact-bposts-customer-services) – telefoon, uren, chat, Postbus 5000

@@ -3,7 +3,7 @@ title: bpost suivi : code-barres, statuts et point relais
 description: Suivre un colis bpost : où trouver le code-barres, ce que veut dire chaque statut du Track & Trace, combien de temps le colis attend et comment joindre bpost.
 slug: bpost-suivi
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 bpost est l'entreprise postale belge, la marque du groupe bnode qui livre les colis en Belgique et aux Pays-Bas. Pour suivre ton colis, saisis son code-barres sur le [Track & Trace de bpost](https://track.bpost.cloud/), dans l'app My bpost ou dans le champ ci-dessus. Ce code-barres figure dans l'e-mail d'expédition de la boutique, dans le SMS ou l'e-mail de bpost, sur l'étiquette ou sur l'avis de passage.
@@ -71,7 +71,7 @@ Après `Votre envoi est arrivé chez l'opérateur postal du pays de destination 
 
 **Retourné.** Une mauvaise adresse, un colis refusé à la porte ou non retiré à temps repart chez l'expéditeur. Contacte la boutique pour un nouvel envoi ou un remboursement.
 
-**Douane.** Un colis venu de l'extérieur de l'UE n'est livré qu'après paiement des frais d'importation, de préférence dans l'app My bpost ou sur le Track & Trace, dans les 14 jours. Pour une commande de moins de 150 €, bpost indique 3 € de droits par article depuis le 1er juillet 2026, plus 21,5 € de frais administratifs si la boutique n'a pas encaissé la TVA et les droits à l'avance. Vérifie la [page de bpost sur les achats hors UE](https://www.bpost.be/fr/shopping-hors-ue) et le guide [colis bloqué en douane](guide:customs).
+**Douane.** Un colis venu de l'extérieur de l'UE n'est livré qu'après paiement des frais d'importation, de préférence dans l'app My bpost ou sur le Track & Trace, dans les 14 jours. Pour une commande de moins de 150 €, bpost indique 3 € de droits par article depuis le 1er juillet 2026 et, à partir du 1er novembre 2026, 2 € de frais de traitement européens par article, un article étant un type de produit : deux t-shirts identiques coûtent alors 5 € de droits et de frais, un t-shirt et un maillot de bain 10 €. S'y ajoutent la TVA, généralement 21 %, et 21,50 € de frais administratifs si la boutique n'a pas encaissé la TVA et les droits à l'avance. Au-delà de 150 €, tu paies des droits selon le type de produit, la TVA, 40 € de frais administratifs et, à partir du 1er novembre 2026, les 2 € de frais de traitement européens. Vérifie la [page de bpost sur les achats hors UE](https://www.bpost.be/fr/shopping-hors-ue) et le guide [colis bloqué en douane](guide:customs).
 
 > Pour les envois au sein de l'UE, bpost ne te demandera jamais de payer pendant que ton colis est en cours de livraison, ni de donner tes données personnelles par e-mail ou SMS. Transfère les messages suspects à abuse@bpost.be.
 
@@ -135,7 +135,7 @@ Le plus souvent, l'expéditeur ne l'a pas encore remis à bpost : le suivi comme
 - [bpost : Le colis a été livré, mais je n'ai rien reçu](https://www.bpost.be/fr/faq/je-recois-un-message-indiquant-que-mon-colis-ete-livre-mais-je-nai-rien-recu-que-faire) – vérifications, photo, formulaire
 - [bpost : Pas livré à domicile, raison du retour à l'expéditeur](https://www.bpost.be/fr/faq/mon-colis-aurait-du-etre-livre-domicile-mais-ete-renvoye-lexpediteur-pourquoi-et-comment-puis-je) – raisons d'un retour
 - [bpost : Mon colis à la douane](https://www.bpost.be/fr/recevoir-colis/douane) – paiement à l'avance des frais d'importation
-- [bpost : Achats en ligne hors de l'UE](https://www.bpost.be/fr/shopping-hors-ue) – 3 € par article, 21,5 € de frais administratifs
+- [bpost : Achats en ligne hors de l'UE](https://www.bpost.be/fr/shopping-hors-ue) – 3 € et 2 € par article, TVA, 21,50 € et 40 € de frais administratifs
 - [bpost : bpost livre-t-elle le samedi et le dimanche ?](https://www.bpost.be/fr/faq/quels-courriers-ou-colis-bpost-livre-t-elle-le-samedi-et-le-dimanche) – horaires du week-end
 - [bpost : Comment contacter le service clientèle de bpost ?](https://www.bpost.be/fr/faq/comment-contacter-le-service-clientele-de-bpost) – téléphone, chat, sur place, Boîte 5000
 - [bpost : How do I contact bpost's customer services?](https://www.bpost.be/en/faq/how-do-i-contact-bposts-customer-services) – 02 278 51 26 (page anglaise)

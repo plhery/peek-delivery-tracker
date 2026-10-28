@@ -30,8 +30,9 @@ translating it (not implemented).
 - Event identity ([`providerEventId`](../src/server/trackingSync.ts)) hashes carrier, time,
   location and description. Rewriting stored descriptions per language would duplicate
   scans, so translation has to happen at display time. A stored scan is only reworded in
-  place, when another source reports the same scan or Swiss Post words it in its owner's
-  language (the same provider code, instant and place)
+  place, when another source reports the same scan, Swiss Post words it in its owner's
+  language (the same provider code, instant and place), or its source rewords it and no
+  longer gives the old words (the same instant and stage)
   ([`eventIdentity.ts`](../src/server/eventIdentity.ts), [ROUTING.md](ROUTING.md)).
 - Pick tracking sources for coverage, freshness and identity, never for language. A handoff
   can bring English destination scans but never translates earlier origin scans.

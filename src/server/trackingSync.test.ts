@@ -6472,6 +6472,30 @@ it('rewrites in place a scan whose place gains a qualifier and one stored with a
     ]);
 });
 
+it('rewrites in place a scan its carrier rewords once the old words leave its answer', async () => {
+  const store = eventStore();
+  // A carrier rewords a failed attempt when it delivers the parcel (synthetic wording and times).
+  const missed = { time: '2026-10-27T15:18:00Z', stage: 'failed_attempt', description: 'We were unable to deliver your parcel', location: '' };
+  const reworded = { ...missed, description: 'We called but you were not in' };
+  const delivered = { time: '2026-10-28T11:02:00Z', stage: 'delivered', description: 'Your parcel has been delivered', location: '' };
+  const result = (...events: (typeof missed)[]) => ({ status: events.at(-1)!.stage, current_stage: events.at(-1)!.stage,
+    last_update: events.at(-1)!.time, last_status_text: events.at(-1)!.description, events });
+  const adapter = { fetch: vi.fn().mockResolvedValueOnce(result(missed)).mockResolvedValue(result(reworded, delivered)) };
+  const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null,
+    () => new Date('2026-10-28T12:00:00Z'));
+  const load = () => ({ id: 'reworded-parcel', user_id: 'owner', carrier: 'dpd-uk', tracking_number: 'TEST1234',
+    current_stage: store.rows.size ? 'failed_attempt' : 'pending', [STORED_EVENT_IDENTITIES]: store.identities() });
+  await service.syncPackage(load());
+  const [first] = [...store.rows.values()];
+  await service.syncPackage(load());
+  await service.syncPackage(load());
+  expect([...store.rows.values()].map(({ id, provider_event_id, stage, description }) => ({ id, provider_event_id, stage, description })))
+    .toEqual([
+      { id: first!.id, provider_event_id: first!.provider_event_id, stage: 'failed_attempt', description: reworded.description },
+      { id: expect.any(String), provider_event_id: expect.stringMatching(/^dpd-uk:/), stage: 'delivered', description: delivered.description },
+    ]);
+});
+
 it('moves the row of a scan its carrier restates a little later, and keeps the next day\'s scan in the same words', async () => {
   const store = eventStore();
   // A carrier moves a departure an hour later and lists only the later time; a day later it lists a new departure

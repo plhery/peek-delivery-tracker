@@ -37,7 +37,7 @@ import {
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
 import { REDETECTION_PAGE, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
-import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, retimedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, UNWORDED_STEP, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, UNWORDED_STEP, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
   askedForCheck,
@@ -1954,6 +1954,8 @@ export class TrackingSyncService {
       const policyCarriers = fetched.earlierResult && fetched.earlierCarrierId && fetched.earlierCarrierId !== sourceCarrierId
         ? [sourceCarrierId, fetched.earlierCarrierId] : [sourceCarrierId];
       for (const policyCarrier of policyCarriers) adopt(sameInstantIdentities(events, stored, policyCarrier));
+      // Last, a scan its source reworded takes over the row of its old words once the source no longer lists them.
+      adopt(rewordedScans(events, stored, reworded));
       // The earlier carrier's relay of a delivery scan stays its own row, at the same second or to the minute.
       const relaying = fetched.earlierCarrierId ?? earlierCarrier(parcel);
       const shared = sharedScans(events.filter((event) => !normalized.relays.has(String(event.provider_event_id))), stored, reworded, relaying);

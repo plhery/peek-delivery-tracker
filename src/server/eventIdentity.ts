@@ -768,6 +768,42 @@ export function retimedScans(
 }
 
 /**
+ * Maps the computed identity of each new scan to the stored row of its old wording: a source
+ * rewords a scan it lists and no longer lists the old words (DPD UK rewrote a failed attempt
+ * when it delivered the parcel). The row is of the same source, at the same instant and in the
+ * same stage, with codes that agree when both carry one, and no scan of the answer carries it.
+ * Scans and rows another rule matched, observations, scans dated by their day alone and
+ * universal or app rows are left out, and the match is one to one: two new scans, or two rows,
+ * of one instant and stage are scans of their own.
+ */
+export function rewordedScans(
+  events: readonly JsonObject[],
+  stored: readonly JsonObject[],
+  matched: ReadonlyMap<string, string> = new Map(),
+): Map<string, string> {
+  const reworded = new Map<string, string>();
+  const own = (row: JsonObject) => {
+    const source = sourceOf(identity(row));
+    return source !== '' && source !== UNIVERSAL && source !== 'app' && stageOf(row) !== ''
+      && !observedOnly(row) && !dayAlone(row) && Number.isFinite(instantOf(row));
+  };
+  const storedIds = new Set(stored.map(identity));
+  const listed = new Set([...events.map(identity), ...matched.values()]);
+  const scans = events.filter((scan) => own(scan) && !storedIds.has(identity(scan)) && !matched.has(identity(scan)));
+  const rows = stored.filter((row) => own(row) && !listed.has(identity(row)));
+  const alike = (scan: JsonObject, row: JsonObject) => sourceOf(identity(scan)) === sourceOf(identity(row))
+    && instantOf(scan) === instantOf(row) && stageOf(scan) === stageOf(row) && codesAgree(scan, row);
+  for (const scan of scans) {
+    const matching = rows.filter((row) => alike(scan, row));
+    if (matching.length !== 1) continue;
+    const row = matching[0]!;
+    if (scans.filter((other) => alike(other, row)).length !== 1) continue;
+    reworded.set(identity(scan), identity(row));
+  }
+  return reworded;
+}
+
+/**
  * Keeps one row per scan when a carrier and a universal provider report it.
  *
  * Only scans whose own identity is not stored are matched, against stored rows

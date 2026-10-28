@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { JsonObject } from './types';
-import { datedObservations, filledPlaceholders, misdatedCopies, requalifiedPlaces, restatedIdentities, retimedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { datedObservations, filledPlaceholders, misdatedCopies, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 
 // New events carry the sync's ISO spelling; stored rows come back from
 // PostgREST with an explicit +00:00 offset. Both name the same instant.
@@ -586,6 +586,57 @@ describe('rows stored with the HTML an adapter left in their words', () => {
     expect(strippedMarkup([scan], [saved, { ...scan }]).size).toBe(0);
     expect(strippedMarkup([scan, { ...saved }], [saved]).size).toBe(0);
     expect(strippedMarkup([scan], [saved, { ...saved, provider_event_id: 'yunexpress:copy', description: `<i>${scan.description}</i>` }]).size).toBe(0);
+  });
+});
+
+describe('a scan its source rewords', () => {
+  // A carrier rewrote a failed attempt when it delivered the parcel, and lists only the new words (synthetic wording and times).
+  const at = (id: string, time: string, description: string, stage: string, extra: JsonObject = {}) => ({
+    provider_event_id: id, occurred_at: new Date(time).toISOString(), stage, description, location: '', raw_data: { time }, ...extra,
+  });
+  const out = at('dpd-uk:out', '2026-10-27T09:42:00Z', 'Your parcel is out for delivery', 'out_for_delivery');
+  const missed = at('dpd-uk:missed', '2026-10-27T15:18:00Z', 'We were unable to deliver your parcel today', 'failed_attempt');
+  const reworded = at('dpd-uk:missed-reworded', '2026-10-27T15:18:00Z', 'We called but you were not in', 'failed_attempt');
+  const delivered = at('dpd-uk:delivered', '2026-10-28T10:34:00Z', 'Your parcel has been delivered', 'delivered');
+  const stored = [out, missed];
+
+  it('takes over the row of the old words the answer no longer lists, which then shows the new ones', () => {
+    const matched = rewordedScans([out, reworded, delivered], stored);
+    expect(pairs(matched)).toEqual([['dpd-uk:missed-reworded', 'dpd-uk:missed']]);
+    expect(withIdentities([reworded], matched, stored)[0]).toMatchObject({ provider_event_id: 'dpd-uk:missed', description: reworded.description });
+  });
+
+  it('keeps a row the answer still lists: the source tells both scans', () => {
+    expect(rewordedScans([out, missed, reworded, delivered], stored).size).toBe(0);
+  });
+
+  it('needs the same source, instant and stage, and codes that agree', () => {
+    const coded = [out, { ...missed, raw_data: { ...missed.raw_data, provider_code: 'MISSED' } }];
+    expect(rewordedScans([out, { ...reworded, raw_data: { ...reworded.raw_data, provider_code: 'MISSED' } }], coded).size).toBe(1);
+    for (const scan of [
+      { ...reworded, provider_event_id: 'dpd:missed-reworded' },
+      { ...reworded, occurred_at: '2026-10-27T15:19:00.000Z' },
+      { ...reworded, stage: 'exception' },
+      { ...reworded, raw_data: { ...reworded.raw_data, provider_code: 'OTHER' } },
+    ]) {
+      expect(rewordedScans([out, scan, delivered], coded).size).toBe(0);
+    }
+  });
+
+  it('leaves two new scans or two rows of one instant and stage alone, and scans and rows another rule matched', () => {
+    const second = at('dpd-uk:missed-second', '2026-10-27T15:18:00Z', 'Calling card left', 'failed_attempt');
+    expect(rewordedScans([out, reworded, second, delivered], stored).size).toBe(0);
+    expect(rewordedScans([out, reworded, delivered], [...stored, second]).size).toBe(0);
+    expect(rewordedScans([out, reworded, delivered], stored, new Map([['dpd-uk:other', 'dpd-uk:missed']])).size).toBe(0);
+    expect(rewordedScans([out, reworded, delivered], stored, new Map([['dpd-uk:missed-reworded', 'dpd-uk:elsewhere']])).size).toBe(0);
+  });
+
+  it('leaves universal and app rows, observations and scans dated by their day alone', () => {
+    const universal = (row: JsonObject) => ({ ...row, provider_event_id: String(row.provider_event_id).replace('dpd-uk:', 'unknown:') });
+    expect(rewordedScans([universal(out), universal(reworded)], [universal(out), universal(missed)]).size).toBe(0);
+    expect(rewordedScans([out, { ...reworded, observed_without_provider_timestamp: true }], stored).size).toBe(0);
+    const day = (row: JsonObject) => ({ ...row, occurred_at: '2026-10-27T00:00:00.000Z', raw_data: { time: '2026-10-27' } });
+    expect(rewordedScans([out, day(reworded)], [out, day(missed)]).size).toBe(0);
   });
 });
 

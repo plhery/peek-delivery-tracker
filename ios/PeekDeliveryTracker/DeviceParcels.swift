@@ -20,6 +20,9 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     var alertPreset: ParcelAlertPreset? = nil
     /// The device token the service last answered about for this parcel's notifications.
     var alertToken: String? = nil
+    /// Someone else's parcel forgotten here before its notifications could be turned off: out of
+    /// the list, and kept only until they are.
+    var forgotten: Bool? = nil
 
     var isViewer: Bool { viewer == true }
 }
@@ -257,6 +260,8 @@ final class DeviceParcels {
     private let now: () -> Date
     private var entries: [DeviceParcel]
     private var keys: [String: String]
+    /// Parcels forgotten here whose notifications are still to be turned off, on file beside the others.
+    private var forgotten: [DeviceParcel]
     /// The tokens and languages rounds of notification requests are under way for.
     private var alertRounds: Set<String> = []
     /// The token and language each parcel's notifications were asked for since launch. Each
@@ -270,7 +275,10 @@ final class DeviceParcels {
         self.storage = storage
         self.postcodes = postcodes
         self.now = now
-        (entries, keys) = storage.load()
+        let (parcels, keys) = storage.load()
+        entries = parcels.filter { $0.forgotten != true }
+        forgotten = parcels.filter { $0.forgotten == true }
+        self.keys = keys
     }
 
     var isEmpty: Bool { entries.isEmpty }
@@ -338,6 +346,7 @@ final class DeviceParcels {
     /// the list keeps what the device has.
     func refresh(all: Bool = false, only id: UUID? = nil) async throws {
         guard let client else { return }
+        await stopForgottenAlerts(client)
         // Keys without their parcel, left by a file that couldn't be read: the service forgets those links too.
         for (linkID, key) in keys where !entries.contains(where: { $0.linkID == linkID }) {
             guard (try? await client.forget(linkID, key)) != nil, !entries.contains(where: { $0.linkID == linkID }) else { continue }
@@ -381,16 +390,35 @@ final class DeviceParcels {
 
     /// The service forgets the parcel, then the device does. Someone else's parcel is forgotten
     /// here alone: its notifications on this iPhone stop, and its link goes on working for others.
+    /// When the service can't be told yet, it leaves the list and each refresh tells it again.
     func forget(id: UUID) async throws {
         guard let index = entries.firstIndex(where: { $0.parcel.id == id }) else { return }
-        let entry = entries[index]
+        var entry = entries[index]
+        var alerting = false
         if let client, let token = entry.alertToken {
-            try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))
+            alerting = (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) == nil
         }
         if let client, let key = keys[entry.linkID] { try await client.forget(entry.linkID, key) }
         entries.removeAll { $0.linkID == entry.linkID }
         keys[entry.linkID] = nil
+        // A forgotten link of this iPhone's own takes its notifications with it; someone else's goes on.
+        if alerting, entry.isViewer {
+            entry.forgotten = true
+            forgotten.append(entry)
+        }
         save()
+    }
+
+    /// Turns off the notifications of parcels forgotten while the service couldn't be told. The
+    /// first trouble ends the round; the rest wait for the next.
+    private func stopForgottenAlerts(_ client: DeviceParcelClient) async {
+        for entry in forgotten {
+            if let token = entry.alertToken {
+                guard (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) != nil else { return }
+            }
+            forgotten.removeAll { $0.linkID == entry.linkID && $0.alertToken == entry.alertToken }
+            save()
+        }
     }
 
     /// Forgets every parcel. The ones the service could not be told about stay, and the trouble is thrown.
@@ -522,6 +550,12 @@ final class DeviceParcels {
         }
         var entry = DeviceParcel(linkID: linkID, label: label?.nonEmpty ?? "", archivedAt: nil,
                                  parcel: Parcel(shared: response.package), checkedAt: now())
+        // Followed again before its notifications were turned off: they go on, and are its own again.
+        if let left = forgotten.first(where: { $0.linkID == linkID }) {
+            entry.alertToken = left.alertToken
+            entry.alertPreset = left.alertPreset
+            forgotten.removeAll { $0.linkID == linkID }
+        }
         if let key {
             keys[linkID] = key
         } else {
@@ -584,7 +618,7 @@ final class DeviceParcels {
         return Self.shown(entries[index])
     }
 
-    private func save() { storage.save(entries, keys: keys) }
+    private func save() { storage.save(entries + forgotten, keys: keys) }
 
     private static func waiting(_ parcel: Parcel) -> Bool { parcel.syncStatus == .pending || parcel.syncStatus == .syncing }
 

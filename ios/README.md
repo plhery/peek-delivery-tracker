@@ -151,7 +151,8 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   one opens the parcel.
 - The device token goes to the API. The app keeps it only beside the parcels it follows
   without an account, so that forgetting one, or an account taking it over, stops its
-  notifications here.
+  notifications here. Someone else's parcel forgotten while the service can't be told leaves
+  the list at once, and each refresh tells the service again until it has.
 - **Live Activities** are switched off (`ParcelStore.offersLiveActivities`, and
   `NSSupportsLiveActivities` in `Info.plist`). Settings has no switch for them, and the
   app ends any still showing and withdraws the iPhone's registration, so the server

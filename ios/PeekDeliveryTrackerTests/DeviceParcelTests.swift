@@ -51,7 +51,8 @@ final class DeviceParcelTests: XCTestCase {
 
     private func client(_ calls: Calls, lookup: PublicLookupResponse? = nil,
                         read: @escaping @Sendable (String) throws -> PublicParcelResponse? = { _ in nil },
-                        alert: @escaping @Sendable (String) throws -> DeviceAlertAnswer = { _ in .on }) -> DeviceParcelClient {
+                        alert: @escaping @Sendable (String) throws -> DeviceAlertAnswer = { _ in .on },
+                        unalert: @escaping @Sendable (String) throws -> Void = { _ in }) -> DeviceParcelClient {
         DeviceParcelClient(
             lookup: { request in
                 calls.add("lookup \(request.trackingNumber) \(request.carrier?.rawValue ?? "-")")
@@ -78,7 +79,7 @@ final class DeviceParcelTests: XCTestCase {
                 calls.add("alert \(linkID) \((key ?? "-").prefix(1)) \(request.preset.rawValue) \(request.token) \(request.locale.rawValue) \(request.environment.rawValue)")
                 return try alert(linkID)
             },
-            removeAlert: { linkID, request in calls.add("unalert \(linkID) \(request.token)") }
+            removeAlert: { linkID, request in calls.add("unalert \(linkID) \(request.token)"); try unalert(linkID) }
         )
     }
 
@@ -745,6 +746,39 @@ final class DeviceParcelTests: XCTestCase {
         relaunched.release(["22222222222A"])
         for _ in 0..<50 where calls.all.last != "unalert 22222222222A token2" { await Task.yield() }
         XCTAssertEqual(calls.all.last, "unalert 22222222222A token2")
+    }
+
+    func testSomeoneElsesParcelLeavesTheListAtOnceAndItsNotificationsStopWhenTheServiceCanBeTold() async throws {
+        let id = UUID()
+        let storage = Memory()
+        let calls = Calls()
+        let shown = PublicParcelResponse(link: reader("33333333333B"), package: package(id))
+        let offline = DeviceParcels(client: client(calls, unalert: { _ in throw DeliveryAPIError.serviceFailed(503) }), storage: storage)
+        _ = try offline.follow(shown, key: nil, label: "Books for Ana")
+        await offline.registerAlerts(token: "token1", locale: .fr, environment: .development)
+
+        // The service can't turn its notifications off yet: the parcel leaves the list all the same,
+        // an account can't take it over, and each refresh asks again.
+        try await offline.forget(id: id)
+        XCTAssertTrue(offline.list().isEmpty)
+        XCTAssertEqual(offline.claims, [])
+        XCTAssertNil(offline.parcelID(linkID: "33333333333B"))
+        XCTAssertFalse(offline.hasParcelsOnTheirWay)
+        try await offline.refresh(all: true)
+        // Followed again meanwhile, it keeps the notifications it still has, and forgetting it asks again.
+        XCTAssertTrue(try offline.follow(shown, key: nil, label: "Books for Ana").added)
+        try await offline.forget(id: id)
+        XCTAssertEqual(calls.all, ["alert 33333333333B - important token1 fr development",
+                                   "unalert 33333333333B token1", "unalert 33333333333B token1", "unalert 33333333333B token1"])
+
+        // After a restart it is still gone, and the next refresh turns them off for good.
+        let relaunched = DeviceParcels(client: client(calls), storage: storage)
+        XCTAssertTrue(relaunched.list().isEmpty)
+        try await relaunched.refresh()
+        try await relaunched.refresh()
+        XCTAssertEqual(calls.all.count, 5)
+        XCTAssertEqual(calls.all.last, "unalert 33333333333B token1")
+        XCTAssertTrue(storage.parcels.isEmpty)
     }
 
     func testARoundOfNotificationRequestsEndsQuietlyWhenTheServiceWantsAPause() async {

@@ -78067,6 +78067,14 @@
     ]
   },
   {
+    "input": "HYYT990000000001GZ",
+    "carrier": "huaya-express",
+    "confidence": "high",
+    "candidates": [
+      "huaya-express"
+    ]
+  },
+  {
     "input": "HZ600275315GR",
     "carrier": "intl-post",
     "confidence": "high",

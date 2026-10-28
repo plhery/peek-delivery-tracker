@@ -32126,6 +32126,43 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.trackmail.co.uk/"
+  },
+  "huaya-express": {
+    "displayName": "Huaya Express",
+    "aliases": [
+      "GZHY",
+      "Huaya Yuntong",
+      "华亚运通",
+      "华亚运通国际物流",
+      "华亚运通国际货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#e60013",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "huaya-express"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "193.112.176.17"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^HYYT\\d{12}GZ$",
+        "confidence": "high"
+      }
+    ]
   }
 } as const;
 
@@ -32990,7 +33027,8 @@ export const CARRIER_IDS = [
   "timely-titan",
   "boxtal",
   "e-commerce-international",
-  "mhi"
+  "mhi",
+  "huaya-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

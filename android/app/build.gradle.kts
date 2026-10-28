@@ -74,6 +74,9 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.activity.compose)
     implementation(libs.lifecycle.runtime.compose)
+    // The iPhone's materials: a blur of what lies behind (Materials.kt).
+    implementation(libs.haze)
+    implementation(libs.haze.blur)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 

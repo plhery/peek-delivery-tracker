@@ -14,7 +14,7 @@ import androidx.compose.ui.platform.LocalDensity
 
 /**
  * The iPhone app's look for everything inside: its colours for the appearance, its fonts at the reader's text size,
- * Reduce Motion, and the carriers' liveries once loaded. Material's own colours and type are filled from these only
+ * Reduce Motion and Reduce Transparency, and the carriers' liveries once loaded. Material's own colours and type are filled from these only
  * so its components blend in; screens read `PeekTheme.colors` and `PeekTheme.type`. No dynamic colour (X-AD16).
  */
 @Composable
@@ -22,6 +22,7 @@ fun PeekTheme(
     dark: Boolean = isSystemInDarkTheme(),
     highContrast: Boolean = increasedContrastSetting(),
     reduceMotion: Boolean = reduceMotionSetting(),
+    reduceTransparency: Boolean = reduceTransparencySetting(),
     dynamicTypeSize: DynamicTypeSize = DynamicTypeSize.of(LocalDensity.current.fontScale),
     carrierIdentities: CarrierIdentities? = rememberCarrierIdentities(),
     content: @Composable () -> Unit,
@@ -32,6 +33,7 @@ fun PeekTheme(
     CompositionLocalProvider(
         LocalPeekColors provides colors,
         LocalReduceMotion provides reduceMotion,
+        LocalReduceTransparency provides reduceTransparency,
         LocalCarrierIdentities provides carrierIdentities,
     ) {
         MaterialTheme(colorScheme = remember(colors) { materialColors(colors) }, typography = materialType) {
@@ -52,6 +54,9 @@ object PeekTheme {
 
     val reduceMotion: Boolean
         @Composable @ReadOnlyComposable get() = LocalReduceMotion.current
+
+    val reduceTransparency: Boolean
+        @Composable @ReadOnlyComposable get() = LocalReduceTransparency.current
 }
 
 private fun materialColors(colors: PeekColors): ColorScheme {

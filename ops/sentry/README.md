@@ -69,6 +69,12 @@ failures age out of the window; a new failure meanwhile reminds as usual.
   first streak.
 - A step skipped during a cooldown is not a success. A check that contacted nobody because
   everything was cooling down records nothing.
+- A carrier whose adapter declines its verification on purpose rather than guess at it (JD's
+  browser service leaving a puzzle it cannot read unanswered, `verification_unreadable`) failed
+  no refresh: while every other source of the check answered, the check records its lookups'
+  samples but no refresh sample, as do the checks its cooldown defers. Its failed lookups still
+  count toward the carrier's lookup incident, and the carrier dashboard's gap files its parcels
+  under verification or captcha.
 - A parcel whose own carrier says not-found stays `waiting` even if every fallback fails.
   The fallbacks can't know a parcel the carrier hasn't announced.
 - If a tier stops being probed (no parcels left), its incident closes once its last sample

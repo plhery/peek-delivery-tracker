@@ -755,6 +755,21 @@ describe('persistent tracking routing', () => {
     expect((again as RoutingDeferred).routing.failures.fedex).toEqual({ kind: 'verification', count: 2,
       user_error: 'carrier:challenge', retry_at: '2026-09-10T12:45:00.000Z' });
   });
+  it('marks a verification the carrier\'s adapter declined on purpose, which the next bot check clears', async () => {
+    fixedPlan('Ship24');
+    const { router, direct, universal } = setup();
+    direct.mockRejectedValue(new ChallengeError('JD Logistics', 'The verification stayed unread', { reason: 'verification_unreadable' }));
+    universal.mockRejectedValue(new NotFoundError('Ship24'));
+    const deferred = await router.fetch(parcel({ carrier: 'jd-logistics' }), false).catch((error: unknown) => error);
+    const routing = (deferred as RoutingDeferred).routing;
+    expect(routing.failures['jd-logistics']).toEqual({ kind: 'verification', count: 1, user_error: 'carrier:challenge', abstained: true,
+      retry_at: '2026-09-10T12:15:00.000Z' });
+    const next = setup(new Date('2026-09-10T12:15:00Z'));
+    next.direct.mockRejectedValue(new ChallengeError('JD Logistics'));
+    next.universal.mockRejectedValue(new NotFoundError('Ship24'));
+    const again = await next.router.fetch(parcel({ carrier: 'jd-logistics', carrier_data: { routing } }), false).catch((error: unknown) => error);
+    expect((again as RoutingDeferred).routing.failures['jd-logistics']).not.toHaveProperty('abstained');
+  });
   it('uses a universal carrier hint only after a matching direct lookup succeeds', async () => {
     const { router, direct } = setup();
     const result = await router.fetch(parcel({ carrier_data: { routing: state({ discovered_carrier: 'ups' }) } }), false);

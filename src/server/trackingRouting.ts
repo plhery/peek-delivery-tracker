@@ -1,7 +1,7 @@
 import 'server-only';
 import { createHash } from 'node:crypto';
 import { setTimeout as sleep } from 'node:timers/promises';
-import { refusedNumberCode, trackingFailureCode, UNKNOWN_ITEM_REASONS } from './trackingFailure';
+import { ABSTAINED_REASONS, carrierErrorReason, refusedNumberCode, trackingFailureCode, UNKNOWN_ITEM_REASONS } from './trackingFailure';
 
 import { DateTime } from 'luxon';
 import { appInputField, detectCarrierMatch } from '../lib/carriers';
@@ -51,7 +51,8 @@ export interface RoutedResult {
   /** The earlier carrier asked again after a handoff: its late scans join the history, not the watermark. */
   earlierFollowUp?: boolean;
 }
-interface Failure { count: number; retry_at: string; kind: RoutingFailureKind; user_error?: string }
+/** `abstained`: the carrier's verification its adapter declined on purpose (ABSTAINED_REASONS), which the refresh health leaves out. */
+interface Failure { count: number; retry_at: string; kind: RoutingFailureKind; user_error?: string; abstained?: true }
 /**
  * Older than the parcel's newest scan; no movement; dated only by a local clock; not dated at
  * all; or behind a provider's delivered or returned stage. Absent: older.
@@ -800,7 +801,8 @@ export class TrackingRouter {
       const userError = trackingFailureCode(error);
       const retryAt = now().getTime() + Math.max(retryAfterMs, Math.min(daily ? DAY : 6 * HOUR, base * 2 ** (count - 1)));
       const unseen = kind === 'no_history' || (kind === 'not_found' && !daily);
-      const failure = { count, kind, ...(userError ? { user_error: userError } : {}),
+      const abstained = kind === 'verification' && ABSTAINED_REASONS.has(carrierErrorReason(error) ?? '');
+      const failure: Failure = { count, kind, ...(userError ? { user_error: userError } : {}), ...(abstained ? { abstained: true as const } : {}),
         retry_at: iso(unseen ? Math.max(now().getTime() + retryAfterMs, beforeHourlyEnd(retryAt)) : retryAt) };
       state.failures[provider] = failure;
       if (universalSource && kind === 'input_required') {

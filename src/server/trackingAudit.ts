@@ -15,7 +15,7 @@ import { recordHealthIncident, recordRefresh, recordRoutingSignal, recordSyncAno
 import { healthMessage, healthReviewSignal, observeTrackingHealth, type HealthSample } from './trackingHealth';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
-import { PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
+import { ABSTAINED_REASONS, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
 import { trackingSupportContext } from './trackingSupport';
 
 /**
@@ -424,8 +424,16 @@ export class TrackingSyncAudit {
       const repeated = !refused && completion.thinAnswer !== undefined && ownAnswer?.healthy === true
         && ownAnswer.details.category === 'ok' && await this.previousThinAnswer() === completion.thinAnswer;
       const healthy = refused || repeated || (completion.outcome !== 'error' && !failedFetch);
+      // A carrier whose adapter declined its verification on purpose, in this check or in the one whose
+      // cooldown deferred it, failed no refresh while every other source answered: the check keeps its
+      // lookups' samples, and the lookup incident still counts the carrier's failed ones.
+      const ownFailure = isRecord(completion.providerFailures) ? completion.providerFailures[this.configuredCarrier] : undefined;
+      const abstained = !healthy && (ownAnswer
+        ? !ownAnswer.healthy && !ownAnswer.recovered && ABSTAINED_REASONS.has(String(ownAnswer.details.reason))
+        : isRecord(ownFailure) && ownFailure.abstained === true)
+        && [...this.#healthSamples.values()].every((sample) => sample === ownAnswer || sample.healthy || sample.recovered);
       const thin = completion.thinAnswer === undefined ? {} : { thin_answer: completion.thinAnswer };
-      const samples: JsonObject[] = [...this.#healthSamples.values(), {
+      const samples: JsonObject[] = [...this.#healthSamples.values(), ...(abstained ? [] : [{
         kind: 'refresh', subject: this.configuredCarrier, healthy,
         // The failing tier's own error class is better evidence than the attempt's summary, unless
         // its lookup recovered from it.
@@ -434,8 +442,8 @@ export class TrackingSyncAudit {
           : { ...(values.error_type ? { error_type: values.error_type } : {}),
             ...[...this.#healthSamples.values()].reverse().find(sample => !sample.healthy && !sample.recovered)?.details,
             ...(healthy ? {} : refreshEvidence(completion)), ...thin },
-      }];
-      await this.writeAudit('evaluate_health', async () => {
+      }])];
+      if (samples.length) await this.writeAudit('evaluate_health', async () => {
         const incidents = await this.client.recordTrackingHealth(this.attemptId, this.packageId, samples);
         for (const incident of incidents) noteHealthIncident(incident);
         // A recovery, a closing or a rescued direct step is a review signal: Postgres keeps it once

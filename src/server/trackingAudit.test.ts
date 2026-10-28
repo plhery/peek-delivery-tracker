@@ -1,9 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { IndeterminateError, InvalidInputError } from 'universal-parcel-scraper';
+import { ChallengeError, IndeterminateError, InvalidInputError, NotFoundError, TransportError } from 'universal-parcel-scraper';
+import type { StepOutcome } from 'universal-parcel-scraper/node';
 import { TrackingSyncAudit } from './trackingAudit';
 import { healthStepRecorder } from './trackingHealth';
 import { SupabaseServiceClient } from './supabase';
 import { trackingSupportEvidence } from './trackingSupport';
+import type { JsonObject } from './types';
 import { captureOperationalError, captureTrackingHealth, logOperationalEvent, reportRoutingEvent, reportTrackingLookup } from './observability';
 import { recordHealthIncident, recordRefresh, recordRoutingSignal, recordSyncAnomaly } from './metrics';
 
@@ -280,6 +282,51 @@ describe('a check of a number that names several parcels', () => {
     expect(several.find((sample) => sample.kind === 'refresh')).toMatchObject({ healthy: true, details: { category: 'input_required' } });
     const failed = await check(new IndeterminateError('Australia Post'));
     expect(failed.find((sample) => sample.kind === 'refresh')).toMatchObject({ healthy: false });
+  });
+});
+
+describe('a check whose carrier declined its verification on purpose', () => {
+  const client = () => ({ completeSyncAttempt: vi.fn().mockResolvedValue(true),
+    recordTrackingHealth: vi.fn().mockResolvedValue([]), ackTrackingHealth: vi.fn() });
+  const lookup = (carrier: string, outcome: StepOutcome, error: Error) => healthStepRecorder.lookup({ carrier, finalStep: 'trawl', outcome,
+    errorType: error.name, durationMs: 1, attempts: 1, error });
+  const declined = () => new ChallengeError('JD Logistics', 'The verification stayed unread', { reason: 'verification_unreadable' });
+  const unknown = () => new NotFoundError('ParcelsApp');
+  const check = async (database: ReturnType<typeof client>, lookups: () => void, failures: JsonObject) => {
+    const audit = new TrackingSyncAudit(database as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'jd-logistics', 'in_transit', { trigger: 'scheduled' });
+    await audit.observeFetch(async () => lookups());
+    audit.record('fetch', 'failed', 100, {}, new Error('No source answered'));
+    await audit.finish({ outcome: 'error', sourceCarrier: 'jd-logistics', providerFailures: failures });
+    return (database.recordTrackingHealth.mock.lastCall?.[2] ?? []) as { kind: string; subject: string; healthy: boolean }[];
+  };
+
+  it('records its lookups but no refresh, in that check and in those its cooldown defers', async () => {
+    const database = client();
+    const failures = { 'jd-logistics': { kind: 'verification', count: 1, user_error: 'carrier:challenge', abstained: true },
+      ParcelsApp: { kind: 'not_found', count: 1 } };
+    const samples = await check(database, () => { lookup('jd-logistics', 'challenge', declined()); lookup('ParcelsApp', 'not_found', unknown()); }, failures);
+    expect(samples.map(({ kind, subject, healthy }) => [kind, subject, healthy]))
+      .toEqual([['provider', 'jd-logistics', false], ['provider', 'ParcelsApp', true]]);
+    const deferred = await check(database, () => lookup('ParcelsApp', 'not_found', unknown()), failures);
+    expect(deferred.map(({ kind }) => kind)).toEqual(['provider']);
+    // A cooldown that asked nobody records nothing, as before.
+    database.recordTrackingHealth.mockClear();
+    await check(database, () => undefined, failures);
+    expect(database.recordTrackingHealth).not.toHaveBeenCalled();
+  });
+
+  it('still fails a refresh when the carrier was refused or blocked, or another source failed too', async () => {
+    const database = client();
+    const blocked = { 'jd-logistics': { kind: 'verification', count: 1, user_error: 'carrier:challenge' } };
+    const refresh = (samples: { kind: string; healthy: boolean }[]) => samples.find((sample) => sample.kind === 'refresh');
+    expect(refresh(await check(database, () => lookup('jd-logistics', 'challenge', new ChallengeError('JD Logistics')), blocked)))
+      .toMatchObject({ healthy: false });
+    expect(refresh(await check(database, () => lookup('ParcelsApp', 'not_found', unknown()), blocked))).toMatchObject({ healthy: false });
+    expect(refresh(await check(database, () => {
+      lookup('jd-logistics', 'challenge', declined());
+      lookup('ParcelsApp', 'transport', new TransportError('ParcelsApp'));
+    }, blocked))).toMatchObject({ healthy: false });
   });
 });
 

@@ -22,6 +22,13 @@ export const UNKNOWN_ITEM_REASONS: ReadonlySet<string> = new Set([
  */
 export const HANDED_OFF_REASONS: ReadonlySet<string> = new Set(['other_country']);
 
+/**
+ * A carrier's verification its adapter declines on purpose rather than guess at: JD's browser
+ * service leaves a puzzle it cannot read, a stale one or a guest session that changed under it
+ * unanswered. The adapter works; the parcel waits for a check that meets a readable one.
+ */
+export const ABSTAINED_REASONS: ReadonlySet<string> = new Set(['verification_unreadable']);
+
 export { PLACEHOLDER_NUMBER } from '../lib/messages';
 
 /** Why a carrier answered as it did (`parcel_found`, `postcode_mismatch`): the first reason in the error's causes. */

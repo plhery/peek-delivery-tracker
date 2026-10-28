@@ -9222,13 +9222,13 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "ppl",
       "recognitionRank": 608
     },
-    "trackingUrlTemplate": "https://www.ppl.cz/vyhledat-zasilku?shipmentId={trackingNumber}",
+    "trackingUrlTemplate": "https://www.ppl.cz/?form=track-and-trace&shipmentId={trackingNumber}",
     "linkRules": [
       {
         "domains": [
           "ppl.cz"
         ],
-        "pathPattern": "^/(?:vyhledat-zasilku|en/track-a-shipment|en/parcel-detail)/?$",
+        "pathPattern": "^/(?:(?:vyhledat-zasilku|en/track-a-shipment|en/parcel-detail)/?)?$",
         "params": [
           "shipmentId"
         ]
@@ -9240,7 +9240,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.ppl.cz/vyhledat-zasilku"
+    "trackingSearchUrl": "https://www.ppl.cz/?form=track-and-trace"
   },
   "slovak-parcel-service": {
     "displayName": "Slovak Parcel Service",
@@ -11407,8 +11407,14 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "fukuyama",
       "recognitionRank": 939
     },
-    "trackingUrlTemplate": "https://corp.fukutsu.co.jp/corp/recieve/tracking_no_hunt/{trackingNumber}",
+    "trackingUrlTemplate": "https://seikyu.fukuyama-tsuun.com/corp/tracking_no_hunt/{trackingNumber}",
     "linkRules": [
+      {
+        "domains": [
+          "seikyu.fukuyama-tsuun.com"
+        ],
+        "path": "^/corp/tracking_no_hunt/([^/?#]+)/?$"
+      },
       {
         "domains": [
           "corp.fukutsu.co.jp"
@@ -11417,7 +11423,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://corp.fukutsu.co.jp/corp/recieve/tracking_no_hunt"
+    "trackingSearchUrl": "https://seikyu.fukuyama-tsuun.com/corp/tracking_no_hunt"
   },
   "gati": {
     "displayName": "AllcargoGATI",
@@ -32009,6 +32015,117 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://timelytitan.com/tracking.html"
+  },
+  "boxtal": {
+    "displayName": "Boxtal",
+    "aliases": [
+      "Boxtal Connect",
+      "Boxtal Shipping"
+    ],
+    "countries": [
+      "FR"
+    ],
+    "color": "#1e5fa6",
+    "selectable": true,
+    "timezone": "Europe/Paris",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "boxtal"
+    },
+    "trackingUrlTemplate": "https://shipping.boxtal.com/fr/fr/suivi/suivre-mon-envoi?reference={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "boxtal.com",
+          "www.boxtal.com",
+          "shipping.boxtal.com"
+        ],
+        "pathPattern": "^/[a-z]{2}/[a-z]{2}/(?:app/)?(?:(?:suivi/)?suivre-mon-envoi|mon-suivi)/?$",
+        "params": [
+          "reference"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{4}[A-Z]{4}[A-Z0-9]{4}FR$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://shipping.boxtal.com/fr/fr/suivi/suivre-mon-envoi"
+  },
+  "e-commerce-international": {
+    "displayName": "E-Commerce International",
+    "aliases": [
+      "E-com International",
+      "ecommerce-system.com"
+    ],
+    "countries": [
+      "PL",
+      "UA"
+    ],
+    "color": "#12399c",
+    "selectable": true,
+    "timezone": "Europe/Warsaw",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "e-commerce-international"
+    },
+    "trackingUrlTemplate": "https://ecommerce-system.com/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "ecommerce-system.com",
+          "www.ecommerce-system.com"
+        ],
+        "path": "^/track/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^PL15\\d{9}UA$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://ecommerce-system.com/track"
+  },
+  "mhi": {
+    "displayName": "MHI",
+    "aliases": [
+      "Mail Handling International"
+    ],
+    "countries": [
+      "GB"
+    ],
+    "color": "#00075c",
+    "selectable": true,
+    "timezone": "Europe/London",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "mhi"
+    },
+    "trackingUrlTemplate": "https://www.trackmail.co.uk/?Tracking={trackingNumber}&command=Track",
+    "linkRules": [
+      {
+        "domains": [
+          "trackmail.co.uk",
+          "www.trackmail.co.uk"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "Tracking",
+          "tracking"
+        ],
+        "ownNumbersOnly": true
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^MHI\\d{3}(?:W\\d{12}|WBB\\d{9}|P\\d{9}|\\d{12})$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://www.trackmail.co.uk/"
   }
 } as const;
 
@@ -32870,7 +32987,10 @@ export const CARRIER_IDS = [
   "eushipments",
   "no-limit",
   "starlinks-global",
-  "timely-titan"
+  "timely-titan",
+  "boxtal",
+  "e-commerce-international",
+  "mhi"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -25997,6 +25997,14 @@
     ]
   },
   {
+    "input": "2205249390CHRPRAQ1FR",
+    "carrier": "boxtal",
+    "confidence": "high",
+    "candidates": [
+      "boxtal"
+    ]
+  },
+  {
     "input": "220602XMJ8",
     "carrier": "unknown",
     "confidence": "low",
@@ -26092,6 +26100,14 @@
       "dpd-nl",
       "dpd-de",
       "seur"
+    ]
+  },
+  {
+    "input": "2212019281MONRM8YNFR",
+    "carrier": "boxtal",
+    "confidence": "high",
+    "candidates": [
+      "boxtal"
     ]
   },
   {
@@ -26816,6 +26832,14 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "2301136016MONRW3S7FR",
+    "carrier": "boxtal",
+    "confidence": "high",
+    "candidates": [
+      "boxtal"
+    ]
   },
   {
     "input": "23012200241591",
@@ -82915,6 +82939,38 @@
     ]
   },
   {
+    "input": "MHI154100090031208",
+    "carrier": "mhi",
+    "confidence": "high",
+    "candidates": [
+      "mhi"
+    ]
+  },
+  {
+    "input": "MHI154W100134524859",
+    "carrier": "mhi",
+    "confidence": "high",
+    "candidates": [
+      "mhi"
+    ]
+  },
+  {
+    "input": "MHI260WBB104947540",
+    "carrier": "mhi",
+    "confidence": "high",
+    "candidates": [
+      "mhi"
+    ]
+  },
+  {
+    "input": "MHI280P016364521",
+    "carrier": "mhi",
+    "confidence": "high",
+    "candidates": [
+      "mhi"
+    ]
+  },
+  {
     "input": "ML545911751MH",
     "carrier": "unknown",
     "confidence": "low",
@@ -86095,6 +86151,14 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "PL15132382072UA",
+    "carrier": "e-commerce-international",
+    "confidence": "high",
+    "candidates": [
+      "e-commerce-international"
+    ]
   },
   {
     "input": "PL2878740005530001",

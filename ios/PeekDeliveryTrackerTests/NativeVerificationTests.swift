@@ -257,6 +257,79 @@ extension NativeVerificationTests {
     }
 }
 
+extension NativeVerificationTests {
+    /// The provider of a build whose key is registered: it signs whatever it is given.
+    private var signs: NativeAttestProvider {
+        NativeAttestProvider(supported: { true }, generateKey: { XCTFail("Unexpected new key"); return "" },
+                             attest: { _, _ in XCTFail("Unexpected registration"); return Data() }, assert: { _, _ in Data("synthetic-assertion".utf8) })
+    }
+
+    func testCancelledLookupLeavesAppAttestOn() async throws {
+        let server = NativeTestServer(paid: true)
+        let verifier = NativeVerification(provider: signs, present: { _ in XCTFail("Unexpected browser check"); return "" },
+                                          records: registered, save: { _ in })
+        let cancelChallenge = NativeTestSwitch()
+        // URLSession ends a cancelled request with URLError.cancelled, not CancellationError.
+        let send: NativeVerification.Send = { request in
+            if request.url?.path == "/api/public/native/challenge", await cancelChallenge.take() { throw URLError(.cancelled) }
+            return try await server.send(request)
+        }
+        // Cancelled first while signing after the server asked, then while signing ahead of it.
+        for _ in 0..<2 {
+            await cancelChallenge.set(true)
+            do {
+                _ = try await verifier.send(lookup(), baseURL: base, using: send)
+                XCTFail("Expected cancellation")
+            } catch is CancellationError {}
+            let result = try await verifier.send(lookup(), baseURL: base, using: send)
+            XCTAssertEqual(result.1.statusCode, 201)
+        }
+        let requests = await server.requests
+        XCTAssertFalse(requests.contains { $0.url?.path == "/api/public/verification" })
+    }
+
+    func testCancelledPreparationLeavesAppAttestOn() async throws {
+        let base = URL(string: "https://prepare.peek.example")!
+        URLProtocol.registerClass(NativeHeldRequest.self)
+        defer { URLProtocol.unregisterClass(NativeHeldRequest.self) }
+        let started = expectation(description: "Preparation asked the server")
+        NativeHeldRequest.started = { started.fulfill() }
+        defer { NativeHeldRequest.started = nil }
+        let server = NativeTestServer(paid: true)
+        let verifier = NativeVerification(provider: signs, present: { _ in XCTFail("Unexpected browser check"); return "" },
+            records: [base.absoluteString: NativeAttestRecord(keyID: "synthetic-key", appID: "TESTTEAM01.com.example.Peek", registered: true)],
+            save: { _ in })
+        let preparing = Task { await verifier.prepare(baseURL: base) }
+        await fulfillment(of: [started], timeout: 2)
+        preparing.cancel()
+        await preparing.value
+        var request = URLRequest(url: base.appending(path: "api/public/parcels"))
+        request.httpMethod = "POST"
+        request.httpBody = lookup().httpBody
+        let result = try await verifier.send(request, baseURL: base, using: { try await server.send($0) })
+        XCTAssertEqual(result.1.statusCode, 201)
+    }
+}
+
+private actor NativeTestSwitch {
+    private var on = false
+    func set(_ value: Bool) { on = value }
+    /// Whether it was on, which turns it off.
+    func take() -> Bool {
+        defer { on = false }
+        return on
+    }
+}
+
+/// A request through URLSession.shared to the preparation host that never gets an answer.
+private final class NativeHeldRequest: URLProtocol {
+    nonisolated(unsafe) static var started: (() -> Void)?
+    override class func canInit(with request: URLRequest) -> Bool { request.url?.host == "prepare.peek.example" }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+    override func startLoading() { Self.started?() }
+    override func stopLoading() {}
+}
+
 private actor NativeTestServer {
     var requests: [URLRequest] = []
     var presented: [URL] = []

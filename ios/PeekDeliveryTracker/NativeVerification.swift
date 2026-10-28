@@ -86,6 +86,7 @@ actor NativeVerification {
             let config = try await configuration(baseURL, using: transport)
             if let appID = config.appAttestAppId { _ = try await registeredKey(baseURL, appID: appID, using: transport) }
         } catch {
+            guard !Self.cancelled(error) else { return }
             forgetInvalidKey(error, base: baseURL.absoluteString)
             pauseAttestUntil[baseURL.absoluteString] = Date().addingTimeInterval(600)
         }
@@ -104,7 +105,7 @@ actor NativeVerification {
         if let appID = configurations[base]?.0.appAttestAppId, records[base]?.appID == appID,
            records[base]?.registered == true, provider.supported(), (pauseAttestUntil[base] ?? .distantPast) <= Date() {
             do { request = try await signed(request, baseURL: baseURL, appID: appID, using: transport) }
-            catch is CancellationError { throw CancellationError() }
+            catch where Self.cancelled(error) { throw CancellationError() }
             catch {
                 forgetInvalidKey(error, base: base)
                 pauseAttestUntil[base] = Date().addingTimeInterval(600)
@@ -125,7 +126,7 @@ actor NativeVerification {
                 // A reinstall, expired registry entry or rejected key gets a new key after a short backoff.
                 records[base] = nil
                 save(records)
-            } catch is CancellationError { throw CancellationError() }
+            } catch where Self.cancelled(error) { throw CancellationError() }
             catch {
                 forgetInvalidKey(error, base: base)
                 // Apple or the network can be unavailable; the browser check remains usable.
@@ -242,6 +243,10 @@ actor NativeVerification {
     static func payload(_ request: URLRequest, challenge: String) -> String {
         let hash = SHA256.hash(data: request.httpBody ?? Data()).map { String(format: "%02x", $0) }.joined()
         return "native-request-v1\n\(challenge)\n\(request.httpMethod ?? "GET")\n\(request.url!.path)\n\(hash)"
+    }
+    /// A cancelled request: URLSession ends it with URLError.cancelled rather than CancellationError.
+    private static func cancelled(_ error: Error) -> Bool {
+        error is CancellationError || (error as? URLError)?.code == .cancelled
     }
     static func needsVerification(_ response: HTTPURLResponse) -> Bool {
         response.statusCode == 403 && response.value(forHTTPHeaderField: "X-Lookup-Verification") == "required"

@@ -4,7 +4,13 @@
 .next
 coverage
 dist
+# Sources the web image doesn't build from: the native apps, the database, docs, browser tests and ops.
+android
 ios
+supabase
+docs
+e2e
+ops
 node_modules
 playwright-report
 test-results

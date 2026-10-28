@@ -57,7 +57,7 @@ Przewoźnicy, którzy piszą o braku numeru, odsyłają do nadawcy. GLS: „popr
 - **Numer dokładnie tak, jak jest wydrukowany.** Poczta Polska prosi, żeby wpisywać go „bez spacji oraz nawiasów”.
 - **To, czy przesyłka w ogóle ma śledzenie.** Poczta Polska pokazuje tylko przesyłki rejestrowane, a przy listach poleconych tylko dzień nadania i doręczenia. Vinted śledzi tylko zamówienia złożone przyciskiem „Kup teraz”.
 
-Kupujesz na Allegro, Amazonie czy Vinted? Pisz do sprzedawcy przez platformę. Jeśli sprzedający na Allegro nie odpowiada, zgłoś problem z zakupem (na Allegro Lokalnie i przy zamówieniach z Magazynu Allegro nadal zakładasz Dyskusję). Możesz to zrobić już godzinę po opłaceniu zamówienia, a sprzedający ma 24 godziny na odpowiedź, nie licząc sobót, niedziel i dni wolnych od pracy. Na Amazon.pl problem z dostawą wyjaśnij najpierw ze sprzedawcą. Jeśli się nie uda, możesz poprosić Amazon bezpośrednio o zwrot pieniędzy. Na Vinted przy wysyłce indywidualnej sprzedający sam powinien podać Ci numer przesyłki.
+Kupujesz na Allegro, Amazonie czy Vinted? Pisz do sprzedawcy przez platformę. Jeśli sprzedający na Allegro nie odpowiada, zgłoś problem z zakupem (na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal zakładasz Dyskusję). Możesz to zrobić już godzinę po opłaceniu zamówienia, a na pierwszą wiadomość sprzedający ma 24 godziny na odpowiedź, nie licząc sobót, niedziel i dni wolnych od pracy. Na Amazon.pl problem z dostawą wyjaśnij najpierw ze sprzedawcą. Jeśli się nie uda, możesz poprosić Amazon bezpośrednio o zwrot pieniędzy. Na Vinted przy wysyłce indywidualnej sprzedający sam powinien podać Ci numer przesyłki.
 
 ### Sprawdź w aplikacji przewoźnika, czy idzie do Ciebie paczka
 

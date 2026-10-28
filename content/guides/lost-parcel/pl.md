@@ -50,7 +50,7 @@ Jeśli sprzedawca nie pomoże, może to zrobić platforma, ale tylko na swoich z
 
 | Platforma | Kiedy zgłosić | Do kiedy |
 | --- | --- | --- |
-| Allegro (Allegro Ochrona Kupujących) | Najpierw zgłoś problem sprzedającemu: Dyskusja albo reklamacja. Wniosek o rekompensatę za nieotrzymany towar nie wcześniej niż po 7 dniach | Najpóźniej 730 dni od zakupu. Do 20 000 zł |
+| Allegro (Allegro Ochrona Kupujących) | Najpierw zgłoś sprzedającemu problem z zakupem (na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal zakładasz Dyskusję) albo złóż reklamację. Wniosek o rekompensatę za nieotrzymany towar nie wcześniej niż po 7 dniach | Najpóźniej 730 dni od zakupu. Do 20 000 zł |
 | Vinted (etykieta z Vinted) | Status `Paczka wydaje się zaginiona` albo 25 dni roboczych od oznaczenia zamówienia jako wysłanego | 2 dni kalendarzowe od powiadomienia Vinted, przycisk „Mam problem” |
 | AliExpress | Od 11. dnia po wysłaniu, a gdy paczka normalnie jedzie, dopiero po upływie czasu dostawy | 15 dni po upływie czasu dostawy |
 
@@ -123,6 +123,7 @@ Gdy nie pomoże ani sprzedawca, ani platforma, zostaje obciążenie zwrotne (cha
 - [DPD Polska: Regulamin Świadczenia Usług w Obrocie Krajowym](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – § 15 zwykła i zadeklarowana wartość, § 20 utrata po 30 dniach, § 21 kto składa, 12 miesięcy, dokumenty, 14 dni
 - [Allegro: Allegro Ochrona Kupujących, regulamin (załącznik nr 9)](https://policies.allegro.com/doc/ccca669b9c6b6723bfdb781db6a9773d0e0c61281a448151bfaa75843e1d55c8) – najpierw sprzedający, 7 i 730 dni, do 20 000 zł, do ceny towaru, koszt przesyłki, nieotrzymany towar i wyłączenia, decyzja w 30 dni roboczych od kompletnego wniosku, zwrot w 7 dni, dowód wpłaty
 - [Allegro: Czym jest Allegro Ochrona Kupujących i co zrobić, gdy mój klient ubiega się o rekompensatę](https://help.allegro.com/pl/sell/a/czym-jest-allegro-ochrona-kupujacych-i-co-zrobic-gdy-moj-klient-ubiega-sie-o-rekompensate-rj9eVqwM8iz) – ochrona obejmuje Allegro i Allegro Lokalnie
+- [Allegro: Jak rozwiązywać problemy z zakupem w zakładce Wiadomości w Sales Center lub w Centrum Wiadomości](https://help.allegro.com/pl/sell/a/jak-rozwiazywac-problemy-z-zakupem-w-zakladce-wiadomosci-w-sales-center-lub-w-centrum-wiadomosci-x5ZVrvzXPuP) – od 28 października 2026 problem z zakupem zamiast Dyskusji, Dyskusje nadal na Allegro Lokalnie i u sprzedających z Magazynu Allegro
 - [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – Gwarancja od A do Z dla każdego produktu, problem z terminową dostawą, zwrot pieniędzy albo wymiana
 - [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, potem zwrot pieniędzy od Amazona
 - [Vinted: Paczka nie dotarła](https://www.vinted.pl/help/658) – 25 dni roboczych, „Mam problem”, zwrot i odszkodowanie dla sprzedającego

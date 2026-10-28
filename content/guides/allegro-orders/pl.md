@@ -1,17 +1,17 @@
 ---
 title: Śledzenie przesyłki Allegro: numer, przewoźnik, Dyskusja
-description: Kto doręcza zamówienie z Allegro, gdzie jest numer przesyłki, ile czekać na wysyłkę, jak działa Smart! i co zrobić, gdy paczka nie dotarła: Dyskusja i Ochrona.
+description: Kto doręcza zamówienie z Allegro, gdzie jest numer przesyłki, ile czekać na wysyłkę, jak działa Smart! i co zrobić, gdy paczka nie dotarła.
 slug: sledzenie-przesylki-allegro
 picture: Paczka w otwartej skrytce One Box, telefon z zamówieniem i Pip, który biegnie ją odebrać.
 published: 2026-10-17
 updated: 2026-10-17
 ---
 
-Numer przesyłki z Allegro jest w „Moich przesyłkach” i w szczegółach zakupu w „Moich zakupach”, razem z nazwą przewoźnika. Paczkę wiezie firma z metody dostawy wybranej przy zakupie: Allegro One, InPost, DPD, DHL, ORLEN Paczka albo Poczta Polska. Gdy paczka nie dociera, piszesz do sprzedającego, potem zakładasz Dyskusję, a jeśli to nie pomoże, Allegro może oddać ci pieniądze w ramach Allegro Ochrony Kupujących.
+Numer przesyłki z Allegro jest w „Moich przesyłkach” i w szczegółach zakupu w „Moich zakupach”, razem z nazwą przewoźnika. Paczkę wiezie firma z metody dostawy wybranej przy zakupie: Allegro One, InPost, DPD, DHL, ORLEN Paczka albo Poczta Polska. Gdy paczka nie dociera, piszesz do sprzedającego, potem zgłaszasz problem z zakupem, a jeśli to nie pomoże, Allegro może oddać ci pieniądze w ramach Allegro Ochrony Kupujących.
 
 ## Który przewoźnik doręcza moje zamówienie z Allegro?
 
-Ten, którego nazwę ma metoda dostawy. Sprzedający decyduje, jakie metody udostępnia w ofercie, a ty wybierasz jedną w formularzu dostawy i płatności. Nazwy metod mówią, kto wiezie paczkę:
+Ten, którego nazwę ma metoda dostawy. Sprzedający decyduje, jakie metody udostępnia w ofercie, a ty wybierasz jedną w formularzu dostawy i płatności. Nazwy metod zwykle mówią, kto wiezie paczkę:
 
 | Metoda dostawy na Allegro | Kto wiezie | Dokąd |
 | --- | --- | --- |
@@ -19,22 +19,21 @@ Ten, którego nazwę ma metoda dostawy. Sprzedający decyduje, jakie metody udos
 | Allegro Automat ORLEN Paczka, Allegro Odbiór w Punkcie ORLEN Paczka | [ORLEN Paczka](carrier:orlen-paczka) | Automat albo punkt |
 | Allegro Automat DHL BOX 24/7, Allegro Odbiór w Punkcie DHL, Allegro Kurier DHL | [DHL](carrier:dhl-ecommerce-pl) | Automat, punkt, adres |
 | Allegro Automat DPD Pickup, Allegro Odbiór w Punkcie DPD Pickup, Allegro Kurier DPD | [DPD](carrier:dpd-pl) | Automat, punkt, adres |
-| Allegro Paczkomaty InPost, Allegro Kurier24 InPost, Allegro miniKurier24 InPost | [InPost](carrier:inpost) | Paczkomat, PaczkoPunkt, adres |
+| Allegro Paczkomaty InPost, Allegro Kurier24 InPost, Allegro miniKurier24 InPost | [InPost](carrier:inpost) | Paczkomat, adres |
 | Allegro Automat Pocztex, Allegro Odbiór w Punkcie Pocztex, Allegro Kurier Pocztex | [Poczta Polska](carrier:poczta-polska) (Pocztex) | Automat, punkt, adres |
-| Allegro XL | Kurier, Allegro nie podaje którego | Adres: produkty cięższe niż 31,5 kg albo dłuższe niż 150 cm |
 
-Pierwsze cztery wiersze to Allegro Delivery, przy DPD tylko metody oznaczone „Allegro Delivery”. Przy tych metodach Allegro bierze odpowiedzialność za przesyłkę na każdym etapie, także za reklamację dostawy i zwrot, a paczkę śledzisz w aplikacji Allegro. Allegro InPost to wspólna usługa Allegro i InPostu. Allegro wymienia też kurierów z wysyłką z zagranicy do Polski: DPD z Niemiec, Czech, Francji i Holandii oraz DHL z Niemiec, Czech i Holandii.
+Metody z pierwszych czterech wierszy sprzedający udostępnia w programie Allegro Delivery albo na własnej umowie z przewoźnikiem. W Allegro Delivery to Allegro odpowiada za cały proces dostawy i za obsługę klienta. Paczki Allegro One Punkt może wieźć DPD, a Allegro One Box także DHL albo ORLEN Paczka. W wybranych miastach dowożą je kurierzy Allegro One.
 
-Kupujesz z Magazynu Allegro? Wtedy paczkę pakuje i nadaje Allegro, w ramach One Fulfillment by Allegro. Produkty od kilku sprzedających przychodzą razem, w jednej przesyłce, a w „Moich zakupach” zamiast nazwy sprzedającego widzisz informację o dostawie z Magazynu Allegro.
+Kupujesz z Magazynu Allegro? Wtedy paczkę pakuje i nadaje Allegro, w ramach One Fulfillment by Allegro. Produkty od kilku sprzedających korzystających z magazynu mogą przyjść razem, w jednej przesyłce.
 
 :::journey
 - shop | Sprzedający albo Magazyn Allegro | Pakuje paczkę w czasie wysyłki podanym w ofercie
-- truck | Allegro One, InPost, DPD, DHL, ORLEN Paczka albo Pocztex | Po nadaniu status zmienia się z „Oczekuje na nadanie” na „Nadana”
-- locker | One Box, Paczkomat albo punkt | Tylko przy takiej dostawie: kod odbioru przychodzi, gdy paczka jest na miejscu
+- truck | Allegro One, InPost, DPD, DHL, ORLEN Paczka albo Pocztex | Allegro uznaje paczkę za wysłaną, gdy przewoźnik potwierdzi to statusem
+- locker | One Box, Paczkomat albo punkt | Tylko przy takiej dostawie: wiadomość o odbiorze przychodzi, gdy paczka jest na miejscu
 - home | Ty | Kurier dowozi paczkę pod adres z zamówienia
 :::
 
-Kod odbioru Allegro Delivery dostajesz mailem, w powiadomieniu push albo SMS-em, jeśli nie masz aplikacji, i widzisz go w „Moich przesyłkach”. Paczka czeka 2 dni kalendarzowe w One Boxie, 2 dni robocze w One Punkcie, w DHL i w DPD Pickup, a 3 dni robocze w ORLEN Paczce. Potem wraca do sprzedającego, a zakup dostaje status „Odesłano nadawcy”. Kody, przedłużanie i pełne automaty opisuje [Paczkomat i automat paczkowy](guide:parcel-lockers), a co dalej: [nieodebrana paczka](guide:uncollected-parcel).
+Przy Allegro Delivery, gdy paczka czeka w punkcie albo automacie, dostajesz maila, SMS-a albo powiadomienie w aplikacji z miejscem i terminem odbioru. Automat otworzysz kodem odbioru, w aplikacji albo kodem QR z SMS-a lub maila. Paczka czeka 2 dni kalendarzowe w One Boxie, 2 dni robocze w One Punkcie, w DHL i w DPD Pickup, a 3 dni robocze w ORLEN Paczce. Potem wraca do sprzedającego. Kody, przedłużanie i pełne automaty opisuje [Paczkomat i automat paczkowy](guide:parcel-lockers), a co dalej: [nieodebrana paczka](guide:uncollected-parcel).
 
 Kupujesz od osób prywatnych na Allegro Lokalnie? To ma osobny poradnik: [Przesyłka OLX i Allegro Lokalnie](guide:second-hand-orders).
 
@@ -42,14 +41,14 @@ Kupujesz od osób prywatnych na Allegro Lokalnie? To ma osobny poradnik: [Przesy
 
 Allegro pokazuje go w czterech miejscach:
 
-- **Moje przesyłki.** Wszystkie paczki od chwili, gdy oczekują na nadanie, aż do odbioru: logo przewoźnika, status, przewidywany termin dostawy, a przy Allegro Delivery kod odbioru albo kod QR.
-- **Moje zakupy.** Przy zakupie kliknij „szczegóły zakupu”: zobaczysz dane sprzedającego, przewoźnika, numer przesyłki i jej status.
-- **Mail od Allegro**, który przychodzi po zakupie.
-- **Aplikacja Allegro**: lista kupionych przedmiotów i zakładka Moje przesyłki.
+- **Moje przesyłki.** Wszystkie paczki od chwili, gdy czekają na nadanie, aż do odbioru, a gdy paczka jest w drodze, także przewidywany termin dostawy.
+- **Moje zakupy.** W szczegółach zakupu zobaczysz numer przesyłki, gdy sprzedający go poda, i jej status.
+- **Mail od Allegro.** Gdy numer pojawi się przy zakupie, dostajesz maila z nazwą przewoźnika, numerem przesyłki i linkiem do śledzenia.
+- **Aplikacja Allegro**, w której sprawdzisz to samo.
 
-Statusy, które tam spotkasz, to „Oczekuje na nadanie”, „Nadana”, „W drodze” i „Odbierz przesyłkę”, a przy Allegro Delivery także „Odesłano nadawcy”. Numer oferty i numer zamówienia też widać w szczegółach, ale to numery Allegro: przewoźnik ich nie zna. Gdzie szukać w innych sklepach: [jak znaleźć numer przesyłki](guide:find-tracking-number).
+Gdzie szukać w innych sklepach: [jak znaleźć numer przesyłki](guide:find-tracking-number).
 
-Nie ma numeru? Allegro wymienia trzy powody: formularz dostawy i płatności nie został poprawnie wypełniony, „sprzedający nie dodał do zamówienia numeru listu przewozowego” albo zakup jest ukryty. Paczkę spoza Allegro Delivery możesz też śledzić na stronie przewoźnika. Numery wyglądają tak:
+Nie ma numeru? Wpisuje go sprzedający, a przy części przewoźników Allegro dodaje go do zamówienia samo, więc najpierw zapytaj sprzedającego. Jeśli sprzedający wysyła firmą, której statusów Allegro nie pobiera, paczkę śledzisz na stronie przewoźnika. Numery wyglądają tak:
 
 | Przewoźnik | Jak wygląda numer |
 | --- | --- |
@@ -71,71 +70,66 @@ Inne kształty: [jak rozpoznać przewoźnika po numerze](guide:tracking-number-f
 
 Najpierw sprawdź, ile sprzedający ma na wysyłkę. Na każdej ofercie Allegro pokazuje przewidywany czas dostawy, a składa się on z dwóch części:
 
-- **Czas wysyłki.** Tyle sprzedający potrzebuje na przygotowanie paczki, licząc od chwili, gdy dostał zapłatę (albo deklarację zapłaty przy pobraniu), do jej wysłania. Allegro bierze go z oferty i z tego, jak szybko sprzedający wysyłał wcześniej.
+- **Czas wysyłki.** Sprzedający podaje go w ofercie. Liczy się od zapłaty (przy płatności przy odbiorze od złożenia zamówienia) do chwili, gdy kurier zeskanuje paczkę. Allegro bierze pod uwagę także to, jak szybko sprzedający faktycznie wysyłał wcześniej.
 - **Czas przewozu**, który zależy od przewoźnika.
 
-Allegro wlicza w to weekendy, święta i urlopy sprzedających, ale nie zdarzenia losowe ani nieplanowane opóźnienia. W okresie świątecznym albo przy trudnych warunkach na drogach termin może się wydłużyć. Najczęstsze powody ciszy:
+To prognoza, a nie gwarancja. Allegro nie uwzględnia w niej zdarzeń losowych, takich jak trudna pogoda czy wypadki na drogach, ani nieplanowanych opóźnień u sprzedającego lub przewoźnika. Najczęstsze powody ciszy:
 
-- **„Oczekuje na nadanie”.** Paczka czeka, aż sprzedający ją nada. Śledzenie ruszy, gdy przewoźnik ją przyjmie.
-- **Brak zapłaty u sprzedającego.** W „Moich zakupach” sprawdź status płatności: „płatność zakończona” znaczy, że sprzedający dostał pieniądze.
-- **Paczka się spóźnia.** Jeśli nie zdąży na termin pokazany przy zakupie, zobaczysz w „Moich zakupach” komunikat „Przesyłka opóźniona”, a Allegro napisze też mailem i w aplikacji. Gdy paczka jest w drodze, poda nową przewidywaną datę.
-- **Kilka paczek w jednym zamówieniu.** Jedno zamówienie może przyjść w kilku przesyłkach, a Allegro pisze o opóźnieniu każdej z nich osobno.
-- **Nieudana próba doręczenia.** Gdy w szczegółach zamówienia widzisz, że kurier cię nie zastał, skontaktuj się z przewoźnikiem. Bezpośredni numer kuriera bywa w jego SMS-ie albo mailu.
+- **Paczka czeka na nadanie.** Widać ją już w „Moich przesyłkach”, ale za wysłaną Allegro uznaje ją dopiero wtedy, gdy przewoźnik potwierdzi to statusem.
+- **Płatność.** Czas wysyłki biegnie od zapłaty, więc sprawdź, czy płatność przeszła.
+- **Kilka paczek w jednym zamówieniu.** Sprzedający może nadać zamówienie w kilku przesyłkach, a każda ma własny numer.
+- **Nieudana próba doręczenia.** Gdy kurier cię nie zastał, skontaktuj się z przewoźnikiem.
 
-Dopóki sprzedający nie zmieni statusu zamówienia, na przykład na „w realizacji”, ani nie poda numeru przesyłki, a od zakupu nie minęły 3 dni, możesz anulować zakup w „Moich zakupach”. Działa to, gdy jako konsument kupujesz od firmy. Kiedy czekanie jest jeszcze normalne: [status przesyłki się nie zmienia](guide:tracking-not-updating).
+Kupujesz z konta zwykłego i nie prosisz o fakturę na firmę? Zakup od sprzedającego z kontem firmowym anulujesz w „Moich zakupach”, dopóki sprzedający nie poda numeru przesyłki ani nie zmieni statusu zamówienia, na przykład na „w realizacji”, ale nie później niż 3 dni po zakupie. Kiedy czekanie jest jeszcze normalne: [status przesyłki się nie zmienia](guide:tracking-not-updating).
 
 ## Allegro Smart! i czas dostawy
 
-Allegro Smart! to płatna usługa: 59,90 zł na rok albo 14,99 zł na miesiąc. Daje nielimitowane darmowe dostawy w całej Polsce, kurierem na maksymalnie 10 adresów albo do automatów i punktów odbioru, darmowy zwrot raz na każde zamówienie i szybsze rozpatrzenie wniosków w ramach Allegro Ochrony Kupujących. Po spełnieniu warunków możesz najpierw aktywować wersję próbną: 5 darmowych dostaw i zwrotów w ciągu 3 miesięcy.
+Allegro Smart! to płatna usługa: 59,90 zł na rok albo 14,99 zł na miesiąc. Daje nielimitowane darmowe dostawy, zarówno kurierem, jak i do automatów i punktów odbioru, a paczki Smart! możesz bezpłatnie zwrócić.
 
-Darmowa dostawa działa w ofertach z oznaczeniem Smart!, gdy wybierzesz metodę z ikoną Smart!, a produkty od jednego sprzedającego kosztują razem co najmniej:
+Darmowa dostawa działa w ofertach z oznaczeniem Smart!, gdy koszt dostawy zamówienia nie przekracza 100 zł, a produkty od jednego sprzedającego kosztują razem co najmniej:
 
-| Smart! aktywny | Automaty i punkty | Kurier |
+| Twój Smart! | Automaty i punkty | Kurier |
 | --- | --- | --- |
-| Od 2 marca 2026 | 49,90 zł | 49,90 zł |
-| Wcześniej | 45 zł | 65 zł |
+| Aktywowany lub przedłużony od 2 marca 2026 | 49,90 zł | 49,90 zł |
+| Aktywowany wcześniej, do końca okresu rozliczeniowego | 45 zł | 65 zł |
 
-Przy pobraniu płacisz 4,99 zł za każdą przesyłkę z zamówienia. Kupujesz kilka ofert naraz? Muszą mieć wspólną metodę dostawy ze Smart!. W Magazynie Allegro próg liczy się od całego zamówienia łączonego, nawet od kilku sprzedających.
+Przy płatności przy odbiorze dopłacasz 4,99 zł za pobranie. W Magazynie Allegro próg liczy się od całego zamówienia łączonego, nawet od kilku sprzedających.
 
-Kiedy paczka przyjdzie, mówi przewidywany czas dostawy. Allegro pokazuje go tak:
+Kiedy paczka przyjdzie, mówi przewidywany czas dostawy. Allegro pokazuje go na przykład jako „dostawa jutro” albo „dostawa pojutrze”. Przy ofertach z wysyłką dłuższą niż 3 dni widzisz przedział dat, konkretną datę albo liczbę dni.
 
-- **dziś, jutro, pojutrze**, gdy dostawa trwa do 2 dni roboczych,
-- **data albo przedział dat**, gdy trwa do 7 dni, na przykład z dopiskiem „w punkcie” albo „u Ciebie”,
-- **liczba dni**, gdy trwa dłużej niż 7 dni.
-
-Allegro Delivery obiecuje dostawę do punktów „nawet na drugi dzień od zamówienia”, a do One Boxa jest też metoda „dostawa dzisiaj”. Zamówienie z Magazynu Allegro złożone do 20:30 możesz odebrać nawet następnego dnia roboczego.
+W Allegro Delivery Allegro One Punkt i One Box oferują dostawę jutro, a u wybranych sprzedających jest też Allegro One Box z dostawą dzisiaj. Przy większości metod z dostawą jutro zamówienie z Magazynu Allegro złożone i opłacone w dzień roboczy do 20:00 trafia do kuriera jeszcze tego samego dnia.
 
 ## Paczka z Allegro nie dotarła albo jest „doręczona”, a jej nie ma: co robić?
 
 Termin minął, a paczki nie ma? Zrób tak:
 
 :::steps
-- Sprawdź śledzenie | Otwórz „Moje przesyłki”. Przy statusie „Oczekuje na nadanie” paczka jeszcze nie wyjechała. W „Moich zakupach” sprawdź też adres i płatność.
-- Napisz do sprzedającego | Kliknij „Zapytaj o zakup” przy zamówieniu i poproś o numer przesyłki albo potwierdzenie nadania. Sprzedający ma 24 godziny na odpowiedź, nie licząc weekendów i świąt.
-- Załóż Dyskusję | W szczegółach zakupu wybierz „zgłoś reklamację lub problem” i powód „nie otrzymałem produktu”. Możesz to zrobić od godziny do 2 lat po zakupie. Gdy sprzedający milczy 24 godziny, kliknij „poproś o pomoc Allegro”.
-- Allegro to sprawdza | Po 7 dniach bez porozumienia oznacz Dyskusję jako nierozwiązaną. Sprawa trafia do Allegro, które przysyła ci link do wniosku w ramach Allegro Ochrony Kupujących.
-- Zwrot pieniędzy | Allegro rozpatruje wniosek zwykle w 2-3 dni robocze, a pieniądze wysyła zwykle w 3 do 7 dni roboczych od decyzji, na kartę albo konto, z którego płacisz.
+- Sprawdź śledzenie | Otwórz „Moje przesyłki” i zobacz, czy paczka została nadana. W „Moich zakupach” sprawdź też adres i płatność.
+- Napisz do sprzedającego | Poproś o numer przesyłki albo potwierdzenie nadania. Sprzedający ma 24 godziny na odpowiedź, nie licząc sobót, niedziel i dni wolnych od pracy.
+- Zgłoś problem z zakupem | Wskaż produkt, liczbę sztuk i powód zgłoszenia. Możesz to zrobić już godzinę po opłaceniu zamówienia. Na twoją pierwszą wiadomość w zgłoszeniu sprzedający też ma 24 godziny, nie licząc sobót, niedziel i dni wolnych od pracy, a Allegro włączy się do rozmowy, gdy o to poprosisz. Na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal zakładasz Dyskusję, a Dyskusja założona przed 28 października 2026 toczy się jak dotąd.
+- Allegro to sprawdza | Przy problemie z przesyłką (opóźnienie, zagubienie, brak produktu w przesyłce) sprzedający ma 7 dni na rozwiązanie zgłoszenia, a przy innych problemach 14 dni. Jeśli po tym czasie Allegro nie widzi, że problem rozwiązano, zapyta cię o to, a gdy odpowiesz, że nadal występuje, zaproponuje ci wniosek w ramach Allegro Ochrony Kupujących.
+- Decyzja | Allegro rozpatruje wniosek w ciągu 30 dni roboczych od otrzymania kompletnego formularza.
 :::
 
-Allegro Ochrona Kupujących obejmuje zakupy na Allegro i Allegro Lokalnie i oddaje do 20 000 zł, choć nie zawsze 100% kosztów. Wniosek złożysz od 14. dnia do 2 lat po zakupie, a gdy produkt nie dotarł, już 7 dni po zgłoszeniu problemu. Nie obejmuje zakupów poza Allegro ani płatności gotówką przy odbiorze osobistym. Jeśli dostaniesz też pieniądze od sprzedającego, rekompensatę oddajesz w 7 dni.
+Allegro Ochrona Kupujących obejmuje zakupy na Allegro i Allegro Lokalnie. Oddaje do 20 000 zł, ale nie więcej niż cena towaru, a koszty dostawy zwraca tylko wtedy, gdy płaciłeś przez Allegro. Gdy produkt nie dotarł, wniosek złożysz nie wcześniej niż po 7 dniach, w innych sprawach po 14 dniach, i nie później niż 730 dni od zakupu. Ochrona nie obejmuje odbioru osobistego z zapłatą na miejscu ani towaru zniszczonego lub zgubionego w transporcie z winy przewoźnika. Jeśli dostaniesz też pieniądze od sprzedającego, rekompensatę oddajesz w 7 dni.
 
-Śledzenie pokazuje, że paczka jest odebrana, a nie masz jej? Allegro radzi sprawdzić, czy nie odebrał jej ktoś inny: domownik, sąsiad albo recepcja w firmie. Jeśli paczka przyjdzie w trakcie Dyskusji, Allegro da ci znać i zamknie Dyskusję po 24 godzinach, gdy nie masz zastrzeżeń.
+Śledzenie pokazuje, że paczka jest odebrana, a nie masz jej? Sprawdź, czy nie odebrał jej ktoś inny: domownik, sąsiad albo recepcja w firmie. Jeśli paczka dotrze, gdy zgłoszenie jest jeszcze otwarte, Allegro zamknie je automatycznie. Gdy problem wróci, możesz otworzyć je ponownie, do 2 lat od zakupu.
 
-Przy Allegro Delivery możesz też zareklamować samą usługę, w tym samym miejscu: zaginięcie, uszkodzenie w transporcie albo spóźnienie. Jeśli paczka nie dotarła, reklamację złożysz tylko wtedy, gdy sprzedający przekazał ci prawo do niej. Masz na to do 12 miesięcy od nadania, a przy uszkodzeniu niewidocznym z zewnątrz 7 dni od odbioru. Allegro zwykle odpowiada w 7 dni, najpóźniej w 30.
+Przy Allegro Delivery możesz też zareklamować samą usługę: zaginięcie, uszkodzenie w transporcie albo spóźnienie. Reklamację składa sprzedający jako nadawca, a ty wtedy, gdy paczkę ci doręczono albo sprzedający przekazał ci to prawo. Złożysz ją elektronicznie na stronie Allegro, najpóźniej 12 miesięcy od nadania, a przy uszkodzeniu niewidocznym z zewnątrz w ciągu 7 dni od odbioru.
 
-Dwie różnice. Przy zakupie od osoby prywatnej w Dyskusji zgłaszasz tylko problemy z przesyłką, a inne sprawy trafiają jako „problem z zakupem” do Centrum Wiadomości. Przy zamówieniu z Magazynu Allegro odpowiada sprzedający albo obsługa magazynu. Więcej: [paczka doręczona, a jej nie ma](guide:delivered-not-received) i [zaginiona paczka](guide:lost-parcel).
+Więcej: [paczka doręczona, a jej nie ma](guide:delivered-not-received) i [zaginiona paczka](guide:lost-parcel).
 
 ## Czy Allegro wysyła za granicę?
 
-Tak, jeśli sprzedający to oferuje. Allegro Kurier DPD i Allegro Kurier DHL wiozą paczki z Polski do 24 krajów Unii Europejskiej, bez Cypru i Malty. Szacowany czas przewozu to 2 do 7 dni roboczych, zależnie od kraju i przewoźnika. Do Czech, Słowacji i na Węgry są też punkty i automaty [Packeta](carrier:packeta), a oferty z tą dostawą znajdziesz również na allegro.cz, allegro.sk i allegro.hu. Przy wysyłce do Ukrainy zakup to import: cło i VAT, jeśli trzeba je zapłacić, pobiera [Nova Post](carrier:nova-poshta).
+Tak, jeśli sprzedający to oferuje. Allegro Kurier DPD i Allegro Kurier DHL wiozą paczki z Polski do 23 krajów Unii Europejskiej. Szacowany czas przewozu to 2 do 7 dni roboczych, zależnie od kraju i przewoźnika. Do Czech, Słowacji i na Węgry są też punkty i automaty [Packeta](carrier:packeta), a oferty z tą dostawą znajdziesz również na allegro.cz, allegro.sk i allegro.hu. Do Ukrainy wysyłka działa na razie pilotażowo, tylko u wybranych sprzedających: paczkę doręcza [Nova Post](carrier:nova-poshta), a cło i VAT od importu, jeśli wystąpią, płaci co do zasady kupujący.
 
-Za granicą nie działa darmowa dostawa ani zwrot ze Smart!: warunki zwrotu ustalasz ze sprzedającym. Kraj dostawy, walutę i język, także angielski, zmienisz na koncie, w sekcji Lokalizacja.
+Wysyłka kurierem za granicę z allegro.pl nie działa w ramach Smart!, a jeśli zechcesz zwrócić odebrany towar, odsyłasz go na własny koszt. Kraj dostawy, walutę i język, także angielski, zmienisz na koncie, w sekcji Lokalizacja. Po wybraniu kraju zobaczysz tylko oferty sprzedających, którzy tam wysyłają.
 
 ## Jak zwrócić zamówienie z Allegro?
 
-Jako konsument masz 14 dni, licząc od dnia po otrzymaniu paczki, żeby powiadomić sprzedającego o odstąpieniu od umowy. Po wypełnieniu formularza („zwróć zakup” w szczegółach zakupu) masz kolejne 14 dni na nadanie. Zwrot jest darmowy ze Smart!, przy Allegro Delivery i przy Allegro InPost.
+Jako konsument masz co najmniej 14 dni, licząc od dnia po otrzymaniu paczki, żeby powiadomić sprzedającego o odstąpieniu od umowy, na przykład formularzem „zwróć zakup”. Po złożeniu oświadczenia masz kolejne 14 dni na odesłanie towaru. Zwrot jest darmowy ze Smart!, przy zwrocie konsumenckim z kodem zwrotu w Allegro Delivery i przy metodach Allegro Kurier24 i miniKurier24 InPost.
 
-Formularz daje sprzedającemu link do śledzenia twojej paczki. Gdy odsyłasz paczkę sam, Allegro jej nie śledzi. Od osoby prywatnej zwrotu nie wymusisz: nie musi go przyjąć. Gdzie jest numer zwrotu i kiedy dostaniesz pieniądze: [zwrot i zwrot pieniędzy](guide:returns-tracking).
+Kupując od osoby prywatnej, nie masz prawa odstąpienia od umowy. Gdzie jest numer zwrotu i kiedy dostaniesz pieniądze: [zwrot i zwrot pieniędzy](guide:returns-tracking).
 
 ## Czy mogę śledzić paczkę z Allegro w Peek?
 
@@ -144,33 +138,34 @@ Tak, numerem przesyłki. Skopiuj go z „Moich przesyłek” albo ze szczegół�
 - **Kilka paczek, kilka numerów.** Dodaj każdy: Peek śledzi każdą paczkę osobno.
 - **Numer zamówienia ani numer oferty nie wystarczą.** Peek potrzebuje numeru przesyłki.
 
-Peek pokazuje to, co publikuje przewoźnik. Dyskusja, reklamacja, Allegro Ochrona Kupujących i zwroty zostają na Allegro.
+Peek pokazuje to, co publikuje przewoźnik. Zgłoszenie problemu z zakupem, reklamacja, Allegro Ochrona Kupujących i zwroty zostają na Allegro.
 
 :::sources
-- [Allegro: Program dostaw Allegro Delivery – informacje dla kupujących](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/program-dostaw-allegro-delivery-informacje-dla-kupujacych-Bvw1bwrMmIz) – metody i przewoźnicy, odpowiedzialność Allegro, kod odbioru, czas na odbiór, Odesłano nadawcy, kurier tylko pod adres, reklamacja dostawy, dostawa na drugi dzień
-- [Allegro: Gdzie sprawdzisz numer i status swojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/gdzie-sprawdzisz-numer-i-status-swojej-przesylki-LvP7agrzOhw) – Moje przesyłki, Moje zakupy, mail, aplikacja, statusy, brak numeru, Przesyłka opóźniona, powiadomienia o każdej przesyłce
-- [Allegro: Gdzie znaleźć numer zamówienia i kiedy z niego skorzystać](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/gdzie-znalezc-numer-zamowienia-i-kiedy-z-niego-skorzystac-85LVKBdO4uO) – numer zamówienia w szczegółach zakupu
-- [Allegro: Przewidywany czas dostawy Twojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/przewidywany-czas-dostawy-twojej-przesylki-z8alPejWRt7) – czas wysyłki i przewozu, weekendy i urlopy, sposób wyświetlania terminu
-- [Allegro: Jak korzystać z Allegro InPost](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/jak-korzystac-z-allegro-inpost-xG71gn3VRuW) – wspólna usługa Allegro i InPostu, metody InPost
-- [Allegro: Metody dostawy i zwrotu przesyłek w ramach Allegro Smart!](https://allegro.pl/pomoc/dla-kupujacych/zakupy-i-zwroty-z-allegro-smart-/metody-dostawy-i-zwrotu-przesylek-w-ramach-allegro-smart-a1WrzwbOXf6) – metody Pocztex i pozostałe, pobranie 4,99 zł, wysyłka z zagranicy do Polski
-- [Allegro: Jak zamówić duże i ciężkie produkty](https://allegro.pl/pomoc/dla-kupujacych/dostawa-zwrot-przesylki-i-reklamacja/jak-zamowic-duze-i-ciezkie-produkty-z-wygodna-dostawa-i-wniesieniem-0A3oO8oOmt3) – Allegro XL, 31,5 kg, 150 cm
-- [Allegro: Czym jest Magazyn Allegro i jak działają zamówienia łączone](https://allegro.pl/pomoc/dla-kupujacych/sposoby-zakupow/czym-sa-zamowienia-laczone-z-magazynu-allegro-g0wv2R5nVsB) – One Fulfillment by Allegro, jedna przesyłka, 20:30, próg Smart!, obsługa magazynu
-- [Allegro: Czym jest usługa Allegro Smart! i jak z niej korzystać](https://allegro.pl/pomoc/dla-kupujacych/korzysci-i-aktywacja-allegro-smart/czym-jest-usluga-allegro-smart-i-jak-z-niej-korzystac-mGwb5Pq6vIL) – darmowe dostawy, 10 adresów, zwrot raz na zamówienie, progi 45, 65 i 49,90 zł, wspólna metoda dostawy
-- [Allegro: Jak kupić usługę Allegro Smart!](https://allegro.pl/pomoc/dla-kupujacych/korzysci-i-aktywacja-allegro-smart/jak-kupic-usluge-allegro-smart-B8205YeWOID) – 59,90 zł na rok, 14,99 zł na miesiąc, wersja próbna
-- [Allegro: Co możesz zrobić, gdy czekasz na przesyłkę zbyt długo](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/co-mozesz-zrobic-gdy-czekasz-na-przesylke-zbyt-dlugo-xG71gn36qC4) – płatność i formularz, numer lub potwierdzenie nadania, Dyskusja, nieudana próba doręczenia, odebrana, a jej nie ma
-- [Allegro: Ramy czasowe Dyskusji](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/ramy-czasowe-dyskusji-85Y7X9bxEs2) – godzina, 24 godziny bez weekendów i świąt, 7 dni, 2 lata, sprzedający prywatni
-- [Allegro: Jak rozpocząć Dyskusję i wyjaśnić problem ze sprzedającym](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/jak-rozpoczac-dyskusje-i-wyjasnic-problem-ze-sprzedajacym-WEDKYqnEvik) – zgłoś reklamację lub problem, Magazyn Allegro
-- [Allegro: Jak od 4 sierpnia zgłaszać problemy z zakupami od sprzedających z kont zwykłych](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/jak-od-4-sierpnia-zglaszac-problemy-z-zakupami-od-sprzedajacych-z-kont-zwyklych-prywatnych-1nGAz9lDgT5) – Dyskusja tylko dla przesyłek, problem z zakupem w Centrum Wiadomości
-- [Allegro: Jak skontaktować się ze sprzedającym](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/jak-skontaktowac-sie-ze-sprzedajacym-YLkxdB0l1t8) – Zapytaj o zakup, 24 godziny
-- [Allegro: Jak działa Allegro Ochrona Kupujących](https://allegro.pl/pomoc/dla-kupujacych/allegro-ochrona-kupujacych/jak-dziala-allegro-ochrona-kupujacych-qzdAg2Klbsl) – 20 000 zł, wyłączenia, od 14. dnia do 2 lat, 7 dni, 2-3 i 3-7 dni roboczych, zwrot podwójnej rekompensaty
-- [Allegro: Co zrobić, aby dostać rekompensatę w ramach Allegro Ochrony Kupujących](https://allegro.pl/pomoc/dla-kupujacych/allegro-ochrona-kupujacych/co-zrobic-aby-dostac-rekompensate-w-ramach-allegro-ochrony-kupujacych-KM54xY0avCo) – kolejność kroków, link do wniosku
-- [Allegro: Jak anulować zakup](https://allegro.pl/pomoc/dla-kupujacych/zasady-zwrotow-i-reklamacji/jak-anulowac-zakup-rKDAEXOx8iX) – statusy sprzedającego, numer przesyłki, 3 dni
-- [Allegro: Lista zakupów w zakładce Moje zakupy](https://allegro.pl/pomoc/dla-kupujacych/historia-zakupow/lista-zakupow-w-zakladce-moje-zakupy-ZGOKz47L2U6) – statusy płatności
-- [Allegro: Allegro Kurier DPD i Allegro Kurier DHL – dostawa z Polski na terenie Unii Europejskiej](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/allegro-kurier-dpd-i-allegro-kurier-dhl-dostawa-z-polski-na-terenie-unii-europejskiej-ZMDgKY6vOCO) – 24 kraje, czasy przewozu, bez Smart! za granicą
-- [Allegro: Dostawa z Polski do Czech, Słowacji i Węgier – Packeta](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/dostawa-z-polski-do-czech-slowacji-i-wegier-do-automatow-paczkowych-i-punktow-odbioru-packeta-E7376gkyMuB) – punkty i automaty Packeta, allegro.cz, allegro.sk, allegro.hu
-- [Allegro: Zakup towaru z Polski do Ukrainy](https://allegro.pl/pomoc/dla-kupujacych/wyjatki-i-zasady-dla-wybranych-kategorii/zakup-towaru-z-polski-do-ukrainy-informacje-dla-kupujacych-YWM0D2ld1Sn) – import, Nova Post pobiera należności
-- [Allegro: Jak zmienić język, walutę i kraj dostawy na Allegro](https://allegro.pl/pomoc/dla-kupujacych/dane-i-ustawienia-konta/jak-zmienic-jezyk-walute-i-kraj-dostawy-na-allegro-LRVawwVz1TR) – Allegro po angielsku, sekcja Lokalizacja, Smart! tylko w Polsce
-- [Allegro: Jak zwrócić zakup i odesłać produkt do sprzedającego](https://allegro.pl/pomoc/dla-kupujacych/zasady-zwrotow-i-reklamacji/jak-zwrocic-zakup-i-odeslac-produkt-do-sprzedajacego-GDeq5VeKRHD) – 14 dni, formularz zwrotu, darmowe zwroty, link do śledzenia, sprzedający prywatni
+- [Allegro: Regulamin Allegro](https://policies.allegro.com/doc/f86a1a793dc4f5bc4b695b0ff0d54d974badab4169f5aaaddad89585c2c90690) – numer i link do śledzenia w mailu, 24 godziny na odpowiedź na wiadomość bez sobót, niedziel i dni wolnych od pracy
+- [Allegro: Allegro Ochrona Kupujących, załącznik nr 9 do Regulaminu](https://policies.allegro.com/doc/ccca669b9c6b6723bfdb781db6a9773d0e0c61281a448151bfaa75843e1d55c8) – zakres, 20 000 zł, cena towaru, koszty dostawy, 7, 14 i 730 dni, wyłączenia, 30 dni roboczych, zwrot rekompensaty w 7 dni
+- [Allegro: Regulamin usługi Allegro Delivery](https://policies.allegro.com/doc/e5cf7a904b3b08d908db62830a8bdac17b22cf354baf748e7853adff00fea84c) – powiadomienie o odbiorze, otwieranie automatu, bezpłatne zwroty konsumenckie, reklamacja: kto, gdzie, 12 miesięcy, 7 dni
+- [Allegro: Zmiany w regulaminie usługi Allegro Smart! od 2026-03-02](https://policies.allegro.com/doc/63b712cdd7a0dac306b6525a3b44e2330723057efe2ec19ae41bbfd4e3cc5aff) – 14,99 zł na miesiąc, 59,90 zł na rok, próg 49,90 zł
+- [Allegro: Program dostaw Allegro Delivery – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-dostaw-allegro-delivery-informacje-dla-sprzedajacych-9gzevkzEGs1) – metody i przewoźnicy, własna umowa, odpowiedzialność Allegro, One Punkt i One Box, dostawa jutro i dzisiaj, czas na odbiór, pobranie 4,99 zł
+- [Allegro: Allegro Kurier24 InPost oraz Allegro miniKurier24 InPost – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/allegro-kurier24-inpost-oraz-allegro-minikurier24-inpost-informacje-dla-sprzedajacych-3Addbxa8yI9) – kurierzy InPost, bezpłatny zwrot
+- [Allegro: Allegro Smart! na allegro.pl – informacje dla sprzedających z kontem firmowym](https://help.allegro.com/pl/sell/a/allegro-smart-na-allegro-pl-informacje-dla-sprzedajacych-z-kontem-firmowym-9g0rWRXKxHG) – metody Smart!, w tym Paczkomaty InPost i Pocztex, darmowe dostawy i zwroty, 100 zł, pobranie 4,99 zł
+- [Allegro: Zmieniliśmy regulamin Allegro Smart! dla kupujących – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/zmienilismy-regulamin-allegro-smart-dla-kupujacych-GREoO0LKbfg) – 49,90 zł od jednego sprzedającego, 45 i 65 zł do końca okresu rozliczeniowego
+- [Allegro: Jak poprawnie nadawać przesyłki z zamówieniami – poradnik dla sprzedających](https://help.allegro.com/pl/sell/a/jak-poprawnie-nadawac-przesylki-z-zamowieniami-poradnik-dla-sprzedajacych-AgbzAwmGMcY) – gdzie kupujący widzą status, numer od sprzedającego, przesyłka wysłana dopiero po statusie przewoźnika, strona przewoźnika
+- [Allegro: Jak możesz nadać kilka paczek do jednego zamówienia – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/jak-mozesz-nadac-kilka-paczek-do-jednego-zamowienia-nnkeyKBeyf0) – kilka przesyłek, każda z własnym numerem
+- [Allegro: Przewidywany czas dostawy – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/przewidywany-czas-dostawy-7G6ElR4v4cM) – czas wysyłki i przewozu, prognoza, a nie gwarancja, sposób wyświetlania terminu
+- [Allegro: Anulowanie zakupu – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/anulowanie-zakupu-informacje-dla-sprzedajacych-2YbEZmDjmUX) – konto zwykłe, sprzedający z kontem firmowym, statusy, numer przesyłki, 3 dni
+- [Allegro: Czym są zamówienia łączone w One Fulfillment by Allegro – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/czym-sa-zamowienia-laczone-w-one-fulfillment-by-allegro-d2WoLAr5mHR) – jedna przesyłka od kilku sprzedających, próg Smart!
+- [Allegro: Jak realizujemy zamówienia w One Fulfillment by Allegro – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/jak-realizujemy-zamowienia-w-one-fulfillment-by-allegro-aMloERrGWfO) – pakowanie w Magazynie Allegro, zamówienia opłacone do 20:00 przekazane kurierowi tego samego dnia
+- [Allegro: Jak rozwiązywać problemy z zakupem w zakładce Wiadomości w Sales Center lub w Centrum Wiadomości](https://help.allegro.com/pl/sell/a/jak-rozwiazywac-problemy-z-zakupem-w-zakladce-wiadomosci-w-sales-center-lub-w-centrum-wiadomosci-x5ZVrvzXPuP) – od 28 października 2026 problem z zakupem zamiast Dyskusji, Dyskusje nadal na Allegro Lokalnie i u sprzedających z Magazynu Allegro, Dyskusje sprzed tej daty jak dotąd, produkt, liczba sztuk i powód, godzinę po opłaceniu zamówienia, 24 godziny na pierwszą wiadomość bez sobót, niedziel i dni wolnych od pracy, Allegro na prośbę kupującego, 7 dni przy problemie z przesyłką i 14 dni przy innych, wniosek w ramach Allegro Ochrony Kupujących, automatyczne zamknięcie, ponowne otwarcie do 2 lat
+- [Allegro: Czym jest Allegro Ochrona Kupujących – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/czym-jest-allegro-ochrona-kupujacych-i-co-zrobic-gdy-moj-klient-ubiega-sie-o-rekompensate-rj9eVqwM8iz) – Allegro i Allegro Lokalnie
+- [Allegro: Allegro Kurier DPD z wysyłką z Polski za granicę – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/allegro-kurier-dpd-z-wysylka-z-polski-za-granice-informacje-dla-sprzedajacych-D7aPvEKWGcD) – 23 kraje UE, bez Smart!, zwrot na koszt kupującego
+- [Allegro: Allegro Kurier DHL z wysyłką z Polski za granicę – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/allegro-kurier-dhl-z-wysylka-z-polski-za-granice-informacje-dla-sprzedajacych-E7kb0G1lnf7) – 23 kraje UE, bez Smart!, zwrot na koszt kupującego
+- [Allegro: How to ship abroad with Allegro – information for sellers](https://help.allegro.com/en/sell/a/how-to-ship-abroad-with-allegro-g0lqGDMDrT4) – czasy przewozu do krajów UE, Packeta do Czech
+- [Allegro: Allegro Packeta delivery options – information for sellers](https://help.allegro.com/en/sell/c/allegro-packeta-delivery-options) – Packeta do Czech, Słowacji i na Węgry, allegro.cz, allegro.sk, allegro.hu
+- [Allegro: Program pilotażowy Allegro International Ukraina – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-pilotazowy-allegro-international-ukraina-informacje-dla-sprzedajacych-q0bdxDbjxHd) – wybrani sprzedający, Nova Post, cło i VAT
+- [Allegro: Jak zmienić język, walutę i kraj dostawy na Allegro](https://help.allegro.com/pl/sell/a/jak-zmienic-jezyk-walute-i-kraj-dostawy-na-allegro-oAd1MRbMRS4) – Allegro po angielsku, sekcja Lokalizacja, oferty sprzedających wysyłających do kraju
+- [Allegro: Polityka zwrotów na Allegro – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/polityka-zwrotow-na-allegro-informacje-dla-sprzedajacych-LR8WwMB31F8) – minimum 14 dni, 14 dni na odesłanie, darmowy zwrot
+- [UOKiK: Odstąpienie od umowy – pytania i odpowiedzi](https://prawakonsumenta.uokik.gov.pl/pytania-i-odpowiedzi/odstapienie-od-umowy/) – 14 dni od dnia po otrzymaniu towaru, dni kalendarzowe
+- [Your Europe: Zwrot towarów i prawo do odstąpienia od umowy](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pl.htm) – brak prawa odstąpienia przy zakupie od osoby prywatnej
 - [Pocztex](https://www.pocztex.pl/) – marka Poczty Polskiej
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, przewoźnicy znani Peek
 :::

@@ -7,22 +7,22 @@ published: 2026-10-17
 updated: 2026-10-17
 ---
 
-O Allegro é um marketplace polaco: tem o allegro.pl, o allegro.cz, o allegro.sk e o allegro.hu, mas nenhum site para Portugal. Os vendedores do allegro.pl podem enviar-te a encomenda para Portugal com Allegro Kurier DPD ou Allegro Kurier DHL, se o oferecerem no anúncio. O número de seguimento está na tua conta Allegro, em «Moje przesyłki» (As minhas encomendas) e «Moje zakupy» (As minhas compras), e no e-mail que o Allegro te envia depois da compra.
+O Allegro é um marketplace polaco: as suas condições referem o allegro.pl, o allegro.cz, o allegro.sk e o allegro.hu, e não há nenhum site para Portugal. Os vendedores do allegro.pl podem enviar-te a encomenda para Portugal com Allegro Kurier DPD ou Allegro Kurier DHL, se o oferecerem no anúncio. O número de seguimento está na tua conta Allegro, em «Moje przesyłki» (As minhas encomendas) e «Moje zakupy» (As minhas compras), e no e-mail que o Allegro te envia quando o número é adicionado.
 
 ## Que transportadora entrega a minha encomenda do Allegro?
 
-No Allegro cada vendedor escolhe os métodos de envio que oferece, e tu escolhes um no formulário «Dostawa i płatność» (Entrega e pagamento). Para as entregas na Polónia, o Allegro indica estas transportadoras:
+No Allegro cada vendedor escolhe os métodos de envio que oferece, e tu escolhes um no formulário de entrega e pagamento. Para as entregas na Polónia, o nome do método costuma dizer que transportadora leva a encomenda:
 
 | Transportadora | Métodos no Allegro, por exemplo | Onde |
 | --- | --- | --- |
 | Allegro One | `Allegro One Box`, `Allegro One Punkt`, `Allegro One Kurier` | Cacifos do Allegro, pontos de recolha, em casa |
-| [InPost](carrier:inpost) | `Allegro Paczkomaty InPost`, `Allegro Kurier24 InPost` | Paczkomat, PaczkoPunkt, em casa |
+| [InPost](carrier:inpost) | `Allegro Paczkomaty InPost`, `Allegro Kurier24 InPost` | Paczkomat, em casa |
 | DPD | `Allegro Kurier DPD`, `Allegro Automat DPD Pickup` | Em casa, cacifo ou ponto DPD Pickup |
 | DHL | `Allegro Kurier DHL`, `Allegro Automat DHL BOX 24/7` | Em casa, cacifo ou ponto DHL |
 | ORLEN Paczka | `Allegro Automat ORLEN Paczka` | Cacifo ou ponto |
-| Poczta Polska (Pocztex) | `Allegro Kurier Pocztex`, `Allegro Automat Pocztex`, `Allegro Przesyłka polecona` | Em casa, cacifo, ponto, estação de correios |
+| Poczta Polska (Pocztex) | `Allegro Kurier Pocztex`, `Allegro Automat Pocztex`, `Allegro Odbiór w Punkcie Pocztex` | Em casa, cacifo, ponto |
 
-Os métodos marcados «Allegro Delivery» (Allegro One, ORLEN Paczka, DHL, DPD) fazem parte do programa de entregas do Allegro: aí o Allegro assume a responsabilidade pela encomenda «em cada etapa», incluindo a reclamação e a devolução. Um vendedor também pode enviar com uma transportadora escolhida por ele.
+O vendedor oferece os métodos do Allegro One, da ORLEN Paczka, da DHL e da DPD através do «Allegro Delivery», o programa de entregas do Allegro, ou com o seu próprio contrato com a transportadora. Com o Allegro Delivery, o Allegro é responsável por toda a entrega e pelo apoio ao cliente. As encomendas Allegro One Punkt podem ser levadas pela DPD, e as Allegro One Box também pela DHL ou pela ORLEN Paczka; os estafetas do próprio Allegro One entregam em cidades selecionadas.
 
 Com Allegro Delivery a encomenda espera por ti 2 dias de calendário numa One Box e 2 ou 3 dias úteis nos outros cacifos e pontos. O código de levantamento chega por e-mail, na app ou por SMS. Se não a levantares, volta para o vendedor. Como funcionam os cacifos: [encomenda no cacifo](guide:parcel-lockers).
 
@@ -35,15 +35,14 @@ Com Allegro Delivery a encomenda espera por ti 2 dias de calendário numa One Bo
 
 ## Onde está o número de seguimento no Allegro?
 
-Em três sítios da tua conta:
+Em quatro sítios:
 
-- **«Moje przesyłki» (As minhas encomendas).** As tuas encomendas até as levantares, com transportadora, estado, data prevista e, com Allegro Delivery, código de levantamento. Na app chegas lá pelo ícone do veículo, no canto superior direito.
-- **«Moje zakupy» (As minhas compras).** Procura a compra e clica em «szczegóły zakupu» (detalhes da compra): aí estão a transportadora, o «numer przesyłki» (número da remessa) e o estado.
-- **O e-mail** que o Allegro te envia depois da compra.
+- **«Moje przesyłki» (As minhas encomendas).** As tuas encomendas desde que esperam pelo envio até as levantares e, quando já estão a caminho, a data prevista.
+- **«Moje zakupy» (As minhas compras).** Nos detalhes da compra estão o número de seguimento, assim que o vendedor o adiciona, e o seu estado.
+- **O e-mail** que o Allegro te envia quando o número é adicionado, com o nome da transportadora, o número e uma ligação de seguimento.
+- **A app do Allegro.**
 
-Os estados dizem, por exemplo, `Oczekuje na nadanie` (à espera de ser entregue à transportadora), `Nadana` (enviada), `W drodze` (a caminho) e `Odbierz przesyłkę` (pronta a levantar). `Odesłano nadawcy` quer dizer devolvida ao remetente, porque não a levantaste a tempo.
-
-Não há número? Segundo o Allegro, falta se o formulário de entrega não foi bem preenchido, se o vendedor ainda não introduziu o «numer listu przewozowego» (número da guia de transporte) ou se ocultaste a compra. O número da encomenda («numer zamówienia») não é um número de seguimento: só serve para escrever ao vendedor ou ao Allegro. Onde está o número noutras lojas: [número de seguimento](guide:find-tracking-number).
+Não há número? É o vendedor que o adiciona, e com algumas transportadoras o Allegro adiciona-o sozinho, por isso pergunta primeiro ao vendedor. Se ele enviar com uma transportadora cujos estados o Allegro não recebe, segue a encomenda no site da transportadora. Onde está o número noutras lojas: [número de seguimento](guide:find-tracking-number).
 
 É assim que são os números destas transportadoras, com exemplos inventados:
 
@@ -63,88 +62,90 @@ Não sabes o que tens? Escreve-o aqui:
 
 ## Porque é que a minha encomenda do Allegro ainda não foi enviada ou o seguimento não avança?
 
-O prazo de entrega que o Allegro calcula soma o «czas wysyłki» (tempo de envio), ou seja, o tempo de que o vendedor precisa depois do teu pagamento para enviar a encomenda, e o «czas przewozu» (tempo de transporte) da transportadora. Fins de semana, feriados e férias do vendedor já estão contados. O resultado aparece no anúncio e nos detalhes da compra.
+O prazo de entrega que o Allegro calcula soma o «czas wysyłki» (tempo de envio), que conta a partir do teu pagamento, ou da encomenda se pagares à cobrança, até o estafeta ler o código da encomenda, e o «czas przewozu» (tempo de transporte) da transportadora. O Allegro tem em conta os fins de semana e os feriados. O resultado aparece no anúncio e nos detalhes da compra, e é uma estimativa, não uma garantia.
 
-O que podes ver nos detalhes da compra:
+O que acontece com mais frequência:
 
-- **O vendedor está a tratar dela.** Põe a encomenda em `W realizacji` (em preparação), `Przygotowane do wysyłki` (pronta para envio) ou `Wysłane` (enviada).
-- **Ainda não está na transportadora.** `Oczekuje na nadanie` quer dizer que a encomenda espera ser entregue à transportadora. As leituras só aparecem depois.
-- **Atrasada.** Se a encomenda chegar depois da data que viste ao comprar, em «Moje zakupy» aparece `Przesyłka opóźniona` (remessa atrasada) e recebes um e-mail ou uma notificação na app.
+- **Ainda não foi enviada.** A encomenda já aparece em «Moje przesyłki», mas o Allegro só a considera enviada quando o estado da transportadora o confirma.
+- **O pagamento.** O tempo de envio conta a partir do pagamento. Verifica em «Moje zakupy» se foi concluído e se os teus dados de entrega estão certos.
 
-Se esperas há demasiado tempo, o Allegro aconselha a verificar em «Moje zakupy» os teus dados de entrega e se o vendedor recebeu o pagamento, e depois escrever-lhe. Porque é que um seguimento fica parado: [seguimento sem atualizações](guide:tracking-not-updating).
+Se esperas há demasiado tempo, escreve ao vendedor como se explica abaixo. Porque é que um seguimento fica parado: [seguimento sem atualizações](guide:tracking-not-updating).
 
 ## Allegro Smart! e prazos de entrega
 
-O Allegro Smart! é um serviço que compras na tua conta Allegro. Dá-te entregas grátis ilimitadas em toda a Polónia, por estafeta até 10 moradas ou em cacifos e pontos de recolha, uma devolução grátis por encomenda e prioridade na proteção do comprador: o Allegro analisa os teus pedidos em 2 dias úteis.
+O Allegro Smart! custa 59,90 zł por ano ou 14,99 zł por mês. Dá-te entregas grátis ilimitadas na Polónia, por estafeta ou em cacifos e pontos de recolha, e devoluções grátis das encomendas Smart!.
 
-A entrega é grátis a partir de 45 zł por vendedor em cacifo ou ponto e a partir de 65 zł por estafeta. Se ativaste o Smart! a partir de 2 de março de 2026, o mínimo é 49,90 zł nos dois casos. O anúncio e o método de entrega têm de ter o símbolo Smart!
+A entrega é grátis nas ofertas com o símbolo Smart!, quando o custo de entrega da encomenda não passa de 100 zł e os teus produtos de um mesmo vendedor somam pelo menos 49,90 zł, se ativaste ou renovaste o Smart! a partir de 2 de março de 2026, tanto em cacifo ou ponto como por estafeta. Um Smart! ativado antes mantém, até ao fim do seu período de faturação, 45 zł em cacifo ou ponto e 65 zł por estafeta.
 
-Também com Smart! o anúncio mostra a entrega prevista: «dziś», «jutro» ou «pojutrze» (hoje, amanhã, depois de amanhã), senão uma data ou um número de dias. Com Allegro Delivery, o Allegro promete a entrega em pontos de recolha «até no dia seguinte», por exemplo com `Allegro One Box – dostawa jutro` (entrega amanhã). O Smart! não se aplica aos envios para o estrangeiro.
+Também com Smart! o anúncio mostra a entrega prevista, por exemplo «dostawa jutro» (entrega amanhã) ou «dostawa pojutrze» (entrega depois de amanhã). Se o vendedor demorar mais de 3 dias a enviar, vês um intervalo de datas, uma data ou um número de dias. Com Allegro Delivery, o Allegro One Punkt e o Allegro One Box entregam no dia seguinte. O Smart! não se aplica aos envios para o estrangeiro.
 
 ## Encomenda não chegou ou aparece como entregue: o que fazer
 
-Para um problema de entrega abres uma «Dyskusja» (discussão) com o vendedor. Se não ficar resolvido, entra o Allegro com a sua proteção do comprador, «Allegro Ochrona Kupujących», até 20 000 zł. Por ordem:
+Se houver um problema, comunicas ao vendedor um «problem z zakupem» (problema com a compra). Se não ficar resolvido, o Allegro propõe-te a sua proteção do comprador, «Allegro Ochrona Kupujących». Por ordem:
 
 :::steps
-- Vê o seguimento | Verifica o estado em «Moje przesyłki». Diz levantada ou entregue? Pergunta em casa, aos vizinhos ou na portaria. Uma tentativa de entrega falhada? Contacta a transportadora.
+- Vê o seguimento | Verifica o estado em «Moje przesyłki». Diz levantada ou entregue? Pergunta em casa, aos vizinhos ou na portaria. Uma tentativa de entrega falhada? Contacta a transportadora. Em «Moje zakupy» verifica também a morada e o pagamento.
 - Escreve ao vendedor | Pergunta-lhe o que aconteceu. Se disser que a encomenda foi enviada, pede-lhe o número de seguimento ou o comprovativo de envio.
-- Abre uma discussão | Em «Moje zakupy» clica em «zgłoś reklamację lub problem» (apresentar reclamação ou problema) e escolhe `nie otrzymałem produktu` (não recebi o produto). Podes fazê-lo desde 1 hora até 2 anos depois da compra. O vendedor tem 24 horas para responder, sem contar fins de semana nem feriados. Se não responder, escolhe «poproś o pomoc Allegro» (pedir ajuda ao Allegro).
-- O Allegro analisa | Se ao fim de 7 dias não houver acordo, marca a discussão como não resolvida. O Allegro envia-te a ligação para o pedido de reembolso. Costuma decidir em 2 a 3 dias úteis, primeiro para quem tem Smart!
-- Reembolso | Se o pedido for aceite, o Allegro devolve o dinheiro normalmente em 3 a 7 dias úteis, para o cartão ou a conta com que pagaste. Nem sempre cobre 100 % da compra.
+- Comunica um problema | Comunica um «problem z zakupem», no mínimo 1 hora depois de pagares, e indica o produto e o motivo. O vendedor tem 24 horas para a primeira resposta, sem contar sábados, domingos e feriados, e o Allegro intervém se lhe pedires. No Allegro Lokalnie e com vendedores que usam o Magazyn Allegro (o armazém do Allegro) continuas a abrir uma «Dyskusja» (discussão), e uma aberta antes de 28 de outubro de 2026 continua como antes.
+- O Allegro analisa | Para um problema com a encomenda, como um atraso ou uma perda, o vendedor tem 7 dias, e 14 para outros problemas. Se depois o Allegro não vir que está resolvido, pergunta-te, e se disseres que o problema continua, propõe-te um pedido na proteção do comprador.
+- Decisão | O Allegro decide no prazo de 30 dias úteis depois de receber o teu pedido completo.
 :::
 
-Dois prazos a saber. O pedido de reembolso faz-se do 14.º dia até 2 anos depois da compra, ou logo 7 dias depois de comunicares uma encomenda que nunca chegou. E se o estado disser entregue, o Allegro fecha a discussão se não escreveres nada nas 24 horas seguintes à entrega.
+A proteção do comprador cobre as compras no Allegro e no Allegro Lokalnie. Reembolsa até 20 000 zł, mas não mais do que o preço do produto, e os custos de envio só se pagaste através do Allegro. Por uma encomenda que não chegou, o pedido faz-se no mínimo ao fim de 7 dias, por outros problemas ao fim de 14, e no máximo 730 dias depois da compra. Se a encomenda chegar enquanto a tua comunicação está aberta, o Allegro fecha-a sozinho. Se o problema voltar, podes reabri-la até 2 anos depois da compra.
 
-Uma encomenda Allegro Delivery reclama-se ao próprio Allegro, com o mesmo «zgłoś reklamację lub problem», até 12 meses depois do envio. Se nunca chegou, só o podes fazer se o vendedor te tiver cedido o seu direito de reclamação.
+Com Allegro Delivery também podes reclamar da própria entrega, por exemplo uma perda, um dano no transporte ou um atraso. A reclamação é apresentada pelo vendedor como remetente, e por ti depois de a encomenda te ser entregue ou se o vendedor te tiver cedido esse direito. Faz-se online ao Allegro, até 12 meses depois do envio, ou no prazo de 7 dias após a receção para um dano que não se vê por fora.
 
 Quem responde e que provas guardar: [encomenda entregue mas não recebida](guide:delivered-not-received) e [encomenda perdida](guide:lost-parcel).
 
 ## Comprar no Allegro a partir de Portugal
 
-O Allegro tem marketplaces para a Polónia (allegro.pl), a Chéquia (allegro.cz), a Eslováquia (allegro.sk) e a Hungria (allegro.hu). Não há versão em português, mas o allegro.pl pode ser usado em inglês. Na tua conta, em «Lokalizacja» (localização), escolhes a língua, a moeda e o país de entrega. Com o país escolhido só vês as ofertas de vendedores que enviam para lá.
+O Allegro tem marketplaces para a Polónia (allegro.pl), a Chéquia (allegro.cz), a Eslováquia (allegro.sk) e a Hungria (allegro.hu). Não há versão portuguesa, mas podes usar o Allegro em inglês. Na tua conta, em «Lokalizacja» (localização), escolhes a língua, a moeda e o país de entrega. Com o país escolhido só vês as ofertas de vendedores que enviam para lá.
 
-Para Portugal os vendedores enviam com dois métodos do Allegro: Allegro Kurier DPD e Allegro Kurier DHL. Cobrem 24 países da União Europeia, todos exceto Chipre e Malta, e só se o vendedor os oferecer no anúncio. Encontras estes métodos nos filtros de pesquisa ou no anúncio, em «Dostawa i płatność», escolhendo o teu país. O Allegro indica estes tempos de transporte e preços máximos:
+Para Portugal os vendedores enviam com dois métodos do Allegro: Allegro Kurier DPD e Allegro Kurier DHL. As páginas de ajuda do Allegro para vendedores indicam 23 países da União Europeia para cada um, e só estão disponíveis se o vendedor os oferecer no anúncio. O Allegro indica estes tempos de transporte:
 
 | País | Allegro Kurier DPD | Allegro Kurier DHL |
 | --- | --- | --- |
-| Portugal | 4 dias úteis, até 85,99 zł | 4-5 dias úteis, até 80,99 zł |
+| Portugal | 4 dias úteis | 4-5 dias úteis |
 
-É o tempo da transportadora: soma-se o tempo de envio do vendedor. O preço é definido pelo vendedor, no máximo o da tabela.
+É o tempo da transportadora: soma-se o tempo de envio do vendedor.
 
 O que muda em Portugal:
 
-- **Depois de uma primeira tentativa falhada,** com Allegro Kurier DHL a transportadora pode deixar a encomenda num ponto de recolha, num cacifo, na caixa de correio ou numa estação de correios.
-- **Prazo de levantamento.** Em Portugal o Allegro indica 14 dias num ponto ou cacifo DPD Pickup, contando o dia da entrega, e 10 dias num DHL ServicePoint. Se não a levantares, a encomenda volta para o vendedor, a custo dele.
-- **Sem Smart!** Com os métodos para o estrangeiro, o Smart! não dá entrega nem devolução grátis. As condições e o custo de uma devolução combinas com o vendedor.
+- **Ausente ou não levantada.** Se não estiveres em casa, o estafeta tenta de novo; quantas vezes depende do país e do método. Se não levantares a encomenda, volta para o vendedor.
+- **Sem Smart!** Os envios por estafeta para o estrangeiro a partir do allegro.pl não fazem parte do Smart!. Se devolveres um produto que recebeste, organizas e pagas tu a devolução.
 
 O número de seguimento está em «Moje zakupy», como na Polónia. Com ele também segues a encomenda diretamente na transportadora.
 
 ## Devolver uma encomenda do Allegro
 
-Com um vendedor profissional tens 14 dias a partir do dia seguinte à entrega para lhe comunicar a desistência, com «zwróć zakup» (devolver a compra) nos detalhes da compra. Depois tens mais 14 dias de calendário para enviar a encomenda. Um vendedor particular não é obrigado a aceitar a devolução. Se usares uma das opções de devolução pagas do Allegro, o Allegro segue a encomenda. Se a enviares por tua conta, o Allegro não a consegue seguir. Onde está o número da devolução e quando chega o reembolso: [devolução](guide:returns-tracking).
+Com um vendedor profissional tens pelo menos 14 dias a partir do dia seguinte à entrega para lhe comunicar a desistência, por exemplo com o formulário «Zwróć zakup» (devolver a compra) em «Moje zakupy». Depois tens mais 14 dias para enviar o produto. A devolução é grátis com Smart!, numa devolução de consumidor com um código de devolução do Allegro Delivery e com Allegro Kurier24 e miniKurier24 InPost. Se comprares a um particular, não tens direito de retratação. Onde está o número da devolução e quando chega o reembolso: [devolução](guide:returns-tracking).
 
 ## Posso seguir uma encomenda do Allegro no Peek?
 
 Sim, com o número da transportadora. Copia-o de «Moje zakupy» e cola-o no [Peek](/). O Peek reconhece e segue sozinho os números Allegro One (`A0` ou `AD` e 8 caracteres, `AD0` e 14) e reconhece pela forma também a DPD Polónia e a Pocztex. Se uma forma for usada por várias transportadoras, como os 24 algarismos da InPost, toca em «Alterar» e escolhe a que aparece nos detalhes da compra.
 
-O número da encomenda do Allegro não é um número de seguimento, e o Peek não o consegue seguir. O Peek mostra o que a transportadora publica. As discussões, a proteção do comprador e os reembolsos ficam na tua conta Allegro.
+O número da encomenda do Allegro não é um número de seguimento, e o Peek não o consegue seguir. O Peek mostra o que a transportadora publica. As comunicações de problemas, a proteção do comprador e os reembolsos ficam na tua conta Allegro.
 
 :::sources
-- [Allegro: Gdzie sprawdzisz numer i status swojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/gdzie-sprawdzisz-numer-i-status-swojej-przesylki-LvP7agrzOhw) – onde está o número, estados, número em falta, atraso
-- [Allegro: Program dostaw Allegro Delivery – informacje dla kupujących](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/program-dostaw-allegro-delivery-informacje-dla-kupujacych-Bvw1bwrMmIz) – métodos, código e prazos de levantamento, reclamação
-- [Allegro: Jak korzystać z Allegro InPost](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/jak-korzystac-z-allegro-inpost-xG71gn3VRuW) – métodos InPost
-- [Allegro: Metody dostawy i zwrotu przesyłek w ramach Allegro Smart!](https://allegro.pl/pomoc/dla-kupujacych/zakupy-i-zwroty-z-allegro-smart-/metody-dostawy-i-zwrotu-przesylek-w-ramach-allegro-smart-a1WrzwbOXf6) – métodos Pocztex
-- [Allegro: Czym jest usługa Allegro Smart! i jak z niej korzystać](https://allegro.pl/pomoc/dla-kupujacych/korzysci-i-aktywacja-allegro-smart/czym-jest-usluga-allegro-smart-i-jak-z-niej-korzystac-mGwb5Pq6vIL) – vantagens e mínimos do Smart!
-- [Allegro: Przewidywany czas dostawy Twojej przesyłki](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/przewidywany-czas-dostawy-twojej-przesylki-z8alPejWRt7) – tempo de envio e de transporte
-- [Allegro: Co możesz zrobić, gdy czekasz na przesyłkę zbyt długo](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/co-mozesz-zrobic-gdy-czekasz-na-przesylke-zbyt-dlugo-xG71gn36qC4) – o que fazer se a encomenda não chega
-- [Allegro: Ramy czasowe Dyskusji](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/ramy-czasowe-dyskusji-85Y7X9bxEs2) – prazos da discussão
-- [Allegro: Jak rozpocząć Dyskusję i wyjaśnić problem ze sprzedającym](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/jak-rozpoczac-dyskusje-i-wyjasnic-problem-ze-sprzedajacym-WEDKYqnEvik) – abrir uma discussão, marcá-la como não resolvida
-- [Allegro: Jak działa Allegro Ochrona Kupujących](https://allegro.pl/pomoc/dla-kupujacych/allegro-ochrona-kupujacych/jak-dziala-allegro-ochrona-kupujacych-qzdAg2Klbsl) – proteção do comprador: montante, prazos
-- [Allegro: Allegro Kurier DPD i Allegro Kurier DHL – dostawa z Polski na terenie Unii Europejskiej](https://allegro.pl/pomoc/dla-kupujacych/metody-dostawy/allegro-kurier-dpd-i-allegro-kurier-dhl-dostawa-z-polski-na-terenie-unii-europejskiej-ZMDgKY6vOCO) – envio na UE, prazos, preços, levantamento, sem Smart!
-- [Allegro: Jak zmienić język, walutę i kraj dostawy na Allegro](https://allegro.pl/pomoc/dla-kupujacych/dane-i-ustawienia-konta/jak-zmienic-jezyk-walute-i-kraj-dostawy-na-allegro-LRVawwVz1TR) – inglês, país de entrega, Smart! só na Polónia
-- [Allegro: Jak zwrócić zakup i odesłać produkt do sprzedającego](https://allegro.pl/pomoc/dla-kupujacych/zasady-zwrotow-i-reklamacji/jak-zwrocic-zakup-i-odeslac-produkt-do-sprzedajacego-GDeq5VeKRHD) – estados da encomenda, devolução, 14 dias
-- [Allegro: Gdzie znaleźć numer zamówienia i kiedy z niego skorzystać](https://allegro.pl/pomoc/dla-kupujacych/problemy-transakcyjne/gdzie-znalezc-numer-zamowienia-i-kiedy-z-niego-skorzystac-85LVKBdO4uO) – número da encomenda
-- [Allegro for sellers: How to settle delivery costs on Allegro](https://help.allegro.com/sell/en/a/how-to-settle-delivery-costs-on-allegro-K6V3vAGObFj) – outras transportadoras com contrato do vendedor
-- [Allegro: Who we are](https://about.allegro.eu/who-we-are/) – allegro.cz, allegro.sk, allegro.hu
+- [Allegro: Regulamin Allegro (condições)](https://policies.allegro.com/doc/f86a1a793dc4f5bc4b695b0ff0d54d974badab4169f5aaaddad89585c2c90690) – os quatro marketplaces, e-mail com transportadora, número e ligação, formulário «Zwróć zakup» em «Moje zakupy»
+- [Allegro: Allegro Ochrona Kupujących, anexo 9 às condições](https://policies.allegro.com/doc/ccca669b9c6b6723bfdb781db6a9773d0e0c61281a448151bfaa75843e1d55c8) – até 20 000 zł, preço do produto, custos de envio, 7, 14 e 730 dias, 30 dias úteis
+- [Allegro: Regulamin usługi Allegro Delivery (condições)](https://policies.allegro.com/doc/e5cf7a904b3b08d908db62830a8bdac17b22cf354baf748e7853adff00fea84c) – código de levantamento por e-mail, SMS ou app, devolução de consumidor grátis, reclamação: quem, online, 12 meses, 7 dias
+- [Allegro: Zmiany w regulaminie usługi Allegro Smart! od 2026-03-02](https://policies.allegro.com/doc/63b712cdd7a0dac306b6525a3b44e2330723057efe2ec19ae41bbfd4e3cc5aff) – preços do Smart!
+- [Allegro: The Allegro Delivery program — information for sellers](https://help.allegro.com/en/sell/a/the-allegro-delivery-program-information-for-sellers-MR7exl1wYS4) – métodos e transportadoras, contrato próprio, responsabilidade do Allegro, One Punkt e One Box, entrega no dia seguinte, prazos de levantamento, volta para o vendedor
+- [Allegro: Allegro Kurier24 InPost and Allegro miniKurier24 InPost — information for sellers](https://help.allegro.com/en/sell/a/allegro-kurier24-inpost-and-allegro-minikurier24-inpost-information-for-sellers-8dvv7BzV5Iv) – estafetas InPost, devoluções grátis
+- [Allegro: Allegro Smart! on allegro.pl — information for sellers with a business account](https://help.allegro.com/en/sell/a/allegro-smart-on-allegro-pl-information-for-sellers-with-a-business-account-LR8j8Y26GTR) – métodos Smart! com Paczkomaty InPost e Pocztex, entrega e devolução grátis, 100 zł
+- [Allegro: We changed the Allegro Smart! Terms & Conditions for buyers — information for sellers](https://help.allegro.com/en/sell/a/we-changed-the-allegro-smart-terms-conditions-for-buyers-wwkzRYxRdio) – 49,90 zł de um mesmo vendedor, 45 e 65 zł até ao fim do período de faturação
+- [Allegro: How to correctly dispatch parcels with orders — a guide for sellers](https://help.allegro.com/en/sell/a/how-to-correctly-dispatch-parcels-with-orders-a-guide-for-sellers-GRv326wwXF1) – onde o comprador vê o número e o estado, número do vendedor ou do Allegro, enviada só com o estado da transportadora, sites das transportadoras
+- [Allegro: Estimated delivery time — information for sellers](https://help.allegro.com/en/sell/a/estimated-delivery-time-zlKxReRdPUb) – tempo de envio e de transporte, fins de semana e feriados, sem garantia, como é mostrado
+- [Allegro: How to solve problems with purchases in the Messages tab in the Sales Center or in the Message Center](https://help.allegro.com/en/sell/a/how-to-solve-problems-with-purchases-in-the-messages-tab-in-the-sales-center-or-in-the-message-center-Bv0zrVqDVIX) – desde 28 de outubro de 2026, problema com a compra em vez de discussão, discussões só no Allegro Lokalnie e com o Magazyn Allegro, as abertas como antes, a partir de 1 hora, 24 horas sem fins de semana nem feriados, 7 dias por um problema com a encomenda, 14 por outros, proteção do comprador, fecho automático, reabertura até 2 anos
+- [Allegro: Jak rozwiązywać problemy z zakupem w zakładce Wiadomości w Sales Center lub w Centrum Wiadomości](https://help.allegro.com/pl/sell/a/jak-rozwiazywac-problemy-z-zakupem-w-zakladce-wiadomosci-w-sales-center-lub-w-centrum-wiadomosci-x5ZVrvzXPuP) – 1 hora depois do pagamento, o Allegro só intervém a pedido do comprador
+- [Allegro: What Allegro Buyer Protection is — information for sellers](https://help.allegro.com/en/sell/a/what-allegro-buyer-protection-is-and-what-to-do-when-my-customer-applies-for-compensation-7G6E75KlPcM) – Allegro e Allegro Lokalnie
+- [Allegro: Allegro DPD Courier — dispatch abroad from Poland — information for sellers](https://help.allegro.com/en/sell/a/allegro-dpd-courier-dispatch-abroad-from-poland-information-for-sellers-2Yb2dvzKWCL) – 23 países da UE, sem Smart!, devolução a cargo do comprador
+- [Allegro: Allegro DHL Courier with dispatch abroad from Poland — information for sellers](https://help.allegro.com/en/sell/a/allegro-dhl-courier-with-dispatch-abroad-from-poland-d2Wv3wKYZIv) – 23 países da UE, sem Smart!, devolução a cargo do comprador
+- [Allegro: How to ship abroad with Allegro — information for sellers](https://help.allegro.com/en/sell/a/how-to-ship-abroad-with-allegro-g0lqGDMDrT4) – tempos de transporte para Portugal, novas tentativas de entrega, encomendas não levantadas
+- [Allegro: How to change language, currency, and country of delivery on Allegro](https://help.allegro.com/en/sell/a/how-to-change-language-currency-and-country-of-delivery-on-allegro-O3PwMxodWfY) – inglês, «Lokalizacja», só ofertas de vendedores que enviam para lá
+- [Allegro: The Allegro returns policy — information for sellers](https://help.allegro.com/en/sell/a/the-allegro-returns-policy-information-for-sellers-1nPyxjWmZTl) – pelo menos 14 dias, mais 14 dias para enviar, devoluções grátis
+- [UOKiK: Odstąpienie od umowy – pytania i odpowiedzi](https://prawakonsumenta.uokik.gov.pl/pytania-i-odpowiedzi/odstapienie-od-umowy/) – 14 dias a partir do dia seguinte à entrega
+- [Your Europe: Devoluções e direito de retratação](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_pt.htm) – sem direito de retratação numa compra a um particular
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas dos números, o que o Peek verifica
 :::

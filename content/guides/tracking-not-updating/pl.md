@@ -73,7 +73,7 @@ Na reklamację krajową w Poczcie Polskiej, Pocztex i InPost masz 12 miesięcy o
 
 ## Pisać do sprzedawcy czy do kuriera?
 
-Do sprzedawcy. To on zamówił przewóz, więc to on jest klientem przewoźnika. Widać to w zasadach reklamacji: w Poczcie Polskiej składa ją nadawca, w DPD zleceniodawca. Regulamin Allegro Ochrony Kupujących też każe zacząć od sprzedającego: zanim złożysz wniosek o rekompensatę, zgłaszasz mu problem w Dyskusji albo w reklamacji.
+Do sprzedawcy. To on zamówił przewóz, więc to on jest klientem przewoźnika. Widać to w zasadach reklamacji: w Poczcie Polskiej składa ją nadawca, w DPD zleceniodawca. Regulamin Allegro Ochrony Kupujących też każe zacząć od sprzedającego: zanim złożysz wniosek o rekompensatę, zgłaszasz mu problem albo składasz reklamację.
 
 Prawo mówi to samo, jeśli kupujesz jako konsument od firmy: paczka jest na ryzyko sprzedawcy, dopóki nie zostanie Ci wydana, chyba że sam wybrałeś przewoźnika spoza jego oferty (art. 548 § 3 Kodeksu cywilnego). Wyjątki i to, jak złożyć reklamację u przewoźnika, opisuje poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received). Jeśli umowa nie mówi inaczej, sprzedawca musi też wydać rzecz niezwłocznie, najpóźniej 30 dni od zawarcia umowy. Gdy się spóźnia, możesz wyznaczyć mu dodatkowy termin, a po jego bezskutecznym upływie odstąpić od umowy.
 
@@ -86,7 +86,7 @@ Co robić po kolei:
 - Sprawdź przewoźnika | Jego śledzenie i komunikaty, a jeśli paczkę przejął inny przewoźnik, także jego stronę.
 - Napisz do sprzedawcy | Niech potwierdzi, że wysłał paczkę na właściwy adres, poda numer przesyłki albo potwierdzenie nadania i powie, kiedy ma dotrzeć.
 - Termin minął | Sprzedawca składa reklamację u przewoźnika. W Poczcie Polskiej możesz ją złożyć Ty, jeśli nadawca zrzeknie się roszczeń na Twoją rzecz.
-- Pilnuj terminu platformy | Otwórz Dyskusję na Allegro albo zgłoś problem na Vinted, zanim minie ich termin.
+- Pilnuj terminu platformy | Zgłoś problem z zakupem na Allegro albo problem na Vinted, zanim minie ich termin.
 :::
 
 ## Kiedy zgłosić spóźnioną paczkę na Allegro, Amazonie i Vinted?
@@ -95,7 +95,7 @@ Platforma może oddać Ci pieniądze, ale tylko w swoim terminie:
 
 | Platforma | Od kiedy | Do kiedy |
 | --- | --- | --- |
-| Allegro (Allegro Ochrona Kupujących) | Dyskusja z powodem „nie otrzymałem produktu”: najwcześniej godzinę po zakupie, sprzedający ma 24 godziny na odpowiedź (bez weekendów i świąt). Jeśli w ciągu 7 dni nie dojdziecie do porozumienia, możesz oznaczyć Dyskusję jako nierozwiązaną (nie dotyczy Allegro Lokalnie) i sprawa trafia do Allegro | Wniosek o rekompensatę najpóźniej 730 dni od zakupu. Rekompensata do 20 000 zł |
+| Allegro (Allegro Ochrona Kupujących) | Problem z zakupem (na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal Dyskusja): najwcześniej godzinę po opłaceniu zamówienia, sprzedający ma 24 godziny na odpowiedź na Twoją pierwszą wiadomość (bez sobót, niedziel i dni wolnych od pracy). Przy opóźnieniu albo zagubieniu paczki ma 7 dni na rozwiązanie zgłoszenia. Jeśli po tym czasie Allegro nie widzi, że problem rozwiązano, zapyta Cię o to, a gdy odpowiesz, że nadal występuje, zaproponuje Ci wniosek w ramach Allegro Ochrony Kupujących | Wniosek o rekompensatę najpóźniej 730 dni od zakupu. Rekompensata do 20 000 zł |
 | Vinted | Etykieta wygenerowana na Vinted: po 25 dniach roboczych od chwili, gdy zamówienie oznaczono jako wysłane. Wysyłka indywidualna: po 21 dniach roboczych zamówienie zostaje oznaczone jako doręczone | 2 dni od powiadomienia od Vinted albo od zmiany statusu na „Doręczono” |
 
 Na Amazonie każdy produkt, także od niezależnego sprzedawcy, jest objęty Gwarancją od A do Z. Jeśli masz problem z terminową dostawą, Amazon obiecuje zwrot pieniędzy albo wymianę produktu. Gdy sprzedaje ktoś inny niż Amazon, najpierw spróbuj rozwiązać problem bezpośrednio ze sprzedawcą.
@@ -129,8 +129,8 @@ Paczka może nie mieć jeszcze pierwszego skanu, numer może należeć do innego
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – następny dzień roboczy, 3 dni robocze, usługa Sobota, numer do kuriera
 - [DPD Polska: Złóż reklamację](https://www.dpd.com/pl/pl/moje-dpd/zloz-reklamacje/) – utrata po 30 dniach od terminu wykonania usługi
 - [DPD Polska: Regulamin Świadczenia Usług w Obrocie Krajowym (od 1 stycznia 2024 r.)](https://www.dpd.com/wp-content/uploads/sites/260/2025/01/RUK_01.01.2024PL.pdf) – § 20 i § 21: utrata po 30 dniach, kto może złożyć reklamację
-- [Allegro: Czym są i jak działają Dyskusje – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/czym-sa-i-jak-dzialaja-dyskusje-informacje-dla-sprzedajacych-k1wRjeRw2I8) – godzina po zakupie, 24 godziny na odpowiedź, 7 dni, nierozwiązana Dyskusja
-- [Allegro: Allegro Ochrona Kupujących, regulamin (załącznik nr 9)](https://policies.allegro.com/doc/ccca669b9c6b6723bfdb781db6a9773d0e0c61281a448151bfaa75843e1d55c8) – najpierw sprzedający w Dyskusji albo reklamacji, 730 dni, do 20 000 zł
+- [Allegro: Jak rozwiązywać problemy z zakupem w zakładce Wiadomości w Sales Center lub w Centrum Wiadomości](https://help.allegro.com/pl/sell/a/jak-rozwiazywac-problemy-z-zakupem-w-zakladce-wiadomosci-w-sales-center-lub-w-centrum-wiadomosci-x5ZVrvzXPuP) – od 28 października 2026 problem z zakupem zamiast Dyskusji, Dyskusje nadal na Allegro Lokalnie i u sprzedających z Magazynu Allegro, godzinę po opłaceniu zamówienia, 24 godziny na pierwszą wiadomość bez sobót, niedziel i dni wolnych od pracy, 7 dni przy opóźnieniu i zagubieniu, wniosek w ramach Allegro Ochrony Kupujących
+- [Allegro: Allegro Ochrona Kupujących, regulamin (załącznik nr 9)](https://policies.allegro.com/doc/ccca669b9c6b6723bfdb781db6a9773d0e0c61281a448151bfaa75843e1d55c8) – najpierw sprzedający, 730 dni, do 20 000 zł
 - [Poczta Polska: Śledzenie przesyłek](https://www.poczta-polska.pl/sledzenie-przesylek/) – komunikat o błędnym numerze
 - [DHL eCommerce Polska: Śledzenie paczek krajowych i zagranicznych](https://mojdhl.pl/sprawdz) – komunikat Brak informacji o przesyłce i jego powody, kontakt z nadawcą
 - [Zalando: Gdzie jest moja paczka?](https://www.zalando.pl/faq/where-is-my-parcel.html) – link do śledzenia działa po odbiorze paczki przez przewoźnika

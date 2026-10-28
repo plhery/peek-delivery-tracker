@@ -371,7 +371,13 @@ class Localizer(
         return "${shortDate(date)}, ${clockTime(date)}"
     }
 
-    fun parcelStatus(parcel: Parcel): String = text(parcel.displayStatus.key)
+    /** The status line, which names the carrier a parcel probably travels with while it waits for that carrier's first scan. */
+    fun parcelStatus(parcel: Parcel): String {
+        val key = parcel.displayStatus.key
+        val likely = parcel.likelyCarrier
+        if (key != "status.likelyCarrier" || likely == null) return text(key)
+        return text(key, mapOf("carrier" to CarrierCatalog.shared.info(likely, language).displayName))
+    }
 
     fun parcelDeliveryEstimate(parcel: Parcel, now: Instant = Instant.now()): String? {
         val value = parcel.expectedDelivery ?: return null

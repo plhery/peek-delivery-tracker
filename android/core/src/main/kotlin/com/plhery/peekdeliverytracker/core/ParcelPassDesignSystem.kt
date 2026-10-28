@@ -114,21 +114,25 @@ data class CarrierBrandAssets(
     }
 }
 
-class CarrierVisualIdentity(id: String, carrier: CarrierDefinition) {
-    val family: String
-    val name: String
-    val fullName: String
-    val colors: List<String>
-    val decal: String
+class CarrierVisualIdentity private constructor(
+    val family: String,
+    val name: String,
+    val fullName: String,
+    val colors: List<String>,
+    val decal: String,
+) {
+    constructor(id: String, carrier: CarrierDefinition) : this(id, carrier, CarrierBrandAssets.shared)
 
-    init {
-        val assets = CarrierBrandAssets.shared
-        family = assets.families[id] ?: id
-        fullName = carrier.displayName
-        name = mapOf("dhl" to "DHL", "gls" to "GLS", "ups" to "ups")[family] ?: carrier.displayName
-        decal = assets.decals[id] ?: "default"
-        colors = assets.derivation.map { step -> assets.palettes[id]?.get(step.property) ?: mix(carrier.color, step.base, step.amount) }
-    }
+    private constructor(id: String, carrier: CarrierDefinition, assets: CarrierBrandAssets) : this(
+        family = assets.families[id] ?: id,
+        name = mapOf("dhl" to "DHL", "gls" to "GLS", "ups" to "ups")[assets.families[id] ?: id] ?: carrier.displayName,
+        fullName = carrier.displayName,
+        colors = assets.derivation.map { step -> assets.palettes[id]?.get(step.property) ?: mix(carrier.color, step.base, step.amount) },
+        decal = assets.decals[id] ?: "default",
+    )
+
+    /** The same livery under other names: Swift's `private(set) var name, fullName`. */
+    private fun copy(name: String, fullName: String) = CarrierVisualIdentity(family, name, fullName, colors, decal)
 
     /** One of the livery's named colours (`truck`, `accent`…), or else a colour literal. */
     fun paint(value: String): RgbaColor {
@@ -167,6 +171,18 @@ class CarrierVisualIdentity(id: String, carrier: CarrierDefinition) {
             val definition = catalog.info(carrier, language)
             val key = "${carrier.rawValue}|${definition.displayName}|${definition.color}"
             return cache.getOrPut(key) { CarrierVisualIdentity(carrier.rawValue, definition) }
+        }
+
+        /**
+         * The carrier a card or the parcel's header shows: the parcel's own, or while none is known, the one its number
+         * points to, named as probable in the livery of no carrier.
+         */
+        fun shown(parcel: Parcel, catalog: CarrierCatalog = CarrierCatalog.shared, localizer: Localizer): CarrierVisualIdentity {
+            val identity = of(parcel.displayedCarrier, catalog, localizer.language)
+            val likely = parcel.likelyCarrier
+            if (parcel.displayedCarrier != CarrierId.Unknown || likely == null) return identity
+            val probable = localizer.text("link.likely.carrier", mapOf("carrier" to catalog.info(likely, localizer.language).displayName))
+            return identity.copy(name = probable, fullName = probable)
         }
 
         /**

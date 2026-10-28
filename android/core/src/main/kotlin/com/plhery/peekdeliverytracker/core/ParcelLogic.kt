@@ -154,6 +154,47 @@ val Parcel.inputSuggestedPrompt: CarrierInputSuggested?
         return suggested
     }
 
+/** How long a carrier may go without listing a number of its own format before the reader is asked to check it, in seconds. */
+val Parcel.Companion.likelyCarrierWait: Double get() = 7 * 24 * 60 * 60.0
+
+/**
+ * Nobody has answered for the number yet, and it points to a carrier that does not list it yet: the carrier the parcel
+ * probably travels with, which its card and header name as probable.
+ */
+val Parcel.likelyCarrier: CarrierId?
+    get() {
+        val likely = carrierData?.routing?.likelyCarrier ?: return null
+        if (carrier != CarrierId.Unknown || hasCarrierUpdate) return null
+        return likely.carrier
+    }
+
+/** Swift's `(carrier:, waited:)` from `likelyCarrierPrompt`. */
+data class LikelyCarrierPrompt(val carrier: CarrierId, val waited: Boolean)
+
+/**
+ * The likely carrier, said under the header. `waited` once it has not listed the number for a week, when its owner is
+ * asked to check the number or choose another carrier.
+ */
+fun Parcel.likelyCarrierPrompt(now: Instant = Instant.now()): LikelyCarrierPrompt? {
+    if (inputNeededPrompt != null || inputSuggestedPrompt != null) return null
+    val likely = carrierData?.routing?.likelyCarrier ?: return null
+    if (likelyCarrier == null || isArchived) return null
+    val since = DateParser.date(likely.since)
+    return LikelyCarrierPrompt(likely.carrier, since?.let { now.timeIntervalSince(it) >= Parcel.likelyCarrierWait } ?: false)
+}
+
+/**
+ * Nobody has answered for the number, its format points to no carrier of its own, and it looks like a shop's order
+ * number or is shorter than tracking numbers are: its owner is told where the tracking number is, and may choose the
+ * carrier.
+ */
+val Parcel.nonTrackingShape: NonTrackingShape?
+    get() {
+        if (inputNeededPrompt != null || inputSuggestedPrompt != null || carrierData?.routing?.likelyCarrier != null) return null
+        if (carrier != CarrierId.Unknown || isArchived || hasCarrierUpdate || syncError == "carrier:placeholder_number") return null
+        return CarrierCatalog.nonTrackingShape(CarrierCatalog.normalize(trackingNumber))
+    }
+
 /** `Parcel.eventPrecedes` as a comparator, newest first. */
 internal val eventOrderComparator: Comparator<TrackingEvent> = Comparator { lhs, rhs ->
     when {
@@ -331,8 +372,9 @@ val Parcel.displayStatus: ParcelDisplayStatus
         if (isUnannounced) {
             val key = when {
                 carrierData?.routing?.providerInputNeeded != null -> "status.inputNeeded"
-                carrier == CarrierId.Unknown -> "status.noHistory"
-                else -> "status.unannounced"
+                carrier != CarrierId.Unknown -> "status.unannounced"
+                likelyCarrier != null -> "status.likelyCarrier"
+                else -> "status.noHistory"
             }
             return ParcelDisplayStatus(key, ParcelTone.Normal, syncing = false)
         }

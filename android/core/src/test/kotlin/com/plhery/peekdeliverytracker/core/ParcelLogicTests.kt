@@ -5,6 +5,7 @@ import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.makeParcel
 import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.widgetParcel
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierData
+import com.plhery.peekdeliverytracker.core.api.CarrierDataRouting
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
@@ -18,6 +19,7 @@ import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.FriendsSnapshot
+import com.plhery.peekdeliverytracker.core.api.LikelyCarrier
 import com.plhery.peekdeliverytracker.core.api.LiveActivityUpdateTokenRequest
 import com.plhery.peekdeliverytracker.core.api.NativePushDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
@@ -38,6 +40,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -343,8 +346,100 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun namesTheLikelyCarrierWhileNobodyAnsweredAndAsksToChooseAfterAWeek() {
+        val packageId = UUID.randomUUID()
+        val json = """
+            {
+              "packages": [{
+                "id": "${packageId.uuidString}",
+                "tracking_number": "EOB10293847561029384",
+                "label": "Test parcel",
+                "carrier": "unknown",
+                "created_at": "2026-08-01T10:00:00Z",
+                "sync_status": "waiting",
+                "carrier_data": { "routing": { "likely_carrier": { "carrier": "brt", "since": "2026-08-01T10:00:00Z" } } },
+                "notifications_muted": false,
+                "tracking_events": []
+              }]
+            }
+        """.trimIndent()
+        val parcel = ApiJson.decodeFromString(PackageListResponse.serializer(), json).packages.first()
+        val since = DateParser.date("2026-08-01T10:00:00Z")!!
+        val early = parcel.likelyCarrierPrompt(since.plusSeconds(24 * 60 * 60))
+        assertNotNull(early)
+        assertEquals(CarrierId.Brt, early!!.carrier)
+        assertFalse(early.waited)
+        assertEquals(true, parcel.likelyCarrierPrompt(since.plusSeconds(Parcel.likelyCarrierWait.toLong()))?.waited)
+
+        // Filed under a carrier, archived, with a scan, or once a postcode is asked for: no likely carrier.
+        val filed = parcel.copy(carrier = CarrierId.Brt)
+        assertNull(filed.likelyCarrierPrompt(since))
+        val archived = parcel.copy(archivedAt = "2026-08-10T10:00:00Z")
+        assertNull(archived.likelyCarrierPrompt(since))
+        val scanned = parcel.copy(trackingEvents = parcel.trackingEvents + event(packageId, TrackingStage.InTransit, "2026-08-10T10:00:00Z"))
+        assertNull(scanned.likelyCarrierPrompt(since))
+        val suggested = parcel.copy(
+            carrierData = parcel.carrierData?.copy(
+                routing = parcel.carrierData.routing?.copy(
+                    inputSuggested = CarrierInputSuggested(CarrierId.MondialRelay, CarrierInputSuggestedField.DpdPostcode),
+                ),
+            ),
+        )
+        assertNull(suggested.likelyCarrierPrompt(since))
+    }
+
+    @Test
+    fun namesTheProbableCarrierWhereTheCarrierIsNamedUntilACarrierAnswers() {
+        val packageId = UUID.randomUUID()
+        // A synthetic number in DPD Switzerland's depot range, which no carrier has answered for yet.
+        val json = """
+            {
+              "packages": [{
+                "id": "${packageId.uuidString}",
+                "tracking_number": "06080000000002",
+                "label": "Test parcel",
+                "carrier": "unknown",
+                "created_at": "2026-10-28T09:00:00Z",
+                "sync_status": "waiting",
+                "carrier_data": { "routing": { "likely_carrier": { "carrier": "dpd", "since": "2026-10-28T10:00:00Z" } } },
+                "notifications_muted": false,
+                "tracking_events": []
+              }]
+            }
+        """.trimIndent()
+        val parcel = ApiJson.decodeFromString(PackageListResponse.serializer(), json).packages.first()
+        val localizer = Localizer(AppLanguage.En)
+        assertEquals(CarrierId.Dpd, parcel.likelyCarrier)
+        assertEquals("status.likelyCarrier", parcel.displayStatus.key)
+        assertEquals("Waiting for DPD Switzerland’s first scan", localizer.parcelStatus(parcel))
+        val identity = CarrierVisualIdentity.shown(parcel, localizer = localizer)
+        assertEquals("Probably DPD Switzerland", identity.name)
+        assertEquals(CarrierVisualIdentity.of(CarrierId.Unknown, language = AppLanguage.En).decal, identity.decal)
+        // Every language names the carrier in both lines.
+        for (language in AppLanguage.entries) {
+            localizer.language = language
+            assertTrue("$language", localizer.parcelStatus(parcel).contains("DPD Switzerland"))
+            assertTrue("$language", CarrierVisualIdentity.shown(parcel, localizer = localizer).name.contains("DPD Switzerland"))
+        }
+        localizer.language = AppLanguage.En
+
+        // A shape nobody leads keeps the words of a number no carrier knows yet.
+        val shared = parcel.copy(carrierData = null)
+        assertNull(shared.likelyCarrier)
+        assertEquals("status.noHistory", shared.displayStatus.key)
+        assertEquals(
+            CarrierVisualIdentity.of(CarrierId.Unknown, language = AppLanguage.En).name,
+            CarrierVisualIdentity.shown(shared, localizer = localizer).name,
+        )
+        // Once another carrier answers for the number, the parcel is filed under it and the guess goes.
+        val filed = parcel.copy(carrier = CarrierId.Seur)
+        assertNull(filed.likelyCarrier)
+        assertEquals("status.unannounced", filed.displayStatus.key)
+        assertEquals("SEUR", CarrierVisualIdentity.shown(filed, localizer = localizer).name)
+    }
+
+    @Test
     fun tellsAnOrderNumberOrAShortNumberNoCarrierAnsweredFor() {
-        // The catalog's half of the iPhone's test; Parcel.nonTrackingShape's half comes with the likely carrier.
         // Synthetic numbers: Amazon's without hyphens, AliExpress's, Temu's as a lookup stores it, a short one.
         assertEquals(NonTrackingShape.Order(shop = "amazon"), CarrierCatalog.nonTrackingShape("30245719832294617"))
         assertEquals(NonTrackingShape.Order(shop = "aliexpress"), CarrierCatalog.nonTrackingShape("3041234567890123"))
@@ -352,6 +447,31 @@ class ParcelLogicTests {
         assertEquals(NonTrackingShape.Short, CarrierCatalog.nonTrackingShape("10293"))
         assertNull(CarrierCatalog.nonTrackingShape("99945719832294617"))
         assertNull(CarrierCatalog.nonTrackingShape("12345678"))
+
+        val packageId = UUID.randomUUID()
+        val json = """
+            {
+              "packages": [{
+                "id": "${packageId.uuidString}",
+                "tracking_number": "30245719832294617",
+                "label": "Test parcel",
+                "carrier": "unknown",
+                "created_at": "2026-08-01T10:00:00Z",
+                "sync_status": "waiting",
+                "notifications_muted": false,
+                "tracking_events": []
+              }]
+            }
+        """.trimIndent()
+        val parcel = ApiJson.decodeFromString(PackageListResponse.serializer(), json).packages.first()
+        assertEquals(NonTrackingShape.Order(shop = "amazon"), parcel.nonTrackingShape)
+        // Filed under a carrier, or with a carrier its own format points to: nothing said.
+        val filed = parcel.copy(carrier = CarrierId.Ups)
+        assertNull(filed.nonTrackingShape)
+        val likely = parcel.copy(
+            carrierData = CarrierData(routing = CarrierDataRouting(likelyCarrier = LikelyCarrier(CarrierId.Brt, "2026-08-01T10:00:00Z"))),
+        )
+        assertNull(likely.nonTrackingShape)
     }
 
     @Test

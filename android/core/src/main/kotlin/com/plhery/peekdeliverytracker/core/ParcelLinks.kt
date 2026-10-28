@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierData
+import com.plhery.peekdeliverytracker.core.api.CarrierDataRouting
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelResultOutcome
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelsResponse
@@ -69,6 +70,7 @@ fun Parcel(shared: PublicPackage): Parcel {
             weightKg = data.weightKg,
             importCharges = data.importCharges,
             destinationCountry = data.destinationCountry,
+            routing = data.likelyCarrier?.let { CarrierDataRouting(likelyCarrier = it) },
         ),
         archivedAt = shared.archivedAt,
         notificationsMuted = shared.notificationsMuted,

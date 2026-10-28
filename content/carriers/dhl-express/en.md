@@ -1,74 +1,72 @@
 ---
 title: DHL Express tracking: waybill numbers and statuses
-description: Track a DHL Express parcel: where to find the 10-digit waybill number, what DHL's statuses mean, duties, missed deliveries, claims and DHL Express contacts.
+description: Track a DHL Express parcel: where to find the 10-digit waybill number, what DHL Express scans mean, customs charges, missed deliveries and lost parcels.
 slug: dhl-express-tracking
 published: 2026-10-13
 updated: 2026-10-27
 ---
 
-DHL Express is DHL's international courier division for time-definite shipments, often chosen by shops abroad that have a delivery agreement with DHL. Track a parcel with its 10-digit waybill number on dhl.com or MyDHL+, with the link in DHL's email or SMS, or by pasting the number in the box above. The shop usually gives you the number in its shipping email.
+Paste a DHL Express waybill number, or a MyDHL+ tracking link, in the box above to follow the parcel. DHL's own tracking is on its website (MyDHL+) and in the DHL Express mobile app.
 
 ## DHL Express tracking number: where to find the waybill
 
-DHL Express calls its tracking number the waybill number. DHL says the sender or shop usually provides it, most often in the order confirmation or shipping email; if not, ask them. DHL's own On Demand Delivery messages arrive by SMS or email with a link. More in [where to find a tracking number](guide:find-tracking-number).
-
-DHL Express describes two shapes:
+DHL Express calls its tracking number the waybill number. Look in the shop's shipping email or on your order page; a MyDHL+ tracking link carries it too, after `id=`. Still nothing? See [where to find a tracking number](guide:find-tracking-number).
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `1234567891` | The waybill: 10 digits, the number you track the whole shipment with. |
-| `JD014600001234567890` | A piece identifier: 20 characters starting with `JD`, one per parcel in the shipment. |
+| `1234567891` | The waybill: 10 digits, the number that tracks the whole shipment. The last digit is a check digit. |
+| `JD014600001234567890` | A piece number: `JD01` and 16 digits, printed as `(J)JD…` under the label's lower barcode. Each parcel in a shipment has its own, and it leads back to the waybill. |
 
-Mondial Relay, [Relais Colis](carrier:relais-colis), [TIPSA](carrier:tipsa), Estafeta and [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) use 10 digits too, so check which carrier the shop's email names. A number with letters or another length is probably another DHL division, such as [DHL Paket](carrier:dhl) or [DHL eCommerce UK](carrier:dhl-ecommerce-uk), with its own tracking.
+Ten digits also fit [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), [TIPSA](carrier:tipsa), Estafeta, [Packeta](carrier:packeta), [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and [DHL Paket](carrier:dhl), so check which carrier the shop's email names.
 
-DHL recycles waybill numbers, so tracking can briefly show another shipment's history. Your parcel still goes to its own address.
+DHL reuses waybill numbers: a number can come with an earlier shipment's scans, which Peek ignores.
 
 ## What DHL Express tracking statuses mean
 
-DHL Express's tracking shows these lines in English. Many end with the facility, for example `Processed at` followed by a town and country.
+These are scan wordings Peek reads from DHL Express, in DHL's English, roughly in the order a parcel meets them, with the status Peek shows for each. Many end with the facility, for example `Processed at` followed by a town and country.
 
-| DHL Express's status | What it means for you |
-| --- | --- |
-| `Shipment information received` | The sender has created the shipment and its waybill. DHL doesn't have the parcel yet. |
-| `Shipment picked up` | A DHL Express courier has collected it from the sender. |
-| `Arrived at DHL Sort Facility` | It has reached a sorting centre; you'll see this several times. |
-| `Shipment has departed from a DHL facility` | It's on its way to the next stop. |
-| `Customs clearance status updated. Note - The Customs clearance process` … | Customs in the destination country is processing it. |
-| `Clearance processing complete at` | Customs has cleared it. |
-| `Arrived at DHL Delivery Facility` | It's at the depot that delivers in your area. |
-| `Shipment is out with courier for delivery` | A courier has it and is heading to you. |
-| `Delivery attempted but no response at Consignee address` | The courier came and nobody answered. You are the consignee. |
-| `On Hold Awaiting for Payment of Shipment Related Fees` | It's waiting for import duties and taxes to be paid. |
-| `Shipment is on hold` | It has stopped at a checkpoint. Contact DHL to find out why. |
-| `Delivered` | DHL has delivered it to the consignee: you. |
+| DHL Express's scan | Peek shows | What it means |
+| --- | --- | --- |
+| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Label created | The sender has sent DHL the shipment's details. |
+| `Shipment picked up`, `Shipment accepted` | Received by carrier | DHL Express has the parcel. |
+| `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | In transit | It's moving through DHL's network. |
+| `Scheduled to depart on the next planned movement` | In transit | It's waiting at a facility for its next truck or flight. |
+| `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | At customs | It's going through customs (see below). |
+| `Payment is received and recorded for shipment related fees` | At customs | The duties or fees have been paid; it stays at customs until clearance is complete. |
+| `Clearance processing complete at` | In transit | Customs has finished with it and it's moving again. |
+| `Arrived at DHL Delivery Facility` | In transit | It has reached the DHL facility that delivers it. |
+| `Shipment is out with courier for delivery` | Out for delivery | A courier is bringing it to you. |
+| `Delivery attempted but no response at Consignee address`, `Delivery attempt could not be completed` | Delivery attempted | The delivery didn't go ahead. The consignee is you, the recipient. |
+| `Shipment is scheduled for delivery` | In transit | A delivery is booked for a later round, for example after a missed attempt. |
+| `Awaiting collection by the consignee` | Ready for pickup | It's held at a DHL facility for you to collect. |
+| `Delivered` | Delivered | It's been delivered. |
+| `Shipment is on hold` | Needs attention | DHL has stopped the shipment for now. |
+| `Shipment arrived at incorrect facility. It will be sent to the correct destination` | Needs attention | It was sorted to the wrong facility and goes on to the right one, late. |
+| `Returned to shipper` | Returned to sender | It's going back to the sender. |
 
-The customs line can appear right after the parcel leaves the origin country, since clearance may start in transit. It lets you see early whether customs needs more information: open "Further details" beside it.
+## Missed DHL Express delivery
 
-`Processed at` and `Shipment is in transit to destination` are ordinary transit steps. The delivery town shown is the DHL service station's, not necessarily yours. `Returned to Shipper` means it's going back, after a customs problem, a refusal or unpaid fees.
+After a missed attempt the tracking reads `Delivery attempted but no response at Consignee address` or `Delivery attempt could not be completed`. A later `Shipment is scheduled for delivery` means a new attempt is booked; `Awaiting collection by the consignee` means the parcel is waiting at a DHL facility for you to collect it. To rearrange the delivery, contact DHL Express through its website or app: Peek can't change a delivery. More in [missed deliveries](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
 
-## Missed DHL Express delivery and changing it
+## DHL Express parcel held at customs
 
-With DHL's free [On Demand Delivery](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=GB), enter the waybill as a guest and choose among up to six options: a safe place without signature, another date, a neighbour or concierge, a DHL Express Service Point or locker, another address, or a vacation hold of up to 30 days. Which options you get varies by country.
+A parcel from outside the UK, or from outside the EU for Ireland, may owe import charges. The tracking shows `Customs clearance status updated…`, `Processed for clearance at` or `Clearance event` while it's at customs, `Payment is received and recorded for shipment related fees` once the charges are paid, and `Clearance processing complete at` when customs lets it go.
 
-DHL Express Italy describes a missed delivery: the courier tries to call the phone number on the waybill and comes back a second time; then the parcel waits at the nearest service centre for instructions.
+- **UK**: GOV.UK says the courier contacts you with a bill for any VAT, duty or delivery charges, and normally holds the parcel for about 3 weeks. Unpaid, it goes back to the sender.
+- **Ireland**: since 1 July 2026, most parcels worth €150 or less from outside the EU owe €3 customs duty per item. If the shop didn't collect it at checkout, Revenue says the courier will ask you for it before delivering. The courier can add its own administration fee, so check that cost with it.
 
-**Duties and taxes.** DHL usually pays import duties and taxes for you and collects them before or on delivery: "Generally, DHL Express is unable to deliver parcels until these have been paid." If the shop chose Duty Tax Paid, you pay nothing. In the UK, DHL's 2026 rate guide adds a Duty Tax Processing fee for non-account customers of 2.5% of the duties and taxes, at least £11.00; other countries' amounts are in DHL Express's Service and Rate Guide for that country. See [what customs charges](guide:customs).
+More in [parcels held at customs](guide:customs).
 
-## DHL Express parcel delayed, on hold, lost or damaged
+## DHL Express parcel late, lost or marked delivered
 
-When tracking says to contact DHL, it usually lacks information, often a wrong address, which DHL says is "resolved very quickly by contacting Customer Service". For `Shipment is on hold`, DHL also says to contact it to find out why. DHL's Malaysian status page advises contacting DHL if tracking stays the same for more than 3 days; see also [tracking that isn't updating](guide:tracking-not-updating).
+If the tracking has stopped moving, or shows `Shipment is on hold`, see [tracking that isn't updating](guide:tracking-not-updating).
 
-For a lost, late or damaged parcel, DHL's claim forms accept claims from the sender, the recipient or whoever paid for the transport, within 30 days. Depending on the country, that counts from acceptance or from delivery, so act early. For damage, keep the contents and packaging, take photos and have proof of value ready.
+If you live in Great Britain or Ireland and bought from a shop, the shop is responsible for getting the parcel to you, even when DHL Express carries it:
 
-## DHL Express customer service number
+- **England, Scotland and Wales**: Citizens Advice says the seller should chase the courier, not you. If the item hasn't arrived within 30 days of buying it, you can cancel and ask for your money back. If it was left somewhere you didn't agree to and went missing, the seller has to sort it out.
+- **Ireland**: the CCPC says that without an agreed date, the order must arrive within 30 days of purchase. If it doesn't, arrange a new delivery date with the business; if that passes too, you're entitled to a full refund. A parcel damaged or lost in transit should be replaced, and the business stays responsible until you, or someone you nominate, have the parcel in hand.
 
-DHL Express's channels for recipients, as its MyDHL+ contact pages listed them on 13 October 2026:
-
-- **United Kingdom**: 0344 248 0012 for individuals (local call rates), Monday to Friday 8 a.m. to 7 p.m.; business customers 0844 248 0844. A Digital Assistant chat around the clock, WhatsApp, and forms for a tracking query, a claim or a rearranged delivery on the [UK Help and Support page](https://mydhl.express.dhl/gb/en/help-and-support.html).
-- **Ireland**: 0818 725 725, or 00 353 1 8700790 from abroad, Monday to Friday 8.30 a.m. to 5 p.m.; chat around the clock and WhatsApp.
-- **United States**: 1-800-CALL DHL (1-800-225-5345), Monday to Friday 5 a.m. to 7 p.m. Arizona time; 1-888-273-8876 for Attempted Delivery Notices; chat around the clock.
-
-> DHL warns about fake SMS with shortened links, a generic sender such as "Delivery" or an unexpected country code. The only payments DHL asks for by email or SMS are duties and taxes, with a one-time code sent to you first. Send a screenshot to phishing@dhl.com; in the UK, also report it to Action Fraud.
+Marked `Delivered` but not there? DHL's tracking page can show the signature, which Peek doesn't keep. Check the tracking on DHL's website, then contact the shop. More in [delivered but not received](guide:delivered-not-received) and [lost parcels](guide:lost-parcel).
 
 ## Tracking DHL Express parcels with Peek
 
@@ -82,33 +80,31 @@ It shows the status, each scan with its facility on a map and the destination co
 
 ### Is the DHL waybill number the same as the tracking number?
 
-Yes. For DHL Express the 10-digit waybill number tracks the whole shipment; the `JD` piece identifier belongs to a single parcel.
+Yes. For DHL Express the 10-digit waybill number tracks the whole shipment; a `JD01` piece number belongs to a single parcel and leads back to the waybill.
 
 ### Is DHL the same as DHL Express?
 
-No: they are separate divisions of one group, each with its own tracking. Parcels without a 10-digit waybill usually belong to DHL eCommerce or DHL Paket.
+Not in Peek: DHL Express is its own carrier, separate from [DHL Paket](carrier:dhl) and the DHL eCommerce carriers, each with its own numbers and tracking. A parcel without a 10-digit waybill or a `JD01` piece number usually belongs to one of those.
 
 ### Why is my DHL waybill number invalid?
 
-Often it is another DHL division's number: DHL Express waybills have exactly 10 digits. A new waybill shows only `Shipment information received` until DHL has the parcel.
+Often it's another DHL carrier's number: DHL Express waybills have exactly 10 digits, and the last one is a check digit, so a typo usually fails it. A new waybill can also show only `Shipment information received` until DHL has picked up the parcel.
 
 ### Can I track DHL Express without a waybill number?
 
-Yes, if you have the shipper's reference: DHL Express offers Shipper's Reference Tracking. Otherwise ask the sender or shop for the waybill.
+Not in Peek: it needs the 10-digit waybill or a `JD01` piece number from the label. Ask the shop or the sender for the waybill.
+
+### Is a DHL Express text asking me to pay a scam?
+
+It can be. Citizens Advice says a message asking you to pay to get a parcel or to reschedule its delivery is usually a scam. Don't tap the link: look the waybill up on DHL's website or in Peek instead. In the UK, forward the text to 7726 for free. In the US, the FTC says to contact the shipping company through a website or phone number you know is real. More in [delivery scam texts](guide:delivery-scam-texts).
 
 :::sources
-- [DHL Express: FAQs – Tracking and Monitoring (United Kingdom)](https://mydhl.express.dhl/gb/en/help-and-support/faqs/tracking-monitoring.html) – recycled waybills, contact-DHL message, service station towns, customs status, Further details
-- [DHL Express: FAQs – Tracking and Monitoring (Spain, English)](https://mydhl.express.dhl/es/en/help-and-support/faqs/tracking-monitoring.html) – 10-digit waybill, JD piece identifier, other divisions, Shipper's Reference Tracking
-- [DHL Express: FAQs – Duties and Taxes (United Kingdom)](https://mydhl.express.dhl/gb/en/help-and-support/faqs/duties-and-taxes.html) – shop agreement, DHL advances duties, no delivery before payment, Duty Tax Paid
-- [DHL Express: Help and Support (United Kingdom)](https://mydhl.express.dhl/gb/en/help-and-support.html#/contact_us) – phone numbers, hours, chat, forms, non-10-digit numbers, Action Fraud
-- [DHL Express: Help and Support (Ireland)](https://mydhl.express.dhl/ie/en/help-and-support.html#/contact_us) – phone numbers, hours
-- [DHL Express: Help and Support (United States)](https://mydhl.express.dhl/us/en/help-and-support.html#/contact_us) – phone numbers, hours
-- [DHL: On Demand Delivery (United Kingdom)](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=GB) – six options, 30-day vacation hold, notifications, availability by country
-- [DHL Express: Tracking (Italy, English)](https://www.dhl.com/it-en/home/express/businesses/tracking-your-shipments.html) – phone call, second attempt, service centre hold
-- [DHL: Shipment Tracking Status Explained (Malaysia)](https://www.dhl.com/discover/en-my/ship-with-dhl/track/tracking-status) – status meanings, alert statuses, 3-day advice
-- [DHL Express: Service & Rate Guide 2026 (United Kingdom)](https://mydhl.express.dhl/content/dam/downloads/gb/en/rate-guide/service_and_rate_guide_gb_en.pdf) – Duty Tax Processing fee
-- [DHL Express: Email Us – Claim (United Kingdom)](https://mydhl.express.dhl/gb/en/forms/csm/claim.html) – 30 days after delivery, photos, proof of value
-- [DHL Express: Register a Claim for Damage (Italy)](https://mydhl.express.dhl/it/en/forms/claim-for-damage.html) – who can claim, 30 days from acceptance, keep packaging
-- [DHL: Fraud Awareness (United Kingdom)](https://www.dhl.com/gb-en/home/footer/fraud-awareness.html) – fake SMS signs, duties-only payments with a one-time code, phishing@dhl.com
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from DHL Express
+- [Citizens Advice: If something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – seller's responsibility, 30 days, agreed place, scam messages (same advice for England, Scotland and Wales)
+- [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – the courier's bill, about 3 weeks, return to sender
+- [GOV.UK: Report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – forward scam texts to 7726
+- [CCPC: Your consumer rights if your order is not delivered](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – 30 days, new date, refund, responsible until you have it (Ireland)
+- [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 per item since 1 July 2026, paid to the courier before delivery
+- [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – couriers' administration fee, which can vary
+- [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – contact the shipping company through a website or number you know
+- [Universal Parcel Scraper: DHL Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dhl-express) – waybill and piece number shapes, check digit, 10-digit lookalikes, reused waybills, DHL Express's scan wordings and Peek's status for each, signature shown by DHL, what Peek reads from DHL Express
 :::

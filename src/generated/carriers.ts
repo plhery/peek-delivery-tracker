@@ -2179,7 +2179,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "dhl-express",
       "catalog": "dhl-express",
       "slug": "dhl-express-tracking",
-      "title": "DHL Express tracking: lettera di vettura, stati e contatti",
+      "title": "DHL Express tracking: lettera di vettura, stati e dogana",
       "name": "DHL Express",
       "color": "#ffcc00"
     },
@@ -2365,7 +2365,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "dhl-ecommerce-es",
       "catalog": "dhl-ecommerce-es",
       "slug": "dhl-ecommerce-iberia-seguimiento",
-      "title": "DHL eCommerce Iberia seguimiento: estados y teléfono",
+      "title": "DHL eCommerce Iberia seguimiento: estados y ServicePoints",
       "name": "DHL eCommerce Iberia",
       "color": "#ffcc00"
     },
@@ -2719,7 +2719,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "dhl-express",
       "catalog": "dhl-express",
       "slug": "dhl-express-tracking",
-      "title": "DHL Express tracking: carta de porte, estados e contactos",
+      "title": "DHL Express tracking: carta de porte, estados e alfândega",
       "name": "DHL Express",
       "color": "#ffcc00"
     },

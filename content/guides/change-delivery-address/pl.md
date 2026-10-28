@@ -41,7 +41,7 @@ Czasem tak, i wtedy pytasz przewoźnika, nie sklep. Klientem przewoźnika jest j
 
 Oprócz numeru często potrzebujesz linku od przewoźnika, kodu PIN albo konta w jego aplikacji. Jak znaleźć numer i które aplikacje same pokazują paczki wysłane na Twój numer telefonu, opisuje poradnik [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
-> SMS z prośbą o „aktualizację adresu” albo o drobną dopłatę przed doręczeniem to klasyczne oszustwo. DHL też wysyła linki do przekierowania, więc gdy masz wątpliwości, nie klikaj, tylko wpisz numer przesyłki na stronie lub w aplikacji przewoźnika: [jak rozpoznać fałszywy SMS o paczce](guide:delivery-scam-texts).
+> SMS z prośbą o „aktualizację adresu” albo o drobną dopłatę przed doręczeniem to klasyczne oszustwo. Gdy masz wątpliwości, nie klikaj, tylko wpisz numer przesyłki na stronie lub w aplikacji przewoźnika: [jak rozpoznać fałszywy SMS o paczce](guide:delivery-scam-texts).
 
 ## Jak przekierować paczkę DPD, DHL, GLS i Poczty Polskiej
 
@@ -50,13 +50,13 @@ Każdy przewoźnik ma własne zasady. DPD, DHL eCommerce i GLS przyjmą inny adr
 | Przewoźnik | Dokąd możesz ją przekierować | Koszt |
 | --- | --- | --- |
 | DPD (DPD Mobile, mojapaczka.dpd.com.pl) | Inny adres, sąsiad albo safeplace, punkt lub automat DPD Pickup, inny termin | Bezpłatnie |
-| [DHL eCommerce](carrier:dhl-ecommerce-pl) (przekieruj.dhlparcel.pl, aplikacja Mój DHL) | Inny adres, inna data, punkt DHL POP albo automat DHL BOX 24/7 | Bezpłatnie |
+| [DHL eCommerce](carrier:dhl-ecommerce-pl) (aplikacja i strona Mój DHL) | Inny adres, inna data, punkt DHL POP | Bezpłatnie |
 | GLS (FlexDeliveryService) | Nowy adres, nowa data, punkt GLS ParcelShop, odbiór w oddziale GLS | Bez dodatkowych opłat |
 | [Poczta Polska](carrier:poczta-polska), Pocztex | Zmianę adresu zgłasza nadawca. Ty, gdy kurier nie zastanie Cię w domu, możesz go najwyżej poprosić przez telefon o zostawienie paczki tuż obok adresu | Nadawca płaci 9,00 zł i opłatę za dalszy przewóz |
 
 **DPD:** paczką zarządzasz po zalogowaniu w aplikacji DPD Mobile albo na mojapaczka.dpd.com.pl, od chwili przekazania jej kurierowi aż do wydania do doręczenia. Oprócz zmiany adresu czy terminu możesz też z paczki zrezygnować.
 
-**DHL eCommerce:** PIN do serwisu „Przekieruj paczkę” dostaniesz SMS-em na numer, który sklep podał DHL, e-mailem albo w aplikacji Mój DHL. Logujesz się numerem paczki i PIN-em. Dyspozycję możesz zmieniać kilka razy, liczy się ostatnia. Składasz ją najpóźniej do 23:59 w dniu nadania paczki, a DHL realizuje ją najwcześniej następnego dnia roboczego. Jeśli nie masz PIN-u, wybierz na stronie „Nie mam kodu PIN”. Jeśli dyspozycję złożył już nadawca, Ty nie złożysz swojej.
+**DHL eCommerce:** DHL eCommerce Polska podaje, że odbiorca może sam zmienić datę lub adres doręczenia, bez kontaktu z nadawcą, a o nadaniu paczki, dacie, miejscu i przewidywanych godzinach doręczenia informuje e-mailem lub SMS-em. W aplikacji i na stronie Mój DHL przy paczce znajdziesz przekierowanie do punktu, zmianę adresu dostawy i rezygnację z przesyłki. Zgubiony PIN też odzyskasz w Mój DHL.
 
 **GLS:** opcje działają, jeśli nadawca podał GLS Twój e-mail. Wtedy dostaniesz wiadomość o zbliżającej się dostawie z linkiem do zmiany jej warunków.
 
@@ -69,10 +69,10 @@ Jeśli sklep chce ściągnąć paczkę z powrotem do siebie, to sprawa między n
 Często tak, i zwykle łatwiej niż adres.
 
 - **DPD:** datę doręczenia przesuniesz o maksymalnie 3 dni robocze, w DPD Mobile albo na mojapaczka.dpd.com.pl.
-- **DHL eCommerce:** inną datę wybierzesz w serwisie „Przekieruj paczkę”, z tym samym terminem: do 23:59 w dniu nadania.
+- **DHL eCommerce:** według DHL eCommerce Polska odbiorca sam zmieni datę doręczenia, bez kontaktu z nadawcą; opcje przy paczce znajdziesz w Mój DHL.
 - **GLS:** „Zmiana daty dostawy” to jedna z opcji FlexDeliveryService, dostępna, jeśli nadawca podał GLS Twój e-mail.
 
-Wyjeżdżasz na dłużej? Polscy przewoźnicy nie przechowują paczek tygodniami: DPD przesunie doręczenie najwyżej o 3 dni robocze, a w automacie czy punkcie paczka czeka krótko. W DPD Pickup są to 2 pełne dni robocze, a paczka przekierowana przez serwis DHL do DHL POP lub DHL BOX 24/7 czeka 2 dni kalendarzowe. Lepiej poproś kogoś o odbiór. Terminy wszystkich firm zebraliśmy w poradniku [nieodebrana paczka z paczkomatu lub poczty](guide:uncollected-parcel).
+Wyjeżdżasz na dłużej? Polscy przewoźnicy nie przechowują paczek tygodniami: DPD przesunie doręczenie najwyżej o 3 dni robocze, a w automacie czy punkcie paczka czeka krótko. W DPD Pickup są to 2 pełne dni robocze. Lepiej poproś kogoś o odbiór. Terminy wszystkich firm zebraliśmy w poradniku [nieodebrana paczka z paczkomatu lub poczty](guide:uncollected-parcel).
 
 Jeśli kurier już był i zostawił awizo, nie przekierowujesz już paczki, tylko umawiasz ponowne doręczenie albo odbiór: zajrzyj do poradnika [awizo i nieudane doręczenie](guide:missed-delivery).
 
@@ -80,11 +80,10 @@ Jeśli kurier już był i zostawił awizo, nie przekierowujesz już paczki, tylk
 
 Gdy opcji nie ma albo są nieaktywne, powód jest zwykle jeden z poniższych:
 
-- **Nadawca na to nie pozwala.** DPD nie przekierowuje paczek od niektórych nadawców, w tym Temu, AliExpress i Shein. U GLS opcje istnieją tylko wtedy, gdy nadawca podał Twój e-mail, a DHL eCommerce nie przyjmie Twojej dyspozycji, jeśli swoją złożył już nadawca.
-- **Jest za późno.** DPD przekierowuje do chwili wydania paczki do doręczenia, a DHL eCommerce przyjmuje zmiany do 23:59 w dniu nadania paczki.
+- **Nadawca na to nie pozwala.** DPD nie przekierowuje paczek od niektórych nadawców, w tym Temu, AliExpress i Shein. U GLS opcje istnieją tylko wtedy, gdy nadawca podał Twój e-mail.
+- **Jest za późno.** DPD przekierowuje do chwili wydania paczki do doręczenia.
 - **Paczka i tak jedzie do automatu lub punktu.** Poczta Polska nie przeniesie paczki Pocztex PUNKT ani AUTOMAT do innego punktu.
-- **Paczka jest za pobraniem albo wymaga podpisu lub sprawdzenia tożsamości.** GLS nie przekieruje do punktu ParcelShop paczki z usługą CashService (pobranie) ani IdentService, a DHL eCommerce nie skieruje do DHL POP ani DHL BOX 24/7 paczki z usługą „DHL osobisty podpis”.
-- **Paczka jest za duża albo za ciężka.** Serwis DHL eCommerce obsługuje przesyłki do 31,5 kg, a do punktu DHL POP i automatu DHL BOX 24/7 przekierujesz tylko jednoelementową paczkę do 25 kg i 64 × 41 × 38 cm.
+- **Paczka jest za pobraniem albo wymaga podpisu lub sprawdzenia tożsamości.** GLS nie przekieruje do punktu ParcelShop paczki z usługą CashService (pobranie) ani IdentService.
 - **To przesyłka Pocztex.** Tu zmianę adresu zgłasza nadawca, nie Ty.
 
 Jeśli nic nie działa, poproś kogoś pod pierwotnym adresem, żeby odebrał paczkę, albo odbierz ją osobiście w punkcie. Nieodebrana w końcu wróci do sklepu.
@@ -109,7 +108,7 @@ Dla odbiorcy zwykle nie. DHL eCommerce i DPD robią to bezpłatnie, a GLS bez do
 
 ### Jak uniknąć tego następnym razem?
 
-Sprawdź adres przed zapłatą albo od razu wybierz automat lub punkt odbioru. Podawaj sklepowi numer telefonu i e-mail: bez e-maila GLS nie pokaże Ci opcji dostawy, a DHL eCommerce właśnie SMS-em albo e-mailem wysyła PIN do przekierowania. I włącz powiadomienia, w [Peek](/) albo w aplikacji przewoźnika: zdążysz zareagować, zanim paczka zostanie wydana do doręczenia.
+Sprawdź adres przed zapłatą albo od razu wybierz automat lub punkt odbioru. Podawaj sklepowi numer telefonu i e-mail: bez e-maila GLS nie pokaże Ci opcji dostawy, a DHL eCommerce właśnie SMS-em albo e-mailem podaje datę i miejsce doręczenia. I włącz powiadomienia, w [Peek](/) albo w aplikacji przewoźnika: zdążysz zareagować, zanim paczka zostanie wydana do doręczenia.
 
 ### Czy Peek może zmienić adres dostawy?
 
@@ -119,8 +118,8 @@ Nie. Peek śledzi paczkę i pokazuje, gdzie jest. Przekierować ją może tylko 
 - [Vinted: Adres dostawy jest nieprawidłowy](https://www.vinted.pl/help/660) – anulowanie z osobą sprzedającą, ponowny zakup, przekierowanie w niektórych przypadkach
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – opcje w DPD Mobile i mojapaczka.dpd.com.pl, 3 dni robocze, wyjątki Temu, AliExpress, Shein, 2 pełne dni robocze w DPD Pickup
 - [DPD Polska: Jak przekierować paczkę w DPD](https://www.dpd.com/pl/pl/2025/01/31/jak-przekierowac-paczke-w-dpd/) – bezpłatnie, do wydania do doręczenia, logowanie
-- [DHL eCommerce Polska: Regulamin korzystania z serwisu Przekieruj paczkę](https://przekieruj.dhlparcel.pl/doc/Regulamin_korzystania_z_serwisu_Przekieruj_paczke_1.pdf) – POP, BOX, adres, data, PIN, link, 23:59 w dniu nadania, realizacja następnego dnia roboczego, ostatnia dyspozycja, 31,5 kg i 25 kg, „DHL osobisty podpis”, 2 dni w POP i BOX, bezpłatnie, dyspozycja nadawcy
-- [DHL eCommerce Polska: Przekieruj paczkę](https://przekieruj.dhlparcel.pl/) – logowanie numerem paczki i PIN-em, „Nie mam kodu PIN”
+- [DHL24: portal DHL eCommerce Polska](https://dhl24.com.pl/) – odbiorca sam zmienia datę lub adres doręczenia, bezpłatnie i bez kontaktu z nadawcą; e-mail lub SMS z datą, miejscem i godzinami doręczenia
+- [DHL eCommerce Polska: Mój DHL, śledzenie](https://mojdhl.pl/tracking) – przekierowanie do punktu, zmiana adresu dostawy, rezygnacja z przesyłki, odzyskanie PIN-u
 - [GLS Polska: FlexDeliveryService](https://gls-group.com/PL/pl/flexdelivery-service/) – nowy termin, nowy adres, ParcelShop, bez dodatkowych opłat, e-mail od nadawcy, wyłączenia CashService i IdentService
 - [InPost: Regulamin Konta InPost](https://terms.inpost-group.com/pl/regulamin) – obowiązuje od 1 października 2026, w Polsce usługi zarządzania paczkami (zmiany, przekierowania), aktualne informacje o usługach w aplikacji InPost Mobile
 - [Poczta Polska: Regulamin usługi Pocztex w obrocie krajowym](https://www.poczta-polska.pl/wp-content/uploads/2025/02/regulamin-swiadczenia-uslugi-pocztex-w-obrocie-krajowym_27-04-2026.pdf) – żądanie zmiany adresu składa nadawca, dyspozycja telefoniczna adresata

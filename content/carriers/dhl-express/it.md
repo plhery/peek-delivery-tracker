@@ -1,73 +1,69 @@
 ---
-title: DHL Express tracking: lettera di vettura, stati e contatti
-description: Tracking DHL Express: dove trovi la lettera di vettura di 10 cifre, cosa vogliono dire gli stati, dazi, consegna mancata e contatti di DHL Express Italia.
+title: DHL Express tracking: lettera di vettura, stati e dogana
+description: Tracking DHL Express: dove trovi la lettera di vettura di 10 cifre, cosa vogliono dire gli stati, dazi, consegna mancata e cosa fare se il pacco si perde.
 slug: dhl-express-tracking
 published: 2026-10-13
 updated: 2026-10-27
 ---
 
-DHL Express è la divisione corriere internazionale di DHL per le spedizioni a tempo definito, e consegna anche gli ordini dei negozi online che hanno un accordo di consegna con DHL. Per seguire il pacco cerca il numero di 10 cifre su dhl.com o MyDHL+, apri il link nell'SMS o nell'e-mail di DHL oppure incollalo nel box qui sopra. Di solito il numero te lo dà il negozio, nell'e-mail di spedizione.
+Incolla una lettera di vettura DHL Express, o un link di tracking di MyDHL+, nel box qui sopra per seguire il pacco. Il tracking ufficiale di DHL è sul suo sito (MyDHL+) e nell'app di DHL Express.
 
 ## Lettera di vettura DHL Express: dove trovi il numero di tracking
 
-DHL Express chiama il suo numero di tracking «lettera di vettura» (in inglese «waybill number»). Secondo DHL te lo fornisce di solito il mittente o il negozio, quasi sempre nella conferma d'ordine o nell'e-mail di spedizione; se non lo trovi, chiedilo a loro. I messaggi On Demand Delivery di DHL arrivano invece per SMS o e-mail, con un link. Altri posti dove cercarlo: [dove si trova il codice tracking](guide:find-tracking-number).
+Il numero di tracking di DHL Express è la lettera di vettura (in inglese «waybill number»). Cercalo nell'e-mail di spedizione del negozio o nella pagina del tuo ordine; anche un link di tracking di MyDHL+ lo contiene, dopo `id=`. Altri posti dove cercarlo: [dove si trova il codice tracking](guide:find-tracking-number).
 
-DHL Express descrive due forme (cifre inventate):
-
-| Forma | Che cos'è |
+| Forma (cifre inventate) | Che cos'è |
 | --- | --- |
-| `1234567891` | La lettera di vettura: 10 cifre, il numero con cui segui tutta la spedizione. |
-| `JD014600001234567890` | L'identificativo del collo: 20 caratteri che iniziano con `JD`, uno per ogni pacco della spedizione. |
+| `1234567891` | La lettera di vettura: 10 cifre, il numero con cui segui tutta la spedizione. L'ultima è una cifra di controllo. |
+| `JD014600001234567890` | L'identificativo del collo: `JD01` più 16 cifre, stampato come `(J)JD…` sotto il codice a barre inferiore dell'etichetta. Ogni pacco della spedizione ha il suo, che riporta alla lettera di vettura. |
 
-Anche Mondial Relay, Relais Colis, TIPSA, Estafeta e DHL eCommerce Iberia usano numeri di 10 cifre, quindi guarda quale corriere nomina l'e-mail del negozio. Un numero di un'altra forma è con ogni probabilità di un'altra divisione di DHL, come DHL eCommerce o [DHL Paket](carrier:dhl), che hanno un tracking tutto loro.
+Anche Mondial Relay, Relais Colis, TIPSA, Estafeta, Packeta, DHL eCommerce Iberia e [DHL Paket](carrier:dhl) usano numeri di 10 cifre, quindi guarda quale corriere nomina l'e-mail del negozio.
 
-DHL ricicla periodicamente i numeri di lettera di vettura, quindi il tracking può mostrare per poco tempo i dati di un'altra spedizione. Il tuo pacco va comunque al suo indirizzo.
+DHL riusa i numeri di lettera di vettura: con un numero possono comparire scansioni di una spedizione precedente, che Peek ignora.
 
 ## Stati del tracking DHL Express: cosa significano
 
-Il tracking di DHL Express che legge Peek scrive gli stati in inglese, e molti finiscono con il centro DHL: per esempio `Processed at` seguito da città e Paese. Ecco quelli che vedi più spesso, nell'ordine in cui un pacco li incontra:
+Queste sono le scansioni che Peek legge da DHL Express, nell'inglese di DHL, più o meno nell'ordine in cui un pacco le incontra, con lo stato che Peek mostra per ciascuna. Molte finiscono con il centro DHL: per esempio `Processed at` seguito da città e Paese.
 
-| Stato DHL Express | Cosa vuol dire per te |
-| --- | --- |
-| `Shipment information received` | Il mittente ha creato la spedizione e la lettera di vettura. DHL non ha ancora il pacco. |
-| `Shipment picked up` | Un corriere DHL Express l'ha ritirato dal mittente. |
-| `Arrived at DHL Sort Facility` | È arrivato in un centro di smistamento; lo vedrai più volte. |
-| `Shipment has departed from a DHL facility` | È ripartito verso la tappa successiva. |
-| `Customs clearance status updated. Note - The Customs clearance process` … | La dogana del Paese di destinazione lo sta trattando. |
-| `Clearance processing complete at` | La dogana l'ha sdoganato. |
-| `Arrived at DHL Delivery Facility` | È nel centro DHL che consegna nella tua zona. |
-| `Shipment is out with courier for delivery` | Il corriere ce l'ha e sta venendo da te. |
-| `Delivery attempted but no response at Consignee address` | Il corriere è passato e non ha risposto nessuno. Il «consignee» sei tu. |
-| `On Hold Awaiting for Payment of Shipment Related Fees` | Aspetta il pagamento di dazi e tasse di importazione. |
-| `Shipment is on hold` | Si è fermato a un punto di controllo. Contatta DHL per sapere perché. |
-| `Delivered` | DHL l'ha consegnato al destinatario, cioè a te. |
+| Scansione DHL Express | Peek mostra | Cosa vuol dire |
+| --- | --- | --- |
+| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Registrato | Il mittente ha mandato a DHL i dati della spedizione. |
+| `Shipment picked up`, `Shipment accepted` | Preso in carico | DHL Express ha il pacco. |
+| `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | In transito | Viaggia nella rete di DHL. |
+| `Scheduled to depart on the next planned movement` | In transito | Aspetta in un centro il prossimo camion o volo. |
+| `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | In dogana | Sta passando la dogana (vedi sotto). |
+| `Payment is received and recorded for shipment related fees` | In dogana | Dazi o spese sono pagati; resta in dogana finché lo sdoganamento non è finito. |
+| `Clearance processing complete at` | In transito | La dogana ha finito e il pacco riparte. |
+| `Arrived at DHL Delivery Facility` | In transito | È arrivato al centro DHL che lo consegna. |
+| `Shipment is out with courier for delivery` | In consegna | Un corriere te lo sta portando. |
+| `Delivery attempted but no response at Consignee address`, `Delivery attempt could not be completed` | Tentativo di consegna | La consegna non è riuscita. Il «consignee» sei tu, il destinatario. |
+| `Shipment is scheduled for delivery` | In transito | È prevista una consegna in un giro successivo, per esempio dopo un tentativo mancato. |
+| `Awaiting collection by the consignee` | Pronto per il ritiro | Ti aspetta in un centro DHL perché tu lo ritiri. |
+| `Delivered` | Consegnato | È stato consegnato. |
+| `Shipment is on hold` | Problema segnalato | DHL ha fermato la spedizione per ora. |
+| `Shipment arrived at incorrect facility. It will be sent to the correct destination` | Problema segnalato | È finito nel centro sbagliato e prosegue verso quello giusto, in ritardo. |
+| `Returned to shipper` | Restituito al mittente | Torna al mittente. |
 
-La riga sulla dogana può comparire subito dopo che il pacco ha lasciato il Paese di partenza, perché lo sdoganamento può iniziare durante il viaggio. Serve a vedere presto se la dogana chiede altre informazioni: secondo le FAQ italiane di DHL, «Further details» (+) mostra la conferma dello sdoganamento o il motivo per cui il pacco è fermo in dogana.
+## Consegna DHL Express mancata
 
-`Processed at` e `Shipment is in transit to destination` sono normali tappe del viaggio. La città di consegna che vedi è quella del centro di servizio DHL, non per forza la tua. `Returned to Shipper` vuol dire che il pacco torna al mittente, dopo un problema in dogana, un rifiuto o dazi non pagati.
+Dopo un tentativo mancato il tracking mostra `Delivery attempted but no response at Consignee address` o `Delivery attempt could not be completed`. Se poi compare `Shipment is scheduled for delivery`, è previsto un nuovo tentativo; `Awaiting collection by the consignee` vuol dire che il pacco ti aspetta in un centro DHL perché tu lo ritiri. Per cambiare la consegna rivolgiti a DHL Express, sul suo sito o nella sua app: Peek non può cambiarla. Altri passi in [consegna mancata](guide:missed-delivery) e [pacco non ritirato](guide:uncollected-parcel).
 
-## Consegna DHL Express mancata: giacenza e On Demand Delivery
+## Dazi e dogana sui pacchi DHL Express
 
-Per DHL Express Italia, se la consegna non riesce il corriere prova a chiamarti al numero di telefono scritto sulla lettera di vettura e passa una seconda volta. Se anche questa va a vuoto, il pacco «rimane in giacenza presso la filiale DHL Express più vicina, in attesa di istruzioni». Per dare nuove istruzioni contatta il Servizio Clienti.
+Un pacco che arriva da fuori UE, o dall'estero se abiti in Svizzera, può richiedere dazi o tasse. Finché è in dogana, il tracking mostra `Customs clearance status updated…`, `Processed for clearance at` o `Clearance event`, poi `Payment is received and recorded for shipment related fees` quando le spese sono pagate e `Clearance processing complete at` quando la dogana lo rilascia.
 
-Con [On Demand Delivery](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=IT&lang=it), gratuito, inserisci la lettera di vettura come ospite e scegli tra fino a sei opzioni: lasciare il pacco in un luogo sicuro senza firma, cambiare la data, lasciarlo a un vicino o al portiere, ritirarlo in un DHL Express Service Point o in un locker, farlo consegnare a un altro indirizzo, oppure la «Giacenza per vacanze», che rimanda la consegna fino a 30 giorni. Le opzioni e i canali di notifica cambiano da Paese a Paese. Le notifiche di DHL arrivano per e-mail, SMS, WhatsApp o con l'app DHL Express Mobile.
+- **Italia**: secondo Your Europe, in tutta l'UE agli ordini fino a 150 euro comprati online da paesi extra UE si applica un dazio di 3 euro per articolo, in aggiunta all'IVA e alle spese di consegna. A riscuoterlo è il venditore o il vettore.
+- **Svizzera (Ticino)**: secondo l'UDSC, nel traffico postale e di corriere l'imposizione la fa il trasportatore, e solo lui può aiutarti a cercare un invio.
 
-**Dazi e tasse.** Di solito DHL paga per te dazi e tasse di importazione e te li chiede prima o al momento della consegna, e in genere non consegna il pacco finché non sono pagati. Se il negozio ha scelto la formula Duty Tax Paid, non paghi nulla. Nel Regno Unito e in Francia le guide tariffarie 2026 di DHL aggiungono un costo per l'anticipo dei dazi; per l'Italia o la Svizzera controlla la Service and Rate Guide di DHL Express del Paese. In Ticino la pagina contatti di DHL Express Svizzera offre il pagamento online di dazi e IVA. Più dettagli in [pacco fermo in dogana](guide:customs).
+Altro in [pacco fermo in dogana](guide:customs).
 
-## Pacco DHL Express fermo, in ritardo, smarrito o danneggiato
+## Pacco DHL Express fermo, in ritardo o smarrito
 
-Quando il tracking ti dice di contattare DHL, di solito mancano informazioni, spesso per un indirizzo sbagliato, e secondo DHL basta contattare il Servizio Clienti per risolvere in fretta. Anche per `Shipment is on hold` DHL dice di contattarla per sapere il motivo e seguire le sue istruzioni. La pagina sugli stati di DHL Malaysia consiglia di contattare DHL se il tracking resta uguale per più di 3 giorni; leggi anche [perché il tracking non si aggiorna](guide:tracking-not-updating).
+Se il tracking è fermo, o mostra `Shipment is on hold`, leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
-Per un pacco smarrito, in ritardo o danneggiato i moduli di reclamo di DHL accettano la richiesta dal mittente, dal destinatario o da chi ha pagato il trasporto, entro 30 giorni. Sui moduli di DHL Express Italia i 30 giorni partono dall'accettazione della spedizione, su quelli di altri Paesi dalla consegna: non aspettare. Per un danno tieni il contenuto e l'imballaggio originale e prepara una prova del valore. Sui moduli italiani DHL dice che uno specialista risponde entro 1 giorno lavorativo.
+Se hai comprato da un negozio, il tuo interlocutore è lui, anche se il pacco lo porta DHL Express. Secondo Your Europe, nell'UE il commerciante deve consegnare entro 30 giorni, salvo una data diversa concordata, ed è responsabile dei danni alla merce dalla spedizione alla consegna. Se il pacco non arriva, sollecita il venditore e concedigli un'ulteriore proroga ragionevole; se non consegna nemmeno entro quella, puoi recedere dal contratto ed essere rimborsato il prima possibile.
 
-## DHL Express Italia contatti: servizio clienti e WhatsApp
-
-I canali di DHL Express per chi riceve un pacco, come li elencavano le pagine contatti di MyDHL+ il 13 ottobre 2026:
-
-- **Italia**: Servizio Clienti 199.199.345, dal lunedì al venerdì dalle 8.00 alle 18.30 (la pagina non indica il costo della chiamata). Chat 24 ore su 24 e WhatsApp sulla pagina [Aiuto e Supporto](https://mydhl.express.dhl/it/it/help-and-support.html#/contact_us).
-- **Svizzera e Ticino**: 0848 711 711 (CHF 0.08 al minuto), dal lunedì al venerdì dalle 7.30 alle 18.00. Chat 24 ore su 24 e WhatsApp.
-
-> DHL mette in guardia dagli SMS falsi con link accorciati, un mittente generico come «Delivery» o un prefisso di un Paese inatteso. Gli unici pagamenti che DHL chiede per e-mail o SMS sono dazi e tasse, e prima ti manda un codice monouso. Inoltra uno screenshot del messaggio, numero compreso, a phishing@dhl.com.
+**Risulta consegnato ma il pacco non c'è?** La pagina di tracking di DHL può mostrare la firma, che Peek non conserva. Controlla sul sito di DHL, poi contatta il venditore. Altri passi in [pacco consegnato ma non ricevuto](guide:delivered-not-received) e [pacco smarrito](guide:lost-parcel).
 
 ## Seguire un pacco DHL Express con Peek
 
@@ -81,38 +77,27 @@ Mostra lo stato, ogni scansione con il suo centro DHL su una mappa e il Paese di
 
 ### La lettera di vettura DHL è il numero di tracking?
 
-Sì. Per DHL Express la lettera di vettura di 10 cifre segue tutta la spedizione, mentre l'identificativo `JD` riguarda un singolo collo.
+Sì. Per DHL Express la lettera di vettura di 10 cifre segue tutta la spedizione, mentre l'identificativo `JD01` riguarda un singolo collo e riporta alla lettera di vettura.
 
 ### DHL e DHL Express sono la stessa cosa?
 
-No: sono divisioni separate dello stesso gruppo, ognuna con il suo tracking. Un pacco senza lettera di vettura di 10 cifre di solito è di DHL eCommerce o di DHL Paket.
+Non in Peek: DHL Express è un corriere a sé, separato da [DHL Paket](carrier:dhl) e dai corrieri DHL eCommerce, ognuno con i suoi numeri e il suo tracking. Un pacco senza lettera di vettura di 10 cifre né identificativo `JD01` di solito è di uno di loro.
 
 ### Perché la lettera di vettura DHL risulta non valida?
 
-Può essere il numero di un'altra divisione di DHL: le lettere di vettura DHL Express hanno esattamente 10 cifre. Una lettera di vettura appena creata mostra solo `Shipment information received` finché DHL non ha il pacco.
+Spesso è il numero di un altro corriere di DHL: le lettere di vettura DHL Express hanno esattamente 10 cifre e l'ultima è una cifra di controllo, quindi un numero con un errore di battitura di solito non supera il controllo. Una lettera di vettura appena creata può mostrare solo `Shipment information received` finché DHL non ha preso in carico il pacco.
 
 ### Si può tracciare DHL Express senza lettera di vettura?
 
-Sì, se hai il riferimento del mittente: DHL Express offre il tracciamento per riferimento (Shipper's Reference Tracking). Altrimenti chiedi la lettera di vettura al mittente o al negozio.
+Non in Peek: servono la lettera di vettura di 10 cifre o un identificativo `JD01` dell'etichetta. Chiedi la lettera di vettura al negozio o al mittente.
 
-### DHL Express Italia ha un numero verde?
+### Un SMS di DHL che chiede di pagare è una truffa?
 
-La pagina contatti non ne indica uno: per i destinatari in Italia DHL Express dà il Servizio Clienti 199.199.345, dal lunedì al venerdì dalle 8.00 alle 18.30, senza dire quanto costa la chiamata. Ci sono anche la chat, attiva 24 ore su 24, e WhatsApp.
+Può esserlo. La Polizia Postale ha segnalato una campagna di smishing contro chi compra online e sceglie note aziende di spedizione: dopo gli SMS veri del corriere, nella stessa chat arriva un messaggio falso che dice che il pacco è al centro di spedizione e invita a cliccare un link. Non dare dati personali o bancari tramite link ricevuti via SMS o e-mail: cerca il numero tu stesso sul sito di DHL o in Peek, e se ti chiama un presunto corriere verifica contattando direttamente la società di spedizione. Altro in [truffa pacco via SMS](guide:delivery-scam-texts).
 
 :::sources
-- [DHL Express: Aiuto e Supporto (Italia)](https://mydhl.express.dhl/it/it/help-and-support.html#/contact_us) – Servizio Clienti 199.199.345, orari, chat, WhatsApp
-- [DHL Express: FAQ – Ricerca e Monitoraggio (Italia)](https://mydhl.express.dhl/it/it/help-and-support/faqs/tracking-monitoring.html) – lettera di vettura, Further details, numeri riciclati, città del centro di servizio, messaggio «contatta DHL»
-- [DHL Express: Tracking DHL Express (Italia)](https://www.dhl.com/it-it/home/express/businesses/tracking-your-shipments.html) – telefonata, secondo tentativo, giacenza nella filiale più vicina
-- [DHL: On Demand Delivery (Italia)](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=IT&lang=it) – sei opzioni, Giacenza per vacanze fino a 30 giorni, notifiche, disponibilità per Paese
-- [DHL Express: FAQ – Dazi e tasse (Italia)](https://mydhl.express.dhl/it/it/help-and-support/faqs/duties-and-taxes.html) – DHL anticipa dazi e tasse, li paga il destinatario
-- [DHL: Prevenzione delle frodi](https://www.dhl.com/it-it/home/footer/fraud-awareness.html) – SMS falsi, pagamenti solo per dazi con codice monouso, phishing@dhl.com
-- [DHL Express: Hilfe und Support (Svizzera)](https://mydhl.express.dhl/ch/de/help-and-support.html#/contact_us) – 0848 711 711, costo, orari, pagamento online di dazi e IVA
-- [DHL Express: Register a Claim for Damage (Italia)](https://mydhl.express.dhl/it/en/forms/claim-for-damage.html) – chi può fare reclamo, 30 giorni dall'accettazione, imballaggio, prova del valore, risposta entro 1 giorno lavorativo
-- [DHL Express: Claim for Loss (Italia)](https://mydhl.express.dhl/it/en/forms/claim-for-loss.html) – stessi termini per lo smarrimento
-- [DHL Express: Email Us – Claim (Regno Unito)](https://mydhl.express.dhl/gb/en/forms/csm/claim.html) – 30 giorni dalla consegna
-- [DHL Express: FAQs – Tracking and Monitoring (Spagna, inglese)](https://mydhl.express.dhl/es/en/help-and-support/faqs/tracking-monitoring.html) – 10 cifre, identificativo JD, altre divisioni, Shipper's Reference Tracking
-- [DHL Express: FAQs – Duties and Taxes (Regno Unito)](https://mydhl.express.dhl/gb/en/help-and-support/faqs/duties-and-taxes.html) – accordo del negozio con DHL, nessuna consegna prima del pagamento, Duty Tax Paid
-- [DHL: Shipment Tracking Status Explained (Malaysia)](https://www.dhl.com/discover/en-my/ship-with-dhl/track/tracking-status) – significato degli stati, consiglio dei 3 giorni
-- [DHL: Service Client (Francia)](https://www.dhl.com/fr-fr/home/customer-service.html) – il numero arriva dal mittente o dal negozio
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek per DHL Express
+- [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – 30 giorni, proroga, recesso e rimborso, responsabilità del commerciante, dazio di 3 euro per articolo riscosso dal venditore o dal vettore
+- [UDSC: Spese di imposizione e tracciabilità dei colli](https://www.bazg.admin.ch/it/costi-imposizione-e-tracciamento-pacchi) – imposizione fatta dal trasportatore, ricerca dell'invio (Svizzera)
+- [Polizia Postale: Nuova campagna di smishing «Il tuo pacco è stato consegnato al centro di spedizione»](https://www.commissariatodips.it/notizie/articolo/nuova-campagna-di-smishing-il-tuo-pacco-e-stato-consegnato-al-centro-di-spedizione/index.html) – SMS falso nella stessa chat del corriere, verificare con la società di spedizione
+- [Universal Parcel Scraper: DHL Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dhl-express) – forme della lettera di vettura e dell'identificativo del collo, cifra di controllo, altri numeri di 10 cifre, lettere di vettura riusate, scansioni di DHL Express e stato di Peek per ciascuna, firma sul sito di DHL, cosa legge Peek da DHL Express
 :::

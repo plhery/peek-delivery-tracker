@@ -6,69 +6,76 @@ published: 2026-10-13
 updated: 2026-10-27
 ---
 
-DHL Express est la branche de messagerie express internationale du groupe DHL : si ton colis arrive par DHL Express, c'est que la boutique a un contrat avec DHL pour livrer ses commandes en ligne. Pour suivre ton colis, saisis son numéro de bordereau à 10 chiffres sur le site de DHL, ouvre le lien de l'e-mail ou du SMS de DHL, ou colle le numéro dans le champ ci-dessus. La boutique te le donne en général dans son e-mail de confirmation ou d'expédition.
+Colle un numéro de bordereau DHL Express, ou un lien de suivi MyDHL+, dans le champ ci-dessus pour suivre ton colis. DHL propose aussi son propre suivi, sur son site (MyDHL+) et dans l'application DHL Express.
 
 ## Numéro de suivi DHL Express : le bordereau à 10 chiffres
 
 En français, DHL parle de « numéro de bordereau » ou de « lettre de transport » (le « waybill number » des pages en anglais). Selon DHL, c'est l'expéditeur ou la boutique qui te le fournit, le plus souvent dans l'e-mail de confirmation de commande ou d'expédition ; sinon, demande-le-lui. Les messages On Demand Delivery de DHL arrivent par SMS ou par e-mail, avec un lien. Plus de pistes dans [où trouver son numéro de suivi](guide:find-tracking-number).
 
-DHL Express décrit deux formes :
+Un lien de suivi MyDHL+ contient aussi le numéro, après `id=`.
 
 | Forme (chiffres inventés) | Ce que c'est |
 | --- | --- |
-| `1234567891` | Le bordereau : 10 chiffres, le numéro qui suit tout l'envoi. |
-| `JD014600001234567890` | L'identifiant de pièce : 20 caractères commençant par `JD`, un par colis de l'envoi. |
+| `1234567891` | Le bordereau : 10 chiffres, le numéro qui suit tout l'envoi. Le dernier chiffre est une clé de contrôle. |
+| `JD014600001234567890` | L'identifiant de pièce : `JD01` puis 16 chiffres, imprimé `(J)JD…` sous le code-barres du bas de l'étiquette. Chaque colis de l'envoi a le sien, qui renvoie au bordereau. |
 
-[Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), TIPSA, Estafeta et DHL eCommerce Iberia utilisent aussi des numéros à 10 chiffres : regarde quel transporteur nomme l'e-mail de la boutique. Un numéro avec des lettres ou d'une autre longueur appartient très probablement à une autre division de DHL, comme DHL eCommerce ou [DHL Paket](carrier:dhl), qui a son propre suivi.
+[Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), TIPSA, Estafeta, Packeta, DHL eCommerce Iberia et [DHL Paket](carrier:dhl) utilisent aussi des numéros à 10 chiffres : regarde quel transporteur nomme l'e-mail de la boutique.
 
-DHL réutilise de temps en temps ses numéros de bordereau : le suivi peut donc afficher un moment les étapes d'un autre envoi. Ton colis, lui, va bien à ta propre adresse. Autre surprise possible : la ville affichée à l'enlèvement et à la livraison est celle de l'agence DHL qui s'en occupe, pas forcément la tienne.
+DHL réutilise ses numéros de bordereau : un numéro peut ramener les scans d'un envoi plus ancien, que Peek ignore.
 
 ## DHL Express suivi colis : ce que veulent dire les statuts
 
-Le suivi de DHL Express affiche ces lignes en anglais. Beaucoup se terminent par le site concerné, par exemple `Processed at` suivi d'une ville et d'un pays.
+Voici les libellés de scan que Peek lit chez DHL Express, dans l'anglais de DHL, à peu près dans l'ordre où un colis les rencontre, avec le statut que Peek affiche pour chacun. Beaucoup se terminent par le site concerné, par exemple `Processed at` suivi d'une ville et d'un pays.
 
-| Statut DHL Express | Ce que ça veut dire pour toi |
-| --- | --- |
-| `Shipment information received` | L'expéditeur a créé l'envoi et son bordereau. DHL n'a pas encore le colis. |
-| `Shipment picked up` | Un coursier DHL Express l'a pris chez l'expéditeur. |
-| `Arrived at DHL Sort Facility` | Il est arrivé dans un centre de tri ; tu verras cette ligne plusieurs fois. |
-| `Shipment has departed from a DHL facility` | Il repart vers l'étape suivante. |
-| `Customs clearance status updated. Note - The Customs clearance process` … | La douane du pays de destination traite l'envoi. |
-| `Clearance processing complete at` | La douane l'a dédouané. |
-| `Arrived at DHL Delivery Facility` | Il est à l'agence qui livre ta zone. |
-| `Shipment is out with courier for delivery` | Un coursier l'a et vient vers toi. |
-| `Delivery attempted but no response at Consignee address` | Le coursier est passé et personne n'a répondu. Le « consignee », c'est toi. |
-| `On Hold Awaiting for Payment of Shipment Related Fees` | Il attend le paiement des droits et taxes d'importation. |
-| `Shipment is on hold` | Il est arrêté à une étape. Contacte DHL pour savoir pourquoi. |
-| `Delivered` | DHL l'a livré au destinataire : toi. |
+| Scan de DHL Express | Peek affiche | Ce que ça veut dire |
+| --- | --- | --- |
+| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Étiquette créée | L'expéditeur a transmis à DHL les données de l'envoi. |
+| `Shipment picked up`, `Shipment accepted` | Pris en charge | DHL Express a le colis. |
+| `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | En transit | Il avance dans le réseau de DHL. |
+| `Scheduled to depart on the next planned movement` | En transit | Il attend dans un site son prochain camion ou vol. |
+| `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | À la douane | Il passe la douane (voir plus bas). |
+| `Payment is received and recorded for shipment related fees` | À la douane | Les droits ou frais sont payés ; il reste en douane jusqu'à la fin du dédouanement. |
+| `Clearance processing complete at` | En transit | La douane en a fini avec lui, il repart. |
+| `Arrived at DHL Delivery Facility` | En transit | Il est arrivé au site DHL qui va le livrer. |
+| `Shipment is out with courier for delivery` | En livraison | Un coursier te l'apporte. |
+| `Delivery attempted but no response at Consignee address`, `Delivery attempt could not be completed` | Tentative de livraison | La livraison n'a pas pu se faire. Le « consignee », c'est toi, le destinataire. |
+| `Shipment is scheduled for delivery` | En transit | Une livraison est prévue lors d'une tournée suivante, par exemple après une tentative manquée. |
+| `Awaiting collection by the consignee` | Prêt à être retiré | Il t'attend dans un site DHL pour que tu viennes le chercher. |
+| `Delivered` | Livré | Il est livré. |
+| `Shipment is on hold` | Problème signalé | DHL a arrêté l'envoi pour l'instant. |
+| `Shipment arrived at incorrect facility. It will be sent to the correct destination` | Problème signalé | Il a été trié vers le mauvais site et repart vers le bon, avec du retard. |
+| `Returned to shipper` | Retourné à l’expéditeur | Il repart chez l'expéditeur. |
 
-La ligne de douane peut apparaître juste après le départ du pays d'origine, car le dédouanement peut commencer pendant le transport. La FAQ française de DHL l'appelle « statut douanier mis à jour » : cette ligne te montre très tôt si la douane a besoin d'informations. Clique sur « Afficher les détails » pour en savoir plus.
+## Livraison DHL Express manquée
 
-`Processed at` et `Shipment is in transit to destination` sont de simples étapes de transit. `Returned to Shipper` veut dire que le colis repart chez l'expéditeur, après un problème de douane, un refus ou des frais impayés.
+Après une tentative manquée, le suivi affiche `Delivery attempted but no response at Consignee address` ou `Delivery attempt could not be completed`. Si `Shipment is scheduled for delivery` suit, une nouvelle tentative est prévue ; `Awaiting collection by the consignee` veut dire que le colis t'attend dans un site DHL pour que tu ailles le chercher. Pour modifier la livraison, passe par DHL Express, sur son site ou dans son application : Peek ne peut pas la modifier. Plus de pistes dans [livraison manquée](guide:missed-delivery) et [colis non retiré](guide:uncollected-parcel).
 
-## Livraison DHL Express : absence, point relais et droits de douane
+## Frais de douane sur un colis DHL Express
 
-Avec le service gratuit [On Demand Delivery](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=FR&lang=fr), tu saisis ton numéro de bordereau sans compte et tu choisis parmi six options au plus : dépôt en lieu sûr sans signature, autre date, voisin ou gardien, retrait dans un DHL Express Service Point ou une consigne, autre adresse, ou mise en attente pendant tes vacances, jusqu'à 30 jours. Les options proposées dépendent du pays. Pour une livraison à une adresse privée, le guide des tarifs 2026 de DHL Express France précise que DHL t'informe de l'avancée par e-mail ou SMS et que tu choisis ensuite ton option dans On Demand Delivery.
+Un colis venu de l'extérieur de l'UE, ou de l'étranger pour la Suisse, peut être soumis à des frais d'importation. Tant qu'il est en douane, le suivi affiche `Customs clearance status updated…`, `Processed for clearance at` ou `Clearance event`, puis `Payment is received and recorded for shipment related fees` une fois les frais payés et `Clearance processing complete at` quand la douane le libère.
 
-DHL Express Italie décrit ce qui suit une absence : le coursier essaie de t'appeler au numéro inscrit sur le bordereau et repasse une seconde fois ; ensuite, le colis attend des instructions à l'agence DHL Express la plus proche.
+- **France et Belgique** : comme partout dans l'UE depuis le 1er juillet 2026, une commande de 150 € ou moins venue de l'extérieur de l'UE est soumise à un droit de douane forfaitaire de 3 € par article, en plus de la TVA ; c'est le vendeur ou le transporteur qui le perçoit. En France métropolitaine, la douane précise que ces taxes peuvent t'être demandées à la réception du colis par le transporteur, qui peut y ajouter ses propres frais de dédouanement, sans lien avec ce que perçoit la douane.
+- **Suisse** : selon l'OFDF, c'est le transporteur qui dédouane les envois de courrier rapide, et lui seul peut t'aider à rechercher ton envoi.
 
-**Droits et taxes.** DHL paie en général les droits et taxes d'importation à ta place, puis te les réclame avant ou à la livraison : « DHL n'est pas en mesure de livrer les colis tant que ces frais n'ont pas été réglés. » Si la boutique a choisi Duty Tax Paid, tu ne paies rien. En France, le guide des tarifs 2026 ajoute des frais de « Traitement de la taxe douanière » pour les clients sans compte : 1,8 % des charges fiscales, au moins 16,67 €. Quand la douane ne peut pas libérer l'envoi, des frais de stockage s'appliquent trois jours calendaires après l'arrivée, à la charge de celui qui paie les droits. En Belgique et en Suisse, regarde le Service and Rate Guide de DHL Express de ton pays. Voir aussi [colis bloqué en douane](guide:customs).
+Plus d'infos dans [colis bloqué en douane](guide:customs).
 
-## Colis DHL Express bloqué, en retard, perdu ou abîmé
+## Colis DHL Express bloqué, en retard ou perdu
 
-Quand le suivi te demande de contacter DHL, c'est en général que DHL manque d'informations, par exemple parce que l'adresse est incorrecte : selon DHL, le service client règle « rapidement » ce problème. Pour `Shipment is on hold`, DHL conseille aussi de contacter son service client pour savoir pourquoi. Les premières étapes apparaissent en général 24 à 48 heures après la réception du numéro, une fois l'envoi arrivé chez DHL, selon la page Service Client de DHL. Si rien ne bouge ensuite, lis [pourquoi un suivi de colis ne bouge plus](guide:tracking-not-updating).
+Si le suivi ne bouge plus, ou affiche `Shipment is on hold`, lis [pourquoi un suivi de colis ne bouge plus](guide:tracking-not-updating).
 
-Pour un colis perdu, en retard ou abîmé, les formulaires de réclamation de DHL acceptent l'expéditeur, le destinataire ou celui qui a payé le transport, dans les 30 jours. Selon le pays, ce délai court depuis la prise en charge ou depuis la livraison (le formulaire suisse dit « 30 jours après la livraison ») : agis vite. En cas de dommage, garde le contenu et l'emballage, prends des photos et prépare une preuve de la valeur.
+Si tu as acheté dans une boutique, c'est à elle de te faire parvenir le colis, même quand DHL Express le transporte : dans l'UE, selon Your Europe, le commerçant répond des dommages subis par la marchandise de l'expédition jusqu'à la réception.
 
-## DHL Express suivi téléphone : le contact en France, Belgique et Suisse
+En France, selon Service-Public.fr, quand la livraison passe par le transporteur proposé par le vendeur, le vendeur est seul responsable : la perte ou l'avarie n'est à ta charge qu'une fois le colis physiquement entre tes mains. Sans date convenue, il doit livrer au plus tard 30 jours après la commande. Passé ce délai, demande-lui de livrer dans un délai supplémentaire raisonnable ; s'il ne livre toujours pas, tu peux annuler la commande, et il doit te rembourser sous 14 jours.
 
-Les canaux de DHL Express pour les destinataires, tels que ses pages de contact les listaient le 13 octobre 2026 :
+**Livré mais pas reçu ?** La page de suivi de DHL peut montrer la signature, que Peek ne garde pas. Vérifie sur le site de DHL, puis contacte la boutique. Plus de pistes dans [colis livré mais non reçu](guide:delivered-not-received) et [colis perdu](guide:lost-parcel).
+
+## DHL Express suivi téléphone : le contact en France
+
+En France, DHL Express donnait ces contacts sur ses pages le 13 octobre 2026 :
 
 - **France :** 09 69 32 93 93 pour les particuliers (« service gratuit + prix appel »), du lundi au vendredi de 8 h à 18 h et le samedi de 8 h 30 à 13 h 30. Service Douane au 01 79 51 74 25 et Service Droits et Taxes au 04 26 70 02 43 pour payer les droits et taxes d'une livraison en France (« Appel non-surtaxé, prix d'un appel local »). Chat 24 h/24 et WhatsApp sur la page [Aide et support](https://mydhl.express.dhl/fr/fr/help-and-support.html).
-- **Belgique :** Service Clients au +32 2 715 50 50, et WhatsApp au +32 289 94788 avec le message « Suivre mon colis ». La page ne donne pas d'horaires.
-- **Suisse :** 0848 711 711 (CHF 0.08 la minute), du lundi au vendredi de 7 h 30 à 18 h ; chat 24 h/24, WhatsApp et paiement en ligne des droits d'importation et de la TVA.
 
-> DHL met en garde contre les faux SMS : liens raccourcis (bit.ly), expéditeur générique comme « Delivery », indicatif de pays inattendu. Les seuls paiements que DHL demande par e-mail ou SMS sont les droits et taxes, avec un code à usage unique envoyé d'abord au destinataire. Envoie une capture d'écran du message, numéro de l'expéditeur compris, à phishing@dhl.com.
+En Belgique et en Suisse, cherche les contacts de DHL Express sur le site de DHL de ton pays.
 
 ## Suivre un colis DHL Express avec Peek
 
@@ -82,36 +89,34 @@ Tu vois le statut, chaque scan sur une carte avec son site, et le pays de destin
 
 ### Où trouver le numéro de bordereau DHL ?
 
-Dans l'e-mail de confirmation de commande ou d'expédition de la boutique, en général. Sinon, demande-le à l'expéditeur : c'est lui qui le reçoit en créant l'envoi.
+Dans l'e-mail de confirmation de commande ou d'expédition de la boutique, en général. Sinon, demande-le à la boutique ou à l'expéditeur.
 
 ### DHL et DHL Express, c'est la même chose ?
 
-Non : ce sont des divisions distinctes du même groupe, chacune avec son suivi. Un colis sans bordereau à 10 chiffres relève en général de DHL eCommerce ou de DHL Paket.
+Pas dans Peek : DHL Express y est un transporteur à part, distinct de [DHL Paket](carrier:dhl) et des transporteurs DHL eCommerce, chacun avec ses numéros et son suivi. Un colis sans bordereau à 10 chiffres ni identifiant `JD01` relève en général de l'un d'eux.
 
 ### Pourquoi mon numéro DHL Express n'est-il pas reconnu ?
 
-Souvent, c'est le numéro d'une autre division de DHL : un bordereau DHL Express a exactement 10 chiffres. Un bordereau tout neuf n'affiche que `Shipment information received` tant que DHL n'a pas le colis.
+Souvent, c'est le numéro d'un autre transporteur de DHL : un bordereau DHL Express a exactement 10 chiffres, et le dernier est une clé de contrôle, donc une faute de frappe la fait en général échouer. Un bordereau tout neuf peut n'afficher que `Shipment information received` tant que DHL n'a pas pris en charge le colis.
 
 ### Peut-on suivre un colis DHL Express sans numéro de bordereau ?
 
-Oui, avec la référence de l'expéditeur : DHL Express propose un suivi par référence (Shipper's Reference Tracking). Sinon, demande le bordereau à la boutique.
+Pas dans Peek : il lui faut le bordereau à 10 chiffres ou un identifiant `JD01` de l'étiquette. Demande le bordereau à la boutique ou à l'expéditeur.
+
+### Un SMS de DHL qui demande de payer, c'est une arnaque ?
+
+Ça peut l'être. Cybermalveillance.gouv.fr signale de faux SMS et e-mails au nom de transporteurs, qui annoncent un problème de livraison ou des frais à payer et renvoient vers un faux site qui cherche à dérober tes données personnelles et ta carte bancaire. Ne clique pas sur le lien : vérifie le vrai suivi toi-même, sur le site de DHL ou dans Peek. En France, signale le SMS au 33700 (gratuit). Plus d'infos dans [arnaque colis par SMS](guide:delivery-scam-texts).
 
 :::sources
-- [DHL Express : FAQ – Suivi et Contrôle (France)](https://mydhl.express.dhl/fr/fr/help-and-support/faqs/tracking-monitoring.html) – numéro de bordereau, réutilisation, ville de l'agence, message « contacter DHL », statut douanier mis à jour
-- [DHL Express : FAQ – Droits et taxes (France)](https://mydhl.express.dhl/fr/fr/help-and-support/faqs/duties-and-taxes.html) – DHL avance les droits, pas de livraison avant paiement
+- [DHL Express : FAQ – Suivi et Contrôle (France)](https://mydhl.express.dhl/fr/fr/help-and-support/faqs/tracking-monitoring.html) – numéro de bordereau
 - [DHL Express : Aide et support (France)](https://mydhl.express.dhl/fr/fr/help-and-support.html#/contact_us) – Service Douane, Droits et Taxes, horaires, chat, WhatsApp
-- [DHL Express : Aide et support (Belgique)](https://mydhl.express.dhl/be/fr/help-and-support.html#/contact_us) – téléphone, WhatsApp
-- [DHL Express : Aide et support (Suisse)](https://mydhl.express.dhl/ch/fr/help-and-support.html#/contact_us) – téléphone, coût, horaires
-- [DHL Express : Hilfe und Support (Schweiz)](https://mydhl.express.dhl/ch/de/help-and-support.html#/contact_us) – horaires, paiement en ligne des droits
-- [DHL : On Demand Delivery (France)](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=FR&lang=fr) – six options, vacances jusqu'à 30 jours, disponibilité selon le pays
-- [DHL Express : Guide des services et tarifs 2026 (France)](https://mydhl.express.dhl/content/dam/downloads/fr/fr/rate-guide/service_and_rate_guide_fr_fr_2026.pdf) – téléphones, frais de traitement de la taxe douanière, stockage, On Demand Delivery
-- [DHL : Service Client (France)](https://www.dhl.com/fr-fr/home/customer-service.html) – origine du numéro, 24 à 48 heures avant les premières étapes
-- [DHL : Sensibilisation à la fraude](https://www.dhl.com/fr-fr/home/footer/fraud-awareness.html) – faux SMS, paiements de droits avec code à usage unique, phishing@dhl.com
-- [DHL Express : FAQs – Tracking and Monitoring (Spain, English)](https://mydhl.express.dhl/es/en/help-and-support/faqs/tracking-monitoring.html) – bordereau à 10 chiffres, identifiant JD, autres divisions, suivi par référence
-- [DHL : Shipment Tracking Status Explained (Malaysia)](https://www.dhl.com/discover/en-my/ship-with-dhl/track/tracking-status) – sens des statuts
-- [DHL Express : Tracking (Italy, English)](https://www.dhl.com/it-en/home/express/businesses/tracking-your-shipments.html) – appel, seconde tentative, attente à l'agence
-- [DHL Express : E-Mail an uns – Forderung (Schweiz)](https://mydhl.express.dhl/ch/de/forms/csm/claim.html) – 30 jours après la livraison
-- [DHL Express : Register a Claim for Damage (Italy)](https://mydhl.express.dhl/it/en/forms/claim-for-damage.html) – qui peut réclamer, 30 jours depuis la prise en charge, emballage, preuve de valeur
-- [DHL Express : Email Us – Claim (United Kingdom)](https://mydhl.express.dhl/gb/en/forms/csm/claim.html) – photos du contenu et de l'emballage
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit chez DHL Express
+- [DHL Express : Guide des services et tarifs 2026 (France)](https://mydhl.express.dhl/content/dam/downloads/fr/fr/rate-guide/service_and_rate_guide_fr_fr_2026.pdf) – téléphones, messages On Demand Delivery
+- [DHL : Service Client (France)](https://www.dhl.com/fr-fr/home/customer-service.html) – origine du numéro
+- [Douane : Droit de douane forfaitaire de 3 euros sur les ventes à distance de biens importés](https://www.douane.gouv.fr/fiche/droit-de-douane-forfaitaire-de-3-euros-sur-les-ventes-distance-de-biens-importes) – 3 € par article jusqu'à 150 €, en vigueur depuis le 1er juillet 2026
+- [Douane : Vous achetez sur internet](https://www.douane.gouv.fr/demarche/vous-achetez-sur-internet) – taxes demandées à la réception par le transporteur, ses frais de dédouanement
+- [Your Europe : Expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_fr.htm) – 3 € par article dans l'UE, perçu par le vendeur ou le transporteur, responsabilité du commerçant jusqu'à la réception
+- [Service-Public.fr : Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – vendeur seul responsable, transfert des risques, 30 jours, délai supplémentaire, annulation, remboursement sous 14 jours
+- [OFDF : Frais de dédouanement et suivi des colis](https://www.bazg.admin.ch/fr/frais-dedouanement-et-suivi-des-colis) – dédouanement par le transporteur, recherche de l'envoi (Suisse)
+- [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – faux SMS au nom de transporteurs, vol de données et de carte bancaire, vérifier le vrai suivi, 33700
+- [Universal Parcel Scraper : DHL Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dhl-express) – formes du bordereau et de l'identifiant de pièce, clé de contrôle, autres numéros à 10 chiffres, bordereaux réutilisés, scans de DHL Express et statut Peek de chacun, signature sur le site de DHL, ce que Peek lit chez DHL Express
 :::

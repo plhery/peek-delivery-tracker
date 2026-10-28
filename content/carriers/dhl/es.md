@@ -57,12 +57,12 @@ Antes de la entrega, en dhl.de puedes retrasarla hasta seis días laborables sin
 
 Un DHL Paket International lleva siempre seguimiento internacional y seguro hasta 500 €.
 
-En España, DHL Paket no reparte: pasa el paquete a una empresa local, y las páginas de DHL no nombran siempre la misma. La ficha de España de dhl.de para particulares dice que reparte Correos. La ficha de destinos para empresas (septiembre de 2026) dice que en la península reparte DHL eCommerce Iberia o Correos, y en Canarias, Ceuta y Melilla solo Correos. Y DHL eCommerce España firmó en mayo de 2026 una alianza con CTT Express, que en España se centra en las entregas a particulares. Qué empresa tiene tu paquete te lo dicen el seguimiento o el aviso.
+En España, DHL Paket no reparte: pasa el paquete a una empresa local, y las páginas de DHL no nombran siempre la misma. La ficha de España de dhl.de para particulares dice que reparte Correos. La ficha de destinos para empresas (septiembre de 2026) dice que en la península reparte DHL eCommerce Iberia o Correos, y en Canarias, Ceuta y Melilla solo Correos. Además, DHL eCommerce y CTT firmaron el 12 de mayo de 2026 una alianza por la que CTT Express se queda con las entregas a particulares en España. Qué empresa tiene tu paquete te lo dicen el seguimiento o el aviso.
 
 DHL calcula, de forma orientativa, de 3 a 4 días laborables hasta la península. Puedes seguirlo en dhl.de, aunque la empresa local no siempre le pasa todos los eventos. Si el seguimiento se queda corto, prueba el número en la web de la empresa que reparte:
 
 - **[Correos](carrier:correos-spain):** si no estás, te deja un aviso de llegada o te manda un SMS. El paquete está en la oficina desde el día siguiente y tienes 15 días para recogerlo, con tu DNI. Otra persona puede hacerlo con tu autorización, su DNI y una fotocopia del tuyo.
-- **[DHL eCommerce Iberia](carrier:dhl-ecommerce-es):** si te lo deja en un ServicePoint, tienes 10 días naturales, con un recordatorio a los 7. Después vuelve al remitente.
+- **[DHL eCommerce Iberia](carrier:dhl-ecommerce-es):** si te lo deja en una tienda ServicePoint, el estado pasa a `Delivered to DHL ServicePoint, ready for collection by the recipient`. Cuánto tiempo te lo guardan, pregúntaselo a DHL.
 - **[CTT Express](carrier:ctt-express):** si el seguimiento o el aviso te dan un número de CTT Express, síguelo con ese número.
 
 Canarias forma parte del territorio aduanero de la UE, pero tiene su propio IVA: el paquete lleva documentos de aduana y puede haber impuestos al recibirlo. Mira [cómo funcionan los gastos de aduana](guide:customs). De Alemania a la península y Baleares no hay aduana.
@@ -83,7 +83,6 @@ Según las páginas de cada empresa, consultadas en octubre de 2026:
 
 - **DHL Paket (Alemania):** 0228 4333112, o +49 228 4333112 desde fuera de Alemania. De lunes a viernes de 8 a 20 h y los sábados de 8 a 18 h, salvo festivos nacionales en Alemania. Ten a mano el número de seguimiento. En dhl.de también hay chat y formulario.
 - **Correos:** 915 197 197 o 900 400 004, de lunes a viernes no festivos de 8 a 20 h y los sábados de 9 a 13 h.
-- **DHL eCommerce Iberia:** +34 919 19 92 26, el teléfono que DHL España da a los particulares que esperan un envío de DHL eCommerce.
 
 DHL avisa de SMS falsos con enlaces acortados o prefijos de país raros, y de tarjetas de aviso falsas con códigos QR: DHL nunca te pide datos personales a través del QR de una tarjeta. Más en [SMS falsos de paquetes](guide:delivery-scam-texts).
 
@@ -130,7 +129,7 @@ No. Ni el DHL Päckchen ni el DHL Päckchen International tienen seguimiento; so
 - [DHL: My parcel was delivered, but there's a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – vecino, parte de daños, recogida gratis, 7 días
 - [DHL: Ihr Versand nach Spanien](https://www.dhl.de/de/privatkunden/pakete-versenden/weltweit-versenden/land/spanien.html) – reparte Correos, 3 a 4 días laborables
 - [DHL: Ihr Versand auf die Kanarischen Inseln](https://www.dhl.de/de/privatkunden/pakete-versenden/weltweit-versenden/land/kanarische-inseln.html) – Canarias, IVA propio, documentos de aduana
-- [DHL: DHL Paket International Infoblatt Destinationen](https://www.dhl.de/dam/jcr:95e6bbfa-3b8a-4686-957b-7ac5615f891d/dhl-paket-international-infoblatt-destinationen-de-092026.xlsx) – DHL eCommerce Iberia o Correos en la península, solo Correos en Canarias, Ceuta y Melilla, ServicePoint 10 días y Correos 15, eventos incompletos
+- [DHL: DHL Paket International Infoblatt Destinationen](https://www.dhl.de/dam/jcr:95e6bbfa-3b8a-4686-957b-7ac5615f891d/dhl-paket-international-infoblatt-destinationen-de-092026.xlsx) – DHL eCommerce Iberia o Correos en la península, solo Correos en Canarias, Ceuta y Melilla, eventos incompletos
 - [DHL: Export FAQ](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/export.html) – seguimiento y seguro hasta 500 €, Päckchen International sin seguimiento
 - [DHL: International problems and solutions](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – web del socio local, IPZ Fráncfort, 8 semanas, contenido incompleto en el extranjero, atención al cliente ve el mismo seguimiento
 - [DHL: 0228 4333112](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal-telefon.html) – teléfono y horario
@@ -138,8 +137,6 @@ No. Ni el DHL Päckchen ni el DHL Päckchen International tienen seguimiento; so
 - [DHL: Security notices](https://www.dhl.de/en/toolbar/footer/sicherheitshinweise.html) – SMS falsos, prefijos raros, tarjetas con QR
 - [Correos: Gestionar la entrega de un envío con Correos](https://www.correos.es/es/es/particulares/recibir) – aviso de llegada, SMS, 15 días, DNI, autorización
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – teléfonos y horario de Correos
-- [DHL eCommerce España: Entrega modificada a ServicePoint](https://www.dhl.com/es-es/ecommerce/home/private-shipments/modify-the-delivery/deliveries-at-collection-points.html) – 10 días naturales, recordatorio a los 7, devolución
-- [DHL eCommerce España: Alianza estratégica con CTT Express](https://www.dhl.com/es-es/ecommerce/home/alianza-estrategica-dhl-ecommerce-ctt-espress.html) – mayo de 2026, CTT Express se centra en las entregas a particulares en España
-- [DHL España: Localice su contacto](https://www.dhl.com/es-es/home/servicio-al-cliente/find-your-contact.html) – teléfono para particulares de DHL eCommerce
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que Peek lee y muestra de DHL Paket
+- [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – alianza firmada el 12 de mayo de 2026, entregas a particulares en España con CTT Express
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que Peek lee y muestra de DHL Paket, estado de ServicePoint de DHL eCommerce Iberia
 :::

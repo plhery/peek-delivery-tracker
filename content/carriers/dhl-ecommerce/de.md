@@ -6,18 +6,18 @@ published: 2026-10-11
 updated: 2026-10-27
 ---
 
-DHL eCommerce ist der Bereich von DHL, der Pakete für große Online-Shops verschickt, oft aus den USA oder Asien. Es sortiert dein Paket in seinen eigenen Verteilzentren und übergibt es dann einem Zusteller im Zielland: der Post vor Ort oder einem anderen Paketdienst. Verfolgen kannst du es mit der Nummer aus der Versandmail des Shops auf Webtrack, der Tracking-Seite von DHL eCommerce, oder im Feld oben.
+DHL eCommerce, früher DHL Global Mail, ist der Paketbereich von DHL für Online-Shops. Es sortiert dein Paket in seinen eigenen Verteilzentren und übergibt es dann einem Zusteller im Zielland: der Post vor Ort oder einem anderen Paketdienst. Verfolgen kannst du es mit der Nummer aus der Versandmail des Shops auf Webtrack, der Tracking-Seite von DHL eCommerce, oder im Feld oben.
 
 ## DHL eCommerce Trackingnummer: so sieht sie aus
 
-Laut DHL ist die Tracking-ID zwischen 10 und 39 Zeichen lang, Buchstaben und Ziffern. Du bekommst sie normalerweise vom Absender oder Onlineshop, oft in der Bestellbestätigung oder der Versandbenachrichtigung. Hat dir der Shop einen eigenen Tracking-Link geschickt, sollst du laut DHL diesen nutzen. Keine Nummer bekommen? Dann frag den Shop.
+Nummern von DHL eCommerce haben mindestens zehn Zeichen und beginnen meist mit GM. Keine Nummer bekommen? Dann frag den Shop.
 
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
-| `GM0000000000000000` | GM und 16 bis 18 Ziffern: die GM-Nummer, die DHL auch Kundenbestätigungsnummer (Customer Confirmation Number) nennt. |
+| `GM0000000000000000` | GM und 16 bis 18 Ziffern: die GM-Nummer, die übliche Form bei DHL eCommerce. |
 | `0000000000000000` | 16 oder 17 Ziffern: eine weitere Form von DHL eCommerce. |
 | `0031000000000000000000000000000` | 0031 und 27 Ziffern: ebenfalls DHL eCommerce. |
-| `9261000000000000000000` | 22 Ziffern mit 9261 oder 9361 vorne: eine Nummer im Format von USPS, für Pakete innerhalb der USA. |
+| `9261000000000000000000` | 22 Ziffern mit 9261 oder 9361 vorne: die USPS-Nummer, die ein Paket in den USA nach der Übergabe an USPS trägt. |
 
 In Webtracks Detailbox steht unter „Delivery by“, welcher Paketdienst zustellt. Auf Webtrack kannst du bis zu 10 Nummern auf einmal eingeben, getrennt durch Kommas.
 
@@ -68,28 +68,28 @@ Adresse ändern: Webtracks deutsche FAQ sagt, das gehe nur, wenn beide Adressen 
 
 ## DHL eCommerce Paket hängt, ist verloren oder kommt zurück
 
-**Noch keine Scans.** Laut DHL erscheinen die ersten Ereignisse 24 bis 48 Stunden, nachdem das Paket im Lager bearbeitet wurde. Findet Webtrack dann noch nichts, sollst du die Nummer prüfen und den Shop fragen.
+**Noch keine Scans.** Laut Webtracks FAQ erscheinen die ersten Ereignisse meist innerhalb von 24 bis 48 Stunden; gibt es nach 48 Stunden noch keine, frag den Shop. Findet Webtrack nichts, sollst du die Nummer prüfen und dich an den Shop wenden.
 
-**Tagelang kein Update.** DHL nennt Wetter, Feiertage, Zoll, Streiks und Rückstaus. Bei Paketen in den USA rechnet DHL nach der Übergabe an USPS mit 1 bis 3 Tagen ohne Update. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Tagelang kein Update.** Webtracks FAQ nennt Wetter, Feiertage, Zoll, Streiks und andere Ereignisse, auf die DHL keinen Einfluss hat. Bei Paketen in den USA kündigt schon der Übergabe-Scan bis zu 3 Tage ohne Update an. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Nicht angekommen.** DHLs Regel: Ist die Sendung zehn Tage nach dem erwarteten Zustelldatum noch nicht da, wende dich an den Absender oder Onlineshop. Er hat den Vertrag mit DHL und kann eine Suche nach dem verlorenen Paket starten. Kann dir der Verkäufer keinen aktuellen Status geben, verweist Webtracks deutsche FAQ an den Kundenservice von DHL eCommerce Solutions. Eine Frist für Reklamationen von Empfängern veröffentlicht DHL nicht.
+**Nicht angekommen.** Ist das Paket nach dem erwarteten Lieferzeitraum nicht da, wende dich laut Webtracks FAQ an den Verkäufer. Kann er dir keinen aktuellen Status geben, verweist die deutsche FAQ an den Kundenservice von DHL eCommerce Solutions. In der EU haftet der Händler laut Ihr Europa für Schäden an der Ware, bis du sie erhältst, und sollte innerhalb von 30 Tagen liefern, sofern nichts anderes vereinbart ist; sonst erinnerst du ihn mit einer Nachfrist und kannst danach vom Vertrag zurücktreten und dein Geld zurückverlangen.
 
-**Zoll.** Laut DHL dauert die Verzollung je nach Land unterschiedlich lang, und DHL hat darauf keinen Einfluss. Braucht der Zoll mehr Angaben, meldet er sich bei dir. Was du zahlen musst, erklärt [Paket beim Zoll](guide:customs).
+**Zoll.** `CUSTOMS CLEARANCE` heißt, das Paket ist beim Zoll. Was du zahlen musst, erklärt [Paket beim Zoll](guide:customs).
 
-**Zurück an den Shop.** DHLs asiatisches Portal nennt die üblichen Gründe: niemand zu Hause, Paket nicht bei der Post abgeholt oder unvollständige Adresse. Frag den Shop nach Erstattung oder neuem Versand.
+**Zurück an den Shop.** `RETURNED TO SENDER` heißt, das Paket geht zurück an den Shop. Frag dort nach Erstattung oder neuem Versand.
 
 ## DHL eCommerce Kontakt und Telefonnummer
 
-DHL rät, zuerst den Shop zu fragen: Nur der Absender kann dir eine Nummer geben oder erklären, warum sie sich nicht bewegt. Webtracks Seite „Contact Customer Service“ zeigt, Stand 12. Oktober 2026, eine Karte pro Land:
+Frag zuerst den Shop, so rät es auch Webtracks FAQ. Webtracks Seite „Contact Customer Service“ zeigt, Stand 12. Oktober 2026, eine Karte pro Land:
 
 - **Deutschland:** Die Karte verweist auf den [Kundenservice von DHL](https://www.dhl.de/de/privatkunden/hilfe-kundenservice.html) auf dhl.de, Montag bis Sonntag 7 bis 20 Uhr.
 - **Österreich:** +49 228 92 95 95 95, Montag bis Freitag 8 bis 18 Uhr, Samstag und Sonntag geschlossen.
-- **Schweiz:** +49 228 92 95 95 95, Montag bis Freitag 9 bis 18 Uhr. Die Schweizer Kontaktseite auf dhl.com nennt 8 bis 18 Uhr und hat ein Formular mit Name, E-Mail, Land, Trackingnummer und Frage.
+- **Schweiz:** +49 228 92 95 95 95, Montag bis Freitag 9 bis 18 Uhr.
 - **Pakete aus den USA:** +1 317-554-5191, Montag bis Freitag 8 bis 20 Uhr Ostküstenzeit.
 
 Über Webtracks Formular „Contact Support“ soll sich laut DHL innerhalb von 24 bis 72 Stunden jemand melden. Was ein Anruf kostet, steht nirgends. Auf Webtrack kannst du dir außerdem Updates per E-Mail schicken lassen: bei jedem Ereignis, bei Verzögerung oder bei Zustellung.
 
-Verdächtige Nachricht? DHL eCommerce schreibt, dass DHL Online-Käufer nicht direkt zur Zahlung auffordert. Gibt eine Nummer aus einer E-Mail im Tracking kein Ergebnis, stammt die Mail laut DHL nicht von DHL. Gefälschte SMS erkennst du laut dhl.de oft an einem gekürzten Link (etwa bit.ly), einem allgemeinen Absender wie „Lieferung“ oder einer unerwarteten Ländervorwahl. Einen Screenshot mit der Nummer kannst du an phishing@dhl.com schicken.
+Verdächtige Nachricht? Gefälschte SMS erkennst du laut dhl.de oft an einem gekürzten Link (etwa bit.ly), einem allgemeinen Absender wie „Lieferung“ oder einer unerwarteten Ländervorwahl. Einen Screenshot mit der Nummer kannst du an phishing@dhl.com schicken.
 
 ## DHL eCommerce mit Peek verfolgen
 
@@ -105,34 +105,26 @@ Nennt Webtrack USPS, kann das Paket bei USPS weiterverfolgt werden, und seine Se
 
 ### Ist DHL eCommerce dasselbe wie DHL Express oder DHL Paket?
 
-Nein. DHL führt DHL eCommerce und DHL Express als getrennte Bereiche, und DHL Paket ist das deutsche Paketnetz. DHL eCommerce überlässt die letzte Strecke meist einer Post oder einem Paketdienst vor Ort.
+Nein. DHL eCommerce ist der Paketbereich von DHL für Online-Shops und überlässt die letzte Strecke meist einer Post oder einem Paketdienst vor Ort. DHL Express hat eine eigene Sendungsverfolgung, und DHL Paket ist das deutsche Paketnetz. Peek verfolgt sie als getrennte Paketdienste.
 
 ### DHL eCommerce Paket nicht erhalten: was tun?
 
-Wende dich an den Shop, wenn das Paket zehn Tage nach dem erwarteten Zustelldatum noch nicht da ist. Er kann laut DHL eine Suche nach dem verlorenen Paket starten.
+Wende dich an den Verkäufer, wenn das Paket nach dem erwarteten Lieferzeitraum nicht da ist. Kann er dir keinen aktuellen Status geben, nennt Webtracks deutsche FAQ den Kundenservice von DHL eCommerce Solutions als nächste Anlaufstelle.
 
 ### Kann ich ein DHL eCommerce Paket umleiten?
 
 Kaum. Laut Webtracks deutscher FAQ geht eine neue Adresse nur im selben Zustellgebiet des Zustellers, die englische FAQ verneint es ganz. Frag den Shop, solange das Paket noch nicht unterwegs ist.
 
-### Wie lange braucht DHL eCommerce aus den USA nach Deutschland?
+### Warum zeigt DHL eCommerce noch keine Sendungsdaten?
 
-Das hängt vom Service ab, den der Shop gewählt hat. Für Parcel International Direct nennt DHL im Schnitt 4 bis 7 Tage nach Deutschland, für Parcel International Standard 4 bis 8 Werktage nach Europa.
+Laut Webtracks FAQ erscheinen die ersten Ereignisse meist innerhalb von 24 bis 48 Stunden. Gibt es nach 48 Stunden noch keine, frag den Shop, der das Paket verschickt hat.
 
 :::sources
-- [DHL: Sendungsverfolgung eCommerce Solutions, FAQ](https://www.dhl.com/de-de/home/tracking/tracking-ecommerce.html) – 10 bis 39 Zeichen, wo die Nummer steht, zehn Tage nach dem erwarteten Zustelldatum
-- [DHL eCommerce: Webtrack](https://webtrack.dhlecs.com/) – Tracking-Seite, Gesamtstatus, deutsche und englische Scans, Detailbox, 10 Nummern, Formular, E-Mail-Updates
-- [DHL eCommerce: Webtrack Contact Customer Service](https://webtrack.dhlecs.com/support/customer-service) – Karten pro Land, Telefonnummern, Zeiten, FAQ zu Zustellung, Verzögerung, Adressänderung
-- [DHL: Track eCommerce, FAQ](https://www.dhl.com/global-en/home/tracking/tracking-ecommerce.html) – 24 bis 48 Stunden, Tracking-Link des Shops, Zoll, Verzögerungen
-- [DHL eCommerce: Contact DHL eCommerce About A Shipment (Schweiz)](https://www.dhl.com/ch-en/home/customer-service/contact-dhl-ecommerce-about-a-shipment.html) – Formular, Telefonnummer, nur der Absender kann die Nummer geben
+- [DHL eCommerce: Webtrack](https://webtrack.dhlecs.com/) – Tracking-Seite, Gesamtstatus, deutsche und englische Scans, Detailbox, 10 Nummern, Rat bei fehlendem Ergebnis, Formular, E-Mail-Updates
+- [DHL eCommerce: Webtrack Contact Customer Service](https://webtrack.dhlecs.com/support/customer-service) – Karten pro Land, Telefonnummern, Zeiten, FAQ zu 24 bis 48 Stunden, Zustellung, Verzögerung, nicht erhaltenen Paketen, Adressänderung
 - [DHL Paket: Import, Pakete aus dem Ausland](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/import.html) – Zustellung nicht zwangsläufig durch Deutsche Post oder DHL Paket, Prüfung im Tracking von dhl.de
 - [DHL: Kundenservice für Privatkunden](https://www.dhl.de/de/privatkunden/hilfe-kundenservice.html) – Ziel der Karte für Deutschland
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – Merkmale gefälschter SMS, phishing@dhl.com
-- [DHL eCommerce: United States](https://www.dhl.com/us-en/home/ecommerce.html) – was DHL eCommerce ist, die Bereiche von DHL
-- [DHL eCommerce: International Shipping Service](https://www.dhl.com/us-en/home/ecommerce/shipping-services/international-shipping-services.html) – Services, Laufzeiten nach Europa
-- [DHL eCommerce: Parcel International Direct](https://www.dhl.com/content/dam/dhl/local/us/dhl-ecommerce/documents/pdf/us-parcel-international-direct_2026.pdf.coredownload.pdf) – 4 bis 7 Tage nach Deutschland
-- [DHL Developer: References (DHL eCommerce Americas)](https://developer.dhl.com/api-reference/references-dhl-ecommerce-americas) – GM-Nummer, Kundenbestätigungsnummer, USPS-Nummer für Pakete in den USA
-- [DHL eCommerce: Tracking (Asien)](https://ecommerceportal.dhl.com/track/pages/customer/trackItNowPublic.xhtml?locale=en) – Gründe für Rücksendungen
-- [DHL eCommerce: Portal](https://ecommerceportal.dhl.com/) – keine Zahlungsaufforderungen, verdächtige Nummer prüfen
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt
+- [Ihr Europa: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – Haftung des Händlers bis zur Lieferung, 30 Tage, Nachfrist, Rücktritt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – früher DHL Global Mail, Nummernformen und USPS-Nummer, Scans und ihre Stufen, eigene Sendungsverfolgung von DHL Express, was Peek liest und zeigt
 :::

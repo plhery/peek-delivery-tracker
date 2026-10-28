@@ -1,74 +1,66 @@
 ---
 title: DHL Express seguimiento: número de albarán y estados
-description: Seguimiento de DHL Express: dónde está el albarán de 10 cifras, qué significan sus estados, aduanas, entregas fallidas, reclamaciones y teléfono en España.
+description: Seguimiento de DHL Express: dónde está el albarán de 10 cifras, qué significan sus estados, aduanas, entregas fallidas y qué hacer si el paquete se pierde.
 slug: dhl-express-seguimiento
 published: 2026-10-13
 updated: 2026-10-27
 ---
 
-DHL Express es la división de mensajería internacional urgente de DHL, la de los envíos con plazo definido; si una tienda online te envía el pedido con DHL Express, es porque tiene un acuerdo de entrega con DHL. Para seguir tu envío necesitas el número de albarán de 10 cifras: búscalo en la web de DHL, abre el enlace de su SMS o correo, o pégalo en la casilla de arriba. Normalmente te lo da la tienda en el correo de envío.
+Pega un número de albarán de DHL Express, o un enlace de seguimiento de MyDHL+, en la casilla de arriba para seguir el paquete. El seguimiento propio de DHL está en su web (MyDHL+) y en la app de DHL Express.
 
 ## Número de seguimiento de DHL Express: el albarán de 10 cifras
 
-DHL Express llama a su número de seguimiento «número de albarán». Según DHL, lo suele dar el remitente o la tienda, casi siempre en la confirmación del pedido o en el aviso de envío; si no lo encuentras, pídeselo a ellos. Los mensajes de On Demand Delivery de DHL llegan por SMS o correo con un enlace. Más ideas en [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
-
-La ayuda de DHL Express España describe dos formas (las cifras son inventadas):
+El número de seguimiento de DHL Express es el número de albarán (en inglés, «waybill number»). Búscalo en el correo de envío de la tienda o en la página de tu pedido; un enlace de seguimiento de MyDHL+ también lo lleva, detrás de `id=`. ¿Sigues sin él? Más ideas en [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 
 | Número (inventado) | Qué es |
 | --- | --- |
-| `1234567891` | El albarán: 10 cifras, con el que sigues todo el envío. |
-| `JD014600001234567890` | El identificador de pieza: 20 posiciones que empiezan por `JD`, uno por bulto. |
+| `1234567891` | El albarán: 10 cifras, con el que sigues todo el envío. La última es un dígito de control. |
+| `JD014600001234567890` | El identificador de pieza: `JD01` y 16 cifras, impreso como `(J)JD…` bajo el código de barras inferior de la etiqueta. Cada bulto del envío tiene el suyo, y lleva al albarán. |
 
-En España, DHL Express avisa de que una referencia con letras o con otro número de cifras es muy probablemente un envío de DHL eCommerce (DHL Parcel), con su propio seguimiento: mira la página de [DHL eCommerce Iberia](carrier:dhl-ecommerce-es). Otras empresas también usan números de 10 cifras, como [TIPSA](carrier:tipsa), [Mondial Relay](carrier:mondial-relay), Relais Colis y Estafeta, así que comprueba qué empresa nombra el correo de la tienda.
+Otras empresas también usan números de 10 cifras, como [TIPSA](carrier:tipsa), [Mondial Relay](carrier:mondial-relay), Relais Colis, Estafeta, Packeta, [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (DHL Parcel en España) y [DHL Paket](carrier:dhl), así que comprueba qué empresa nombra el correo de la tienda.
 
-DHL reutiliza de vez en cuando los números de albarán, por lo que el seguimiento puede enseñar un momento los datos de otro envío. Tu paquete sigue yendo a su propia dirección.
+DHL reutiliza los números de albarán: con un número pueden aparecer escaneos de un envío anterior, que Peek ignora.
 
 ## Estados de DHL Express: qué significa cada uno
 
-El seguimiento de DHL Express muestra estos estados en inglés. Muchos terminan con el centro donde está el paquete, por ejemplo `Processed at` seguido de una ciudad y un país. En el orden en que los ve un paquete:
+Estos son los textos de escaneo que Peek lee de DHL Express, en el inglés de DHL, más o menos en el orden en que los ve un paquete, con el estado que muestra Peek para cada uno. Muchos terminan con el centro donde está el paquete, por ejemplo `Processed at` seguido de una ciudad y un país.
 
-| DHL Express escribe | Qué significa para ti |
-| --- | --- |
-| `Shipment information received` | El remitente ha creado el envío y su albarán. DHL todavía no tiene el paquete. |
-| `Shipment picked up` | Un mensajero de DHL Express lo ha recogido en el remitente. |
-| `Arrived at DHL Sort Facility` | Ha llegado a un centro de clasificación. Lo verás varias veces. |
-| `Shipment has departed from a DHL facility` | Ha salido hacia la siguiente parada. |
-| `Customs clearance status updated. Note - The Customs clearance process` | La aduana del país de destino lo está tramitando. |
-| `Clearance processing complete at` | La aduana de destino lo ha despachado. |
-| `Arrived at DHL Delivery Facility` | Está en el centro que reparte en tu zona. |
-| `Shipment is out with courier for delivery` | Un mensajero lo lleva y va hacia ti. |
-| `Delivery attempted but no response at Consignee address` | El mensajero vino y nadie respondió. El «consignee» eres tú. |
-| `On Hold Awaiting for Payment of Shipment Related Fees` | Está parado hasta que se paguen los gastos, como los aranceles e impuestos de importación. |
-| `Shipment is on hold` | Se ha detenido en un punto de control. Llama a DHL para saber por qué. |
-| `Delivered` | Entregado al destinatario: a ti. |
+| Escaneo de DHL Express | Peek muestra | Qué significa |
+| --- | --- | --- |
+| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Etiqueta creada | El remitente ha enviado a DHL los datos del envío. |
+| `Shipment picked up`, `Shipment accepted` | Admitido por el transportista | DHL Express ya tiene el paquete. |
+| `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | En tránsito | Avanza por la red de DHL. |
+| `Scheduled to depart on the next planned movement` | En tránsito | Espera en un centro su próximo camión o vuelo. |
+| `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | En aduanas | Está pasando la aduana (más abajo). |
+| `Payment is received and recorded for shipment related fees` | En aduanas | Ya se han pagado los aranceles o gastos; sigue en aduanas hasta que termine el despacho. |
+| `Clearance processing complete at` | En tránsito | La aduana ha terminado con él y vuelve a moverse. |
+| `Arrived at DHL Delivery Facility` | En tránsito | Ha llegado al centro de DHL que lo reparte. |
+| `Shipment is out with courier for delivery` | En reparto | Un mensajero lo lleva hacia ti. |
+| `Delivery attempted but no response at Consignee address`, `Delivery attempt could not be completed` | Intento de entrega | No se pudo entregar. El «consignee» eres tú, el destinatario. |
+| `Shipment is scheduled for delivery` | En tránsito | Hay una entrega prevista en un reparto posterior, por ejemplo tras un intento fallido. |
+| `Awaiting collection by the consignee` | Listo para recoger | Te espera en un centro de DHL para que lo recojas. |
+| `Delivered` | Entregado | Ya está entregado. |
+| `Shipment is on hold` | Incidencia | DHL ha parado el envío por ahora. |
+| `Shipment arrived at incorrect facility. It will be sent to the correct destination` | Incidencia | Se clasificó en un centro equivocado y sigue hacia el correcto, con retraso. |
+| `Returned to shipper` | Devuelto al remitente | Vuelve al remitente. |
 
-El estado de aduanas, que la ayuda española de DHL llama `Estatus de Aduanas actualizado`, puede salir justo después de que el paquete deje el país de origen, porque el despacho puede empezar en tránsito. Sirve para ver pronto si la aduana necesita más datos: abre «Further details» junto a él.
+## Entrega fallida de DHL Express
 
-`Processed at` y `Shipment is in transit to destination` son pasos normales del trayecto. La ciudad de entrega que aparece es la de la delegación de DHL que reparte, no siempre la tuya. `Returned to Shipper` indica que el paquete vuelve al remitente, por un problema de aduanas, un rechazo o un pago pendiente.
+Tras un intento fallido, el seguimiento dice `Delivery attempted but no response at Consignee address` o `Delivery attempt could not be completed`. Si después sale `Shipment is scheduled for delivery`, hay un nuevo intento previsto; `Awaiting collection by the consignee` significa que el paquete te espera en un centro de DHL para que lo recojas. Para cambiar la entrega, contacta con DHL Express en su web o su app: Peek no puede cambiarla. Más en [entrega fallida](guide:missed-delivery) y [paquete no recogido](guide:uncollected-parcel).
 
-## Entrega de DHL Express: ausente, cambios y Service Point
+## Aduanas: qué se paga por un paquete de DHL Express
 
-Con On Demand Delivery, el servicio gratuito de DHL en delivery.dhl.com, metes el albarán de 10 cifras como invitado y eliges entre un máximo de seis opciones: dejarlo en un lugar seguro sin firma, cambiar la fecha, dejarlo a un vecino o al conserje, recogerlo en un DHL Express Service Point o una taquilla cercana, entregarlo en otra dirección o aplazarlo hasta 30 días si estás de vacaciones. DHL avisa de que las opciones y los canales de aviso cambian según el país. Los avisos llegan por correo, SMS, la app DHL Express Mobile o WhatsApp.
+Un paquete que llega de fuera de la UE puede tener gastos de importación. Mientras está en la aduana, el seguimiento muestra `Customs clearance status updated…`, `Processed for clearance at` o `Clearance event`; `Payment is received and recorded for shipment related fees` cuando se han pagado los gastos, y `Clearance processing complete at` cuando la aduana lo libera.
 
-DHL Express Italia explica qué pasa si no te encuentran: el mensajero intenta llamarte al teléfono del albarán y vuelve una segunda vez; si tampoco puede entregarlo, el paquete se queda en el centro de DHL Express más cercano a la espera de instrucciones. Para dar nuevas instrucciones, contacta con atención al cliente.
+Según la Agencia Tributaria, desde el 1 de julio de 2026 las compras por internet de hasta 150 euros enviadas desde fuera de la UE pagan, además del IVA, un arancel fijo de 3 euros por cada categoría de artículos. Si las condiciones de compra de la tienda dicen que el precio incluye el arancel, el transportista no te cobrará nada por él. Si no, puede pedirte el arancel y el IVA, y quizá unos gastos de gestión, antes de entregarte el paquete. Más en [paquete retenido en aduanas](guide:customs).
 
-**Aduanas e impuestos.** Cuando hay que pagar aranceles e impuestos de importación, DHL suele pagarlos por ti y te los cobra antes o en el momento de la entrega. Su ayuda en español lo dice claro: «Generalmente DHL no puede entregar paquetes hasta que éstos hayan sido pagados». Si la tienda eligió Duty Tax Paid, no pagas nada. Por adelantar esos importes DHL puede cobrar además una tarifa: consulta la Guía de servicios y tarifas de DHL Express de tu país. Más detalles en [paquete retenido en aduanas](guide:customs).
+## Envío de DHL Express retrasado, retenido o perdido
 
-## Envío de DHL Express retrasado, retenido, perdido o dañado
+Si el seguimiento no se mueve, o dice `Shipment is on hold`, lee [qué hacer si el seguimiento no se actualiza](guide:tracking-not-updating).
 
-Cuando el seguimiento te pide que contactes con DHL, normalmente le falta información, muchas veces por una dirección incorrecta, y DHL dice que se resuelve muy rápido llamando a atención al cliente. Con `Shipment is on hold` también hay que llamar para saber el motivo y seguir sus indicaciones. Si el seguimiento lleva días quieto, mira [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
+Si compraste en una tienda, es ella quien responde de que el paquete te llegue, aunque lo lleve DHL Express. Según Your Europe, el portal de la UE, el vendedor responde de los daños desde que envía el pedido hasta que lo recibes. Si no habéis acordado otro plazo, debe entregarlo en 30 días; si no llega, avísale y dale un plazo adicional razonable. Si tampoco lo cumple, tienes derecho a rescindir el contrato y a que te devuelva el dinero lo antes posible.
 
-Si el envío se retrasa, se pierde o llega dañado, pueden reclamar el remitente, el destinatario o quien pagó el transporte. El plazo es de 30 días, pero los formularios de DHL lo cuentan desde la admisión del envío o desde la entrega según el país, así que no esperes. Si llega dañado, guarda el contenido y el embalaje, haz fotos y ten a mano una prueba del valor.
-
-## Teléfono de atención al cliente de DHL Express en España
-
-Así aparecían el 13 de octubre de 2026 en la página «Ayuda y Soporte» de DHL Express España:
-
-- **Atención al Cliente:** 91 309 84 31, 93 267 61 31, 94 481 89 31 o 900 12 24 24; desde el extranjero, +34 91 309 84 52. De lunes a viernes de 08:00 a 19:00; sábados y domingos, cerrado. Ten a mano el número de albarán.
-- **Chat:** 7/24, y también por WhatsApp.
-- **DHL Parcel (DHL eCommerce) España** es otra empresa con otro teléfono: +34 919 199 226 para particulares.
-
-> DHL avisa de SMS falsos con enlaces acortados, un remitente genérico como «Delivery» o un prefijo de país inesperado. En España, DHL puede mandarte antes de la entrega un enlace a su plataforma de pago para aranceles e impuestos, identificado con el albarán: comprueba que esperas ese envío. Reenvía una captura con el número a phishing@dhl.com.
+**¿Pone entregado y no lo tienes?** La página de seguimiento de DHL puede mostrar la firma, y Peek no la guarda. Míralo en la web de DHL y después habla con la tienda. Más en [paquete entregado pero no recibido](guide:delivered-not-received) y [paquete perdido](guide:lost-parcel).
 
 ## Seguimiento de DHL Express con Peek
 
@@ -82,37 +74,29 @@ Ves el estado, cada escaneo en un mapa con el centro donde se hizo, y el país d
 
 ### ¿El número de albarán es el número de seguimiento de DHL Express?
 
-Sí. El albarán de 10 cifras sigue todo el envío; el identificador de pieza que empieza por `JD` corresponde a un solo bulto.
+Sí. El albarán de 10 cifras sigue todo el envío; el identificador de pieza que empieza por `JD01` corresponde a un solo bulto y lleva al albarán.
 
 ### ¿Por qué no funciona mi número de DHL Express?
 
-Los albaranes de DHL Express tienen exactamente 10 cifras; un número con letras o de otra longitud es muy probablemente de otra división de DHL, con su propio seguimiento. Un albarán recién creado solo muestra `Shipment information received` hasta que DHL tiene el paquete.
+A menudo es el número de otro transportista de DHL: los albaranes de DHL Express tienen exactamente 10 cifras y la última es un dígito de control, así que un número con una errata no suele pasarlo. Un albarán recién creado puede mostrar solo `Shipment information received` hasta que DHL recoge el paquete.
 
 ### ¿Es lo mismo DHL que DHL Express?
 
-No. Son divisiones distintas del mismo grupo, cada una con su seguimiento. En España, un número con letras o con otra longitud suele ser de DHL eCommerce (DHL Parcel).
-
-### ¿Tengo que pagar aduana en un envío de DHL Express?
-
-Si el envío los genera y la tienda no eligió Duty Tax Paid, normalmente sí: DHL adelanta los aranceles e impuestos y te los cobra antes de entregarlo. Puede mandarte un enlace a su plataforma de pago identificado con el albarán.
+En Peek, no: DHL Express es un transportista aparte de [DHL Paket](carrier:dhl) y de [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), cada uno con sus números y su seguimiento. Un paquete sin albarán de 10 cifras ni identificador `JD01` suele ser de uno de ellos.
 
 ### ¿Puedo seguir un envío de DHL Express sin el albarán?
 
-Sí, si tienes la referencia del remitente: DHL Express ofrece seguimiento por referencia del remitente. Si no, pide el albarán a la tienda o llama a atención al cliente, como indica la ayuda española de DHL.
+En Peek, no: hace falta el albarán de 10 cifras o un identificador `JD01` de la etiqueta. Pídele el albarán a la tienda o al remitente.
+
+### ¿Es de DHL un SMS o un correo que me pide pagar para entregar el paquete?
+
+Desconfía. INCIBE ha avisado de una campaña de SMS falsos que se hacen pasar por empresas de paquetería para quedarse con tus datos personales y los de tu tarjeta, y de correos falsos de DHL que hablan de un paquete devuelto y piden pagar una pequeña tarifa en 48 horas. No pulses el enlace: comprueba el envío tú mismo en la web de DHL o en Peek, y luego borra el mensaje y bloquea al remitente. Si ya diste datos bancarios, llama a tu banco cuanto antes. Si tienes dudas, llama al 017, la Línea de Ayuda en Ciberseguridad de INCIBE. Más en [estafa del paquete por SMS](guide:delivery-scam-texts).
 
 :::sources
-- [DHL Express España: Preguntas Frecuentes – Seguimiento](https://mydhl.express.dhl/es/es/help-and-support/faqs/tracking-monitoring.html) – albarán de 10 cifras, identificador JD, «Estatus de Aduanas actualizado», números de DHL Parcel, mensaje de contactar con DHL, sin número
-- [DHL Express España: Ayuda y Soporte](https://mydhl.express.dhl/es/es/help-and-support.html#/contact_us) – teléfonos, horario, chat, WhatsApp
-- [DHL Express España: Preguntas Frecuentes – Aranceles e impuestos](https://mydhl.express.dhl/es/es/help-and-support/faqs/duties-and-taxes.html) – no entrega hasta el pago
-- [DHL: On Demand Delivery (España)](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=ES&lang=es) – seis opciones, acceso como invitado con el albarán
-- [DHL: Concienciación sobre el fraude (España)](https://www.dhl.com/es-es/home/footer/fraud-awareness.html) – señales de SMS falsos, enlace de pago de aranceles, phishing@dhl.com
-- [DHL Express: FAQs – Tracking and Monitoring (Spain, English)](https://mydhl.express.dhl/es/en/help-and-support/faqs/tracking-monitoring.html) – albaranes reutilizados, seguimiento por referencia del remitente, otras divisiones, Further details
-- [DHL Express: FAQs – Tracking and Monitoring (United Kingdom)](https://mydhl.express.dhl/gb/en/help-and-support/faqs/tracking-monitoring.html) – ciudad de la delegación, estado de aduanas en tránsito
-- [DHL Express: FAQs – Duties and Taxes (United Kingdom)](https://mydhl.express.dhl/gb/en/help-and-support/faqs/duties-and-taxes.html) – acuerdo de la tienda, DHL adelanta aranceles, Duty Tax Paid
-- [DHL: On Demand Delivery (United Kingdom)](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=GB) – vacaciones hasta 30 días, canales de aviso, disponibilidad por país
-- [DHL Express: Tracking (Italy, English)](https://www.dhl.com/it-en/home/express/businesses/tracking-your-shipments.html) – llamada, segundo intento, espera en el centro
-- [DHL: Shipment Tracking Status Explained (Malaysia)](https://www.dhl.com/discover/en-my/ship-with-dhl/track/tracking-status) – significado de los estados
-- [DHL Express: Email Us – Claim (United Kingdom)](https://mydhl.express.dhl/gb/en/forms/csm/claim.html) – 30 días desde la entrega, fotos, prueba de valor
-- [DHL Express: Register a Claim for Damage (Italy)](https://mydhl.express.dhl/it/en/forms/claim-for-damage.html) – quién reclama, 30 días desde la admisión, guardar el embalaje
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – qué lee y muestra Peek de DHL Express
+- [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – arancel de 3 euros desde el 1 de julio de 2026, IVA y gastos de gestión al transportista
+- [Your Europe: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – 30 días, plazo adicional, rescisión y reembolso, el vendedor responde de los daños
+- [INCIBE: Campaña de smishing que suplanta a empresas de paquetería](https://www.incibe.es/ciudadania/avisos/campana-de-smishing-que-suplanta-empresas-de-paqueteria-con-la-excusa-de-que) – SMS falsos de entrega, no pulsar el enlace, borrar y bloquear, banco, 017
+- [INCIBE: DHL no está avisando por correo de que un paquete ha sido devuelto](https://www.incibe.es/ciudadania/avisos/dhl-no-esta-avisando-por-correo-de-que-un-paquete-ha-sido-devuelto-y-que-se) – correos falsos de DHL, tarifa y plazo de 48 horas, contactar con el banco
+- [Universal Parcel Scraper: DHL Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dhl-express) – formas del albarán y del identificador de pieza, dígito de control, otros números de 10 cifras, albaranes reutilizados, escaneos de DHL Express y estado de Peek para cada uno, firma en la web de DHL, qué lee Peek de DHL Express
+- [Universal Parcel Scraper: DHL eCommerce Iberia](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dhl-ecommerce-es) – DHL Parcel en España, números de 10 cifras
 :::

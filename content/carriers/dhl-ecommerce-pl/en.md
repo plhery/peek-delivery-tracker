@@ -1,81 +1,71 @@
 ---
 title: DHL eCommerce Poland tracking: statuses, pickup and help
-description: Track a DHL parcel in Poland: the 11-digit waybill number, what DHL eCommerce's statuses mean, DHL POP points and lockers, claims and the hotline.
+description: Track a DHL parcel in Poland: the 11-digit waybill number, what DHL eCommerce's statuses mean, DHL POP points and lockers, redirects and complaints.
 slug: dhl-ecommerce-poland-tracking
 published: 2026-10-11
 updated: 2026-10-27
 ---
 
-DHL eCommerce Poland (formerly DHL Parcel Polska) is the DHL company that delivers online shops' parcels inside Poland. Track a parcel on DHL's tracking page at sprawdz.dhl.com.pl or in the Mój DHL app with its 11-digit waybill number, or paste it in the box above. DHL sends the number by SMS or email when the courier collects the parcel from the shop.
+DHL eCommerce Poland (formerly DHL Parcel Polska) is DHL's domestic parcel network in Poland, which delivers online shops' parcels. Track a parcel on the Mój DHL website or in the Mój DHL app with its 11-digit waybill number, or paste it in the box above. DHL emails or texts you once the parcel is posted, with the delivery day, the place and the expected delivery hours.
 
 ## Where is my DHL tracking number?
 
-DHL calls it the waybill number (numer listu przewozowego). For domestic parcels it has 11 digits, digits only, starting with 1 or 2.
+DHL calls it the waybill number (numer listu przewozowego). For domestic parcels it has 11 digits, digits only, and the last one is a check digit worked out from the other ten: that's how Peek tells a DHL waybill from a mistyped one.
 
 | Number (invented) | What it is |
 | --- | --- |
-| `12345678901` | DHL's own example of an 11-digit domestic waybill number. |
-| `20000000000` | Also 11 digits: the same kind of number, starting with 2. |
+| `99999999995` | 11 digits ending in the check digit: a waybill number. |
+| `30000000008` | Also a waybill number. They don't all start with the same digit: 1, 2 and 3 all occur. |
 
-When the courier picks the parcel up from the shop, DHL sends an SMS or email to the contact the shop passed on, with the expected date and place, the parcel number and a 6-digit PIN. Keep it: you need the PIN to pick the parcel up or change its delivery. On a return label, the number is under the lowest barcode and in the return confirmation email.
+Look for it in the shop's shipping email. Mój DHL can follow several parcels at once, and its menu also has "Return your parcel": shops can let customers send returns through the app.
 
-No number? DHL says to ask the sender, or see [how to find your tracking number](guide:find-tracking-number).
+No number? Ask the shop, or see [how to find your tracking number](guide:find-tracking-number).
 
 Eleven digits also fit [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch) and [Swiss Post](carrier:swiss-post) parcel numbers. If DHL says the number is wrong, check that the shop's email names DHL.
 
 ## What DHL eCommerce Poland's tracking statuses mean
 
-Both DHL tracking pages work in English as well as Polish. In English, in the order a parcel usually meets them:
+Peek reads the parcel's current status from Mój DHL in English. The wordings it gets, roughly in the order a parcel meets them:
 
 | DHL says | What it means for you |
 | --- | --- |
-| `Shipment in preparation` | The shop has created the label; DHL doesn't have the parcel yet. |
-| `Picked up by courier` | A DHL courier collected it from the sender. |
-| `On its way` | Moving through DHL's depots and sorting centres. |
-| `Out for delivery` | With the courier today. |
-| `Unsuccessful delivery attempt` | The courier missed you. |
-| `Redirected to the servicepoint` | Sent to a DHL POP point instead of your door. |
-| `Ready for pickup` | Waiting for you at a point or locker; your PIN and QR code appear now. |
-| `Delivered` | Delivered to you. |
-| `Return to Sender` | On its way back to the shop. |
-| `The parcel has returned to Sender` | The return has reached the sender. |
+| `Shipment preparation` | The shop has made the label; DHL doesn't have the parcel yet. |
+| `Posted` | The sender has posted the parcel with DHL. |
+| `On its way` | It's moving through DHL's network. |
+| `Parcel redirected` | Its delivery has been redirected; it's still on its way. |
+| `For delivery` | The courier has it for delivery. |
+| `Parcel has been delivered` | Delivered. Some answers just say `Delivered`. |
+| `Return to the Sender` | It's going back to the sender. |
+| `The parcel has returned to Sender` | The return has reached the sender (also `Delivered to the Sender`). |
+| `The sender has requested the withdrawal of the shipment` | The sender has asked DHL to pull the parcel. |
+| `Shipment disposed of` | DHL has disposed of the parcel. |
 | `The shipment is lost` | DHL treats the parcel as lost. |
 
-A parcel shown in another city is passing through a sorting centre, DHL says.
+Where DHL shows the scan history, it words each step in Polish or English: `Przesyłka została nadana przez nadawcę w oddziale DHL.` (`The shipment has been dropped off at depot by the sender.`) when the sender drops it off, `Przesyłka w transporcie do oddziału doręczającego.` (`The shipment is in transit to the delivery depot.`) on the way, `Przesyłka przekazana kurierowi do doręczenia` (`With delivery courier`) on delivery day and `Przesyłka doręczona do Odbiorcy.` (`Delivered to customer.`) at the end.
 
-`Shipment preparation` is a label with no parcel yet. `Shipment disposed of` means DHL deems the parcel lost and points to its complaint form on DHL24. If DHL asks you to contact it, it lacks information to deliver, such as a wrong address: call the hotline below.
+A withdrawn, disposed of or lost parcel leaves nothing to wait for: Peek flags it as needing attention. Ask the shop first, then see the complaints section below.
 
-## DHL POP points, DHL BOX lockers and missed deliveries
+## DHL POP points, DHL BOX lockers and changing delivery
 
-**If you're out.** The courier leaves a notice and takes the parcel to a nearby DHL POP point, and DHL sends the address and a PIN by SMS or email, or as a Mój DHL notification. DHL POP points (Żabka shops among them) and DHL BOX 24/7 lockers add up to 24,000 locations. If a parcel can't go to a point (too heavy, or no phone or email given), the courier tries again the next working day; after a second miss you have 2 calendar days to pick it up at the POP named on the notice.
+**Points and lockers.** DHL counts 24,000 places in Poland to send and collect parcels: DHL POP points and DHL BOX 24/7 parcel lockers, 9,000 of them lockers as of May 2026. POP points sit in petrol stations, shops and newsagents, Żabka, ABC and Lewiatan stores among them. Since May 2026, shops can also have parcels delivered to points and lockers on Saturdays, at no extra charge.
 
-**How long it waits.** Two calendar days at a POP point or DHL BOX, from when it arrives there. DHL's terms say the window is the one in DHL's message, and never shorter than 2 days, not counting Sundays and public holidays. After that the parcel goes back to the sender.
-
-**Picking up.** Give the PIN at a POP point, type the pickup code at a DHL BOX, or scan the QR code in Mój DHL. Someone else can pick up with your PIN and the waybill number. Cash on delivery can be paid at DHL BOX lockers and Żabka.
-
-**Changing delivery.** DHL's redirect service (przekieruj.dhlparcel.pl) is free: log in with the parcel number and the 6-digit PIN, then change the address or date, choose a POP point or DHL BOX, or refuse the parcel. You can change it as often as you like until 23:59 on the day the parcel is posted, and DHL carries it out within 1 to 2 working days. It works only for courier-delivered domestic parcels up to 31.5 kg, within the delivering depot's area.
+**Changing delivery.** DHL says recipients can change the delivery date or address themselves, free and without contacting the sender. In Mój DHL, a parcel's options include redirecting it to a point, changing the delivery address, declining the parcel, calling or locating the courier, and recovering the parcel's PIN. The main menu also has "Redirect parcel".
 
 ## DHL parcel delayed, lost or damaged
 
-**No update.** A label isn't in DHL's system until the first scan. For longer gaps, see [tracking that isn't updating](guide:tracking-not-updating). If the parcel hasn't arrived, DHL says to register a request on DHL24 straight away. Under DHL's terms, a domestic parcel counts as lost if it isn't delivered within 30 days after the delivery deadline.
+**No update.** `Shipment preparation` means the shop has made a label and DHL doesn't have the parcel yet, so ask the shop when it will hand it over. For longer gaps, see [tracking that isn't updating](guide:tracking-not-updating).
 
-**Lost.** DHL's customer service page says only the sender, usually the shop, can claim for a lost parcel, as the party to the contract. The terms add that you can claim when the parcel was delivered to you or the sender passes the right on to you. So start with the shop.
+**Late, lost or damaged.** When you buy online, start with the shop. Your Europe says the trader is responsible for any damage to your goods from dispatch until you receive them, and should deliver within 30 days unless you agreed otherwise. If nothing arrives, remind the trader and give it a reasonable extra deadline; if it misses that too, you can end the contract and get your money back.
 
-**Damaged.** Report it within 7 calendar days of delivery through DHL's form; a courier comes to write a damage report.
+**Complaints to DHL.** DHL24, DHL eCommerce Poland's online portal, has a complaint form ("Zgłoszenie reklamacji / dyspozycji") that asks for the label number or the transport order number. Delivered but not there? See [delivered but not received](guide:delivered-not-received).
 
-**Claims.** File them on DHL24 (the form "Submit instruction, complaint", also in English) or by post to DHL eCommerce (Poland) Sp. z o.o., Dział Reklamacji, ul. Targowa 35, 90-043 Łódź. Add the waybill number, the amount, your bank account, proof of value and photos. DHL answers domestic claims within 10 working days, its claims page says. Delivered but not there? See [delivered but not received](guide:delivered-not-received).
+## DHL Poland customer service and complaints
 
-## DHL Poland customer service and contact number
+- **In Mój DHL:** the menu has "Contact us" and "Make a complaint", in Polish or English.
+- **On DHL24:** the complaint form above.
+- **Who to ask first:** the shop, which chose DHL and is responsible for your goods until you receive them.
 
-As listed on DHL eCommerce Poland's English pages on 11 October 2026:
-
-- **Hotline:** +48 42 6 345 345, Monday to Friday 7:00 am to 8:00 pm, Saturday 7:00 am to 3:00 pm.
-- **Online:** DHL's contact hub on dhl.com/pl-en/ecommerce, and claims on DHL24.
-- **In the app:** Mój DHL's help and complaint section.
-
-DHL's pages list no chat and no email address for recipients.
-
-> DHL eCommerce says it charges no extra fees once a parcel is posted, and text messages asking for an extra payment are fake: don't click the link, delete the message. DHL asks you to send a screenshot and the sender's number to phishing@dhl.com.
+> A text asking you to pay extra for a parcel may be a scam. CSIRT NASK, one of Poland's national computer security teams, warns about texts that pose as couriers and lead to a fake payment form that steals card details. Don't tap the link: type the number into Mój DHL or Peek yourself. Forward the whole text, link included, to 8080 for free, and if you've already entered card details, call your bank at once.
 
 ## Tracking a DHL eCommerce Poland parcel with Peek
 
@@ -85,35 +75,28 @@ DHL's public lookup gives only the current status, with no history and no places
 
 ## Questions about DHL parcel tracking in Poland
 
-### How long does DHL eCommerce take to deliver in Poland?
+### Can I change the delivery address or day of a DHL parcel?
 
-DHL says parcels up to 31.5 kg are delivered as standard the next working day, heavier ones within 2 working days. Its terms set 3 days, not counting Saturdays and public holidays, when no guaranteed term applies.
+Yes. DHL says recipients can change the delivery date or address themselves, free and without contacting the sender. In Mój DHL you can also redirect the parcel to a DHL POP point.
 
-### How long will DHL hold a parcel at a service point?
+### Where can I collect a DHL parcel in Poland?
 
-Two calendar days at a DHL POP point or DHL BOX locker, then it goes back to the sender.
+At a DHL POP point or a DHL BOX 24/7 locker. DHL counts 24,000 of them, with POP points in petrol stations, shops and newsagents such as Żabka, ABC and Lewiatan.
 
-### Can I track a DHL parcel by phone number?
+### What is a DHL eCommerce parcel?
 
-Yes, in the Mój DHL app, which lists parcels linked to the phone number and email you gave the shop. DHL's tracking page needs the waybill number.
+A domestic parcel from an online shop, carried by DHL eCommerce Poland, formerly DHL Parcel Polska. A courier brings it, or it goes to a DHL POP point or a DHL BOX locker.
 
 ### Can I track an Allegro Delivery parcel with DHL?
 
-No. DHL says Allegro Delivery parcels are tracked only in Allegro's app or on its site.
+Not here. Allegro tracks Allegro Delivery parcels itself, so Peek doesn't take their `AD` numbers: follow them with Allegro.
 
 :::sources
-- [DHL eCommerce Poland: Redirect Shipments for Receivers](https://www.dhl.com/pl-en/ecommerce/private-customers/receiving-parcels/redirect.html) – missed delivery, POP 2 days, redirect rules, PIN
-- [DHL eCommerce Poland: Contact - Complaints](https://www.dhl.com/pl-en/ecommerce/private-customers/customer-service/contact/claims.html) – claims, documents, processing time, hotline and hours
-- [DHL eCommerce Poland: Mój DHL Application Helpdesk](https://www.dhl.com/pl-en/ecommerce/private-customers/customer-service/contact/moj-dhl-application-helpdesk.html) – app statuses, first scan, Allegro Delivery, sharing the PIN
-- [DHL eCommerce Poland: Contact: For you](https://www.dhl.com/pl-en/ecommerce/private-customers/customer-service/contact.html) – contact topics
-- [DHL eCommerce Polska: Kontakt - śledź przesyłkę](https://www.dhl.com/pl-pl/ecommerce/dla-ciebie/obsluga/kontakt/sledzenie.html) – number format, delivery time, status messages, damage within 7 days, infoline
-- [DHL eCommerce Polska: Obsługa Klienta Indywidualnego](https://www.dhl.com/pl-pl/ecommerce/dla-ciebie/obsluga.html) – only the sender claims, number on a return label
-- [DHL eCommerce Polska: Odbierz Przesyłkę w Punkcie DHL POP](https://www.dhl.com/pl-pl/ecommerce/dla-ciebie/odbior/punkt.html) – POP PIN, pickup by someone else, cash on delivery, 24,000 points
-- [DHL eCommerce Polska: Odbierz w automacie DHL BOX 24/7](https://www.dhl.com/pl-pl/ecommerce/dla-ciebie/odbior/automaty-pop-box.html) – locker pickup code, 2 days, 25 kg
-- [DHL eCommerce Polska: Ważne informacje](https://www.dhl.com/pl-pl/ecommerce/o-dhl-ecommerce/wazne-informacje.html) – fake SMS warning
-- [DHL Polska: Uważaj na oszustów](https://www.dhl.com/pl-pl/home/stopka/uwazaj-na-oszustow.html) – phishing@dhl.com
-- [DHL eCommerce Polska: Regulamin świadczenia krajowych usług przewozowych i pocztowych](https://www.dhl.com/content/dam/dhl/local/pl/dhl-ecommerce/documents/pdf/pl-ecommerce-polska-regulamin-swiadczenia-krajowych-uslug.pdf) – delivery term, pickup window, absent recipient, who may claim, lost after 30 days
-- [DHL eCommerce: Śledzenie paczek krajowych i zagranicznych](https://sprawdz.dhl.com.pl/) – tracking page, accepted formats, language switch
-- [DHL eCommerce Poland: Mój DHL tracking](https://mojdhl.pl/tracking) – status wordings in English and Polish
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [DHL eCommerce Poland: Mój DHL tracking](https://mojdhl.pl/tracking) – tracking page and app, 11-digit waybill number for domestic parcels, menu (contact, complaint, redirect, return), a parcel's options (redirect to a point, change address, decline, courier, PIN), several numbers at once
+- [DHL24: DHL eCommerce Poland's portal](https://dhl24.com.pl/) – email and text notices, free changes of date or address, 24,000 points and lockers, 9,000 DHL BOX, Saturday deliveries, POP point types, returns in Mój DHL
+- [DHL24: Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – complaint form, label or order number
+- [DHL24: Wyślij paczkę](https://dhl24.com.pl/pl/paczka.html) – DHL POP points in Żabka, ABC and Lewiatan, DHL BOX 24/7
+- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – trader responsible for damage until delivery, 30 days, extra deadline, refund
+- [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fake courier texts, payment form, 8080, bank
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads: 11 digits and the check digit, status and scan wordings, Allegro Delivery
 :::

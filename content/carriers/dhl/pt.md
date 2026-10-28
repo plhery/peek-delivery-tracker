@@ -57,12 +57,12 @@ Antes da entrega, no dhl.de podes adiá-la até seis dias úteis sem custo (Lief
 
 Uma DHL Paket International tem sempre rastreio internacional e seguro até 500 €. Da Alemanha para Portugal não há alfândega: os dois países estão na UE.
 
-Em Portugal, a DHL Paket não faz a entrega: passa a encomenda a uma empresa local, e as páginas da DHL não indicam sempre a mesma. A página de Portugal do dhl.de para particulares diz que entrega o CTT Expresso. A ficha de destinos para empresas (setembro de 2026) diz que no continente entrega a DHL Parcel Portugal e que o CTT Expresso fica com as ilhas, como a Madeira, e com os envios com aviso de receção. E a DHL eCommerce Portugal, a antiga DHL Parcel Portugal, juntou-se entretanto à CTT Express. O rastreio ou o aviso mostram-te quem a tem. Segundo a DHL, em Portugal entrega-se de segunda a sexta.
+Em Portugal, a DHL Paket não faz a entrega: passa a encomenda a uma empresa local, e as páginas da DHL não indicam sempre a mesma. A página de Portugal do dhl.de para particulares diz que entrega o CTT Expresso. A ficha de destinos para empresas (setembro de 2026) diz que no continente entrega a DHL Parcel Portugal e que o CTT Expresso fica com as ilhas, como a Madeira, e com os envios com aviso de receção. E, pela parceria que a DHL eCommerce e os CTT assinaram a 12 de maio de 2026, o negócio em Portugal da DHL eCommerce (a antiga DHL Parcel Portugal) passa para a CTT Expresso. O rastreio ou o aviso mostram-te quem a tem. Segundo a DHL, em Portugal entrega-se de segunda a sexta.
 
 A DHL aponta, como orientação, 4 a 5 dias úteis até Portugal continental; para a Madeira e os Açores demora mais. Podes seguir a encomenda no dhl.de, mas a empresa local nem sempre lhe passa todos os eventos. Se o rastreio ficar curto, experimenta o número no site de quem entrega:
 
 - **[CTT](carrier:ctt), para o CTT Expresso:** se não estiveres, recebes um aviso em papel, por SMS ou por email, e levantas a encomenda numa Loja ou num Ponto CTT. Na tabela dos CTT, uma encomenda postal internacional (códigos `CA`, `CB`, `CC`…) fica lá 15 dias úteis, a contar do dia útil seguinte ao aviso. Leva o aviso e o Cartão de Cidadão, o passaporte ou outro documento que os CTT aceitem.
-- **[DHL eCommerce Iberia](carrier:dhl-ecommerce-es):** a DHL diz que, depois da junção à CTT Express, os serviços continuam a funcionar normalmente. Se a encomenda ficar num ServicePoint, não pode passar para outro.
+- **[DHL eCommerce Iberia](carrier:dhl-ecommerce-es):** se a encomenda ficar numa loja ServicePoint, o estado passa a `Delivered to DHL ServicePoint, ready for collection by the recipient`. Quanto tempo fica lá à tua espera, confirma com a DHL.
 
 ## Encomenda DHL atrasada, perdida ou danificada
 
@@ -80,7 +80,6 @@ Segundo as páginas de cada empresa, consultadas em outubro de 2026:
 
 - **DHL Paket (Alemanha):** 0228 4333112, ou +49 228 4333112 de fora da Alemanha. Segunda a sexta das 8h às 20h e sábado das 8h às 18h, exceto feriados nacionais alemães. Tem o número de rastreio à mão. No dhl.de há também chat e formulário.
 - **CTT:** 21 047 16 16 (+351 21 047 16 16 do estrangeiro), nos dias úteis das 8h30 às 19h30.
-- **DHL eCommerce Portugal:** 210 270 755 para envios com origem na Alemanha ou fora da Europa, a linha para particulares, de segunda a sexta das 8h00 às 18h00.
 
 A DHL avisa para SMS falsos com links encurtados ou indicativos de país estranhos, e para avisos falsos com códigos QR: a DHL nunca te pede dados pessoais através do QR de um aviso. Mais em [SMS falsos de encomendas](guide:delivery-scam-texts).
 
@@ -104,7 +103,7 @@ A DHL aponta 4 a 5 dias úteis para o continente; para a Madeira e os Açores de
 
 ### Quem entrega a DHL Paket em Portugal?
 
-Depende: a DHL nomeia o CTT Expresso e, no continente, também a DHL Parcel Portugal, hoje DHL eCommerce, que se juntou à CTT Express. Nas ilhas entrega o CTT Expresso. O rastreio ou o aviso dizem-te que empresa tem a encomenda.
+Depende: a DHL nomeia o CTT Expresso e, no continente, também a DHL Parcel Portugal, hoje DHL eCommerce, cujo negócio em Portugal passa para a CTT Expresso. Nas ilhas entrega o CTT Expresso. O rastreio ou o aviso dizem-te que empresa tem a encomenda.
 
 ### Posso seguir uma DHL Päckchen?
 
@@ -136,9 +135,6 @@ Não. Nem a DHL Päckchen nem a DHL Päckchen International têm rastreio; só a
 - [CTT: Prazo para levantar](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/prazo-para-levantar) – 15 dias úteis para encomendas postais internacionais, contagem a partir do dia útil seguinte
 - [CTT: O que precisa de levar consigo](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/o-que-precisa-de-levar-consigo) – aviso e documentos de identificação aceites
 - [CTT: Linhas de apoio](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/linhas-de-apoio) – telefone e horário
-- [DHL eCommerce Portugal: página inicial](https://www.dhl.com/pt-pt/ecommerce/home.html) – junção à CTT Express, serviços normais
-- [DHL eCommerce Portugal: O meu envio foi entregue num ponto de recolha da DHL](https://www.dhl.com/pt-pt/ecommerce/home/envios-particulares/perguntas-frequentes/receber-um-envio/o-meu-envio-foi-entregue-num-ponto-de-recolha-da-dhl.html) – sem mudança de ServicePoint
-- [DHL eCommerce Portugal: Onde está o meu envio?](https://www.dhl.com/pt-pt/ecommerce/home/envios-particulares/perguntas-frequentes/receber-um-envio/onde-esta-o-meu-envio.html) – sem entregas ao sábado
-- [DHL eCommerce Portugal: Perguntas Frequentes Particulares](https://www.dhl.com/pt-pt/ecommerce/home/envios-particulares/perguntas-frequentes.html) – telefone para envios da Alemanha e horário
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra da DHL Paket
+- [CTT: CTT e DHL Ecommerce selam parceria estratégica](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-dhl-ecommerce-selam-parceria-estrategica-para-criar-rede-de-distribuicao-de-encomendas-mais-completa-da-peninsula-iberica) – parceria assinada a 12 de maio de 2026, negócio da DHL eCommerce em Portugal para a CTT Expresso
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra da DHL Paket, estado de ServicePoint da DHL eCommerce Iberia
 :::

@@ -60,7 +60,7 @@ DHL podaje tu dwie firmy. Strona DHL dla klientów indywidualnych o wysyłce do 
 
 - **Doręczenie:** według DHL jedna próba doręczenia, potem paczkę odbierasz w punkcie. Doręczenia od poniedziałku do piątku, orientacyjnie 2–3 dni robocze z Niemiec.
 - **Śledzenie:** dalej na dhl.de pod tym samym numerem, ale DHL uprzedza, że nie każdy kraj przekazuje wszystkie zdarzenia, a paczkę często da się śledzić na stronie partnera. Faktyczne miejsce odbioru widać w śledzeniu partnera, który powiadomi Cię e-mailem lub SMS-em, jeśli ma Twoje dane.
-- **Odbiór:** gdy paczkę doręcza DHL eCommerce Polska, dostajesz SMS lub e-mail, a w punkcie DHL POP podajesz PIN z powiadomienia. Ktoś inny odbierze paczkę z Twoim PIN-em i numerem listu przewozowego. Ile dni paczka czeka, sprawdź w powiadomieniu firmy, która ją doręcza: strony DHL podają tu różne terminy.
+- **Odbiór:** gdy paczkę doręcza DHL eCommerce Polska, dostajesz e-mail lub SMS z datą, miejscem i przewidywanymi godzinami doręczenia. Według DHL eCommerce Polska datę lub adres doręczenia zmienisz sam, bez kontaktu z nadawcą, a w aplikacji Mój DHL przekierujesz paczkę do punktu DHL POP albo odzyskasz PIN.
 - **Status stoi:** kilka dni bez zmian po wyjeździe z Niemiec (np. ostatni wpis w międzynarodowym centrum we Frankfurcie) to według DHL nic złego, dopóki paczka mieści się w zwykłym czasie dostawy.
 
 Między Niemcami a Polską nie ma cła, bo oba kraje są w Unii Europejskiej. O paczkach spoza UE przeczytasz w poradniku [paczka w urzędzie celnym](guide:customs).
@@ -73,15 +73,15 @@ Status „doręczona”, a paczki nie ma? Pole „Zugestellt an” (lub „Deliv
 
 Uszkodzenie lub brak zawartości zgłoś DHL w ciągu 7 dni od doręczenia: wypełnij formularz szkody (Schadensanzeige), potem zamów bezpłatny odbiór pod numerem 0228 4333112 albo oddaj całą paczkę w Filiale. DHL skontaktuje się z nadawcą.
 
-**W Polsce.** Gdy w doręczonej paczce czegoś brakuje, DHL odsyła do firmy, która ją doręczyła. Jeśli doręczał DHL eCommerce Polska, uszkodzenie zgłaszasz w ciągu 7 dni kalendarzowych od doręczenia przez formularz na dhl24.com.pl. Paczka nie dociera? Zacznij od nadawcy w Niemczech: międzynarodowe poszukiwanie DHL może trwać do 8 tygodni, bo zależy też od informacji partnera. Zobacz [zaginiona paczka](guide:lost-parcel).
+**W Polsce.** Gdy w doręczonej paczce czegoś brakuje, DHL odsyła do firmy, która ją doręczyła. Jeśli doręczał DHL eCommerce Polska, reklamację złożysz przez formularz „Zgłoszenie reklamacji / dyspozycji” na dhl24.com.pl, z numerem etykiety lub zlecenia, albo przez „Zgłoś reklamację” w Mój DHL. Paczka nie dociera? Zacznij od nadawcy w Niemczech: międzynarodowe poszukiwanie DHL może trwać do 8 tygodni, bo zależy też od informacji partnera. Zobacz [zaginiona paczka](guide:lost-parcel).
 
-## DHL Paket kontakt: telefon i infolinia w Polsce
+## DHL Paket kontakt: telefon w Niemczech i pomoc w Polsce
 
-Według stron DHL (dhl.de: 22 października 2026, DHL eCommerce Polska: wrzesień 2026):
+Według stron DHL (dhl.de: 22 października 2026):
 
 - **DHL Paket (Niemcy):** 0228 4333112, z zagranicy +49 228 4333112, od poniedziałku do piątku 8:00–20:00, w soboty 8:00–18:00, poza świętami ogólnoniemieckimi. Przygotuj numer przesyłki oraz Postnummer, jeśli masz konto, albo pełny adres.
 - **DHL Paket online i listownie:** strona „Kontakt zum Kundenservice DHL Paket” z formularzem i czatem; adres: DHL Paket GmbH, Kundenservice, 22795 Hamburg.
-- **DHL eCommerce Polska:** infolinia +48 42 6 345 345, poniedziałek–piątek 7:00–20:00, sobota 7:00–15:00.
+- **DHL eCommerce Polska:** w aplikacji i na stronie Mój DHL („Kontakt”, „Zgłoś reklamację”), reklamacje także przez formularz na DHL24.
 - **DHL Express Polska:** numery i godziny znajdziesz na stronie [DHL Express](carrier:dhl-express).
 
 DHL nigdy nie prosi SMS-em o dane osobowe ani o płatność; podejrzaną wiadomość zgłoś na phishing@dhl.com. Zobacz [fałszywe SMS-y o paczce](guide:delivery-scam-texts).
@@ -104,9 +104,9 @@ DHL podaje dwie firmy: DHL Express Polska (strona dla klientów indywidualnych) 
 
 DHL podaje orientacyjnie 2–3 dni robocze. W Niemczech paczka dociera zwykle 1–2 dni robocze po nadaniu, a przed Bożym Narodzeniem dłużej.
 
-### Czy paczkę DHL Paket sprawdzę na sprawdz.dhl.com.pl?
+### Czy paczkę DHL Paket sprawdzę w Mój DHL?
 
-Możesz spróbować: DHL eCommerce Polska wymienia tam numery `JJD`, 12-cyfrowe i w formacie „2 litery + 9 cyfr + 2 litery”. Jeśli strona nie zna numeru, śledź paczkę na dhl.de.
+Czasem tak. Mój DHL podaje, że paczkę nadaną za granicą da się tam śledzić, gdy dotrze do magazynu DHL eCommerce Polska. Wtedy Mój DHL może znać jej numer `JJD`: w Peek wybierz DHL eCommerce Poland przez „Zmień przewoźnika”, bo sam numer `JJD` trafia do DHL z Niemiec. Jeśli Mój DHL nie zna numeru, śledź paczkę na dhl.de.
 
 ### Czy da się śledzić DHL Päckchen?
 
@@ -135,8 +135,8 @@ Nie. DHL Päckchen i Päckchen International nie mają śledzenia, tylko paczki 
 - [DHL: Parcel has arrived, but there is a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – numer z zagranicy
 - [DHL: Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – formularz szkody, oddanie w Filiale, adres
 - [DHL: Security notices](https://www.dhl.de/en/toolbar/footer/sicherheitshinweise.html) – fałszywe SMS-y, phishing@dhl.com
-- [DHL eCommerce: Śledzenie paczek krajowych i zagranicznych](https://sprawdz.dhl.com.pl/) – obsługiwane formaty numerów, w tym JJD, 12 cyfr i 2 litery + 9 cyfr + 2 litery
-- [DHL eCommerce Polska: Odbierz przesyłkę w punkcie DHL POP](https://www.dhl.com/pl-pl/ecommerce/dla-ciebie/odbior/punkt.html) – SMS lub e-mail, PIN, odbiór przez inną osobę
-- [DHL eCommerce Polska: Kontakt - śledź przesyłkę](https://www.dhl.com/pl-pl/ecommerce/dla-ciebie/obsluga/kontakt/sledzenie.html) – uszkodzenie w 7 dni kalendarzowych, formularz DHL24, infolinia i godziny
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje z DHL Paket
+- [DHL24: portal DHL eCommerce Polska](https://dhl24.com.pl/) – e-mail lub SMS z datą, miejscem i godzinami, zmiana daty lub adresu bez kontaktu z nadawcą
+- [DHL24: Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – formularz reklamacji, numer etykiety lub zlecenia
+- [DHL eCommerce Polska: Mój DHL, śledzenie](https://mojdhl.pl/tracking) – przekierowanie do punktu, odzyskanie PIN-u, „Kontakt”, „Zgłoś reklamację”, paczki z zagranicy po dotarciu do magazynu DHL eCommerce Polska
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje z DHL Paket; numery JJD w Mój DHL
 :::

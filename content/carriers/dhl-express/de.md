@@ -6,71 +6,78 @@ published: 2026-10-13
 updated: 2026-10-27
 ---
 
-DHL Express ist der internationale Kurierdienst von DHL für zeitgenaue Sendungen. Shops im Ausland nutzen ihn oft, weil sie mit DHL einen Vertrag über die Lieferung von Online-Bestellungen haben. Verfolgen kannst du die Sendung mit der 10-stelligen Frachtbriefnummer auf dhl.com oder MyDHL+, über den Link in DHLs E-Mail oder SMS, oder indem du die Nummer oben ins Feld einfügst. Die Nummer schickt dir meist der Shop mit der Versandbestätigung.
+Füg eine Frachtbriefnummer von DHL Express oder einen MyDHL+-Link oben ins Feld ein, um das Paket zu verfolgen. DHLs eigene Sendungsverfolgung findest du in Deutschland auf dhl.de und in der App von DHL Express.
 
 ## DHL Express Sendungsverfolgungsnummer: wo sie steht und wie sie aussieht
 
-DHL Express nennt seine Sendungsnummer Frachtbriefnummer (englisch „waybill number“), im Zustellportal auch „10-stellige Sendungsnummer“. Laut DHL gibt sie dir in der Regel der Versender oder Online-Shop, meist in der Bestellbestätigung oder der Versand-E-Mail. Fehlt sie, frag dort nach. Mehr Tipps in [Sendungsnummer finden](guide:find-tracking-number).
-
-DHL Express beschreibt zwei Formen (Ziffern erfunden):
+Die Sendungsnummer von DHL Express ist die Frachtbriefnummer (englisch „waybill number“). Schau in die Versand-E-Mail des Shops oder auf deine Bestellseite; ein MyDHL+-Link enthält die Nummer hinter `id=`. Hat der Versender DHL Express deine E-Mail-Adresse gegeben, schickt dir laut dhl.de auch DHL Express die Sendungsnummer per E-Mail. Mehr Tipps in [Sendungsnummer finden](guide:find-tracking-number).
 
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
-| `1234567891` | Die Frachtbriefnummer: 10 Ziffern, damit verfolgst du die ganze Sendung. |
-| `JD014600001234567890` | Die Packstück-Nummer: 20 Zeichen, beginnt mit `JD`, eine pro Paket in der Sendung. |
+| `1234567891` | Die Frachtbriefnummer: 10 Ziffern, damit verfolgst du die ganze Sendung. Die letzte Ziffer ist eine Prüfziffer. |
+| `JD014600001234567890` | Die Packstück-Nummer: `JD01` und 16 Ziffern, auf dem Etikett als `(J)JD…` unter dem unteren Barcode. Jedes Paket einer Sendung hat seine eigene, und sie führt zur Frachtbriefnummer zurück. |
 
-Auch Mondial Relay, Relais Colis, TIPSA, Estafeta und DHL eCommerce Iberia vergeben 10-stellige Nummern. Schau also in der E-Mail des Shops nach, welcher Paketdienst genannt ist. Beginnt deine Nummer nicht mit `JD` und hat sie Buchstaben oder eine andere Länge, gehört sie laut DHL sehr wahrscheinlich zu einem anderen DHL-Bereich mit eigener Sendungsverfolgung, etwa [DHL Paket](carrier:dhl) oder [DHL eCommerce](carrier:dhl-ecommerce).
+Auch Mondial Relay, Relais Colis, TIPSA, Estafeta, [Packeta](carrier:packeta), DHL eCommerce Iberia und [DHL Paket](carrier:dhl) vergeben 10-stellige Nummern. Schau also in der E-Mail des Shops nach, welcher Paketdienst genannt ist.
 
-DHL vergibt Frachtbriefnummern nach einer Weile neu. Deshalb kann die Sendungsverfolgung kurz Daten einer fremden Sendung zeigen. Dein Paket geht laut DHL trotzdem an seine eigene Adresse.
+DHL vergibt Frachtbriefnummern neu: Unter einer Nummer können Scans einer früheren Sendung auftauchen, die Peek ignoriert.
 
 ## DHL Express Status: was die Meldungen bedeuten
 
-DHL Express' Sendungsverfolgung zeigt die Status auf Englisch. Viele enden mit dem Standort, zum Beispiel `Processed at` gefolgt von Stadt und Land. Die wichtigsten, in der Reihenfolge, in der ein Paket sie durchläuft:
+Das sind Scan-Texte, die Peek von DHL Express liest, in DHLs Englisch, ungefähr in der Reihenfolge, in der ein Paket sie durchläuft, mit dem Status, den Peek jeweils zeigt. Viele enden mit dem Standort, zum Beispiel `Processed at` gefolgt von Stadt und Land.
 
-| DHL Express schreibt | Was es für dich heißt |
-| --- | --- |
-| `Shipment information received` | Der Versender hat die Sendung angelegt, die Frachtbriefnummer gibt es. DHL hat das Paket noch nicht. |
-| `Shipment picked up` | Ein DHL-Express-Kurier hat das Paket beim Versender abgeholt. |
-| `Arrived at DHL Sort Facility` | Es ist in einem Sortierzentrum angekommen. Das siehst du unterwegs mehrmals. |
-| `Shipment has departed from a DHL facility` | Es ist auf dem Weg zur nächsten Station. |
-| `Customs clearance status updated. Note - The Customs clearance process` … | Der Zoll im Zielland bearbeitet die Sendung. |
-| `Clearance processing complete at` | Der Zoll hat die Sendung freigegeben. |
-| `Arrived at DHL Delivery Facility` | Es ist im Zustelldepot im Zielland angekommen. |
-| `Shipment is out with courier for delivery` | Ein Kurier hat das Paket und ist unterwegs zu dir. |
-| `Delivery attempted but no response at Consignee address` | Der Kurier war da, aber niemand hat geöffnet. „Consignee“ bist du, der Empfänger. |
-| `On Hold Awaiting for Payment of Shipment Related Fees` | Das Paket wartet, bis Einfuhrabgaben bezahlt sind. |
-| `Shipment is on hold` | Die Sendung steht an einem Kontrollpunkt still. Frag bei DHL nach dem Grund. |
-| `Delivered` | Zugestellt an den Empfänger, also an dich. |
-
-Die Zollmeldung kann schon kurz nach dem Abflug im Herkunftsland erscheinen, denn die Verzollung kann laut DHL beginnen, während das Paket noch unterwegs ist. In DHLs deutschen Hilfeseiten heißt sie `Verzollungsstatus aktualisiert`. So siehst du früh, ob der Zoll noch Angaben braucht: Klick auf „Further details“ daneben.
-
-`Processed at` und `Shipment is in transit to destination` sind normale Transportschritte. Der Ort bei Abholung und Zustellung ist laut DHL der Standort der zuständigen DHL-Station, nicht unbedingt dein Wohnort. `Returned to Shipper` heißt: Das Paket geht zurück, etwa nach Zollproblemen, einer Annahmeverweigerung oder unbezahlten Gebühren.
+| DHL Express' Scan | Peek zeigt | Was es heißt |
+| --- | --- | --- |
+| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Angekündigt | Der Versender hat DHL die Sendungsdaten geschickt. |
+| `Shipment picked up`, `Shipment accepted` | Beim Paketdienst eingegangen | DHL Express hat das Paket. |
+| `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | Unterwegs | Es läuft durch DHLs Netz. |
+| `Scheduled to depart on the next planned movement` | Unterwegs | Es wartet an einem Standort auf den nächsten Lkw oder Flug. |
+| `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | Beim Zoll | Es ist in der Verzollung (siehe unten). |
+| `Payment is received and recorded for shipment related fees` | Beim Zoll | Die Abgaben oder Gebühren sind bezahlt; das Paket bleibt beim Zoll, bis die Verzollung abgeschlossen ist. |
+| `Clearance processing complete at` | Unterwegs | Der Zoll ist fertig, es geht weiter. |
+| `Arrived at DHL Delivery Facility` | Unterwegs | Es ist im DHL-Standort angekommen, der es zustellt. |
+| `Shipment is out with courier for delivery` | In Zustellung | Ein Kurier bringt es zu dir. |
+| `Delivery attempted but no response at Consignee address`, `Delivery attempt could not be completed` | Zustellversuch | Die Zustellung hat nicht geklappt. „Consignee“ bist du, der Empfänger. |
+| `Shipment is scheduled for delivery` | Unterwegs | Eine Zustellung ist für eine spätere Tour geplant, etwa nach einem verpassten Versuch. |
+| `Awaiting collection by the consignee` | Abholbereit | Es liegt in einer DHL-Einrichtung, bis du es abholst. |
+| `Delivered` | Zugestellt | Es ist zugestellt. |
+| `Shipment is on hold` | Problem gemeldet | DHL hat die Sendung vorerst angehalten. |
+| `Shipment arrived at incorrect facility. It will be sent to the correct destination` | Problem gemeldet | Es wurde falsch sortiert und geht mit Verspätung zum richtigen Standort weiter. |
+| `Returned to shipper` | Zurück an Absender | Es geht zurück an den Versender. |
 
 ## DHL Express Zustellung verpasst oder ändern
 
-Mit dem kostenlosen [On Demand Delivery](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=DE&lang=de) von DHL gibst du die 10-stellige Sendungsnummer als Gast ein und wählst aus bis zu sechs Optionen: Abstellen an einem sicheren Ort ohne Unterschrift, ein anderes Lieferdatum, Abgabe bei Nachbarn, Concierge oder Pförtner, Abholung in einem DHL Express Service Point oder an einem Locker, eine andere Adresse oder eine Urlaubspause von bis zu 30 Tagen. DHL benachrichtigt dich per E-Mail, SMS, App oder WhatsApp. Welche Optionen und Wege es gibt, hängt laut DHL vom Land ab.
+Nach einem verpassten Versuch steht in der Sendungsverfolgung `Delivery attempted but no response at Consignee address` oder `Delivery attempt could not be completed`. Folgt `Shipment is scheduled for delivery`, ist ein neuer Versuch geplant; `Awaiting collection by the consignee` heißt, das Paket wartet in einer DHL-Einrichtung auf dich.
 
-Wie viele Zustellversuche es gibt, schreibt DHL Express Italien: Der Kurier versucht dich unter der Telefonnummer auf dem Frachtbrief anzurufen und kommt ein zweites Mal. Klappt auch das nicht, bleibt die Sendung im nächsten DHL-Express-Servicecenter und wartet auf Anweisungen. In Deutschland hat DHL Express für verpasste Sendungen eine eigene Telefonnummer (siehe Kontakt).
+In Deutschland hinterlässt der Fahrer laut dhl.de eine Benachrichtigungskarte mit einer Referenznummer, und die Sendung liegt dann in einem nahen DHL Service Point oder einer Filiale. Mit der Sendungs- oder Referenznummer zeigt dir DHLs kostenloser Dienst On Demand Delivery, wo: Du kannst sie noch am selben Tag abholen oder eine Zweitzustellung buchen. Zur Abholung bringst du einen gültigen Ausweis mit; schickst du jemand anderen, gibst du ihm eine Vollmacht. Holst du sie nicht innerhalb von sieben Tagen ab, geht sie zurück an den Versender.
 
-**Zoll und Einfuhrabgaben.** Fallen Zoll und Steuern an, legt DHL sie meist für dich aus und holt sie vor oder bei der Zustellung bei dir ab. DHL schreibt: „Generell kann DHL eine Sendung vor der Zahlung nicht ausliefern.“ Hat der Shop die Abgaben übernommen (Duty Tax Paid), zahlst du nichts. Ob DHL für das Auslegen eine Gebühr berechnet und wie hoch sie ist, steht in DHL Express' Service- und Preisübersicht für dein Land. In der Schweiz kannst du Einfuhrabgaben und MwSt. online bezahlen. Mehr in [Paket beim Zoll](guide:customs).
+Hat der Versender On Demand Delivery freigeschaltet, kannst du über den Link in der SMS oder E-Mail von DHL Express schon vorher umplanen: Tag oder Zeitfenster, Nachbar, andere Adresse, DHL Service Point, Urlaubsaufbewahrung oder Zustellung ohne Unterschrift. Ändern kannst du die Zustellung nur bei DHL, nicht in Peek. Mehr in [Paket verpasst](guide:missed-delivery) und [Paket nicht abgeholt](guide:uncollected-parcel).
 
-## DHL Express Sendungsverfolgung nicht aktuell oder Paket verloren
+## DHL Express Paket beim Zoll
 
-DHLs Statusseite für Malaysia rät, DHL zu kontaktieren, wenn sich die Sendungsverfolgung mehr als 3 Tage nicht ändert. Wann du dir Sorgen machen solltest, steht in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+Kommt ein Paket aus einem Nicht-EU-Staat, können Einfuhrabgaben fällig werden. Solange es beim Zoll ist, zeigt die Sendungsverfolgung `Customs clearance status updated…`, `Processed for clearance at` oder `Clearance event`, nach der Zahlung `Payment is received and recorded for shipment related fees` und nach der Freigabe `Clearance processing complete at`.
 
-Zeigt die Sendungsverfolgung den Hinweis, DHL zu kontaktieren, fehlen DHL laut eigener Aussage Angaben, meist wegen einer falschen Adresse. Das lässt sich über den Kundenservice „sehr schnell“ klären. Bei `Shipment is on hold` sagt DHL ebenfalls: beim Kundenservice nachfragen und dessen Anweisungen folgen.
+In Deutschland übernimmt laut Zoll in den meisten Fällen der Post- oder Kurierdienst die Zollanmeldung und legt die Einfuhrabgaben aus. Du zahlst sie in der Regel bei der Zustellung, dazu meist eine Servicepauschale, deren Höhe in den AGB des Dienstes steht. Seit dem 1. Juli 2026 fällt für Sendungen aus Nicht-EU-Staaten bis 150 € ein pauschaler Zoll von 3 € je Warenkategorie an, dazu wie bisher die Einfuhrumsatzsteuer von 19 bzw. 7 %. Dieser Pauschalzoll gilt laut dem EU-Portal „Ihr Europa“ in der ganzen EU, also auch in Österreich.
 
-Ist die Sendung verspätet, beschädigt oder verloren, dürfen laut DHL Versender, Empfänger oder wer den Transport bezahlt hat eine Forderung stellen, innerhalb von 30 Tagen. Das Schweizer Formular zählt ab Zustellung, die italienischen ab Annahme durch DHL. Melde dich also früh. Bei Schäden behältst du Inhalt und Verpackung, machst Fotos und hältst einen Wertnachweis bereit.
+DHL Express Deutschland schreibt auf dhl.de, dass es fällige Zölle auslegt und sie danach bei dir einfordert, ob du die Ware annimmst oder nicht. Du zahlst bar oder per QR-Code an der Haustür oder vorab online über On Demand Delivery, ohne Anmeldung. Ohne Zahlung, oder ohne schriftliche Zusage des Versenders, die Kosten zu übernehmen, stellt DHL die Sendung nicht zu. Mehr in [Paket beim Zoll](guide:customs).
+
+## DHL Express Sendung verspätet, angehalten oder verloren
+
+Steht die Sendungsverfolgung still oder zeigt sie `Shipment is on hold`, lies [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating). Fordert dich DHLs Sendungsverfolgung auf, DHL zu kontaktieren, reichen DHL laut dhl.de oft die Angaben nicht, etwa weil die Adresse falsch oder unvollständig ist; ein Anruf beim Kundenservice kann das schnell klären. Ist eine Sendung nicht angekommen, meldest du dich laut dhl.de so bald wie möglich beim Kundenservice, mit einer genauen Beschreibung von Ware und Verpackung.
+
+Hast du bei einem Händler bestellt, ist er dein Ansprechpartner, auch wenn DHL Express das Paket bringt. Laut „Ihr Europa“ haftet er für Schäden an der Ware vom Versand bis zur Übergabe an dich. Ist nichts anderes vereinbart, muss er innerhalb von 30 Tagen liefern. Kommt nichts, setz ihm eine angemessene Nachfrist; hält er auch die nicht ein, kannst du vom Vertrag zurücktreten und bekommst dein Geld zurück. Das gilt in der ganzen EU.
+
+**Zugestellt, aber nicht da?** DHLs Sendungsverfolgung kann die Unterschrift zeigen; Peek speichert sie nicht. Schau bei DHL nach und wende dich dann an den Händler. Mehr in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received) und [Paket verloren](guide:lost-parcel).
 
 ## DHL Express Kontakt und Telefonnummer
 
-So listete DHL Express die Kanäle am 13. Oktober 2026 auf seinen Hilfe-und-Support-Seiten:
+Für Express-Sendungen in Deutschland nennt DHL auf dhl.de diese Kontakte:
 
-- **Deutschland:** Kundenservice +49 (0) 228 902 435-11 für nationale und +49 (0) 228 902 435-13 für internationale Sendungen, für Sendungsstatus, Lieferung und Abholung. „DHL Express Sendung Verpasst“: +49 (0)228 902 435-14. Montag bis Freitag 7 bis 19 Uhr, Samstag 8 bis 14 Uhr, dazu ein WhatsApp-Chat. DHL Paket hat eine andere Nummer.
-- **Österreich:** Kundendienst 07221/201-5000, aus dem Ausland +43 7221/201-5000, Montag bis Freitag 8 bis 17 Uhr, Chat rund um die Uhr.
-- **Schweiz:** 0848 711 711 (CHF 0.08/Min.), Montag bis Freitag 7.30 bis 18 Uhr, Chat rund um die Uhr und WhatsApp.
+- **Kundenservice:** +49 (0) 228 902 435-11 für nationale und +49 (0) 228 902 435-13 für internationale Sendungen, Montag bis Freitag 7 bis 19 Uhr, nicht an bundesweiten Feiertagen.
+- **Sendung verpasst (On Demand Delivery):** +49 (0)228 90243514, Montag bis Freitag 7 bis 19 Uhr.
+- **Steuern und Einfuhrzölle:** +49 (0)2203 699 230-0, Montag bis Freitag 8.30 bis 16 Uhr.
+- **WhatsApp-Chat:** +49 (0) 173/54 64 461, Montag bis Freitag 8 bis 18 Uhr.
 
-> DHL warnt vor gefälschten SMS mit Kurzlinks (etwa bit.ly), einem allgemeinen Absender wie „Delivery“ oder einer unerwarteten Ländervorwahl. Per E-Mail oder SMS verlangt DHL nur Zoll und Steuern, und vorher bekommst du einen Einmalcode. Echte E-Mails kommen von @dhl.com oder DHL-Domains, nie von Gratis-Mailadressen. Einen Screenshot mit der Absendernummer schickst du an phishing@dhl.com.
+DHL Paket hat eine andere Nummer. In Österreich und der Schweiz findest du die Kontakte von DHL Express auf DHLs Website für dein Land.
 
 ## DHL Express Sendung mit Peek verfolgen
 
@@ -84,35 +91,34 @@ Du siehst den Status, jeden Scan mit Station auf einer Karte und das Zielland. D
 
 ### Warum ist die DHL Express Sendungsverfolgung nicht möglich?
 
-Meist gehört die Nummer zu einem anderen DHL-Bereich: Frachtbriefnummern von DHL Express haben genau 10 Ziffern. Eine neue Nummer zeigt nur `Shipment information received`, bis DHL das Paket hat.
+Meist gehört die Nummer zu einem anderen DHL-Paketdienst: Frachtbriefnummern von DHL Express haben genau 10 Ziffern, die letzte ist eine Prüfziffer, ein Tippfehler fällt also meist durch. Eine neue Nummer zeigt oft nur `Shipment information received`, bis DHL das Paket abgeholt hat.
 
 ### Ist DHL dasselbe wie DHL Express?
 
-Nein. Es sind getrennte Bereiche eines Konzerns, jeder mit eigener Sendungsverfolgung und eigener Telefonnummer. Pakete ohne 10-stellige Frachtbriefnummer laufen meist über DHL Paket oder DHL eCommerce.
+Nicht in Peek: DHL Express ist ein eigener Paketdienst, getrennt von [DHL Paket](carrier:dhl) und [DHL eCommerce](carrier:dhl-ecommerce), jeder mit eigenen Nummern und eigener Sendungsverfolgung. Pakete ohne 10-stellige Frachtbriefnummer oder `JD01`-Nummer laufen meist über einen von ihnen.
 
 ### Wo finde ich die DHL Waybill Number?
 
-Die Waybill Number ist die 10-stellige Frachtbriefnummer. Sie steht in der Versand-E-Mail oder Bestellbestätigung des Shops. Die `JD`-Nummer gehört nur zu einem einzelnen Paket.
+Die Waybill Number ist die 10-stellige Frachtbriefnummer. Sie steht meist in der Versand-E-Mail oder Bestellbestätigung des Shops. Die `JD01`-Nummer gehört nur zu einem einzelnen Paket.
 
 ### Kann ich DHL Express ohne Frachtbriefnummer verfolgen?
 
-Frag laut DHL zuerst den Versender. Hast du seine Referenz, bietet DHL Express die Verfolgung per Versenderreferenz an (Shipper's Reference Tracking).
+In Peek nicht: Es braucht die Frachtbriefnummer oder eine `JD01`-Nummer vom Etikett. Laut dhl.de kannst du mit der Referenznummer des Versenders die „Referenzsuche“ in DHLs Express-Sendungsverfolgung auf dhl.de nutzen; sonst frag den Shop oder Versender.
+
+### Ist eine SMS von DHL Express echt?
+
+Nicht unbedingt. Laut den Sicherheitshinweisen auf dhl.de enthalten gefälschte SMS oft einen Kurzlink, etwa mit bit.ly, und statt einer Absendernummer eine allgemeine Bezeichnung wie „Lieferung“, und DHL fordere nie per SMS zu Zahlungen auf. Echte E-Mails von DHL kommen von @dhl.com, @dhl.de oder einer anderen DHL-Domain, nie von Gratis-Adressen. Die FAQ zur Express-Sendung auf dhl.de zeigt allerdings echte Zahlungsaufforderungen für Einfuhrabgaben: eine SMS mit Link und dem Absender „DHL Express“ und eine E-Mail von „DHL Express <noreply@dhl.com>“. Am sichersten zahlst du also nicht über einen Link, sondern gibst die Sendungsnummer selbst bei On Demand Delivery ein; dort kannst du die Abgaben auch ohne Link bezahlen. Eine verdächtige SMS schickst du als Screenshot, mit der Nummer des Absenders, an phishing@dhl.com. Mehr in [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 
 :::sources
-- [DHL Express: FAQs – Sendungsverfolgung (Deutschland)](https://mydhl.express.dhl/de/de/help-and-support/faqs/tracking-monitoring.html) – Frachtbriefnummer, neu vergebene Nummern, Ort der Station, Zollstatus, Kontakt-Hinweis, zuerst den Versender fragen
-- [DHL Express: FAQs – Zollabgaben und Steuern (Deutschland)](https://mydhl.express.dhl/de/de/help-and-support/faqs/duties-and-taxes.html) – Vertrag des Shops, DHL legt Abgaben aus, keine Zustellung vor Zahlung, Duty Tax Paid, „Verzollungsstatus aktualisiert“
-- [DHL Express: Hilfe und Support (Deutschland)](https://mydhl.express.dhl/de/de/help-and-support.html#/contact_us) – Telefonnummern, Zeiten, WhatsApp
-- [DHL Express: Hilfe und Support (Österreich)](https://mydhl.express.dhl/at/de/help-and-support.html#/contact_us) – Telefonnummer, Zeiten, Chat
-- [DHL Express: Hilfe und Support (Schweiz)](https://mydhl.express.dhl/ch/de/help-and-support.html#/contact_us) – Telefonnummer, Kosten, Zeiten, Online-Zahlung der Einfuhrabgaben
-- [DHL: On Demand Delivery (Deutschland)](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=DE&lang=de) – 10-stellige Sendungsnummer, sechs Optionen, 30 Tage Urlaubspause
-- [DHL Express: E-Mail an uns – Forderung (Schweiz)](https://mydhl.express.dhl/ch/de/forms/csm/claim.html) – 30 Tage nach Zustellung
-- [DHL: Betrugsbekämpfung (Deutschland)](https://www.dhl.com/de-de/home/footer/fraud-awareness.html) – Merkmale gefälschter SMS, nur Zoll und Steuern mit Einmalcode, phishing@dhl.com
-- [DHL Express: FAQs – Tracking and Monitoring (Spain, English)](https://mydhl.express.dhl/es/en/help-and-support/faqs/tracking-monitoring.html) – 10-stellige Frachtbriefnummer, `JD`-Packstück-Nummer, andere DHL-Bereiche, Shipper's Reference Tracking
-- [DHL: On Demand Delivery (United Kingdom)](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=GB) – Optionen je nach Land, Benachrichtigungswege
-- [DHL Express: Tracking (Italy, English)](https://www.dhl.com/it-en/home/express/businesses/tracking-your-shipments.html) – Anruf, zweiter Versuch, Servicecenter
-- [DHL: Shipment Tracking Status Explained (Malaysia)](https://www.dhl.com/discover/en-my/ship-with-dhl/track/tracking-status) – Bedeutung der Status, Rat nach 3 Tagen
-- [DHL Express: Register a Claim for Damage (Italy)](https://mydhl.express.dhl/it/en/forms/claim-for-damage.html) – wer fordern darf, 30 Tage ab Annahme, Verpackung aufbewahren, Wertnachweis
-- [DHL Express: Email Us – Claim (United Kingdom)](https://mydhl.express.dhl/gb/en/forms/csm/claim.html) – Fotos und Wertnachweis
-- [DHL: Fraud Awareness (United Kingdom)](https://www.dhl.com/gb-en/home/footer/fraud-awareness.html) – Absenderadressen echter E-Mails
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek bei DHL Express liest
+- [DHL: Express-Sendung verpasst (dhl.de)](https://www.dhl.de/de/privatkunden/pakete-empfangen/express-sendung-empfangen/express-sendung-verpasst.html) – Service Point oder Filiale, Referenznummer, am selben Tag abholen oder Zweitzustellung, Ausweis, Vollmacht, sieben Tage, E-Mail mit der Sendungsnummer
+- [DHL: Express-Sendung umleiten (dhl.de)](https://www.dhl.de/de/privatkunden/pakete-empfangen/express-sendung-empfangen/express-sendung-umleiten.html) – kostenloses On Demand Delivery, Optionen, Link aus SMS oder E-Mail, nur nach Freischaltung durch den Versender
+- [DHL: FAQ zur Express-Sendung (dhl.de)](https://www.dhl.de/de/privatkunden/pakete-empfangen/express-sendung-empfangen/faq.html) – bar, per QR-Code oder vorab online zahlen, keine Zustellung ohne Zahlung oder Zusage des Versenders, Absender echter Zahlungs-SMS und -E-Mails, Zahlung ohne Link
+- [DHL Express: Tracking & Tracing FAQ (dhl.de)](https://www.dhl.de/de/geschaeftskunden/express/verfolgen/tracking-tracing-faq.html) – Referenzsuche, Kontakt-Hinweis bei fehlenden Angaben, Zweitzustellung mit der Benachrichtigungskarte
+- [DHL Express: Kundenservice-FAQs (dhl.de)](https://www.dhl.de/de/geschaeftskunden/express/infos-knowhow/kundenservice-faqs.html) – DHL legt Zölle aus, Zahlung auch ohne Annahme, verlorene Sendung früh melden
+- [DHL Express: Kontakt per Telefon (dhl.de)](https://www.dhl.de/de/geschaeftskunden/express/kontakt-express/telefon.html) – Kundenservice, Sendung verpasst, Steuern und Einfuhrzölle, Zeiten, DHL Paket mit eigener Nummer
+- [DHL Express: WhatsApp (dhl.de)](https://www.dhl.de/de/geschaeftskunden/express/kontakt-express/whatsapp.html) – WhatsApp-Nummer und Zeiten
+- [DHL: Sicherheitshinweise (dhl.de)](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – Kurzlinks, allgemeiner Absender, keine Zahlungsaufforderung per SMS, echte Absenderdomains, phishing@dhl.com
+- [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – Kurierdienst meldet an und legt aus, Zahlung bei Zustellung, Servicepauschale, 3 € seit 1. Juli 2026, 19 bzw. 7 %
+- [Ihr Europa: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – 30 Tage, Nachfrist, Rücktritt, Haftung des Händlers, 3 € je Position in der EU
+- [Universal Parcel Scraper: DHL Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dhl-express) – Frachtbrief- und Packstück-Nummern, Prüfziffer, andere 10-stellige Nummern, neu vergebene Nummern, DHL Express' Scans und Peeks Status dazu, Unterschrift bei DHL, was Peek bei DHL Express liest
 :::

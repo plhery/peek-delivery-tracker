@@ -6,70 +6,75 @@ published: 2026-10-13
 updated: 2026-10-27
 ---
 
-DHL Express to międzynarodowy dział kurierski DHL dla przesyłek z gwarantowanym terminem, z którego korzystają sklepy mające z DHL umowę na doręczanie zamówień. Paczkę śledzisz po 10-cyfrowym numerze listu przewozowego na stronie DHL, przez link z e-maila lub SMS-a od DHL albo wklejając numer w pole powyżej. Numer zwykle podaje sklep w e-mailu o wysyłce.
+Wklej w pole powyżej numer listu przewozowego DHL Express albo link do śledzenia z MyDHL+ lub z dhlexpress.pl, a Peek będzie śledzić paczkę. DHL ma też własne śledzenie na swojej stronie i w aplikacji DHL Express. Według dhlexpress.pl odbiorcy indywidualni dostają też od DHL Express e-mail lub SMS z planowanym czasem doręczenia.
 
 ## Numer listu przewozowego DHL Express: gdzie go znaleźć
 
-DHL Express nazywa swój numer przesyłki numerem listu przewozowego (po angielsku waybill number). Według DHL podaje go nadawca albo sklep, najczęściej w potwierdzeniu zamówienia lub w e-mailu o wysyłce; jeśli go tam nie ma, zapytaj sklep. Wiadomości DHL z usługi On Demand Delivery przychodzą SMS-em albo e-mailem, z linkiem. Więcej podpowiedzi w poradniku [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
+Numer przesyłki DHL Express to numer listu przewozowego (po angielsku waybill number). Szukaj go w e-mailu o wysyłce ze sklepu albo na stronie zamówienia; link do śledzenia z MyDHL+ też go zawiera, po `id=`. Więcej podpowiedzi w poradniku [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
-DHL Express opisuje dwa kształty (cyfry wymyślone):
-
-| Numer | Co to jest |
+| Numer (wymyślony) | Co to jest |
 | --- | --- |
-| `1234567891` | List przewozowy: 10 cyfr, numer całej przesyłki. Tym śledzisz. |
-| `JD014600001234567890` | Identyfikator paczki: 20 znaków od `JD`, osobny dla każdej paczki w przesyłce. |
+| `1234567891` | List przewozowy: 10 cyfr, numer całej przesyłki. Tym śledzisz. Ostatnia cyfra jest cyfrą kontrolną. |
+| `JD014600001234567890` | Identyfikator paczki: `JD01` i 16 cyfr, wydrukowany jako `(J)JD…` pod dolnym kodem kreskowym etykiety. Każda paczka w przesyłce ma własny, a prowadzi on do listu przewozowego. |
 
-Dziesięć cyfr mają też numery Mondial Relay, Relais Colis, TIPSA, Estafety i DHL eCommerce Iberia, więc sprawdź, jakiego przewoźnika wymienia e-mail ze sklepu. Numer z literami albo o innej długości to według DHL najpewniej przesyłka innego działu grupy, z własnym śledzeniem: DHL eCommerce (w Polsce [DHL eCommerce Poland](carrier:dhl-ecommerce-pl)) albo [DHL Paket](carrier:dhl) z Niemiec.
+Dziesięć cyfr mają też numery Mondial Relay, Relais Colis, TIPSA, Estafety, [Packety](carrier:packeta), DHL eCommerce Iberia i [DHL Paket](carrier:dhl), więc sprawdź, jakiego przewoźnika wymienia e-mail ze sklepu. Według dhlexpress.pl numery DHL Parcel / eCommerce mogą mieć 11 znaków lub więcej i często zaczynają się od „C”, „3S”, „JVGL” albo „HL”; w Peek to osobny przewoźnik, [DHL eCommerce Poland](carrier:dhl-ecommerce-pl), z własnym śledzeniem.
 
-DHL co jakiś czas używa numerów listów przewozowych ponownie, więc śledzenie może przez chwilę pokazywać historię innej przesyłki. Twoja paczka jedzie mimo to pod swój adres.
+DHL używa numerów listów przewozowych ponownie: pod numerem mogą pojawić się skany wcześniejszej przesyłki, które Peek pomija.
 
 ## DHL Express śledzenie przesyłki: co znaczą statusy
 
-Linie śledzenia DHL Express są po angielsku. Wiele z nich kończy się nazwą placówki, na przykład `Processed at`, a po nim miasto i kraj. Tak wygląda zwykła droga paczki:
+To skany, które Peek odczytuje z DHL Express, w angielskim brzmieniu DHL, mniej więcej w kolejności, w jakiej spotyka je paczka, ze statusem, który Peek pokazuje przy każdym. Wiele z nich kończy się nazwą placówki, na przykład `Processed at`, a po nim miasto i kraj.
 
-| DHL Express pisze | Co to znaczy dla Ciebie |
-| --- | --- |
-| `Shipment information received` | Nadawca utworzył przesyłkę i numer listu przewozowego. DHL nie ma jeszcze paczki. |
-| `Shipment picked up` | Kurier DHL Express odebrał paczkę od nadawcy. |
-| `Arrived at DHL Sort Facility` | Paczka dotarła do sortowni; zobaczysz to kilka razy. |
-| `Shipment has departed from a DHL facility` | Paczka jedzie do następnego punktu. |
-| `Customs clearance status updated. Note - The Customs clearance process` … | Trwa odprawa celna w kraju docelowym. |
-| `Clearance processing complete at` | Odprawa celna zakończona. |
-| `Arrived at DHL Delivery Facility` | Paczka dotarła do placówki doręczającej w kraju docelowym. |
-| `Shipment is out with courier for delivery` | Kurier ma paczkę i jedzie do Ciebie. |
-| `Delivery attempted but no response at Consignee address` | Kurier był, ale nikt nie otworzył. „Consignee” to Ty, odbiorca. |
-| `On Hold Awaiting for Payment of Shipment Related Fees` | Paczka czeka na zapłatę cła i podatków. |
-| `Shipment is on hold` | Paczka stanęła w jednym z punktów. Zapytaj DHL o powód. |
-| `Delivered` | DHL doręczył paczkę odbiorcy. |
+| Skan DHL Express | Peek pokazuje | Co to znaczy |
+| --- | --- | --- |
+| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Zarejestrowana | Nadawca przekazał DHL dane przesyłki. |
+| `Shipment picked up`, `Shipment accepted` | Przyjęta przez przewoźnika | DHL Express ma paczkę. |
+| `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | W transporcie | Paczka jedzie przez sieć DHL. |
+| `Scheduled to depart on the next planned movement` | W transporcie | Czeka w placówce na najbliższy transport lub lot. |
+| `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | W urzędzie celnym | Trwa odprawa celna (więcej niżej). |
+| `Payment is received and recorded for shipment related fees` | W urzędzie celnym | Cło lub opłaty są zapłacone; paczka czeka w urzędzie celnym do końca odprawy. |
+| `Clearance processing complete at` | W transporcie | Odprawa się skończyła i paczka jedzie dalej. |
+| `Arrived at DHL Delivery Facility` | W transporcie | Paczka dotarła do placówki DHL, która ją doręczy. |
+| `Shipment is out with courier for delivery` | W doręczeniu | Kurier wiezie ją do Ciebie. |
+| `Delivery attempted but no response at Consignee address`, `Delivery attempt could not be completed` | Próba doręczenia | Doręczenie się nie udało. „Consignee” to Ty, odbiorca. |
+| `Shipment is scheduled for delivery` | W transporcie | Doręczenie zaplanowano na późniejszy kurs, na przykład po nieudanej próbie. |
+| `Awaiting collection by the consignee` | Do odbioru | Paczka czeka w placówce DHL, aż ją odbierzesz. |
+| `Delivered` | Dostarczona | Paczka została doręczona. |
+| `Shipment is on hold` | Zgłoszono problem | DHL na razie wstrzymał przesyłkę. |
+| `Shipment arrived at incorrect facility. It will be sent to the correct destination` | Zgłoszono problem | Paczka trafiła do złej placówki i z opóźnieniem jedzie do właściwej. |
+| `Returned to shipper` | Zwrócona nadawcy | Paczka wraca do nadawcy. |
 
-Linia o odprawie może się pojawić zaraz po tym, jak paczka opuści kraj nadania, bo odprawa zaczyna się czasem jeszcze w drodze. Dzięki niej wcześnie widać, czy urząd celny potrzebuje dodatkowych informacji: szczegóły rozwiniesz przy „Further details (+)”. W polskim FAQ DHL ten status nazywa się `Zaktualizowano status odprawy celnej`.
+## Doręczenie DHL Express: nieudana próba i zmiana dostawy
 
-`Processed at` i `Shipment is in transit to destination` to zwykłe etapy w drodze. Miasto doręczenia w śledzeniu to miasto stacji DHL, która obsługuje doręczenie, niekoniecznie Twoje. `Returned to Shipper` znaczy, że paczka wraca do nadawcy, na przykład po problemie z odprawą, odmowie przyjęcia albo braku zapłaty.
+Po nieudanej próbie śledzenie pokazuje `Delivery attempted but no response at Consignee address` albo `Delivery attempt could not be completed`. Jeśli potem pojawi się `Shipment is scheduled for delivery`, zaplanowano nową próbę; `Awaiting collection by the consignee` znaczy, że paczka czeka na Ciebie w placówce DHL.
 
-## Doręczenie DHL Express: nieudana próba, cło i On Demand Delivery
+W Polsce termin, adres albo sposób doręczenia zmienisz według dhlexpress.pl na infolinii DHL Express (temat 3, „Opcje dostawy”, z numerem przesyłki) albo w serwisie On-Demand Delivery. Paczkę możesz też przekierować do punktu DHL lub automatu paczkowego. W Peek doręczenia nie zmienisz. Więcej w poradnikach [nieudane doręczenie](guide:missed-delivery) i [nieodebrana paczka](guide:uncollected-parcel).
 
-W bezpłatnej usłudze [On Demand Delivery](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=PL&lang=pl) wpisujesz numer listu przewozowego jako gość albo logujesz się i wybierasz jedną z maksymalnie sześciu opcji: zostawienie paczki w bezpiecznym miejscu bez podpisu, inny dzień doręczenia, sąsiad albo recepcja, odbiór w punkcie DHL Express Service Point lub automacie, inny adres albo przechowanie na okres wakacji, maksymalnie 30 dni. DHL zaznacza, że dostępne opcje i kanały powiadomień zależą od kraju. Powiadomienia przychodzą e-mailem, SMS-em, w aplikacji DHL Express Mobile albo przez WhatsApp.
+## Cło za paczkę DHL Express spoza UE
 
-Co dzieje się po nieudanej próbie, opisuje DHL Express we Włoszech: kurier próbuje zadzwonić pod numer telefonu z listu przewozowego i przyjeżdża drugi raz, a potem paczka czeka w najbliższym centrum serwisowym DHL Express na instrukcje. Nowe instrukcje doręczenia przekażesz przez obsługę klienta.
+Za paczkę spoza UE mogą należeć się opłaty przywozowe. Dopóki trwa odprawa, śledzenie pokazuje `Customs clearance status updated…`, `Processed for clearance at` albo `Clearance event`, po zapłacie `Payment is received and recorded for shipment related fees`, a gdy urząd celny zwolni paczkę, `Clearance processing complete at`.
 
-**Cło i podatki.** Przy paczce spoza Unii DHL zwykle płaci cło i podatki importowe za Ciebie i pobiera je przed doręczeniem albo przy nim. Zanim nie zostaną zapłacone, DHL Express generalnie nie może doręczyć paczki. Jeśli sklep wybrał opcję Duty Tax Paid, nie płacisz nic. Za wyłożenie należności DHL dolicza opłatę; jej wysokość w Polsce podaje Service and Rate Guide DHL Express dla Polski. Co jeszcze może Cię czekać, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs).
+Według Krajowej Administracji Skarbowej od 1 lipca 2026 r. zakupy internetowe spoza UE nie korzystają już ze zwolnienia z cła dla przesyłek do 150 EUR. Zamiast niego obowiązuje ryczałtowe cło 3 EUR za każdą pozycję towarową w zgłoszeniu celnym. Tego cła nie płaci konsument, tylko sprzedawca, platforma internetowa lub ich przedstawiciel, ale sprzedawca może je doliczyć do ceny lub kosztów dostawy. Unijny portal Your Europe dodaje, że cło dochodzi do VAT i opłat za dostawę, a pobiera je sprzedawca albo przewoźnik.
+
+DHL Express w Polsce pisze na dhlexpress.pl, że opłaty w imporcie to najczęściej cło i VAT, liczone od wartości celnej, czyli wartości towaru razem z kosztami dostarczenia. Jeśli do odprawy brakuje informacji, DHL Express się z Tobą skontaktuje: może poprosić o upoważnienie albo o opis zawartości po polsku (tłumaczenie faktury). Przy przesyłkach do osób prywatnych, co do zasady o wartości do 150 EUR, może działać na podstawie upoważnienia dorozumianego. Należności celne zapłacisz online przez On-Demand Delivery. Więcej w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Przesyłka DHL Express opóźniona, wstrzymana, zaginiona lub uszkodzona
 
-Gdy śledzenie prosi o kontakt z DHL, zwykle brakuje danych, często chodzi o błędny adres. DHL pisze, że taką sprawę zwykle „bardzo szybko” rozwiązuje kontakt z obsługą klienta. Przy `Shipment is on hold` DHL też radzi zadzwonić i zapytać o powód. Gdy status długo się nie zmienia, zajrzyj do poradnika [status przesyłki się nie zmienia](guide:tracking-not-updating).
+Jeśli status stoi w miejscu albo pokazuje `Shipment is on hold`, zajrzyj do poradnika [status przesyłki się nie zmienia](guide:tracking-not-updating). Uszkodzoną przesyłkę według dhlexpress.pl reklamujesz w ciągu 30 dni od doręczenia; potrzebne są zdjęcia uszkodzenia, rachunek i dokumentacja.
 
-Reklamację zaginionej, spóźnionej albo uszkodzonej przesyłki może według formularzy DHL złożyć nadawca, odbiorca albo ten, kto zapłacił za transport, w ciągu 30 dni. W zależności od kraju DHL liczy je od przyjęcia przesyłki albo od doręczenia, więc nie zwlekaj. Przy uszkodzeniu zachowaj zawartość i opakowanie, zrób zdjęcia i przygotuj dowód wartości.
+Przy zakupach w sklepie to sprzedawca odpowiada za to, żeby paczka do Ciebie dotarła, nawet gdy wiezie ją DHL Express. Według Your Europe sprzedawca odpowiada za uszkodzenia towaru od wysyłki aż do chwili, gdy go otrzymasz. Jeśli nie umówiliście się inaczej, musi dostarczyć towar w ciągu 30 dni. Gdy towaru nie ma, przypomnij sprzedawcy o zamówieniu i wyznacz mu dodatkowy, rozsądny termin. Jeśli i tego nie dotrzyma, możesz rozwiązać umowę i odzyskać pieniądze.
+
+**Peek pokazuje „Dostarczona”, a paczki nie ma?** Strona śledzenia DHL może pokazywać podpis, którego Peek nie zapisuje. Sprawdź to u DHL, a potem skontaktuj się ze sprzedawcą. Więcej w poradnikach [paczka doręczona, a jej nie ma](guide:delivered-not-received) i [zaginiona paczka](guide:lost-parcel).
 
 ## DHL Express kontakt: infolinia w Polsce
 
-Kanały dla odbiorców z polskiej strony pomocy DHL Express, stan na 13 października 2026:
+Tak podaje kanały kontaktu polska strona DHL Express, dhlexpress.pl:
 
-- **Dział Obsługi Klienta:** +48 42 6 345 100, w sprawie statusu przesyłki, odprawy celnej i doręczenia; od poniedziałku do piątku 7:30–17:00, w sobotę i niedzielę nieczynne.
-- **Czat:** całą dobę, 7 dni w tygodniu, oraz WhatsApp, na [stronie Pomoc i wsparcie](https://mydhl.express.dhl/pl/pl/help-and-support.html#/contact_us).
+- **Infolinia:** +48 426 345 100; konsultanci od poniedziałku do piątku 7:30–17:00, wirtualny asystent codziennie przez całą dobę. Po połączeniu wybierz temat: 2 to status przesyłki, 3 to opcje dostawy. Przygotuj 10-cyfrowy numer przesyłki.
+- **Czat online:** konsultanci od poniedziałku do piątku 8:00–17:00, wirtualny asystent całą dobę.
+- **WhatsApp:** +48 732 141 010, konsultanci od poniedziałku do piątku 8:00–17:00, wirtualny asystent całą dobę.
 
-Miej pod ręką numer listu przewozowego.
-
-> DHL ostrzega przed fałszywymi SMS-ami ze skróconymi linkami, z nadawcą ukrytym pod ogólną nazwą w rodzaju „Delivery” albo z nieoczekiwanym numerem kierunkowym kraju. Jedyne płatności, o które DHL prosi e-mailem lub SMS-em, to cło i podatki, zabezpieczone jednorazowym kodem. Zrzut ekranu wiadomości, razem z numerem nadawcy, wyślij na phishing@dhl.com.
+DHL Parcel / eCommerce to inny operator, z własną obsługą klienta.
 
 ## Śledzenie DHL Express w Peek
 
@@ -83,34 +88,30 @@ Widzisz status, każdy skan z placówką na mapie i kraj docelowy. Godzina skanu
 
 ### Jak skontaktować się z konsultantem DHL Express?
 
-Zadzwoń pod +48 42 6 345 100, od poniedziałku do piątku od 7:30 do 17:00 (stan na 13 października 2026). Poza tymi godzinami zostaje czat, czynny całą dobę, albo WhatsApp.
+Zadzwoń na infolinię +48 426 345 100 i wybierz temat; konsultanci odbierają od poniedziałku do piątku od 7:30 do 17:00, a wirtualny asystent całą dobę. Na czacie i przez WhatsApp (+48 732 141 010) konsultanci piszą od poniedziałku do piątku od 8:00 do 17:00.
 
 ### Dlaczego numer listu przewozowego DHL nie działa?
 
-Często to numer innego działu DHL: list przewozowy DHL Express ma dokładnie 10 cyfr. Nowy numer pokazuje tylko `Shipment information received`, dopóki DHL nie odbierze paczki.
+Często to numer innego przewoźnika z grupy DHL: list przewozowy DHL Express ma dokładnie 10 cyfr, a ostatnia jest cyfrą kontrolną, więc literówka zwykle nie przechodzi kontroli. Nowy numer może pokazywać tylko `Shipment information received`, dopóki DHL nie odbierze paczki.
 
 ### Czy DHL i DHL Express to to samo?
 
-Nie: to osobne działy jednej grupy, każdy z własnym śledzeniem. Paczka bez 10-cyfrowego listu przewozowego należy zwykle do DHL eCommerce albo DHL Paket.
+W Peek nie: DHL Express to osobny przewoźnik, oddzielny od [DHL Paket](carrier:dhl) i od DHL eCommerce Poland, każdy z własnymi numerami i śledzeniem. Paczka bez 10-cyfrowego listu przewozowego ani numeru `JD01` należy zwykle do któregoś z nich.
 
 ### Czy da się śledzić DHL Express bez numeru listu przewozowego?
 
-Tak, jeśli masz numer referencyjny nadawcy: DHL Express oferuje Shipper's Reference Tracking. W innym wypadku poproś nadawcę lub sklep o numer listu przewozowego.
+W Peek nie: potrzebny jest 10-cyfrowy list przewozowy albo numer `JD01` z etykiety. Poproś sklep lub nadawcę o numer listu przewozowego.
+
+### Czy SMS od DHL z prośbą o dopłatę jest prawdziwy?
+
+Może to być oszustwo. CSIRT NASK ostrzegał przed SMS-ami, w których przestępcy podszywają się pod firmy kurierskie: piszą o problemie z doręczeniem, a link prowadzi do fałszywej strony, gdzie pod pretekstem dopłaty wyłudzają dane karty. Nie klikaj linku: numer przesyłki wpisz sam na stronie DHL albo w Peek. Podejrzany SMS przekaż w całości, bez wycinania linku, na bezpłatny numer 8080. Jeśli dane karty trafiły już na fałszywą stronę, od razu zadzwoń do banku. Więcej w poradniku [oszustwo na paczkę](guide:delivery-scam-texts).
 
 :::sources
-- [DHL Express: Najczęściej zadawane pytania – Śledzenie i monitorowanie](https://mydhl.express.dhl/pl/pl/help-and-support/faqs/tracking-monitoring.html) – numer listu przewozowego, „Zaktualizowano status odprawy celnej”, komunikat o kontakcie z DHL, miasto stacji
-- [DHL Express: Pomoc i wsparcie (Polska)](https://mydhl.express.dhl/pl/pl/help-and-support.html#/contact_us) – telefon, godziny, czat, WhatsApp
-- [DHL: On Demand Delivery (Polska)](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=PL&lang=pl) – sześć opcji, przechowanie do 30 dni, dostęp jako gość
-- [DHL Express: Cło i podatki (Polska)](https://mydhl.express.dhl/pl/pl/help-and-support/faqs/duties-and-taxes.html) – odbiorca płaci, DHL wykłada należności
-- [DHL: Ostrzeżenie przed oszustwami](https://www.dhl.com/pl-pl/home/footer/fraud-awareness.html) – fałszywe SMS-y, płatności tylko za cło i podatki z jednorazowym kodem, phishing@dhl.com
-- [DHL Express: FAQs – Tracking and Monitoring (Spain, English)](https://mydhl.express.dhl/es/en/help-and-support/faqs/tracking-monitoring.html) – 10 cyfr, identyfikator JD, inne działy DHL, Shipper's Reference Tracking
-- [DHL Express: FAQs – Tracking and Monitoring (United Kingdom)](https://mydhl.express.dhl/gb/en/help-and-support/faqs/tracking-monitoring.html) – ponowne użycie numerów, status celny, Further details
-- [DHL Express: FAQs – Duties and Taxes (United Kingdom)](https://mydhl.express.dhl/gb/en/help-and-support/faqs/duties-and-taxes.html) – umowa sklepu z DHL, brak doręczenia przed zapłatą, Duty Tax Paid
-- [DHL: On Demand Delivery (United Kingdom)](https://delivery.dhl.com/prg/on-demand-delivery.xhtml?ctrycode=GB) – zależność od kraju, kanały powiadomień
-- [DHL Express: Tracking (Italy, English)](https://www.dhl.com/it-en/home/express/businesses/tracking-your-shipments.html) – telefon kuriera, druga próba, przechowanie w centrum serwisowym
-- [DHL: Shipment Tracking Status Explained (Malaysia)](https://www.dhl.com/discover/en-my/ship-with-dhl/track/tracking-status) – znaczenie statusów, statusy alertów
-- [DHL Express: Email Us – Claim (United Kingdom)](https://mydhl.express.dhl/gb/en/forms/csm/claim.html) – 30 dni od doręczenia, zdjęcia, dowód wartości
-- [DHL Express: Register a Claim for Damage (Italy)](https://mydhl.express.dhl/it/en/forms/claim-for-damage.html) – kto może reklamować, 30 dni od przyjęcia, opakowanie
-- [DHL: Service Client (France)](https://www.dhl.com/fr-fr/home/customer-service.html) – skąd pochodzi numer
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje z DHL Express
+- [DHL Express Polska: Kontakt](https://dhlexpress.pl/kontakt/) – 10-cyfrowy numer przesyłki, numery DHL Parcel / eCommerce, infolinia, tematy 2 i 3, godziny, czat, WhatsApp, reklamacja w ciągu 30 dni od doręczenia, powiadomienia SMS/e-mail
+- [DHL Express Polska: Odbiór przesyłek](https://dhlexpress.pl/indywidualny/odbior-przesylek/) – powiadomienia e-mail/SMS z planowanym czasem doręczenia, przekierowanie, punkty i automaty, płatność należności celnych przez On-Demand Delivery
+- [DHL Express Polska: Import – osoby fizyczne](https://dhlexpress.pl/obsluga-i-proces-celny/import-osoby-fizyczne/) – odprawa spoza UE, kontakt przy brakach, upoważnienie, tłumaczenie faktury, upoważnienie dorozumiane do 150 EUR, cło i VAT od wartości celnej
+- [Krajowa Administracja Skarbowa: Zmiany w e-commerce od 1 lipca 2026 r.](https://www.gov.pl/web/kas/zmiany-w-e-commerce-od-1-lipca-2026-r) – koniec zwolnienia do 150 EUR, 3 EUR za pozycję towarową, cła nie płaci konsument
+- [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – cło pobiera sprzedawca lub przewoźnik, 30 dni, dodatkowy termin, rozwiązanie umowy, odpowiedzialność sprzedawcy za uszkodzenia
+- [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fałszywe SMS-y o przesyłce, dopłata, numer 8080, bank
+- [Universal Parcel Scraper: DHL Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dhl-express) – kształty listu przewozowego i identyfikatora paczki, cyfra kontrolna, inne 10-cyfrowe numery, ponownie używane numery, skany DHL Express i status Peek dla każdego, podpis na stronie DHL, linki z dhlexpress.pl, co Peek odczytuje z DHL Express
 :::

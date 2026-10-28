@@ -4,7 +4,7 @@ description: Cómo saber si un SMS de Correos, SEUR, GLS, DHL o InPost es falso,
 slug: estafa-paquete-sms-falso
 picture: Un móvil con un mensaje con un triángulo de aviso y un anzuelo en el enlace, una moneda tachada y Pip, preocupado, con una mano de alto en su bocadillo.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-28
 ---
 
 Un SMS o un correo que dice que tu paquete está retenido, que falta pagar una pequeña cantidad o que hay que confirmar la dirección, y que te da un enlace para arreglarlo, es casi siempre una estafa. No pulses nada: abre tú la web o la app del transportista y consulta ahí el número de seguimiento que te mandó la tienda. Si ya has metido los datos de tu tarjeta, llama ahora a tu banco al número que aparece en la tarjeta o en su app.
@@ -16,8 +16,8 @@ Estos mensajes son phishing: se hacen pasar por el transportista para sacarte da
 - **No esperas ningún paquete.** Es la primera pregunta que propone [Correos](carrier:correos-spain): si no esperas ningún envío, no eres cliente ni tienes contratado ningún servicio desde el que te puedan escribir, ignora el mensaje y bórralo.
 - **Te pide dinero o datos para entregarlo.** «Correos nunca solicita datos personales, bancarios o movimientos económicos por correo electrónico o mensaje de texto (SMS)». InPost dice que nunca te pedirá el pago de ningún servicio directamente por SMS, y [GLS](carrier:gls-es) que no pide datos de pago por correo o SMS para confirmar que recibes un envío.
 - **Te mete prisa.** Correos lo resume así: «las prisas nunca son buenas». InPost y GLS añaden las amenazas: que vas a perder el paquete o que habrá consecuencias si no haces algo ya.
-- **El enlace no es del transportista.** Enlaces acortados como bit.ly (los cita [DHL](carrier:dhl-express)), imitaciones como `inpost-es.com` o `inpost.entrega-paquete.com` (ejemplos de InPost). GLS solo enlaza a gls-group.com/ES/, e InPost te pide comprobar que el enlace lleva a inpost.es.
-- **El remitente no cuadra.** DHL avisa de SMS sin número visible, con un nombre genérico como «Entrega», o con un número que empieza por el prefijo de otro país (su ejemplo: +235). GLS te pide desconfiar si te llaman, por WhatsApp o por teléfono, con un prefijo que no es el +34. Un email desde @gmail o @yahoo no es de DHL ni de GLS.
+- **El enlace no es del transportista.** Imitaciones como `inpost-es.com` o `inpost.entrega-paquete.com` (ejemplos de InPost). GLS solo enlaza a gls-group.com/ES/, e InPost te pide comprobar que el enlace lleva a inpost.es.
+- **El remitente no cuadra.** GLS te pide desconfiar si te llaman, por WhatsApp o por teléfono, con un prefijo que no es el +34, y un email desde @gmail o @yahoo no es de GLS.
 - **Te pide llamar, descargar algo o pagar por un canal raro.** InPost nunca te pedirá que llames a un número de tarificación adicional (807, 906…), que descargues un archivo de Dropbox o WeTransfer ni que hagas una transferencia para liberar un paquete. Correos recuerda que las entidades oficiales nunca envían adjuntos ni ejecutables.
 - **Está mal escrito.** Correos y GLS señalan las faltas de ortografía y los fallos gramaticales; según GLS, muchas de estas estafas pasan por un traductor automático.
 
@@ -35,7 +35,7 @@ Los enlaces falsos suelen empezar por el nombre del transportista. El dueño de 
 
 Aunque un enlace parezca bueno, no lo uses: escribe tú la dirección del transportista.
 
-## ¿Correos, GLS, DHL e InPost envían SMS de verdad?
+## ¿Correos, GLS e InPost envían SMS de verdad?
 
 Sí, casi todos, y por eso los falsos funcionan. Esto es lo que cada uno dice en su propia página:
 
@@ -43,10 +43,9 @@ Sí, casi todos, y por eso los falsos funcionan. Esto es lo que cada uno dice en
 | --- | --- | --- |
 | Correos | SMS o correo que sustituye al aviso de llegada cuando no ha podido entregar, y SMS con la oficina donde recogerlo; si elegiste entrega en oficina, un SMS con un enlace a su buscador de oficinas | Pedir datos personales, bancarios o pagos por correo electrónico o SMS |
 | GLS | Emails desde @gls-spain.es, @mail.gls-spain.es, @comunicaciones.gls-spain.com o @gls-spain.com; enlaces solo a gls-group.com/ES/ | Pedirte por correo un pago con una plataforma online, tarjeta o transferencia (el reembolso se paga en efectivo al recibirlo); tener teléfonos que empiecen por 807 |
-| DHL | Emails desde @dhl.com o sus subdominios; enlaces solo a sus propias webs | Pedir por correo o SMS cualquier pago que no sean aranceles e impuestos |
 | InPost | Emails desde @inpost.es o @inpost-spain.com; web inpost.es | Pedir el pago de un servicio por SMS, o tasas y aduanas mediante un enlace en un SMS |
 
-Los transportistas de verdad envían enlaces, así que un enlace por sí solo no demuestra nada. Los pocos pagos reales son casi todos de aduanas, como el enlace de DHL a su plataforma de pago, identificado con el número de albarán, o el aviso de GLS Spain por correo, SMS o carta para un paquete de fuera de la UE: la guía de [paquete retenido en aduanas](guide:customs) explica cómo te los piden de verdad.
+Los transportistas de verdad envían enlaces, así que un enlace por sí solo no demuestra nada. Los pocos pagos reales son casi todos de aduanas, como el aviso de GLS Spain por correo, SMS o carta para un paquete de fuera de la UE: la guía de [paquete retenido en aduanas](guide:customs) explica cómo te los piden de verdad.
 
 ## Qué dicen los SMS falsos de paquetes
 
@@ -56,10 +55,11 @@ Se repiten los mismos guiones. Estos salen de los avisos de los propios transpor
 - **Confirma tu dirección.** Correos dice que pedir un pago o completar la dirección de entrega son los dos ganchos más usados con su nombre. InPost cita «Confirma tu dirección para recibir tu envío».
 - **Paquete retenido.** «Tu paquete está retenido», en emails falsos con un enlace a una web que imita la suya (InPost).
 - **Gastos de envío.** En 2022, INCIBE avisó de correos y SMS que suplantaban a [SEUR](carrier:seur) y pedían 2,99 € de gastos de envío. Después de la tarjeta, la web pedía un código que iba a llegar por SMS (nunca llegaba) y contestaba «código incorrecto» para parecer creíble: para entonces ya tenían los datos de la tarjeta.
+- **Paquete devuelto.** En julio de 2025, INCIBE avisó de emails que suplantaban a [DHL](carrier:dhl-express): el paquete había vuelto a una oficina de DHL y, para recuperarlo en 48 horas, había que pagar 2,86 € en una web que imitaba la de DHL.
 - **Tasas de aduana.** InPost cita SMS que piden «pagar una tasa de aduana» con un enlace. Si de verdad esperas algo de fuera de la UE, compruébalo en la web del transportista, como se explica más arriba.
 - **Una llamada.** InPost avisa de falsos agentes que llaman por un problema con tu envío y piden datos personales o bancarios. GLS confirma que el 911 118 768 es suyo: lo usa para revisar la calidad de las entregas con una reclamación abierta, nunca con fines comerciales.
-- **WhatsApp en vez de SMS.** DHL avisa de cuentas falsas que intentan llevarte a WhatsApp o Telegram. GLS dice que, si alguna vez diste tu teléfono, los estafadores pueden llamarte por WhatsApp, muchas veces desde números extranjeros, para pedirte datos bancarios o un pago.
-- **Un «transportista» para tu venta de segunda mano.** GLS y DHL no hacen de intermediarios ni de depositarios en la compraventa de artículos de segunda mano, ni usan plataformas de compraventa para anunciar sus envíos. Si alguien en Wallapop o Milanuncios te manda un enlace de «GLS» o «DHL» para cobrar, es un engaño.
+- **WhatsApp en vez de SMS.** GLS dice que, si alguna vez diste tu teléfono, los estafadores pueden llamarte por WhatsApp, muchas veces desde números extranjeros, para pedirte datos bancarios o un pago.
+- **Un «transportista» para tu venta de segunda mano.** GLS no hace de intermediario ni de depositario en la compraventa de artículos de segunda mano, ni usa plataformas de compraventa para anunciar sus envíos. Si alguien en Wallapop o Milanuncios te manda un enlace de «GLS» para cobrar, es un engaño.
 
 ## Cómo comprobar un SMS de paquete sin caer en la estafa
 
@@ -101,7 +101,7 @@ Repórtalo aunque no hayas pinchado nada, y después bórralo.
 
 | Qué ha pasado | Dónde avisar |
 | --- | --- |
-| Te ha llegado un SMS o un email falso | Al buzón de INCIBE-CERT, incidencias@incibe-cert.es, con una captura, el mensaje reenviado o la URL. Si suplanta a DHL, una captura con el número del remitente a phishing@dhl.com; a InPost, a fraude@inpost.es; a GLS, por su formulario de fraude, con capturas, el nombre y el número de quien lo envía. Si suplanta a Correos y tienes dudas, pregunta a su Atención al Cliente o en @CorreosAtiende, en X |
+| Te ha llegado un SMS o un email falso | Al buzón de INCIBE-CERT, incidencias@incibe-cert.es, con una captura, el mensaje reenviado o la URL. Si suplanta a InPost, a fraude@inpost.es; a GLS, por su formulario de fraude, con capturas, el nombre y el número de quien lo envía. Si suplanta a Correos y tienes dudas, pregunta a su Atención al Cliente o en @CorreosAtiende, en X |
 | Tienes dudas o no sabes qué hacer | El 017 de INCIBE, por teléfono, WhatsApp (900 116 117) o Telegram (@INCIBE017), de 8:00 a 23:00 |
 | Has perdido dinero o datos | Primero tu banco. Después, denuncia en la Policía Nacional (en comisaría o con la Oficina Virtual de Denuncias y firma en 72 horas) o en la Guardia Civil |
 
@@ -111,10 +111,10 @@ En el iPhone, debajo de un mensaje de un remitente desconocido aparece **Mensaje
 - [Correos: Phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – ¿esperas un envío?, nunca pide datos ni pagos por SMS o correo, ganchos más usados, adjuntos, prisas, faltas, @CorreosAtiende
 - [Correos: Aviso de llegada/SMS](https://www.correos.es/es/es/atencion-al-cliente/recibir/aviso-de-llegada) – SMS o correo de aviso de llegada, SMS de oficina con enlace al buscador
 - [GLS Spain: Consejos de seguridad](https://gls-group.com/ES/es/gls-informa/consejos-de-seguridad/) – dominios, web oficial, sin pagos por tarjeta o transferencia, aranceles fuera de la UE, 807, 911 118 768, +34, spoofing, segunda mano, formulario de fraude
-- [DHL España: Concienciación sobre el fraude](https://www.dhl.com/es-es/home/pie-de-pagina/concienciacion-sobre-el-fraude.html) – dominios, bit.ly, «Entrega», prefijos, WhatsApp, enlace de pago de aduanas con OTP, phishing@dhl.com
 - [InPost: Protégete contra fraudes online](https://www.inpost.es/envia-con-nosotros/como-enviar/pago-seguro/informacion-sobre-fraude) – nunca pide pagos por SMS, dominios falsos, 807 y 906, vishing, qué hacer, fraude@inpost.es
 - [INCIBE: Smishing que suplanta a empresas de paquetería por falta del número de casa](https://www.incibe.es/ciudadania/avisos/campana-de-smishing-que-suplanta-empresas-de-paqueteria-con-la-excusa-de-que) – guion, banco, pruebas, denuncia, reportar y bloquear
 - [INCIBE: Mensajes fraudulentos que suplantan a SEUR](https://www.incibe.es/ciudadania/avisos/mensajes-fraudulentos-que-suplantan-seur-solicitandote-dinero) – 2022, 2,99 €, código por SMS que nunca llega, «código incorrecto»
+- [INCIBE: DHL no está avisando por correo de que un paquete ha sido devuelto y que se cobrará una tarifa de envío](https://www.incibe.es/ciudadania/avisos/dhl-no-esta-avisando-por-correo-de-que-un-paquete-ha-sido-devuelto-y-que-se) – julio de 2025, paquete devuelto, 48 horas, 2,86 €
 - [INCIBE: Reporte de fraude](https://www.incibe.es/ciudadania/ayuda/reporte-de-fraude) – incidencias@incibe-cert.es
 - [INCIBE: Tu Ayuda en Ciberseguridad](https://www.incibe.es/linea-de-ayuda-en-ciberseguridad) – 017, horario, WhatsApp, Telegram
 - [Policía Nacional: Oficina Virtual de Denuncias](https://denuncias.policia.es/OVD/) – firma en comisaría en 72 horas

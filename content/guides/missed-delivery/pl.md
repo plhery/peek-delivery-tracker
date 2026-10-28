@@ -1,13 +1,13 @@
 ---
 title: Awizo: jak odebrać paczkę po nieudanej próbie doręczenia
-description: Awizo albo SMS o nieudanej próbie doręczenia? Co dalej z paczką w Poczcie Polskiej, InPost, DPD i DHL, jak ją odebrać bez dowodu, za kogoś i gdzie się skarżyć.
+description: Awizo albo SMS o nieudanej próbie doręczenia? Co dalej z paczką w Poczcie Polskiej, Pocztex i DPD, jak ją odebrać bez dowodu, za kogoś i gdzie się skarżyć.
 slug: awizo-jak-odebrac-paczke
 picture: Drzwi wejściowe z awizo wsuniętym pod spód, furgonetka już daleko i zdyszany Pip, który przybiegł chwilę za późno.
 published: 2026-10-14
-updated: 2026-10-14
+updated: 2026-10-28
 ---
 
-Awizo, czyli papierowe zawiadomienie albo SMS po nieudanej próbie doręczenia, mówi, gdzie teraz jest Twoja paczka i do kiedy na Ciebie czeka. Poczta Polska zostawia przesyłkę w placówce z awizo i masz 14 dni, żeby ją tam odebrać. Kurier InPost próbuje drugi raz, a DPD i DHL mogą od razu zostawić paczkę w punkcie odbioru, skąd odbierzesz ją z kodem z powiadomienia.
+Awizo, czyli papierowe zawiadomienie albo SMS po nieudanej próbie doręczenia, mówi, gdzie teraz jest Twoja paczka i do kiedy na Ciebie czeka. Poczta Polska zostawia przesyłkę w placówce z awizo i masz 14 dni, żeby ją tam odebrać. DPD może od razu zostawić paczkę w punkcie odbioru, skąd odbierzesz ją z kodem z powiadomienia.
 
 ## Awizo: co zrobić po nieudanej próbie doręczenia
 
@@ -24,9 +24,8 @@ Co zostawia każdy przewoźnik i co robi potem:
 | --- | --- | --- |
 | [Poczta Polska](carrier:poczta-polska), list polecony i paczka pocztowa | „Zawiadomienie o próbie doręczenia” w skrzynce albo SMS lub e-mail (eINFO:awizo) | Przesyłka czeka w placówce wskazanej na awizo, po 7 dniach powtórne awizo |
 | Poczta Polska, Pocztex Kurier | SMS, e-mail albo powiadomienie w aplikacji; papier tylko wtedy, gdy nadawca nie podał Twojego telefonu ani e-maila | Odbiór w placówce pocztowej, przypomnienie drugiego dnia |
-| [InPost](carrier:inpost), paczka kurierska | Nieudana próba widoczna w śledzeniu | Dwie próby doręczenia, potem zwrot do nadawcy |
+| [InPost](carrier:inpost), paczka kurierska | Śledzenie może pokazać nieudaną próbę | Sprawdź w aplikacji InPost Mobile albo na stronie InPost |
 | [DPD](carrier:dpd-pl) | SMS albo e-mail, gdy paczka trafia do punktu | Punkt DPD Pickup, jeśli paczka się mieści i nadawca podał Twój telefon lub e-mail |
-| [DHL eCommerce](carrier:dhl-ecommerce-pl) | Awizo z adresem punktu | Punkt DHL POP w okolicy albo druga próba następnego dnia roboczego |
 
 ## Co to jest awizo?
 
@@ -42,9 +41,8 @@ To zależy od przewoźnika.
 
 - **Poczta Polska:** przesyłkę odbierasz w placówce z awizo. Regulamin przewiduje potem już tylko powtórne awizo, a nie drugą próbę doręczenia.
 - **Pocztex:** jeśli nadawca podał Twój numer telefonu, możesz zadzwonić do kuriera i poprosić, żeby zostawił paczkę w miejscu tuż obok Twojego adresu. Nie dotyczy to m.in. przesyłek za pobraniem ani doręczanych do rąk własnych. Inaczej odbierasz ją w placówce.
-- **InPost:** kurier podejmie dwie próby doręczenia. Przy Allegro Kurier InPost kurier przyjedzie znowu następnego dnia albo, jeśli się zgodzisz, zostawi paczkę w najbliższym PaczkoPunkcie. Paczkę kurierską, która jest już w drodze, przekierujesz też bezpłatnie (InPost pozwala na to dla wybranych paczek, m.in. zależnie od gabarytu) przyciskiem „Przekieruj” w aplikacji InPost Mobile albo przez link z SMS-a: do pobliskiego Paczkomatu, PaczkoPunktu albo do sąsiada z tej samej ulicy.
+- **InPost:** śledzenie może pokazać nieudaną próbę, a co dalej z paczką, sprawdzisz w aplikacji InPost Mobile albo na stronie InPost.
 - **DPD:** po nieudanej próbie DPD może skierować paczkę do punktu DPD Pickup i wysłać Ci SMS albo e-mail ze wszystkim, czego potrzebujesz do odbioru. W aplikacji DPD Mobile albo na mojapaczka.dpd.com.pl przesuniesz doręczenie o maksymalnie 3 dni robocze, wybierzesz sąsiada, safeplace albo punkt DPD Pickup. Paczek od niektórych nadawców, m.in. Temu, AliExpress i Shein, nie przekierujesz, ale możesz je skierować do punktu DPD Pickup na trasie kuriera.
-- **DHL eCommerce:** kurier zostawia awizo i zawozi paczkę do punktu DHL POP w okolicy. Paczka za ciężka na punkt czeka w DHL POP z awizo od następnego dnia roboczego, a jeśli jej nie odbierzesz, kurier następnego dnia roboczego spróbuje drugi raz.
 
 Chcesz, żeby następnym razem paczka pojechała gdzie indziej? Zajrzyj do poradnika [o zmianie adresu dostawy i przekierowaniu paczki](guide:change-delivery-address).
 
@@ -54,7 +52,6 @@ Zwykle nie: paczka musi najpierw wrócić z trasy do placówki albo punktu.
 
 - **Poczta Polska:** termin odbioru i adres placówki są na awizo albo w SMS-ie eINFO:awizo.
 - **Pocztex:** SMS, e-mail albo powiadomienie w aplikacji podaje numer przesyłki, termin i adres placówki.
-- **DHL eCommerce:** paczka, której nie da się zostawić w punkcie, jest w DHL POP od następnego dnia roboczego po pierwszej nieudanej próbie. Adres punktu znajdziesz na awizo.
 - **DPD:** paczka jest gotowa, gdy dostaniesz SMS albo e-mail o przekazaniu do punktu DPD Pickup.
 
 Przed wyjściem z domu sprawdź jeszcze śledzenie.
@@ -68,7 +65,6 @@ Na poczcie bez żadnego dokumentu się nie da, ale nie musi to być plastikowy d
 | Poczta Polska, placówka | Dokument tożsamości albo aplikacja mObywatel | Ministerstwo Cyfryzacji: mObywatel potwierdzi Twoją tożsamość przy odbiorze listów i paczek, także kurierskich |
 | Pocztex PUNKT i AUTOMAT | Jednorazowy kod odbioru (w automacie także numer telefonu) albo aplikacja | Kto ma Twój kod, może odebrać paczkę za Ciebie |
 | Punkt DPD Pickup | Numer przesyłki, imię i nazwisko odbiorcy oraz dokument tożsamości albo jego cyfrowy odpowiednik | Zamiast dokumentu: PIN albo e-mail z kodem 2D |
-| Punkt DHL POP | PIN z powiadomienia | Bez PIN-u zapytaj DHL |
 
 Na poczcie płacisz też należności, które ciążą na przesyłce, na przykład cło albo pobranie.
 
@@ -78,9 +74,7 @@ Na poczcie potrzebujesz pełnomocnictwa, w punktach zwykle wystarczy kod odbioru
 
 - **Poczta Polska:** przesyłkę wyda pełnomocnikowi na podstawie zwykłego pełnomocnictwa albo pełnomocnictwa pocztowego. Pocztowe składasz na formularzu w placówce, w obecności pracownika: pokazujesz swój dokument, podajesz imię, nazwisko i dane dokumentu pełnomocnika i podpisujesz formularz na miejscu. Jeśli nie możesz samodzielnie się poruszać, da się to zrobić w domu. Według cennika Poczty Polskiej pełnomocnictwo jednorazowe kosztuje 6,00 zł, okresowe 8,00 zł za każdy miesiąc, a stałe 26,00 zł.
 - **Pocztex PUNKT i AUTOMAT:** kto dostanie od Ciebie kod odbioru, jest upoważniony do odbioru.
-- **InPost:** paczkę czekającą w Paczkomacie udostępnisz w aplikacji InPost Mobile „z apki do apki” osobie, z którą się sparujesz. To bezpłatne, a ona odbierze paczkę ze swojej aplikacji.
 - **DPD Pickup:** wystarczy, że ta osoba poda numer przesyłki, Twoje imię i nazwisko z etykiety oraz PIN albo pokaże e-mail z kodem 2D. DPD uznaje to za Twoje upoważnienie.
-- **DHL POP:** przekaż tej osobie swój PIN i numer listu przewozowego.
 
 Za kogoś nie odbierzesz przesyłki Pocztex z usługą „Doręczenie do rąk własnych”: Poczta Polska wydaje ją wyłącznie adresatowi.
 
@@ -89,8 +83,8 @@ Za kogoś nie odbierzesz przesyłki Pocztex z usługą „Doręczenie do rąk w�
 Zanim uznasz, że kurier nie dzwonił do drzwi, sprawdź trzy rzeczy:
 
 - **Czy to w ogóle była próba doręczenia.** Ekonomiczną paczkę pocztową cięższą niż 2 kg z innej miejscowości, przesyłkę z wysoką zadeklarowaną wartością i przesyłkę z należnościami celnymi Poczta Polska może od razu awizować. Według regulaminu pozostawienie awizo jest wtedy równoznaczne z doręczeniem.
-- **Czy awizo nie przyszło SMS-em.** Pocztex z Twoim telefonem od nadawcy wysyła tylko SMS, e-mail albo powiadomienie w aplikacji. DPD i DHL informują SMS-em o paczce w punkcie.
-- **Czy paczka nie czeka w punkcie.** DPD może zostawić ją w DPD Pickup, a DHL w DHL POP. Przekazanie paczki do punktu DPD uznaje za próbę doręczenia.
+- **Czy awizo nie przyszło SMS-em.** Pocztex z Twoim telefonem od nadawcy wysyła tylko SMS, e-mail albo powiadomienie w aplikacji. DPD informuje SMS-em albo e-mailem o paczce w punkcie.
+- **Czy paczka nie czeka w punkcie.** DPD może zostawić ją w punkcie DPD Pickup i uznaje to za próbę doręczenia.
 
 Jeśli nic się nie zgadza, zanotuj godzinę, zachowaj nagranie z wideodomofonu, porównaj je ze śledzeniem i zgłoś sprawę przewoźnikowi (niżej). U DPD możesz na przyszłość zlecić doręczenie do sąsiada albo w bezpieczne miejsce.
 
@@ -98,19 +92,17 @@ Jeśli śledzenie pokazuje „doręczona”, a paczki nie ma, przeczytaj poradni
 
 ## Awizo: ile dni na odbiór?
 
-Na poczcie dwa tygodnie, w punktach od 2 do 3 dni. Ostatni dzień zawsze jest na awizo albo w SMS-ie.
+Na poczcie dwa tygodnie, przy Pocztex Kurier tydzień. Ostatni dzień zawsze jest na awizo albo w SMS-ie.
 
 - **Poczta Polska:** 14 dni od dnia po pierwszym awizo. Po 7 dniach dostajesz powtórne awizo, ale termin się nie przedłuża.
 - **Pocztex Kurier:** 7 dni w placówce, licząc od dnia po awizo.
-- **InPost:** paczka kurierska czeka w PaczkoPunkcie 3 dni robocze.
 - **DPD Pickup:** tyle, ile podaje SMS albo e-mail.
-- **DHL POP:** 2 dni kalendarzowe, potem zwrot do nadawcy.
 
 Potem paczka wraca do nadawcy. Jak przedłużyć termin i odzyskać pieniądze, wyjaśnia poradnik [nieodebrana paczka z paczkomatu lub poczty](guide:uncollected-parcel).
 
 ## SMS o awizo z linkiem do dopłaty
 
-> SMS, że kurier Cię nie zastał i musisz dopłacić drobną kwotę przez link, to klasyczne oszustwo. Poczta Polska nie wysyła SMS-ów o dodatkowej płatności za odbiór przesyłki, a InPost nigdy nie wysyła SMS-ów o dopłatach. Nie klikaj: sam wpisz numer przesyłki na stronie albo w aplikacji przewoźnika, a podejrzany SMS przekaż bezpłatnie na numer 8080.
+> SMS, że kurier Cię nie zastał i musisz dopłacić drobną kwotę przez link, to klasyczne oszustwo. Poczta Polska nie wysyła SMS-ów o dodatkowej płatności za odbiór przesyłki. Nie klikaj: sam wpisz numer przesyłki na stronie albo w aplikacji przewoźnika, a podejrzany SMS przekaż bezpłatnie na numer 8080.
 
 Więcej w poradniku [o fałszywych SMS-ach o paczce](guide:delivery-scam-texts). Żeby wiedzieć o prawdziwych nieudanych doręczeniach, [Peek](/) może wysyłać Ci powiadomienia o ważnych krokach, w tym o nieudanych doręczeniach. Umówić kolejną próbę możesz jednak tylko u przewoźnika.
 
@@ -126,7 +118,7 @@ Formalna reklamacja usługi pocztowej ma swoje zasady:
 | Odwołanie | Do tego samego przewoźnika | 14 dni od odpowiedzi; przewoźnik ma 30 dni |
 | Po odmowie | Interwencja Prezesa UKE, bezpłatne polubowne rozwiązanie sporu w UKE albo sąd | |
 
-InPost przyjmuje reklamacje przez [formularz na stronie](https://inpost.pl/reklamacja) i na infolinii 722 444 000 lub 746 600 000. Kto odpowiada za paczkę, która do Ciebie nie dotarła, opisuje poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
+Kto odpowiada za paczkę, która do Ciebie nie dotarła, opisuje poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
 :::sources
 - [Poczta Polska: Regulamin świadczenia usług powszechnych, tekst jednolity](https://www.poczta-polska.pl/wp-content/uploads/2026/07/Regulamin-swiadczenia-uslug-powszechnych-tekst-jednolity.pdf) – § 23–26 i § 30–35: tożsamość, awizo, SMS i e-mail, awizo bez próby doręczenia, 7 i 14 dni, przechowywanie, pełnomocnictwo pocztowe
@@ -134,16 +126,9 @@ InPost przyjmuje reklamacje przez [formularz na stronie](https://inpost.pl/rekla
 - [Poczta Polska: Regulamin usługi Pocztex w obrocie krajowym dla klienta biznesowego](https://www.poczta-polska.pl/wp-content/uploads/2026/08/Regulamin-swiadczenia-uslugi-Pocztex-w-obrocie-krajowym-dla-klienta-biznesowego-obowiazuje-od-24.08.2026-r.pdf) – powiadomienie SMS lub e-mail zamiast papieru, przypomnienie, 7 dni w placówce, dyspozycja telefoniczna, kod odbioru, rąk własnych
 - [gov.pl: Otrzymuj wiadomości o nadejściu przesyłki (awizo) w formie SMS lub na adres e-mail](https://www.gov.pl/web/gov/otrzymuj-wiadomosci-o-nadejsciu-przesylki-awizo-w-formie-sms-lub-na-adres-e-mail) – eINFO:awizo, profil zaufany, bezpłatnie
 - [Ministerstwo Cyfryzacji: Ze smartfonem po „polecony”, czyli mObywatel na poczcie](https://www.gov.pl/web/cyfryzacja/ze-smartfonem-po-polecony-czyli-mobywatel-na-poczcie) – mObywatel przy odbiorze przesyłek poleconych
-- [InPost: Ile razy kurier będzie się starał doręczyć przesyłkę InPost Kurier?](https://inpost.pl/pomoc-ile-razy-kurier-bedzie-sie-staral-doreczyc-przesylke-inpost-kurier) – dwie próby, potem zwrot
-- [InPost: Co się stanie z przesyłką Allegro Kurier InPost, gdy kurier nie zastanie mnie w domu?](https://inpost.pl/pomoc-co-sie-stanie-z-przesylka-allegro-kurier-inpost-gdy-kurier-nie-zastanie-mnie-w-domu) – kolejna próba następnego dnia, PaczkoPunkt, 3 dni
-- [InPost: Co to jest Dynamiczne Przekierowanie paczek kurierskich?](https://inpost.pl/pomoc-co-jest-dynamiczne-przekierowanie-paczek-kurierskich) – bezpłatnie, „Przekieruj”, Paczkomat, PaczkoPunkt, sąsiad, 10 km
-- [InPost: Udostępnienie przesyłki z apki do apki](https://inpost.pl/z-apki-do-apki) – odbiór przez inną osobę, bezpłatnie
-- [InPost: Reklamacje](https://inpost.pl/reklamacja) – formularz, infolinia, 12 miesięcy
-- [InPost: Bezpieczeństwo z InPost](https://inpost.pl/bezpieczenstwo-z-inpost) – brak SMS-ów o dopłatach
+- [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek: nieudana próba doręczenia pod adresem
 - [DPD Polska: Szczegółowe Warunki Świadczenia Usług](https://www.dpd.com/wp-content/uploads/sites/260/2026/03/Szczegolowe-Warunki-Swiadczenia-Uslug_02.2026_PL.pdf) – art. 8: DPD Pickup po nieudanej próbie, SMS lub e-mail, odbiór z dokumentem albo PIN-em, upoważnienie, sąsiad i bezpieczne miejsce
 - [DPD Polska: Najczęściej zadawane pytania](https://www.dpd.com/pl/pl/najczesciej-zadawane-pytania-faq/) – DPD Mobile i mojapaczka.dpd.com.pl, 3 dni robocze, wyjątki Temu, AliExpress, Shein
-- [DHL eCommerce Polska: Przekierowanie przesyłki dla odbiorców](https://www.dhl.com/pl-pl/ecommerce/dla-ciebie/odbior/przekieruj.html) – awizo, DHL POP, 2 dni kalendarzowe, druga próba następnego dnia roboczego
-- [DHL eCommerce Polska: Odbierz w punkcie DHL POP](https://www.dhl.com/pl-pl/ecommerce/dla-ciebie/odbior/punkt.html) – PIN, odbiór przez inną osobę
 - [Poczta Polska: Poczta Polska ostrzega przed fałszywymi SMS-ami](https://www.poczta-polska.pl/news/poczta-polska-ostrzega-przed-falszywymi-sms-ami/) – brak SMS-ów o dodatkowej płatności
 - [gov.pl: Coraz więcej prób wyłudzenia przez tzw. fałszywe SMS-y](https://www.gov.pl/web/baza-wiedzy/coraz-wiecej-prob-wyludzenia-przez-tzw-falszywe-sms-y-zachowaj-czujnosc) – 8080
 - [UKE: Reklamacje usług pocztowych](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa, 12 miesięcy, 30 dni, odwołanie 14 dni, interwencja Prezesa UKE, polubowne rozwiązanie sporu

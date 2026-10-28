@@ -15,11 +15,16 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.text.TextMeasurer
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Density
@@ -39,7 +44,7 @@ import kotlin.math.sin
 import kotlin.math.tan
 
 // Carries out :core's drawings (MapDrawing steps over MapPaths) as SwiftUI's GraphicsContext and CoreGraphics do on
-// the iPhone: the mark, the trucks, and later the world map and Pip. Everything is in the drawing's own units; the
+// the iPhone: the mark, the trucks, Pip, and later the world map. Everything is in the drawing's own units; the
 // caller scales and moves the canvas there first (`withAffineTransform`, DrawScope's `scale`) and clips it.
 
 /**
@@ -159,33 +164,37 @@ private val MapDrawing.isCut: Boolean
     get() = (this is MapDrawing.Fill && cut) || (this is MapDrawing.Stroke && cut)
 
 private class MapDrawingPainter(val dark: Boolean, val highContrast: Boolean, val textMeasurer: TextMeasurer?) {
-    fun draw(scope: DrawScope, steps: List<MapDrawing>) {
+    /** Carries out `steps`, each at `fade` times its own opacity (a transformed context's opacity). */
+    fun draw(scope: DrawScope, steps: List<MapDrawing>, fade: Double = 1.0) {
         for (step in steps) {
+            val opacity = step.opacity * fade
             when (step) {
                 is MapDrawing.Fill -> scope.drawPath(
                     path = step.path.toComposePath(step.evenOdd),
-                    color = color(step.color, step.opacity),
+                    color = color(step.color, opacity),
                     style = Fill,
                     blendMode = if (step.cut) BlendMode.DstOut else BlendMode.SrcOver,
                 )
                 is MapDrawing.Stroke -> scope.drawPath(
                     path = step.path.toComposePath(),
-                    color = color(step.color, step.opacity),
+                    color = color(step.color, opacity),
                     style = stroke(step.style),
                     blendMode = if (step.cut) BlendMode.DstOut else BlendMode.SrcOver,
                 )
-                is MapDrawing.Shade -> shade(scope, step)
-                is MapDrawing.Layer -> layer(scope, step.steps)
-                is MapDrawing.Text -> text(scope, step)
+                is MapDrawing.Shade -> shade(scope, step, opacity)
+                is MapDrawing.Layer -> layer(scope, step.steps, fade)
+                is MapDrawing.Transformed -> scope.withAffineTransform(step.transform) { draw(this, step.steps, opacity) }
+                is MapDrawing.Text -> text(scope, step, opacity)
+                is MapDrawing.TextLine -> textLine(scope, step, opacity)
             }
         }
     }
 
     /** `drawLayer`: the steps go into a layer of their own, then onto what is below, so a cut there clears only them. */
-    fun layer(scope: DrawScope, steps: List<MapDrawing>) {
+    fun layer(scope: DrawScope, steps: List<MapDrawing>, fade: Double = 1.0) {
         val canvas = scope.drawContext.canvas.nativeCanvas
         val saved = canvas.saveLayer(null, null)
-        draw(scope, steps)
+        draw(scope, steps, fade)
         canvas.restoreToCount(saved)
     }
 
@@ -223,7 +232,7 @@ private class MapDrawingPainter(val dark: Boolean, val highContrast: Boolean, va
      * A radial gradient from clear at `startRadius` to the colour at `endRadius`, flat beyond both. Clear is the colour
      * at no opacity, which is what blending from `.clear` gives in premultiplied colour.
      */
-    fun shade(scope: DrawScope, step: MapDrawing.Shade) {
+    fun shade(scope: DrawScope, step: MapDrawing.Shade, opacity: Double) {
         val color = color(step.color, 1.0)
         val end = step.endRadius.toFloat()
         if (!(end > 0)) return
@@ -236,34 +245,47 @@ private class MapDrawingPainter(val dark: Boolean, val highContrast: Boolean, va
             radius = end,
             tileMode = TileMode.Clamp,
         )
-        scope.drawPath(step.path.toComposePath(), brush, alpha = step.opacity.coerceIn(0.0, 1.0).toFloat())
+        scope.drawPath(step.path.toComposePath(), brush, alpha = opacity.coerceIn(0.0, 1.0).toFloat())
     }
 
     /**
      * A line of text at its size in the drawing's units whatever the reader's text size, the middle of its leading
      * edge at `at`, on one line.
      */
-    fun text(scope: DrawScope, step: MapDrawing.Text) {
+    fun text(scope: DrawScope, step: MapDrawing.Text, opacity: Double) {
+        val layout = measure(step.text, step.font, color(step.color, opacity), step.tracking)
+        scope.drawText(layout, topLeft = Offset(step.at.x.toFloat(), step.at.y.toFloat() - layout.size.height / 2f))
+    }
+
+    /** A line from the start of its baseline, squeezed across into its room when it is wider. */
+    fun textLine(scope: DrawScope, step: MapDrawing.TextLine, opacity: Double) {
+        val layout = measure(step.text, step.font, color(step.color, opacity), step.tracking)
+        val width = layout.getLineRight(0) - layout.getLineLeft(0)
+        val squeeze = if (width > step.room) (step.room / width).toFloat() else 1f
+        scope.translate(step.start.x.toFloat(), step.start.y.toFloat() - layout.firstBaseline) {
+            scale(squeeze, 1f, pivot = Offset.Zero) {
+                drawText(layout, topLeft = Offset.Zero)
+            }
+        }
+    }
+
+    /** One line of text in `font`, one sp to one unit of the drawing. */
+    private fun measure(text: String, font: MapFont, color: Color, tracking: Double): TextLayoutResult {
         val measurer = requireNotNull(textMeasurer) { "A text step needs a TextMeasurer" }
         val style = TextStyle(
-            color = color(step.color, step.opacity),
-            fontSize = step.font.size.sp,
-            fontWeight = when (step.font.weight) {
+            color = color,
+            fontSize = font.size.sp,
+            fontWeight = when (font.weight) {
                 MapFont.Weight.Regular -> FontWeight.Normal
                 MapFont.Weight.Medium -> FontWeight.Medium
                 MapFont.Weight.Semibold -> FontWeight.SemiBold
+                MapFont.Weight.Heavy -> FontWeight.ExtraBold
             },
-            letterSpacing = step.tracking.sp,
+            fontStyle = if (font.italic) FontStyle.Italic else FontStyle.Normal,
+            fontFamily = if (font.monospaced) FontFamily.Monospace else null,
+            letterSpacing = tracking.sp,
         )
-        val layout = measurer.measure(
-            step.text,
-            style,
-            overflow = TextOverflow.Visible,
-            softWrap = false,
-            maxLines = 1,
-            density = UNIT_DENSITY,
-        )
-        scope.drawText(layout, topLeft = Offset(step.at.x.toFloat(), step.at.y.toFloat() - layout.size.height / 2f))
+        return measurer.measure(text, style, overflow = TextOverflow.Visible, softWrap = false, maxLines = 1, density = UNIT_DENSITY)
     }
 
     companion object {

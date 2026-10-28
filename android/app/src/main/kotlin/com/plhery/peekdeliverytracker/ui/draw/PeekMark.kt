@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AdaptiveColor
 import com.plhery.peekdeliverytracker.core.PeekMarkArtwork
-import com.plhery.peekdeliverytracker.core.RgbaColor
+import com.plhery.peekdeliverytracker.ui.theme.toRgba
 import kotlin.math.ceil
 import com.plhery.peekdeliverytracker.core.PeekMark as PeekMarkGeometry
 
@@ -59,5 +59,3 @@ fun PeekEyes(color: Color, modifier: Modifier = Modifier, height: Dp = 12.dp) {
         }
     }
 }
-
-private fun Color.toRgba(): RgbaColor = RgbaColor(red.toDouble(), green.toDouble(), blue.toDouble(), alpha.toDouble())

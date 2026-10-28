@@ -486,6 +486,8 @@ class ParcelRouteTests {
                 is MapDrawing.Shade -> "shade $opacity ${"%.2f".format(Locale.ROOT, step.startRadius / step.endRadius)}"
                 is MapDrawing.Layer -> "layer ${summary(step.steps)}"
                 is MapDrawing.Text -> "text"
+                is MapDrawing.Transformed -> "transformed ${summary(step.steps)}"
+                is MapDrawing.TextLine -> "text line"
             }
         }
         fun drawn(kilometres: Double, tiles: List<DetailTile> = emptyList(), tiled: Boolean = false) =

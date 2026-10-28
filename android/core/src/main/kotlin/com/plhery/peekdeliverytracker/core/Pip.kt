@@ -9,9 +9,8 @@ import kotlin.math.floor
 import kotlin.math.hypot
 import kotlin.math.sin
 
-// From Pip.swift, what the map needs to place Pip and what his drawing computes: his moods, where he stands, his box's
-// geometry, its opening, his colours, his blink, his motion and his glints' twinkle. The drawing itself (PipArtwork's
-// GraphicsContext code, the views) belongs to :app.
+// From Pip.swift: his moods, where he stands on a map, his box's geometry, its opening, his colours and his blink. His
+// drawing is in PipArtwork.kt; the views, which clock it, are :app's.
 
 /** How Pip, the parcel with a face, feels about the parcel's stage. */
 enum class PipMood {
@@ -262,6 +261,38 @@ object PipGeometry {
         Glint(Point(216.0, 55.0), 18.0), Glint(Point(261.0, 96.0), 25.0), Glint(Point(233.0, 145.0), 13.0),
     )
 
+    val hairlines: MapPath
+        get() = MapPath().also { path ->
+            path.addLines(points(56.0 to 144.0, 56.0 to 228.0, 149.0 to 275.0))
+            path.addLines(points(151.0 to 275.0, 243.0 to 229.0, 243.0 to 145.0))
+        }
+
+    val edges: MapPath
+        get() = MapPath().also { path ->
+            path.addLines(points(55.0 to 142.0, 150.0 to 190.0, 245.0 to 142.0))
+            path.addLines(points(150.0 to 190.0, 150.0 to 277.0))
+        }
+
+    /** A four-pointed glint, one unit from its centre to its tips. */
+    val glint: MapPath
+        get() = polygon(
+            points(
+                0.0 to -1.0, 0.24 to -0.24, 1.0 to 0.0, 0.24 to 0.24, 0.0 to 1.0, -0.24 to 0.24, -1.0 to 0.0, -0.24 to -0.24,
+            ),
+        )
+
+    fun polygon(points: List<Point>): MapPath = MapPath().also { path ->
+        path.addLines(points)
+        path.closeSubpath()
+    }
+
+    /** `Path.addLines(_:)`: a new subpath through `points`. */
+    private fun MapPath.addLines(points: List<Point>) {
+        if (points.isEmpty()) return
+        move(points[0])
+        for (point in points.drop(1)) addLine(point)
+    }
+
     private fun points(vararg pairs: Pair<Double, Double>): List<Point> = pairs.map { Point(it.first, it.second) }
 
     private val box = points(55.0 to 142.0, 150.0 to 95.0, 245.0 to 142.0, 245.0 to 229.0, 150.0 to 277.0, 55.0 to 229.0)
@@ -309,6 +340,16 @@ object PipGeometry {
         return if (abs(turns) == to.size) 0.0 else nearest
     }
 }
+
+/**
+ * The carrier's label on the kraft parcel's right side, in place of the arrow and the seal: whose parcel it is, and its
+ * number as the reader may see it.
+ */
+data class PipLabel(
+    val identity: CarrierVisualIdentity,
+    /** Whole or masked; none for a parcel whose number is not shown. */
+    val number: String? = null,
+)
 
 // MARK: - Colours
 
@@ -376,69 +417,7 @@ data class PipPalette(
     }
 }
 
-/** PipArtwork's arithmetic: his motion and his glints' twinkle. The drawing is :app's. */
-object PipArtwork {
-    private val spring = UnitCurve.bezier(Point(0.22, 1.0), Point(0.36, 1.0))
-
-    /** How long one bob, or one jump, takes. */
-    fun period(mood: PipMood): Double = if (mood == PipMood.Joy) 2.2 else 1.1
-
-    private class Key(val at: Double, val rise: Double, val turn: Double, val across: Double, val up: Double)
-
-    private val jump = listOf(
-        Key(0.0, 0.0, 0.0, 1.0, 1.0), Key(0.12, 0.0, 0.0, 1.07, 0.9), Key(0.28, -10.0, -5.0, 0.96, 1.05),
-        Key(0.44, 0.0, 2.0, 1.05, 0.95), Key(0.58, 0.0, 0.0, 1.0, 1.0), Key(1.0, 0.0, 0.0, 1.0, 1.0),
-    )
-
-    /** How the mood moves him, about the bottom of the box: an eager bob, or a joyful jump. */
-    fun motion(mood: PipMood, at: Double): AffineTransform {
-        val time = at
-        // Rise, turn in degrees, and stretch across and up.
-        val rise: Double
-        val turn: Double
-        val across: Double
-        val up: Double
-        when (mood) {
-            PipMood.Eager -> {
-                val phase = (time / period(PipMood.Eager)) % 1
-                val swing = UnitCurve.easeInOut.value(if (phase < 0.5) phase * 2 else (1 - phase) * 2)
-                rise = -3 * swing
-                turn = -2 + 4.5 * swing
-                across = 1.0
-                up = 1.0
-            }
-            PipMood.Joy -> {
-                val phase = (time / period(PipMood.Joy)) % 1
-                val next = jump.indexOfFirst { it.at > phase }.let { if (it < 0) jump.size - 1 else it }
-                val from = jump[next - 1]
-                val to = jump[next]
-                val t = spring.value((phase - from.at) / (to.at - from.at))
-                rise = from.rise + (to.rise - from.rise) * t
-                turn = from.turn + (to.turn - from.turn) * t
-                across = from.across + (to.across - from.across) * t
-                up = from.up + (to.up - from.up) * t
-            }
-            PipMood.Look, PipMood.Wait, PipMood.Worry -> return AffineTransform.Identity
-        }
-        val pivot = Point(150.0, 277.0)
-        return AffineTransform.translation(pivot.x, pivot.y + rise)
-            .rotated(turn * PI / 180)
-            .scaledBy(across, up)
-            .translatedBy(-pivot.x, -pivot.y)
-    }
-
-    /** How a glint shows: its opacity, its size as a share of its own, and its turn in degrees. */
-    data class Twinkle(val opacity: Double, val scale: Double, val degrees: Double)
-
-    /** Each glint twinkles on its own clock: the one at `PipGeometry.glints[index]`, `at` seconds on it. */
-    fun twinkle(index: Int, at: Double): Twinkle {
-        val period = 2.2 + (index % 3).toDouble() * 0.5
-        val phase = ((at - index.toDouble() * 0.37) / period) % 1
-        val wrapped = if (phase < 0) phase + 1 else phase
-        val glow = UnitCurve.easeInOut.value(if (wrapped < 0.5) wrapped * 2 else (1 - wrapped) * 2)
-        return Twinkle(0.2 + 0.8 * glow, 0.6 + 0.5 * glow, -10 + 18 * glow)
-    }
-}
+// MARK: - Blink
 
 /** The kraft parcel blinks while it waits: once a period, each open eye flattens and reopens. */
 object PipBlink {
@@ -474,5 +453,25 @@ object PipBlink {
         if (cycle > 0 && time < reopened) return swiftMin(time + FRAME, reopened)
         val closes = (cycle + CLOSING) * PERIOD
         return if (time < closes) closes else swiftMin(time + FRAME, (cycle + 1) * PERIOD + LAG)
+    }
+}
+
+/**
+ * Wakes a timeline for the frames of each blink only (`PipBlinkSchedule`, a TimelineSchedule on the iPhone): the times
+ * to draw at, in seconds on the blink's clock.
+ */
+class PipBlinkSchedule(val paused: Boolean = false) {
+    /**
+     * From `from` seconds after the clock started: that moment, then every frame of each blink and nothing between.
+     * Paused, or in low-frequency mode, it draws the once.
+     */
+    fun entries(from: Double, lowFrequency: Boolean = false): Sequence<Double> = sequence {
+        var time = swiftMax(0.0, from)
+        yield(time)
+        if (paused || lowFrequency) return@sequence
+        while (true) {
+            time = PipBlink.nextFrame(time)
+            yield(time)
+        }
     }
 }

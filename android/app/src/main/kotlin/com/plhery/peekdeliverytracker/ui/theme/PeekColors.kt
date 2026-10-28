@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui.theme
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.colorspace.ColorSpaces
 import com.plhery.peekdeliverytracker.core.AdaptiveColor
 import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.RgbaColor
@@ -14,6 +15,10 @@ fun RgbaColor.toColor(): Color = Color(
     blue = blue.coerceIn(0.0, 1.0).toFloat(),
     alpha = opacity.coerceIn(0.0, 1.0).toFloat(),
 )
+
+/** A Compose colour as :core's, in sRGB. */
+fun Color.toRgba(): RgbaColor =
+    convert(ColorSpaces.Srgb).let { RgbaColor(it.red.toDouble(), it.green.toDouble(), it.blue.toDouble(), it.alpha.toDouble()) }
 
 /**
  * UIKit's label and separator colours, which the iPhone app takes from the system (`.primary`, `.secondary`,

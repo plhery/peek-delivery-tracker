@@ -862,9 +862,13 @@ data class MapPalette(
 
 enum class MapLabels { All, Ends, None }
 
-/** A font the map writes in, by its point size and weight: the system font, as `UIFont.systemFont(ofSize:weight:)`. */
-data class MapFont(val size: Double, val weight: Weight) {
-    enum class Weight { Regular, Medium, Semibold }
+/**
+ * A font the map writes in, by its point size and weight: the system font, as `UIFont.systemFont(ofSize:weight:)`.
+ * Pip's label also writes in the heavy weight, in italics (`.italic()`) and in the monospaced design
+ * (`.system(size:design: .monospaced)`).
+ */
+data class MapFont(val size: Double, val weight: Weight, val italic: Boolean = false, val monospaced: Boolean = false) {
+    enum class Weight { Regular, Medium, Semibold, Heavy }
 }
 
 /**
@@ -927,6 +931,12 @@ sealed interface MapDrawing {
         override val opacity: Double get() = 1.0
     }
 
+    /**
+     * `concatenate(transform)` for `steps`, each also at `opacity` times its own (a context's opacity applies to each
+     * thing drawn, not to the steps as one layer).
+     */
+    class Transformed(val transform: AffineTransform, val steps: List<MapDrawing>, override val opacity: Double = 1.0) : MapDrawing
+
     /** A line of text, drawn at its size whatever the reader's (dp, not sp), the middle of its leading edge at `at`. */
     class Text(
         val text: String,
@@ -936,6 +946,65 @@ sealed interface MapDrawing {
         val tracking: Double = 0.0,
         override val opacity: Double = 1.0,
     ) : MapDrawing
+
+    /**
+     * A line of text whose baseline starts at `start`, drawn at its size whatever the reader's; where it is wider than
+     * `room` it is squeezed across to fit, its letters narrower rather than cut (Pip's label).
+     */
+    class TextLine(
+        val text: String,
+        val font: MapFont,
+        val color: AdaptiveColor,
+        val start: Point,
+        val room: Double,
+        val tracking: Double = 0.0,
+        override val opacity: Double = 1.0,
+    ) : MapDrawing
+}
+
+/**
+ * SwiftUI's GraphicsContext as :core draws with it, recording MapDrawing steps rather than drawing. A copy, as
+ * `var layer = context`, draws into the same steps with a transform and an opacity of its own. Each step is recorded
+ * under the transform it was drawn with, at the context's opacity.
+ */
+class MapDrawingContext private constructor(
+    private val steps: MutableList<MapDrawing>,
+    var transform: AffineTransform,
+    var opacity: Double,
+) {
+    constructor() : this(ArrayList(), AffineTransform.Identity, 1.0)
+
+    /** Everything drawn so far, through this context and its copies. */
+    val drawing: List<MapDrawing> get() = steps.toList()
+
+    fun copy(): MapDrawingContext = MapDrawingContext(steps, transform, opacity)
+
+    /** `concatenate(_:)`: `matrix` applies first, then the context's transform. */
+    fun concatenate(matrix: AffineTransform) {
+        transform = matrix.concatenating(transform)
+    }
+
+    fun translateBy(x: Double, y: Double) = concatenate(AffineTransform.translation(x, y))
+
+    fun scaleBy(x: Double, y: Double) = concatenate(AffineTransform(x, 0.0, 0.0, y, 0.0, 0.0))
+
+    fun fill(path: MapPath, color: AdaptiveColor, evenOdd: Boolean = false) = add(MapDrawing.Fill(path, color, evenOdd, opacity))
+
+    fun stroke(path: MapPath, color: AdaptiveColor, lineWidth: Double) = stroke(path, color, StrokeStyle(lineWidth))
+
+    fun stroke(path: MapPath, color: AdaptiveColor, style: StrokeStyle) = add(MapDrawing.Stroke(path, color, style, opacity))
+
+    fun text(text: String, font: MapFont, color: AdaptiveColor, start: Point, room: Double, tracking: Double = 0.0) =
+        add(MapDrawing.TextLine(text, font, color, start, room, tracking, opacity))
+
+    /** Steps drawn for a context of their own (`CarrierTruckGeometry.draw`), under this one's transform and opacity. */
+    fun draw(drawing: List<MapDrawing>) {
+        steps += MapDrawing.Transformed(transform, drawing, opacity)
+    }
+
+    private fun add(step: MapDrawing) {
+        steps += if (transform == AffineTransform.Identity) step else MapDrawing.Transformed(transform, listOf(step))
+    }
 }
 
 /**

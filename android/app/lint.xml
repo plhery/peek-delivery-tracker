@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- ICU4J is a test library of :core's (core/build.gradle.kts), which lint now reaches through :app; the app
+         doesn't ship it, and :core keeps its version. -->
+    <issue id="NewerVersionAvailable">
+        <ignore regexp="com\.ibm\.icu:icu4j" />
+    </issue>
+</lint>

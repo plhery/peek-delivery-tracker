@@ -1,5 +1,15 @@
 # Android app
 
+The app reads the data the iPhone app bundles (brand, carrier catalog, copy, map) from its assets: `:app` packages
+the files `:core` reads, synced from `ios/PeekDeliveryTracker/Resources` along with its own country names, under
+`peek/`, and `SharedResources` reads them there.
+
+## App tests and screenshots
+
+`./gradlew :app:testDebugUnitTest` runs the app's tests on the JVM with Robolectric. The design system's screenshots
+are kept in `app/src/test/snapshots`: `./gradlew :app:verifyRoborazziDebug` fails on any pixel that differs, and
+`./gradlew :app:recordRoborazziDebug` records them again after a change meant to show.
+
 ## Core tests on a device
 
 `./gradlew :core:test` runs the core's JUnit tests on the JVM, with ICU4J standing in for the phone's ICU.

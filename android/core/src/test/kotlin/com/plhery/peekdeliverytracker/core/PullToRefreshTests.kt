@@ -220,6 +220,79 @@ class PullToRefreshTests {
         assertEquals(listOf(Point(3.125, 7.5), Point(5.625, 10.0), Point(11.875, 3.75)), points)
     }
 
+    // Not an iPhone test: the glyph's spring as SwiftUI applies it (a swiftc harness on the Mac). The opacity stops at 1
+    // while the spring overshoots, as SwiftUI keeps an opacity within 0 and 1; the scale does not stop.
+    @Test
+    fun theGlyphFadesInAndGrowsOnItsSpring() {
+        assertEquals(0.0, PullToRefreshSeal.glyphOpacity(0.0), 0.0)
+        assertEquals(0.3108581140887894, PullToRefreshSeal.glyphOpacity(0.05), 1e-15)
+        assertEquals(1.0, PullToRefreshSeal.glyphOpacity(0.2), 0.0)
+        assertEquals(1.0, PullToRefreshSeal.glyphOpacity(0.3), 0.0)
+        assertEquals(0.9997700343043638, PullToRefreshSeal.glyphOpacity(0.5), 1e-15)
+        assertEquals(1.0, PullToRefreshSeal.glyphOpacity(Double.POSITIVE_INFINITY), 0.0)
+        assertEquals(0.65, PullToRefreshSeal.glyphScale(0.0, reduceMotion = false), 0.0)
+        assertEquals(0.65 + 0.35 * 0.7047501156032632, PullToRefreshSeal.glyphScale(0.1, reduceMotion = false), 1e-15)
+        assertEquals(0.65 + 0.35 * 1.0104505747325803, PullToRefreshSeal.glyphScale(0.3, reduceMotion = false), 1e-15)
+        assertTrue(PullToRefreshSeal.glyphScale(0.3, reduceMotion = false) > 1)
+        assertEquals(1.0, PullToRefreshSeal.glyphScale(Double.POSITIVE_INFINITY, reduceMotion = false), 0.0)
+        assertEquals(1.0, PullToRefreshSeal.glyphScale(0.0, reduceMotion = true), 0.0)
+        // A spring that has run for ever has arrived, where SwiftUI's own formula gives NaN.
+        assertEquals(1.0, PullToRefreshSeal.glyphAnimation.value(Double.POSITIVE_INFINITY), 0.0)
+        assertEquals(-0.06, Spring(duration = 0.4, bounce = 0.5).value(-0.06, time = Double.POSITIVE_INFINITY), 0.0)
+        assertEquals(0.0, Spring().value(1.0, time = Double.NaN), 0.0)
+    }
+
+    // Not an iPhone test: the label shrinks to fit the 12 points under the seal, as `minimumScaleFactor(0.8)` does
+    // (measured with SwiftUI's own layout on the Mac), at caption 2's line height for 11, 13 and 15 points.
+    @Test
+    fun theLabelShrinksToFitUnderTheSealButNoFurtherThan80Percent() {
+        assertEquals(12.0, PullToRefreshIndicator.LABEL_HEIGHT, 0.0)
+        assertEquals(1.0, PullToRefreshIndicator.labelScale(lineHeight = 11.0), 0.0)
+        assertEquals(1.0, PullToRefreshIndicator.labelScale(lineHeight = 12.0), 0.0)
+        assertEquals(12 / 13.13, PullToRefreshIndicator.labelScale(lineHeight = 13.13), 1e-15)
+        assertEquals(0.8, PullToRefreshIndicator.labelScale(lineHeight = 15.52), 0.0)
+        assertEquals(0.8, PullToRefreshIndicator.labelScale(lineHeight = 17.91), 0.0)
+        // A line too wide for the band shrinks too, as far as the same floor, then is cut.
+        assertEquals(0.9, PullToRefreshIndicator.labelScale(lineHeight = 12.0, textWidth = 200.0, availableWidth = 180.0), 1e-15)
+        assertEquals(0.8, PullToRefreshIndicator.labelScale(lineHeight = 12.0, textWidth = 400.0, availableWidth = 180.0), 0.0)
+        assertEquals(12 / 13.13, PullToRefreshIndicator.labelScale(lineHeight = 13.13, textWidth = 100.0, availableWidth = 180.0), 1e-15)
+        assertEquals(11.0, PullToRefreshIndicator.LABEL_FONT_SIZE, 0.0)
+        assertEquals(15.0, PullToRefreshIndicator.LABEL_MAXIMUM_FONT_SIZE, 0.0)
+    }
+
+    // Not an iPhone test: UIScrollView comes back to exactly 0, Android's list to within a sliver of a pixel. Under half
+    // a pixel is at rest, so the next pull can start a refresh.
+    @Test
+    fun anOverscrollUnderHalfAPixelIsAtRest() = runTest {
+        assertEquals(PullGeometry(0.0, 164.0, 874.0), PullGeometry.of(-164.000001, 164.0, 874.0, displayScale = 3.0))
+        assertEquals(PullGeometry(0.0, 164.0, 874.0), PullGeometry.of(-164.16, 164.0, 874.0, displayScale = 3.0))
+        assertEquals(0.17, PullGeometry.of(-164.17, 164.0, 874.0, displayScale = 3.0).overscroll, 1e-9)
+        assertEquals(0.25, PullGeometry.of(-164.25, 164.0, 874.0, displayScale = 2.0).overscroll, 1e-9)
+        assertEquals(0.0, PullGeometry.of(-164.24, 164.0, 874.0, displayScale = 2.0).overscroll, 0.0)
+        assertEquals(PullGeometry(0.0, 164.0, 874.0), PullGeometry.of(-100.0, 164.0, 874.0, displayScale = 3.0))
+
+        val model = PullToRefreshModel(this)
+        var trigger = PullToRefreshTrigger()
+        fun pull(offset: Double, dragging: Boolean): Boolean {
+            model.track(PullGeometry.of(offset, 164.0, 874.0, displayScale = 2.625))
+            val next = trigger.next(model.distance, dragging, model)
+            trigger = next.trigger
+            if (next.starts) model.begin(label = "Checking for updates…")
+            return next.starts
+        }
+        assertFalse(pull(-164.0, dragging = true))
+        assertTrue(pull(-340.0, dragging = true))
+        model.finish(succeeded = true, label = "Tracking updated")
+        model.settle()
+        model.settleJob?.join()
+        assertTrue(model.awaitingRest)
+        assertFalse(pull(-164.000001, dragging = false))
+        assertFalse(model.awaitingRest)
+        assertEquals(0.0, model.distance, 0.0)
+        assertTrue("back at rest, a pull starts the next one", pull(-340.0, dragging = true))
+        assertEquals(2, model.starts)
+    }
+
     @Test
     fun aRefreshStartsOnceAHeldPullReachesTheThresholdAndAgainOnlyAfterRest() = runTest {
         val model = PullToRefreshModel(this)

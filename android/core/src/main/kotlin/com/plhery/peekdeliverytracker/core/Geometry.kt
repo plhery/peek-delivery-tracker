@@ -779,10 +779,12 @@ data class Spring(val duration: Double = 0.5, val bounce: Double = 0.0) {
 
     /**
      * `value(target:initialVelocity:time:)`: where the spring is `time` seconds after leaving zero toward `target`,
-     * moving at `initialVelocity`; zero until it leaves.
+     * moving at `initialVelocity`; zero until it leaves, and the target once infinitely long has passed, where
+     * SwiftUI's own formula gives NaN.
      */
     fun value(target: Double, initialVelocity: Double = 0.0, time: Double): Double {
         if (!(time > 0)) return 0.0
+        if (time == Double.POSITIVE_INFINITY) return target
         val naturalFrequency = sqrt(stiffness / mass)
         val ratio = dampingRatio
         val start = -target

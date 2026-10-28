@@ -107,7 +107,10 @@ class PeekMarkTests {
     @Test
     fun theEyesAloneAreOneColourWithThePupilsCutAroundTheirCatchlights() {
         val ink = AdaptiveColor(RgbaColor(0.0, 0.0, 0.0))
-        val steps = PeekMarkArtwork.drawEyes(ink).map { it as MapDrawing.Fill }
+        // One layer, so the cut clears only the whites under it.
+        val drawing = PeekMarkArtwork.drawEyes(ink)
+        assertEquals(1, drawing.size)
+        val steps = (drawing.single() as MapDrawing.Layer).steps.map { it as MapDrawing.Fill }
         assertEquals(listOf(false, true, false), steps.map { it.cut })
         assertEquals(ink, steps[0].color)
         assertEquals(ink, steps[2].color)

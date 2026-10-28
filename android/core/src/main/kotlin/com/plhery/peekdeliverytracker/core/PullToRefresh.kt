@@ -30,10 +30,14 @@ class PullGeometry(val overscroll: Double, val inset: Double, val height: Double
     companion object {
         /**
          * `init(_ geometry: ScrollGeometry)`: from the content's offset (negative while pulled down), the top inset and
-         * the scroll view's height.
+         * the scroll view's height, in points. UIScrollView keeps its offset on whole pixels, so the content comes back
+         * to exactly 0; Android's list can settle a sliver of a pixel short. An overscroll under half a pixel, at
+         * `displayScale` pixels to the point (the density), is the content at rest.
          */
-        fun of(contentOffsetY: Double, contentInsetTop: Double, containerHeight: Double): PullGeometry =
-            PullGeometry(swiftMax(0.0, -(contentOffsetY + contentInsetTop)), contentInsetTop, containerHeight)
+        fun of(contentOffsetY: Double, contentInsetTop: Double, containerHeight: Double, displayScale: Double): PullGeometry {
+            val overscroll = swiftMax(0.0, -(contentOffsetY + contentInsetTop))
+            return PullGeometry(if (overscroll * displayScale < 0.5) 0.0 else overscroll, contentInsetTop, containerHeight)
+        }
     }
 }
 
@@ -103,7 +107,11 @@ class PullToRefreshModel(private val scope: CoroutineScope) {
             labelState.value = value
         }
 
-    /** Counts refreshes, so the seal pops once each time one starts. */
+    /**
+     * Counts refreshes, so the seal pops once each time one starts. :app also plays a light impact each time it changes,
+     * as `.sensoryFeedback(.impact(weight: .light), trigger:)` does, and not for the value it is first composed with:
+     * `HapticFeedbackConstants.GESTURE_THRESHOLD_ACTIVATE` from API 34, `HapticFeedbackConstants.CONTEXT_CLICK` before.
+     */
     var starts: Int
         get() = startsState.value
         private set(value) {
@@ -231,6 +239,23 @@ data class PullToRefreshIndicator(
         const val LABEL_PADDING = 12.0
         const val LABEL_MINIMUM_SCALE = 0.8
 
+        /** The height the band leaves the label under the seal. */
+        const val LABEL_HEIGHT = HEIGHT - PullToRefreshSeal.SIZE - SPACING
+
+        /** Caption 2's size in points at the default text sizes (up to Large), and at xxLarge, past which it stops. */
+        const val LABEL_FONT_SIZE = 11.0
+        const val LABEL_MAXIMUM_FONT_SIZE = 15.0
+
+        /**
+         * The label's scale (`minimumScaleFactor(0.8)`): it shrinks until its line fits the `LABEL_HEIGHT` left under
+         * the seal and its text, `textWidth` wide at full size, fits `availableWidth`, but never below 0.8. :app measures
+         * the line height of caption 2 medium at the reader's text size, capped at `LABEL_MAXIMUM_FONT_SIZE`, and centres
+         * the line on the label's height, so a line still too tall overflows it equally above and below; a line still
+         * too wide is cut at its end.
+         */
+        fun labelScale(lineHeight: Double, textWidth: Double = 0.0, availableWidth: Double = Double.POSITIVE_INFINITY): Double =
+            swiftMin(1.0, swiftMax(LABEL_MINIMUM_SCALE, swiftMin(LABEL_HEIGHT / lineHeight, availableWidth / textWidth)))
+
         /**
          * `.animation(.easeOut(duration: 0.22), value: model.phase)`: as the phase changes, the opacity and what changes
          * with it inside the indicator (the seal's scale) ease over this. The offset follows the content, unanimated.
@@ -302,6 +327,19 @@ data class PullToRefreshSeal(
 
         /** As a result comes, the glyph fades in and grows to full size on this spring; as it goes, at once. */
         val glyphAnimation = MotionCurve.SpringCurve(Spring(duration = 0.3, bounce = 0.2))
+
+        /**
+         * The glyph's opacity `time` seconds after a result comes: 0 to 1 on `glyphAnimation`, held at 1 while the spring
+         * overshoots, as SwiftUI keeps an opacity within 0 and 1. With Reduce Motion too.
+         */
+        fun glyphOpacity(time: Double): Double = swiftMin(1.0, swiftMax(0.0, glyphAnimation.value(time)))
+
+        /**
+         * The glyph's scale `time` seconds after a result comes: 0.65 to 1 on `glyphAnimation`, past 1 while the spring
+         * overshoots, as SwiftUI does not limit a scale. 1 throughout with Reduce Motion.
+         */
+        fun glyphScale(time: Double, reduceMotion: Boolean): Double =
+            if (reduceMotion) 1.0 else 0.65 + (1.0 - 0.65) * glyphAnimation.value(time)
 
         /** How long the pop lasts. */
         const val POP_DURATION = 0.52

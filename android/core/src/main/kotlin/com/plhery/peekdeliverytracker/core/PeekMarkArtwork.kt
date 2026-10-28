@@ -33,15 +33,20 @@ object PeekMarkArtwork {
 
     /**
      * `drawEyes(in:)`: the eyes alone in one colour, the pupils cut out around their catchlights: a template image, such
-     * as the one in a Mac's menu bar. In the frame's units, with y pointing down. The cut clears whatever is under it.
+     * as the one in a Mac's menu bar. In the frame's units, with y pointing down. One layer, as the iPhone draws them
+     * into an image of their own: the cut clears the whites and nothing :app drew before.
      */
     fun drawEyes(color: AdaptiveColor): List<MapDrawing> {
         fun both(x: Double, y: Double, rx: Double, ry: Double): MapPath =
             MapPath().also { path -> for (eye in eyes) path.addPath(ellipse(x + eye, y, rx, ry)) }
         return listOf(
-            MapDrawing.Fill(both(190.0, 262.0, 70.0, 77.0), color),
-            MapDrawing.Fill(both(219.4, 269.0, 35.0, 35.0), AdaptiveColor(RgbaColor(0.0, 0.0, 0.0)), cut = true),
-            MapDrawing.Fill(both(207.5, 255.0, 10.5, 10.5), color),
+            MapDrawing.Layer(
+                listOf(
+                    MapDrawing.Fill(both(190.0, 262.0, 70.0, 77.0), color),
+                    MapDrawing.Fill(both(219.4, 269.0, 35.0, 35.0), AdaptiveColor(RgbaColor(0.0, 0.0, 0.0)), cut = true),
+                    MapDrawing.Fill(both(207.5, 255.0, 10.5, 10.5), color),
+                ),
+            ),
         )
     }
 

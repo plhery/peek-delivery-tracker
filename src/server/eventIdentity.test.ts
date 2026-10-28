@@ -1089,6 +1089,25 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(matched(copy, [own], 'ctt-express')).toBe(0);
   });
 
+  it('leaves out every copy to the whole second of the one row a carrier holds in that second', () => {
+    // Ship24 copies a CTT Express scan in CTT Express's words and in CTT Portugal's, both without the milliseconds.
+    const own = row('ctt-express:sent', '2026-01-21T16:40:50.767+00:00', 'Enviado', 'in_transit');
+    const spanish = scan('unknown:sent', '2026-01-21T16:40:50Z', 'Enviado', 'in_transit');
+    const portuguese = { ...scan('unknown:arrived', '2026-01-21T16:40:50Z', 'Em trânsito - Chegou ao centro operacional', 'in_transit'),
+      location: 'Example Customs Centre' };
+    expect(pairs(sharedScans([spanish, portuguese], [own]).skipped))
+      .toEqual([['unknown:arrived', 'ctt-express:sent'], ['unknown:sent', 'ctt-express:sent']]);
+    const skipped = (rows: JsonObject[]) => sharedScans([spanish, portuguese], rows).skipped.size;
+    // Not the next second, nor another place.
+    expect(skipped([{ ...own, occurred_at: '2026-01-21T16:40:51.200+00:00' }])).toBe(0);
+    // With two of the carrier's rows in the second, the copy in the carrier's words still matches its own.
+    expect(pairs(sharedScans([spanish, portuguese], [own, row('ctt-express:sorted', '2026-01-21T16:40:50.900+00:00', 'Clasificado', 'in_transit')]).skipped))
+      .toEqual([['unknown:sent', 'ctt-express:sent']]);
+    expect(sharedScans([portuguese], [{ ...own, location: 'Madrid' }]).skipped.size).toBe(0);
+    // An earlier carrier's relay keeps only the copy in its own words out.
+    expect(pairs(sharedScans([spanish, portuguese], [own], new Map(), 'ctt-express').skipped)).toEqual([['unknown:sent', 'ctt-express:sent']]);
+  });
+
   describe('several rows in other wording in the scan\'s minute or second', () => {
     // ParcelsApp dates two Chronopost scans to the minute and adds the reason to one; Chronopost dates both to the second.
     const hub = { location: 'Example Hub' };

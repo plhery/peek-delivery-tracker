@@ -895,7 +895,10 @@ export function rewordedScans(
  * a row a carrier holds at its instant, by its prefix or because the row names
  * no provider, is left out, so an absorbed copy does not come back with the
  * provider's next answer. Of several such rows it repeats the one whose wording
- * opens alike, when one alone does, else the first.
+ * opens alike, when one alone does, else the first. A universal scan to the
+ * whole second repeats the one row a carrier holds in that second, unless the
+ * row is an earlier carrier's relay (Ship24 copies a CTT Express scan twice,
+ * in CTT Express's words and in CTT Portugal's, without the milliseconds).
  *
  * A provider's scan that matched nothing repeats another provider's row at the
  * shift most of its scans show from that provider's rows, in whole quarter
@@ -1059,9 +1062,18 @@ export function sharedScans(
   }
   // A copy of a scan a carrier holds stays out, so the copies it absorbed do not come back.
   const held = stored.filter((row) => heldByCarrier(row) && !observedOnly(row));
+  // A copy to the whole second repeats the one row a carrier holds in that second (Ship24 tells a CTT Express scan in
+  // its words and in CTT Portugal's, both without the milliseconds): two such copies meet the row, which the one-to-one
+  // match above gives to neither. An earlier carrier's relay in the second is no such row.
+  const heldInSecond = (event: JsonObject) => {
+    const at = instantOf(event);
+    const rows = at % 1_000 === 0 ? held.filter((row) => Math.floor(instantOf(row) / 1_000) * 1_000 === at) : [];
+    const row = rows.length === 1 ? rows[0]! : undefined;
+    return row && stageOf(event) !== '' && sourceOf(identity(row)) !== relaying && !placesApart(event, row) ? row : undefined;
+  };
   const heldCopy = (event: JsonObject) => {
     const twins = held.filter((row) => copies(event, row));
-    return twins.length > 1 ? openingAlike(event, twins) ?? twins[0] : twins[0];
+    return twins.length > 1 ? openingAlike(event, twins) ?? twins[0] : twins[0] ?? heldInSecond(event);
   };
   for (const event of pending) {
     const id = identity(event);

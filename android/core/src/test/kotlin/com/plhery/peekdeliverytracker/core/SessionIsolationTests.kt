@@ -1028,7 +1028,7 @@ class SessionIsolationTests {
                 assertNotNull(session.user)
             }
         }
-        // Android's own: the monitor the deletion cancelled sets no error and starts no second one beside the next.
+        // The monitor the deletion cancelled sets no error and starts no second one beside the next, as on the iPhone.
         runCurrent()
         assertNull(store.errorMessage)
         assertEquals(2, transport.requests.count { it.method == "GET" && it.path == "/api/sync/jobs" })

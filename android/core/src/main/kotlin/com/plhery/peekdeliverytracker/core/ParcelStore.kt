@@ -30,7 +30,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.isActive
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
@@ -1255,7 +1254,8 @@ class ParcelStore(
             notificationPreferences = loaded
             notificationError = null
         } catch (error: Exception) {
-            // A cancelled call may end in an error of its own, as URLSession's in URLError.cancelled: it ends as a cancellation.
+            // Unlike the iPhone, which shows URLError.cancelled, a call cancelled under way ends as a cancellation whatever
+            // it threw (OkHttp's IOException).
             currentCoroutineContext().ensureActive()
             // An answer for the account before this one says nothing about this one.
             if (generation != session.generation || error is CancellationException) return
@@ -1504,7 +1504,6 @@ class ParcelStore(
         if (jobMonitoringTask != null || pendingJobIds.isEmpty()) return
         val generation = session.generation
         jobMonitoringTask = scope.launch {
-            val own = coroutineContext.job
             while (isActive && pendingJobIds.isNotEmpty()) {
                 val current = pendingJobIds.toList()
                 try {
@@ -1517,8 +1516,8 @@ class ParcelStore(
                     errorMessage = localizer.errorMessage(error)
                 }
             }
-            // Unlike the iPhone's, a monitor a sign-out or deletion cancelled ends in stillCurrent, with no error, and clears only its own handle.
-            if (!stillCurrent(generation) || jobMonitoringTask !== own) return@launch
+            // A monitor a sign-out or deletion cancelled ends in stillCurrent, with no error and the next one's handle left alone.
+            if (!stillCurrent(generation)) return@launch
             jobMonitoringTask = null
             if (pendingJobIds.isNotEmpty()) monitorJobs(emptyList())
         }

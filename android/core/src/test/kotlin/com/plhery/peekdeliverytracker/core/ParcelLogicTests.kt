@@ -625,6 +625,16 @@ class ParcelLogicTests {
         assertEquals(listOf(listOf(nextUp)), DeliveryWidgetSelection.pages(listOf(nextUp), medium = true))
     }
 
+    /** The selection half of ParcelRouteTests.testTheWidgetGalleryShowsTheDemosNextDeliveries; its drawings wait for :app. */
+    @Test
+    fun theWidgetGalleryShowsTwoOfTheDemosNextDeliveriesInEveryLanguage() {
+        for (language in AppLanguage.entries) {
+            val parcels = DemoRepository(MemoryDefaults(), language = { language }).list()
+            val shown = DeliveryWidgetSelection.pages(ParcelStore.widgetDeliveries(parcels, Localizer(language)), medium = true).firstOrNull()
+            assertEquals("$language", 2, shown?.size)
+        }
+    }
+
     /** A delivered parcel comes after those on their way, for a day after it arrived, even when the app has not published since. */
     @Test
     fun widgetKeepsADeliveredParcelForADay() {

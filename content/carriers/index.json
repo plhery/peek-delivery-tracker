@@ -157,5 +157,7 @@
   { "id": "mtscn", "catalog": "mtscn", "name": "Meiteshun Logistics", "languages": ["en"] },
   { "id": "cttyex", "catalog": "cttyex", "name": "CTTYEX", "languages": ["en"] },
   { "id": "speedaf", "catalog": "speedaf", "name": "Speedaf", "languages": ["en"] },
-  { "id": "yilong-logistics", "catalog": "yilong-logistics", "name": "Yilong Logistics", "languages": ["en"] }
+  { "id": "yilong-logistics", "catalog": "yilong-logistics", "name": "Yilong Logistics", "languages": ["en"] },
+  { "id": "quick-rabbit", "catalog": "quick-rabbit", "name": "Quick Rabbit", "languages": ["en"] },
+  { "id": "huaya-express", "catalog": "huaya-express", "name": "Huaya Express", "languages": ["en"] }
 ]

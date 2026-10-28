@@ -1280,6 +1280,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Yilong Logistics tracking: YIL numbers and statuses",
       "name": "Yilong Logistics",
       "color": "#ec0307"
+    },
+    {
+      "id": "quick-rabbit",
+      "catalog": "quick-rabbit",
+      "slug": "quick-rabbit-tracking",
+      "title": "Quick Rabbit tracking: PKG codes, statuses and Citibox",
+      "name": "Quick Rabbit",
+      "color": "#f6851f"
+    },
+    {
+      "id": "huaya-express",
+      "catalog": "huaya-express",
+      "slug": "huaya-express-tracking",
+      "title": "Huaya Express tracking: HYYT numbers and where they stop",
+      "name": "Huaya Express",
+      "color": "#e60013"
     }
   ],
   "de": [

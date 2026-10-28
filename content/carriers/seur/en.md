@@ -6,21 +6,21 @@ published: 2026-10-11
 updated: 2026-10-26
 ---
 
-SEUR is a Spanish parcel and express carrier, part of the Geopost group that also runs DPD. Track it without an account on SEUR's [miSEUR tracking page](https://www.seur.com/miseur/mis-envios), with the link in SEUR's emails or by pasting the number in the box above. The number comes from the sender: if you don't have it, SEUR's help says to ask the shop.
+SEUR is a Spanish parcel and express carrier, part of the Geopost group that also runs DPD. Track it without an account on SEUR's miSEUR tracking page on seur.com, with a SEUR tracking link or by pasting the number in the box above.
 
 ## SEUR tracking number: what it looks like and where to find it
 
-SEUR publishes no format; its tracking field asks for the "Shipment ID". Numbers are usually 14 or 21 digits, and a 7-digit code works too:
+SEUR's numbers are usually 14 or 21 digits, and a 7-digit code works too:
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `12300000000000` | 14 digits |
+| `12345678901234` | 14 digits |
 | `123456789012345678901` | 21 digits |
 | `1234567` | 7 digits |
 
 Look in the shop's shipping email or your order page. No number at all? See [how to find your tracking number](guide:find-tracking-number).
 
-Fourteen digits also fit DPD, Relais Colis, BRT and others, so check which carrier the shop's email names.
+Fourteen digits also fit DPD, BRT and others, so check which carrier the shop's email names.
 
 ## What SEUR's tracking statuses mean
 
@@ -40,47 +40,31 @@ SEUR's tracking site is in Spanish and English. The statuses below are the Spani
 | `EL ENVÍO ESTÁ ENTREGADO.` | Delivered. |
 | `EL ENVÍO HA SIDO ENTREGADO A UN VECINO.` | Delivered to a neighbour. |
 
-"En tránsito" confuses people: SEUR's help says it covers a parcel heading to your local depot and one already there, waiting to go out. The delay message gives no reason or length. Parcels that go through customs also show two customs steps, arrival at customs and clearance, before delivery.
+The delay message gives no reason or length. Parcels that go through customs also show customs steps, such as arrival at customs and clearance, before delivery.
 
 ## SEUR delivery, pickup points and missed deliveries
 
-SEUR delivers Monday to Friday, and on Saturday morning only when the sender booked that option.
+**Missed delivery.** The tracking shows `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.`, and you can rebook. If the delivery is moved to a SEUR Pickup point, you see `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.`
 
-**Missed delivery.** SEUR's Spanish transport conditions say consumer parcels get one delivery attempt, then go to the nearest SEUR Pickup point; the English version of the same page mentions up to two attempts. SEUR leaves a notice.
-
-**Changing the delivery (SEUR Predict).** Predict emails or texts you when the parcel is collected, with the delivery day, then sends a one-hour window on the day. Before delivery or after a missed attempt you can choose a Pickup point, another day or another address. In miSEUR they're greyed out when the sender doesn't allow changes or the time for changes has run out. Predict isn't available for every delivery: it depends on what the sender chose.
-
-**SEUR Pickup points and lockers.** Find one of SEUR's thousands of Pickup shops and lockers with its [Pickup point finder](https://www.seur.com/miseur/buscador-tiendas). A shop keeps your parcel up to 7 days after SEUR tells you it's there, a locker 5 days. After that it goes back to the sender. At a shop, show the QR code or PIN from SEUR's message, or your ID (DNI, NIE or passport). Someone else can go with that message. Lockers open 24 hours; the PIN arrives by email or SMS.
+**SEUR Pickup points and lockers.** SEUR has thousands of Pickup shops and lockers; find one on seur.com. Once your parcel is there, the tracking shows `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.`, and after you collect it from a shop, `EL DESTINATARIO HA RETIRADO EL ENVÍO DE LA TIENDA SEUR PICKUP SELECCIONADA.` If a locker couldn't take it, `EL ENVÍO NO HA SIDO DEPOSITADO EN EL LOCKER SELECCIONADO. SE DEBE ELEGIR OTRO PUNTO SEUR PICKUP.` means you have to choose another point.
 
 ## SEUR parcel delayed, lost or damaged
 
-SEUR says a new shipment can take up to 48 hours to show. If the number still isn't found, the sender may not have handed the parcel over: ask the sender. Past the expected day? Check miSEUR, then use SEUR's customer service form. See also [tracking that isn't updating](guide:tracking-not-updating).
+SEUR gives the same "not found" answer for a shipment too new to show as for a number it doesn't know, so give a new shipment some time. If the number still isn't found, ask the sender whether the parcel was handed over. Past the expected day? See [tracking that isn't updating](guide:tracking-not-updating).
 
-Who acts: SEUR compensates only the customer who paid for the shipment and tells other recipients to contact the sender. If you bought online, start with the shop.
+Who acts: if you bought online, start with the shop. Under EU rules, the seller is responsible for damage to your goods until you receive them.
 
-SEUR's own deadlines for damage or missing items:
+Marked delivered but not with you? If the tracking says `EL ENVÍO HA SIDO ENTREGADO A UN VECINO.`, ask your neighbours first; see [delivered but not received](guide:delivered-not-received).
 
-- Visible damage: note it on the delivery slip when the parcel arrives, and take photos of the goods and packaging straight away.
-- Hidden damage or missing contents: 7 days from delivery (8 for parcels to Portugal), in writing. Keep the packaging.
-- Delays: written reservations to SEUR within 21 days of delivery.
+## SEUR customer service
 
-Marked delivered but not with you? SEUR suggests checking whether someone else at the address took it, then calling or using the form; see [delivered but not received](guide:delivered-not-received). Claims go through miSEUR's complaints area, where you say whether you're the sender or the recipient and get a case number.
+For SEUR's customer service, go to the support area of miSEUR, on seur.com.
 
-## SEUR customer service and contact number
-
-SEUR's channels for recipients in Spain, as listed on its help pages on 11 October 2026:
-
-- **Consumer line** 800 00 95 84, free under Spanish consumer law.
-- **Customer service** 902 10 10 10.
-- **Online form** in [miSEUR's support area](https://www.seur.com/miseur/soporte), and Lola, SEUR's chatbot, for tracking and problems.
-
-SEUR publishes no opening hours and no English-language line.
-
-> SEUR warns of fake SMS using its name: a link asks for a small payment to steal your card details. Don't click; check the parcel on seur.com or with Lola, and forward doubtful messages to phishing@seur.net. SEUR also says it doesn't take payment by bank transfer.
+> In February 2021, INCIBE, Spain's national cybersecurity institute, warned of fake SMS using SEUR's name: a link led to a copy of SEUR's site that asked for a small payment to steal card details. Its advice: don't follow the link, type SEUR's address into your browser to check the parcel, and if you've entered your card details, contact your bank as soon as possible.
 
 ## Tracking SEUR parcels with Peek
 
-[Peek](/) asks SEUR about 21- and 7-digit numbers directly. For 14 digits it asks the likely carriers at once, SEUR first for readers in Spain or Portugal. You see "asking…" and then "SEUR has this parcel." when only SEUR knows it; otherwise press "Change" and pick SEUR. A miSEUR or live-tracking link with `tracking=` works too, and no postcode is needed. A 21-digit number with `000` as its 13th to 15th digits is taken for [Australia Post](carrier:australia-post)'s: pick SEUR with "Change".
+[Peek](/) asks SEUR about 21-digit numbers directly. For 14 digits it asks the likely carriers at once, SEUR first for readers in Spain. You see "Checking tracking services…" and then "SEUR has this parcel." when only SEUR knows it; otherwise press "Change" and pick SEUR. Do the same for a 7-digit number: SEUR reuses them, so Peek doesn't ask SEUR about one on its own. A miSEUR or live-tracking link with `tracking=` works too, and no postcode is needed. A 21-digit number with `000` as its 13th to 15th digits is taken for [Australia Post](carrier:australia-post)'s: pick SEUR with "Change".
 
 Peek shows the status, the history and the weight. SEUR gives no place for its scans, so nothing appears on the map. Statuses stay in SEUR's Spanish; the delivered ones show as "Delivered". Peek drops the parcel count, the sender, the recipient and the delivery PIN and QR code. SEUR's scan times carry no reliable time zone, so Peek reads them on Madrid time and lists SEUR's own history. Multi-parcel shipments are followed only through other tracking services. You can be notified when the status changes.
 
@@ -88,32 +72,20 @@ Peek shows the status, the history and the weight. SEUR gives no place for its s
 
 ### Why is SEUR tracking not working?
 
-Usually the shipment is too new: SEUR says it can take 48 hours to appear. After that, ask the sender whether it was handed over.
+The shipment may be too new: SEUR gives the same "not found" answer for a recent shipment as for a number it doesn't know. If it lasts, ask the sender whether the parcel was handed over.
 
-### Does SEUR deliver on Saturdays?
+### What does SEUR's delay message mean?
 
-Only on Saturday mornings, and only when the sender booked Saturday delivery.
-
-### Is there a SEUR customer service number in English?
-
-SEUR lists none. Its numbers are 800 00 95 84 (free) and 902 10 10 10; the form and chatbot are on seur.com.
+SEUR has flagged a delay, and delivery may come later than planned; it gives no reason or length. Peek keeps the parcel at the stage it had before the message. Wait for the next scan and, if the expected day passes, contact SEUR or the shop.
 
 ### Is SEUR the same as DPD?
 
-Not quite: SEUR belongs to the Geopost group, which also runs DPD, and uses DPD's network in Europe. SEUR's Portuguese site now leads to DPD Portugal.
+Not quite: SEUR is one of the Geopost group's delivery brands, alongside DPD.
 
 :::sources
-- [SEUR: Home](https://www.seur.com/en/) – tracking, Pickup finder, English site
-- [SEUR: miSEUR, Mis envíos](https://www.seur.com/miseur/mis-envios) – tracking without account, Shipment ID, rebooking limits, PIN and QR, claims
-- [SEUR: Preguntas frecuentes](https://www.seur.com/miseur/ayuda) – number from the sender, 48 hours, En tránsito, pickup days, ID, damage, phones
-- [SEUR: FAQ (English feed)](https://www.seur.com/miseur/backend/contenidos?seccion=ms_ayuda&idioma=en) – In Transit, phones, pickup days
-- [SEUR: Condiciones de transporte](https://www.seur.com/es/condiciones-de-transporte/) – one attempt, notice, signature, days, claim deadlines
-- [SEUR: Transport conditions](https://www.seur.com/en/transport-conditions/) – up to two attempts
-- [SEUR: SEUR Predict](https://www.seur.com/es/recibir/seur-predict/) – change options, one-hour window, not every delivery
-- [SEUR: Change my delivery](https://www.seur.com/en/receive/change-my-delivery/) – change options
-- [SEUR: SEUR Locker](https://www.seur.com/es/puntos-pickup/lockers/) – 24 hours, 5 days
-- [SEUR: Qué es el phishing](https://www.seur.com/minisites/que-es-el-phishing) – fake SMS, phishing@seur.net, Geopost España
-- [SEUR: Fraudulent brand use](https://www.seur.com/en/fraudulent-brand-use/) – no bank transfers
-- [SEUR: Portugal](https://www.seur.com/pt/) – leads to DPD Portugal
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Geopost: Who we are](https://www.geopost.com/en/about-us/who-we-are/) – SEUR among the group's delivery brands, with DPD
+- [Geopost: SEUR](https://www.geopost.com/en/about-us/our-companies-and-partners/seur/) – express transport in Spain, Pickup shops and lockers
+- [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – the seller answers for damage until you receive the goods
+- [INCIBE: Circulan SMS fraudulentos que suplantan a SEUR (in Spanish)](https://www.incibe.es/ciudadania/avisos/circulan-sms-fraudulentos-que-suplantan-seur-que-no-te-enganen) – February 2021 alert: fake SMS, small payment, card details, type the address, contact the bank
+- [Universal Parcel Scraper: SEUR](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/seur) – lookup without account, tracking in Spanish and English, number shapes, statuses and stages, "not found" answer, support page, what Peek reads
 :::

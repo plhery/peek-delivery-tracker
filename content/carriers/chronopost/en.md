@@ -6,11 +6,11 @@ published: 2026-10-11
 updated: 2026-10-27
 ---
 
-Chronopost is the express parcel service of the French La Poste group. Track it on Chronopost's tracking page, in the myChronopost app or in the box above, with the number from Chronopost's email or SMS.
+Chronopost is the express parcel service of the French La Poste group. Track it on Chronopost's tracking page or in the box above.
 
 ## Chronopost tracking number format
 
-Chronopost's number has 13 characters (two letters, nine digits, two letters), or 15 for parcels from abroad. Type it without spaces. It arrives by email or SMS; if not, check your spam or ask the shop, or see [how to find a tracking number](guide:find-tracking-number).
+Chronopost's number usually has 13 characters (two letters, nine digits, two letters), or 15 for parcels from abroad. If you don't have it, ask the shop, or see [how to find a tracking number](guide:find-tracking-number).
 
 | Shape (invented) | What it is |
 | --- | --- |
@@ -18,7 +18,7 @@ Chronopost's number has 13 characters (two letters, nine digits, two letters), o
 | `AB000000000JB` | The same shape ending in JB, JF or TS. |
 | `00000000000000U` | 15 characters, 14 digits and a check letter: a parcel from abroad. |
 
-The 13-character shape is the international postal format: a number ending FR may be [La Poste](carrier:la-poste)'s Colissimo, one ending CH, GB or DE another country's post. The 15-character shape is also DPD's, so it may be a [DPD Switzerland](carrier:dpd-ch) or [DPD Germany](carrier:dpd-de) parcel. If Chronopost doesn't know it, check the carrier the shop's email names.
+The 13-character shape is the international postal format: a number ending FR may be [La Poste](carrier:la-poste)'s Colissimo, one ending CH, GB or DE another country's post. The 15-character shape is also DPD's, so it may be a [DPD Switzerland](carrier:dpd-ch), [DPD Germany](carrier:dpd-de), [DPD Portugal](carrier:dpd-pt) or [DPD UK](carrier:dpd-uk) parcel. If Chronopost doesn't know it, check the carrier the shop's email names.
 
 ## What Chronopost's tracking statuses mean
 
@@ -42,48 +42,38 @@ Chronopost's tracking statuses are in French. In the order a parcel meets them:
 
 ## Chronopost delivery, point relais and missed deliveries
 
-Chronopost delivers from 8 am to 10 pm, Monday to Sunday except public holidays, according to the option the shop chose.
+If you're out, the parcel can wait at a pickup point: in France, Chronopost's are Pickup relays and lockers, post offices and its own depots. At a Pickup point you get an email or SMS when it's ready, with the deadline to collect it. Pickup says that deadline is never more than:
 
-With Predict, Chronopost notifies many recipients the day before by email or SMS; until an hour before, you can pick another date (up to 6 working days later), a neighbour, a safe place or a nearby pickup point. Use Chronopost's tracking, or tell its chatbot Léonard "Donner une instruction". No options shown means the parcel probably isn't eligible; the shop's choices also limit them.
+- 8 days at a Pickup relay;
+- 5 days in a Pickup locker.
 
-If you're out, you get a calling card and the parcel waits, depending on the service, at the nearest Pickup relay, post office or Chronopost depot; wait for the message saying it's ready. In mainland France it stays:
+After that deadline, the parcel goes back to the sender automatically.
 
-- 14 days at a post office or depot;
-- 7 calendar days at a Pickup relay;
-- 5 days in a locker.
-
-Abroad it varies. Uncollected parcels go back to the shop.
-
-At a relay or locker you need the Pickup Pass (QR code) or 6-digit code sent by email or SMS; lockers open around the clock. Someone else can pick it up with a proxy form ("procuration"), their ID and yours. For secure home delivery, the driver needs that code too.
+At a Pickup relay or locker you need the Pickup Pass (QR code) or the codes sent by email or SMS; at a relay, your original ID also works. Lockers are self-service and can be open around the clock. Someone else can collect it with your Pickup Pass or codes, or at a relay with the originals of their ID and yours; Pickup accepts no written proxy.
 
 ## Chronopost parcel stuck, not delivered or lost
 
-**No update.** For parcels to and from mainland France, Chronopost asks you to contact customer service after 48 hours without change, not counting weekends and public holidays. See [tracking that isn't updating](guide:tracking-not-updating).
+**No update or late.** Complaints about a late delivery go to the shop, which booked it: in France, an online shop alone answers for a delivery by the carrier it chose. See [tracking that isn't updating](guide:tracking-not-updating).
 
-**Late.** Léonard can email you updates. Complaints about a late delivery go to the shop, which booked it.
+**Lost or damaged.** Claim through the shop. If it arrives damaged, you can note it on the delivery slip, then contact the shop's customer service quickly. At a Pickup relay, report the damage to the shopkeeper, who records it; you can still take the parcel or refuse it.
 
-**Lost or damaged.** Claim through the shop. If it arrives damaged, write precise, dated and signed reservations on the driver's slip, then contact the shop. Claim deadlines are the sender's: 14 days from delivery for a private sender, 21 internationally.
+**Marked delivered but not received.** Contact the shop: if it can't prove you received the parcel, the loss is its risk. See [delivered but not received](guide:delivered-not-received).
 
-**Marked delivered but not received.** Tell Léonard "contester livraison" with the number. Signed for: customer service investigates. Handed over with a code or Pickup Pass: contact the shop quickly. Left in a safe place or with someone: check there first, then contact customer service. See [delivered but not received](guide:delivered-not-received).
+## Chronopost customer service
 
-**Returned.** A wrong address, an uncollected parcel or a refusal sends it back.
+Chronopost's own contact page is on chronopost.fr. La Poste Groupe and Pickup also name:
 
-## Chronopost customer service in English
-
-Chronopost's channels, from its English and French contact pages, read on 11 October 2026:
-
-- **Léonard**, the chatbot on chronopost.fr, available at any time, for tracking questions and instructions.
-- **Phone** +33 (0)969 391 391, standard rates, Monday to Friday 8 am to 7 pm and Saturday 8 am to noon, Paris time, excluding public holidays. In France: 09 69 391 391. No English-speaking line is promised.
-- **X** @ChronopostSAV and **Messenger** @Chronopost.
+- **Léonard**, Chronopost's chatbot, for delivery questions; complex cases go to a person.
+- **Phone** 09 69 39 13 91.
 - Shop2Shop parcels: chronoshop2shop.fr.
 
-If you dispute customer service's answer, turn to the Médiateur du Groupe La Poste.
+If Chronopost leaves a written, dated and signed complaint unanswered for at least two months, or you dispute its answer, turn to the Médiateur du Groupe La Poste, within a year of the complaint.
 
-> Chronopost warns of fake SMS and emails. Its SMS come from "Chronopost" with no number, and by default it asks for no ID or delivery fees for deliveries in France. Forward doubtful emails to abuse@chronopost.fr, SMS to 33700.
+> Scam SMS and emails use Chronopost's name. Chronopost says it asks for no ID or delivery fees for deliveries in France. Forward doubtful emails to abuse@chronopost.fr and report scam SMS to 33700.
 
 ## Tracking Chronopost parcels with Peek
 
-[Peek](/) recognises 13-character numbers at once when they start PZ, XR, XT, XU, XW or XY with a valid check digit, or end JB, JF or TS. It asks Chronopost alone about other numbers of that shape (valid FR ones with other prefixes go to La Poste) and about 15-character ones starting 1550. For 14 digits and a check letter it asks Chronopost, DPD Switzerland and DPD Germany; if two know it, or none does, you pick with "Change". Chronopost and chronoshop2shop.fr tracking links work too. No postcode is needed.
+[Peek](/) recognises 13-character numbers at once when they start PZ, XR, XT, XU, XW or XY with a valid check digit, or end JB, JF or TS. It asks Chronopost alone about those prefixes when the check digit fails and about numbers ending RV or VF; valid ones ending FR with other prefixes go to La Poste. For 14 digits and a check letter it asks Chronopost and the DPD companies that share the shape (DPD Switzerland, Germany, Portugal and UK); if two know it, or none does, you pick with "Change". Chronopost and chronoshop2shop.fr tracking links work too. No postcode is needed.
 
 Wordings stay French, except `Livraison effectuée` ("Delivered"). Peek maps each scan's office and shows the destination country, delivery time, partner's number abroad and, while the parcel waits, the relay or locker's name and address. An expected day appears only once a redelivery is booked. It drops your address and the point's contacts. A parcel to Germany with a partner number can be followed to DPD Germany. After a return starts, delivery counts as returned to sender.
 
@@ -99,32 +89,17 @@ Yes. Chronopost belongs to Geopost, which belongs to La Poste Groupe.
 
 Chronopost doesn't present itself as DPD: it is a member of Geopost, La Poste's parcel holding. Its numbers for parcels from abroad can have DPD's shape.
 
-### Does Chronopost deliver on Saturday?
-
-It can, if the shop chose that option: Chronopost delivers Monday to Sunday, outside public holidays.
-
 ### How long does Chronopost keep a parcel at a Pickup relay?
 
-Seven calendar days in mainland France; it goes back on the 8th day.
+Up to 8 days, says Pickup, which runs the relays; the email or SMS gives the exact deadline. After that the parcel goes back to the sender.
 
 :::sources
-- [Chronopost: Where can I find my parcel number?](https://www.chronopost.fr/en/faq/recipient/where-can-i-find-my-parcel-number) – number format
-- [Chronopost: Suivre votre colis](https://www.chronopost.fr/fr/suivi-colis) – tracking, Léonard, fraud warning
-- [Chronopost: When will my parcel be delivered?](https://www.chronopost.fr/en/faq/recipient/when-will-my-parcel-be-delivered) – 8 am to 10 pm, Monday to Sunday
-- [Chronopost: I want to change the date or address of my delivery](https://www.chronopost.fr/en/faq/recipient/I-want-to-change-the-date-or-address-of-my-delivery) – Predict, calling card
-- [Chronopost: Service Predict](https://www.chronopost.fr/fr/livraison/nos-services/predict) – notice times, 6 working days
-- [Chronopost: Combien de temps mon colis peut-il rester au point de proximité ?](https://www.chronopost.fr/fr/faq/destinataire/combien-de-temps-mon-colis-peut-il-rester-au-point-de-proximite) – holding times, proxy
-- [Chronopost: Livraison sur présentation d'un code sécurisé](https://www.chronopost.fr/fr/faq/destinataire/quest-ce-quune-livraison-sur-presentation-dun-code-securise-ou-dun-code-pin) – 6-digit code, Pickup Pass
-- [Chronopost: Que faire si mon colis est en retard ?](https://www.chronopost.fr/fr/faq/destinataire/que-faire-si-mon-colis-est-en-retard-ou-livre-en-retard) – 48-hour rule, late parcels
-- [Chronopost: Will I be compensated if my parcel is lost or damaged?](https://www.chronopost.fr/en/faq/recipient/will-i-be-compensated-if-my-parcel-lost-or-damaged) – lost and damaged parcels
-- [Chronopost: Je n'ai pas reçu mon colis qui est indiqué livré](https://www.chronopost.fr/fr/faq/destinataire/je-nai-pas-recu-mon-colis-qui-est-indique-livre) – contester livraison
-- [Chronopost: Points Pickup](https://www.chronopost.fr/fr/relais-pickup) – lockers open 24/7
-- [Chronopost: Suis-je indemnisé en cas de perte ou d'avarie ?](https://www.chronopost.fr/fr/faq/expediteur/suis-je-indemnise-en-cas-de-perte-ou-davarie) – sender claim deadlines
-- [Chronopost: Pourquoi mon colis m'a-t-il été retourné ?](https://www.chronopost.fr/fr/faq/expediteur/pourquoi-mon-colis-m-a-t-il-ete-retourne) – reasons for return
-- [Chronopost: Contact us](https://www.chronopost.fr/en/private/contact-us) – phone, hours, X, Messenger
-- [Chronopost: Nous contacter](https://www.chronopost.fr/fr/particulier/nous-contacter) – Léonard, French number, Shop2Shop
-- [Chronopost: Contact médiateur](https://www.chronopost.fr/fr/contact-mediateur) – La Poste group mediator
-- [Chronopost: Eviter les tentatives d'escroqueries](https://www.chronopost.fr/fr/eviter-les-tentatives-descroqueries) – SMS sender name, no fees in France
+- [La Poste Groupe: Chronopost](https://www.lapostegroupe.com/en/focus/la-poste-groupes-subsidiaries/chronopost) – express parcels; pickup points in France: depots, post offices, Pickup points
+- [La Poste Groupe: 2025 Integrated Report](https://www.lapostegroupe.com/assets/media/le-groupe-laposte/ad4Q_p1ZCF7ETKqb_MEL_LAPO_RI_seul_2025_EN_14042026.pdf) – Léonard, Chronopost's chatbot (p. 18)
+- [Pickup: FAQ](https://www.pickup.fr/faq-particulier/) – notice when ready, 8 days at a relay for Chronopost, 5 in a locker, return to sender, Pickup Pass and codes, collecting for someone else, lockers up to 24/7, Chronopost's phone number, damage at a relay
+- [Service-Public: Achat à distance, livraison du bien](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – the seller answers for the delivery, damaged and missing parcels
+- [Médiateur du groupe La Poste: Conditions de saisine](https://mediateur.groupelaposte.com/pages/conditions-requises-a-la-saisine-du-mediateur-de-la-consommation-du-groupe-la-poste) – Chronopost disputes, two months, one year
+- [Cybermalveillance.gouv.fr: L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – no ID or fees in France, abuse@chronopost.fr, 33700
 - [Geopost: leboncoin is teaming up with Chronopost](https://www.geopost.com/en/news/leboncoin-is-teaming-up-with-chronopost/) – Chronopost in Geopost, Shop2Shop
 - [Geopost: About us](https://www.geopost.com/en/about-us/) – Geopost belongs to La Poste Groupe
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads

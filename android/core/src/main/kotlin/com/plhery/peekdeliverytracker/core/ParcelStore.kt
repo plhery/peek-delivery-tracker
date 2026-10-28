@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
@@ -1099,6 +1100,7 @@ class ParcelStore(
         nativePushGeneration += 1
         stopDeliveryLiveActivityObservers()
         jobMonitoringTask?.cancel()
+        jobMonitoringTask = null
         pendingJobIds.clear()
         api.deleteAccount(confirmation, appleAuthorizationCode)
         session.checkGeneration(generation)
@@ -1123,6 +1125,7 @@ class ParcelStore(
         val generation = session.generation
         nativePushGeneration += 1
         jobMonitoringTask?.cancel()
+        jobMonitoringTask = null
         pendingJobIds.clear()
         val token = notifications.currentDeviceToken
         if (token != null && !isDemo) tryQuietly { api.unregisterNativePushToken(token) }
@@ -1244,6 +1247,7 @@ class ParcelStore(
         // Alerts belong to an account.
         if (isGuest) return
         val saves = notificationPreferenceSaves
+        val generation = session.generation
         try {
             val loaded = if (isDemo) demo.notificationPreferences else api.notificationPreferences()
             // A save was answered meanwhile: its answer is the newer one.
@@ -1251,7 +1255,10 @@ class ParcelStore(
             notificationPreferences = loaded
             notificationError = null
         } catch (error: Exception) {
-            if (error is CancellationException) currentCoroutineContext().ensureActive()
+            // A cancelled call may end in an error of its own, as URLSession's in URLError.cancelled: it ends as a cancellation.
+            currentCoroutineContext().ensureActive()
+            // An answer for the account before this one says nothing about this one.
+            if (generation != session.generation || error is CancellationException) return
             notificationError = localizer.errorMessage(error)
         }
     }
@@ -1294,6 +1301,7 @@ class ParcelStore(
     suspend fun forwardNativePushToken(token: String, language: AppLanguage) {
         if (isDemo || !session.isAuthenticated || notificationEnableInProgress || defaults.bool(forKey = notificationOptOutKey)) return
         val generation = nativePushGeneration
+        val sessionGeneration = session.generation
         try {
             api.registerNativePushToken(token, installationId, language, sendTest = false)
             if (generation != nativePushGeneration || !session.isAuthenticated || defaults.bool(forKey = notificationOptOutKey)) {
@@ -1304,7 +1312,8 @@ class ParcelStore(
             notificationsEnabledOnDevice = session.isAuthenticated
             notificationError = null
         } catch (error: Exception) {
-            if (error is CancellationException) currentCoroutineContext().ensureActive()
+            currentCoroutineContext().ensureActive()
+            if (sessionGeneration != session.generation || error is CancellationException) return
             notificationError = localizer.errorMessage(error)
         }
     }
@@ -1495,6 +1504,7 @@ class ParcelStore(
         if (jobMonitoringTask != null || pendingJobIds.isEmpty()) return
         val generation = session.generation
         jobMonitoringTask = scope.launch {
+            val own = coroutineContext.job
             while (isActive && pendingJobIds.isNotEmpty()) {
                 val current = pendingJobIds.toList()
                 try {
@@ -1507,7 +1517,8 @@ class ParcelStore(
                     errorMessage = localizer.errorMessage(error)
                 }
             }
-            if (!stillCurrent(generation)) return@launch
+            // Unlike the iPhone's, a monitor a sign-out or deletion cancelled ends in stillCurrent, with no error, and clears only its own handle.
+            if (!stillCurrent(generation) || jobMonitoringTask !== own) return@launch
             jobMonitoringTask = null
             if (pendingJobIds.isNotEmpty()) monitorJobs(emptyList())
         }

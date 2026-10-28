@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.CreatePackageResponse
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -17,6 +18,7 @@ import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runCurrent
@@ -920,5 +922,115 @@ class SessionIsolationTests {
         assertEquals(user.id, session.user?.id)
         val token = session.accessToken()
         assertEquals("access", token)
+    }
+
+    @Test
+    fun lateNotificationAnswersForThePreviousAccountShowNoError() = runTest {
+        for (path in listOf("/api/push/preferences", "/api/push/devices")) {
+            val transport = RecordingTransport()
+            val session = sessionStore(transport)
+            authorize(session, transport)
+            val store = store(session, transport)
+            val started = CompletableDeferred<Unit>()
+            val complete = CompletableDeferred<HttpResponse>()
+            transport.handler = { request ->
+                if (request.path == path) {
+                    started.complete(Unit)
+                    complete.await()
+                } else {
+                    jsonResponse(200, "{}")
+                }
+            }
+            // A change of account turns this device's notifications off; the token goes only while they are on.
+            defaults.removeObject(forKey = "sdt.notificationsDeviceOptOut")
+            val pending = async {
+                if (path == "/api/push/preferences") store.loadNotificationPreferences() else store.forwardNativePushToken("synthetic-token", AppLanguage.En)
+            }
+            started.await()
+            session.forceSignOut()
+            authorize(session, transport, id = UUID.randomUUID())
+            complete.complete(jsonResponse(500, """{"error":"Unavailable"}"""))
+            pending.await()
+            assertNull(path, store.notificationError)
+        }
+    }
+
+    /**
+     * Android's own: a notification request cancelled under way shows no error, whatever the call ends in. The iPhone's
+     * guards (ParcelStore.swift:981, :1043) know CancellationError alone, so URLError.cancelled still shows one.
+     */
+    @Test
+    fun aCancelledNotificationRequestShowsNoErrorWhateverItEndsIn() = runTest {
+        for (path in listOf("/api/push/preferences", "/api/push/devices")) {
+            val transport = RecordingTransport()
+            val session = sessionStore(transport)
+            authorize(session, transport)
+            val store = store(session, transport)
+            val started = CompletableDeferred<Unit>()
+            transport.handler = { request ->
+                if (request.path == path) {
+                    started.complete(Unit)
+                    // An interrupted OkHttp call ends in an IOException of its own.
+                    try {
+                        awaitCancellation()
+                    } catch (_: CancellationException) {
+                        throw IOException("Canceled")
+                    }
+                } else {
+                    jsonResponse(200, "{}")
+                }
+            }
+            defaults.removeObject(forKey = "sdt.notificationsDeviceOptOut")
+            val pending = async {
+                if (path == "/api/push/preferences") store.loadNotificationPreferences() else store.forwardNativePushToken("synthetic-token", AppLanguage.En)
+            }
+            started.await()
+            pending.cancel()
+            pending.join()
+            assertNull(path, store.notificationError)
+        }
+    }
+
+    @Test
+    fun failedAccountDeletionKeepsWatchingTheNextChecks() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        // An account without Apple deletes without signing in again.
+        val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false, identities = listOf(AuthUser.Identity(provider = "email")))
+        transport.respond(sessionJson(user))
+        session.verifyCode(email = "test@example.com", code = "123456")
+        val store = store(session, transport)
+        val added = json(CreatePackageResponse.serializer(), CreatePackageResponse(parcel = parcel(), jobIds = listOf(UUID.randomUUID())))
+        var watched: CompletableDeferred<Unit>? = null
+        transport.handler = { request ->
+            when (request.method to request.path) {
+                "POST" to "/api/packages" -> jsonResponse(201, added)
+                // The checks never finish: only whether they are watched counts.
+                "GET" to "/api/sync/jobs" -> {
+                    watched?.complete(Unit)
+                    awaitCancellation()
+                }
+                "DELETE" to "/api/account" -> jsonResponse(500, """{"error":"Unavailable"}""")
+                else -> jsonResponse(200, "{}")
+            }
+        }
+        for (attempt in 0 until 2) {
+            val watching = CompletableDeferred<Unit>()
+            watched = watching
+            store.add(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+            watching.await()
+            if (attempt == 0) {
+                try {
+                    store.deleteAccount(confirmation = "DELETE")
+                    fail("Expected the refusal")
+                } catch (_: DeliveryApiError) {
+                }
+                assertNotNull(session.user)
+            }
+        }
+        // Android's own: the monitor the deletion cancelled sets no error and starts no second one beside the next.
+        runCurrent()
+        assertNull(store.errorMessage)
+        assertEquals(2, transport.requests.count { it.method == "GET" && it.path == "/api/sync/jobs" })
     }
 }

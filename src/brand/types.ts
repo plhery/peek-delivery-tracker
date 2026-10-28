@@ -146,7 +146,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'huaya-express' | 'quick-rabbit'
   | 'dealersend' | 'pactic' | 'express-one-bg'
   | 'logisimple' | 'viadireta'
-  | 'meso-global';
+  | 'meso-global'
+  | 'jifan' | 'youbang-express';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -39,6 +39,7 @@ import {
   parcelHasCarrierUpdate,
 } from '../lib/parcelStatus';
 import { awaitingHandover, currentEvent } from '../lib/stages';
+import { parcelAttention } from '../lib/parcelPriority';
 import { isBackSwipe, type TouchPoint } from '../lib/swipe';
 import { useCardDialog } from '../lib/cardDialog';
 import { RefreshTimeoutError, type CarrierId, type ParcelCarrierInput, type ParcelWithEvents } from '../types';
@@ -61,6 +62,7 @@ import type { ApiAuth } from '../lib/apiClient';
 import { createAccountFeedback, createAccountShare, demoAccountShare } from '../peek/links';
 import { nonTrackingShape, SHOP_NAMES } from '../peek/lookup/reading';
 import { FeedbackOverlays, FeedbackQuestion, useParcelFeedback } from '../peek/parcel/Feedback';
+import { NoteCard, quietNote } from '../peek/parcel/Details';
 import { scanIdentity } from '../peek/parcel/feedbackModel';
 import { parcelFeedbackNotes } from '../peek/parcel/feedbackNotes';
 import { Glyph } from '../peek/parcel/glyphs';
@@ -134,6 +136,8 @@ export function ParcelDetail({
   const waitingAt = current?.stage === 'ready_for_pickup' ? pickupPoint(parcel.pickupPoint) : null;
   // After a missed delivery or a problem, the carrier waits on the reader: the page says so and quotes it.
   const carrierWaits = !parcel.archivedAt && (current?.stage === 'failed_attempt' || current?.stage === 'exception') ? current : null;
+  // A carrier to name: without one the note would say Peek keeps asking an unknown carrier.
+  const stalled = !parcel.archivedAt && displayedCarrier.id !== 'unknown' && parcelAttention(parcel) === 'stalled';
   const pickupFact = waitingAt ? undefined : parcel.pickupPoint?.trim();
   // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over.
   const handoverNote = !parcel.archivedAt && awaitingHandover(parcel.events) ? t('parcel.awaitingHandover', { carrier: displayedCarrier.name }) : null;
@@ -648,6 +652,7 @@ export function ParcelDetail({
         <span className="peekp-note__icon" aria-hidden="true"><Glyph name="info" /></span>
         <div><strong>{t('link.carrierSays', { carrier: carrier.name })}</strong><blockquote>{carrierWaits.description.trim()}</blockquote></div>
       </div>}
+      {stalled && <div className="detail__quiet"><NoteCard note={quietNote(parcel, displayedCarrier, t, locale)} /></div>}
       {delivered && apiAuth && accountEmail && <EmailOffer apiAuth={apiAuth} email={accountEmail} />}
       <section className="detail__information">
         {(importCharges || pickupFact || parcel.receiverName || parcel.dimensionsText || (Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0)) && (

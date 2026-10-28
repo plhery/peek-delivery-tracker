@@ -1737,6 +1737,24 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertNil(catalog.searchLink(for: parcel, language: .fr))
     }
 
+    func testAQuietParcelLinksItsCarriersHelpAndSaysWhatItsTrackingLeavesOut() throws {
+        var parcel = Parcel(
+            id: UUID(), trackingNumber: "100000000000000001", label: "Parcel", carrier: .springGDS,
+            createdAt: "2026-09-07T13:00:00Z", syncStatus: .ok, notificationsMuted: false
+        )
+        // PostNL's tracker names no carrier abroad for Spring's 18-digit numbers.
+        XCTAssertTrue(catalog.hidesDestinationLeg(parcel))
+        XCTAssertEqual(catalog.helpLink(for: parcel, language: .en)?.name, "PostNL")
+        parcel.trackingNumber = "RR123456785NL"
+        XCTAssertFalse(catalog.hidesDestinationLeg(parcel))
+        // Swiss Post's help page follows the reader's language.
+        parcel.carrier = .swissPost
+        let help = try XCTUnwrap(catalog.helpLink(for: parcel, language: .it))
+        XCTAssertEqual(help.url.absoluteString, "https://www.post.ch/de/hilfe-und-kontakt/empfangen?lang=it")
+        parcel.carrier = .yunexpress
+        XCTAssertNil(catalog.helpLink(for: parcel, language: .en))
+    }
+
     private static var bundledCatalogData: Data {
         get throws {
             let url = try XCTUnwrap(

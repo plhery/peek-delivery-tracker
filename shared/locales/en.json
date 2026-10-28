@@ -391,6 +391,8 @@
   "link.returnedSince": "On its way back since {{date}}",
   "link.returned": "{{carrier}} is taking it back to the sender. Contact the sender about a refund or a new delivery.",
   "link.quiet": "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking {{carrier}} and shows the next scan here.",
+  "link.quietAbroad": "{{carrier}} doesn’t show this parcel’s journey in the destination country, so it may arrive with no new scan here.",
+  "link.help": "Get help from {{carrier}}",
   "link.generated": "Every update comes exactly the same length of time after the one before, each in a new place. Parcels don’t travel like that: these updates were most likely generated and don’t show where the parcel is. Peek keeps asking {{carrier}} and shows the next real scan here.",
   "link.carrierSays": "What {{carrier}} says",
   "link.unknown.carrier": "Carrier not found yet",

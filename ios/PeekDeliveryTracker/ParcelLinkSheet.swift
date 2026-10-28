@@ -128,6 +128,9 @@ struct ParcelLinkSheet: View {
                 }
                 // A gift cannot be kept before it is delivered: that would show its number.
                 keeping(response, keepable: response.link.canKeep && !wrapped, followable: !wrapped)
+                if !wrapped, parcel.displayedCarrier != .unknown, parcel.attention() == .stalled {
+                    ParcelQuietNote(parcel: parcel, tint: tint)
+                }
                 VStack(alignment: .leading, spacing: 20) {
                     // The number and the carrier's own page would tell where a gift comes from.
                     if !wrapped {

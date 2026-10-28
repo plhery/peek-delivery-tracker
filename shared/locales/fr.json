@@ -391,6 +391,8 @@
   "link.returnedSince": "Sur le chemin du retour depuis {{date}}",
   "link.returned": "{{carrier}} le renvoie à l’expéditeur. Contacte l’expéditeur pour un remboursement ou une nouvelle livraison.",
   "link.quiet": "Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger {{carrier}} et affichera le prochain scan ici.",
+  "link.quietAbroad": "{{carrier}} ne montre pas le trajet de ce colis dans le pays de destination, il peut donc arriver sans nouveau scan ici.",
+  "link.help": "Demande de l’aide à {{carrier}}",
   "link.generated": "Chaque mise à jour arrive exactement le même temps après la précédente, à chaque fois dans un nouveau lieu. Un colis ne voyage pas ainsi : ces mises à jour ont très probablement été générées et ne disent pas où se trouve le colis. Peek continue d’interroger {{carrier}} et affichera ici le prochain vrai scan.",
   "link.carrierSays": "Ce que dit {{carrier}}",
   "link.unknown.carrier": "Transporteur pas encore trouvé",

@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testParcel, testView } from '../test/parcelLinks';
 import type { ParcelWithEvents, Stage, TrackingEvent } from '../types';
 import { takeCarrierHandoff } from '../lib/carrierHandoff';
+import { carrierInfo } from '../lib/carriers';
 import { ParcelLinkError, type ParcelLinkView } from './links';
 import { ParcelPage } from './ParcelPage';
 import { NoticeToast } from './parcel/Toast';
@@ -404,11 +405,24 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.queryByRole('button', { name: /Check now/ })).toBeNull();
   });
 
-  it('explains a parcel that went quiet', async () => {
+  it('explains a parcel that went quiet, and links its carrier’s help', async () => {
     await shown(view([scan('accepted', 140), scan('in_transit', 120)]));
     expect(within(card()).getByText('No tracking update for four days')).toBeVisible();
-    expect(screen.getByRole('note')).toHaveTextContent(/^Parcels often go quiet on long flights.+Peek keeps asking DHL and shows the next scan here\.$/);
+    const note = screen.getByRole('note');
+    expect(note.querySelector('p')).toHaveTextContent(/^Parcels often go quiet on long flights.+Peek keeps asking DHL and shows the next scan here\.$/);
+    expect(within(note).getByRole('link', { name: 'Get help from DHL' })).toHaveAttribute('href', carrierInfo('dhl').helpUrl);
     expect(freshness()).toHaveTextContent('Last checked: 2 min ago');
+  });
+
+  it('says a quiet parcel’s carrier shows nothing of its leg abroad, and links no help a carrier has no page for', async () => {
+    await shown(view([scan('accepted', 140)], { carrier: 'spring-gds', trackingNumber: '100000000000000001' }));
+    const note = screen.getByRole('note');
+    expect(note).toHaveTextContent('PostNL doesn’t show this parcel’s journey in the destination country, so it may arrive with no new scan here.');
+    expect(within(note).getByRole('link', { name: 'Get help from PostNL' })).toBeVisible();
+    cleanup();
+    await shown(view([scan('accepted', 140)], { carrier: 'yunexpress', trackingNumber: 'YT0000000000000001' }));
+    expect(screen.getByRole('note')).not.toHaveTextContent('destination country');
+    expect(within(screen.getByRole('note')).queryByRole('link')).toBeNull();
   });
 
   it('says a generated track looks so, and neither maps its places nor calls them updates', async () => {

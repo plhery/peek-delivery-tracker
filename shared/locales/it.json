@@ -391,6 +391,8 @@
   "link.returnedSince": "In viaggio di ritorno, partito {{date}}",
   "link.returned": "{{carrier}} lo sta riportando al mittente. Contatta il mittente per un rimborso o una nuova consegna.",
   "link.quiet": "Capita spesso che un pacco resti in silenzio durante un lungo volo, in dogana o nel fine settimana. Peek continua a chiedere a {{carrier}} e mostrerà qui la prossima scansione.",
+  "link.quietAbroad": "{{carrier}} non mostra il percorso di questo pacco nel paese di destinazione, quindi potrebbe arrivare senza una nuova scansione qui.",
+  "link.help": "Chiedi aiuto a {{carrier}}",
   "link.generated": "Ogni aggiornamento arriva esattamente dopo lo stesso tempo del precedente, ogni volta in un luogo nuovo. I pacchi non viaggiano così: molto probabilmente questi aggiornamenti sono stati generati e non dicono dove si trova il pacco. Peek continua a chiedere a {{carrier}} e mostrerà qui la prossima scansione reale.",
   "link.carrierSays": "Cosa dice {{carrier}}",
   "link.unknown.carrier": "Corriere non ancora trovato",

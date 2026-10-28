@@ -391,6 +391,8 @@
   "link.returnedSince": "De regresso desde {{date}}",
   "link.returned": "{{carrier}} está a devolvê-la ao remetente. Contacta o remetente para um reembolso ou uma nova entrega.",
   "link.quiet": "É habitual uma encomenda ficar sem novidades em voos longos, na alfândega ou ao fim de semana. O Peek continua a perguntar a {{carrier}} e mostra aqui a próxima leitura.",
+  "link.quietAbroad": "{{carrier}} não mostra o percurso desta encomenda no país de destino, por isso pode chegar sem uma nova leitura aqui.",
+  "link.help": "Pede ajuda a {{carrier}}",
   "link.generated": "Cada atualização chega exatamente o mesmo tempo depois da anterior, sempre num lugar novo. As encomendas não viajam assim: muito provavelmente estas atualizações foram geradas e não mostram onde está a encomenda. O Peek continua a perguntar a {{carrier}} e mostra aqui a próxima leitura real.",
   "link.carrierSays": "O que diz {{carrier}}",
   "link.unknown.carrier": "Transportadora ainda não encontrada",

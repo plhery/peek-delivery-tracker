@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, onTestFinished, vi } from 'vitest';
 import { ParcelDetail } from './ParcelDetail';
-import { parcelTrackingLinks } from '../lib/carriers';
+import { carrierInfo, parcelTrackingLinks } from '../lib/carriers';
 import type { ParcelWithEvents } from '../types';
 
 const parcel: ParcelWithEvents = { id: 'parcel', carrier: 'heppner', trackingNumber: '12345678', label: 'Books', createdAt: '2026-09-10T12:00:00Z', syncStatus: 'ok', events: [] };
@@ -140,6 +140,19 @@ describe('shipment details', () => {
     show({ events: [{ id: 'moving', parcelId: 'parcel', stage: 'in_transit', description: 'Sorted', occurredAt: '2026-09-11T12:00:00Z' }] });
     expect(document.querySelector('.detail__flag')).toBeNull();
     expect(screen.queryByText('What Heppner says')).not.toBeInTheDocument();
+  });
+
+  it('explains a parcel that went quiet, with the help page of a carrier that has one', () => {
+    const quiet = [{ id: 'moving', parcelId: 'parcel', stage: 'in_transit', description: 'Sorted', occurredAt: new Date(Date.now() - 5 * 86_400_000).toISOString() }] as const;
+    const view = show({ carrier: 'dhl', events: [...quiet] });
+    const note = within(document.querySelector<HTMLElement>('.detail__quiet')!);
+    expect(note.getByText(/^Parcels often go quiet on long flights.+Peek keeps asking DHL/)).toBeVisible();
+    expect(note.getByRole('link', { name: 'Get help from DHL' })).toHaveAttribute('href', carrierInfo('dhl').helpUrl);
+    view.unmount();
+
+    show({ events: [...quiet] });
+    expect(document.querySelector('.detail__quiet')).toHaveTextContent('Peek keeps asking Heppner');
+    expect(within(document.querySelector<HTMLElement>('.detail__quiet')!).queryByRole('link')).toBeNull();
   });
 
   it('shows a waiting parcel\'s pickup point as a card and a collected one as a fact', async () => {

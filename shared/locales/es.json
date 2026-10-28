@@ -391,6 +391,8 @@
   "link.returnedSince": "Devolución iniciada: {{date}}",
   "link.returned": "{{carrier}} lo está devolviendo al remitente. Contacta con el remitente para un reembolso o un nuevo envío.",
   "link.quiet": "Es habitual que un paquete se quede sin novedades en vuelos largos, en la aduana o durante el fin de semana. Peek sigue preguntando a {{carrier}} y mostrará aquí el próximo escaneo.",
+  "link.quietAbroad": "{{carrier}} no muestra el recorrido de este paquete en el país de destino, así que puede llegar sin un nuevo escaneo aquí.",
+  "link.help": "Pide ayuda a {{carrier}}",
   "link.generated": "Cada novedad llega exactamente el mismo tiempo después de la anterior, cada vez en un lugar nuevo. Los paquetes no viajan así: lo más probable es que estas novedades se hayan generado y no muestren dónde está el paquete. Peek sigue preguntando a {{carrier}} y mostrará aquí el próximo escaneo real.",
   "link.carrierSays": "Lo que dice {{carrier}}",
   "link.unknown.carrier": "Transportista aún no encontrado",

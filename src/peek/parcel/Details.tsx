@@ -2,7 +2,8 @@ import { Fragment, useEffect, useState, type ReactNode } from 'react';
 import { Icon } from '../../components/Icon';
 import { trackingFailureMessage, useI18n, type MessageKey } from '../../i18n';
 import { AMAZON_HISTORY_EXPIRED } from '../../lib/amazon';
-import { numberToCheck } from '../../lib/messages';
+import type { Locale } from '../../lib/locale';
+import { numberToCheck, type Translate } from '../../lib/messages';
 import { trackAction } from '../../lib/analytics';
 import { importChargesLine } from '../../lib/importCharges';
 import {
@@ -106,7 +107,7 @@ export function NumberSection({ view, links, onVisit }: {
   </section>;
 }
 
-interface Note {
+export interface Note {
   id: string;
   icon: ReactNode;
   title?: string;
@@ -115,6 +116,36 @@ interface Note {
   quoted?: boolean;
   /** A card on paper for what the reader should know; a quiet one for what Peek is doing about it. */
   paper?: boolean;
+  /** A page of the carrier's to go on to, opened in a new tab. */
+  link?: { label: string; href: string };
+}
+
+/**
+ * Why a parcel that stopped moving may still be on its way, that its carrier doesn't show its
+ * journey in the destination country when it doesn't, and where to ask the carrier: the help
+ * page of the carrier that has it, else of the one it is filed under. No page, no link.
+ */
+export function quietNote(parcel: ParcelWithEvents, carrier: CarrierInfo, t: Translate, locale: Locale): Note {
+  const active = carrierInfo(activeTrackingCarrierId(parcel), locale);
+  const number = parcel.activeTrackingNumber ?? parcel.trackingNumber;
+  const abroad = number && active.hidesDestinationLeg?.(number) ? ` ${t('link.quietAbroad', { carrier: active.name })}` : '';
+  const help = [active, carrier].find((candidate) => candidate.helpUrl);
+  return {
+    id: 'quiet', icon: <Icon name="hourglass" />, body: `${t('link.quiet', { carrier: carrier.name })}${abroad}`,
+    link: help?.helpUrl ? { label: t('link.help', { carrier: help.name }), href: localizedCarrierUrl(help.id, help.helpUrl, locale) } : undefined,
+  };
+}
+
+export function NoteCard({ note }: { note: Note }) {
+  return <div className={`peekp-note${note.paper ? ' peekp-note--paper' : ''}`} role="note">
+    <span className="peekp-note__icon" aria-hidden="true">{note.icon}</span>
+    <div>
+      {note.title && <strong>{note.title}</strong>}
+      {note.quoted ? <blockquote>{note.body}</blockquote> : <p>{note.body}</p>}
+      {note.link && <a className="peekp-note__link" href={note.link.href} target="_blank" rel="noopener noreferrer"
+        onClick={() => trackAction('parcel-carrier-help')}><span>{note.link.label}</span><Icon name="arrow" /></a>}
+    </div>
+  </div>;
 }
 
 /**
@@ -130,7 +161,7 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
   trouble: ParcelLinkError | null;
   carrier: CarrierInfo;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { parcel } = view;
   const active = carrierInfo(activeTrackingCarrierId(parcel));
   const expired = active.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
@@ -148,7 +179,7 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
     // A number to check says so on the card.
     notes.push({ id: 'sync', icon: <Glyph name="info" />, body: trackingFailureMessage(parcel.syncError, t) });
   }
-  if (flag === 'stalled') notes.push({ id: 'quiet', icon: <Icon name="hourglass" />, body: t('link.quiet', { carrier: carrier.name }) });
+  if (flag === 'stalled') notes.push(quietNote(parcel, carrier, t, locale));
   if (flag === 'generated') notes.push({ id: 'generated', icon: <Glyph name="warning" />, body: t('link.generated', { carrier: carrier.name }), paper: true });
   if ((stage === 'exception' || stage === 'failed_attempt') && scan?.description.trim()) {
     notes.push({ id: 'says', icon: <Glyph name="info" />, title: t('link.carrierSays', { carrier: carrier.name }), body: scan.description.trim(), quoted: true, paper: true });
@@ -157,13 +188,7 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
   if (!notes.length) return null;
 
   return <div className="peekp-notes">
-    {notes.map((note) => <div key={note.id} className={`peekp-note${note.paper ? ' peekp-note--paper' : ''}`} role="note">
-      <span className="peekp-note__icon" aria-hidden="true">{note.icon}</span>
-      <div>
-        {note.title && <strong>{note.title}</strong>}
-        {note.quoted ? <blockquote>{note.body}</blockquote> : <p>{note.body}</p>}
-      </div>
-    </div>)}
+    {notes.map((note) => <NoteCard key={note.id} note={note} />)}
   </div>;
 }
 

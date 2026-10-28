@@ -122,6 +122,10 @@ Key server modules:
     recipient's name and internal ids never leave the server, for either role. A viewer's
     carrier link opens the carrier's page for typing a number in (the catalog's
     `trackingSearchUrl`), or is left out when the carrier has none.
+  - A parcel with no new scan for four days links the help page of the carrier that has it,
+    else of the one it is filed under (the catalog's `helpUrl`; no link when neither has
+    one), and says so when that carrier's tracking leaves out the destination country
+    (`hidesDestinationLeg`). An account's parcel and the iPhone app show the same note.
   - `parcel_links` and the lookup counters are service-role only. An unknown, forgotten,
     expired or malformed link and a wrong key all get the same answer.
   - Keeping a parcel runs under the user's own token: the database checks the key, the

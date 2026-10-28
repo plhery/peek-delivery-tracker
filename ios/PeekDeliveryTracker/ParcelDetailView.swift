@@ -486,6 +486,10 @@ struct ParcelDetailView: View {
             if let words = carrierWaits(parcel)?.description.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty {
                 carrierSaysNote(words, carrier: carrier.displayName)
             }
+            // A carrier to name: without one the note would say Peek keeps asking an unknown carrier.
+            if !parcel.isArchived, parcel.displayedCarrier != .unknown, parcel.attention() == .stalled {
+                ParcelQuietNote(parcel: parcel, tint: branding.ink)
+            }
             shipmentIdentity(parcel, links: trackingLinks, tint: branding.ink)
             if let details = parcel.carrierData {
                 VStack(alignment: .leading, spacing: 10) {
@@ -1738,5 +1742,55 @@ struct AutomaticCarrierNotice: View {
                 }
             }
         }
+    }
+}
+
+/// What a parcel that stopped moving is told: why parcels go quiet, that its carrier doesn't show its journey in the
+/// destination country when it doesn't, and where to ask the carrier. No help page of the carrier's own, no link.
+struct ParcelQuietNote: View {
+    let parcel: Parcel
+    let tint: Color
+
+    @EnvironmentObject private var localizer: Localizer
+    @ObservedObject private var catalog = CarrierCatalog.shared
+
+    var body: some View {
+        let carrier = catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName
+        let active = catalog.info(for: parcel.activeTrackingCarrier, language: localizer.language).displayName
+        let abroad = catalog.hidesDestinationLeg(parcel) ? " " + localizer.text("link.quietAbroad", ["carrier": active]) : ""
+        let help = catalog.helpLink(for: parcel, language: localizer.language)
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: "hourglass")
+                .font(.system(size: 17))
+                .foregroundStyle(.secondary)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(localizer.text("link.quiet", ["carrier": carrier]) + abroad)
+                    .font(.footnote).foregroundStyle(.secondary)
+                if let help {
+                    Link(destination: help.url) {
+                        HStack(spacing: 6) {
+                            Text(localizer.text("link.help", ["carrier": help.name]))
+                            Image(systemName: "arrow.up.right").font(.system(size: 10, weight: .regular))
+                                .accessibilityHidden(true)
+                        }
+                        .font(.footnote.weight(.semibold))
+                        .frame(minHeight: 44, alignment: .leading)
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(tint)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        DeliveryAnalytics.shared.action("parcel-carrier-help")
+                    })
+                }
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(.top, 14)
+        // The link's own height leaves room below it.
+        .padding(.bottom, help == nil ? 14 : 4)
+        .padding(.horizontal, 16)
+        .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 16))
     }
 }

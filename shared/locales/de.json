@@ -391,6 +391,8 @@
   "link.returnedSince": "Auf dem Rückweg seit {{date}}",
   "link.returned": "{{carrier}} bringt es zum Absender zurück. Frag beim Absender nach einer Erstattung oder einer neuen Lieferung.",
   "link.quiet": "Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei {{carrier}} nach und zeigt den nächsten Scan hier.",
+  "link.quietAbroad": "{{carrier}} zeigt den Weg dieses Pakets im Zielland nicht. Es kann also ankommen, ohne dass hier ein neuer Scan erscheint.",
+  "link.help": "Hol dir Hilfe bei {{carrier}}",
   "link.generated": "Jede Aktualisierung kommt genau gleich lange nach der vorigen, jedes Mal an einem neuen Ort. So reist kein Paket: Diese Aktualisierungen sind wahrscheinlich automatisch erzeugt und zeigen nicht, wo das Paket ist. Peek fragt weiter bei {{carrier}} nach und zeigt den nächsten echten Scan hier.",
   "link.carrierSays": "Das sagt {{carrier}}",
   "link.unknown.carrier": "Paketdienst noch nicht gefunden",

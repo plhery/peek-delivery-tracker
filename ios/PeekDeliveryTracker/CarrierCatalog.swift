@@ -165,14 +165,19 @@ struct CarrierDefinition: Codable, Sendable {
     let trackingURLTemplate: String?
     /// The carrier's page for typing a number in, linked when a parcel link hides the number.
     var trackingSearchURL: String? = nil
+    /// The carrier's own help and contact page for someone receiving a parcel, linked once it stops moving.
+    var helpURL: String? = nil
+    /// The numbers whose journey in the destination country the carrier's tracking leaves out.
+    var hidesDestinationLeg: String? = nil
     let linkRules: [LinkRule]
     let detectionRules: [DetectionRule]
 
     enum CodingKeys: String, CodingKey {
         case displayName, displayNames, aliases, countries, trackingSiteName, color, selectable, timezone, tracking
-        case linkRules, detectionRules
+        case linkRules, detectionRules, hidesDestinationLeg
         case trackingURLTemplate = "trackingUrlTemplate"
         case trackingSearchURL = "trackingSearchUrl"
+        case helpURL = "helpUrl"
     }
 }
 
@@ -1078,6 +1083,25 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         guard let raw = definition.trackingSearchURL,
               let url = localizedURL(raw, carrier: carrier, language: language) else { return nil }
         return ParcelTrackingLink(carrier: carrier, name: definition.trackingSiteName ?? definition.displayName, url: url, role: .active)
+    }
+
+    /// Where to ask about a parcel that stopped moving: the help page of the carrier that has it, else of the one it is
+    /// filed under. None when neither has a page of its own.
+    func helpLink(for parcel: Parcel, language: AppLanguage) -> ParcelTrackingLink? {
+        for carrier in [parcel.activeTrackingCarrier, parcel.displayedCarrier] {
+            let definition = info(for: carrier, language: language)
+            if let raw = definition.helpURL, let url = localizedURL(raw, carrier: carrier, language: language) {
+                return ParcelTrackingLink(carrier: carrier, name: definition.displayName, url: url, role: .active)
+            }
+        }
+        return nil
+    }
+
+    /// Whether the carrier that has the parcel leaves out its journey in the destination country.
+    func hidesDestinationLeg(_ parcel: Parcel) -> Bool {
+        guard let pattern = info(for: parcel.activeTrackingCarrier).hidesDestinationLeg else { return false }
+        let number = Self.normalize(parcel.carrierData?.activeTrackingNumber?.nonEmpty ?? parcel.trackingNumber)
+        return !number.isEmpty && number.range(of: pattern, options: .regularExpression) != nil
     }
 
     private func followedTrackingLinks(for parcel: Parcel, language: AppLanguage) -> [ParcelTrackingLink] {

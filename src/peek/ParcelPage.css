@@ -176,6 +176,8 @@
 .peekp-note p, .peekp-note blockquote, .peekp-already p { margin: 0; color: var(--ink-soft); font-size: 12.5px; line-height: 1.5; overflow-wrap: anywhere; }
 .peekp-note blockquote { quotes: '“' '”'; }
 .peekp-note blockquote::before { content: open-quote; }
+.peekp-note__link { display: flex; align-items: center; gap: 6px; width: fit-content; min-height: 32px; margin-top: 2px; color: var(--tone); font-size: 12.5px; font-weight: 600; text-decoration: none; }
+.peekp-note__link svg { width: 12px; height: 12px; }
 .peekp-note blockquote::after { content: close-quote; }
 .peekp-note a { display: inline-flex; align-items: center; gap: 6px; width: fit-content; min-height: 36px; color: var(--ink); font-size: 13px; font-weight: 600; text-decoration: none; }
 .peekp-note a svg { width: 13px; height: 13px; }

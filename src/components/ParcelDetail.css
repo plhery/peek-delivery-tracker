@@ -175,4 +175,4 @@
 
 /* A carrier waiting on the reader: the flag under the status, its words under the card. */
 .detail__flag { margin-top: 10px; }
-.detail__carrier-says { margin: 12px 24px 0; }
+.detail__carrier-says, .detail__quiet { margin: 12px 24px 0; }

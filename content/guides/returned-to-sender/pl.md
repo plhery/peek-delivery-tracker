@@ -104,7 +104,7 @@ W historii śledzenia zwrot wygląda jak ta sama trasa od końca:
 
 To myli wiele osób: ostatnie „doręczona” w historii zwrotu dotyczy nadawcy. U Poczty Polskiej `Final delivery` po statusie `Returned` to właśnie doręczenie z powrotem do nadawcy. Jeśli historia się urywa, zapytaj sprzedawcę, czy zwrot dostał nowy numer przesyłki, albo przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
-[Peek](/) przy ustawieniu „Tylko ważne” wysyła powiadomienia także o zwrotach, więc dowiesz się, gdy paczka zawróci. Zatrzymać jej nie może.
+[Peek](/) przy ustawieniu „Ważne etapy” wysyła powiadomienia także o zwrotach, więc dowiesz się, gdy paczka zawróci. Zatrzymać jej nie może.
 
 ## Szybkie odpowiedzi
 

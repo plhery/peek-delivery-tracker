@@ -68,7 +68,7 @@ Odmawiaj, gdy karton wygląda tak, że zawartość najpewniej ucierpiała: jest 
 
 ### Do kiedy możesz odmówić przyjęcia paczki?
 
-Tylko do chwili, w której ją odbierzesz. Potem pozostaje zgłoszenie uszkodzenia. [Peek](/) może wysłać Ci powiadomienie, gdy przewoźnik poda, że paczka została wydana do doręczenia (ustawienie „Tylko w dniu dostawy”), żeby ktoś był w domu i obejrzał karton przy kurierze.
+Tylko do chwili, w której ją odbierzesz. Potem pozostaje zgłoszenie uszkodzenia. [Peek](/) może wysłać Ci powiadomienie, gdy przewoźnik poda, że paczka została wydana do doręczenia (ustawienie „Tylko doręczenie”), żeby ktoś był w domu i obejrzał karton przy kurierze.
 
 ### Co, jeśli paczka jest już odebrana bez uwag?
 

@@ -71,7 +71,7 @@ Se non riesci ad arrivare in tempo:
 
 GLS e BRT chiedono al mittente cosa fare del pacco in giacenza: se è fermo in filiale, scrivi subito al negozio, perché i 10 giorni passano in fretta. Per un locker InPost basta inoltrare il codice QR o il PIN a una persona di fiducia.
 
-Con i 3 giorni di un locker, basta accorgersene tardi per perdere il pacco. [Peek](/) può mandarti una notifica quando il tracking dice che il pacco è pronto per il ritiro: basta scegliere «Solo importanti». La scadenza però la possono spostare solo il corriere o il negozio.
+Con i 3 giorni di un locker, basta accorgersene tardi per perdere il pacco. [Peek](/) può mandarti una notifica quando il tracking dice che il pacco è pronto per il ritiro: basta scegliere «Passaggi importanti». La scadenza però la possono spostare solo il corriere o il negozio.
 
 ## Se non ritiro il pacco mi rimborsano?
 

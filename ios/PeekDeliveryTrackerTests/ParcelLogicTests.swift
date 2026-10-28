@@ -2718,6 +2718,107 @@ extension SessionIsolationTests {
     }
 }
 
+extension SessionIsolationTests {
+    @MainActor func testRefusedRefreshTokenSignsOutInEitherErrorShape() async throws {
+        // Supabase Auth's answer with X-Supabase-Api-Version, and its older one, whose `code` is the HTTP status.
+        let answers = [
+            #"{"code":"refresh_token_not_found","message":"Invalid Refresh Token: Refresh Token Not Found"}"#,
+            #"{"code":400,"error_code":"refresh_token_not_found","msg":"Invalid Refresh Token: Refresh Token Not Found"}"#,
+        ]
+        for answer in answers {
+            let transport = transport()
+            defer { transport.invalidateAndCancel() }
+            let persistence = MemorySessionPersistence()
+            let session = SessionStore(configuration: configuration, persistence: persistence, transport: transport)
+            try await authorize(session, expired: true)
+            nonisolated(unsafe) var versions: [String?] = []
+            SessionTestURLProtocol.handler = { request, complete in
+                versions.append(request.value(forHTTPHeaderField: "X-Supabase-Api-Version"))
+                complete(.success((400, Data(answer.utf8))))
+            }
+            do { _ = try await session.accessToken(); XCTFail("Expected the refusal") } catch AuthenticationError.missingSession {}
+            XCTAssertNil(session.user)
+            XCTAssertNil(persistence.data)
+            XCTAssertEqual(versions, ["2024-01-01"])
+        }
+    }
+
+    @MainActor func testAuthErrorInTheOlderShapeKeepsItsMessage() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        respond(Data(#"{"code":403,"error_code":"otp_expired","msg":"Token has expired or is invalid"}"#.utf8), status: 403)
+        do {
+            try await session.verifyCode(email: "test@example.com", code: "123456")
+            XCTFail("Expected the refusal")
+        } catch AuthenticationError.server(let message) {
+            XCTAssertEqual(message, "Token has expired or is invalid")
+        }
+    }
+
+    @MainActor func testRefreshBegunBeforeTheAccountChangedDoesNotHoldUpLaterOnes() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let id = UUID()
+        try await authorize(session, id: id, expired: true)
+        let started = expectation(description: "Refresh started")
+        nonisolated(unsafe) var complete: ((Result<(Int, Data), Error>) -> Void)?
+        SessionTestURLProtocol.handler = { _, callback in
+            complete = callback
+            started.fulfill()
+        }
+        let stale = Task { try await session.accessToken() }
+        await fulfillment(of: [started], timeout: 2)
+        // The account changes while the refresh is under way, without the session being cleared first.
+        session.showSignIn()
+        try await authorize(session, id: id, expired: true)
+        let fresh = AuthSession(accessToken: "fresh", tokenType: "bearer", expiresIn: 3600, expiresAt: Int(Date().timeIntervalSince1970) + 3600,
+                                refreshToken: "next", user: AuthUser(id: id, email: "test@example.com", isAnonymous: false))
+        let freshData = try JSONEncoder.deliveryTracker.encode(fresh)
+        complete?(.success((200, freshData)))
+        do { _ = try await stale.value; XCTFail("Expected the stale refresh to give way") } catch is CancellationError {}
+        respond(freshData)
+        let token = try await session.accessToken()
+        XCTAssertEqual(token, "fresh")
+    }
+
+    @MainActor func testSigningOutWithAnExpiredTokenRefreshesItForTheServer() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        let id = UUID()
+        try await authorize(session, id: id, expired: true)
+        let fresh = try JSONEncoder.deliveryTracker.encode(AuthSession(
+            accessToken: "fresh", tokenType: "bearer", expiresIn: 3600, expiresAt: Int(Date().timeIntervalSince1970) + 3600,
+            refreshToken: "next", user: AuthUser(id: id, email: "test@example.com", isAnonymous: false)))
+        nonisolated(unsafe) var calls: [String] = []
+        SessionTestURLProtocol.handler = { request, complete in
+            calls.append("\(request.url!.path)?\(request.url!.query ?? "") \(request.value(forHTTPHeaderField: "Authorization") ?? "-")")
+            if request.url?.query == "grant_type=refresh_token" { complete(.success((200, fresh))) }
+            else { complete(.success((204, Data()))) }
+        }
+        try await session.signOut()
+        XCTAssertNil(session.user)
+        XCTAssertEqual(calls, ["/auth/v1/token?grant_type=refresh_token -", "/auth/v1/logout?scope=local Bearer fresh"])
+    }
+
+    @MainActor func testASessionWhoseExpiryAnIntCannotHoldIsKept() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let user = AuthUser(id: UUID(), email: "test@example.com", isAnonymous: false)
+        respond(try JSONEncoder.deliveryTracker.encode(AuthSession(accessToken: "access", tokenType: "bearer", expiresIn: .max,
+                                                                   expiresAt: nil, refreshToken: "refresh", user: user)))
+        try await session.verifyCode(email: "test@example.com", code: "123456")
+        XCTAssertEqual(session.user?.id, user.id)
+        let token = try await session.accessToken()
+        XCTAssertEqual(token, "access")
+    }
+}
+
 extension ParcelLogicTests {
     func testDeliveryListLayoutFeaturesOneArrivalAndKeepsIssuesOnTheirOwnCards() {
         let now = DateParser.date("2026-09-09T12:00:00Z")!

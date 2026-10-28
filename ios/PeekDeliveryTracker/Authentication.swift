@@ -123,7 +123,7 @@ final class SessionStore: ObservableObject {
     private let emailLanguageKey = "sdt.native.email-language.v1"
     private let defaults: UserDefaults
     private var session: AuthSession?
-    private var refreshTask: Task<Void, Error>?
+    private var refreshTask: (task: Task<Void, Error>, generation: UUID)?
     private var webAuthenticationSession: ASWebAuthenticationSession?
 
     init(configuration: AppConfiguration = .current, defaults: UserDefaults = .standard,
@@ -358,18 +358,28 @@ final class SessionStore: ObservableObject {
 
     func signOut() async throws {
         DeliveryAnalytics.shared.action("sign-out")
-        let token = session?.accessToken
+        let ending = session
         clearLocalSession()
         showWelcome()
-        if let token {
-            _ = try? await authRequest(
-                path: "logout?scope=local",
-                method: "POST",
-                jsonObject: [:],
-                response: EmptyAuthResponse.self,
-                bearer: token
-            )
+        guard let ending else { return }
+        // The server ends a session only for an access token it still accepts.
+        var token = ending.accessToken
+        if ending.expirationDate.timeIntervalSinceNow < 60,
+           let refreshed = try? await authRequest(
+               path: "token?grant_type=refresh_token",
+               method: "POST",
+               jsonObject: ["refresh_token": ending.refreshToken],
+               response: AuthSession.self
+           ) {
+            token = refreshed.accessToken
         }
+        _ = try? await authRequest(
+            path: "logout?scope=local",
+            method: "POST",
+            jsonObject: [:],
+            response: EmptyAuthResponse.self,
+            bearer: token
+        )
     }
 
     func forceSignOut() {
@@ -377,12 +387,13 @@ final class SessionStore: ObservableObject {
     }
 
     private func refreshSession() async throws {
-        if let refreshTask {
-            try await refreshTask.value
+        let generation = generation
+        // A refresh begun before the account changed is not this account's to wait for.
+        if let refreshTask, refreshTask.generation == generation {
+            try await refreshTask.task.value
             return
         }
         guard let refreshToken = session?.refreshToken else { throw AuthenticationError.missingSession }
-        let generation = generation
         let task = Task<Void, Error> { [weak self] in
             guard let self else { throw AuthenticationError.missingSession }
             let refreshed = try await self.authRequest(
@@ -395,8 +406,8 @@ final class SessionStore: ObservableObject {
             guard refreshed.user.id == self.session?.user.id else { throw AuthenticationError.missingSession }
             try self.accept(refreshed)
         }
-        refreshTask = task
-        defer { if self.generation == generation { refreshTask = nil } }
+        refreshTask = (task, generation)
+        defer { if refreshTask?.task == task { refreshTask = nil } }
         do {
             try await task.value
         } catch {
@@ -409,9 +420,11 @@ final class SessionStore: ObservableObject {
 
     private func accept(_ next: AuthSession) throws {
         guard next.user.isAnonymous != true else { throw AuthenticationError.missingSession }
+        // An expiry an Int can't hold would trap: it stays at the end of the range instead.
+        let expiry = Int(Date().timeIntervalSince1970).addingReportingOverflow(next.expiresIn)
         let saved = AuthSession(accessToken: next.accessToken, tokenType: next.tokenType,
                                 expiresIn: next.expiresIn,
-                                expiresAt: next.expiresAt ?? Int(Date().timeIntervalSince1970) + next.expiresIn,
+                                expiresAt: next.expiresAt ?? (expiry.overflow ? (next.expiresIn < 0 ? .min : .max) : expiry.partialValue),
                                 refreshToken: next.refreshToken, user: next.user)
         try keychain.save(saved)
         session = saved
@@ -420,7 +433,7 @@ final class SessionStore: ObservableObject {
     }
 
     private func clearLocalSession() {
-        refreshTask?.cancel()
+        refreshTask?.task.cancel()
         refreshTask = nil
         session = nil
         keychain.delete()
@@ -447,6 +460,8 @@ final class SessionStore: ObservableObject {
         request.httpBody = try JSONSerialization.data(withJSONObject: jsonObject)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(configuration.supabasePublishableKey, forHTTPHeaderField: "apikey")
+        // Without it Supabase Auth answers errors in its older shape, with the HTTP status as `code`.
+        request.setValue("2024-01-01", forHTTPHeaderField: "X-Supabase-Api-Version")
         if let bearer { request.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization") }
         let (data, rawResponse) = try await transport.data(for: request)
         guard let http = rawResponse as? HTTPURLResponse else { throw AuthenticationError.invalidResponse }
@@ -588,12 +603,24 @@ private struct EmptyAuthResponse: Codable {
     init() {}
 }
 
-private struct AuthErrorPayload: Codable {
+private struct AuthErrorPayload: Decodable {
+    /// The error code: `code` in the 2024-01-01 shape, `error_code` in the older one, whose `code` is the HTTP status.
     let code: String?
     let error: String?
     let message: String?
     let msg: String?
     let errorDescription: String?
+
+    private enum CodingKeys: String, CodingKey { case code, errorCode, error, message, msg, errorDescription }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        code = (try? container.decodeIfPresent(String.self, forKey: .errorCode)) ?? (try? container.decodeIfPresent(String.self, forKey: .code))
+        error = try? container.decodeIfPresent(String.self, forKey: .error)
+        message = try? container.decodeIfPresent(String.self, forKey: .message)
+        msg = try? container.decodeIfPresent(String.self, forKey: .msg)
+        errorDescription = try? container.decodeIfPresent(String.self, forKey: .errorDescription)
+    }
 }
 
 private final class AuthenticationAnchorProvider: NSObject, ASWebAuthenticationPresentationContextProviding {

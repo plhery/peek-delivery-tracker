@@ -188,11 +188,14 @@ order by i.active desc, i.last_notified_at desc;
 \echo '   movement, on local clocks only, without dates or behind a provider''s delivered or returned stage, or gave no'
 \echo '   direct answer in 30 days; captcha: a verification or captcha page stops the adapter; dormant: not checked for 24 h'
 \echo '   because nobody follows it (a lookup whose link nobody opened for 24 h and that has no alert: opening its link checks it);'
-\echo '   none: the carrier answers and the provider history is kept or fills in its partial answer, or the parcel'
-\echo '   already shows the newest scan of its answer set aside as older (answer shows an earlier leg);'
+\echo '   none: the carrier answers and the provider history is kept or fills in its partial answer, the parcel'
+\echo '   already shows the newest scan of its answer set aside as older (answer shows an earlier leg), or Peek asks'
+\echo '   the reader for the input the carrier needs (reader asked for input);'
 \echo '   delivery-tracker: its adapter answers other parcels and was not asked for these (carrier not asked),'
-\echo '   or its answer was set aside as older than the parcel''s newest scan (answer older than parcel)'
-\echo '   could_take: the carrier that answered or a provider names, else the one detection names for an unfiled parcel'
+\echo '   its answer was set aside as older than the parcel''s newest scan (answer older than parcel), or the sync'
+\echo '   refused its latest answer for lacking the parcel''s progress (answer lacks the parcel''s progress)'
+\echo '   could_take: the carrier that answered or a provider names, else for an unfiled parcel the one detection names,'
+\echo '   else the one whose input Peek asks its reader for'
 -- private.tracking_gaps classifies them, as the carrier dashboard's goals count them.
 select carrier, could_take, provider, lane, why,
        count(*) filter (where created_at >= :since) as new, count(*) as parcels,

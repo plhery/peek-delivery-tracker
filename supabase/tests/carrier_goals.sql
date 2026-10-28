@@ -337,6 +337,49 @@ begin
 end;
 $$;
 
+-- refused: a parcel filed under no carrier whose provider named La Poste, which answered at the
+-- latest check without the parcel's progress, so the sync refused it. needed: a parcel filed under no
+-- carrier whose reader Peek asks for DHL's postcode; suggested: one offered Mondial Relay's;
+-- filed: a Spring GDS parcel whose reader is asked for its postcode.
+insert into public.packages (id, user_id, one_off, tracking_number, carrier, current_stage, sync_status, created_at, last_synced_at, carrier_data)
+values
+  ('f4000000-0000-4000-8000-000000000021', null, true, 'GOALS0024', 'unknown',
+    'in_transit', 'error', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "ParcelsApp", "routing": {"discovered_carrier": "la-poste"}}'),
+  ('f4000000-0000-4000-8000-000000000022', null, true, 'GOALS0025', 'unknown',
+    'in_transit', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "ParcelsApp", "routing": {"input_needed": {"carrier": "dhl", "field": "dpdPostcode"}}}'),
+  ('f4000000-0000-4000-8000-000000000023', null, true, 'GOALS0026', 'unknown',
+    'registered', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "ParcelsApp", "routing": {"input_suggested": {"carrier": "mondial-relay", "field": "dpdPostcode"}}}'),
+  ('f4000000-0000-4000-8000-000000000024', null, true, 'GOALS0027', 'spring-gds',
+    'in_transit', 'ok', now() - interval '3 days', now() - interval '6 minutes',
+    '{"tracking_provider": "ParcelsApp", "routing": {"input_needed": {"carrier": "spring-gds", "field": "dpdPostcode"},
+      "failures": {"spring-gds": {"kind": "input_required", "count": 1}}}}');
+insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier, source_carrier, outcome, error_type, selected_stage, anomaly_codes, started_at, completed_at)
+values
+  ('f4000000-0000-4000-8000-000000000211', 'f4000000-0000-4000-8000-000000000021', 'scheduled', 'unknown', 'unknown',
+    'updated', null, 'in_transit', '{}', now() - interval '2 days', now() - interval '2 days'),
+  ('f4000000-0000-4000-8000-000000000212', 'f4000000-0000-4000-8000-000000000021', 'scheduled', 'unknown', 'la-poste',
+    'error', 'ProgressDisappeared', 'registered', '{progress_disappeared}', now() - interval '6 minutes', now() - interval '6 minutes');
+
+-- A carrier whose answer the sync refused was asked; a parcel whose reader Peek asks for a carrier's
+-- input is that carrier's to take, and waits on the reader.
+do $$
+begin
+  if (select array_agg(row(tracking_number, could_take, why, reason, lane)::text order by tracking_number)
+      from private.tracking_gaps where tracking_number between 'GOALS0024' and 'GOALS0027')
+      is distinct from array[
+        row('GOALS0024', 'la-poste', 'answer lacks the parcel''s progress', 'answer refused', 'delivery-tracker')::text,
+        row('GOALS0025', 'dhl', 'reader asked for input', 'reader asked for input', 'none')::text,
+        row('GOALS0026', 'mondial-relay', 'reader asked for input', 'reader asked for input', 'none')::text,
+        row('GOALS0027', 'spring-gds', 'reader asked for input', 'reader asked for input', 'none')::text] then
+    raise exception 'A refused answer or a reader asked for input was misread: %', (select array_agg(row(tracking_number, could_take, why, reason, lane)::text)
+      from private.tracking_gaps where tracking_number between 'GOALS0024' and 'GOALS0027');
+  end if;
+end;
+$$;
+
 -- Grafana's role reads the counts, not the parcels behind them.
 set local role metrics_reader;
 select day, parcels, stale_parcels from metrics.goals_daily order by day desc limit 1;

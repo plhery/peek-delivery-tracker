@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelLink
 import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
+import com.plhery.peekdeliverytracker.core.api.CreatePackageResponse
 import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -27,6 +28,7 @@ import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.builtins.ListSerializer
@@ -163,6 +165,16 @@ class DeviceParcelTests {
 
     private fun parcel(linkId: String, label: String, id: UUID, at: Double = date(), pkg: PublicPackage = pkg(id)) =
         DeviceParcel(linkId = linkId, label = label, archivedAt = null, parcel = Parcel(shared = pkg), checkedAt = at)
+
+    /** The store's notifications when the phone has them off, so no test asks. */
+    private fun quietNotifications() =
+        DeviceNotificationAccess(status = { NotificationAuthorizationStatus.Denied }, request = {}, register = {}, token = { null })
+
+    private val postcodeConfiguration = AppConfiguration(
+        mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://postcodes.test", supabaseUrl = "https://postcodes.test",
+        supabasePublishableKey = "public", googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true,
+        appGroupIdentifier = "postcodes.test",
+    )
 
     private suspend fun assertThrows(block: suspend () -> Unit) {
         try {
@@ -571,6 +583,58 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun onlyALookupWithoutAnAccountIsRememberedAndSigningOutKeepsIt() = runTest {
+        val defaults = MemoryDefaults()
+        val memory = PostcodeMemory(defaults)
+        val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
+        val signedIn = JsonEncoder.deliveryTracker.encode(
+            AuthSession.serializer(),
+            AuthSession(
+                accessToken = "access", tokenType = "bearer", expiresIn = 3600, expiresAt = Instant.now().epochSecond + 3600,
+                refreshToken = "refresh", user = user,
+            ),
+        ).decodeToString()
+        val accountParcel = Parcel(
+            id = UUID.randomUUID(), trackingNumber = "TESTPARCEL999", label = "", carrier = CarrierId.GlsCh, createdAt = "2026-10-02T08:00:00Z",
+            syncStatus = SyncStatus.Pending, dpdPostcode = "3000", notificationsMuted = false,
+        )
+        val added = JsonEncoder.deliveryTracker.encode(CreatePackageResponse.serializer(), CreatePackageResponse(accountParcel, emptyList())).decodeToString()
+        val transport = RecordingTransport { request ->
+            when (request.method to request.path) {
+                "POST" to "/auth/v1/verify" -> jsonResponse(200, signedIn)
+                "POST" to "/api/packages" -> jsonResponse(201, added)
+                else -> jsonResponse(404)
+            }
+        }
+        val id = UUID.randomUUID()
+        val found = PublicLookupResponse(link = link("22222222222A"), key = key, parcel = pkg(id, carrier = CarrierId.Dpd))
+        val answered = PublicParcelResponse(link = link("22222222222A"), parcel = pkg(id, carrier = CarrierId.Dpd))
+        val device = device(client(Calls(), lookup = found, read = { answered }), Memory(), backgroundScope, postcodes = memory)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport, defaults = defaults)
+        session.showWelcome()
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, defaults, device = device, deviceNotifications = quietNotifications(),
+        )
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        store.add(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = " 75001 ")
+        assertEquals(listOf(given(CarrierId.Dpd, "75001")), memory.entries)
+        assertEquals(listOf(given(CarrierId.Dpd, "75001")), store.givenPostcodes)
+
+        // An account's postcode stays on its parcel, and the account's parcels come first.
+        session.verifyCode(email = "test@example.com", code = "123456")
+        store.add(trackingNumber = "TESTPARCEL999", label = "", carrier = CarrierId.GlsCh, trackingUrl = null, dpdPostcode = "3000")
+        assertEquals(listOf(given(CarrierId.Dpd, "75001")), memory.entries)
+        assertEquals(listOf(given(CarrierId.GlsCh, "3000"), given(CarrierId.Dpd, "75001")), store.givenPostcodes)
+
+        session.forceSignOut()
+        assertEquals(listOf(given(CarrierId.Dpd, "75001")), memory.entries)
+        store.forgetPostcode("75001")
+        assertEquals(emptyList<GivenPostcode>(), memory.entries)
+    }
+
+    @Test
     fun aForgottenPostcodeLeavesTheFieldUntilItsDetailsArePreparedAgain() {
         var fill = PostcodeFill()
         assertEquals("75001", fill.offering("75001"))
@@ -817,6 +881,46 @@ class DeviceParcelTests {
         assertEquals(ParcelAlertPreset.All, preset(TrackingStage.Registered))
         assertEquals(ParcelAlertPreset.Important, preset(TrackingStage.Accepted))
         assertEquals(ParcelAlertPreset.Important, preset(TrackingStage.InTransit))
+    }
+
+    @Test
+    fun followingALinkWithoutAnAccountAsksForNotificationsOnce() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val id = UUID.randomUUID()
+        val shown = PublicParcelResponse(link = reader("33333333333A"), parcel = pkg(id, stage = TrackingStage.Registered))
+        val calls = Calls()
+        val device = device(client(calls, read = { shown }), Memory(), backgroundScope)
+        var status = NotificationAuthorizationStatus.NotDetermined
+        val asked = mutableListOf<String>()
+        val notifications = DeviceNotificationAccess(
+            status = { asked += "status"; status },
+            request = { asked += "request"; status = NotificationAuthorizationStatus.Authorized },
+            register = { asked += "register" },
+            token = { "token1" },
+        )
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        val localizer = Localizer(AppLanguage.En)
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, localizer = localizer, device = device, deviceNotifications = notifications,
+        )
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        assertNull(store.followedHere(shown))
+
+        val claim = store.follow(ParcelLinkRoute(id = "33333333333A", name = "Books"), shown)
+
+        assertEquals(ParcelLinkClaim.Added(id), claim)
+        assertTrue("The sign-in screen gives way to the parcels on this iPhone", session.isGuest)
+        assertEquals(listOf("Books"), store.parcels.map { it.label })
+        assertEquals(id, store.followedHere(shown))
+        assertEquals(id, store.followedHere(linkId = "33333333333A"))
+        assertEquals("33333333333A", store.viewerLink(store.parcels.first()))
+        val alert = "alert 33333333333A - all token1 ${NativePushLocale(localizer.language).rawValue} ${NativePushEnvironment.current(false).rawValue}"
+        runCurrent()
+        assertEquals(listOf(alert), calls.all.filter { it.startsWith("alert") })
+        assertEquals(listOf("status", "request", "status", "register"), asked)
+        val again = store.follow(ParcelLinkRoute(id = "33333333333A"), shown)
+        assertEquals(ParcelLinkClaim.Already(id), again)
     }
 
     @Test

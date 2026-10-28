@@ -1,6 +1,9 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
+import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.GiftWords
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkKind
@@ -792,25 +795,112 @@ class ParcelShareTests {
 
     // The service
 
-    /**
-     * The account's calls are `ParcelStore.shareClient(for:)` over HTTP, which come with the store's port; this keeps
-     * the bodies they send and read, and that the notes of a deleted parcel go.
-     */
+    private class Sent(val method: String, val path: String, val authorization: String?, val body: String)
+
     @Test
-    fun sharingGoesThroughTheAccountAndForgetsTheWordsOfADeletedParcel() {
+    fun sharingGoesThroughTheAccountAndForgetsTheWordsOfADeletedParcel() = runTest {
+        val configuration = AppConfiguration(
+            mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://share.test", supabaseUrl = "https://share.test",
+            supabasePublishableKey = "public", googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true,
+            appGroupIdentifier = "share.test",
+        )
+        val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
+        val signedIn = JsonEncoder.deliveryTracker.encode(
+            AuthSession.serializer(),
+            AuthSession(
+                accessToken = "access", tokenType = "bearer", expiresIn = 3600, expiresAt = Instant.now().epochSecond + 3600,
+                refreshToken = "refresh", user = user,
+            ),
+        ).decodeToString()
+        val parcel = Parcel(
+            id = UUID.randomUUID(), trackingNumber = "TESTPARCEL983456", label = "Moon lamp", carrier = CarrierId.Dpd,
+            createdAt = "2026-10-02T08:00:00Z", syncStatus = SyncStatus.Ok, notificationsMuted = false,
+        )
+        val path = "/api/packages/${parcel.id.uuidString}/share"
+        val shared = JsonEncoder.deliveryTracker.encode(ParcelShareResponse.serializer(), fixture().parcelShare).decodeToString()
+        val requests = mutableListOf<Sent>()
+        var link: String? = null
+        val transport = RecordingTransport { request ->
+            val asked = request.path ?: ""
+            if (asked == "/auth/v1/verify") return@RecordingTransport jsonResponse(200, signedIn)
+            requests += Sent(request.method, asked, request.header("Authorization"), request.body?.decodeToString() ?: "")
+            if (asked == path) {
+                when (request.method) {
+                    "GET" -> return@RecordingTransport jsonResponse(200, link ?: """{"link":null}""")
+                    "PUT" -> {
+                        link = shared
+                        return@RecordingTransport jsonResponse(200, shared)
+                    }
+                    "DELETE" -> {
+                        link = null
+                        return@RecordingTransport jsonResponse(204)
+                    }
+                }
+            }
+            if (request.method == "DELETE" && asked == "/api/packages/${parcel.id.uuidString}/permanent") {
+                return@RecordingTransport jsonResponse(200, """{"ok":true}""")
+            }
+            jsonResponse(404, """{"error":"Package not found"}""")
+        }
+        val defaults = MemoryDefaults()
+        val session = testSessionStore(configuration, backgroundScope, transport = transport)
+        val store = testParcelStore(configuration, session, transport, backgroundScope, defaults)
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        val client = store.shareClient(parcel)
+
+        try {
+            client.current()
+            fail("Sharing needs an account")
+        } catch (_: DeliveryApiError) {
+            assertTrue(requests.isEmpty())
+        }
+
+        session.verifyCode(email = "test@example.com", code = "123456")
+        assertNull(client.current())
+        assertEquals("GET", requests.last().method)
+        assertEquals(path, requests.last().path)
+        assertEquals("Bearer access", requests.last().authorization)
+
+        val made = client.share(ParcelShareModel.Settings(showNumber = false, gift = true))
+        assertEquals(linkId, made.id)
+        assertEquals("PUT", requests.last().method)
+        assertEquals("Never a name, a note or a signature", """{"gift":true,"showNumber":false}""", requests.last().body)
+        assertEquals(made, client.current())
+
+        client.stop()
+        assertEquals("DELETE", requests.last().method)
+        assertEquals(path, requests.last().path)
+        assertNull(client.current())
+
+        // Another account's parcel reads as missing.
+        val other = store.shareClient(
+            Parcel(
+                id = UUID.randomUUID(), trackingNumber = "TESTPARCEL654321", label = "", carrier = CarrierId.Dpd,
+                createdAt = "2026-10-02T08:00:00Z", syncStatus = SyncStatus.Ok, notificationsMuted = false,
+            ),
+        )
+        try {
+            other.share(ParcelShareModel.Settings())
+            fail("Expected a refusal")
+        } catch (error: DeliveryApiError.Service) {
+            assertEquals("Package not found", error.serviceMessage)
+        }
+
+        // Deleting the parcel drops what its link carried.
+        val notes = ParcelShareNotes(defaults)
+        notes.remember(ParcelShareWords(name = true, note = "Enjoy", from = "Sam"), parcel.id)
+        store.permanentlyDelete(parcel)
+        assertNull(notes.words(parcel.id))
+    }
+
+    @Test
+    fun theRequestsBodiesCarryOnlyTheSwitchesAndAnyGiftWords() {
         val shared = fixture().parcelShare
         val served = JsonEncoder.deliveryTracker.encode(ParcelShareResponse.serializer(), shared)
         assertEquals(shared, ApiJson.decodeFromString(ParcelShareResponse.serializer(), served.decodeToString()))
         assertEquals(linkId, shared.link?.id)
         assertNull(ApiJson.decodeFromString(ParcelShareResponse.serializer(), """{"link":null}""").link)
-
-        // `shareClient` sends the switches as the sheet shows them, and gift words only when there are some.
-        val request = ParcelShareModel.Settings(showNumber = false, gift = true).request
-        assertEquals(
-            "Never a name, a note or a signature",
-            """{"gift":true,"showNumber":false}""",
-            JsonEncoder.deliveryTracker.encode(ShareParcelRequest.serializer(), request).decodeToString(),
-        )
         val words = GiftWords(name = "Moon lamp", note = "Enjoy", from = null)
         assertEquals(
             """{"gift":true,"giftWords":{"from":null,"name":"Moon lamp","note":"Enjoy"},"showNumber":true}""",
@@ -819,13 +909,6 @@ class ParcelShareTests {
                 ParcelShareModel.Settings(showNumber = true, gift = true, giftWords = words).request,
             ).decodeToString(),
         )
-
-        // Deleting the parcel drops what its link carried.
-        val notes = ParcelShareNotes(MemoryDefaults())
-        val parcelId = UUID.randomUUID()
-        notes.remember(ParcelShareWords(name = true, note = "Enjoy", from = "Sam"), parcelId)
-        notes.forget(parcelId)
-        assertNull(notes.words(parcelId))
     }
 
     @Test

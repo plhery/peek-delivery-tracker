@@ -29,6 +29,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.util.Locale
 import java.util.UUID
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonObject
@@ -103,6 +104,63 @@ class ParcelLogicTests {
             assertTrue(dates.all { it <= now })
             assertTrue(parcel.trackingEvents.all { it.packageId == parcel.id })
         }
+    }
+
+    @Test
+    fun demoUpgradePreservesEditsAndOnlyAddsExamplesOnce() {
+        val defaults = MemoryDefaults()
+        val coffee = DemoRepository.seed().first { it.trackingNumber == "993412345678901234" }
+            .copy(label = "My edited coffee", archivedAt = DateParser.isoString(java.time.Instant.now()))
+        defaults.set(JsonEncoder.deliveryTracker.encode(ListSerializer(Parcel.serializer()), listOf(coffee)), forKey = "sdt.native.demo.parcels.v1")
+        val repo = DemoRepository(defaults, language = { AppLanguage.En })
+        val upgraded = repo.list()
+        assertEquals(17, upgraded.size)
+        assertEquals("My edited coffee", upgraded.first { it.id == coffee.id }.label)
+        assertTrue(upgraded.first { it.id == coffee.id }.isArchived)
+        val lamp = upgraded.first { it.label == "Moon lamp \uD83C\uDF19" }
+        repo.permanentlyDelete(lamp.id)
+        // Swift's `DemoRepository(defaults:)` speaks `AppLanguage.current`; the count is the same in every language.
+        assertEquals(16, DemoRepository(defaults, language = { AppLanguage.En }).list().size)
+        defaults.set(JsonEncoder.deliveryTracker.encode(ListSerializer(Parcel.serializer()), emptyList()), forKey = "sdt.native.demo.parcels.v1")
+        defaults.removeObject(forKey = "sdt.native.demo.catalog.v2")
+        assertTrue(DemoRepository(defaults, language = { AppLanguage.En }).list().isEmpty())
+    }
+
+    @Test
+    fun demoIsWrittenInTheAppLanguageAndKeepsEditedNames() {
+        val defaults = MemoryDefaults()
+        var language = AppLanguage.En
+        val repo = DemoRepository(defaults, language = { language })
+        val coffee = repo.list().first { it.label == "Coffee beans \u2615" }
+        repo.rename(coffee.id, "My own coffee")
+
+        language = AppLanguage.Fr
+        val french = repo.list()
+        assertEquals("My own coffee", french.first { it.id == coffee.id }.label)
+        val sneakers = french.first { it.trackingNumber == "1234567899" }
+        assertEquals("Nouvelles baskets \uD83D\uDC5F", sneakers.label)
+        assertEquals("Kiosk im Hauptbahnhof", sneakers.pickupPlace)
+        assertTrue(sneakers.trackingEvents.any { it.description == "Personne à la maison. Sans doute parti courir." })
+        assertEquals("T\u2019attend au point de retrait", sneakers.lastStatusText)
+        // A refresh adds its scan in the same language.
+        val collected = repo.refresh(sneakers.id)
+        assertEquals("Livré dans ta boîte aux lettres", collected.currentEvent?.description)
+        assertEquals("Domicile", collected.currentEvent?.location)
+        assertNull(collected.pickupPlace)
+
+        language = AppLanguage.De
+        val german = repo.list()
+        assertEquals("Neue Sneaker \uD83D\uDC5F", german.first { it.id == sneakers.id }.label)
+        assertEquals("In deinen Briefkasten zugestellt", german.first { it.id == sneakers.id }.currentEvent?.description)
+        assertEquals("My own coffee", german.first { it.id == coffee.id }.label)
+        // Another launch, and a reset, keep the chosen language.
+        val later = DemoRepository(defaults, language = { AppLanguage.De })
+        assertEquals("Neue Sneaker \uD83D\uDC5F", later.list().first { it.id == sneakers.id }.label)
+        later.reset()
+        assertTrue(later.list().any { it.label == "Kaffeebohnen \u2615" })
+
+        language = AppLanguage.En
+        assertEquals(DemoRepository.seed().map { it.label }.toSet(), repo.list().map { it.label }.toSet())
     }
 
     @Test
@@ -425,6 +483,29 @@ class ParcelLogicTests {
 
         assertEquals(listOf(first, second), DeliveryWidgetSelection.displayParcels(listOf(nextUp, first, second)))
         assertEquals(listOf(nextUp), DeliveryWidgetSelection.displayParcels(listOf(nextUp)))
+    }
+
+    @Test
+    fun disablingWidgetRemovesSharedParcelSnapshot() {
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val snapshot = DeliveryWidgetSnapshot(
+            generatedAt = java.time.Instant.ofEpochSecond(1_700_000_000),
+            languageCode = "fr",
+            parcels = listOf(widgetParcel(label = "Private parcel", outForDelivery = true)),
+        )
+
+        assertTrue(store.isEnabled)
+        store.setLanguageCode("fr")
+        store.setLiveActivitiesEnabled(true)
+        assertTrue(store.save(snapshot))
+        assertEquals(snapshot, store.snapshot)
+
+        store.setEnabled(false)
+
+        assertFalse(store.isEnabled)
+        assertTrue(store.liveActivitiesEnabled)
+        assertNull(store.snapshot)
+        assertEquals("fr", store.languageCode)
     }
 
     @Test

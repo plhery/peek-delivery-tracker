@@ -375,6 +375,22 @@ class NotificationLogicTests {
         assertTrue(ApiJson.decodeFromString(Parcel.serializer(), row).isEmailMuted)
     }
 
+    @Test
+    fun demoParcelsKeepDecodingWithAnEmailMute() {
+        val defaults = MemoryDefaults()
+        val repo = DemoRepository(defaults, language = { AppLanguage.En })
+        val parcels = repo.list()
+        assertTrue(parcels.all { it.emailMuted == null })
+        val first = parcels.first()
+        assertEquals(true, repo.setEmailMuted(first.id, muted = true).emailMuted)
+        val reopened = DemoRepository(defaults, language = { AppLanguage.En }).list()
+        assertEquals(parcels.size, reopened.size)
+        assertEquals(true, reopened.first { it.id == first.id }.emailMuted)
+        // The demo's preferences say nothing about email, so nothing about it shows there.
+        assertNull(repo.notificationPreferences.emailAvailable)
+        assertNull(repo.notificationPreferences.emailOnDelivery)
+    }
+
     private fun preferences(email: Boolean?, available: Boolean? = true): NotificationPreferences = NotificationPreferences(
         enabledStages = NotificationPreset.Important.stages, timezone = "Europe/Zurich",
         emailOnDelivery = email, emailAvailable = available,

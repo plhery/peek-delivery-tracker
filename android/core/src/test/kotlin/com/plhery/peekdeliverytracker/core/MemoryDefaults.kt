@@ -23,4 +23,6 @@ internal class MemoryDefaults(val values: MutableMap<String, Any> = mutableMapOf
     override fun removeObject(forKey: String) {
         values.remove(forKey)
     }
+
+    override fun hasObject(forKey: String): Boolean = forKey in values
 }

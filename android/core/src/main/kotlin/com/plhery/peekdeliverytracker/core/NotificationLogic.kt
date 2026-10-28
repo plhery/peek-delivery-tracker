@@ -223,6 +223,9 @@ interface UserDefaults {
     fun set(value: String, forKey: String)
 
     fun removeObject(forKey: String)
+
+    /** Whether anything is saved under the key: Swift's `object(forKey:) != nil`. */
+    fun hasObject(forKey: String): Boolean
 }
 
 object NotificationInvitationPreference {

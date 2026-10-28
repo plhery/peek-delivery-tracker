@@ -13,6 +13,8 @@ import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
+import com.plhery.peekdeliverytracker.core.api.PackageListResponse
+import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkKind
@@ -543,25 +545,58 @@ class ParcelLinkTests {
         }
     }
 
-    /** Keeping is `ParcelStore.keep`, which comes with the store's port; this keeps its request and how it reads the answer. */
     @Test
-    fun keepingSendsTheSuggestedNameUnderTheAccountAndReloadsTheList() {
-        val kept = UUID.randomUUID()
-        // `ParcelStore.keep` asks for the link with its key and its name as the parcel's.
-        fun claimBody(link: ParcelLinkRoute): String = body(
-            JsonEncoder.deliveryTracker.encode(
-                ClaimParcelsRequest.serializer(),
-                ClaimParcelsRequest(links = listOf(ClaimParcelLink(id = link.id, key = link.key, label = link.name))),
+    fun keepingSendsTheSuggestedNameUnderTheAccountAndReloadsTheList() = runTest {
+        val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
+        val signedIn = JsonEncoder.deliveryTracker.encode(
+            AuthSession.serializer(),
+            AuthSession(
+                accessToken = "access", tokenType = "bearer", expiresIn = 3600, expiresAt = Instant.now().epochSecond + 3600,
+                refreshToken = "refresh", user = user,
             ),
+        ).decodeToString()
+        val kept = Parcel(
+            id = UUID.randomUUID(), trackingNumber = "TESTPARCEL983456", label = "Moon lamp", carrier = CarrierId.Dpd,
+            createdAt = "2026-10-02T08:00:00Z", syncStatus = SyncStatus.Pending, notificationsMuted = false,
         )
-        assertEquals("""{"links":[{"id":"k7Qm2xHd9RtW","label":"Moon lamp"}]}""", claimBody(ParcelLinkRoute(linkId, name = "Moon lamp")))
-        assertEquals("""{"links":[{"id":"k7Qm2xHd9RtW"}]}""", claimBody(ParcelLinkRoute(linkId)))
-
-        for ((outcome, claim) in listOf("kept" to ParcelLinkClaim.Added(kept), "quota" to ParcelLinkClaim.Full)) {
-            val id = if (outcome == "quota") "" else ""","packageId":"${kept.uuidString}""""
-            val answer = ApiJson.decodeFromString(ClaimParcelsResponse.serializer(), """{"results":[{"id":"k7Qm2xHd9RtW","outcome":"$outcome"$id}]}""")
-            assertEquals(claim, ParcelLinkClaim(response = answer, linkId = linkId))
+        val list = JsonEncoder.deliveryTracker.encode(PackageListResponse.serializer(), PackageListResponse(listOf(kept))).decodeToString()
+        val claims = mutableListOf<Pair<String?, String>>()
+        var outcome = "kept"
+        val transport = RecordingTransport { request ->
+            when (request.path) {
+                "/auth/v1/verify" -> jsonResponse(200, signedIn)
+                "/api/packages/claim" -> {
+                    claims += request.header("Authorization") to body(request.body ?: ByteArray(0))
+                    val id = if (outcome == "quota") "" else ""","packageId":"${kept.id.uuidString}""""
+                    jsonResponse(200, """{"results":[{"id":"k7Qm2xHd9RtW","outcome":"$outcome"$id}]}""")
+                }
+                "/api/packages" -> jsonResponse(200, list)
+                else -> jsonResponse(404)
+            }
         }
+        val session = testSessionStore(linkConfiguration, backgroundScope, transport = transport)
+        val store = testParcelStore(linkConfiguration, session, transport, backgroundScope)
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        try {
+            store.keep(ParcelLinkRoute(linkId))
+            fail("Keeping needs an account")
+        } catch (_: DeliveryApiError) {
+            assertTrue(claims.isEmpty())
+        }
+
+        session.verifyCode(email = "test@example.com", code = "123456")
+        val claim = store.keep(ParcelLinkRoute(linkId, name = "Moon lamp"))
+        assertEquals(ParcelLinkClaim.Added(kept.id), claim)
+        assertEquals("Bearer access", claims.last().first)
+        assertEquals("""{"links":[{"id":"k7Qm2xHd9RtW","label":"Moon lamp"}]}""", claims.last().second)
+        assertEquals("The kept parcel is on the list before the sheet closes", listOf(kept.id), store.parcels.map { it.id })
+
+        outcome = "quota"
+        val full = store.keep(ParcelLinkRoute(linkId))
+        assertEquals(ParcelLinkClaim.Full, full)
+        assertEquals("""{"links":[{"id":"k7Qm2xHd9RtW"}]}""", claims.last().second)
     }
 
     // Across sign-in

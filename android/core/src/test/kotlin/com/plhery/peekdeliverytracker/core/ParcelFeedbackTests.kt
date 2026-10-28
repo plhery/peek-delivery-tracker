@@ -962,29 +962,76 @@ class ParcelFeedbackTests {
         }
     }
 
-    /**
-     * `ParcelStore.feedbackClient(for:)` and `feedbackClient(forLink:)` come with the store's port; this keeps the body
-     * an account's answer sends and the rule that a demo's pages, or a link's in a build without a server, ask nothing.
-     */
     @Test
-    fun theStoreSendsThroughTheAccountAndNothingInABuildWithoutAServer() {
-        val parcel = this.parcel()
+    fun theStoreSendsThroughTheAccountAndNothingInABuildWithoutAServer() = runTest {
+        val configuration = AppConfiguration(
+            mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://feedback.test", supabaseUrl = "https://feedback.test",
+            supabasePublishableKey = "public", googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true,
+            appGroupIdentifier = "feedback.test",
+        )
+        val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
+        val signedIn = JsonEncoder.deliveryTracker.encode(
+            AuthSession.serializer(),
+            AuthSession(
+                accessToken = "access", tokenType = "bearer", expiresIn = 3600, expiresAt = Instant.now().epochSecond + 3600,
+                refreshToken = "refresh", user = user,
+            ),
+        ).decodeToString()
+        val parcel = parcel()
+        val requests = mutableListOf<HttpRequest>()
+        val transport = RecordingTransport { request ->
+            val asked = request.path ?: ""
+            if (asked == "/auth/v1/verify") return@RecordingTransport jsonResponse(200, signedIn)
+            requests += request
+            if (asked.endsWith("/feedback")) jsonResponse(204) else jsonResponse(404, """{"error":"Package not found"}""")
+        }
+        val session = testSessionStore(configuration, backgroundScope, transport = transport)
+        val store = testParcelStore(configuration, session, transport, backgroundScope)
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        session.verifyCode(email = "test@example.com", code = "123456")
         val answer = ParcelFeedbackRequest.right(asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.En, app = ios)
-        val json = Json.parseToJsonElement(body(answer)).jsonObject
-        assertEquals(answer.id.uuidString, json.getValue("id").jsonPrimitive.content)
-        assertEquals("right", json.getValue("answer").jsonPrimitive.content)
+
+        store.feedbackClient(parcel).send(answer)
+
+        val sent = requests.last { it.path?.endsWith("/feedback") == true }
+        assertEquals("POST", sent.method)
+        assertEquals("/api/packages/${parcel.id.uuidString}/feedback", sent.path)
+        assertEquals("Bearer access", sent.header("Authorization"))
+        val json = Json.parseToJsonElement(sent.body?.decodeToString() ?: "").jsonObject
+        assertEquals(answer.id.uuidString, json["id"]?.jsonPrimitive?.content)
+        assertEquals("right", json["answer"]?.jsonPrimitive?.content)
+
+        // A link's parcel is answered for through the link, signed in or not.
+        store.feedbackClient(linkId).send(answer)
+        assertEquals("/api/public/parcels/$linkId/feedback", requests.last().path)
+        assertNull(requests.last().header("Authorization"))
+
+        // The demo's parcels are made up: their answers go nowhere, and succeed.
+        val count = requests.size
+        val preferences = MemoryDefaults()
+        val demo = AppConfiguration(
+            mode = AppConfiguration.Mode.Demo, apiBaseUrl = "https://feedback.test", supabaseUrl = null, supabasePublishableKey = "",
+            googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = false, appGroupIdentifier = "feedback.test",
+        )
+        val demoSession = testSessionStore(demo, backgroundScope, transport = transport, defaults = preferences)
+        val demoStore = testParcelStore(demo, demoSession, transport, backgroundScope, preferences)
+        demoStore.setDeliveryWidgetEnabled(false)
+        demoStore.setDeliveryLiveActivitiesEnabled(false)
+        demoSession.enterDemo()
+        assertTrue(demoStore.isDemo)
+        demoStore.feedbackClient(parcel).send(answer)
+        // A build without a server reads no link either.
+        demoStore.feedbackClient(linkId).send(answer)
+        assertEquals(count, requests.size)
 
         // Nor do their pages ask: the demo's stories are not something to judge.
-        for (madeUp in listOf(true, false)) {
-            val page = ParcelFeedbackModel.Page(
-                parcel, subject = ParcelFeedbackSubject.Parcel(parcel.id), showsHistory = true, madeUp = madeUp, carrier = "DHL", language = AppLanguage.En,
-            )
-            val link = ParcelFeedbackModel.Page(
-                parcel, subject = ParcelFeedbackSubject.Link(linkId), showsHistory = true, madeUp = madeUp, carrier = "DHL", language = AppLanguage.En,
-            )
-            assertEquals(madeUp, page == null)
-            assertEquals(madeUp, link == null)
-        }
+        fun page(subject: ParcelFeedbackSubject, madeUp: Boolean) =
+            ParcelFeedbackModel.Page(parcel, subject = subject, showsHistory = true, madeUp = madeUp, carrier = "DHL", language = AppLanguage.En)
+        assertNull(page(ParcelFeedbackSubject.Parcel(parcel.id), madeUp = demoStore.isDemo))
+        assertNull(page(ParcelFeedbackSubject.Link(linkId), madeUp = !demoStore.tracksWithoutAccount))
+        assertNotNull(page(ParcelFeedbackSubject.Parcel(parcel.id), madeUp = store.isDemo))
+        assertNotNull(page(ParcelFeedbackSubject.Link(linkId), madeUp = !store.tracksWithoutAccount))
     }
 
     @Test

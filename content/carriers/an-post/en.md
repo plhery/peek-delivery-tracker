@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-10-28
 ---
 
-An Post is Ireland's state-owned postal service, and ComReg, the postal regulator, says it is designated as Ireland's universal postal service provider until 1 August 2029. Paste the tracking number in the box above, or look it up on An Post's own tracking at anpost.com. The number comes from the sender, usually in the shop's shipping email.
+An Post is Ireland's national postal service: ComReg, the postal regulator, says it is designated as Ireland's universal postal service provider until 1 August 2029. Paste the tracking number in the box above, or look it up on An Post's own tracking at anpost.com. The number comes from the sender, usually in the shop's shipping email.
 
 ## An Post tracking number format
 
@@ -72,7 +72,7 @@ Still unhappy with the final answer? Within 30 calendar days, ask An Post's Cust
 
 [Peek](/) recognises a valid number of two letters, nine digits and `IE` as An Post's straight away. An anpost.com Track History link with `item=` or `barcode=` works too. For the sender's reference from the postage label, pick An Post with "Change": Peek then shows the item's own number. No postcode needed.
 
-An Post's scans carry no time zone: Peek reads them on Irish time, or on the clock of the scan's place once the item has left Ireland, and lists An Post's own history. Statuses keep An Post's English wording. Peek can notify you when the status changes.
+An Post's scans carry no time zone. Peek reads them on Irish time; a scan An Post relays from the delivery partner abroad that names its place goes by that place's clock instead, and so do the placeless scans after it. Peek shows each scan in your device's time zone and lists An Post's own history. Statuses keep An Post's English wording. Peek can notify you when the status changes.
 
 It drops your name, the signatory, references and the proof of delivery, and An Post gives no expected delivery day. A number ending in another country's letters is followed on that country's post first. Peek also asks An Post once that post names Ireland as the destination, or names none while you're in Ireland, and switches to An Post when it shows fresh scans, keeping the earlier history. For an item leaving Ireland, the local delivery provider's scans that An Post relays stay in the history, and if you're outside Ireland, Peek can also ask your country's post with the same number and switch to it the same way.
 
@@ -105,6 +105,5 @@ Lodge it with An Post Customer Services through the enquiry form for missing, da
 - [Revenue: Fraudulent emails, SMS and phone calls](https://www.revenue.ie/en/customs/individuals/buying-online-personal/fraudulent-requests.aspx) – no links in An Post texts, no Revenue payment links
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – Great Britain included, €2 fee from 1 November 2026, checkout or delivery, Northern Ireland and EU
 - [CCPC: Non-delivery of goods](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – the business is responsible, lost in transit
-- [Wikipedia: An Post](https://en.wikipedia.org/wiki/An_Post) – state-owned postal service of Ireland
 - [Universal Parcel Scraper: An Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/an-post) – number format and check digit, mail from other posts, status wordings, relayed partner scans, expired numbers, what Peek reads
 :::

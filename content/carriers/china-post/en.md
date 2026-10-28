@@ -59,7 +59,7 @@ China Post flies the parcel out; in your country the national post takes over, t
 
 - **United States**: [USPS](carrier:usps).
 - **United Kingdom**: [Royal Mail](carrier:royal-mail). It takes the parcel through UK customs and tells you if VAT or duty is due.
-- **Ireland**: [An Post](carrier:an-post). Its tracking shows the parcel only once An Post has received and scanned it in Ireland, and it warns that another post's tracking can say Ireland while the item is still in transit abroad.
+- **Ireland**: [An Post](carrier:an-post).
 - **Canada**: [Canada Post](carrier:canada-post). Look the number up in its Track tool; if nothing appears, Canada Post asks you to have the sender investigate with their country's post.
 - **Australia**: [Australia Post](carrier:australia-post). It says tracking for items from overseas depends on the service used in the sending country, and that customs can take up to 15 days.
 
@@ -94,7 +94,7 @@ Peek reads China Post's own tracking. When China Post asks for phone digits, Pee
 
 It shows the status, the history with the office of each scan, and the destination country. Scans appear in English where Peek knows China Post's wording, otherwise in Chinese. China Post times its own scans on China's clock, even the arrival in your country; the later scans it copies from your national post usually keep that post's local time. Peek shows each scan in your device's time zone. China Post gives no expected delivery date, weight or pickup point, and Peek drops the service name, contacts, sender and recipient details, couriers' names and phone numbers, and map coordinates.
 
-Once China Post names your country, Peek also asks your national post with the same number (USPS, Royal Mail, Canada Post or Australia Post) and switches to it once it shows fresh scans, keeping China Post's history. An Post isn't asked, so in Ireland Peek stays with China Post and tracking services. Peek can notify you of "All tracking updates", "Important only" or "Delivery day only". It can't contact China Post, your post or the shop for you.
+For a number ending in `CN`, once China Post names your country, Peek also asks your national post with the same number (USPS, Royal Mail, An Post, Canada Post or Australia Post) and switches to it once it shows fresh scans, keeping China Post's history. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact China Post, your post or the shop for you.
 
 ## Questions about China Post tracking
 
@@ -126,7 +126,6 @@ Your national post: USPS in the US, Royal Mail in the UK. They deliver it under 
 - [China Post: 邮件查询 (mail tracking, Chinese)](https://www.ems.com.cn/mailtracking/you_jian_cha_xun.html) – picture check, online customer service
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – number format, service letters, U range without tracking, one number per item
 - [GOV.UK: Tax and customs for goods sent from abroad: Overview](https://www.gov.uk/goods-sent-from-abroad) – Royal Mail takes goods through UK customs and says if VAT or duty is due
-- [An Post: Track and Trace help](https://www.anpost.com/Help-Support/Track-and-Trace) – items from abroad shown once scanned in Ireland
 - [Canada Post: Tracking international packages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-international-packages.page) – packages coming to Canada, sender investigates, timelines
 - [Australia Post: International tracking](https://auspost.com.au/help/parcel-tracking/international-parcel/tracking) – tracking depends on the sending country's service
 - [Australia Post: Customs](https://auspost.com.au/help/parcel-tracking/international-parcel/customs) – up to 15 days

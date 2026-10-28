@@ -3,7 +3,7 @@ title: TNT seguimiento: número de envío, estados y entrega
 description: Seguimiento de TNT en España: dónde está el número de envío de 9 cifras, qué significan los estados, entregas fallidas, aduanas, reclamaciones y teléfono.
 slug: tnt-seguimiento
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 TNT transporta paquetes, documentos y carga por todo el mundo, con su propia red por carretera en toda Europa. Hoy forma parte de FedEx, pero sus envíos se siguen en tnt.com. Cada envío tiene un número de 9 cifras, que TNT llama número de envío o de albarán. Búscalo en el [Track & Trace de tnt.com](https://www.tnt.com/express/es_es/site/herramientas-envio/seguimiento.html), que también acepta la referencia del remitente, o pega el número en la casilla de arriba.
@@ -91,7 +91,7 @@ Pega el número de 9 cifras. Si su dígito de control es correcto, [Peek](/) pre
 
 Peek muestra el estado, el historial con la ciudad y el país de cada escaneo, el país de destino y la fecha prevista mientras TNT la da, con las horas en la zona horaria de tu dispositivo. La referencia y la firma se quedan en tnt.com. Como los números se repiten, Peek se queda con el envío del escaneo más reciente: comprueba que el recorrido es el tuyo.
 
-Peek consulta el seguimiento cada 10 minutos de día (de 8:00 a 22:00, hora de Suiza, la misma que la peninsular), cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede avisarte con «Todas las novedades», «Solo importantes» o «Solo el día de entrega». No puede llamar a TNT ni al remitente, pagar la aduana ni cambiar una entrega.
+Peek consulta el seguimiento cada 10 minutos de día (de 8:00 a 22:00, hora de Suiza, la misma que la peninsular), cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede avisarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede llamar a TNT ni al remitente, pagar la aduana ni cambiar una entrega.
 
 ## Preguntas sobre el seguimiento de TNT
 

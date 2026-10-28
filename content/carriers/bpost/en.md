@@ -41,7 +41,8 @@ bpost's Track & Trace is available in English, French, Dutch and German. These a
 | `Departure to country of destination` | Leaving for the country it is going to. |
 | `Your shipment has arrived at the postal operator of the country of destination and will be delivered in the coming days` | The destination's post has it and will deliver it. |
 | `The postman's delivery round for your item has started` | Out for delivery today. |
-| `Item available at Pick-up point` | Ready to pick up at a Pick-up point or Parcel Locker. |
+| `Item available at Pick-up point` | Ready to pick up at a Pick-up point. |
+| `Item available at the bbox locker` | Ready to pick up from a bbox locker. |
 | `Item delivered` | Delivered, or picked up at the point. |
 
 ## Delivery, Pick-up points and Parcel Lockers

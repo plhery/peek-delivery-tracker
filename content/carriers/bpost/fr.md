@@ -42,7 +42,7 @@ Le Track & Trace de bpost existe en français, en néerlandais, en anglais et en
 | `Départ vers le pays de destination` | Il part vers le pays où il est livré. |
 | `Votre envoi est arrivé chez l'opérateur postal du pays de destination et sera livré dans les prochains jours` | La poste du pays de destination l'a reçu et va le livrer. |
 | `La livraison de votre colis est en cours` | Le facteur l'a dans sa tournée aujourd'hui. |
-| `Article disponible au Point Relais` | Il t'attend dans un Point d'enlèvement ou un Distributeur de Colis. |
+| `Article disponible au Point Relais` | Il t'attend dans un Point d'enlèvement. |
 | `Envoi distribué` | Livré, ou retiré au point. |
 
 `Article disponible au Point Relais` désigne ce que les pages d'aide de bpost appellent un « Point d'enlèvement » : c'est le même endroit. `Colis arrivé au centre de distribution - ne peut pas être traité - informations manquantes` veut dire que le centre n'a pas pu mettre le colis dans une tournée parce qu'il manque une information. bpost n'en dit pas plus : si rien ne bouge, contacte la boutique.

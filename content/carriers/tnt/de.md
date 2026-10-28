@@ -3,7 +3,7 @@ title: TNT Sendungsverfolgung: Sendungsnummer, Status, Zustellung
 description: TNT-Sendung verfolgen: wo die 9-stellige Sendungsnummer steht, was die Status heißen, verpasste Zustellung, Zoll, Schäden und wie du TNT erreichst.
 slug: tnt-sendungsverfolgung
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 TNT bringt Pakete, Dokumente und Paletten per Express ans Ziel und gehört zu FedEx: In Deutschland sind FedEx Express und TNT seit dem 1. Dezember 2021 ein Unternehmen, die FedEx Express Deutschland GmbH. TNT-Sendungen verfolgst du trotzdem weiter auf tnt.com unter [Sendung verfolgen](https://www.tnt.com/express/de_de/site/shipping-tools/tracking.html), oder du fügst die Nummer oben ins Feld ein. Dafür brauchst du die 9-stellige Sendungsnummer vom Frachtbrief. Mit der Referenz des Versenders sucht nur tnt.com, Peek nicht.
@@ -90,7 +90,7 @@ Füg die 9-stellige Sendungsnummer ein. Stimmt ihre Prüfziffer, fragt [Peek](/)
 
 Peek zeigt den Status, den Verlauf mit Stadt und Land jedes Scans, das Zielland und den voraussichtlichen Liefertag, solange TNT einen nennt. Die Uhrzeiten zeigt Peek in der Zeitzone deines Geräts. Die Referenz des Versenders und die Unterschrift bleiben auf tnt.com. Weil TNT Nummern neu vergibt, folgt Peek der Sendung mit dem neuesten Scan: Prüf, ob die Strecke zu deiner passt.
 
-Tagsüber (8 bis 22 Uhr Schweizer Zeit) schaut Peek alle 10 Minuten nach, alle 2 Minuten, sobald die Sendung in Zustellung ist, nachts alle ein bis zwei Stunden. Mitteilungen wählst du selbst: „Alle Updates“, „Nur wichtige“ oder „Nur am Liefertag“. TNT oder den Absender für dich kontaktieren, Zoll bezahlen oder die Zustellung ändern kann Peek nicht.
+Tagsüber (8 bis 22 Uhr Schweizer Zeit) schaut Peek alle 10 Minuten nach, alle 2 Minuten, sobald die Sendung in Zustellung ist, nachts alle ein bis zwei Stunden. Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. TNT oder den Absender für dich kontaktieren, Zoll bezahlen oder die Zustellung ändern kann Peek nicht.
 
 ## Fragen zur TNT Sendungsverfolgung
 

@@ -1054,6 +1054,7 @@ export const CARRIER_CAPABILITIES = {
           "dpdgroup.com",
           "dpd.com"
         ],
+        "pathPattern": "^/ch(?:/|$)",
         "params": [
           "parcelNumber",
           "parcelnumber"
@@ -1101,6 +1102,17 @@ export const CARRIER_CAPABILITIES = {
           "trace.dpd.fr"
         ],
         "path": "^/(?:fr/trace|trace-particuliers)/([^/?#]+)/?$"
+      },
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "pathPattern": "^/fr(?:/|$)",
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
+        ]
       }
     ],
     "detectionRules": [
@@ -1963,7 +1975,7 @@ export const CARRIER_CAPABILITIES = {
           "gls-group.eu",
           "gls-group.com"
         ],
-        "pathPattern": "^/GROUP/",
+        "pathPattern": "^/(?:GROUP|BE|BG|CZ|DK|FI|HR|HU|IE|LU|NL|RO|RS|SI|SK)/",
         "params": [
           "match",
           "parcelNumber",
@@ -5270,6 +5282,17 @@ export const CARRIER_CAPABILITIES = {
         "params": [
           "parcelno"
         ]
+      },
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "pathPattern": "^/de(?:/|$)",
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
+        ]
       }
     ],
     "detectionRules": [
@@ -5985,6 +6008,17 @@ export const CARRIER_CAPABILITIES = {
         "params": [
           "p1"
         ]
+      },
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "pathPattern": "^/pl(?:/|$)",
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
+        ]
       }
     ],
     "detectionRules": [
@@ -6371,7 +6405,21 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "box-now",
       "recognitionRank": 250
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "boxnow.gr",
+          "boxnow.bg",
+          "boxnow.hr",
+          "boxnow.cy",
+          "boxnow.si"
+        ],
+        "pathPattern": "^/(?:[a-z]{2}/)?track/?$",
+        "params": [
+          "track"
+        ]
+      }
+    ],
     "detectionRules": [
       {
         "pattern": "^\\d{10}$",
@@ -7804,7 +7852,32 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "speedy",
       "recognitionRank": 280
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "speedy.bg"
+        ],
+        "pathPattern": "^/(?:[a-z]{2}/)?track-shipment/?$",
+        "params": [
+          "shipmentNumber"
+        ]
+      },
+      {
+        "domains": [
+          "speedy.bg"
+        ],
+        "pathPattern": "^/begin\\.php$",
+        "params": [
+          "shipmentNumber"
+        ]
+      },
+      {
+        "domains": [
+          "myspeedy.speedy.bg"
+        ],
+        "path": "^/pub/tracking/([^/?#]+)/?$"
+      }
+    ],
     "detectionRules": [],
     "trackingUrlTemplate": "https://myspeedy.speedy.bg/pub/tracking/{trackingNumber}",
     "trackingSearchUrl": "https://myspeedy.speedy.bg/pub/tracking/"
@@ -22538,7 +22611,19 @@ export const CARRIER_CAPABILITIES = {
       "recognitionRank": 983
     },
     "trackingUrlTemplate": "https://www.dpdgroup.com/be/mydpd/my-parcels/track?lang=en&parcelNumber={trackingNumber}",
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "pathPattern": "^/be(?:/|$)",
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
+        ]
+      }
+    ],
     "detectionRules": [
       {
         "pattern": "^\\d{14}$",
@@ -22633,7 +22718,19 @@ export const CARRIER_CAPABILITIES = {
       "recognitionRank": 972
     },
     "trackingUrlTemplate": "https://www.dpdgroup.com/nl/mydpd/my-parcels/search?lang=en&parcelNumber={trackingNumber}",
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "pathPattern": "^/nl(?:/|$)",
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
+        ]
+      }
+    ],
     "detectionRules": [
       {
         "pattern": "^\\d{14}$",
@@ -23274,6 +23371,17 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/(?:track-and-trace|en/getting-parcel/track-trace)/?$",
         "params": [
           "reference"
+        ]
+      },
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "pathPattern": "^/pt(?:/|$)",
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
         ]
       }
     ],
@@ -24257,6 +24365,17 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/meine-pakete/?$",
         "params": [
           "ipn"
+        ]
+      },
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "pathPattern": "^/at(?:/|$)",
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
         ]
       }
     ],
@@ -30473,6 +30592,17 @@ export const CARRIER_CAPABILITIES = {
         "params": [
           "shipmentNumber"
         ]
+      },
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "pathPattern": "^/ro(?:/|$)",
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
+        ]
       }
     ],
     "detectionRules": [
@@ -31651,7 +31781,19 @@ export const CARRIER_CAPABILITIES = {
       "recognitionRank": 804
     },
     "trackingUrlTemplate": "https://www.dpdgroup.com/hu/mydpd/my-parcels/search?lang=en&parcelNumber={trackingNumber}",
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "pathPattern": "^/hu(?:/|$)",
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
+        ]
+      }
+    ],
     "detectionRules": [
       {
         "pattern": "^\\d{14}$",
@@ -32204,6 +32346,122 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://web.quickrabbit.es/es/tracking"
+  },
+  "dealersend": {
+    "displayName": "DealerSend",
+    "aliases": [
+      "Dealer Send",
+      "Dealer Send Logistics",
+      "Dealer Send Logistics Limited"
+    ],
+    "countries": [
+      "HK"
+    ],
+    "color": "#d71d4f",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "dealersend",
+      "recognitionRank": 69
+    },
+    "trackingUrlTemplate": "https://dealer-send.com/en-US/track-my-shipment?trackingNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "dealer-send.com",
+          "www.dealer-send.com"
+        ],
+        "pathPattern": "^/(?:(?:en-US|zh-HK|zh-CN)/)?track-my-shipment/?$",
+        "params": [
+          "trackingNumber"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^DSLAF\\d{10}YQ$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://dealer-send.com/en-US/track-my-shipment"
+  },
+  "express-one-bg": {
+    "displayName": "Express One Bulgaria",
+    "aliases": [
+      "Express One BG",
+      "Експрес Уан"
+    ],
+    "countries": [
+      "BG"
+    ],
+    "color": "#f58220",
+    "selectable": true,
+    "timezone": "Europe/Sofia",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "express-one-bg"
+    },
+    "trackingUrlTemplate": "https://expressone.bg/en/tracking/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "expressone.bg"
+        ],
+        "path": "^/(?:(?:bg|en)/)?tracking/(\\d+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://expressone.bg/en/tracking"
+  },
+  "pactic": {
+    "displayName": "Pactic",
+    "aliases": [
+      "Allpacka"
+    ],
+    "countries": [
+      "HU",
+      "RO",
+      "PL",
+      "AT",
+      "BG",
+      "CZ",
+      "DE",
+      "GR",
+      "HR",
+      "IT",
+      "SI",
+      "SK"
+    ],
+    "color": "#390084",
+    "selectable": true,
+    "timezone": "Europe/Budapest",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "pactic",
+      "recognitionRank": 71
+    },
+    "trackingUrlTemplate": "https://dashboard.pactic.com/tracking?waybill={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "dashboard.pactic.com"
+        ],
+        "pathPattern": "^/(?:[a-z]{2}/)?(?:tracking|csomagkovetes)/?$",
+        "params": [
+          "waybill",
+          "waybillNumber"
+        ],
+        "ownNumbersOnly": true
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^C\\d{6}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])(?:[01]\\d|2[0-3])[0-5]\\d[0-5]\\d\\d{6}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://dashboard.pactic.com/tracking"
   }
 } as const;
 
@@ -33070,7 +33328,10 @@ export const CARRIER_IDS = [
   "e-commerce-international",
   "mhi",
   "huaya-express",
-  "quick-rabbit"
+  "quick-rabbit",
+  "dealersend",
+  "express-one-bg",
+  "pactic"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -18314,7 +18314,39 @@
     ]
   },
   {
+    "input": "158278800025728334040064",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "ciblex",
+      "inpost",
+      "bpost",
+      "austrian-post"
+    ],
+    "asked": [
+      "austrian-post",
+      "inpost",
+      "ciblex"
+    ]
+  },
+  {
     "input": "158278800045109063606500",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "ciblex",
+      "inpost",
+      "bpost",
+      "austrian-post"
+    ],
+    "asked": [
+      "austrian-post",
+      "inpost",
+      "ciblex"
+    ]
+  },
+  {
+    "input": "158278800050128255906301",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -18347,6 +18379,22 @@
   },
   {
     "input": "158278800067834653601119",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "ciblex",
+      "inpost",
+      "bpost",
+      "austrian-post"
+    ],
+    "asked": [
+      "austrian-post",
+      "inpost",
+      "ciblex"
+    ]
+  },
+  {
+    "input": "158278800069617235907280",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -31008,6 +31056,16 @@
     "confidence": "high",
     "candidates": [
       "nacex"
+    ]
+  },
+  {
+    "input": "28561866",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
     ]
   },
   {
@@ -68465,6 +68523,14 @@
     ]
   },
   {
+    "input": "C1293260113143739958059",
+    "carrier": "pactic",
+    "confidence": "high",
+    "candidates": [
+      "pactic"
+    ]
+  },
+  {
     "input": "C1867094M",
     "carrier": "unknown",
     "confidence": "low",
@@ -72572,6 +72638,30 @@
     ],
     "asked": [
       "colis-prive"
+    ]
+  },
+  {
+    "input": "DSLAF1021401768YQ",
+    "carrier": "dealersend",
+    "confidence": "high",
+    "candidates": [
+      "dealersend"
+    ]
+  },
+  {
+    "input": "DSLAF1022425992YQ",
+    "carrier": "dealersend",
+    "confidence": "high",
+    "candidates": [
+      "dealersend"
+    ]
+  },
+  {
+    "input": "DSLAF1026220361YQ",
+    "carrier": "dealersend",
+    "confidence": "high",
+    "candidates": [
+      "dealersend"
     ]
   },
   {

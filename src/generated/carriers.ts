@@ -1777,7 +1777,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "fedex",
       "catalog": "fedex",
       "slug": "fedex-suivi-colis",
-      "title": "FedEx suivi\u00a0: colis, statuts et avis de passage",
+      "title": "FedEx suivi\u00a0: numéro, statuts et livraison manquée",
       "name": "FedEx",
       "color": "#4d148c"
     },
@@ -2309,7 +2309,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "fedex",
       "catalog": "fedex",
       "slug": "fedex-seguimiento",
-      "title": "FedEx seguimiento: estado del envío, entrega y teléfono",
+      "title": "FedEx seguimiento: número, estados del envío y aduanas",
       "name": "FedEx",
       "color": "#4d148c"
     },
@@ -2785,7 +2785,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "fedex",
       "catalog": "fedex",
       "slug": "fedex-sledzenie",
-      "title": "FedEx śledzenie: numer przesyłki, statusy i awizo",
+      "title": "FedEx śledzenie: numer przesyłki, statusy i cło",
       "name": "FedEx",
       "color": "#4d148c"
     },

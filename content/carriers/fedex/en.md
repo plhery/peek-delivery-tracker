@@ -1,80 +1,68 @@
 ---
 title: FedEx tracking: numbers, statuses and missed deliveries
-description: Track a FedEx parcel: where to find the 12-digit tracking number, what statuses like Delivery exception mean, missed deliveries, customs bills and contacts.
+description: Track a FedEx parcel: what the 12-digit tracking number looks like, what Delivery exception and other scans mean, customs charges and your rights if it's lost.
 slug: fedex-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-FedEx is an express and parcel carrier. Track a parcel on fedex.com's tracking page, in the FedEx Mobile App or by pasting the number in the box above. FedEx says the number usually comes in the email or SMS it sends about your shipment.
+Paste a FedEx tracking number, or a FedEx tracking link, in the box above to follow the parcel. FedEx's own tracking is on fedex.com and in the FedEx Mobile app.
 
 ## FedEx tracking number: where to find it and how many digits
 
-Look in the shop's shipping email or order page, in FedEx's own email or SMS, and at the bottom of the shipping label. FedEx's help box calls it "a 12-digit number"; its tracking FAQ says 12 or 13 digits.
+Look in the shop's shipping email or on your order page. A fedex.com tracking link carries the number too, after `trknbr=` or `tracknumbers=`. Still nothing? See [where else to find a tracking number](guide:find-tracking-number).
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `123456789012` | 12 digits: the usual FedEx tracking number. |
+| `123456789012` | 12 digits: a FedEx tracking number. The last digit is a check digit worked out from the 11 before it. |
 | `123456789012343` | 15 digits: a shape Peek also files under FedEx. |
 | `61290000000000000014` | 20 digits starting `6129` or `7489`: FedEx Ground Economy (formerly SmartPost) in the US. |
-
-No number? On fedex.com, "Track by reference" works with the shipper's reference. Without either, FedEx says to contact the sender; see [where else to find a tracking number](guide:find-tracking-number).
 
 Twelve digits also fit [DPD France](carrier:dpd-fr), [Mondial Relay](carrier:mondial-relay), [BRT](carrier:brt) and several Asian couriers, and fifteen fit DPD France and BRT too. If fedex.com doesn't know the number, check which carrier the shop's email names.
 
 ## What FedEx tracking statuses mean, including delivery exception
 
-These are the English names on fedex.com. Its other country sites show them in their own language.
+These are scan wordings Peek reads from FedEx, in FedEx's English, roughly in the order a parcel meets them, with the status Peek shows for each.
 
-| FedEx's status | What it means for you |
-| --- | --- |
-| `Label created` | The shipper printed the label and is preparing the parcel. FedEx doesn't have it yet. |
-| `We have your package` | It reached a FedEx facility or a FedEx courier picked it up. |
-| `On the way` | It's moving towards you, in a vehicle or at a FedEx facility. |
-| `At our facility` | It's safe at a FedEx location. The status changes when it moves again. |
-| `Clearance in progress` | It's going through customs. |
-| `Out for delivery` | It's on the van for delivery today. |
-| `Delivery updated` | The date or address changed, at the shipper's or your request, or because of an exceptional event. |
-| `Delivery exception` | Something unexpected is delaying delivery. |
-| `Running late` | It probably won't arrive by the first estimate. |
-| `Ready for pickup` | It's waiting for you at a FedEx location. |
-| `Returning to FedEx facility` | It was turned away at the door and is going back to a FedEx location. |
-| `DELIVERED` | Delivered, with the date, time and who signed. |
+| FedEx's scan | Peek shows | What it means |
+| --- | --- | --- |
+| `Shipment information sent to FedEx` | Label created | The sender has sent FedEx the shipment's details. |
+| `Picked up`, `Tendered at FedEx location` | Received by carrier | FedEx has it: a courier collected it, or the sender handed it in at a FedEx location. |
+| `Arrived at FedEx location`, `Departed FedEx location`, `At local FedEx facility`, `On the way` | In transit | It's moving through FedEx's network. |
+| `Clearance in progress`, `Clearance delay` | At customs | It's going through customs (see below). |
+| `International shipment release - Import` | In transit | Customs has released it into the destination country. |
+| `On FedEx vehicle for delivery` | Out for delivery | It's on the van for delivery. |
+| `Delivery exception`, `Customer not available or business closed` | Delivery attempted | The delivery didn't go ahead. |
+| `Ready for pickup` | Ready for pickup | It's waiting for you at a pickup location. |
+| `Delivered` | Delivered | It's been delivered. |
+| `Shipment exception` | Needs attention | FedEx reports a problem with the shipment. |
+| `Returning to shipper` | Returned to sender | It's going back to the sender. |
 
-`Delivery exception` sounds worse than it is: FedEx's examples are a customs delay, bad weather, strikes, nobody at home or security restrictions, and it says there's nothing you need to do at that point. The detailed history may give the reason, such as `Customer not available or business closed`.
+Peek files `Delivery exception` with failed delivery attempts. The scans can say why: `Customer not available or business closed` means nobody could take the parcel, and `Local delivery restriction - Delivery not attempted` means a local restriction kept the driver from trying. When FedEx flags a parcel as delayed, Peek shows "Needs attention", except while the latest scan is `Package received after FedEx cutoff`: FedEx got the parcel after the day's cutoff, and it leaves on the next business day.
 
-`Returning to FedEx facility` isn't a return to the shop yet. It means the recipient refused it, for example as damaged, and FedEx asks the shipper what to do.
+## Missed FedEx delivery and pickup locations
 
-## Missed FedEx delivery, door tags and Delivery Manager
+If you ask FedEx to hold the parcel at a pickup location, a scan can read `Delivery option requested` while it travels there, then `Ready for pickup` once it has arrived. Peek then shows the location's name and address if FedEx gives them: for a hold asked for after the parcel was sent, FedEx's page shows visitors who aren't signed in only the town. FedEx's page may label the last leg `Heading to pickup location`, which Peek counts as out for delivery. You arrange such changes with FedEx, not in Peek. More in [missed deliveries](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
 
-**UK, Ireland and Europe.** If nobody is in, FedEx may leave the parcel in a secure place. Otherwise the driver leaves a Missed Delivery Card with a QR code that opens your options: a later date, a neighbour, a safe place, a pickup point, another address or instructions for the driver, depending on your country and the shipment. After a missed delivery, you need to pick a new date in FedEx Delivery Manager for another attempt. Before the first attempt, use "Manage delivery" on the tracking page or the link in FedEx's email.
+## FedEx parcel held at customs
 
-You can make changes until 4:00 am on the scheduled delivery day, after two-step authentication. The new date must fall within 5 business days of the original one; a parcel held longer may cost storage fees. High-value parcels, those needing a direct or adult signature and those whose sender doesn't allow it may not qualify. Redirecting can cost extra and never crosses a border.
+A parcel from outside the UK, or from outside the EU for Ireland, may owe import charges. The tracking shows `Clearance in progress` or `Clearance delay` while it's at customs, and `International shipment release - Import` once customs lets it go.
 
-In Europe only the sender can switch on Delivery Manager; its SMS or email then lets you change the date or place for free.
+- **UK**: GOV.UK says the courier contacts you with a bill for any VAT, duty or delivery charges, and normally holds the parcel for about 3 weeks. Unpaid, it goes back to the sender.
+- **Ireland**: since 1 July 2026, most parcels worth €150 or less from outside the EU owe €3 customs duty per item. If the shop didn't collect it at checkout, Revenue says the courier will ask you for it before delivering, and couriers charge their own administration fee on top.
 
-**United States.** A missed delivery leaves a door tag. If it was the first attempt, sign the tag and leave it on the door to authorise a next-business-day delivery; if the driver ticked "Final delivery attempt", the parcel is at a FedEx location. To pick it up, bring the door tag or tracking number and government-issued photo ID. Or redirect it to a FedEx location such as FedEx Office or Walgreens.
+More in [parcels held at customs](guide:customs).
 
-FedEx's finder at local.fedex.com lists pickup points and their hours. FedEx doesn't say how long a parcel waits there.
+## FedEx parcel late, lost or marked delivered
 
-## FedEx parcel delayed, held at customs or lost
+If the tracking has stopped moving, see [tracking that isn't updating](guide:tracking-not-updating).
 
-**No movement.** For `Delivery exception` and `Running late`, FedEx says there's nothing you need to do. If it drags on, "Ask FedEx" offers "Report a delayed delivery".
+If you live in Great Britain or Ireland and bought from a shop, the shop is responsible for getting the parcel to you, even when FedEx carries it:
 
-**Customs.** When paperwork or information is missing, FedEx contacts you or the shipper; reply to its email with the documents. Duties and taxes fall on the recipient unless the shipper chose to pay them. FedEx may pay them for you and add a disbursement fee, listed on its rates page for each country. The bill can come after delivery, or the parcel may be held until you pay. Pay on FedEx's payment portal or with the unique link in its email or SMS. See [parcels held at customs](guide:customs).
+- **England, Scotland and Wales**: Citizens Advice says the seller should chase the courier, not you. If the item hasn't arrived within 30 days of buying it, you can cancel and ask for your money back. If it was left somewhere you didn't agree to and went missing, the seller has to sort it out.
+- **Ireland**: the CCPC says that without an agreed date, the order must arrive within 30 days of purchase. If it doesn't, arrange a new delivery date with the business; if that passes too, you're entitled to a full refund. A parcel damaged or lost in transit should be replaced, and the business stays responsible until you, or someone you nominate, have the parcel in hand.
 
-**Delivered but not there?** Check with neighbours, look at the proof of delivery on the tracking page, then choose "Manage delivery" and report the parcel missing. More in [delivered but not received](guide:delivered-not-received).
-
-**Damage or loss.** FedEx's Conditions of Carriage set 21 days after delivery for damage, delay or missing contents, and nine months after FedEx took the parcel for loss or non-delivery. The shop or sender holds the contract with FedEx, so tell them first. Keep the contents, box and packaging: FedEx may want to inspect them.
-
-## How to contact FedEx customer service
-
-FedEx's contact pages, read on 13 October 2026:
-
-- **UK, Ireland, Germany, Austria, Switzerland, Belgium, Portugal and Poland**: "Ask FedEx" on the customer support page, with guest access for private users, answers and a way to speak to a person. These pages show no phone number. Claims and complaints go through FedEx's contact form.
-- **United States and Canada**: 1.800.GoFedEx (1.800.463.3339).
-
-> FedEx says a delivery notification never asks for payment, bank details or passport numbers, and that a real Delivery Manager link shows the full fedex.com domain. A duty bill can come by email or SMS, though: check it on fedex.com first. FedEx's US site also warns about texts linking to .shop addresses; forward suspicious messages to abuse@fedex.com.
+Marked `Delivered` but not there? FedEx's delivery scan names who signed, which Peek doesn't keep. Check the tracking on fedex.com, then contact the shop. More in [delivered but not received](guide:delivered-not-received) and [lost parcels](guide:lost-parcel).
 
 ## Tracking FedEx parcels with Peek
 
@@ -82,7 +70,7 @@ FedEx's contact pages, read on 13 October 2026:
 
 Peek opens fedex.com's tracking page in a browser on its own server. When FedEx refuses, or asks for recipient verification, tracking services fill in.
 
-It shows the status, each scan with its place and exact time on a map, the expected delivery day, the delivered time and, while the parcel waits, the FedEx location's name and address. It checks every 10 minutes by day, every 5 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you at every scan, at important steps or on delivery day only. It drops your name and address, the shipper, the signature, weight and dimensions. Scans show in FedEx's English, except the delivered one: FedEx's line names who signed, so Peek shows "Delivered".
+It shows the status, each scan with its place and exact time on a map, the expected delivery day, the delivered time and, while the parcel waits, the FedEx location's name and address when FedEx gives them. It checks every 10 minutes by day, every 5 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you at every scan, at important steps or on delivery day only. It drops your name and address, the shipper, the signature, weight and dimensions. Scans show in FedEx's English, except the delivered one: FedEx's line names who signed, so Peek shows "Delivered".
 
 Most Ground Economy parcels are delivered by FedEx itself. When FedEx says the [US Postal Service](carrier:usps) has one, Peek follows it there ("Delivery with USPS").
 
@@ -92,38 +80,21 @@ Most Ground Economy parcels are delivered by FedEx itself. When FedEx says the [
 
 No. A number starting `1Z` is a [UPS](carrier:ups) number. FedEx's are digits only.
 
-### Why does FedEx tracking show no delivery date?
+### Why does my FedEx tracking only say Shipment information sent to FedEx?
 
-FedEx shows an estimated date and time once its courier has the parcel, so `Label created` alone often has none. If a date disappears later, FedEx is updating it.
+That first scan only means the sender has sent FedEx the shipment's details. The tracking moves on once FedEx has the parcel: `Picked up` or `Tendered at FedEx location`. If it was handed in after the day's cutoff, the scan reads `Package received after FedEx cutoff` and the parcel leaves on the next business day.
 
-### Can I get proof of delivery for a FedEx parcel?
+### Is a FedEx delivery text a scam?
 
-Yes, from the tracking page, without an account. FedEx Express keeps signed proof for up to 18 months; without a signature, a home delivery shows a photo instead.
+It can be. Citizens Advice says a message asking you to pay to get a parcel or to reschedule its delivery is usually a scam, and delivery companies won't ask you to pay through a link in a text or email. Don't tap the link: check the tracking number on fedex.com or in Peek instead. In the UK, forward the text to 7726 for free. In the US, the FTC says to contact the shipping company through a website or phone number you know is real. More in [delivery scam texts](guide:delivery-scam-texts).
 
 :::sources
-- [FedEx UK: What does my tracking status mean?](https://www.fedex.com/en-gb/customer-support/faq/receiving/tracking-questions/fedex-tracking-status-meaning.html) – status names and meanings, local languages
-- [FedEx UK: What does the status 'Exception' mean?](https://www.fedex.com/en-gb/customer-support/faq/sending/tracking-questions/what-is-a-fedex-delivery-exception.html) – exception causes
-- [FedEx: Track a package](https://www.fedex.com/fedextrack/) – DELIVERED headline, Report missing package
-- [FedEx UK: Customer Support](https://www.fedex.com/en-gb/customer-support.html) – 12 digits on the label, Ask FedEx, no phone
-- [FedEx UK: How can I track my parcel without a tracking number?](https://www.fedex.com/en-gb/customer-support/faq/receiving/tracking-questions/how-to-track-a-package-without-a-tracking-number.html) – 12 or 13 digits, email or SMS, track by reference
-- [FedEx UK: Where is my package?](https://www.fedex.com/en-gb/customer-support/faq/receiving/tracking-questions/where-is-my-package.html) – tracking page, app
-- [FedEx UK: When will my package arrive?](https://www.fedex.com/en-gb/customer-support/faq/sending/tracking-questions/when-will-my-fedex-package-arrive.html) – estimated date, disappearing estimate
-- [FedEx UK: What happens when no one is at my home or office?](https://www.fedex.com/en-gb/customer-support/faq/receiving/delivery-options-fedex/fedex-not-home.html) – Missed Delivery Card, options, restrictions
-- [FedEx UK: How can I reschedule a delivery?](https://www.fedex.com/en-gb/customer-support/faq/receiving/delivery-options-fedex/reschedule-fedex-delivery.html) – Manage delivery, 4:00 am, 5 business days, storage fees
-- [FedEx UK: Can I change the delivery address of my package?](https://www.fedex.com/en-gb/customer-support/faq/receiving/delivery-options-fedex/change-fedex-delivery-address.html) – redirecting, fees, no other country
-- [FedEx UK: FedEx Delivery Manager](https://www.fedex.com/en-gb/shipping-tools/deliverymanager.html) – sender enables it, free changes, scam warning
-- [FedEx UK: Where can I find the nearest FedEx location?](https://www.fedex.com/en-gb/customer-support/faq/sending/pickups/nearest-drop-off.html) – location finder, opening hours
-- [FedEx UK: Can I get a proof of delivery?](https://www.fedex.com/en-gb/customer-support/faq/receiving/tracking-questions/fedex-proof-of-delivery.html) – 18 months, photo, no account
-- [FedEx UK: What happens if my package was delivered to the wrong location?](https://www.fedex.com/en-gb/customer-support/faq/receiving/delivery-options-fedex/wrong-address.html) – neighbours, report missing
-- [FedEx UK: Why is my package stuck at customs?](https://www.fedex.com/en-gb/customer-support/faq/receiving/tracking-questions/why-is-my-package-stuck-at-customs.html) – customs holds, documents
-- [FedEx UK: Who pays duties and taxes?](https://www.fedex.com/en-gb/customer-support/faq/duties-taxes-imported-goods/paying-duties-taxes/who-pays-custom-duties-taxes.html) – recipient pays by default
-- [FedEx UK: Why didn't FedEx advise me of duties and taxes at the time of delivery?](https://www.fedex.com/en-gb/customer-support/faq/duties-taxes-imported-goods/problems-with-customs/fedex-advise-duties-taxes-delivery.html) – bill after delivery
-- [FedEx UK: Customs duties and taxes guide](https://www.fedex.com/en-gb/billing/duty-tax.html) – disbursement fee, held until payment
-- [FedEx UK: How can I pay the duties and taxes?](https://www.fedex.com/en-gb/customer-support/faq/duties-taxes-imported-goods/paying-duties-taxes/how-to-pay-duties-taxes.html) – payment portal, unique link
-- [FedEx UK: Conditions of Carriage, January 2026](https://www.fedex.com/en-gb/conditions-of-carriage.html) – neighbour, safe place, claim deadlines, inspection
-- [FedEx UK: Where can I make a complaint?](https://www.fedex.com/en-gb/customer-support/faq/complaints-and-refunds/fedex-complaint.html) – contact form
-- [FedEx US: I got a FedEx door tag, now what?](https://www.fedex.com/en-us/delivery-manager/door-tag.html) – door tag, redelivery, pickup with ID, redirecting
-- [FedEx US: Contact Us](https://www.fedex.com/en-us/customer-support/contact-us.html) – 1.800.463.3339
-- [FedEx US: How to Recognize and Help Prevent Fraud and Scams](https://www.fedex.com/en-us/trust-center/report-fraud.html) – .shop warning, duty links, abuse@fedex.com
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from FedEx
+- [Citizens Advice: If something you ordered hasn't arrived](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – seller's responsibility, 30 days, agreed place, scam messages (same advice for England, Scotland and Wales)
+- [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – the courier's bill, about 3 weeks, return to sender
+- [GOV.UK: Report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – forward scam texts to 7726
+- [CCPC: Your consumer rights if your order is not delivered](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – 30 days, new date, refund, responsible until you have it (Ireland)
+- [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 per item since 1 July 2026, paid to the courier before delivery
+- [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – couriers' administration fee
+- [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – contact the shipping company through a website or number you know
+- [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – number shapes, check digits, FedEx's scan wordings, what Peek reads from FedEx
 :::

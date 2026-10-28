@@ -1,37 +1,33 @@
 ---
 title: FedEx Poland tracking: 13-digit numbers and statuses
-description: Track a FedEx Poland domestic parcel: the 13-digit number, what Polish statuses like Przesyłka awizowana mean, pickup points, missed deliveries and contacts.
+description: Track a FedEx Poland domestic parcel: the 13-digit number, what Polish statuses like Przesyłka awizowana mean, and how to complain about a lost or damaged parcel.
 slug: fedex-poland-tracking
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
-FedEx Poland is FedEx's domestic courier service inside Poland: parcels sent from one Polish address to another under 13-digit numbers, which FedEx calls FDS 2.0 shipments. The network comes from Opek, a Polish courier founded in 1994 that FedEx agreed to buy in 2012. Track the number on FedEx's [domestic tracking page](https://www.fedex.com/pl-pl/online/domestic-tracking.html) or in the box above.
+FedEx Poland is FedEx's domestic courier network inside Poland. Its parcels have 13-digit numbers and a tracker of their own: track the number on FedEx's domestic tracking page (on fedex.com) or in the box above.
 
 ## FedEx Poland tracking number: 13 digits
 
-The number is in the shop's shipping email or order page, in FedEx's text or email, and on the label. FedEx's Polish customer support splits its parcels in two: "12-digit FedEx Express shipments, international and domestic" and "13-digit FedEx domestic shipments (FDS 2.0)". This page is about the second kind.
+The number is in the shop's shipping email or on your order page. A FedEx Poland number has 13 digits, starts with 6 and ends in a check digit. FedEx's domestic tracking page takes only 13-digit numbers, and FedEx's worldwide tracking page doesn't take them at all.
 
 | Shape (invented) | What it is |
 | --- | --- |
 | `6123456789016` | 13 digits starting with 6: a FedEx Poland domestic parcel. |
-| `123456789012` | 12 digits: [FedEx](carrier:fedex) Express, for international parcels and FedEx's express services inside Poland. |
+| `123456789012` | 12 digits: a number for FedEx's worldwide tracking page, not FedEx Poland. See the [FedEx](carrier:fedex) page. |
 
-A parcel from abroad, or going abroad, is a FedEx Express international shipment, not FedEx Poland: track it on fedex.com's main page, which has its own statuses, customs steps and Delivery Manager. See the [FedEx](carrier:fedex) page.
-
-FedEx's domestic tracking page takes up to 30 numbers at once, 13 digits each. `Numer nie został rozpoznany. Sprawdź, czy został poprawnie wpisany lub skontaktuj się z nadawcą.` means FedEx doesn't know the number: check it, or ask the sender. `Numer nie został rozpoznany. Skontaktuj się z Biurem Obsługi Klienta.` sends you to FedEx's customer service.
-
-No number? The page's "Track by reference" also needs the payer's 9-digit FedEx account number (EAN), which only the sender has, so ask the shop. More in [where to find a tracking number](guide:find-tracking-number).
+No number? Ask the shop. More in [where to find a tracking number](guide:find-tracking-number).
 
 ## What FedEx Poland statuses mean
 
-FedEx writes its domestic scans in Polish, each with its branch. Above them, a one-line status sums up the parcel: `W ODDZIALE FEDEX` (at a FedEx branch), `WYDANA DO DORĘCZENIA` (out for delivery) or `DORĘCZONA` (delivered). The scans, in order:
+FedEx writes its domestic scans in Polish, each with its branch. Next to the number, FedEx's tracking page sums up the parcel in a one-line status: `W ODDZIALE FEDEX` (at a FedEx branch), `WYDANA DO DORĘCZENIA` (out for delivery) or `DORĘCZONA` (delivered). The scans, in order:
 
 | FedEx says | What it means for you |
 | --- | --- |
 | `Przesyłka przygotowana przez nadawcę do odbioru przez kuriera FedEx.` | The sender has made the label and is waiting for a FedEx courier. FedEx doesn't have it yet. |
 | `Kurier odebrał przesyłkę od nadawcy.` | A FedEx courier picked it up from the sender. |
-| `Przesyłka w oddziale FedEx.` | It's at a FedEx branch. It can repeat, once per branch. |
+| `Przesyłka w oddziale FedEx.` | It's at a FedEx branch. Every branch scan reads the same, so it can repeat. |
 | `Przesyłka wydana do doręczenia kurierowi FedEx.` | It's with your courier for delivery today. |
 | `Dyspozycja zmiany terminu doręczenia` | A request to change the delivery date. The parcel didn't move. |
 | `Nieudana próba doręczenia. Przesyłka awizowana.` | The courier missed you and left a notice. |
@@ -40,48 +36,23 @@ FedEx writes its domestic scans in Polish, each with its branch. Above them, a o
 | `Kurier doręczył przesyłkę do odbiorcy.` | Delivered. `Przesyłka doręczona do odbiorcy.` says the same. |
 | `Zwrot przesyłki do nadawcy.` | It's going back to the sender. |
 
-On delivery day, FedEx may add a planned slot under the out-for-delivery scan: `Planowane doręczenie w przedziale godzinowym` and two times, the window when the courier expects to reach you. The general stages are explained in [tracking statuses](guide:tracking-statuses).
-
-## FedEx Poland delivery, notices and pickup points
-
-**When.** FedEx's domestic terms promise delivery on the next working day after it takes the parcel, unless the sender's contract or price list says otherwise. The sender picks the service: FedEx Next Day Morning (by 9:00 or 10:00), Next Day Noon (by 12:00), Next Day Standard, or Direct2Retail, straight to a FedEx point. Which ones you can get depends on the postcodes.
-
-**Messages.** Texts and emails come only if the sender gave FedEx your number or address and ticked them. A call from the courier before delivery ("Telefon od kuriera") is an option the sender adds too.
-
-**Attempts.** FedEx makes at most two delivery attempts at a home address and three at others. If you're out, it may leave the parcel at a FedEx partner point, or leave a notice (awizo) naming the branch and the deadline. You then collect it at that branch within five working days, counted from the day after the last attempt.
-
-**Who can sign.** The courier hands it to you or someone you've authorised, a household member included, and may check ID. A safe place or a neighbour needs the sender's instruction and your agreement. For cash on delivery (pobranie), you pay the courier in one of the ways FedEx accepts. Open the parcel only after signing for it.
-
-**Changes.** FedEx's rules allow a safe place, a later date (up to two days later), a nearby address served by the same branch, or a FedEx point. Use the link in FedEx's text or email, call, or use "Zaktualizuj adres doręczenia" in Ask FedEx. The sender can rule out a redirection. More on [missed deliveries](guide:missed-delivery).
-
-**Points.** FedEx's locator on [local.fedex.com](https://local.fedex.com/pl-pl) lists about 11,000 locations in Poland: Żabka shops since January 2026, plus Kolporter, Epaka, Furgonetka and some Delikatesy Centrum, ABC, Groszek, Duży Ben, Stokrotka Express and Shell shops. Points take parcels up to 20 kg and 50 × 40 × 30 cm. You collect with the code FedEx sends by text or email, without signing. A Direct2Retail parcel waits 4 working days, with reminders, then goes back to the sender. See [uncollected parcels](guide:uncollected-parcel).
+On delivery day, FedEx may add a planned slot under the out-for-delivery scan: `Planowane doręczenie w przedziale godzinowym` and two times, the window when the courier expects to reach you. The general stages are explained in [tracking statuses](guide:tracking-statuses), and what to do after a notice in [missed deliveries](guide:missed-delivery).
 
 ## FedEx Poland parcel not updating, lost, damaged or returned
 
 **Only the label scan.** The sender has a label but FedEx doesn't have the parcel. Ask the shop when it will hand it over.
 
-**No movement for days.** Ask FedEx has "Zgłoś opóźnione doręczenie" (report a delayed delivery) under the 13-digit tab. See [why tracking stops updating](guide:tracking-not-updating).
+**No movement for days.** Ask the shop that sent it, and see [why tracking stops updating](guide:tracking-not-updating).
 
-**Lost.** FedEx's terms count a courier parcel as lost when it can't be delivered within 30 days of posting.
+**Bought online?** Until you receive the parcel, the shop is responsible if it's lost or damaged, as long as the shop chose FedEx or offered it among its delivery options. If FedEx damages it, you complain to the shop, which should then claim from FedEx. For a lost parcel, only the sender can complain to FedEx itself, unless the sender hands the right to claim over to you.
 
-**Damaged.** Write a damage report (protokół szkody) on FedEx's form with the courier at delivery, or send it online. Hidden damage must be reported within 7 days of delivery. Photos of the box and contents can back a complaint. More in [damaged parcels](guide:damaged-parcel).
+**Damaged.** If the damage shows on the outside, you can refuse the parcel, or accept it and open it in front of the courier to write a damage report (protokół szkody), which then backs your complaint. Damage you couldn't see from outside must be reported to FedEx within 7 days of receiving the parcel. More in [damaged parcels](guide:damaged-parcel).
 
-**Refused or returned.** When you refuse a parcel, FedEx asks the sender what to do; without an answer, it goes back at the sender's cost, shown as `Zwrot przesyłki do nadawcy.`. See [returned to sender](guide:returned-to-sender).
+**Refused or returned.** After a refused delivery, `Zwrot przesyłki do nadawcy.` shows the parcel going back to the sender. See [returned to sender](guide:returned-to-sender).
 
-**Delivered but not there.** Ask your household and neighbours, and check whether it went to a point. FedEx's proof of delivery is the signature or a photo of the parcel where it was left; the PDF on the tracking page needs the payer's account number, so ask the sender. More in [delivered but not received](guide:delivered-not-received).
+**Delivered but not there.** Ask the people you live with. FedEx's proof of delivery needs the payer's account number, so ask the sender for the proof. More in [delivered but not received](guide:delivered-not-received).
 
-**Complaints.** File one on FedEx's [domestic complaint form](https://mydelivery.emea.fedex.com/cmplweb/) with the 13-digit number, or in writing or orally. The recipient can complain as well as the sender. FedEx answers within 30 days. If you disagree, the terms point to mediation by Poland's telecoms and post regulator, UKE.
-
-## How to contact FedEx Poland
-
-As read on 22 October 2026:
-
-- **Phone:** 801 420 420 for calls within Poland, +48 22 576 31 93 for calls from abroad, at your operator's rates. These are the numbers in FedEx's domestic terms, which give no hours.
-- **Email:** polska@fedex.com for domestic services.
-- **Ask FedEx:** FedEx's Polish customer support page, with a tab for 13-digit domestic parcels, guest access, a chat with an agent and callback requests.
-- **Post:** FedEx Express Poland sp. z o.o., ul. Annopol 19, 03-236 Warszawa.
-
-> FedEx says its delivery notifications never ask for payment, bank details or passport numbers to release a parcel, and their link uses the full fedex.com domain. Don't open a message that asks for those. See [delivery scam texts](guide:delivery-scam-texts).
+**Complaints.** In Poland, courier parcels fall under postal law, overseen by UKE, the postal regulator. You can complain to FedEx in writing, electronically (for example through a form on the operator's website) or orally, within 12 months of posting. The sender can complain, and so can the recipient once the parcel is delivered or the sender hands over the right. FedEx has 30 days to answer; no answer in time means the complaint is accepted. You can appeal a refusal within 14 days. If you're still not satisfied, ask the President of UKE to intervene, use UKE's free out-of-court dispute resolution (ADR), or go to court.
 
 ## Track a FedEx Poland parcel with Peek
 
@@ -93,36 +64,24 @@ Peek reads FedEx's domestic tracking service directly. It shows the status, each
 
 ## Questions about FedEx Poland tracking
 
-### Is FedEx Poland the same as Opek?
-
-Opek was a Polish courier, founded in 1994, that FedEx agreed to buy in 2012 for its nationwide domestic network. Today FedEx runs domestic parcels in Poland under its own name, tracked on FedEx's domestic tracking page.
-
 ### Why does my FedEx number have 13 digits?
 
-Because it's a FedEx domestic parcel inside Poland (FDS 2.0). FedEx Express numbers, international or domestic, have 12 digits and are tracked on fedex.com's main page.
+Because it's a FedEx Poland domestic parcel. FedEx's worldwide tracking page doesn't take 13 digits; other FedEx numbers, such as 12-digit ones, are tracked there.
 
-### How long does FedEx Poland keep a parcel after a missed delivery?
+### Why doesn't FedEx's tracking page recognise my number?
 
-Five working days at the branch named on the notice, from the day after the last attempt. A Direct2Retail parcel waits 4 working days at its point.
+The page reports a number it doesn't know as not recognised, so check the 13 digits or ask the sender. A parcel delivered long ago can get the same answer, because the tracker drops old histories. Another version of the message sends you to FedEx's customer service instead: then the number may exist, but the page won't show it.
 
-### Can I collect a FedEx parcel at Żabka?
+### Is a text asking me to pay for a FedEx delivery real?
 
-Yes, when FedEx sends it to a point: since January 2026 Żabka shops have been FedEx points for domestic parcels up to 20 kg. You collect it with the code from FedEx's text or email.
+It may be a scam. CERT Polska (CSIRT NASK) warns of texts that pose as courier companies: they claim a delivery problem and link to a fake site that asks for an extra payment for redelivery, to steal card details. Don't use the link: type the number into the box above yourself and, if in doubt, contact FedEx through a phone number or email address from its official website, not from the text. Forward the whole text to 8080, free of charge. If your card details are already on a fake site, contact your bank at once. See [delivery scam texts](guide:delivery-scam-texts).
 
 :::sources
-- [FedEx Polska: Monitoruj przesyłkę krajową](https://fds2tracking.emea.fedex.com/) – 13-digit numbers, 30 at once, reference search, proof of delivery, messages
-- [FedEx Polska: Domestic Tracking](https://www.fedex.com/pl-pl/online/domestic-tracking.html) – domestic tracking page, complaints link
-- [FedEx Polska: Witamy w Biurze Obsługi Klienta FedEx](https://www.fedex.com/pl-pl/customer-support/call-us.html) – 12- and 13-digit parcels, Ask FedEx options, guest access, chat and callback
-- [FedEx Polska: Warunki Przewozu dla Usług Krajowych](https://www.fedex.com/pl-pl/conditions-of-carriage-domestic.html) – company, phone, email, points, attempts, notice, pickup deadline, refusal, loss, damage, complaints, UKE, delivery time, proof of delivery
-- [FedEx Polska: Wysyłka FDS 2.0](https://www.fedex.com/pl-pl/campaign/domestic-fds.html) – domestic services, Direct2Retail, postcodes
-- [FedEx Polska: Wysyłka krajowa](https://www.fedex.com/pl-pl/shipping/domestic.html) – FedEx Express domestic services
-- [FedEx Polska: FedEx Direct2Retail](https://www.fedex.com/content/dam/fedex/eu-europe/downloads/PL_PL_Direct_2_Retail_marketing.pdf) – 4 working days at the point, reminders, return
-- [FedEx Polska: Instrukcja użytkownika FDS 2.0](https://www.fedex.com/content/dam/fedex/eu-europe/downloads/PL_PL_master_pdf_NA_FDS_2.0.pdf) – texts, emails and courier call as sender options
-- [FedEx Polska: Regulamin Systemu Alternatywnych Doręczeń dla Doręczeń Krajowych](https://www.fedex.com/content/dam/fedex/eu-europe/resources/PL_PL_2020_4_web_pdf_na_FDMi_Terms_and_Conditions_marketing.pdf) – delivery changes
-- [FedEx Polska: FedEx Delivery Manager](https://www.fedex.com/pl-pl/shipping-tools/deliverymanager.html) – genuine notifications and links
-- [FedEx Polska: Formularz zgłoszenia reklamacji](https://mydelivery.emea.fedex.com/cmplweb/) – domestic complaint form
-- [FedEx: Placówki FedEx – Polska](https://local.fedex.com/pl-pl) – number of locations, points, 20 kg limit
-- [FedEx Newsroom: FedEx and Zabka Offers Convenient Package Drop-off and Pickup Solutions](https://newsroom.fedex.com/newsroom/europe-english/fedex-and-zabka-offers-convenient-package-drop-off-and-pickup-solutions) – Żabka since January 2026, other chains, limits
-- [FedEx Newsroom: FedEx to Acquire Polish Shipping Company Opek Sp.z o.o.](https://newsroom.fedex.com/newsroom/europe-english/fedex-to-acquire-polish-shipping-company-opek-sp-z-o-o) – Opek, 1994, 2012
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – FedEx Poland's statuses and what Peek shows
+- [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – 13-digit numbers and check digit, the domestic tracker and its answers, statuses, proof of delivery, what Peek shows
+- [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – 12-digit numbers on FedEx's worldwide tracking
+- [UKE: Odbieram paczkę – jakie mam prawa?](https://uke.gov.pl/blog/odbieram-paczke-jakie-mam-prawa,8.html) – courier parcels, refusing or opening a damaged parcel, damage report, 7 days, who can complain, 12 months, UKE
+- [UKE: Co zrobić, gdy zaginie przesyłka pocztowa?](https://uke.gov.pl/blog/co-zrobic-gdy-zaginie-przesylka-pocztowa-nasz-poradnik,129.html) – courier services, UKE as postal regulator, who can complain about a loss, 30 days, intervention and ADR
+- [UKE, Centrum Informacji Konsumenckiej: Reklamacje](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – ways to complain, who can complain, 12 months, 30 days, appeal, UKE intervention, ADR
+- [UOKiK: Odpowiedzialność za przesyłkę](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/odpowiedzialnosc-sprzedawcy-za-przesylke/) – the shop is responsible until you receive the parcel, complaints through the shop
+- [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fake delivery texts, extra payment, 8080, bank
 :::

@@ -14,6 +14,12 @@ internal class MemoryDefaults(val values: MutableMap<String, Any> = mutableMapOf
         values[forKey] = value
     }
 
+    override fun string(forKey: String): String? = values[forKey] as? String
+
+    override fun set(value: String, forKey: String) {
+        values[forKey] = value
+    }
+
     override fun removeObject(forKey: String) {
         values.remove(forKey)
     }

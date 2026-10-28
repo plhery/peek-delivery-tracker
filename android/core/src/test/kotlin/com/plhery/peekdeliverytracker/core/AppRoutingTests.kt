@@ -2,6 +2,8 @@ package com.plhery.peekdeliverytracker.core
 
 import java.time.Instant
 import java.util.UUID
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -49,6 +51,37 @@ class AppRoutingTests {
     private fun queryValues(components: UrlComponents): Map<String, String?> {
         val items = components.queryItems ?: emptyList()
         return items.associate { it.name to it.value }.also { check(it.size == items.size) { "repeated query item" } }
+    }
+
+    /**
+     * `SessionStore(defaults:)` on `AppConfiguration.current`: a build without settings stands in for it, as neither
+     * test signs in or reaches the auth service.
+     */
+    private fun sessionStore(defaults: UserDefaults, scope: CoroutineScope) =
+        testSessionStore(AppConfiguration.from { null }, scope, defaults = defaults)
+
+    @Test
+    fun leavingDemoReturnsToTheUnopenedWelcome() = runTest {
+        val preference = "sdt.native.experience.v1"
+        val defaults = MemoryDefaults()
+        val session = sessionStore(defaults, backgroundScope)
+        session.enterDemo()
+        session.showWelcome()
+
+        assertEquals("Expected the unopened welcome", AuthenticationState.Welcome, session.state)
+        assertNull(defaults.values[preference])
+    }
+
+    @Test
+    fun signingOutRestartsTheWelcomeForTheNextVisit() = runTest {
+        val preference = "sdt.native.experience.v1"
+        val defaults = MemoryDefaults()
+        val session = sessionStore(defaults, backgroundScope)
+        session.showSignIn()
+        session.signOut()
+
+        assertEquals("Expected the unopened welcome", AuthenticationState.Welcome, session.state)
+        assertNull(defaults.values[preference])
     }
 
     @Test

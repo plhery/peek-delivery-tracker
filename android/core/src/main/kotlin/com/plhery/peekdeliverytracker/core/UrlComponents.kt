@@ -494,6 +494,60 @@ internal fun String.appendingPath(component: String): String {
 }
 
 /**
+ * `URL(string: reference, relativeTo: URL(string: self))?.absoluteURL` for a reference that is a path, from the root
+ * or relative, with or without a query: RFC 3986's resolution, as swift-foundation's URL makes it. The base's scheme
+ * and authority, the reference's path merged with the base's and its dot segments removed, the reference's query;
+ * the base's query and fragment go. A relative path replaces the base's last segment ("https://h/a/b" makes
+ * "https://h/a/<path>"). Nil when the base is no URL.
+ */
+internal fun String.resolving(reference: String): String? {
+    val base = UrlComponents.parse(this) ?: return null
+    val queryStart = reference.indexOf('?').let { if (it < 0) reference.length else it }
+    val path = reference.substring(0, queryStart)
+    val basePath = base.percentEncodedPath
+    val merged = when {
+        path.startsWith("/") -> path
+        base.hasAuthority && basePath.isEmpty() -> "/$path"
+        else -> basePath.substring(0, basePath.lastIndexOf('/') + 1) + path
+    }
+    // A path without a root keeps none once its dot segments go ("mailto:a/../b" makes "mailto:b"), as Foundation's does.
+    base.percentEncodedPath = if (merged.startsWith("/")) removingDotSegments(merged) else removingDotSegments("/$merged").removePrefix("/")
+    base.percentEncodedQuery = if (queryStart < reference.length) reference.substring(queryStart + 1) else null
+    base.percentEncodedFragment = null
+    return base.url
+}
+
+/** RFC 3986's remove_dot_segments. */
+private fun removingDotSegments(path: String): String {
+    var input = path
+    val output = StringBuilder()
+    fun dropLastSegment() = output.setLength(maxOf(output.lastIndexOf("/"), 0))
+    while (input.isNotEmpty()) {
+        when {
+            input.startsWith("../") -> input = input.substring(3)
+            input.startsWith("./") -> input = input.substring(2)
+            input.startsWith("/./") -> input = input.substring(2)
+            input == "/." -> input = "/"
+            input.startsWith("/../") -> {
+                input = input.substring(3)
+                dropLastSegment()
+            }
+            input == "/.." -> {
+                input = "/"
+                dropLastSegment()
+            }
+            input == "." || input == ".." -> input = ""
+            else -> {
+                val end = input.indexOf('/', if (input.startsWith("/")) 1 else 0).let { if (it < 0) input.length else it }
+                output.append(input, 0, end)
+                input = input.substring(end)
+            }
+        }
+    }
+    return output.toString()
+}
+
+/**
  * `URL.appending(queryItems:)` on a URL's string: the items after those it has, which are read and encoded again as
  * `queryItems` does (a value that is not UTF-8 is lost).
  */

@@ -217,6 +217,11 @@ interface UserDefaults {
 
     fun set(value: ByteArray, forKey: String)
 
+    /** The text saved under the key; nil when nothing, or something else, is. */
+    fun string(forKey: String): String?
+
+    fun set(value: String, forKey: String)
+
     fun removeObject(forKey: String)
 }
 

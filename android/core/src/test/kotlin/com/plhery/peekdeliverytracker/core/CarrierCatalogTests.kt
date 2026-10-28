@@ -438,7 +438,7 @@ class CarrierCatalogTests {
 
     @Test
     fun recognitionAsksOnlyAboutASettledAmbiguousNumber() {
-        val number = "12345678901"
+        val number = "12345478901"
         val ambiguous = catalog.parse(number)
         val asked = catalog.recognitionCandidates(number)
         assertEquals(CarrierMatch.Confidence.Low, ambiguous.confidence)
@@ -480,6 +480,21 @@ class CarrierCatalogTests {
     }
 
     @Test
+    fun placeholdersAreReadAsTheSharedEngineReadsThemAndNobodyIsAsked() {
+        for (number in listOf(
+            "123EXAMPLE", "EXAMPLE", "000000", "777777777", "123456789", "9876543210", "1234567899",
+            "RR123456785CH", "JJD000000000000000", "ABC123456",
+        )) {
+            assertTrue(number, CarrierCatalog.isPlaceholderNumber(number))
+        }
+        for (number in listOf("LX123436785DE", "1Z999AA10123456784", "12345", "204617", "01234564890123", "123456ABCD7")) {
+            assertFalse(number, CarrierCatalog.isPlaceholderNumber(number))
+        }
+        assertTrue(CarrierCatalog.isPlaceholderNumber(CarrierCatalog.normalize("123 example")))
+        assertFalse(CarrierRecognition.applies(catalog.parse("123456789"), amazon = false, demo = false))
+    }
+
+    @Test
     fun aRefusalIsAskedOnceForACarrierAndANumberTheServerTakes() = runTest {
         assertNull(NumberRefusals.question(carrier = null, trackingNumber = "SYNTH12345", demo = false))
         assertNull(NumberRefusals.question(carrier = CarrierId.Unknown, trackingNumber = "SYNTH12345", demo = false))
@@ -506,7 +521,7 @@ class CarrierCatalogTests {
 
     @Test
     fun recognitionAsksDirectCandidatesForGenericPostalNumbers() {
-        val number = "RR123456785FI"
+        val number = "RR123436785FI"
         val input = catalog.parse(number)
         assertEquals(CarrierId.InternationalPost, input.carrier)
         assertEquals(CarrierMatch.Confidence.High, input.confidence)
@@ -881,6 +896,23 @@ class CarrierCatalogTests {
     }
 
     @Test
+    fun readsAWaybillAndNoAmazonNumberAfterALabelWord() {
+        for (text in listOf(
+            "Your DHL waybill 1234567890 is ready",
+            "Waybill No. 1234567890 has shipped",
+            "AWB No. 1234567890",
+            "Tracking No. 1234567890",
+            "TRACKING NO. 1234567890",
+            "Your parcel No. 1234567890 has shipped",
+        )) {
+            val parsed = catalog.parse(text)
+            assertEquals(text, "1234567890", parsed.trackingNumber)
+            assertEquals(text, TrackingInputMatch.Source.Text, parsed.source)
+            assertNotEquals(text, "amazon-logistics", parsed.carrier.rawValue)
+        }
+    }
+
+    @Test
     fun leavesALabelWordOutOfAShortEntry() {
         for ((text, number) in listOf(
             "Abholcode 123456" to "123456",
@@ -900,6 +932,12 @@ class CarrierCatalogTests {
             "numero di tracciamento 12345678" to "12345678",
             "n.º de rastreio 12345678" to "12345678",
             "Numer przesyłki 12345678" to "12345678",
+            "Número de rastreo: 12345678" to "12345678",
+            "Número de guía 12345678" to "12345678",
+            "Guía: 12345678" to "12345678",
+            "WAYBILL 1234567890" to "1234567890",
+            "WAYBILL1234567890" to "1234567890",
+            "Tracking1234567890" to "1234567890",
         )) {
             val parsed = catalog.parse(text)
             assertEquals(text, number, parsed.trackingNumber)
@@ -911,7 +949,7 @@ class CarrierCatalogTests {
             assertEquals(text, TrackingInputMatch.Source.None, catalog.parse(text).source)
         }
         // Letters a carrier prints apart from its digits stay on the number.
-        for (text in listOf("QZX 123456", "ABCD 1234567", "LP 00123456789012", "1111 2222 3333 4444", "1Z 999 AA1 01 2345 6784", "abholcode123456")) {
+        for (text in listOf("QZX 123456", "ABCD 1234567", "LP 00123456789012", "1111 2222 3333 4444", "1Z 999 AA1 01 2345 6784", "abholcode123456", "AWB1234567890")) {
             val parsed = catalog.parse(text)
             assertEquals(text, text, parsed.trackingNumber)
             assertEquals(text, TrackingInputMatch.Source.Number, parsed.source)
@@ -1628,19 +1666,19 @@ class CarrierCatalogTests {
     fun anUnknownChecksumOnAHighRuleNeverSelectsTheCarrier() {
         val dynamic = CarrierCatalog(unknownChecksumCatalogData)
         val futureExpress = CarrierId("future-express")
-        assertNull(CarrierCatalog.checksumPasses("future-check", "FX12345678"))
+        assertNull(CarrierCatalog.checksumPasses("future-check", "FX12375678"))
 
         // The shape still suggests the carrier; the user or the carriers confirm it.
         assertEquals(
             CarrierMatch(carrier = CarrierId.Unknown, confidence = CarrierMatch.Confidence.Low, candidates = listOf(futureExpress)),
-            dynamic.detect("FX12345678"),
+            dynamic.detect("FX12375678"),
         )
-        val input = dynamic.parse("FX12345678")
+        val input = dynamic.parse("FX12375678")
         assertEquals(CarrierId.Unknown, input.carrier)
         assertEquals(CarrierMatch.Confidence.Low, input.confidence)
         assertEquals(listOf(futureExpress), input.candidates)
         assertTrue(CarrierRecognition.applies(input, amazon = false, demo = false))
-        assertEquals(listOf(futureExpress), dynamic.recognitionCandidates("FX12345678"))
+        assertEquals(listOf(futureExpress), dynamic.recognitionCandidates("FX12375678"))
 
         // A check this build knows still selects a carrier and rejects a mistyped number.
         assertEquals(true, CarrierCatalog.checksumPasses("s10", "RA123456785CH"))

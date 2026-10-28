@@ -557,13 +557,15 @@ class CarrierCatalog private constructor(
             return makeMatch(recognized, if (input == recognized) TrackingInputMatch.Source.Number else TrackingInputMatch.Source.Text)
         }
 
+        // An entry that holds its number whole comes before a label in prose, as in the scraper: "AWB1234567890"
+        // stays whole.
+        numberEnteredWhole(input)?.let { whole ->
+            return makeMatch(whole.number, if (whole.labelled) TrackingInputMatch.Source.Text else TrackingInputMatch.Source.Number)
+        }
         capture(prose, labelledNumberPattern, caseInsensitive = true)?.let { labelled ->
             // A sentence can end right after its number.
             val keyword = foundationReplacing(labelled, "[.-]+$", "")
             if (validInText(keyword)) return makeMatch(keyword, TrackingInputMatch.Source.Text)
-        }
-        numberEnteredWhole(input)?.let { whole ->
-            return makeMatch(whole.number, if (whole.labelled) TrackingInputMatch.Source.Text else TrackingInputMatch.Source.Number)
         }
         return emptyMatch
     }
@@ -574,7 +576,7 @@ class CarrierCatalog private constructor(
      * The number a short entry holds whole, groups a label prints apart included, as in
      * "1Z 999 AA1 01 2345 6784", as the shared engine reads it (`numberEnteredWhole`). A word offering a
      * second number leaves it unread, and a label word before the digits is no part of it, unless a carrier
-     * confidently claims the two together.
+     * confidently claims the two together. Nor is any other word: a sentence holds no number whole.
      */
     private fun numberEnteredWhole(input: String): WholeNumber? {
         if (input.contains("://")) return null
@@ -587,11 +589,12 @@ class CarrierCatalog private constructor(
             }
         }
         if (alternatives.count { matches(it, "[0-9]") } > 1) return null
+        val claimed = detect(input).confidence == CarrierMatch.Confidence.High
         val number = capture(input, entryLabelPattern, caseInsensitive = true)
-        if (number != null && detect(input).confidence != CarrierMatch.Confidence.High && valid(number)) {
+        if (number != null && !claimed && valid(number) && !holdsWord(number)) {
             return WholeNumber(number, true)
         }
-        return if (valid(input)) WholeNumber(input, false) else null
+        return if (valid(input) && (claimed || !holdsWord(input))) WholeNumber(input, false) else null
     }
 
     /**
@@ -833,6 +836,9 @@ class CarrierCatalog private constructor(
     /** Swift's `(shop:, pattern:)`. */
     data class OrderNumber(val shop: OrderShop, val pattern: String)
 
+    /** Swift's `(shop:, pattern:)` for an order number as a lookup stores it. */
+    data class StoredOrderNumber(val shop: String, val pattern: String)
+
     /** Swift's `(pattern:, caseInsensitive:)`. */
     data class CandidatePattern(val pattern: String, val caseInsensitive: Boolean)
 
@@ -841,12 +847,16 @@ class CarrierCatalog private constructor(
     @Serializable
     private class ReadingRules(
         val shops: List<Shop>,
+        val storedOrders: List<StoredOrder>,
         val numberWords: String,
         val lookalikes: Lookalikes,
         val candidates: List<Shape>,
     ) {
         @Serializable
         class Shop(val shop: OrderShop, val pattern: String)
+
+        @Serializable
+        class StoredOrder(val shop: String, val pattern: String)
 
         @Serializable
         class Shape(val source: String, val flags: String)
@@ -963,13 +973,20 @@ class CarrierCatalog private constructor(
          * entry. German and Dutch join theirs into one word: Abholcode, Sendungsnummer. French, Spanish,
          * Italian and Portuguese name what the number tracks after a preposition ("N° de suivi", "número de
          * seguimiento", "numero di tracciamento"), Polish after the word ("numer przesyłki"), and the tracking
-         * word can stand alone ("Suivi"). "N°" can touch its digits. */
+         * word can stand alone ("Suivi"), as can a courier's word for its waybill ("AWB", "Guía"). An abbreviated
+         * "No." can follow the label ("AWB No."). "N°", "Waybill" and "Tracking" can touch their digits; no
+         * carrier's number starts with those words. */
         private val entryLabelPattern: String = run {
-            val tracked = "suivi|seguimiento|tracciamento|rastreio|rastreamento|tracking"
+            val tracked = "suivi|seguimiento|rastreo|tracciamento|rastreio|rastreamento|tracking|waybill|awb|guía|guia"
             "^(?:\\p{L}+\\s+)?(?:(?:\\p{L}*(?:code|nummer)|number|numer|numero|número|numéro|nr|n\\.?[°º]|kod|codice|codigo|código)" +
                 "(?:\\s+(?:(?:de|du|del|di|do|da)\\s+(?:$tracked|colis|envío|envio|spedizione)|przesyłki|paczki))?|$tracked)" +
-                "(?:[.:#\\s]+|(?<=[°º]))(?=[0-9])([\\s\\S]*)"
+                "(?:\\s+(?:no|nr)\\.)?(?:[.:#\\s]+|(?<=[°º]|waybill|tracking))(?=[0-9])([\\s\\S]*)"
         }
+
+        /** A word among the groups of an entry. The letters a number prints apart are fewer, "RR 123 456 789 FR",
+         * and GLS's lettered Track IDs stand alone. */
+        private fun holdsWord(entry: String): Boolean =
+            matches(entry, "\\s") && matches(entry, "(?:^|\\s)\\p{L}{5,}(?=\\s|$)")
 
         /** The characters a link pasted in prose can carry around it. */
         private val linkPunctuation = "<>'\"()[],;.!?".map { it.code }.toSet()
@@ -1004,6 +1021,21 @@ class CarrierCatalog private constructor(
          * number. */
         fun isPickupCode(normalized: String): Boolean = matches(normalized, "^[0-9]{6}$")
 
+        /** A placeholder rather than a number a carrier issued, normalized, as the shared engine reads it
+         * (`isPlaceholderNumber`): apart from a letter prefix and suffix, six or more digits that repeat one digit
+         * or run straight up or down, or a run of nine or more with one digit after it, as a check digit would be.
+         * An S10 item is read by its serial without the check digit. So is the word EXAMPLE with digits around it,
+         * such as the first screen's demo parcel. Every lookup refuses one. */
+        fun isPlaceholderNumber(normalized: String): Boolean {
+            if (matches(normalized, "^[0-9]*EXAMPLE[0-9]*$")) return true
+            val digits = capture(normalized, "^[A-Z]{2}([0-9]{8})[0-9][A-Z]{2}$")
+                ?: capture(normalized, "^[A-Z]*([0-9]{6,})[A-Z]*$") ?: return false
+            fun isRun(digits: String) = placeholderRuns.any { it.contains(digits) }
+            return digits.toSet().size == 1 || isRun(digits) || (digits.length >= 10 && isRun(digits.dropLast(1)))
+        }
+
+        private val placeholderRuns = listOf("0123456789".repeat(5), "9876543210".repeat(5))
+
         private val readingRules: ReadingRules? by lazy {
             runCatching { ApiJson.decodeFromString(ReadingRules.serializer(), SharedResources.text("Reading.json")) }.getOrNull()
         }
@@ -1011,6 +1043,12 @@ class CarrierCatalog private constructor(
         /** Each shop's order number, tried in turn and read without regard to case: the front door's patterns. */
         val orderNumbers: List<OrderNumber> by lazy {
             readingRules?.shops?.map { OrderNumber(it.shop, it.pattern) } ?: emptyList()
+        }
+
+        /** Order numbers as a lookup stores them, without hyphens, which only a parcel no carrier answered for is
+         * taken for. */
+        val storedOrderNumbers: List<StoredOrderNumber> by lazy {
+            readingRules?.storedOrders?.map { StoredOrderNumber(it.shop, it.pattern) } ?: emptyList()
         }
 
         /** The shapes of a number in a text, as the shared engine tries them (`TRACKING_CANDIDATE_PATTERNS`). */
@@ -1038,6 +1076,15 @@ class CarrierCatalog private constructor(
         fun orderShop(text: String): OrderShop? =
             orderNumbers.firstOrNull { matches(text, it.pattern, caseInsensitive = true) }?.shop
 
+        /** Whether a normalized number no carrier answered for looks like a shop's order number, or is shorter than
+         * tracking numbers are: the parcel says so instead of waiting for a carrier. */
+        fun nonTrackingShape(normalized: String): NonTrackingShape? {
+            val shop = orderShop(normalized)?.rawValue
+                ?: storedOrderNumbers.firstOrNull { matches(normalized, it.pattern) }?.shop
+            if (shop != null) return NonTrackingShape.Order(shop)
+            return if (normalized.characterCount < 8) NonTrackingShape.Short else null
+        }
+
         /** The text without its order numbers, so that no part of one is read as a tracking number. */
         private fun withoutOrders(text: String): String =
             orderNumbers.fold(text) { rest, order -> blanking(order.pattern, rest, caseInsensitive = true) }
@@ -1060,13 +1107,13 @@ class CarrierCatalog private constructor(
             return value
         }
 
-        /** A number introduced by a "tracking number:" style label, as the web engine reads it. "No" and "ID"
-         * also start numbers, so they belong to the label only when they stand apart from what follows. The
-         * token holds a digit, so a label followed by a plain word does not end the search. */
+        /** A number introduced by a "tracking number:" or "Waybill No." style label, as the web engine reads it.
+         * "No" and "ID" also start numbers, so they belong to the label only when they stand apart from what
+         * follows. The token holds a digit, so a label followed by a plain word does not end the search. */
         private val labelledNumberPattern: String = run {
             val suffix = "(?:numbers?(?![A-Z])|no\\.|(?:no|id)(?![A-Z0-9.]))"
             "(?:track(?:ing)?(?:\\s*$suffix|(?![A-Z]))" +
-                "|(?:parcel|shipment)(?:\\s+(?:tracking(?![A-Z])|$suffix)|(?![A-Z])))" +
+                "|(?:parcel|shipment|waybill|awb)(?:\\s+(?:tracking(?![A-Z])|$suffix)|(?![A-Z])))" +
                 "(?:\\s+is(?![A-Z0-9]))?\\s*[:#-]?\\s*" +
                 "((?=[A-Z0-9.-]{0,39}\\d)[A-Z0-9][A-Z0-9.-]{3,39})"
         }

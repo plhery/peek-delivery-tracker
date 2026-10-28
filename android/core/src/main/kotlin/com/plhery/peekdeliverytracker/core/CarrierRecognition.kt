@@ -93,8 +93,10 @@ data class CarrierRecognition(
          * has the parcel.
          */
         fun applies(input: TrackingInputMatch, amazon: Boolean, demo: Boolean): Boolean =
-            !demo && !amazon && ((input.confidence == CarrierMatch.Confidence.Low && input.carrier == CarrierId.Unknown) ||
-                input.carrier == CarrierId.InternationalPost)
+            // Nobody is asked about a placeholder.
+            !demo && !amazon && !CarrierCatalog.isPlaceholderNumber(CarrierCatalog.normalize(input.trackingNumber)) &&
+                ((input.confidence == CarrierMatch.Confidence.Low && input.carrier == CarrierId.Unknown) ||
+                    input.carrier == CarrierId.InternationalPost)
     }
 }
 

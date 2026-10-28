@@ -343,6 +343,17 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun tellsAnOrderNumberOrAShortNumberNoCarrierAnsweredFor() {
+        // Synthetic numbers: Amazon's without hyphens, AliExpress's, Temu's as a lookup stores it, a short one.
+        assertEquals(NonTrackingShape.Order(shop = "amazon"), CarrierCatalog.nonTrackingShape("30245719832294617"))
+        assertEquals(NonTrackingShape.Order(shop = "aliexpress"), CarrierCatalog.nonTrackingShape("3041234567890123"))
+        assertEquals(NonTrackingShape.Order(shop = "temu"), CarrierCatalog.nonTrackingShape("PO00012345678901234567"))
+        assertEquals(NonTrackingShape.Short, CarrierCatalog.nonTrackingShape("10293"))
+        assertNull(CarrierCatalog.nonTrackingShape("99945719832294617"))
+        assertNull(CarrierCatalog.nonTrackingShape("12345678"))
+    }
+
+    @Test
     fun journalShowsAnEarlierCarriersCopyUnderTheScanItRepeats() {
         val packageId = UUID.randomUUID()
         val (scan, copy, other, orphan) = List(4) { UUID.randomUUID() }

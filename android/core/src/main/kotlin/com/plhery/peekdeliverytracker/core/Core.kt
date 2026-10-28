@@ -490,6 +490,7 @@ class Localizer(
             "amazon logistics.*amazon account" to "add.amazonAccount",
             "postcode|postal code" to "error.postcode",
             "tracking.*(url|link)|complete.*link" to "error.trackingLink",
+            "not a real tracking number" to "tracking.failure.placeholderNumber",
             "tracking (number|input)|parcel number" to "error.trackingNumber",
             "80 characters|label.*long" to "error.nameTooLong",
             "package not found|parcel.*no longer" to "native.parcelMissing",

@@ -82,17 +82,15 @@ class CarrierCatalogParityTests {
         assertEquals(nothing, catalog.parse("Trackİng NO123456789"))
         assertEquals(nothing, catalog.parse("Your trackİng number İs 12345678901."))
         assertEquals(nothing, catalog.read("trackİng notable1234"))
+        // "ıs" is no "is" after the label, and an entry holding a word is no number entered whole: only the number
+        // left uncertain is read.
         val entry = "Tracking number ıs 12345678901"
-        val asTyped = TrackingInputMatch(
-            trackingNumber = entry,
-            carrier = CarrierId.Unknown,
-            confidence = CarrierMatch.Confidence.None,
-            candidates = emptyList(),
-            trackingUrl = null,
-            source = TrackingInputMatch.Source.Number,
-        )
-        assertEquals(asTyped, catalog.parse(entry))
-        assertEquals(asTyped, catalog.read(entry))
+        assertEquals(nothing, catalog.parse(entry))
+        val read = catalog.read(entry)
+        assertEquals("12345678901", read.trackingNumber)
+        assertEquals(CarrierId.Unknown, read.carrier)
+        assertEquals(CarrierMatch.Confidence.Low, read.confidence)
+        assertEquals(TrackingInputMatch.Source.Text, read.source)
     }
 
     @Test

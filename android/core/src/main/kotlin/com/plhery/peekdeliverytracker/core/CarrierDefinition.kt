@@ -234,6 +234,24 @@ enum class OrderShop(val rawValue: String) {
     }
 }
 
+/**
+ * What a looked-up number no carrier answered for looks like instead of a tracking number: a shop's order number,
+ * or one shorter than tracking numbers are (`nonTrackingShape` in src/peek/lookup/reading.ts).
+ */
+sealed interface NonTrackingShape {
+    /** The shop by its id in `shared/reading.json`: amazon, aliexpress, shein, shopee or temu. */
+    data class Order(val shop: String) : NonTrackingShape
+
+    data object Short : NonTrackingShape
+
+    companion object {
+        /** The shop by the name the app writes. */
+        val shopNames = mapOf(
+            "amazon" to "Amazon", "aliexpress" to "AliExpress", "shein" to "Shein", "shopee" to "Shopee", "temu" to "Temu",
+        )
+    }
+}
+
 /** One tracking number a text names, with what its shape says about the carrier. */
 data class NumberInText(
     /** The number without spaces, dots or dashes: what makes two spellings the same number. */

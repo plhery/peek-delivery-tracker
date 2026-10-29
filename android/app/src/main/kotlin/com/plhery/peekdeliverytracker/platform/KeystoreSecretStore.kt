@@ -121,6 +121,36 @@ class KeystoreSecretStore(
     }
 }
 
+/**
+ * `store`, read once as it is made, off the main thread, so that the first `load` (the session's, at the bootstrap on
+ * the main thread) finds those bytes without asking the Keystore there. A save or delete first drops them; every later
+ * load reads `store`.
+ */
+class ReadAheadSecretStore(private val store: SessionPersistence) : SessionPersistence {
+    private class Read(val bytes: ByteArray?)
+
+    private var ahead: Read? = Read(store.load())
+
+    @Synchronized
+    override fun load(): ByteArray? {
+        val read = ahead ?: return store.load()
+        ahead = null
+        return read.bytes
+    }
+
+    @Synchronized
+    override fun save(data: ByteArray) {
+        ahead = null
+        store.save(data)
+    }
+
+    @Synchronized
+    override fun delete() {
+        ahead = null
+        store.delete()
+    }
+}
+
 /** Where the stores' keys live: the Android Keystore in the app, a software stand-in in tests. */
 interface SecretKeys {
     /** The key under `alias`, or nil when there is none. */

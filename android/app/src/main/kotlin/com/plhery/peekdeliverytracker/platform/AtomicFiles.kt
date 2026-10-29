@@ -3,7 +3,9 @@ package com.plhery.peekdeliverytracker.platform
 import android.content.Context
 import android.net.Uri
 import androidx.core.content.FileProvider
+import com.plhery.peekdeliverytracker.core.DeviceParcel
 import com.plhery.peekdeliverytracker.core.DeviceParcelFile
+import com.plhery.peekdeliverytracker.core.DeviceParcelStorage
 import com.plhery.peekdeliverytracker.core.ExportFiles
 import com.plhery.peekdeliverytracker.core.ParcelCacheFiles
 import java.io.File
@@ -14,6 +16,8 @@ import java.nio.file.StandardCopyOption
 import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -115,6 +119,24 @@ class DeviceParcelsFile(file: File) : DeviceParcelFile {
 
     companion object {
         fun of(context: Context): DeviceParcelsFile = DeviceParcelsFile(File(File(context.filesDir, "DeviceParcels"), "parcels.json"))
+    }
+}
+
+/**
+ * DeviceParcels' storage with each save handed to one thread of its own, in the order they come, so that a follow
+ * never seals its keys and syncs the file on the main thread. Each save is the whole list with its keys, so the last
+ * one made is the one kept, and the keys still go before the file within it; nobody waits for one, as
+ * DeviceParcelFiles drops a failure the way the iPhone's `try?` does. `load` reads at once: DeviceParcels reads once,
+ * as it is made, off the main thread.
+ */
+class QueuedDeviceParcelStorage(
+    private val storage: DeviceParcelStorage,
+    private val queue: Executor = Executors.newSingleThreadExecutor { task -> Thread(task, "Peek device parcels").apply { isDaemon = true } },
+) : DeviceParcelStorage {
+    override fun load(): DeviceParcelStorage.Contents = storage.load()
+
+    override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {
+        queue.execute { storage.save(parcels, keys) }
     }
 }
 

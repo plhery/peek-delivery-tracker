@@ -3,12 +3,16 @@ package com.plhery.peekdeliverytracker.platform
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.DeviceParcel
+import com.plhery.peekdeliverytracker.core.DeviceParcelStorage
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.Collections
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
@@ -196,6 +200,27 @@ class PersistenceTest {
         // Application Support does: those followed through someone else's link need no key.
         val folders = listOf("file:Keychain/", "file:ParcelCache/")
         assertEquals(folders + folders, excluded)
+    }
+
+    @Test
+    fun theDeviceParcelsAreSavedOnAThreadOfTheirOwnInTheOrderGiven() {
+        val saves = Collections.synchronizedList(mutableListOf<Pair<String?, Thread>>())
+        val storage = object : DeviceParcelStorage {
+            override fun load() = DeviceParcelStorage.Contents(emptyList(), mapOf("link" to "key"))
+
+            override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {
+                saves += keys["link"] to Thread.currentThread()
+            }
+        }
+        val queued = QueuedDeviceParcelStorage(storage)
+        assertEquals(mapOf("link" to "key"), queued.load().keys)
+        for (index in 1..50) queued.save(emptyList(), mapOf("link" to "$index"))
+        val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(10)
+        while (saves.size < 50 && System.nanoTime() < deadline) Thread.sleep(10)
+        val made = synchronized(saves) { saves.toList() }
+        assertEquals((1..50).map { "$it" }, made.map { it.first })
+        assertEquals(1, made.map { it.second }.toSet().size)
+        assertTrue(made.none { it.second == Thread.currentThread() })
     }
 
     @Test

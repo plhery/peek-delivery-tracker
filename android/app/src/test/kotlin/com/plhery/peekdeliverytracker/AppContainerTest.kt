@@ -8,10 +8,14 @@ import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
+import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import java.security.Security
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import mockwebserver3.Dispatcher
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
@@ -60,14 +64,16 @@ class AppContainerTest {
         server.close()
     }
 
-    private fun container(): AppContainer {
-        val configuration = AppConfiguration(
-            mode = AppConfiguration.Mode.Api, apiBaseUrl = server.url("/").toString().trimEnd('/'), supabaseUrl = null,
-            supabasePublishableKey = "", googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true,
-            appGroupIdentifier = "group.test.peek",
+    private fun configuration(signIn: Boolean = false): AppConfiguration {
+        val base = server.url("/").toString().trimEnd('/')
+        return AppConfiguration(
+            mode = AppConfiguration.Mode.Api, apiBaseUrl = base, supabaseUrl = if (signIn) base else null,
+            supabasePublishableKey = if (signIn) "synthetic-publishable-key" else "", googleAuthEnabled = false,
+            appleAuthEnabled = false, emailOtpEnabled = true, appGroupIdentifier = "group.test.peek",
         )
-        return AppContainer(context, configuration, scope = MainScope()).also { container = it }
     }
+
+    private fun container(): AppContainer = AppContainer(context, configuration(), scope = MainScope()).also { container = it }
 
     /** Runs the main thread's work, and lets the server and the background threads answer, until `done`. */
     private fun idleUntil(what: String, done: () -> Boolean) {
@@ -109,6 +115,32 @@ class AppContainerTest {
             app.start()
             fail("Expected a second start to be refused")
         } catch (_: IllegalStateException) {
+        }
+    }
+
+    @Test
+    fun theStoresReadTheirSecretsOffTheMainThread() {
+        Security.addProvider(FakeAndroidKeyStore())
+        val services = listOf("auth", "appAttest", "deviceParcels", "liveActivityRevocations").map { "com.plhery.PeekDeliveryTracker.$it" }
+        try {
+            // Something under each that the stores cannot decode: they read it, then start as with nothing saved.
+            for (service in services) KeystoreSecretStore.of(context, service).save("[]".toByteArray())
+            FakeAndroidKeyStore.reads.clear()
+            var made: AppContainer? = null
+            MainScope().launch { made = AppContainer.make(context, configuration(signIn = true)).also { container = it } }
+            idleUntil("the stores") { made != null }
+            val app = made!!
+            app.start()
+            idleUntil("the session") { app.session.state != AuthenticationState.Loading }
+            assertEquals(AuthenticationState.Welcome, app.session.state)
+
+            // Each secret was read, the session's for the bootstrap too, and none on the main thread.
+            val reads = synchronized(FakeAndroidKeyStore.reads) { FakeAndroidKeyStore.reads.toList() }
+            assertEquals(services.map { "peek.secret.$it" }.toSet(), reads.map { it.first }.toSet())
+            assertFalse("$reads", reads.any { it.second })
+        } finally {
+            for (service in services) KeystoreSecretStore.of(context, service).delete()
+            Security.removeProvider("AndroidKeyStore")
         }
     }
 

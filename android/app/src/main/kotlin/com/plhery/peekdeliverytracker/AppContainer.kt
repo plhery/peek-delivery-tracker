@@ -50,6 +50,8 @@ import com.plhery.peekdeliverytracker.platform.OkHttpTransport
 import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
 import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.platform.QueuedDeviceParcelStorage
+import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
@@ -72,6 +74,12 @@ import okhttp3.OkHttpClient
  * `NativeVerification.shared`, `CarrierCatalog.shared`) and what its root view starts with them (RootView's tasks), made
  * once for the process by PeekApplication. Every store shares `scope`, the one `MainScope()` the app keeps: on the main
  * thread, never cancelled while the app runs. The screens read the stores' StateFlows.
+ *
+ * It is made off the main thread ([make]): the stores read their secrets and files as they are made, and the session's
+ * is read then too, for the bootstrap ([ReadAheadSecretStore]). The device's parcels are saved on a thread of their own
+ * ([QueuedDeviceParcelStorage]). The session is still saved on the main thread, as the iPhone saves it: SessionStore
+ * saves it and then takes it in, with no suspension between, so a sign-out can never land in between and see a late
+ * write bring the account back, and a save that failed is the sign-in's or refresh's failure.
  *
  * What the app cannot do yet is a stand-in (platform/StandIns.kt): notifications, the widget, sign-in, the browser
  * check and the rating prompt.
@@ -116,7 +124,7 @@ class AppContainer(
     val session = SessionStore(
         configuration = configuration,
         defaults = defaults,
-        persistence = KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.auth"),
+        persistence = ReadAheadSecretStore(KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.auth")),
         transport = transport,
         appleSignIn = NoAppleSignIn,
         webAuthentication = NoWebAuthentication,
@@ -154,9 +162,8 @@ class AppContainer(
             } else {
                 null
             },
-            storage = DeviceParcelFiles(
-                KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.deviceParcels"),
-                DeviceParcelsFile.of(context),
+            storage = QueuedDeviceParcelStorage(
+                DeviceParcelFiles(KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.deviceParcels"), DeviceParcelsFile.of(context)),
             ),
             postcodes = PostcodeMemory(defaults),
             scope = scope,
@@ -324,11 +331,15 @@ class AppContainer(
         demoParcels = { DemoRepository(defaults, { localizer.language }, importCharges = importCharges).list() },
     )
 
-    private companion object {
-        const val DEBUG_IMPORT_CHARGES = "sdt.debug.importCharges"
+    companion object {
+        private const val DEBUG_IMPORT_CHARGES = "sdt.debug.importCharges"
+
+        /** A container made on the IO dispatcher, where its stores first read the Keystore and the disk. */
+        suspend fun make(context: Context, configuration: AppConfiguration = BuildSettings.configuration): AppContainer =
+            withContext(Dispatchers.IO) { AppContainer(context, configuration) }
 
         /** RootView's `sessionIdentity`. */
-        val AuthenticationState.rootIdentity: String
+        private val AuthenticationState.rootIdentity: String
             get() = when (this) {
                 AuthenticationState.Loading -> "loading"
                 AuthenticationState.Welcome -> "welcome"
@@ -338,6 +349,6 @@ class AppContainer(
                 is AuthenticationState.SignedIn -> user.id.toString().uppercase()
             }
 
-        val AuthenticationState.signedInUser: UUID? get() = (this as? AuthenticationState.SignedIn)?.user?.id
+        private val AuthenticationState.signedInUser: UUID? get() = (this as? AuthenticationState.SignedIn)?.user?.id
     }
 }

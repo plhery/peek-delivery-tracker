@@ -22,16 +22,17 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
 
 class MainActivity : ComponentActivity() {
-    private val container: AppContainer get() = (application as PeekApplication).container
+    private val app: PeekApplication get() = application as PeekApplication
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // The launch window: iOS's blank LaunchBackground, no icon (themes.xml).
-        installSplashScreen()
+        // The launch window: iOS's blank LaunchBackground, no icon (themes.xml), kept while the stores are made.
+        val splash = installSplashScreen()
         val systemDark = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
         systemBars(dark = AppearanceStore.of(this).appearance.value.isDark(systemDark))
         super.onCreate(savedInstanceState)
-        // The stores start with the first window, as the iPhone's start with its app.
-        container
+        // The stores are made with the first window, as the iPhone's are with its app.
+        app.makeContainer()
+        splash.setKeepOnScreenCondition { app.container.value == null }
         setContent {
             val appearance = appearanceSetting()
             val dark = appearance.isDark(isSystemInDarkTheme())
@@ -49,13 +50,13 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        container.sceneActive(true)
+        app.container.value?.sceneActive(true)
     }
 
     /** Covered or left (`scenePhase` leaving `.active`); a rotation, which makes the window again, is neither. */
     override fun onPause() {
         super.onPause()
-        if (!isChangingConfigurations) container.sceneActive(false)
+        if (!isChangingConfigurations) app.container.value?.sceneActive(false)
     }
 
     /** Edge to edge with the bars' icons for the app's appearance, not the phone's, and no scrim, as on the iPhone. */

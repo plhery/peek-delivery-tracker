@@ -1,8 +1,10 @@
 package com.plhery.peekdeliverytracker.platform
 
+import android.os.Looper
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.SessionPersistence
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
@@ -244,6 +246,41 @@ class KeystoreSecretStoreTest {
     }
 
     @Test
+    fun aStoreReadAheadGivesItsFirstReadFromMemoryUnlessWrittenFirst() {
+        var loads = 0
+        var saved: ByteArray? = session
+        val inner = object : SessionPersistence {
+            override fun save(data: ByteArray) {
+                saved = data
+            }
+
+            override fun load(): ByteArray? {
+                loads += 1
+                return saved
+            }
+
+            override fun delete() {
+                saved = null
+            }
+        }
+        val ahead = ReadAheadSecretStore(inner)
+        assertEquals(1, loads)
+        assertArrayEquals(session, ahead.load())
+        assertEquals(1, loads)
+        // Later reads ask the store.
+        assertArrayEquals(session, ahead.load())
+        assertEquals(2, loads)
+
+        val deleted = ReadAheadSecretStore(inner)
+        deleted.delete()
+        assertNull(deleted.load())
+        saved = session
+        val replaced = ReadAheadSecretStore(inner)
+        replaced.save("newer".toByteArray())
+        assertArrayEquals("newer".toByteArray(), replaced.load())
+    }
+
+    @Test
     fun withoutAKeystoreSavingThrowsAndReadingFindsNothing() {
         Security.removeProvider("AndroidKeyStore")
         try {
@@ -269,10 +306,16 @@ class FakeAndroidKeyStore : Provider("AndroidKeyStore", 1.0, "Software stand-in 
     companion object {
         val keys = ConcurrentHashMap<String, SecretKey>()
         val specs: MutableList<KeyGenParameterSpec> = Collections.synchronizedList(mutableListOf())
+
+        /** Each key read, and whether it was read on the main thread. */
+        val reads: MutableList<Pair<String, Boolean>> = Collections.synchronizedList(mutableListOf())
     }
 
     class Store : KeyStoreSpi() {
-        override fun engineGetKey(alias: String, password: CharArray?): Key? = keys[alias]
+        override fun engineGetKey(alias: String, password: CharArray?): Key? {
+            reads += alias to Looper.getMainLooper().isCurrentThread
+            return keys[alias]
+        }
 
         override fun engineGetCertificateChain(alias: String): Array<Certificate>? = null
 

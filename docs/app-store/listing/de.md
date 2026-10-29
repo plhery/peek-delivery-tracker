@@ -34,7 +34,7 @@ Füge eine Sendungsnummer, einen Link vom Paketdienst oder eine ganze Versandmai
 Kein Konto nötig. Keine Werbung.
 
 ERFAHRE ICH, WENN SICH ETWAS TUT?
-Melde dich mit Apple, Google oder einem Code per E-Mail an, und Peek schickt dir Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Auf Wunsch sagt dir auch eine E-Mail, dass das Paket angekommen ist.
+Melde dich mit Apple, Google oder einem Code per E-Mail an, und Peek schickt dir Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder nur bei der Zustellung. Auf Wunsch sagt dir auch eine E-Mail, dass das Paket angekommen ist.
 
 MEHR ALS EIN PAKET UNTERWEGS?
 Alle stehen in einer Liste. Was als Nächstes ankommt, steht ganz oben und reist auf seiner eigenen Karte. Mit einem Konto hast du dieselbe Liste auf deinem iPhone und im Web unter peektracker.com. Ein Widget zeigt deine nächste Lieferung auf dem Home-Bildschirm.

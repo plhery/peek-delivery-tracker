@@ -36,7 +36,7 @@ Colle un numéro de suivi, un lien de transporteur ou tout un e-mail d’expédi
 Pas besoin de compte. Pas de pub.
 
 EST-CE QUE JE SAURAI QUAND IL BOUGE ?
-Connecte-toi avec Apple, Google ou un code reçu par e-mail, et Peek te prévient : à chaque scan, aux étapes importantes ou seulement le jour de la livraison. Un e-mail peut aussi t’annoncer que le colis est arrivé.
+Connecte-toi avec Apple, Google ou un code reçu par e-mail, et Peek te prévient : à chaque scan, aux étapes importantes ou seulement à la livraison. Un e-mail peut aussi t’annoncer que le colis est arrivé.
 
 TU EN SUIS PLUSIEURS ?
 Ils sont tous dans une seule liste, le prochain à arriver tout en haut, sur sa carte. Avec un compte, tu retrouves la même liste sur ton iPhone et sur le web, à l’adresse peektracker.com. Un widget affiche ta prochaine livraison sur l’écran d’accueil.

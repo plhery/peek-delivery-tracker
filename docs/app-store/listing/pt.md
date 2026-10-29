@@ -34,7 +34,7 @@ Cola um número de seguimento, uma ligação da transportadora ou um e-mail de e
 Não precisas de conta. Sem anúncios.
 
 VOU SABER QUANDO SE MEXER?
-Inicia sessão com Apple, Google ou um código por e-mail e o Peek envia-te notificações: a cada leitura, só nos passos importantes ou só no dia da entrega. Um e-mail também te pode avisar quando chegar.
+Inicia sessão com Apple, Google ou um código por e-mail e o Peek envia-te notificações: em todas as leituras, só nos passos importantes ou só na entrega. Um e-mail também te pode avisar quando chegar.
 
 SEGUES MAIS DO QUE UMA?
 Ficam todas numa só lista, com a próxima a chegar no topo, a viajar no seu mapa. Com uma conta, tens a mesma lista no teu iPhone e na web, em peektracker.com. Um widget mantém a tua próxima entrega no ecrã principal.

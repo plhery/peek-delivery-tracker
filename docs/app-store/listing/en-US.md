@@ -36,7 +36,7 @@ Paste a tracking number, a carrier link, or a whole shipping email, or scan the 
 No account needed. No ads.
 
 WILL I KNOW WHEN IT MOVES?
-Sign in with Apple, Google, or a code sent to your email, and Peek notifies you: every scan, the important steps, or delivery day only. An email can tell you it has arrived.
+Sign in with Apple, Google, or a code sent to your email, and Peek notifies you: every scan, the important steps, or delivery only. An email can tell you it has arrived.
 
 FOLLOWING MORE THAN ONE?
 They share one list, the next to arrive on top, riding on its map. With an account, the same list is on your iPhone and on the web at peektracker.com. A widget keeps your next delivery on the Home Screen.

@@ -34,7 +34,7 @@ Incolla un numero di tracciamento, un link del corriere o un’intera e-mail di 
 Non serve un account. Niente pubblicità.
 
 SAPRÒ QUANDO SI MUOVE?
-Accedi con Apple, Google o un codice via e-mail e Peek ti avvisa: a ogni scansione, solo nei passaggi importanti o solo il giorno di consegna. Un’e-mail può dirti che è arrivato.
+Accedi con Apple, Google o un codice via e-mail e Peek ti avvisa: a ogni scansione, solo nei passaggi importanti o solo alla consegna. Un’e-mail può dirti che è arrivato.
 
 NE SEGUI PIÙ DI UNO?
 Stanno tutti in una lista sola: in cima il prossimo ad arrivare, in viaggio sulla sua mappa. Con un account ritrovi la stessa lista sul tuo iPhone e sul web, su peektracker.com. Un widget mostra la prossima consegna nella schermata Home.

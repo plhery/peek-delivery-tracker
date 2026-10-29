@@ -34,7 +34,7 @@ Wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce. Może
 Bez konta. Bez reklam.
 
 CZY DOWIEM SIĘ, GDY RUSZY?
-Zaloguj się przez Apple, Google albo kodem wysłanym e-mailem, a Peek Cię powiadomi: o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. E-mail może dać Ci znać, że paczka dotarła.
+Zaloguj się przez Apple, Google albo kodem wysłanym e-mailem, a Peek Cię powiadomi: o każdym skanie, tylko o ważnych etapach albo tylko o doręczeniu. E-mail może dać Ci znać, że paczka dotarła.
 
 ŚLEDZISZ WIĘCEJ NIŻ JEDNĄ?
 Wszystkie trafiają na jedną listę: najbliższa jest na górze i podróżuje na swojej mapie. Z kontem masz tę samą listę na iPhonie i w przeglądarce, pod adresem peektracker.com. Widżet pokazuje najbliższą dostawę na ekranie początkowym.

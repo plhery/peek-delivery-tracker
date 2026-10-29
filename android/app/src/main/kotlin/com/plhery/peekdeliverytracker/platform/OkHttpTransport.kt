@@ -5,7 +5,15 @@ import com.plhery.peekdeliverytracker.core.HttpRequest
 import com.plhery.peekdeliverytracker.core.HttpResponse
 import com.plhery.peekdeliverytracker.core.HttpTransport
 import java.io.IOException
+import java.io.InterruptedIOException
+import java.net.InetAddress
+import java.net.UnknownHostException
+import java.util.concurrent.ExecutionException
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.FutureTask
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.math.roundToLong
@@ -14,6 +22,7 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Cookie
 import okhttp3.CookieJar
+import okhttp3.Dns
 import okhttp3.Headers
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -29,9 +38,10 @@ import okhttp3.Response
  * OkHttp cannot make, a network failure and a timeout are IOExceptions; a cancelled coroutine cancels its call and ends
  * in a CancellationException. Nothing is cached: `client` has no cache, so every request reaches the server.
  *
- * Each request gets its own timeouts, `HttpRequest.timeout` as connect, read and write timeouts, as URLRequest's
- * `timeoutInterval` limits each wait for the server and not the whole answer. A request with `handlesCookies` false
- * sends no cookie and keeps none, whatever `client`'s cookie jar holds.
+ * Each request gets its own timeouts, `HttpRequest.timeout` for the name lookup ([TimedDns]) and as connect, read and
+ * write timeouts, as URLRequest's `timeoutInterval` limits each wait, the lookup included, and not the whole answer:
+ * OkHttp's call timeout, which would, is left off. A request with `handlesCookies` false sends no cookie and keeps none,
+ * whatever `client`'s cookie jar holds.
  */
 class OkHttpTransport(
     private val client: OkHttpClient,
@@ -66,6 +76,7 @@ class OkHttpTransport(
     private fun client(request: HttpRequest): OkHttpClient {
         val timeout = if (request.timeout > 0) (request.timeout * 1_000).roundToLong().coerceAtLeast(1) else DEFAULT_TIMEOUT_MILLIS
         return client.newBuilder()
+            .dns(TimedDns(client.dns, timeout))
             .connectTimeout(timeout, TimeUnit.MILLISECONDS)
             .readTimeout(timeout, TimeUnit.MILLISECONDS)
             .writeTimeout(timeout, TimeUnit.MILLISECONDS)
@@ -104,6 +115,48 @@ class OkHttpTransport(
             for (name in response.headers.names()) headers[name] = response.headers.values(name).joinToString(", ")
             return HttpResponse(response.code, headers, response.body.bytes())
         }
+    }
+}
+
+/**
+ * `dns`'s lookups, each given `timeoutMillis` as URLSession gives a connection's name lookup the request's timeout:
+ * OkHttp's connect timeout starts only once the addresses are known, and the system's lookup may take far longer. A
+ * lookup that outlasts it goes on alone on its own thread, and the request fails as a host that could not be found.
+ */
+internal class TimedDns(private val dns: Dns, private val timeoutMillis: Long) : Dns {
+    override fun lookup(hostname: String): List<InetAddress> {
+        val lookup = FutureTask { dns.lookup(hostname) }
+        lookups.execute(lookup)
+        return try {
+            lookup.get(timeoutMillis, TimeUnit.MILLISECONDS)
+        } catch (e: TimeoutException) {
+            lookup.cancel(true)
+            throw UnknownHostException("No address for $hostname within $timeoutMillis ms").apply { initCause(e) }
+        } catch (e: ExecutionException) {
+            when (val cause = e.cause) {
+                is IOException -> throw cause
+                is RuntimeException -> throw cause
+                is Error -> throw cause
+                else -> throw UnknownHostException(hostname).apply { initCause(cause) }
+            }
+        } catch (e: InterruptedException) {
+            lookup.cancel(true)
+            Thread.currentThread().interrupt()
+            throw InterruptedIOException("Interrupted looking up $hostname").apply { initCause(e) }
+        }
+    }
+
+    /**
+     * Equal to any other over the same `dns`, whatever its timeout: OkHttp reuses a connection only for an address with
+     * an equal `Dns`, and every request's client has one of these.
+     */
+    override fun equals(other: Any?): Boolean = other is TimedDns && other.dns == dns
+
+    override fun hashCode(): Int = dns.hashCode()
+
+    private companion object {
+        /** A thread for each lookup under way: one the system holds up holds up no other. */
+        val lookups: ExecutorService = Executors.newCachedThreadPool { task -> Thread(task, "Peek DNS").apply { isDaemon = true } }
     }
 }
 

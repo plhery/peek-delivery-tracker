@@ -5,7 +5,10 @@ import com.plhery.peekdeliverytracker.core.HttpRequest
 import com.plhery.peekdeliverytracker.core.HttpResponse
 import com.plhery.peekdeliverytracker.core.identifying
 import java.io.IOException
+import java.net.InetAddress
 import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +19,7 @@ import mockwebserver3.Dispatcher
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
 import mockwebserver3.RecordedRequest
+import okhttp3.Dns
 import okhttp3.OkHttp
 import okio.Buffer
 import org.junit.After
@@ -151,6 +155,39 @@ class OkHttpTransportTest {
         // Ten bytes, one every 100 ms: a second in all, three times the timeout, never a wait as long as it.
         server.enqueue(MockResponse.Builder().body("0123456789").throttleBody(1, 100, TimeUnit.MILLISECONDS).build())
         assertEquals("0123456789", send(HttpRequest(url(), timeout = 0.35)).body.decodeToString())
+    }
+
+    @Test
+    fun aNameLookupThatHangsTimesOutWithTheRequest() {
+        val release = CountDownLatch(1)
+        val hanging = object : Dns {
+            override fun lookup(hostname: String): List<InetAddress> {
+                release.await()
+                return Dns.SYSTEM.lookup(hostname)
+            }
+        }
+        val started = System.nanoTime()
+        try {
+            val transport = OkHttpTransport(client.newBuilder().dns(hanging).build())
+            // As URLSession's timeout covers the lookup, which OkHttp's connect timeout does not.
+            val error = failure<IOException> { send(HttpRequest("http://lookup.example/", timeout = 0.3), through = transport) }
+            assertTrue("$error", error is UnknownHostException)
+            assertTrue(System.nanoTime() - started < TimeUnit.SECONDS.toNanos(3))
+        } finally {
+            release.countDown()
+        }
+    }
+
+    @Test
+    fun requestsWithOtherTimeoutsShareTheirConnection() {
+        server.enqueue(MockResponse.Builder().body("first").build())
+        server.enqueue(MockResponse.Builder().body("second").build())
+        assertEquals("first", send(HttpRequest(url(), timeout = 5.0)).body.decodeToString())
+        assertEquals("second", send(HttpRequest(url(), timeout = 30.0)).body.decodeToString())
+        val first = take()
+        val second = take()
+        assertEquals(first.connectionIndex, second.connectionIndex)
+        assertEquals(1, second.exchangeIndex)
     }
 
     @Test

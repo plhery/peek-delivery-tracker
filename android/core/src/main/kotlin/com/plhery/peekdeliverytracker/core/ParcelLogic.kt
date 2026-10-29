@@ -212,20 +212,25 @@ val Parcel.sortedEvents: List<TrackingEvent> get() = trackingEvents.sortedWith(e
  */
 val Parcel.journalEntries: List<JournalEntry>
     get() {
-        val byId = trackingEvents.firstById { it.id }
-        val relays = HashMap<UUID, MutableList<TrackingEvent>>()
-        val folded = HashSet<UUID>()
-        for (event in trackingEvents) {
-            val scanId = event.relayOf ?: continue
-            if (scanId == event.id) continue
-            val scan = byId[scanId] ?: continue
-            if (scan.relayOf != null) continue
-            relays.getOrPut(scanId) { mutableListOf() }.add(event)
-            folded.add(event.id)
-        }
+        val relays = relayLines(trackingEvents)
+        val folded = relays.values.flatten().mapTo(HashSet()) { it.id }
         return sortedEvents.filter { it.id !in folded }
             .map { JournalEntry(it, (relays[it.id] ?: emptyList()).sortedWith(eventOrderComparator)) }
     }
+
+/** The scans of relay pairs the journal shows as a line under another, by the scan they name. */
+internal fun relayLines(events: List<TrackingEvent>): Map<UUID, List<TrackingEvent>> {
+    val byId = events.firstById { it.id }
+    val relays = HashMap<UUID, MutableList<TrackingEvent>>()
+    for (event in events) {
+        val scanId = event.relayOf ?: continue
+        if (scanId == event.id) continue
+        val scan = byId[scanId] ?: continue
+        if (scan.relayOf != null) continue
+        relays.getOrPut(scanId) { mutableListOf() }.add(event)
+    }
+    return relays
+}
 
 /** The country code of the first place the parcel was scanned, which is where it was posted. */
 val Parcel.stampOrigin: String? get() = sortedEvents.lastOrNull { it.place != null }?.place?.country
@@ -455,7 +460,9 @@ private object LatestEventCache {
     fun latest(parcel: Parcel): TrackingEvent? {
         val events = parcel.trackingEvents
         entries[parcel.id]?.let { if (it.events == events) return it.latest }
-        val carrier = events.filter { it.stage != TrackingStage.Pending }.sortedWith(eventOrderComparator)
+        // A line under another scan in the journal is part of that scan's step, whichever is newer.
+        val lines = relayLines(events).values.flatten().mapTo(HashSet()) { it.id }
+        val carrier = events.filter { it.stage != TrackingStage.Pending && it.id !in lines }.sortedWith(eventOrderComparator)
         val latest = current(carrier) ?: newest(events)
         entries[parcel.id] = Entry(events, latest)
         return latest

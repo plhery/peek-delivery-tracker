@@ -506,6 +506,19 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun currentEventIsTheScanTheJournalShowsNotTheLineUnderIt() {
+        val packageId = UUID.randomUUID()
+        val scan = event(packageId, TrackingStage.InTransit, "2026-09-09T14:16:00Z")
+            .copy(id = UUID.fromString("00000000-0000-4000-8000-000000000001"))
+        val line = event(packageId, TrackingStage.InTransit, "2026-09-09T14:16:00Z")
+            .copy(id = UUID.fromString("ffffffff-0000-4000-8000-000000000001"), relayOf = scan.id)
+        // The line would win the tie on its id, or is a few seconds newer: the scan it sits under is the parcel's step.
+        assertEquals(scan.id, makeParcel(id = packageId, events = listOf(scan, line)).currentEvent?.id)
+        val newer = line.copy(occurredAt = "2026-09-09T14:16:20Z")
+        assertEquals(scan.id, makeParcel(id = packageId, events = listOf(scan, newer)).currentEvent?.id)
+    }
+
+    @Test
     fun generatedRequestModelsEncodeApiFieldNamesAndEnumValues() {
         val packageRequest = CreatePackageRequest(
             trackingNumber = "99.34.123456.12345678",

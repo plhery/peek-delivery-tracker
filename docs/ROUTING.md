@@ -716,7 +716,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   with milliseconds), one to three whole hours to the second from a row of the new carrier, in
   any stage, is that row on another clock (CTT Express tells CTT's scans an hour early), and is
   served with `relay_of` its id after every other pairing. The apps show the words of the row with
-  `relay_of` as a line under the other row instead of a step of its own. Of a pair, the row
+  `relay_of` as a line under the other row instead of a step of its own, and a parcel's card
+  reads the other row as its status, whichever is newer. Of a pair, the row
   stored second announces no push or link alert, nor the copy of a pair stored together, unless
   the copy alone tells a problem: then the other row is the one left out. The delivered email quotes the row
   without `relay_of` ([`relayCopies.ts`](../src/server/relayCopies.ts),

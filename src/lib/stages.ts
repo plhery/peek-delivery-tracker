@@ -91,10 +91,16 @@ const MOVING_STAGES: ReadonlySet<Stage> = new Set<Stage>(['in_transit', 'customs
  * merely because it has a newer timestamp. An announcement or acceptance after
  * the parcel has moved on is a notice or a reworded scan, not a step back: the
  * scan before it still says where the parcel is. After a problem, a return or
- * a delivery, a new label starts over.
+ * a delivery, a new label starts over. A scan the journal shows as a line under
+ * another (`relayOf`) is part of that scan's step, whichever is newer.
  */
 export function currentEvent(events: TrackingEvent[]): TrackingEvent | null {
-  const carrier = sortEventsDesc(events.filter((event) => event.stage !== 'pending'));
+  const byId = new Map(events.map((event) => [event.id, event]));
+  const underAnother = (event: TrackingEvent) => {
+    const scan = event.relayOf ? byId.get(event.relayOf) : undefined;
+    return scan !== undefined && scan !== event && !scan.relayOf;
+  };
+  const carrier = sortEventsDesc(events.filter((event) => event.stage !== 'pending' && !underAnother(event)));
   let current = carrier[0];
   if (!current) return latestEvent(events);
   for (const event of carrier.slice(1)) {

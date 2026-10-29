@@ -183,16 +183,21 @@ extension Parcel {
     /// a line under the scan it names, and keeps a row of its own when that
     /// scan is not there.
     var journalEntries: [JournalEntry] {
-        let byID = Dictionary(trackingEvents.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
-        var relays: [UUID: [TrackingEvent]] = [:]
-        var folded = Set<UUID>()
-        for event in trackingEvents {
-            guard let scanID = event.relayOf, scanID != event.id, let scan = byID[scanID], scan.relayOf == nil else { continue }
-            relays[scanID, default: []].append(event)
-            folded.insert(event.id)
-        }
+        let relays = Self.relayLines(in: trackingEvents)
+        let folded = Set(relays.values.joined().map(\.id))
         return sortedEvents.filter { !folded.contains($0.id) }
             .map { JournalEntry(event: $0, relays: (relays[$0.id] ?? []).sorted(by: Self.eventPrecedes)) }
+    }
+
+    /// The scans of relay pairs the journal shows as a line under another, by the scan they name.
+    static func relayLines(in events: [TrackingEvent]) -> [UUID: [TrackingEvent]] {
+        let byID = Dictionary(events.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        var relays: [UUID: [TrackingEvent]] = [:]
+        for event in events {
+            guard let scanID = event.relayOf, scanID != event.id, let scan = byID[scanID], scan.relayOf == nil else { continue }
+            relays[scanID, default: []].append(event)
+        }
+        return relays
     }
 
     /// The country code of the first place the parcel was scanned, which is where it was posted.
@@ -408,7 +413,9 @@ private final class LatestEventCache: @unchecked Sendable {
         if let entry = lock.withLock({ entries[parcel.id] }), entry.events == events {
             return entry.latest
         }
-        let carrier = events.filter { $0.stage != .pending }.sorted(by: Parcel.eventPrecedes)
+        // A line under another scan in the journal is part of that scan's step, whichever is newer.
+        let lines = Set(Parcel.relayLines(in: events).values.joined().map(\.id))
+        let carrier = events.filter { $0.stage != .pending && !lines.contains($0.id) }.sorted(by: Parcel.eventPrecedes)
         let latest = Self.current(newestFirst: carrier) ?? events.min(by: Parcel.eventPrecedes)
         lock.withLock { entries[parcel.id] = (events, latest) }
         return latest

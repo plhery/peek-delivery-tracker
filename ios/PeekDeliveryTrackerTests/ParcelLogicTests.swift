@@ -818,6 +818,36 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertTrue(parcel.journalEntries.dropLast().allSatisfy(\.relays.isEmpty))
     }
 
+    func testCurrentEventIsTheScanTheJournalShowsNotTheLineUnderIt() throws {
+        let packageID = UUID()
+        let scan = UUID(uuidString: "00000000-0000-4000-8000-000000000001")!
+        let line = UUID(uuidString: "FFFFFFFF-0000-4000-8000-000000000001")!
+        let event = { (id: UUID, at: String, relayOf: UUID?) in
+            """
+            {"id": "\(id.uuidString)", "package_id": "\(packageID.uuidString)", "stage": "in_transit",
+             "description": "Sorted", "location": null, "occurred_at": "\(at)"\(relayOf.map { ", \"relay_of\": \"\($0.uuidString)\"" } ?? "")}
+            """
+        }
+        let parcel = { (lineAt: String) in
+            let json = """
+            {"packages": [{
+              "id": "\(packageID.uuidString)", "tracking_number": "RELAYTEST0002", "label": "Relayed", "carrier": "la-poste",
+              "created_at": "2026-09-01T10:00:00Z", "expected_delivery": null, "last_status_text": null, "last_synced_at": null,
+              "sync_status": "ok", "sync_error": null, "tracking_url": null, "dpd_postcode": null, "archived_at": null,
+              "notifications_muted": false,
+              "tracking_events": [
+                \(event(scan, "2026-09-09T14:16:00Z", nil)),
+                \(event(line, lineAt, scan))
+              ]
+            }]}
+            """
+            return try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(json.utf8)).packages.first)
+        }
+        // The line would win the tie on its id, or is a few seconds newer: the scan it sits under is the parcel's step.
+        XCTAssertEqual(try parcel("2026-09-09T14:16:00Z").currentEvent?.id, scan)
+        XCTAssertEqual(try parcel("2026-09-09T14:16:20Z").currentEvent?.id, scan)
+    }
+
     func testGeneratedRequestModelsEncodeAPIFieldNamesAndEnumValues() throws {
         let packageRequest = CreatePackageRequest(
             trackingNumber: "99.34.123456.12345678",

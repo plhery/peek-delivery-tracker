@@ -131,6 +131,17 @@ describe('currentStage / progressIndex', () => {
     expect(currentEvent([notice])).toBe(notice);
   });
 
+  it('reads a relay pair as the scan the journal shows, not the line under it', () => {
+    // The earlier carrier's copy names the place, so it heads the pair; the delivery carrier's scan is a few seconds newer.
+    const head = makeEvent({ id: 'b-head', stage: 'in_transit', description: 'Sorted', occurredAt: '2026-06-02T08:00:00.000Z' });
+    const line = makeEvent({ id: 'a-line', stage: 'in_transit', description: 'Sortiert', occurredAt: '2026-06-02T08:00:20.000Z', relayOf: 'b-head' });
+    expect(currentEvent([head, line])).toBe(head);
+    // At the same second the id no longer decides, in another stage neither does the stage.
+    expect(currentEvent([head, { ...line, id: 'c-line', occurredAt: head.occurredAt, stage: 'customs' }])).toBe(head);
+    // A copy whose scan is not there keeps a row of its own.
+    expect(currentEvent([line])).toBe(line);
+  });
+
   it('keeps the newest scan in a stage current past a carrier notice in none', () => {
     // The server stores a scan no rule gives a stage as pending where in transit would step back.
     const notice = makeEvent({ id: 'notice', stage: 'pending', description: 'Carrier notice', occurredAt: '2026-06-03T15:08:00.000Z' });

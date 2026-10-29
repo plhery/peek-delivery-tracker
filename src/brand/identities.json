@@ -202,6 +202,9 @@
   "averitt": {
     "decal": "averitt"
   },
+  "avis-logistics": {
+    "decal": "avis-logistics"
+  },
   "aymakan": {
     "decal": "aymakan"
   },
@@ -573,6 +576,9 @@
   "daily-xpress": {
     "decal": "daily-xpress"
   },
+  "dakota-cargo": {
+    "decal": "dakota-cargo"
+  },
   "danske-fragtmaend": {
     "decal": "danske-fragtmaend"
   },
@@ -617,6 +623,9 @@
   },
   "delnext": {
     "decal": "delnext"
+  },
+  "depo": {
+    "decal": "depo"
   },
   "deppon": {
     "decal": "deppon",
@@ -757,6 +766,9 @@
   },
   "dynalogic": {
     "decal": "dynalogic"
+  },
+  "e-cargo": {
+    "decal": "e-cargo"
   },
   "e-commerce-international": {
     "decal": "e-commerce-international"
@@ -1284,6 +1296,9 @@
   "instabox": {
     "decal": "instabox"
   },
+  "instapack": {
+    "decal": "instapack"
+  },
   "integral-pack": {
     "decal": "integral-pack"
   },
@@ -1751,6 +1766,9 @@
   "oak-harbor": {
     "decal": "oak-harbor"
   },
+  "obibox": {
+    "decal": "obibox"
+  },
   "oca": {
     "decal": "oca"
   },
@@ -2210,6 +2228,9 @@
   },
   "sending": {
     "decal": "sending"
+  },
+  "sentral-cargo": {
+    "decal": "sentral-cargo"
   },
   "serpost": {
     "decal": "serpost"

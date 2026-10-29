@@ -182,7 +182,14 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'gio-express'
   | 'sway'
   | '3pe-express'
-  | 'xinghe-freight';
+  | 'xinghe-freight'
+  | 'instapack'
+  | 'obibox'
+  | 'avis-logistics'
+  | 'dakota-cargo'
+  | 'sentral-cargo'
+  | 'depo'
+  | 'e-cargo';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

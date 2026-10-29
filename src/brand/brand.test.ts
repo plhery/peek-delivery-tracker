@@ -258,6 +258,13 @@ describe('carrier brand', () => {
       'sway',
       '3pe-express',
       'xinghe-freight',
+      'instapack',
+      'obibox',
+      'avis-logistics',
+      'dakota-cargo',
+      'sentral-cargo',
+      'depo',
+      'e-cargo',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

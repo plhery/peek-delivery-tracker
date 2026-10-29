@@ -194,6 +194,13 @@ describe('carrier mark', () => {
     'sway',
     '3pe-express',
     'xinghe-freight',
+    'instapack',
+    'obibox',
+    'avis-logistics',
+    'dakota-cargo',
+    'sentral-cargo',
+    'depo',
+    'e-cargo',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

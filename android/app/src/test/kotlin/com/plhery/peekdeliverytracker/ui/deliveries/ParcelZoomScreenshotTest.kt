@@ -29,9 +29,9 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * A parcel's page zooming out of its card on the iPhone the captures were taken on (440 × 956 points at three pixels
- * to the point), in the demo, light and dark: three frames after New trainers' Next up card is tapped, the page a quarter of
- * the way out of it over the receding list with the card's picture half gone, and the page dragged 200 points down,
- * shrinking about the finger.
+ * to the point), in the demo, light and dark: three frames into the flight of New trainers' page out of its Next up card,
+ * the page a quarter of the way out of it over the receding list with the card's picture half gone, and the page
+ * dragged 200 points down, shrinking about the finger.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -79,11 +79,16 @@ class ParcelZoomScreenshotTest {
         }
     }
 
-    /** Taps New trainers' card and moves the clock on to the frame its page sets off in. */
+    /**
+     * Taps New trainers' card and moves the clock on to the first frame its page has left it in: the flight's second,
+     * one frame on from the one it sets off in.
+     */
     private fun open() {
         compose.card("New trainers").performClick()
+        // What the tap starts, the page and the card's press, takes the next frame rather than perhaps the one after.
+        compose.waitForIdle()
         var frames = 0
-        while (deliveries.zoom.covered == null) {
+        while ((deliveries.zoom.flight?.progress ?: 0f) <= 0f) {
             check(frames++ < 10) { "The page didn't set off" }
             advance(FRAME)
         }
@@ -92,7 +97,7 @@ class ParcelZoomScreenshotTest {
     private fun opening(dark: Boolean) {
         show(dark)
         open()
-        advance(3 * FRAME)
+        advance(2 * FRAME)
         compose.screenshot("zoom_open_${theme(dark)}")
     }
 

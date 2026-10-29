@@ -96,8 +96,9 @@ fun tabContentPadding(): PaddingValues {
 }
 
 /**
- * Taps on the tab already chosen, for what the tab shows: a stack goes back to its root, and a list at its root
- * scrolls to its top, as a UITabBarController's tab does.
+ * Taps on the tab already chosen, for what the tab shows: a list scrolls to its top, as a UITabBarController's tab
+ * does. A page pushed over a stack's root hides the bar ([TabBarHidden]), so the tab is tapped again only with the root
+ * in view.
  */
 @Stable
 class TabReselection {

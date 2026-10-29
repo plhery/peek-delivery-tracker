@@ -41,6 +41,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.GraphicsLayerScope
 import androidx.compose.ui.graphics.Outline
@@ -461,8 +462,19 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         val coordinates = node.coordinates ?: return null
         val host = host ?: return null
         if (!coordinates.isAttached || !host.isAttached) return null
-        return host.localBoundingBoxOf(coordinates, clipBounds = clipped)
+        val receding = transition.receding?.takeIf { it.isAttached && it.holds(coordinates) }
+        val region = receding?.parentCoordinates ?: return host.localBoundingBoxOf(coordinates, clipBounds = clipped)
+        // Receded as far as the page has come, worked out here rather than read from its layer, which a frame may
+        // update only after the page's.
+        val frame = receding.localBoundingBoxOf(coordinates, clipBounds = clipped)
+        val middle = receding.size.toSize().center
+        val scale = ZoomGeometry.receded(behind())
+        val origin = host.localPositionOf(region, Offset.Zero) + middle
+        return Rect(origin + (frame.topLeft - middle) * scale, origin + (frame.bottomRight - middle) * scale)
     }
+
+    private fun LayoutCoordinates.holds(inner: LayoutCoordinates): Boolean =
+        generateSequence(inner) { it.parentCoordinates }.any { it === this }
 
     /** The page has gone back into its source: the source shows again, and the page leaves the stack. */
     fun land() {

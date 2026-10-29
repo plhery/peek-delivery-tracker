@@ -118,8 +118,8 @@ sealed interface DeliveriesEntry : NavKey {
  *
  * The stack is drawn from the navigation, as the iPhone's NavigationStack is, and the navigation is kept with the
  * window: the parcel open comes back after a rotation, a fold or a resize, and after the system closed the app, once
- * the parcels are back. Tapping the tab again goes back to the list, and at the list scrolls it to its top. A parcel a
- * link asks for ([inbox]) opens on the list.
+ * the parcels are back. Tapping the tab again scrolls the list to its top: over a parcel's page the tab bar has gone.
+ * A parcel a link asks for ([inbox]) opens on the list.
  */
 @Composable
 fun DeliveriesTab(

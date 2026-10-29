@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.compose.ui.graphics.layer.drawLayer
 import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.node.DelegatingNode
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.node.GlobalPositionAwareModifierNode
@@ -54,6 +55,9 @@ class ZoomTransition {
     /** How far the page has come over what lies under it, from 0 to 1. */
     val behind: Float get() = flight?.behind() ?: 0f
 
+    /** Inside what recedes under the pages ([recedingUnderZoom]), as last placed. */
+    internal var receding: LayoutCoordinates? = null
+
     /** The page to show at rest as it next comes on top ([showStill]). */
     internal var still: Any? = null
 
@@ -91,13 +95,14 @@ internal fun Modifier.zoomSource(id: Any, transition: ZoomTransition, cornerRadi
 
 /**
  * What lies under a zooming page and moves with the page: it recedes about its middle as the page comes over it.
- * The iPhone's list recedes, and its bars stay where they are.
+ * The iPhone's list recedes, and its bars stay where they are. A page flying out of a source in it or back into one
+ * finds the source as far receded as the page has come, from the same frame.
  */
 fun Modifier.recedingUnderZoom(transition: ZoomTransition): Modifier = graphicsLayer {
     val scale = ZoomGeometry.receded(transition.behind)
     scaleX = scale
     scaleY = scale
-}
+}.onPlaced { transition.receding = it }
 
 /** The bar's items under a zooming page, which fade where they are as the page comes over them. */
 fun Modifier.fadingUnderZoom(transition: ZoomTransition): Modifier = graphicsLayer { alpha = 1f - transition.behind.coerceIn(0f, 1f) }

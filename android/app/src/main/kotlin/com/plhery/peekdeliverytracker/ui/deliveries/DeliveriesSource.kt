@@ -10,6 +10,7 @@ import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +26,12 @@ interface DeliveriesSource {
     /** The app's launch these stores belong to: a window saved in another one comes back after the process died. */
     val launch: UUID
 
+    /**
+     * The app's own scope, which outlives the window: the list's changes to the parcels run in it, so that leaving the
+     * tab or the window being made again doesn't cancel one half done, which the store would undo.
+     */
+    val scope: CoroutineScope
+
     val parcels: StateFlow<List<Parcel>>
     val loading: StateFlow<Boolean>
     val refreshing: StateFlow<Boolean>
@@ -38,7 +45,10 @@ interface DeliveriesSource {
     /** The parcel archived last, which its toast's Undo brings back (`store.undoParcel`). */
     val undoParcel: StateFlow<Parcel?>
 
-    /** `store.undoParcel = nil` once the toast has had its time, unless another parcel was archived since. */
+    /**
+     * `store.undoParcel = nil` once the toast has had its time: only while it still offers this very Undo (`parcel` as
+     * the store gave it), not one archived since, even of the same parcel.
+     */
     fun forgetUndo(parcel: Parcel)
 
     /**
@@ -70,6 +80,7 @@ interface DeliveriesSource {
 /** The deliveries from the app's container. */
 class ContainerDeliveries(private val container: AppContainer) : DeliveriesSource {
     override val launch: UUID get() = LAUNCH
+    override val scope: CoroutineScope get() = container.scope
     override val parcels get() = container.parcels.parcelsFlow
     override val loading get() = container.parcels.loadingFlow
     override val refreshing get() = container.parcels.refreshingFlow
@@ -81,7 +92,7 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val undoParcel get() = container.parcels.undoParcelFlow
 
     override fun forgetUndo(parcel: Parcel) {
-        if (container.parcels.undoParcel?.id == parcel.id) container.parcels.undoParcel = null
+        if (container.parcels.undoParcel === parcel) container.parcels.undoParcel = null
     }
 
     override suspend fun checkAllParcels(): ParcelStore.RefreshResult? {

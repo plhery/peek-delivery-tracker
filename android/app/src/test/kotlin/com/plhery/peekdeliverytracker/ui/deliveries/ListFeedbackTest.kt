@@ -17,6 +17,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
@@ -203,12 +204,13 @@ class ListFeedbackTest {
         toast("No new updates").assertExists()
         assertEquals("No new updates", announced())
         advance(3000)
-        source.checkResult = ParcelStore.RefreshResult.Updated
+        // The same words again are another message, with four seconds of its own, and news to TalkBack again.
         compose.onNodeWithTag(REFRESH_BUTTON).performClick()
         advance(100)
-        toast("Tracking updated").assertExists()
+        assertEquals(2, source.refreshes)
+        assertEquals("No new updates", announced())
         advance(2000)
-        toast("Tracking updated").assertExists()
+        toast("No new updates").assertExists()
         advance(2000)
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
 
@@ -217,5 +219,27 @@ class ListFeedbackTest {
         pull(700f)
         compose.waitForIdle()
         assertEquals(3, source.refreshes)
+    }
+
+    @Test
+    fun theUndoKeepsItsSevenSecondsFromTheArchiveThoughTheWindowIsMadeAgain() {
+        source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+        val recreation = Recreation(compose)
+        recreation.setContent { RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false) }
+        compose.waitForIdle()
+        compose.mainClock.autoAdvance = false
+        archive("Birthday gift")
+        // Archived once the card is out of sight: its seven seconds start.
+        advanceUntil { compose.onAllNodes(hasTestTag(INLINE_TOAST)).fetchSemanticsNodes().isNotEmpty() }
+        toast("Birthday gift").assertExists()
+        advance(3000)
+        recreation.recreate()
+        advance(500)
+        toast("Birthday gift").assertExists()
+        advance(3300)
+        toast("Birthday gift").assertExists()
+        advance(300)
+        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+        assertEquals(null, source.undoParcel.value)
     }
 }

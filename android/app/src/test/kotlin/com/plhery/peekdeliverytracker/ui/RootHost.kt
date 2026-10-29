@@ -6,6 +6,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
@@ -16,11 +17,13 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelPagePlaceholder
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import kotlin.coroutines.ContinuationInterceptor
 
 /**
  * The root as the app shows it, in the app's copy for `language`, at the captures' moment ([CAPTURED]), the deliveries
  * showing [source]'s parcels (the demo's unless a test gives its own), under Reduce Motion unless asked otherwise. The
- * session is told to the deliveries too, and their screens counted to [onView] with the tabs'.
+ * session is told to the deliveries too, and their screens counted to [onView] with the tabs'; their app's scope runs
+ * on the test's clock.
  */
 @Composable
 fun RootHost(
@@ -36,6 +39,9 @@ fun RootHost(
     val localizer = remember(language) { Localizer(language, variant = "android") }
     val shown = source ?: remember(language) { FakeDeliveries(DemoCards.parcels(language), state) }
     shown.onView = onView
+    // The app's scope keeps the test's time, as the composition's effects do.
+    val effects = rememberCoroutineScope()
+    effects.coroutineContext[ContinuationInterceptor]?.let { shown.dispatcher = it }
     SideEffect { shown.session.value = state }
     CompositionLocalProvider(LocalNow provides { CAPTURED }) {
         PeekTheme(

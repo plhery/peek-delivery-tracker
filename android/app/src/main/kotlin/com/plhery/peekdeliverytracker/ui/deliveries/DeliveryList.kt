@@ -203,7 +203,8 @@ internal fun DeliveryList(state: DeliveriesState) {
 
 /**
  * `bottomControls`: the toast of the parcel archived last, whose Undo brings it back, or else the latest message, for
- * four seconds from when it came. The invitation to turn notifications on comes with the notifications.
+ * four seconds from when it came, which the tab counts ([DeliveriesTab]). The invitation to turn notifications on comes
+ * with the notifications.
  */
 @Composable
 private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, modifier: Modifier) {
@@ -217,19 +218,12 @@ private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, m
             text = state.archivedText(parcel), button = localizer.text("app.undo"), symbol = "archivebox.fill",
             tint = colors.resolve(ExperimentalPalette.ochre), action = { state.restore(parcel) }, backdrop = backdrop, modifier = modifier,
         )
-        toast != null -> {
-            InlineToast(
-                text = toast.text, button = null,
-                symbol = if (toast.warning) "exclamationmark.triangle.fill" else "checkmark.circle.fill",
-                tint = if (toast.warning) colors.warning else colors.resolve(ExperimentalPalette.delivered),
-                action = null, backdrop = backdrop, modifier = modifier,
-            )
-            // A newer message gets its own four seconds.
-            LaunchedEffect(toast) {
-                delay(TOAST_DURATION)
-                state.dismiss(toast)
-            }
-        }
+        toast != null -> InlineToast(
+            text = toast.text, button = null,
+            symbol = if (toast.warning) "exclamationmark.triangle.fill" else "checkmark.circle.fill",
+            tint = if (toast.warning) colors.warning else colors.resolve(ExperimentalPalette.delivered),
+            action = null, backdrop = backdrop, modifier = modifier,
+        )
         // Nothing shows: the list comes back down.
         else -> Box(modifier)
     }
@@ -509,7 +503,7 @@ private fun SwipeableCard(
         return
     }
     val title = localizer.text("parcel.archive")
-    val swipe = rememberArchiveSwipe(state, parcel.id) { state.archive(menu.parcel) }
+    val swipe = rememberArchiveSwipe(state, parcel.id) { leaving -> state.archive(menu.parcel, after = leaving) }
     val action = remember(swipe, title) { archiveAction(swipe, title) }
     val tap = remember(swipe, open) { { swipe.tap(open) } }
     SwipeToArchive(swipe, title, cornerRadius, shadow, menu.modifier.then(modifier)) { moved ->
@@ -647,7 +641,6 @@ private val CARD_SPACING = 12.dp
 private val CONTROLS_BOTTOM = 5.dp
 private val CONTROLS_SPACING = CONTROLS_BOTTOM + 8.dp
 private val ARCHIVE_RADIUS = 18.dp
-private const val TOAST_DURATION = 4_000L
 /** How long TalkBack's news stays said before it is emptied. */
 private const val ANNOUNCEMENT_HOLD = 1_000L
 private const val LIST_MOTION = 0.32

@@ -27,6 +27,7 @@ import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createComposeRule
@@ -489,5 +490,25 @@ class DeliveryListTest {
         val started = shadowOf(ApplicationProvider.getApplicationContext<Application>()).nextStartedActivity
         assertEquals(Intent.ACTION_VIEW, started.action)
         assertEquals("https://example.com/privacy", started.dataString)
+    }
+
+    // A turn draws the list anew (`key(arrangement)`): what it keeps, and what goes with it.
+
+    private fun toastShown(text: String): Boolean =
+        compose.onAllNodes(hasTestTag(INLINE_TOAST) and hasContentDescription(text, substring = true)).fetchSemanticsNodes().isNotEmpty()
+
+    @Test
+    fun aTurnKeepsAMessageAndWhatIsLeftOfItsFourSeconds() {
+        show()
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(REFRESH_BUTTON).performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertTrue(toastShown("No new updates"))
+        compose.mainClock.advanceTimeBy(3000)
+        resize(600.dp)
+        compose.mainClock.advanceTimeBy(500)
+        assertTrue(toastShown("No new updates"))
+        compose.mainClock.advanceTimeBy(500)
+        assertFalse(toastShown("No new updates"))
     }
 }

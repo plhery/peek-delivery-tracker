@@ -75,7 +75,10 @@ import kotlin.math.abs
 import kotlin.math.hypot
 import kotlin.math.max
 import kotlin.math.min
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /** What [archivePanDecision] makes of a drag so far. */
@@ -111,7 +114,9 @@ internal class ArchiveSwipe(
 ) {
     var reduceMotion: Boolean = reduceMotion
     var width: Double = 0.0
-    var action: suspend () -> Boolean = { false }
+
+    /** Archives the parcel once `leaving` is over, and says whether it left the list. */
+    var action: (leaving: Job) -> Deferred<Boolean> = { CompletableDeferred(false) }
 
     private var swipe = ArchiveSwipeState()
     private var gestureActive = false
@@ -250,7 +255,11 @@ internal class ArchiveSwipe(
         open()
     }
 
-    /** The card leaves to the left, the label moving to the middle of the row, then the parcel is archived. */
+    /**
+     * The card leaves to the left, the label moving to the middle of the row, then the parcel is archived: in the app's
+     * scope ([action]), so that leaving the tab or the window turning as the card goes cuts its way out short rather
+     * than the archive.
+     */
     fun trigger(velocity: Double? = null, provideFeedback: Boolean) {
         if (committing) return
         committing = true
@@ -270,11 +279,13 @@ internal class ArchiveSwipe(
         start(exit)
         // The row leaves the list once the card is out of sight and the label has nearly centred.
         val leave = exit.time { it.reveal >= width - 2 && it.land >= 0.92 }
-        scope.launch {
+        val leaving = scope.launch {
             while (motion === exit && elapsed() < leave) withFrameNanos { tick(it) }
+        }
+        val archived = action(leaving)
+        scope.launch {
             // The list removes the row at once; it comes back only when archiving failed.
-            val archived = action()
-            if (archived) return@launch
+            if (archived.await()) return@launch
             committing = false
             arm(false)
             settle(ArchiveSwipeState.Destination.Closed)
@@ -293,7 +304,7 @@ internal class ArchiveSwipe(
 
 /** The swipe of a card that `state` archives, kept as long as the card is in the list. */
 @Composable
-internal fun rememberArchiveSwipe(state: DeliveriesState, parcelId: UUID, action: suspend () -> Boolean): ArchiveSwipe {
+internal fun rememberArchiveSwipe(state: DeliveriesState, parcelId: UUID, action: (leaving: Job) -> Deferred<Boolean>): ArchiveSwipe {
     val reduceMotion = PeekTheme.reduceMotion
     val haptics = rememberHaptics()
     val swipe = remember(state, parcelId) { ArchiveSwipe(state.scope, { haptics }, reduceMotion) }

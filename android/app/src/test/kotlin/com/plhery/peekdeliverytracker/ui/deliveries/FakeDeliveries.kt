@@ -5,13 +5,19 @@ import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.time.Instant
 import java.util.UUID
+import kotlin.coroutines.ContinuationInterceptor
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  * The deliveries' stores as a test sets them: its parcels, the session, what loads, and what the list asked of them.
- * A new process is a new `launch`. Archiving, restoring and deleting change the parcels as the store does, or fail with
- * `failure`; a check of every parcel answers `checkResult`, or waits for `checking` when a test holds it.
+ * A new process is a new `launch`, and the app's scope outlives every window, on the test's clock once `RootHost` shows
+ * them ([dispatcher]). Archiving, restoring and deleting change the parcels as the store does, or fail with `failure`,
+ * an archive once `archiving` lets it go when a test holds it; a check of every parcel answers `checkResult`, or waits
+ * for `checking` when a test holds it.
  */
 class FakeDeliveries(
     parcels: List<Parcel> = emptyList(),
@@ -26,6 +32,12 @@ class FakeDeliveries(
     override val undoParcel = MutableStateFlow<Parcel?>(null)
     override val homePageUrl = "https://example.com/"
     override val privacyUrl = "https://example.com/privacy"
+    private val job = SupervisorJob()
+
+    /** Where the app's scope runs: the main thread, or the test's clock, which `RootHost` hands in. */
+    var dispatcher: ContinuationInterceptor = Dispatchers.Main.immediate
+
+    override val scope: CoroutineScope get() = CoroutineScope(job + dispatcher)
 
     /** The screens and actions counted, in their order. */
     val views = mutableListOf<String>()
@@ -46,6 +58,9 @@ class FakeDeliveries(
     /** What the store's changes throw, when they fail. */
     var failure: Exception? = null
 
+    /** Holds each archive until the test lets it go, as a slow connection would. */
+    var archiving: CompletableDeferred<Unit>? = null
+
     /** The parcels archived, restored and deleted, in their order. */
     val archived = mutableListOf<UUID>()
     val restored = mutableListOf<UUID>()
@@ -64,10 +79,11 @@ class FakeDeliveries(
     }
 
     override fun forgetUndo(parcel: Parcel) {
-        if (undoParcel.value?.id == parcel.id) undoParcel.value = null
+        if (undoParcel.value === parcel) undoParcel.value = null
     }
 
     override suspend fun archive(parcel: Parcel) {
+        archiving?.await()
         failure?.let { throw it }
         archived += parcel.id
         parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(archivedAt = ARCHIVED_AT) else it }

@@ -34,6 +34,9 @@ import java.time.Instant
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -187,9 +190,12 @@ internal fun <T> rememberForLaunch(launch: UUID, initial: T): MutableState<T> =
         ),
     ) { mutableStateOf(initial) }
 
-/** A message under the list (`ListToast`): what a check of the parcels found, or that a number was copied. */
+/**
+ * A message under the list (`ListToast`): what a check of the parcels found, or that a number was copied. Each one
+ * shown is another ([id]), even with the same words, and has its own four seconds.
+ */
 @Immutable
-internal data class ListToast(val text: String, val warning: Boolean = false)
+internal data class ListToast(val id: Int, val text: String, val warning: Boolean = false)
 
 /** News TalkBack is told that nothing on screen says (`AccessibilityNotification.Announcement`), each one once. */
 @Immutable
@@ -200,8 +206,10 @@ internal data class Announcement(val text: String, val count: Int)
  * arrangement, the navigation, the list's scroll and the archive's shelf; and what ParcelListView keeps for its
  * feedback: the pull, the toast, the error of an action, the card menu open and the delete it asks about.
  *
- * The list's own work (a refresh, an archive) runs in `scope`, the tab's, so that drawing the list again doesn't
- * cancel it, as the iPhone's pull runs in a task of its own.
+ * The list's own work (a refresh, a card on its way out) runs in `scope`, the tab's, so that drawing the list again,
+ * as the window turns, doesn't cancel it, as the iPhone's pull runs in a task of its own. Its changes to the parcels
+ * (an archive, a restore, a delete) run in the app's scope ([DeliveriesSource.scope]), which leaving the tab doesn't
+ * cancel either.
  */
 @Stable
 internal class DeliveriesState(
@@ -311,15 +319,17 @@ internal class DeliveriesState(
     var toast: ListToast? by mutableStateOf(null)
         private set
 
+    private var toasts = 0
+
     /** Shows a message under the list, and tells TalkBack. */
-    fun show(toast: ListToast) {
-        this.toast = toast
-        announce(toast.text)
+    fun show(text: String, warning: Boolean = false) {
+        toast = ListToast(++toasts, text, warning)
+        announce(text)
     }
 
-    /** The message has had its four seconds, unless a newer one took its place. */
-    fun dismiss(toast: ListToast) {
-        if (this.toast == toast) this.toast = null
+    /** The message `id` has had its four seconds, unless a newer one took its place. */
+    fun dismiss(id: Int) {
+        if (toast?.id == id) toast = null
     }
 
     /** What the toast of an archived parcel says (`app.archivedToast`). */
@@ -365,7 +375,7 @@ internal class DeliveriesState(
                 is ParcelStore.RefreshResult.Failed -> {
                     finishPull(succeeded = false, label = text("detail.checkFailed"))
                     delay(PULL_RESULT)
-                    show(ListToast(result.message, warning = true))
+                    show(result.message, warning = true)
                 }
                 ParcelStore.RefreshResult.StillChecking -> {
                     // The checks keep running, so the arrow keeps turning under the message.
@@ -394,27 +404,44 @@ internal class DeliveriesState(
         if (source.refreshing.value) return
         scope.launch {
             when (val result = source.checkAllParcels()) {
-                is ParcelStore.RefreshResult.Failed -> show(ListToast(result.message, warning = true))
+                is ParcelStore.RefreshResult.Failed -> show(result.message, warning = true)
                 null -> Unit
-                else -> show(ListToast(text(result.messageKey)))
+                else -> show(text(result.messageKey))
             }
         }
     }
 
-    /** Archives the parcel; whether it left the list, so a swiped card only comes back after a failure. */
-    suspend fun archive(parcel: Parcel): Boolean = try {
-        source.archive(parcel)
+    /**
+     * Archives the parcel once `after` is over (a swiped card's way out, done or cut short), in the app's scope;
+     * whether it left the list, so a swiped card only comes back after a failure.
+     *
+     * Its Undo then lasts seven seconds, counted in the app's scope too, as the iPhone counts them in a task of its
+     * own: leaving the tab or the window turning doesn't give it seven more. Each archive counts for its own Undo, so
+     * one after it, even of the same parcel put back in between, keeps its whole seven.
+     */
+    fun archive(parcel: Parcel, after: Job? = null): Deferred<Boolean> = source.scope.async {
+        after?.join()
+        try {
+            source.archive(parcel)
+        } catch (error: CancellationException) {
+            throw error
+        } catch (error: Exception) {
+            actionError = source.errorMessage(error)
+            return@async false
+        }
+        source.undoParcel.value?.let { undo ->
+            announce(archivedText(undo))
+            source.scope.launch {
+                delay(UNDO_DURATION)
+                source.forgetUndo(undo)
+            }
+        }
         true
-    } catch (error: CancellationException) {
-        throw error
-    } catch (error: Exception) {
-        actionError = source.errorMessage(error)
-        false
     }
 
     /** Brings a parcel back from the archive: the card's Restore, and the Undo of its toast. */
     fun restore(parcel: Parcel) {
-        scope.launch {
+        source.scope.launch {
             try {
                 source.restore(parcel)
             } catch (error: CancellationException) {
@@ -428,7 +455,7 @@ internal class DeliveriesState(
     /** Deletes the parcel its menu asked about. Beside the list, a card that was shown gives way to the next. */
     fun delete(parcel: Parcel) {
         val cards = rows
-        scope.launch {
+        source.scope.launch {
             try {
                 source.permanentlyDelete(parcel)
                 navigator.leave(parcel.id, cards)
@@ -452,9 +479,9 @@ internal class DeliveriesState(
                 source.action("parcel-copy-tracking")
                 val copied = text("detail.copied")
                 // Where the system shows the copy itself, TalkBack still hears of it.
-                if (copy(TrackingNumberCopy.text(entry.number, entry.carrier))) show(ListToast(copied)) else announce(copied)
+                if (copy(TrackingNumberCopy.text(entry.number, entry.carrier))) show(copied) else announce(copied)
             }
-            ParcelMenuItem.Archive -> scope.launch { archive(parcel) }
+            ParcelMenuItem.Archive -> archive(parcel)
             ParcelMenuItem.Restore -> restore(parcel)
             ParcelMenuItem.Delete -> deleting = parcel
         }
@@ -533,6 +560,9 @@ internal fun cardId(key: Any?): UUID? {
 
 /** The archive's shelf's key in the list. */
 internal const val ARCHIVE_KEY = "archive"
+
+/** How long an archived parcel's Undo stays, in milliseconds. */
+private const val UNDO_DURATION = 7_000L
 
 /** The pull holds its arrow turning this long at least, and its result this long, in milliseconds. */
 private const val PULL_MINIMUM = 900L

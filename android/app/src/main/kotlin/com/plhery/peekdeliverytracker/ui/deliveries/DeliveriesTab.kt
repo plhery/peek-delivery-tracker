@@ -143,13 +143,15 @@ fun DeliveriesTab(
         // From Android 13 the system confirms a copy itself, and the app says nothing more.
         Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
     }
+    // A message under the list has four seconds while it shows, from when it came; a newer one, even in the same
+    // words, has its own. Counted here rather than by the list, which a turn of the window draws anew. An archive's
+    // Undo counts its seven in the app's scope ([DeliveriesState.archive]).
     val undo by source.undoParcel.collectAsState()
-    // An Undo lasts seven seconds; archiving another parcel gives it seven more.
-    LaunchedEffect(undo?.id) {
-        val parcel = undo ?: return@LaunchedEffect
-        state.announce(state.archivedText(parcel))
-        delay(UNDO_DURATION)
-        source.forgetUndo(parcel)
+    val toast = state.toast.takeIf { undo == null }
+    LaunchedEffect(toast?.id) {
+        if (toast == null) return@LaunchedEffect
+        delay(TOAST_DURATION)
+        state.dismiss(toast.id)
     }
     val reduceMotion = PeekTheme.reduceMotion
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
@@ -256,10 +258,10 @@ private fun HoldingDelivered(state: DeliveriesState, reduceMotion: Boolean) {
 }
 
 private const val POSTMARK_MILLIS = 300L
-
-/** How long an archived parcel's Undo stays, in milliseconds. */
-private const val UNDO_DURATION = 7_000L
 private const val READ_MILLIS = 650L
+
+/** How long a message under the list stays, in milliseconds. */
+private const val TOAST_DURATION = 4_000L
 
 /**
  * What waits for the list in this window (A-D26, A-L14): a parcel a link asked for, at once and whenever another comes;

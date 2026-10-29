@@ -13,6 +13,7 @@ import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
@@ -21,7 +22,9 @@ import androidx.compose.ui.test.performTouchInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
@@ -247,11 +250,62 @@ class ArchiveSwipeTest {
         val rest = left("Birthday gift")
         drag("Birthday gift", distance = -230f, steps = 20)
         assertEquals(emptyList<Any>(), source.archived)
-        assertEquals(rest, left("Birthday gift"), 0.5f)
         compose.onNodeWithTag(ACTION_ERROR).assertExists()
         compose.onNode(hasText("No connection", substring = true)).assertExists()
+        assertEquals(rest, left("Birthday gift"), 0.5f)
         compose.onNodeWithTag(ACTION_ERROR_CLOSE).performClick()
         compose.waitForIdle()
         compose.onNodeWithTag(ACTION_ERROR).assertDoesNotExist()
+    }
+
+    @Test
+    fun anArchiveUnderWayFinishesThoughTheTabIsLeftAndItsUndoKeepsItsSevenSeconds() {
+        show()
+        val held = CompletableDeferred<Unit>()
+        source.archiving = held
+        compose.mainClock.autoAdvance = false
+        compose.card("Birthday gift").performTouchInput { slide(-230f, steps = 20, hold = 200) }
+        compose.mainClock.advanceTimeByFrame()
+        // Another tab at once, the card still on its way out, then the store answers. (The tabs are pressed as TalkBack
+        // does, the clock held still.)
+        compose.onNodeWithContentDescription("Friends").performSemanticsAction(SemanticsActions.OnClick)
+        compose.waitForIdle()
+        compose.mainClock.advanceTimeBy(1000)
+        compose.onNodeWithTag("friends").assertExists()
+        assertEquals(emptyList<Any>(), source.archived)
+        held.complete(Unit)
+        compose.mainClock.advanceTimeBy(1000)
+        assertEquals(listOf(DemoCards.parcel("Birthday gift").id), source.archived)
+
+        compose.onNodeWithContentDescription("Deliveries").performSemanticsAction(SemanticsActions.OnClick)
+        compose.waitForIdle()
+        compose.mainClock.advanceTimeBy(500)
+        compose.onNode(cardNamed("Birthday gift") and hasAnyAncestor(hasTestTag(PARCEL_LIST))).assertDoesNotExist()
+        undoShown("Birthday gift").assertExists()
+        // Seven seconds from the archive, not from coming back.
+        compose.mainClock.advanceTimeBy(4600)
+        undoShown("Birthday gift").assertExists()
+        compose.mainClock.advanceTimeBy(1000)
+        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+    }
+
+    @Test
+    fun anArchiveUnderWayFinishesThoughTheWindowIsMadeAgain() {
+        source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+        val recreation = Recreation(compose)
+        recreation.setContent { RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false) }
+        compose.waitForIdle()
+        val held = CompletableDeferred<Unit>()
+        source.archiving = held
+        compose.card("Birthday gift").fetchSemanticsNode().config[SemanticsActions.CustomActions].single { it.label == "Archive" }
+            .let { action -> compose.runOnUiThread { action.action() } }
+        compose.waitForIdle()
+        recreation.recreate()
+        held.complete(Unit)
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertEquals(listOf(DemoCards.parcel("Birthday gift").id), source.archived)
+        compose.onNode(cardNamed("Birthday gift") and hasAnyAncestor(hasTestTag(PARCEL_LIST))).assertDoesNotExist()
+        undoShown("Birthday gift").assertExists()
     }
 }

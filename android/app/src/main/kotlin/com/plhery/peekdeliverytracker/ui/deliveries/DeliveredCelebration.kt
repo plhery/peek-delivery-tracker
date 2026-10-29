@@ -235,6 +235,9 @@ internal class DeliveredPaperBurst(val confetti: DeliveredConfetti, val colors: 
 /** The seeds of the bursts of paper, random but in the tests, which fix them to draw the same paper each time. */
 internal val LocalPaperSeeds = staticCompositionLocalOf<(() -> ULong)?> { null }
 
+/** Told the list's state as the tab is drawn: the tests read where the paper is thrown from and where the cards fly. */
+internal val LocalDeliveriesState = staticCompositionLocalOf<((DeliveriesState) -> Unit)?> { null }
+
 /**
  * The rest of `DeliveryCardPlace`: the card's node, which its place in the list is measured from, until it leaves the
  * list. Its frame in its item is [deliveryCardPlace]'s.

@@ -152,6 +152,7 @@ fun DeliveriesTab(
     state.density = LocalDensity.current
     state.layoutDirection = LocalLayoutDirection.current
     LocalPaperSeeds.current?.let { state.seeds = it }
+    LocalDeliveriesState.current?.invoke(state)
     val context = LocalContext.current
     val haptics = rememberHaptics()
     state.copy = { text ->

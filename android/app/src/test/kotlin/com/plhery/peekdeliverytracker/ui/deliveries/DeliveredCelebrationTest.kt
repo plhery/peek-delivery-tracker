@@ -23,6 +23,7 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -42,6 +43,7 @@ import java.time.Duration
 import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -52,9 +54,9 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * A parcel delivered as the list is looked at, on a phone: its card held with the postmark, the tap and one burst of
- * paper, then the cards flown to their new places; nothing held when nobody looks or under Reduce Motion; the flights
- * ended without a trace as the list goes, turns or takes another size, or a parcel opens; and the rating the arrival may
- * ask for once its card has landed, through a fake of Play's prompt.
+ * paper, then the cards flown to their new places, wherever the list is scrolled to; nothing held when nobody looks or
+ * under Reduce Motion; the flights ended without a trace as the list goes, turns or takes another size, or a parcel
+ * opens; and the rating the arrival may ask for once its card has landed, through a fake of Play's prompt.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -65,6 +67,7 @@ class DeliveredCelebrationTest {
 
     private lateinit var source: FakeDeliveries
     private lateinit var view: View
+    private lateinit var deliveries: DeliveriesState
     private var windowWidth by mutableStateOf(390.dp)
 
     /** The bursts of paper thrown, each asking for its seed once. */
@@ -96,7 +99,7 @@ class DeliveredCelebrationTest {
         source = FakeDeliveries(parcels, AuthenticationState.Demo)
         val content = @Composable {
             view = LocalView.current
-            CompositionLocalProvider(LocalPaperSeeds provides { bursts++; SEED }) {
+            CompositionLocalProvider(LocalPaperSeeds provides { bursts++; SEED }, LocalDeliveriesState provides { deliveries = it }) {
                 Box(Modifier.width(windowWidth).fillMaxHeight()) {
                     RootHost(state = AuthenticationState.Demo, reduceMotion = reduceMotion, source = source)
                 }
@@ -358,6 +361,48 @@ class DeliveredCelebrationTest {
             assertFalse(shows(DELIVERED_FLIGHTS))
         }
         assertTrue(cards("New trainers") <= 1)
+    }
+
+    @Test
+    fun aCardFirstDrawnInAnItemTheListMadeForAnotherThrowsPaperAndFliesFromItsPlace() {
+        // Six records on the way besides the demo's parcels, each as Kind of Blue is: more cards than the screen holds.
+        val vinyl = before.first { it.label.startsWith("Kind of Blue") }
+        val records = List(6) { vinyl.copy(id = UUID(7, it.toLong()), label = "Record ${'A' + it}") }
+        val last = records.last()
+        val arrived = demo[2].first { it.id == vinyl.id }.copy(id = last.id, label = last.label)
+        assertTrue(arrived.isDelivered)
+        show(before + records)
+        // Scrolled down a card at a time, the list draws each card coming in with the item of one that went: the last
+        // record's, below the screen at first, too.
+        assertEquals(0, cards(last.label))
+        val list = compose.onNodeWithTag(PARCEL_LIST)
+        compose.mainClock.autoAdvance = true
+        var index = 0
+        while (cards(last.label) == 0 || top(last.label) > 300f) {
+            list.performScrollToIndex(++index)
+            compose.waitForIdle()
+        }
+        compose.mainClock.autoAdvance = false
+        val card = compose.card(last.label).getUnclippedBoundsInRoot()
+        val listTop = list.getUnclippedBoundsInRoot().top.value
+
+        deliver(before + records.dropLast(1) + arrived)
+        advance(350)
+        // The paper comes out of the end of its card, as it shows.
+        assertEquals(1, bursts)
+        val origin = deliveries.paper!!.confetti.origin
+        assertTrue(origin.x in card.left.value..card.right.value && origin.y in card.top.value..card.bottom.value)
+        advance(650)
+        // Its picture flies from where the card stood, to where the list now has it, among the deliveries on the screen,
+        // rather than out of the screen.
+        val flight = deliveries.flights.single { it.id == last.id }
+        assertEquals(card.top.value - listTop, flight.from.frame.minY.toFloat(), 1f)
+        advanceUntil(1) { flight.to != null }
+        val landing = deliveries.places.place(last.id)
+        assertNotNull(landing)
+        assertEquals(landing!!.frame.minY, flight.to!!.frame.minY, 1.0)
+        advanceUntil(2) { !shows(DELIVERED_FLIGHTS) }
+        assertEquals(1, cards(last.label))
     }
 
     @Test

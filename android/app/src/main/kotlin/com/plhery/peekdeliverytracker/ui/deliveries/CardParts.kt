@@ -236,8 +236,8 @@ private object DeliveryListItemKey
 
 /**
  * `.onGeometryChange(for:) { $0.frame(in: .named(DeliveryListSpace.name)) }`: the content's frame in its item of the
- * list ([deliveryListItem]), in points (dp), each time it changes, which scrolling doesn't; in the window's when there
- * is no list, as SwiftUI falls back to the global space.
+ * list ([deliveryListItem]), in points (dp), each time it changes, which scrolling doesn't, and as the list draws another
+ * card in the item; in the window's when there is no list, as SwiftUI falls back to the global space.
  */
 internal fun Modifier.reportsFrameInList(onFrame: (Rect) -> Unit): Modifier = this then ListFrameElement(onFrame)
 
@@ -245,7 +245,7 @@ private data class ListFrameElement(val onFrame: (Rect) -> Unit) : ModifierNodeE
     override fun create() = ListFrameNode(onFrame)
 
     override fun update(node: ListFrameNode) {
-        node.onFrame = onFrame
+        node.update(onFrame)
     }
 
     override fun InspectorInfo.inspectableProperties() {
@@ -253,12 +253,31 @@ private data class ListFrameElement(val onFrame: (Rect) -> Unit) : ModifierNodeE
     }
 }
 
-private class ListFrameNode(var onFrame: (Rect) -> Unit) :
+private class ListFrameNode(private var onFrame: (Rect) -> Unit) :
     Modifier.Node(), GlobalPositionAwareModifierNode, CompositionLocalConsumerModifierNode {
+    /** The frame `onFrame` was last told. */
     private var last: Rect? = null
 
+    /**
+     * Another one to tell, as when the list gives this item to another card: told at once where the content stands,
+     * which it may not leave again for a long while.
+     */
+    fun update(onFrame: (Rect) -> Unit) {
+        if (onFrame == this.onFrame) return
+        this.onFrame = onFrame
+        last = null
+        if (isAttached) requireLayoutCoordinates().takeIf { it.isAttached }?.let(::report)
+    }
+
+    /** An item the list kept aside to show again: whoever it tells next hasn't been told. */
+    override fun onReset() {
+        last = null
+    }
+
     /** Each time the content moves on screen, a scroll too: told only when its frame in the item has changed. */
-    override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
+    override fun onGloballyPositioned(coordinates: LayoutCoordinates) = report(coordinates)
+
+    private fun report(coordinates: LayoutCoordinates) {
         val density = currentValueOf(LocalDensity).density
         val item = findNearestAncestor(DeliveryListItemKey)?.requireLayoutCoordinates()?.takeIf { it.isAttached }
         val origin = item?.localPositionOf(coordinates, Offset.Zero) ?: coordinates.positionInRoot()

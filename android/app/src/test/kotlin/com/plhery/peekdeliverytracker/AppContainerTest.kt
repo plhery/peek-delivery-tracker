@@ -17,6 +17,7 @@ import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.security.Security
+import java.time.Instant
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -173,6 +174,36 @@ class AppContainerTest {
         idleUntil("the demo") { app.session.state == AuthenticationState.Demo }
         idleUntil("the demo's parcels") { app.parcels.parcelsFlow.value.isNotEmpty() }
         assertTrue(app.session.isDemo)
+    }
+
+    @Test
+    fun theDemoNeverAsksForARatingButForADebugBuildsLook() {
+        val defaults = PreferencesDefaults.standard(context)
+        defaults.set("demo", forKey = "sdt.native.experience.v1")
+        val app = container()
+        // Nothing asks over the first screen, before any parcel.
+        assertFalse(app.reviewSettled.value)
+        app.start(process.lifecycle)
+        idleUntil("the demo's parcels") { app.session.state == AuthenticationState.Demo && app.parcels.parcelsFlow.value.isNotEmpty() }
+        settle()
+        assertFalse(app.reviewSettled.value)
+        app.scope.cancel()
+
+        // `sdt.debug.reviewDue`: every calm moment asks, over the demo too.
+        defaults.set(true, forKey = "sdt.debug.reviewDue")
+        val forced = AppContainer(context, configuration(), scope = MainScope(), debug = true).also { container = it }
+        forced.start(process.lifecycle)
+        idleUntil("the demo's parcels") { forced.session.state == AuthenticationState.Demo && forced.parcels.parcelsFlow.value.isNotEmpty() }
+        idleUntil("a calm moment") { forced.reviewSettled.value }
+        assertTrue(forced.reviewPrompt.isDue(Instant.now(), calm = true))
+        // Never in a release, whatever the defaults say.
+        forced.scope.cancel()
+        val release = AppContainer(context, configuration(), scope = MainScope(), debug = false).also { container = it }
+        release.start(process.lifecycle)
+        idleUntil("the demo's parcels") { release.session.state == AuthenticationState.Demo && release.parcels.parcelsFlow.value.isNotEmpty() }
+        settle()
+        assertFalse(release.reviewSettled.value)
+        assertFalse(release.reviewPrompt.isDue(Instant.now(), calm = true))
     }
 
     @Test

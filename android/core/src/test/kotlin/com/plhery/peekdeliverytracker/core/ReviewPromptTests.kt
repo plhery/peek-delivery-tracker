@@ -355,8 +355,6 @@ class ReviewPromptTests {
         assertFalse(prompt.isDue(at = day(2), calm = true))
     }
 
-    // Helpers
-
     @Test
     fun onlySomeonesOwnCurrentParcelsWithNothingOverThemAreSettled() {
         fun settled(
@@ -391,6 +389,8 @@ class ReviewPromptTests {
         assertFalse(settled(linkOpen = true))
         assertFalse(settled(invitationShown = true))
     }
+
+    // Helpers
 
     private fun usedTwoDays(store: UserDefaults) {
         val prompt = ReviewPrompt(store, version = "1.0.2", timeZone = { ZoneOffset.UTC })

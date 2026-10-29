@@ -162,7 +162,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'tas-courier'
   | 'famafutar'
   | 'first-flight-me'
-  | 'dd-express';
+  | 'dd-express'
+  | 'boyuan';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

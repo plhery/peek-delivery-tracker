@@ -237,6 +237,7 @@ describe('carrier brand', () => {
       'famafutar',
       'first-flight-me',
       'dd-express',
+      'boyuan',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

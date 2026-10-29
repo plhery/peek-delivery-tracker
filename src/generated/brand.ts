@@ -637,6 +637,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "botswana-post": "botswana-post",
   "box-now": "box-now",
   "boxtal": "boxtal",
+  "boyuan": "boyuan",
   "bpost": "bpost",
   "bring-posten": "bring",
   "bringer-parcel": "bringer-parcel",
@@ -15604,6 +15605,37 @@ export const CARRIER_TRUCK: TruckGeometry = {
         "type": "polygon",
         "d": "M8.81 6.07L9.66 5.59L9.1 10.48L8.29 10.48L8.2 9.92Z",
         "fill": "#0056b8"
+      }
+    ],
+    "boyuan": [
+      {
+        "type": "circle",
+        "cx": 11,
+        "cy": 9.3,
+        "r": 4.9,
+        "fill": "accent"
+      },
+      {
+        "type": "circle",
+        "cx": 11,
+        "cy": 9.3,
+        "r": 4.4,
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.06 7.34L7.57 7.7L7.86 8.01L8.03 8.24L8.18 8.49L8.36 8.88L8.44 9.16L8.51 9.58L8.51 10.16L8.44 10.58L8.36 10.86L8.18 11.25L8.03 11.5L7.77 11.84L7.56 12.04L7.62 12.11L10.72 7.97L10.03 7.1L7.19 7.1Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.81 7.1L12.24 7.1L8.09 12.6L8.56 12.96L8.93 13.18L9.52 13.44L10.06 13.6L14.85 7.17Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.39 9.08L15.32 8.44L15.21 8.02L15.07 7.62L14.85 7.17L10.06 13.6L10.57 13.68L11 13.7L11.43 13.68L12.07 13.57L12.48 13.44L12.88 13.28L13.26 13.07L13.79 12.7L14.26 12.25L14.53 11.92L14.77 11.56L15.07 10.98L15.21 10.58L15.35 9.95L15.39 9.52Z",
+        "fill": "#172a88"
       }
     ]
   }

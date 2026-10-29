@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    What leaves the phone in a backup or a transfer to a new one: the preferences, as the iPhone's UserDefaults go in
+    its backups. Never the secrets (Keychain/: the session, owner keys, attestation records, sealed with a key of this
+    phone's Keystore, which stays behind), the parcels this phone follows (DeviceParcels/: useless without their owner
+    keys) or what an account showed (ParcelCache/). The cache folder never goes.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="file" path="Keychain/" />
+        <exclude domain="file" path="DeviceParcels/" />
+        <exclude domain="file" path="ParcelCache/" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="file" path="Keychain/" />
+        <exclude domain="file" path="DeviceParcels/" />
+        <exclude domain="file" path="ParcelCache/" />
+    </device-transfer>
+</data-extraction-rules>

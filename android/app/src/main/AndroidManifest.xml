@@ -6,8 +6,12 @@
     <!-- Haptics at the iPhone's intensities (VibrationEffect compositions, Haptics.kt). -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <!-- Backups carry the preferences, never the secrets, the parcels whose keys stay behind or the caches
+         (res/xml/data_extraction_rules.xml). -->
     <application
         android:name=".PeekApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Peek">
@@ -20,6 +24,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- The account's export, handed to the share sheet (CacheExportFiles). -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.exports"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/exports" />
+        </provider>
     </application>
 
 </manifest>

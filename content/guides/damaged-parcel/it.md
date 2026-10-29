@@ -126,7 +126,7 @@ Se il venditore non ti aiuta, restano lo storno con la carta e la contestazione 
 - [Normattiva: Codice del consumo, art. 133](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art133) – due anni, 26 mesi, nessuna denuncia entro due mesi
 - [Normattiva: Codice del consumo, art. 135](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art135) – presunzione di un anno
 - [Normattiva: Codice del consumo, art. 135-bis](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art135bis) – riparazione, sostituzione, riduzione del prezzo, risoluzione
-- [Brocardi: Codice civile, art. 1698](https://www.brocardi.it/codice-civile/libro-quarto/titolo-iii/capo-viii/sezione-iii/art1698.html) – ricevimento senza riserve, otto giorni
+- [Normattiva: Codice civile, art. 1698](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1698) – ricevimento senza riserve, otto giorni
 - [Fedlex: Codice delle obbligazioni](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/it) – art. 185, 201 («subito») e 210
 - [Poste Italiane: Carta dei servizi postali non universali](https://www.media.poste.it/37381c9f-a87e-4292-8b89-00e88fa53323/web/carta-servizi-non-universali) – modulo di consegna cautelare, verbale di non conformità, rinuncia del mittente, 45 giorni, Poste Delivery Express 15 giorni e 50 €, Poste Delivery Business 20 giorni e 1 € al chilo
 - [BRT: La mia merce è stata persa o danneggiata](https://www.brt.it/it/faq/la-mia-merce-e-stata-persa-o-danneggiata-cosa-devo-fare/) – form Danni, destinatario che ha pagato il trasporto, foto

@@ -88,11 +88,8 @@ class MaterialRecipe(
     val saturation: Float,
     val brightness: Float,
 ) {
-    /**
-     * Android's blur radius for the same Gaussian. RenderEffect's radius r blurs with σ = 0.57735 r + 0.5 pixels
-     * (hwui's Blur::convertRadiusToSigma), so r is √3 σ; the half pixel is left out.
-     */
-    val androidBlurRadius: Dp get() = (blurRadius * sqrt(3f)).dp
+    /** Android's blur radius for the same Gaussian ([gaussianBlurRadius]). */
+    val androidBlurRadius: Dp get() = gaussianBlurRadius(blurRadius.dp)
 
     /**
      * The luminance curve as the line a colour matrix can draw: the curve is taken as the cubic Bézier whose four
@@ -379,7 +376,7 @@ data class GlassLens(val height: Float, val amount: Float) {
 fun glassShadow(minDimension: Float): Shadow {
     val t = ((minDimension - 44) / (170 - 44)).coerceIn(0f, 1f)
     return Shadow(
-        radius = ((6 + 6 * t) * sqrt(3f)).dp,
+        radius = gaussianBlurRadius((6 + 6 * t).dp),
         color = Color.Black.copy(alpha = 0.02f + 0.07f * t),
         spread = (6 * t).dp,
         offset = DpOffset(0.dp, (3 + 7 * t).dp),
@@ -424,7 +421,7 @@ fun GlassSurface(
                 val style = remember(recipe, colors.background) {
                     // From Android 13 the lens's shader filters the face, after the lens and before the ceiling.
                     val filter = recipe.colorMatrix.takeIf { Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU }
-                    hazeStyle((GLASS_BLUR * sqrt(3f)).dp, filter, recipe.over(colors.background, 0f), colors.background)
+                    hazeStyle(gaussianBlurRadius(GLASS_BLUR.dp), filter, recipe.over(colors.background, 0f), colors.background)
                 }
                 // The face reaches GLASS_MARGIN past the shape; the drawing clips it to the shape. It blurs the marked
                 // content: a backdrop input samples what lies behind where it is drawn, and Android 12 draws the face
@@ -587,7 +584,7 @@ private class GlassGeometry(scope: DrawScope, shape: Shape, recipe: GlassRecipe,
      * shrunk, blurred by the renderer and clipped to the shape), the dark line outside and the light line inside.
      */
     private fun recordEdge(layers: GlassLayers, plain: Density, radius: Float) = with(plain) {
-        val shadeBlur = (GLASS_SHADE_DEVIATION * sqrt(3f)).toPx()
+        val shadeBlur = gaussianBlurRadius(GLASS_SHADE_DEVIATION).toPx()
         val shadeReach = ceil(3 * GLASS_SHADE_DEVIATION.toPx()).toInt()
         val shadeColor = Color.Black.copy(alpha = GLASS_SHADE_ALPHA)
         layers.shade.topLeft = IntOffset(-shadeReach, -shadeReach)
@@ -599,7 +596,7 @@ private class GlassGeometry(scope: DrawScope, shape: Shape, recipe: GlassRecipe,
                 drawPath(path, shadeColor, style = Stroke(2 * GLASS_SHADE_SPREAD.toPx()), blendMode = BlendMode.Src)
             }
         }
-        val glowBlur = (GLASS_GLOW_DEVIATION * sqrt(3f)).toPx()
+        val glowBlur = gaussianBlurRadius(GLASS_GLOW_DEVIATION).toPx()
         val glowReach = ceil(3 * GLASS_GLOW_DEVIATION.toPx()).toInt()
         layers.glow.topLeft = IntOffset(-glowReach, -glowReach)
         layers.glow.renderEffect = BlurEffect(glowBlur, glowBlur, TileMode.Clamp)

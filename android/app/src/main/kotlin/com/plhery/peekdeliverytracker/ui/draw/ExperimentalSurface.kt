@@ -17,19 +17,10 @@ import androidx.compose.ui.node.currentValueOf
 import androidx.compose.ui.node.invalidateDraw
 import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.theme.LocalPeekColors
 import com.plhery.peekdeliverytracker.ui.theme.Radii
-
-/**
- * SwiftUI's `.shadow(color:radius:x:y:)`: a Gaussian blur whose deviation is half the radius, which Compose's shadow
- * takes as a blur radius of √3 deviations, as Android's blur does.
- */
-fun swiftUiShadow(color: Color, radius: Dp, x: Dp = 0.dp, y: Dp = 0.dp): Shadow =
-    Shadow(radius = radius * (SQRT3 / 2), color = color, offset = DpOffset(x, y))
-
-private const val SQRT3 = 1.7320508f
+import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 
 /** The experimental surfaces' shadow (A-S59): black at 3.5 %, radius 10, 4 points down. */
 val ExperimentalSurfaceShadow: Shadow = swiftUiShadow(Color.Black.copy(alpha = 0.035f), radius = 10.dp, y = 4.dp)

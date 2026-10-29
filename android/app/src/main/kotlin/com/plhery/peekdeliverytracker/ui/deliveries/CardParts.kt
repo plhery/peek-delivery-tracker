@@ -36,9 +36,11 @@ import androidx.compose.ui.node.findNearestAncestor
 import androidx.compose.ui.node.requireLayoutCoordinates
 import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.onLongClick
 import androidx.compose.ui.semantics.role
@@ -71,7 +73,7 @@ import kotlinx.coroutines.delay
  * says nothing and takes no touches.
  *
  * The swipe to archive and the zoom into the parcel's page belong to the list, which puts them on the card through its
- * `modifier`; its menu comes up on `onLongClick`.
+ * `modifier` and its `actions` for TalkBack; its menu comes up on `onLongClick`.
  */
 internal fun Modifier.cardButton(
     decorative: Boolean,
@@ -82,10 +84,11 @@ internal fun Modifier.cardButton(
     onLongClick: (() -> Unit)?,
     cornerRadius: Dp,
     shadow: Boolean,
+    actions: List<CustomAccessibilityAction> = emptyList(),
 ): Modifier {
     if (decorative) return clearAndSetSemantics {}
     val shape = ContinuousRoundedShape(cornerRadius)
-    return cardTouches(label, hint, selected, onOpen, onLongClick)
+    return cardTouches(label, hint, selected, onOpen, onLongClick, actions)
         .then(if (shadow) Modifier.dropShadow(shape, ExperimentalSurfaceShadow) else Modifier)
         .clip(shape)
 }
@@ -95,7 +98,8 @@ internal fun Modifier.cardButton(
  * where the iPhone gives one), selected while the parcel is shown beside the list, and giving under the finger as
  * ExperimentalSwipeToArchive's card does (the lift). A long press calls `onLongClick`, the list's card menu as the
  * iPhone's `.contextMenu` opens it, with the phone's long-press feel as the iPhone's menu comes with its own; the
- * finger lifting then opens nothing. TalkBack offers it as the element's long-press action.
+ * finger lifting then opens nothing. TalkBack offers it as the element's long-press action, and `actions` (the swipe's
+ * Archive) beside it.
  */
 internal fun Modifier.cardTouches(
     label: String,
@@ -103,6 +107,7 @@ internal fun Modifier.cardTouches(
     selected: Boolean,
     onOpen: () -> Unit,
     onLongClick: (() -> Unit)?,
+    actions: List<CustomAccessibilityAction> = emptyList(),
 ): Modifier = this
     .clearAndSetSemantics {
         contentDescription = label
@@ -118,6 +123,7 @@ internal fun Modifier.cardTouches(
                 true
             }
         }
+        if (actions.isNotEmpty()) customActions = actions
     }
     .combinedClickable(interactionSource = null, indication = PressStyle.ExperimentalLift, onLongClick = onLongClick, onClick = onOpen)
 

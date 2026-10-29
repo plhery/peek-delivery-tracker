@@ -80,6 +80,16 @@ object PeekKeyframes {
         SpringKeyframe(1.0, 0.4, Spring(duration = 0.4, bounce = 0.5)),
     )
 
+    /**
+     * `.symbolEffect(.bounce, value:)`, played as its value changes: the symbol gives a little, then springs back past
+     * its size. Apple doesn't publish the effect's curve; this follows it by eye.
+     */
+    val symbolBounce: KeyframeTimeline<Double> = KeyframeTimeline.of(
+        1.0,
+        LinearKeyframe(0.86, 0.1, UnitCurve.easeOut),
+        SpringKeyframe(1.0, 0.45, Spring(duration = 0.35, bounce = 0.45)),
+    )
+
     /** The welcome parcel's greeting, played every 4.6 s (SignInView.swift): `lift` in points, `angle` in degrees. */
     data class Greeting(val lift: Double = 0.0, val angle: Double = 0.0)
 

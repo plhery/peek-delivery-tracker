@@ -47,7 +47,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -106,7 +105,6 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
-import kotlinx.coroutines.launch
 
 /** The localized text for `key`, written again when the language changes. */
 @Composable
@@ -349,14 +347,13 @@ internal fun OverviewRow(state: DeliveriesState, active: Int, refreshes: Boolean
 private fun RefreshButton(state: DeliveriesState) {
     val refreshing by state.source.refreshing.collectAsState()
     val reduceMotion = PeekTheme.reduceMotion
-    val scope = rememberCoroutineScope()
     val label = localized(if (refreshing) "app.refreshing" else "app.refresh")
     Box(
         Modifier
             .size(BUTTON_SIDE)
             .testTag(REFRESH_BUTTON)
             .clickable(interactionSource = null, indication = PlainPress) {
-                if (!refreshing) scope.launch { state.source.refresh() }
+                if (!refreshing) state.refreshFromButton()
             }
             .semantics {
                 contentDescription = label
@@ -746,7 +743,7 @@ private const val WIDE = "wide"
 private const val NARROW = "narrow"
 
 /** `.buttonStyle(.plain)`: the label dims a little while pressed. */
-private val PlainPress = PressStyle(opacity = 0.7f, animation = MotionCurve.EaseOut(0.12))
+internal val PlainPress = PressStyle(opacity = 0.7f, animation = MotionCurve.EaseOut(0.12))
 
 /** Whether TalkBack, or another service that explores by touch, is on: the list adds a refresh button for it. */
 @Composable

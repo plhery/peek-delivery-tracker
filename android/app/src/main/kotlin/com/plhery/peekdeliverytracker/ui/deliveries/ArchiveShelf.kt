@@ -81,7 +81,7 @@ fun ArchiveShelf(
     modifier: Modifier = Modifier,
     selected: UUID? = null,
     onLongClick: ((Parcel) -> Unit)? = null,
-    rowModifier: (Parcel) -> Modifier = { Modifier },
+    rowModifier: @Composable (Parcel) -> Modifier = { Modifier },
 ) {
     val localizer = LocalLocalizer.current
     // The localizer is the same in every language: its words are written again as the language changes.
@@ -175,7 +175,7 @@ fun ArchivedParcelGroup(
     modifier: Modifier = Modifier,
     selected: UUID? = null,
     onLongClick: ((Parcel) -> Unit)? = null,
-    rowModifier: (Parcel) -> Modifier = { Modifier },
+    rowModifier: @Composable (Parcel) -> Modifier = { Modifier },
 ) {
     val hairline = with(LocalDensity.current) { 1.toDp() }
     val divider = PeekTheme.colors.divider

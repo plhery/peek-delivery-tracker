@@ -6,12 +6,16 @@ import androidx.activity.ComponentActivity
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.NativeRoute
+import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 
 /**
  * What the deliveries read and ask of the app's stores: ParcelListView's `store`, `session`, the configuration's pages
@@ -31,8 +35,29 @@ interface DeliveriesSource {
     val homePageUrl: String
     val privacyUrl: String
 
-    /** Checks every parcel, as the refresh button does. What it found is told in a toast, which isn't ported yet. */
-    suspend fun refresh()
+    /** The parcel archived last, which its toast's Undo brings back (`store.undoParcel`). */
+    val undoParcel: StateFlow<Parcel?>
+
+    /** `store.undoParcel = nil` once the toast has had its time, unless another parcel was archived since. */
+    fun forgetUndo(parcel: Parcel)
+
+    /**
+     * `checkAllParcels()`: checks every parcel and says how it went, waiting for a check the service queued. Null when
+     * the check was interrupted, such as by signing out.
+     */
+    suspend fun checkAllParcels(): ParcelStore.RefreshResult?
+
+    suspend fun archive(parcel: Parcel)
+
+    suspend fun restore(parcel: Parcel)
+
+    suspend fun permanentlyDelete(parcel: Parcel)
+
+    /** `store.viewerLink(for:)`: the link someone else's parcel is followed through, which its menu reads. */
+    fun viewerLink(parcel: Parcel): String?
+
+    /** `localizer.errorMessage(error)`. */
+    fun errorMessage(error: Throwable): String
 
     /** Leaves the demo for the first screen. */
     fun showWelcome()
@@ -53,15 +78,42 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val homePageUrl get() = container.configuration.homePageUrl
     override val privacyUrl get() = container.configuration.privacyUrl
 
-    override suspend fun refresh() {
-        try {
-            container.parcels.refreshAll()
+    override val undoParcel get() = container.parcels.undoParcelFlow
+
+    override fun forgetUndo(parcel: Parcel) {
+        if (container.parcels.undoParcel?.id == parcel.id) container.parcels.undoParcel = null
+    }
+
+    override suspend fun checkAllParcels(): ParcelStore.RefreshResult? {
+        val store = container.parcels
+        val previousOutcome = store.refreshOutcomeFlow.value?.id
+        return try {
+            when (val start = store.refreshAll()) {
+                is ParcelStore.RefreshStart.Completed -> start.result
+                else -> {
+                    // The store finishes a queued check in the background; wait for its outcome.
+                    store.refreshingFlow.first { !it }
+                    store.refreshOutcomeFlow.value?.takeIf { it.id != previousOutcome }?.result
+                }
+            }
         } catch (error: CancellationException) {
-            throw error
-        } catch (_: Exception) {
-            // The iPhone says what went wrong in a toast (refreshFromButton), which comes with the toasts.
+            // The caller's own cancellation goes on; the store's, as the account changed, is an interrupted check.
+            currentCoroutineContext().ensureActive()
+            null
+        } catch (error: Exception) {
+            ParcelStore.RefreshResult.Failed(container.localizer.errorMessage(error))
         }
     }
+
+    override suspend fun archive(parcel: Parcel) = container.parcels.archive(parcel)
+
+    override suspend fun restore(parcel: Parcel) = container.parcels.restore(parcel)
+
+    override suspend fun permanentlyDelete(parcel: Parcel) = container.parcels.permanentlyDelete(parcel)
+
+    override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
+
+    override fun errorMessage(error: Throwable): String = container.localizer.errorMessage(error)
 
     override fun showWelcome() = container.session.showWelcome()
 

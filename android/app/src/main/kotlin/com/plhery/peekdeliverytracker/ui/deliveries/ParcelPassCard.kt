@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.Layout
@@ -62,7 +63,7 @@ import kotlin.math.roundToInt
  * attention for the parcel), with a small route at its end when its scans have places and the text is not one of the
  * accessibility sizes. A past delivery's card is paler.
  *
- * `arrived`, `decorative`, `onName`, `selected` and `onLongClick` are as on [NextDeliveryPass]; an arrived card swells a
+ * `arrived`, `decorative`, `onName`, `selected`, `onLongClick` and `swipeAction` are as on [NextDeliveryPass]; an arrived card swells a
  * little as the news lands. Nothing is drawn until the carriers' liveries are read.
  */
 @Composable
@@ -76,6 +77,7 @@ fun ParcelPassCard(
     onName: ((Float) -> Unit)? = null,
     selected: Boolean = false,
     onLongClick: (() -> Unit)? = null,
+    swipeAction: CustomAccessibilityAction? = null,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -133,6 +135,7 @@ fun ParcelPassCard(
                 onLongClick = onLongClick,
                 cornerRadius = Radii.card,
                 shadow = false,
+                actions = listOfNotNull(swipeAction),
             )
             .graphicsLayer {
                 val scale = if (reduceMotion) 1f else press.toFloat()
@@ -247,8 +250,10 @@ fun DeliveredParcelCard(
     onName: ((Float) -> Unit)? = null,
     selected: Boolean = false,
     onLongClick: (() -> Unit)? = null,
+    swipeAction: CustomAccessibilityAction? = null,
 ) {
     ParcelPassCard(
         parcel, notice = null, onOpen = onOpen, modifier = modifier, onName = onName, selected = selected, onLongClick = onLongClick,
+        swipeAction = swipeAction,
     )
 }

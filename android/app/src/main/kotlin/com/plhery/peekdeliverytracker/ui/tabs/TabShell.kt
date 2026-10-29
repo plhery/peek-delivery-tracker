@@ -119,6 +119,17 @@ val LocalWindowHinge = compositionLocalOf<WindowHinge?> { null }
 /** The reselection of the tab being drawn, or of what its stack shows at its root. */
 val LocalTabReselection = staticCompositionLocalOf { TabReselection() }
 
+/**
+ * What a tab draws over the whole window, its tab bar and the system's bars too, as an iPhone's context menu dims all
+ * of the screen: the shell draws [content] last. Null outside a shell, where a tab draws it over itself.
+ */
+@Stable
+class TabOverlay {
+    var content: (@Composable () -> Unit)? by mutableStateOf(null)
+}
+
+val LocalTabOverlay = staticCompositionLocalOf<TabOverlay?> { null }
+
 /** Runs `onReselect` each time the tab drawing this is tapped again while chosen. */
 @Composable
 fun TabReselectionEffect(onReselect: suspend () -> Unit) {
@@ -156,6 +167,7 @@ fun TabShell(
     val tap = { tab: Int -> if (tab == selection) reselections[tab].reselect() else onSelect(tab) }
     val holder = rememberSaveableStateHolder()
     val backdrop = rememberMaterialBackdrop()
+    val overlay = remember { TabOverlay() }
     val density = LocalDensity.current
     BoxWithConstraints(modifier.fillMaxSize()) {
         val top = maxWidth >= 600.dp && maxHeight >= 480.dp
@@ -173,6 +185,7 @@ fun TabShell(
                 LocalTabBarPadding provides footprint,
                 LocalTabReselection provides reselections[selection],
                 LocalWindowHinge provides windowHinge,
+                LocalTabOverlay provides overlay,
             ) {
                 holder.SaveableStateProvider(tabs[selection].name) { content(tabs[selection]) }
             }
@@ -185,6 +198,7 @@ fun TabShell(
             val clear = if (hinge == null) Modifier.windowInsetsPadding(sides) else Modifier
             BottomTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.BottomStart).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap))
         }
+        overlay.content?.invoke()
     }
 }
 

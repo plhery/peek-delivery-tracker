@@ -69,6 +69,24 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import java.util.UUID
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
+import com.plhery.peekdeliverytracker.core.ExperimentalPalette
+import com.plhery.peekdeliverytracker.core.isArchived
+import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.Radii
+import kotlinx.coroutines.delay
 
 /** Which of the window's sides a column of the deliveries reaches, whose bars and cutout it keeps clear of. */
 @Immutable
@@ -87,10 +105,15 @@ val LocalColumnEdges = compositionLocalOf { ColumnEdges(start = true, end = true
  * Its items are what they show ([ListItem]), so a card is drawn again only when its parcel changes, and a card marked
  * as the one beside the list only as that changes.
  *
- * Out of the iPhone's list: pulling to refresh, swiping a card to the archive, a card's menu, the toasts and their
- * undo, the search field and the filters, the delivered card's celebration and flight, what a card's menu asks, the
- * sheets (Add, the account), the zoom from a card to its page and dropping text on the list. The buttons that would
- * open them call [DeliveriesState]'s hooks, which do nothing yet.
+ * Pulling the list down checks every parcel ([PullToRefresh]); a card swipes to the archive ([SwipeToArchive]) and
+ * opens its menu on a long press ([CardMenuHost]), as an archived row does; under the list, over the tab bar, the toast
+ * of a parcel just archived offers Undo for seven seconds, and a message says for four what a check found
+ * ([BottomControls]).
+ *
+ * Out of the iPhone's list: the search field and the filters, the delivered card's celebration and flight, the
+ * invitation to turn notifications on, what a card's menu asks (a new name, sharing, another carrier), the sheets
+ * (Add, the account), the zoom from a card to its page and dropping text on the list. The buttons that would open them
+ * call [DeliveriesState]'s hooks, which do nothing yet.
  */
 @Composable
 internal fun DeliveryList(state: DeliveriesState) {
@@ -112,8 +135,12 @@ internal fun DeliveryList(state: DeliveriesState) {
     val end = if (edges.end) padding.calculateEndPadding(direction) else 0.dp
     val rowTop = barRowTop()
     val barBottom = rowTop + BAR_HEIGHT
-    // The content's own 28 under the 8 the iPhone keeps above its tab bar.
-    val bottom = padding.calculateBottomPadding() + BOTTOM_SPACING + BOTTOM_PADDING
+    // The content's own 28 under the 8 the iPhone keeps above its tab bar, and over the toast while one shows, as its
+    // `safeAreaInset` raises the list.
+    var controls by remember { mutableIntStateOf(0) }
+    val density = LocalDensity.current
+    val raised = if (controls > 0) with(density) { controls.toDp() } + CONTROLS_SPACING else 0.dp
+    val bottom = padding.calculateBottomPadding() + BOTTOM_SPACING + BOTTOM_PADDING + raised
 
     val entries = listEntries(state, sideBySide, guest, loading, errorMessage, firstLoad)
     state.itemKeys = entries.map { it.key }
@@ -162,34 +189,117 @@ internal fun DeliveryList(state: DeliveriesState) {
         }
         ListToolbar(state, sideBySide, rowTop, start, end, backdrop)
         if (firstLoad) FirstLoad(Modifier.align(Alignment.Center))
+        BottomControls(
+            state, backdrop,
+            Modifier
+                .align(Alignment.BottomCenter)
+                .padding(start = start + 16.dp, end = end + 16.dp, bottom = padding.calculateBottomPadding() + CONTROLS_BOTTOM)
+                .onSizeChanged { controls = it.height },
+        )
+        Announcements(state)
+        CardMenuHost(state)
+    }
+}
+
+/**
+ * `bottomControls`: the toast of the parcel archived last, whose Undo brings it back, or else the latest message, for
+ * four seconds from when it came. The invitation to turn notifications on comes with the notifications.
+ */
+@Composable
+private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, modifier: Modifier) {
+    val undo by state.source.undoParcel.collectAsState()
+    val toast = state.toast
+    val localizer = LocalLocalizer.current
+    val colors = PeekTheme.colors
+    val parcel = undo
+    when {
+        parcel != null -> InlineToast(
+            text = state.archivedText(parcel), button = localizer.text("app.undo"), symbol = "archivebox.fill",
+            tint = colors.resolve(ExperimentalPalette.ochre), action = { state.restore(parcel) }, backdrop = backdrop, modifier = modifier,
+        )
+        toast != null -> {
+            InlineToast(
+                text = toast.text, button = null,
+                symbol = if (toast.warning) "exclamationmark.triangle.fill" else "checkmark.circle.fill",
+                tint = if (toast.warning) colors.warning else colors.resolve(ExperimentalPalette.delivered),
+                action = null, backdrop = backdrop, modifier = modifier,
+            )
+            // A newer message gets its own four seconds.
+            LaunchedEffect(toast) {
+                delay(TOAST_DURATION)
+                state.dismiss(toast)
+            }
+        }
+        // Nothing shows: the list comes back down.
+        else -> Box(modifier)
+    }
+}
+
+/**
+ * News for TalkBack that nothing on screen says as it comes (`AccessibilityNotification.Announcement`): a node that
+ * says it, polite, and is emptied once said, so the same words later are news again.
+ */
+@Composable
+private fun Announcements(state: DeliveriesState) {
+    val announcement = state.announcement
+    Box(
+        Modifier
+            .size(1.dp)
+            .testTag(ANNOUNCEMENT)
+            .semantics {
+                liveRegion = LiveRegionMode.Polite
+                contentDescription = announcement?.text.orEmpty()
+            },
+    )
+    LaunchedEffect(announcement) {
+        if (announcement == null || announcement.text.isEmpty()) return@LaunchedEffect
+        delay(ANNOUNCEMENT_HOLD)
+        state.announced(announcement)
     }
 }
 
 private enum class ChromeSlot { DemoBar, List, Band }
 
-/** The list's scrolling column, `padding` clear of the bars at its top and bottom and `start` and `end` of the sides. */
+/**
+ * The list's scrolling column, `padding` clear of the bars at its top and bottom and `start` and `end` of the sides,
+ * which pulls down to refresh ([ListPull]): the pull's seal behind its content, at the top of what the list scrolls.
+ */
 @Composable
 private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding: PaddingValues, start: Dp, end: Dp) {
     val reduceMotion = PeekTheme.reduceMotion
     val fade = if (reduceMotion) null else Motion.snappy<Float>(LIST_MOTION)
     val move = if (reduceMotion) null else Motion.snappy<IntOffset>(LIST_MOTION)
-    LazyColumn(
-        Modifier.fillMaxSize().testTag(PARCEL_LIST),
-        state = state.listState,
-        contentPadding = padding,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        items(entries, key = { it.key }, contentType = { it.type }) { entry ->
-            Box(
-                Modifier
-                    .animateItem(fadeInSpec = fade, placementSpec = move, fadeOutSpec = if (entry.leavesAtOnce) null else fade)
-                    .padding(start = start, end = end)
-                    .widthIn(max = COLUMN_WIDTH)
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, top = entry.top, end = 16.dp)
-                    .deliveryListItem(),
-            ) {
-                ListItemContent(state, entry.item)
+    val pull = rememberListPull(state)
+    val density = LocalDensity.current
+    // While refreshing, the gap stands over the content, as the system adds it to the list's inset.
+    val held = with(density) { pull.held.value.toDp() }
+    val listState = state.listState
+    Box(Modifier.fillMaxSize().nestedScroll(pull).onSizeChanged { pull.height = it.height }) {
+        PullIndicator(state.pull, origin = {
+            // The top of the content: the list's first item, less the content's own room above it.
+            val info = listState.layoutInfo
+            info.visibleItemsInfo.firstOrNull { it.index == 0 }?.let {
+                it.offset - info.viewportStartOffset - with(density) { CONTENT_TOP.toPx() } + pull.past
+            }
+        })
+        LazyColumn(
+            Modifier.fillMaxSize().graphicsLayer { translationY = pull.past }.testTag(PARCEL_LIST),
+            state = listState,
+            contentPadding = PaddingValues(top = padding.calculateTopPadding() + held, bottom = padding.calculateBottomPadding()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            items(entries, key = { it.key }, contentType = { it.type }) { entry ->
+                Box(
+                    Modifier
+                        .animateItem(fadeInSpec = fade, placementSpec = move, fadeOutSpec = if (entry.leavesAtOnce) null else fade)
+                        .padding(start = start, end = end)
+                        .widthIn(max = COLUMN_WIDTH)
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, top = entry.top, end = 16.dp)
+                        .deliveryListItem(),
+                ) {
+                    ListItemContent(state, entry.item)
+                }
             }
         }
     }
@@ -313,14 +423,14 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
 @Composable
 private fun NextCard(state: DeliveriesState, item: ListItem.Next) {
     val parcel = item.parcel
-    val shown by state.shows(parcel)
-    val arrived by state.holds(parcel.id)
-    val selected by state.selects(parcel.id)
+    // Read here rather than where the card is drawn, inside its swipe: the card is drawn again as a whole.
+    val shown = state.shows(parcel).value
+    val arrived = state.holds(parcel.id).value
+    val selected = state.selects(parcel.id).value
     CardComposed(parcel.id)
-    NextDeliveryPass(
-        shown, onOpen = { state.navigator.open(parcel.id) }, modifier = Modifier.deliveryCardPlace(parcel.id, flying = false, stand = state::stand),
-        arrived = arrived, selected = selected,
-    )
+    SwipeableCard(state, shown, Radii.nextUp, shadow = true, Modifier.deliveryCardPlace(parcel.id, flying = false, stand = state::stand)) { moved, open, menu, archive ->
+        NextDeliveryPass(shown, onOpen = open, modifier = moved, arrived = arrived, selected = selected, onLongClick = menu, swipeAction = archive)
+    }
 }
 
 /** A card on its way after Next up; one that needs attention says what. */
@@ -330,19 +440,20 @@ private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val now = LocalNow.current
-    val shown by state.shows(parcel)
-    val arrived by state.holds(parcel.id)
-    val selected by state.selects(parcel.id)
+    val shown = state.shows(parcel).value
+    val arrived = state.holds(parcel.id).value
+    val selected = state.selects(parcel.id).value
     CardComposed(parcel.id)
     val notice = if (!item.attention || arrived) {
         null
     } else {
         remember(shown, localizer, language) { shown.notice(now())?.let { localizer.text(it.localizationKey) } }
     }
-    ParcelPassCard(
-        shown, notice = notice, onOpen = { state.navigator.open(parcel.id) },
-        modifier = Modifier.deliveryCardPlace(parcel.id, flying = false, stand = state::stand), arrived = arrived, selected = selected,
-    )
+    SwipeableCard(state, shown, Radii.card, shadow = false, Modifier.deliveryCardPlace(parcel.id, flying = false, stand = state::stand)) { moved, open, menu, archive ->
+        ParcelPassCard(
+            shown, notice = notice, onOpen = open, modifier = moved, arrived = arrived, selected = selected, onLongClick = menu, swipeAction = archive,
+        )
+    }
 }
 
 /** A card of a section: a past delivery's, or one on its way among the returned or flagged. */
@@ -352,19 +463,57 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val now = LocalNow.current
-    val selected by state.selects(parcel.id)
+    val selected = state.selects(parcel.id).value
     CardComposed(parcel.id)
-    val open = { state.navigator.open(parcel.id) }
     when {
         item.kind == ParcelSectionKind.Delivered ->
-            DeliveredParcelCard(parcel, onOpen = open, modifier = Modifier.deliveryCardPlace(parcel.id, false, state::stand), selected = selected)
-        item.next -> NextDeliveryPass(parcel, onOpen = open, selected = selected)
+            SwipeableCard(state, parcel, Radii.card, shadow = false, Modifier.deliveryCardPlace(parcel.id, false, state::stand)) { moved, open, menu, archive ->
+                DeliveredParcelCard(parcel, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive)
+            }
+        item.next -> SwipeableCard(state, parcel, Radii.nextUp, shadow = true, Modifier) { moved, open, menu, archive ->
+            NextDeliveryPass(parcel, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive)
+        }
         else -> {
             val notice = if (item.kind != ParcelSectionKind.Attention) null else remember(parcel, localizer, language) {
                 parcel.notice(now())?.let { localizer.text(it.localizationKey) }
             }
-            ParcelPassCard(parcel, notice = notice, onOpen = open, selected = selected)
+            // An archived parcel found here isn't archived again by a swipe; its menu restores it.
+            SwipeableCard(state, parcel, Radii.card, shadow = false, Modifier, swipes = !parcel.isArchived) { moved, open, menu, archive ->
+                ParcelPassCard(parcel, notice = notice, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive)
+            }
         }
+    }
+}
+
+/**
+ * A card that swipes to the archive (`experimentalSwipeToArchive`) and whose menu opens on a long press (`.cardMenu`),
+ * in its corners. `card` draws it with the modifier that moves it, what a tap does (closes the swipe while it is open,
+ * opens the parcel otherwise), the long press and the swipe's action for TalkBack. Without `swipes` the card only has
+ * its menu.
+ */
+@Composable
+private fun SwipeableCard(
+    state: DeliveriesState,
+    parcel: Parcel,
+    cornerRadius: Dp,
+    shadow: Boolean,
+    modifier: Modifier,
+    swipes: Boolean = true,
+    card: @Composable (moved: Modifier, onOpen: () -> Unit, onLongClick: () -> Unit, swipeAction: CustomAccessibilityAction?) -> Unit,
+) {
+    val localizer = LocalLocalizer.current
+    val menu = rememberCardMenu(state, parcel, cornerRadius)
+    val open = remember(state, parcel.id) { { state.navigator.open(parcel.id) } }
+    if (!swipes) {
+        card(menu.modifier.then(modifier), open, menu::open, null)
+        return
+    }
+    val title = localizer.text("parcel.archive")
+    val swipe = rememberArchiveSwipe(state, parcel.id) { state.archive(menu.parcel) }
+    val action = remember(swipe, title) { archiveAction(swipe, title) }
+    val tap = remember(swipe, open) { { swipe.tap(open) } }
+    SwipeToArchive(swipe, title, cornerRadius, shadow, menu.modifier.then(modifier)) { moved ->
+        card(moved, tap, menu::open, action)
     }
 }
 
@@ -375,7 +524,21 @@ private fun ArchiveItem(state: DeliveriesState, item: ListItem.Archive) {
     val selected by remember(state, parcels) {
         derivedStateOf(structuralEqualityPolicy()) { state.selectedCard?.takeIf { id -> parcels.any { it.id == id } } }
     }
-    ArchiveShelf(parcels, expanded = state.archiveOpen, onExpandedChange = state::openArchive, onOpen = state.navigator::open, selected = selected)
+    // Each row lifts as its menu opens, on the archive's paper, cut to the surface's corners.
+    val menus = remember(state) { mutableMapOf<UUID, CardMenuSource>() }
+    val paper = PeekTheme.colors.paper
+    ArchiveShelf(
+        parcels, expanded = state.archiveOpen, onExpandedChange = state::openArchive, onOpen = state.navigator::open, selected = selected,
+        onLongClick = { menus[it.id]?.open() },
+        rowModifier = { parcel ->
+            val menu = rememberCardMenu(state, parcel, ARCHIVE_RADIUS, fill = paper)
+            DisposableEffect(menus, menu) {
+                menus[parcel.id] = menu
+                onDispose { if (menus[parcel.id] === menu) menus.remove(parcel.id) }
+            }
+            menu.modifier
+        },
+    )
 }
 
 /** Whether the parcel's card is marked as the one shown beside the list: a card is drawn again only as that changes. */
@@ -480,5 +643,14 @@ private val GROUP_SPACING = 10.dp
 private val SECTION_SPACING = 24.dp
 private val DELIVERED_SPACING = 10.dp
 private val CARD_SPACING = 12.dp
+/** Over the toast, the room it keeps under itself and the list's spacing above it (`safeAreaInset(spacing: 8)`). */
+private val CONTROLS_BOTTOM = 5.dp
+private val CONTROLS_SPACING = CONTROLS_BOTTOM + 8.dp
+private val ARCHIVE_RADIUS = 18.dp
+private const val TOAST_DURATION = 4_000L
+/** How long TalkBack's news stays said before it is emptied. */
+private const val ANNOUNCEMENT_HOLD = 1_000L
 private const val LIST_MOTION = 0.32
 private const val SEARCH_MOTION = 0.3
+
+const val ANNOUNCEMENT = "deliveries.announcement"

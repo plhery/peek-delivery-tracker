@@ -1,5 +1,8 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.os.Build
 import android.view.KeyEvent
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.EnterTransition
@@ -49,6 +52,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
@@ -73,6 +77,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesKey
+import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.TabReselectionEffect
@@ -80,6 +85,7 @@ import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import java.util.Objects
 import java.util.UUID
@@ -124,8 +130,26 @@ fun DeliveriesTab(
     val archiveOpen = rememberForLaunch(launch, false)
     val showingSearch = rememberForLaunch(launch, false)
     val now = LocalNow.current
+    val scope = rememberCoroutineScope()
     val state = remember(source, navigator, listState) {
-        DeliveriesState(source, navigator, listState, archiveOpen, showingSearch, now)
+        DeliveriesState(source, navigator, listState, archiveOpen, showingSearch, now, scope)
+    }
+    state.localizer = LocalLocalizer.current
+    val context = LocalContext.current
+    val haptics = rememberHaptics()
+    state.copy = { text ->
+        context.getSystemService(ClipboardManager::class.java)?.setPrimaryClip(ClipData.newPlainText(text, text))
+        haptics.success()
+        // From Android 13 the system confirms a copy itself, and the app says nothing more.
+        Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+    }
+    val undo by source.undoParcel.collectAsState()
+    // An Undo lasts seven seconds; archiving another parcel gives it seven more.
+    LaunchedEffect(undo?.id) {
+        val parcel = undo ?: return@LaunchedEffect
+        state.announce(state.archivedText(parcel))
+        delay(UNDO_DURATION)
+        source.forgetUndo(parcel)
     }
     val reduceMotion = PeekTheme.reduceMotion
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
@@ -153,7 +177,6 @@ fun DeliveriesTab(
         LaunchedEffect(state) { source.parcels.collect(state::receive) }
         HoldingDelivered(state, reduceMotion)
         Consuming(state, inbox)
-        val scope = rememberCoroutineScope()
         DeliveriesKeys(state, scope, reduceMotion)
         TabReselectionEffect {
             if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen != null) {
@@ -233,6 +256,9 @@ private fun HoldingDelivered(state: DeliveriesState, reduceMotion: Boolean) {
 }
 
 private const val POSTMARK_MILLIS = 300L
+
+/** How long an archived parcel's Undo stays, in milliseconds. */
+private const val UNDO_DURATION = 7_000L
 private const val READ_MILLIS = 650L
 
 /**
@@ -295,13 +321,14 @@ private fun Modifier.listKeys(state: DeliveriesState): Modifier {
 private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMotion: Boolean): Boolean {
     val keys = DeliveriesKey.available(
         free = true, searching = showingSearch, typing = false, arrangement = arrangement, navigation = navigator.navigation,
-        cards = rows, hasParcels = parcels.isNotEmpty(), canUndo = false,
+        cards = rows, hasParcels = parcels.isNotEmpty(), canUndo = source.undoParcel.value != null,
     )
     val command = event.hasModifiers(KeyEvent.META_CTRL_ON) || event.hasModifiers(KeyEvent.META_META_ON)
     val bare = event.hasNoModifiers()
     val key = when {
         command && event.keyCode == KeyEvent.KEYCODE_N -> DeliveriesKey.Add
         command && event.keyCode == KeyEvent.KEYCODE_F -> DeliveriesKey.Find
+        command && event.keyCode == KeyEvent.KEYCODE_Z -> DeliveriesKey.Undo
         bare && event.keyCode == KeyEvent.KEYCODE_ESCAPE -> DeliveriesKey.CloseSearch
         bare && event.keyCode == KeyEvent.KEYCODE_DPAD_UP -> DeliveriesKey.Previous
         bare && event.keyCode == KeyEvent.KEYCODE_DPAD_DOWN -> DeliveriesKey.Next
@@ -316,7 +343,7 @@ private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMo
         DeliveriesKey.Add -> add()
         DeliveriesKey.Find -> showingSearch = true
         DeliveriesKey.CloseSearch -> showingSearch = false
-        DeliveriesKey.Undo -> Unit
+        DeliveriesKey.Undo -> source.undoParcel.value?.let { restore(it) }
         DeliveriesKey.Previous, DeliveriesKey.Next -> {
             val card = navigator.step(if (key == DeliveriesKey.Next) 1 else -1, rows)
             if (card != null) scope.launch { bringIntoView(card, reduceMotion) }

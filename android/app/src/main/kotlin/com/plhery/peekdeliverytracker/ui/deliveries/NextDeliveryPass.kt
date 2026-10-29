@@ -23,6 +23,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
@@ -72,6 +73,7 @@ import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
  * - `onName`: where the parcel's name is written, its middle in points in its item of the list ([deliveryListItem]).
  * - `selected`: the parcel shown beside the list, ringed.
  * - `onLongClick`: a long press, the list's card menu; the press then doesn't open the parcel ([cardButton]).
+ * - `swipeAction`: the list's swipe to archive, offered to TalkBack; the swipe's row then draws the card's shadow.
  *
  * It fades in as it first shows, and its map once drawn, neither under Reduce Motion. Nothing is drawn until the
  * carriers' liveries are read.
@@ -86,6 +88,7 @@ fun NextDeliveryPass(
     onName: ((Float) -> Unit)? = null,
     selected: Boolean = false,
     onLongClick: (() -> Unit)? = null,
+    swipeAction: CustomAccessibilityAction? = null,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -135,7 +138,8 @@ fun NextDeliveryPass(
                 onOpen = onOpen,
                 onLongClick = onLongClick,
                 cornerRadius = Radii.nextUp,
-                shadow = true,
+                shadow = swipeAction == null,
+                actions = listOfNotNull(swipeAction),
             )
             .graphicsLayer {
                 val scale = if (reduceMotion) 1f else press.toFloat()

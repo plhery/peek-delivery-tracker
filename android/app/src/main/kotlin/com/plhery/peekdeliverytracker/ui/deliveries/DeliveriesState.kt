@@ -4,6 +4,7 @@ import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.derivedStateOf
@@ -18,13 +19,24 @@ import com.plhery.peekdeliverytracker.core.DeliveredHold
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesNavigation
 import com.plhery.peekdeliverytracker.core.DeliveryListLayout
+import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.ParcelSectionKind
 import com.plhery.peekdeliverytracker.core.ParcelSort
 import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
+import com.plhery.peekdeliverytracker.core.ParcelStore
+import com.plhery.peekdeliverytracker.core.PullToRefreshModel
+import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
+import com.plhery.peekdeliverytracker.core.trackingNumbers
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import java.time.Instant
 import java.util.UUID
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * ParcelListView's navigation: the parcel shown and how it came to be shown ([DeliveriesNavigation]), the parcel kept
@@ -175,9 +187,21 @@ internal fun <T> rememberForLaunch(launch: UUID, initial: T): MutableState<T> =
         ),
     ) { mutableStateOf(initial) }
 
+/** A message under the list (`ListToast`): what a check of the parcels found, or that a number was copied. */
+@Immutable
+internal data class ListToast(val text: String, val warning: Boolean = false)
+
+/** News TalkBack is told that nothing on screen says (`AccessibilityNotification.Announcement`), each one once. */
+@Immutable
+internal data class Announcement(val text: String, val count: Int)
+
 /**
  * What the deliveries' list and the parcel beside it share: the parcels as the list arranges them, the window's
- * arrangement, the navigation, the list's scroll and the archive's shelf.
+ * arrangement, the navigation, the list's scroll and the archive's shelf; and what ParcelListView keeps for its
+ * feedback: the pull, the toast, the error of an action, the card menu open and the delete it asks about.
+ *
+ * The list's own work (a refresh, an archive) runs in `scope`, the tab's, so that drawing the list again doesn't
+ * cancel it, as the iPhone's pull runs in a task of its own.
  */
 @Stable
 internal class DeliveriesState(
@@ -187,6 +211,7 @@ internal class DeliveriesState(
     archiveOpenState: MutableState<Boolean>,
     showingSearchState: MutableState<Boolean>,
     private val now: () -> Instant,
+    val scope: CoroutineScope,
 ) {
     /** The parcels as the list last received them: the store's, a moment before it shows them. */
     var parcels: List<Parcel> by mutableStateOf(source.parcels.value)
@@ -274,6 +299,167 @@ internal class DeliveriesState(
     /** Opens the sample parcel Pip holds (`FirstOpenJourney.delivered`): its page isn't ported yet. */
     fun openSample() = Unit
 
+    /** The app's words, in its language: the composition hands them in. */
+    var localizer: Localizer? = null
+
+    private fun text(key: String, variables: Map<String, Any> = emptyMap()): String =
+        localizer?.text(key, variables) ?: key
+
+    /** The pull's state, which the list drives and the seal draws. */
+    val pull = PullToRefreshModel(scope)
+
+    var toast: ListToast? by mutableStateOf(null)
+        private set
+
+    /** Shows a message under the list, and tells TalkBack. */
+    fun show(toast: ListToast) {
+        this.toast = toast
+        announce(toast.text)
+    }
+
+    /** The message has had its four seconds, unless a newer one took its place. */
+    fun dismiss(toast: ListToast) {
+        if (this.toast == toast) this.toast = null
+    }
+
+    /** What the toast of an archived parcel says (`app.archivedToast`). */
+    fun archivedText(parcel: Parcel): String = text("app.archivedToast", mapOf("name" to parcel.label.ifEmpty { text("common.parcel") }))
+
+    /** What went wrong with an action, said in an alert (`actionError`). */
+    var actionError: String? by mutableStateOf(null)
+
+    /** The card whose menu is open, and its parcel. */
+    var menu: CardMenuRequest? by mutableStateOf(null)
+
+    /** The parcel its menu asks about before deleting it (`prompts.deleting`). */
+    var deleting: Parcel? by mutableStateOf(null)
+
+    var announcement: Announcement? by mutableStateOf(null)
+        private set
+
+    fun announce(text: String) {
+        announcement = Announcement(text, (announcement?.count ?: 0) + 1)
+    }
+
+    /** TalkBack has had the news: the same words said again later are news again. */
+    fun announced(announcement: Announcement) {
+        if (this.announcement == announcement) this.announcement = announcement.copy(text = "")
+    }
+
+    /**
+     * Copies a tracking number to the clipboard, the composition's; true when the app says so itself, where the system
+     * doesn't.
+     */
+    var copy: (text: String) -> Boolean = { false }
+
+    /** `refreshFromPull()`: holds the pull open until every parcel has been checked, then shows the result on the seal. */
+    fun refreshFromPull() {
+        scope.launch {
+            pull.begin(text("app.refreshing"))
+            val result = coroutineScope {
+                // A check that answers at once still shows the arrow turning.
+                val turning = launch { delay(PULL_MINIMUM) }
+                source.checkAllParcels().also { turning.join() }
+            }
+            when (result) {
+                is ParcelStore.RefreshResult.Failed -> {
+                    finishPull(succeeded = false, label = text("detail.checkFailed"))
+                    delay(PULL_RESULT)
+                    show(ListToast(result.message, warning = true))
+                }
+                ParcelStore.RefreshResult.StillChecking -> {
+                    // The checks keep running, so the arrow keeps turning under the message.
+                    val label = text("app.refreshTimeout")
+                    pull.update(label)
+                    announce(label)
+                    delay(PULL_RESULT)
+                }
+                null -> Unit
+                else -> {
+                    finishPull(succeeded = true, label = text(result.messageKey))
+                    delay(PULL_SUCCESS)
+                }
+            }
+            pull.settle()
+        }
+    }
+
+    private fun finishPull(succeeded: Boolean, label: String) {
+        pull.finish(succeeded, label)
+        announce(label)
+    }
+
+    /** `refreshFromButton()`: the button turns while the parcels are checked, then a toast says how it went. */
+    fun refreshFromButton() {
+        if (source.refreshing.value) return
+        scope.launch {
+            when (val result = source.checkAllParcels()) {
+                is ParcelStore.RefreshResult.Failed -> show(ListToast(result.message, warning = true))
+                null -> Unit
+                else -> show(ListToast(text(result.messageKey)))
+            }
+        }
+    }
+
+    /** Archives the parcel; whether it left the list, so a swiped card only comes back after a failure. */
+    suspend fun archive(parcel: Parcel): Boolean = try {
+        source.archive(parcel)
+        true
+    } catch (error: CancellationException) {
+        throw error
+    } catch (error: Exception) {
+        actionError = source.errorMessage(error)
+        false
+    }
+
+    /** Brings a parcel back from the archive: the card's Restore, and the Undo of its toast. */
+    fun restore(parcel: Parcel) {
+        scope.launch {
+            try {
+                source.restore(parcel)
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                actionError = source.errorMessage(error)
+            }
+        }
+    }
+
+    /** Deletes the parcel its menu asked about. Beside the list, a card that was shown gives way to the next. */
+    fun delete(parcel: Parcel) {
+        val cards = rows
+        scope.launch {
+            try {
+                source.permanentlyDelete(parcel)
+                navigator.leave(parcel.id, cards)
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                actionError = source.errorMessage(error)
+            }
+        }
+    }
+
+    /** What a card's menu asked of its parcel. Archiving it is the same as swiping it away, Undo and all. */
+    fun chose(item: ParcelMenuItem, parcel: Parcel) {
+        when (item) {
+            ParcelMenuItem.Open -> navigator.open(parcel.id)
+            // Naming a parcel, sharing it and changing its carrier open what comes with the parcel's page: the
+            // menu offers them, and they do nothing yet.
+            ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
+            ParcelMenuItem.CopyTrackingNumber -> {
+                val entry = parcel.trackingNumbers.firstOrNull() ?: return
+                source.action("parcel-copy-tracking")
+                val copied = text("detail.copied")
+                // Where the system shows the copy itself, TalkBack still hears of it.
+                if (copy(TrackingNumberCopy.text(entry.number, entry.carrier))) show(ListToast(copied)) else announce(copied)
+            }
+            ParcelMenuItem.Archive -> scope.launch { archive(parcel) }
+            ParcelMenuItem.Restore -> restore(parcel)
+            ParcelMenuItem.Delete -> deleting = parcel
+        }
+    }
+
     /**
      * Where a card stands in the list, which the delivered card's flight and Pip's sight measure from: neither is
      * ported yet.
@@ -347,3 +533,8 @@ internal fun cardId(key: Any?): UUID? {
 
 /** The archive's shelf's key in the list. */
 internal const val ARCHIVE_KEY = "archive"
+
+/** The pull holds its arrow turning this long at least, and its result this long, in milliseconds. */
+private const val PULL_MINIMUM = 900L
+private const val PULL_RESULT = 1100L
+private const val PULL_SUCCESS = 700L

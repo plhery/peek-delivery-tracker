@@ -1344,6 +1344,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Mayi Yinfu tracking: MY numbers, flight lines and DHL",
       "name": "Mayi Yinfu",
       "color": "#000000"
+    },
+    {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-tracking",
+      "title": "JRT tracking: JRT…MM numbers, flight scans and DHL",
+      "name": "JRT",
+      "color": "#023053"
+    },
+    {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "tianhui-hengyuan-tracking",
+      "title": "Tianhui Hengyuan (THHY) tracking: AT numbers and scans",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
     }
   ],
   "de": [

@@ -189,7 +189,7 @@ describe('NotificationControl', () => {
     render(<NotificationControl apiAuth={apiAuth} />);
 
     await user.click(await screen.findByRole('button', { name: 'Notifications enabled' }));
-    await user.click(await screen.findByRole('radio', { name: /important only/i }));
+    await user.click(await screen.findByRole('radio', { name: /important steps/i }));
     expect(screen.queryByRole('checkbox', { name: /quiet hours/i })).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Save preferences' }));
 

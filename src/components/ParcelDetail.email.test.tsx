@@ -106,7 +106,7 @@ describe('a parcel’s bell', () => {
     expect(saves.notifications).not.toHaveBeenCalled();
     const notifications = within(sheet()).getByRole('switch', { name: 'Notifications' });
     expect(notifications).toBeChecked();
-    expect(notifications).toHaveAccessibleDescription('Important only, as in Settings');
+    expect(notifications).toHaveAccessibleDescription('Important steps, as in Settings');
     const email = within(sheet()).getByRole('switch', { name: 'Email when it arrives' });
     expect(email).toBeChecked();
     expect(email).toHaveAccessibleDescription('To alex@example.com');

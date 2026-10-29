@@ -37,7 +37,7 @@ async function open(preferences: Partial<NotificationPreferences> = {}, email: s
   const user = userEvent.setup();
   render(<NotificationControl apiAuth={apiAuth} email={email ?? undefined} />);
   await user.click(await screen.findByRole('button', { name: 'Notifications enabled' }));
-  await screen.findByRole('radio', { name: /delivery day only/i });
+  await screen.findByRole('radio', { name: /delivery only/i });
   return { user, apiAuth };
 }
 const section = () => screen.getByRole('region', { name: /^By email/ });
@@ -93,7 +93,7 @@ describe('the delivery email in Settings', () => {
   it('saves at once, on its own: the last saved events, not the radios’ draft, and the state from the answer', async () => {
     const { user, apiAuth } = await open();
     // A draft of the radios that is not saved.
-    await user.click(screen.getByRole('radio', { name: /all tracking updates/i }));
+    await user.click(screen.getByRole('radio', { name: /every scan/i }));
     await user.click(emailSwitch());
     expect(saveNotificationPreferences).toHaveBeenCalledExactlyOnceWith({
       enabledStages: ['out_for_delivery', 'delivered'],
@@ -105,7 +105,7 @@ describe('the delivery email in Settings', () => {
     await waitFor(() => expect(emailSwitch()).toHaveAttribute('aria-checked', 'true'));
     expect(mocks.track).toHaveBeenCalledWith('email-delivery-change', 'success');
     // The draft is still there, unsaved.
-    expect(screen.getByRole('radio', { name: /all tracking updates/i })).toBeChecked();
+    expect(screen.getByRole('radio', { name: /every scan/i })).toBeChecked();
     expect(screen.queryByText('Preferences saved')).toBeNull();
 
     await user.click(emailSwitch());
@@ -148,7 +148,7 @@ describe('the delivery email in Settings', () => {
     const { user, apiAuth } = await open();
     await user.click(emailSwitch());
     await waitFor(() => expect(emailSwitch()).toHaveAttribute('aria-checked', 'true'));
-    await user.click(screen.getByRole('radio', { name: /all tracking updates/i }));
+    await user.click(screen.getByRole('radio', { name: /every scan/i }));
     await user.click(screen.getByRole('button', { name: 'Save preferences' }));
     expect(await screen.findByText('Preferences saved')).toBeVisible();
     const [sent, auth] = vi.mocked(saveNotificationPreferences).mock.calls[1];
@@ -156,7 +156,7 @@ describe('the delivery email in Settings', () => {
     // The request leaves the email out, and the server keeps what it has.
     expect(Object.keys(sent).sort()).toEqual(['enabledStages', 'quietHoursEnd', 'quietHoursStart', 'timezone']);
     expect(emailSwitch()).toHaveAttribute('aria-checked', 'true');
-    expect(screen.getByRole('radio', { name: /all tracking updates/i })).toBeChecked();
+    expect(screen.getByRole('radio', { name: /every scan/i })).toBeChecked();
   });
 
   it('links the example in the reader’s language', async () => {

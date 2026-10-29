@@ -31,7 +31,7 @@ page of its own: the journey on a map, every scan, the day it should arrive. No 
 needed.
 
 **Will I know when it moves?**<br>
-Yes. Choose every scan, the important steps or delivery day only, on your iPhone or in
+Yes. Choose every scan, the important steps or delivery only, on your iPhone or in
 your browser. Quiet hours keep the night quiet, and an email can tell you it arrived.
 
 **Following more than one?**<br>

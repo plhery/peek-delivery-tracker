@@ -50,7 +50,7 @@ describe('the delivery email in the deliveries', () => {
     const detail = screen.getByRole('dialog', { name: 'Belgian chocolate 🍫' });
     await user.click(await within(detail).findByRole('button', { name: 'Notifications for this parcel' }));
     const sheet = screen.getByRole('dialog', { name: 'Notifications for Belgian chocolate 🍫' });
-    expect(within(sheet).getByRole('switch', { name: 'Notifications' })).toHaveAccessibleDescription('Delivery day only, as in Settings');
+    expect(within(sheet).getByRole('switch', { name: 'Notifications' })).toHaveAccessibleDescription('Delivery only, as in Settings');
     const email = within(sheet).getByRole('switch', { name: 'Email when it arrives' });
     expect(email).toHaveAccessibleDescription('To alex@example.com');
     await user.click(email);

@@ -211,21 +211,21 @@ export function NotificationControl({ apiAuth, email, variant = 'icon' }: {
                     value="all"
                     selected={preset}
                     onChange={setDraft}
-                    title={t('notifications.preset.all')}
+                    title={t('alerts.preset.all')}
                     description={t('notifications.preset.allDescription')}
                   />
                   <PreferenceOption
                     value="important"
                     selected={preset}
                     onChange={setDraft}
-                    title={t('notifications.preset.important')}
+                    title={t('alerts.preset.important')}
                     description={t('notifications.preset.importantDescription')}
                   />
                   <PreferenceOption
                     value="delivery-day"
                     selected={preset}
                     onChange={setDraft}
-                    title={t('notifications.preset.deliveryDay')}
+                    title={t('alerts.preset.delivery')}
                     description={t('notifications.preset.deliveryDayDescription')}
                   />
                 </fieldset>
@@ -338,9 +338,9 @@ function copyFor(state: PushState | null, hasError: boolean, t: Translate): stri
 }
 
 const PRESET_TITLES: Record<EventPreset, MessageKey> = {
-  all: 'notifications.preset.all',
-  important: 'notifications.preset.important',
-  'delivery-day': 'notifications.preset.deliveryDay',
+  all: 'alerts.preset.all',
+  important: 'alerts.preset.important',
+  'delivery-day': 'alerts.preset.delivery',
 };
 
 /** What Settings calls the preset a list of events stands for. */

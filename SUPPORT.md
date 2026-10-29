@@ -52,7 +52,7 @@ Peek has no passwords. It emails a six-digit code to the address you enter.
 - Nothing arrives? Check that Peek may send notifications: in the browser's
   site settings, or in iPhone Settings.
 - Peek announces only the updates you chose: every scan, the important steps
-  or delivery day only.
+  or delivery only.
 - Signed in, Settings › Notifications also has
   **Email me when a parcel arrives**.
 

@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.view.KeyEvent
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -39,6 +38,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
@@ -177,35 +177,39 @@ fun DeliveriesTab(
                 SideBySideColumns(state, largeText, list, shown)
             }
         }
-        NavDisplay(
-            backStack = backStack,
-            modifier = Modifier.fillMaxSize(),
-            onBack = { navigator.pop(navigator.navigation.path.dropLast(1)) },
-            sceneStrategies = listOf(sideBySide, SinglePaneSceneStrategy()),
-            transitionSpec = { if (turning()) Push.still() else Push.forward(reduceMotion) },
-            popTransitionSpec = { if (turning()) Push.still() else Push.back(reduceMotion) },
-            predictivePopTransitionSpec = { if (turning()) Push.still() else Push.predictiveBack(reduceMotion) },
-            entryProvider = { key ->
-                when (key) {
-                    DeliveriesEntry.ParcelList -> NavEntry<DeliveriesEntry>(key, metadata = mapOf(PANE to LIST_PANE)) {
-                        DeliveryList(state)
+        // Each arrangement draws its own stack, as the iPhone swaps its NavigationStack and NavigationSplitView: a turn
+        // is no navigation, and the entries start again (the list keeps its place, held above). One NavDisplay across
+        // turns kept the side-by-side scene on its books, as it tidies them only once it has seen a transition run and
+        // never sees a still one run; that scene could then claim the list's entry from the list a back went to, and
+        // neither drew it.
+        key(arrangement) {
+            val pushes = arrangement == DeliveriesArrangement.Stacked
+            NavDisplay(
+                backStack = backStack,
+                modifier = Modifier.fillMaxSize(),
+                onBack = { navigator.pop(navigator.navigation.path.dropLast(1)) },
+                sceneStrategies = listOf(sideBySide, SinglePaneSceneStrategy()),
+                transitionSpec = { if (pushes) Push.forward(reduceMotion) else Push.still() },
+                popTransitionSpec = { if (pushes) Push.back(reduceMotion) else Push.still() },
+                predictivePopTransitionSpec = { if (pushes) Push.predictiveBack(reduceMotion) else Push.still() },
+                entryProvider = { key ->
+                    when (key) {
+                        DeliveriesEntry.ParcelList -> NavEntry<DeliveriesEntry>(key, metadata = mapOf(PANE to LIST_PANE)) {
+                            DeliveryList(state)
+                        }
+                        is DeliveriesEntry.ParcelPage -> NavEntry<DeliveriesEntry>(key, metadata = mapOf(PANE to PAGE_PANE)) {
+                            DemoPage(state) { page(key.id) }
+                        }
                     }
-                    is DeliveriesEntry.ParcelPage -> NavEntry<DeliveriesEntry>(key, metadata = mapOf(PANE to PAGE_PANE)) {
-                        DemoPage(state) { page(key.id) }
-                    }
-                }
-            },
-        )
+                },
+            )
+        }
     }
 }
 
 /** A window this wide and this tall in dp counts as regular, as the iPhone's size classes would. */
 private val REGULAR_WIDTH = 600.dp
 private val REGULAR_HEIGHT = 480.dp
-
-/** Whether the stack is turning between its arrangements: the iPhone swaps them at once. */
-private fun AnimatedContentTransitionScope<Scene<DeliveriesEntry>>.turning(): Boolean =
-    initialState is SideBySideScene || targetState is SideBySideScene
 
 /**
  * The parcels just delivered keep their place a moment (DeliveredHold): the postmark lands, the card is read, then it

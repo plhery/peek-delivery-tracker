@@ -7,7 +7,7 @@ published: 2026-10-16
 updated: 2026-10-27
 ---
 
-Per tracciare un ordine Amazon accedi al tuo account su amazon.it o apri l'app Amazon e vai in I miei ordini, lo storico dei tuoi ordini: è lì che si seguono di solito le consegne Amazon. Chi ti aiuta quando qualcosa va storto dipende da chi spedisce. Amazon segue i propri ordini e quelli gestiti con Logistica di Amazon, mentre un venditore che spedisce da sé gestisce direttamente la spedizione e l'assistenza clienti.
+Per tracciare un ordine Amazon accedi al tuo account su amazon.it o apri l'app Amazon e vai in I miei ordini, lo storico dei tuoi ordini: è lì che si seguono di solito le consegne Amazon. Chi ti aiuta quando qualcosa va storto dipende da chi spedisce. Amazon segue i propri ordini e quelli gestiti con Logistica di Amazon, mentre se un venditore spedisce da sé ti rivolgi prima a lui.
 
 ## Chi spedisce il mio ordine Amazon: Amazon o un venditore terzo?
 
@@ -16,10 +16,8 @@ Un ordine Amazon rientra in uno di questi tre casi:
 | Chi vende, chi spedisce | Cosa significa | Chi ti aiuta per la consegna |
 | --- | --- | --- |
 | Amazon vende e spedisce | Merce di Amazon | Amazon |
-| Un venditore vende, Amazon spedisce | "Logistica di Amazon": il venditore manda la merce ai centri logistici di Amazon, e Amazon la conserva, la imballa e la spedisce | Amazon, che gestisce anche l'assistenza clienti, i resi e i rimborsi |
-| Lo stesso venditore vende e spedisce | "Gestito dal venditore": conserva i prodotti da sé e gestisce direttamente spedizione e assistenza clienti | Prima il venditore |
-
-Se un ordine gestito con Logistica di Amazon ha problemi di spedizione, se ne fa carico Amazon.
+| Un venditore vende, Amazon spedisce | "Logistica di Amazon": il venditore manda la merce ai centri logistici di Amazon, e Amazon la conserva, la imballa e la spedisce | Amazon |
+| Lo stesso venditore vende e spedisce | Il venditore spedisce da sé e, nell'UE, è responsabile della consegna | Prima il venditore |
 
 ## Quale corriere consegna il mio pacco Amazon?
 
@@ -31,7 +29,7 @@ Quando consegna Amazon stessa si tratta di [Amazon Logistics](carrier:amazon-log
 | [Poste Italiane](carrier:poste-italiane) | Uno dei grandi corrieri nazionali con cui Amazon collabora, per esempio per le consegne nella Laguna di Venezia |
 | Amazon Locker e Amazon Counter | Oltre 44.000 punti di ritiro in Italia: i Locker sono self-service, i Counter sono negozi della zona con personale |
 
-Un venditore che spedisce da sé organizza la propria consegna: il suo corriere può essere uno di questi o un altro. Dove trovare il numero su ogni negozio: [trovare il numero di tracciamento](guide:find-tracking-number). Se non ritiri un pacco in giacenza: [pacco non ritirato](guide:uncollected-parcel).
+Quando un venditore spedisce da sé, il suo corriere può essere uno di questi o un altro. Dove trovare il numero su ogni negozio: [trovare il numero di tracciamento](guide:find-tracking-number). Se non ritiri un pacco in giacenza: [pacco non ritirato](guide:uncollected-parcel).
 
 ## Com'è fatto un numero di tracciamento Amazon?
 
@@ -65,7 +63,7 @@ Due casi possono spiegarlo:
 
 :::journey
 - warehouse | Amazon o il venditore | Un articolo con Logistica di Amazon parte da un centro logistico Amazon, gli altri dal venditore
-- label | Etichetta creata | Con Logistica di Amazon il pacco parte con il tracciamento della spedizione
+- label | Etichetta creata | Se consegna Amazon, il pacco si segue da I miei ordini
 - handover | Partner di trasporto | Può subentrare, come Poste Italiane per le consegne nella Laguna di Venezia
 - truck | In consegna | Un autista di un fornitore di servizi di consegna di Amazon, di un corriere nazionale o del corriere del venditore
 - home | Tu | A casa, in ufficio, in un Amazon Locker o in un Amazon Counter
@@ -78,7 +76,7 @@ Quando il primo corriere indica il partner che subentra, [Peek](/) tiene la prim
 Due motivi possibili:
 
 - **Consegna Amazon Logistics.** Non ha una pagina di tracciamento pubblica: il pacco si segue nel tuo account, in I miei ordini, sul negozio dove hai ordinato.
-- **Il venditore spedisce da sé.** Gestisce direttamente spedizione e assistenza clienti, quindi è lui il primo a cui chiedere se il tracciamento manca.
+- **Il venditore spedisce da sé.** È lui il primo a cui chiedere se il tracciamento manca.
 
 Se il pacco di un venditore non arriva e lui non risolve il problema, puoi chiedere un rimborso ad Amazon con la Garanzia dalla A alla Z. Se il tracciamento resta fermo per giorni: [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
 
@@ -113,14 +111,13 @@ Per un danno fai la richiesta al Servizio Clienti di Amazon, che informa il vend
 Dipende dal numero. Incollalo in [Peek](/):
 
 - **Il numero di un corriere** (Poste Italiane, BRT, GLS, SDA…) si traccia come qualsiasi altro pacco.
-- **Un numero Amazon**, o un link track.amazon: Peek interroga prima il tracciamento pubblico di Amazon. Se risponde, il pacco viaggia con [Amazon Shipping](carrier:amazon-shipping), il servizio di spedizioni di Amazon per gli e-commerce, o con la Gestione multicanale, in cui Amazon spedisce ordini fatti su altri siti, spesso in imballaggi neutri. Allora Peek lo segue da solo.
+- **Un numero Amazon**, o un link track.amazon: Peek interroga prima il tracciamento pubblico di Amazon. Se risponde, il pacco viaggia con [Amazon Shipping](carrier:amazon-shipping), il servizio con cui Amazon consegna i pacchi dei venditori che gestiscono da sé le spedizioni, o con il Multi-Channel Fulfillment, in cui Amazon spedisce la merce di un venditore ai suoi clienti, ovunque abbiano ordinato. Allora Peek lo segue da solo.
 - Altrimenti è Amazon Logistics che consegna un ordine Amazon, e Amazon lo mostra solo nel tuo account. Peek te lo dice e propone "Apri i miei ordini Amazon", che apre i tuoi ordini sul sito Amazon giusto per quel numero: amazon.it per `IT`. Peek non ti chiede mai le credenziali Amazon.
 - **Un numero d'ordine** riceve "Sembra un numero d'ordine Amazon". Se l'e-mail di spedizione contiene un numero di tracciamento, incolla quello.
 
 :::sources
 - [About Amazon Italia: Come evitare le truffe basate sui furti di identità di Amazon](https://www.aboutamazon.it/notizie/company-news/come-evitare-le-truffe-basate-sui-furti-di-identita-di-amazon-in-questo-periodo-festivo) – storico degli ordini nell'account o nell'app, Garanzia dalla A alla Z se il prodotto non arriva o non corrisponde alla descrizione, numeri da non chiamare (2022)
 - [About Amazon Italia: Un'alleanza pubblico-privato per contrastare le truffe basate sui furti d'identità](https://www.aboutamazon.it/news/customer-trust/unalleanza-pubblico-privato-per-contrastare-le-truffe-basate-sui-furti-didentita) – servizio clienti dall'app o dal sito Amazon
-- [Amazon: Amazon FBA, accresci il tuo business in Italia](https://sell.amazon.it/logistica-di-amazon) – Logistica di Amazon: stoccaggio, imballaggio, spedizione con tracciamento, assistenza clienti, resi e rimborsi; Gestito dal venditore
 - [About Amazon Italia: Consegna e logistica di Amazon](https://www.aboutamazon.it/cosa-facciamo/consegna-e-logistica) – ultimo miglio dal deposito di smistamento a case, aziende e Amazon Locker
 - [About Amazon Italia: L'impegno di Amazon verso i dipendenti e i fornitori di servizi](https://www.aboutamazon.it/notizie/lavorare-ad-amazon/il-nostro-impegno-nei-confronti-dei-dipendenti-e-degli-autisti-dei-fornitori-di-servizi-di-consegna) – decine di fornitori di servizi di consegna in tutta Italia
 - [About Amazon Italia: Segui una consegna Amazon a Murano, la città costruita sull'acqua nella laguna di Venezia](https://www.aboutamazon.it/notizie/logistica/segui-una-consegna-amazon-a-murano-la-citta-costruita-sullacqua-nella-laguna-di-venezia) – grandi corrieri nazionali come Poste Italiane, partner di trasporto nella Laguna di Venezia (2022)
@@ -128,7 +125,6 @@ Dipende dal numero. Incollalo in [Peek](/):
 - [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z per includere le richieste di risarcimento per danni alla proprietà e alle persone](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prima il venditore, rimborso, danni a cose o persone da maggio 2024
 - [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – 30 giorni, proroga ragionevole, recesso e rimborso
 - [Your Europe: Domande frequenti su spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_it.htm) – il commerciante è responsabile della consegna, articolo identico o rimborso
-- [Amazon Shipping Italia](https://shipping.amazon.it/) – spedizioni per gli e-commerce
-- [Amazon: Gestione multicanale](https://sell.amazon.it/logistica-di-amazon/gestione-multicanale) – ordini da altri canali, imballaggi neutri
+- [About Amazon Italia: Lettera agli azionisti dal CEO Andy Jassy - 2024](https://www.aboutamazon.it/notizie/company-news/lettera-agli-azionisti-dal-ceo-andy-jassy-2024) – Logistica di Amazon: i venditori immagazzinano la merce nella rete di Amazon, che la preleva, la imballa e la spedisce; Amazon Shipping per i venditori che gestiscono da sé le spedizioni; Multi-Channel Fulfillment, ovunque il cliente abbia ordinato
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei numeri Amazon, cosa controlla Peek, tracciamento di Amazon Logistics nell'account
 :::

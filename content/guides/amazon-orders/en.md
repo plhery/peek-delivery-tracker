@@ -117,7 +117,7 @@ It covers items a third-party seller sold and shipped itself: on-time delivery a
 It depends on the number. Paste it into [Peek](/):
 
 - **A carrier's number** (Royal Mail, USPS, Canada Post, Australia Post…) is tracked like any other parcel.
-- **An Amazon number**, or a track.amazon link: Peek first asks Amazon's public tracker. If Amazon answers, the parcel travels with [Amazon Shipping](carrier:amazon-shipping), Amazon's delivery service for other retailers and Amazon sellers, or with Multi-Channel Fulfilment, where Amazon packs orders placed on other sites, often in plain packaging. Peek then tracks it automatically.
+- **An Amazon number**, or a track.amazon link: Peek first asks Amazon's public tracker. If Amazon answers, the parcel travels with [Amazon Shipping](carrier:amazon-shipping), Amazon's delivery service for other businesses, or with Multi-Channel Fulfilment, where Amazon ships a seller's stock to its customers wherever they ordered. Peek then tracks it automatically.
 - Otherwise it's Amazon Logistics delivering an Amazon order, and Amazon shows that only in your account. Peek says so and offers "Open my Amazon orders", which opens your order history on the Amazon site the number points to. Peek never asks for your Amazon login.
 - **An order number** gets "That looks like an Amazon order number". Use the tracking number from Track Package or the shipment confirmation email instead.
 
@@ -126,6 +126,7 @@ It depends on the number. Paste it into [Peek](/):
 - [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – the same on Amazon.co.uk
 - [About Amazon: 10 tips to protect your Amazon packages from porch pirates](https://www.aboutamazon.com/news/operations/amazon-porch-pirate-prevention-tips) – Track Package from the shipment email, delivery instructions, delivery photos
 - [About Amazon: Fulfillment by Amazon](https://www.aboutamazon.com/news/small-business/fulfillment-by-amazon-how-improving-delivery-fueled-independent-seller-growth-and-success) – Amazon delivers and supports sellers' FBA items; sellers' other ways to ship
+- [About Amazon UK: Fulfilment by Amazon](https://www.aboutamazon.co.uk/news/innovation/fulfilment-by-amazon) – Amazon stores, packs and delivers sellers' stock, with easy returns and Amazon customer service (2018)
 - [About Amazon UK: How to change your delivery address on Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-change-your-delivery-address-on-amazon) – who sells and ships it, below Buy Now; Carrier Contact Information
 - [About Amazon Australia: How to change your delivery address](https://www.aboutamazon.com.au/news/retail/how-to-change-your-delivery-address-on-desktop-and-in-the-amazon-app) – the same on Amazon.com.au
 - [About Amazon Australia: How to cancel Amazon orders](https://www.aboutamazon.com.au/news/shopping/how-to-cancel-your-order-on-amazon-australia) – sold and fulfilled by Amazon AU, by a seller, or both; Contact Seller (2023)
@@ -144,7 +145,6 @@ It depends on the number. Paste it into [Peek](/):
 - [About Amazon Canada: A-to-z Guarantee in Canada](https://www.aboutamazon.ca/news/customer-trust/amazon-expands-a-to-z-guarantee-in-canada-to-include-property-damage-and-personal-injury-claims) – the same in Canada
 - [About Amazon Australia: 12 tips for shopping on Amazon.com.au](https://www.aboutamazon.com.au/news/retail/12-tips-to-get-the-most-out-of-shopping-on-amazon-com-au) – A-to-z Guarantee in Australia (2022)
 - [About Amazon Australia: How to return an order you can't cancel](https://www.aboutamazon.com.au/news/shopping/how-to-return-an-order-if-you-cant-cancel-it-on-amazon-australia) – two business days, then the A-to-z Guarantee (2023)
-- [Amazon Shipping UK](https://shipping.amazon.co.uk/) – delivery for retailers and Amazon selling partners
-- [Amazon UK: Multi-Channel Fulfilment](https://sell.amazon.co.uk/fulfilment-by-amazon/fba-multi-channel) – orders from other sales channels, unbranded packaging
+- [About Amazon UK: Amazon CEO Andy Jassy's 2023 Letter to Shareholders](https://www.aboutamazon.co.uk/news/company-news/ceo-andy-jassys-2023-letter-to-shareholders) – Amazon Shipping, Amazon's last-mile delivery network for other businesses' parcels; Multi-Channel Fulfillment, sellers' stock shipped wherever customers ordered
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Amazon number shapes, stores per prefix, Evri's former name, what Peek checks
 :::

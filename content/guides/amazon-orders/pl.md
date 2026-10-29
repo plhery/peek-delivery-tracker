@@ -105,7 +105,7 @@ Gwarancja od A do Z obejmuje każdy produkt w sklepie, niezależnie od tego, czy
 To zależy od numeru. Wklej go do [Peek](/):
 
 - **Numer przewoźnika** (InPost, DPD, DHL, Poczta Polska…) śledzisz jak każdą inną paczkę.
-- **Numer Amazona** albo link track.amazon: Peek najpierw pyta publiczny system śledzenia Amazona. Jeśli Amazon odpowie, paczka jedzie z Amazon Shipping, usługą dostaw Amazona dla innych sklepów i sprzedawców, albo w ramach Multi-Channel Fulfilment, gdzie Amazon wysyła zamówienia z innych stron, często w opakowaniach bez logo Amazona. Wtedy Peek śledzi ją sam.
+- **Numer Amazona** albo link track.amazon: Peek najpierw pyta publiczny system śledzenia Amazona. Jeśli Amazon odpowie, paczka jedzie z Amazon Shipping albo w ramach Multi-Channel Fulfillment (MCF) i nie pochodzi z zamówienia złożonego w samym Amazonie. Wtedy Peek śledzi ją sam.
 - Jeśli nie, to Amazon Logistics dowozi zamówienie z Amazona, a Amazon pokazuje je tylko na twoim koncie. Peek mówi ci o tym i proponuje „Otwórz moje zamówienia Amazon”, które otwiera twoje zamówienia na stronie Amazona pasującej do numeru: amazon.pl dla `PL`. Peek nigdy nie prosi o login do Amazona.
 - **Numer zamówienia** dostaje komunikat „To wygląda na numer zamówienia Amazon”. Użyj zamiast niego numeru przesyłki ze swojego konta.
 
@@ -120,7 +120,5 @@ To zależy od numeru. Wklej go do [Peek](/):
 - [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, zwrot pieniędzy od Amazona
 - [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – 30 dni, dodatkowy termin, rozwiązanie umowy i zwrot pieniędzy
 - [Your Europe: Najczęściej zadawane pytania – Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_pl.htm) – sprzedawca odpowiada za dostawę, taki sam produkt lub zwrot pieniędzy
-- [Amazon Shipping UK](https://shipping.amazon.co.uk/) – dostawy dla sklepów i sprzedawców Amazon
-- [Amazon UK: Multi-Channel Fulfilment](https://sell.amazon.co.uk/fulfilment-by-amazon/fba-multi-channel) – zamówienia z innych kanałów, opakowania bez logo
-- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów Amazona, śledzenie tylko na koncie, co sprawdza Peek
+- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów Amazona, śledzenie tylko na koncie, co sprawdza Peek, Amazon Shipping i MCF w publicznym systemie śledzenia Amazona
 :::

@@ -7,7 +7,7 @@ published: 2026-10-16
 updated: 2026-10-27
 ---
 
-Pour suivre une commande Amazon, connecte-toi à ton compte sur amazon.fr ou ouvre l'application Amazon, puis va dans Vos commandes : c'est là que tu vérifies l'état de tes commandes. La page du service client d'Amazon donne aussi accès au suivi de tes colis. Qui t'aide en cas de souci dépend de qui expédie. Amazon s'occupe de ses propres commandes et des articles « Expédié par Amazon », alors qu'un vendeur qui expédie lui-même se charge de l'envoi et de la livraison.
+Pour suivre une commande Amazon, connecte-toi à ton compte sur amazon.fr ou ouvre l'application Amazon, puis va dans Vos commandes : c'est là que tu vérifies l'état de tes commandes. La page du service client d'Amazon donne aussi accès au suivi de tes colis. Qui t'aide en cas de souci dépend de qui expédie. Amazon s'occupe de ses propres commandes et des articles « Expédié par Amazon », alors que pour un vendeur qui expédie lui-même, c'est d'abord lui que tu contactes.
 
 ## Qui expédie ma commande Amazon : Amazon ou un vendeur tiers ?
 
@@ -17,7 +17,7 @@ Une commande Amazon entre dans l'un de ces trois cas :
 | --- | --- | --- |
 | Amazon vend et expédie | Le stock d'Amazon | Amazon |
 | Un vendeur vend, Amazon expédie | « Expédié par Amazon » : le vendeur confie son stock à Amazon, qui le stocke, l'emballe et l'expédie | Amazon, qui gère aussi le service client et les retours |
-| Le même vendeur vend et expédie | « Expédié par le vendeur » : il se charge lui-même du stockage, de l'emballage, de l'envoi et de la livraison | Le vendeur d'abord |
+| Le même vendeur vend et expédie | Le vendeur expédie lui-même et, dans l'UE, répond de la livraison | Le vendeur d'abord |
 
 **En Belgique**, amazon.com.be, ouvert en 2022, propose un service client en français, en néerlandais ou en anglais.
 
@@ -33,7 +33,7 @@ Quand Amazon livre lui-même, c'est [Amazon Logistics](carrier:amazon-logistics)
 | Belgique | amazon.com.be | Amazon et ses partenaires de livraison locaux, [bpost](carrier:bpost) |
 | Suisse | amazon.de, amazon.fr | [La Poste suisse](carrier:swiss-post), qui livre avec son propre réseau |
 
-Un vendeur qui expédie lui-même organise sa propre livraison : son transporteur peut être l'un de ceux-ci ou un autre. Pour retrouver le numéro de suivi : [trouver ton numéro de suivi](guide:find-tracking-number).
+Quand un vendeur expédie lui-même, son transporteur peut être l'un de ceux-ci ou un autre. Pour retrouver le numéro de suivi : [trouver ton numéro de suivi](guide:find-tracking-number).
 
 ## À quoi ressemble un numéro de suivi Amazon ?
 
@@ -67,7 +67,7 @@ Deux cas peuvent l'expliquer :
 
 :::journey
 - warehouse | Amazon ou le vendeur | Un article « Expédié par Amazon » part d'un centre de distribution Amazon, les autres de chez le vendeur
-- label | Étiquette créée | Le vendeur qui expédie lui-même doit fournir un suivi valide pour au moins 95 % de ses commandes
+- label | Étiquette créée | L'état de la commande se vérifie dans Vos commandes, sur amazon.fr ou dans l'application
 - handover | Transporteur partenaire | Peut prendre le relais, par exemple La Poste suisse pour un colis envoyé en Suisse
 - truck | En cours de livraison | Un livreur d'une entreprise partenaire d'Amazon, de La Poste ou du transporteur du vendeur
 - home | Toi | À domicile, dans un Amazon Locker ou dans un point de retrait partenaire
@@ -80,7 +80,7 @@ Quand le premier transporteur nomme le partenaire qui prend le relais, [Peek](/)
 Deux raisons possibles :
 
 - **Amazon Logistics livre le colis.** Il n'a pas de page de suivi publique : il se suit dans ton compte, dans Vos commandes, sur la boutique où tu as commandé.
-- **Le vendeur expédie lui-même.** Amazon lui demande un suivi valide pour au moins 95 % de ses commandes, pas pour toutes : certaines peuvent donc partir sans suivi.
+- **Le vendeur expédie lui-même.** Le suivi dépend alors de lui et de son transporteur, pas d'Amazon.
 
 Pas de suivi du tout sur une commande de vendeur ? Écris d'abord au vendeur ; si le colis n'arrive pas et qu'il ne règle pas le problème, la garantie A à Z te permet de demander un remboursement à Amazon. Quand le suivi reste figé plusieurs jours : [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
 
@@ -115,14 +115,14 @@ Pour un dommage, tu fais la réclamation auprès du service client d'Amazon, qui
 Ça dépend du numéro. Colle-le dans [Peek](/) :
 
 - **Le numéro d'un transporteur** (Colissimo, Chronopost, Mondial Relay, bpost, La Poste suisse…) se suit comme n'importe quel colis.
-- **Un numéro Amazon**, ou un lien track.amazon : Peek interroge d'abord le suivi public d'Amazon. S'il répond, le colis voyage avec [Amazon Shipping](carrier:amazon-shipping), le service de livraison d'Amazon pour les e-commerçants, ou avec les Ventes Multi-Sites (MCF), où Amazon envoie des commandes passées sur d'autres sites, souvent dans un emballage neutre. Peek le suit alors tout seul.
+- **Un numéro Amazon**, ou un lien track.amazon : Peek interroge d'abord le suivi public d'Amazon. S'il répond, le colis voyage avec [Amazon Shipping](carrier:amazon-shipping), ou Amazon l'expédie pour un vendeur qui a vendu via un autre canal de vente (Multi-Channel Fulfillment, MCF) : il ne vient pas d'une commande passée sur Amazon même. Peek le suit alors tout seul.
 - Sinon, c'est Amazon Logistics qui livre une commande Amazon, et Amazon ne la montre que dans ton compte. Peek te le dit et propose « Voir mes commandes Amazon », qui ouvre tes commandes sur le site Amazon qui correspond au numéro : amazon.fr pour `FR`, amazon.com.be pour `BE`. Peek ne te demande jamais tes identifiants Amazon.
 - **Un numéro de commande** reçoit « On dirait un numéro de commande Amazon ». Si l'e-mail d'expédition contient un numéro de suivi, colle plutôt celui-ci.
 
 :::sources
 - [About Amazon France : Six conseils pratiques pour se protéger des tentatives d'arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – vérifier ses commandes dans son compte ou l'application, garantie A à Z en cas de retard ou d'article en mauvais état
 - [About Amazon France : Comment contacter le service client Amazon ?](https://www.aboutamazon.fr/actualites/nos-boutiques/comment-contacter-le-service-client-amazon) – suivi des colis sur la page du service client, chat et téléphone de 6 h à minuit, rappel
-- [Amazon : Amazon FBA, emballé, expédié, livré](https://sell.amazon.fr/expedie-par-amazon) – stockage, expédition, service client et retours par Amazon, vendeur qui expédie lui-même, suivi valide sur 95 % des commandes
+- [About Amazon France : Expédié par Amazon](https://www.aboutamazon.fr/actualites/innovations/expedie-par-amazon) – stockage, emballage, expédition, service client et retours par Amazon, ventes sur Amazon ou via d'autres canaux de vente (2018)
 - [About Amazon France : Les clients Amazon mettent leurs livreurs à l'honneur](https://www.aboutamazon.fr/actualites/activite-logistique/les-clients-amazon-mettent-leurs-livreurs-a-lhonneur) – entreprises de livraison indépendantes, agences de livraison d'Amazon, groupe La Poste (décembre 2022)
 - [About Amazon France : Garantir des livraisons fiables et efficaces](https://www.aboutamazon.fr/actualites/activite-logistique/garantir-des-livraisons-fiables-et-efficaces-pendant-les-periodes-exceptionnelles) – Amazon Locker, points de retrait Mondial Relay, Relais Colis et La Poste
 - [About Amazon (Europe) : Amazon.com.be launches in Belgium](https://www.aboutamazon.eu/news/amazon-prime/amazon-com-be-launches-in-belgium) – amazon.com.be, service client en français, néerlandais ou anglais
@@ -132,7 +132,5 @@ Pour un dommage, tu fais la réclamation auprès du service client d'Amazon, qui
 - [About Amazon France : Amazon étend les protections apportées par la Garantie A à Z](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeur d'abord, remboursement, dommages matériels et corporels depuis mai 2024
 - [Your Europe : Expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_fr.htm) – 30 jours, délai supplémentaire, fin du contrat et remboursement
 - [Your Europe : FAQ expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_fr.htm) – le vendeur répond de la livraison, article identique ou remboursement
-- [Amazon Shipping France](https://shipping.amazon.fr/) – livraison pour les e-commerçants
-- [Amazon : Ventes Multi-Sites (MCF)](https://sell.amazon.fr/expedie-par-amazon/expedie-multicanal) – commandes d'autres canaux, emballages neutres
-- [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes des numéros Amazon, ce que Peek vérifie, suivi d'Amazon Logistics dans le compte
+- [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes des numéros Amazon, ce que Peek vérifie, Amazon Shipping et MCF dans le suivi public d'Amazon, suivi d'Amazon Logistics dans le compte
 :::

@@ -7,7 +7,7 @@ published: 2026-10-16
 updated: 2026-10-27
 ---
 
-Eine Amazon-Bestellung verfolgst du in deinem Amazon-Konto, auf der Website oder in der App, unter „Meine Bestellungen“: Bestellung wählen, dann „Lieferung verfolgen“. Dort siehst du, wo dein Paket gerade ist und wann es ankommt, bei manchen Lieferungen auch ein Zustellfoto. Wer dir bei Problemen hilft, hängt davon ab, wer versendet: Amazon kümmert sich um eigene Bestellungen und um „Versand durch Amazon“, ein Verkäufer mit eigenem Versand kümmert sich selbst um Versand, Lieferung und Kundenservice.
+Eine Amazon-Bestellung verfolgst du in deinem Amazon-Konto, auf der Website oder in der App, unter „Meine Bestellungen“: Bestellung wählen, dann „Lieferung verfolgen“. Dort siehst du, wo dein Paket gerade ist und wann es ankommt, bei manchen Lieferungen auch ein Zustellfoto. Wer dir bei Problemen hilft, hängt davon ab, wer versendet: Amazon kümmert sich um eigene Bestellungen und um „Versand durch Amazon“, bei einem Verkäufer mit eigenem Versand wendest du dich zuerst an ihn.
 
 ## Wer versendet meine Amazon-Bestellung: Amazon oder ein Verkäufer?
 
@@ -16,8 +16,8 @@ Eine Amazon-Bestellung fällt in einen dieser drei Fälle:
 | Wer verkauft, wer versendet | Was es heißt | Wer bei der Lieferung hilft |
 | --- | --- | --- |
 | Amazon verkauft und versendet | Amazons eigene Ware | Amazon |
-| Ein Verkäufer verkauft, Amazon versendet | „Versand durch Amazon“: Der Verkäufer schickt seine Ware in Amazons Logistikzentren, Amazon lagert, verpackt und versendet sie | Amazon, das auch Kundenservice, Rücksendungen und Erstattungen übernimmt |
-| Derselbe Verkäufer verkauft und versendet | „Versand durch Verkäufer“: Er lagert die Ware selbst und kümmert sich um Versand, Lieferung und Kundenservice | Zuerst der Verkäufer |
+| Ein Verkäufer verkauft, Amazon versendet | „Versand durch Amazon“: Amazon lagert die Ware des Verkäufers in seinen Logistikzentren, verpackt und versendet sie | Amazon, das sich auch um Kundendienst und Retouren kümmert |
+| Derselbe Verkäufer verkauft und versendet | Der Verkäufer verschickt die Ware selbst und ist in der EU für die Lieferung verantwortlich | Zuerst der Verkäufer |
 
 **In der Schweiz** bestellst du auf amazon.de, oder auf amazon.fr und amazon.it, wenn du lieber auf Französisch oder Italienisch einkaufst. Was Amazon direkt versendet, kommt im Standardversand in 3 bis 5 Werktagen, im Expressversand in 1 bis 3. Der Gesamtpreis, den du beim Bezahlen siehst, enthält grundsätzlich die Schweizer Umsatzsteuer, eventuelle Zollgebühren und die Versandkosten. Bei Verkäufern, die nicht über Amazon versenden, kann es Ausnahmen geben: Dann können beim Zoll zusätzliche Zahlungen anfallen, wenn der Verkäufer sie nicht im Preis berücksichtigt hat. Mehr dazu: [Paket beim Zoll](guide:customs).
 
@@ -31,7 +31,7 @@ Liefert Amazon selbst, ist es [Amazon Logistics](carrier:amazon-logistics), Amaz
 | Österreich | amazon.de | Amazon und lokale Lieferpartner, aus Amazons eigenen Verteilzentren |
 | Schweiz | amazon.de, amazon.fr, amazon.it | [Die Post](carrier:swiss-post), über ihr eigenes Logistiknetz |
 
-Ein Verkäufer mit eigenem Versand kümmert sich selbst um die Lieferung: Sein Zusteller kann einer von diesen sein oder ein anderer. Wo die Nummer bei jedem Shop steht: [Sendungsnummer finden](guide:find-tracking-number).
+Versendet ein Verkäufer selbst, kann sein Zusteller einer von diesen sein oder ein anderer. Wo die Nummer bei jedem Shop steht: [Sendungsnummer finden](guide:find-tracking-number).
 
 ## Wie sieht eine Amazon-Sendungsnummer aus?
 
@@ -78,7 +78,7 @@ Nennt der erste Zusteller den Partner, der übernimmt, behält [Peek](/) den ers
 Zwei Gründe sind möglich:
 
 - **Amazon Logistics liefert das Paket.** Es hat keine öffentliche Seite zur Sendungsverfolgung: Du verfolgst es in deinem Konto unter „Meine Bestellungen“, in dem Shop, in dem du bestellt hast.
-- **Der Verkäufer versendet selbst.** Er kümmert sich um Versand, Lieferung und Kundenservice, also ist er auch dein erster Ansprechpartner, wenn die Sendungsverfolgung fehlt.
+- **Der Verkäufer versendet selbst.** Dann ist er dein erster Ansprechpartner, wenn die Sendungsverfolgung fehlt.
 
 Kommt ein Verkäufer-Paket nicht an und löst der Verkäufer das Problem nicht, kannst du über die A-bis-z-Garantie bei Amazon eine Erstattung beantragen. Wenn das Tracking tagelang stillsteht: [warum die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
@@ -113,23 +113,22 @@ Einen Schaden meldest du beim Amazon Kundenservice, der dann den Verkäufer bena
 Das hängt von der Nummer ab. Füge sie in [Peek](/) ein:
 
 - **Die Nummer eines Zustellers** (DHL, Hermes, DPD, Österreichische Post, Die Post…) wird wie jedes andere Paket verfolgt.
-- **Eine Amazon-Nummer** oder ein track.amazon-Link: Peek fragt zuerst Amazons öffentlichen Tracker. Antwortet Amazon, reist das Paket mit [Amazon Shipping](carrier:amazon-shipping), Amazons Lieferdienst für andere Händler und Amazon-Verkäufer, oder mit dem Multi-Channel-Versand, bei dem Amazon Bestellungen aus anderen Shops oft in neutraler Verpackung verschickt. Dann verfolgt Peek es automatisch.
+- **Eine Amazon-Nummer** oder ein track.amazon-Link: Peek fragt zuerst Amazons öffentlichen Tracker. Antwortet Amazon, reist das Paket mit [Amazon Shipping](carrier:amazon-shipping) oder mit Amazons Multi-Channel-Versand und stammt nicht aus einer Bestellung bei Amazon selbst. Dann verfolgt Peek es automatisch.
 - Sonst liefert Amazon Logistics eine Amazon-Bestellung, und die zeigt Amazon nur in deinem Konto. Peek sagt dir das und bietet „Meine Amazon-Bestellungen öffnen“ an: Das öffnet deine Bestellübersicht auf der Amazon-Seite, zu der die Nummer passt, bei `DE` und `AT` also amazon.de. Peek fragt nie nach deinem Amazon-Login.
 - **Eine Bestellnummer** bekommt „Das sieht nach einer Amazon-Bestellnummer aus“. Steht in der Versandmail eine Sendungsnummer, füge stattdessen diese ein.
 
 :::sources
 - [About Amazon Deutschland: Amazon-Lieferung: einfache Bestellung und Verfolgung](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-lieferoptionen-sendung-verfolgen) – „Meine Bestellungen“, „Lieferung verfolgen“, Zustellfoto, Live-Karte, Ablageort, Abholstationen von DHL, Hermes und DPD
-- [Amazon: Versand durch Amazon (FBA)](https://sell.amazon.de/versand-durch-amazon) – Amazon lagert, verpackt, versendet und übernimmt Kundenservice, Rücksendungen und Erstattungen; Versand durch Verkäufer
+- [About Amazon Deutschland: Steigern Sie Ihre Verkaufschancen mit Versand durch Amazon](https://www.aboutamazon.de/news/chancen/steigern-sie-ihre-verkaufschancen-mit-versand-durch-amazon) – Amazon lagert, verpackt und versendet die Ware der Verkäufer, kümmert sich um Kundendienst und Retouren (2018)
 - [About Amazon Deutschland: Wie ist das Arbeiten als Fahrer:in bei einem Amazon Lieferpartner?](https://www.aboutamazon.de/news/logistik-und-zustellung/wie-ist-das-arbeiten-als-fahrer-in-bei-einem-amazon-lieferpartner) – Lieferpartner seit 2015, Partnerschaften mit DHL, DPD und Hermes (Stand 2023)
 - [About Amazon Deutschland: Amazon setzt Spatenstich in Enns: Baustart für Oberösterreichs erstes Verteilzentrum](https://www.aboutamazon.de/news/amazon-in-oesterreich/amazon-verteilzentrum-enns) – eigene Verteilzentren in Österreich seit 2018, lokale Lieferpartner
 - [About Amazon Deutschland: Amazon in der Schweiz: Alles, was du wissen musst!](https://www.aboutamazon.de/news/company-news/aus-der-schweiz-bei-amazon-bestellen-das-musst-du-wissen) – amazon.de, amazon.fr und amazon.it aus der Schweiz, Lieferzeiten, Umsatzsteuer, Zoll und Versandkosten im Preis
 - [About Amazon Deutschland: Wie kommt mein Paket zu mir?](https://www.aboutamazon.de/news/verpackung/wie-kommt-mein-paket-zu-mir) – Zustellung in der Schweiz durch die Schweizerische Post
-- [About Amazon Deutschland: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – Chat, Rückruf, telefonisch 6 bis 24 Uhr, A-bis-z-Garantie für Lieferung und Zustand
+- [About Amazon Deutschland: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – Chat, Rückruf, telefonisch 6 bis 24 Uhr, A-bis-z-Garantie für Lieferung und Zustand, von Verkäufern versendete Artikel
 - [About Amazon Deutschland: Amazon A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – zuerst der Verkäufer, Erstattung, Sach- und Personenschäden seit Mai 2024
 - [About Amazon Deutschland: 5 praktische Tipps, die dir helfen, sicher bei Amazon einzukaufen und Betrugsmaschen zu verhindern](https://www.aboutamazon.de/news/amazon-prime-und-shopping/5-praktische-tipps-die-dir-helfen-sicher-bei-amazon-einzukaufen-und-betrugsmaschen-zu-verhindern) – Ersatz oder Erstattung bei verspäteter Lieferung oder schlechtem Zustand
 - [Your Europe: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – 30 Tage, angemessene Nachfrist, Vertrag beenden und Erstattung
 - [Your Europe: Fragen und Antworten zu Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_de.htm) – Händler ist für die Lieferung verantwortlich, identischer Artikel oder Erstattung
-- [Amazon Shipping UK](https://shipping.amazon.co.uk/) – Zustellung für Händler und Amazon-Verkäufer
-- [Amazon: Multi-Channel-Versand](https://sell.amazon.de/versand-durch-amazon/multi-channel-versand) – Bestellungen aus anderen Kanälen, neutrale Verpackung
-- [Universal Parcel Scraper: Zustellerdaten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Formen der Amazon-Nummern, was Peek prüft, Sendungsverfolgung von Amazon Logistics im Konto
+- [About Amazon Deutschland: Amazon-Studie: KMUs nutzen Daten und KI für erfolgreiche Feiertagsverkäufe](https://www.aboutamazon.de/news/company-news/amazon-studie-kmus-nutzen-daten-und-ki-fuer-erfolgreiche-feiertagsverkaeufe) – Multi-Channel-Versand, ein Amazon-Angebot für Verkäufer in Europa
+- [Universal Parcel Scraper: Zustellerdaten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Formen der Amazon-Nummern, was Peek prüft, Amazon Shipping und Multi-Channel-Versand in Amazons öffentlichem Tracker, Sendungsverfolgung von Amazon Logistics im Konto
 :::

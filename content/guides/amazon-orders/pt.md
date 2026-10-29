@@ -15,13 +15,13 @@ Sim. Os clientes em Portugal compram na Amazon.es, que a Amazon adaptou ao merca
 
 ## Quem envia a minha encomenda da Amazon: a Amazon ou um vendedor?
 
-Com a logística da Amazon (FBA), os vendedores guardam os produtos nos centros de distribuição da Amazon, que trata do armazenamento, da embalagem e da entrega, e chegam assim aos clientes Prime. Um vendedor também pode enviar por conta própria.
+Com a logística da Amazon (FBA), os vendedores guardam os produtos nos centros de distribuição da Amazon, que trata do armazenamento, da embalagem e da entrega, e chegam assim aos clientes Prime.
 
 | Caso | O que significa | Quem te ajuda com a entrega |
 | --- | --- | --- |
 | Vendido e enviado pela Amazon | Stock da Amazon | Amazon |
 | Vendido por um vendedor, enviado pela Amazon | Logística da Amazon (FBA): o vendedor oferece o produto, a Amazon envia-o a partir de um centro de distribuição | Amazon |
-| Vendido e enviado por um vendedor | O vendedor envia a partir do seu próprio stock | Primeiro o vendedor |
+| Vendido e enviado por um vendedor | O vendedor envia ele próprio e responde pela entrega | Primeiro o vendedor |
 
 Se o vendedor envia por conta própria, a entrega é com ele. Se não te resolver o problema, podes recorrer à Amazon com a Garantia de A a Z.
 
@@ -66,7 +66,7 @@ Normalmente por uma destas razões:
 
 :::journey
 - warehouse | Amazon ou o vendedor | Com a FBA, a Amazon armazena, embala e entrega; senão, envia o vendedor
-- label | Etiqueta criada | Com a FBA, a encomenda sai com a informação de seguimento
+- label | Etiqueta criada | Se é a Amazon a entregar, o estado aparece em Os meus pedidos
 - handover | Transportadora | A Amazon Logistics ou a transportadora escolhida pelo vendedor
 - truck | Para entrega | As informações sobre o envio chegam-te em português
 - home | Tu | Em casa, num cacifo da Amazon ou num ponto da rede CTT
@@ -106,7 +106,7 @@ Cobre os produtos de vendedores externos. Se não ficaste satisfeito com a entre
 Depende do número. Cola-o no [Peek](/):
 
 - **O número de uma transportadora** (CTT, CTT Express, SEUR, Correos Express…) segue-se como qualquer outra encomenda.
-- **Um número da Amazon**, ou um link track.amazon: o Peek pergunta primeiro ao seguimento público da Amazon. Se responder, a encomenda viaja com a Amazon Shipping, o serviço de entregas da Amazon para lojas online, ou com a Logística Multicanal, em que a Amazon envia encomendas feitas noutros sites, muitas vezes em embalagens sem marca. Aí o Peek segue-a sozinho.
+- **Um número da Amazon**, ou um link track.amazon: o Peek pergunta primeiro ao seguimento público da Amazon. Se responder, a encomenda viaja com a Amazon Shipping ou com o Multi-Channel Fulfillment (MCF) e não vem de um pedido feito na própria Amazon. Aí o Peek segue-a sozinho.
 - Se não, é a Amazon Logistics a entregar uma encomenda da Amazon, e a Amazon só a mostra na tua conta. O Peek diz-te isso e propõe "Abrir os meus pedidos Amazon", que abre os teus pedidos no site da Amazon que corresponde ao número: amazon.es para `PT` e `ES`. O Peek nunca te pede os dados de acesso da Amazon.
 - **Um número de pedido** recebe "Parece um número de pedido da Amazon". Usa antes o número de seguimento que aparece na tua conta.
 
@@ -114,14 +114,10 @@ Depende do número. Cola-o no [Peek](/):
 - [About Amazon (Europe): Amazon Prime now available to customers in Portugal](https://www.aboutamazon.eu/news/press-lounge/amazon-prime-now-available-to-customers-in-portugal) – clientes em Portugal na Amazon.es, site em português, informações do pedido e do envio e apoio por telefone e e-mail em português
 - [About Amazon (Europe): Portuguese Sellers explore growth opportunities](https://www.aboutamazon.eu/news/empowering-small-business/portuguese-sellers-explore-growth-opportunities-during-amazon-fulfilment-centre-tour-in-spain) – Amazon.es e sell.amazon.es adaptadas ao mercado português, FBA: armazenamento, embalagem e entrega, clientes Prime
 - [CTT: Os clientes Amazon podem agora recolher as suas encomendas em toda a rede dos CTT](https://www.ctt.pt/grupo-ctt/media/noticias/os-clientes-amazon-podem-agora-recolher-as-suas-encomendas-utilizando-toda-a-rede-dos-ctt-em-portugal) – parceria com a Amazon, lojas, Pontos CTT, agentes Payshop e cacifos Locky, arranque progressivo, casa e cacifos da Amazon
-- [Amazon: Empezar a vender en Amazon en 7 pasos](https://sell.amazon.es/vender-online) – o vendedor envia por conta própria ou com a logística da Amazon
-- [Amazon: Vender en Amazon FBA](https://sell.amazon.es/logistica-de-amazon) – envio com informação de seguimento, a Amazon trata da entrega e dos problemas com o envio
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantia de A a Z para produtos de vendedores externos, reclamação diretamente à Amazon
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – primeiro o vendedor, reembolso da Amazon
 - [About Amazon España: A un 62 % de los españoles no le importaría recibir sus pedidos sin embalaje adicional](https://www.aboutamazon.es/noticias/sostenibilidad/a-un-62-de-los-espanoles-no-le-importaria-recibir-sus-pedidos-online-sin-embalaje-adicional) – problema com um pedido da Amazon: substituição ou reembolso
 - [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo suplementar, rescisão e reembolso
 - [Your Europe: Perguntas frequentes sobre expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_pt.htm) – o vendedor responde pela entrega, artigo idêntico ou reembolso
-- [Amazon Shipping España](https://shipping.amazon.es/) – entregas para lojas online
-- [Amazon: Logística Multicanal](https://sell.amazon.es/logistica-de-amazon/gestion-multicanal) – encomendas de outros canais, embalagens sem marca
-- [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas dos números da Amazon, seguimento só na conta, o que o Peek verifica
+- [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas dos números da Amazon, seguimento só na conta, o que o Peek verifica, Amazon Shipping e MCF no seguimento público da Amazon
 :::

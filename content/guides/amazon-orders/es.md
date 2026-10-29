@@ -11,15 +11,15 @@ Para seguir un pedido de Amazon, entra en Mis pedidos, en Amazon.es o en la app 
 
 ## ¿Quién envía mi pedido de Amazon: Amazon o un vendedor externo?
 
-En la página del producto puede haber varias ofertas del mismo artículo, de vendedores distintos y con opciones de envío distintas. Fíjate también en el distintivo de Prime: un vendedor puede conseguirlo con Logística de Amazon, que envía sus productos desde los centros logísticos de Amazon.
+En la página del producto puede haber varias ofertas del mismo artículo, de Amazon y de vendedores externos. Fíjate también en el distintivo de Prime: un vendedor puede conseguirlo con Logística de Amazon, que envía sus productos desde los centros logísticos de Amazon.
 
 | Caso | Qué significa | Quién te ayuda con la entrega |
 | --- | --- | --- |
 | Vendido y enviado por Amazon | Stock de Amazon | Amazon |
-| Vendido por un vendedor, enviado por Amazon | Logística de Amazon: el vendedor manda sus productos a los centros logísticos de Amazon, y Amazon los empaqueta y los envía | Amazon |
-| Vendido y enviado por un vendedor | Gestión logística del vendedor: guarda su propio inventario y envía él mismo los pedidos | Primero el vendedor |
+| Vendido por un vendedor, enviado por Amazon | Logística de Amazon: Amazon almacena los productos del vendedor en sus centros logísticos, los empaqueta y los envía | Amazon |
+| Vendido y enviado por un vendedor | El vendedor envía él mismo los pedidos y responde de la entrega | Primero el vendedor |
 
-Con Logística de Amazon, Amazon se encarga de la entrega, la atención al cliente, las devoluciones y los reembolsos. Si el vendedor envía por su cuenta, la entrega es cosa suya, y si no te lo resuelve, puedes acudir a Amazon con la Garantía de la A a la Z.
+Con Logística de Amazon, Amazon se encarga del envío, la atención al cliente y las devoluciones. Si el vendedor envía por su cuenta, la entrega es cosa suya, y si no te lo resuelve, puedes acudir a Amazon con la Garantía de la A a la Z.
 
 ## ¿Qué transportista entrega mi paquete de Amazon?
 
@@ -60,7 +60,7 @@ Normalmente por uno de estos motivos:
 
 :::journey
 - warehouse | Centro logístico | Amazon recoge, empaqueta y envía el pedido, salvo que lo envíe el vendedor
-- label | Etiqueta creada | Con Logística de Amazon, el pedido sale con su información de seguimiento
+- label | Etiqueta creada | Si el paquete lo reparte Amazon, su estado aparece en Mis pedidos
 - handover | Centro de distribución | Los pedidos se clasifican por destino y se cargan en camiones
 - truck | Estación logística | Desde allí, empresas externas de reparto hacen la última milla
 - home | Tú | El pedido llega a tu puerta o a un punto de recogida
@@ -100,7 +100,7 @@ Cubre los productos de vendedores externos. Si no estás satisfecho con la entre
 Depende del número. Pégalo en [Peek](/):
 
 - **El número de un transportista** (Correos, SEUR, GLS, CTT Express…) se sigue como cualquier otro paquete.
-- **Un número de Amazon**, o un enlace de track.amazon: Peek pregunta primero al seguimiento público de Amazon. Si responde, el paquete viaja con [Amazon Shipping](carrier:amazon-shipping), el servicio de paquetería de Amazon para comercios online, "no solo para vendedores en Amazon", o con la Logística Multicanal, donde Amazon envía pedidos de otras webs, a menudo en embalajes sin marca. Entonces Peek lo sigue solo.
+- **Un número de Amazon**, o un enlace de track.amazon: Peek pregunta primero al seguimiento público de Amazon. Si responde, el paquete viaja con [Amazon Shipping](carrier:amazon-shipping), el servicio de reparto de Amazon para otras empresas, o con el servicio multicanal (Multi-Channel Fulfillment), donde Amazon envía los productos de un vendedor a sus clientes, hayan hecho el pedido donde lo hayan hecho. Entonces Peek lo sigue solo.
 - Si no, es Amazon Logistics entregando un pedido de Amazon, y Amazon solo lo muestra en tu cuenta. Peek te lo dice y te ofrece "Abrir mis pedidos de Amazon", que abre tus pedidos en la web de Amazon que corresponde al número: amazon.es para `ES`. Peek nunca te pide tus datos de acceso de Amazon.
 - **Un número de pedido** recibe "Parece un número de pedido de Amazon". Usa el número de seguimiento que aparece en tu cuenta.
 
@@ -111,11 +111,11 @@ Depende del número. Pégalo en [Peek](/):
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Amazon Locker y puntos de recogida, correo de confirmación de entrega, Garantía de la A a la Z
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – productos de vendedores, primero el vendedor, reembolso de Amazon
 - [About Amazon España: A un 62 % de los españoles no le importaría recibir sus pedidos sin embalaje adicional](https://www.aboutamazon.es/noticias/sostenibilidad/a-un-62-de-los-espanoles-no-le-importaria-recibir-sus-pedidos-online-sin-embalaje-adicional) – problema con un pedido: reemplazo o reembolso
-- [Amazon: Empezar a vender en Amazon en 7 pasos](https://sell.amazon.es/vender-online) – gestión logística del vendedor o Logística de Amazon, varios vendedores por producto, distintivo de Prime
-- [Amazon: Vender en Amazon FBA](https://sell.amazon.es/logistica-de-amazon) – Amazon empaqueta y envía con información de seguimiento, entrega, atención al cliente, devoluciones y reembolsos
+- [About Amazon España: Amazon Marketplace](https://www.aboutamazon.es/noticias/inversiones-y-creacion-de-empleo/amazon-marketplace) – ofertas de vendedores externos en las páginas de producto, junto a las de Amazon (2016)
+- [About Amazon España: Logística de Amazon](https://www.aboutamazon.es/noticias/innovacion/logistica-de-amazon) – centros logísticos de Amazon, ventajas de Amazon Prime para los vendedores (2016)
+- [About Amazon España: Aumenta tus ventas con Logística de Amazon](https://www.aboutamazon.es/noticias/inversiones-y-creacion-de-empleo/aumenta-tus-ventas-con-logistica-de-amazon) – Amazon almacena, recoge, empaqueta y envía; atención al cliente y devoluciones (2016)
 - [Your Europe: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – 30 días, plazo adicional razonable, rescisión y reembolso
 - [Your Europe: Preguntas frecuentes sobre envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_es.htm) – el vendedor responde de la entrega, producto idéntico o reembolso
-- [Amazon Shipping España](https://shipping.amazon.es/) – paquetería para comercios online
-- [Amazon: Logística Multicanal](https://sell.amazon.es/logistica-de-amazon/gestion-multicanal) – pedidos de otros canales, embalajes sin marca
+- [About Amazon España: Carta anual a los accionistas de nuestro CEO, Andy Jassy](https://www.aboutamazon.es/noticias/noticias-de-la-compania/carta-anual-a-los-accionistas-2023-de-nuestro-ceo-andy-jassy) – Amazon Shipping, la red de entrega de última milla de Amazon para los envíos de otras empresas; Multi-Channel Fulfillment, envíos a los clientes independientemente de dónde hayan hecho el pedido
 - [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números de Amazon, seguimiento solo en la cuenta, qué comprueba Peek
 :::

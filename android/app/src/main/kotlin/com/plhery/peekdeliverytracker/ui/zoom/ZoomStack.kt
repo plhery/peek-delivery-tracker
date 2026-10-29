@@ -317,8 +317,8 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     var bounds: Rect by mutableStateOf(Rect.Zero)
         private set
 
-    /** The finger, as the page last saw it. */
-    var finger = Offset.Zero
+    /** The finger on the page, as the page last saw it; null with none down. */
+    var finger: Offset? = null
 
     val dragging: Boolean get() = dragAnchor != null
     val atRest: Boolean get() = phase == Phase.Rest && !dragging && !backing && !springing
@@ -644,15 +644,16 @@ internal class ShadowPaint(density: Density) {
 }
 
 /**
- * The page's content, at its top and dragged further down, hands the drag to the page ([dragToClose]). While the page
- * has the drag, the content scrolls no more, nor flings.
+ * The page's content, at its top and dragged further down by a finger, hands the drag to the page ([dragToClose]); a
+ * wheel or a key scrolling it there doesn't. While the page has the drag, the content scrolls no more, nor flings.
  */
 private class DragConnection(private val flight: ZoomFlight) : NestedScrollConnection {
     override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset = if (flight.dragging) available else Offset.Zero
 
     override fun onPostScroll(consumed: Offset, available: Offset, source: NestedScrollSource): Offset {
-        if (source != NestedScrollSource.UserInput || available.y <= 0f || !flight.canDrag()) return Offset.Zero
-        flight.startDrag(flight.finger)
+        val finger = flight.finger
+        if (source != NestedScrollSource.UserInput || available.y <= 0f || finger == null || !flight.canDrag()) return Offset.Zero
+        flight.startDrag(finger)
         return available
     }
 
@@ -695,6 +696,7 @@ private suspend fun PointerInputScope.dragToClose(flight: ZoomFlight, scope: Cor
                 }
             }
         } finally {
+            flight.finger = null
             if (!released && flight.dragging) flight.release(Velocity.Zero, scope, onBack)
         }
     }

@@ -202,6 +202,27 @@ class ZoomStackTest {
     }
 
     @Test
+    fun aWheelPastThePagesTopTakesNothingFromTheNextTap() {
+        show()
+        compose.onNodeWithTag(PAGE).performScrollToIndex(2)
+        compose.waitForIdle()
+        // The wheel turned up, as far as the content's top and on.
+        compose.onNodeWithTag(PAGE).performMouseInput {
+            moveTo(center)
+            repeat(12) { scroll(-1f) }
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(0, scrolled())
+        assertEquals(390f, width(), 0.5f)
+
+        // A tap low on the page afterwards is a tap: no drag from where a finger last was takes it.
+        compose.onRoot().performTouchInput { click(Offset(centerX, height * 0.9f)) }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(SOURCE, top)
+        assertEquals(390f, width(), 0.5f)
+    }
+
+    @Test
     fun aPageShownWithoutAFlightShrinksUnderTheBackGestureInPoints() {
         show(initial = SOURCE)
         assertEquals(390f, width(), 0.5f)

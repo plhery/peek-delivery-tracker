@@ -287,7 +287,7 @@ values
  ('97000000-0000-0000-0000-000000000066', '97000000-0000-0000-0000-000000000061', 'customs', 'Departed facility',
   'NORTH HUB', 'unknown:other-stage', '2026-10-23T05:41:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
  ('97000000-0000-0000-0000-000000000067', '97000000-0000-0000-0000-000000000061', 'in_transit', 'Departed facility',
-  'NORTH HUB', 'unknown:too-early', '2026-10-23T04:59:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}');
+  'NORTH HUB', 'unknown:too-late', '2026-10-23T07:08:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}');
 do $$ begin
   if not public.hidden_provider_copy('97000000-0000-0000-0000-000000000063')
     or not public.hidden_provider_copy('97000000-0000-0000-0000-000000000064') then
@@ -323,6 +323,40 @@ do $$ begin
   if public.hidden_provider_copy('97000000-0000-0000-0000-000000000075')
     or public.hidden_provider_copy('97000000-0000-0000-0000-000000000076') then
     raise exception 'An announcement over an hour away, or another step in other words, was hidden';
+  end if;
+end; $$;
+-- A provider's row in a carrier scan's stage and words, alone or followed by the row's place, at the scan's place
+-- (without its postcode) up to three hours before it is a copy; one over three hours before it, after it, at another
+-- place or with none stays.
+insert into public.packages(id, user_id, tracking_number, label, carrier, current_stage, carrier_data)
+values ('97000000-0000-0000-0000-000000000081', '97000000-0000-0000-0000-000000000001', 'COPYTEST8', 'Moved on',
+  'posti', 'in_transit', '{"routing": {"confirmed_carrier": "posti"}}');
+insert into public.tracking_events(id, package_id, stage, description, location, provider_event_id, occurred_at, created_at, raw_data)
+values
+ ('97000000-0000-0000-0000-000000000082', '97000000-0000-0000-0000-000000000081', 'in_transit', 'Departed facility',
+  'NORTH HUB 00000', 'posti:departed', '2026-10-23T14:15:00Z', '2026-10-23T14:30:00Z', '{}'),
+ ('97000000-0000-0000-0000-000000000083', '97000000-0000-0000-0000-000000000081', 'in_transit', 'Departed Facility, North Hub',
+  'North Hub', 'unknown:first-time', '2026-10-23T11:24:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000084', '97000000-0000-0000-0000-000000000081', 'in_transit', 'Departed facility',
+  'NORTH HUB 00000', 'unknown:same-words', '2026-10-23T13:13:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000085', '97000000-0000-0000-0000-000000000081', 'in_transit', 'Departed facility',
+  'NORTH HUB 00000', 'unknown:too-early', '2026-10-23T11:14:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000086', '97000000-0000-0000-0000-000000000081', 'in_transit', 'Departed facility',
+  'NORTH HUB 00000', 'unknown:too-late', '2026-10-23T15:16:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000087', '97000000-0000-0000-0000-000000000081', 'in_transit', 'Departed Facility, North Hubs',
+  'North Hubs', 'unknown:other-place', '2026-10-23T12:10:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}'),
+ ('97000000-0000-0000-0000-000000000088', '97000000-0000-0000-0000-000000000081', 'in_transit', 'Departed facility',
+  null, 'unknown:no-place', '2026-10-23T12:20:00Z', '2026-10-27T07:00:00Z', '{"universal_provider": "ParcelsApp"}');
+do $$ begin
+  if not public.hidden_provider_copy('97000000-0000-0000-0000-000000000083')
+    or not public.hidden_provider_copy('97000000-0000-0000-0000-000000000084') then
+    raise exception 'A copy in the carrier scan''s words at its place up to three hours before it was not hidden';
+  end if;
+  if public.hidden_provider_copy('97000000-0000-0000-0000-000000000085')
+    or public.hidden_provider_copy('97000000-0000-0000-0000-000000000086')
+    or public.hidden_provider_copy('97000000-0000-0000-0000-000000000087')
+    or public.hidden_provider_copy('97000000-0000-0000-0000-000000000088') then
+    raise exception 'A provider row over three hours before the scan, after it, at another place or with none was hidden';
   end if;
 end; $$;
 reset role;

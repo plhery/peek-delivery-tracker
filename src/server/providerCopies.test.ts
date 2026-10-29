@@ -40,7 +40,27 @@ describe('providerCopies', () => {
         // Other words, another stage, or over an hour away.
         scan('u3', 'unknown', '2026-10-23T05:40:00Z', { ...named, description: 'Departed facility early' }),
         scan('u4', 'unknown', '2026-10-23T05:41:00Z', { ...named, ...departed, stage: 'customs' }),
-        scan('u5', 'unknown', '2026-10-23T04:59:00Z', { ...named, ...departed }),
+        scan('u5', 'unknown', '2026-10-23T07:08:00Z', { ...named, ...departed }),
+      ],
+    };
+    expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c1'])], ['u2', new Set(['c1'])]]));
+  });
+
+  it('leaves out a provider\'s copy in the scan\'s words at its place up to three hours before it, and only that', () => {
+    const departed = { description: 'Departed facility', location: 'NORTH HUB 00000' };
+    const row = {
+      carrier_data: confirmed,
+      tracking_events: [
+        scan('c1', 'posti', '2026-10-23T14:15:00Z', departed),
+        // The time the carrier first gave the departure, at its place without the postcode.
+        scan('u1', 'unknown', '2026-10-23T11:24:00Z', { ...named, description: 'Departed Facility, North Hub', location: 'North Hub' }),
+        scan('u2', 'unknown', '2026-10-23T13:13:00Z', { ...named, ...departed }),
+        // Over three hours before it, after it, at another place, with no place, or in other words.
+        scan('u3', 'unknown', '2026-10-23T11:14:00Z', { ...named, ...departed }),
+        scan('u4', 'unknown', '2026-10-23T15:16:00Z', { ...named, ...departed }),
+        scan('u5', 'unknown', '2026-10-23T12:10:00Z', { ...named, description: 'Departed Facility, North Hubs', location: 'North Hubs' }),
+        scan('u6', 'unknown', '2026-10-23T12:20:00Z', { ...named, description: 'Departed facility' }),
+        scan('u7', 'unknown', '2026-10-23T12:30:00Z', { ...named, description: 'Arrived at facility', location: 'NORTH HUB 00000' }),
       ],
     };
     expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c1'])], ['u2', new Set(['c1'])]]));

@@ -7,10 +7,10 @@
  * cannot tell apart stay stored. Once a direct carrier is confirmed for the
  * parcel, its timeline leaves out such a copy: a row only a universal provider
  * wrote, at the minute of one of the carrier's scans, in that scan's stage
- * within 15 minutes or a whole number of hours up to 14 h away, or within an
- * hour in the scan's words, alone or followed by the copy's place (ParcelsApp
- * dates a USPS departure at the time USPS first gave it, before USPS moved the
- * departure on), or in any stage
+ * within 15 minutes or a whole number of hours up to 14 h away, within an hour
+ * in the scan's words, alone or followed by the copy's place, or so worded up
+ * to three hours before it at its place (ParcelsApp dates a USPS departure at
+ * the time USPS first gave it, before USPS moved the departure on), or in any stage
  * and words whole hours away to the second when that second is not a minute's
  * first (ParcelsApp reads ECMS's Japanese scans an hour off). A copy only
  * whole hours from the carrier's scans shows the provider read them a zone
@@ -56,6 +56,8 @@ const NEAR_MS = 15 * MINUTE_MS;
 const QUARTER_HOUR_MS = 15 * MINUTE_MS;
 const HOUR_MS = 60 * MINUTE_MS;
 const MAX_SHIFT_MS = 14 * HOUR_MS;
+/** How much later a carrier may move a scan on (`retimedScans` in eventIdentity.ts). */
+const MOVED_ON_MS = 3 * HOUR_MS;
 const MAX_HELD = 500;
 
 function identity(event: JsonObject): string {
@@ -141,18 +143,36 @@ function stagesAgree(copy: JsonObject, scan: JsonObject): boolean {
   return copy.stage === scan.stage || ['', 'pending'].includes(String(copy.stage ?? ''));
 }
 
+/** Whether `copy` tells `scan` in its words, alone or followed by the copy's place. */
+function scanWords(copy: JsonObject, scan: JsonObject): boolean {
+  const words = wording(scan);
+  return words !== '' && [words, `${words}, ${place(copy)}`].includes(wording(copy));
+}
+
 /**
- * Whether `copy` tells `scan` in its words, alone or followed by the copy's place, or in any words when the scan
- * announces the parcel: a provider tells that notice in its own language (17TRACK's English for Swiss Post's French).
+ * Whether `copy` tells `scan` in its words, or in any words when the scan announces the parcel: a provider tells that
+ * notice in its own language (17TRACK's English for Swiss Post's French).
  */
 function inScanWords(copy: JsonObject, scan: JsonObject): boolean {
-  const words = wording(scan);
-  return scan.stage === 'registered' || (words !== '' && [words, `${words}, ${place(copy)}`].includes(wording(copy)));
+  return scan.stage === 'registered' || scanWords(copy, scan);
+}
+
+/** Whether `copy` names `scan`'s place, as the scan does or without what follows it (ParcelsApp leaves out USPS's postcode). */
+function atScanPlace(copy: JsonObject, scan: JsonObject): boolean {
+  const [named, own] = [place(copy), place(scan)];
+  return named !== '' && (own === named || own.startsWith(`${named} `));
+}
+
+/** Whether `copy` tells `scan` in its words at its place, up to three hours before it: the carrier moved the scan on. */
+function movedOn(copy: JsonObject, scan: JsonObject): boolean {
+  const ahead = instant(scan) - instant(copy);
+  return ahead > 0 && ahead <= MOVED_ON_MS && scanWords(copy, scan) && atScanPlace(copy, scan);
 }
 
 /**
  * Whether `copy` repeats the carrier's `scan`: at its minute, or in its stage close to it, within an
- * hour in its words (any words for the parcel's announcement) or whole hours from it, or whole hours from it to the second when that second is not a minute's first (a
+ * hour in its words (any words for the parcel's announcement), up to three hours before it in its
+ * words at its place, or whole hours from it, or whole hours from it to the second when that second is not a minute's first (a
  * provider reads the carrier's seconds on another clock, in its own words and stage). A scan dated
  * by its day is repeated at its wall clock in some zone: in its stage and words, or at that second
  * when it is not a minute's first, or at the wall clock itself, read as UTC, to the second, in its stage.
@@ -172,7 +192,8 @@ function copies(copy: JsonObject, scan: JsonObject): boolean {
   if (second(instant(scan)) % MINUTE_MS !== 0 && wholeHours(second(instant(copy)) - second(instant(scan)))) return true;
   const apart = Math.abs(instant(copy) - instant(scan));
   return copy.stage === scan.stage
-    && (apart <= NEAR_MS || (apart <= HOUR_MS && inScanWords(copy, scan)) || (minutes % HOUR_MS === 0 && minutes <= MAX_SHIFT_MS));
+    && (apart <= NEAR_MS || (apart <= HOUR_MS && inScanWords(copy, scan)) || movedOn(copy, scan)
+      || (minutes % HOUR_MS === 0 && minutes <= MAX_SHIFT_MS));
 }
 
 /** The minutes from `scan` to `row`, each read to the minute, in milliseconds. */

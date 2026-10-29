@@ -17,11 +17,13 @@ import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isHeading
@@ -357,6 +359,21 @@ class ParcelSearchTest {
         compose.waitForIdle()
         assertFalse(exists(SHEET_PANEL))
         assertFalse(exists(FILTERS_SHEET))
+    }
+
+    @Test
+    fun aCarrierWhoseParcelsHaveGoneStaysChosenInThePicker() {
+        show()
+        openFilters()
+        tap(FILTERS_CARRIER)
+        tap("$FILTERS_CARRIER.dhl")
+        source.parcels.value = source.parcels.value.filter { it.carrier.rawValue != "dhl" }
+        compose.waitForIdle()
+        // As its chip still says, the row and its menu have it chosen.
+        assertTrue(exists("$FILTER_CHIPS.carrier"))
+        compose.onNodeWithTag(FILTERS_CARRIER).assert(hasContentDescription("DHL", substring = true))
+        tap(FILTERS_CARRIER)
+        compose.onNodeWithTag("$FILTERS_CARRIER.dhl").assertIsSelected()
     }
 
     @Test

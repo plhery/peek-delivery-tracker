@@ -401,9 +401,13 @@ internal class DeliveriesState(
      */
     val rows: List<UUID> by derivedStateOf { layout.rows(hasCustomView || archiveOpen) }
 
-    /** The carriers of all the parcels, each once, in the order of their names (`availableCarriers`), for the filters. */
+    /**
+     * The carriers of all the parcels, each once, in the order of their names (`availableCarriers`), for the filters;
+     * and the one filtered on, whose parcels may all have gone since, so that the picker shows it chosen as its chip
+     * does.
+     */
     fun availableCarriers(name: (CarrierId) -> String): List<CarrierId> =
-        parcels.map { it.carrier }.distinct().sortedWith(compareBy(DisplayNameOrder) { name(it) })
+        (parcels.map { it.carrier } + listOfNotNull(carrierFilter)).distinct().sortedWith(compareBy(DisplayNameOrder) { name(it) })
 
     /** The parcel whose card is marked as the one shown beside the list. */
     val selectedCard: UUID? get() = if (arrangement == DeliveriesArrangement.SideBySide) navigator.navigation.shown else null

@@ -66,8 +66,9 @@ internal fun FiltersHost(state: DeliveriesState) {
 
 /**
  * `ParcelFilterView`: the status, an inline picker of every status; the carrier, a menu of all carriers and those of
- * the parcels; the sort, an inline picker of every order; and Clear filters, in red, which puts the three back and
- * leaves the query. "Search & filters" in the bar, and Done, which closes it. TalkBack starts at the title.
+ * the parcels, the one chosen among them though its parcels have gone; the sort, an inline picker of every order; and
+ * Clear filters, in red, which puts the three back and leaves the query. "Search & filters" in the bar, and Done, which
+ * closes it. TalkBack starts at the title.
  */
 @Composable
 private fun ParcelFilterView(state: DeliveriesState, close: () -> Unit, modifier: Modifier = Modifier) {
@@ -76,7 +77,7 @@ private fun ParcelFilterView(state: DeliveriesState, close: () -> Unit, modifier
     val name = { carrier: CarrierId ->
         identities?.displayName(carrier, language) ?: CarrierCatalog.shared.info(carrier, language).displayName
     }
-    val carriers = remember(state.parcels, identities, language) { state.availableCarriers(name) }
+    val carriers = remember(state.parcels, state.carrierFilter, identities, language) { state.availableCarriers(name) }
     val titleFocus = remember { AccessibilityFocus() }
     LaunchedEffect(Unit) { titleFocus.request() }
     SheetPage(

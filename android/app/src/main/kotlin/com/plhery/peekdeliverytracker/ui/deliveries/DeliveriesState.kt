@@ -144,17 +144,22 @@ internal class DeliveriesNavigator(
         return next.shown
     }
 
-    /** The parcels came: the parcel open when the system closed the app opens again, once they are back. */
-    fun restore(parcels: List<Parcel>) {
-        if (!restoring) return
+    /**
+     * The parcels came: the parcel open when the system closed the app opens again, once they are back. True when it
+     * did, and not when someone opened one first.
+     */
+    fun restore(parcels: List<Parcel>): Boolean {
+        if (!restoring) return false
         val parcelId = savedParcel
         if (parcelId == null) {
             restoring = false
-            return
+            return false
         }
-        val restored = navigation.restore(parcelId, parcels.map { it.id }) ?: return
+        val restored = navigation.restore(parcelId, parcels.map { it.id }) ?: return false
+        val opened = navigation.chosen == null && restored.chosen == parcelId
         update(restored)
         restoring = false
+        return opened
     }
 
     companion object {
@@ -449,10 +454,8 @@ internal class DeliveriesState(
         if (arrangement == DeliveriesArrangement.SideBySide && shownBefore != null && next.none { it.id == shownBefore }) {
             navigator.leave(shownBefore, rowsBefore)
         }
-        val restoring = navigator.restoring
-        navigator.restore(next)
         // The parcel open when the system closed the app opens again as it was, without its zoom.
-        if (restoring && !navigator.restoring && arrangement == DeliveriesArrangement.Stacked) {
+        if (navigator.restore(next) && arrangement == DeliveriesArrangement.Stacked) {
             navigator.navigation.chosen?.let(zoom::showStill)
         }
     }

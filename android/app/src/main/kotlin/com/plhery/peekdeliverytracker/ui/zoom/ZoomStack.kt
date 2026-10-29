@@ -350,6 +350,9 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     /** Sets a flight off as the page on top changes. Called as the stack is drawn, so that it draws its first frame. */
     fun follow(top: Any?, surroundings: () -> Surroundings) {
         this.surroundings = surroundings
+        // A page is shown still only as it next comes on top.
+        val still = top != null && top == transition.still
+        if (top != null) transition.still = null
         when {
             // The page left the stack: it goes back into its source, staying drawn until it lands.
             top == null -> if (id != null && phase != Phase.Closing) beginClose()
@@ -362,8 +365,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
             }
             // Another page in place of the open one, one shown still, or one before the root was laid out: it shows
             // at once.
-            (id != null && phase != Phase.Closing) || top == transition.still || bounds.isEmpty -> {
-                transition.still = null
+            (id != null && phase != Phase.Closing) || still || bounds.isEmpty -> {
                 id = top
                 heldAt = null
                 progress = 1f

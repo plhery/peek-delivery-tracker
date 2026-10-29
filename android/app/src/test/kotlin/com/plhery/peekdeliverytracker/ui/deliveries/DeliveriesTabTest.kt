@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.ViewRootForTest
@@ -16,6 +17,7 @@ import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.junit4.StateRestorationTester
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
@@ -386,5 +388,39 @@ class DeliveriesTabTest {
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
         assertTrue(compose.card("New trainers").hasTalkBackFocus(view))
+    }
+
+    @Test
+    fun aParcelOpenedBeforeTheParcelsCameBackZoomsOutOfItsCardTheNextTime() {
+        var process = FakeDeliveries(DemoCards.parcels())
+        val restoration = StateRestorationTester(compose)
+        restoration.setContent {
+            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                RootHost(reduceMotion = false, source = remember { process })
+            }
+        }
+        compose.waitForIdle()
+        open("New trainers")
+        // The system closes the app, and the next process has no parcels until it has read them again.
+        process = FakeDeliveries(emptyList())
+        restoration.emulateSavedInstanceStateRestore()
+        compose.waitForIdle()
+        // A notification opens another parcel before they come.
+        val gift = DemoCards.parcels().first { it.label?.startsWith("Birthday gift") == true }.id
+        compose.runOnUiThread { deliveries.navigator.open(gift) }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        compose.runOnUiThread { process.parcels.value = DemoCards.parcels() }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        back()
+        compose.mainClock.advanceTimeBy(2_000)
+        compose.waitForIdle()
+
+        val card = bounds(compose.card("Birthday gift"))
+        compose.mainClock.autoAdvance = false
+        compose.card("Birthday gift").performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertPartway(card, page())
     }
 }

@@ -348,30 +348,8 @@ private class MapDrawingPainter(
         }
     }
 
-    /**
-     * One line of text in `font`, one sp to one unit of the drawing, as wide as SF's ([SfWidths]) plus the step's
-     * tracking after each character.
-     */
-    private fun measure(text: String, font: MapFont, color: Color, tracking: Double): TextLayoutResult {
-        val measurer = requireNotNull(textMeasurer) { "A text step needs a TextMeasurer" }
-        val weight = when (font.weight) {
-            MapFont.Weight.Regular -> FontWeight.Normal
-            MapFont.Weight.Medium -> FontWeight.Medium
-            MapFont.Weight.Semibold -> FontWeight.SemiBold
-            MapFont.Weight.Heavy -> FontWeight.ExtraBold
-        }
-        val size = font.size.toFloat()
-        val sfSpacing = if (font.monospaced) 0f else SfWidths.em(size, weight)
-        val style = TextStyle(
-            color = color,
-            fontSize = size.sp,
-            fontWeight = weight,
-            fontStyle = if (font.italic) FontStyle.Italic else FontStyle.Normal,
-            fontFamily = if (font.monospaced) FontFamily.Monospace else null,
-            letterSpacing = if (size > 0) (sfSpacing + tracking.toFloat() / size).em else 0.sp,
-        )
-        return measurer.measure(text, style, overflow = TextOverflow.Visible, softWrap = false, maxLines = 1, density = UNIT_DENSITY)
-    }
+    private fun measure(text: String, font: MapFont, color: Color, tracking: Double): TextLayoutResult =
+        measureMapText(requireNotNull(textMeasurer) { "A text step needs a TextMeasurer" }, text, font, color, tracking)
 
     /**
      * How far Android sets the first character in for `tracking`: it puts half of each character's letter spacing
@@ -379,9 +357,31 @@ private class MapDrawingPainter(
      * where the iPhone's does.
      */
     private fun trackingLead(tracking: Double): Float = tracking.toFloat() / 2
+}
 
-    companion object {
-        /** One sp to one unit of the drawing, so text keeps the size the drawing gives it. */
-        private val UNIT_DENSITY = Density(1f, 1f)
+/** One sp to one unit of the drawing, so text keeps the size the drawing gives it. */
+private val UNIT_DENSITY = Density(1f, 1f)
+
+/**
+ * One line of text in `font`, one sp to one unit of the drawing, as wide as SF's ([SfWidths]) plus `tracking` after
+ * each character: as the renderer writes it, and as [MapTextWidths] measures it for the layout.
+ */
+internal fun measureMapText(measurer: TextMeasurer, text: String, font: MapFont, color: Color, tracking: Double): TextLayoutResult {
+    val weight = when (font.weight) {
+        MapFont.Weight.Regular -> FontWeight.Normal
+        MapFont.Weight.Medium -> FontWeight.Medium
+        MapFont.Weight.Semibold -> FontWeight.SemiBold
+        MapFont.Weight.Heavy -> FontWeight.ExtraBold
     }
+    val size = font.size.toFloat()
+    val sfSpacing = if (font.monospaced) 0f else SfWidths.em(size, weight)
+    val style = TextStyle(
+        color = color,
+        fontSize = size.sp,
+        fontWeight = weight,
+        fontStyle = if (font.italic) FontStyle.Italic else FontStyle.Normal,
+        fontFamily = if (font.monospaced) FontFamily.Monospace else null,
+        letterSpacing = if (size > 0) (sfSpacing + tracking.toFloat() / size).em else 0.sp,
+    )
+    return measurer.measure(text, style, overflow = TextOverflow.Visible, softWrap = false, maxLines = 1, density = UNIT_DENSITY)
 }

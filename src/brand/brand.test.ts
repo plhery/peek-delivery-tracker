@@ -287,6 +287,17 @@ describe('carrier brand', () => {
       'trexity',
       'savar-express',
       'xgs',
+      'optima-overnight',
+      'plycon',
+      'peninsula-truck-lines',
+      'ross-express',
+      'centurion-transport',
+      'airroad',
+      'cope-sensitive-freight',
+      'kiwi-express',
+      'inter-express-logistics',
+      'ats-healthcare',
+      'whiz-delivery',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

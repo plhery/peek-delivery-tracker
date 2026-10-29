@@ -211,7 +211,18 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'okaken'
   | 'trexity'
   | 'savar-express'
-  | 'xgs';
+  | 'xgs'
+  | 'optima-overnight'
+  | 'plycon'
+  | 'peninsula-truck-lines'
+  | 'ross-express'
+  | 'centurion-transport'
+  | 'airroad'
+  | 'cope-sensitive-freight'
+  | 'kiwi-express'
+  | 'inter-express-logistics'
+  | 'ats-healthcare'
+  | 'whiz-delivery';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

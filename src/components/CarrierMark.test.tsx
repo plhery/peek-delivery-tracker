@@ -223,6 +223,17 @@ describe('carrier mark', () => {
     'trexity',
     'savar-express',
     'xgs',
+    'optima-overnight',
+    'plycon',
+    'peninsula-truck-lines',
+    'ross-express',
+    'centurion-transport',
+    'airroad',
+    'cope-sensitive-freight',
+    'kiwi-express',
+    'inter-express-logistics',
+    'ats-healthcare',
+    'whiz-delivery',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

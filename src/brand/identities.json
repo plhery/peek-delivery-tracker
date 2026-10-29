@@ -77,6 +77,9 @@
   "airpak-express": {
     "decal": "airpak-express"
   },
+  "airroad": {
+    "decal": "airroad"
+  },
   "ait-home-delivery": {
     "family": "ait-worldwide"
   },
@@ -200,6 +203,9 @@
   },
   "atlantic-courier": {
     "decal": "atlantic-courier"
+  },
+  "ats-healthcare": {
+    "decal": "ats-healthcare"
   },
   "australia-post": {
     "decal": "australia-post"
@@ -381,6 +387,9 @@
   "central-transport": {
     "decal": "central-transport"
   },
+  "centurion-transport": {
+    "decal": "centurion-transport"
+  },
   "ceska-posta": {
     "decal": "ceska-posta",
     "palette": {
@@ -480,6 +489,9 @@
   },
   "copa-courier": {
     "decal": "copa-courier"
+  },
+  "cope-sensitive-freight": {
+    "decal": "cope-sensitive-freight"
   },
   "corre": {
     "decal": "corre"
@@ -1335,6 +1347,9 @@
   "inter-courier": {
     "decal": "inter-courier"
   },
+  "inter-express-logistics": {
+    "decal": "inter-express-logistics"
+  },
   "intereuropa": {
     "decal": "intereuropa"
   },
@@ -1479,6 +1494,9 @@
   },
   "kit-tk": {
     "decal": "kit-tk"
+  },
+  "kiwi-express": {
+    "decal": "kiwi-express"
   },
   "kolay-gelsin": {
     "decal": "kolay-gelsin"
@@ -1837,6 +1855,9 @@
   "opt-nc": {
     "decal": "opt-nc"
   },
+  "optima-overnight": {
+    "decal": "optima-overnight"
+  },
   "orian": {
     "decal": "orian"
   },
@@ -1957,6 +1978,9 @@
   "pengyou": {
     "decal": "pengyou"
   },
+  "peninsula-truck-lines": {
+    "decal": "peninsula-truck-lines"
+  },
   "peqasus-az": {
     "decal": "peqasus-az"
   },
@@ -1995,6 +2019,9 @@
   },
   "planzer": {
     "decal": "planzer"
+  },
+  "plycon": {
+    "decal": "plycon"
   },
   "pmm": {
     "decal": "pmm"
@@ -2192,6 +2219,9 @@
   },
   "roadrunner": {
     "decal": "roadrunner"
+  },
+  "ross-express": {
+    "decal": "ross-express"
   },
   "royal-express-mm": {
     "decal": "royal-express-mm"
@@ -2790,6 +2820,9 @@
   },
   "whistl": {
     "decal": "whistl"
+  },
+  "whiz-delivery": {
+    "decal": "whiz-delivery"
   },
   "winion-logis": {
     "decal": "winion-logis"

@@ -1368,6 +1368,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JS Express tracking: JSE…YQ numbers, scans and who delivers",
       "name": "JS Express",
       "color": "#fe9b00"
+    },
+    {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "wanbexpress-tracking",
+      "title": "WanbExpress tracking: WNB…YQ numbers, scans and who delivers",
+      "name": "WanbExpress",
+      "color": "#da381b"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-tracking",
+      "title": "GZYL tracking: YL…YQ numbers, scans and who to ask",
+      "name": "GZYL",
+      "color": "#4e79e1"
     }
   ],
   "de": [

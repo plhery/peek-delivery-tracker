@@ -223,6 +223,20 @@ class ZoomStackTest {
     }
 
     @Test
+    fun aDragTheSystemCancelsSpringsBackHoweverFarItWent() {
+        show()
+        compose.onRoot().performTouchInput {
+            down(center)
+            moveBy(Offset(0f, 50f), delayMillis = 100)
+            moveBy(Offset(0f, 600f), delayMillis = 400)
+            cancel()
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(SOURCE, top)
+        assertEquals(390f, width(), 0.5f)
+    }
+
+    @Test
     fun aPageShownWithoutAFlightShrinksUnderTheBackGestureInPoints() {
         show(initial = SOURCE)
         assertEquals(390f, width(), 0.5f)

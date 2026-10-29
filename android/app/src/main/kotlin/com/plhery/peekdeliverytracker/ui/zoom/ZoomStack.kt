@@ -571,12 +571,18 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
             beginClose()
             onBack()
         } else {
-            springing = true
-            scope.launch { springBack() }
+            springBack(scope)
         }
     }
 
-    private suspend fun springBack() {
+    /** The page springs back to the window: let go short of closing, or the system took the drag back. */
+    fun springBack(scope: CoroutineScope) {
+        if (!dragging || springing) return
+        springing = true
+        scope.launch { springBackFromDrag() }
+    }
+
+    private suspend fun springBackFromDrag() {
         try {
             animate(Offset.VectorConverter, drag, Offset.Zero, animationSpec = SPRING_BACK_OFFSET) { value, _ -> drag = value }
         } finally {
@@ -663,7 +669,7 @@ private class DragConnection(private val flight: ZoomFlight) : NestedScrollConne
 /**
  * The page's drag down to close it. The page sees the finger before its content does and, once the drag is the page's,
  * keeps it from the content. Content that doesn't scroll lets a drag down past the touch slop take the page; content
- * that scrolls hands it over at its top ([DragConnection]).
+ * that scrolls hands it over at its top ([DragConnection]). A drag the system cancels springs back, however far it went.
  */
 private suspend fun PointerInputScope.dragToClose(flight: ZoomFlight, scope: CoroutineScope, onBack: () -> Unit) {
     awaitEachGesture {
@@ -675,6 +681,8 @@ private suspend fun PointerInputScope.dragToClose(flight: ZoomFlight, scope: Cor
         try {
             while (true) {
                 val change = awaitPointerEvent(PointerEventPass.Initial).changes.firstOrNull { it.id == down.id } ?: break
+                // An up taken before the page sees it is the system cancelling the gesture, as Compose hands one on.
+                if (!change.pressed && change.isConsumed) break
                 tracker.addPosition(change.uptimeMillis, change.position)
                 flight.finger = change.position
                 if (flight.dragging) {
@@ -697,7 +705,8 @@ private suspend fun PointerInputScope.dragToClose(flight: ZoomFlight, scope: Cor
             }
         } finally {
             flight.finger = null
-            if (!released && flight.dragging) flight.release(Velocity.Zero, scope, onBack)
+            // A drag the system cancelled, or one whose finger went otherwise, springs back however far it went.
+            if (!released) flight.springBack(scope)
         }
     }
 }

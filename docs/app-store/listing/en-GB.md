@@ -73,12 +73,7 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• Notification choices are now called Every scan, Important steps and Delivery only, as on the website.
-• When a number has the format of a carrier that doesn’t list it yet, the parcel says “Probably” with that carrier’s name while it waits for the first scan. If the carrier still doesn’t list it after a week, Peek asks you to check the number with the sender or choose another carrier.
-• After four days with no new scan, a parcel’s page links to its carrier’s help page.
-• When no carrier lists a number that looks like a shop’s order number, the parcel tells you the tracking number is in the shipping email or on the shop’s order page.
-• When more parcels are on their way than the widget can show, a small arrow on its card turns it to the next ones. A parcel with no places on its map yet shows Pip instead.
-• Without an account, Peek now asks carriers for updates in the app’s language, so those that write in several, such as Poczta Polska, answer in yours.
-• When you add a parcel, Peek reads the number after more labels, such as “Waybill”, “AWB” and “Guía”, and turns down a placeholder number no carrier could ever find.
-• Fixes: when your sign-in can no longer be renewed, Peek signs you out so you can sign in again, and forgetting a parcel someone shared with you stops its notifications even when Peek can’t reach the service at that moment.
+• When a carrier needs something from you before customs releases your parcel (your tax number, import duties or taxes, or documents), your list and the parcel’s page say what’s needed, and the page quotes the carrier’s words. A later scan clears it.
+• With an account, a parcel saved without a postcode now gets the one you gave your latest parcel at its next check, if its carrier shows more with one, as DPD does. If there’s none to give, its page says the carrier shows more with the delivery postcode and offers to add it.
+• The postcode field no longer asks for a country, except for Mondial Relay and PostNL, whose tracking needs one.
 ```

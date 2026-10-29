@@ -71,12 +71,7 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Le opzioni di notifica ora si chiamano Ogni scansione, Passaggi importanti e Solo la consegna, come sul sito.
-• Quando un numero ha il formato di un corriere che non lo riconosce ancora, il pacco mostra «Probabilmente» con il nome di quel corriere in attesa della prima scansione. Se dopo una settimana il corriere continua a non riconoscerlo, Peek ti chiede di verificare il numero con il mittente o di scegliere un altro corriere.
-• Dopo quattro giorni senza nuove scansioni, la pagina di un pacco rimanda alla pagina di assistenza del suo corriere.
-• Quando nessun corriere riconosce un numero che sembra un numero d’ordine, il pacco ti dice che il numero di tracciamento è nell’e-mail di spedizione o nella pagina dell’ordine del negozio.
-• Quando i pacchi in arrivo sono più di quanti il widget ne possa mostrare, una piccola freccia sulla sua scheda passa ai successivi. Un pacco che non ha ancora luoghi sulla mappa mostra Pip al loro posto.
-• Senza account, Peek ora chiede gli aggiornamenti ai corrieri nella lingua dell’app: chi scrive in più lingue, come Poczta Polska, risponde nella tua.
-• Quando aggiungi un pacco, Peek legge il numero dopo più indicazioni, come «Waybill», «AWB» o «Guía», e rifiuta un numero fittizio che nessun corriere potrebbe mai trovare.
-• Correzioni: quando la sessione non può più essere rinnovata, Peek ti disconnette così puoi accedere di nuovo, e dimenticare un pacco che qualcuno ha condiviso con te ne ferma le notifiche anche se Peek non riesce a raggiungere il servizio in quel momento.
+• Quando un corriere ha bisogno di qualcosa da te prima che la dogana svincoli il pacco (il tuo codice fiscale, dazi o tasse da pagare, o dei documenti), la tua lista e la pagina del pacco lo indicano, e la pagina riporta le parole del corriere. Con una nuova scansione l’avviso sparisce.
+• Con un account, un pacco salvato senza codice postale ora riceve quello del tuo ultimo pacco, al prossimo controllo, se il suo corriere, come DPD, mostra di più con il codice postale. Se non ce n’è nessuno, la pagina del pacco dice che il corriere mostra di più con il codice postale di consegna e propone di aggiungerlo.
+• Il campo del codice postale non chiede più il paese, tranne per Mondial Relay e PostNL, che ne hanno bisogno per il tracciamento.
 ```

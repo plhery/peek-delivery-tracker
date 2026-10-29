@@ -71,12 +71,7 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Opcje powiadomień nazywają się teraz tak jak na stronie: Każdy skan, Ważne etapy i Tylko doręczenie.
-• Gdy numer ma format przewoźnika, który go jeszcze nie zna, przy przesyłce widać „Prawdopodobnie” i nazwę tego przewoźnika, dopóki nie pojawi się pierwszy skan. Jeśli po tygodniu przewoźnik nadal go nie zna, Peek prosi o sprawdzenie numeru u nadawcy lub wybranie innego przewoźnika.
-• Po czterech dniach bez nowego skanu strona przesyłki prowadzi do strony pomocy jej przewoźnika.
-• Gdy żaden przewoźnik nie zna numeru, który wygląda na numer zamówienia, Peek podpowiada, że numer śledzenia jest w e-mailu o wysyłce lub na stronie zamówienia w sklepie.
-• Gdy w drodze jest więcej przesyłek, niż widżet może pokazać, mała strzałka na jego karcie przełącza go na kolejne. Przy przesyłce, która nie ma jeszcze miejsc na mapie, zamiast trasy widać Pipa.
-• Bez konta Peek pyta teraz przewoźników o aktualizacje w języku aplikacji: ci, którzy piszą w kilku językach, jak Poczta Polska, odpowiadają w Twoim.
-• Przy dodawaniu przesyłki Peek odczytuje numer także po innych oznaczeniach, takich jak „Waybill”, „AWB” czy „Guía”, i odrzuca przykładowy numer, którego żaden przewoźnik nie mógłby znaleźć.
-• Poprawki: gdy sesji nie da się już odnowić, Peek wylogowuje Cię, aby można było zalogować się ponownie, a zapomnienie o przesyłce, którą ktoś Ci udostępnił, wyłącza jej powiadomienia, nawet gdy Peek nie może w tej chwili połączyć się z usługą.
+• Gdy przewoźnik potrzebuje czegoś od Ciebie, zanim urząd celny wyda przesyłkę (numeru podatkowego, opłaty cła lub podatków albo dokumentów), lista i strona przesyłki to pokazują, a strona przytacza słowa przewoźnika. Po kolejnym skanie komunikat znika.
+• Przesyłka zapisana na koncie bez kodu pocztowego dostaje teraz przy najbliższym sprawdzeniu kod podany dla ostatniej przesyłki, o ile jej przewoźnik, np. DPD, pokazuje z nim więcej. Gdy nie ma żadnego, strona przesyłki informuje, że przewoźnik pokazuje więcej z kodem pocztowym odbiorcy, i proponuje jego dodanie.
+• Pole kodu pocztowego nie pyta już o kraj, z wyjątkiem Mondial Relay i PostNL, które potrzebują go do śledzenia.
 ```

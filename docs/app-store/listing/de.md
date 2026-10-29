@@ -71,12 +71,7 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Die Optionen für Mitteilungen heißen jetzt wie auf der Website: „Jeden Scan“, „Wichtige Schritte“ und „Nur die Zustellung“.
-• Hat eine Nummer das Format eines Paketdiensts, der sie noch nicht kennt, zeigt das Paket „Wahrscheinlich“ und den Namen des Paketdiensts, bis der erste Scan kommt. Kennt er sie nach einer Woche immer noch nicht, bittet Peek dich, die Nummer beim Absender zu prüfen oder einen anderen Paketdienst zu wählen.
-• Nach vier Tagen ohne neuen Scan verlinkt die Seite eines Pakets auf die Hilfeseite seines Paketdiensts.
-• Kennt kein Paketdienst eine Nummer, die wie eine Bestellnummer aussieht, sagt dir das Paket, dass die Sendungsnummer in der Versandmail oder auf der Bestellseite des Shops steht.
-• Sind mehr Pakete unterwegs, als das Widget zeigen kann, blättert ein kleiner Pfeil oben im Widget zu den nächsten. Hat ein Paket noch keine Orte, zeigt es statt der Route Pip.
-• Ohne Konto fragt Peek die Paketdienste jetzt in der Sprache der App: Wer in mehreren Sprachen schreibt, etwa Poczta Polska, antwortet in deiner.
-• Beim Hinzufügen eines Pakets erkennt Peek die Nummer hinter weiteren Angaben wie „Waybill“, „AWB“ oder „Guía“ und lehnt eine Platzhalternummer ab, die kein Paketdienst je finden könnte.
-• Fehlerbehebungen: Lässt sich deine Anmeldung nicht mehr erneuern, meldet Peek dich ab, damit du dich neu anmelden kannst. Und vergisst du ein Paket, das jemand mit dir geteilt hat, enden seine Mitteilungen auch dann, wenn Peek den Dienst gerade nicht erreicht.
+• Braucht ein Paketdienst etwas von dir, bevor der Zoll dein Paket freigibt (deine Steuernummer, Unterlagen oder die Zahlung von Zoll oder Einfuhrsteuern), zeigen deine Liste und die Seite des Pakets das an, und die Seite zitiert den Paketdienst. Mit einem neuen Scan verschwindet der Hinweis.
+• Mit Konto bekommt ein ohne Postleitzahl gespeichertes Paket jetzt bei der nächsten Abfrage die Postleitzahl deines letzten Pakets, wenn sein Paketdienst, etwa DPD, damit mehr zeigt. Gibt es keine, sagt seine Seite, dass der Paketdienst mit der Postleitzahl mehr zeigt, und bietet an, sie einzugeben.
+• Das Feld für die Postleitzahl fragt nicht mehr nach einem Land, außer bei Mondial Relay und PostNL, die es für die Sendungsverfolgung brauchen.
 ```

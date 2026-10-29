@@ -71,12 +71,7 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• As opções de notificação chamam-se agora Todas as leituras, Passos importantes e Só a entrega, como no site.
-• Quando um número tem o formato de uma transportadora que ainda não o reconhece, a encomenda mostra «Provavelmente» com o nome dessa transportadora enquanto espera pelo primeiro registo. Se ao fim de uma semana a transportadora continuar sem o reconhecer, o Peek pede-te que confirmes o número com o remetente ou escolhas outra transportadora.
-• Após quatro dias sem novas leituras, a página de uma encomenda tem uma ligação para a página de ajuda da sua transportadora.
-• Quando nenhuma transportadora reconhece um número que parece um número de pedido, a encomenda diz-te que o número de seguimento está no e-mail de envio ou na página do pedido na loja.
-• Quando há mais encomendas a caminho do que o widget consegue mostrar, uma pequena seta na ficha passa às seguintes. Uma encomenda que ainda não tem locais no mapa mostra o Pip no lugar deles.
-• Sem conta, o Peek pede agora as atualizações às transportadoras no idioma da app: as que escrevem em vários idiomas, como a Poczta Polska, respondem no teu.
-• Ao adicionares uma encomenda, o Peek lê o número a seguir a mais indicações, como «Waybill», «AWB» ou «Guía», e recusa um número fictício que nenhuma transportadora poderia encontrar.
-• Correções: quando a tua sessão já não pode ser renovada, o Peek termina-a para poderes voltar a iniciar sessão, e esquecer uma encomenda que alguém partilhou contigo desativa as suas notificações mesmo quando o Peek não consegue contactar o serviço nesse momento.
+• Quando uma transportadora precisa de algo de ti antes de a alfândega libertar a encomenda (o teu número fiscal, direitos ou impostos a pagar, ou documentos), a tua lista e a página da encomenda indicam-no, e a página cita as palavras da transportadora. Com uma nova leitura, o aviso desaparece.
+• Com uma conta, uma encomenda guardada sem código postal recebe agora o da tua última encomenda na consulta seguinte, se a transportadora, como a DPD, mostrar mais com o código postal. Se não houver nenhum, a página da encomenda diz que a transportadora mostra mais com o código postal de entrega e propõe adicioná-lo.
+• O campo do código postal já não pede o país, exceto com a Mondial Relay e a PostNL, cujo seguimento precisa dele.
 ```

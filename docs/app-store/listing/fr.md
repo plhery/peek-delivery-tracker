@@ -73,12 +73,7 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Les choix de notification s’appellent désormais Chaque scan, Étapes importantes et Livraison seulement, comme sur le site.
-• Quand un numéro a le format d’un transporteur qui ne le connaît pas encore, le colis affiche « Probablement » suivi de ce transporteur en attendant le premier scan. Si le transporteur ne le connaît toujours pas au bout d’une semaine, Peek te demande de vérifier le numéro auprès de l’expéditeur ou de choisir un autre transporteur.
-• Après quatre jours sans nouveau scan, la fiche d’un colis renvoie vers la page d’aide de son transporteur.
-• Quand aucun transporteur ne connaît un numéro qui ressemble à un numéro de commande, le colis t’indique que le numéro de suivi se trouve dans l’e-mail d’expédition ou sur la page de la commande dans la boutique.
-• Quand il y a plus de colis en route que le widget ne peut en montrer, une petite flèche sur sa fiche le fait passer aux suivants. Un colis qui n’a encore aucun lieu sur sa carte montre Pip à la place.
-• Sans compte, Peek demande désormais les mises à jour aux transporteurs dans la langue de l’app : ceux qui écrivent en plusieurs langues, comme Poczta Polska, répondent dans la tienne.
-• Quand tu ajoutes un colis, Peek lit le numéro après davantage de mentions, comme « Waybill », « AWB » ou « Guía », et refuse un numéro factice qu’aucun transporteur ne pourrait trouver.
-• Corrections : quand ta session ne peut plus être renouvelée, Peek te déconnecte pour que tu puisses te reconnecter, et oublier un colis que quelqu’un a partagé avec toi arrête ses notifications même si Peek ne parvient pas à joindre le service sur le moment.
+• Quand un transporteur attend quelque chose de toi avant que la douane libère ton colis (ton numéro fiscal, des droits de douane ou taxes à payer, ou des documents), ta liste et la fiche du colis l’indiquent, et la fiche cite le message du transporteur. L’indication disparaît dès le scan suivant.
+• Avec un compte, un colis enregistré sans code postal reçoit désormais celui de ton dernier colis, à sa prochaine vérification, si son transporteur en montre plus avec un code postal, comme DPD. S’il n’y en a aucun, sa fiche indique que le transporteur en montre plus avec le code postal de livraison et propose de l’ajouter.
+• Le champ du code postal ne demande plus de pays, sauf pour Mondial Relay et PostNL, dont le suivi en a besoin.
 ```

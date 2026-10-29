@@ -71,12 +71,7 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Las opciones de notificación se llaman ahora Cada escaneo, Pasos importantes y Solo la entrega, como en la web.
-• Cuando un número tiene el formato de un transportista que aún no lo reconoce, el paquete muestra «Probablemente» con el nombre de ese transportista mientras espera el primer escaneo. Si al cabo de una semana el transportista sigue sin reconocerlo, Peek te pide que compruebes el número con el remitente o elijas otro transportista.
-• Tras cuatro días sin escaneos nuevos, la página de un paquete enlaza con la página de ayuda de su transportista.
-• Cuando ningún transportista reconoce un número que parece un número de pedido, el paquete te indica que el número de seguimiento está en el correo de envío o en la página del pedido en la tienda.
-• Cuando hay más paquetes en camino de los que caben en el widget, una pequeña flecha en su ficha pasa a los siguientes. Un paquete que aún no tiene lugares en el mapa muestra a Pip en lugar del recorrido.
-• Sin cuenta, Peek ahora pide las novedades a los transportistas en el idioma de la app: los que escriben en varios idiomas, como Poczta Polska, responden en el tuyo.
-• Al añadir un paquete, Peek lee el número tras más indicaciones, como «Waybill», «AWB» o «Guía», y rechaza un número de ejemplo que ningún transportista podría encontrar.
-• Correcciones: cuando tu sesión ya no se puede renovar, Peek la cierra para que puedas volver a iniciarla, y olvidar un paquete que alguien compartió contigo detiene sus notificaciones aunque Peek no pueda contactar con el servicio en ese momento.
+• Cuando un transportista necesita algo de ti antes de que Aduanas libere tu paquete (tu número fiscal, aranceles o impuestos por pagar, o documentos), tu lista y la página del paquete lo indican, y la página cita al transportista. Con un nuevo escaneo, el aviso desaparece.
+• Con una cuenta, un paquete guardado sin código postal recibe ahora el de tu último paquete en la siguiente consulta, si su transportista, como DPD, muestra más con el código postal. Si no hay ninguno, la página del paquete indica que el transportista muestra más con el código postal de entrega y te ofrece añadirlo.
+• El campo del código postal ya no pide el país, salvo con Mondial Relay y PostNL, cuyo seguimiento lo necesita.
 ```

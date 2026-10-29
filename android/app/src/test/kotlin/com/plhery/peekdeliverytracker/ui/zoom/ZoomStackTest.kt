@@ -202,6 +202,19 @@ class ZoomStackTest {
     }
 
     @Test
+    fun aPageShownWithoutAFlightShrinksUnderTheBackGestureInPoints() {
+        show(initial = SOURCE)
+        assertEquals(390f, width(), 0.5f)
+        gesture(at(0f), at(0.5f))
+        // Half way: 95 % of its size, moved right as far as leaves 8 dp from the edge at the end, the finger level. The
+        // list is 40 dp down the page.
+        val held = page()
+        assertEquals(370.5f, (held.right - held.left).value, 0.5f)
+        assertEquals(15.5f, held.left.value, 0.5f)
+        assertEquals(21.1f + 40f * 0.95f, held.top.value, 0.5f)
+    }
+
+    @Test
     fun underReduceMotionTheSourceStaysAsThePageFadesInOverIt() {
         show(reduceMotion = true, open = false)
         compose.mainClock.autoAdvance = false

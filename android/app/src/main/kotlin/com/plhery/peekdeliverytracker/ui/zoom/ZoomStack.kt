@@ -407,8 +407,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
 
     /** Where the page flies from and to: its source where it can be seen, the middle of the window otherwise. */
     private fun resolve(id: Any, around: Surroundings) {
-        density = around.density.density
-        displayRadius = around.displayRadius
+        takeWindow(around)
         val node = transition.sources[id]
         val seen = node?.let { frameOf(it, clipped = true) }
         val frame = node?.let { frameOf(it, clipped = false) }
@@ -422,6 +421,12 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
             fallback = ZoomGeometry.fallback(around.safe, around.density.density, around.hinge)
             sourceRadius = with(around.density) { Radii.card.toPx() }
         }
+    }
+
+    /** The window's density and corners, which a gesture needs as a flight does: a page shown at once has had no flight. */
+    private fun takeWindow(around: Surroundings) {
+        density = around.density.density
+        displayRadius = around.displayRadius
     }
 
     private fun frameOf(node: ZoomSourceNode, clipped: Boolean): Rect? {
@@ -545,6 +550,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     }
 
     fun startDrag(at: Offset) {
+        surroundings?.invoke()?.let(::takeWindow)
         dragAnchor = at
         dragStart = at
         drag = Offset.Zero
@@ -582,6 +588,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
 
     fun back(event: BackEventCompat) {
         if (!backing) {
+            surroundings?.invoke()?.let(::takeWindow)
             backing = true
             backFromLeft = event.swipeEdge == BackEventCompat.EDGE_LEFT
             backStartY = event.touchY

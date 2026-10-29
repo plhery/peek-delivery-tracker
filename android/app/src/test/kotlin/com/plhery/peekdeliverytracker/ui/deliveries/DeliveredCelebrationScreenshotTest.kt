@@ -47,6 +47,7 @@ class DeliveredCelebrationScreenshotTest {
 
     private lateinit var view: View
     private lateinit var source: FakeDeliveries
+    private lateinit var deliveries: DeliveriesState
 
     /** The demo's parcels as they are, and as its check finds them. */
     private val demo: Pair<List<Parcel>, List<Parcel>> by lazy {
@@ -64,7 +65,7 @@ class DeliveredCelebrationScreenshotTest {
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
-            CompositionLocalProvider(LocalPaperSeeds provides { SEED }) {
+            CompositionLocalProvider(LocalPaperSeeds provides { SEED }, LocalDeliveriesState provides { deliveries = it }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source)
                 }
@@ -125,14 +126,24 @@ class DeliveredCelebrationScreenshotTest {
     @Test
     fun thePaperMidBurstInDark() = paper(dark = true)
 
-    /** 0.2 s into the flights: New trainers' card shrinks down to its place among the deliveries, Moon lamp's grows to Next up. */
+    /**
+     * 0.2 s into the flights: New trainers' card has shrunk most of the way to its place among the past deliveries,
+     * below the screen, as it goes down to it, and Moon lamp's comes up into Next up, growing to it with its new card
+     * coming in over it. Both show, each clear of the other.
+     */
     @Test
     fun theCardsMidFlight() {
         deliver(dark = false)
         advance(900)
         // The window draws the held cards, whose pictures fly: Robolectric draws it only when asked, as for a shot.
         compose.awaitFrame()
-        shot(50 + 200, "celebration_flight_light")
+        // The flights set off once the list has laid out the cards they become.
+        var frames = 0
+        while (!deliveries.flightProgress.isRunning) {
+            check(frames++ < 30) { "The flights didn't set off" }
+            advance(FRAME)
+        }
+        shot(200, "celebration_flight_light")
     }
 
     /** The cards landed and the paper gone. */

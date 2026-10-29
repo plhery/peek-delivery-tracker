@@ -1080,6 +1080,29 @@ describe('TrackingSyncService', () => {
       expect.objectContaining({ anomaly_codes: [] }), expect.any(Array));
   });
 
+  it('tells the stage a scan gives over the carrier\'s pending summary in that scan\'s words', async () => {
+    const sync = async (answer: CarrierResult) => {
+      const client = fakeClient();
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn().mockResolvedValue(answer) },
+        null, () => new Date('2026-10-20T08:00:00Z'));
+      await service.syncPackage({ id: 'pending-summary', carrier: 'nacex', tracking_number: '0000/00000000', current_stage: 'pending' });
+      const saved = client.updatePackage.mock.lastCall![1] as JsonObject;
+      return [saved.current_stage, saved.last_status_text, (saved.carrier_data as JsonObject).last_status_text];
+    };
+    // Royal Mail's summary reads "Pending" beside its customs scans (synthetic scans).
+    const customs = [
+      { time: '2026-10-14T21:06:00Z', description: 'Your item is with customs', stage: 'customs' },
+      { time: '2026-10-05T23:11:14Z', description: 'Item leaving the UK', stage: 'in_transit' }];
+    await expect(sync({ status: 'pending', current_stage: 'pending', last_status_text: 'Pending', last_update: null, events: customs }))
+      .resolves.toEqual(['customs', 'Your item is with customs', 'Pending']);
+    // A summary in the stage of the scans, or one past them, keeps its own words.
+    const label = [{ time: '2026-10-14T21:06:00Z', description: 'Label printed', stage: 'registered' }];
+    await expect(sync({ status: 'pending', current_stage: 'registered', last_status_text: 'Expecting it', last_update: null, events: label }))
+      .resolves.toEqual(['registered', 'Expecting it', 'Expecting it']);
+    await expect(sync({ status: 'in_transit', current_stage: 'in_transit', last_status_text: 'On its way', last_update: null, events: label }))
+      .resolves.toEqual(['in_transit', 'On its way', 'On its way']);
+  });
+
   it('lets the scan the carrier now dates take over the stage change it saw without a time', async () => {
     const answer: CarrierResult = { status: 'exception', current_stage: 'exception', last_status_text: 'Contacta con agencia',
       last_update: '2026-10-19T14:00:00+02:00', events: [

@@ -1735,6 +1735,8 @@ export class TrackingSyncService {
     let sourceCarrierId: string | null = null;
     let reportedStage: string | null = null;
     let selectedStage: string | null = null;
+    // The words of the scan that gives the parcel a stage its carrier's pending summary does not.
+    let stageText: string | null = null;
     let events: JsonObject[] = [];
     let anomalies: SyncAnomalyCode[] = [];
     try {
@@ -1890,6 +1892,10 @@ export class TrackingSyncService {
         const normalizedSelectedStage = normalizedReportedStage && result!.status !== 'pending'
           ? normalizedReportedStage
           : (progressEvent ? String(progressEvent.stage) : null) ?? normalizedReportedStage ?? latestEventStage;
+        // The scan that sets the stage over a pending summary tells it too: Royal Mail's "Pending"
+        // summary beside its customs scans would say otherwise.
+        const scanText = result!.status === 'pending' && progressEvent && normalizedSelectedStage === progressEvent.stage
+          && normalizedSelectedStage !== normalizedReportedStage ? String(progressEvent.description ?? '').trim() || null : null;
         // The delivery carrier answers for the parcel's stage: the earlier
         // carrier's stage, seen without a time of its own, dates no row.
         const earlierEvents = fetched.earlierResult && fetched.earlierCarrierId
@@ -1899,6 +1905,7 @@ export class TrackingSyncService {
           relays: relayedScans(earlierEvents, normalizedEvents),
           reportedStage: normalizedReportedStage,
           selectedStage: normalizedSelectedStage,
+          scanText,
         };
       }, (value) => ({
         events_received: result?.events?.length ?? 0,
@@ -1910,6 +1917,7 @@ export class TrackingSyncService {
       events = normalized.events;
       reportedStage = normalized.reportedStage;
       selectedStage = normalized.selectedStage;
+      stageText = normalized.scanText;
       const previousRouting = routingState(parcel);
       anomalies = detectSyncAnomalies(
         parcel,
@@ -2195,7 +2203,7 @@ export class TrackingSyncService {
           && !deleteDescriptions.includes(String(row.description))), ...persistedEvents];
       };
       if (!preserveSummary) {
-        values.last_status_text = result.last_status_text || null;
+        values.last_status_text = stageText || result.last_status_text || null;
         values.expected_delivery = result.expected_delivery ? String(result.expected_delivery) : null;
         values.carrier_data = carrierData;
         if (selectedStage && (hasUpdate || !swissPostReady)) {

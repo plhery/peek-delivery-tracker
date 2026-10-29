@@ -268,6 +268,7 @@ internal class DeliveriesState(
     val navigator: DeliveriesNavigator,
     val listState: LazyListState,
     archiveOpenState: MutableState<Boolean>,
+    reviewDueState: MutableState<Boolean>,
     private val views: ListViewStates,
     private val now: () -> Instant,
     val scope: CoroutineScope,
@@ -485,8 +486,11 @@ internal class DeliveriesState(
     var paper: DeliveredPaperBurst? by mutableStateOf(null)
         private set
 
-    /** A parcel seen arriving was the moment to ask for a rating (ReviewPrompt), and the list has not asked yet. */
-    var reviewDue by mutableStateOf(false)
+    /**
+     * A parcel seen arriving was the moment to ask for a rating (ReviewPrompt), and the list has not asked yet: kept as
+     * `@State` is, through the window being made again and another tab.
+     */
+    var reviewDue: Boolean by reviewDueState
 
     /**
      * The held parcels are being let go: the list's items take their places with the release's spring, until the list

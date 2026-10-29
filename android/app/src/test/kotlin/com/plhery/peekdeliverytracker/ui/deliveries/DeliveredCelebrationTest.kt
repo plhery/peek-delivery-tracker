@@ -463,6 +463,34 @@ class DeliveredCelebrationTest {
     }
 
     @Test
+    fun anAskDueAsTheWindowIsMadeAgainOrTheTabLeftComesOnceTheListIsBack() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        usedTwoEarlierDays()
+        deliver()
+        advance(1050)
+        advanceUntil(2) { !shows(DELIVERED_FLIGHTS) }
+        frame()
+        assertEquals(listOf("prepare"), source.reviewCalls)
+        // The window is made again as the moment settles: the ask is still due, and the moment settles anew.
+        advance(1000)
+        recreation.recreate()
+        frame()
+        assertEquals(listOf("prepare", "prepare"), source.reviewCalls)
+        // The tab is left before it has: back on the list, the ask comes once the moment has settled.
+        advance(1000)
+        compose.onNodeWithContentDescription("Passport").performClick()
+        advance(500)
+        assertFalse(shows(PARCEL_LIST))
+        compose.onNodeWithContentDescription("Deliveries").performClick()
+        advance(500)
+        assertEquals(listOf("prepare", "prepare", "prepare"), source.reviewCalls)
+        advance(2000)
+        assertEquals(listOf("prepare", "prepare", "prepare", "launch"), source.reviewCalls)
+        assertEquals(1, source.actions.count { it == "review-ask" })
+    }
+
+    @Test
     fun theDemosParcelsAskNothing() {
         show()
         usedTwoEarlierDays()

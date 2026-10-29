@@ -138,11 +138,12 @@ fun DeliveriesTab(
     navigator.view = source::view
     val listState = rememberLazyListState()
     val archiveOpen = rememberForLaunch(launch, false)
+    val reviewDue = rememberForLaunch(launch, false)
     val views = rememberListViewStates(launch)
     val now = LocalNow.current
     val scope = rememberCoroutineScope()
     val state = remember(source, navigator, listState) {
-        DeliveriesState(source, navigator, listState, archiveOpen, views, now, scope)
+        DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, views, now, scope)
     }
     state.localizer = LocalLocalizer.current
     // What the paper and the flights are drawn with, as the list was last drawn.

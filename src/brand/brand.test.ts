@@ -278,6 +278,15 @@ describe('carrier brand', () => {
       'kuayue-express',
       'islandwide-express',
       'piggy-express',
+      'rozetka-delivery',
+      'hrx',
+      'cargobus',
+      'jetpak',
+      'tonami',
+      'okaken',
+      'trexity',
+      'savar-express',
+      'xgs',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

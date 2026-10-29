@@ -351,6 +351,9 @@
   "canpar": {
     "decal": "canpar"
   },
+  "cargobus": {
+    "decal": "cargobus"
+  },
   "cargoline": {
     "decal": "cargoline"
   },
@@ -1262,6 +1265,9 @@
       "accent": "#1d1d1b"
     }
   },
+  "hrx": {
+    "decal": "hrx"
+  },
   "huahan": {
     "decal": "huahan"
   },
@@ -1416,6 +1422,9 @@
   },
   "jetline-couriers": {
     "decal": "jetline-couriers"
+  },
+  "jetpak": {
+    "decal": "jetpak"
   },
   "jhgj": {
     "decal": "jhgj"
@@ -1801,6 +1810,9 @@
   },
   "ocs-ana": {
     "decal": "ocs-ana"
+  },
+  "okaken": {
+    "decal": "okaken"
   },
   "old-dominion": {
     "decal": "old-dominion"
@@ -2190,6 +2202,9 @@
       "accent": "#fdda24"
     }
   },
+  "rozetka-delivery": {
+    "decal": "rozetka-delivery"
+  },
   "rpx-hk": {
     "decal": "rpx-hk"
   },
@@ -2240,6 +2255,9 @@
   },
   "saudi-post": {
     "decal": "saudi-post"
+  },
+  "savar-express": {
+    "decal": "savar-express"
   },
   "sbs-sokuhai": {
     "decal": "sbs-sokuhai"
@@ -2576,6 +2594,9 @@
   "today-kr": {
     "decal": "today-kr"
   },
+  "tonami": {
+    "decal": "tonami"
+  },
   "toptrans": {
     "decal": "toptrans"
   },
@@ -2614,6 +2635,9 @@
   },
   "trendyol-express": {
     "decal": "trendyol-express"
+  },
+  "trexity": {
+    "decal": "trexity"
   },
   "tsjy": {
     "decal": "tsjy"
@@ -2784,6 +2808,9 @@
   },
   "xdp": {
     "decal": "xdp"
+  },
+  "xgs": {
+    "decal": "xgs"
   },
   "xinghe-freight": {
     "decal": "xinghe-freight"

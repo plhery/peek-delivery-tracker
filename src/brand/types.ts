@@ -202,7 +202,16 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'ace-lv'
   | 'kuayue-express'
   | 'islandwide-express'
-  | 'piggy-express';
+  | 'piggy-express'
+  | 'rozetka-delivery'
+  | 'hrx'
+  | 'cargobus'
+  | 'jetpak'
+  | 'tonami'
+  | 'okaken'
+  | 'trexity'
+  | 'savar-express'
+  | 'xgs';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

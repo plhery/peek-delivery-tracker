@@ -101,6 +101,7 @@ import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
@@ -307,9 +308,13 @@ private fun Reviewing(state: DeliveriesState, resumed: Boolean, watching: Boolea
     val refreshing by source.refreshing.collectAsState()
     val inUse = resumed && settled
     LaunchedEffect(inUse) { if (inUse) prompt.used(now()) }
-    // Something failed in front of the reader: the list's notice, a check, or an action.
+    // Something failed in front of the reader: the list's notice, a check, or an action. Noted as it comes into view
+    // (`.onChange(of: failureShown)`), not as the list first shows with it.
     val failureShown = resumed && (errorMessage != null || state.toast?.warning == true || state.actionError != null)
-    LaunchedEffect(failureShown) { if (failureShown) prompt.noteBadMoment(now()) }
+    val failure by rememberUpdatedState(failureShown)
+    LaunchedEffect(prompt) {
+        snapshotFlow { failure }.drop(1).collect { shown -> if (shown) prompt.noteBadMoment(now()) }
+    }
     val covered = state.showingFilters || state.menu != null || state.deleting != null || state.actionError != null
     val ready = watching && !covered && state.hold.isEmpty && state.flights.isEmpty() && state.toast == null && undo == null &&
         !refreshing && !state.showingSearch && settled

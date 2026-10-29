@@ -95,8 +95,9 @@ class DeliveredCelebrationTest {
     private fun List<Parcel>.with(name: String, found: List<Parcel>): List<Parcel> =
         map { parcel -> if (parcel.label.startsWith(name)) found.first { it.id == parcel.id } else parcel }
 
-    private fun show(parcels: List<Parcel> = before, reduceMotion: Boolean = false, recreation: Recreation? = null) {
+    private fun show(parcels: List<Parcel> = before, reduceMotion: Boolean = false, recreation: Recreation? = null, failing: String? = null) {
         source = FakeDeliveries(parcels, AuthenticationState.Demo)
+        source.errorMessage.value = failing
         val content = @Composable {
             view = LocalView.current
             CompositionLocalProvider(LocalPaperSeeds provides { bursts++; SEED }, LocalDeliveriesState provides { deliveries = it }) {
@@ -488,6 +489,21 @@ class DeliveredCelebrationTest {
         advance(2000)
         assertEquals(listOf("prepare", "prepare", "prepare", "launch"), source.reviewCalls)
         assertEquals(1, source.actions.count { it == "review-ask" })
+    }
+
+    @Test
+    fun aFailureTheListOpensOnIsntTheDaysButOneThatComesIs() {
+        // `.onChange(of: failureShown)`: the list's first look, a notice of a failure already on it, changes nothing.
+        show(failing = "The service is down")
+        usedTwoEarlierDays()
+        assertTrue(source.reviewPrompt.isDue(CAPTURED, calm = true))
+        compose.runOnUiThread { source.errorMessage.value = null }
+        frame()
+        assertTrue(source.reviewPrompt.isDue(CAPTURED, calm = true))
+        // A failure shown from now: no ask for the rest of the day.
+        compose.runOnUiThread { source.errorMessage.value = "The service is down" }
+        frame()
+        assertFalse(source.reviewPrompt.isDue(CAPTURED, calm = true))
     }
 
     @Test

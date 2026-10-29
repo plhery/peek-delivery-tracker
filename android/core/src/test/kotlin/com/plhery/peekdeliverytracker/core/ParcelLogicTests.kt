@@ -203,6 +203,181 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun archiveReleaseKeepsTheFingerPositionUntilTheSettleAnimation() {
+        var swipe = ArchiveSwipeState()
+        // The first 8 points only pick the direction, so the card starts without a jump.
+        swipe = swipe.drag(Size(-60.0, 3.0), width = 360.0)
+        assertEquals(52.0, swipe.reveal, 0.001)
+
+        val released = swipe.release(velocity = -300.0, width = 360.0)
+        assertEquals(ArchiveSwipeState.Destination.Revealed, released.destination)
+        swipe = released.state
+        // Releasing used to reset the displayed translation to zero for a frame.
+        assertEquals(52.0, swipe.reveal, 0.001)
+        assertNull(swipe.cancel().destination)
+        swipe = swipe.settle(at = 88.0)
+
+        // Past the action the card resists the finger.
+        swipe = swipe.drag(Size(-12.0, 0.0), width = 360.0)
+        assertEquals(91.2, swipe.reveal, 0.001)
+    }
+
+    @Test
+    fun archiveSwipeThatStartsAtZeroFollowsTheFingerOneToOne() {
+        // iOS 27 reports a recognized pan at zero before it moves.
+        var swipe = ArchiveSwipeState()
+        swipe = swipe.drag(Size.Zero, width = 360.0)
+        swipe = swipe.drag(Size(-15.5, -2.0), width = 360.0)
+        assertEquals(15.5, swipe.reveal, 0.001)
+        swipe = swipe.drag(Size(-48.0, -5.0), width = 360.0)
+        assertEquals(48.0, swipe.reveal, 0.001)
+        val released = swipe.release(velocity = -600.0, width = 360.0)
+        assertEquals(ArchiveSwipeState.Destination.Revealed, released.destination)
+        swipe = released.state
+
+        swipe = swipe.settle(at = 0.0)
+        swipe = swipe.drag(Size.Zero, width = 360.0)
+        swipe = swipe.drag(Size(-3.0, -18.0), width = 360.0)
+        swipe = swipe.drag(Size(-120.0, -20.0), width = 360.0)
+        assertEquals(0.0, swipe.reveal, 0.0)
+        assertNull(swipe.release(velocity = -900.0, width = 360.0).destination)
+    }
+
+    @Test
+    fun shortArchiveSwipeClosesFromTheReleasePosition() {
+        val swipe = ArchiveSwipeState().drag(Size(-25.0, 0.0), width = 360.0)
+        val released = swipe.release(velocity = 0.0, width = 360.0)
+        assertEquals(ArchiveSwipeState.Destination.Closed, released.destination)
+        assertEquals(17.0, released.state.reveal, 0.001)
+    }
+
+    @Test
+    fun reversingAnOpenArchiveSwipeClosesIt() {
+        var swipe = ArchiveSwipeState().settle(at = 88.0)
+        swipe = swipe.drag(Size(65.0, 2.0), width = 360.0)
+        assertEquals(31.0, swipe.reveal, 0.001)
+        val released = swipe.release(velocity = 400.0, width = 360.0)
+        assertEquals(ArchiveSwipeState.Destination.Closed, released.destination)
+        assertEquals(31.0, released.state.reveal, 0.001)
+    }
+
+    @Test
+    fun archiveNeedsTheCommitPointOrAThrowPastTheAction() {
+        var swipe = ArchiveSwipeState().drag(Size(-30.0, 0.0), width = 360.0)
+        var released = swipe.release(velocity = -2000.0, width = 360.0)
+        assertEquals(ArchiveSwipeState.Destination.Revealed, released.destination)
+
+        swipe = released.state.settle(at = 0.0).drag(Size(-120.0, 1.0), width = 360.0)
+        released = swipe.release(velocity = -500.0, width = 360.0)
+        assertEquals(ArchiveSwipeState.Destination.Revealed, released.destination)
+        swipe = released.state.settle(at = 0.0).drag(Size(-120.0, 1.0), width = 360.0)
+        released = swipe.release(velocity = -1500.0, width = 360.0)
+        assertEquals(ArchiveSwipeState.Destination.Archive, released.destination)
+
+        swipe = released.state.settle(at = 0.0).drag(Size(-230.0, 1.0), width = 360.0)
+        assertTrue(swipe.reveal >= ArchiveSwipeState.commitPoint(width = 360.0))
+        assertEquals(ArchiveSwipeState.Destination.Archive, swipe.release(velocity = 0.0, width = 360.0).destination)
+    }
+
+    @Test
+    fun verticalScrollDoesNotBecomeAnArchiveSwipe() {
+        var swipe = ArchiveSwipeState()
+        swipe = swipe.drag(Size(-3.0, -18.0), width = 360.0)
+        swipe = swipe.drag(Size(-200.0, -25.0), width = 360.0)
+        assertEquals(0.0, swipe.reveal, 0.0)
+        assertNull(swipe.release(velocity = -900.0, width = 360.0).destination)
+    }
+
+    @Test
+    fun cancelledSwipeSettlesWithoutArchivingOrResettingItsPosition() {
+        val swipe = ArchiveSwipeState().drag(Size(-220.0, 0.0), width = 360.0)
+        val reveal = swipe.reveal
+        val cancelled = swipe.cancel()
+        assertEquals(ArchiveSwipeState.Destination.Revealed, cancelled.destination)
+        assertEquals(reveal, cancelled.state.reveal, 0.0)
+        assertNull(cancelled.state.cancel().destination)
+    }
+
+    @Test
+    fun archiveSwipeStaysWithinCardBounds() {
+        var swipe = ArchiveSwipeState()
+        swipe = swipe.drag(Size(50.0, 0.0), width = 360.0)
+        assertTrue(swipe.reveal < 0)
+        assertTrue(swipe.reveal > -44)
+        swipe = swipe.drag(Size(-500.0, 0.0), width = 360.0)
+        assertTrue(swipe.reveal < 360)
+    }
+
+    @Test
+    fun archiveSwipeTravelIsContinuousAndInvertible() {
+        val knee = 88 + (ArchiveSwipeState.commitPoint(width = 360.0) - 88) / 0.8
+        for (travel in listOf(-120.0, -1.0, 0.0, 30.0, 88.0, 120.0, knee - 1, knee + 1, 260.0, 400.0)) {
+            val reveal = ArchiveSwipeState.reveal(forTravel = travel, width = 360.0)
+            assertEquals(travel, ArchiveSwipeState.travel(forReveal = reveal, width = 360.0), 0.0001)
+        }
+        for (edge in listOf(0.0, 88.0, knee)) {
+            val step = ArchiveSwipeState.reveal(forTravel = edge + 0.0001, width = 360.0) -
+                ArchiveSwipeState.reveal(forTravel = edge - 0.0001, width = 360.0)
+            assertTrue(step < 0.001)
+        }
+        assertEquals(180.0, ArchiveSwipeState.commitPoint(width = 360.0), 0.0)
+        assertEquals(144.0, ArchiveSwipeState.commitPoint(width = 200.0), 0.0)
+    }
+
+    @Test
+    fun swipeSpringStartsWithItsReleaseSpeedAndSettlesOnTarget() {
+        val start = SwipeSpring.fling.state(from = 40.0, to = 88.0, velocity = 600.0, at = 0.0)
+        assertEquals(40.0, start.value, 0.0001)
+        assertEquals(600.0, start.velocity, 0.0001)
+        val rest = SwipeSpring.snap.state(from = 40.0, to = 88.0, velocity = 600.0, at = 1.5)
+        assertEquals(88.0, rest.value, 0.01)
+        val samples = (0 until 120).map { SwipeSpring.snap.state(from = 0.0, to = 100.0, velocity = 0.0, at = it / 120.0).value }
+        assertTrue((samples.maxOrNull() ?: 0.0) <= 100)
+        val settle = SwipeSpring.snap.settleTime(from = 0.0, to = 100.0, velocity = 0.0)
+        assertTrue(settle > 0.25)
+        assertTrue(settle < 0.6)
+    }
+
+    @Test
+    fun archiveSwipeMotionHandsOverItsPositionAndSpeed() {
+        val began = 0.0
+        val motion = ArchiveSwipeMotion(
+            start = ArchiveSwipePose(reveal = 150.0), target = ArchiveSwipePose(reveal = 360.0, spread = 1.0, land = 1.0),
+            velocity = ArchiveSwipePose(reveal = 900.0), spring = SwipeSpring.exit, reduceMotion = false, began = began,
+        )
+        assertEquals(150.0, motion.pose(at = began).reveal, 0.001)
+        assertEquals(900.0, motion.velocity(at = began).reveal, 0.001)
+        val midway = began + 0.1
+        assertTrue(motion.pose(at = midway).reveal > 150)
+        assertTrue(motion.pose(at = midway).land > 0)
+        assertEquals(motion.target, motion.pose(at = began + motion.duration + 0.1))
+        val leave = motion.time { it.reveal >= 358 && it.land >= 0.92 }
+        assertTrue(leave > 0.1)
+        assertTrue(leave < motion.duration)
+
+        // A throw from beside the action: the gap to the card only closes on the way out.
+        val exit = ArchiveSwipeMotion(
+            start = ArchiveSwipePose(reveal = 106.0), target = ArchiveSwipePose(reveal = 370.0, spread = 1.0, land = 1.0),
+            velocity = ArchiveSwipePose(reveal = 2000.0), spring = SwipeSpring.exit, reduceMotion = false, glued = true,
+            began = began,
+        )
+        var gap = 18.001
+        for (step in 0..60) {
+            val pose = exit.pose(at = began + step / 120.0)
+            val next = (1 - pose.spread) * maxOf(0.0, minOf(pose.reveal, 370.0) - 88)
+            assertTrue(next <= gap + 0.001)
+            gap = next
+        }
+
+        val still = ArchiveSwipeMotion(
+            start = ArchiveSwipePose(reveal = 150.0), target = ArchiveSwipePose(),
+            velocity = ArchiveSwipePose(reveal = 900.0), spring = SwipeSpring.fling, reduceMotion = true, began = began,
+        )
+        assertEquals(ArchiveSwipePose(), still.velocity)
+        assertEquals(SwipeSpring.reduced, still.revealSpring)
+    }
+
+    @Test
     fun internationalPostWaitsForItsAutomaticLookup() {
         val id = UUID.randomUUID()
         val parcel = makeParcel(id, events = emptyList()).copy(carrier = CarrierId.InternationalPost, syncStatus = SyncStatus.Pending)

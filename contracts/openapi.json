@@ -3336,7 +3336,7 @@
           "checksum": "luhn"
         },
         {
-          "pattern": "^(?!(?:BNI|BYS|CUB|GWD|LTN|MPX|NZC|QSP|QSS|RWM|XLT))[A-Z]{3}\\d{9}$",
+          "pattern": "^(?!(?:BNI|BYS|CUB|GWD|LTN|MPX|NZC|QSP|QSS|RMP|RWM|XLT))[A-Z]{3}\\d{9}$",
           "confidence": "high"
         }
       ],
@@ -34878,6 +34878,302 @@
         }
       ],
       "trackingSearchUrl": "https://track.westparcel.com/"
+    },
+    "cargobus": {
+      "displayName": "Cargobus",
+      "aliases": [
+        "CargoBus",
+        "Cargobus EE",
+        "Cargobus Eesti",
+        "T Grupp",
+        "T Grupp OÜ"
+      ],
+      "countries": [
+        "EE",
+        "LV",
+        "LT"
+      ],
+      "color": "#006ade",
+      "selectable": true,
+      "timezone": "Europe/Tallinn",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://cargobusee.opter.cloud/TT?keyword={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "cargobusee.opter.cloud"
+          ],
+          "pathPattern": "^/[Tt][Tt]/?$",
+          "params": [
+            "keyword"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://cargobusee.opter.cloud/tt"
+    },
+    "hrx": {
+      "displayName": "HRX",
+      "aliases": [
+        "HRX SIA",
+        "HRX AS",
+        "HRX UAB",
+        "HRX Finland",
+        "HRX Finland Oy",
+        "HRX Sverige",
+        "HR-Express",
+        "HR-Express Oy",
+        "HRX E-com Parcel"
+      ],
+      "countries": [
+        "FI",
+        "EE",
+        "LV",
+        "LT",
+        "PL",
+        "SE"
+      ],
+      "color": "#e82c2a",
+      "selectable": true,
+      "timezone": "Europe/Tallinn",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://wop.hrx.eu/public/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "wop.hrx.eu"
+          ],
+          "path": "^/public/tracking/([^/]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.hrx.lv/en/track-trace/"
+    },
+    "jetpak": {
+      "displayName": "Jetpak",
+      "aliases": [
+        "Jetpak Group",
+        "Jetpak Group AB",
+        "Jetpak Sverige",
+        "Jetpak Norge",
+        "Jetpak Danmark",
+        "Jetpak Finland",
+        "Jetpak Air",
+        "Jetpak Road",
+        "JetPak"
+      ],
+      "countries": [
+        "SE",
+        "NO",
+        "DK",
+        "FI"
+      ],
+      "color": "#d60e1f",
+      "selectable": true,
+      "timezone": "Europe/Stockholm",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://my.jetpak.com/app/en/track/awb/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "my.jetpak.com"
+          ],
+          "path": "^/app/[a-z]{2}/track/awb/([^/]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://my.jetpak.com/app/en/track"
+    },
+    "okaken": {
+      "displayName": "Okayamaken Freight Transportation",
+      "aliases": [
+        "Okaken",
+        "OKAKEN",
+        "Okayama Ken Freight Transportation",
+        "岡山県貨物運送",
+        "岡山県貨物運送株式会社",
+        "オカケン"
+      ],
+      "countries": [
+        "JP"
+      ],
+      "color": "#008041",
+      "selectable": true,
+      "timezone": "Asia/Tokyo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.okaken.co.jp/refer/"
+    },
+    "rozetka-delivery": {
+      "displayName": "ROZETKA Delivery",
+      "aliases": [
+        "Rozetka Delivery",
+        "Rozetka.Delivery",
+        "rozetka.delivery"
+      ],
+      "countries": [
+        "UA"
+      ],
+      "color": "#05bc52",
+      "selectable": true,
+      "timezone": "Europe/Kyiv",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://rozetka.delivery/tracking?parcel_id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "rozetka.delivery",
+            "www.rozetka.delivery"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "parcel_id"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^RMP\\d{9}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://rozetka.delivery/tracking"
+    },
+    "savar-express": {
+      "displayName": "SAVAR Express",
+      "aliases": [
+        "Savar Express",
+        "SAVAR express",
+        "Savar",
+        "Simple Express S.A.C."
+      ],
+      "countries": [
+        "PE"
+      ],
+      "color": "#0779ff",
+      "selectable": true,
+      "timezone": "America/Lima",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.savarexpress.com.pe/rastrea-un-envio/"
+    },
+    "tonami": {
+      "displayName": "Tonami Transportation",
+      "aliases": [
+        "Tonami",
+        "TONAMI",
+        "Tonami Unyu",
+        "TONAMI TRANSPORTATION CO., LTD.",
+        "トナミ運輸",
+        "トナミ運輸株式会社"
+      ],
+      "countries": [
+        "JP"
+      ],
+      "color": "#b50005",
+      "selectable": true,
+      "timezone": "Asia/Tokyo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://trc1.tonami.co.jp/trc/search3/excSearch3?id%5B0%5D={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "trc1.tonami.co.jp"
+          ],
+          "pathPattern": "^/trc/search3/excSearch3$",
+          "params": [
+            "id[0]"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://trc1.tonami.co.jp/trc/search3/excSearch3"
+    },
+    "trexity": {
+      "displayName": "Trexity",
+      "aliases": [
+        "Trexity Inc."
+      ],
+      "countries": [
+        "CA",
+        "US"
+      ],
+      "color": "#4361ee",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tracking.trexity.com/?t={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.trexity.com"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "t"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.trexity.com/"
+    },
+    "xgs": {
+      "displayName": "XGS",
+      "aliases": [
+        "Xpress Global Systems",
+        "Xpress Global Systems LLC",
+        "Xpress Global",
+        "XGSI"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#20326e",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.xgsi.com/#track-shipment={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.xgsi.com",
+            "xgsi.com"
+          ],
+          "pathPattern": "^/?$",
+          "fragment": "^track-shipment=(\\d{7,8})$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.xgsi.com/"
     }
   },
   "servers": [
@@ -38546,7 +38842,16 @@
           "pallex",
           "piggy-express",
           "trans-ontario",
-          "western-bid"
+          "western-bid",
+          "cargobus",
+          "hrx",
+          "jetpak",
+          "okaken",
+          "rozetka-delivery",
+          "savar-express",
+          "tonami",
+          "trexity",
+          "xgs"
         ]
       },
       "Stage": {

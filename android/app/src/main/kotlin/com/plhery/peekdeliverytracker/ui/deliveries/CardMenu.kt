@@ -36,6 +36,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
@@ -281,11 +282,14 @@ internal fun CardMenuHost(state: DeliveriesState) {
 
 /**
  * Draws `content` over the window as the shell's layer `key` ([LocalTabOverlay]) while it isn't null, taking the latest
- * `content` each time it is drawn.
+ * `content` each time it is drawn. Each composition here draws the layer again, as it would be drawn in place: the same
+ * lambda with new captures, which Compose remembers as one, would otherwise leave the layer as it was.
  */
 @Composable
 internal fun OverlayLayer(host: TabOverlay, key: Any, content: (@Composable () -> Unit)?) {
-    val current by rememberUpdatedState(content)
+    val latest = remember { mutableStateOf(content, neverEqualPolicy()) }
+    latest.value = content
+    val current by latest
     DisposableEffect(host, key, content != null) {
         host.show(key, if (content != null) { { current?.invoke() } } else null)
         onDispose { host.show(key, null) }

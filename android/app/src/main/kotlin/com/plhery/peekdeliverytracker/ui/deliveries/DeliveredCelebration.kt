@@ -455,14 +455,13 @@ private fun DrawScope.drawFlight(flight: DeliveredFlight, progress: Double, shif
     flight.outline.addRoundedRect(left.toDouble(), top.toDouble(), right.toDouble(), bottom.toDouble(), pose.cornerRadius * scale)
     val outline = flight.clip.fill(flight.outline)
     if (pose.shadow > 0) {
-        // The box's own shadow, a continuous rounded rectangle as its clip.
+        // The box's own shadow. Blurred this much, a rounded rectangle's circular corners look as the box's continuous
+        // ones, and the renderer blurs a rounded rectangle from a small mask it keeps, where it would blur the whole of
+        // a path's mask again each frame.
         shadow.color = Color.Black.copy(alpha = (FLIGHT_SHADOW_OPACITY * pose.shadow).toFloat())
         val drop = FLIGHT_SHADOW_DROP.toPx()
-        drawIntoCanvas {
-            it.translate(0f, drop)
-            it.drawPath(outline, shadow)
-            it.translate(0f, -drop)
-        }
+        val corner = (pose.cornerRadius * scale).toFloat()
+        drawIntoCanvas { it.drawRoundRect(left, top + drop, right, bottom + drop, corner, corner, shadow) }
     }
     clipPath(outline) {
         translate(left, top + (pose.leaving * scale).toFloat()) { drawLayer(flight.picture) }

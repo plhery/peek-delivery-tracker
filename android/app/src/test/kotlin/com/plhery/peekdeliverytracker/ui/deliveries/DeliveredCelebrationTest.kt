@@ -16,6 +16,7 @@ import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasTestTag
@@ -24,6 +25,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -404,6 +406,29 @@ class DeliveredCelebrationTest {
         assertEquals(landing!!.frame.minY, flight.to!!.frame.minY, 1.0)
         advanceUntil(2) { !shows(DELIVERED_FLIGHTS) }
         assertEquals(1, cards(last.label))
+    }
+
+    @Test
+    fun aMenuOpenOnTheCardHeldNeitherKeepsItInPlaceNorStaysBehind() {
+        // As the iPhone's context menu, a card's menu doesn't stop the list being looked at (`watching`): the card
+        // held leaves on time, and its menu goes with it.
+        show()
+        val nextTop = top("New trainers")
+        deliver()
+        advance(400)
+        compose.card("New trainers").performSemanticsAction(SemanticsActions.OnLongClick)
+        advance(100)
+        compose.onNodeWithTag(CARD_MENU).assertExists()
+        advance(450)
+        assertTrue(shows(DELIVERED_FLIGHTS))
+        // The card lifted in its menu is still pictured as it shows, and flies.
+        val held = deliveries.flights.single { it.parcel.label.startsWith("New trainers") }
+        assertTrue(held.picture.size.width > 0 && held.picture.size.height > 0)
+        assertEquals(null, deliveries.menu)
+        frame()
+        compose.onNodeWithTag(CARD_MENU).assertDoesNotExist()
+        advanceUntil(2) { !shows(DELIVERED_FLIGHTS) }
+        assertLanded(nextTop)
     }
 
     @Test

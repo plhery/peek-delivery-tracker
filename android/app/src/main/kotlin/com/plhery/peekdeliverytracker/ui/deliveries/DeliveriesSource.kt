@@ -1,7 +1,11 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
@@ -72,12 +76,12 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 }
 
 /**
- * What reaches the deliveries from outside the list, for the process: a parcel a link asked for (`.onOpenURL`'s
- * `parcel/<uuid>`), which the list shows and then takes, whichever window asked. The tabs bring the deliveries forward
- * while one waits.
+ * What reaches a window's deliveries from outside the list: a parcel a link asked for (`.onOpenURL`'s
+ * `parcel/<uuid>`), which the list shows and then takes. Each window has its own ([of]), as each iPhone scene follows
+ * its own links, so the window the link came to opens it. The tabs bring the deliveries forward while one waits.
  */
-class DeliveriesInbox {
-    private val parcelState = MutableStateFlow<UUID?>(null)
+class DeliveriesInbox(parcel: UUID? = null) {
+    private val parcelState = MutableStateFlow(parcel)
 
     /** The parcel waiting to be shown. */
     val parcel: StateFlow<UUID?> = parcelState.asStateFlow()
@@ -92,6 +96,17 @@ class DeliveriesInbox {
         parcelState.compareAndSet(parcelId, null)
     }
 
+    /** `.onOpenURL` (A-L14): `peekdeliverytracker://parcel/<uuid>` opens the parcel on the deliveries. */
+    fun follow(intent: Intent?) {
+        if (intent?.action != Intent.ACTION_VIEW) return
+        val url = intent.dataString ?: return
+        when (val route = NativeRoute(url)) {
+            is NativeRoute.Parcel -> open(route.id)
+            // The friends, Add and the links' notifications come with their screens.
+            else -> Unit
+        }
+    }
+
     /**
      * `ShareInbox.consume()`: what another app shared with this one, for Add. Android has no share target yet, so
      * nothing is ever waiting.
@@ -103,4 +118,24 @@ class DeliveriesInbox {
      * notifications aren't ported yet, so none is ever waiting.
      */
     fun consumePendingParcelNotification(): UUID? = null
+
+    companion object {
+        private const val SAVED = "deliveries.inbox"
+        private const val PARCEL = "parcel"
+
+        /**
+         * The window's inbox, after its `super.onCreate`: it follows the link that started the window, and each link
+         * that comes to it after. Made again, the window finds the parcel still waiting, and doesn't follow the link
+         * that started it again once its list has shown it.
+         */
+        fun of(activity: ComponentActivity): DeliveriesInbox {
+            val registry = activity.savedStateRegistry
+            val saved = registry.consumeRestoredStateForKey(SAVED)
+            val inbox = DeliveriesInbox(saved?.getString(PARCEL)?.let(UUID::fromString))
+            registry.registerSavedStateProvider(SAVED) { Bundle().apply { putString(PARCEL, inbox.parcel.value?.toString()) } }
+            if (saved == null) inbox.follow(activity.intent)
+            activity.addOnNewIntentListener { inbox.follow(it) }
+            return inbox
+        }
+    }
 }

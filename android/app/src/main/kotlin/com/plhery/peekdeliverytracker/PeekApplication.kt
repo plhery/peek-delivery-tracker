@@ -3,7 +3,6 @@ package com.plhery.peekdeliverytracker
 import android.app.Application
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.plhery.peekdeliverytracker.core.SharedResources
-import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import java.io.FileNotFoundException
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,9 +18,6 @@ class PeekApplication : Application() {
     val container: StateFlow<AppContainer?> = containerState.asStateFlow()
 
     private var making = false
-
-    /** What reaches the deliveries from outside them, for every window: a parcel a link asked for. */
-    val inbox = DeliveriesInbox()
 
     override fun onCreate() {
         super.onCreate()

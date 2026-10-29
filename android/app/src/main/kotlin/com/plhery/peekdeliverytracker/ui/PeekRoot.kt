@@ -41,8 +41,8 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.withContext
 
 /**
- * RootView (A-D20): what the session's state shows, from the container's stores. A parcel a link asked for
- * ([inbox]) brings the deliveries forward and opens there.
+ * RootView (A-D20): what the session's state shows, from the container's stores. A parcel a link to this window asked
+ * for ([inbox]) brings the deliveries forward and opens there.
  */
 @Composable
 fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {

@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker
 
-import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
@@ -16,8 +15,8 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.ui.PeekRoot
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
@@ -34,8 +33,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         // The stores are made with the first window, as the iPhone's are with its app.
         app.makeContainer()
-        // A link that started the window; one the window saved was followed when it came.
-        if (savedInstanceState == null) follow(intent)
+        // The links that come to this window.
+        val inbox = DeliveriesInbox.of(this)
         splash.setKeepOnScreenCondition { app.container.value == null }
         setContent {
             val appearance = appearanceSetting()
@@ -49,28 +48,12 @@ class MainActivity : ComponentActivity() {
             val catalog = container?.catalog?.collectAsState()?.value
             PeekTheme(appearance = appearance, dark = dark, carrierIdentities = rememberCarrierIdentities(catalog)) {
                 if (container != null) {
-                    PeekRoot(container, app.inbox)
+                    PeekRoot(container, inbox)
                 } else {
                     // Under the launch window, which stays until the container is made.
                     Box(Modifier.fillMaxSize().background(PeekTheme.colors.background))
                 }
             }
-        }
-    }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        follow(intent)
-    }
-
-    /** `.onOpenURL` (A-L14): `peekdeliverytracker://parcel/<uuid>` opens the parcel on the deliveries. */
-    private fun follow(intent: Intent?) {
-        if (intent?.action != Intent.ACTION_VIEW) return
-        val url = intent.dataString ?: return
-        when (val route = NativeRoute(url)) {
-            is NativeRoute.Parcel -> app.inbox.open(route.id)
-            // The friends, Add and the links' notifications come with their screens.
-            else -> Unit
         }
     }
 

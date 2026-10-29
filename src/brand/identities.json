@@ -11,6 +11,9 @@
   "2go": {
     "decal": "2go"
   },
+  "3pe-express": {
+    "decal": "3pe-express"
+  },
   "4-72": {
     "decal": "4-72"
   },
@@ -65,6 +68,9 @@
   "airpak-express": {
     "decal": "airpak-express"
   },
+  "ait-home-delivery": {
+    "family": "ait-worldwide"
+  },
   "ait-worldwide": {
     "decal": "ait-worldwide"
   },
@@ -108,6 +114,9 @@
   "amazon-shipping": {
     "family": "amazon-logistics"
   },
+  "ambro-express": {
+    "decal": "ambro-express"
+  },
   "ameex": {
     "decal": "ameex"
   },
@@ -116,6 +125,9 @@
   },
   "amerijet": {
     "decal": "amerijet"
+  },
+  "ameriship": {
+    "decal": "ameriship"
   },
   "ampm": {
     "decal": "ampm"
@@ -324,6 +336,9 @@
   "canpar": {
     "decal": "canpar"
   },
+  "cargoline": {
+    "decal": "cargoline"
+  },
   "cargus": {
     "decal": "cargus"
   },
@@ -394,6 +409,9 @@
   },
   "ciblex": {
     "decal": "ciblex"
+  },
+  "city-air-express": {
+    "decal": "city-air-express"
   },
   "city-express-rs": {
     "decal": "city-express-rs"
@@ -1023,6 +1041,9 @@
   "ghtk": {
     "decal": "ghtk"
   },
+  "gio-express": {
+    "decal": "gio-express"
+  },
   "globalpost": {
     "decal": "globalpost"
   },
@@ -1380,6 +1401,9 @@
   },
   "jordan-post": {
     "decal": "jordan-post"
+  },
+  "jp-home": {
+    "decal": "jp-home"
   },
   "jrs-express": {
     "decal": "jrs-express"
@@ -1767,6 +1791,9 @@
   },
   "osm-worldwide": {
     "decal": "osm-worldwide"
+  },
+  "overnite": {
+    "decal": "overnite"
   },
   "overseas-express": {
     "decal": "overseas-express"
@@ -2376,6 +2403,9 @@
   },
   "surat-kargo": {
     "decal": "surat-kargo"
+  },
+  "sway": {
+    "decal": "sway"
   },
   "swiftx": {
     "decal": "swiftx"

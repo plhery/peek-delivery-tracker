@@ -172,7 +172,16 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'costco-logistics'
   | 'quality-post'
   | 'rxo'
-  | 'runner-express';
+  | 'runner-express'
+  | 'jp-home'
+  | 'cargoline'
+  | 'overnite'
+  | 'ambro-express'
+  | 'city-air-express'
+  | 'ameriship'
+  | 'gio-express'
+  | 'sway'
+  | '3pe-express';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

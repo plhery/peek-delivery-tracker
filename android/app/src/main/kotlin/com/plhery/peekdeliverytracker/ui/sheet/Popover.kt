@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,6 +40,7 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
@@ -67,9 +69,11 @@ data class PopoverSize(val minWidth: Dp, val idealWidth: Dp, val minHeight: Dp, 
 /**
  * `.popover(isPresented:)` as iPadOS 26 draws it, over the whole window ([LocalTabOverlay]): on glass, its arrow pointing
  * at [anchor] (the source's bounds in the window), under it where there is room and over it otherwise, centred on it
- * as far as the window allows. It takes its ideal size, down to its least where the window is short of room. Nothing
- * dims; a tap outside it, or the system's back, dismisses it. It grows from its arrow on a spring and shrinks back as
- * it goes. TalkBack reaches only the popover, named [paneTitle]; [onClosed] runs once it has gone.
+ * as far as the window allows. It takes its ideal size, down to its least where the window is short of room, and stays
+ * in the window's safe area, what it holds scrolling where even its least would not fit. Nothing dims; a tap outside
+ * it, or the system's back, dismisses it. It grows from its arrow on a spring and shrinks back as it goes; the window
+ * made again (a rotation) finds it there without growing again. TalkBack reaches only the popover, named [paneTitle],
+ * and only its menu while one is open ([FormMenuRow]); [onClosed] runs once it has gone.
  */
 @Composable
 fun Popover(
@@ -83,12 +87,14 @@ fun Popover(
 ) {
     var present by remember { mutableStateOf(visible) }
     if (visible) present = true
+    val memory = rememberSaveable(saver = SheetMemory.Saver) { SheetMemory() }
+    if (!present) memory.forget()
     val host = LocalTabOverlay.current
     val dismiss by rememberUpdatedState(onDismiss)
     val closed by rememberUpdatedState(onClosed)
     val layer: (@Composable () -> Unit)? = if (!present) null else {
         {
-            PopoverLayer(visible, anchor, { dismiss() }, paneTitle, size, host?.backdrop, {
+            PopoverLayer(visible, anchor, { dismiss() }, paneTitle, size, host?.backdrop, memory, {
                 present = false
                 closed()
             }, content)
@@ -107,18 +113,25 @@ private fun PopoverLayer(
     paneTitle: String,
     size: PopoverSize,
     backdrop: MaterialBackdrop?,
+    memory: SheetMemory,
     onGone: () -> Unit,
     content: @Composable () -> Unit,
 ) {
     val density = LocalDensity.current
+    val direction = LocalLayoutDirection.current
     val reduceMotion = PeekTheme.reduceMotion
-    val shown = remember { Animatable(0f) }
+    // Made again with the window, it is there already.
+    val shown = remember { Animatable(if (memory.up) 1f else 0f) }
     val menus = remember { SheetMenus() }
     var origin by remember { mutableStateOf(Offset.Zero) }
+    val showing by rememberUpdatedState(visible)
+    val dismiss by rememberUpdatedState(onDismiss)
     LaunchedEffect(visible) {
         if (visible) {
             shown.animateTo(1f, if (reduceMotion) Motion.easeOut(0.2) else Motion.spring(0.35, 0.15))
+            memory.up = true
         } else {
+            memory.forget()
             shown.animateTo(0f, if (reduceMotion) Motion.easeOut(0.2) else Motion.spring(0.25))
             onGone()
         }
@@ -128,13 +141,13 @@ private fun PopoverLayer(
         Modifier
             .fillMaxSize()
             .onGloballyPositioned { origin = it.positionInWindow() }
-            .pointerInput(Unit) { detectTapGestures { if (visible) onDismiss() } },
+            .pointerInput(Unit) { detectTapGestures { if (showing) dismiss() } },
     ) {
         val bars = WindowInsets.systemBars.union(WindowInsets.displayCutout)
         val frame = with(density) {
             popoverFrame(
                 anchor.translate(-origin), size, constraints.maxWidth.toFloat(), constraints.maxHeight.toFloat(),
-                bars.getTop(this).toFloat(), bars.getBottom(this).toFloat(),
+                SafeInsets(bars.getLeft(this, direction).toFloat(), bars.getTop(this).toFloat(), bars.getRight(this, direction).toFloat(), bars.getBottom(this).toFloat()),
             )
         }
         val shape = with(density) { remember(frame) { PopoverShape(frame, ARROW_HEIGHT.toPx(), ARROW_WIDTH.toPx(), POPOVER_RADIUS.toPx()) } }
@@ -147,7 +160,8 @@ private fun PopoverLayer(
                 }
                 .graphicsLayer {
                     val t = shown.value
-                    alpha = t.coerceIn(0f, 1f)
+                    // Made again with the window, it shows once its source has been laid out again.
+                    alpha = if (anchor == Rect.Zero) 0f else t.coerceIn(0f, 1f)
                     val scale = if (reduceMotion) 1f else 0.5f + 0.5f * t
                     scaleX = scale
                     scaleY = scale
@@ -156,7 +170,9 @@ private fun PopoverLayer(
                 .dropShadow(shape, POPOVER_SHADOW)
                 .clip(shape)
                 .pointerInput(Unit) { detectTapGestures { } }
-                .semantics { this.paneTitle = paneTitle },
+                .semantics { this.paneTitle = paneTitle }
+                // While a menu is open over it, TalkBack reaches only the menu.
+                .then(if (menus.content != null) Modifier.clearAndSetSemantics {} else Modifier),
         ) {
             SheetGlass(shape, backdrop, Modifier.matchParentSize())
             val insets = with(density) { SheetInsets.popover(frame.bounds.width.toDp()) }
@@ -177,21 +193,35 @@ private fun PopoverLayer(
 @Immutable
 private data class PopoverFrame(val bounds: Rect, val below: Boolean, val tip: Float)
 
+/** The window's bars' and cutout's insets on each side, in pixels. */
+private data class SafeInsets(val left: Float, val top: Float, val right: Float, val bottom: Float)
+
 /**
- * The popover's frame in a window `width` × `height`, clear of its bars (`top`, `bottom`): under its source while
- * there is room for its ideal height there, or wherever has more; as wide and tall as it would be, down to its least.
+ * The popover's frame in a window `width` × `height`, in by a margin from its safe area ([safe]): under its source
+ * while there is room for its ideal height there, or wherever has more; as wide and tall as it would be, down to its
+ * least, and no larger than the room it has. Its body stays in the window however close to its edge the source is.
  */
-private fun Density.popoverFrame(anchor: Rect, size: PopoverSize, width: Float, height: Float, top: Float, bottom: Float): PopoverFrame {
+private fun Density.popoverFrame(anchor: Rect, size: PopoverSize, width: Float, height: Float, safe: SafeInsets): PopoverFrame {
     val margin = POPOVER_MARGIN.toPx()
     val arrow = ARROW_HEIGHT.toPx()
-    val roomBelow = height - bottom - margin - anchor.bottom - arrow
-    val roomAbove = anchor.top - top - margin - arrow
+    val start = safe.left + margin
+    val end = width - safe.right - margin
+    val top = safe.top + margin
+    val bottom = height - safe.bottom - margin
+    val roomBelow = max(0f, bottom - anchor.bottom - arrow)
+    val roomAbove = max(0f, anchor.top - top - arrow)
     val below = roomBelow >= size.idealHeight.toPx() || roomBelow >= roomAbove
     val room = if (below) roomBelow else roomAbove
-    val w = min(size.idealWidth.toPx(), width - 2 * margin).coerceAtLeast(min(size.minWidth.toPx(), width))
-    val h = min(size.idealHeight.toPx(), room).coerceAtLeast(min(size.minHeight.toPx(), height - top - bottom - arrow)) + arrow
-    val left = (anchor.center.x - w / 2).coerceIn(margin, max(margin, width - margin - w))
-    val y = if (below) anchor.bottom else anchor.top - h
+    val across = max(0f, end - start)
+    val w = min(size.idealWidth.toPx(), across).coerceAtLeast(min(size.minWidth.toPx(), across))
+    val h = min(size.idealHeight.toPx(), room).coerceAtLeast(min(size.minHeight.toPx(), room)) + arrow
+    val left = (anchor.center.x - w / 2).coerceIn(start, max(start, end - w))
+    // The arrow over or under the body: the body between the safe area's top and bottom.
+    val y = if (below) {
+        anchor.bottom.coerceIn(top - arrow, max(top - arrow, bottom - h))
+    } else {
+        (anchor.top - h).coerceIn(top, max(top, bottom - h + arrow))
+    }
     val bounds = Rect(left, y, left + w, y + h)
     return PopoverFrame(bounds, below, ((anchor.center.x - left) / w).coerceIn(0f, 1f))
 }

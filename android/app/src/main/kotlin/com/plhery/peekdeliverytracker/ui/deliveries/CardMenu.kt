@@ -29,6 +29,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
@@ -36,11 +37,11 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -282,19 +283,28 @@ internal fun CardMenuHost(state: DeliveriesState) {
 
 /**
  * Draws `content` over the window as the shell's layer `key` ([LocalTabOverlay]) while it isn't null, taking the latest
- * `content` each time it is drawn. Each composition here draws the layer again, as it would be drawn in place: the same
- * lambda with new captures, which Compose remembers as one, would otherwise leave the layer as it was.
+ * `content` each time it is drawn. Each composition here draws the whole layer again: `content` is the same lambda
+ * with new captures, which Compose remembers as one, and Compose drops that lambda's own redraw when this composes in
+ * the frame the layer was put in (a popover made again with the window, its source laid out that frame), so the layer
+ * would keep what it first drew.
  */
 @Composable
 internal fun OverlayLayer(host: TabOverlay, key: Any, content: (@Composable () -> Unit)?) {
-    val latest = remember { mutableStateOf(content, neverEqualPolicy()) }
-    latest.value = content
-    val current by latest
+    val latest = remember { mutableStateOf<LayerPass?>(null) }
+    latest.value = content?.let(::LayerPass)
     DisposableEffect(host, key, content != null) {
-        host.show(key, if (content != null) { { current?.invoke() } } else null)
+        val layer: @Composable () -> Unit = {
+            latest.value?.let { pass -> CompositionLocalProvider(LocalLayerPass provides pass) { pass.content() } }
+        }
+        host.show(key, if (content != null) layer else null)
         onDispose { host.show(key, null) }
     }
 }
+
+/** A composition of a layer's owner. Each is new, and a new one provided over the layer composes all of it again. */
+private class LayerPass(val content: @Composable () -> Unit)
+
+private val LocalLayerPass = staticCompositionLocalOf<LayerPass?> { null }
 
 /**
  * The card's menu (A-S41, A-G04): the screen dims, the card lifts in its shape, and the parcel's items stand beside it on

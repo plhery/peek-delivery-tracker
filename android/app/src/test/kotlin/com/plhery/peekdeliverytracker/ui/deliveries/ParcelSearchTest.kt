@@ -8,12 +8,16 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.platform.WindowInfo
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
@@ -41,6 +45,7 @@ import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
 import androidx.compose.ui.test.swipeUp
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
@@ -68,7 +73,7 @@ import kotlin.math.abs
  * The deliveries' search and filters (A-S27, A-S28, A-S98, B-S36): what a query, a status, a carrier and a sort show,
  * their chips and what clears them, the list with nothing to show, what is counted and when, the field's focus and the
  * keys, the filters' sheet at its heights and what dismisses it, the keyboard going as it comes up, their popover side
- * by side, TalkBack and their menu, and what a window made again or resized keeps.
+ * by side and in short windows, TalkBack and their menu, and what a window made again or resized keeps.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -80,6 +85,7 @@ class ParcelSearchTest {
     private lateinit var source: FakeDeliveries
     private lateinit var view: View
     private var width: Dp? by mutableStateOf(null)
+    private var windowWidth: Int? by mutableStateOf(null)
 
     private fun show(reduceMotion: Boolean = false, recreation: Recreation? = null, width: Dp? = null) {
         this.width = width
@@ -87,11 +93,15 @@ class ParcelSearchTest {
         val content = @androidx.compose.runtime.Composable {
             view = LocalView.current
             val shown = this.width
-            if (shown == null) {
-                RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = reduceMotion)
-            } else {
-                Box(Modifier.width(shown).fillMaxHeight()) {
+            val window = LocalWindowInfo.current
+            val resized = remember(window) { ResizedWindow(window) { windowWidth } }
+            CompositionLocalProvider(LocalWindowInfo provides resized) {
+                if (shown == null) {
                     RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = reduceMotion)
+                } else {
+                    Box(Modifier.width(shown).fillMaxHeight()) {
+                        RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = reduceMotion)
+                    }
                 }
             }
         }
@@ -551,6 +561,78 @@ class ParcelSearchTest {
     }
 
     @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun aPopoverInAWindowTurnedCompactIsASheet() {
+        show()
+        openFilters()
+        assertTrue(exists(FILTERS_POPOVER))
+        // Resized to 500 points across, as beside another app on a tablet.
+        windowWidth = 1000
+        compose.waitForIdle()
+        assertTrue(exists(FILTERS_SHEET))
+        assertFalse(exists(FILTERS_POPOVER))
+    }
+
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun aMenuOverThePopoverIsAllTalkBackReaches() {
+        show()
+        talkBack()
+        openFilters()
+        tap(FILTERS_CARRIER)
+        compose.onNodeWithTag(FILTERS_DONE).assertDoesNotExist()
+        compose.onNodeWithTag("$FILTERS_CARRIER.all").assertExists()
+    }
+
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun thePopoverMadeAgainWithTheWindowIsThereWithoutGrowingAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        openFilters()
+        val shown = popoverInWindow()
+        recreation.recreate()
+        // Its button is laid out in the first frame, the popover put back over the window in the next, and from the
+        // one after it stands by its button at its full size.
+        repeat(2) { compose.mainClock.advanceTimeByFrame() }
+        assertEquals(shown, popoverInWindow())
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertEquals(shown, popoverInWindow())
+    }
+
+    /** The popover's bounds in the window, as drawn, its scale as it grows included. */
+    private fun popoverInWindow() = compose.onNodeWithTag(FILTERS_POPOVER).fetchSemanticsNode().boundsInWindow
+
+    /** A window too short for the popover's least height under its button (B-S36). */
+    @Test
+    @Config(qualifiers = "w900dp-h520dp-xhdpi")
+    fun inAShortWindowThePopoverStaysInItAndScrolls() = popoverStaysInTheWindow()
+
+    /** A foldable open flat on its side. */
+    @Test
+    @Config(qualifiers = "w823dp-h707dp-xhdpi")
+    fun onAnOpenFoldablePopoverStaysInTheWindow() = popoverStaysInTheWindow()
+
+    private fun popoverStaysInTheWindow() {
+        show()
+        openFilters()
+        assertTrue(exists(FILTERS_POPOVER))
+        val window = compose.onRoot().getUnclippedBoundsInRoot()
+        val body = compose.onNodeWithTag(FILTERS_POPOVER).getUnclippedBoundsInRoot()
+        val button = compose.onNodeWithTag(FILTERS_BUTTON, useUnmergedTree = true).getUnclippedBoundsInRoot()
+        assertTrue("$body in $window", body.bottom <= window.bottom - 16.dp && body.top >= window.top)
+        // Its arrow points at the button: the body 13 under it, across from it.
+        assertEquals(button.bottom.value + 13f, body.top.value, 1f)
+        assertTrue("$button over $body", (button.left + button.right) / 2 in body.left..body.right)
+        // What doesn't fit scrolls into it.
+        compose.onNodeWithTag(FILTERS_CLEAR).performScrollTo()
+        compose.waitForIdle()
+        val clear = compose.onNodeWithTag(FILTERS_CLEAR).getUnclippedBoundsInRoot()
+        assertTrue("$clear in $body", clear.top >= body.top && clear.bottom <= body.bottom)
+    }
+
+    @Test
     fun theQueryAndTheFiltersOutliveTheWindowMadeAgainButNotANewLaunch() {
         val recreation = Recreation(compose)
         var launch by mutableStateOf(FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo))
@@ -637,4 +719,10 @@ class ParcelSearchTest {
     private fun assertEquals(expected: Float, actual: Float, tolerance: Float) {
         assertTrue("Expected $expected, was $actual", abs(expected - actual) <= tolerance)
     }
+}
+
+/** The activity's window, [width] pixels across while that isn't null, as a window resized beside another app. */
+private class ResizedWindow(private val window: WindowInfo, private val width: () -> Int?) : WindowInfo {
+    override val isWindowFocused: Boolean get() = window.isWindowFocused
+    override val containerSize: IntSize get() = width()?.let { IntSize(it, window.containerSize.height) } ?: window.containerSize
 }

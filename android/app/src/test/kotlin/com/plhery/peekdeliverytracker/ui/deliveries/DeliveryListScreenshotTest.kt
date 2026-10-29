@@ -120,7 +120,7 @@ class DeliveryListScreenshotTest {
         compose.waitForIdle()
     }
 
-    private fun scrollToThePast() = scrollTo("section-Delivered", { compose.onNodeWithText("Past deliveries") }, PAST_HEADER_TOP)
+    private fun scrollToThePast(top: Float) = scrollTo("section-Delivered", { compose.onNodeWithText("Past deliveries") }, top)
 
     private fun openTheArchive() {
         scrollToEnd()
@@ -155,14 +155,14 @@ class DeliveryListScreenshotTest {
     @Test
     fun scrolledToThePastDeliveries() {
         show()
-        scrollToThePast()
+        scrollToThePast(PAST_HEADER_TOP)
         compose.screenshot("list_past_light")
     }
 
     @Test
     fun scrolledToThePastDeliveriesInDark() {
         show(dark = true)
-        scrollToThePast()
+        scrollToThePast(PAST_HEADER_TOP_DARK)
         compose.screenshot("list_past_dark")
     }
 
@@ -244,5 +244,6 @@ class DeliveryListScreenshotTest {
     }
 }
 
-/** Where the capture shows the past deliveries' heading, from the window's top. */
+/** Where the captures show the past deliveries' heading, from the window's top: the dark one is scrolled less far. */
 private const val PAST_HEADER_TOP = 579.5f
+private const val PAST_HEADER_TOP_DARK = 657.2f

@@ -30,6 +30,8 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -51,6 +53,7 @@ import androidx.compose.ui.unit.max
 import androidx.core.view.ViewCompat
 import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowInfoTracker
+import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
@@ -122,12 +125,32 @@ val LocalTabReselection = staticCompositionLocalOf { TabReselection() }
 
 /**
  * What a tab draws over the whole window, its tab bar and the system's bars too, as an iPhone's context menu dims all
- * of the screen: the shell draws [content] last, and while it shows TalkBack reaches nothing under it. Null outside a
- * shell, where a tab draws it over itself.
+ * of the screen and a sheet comes up over the tab bar: the shell draws each layer last, in the order they came, and
+ * while one shows TalkBack reaches nothing under them. [backdrop] is what the shell's tab draws, for a layer's glass
+ * to show through. Null outside a shell, where a tab draws its layers over itself.
  */
 @Stable
-class TabOverlay {
-    var content: (@Composable () -> Unit)? by mutableStateOf(null)
+class TabOverlay(val backdrop: MaterialBackdrop? = null) {
+    private val layers = mutableStateListOf<Pair<Any, @Composable () -> Unit>>()
+
+    /** Draws `content` as the layer `key`, in its place if it shows already, or takes the layer away with null. */
+    fun show(key: Any, content: (@Composable () -> Unit)?) {
+        val index = layers.indexOfFirst { it.first == key }
+        when {
+            content == null -> if (index >= 0) layers.removeAt(index)
+            index >= 0 -> layers[index] = key to content
+            else -> layers += key to content
+        }
+    }
+
+    /** Whether a layer shows. */
+    val covered: Boolean get() = layers.isNotEmpty()
+
+    /** The layers, in the order they came. */
+    @Composable
+    fun Content() {
+        for ((key, content) in layers) key(key) { content() }
+    }
 }
 
 val LocalTabOverlay = staticCompositionLocalOf<TabOverlay?> { null }
@@ -169,7 +192,7 @@ fun TabShell(
     val tap = { tab: Int -> if (tab == selection) reselections[tab].reselect() else onSelect(tab) }
     val holder = rememberSaveableStateHolder()
     val backdrop = rememberMaterialBackdrop()
-    val overlay = remember { TabOverlay() }
+    val overlay = remember(backdrop) { TabOverlay(backdrop) }
     val density = LocalDensity.current
     BoxWithConstraints(modifier.fillMaxSize()) {
         val top = maxWidth >= 600.dp && maxHeight >= 480.dp
@@ -182,9 +205,8 @@ fun TabShell(
         val footprint = if (top) PaddingValues(top = topGap + TOP_BAR_HEIGHT) else PaddingValues(bottom = bottomGap + BOTTOM_BAR_HEIGHT)
         val windowHinge = windowHinge(constraints.maxWidth)
         val hinge = windowHinge?.start
-        val covered = overlay.content
-        // Under what a tab draws over the window, which is modal, as the iPhone's menus and alerts are.
-        val hidden = if (covered != null) Modifier.clearAndSetSemantics {} else Modifier
+        // Under what a tab draws over the window, which is modal, as the iPhone's menus, alerts and sheets are.
+        val hidden = if (overlay.covered) Modifier.clearAndSetSemantics {} else Modifier
         Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background).then(hidden)) {
             CompositionLocalProvider(
                 LocalTabBarPadding provides footprint,
@@ -206,7 +228,7 @@ fun TabShell(
                 Modifier.align(Alignment.BottomStart).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(hidden),
             )
         }
-        covered?.invoke()
+        overlay.Content()
     }
 }
 

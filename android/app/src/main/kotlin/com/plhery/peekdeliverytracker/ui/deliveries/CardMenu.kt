@@ -95,6 +95,7 @@ import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
+import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.Motion
@@ -275,10 +276,19 @@ internal fun CardMenuHost(state: DeliveriesState) {
         content?.invoke()
         return
     }
+    OverlayLayer(host, CARD_MENU, content)
+}
+
+/**
+ * Draws `content` over the window as the shell's layer `key` ([LocalTabOverlay]) while it isn't null, taking the latest
+ * `content` each time it is drawn.
+ */
+@Composable
+internal fun OverlayLayer(host: TabOverlay, key: Any, content: (@Composable () -> Unit)?) {
     val current by rememberUpdatedState(content)
-    DisposableEffect(host, content != null) {
-        host.content = if (content != null) { { current?.invoke() } } else null
-        onDispose { host.content = null }
+    DisposableEffect(host, key, content != null) {
+        host.show(key, if (content != null) { { current?.invoke() } } else null)
+        onDispose { host.show(key, null) }
     }
 }
 

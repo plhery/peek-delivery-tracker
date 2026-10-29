@@ -4287,7 +4287,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-28</lastmod>
+<lastmod>2026-10-30</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers</loc>
@@ -8026,6 +8026,18 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/mayi-yinfu-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mayi-yinfu-tracking" />
 <lastmod>2026-10-28</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/jrt-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jrt-tracking" />
+<lastmod>2026-10-30</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/tianhui-hengyuan-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tianhui-hengyuan-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tianhui-hengyuan-tracking" />
+<lastmod>2026-10-30</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/privacy.html</loc>

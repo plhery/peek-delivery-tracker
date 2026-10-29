@@ -129,50 +129,26 @@
   },
   {
     "input": "0000000001859168",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "a-tu-hora-express",
+    "confidence": "high",
     "candidates": [
-      "dhl-ecommerce",
-      "tnt",
       "a-tu-hora-express"
-    ],
-    "asked": [
-      "tnt",
-      "dhl-ecommerce"
     ]
   },
   {
     "input": "0000000004586051",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "a-tu-hora-express",
+    "confidence": "high",
     "candidates": [
-      "dhl-ecommerce",
-      "tnt",
       "a-tu-hora-express"
-    ],
-    "asked": [
-      "tnt",
-      "dhl-ecommerce"
     ]
   },
   {
     "input": "0000000007077432",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "a-tu-hora-express",
+    "confidence": "high",
     "candidates": [
-      "dhl-ecommerce",
-      "correos-express",
-      "canada-post",
-      "tnt",
-      "a-tu-hora-express",
-      "evri-uk"
-    ],
-    "asked": [
-      "correos-express",
-      "evri-uk",
-      "canada-post",
-      "tnt",
-      "dhl-ecommerce"
+      "a-tu-hora-express"
     ]
   },
   {
@@ -222,58 +198,34 @@
   },
   {
     "input": "0000000012987742",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "a-tu-hora-express",
+    "confidence": "high",
     "candidates": [
-      "dhl-ecommerce",
-      "tnt",
       "a-tu-hora-express"
-    ],
-    "asked": [
-      "tnt",
-      "dhl-ecommerce"
     ]
   },
   {
     "input": "0000004900449811",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "a-tu-hora-express",
+    "confidence": "high",
     "candidates": [
-      "dhl-ecommerce",
-      "tnt",
       "a-tu-hora-express"
-    ],
-    "asked": [
-      "tnt",
-      "dhl-ecommerce"
     ]
   },
   {
     "input": "0000004902744782",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "a-tu-hora-express",
+    "confidence": "high",
     "candidates": [
-      "dhl-ecommerce",
-      "tnt",
       "a-tu-hora-express"
-    ],
-    "asked": [
-      "tnt",
-      "dhl-ecommerce"
     ]
   },
   {
     "input": "0000007713637037",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "a-tu-hora-express",
+    "confidence": "high",
     "candidates": [
-      "dhl-ecommerce",
-      "tnt",
       "a-tu-hora-express"
-    ],
-    "asked": [
-      "tnt",
-      "dhl-ecommerce"
     ]
   },
   {

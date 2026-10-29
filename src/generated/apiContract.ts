@@ -403,6 +403,7 @@ export const CARRIER_CAPABILITIES = {
           "whenTrackingNumber": "^(?=.{13}$|.{15}$)3S[A-Z]{1,4}[0-9]+$",
           "validator": "internationalPostcode",
           "optional": true,
+          "readsCountry": true,
           "label": "Delivery postcode",
           "type": "text",
           "placeholder": "1234 AB",
@@ -1057,6 +1058,7 @@ export const CARRIER_CAPABILITIES = {
           "field": "dpdPostcode",
           "validator": "internationalPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Delivery postcode",
           "type": "text",
           "help": "Optional. DPD uses it to unlock verified scans and the delivery window.",
@@ -1180,6 +1182,7 @@ export const CARRIER_CAPABILITIES = {
           "field": "dpdPostcode",
           "whenTrackingNumber": "^[0-9]{8}$",
           "validator": "internationalPostcode",
+          "readsCountry": true,
           "label": "Delivery postcode",
           "type": "text",
           "help": "8-digit Mondial Relay shipment numbers require the recipient postcode; longer numbers and label barcodes do not.",
@@ -1736,6 +1739,7 @@ export const CARRIER_CAPABILITIES = {
           "field": "dpdPostcode",
           "validator": "paackPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Delivery postcode",
           "type": "text",
           "placeholder": "75001",
@@ -1808,6 +1812,7 @@ export const CARRIER_CAPABILITIES = {
           "field": "dpdPostcode",
           "validator": "internationalPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Delivery postcode",
           "type": "text",
           "help": "Optional. Asendia's European tracker shows the scans only with the delivery postcode; without it, the current status.",
@@ -5357,6 +5362,7 @@ export const CARRIER_CAPABILITIES = {
         {
           "field": "dpdPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Delivery postcode",
           "type": "text",
           "placeholder": "10115",
@@ -6821,6 +6827,7 @@ export const CARRIER_CAPABILITIES = {
           "whenTrackingNumber": "^(?:[A-Z]\\d{7}|\\d{8})$",
           "validator": "internationalPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Delivery postcode",
           "type": "text",
           "placeholder": "SW1A 1AA",
@@ -7046,6 +7053,7 @@ export const CARRIER_CAPABILITIES = {
           "field": "dpdPostcode",
           "validator": "internationalPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Sender or recipient postcode",
           "type": "text",
           "help": "Gebrüder Weiss shows a shipment only with its sender's or recipient's postcode. Without it, other sources are asked.",
@@ -8173,6 +8181,7 @@ export const CARRIER_CAPABILITIES = {
           "field": "dpdPostcode",
           "validator": "internationalPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Delivery or collection postcode",
           "type": "text",
           "help": "XDP shows a consignment only with its delivery or collection postcode. Without it, other sources are asked.",
@@ -10121,6 +10130,7 @@ export const CARRIER_CAPABILITIES = {
           "field": "dpdPostcode",
           "validator": "internationalPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Delivery postcode",
           "type": "text",
           "placeholder": "SW1A 1AA",
@@ -22881,6 +22891,7 @@ export const CARRIER_CAPABILITIES = {
           "whenTrackingNumber": "^RELR[A-Z0-9]{8}$",
           "validator": "internationalPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Delivery postcode",
           "type": "text",
           "placeholder": "SW1A 1AA",
@@ -23561,7 +23572,7 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "dpd-pt",
       "recognitionRank": 815
     },
-    "trackingUrlTemplate": "https://tracking.dpd.pt/track-and-trace?reference={trackingNumber}",
+    "trackingUrlTemplate": "https://tracking.dpd.pt/?reference={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -23607,7 +23618,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "dpd"
       }
     ],
-    "trackingSearchUrl": "https://tracking.dpd.pt/track-and-trace"
+    "trackingSearchUrl": "https://tracking.dpd.pt/"
   },
   "gls-pl": {
     "displayName": "GLS Poland",
@@ -23628,6 +23639,7 @@ export const CARRIER_CAPABILITIES = {
         {
           "field": "dpdPostcode",
           "optional": true,
+          "showsMore": true,
           "validator": "internationalPostcode",
           "label": "Delivery postcode",
           "type": "text",
@@ -24744,6 +24756,7 @@ export const CARRIER_CAPABILITIES = {
         {
           "field": "dpdPostcode",
           "optional": true,
+          "showsMore": true,
           "validator": "internationalPostcode",
           "label": "Delivery postcode",
           "type": "text",
@@ -27330,6 +27343,7 @@ export const CARRIER_CAPABILITIES = {
           "whenTrackingNumber": "^(?:[0-9]{10}|[0-9]{16})$",
           "validator": "internationalPostcode",
           "optional": true,
+          "showsMore": true,
           "label": "Delivery postcode",
           "type": "text",
           "placeholder": "12345",
@@ -27347,7 +27361,7 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^0{6}\\d{10}$",
-        "confidence": "low"
+        "confidence": "high"
       },
       {
         "pattern": "^0{6}\\d{10}001\\d{5}$",

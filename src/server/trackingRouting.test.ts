@@ -1357,8 +1357,9 @@ describe('persistent tracking routing', () => {
       expect(result.result).toMatchObject({ auto_changed_from: 'asendia', auto_changed_to: 'dpd' });
     });
     it('keeps a parcel whose provider-named carrier answers with the filed carrier\'s codes', async () => {
-      // Sixteen digits fit Correos Express, not Correos, whose localizador lists Correos Express's scans too.
-      const number = '0000000000000017';
+      // Sixteen digits fit Correos Express, not Correos, whose localizador lists Correos Express's scans too. Six
+      // zeros first would be A Tu Hora Express's.
+      const number = '0000010000000016';
       const answer = (code: string, description: string): RoutedResult => ({ sourceCarrierId: 'correos-spain', swissPostReady: null,
         handoffFallbackErrorType: null, result: { ...history(), events: [{ time: '2026-09-10T11:00:00Z', description, stage: 'in_transit', provider_code: code }] } });
       const filed = parcel({ carrier: 'correos-express', tracking_number: number, carrier_data: {

@@ -11,6 +11,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -89,6 +90,18 @@ class PeekTypography(val size: DynamicTypeSize, private val density: Density) {
 /** `.monospacedDigit()`: figures of one width, so counts and times don't shift as they change. */
 fun TextStyle.monospacedDigit(): TextStyle =
     copy(fontFeatureSettings = listOfNotNull(fontFeatureSettings, "tnum").joinToString(", "))
+
+/**
+ * A line as tall as SwiftUI's: SF's ascender and descender, 1.193 em, where Roboto's make 1.172, with the baseline
+ * where SF's stands, so a stack of text is as tall as the iPhone's and each line sits where its line does there.
+ */
+fun TextStyle.sfLines(): TextStyle = copy(
+    lineHeight = SF_LINE_HEIGHT.em,
+    lineHeightStyle = LineHeightStyle(alignment = LineHeightStyle.Alignment.Bottom, trim = LineHeightStyle.Trim.None),
+)
+
+/** SF Pro's ascender and descender (1950 and 494 of its 2048 units), the height of a line of SwiftUI's text. */
+private const val SF_LINE_HEIGHT = (1950f + 494f) / 2048f
 
 /** `.italic()`: the font's italic, keeping the upright's letter spacing. */
 fun TextStyle.italic(): TextStyle = copy(fontStyle = FontStyle.Italic)

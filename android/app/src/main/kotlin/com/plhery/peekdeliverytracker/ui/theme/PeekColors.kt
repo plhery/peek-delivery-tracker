@@ -47,6 +47,12 @@ object SystemColors {
         darkHighContrast = rgb(235, 235, 245, 0.549),
     )
     val separator = AdaptiveColor(rgb(60, 60, 67, 0.12), rgb(84, 84, 88, 0.5))
+
+    /**
+     * SwiftUI's `Divider()`, a pixel high: still the separator as iOS 18 drew it, which iOS 27's screenshots show as
+     * #C6C6C8 on white.
+     */
+    val divider = AdaptiveColor(rgb(60, 60, 67, 0.29), rgb(84, 84, 88, 0.6))
     val red = AdaptiveColor(
         light = rgb(255, 56, 60),
         dark = rgb(255, 66, 69),
@@ -87,6 +93,7 @@ class PeekColors(val dark: Boolean, val highContrast: Boolean = false) {
     val warningSoft = resolve(Brand.warningSoft)
     val background = resolve(Brand.background)
     val separator = resolve(SystemColors.separator)
+    val divider = resolve(SystemColors.divider)
     val label = resolve(SystemColors.label)
     val secondaryLabel = resolve(SystemColors.secondaryLabel)
     val tertiaryLabel = resolve(SystemColors.tertiaryLabel)

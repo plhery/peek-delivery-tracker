@@ -632,7 +632,6 @@ struct ParcelDetailView: View {
         .accessibilityElement(children: .contain)
     }
 
-    /// Where the parcel waits for collection, with a way to get there.
     /// After a missed delivery or a problem, or while customs asks the reader for something, the carrier waits on the reader:
     /// the page says so and quotes it.
     private func carrierWaits(_ parcel: Parcel) -> TrackingEvent? {
@@ -660,6 +659,7 @@ struct ParcelDetailView: View {
         .accessibilityElement(children: .combine)
     }
 
+    /// Where the parcel waits for collection, with a way to get there.
     private func pickupPointCard(_ point: PickupPoint, identity: CarrierVisualIdentity) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .top, spacing: 12) {

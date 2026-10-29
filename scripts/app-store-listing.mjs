@@ -23,6 +23,8 @@ const LISTING = new URL('../docs/app-store/listing/', import.meta.url);
 const README = new URL('../docs/app-store/README.md', import.meta.url);
 const PROJECT = new URL('../ios/PeekDeliveryTracker.xcodeproj/project.pbxproj', import.meta.url);
 const CATEGORIES = { primaryCategory: 'UTILITIES', secondaryCategory: 'SHOPPING' };
+/** The review contact, set by hand in App Store Connect: it stays out of this repository. */
+const REVIEW_CONTACT = ['contactFirstName', 'contactLastName', 'contactPhone', 'contactEmail'];
 const URLS = {
   privacyPolicyUrl: 'https://peektracker.com/privacy.html',
   supportUrl: 'https://peektracker.com/support.html',
@@ -216,6 +218,7 @@ export async function syncListing({ api, apply = false, listings, notes, version
   const keptNotes = detail?.attributes.notes?.startsWith(notes);
   await write(upsert('appStoreReviewDetails', detail, { ...(!keptNotes && { notes }), demoAccountRequired: false },
     { appStoreVersion: version }, 'review'));
+  if (!REVIEW_CONTACT.every(field => detail?.attributes[field])) log('In App Store Connect, add the review contact details.');
   return writes;
 }
 
@@ -283,7 +286,7 @@ async function main() {
   const writes = await syncListing({ api, apply: values.apply, listings, notes, versionString: values.version, copyright: values.copyright });
   if (!writes.length) console.log('Nothing to change.');
   else console.log(values.apply ? `Sent ${writes.length} changes.` : `Dry run: ${writes.length} changes. Re-run with --apply to send them.`);
-  console.log('In App Store Connect, add the review contact details. A parcel of your own can follow the last line of the review notes.');
+  console.log('A parcel of your own can follow the last line of the review notes.');
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

@@ -162,6 +162,20 @@ describe('a dry run', () => {
     assert.ok(!writes.some(write => write.path.startsWith('/v1/appStoreReviewDetails')));
   });
 
+  it('asks for the review contact only while it is missing', async () => {
+    const reminded = async attributes => {
+      const { api } = fakeApi({ ...routes, '/v1/appStoreVersions/version-1/appStoreReviewDetail': { type: 'appStoreReviewDetails',
+        id: 'review-1', attributes: { notes, demoAccountRequired: false, ...attributes } } });
+      const lines = [];
+      await sync(api, { log: line => lines.push(line) });
+      return lines.some(line => line.includes('review contact'));
+    };
+    const contact = { contactFirstName: 'Sam', contactLastName: 'Example', contactPhone: '+41 00 000 00 00', contactEmail: 'review@example.com' };
+    assert.equal(await reminded({}), true);
+    assert.equal(await reminded({ ...contact, contactPhone: null }), true);
+    assert.equal(await reminded(contact), false);
+  });
+
   it('stops when the app record does not exist', async () => {
     const { api } = fakeApi({ ...routes, '/v1/apps': [] });
     await assert.rejects(sync(api), /no app com\.plhery\.PeekDeliveryTracker\. Create the app record first/);

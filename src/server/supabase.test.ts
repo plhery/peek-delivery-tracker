@@ -91,7 +91,7 @@ describe('guarded tracking writes', () => {
     await user.listPackages();
     await user.listActivePackages();
 
-    const identities = `${STORED_EVENT_IDENTITIES}:tracking_events(provider_event_id,occurred_at,stage,description,location,time:raw_data->>time,provider_code:raw_data->>provider_code,observed_without_provider_timestamp:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,local_time:raw_data->>local_time,time_zone_basis:raw_data->>time_zone_basis,time_provenance:raw_data->>time_provenance,provider_time_iso:raw_data->>provider_time_iso,retimed_from:raw_data->>retimed_from,created_at)`;
+    const identities = `${STORED_EVENT_IDENTITIES}:tracking_events(provider_event_id,occurred_at,stage,description,location,time:raw_data->>time,provider_code:raw_data->>provider_code,observed_without_provider_timestamp:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,local_time:raw_data->>local_time,time_zone_basis:raw_data->>time_zone_basis,time_provenance:raw_data->>time_provenance,provider_time_iso:raw_data->>provider_time_iso,retimed_from:raw_data->>retimed_from,stage_source:raw_data->>stage_source,created_at)`;
     expect(select(serviceRequest, 0).endsWith(`,owner_locale,${identities}`)).toBe(true);
     expect(select(serviceRequest, 1).endsWith(`,owner_locale,${identities}`)).toBe(true);
     // The API's package shape reads provider_event_id only to tell Peek's own rows, and the stored times

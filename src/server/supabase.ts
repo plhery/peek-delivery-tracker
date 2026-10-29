@@ -46,7 +46,7 @@ const ACTIVE_PACKAGE_SELECT = 'id,user_id,tracking_number,label,carrier,current_
  * mapper reads it.
  */
 export const STORED_EVENT_IDENTITIES = 'stored_event_identities';
-const SYNC_EVENT_IDENTITIES = `${STORED_EVENT_IDENTITIES}:tracking_events(provider_event_id,occurred_at,stage,description,location,time:raw_data->>time,provider_code:raw_data->>provider_code,observed_without_provider_timestamp:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,local_time:raw_data->>local_time,time_zone_basis:raw_data->>time_zone_basis,time_provenance:raw_data->>time_provenance,provider_time_iso:raw_data->>provider_time_iso,retimed_from:raw_data->>retimed_from,created_at)`;
+const SYNC_EVENT_IDENTITIES = `${STORED_EVENT_IDENTITIES}:tracking_events(provider_event_id,occurred_at,stage,description,location,time:raw_data->>time,provider_code:raw_data->>provider_code,observed_without_provider_timestamp:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,local_time:raw_data->>local_time,time_zone_basis:raw_data->>time_zone_basis,time_provenance:raw_data->>time_provenance,provider_time_iso:raw_data->>provider_time_iso,retimed_from:raw_data->>retimed_from,stage_source:raw_data->>stage_source,created_at)`;
 /**
  * What the sync loaders read besides the parcel's columns: the owner's app language (a computed
  * field, migration 20261025180000), in which a carrier that words its scans in several languages

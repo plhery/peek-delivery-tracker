@@ -623,6 +623,19 @@ describe('a scan its source rewords', () => {
     }
   });
 
+  it('takes over, in any stage, a row that had no stage of its own: a release gives the words in English and maps them', () => {
+    // Stored as the fallback while no map read the carrier's words; the next release renders and stages them.
+    const unread = at('meso:unread', '2026-10-27T15:18:00Z', '等待清关', 'in_transit', { stage_source: 'none' });
+    const rendered = at('meso:rendered', '2026-10-27T15:18:00Z', 'Awaiting customs clearance', 'customs');
+    expect(pairs(rewordedScans([rendered], [unread]))).toEqual([['meso:rendered', 'meso:unread']]);
+    // The same as a raw field, as a batch row carries it.
+    expect(rewordedScans([rendered], [{ ...unread, stage_source: undefined, raw_data: { time: '2026-10-27T15:18:00Z', stage_source: 'none' } }]).size).toBe(1);
+    // A row in a stage of its own still needs the same stage.
+    expect(rewordedScans([rendered], [{ ...unread, stage_source: 'carrier_map' }]).size).toBe(0);
+    // Beside a row of the scan's stage at that instant, neither is taken.
+    expect(rewordedScans([rendered], [unread, at('meso:customs', '2026-10-27T15:18:00Z', 'Customs', 'customs')]).size).toBe(0);
+  });
+
   it('leaves two new scans or two rows of one instant and stage alone, and scans and rows another rule matched', () => {
     const second = at('dpd-uk:missed-second', '2026-10-27T15:18:00Z', 'Calling card left', 'failed_attempt');
     expect(rewordedScans([out, reworded, second, delivered], stored).size).toBe(0);

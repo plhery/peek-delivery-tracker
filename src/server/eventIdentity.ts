@@ -528,6 +528,11 @@ function observedOnly(row: JsonObject): boolean {
     || (isRecord(row.raw_data) && row.raw_data.observed_without_provider_timestamp === true);
 }
 
+/** A row stored with no stage of its own: no map or rule read its words, or it is a notice keeping the stage before it. */
+function stageless(row: JsonObject): boolean {
+  return (row.stage_source ?? (isRecord(row.raw_data) ? row.raw_data.stage_source : undefined)) === 'none';
+}
+
 /** A scan dated by its day alone: it stands at the start of that day, with no clock that could be off. */
 function dayAlone(row: JsonObject): boolean {
   return scanDay(isRecord(row.raw_data) ? row.raw_data : row) !== null;
@@ -801,7 +806,9 @@ export function retimedScans(
  * Maps the computed identity of each new scan to the stored row of its old wording: a source
  * rewords a scan it lists and no longer lists the old words (DPD UK rewrote a failed attempt
  * when it delivered the parcel). The row is of the same source, at the same instant and in the
- * same stage, with codes that agree when both carry one, and no scan of the answer carries it.
+ * same stage, or in any stage when it had none of its own (a release that gives a carrier's
+ * words in English and maps them), with codes that agree when both carry one, and no scan of
+ * the answer carries it.
  * Scans and rows another rule matched, observations, scans dated by their day alone and
  * universal or app rows are left out, and the match is one to one: two new scans, or two rows,
  * of one instant and stage are scans of their own.
@@ -822,7 +829,7 @@ export function rewordedScans(
   const scans = events.filter((scan) => own(scan) && !storedIds.has(identity(scan)) && !matched.has(identity(scan)));
   const rows = stored.filter((row) => own(row) && !listed.has(identity(row)));
   const alike = (scan: JsonObject, row: JsonObject) => sourceOf(identity(scan)) === sourceOf(identity(row))
-    && instantOf(scan) === instantOf(row) && stageOf(scan) === stageOf(row) && codesAgree(scan, row);
+    && instantOf(scan) === instantOf(row) && (stageOf(scan) === stageOf(row) || stageless(row)) && codesAgree(scan, row);
   for (const scan of scans) {
     const matching = rows.filter((row) => alike(scan, row));
     if (matching.length !== 1) continue;

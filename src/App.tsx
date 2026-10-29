@@ -65,6 +65,9 @@ const PARCEL_VIEW_CONTROLS_ID = 'parcel-view-controls';
 const ATTENTION_LABELS: Record<ParcelAttention, MessageKey> = {
   sync_error: 'attention.sync_error',
   failed_attempt: 'attention.failed_attempt',
+  customs_tax_id: 'attention.customs_tax_id',
+  customs_duties: 'attention.customs_duties',
+  customs_documents: 'attention.customs_documents',
   ready_for_pickup: 'attention.ready_for_pickup',
   exception: 'attention.exception',
   customs: 'attention.customs',

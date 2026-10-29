@@ -41,9 +41,10 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
   const hero = variant === 'hero';
   // Next up draws its route across the card; every other card carries it small, at its end.
   const { placed, route } = useParcelRoute(parcel, languageTag);
-  // Customs and a pickup say all they need in the status line; after a missed delivery or a problem, the carrier waits on the reader.
-  const carrierIssue = ['customs', 'ready_for_pickup'].includes(current?.stage ?? '');
-  const actionNeeded = ['failed_attempt', 'exception'].includes(current?.stage ?? '');
+  // Customs and a pickup say all they need in the status line; after a missed delivery or a problem, or while customs asks
+  // the reader for something, the carrier waits on the reader.
+  const actionNeeded = Boolean(current?.recipientAction) || ['failed_attempt', 'exception'].includes(current?.stage ?? '');
+  const carrierIssue = !actionNeeded && ['customs', 'ready_for_pickup'].includes(current?.stage ?? '');
   // A number to check says so in the status line: no update was missed.
   const flag = (notice && !carrierIssue ? notice : null)
     ?? (parcel.syncStatus === 'error' && !numberToCheck(parcel.syncError) ? t('attention.sync_error') : null);

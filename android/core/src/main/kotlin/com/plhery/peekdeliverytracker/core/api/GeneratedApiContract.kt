@@ -1886,6 +1886,18 @@ enum class SyncStatus(val rawValue: String) {
 }
 
 @Serializable
+enum class RecipientAction(val rawValue: String) {
+    @SerialName("tax_id") TaxId("tax_id"),
+    @SerialName("duties") Duties("duties"),
+    @SerialName("documents") Documents("documents"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): RecipientAction? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
 data class EventPlace(
     val latitude: Double,
     val longitude: Double,
@@ -1929,6 +1941,7 @@ data class TrackingEvent(
     val day: String? = null,
     val place: EventPlace? = null,
     @SerialName("relay_of") val relayOf: UUID? = null,
+    @SerialName("recipient_action") val recipientAction: RecipientAction? = null,
 )
 
 @Serializable

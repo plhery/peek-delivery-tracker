@@ -107,6 +107,7 @@ export function toEvent(row: ApiTrackingEventRow): TrackingEvent {
     occurredAt: row.occurred_at,
     day: row.day ?? undefined,
     relayOf: row.relay_of ?? undefined,
+    recipientAction: row.recipient_action ?? undefined,
   };
 }
 

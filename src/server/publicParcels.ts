@@ -431,6 +431,7 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
     occurred_at: String(event.occurred_at),
     place: (isRecord(event.place) ? event.place : null) as ApiTrackingEventRow['place'],
     ...(typeof event.relay_of === 'string' ? { relay_of: event.relay_of } : {}),
+    ...(typeof event.recipient_action === 'string' ? { recipient_action: event.recipient_action as ApiTrackingEventRow['recipient_action'] } : {}),
   }));
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   const destination = typeof carrierData.destination_country === 'string' && /^[A-Za-z]{2}$/.test(carrierData.destination_country)

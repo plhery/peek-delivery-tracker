@@ -1879,6 +1879,14 @@ enum SyncStatus: String, Codable, CaseIterable, Hashable, Sendable, Identifiable
     var id: String { rawValue }
 }
 
+enum RecipientAction: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case taxID = "tax_id"
+    case duties
+    case documents
+
+    var id: String { rawValue }
+}
+
 struct EventPlace: Codable, Equatable, Hashable, Sendable {
     var latitude: Double
     var longitude: Double
@@ -1918,6 +1926,7 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
     var day: String? = nil
     var place: EventPlace? = nil
     var relayOf: UUID? = nil
+    var recipientAction: RecipientAction? = nil
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -1929,6 +1938,7 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
         case day
         case place
         case relayOf
+        case recipientAction
     }
 }
 

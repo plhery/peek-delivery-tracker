@@ -38882,6 +38882,14 @@
           "unsupported"
         ]
       },
+      "RecipientAction": {
+        "type": "string",
+        "enum": [
+          "tax_id",
+          "duties",
+          "documents"
+        ]
+      },
       "EventPlace": {
         "type": "object",
         "additionalProperties": false,
@@ -39066,6 +39074,10 @@
             "type": "string",
             "format": "uuid",
             "description": "Set on a scan shown under another, with that scan's id. One scan of a relay pair, a scan of the carrier the parcel was handed over from that repeats a scan of another source (at the same stage within a minute, or in any stage at the same second, or to the minute when one of the two keeps no seconds): set on the copy, or on the scan it repeats when only the copy has a location or only the copy tells a problem. Or a carrier's repeat of its own scan, in the same stage, words and place right after it and within an hour of the first: set on each but the newest. Apps show the scan with relay_of under the other rather than as a step of its own, and keep its words visible when they differ, since it may be a scan of its own."
+          },
+          "recipient_action": {
+            "$ref": "#/components/schemas/RecipientAction",
+            "description": "Set on a scan whose carrier asks the recipient to act before the parcel moves on, in one of the customs wordings that say so explicitly: tax_id give their tax number (such as Brazil's CPF or CNPJ), duties pay the import duties or taxes, documents send customs documents. Apps flag the parcel as needing action while this scan is its newest, and quote the scan's description."
           }
         }
       },

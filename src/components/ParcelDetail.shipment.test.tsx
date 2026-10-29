@@ -136,6 +136,13 @@ describe('shipment details', () => {
     expect(screen.queryByText('What Heppner says')).not.toBeInTheDocument();
   });
 
+  it('flags a customs request waiting on the reader and quotes it', () => {
+    show({ events: [{ id: 'held', parcelId: 'parcel', stage: 'customs', description: 'Need to inform recipient\'s CPF/CNPJ',
+      occurredAt: '2026-09-11T12:00:00Z', recipientAction: 'tax_id' }] });
+    expect(screen.getByText('Customs needs your tax number')).toHaveClass('detail__flag');
+    expect(screen.getByRole('note').querySelector('blockquote')).toHaveTextContent(/^Need to inform recipient's CPF\/CNPJ$/);
+  });
+
   it('keeps the flag and the carrier\'s words off a parcel on its way', () => {
     show({ events: [{ id: 'moving', parcelId: 'parcel', stage: 'in_transit', description: 'Sorted', occurredAt: '2026-09-11T12:00:00Z' }] });
     expect(document.querySelector('.detail__flag')).toBeNull();

@@ -2,7 +2,7 @@ import 'server-only';
 
 import { EVENT_STAGE_ORDER } from '../lib/stages';
 import { captureOperationalError } from './observability';
-import { CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
+import { CARRIER_DEFINITIONS, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
 import { clockDay, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
@@ -20,15 +20,27 @@ let reported = false;
  * a carrier's repeat of a scan the newest of its run (scanRepeats.ts). A
  * scan dated by its day alone names that day. A stage change Peek saw with no
  * words from the carrier (AliExpress's undated record) is served without
- * Peek's stand-in, so the apps name the stage.
+ * Peek's stand-in, so the apps name the stage. A scan in which the carrier asks
+ * the recipient to act names what (`recipient_action`, see `scanAction`).
  */
 function served(event: JsonObject, relayOf?: string): JsonObject {
+  const action = scanAction(event);
   const rest: JsonObject = { ...dated(event), ...(relayOf ? { relay_of: relayOf } : {}),
     ...(event.observed === true && event.description === UNWORDED_STEP ? { description: '' } : {}) };
   delete rest.point;
   delete rest.provider_event_id;
   delete rest.universal_provider;
-  return rest;
+  delete rest.recipient_action;
+  return action ? { ...rest, recipient_action: action } : rest;
+}
+
+/**
+ * What a scan asks its recipient to do: as the scraper flagged it when the scan was stored, which
+ * a carrier's own code can set too (UPS), or, for a row stored before the flag, as its words say.
+ */
+function scanAction(event: JsonObject): string | undefined {
+  return RECIPIENT_ACTIONS.find((action) => action === event.recipient_action)
+    ?? recipientAction(typeof event.description === 'string' ? event.description : null);
 }
 
 /**

@@ -252,6 +252,23 @@ describe('what a link shows', () => {
     expect(shown[0]).not.toHaveProperty('relay_of');
   });
 
+  it('says what a customs scan asks its recipient to do, as the view stored it or as its words say', () => {
+    const scan = (id: string, description: string, recipient_action: string | null, occurred_at: string) => ({ id, package_id: 'parcel',
+      stage: 'customs', description, location: null, occurred_at, provider_event_id: `ups:${id}`, point: null, recipient_action });
+    const shown = publicParcelResponse({
+      link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-02T08:00:00Z', forget_at: null },
+      package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'ups', sync_status: 'ok', created_at: '2026-10-02T08:00:00Z',
+        carrier_data: {}, tracking_events: [
+          scan('coded', 'Held: duties are due', 'duties', '2026-10-02T07:00:00+00:00'),
+          scan('worded', 'Waiting for shipment documents from the customer', null, '2026-10-02T09:00:00+00:00'),
+          scan('cleared', 'Released by customs', null, '2026-10-02T10:00:00+00:00'),
+        ] },
+    }, alerts).package.tracking_events;
+    expect(shown.map(({ id, recipient_action }) => [id, recipient_action])).toEqual([
+      ['coded', 'duties'], ['worded', 'documents'], ['cleared', undefined]]);
+    expect(shown[2]).not.toHaveProperty('recipient_action');
+  });
+
   it('answers with the shapes the web and iPhone clients decode from the shared fixture', () => {
     const { publicParcel, publicLookup, publicGiftParcel } = contractFixture;
     const stored = {

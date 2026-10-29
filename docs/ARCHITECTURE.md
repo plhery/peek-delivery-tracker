@@ -360,6 +360,11 @@ and nothing typed is sent.
   (`EVENT_STAGE_ORDER` in `src/lib/stages.ts`), then by id, in the timeline, the map and
   the stage a check picks; a check reads its answer's ties in the carrier's order, which
   is not stored.
+- **A customs request**: a scan in which the carrier asks the recipient to give a tax number,
+  pay import duties or taxes, or send documents is served with `recipient_action`, as the
+  scraper flagged it when the scan was stored, or, for a row stored before the flag, as its
+  words say. While it is the parcel's newest scan, the web shows the parcel as needing action,
+  as after a missed delivery, and quotes the carrier's words; a later scan clears it.
 - **A pickup point** is named by most carriers only while the parcel waits there. A
   delivered parcel keeps the point it was collected from once the carrier stops naming it,
   so the apps and its links still say where: its last movement before the delivery made

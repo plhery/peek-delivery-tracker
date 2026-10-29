@@ -181,7 +181,7 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
   }
   if (flag === 'stalled') notes.push(quietNote(parcel, carrier, t, locale));
   if (flag === 'generated') notes.push({ id: 'generated', icon: <Glyph name="warning" />, body: t('link.generated', { carrier: carrier.name }), paper: true });
-  if ((stage === 'exception' || stage === 'failed_attempt') && scan?.description.trim()) {
+  if ((stage === 'exception' || stage === 'failed_attempt' || scan?.recipientAction) && scan?.description.trim()) {
     notes.push({ id: 'says', icon: <Glyph name="info" />, title: t('link.carrierSays', { carrier: carrier.name }), body: scan.description.trim(), quoted: true, paper: true });
   }
   if (stage === 'returned') notes.push({ id: 'returned', icon: <Glyph name="back" />, body: t('link.returned', { carrier: carrier.name }), paper: true });

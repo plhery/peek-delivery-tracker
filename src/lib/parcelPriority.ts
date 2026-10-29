@@ -1,13 +1,14 @@
 import { generatedScans } from './generatedTrack';
 import { currentEvent, currentStage } from './stages';
 import { parcelIsUnannounced } from './parcelStatus';
-import type { ParcelWithEvents } from '../types';
+import type { ParcelWithEvents, RecipientAction } from '../types';
 
 const DAY = 86_400_000;
 
 export type ParcelAttention =
   | 'sync_error'
   | 'failed_attempt'
+  | `customs_${RecipientAction}`
   | 'ready_for_pickup'
   | 'exception'
   | 'customs'
@@ -36,6 +37,8 @@ export function parcelAttention(
   now: number = Date.now(),
 ): ParcelAttention | null {
   const current = currentEvent(parcel.events);
+  // The carrier waits on the recipient until a later scan says it moved on.
+  if (current?.recipientAction) return `customs_${current.recipientAction}`;
   switch (current?.stage) {
     case 'failed_attempt': return 'failed_attempt';
     case 'ready_for_pickup': return 'ready_for_pickup';

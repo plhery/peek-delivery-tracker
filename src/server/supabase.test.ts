@@ -99,7 +99,8 @@ describe('guarded tracking writes', () => {
     const apiShape = 'id,tracking_number,label,carrier,created_at,expected_delivery,last_status_text,'
       + 'last_synced_at,sync_status,sync_error,tracking_url,dpd_postcode,carrier_data,archived_at,'
       + 'notifications_muted,email_muted,tracking_events(id,package_id,stage,description,location,occurred_at,provider_event_id,point:raw_data->point,'
-      + 'time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider)';
+      + 'time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,'
+      + 'recipient_action:raw_data->>recipient_action)';
     expect(select(userRequest, 0)).toBe(apiShape);
     expect(select(userRequest, 1)).toBe(apiShape);
     expect(select(userRequest, 2)).toBe(apiShape);

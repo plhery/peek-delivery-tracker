@@ -47,6 +47,17 @@ describe('parcel priority', () => {
     expect(nextPriorityParcel([track], NOW)).toBeNull();
   });
 
+  it('asks the recipient to act while the carrier\'s customs request is the newest scan', () => {
+    const held = parcel('held', 'customs');
+    held.events[0] = { ...held.events[0]!, description: 'Duties or taxes are due on this package', recipientAction: 'duties' };
+    expect(parcelAttention(held, NOW)).toBe('customs_duties');
+    expect(parcelAttention({ ...held, syncStatus: 'error' }, NOW)).toBe('customs_duties');
+    expect(nextPriorityParcel([held], NOW)).toBeNull();
+    // Paid: the carrier moved on.
+    held.events.push({ id: 'event-released', parcelId: 'held', stage: 'in_transit', description: 'Released by customs', occurredAt: '2026-08-05T10:00:00Z' });
+    expect(parcelAttention(held, NOW)).toBeNull();
+  });
+
   it('separates customs and failed delivery notices from the next arrival', () => {
     const customs = { ...parcel('customs', 'customs'), expectedDelivery: '2026-08-05' };
     const failed = parcel('failed', 'failed_attempt');

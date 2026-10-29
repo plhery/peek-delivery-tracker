@@ -88,6 +88,23 @@ describe('withEventPlaces', () => {
     expect(located[1].location).toBe('BASEL - SWITZERLAND');
   });
 
+  it('serves what a customs scan asks the recipient to do, as stored or, for an older row, as its words say', () => {
+    const row = {
+      id: 'parcel',
+      carrier: 'ups',
+      tracking_events: [
+        // Flagged by the carrier's code, in words the list of wordings does not hold.
+        { ...event('1', null, '2026-01-05T11:47:00+00:00'), stage: 'customs', description: 'Held: duties are due', recipient_action: 'duties' },
+        // Stored before the flag, or read through a link's view without it.
+        { ...event('2', null, '2026-01-06T09:00:00+00:00'), stage: 'customs', description: 'Need to inform recipient\'s CPF/CNPJ.', recipient_action: null },
+        { ...event('3', null, '2026-01-07T09:00:00+00:00'), recipient_action: 'unknown' },
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map((scan) => scan.recipient_action)).toEqual(['duties', 'tax_id', undefined]);
+    expect('recipient_action' in served[2]!).toBe(false);
+  });
+
   it('leaves packages without scans untouched', () => {
     const row = { id: 'parcel', carrier: 'swiss-post', tracking_events: [] };
     expect(withEventPlaces(row)).toBe(row);

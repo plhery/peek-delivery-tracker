@@ -388,6 +388,18 @@ describe('ParcelPage stages and troubles', () => {
     expect(card().querySelector('.peekp-card__detail')).toBeNull();
   });
 
+  it('flags a customs request until the carrier moves on, and quotes what it asked', async () => {
+    const held = scan('customs', 2, 'Waiting for customs payment', { recipientAction: 'duties' });
+    await shown(view([...journey, held]));
+    expect(within(card()).getByText('Import duties or taxes to pay')).toBeVisible();
+    expect(screen.getByRole('note').querySelector('blockquote')).toHaveTextContent('Waiting for customs payment');
+    cleanup();
+
+    await shown(view([...journey, held, scan('in_transit', 1)]));
+    expect(within(card()).queryByText('Import duties or taxes to pay')).toBeNull();
+    expect(screen.queryByText('What DHL says')).toBeNull();
+  });
+
   it('shows where a parcel waits for pickup, with a way to get there', async () => {
     await shown(view([...journey, scan('ready_for_pickup', 2)], { pickupPoint: 'Example Kiosk\nExample Street 1, 9999 Sampleville' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Ready for pickup' })).toBeVisible();

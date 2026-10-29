@@ -3,6 +3,7 @@ import type {
   ApiCarrierId,
   ApiEventPlace,
   ApiImportCharges,
+  ApiRecipientAction,
   ApiStage,
   ApiSyncStatus,
 } from './generated/apiContract';
@@ -13,6 +14,9 @@ export type SyncStatus = ApiSyncStatus;
 
 /** The duties, taxes and fees the carrier lists for importing a parcel. */
 export type ImportCharges = ApiImportCharges;
+
+/** What a carrier asks its recipient to do before customs lets the parcel go: give a tax number, pay duties or taxes, or send documents. */
+export type RecipientAction = ApiRecipientAction;
 
 /**
  * The lifecycle of a parcel. The first six are the "happy path" in order;
@@ -97,6 +101,8 @@ export interface TrackingEvent {
   day?: string;
   /** The scan of the new carrier this scan of the earlier one repeats; the timeline shows it under that scan. */
   relayOf?: string;
+  /** What the carrier asks the recipient to do in this scan; the parcel needs action while it is the newest. */
+  recipientAction?: RecipientAction;
 }
 
 export interface ParcelWithEvents extends Parcel {

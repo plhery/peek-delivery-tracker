@@ -134,8 +134,10 @@ export function ParcelDetail({
   const current = currentEvent(parcel.events);
   // While the parcel waits, its pickup point gets a card; afterwards it is a plain fact.
   const waitingAt = current?.stage === 'ready_for_pickup' ? pickupPoint(parcel.pickupPoint) : null;
-  // After a missed delivery or a problem, the carrier waits on the reader: the page says so and quotes it.
-  const carrierWaits = !parcel.archivedAt && (current?.stage === 'failed_attempt' || current?.stage === 'exception') ? current : null;
+  // After a missed delivery or a problem, or while customs asks the reader for something, the carrier waits on the reader:
+  // the page says so and quotes it.
+  const carrierWaits = !parcel.archivedAt
+    && (current?.recipientAction || current?.stage === 'failed_attempt' || current?.stage === 'exception') ? current : null;
   // A carrier to name: without one the note would say Peek keeps asking an unknown carrier.
   const stalled = !parcel.archivedAt && displayedCarrier.id !== 'unknown' && parcelAttention(parcel) === 'stalled';
   const pickupFact = waitingAt ? undefined : parcel.pickupPoint?.trim();
@@ -637,7 +639,8 @@ export function ParcelDetail({
         )}
         <p className="detail__state">{statusLabel}</p>
         {handoverNote && <p className="detail__handover">{handoverNote}</p>}
-        {carrierWaits && <p className="parcel-card__notice detail__flag"><Glyph name="warning" />{t(carrierWaits.stage === 'failed_attempt' ? 'attention.failed_attempt' : 'attention.exception')}</p>}
+        {carrierWaits && <p className="parcel-card__notice detail__flag"><Glyph name="warning" />{t(carrierWaits.recipientAction ? `attention.customs_${carrierWaits.recipientAction}`
+          : carrierWaits.stage === 'failed_attempt' ? 'attention.failed_attempt' : 'attention.exception')}</p>}
         {(completionDate || estimate) && (
           <p className="detail__arrival">
             {completionDate

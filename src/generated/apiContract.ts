@@ -36142,6 +36142,8 @@ export const SYNC_STATUSES = [
 ] as const;
 export type ApiSyncStatus = (typeof SYNC_STATUSES)[number];
 
+export type ApiRecipientAction = "tax_id" | "duties" | "documents";
+
 export interface ApiEventPlace {
   "latitude": number;
   "longitude": number;
@@ -36181,6 +36183,7 @@ export interface ApiTrackingEventRow {
   "day"?: string;
   "place"?: ApiEventPlace | null;
   "relay_of"?: string;
+  "recipient_action"?: ApiRecipientAction;
 }
 
 export interface ApiPackageRow {

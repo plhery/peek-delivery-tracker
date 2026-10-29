@@ -77,6 +77,9 @@ const FLAG_ICONS: Record<ParcelAttention, ReactNode> = {
   not_announced: <Icon name="clock" />,
   exception: <Glyph name="warning" />,
   failed_attempt: <Glyph name="warning" />,
+  customs_tax_id: <Glyph name="warning" />,
+  customs_duties: <Glyph name="warning" />,
+  customs_documents: <Glyph name="warning" />,
   customs: <Glyph name="warning" />,
   ready_for_pickup: <Icon name="location" />,
 };

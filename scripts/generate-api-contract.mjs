@@ -1,7 +1,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { CARRIER_CATALOG, STAGES } from 'universal-parcel-scraper';
+import { CARRIER_CATALOG, RECIPIENT_ACTIONS, STAGES } from 'universal-parcel-scraper';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contractPath = path.join(root, 'contracts', 'openapi.json');
@@ -184,6 +184,9 @@ function validateOperations() {
 const carrierDocuments = CARRIER_CATALOG;
 if (JSON.stringify(schemas.Stage?.enum) !== JSON.stringify(STAGES)) {
   throw new Error('The app and scraper stage vocabulary must agree');
+}
+if (JSON.stringify(schemas.RecipientAction?.enum) !== JSON.stringify(RECIPIENT_ACTIONS)) {
+  throw new Error('The app and scraper recipient actions must agree');
 }
 const carrierCapabilities = mergeContractCarriers(carrierDocuments);
 const carrierIds = orderedCarrierIds(Object.keys(carrierDocuments), publishedCarrierIds);

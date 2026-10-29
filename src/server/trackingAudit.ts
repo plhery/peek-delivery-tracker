@@ -41,8 +41,9 @@ export type SyncStep =
 /**
  * `updated`: the check stored a new scan or moved the parcel's stage.
  * `unchanged`: the carrier answered with the progress already saved.
+ * `skipped`: the check asked no carrier and no provider, each still waiting out a failure or an input.
  */
-export type SyncAuditOutcome = 'updated' | 'unchanged' | 'waiting' | 'error' | 'unsupported' | 'superseded';
+export type SyncAuditOutcome = 'updated' | 'unchanged' | 'waiting' | 'error' | 'unsupported' | 'superseded' | 'skipped';
 /** `refused`: a failed check whose carrier answered with what only the owner can correct. */
 type RecordedOutcome = SyncAuditOutcome | 'refused';
 export type SyncAnomalyCode =
@@ -95,7 +96,7 @@ export interface SyncAuditCompletion {
   errorType?: string;
   /** Routing's `failures`, each with its `kind`, keyed by provider or carrier id: a failed refresh's evidence. */
   providerFailures?: unknown;
-  /** False when no provider was contacted, so the check is not evidence of provider health. */
+  /** False to leave the check out of health evaluation, as a check that asked nobody already is (`skipped`). */
   evaluateHealth?: boolean;
   /**
    * The answer without the saved progress that the parcel's own carrier gave, as an opaque id of
@@ -400,8 +401,10 @@ export class TrackingSyncAudit {
       duration_ms: Math.round(elapsedMilliseconds(this.#startedAt)),
       lookups: Object.fromEntries(this.#lookups),
     };
-    // Telemetry must never change a tracking result.
-    try { recordRefresh(this.configuredCarrier, completion.sourceCarrier, outcome); } catch { /* metrics only */ }
+    // Telemetry must never change a tracking result. A skipped check refreshed nothing: it counts in no refresh rate.
+    if (outcome !== 'skipped') {
+      try { recordRefresh(this.configuredCarrier, completion.sourceCarrier, outcome); } catch { /* metrics only */ }
+    }
     await this.writeAudit('complete_attempt', async () => {
       const completed = await this.client.completeSyncAttempt(
         this.attemptId,

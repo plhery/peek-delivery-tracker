@@ -38,7 +38,7 @@ import {
 import type { JsonObject } from './types';
 import * as observability from './observability';
 import * as metrics from './metrics';
-import { catalogRules, recognizers, routingFailure, TrackingRouter, type RoutedResult } from './trackingRouting';
+import { catalogRules, recognizers, routingFailure, routingState, RoutingDeferred, TrackingRouter, type RoutedResult } from './trackingRouting';
 import { WorkerShutdown } from './trackingAudit';
 import { UniversalTrackingError } from 'universal-parcel-scraper/node';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
@@ -2757,6 +2757,28 @@ describe('TrackingSyncService', () => {
     await service.syncPackage(parcel, { trigger });
     expect(route.mock.calls[0][1]).toBe(scheduled);
     expect(client.startSyncAttempt.mock.calls[0][1]).toMatchObject({ trigger });
+  });
+
+  it('records a check that asked no carrier and no provider as skipped, which no refresh count or health sample reads', async () => {
+    const refresh = vi.spyOn(metrics, 'recordRefresh');
+    const check = async (attempted: number) => {
+      const parcel = { id: 'cooling', carrier: 'jd-logistics', tracking_number: 'TEST1234', current_stage: 'in_transit' };
+      // Every source still waits out its failure, the parcel's own carrier one it cannot clear itself.
+      const failures = { 'jd-logistics': { count: 3, kind: 'verification' as const, retry_at: '2026-09-10T18:00:00Z' } };
+      vi.spyOn(TrackingRouter.prototype, 'fetch')
+        .mockRejectedValue(new RoutingDeferred({ ...routingState(parcel), failures, consecutive_failures: 3 }, true, attempted));
+      const client = fakeClient();
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn(), fetchUniversal: vi.fn() }, null,
+        () => new Date('2026-09-10T12:00:00Z'));
+      await expect(service.syncPackage(parcel, { trigger: 'scheduled' })).resolves.toMatchObject({ checked: 1, errors: 1 });
+      // The parcel still shows that its sources are down.
+      expect(client.updatePackage.mock.lastCall![1]).toMatchObject({ sync_status: 'error' });
+      return { outcome: client.completeSyncAttempt.mock.lastCall![1].outcome, health: client.recordTrackingHealth.mock.calls.length };
+    };
+    await expect(check(0)).resolves.toEqual({ outcome: 'skipped', health: 0 });
+    expect(refresh).not.toHaveBeenCalled();
+    await expect(check(1)).resolves.toEqual({ outcome: 'error', health: 1 });
+    expect(refresh).toHaveBeenCalledExactlyOnceWith('jd-logistics', 'jd-logistics', 'error');
   });
 
   it('checks a parcel whose link was opened only if the scheduled run has not checked it meanwhile', async () => {

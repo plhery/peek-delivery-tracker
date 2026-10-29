@@ -55,9 +55,14 @@ begin
   exception when check_violation then null;
   end;
 
+  -- A check that asked nobody is no attempt of the carrier's, and counts apart.
+  insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier)
+  values ('b8100000-0000-4000-8000-000000000015', parcel, 'scheduled', 'outcome-test');
+  assert public.complete_tracking_sync_attempt('b8100000-0000-4000-8000-000000000015', '{"outcome":"skipped"}', '[]');
+
   select * into strict health from public.tracking_sync_health_24h where configured_carrier = 'outcome-test';
   assert health.attempts = 4 and health.updated = 2 and health.unchanged = 1 and health.events_new = 1
-    and health.errors = 0, format('The 24-hour health miscounted: %s', health);
+    and health.errors = 0 and health.skipped = 1, format('The 24-hour health miscounted: %s', health);
 end;
 $$;
 

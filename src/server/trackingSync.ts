@@ -2390,10 +2390,11 @@ export class TrackingSyncService {
           audit.reportError(persistenceError, 'persist_routing_state');
           throw persistenceError;
         }
-        // A check that contacted nobody says nothing about provider health.
+        // A check that contacted nobody says nothing about the carrier's or a provider's health: it is
+        // skipped, which neither health samples nor failure counts read, whatever the parcel shows.
         // Keep the failure evidence even while the parcel's error chip is suppressed.
-        await audit.finish({ outcome: failing ? 'error' : 'waiting', sourceCarrier: carrierId,
-          evaluateHealth: error.attempted > 0, error, providerFailures: error.routing.failures });
+        await audit.finish({ outcome: error.attempted > 0 ? failing ? 'error' : 'waiting' : 'skipped', sourceCarrier: carrierId,
+          error, providerFailures: error.routing.failures });
         return failing ? 'errors' : 'waiting';
       }
       let message = error instanceof Error ? error.message.trim() || error.name : String(error);

@@ -143,6 +143,8 @@ begin
     (parcel, 'scheduled', 'health-b', 'error', now() - interval '61 minutes', now() - interval '60 minutes'),
     (parcel, 'scheduled', 'health-b', 'updated', now() - interval '61 minutes', now() - interval '60 minutes'),
     (parcel, 'package', 'health-b', 'superseded', now() - interval '61 minutes', now() - interval '60 minutes'),
+    -- A check that asked nobody is no check of its carrier's.
+    (parcel, 'scheduled', 'health-d', 'skipped', now() - interval '61 minutes', now() - interval '60 minutes'),
     (parcel, 'package', 'health-c', 'running', now() - interval '1 minute', null),
     (parcel, 'scheduled', 'health-c', 'error', now() - interval '4 hours', now() - interval '4 hours');
   insert into public.sync_jobs (kind, state, started_at, completed_at) values

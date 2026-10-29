@@ -110,7 +110,10 @@ All tables and views here are service-role only.
   `waiting`. Real failures end as `error`. A check that failed on what only the owner can
   correct, a number its carrier does not issue, one for several parcels, a placeholder, or an
   input it lacks or refuses, ends `refused`: the carrier answered, so its error counts
-  (`error_percent`, `metrics.health`, `carrier_refresh_total`) leave it out. A successful
+  (`error_percent`, `metrics.health`, `carrier_refresh_total`) leave it out. A check that asked
+  no carrier and no provider, each still waiting out a failure or an input, ends `skipped`
+  whatever the parcel shows: no refresh count, health sample or check total reads it, and the
+  24-hour health counts it apart (`skipped`). A successful
   `fetch` names the source that served the parcel (`source_carrier`, `unknown` for a universal provider) and has `carrier_answered`
   when the carrier answered too, on local clocks, in part or with the label alone. When another source served a
   parcel filed under a carrier, `direct_outcome` says how that carrier's own lookup went in the
@@ -919,7 +922,7 @@ dashboard's failure panels leave out.
 | `carrier_fallback_total` (from_step, to_step, reason) | How often recovery is needed |
 | `carrier_status_mapping_total` (carrier, stage_source) | Share of events mapped explicitly, by wording, or not at all |
 | `carrier_detection_total` (result) | Detection confidence served to clients |
-| `carrier_refresh_total` (carrier, served_by, outcome) | Who served each refresh: `adapter`, `other_adapter`, `provider` or `none`, and how it ended: `updated` (a new scan or stage), `unchanged`, `waiting`, `error`, `refused` (the number or its details are the owner's to correct) or `superseded` |
+| `carrier_refresh_total` (carrier, served_by, outcome) | Who served each refresh: `adapter`, `other_adapter`, `provider` or `none`, and how it ended: `updated` (a new scan or stage), `unchanged`, `waiting`, `error`, `refused` (the number or its details are the owner's to correct) or `superseded`. A `skipped` check asked nobody and is not counted |
 | `tracking_routing_signal_total` (signal, carrier, subject) | Routing signals for the review: `subject` is the carrier the signal is about, `uncatalogued` for a name a provider gave |
 | `tracking_sync_anomaly_total` (carrier, anomaly) | Suspicious decisions of checks, by anomaly code |
 | `tracking_health_incident_total` (kind, subject, state) | Health incidents that opened or still fail six hours on (`open`), `recovered`, or `closed` with no sample left or a direct step the carrier has not run for six hours |

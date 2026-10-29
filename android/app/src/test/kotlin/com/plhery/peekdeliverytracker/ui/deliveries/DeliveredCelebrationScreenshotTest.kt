@@ -88,9 +88,20 @@ class DeliveredCelebrationScreenshotTest {
         }
     }
 
-    /** The shot `milliseconds` later, the clock moved a frame at a time to it. */
+    /**
+     * The clock moved on `milliseconds` a frame at a time, and the maps each frame asks for made before the next, as a
+     * phone has them in time: the paper comes out of Pip's box where his map has him, whatever the maps made before.
+     */
+    private fun advance(milliseconds: Long) {
+        repeat(((milliseconds + FRAME - 1) / FRAME).toInt()) {
+            compose.mainClock.advanceTimeByFrame()
+            compose.waitForIdle()
+        }
+    }
+
+    /** The shot `milliseconds` later. */
     private fun shot(milliseconds: Long, name: String) {
-        compose.mainClock.advanceTimeBy(milliseconds)
+        advance(milliseconds)
         compose.screenshot(name)
     }
 
@@ -118,7 +129,7 @@ class DeliveredCelebrationScreenshotTest {
     @Test
     fun theCardsMidFlight() {
         deliver(dark = false)
-        compose.mainClock.advanceTimeBy(900)
+        advance(900)
         // The window draws the held cards, whose pictures fly: Robolectric draws it only when asked, as for a shot.
         compose.awaitFrame()
         shot(50 + 200, "celebration_flight_light")
@@ -134,5 +145,8 @@ class DeliveredCelebrationScreenshotTest {
     private companion object {
         /** One burst of paper, the same in every run. */
         const val SEED = 0x5EED_CAFEuL
+
+        /** The test clock's frame, in milliseconds. */
+        const val FRAME = 16L
     }
 }

@@ -568,6 +568,9 @@
   "dayton-freight": {
     "decal": "dayton-freight"
   },
+  "dd-express": {
+    "decal": "dd-express"
+  },
   "dealersend": {
     "decal": "dealersend"
   },
@@ -865,6 +868,9 @@
   "express-one-bg": {
     "decal": "express-one-bg"
   },
+  "famafutar": {
+    "decal": "famafutar"
+  },
   "fan-courier": {
     "decal": "fan-courier"
   },
@@ -909,6 +915,9 @@
   },
   "first-delivery-tn": {
     "decal": "first-delivery-tn"
+  },
+  "first-flight-me": {
+    "decal": "first-flight-me"
   },
   "first-fly-express": {
     "decal": "first-fly-express"
@@ -1888,6 +1897,9 @@
   "polaris-transport": {
     "decal": "polaris-transport"
   },
+  "polonez": {
+    "decal": "polonez"
+  },
   "pony-express": {
     "decal": "pony-express"
   },
@@ -1902,6 +1914,12 @@
   },
   "post-luxembourg": {
     "decal": "post-luxembourg"
+  },
+  "post-one": {
+    "decal": "post-one",
+    "palette": {
+      "accent": "#100f0f"
+    }
   },
   "posta-faroe": {
     "decal": "posta-faroe"
@@ -2351,6 +2369,9 @@
   "tanzania-posts": {
     "decal": "tanzania-posts"
   },
+  "tas-courier": {
+    "decal": "tas-courier"
+  },
   "taxydema": {
     "decal": "taxydema"
   },
@@ -2617,6 +2638,9 @@
   "ward-trucking": {
     "decal": "ward-trucking"
   },
+  "wedo": {
+    "family": "allegro-one"
+  },
   "whistl": {
     "decal": "whistl"
   },
@@ -2656,6 +2680,9 @@
       "brand-light": "#141414"
     },
     "decal": "yamato"
+  },
+  "yamato-america": {
+    "family": "yamato"
   },
   "yanwen": {
     "decal": "yanwen"

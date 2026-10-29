@@ -156,7 +156,13 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'veho'
   | 'hfd'
   | 'cheetah-delivery'
-  | 'parcel-one';
+  | 'parcel-one'
+  | 'post-one'
+  | 'polonez'
+  | 'tas-courier'
+  | 'famafutar'
+  | 'first-flight-me'
+  | 'dd-express';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

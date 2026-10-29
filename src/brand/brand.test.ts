@@ -63,6 +63,7 @@ describe('carrier brand', () => {
     ['swiss-post-cargo', 'swiss-post'], ['postlogistics', 'swiss-post'],
     ['dpd-de', 'dpd'], ['dpd-uk', 'dpd'], ['evri-uk', 'evri'], ['delivengo', 'la-poste'],
     ['gofo-ca', 'gofo'], ['gofo-fr', 'gofo'], ['gofo-it', 'gofo'], ['gofo-nl', 'gofo'],
+    ['wedo', 'allegro-one'], ['yamato-america', 'yamato'],
   ])('shares %s branding with %s', (id, owner) => {
     expect(carrierBrandFamily(id)).toBe(owner);
     expect(carrierDecal(id)).toBe(carrierDecal(owner));
@@ -230,6 +231,12 @@ describe('carrier brand', () => {
       'hfd',
       'cheetah-delivery',
       'parcel-one',
+      'post-one',
+      'polonez',
+      'tas-courier',
+      'famafutar',
+      'first-flight-me',
+      'dd-express',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

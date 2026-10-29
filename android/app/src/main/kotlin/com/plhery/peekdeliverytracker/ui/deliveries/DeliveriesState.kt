@@ -196,7 +196,8 @@ internal fun <T> rememberForLaunch(launch: UUID, initial: T): MutableState<T> =
 /**
  * What ParcelListView keeps in `@State` for its search and its filters (A-SE04): whether the search shows, the query,
  * the status, the carrier (its raw value, which a window keeps) and the sort, whether the filters are open and whether
- * sheets show as forms, each held for the launch ([rememberForLaunch]), and whether the search field has the focus.
+ * sheets show as forms, each held for the launch ([rememberForLaunch]), whether the search field has the focus, and
+ * the query last counted.
  */
 internal class ListViewStates(
     val showingSearch: MutableState<Boolean>,
@@ -207,6 +208,7 @@ internal class ListViewStates(
     val showingFilters: MutableState<Boolean>,
     val sheetsAsForms: MutableState<Boolean>,
     val searchFocused: MutableState<Boolean>,
+    val countedQuery: MutableState<String?>,
 )
 
 @Composable
@@ -219,6 +221,7 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
     showingFilters = rememberForLaunch(launch, false),
     sheetsAsForms = rememberForLaunch(launch, false),
     searchFocused = rememberForLaunch(launch, false),
+    countedQuery = rememberForLaunch<String?>(launch, null),
 )
 
 /**
@@ -273,12 +276,21 @@ internal class DeliveriesState(
      */
     var searchFocused: Boolean by views.searchFocused
 
+    /** The query a search was last counted for, kept with the window so that a rotation doesn't count it again. */
+    var countedQuery: String? by views.countedQuery
+
     /** The filters' button's bounds in the window, which their popover points at. */
     var filtersAnchor: Rect by mutableStateOf(Rect.Zero)
 
-    /** Asks the search field to take the focus, or to give it up, once it is there to: counted, so each ask is news. */
-    var focusRequest: SearchFocusRequest by mutableStateOf(SearchFocusRequest(0, focus = false))
+    /**
+     * An ask for the search field to take the focus (true), or to give it up (false), not yet taken by the field
+     * ([takeFocusRequest]): each is taken once, by the field there or by the one that shows next.
+     */
+    var focusRequest: Boolean? by mutableStateOf(null)
         private set
+
+    /** The field's ask for the focus, which no other field then takes. */
+    fun takeFocusRequest(): Boolean? = focusRequest.also { focusRequest = null }
 
     /** The parcels the list shows, by their status. Each change counts as `filter-status`. */
     var statusFilter: ParcelStatusFilter
@@ -354,7 +366,7 @@ internal class DeliveriesState(
 
     /** The field takes the focus, or gives it up. */
     fun focusSearch(focus: Boolean) {
-        focusRequest = SearchFocusRequest(focusRequest.count + 1, focus)
+        focusRequest = focus
     }
 
     /** The filters' button: the field gives up the focus, then the filters open. */
@@ -702,10 +714,6 @@ internal class DeliveriesState(
         listState.scrollToItem(index)
     }
 }
-
-/** An ask for the search field's focus ([DeliveriesState.focusRequest]): the `count`th, to take it or to give it up. */
-@Immutable
-internal data class SearchFocusRequest(val count: Int, val focus: Boolean)
 
 /**
  * Swift's `<` on the carriers' names: code unit by code unit, near enough to Swift's comparison of their Unicode

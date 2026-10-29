@@ -93,7 +93,6 @@ import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
@@ -266,14 +265,18 @@ private fun HoldingDelivered(state: DeliveriesState, reduceMotion: Boolean) {
 
 /**
  * A search counts once its query has stayed the same 800 ms, and isn't empty (`.task(id: query)`). Only a change counts:
- * the list drawn again, after a rotation or back from a parcel, doesn't count its query again.
+ * the list drawn again, after a rotation or back from a parcel, doesn't count the query it last counted again
+ * ([DeliveriesState.countedQuery]), and counts one typed just before once it has stayed.
  */
 @Composable
 private fun SearchCounted(state: DeliveriesState) {
     LaunchedEffect(state) {
-        snapshotFlow { state.query }.drop(1).collectLatest { query ->
+        snapshotFlow { state.query }.collectLatest { query ->
+            if (query == state.countedQuery) return@collectLatest
+            state.countedQuery = null
             if (query.isBlank()) return@collectLatest
             delay(SEARCH_SETTLE_MILLIS)
+            state.countedQuery = query
             state.source.action("search")
         }
     }

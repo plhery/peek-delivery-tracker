@@ -30,6 +30,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performTextClearance
@@ -134,6 +135,8 @@ class ParcelSearchTest {
     private fun sheetTop(): Float = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot().top.value
 
     private fun windowHeight(): Float = compose.onRoot().getUnclippedBoundsInRoot().bottom.value
+
+    private fun searches() = source.actions.filter { it == "search" }
 
     /** A key pressed and let go on a hardware keyboard, with `meta` held, through the window as the system sends it. */
     private fun press(key: Int, meta: Int = 0) {
@@ -285,6 +288,54 @@ class ParcelSearchTest {
         tap(FILTERS_BUTTON)
         press(KeyEvent.KEYCODE_ESCAPE)
         assertTrue(exists(SEARCH_ROW))
+    }
+
+    @Test
+    fun theFieldKeepsItsFocusThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        openSearch()
+        assertTrue(focused(SEARCH_FIELD))
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertTrue(focused(SEARCH_FIELD))
+
+        // Unfocused, it stays so.
+        compose.onNodeWithTag(SEARCH_FIELD).performImeAction()
+        compose.waitForIdle()
+        assertFalse(focused(SEARCH_FIELD))
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertTrue(exists(SEARCH_ROW))
+        assertFalse(focused(SEARCH_FIELD))
+    }
+
+    @Test
+    fun aQueryTypedJustBeforeTheWindowIsMadeAgainIsCountedOnce() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        openSearch()
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(SEARCH_FIELD).performTextInput("gift")
+        compose.mainClock.advanceTimeBy(300)
+        recreation.recreate()
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(listOf("search"), searches())
+
+        // Neither the window made again once more nor a parcel opened and closed counts it again.
+        recreation.recreate()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertEquals(listOf("search"), searches())
+        inList("Birthday gift").performClick()
+        compose.waitForIdle()
+        back()
+        assertTrue(shows("Birthday gift"))
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(listOf("search"), searches())
     }
 
     @Test

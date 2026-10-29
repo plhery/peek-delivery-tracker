@@ -15,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -457,16 +458,24 @@ internal fun SearchControls(state: DeliveriesState) {
         if (reduceMotion) snap() else Motion.snappy(SEARCH_FIELD_MOTION),
         label = "trailing",
     )
-    // `.onAppear { searchFocused = true }` as the search opens, and again after a rotation that found it focused.
-    val request = state.focusRequest
-    LaunchedEffect(request) {
-        when {
-            request.focus -> focus.requestFocus()
-            state.searchFocused -> focusManager.clearFocus()
+    // `.onAppear { searchFocused = true }` as the search opens, and again in the window made again (a rotation) that
+    // found it focused: the field going with the old window keeps the focus for the new one, and the new one coming in
+    // unfocused leaves it as it was until it has taken it.
+    val activity = LocalActivity.current
+    val windowMadeAgain = { activity?.isChangingConfigurations == true }
+    val refocus = remember { mutableStateOf(state.searchFocused) }
+    LaunchedEffect(state.focusRequest) {
+        when (state.takeFocusRequest()) {
+            true -> focus.requestFocus()
+            false -> if (state.searchFocused) focusManager.clearFocus()
+            null -> Unit
         }
     }
-    LaunchedEffect(Unit) { if (state.searchFocused) focus.requestFocus() }
-    DisposableEffect(Unit) { onDispose { state.searchFocused = false } }
+    LaunchedEffect(Unit) {
+        if (refocus.value) focus.requestFocus()
+        refocus.value = false
+    }
+    DisposableEffect(Unit) { onDispose { if (!windowMadeAgain()) state.searchFocused = false } }
     Row(Modifier.fillMaxWidth().testTag(SEARCH_ROW), horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
         Row(
             Modifier
@@ -485,7 +494,7 @@ internal fun SearchControls(state: DeliveriesState) {
                     .weight(1f)
                     .testTag(SEARCH_FIELD)
                     .focusRequester(focus)
-                    .onFocusChanged { state.searchFocused = it.isFocused }
+                    .onFocusChanged { if (it.isFocused || !refocus.value && !windowMadeAgain()) state.searchFocused = it.isFocused }
                     .semantics { contentDescription = label },
                 textStyle = font.copy(color = colors.label),
                 singleLine = true,

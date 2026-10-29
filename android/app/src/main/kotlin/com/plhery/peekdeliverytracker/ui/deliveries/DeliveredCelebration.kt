@@ -322,7 +322,9 @@ internal fun DeliveredPaper(state: DeliveriesState) {
                 // The burst is told where it is in the window.
                 translate(-corner.offset.x, -corner.offset.y) {
                     scale(density, density, Offset.Zero) {
-                        for (piece in confetti.pieces) {
+                        // By index, as every loop drawing a frame: no iterator is made for it.
+                        for (index in confetti.pieces.indices) {
+                            val piece = confetti.pieces[index]
                             if (!confetti.pose(piece, time, pose) || abs(pose.scaleY) <= 0.02) continue
                             val width = piece.width.toFloat()
                             val height = piece.height.toFloat()
@@ -336,7 +338,8 @@ internal fun DeliveredPaper(state: DeliveriesState) {
                                 }
                             }
                         }
-                        for (star in confetti.glints) {
+                        for (index in confetti.glints.indices) {
+                            val star = confetti.glints[index]
                             if (!confetti.pose(star, time, pose) || pose.scaleX <= 0.02) continue
                             val half = (star.size / 2).toFloat()
                             val alpha = max(0f, pose.opacity.toFloat())
@@ -395,7 +398,7 @@ internal fun DeliveredFlights(state: DeliveriesState, modifier: Modifier = Modif
                 drawContent()
                 val time = progress.value.toDouble()
                 val shift = state.contentShift
-                for (flight in flights) drawFlight(flight, time, shift, shadow)
+                for (index in flights.indices) drawFlight(flights[index], time, shift, shadow)
             },
     ) {
         for (flight in flights) key(flight) { FlightFace(flight) }

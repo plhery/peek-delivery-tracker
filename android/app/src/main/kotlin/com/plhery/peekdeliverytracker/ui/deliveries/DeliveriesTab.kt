@@ -153,6 +153,7 @@ fun DeliveriesTab(
         delay(TOAST_DURATION)
         state.dismiss(toast.id)
     }
+    ListPullEffects(state)
     val reduceMotion = PeekTheme.reduceMotion
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val hinge = LocalWindowHinge.current

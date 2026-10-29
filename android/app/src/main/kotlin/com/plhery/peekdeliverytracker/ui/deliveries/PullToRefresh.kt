@@ -27,7 +27,6 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
@@ -90,7 +89,11 @@ import kotlinx.coroutines.launch
  * finger on UIScrollView's rubber band; pulled past the model's threshold, the refresh starts at once and the list holds
  * a gap of [HOLD] open over its content until it is over, then closes it. It takes the list's drags at its top before
  * the list's own bounce does, through nested scrolling, so the list's flings are left alone, and a fling into the top
- * still bounces as before.
+ * still bounces as before. Thrown back up while pulled, the list takes the pull back and scrolls on with what is left
+ * of the throw, as a scroll view's momentum carries on past its top.
+ *
+ * It is the tab's ([DeliveriesState.listPull]), not the list's, so that a pull or a gap held open lives on as the window
+ * turns and the list is drawn anew ([ListPullEffects]).
  *
  * Positions are in pixels: [past] is how far the content shows below its rest, [held] the gap held open.
  */
@@ -113,7 +116,14 @@ internal class ListPull(private val state: DeliveriesState, private val scope: C
     val shown: Float get() = past + held.value
 
     override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-        if (source != NestedScrollSource.UserInput || past <= 0f || available.y >= 0f) return Offset.Zero
+        if (past <= 0f || available.y >= 0f) return Offset.Zero
+        if (source != NestedScrollSource.UserInput) {
+            // A throw up takes back the pull as it moves the content, before the list scrolls on.
+            if (dragging || spring?.isActive == true) return Offset.Zero
+            val back = max(available.y, -past)
+            move(past + back)
+            return Offset(0f, back)
+        }
         // Pushing back up takes back the pull first.
         catch()
         val finger = finger(past)
@@ -131,9 +141,16 @@ internal class ListPull(private val state: DeliveriesState, private val scope: C
 
     override suspend fun onPreFling(available: Velocity): Velocity {
         dragging = false
-        if (past <= 0f) return Velocity.Zero
+        // Thrown up, the list flings, and the throw takes the pull back first (onPreScroll).
+        if (past <= 0f || available.y < 0f) return Velocity.Zero
         release(available.y)
         return available
+    }
+
+    override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity {
+        // A throw up too weak to take the whole pull back leaves the rest to spring home.
+        if (past > 0f && spring?.isActive != true) release(0f)
+        return Velocity.Zero
     }
 
     private fun catch() {
@@ -206,16 +223,15 @@ internal class ListPull(private val state: DeliveriesState, private val scope: C
     }
 }
 
+/** The tab's side of the pull ([DeliveriesState.listPull]): the window's density, and the gap closing as the refresh settles. */
 @Composable
-internal fun rememberListPull(state: DeliveriesState): ListPull {
-    val scope = rememberCoroutineScope()
-    val pull = remember(state) { ListPull(state, scope) }
+internal fun ListPullEffects(state: DeliveriesState) {
+    val pull = state.listPull
     pull.density = LocalDensity.current
     val phase by state.pull.phaseFlow.collectAsState()
-    LaunchedEffect(phase) {
+    LaunchedEffect(pull, phase) {
         if (phase == PullToRefreshModel.Phase.Settling) pull.close()
     }
-    return pull
 }
 
 /**

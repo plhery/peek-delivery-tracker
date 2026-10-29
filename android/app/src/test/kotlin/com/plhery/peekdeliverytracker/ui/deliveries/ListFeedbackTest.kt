@@ -21,6 +21,7 @@ import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -241,5 +242,23 @@ class ListFeedbackTest {
         advance(300)
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
         assertEquals(null, source.undoParcel.value)
+    }
+
+    @Test
+    fun aPullThrownBackUpGivesItselfBackAndTheListScrollsOnWithTheThrow() {
+        show()
+        val rest = top("New trainers")
+        compose.onNodeWithTag(PARCEL_LIST).performTouchInput {
+            down(Offset(width / 2f, dp(200f)))
+            // A hundred points down, short of the threshold, held a moment, then thrown up sixty: still pulled as the
+            // finger lifts.
+            repeat(20) { moveBy(Offset(0f, dp(5f))) }
+            advanceEventTime(200)
+            repeat(4) { moveBy(Offset(0f, -dp(15f))) }
+            up()
+        }
+        compose.waitForIdle()
+        assertEquals(0, source.refreshes)
+        assertTrue("The list scrolled on: ${top("New trainers")} from $rest", top("New trainers") < rest - 50f)
     }
 }

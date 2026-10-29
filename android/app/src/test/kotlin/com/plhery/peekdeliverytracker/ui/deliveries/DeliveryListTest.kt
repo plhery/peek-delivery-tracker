@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.semantics.SemanticsActions
@@ -36,15 +37,18 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import java.util.UUID
+import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -494,8 +498,38 @@ class DeliveryListTest {
 
     // A turn draws the list anew (`key(arrangement)`): what it keeps, and what goes with it.
 
+    private fun top(name: String): Float = compose.card(name).getBoundsInRoot().top.value
+
     private fun toastShown(text: String): Boolean =
         compose.onAllNodes(hasTestTag(INLINE_TOAST) and hasContentDescription(text, substring = true)).fetchSemanticsNodes().isNotEmpty()
+
+    @Test
+    fun aTurnKeepsThePullsGapOpenUntilTheCheckIsOver() {
+        show(width = 600.dp)
+        val narrow = top("New trainers")
+        resize(1032.dp)
+        val wide = top("New trainers")
+        resize(600.dp)
+        val checked = CompletableDeferred<ParcelStore.RefreshResult?>()
+        source.checking = checked
+        compose.onNodeWithTag(PARCEL_LIST).performTouchInput {
+            down(Offset(width / 2f, 200.dp.toPx()))
+            repeat(30) { moveBy(Offset(0f, 700.dp.toPx() / 30)) }
+            advanceEventTime(200)
+            up()
+        }
+        compose.waitForIdle()
+        assertEquals(1, source.refreshes)
+        assertEquals(narrow + 60f, top("New trainers"), 1f)
+
+        // Turned while checking, the gap stays open over the list drawn anew, and closes once the check is over.
+        resize(1032.dp)
+        assertEquals(wide + 60f, top("New trainers"), 1f)
+        checked.complete(ParcelStore.RefreshResult.Updated)
+        compose.waitForIdle()
+        assertEquals(wide, top("New trainers"), 0.5f)
+        assertEquals(1, source.refreshes)
+    }
 
     @Test
     fun aTurnKeepsAMessageAndWhatIsLeftOfItsFourSeconds() {

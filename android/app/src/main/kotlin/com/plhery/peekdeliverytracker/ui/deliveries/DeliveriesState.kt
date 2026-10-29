@@ -208,10 +208,10 @@ internal data class Announcement(val text: String, val count: Int)
  * arrangement, the navigation, the list's scroll and the archive's shelf; and what ParcelListView keeps for its
  * feedback: the pull, the toast, the error of an action, the card menu open and the delete it asks about.
  *
- * The list's own work (a refresh, a card on its way out) runs in `scope`, the tab's, so that drawing the list again,
- * as the window turns, doesn't cancel it, as the iPhone's pull runs in a task of its own. Its changes to the parcels
- * (an archive, a restore, a delete) run in the app's scope ([DeliveriesSource.scope]), which leaving the tab doesn't
- * cancel either.
+ * The list's own work (a refresh, the pull, a card on its way out) runs in `scope`, the tab's, so that drawing the
+ * list again, as the window turns, doesn't cancel it, as the iPhone's pull runs in a task of its own. Its changes to
+ * the parcels (an archive, a restore, a delete) run in the app's scope ([DeliveriesSource.scope]), which leaving the
+ * tab doesn't cancel either.
  */
 @Stable
 internal class DeliveriesState(
@@ -317,6 +317,9 @@ internal class DeliveriesState(
 
     /** The pull's state, which the list drives and the seal draws. */
     val pull = PullToRefreshModel(scope)
+
+    /** The finger's pull on the list, kept here rather than with the list so that a turn of the window keeps it. */
+    val listPull = ListPull(this, scope)
 
     var toast: ListToast? by mutableStateOf(null)
         private set

@@ -256,14 +256,15 @@ private enum class ChromeSlot { DemoBar, List, Band }
 
 /**
  * The list's scrolling column, `padding` clear of the bars at its top and bottom and `start` and `end` of the sides,
- * which pulls down to refresh ([ListPull]): the pull's seal behind its content, at the top of what the list scrolls.
+ * which pulls down to refresh ([ListPull], the tab's): the pull's seal behind its content, at the top of what the list
+ * scrolls.
  */
 @Composable
 private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding: PaddingValues, start: Dp, end: Dp) {
     val reduceMotion = PeekTheme.reduceMotion
     val fade = if (reduceMotion) null else Motion.snappy<Float>(LIST_MOTION)
     val move = if (reduceMotion) null else Motion.snappy<IntOffset>(LIST_MOTION)
-    val pull = rememberListPull(state)
+    val pull = state.listPull
     val density = LocalDensity.current
     // While refreshing, the gap stands over the content, as the system adds it to the list's inset.
     val held = with(density) { pull.held.value.toDp() }

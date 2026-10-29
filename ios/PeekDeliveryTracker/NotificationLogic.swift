@@ -19,15 +19,22 @@ enum NotificationPreset: String, CaseIterable, Identifiable {
         }
     }
 
+    /// The website's words for the same three lists, as on a parcel link's alerts.
     var titleKey: String {
         switch self {
-        case .all: "notifications.preset.all"
-        case .important: "notifications.preset.important"
-        case .deliveryDay: "notifications.preset.deliveryDay"
+        case .all: "alerts.preset.all"
+        case .important: "alerts.preset.important"
+        case .deliveryDay: "alerts.preset.delivery"
         }
     }
 
-    var descriptionKey: String { "\(titleKey)Description" }
+    var descriptionKey: String {
+        switch self {
+        case .all: "notifications.preset.allDescription"
+        case .important: "notifications.preset.importantDescription"
+        case .deliveryDay: "notifications.preset.deliveryDayDescription"
+        }
+    }
 
     static func matching(_ stages: [NotificationStage]) -> NotificationPreset {
         let enabled = Set(stages)

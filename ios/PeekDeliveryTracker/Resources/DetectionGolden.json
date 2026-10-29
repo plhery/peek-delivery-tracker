@@ -21654,6 +21654,22 @@
     ]
   },
   {
+    "input": "1AM12279974",
+    "carrier": "wedo",
+    "confidence": "high",
+    "candidates": [
+      "wedo"
+    ]
+  },
+  {
+    "input": "1AM21557070",
+    "carrier": "wedo",
+    "confidence": "high",
+    "candidates": [
+      "wedo"
+    ]
+  },
+  {
     "input": "1C1000A000001",
     "carrier": "unknown",
     "confidence": "low",
@@ -41128,6 +41144,14 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "46P00023155",
+    "carrier": "wedo",
+    "confidence": "high",
+    "candidates": [
+      "wedo"
     ]
   },
   {
@@ -86284,6 +86308,14 @@
     ]
   },
   {
+    "input": "PIE000MP005790",
+    "carrier": "polonez",
+    "confidence": "high",
+    "candidates": [
+      "polonez"
+    ]
+  },
+  {
     "input": "PK-4948681651650700612-0",
     "carrier": "unknown",
     "confidence": "low",
@@ -86719,6 +86751,14 @@
     ],
     "preferred": [
       "magyar-posta"
+    ]
+  },
+  {
+    "input": "POL031MP009843",
+    "carrier": "polonez",
+    "confidence": "high",
+    "candidates": [
+      "polonez"
     ]
   },
   {
@@ -87563,7 +87603,32 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-it",
+      "post-one"
+    ],
+    "asked": [
       "gls-it"
+    ]
+  },
+  {
+    "input": "R5960672467",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-it",
+      "post-one"
+    ],
+    "asked": [
+      "gls-it"
+    ]
+  },
+  {
+    "input": "R6065155916",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-it",
+      "post-one"
     ],
     "asked": [
       "gls-it"
@@ -87574,7 +87639,20 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "gls-it",
+      "post-one"
+    ],
+    "asked": [
       "gls-it"
+    ]
+  },
+  {
+    "input": "R7551776860",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-it",
+      "post-one"
     ],
     "asked": [
       "gls-it"
@@ -94177,6 +94255,38 @@
     "confidence": "high",
     "candidates": [
       "pitney-bowes"
+    ]
+  },
+  {
+    "input": "UPS001LE000368",
+    "carrier": "polonez",
+    "confidence": "high",
+    "candidates": [
+      "polonez"
+    ]
+  },
+  {
+    "input": "UPS001LE000935",
+    "carrier": "polonez",
+    "confidence": "high",
+    "candidates": [
+      "polonez"
+    ]
+  },
+  {
+    "input": "UPS001LE001171",
+    "carrier": "polonez",
+    "confidence": "high",
+    "candidates": [
+      "polonez"
+    ]
+  },
+  {
+    "input": "UPS001LZ998704",
+    "carrier": "polonez",
+    "confidence": "high",
+    "candidates": [
+      "polonez"
     ]
   },
   {

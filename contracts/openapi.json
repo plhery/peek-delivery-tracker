@@ -33138,7 +33138,7 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "ydh"
       },
       "trackingUrlTemplate": "https://track.ydhex.com/track_query.aspx?track_number={trackingNumber}",
       "linkRules": [
@@ -33159,6 +33159,297 @@
         }
       ],
       "trackingSearchUrl": "https://track.ydhex.com/track_query.aspx"
+    },
+    "dd-express": {
+      "displayName": "DD Express",
+      "aliases": [
+        "DD Cold Chain",
+        "DD Express Sdn Bhd",
+        "滴滴冷链物流"
+      ],
+      "countries": [
+        "MY",
+        "SG"
+      ],
+      "color": "#4ec1ea",
+      "selectable": true,
+      "timezone": "Asia/Kuala_Lumpur",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tracking.dd.express/?tracking_ids={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.dd.express"
+          ],
+          "params": [
+            "tracking_ids"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.dd.express/"
+    },
+    "famafutar": {
+      "displayName": "FámaFutár",
+      "aliases": [
+        "Famafutar",
+        "FamaFutar",
+        "Fáma Futár",
+        "Fama Futar",
+        "Fáma Futárszolgálat",
+        "Fáma First",
+        "Fáma First Kft."
+      ],
+      "countries": [
+        "HU"
+      ],
+      "color": "#ff7f00",
+      "selectable": true,
+      "timezone": "Europe/Budapest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://famafutar.hu/tracking/#{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "famafutar.hu",
+            "www.famafutar.hu"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "fragment": "^(\\d{24})$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://famafutar.hu/tracking/"
+    },
+    "first-flight-me": {
+      "displayName": "First Flight (Middle East)",
+      "aliases": [
+        "First Flight Couriers (Middle East)",
+        "First Flight Couriers (Middle East) L.L.C.",
+        "First Flight Couriers ME",
+        "First Flight ME"
+      ],
+      "countries": [
+        "AE"
+      ],
+      "color": "#ee6818",
+      "selectable": true,
+      "timezone": "Asia/Dubai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://firstflightme.com/tracking/awb/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "firstflightme.com",
+            "www.firstflightme.com"
+          ],
+          "path": "^/tracking/awb/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://firstflightme.com/"
+    },
+    "polonez": {
+      "displayName": "Polonez",
+      "aliases": [
+        "Polonez Express",
+        "Polonez Parcel Service",
+        "Polonez America",
+        "Polonez America LLC"
+      ],
+      "countries": [
+        "US",
+        "PL"
+      ],
+      "color": "#e41d36",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tracking-iframe.meest.com/t/en/{trackingNumber}",
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^[A-Z]{3}\\d{3}[A-Z]{2}\\d{6}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://polonez.express/us-en/parcel-track"
+    },
+    "post-one": {
+      "displayName": "Post One",
+      "aliases": [
+        "PostOne",
+        "POST ONE",
+        "Post One Group",
+        "Post One Group Ltd",
+        "Пост Уан",
+        "Пост Уан Груп"
+      ],
+      "countries": [
+        "BG"
+      ],
+      "color": "#f7da19",
+      "selectable": true,
+      "timezone": "Europe/Sofia",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://postone.eu/en/track?code={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "postone.eu",
+            "www.postone.eu"
+          ],
+          "pathPattern": "^/(?:[a-z]{2}/)?track/?$",
+          "params": [
+            "code"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^R\\d{10}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://postone.eu/en/products/view/track"
+    },
+    "tas-courier": {
+      "displayName": "TAS Courier",
+      "aliases": [
+        "TAScourier",
+        "TAS Courier E.E.",
+        "TAS Courier ΕΕ"
+      ],
+      "countries": [
+        "GR"
+      ],
+      "color": "#e9272b",
+      "selectable": true,
+      "timezone": "Europe/Athens",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.tascourier.gr/track?v={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.tascourier.gr",
+            "tascourier.gr"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "v"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.tascourier.gr/track"
+    },
+    "wedo": {
+      "displayName": "One by Allegro CZ",
+      "aliases": [
+        "WeDo (InTime)",
+        "WeDo",
+        "WE|DO",
+        "WE DO",
+        "WE|DO CZ",
+        "WE|DO CZ s.r.o.",
+        "IN TIME spedice",
+        "Uloženka",
+        "Ulozenka",
+        "One Kurýr",
+        "One Box CZ"
+      ],
+      "countries": [
+        "CZ"
+      ],
+      "color": "#006d57",
+      "selectable": true,
+      "timezone": "Europe/Prague",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://onedelivery.cz/sledovani-zasilky?numer={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "onedelivery.cz",
+            "www.onedelivery.cz"
+          ],
+          "pathPattern": "^/(?:sledovani-zasilky/?)?$",
+          "params": [
+            "numer"
+          ]
+        },
+        {
+          "domains": [
+            "trace.wedo.cz",
+            "trace.intime.cz"
+          ],
+          "pathPattern": "^/index\\.php$",
+          "params": [
+            "orderNumber"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^(?!7[DX]\\d)\\d(?:[A-Z][0-9A-Z]|\\d[A-Z])\\d{8}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://onedelivery.cz/sledovani-zasilky"
+    },
+    "yamato-america": {
+      "displayName": "Yamato Transport U.S.A.",
+      "aliases": [
+        "Yamato America",
+        "Yamato Transport USA",
+        "Yamato USA",
+        "Yamato Transport U.S.A., Inc."
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#fccf00",
+      "selectable": true,
+      "timezone": "America/Los_Angeles",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.yamatoamerica.com/tracking/?slipnumber={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.yamatoamerica.com",
+            "yamatoamerica.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "slipnumber"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.yamatoamerica.com/tracking/"
     }
   },
   "servers": [
@@ -36778,7 +37069,15 @@
           "parcel-one",
           "takesend",
           "veho",
-          "ydh"
+          "ydh",
+          "dd-express",
+          "famafutar",
+          "first-flight-me",
+          "polonez",
+          "post-one",
+          "tas-courier",
+          "wedo",
+          "yamato-america"
         ]
       },
       "Stage": {

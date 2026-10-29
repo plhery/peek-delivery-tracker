@@ -66,22 +66,15 @@ class CardListTest {
         val settled = compose.drawn(compose.onNodeWithTag("list"))
 
         compose.mainClock.autoAdvance = false
-        try {
-            compose.runOnUiThread { runBlocking { state.scrollToItem(2) } }
-            compose.mainClock.advanceTimeByFrame()
-            compose.onAllNodes(buttons).assertCountEquals(0)
-            compose.runOnUiThread { runBlocking { state.scrollToItem(0) } }
-            compose.mainClock.advanceTimeByFrame()
-            compose.onAllNodes(buttons).assertCountEquals(2)
-            val back = compose.drawn(compose.onNodeWithTag("list"))
-            val changed = back.indices.count { back[it] != settled[it] }
-            assertEquals("Pixels unlike the settled list in the first frame back", 0, changed)
-        } finally {
-            // The list settles before the test ends: one ended between two frames with the clock held left the later
-            // cards' screenshots without their maps.
-            compose.mainClock.autoAdvance = true
-            compose.waitForIdle()
-        }
+        compose.runOnUiThread { runBlocking { state.scrollToItem(2) } }
+        compose.mainClock.advanceTimeByFrame()
+        compose.onAllNodes(buttons).assertCountEquals(0)
+        compose.runOnUiThread { runBlocking { state.scrollToItem(0) } }
+        compose.mainClock.advanceTimeByFrame()
+        compose.onAllNodes(buttons).assertCountEquals(2)
+        val back = compose.drawn(compose.onNodeWithTag("list"))
+        val changed = back.indices.count { back[it] != settled[it] }
+        assertEquals("Pixels unlike the settled list in the first frame back", 0, changed)
     }
 
     @Test

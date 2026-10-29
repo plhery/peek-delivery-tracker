@@ -288,6 +288,67 @@ class MapPath {
 
     fun addLine(to: Point) = addLine(to.x, to.y)
 
+    /**
+     * [roundedRect]'s elements added to this path, for the rectangle from (`minX`, `minY`) to (`maxX`, `maxY`): what a
+     * shape that changes each frame fills a path it keeps with ([rewind]), making nothing new.
+     */
+    fun addRoundedRect(minX: Double, minY: Double, maxX: Double, maxY: Double, cornerRadius: Double) {
+        val width = maxX - minX
+        val height = maxY - minY
+        if (cornerRadius == 0.0) {
+            move(minX, minY)
+            addLine(maxX, minY)
+            addLine(maxX, maxY)
+            addLine(minX, maxY)
+            closeSubpath()
+            return
+        }
+        val midY = (minY + maxY) / 2
+        val radius = swiftMin(cornerRadius, swiftMin(width, height) / 2)
+        move(maxX, midY)
+        if (!(radius > 0)) {
+            addLine(maxX, maxY)
+            addLine(minX, maxY)
+            addLine(minX, minY)
+            addLine(maxX, minY)
+            closeSubpath()
+            return
+        }
+        val xRoom = cornerRoom(width / 2, radius)
+        val yRoom = cornerRoom(height / 2, radius)
+        val xStart = cornerStart(xRoom)
+        val xControl1 = cornerControl1(xRoom)
+        val xControl2 = cornerControl2(xRoom)
+        val yStart = cornerStart(yRoom)
+        val yControl1 = cornerControl1(yRoom)
+        val yControl2 = cornerControl2(yRoom)
+        fun right(reach: Double) = maxX - radius * reach
+        fun left(reach: Double) = minX + radius * reach
+        fun bottom(reach: Double) = maxY - radius * reach
+        fun top(reach: Double) = minY + radius * reach
+        val end1 = MIDDLE_END1
+        val end2 = MIDDLE_END2
+        val control1 = MIDDLE_CONTROL1
+        val control2 = MIDDLE_CONTROL2
+        addLine(maxX, bottom(yStart))
+        addCurve(right(end1), bottom(end2), maxX, bottom(yControl1), maxX, bottom(yControl2))
+        addCurve(right(end2), bottom(end1), right(control1), bottom(control2), right(control2), bottom(control1))
+        addCurve(right(xStart), maxY, right(xControl2), maxY, right(xControl1), maxY)
+        addLine(left(xStart), maxY)
+        addCurve(left(end2), bottom(end1), left(xControl1), maxY, left(xControl2), maxY)
+        addCurve(left(end1), bottom(end2), left(control2), bottom(control1), left(control1), bottom(control2))
+        addCurve(minX, bottom(yStart), minX, bottom(yControl2), minX, bottom(yControl1))
+        addLine(minX, top(yStart))
+        addCurve(left(end1), top(end2), minX, top(yControl1), minX, top(yControl2))
+        addCurve(left(end2), top(end1), left(control1), top(control2), left(control2), top(control1))
+        addCurve(left(xStart), minY, left(xControl2), minY, left(xControl1), minY)
+        addLine(right(xStart), minY)
+        addCurve(right(end2), top(end1), right(xControl1), minY, right(xControl2), minY)
+        addCurve(right(end1), top(end2), right(control2), top(control1), right(control1), top(control2))
+        addCurve(maxX, top(yStart), maxX, top(yControl2), maxX, top(yControl1))
+        closeSubpath()
+    }
+
     fun addQuadCurve(x: Double, y: Double, controlX: Double, controlY: Double) {
         add(QUAD, 4)
         numbers[numberCount++] = x
@@ -658,14 +719,17 @@ class MapPath {
 
         private fun single(value: Double): Double = value.toFloat().toDouble()
 
-        /** A continuous corner's reach along one side, in radii, for a side `half` long from its middle to the corner. */
-        private class CornerReach(half: Double, radius: Double) {
-            // How much of its full length the side gives the corner, from 0 to 1, in Float as SwiftUI works it out.
-            private val room = swiftMin(1.0, ((half.toFloat() - radius.toFloat()) / (radius.toFloat() * CORNER_STRETCH.toFloat())).toDouble())
-            val start = single(1 + CORNER_STRETCH * room)
-            val control1 = single(TIGHT_CONTROL1 + (FULL_CONTROL1 - TIGHT_CONTROL1) * room)
-            val control2 = single(TIGHT_CONTROL2 + (FULL_CONTROL2 - TIGHT_CONTROL2) * room)
-        }
+        /**
+         * How much of its full length a side `half` long from its middle to the corner gives a continuous corner, from
+         * 0 to 1, in Float as SwiftUI works it out; then where the corner leaves the side and its first two control
+         * points, in radii.
+         */
+        private fun cornerRoom(half: Double, radius: Double): Double =
+            swiftMin(1.0, ((half.toFloat() - radius.toFloat()) / (radius.toFloat() * CORNER_STRETCH.toFloat())).toDouble())
+
+        private fun cornerStart(room: Double): Double = single(1 + CORNER_STRETCH * room)
+        private fun cornerControl1(room: Double): Double = single(TIGHT_CONTROL1 + (FULL_CONTROL1 - TIGHT_CONTROL1) * room)
+        private fun cornerControl2(room: Double): Double = single(TIGHT_CONTROL2 + (FULL_CONTROL2 - TIGHT_CONTROL2) * room)
 
         /** `Path(_: CGRect)`: from the top left corner, clockwise on screen. */
         fun rect(rect: Rect): MapPath = MapPath().also {
@@ -684,53 +748,8 @@ class MapPath {
          * 1.53 radii from its middle to a corner, that side's curves draw in toward a quarter circle. A radius of exactly
          * 0 gives `Path(_: CGRect)`; a negative one, or no width or height, the four sides from the right middle.
          */
-        fun roundedRect(rect: Rect, cornerRadius: Double): MapPath {
-            if (cornerRadius == 0.0) return MapPath.rect(rect)
-            val minX = rect.minX
-            val minY = rect.minY
-            val maxX = rect.maxX
-            val maxY = rect.maxY
-            val midY = (minY + maxY) / 2
-            val radius = swiftMin(cornerRadius, swiftMin(rect.width, rect.height) / 2)
-            val path = MapPath()
-            path.move(maxX, midY)
-            if (!(radius > 0)) {
-                path.addLine(maxX, maxY)
-                path.addLine(minX, maxY)
-                path.addLine(minX, minY)
-                path.addLine(maxX, minY)
-                path.closeSubpath()
-                return path
-            }
-            val x = CornerReach(rect.width / 2, radius)
-            val y = CornerReach(rect.height / 2, radius)
-            fun right(reach: Double) = maxX - radius * reach
-            fun left(reach: Double) = minX + radius * reach
-            fun bottom(reach: Double) = maxY - radius * reach
-            fun top(reach: Double) = minY + radius * reach
-            val end1 = MIDDLE_END1
-            val end2 = MIDDLE_END2
-            val control1 = MIDDLE_CONTROL1
-            val control2 = MIDDLE_CONTROL2
-            path.addLine(maxX, bottom(y.start))
-            path.addCurve(right(end1), bottom(end2), maxX, bottom(y.control1), maxX, bottom(y.control2))
-            path.addCurve(right(end2), bottom(end1), right(control1), bottom(control2), right(control2), bottom(control1))
-            path.addCurve(right(x.start), maxY, right(x.control2), maxY, right(x.control1), maxY)
-            path.addLine(left(x.start), maxY)
-            path.addCurve(left(end2), bottom(end1), left(x.control1), maxY, left(x.control2), maxY)
-            path.addCurve(left(end1), bottom(end2), left(control2), bottom(control1), left(control1), bottom(control2))
-            path.addCurve(minX, bottom(y.start), minX, bottom(y.control2), minX, bottom(y.control1))
-            path.addLine(minX, top(y.start))
-            path.addCurve(left(end1), top(end2), minX, top(y.control1), minX, top(y.control2))
-            path.addCurve(left(end2), top(end1), left(control1), top(control2), left(control2), top(control1))
-            path.addCurve(left(x.start), minY, left(x.control2), minY, left(x.control1), minY)
-            path.addLine(right(x.start), minY)
-            path.addCurve(right(end2), top(end1), right(x.control1), minY, right(x.control2), minY)
-            path.addCurve(right(end1), top(end2), right(control2), top(control1), right(control1), top(control2))
-            path.addCurve(maxX, top(y.start), maxX, top(y.control2), maxX, top(y.control1))
-            path.closeSubpath()
-            return path
-        }
+        fun roundedRect(rect: Rect, cornerRadius: Double): MapPath =
+            MapPath().also { it.addRoundedRect(rect.minX, rect.minY, rect.maxX, rect.maxY, cornerRadius) }
 
         /**
          * `UnevenRoundedRectangle(cornerRadii:)`, continuous as SwiftUI's default: [roundedRect]'s corners, each with
@@ -816,7 +835,7 @@ class MapPath {
         }
 
         /**
-         * An uneven corner's reach along one side, in radii, for its `share` of that side: as [CornerReach], with the
+         * An uneven corner's reach along one side, in radii, for its `share` of that side: as [cornerRoom], with the
          * room worked out in Double and then rounded to Float, as SwiftUI's uneven rectangle does.
          */
         private class UnevenReach(share: Double, radius: Double) {

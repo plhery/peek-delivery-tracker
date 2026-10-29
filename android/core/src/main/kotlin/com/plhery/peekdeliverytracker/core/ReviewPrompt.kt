@@ -18,7 +18,7 @@ import kotlinx.serialization.Required
 import kotlinx.serialization.Serializable
 
 // ReviewPrompt.swift. The system's prompt is the app's: Play In-App Review through `ReviewRequester`, where iOS asks
-// StoreKit's `requestReview`. `settled(session:store:links:invitation:)` comes with the stores it reads. The iPhone makes
+// StoreKit's `requestReview`. `settled(session:store:links:invitation:)` takes what it reads of the stores. The iPhone makes
 // a `ReviewPrompt()` at each use, in the zone the device is in then; this one reads `timeZone` at each use instead.
 
 /**
@@ -122,6 +122,35 @@ class ReviewPrompt(
         val settle: Duration = 2.seconds
 
         private const val key = "sdt.reviewPrompt.v1"
+
+        /**
+         * `settled(session:store:links:invitation:)`: nothing in the app stands in the way of an ask, whatever the
+         * screen. Someone's own parcels are loaded and current, and no notice, notification permission, friend's
+         * invitation or parcel link is over them. Never over the demo's made-up parcels, but for a look at the prompt
+         * in a debug build (`asksInDemo`, the forced ask), nor over the first screen.
+         */
+        fun settled(
+            session: AuthenticationState,
+            hasParcels: Boolean,
+            loading: Boolean,
+            errorMessage: String?,
+            authenticationRequired: Boolean,
+            usingCachedData: Boolean,
+            notificationEnableInProgress: Boolean,
+            linkOpen: Boolean,
+            invitationShown: Boolean,
+            asksInDemo: Boolean,
+        ): Boolean {
+            val following = when (session) {
+                is AuthenticationState.SignedIn -> true
+                // Nobody is signed in: the parcels this phone follows, once there are some.
+                AuthenticationState.Welcome -> hasParcels
+                AuthenticationState.Demo -> asksInDemo
+                AuthenticationState.Loading, AuthenticationState.SignedOut, AuthenticationState.Unconfigured -> false
+            }
+            return following && !loading && errorMessage == null && !authenticationRequired && !usingCachedData &&
+                !notificationEnableInProgress && !linkOpen && !invitationShown
+        }
 
         /**
          * Swift's `askingForReview(due:ready:take:)` modifier without its view: what its task does each time `due` or

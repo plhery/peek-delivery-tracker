@@ -357,6 +357,41 @@ class ReviewPromptTests {
 
     // Helpers
 
+    @Test
+    fun onlySomeonesOwnCurrentParcelsWithNothingOverThemAreSettled() {
+        fun settled(
+            session: AuthenticationState = AuthenticationState.Welcome,
+            hasParcels: Boolean = true,
+            loading: Boolean = false,
+            errorMessage: String? = null,
+            authenticationRequired: Boolean = false,
+            usingCachedData: Boolean = false,
+            notificationEnableInProgress: Boolean = false,
+            linkOpen: Boolean = false,
+            invitationShown: Boolean = false,
+            asksInDemo: Boolean = false,
+        ) = ReviewPrompt.settled(
+            session, hasParcels, loading, errorMessage, authenticationRequired, usingCachedData, notificationEnableInProgress, linkOpen,
+            invitationShown, asksInDemo,
+        )
+        assertTrue(settled())
+        assertTrue(settled(session = AuthenticationState.SignedIn(AuthUser(UUID.randomUUID())), hasParcels = false))
+        // The first screen, and the demo's made-up parcels but for a debug build's forced ask.
+        assertFalse(settled(hasParcels = false))
+        assertFalse(settled(session = AuthenticationState.Demo))
+        assertTrue(settled(session = AuthenticationState.Demo, asksInDemo = true))
+        for (session in listOf(AuthenticationState.Loading, AuthenticationState.SignedOut, AuthenticationState.Unconfigured)) {
+            assertFalse(settled(session = session))
+        }
+        assertFalse(settled(loading = true))
+        assertFalse(settled(errorMessage = "Offline"))
+        assertFalse(settled(authenticationRequired = true))
+        assertFalse(settled(usingCachedData = true))
+        assertFalse(settled(notificationEnableInProgress = true))
+        assertFalse(settled(linkOpen = true))
+        assertFalse(settled(invitationShown = true))
+    }
+
     private fun usedTwoDays(store: UserDefaults) {
         val prompt = ReviewPrompt(store, version = "1.0.2", timeZone = { ZoneOffset.UTC })
         prompt.used(at = day(0))

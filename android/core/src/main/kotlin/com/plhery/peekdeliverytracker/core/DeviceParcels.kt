@@ -299,9 +299,10 @@ interface DeviceParcelStorage {
  */
 interface DeviceParcelFile {
     /**
-     * The file's bytes, or nil when there is no file or it cannot be read; read through the same `AtomicFile`
-     * (`readFully`). Neither this file nor the keys' secret store goes into a backup (`dataExtractionRules`): a file
-     * brought back without its keys holds parcels this phone can neither read nor forget.
+     * The file's bytes, or nil when there is no file or it cannot be read. It goes into backups and transfers to a
+     * new phone, as Application Support does on the iPhone, and the keys' secret store does not
+     * (`dataExtractionRules`): a file brought back without its keys keeps the parcels followed through someone else's
+     * link alone (`matched`).
      */
     fun read(): ByteArray?
 

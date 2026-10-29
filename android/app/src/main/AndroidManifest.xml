@@ -6,7 +6,7 @@
     <!-- Haptics at the iPhone's intensities (VibrationEffect compositions, Haptics.kt). -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!-- Backups carry the preferences, never the secrets, the parcels whose keys stay behind or the caches
+    <!-- Backups carry the preferences and the parcels this phone follows, never the secrets or the caches
          (res/xml/data_extraction_rules.xml). -->
     <application
         android:name=".PeekApplication"

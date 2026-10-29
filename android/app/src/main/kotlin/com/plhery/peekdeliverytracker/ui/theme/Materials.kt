@@ -399,15 +399,16 @@ fun glassShadow(minDimension: Float): Shadow {
  * mirrored about the band's inner line along each side, the band split on the shape's diagonals, and holds each
  * channel to the ceiling, which dulls bright colours in dark.
  *
- * It is drawn solid, the face over the page's background with no lens, where there is no backdrop, and under Reduce
- * Transparency ([PeekTheme.reduceTransparency]), whose face is all but opaque on the iPhone too. Increase Contrast
- * ([PeekColors.highContrast]) takes its own face. Vibrancy, which iOS gives content on glass, is not drawn.
+ * It is drawn solid, the face over `behind` (the page's background) with no lens, where there is no backdrop, and
+ * under Reduce Transparency ([PeekTheme.reduceTransparency]), whose face is all but opaque on the iPhone too. Increase
+ * Contrast ([PeekColors.highContrast]) takes its own face. Vibrancy, which iOS gives content on glass, is not drawn.
  */
 @Composable
 fun GlassSurface(
     shape: Shape,
     modifier: Modifier = Modifier,
     backdrop: MaterialBackdrop? = LocalMaterialBackdrop.current,
+    behind: Color = PeekTheme.colors.background,
     content: @Composable BoxScope.() -> Unit,
 ) {
     val colors = PeekTheme.colors
@@ -415,13 +416,13 @@ fun GlassSurface(
     val recipe = GlassFace.of(colors.highContrast, reduceTransparency).recipe(colors.dark)
     val blurred = backdrop?.takeUnless { reduceTransparency }
     Box(modifier) {
-        val solid = colors.background.takeIf { blurred == null }
+        val solid = behind.takeIf { blurred == null }
         Box(Modifier.matchParentSize().then(GlassElement(shape, recipe, solid))) {
             if (blurred != null) {
-                val style = remember(recipe, colors.background) {
+                val style = remember(recipe, behind) {
                     // From Android 13 the lens's shader filters the face, after the lens and before the ceiling.
                     val filter = recipe.colorMatrix.takeIf { Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU }
-                    hazeStyle(gaussianBlurRadius(GLASS_BLUR.dp), filter, recipe.over(colors.background, 0f), colors.background)
+                    hazeStyle(gaussianBlurRadius(GLASS_BLUR.dp), filter, recipe.over(behind, 0f), behind)
                 }
                 // The face reaches GLASS_MARGIN past the shape; the drawing clips it to the shape. It blurs the marked
                 // content: a backdrop input samples what lies behind where it is drawn, and Android 12 draws the face
@@ -432,6 +433,40 @@ fun GlassSurface(
         content()
     }
 }
+
+/**
+ * The glass of a sheet or a popover, iOS 26's Liquid Glass at its largest: [GlassFace]'s face over what lies behind,
+ * blurred as far as the thin material blurs ([LARGE_GLASS_BLUR]) rather than a control's few points, with no lens, lit
+ * edge or shadow, which a sheet's glass doesn't show. It is drawn solid, the face over `behind`, where there is no
+ * backdrop and under Reduce Transparency.
+ */
+@Composable
+fun LargeGlassSurface(
+    shape: Shape,
+    modifier: Modifier = Modifier,
+    backdrop: MaterialBackdrop? = LocalMaterialBackdrop.current,
+    behind: Color = PeekTheme.colors.background,
+) {
+    val colors = PeekTheme.colors
+    val reduceTransparency = PeekTheme.reduceTransparency
+    val recipe = GlassFace.of(colors.highContrast, reduceTransparency).recipe(colors.dark)
+    val blurred = backdrop?.takeUnless { reduceTransparency }
+    val fill = modifier.clip(shape)
+    if (blurred == null) {
+        Box(fill.background(recipe.over(behind, LARGE_GLASS_SIDE)))
+    } else {
+        val style = remember(recipe, behind) {
+            hazeStyle(gaussianBlurRadius(LARGE_GLASS_BLUR.dp), recipe.colorMatrix, recipe.over(behind, LARGE_GLASS_SIDE), behind)
+        }
+        Box(fill.hazeBlur(HazeInput.Backdrop(blurred.haze), style, expandLayerBounds = false))
+    }
+}
+
+/** How far a sheet's glass blurs what lies behind it, in points: as far as the thin material does. */
+private const val LARGE_GLASS_BLUR = 30f
+
+/** A large glass's shorter side, in points, for its luminance ceiling in dark. */
+private const val LARGE_GLASS_SIDE = 400f
 
 /** The glass drawn behind its content: the shadow, the face (its content) or [solid] behind it, the lens, the edge. */
 private data class GlassElement(val shape: Shape, val recipe: GlassRecipe, val solid: Color?) : ModifierNodeElement<GlassNode>() {

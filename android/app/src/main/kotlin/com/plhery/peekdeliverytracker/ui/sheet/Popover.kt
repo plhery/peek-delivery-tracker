@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -29,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathOperation
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
@@ -152,11 +154,16 @@ private fun PopoverLayer(
                     transformOrigin = TransformOrigin(frame.tip, if (frame.below) 0f else 1f)
                 }
                 .dropShadow(shape, POPOVER_SHADOW)
+                .clip(shape)
                 .pointerInput(Unit) { detectTapGestures { } }
                 .semantics { this.paneTitle = paneTitle },
         ) {
             SheetGlass(shape, backdrop, Modifier.matchParentSize())
-            CompositionLocalProvider(LocalSheetAttachment provides { 0f }, LocalSheetMenus provides menus, LocalSheetBarTop provides POPOVER_BAR_TOP) {
+            val insets = with(density) { SheetInsets.popover(frame.bounds.width.toDp()) }
+            val ground: @Composable (Modifier) -> Unit = { SheetGlass(RectangleShape, backdrop, it) }
+            CompositionLocalProvider(
+                LocalSheetAttachment provides { 0f }, LocalSheetMenus provides menus, LocalSheetInsets provides insets, LocalSheetGround provides ground,
+            ) {
                 Box(Modifier.padding(top = if (frame.below) ARROW_HEIGHT else 0.dp, bottom = if (frame.below) 0.dp else ARROW_HEIGHT)) {
                     content()
                 }
@@ -215,5 +222,4 @@ private val POPOVER_MARGIN = 16.dp
 private val POPOVER_RADIUS = 30.dp
 private val ARROW_HEIGHT = 13.dp
 private val ARROW_WIDTH = 34.dp
-private val POPOVER_BAR_TOP = 10.dp
 private val POPOVER_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.14f), radius = 30.dp, y = 10.dp)

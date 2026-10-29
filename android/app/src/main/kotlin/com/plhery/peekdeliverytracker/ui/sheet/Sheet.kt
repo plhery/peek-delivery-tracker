@@ -41,7 +41,9 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -64,8 +66,8 @@ import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
-import com.plhery.peekdeliverytracker.ui.theme.MaterialSurface
-import com.plhery.peekdeliverytracker.ui.theme.PeekMaterial
+import com.plhery.peekdeliverytracker.ui.theme.GlassFace
+import com.plhery.peekdeliverytracker.ui.theme.LargeGlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
@@ -73,6 +75,7 @@ import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.roundToInt
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -98,6 +101,12 @@ sealed interface SheetDetent {
  */
 internal val LocalSheetAttachment = staticCompositionLocalOf<() -> Float> { { 1f } }
 
+/**
+ * What a sheet or a popover stands on, its glass or its opaque ground, drawn again in `Modifier`'s bounds under what
+ * blurs it: the bar's confirmation stands on the sheet, and takes it on through its glass ([SheetPage]). Null outside one.
+ */
+internal val LocalSheetGround = staticCompositionLocalOf<(@Composable (Modifier) -> Unit)?> { null }
+
 /** Where a menu opened in a sheet or a popover is drawn, over all of it ([MenuRow]); null outside one. */
 internal val LocalSheetMenus = staticCompositionLocalOf<SheetMenus?> { null }
 
@@ -112,7 +121,8 @@ internal class SheetMenus {
  *
  * - Where the window is compact (narrower than 600 or lower than 480, as a phone is), it comes up from the bottom to the
  *   first of its [detents]. At the medium detent, and at a height of its own, it floats on glass inset 8 from the
- *   window's sides and bottom, its bottom corners concentric with the display's own; at the large one it stands under
+ *   window's sides and bottom, its bottom corners concentric with the display's own, what it holds laid out as at the
+ *   window's width and made smaller to the panel's; at the large one it stands under
  *   the status bar, attached and opaque, on the grouped ground. Dragged by its grabber, its bar or what it scrolls once
  *   at its top, it follows the finger between them, morphing from one to the other, and settles where the release and
  *   its speed would carry it, as UIKit projects a flick; dragged down past its lowest detent, it goes. A scroll in it
@@ -217,6 +227,7 @@ private fun SheetLayer(
         val width = constraints.maxWidth.toFloat()
         val height = constraints.maxHeight.toFloat()
         val regular = maxWidth >= REGULAR_WIDTH && maxHeight >= REGULAR_HEIGHT
+        val insets = SheetInsets.sheet(maxWidth)
         val motion = remember { SheetMotion(height) }
         motion.hidden = height
         var backProgress by remember { mutableFloatStateOf(0f) }
@@ -237,7 +248,7 @@ private fun SheetLayer(
                     SheetDetent.Large -> largeTop
                     SheetDetent.Medium -> height * MEDIUM_TOP
                     is SheetDetent.Height -> height - inset - with(density) { detent.height.toPx() }
-                    SheetDetent.Fitted -> if (fitted > 0) height - inset - fitted else height * MEDIUM_TOP
+                    SheetDetent.Fitted -> if (fitted > 0) height - inset - fitted * (width - 2 * inset) / width else height * MEDIUM_TOP
                 }.coerceAtLeast(largeTop)
             }
             // A keyboard up takes the sheet to its large detent, as UIKit lifts a sheet clear of it.
@@ -348,14 +359,20 @@ private fun SheetLayer(
         if (regular) {
             val shape = ContinuousRoundedShape(FORM_RADIUS)
             Box(
-                modifier
+                Modifier
                     .placedAt(formWidth, formHeight) { (width - formWidth) / 2 to motion.top + backProgress * BACK_TRAVEL * formHeight }
+                    .testTag(SHEET_PANEL)
+                    .then(modifier)
                     .dropShadow(shape, SHEET_SHADOW)
                     .clip(shape)
                     .background(colors.groupedBackground)
                     .then(sheetModifier),
             ) {
-                CompositionLocalProvider(LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus) {
+                val ground: @Composable (Modifier) -> Unit = { Box(it.background(colors.groupedBackground)) }
+                CompositionLocalProvider(
+                    LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus, LocalSheetInsets provides SheetInsets.sheet(FORM_WIDTH),
+                    LocalSheetGround provides ground,
+                ) {
                     Grabber(Modifier.align(Alignment.TopCenter))
                     content()
                 }
@@ -380,14 +397,16 @@ private fun SheetLayer(
             }
             val shape = UnevenContinuousRoundedShape(TOP_RADIUS, bottomRadius, bottomRadius, TOP_RADIUS)
             Box(
-                modifier
+                Modifier
                     .placedAt(width - 2 * sideInset, panelHeight) { sideInset to layoutTop + below }
+                    .testTag(SHEET_PANEL)
+                    .then(modifier)
                     .dropShadow(shape, SHEET_SHADOW)
                     .then(sheetModifier),
             ) {
                 // The glass it floats on, giving way to the opaque ground as it attaches.
                 if (attach < 1f) {
-                    SheetGlass(shape, backdrop, Modifier.matchParentSize().graphicsLayer { alpha = 1 - attachment() })
+                    SheetGlass(shape, backdrop, Modifier.matchParentSize().graphicsLayer { alpha = 1 - attachment() }) { dim * presence }
                 }
                 Box(
                     Modifier
@@ -395,9 +414,27 @@ private fun SheetLayer(
                         .clip(shape)
                         .drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) },
                 )
+                val scale = { (width - 2 * inset * (1 - attachment())) / width }
+                // Drawn again in what is scaled, it is scaled back, so that its glass blurs the window where it is.
+                val ground: @Composable (Modifier) -> Unit = { bounds ->
+                    Box(bounds.scaledFrom { 1 / scale() }) {
+                        if (attach < 1f) SheetGlass(RectangleShape, backdrop, Modifier.fillMaxSize().graphicsLayer { alpha = 1 - attachment() }) { dim * presence }
+                        Box(Modifier.fillMaxSize().drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) })
+                    }
+                }
                 Box(Modifier.matchParentSize().clip(shape)) {
-                    CompositionLocalProvider(LocalSheetAttachment provides attachment, LocalSheetMenus provides menus) {
-                        Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() }
+                    CompositionLocalProvider(
+                        LocalSheetAttachment provides attachment, LocalSheetMenus provides menus, LocalSheetInsets provides insets,
+                        LocalSheetGround provides ground,
+                    ) {
+                        // Floating, the sheet is its attached self made smaller to its width, as UIKit draws it: laid
+                        // out across the whole window, and scaled into the inset panel.
+                        Box(
+                            Modifier
+                                .fillMaxSize()
+                                .scaledFrom(scale)
+                                .then(if (SheetDetent.Fitted in detents) Modifier.measureFitted { fitted = it } else Modifier),
+                        ) { content() }
                         Grabber(Modifier.align(Alignment.TopCenter))
                     }
                 }
@@ -407,19 +444,42 @@ private fun SheetLayer(
     }
 }
 
-/** The panel `width` × `height` pixels, at the offset [at] gives, whatever the room. */
+/** The panel `width` × `height` pixels in the whole window, at the offset [at] gives, read as it is placed. */
 private fun Modifier.placedAt(width: Float, height: Float, at: () -> Pair<Float, Float>): Modifier =
     this.then(
-        Modifier.layout { measurable, _ ->
+        Modifier.layout { measurable, constraints ->
             val placeable = measurable.measure(Constraints.fixed(width.toInt().coerceAtLeast(0), height.toInt().coerceAtLeast(0)))
-            layout(placeable.width, placeable.height) {
+            layout(constraints.maxWidth, constraints.maxHeight) {
                 val (x, y) = at()
                 placeable.place(x.toInt(), y.toInt())
             }
         },
     )
 
-/** Reports the height the content needs, laid out with all the room it could have, for [SheetDetent.Fitted]. */
+/**
+ * Lays the content out larger by 1 / [scale] and draws it scaled by it from its top leading corner, so that it fills
+ * the room it is given as if laid out in a larger one.
+ */
+private fun Modifier.scaledFrom(scale: () -> Float): Modifier = this.then(
+    Modifier.layout { measurable, constraints ->
+        val factor = scale().coerceIn(0.5f, 2f)
+        val placeable = measurable.measure(
+            Constraints.fixed((constraints.maxWidth / factor).roundToInt(), (constraints.maxHeight / factor).roundToInt()),
+        )
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            placeable.placeWithLayer(0, 0) {
+                scaleX = factor
+                scaleY = factor
+                transformOrigin = TransformOrigin(0f, 0f)
+            }
+        }
+    },
+)
+
+/**
+ * Reports the height the content needs, laid out with all the room it could have, for [SheetDetent.Fitted], whose
+ * content must answer intrinsic measurements (no lazy list or `BoxWithConstraints` in it).
+ */
 private fun Modifier.measureFitted(report: (Float) -> Unit): Modifier = this.then(
     Modifier.layout { measurable, constraints ->
         val needed = measurable.maxIntrinsicHeight(constraints.maxWidth)
@@ -430,12 +490,18 @@ private fun Modifier.measureFitted(report: (Float) -> Unit): Modifier = this.the
 )
 
 /**
- * The glass a sheet floats on, and a popover stands on: iOS 26's large glass, which blurs what lies behind it far more
- * than a control's, drawn as the thin material over [backdrop].
+ * The glass a sheet floats on, and a popover stands on: iOS 26's large glass ([LargeGlassSurface]). The iPhone's glass
+ * blurs the window dimmed under it, where [backdrop] is the window as it is: in light, the dim is laid over the glass as
+ * the glass would show it, its face's own colour for black at the dim's strength, `dim()`. In dark, the iPhone's sheet
+ * is lighter than its glass would make of the dimmed window, and comes closest without it.
  */
 @Composable
-internal fun SheetGlass(shape: Shape, backdrop: MaterialBackdrop?, modifier: Modifier) {
-    MaterialSurface(PeekMaterial.Thin, shape, modifier, backdrop) {}
+internal fun SheetGlass(shape: Shape, backdrop: MaterialBackdrop?, modifier: Modifier, dim: () -> Float = { 0f }) {
+    val colors = PeekTheme.colors
+    LargeGlassSurface(shape, modifier, backdrop, behind = colors.groupedBackground)
+    if (colors.dark) return
+    val black = GlassFace.of(colors.highContrast, PeekTheme.reduceTransparency).recipe(false).over(Color.Black, 400f)
+    Box(modifier.clip(shape).drawBehind { drawRect(black, alpha = dim()) })
 }
 
 /** `.presentationDragIndicator(.visible)`: 36 × 5, 5 under the sheet's top. */
@@ -474,4 +540,5 @@ private const val DETENT_DURATION = 0.4
 private const val BACK_TRAVEL = 0.1f
 private val SHEET_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 20.dp, y = 0.dp)
 
-const val SHEET = "sheet"
+/** The sheet's panel, the dim around it aside. */
+const val SHEET_PANEL = "sheet.panel"

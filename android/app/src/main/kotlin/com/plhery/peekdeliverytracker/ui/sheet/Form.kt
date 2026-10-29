@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -27,6 +29,7 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,7 +43,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawOutline
@@ -111,31 +114,36 @@ internal fun SheetPage(
     val attachment = LocalSheetAttachment.current
     val backdrop = rememberMaterialBackdrop()
     val bottom = with(LocalDensity.current) { WindowInsets.navigationBars.getBottom(this).toDp() }
-    val barTop = LocalSheetBarTop.current
+    val insets = LocalSheetInsets.current
+    val barTop = insets.barTop
     val barHeight = barTop + BAR_ROW
+    val ground = LocalSheetGround.current
     Box(modifier.fillMaxSize()) {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .materialBackdrop(backdrop)
-                .verticalScroll(scroll)
-                .padding(top = barHeight, bottom = FORM_BOTTOM + bottom),
-        ) {
-            content()
+        Box(Modifier.fillMaxSize().materialBackdrop(backdrop)) {
+            // The sheet, drawn again where the confirmation's glass can take it on, as the iPhone's does: its tint
+            // over the glass, or its lighter grey on the grouped ground in dark.
+            ground?.invoke(Modifier.fillMaxSize())
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(scroll)
+                    .padding(top = barHeight, bottom = FORM_BOTTOM + bottom),
+            ) {
+                content()
+            }
         }
-        // iOS 26's scroll edge: the ground the form scrolls under, fading out below the bar, once it has scrolled.
+        // iOS 26's hard scroll edge on an attached sheet: once the form has scrolled under the bar, a band the cells'
+        // colour, which leaves a ghost of what is under it, down to a hairline EDGE_BELOW under the bar.
         Box(
             Modifier
                 .fillMaxWidth()
-                .height(barHeight + EDGE_FADE)
+                .height(barHeight + EDGE_BELOW)
                 .drawBehind {
-                    val shown = (scroll.value / EDGE_FADE.toPx()).coerceIn(0f, 1f) * attachment()
+                    val shown = (scroll.value / EDGE_BELOW.toPx()).coerceIn(0f, 1f) * attachment()
                     if (shown <= 0f) return@drawBehind
-                    val ground = colors.groupedBackground
-                    drawRect(
-                        Brush.verticalGradient(0f to ground, 0.75f to ground.copy(alpha = 0.9f), 1f to ground.copy(alpha = 0f)),
-                        alpha = shown,
-                    )
+                    drawRect(colors.secondaryGroupedBackground, alpha = shown * EDGE_OPACITY)
+                    val line = 1.dp.toPx()
+                    drawRect(colors.separator, Offset(0f, size.height - line), Size(size.width, line), alpha = shown)
                 },
         )
         Box(Modifier.fillMaxWidth().padding(top = barTop).height(BAR_ROW)) {
@@ -151,7 +159,7 @@ internal fun SheetPage(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            ConfirmationButton(confirmation, onConfirm, backdrop, Modifier.align(Alignment.CenterEnd).padding(end = BAR_SIDE), confirmTag)
+            ConfirmationButton(confirmation, onConfirm, backdrop, Modifier.align(Alignment.CenterEnd).padding(end = insets.barSide), confirmTag)
         }
     }
 }
@@ -174,25 +182,41 @@ private fun ConfirmationButton(title: String, onConfirm: () -> Unit, backdrop: M
     }
 }
 
-/** How far under the top of a sheet its bar's row stands: clear of the grabber, or 10 in a popover. */
-internal val LocalSheetBarTop = staticCompositionLocalOf { 19.dp }
+/**
+ * Where a page's bar and form stand in a sheet or a popover: the bar's row `barTop` under its top, clear of a sheet's
+ * grabber, its confirmation `barSide` in from the side, and the form's sections and rows `formSide` in, UIKit's layout
+ * margins, 16 on a surface narrower than 414 points, as a popover is, and 20 from there.
+ */
+@Immutable
+internal data class SheetInsets(val barTop: Dp, val barSide: Dp, val formSide: Dp) {
+    companion object {
+        /** A sheet `width` wide. */
+        fun sheet(width: Dp) = SheetInsets(19.dp, 20.dp, margin(width))
+
+        /** A popover `width` wide. */
+        fun popover(width: Dp) = SheetInsets(10.dp, 10.dp, margin(width))
+
+        private fun margin(width: Dp) = if (width >= 414.dp) 20.dp else 16.dp
+    }
+}
+
+internal val LocalSheetInsets = staticCompositionLocalOf { SheetInsets.sheet(440.dp) }
 
 /**
  * `Section(header)` in an inset grouped form: its header, then its rows on one rounded surface, a hairline between
  * each, inset 20 on both sides. The surface is white (dark grey in dark) on the sheet's opaque ground, and a veil on
- * its glass ([LocalSheetAttachment]). Without a header, the section keeps the room one would take.
+ * its glass, where the hairlines are a shade of the rows ([LocalSheetAttachment]). Without a header, the section keeps the room one would take.
  */
 @Composable
 fun FormSection(header: String?, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     val colors = PeekTheme.colors
     val attachment = LocalSheetAttachment.current
-    val density = LocalDensity.current
-    val hairline = with(density) { 1.toDp() }
-    Column(modifier.fillMaxWidth().padding(horizontal = FORM_SIDE)) {
+    val side = LocalSheetInsets.current.formSide
+    Column(modifier.fillMaxWidth().padding(horizontal = side).padding(bottom = SECTION_BOTTOM)) {
         if (header != null) {
             Text(
                 header,
-                Modifier.padding(start = ROW_SIDE, end = ROW_SIDE, top = HEADER_TOP, bottom = HEADER_BOTTOM).semantics { heading() },
+                Modifier.padding(start = side, end = side, top = HEADER_TOP, bottom = HEADER_BOTTOM).semantics { heading() },
                 color = colors.secondaryLabel,
                 style = PeekTheme.type.style(IosTextStyle.Headline, FontWeight.SemiBold).sfLines(),
             )
@@ -208,13 +232,19 @@ fun FormSection(header: String?, modifier: Modifier = Modifier, content: @Compos
                 .drawBehind {
                     val attached = attachment()
                     val outline = shape.createOutline(size, layoutDirection, this)
-                    val veil = if (colors.dark) Color.White.copy(alpha = GLASS_ROWS_DARK) else Color.White.copy(alpha = GLASS_ROWS_LIGHT)
+                    val veil = if (colors.dark) Color.White.copy(alpha = GLASS_ROWS_DARK) else Color.Black.copy(alpha = GLASS_ROWS_LIGHT)
                     if (attached < 1f) drawOutline(outline, veil, alpha = 1 - attached)
                     if (attached > 0f) drawOutline(outline, colors.secondaryGroupedBackground, alpha = attached)
-                    val side = ROW_SIDE.toPx()
-                    val line = hairline.toPx()
+                    val inset = side.toPx()
+                    val line = SEPARATOR.toPx()
+                    // On glass, the hairlines are the rows' own colour darkened (lightened in dark), as the
+                    // iPhone's show; on the ground, the separator.
+                    val glassLine = if (colors.dark) Color.White.copy(alpha = GLASS_SEPARATOR_DARK) else Color.Black.copy(alpha = GLASS_SEPARATOR_LIGHT)
                     for (y in bounds) {
-                        drawRect(colors.separator, Offset(side, y - line), androidx.compose.ui.geometry.Size(size.width - 2 * side, line))
+                        val origin = Offset(inset, y - line)
+                        val lineSize = Size(size.width - 2 * inset, line)
+                        if (attached < 1f) drawRect(glassLine, origin, lineSize, alpha = 1 - attached)
+                        if (attached > 0f) drawRect(colors.separator, origin, lineSize, alpha = attached)
                     }
                 },
         ) { measurables, constraints ->
@@ -313,8 +343,7 @@ fun FormMenuRow(
                 onClick { open(); true }
             },
     ) {
-        Text(title, Modifier.weight(1f, fill = false), color = colors.label, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
-        Spacer(Modifier.weight(0.001f).width(8.dp))
+        Text(title, Modifier.weight(1f).padding(end = 8.dp), color = colors.label, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
         Row(Modifier.onGloballyPositioned { value = it.boundsInWindow() }, verticalAlignment = Alignment.CenterVertically) {
             Text(current, color = colors.secondaryLabel, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
             PeekSymbol(
@@ -335,10 +364,10 @@ fun FormMenuRow(
  */
 @Composable
 private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trailing: Float, onClose: () -> Unit, onSelect: (Int) -> Unit) {
-    val density = LocalDensity.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion
+    val bars = WindowInsets.systemBars
     val scope = rememberCoroutineScope()
     val shown = remember { Animatable(0f) }
     val first = remember { AccessibilityFocus() }
@@ -367,12 +396,14 @@ private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trail
             Modifier
                 .layout { measurable, constraints ->
                     val margin = MENU_MARGIN.roundToPx()
+                    val top = max(margin, bars.getTop(this))
+                    val bottom = max(margin, bars.getBottom(this))
                     val width = MENU_WIDTH.roundToPx()
-                    val placeable = measurable.measure(Constraints(width, width, 0, max(0, constraints.maxHeight - 2 * margin)))
+                    val placeable = measurable.measure(Constraints(width, width, 0, max(0, constraints.maxHeight - top - bottom)))
                     layout(constraints.maxWidth, constraints.maxHeight) {
                         val x = (trailing - origin.x - width).roundToInt().coerceIn(margin, max(margin, constraints.maxWidth - width - margin))
                         val wanted = (row.top - origin.y + MENU_DROP.toPx()).roundToInt()
-                        val y = wanted.coerceAtMost(constraints.maxHeight - margin - placeable.height).coerceAtLeast(margin)
+                        val y = wanted.coerceAtMost(constraints.maxHeight - bottom - placeable.height).coerceAtLeast(top)
                         placeable.place(x, y)
                     }
                 }
@@ -388,7 +419,8 @@ private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trail
                 .pointerInput(Unit) { detectTapGestures { } }
                 .semantics { paneTitle = options.getOrNull(selected)?.title.orEmpty() },
         ) {
-            SheetGlass(shape, null, Modifier.matchParentSize())
+            // On the glass of a control, its edge lit and shaded, over the sheet's ground.
+            GlassSurface(shape, Modifier.matchParentSize(), backdrop = null, behind = colors.groupedBackground) {}
             Column(Modifier.verticalScroll(rememberScrollState()).padding(vertical = MENU_PADDING)) {
                 options.forEachIndexed { index, option ->
                     val chosen = index == selected
@@ -405,7 +437,7 @@ private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trail
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Box(Modifier.width(MENU_CHECK_WIDTH)) {
-                            if (chosen) PeekSymbol("checkmark", font = type.style(IosTextStyle.Body, FontWeight.SemiBold), tint = colors.label)
+                            if (chosen) PeekSymbol("checkmark", font = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold), tint = colors.label)
                         }
                         Text(option.title, Modifier.weight(1f), color = colors.label, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
@@ -415,11 +447,11 @@ private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trail
     }
 }
 
-/** A row of a form: at least 52 high, its content 20 in from either side. */
+/** A row of a form: at least 52 high, its content in by the form's margin on either side. */
 @Composable
-private fun FormRowFrame(modifier: Modifier, content: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit) {
+private fun FormRowFrame(modifier: Modifier, content: @Composable RowScope.() -> Unit) {
     Row(
-        modifier.fillMaxWidth().heightIn(min = ROW_HEIGHT).padding(horizontal = ROW_SIDE, vertical = ROW_VERTICAL),
+        modifier.fillMaxWidth().heightIn(min = ROW_HEIGHT).padding(horizontal = LocalSheetInsets.current.formSide, vertical = ROW_VERTICAL),
         verticalAlignment = Alignment.CenterVertically,
         content = content,
     )
@@ -466,27 +498,29 @@ private class HighlightNode(private val interactionSource: InteractionSource, pr
 }
 
 private val BAR_ROW = 44.dp
-private val BAR_SIDE = 20.dp
 private val TITLE_CLEARANCE = 96.dp
 private val CONFIRM_PADDING = 16.dp
-private val EDGE_FADE = 16.dp
+private val EDGE_BELOW = 11.dp
+private const val EDGE_OPACITY = 0.95f
 private val FORM_BOTTOM = 20.dp
-private val FORM_SIDE = 20.dp
-private val ROW_SIDE = 20.dp
 private val ROW_HEIGHT = 52.dp
 private val ROW_VERTICAL = 6.dp
-private val HEADER_TOP = 18.dp
+private val HEADER_TOP = 21.dp
 private val HEADER_BOTTOM = 10.dp
-private val SECTION_GAP = 20.dp
+private val SECTION_GAP = 29.dp
+private val SECTION_BOTTOM = 6.dp
+private val SEPARATOR = 1.dp
 private val SECTION_RADIUS = 26.dp
-private const val GLASS_ROWS_LIGHT = 0.5f
+private const val GLASS_ROWS_LIGHT = 0.07f
 private const val GLASS_ROWS_DARK = 0.08f
+private const val GLASS_SEPARATOR_LIGHT = 0.11f
+private const val GLASS_SEPARATOR_DARK = 0.145f
 private val MENU_WIDTH = 250.dp
-private val MENU_RADIUS = 24.dp
+private val MENU_RADIUS = 34.dp
 private val MENU_ROW = 42.dp
-private val MENU_PADDING = 10.dp
+private val MENU_PADDING = 8.dp
 private val MENU_MARGIN = 16.dp
 private val MENU_DROP = 8.dp
-private val MENU_CHECK_START = 18.dp
-private val MENU_CHECK_WIDTH = 25.dp
+private val MENU_CHECK_START = 20.5.dp
+private val MENU_CHECK_WIDTH = 23.dp
 private val MENU_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 24.dp, y = 8.dp)

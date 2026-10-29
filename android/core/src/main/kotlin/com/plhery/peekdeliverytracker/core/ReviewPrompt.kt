@@ -160,9 +160,9 @@ class ReviewPrompt(
          * word, and an ask is counted (`report`, the analytics action). Never from a tap: the store may show nothing,
          * and a button that does nothing would be a broken one.
          *
-         * StoreKit's prompt needs nothing first; Play's needs its review info, which may not come (no Play Store or an
-         * outdated one, no connection, an app not installed from Play). It is fetched while the moment settles, and
-         * without it nothing is taken: the version keeps its ask and no month starts, as no ask reached the system.
+         * StoreKit's prompt needs nothing first; Play's needs its review info, which doesn't come without the Play
+         * Store or with one that isn't Google's. It is fetched while the moment settles, and without it nothing is
+         * taken: the version keeps its ask and no month starts, as no ask reached the system.
          */
         suspend fun ask(due: Boolean, ready: Boolean, take: () -> Boolean, requester: ReviewRequester, report: (String) -> Unit) {
             if (!due || !ready) return
@@ -192,7 +192,8 @@ class ReviewPrompt(
 interface ReviewRequester {
     /**
      * Play's `requestReviewFlow()`: fetches the review info the prompt needs. False, or a throw, when there is none (no
-     * Play Store or an outdated one, no connection, an app not installed from Play); nothing is asked then.
+     * Play Store, or one that isn't Google's); nothing is asked then. An app installed from elsewhere than Play gets
+     * info whose launch shows nothing.
      */
     suspend fun prepare(): Boolean
 

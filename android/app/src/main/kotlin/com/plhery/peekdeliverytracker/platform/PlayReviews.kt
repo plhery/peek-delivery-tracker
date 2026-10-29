@@ -9,8 +9,10 @@ import com.plhery.peekdeliverytracker.core.ReviewRequester
 
 /**
  * The system's prompt for a rating over `activity`: Play In-App Review, where the iPhone asks StoreKit's
- * `requestReview`. Play decides whether anything shows, and says nothing of it. Without the Play Store, an outdated one
- * or an app not installed from Play, the review info doesn't come: [prepare] throws, and nothing is asked.
+ * `requestReview`. Play decides whether anything shows, and says nothing of it. An app installed from elsewhere than
+ * Play, a debug build among them, gets review info all the same, and a launch that shows nothing: its version's ask is
+ * spent, as an iPhone's is when StoreKit shows nothing. Only without the Play Store, or with one that isn't Google's,
+ * does the review info not come: [prepare] throws, and nothing is asked.
  */
 class PlayReviews(
     private val activity: Activity,

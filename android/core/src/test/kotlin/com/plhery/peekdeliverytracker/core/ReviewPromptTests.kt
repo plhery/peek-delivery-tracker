@@ -349,7 +349,7 @@ class ReviewPromptTests {
         val take = { prompt.take(at = day(2), calm = true) }
         val calls = mutableListOf<String>()
 
-        // No Play Store, an outdated one, no connection or an app not installed from Play: nothing is taken or counted.
+        // No Play Store, or one that isn't Google's: nothing is taken or counted.
         val failing = Requester(calls, prepares = { false })
         ReviewPrompt.ask(due = true, ready = true, take = take, requester = failing) { calls += it }
         assertEquals(listOf("prepare"), calls)

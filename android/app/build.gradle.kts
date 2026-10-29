@@ -4,6 +4,33 @@ plugins {
     alias(libs.plugins.roborazzi)
 }
 
+// The iPhone build's configuration: ios/Configuration/Shared.xcconfig, then a developer's own Local.xcconfig (git
+// ignores it), so both apps talk to the same server with the same switches. Only public client settings live there.
+val xcconfig: Map<String, String> = listOf("Shared.xcconfig", "Local.xcconfig")
+    .flatMap { name ->
+        val file = rootProject.layout.projectDirectory.file("../ios/Configuration/$name")
+        providers.fileContents(file).asText.orNull.orEmpty().lines()
+    }
+    .map { it.trim() }
+    .filter { '=' in it && !it.startsWith("//") && !it.startsWith("#") }
+    // `$()` is empty, which keeps `//` in a URL from starting a comment.
+    .associate { it.substringBefore('=').trim() to it.substringAfter('=').substringBefore("//").trim().replace("$()", "") }
+
+/** The settings AppConfiguration reads, by their Info.plist keys (ios/PeekDeliveryTracker/Info.plist). */
+val iosSettings = mapOf(
+    "SDTUseAPI" to "SDT_USE_API",
+    "SDTAPIBaseURL" to "SDT_API_BASE_URL",
+    "SDTSupabaseURL" to "SDT_SUPABASE_URL",
+    "SDTSupabasePublishableKey" to "SDT_SUPABASE_PUBLISHABLE_KEY",
+    "SDTGoogleAuthEnabled" to "SDT_GOOGLE_AUTH_ENABLED",
+    "SDTAppleAuthEnabled" to "SDT_APPLE_AUTH_ENABLED",
+    "SDTEmailOTPEnabled" to "SDT_EMAIL_OTP_ENABLED",
+    "SDTAppGroupIdentifier" to "SDT_APP_GROUP_IDENTIFIER",
+    "SDTLinkHosts" to "SDT_LINK_HOSTS",
+    "SDTOIDCProvider" to "SDT_OIDC_PROVIDER",
+    "SDTOIDCName" to "SDT_OIDC_NAME",
+)
+
 android {
     namespace = "com.plhery.peekdeliverytracker"
     compileSdk = 37
@@ -14,10 +41,16 @@ android {
         targetSdk = 37
         versionCode = 1
         versionName = "0.1.0"
+        // The iPhone build's settings, under the names its Info.plist gives them (AppConfiguration.from).
+        for ((key, setting) in iosSettings) {
+            val value = xcconfig[setting].orEmpty().replace("\\", "\\\\").replace("\"", "\\\"")
+            buildConfigField("String", key, "\"$value\"")
+        }
     }
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     packaging {
@@ -95,6 +128,8 @@ dependencies {
     // The iPhone's materials: a blur of what lies behind (Materials.kt).
     implementation(libs.haze)
     implementation(libs.haze.blur)
+    // URLSession's stand-in: the API, sign-in, catalog and link requests (platform/OkHttpTransport.kt).
+    implementation(libs.okhttp)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
@@ -110,4 +145,5 @@ dependencies {
     testImplementation(libs.roborazzi)
     testImplementation(libs.roborazzi.compose)
     testImplementation(libs.roborazzi.junit.rule)
+    testImplementation(libs.mockwebserver)
 }

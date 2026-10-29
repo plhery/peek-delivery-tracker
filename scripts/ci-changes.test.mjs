@@ -36,7 +36,7 @@ describe('test suite boundaries', () => {
   });
 
   it('runs native tests for native code and build configuration', () => {
-    for (const file of ['ios/PeekDeliveryTracker/Parcel.swift', 'ios/Configuration/Shared.xcconfig',
+    for (const file of ['ios/PeekDeliveryTracker/Parcel.swift', 'ios/Configuration/Local.xcconfig.example',
       'ios/PeekDeliveryTracker/GeneratedAPIContract.swift',
       'ios/PeekDeliveryTracker/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png',
       'ios/PeekDeliveryTracker/Resources/en.lproj/InfoPlist.strings']) {
@@ -49,9 +49,10 @@ describe('test suite boundaries', () => {
     }
   });
 
-  it('runs both native apps for the generated data the Android build copies from the iPhone app', () => {
+  it('runs both native apps for the generated data and the build settings the Android build takes from the iPhone app', () => {
     for (const file of ['ios/PeekDeliveryTracker/Resources/CarrierCatalog.json',
-      'ios/PeekDeliveryTracker/Resources/WorldDetail.pack', 'ios/PeekDeliveryTracker/Resources/DetectionGolden.json']) {
+      'ios/PeekDeliveryTracker/Resources/WorldDetail.pack', 'ios/PeekDeliveryTracker/Resources/DetectionGolden.json',
+      'ios/Configuration/Shared.xcconfig']) {
       assert.deepEqual(selectSuites([file]), native, file);
     }
   });

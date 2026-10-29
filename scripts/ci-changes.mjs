@@ -24,6 +24,8 @@ const iosTooling = new Set([
 // (android/core/build.gradle.kts); the folders below them are the iPhone's own.
 const iosResources = 'ios/PeekDeliveryTracker/Resources/';
 const isSharedResource = file => file.startsWith(iosResources) && !file.slice(iosResources.length).includes('/');
+// The Android build reads the iPhone build's settings too (android/app/build.gradle.kts).
+const sharedConfiguration = 'ios/Configuration/Shared.xcconfig';
 const webConfiguration = new Set([
   'Dockerfile', '.dockerignore', '.env.example', 'next.config.ts', 'next-env.d.ts',
   'tsconfig.json', 'eslint.config.js', 'vitest.config.ts', 'vitest.server.config.ts',
@@ -40,7 +42,7 @@ export function selectSuites(files) {
       || file.startsWith('.github/ISSUE_TEMPLATE/') || file === '.github/pull_request_template.md') continue;
     if (file.startsWith('supabase/') || file === 'scripts/test-migrations.sh') {
       suites.migrations = true;
-    } else if (isSharedResource(file)) {
+    } else if (isSharedResource(file) || file === sharedConfiguration) {
       suites.ios = true;
       suites.android = true;
     } else if (file.startsWith('ios/')) {

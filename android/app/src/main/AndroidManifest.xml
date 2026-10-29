@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- The API, sign-in, the carrier catalog and parcel links (platform/OkHttpTransport.kt). -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- Haptics at the iPhone's intensities (VibrationEffect compositions, Haptics.kt). -->
     <uses-permission android:name="android.permission.VIBRATE" />
 

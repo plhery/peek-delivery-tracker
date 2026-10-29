@@ -4299,7 +4299,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-28</lastmod>
+<lastmod>2026-10-30</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers</loc>
@@ -8006,8 +8006,16 @@
 <url>
 <loc>https://peektracker.com/carriers/topyou-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/topyou-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/topyou-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/topyou-tracking" />
 <lastmod>2026-10-28</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/carriers/topyou-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/topyou-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/topyou-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/topyou-tracking" />
+<lastmod>2026-10-30</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/byhd-tracking</loc>
@@ -8037,6 +8045,12 @@
 <loc>https://peektracker.com/carriers/tianhui-hengyuan-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tianhui-hengyuan-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tianhui-hengyuan-tracking" />
+<lastmod>2026-10-30</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/js-express-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/js-express-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/js-express-tracking" />
 <lastmod>2026-10-30</lastmod>
 </url>
 <url>

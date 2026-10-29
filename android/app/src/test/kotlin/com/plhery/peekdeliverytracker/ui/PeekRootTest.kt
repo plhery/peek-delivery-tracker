@@ -12,7 +12,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
+import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.StateRestorationTester
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -25,8 +29,10 @@ import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_COLUMN
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
+import com.plhery.peekdeliverytracker.ui.deliveries.card
 import com.plhery.peekdeliverytracker.ui.deliveries.openCard
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
 import java.util.UUID
@@ -175,6 +181,48 @@ class PeekRootTest {
         compose.onNodeWithContentDescription("Deliveries").performClick()
         compose.waitForIdle()
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
+    }
+
+    /**
+     * Beside the list, after process death: a parcel shown by itself is shown by itself again, counted as nothing, and
+     * the parcel someone chose comes back chosen, counted as it opens again.
+     */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun besideTheListTheParcelChosenComesBackAfterProcessDeath() {
+        var process = FakeDeliveries(DemoCards.parcels())
+        val views = mutableListOf<String>()
+        val restoration = StateRestorationTester(compose)
+        restoration.setContent {
+            RootHost(state = AuthenticationState.Welcome, onView = { views += it }, source = remember { process })
+        }
+        compose.waitForIdle()
+        compose.onNodeWithTag(PAGE_COLUMN).assertExists()
+
+        fun newProcess() {
+            process = process.newProcess()
+            views.clear()
+            restoration.emulateSavedInstanceStateRestore()
+            compose.waitForIdle()
+        }
+
+        newProcess()
+        assertPageShows("New trainers")
+        compose.card("New trainers").assertIsSelected()
+        assertEquals(emptyList<String>(), views)
+
+        compose.card("Birthday gift").performClick()
+        compose.waitForIdle()
+        assertEquals(listOf("parcel"), views)
+        newProcess()
+        assertPageShows("Birthday gift")
+        compose.card("Birthday gift").assertIsSelected()
+        compose.card("New trainers").assertIsNotSelected()
+        assertEquals(listOf("parcel"), views)
+    }
+
+    private fun assertPageShows(name: String) {
+        compose.onNode(hasText(name, substring = true) and hasAnyAncestor(hasTestTag(PARCEL_PAGE))).assertExists()
     }
 
     @Test

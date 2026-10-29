@@ -266,7 +266,13 @@ private class ListFrameNode(var onFrame: (Rect) -> Unit) :
 /**
  * `DeliveryCardPlace`: a card tells the list where it stands (`stand`, its frame in its item), and stays
  * unseen while its picture flies to another place. A card about to become another leaves without fading: the list's
- * own item animation, which the list chooses.
+ * own item animation, which the list chooses. Made again for the same card and `stand`, it is the same modifier, so
+ * the card isn't drawn again for it.
  */
 fun Modifier.deliveryCardPlace(id: UUID, flying: Boolean, stand: (id: UUID, frame: Rect) -> Unit): Modifier =
-    reportsFrameInList { stand(id, it) }.alpha(if (flying) 0f else 1f)
+    reportsFrameInList(CardStand(id, stand)).alpha(if (flying) 0f else 1f)
+
+/** Tells `stand` where the card of `id` stands; equal for the same card and `stand`. */
+private data class CardStand(val id: UUID, val stand: (id: UUID, frame: Rect) -> Unit) : (Rect) -> Unit {
+    override fun invoke(frame: Rect) = stand(id, frame)
+}

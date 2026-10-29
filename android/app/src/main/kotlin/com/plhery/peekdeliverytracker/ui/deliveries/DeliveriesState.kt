@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
-import android.os.SystemClock
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.lazy.LazyListState
@@ -30,7 +29,7 @@ import java.util.UUID
 /**
  * ParcelListView's navigation: the parcel shown and how it came to be shown ([DeliveriesNavigation]), the parcel kept
  * with the window (`@SceneStorage("deliveries.parcel")`, A-SE03) and whether it still waits for the parcels to open it
- * again, the arrangement the window last had and when it last turned stacked.
+ * again, and the arrangement the window last had.
  *
  * Each change of the navigation counts the screen it shows (`now.screen(after: before)`), and only a change does: the
  * window made again finds its navigation as it left it, and counts nothing.
@@ -41,7 +40,6 @@ internal class DeliveriesNavigator(
     savedParcel: UUID? = null,
     restoring: Boolean = true,
     arrangement: DeliveriesArrangement? = null,
-    private val clock: () -> Long = SystemClock::uptimeMillis,
 ) {
     var navigation: DeliveriesNavigation by mutableStateOf(navigation)
         private set
@@ -54,12 +52,12 @@ internal class DeliveriesNavigator(
     var restoring: Boolean by mutableStateOf(restoring)
         private set
 
-    /** The arrangement the window last had; null before its first. */
-    var arrangement: DeliveriesArrangement? by mutableStateOf(arrangement)
+    /**
+     * The arrangement the window last had, null before its first: what keeps it near the line between them. Taken as
+     * the window lays out, so nothing is drawn again for it.
+     */
+    var arrangement: DeliveriesArrangement? = arrangement
         private set
-
-    /** When the window last turned stacked, on the uptime clock. */
-    private var stackedAt: Long? = null
 
     /** The card the list showed at its top when the window turned, which it shows there again once laid out anew. */
     var keptCard: UUID? by mutableStateOf(null)
@@ -79,25 +77,21 @@ internal class DeliveriesNavigator(
     fun open(parcelId: UUID) = update(navigation.open(parcelId))
 
     /**
-     * The stack went back to `path`. The split view going away pops the parcel off the stack that takes its place as
-     * the window turns, on the iPhone: nobody goes back that fast, and for a second after turning the parcel stays.
+     * The stack went back to `path`, from the system's back or its gesture. The iPhone holds the parcel for a second
+     * after the window turns stacked, against the split view popping it as it goes; nothing pops the stack as the
+     * window turns here, so every back goes back.
      */
-    fun pop(path: List<UUID>) {
-        val stackedAt = stackedAt
-        if (path.size < navigation.path.size && stackedAt != null && clock() - stackedAt < POP_GUARD_MILLIS) return
-        update(navigation.copy(path = path))
-    }
+    fun pop(path: List<UUID>) = update(navigation.copy(path = path))
 
     /**
-     * The window takes `arrangement`: having turned stacked, it notes when, and it keeps `topCard` at the top of the
-     * list. The first arrangement the window has is no turn.
+     * The window takes `arrangement`: having turned, it keeps the card at the top of the list ([topCard], read only
+     * then) at the top. The first arrangement the window has is no turn.
      */
-    fun turn(arrangement: DeliveriesArrangement, topCard: UUID?) {
+    fun turn(arrangement: DeliveriesArrangement, topCard: () -> UUID?) {
         val last = this.arrangement
         this.arrangement = arrangement
         if (last == null || last == arrangement) return
-        if (arrangement == DeliveriesArrangement.Stacked) stackedAt = clock()
-        keptCard = topCard
+        keptCard = topCard()
     }
 
     fun settle(arrangement: DeliveriesArrangement, rows: List<UUID>) = update(navigation.settle(arrangement, rows))
@@ -129,8 +123,6 @@ internal class DeliveriesNavigator(
     }
 
     companion object {
-        private const val POP_GUARD_MILLIS = 1000L
-
         /**
          * Kept with the window. Made again in the same launch, the navigation comes back as it was, as the iPhone's
          * view lives on through a rotation; after the process died, only the parcel someone chose comes back, once the
@@ -244,7 +236,9 @@ internal class DeliveriesState(
     fun receive(next: List<Parcel>) {
         val rowsBefore = rows
         val shownBefore = navigator.navigation.shown
-        hold = hold.receive(shown = parcels, next = next, watching = watching)
+        val held = hold.receive(shown = parcels, next = next, watching = watching)
+        // Holding nothing as before is no change: the list isn't arranged again for it.
+        if (!held.isEmpty || !hold.isEmpty) hold = held
         parcels = next
         // A parcel shown beside the list that has gone, deleted from its card or elsewhere, gives way to the card after it.
         if (arrangement == DeliveriesArrangement.SideBySide && shownBefore != null && next.none { it.id == shownBefore }) {
@@ -255,7 +249,7 @@ internal class DeliveriesState(
 
     /** The parcels just arrived take their new places. Their card's flight there isn't ported yet: they simply move. */
     fun letGo() {
-        hold = hold.release()
+        if (!hold.isEmpty) hold = hold.release()
     }
 
     fun openArchive(open: Boolean) {

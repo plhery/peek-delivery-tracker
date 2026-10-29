@@ -15,10 +15,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -27,17 +37,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.Dp
@@ -57,17 +70,20 @@ import androidx.navigation3.scene.SceneStrategy
 import androidx.navigation3.scene.SceneStrategyScope
 import androidx.navigation3.scene.SinglePaneSceneStrategy
 import androidx.navigation3.ui.NavDisplay
+import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesKey
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.TabReselectionEffect
+import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import java.util.Objects
 import java.util.UUID
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -129,15 +145,16 @@ fun DeliveriesTab(
         // Read by the list as it is drawn, after this.
         state.arrangement = arrangement
         val rows = state.rows
+        // Here rather than once drawn, so that the page beside the list shows from the window's first frame. The card
+        // at the list's top is read as it was before the turn, and not followed as the list scrolls.
+        navigator.turn(arrangement) { Snapshot.withoutReadObservation { state.topCard() } }
+        navigator.settle(arrangement, rows)
 
         LaunchedEffect(state) { source.parcels.collect(state::receive) }
-        LaunchedEffect(arrangement, rows) {
-            navigator.turn(arrangement, state.topCard())
-            navigator.settle(arrangement, rows)
-        }
         HoldingDelivered(state, reduceMotion)
         Consuming(state, inbox)
         val scope = rememberCoroutineScope()
+        DeliveriesKeys(state, scope, reduceMotion)
         TabReselectionEffect {
             if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen != null) {
                 navigator.toList()
@@ -162,7 +179,7 @@ fun DeliveriesTab(
         }
         NavDisplay(
             backStack = backStack,
-            modifier = Modifier.fillMaxSize().deliveriesKeys(state, scope, reduceMotion),
+            modifier = Modifier.fillMaxSize(),
             onBack = { navigator.pop(navigator.navigation.path.dropLast(1)) },
             sceneStrategies = listOf(sideBySide, SinglePaneSceneStrategy()),
             transitionSpec = { if (turning()) Push.still() else Push.forward(reduceMotion) },
@@ -174,7 +191,7 @@ fun DeliveriesTab(
                         DeliveryList(state)
                     }
                     is DeliveriesEntry.ParcelPage -> NavEntry<DeliveriesEntry>(key, metadata = mapOf(PANE to PAGE_PANE)) {
-                        page(key.id)
+                        DemoPage(state) { page(key.id) }
                     }
                 }
             },
@@ -215,9 +232,9 @@ private const val POSTMARK_MILLIS = 300L
 private const val READ_MILLIS = 650L
 
 /**
- * What waits for the list (A-D26, A-L14): a parcel a link asked for, at once and whenever another comes; a parcel's
- * notification opened before the list was there, as it appears; and what another app shared, as it appears and each
- * time the app comes back to the front.
+ * What waits for the list in this window (A-D26, A-L14): a parcel a link asked for, at once and whenever another comes;
+ * a parcel's notification opened before the list was there, as it appears; and what another app shared, as it appears
+ * and each time the app comes back to the front.
  */
 @Composable
 private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
@@ -242,12 +259,12 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
  * beside the list and bring it into view, Return opens the one shown by itself, Ctrl or Meta with F opens the search
  * and Escape closes it, Ctrl or Meta with N adds. The parcel's own are on its page.
  *
- * They are heard whether or not something in the window has the keys: the list takes them before what has the focus,
- * and the window gives them over once nothing has used them. Beside a parcel the list takes the focus, so that ↑ and ↓
- * step through the cards rather than move the focus.
+ * As the iPhone's, they are the window's: once nothing in it has used a key, the window gives it over here. Beside a
+ * parcel the list's column also takes them, and the focus, so that ↑ and ↓ step through the cards rather than move
+ * the focus ([listKeys]).
  */
 @Composable
-private fun Modifier.deliveriesKeys(state: DeliveriesState, scope: kotlinx.coroutines.CoroutineScope, reduceMotion: Boolean): Modifier {
+private fun DeliveriesKeys(state: DeliveriesState, scope: CoroutineScope, reduceMotion: Boolean) {
     val handle by rememberUpdatedState { event: KeyEvent -> state.key(event, scope, reduceMotion) }
     val view = LocalView.current
     DisposableEffect(view) {
@@ -255,14 +272,23 @@ private fun Modifier.deliveriesKeys(state: DeliveriesState, scope: kotlinx.corou
         ViewCompat.addOnUnhandledKeyEventListener(view, listener)
         onDispose { ViewCompat.removeOnUnhandledKeyEventListener(view, listener) }
     }
+}
+
+/**
+ * The list's column beside a parcel takes the focus and the deliveries' keys, after what has the focus in it: a card
+ * or a button reached with the keyboard opens or presses on Return itself.
+ */
+@Composable
+private fun Modifier.listKeys(state: DeliveriesState): Modifier {
+    val scope = rememberCoroutineScope()
+    val reduceMotion = PeekTheme.reduceMotion
     val focus = remember { FocusRequester() }
-    val sideBySide = state.arrangement == DeliveriesArrangement.SideBySide
-    LaunchedEffect(sideBySide) { if (sideBySide) focus.requestFocus() }
-    return focusRequester(focus).onPreviewKeyEvent { handle(it.nativeKeyEvent) }.focusable()
+    LaunchedEffect(focus) { focus.requestFocus() }
+    return focusRequester(focus).onKeyEvent { state.key(it.nativeKeyEvent, scope, reduceMotion) }.focusable()
 }
 
 /** Acts on a key the deliveries answer, as [DeliveriesKey.available] has them; true once it has used it. */
-private fun DeliveriesState.key(event: KeyEvent, scope: kotlinx.coroutines.CoroutineScope, reduceMotion: Boolean): Boolean {
+private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMotion: Boolean): Boolean {
     val keys = DeliveriesKey.available(
         free = true, searching = showingSearch, typing = false, arrangement = arrangement, navigation = navigator.navigation,
         cards = rows, hasParcels = parcels.isNotEmpty(), canUndo = false,
@@ -359,7 +385,7 @@ private fun SideBySideColumns(
             pageStart = listWidth
         }
         CompositionLocalProvider(LocalColumnEdges provides ColumnEdges(start = true, end = false)) {
-            Box(Modifier.width(listWidth).fillMaxHeight()) { list() }
+            Box(Modifier.width(listWidth).fillMaxHeight().testTag(LIST_COLUMN).listKeys(state)) { list() }
         }
         CompositionLocalProvider(LocalColumnEdges provides ColumnEdges(start = false, end = true)) {
             // The toolbar's glass shows the page under it.
@@ -410,12 +436,37 @@ fun ParcelPagePlaceholder(label: String?) {
     }
 }
 
+/**
+ * A parcel's page over the list in the demo, under the demo's bar as the list is (`safeAreaInset(edge: .top)`): the
+ * page keeps clear of the bar as it would of the window's. Beside the list the bar stays over the list alone.
+ */
+@Composable
+private fun DemoPage(state: DeliveriesState, content: @Composable () -> Unit) {
+    val source = state.source
+    val session by source.session.collectAsState()
+    val bar = state.arrangement == DeliveriesArrangement.Stacked && session == AuthenticationState.Demo
+    Column(Modifier.fillMaxSize()) {
+        if (bar) {
+            val padding = tabContentPadding()
+            val direction = LocalLayoutDirection.current
+            DemoModeBar(
+                onExit = source::showWelcome,
+                modifier = Modifier.background(PeekTheme.colors.cream).padding(top = padding.calculateTopPadding()),
+                sides = PaddingValues(start = padding.calculateStartPadding(direction), end = padding.calculateEndPadding(direction)),
+            )
+        }
+        val topTaken = if (bar) Modifier.consumeWindowInsets(WindowInsets.safeDrawing.only(WindowInsetsSides.Top)) else Modifier
+        Box(Modifier.weight(1f).fillMaxWidth().then(topTaken)) { content() }
+    }
+}
+
 /** Which pane of the deliveries an entry is, in its metadata. */
 private const val PANE = "deliveries.pane"
 private const val LIST_PANE = "list"
 private const val PAGE_PANE = "page"
 
-/** The test tags of the list, of a parcel's page and of the column beside the list. */
+/** The test tags of the list, of a parcel's page, and of the list's column and the page's beside a parcel. */
 const val PARCEL_LIST = "parcelList"
 const val PARCEL_PAGE = "parcelPage"
+const val LIST_COLUMN = "listColumn"
 const val PAGE_COLUMN = "pageColumn"

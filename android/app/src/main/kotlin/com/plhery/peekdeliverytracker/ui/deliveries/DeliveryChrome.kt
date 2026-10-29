@@ -351,10 +351,6 @@ private fun RefreshButton(state: DeliveriesState) {
     val reduceMotion = PeekTheme.reduceMotion
     val scope = rememberCoroutineScope()
     val label = localized(if (refreshing) "app.refreshing" else "app.refresh")
-    val turning = rememberInfiniteTransition("refresh")
-    // `.symbolEffect(.rotate)`: a turn a second; `.pulse`: the arrow fades to a third and back.
-    val angle by turning.animateFloat(0f, 360f, infiniteRepeatable(tween(1000, easing = LinearEasing)), "turn")
-    val pulse by turning.animateFloat(1f, 0.35f, InfiniteRepeatableSpec(tween(750), RepeatMode.Reverse), "pulse")
     Box(
         Modifier
             .size(BUTTON_SIDE)
@@ -370,14 +366,26 @@ private fun RefreshButton(state: DeliveriesState) {
     ) {
         PeekSymbol(
             "arrow.clockwise",
-            Modifier.graphicsLayer {
-                rotationZ = if (refreshing && !reduceMotion) angle else 0f
-                alpha = if (refreshing && reduceMotion) pulse else 1f
-            },
+            if (refreshing) Modifier.refreshing(reduceMotion) else Modifier,
             font = PeekTheme.type.body,
             tint = PeekTheme.colors.ink,
         )
     }
+}
+
+/**
+ * The arrow while the parcels are checked: `.symbolEffect(.rotate)`, a turn a second, or `.pulse` under Reduce Motion,
+ * the arrow fading to a third and back. Only then, so that the window rests the rest of the time.
+ */
+@Composable
+private fun Modifier.refreshing(reduceMotion: Boolean): Modifier {
+    val turning = rememberInfiniteTransition("refresh")
+    if (reduceMotion) {
+        val pulse = turning.animateFloat(1f, 0.35f, InfiniteRepeatableSpec(tween(750), RepeatMode.Reverse), "pulse")
+        return graphicsLayer { alpha = pulse.value }
+    }
+    val angle = turning.animateFloat(0f, 360f, infiniteRepeatable(tween(1000, easing = LinearEasing)), "turn")
+    return graphicsLayer { rotationZ = angle.value }
 }
 
 /** A count in a faint capsule, beside a heading. */

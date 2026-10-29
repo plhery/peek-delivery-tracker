@@ -5,10 +5,9 @@ import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-/** The navigation as the window turns: for a second after turning stacked, the stack can't pop the parcel. */
+/** The navigation as the window turns: the card at the list's top is kept, and back goes back at once. */
 class DeliveriesNavigatorTest {
-    private var now = 10_000L
-    private val navigator = DeliveriesNavigator(clock = { now })
+    private val navigator = DeliveriesNavigator()
     private val parcel = UUID.fromString("00000000-0000-4000-8000-000000000001")
     private val views = mutableListOf<String>()
 
@@ -17,16 +16,11 @@ class DeliveriesNavigatorTest {
     }
 
     @Test
-    fun aPopInTheSecondAfterTurningStackedKeepsTheParcel() {
-        navigator.turn(DeliveriesArrangement.SideBySide, topCard = null)
+    fun aPopRightAfterTurningStackedPops() {
+        navigator.turn(DeliveriesArrangement.SideBySide) { null }
         navigator.open(parcel)
-        navigator.turn(DeliveriesArrangement.Stacked, topCard = null)
+        navigator.turn(DeliveriesArrangement.Stacked) { null }
 
-        now += 999
-        navigator.pop(emptyList())
-        assertEquals(listOf(parcel), navigator.navigation.path)
-
-        now += 1
         navigator.pop(emptyList())
         assertEquals(emptyList<UUID>(), navigator.navigation.path)
         assertEquals(listOf("parcel", "deliveries"), views)
@@ -34,7 +28,7 @@ class DeliveriesNavigatorTest {
 
     @Test
     fun theFirstArrangementIsNoTurn() {
-        navigator.turn(DeliveriesArrangement.Stacked, topCard = parcel)
+        navigator.turn(DeliveriesArrangement.Stacked) { parcel }
         assertEquals(null, navigator.keptCard)
         navigator.open(parcel)
         navigator.pop(emptyList())
@@ -43,8 +37,19 @@ class DeliveriesNavigatorTest {
 
     @Test
     fun turningKeepsTheCardAtTheTopOfTheList() {
-        navigator.turn(DeliveriesArrangement.Stacked, topCard = null)
-        navigator.turn(DeliveriesArrangement.SideBySide, topCard = parcel)
+        navigator.turn(DeliveriesArrangement.Stacked) { null }
+        navigator.turn(DeliveriesArrangement.SideBySide) { parcel }
         assertEquals(parcel, navigator.keptCard)
+    }
+
+    @Test
+    fun theListsTopIsReadOnlyAsTheWindowTurns() {
+        var reads = 0
+        val top = { reads++; parcel }
+        navigator.turn(DeliveriesArrangement.Stacked, top)
+        navigator.turn(DeliveriesArrangement.Stacked, top)
+        assertEquals(0, reads)
+        navigator.turn(DeliveriesArrangement.SideBySide, top)
+        assertEquals(1, reads)
     }
 }

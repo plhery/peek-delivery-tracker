@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,9 +12,12 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.IdlingResource
+import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
@@ -100,6 +105,20 @@ class ZurichTime : ExternalResource() {
     }
 }
 
+/**
+ * The pixels of `node`, drawn now in software, as the app's other pixel tests draw theirs: run with the whole suite,
+ * `captureToImage` has given two different nodes the same picture.
+ */
+fun ComposeContentTestRule.drawn(node: SemanticsNodeInteraction): IntArray {
+    val root = (onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+    val bounds = node.fetchSemanticsNode().boundsInRoot
+    val whole = Bitmap.createBitmap(root.width, root.height, Bitmap.Config.ARGB_8888)
+    runOnUiThread { root.draw(Canvas(whole)) }
+    val pixels = IntArray(bounds.width.toInt() * bounds.height.toInt())
+    whole.getPixels(pixels, 0, bounds.width.toInt(), bounds.left.toInt(), bounds.top.toInt(), bounds.width.toInt(), bounds.height.toInt())
+    return pixels
+}
+
 /** The maps' pictures are made on other threads: the test waits until each is drawn. */
 fun ComposeContentTestRule.waitsForMaps() {
     runBlocking { WorldAtlases.load().await() }
@@ -109,8 +128,9 @@ fun ComposeContentTestRule.waitsForMaps() {
 }
 
 /**
- * `content` as the list shows it, in the app's copy for `language`, on the list's background with 16 points either
- * side: the iPhone's cards are 408 points wide on its 440. Under Reduce Motion, so each shot shows the card at rest.
+ * `content` as the list shows it, in the app's copy for `language` (or `localizer`'s, whose language a test may change),
+ * on the list's background with 16 points either side: the iPhone's cards are 408 points wide on its 440. Under Reduce
+ * Motion, so each shot shows the card at rest.
  */
 @Composable
 fun CardHost(
@@ -119,9 +139,9 @@ fun CardHost(
     fontScale: Float = 1f,
     highContrast: Boolean = false,
     reduceMotion: Boolean = true,
+    localizer: Localizer = remember(language) { Localizer(language, variant = "android") },
     content: @Composable () -> Unit,
 ) {
-    val localizer = remember(language) { Localizer(language, variant = "android") }
     val density = LocalDensity.current
     CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalNow provides { CAPTURED }) {
         PeekTheme(

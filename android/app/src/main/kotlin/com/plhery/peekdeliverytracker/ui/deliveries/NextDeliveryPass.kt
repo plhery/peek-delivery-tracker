@@ -19,7 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
@@ -68,8 +69,9 @@ import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
  * - `arrived`: just delivered and still shown where it stood. "Next up" keeps its room and goes, the status line takes
  *   a tick and the delivery's date, and the card gives a little as the news lands.
  * - `decorative`: drawn for its look alone, on a card that flies over the list; it says nothing and takes no touches.
- * - `onName`: where the parcel's name is written, its middle in points in the list's space ([DeliveryListSpace]).
+ * - `onName`: where the parcel's name is written, its middle in points in its item of the list ([deliveryListItem]).
  * - `selected`: the parcel shown beside the list, ringed.
+ * - `onLongClick`: a long press, the list's card menu; the press then doesn't open the parcel ([cardButton]).
  *
  * It fades in as it first shows, and its map once drawn, neither under Reduce Motion. Nothing is drawn until the
  * carriers' liveries are read.
@@ -83,6 +85,7 @@ fun NextDeliveryPass(
     decorative: Boolean = false,
     onName: ((Float) -> Unit)? = null,
     selected: Boolean = false,
+    onLongClick: (() -> Unit)? = null,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -95,7 +98,9 @@ fun NextDeliveryPass(
     // Scans with places are drawn as a route across the top of the card, as on the opened parcel.
     val placed = parcel.hasMappedPlace
 
-    var appeared by remember { mutableStateOf(false) }
+    // Kept while the card is scrolled out of the list, which saves it under the card's key: it fades in and its stamp
+    // settles once, as the iPhone's lazy list keeps a card's state.
+    var appeared by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(Unit) { appeared = true }
     val opacity by animateFloatAsState(
         if (appeared || reduceMotion) 1f else 0f,
@@ -128,6 +133,7 @@ fun NextDeliveryPass(
                 hint = localizer.text("detail.label"),
                 selected = selected,
                 onOpen = onOpen,
+                onLongClick = onLongClick,
                 cornerRadius = Radii.nextUp,
                 shadow = true,
             )
@@ -197,7 +203,7 @@ fun NextDeliveryPass(
 
 /**
  * "Next up" in caption2 capitals, tracked 1.2 and in the carrier's ink at 75 %, on one line that shrinks to 70 % before
- * it is cut, and no larger than at the first accessibility size.
+ * it ends in an ellipsis, and no larger than at the first accessibility size.
  */
 @Composable
 private fun NextUpWords(text: String, identity: CarrierVisualIdentity, locale: java.util.Locale, modifier: Modifier) {
@@ -210,6 +216,7 @@ private fun NextUpWords(text: String, identity: CarrierVisualIdentity, locale: j
             // CoreText tracks after each letter, Android half before it: the words end where the iPhone's end.
             modifier.offset(x = (-0.6).dp),
             style = style,
+            overflow = TextOverflow.Ellipsis,
             maxLines = 1,
             autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * 0.7f, maxFontSize = style.fontSize, stepSize = 0.1.sp),
         )

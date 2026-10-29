@@ -62,8 +62,8 @@ import kotlin.math.roundToInt
  * attention for the parcel), with a small route at its end when its scans have places and the text is not one of the
  * accessibility sizes. A past delivery's card is paler.
  *
- * `arrived`, `decorative`, `onName` and `selected` are as on [NextDeliveryPass]; an arrived card swells a little as the
- * news lands. Nothing is drawn until the carriers' liveries are read.
+ * `arrived`, `decorative`, `onName`, `selected` and `onLongClick` are as on [NextDeliveryPass]; an arrived card swells a
+ * little as the news lands. Nothing is drawn until the carriers' liveries are read.
  */
 @Composable
 fun ParcelPassCard(
@@ -75,6 +75,7 @@ fun ParcelPassCard(
     decorative: Boolean = false,
     onName: ((Float) -> Unit)? = null,
     selected: Boolean = false,
+    onLongClick: (() -> Unit)? = null,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -129,6 +130,7 @@ fun ParcelPassCard(
                 hint = null,
                 selected = selected,
                 onOpen = onOpen,
+                onLongClick = onLongClick,
                 cornerRadius = Radii.card,
                 shadow = false,
             )
@@ -244,6 +246,9 @@ fun DeliveredParcelCard(
     modifier: Modifier = Modifier,
     onName: ((Float) -> Unit)? = null,
     selected: Boolean = false,
+    onLongClick: (() -> Unit)? = null,
 ) {
-    ParcelPassCard(parcel, notice = null, onOpen = onOpen, modifier = modifier, onName = onName, selected = selected)
+    ParcelPassCard(
+        parcel, notice = null, onOpen = onOpen, modifier = modifier, onName = onName, selected = selected, onLongClick = onLongClick,
+    )
 }

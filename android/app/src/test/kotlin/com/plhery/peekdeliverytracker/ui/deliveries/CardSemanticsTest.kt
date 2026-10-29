@@ -1,9 +1,15 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -13,15 +19,19 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.performTouchInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -212,5 +222,115 @@ class CardSemanticsTest {
         assertEquals(false, rows[0].selected())
         rows[3].performClick()
         assertEquals(parcels[3].id, opened)
+    }
+
+    @Test
+    fun theShelfIsWrittenAgainInANewLanguage() {
+        val parcels = DemoCards.archived()
+        val localizer = Localizer(AppLanguage.En, variant = "android")
+        compose.setContent {
+            Column {
+                CardHost(localizer = localizer) { ArchiveShelf(parcels, expanded = false, onExpandedChange = {}, onOpen = {}) }
+                CardHost(AppLanguage.De) { ArchiveShelf(parcels, expanded = false, onExpandedChange = {}, onOpen = {}) }
+            }
+        }
+        val headers = compose.onAllNodes(buttons)
+        headers.assertCountEquals(2)
+        assertEquals("Archived, 5", headers[0].label())
+        assertFalse("English and German headers look different", headers[0].pixels().contentEquals(headers[1].pixels()))
+
+        localizer.language = AppLanguage.De
+        compose.waitForIdle()
+        assertEquals("Archiviert, 5", headers[0].label())
+        assertEquals("Archivierte Pakete anzeigen", headers[0].hint())
+        // Its words on screen too: drawn as the German header drawn in German from the start.
+        assertArrayEquals(headers[1].pixels(), headers[0].pixels())
+    }
+
+    private fun SemanticsNodeInteraction.pixels(): IntArray = compose.drawn(this)
+
+    /** What a long press plays, as the phone's own long press does. */
+    private class FeltHaptics : HapticFeedback {
+        val played = mutableListOf<HapticFeedbackType>()
+
+        override fun performHapticFeedback(hapticFeedbackType: HapticFeedbackType) {
+            played += hapticFeedbackType
+        }
+    }
+
+    @Test
+    fun aLongPressCallsForTheCardsMenuWithTheLongPressFeelAndOpensNothing() {
+        compose.waitsForMaps()
+        val next = DemoCards.parcel("New trainers")
+        val card = DemoCards.parcel("Moon lamp")
+        val delivered = DemoCards.parcel("Coffee beans")
+        val archived = DemoCards.archived().first()
+        val opened = mutableListOf<String>()
+        val held = mutableListOf<String>()
+        val haptics = FeltHaptics()
+        compose.setContent {
+            CompositionLocalProvider(LocalHapticFeedback provides haptics) {
+                CardHost {
+                    Column {
+                        NextDeliveryPass(next, onOpen = { opened += "next" }, onLongClick = { held += "next" })
+                        ParcelPassCard(card, notice = null, onOpen = { opened += "card" }, onLongClick = { held += "card" })
+                        DeliveredParcelCard(delivered, onOpen = { opened += "delivered" }, onLongClick = { held += "delivered" })
+                        ArchivedParcelRow(archived, onOpen = { opened += "archived" }, onLongClick = { held += "archived" })
+                    }
+                }
+            }
+        }
+        val names = listOf("next", "card", "delivered", "archived")
+        val cards = compose.onAllNodes(buttons)
+        cards.assertCountEquals(4)
+        names.forEachIndexed { index, name ->
+            cards[index].performTouchInput { longClick() }
+            compose.waitForIdle()
+            assertEquals(name, held.last())
+            assertEquals(index + 1, haptics.played.count { it == HapticFeedbackType.LongPress })
+        }
+        assertEquals("A long press opens no parcel", emptyList<String>(), opened)
+        // TalkBack's long press is the same menu.
+        names.forEachIndexed { index, name ->
+            cards[index].performSemanticsAction(SemanticsActions.OnLongClick)
+            assertEquals(name, held.last())
+        }
+        assertEquals(8, held.size)
+        names.forEachIndexed { index, _ -> cards[index].performClick() }
+        assertEquals(names, opened)
+        assertEquals(8, held.size)
+    }
+
+    @Test
+    fun aCardWithoutAMenuHasNoLongPress() {
+        compose.waitsForMaps()
+        compose.setContent { CardHost { ParcelPassCard(DemoCards.parcel("Moon lamp"), notice = null, onOpen = {}) } }
+        assertNull(button().fetchSemanticsNode().config.getOrNull(SemanticsActions.OnLongClick))
+    }
+
+    @Test
+    fun theListPutsItsMenuAndItsOwnModifierOnEachArchivedRow() {
+        val parcels = DemoCards.archived()
+        val held = mutableListOf<Parcel>()
+        var opened: Any? = null
+        compose.setContent {
+            CardHost {
+                ArchiveShelf(
+                    parcels, expanded = true, onExpandedChange = {}, onOpen = { opened = it }, onLongClick = { held += it },
+                    rowModifier = { Modifier.testTag("row ${it.trackingNumber}") },
+                )
+            }
+        }
+        for (parcel in parcels) {
+            val row = compose.onNodeWithTag("row ${parcel.trackingNumber}")
+            assertTrue(row.label().startsWith(parcel.label))
+            row.performTouchInput { longClick() }
+            compose.waitForIdle()
+            assertEquals(parcel.id, held.last().id)
+        }
+        assertEquals(parcels.size, held.size)
+        assertNull(opened)
+        compose.onNodeWithTag("row ${parcels[2].trackingNumber}").performClick()
+        assertEquals(parcels[2].id, opened)
     }
 }

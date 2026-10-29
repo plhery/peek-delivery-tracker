@@ -18,7 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
@@ -77,9 +77,10 @@ import androidx.compose.ui.geometry.Size as ComposeSize
  * fade, beside the parcel's dot, when `pip` asks for him on a palette with a card.
  *
  * Framing and laying out the map is a few milliseconds of work, so it is done off the main thread and kept
- * ([MapScenes]): a card scrolled back into view finds its picture done. Nothing shows until then; `entrance` is how
- * the drawing then comes in, as SwiftUI's `.transition(.opacity)` brings a map in once the atlas is read, and null
- * shows it at once. Sizes, insets and boxes are in points (dp). Decorative.
+ * ([MapScenes]): a card scrolled back into view finds its picture done, and shows it at once. A map seen for the first
+ * time shows nothing until then; `entrance` is how the drawing then comes in, as SwiftUI's `.transition(.opacity)`
+ * brings a map in once the atlas is read, and null shows it at once. A map whose picture changes keeps the old one
+ * until the new one is made. Sizes, insets and boxes are in points (dp). Decorative.
  */
 @Composable
 fun WorldMapView(
@@ -110,8 +111,14 @@ fun WorldMapView(
             maxWidth.value.toDouble(), maxHeight.value.toDouble(), colors.dark, colors.highContrast,
         )
         val pending = remember(request) { MapScenes.request(request, context) }
-        val scene by produceState(pending.completedOrNull(), pending) {
-            if (value != null) return@produceState
+        val made = pending.completedOrNull()
+        // The last scene delivered: until the new request's scene is made, a map whose route, language, stage, carrier
+        // or size changes keeps the picture it shows rather than going blank, as the iPhone draws the new one at once.
+        val delivered by produceState(made, pending) {
+            pending.completedOrNull()?.let {
+                value = it
+                return@produceState
+            }
             MapScenes.awaiting {
                 value = try {
                     pending.await()
@@ -122,7 +129,10 @@ fun WorldMapView(
                 }
             }
         }
-        val shown = remember { Animatable(if (entrance == null) 1f else 0f) }
+        val scene = made ?: delivered
+        // A map whose picture is already made, as one scrolled back into a list finds it, shows at once: the entrance
+        // is for a map that waited for its picture, as the iPhone's card fades its map in once, when the atlas is read.
+        val shown = remember { Animatable(if (entrance == null || scene != null) 1f else 0f) }
         val ready = scene != null
         LaunchedEffect(ready) {
             if (!ready) return@LaunchedEffect
@@ -134,10 +144,15 @@ fun WorldMapView(
                 Modifier
                     .fillMaxSize()
                     .graphicsLayer { if (fades || fadesIn) compositingStrategy = CompositingStrategy.Offscreen }
-                    .drawWithContent {
-                        drawContent()
-                        if (fades) drawRect(Brush.verticalGradient(0.78f to Color.Black, 1f to Color.Transparent), blendMode = BlendMode.DstIn)
-                        if (fadesIn) drawRect(Brush.horizontalGradient(0f to Color.Transparent, 0.46f to Color.Black), blendMode = BlendMode.DstIn)
+                    .drawWithCache {
+                        // Made once for the size, as the parcel's pulse draws the map again each frame.
+                        val down = if (fades) Brush.verticalGradient(0.78f to Color.Black, 1f to Color.Transparent) else null
+                        val across = if (fadesIn) Brush.horizontalGradient(0f to Color.Transparent, 0.46f to Color.Black) else null
+                        onDrawWithContent {
+                            drawContent()
+                            if (down != null) drawRect(down, blendMode = BlendMode.DstIn)
+                            if (across != null) drawRect(across, blendMode = BlendMode.DstIn)
+                        }
                     },
             ) {
                 Canvas(Modifier.fillMaxSize()) { drawPicture(drawn.base) }

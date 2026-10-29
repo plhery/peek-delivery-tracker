@@ -4,17 +4,15 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -28,18 +26,21 @@ import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.layout.LayoutCoordinates
-import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
 import androidx.compose.ui.node.GlobalPositionAwareModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.node.TraversableNode
 import androidx.compose.ui.node.currentValueOf
+import androidx.compose.ui.node.findNearestAncestor
+import androidx.compose.ui.node.requireLayoutCoordinates
 import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.semantics.onLongClick
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.text.font.FontWeight
@@ -65,14 +66,12 @@ import java.util.UUID
 import kotlinx.coroutines.delay
 
 /**
- * How a card of the list is one thing to touch and to hear (A-AX06, A-AX07): one element read as `label`, a button
- * whose action opens the parcel, `hint` its action's name where the iPhone gives one, selected while the parcel is shown
- * beside the list. It gives under the finger as ExperimentalSwipeToArchive's card does (the lift), and is cut to its
- * continuous corners with the surfaces' shadow under it when `shadow`. A decorative card, drawn for its look alone
- * over the list, says nothing and takes no touches.
+ * How a card of the list is one thing to touch and to hear (A-AX06, A-AX07): [cardTouches], cut to its continuous
+ * corners with the surfaces' shadow under it when `shadow`. A decorative card, drawn for its look alone over the list,
+ * says nothing and takes no touches.
  *
- * The swipe to archive, the card's menu and the zoom into the parcel's page belong to the list, which puts them on
- * the card through its `modifier`.
+ * The swipe to archive and the zoom into the parcel's page belong to the list, which puts them on the card through its
+ * `modifier`; its menu comes up on `onLongClick`.
  */
 internal fun Modifier.cardButton(
     decorative: Boolean,
@@ -80,12 +79,32 @@ internal fun Modifier.cardButton(
     hint: String?,
     selected: Boolean,
     onOpen: () -> Unit,
+    onLongClick: (() -> Unit)?,
     cornerRadius: Dp,
     shadow: Boolean,
 ): Modifier {
     if (decorative) return clearAndSetSemantics {}
     val shape = ContinuousRoundedShape(cornerRadius)
-    return clearAndSetSemantics {
+    return cardTouches(label, hint, selected, onOpen, onLongClick)
+        .then(if (shadow) Modifier.dropShadow(shape, ExperimentalSurfaceShadow) else Modifier)
+        .clip(shape)
+}
+
+/**
+ * A card or an archived row as one element: read as `label`, a button whose action opens the parcel (`hint` its name
+ * where the iPhone gives one), selected while the parcel is shown beside the list, and giving under the finger as
+ * ExperimentalSwipeToArchive's card does (the lift). A long press calls `onLongClick`, the list's card menu as the
+ * iPhone's `.contextMenu` opens it, with the phone's long-press feel as the iPhone's menu comes with its own; the
+ * finger lifting then opens nothing. TalkBack offers it as the element's long-press action.
+ */
+internal fun Modifier.cardTouches(
+    label: String,
+    hint: String?,
+    selected: Boolean,
+    onOpen: () -> Unit,
+    onLongClick: (() -> Unit)?,
+): Modifier = this
+    .clearAndSetSemantics {
         contentDescription = label
         role = Role.Button
         this.selected = selected
@@ -93,11 +112,14 @@ internal fun Modifier.cardButton(
             onOpen()
             true
         }
+        if (onLongClick != null) {
+            this.onLongClick {
+                onLongClick()
+                true
+            }
+        }
     }
-        .clickable(interactionSource = null, indication = PressStyle.ExperimentalLift, onClick = onOpen)
-        .then(if (shadow) Modifier.dropShadow(shape, ExperimentalSurfaceShadow) else Modifier)
-        .clip(shape)
-}
+    .combinedClickable(interactionSource = null, indication = PressStyle.ExperimentalLift, onLongClick = onLongClick, onClick = onOpen)
 
 /** The texts a card writes, in the order VoiceOver reads them once combined, as one label. */
 internal fun cardLabel(vararg parts: String?): String = parts.filterNot { it.isNullOrEmpty() }.joinToString(", ")
@@ -182,22 +204,34 @@ private fun stillAhead(parcel: Parcel, time: Instant): Boolean {
 }
 
 /**
- * `.coordinateSpace(name: DeliveryListSpace.name)`: the list's own space, where its cards say they stand and where
- * their names are written ([reportsFrameInList]). The list puts [deliveryListSpace] on itself and provides this.
+ * `.coordinateSpace(name: DeliveryListSpace.name)` as a lazy list can have it: the list puts this on each of its items,
+ * and its cards say where they stand and where their names are written from the top of their item
+ * ([reportsFrameInList]). The iPhone measures them in the scroll content's space, which scrolling doesn't move; a
+ * lazy list has none, so they are measured in their item, which scrolling doesn't move either, and the list adds the
+ * item's own place (`LazyListLayoutInfo.visibleItemsInfo`, its `offset` from the top of the list) where it needs one.
  */
-@Stable
-class DeliveryListSpace {
-    internal var coordinates: LayoutCoordinates? = null
+fun Modifier.deliveryListItem(): Modifier = this then DeliveryListItemElement
+
+private data object DeliveryListItemElement : ModifierNodeElement<DeliveryListItemNode>() {
+    override fun create() = DeliveryListItemNode()
+
+    override fun update(node: DeliveryListItemNode) = Unit
+
+    override fun InspectorInfo.inspectableProperties() {
+        name = "deliveryListItem"
+    }
 }
 
-val LocalDeliveryListSpace = staticCompositionLocalOf<DeliveryListSpace?> { null }
+private class DeliveryListItemNode : Modifier.Node(), TraversableNode {
+    override val traverseKey: Any get() = DeliveryListItemKey
+}
 
-/** The list whose space `space` is. */
-fun Modifier.deliveryListSpace(space: DeliveryListSpace): Modifier = onPlaced { space.coordinates = it }
+private object DeliveryListItemKey
 
 /**
- * `.onGeometryChange(for:) { $0.frame(in: .named(DeliveryListSpace.name)) }`: the content's frame in the list's space,
- * in points (dp), each time it changes; in the window's when there is no list, as SwiftUI falls back to the global space.
+ * `.onGeometryChange(for:) { $0.frame(in: .named(DeliveryListSpace.name)) }`: the content's frame in its item of the
+ * list ([deliveryListItem]), in points (dp), each time it changes, which scrolling doesn't; in the window's when there
+ * is no list, as SwiftUI falls back to the global space.
  */
 internal fun Modifier.reportsFrameInList(onFrame: (Rect) -> Unit): Modifier = this then ListFrameElement(onFrame)
 
@@ -217,10 +251,11 @@ private class ListFrameNode(var onFrame: (Rect) -> Unit) :
     Modifier.Node(), GlobalPositionAwareModifierNode, CompositionLocalConsumerModifierNode {
     private var last: Rect? = null
 
+    /** Each time the content moves on screen, a scroll too: told only when its frame in the item has changed. */
     override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
         val density = currentValueOf(LocalDensity).density
-        val list = currentValueOf(LocalDeliveryListSpace)?.coordinates?.takeIf { it.isAttached }
-        val origin = list?.localPositionOf(coordinates, Offset.Zero) ?: coordinates.positionInRoot()
+        val item = findNearestAncestor(DeliveryListItemKey)?.requireLayoutCoordinates()?.takeIf { it.isAttached }
+        val origin = item?.localPositionOf(coordinates, Offset.Zero) ?: coordinates.positionInRoot()
         val frame = Rect(origin / density, Size(coordinates.size.width / density, coordinates.size.height / density))
         if (frame == last) return
         last = frame
@@ -229,7 +264,7 @@ private class ListFrameNode(var onFrame: (Rect) -> Unit) :
 }
 
 /**
- * `DeliveryCardPlace`: a card tells the list where it stands (`stand`, its frame in the list's space), and stays
+ * `DeliveryCardPlace`: a card tells the list where it stands (`stand`, its frame in its item), and stays
  * unseen while its picture flies to another place. A card about to become another leaves without fading: the list's
  * own item animation, which the list chooses.
  */

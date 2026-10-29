@@ -26,6 +26,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -35,7 +37,6 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
@@ -68,7 +69,8 @@ import java.util.UUID
 /**
  * `ExperimentalArchiveShelf` (A-S39): the archived parcels under the deliveries, behind a header that names them and
  * counts them, its chevron turned up while they show. A tap shows or hides them with a snappy 0.3 s fade and slide from
- * the top, and a selection tick; at once under Reduce Motion. `selected` is the parcel shown beside the list.
+ * the top, and a selection tick; at once under Reduce Motion. `selected` is the parcel shown beside the list;
+ * `onLongClick` and `rowModifier` are the list's for each row, as on [ArchivedParcelGroup].
  */
 @Composable
 fun ArchiveShelf(
@@ -78,16 +80,23 @@ fun ArchiveShelf(
     onOpen: (UUID) -> Unit,
     modifier: Modifier = Modifier,
     selected: UUID? = null,
+    onLongClick: ((Parcel) -> Unit)? = null,
+    rowModifier: (Parcel) -> Modifier = { Modifier },
 ) {
     val localizer = LocalLocalizer.current
+    // The localizer is the same in every language: its words are written again as the language changes.
+    val language = LocalLanguage.current
+    val title = remember(localizer, language) { localizer.text("app.archived") }
+    val hint = remember(localizer, language, expanded) { localizer.text(if (expanded) "design.hideArchive" else "design.showArchive") }
     val reduceMotion = PeekTheme.reduceMotion
     SensoryFeedbackEffect(SensoryFeedback.Selection, expanded)
     Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         ArchiveShelfHeader(
+            title = title,
             count = parcels.size,
             expanded = expanded,
-            label = cardLabel(localizer.text("app.archived"), parcels.size.toString()),
-            hint = localizer.text(if (expanded) "design.hideArchive" else "design.showArchive"),
+            label = cardLabel(title, parcels.size.toString()),
+            hint = hint,
             onToggle = { onExpandedChange(!expanded) },
         )
         val spring = Motion.snappy<Float>(0.3, extraBounce = 0.02)
@@ -101,18 +110,17 @@ fun ArchiveShelf(
             exit = if (reduceMotion) ExitTransition.None else
                 fadeOut(spring) + slideOutVertically(springOffset) { -it } + shrinkVertically(springSize, Alignment.Top, clip = false),
         ) {
-            ArchivedParcelGroup(parcels, onOpen, selected = selected)
+            ArchivedParcelGroup(parcels, onOpen, selected = selected, onLongClick = onLongClick, rowModifier = rowModifier)
         }
     }
 }
 
 /**
- * The shelf's header: the archive box, "Archived", the count in brackets and the chevron, all secondary, a lift under
- * the finger. One button, read as "Archived, n", whose action shows or hides the archive.
+ * The shelf's header: the archive box, `title` ("Archived"), the count in brackets and the chevron, all secondary, a
+ * lift under the finger. One button, read as "Archived, n", whose action shows or hides the archive.
  */
 @Composable
-private fun ArchiveShelfHeader(count: Int, expanded: Boolean, label: String, hint: String, onToggle: () -> Unit) {
-    val localizer = LocalLocalizer.current
+private fun ArchiveShelfHeader(title: String, count: Int, expanded: Boolean, label: String, hint: String, onToggle: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion
@@ -141,7 +149,7 @@ private fun ArchiveShelfHeader(count: Int, expanded: Boolean, label: String, hin
         Box(Modifier.width(22.dp), contentAlignment = Alignment.Center) {
             PeekSymbol("archivebox", font = type.subheadline, tint = colors.secondaryLabel)
         }
-        Text(localizer.text("app.archived"), color = colors.secondaryLabel, style = type.subheadline.sfLines())
+        Text(title, color = colors.secondaryLabel, style = type.subheadline.sfLines())
         Spacer(Modifier.weight(1f))
         // `Spacer(minLength: 6)` between the words and the count, and 9 on either side of it.
         Text("($count)", Modifier.padding(start = 6.dp), color = colors.secondaryLabel, style = type.caption.monospacedDigit().sfLines())
@@ -156,23 +164,37 @@ private fun ArchiveShelfHeader(count: Int, expanded: Boolean, label: String, hin
 
 /**
  * `ExperimentalArchivedParcelGroup`: archived parcels' rows on one surface (corner 18, no shadow), each but the last
- * with a hairline under it from past its symbol. The list uses it for a search's archived results too.
+ * with a hairline under it from past its symbol. The list uses it for a search's archived results too. For each row,
+ * `onLongClick` is the list's card menu (Swift's `menu: (Parcel) -> CardMenu`) and `rowModifier` what else the list
+ * puts on it, such as the zoom into the parcel's page.
  */
 @Composable
-fun ArchivedParcelGroup(parcels: List<Parcel>, onOpen: (UUID) -> Unit, modifier: Modifier = Modifier, selected: UUID? = null) {
+fun ArchivedParcelGroup(
+    parcels: List<Parcel>,
+    onOpen: (UUID) -> Unit,
+    modifier: Modifier = Modifier,
+    selected: UUID? = null,
+    onLongClick: ((Parcel) -> Unit)? = null,
+    rowModifier: (Parcel) -> Modifier = { Modifier },
+) {
     val hairline = with(LocalDensity.current) { 1.toDp() }
     val divider = PeekTheme.colors.divider
     Column(modifier.experimentalSurface(cornerRadius = 18.dp, shadow = false)) {
         parcels.forEachIndexed { index, parcel ->
-            ArchivedParcelRow(parcel, onOpen = { onOpen(parcel.id) }, selected = parcel.id == selected)
-            if (index < parcels.lastIndex) {
-                Box(
-                    Modifier
-                        .padding(start = 48.dp)
-                        .fillMaxWidth()
-                        .height(hairline)
-                        .background(divider),
+            key(parcel.id) {
+                ArchivedParcelRow(
+                    parcel, onOpen = { onOpen(parcel.id) }, modifier = rowModifier(parcel), selected = parcel.id == selected,
+                    onLongClick = onLongClick?.let { { it(parcel) } },
                 )
+                if (index < parcels.lastIndex) {
+                    Box(
+                        Modifier
+                            .padding(start = 48.dp)
+                            .fillMaxWidth()
+                            .height(hairline)
+                            .background(divider),
+                    )
+                }
             }
         }
     }
@@ -182,10 +204,16 @@ fun ArchivedParcelGroup(parcels: List<Parcel>, onOpen: (UUID) -> Unit, modifier:
  * `ExperimentalArchivedParcelRow` (A-S40): an archived parcel's stage symbol in its tint, its name, its carrier and status,
  * and the day it was delivered or archived, on one line each; at the accessibility sizes the symbol goes and the words
  * wrap, with the day under them. One button, its texts read together, selected while the parcel is shown beside the
- * list; tinted with the ink then. A lift under the finger.
+ * list; tinted with the ink then. A lift under the finger; a long press calls `onLongClick` ([cardTouches]).
  */
 @Composable
-fun ArchivedParcelRow(parcel: Parcel, onOpen: () -> Unit, modifier: Modifier = Modifier, selected: Boolean = false) {
+fun ArchivedParcelRow(
+    parcel: Parcel,
+    onOpen: () -> Unit,
+    modifier: Modifier = Modifier,
+    selected: Boolean = false,
+    onLongClick: (() -> Unit)? = null,
+) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val identities = LocalCarrierIdentities.current ?: return
@@ -200,16 +228,7 @@ fun ArchivedParcelRow(parcel: Parcel, onOpen: () -> Unit, modifier: Modifier = M
 
     Row(
         modifier
-            .clearAndSetSemantics {
-                contentDescription = cardLabel(name, detail, date)
-                role = Role.Button
-                this.selected = selected
-                onClick {
-                    onOpen()
-                    true
-                }
-            }
-            .clickable(interactionSource = null, indication = PressStyle.ExperimentalLift, onClick = onOpen)
+            .cardTouches(cardLabel(name, detail, date), hint = null, selected = selected, onOpen = onOpen, onLongClick = onLongClick)
             .then(if (selected) Modifier.background(colors.ink.copy(alpha = colors.ink.alpha * 0.08f)) else Modifier)
             .fillMaxWidth()
             .heightIn(min = 58.dp)
@@ -247,6 +266,7 @@ private fun ArchivedDate(date: String) {
     Text(
         date, color = PeekTheme.colors.secondaryLabel,
         style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).monospacedDigit().sfLines(), maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
     )
 }
 

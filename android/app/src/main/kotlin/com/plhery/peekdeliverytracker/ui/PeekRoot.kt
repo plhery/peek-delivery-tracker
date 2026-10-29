@@ -85,13 +85,15 @@ internal fun PeekRoot(
 /**
  * LaunchView (A-ST01): restoring the session takes a frame or two, so the screen stays as the launch screen left it
  * and shows progress only after 600 ms, fading in over 0.2 s, rather than flashing a spinner. The fade is kept under
- * Reduce Motion, as SwiftUI keeps an opacity transition.
+ * Reduce Motion, as SwiftUI keeps an opacity transition. Progress once shown stays shown when the window is made
+ * again (a rotation, a change of theme), as the iPhone's view lives on through those.
  */
 @Composable
 internal fun LaunchView(loading: String) {
-    var slow by remember { mutableStateOf(false) }
-    val opacity = remember { Animatable(0f) }
+    var slow by rememberSaveable { mutableStateOf(false) }
+    val opacity = remember { Animatable(if (slow) 1f else 0f) }
     LaunchedEffect(Unit) {
+        if (slow) return@LaunchedEffect
         delay(SLOW_MILLIS)
         slow = true
         withContext(KeepMotion) { opacity.animateTo(1f, Motion.easeOut(0.2)) }

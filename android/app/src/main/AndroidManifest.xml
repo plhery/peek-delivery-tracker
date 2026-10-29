@@ -7,13 +7,16 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- Backups carry the preferences and the parcels this phone follows, never the secrets or the caches
-         (res/xml/data_extraction_rules.xml). -->
+         (res/xml/data_extraction_rules.xml).
+         Left to right on a phone set to a right-to-left language, as the iPhone app stays: it has no right-to-left
+         copy and shows English there. Without RTL support the views Android draws in the app's windows (the splash,
+         text selection's toolbar, dialogs' frames) agree with the screens, which PeekTheme lays out left to right. -->
     <application
         android:name=".PeekApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:label="@string/app_name"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.Peek">
         <!-- The keyboard never pans the window: the screens make room for it from its insets, and the tab bar stays
              where it is, behind it, as the iPhone's does. -->

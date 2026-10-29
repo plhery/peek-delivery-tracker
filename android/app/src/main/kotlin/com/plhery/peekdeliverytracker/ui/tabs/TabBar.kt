@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -38,6 +39,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
@@ -45,7 +47,6 @@ import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
-import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
@@ -136,7 +137,8 @@ internal fun TopTabBar(
 
 /**
  * The capsule, the pill and the items, each item a tab to accessibility (its label, whether it is chosen, its place
- * among the three), the whole of its frame taking the tap and giving under the finger as the app's buttons do.
+ * among the three), the whole of its frame taking the tap. An item neither dims nor shrinks under the finger, as iOS
+ * 26's don't.
  */
 @Composable
 private fun TabBar(
@@ -164,7 +166,7 @@ private fun TabBar(
                     Modifier
                         .width(geometry.itemWidths[index].dp)
                         .fillMaxHeight()
-                        .selectable(selected, interactionSource = null, indication = PressStyle.Tactile, role = Role.Tab) { onTap(index) }
+                        .selectable(selected, interactionSource = null, indication = null, role = Role.Tab) { onTap(index) }
                         .semantics {
                             contentDescription = labels[index]
                             collectionItemInfo = CollectionItemInfo(rowIndex = 0, rowSpan = 1, columnIndex = index, columnSpan = 1)
@@ -180,6 +182,7 @@ private fun TabBar(
 /**
  * The pill behind the chosen item. It takes `shade` off each channel of the glass under it, as the iPhone's does in
  * light and dark alike: a grey of that shade drawn as a difference, straight onto the glass with no layer between.
+ * It is as large as it is drawn and offset from the capsule's start, as the items are laid from it.
  */
 @Composable
 private fun TabPill(geometry: TabBarGeometry, selection: Int, shade: Float) {
@@ -205,12 +208,12 @@ private fun TabPill(geometry: TabBarGeometry, selection: Int, shade: Float) {
     val grey = Color(shade, shade, shade)
     Box(
         Modifier
+            .offset { IntOffset(left.value.dp.roundToPx(), PILL_INSET.dp.roundToPx()) }
             .layout { measurable, _ ->
-                val x = left.value.dp.roundToPx()
-                val width = right.value.dp.roundToPx() - x
+                val width = right.value.dp.roundToPx() - left.value.dp.roundToPx()
                 val height = (geometry.height - 2 * PILL_INSET).dp.roundToPx()
                 val placeable = measurable.measure(Constraints.fixed(width.coerceAtLeast(0), height))
-                layout(placeable.width, placeable.height) { placeable.place(x, PILL_INSET.dp.roundToPx()) }
+                layout(placeable.width, placeable.height) { placeable.place(0, 0) }
             }
             .testTag(TAB_PILL)
             .drawBehind { drawRoundRect(grey, cornerRadius = CornerRadius(size.height / 2), blendMode = BlendMode.Difference) },

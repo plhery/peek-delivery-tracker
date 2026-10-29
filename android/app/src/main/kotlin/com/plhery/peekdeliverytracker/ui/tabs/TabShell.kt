@@ -10,15 +10,16 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.tappableElement
 import androidx.compose.foundation.layout.union
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -26,21 +27,25 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.core.view.ViewCompat
 import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowInfoTracker
@@ -51,7 +56,6 @@ import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.emptyFlow
 
 /** The iPhone's three tabs (ParcelListView's TabView), in its order: a tab's ordinal is its tag there. */
 enum class PeekTab(val copyKey: String, val symbol: String, val screen: String) {
@@ -67,6 +71,24 @@ enum class PeekTab(val copyKey: String, val symbol: String, val screen: String) 
  * the bar's top on a phone, from the window's top to the bar's bottom where the bar stands at the top.
  */
 val LocalTabBarPadding = compositionLocalOf { PaddingValues(0.dp) }
+
+/**
+ * The padding of a tab's content, which draws edge to edge under the bar and the system's: on each side the system
+ * bars and the display cutout, and at the top and the bottom whichever reaches further of those and the bar's room.
+ * A bar at the top leaves the bottom to the navigation buttons or a taskbar, which still need room there.
+ */
+@Composable
+fun tabContentPadding(): PaddingValues {
+    val bar = LocalTabBarPadding.current
+    val direction = LocalLayoutDirection.current
+    val safe = WindowInsets.systemBars.union(WindowInsets.displayCutout).asPaddingValues()
+    return PaddingValues(
+        start = safe.calculateStartPadding(direction),
+        top = max(safe.calculateTopPadding(), bar.calculateTopPadding()),
+        end = safe.calculateEndPadding(direction),
+        bottom = max(safe.calculateBottomPadding(), bar.calculateBottomPadding()),
+    )
+}
 
 /**
  * Taps on the tab already chosen, for what the tab shows: a stack goes back to its root, and a list at its root
@@ -126,27 +148,38 @@ fun TabShell(
     val density = LocalDensity.current
     BoxWithConstraints(modifier.fillMaxSize()) {
         val top = maxWidth >= 600.dp && maxHeight >= 480.dp
-        val statusTop = with(density) { WindowInsets.statusBars.getTop(this).toDp() }
+        // The status bar, or a desktop window's caption bar, and a cutout reaching past them.
+        val safeTop = with(density) { WindowInsets.systemBars.union(WindowInsets.displayCutout).getTop(this).toDp() }
         val buttons = with(density) { WindowInsets.tappableElement.getBottom(this).toDp() }
         // Above the navigation buttons where there are some; over the gesture bar as over the iPhone's home indicator.
         val bottomGap = if (buttons > 0.dp) buttons + BUTTONS_GAP else GESTURE_GAP
-        val topGap = statusTop + STATUS_GAP
+        val topGap = safeTop + STATUS_GAP
         val footprint = if (top) PaddingValues(top = topGap + TOP_BAR_HEIGHT) else PaddingValues(bottom = bottomGap + BOTTOM_BAR_HEIGHT)
         Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background)) {
             CompositionLocalProvider(LocalTabBarPadding provides footprint, LocalTabReselection provides reselections[selection]) {
                 holder.SaveableStateProvider(tabs[selection].name) { content(tabs[selection]) }
             }
         }
+        val hinge = hingeStart(constraints.maxWidth)
         if (top) {
-            val startHalf = bookStartHalf()
-            Box(Modifier.align(Alignment.TopStart).then(if (startHalf != null) Modifier.width(startHalf) else Modifier.fillMaxSize())) {
-                TopTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.TopCenter).padding(top = topGap))
-            }
+            TopTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.TopStart).clearOfTheHinge(hinge).padding(top = topGap))
         } else {
+            // Clear of a cutout or of navigation buttons at the side, unless a hinge already puts it in the start half.
             val sides = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal)
-            BottomTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.BottomCenter).windowInsetsPadding(sides).padding(bottom = bottomGap))
+            val clear = if (hinge == null) Modifier.windowInsetsPadding(sides) else Modifier
+            BottomTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.BottomStart).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap))
         }
     }
+}
+
+/**
+ * The bar centred across the room it is given or, where a hinge splits the window [hinge] pixels from its left, in
+ * the half before the hinge when the bar fits there. The shell fills the window, so its left is the window's.
+ */
+private fun Modifier.clearOfTheHinge(hinge: Int?): Modifier = layout { measurable, constraints ->
+    val bar = measurable.measure(constraints.copy(minWidth = 0))
+    val room = hinge?.takeIf { bar.width <= it } ?: constraints.maxWidth
+    layout(constraints.maxWidth, bar.height) { bar.place((room - bar.width) / 2, 0) }
 }
 
 /** The tab an effect last acted on, kept across compositions without causing one. */
@@ -183,21 +216,37 @@ private fun TabKeys(choose: (Int) -> Unit) {
 }
 
 /**
- * The width of the window's start half, before a foldable's hinge, when the hinge stands upright and splits the
- * window (book posture): the top bar keeps to that half rather than straddling the fold.
+ * Where a hinge starts, in pixels from the window's left, when it stands upright and splits the window: a foldable in
+ * book posture or a dual screen spanned. The bars keep to the half before it rather than straddling the fold. The
+ * app lays out left to right, so that half is the left one.
+ *
+ * The last hinge reported is kept with the window, for a window of the same width, so the first frame after a
+ * recreation (a change of theme, of text size, of language) already keeps clear of it rather than jumping there once
+ * the hinge is reported again.
  */
 @Composable
-private fun bookStartHalf(): androidx.compose.ui.unit.Dp? {
+private fun hingeStart(windowWidth: Int): Int? {
     val activity = LocalContext.current.activity()
-    val layout by remember(activity) {
-        activity?.let { WindowInfoTracker.getOrCreate(it).windowLayoutInfo(it) } ?: emptyFlow()
-    }.collectAsState(initial = null)
-    val fold = layout?.displayFeatures?.filterIsInstance<FoldingFeature>()
-        ?.firstOrNull { it.isSeparating && it.orientation == FoldingFeature.Orientation.VERTICAL } ?: return null
-    val window = LocalView.current.rootView.width
-    val start = if (LocalLayoutDirection.current == LayoutDirection.Ltr) fold.bounds.left else window - fold.bounds.right
-    return with(LocalDensity.current) { start.toDp() }
+    var reported by rememberSaveable(stateSaver = HingeSaver) { mutableStateOf<Hinge?>(null) }
+    val width by rememberUpdatedState(windowWidth)
+    LaunchedEffect(activity) {
+        if (activity == null) return@LaunchedEffect
+        WindowInfoTracker.getOrCreate(activity).windowLayoutInfo(activity).collect { layout ->
+            val fold = layout.displayFeatures.filterIsInstance<FoldingFeature>()
+                .firstOrNull { it.isSeparating && it.orientation == FoldingFeature.Orientation.VERTICAL }
+            reported = fold?.let { Hinge(it.bounds.left, width) }
+        }
+    }
+    return reported?.takeIf { it.windowWidth == windowWidth }?.start
 }
+
+/** A hinge's start from the window's left, and the width of the window it splits, in pixels. */
+private data class Hinge(val start: Int, val windowWidth: Int)
+
+private val HingeSaver = Saver<Hinge?, IntArray>(
+    save = { hinge -> hinge?.let { intArrayOf(it.start, it.windowWidth) } },
+    restore = { Hinge(it[0], it[1]) },
+)
 
 private tailrec fun Context.activity(): Activity? = when (this) {
     is Activity -> this

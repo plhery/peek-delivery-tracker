@@ -1,19 +1,20 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,20 +25,20 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.serialization.NavBackStackSerializer
 import androidx.navigation3.scene.SinglePaneSceneStrategy
 import androidx.navigation3.ui.NavDisplay
-import com.plhery.peekdeliverytracker.ui.tabs.LocalTabBarPadding
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabReselection
 import com.plhery.peekdeliverytracker.ui.tabs.TabReselection
 import com.plhery.peekdeliverytracker.ui.tabs.TabReselectionEffect
+import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
+import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlinx.serialization.Serializable
 
@@ -82,10 +83,14 @@ fun DeliveriesTab(
         val shown = DeliveriesKey.ParcelPage(id)
         if (backStack.last() != shown) backStack.add(shown)
     }
+    val reduceMotion = PeekTheme.reduceMotion
     NavDisplay(
         backStack = backStack,
         modifier = modifier,
         sceneStrategies = sceneStrategies,
+        transitionSpec = { Push.forward(reduceMotion) },
+        popTransitionSpec = { Push.back(reduceMotion) },
+        predictivePopTransitionSpec = { Push.predictiveBack(reduceMotion) },
         entryProvider = entryProvider {
             entry<DeliveriesKey.ParcelList> {
                 CompositionLocalProvider(LocalTabReselection provides listReselection) { list(open) }
@@ -96,6 +101,33 @@ fun DeliveriesTab(
 }
 
 private val sceneStrategies = listOf(SinglePaneSceneStrategy<DeliveriesKey>())
+
+/**
+ * How a parcel's page comes and goes until it zooms from its card: UINavigationController's push. The page slides in
+ * from the trailing edge over the list, which moves a third of the way out behind it, on a spring of response 0.35 s
+ * that doesn't bounce, and back reverses it. The stack keeps the page over the list both ways. Nothing moves under
+ * Reduce Motion.
+ */
+private object Push {
+    fun forward(reduceMotion: Boolean): ContentTransform =
+        if (reduceMotion) still() else slideInHorizontally(spring) { it } togetherWith slideOutHorizontally(spring) { -it / 3 }
+
+    fun back(reduceMotion: Boolean): ContentTransform = pop(reduceMotion, spring)
+
+    /**
+     * The predictive back gesture moves both the same way. The stack seeks the pop by the gesture's progress, so an even
+     * pace keeps the page under the finger; let go, it goes the rest of the way in what is left of 0.35 s.
+     */
+    fun predictiveBack(reduceMotion: Boolean): ContentTransform = pop(reduceMotion, gesture)
+
+    private fun pop(reduceMotion: Boolean, motion: FiniteAnimationSpec<IntOffset>): ContentTransform =
+        if (reduceMotion) still() else slideInHorizontally(motion) { -it / 3 } togetherWith slideOutHorizontally(motion) { it }
+
+    private fun still(): ContentTransform = EnterTransition.None togetherWith ExitTransition.None
+
+    private val spring = Motion.springWithResponse<IntOffset>(0.35, 1.0)
+    private val gesture = tween<IntOffset>(durationMillis = 350, easing = LinearEasing)
+}
 
 /** The list until it is ported: the parcels' names, each opening its page. */
 @Composable
@@ -108,7 +140,7 @@ fun ParcelListPlaceholder(parcels: List<Pair<String, String>>, open: (id: String
     LazyColumn(
         Modifier.fillMaxSize().background(colors.background).testTag(PARCEL_LIST),
         state = state,
-        contentPadding = underTheBar(),
+        contentPadding = tabContentPadding(),
     ) {
         items(parcels, key = { it.first }) { (id, label) ->
             BasicText(label, Modifier.fillMaxWidth().clickable { open(id) }.padding(horizontal = 16.dp, vertical = 12.dp), style = style)
@@ -123,20 +155,6 @@ fun ParcelPagePlaceholder(label: String?) {
     Box(Modifier.fillMaxSize().background(colors.background).testTag(PARCEL_PAGE)) {
         BasicText(label.orEmpty(), Modifier.safeDrawingPadding().padding(16.dp), style = PeekTheme.type.headline.copy(color = colors.label))
     }
-}
-
-/** The safe area, with the tab bar's room at the edge it stands on. */
-@Composable
-private fun underTheBar(): PaddingValues {
-    val bar = LocalTabBarPadding.current
-    val direction = LocalLayoutDirection.current
-    val safe = WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top).asPaddingValues()
-    return PaddingValues(
-        start = safe.calculateStartPadding(direction),
-        top = max(safe.calculateTopPadding(), bar.calculateTopPadding()),
-        end = safe.calculateEndPadding(direction),
-        bottom = bar.calculateBottomPadding(),
-    )
 }
 
 /** The test tags of the placeholders. */

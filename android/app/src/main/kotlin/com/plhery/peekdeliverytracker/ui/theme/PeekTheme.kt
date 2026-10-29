@@ -21,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.node.DelegatableNode
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 
 /**
  * The iPhone app's look for everything inside: its colours for the appearance, its fonts at the reader's text size,
@@ -31,6 +33,11 @@ import androidx.compose.ui.platform.LocalDensity
  * The appearance is the one picked in Settings, light unless the reader picks another; the phone's dark theme counts
  * only for System. Text and icons take the label colour, text selection the tint, a press shows no ripple (buttons
  * take a `PressStyle`), and scrolling containers bounce at their ends ([RubberBandOverscroll]).
+ *
+ * Everything lays out left to right, whatever the phone's language. The app has no right-to-left copy and falls back
+ * to English on a phone set to Arabic, Hebrew or Persian, and the iPhone app, which iOS lays out in the app's own
+ * language, stays left to right there. Compose takes its direction from the phone's locale whatever the manifest says,
+ * so it is set here; the manifest's `supportsRtl` keeps what Android draws itself left to right too.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,6 +55,7 @@ fun PeekTheme(
     val density = LocalDensity.current
     val materialType = remember(dynamicTypeSize, density) { materialType(PeekTypography(dynamicTypeSize, density)) }
     CompositionLocalProvider(
+        LocalLayoutDirection provides LayoutDirection.Ltr,
         LocalPeekColors provides colors,
         LocalReduceMotion provides reduceMotion,
         LocalReduceTransparency provides reduceTransparency,

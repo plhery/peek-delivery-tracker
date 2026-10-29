@@ -22,9 +22,11 @@ import androidx.compose.material3.RippleConfiguration
 import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.captureToImage
@@ -32,6 +34,7 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.core.view.children
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -112,6 +115,20 @@ class PeekThemeTest {
         assertNull(ripple)
         assertSame(RubberBandOverscrollFactory, overscroll)
         assertEquals(colors.paper, scheme!!.surface)
+    }
+
+    @Test
+    fun insideTheThemeEverythingLaysOutLeftToRight() {
+        var direction: LayoutDirection? = null
+        compose.setContent {
+            CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                PeekTheme(dark = false, highContrast = false, reduceMotion = false, carrierIdentities = null) {
+                    direction = LocalLayoutDirection.current
+                }
+            }
+        }
+        compose.waitForIdle()
+        assertEquals(LayoutDirection.Ltr, direction)
     }
 
     /** The centre pixel of the node tagged `tag`, as 0…255 channels. */

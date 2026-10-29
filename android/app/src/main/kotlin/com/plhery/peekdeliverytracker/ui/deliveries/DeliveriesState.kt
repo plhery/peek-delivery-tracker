@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.lazy.LazyListState
@@ -9,6 +11,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
@@ -16,10 +19,18 @@ import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.GraphicsContext
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.LayoutDirection
+import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.DeliveredConfetti
 import com.plhery.peekdeliverytracker.core.DeliveredHold
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesNavigation
+import com.plhery.peekdeliverytracker.core.DeliveryCardKind
+import com.plhery.peekdeliverytracker.core.DeliveryCardPlace
 import com.plhery.peekdeliverytracker.core.DeliveryListLayout
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
@@ -32,6 +43,8 @@ import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
 import com.plhery.peekdeliverytracker.core.trackingNumbers
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.displayedCarrier
+import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import java.time.Instant
 import java.util.UUID
@@ -43,6 +56,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.random.Random
+import com.plhery.peekdeliverytracker.core.Rect as CoreRect
 
 /**
  * ParcelListView's navigation: the parcel shown and how it came to be shown ([DeliveriesNavigation]), the parcel kept
@@ -434,10 +451,186 @@ internal class DeliveriesState(
         navigator.restore(next)
     }
 
-    /** The parcels just arrived take their new places. Their card's flight there isn't ported yet: they simply move. */
-    fun letGo() {
+    /** Nobody looks at the list any more: the parcels just arrived take their new places at once, unseen (`release()`). */
+    fun release() {
         if (!hold.isEmpty) hold = hold.release()
     }
+
+    /** Where each card stands, Pip's box and what each card shows, which the paper and the flights start from. */
+    val places = DeliveryCardPlaces()
+
+    /** The cards on their way to their new places, over the list ([DeliveredFlights]). */
+    var flights: List<DeliveredFlight> by mutableStateOf(emptyList())
+        private set
+
+    /**
+     * How far along the flights are, from 0 to 1 and past it as a spring goes: a new one for each letting go, so that
+     * the new flights start from 0 on their first frame, whatever the last ones reached.
+     */
+    var flightProgress: Animatable<Float, AnimationVector1D> by mutableStateOf(Animatable(0f))
+        private set
+
+    /** Each letting go counts one, so that a flight still landing doesn't end the next. */
+    private var flightRound = 0
+    private var flightJob: Job? = null
+
+    /** Each letting go counts one, so that the list's release ends with the last one. */
+    private var releases = 0
+
+    /** Each postmark that lands taps success (`.sensoryFeedback(.success, trigger: postmarks)`). */
+    var postmarks by mutableIntStateOf(0)
+        private set
+
+    /** The paper out of the card just delivered, while it flies ([DeliveredPaper]). */
+    var paper: DeliveredPaperBurst? by mutableStateOf(null)
+        private set
+
+    /** A parcel seen arriving was the moment to ask for a rating (ReviewPrompt), and the list has not asked yet. */
+    var reviewDue by mutableStateOf(false)
+
+    /**
+     * The held parcels are being let go: the list's items take their places with the release's spring, until the list
+     * has been laid out anew ([ListMotion]).
+     */
+    var releasing = false
+        private set
+
+    /** What the list draws with, as it was last drawn: the carriers' liveries, the language and the window's graphics. */
+    var identities: CarrierIdentities? = null
+    var language: AppLanguage = AppLanguage.En
+    var graphics: GraphicsContext? = null
+    var density: Density = Density(1f)
+    var layoutDirection: LayoutDirection = LayoutDirection.Ltr
+
+    /** Where each burst of paper is thrown from: random, but in the tests ([LocalPaperSeeds]). */
+    var seeds: () -> ULong = { Random.nextLong().toULong() }
+
+    /** The postmark landed: a tap, and paper for the parcels that have just arrived (`postmarks += 1`, `throwPaper()`). */
+    fun postmark() {
+        postmarks++
+        throwPaper()
+    }
+
+    /**
+     * `throwPaper()`: one burst however many have arrived, out of Pip's open box on the first of their cards that
+     * shows, from the top of the list down, in that card's colours.
+     */
+    private fun throwPaper() {
+        val identities = identities ?: return
+        val cards = parcels.filter { hold.holds(it.id) }
+            .mapNotNull { parcel -> places.place(parcel.id)?.let { parcel to it.frame.minY } }
+            .sortedBy { it.second }
+        for ((parcel, _) in cards) {
+            val mouth = places.mouth(parcel.id) ?: continue
+            val identity = identities.of(parcel.displayedCarrier, language)
+            val count = if (layout.kind(parcel.id) == DeliveryCardKind.Next) DeliveredConfetti.next else DeliveredConfetti.other
+            val confetti = DeliveredConfetti(mouth, count, seeds())
+            val burst = DeliveredPaperBurst(confetti, DeliveredConfetti.colors(identity.ink, identity.surface, identity.brand))
+            paper = burst
+            scope.launch {
+                delay((confetti.duration * 1000).toLong())
+                if (paper === burst) paper = null
+            }
+            return
+        }
+    }
+
+    /**
+     * `letGo()`: the held parcels take their new places. Each card that becomes another and shows whole is pictured
+     * where it stands and flown to where the list now has it, and the other cards make room; a card already in flight
+     * simply takes its place, as its picture would be of nothing. The moment a parcel was seen arriving may be the one
+     * to ask for a rating, once its card has landed.
+     */
+    fun letGo() {
+        val ids = hold.ids
+        if (ids.isEmpty()) return
+        if (source.reviewPrompt.isDue(now(), calm = source.reviewSettled.value)) reviewDue = true
+        val changes = layout.changing(into = arrange(parcels))
+        val visible = places.visible
+        val graphics = graphics
+        val inFlight = flights.mapTo(HashSet()) { it.id }
+        val taking = mutableListOf<DeliveredFlight>()
+        if (visible != null && graphics != null) {
+            for (parcel in parcels) {
+                val change = changes[parcel.id] ?: continue
+                if (parcel.id in inFlight) continue
+                // Only a card that shows whole can be pictured whole: another simply takes its new place.
+                val from = places.place(parcel.id)?.takeIf { visible.contains(it.frame) } ?: continue
+                val picture = places.picture(parcel.id, graphics, density, layoutDirection) ?: continue
+                taking += DeliveredFlight(parcel.id, parcel, change.was, change.becomes, picture, from, parcel.id in ids, contentShift)
+            }
+        }
+        // The arrivals are drawn last, over the card that takes their place.
+        taking.sortBy { it.lifted }
+        for (flight in taking) places.forget(flight.id)
+        flightJob?.cancel()
+        endFlights()
+        val round = ++flightRound
+        val progress = Animatable(0f)
+        flightProgress = progress
+        flights = taking
+        val release = ++releases
+        releasing = true
+        hold = hold.release()
+        scope.launch {
+            // The list is laid out anew in the next frame, and its items start moving with the release's spring.
+            withFrameNanos {}
+            withFrameNanos {}
+            if (release == releases) releasing = false
+        }
+        if (taking.isEmpty()) return
+        flightJob = scope.launch {
+            // The list lays its new cards out; one that stays unplaced is beyond the screen, and its picture flies out.
+            for (attempt in 0 until PLACE_ATTEMPTS) {
+                delay(PLACE_WAIT)
+                if (taking.all { places.place(it.id) != null }) break
+            }
+            if (round != flightRound) return@launch
+            val since = contentShift
+            for (flight in taking) {
+                val from = flight.from
+                // Measured as the list now stands, told as it stood when the flight began.
+                flight.to = places.place(flight.id)?.let { it.shifted(-(since - flight.shift) / places.density) }
+                    ?: DeliveryCardPlace(
+                        CoreRect(from.frame.minX, max(from.frame.maxY, visible?.maxY ?: 0.0) + 40, from.frame.width, min(from.frame.height, 102.0)),
+                        min(from.title, 50.0),
+                    )
+            }
+            progress.animateTo(1f, Motion.spring(FLIGHT_DURATION, FLIGHT_BOUNCE))
+            if (round == flightRound) endFlights()
+        }
+    }
+
+    /** The flights end, and the pictures they drew go. */
+    private fun endFlights() {
+        val ended = flights
+        if (ended.isEmpty()) return
+        flights = emptyList()
+        graphics?.let { graphics -> ended.forEach { graphics.releaseGraphicsLayer(it.picture) } }
+    }
+
+    /**
+     * The list has gone (`.onDisappear { flights = [] }`), or taken another size or another place than the flights
+     * measured: its cards in flight are at their places already.
+     */
+    fun dropFlights() {
+        if (flights.isEmpty() && flightJob?.isActive != true) return
+        flightRound++
+        flightJob?.cancel()
+        flightJob = null
+        endFlights()
+    }
+
+    /** Whether the parcel's card is in flight to its place, where it stays unseen until it lands. */
+    fun flies(parcelId: UUID): Boolean = flights.any { it.id == parcelId }
+
+    /**
+     * How far the list's content has moved down since the list was made, in pixels: scrolled by a finger or a throw,
+     * pulled, and pushed down by the gap held open as it refreshes. The iPhone flies its cards in the scroll content's
+     * space, which moves with all of these; here a flight is drawn over the list, moved by as much as this has changed
+     * since it began. The list's own scrolls (to its top, to a card) end the flights first.
+     */
+    val contentShift: Float get() = listPull.scrolled + listPull.shown
 
     fun openArchive(open: Boolean) {
         if (open == archiveOpen) return
@@ -663,12 +856,8 @@ internal class DeliveriesState(
         }
     }
 
-    /**
-     * Where a card stands in the list, which the delivered card's flight and Pip's sight measure from: neither is
-     * ported yet.
-     */
-    @Suppress("UNUSED_PARAMETER")
-    fun stand(parcelId: UUID, frame: Rect) = Unit
+    /** Where a card stands in its item of the list (`places.stand(id, at:)`), which its flight and Pip's sight start from. */
+    fun stand(parcelId: UUID, frame: Rect) = places.stand(parcelId, frame)
 
     /** The keys of the list's items, in its order, as last drawn ([cardKey] for a card). */
     var itemKeys: List<Any> = emptyList()
@@ -691,11 +880,13 @@ internal class DeliveriesState(
     }
 
     suspend fun scrollToTop(reduceMotion: Boolean) {
+        dropFlights()
         if (reduceMotion) listState.scrollToItem(0) else listState.animateScrollToItem(0)
     }
 
     /** `proxy.scrollTo(id)`: the card scrolled just far enough to show whole, on a snappy 0.25 s. */
     suspend fun bringIntoView(parcelId: UUID, reduceMotion: Boolean) {
+        dropFlights()
         val info = listState.layoutInfo
         val index = itemIndex(parcelId) ?: return
         val item = info.visibleItemsInfo.firstOrNull { it.index == index }
@@ -715,6 +906,7 @@ internal class DeliveriesState(
     /** The card the list showed at its top when the window turned, at its top again once the list is laid out anew. */
     suspend fun keepCard(parcelId: UUID) {
         val index = itemIndex(parcelId) ?: return
+        dropFlights()
         listState.scrollToItem(index)
     }
 }
@@ -745,6 +937,17 @@ internal const val ARCHIVE_KEY = "archive"
 
 /** How long an archived parcel's Undo stays, in milliseconds. */
 private const val UNDO_DURATION = 7_000L
+
+/** A place moved up or down the list by `dy` points. */
+private fun DeliveryCardPlace.shifted(dy: Float): DeliveryCardPlace = copy(frame = frame.offsetBy(0.0, dy.toDouble()))
+
+/** `.spring(duration: 0.62, bounce: 0.16)`: the flights' spring. */
+private const val FLIGHT_DURATION = 0.62
+private const val FLIGHT_BOUNCE = 0.16
+
+/** The list has 4 × 30 ms to lay the new cards out before one still unplaced is taken for one beyond the screen. */
+private const val PLACE_ATTEMPTS = 4
+private const val PLACE_WAIT = 30L
 
 /** The pull holds its arrow turning this long at least, and its result this long, in milliseconds. */
 private const val PULL_MINIMUM = 900L

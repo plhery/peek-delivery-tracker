@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.os.Build
 import android.view.KeyEvent
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -54,6 +55,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalGraphicsContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
@@ -78,16 +80,22 @@ import androidx.navigation3.ui.NavDisplay
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesKey
+import com.plhery.peekdeliverytracker.core.ReviewPrompt
+import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.TabReselectionEffect
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
+import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
+import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
+import java.time.Instant
 import java.util.Objects
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
@@ -137,6 +145,13 @@ fun DeliveriesTab(
         DeliveriesState(source, navigator, listState, archiveOpen, views, now, scope)
     }
     state.localizer = LocalLocalizer.current
+    // What the paper and the flights are drawn with, as the list was last drawn.
+    state.identities = LocalCarrierIdentities.current
+    state.language = LocalLanguage.current
+    state.graphics = LocalGraphicsContext.current
+    state.density = LocalDensity.current
+    state.layoutDirection = LocalLayoutDirection.current
+    LocalPaperSeeds.current?.let { state.seeds = it }
     val context = LocalContext.current
     val haptics = rememberHaptics()
     state.copy = { text ->
@@ -182,7 +197,12 @@ fun DeliveriesTab(
 
         LaunchedEffect(state) { source.parcels.collect(state::receive) }
         SearchCounted(state)
-        HoldingDelivered(state, reduceMotion)
+        val lifecycle = LocalLifecycleOwner.current.lifecycle
+        val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
+        // `watching`: the list is looked at, and may show a card moving.
+        val watching = resumed && state.listShown && !state.showingFilters && !state.hasCustomView && !reduceMotion
+        HoldingDelivered(state, watching)
+        Reviewing(state, resumed, watching, now)
         Consuming(state, inbox)
         DeliveriesKeys(state, scope, reduceMotion)
         TabReselectionEffect {
@@ -235,6 +255,8 @@ fun DeliveriesTab(
                 },
             )
         }
+        // The paper of a delivery, over the list and the parcel beside it, as the iPhone's is over the whole screen.
+        DeliveredPaper(state)
     }
 }
 
@@ -243,23 +265,66 @@ private val REGULAR_WIDTH = 600.dp
 private val REGULAR_HEIGHT = 480.dp
 
 /**
- * The parcels just delivered keep their place a moment (DeliveredHold): the postmark lands, the card is read, then it
- * takes its new place. Nobody looking, they move at once. The postmark's tap, the paper and the card's flight to its
- * new place aren't ported yet: the card simply moves.
+ * `holdingDelivered`: the parcels just delivered keep their place a moment (DeliveredHold). The postmark lands with a
+ * tap of success and paper out of Pip's open box ([DeliveriesState.postmark]), the card is read, then it flies to its
+ * new place ([DeliveriesState.letGo]). Nobody looking, or under Reduce Motion, they take their new places at once,
+ * unseen, as nothing is held then.
  */
 @Composable
-private fun HoldingDelivered(state: DeliveriesState, reduceMotion: Boolean) {
-    val lifecycle = LocalLifecycleOwner.current.lifecycle
-    val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
-    val watching = resumed && state.listShown && !state.showingFilters && !state.hasCustomView && !reduceMotion
+private fun HoldingDelivered(state: DeliveriesState, watching: Boolean) {
     state.watching = watching
-    LaunchedEffect(watching) { if (!watching) state.letGo() }
+    SensoryFeedbackEffect(SensoryFeedback.Success, state.postmarks)
+    LaunchedEffect(watching) { if (!watching) state.release() }
     LaunchedEffect(state.hold.ids) {
         if (state.hold.isEmpty) return@LaunchedEffect
         delay(POSTMARK_MILLIS)
-        // Here the iPhone taps success and throws paper out of Pip's box.
+        state.postmark()
         delay(READ_MILLIS)
         state.letGo()
+    }
+}
+
+/**
+ * `reviewing`: a parcel seen arriving asks for a rating a moment after its card has landed ([DeliveriesState.reviewDue]),
+ * while the list is still looked at with nothing over it or at its foot. The days the list is in use count towards the
+ * first ask; a failure shown on it keeps any ask away for the day. Play's prompt is shown over the window's activity.
+ * A card's open menu stands over the list too, as the questions it asks do on the iPhone.
+ *
+ * Out of the iPhone's: the Add and account sheets, a page of the site, the notifications' invitation and what a card's
+ * menu asks, which don't stand over the list on Android yet, nor anything over the parcel beside it.
+ */
+@Composable
+private fun Reviewing(state: DeliveriesState, resumed: Boolean, watching: Boolean, now: () -> Instant) {
+    val source = state.source
+    val prompt = source.reviewPrompt
+    val settled by source.reviewSettled.collectAsState()
+    val errorMessage by source.errorMessage.collectAsState()
+    val undo by source.undoParcel.collectAsState()
+    val refreshing by source.refreshing.collectAsState()
+    val inUse = resumed && settled
+    LaunchedEffect(inUse) { if (inUse) prompt.used(now()) }
+    // Something failed in front of the reader: the list's notice, a check, or an action.
+    val failureShown = resumed && (errorMessage != null || state.toast?.warning == true || state.actionError != null)
+    LaunchedEffect(failureShown) { if (failureShown) prompt.noteBadMoment(now()) }
+    val covered = state.showingFilters || state.menu != null || state.deleting != null || state.actionError != null
+    val ready = watching && !covered && state.hold.isEmpty && state.flights.isEmpty() && state.toast == null && undo == null &&
+        !refreshing && !state.showingSearch && settled
+    val activity = LocalActivity.current
+    val requester = remember(source, activity) { activity?.let(source::reviews) }
+    LaunchedEffect(state.reviewDue, ready, requester) {
+        if (requester == null) return@LaunchedEffect
+        ReviewPrompt.ask(
+            due = state.reviewDue, ready = ready,
+            take = {
+                if (!state.reviewDue) {
+                    false
+                } else {
+                    state.reviewDue = false
+                    prompt.take(now(), calm = true)
+                }
+            },
+            requester = requester, report = source::action,
+        )
     }
 }
 

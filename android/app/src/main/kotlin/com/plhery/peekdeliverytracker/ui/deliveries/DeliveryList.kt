@@ -28,6 +28,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -64,6 +65,7 @@ import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
+import com.plhery.peekdeliverytracker.ui.draw.LocalPipSight
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -74,8 +76,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.CustomAccessibilityAction
@@ -116,10 +120,14 @@ val LocalColumnEdges = compositionLocalOf { ColumnEdges(start = true, end = true
  * as a group under its header and, when nothing matches, a word on it ([NoResults]). The filters open in a sheet, or
  * side by side in a popover off their button ([FiltersHost]).
  *
- * Out of the iPhone's list: the delivered card's celebration and flight, the invitation to turn notifications on (and
- * the device account's row, which a custom view hides), what a card's menu asks (a new name, sharing, another
- * carrier), the sheets (Add, the account), the zoom from a card to its page and dropping text on the list. The buttons
- * that would open them call [DeliveriesState]'s hooks, which do nothing yet.
+ * A parcel delivered as the list is looked at keeps its card a moment, postmarked, and paper comes out of Pip's box
+ * ([DeliveriesState.postmark]); then the card flies to its new place over the list ([DeliveredFlights]) as the other
+ * cards make room.
+ *
+ * Out of the iPhone's list: the invitation to turn notifications on (and the device account's row, which a custom view
+ * hides), what a card's menu asks (a new name, sharing, another carrier), the sheets (Add, the account), the zoom from
+ * a card to its page and dropping text on the list. The buttons that would open them call [DeliveriesState]'s hooks,
+ * which do nothing yet.
  */
 @Composable
 internal fun DeliveryList(state: DeliveriesState) {
@@ -268,19 +276,32 @@ private enum class ChromeSlot { DemoBar, List, Band }
 /**
  * The list's scrolling column, `padding` clear of the bars at its top and bottom and `start` and `end` of the sides,
  * which pulls down to refresh ([ListPull], the tab's): the pull's seal behind its content, at the top of what the list
- * scrolls.
+ * scrolls, and the cards in flight over it. Its items move as its parcels change, with the release's spring as the
+ * held parcels are let go ([ListMotion]). The flights end as the list goes or takes another size, as the iPhone's end
+ * as it disappears.
  */
 @Composable
 private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding: PaddingValues, start: Dp, end: Dp) {
     val reduceMotion = PeekTheme.reduceMotion
-    val fade = if (reduceMotion) null else Motion.snappy<Float>(LIST_MOTION)
-    val move = if (reduceMotion) null else Motion.snappy<IntOffset>(LIST_MOTION)
+    val fade = remember(state, reduceMotion) { if (reduceMotion) null else ListMotion<Float> { state.releasing } }
+    val move = remember(state, reduceMotion) { if (reduceMotion) null else ListMotion<IntOffset> { state.releasing } }
     val pull = state.listPull
     val density = LocalDensity.current
+    state.places.density = density.density
     // While refreshing, the gap stands over the content, as the system adds it to the list's inset.
     val held = with(density) { pull.held.value.toDp() }
     val listState = state.listState
-    Box(Modifier.fillMaxSize().nestedScroll(pull).onSizeChanged { pull.height = it.height }) {
+    DisposableEffect(state) { onDispose(state::dropFlights) }
+    Box(
+        Modifier
+            .fillMaxSize()
+            .nestedScroll(pull)
+            .onSizeChanged {
+                pull.height = it.height
+                state.dropFlights()
+            }
+            .onPlaced { state.places.list = it },
+    ) {
         PullIndicator(state.pull, origin = {
             // The top of the content: the list's first item, less the content's own room above it.
             val info = listState.layoutInfo
@@ -308,6 +329,7 @@ private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding
                 }
             }
         }
+        DeliveredFlights(state)
     }
 }
 
@@ -445,8 +467,8 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
 }
 
 /**
- * Next up's card. A card on its way tells the list where it stands, and is pictured flying to its new place: the
- * flight isn't ported yet.
+ * Next up's card. A card on its way tells the list where it stands, its name and, on Next up, where Pip shows, which
+ * the paper of its delivery comes out of; it is pictured flying to its new place ([DeliveriesState.letGo]).
  */
 @Composable
 private fun NextCard(state: DeliveriesState, item: ListItem.Next) {
@@ -455,9 +477,17 @@ private fun NextCard(state: DeliveriesState, item: ListItem.Next) {
     val shown = state.shows(parcel).value
     val arrived = state.holds(parcel.id).value
     val selected = state.selects(parcel.id).value
+    val place = state.cardPlace(parcel.id)
+    val onName = state.names(parcel.id)
+    val sight = remember(state, parcel.id) { { pip: Rect -> state.places.see(pip, parcel.id) } }
     CardComposed(parcel.id)
-    SwipeableCard(state, shown, Radii.nextUp, shadow = true, Modifier.deliveryCardPlace(parcel.id, flying = false, stand = state::stand)) { moved, open, menu, archive ->
-        NextDeliveryPass(shown, onOpen = open, modifier = moved, arrived = arrived, selected = selected, onLongClick = menu, swipeAction = archive)
+    SwipeableCard(state, shown, Radii.nextUp, shadow = true, place, pictured = true) { moved, open, menu, archive ->
+        CompositionLocalProvider(LocalPipSight provides sight) {
+            NextDeliveryPass(
+                shown, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected, onLongClick = menu,
+                swipeAction = archive,
+            )
+        }
     }
 }
 
@@ -477,9 +507,12 @@ private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
     } else {
         remember(shown, localizer, language) { shown.notice(now())?.let { localizer.text(it.localizationKey) } }
     }
-    SwipeableCard(state, shown, Radii.card, shadow = false, Modifier.deliveryCardPlace(parcel.id, flying = false, stand = state::stand)) { moved, open, menu, archive ->
+    val place = state.cardPlace(parcel.id)
+    val onName = state.names(parcel.id)
+    SwipeableCard(state, shown, Radii.card, shadow = false, place, pictured = true) { moved, open, menu, archive ->
         ParcelPassCard(
-            shown, notice = notice, onOpen = open, modifier = moved, arrived = arrived, selected = selected, onLongClick = menu, swipeAction = archive,
+            shown, notice = notice, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected,
+            onLongClick = menu, swipeAction = archive,
         )
     }
 }
@@ -494,10 +527,13 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
     val selected = state.selects(parcel.id).value
     CardComposed(parcel.id)
     when {
-        item.kind == ParcelSectionKind.Delivered ->
-            SwipeableCard(state, parcel, Radii.card, shadow = false, Modifier.deliveryCardPlace(parcel.id, false, state::stand)) { moved, open, menu, archive ->
-                DeliveredParcelCard(parcel, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive)
+        item.kind == ParcelSectionKind.Delivered -> {
+            val place = state.cardPlace(parcel.id)
+            val onName = state.names(parcel.id)
+            SwipeableCard(state, parcel, Radii.card, shadow = false, place, pictured = true) { moved, open, menu, archive ->
+                DeliveredParcelCard(parcel, onOpen = open, modifier = moved, onName = onName, selected = selected, onLongClick = menu, swipeAction = archive)
             }
+        }
         item.next -> SwipeableCard(state, parcel, Radii.nextUp, shadow = true, Modifier) { moved, open, menu, archive ->
             NextDeliveryPass(parcel, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive)
         }
@@ -517,7 +553,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
  * A card that swipes to the archive (`experimentalSwipeToArchive`) and whose menu opens on a long press (`.cardMenu`),
  * in its corners. `card` draws it with the modifier that moves it, what a tap does (closes the swipe while it is open,
  * opens the parcel otherwise), the long press and the swipe's action for TalkBack. Without `swipes` the card only has
- * its menu.
+ * its menu. A `pictured` card's picture, its menu's, is what flies when it takes another place ([DeliveryCardPlaces]).
  */
 @Composable
 private fun SwipeableCard(
@@ -527,10 +563,17 @@ private fun SwipeableCard(
     shadow: Boolean,
     modifier: Modifier,
     swipes: Boolean = true,
+    pictured: Boolean = false,
     card: @Composable (moved: Modifier, onOpen: () -> Unit, onLongClick: () -> Unit, swipeAction: CustomAccessibilityAction?) -> Unit,
 ) {
     val localizer = LocalLocalizer.current
     val menu = rememberCardMenu(state, parcel, cornerRadius)
+    if (pictured) {
+        DisposableEffect(state, parcel.id, menu) {
+            state.places.picture(parcel.id, menu.picture)
+            onDispose { state.places.dropPicture(parcel.id, menu.picture) }
+        }
+    }
     val open = remember(state, parcel.id) { { state.navigator.open(parcel.id) } }
     if (!swipes) {
         card(menu.modifier.then(modifier).then(menu.target), open, menu::open, null)
@@ -580,6 +623,22 @@ private fun ArchiveItem(state: DeliveriesState, item: ListItem.Archive) {
 @Composable
 private fun DeliveriesState.selects(parcelId: UUID): State<Boolean> =
     remember(this, parcelId) { derivedStateOf(structuralEqualityPolicy()) { selectedCard == parcelId } }
+
+/**
+ * `place(of:leaving:)`: the card tells the list where it stands, and stays unseen while its picture flies to its place.
+ * A card is drawn again only as its own flight starts and ends.
+ */
+@Composable
+private fun DeliveriesState.cardPlace(parcelId: UUID): Modifier {
+    val flying by remember(this, parcelId) { derivedStateOf(structuralEqualityPolicy()) { flies(parcelId) } }
+    val stand = remember(this) { this::stand }
+    return Modifier.deliveryCardPlace(parcelId, flying, stand).cardInList(parcelId, places)
+}
+
+/** `onName: { places.name(parcel.id, at: $0) }`: where the card writes its parcel's name, which its flight keeps level. */
+@Composable
+private fun DeliveriesState.names(parcelId: UUID): (Float) -> Unit =
+    remember(this, parcelId) { { middle: Float -> places.name(parcelId, middle) } }
 
 /** Whether the parcel has just arrived and keeps its place a moment. */
 @Composable
@@ -686,7 +745,6 @@ private val CONTROLS_SPACING = CONTROLS_BOTTOM + 8.dp
 private val ARCHIVE_RADIUS = 18.dp
 /** How long TalkBack's news stays said before it is emptied. */
 private const val ANNOUNCEMENT_HOLD = 1_000L
-private const val LIST_MOTION = 0.32
 private const val SEARCH_MOTION = 0.3
 /** How far above its place the search row comes from and goes to (`.offset(y: -10)`). */
 private val SEARCH_DROP = 10.dp

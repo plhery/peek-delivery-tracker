@@ -60,10 +60,30 @@ fun MapPath.toComposePath(evenOdd: Boolean = false): Path {
     return path
 }
 
+/**
+ * A Compose path kept and filled again from a MapPath each frame ([fill]), for a shape that changes as it moves:
+ * neither the path nor what fills it is made anew.
+ */
+internal class ComposePathFiller(val path: Path = Path()) {
+    private val sink = ComposePathSink(path)
+
+    fun fill(source: MapPath): Path {
+        path.rewind()
+        sink.reset()
+        source.replay(sink)
+        return path
+    }
+}
+
 private class ComposePathSink(private val path: Path) : MapPath.Sink {
     private var hasCurrentPoint = false
     private var startX = 0.0
     private var startY = 0.0
+
+    /** Ready for a path rewound: no current point. */
+    fun reset() {
+        hasCurrentPoint = false
+    }
 
     override fun move(x: Double, y: Double) {
         path.moveTo(x.toFloat(), y.toFloat())

@@ -115,6 +115,13 @@ internal class ListPull(private val state: DeliveriesState, private val scope: C
     /** How far the content is moved down from its rest: what the list is drawn translated by, beside its gap. */
     val shown: Float get() = past + held.value
 
+    /**
+     * How far a finger or a throw has scrolled the content down since the list was made, as the list took it: with
+     * [shown], how far the content has moved in all, which the cards in flight move with ([DeliveriesState.contentShift]).
+     */
+    var scrolled by mutableFloatStateOf(0f)
+        private set
+
     override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
         if (past <= 0f || available.y >= 0f) return Offset.Zero
         if (source != NestedScrollSource.UserInput) {
@@ -133,6 +140,7 @@ internal class ListPull(private val state: DeliveriesState, private val scope: C
     }
 
     override fun onPostScroll(consumed: Offset, available: Offset, source: NestedScrollSource): Offset {
+        if (consumed.y != 0f) scrolled += consumed.y
         if (source != NestedScrollSource.UserInput || available.y <= 0f || height <= 0) return Offset.Zero
         catch()
         move(band(finger(past) + available.y))

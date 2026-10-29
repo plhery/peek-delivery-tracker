@@ -33495,6 +33495,310 @@
         }
       ],
       "trackingSearchUrl": "https://www.boyuangyl.com/"
+    },
+    "asigna": {
+      "displayName": "Asigna",
+      "aliases": [
+        "Asigna Logística Canaria",
+        "Comunicación y Logística Canaria"
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#11358b",
+      "selectable": true,
+      "timezone": "Atlantic/Canary",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://web.asigna.es/apps/tracking/"
+    },
+    "costco-logistics": {
+      "displayName": "Costco Logistics",
+      "aliases": [
+        "Costco Wholesale Logistics",
+        "Innovel Solutions",
+        "Innovel"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#b8182b",
+      "selectable": true,
+      "timezone": "America/Chicago",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://logistics.costco.com/tracking?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "logistics.costco.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^1I20\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{9}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://logistics.costco.com/tracking"
+    },
+    "emex": {
+      "displayName": "EMEX",
+      "aliases": [
+        "EMEX Kazakhstan",
+        "EMEX Express",
+        "Emexnet",
+        "ТОО EMEX",
+        "ТОО «ЕМЕХ»"
+      ],
+      "countries": [
+        "KZ"
+      ],
+      "color": "#0d237a",
+      "selectable": true,
+      "timezone": "Asia/Almaty",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.emex.kz/otslezhivanie-po-kazahstanu?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.emex.kz",
+            "emex.kz"
+          ],
+          "pathPattern": "^/otslezhivanie-po-kazahstanu/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.emex.kz/otslezhivanie-po-kazahstanu"
+    },
+    "interlogistica": {
+      "displayName": "Interlogistica",
+      "aliases": [
+        "Интерлогистика",
+        "Interlogistica Courier",
+        "Интерлогистика Куриер",
+        "Интерлогистика Куриер ЕООД"
+      ],
+      "countries": [
+        "BG"
+      ],
+      "color": "#e31e24",
+      "selectable": true,
+      "timezone": "Europe/Sofia",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.interlogistica.bg/"
+    },
+    "intime-bg": {
+      "displayName": "In Time Bulgaria",
+      "aliases": [
+        "InTime Bulgaria",
+        "ИН ТАЙМ",
+        "Ин Тайм",
+        "IN TIME OOD",
+        "UPS Ин Тайм"
+      ],
+      "countries": [
+        "BG"
+      ],
+      "color": "#00ab8e",
+      "selectable": true,
+      "timezone": "Europe/Sofia",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://intime.bg/tracking/?track_number={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "intime.bg",
+            "www.intime.bg"
+          ],
+          "pathPattern": "^/(?:en/)?tracking/?$",
+          "params": [
+            "track_number"
+          ]
+        },
+        {
+          "domains": [
+            "courier.intime.bg"
+          ],
+          "path": "^/(?:bg|en)/tracking/code/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://intime.bg/tracking/"
+    },
+    "pflogistics": {
+      "displayName": "Parcel Freight Logistics",
+      "aliases": [
+        "PFLogistics",
+        "PFL Logistics",
+        "Parcel Freight Logistics (PFL)",
+        "Parcel Freight Logistics Pty Ltd"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "color": "#172a47",
+      "selectable": true,
+      "timezone": "Australia/Sydney",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://pflogistics.com.au/tracking-result?tracking={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "pflogistics.com.au",
+            "www.pflogistics.com.au"
+          ],
+          "pathPattern": "^/tracking-result/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^NEXAU\\d{10}YQ$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://pflogistics.com.au/tracking"
+    },
+    "quality-post": {
+      "displayName": "Quality Post",
+      "aliases": [
+        "QualityPost",
+        "Grupo Qualitypost",
+        "QPN"
+      ],
+      "countries": [
+        "MX"
+      ],
+      "color": "#a4e000",
+      "selectable": true,
+      "timezone": "America/Monterrey",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://wstracking.qualitypost.com.mx/portal_seguimiento?info={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "wstracking.qualitypost.com.mx"
+          ],
+          "pathPattern": "^/portal_seguimiento/?$",
+          "params": [
+            "info"
+          ]
+        },
+        {
+          "domains": [
+            "tracking.qualitypost.com.mx"
+          ],
+          "pathPattern": "^/newtracking/seguimiento_envio/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.qualitypost.com.mx/"
+    },
+    "runner-express": {
+      "displayName": "Runner Express",
+      "aliases": [
+        "Runner Express Ltd",
+        "Runner Express IL",
+        "רנר אקספרס"
+      ],
+      "countries": [
+        "IL"
+      ],
+      "color": "#e71c22",
+      "selectable": true,
+      "timezone": "Asia/Jerusalem",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://runnerexpress.co.il/track/?search_query={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "runnerexpress.co.il",
+            "www.runnerexpress.co.il"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "search_query"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://runnerexpress.co.il/track/"
+    },
+    "rxo": {
+      "displayName": "RXO",
+      "aliases": [
+        "RXO Order Number and Retailer Number tracking",
+        "RXO Inc.",
+        "RXO Last Mile",
+        "XPO Last Mile",
+        "XPO Logistics Last Mile"
+      ],
+      "countries": [
+        "US",
+        "CA"
+      ],
+      "color": "#000000",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.rxo.com/?trackingnumber={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.rxo.com",
+            "track.xpo.com"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "trackingnumber"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.rxo.com/"
     }
   }
 }

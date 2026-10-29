@@ -21729,6 +21729,54 @@
     ]
   },
   {
+    "input": "1I20220418005767393",
+    "carrier": "costco-logistics",
+    "confidence": "high",
+    "candidates": [
+      "costco-logistics"
+    ]
+  },
+  {
+    "input": "1I20220617006341071",
+    "carrier": "costco-logistics",
+    "confidence": "high",
+    "candidates": [
+      "costco-logistics"
+    ]
+  },
+  {
+    "input": "1I20220621006376591",
+    "carrier": "costco-logistics",
+    "confidence": "high",
+    "candidates": [
+      "costco-logistics"
+    ]
+  },
+  {
+    "input": "1I20221015007354211",
+    "carrier": "costco-logistics",
+    "confidence": "high",
+    "candidates": [
+      "costco-logistics"
+    ]
+  },
+  {
+    "input": "1I20260810024898088",
+    "carrier": "costco-logistics",
+    "confidence": "high",
+    "candidates": [
+      "costco-logistics"
+    ]
+  },
+  {
+    "input": "1I20260825025143336",
+    "carrier": "costco-logistics",
+    "confidence": "high",
+    "candidates": [
+      "costco-logistics"
+    ]
+  },
+  {
     "input": "1LS7119013618127-1",
     "carrier": "ontrac",
     "confidence": "high",
@@ -78800,6 +78848,17 @@
     ]
   },
   {
+    "input": "ITX0398560",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post"
+    ],
+    "asked": [
+      "australia-post"
+    ]
+  },
+  {
     "input": "ITX235032203936001",
     "carrier": "unknown",
     "confidence": "none",
@@ -84314,6 +84373,38 @@
     "confidence": "high",
     "candidates": [
       "loomis-express"
+    ]
+  },
+  {
+    "input": "NEXAU1020687014YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pflogistics"
+    ]
+  },
+  {
+    "input": "NEXAU1023032257YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pflogistics"
+    ]
+  },
+  {
+    "input": "NEXAU1025311823YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pflogistics"
+    ]
+  },
+  {
+    "input": "NEXAU9105003910YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pflogistics"
     ]
   },
   {

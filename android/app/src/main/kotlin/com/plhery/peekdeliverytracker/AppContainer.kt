@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker
 
+import android.app.Activity
 import android.content.ComponentCallbacks
 import android.content.Context
 import android.content.res.Configuration
@@ -31,6 +32,7 @@ import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.PostcodeMemory
 import com.plhery.peekdeliverytracker.core.PushNotifications
+import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
 import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.core.TextMeasurer
@@ -47,13 +49,13 @@ import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.NoAppleSignIn
 import com.plhery.peekdeliverytracker.platform.NoDeviceAttestation
 import com.plhery.peekdeliverytracker.platform.NoPushNotifications
-import com.plhery.peekdeliverytracker.platform.NoReviews
 import com.plhery.peekdeliverytracker.platform.NoTurnstile
 import com.plhery.peekdeliverytracker.platform.NoWebAuthentication
 import com.plhery.peekdeliverytracker.platform.NoWidgets
 import com.plhery.peekdeliverytracker.platform.OkHttpTransport
 import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
 import com.plhery.peekdeliverytracker.platform.PeekHttp
+import com.plhery.peekdeliverytracker.platform.PlayReviews
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.platform.QueuedDeviceParcelStorage
 import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
@@ -63,6 +65,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -70,6 +73,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -86,8 +90,8 @@ import okhttp3.OkHttpClient
  * saves it and then takes it in, with no suspension between, so a sign-out can never land in between and see a late
  * write bring the account back, and a save that failed is the sign-in's or refresh's failure.
  *
- * What the app cannot do yet is a stand-in (platform/StandIns.kt): notifications, the widget, sign-in, the browser
- * check and the rating prompt.
+ * What the app cannot do yet is a stand-in (platform/StandIns.kt): notifications, the widget, sign-in and the browser
+ * check.
  */
 class AppContainer(
     private val context: Context,
@@ -157,8 +161,14 @@ class AppContainer(
 
     val notifications: PushNotifications = NoPushNotifications
 
-    /** The rating prompt's (ReviewPrompt). */
-    val reviews: ReviewRequester = NoReviews
+    /**
+     * When the app asks for a rating (ReviewPrompt), in this version. A debug build's `sdt.debug.reviewDue` asks at
+     * every calm moment, as the iPhone's `-sdt.debug.reviewDue YES`, over the demo too.
+     */
+    val reviewPrompt = ReviewPrompt(defaults, BuildConfig.VERSION_NAME, forced = debug && defaults.bool(DEBUG_REVIEW_DUE))
+
+    /** The system's prompt for a rating over `activity`: Play In-App Review, where the iPhone asks StoreKit. */
+    fun reviews(activity: Activity): ReviewRequester = PlayReviews(activity)
 
     /** The map's names, measured as the renderer writes them; made when a map first needs it. */
     val mapText: TextMeasurer by lazy { MapTextWidths.of(context) }
@@ -211,6 +221,30 @@ class AppContainer(
     /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for. */
     val links: ParcelLinkStore = (if (debug) debugLinkPreview() else null)
         ?: ParcelLinkStore(defaults, configuration, api = { id, key -> DeliveryApiClient.publicParcel(id, key, configuration, transport) })
+
+    /**
+     * `ReviewPrompt.settled(session:store:links:invitation:)` as the stores change: someone's own parcels, loaded and
+     * current, with nothing over them. Android shows no friend's invitation yet.
+     */
+    val reviewSettled: StateFlow<Boolean> = combine(
+        listOf(
+            session.stateFlow, parcels.parcelsFlow, parcels.loadingFlow, parcels.errorMessageFlow, parcels.authenticationRequiredFlow,
+            parcels.usingCachedDataFlow, parcels.notificationEnableInProgressFlow, links.routeFlow,
+        ),
+    ) { reviewSettledNow() }.stateIn(scope, SharingStarted.Eagerly, reviewSettledNow())
+
+    private fun reviewSettledNow(): Boolean = ReviewPrompt.settled(
+        session = session.stateFlow.value,
+        hasParcels = parcels.parcelsFlow.value.isNotEmpty(),
+        loading = parcels.loadingFlow.value,
+        errorMessage = parcels.errorMessageFlow.value,
+        authenticationRequired = parcels.authenticationRequiredFlow.value,
+        usingCachedData = parcels.usingCachedDataFlow.value,
+        notificationEnableInProgress = parcels.notificationEnableInProgressFlow.value,
+        linkOpen = links.routeFlow.value != null,
+        invitationShown = false,
+        asksInDemo = debug && defaults.bool(DEBUG_REVIEW_DUE),
+    )
 
     private val catalogState = MutableStateFlow<CarrierCatalog?>(null)
 
@@ -379,6 +413,7 @@ class AppContainer(
 
     companion object {
         private const val DEBUG_IMPORT_CHARGES = "sdt.debug.importCharges"
+        private const val DEBUG_REVIEW_DUE = "sdt.debug.reviewDue"
 
         /** A container made on the IO dispatcher, where its stores first read the Keystore and the disk. */
         suspend fun make(context: Context, configuration: AppConfiguration = BuildSettings.configuration): AppContainer =

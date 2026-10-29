@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,6 +8,8 @@ import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.ParcelStore
+import com.plhery.peekdeliverytracker.core.ReviewPrompt
+import com.plhery.peekdeliverytracker.core.ReviewRequester
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
@@ -75,6 +78,15 @@ interface DeliveriesSource {
     fun view(screen: String)
 
     fun action(name: String)
+
+    /** When the list asks for a rating (ReviewPrompt): the days used, the bad days and the asks, kept on this phone. */
+    val reviewPrompt: ReviewPrompt
+
+    /** Nothing in the app stands in the way of asking for a rating (`ReviewPrompt.settled`). */
+    val reviewSettled: StateFlow<Boolean>
+
+    /** The system's prompt for a rating, over the window's `activity` (`requestReview`). */
+    fun reviews(activity: Activity): ReviewRequester
 }
 
 /** The deliveries from the app's container. */
@@ -131,6 +143,12 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override fun view(screen: String) = container.analytics.view(screen)
 
     override fun action(name: String) = container.analytics.action(name)
+
+    override val reviewPrompt get() = container.reviewPrompt
+
+    override val reviewSettled get() = container.reviewSettled
+
+    override fun reviews(activity: Activity): ReviewRequester = container.reviews(activity)
 
     private companion object {
         /** This process's launch: the same for every window it makes, another once the system made the process again. */

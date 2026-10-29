@@ -138,6 +138,8 @@ dependencies {
     implementation(libs.navigation3.ui)
     // A foldable's hinge, which the tab bar keeps clear of in book posture (FoldingFeature).
     implementation(libs.window)
+    // StoreKit's `requestReview`: the rating prompt, through Play In-App Review (platform/PlayReviews.kt).
+    implementation(libs.play.review.ktx)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 

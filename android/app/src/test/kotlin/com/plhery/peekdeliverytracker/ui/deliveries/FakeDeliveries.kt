@@ -1,9 +1,16 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.app.Activity
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelStore
+import com.plhery.peekdeliverytracker.core.ReviewPrompt
+import com.plhery.peekdeliverytracker.core.ReviewRequester
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.time.Instant
+import java.time.ZoneOffset
 import java.util.UUID
 import kotlin.coroutines.ContinuationInterceptor
 import kotlinx.coroutines.CompletableDeferred
@@ -17,7 +24,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
  * A new process is a new `launch`, and the app's scope outlives every window, on the test's clock once `RootHost` shows
  * them ([dispatcher]). Archiving, restoring and deleting change the parcels as the store does, or fail with `failure`,
  * an archive once `archiving` lets it go when a test holds it; a check of every parcel answers `checkResult`, or waits
- * for `checking` when a test holds it.
+ * for `checking` when a test holds it. The rating prompt keeps its days in a store of its own, in UTC, and the system's
+ * prompt is a fake that notes each step ([reviewCalls]).
  */
 class FakeDeliveries(
     parcels: List<Parcel> = emptyList(),
@@ -67,6 +75,33 @@ class FakeDeliveries(
     val deleted = mutableListOf<UUID>()
 
     var viewerLinks: Map<UUID, String> = emptyMap()
+
+    /** The rating prompt's memory, empty for each new source, and the version it asks for. */
+    private val reviewDefaults = PreferencesDefaults(
+        ApplicationProvider.getApplicationContext<Context>().getSharedPreferences("review-${UUID.randomUUID()}", Context.MODE_PRIVATE),
+    )
+
+    override var reviewPrompt = ReviewPrompt(reviewDefaults, version = "1.0", timeZone = { ZoneOffset.UTC })
+
+    /** Nothing stands in the way of an ask, unless a test says otherwise. */
+    override val reviewSettled = MutableStateFlow(true)
+
+    /** Play's two steps as the list took them: `prepare`, then `launch` once the ask was counted. */
+    val reviewCalls = mutableListOf<String>()
+
+    /** Whether Play has the review info a prompt needs. */
+    var reviewInfo = true
+
+    override fun reviews(activity: Activity): ReviewRequester = object : ReviewRequester {
+        override suspend fun prepare(): Boolean {
+            reviewCalls += "prepare"
+            return reviewInfo
+        }
+
+        override fun launch() {
+            reviewCalls += "launch"
+        }
+    }
 
     override suspend fun checkAllParcels(): ParcelStore.RefreshResult? {
         refreshes++

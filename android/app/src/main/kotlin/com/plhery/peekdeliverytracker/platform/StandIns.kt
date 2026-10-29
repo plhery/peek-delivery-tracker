@@ -7,7 +7,6 @@ import com.plhery.peekdeliverytracker.core.DeviceAttestation
 import com.plhery.peekdeliverytracker.core.NativeVerificationFailed
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.PushNotifications
-import com.plhery.peekdeliverytracker.core.ReviewRequester
 import com.plhery.peekdeliverytracker.core.TurnstilePresenter
 import com.plhery.peekdeliverytracker.core.WebAuthenticating
 import com.plhery.peekdeliverytracker.core.WidgetCenter
@@ -59,11 +58,4 @@ object NoWebAuthentication : WebAuthenticating {
 /** Sign in with Apple cannot start, until M5 opens Apple's web sign-in. */
 object NoAppleSignIn : AppleSignInAuthorizing {
     override suspend fun credential(nonce: String): AppleSignInCredential = throw AuthenticationError.InvalidResponse()
-}
-
-/** No rating prompt to show, as without the Play Store, until M6 asks through Play In-App Review. */
-object NoReviews : ReviewRequester {
-    override suspend fun prepare(): Boolean = false
-
-    override fun launch() {}
 }

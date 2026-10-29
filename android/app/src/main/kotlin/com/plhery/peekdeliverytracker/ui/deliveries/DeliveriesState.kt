@@ -346,6 +346,9 @@ internal class DeliveriesState(
     /** The card whose menu is open, and its parcel. */
     var menu: CardMenuRequest? by mutableStateOf(null)
 
+    /** Where TalkBack goes back to once the menu and what it opened have closed: the card the menu came from. */
+    var returnFocus: AccessibilityFocus? = null
+
     /**
      * The swipes of the cards open on the list as drawn, in the order they opened: the last one's action is kept from
      * the system's back gesture.
@@ -354,6 +357,9 @@ internal class DeliveriesState(
 
     /** The parcel its menu asks about before deleting it (`prompts.deleting`). */
     var deleting: Parcel? by mutableStateOf(null)
+
+    /** A menu, the question it asks or an alert shows over the list, and TalkBack reaches nothing else. */
+    val modal: Boolean get() = menu != null || deleting != null || actionError != null
 
     var announcement: Announcement? by mutableStateOf(null)
         private set
@@ -481,7 +487,11 @@ internal class DeliveriesState(
     /** What a card's menu asked of its parcel. Archiving it is the same as swiping it away, Undo and all. */
     fun chose(item: ParcelMenuItem, parcel: Parcel) {
         when (item) {
-            ParcelMenuItem.Open -> navigator.open(parcel.id)
+            ParcelMenuItem.Open -> {
+                // TalkBack goes on to the parcel's page rather than back to its card.
+                returnFocus = null
+                navigator.open(parcel.id)
+            }
             // Naming a parcel, sharing it and changing its carrier open what comes with the parcel's page: the
             // menu offers them, and they do nothing yet.
             ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit

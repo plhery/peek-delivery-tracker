@@ -255,10 +255,10 @@ class ArchiveSwipeTest {
         assertEquals(emptyList<Any>(), source.archived)
         compose.onNodeWithTag(ACTION_ERROR).assertExists()
         compose.onNode(hasText("No connection", substring = true)).assertExists()
-        assertEquals(rest, left("Birthday gift"), 0.5f)
         compose.onNodeWithTag(ACTION_ERROR_CLOSE).performClick()
         compose.waitForIdle()
         compose.onNodeWithTag(ACTION_ERROR).assertDoesNotExist()
+        assertEquals(rest, left("Birthday gift"), 0.5f)
     }
 
     /** The leading edge of the action shown, in points: the one open enough to press. */

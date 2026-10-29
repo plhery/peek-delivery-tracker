@@ -49,6 +49,7 @@ import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
@@ -155,47 +156,51 @@ internal fun DeliveryList(state: DeliveriesState) {
 
     val backdrop = rememberMaterialBackdrop()
     Box(Modifier.fillMaxSize().background(colors.background)) {
-        // What the bar's glass shows through: the list, the band behind the bar and the demo's bar. The demo's bar is
-        // measured first and the list starts under it, from the first frame at any size of text.
-        SubcomposeLayout(Modifier.fillMaxSize().materialBackdrop(backdrop)) { constraints ->
-            val loose = constraints.copy(minWidth = 0, minHeight = 0)
-            val bar = subcompose(ChromeSlot.DemoBar) {
-                if (demo) DemoModeBar(onExit = source::showWelcome, sides = PaddingValues(start = start, end = end))
-            }.map { it.measure(loose) }
-            val chromeBottom = barBottom + (bar.maxOfOrNull { it.height } ?: 0).toDp()
-            val list = subcompose(ChromeSlot.List) {
-                ListColumn(state, entries, PaddingValues(top = chromeBottom + CONTENT_TOP, bottom = bottom), start, end)
-            }.map { it.measure(constraints) }
-            // Behind the bar: the demo's cream from the window's top, or the page's ground fading out over the
-            // cards, as iOS 26's scroll edge keeps the bar's items clear of what scrolls under them.
-            val band = subcompose(ChromeSlot.Band) {
-                if (demo) {
-                    Box(Modifier.fillMaxWidth().height(barBottom).background(colors.cream))
-                } else {
-                    val ground = colors.background
-                    Box(
-                        Modifier
-                            .fillMaxWidth()
-                            .height(barBottom + SCROLL_EDGE)
-                            .background(Brush.verticalGradient(0f to ground, 0.7f to ground.copy(alpha = 0.85f), 1f to ground.copy(alpha = 0f))),
-                    )
+        // While a card's menu, the question it asks or an alert shows over the list, TalkBack reaches only that, as
+        // iOS's are modal; the tab shell hides the tab bar the same way.
+        Box(Modifier.fillMaxSize().then(if (state.modal) Modifier.clearAndSetSemantics {} else Modifier)) {
+            // What the bar's glass shows through: the list, the band behind the bar and the demo's bar. The demo's bar
+            // is measured first and the list starts under it, from the first frame at any size of text.
+            SubcomposeLayout(Modifier.fillMaxSize().materialBackdrop(backdrop)) { constraints ->
+                val loose = constraints.copy(minWidth = 0, minHeight = 0)
+                val bar = subcompose(ChromeSlot.DemoBar) {
+                    if (demo) DemoModeBar(onExit = source::showWelcome, sides = PaddingValues(start = start, end = end))
+                }.map { it.measure(loose) }
+                val chromeBottom = barBottom + (bar.maxOfOrNull { it.height } ?: 0).toDp()
+                val list = subcompose(ChromeSlot.List) {
+                    ListColumn(state, entries, PaddingValues(top = chromeBottom + CONTENT_TOP, bottom = bottom), start, end)
+                }.map { it.measure(constraints) }
+                // Behind the bar: the demo's cream from the window's top, or the page's ground fading out over the
+                // cards, as iOS 26's scroll edge keeps the bar's items clear of what scrolls under them.
+                val band = subcompose(ChromeSlot.Band) {
+                    if (demo) {
+                        Box(Modifier.fillMaxWidth().height(barBottom).background(colors.cream))
+                    } else {
+                        val ground = colors.background
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                                .height(barBottom + SCROLL_EDGE)
+                                .background(Brush.verticalGradient(0f to ground, 0.7f to ground.copy(alpha = 0.85f), 1f to ground.copy(alpha = 0f))),
+                        )
+                    }
+                }.map { it.measure(loose) }
+                layout(constraints.maxWidth, constraints.maxHeight) {
+                    list.forEach { it.place(0, 0) }
+                    band.forEach { it.place(0, 0) }
+                    bar.forEach { it.place(0, barBottom.roundToPx()) }
                 }
-            }.map { it.measure(loose) }
-            layout(constraints.maxWidth, constraints.maxHeight) {
-                list.forEach { it.place(0, 0) }
-                band.forEach { it.place(0, 0) }
-                bar.forEach { it.place(0, barBottom.roundToPx()) }
             }
+            ListToolbar(state, sideBySide, rowTop, start, end, backdrop)
+            if (firstLoad) FirstLoad(Modifier.align(Alignment.Center))
+            BottomControls(
+                state, backdrop,
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(start = start + 16.dp, end = end + 16.dp, bottom = padding.calculateBottomPadding() + CONTROLS_BOTTOM)
+                    .onSizeChanged { controls = it.height },
+            )
         }
-        ListToolbar(state, sideBySide, rowTop, start, end, backdrop)
-        if (firstLoad) FirstLoad(Modifier.align(Alignment.Center))
-        BottomControls(
-            state, backdrop,
-            Modifier
-                .align(Alignment.BottomCenter)
-                .padding(start = start + 16.dp, end = end + 16.dp, bottom = padding.calculateBottomPadding() + CONTROLS_BOTTOM)
-                .onSizeChanged { controls = it.height },
-        )
         Announcements(state)
         CardMenuHost(state)
     }
@@ -500,7 +505,7 @@ private fun SwipeableCard(
     val menu = rememberCardMenu(state, parcel, cornerRadius)
     val open = remember(state, parcel.id) { { state.navigator.open(parcel.id) } }
     if (!swipes) {
-        card(menu.modifier.then(modifier), open, menu::open, null)
+        card(menu.modifier.then(modifier).then(menu.target), open, menu::open, null)
         return
     }
     val title = localizer.text("parcel.archive")
@@ -509,7 +514,7 @@ private fun SwipeableCard(
     val tap = remember(swipe, open) { { swipe.tap(open) } }
     val excluded by remember(state, swipe) { derivedStateOf { state.openSwipes.lastOrNull() === swipe } }
     SwipeToArchive(swipe, title, cornerRadius, shadow, menu.modifier.then(modifier), excluded) { moved ->
-        card(moved, tap, menu::open, action)
+        card(moved.then(menu.target), tap, menu::open, action)
     }
 }
 
@@ -532,7 +537,7 @@ private fun ArchiveItem(state: DeliveriesState, item: ListItem.Archive) {
                 menus[parcel.id] = menu
                 onDispose { if (menus[parcel.id] === menu) menus.remove(parcel.id) }
             }
-            menu.modifier
+            menu.modifier.then(menu.target)
         },
     )
 }

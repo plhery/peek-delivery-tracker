@@ -2,9 +2,12 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.ClipboardManager
 import android.view.KeyEvent
+import android.view.View
+import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertContentDescriptionEquals
@@ -17,6 +20,7 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.longClick
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
@@ -43,6 +47,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -207,9 +212,9 @@ class CardMenuTest {
         compose.onNodeWithTag(ACTION_ERROR).assertExists()
         compose.onNode(hasText("Something went wrong")).assertExists()
         compose.onNode(hasText("No connection")).assertExists()
-        inList("Birthday gift").assertExists()
         back()
         compose.onNodeWithTag(ACTION_ERROR).assertDoesNotExist()
+        inList("Birthday gift").assertExists()
     }
 
     /** ParcelLogicTests' check of the menu's keys, on the keys as Android reads them. */
@@ -241,7 +246,7 @@ class CardMenuTest {
         assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl), items))
     }
 
-    // Where the menu stands (finding the room on any window), and the card it lifts.
+    // Where the menu stands (finding the room on any window), the card it lifts, and TalkBack.
 
     /** The window, in points. */
     private fun window() = compose.onRoot().getUnclippedBoundsInRoot()
@@ -369,6 +374,71 @@ class CardMenuTest {
         assertTrue("Cut by the top: $card", card.top < window().top && card.bottom > window().top)
         openMenu("Birthday gift")
         assertWholeCardLifted(card)
+    }
+
+    /** The window's view, which TalkBack reads, with TalkBack on. */
+    private fun talkBack(): View {
+        val root = compose.onRoot().fetchSemanticsNode().root as ViewRootForTest
+        val manager = shadowOf(compose.activity.getSystemService(AccessibilityManager::class.java))
+        compose.runOnUiThread {
+            manager.setEnabled(true)
+            manager.setTouchExplorationEnabled(true)
+            root.forceAccessibilityForTesting(true)
+        }
+        return root.view
+    }
+
+    /** Whether TalkBack's focus is on `node`. */
+    private fun SemanticsNodeInteraction.hasTalkBackFocus(view: View): Boolean {
+        val id = fetchSemanticsNode().id
+        var focused = false
+        compose.runOnUiThread { focused = view.accessibilityNodeProvider.createAccessibilityNodeInfo(id)?.isAccessibilityFocused == true }
+        return focused
+    }
+
+    @Test
+    fun theMenuIsModalForTalkBackFromItsFirstItemAndHandsTheFocusBackToTheCard() {
+        show()
+        val view = talkBack()
+        longPress("Birthday gift")
+        // Nothing under the menu is there for TalkBack: the list, its bar, the tabs.
+        compose.onNodeWithTag(CARD_MENU).assertExists()
+        inList("Birthday gift").assertDoesNotExist()
+        inList("New trainers").assertDoesNotExist()
+        compose.onNodeWithContentDescription("Friends").assertDoesNotExist()
+        compose.onNodeWithTag(REFRESH_BUTTON).assertDoesNotExist()
+        assertTrue(item(ParcelMenuItem.Open).hasTalkBackFocus(view))
+
+        back()
+        inList("Birthday gift").assertExists()
+        compose.onNodeWithContentDescription("Friends").assertExists()
+        assertTrue(compose.card("Birthday gift").hasTalkBackFocus(view))
+    }
+
+    @Test
+    fun theDeleteQuestionAndAnAlertAreModalForTalkBackToo() {
+        show()
+        val view = talkBack()
+        longPress("Birthday gift")
+        choose(ParcelMenuItem.Delete)
+        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+        inList("Birthday gift").assertDoesNotExist()
+        compose.onNodeWithContentDescription("Friends").assertDoesNotExist()
+        assertTrue(compose.onNode(hasText("Delete this parcel permanently?", substring = true)).hasTalkBackFocus(view))
+        compose.onNodeWithTag(DELETE_CANCEL).performClick()
+        compose.waitForIdle()
+        assertTrue(compose.card("Birthday gift").hasTalkBackFocus(view))
+
+        source.failure = IllegalStateException("No connection")
+        longPress("Birthday gift")
+        choose(ParcelMenuItem.Archive)
+        compose.onNodeWithTag(ACTION_ERROR).assertExists()
+        inList("Birthday gift").assertDoesNotExist()
+        compose.onNodeWithContentDescription("Friends").assertDoesNotExist()
+        assertTrue(compose.onNode(hasText("No connection", substring = true)).hasTalkBackFocus(view))
+        back()
+        inList("Birthday gift").assertExists()
+        assertTrue(compose.card("Birthday gift").hasTalkBackFocus(view))
     }
 }
 

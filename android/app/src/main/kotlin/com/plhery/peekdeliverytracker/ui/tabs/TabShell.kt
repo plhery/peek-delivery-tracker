@@ -45,6 +45,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.core.view.ViewCompat
@@ -121,7 +122,8 @@ val LocalTabReselection = staticCompositionLocalOf { TabReselection() }
 
 /**
  * What a tab draws over the whole window, its tab bar and the system's bars too, as an iPhone's context menu dims all
- * of the screen: the shell draws [content] last. Null outside a shell, where a tab draws it over itself.
+ * of the screen: the shell draws [content] last, and while it shows TalkBack reaches nothing under it. Null outside a
+ * shell, where a tab draws it over itself.
  */
 @Stable
 class TabOverlay {
@@ -180,7 +182,10 @@ fun TabShell(
         val footprint = if (top) PaddingValues(top = topGap + TOP_BAR_HEIGHT) else PaddingValues(bottom = bottomGap + BOTTOM_BAR_HEIGHT)
         val windowHinge = windowHinge(constraints.maxWidth)
         val hinge = windowHinge?.start
-        Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background)) {
+        val covered = overlay.content
+        // Under what a tab draws over the window, which is modal, as the iPhone's menus and alerts are.
+        val hidden = if (covered != null) Modifier.clearAndSetSemantics {} else Modifier
+        Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background).then(hidden)) {
             CompositionLocalProvider(
                 LocalTabBarPadding provides footprint,
                 LocalTabReselection provides reselections[selection],
@@ -191,14 +196,17 @@ fun TabShell(
             }
         }
         if (top) {
-            TopTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.TopStart).clearOfTheHinge(hinge).padding(top = topGap))
+            TopTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.TopStart).clearOfTheHinge(hinge).padding(top = topGap).then(hidden))
         } else {
             // Clear of a cutout or of navigation buttons at the side, unless a hinge already puts it in the start half.
             val sides = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal)
             val clear = if (hinge == null) Modifier.windowInsetsPadding(sides) else Modifier
-            BottomTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.BottomStart).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap))
+            BottomTabBar(
+                labels, selection, tap, backdrop,
+                Modifier.align(Alignment.BottomStart).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(hidden),
+            )
         }
-        overlay.content?.invoke()
+        covered?.invoke()
     }
 }
 

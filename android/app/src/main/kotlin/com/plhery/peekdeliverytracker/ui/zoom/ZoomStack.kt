@@ -87,6 +87,7 @@ import com.plhery.peekdeliverytracker.ui.theme.gaussianBlurRadius
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -108,14 +109,15 @@ import kotlinx.coroutines.withContext
  *   filtered out or gone), the page comes from and goes back to a card's frame in the middle of the window, fading.
  * - Dragged down while its content is at its top, the page follows the finger and shrinks, the root showing behind
  *   it. Let go far or fast enough, it goes back into its source from there; otherwise it springs back on a spring of
- *   response 0.25 s.
+ *   response 0.25 s, and a finger down on it meanwhile catches it where it is.
  * - The predictive back gesture shrinks it as Android's does for a container the size of the window: to 90 %, away
  *   from the edge it was swiped from, and up or down with the finger. Let go, it goes back into its source from there,
  *   and a cancel springs it back. A back press closes it.
  * - Under Reduce Motion, the page and the root crossfade over 0.35 s, and nothing moves or shrinks.
  *
  * While a page is over the root or on its way, the root takes no touch, TalkBack doesn't reach it and the root's own
- * back handlers wait. At rest under the page, the root isn't drawn. Nothing takes a touch while the page flies.
+ * back handlers wait. At rest under the page, the root isn't drawn. Nothing takes a touch while the page opens or
+ * closes: its flight, unlike a spring back, can't be caught.
  * TalkBack goes to the page as it lands, and back to its source as it goes. A stack shown anew (after a rotation or a
  * turn of the window) shows its page at rest, without a flight, as does a page shown still ([ZoomTransition.showStill]).
  */
@@ -238,7 +240,7 @@ fun ZoomStack(
                     CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp)) { page() }
                 }
             }
-            // Nothing takes a touch while the page flies.
+            // Nothing takes a touch while the page opens or closes.
             if (flight.flying) Box(Modifier.fillMaxSize().pointerInput(Unit) { swallowTouches() })
         }
     }
@@ -306,12 +308,14 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     private var dragAnchor: Offset? by mutableStateOf(null)
     private var dragStart = Offset.Zero
     private var drag: Offset by mutableStateOf(Offset.Zero)
+
+    /** The page springing back from a drag, which a finger catches. */
+    private var dragSpring: Job? = null
     private var backing: Boolean by mutableStateOf(false)
     private var backProgress: Float by mutableFloatStateOf(0f)
     private var backFromLeft = true
     private var backStartY = 0f
     private var backDeltaY: Float by mutableFloatStateOf(0f)
-    private var springing: Boolean by mutableStateOf(false)
 
     private var host: LayoutCoordinates? = null
     var bounds: Rect by mutableStateOf(Rect.Zero)
@@ -321,8 +325,8 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     var finger: Offset? = null
 
     val dragging: Boolean get() = dragAnchor != null
-    val atRest: Boolean get() = phase == Phase.Rest && !dragging && !backing && !springing
-    val flying: Boolean get() = phase != Phase.Rest || springing
+    val atRest: Boolean get() = phase == Phase.Rest && !dragging && !backing
+    val flying: Boolean get() = phase != Phase.Rest
     val hidesRoot: Boolean get() = id != null && atRest && progress >= 1f
 
     /** Whether a drag may take the page now. */
@@ -577,19 +581,31 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
 
     /** The page springs back to the window: let go short of closing, or the system took the drag back. */
     fun springBack(scope: CoroutineScope) {
-        if (!dragging || springing) return
-        springing = true
-        scope.launch { springBackFromDrag() }
+        if (!dragging || dragSpring != null) return
+        dragSpring = scope.launch {
+            try {
+                animate(Offset.VectorConverter, drag, Offset.Zero, animationSpec = SPRING_BACK_OFFSET) { value, _ -> drag = value }
+            } finally {
+                // Unless a finger caught the page meanwhile.
+                if (dragSpring === coroutineContext[Job]) {
+                    dragSpring = null
+                    dragAnchor = null
+                    drag = Offset.Zero
+                }
+            }
+        }
     }
 
-    private suspend fun springBackFromDrag() {
-        try {
-            animate(Offset.VectorConverter, drag, Offset.Zero, animationSpec = SPRING_BACK_OFFSET) { value, _ -> drag = value }
-        } finally {
-            dragAnchor = null
-            drag = Offset.Zero
-            springing = false
-        }
+    /**
+     * A finger down on the page as it springs back catches it where it is, and drags it on from there, as a finger
+     * catches a scroll view springing back. False with no spring to catch.
+     */
+    fun catch(at: Offset): Boolean {
+        val spring = dragSpring ?: return false
+        dragSpring = null
+        spring.cancel()
+        dragStart = at - drag
+        return true
     }
 
     fun back(event: BackEventCompat) {
@@ -614,7 +630,6 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
 
     suspend fun springBackFromBack() {
         if (!backing) return
-        springing = true
         val progress = backProgress
         val deltaY = backDeltaY
         try {
@@ -626,7 +641,6 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
             backing = false
             backProgress = 0f
             backDeltaY = 0f
-            springing = false
         }
     }
 }
@@ -674,6 +688,8 @@ private class DragConnection(private val flight: ZoomFlight) : NestedScrollConne
 private suspend fun PointerInputScope.dragToClose(flight: ZoomFlight, scope: CoroutineScope, onBack: () -> Unit) {
     awaitEachGesture {
         val down = awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
+        // A page springing back stops under the finger, which the content under it doesn't take.
+        if (flight.catch(down.position)) down.consume()
         flight.finger = down.position
         val tracker = VelocityTracker()
         tracker.addPosition(down.uptimeMillis, down.position)

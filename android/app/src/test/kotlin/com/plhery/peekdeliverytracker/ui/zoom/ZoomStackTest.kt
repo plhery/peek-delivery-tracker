@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui.zoom
 import androidx.activity.BackEventCompat
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performKeyInput
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performMouseInput
 import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performTouchInput
@@ -71,6 +73,7 @@ class ZoomStackTest {
     private val rootFocus = FocusRequester()
     private var rootFocused = false
     private var pageFocused = false
+    private var taps = 0
 
     /** The root, with the page on top from the first frame (`initial`), or opened once the root is drawn (`open`). */
     private fun show(reduceMotion: Boolean = false, initial: String? = null, open: Boolean = initial == null) {
@@ -104,7 +107,7 @@ class ZoomStackTest {
                     page = drawn?.let {
                         {
                             Column(Modifier.fillMaxSize()) {
-                                Box(Modifier.onFocusChanged { pageFocused = it.isFocused }.focusable().size(40.dp).testTag(PAGE_BUTTON))
+                                Box(Modifier.onFocusChanged { pageFocused = it.isFocused }.clickable { taps++ }.size(40.dp).testTag(PAGE_BUTTON))
                                 LazyColumn(Modifier.fillMaxSize().testTag(PAGE), state = list) {
                                     items(40) { row -> BasicText("Row $row", Modifier.height(80.dp)) }
                                 }
@@ -234,6 +237,51 @@ class ZoomStackTest {
         compose.mainClock.advanceTimeBy(1_000)
         assertEquals(SOURCE, top)
         assertEquals(390f, width(), 0.5f)
+    }
+
+    @Test
+    fun aFingerCatchesThePageSpringingBackWhereItIs() {
+        show()
+        val root = compose.onRoot()
+        root.performTouchInput {
+            down(center)
+            moveBy(Offset(0f, 50f), delayMillis = 100)
+            moveBy(Offset(0f, 150f), delayMillis = 400)
+        }
+        compose.waitForIdle()
+        val dragged = width()
+        compose.mainClock.autoAdvance = false
+        root.performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(64)
+
+        // Down on it as it springs back, the finger holds it where it is.
+        root.performTouchInput { down(center) }
+        val caught = width()
+        assertTrue("Caught at $caught from $dragged", caught > dragged + 1f && caught < 389f)
+        compose.mainClock.advanceTimeBy(500)
+        assertEquals(caught, width(), 0.5f)
+
+        // And drags it on from there.
+        root.performTouchInput { moveBy(Offset(0f, 100f), delayMillis = 400) }
+        compose.mainClock.advanceTimeBy(16)
+        assertTrue("Dragged on to ${width()} from $caught", width() < caught - 1f)
+        root.performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(390f, width(), 0.5f)
+        assertEquals(SOURCE, top)
+    }
+
+    @Test
+    fun aTapReachesThePageAsACancelledBackSpringsBack() {
+        show()
+        gesture(at(0f), at(0.5f))
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.dispatchOnBackCancelled() }
+        compose.mainClock.advanceTimeBy(48)
+        assertTrue("Springing back at ${width()}", width() < 389f)
+        compose.onNodeWithTag(PAGE_BUTTON).performClick()
+        compose.mainClock.advanceTimeBy(16)
+        assertEquals(1, taps)
     }
 
     @Test

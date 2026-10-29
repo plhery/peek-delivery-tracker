@@ -10,8 +10,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
@@ -23,8 +26,11 @@ import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.performScrollToKey
+import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.pressKey
 import androidx.compose.ui.unit.DpRect
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -422,5 +428,28 @@ class DeliveriesTabTest {
         compose.card("Birthday gift").performClick()
         compose.mainClock.advanceTimeBy(100)
         assertPartway(card, page())
+    }
+
+    @Test
+    fun theSearchLetsTheKeyboardGoUnderAParcelsPageAndTakesItBackAsThePageGoes() {
+        show()
+        compose.onNodeWithTag(SEARCH_BUTTON).performClick()
+        compose.waitForIdle()
+        compose.onNodeWithTag(SEARCH_FIELD).performTextInput("train")
+        compose.waitForIdle()
+        open("New trainers")
+        // The field gave up the keyboard as the page came: what is typed no longer reaches the query under it.
+        compose.onNodeWithTag(SEARCH_FIELD, useUnmergedTree = true).assertIsNotFocused()
+        assertFalse(deliveries.searchFocused)
+        compose.onRoot().performKeyInput { pressKey(Key.A) }
+        compose.waitForIdle()
+        assertEquals("train", deliveries.query)
+
+        // As the page goes, the field takes the keyboard again, as it does as the iPhone's list appears again.
+        back()
+        compose.mainClock.advanceTimeBy(2_000)
+        compose.waitForIdle()
+        compose.onNodeWithTag(SEARCH_FIELD).assertIsFocused()
+        assertTrue(deliveries.searchFocused)
     }
 }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
@@ -27,6 +28,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import kotlinx.coroutines.flow.drop
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.FirstOpenJourney
 import com.plhery.peekdeliverytracker.core.ParcelSort
@@ -471,7 +473,8 @@ internal fun SearchControls(state: DeliveriesState) {
     )
     // `.onAppear { searchFocused = true }` as the search opens, and again in the window made again (a rotation) that
     // found it focused: the field going with the old window keeps the focus for the new one, and the new one coming in
-    // unfocused leaves it as it was until it has taken it.
+    // unfocused leaves it as it was until it has taken it. And again as the list comes back from under a parcel's
+    // page, which took the focus from it as it came ([ZoomStack]), as the iPhone's list appears again.
     val activity = LocalActivity.current
     val windowMadeAgain = { activity?.isChangingConfigurations == true }
     val refocus = remember { mutableStateOf(state.searchFocused) }
@@ -485,6 +488,9 @@ internal fun SearchControls(state: DeliveriesState) {
     LaunchedEffect(Unit) {
         if (refocus.value) focus.requestFocus()
         refocus.value = false
+    }
+    LaunchedEffect(state.zoom) {
+        snapshotFlow { state.zoom.covered != null }.drop(1).collect { covered -> if (!covered) focus.requestFocus() }
     }
     DisposableEffect(Unit) { onDispose { if (!windowMadeAgain()) state.searchFocused = false } }
     Row(Modifier.fillMaxWidth().testTag(SEARCH_ROW), horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {

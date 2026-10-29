@@ -107,7 +107,7 @@ class ZoomStackTest {
                     page = drawn?.let {
                         {
                             Column(Modifier.fillMaxSize()) {
-                                Box(Modifier.onFocusChanged { pageFocused = it.isFocused }.clickable { taps++ }.size(40.dp).testTag(PAGE_BUTTON))
+                                Box(Modifier.onFocusChanged { pageFocused = it.isFocused }.focusable().clickable { taps++ }.size(40.dp).testTag(PAGE_BUTTON))
                                 LazyColumn(Modifier.fillMaxSize().testTag(PAGE), state = list) {
                                     items(40) { row -> BasicText("Row $row", Modifier.height(80.dp)) }
                                 }
@@ -295,6 +295,37 @@ class ZoomStackTest {
         // Long after the spring back would have ended, the page is where the new gesture holds it: 94 % of its size.
         compose.mainClock.advanceTimeBy(1_000)
         assertEquals(390f * 0.94f, width(), 0.5f)
+    }
+
+    @Test
+    fun theKeyboardsFocusLeavesTheRootUnderThePageUntilItHasGone() {
+        show(open = false)
+        compose.runOnUiThread { rootFocus.requestFocus() }
+        compose.waitForIdle()
+        assertTrue(rootFocused)
+        compose.runOnUiThread { top = SOURCE }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        assertFalse(rootFocused)
+
+        // Tab goes to the page, and never into the root under it; nor does a request.
+        repeat(3) {
+            compose.onRoot().performKeyInput { pressKey(Key.Tab) }
+            compose.waitForIdle()
+            assertFalse(rootFocused)
+        }
+        assertTrue(pageFocused)
+        compose.runOnUiThread { rootFocus.requestFocus() }
+        compose.waitForIdle()
+        assertFalse(rootFocused)
+
+        // Once the page has gone, the root takes it again.
+        compose.runOnUiThread { top = null }
+        compose.mainClock.advanceTimeBy(2_000)
+        compose.waitForIdle()
+        compose.runOnUiThread { rootFocus.requestFocus() }
+        compose.waitForIdle()
+        assertTrue(rootFocused)
     }
 
     @Test

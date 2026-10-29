@@ -10,6 +10,7 @@ import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.animate
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.Box
@@ -35,6 +36,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -63,6 +66,7 @@ import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -116,7 +120,8 @@ import kotlinx.coroutines.withContext
  * - Under Reduce Motion, the page and the root crossfade over 0.35 s, and nothing moves or shrinks.
  *
  * While a page is over the root or on its way, the root takes no touch, TalkBack doesn't reach it and the root's own
- * back handlers wait. At rest under the page, the root isn't drawn. Nothing takes a touch while the page opens or
+ * back handlers wait. The keyboard's focus leaves the root as a page comes over it, and goes back in only once the
+ * page has gone, as the root leaves the iPhone's window under a page pushed over it, taking the keyboard with it. At rest under the page, the root isn't drawn. Nothing takes a touch while the page opens or
  * closes: its flight, unlike a spring back, can't be caught.
  * TalkBack goes to the page as it lands, and back to its source as it goes. A stack shown anew (after a rotation or a
  * turn of the window) shows its page at rest, without a flight, as does a page shown still ([ZoomTransition.showStill]).
@@ -204,6 +209,9 @@ fun ZoomStack(
 
     Box(modifier.fillMaxSize().onPlaced(flight::place)) {
         val covered = flight.id != null
+        val focusManager = LocalFocusManager.current
+        val rootFocus = remember { RootFocus() }
+        LaunchedEffect(covered) { if (covered && rootFocus.has) focusManager.clearFocus() }
         // The root's own back handlers wait while a page is over it.
         val events = rememberNavigationEventDispatcherOwner(enabled = !covered)
         CompositionLocalProvider(LocalNavigationEventDispatcherOwner provides events) {
@@ -211,6 +219,10 @@ fun ZoomStack(
                 Modifier
                     .fillMaxSize()
                     .then(if (covered) Modifier.clearAndSetSemantics {} else Modifier)
+                    // Read as the focus moves, so that it goes back in from the frame the page has gone in.
+                    .focusProperties { onEnter = { if (flight.id != null) cancelFocusChange() } }
+                    .onFocusChanged { rootFocus.has = it.hasFocus }
+                    .focusGroup()
                     .drawWithContent { if (!flight.hidesRoot) drawContent() },
             ) { root() }
         }
@@ -245,6 +257,11 @@ fun ZoomStack(
             if (flight.flying) Box(Modifier.fillMaxSize().pointerInput(Unit) { swallowTouches() })
         }
     }
+}
+
+/** Whether the keyboard's focus is in the root. */
+private class RootFocus {
+    var has = false
 }
 
 /** How long after a page sets off back into its source the tab bar comes back: UIKit's transition ends only then. */

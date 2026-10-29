@@ -21,12 +21,12 @@ import kotlinx.serialization.builtins.ListSerializer
  * Called on the cache's own thread, never the main one, one call at a time.
  */
 interface ParcelCacheFiles {
-    /** The bytes of the account's file, or nil when there is none or it cannot be read (`AtomicFile.readFully`). */
+    /** The bytes of the account's file, or nil when there is none or it cannot be read. */
     fun read(userId: UUID): ByteArray?
 
     /**
-     * Replaces the account's file with `data` at once: written beside it, then renamed over it (`AtomicFile`), so a
-     * reader finds the old bytes or the new ones, never part of either. Throws when it could not be written.
+     * Replaces the account's file with `data` at once: written beside it, synced, then renamed over it, so a reader
+     * finds the old bytes or the new ones, never part of either. Throws when any step failed.
      */
     fun write(userId: UUID, data: ByteArray)
 

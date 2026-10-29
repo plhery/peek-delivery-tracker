@@ -6,6 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.util.UUID
 import kotlinx.coroutines.runBlocking
@@ -103,19 +104,45 @@ class PersistenceTest {
     }
 
     @Test
-    fun aWriteThatFailsThrowsAndLeavesTheOldFile() {
-        val folder = File(context.filesDir, "Locked")
-        val atomic = AtomicBytesFile(File(folder, "parcels.json"))
-        atomic.write("old".toByteArray())
-        assertTrue(folder.setWritable(false))
-        try {
-            atomic.write("new".toByteArray())
-            fail("Expected the write to fail")
-        } catch (_: IOException) {
-        } finally {
-            folder.setWritable(true)
+    fun aWriteThatFailsAtAnyStepThrowsAndLeavesTheOldFile() {
+        val file = File(context.filesDir, "Failing/parcels.json")
+        AtomicBytesFile(file).write("old".toByteArray())
+        for (step in listOf("open", "sync", "close", "rename")) {
+            val failing = object : FileCalls {
+                fun fail(name: String) {
+                    if (name == step) throw IOException("$name failed")
+                }
+
+                override fun open(file: File): FileOutputStream {
+                    fail("open")
+                    return FileCalls.System.open(file)
+                }
+
+                override fun sync(stream: FileOutputStream) {
+                    fail("sync")
+                    FileCalls.System.sync(stream)
+                }
+
+                override fun close(stream: FileOutputStream) {
+                    fail("close")
+                    FileCalls.System.close(stream)
+                }
+
+                override fun rename(from: File, to: File) {
+                    fail("rename")
+                    FileCalls.System.rename(from, to)
+                }
+            }
+            try {
+                AtomicBytesFile(file, failing).write("new".toByteArray())
+                fail("Expected a failed $step to throw")
+            } catch (error: IOException) {
+                assertEquals("$step failed", error.message)
+            }
+            assertEquals(step, "old", AtomicBytesFile(file).read()!!.decodeToString())
+            // Nothing half-written is left beside it.
+            assertEquals(step, listOf("parcels.json"), file.parentFile!!.list()!!.toList())
         }
-        assertEquals("old", atomic.read()!!.decodeToString())
 
         // A folder that cannot be made is a failure too.
         val blocked = File(context.filesDir, "blocked").apply { writeText("a file") }
@@ -124,6 +151,20 @@ class PersistenceTest {
             fail("Expected the write to fail")
         } catch (_: IOException) {
         }
+    }
+
+    @Test
+    fun aWriteLeftHalfDoneIsReplacedByTheNextAndGoesWithADelete() {
+        val file = File(context.filesDir, "Half/parcels.json")
+        val atomic = AtomicBytesFile(file)
+        atomic.write("old".toByteArray())
+        File(file.path + ".new").writeText("half")
+        assertEquals("old", atomic.read()!!.decodeToString())
+        atomic.write("new".toByteArray())
+        assertEquals(listOf("parcels.json"), file.parentFile!!.list()!!.toList())
+        File(file.path + ".new").writeText("half")
+        atomic.delete()
+        assertEquals(emptyList<String>(), file.parentFile!!.list()!!.toList())
     }
 
     @Test

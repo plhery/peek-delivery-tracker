@@ -306,8 +306,8 @@ interface DeviceParcelFile {
     fun read(): ByteArray?
 
     /**
-     * Replaces the file with `data` at once: written beside it, then renamed over it (`AtomicFile`), so a reader finds
-     * the old bytes or the new ones, never part of either. Throws when it could not be written, leaving the old file.
+     * Replaces the file with `data` at once: written beside it, synced, then renamed over it, so a reader finds the old
+     * bytes or the new ones, never part of either. Throws when any step failed, leaving the old file.
      */
     fun write(data: ByteArray)
 

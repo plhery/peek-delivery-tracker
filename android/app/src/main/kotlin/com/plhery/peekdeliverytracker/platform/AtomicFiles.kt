@@ -2,28 +2,33 @@ package com.plhery.peekdeliverytracker.platform
 
 import android.content.Context
 import android.net.Uri
-import android.util.AtomicFile
 import androidx.core.content.FileProvider
 import com.plhery.peekdeliverytracker.core.DeviceParcelFile
 import com.plhery.peekdeliverytracker.core.ExportFiles
 import com.plhery.peekdeliverytracker.core.ParcelCacheFiles
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 import java.util.Locale
 import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
- * A file replaced whole, as Swift's `.atomic` write replaces one: written beside it, synced, then renamed over it
- * (`AtomicFile`), so a reader finds the old bytes or the new ones, never part of either.
+ * A file replaced whole, as Swift's `.atomic` write replaces one: written to `<name>.new` beside it, synced, closed,
+ * then renamed over it, so a reader finds the old bytes or the new ones, never part of either. Each step that fails
+ * throws, where `android.util.AtomicFile.finishWrite` only logs a failed sync, close or rename. Writes to one path
+ * take turns.
  */
-class AtomicBytesFile(val file: File) {
-    private val atomic = AtomicFile(file)
+class AtomicBytesFile(val file: File, private val calls: FileCalls = FileCalls.System) {
+    private val temporary = File(file.path + ".new")
 
     /** The bytes, or nil when there is no file or it cannot be read. */
     fun read(): ByteArray? = try {
-        atomic.readFully()
+        file.readBytes()
     } catch (_: IOException) {
         null
     } catch (_: SecurityException) {
@@ -36,19 +41,65 @@ class AtomicBytesFile(val file: File) {
         if (folder != null && !folder.isDirectory && !folder.mkdirs() && !folder.isDirectory) {
             throw IOException("Could not make ${folder.name}")
         }
-        val stream = atomic.startWrite()
-        try {
-            stream.write(data)
-        } catch (e: IOException) {
-            atomic.failWrite(stream)
-            throw e
+        synchronized(lock(file)) {
+            try {
+                val stream = calls.open(temporary)
+                try {
+                    stream.write(data)
+                    calls.sync(stream)
+                } catch (e: IOException) {
+                    try {
+                        stream.close()
+                    } catch (_: IOException) {
+                    }
+                    throw e
+                }
+                calls.close(stream)
+                calls.rename(temporary, file)
+            } catch (e: IOException) {
+                temporary.delete()
+                throw e
+            }
         }
-        atomic.finishWrite(stream)
     }
 
     /** Removes the file, and any write left half-done beside it. */
     fun delete() {
-        atomic.delete()
+        synchronized(lock(file)) {
+            file.delete()
+            temporary.delete()
+        }
+    }
+
+    private companion object {
+        val locks = ConcurrentHashMap<String, Any>()
+
+        fun lock(file: File): Any = locks.computeIfAbsent(file.absolutePath) { Any() }
+    }
+}
+
+/** The system calls a write is made of, each throwing when it fails; a test makes one fail. */
+interface FileCalls {
+    fun open(file: File): FileOutputStream
+
+    /** fsync(2): the bytes are on the disk once it returns. */
+    fun sync(stream: FileOutputStream)
+
+    fun close(stream: FileOutputStream)
+
+    /** rename(2), which replaces `to` at once. */
+    fun rename(from: File, to: File)
+
+    object System : FileCalls {
+        override fun open(file: File): FileOutputStream = FileOutputStream(file)
+
+        override fun sync(stream: FileOutputStream) = stream.fd.sync()
+
+        override fun close(stream: FileOutputStream) = stream.close()
+
+        override fun rename(from: File, to: File) {
+            Files.move(from.toPath(), to.toPath(), StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING)
+        }
     }
 }
 

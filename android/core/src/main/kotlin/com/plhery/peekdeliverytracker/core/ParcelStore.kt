@@ -86,8 +86,8 @@ fun interface WidgetCenter {
 /**
  * Where an account's export is written for the share sheet: the iPhone's temporary folder. On Android a file in the
  * app's cache (`cacheDir/exports/<name>`, replacing one of the same name) that a FileProvider hands to the share
- * intent, written whole beside it and renamed over it (`AtomicFile`), as Swift's `.atomic` write: a half-written file
- * is never shared. Throws when it cannot be written.
+ * intent, written whole beside it, synced and renamed over it, as Swift's `.atomic` write: a half-written file is
+ * never shared. Throws when it cannot be written.
  */
 fun interface ExportFiles {
     suspend fun write(name: String, data: ByteArray): File

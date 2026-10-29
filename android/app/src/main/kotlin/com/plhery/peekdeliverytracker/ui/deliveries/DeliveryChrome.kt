@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.FirstOpenJourney
 import com.plhery.peekdeliverytracker.core.ParcelSort
 import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
@@ -135,6 +136,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
+import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
 
 /** The localized text for `key`, written again when the language changes. */
 @Composable
@@ -162,9 +164,17 @@ internal fun barRowTop(): Dp {
  * the parcel ([PageToolbar]). The glass shows the list scrolling under it ([backdrop]).
  */
 @Composable
-internal fun ListToolbar(state: DeliveriesState, sideBySide: Boolean, rowTop: Dp, start: Dp, end: Dp, backdrop: MaterialBackdrop) {
+internal fun ListToolbar(
+    state: DeliveriesState,
+    sideBySide: Boolean,
+    rowTop: Dp,
+    start: Dp,
+    end: Dp,
+    backdrop: MaterialBackdrop,
+    modifier: Modifier = Modifier,
+) {
     val title = localized("native.deliveries")
-    Box(Modifier.fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
+    Box(modifier.fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
         // The mark stands on its own, not on a control's glass.
         PeekMark(30.dp, Modifier.align(Alignment.CenterStart).offset(x = start + if (sideBySide) 17.dp else 27.dp).clearAndSetSemantics {})
         // Centred on the bar, clear of its items on either side.
@@ -745,7 +755,11 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
             .padding(start = 8.dp, top = 34.dp, end = 8.dp, bottom = 12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        ClosedParcel(onOpen = state::openSample, label = localized("landing.pip.open"))
+        ClosedParcel(
+            onOpen = state::openSample,
+            label = localized("landing.pip.open"),
+            modifier = Modifier.zoomSource(FirstOpenJourney.parcelId, state.zoom),
+        )
         Text(
             localized("peek.title"),
             Modifier.semantics { heading() },
@@ -818,7 +832,7 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
  * 0.3 s and damping 0.64.
  */
 @Composable
-private fun ClosedParcel(onOpen: () -> Unit, label: String) {
+private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier = Modifier) {
     val interaction = remember { MutableInteractionSource() }
     val pressed by interaction.collectIsPressedAsState()
     val reduceMotion = PeekTheme.reduceMotion
@@ -829,6 +843,7 @@ private fun ClosedParcel(onOpen: () -> Unit, label: String) {
     Box(
         Modifier
             .size(PARCEL_WIDTH.dp, (PARCEL_WIDTH * 31f / 30f).dp)
+            .then(modifier)
             .testTag(EMPTY_SAMPLE)
             .clickable(interaction, indication = null, role = Role.Button, onClick = onOpen)
             .semantics { contentDescription = label },

@@ -5,6 +5,8 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.KeyEvent
 import android.view.View
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.ime
 import androidx.compose.runtime.CompositionLocalProvider
@@ -79,11 +81,13 @@ class TabShellTest {
     val rules: RuleChain = RuleChain.outerRule(fold).around(compose)
 
     private lateinit var view: View
+    private lateinit var back: OnBackPressedDispatcher
     private val views = mutableListOf<String>()
 
     private fun show(language: AppLanguage = AppLanguage.En) {
         compose.setContent {
             view = LocalView.current
+            back = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
             RootHost(language = language, onView = { views += it })
         }
         compose.waitForIdle()
@@ -117,15 +121,17 @@ class TabShellTest {
     }
 
     @Test
-    fun tappingTheChosenTabGoesBackToTheListThenScrollsItToTheTop() {
+    fun overAParcelsPageTheBarHasGoneAndTappingTheChosenTabScrollsTheListToTheTop() {
         show()
         compose.openCard("New trainers")
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
-
-        tab("Deliveries").performClick()
+        // The page has the screen to itself, as the iPhone's over the list.
+        tab("Deliveries").assertDoesNotExist()
+        compose.onNodeWithTag(TAB_BAR).assertDoesNotExist()
+        compose.runOnUiThread { back.onBackPressed() }
         compose.waitForIdle()
-        compose.onNodeWithTag(PARCEL_PAGE).assertDoesNotExist()
-        compose.onNodeWithTag(PARCEL_LIST).assertExists()
+        tab("Deliveries").assertIsSelected()
+        views.clear()
 
         compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("foot")
         compose.waitForIdle()
@@ -133,8 +139,8 @@ class TabShellTest {
         tab("Deliveries").performClick()
         compose.waitForIdle()
         compose.onNodeWithText("On the way").assertExists()
-        // Tapping the chosen tab is no change of tab: only the deliveries count the parcel and the list again.
-        assertEquals(listOf("parcel", "deliveries"), views)
+        // Tapping the chosen tab is no change of tab: it counts nothing.
+        assertEquals(emptyList<String>(), views)
     }
 
     @Test

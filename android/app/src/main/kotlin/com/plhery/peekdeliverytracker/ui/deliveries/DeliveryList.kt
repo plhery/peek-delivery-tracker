@@ -71,6 +71,9 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
+import com.plhery.peekdeliverytracker.ui.zoom.fadingUnderZoom
+import com.plhery.peekdeliverytracker.ui.zoom.recedingUnderZoom
+import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
 import java.util.UUID
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.DisposableEffect
@@ -124,10 +127,12 @@ val LocalColumnEdges = compositionLocalOf { ColumnEdges(start = true, end = true
  * ([DeliveriesState.postmark]); then the card flies to its new place over the list ([DeliveredFlights]) as the other
  * cards make room.
  *
+ * A parcel's page zooms out of its card and back into it ([zoomSource]): the list recedes under the page and the bar's
+ * items fade, the bar staying where it is.
+ *
  * Out of the iPhone's list: the invitation to turn notifications on (and the device account's row, which a custom view
- * hides), what a card's menu asks (a new name, sharing, another carrier), the sheets (Add, the account), the zoom from
- * a card to its page and dropping text on the list. The buttons that would open them call [DeliveriesState]'s hooks,
- * which do nothing yet.
+ * hides), what a card's menu asks (a new name, sharing, another carrier), the sheets (Add, the account) and dropping
+ * text on the list. The buttons that would open them call [DeliveriesState]'s hooks, which do nothing yet.
  */
 @Composable
 internal fun DeliveryList(state: DeliveriesState) {
@@ -204,7 +209,7 @@ internal fun DeliveryList(state: DeliveriesState) {
                     bar.forEach { it.place(0, barBottom.roundToPx()) }
                 }
             }
-            ListToolbar(state, sideBySide, rowTop, start, end, backdrop)
+            ListToolbar(state, sideBySide, rowTop, start, end, backdrop, Modifier.fadingUnderZoom(state.zoom))
             if (firstLoad) FirstLoad(Modifier.align(Alignment.Center))
             BottomControls(
                 state, backdrop,
@@ -295,6 +300,7 @@ private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding
     Box(
         Modifier
             .fillMaxSize()
+            .recedingUnderZoom(state.zoom)
             .nestedScroll(pull)
             .onSizeChanged {
                 pull.height = it.height
@@ -554,6 +560,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
  * in its corners. `card` draws it with the modifier that moves it, what a tap does (closes the swipe while it is open,
  * opens the parcel otherwise), the long press and the swipe's action for TalkBack. Without `swipes` the card only has
  * its menu. A `pictured` card's picture, its menu's, is what flies when it takes another place ([DeliveryCardPlaces]).
+ * The parcel's page zooms out of the card ([zoomSource]).
  */
 @Composable
 private fun SwipeableCard(
@@ -576,7 +583,7 @@ private fun SwipeableCard(
     }
     val open = remember(state, parcel.id) { { state.navigator.open(parcel.id) } }
     if (!swipes) {
-        card(menu.modifier.then(modifier).then(menu.target), open, menu::open, null)
+        card(menu.modifier.then(modifier).then(menu.target).zoomSource(parcel.id, state.zoom, cornerRadius, menu.focus), open, menu::open, null)
         return
     }
     val title = localizer.text("parcel.archive")
@@ -585,7 +592,7 @@ private fun SwipeableCard(
     val tap = remember(swipe, open) { { swipe.tap(open) } }
     val excluded by remember(state, swipe) { derivedStateOf { state.openSwipes.lastOrNull() === swipe } }
     SwipeToArchive(swipe, title, cornerRadius, shadow, menu.modifier.then(modifier), excluded) { moved ->
-        card(moved.then(menu.target), tap, menu::open, action)
+        card(moved.then(menu.target).zoomSource(parcel.id, state.zoom, cornerRadius, menu.focus), tap, menu::open, action)
     }
 }
 
@@ -605,7 +612,7 @@ private fun ArchiveItem(state: DeliveriesState, item: ListItem.Archive) {
             menus[parcel.id] = menu
             onDispose { if (menus[parcel.id] === menu) menus.remove(parcel.id) }
         }
-        menu.modifier.then(menu.target)
+        menu.modifier.then(menu.target).zoomSource(parcel.id, state.zoom, ARCHIVE_RADIUS, menu.focus)
     }
     if (item.grouped) {
         ArchivedParcelGroup(

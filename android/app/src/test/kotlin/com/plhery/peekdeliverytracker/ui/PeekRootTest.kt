@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.HapticFeedbackConstants
+import android.view.KeyEvent
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.getValue
@@ -169,9 +170,19 @@ class PeekRootTest {
         newProcess(counted = listOf("parcel"))
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
         compose.onNodeWithText("New trainers", substring = true).assertExists()
+        compose.onNodeWithTag(TAB_BAR).assertDoesNotExist()
 
-        compose.onNodeWithContentDescription("Friends").performClick()
-        compose.waitForIdle()
+        // The page hides the tab bar, and ⌘3 chooses the friends as on the iPhone.
+        fun press(digit: Int) {
+            val window = view.rootView.parent
+            val deliver = window.javaClass.getMethod("dispatchKeyFromIme", KeyEvent::class.java)
+            compose.runOnUiThread {
+                deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_DOWN, digit, 0, KeyEvent.META_CTRL_ON))
+                deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_UP, digit, 0, KeyEvent.META_CTRL_ON))
+            }
+            compose.waitForIdle()
+        }
+        press(KeyEvent.KEYCODE_3)
         assertEquals(listOf("friends"), views)
         newProcess(counted = emptyList())
         compose.onNodeWithContentDescription("Friends").assertIsSelected()

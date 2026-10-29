@@ -124,8 +124,9 @@ class DeliveryListTest {
         compose.onNode(hasText(name, substring = true) and hasAnyAncestor(hasTestTag(PARCEL_PAGE))).assertExists()
     }
 
+    /** No page, nor one on its way back into its card, which TalkBack no longer reaches. */
     private fun assertNoPage() {
-        compose.onNodeWithTag(PARCEL_PAGE).assertDoesNotExist()
+        compose.onNodeWithTag(PARCEL_PAGE, useUnmergedTree = true).assertDoesNotExist()
     }
 
     /** A key pressed and let go on a hardware keyboard, through the window as the system sends it. */
@@ -437,7 +438,7 @@ class DeliveryListTest {
         assertEquals(listOf("parcel"), views)
 
         // Back on the list, the archive is still open.
-        compose.onNodeWithContentDescription("Deliveries").performClick()
+        compose.runOnUiThread { back.onBackPressed() }
         compose.waitForIdle()
         assertNoPage()
         compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed("Linen weekend bag"))
@@ -455,7 +456,8 @@ class DeliveryListTest {
 
         compose.runOnUiThread { inbox.open(DemoCards.parcel("Kind of Blue").id) }
         compose.waitForIdle()
-        compose.onNodeWithContentDescription("Deliveries").assertIsSelected()
+        // Under the page, which hides the tab bar.
+        compose.onNodeWithContentDescription("Deliveries", useUnmergedTree = true).assertIsSelected()
         assertPageShows("Kind of Blue")
         assertEquals(null, inbox.parcel.value)
         assertEquals(listOf("deliveries", "parcel"), views)

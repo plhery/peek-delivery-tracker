@@ -47,6 +47,8 @@ import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomStack
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomTransition
 import java.time.Instant
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
@@ -131,9 +133,6 @@ internal class DeliveriesNavigator(
     }
 
     fun settle(arrangement: DeliveriesArrangement, rows: List<UUID>) = update(navigation.settle(arrangement, rows))
-
-    /** Back to the list, as tapping the tab again goes: at once, whenever the window turned. */
-    fun toList() = update(navigation.copy(path = emptyList()))
 
     /** The parcel shown beside the list has gone from it: the card after it shows instead. */
     fun leave(parcelId: UUID, rows: List<UUID>) = update(navigation.leave(parcelId, rows))
@@ -450,7 +449,12 @@ internal class DeliveriesState(
         if (arrangement == DeliveriesArrangement.SideBySide && shownBefore != null && next.none { it.id == shownBefore }) {
             navigator.leave(shownBefore, rowsBefore)
         }
+        val restoring = navigator.restoring
         navigator.restore(next)
+        // The parcel open when the system closed the app opens again as it was, without its zoom.
+        if (restoring && !navigator.restoring && arrangement == DeliveriesArrangement.Stacked) {
+            navigator.navigation.chosen?.let(zoom::showStill)
+        }
     }
 
     /** Nobody looks at the list any more: the parcels just arrived take their new places at once, unseen (`release()`). */
@@ -460,6 +464,9 @@ internal class DeliveriesState(
 
     /** Where each card stands, Pip's box and what each card shows, which the paper and the flights start from. */
     val places = DeliveryCardPlaces()
+
+    /** The zoom from a card, an archived row or Pip's box to its parcel's page over the list ([ZoomStack]). */
+    val zoom = ZoomTransition()
 
     /** The cards on their way to their new places, over the list ([DeliveredFlights]). */
     var flights: List<DeliveredFlight> by mutableStateOf(emptyList())

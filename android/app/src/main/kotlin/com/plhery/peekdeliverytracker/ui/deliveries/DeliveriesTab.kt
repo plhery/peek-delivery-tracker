@@ -8,11 +8,6 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.FiniteAnimationSpec
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.focusable
@@ -61,7 +56,6 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.min
@@ -75,7 +69,6 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.scene.Scene
 import androidx.navigation3.scene.SceneStrategy
 import androidx.navigation3.scene.SceneStrategyScope
-import androidx.navigation3.scene.SinglePaneSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
@@ -88,13 +81,13 @@ import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.TabReselectionEffect
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
-import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomStack
 import java.time.Instant
 import java.util.Objects
 import java.util.UUID
@@ -117,8 +110,9 @@ sealed interface DeliveriesEntry : NavKey {
 /**
  * ParcelListView's DeliveryListView: the list and a parcel opened over it or beside it, as the window has room for.
  *
- * - Stacked, the page comes over the list on a stack that the system's back and the predictive back gesture pop, and a
- *   parcel shown by itself beside the list goes back into it as the window turns.
+ * - Stacked, the page zooms out of its card over the list and back into it ([ZoomStack]): the system's back, the
+ *   predictive back gesture and a drag down from the page's top send it back. A parcel shown by itself beside the list
+ *   goes back into it as the window turns.
  * - Side by side (a window wide and tall enough, or a foldable in book posture, a half each), the page stands beside
  *   the list, the first card's parcel when nobody chose one, its card ringed, and ↑, ↓ and Return step through them.
  *
@@ -208,26 +202,30 @@ fun DeliveriesTab(
         Reviewing(state, resumed, watching, now)
         Consuming(state, inbox)
         DeliveriesKeys(state, scope, reduceMotion)
-        TabReselectionEffect {
-            if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen != null) {
-                navigator.toList()
-            } else {
-                state.scrollToTop(reduceMotion)
-            }
-        }
+        // Over a parcel's page the tab bar has gone, so the tab is tapped again only with the list in view.
+        TabReselectionEffect { state.scrollToTop(reduceMotion) }
 
         val backStack = buildList {
             add(DeliveriesEntry.ParcelList)
             val navigation = navigator.navigation
             when (arrangement) {
-                DeliveriesArrangement.Stacked ->
-                    if (!navigation.shownAutomatically) navigation.path.forEach { add(DeliveriesEntry.ParcelPage(it)) }
+                // The page that left stays on the stack until it has gone back into its card.
+                DeliveriesArrangement.Stacked -> state.zoom.drawn(navigation.chosen)?.let { add(DeliveriesEntry.ParcelPage(it as UUID)) }
                 DeliveriesArrangement.SideBySide -> navigation.shown?.let { add(DeliveriesEntry.ParcelPage(it)) }
             }
         }
-        val sideBySide = remember(arrangement, largeText, hinge) {
-            SideBySideStrategy(arrangement == DeliveriesArrangement.SideBySide) { list, shown ->
-                SideBySideColumns(state, largeText, list, shown)
+        val panes = remember(arrangement, largeText, hinge) {
+            PanesStrategy { list, shown ->
+                when (arrangement) {
+                    DeliveriesArrangement.SideBySide -> SideBySideColumns(state, largeText, list, shown)
+                    DeliveriesArrangement.Stacked -> ZoomStack(
+                        transition = state.zoom,
+                        top = navigator.navigation.chosen,
+                        onBack = { navigator.pop(navigator.navigation.path.dropLast(1)) },
+                        root = list,
+                        page = shown,
+                    )
+                }
             }
         }
         // Each arrangement draws its own stack, as the iPhone swaps its NavigationStack and NavigationSplitView: a turn
@@ -237,15 +235,14 @@ fun DeliveriesTab(
         // run and never sees a still one run; that scene could then claim the list's entry from the list a back went
         // to, and neither drew it.
         key(arrangement) {
-            val pushes = arrangement == DeliveriesArrangement.Stacked
             NavDisplay(
                 backStack = backStack,
                 modifier = Modifier.fillMaxSize(),
                 onBack = { navigator.pop(navigator.navigation.path.dropLast(1)) },
-                sceneStrategies = listOf(sideBySide, SinglePaneSceneStrategy()),
-                transitionSpec = { if (pushes) Push.forward(reduceMotion) else Push.still() },
-                popTransitionSpec = { if (pushes) Push.back(reduceMotion) else Push.still() },
-                predictivePopTransitionSpec = { if (pushes) Push.predictiveBack(reduceMotion) else Push.still() },
+                sceneStrategies = listOf(panes),
+                transitionSpec = { still() },
+                popTransitionSpec = { still() },
+                predictivePopTransitionSpec = { still() },
                 entryProvider = { key ->
                     when (key) {
                         DeliveriesEntry.ParcelList -> NavEntry<DeliveriesEntry>(key, metadata = mapOf(PANE to LIST_PANE)) {
@@ -459,40 +456,42 @@ private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMo
     return true
 }
 
-/** The parcel's page and the list side by side, a scene of their own. */
-private class SideBySideStrategy(
-    private val active: Boolean,
-    private val columns: @Composable (list: @Composable () -> Unit, page: (@Composable () -> Unit)?) -> Unit,
+/**
+ * The list and the parcel's page as one scene, whichever parcel shows: `panes` draws them, side by side or the page
+ * over the list. NavDisplay sees no transition, and nothing before the scene, so it leaves the system's back to the
+ * page over the list ([ZoomStack]); with none, back leaves the app.
+ */
+private class PanesStrategy(
+    private val panes: @Composable (list: @Composable () -> Unit, page: (@Composable () -> Unit)?) -> Unit,
 ) : SceneStrategy<DeliveriesEntry> {
     override fun SceneStrategyScope<DeliveriesEntry>.calculateScene(entries: List<NavEntry<DeliveriesEntry>>): Scene<DeliveriesEntry>? {
-        if (!active) return null
         val list = entries.firstOrNull { it.metadata[PANE] == LIST_PANE } ?: return null
         val page = entries.lastOrNull { it.metadata[PANE] == PAGE_PANE }
-        return SideBySideScene(entries, list, page, columns)
+        return PanesScene(entries, list, page, panes)
     }
 }
 
-/**
- * The list and the page beside it, one scene whichever parcel shows: a new one takes the old one's place at once, as
- * the iPhone's detail column does. Nothing is before it, so back leaves the app.
- */
-private class SideBySideScene(
+/** The list and the page, side by side or one over the other: a new page takes the old one's place in the same scene. */
+private class PanesScene(
     override val entries: List<NavEntry<DeliveriesEntry>>,
     private val list: NavEntry<DeliveriesEntry>,
     private val page: NavEntry<DeliveriesEntry>?,
-    private val columns: @Composable (list: @Composable () -> Unit, page: (@Composable () -> Unit)?) -> Unit,
+    private val panes: @Composable (list: @Composable () -> Unit, page: (@Composable () -> Unit)?) -> Unit,
 ) : Scene<DeliveriesEntry> {
-    override val key: Any = SideBySideScene::class
+    override val key: Any = PanesScene::class
     override val previousEntries: List<NavEntry<DeliveriesEntry>> = emptyList()
     override val content: @Composable () -> Unit = {
-        columns({ list.Content() }, page?.let { entry -> { entry.Content() } })
+        panes({ list.Content() }, page?.let { entry -> { entry.Content() } })
     }
 
     override fun equals(other: Any?): Boolean =
-        other is SideBySideScene && entries == other.entries && list == other.list && page == other.page
+        other is PanesScene && entries == other.entries && list == other.list && page == other.page
 
     override fun hashCode(): Int = Objects.hash(entries, list, page)
 }
+
+/** NavDisplay's own transitions: none, as the zoom is drawn by the scene. */
+private fun still(): ContentTransform = EnterTransition.None togetherWith ExitTransition.None
 
 /**
  * NavigationSplitView's columns: the list `listWidth` wide, about 380 (480 at the accessibility text sizes) and no
@@ -535,33 +534,6 @@ private fun SideBySideColumns(
             }
         }
     }
-}
-
-/**
- * How a parcel's page comes and goes until it zooms from its card: UINavigationController's push. The page slides in
- * from the trailing edge over the list, which moves a third of the way out behind it, on a spring of response 0.35 s
- * that doesn't bounce, and back reverses it. The stack keeps the page over the list both ways. Nothing moves under
- * Reduce Motion, nor as the window turns between its arrangements.
- */
-private object Push {
-    fun forward(reduceMotion: Boolean): ContentTransform =
-        if (reduceMotion) still() else slideInHorizontally(spring) { it } togetherWith slideOutHorizontally(spring) { -it / 3 }
-
-    fun back(reduceMotion: Boolean): ContentTransform = pop(reduceMotion, spring)
-
-    /**
-     * The predictive back gesture moves both the same way. The stack seeks the pop by the gesture's progress, so an even
-     * pace keeps the page under the finger; let go, it goes the rest of the way in what is left of 0.35 s.
-     */
-    fun predictiveBack(reduceMotion: Boolean): ContentTransform = pop(reduceMotion, gesture)
-
-    private fun pop(reduceMotion: Boolean, motion: FiniteAnimationSpec<IntOffset>): ContentTransform =
-        if (reduceMotion) still() else slideInHorizontally(motion) { -it / 3 } togetherWith slideOutHorizontally(motion) { it }
-
-    fun still(): ContentTransform = EnterTransition.None togetherWith ExitTransition.None
-
-    private val spring = Motion.springWithResponse<IntOffset>(0.35, 1.0)
-    private val gesture = tween<IntOffset>(durationMillis = 350, easing = LinearEasing)
 }
 
 /** A parcel's page until it is ported: the parcel's name, in the middle of the page, clear of the bars. */

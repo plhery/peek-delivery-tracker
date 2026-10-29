@@ -9788,6 +9788,22 @@
           "params": [
             "tracknbr"
           ]
+        },
+        {
+          "domains": [
+            "parcelright.com.au",
+            "www.parcelright.com.au"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "tracknbr"
+          ]
+        },
+        {
+          "domains": [
+            "parcelrig.ht"
+          ],
+          "path": "^/([0-9A-Z]{8,40})/?$"
         }
       ],
       "detectionRules": [
@@ -9802,7 +9818,12 @@
           "preferred": true
         }
       ],
-      "trackingSearchUrl": "https://daipost.com/track"
+      "trackingSearchUrl": "https://daipost.com/track",
+      "aliases": [
+        "Parcel Right",
+        "ParcelRight",
+        "Parcel Right Pty Ltd"
+      ]
     },
     "5post": {
       "displayName": "5Post",
@@ -34419,6 +34440,435 @@
         }
       ],
       "trackingSearchUrl": "https://portal.sengiexpress.com/"
+    },
+    "ace-lt": {
+      "displayName": "ACE Logistics Lithuania",
+      "aliases": [
+        "ACE Logistics Lithuania UAB",
+        "ACE LT",
+        "aceSpeed",
+        "aceFlex"
+      ],
+      "countries": [
+        "LT"
+      ],
+      "color": "#004f7c",
+      "selectable": true,
+      "timezone": "Europe/Vilnius",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.acelogistics.eu/tracker/tracker_en.php?office=LT&cc=LT&ref={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.acelogistics.eu",
+            "acelogistics.eu"
+          ],
+          "pathPattern": "^/tracker/tracker(?:_[a-z]{2})?\\.php$",
+          "query": "^(?=(?:.*&)?office=LT(?:&|$))(?:.*&)?ref=([^&]+)(?=&|$)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.acelogistics.eu/lt/en/service/cargo-tracking/"
+    },
+    "ace-lv": {
+      "displayName": "ACE Logistics Latvia",
+      "aliases": [
+        "ACE Logistics Latvia SIA",
+        "ACE LV",
+        "AceB2C"
+      ],
+      "countries": [
+        "LV"
+      ],
+      "color": "#004f7c",
+      "selectable": true,
+      "timezone": "Europe/Riga",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.acelogistics.eu/tracker/tracker_en.php?office=LV&cc=LV&ref={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.acelogistics.eu",
+            "acelogistics.eu"
+          ],
+          "pathPattern": "^/tracker/tracker(?:_[a-z]{2})?\\.php$",
+          "query": "^(?=(?:.*&)?office=LV(?:&|$))(?:.*&)?ref=([^&]+)(?=&|$)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.acelogistics.eu/lv/en/service/cargo-tracking/"
+    },
+    "airmee": {
+      "displayName": "Airmee",
+      "aliases": [
+        "Airmee AB",
+        "Airmiz AB",
+        "Airmiz Denmark ApS"
+      ],
+      "countries": [
+        "SE",
+        "DK"
+      ],
+      "color": "#000000",
+      "selectable": true,
+      "timezone": "Europe/Stockholm",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.airmee.com/#/shipment-search"
+    },
+    "akis-express": {
+      "displayName": "AKIS Express",
+      "aliases": [
+        "G.A.P. Akis Express",
+        "GAP Akis Express",
+        "G.A.P Akis Express Limited"
+      ],
+      "countries": [
+        "CY"
+      ],
+      "color": "#e53d51",
+      "selectable": true,
+      "timezone": "Asia/Nicosia",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://gapakisexpress.com/track-your-packages/?tracking_num={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "gapakisexpress.com",
+            "www.gapakisexpress.com"
+          ],
+          "pathPattern": "^/track-your-packages/?$",
+          "params": [
+            "tracking_num"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://gapakisexpress.com/track-your-packages/"
+    },
+    "collicare": {
+      "displayName": "ColliCare",
+      "aliases": [
+        "ColliCare Logistics",
+        "ColliCare Logistics AS",
+        "ColliCare Norge"
+      ],
+      "countries": [
+        "NO",
+        "SE",
+        "DK",
+        "FI"
+      ],
+      "color": "#f89728",
+      "selectable": true,
+      "timezone": "Europe/Oslo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.collicare.no/track-and-trace?s={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.collicare.no",
+            "collicare.no"
+          ],
+          "pathPattern": "^/track-and-trace/?$",
+          "params": [
+            "s"
+          ]
+        },
+        {
+          "domains": [
+            "www.collicare.no",
+            "collicare.no"
+          ],
+          "pathPattern": "^/track-and-trace/?$",
+          "fragment": "^/s/([^/?&]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.collicare.no/kundeservice/sporing"
+    },
+    "fofr": {
+      "displayName": "FOFR",
+      "aliases": [
+        "FOFR CZ",
+        "Systém FOFR",
+        "RSC Logistics",
+        "RSC Logistics, logistické družstvo"
+      ],
+      "countries": [
+        "CZ",
+        "SK"
+      ],
+      "color": "#1a478a",
+      "selectable": true,
+      "timezone": "Europe/Prague",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://objednavky.fofrcz.cz/sledovani-zasilek-fofr?shipment_num={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "objednavky.fofrcz.cz"
+          ],
+          "pathPattern": "^/sledovani-zasilek-fofr/?$",
+          "params": [
+            "shipment_num"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://objednavky.fofrcz.cz/sledovani-zasilek-fofr"
+    },
+    "islandwide-express": {
+      "displayName": "Islandwide Express",
+      "aliases": [
+        "Islandwide",
+        "Island Wide Express",
+        "PJ Rosaly Enterprises",
+        "iWide",
+        "IWEX"
+      ],
+      "countries": [
+        "PR"
+      ],
+      "color": "#cb1f11",
+      "selectable": true,
+      "timezone": "America/Puerto_Rico",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.islandwide.com/tracking?TrackingNumber={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.islandwide.com",
+            "islandwide.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "TrackingNumber"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.islandwide.com/tracking"
+    },
+    "kuayue-express": {
+      "displayName": "Kuayue Express",
+      "aliases": [
+        "KYE",
+        "KY Express",
+        "Kua Yue Express",
+        "KYE Group",
+        "跨越速运",
+        "跨越速运集团",
+        "跨越速运集团有限公司",
+        "跨越物流",
+        "跨越速递"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#7e51e4",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.ky-express.com/88.html?tab=3&orders={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.ky-express.com",
+            "ky-express.com"
+          ],
+          "pathPattern": "^/88\\.html$",
+          "params": [
+            "orders"
+          ]
+        },
+        {
+          "domains": [
+            "u.ky-express.com"
+          ],
+          "pathPattern": "^/diyServiceNews/?$",
+          "params": [
+            "orders"
+          ]
+        },
+        {
+          "domains": [
+            "ic-h5.kye-erp.com"
+          ],
+          "pathPattern": "^/waybill-route\\.html$",
+          "fragment": "^/?\\?(?:[^&]*&)*waybillNo=([^&]+)"
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^KY\\d{13}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://www.ky-express.com/88.html"
+    },
+    "pallex": {
+      "displayName": "Pall-Ex",
+      "aliases": [
+        "Pallex",
+        "Pall-Ex UK",
+        "Pall-Ex (UK) Ltd",
+        "Pall-Ex Group"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "color": "#e41312",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "mynexus.pallex.com"
+          ],
+          "path": "^/NexusTracking/(\\d{16})/[^/]+/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://mynexus.pallex.com/tracking"
+    },
+    "piggy-express": {
+      "displayName": "Piggy Express",
+      "aliases": [
+        "PiggyExp",
+        "PiggyExp Inc.",
+        "PiggyShip",
+        "Piggy Ship",
+        "小猪物流"
+      ],
+      "countries": [
+        "US",
+        "CA"
+      ],
+      "color": "#fe4646",
+      "selectable": true,
+      "timezone": "America/Los_Angeles",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "piggyexp.com",
+            "www.piggyexp.com"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "tracking"
+          ]
+        },
+        {
+          "domains": [
+            "dsp-tracking.piggyship.com"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://piggyexp.com/track"
+    },
+    "trans-ontario": {
+      "displayName": "Trans-Ontario Express",
+      "aliases": [
+        "Trans Ontario",
+        "Trans Ontario Express",
+        "TransOntario"
+      ],
+      "countries": [
+        "CA",
+        "US"
+      ],
+      "color": "#1f4aee",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://trace.transontario.com/"
+    },
+    "western-bid": {
+      "displayName": "Western Bid",
+      "aliases": [
+        "WestParcel",
+        "West Parcel",
+        "Western Bid, Inc.",
+        "Western Bid Europe",
+        "Вестерн Бід",
+        "Вест Парсел"
+      ],
+      "countries": [
+        "UA",
+        "PL",
+        "US"
+      ],
+      "color": "#284e51",
+      "selectable": true,
+      "timezone": "Europe/Kyiv",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.westparcel.com/?trackNumber={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.westparcel.com",
+            "track.westernbid.com"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "trackNumber"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^WBX\\d{12}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://track.westparcel.com/"
     }
   },
   "servers": [
@@ -38075,7 +38525,19 @@
           "instapack",
           "obibox",
           "sentral-cargo",
-          "sengi-express"
+          "sengi-express",
+          "ace-lt",
+          "ace-lv",
+          "airmee",
+          "akis-express",
+          "collicare",
+          "fofr",
+          "islandwide-express",
+          "kuayue-express",
+          "pallex",
+          "piggy-express",
+          "trans-ontario",
+          "western-bid"
         ]
       },
       "Stage": {

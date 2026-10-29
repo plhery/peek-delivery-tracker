@@ -930,6 +930,18 @@ value class CarrierId(val rawValue: String) {
         val Obibox = CarrierId("obibox")
         val SentralCargo = CarrierId("sentral-cargo")
         val SengiExpress = CarrierId("sengi-express")
+        val AceLt = CarrierId("ace-lt")
+        val AceLv = CarrierId("ace-lv")
+        val Airmee = CarrierId("airmee")
+        val AkisExpress = CarrierId("akis-express")
+        val Collicare = CarrierId("collicare")
+        val Fofr = CarrierId("fofr")
+        val IslandwideExpress = CarrierId("islandwide-express")
+        val KuayueExpress = CarrierId("kuayue-express")
+        val Pallex = CarrierId("pallex")
+        val PiggyExpress = CarrierId("piggy-express")
+        val TransOntario = CarrierId("trans-ontario")
+        val WesternBid = CarrierId("western-bid")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -1804,6 +1816,18 @@ value class CarrierId(val rawValue: String) {
             Obibox,
             SentralCargo,
             SengiExpress,
+            AceLt,
+            AceLv,
+            Airmee,
+            AkisExpress,
+            Collicare,
+            Fofr,
+            IslandwideExpress,
+            KuayueExpress,
+            Pallex,
+            PiggyExpress,
+            TransOntario,
+            WesternBid,
         )
     }
 }

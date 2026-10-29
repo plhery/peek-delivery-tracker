@@ -80976,6 +80976,30 @@
     ]
   },
   {
+    "input": "KY4000200667516",
+    "carrier": "kuayue-express",
+    "confidence": "high",
+    "candidates": [
+      "kuayue-express"
+    ]
+  },
+  {
+    "input": "KY4000231442561",
+    "carrier": "kuayue-express",
+    "confidence": "high",
+    "candidates": [
+      "kuayue-express"
+    ]
+  },
+  {
+    "input": "KY4000534292346",
+    "carrier": "kuayue-express",
+    "confidence": "high",
+    "candidates": [
+      "kuayue-express"
+    ]
+  },
+  {
     "input": "KYV009956937",
     "carrier": "purolator",
     "confidence": "high",
@@ -95444,6 +95468,14 @@
     "confidence": "high",
     "candidates": [
       "thailand-post"
+    ]
+  },
+  {
+    "input": "WBX100000000017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "western-bid"
     ]
   },
   {

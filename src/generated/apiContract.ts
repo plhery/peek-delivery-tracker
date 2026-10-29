@@ -412,7 +412,9 @@ export const CARRIER_CAPABILITIES = {
           "inputMode": "text",
           "autoComplete": "postal-code"
         }
-      ]
+      ],
+      "recognitionRank": 524,
+      "recognitionPattern": "^1810\\d{14}$"
     },
     "trackingUrlTemplate": "https://postnl.post/track?barcodes={trackingNumber}",
     "linkRules": [
@@ -453,6 +455,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^(?=.{13}$|.{15}$)3S[A-Z]{1,3}\\d+$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^1810\\d{14}$",
         "confidence": "low"
       }
     ],
@@ -15808,7 +15814,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:AE|EG|GH|KE|KZ|MA|MU|MV|NG|PK|RE|RW|SA|TR|UG|ZA|ZM)\\d{12}T?$",
+        "pattern": "^(?:AE|EG|GH|IE|KE|KZ|MA|MU|MV|NG|PK|RE|RW|SA|TR|UG|ZA|ZM)\\d{12}T?$",
         "confidence": "low"
       },
       {
@@ -32518,6 +32524,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^PKG\\d{5}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])ES\\d{13}[A-Z]$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^WT\\d{16}$",
         "confidence": "low"
       }
     ],

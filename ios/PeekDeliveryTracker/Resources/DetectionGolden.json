@@ -20398,6 +20398,19 @@
     ]
   },
   {
+    "input": "181011000000000017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "spring-gds",
+      "bpost",
+      "ecoscooting"
+    ],
+    "asked": [
+      "spring-gds"
+    ]
+  },
+  {
     "input": "18113149",
     "carrier": "unknown",
     "confidence": "low",
@@ -78709,6 +78722,17 @@
     ]
   },
   {
+    "input": "IE120000000017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "speedaf"
+    ],
+    "asked": [
+      "speedaf"
+    ]
+  },
+  {
     "input": "IEG9246514",
     "carrier": "unknown",
     "confidence": "low",
@@ -95661,8 +95685,13 @@
   {
     "input": "WT2527401177023677",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "quick-rabbit"
+    ],
+    "asked": [
+      "quick-rabbit"
+    ]
   },
   {
     "input": "WX6Z9T",

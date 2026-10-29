@@ -148,7 +148,15 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'logisimple' | 'viadireta'
   | 'meso-global'
   | 'jifan' | 'youbang-express'
-  | 'fastbox';
+  | 'fastbox'
+  | 'ydh'
+  | 'takesend'
+  | 'flyt-express'
+  | 'joom-logistics'
+  | 'veho'
+  | 'hfd'
+  | 'cheetah-delivery'
+  | 'parcel-one';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -354,6 +354,9 @@
   "chazki": {
     "decal": "chazki"
   },
+  "cheetah-delivery": {
+    "decal": "cheetah-delivery"
+  },
   "chilexpress": {
     "decal": "chilexpress"
   },
@@ -934,6 +937,9 @@
   "flyking": {
     "decal": "flyking"
   },
+  "flyt-express": {
+    "decal": "flyt-express"
+  },
   "followmont": {
     "decal": "followmont"
   },
@@ -1135,6 +1141,9 @@
   },
   "hermes-de": {
     "decal": "hermes"
+  },
+  "hfd": {
+    "decal": "hfd"
   },
   "hi-trans": {
     "decal": "hi-trans"
@@ -1338,6 +1347,9 @@
   },
   "jne": {
     "decal": "jne"
+  },
+  "joom-logistics": {
+    "decal": "joom-logistics"
   },
   "jordan-post": {
     "decal": "jordan-post"
@@ -1773,6 +1785,9 @@
   },
   "paquetexpress": {
     "decal": "paquetexpress"
+  },
+  "parcel-one": {
+    "decal": "parcel-one"
   },
   "parcelforce": {
     "decal": "parcelforce"
@@ -2330,6 +2345,9 @@
   "t-group": {
     "decal": "t-group"
   },
+  "takesend": {
+    "decal": "takesend"
+  },
   "tanzania-posts": {
     "decal": "tanzania-posts"
   },
@@ -2543,6 +2561,9 @@
   "vasp-expresso": {
     "decal": "vasp-expresso"
   },
+  "veho": {
+    "decal": "veho"
+  },
   "veloces": {
     "decal": "veloces"
   },
@@ -2644,6 +2665,9 @@
   },
   "ycs-logistics": {
     "decal": "ycs-logistics"
+  },
+  "ydh": {
+    "decal": "ydh"
   },
   "yilong-logistics": {
     "decal": "yilong-logistics"

@@ -222,6 +222,14 @@ describe('carrier brand', () => {
       'jifan',
       'youbang-express',
       'fastbox',
+      'ydh',
+      'takesend',
+      'flyt-express',
+      'joom-logistics',
+      'veho',
+      'hfd',
+      'cheetah-delivery',
+      'parcel-one',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

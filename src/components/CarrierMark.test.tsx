@@ -160,6 +160,14 @@ describe('carrier mark', () => {
     'logisimple',
     'viadireta',
     'meso-global',
+    'ydh',
+    'takesend',
+    'flyt-express',
+    'joom-logistics',
+    'veho',
+    'hfd',
+    'cheetah-delivery',
+    'parcel-one',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

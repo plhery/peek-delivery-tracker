@@ -4795,10 +4795,10 @@ describe('TrackingSyncService', () => {
 
   describe('its own carrier listing fewer of the stored scans', () => {
     // A carrier that keeps a parcel's label scans and drops its later ones. Its wording ("arrived at the
-    // pickup point", "left the operations center") gives no stage of its own: the adapter's does.
+    // consolidation point", "left the operations center") gives no stage of its own: the adapter's does.
     const label = { stage: 'registered', description: 'Electronic data received', time: '2026-10-04T09:16:20Z' };
     const relabel = { stage: 'registered', description: 'Electronic data received', time: '2026-10-20T03:23:29Z' };
-    const accepted = { stage: 'accepted', description: '到达收货点', time: '2026-10-20T03:28:11Z' };
+    const accepted = { stage: 'accepted', description: '到达集货点', time: '2026-10-20T03:28:11Z' };
     const departed = { stage: 'in_transit', description: '货物离开操作中心', time: '2026-10-20T03:30:36Z' };
     const answer = (...events: CarrierResult['events'] & object): CarrierResult => ({
       status: events[0]!.stage as CarrierResult['status'], current_stage: events[0]!.stage, last_status_text: events[0]!.description,

@@ -9,11 +9,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.geometry.Rect
 import com.plhery.peekdeliverytracker.core.DeliveredHold
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
@@ -340,6 +342,12 @@ internal class DeliveriesState(
 
     /** The card whose menu is open, and its parcel. */
     var menu: CardMenuRequest? by mutableStateOf(null)
+
+    /**
+     * The swipes of the cards open on the list as drawn, in the order they opened: the last one's action is kept from
+     * the system's back gesture.
+     */
+    val openSwipes: SnapshotStateList<ArchiveSwipe> = mutableStateListOf()
 
     /** The parcel its menu asks about before deleting it (`prompts.deleting`). */
     var deleting: Parcel? by mutableStateOf(null)

@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.TouchInjectionScope
@@ -15,10 +16,12 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.unit.height
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -256,6 +259,94 @@ class ArchiveSwipeTest {
         compose.onNodeWithTag(ACTION_ERROR_CLOSE).performClick()
         compose.waitForIdle()
         compose.onNodeWithTag(ACTION_ERROR).assertDoesNotExist()
+    }
+
+    /** The leading edge of the action shown, in points: the one open enough to press. */
+    private fun actionLeft(): Float =
+        compose.onNode(hasTestTag(ARCHIVE_ACTION) and hasClickAction()).fetchSemanticsNode().boundsInRoot.left / compose.density.density
+
+    /** The finger moved `points` across (negative to the left) over a frame, and the frame drawn. */
+    private fun move(points: Float) {
+        compose.onRoot().performTouchInput { moveBy(Offset(dp(points), 0f), delayMillis = 16) }
+        compose.mainClock.advanceTimeByFrame()
+    }
+
+    @Test
+    fun pastTheCommitPointTheActionLeapsToTheCardWhileTheFingerKeepsMoving() {
+        show()
+        compose.mainClock.autoAdvance = false
+        compose.card("Birthday gift").performTouchInput { down(Offset(width - dp(30f), height / 2f)) }
+        compose.mainClock.advanceTimeByFrame()
+        // 200 points in 20 frames, past the commit point (half the card's 358), then a point a frame: the finger never
+        // stops, and within the leap's 0.3 s and a little more the action has reached the card's edge.
+        repeat(20) { move(-10f) }
+        repeat(25) { move(-1f) }
+        val edge = compose.card("Birthday gift").getUnclippedBoundsInRoot().right.value
+        assertEquals(edge, actionLeft(), 1f)
+        compose.onRoot().performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(2000)
+        assertEquals(listOf(DemoCards.parcel("Birthday gift").id), source.archived)
+    }
+
+    @Test
+    fun aCardLeftOpenIsStillOpenWhenTheListScrollsBackToIt() {
+        show()
+        val rest = left("New trainers")
+        drag("New trainers", distance = -60f)
+        assertEquals(rest - 88f, left("New trainers"), 1f)
+        // Far enough down for the list to let go of the card, and back up.
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed("Matcha ritual"))
+        compose.waitForIdle()
+        compose.card("New trainers").assertDoesNotExist()
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed("New trainers"))
+        compose.waitForIdle()
+        assertEquals(rest - 88f, left("New trainers"), 1f)
+        assertEquals(1, openActions())
+    }
+
+    /** What the window keeps from the system's back gesture, in points from its top left. */
+    private fun excluded(): List<android.graphics.RectF> {
+        val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+        val scale = compose.density.density
+        var rects = emptyList<android.graphics.RectF>()
+        compose.runOnUiThread {
+            rects = view.systemGestureExclusionRects.map { android.graphics.RectF(it.left / scale, it.top / scale, it.right / scale, it.bottom / scale) }
+        }
+        return rects
+    }
+
+    @Test
+    fun theCardOpenedLastKeepsItsActionFromTheBackGestureWithinTheSystemsTwoHundredPoints() {
+        show()
+        assertEquals(emptyList<Any>(), excluded())
+        drag("Birthday gift", distance = -60f)
+        val gift = compose.card("Birthday gift").getUnclippedBoundsInRoot()
+        val row = gift.right.value + 88f
+        assertEquals(1, excluded().size)
+        excluded().single().let {
+            // The action's strip at the row's end, the card's whole height while it is under 200 points.
+            assertEquals(row - 88f, it.left, 1f)
+            assertEquals(row, it.right, 1f)
+            assertEquals(gift.top.value, it.top, 1f)
+            assertEquals(gift.bottom.value, it.bottom, 1f)
+        }
+
+        // Next up's card, taller than the system grants, opened after it: its action has the edge, 200 points of it.
+        drag("New trainers", distance = -60f)
+        assertEquals(2, openActions())
+        val trainers = compose.card("New trainers").getUnclippedBoundsInRoot()
+        assertTrue(trainers.height.value > 200f)
+        excluded().single().let {
+            assertEquals(200f, it.height(), 1f)
+            assertEquals((trainers.top.value + trainers.bottom.value) / 2, it.centerY(), 1f)
+        }
+
+        // Shut, it gives the edge back to the card still open.
+        compose.card("New trainers").performClick()
+        compose.waitForIdle()
+        assertEquals(gift.top.value, excluded().single().top, 1f)
+        drag("Birthday gift", distance = 60f)
+        assertEquals(emptyList<Any>(), excluded())
     }
 
     @Test

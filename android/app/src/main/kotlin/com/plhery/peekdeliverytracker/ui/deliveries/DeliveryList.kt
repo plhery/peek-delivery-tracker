@@ -506,7 +506,8 @@ private fun SwipeableCard(
     val swipe = rememberArchiveSwipe(state, parcel.id) { leaving -> state.archive(menu.parcel, after = leaving) }
     val action = remember(swipe, title) { archiveAction(swipe, title) }
     val tap = remember(swipe, open) { { swipe.tap(open) } }
-    SwipeToArchive(swipe, title, cornerRadius, shadow, menu.modifier.then(modifier)) { moved ->
+    val excluded by remember(state, swipe) { derivedStateOf { state.openSwipes.lastOrNull() === swipe } }
+    SwipeToArchive(swipe, title, cornerRadius, shadow, menu.modifier.then(modifier), excluded) { moved ->
         card(moved, tap, menu::open, action)
     }
 }

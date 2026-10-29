@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.derivedStateOf
@@ -21,6 +23,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
@@ -29,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
@@ -39,6 +44,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.Role
@@ -47,8 +53,10 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.ArchiveSwipeMotion
 import com.plhery.peekdeliverytracker.core.ArchiveSwipePose
@@ -101,10 +109,13 @@ internal val ARCHIVE_DECISION_DISTANCE = 10.dp
 /**
  * ExperimentalSwipeToArchiveModifier's state for one card (A-G01–G03, A-AN28–AN33): the swipe under the finger, the
  * pose at rest, the motion between gestures, and whether the action is armed or the card is on its way out. Each card
- * keeps its own, so several can stay open, and scrolling leaves them open. Positions are in points (dp).
+ * keeps its own, so several can stay open, and scrolling leaves them open, even past the screen and back ([saver]).
+ * Positions are in points (dp).
  *
- * A motion is timed from its first frame; [frame] is the latest frame's time while one runs, read only where the card
- * is placed and drawn, so a moving card is laid out and drawn again each frame, not composed.
+ * A motion is timed from when it was made, as the iPhone stamps each with the time: the latest frame's while one runs
+ * (a finger moving each frame replaces it each frame, and the next carries on from where it got to), its own first
+ * frame after a rest. [frame] is the latest frame's time, read only where the card is placed and drawn, so a moving
+ * card is laid out and drawn again each frame, not composed.
  */
 @Stable
 internal class ArchiveSwipe(
@@ -135,6 +146,14 @@ internal class ArchiveSwipe(
     var archiveFeedback by mutableIntStateOf(0)
         private set
 
+    /** The card rests open on its action, or is on its way there. */
+    var open by mutableStateOf(false)
+        private set
+
+    /** Open as it came back on screen ([saver]), opened before the cards that opened while it was away. */
+    var reopened = false
+        private set
+
     private val rowWidth: Double get() = max(width, ArchiveSwipeState.ACTION_WIDTH)
 
     private fun elapsed(): Double {
@@ -153,7 +172,6 @@ internal class ArchiveSwipe(
 
     /** Runs the motion frame by frame until it rests, as the iPhone's timeline does. */
     suspend fun run(current: ArchiveSwipeMotion) {
-        motionStart = null
         while (motion === current) {
             withFrameNanos { tick(it) }
             if (motion === current && elapsed() >= current.duration) {
@@ -169,9 +187,18 @@ internal class ArchiveSwipe(
     }
 
     private fun start(next: ArchiveSwipeMotion?) {
-        // A new motion starts where the last one is now; it is timed from its own first frame.
-        motionStart = null
+        // A new motion starts where the last one is now, and when: at the latest frame while that one was running,
+        // or at its own first frame after a rest.
+        motionStart = if (motion != null && motionStart != null) frame else null
         motion = next
+    }
+
+    /** Shown open at once, as the card comes back on screen. */
+    private fun restoreOpen() {
+        swipe = swipe.settle(at = ArchiveSwipeState.ACTION_WIDTH)
+        pose = ArchiveSwipePose(reveal = ArchiveSwipeState.ACTION_WIDTH)
+        open = true
+        reopened = true
     }
 
     fun began() {
@@ -236,6 +263,8 @@ internal class ArchiveSwipe(
         val reveal = if (destination == ArchiveSwipeState.Destination.Revealed) ArchiveSwipeState.ACTION_WIDTH else 0.0
         val flung = destination == ArchiveSwipeState.Destination.Revealed && (velocity ?: 0.0) >= ArchiveSwipeState.FLICK_SPEED
         swipe = swipe.settle(at = reveal)
+        open = destination == ArchiveSwipeState.Destination.Revealed
+        reopened = false
         start(
             ArchiveSwipeMotion(
                 shown, ArchiveSwipePose(reveal = reveal),
@@ -263,6 +292,7 @@ internal class ArchiveSwipe(
     fun trigger(velocity: Double? = null, provideFeedback: Boolean) {
         if (committing) return
         committing = true
+        open = false
         if (provideFeedback) {
             archiveFeedback += 1
             haptics()?.perform(SensoryFeedback.Impact(SensoryFeedback.Impact.Weight.Medium, 0.8))
@@ -300,18 +330,38 @@ internal class ArchiveSwipe(
 
     /** The card's offset to the left, in points. */
     fun cardOffset(): Double = min(shown().reveal, rowWidth)
+
+    companion object {
+        /** Keeps whether the card was open, so that it is open again as it comes back on screen. */
+        fun saver(make: () -> ArchiveSwipe): Saver<ArchiveSwipe, Boolean> = Saver(
+            save = { it.open },
+            restore = { open -> make().also { if (open) it.restoreOpen() } },
+        )
+    }
 }
 
-/** The swipe of a card that `state` archives, kept as long as the card is in the list. */
+/**
+ * The swipe of a card that `state` archives, kept as long as the card is in the list, and whether it was open while
+ * the list's item is away. While open and drawn, it stands in [DeliveriesState.openSwipes], in the order the cards
+ * opened.
+ */
 @Composable
 internal fun rememberArchiveSwipe(state: DeliveriesState, parcelId: UUID, action: (leaving: Job) -> Deferred<Boolean>): ArchiveSwipe {
     val reduceMotion = PeekTheme.reduceMotion
     val haptics = rememberHaptics()
-    val swipe = remember(state, parcelId) { ArchiveSwipe(state.scope, { haptics }, reduceMotion) }
+    val make = { ArchiveSwipe(state.scope, { haptics }, reduceMotion) }
+    val swipe = rememberSaveable(state, parcelId, saver = ArchiveSwipe.saver(make), init = make)
     swipe.reduceMotion = reduceMotion
     swipe.action = action
     val motion = swipe.motion
     LaunchedEffect(motion) { if (motion != null) swipe.run(motion) }
+    val open = swipe.open
+    DisposableEffect(swipe, open) {
+        if (open) {
+            if (swipe.reopened) state.openSwipes.add(0, swipe) else state.openSwipes.add(swipe)
+        }
+        onDispose { state.openSwipes.remove(swipe) }
+    }
     return swipe
 }
 
@@ -320,6 +370,8 @@ internal fun rememberArchiveSwipe(state: DeliveriesState, parcelId: UUID, action
  * the row rather than the card, which moves left over the action drawn behind it. `card` draws the card with the
  * modifier given, which moves it; the card itself takes its taps through [ArchiveSwipe.tap] and offers the swipe's
  * action to TalkBack ([archiveAction]).
+ *
+ * While `excluded`, the action's strip is kept from the system's back gesture ([keptFromBack]).
  */
 @Composable
 internal fun SwipeToArchive(
@@ -328,13 +380,16 @@ internal fun SwipeToArchive(
     cornerRadius: Dp,
     shadow: Boolean,
     modifier: Modifier = Modifier,
+    excluded: Boolean = false,
     card: @Composable (Modifier) -> Unit,
 ) {
     val shape = ContinuousRoundedShape(cornerRadius)
     val density = LocalDensity.current
+    val direction = LocalLayoutDirection.current
     var origin by remember { mutableStateOf(Offset.Zero) }
     Box(
         modifier
+            .then(if (excluded) Modifier.keptFromBack(density, direction) else Modifier)
             .then(if (shadow) Modifier.dropShadow(shape, ExperimentalSurfaceShadow) else Modifier)
             .clip(shape)
             .onSizeChanged { swipe.width = with(density) { it.width.toDp().value.toDouble() } }
@@ -345,6 +400,26 @@ internal fun SwipeToArchive(
         card(Modifier.offset { IntOffset(-(swipe.cardOffset() * density.density).toInt(), 0) })
     }
 }
+
+/**
+ * An open card's action, kept from the system's back gesture where it reaches into the screen's edge, so that a drag
+ * starting on it moves the card (on to the archive, or back shut) rather than going back: the action's width at the
+ * row's end, at most [EXCLUSION_HEIGHT] of it about its middle. The system grants an app 200 dp of each edge at most,
+ * and past that keeps only the lowest 200, so a single card has it: the one opened last ([DeliveriesState.openSwipes]),
+ * whose action is where the finger is likely to be. A closed card's swipe starts on the card, mostly clear of the
+ * edge, and the edge stays the system's back everywhere else.
+ */
+private fun Modifier.keptFromBack(density: Density, direction: LayoutDirection): Modifier = systemGestureExclusion { coordinates ->
+    val size = coordinates.size
+    val strip = min(size.width.toFloat(), with(density) { ArchiveSwipeState.ACTION_WIDTH.dp.toPx() })
+    val height = min(size.height.toFloat(), with(density) { EXCLUSION_HEIGHT.toPx() })
+    val top = (size.height - height) / 2
+    val left = if (direction == LayoutDirection.Ltr) size.width - strip else 0f
+    Rect(left, top, left + strip, top + height)
+}
+
+/** What the system grants an app of each edge, all of it for the one card. */
+private val EXCLUSION_HEIGHT = 200.dp
 
 /** The swipe's action in TalkBack's actions on the card, named as on the card's layer. */
 internal fun archiveAction(swipe: ArchiveSwipe, title: String): CustomAccessibilityAction =

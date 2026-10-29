@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
@@ -70,6 +71,7 @@ import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.draw.ComposePathFiller
 import com.plhery.peekdeliverytracker.ui.draw.toComposePath
+import com.plhery.peekdeliverytracker.ui.map.LocalMapsAtOnce
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -408,7 +410,10 @@ internal fun DeliveredFlights(state: DeliveriesState, modifier: Modifier = Modif
     }
 }
 
-/** The card a flight becomes, laid out at the size of its new place and recorded for the flight to draw. */
+/**
+ * The card a flight becomes, laid out at the size of its new place and recorded for the flight to draw: as the list
+ * draws it, from the first frame it shows in, its map made then rather than coming in after ([LocalMapsAtOnce]).
+ */
 @Composable
 private fun FlightFace(flight: DeliveredFlight) {
     val layer = rememberGraphicsLayer()
@@ -435,10 +440,12 @@ private fun FlightFace(flight: DeliveredFlight) {
         // Its own layer, so that each frame of the flights draws it again without recording it again.
         .graphicsLayer()
         .drawWithContent { layer.record { this@drawWithContent.drawContent() } }
-    if (flight.becomes == DeliveryCardKind.Next) {
-        NextDeliveryPass(flight.parcel, onOpen = {}, modifier = face, decorative = true)
-    } else {
-        ParcelPassCard(flight.parcel, notice = null, onOpen = {}, modifier = face, decorative = true)
+    CompositionLocalProvider(LocalMapsAtOnce provides true) {
+        if (flight.becomes == DeliveryCardKind.Next) {
+            NextDeliveryPass(flight.parcel, onOpen = {}, modifier = face, decorative = true)
+        } else {
+            ParcelPassCard(flight.parcel, notice = null, onOpen = {}, modifier = face, decorative = true)
+        }
     }
 }
 

@@ -17,6 +17,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
@@ -61,6 +62,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.ceil
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -80,7 +82,8 @@ import androidx.compose.ui.geometry.Size as ComposeSize
  * ([MapScenes]): a card scrolled back into view finds its picture done, and shows it at once. A map seen for the first
  * time shows nothing until then; `entrance` is how the drawing then comes in, as SwiftUI's `.transition(.opacity)`
  * brings a map in once the atlas is read, and null shows it at once. A map whose picture changes keeps the old one
- * until the new one is made. Sizes, insets and boxes are in points (dp). Decorative.
+ * until the new one is made. Where its picture has to be there at once ([LocalMapsAtOnce]), the map makes it then, and
+ * shows it with its first frame. Sizes, insets and boxes are in points (dp). Decorative.
  */
 @Composable
 fun WorldMapView(
@@ -110,7 +113,8 @@ fun WorldMapView(
             atlas, route, mode, palette, labels, showsContext, pip, quiet, insets, covered, buttons, language,
             maxWidth.value.toDouble(), maxHeight.value.toDouble(), colors.dark, colors.highContrast,
         )
-        val pending = remember(request) { MapScenes.request(request, context) }
+        val atOnce = LocalMapsAtOnce.current
+        val pending = remember(request) { if (atOnce) MapScenes.made(request, context) else MapScenes.request(request, context) }
         val made = pending.completedOrNull()
         // The last scene delivered: until the new request's scene is made, a map whose route, language, stage, carrier
         // or size changes keeps the picture it shows rather than going blank, as the iPhone draws the new one at once.
@@ -166,6 +170,13 @@ fun WorldMapView(
         }
     }
 }
+
+/**
+ * Whether the maps here make their pictures as they are composed, on the main thread, rather than show nothing until
+ * another thread has made them: for a card drawn only into a picture, as a flight's card is, which shows as the list
+ * draws it from the first frame it is seen in.
+ */
+internal val LocalMapsAtOnce = staticCompositionLocalOf { false }
 
 /** The scene if it is made, without waiting. */
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -262,6 +273,24 @@ internal object MapScenes {
                 busy.decrementAndGet()
             }
         }.also { scenes[request] = it }
+    }
+
+    /**
+     * The picture for `request`, made now on this thread unless it was made already, and kept for the maps that ask
+     * for it next. One still being made on another thread is made again here rather than waited for.
+     */
+    fun made(request: MapSceneRequest, context: Context): Deferred<MapScene> {
+        synchronized(scenes) { scenes[request]?.takeIf { it.completedOrNull() != null }?.let { return it } }
+        val (measurer, widths) = text(context)
+        val made = CompletableDeferred<MapScene>()
+        try {
+            made.complete(make(request, measurer, widths))
+        } catch (error: Exception) {
+            made.completeExceptionally(error)
+            return made
+        }
+        synchronized(scenes) { scenes[request] = made }
+        return made
     }
 
     private fun text(context: Context): Pair<TextMeasurer, MapTextWidths> = text ?: synchronized(this) {

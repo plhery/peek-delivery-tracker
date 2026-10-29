@@ -189,7 +189,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'dakota-cargo'
   | 'sentral-cargo'
   | 'depo'
-  | 'e-cargo';
+  | 'e-cargo'
+  | 'sengi-express';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

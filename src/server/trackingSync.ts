@@ -1911,11 +1911,15 @@ export class TrackingSyncService {
         // of the scans before it.
         const progressEvent = newestEvents.find((event) => event.stage !== 'pending');
         const latestEventStage = newestEvents[0] ? String(newestEvents[0].stage) : null;
+        // A summary in the stage of one of the newest scans in a stage read that instant in the
+        // carrier's order, which no row keeps: the parcel reads it by delivery progress, as the apps do.
+        const summaryOfTie = progressEvent !== undefined && newestEvents.some((event) => event.occurred_at === progressEvent.occurred_at
+          && event.stage === normalizedReportedStage);
         // A provider's explicit non-pending summary can be newer than its last
         // timestamped milestone. Timed progress remains authoritative only
         // while the provider's summary is still pending.
         const normalizedSelectedStage = normalizedReportedStage && result!.status !== 'pending'
-          ? normalizedReportedStage
+          ? summaryOfTie ? String(progressEvent.stage) : normalizedReportedStage
           : (progressEvent ? String(progressEvent.stage) : null) ?? normalizedReportedStage ?? latestEventStage;
         // The scan that sets the stage over a pending summary tells it too: Royal Mail's "Pending"
         // summary beside its customs scans would say otherwise.

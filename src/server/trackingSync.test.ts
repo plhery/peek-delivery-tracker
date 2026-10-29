@@ -1971,6 +1971,31 @@ describe('TrackingSyncService', () => {
     expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'in_transit' });
   });
 
+  it('reads scans of one instant by delivery progress over the carrier\'s summary of them', async () => {
+    // A return and the problem behind it at one instant (synthetic wording and times), the problem
+    // listed first, so the summary names it: the parcel is returned, as the apps show it.
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const at = '2026-09-09T23:20:58Z';
+    const answer = (status: 'exception' | 'delivered') => ({ status, current_stage: status, last_status_text: 'Address problem', last_update: at,
+      events: [
+        { time: at, description: 'Address problem', stage: 'exception' },
+        { time: at, description: 'Returned to the sender', stage: 'returned' },
+        { time: '2026-09-08T10:00:00Z', description: 'In transit', stage: 'in_transit' },
+      ] });
+    const adapter = { fetch: vi.fn().mockResolvedValue(answer('exception')) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await service.syncPackage({ id: 'tie', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'in_transit' });
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'returned' });
+
+    // A summary in a stage none of those scans has is newer than them, and stands.
+    adapter.fetch.mockResolvedValue(answer('delivered'));
+    await service.syncPackage({ id: 'tie', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'in_transit' });
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'delivered' });
+  });
+
   it('follows the carrier once no scan the parcel keeps shows the stage it was held at', async () => {
     // A scraper fix re-reads the scan that moved the parcel as a booked
     // collection (synthetic wording and times): no scan is in transit any more.

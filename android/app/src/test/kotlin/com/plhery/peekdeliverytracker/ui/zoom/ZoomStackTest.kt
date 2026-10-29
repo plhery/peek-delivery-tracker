@@ -285,6 +285,19 @@ class ZoomStackTest {
     }
 
     @Test
+    fun aBackGestureStartedAsThePageSpringsBackTakesItOver() {
+        show()
+        gesture(at(0f), at(0.5f))
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.dispatchOnBackCancelled() }
+        compose.mainClock.advanceTimeBy(48)
+        gesture(at(0f), at(0.3f), at(0.6f))
+        // Long after the spring back would have ended, the page is where the new gesture holds it: 94 % of its size.
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(390f * 0.94f, width(), 0.5f)
+    }
+
+    @Test
     fun aPageShownWithoutAFlightShrinksUnderTheBackGestureInPoints() {
         show(initial = SOURCE)
         assertEquals(390f, width(), 0.5f)

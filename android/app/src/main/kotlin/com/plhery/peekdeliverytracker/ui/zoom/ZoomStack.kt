@@ -112,7 +112,7 @@ import kotlinx.coroutines.withContext
  *   response 0.25 s, and a finger down on it meanwhile catches it where it is.
  * - The predictive back gesture shrinks it as Android's does for a container the size of the window: to 90 %, away
  *   from the edge it was swiped from, and up or down with the finger. Let go, it goes back into its source from there,
- *   and a cancel springs it back. A back press closes it.
+ *   and a cancel springs it back, which the next gesture takes over. A back press closes it.
  * - Under Reduce Motion, the page and the root crossfade over 0.35 s, and nothing moves or shrinks.
  *
  * While a page is over the root or on its way, the root takes no touch, TalkBack doesn't reach it and the root's own
@@ -190,13 +190,14 @@ fun ZoomStack(
             events.collect {}
             return@PredictiveBackHandler
         }
+        flight.startBack()
         try {
             events.collect { event -> if (flight.canFollowBack()) flight.back(event) }
             flight.letBackGo()
             flight.beginClose()
             back()
         } catch (cancelled: CancellationException) {
-            scope.launch { flight.springBackFromBack() }
+            flight.springBackFromBack(scope)
             throw cancelled
         }
     }
@@ -312,10 +313,14 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     /** The page springing back from a drag, which a finger catches. */
     private var dragSpring: Job? = null
     private var backing: Boolean by mutableStateOf(false)
+    private var backStarting = false
     private var backProgress: Float by mutableFloatStateOf(0f)
     private var backFromLeft = true
     private var backStartY = 0f
     private var backDeltaY: Float by mutableFloatStateOf(0f)
+
+    /** The page springing back from a cancelled back gesture, which the next one takes over. */
+    private var backSpring: Job? = null
 
     private var host: LayoutCoordinates? = null
     var bounds: Rect by mutableStateOf(Rect.Zero)
@@ -608,10 +613,20 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         return true
     }
 
+    /** A back gesture starts: it takes the page over from a spring back from the last one, where that has it. */
+    fun startBack() {
+        backSpring?.let { spring ->
+            backSpring = null
+            spring.cancel()
+        }
+        backStarting = true
+    }
+
     fun back(event: BackEventCompat) {
-        if (!backing) {
+        if (backStarting) {
             surroundings?.invoke()?.let(::takeWindow)
             backing = true
+            backStarting = false
             backFromLeft = event.swipeEdge == BackEventCompat.EDGE_LEFT
             backStartY = event.touchY
         }
@@ -628,19 +643,26 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         backDeltaY = 0f
     }
 
-    suspend fun springBackFromBack() {
-        if (!backing) return
+    /** The gesture was cancelled: the page springs back to the window from where the gesture held it. */
+    fun springBackFromBack(scope: CoroutineScope) {
+        if (!backing || backSpring != null) return
         val progress = backProgress
         val deltaY = backDeltaY
-        try {
-            animate(1f, 0f, animationSpec = SPRING_BACK) { value, _ ->
-                backProgress = progress * value
-                backDeltaY = deltaY * value
+        backSpring = scope.launch {
+            try {
+                animate(1f, 0f, animationSpec = SPRING_BACK) { value, _ ->
+                    backProgress = progress * value
+                    backDeltaY = deltaY * value
+                }
+            } finally {
+                // Unless another gesture took the page over meanwhile.
+                if (backSpring === coroutineContext[Job]) {
+                    backSpring = null
+                    backing = false
+                    backProgress = 0f
+                    backDeltaY = 0f
+                }
             }
-        } finally {
-            backing = false
-            backProgress = 0f
-            backDeltaY = 0f
         }
     }
 }

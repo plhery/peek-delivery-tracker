@@ -227,7 +227,7 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^AP\\d{14}$",
-        "confidence": "low"
+        "confidence": "high"
       },
       {
         "pattern": "^CNBR\\d{11}$",
@@ -21608,7 +21608,8 @@ export const CARRIER_CAPABILITIES = {
       "DPD Laser Express Logistics",
       "DPD Laser Express Logistics (Pty) Ltd",
       "DPDLaser",
-      "Dawn Wing"
+      "Dawn Wing",
+      "Fast & Furious"
     ],
     "countries": [
       "ZA"
@@ -34158,15 +34159,231 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "xinghe-freight"
     },
     "linkRules": [],
     "detectionRules": [
       {
         "pattern": "^GZXH\\d{10}YQ$",
-        "confidence": "low"
+        "confidence": "high"
       }
     ]
+  },
+  "avis-logistics": {
+    "displayName": "Avis Logistics",
+    "aliases": [
+      "AVIS Logistics KZ",
+      "ТОО Avis Logistics",
+      "Авис Логистикс"
+    ],
+    "countries": [
+      "KZ",
+      "RU"
+    ],
+    "color": "#095fa9",
+    "selectable": true,
+    "timezone": "Asia/Almaty",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://avislogistics.kz/?trace={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "avislogistics.kz",
+          "www.avislogistics.kz"
+        ],
+        "pathPattern": "^/$",
+        "params": [
+          "trace"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://avislogistics.kz/"
+  },
+  "dakota-cargo": {
+    "displayName": "Dakota Cargo",
+    "aliases": [
+      "Dakota Group",
+      "PT Dakota Buana Semesta",
+      "Dakota Buana Semesta",
+      "Dakota Logistik",
+      "Dakota Kurir",
+      "Dakota Courier"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#120f84",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{3}(?:0[1-9]|1[0-2])20\\d{2}A\\d{6}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://dakotacargo.co.id/#lacak-kiriman"
+  },
+  "depo": {
+    "displayName": "Depo",
+    "aliases": [
+      "Depo.sk",
+      "DEPO výdajné miesta",
+      "Mediaprint-Kapa Pressegrosso"
+    ],
+    "countries": [
+      "SK"
+    ],
+    "color": "#f36a10",
+    "selectable": true,
+    "timezone": "Europe/Bratislava",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://depo.sk/sledovanie-zasielky/?number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "depo.sk",
+          "www.depo.sk"
+        ],
+        "pathPattern": "^/sledovanie-zasielky/?$",
+        "params": [
+          "number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://depo.sk/sledovanie-zasielky/"
+  },
+  "e-cargo": {
+    "displayName": "e-Cargo",
+    "aliases": [
+      "E-Cargo Logistics",
+      "E-Cargo Logistics Ltd",
+      "אי קרגו"
+    ],
+    "countries": [
+      "IL"
+    ],
+    "color": "#ee4037",
+    "selectable": true,
+    "timezone": "Asia/Jerusalem",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.e-cargo.co.il/CargoTracking/public-tracking/search?searchKey={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.e-cargo.co.il"
+        ],
+        "pathPattern": "^/CargoTracking/public-tracking/search/?$",
+        "params": [
+          "searchKey"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.e-cargo.co.il/CargoTracking/public-tracking/search"
+  },
+  "instapack": {
+    "displayName": "Instapack",
+    "aliases": [
+      "Immediate Delivery S.L.",
+      "Mi Instapack"
+    ],
+    "countries": [
+      "ES",
+      "FR"
+    ],
+    "color": "#36a8dd",
+    "selectable": true,
+    "timezone": "Europe/Madrid",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://back.instapack.es/client-dashboard/seguimiento-de-envios/"
+  },
+  "obibox": {
+    "displayName": "Obibox",
+    "aliases": [
+      "Obibox / Xpedigo",
+      "Xpedigo",
+      "Xpedigo Inc."
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#ec6615",
+    "selectable": true,
+    "timezone": "America/Toronto",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.obibox.io/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.obibox.io",
+          "tracking.xpedigo.com"
+        ],
+        "path": "^/([A-Za-z0-9_]{8,40})/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^XP[A-Z]{3,4}\\d[0-9A-Z]{9,21}(?:_|Q)\\d{1,2}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://tracking.obibox.io/"
+  },
+  "sentral-cargo": {
+    "displayName": "Sentral Cargo",
+    "aliases": [
+      "SentralCargo",
+      "PT Aeronusa Inti Raya"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#e6212a",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://sentralcargo.co.id/cekresi?resi={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "sentralcargo.co.id",
+          "www.sentralcargo.co.id"
+        ],
+        "pathPattern": "^/(?:en/tracking|cekresi)/?$",
+        "params": [
+          "resi"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://sentralcargo.co.id/"
   }
 } as const;
 
@@ -35081,7 +35298,14 @@ export const CARRIER_IDS = [
   "jp-home",
   "overnite",
   "sway",
-  "xinghe-freight"
+  "xinghe-freight",
+  "avis-logistics",
+  "dakota-cargo",
+  "depo",
+  "e-cargo",
+  "instapack",
+  "obibox",
+  "sentral-cargo"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

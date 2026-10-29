@@ -65538,6 +65538,15 @@
     ]
   },
   {
+    "input": "999092022A123456",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "royal-mail",
+      "dakota-cargo"
+    ]
+  },
+  {
     "input": "99911453",
     "carrier": "unknown",
     "confidence": "low",
@@ -67237,34 +67246,25 @@
   },
   {
     "input": "AP00808868960945",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "aliexpress",
+    "confidence": "high",
     "candidates": [
-      "aliexpress"
-    ],
-    "asked": [
       "aliexpress"
     ]
   },
   {
     "input": "AP00821064969338",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "aliexpress",
+    "confidence": "high",
     "candidates": [
-      "aliexpress"
-    ],
-    "asked": [
       "aliexpress"
     ]
   },
   {
     "input": "AP00822511080252",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "aliexpress",
+    "confidence": "high",
     "candidates": [
-      "aliexpress"
-    ],
-    "asked": [
       "aliexpress"
     ]
   },
@@ -77367,8 +77367,8 @@
   },
   {
     "input": "GZXH0000000017YQ",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "xinghe-freight",
+    "confidence": "high",
     "candidates": [
       "xinghe-freight"
     ]
@@ -95890,6 +95890,30 @@
     ],
     "asked": [
       "chronopost"
+    ]
+  },
+  {
+    "input": "XPHFRE271733CK15466Q1",
+    "carrier": "obibox",
+    "confidence": "high",
+    "candidates": [
+      "obibox"
+    ]
+  },
+  {
+    "input": "XPLOP807214725068_1",
+    "carrier": "obibox",
+    "confidence": "high",
+    "candidates": [
+      "obibox"
+    ]
+  },
+  {
+    "input": "XPSHP254130SPY680Q1",
+    "carrier": "obibox",
+    "confidence": "high",
+    "candidates": [
+      "obibox"
     ]
   },
   {

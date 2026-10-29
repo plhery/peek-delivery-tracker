@@ -922,6 +922,13 @@ value class CarrierId(val rawValue: String) {
         val Overnite = CarrierId("overnite")
         val Sway = CarrierId("sway")
         val XingheFreight = CarrierId("xinghe-freight")
+        val AvisLogistics = CarrierId("avis-logistics")
+        val DakotaCargo = CarrierId("dakota-cargo")
+        val Depo = CarrierId("depo")
+        val ECargo = CarrierId("e-cargo")
+        val Instapack = CarrierId("instapack")
+        val Obibox = CarrierId("obibox")
+        val SentralCargo = CarrierId("sentral-cargo")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -1788,6 +1795,13 @@ value class CarrierId(val rawValue: String) {
             Overnite,
             Sway,
             XingheFreight,
+            AvisLogistics,
+            DakotaCargo,
+            Depo,
+            ECargo,
+            Instapack,
+            Obibox,
+            SentralCargo,
         )
     }
 }

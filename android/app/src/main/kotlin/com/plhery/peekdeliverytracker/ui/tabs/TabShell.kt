@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
@@ -105,6 +106,16 @@ class TabReselection {
     }
 }
 
+/**
+ * An upright hinge that splits the window, as a foldable in book posture or a dual screen spanned has: where it starts
+ * and ends, in pixels from the window's left.
+ */
+@Immutable
+data class WindowHinge(val start: Int, val end: Int)
+
+/** The hinge splitting the tab's window, null where none does. */
+val LocalWindowHinge = compositionLocalOf<WindowHinge?> { null }
+
 /** The reselection of the tab being drawn, or of what its stack shows at its root. */
 val LocalTabReselection = staticCompositionLocalOf { TabReselection() }
 
@@ -155,12 +166,17 @@ fun TabShell(
         val bottomGap = if (buttons > 0.dp) buttons + BUTTONS_GAP else GESTURE_GAP
         val topGap = safeTop + STATUS_GAP
         val footprint = if (top) PaddingValues(top = topGap + TOP_BAR_HEIGHT) else PaddingValues(bottom = bottomGap + BOTTOM_BAR_HEIGHT)
+        val windowHinge = windowHinge(constraints.maxWidth)
+        val hinge = windowHinge?.start
         Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background)) {
-            CompositionLocalProvider(LocalTabBarPadding provides footprint, LocalTabReselection provides reselections[selection]) {
+            CompositionLocalProvider(
+                LocalTabBarPadding provides footprint,
+                LocalTabReselection provides reselections[selection],
+                LocalWindowHinge provides windowHinge,
+            ) {
                 holder.SaveableStateProvider(tabs[selection].name) { content(tabs[selection]) }
             }
         }
-        val hinge = hingeStart(constraints.maxWidth)
         if (top) {
             TopTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.TopStart).clearOfTheHinge(hinge).padding(top = topGap))
         } else {
@@ -216,16 +232,16 @@ private fun TabKeys(choose: (Int) -> Unit) {
 }
 
 /**
- * Where a hinge starts, in pixels from the window's left, when it stands upright and splits the window: a foldable in
- * book posture or a dual screen spanned. The bars keep to the half before it rather than straddling the fold. The
- * app lays out left to right, so that half is the left one.
+ * Where a hinge starts and ends, in pixels from the window's left, when it stands upright and splits the window: a
+ * foldable in book posture or a dual screen spanned. The bars keep to the half before it rather than straddling the
+ * fold. The app lays out left to right, so that half is the left one.
  *
  * The last hinge reported is kept with the window, for a window of the same width, so the first frame after a
  * recreation (a change of theme, of text size, of language) already keeps clear of it rather than jumping there once
  * the hinge is reported again.
  */
 @Composable
-private fun hingeStart(windowWidth: Int): Int? {
+private fun windowHinge(windowWidth: Int): WindowHinge? {
     val activity = LocalContext.current.activity()
     var reported by rememberSaveable(stateSaver = HingeSaver) { mutableStateOf<Hinge?>(null) }
     val width by rememberUpdatedState(windowWidth)
@@ -234,18 +250,18 @@ private fun hingeStart(windowWidth: Int): Int? {
         WindowInfoTracker.getOrCreate(activity).windowLayoutInfo(activity).collect { layout ->
             val fold = layout.displayFeatures.filterIsInstance<FoldingFeature>()
                 .firstOrNull { it.isSeparating && it.orientation == FoldingFeature.Orientation.VERTICAL }
-            reported = fold?.let { Hinge(it.bounds.left, width) }
+            reported = fold?.let { Hinge(it.bounds.left, it.bounds.right, width) }
         }
     }
-    return reported?.takeIf { it.windowWidth == windowWidth }?.start
+    return reported?.takeIf { it.windowWidth == windowWidth }?.let { WindowHinge(it.start, it.end) }
 }
 
-/** A hinge's start from the window's left, and the width of the window it splits, in pixels. */
-private data class Hinge(val start: Int, val windowWidth: Int)
+/** A hinge's start and end from the window's left, and the width of the window it splits, in pixels. */
+private data class Hinge(val start: Int, val end: Int, val windowWidth: Int)
 
 private val HingeSaver = Saver<Hinge?, IntArray>(
-    save = { hinge -> hinge?.let { intArrayOf(it.start, it.windowWidth) } },
-    restore = { Hinge(it[0], it[1]) },
+    save = { hinge -> hinge?.let { intArrayOf(it.start, it.end, it.windowWidth) } },
+    restore = { Hinge(it[0], it[1], it[2]) },
 )
 
 private tailrec fun Context.activity(): Activity? = when (this) {

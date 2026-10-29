@@ -30,7 +30,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollToIndex
+import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.DpRect
 import androidx.compose.ui.unit.LayoutDirection
@@ -48,8 +48,10 @@ import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.deliveries.FOOT
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
+import com.plhery.peekdeliverytracker.ui.deliveries.openCard
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
@@ -117,8 +119,7 @@ class TabShellTest {
     @Test
     fun tappingTheChosenTabGoesBackToTheListThenScrollsItToTheTop() {
         show()
-        compose.onNodeWithText("Parcel 3").performClick()
-        compose.waitForIdle()
+        compose.openCard("New trainers")
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
 
         tab("Deliveries").performClick()
@@ -126,14 +127,14 @@ class TabShellTest {
         compose.onNodeWithTag(PARCEL_PAGE).assertDoesNotExist()
         compose.onNodeWithTag(PARCEL_LIST).assertExists()
 
-        compose.onNodeWithTag(PARCEL_LIST).performScrollToIndex(35)
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("foot")
         compose.waitForIdle()
-        compose.onNodeWithText("Parcel 1").assertDoesNotExist()
+        compose.onNodeWithText("On the way").assertDoesNotExist()
         tab("Deliveries").performClick()
         compose.waitForIdle()
-        compose.onNodeWithText("Parcel 1").assertExists()
-        // Tapping the chosen tab is no change of tab.
-        assertEquals(emptyList<String>(), views)
+        compose.onNodeWithText("On the way").assertExists()
+        // Tapping the chosen tab is no change of tab: only the deliveries count the parcel and the list again.
+        assertEquals(listOf("parcel", "deliveries"), views)
     }
 
     @Test
@@ -239,17 +240,18 @@ class TabShellTest {
     fun underATopBarTheListEndsAboveTheNavigationButtons() {
         show()
         insets(WindowInsetsCompat.Type.tappableElement() or WindowInsetsCompat.Type.navigationBars(), bottom = 96)
-        compose.onNodeWithTag(PARCEL_LIST).performScrollToIndex(SAMPLE_LAST)
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("foot")
         compose.waitForIdle()
-        assertEquals(window().bottom.value - 48, compose.onNodeWithText("Parcel 40").getBoundsInRoot().bottom.value, 0.5f)
+        // The list's own 36 under its foot.
+        assertEquals(window().bottom.value - 48 - 36, bounds(FOOT).bottom.value, 0.5f)
     }
 
     @Test
     fun underABottomBarTheListEndsAboveTheBar() {
         show()
-        compose.onNodeWithTag(PARCEL_LIST).performScrollToIndex(SAMPLE_LAST)
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("foot")
         compose.waitForIdle()
-        assertEquals(window().bottom.value - 21 - 62, compose.onNodeWithText("Parcel 40").getBoundsInRoot().bottom.value, 0.5f)
+        assertEquals(window().bottom.value - 21 - 62 - 36, bounds(FOOT).bottom.value, 0.5f)
     }
 
     @Test
@@ -457,6 +459,3 @@ class TabShellTest {
         assertEquals(item.right.value + 4, pill.right.value, 0.5f)
     }
 }
-
-/** The index of the last of the sample parcels, "Parcel 40". */
-private const val SAMPLE_LAST = 39

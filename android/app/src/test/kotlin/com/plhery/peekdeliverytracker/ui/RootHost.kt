@@ -1,21 +1,26 @@
 package com.plhery.peekdeliverytracker.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
-import com.plhery.peekdeliverytracker.ui.deliveries.ParcelListPlaceholder
+import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
+import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelPagePlaceholder
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 
-/** Made-up parcels for the list's placeholder. */
-val SAMPLE_PARCELS = List(40) { "parcel-${it + 1}" to "Parcel ${it + 1}" }
-
 /**
- * The root as the app shows it, in the app's copy for `language`, the deliveries' placeholders showing [parcels],
- * under Reduce Motion unless asked otherwise.
+ * The root as the app shows it, in the app's copy for `language`, at the captures' moment ([CAPTURED]), the deliveries
+ * showing [source]'s parcels (the demo's unless a test gives its own), under Reduce Motion unless asked otherwise. The
+ * session is told to the deliveries too, and their screens counted to [onView] with the tabs'.
  */
 @Composable
 fun RootHost(
@@ -24,19 +29,26 @@ fun RootHost(
     dark: Boolean = false,
     reduceMotion: Boolean = true,
     onView: (String) -> Unit = {},
-    parcels: List<Pair<String, String>> = SAMPLE_PARCELS,
+    source: FakeDeliveries? = null,
+    inbox: DeliveriesInbox? = null,
     deliveries: (@Composable () -> Unit)? = null,
 ) {
     val localizer = remember(language) { Localizer(language, variant = "android") }
-    PeekTheme(dark = dark, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = false, carrierIdentities = null) {
-        PeekRoot(state, localizer, onView) {
-            if (deliveries != null) {
-                deliveries()
-            } else {
-                DeliveriesTab(
-                    list = { open -> ParcelListPlaceholder(parcels, open) },
-                    page = { id -> ParcelPagePlaceholder(parcels.firstOrNull { it.first == id }?.second) },
-                )
+    val shown = source ?: remember(language) { FakeDeliveries(DemoCards.parcels(language), state) }
+    shown.onView = onView
+    SideEffect { shown.session.value = state }
+    CompositionLocalProvider(LocalNow provides { CAPTURED }) {
+        PeekTheme(
+            dark = dark, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = false,
+            carrierIdentities = DemoCards.identities,
+        ) {
+            PeekRoot(state, localizer, onView, inbox) {
+                if (deliveries != null) {
+                    deliveries()
+                } else {
+                    val parcels by shown.parcels.collectAsState()
+                    DeliveriesTab(shown, inbox = inbox) { id -> ParcelPagePlaceholder(parcels.firstOrNull { it.id == id }?.label) }
+                }
             }
         }
     }

@@ -26,7 +26,8 @@ import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
-import com.plhery.peekdeliverytracker.ui.deliveries.ParcelListPlaceholder
+import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelPagePlaceholder
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
@@ -36,19 +37,20 @@ import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.withContext
 
-/** RootView (A-D20): what the session's state shows, from the container's stores. */
+/**
+ * RootView (A-D20): what the session's state shows, from the container's stores. A parcel a link asked for
+ * ([inbox]) brings the deliveries forward and opens there.
+ */
 @Composable
-fun PeekRoot(container: AppContainer) {
+fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     val state by container.session.stateFlow.collectAsState()
     val parcels by container.parcels.parcelsFlow.collectAsState()
-    PeekRoot(state, container.localizer, onView = { container.analytics.view(it) }) {
-        val rows = remember(parcels) { parcels.map { it.id.toString() to it.label } }
-        DeliveriesTab(
-            list = { open -> ParcelListPlaceholder(rows, open) },
-            page = { id -> ParcelPagePlaceholder(rows.firstOrNull { it.first == id }?.second) },
-        )
+    val source = remember(container) { ContainerDeliveries(container) }
+    PeekRoot(state, container.localizer, onView = { container.analytics.view(it) }, inbox = inbox) {
+        DeliveriesTab(source, inbox = inbox) { id -> ParcelPagePlaceholder(parcels.firstOrNull { it.id == id }?.label) }
     }
 }
 
@@ -56,26 +58,32 @@ fun PeekRoot(container: AppContainer) {
  * RootView's routing, in its order: the launch screen while the session is read, the arrival while nobody is signed in
  * and this phone follows nothing on its own, the tabs otherwise. A state replaces the one before it at once. The tab
  * chosen is kept with the window and through process death, as `@SceneStorage("tab")` keeps it, whatever the state
- * shows in between.
+ * shows in between. A parcel waiting in [inbox] chooses the deliveries.
  */
 @Composable
 internal fun PeekRoot(
     state: AuthenticationState,
     localizer: Localizer,
     onView: (String) -> Unit,
+    inbox: DeliveriesInbox? = null,
     deliveries: @Composable () -> Unit,
 ) {
     val language by localizer.languageFlow.collectAsState()
     var tab by rememberSaveable { mutableIntStateOf(PeekTab.Deliveries.ordinal) }
-    when (state) {
-        AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
-        AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
-        AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
-            val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
-            TabShell(selection = tab, onSelect = { tab = it }, labels = labels, onView = onView) { shown ->
-                when (shown) {
-                    PeekTab.Deliveries -> deliveries()
-                    PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+    LaunchedEffect(inbox) {
+        inbox?.parcel?.filterNotNull()?.collect { tab = PeekTab.Deliveries.ordinal }
+    }
+    ProvideLocalizer(localizer) {
+        when (state) {
+            AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
+            AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
+            AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
+                val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
+                TabShell(selection = tab, onSelect = { tab = it }, labels = labels, onView = onView) { shown ->
+                    when (shown) {
+                        PeekTab.Deliveries -> deliveries()
+                        PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                    }
                 }
             }
         }

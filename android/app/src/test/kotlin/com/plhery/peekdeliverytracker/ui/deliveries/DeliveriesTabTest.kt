@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -65,7 +64,7 @@ class DeliveriesTabTest {
     fun theParcelsPageSlidesInOverTheListAndBackOut() {
         compose.setContent { RootHost(reduceMotion = false) }
         compose.mainClock.autoAdvance = false
-        compose.onNodeWithText("Parcel 3").performClick()
+        compose.card("New trainers").performClick()
         // 0.1 s into a spring of response 0.35 s, a little over half the way.
         compose.mainClock.advanceTimeBy(100)
         assertPartway()
@@ -84,7 +83,7 @@ class DeliveriesTabTest {
     @Test
     fun thePredictiveBackGestureMovesThePageWithTheFinger() {
         compose.setContent { RootHost(reduceMotion = false) }
-        compose.onNodeWithText("Parcel 3").performClick()
+        compose.card("New trainers").performClick()
         compose.waitForIdle()
         gesture(at(0f), at(0.25f))
         val width = width()
@@ -110,7 +109,7 @@ class DeliveriesTabTest {
     fun underReduceMotionThePageComesAndGoesAtOnce() {
         compose.setContent { RootHost(reduceMotion = true) }
         compose.mainClock.autoAdvance = false
-        compose.onNodeWithText("Parcel 3").performClick()
+        compose.card("New trainers").performClick()
         compose.mainClock.advanceTimeBy(50)
         assertEquals(0f, left(PARCEL_PAGE), 0.5f)
         compose.onNodeWithTag(PARCEL_LIST).assertDoesNotExist()

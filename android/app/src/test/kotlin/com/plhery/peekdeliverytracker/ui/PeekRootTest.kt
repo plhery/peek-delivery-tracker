@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.platform.LocalView
@@ -22,8 +23,11 @@ import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
+import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
+import com.plhery.peekdeliverytracker.ui.deliveries.openCard
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
 import java.util.UUID
 import kotlin.math.abs
@@ -119,24 +123,31 @@ class PeekRootTest {
         assertEquals(1.0, launchInk().toDouble() / shown, 0.03)
     }
 
+    /**
+     * After process death the tab comes back with nothing counted or felt, and the parcel open comes back once the
+     * parcels do, counted as the iPhone counts it: its navigation changes as it opens again.
+     */
     @Test
-    fun theTabAndTheOpenParcelComeBackAfterProcessDeathWithNothingCountedOrFelt() {
+    fun theTabAndTheOpenParcelComeBackAfterProcessDeath() {
         var session = mutableStateOf<AuthenticationState>(AuthenticationState.Loading)
+        // The stores of the process the content is made in: a new process makes it with new ones.
+        var process = FakeDeliveries(DemoCards.parcels())
         val views = mutableListOf<String>()
         lateinit var view: View
         val restoration = StateRestorationTester(compose)
         restoration.setContent {
             view = LocalView.current
-            RootHost(state = session.value, onView = { views += it })
+            RootHost(state = session.value, onView = { views += it }, source = remember { process })
         }
         session.value = AuthenticationState.Welcome
-        compose.onNodeWithText("Parcel 3").performClick()
         compose.waitForIdle()
+        compose.openCard("New trainers")
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
 
         /** A new process: its session is read again behind the launch screen before the tabs come back. */
-        fun newProcess() {
+        fun newProcess(counted: List<String>) {
             session = mutableStateOf(AuthenticationState.Loading)
+            process = process.newProcess()
             restoration.emulateSavedInstanceStateRestore()
             compose.onNodeWithTag(LAUNCH).assertExists()
             views.clear()
@@ -144,22 +155,23 @@ class PeekRootTest {
             compose.runOnUiThread { view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK) }
             session.value = AuthenticationState.Welcome
             compose.waitForIdle()
-            assertEquals(emptyList<String>(), views)
+            assertEquals(counted, views)
             assertEquals(HapticFeedbackConstants.CLOCK_TICK, shadowOf(view).lastHapticFeedbackPerformed())
+            views.clear()
         }
 
-        newProcess()
+        newProcess(counted = listOf("parcel"))
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
-        compose.onNodeWithText("Parcel 3").assertExists()
+        compose.onNodeWithText("New trainers", substring = true).assertExists()
 
         compose.onNodeWithContentDescription("Friends").performClick()
         compose.waitForIdle()
         assertEquals(listOf("friends"), views)
-        newProcess()
+        newProcess(counted = emptyList())
         compose.onNodeWithContentDescription("Friends").assertIsSelected()
         compose.onNodeWithTag("friends").assertExists()
 
-        // The deliveries kept their stack while the friends were shown.
+        // The deliveries kept the parcel open while the friends were shown.
         compose.onNodeWithContentDescription("Deliveries").performClick()
         compose.waitForIdle()
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
@@ -172,8 +184,7 @@ class PeekRootTest {
         compose.waitForIdle()
         assertFalse(back.hasEnabledCallbacks())
 
-        compose.onNodeWithText("Parcel 3").performClick()
-        compose.waitForIdle()
+        compose.openCard("New trainers")
         assertTrue(back.hasEnabledCallbacks())
         compose.runOnUiThread { back.onBackPressed() }
         compose.waitForIdle()

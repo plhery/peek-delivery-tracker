@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker
 
 import android.app.Application
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.plhery.peekdeliverytracker.core.SharedResources
 import java.io.FileNotFoundException
 import kotlinx.coroutines.MainScope
@@ -39,7 +40,7 @@ class PeekApplication : Application() {
         making = true
         MainScope().launch {
             val container = AppContainer.make(this@PeekApplication)
-            container.start()
+            container.start(ProcessLifecycleOwner.get().lifecycle)
             containerState.value = container
         }
     }

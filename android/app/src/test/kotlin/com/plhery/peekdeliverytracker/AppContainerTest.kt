@@ -2,6 +2,9 @@ package com.plhery.peekdeliverytracker
 
 import android.content.Context
 import android.os.Looper
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
@@ -41,9 +44,15 @@ class AppContainerTest {
     private lateinit var previousCatalog: CarrierCatalog
     private var container: AppContainer? = null
 
+    /** The process's lifecycle (ProcessLifecycleOwner's), in front. */
+    private val process = object : LifecycleOwner {
+        override val lifecycle = LifecycleRegistry(this)
+    }
+
     @Before
     fun start() {
         previousCatalog = CarrierCatalog.shared
+        process.lifecycle.currentState = Lifecycle.State.RESUMED
         server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 synchronized(paths) {
@@ -88,6 +97,15 @@ class AppContainerTest {
 
     private fun requested(path: String) = synchronized(paths) { path in paths }
 
+    private fun count(path: String) = synchronized(paths) { paths.count { it == path } }
+
+    /** Gives anything the main thread or the server still had to do a moment to land. */
+    private fun settle() {
+        shadowOf(Looper.getMainLooper()).idle()
+        Thread.sleep(200)
+        shadowOf(Looper.getMainLooper()).idle()
+    }
+
     @Test
     fun aFreshInstallInstallsTheCatalogAndOpensOnTheFrontDoorWithNoParcels() {
         val app = container()
@@ -95,7 +113,7 @@ class AppContainerTest {
         shadowOf(Looper.getMainLooper()).idle()
         assertEquals(AuthenticationState.Loading, app.session.state)
 
-        app.start()
+        app.start(process.lifecycle)
         idleUntil("the catalog") { app.catalog.value != null }
         assertSame(app.catalog.value, CarrierCatalog.shared)
         idleUntil("the session") { app.session.state != AuthenticationState.Loading }
@@ -112,7 +130,7 @@ class AppContainerTest {
         assertEquals("en", PreferencesDefaults.appGroup(context, "group.test.peek").string(AppLanguage.storageKey))
 
         try {
-            app.start()
+            app.start(process.lifecycle)
             fail("Expected a second start to be refused")
         } catch (_: IllegalStateException) {
         }
@@ -130,7 +148,7 @@ class AppContainerTest {
             MainScope().launch { made = AppContainer.make(context, configuration(signIn = true)).also { container = it } }
             idleUntil("the stores") { made != null }
             val app = made!!
-            app.start()
+            app.start(process.lifecycle)
             idleUntil("the session") { app.session.state != AuthenticationState.Loading }
             assertEquals(AuthenticationState.Welcome, app.session.state)
 
@@ -148,7 +166,7 @@ class AppContainerTest {
     fun theDemoOpensOnItsParcels() {
         PreferencesDefaults.standard(context).set("demo", forKey = "sdt.native.experience.v1")
         val app = container()
-        app.start()
+        app.start(process.lifecycle)
         idleUntil("the demo") { app.session.state == AuthenticationState.Demo }
         idleUntil("the demo's parcels") { app.parcels.parcelsFlow.value.isNotEmpty() }
         assertTrue(app.session.isDemo)
@@ -159,7 +177,7 @@ class AppContainerTest {
         PreferencesDefaults.standard(context).set("de", forKey = AppLanguage.storageKey)
         val app = container()
         assertEquals(AppLanguage.De, app.localizer.language)
-        app.start()
+        app.start(process.lifecycle)
         idleUntil("the session") { app.session.state != AuthenticationState.Loading }
 
         app.localizer.language = AppLanguage.Fr
@@ -168,17 +186,26 @@ class AppContainerTest {
     }
 
     @Test
-    fun comingBackToTheFrontAsksForTheCatalogNoSoonerThanItsInterval() {
+    fun onlyLeavingTheAppAndComingBackCountsAsAForeground() {
         val app = container()
-        app.start()
+        app.start(process.lifecycle)
         idleUntil("the catalog's refresh") { requested("GET /api/carriers") }
-        // Already in front at launch: no change.
-        app.sceneActive(true)
-        app.sceneActive(false)
-        app.sceneActive(true)
-        shadowOf(Looper.getMainLooper()).idle()
-        Thread.sleep(200)
-        shadowOf(Looper.getMainLooper()).idle()
-        assertEquals(1, synchronized(paths) { paths.count { it == "GET /api/carriers" } })
+        // The server has no analytics: each start asks again.
+        idleUntil("the analytics' start") { requested("GET /api/analytics/config") }
+
+        // A dialog or the share sheet over the app pauses it and leaves it started: still in front.
+        process.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+        process.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        settle()
+        assertEquals(1, count("GET /api/analytics/config"))
+
+        // Left and back: a foreground, which starts the analytics again; the catalog, read at launch, waits its interval.
+        process.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+        settle()
+        assertEquals(1, count("GET /api/analytics/config"))
+        process.lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        idleUntil("the foreground's analytics") { count("GET /api/analytics/config") == 2 }
+        settle()
+        assertEquals(1, count("GET /api/carriers"))
     }
 }

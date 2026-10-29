@@ -48,17 +48,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        app.container.value?.sceneActive(true)
-    }
-
-    /** Covered or left (`scenePhase` leaving `.active`); a rotation, which makes the window again, is neither. */
-    override fun onPause() {
-        super.onPause()
-        if (!isChangingConfigurations) app.container.value?.sceneActive(false)
-    }
-
     /** Edge to edge with the bars' icons for the app's appearance, not the phone's, and no scrim, as on the iPhone. */
     private fun systemBars(dark: Boolean) {
         val style = if (dark) SystemBarStyle.dark(Color.TRANSPARENT) else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)

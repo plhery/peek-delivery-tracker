@@ -2,6 +2,9 @@ package com.plhery.peekdeliverytracker
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import com.plhery.peekdeliverytracker.core.AnalyticsCatalog
 import com.plhery.peekdeliverytracker.core.AnalyticsLifecycleObserver
 import com.plhery.peekdeliverytracker.core.AppConfiguration
@@ -207,7 +210,7 @@ class AppContainer(
 
     private var started = false
 
-    /** The app is in front (`scenePhase == .active`); it opens so. */
+    /** The app is in front (`scenePhase == .active`); it opens so unless it was left before its stores were made. */
     private var active = true
 
     init {
@@ -219,10 +222,19 @@ class AppContainer(
      * Reads the carrier catalog off the main thread and installs it, then starts what RootView's tasks start: the
      * session's bootstrap, the catalog's refresh, the parcels of each identity, the browser check's preparation and the
      * sign-in emails' language. Once.
+     *
+     * `lifecycle` is the process's (ProcessLifecycleOwner's), whose start and stop are the app coming to the front and
+     * leaving it (`scenePhase`): a dialog, the share sheet, a permission prompt or a window beside it in split screen
+     * covers the app without stopping it, and a rotation or a foldable opened makes the window again without a stop.
      */
-    fun start() {
+    fun start(lifecycle: Lifecycle) {
         check(!started) { "The app's stores start once." }
         started = true
+        if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) sceneActive(false)
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onStart(owner: LifecycleOwner) = sceneActive(true)
+            override fun onStop(owner: LifecycleOwner) = sceneActive(false)
+        })
         // The iPhone's detached lookup tables, built before the first card or parcel needs them; the copy too.
         scope.launch(Dispatchers.Default) {
             CarrierBrandAssets.shared
@@ -311,10 +323,10 @@ class AppContainer(
     }
 
     /**
-     * The window came to the front or left it (`scenePhase`): the parcels poll only while it is in front, and coming
-     * back asks for a newer catalog. A change of configuration (a rotation) is no change.
+     * The app came to the front or left it (`scenePhase`): the parcels poll only while it is in front, and coming back
+     * counts a foreground and asks for a newer catalog.
      */
-    fun sceneActive(active: Boolean) {
+    private fun sceneActive(active: Boolean) {
         if (active == this.active) return
         this.active = active
         parcels.setActive(active)

@@ -125,6 +125,8 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.core.splashscreen)
     implementation(libs.lifecycle.runtime.compose)
+    // Whether the app is in front or left (scenePhase), for the stores (AppContainer). Already there through emoji2.
+    implementation(libs.lifecycle.process)
     // The iPhone's materials: a blur of what lies behind (Materials.kt).
     implementation(libs.haze)
     implementation(libs.haze.blur)

@@ -55,7 +55,7 @@ class LocalizationTests {
         }
     }
 
-    /** The iPad's variant, as `Localizer(onPad: true)` reads it; Android tablets get theirs once the copy has one. */
+    /** The iPad's variant, as `Localizer(onPad: true)` reads it. */
     @Test
     fun anIPadReadsItsOwnNameWhereTheCopyNamesTheIPhone() {
         val dictionaries = localizationDictionaries()
@@ -78,6 +78,28 @@ class LocalizationTests {
         pad.language = AppLanguage.En
         assertEquals("Follow on this iPad", pad.text("native.follow.action"))
         assertEquals("Account", pad.text("native.account"))
+    }
+
+    /** Android's variant, which the app reads on every phone, foldable and tablet: "this device", Android's settings. */
+    @Test
+    fun androidReadsItsOwnWordsWhereTheCopyNamesTheIPhone() {
+        val dictionaries = localizationDictionaries()
+        val variants = dictionaries.getValue("en").keys.filter { it.endsWith(".android") }
+        assertTrue(variants.contains("native.follow.action.android"))
+        val android = Localizer(AppLanguage.En, variant = "android")
+        for (language in AppLanguage.entries) {
+            android.language = language
+            val messages = dictionaries.getValue(language.rawValue)
+            for (variant in variants) {
+                val key = variant.dropLast(".android".length)
+                assertEquals("$language.$key", messages[variant], android.text(key))
+                assertFalse("$language.$key", Regex("iPhon|iPad|Home Screen|Home-Bildschirm").containsMatchIn(android.text(key)))
+            }
+        }
+        android.language = AppLanguage.En
+        assertEquals("Follow on this device", android.text("native.follow.action"))
+        assertEquals("Open Android settings", android.text("native.openSettings"))
+        assertEquals("Account", android.text("native.account"))
     }
 
     @Test

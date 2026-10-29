@@ -180,6 +180,7 @@ class AppContainerTest {
         PreferencesDefaults.standard(context).set("de", forKey = AppLanguage.storageKey)
         val app = container()
         assertEquals(AppLanguage.De, app.localizer.language)
+        assertEquals("Auf diesem Gerät verfolgen", app.localizer.text("native.follow.action"))
         app.start(process.lifecycle)
         idleUntil("the session") { app.session.state != AuthenticationState.Loading }
 

@@ -12,6 +12,9 @@ copy.
 - The iOS app also runs on iPad and Mac. Copy it shows that names the iPhone needs a `<key>.ipad`
   variant, which an iPad reads instead, and a `<key>.mac` one for a Mac; `ios:resources` refuses
   a key without them, unless only an iPhone or an iPad shows it.
+- The Android app reads a `<key>.android` variant instead, which names "this device" and
+  Android's settings on every phone, foldable and tablet. The Android tests refuse a key the
+  app shows that names the iPhone, an Apple app or the iPhone's Home Screen without one.
 
 **Tone.** Informal and concise. Spanish and Portuguese are the European variants; Portuguese
 pages and emails declare `pt-PT`. In Portuguese the tracked parcel is always *encomenda*

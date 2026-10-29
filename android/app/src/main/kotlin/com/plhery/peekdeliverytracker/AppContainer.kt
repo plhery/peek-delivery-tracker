@@ -110,9 +110,10 @@ class AppContainer(
 
     /**
      * `Localizer()`: the language saved here, else the phone's first the app speaks, and the phone's again when they
-     * change ([deviceLanguagesChanged]).
+     * change ([deviceLanguagesChanged]). Where the copy names the iPhone, its `.android` variant names this device and
+     * Android's settings, as an iPad reads `.ipad`.
      */
-    val localizer = Localizer(deviceLanguage())
+    val localizer = Localizer(deviceLanguage(), variant = "android")
 
     /** The language the phone's languages gave, taken without being chosen; null once a change has been seen. */
     private var followed: AppLanguage? = null

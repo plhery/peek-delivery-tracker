@@ -222,7 +222,9 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'kiwi-express'
   | 'inter-express-logistics'
   | 'ats-healthcare'
-  | 'whiz-delivery';
+  | 'whiz-delivery'
+  | 'ets-express'
+  | 'rincos';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

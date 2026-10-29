@@ -892,6 +892,9 @@
   "ethiopian-post": {
     "decal": "ethiopian-post"
   },
+  "ets-express": {
+    "decal": "ets-express"
+  },
   "eurodis": {
     "decal": "eurodis"
   },
@@ -2207,6 +2210,9 @@
   },
   "relais-colis": {
     "decal": "relais-colis"
+  },
+  "rincos": {
+    "decal": "rincos"
   },
   "rivigo": {
     "decal": "rivigo"

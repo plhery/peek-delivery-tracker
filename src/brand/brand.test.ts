@@ -298,6 +298,8 @@ describe('carrier brand', () => {
       'inter-express-logistics',
       'ats-healthcare',
       'whiz-delivery',
+      'ets-express',
+      'rincos',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

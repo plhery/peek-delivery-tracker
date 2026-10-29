@@ -1,14 +1,19 @@
 package com.plhery.peekdeliverytracker.ui.theme
 
 import android.content.Context
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.CarrierCatalogRefreshResult
 import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -16,6 +21,9 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class SharedDataTest {
     private val context = ApplicationProvider.getApplicationContext<Context>()
+
+    @get:Rule
+    val compose = createComposeRule()
 
     @Test
     fun theAppCarriesEverySharedFileAsAnAsset() {
@@ -44,11 +52,29 @@ class SharedDataTest {
 
     @Test
     fun identitiesLoadOffTheMainThreadAndNameTheirCarrier() {
-        val identities = runBlocking { CarrierIdentities.load() }
+        val identities = runBlocking { CarrierIdentities.load(CarrierCatalog.shared) }
         val dhl = identities.of(CarrierId.Dhl, AppLanguage.En)
         assertEquals("dhl", dhl.family)
         assertEquals("DHL", dhl.name)
         assertEquals("dhl", dhl.decal)
         assertTrue(identities.of(CarrierId("c3x"), AppLanguage.En).decal == "c3x")
+    }
+
+    @Test
+    fun theLiveriesFollowTheAppsCatalogAsItRefreshes() {
+        val bundled = SharedResources.text("CarrierCatalog.json")
+        val renamed = bundled.replace("\"displayName\": \"DHL\"", "\"displayName\": \"DHL Renamed\"")
+        val catalog = CarrierCatalog(bundled.encodeToByteArray(), loader = { CarrierCatalog.Response(200, body = renamed.encodeToByteArray()) })
+        var shown: String? = null
+        compose.setContent {
+            CompositionLocalProvider(LocalCarrierIdentities provides rememberCarrierIdentities(catalog)) {
+                shown = carrierIdentity(CarrierId.Dhl, AppLanguage.En)?.fullName
+            }
+        }
+        compose.waitUntil(10_000) { shown != null }
+        assertEquals("DHL", shown)
+
+        assertEquals(CarrierCatalogRefreshResult.Updated, runBlocking { catalog.refresh("https://delivery.example", force = true) })
+        compose.waitUntil(10_000) { shown == "DHL Renamed" }
     }
 }

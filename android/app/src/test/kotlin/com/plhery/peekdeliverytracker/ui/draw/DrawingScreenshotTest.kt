@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.SHOT
@@ -46,7 +47,7 @@ class DrawingScreenshotTest {
     val compose = createComposeRule()
 
     private fun shoot(name: String, dark: Boolean, content: @Composable () -> Unit) {
-        val identities = runBlocking { CarrierIdentities.load() }
+        val identities = runBlocking { CarrierIdentities.load(CarrierCatalog.shared) }
         compose.setContent {
             PeekTheme(dark = dark, highContrast = false, reduceMotion = true, carrierIdentities = identities) {
                 Box(Modifier.testTag(SHOT).background(PeekTheme.colors.background).padding(12.dp)) { content() }

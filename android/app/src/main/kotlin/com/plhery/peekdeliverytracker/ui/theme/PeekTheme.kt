@@ -41,7 +41,7 @@ fun PeekTheme(
     reduceMotion: Boolean = reduceMotionSetting(),
     reduceTransparency: Boolean = reduceTransparencySetting(),
     dynamicTypeSize: DynamicTypeSize = DynamicTypeSize.of(LocalDensity.current.fontScale),
-    carrierIdentities: CarrierIdentities? = rememberCarrierIdentities(),
+    carrierIdentities: CarrierIdentities?,
     content: @Composable () -> Unit,
 ) {
     val colors = remember(dark, highContrast) { PeekColors(dark, highContrast) }

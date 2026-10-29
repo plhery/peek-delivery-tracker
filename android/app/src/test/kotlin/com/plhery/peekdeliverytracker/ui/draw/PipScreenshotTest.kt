@@ -26,6 +26,7 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.PipArtwork
 import com.plhery.peekdeliverytracker.core.PipLabel
 import com.plhery.peekdeliverytracker.core.PipMood
@@ -59,7 +60,7 @@ class PipScreenshotTest {
     @get:Rule
     val compose = createComposeRule()
 
-    private val identities by lazy { runBlocking { CarrierIdentities.load() } }
+    private val identities by lazy { runBlocking { CarrierIdentities.load(CarrierCatalog.shared) } }
 
     /** A card's ink and surface, light and dark. */
     private fun card(dark: Boolean) = if (dark) Color(0xFFC9D6BD) to Color(0xFF263022) else Color(0xFF55654B) to Color(0xFFF4F6F1)

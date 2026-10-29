@@ -15,8 +15,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
- * Each carrier's livery (colours, truck decal, names) from Brand.json and the carrier catalog, both decoded once and
- * off the main thread: they are over a megabyte each.
+ * Each carrier's livery (colours, truck decal, names) from Brand.json and the app's carrier catalog, both decoded once
+ * and off the main thread: they are over a megabyte each. Made again for each change of the catalog, so a screen that
+ * remembers a carrier's identity takes the new one, as the iPhone's views observing the catalog do.
  */
 @Stable
 class CarrierIdentities private constructor(private val catalog: CarrierCatalog) {
@@ -25,21 +26,27 @@ class CarrierIdentities private constructor(private val catalog: CarrierCatalog)
         CarrierVisualIdentity.of(carrier, catalog, language)
 
     companion object {
-        /** Decodes the brand data and the app's catalog on the IO dispatcher, or finds them decoded already. */
-        suspend fun load(): CarrierIdentities = withContext(Dispatchers.IO) {
+        /** Decodes the brand data on the IO dispatcher, or finds it decoded already, for the liveries of `catalog`. */
+        suspend fun load(catalog: CarrierCatalog): CarrierIdentities = withContext(Dispatchers.IO) {
             CarrierBrandAssets.shared
-            CarrierIdentities(CarrierCatalog.shared)
+            CarrierIdentities(catalog)
         }
     }
 }
 
-/** The identities once loaded; null while Brand.json is still being read. */
+/** The identities once loaded; null while the catalog or Brand.json is still being read. */
 val LocalCarrierIdentities = staticCompositionLocalOf<CarrierIdentities?> { null }
 
-/** Starts loading the identities, giving null until they are ready. */
+/**
+ * The identities of the app's catalog (AppContainer's, null until it is read), made again as it refreshes; null until
+ * there is a catalog and Brand.json has been read.
+ */
 @Composable
-fun rememberCarrierIdentities(): CarrierIdentities? {
-    val identities by produceState<CarrierIdentities?>(null) { value = CarrierIdentities.load() }
+fun rememberCarrierIdentities(catalog: CarrierCatalog?): CarrierIdentities? {
+    val identities by produceState<CarrierIdentities?>(null, catalog) {
+        if (catalog == null) return@produceState
+        catalog.definitionsFlow.collect { value = CarrierIdentities.load(catalog) }
+    }
     return identities
 }
 

@@ -12,6 +12,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -20,6 +21,7 @@ import com.plhery.peekdeliverytracker.ui.draw.PeekMark
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
+import com.plhery.peekdeliverytracker.ui.theme.rememberCarrierIdentities
 
 class MainActivity : ComponentActivity() {
     private val app: PeekApplication get() = application as PeekApplication
@@ -40,7 +42,9 @@ class MainActivity : ComponentActivity() {
                 systemBars(dark)
                 onDispose {}
             }
-            PeekTheme(appearance = appearance, dark = dark) {
+            // The liveries from the container's catalog, never from one read before it is installed.
+            val catalog = app.container.collectAsState().value?.catalog?.collectAsState()?.value
+            PeekTheme(appearance = appearance, dark = dark, carrierIdentities = rememberCarrierIdentities(catalog)) {
                 Box(Modifier.fillMaxSize().background(PeekTheme.colors.background), contentAlignment = Alignment.Center) {
                     PeekMark(78.dp)
                 }

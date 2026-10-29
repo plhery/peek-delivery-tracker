@@ -1,6 +1,6 @@
 import 'server-only';
 import { detectCarrierMatch, inferStage, type CarrierResult } from 'universal-parcel-scraper';
-import { carrierIdFromName, latestResultTime } from 'universal-parcel-scraper/app';
+import { brandCarrierIds, carrierIdFromName, latestResultTime } from 'universal-parcel-scraper/app';
 import type { ApiCarrierId } from '../generated/apiContract';
 import { AUTOMATIC_CARRIER_IDS, requiredRequirements } from './carriers';
 
@@ -11,18 +11,30 @@ function ownsNumber(carrier: string, number: string): boolean {
 }
 
 /**
+ * Whether a provider names only a brand with several networks (GLS), one of which is `network`.
+ * The name alone settles no network.
+ */
+export function namesBrandOf(result: CarrierResult, network: string): boolean {
+  const names: unknown[] = Array.isArray(result.reported_carriers) ? result.reported_carriers : [];
+  return names.length === 1 && typeof names[0] === 'string' && !carrierIdFromName(names[0])
+    && brandCarrierIds(names[0]).includes(network);
+}
+
+/**
  * Identify an unselected parcel from the carrier a provider names and dated
  * shipment movement. Several names are one journey's legs (Mayi Yinfu and the
  * DHL networks that deliver it): the one the provider settled on counts only
- * when the number's own rules point to it alone. Callers then ask that
- * carrier's adapter whether it refuses the number (numberRefusal.ts).
+ * when the number's own rules point to it alone. A brand's name alone (GLS)
+ * counts for the `network` of it that the caller settled on. Callers then ask
+ * that carrier's adapter whether it refuses the number (numberRefusal.ts).
  */
-export function providerCarrier(result: CarrierResult, number: string): ApiCarrierId | undefined {
+export function providerCarrier(result: CarrierResult, number: string, network?: string): ApiCarrierId | undefined {
   const names: unknown[] = Array.isArray(result.reported_carriers) ? result.reported_carriers : [];
   if (result.tracking_provider === 'UPU' || !names.length || names.length > 4
     || names.some((name) => typeof name !== 'string')) return undefined;
   const discovered = typeof result.discovered_carrier === 'string' ? result.discovered_carrier : undefined;
-  const carrier = names.length === 1 ? carrierIdFromName(String(names[0]))
+  const carrier = names.length === 1
+    ? carrierIdFromName(String(names[0])) ?? (network && namesBrandOf(result, network) ? network : undefined)
     : discovered && ownsNumber(discovered, number) ? discovered : undefined;
   if (!carrier || carrier !== discovered || !AUTOMATIC_CARRIER_IDS.has(carrier)
     || requiredRequirements(carrier, number).length) return undefined;

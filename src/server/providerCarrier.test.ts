@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import type { CarrierResult } from 'universal-parcel-scraper';
-import { providerCarrier } from './providerCarrier';
+import { namesBrandOf, providerCarrier } from './providerCarrier';
 
 const history: CarrierResult = { tracking_provider: 'Ship24', discovered_carrier: 'dhl-express',
   reported_carriers: ['DHL Express'], events: [{ time: '2026-09-10T11:00:00Z', stage: 'delivered', description: 'Delivered' }] };
@@ -38,4 +38,19 @@ it('uses the journey owner of several named carriers when the number points to i
 
 it('keeps a carrier requiring recipient input unresolved', () => {
   expect(providerCarrier({ ...history, discovered_carrier: 'gls-ch', reported_carriers: ['GLS Switzerland'] }, '12345678')).toBeUndefined();
+});
+
+it('names the network of a brand the caller settled on, only for the brand\'s name alone', () => {
+  const gls = { ...history, discovered_carrier: 'gls-at', reported_carriers: ['GLS'] };
+  expect(namesBrandOf(gls, 'gls-at')).toBe(true);
+  expect(providerCarrier(gls, '12345678901', 'gls-at')).toBe('gls-at');
+  // Without that network, a network outside the brand, or with another name beside it, the name settles nothing.
+  expect(providerCarrier(gls, '12345678901')).toBeUndefined();
+  expect(namesBrandOf(gls, 'dpd')).toBe(false);
+  expect(providerCarrier({ ...gls, discovered_carrier: 'dpd' }, '12345678901', 'dpd')).toBeUndefined();
+  expect(namesBrandOf({ ...gls, reported_carriers: ['GLS', 'DPD'] }, 'gls-at')).toBe(false);
+  // A name the catalog places itself is not left to the caller.
+  expect(namesBrandOf({ ...gls, reported_carriers: ['GLS Switzerland'] }, 'gls-ch')).toBe(false);
+  // Nor is a network whose lookup requires the postcode taken.
+  expect(providerCarrier({ ...gls, discovered_carrier: 'gls-de' }, '12345678901', 'gls-de')).toBeUndefined();
 });

@@ -25,7 +25,9 @@ asked identifies an unknown parcel; conflicting names, a cancelled provider, bar
 registration-only history stay unresolved, and so does a carrier whose adapter refuses the number.
 Several names from one provider are legs of one journey (Mayi Yinfu and the DHL network that
 delivers it): the carrier the provider settled on counts only when the number's own rules
-point to it alone.
+point to it alone. A bare brand (GLS) counts for the network of it that recognition settled
+on in the same check by the parcel's country, when that network knows the number and its
+lookup requires no input (GLS Austria for an eleven-digit number in Austria).
 That check runs the adapter's own number validation with nothing sent. The lookups name no carrier to the providers: none is
 filed yet, and a guess sent with them could come back as their answer. Direct confirmation remains necessary to replace a selected carrier. The Add button stays
 available while the check runs, and the saved parcel continues the full lookup chain.
@@ -516,7 +518,7 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   current leg. A carrier that needs the user's input is saved as
   `routing.input_needed`, and the parcel asks the user for it. So is one whose lookup finds
   the parcel behind an input it lists as optional (DHL's postcode, when several shipments
-  share a twelve-digit number); a lookup that fails on the way leaves the request.
+  share a twelve-digit number, and GLS Austria's); a lookup that fails on the way leaves the request.
   The owner adding the postcode files the parcel under that carrier. Until then the providers
   serve the parcel and are asked daily by day. The parcel's own carrier asks the same way when
   its adapter needs a postcode it lists for the number and the parcel has none (PostNL's for a

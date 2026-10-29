@@ -1176,6 +1176,47 @@ describe('persistent tracking routing', () => {
       expect(later.direct).toHaveBeenCalledOnce();
       expect(answered.result.routing).not.toHaveProperty('input_needed');
     });
+    describe('a provider naming only GLS', () => {
+      // GLS's eleven-digit parcel numbers carry no country: one group service answers for every
+      // network, and GLS Austria's lookup shows the scans only with the postcode it lists as optional.
+      const number = '12345678901';
+      const check = async (hint: string | undefined, provider: CarrierResult) => {
+        const { router, direct, recognize, universal } = setup();
+        recognize.mockImplementation(knows('gls-at', 'gls-ch', 'gls-de'));
+        direct.mockRejectedValue(new InputRequiredError('GLS', 'the recipient postcode', 'GLS detailed tracking requires the recipient postcode'));
+        universal.mockResolvedValue(provider);
+        const result = await router.fetch(parcel({ tracking_number: number,
+          carrier_data: hint ? { lookup_country_hint: hint } : {} }), false);
+        return { result, direct };
+      };
+
+      it('files the parcel under the network its country settles on, and asks that one for the postcode', async () => {
+        const { result, direct } = await check('AT', { ...history(), reported_carriers: ['GLS'] });
+        expect(direct).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ tracking_number: number, dpd_postcode: null }), 'gls-at');
+        expect(result).toMatchObject({ correction: { carrier: 'gls-at', trackingUrl: null, postcode: null },
+          result: { current_stage: 'in_transit', discovered_carrier: 'gls-at', routing: { configured_carrier: 'gls-at',
+            discovered_carrier: 'gls-at', input_needed: { carrier: 'gls-at', field: 'dpdPostcode' } } } });
+        expect(result.result.routing).not.toHaveProperty('confirmed_carrier');
+      });
+
+      it.each([
+        ['no country', undefined, ['GLS']],
+        ['a country no network it knows is at home in', 'FR', ['GLS']],
+        ['a German one, whose network needs the postcode', 'DE', ['GLS']],
+        ['a country, with another carrier named beside GLS', 'AT', ['GLS', 'Austrian Post']],
+      ] as const)('leaves the parcel unfiled with %s', async (_label, hint, names) => {
+        const { result } = await check(hint, { ...history(), reported_carriers: [...names] });
+        expect(result.correction).toBeUndefined();
+        expect(result.result.routing).toMatchObject({ configured_carrier: 'unknown' });
+        expect(result.result).not.toHaveProperty('discovered_carrier');
+      });
+
+      it('leaves the parcel unfiled while the provider dates no progress', async () => {
+        const { result } = await check('AT', { ...thinHistory(), reported_carriers: ['GLS'] });
+        expect(result.correction).toBeUndefined();
+        expect(result.result.routing).toMatchObject({ configured_carrier: 'unknown', input_needed: { carrier: 'gls-at', field: 'dpdPostcode' } });
+      });
+    });
     it.each(['3SABCD826405193', '3SABCD8264051'])('offers the owner the postcode the filed carrier asks for (%s)', async (number) => {
       // PostNL shows a 3S parcel sent within the Netherlands only with its delivery postcode.
       const needs = () => new InputRequiredError('PostNL', 'postcode', 'PostNL shows a parcel sent within the Netherlands only with its delivery postcode');

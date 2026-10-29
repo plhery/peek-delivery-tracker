@@ -22,7 +22,7 @@ import { eventTimestamp, latestResultTime, resultTimezone } from 'universal-parc
 import type { Recognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
 import { BROWSER_RECOGNITION_BUDGET_MS, MAX_BROWSER_RECOGNITIONS } from './browserRecognition';
-import { providerCarrier } from './providerCarrier';
+import { namesBrandOf, providerCarrier } from './providerCarrier';
 import { normalizedLookupCountry } from './lookupCountry';
 import manifest from '../../package.json';
 import { getRecognitionPriorities } from './recognitionRanking';
@@ -722,6 +722,9 @@ export class TrackingRouter {
     const localAnswers = new Map<string, { value: RoutedResult; history: JsonObject | undefined; confirm: () => void }>();
     // The carrier this check's recognition settled on alone.
     let recognized: string | undefined;
+    // That carrier when the parcel's country settled it among a brand's networks and its lookup
+    // requires no input (GLS Austria for a parcel in Austria): a provider naming only the brand names it.
+    let homeNetwork: string | undefined;
     // Asked again, or its answer on local clocks taken, a carrier has nothing set aside.
     const clearSetAside = (carrier: string) => {
       if (!state.set_aside?.[carrier]) return;
@@ -888,7 +891,7 @@ export class TrackingRouter {
         && !metadata.original_carrier && universalNumber === number && sources.includes(provider as UniversalSource);
       // A provider can name an unknown parcel without pretending the carrier answered,
       // but not a carrier whose adapter refuses the number.
-      const identified = unnamed ? providerCarrier(value.result, number) : undefined;
+      const identified = unnamed ? providerCarrier(value.result, number, homeNetwork) : undefined;
       const providerNamed = identified && state.discovered_carrier === identified
         && !refusedNumberCode(state.failures[identified]?.user_error) ? identified : undefined;
       // The carrier detection names, or else the one this provider names, answered
@@ -1114,7 +1117,8 @@ export class TrackingRouter {
         const failure = fail(carrier, error);
         if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
         writtenAhead.push(...writtenAheadClocks(error));
-        if (probe && error instanceof CarrierError && error.reason === 'parcel_found') heldDirect.add(carrier);
+        // A probe asks only a carrier that knows the number: wanting an input, it holds the parcel behind it.
+        if (probe && failure.kind === 'input_required') heldDirect.add(carrier);
         if (probe && ['rate_limited', 'verification', 'schema', 'transport'].includes(failure.kind)) unsettledDirect.add(carrier);
         // The carrier does not issue this number (a failed check digit): a
         // provider's name for it, saved by an older check, stops being asked.
@@ -1295,6 +1299,8 @@ export class TrackingRouter {
       }
       signal?.throwIfAborted();
       recognized = settleRecognition(outcomes, now()).carrier;
+      homeNetwork = recognized && !requiredRequirements(recognized, number).length
+        && outcomes.some((outcome) => outcome.carrier === recognized && outcome.countryMatch === 'home') ? recognized : undefined;
       // A carrier that knows the number and needs no input gets a full
       // lookup, adopted only on real progress (a pre-advice is not enough).
       for (const outcome of outcomes) {
@@ -1318,7 +1324,7 @@ export class TrackingRouter {
       // A carrier that knows the number but needs the user's input (GLS's
       // postcode) is offered to the user instead, as is one whose lookup found
       // the parcel behind an input it lists as optional (DHL's postcode, when
-      // several shipments share the number).
+      // several shipments share the number, and GLS Austria's).
       const asking = outcomes.map((outcome) => ({ ...outcome, needsInput: outcome.needsInput
         ?? (heldDirect.has(outcome.carrier) ? activeRequirements(outcome.carrier, number)[0]?.field ?? null : null) }))
         .filter((outcome) => outcome.needsInput);
@@ -1543,6 +1549,10 @@ export class TrackingRouter {
       if (!withoutProgress && !directCarrier(declared) && declared !== 'unknown' && declared !== 'intl-post' && !preferred) opportunity(declared);
       state.preferred_provider = withoutProgress || chosen === 'UPU' ? preferred : chosen;
       state.preferred_number = state.preferred_provider ? universalNumber : undefined;
+      // A provider naming only a brand (GLS) names the network of it the parcel's country
+      // settled recognition on, which knows the number.
+      if (homeNetwork && !withoutProgress && typeof value.result.discovered_carrier !== 'string'
+        && namesBrandOf(value.result, homeNetwork)) value = { ...value, result: { ...value.result, discovered_carrier: homeNetwork } };
       // A carrier whose adapter refuses the number as one it does not issue is no
       // hint: asked, it would only refuse again. The check sends nothing.
       const refused = typeof value.result.discovered_carrier === 'string'

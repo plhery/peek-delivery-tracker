@@ -210,7 +210,7 @@ fun DeliveriesTab(
             val navigation = navigator.navigation
             when (arrangement) {
                 // The page that left stays on the stack until it has gone back into its card.
-                DeliveriesArrangement.Stacked -> state.zoom.drawn(navigation.chosen)?.let { add(DeliveriesEntry.ParcelPage(it as UUID)) }
+                DeliveriesArrangement.Stacked -> (navigation.chosen ?: state.zoom.covered)?.let { add(DeliveriesEntry.ParcelPage(it as UUID)) }
                 DeliveriesArrangement.SideBySide -> navigation.shown?.let { add(DeliveriesEntry.ParcelPage(it)) }
             }
         }

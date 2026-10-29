@@ -37,22 +37,22 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocusNode
 class ZoomTransition {
     internal val sources = HashMap<Any, ZoomSourceNode>()
 
-    /** The source whose page is over it, or flies out of it or back into it: unseen meanwhile, as the iPhone's. */
-    internal var covered: Any? by mutableStateOf(null)
-
-    /** How far the page has come over what lies under it, from 0 to 1. */
-    internal var behindNow: () -> Float = { 0f }
-
-    val behind: Float get() = behindNow()
+    /** The flight of the stack drawing the pages. */
+    internal var flight: ZoomFlight? by mutableStateOf(null)
+        private set
 
     /**
-     * The page going back into its source, which stays on the stack until it lands: the stack drawing the pages
-     * keeps it ([drawn]).
+     * The page over the root, or on its way: one that has left the stack stays drawn until it has gone back into its
+     * source. A stack drawing pages that zoom draws `top ?: covered`, so that a page that leaves stays drawn from the
+     * frame it leaves in until it lands.
      */
-    var closing: Any? by mutableStateOf(null)
-        internal set
+    val covered: Any? get() = flight?.id
 
-    private var top: Any? = null
+    /** The source unseen while its page is over it or on its way, as the iPhone's is; none in Reduce Motion's crossfade. */
+    internal val hidden: Any? get() = flight?.hidden
+
+    /** How far the page has come over what lies under it, from 0 to 1. */
+    val behind: Float get() = flight?.behind() ?: 0f
 
     /** The page to show at rest as it next comes on top ([showStill]). */
     internal var still: Any? = null
@@ -66,27 +66,15 @@ class ZoomTransition {
         still = id
     }
 
-    /**
-     * The page to draw over the root as `top` is on top of the stack: `top` itself or, once it left, the page going
-     * back into its source until it lands. A stack drawing pages that zoom asks for it each time it is drawn, so that
-     * a page that leaves stays drawn from the frame it leaves in.
-     */
-    fun drawn(top: Any?): Any? {
-        if (top != this.top) {
-            val left = this.top
-            this.top = top
-            closing = if (top == null) left else null
-        }
-        return top ?: closing
+    internal fun attach(flight: ZoomFlight) {
+        this.flight = flight
     }
 
     /** Forgets the pages as the stack drawing them goes. */
-    internal fun reset() {
-        top = null
-        closing = null
+    internal fun detach(flight: ZoomFlight) {
+        if (this.flight !== flight) return
+        this.flight = null
         still = null
-        covered = null
-        behindNow = { 0f }
     }
 }
 
@@ -203,6 +191,6 @@ internal class ZoomSourceNode(
             return
         }
         layer.record(size.toIntSize()) { this@draw.drawContent() }
-        if (transition.covered != id) drawLayer(layer)
+        if (transition.hidden != id) drawLayer(layer)
     }
 }

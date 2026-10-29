@@ -309,7 +309,6 @@ class DeliveriesTabTest {
         assertWindow(page())
         compose.onNode(hasText("Birthday gift", substring = true) and hasAnyAncestor(hasTestTag(PARCEL_PAGE))).assertExists()
         assertEquals(other, deliveries.zoom.covered)
-        assertNull(deliveries.zoom.closing)
         compose.onNodeWithTag(TAB_BAR).assertDoesNotExist()
     }
 

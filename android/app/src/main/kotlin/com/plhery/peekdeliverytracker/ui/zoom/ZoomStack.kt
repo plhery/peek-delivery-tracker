@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.zoom
 
 import android.graphics.BlurMaskFilter
 import android.graphics.Paint
+import android.graphics.Path
 import android.view.RoundedCorner
 import androidx.activity.BackEventCompat
 import androidx.activity.compose.PredictiveBackHandler
@@ -36,18 +37,14 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.GraphicsLayerScope
 import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.graphicsLayer
@@ -100,9 +97,9 @@ import kotlinx.coroutines.withContext
  * source ([zoomSource]) as it opens and shrinks back into it as it goes, as the iPhone's parcel page does out of its
  * card.
  *
- * `top` is the id of the page on top of the stack, null with the root alone. `page` draws the page drawn: `top`'s or,
- * once it has left, the one going back into its source, which [ZoomTransition.drawn] keeps on the stack until it
- * lands. `onBack` pops the page.
+ * `top` is the id of the page on top of the stack, null with the root alone. `page` draws `top`'s page or, once it has
+ * left, the one going back into its source until it lands: the stack draws `top ?: transition.covered`
+ * ([ZoomTransition.covered]). `onBack` pops the page.
  *
  * - Opening, the page's container springs from its source's frame to the window's on a critically damped spring of
  *   response 0.32 s, and the source's picture gives way to the page. The root recedes and dims under it, and the tab
@@ -137,11 +134,11 @@ fun ZoomStack(
     val view = LocalView.current
     val hinge = LocalWindowHinge.current
     val safe = WindowInsets.systemBars.union(WindowInsets.displayCutout)
-    val flight = remember(transition) { ZoomFlight(transition, top ?: transition.closing) }
+    val flight = remember(transition) { ZoomFlight(transition, top) }
     val scope = rememberCoroutineScope()
     val back by rememberUpdatedState(onBack)
     flight.reduceMotion = reduceMotion
-    flight.follow(top, top ?: transition.closing) {
+    flight.follow(top) {
         // Read as a flight sets off, and only then.
         val bounds = flight.bounds
         Surroundings(
@@ -334,13 +331,15 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     /** Whether the predictive back gesture moves the page: not under Reduce Motion, and only from rest. */
     fun canFollowBack(): Boolean = id != null && !crossfade && !reduceMotion && (backing || atRest)
 
+    /** The source unseen under the page: none in Reduce Motion's crossfade, where the page fades in over it. */
+    val hidden: Any? get() = if (crossfade) null else id
+
     fun attach() {
-        transition.covered = id
-        transition.behindNow = ::behind
+        transition.attach(this)
     }
 
     fun detach() {
-        transition.reset()
+        transition.detach(this)
     }
 
     fun place(coordinates: LayoutCoordinates) {
@@ -349,40 +348,38 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     }
 
     /** Sets a flight off as the page on top changes. Called as the stack is drawn, so that it draws its first frame. */
-    fun follow(top: Any?, drawn: Any?, surroundings: () -> Surroundings) {
+    fun follow(top: Any?, surroundings: () -> Surroundings) {
         this.surroundings = surroundings
         when {
-            top != null -> when {
-                top == id && phase != Phase.Closing -> Unit
-                // Opened again on its way back: it turns round.
-                top == id -> {
-                    heldAt = null
-                    barHeld = false
-                    start(Phase.Opening)
-                }
-                // Another page in place of the open one, one shown still, or one before the root was laid out: it
-                // shows at once.
-                (id != null && phase != Phase.Closing) || top == transition.still || bounds.isEmpty -> {
-                    transition.still = null
-                    show(top)
-                    heldAt = null
-                    progress = 1f
-                    start(Phase.Rest)
-                }
-                else -> {
-                    show(top)
-                    val around = surroundings()
-                    crossfade = around.reduceMotion
-                    resolve(top, around)
-                    heldAt = null
-                    barHeld = false
-                    progress = 0f
-                    velocity = 0f
-                    start(Phase.Opening)
-                }
+            // The page left the stack: it goes back into its source, staying drawn until it lands.
+            top == null -> if (id != null && phase != Phase.Closing) beginClose()
+            top == id && phase != Phase.Closing -> Unit
+            // Opened again on its way back: it turns round.
+            top == id -> {
+                heldAt = null
+                barHeld = false
+                start(Phase.Opening)
             }
-            drawn == null -> if (id != null) land()
-            drawn == id && phase != Phase.Closing -> beginClose()
+            // Another page in place of the open one, one shown still, or one before the root was laid out: it shows
+            // at once.
+            (id != null && phase != Phase.Closing) || top == transition.still || bounds.isEmpty -> {
+                transition.still = null
+                id = top
+                heldAt = null
+                progress = 1f
+                start(Phase.Rest)
+            }
+            else -> {
+                id = top
+                val around = surroundings()
+                crossfade = around.reduceMotion
+                resolve(top, around)
+                heldAt = null
+                barHeld = false
+                progress = 0f
+                velocity = 0f
+                start(Phase.Opening)
+            }
         }
     }
 
@@ -404,11 +401,6 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     private fun start(phase: Phase) {
         this.phase = phase
         run++
-    }
-
-    private fun show(id: Any) {
-        this.id = id
-        transition.covered = id
     }
 
     /** Where the page flies from and to: its source where it can be seen, the middle of the window otherwise. */
@@ -439,9 +431,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
 
     /** The page has gone back into its source: the source shows again, and the page leaves the stack. */
     fun land() {
-        if (transition.closing == id) transition.closing = null
         id = null
-        transition.covered = null
         phase = Phase.Rest
         progress = 0f
         velocity = 0f
@@ -490,7 +480,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     fun radius(): Float = if (atRest || crossfade) 0f else ZoomGeometry.cornerRadius(sourceRadius, displayRadius, progress)
 
     /** How far the page has come over the root. Under Reduce Motion the root stays as it is. */
-    private fun behind(): Float = if (id == null || crossfade) 0f else progress
+    fun behind(): Float = if (id == null || crossfade) 0f else progress
 
     /** The page fades in under Reduce Motion, and where it has no source to grow out of. */
     private fun containerOpacity(): Float = when {
@@ -525,13 +515,16 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         if (opacity <= 0f) return@with
         val frame = container()
         val radius = radius()
-        // Around the page only, which may let it through as it fades.
-        val page = Path().apply { addRoundRect(RoundRect(frame, radius, radius)) }
-        clipPath(page, ClipOp.Difference) {
-            drawIntoCanvas { canvas ->
-                shadow.paint.color = Color.Black.copy(alpha = opacity).toArgb()
-                canvas.nativeCanvas.drawRoundRect(frame.left, frame.top, frame.right, frame.bottom, radius, radius, shadow.paint)
-            }
+        drawIntoCanvas { drawn ->
+            val canvas = drawn.nativeCanvas
+            // Around the page only, which may let it through as it fades.
+            shadow.page.rewind()
+            shadow.page.addRoundRect(frame.left, frame.top, frame.right, frame.bottom, radius, radius, Path.Direction.CW)
+            canvas.save()
+            canvas.clipOutPath(shadow.page)
+            shadow.paint.color = Color.Black.copy(alpha = opacity).toArgb()
+            canvas.drawRoundRect(frame.left, frame.top, frame.right, frame.bottom, radius, radius, shadow.paint)
+            canvas.restore()
         }
     }
 
@@ -632,12 +625,13 @@ private data class ContainerCut(val height: Float, val radius: Float) : Shape {
     }
 }
 
-/** The page's shadow: black blurred as a Gaussian 30 points wide, as the iPhone's is. */
+/** The page's shadow: black blurred as a Gaussian 30 points wide, as the iPhone's is, and the page it is cut around. */
 internal class ShadowPaint(density: Density) {
     val paint = Paint().apply {
         isAntiAlias = true
         maskFilter = BlurMaskFilter(with(density) { gaussianBlurRadius(ZoomGeometry.SHADOW_DEVIATION.dp).toPx() }, BlurMaskFilter.Blur.NORMAL)
     }
+    val page = Path()
 }
 
 /**

@@ -190,7 +190,19 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'sentral-cargo'
   | 'depo'
   | 'e-cargo'
-  | 'sengi-express';
+  | 'sengi-express'
+  | 'trans-ontario'
+  | 'pallex'
+  | 'airmee'
+  | 'fofr'
+  | 'akis-express'
+  | 'collicare'
+  | 'western-bid'
+  | 'ace-lt'
+  | 'ace-lv'
+  | 'kuayue-express'
+  | 'islandwide-express'
+  | 'piggy-express';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

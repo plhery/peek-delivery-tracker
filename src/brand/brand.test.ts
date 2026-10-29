@@ -266,6 +266,18 @@ describe('carrier brand', () => {
       'depo',
       'e-cargo',
       'sengi-express',
+      'trans-ontario',
+      'pallex',
+      'airmee',
+      'fofr',
+      'akis-express',
+      'collicare',
+      'western-bid',
+      'ace-lt',
+      'ace-lv',
+      'kuayue-express',
+      'islandwide-express',
+      'piggy-express',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

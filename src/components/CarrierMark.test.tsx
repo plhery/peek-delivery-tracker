@@ -202,6 +202,18 @@ describe('carrier mark', () => {
     'depo',
     'e-cargo',
     'sengi-express',
+    'trans-ontario',
+    'pallex',
+    'airmee',
+    'fofr',
+    'akis-express',
+    'collicare',
+    'western-bid',
+    'ace-lt',
+    'ace-lv',
+    'kuayue-express',
+    'islandwide-express',
+    'piggy-express',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

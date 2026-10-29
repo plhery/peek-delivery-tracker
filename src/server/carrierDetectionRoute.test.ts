@@ -120,6 +120,17 @@ it('asks nobody about a mobile number as dialled in the device region, and refus
   expect((await detect('CH')).status).toBe(200);
 });
 
+it("refuses a placeholder and asks nobody about it, Amazon's tracker included", async () => {
+  const amazonCheck = vi.spyOn(amazon, 'checkAmazonShipping').mockResolvedValue('available');
+  for (const trackingNumber of ['UK1234567890', 'TBA123456789012']) {
+    const refused = await request(trackingNumber);
+    expect(refused.status).toBe(400);
+    expect((await refused.json()).error).toMatch('not a real tracking number');
+  }
+  expect(amazonCheck).not.toHaveBeenCalled();
+  expect(recognize).not.toHaveBeenCalled();
+});
+
 it('returns the one carrier that knows an ambiguous number', async () => {
   recognize.mockImplementation(knows('dpd'));
   const response = await request('0608 0000 0000 02');

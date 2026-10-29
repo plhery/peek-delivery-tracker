@@ -172,8 +172,8 @@ export function AddParcelSheet({
     && settledTrackingInput.trim() && !settledTrackingNumber);
   const normalizedNumber = normalizeTrackingNumber(trackingNumber);
   const amazonNumber = isAmazonTrackingNumber(normalizedNumber);
-  // Amazon numbers must be verified before they can be added.
-  const shouldLookup = Boolean(apiAuth) && amazonNumber;
+  // Amazon numbers must be verified before they can be added; a placeholder is asked about nowhere.
+  const shouldLookup = Boolean(apiAuth) && amazonNumber && !notTrackingNumber(normalizedNumber, dialling);
   const lookingUp = shouldLookup && verifiedCarrier?.trackingNumber !== normalizedNumber;
   const currentVerification = verifiedCarrier?.trackingNumber === normalizedNumber ? verifiedCarrier : undefined;
   // The check keeps running when a carrier is picked by hand meanwhile: its

@@ -8,7 +8,7 @@ import { createAdapterRegistry } from './adapterRegistry';
 import { BROWSER_RECOGNITION_BUDGET_MS, MAX_BROWSER_RECOGNITIONS, recognizeBrowser } from './browserRecognition';
 import { checkAmazonShipping } from './amazonShippingEligibility';
 import { HttpError } from './api';
-import { isPhoneNumber, MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
+import { isPhoneNumber, isPlaceholderNumber, MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
 import { preflightTracking } from './trackingPreflight';
 import { recordDetection } from './metrics';
 import { logOperationalEvent } from './observability';
@@ -120,6 +120,8 @@ export async function detectCarrier(
   // universal provider either, is asked about it.
   if (isPhoneNumber(trackingNumber, countryHint)) throw new HttpError(400, PLACEHOLDER_MESSAGE);
   if (isAmazonTrackingNumber(trackingNumber)) {
+    // Every carrier's lookup refuses a placeholder, but Amazon's eligibility check asks its tracker directly.
+    if (isPlaceholderNumber(trackingNumber)) throw new HttpError(400, PLACEHOLDER_MESSAGE);
     await beforeAsking?.();
     const amazonShippingStatus = await checkAmazonShipping(trackingNumber);
     recordDetection('high');

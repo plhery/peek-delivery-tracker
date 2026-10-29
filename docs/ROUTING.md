@@ -165,7 +165,8 @@ shipments, and the scraper looks it up nowhere (`placeholder_number`). A check r
 fails at once, at any stage, as `carrier:placeholder_number`, which asks the owner to check
 the number and add the parcel again. Adding one is refused (400), and the web, front-door
 and iOS Add hold it back as they hold a pickup code, except in a demo build, whose samples
-are placeholders. Whatever was stored from such a number is served
+are placeholders. Detecting one in Amazon's shape is refused too: Amazon's public-tracking
+check asks its tracker directly, without the scraper's refusal. Whatever was stored from such a number is served
 without its carrier scans, status line, estimate and carrier data, with that error, whether
 or not a check ran since ([`eventPlaces.ts`](../src/server/eventPlaces.ts)); the rows stay
 stored. A mobile number as dialled in the reader's country (`isPhoneNumber`) is no carrier's

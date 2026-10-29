@@ -346,6 +346,14 @@ describe('public Amazon Shipping discovery', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: /^add parcel$/i })).toBeEnabled());
   });
 
+  it("asks Amazon's tracker nothing about a placeholder in Amazon's shape", async () => {
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="UK1234567890" />);
+    expect(await screen.findByText(/doesn’t look like a real tracking number/)).toBeInTheDocument();
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    expect(lookupCarrier).not.toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: /^add parcel$/i })).toBeDisabled();
+  });
+
   it('ignores stale confirmation when the user changes the number', async () => {
     let finish!: (value: Awaited<ReturnType<typeof lookupCarrier>>) => void;
     vi.mocked(lookupCarrier).mockReturnValueOnce(new Promise((resolve) => { finish = resolve; })).mockResolvedValue({

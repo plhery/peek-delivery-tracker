@@ -218,7 +218,7 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   const shipping = amazon && answer?.carrier === 'amazon-shipping'
     && ['available', 'expired'].includes(answer.amazonShippingStatus ?? '');
   const account: Survey['account'] = !match || onDevice ? null
-    : amazon ? shipping ? null : !answer ? settledForAsking ? 'checking' : null
+    : amazon ? shipping ? null : !answer ? settledForAsking && !placeholder ? 'checking' : null
       : answer.amazonShippingStatus === 'unavailable' ? 'unavailable' : 'required'
       : state.carrier !== 'auto' && requiresAmazonAccount(state.carrier) ? 'required' : null;
 
@@ -251,7 +251,9 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
     !(requirement.field === 'trackingUrl' && pastedUrl && requirementSatisfied(requirement, pastedUrl)));
   const missing = requirements.find((requirement) => !requirementSatisfied(requirement, input(requirement.field))) ?? null;
 
-  const ask = match && !onDevice && !state.job && settledForAsking && !answer && (amazon || (recognizable && state.carrier === 'auto')) ? normalized : null;
+  // Amazon's tracker is no exception: a placeholder is asked about nowhere.
+  const ask = match && !onDevice && !state.job && settledForAsking && !answer
+    && ((amazon && !placeholder) || (recognizable && state.carrier === 'auto')) ? normalized : null;
   const need: Survey['need'] = order ? 'order' : !match ? 'number' : typo ? 'typo' : onDevice ? null : code || placeholder ? 'code'
     : account === 'checking' || check.status === 'asking' ? 'wait'
       : account ? 'account'

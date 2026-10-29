@@ -473,6 +473,12 @@ describe('Amazon numbers', () => {
     expect(confirmed.job).toEqual({ type: 'lookup', carrier: 'amazon-shipping', input: { trackingNumber: AMAZON, carrier: 'amazon-shipping' } });
   });
 
+  it("asks Amazon's tracker nothing about a placeholder in Amazon's shape", () => {
+    const pressed = run([typed('UK1234567890'), track]);
+    expect(survey(pressed)).toMatchObject({ placeholder: true, need: 'code', account: null, ask: null });
+    expect(pressed.job).toBeNull();
+  });
+
   it('sends the visitor to their Amazon account when the parcel is not public', () => {
     const state = run([pasted(AMAZON), { type: 'answer', answer: { trackingNumber: AMAZON, carrier: 'amazon-logistics', amazonShippingStatus: 'not-found' } }]);
     expect(state.job).toBeNull();

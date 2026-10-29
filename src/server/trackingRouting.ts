@@ -508,8 +508,26 @@ function oldLabel(addedAt: unknown, ...results: (CarrierResult | undefined)[]): 
   return newest > 0 && newest < millis(addedAt) - OLD_LABEL_GAP
     && !results.some((result) => result && finished(result));
 }
-/** Whether a universal history is the number's earlier parcel, not the one filed under this carrier at this time. */
-export function foreignHistory(result: CarrierResult, carrier: string, addedAt: unknown, number: string): boolean {
+/** Stages a carrier's own scan shows on the way to a delivery. */
+const BEFORE_DELIVERY: ReadonlySet<string> = new Set(['registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery', 'failed_attempt', 'ready_for_pickup']);
+/**
+ * Whether the carrier's own stored scans moved on after an answer's delivery: one of them on the
+ * way to a delivery, dated by the carrier more than a day after the answer's newest delivery. A
+ * day covers a provider that reads the carrier's wall clock as UTC.
+ */
+function deliveryBehindOwnScans(result: CarrierResult, carrier: string, stored: unknown): boolean {
+  const delivered = Math.max(0, ...(result.events ?? []).filter((event) => event.stage === 'delivered')
+    .map((event) => Date.parse(eventTimestamp(event.time) ?? '') || 0));
+  return delivered > 0 && Array.isArray(stored) && stored.filter(isRecord).some((row) =>
+    String(row.provider_event_id ?? '').startsWith(`${carrier}:`) && row.observed_without_provider_timestamp !== true
+    && BEFORE_DELIVERY.has(String(row.stage ?? '')) && millis(row.occurred_at) > delivered + DAY);
+}
+/**
+ * Whether a universal history is the number's earlier parcel, not the one filed under this carrier
+ * at this time. One that names no carrier is when the carrier's own stored scans moved on after its
+ * delivery: the provider matched the number to another parcel.
+ */
+export function foreignHistory(result: CarrierResult, carrier: string, addedAt: unknown, number: string, stored?: unknown): boolean {
   if (oldLabel(addedAt, result)) return true;
   if (carrier === 'unknown' && number.length <= SHORT_NUMBER_LENGTH && finished(result)) {
     const newest = newestScan([result]);
@@ -518,7 +536,8 @@ export function foreignHistory(result: CarrierResult, carrier: string, addedAt: 
   if (carrier === 'unknown' || carrier === 'intl-post') return false;
   const names = Array.isArray(result.reported_carriers)
     ? result.reported_carriers.filter((name): name is string => typeof name === 'string') : [];
-  if (!names.length || names.some((name) => mayNameCarrier(name, carrier))) return false;
+  if (!names.length) return deliveryBehindOwnScans(result, carrier, stored);
+  if (names.some((name) => mayNameCarrier(name, carrier))) return false;
   const newest = newestScan([result]);
   return newest > 0 && newest < millis(addedAt) - OTHER_CARRIER_GAP;
 }
@@ -1399,7 +1418,7 @@ export class TrackingRouter {
       const prefetched = prefetchedUniversal.get(source) ?? this.options.takePrefetchedUniversal?.(source, universalNumber, providerPostcode);
       if (prefetched) {
         const result = withoutWrittenAhead(normalizeCarrierResult(prefetched), writtenAhead);
-        if (result && usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at, universalNumber)) {
+        if (result && usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
           delete state.failures[source];
           return { result: { ...result, tracking_provider: source }, sourceCarrierId: 'unknown', swissPostReady: null, handoffFallbackErrorType: null };
         }
@@ -1442,7 +1461,7 @@ export class TrackingRouter {
           Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier))), writtenAhead);
         if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier wrote ahead`);
         if (!usable(result)) throw new TypeError('No usable universal progress');
-        if (foreignHistory(result, universalCarrier, parcel.created_at, universalNumber)) {
+        if (foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
           report('foreign_history_rejected', source);
           throw new IndeterminateError(source, `${source} returned an older parcel for this number`);
         }

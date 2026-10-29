@@ -2198,6 +2198,41 @@ describe('persistent tracking routing', () => {
       expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('foreign_history_rejected', expect.anything());
     });
   });
+  describe('a universal\'s delivery that names no carrier', () => {
+    // The carrier's own scan, a week after the delivery a provider matched the number to.
+    const own = { provider_event_id: 'happy-post:delay', occurred_at: '2026-09-08T10:00:00Z', stage: 'in_transit', description: 'Delayed' };
+    const delivered = (): CarrierResult => ({ status: 'delivered', current_stage: 'delivered', last_update: '2026-09-01T23:00:00Z',
+      events: [{ time: '2026-09-01T23:00:00Z', description: 'Delivered', stage: 'delivered' }] });
+    const filed = (row: JsonObject) => parcel({ carrier: 'happy-post', tracking_number: '12345678', created_at: '2026-09-07T00:00:00Z',
+      current_stage: 'in_transit', [STORED_EVENT_IDENTITIES]: [row] });
+
+    it('is another parcel once the carrier\'s own scans moved on, and the next provider is asked', async () => {
+      fixedPlan('ParcelsApp', '17TRACK');
+      const { router, direct, universal } = setup();
+      direct.mockRejectedValue(new NoHistoryError('Happy-Post'));
+      universal.mockResolvedValueOnce(delivered());
+      universal.mockResolvedValueOnce(history());
+      const result = await router.fetch(filed(own), false);
+      expect(universal.mock.calls.map(([source]) => source)).toEqual(['ParcelsApp', '17TRACK']);
+      expect(result.result).toMatchObject({ tracking_provider: '17TRACK', current_stage: 'in_transit' });
+      expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('foreign_history_rejected', expect.objectContaining({ provider: 'ParcelsApp' }));
+    });
+
+    it.each([
+      ['beside a scan of the carrier\'s within a day of it', { ...own, occurred_at: '2026-09-02T12:00:00Z' }, {}],
+      ['beside a stage a check saw without the carrier\'s time', { ...own, observed_without_provider_timestamp: true }, {}],
+      ['beside a scan another source wrote', { ...own, provider_event_id: 'unknown:delay' }, {}],
+      ['that names the carrier', own, { reported_carriers: ['Happy-Post'] }],
+    ])('serves a delivery %s', async (_label, row, overrides) => {
+      fixedPlan('ParcelsApp', '17TRACK');
+      const { router, direct, universal } = setup();
+      direct.mockRejectedValue(new NoHistoryError('Happy-Post'));
+      universal.mockResolvedValueOnce({ ...delivered(), ...overrides });
+      const result = await router.fetch(filed(row), false);
+      expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', current_stage: 'delivered' });
+      expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('foreign_history_rejected', expect.anything());
+    });
+  });
   describe('the filed carrier\'s own answer for a reused number', () => {
     // Happy-Post's tracker dates its steps on wall clocks in no zone; the number and steps are invented.
     const filed = parcel({ carrier: 'happy-post', tracking_number: '12345678', created_at: '2026-09-01T00:00:00Z' });

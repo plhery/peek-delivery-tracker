@@ -165,7 +165,10 @@ class AppContainer(
      * When the app asks for a rating (ReviewPrompt), in this version. A debug build's `sdt.debug.reviewDue` asks at
      * every calm moment, as the iPhone's `-sdt.debug.reviewDue YES`, over the demo too.
      */
-    val reviewPrompt = ReviewPrompt(defaults, BuildConfig.VERSION_NAME, forced = debug && defaults.bool(DEBUG_REVIEW_DUE))
+    val reviewPrompt = ReviewPrompt(defaults, BuildConfig.VERSION_NAME, forced = ::reviewForced)
+
+    /** `ReviewPrompt.forced`: a debug build's `sdt.debug.reviewDue`, read at each use as the iPhone reads it. */
+    private fun reviewForced(): Boolean = debug && defaults.bool(DEBUG_REVIEW_DUE)
 
     /** The system's prompt for a rating over `activity`: Play In-App Review, where the iPhone asks StoreKit. */
     fun reviews(activity: Activity): ReviewRequester = PlayReviews(activity)
@@ -243,7 +246,7 @@ class AppContainer(
         notificationEnableInProgress = parcels.notificationEnableInProgressFlow.value,
         linkOpen = links.routeFlow.value != null,
         invitationShown = false,
-        asksInDemo = debug && defaults.bool(DEBUG_REVIEW_DUE),
+        asksInDemo = reviewForced(),
     )
 
     private val catalogState = MutableStateFlow<CarrierCatalog?>(null)

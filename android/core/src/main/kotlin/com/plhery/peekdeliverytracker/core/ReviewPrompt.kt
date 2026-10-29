@@ -35,9 +35,9 @@ class ReviewPrompt(
     private val timeZone: () -> ZoneId = ZoneId::systemDefault,
     /**
      * Debug builds' `-sdt.debug.reviewDue YES` on iOS: every calm moment is the one to ask at, so that a run shows the
-     * prompt. Never in a release.
+     * prompt. Never in a release. Read at each use, as the iPhone reads its defaults.
      */
-    private val forced: Boolean = false,
+    private val forced: () -> Boolean = { false },
 ) {
     @Serializable
     private data class Memory(
@@ -65,7 +65,7 @@ class ReviewPrompt(
      */
     fun isDue(at: Instant, calm: Boolean): Boolean {
         used(at)
-        if (forced) return calm
+        if (forced()) return calm
         val memory = read()
         val day = day(at)
         if (!calm || memory.days < days || memory.askedVersion?.equalsCanonically(version) == true || memory.badDay == day) return false

@@ -130,6 +130,21 @@ class ReviewPromptTests {
         assertTrue(prompt.isDue(at = day(3), calm = true))
     }
 
+    @Test
+    fun aForcedAskIsReadAtEachUse() {
+        // A debug build's `sdt.debug.reviewDue`, set and cleared while the app runs, as the iPhone reads its defaults.
+        var forced = false
+        val prompt = ReviewPrompt(MemoryDefaults(), version = "1.0", timeZone = { ZoneOffset.UTC }, forced = { forced })
+        assertFalse(prompt.isDue(at = day(0), calm = true))
+        forced = true
+        assertTrue(prompt.isDue(at = day(0), calm = true))
+        assertFalse(prompt.isDue(at = day(0), calm = false))
+        assertTrue(prompt.take(at = day(0, hours = 1.0), calm = true))
+        assertTrue(prompt.isDue(at = day(0, hours = 2.0), calm = true))
+        forced = false
+        assertFalse(prompt.isDue(at = day(0, hours = 3.0), calm = true))
+    }
+
     // A parcel's page
 
     @Test

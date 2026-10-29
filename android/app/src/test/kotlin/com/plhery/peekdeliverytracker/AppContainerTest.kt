@@ -196,6 +196,11 @@ class AppContainerTest {
         idleUntil("the demo's parcels") { forced.session.state == AuthenticationState.Demo && forced.parcels.parcelsFlow.value.isNotEmpty() }
         idleUntil("a calm moment") { forced.reviewSettled.value }
         assertTrue(forced.reviewPrompt.isDue(Instant.now(), calm = true))
+        // Read at each use, as the iPhone reads it: cleared while the app runs, a calm moment is an ordinary one again.
+        defaults.set(false, forKey = "sdt.debug.reviewDue")
+        assertFalse(forced.reviewPrompt.isDue(Instant.now(), calm = true))
+        defaults.set(true, forKey = "sdt.debug.reviewDue")
+        assertTrue(forced.reviewPrompt.isDue(Instant.now(), calm = true))
         // Never in a release, whatever the defaults say.
         forced.scope.cancel()
         val release = AppContainer(context, configuration(), scope = MainScope(), debug = false).also { container = it }

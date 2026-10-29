@@ -204,10 +204,11 @@ fun DeliveriesTab(
             }
         }
         // Each arrangement draws its own stack, as the iPhone swaps its NavigationStack and NavigationSplitView: a turn
-        // is no navigation, and the entries start again (the list keeps its place, held above). One NavDisplay across
-        // turns kept the side-by-side scene on its books, as it tidies them only once it has seen a transition run and
-        // never sees a still one run; that scene could then claim the list's entry from the list a back went to, and
-        // neither drew it.
+        // is no navigation, and the entries start again. The list keeps its place, its pull and its messages, held
+        // above; cards left open shut, and a card's menu closes with its card, as the iPhone's do. One NavDisplay
+        // across turns kept the side-by-side scene on its books, as it tidies them only once it has seen a transition
+        // run and never sees a still one run; that scene could then claim the list's entry from the list a back went
+        // to, and neither drew it.
         key(arrangement) {
             val pushes = arrangement == DeliveriesArrangement.Stacked
             NavDisplay(

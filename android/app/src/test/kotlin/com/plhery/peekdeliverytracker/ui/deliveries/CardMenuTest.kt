@@ -4,7 +4,11 @@ import android.content.ClipboardManager
 import android.view.KeyEvent
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertContentDescriptionEquals
+import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
@@ -14,10 +18,17 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.unit.DpRect
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.height
+import androidx.compose.ui.unit.width
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
@@ -28,6 +39,7 @@ import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,8 +65,8 @@ class CardMenuTest {
         compose.waitForIdle()
     }
 
-    private fun longPress(name: String) {
-        compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed(name))
+    private fun longPress(name: String, scroll: Boolean = true) {
+        if (scroll) compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed(name))
         compose.card(name).performTouchInput { longClick() }
         compose.waitForIdle()
     }
@@ -228,4 +240,139 @@ class CardMenuTest {
         assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_C, ctrl), items))
         assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl), items))
     }
+
+    // Where the menu stands (finding the room on any window), and the card it lifts.
+
+    /** The window, in points. */
+    private fun window() = compose.onRoot().getUnclippedBoundsInRoot()
+
+    /** Where `node` is drawn, in points, as large as it is drawn. */
+    private fun drawn(node: SemanticsNodeInteraction): Rect {
+        val bounds = node.fetchSemanticsNode().boundsInRoot
+        val scale = compose.density.density
+        return Rect(bounds.left / scale, bounds.top / scale, bounds.right / scale, bounds.bottom / scale)
+    }
+
+    /** The card the menu lifts, as it is drawn. */
+    private fun lifted(): Rect = drawn(compose.onNodeWithTag(CARD_MENU_PREVIEW))
+
+    /**
+     * Every item of the open menu scrolled to in turn, and each then whole on screen: below the window's top, above its
+     * bottom, beside the lifted card or over or under it rather than on it.
+     */
+    private fun assertEveryItemOnScreen() {
+        val window = window().let { Rect(it.left.value, it.top.value, it.right.value, it.bottom.value) }
+        val preview = lifted()
+        assertTrue("The card lifted on screen: $preview", preview.top >= window.top && preview.bottom <= window.bottom)
+        val items = shownItems()
+        assertTrue(items.isNotEmpty())
+        for (shown in items) {
+            item(shown).performScrollTo()
+            val bounds = item(shown).getUnclippedBoundsInRoot().let { Rect(it.left.value, it.top.value, it.right.value, it.bottom.value) }
+            assertTrue("$shown on screen: $bounds in $window", bounds.top >= window.top - 0.5f && bounds.bottom <= window.bottom + 0.5f)
+            assertTrue("$shown on screen: $bounds in $window", bounds.left >= window.left && bounds.right <= window.right)
+            assertTrue("$shown clear of the card: $bounds, $preview", !bounds.overlaps(preview))
+        }
+    }
+
+    /** Deleting from the menu, its last item: it is there to tap. */
+    private fun assertTheLastItemTaps() {
+        item(ParcelMenuItem.Delete).performScrollTo()
+        choose(ParcelMenuItem.Delete)
+        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+    }
+
+    @Test
+    @Config(qualifiers = LANDSCAPE_PHONE)
+    fun onAPhoneOnItsSideNextUpsMenuStandsBesideItAndScrolls() {
+        show()
+        longPress("New trainers")
+        assertEveryItemOnScreen()
+        val preview = lifted()
+        val first = drawn(item(ParcelMenuItem.Open))
+        assertTrue("Beside the card: $first, $preview", first.left >= preview.right || first.right <= preview.left)
+        assertTheLastItemTaps()
+    }
+
+    @Test
+    @Config(qualifiers = LANDSCAPE_PHONE)
+    fun onAPhoneOnItsSideACardNearTheBottomKeepsItsWholeMenuOnScreen() {
+        show()
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed("Matcha ritual"))
+        compose.waitForIdle()
+        // The card scrolled down until its foot is just over the tab bar.
+        val card = compose.card("Matcha ritual").getUnclippedBoundsInRoot()
+        val down = (window().bottom - 80.dp - card.bottom).value * compose.density.density
+        compose.onNodeWithTag(PARCEL_LIST).performSemanticsAction(SemanticsActions.ScrollBy) { it(0f, -down) }
+        compose.waitForIdle()
+        longPress("Matcha ritual", scroll = false)
+        assertEveryItemOnScreen()
+        assertTheLastItemTaps()
+    }
+
+    @Test
+    @Config(qualifiers = TABLET)
+    fun besideAParcelTheMenuStandsUnderItsCardInTheListsColumn() {
+        show()
+        longPress("Birthday gift")
+        assertEveryItemOnScreen()
+        assertTrue(drawn(item(ParcelMenuItem.Open)).top >= lifted().bottom)
+        assertTheLastItemTaps()
+    }
+
+    @Test
+    @Config(qualifiers = FOLDABLE_INNER)
+    fun onAFoldablesInnerScreenNextUpsMenuFitsUnderOrOverIt() {
+        show()
+        longPress("New trainers")
+        assertEveryItemOnScreen()
+        assertTheLastItemTaps()
+    }
+
+    /** The menu opened as TalkBack's long press does, whatever covers the card. */
+    private fun openMenu(name: String) {
+        compose.card(name).performSemanticsAction(SemanticsActions.OnLongClick)
+        compose.waitForIdle()
+    }
+
+    /** The card lifted has the card's own proportions, whatever size it is drawn at: all of it, cut nowhere. */
+    private fun assertWholeCardLifted(card: DpRect) {
+        val preview = lifted()
+        assertEquals(card.height.value / card.width.value, preview.height / preview.width, 0.01f)
+    }
+
+    @Test
+    fun aCardTheScreensFootCutsIsLiftedWhole() {
+        show()
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed("Matcha ritual"))
+        compose.waitForIdle()
+        val top = compose.card("Matcha ritual").getUnclippedBoundsInRoot()
+        // Its middle on the window's foot.
+        val down = (window().bottom - (top.top + top.bottom) / 2).value * compose.density.density
+        compose.onNodeWithTag(PARCEL_LIST).performSemanticsAction(SemanticsActions.ScrollBy) { it(0f, -down) }
+        compose.waitForIdle()
+        val card = compose.card("Matcha ritual").getUnclippedBoundsInRoot()
+        assertTrue("Cut by the foot: $card", card.top < window().bottom && card.bottom > window().bottom)
+        openMenu("Matcha ritual")
+        assertWholeCardLifted(card)
+    }
+
+    @Test
+    fun aCardTheScreensTopCutsIsLiftedWhole() {
+        show()
+        val top = compose.card("Birthday gift").getUnclippedBoundsInRoot()
+        // Its middle on the window's top.
+        val up = ((top.top + top.bottom) / 2 - window().top).value * compose.density.density
+        compose.onNodeWithTag(PARCEL_LIST).performSemanticsAction(SemanticsActions.ScrollBy) { it(0f, up) }
+        compose.waitForIdle()
+        val card = compose.card("Birthday gift").getUnclippedBoundsInRoot()
+        assertTrue("Cut by the top: $card", card.top < window().top && card.bottom > window().top)
+        openMenu("Birthday gift")
+        assertWholeCardLifted(card)
+    }
 }
+
+/** A phone on its side, a tablet and a foldable's inner screen, as the menu finds room on them. */
+private const val LANDSCAPE_PHONE = "w844dp-h390dp-land-xhdpi"
+private const val TABLET = "w1032dp-h1376dp-xhdpi"
+private const val FOLDABLE_INNER = "w673dp-h841dp-xxhdpi"

@@ -32,6 +32,7 @@ import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
@@ -502,6 +503,22 @@ class DeliveryListTest {
 
     private fun toastShown(text: String): Boolean =
         compose.onAllNodes(hasTestTag(INLINE_TOAST) and hasContentDescription(text, substring = true)).fetchSemanticsNodes().isNotEmpty()
+
+    @Test
+    fun aTurnClosesACardsMenuWithItsCardAndLeavesTheListReachable() {
+        show()
+        compose.card("Birthday gift").performTouchInput { longClick() }
+        compose.waitForIdle()
+        compose.onNodeWithTag(CARD_MENU).assertExists()
+        resize(600.dp)
+        compose.onNodeWithTag(CARD_MENU).assertDoesNotExist()
+        compose.card("Birthday gift").assertExists()
+        compose.onNodeWithContentDescription("Friends").assertExists()
+        // The card drawn anew opens a menu of its own.
+        compose.card("Birthday gift").performTouchInput { longClick() }
+        compose.waitForIdle()
+        compose.onNodeWithTag(CARD_MENU).assertExists()
+    }
 
     @Test
     fun aTurnKeepsThePullsGapOpenUntilTheCheckIsOver() {

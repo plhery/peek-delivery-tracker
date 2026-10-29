@@ -22,6 +22,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -50,12 +52,12 @@ import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.compose.ui.graphics.layer.drawLayer
 import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
@@ -65,11 +67,13 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.toSize
 import androidx.core.view.ViewCompat
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -85,14 +89,15 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 
 /**
- * A card, or an archived row, whose menu can open: where it stands in the window and its picture, which the menu lifts
- * over the dimmed screen in the card's own shape (`.contentShape(.contextMenuPreview, shape)`), on `fill` where the
- * card has no ground of its own (a row of the archive's surface), as iOS lifts a preview on a platter. [modifier] goes
- * on the outside of the card; while its menu is open the card is drawn only there, lifted, as iOS hides the card it
- * lifts.
+ * A card, or an archived row, whose menu can open: where it stands in the window, whole even where the list cuts it,
+ * and its picture, which the menu lifts over the dimmed screen in the card's own shape
+ * (`.contentShape(.contextMenuPreview, shape)`), on `fill` where the card has no ground of its own (a row of the
+ * archive's surface), as iOS lifts a preview on a platter. [modifier] goes on the outside of the card; while its menu
+ * is open the card is drawn only there, lifted, as iOS hides the card it lifts.
  */
 @Stable
 internal class CardMenuSource(
@@ -105,11 +110,12 @@ internal class CardMenuSource(
     /** The parcel as the card last showed it. */
     var parcel: Parcel by mutableStateOf(parcel)
 
+    /** The whole card in the window, the part the list cuts off included. */
     var bounds: Rect = Rect.Zero
         private set
 
     val modifier: Modifier = Modifier
-        .onGloballyPositioned { bounds = it.boundsInWindow() }
+        .onGloballyPositioned { bounds = Rect(it.positionInWindow(), it.size.toSize()) }
         .drawWithContent {
             picture.record { this@drawWithContent.drawContent() }
             if (state.menu?.source !== this@CardMenuSource) drawLayer(picture)
@@ -121,11 +127,15 @@ internal class CardMenuSource(
     }
 }
 
+/** A card's menu, which closes as the card goes: off the list, or as the window turns and the list is drawn anew. */
 @Composable
 internal fun rememberCardMenu(state: DeliveriesState, parcel: Parcel, cornerRadius: Dp, fill: Color? = null): CardMenuSource {
     val picture = rememberGraphicsLayer()
     val source = remember(state, parcel.id, cornerRadius, fill, picture) { CardMenuSource(parcel, cornerRadius, fill, picture, state) }
     SideEffect { source.parcel = parcel }
+    DisposableEffect(source) {
+        onDispose { if (state.menu?.source === source) state.menu = null }
+    }
     return source
 }
 
@@ -135,43 +145,83 @@ internal class CardMenuRequest(val source: CardMenuSource) {
     val parcel: Parcel get() = source.parcel
 }
 
+/** The menu's side of the lifted card, where it grows from. */
+internal enum class MenuSide { Below, Above, Left, Right }
+
 /**
- * Where the menu stands beside the lifted card, as iOS places a context menu: under the card when it fits, above it
- * otherwise, and the card moved just enough for the menu to fit when neither does. All in pixels in the window.
+ * Where the lifted card and its menu stand, as iOS places a context menu: the menu under the card when both fit, above
+ * it otherwise, the card moved just enough for the two to fit. Where they don't fit over each other, as on a phone
+ * turned sideways, the menu stands beside the card, the card smaller, on the side with more room; where the window is
+ * too narrow to show the card at half its size beside the menu, the card shrinks over or under the menu instead,
+ * whichever shows it larger. The menu is [menu] tall at most, and scrolls past that. All of it within the window's
+ * safe area `safe`, `margin` from its top and bottom and `side` from its sides; all in pixels in the window.
  */
-internal data class CardMenuPlacement(val card: Rect, val scale: Float, val menuTop: Float, val menuLeft: Float, val above: Boolean)
+internal data class CardMenuPlacement(val card: Rect, val scale: Float, val menu: Rect, val side: MenuSide)
 
 internal fun cardMenuPlacement(
     card: Rect,
     menuWidth: Float,
     menuHeight: Float,
-    windowWidth: Float,
-    windowHeight: Float,
-    top: Float,
-    bottom: Float,
+    safe: Rect,
     margin: Float,
     gap: Float,
     side: Float,
 ): CardMenuPlacement {
+    val highest = safe.top + margin
+    val lowest = max(highest, safe.bottom - margin)
+    val room = lowest - highest
+    val leftmost = safe.left + side
+    val rightmost = max(leftmost, safe.right - side)
     // A card as wide as the window is drawn a little smaller, so it keeps the menu's margins at its sides.
-    val scale = min(1f, (windowWidth - 2 * side) / card.width)
-    val width = card.width * scale
-    val height = card.height * scale
-    var cardTop = card.center.y - height / 2
-    val left = card.center.x - width / 2
-    val lowest = windowHeight - bottom - margin
-    val highest = top + margin
-    val above = cardTop + height + gap + menuHeight > lowest
-    if (above) {
-        cardTop = max(cardTop, highest + menuHeight + gap)
-        cardTop = min(cardTop, lowest - height)
-    } else {
-        cardTop = max(cardTop, highest)
+    val fullScale = min(1f, (rightmost - leftmost) / card.width)
+
+    fun stacked(scale: Float, shown: Float): CardMenuPlacement {
+        val width = card.width * scale
+        val height = card.height * scale
+        val left = (card.center.x - width / 2).coerceIn(leftmost, max(leftmost, rightmost - width))
+        var top = card.center.y - height / 2
+        val above = top + height + gap + shown > lowest
+        top = if (above) min(max(top, highest + shown + gap), lowest - height) else max(top, highest)
+        val menuTop = if (above) top - gap - shown else top + height + gap
+        val menuLeft = (card.center.x - menuWidth / 2).coerceIn(leftmost, max(leftmost, rightmost - menuWidth))
+        return CardMenuPlacement(
+            Rect(left, top, left + width, top + height), scale, Rect(menuLeft, menuTop, menuLeft + menuWidth, menuTop + shown),
+            if (above) MenuSide.Above else MenuSide.Below,
+        )
     }
-    val menuTop = if (above) cardTop - gap - menuHeight else cardTop + height + gap
-    val menuLeft = (card.center.x - menuWidth / 2).coerceIn(side, max(side, windowWidth - side - menuWidth))
-    return CardMenuPlacement(Rect(left, cardTop, left + width, cardTop + height), scale, menuTop, menuLeft, above)
+
+    if (card.height * fullScale + gap + menuHeight <= room) return stacked(fullScale, menuHeight)
+
+    // Over each other, the card keeps at least a third of the room and the menu scrolls under it.
+    val shrunkHeight = (room - gap - menuHeight).coerceIn(min(card.height * fullScale, room * MIN_PREVIEW), card.height * fullScale)
+    val shrunkScale = shrunkHeight / card.height
+    // Beside each other, the card as large as the room left of the menu allows.
+    val besideScale = minOf(1f, (rightmost - leftmost - gap - menuWidth) / card.width, room / card.height)
+    if (besideScale < min(shrunkScale, BESIDE_SCALE)) return stacked(shrunkScale, max(0f, min(menuHeight, room - gap - shrunkHeight)))
+
+    val width = card.width * besideScale
+    val height = card.height * besideScale
+    val right = card.center.x < (leftmost + rightmost) / 2
+    val group = width + gap + menuWidth
+    // The card stays where it was as far as the menu leaves room for it.
+    val start = if (right) card.center.x - width / 2 else card.center.x + width / 2 - group
+    val groupLeft = start.coerceIn(leftmost, max(leftmost, rightmost - group))
+    val cardLeft = if (right) groupLeft else groupLeft + menuWidth + gap
+    val menuLeft = if (right) groupLeft + width + gap else groupLeft
+    val top = (card.center.y - height / 2).coerceIn(highest, max(highest, lowest - height))
+    val shown = min(menuHeight, room)
+    val menuTop = top.coerceIn(highest, max(highest, lowest - shown))
+    return CardMenuPlacement(
+        Rect(cardLeft, top, cardLeft + width, top + height), besideScale, Rect(menuLeft, menuTop, menuLeft + menuWidth, menuTop + shown),
+        if (right) MenuSide.Right else MenuSide.Left,
+    )
 }
+
+/** The least of the room a card shrunk over or under its menu keeps. */
+private const val MIN_PREVIEW = 1f / 3
+
+/** A card this large beside its menu, or larger, stands beside it rather than over or under it. */
+private const val BESIDE_SCALE = 0.5f
 
 /**
  * The open menu, the delete it asks about, or the alert of an action that failed, over the whole window where the tab
@@ -239,17 +289,19 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
     ) {
         val windowWidth = constraints.maxWidth.toFloat()
         val windowHeight = constraints.maxHeight.toFloat()
-        val safe = WindowInsets.safeDrawing
+        val insets = WindowInsets.safeDrawing
+        val direction = LocalLayoutDirection.current
         var origin by remember { mutableStateOf(Offset.Zero) }
         val menuWidth = with(density) { MENU_WIDTH.toPx() }
+        // The menu's whole height, as tall as its items; it shows as much as the placement leaves room for.
         var menuHeight by remember(request) { mutableIntStateOf(0) }
         val card = request.source.bounds.translate(-origin)
         val placement = with(density) {
-            cardMenuPlacement(
-                card, menuWidth, menuHeight.toFloat(), windowWidth, windowHeight,
-                top = safe.getTop(this).toFloat(), bottom = safe.getBottom(this).toFloat(),
-                margin = MENU_MARGIN.toPx(), gap = MENU_GAP.toPx(), side = PREVIEW_SIDE.toPx(),
+            val safe = Rect(
+                insets.getLeft(this, direction).toFloat(), insets.getTop(this).toFloat(),
+                windowWidth - insets.getRight(this, direction), windowHeight - insets.getBottom(this),
             )
+            cardMenuPlacement(card, menuWidth, menuHeight.toFloat(), safe, margin = MENU_MARGIN.toPx(), gap = MENU_GAP.toPx(), side = PREVIEW_SIDE.toPx())
         }
         // The dim, over everything but the card and its menu.
         Box(
@@ -279,18 +331,19 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
                 .dropShadow(ContinuousRoundedShape(radius), PREVIEW_SHADOW)
                 .clip(ContinuousRoundedShape(radius))
                 .then(request.source.fill?.let { Modifier.background(it) } ?: Modifier)
-                .drawBehind { drawLayer(request.source.picture) }
-                .clearAndSetSemantics {},
+                // Gone with its card, as the window turns, a frame before the menu closes.
+                .drawBehind { if (!request.source.picture.isReleased) drawLayer(request.source.picture) }
+                .clearAndSetSemantics { testTag = CARD_MENU_PREVIEW },
         )
-        // The menu, growing out of the card's side.
+        // The menu, growing out of the card's side, as tall as the room allows and scrolling past it.
         GlassSurface(
             ContinuousRoundedShape(MENU_RADIUS),
             Modifier
-                .layout { measurable, constraints ->
-                    val placeable = measurable.measure(constraints.copy(minWidth = menuWidth.toInt(), maxWidth = menuWidth.toInt(), minHeight = 0))
-                    menuHeight = placeable.height
+                .layout { measurable, _ ->
+                    val width = menuWidth.roundToInt()
+                    val placeable = measurable.measure(Constraints(width, width, 0, placement.menu.height.roundToInt()))
                     layout(placeable.width, placeable.height) {
-                        placeable.place(placement.menuLeft.toInt(), placement.menuTop.toInt())
+                        placeable.place(placement.menu.left.roundToInt(), placement.menu.top.roundToInt())
                     }
                 }
                 .graphicsLayer {
@@ -299,13 +352,27 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
                     val scale = if (reduceMotion) 1f else 0.6f + 0.4f * t
                     scaleX = scale
                     scaleY = scale
-                    transformOrigin = TransformOrigin(0.5f, if (placement.above) 1f else 0f)
+                    transformOrigin = when (placement.side) {
+                        MenuSide.Below -> TransformOrigin(0.5f, 0f)
+                        MenuSide.Above -> TransformOrigin(0.5f, 1f)
+                        MenuSide.Right -> TransformOrigin(0f, 0f)
+                        MenuSide.Left -> TransformOrigin(1f, 0f)
+                    }
                 }
                 .pointerInput(Unit) { detectTapGestures { } }
                 .semantics { paneTitle = parcel.label.ifEmpty { localizer.text("common.parcel") } }
                 .dropShadow(ContinuousRoundedShape(MENU_RADIUS), MENU_SHADOW),
         ) {
-            Column(Modifier.padding(vertical = MENU_PADDING)) {
+            Column(
+                Modifier
+                    .verticalScroll(rememberScrollState())
+                    .layout { measurable, constraints ->
+                        val placeable = measurable.measure(constraints)
+                        menuHeight = placeable.height
+                        layout(placeable.width, placeable.height) { placeable.place(0, 0) }
+                    }
+                    .padding(vertical = MENU_PADDING),
+            ) {
                 items.forEachIndexed { index, group ->
                     if (index > 0) MenuSeparator()
                     for (item in group) MenuItemRow(item, shortcuts, choose)
@@ -530,6 +597,7 @@ private val MENU_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius 
 private val PREVIEW_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.1f), radius = 16.dp, y = 6.dp)
 
 const val CARD_MENU = "deliveries.cardMenu"
+const val CARD_MENU_PREVIEW = "deliveries.cardMenu.preview"
 const val DELETE_CONFIRMATION = "deliveries.deleteConfirmation"
 const val DELETE_CONFIRM = "deliveries.deleteConfirmation.delete"
 const val DELETE_CANCEL = "deliveries.deleteConfirmation.cancel"

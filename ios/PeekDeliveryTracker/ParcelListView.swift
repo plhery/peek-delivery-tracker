@@ -1779,14 +1779,18 @@ private struct ExperimentalParcelPassCard: View {
     private var past: Bool { !arrived && (parcel.currentStage?.isFinal == true || parcel.isArchived) }
     /// The words under the top row keep clear of the route.
     private var clearance: CGFloat { drawsRoute ? CardRoute.clearance : 0 }
-    /// Customs and a pickup say all they need in the status line; after a missed delivery or a problem, the carrier waits on the reader.
+    /// Customs and a pickup say all they need in the status line; after a missed delivery or a problem, or while customs asks
+    /// the reader for something, the carrier waits on the reader.
+    private var actionNeeded: Bool {
+        parcel.currentEvent?.recipientAction != nil || parcel.currentStage == .failedAttempt || parcel.currentStage == .exception
+    }
     private var flag: String? {
-        let carrierIssue = [TrackingStage.customs, .readyForPickup].contains { $0 == parcel.currentStage }
+        let carrierIssue = !actionNeeded && [TrackingStage.customs, .readyForPickup].contains { $0 == parcel.currentStage }
         if let notice, !carrierIssue { return notice }
         return parcel.updateFailed ? localizer.text("attention.sync_error") : nil
     }
     private var flagSymbol: String {
-        if notice != nil, parcel.currentStage == .failedAttempt || parcel.currentStage == .exception { return "exclamationmark.triangle" }
+        if notice != nil, actionNeeded { return "exclamationmark.triangle" }
         return parcel.updateFailed ? "arrow.clockwise" : "clock"
     }
 

@@ -339,6 +339,8 @@ extension Parcel {
     var updateFailed: Bool { syncStatus == .error && !numberToCheck }
 
     func attention(now: Date = Date()) -> ParcelAttention? {
+        // The carrier waits on the recipient until a later scan says it moved on.
+        if let action = currentEvent?.recipientAction { return ParcelAttention(action) }
         switch currentStage {
         case .failedAttempt: return .failedAttempt
         case .readyForPickup: return .readyForPickup
@@ -496,9 +498,21 @@ enum GeneratedTrack {
 enum ParcelAttention: String, Sendable {
     case syncError = "sync_error"
     case failedAttempt = "failed_attempt"
+    case customsTaxID = "customs_tax_id"
+    case customsDuties = "customs_duties"
+    case customsDocuments = "customs_documents"
     case readyForPickup = "ready_for_pickup"
     case customs, exception, generated, stalled
     case notAnnounced = "not_announced"
+
+    /// What customs asks the recipient for before it lets the parcel go.
+    init(_ action: RecipientAction) {
+        switch action {
+        case .taxID: self = .customsTaxID
+        case .duties: self = .customsDuties
+        case .documents: self = .customsDocuments
+        }
+    }
 
     var localizationKey: String { "attention.\(rawValue)" }
 }

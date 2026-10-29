@@ -391,6 +391,32 @@ final class ParcelLogicTests: XCTestCase {
         }
     }
 
+    func testCustomsRequestToTheRecipientNeedsActionWhileItIsTheNewestScan() throws {
+        let now = DateParser.date("2026-08-09T12:00:00Z")!
+        let id = UUID()
+        // As the server serves it (parcelPriority.test.ts).
+        let held = try JSONDecoder.deliveryTracker.decode(TrackingEvent.self, from: Data("""
+            {"id":"\(UUID())","package_id":"\(id)","stage":"customs","description":"Duties or taxes are due on this package",
+             "occurred_at":"2026-08-09T08:00:00Z","recipient_action":"duties"}
+            """.utf8))
+        XCTAssertEqual(held.recipientAction, .duties)
+        var parcel = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-08T10:00:00Z"), held])
+        XCTAssertEqual(parcel.attention(now: now), .customsDuties)
+        XCTAssertEqual(parcel.notice(now: now)?.localizationKey, "attention.customs_duties")
+        XCTAssertNil(ParcelOrganizer.nextDelivery(from: [parcel], now: now))
+        parcel.syncStatus = .error
+        XCTAssertEqual(parcel.attention(now: now), .customsDuties)
+        // Each request reads as the web's label.
+        for (action, attention) in [(RecipientAction.taxID, ParcelAttention.customsTaxID), (.duties, .customsDuties),
+                                    (.documents, .customsDocuments)] {
+            XCTAssertEqual(ParcelAttention(action), attention)
+            XCTAssertEqual(attention.localizationKey, "attention.customs_\(action.rawValue)")
+        }
+        // Paid: the carrier moved on.
+        let released = makeParcel(id: id, events: [held, event(id, .inTransit, "2026-08-09T10:00:00Z")])
+        XCTAssertNil(released.attention(now: now))
+    }
+
     func testSenderMetadataDecodesWithoutRequiringItOnOlderResponses() throws {
         let sender = try JSONDecoder.deliveryTracker.decode(
             CarrierData.self, from: Data(#"{"sender_name":"Example sender"}"#.utf8)

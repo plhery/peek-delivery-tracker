@@ -450,7 +450,8 @@ struct ParcelDetailView: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 if let waits = carrierWaits(parcel) {
-                    ParcelFlag(text: localizer.text(waits.stage == .failedAttempt ? "attention.failed_attempt" : "attention.exception"),
+                    ParcelFlag(text: localizer.text(waits.recipientAction.map { ParcelAttention($0).localizationKey }
+                                                    ?? (waits.stage == .failedAttempt ? "attention.failed_attempt" : "attention.exception")),
                                symbol: "exclamationmark.triangle")
                 }
                 if parcel.attention() == .generated {
@@ -632,9 +633,11 @@ struct ParcelDetailView: View {
     }
 
     /// Where the parcel waits for collection, with a way to get there.
-    /// After a missed delivery or a problem, the carrier waits on the reader: the page says so and quotes it.
+    /// After a missed delivery or a problem, or while customs asks the reader for something, the carrier waits on the reader:
+    /// the page says so and quotes it.
     private func carrierWaits(_ parcel: Parcel) -> TrackingEvent? {
-        guard !parcel.isArchived, let event = parcel.currentEvent, [.failedAttempt, .exception].contains(event.stage) else { return nil }
+        guard !parcel.isArchived, let event = parcel.currentEvent,
+              event.recipientAction != nil || [.failedAttempt, .exception].contains(event.stage) else { return nil }
         return event
     }
 

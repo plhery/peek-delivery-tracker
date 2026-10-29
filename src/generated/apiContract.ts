@@ -34129,6 +34129,34 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://track.shipsway.com/"
+  },
+  "xinghe-freight": {
+    "displayName": "Xinghe Freight",
+    "aliases": [
+      "GZXH",
+      "Xinghe Express",
+      "星和货运",
+      "广州星和",
+      "廣州星和",
+      "广州星和货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0e3a6b",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^GZXH\\d{10}YQ$",
+        "confidence": "low"
+      }
+    ]
   }
 } as const;
 
@@ -35042,7 +35070,8 @@ export const CARRIER_IDS = [
   "gio-express",
   "jp-home",
   "overnite",
-  "sway"
+  "sway",
+  "xinghe-freight"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

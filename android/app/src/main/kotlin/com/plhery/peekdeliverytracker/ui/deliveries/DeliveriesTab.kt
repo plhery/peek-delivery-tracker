@@ -201,7 +201,7 @@ fun DeliveriesTab(
         val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
         // `watching`: the list is looked at, and may show a card moving.
         val watching = resumed && state.listShown && !state.showingFilters && !state.hasCustomView && !reduceMotion
-        HoldingDelivered(state, watching)
+        HoldingDelivered(state, resumed, watching)
         Reviewing(state, resumed, watching, now)
         Consuming(state, inbox)
         DeliveriesKeys(state, scope, reduceMotion)
@@ -268,13 +268,15 @@ private val REGULAR_HEIGHT = 480.dp
  * `holdingDelivered`: the parcels just delivered keep their place a moment (DeliveredHold). The postmark lands with a
  * tap of success and paper out of Pip's open box ([DeliveriesState.postmark]), the card is read, then it flies to its
  * new place ([DeliveriesState.letGo]). Nobody looking, or under Reduce Motion, they take their new places at once,
- * unseen, as nothing is held then.
+ * unseen, as nothing is held then. The window's frames stop while it is away: the cards in flight are at their places
+ * as it comes back, as the iPhone's flights have landed meanwhile.
  */
 @Composable
-private fun HoldingDelivered(state: DeliveriesState, watching: Boolean) {
+private fun HoldingDelivered(state: DeliveriesState, resumed: Boolean, watching: Boolean) {
     state.watching = watching
     SensoryFeedbackEffect(SensoryFeedback.Success, state.postmarks)
     LaunchedEffect(watching) { if (!watching) state.release() }
+    LaunchedEffect(resumed) { if (!resumed) state.dropFlights() }
     LaunchedEffect(state.hold.ids) {
         if (state.hold.isEmpty) return@LaunchedEffect
         delay(POSTMARK_MILLIS)

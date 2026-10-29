@@ -25,6 +25,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -307,6 +308,32 @@ class DeliveredCelebrationTest {
         advance(1500)
         assertFalse(shows(DELIVERED_FLIGHTS))
         assertEquals(1, bursts)
+    }
+
+    @Test
+    fun aWindowMadeAgainOrLeftDuringTheFlightsShowsTheCardsAtTheirPlaces() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        val nextTop = top("New trainers")
+        deliver()
+        advance(1050)
+        assertTrue(shows(DELIVERED_FLIGHTS))
+        recreation.recreate()
+        frame()
+        assertFalse(shows(DELIVERED_FLIGHTS))
+        assertLanded(nextTop)
+
+        // The next check delivers Moon lamp, and the app goes to the background mid-flight: back, the cards are at rest.
+        deliver(demo[2])
+        advance(1050)
+        assertTrue(shows(DELIVERED_FLIGHTS))
+        compose.activityRule.scenario.moveToState(Lifecycle.State.STARTED)
+        advance(100)
+        compose.activityRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        frame()
+        assertFalse(shows(DELIVERED_FLIGHTS))
+        assertEquals(nextTop, top("Trail weekend kit"), 1f)
+        assertTrue(cards("Moon lamp") <= 1)
     }
 
     @Test

@@ -51268,6 +51268,16 @@
     ]
   },
   {
+    "input": "64708344",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
+    ]
+  },
+  {
     "input": "64891308754-2",
     "carrier": "unknown",
     "confidence": "low",
@@ -58347,6 +58357,12 @@
       "postlogistics",
       "ppl"
     ]
+  },
+  {
+    "input": "804313478",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "8047293726",
@@ -74039,6 +74055,17 @@
     ]
   },
   {
+    "input": "ED62222005",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt-it"
+    ],
+    "asked": [
+      "tnt-it"
+    ]
+  },
+  {
     "input": "EE 40002887 0 MZ",
     "carrier": "intl-post",
     "confidence": "high",
@@ -76205,6 +76232,12 @@
     "asked": [
       "dhlink"
     ]
+  },
+  {
+    "input": "FCD0062203617",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "FCLIN00000000",
@@ -79202,6 +79235,14 @@
     ],
     "asked": [
       "australia-post"
+    ]
+  },
+  {
+    "input": "IEL9072300018",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "inter-express-logistics"
     ]
   },
   {
@@ -85903,6 +85944,15 @@
     ]
   },
   {
+    "input": "P00210022663126",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "optima-overnight",
+      "transmission"
+    ]
+  },
+  {
     "input": "P004159319",
     "carrier": "unknown",
     "confidence": "low",
@@ -86081,6 +86131,15 @@
     ],
     "asked": [
       "chit-chats"
+    ]
+  },
+  {
+    "input": "P30283718557319",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "optima-overnight",
+      "transmission"
     ]
   },
   {
@@ -93097,6 +93156,30 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "SW54559603BD",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "whiz-delivery"
+    ],
+    "asked": [
+      "colis-prive"
+    ]
+  },
+  {
+    "input": "SW9D47892EB0",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "whiz-delivery"
+    ],
+    "asked": [
+      "colis-prive"
+    ]
   },
   {
     "input": "SWAP2P003014186",

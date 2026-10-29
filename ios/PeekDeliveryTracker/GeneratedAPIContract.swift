@@ -942,6 +942,17 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let tonami = CarrierID(rawValue: "tonami")
     static let trexity = CarrierID(rawValue: "trexity")
     static let xgs = CarrierID(rawValue: "xgs")
+    static let airroad = CarrierID(rawValue: "airroad")
+    static let atsHealthcare = CarrierID(rawValue: "ats-healthcare")
+    static let centurionTransport = CarrierID(rawValue: "centurion-transport")
+    static let copeSensitiveFreight = CarrierID(rawValue: "cope-sensitive-freight")
+    static let interExpressLogistics = CarrierID(rawValue: "inter-express-logistics")
+    static let kiwiExpress = CarrierID(rawValue: "kiwi-express")
+    static let optimaOvernight = CarrierID(rawValue: "optima-overnight")
+    static let peninsulaTruckLines = CarrierID(rawValue: "peninsula-truck-lines")
+    static let plycon = CarrierID(rawValue: "plycon")
+    static let rossExpress = CarrierID(rawValue: "ross-express")
+    static let whizDelivery = CarrierID(rawValue: "whiz-delivery")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -1837,6 +1848,17 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .tonami,
         .trexity,
         .xgs,
+        .airroad,
+        .atsHealthcare,
+        .centurionTransport,
+        .copeSensitiveFreight,
+        .interExpressLogistics,
+        .kiwiExpress,
+        .optimaOvernight,
+        .peninsulaTruckLines,
+        .plycon,
+        .rossExpress,
+        .whizDelivery,
     ]
 
     init(from decoder: Decoder) throws {

@@ -348,7 +348,12 @@ class DeliveryListTest {
         tabTo(SEARCH_BUTTON)
         press(KeyEvent.KEYCODE_ENTER)
         compose.onNodeWithTag(SEARCH_ROW).assertExists()
+        // The field takes the focus, and Return there ends the typing, as Escape closes the search.
+        assertTrue(focused(SEARCH_FIELD))
         press(KeyEvent.KEYCODE_ENTER)
+        assertFalse(focused(SEARCH_FIELD))
+        compose.onNodeWithTag(SEARCH_ROW).assertExists()
+        press(KeyEvent.KEYCODE_ESCAPE)
         compose.onNodeWithTag(SEARCH_ROW).assertDoesNotExist()
         assertEquals(emptyList<String>(), views)
 

@@ -30,6 +30,7 @@ import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.PullToRefreshModel
 import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
 import com.plhery.peekdeliverytracker.core.trackingNumbers
+import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import java.time.Instant
@@ -193,6 +194,34 @@ internal fun <T> rememberForLaunch(launch: UUID, initial: T): MutableState<T> =
     ) { mutableStateOf(initial) }
 
 /**
+ * What ParcelListView keeps in `@State` for its search and its filters (A-SE04): whether the search shows, the query,
+ * the status, the carrier (its raw value, which a window keeps) and the sort, whether the filters are open and whether
+ * sheets show as forms, each held for the launch ([rememberForLaunch]), and whether the search field has the focus.
+ */
+internal class ListViewStates(
+    val showingSearch: MutableState<Boolean>,
+    val query: MutableState<String>,
+    val status: MutableState<ParcelStatusFilter>,
+    val carrier: MutableState<String?>,
+    val sort: MutableState<ParcelSort>,
+    val showingFilters: MutableState<Boolean>,
+    val sheetsAsForms: MutableState<Boolean>,
+    val searchFocused: MutableState<Boolean>,
+)
+
+@Composable
+internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStates(
+    showingSearch = rememberForLaunch(launch, false),
+    query = rememberForLaunch(launch, ""),
+    status = rememberForLaunch(launch, ParcelStatusFilter.All),
+    carrier = rememberForLaunch<String?>(launch, null),
+    sort = rememberForLaunch(launch, ParcelSort.Priority),
+    showingFilters = rememberForLaunch(launch, false),
+    sheetsAsForms = rememberForLaunch(launch, false),
+    searchFocused = rememberForLaunch(launch, false),
+)
+
+/**
  * A message under the list (`ListToast`): what a check of the parcels found, or that a number was copied. Each one
  * shown is another ([id]), even with the same words, and has its own four seconds.
  */
@@ -219,7 +248,7 @@ internal class DeliveriesState(
     val navigator: DeliveriesNavigator,
     val listState: LazyListState,
     archiveOpenState: MutableState<Boolean>,
-    showingSearchState: MutableState<Boolean>,
+    private val views: ListViewStates,
     private val now: () -> Instant,
     val scope: CoroutineScope,
 ) {
@@ -233,12 +262,111 @@ internal class DeliveriesState(
     var arrangement: DeliveriesArrangement by mutableStateOf(DeliveriesArrangement.Stacked)
 
     var archiveOpen: Boolean by archiveOpenState
-    var showingSearch: Boolean by showingSearchState
+    var showingSearch: Boolean by views.showingSearch
+
+    /** What the search field holds, kept as it is while the search hides, as the iPhone keeps it. */
+    var query: String by views.query
+
+    /**
+     * The search field has the keyboard's focus (`@FocusState searchFocused`), kept with the window so that a rotation
+     * finds it focused again.
+     */
+    var searchFocused: Boolean by views.searchFocused
+
+    /** The filters' button's bounds in the window, which their popover points at. */
+    var filtersAnchor: Rect by mutableStateOf(Rect.Zero)
+
+    /** Asks the search field to take the focus, or to give it up, once it is there to: counted, so each ask is news. */
+    var focusRequest: SearchFocusRequest by mutableStateOf(SearchFocusRequest(0, focus = false))
+        private set
+
+    /** The parcels the list shows, by their status. Each change counts as `filter-status`. */
+    var statusFilter: ParcelStatusFilter
+        get() = views.status.value
+        set(value) {
+            if (value == views.status.value) return
+            views.status.value = value
+            source.action("filter-status")
+        }
+
+    /** The carrier whose parcels the list shows, or all. Each change counts as `filter-carrier`. */
+    var carrierFilter: CarrierId?
+        get() = views.carrier.value?.let(::CarrierId)
+        set(value) {
+            if (value?.rawValue == views.carrier.value) return
+            views.carrier.value = value?.rawValue
+            source.action("filter-carrier")
+        }
+
+    /** The list's order. Each change counts as `sort-change`. */
+    var sort: ParcelSort
+        get() = views.sort.value
+        set(value) {
+            if (value == views.sort.value) return
+            views.sort.value = value
+            source.action("sort-change")
+        }
+
+    /**
+     * The filters are open: a sheet over the list, or a popover off its button while sheets show as forms. Opening
+     * them counts as `filters-open`.
+     */
+    var showingFilters: Boolean
+        get() = views.showingFilters.value
+        set(value) {
+            if (value == views.showingFilters.value) return
+            views.showingFilters.value = value
+            settleSheets()
+            if (value) source.action("filters-open")
+        }
+
+    /** Sheets show as forms, and the filters in a popover: side by side, as settled while none is open. */
+    val sheetsAsForms: Boolean get() = views.sheetsAsForms.value
+
+    /** `settleSheets()`: sheets take the window's arrangement, but only while none is open, so a resize keeps one as it is. */
+    fun settleSheets() {
+        if (!showingFilters) views.sheetsAsForms.value = arrangement == DeliveriesArrangement.SideBySide
+    }
+
+    /** A search, a status, a carrier or a sort other than the list's own (`hasCustomView`). */
+    val hasCustomView: Boolean
+        get() = query.isNotBlank() || statusFilter != ParcelStatusFilter.All || carrierFilter != null || sort != ParcelSort.Priority
+
+    /** `clearFilters()`: the list as it was, its query emptied too. */
+    fun clearFilters() {
+        query = ""
+        statusFilter = ParcelStatusFilter.All
+        carrierFilter = null
+        sort = ParcelSort.Priority
+    }
+
+    /** `find()` and the search's button: the search shows and its field takes the focus. */
+    fun openSearch() {
+        showingSearch = true
+        focusSearch(true)
+    }
+
+    /** `closeSearch()`: the search hides and its field gives up the focus; what it holds stays. */
+    fun closeSearch() {
+        showingSearch = false
+        focusSearch(false)
+    }
+
+    /** The field takes the focus, or gives it up. */
+    fun focusSearch(focus: Boolean) {
+        focusRequest = SearchFocusRequest(focusRequest.count + 1, focus)
+    }
+
+    /** The filters' button: the field gives up the focus, then the filters open. */
+    fun openFilters() {
+        focusSearch(false)
+        showingFilters = true
+    }
 
     /** The list is looked at, and may show a card moving (`watching`). */
     var watching: Boolean = false
 
-    /** Filtering, sorting and grouping, once for each change of the parcels: with nothing searched or filtered yet. */
+    /** Filtering, sorting and grouping, once for each change of the parcels or of the search and filters. */
     val layout: DeliveryListLayout by derivedStateOf { arrange(hold.arranged(parcels)) }
 
     /**
@@ -249,13 +377,21 @@ internal class DeliveriesState(
         if (hold.isEmpty) emptySet() else layout.changing(into = arrange(parcels)).keys
     }
 
+    /** `arrangement(of:)`: Next up is featured only in the list's own view. */
     private fun arrange(parcels: List<Parcel>) = DeliveryListLayout(
-        parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Priority, featuresNext = true,
+        parcels, query = query, status = statusFilter, carrier = carrierFilter, sort = sort, featuresNext = !hasCustomView,
         now = now(),
     )
 
-    /** The parcels the list shows a card or a row for, in its order: the archive's rows count while they show. */
-    val rows: List<UUID> by derivedStateOf { layout.rows(archiveOpen) }
+    /**
+     * The parcels the list shows a card or a row for, in its order: the archive's rows count while they show, as they
+     * always do in a custom view, which shows them as a group.
+     */
+    val rows: List<UUID> by derivedStateOf { layout.rows(hasCustomView || archiveOpen) }
+
+    /** The carriers of all the parcels, each once, in the order of their names (`availableCarriers`), for the filters. */
+    fun availableCarriers(name: (CarrierId) -> String): List<CarrierId> =
+        parcels.map { it.carrier }.distinct().sortedWith(compareBy(DisplayNameOrder) { name(it) })
 
     /** The parcel whose card is marked as the one shown beside the list. */
     val selectedCard: UUID? get() = if (arrangement == DeliveriesArrangement.SideBySide) navigator.navigation.shown else null
@@ -360,6 +496,9 @@ internal class DeliveriesState(
 
     /** A menu, the question it asks or an alert shows over the list, and TalkBack reaches nothing else. */
     val modal: Boolean get() = menu != null || deleting != null || actionError != null
+
+    /** Where TalkBack goes back to once the filters have closed: their button. */
+    val filtersButton = AccessibilityFocus()
 
     var announcement: Announcement? by mutableStateOf(null)
         private set
@@ -563,6 +702,16 @@ internal class DeliveriesState(
         listState.scrollToItem(index)
     }
 }
+
+/** An ask for the search field's focus ([DeliveriesState.focusRequest]): the `count`th, to take it or to give it up. */
+@Immutable
+internal data class SearchFocusRequest(val count: Int, val focus: Boolean)
+
+/**
+ * Swift's `<` on the carriers' names: code unit by code unit, near enough to Swift's comparison of their Unicode
+ * scalars for the names of carriers.
+ */
+private val DisplayNameOrder = Comparator<String> { a, b -> a.compareTo(b) }
 
 /**
  * A card's key in the list: its parcel within the group that draws it (Next up, the flagged, the others on their way,

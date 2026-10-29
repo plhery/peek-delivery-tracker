@@ -2,6 +2,34 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.Context
 import android.view.accessibility.AccessibilityManager
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.ParcelSort
+import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
+import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import androidx.compose.animation.core.InfiniteRepeatableSpec
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -301,9 +329,11 @@ private fun DemoBarLine(demo: String, exit: String, named: Boolean) {
 }
 
 /**
- * `listOverview`: "On the way" and its count while parcels are on their way, then the search's button, and the
- * refresh button where there is nothing to pull with (beside a parcel) or for TalkBack. While the parcels are checked,
- * its arrow turns where it is, or pulses under Reduce Motion.
+ * `listOverview`: "On the way" and its count while parcels are on their way (in the view the list shows), then the
+ * search's button, marked while the search shows or the list shows a custom view, and the refresh button where there
+ * is nothing to pull with (beside a parcel) or for TalkBack. The search's button opens the search and focuses its
+ * field, or closes it and drops the focus. While the parcels are checked, the refresh arrow turns where it is, or
+ * pulses under Reduce Motion.
  */
 @Composable
 internal fun OverviewRow(state: DeliveriesState, active: Int, refreshes: Boolean) {
@@ -325,12 +355,15 @@ internal fun OverviewRow(state: DeliveriesState, active: Int, refreshes: Boolean
             }
         }
         val searchLabel = localized(if (state.showingSearch) "view.hideControls" else "view.showControls")
+        val marked = state.showingSearch || state.hasCustomView
         Box(
             Modifier
                 .size(BUTTON_SIDE)
                 .testTag(SEARCH_BUTTON)
-                .background(if (state.showingSearch) colors.ink.copy(alpha = 0.06f) else Color.Transparent, CircleShape)
-                .clickable(interactionSource = null, indication = PlainPress) { state.showingSearch = !state.showingSearch }
+                .background(if (marked) colors.ink.copy(alpha = 0.06f) else Color.Transparent, CircleShape)
+                .clickable(interactionSource = null, indication = PlainPress) {
+                    if (state.showingSearch) state.closeSearch() else state.openSearch()
+                }
                 .semantics {
                     contentDescription = searchLabel
                     role = Role.Button
@@ -401,32 +434,108 @@ internal fun CountPill(count: Int, horizontalPadding: Dp) {
 }
 
 /**
- * `searchControls`: one quiet capsule with the search's glass and its words, and the filters' button beside it. The
- * field, its clearing and the filters aren't ported yet: the capsule shows what it will hold, and the button does
- * nothing.
+ * `searchControls` (A-S27, A-G09): the search field in one quiet capsule, the glass before it and, once it holds
+ * something, the button that empties it; and the filters' button beside it. The field takes the focus as it shows
+ * ([DeliveriesState.openSearch]); it doesn't capitalise or correct what is typed, and the keyboard's Search ends the
+ * editing. Its trailing room narrows from 13 to 5 as the clear button comes, which fades and grows in from 0.7, on a
+ * snappy 0.2 s (at once under Reduce Motion). The filters' button takes the focus from the field, then opens them.
  */
 @Composable
-internal fun SearchControls() {
+internal fun SearchControls(state: DeliveriesState) {
     val colors = PeekTheme.colors
     val font = PeekTheme.type.subheadline
+    val reduceMotion = PeekTheme.reduceMotion
+    val focus = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
+    val query = state.query
+    val label = localized("view.search")
+    val clear = localized("view.clear")
+    val filters = localized("view.showControls")
+    val motion = Motion.snappy<Float>(SEARCH_FIELD_MOTION)
+    val trailing by animateDpAsState(
+        if (query.isEmpty()) 13.dp else 5.dp,
+        if (reduceMotion) snap() else Motion.snappy(SEARCH_FIELD_MOTION),
+        label = "trailing",
+    )
+    // `.onAppear { searchFocused = true }` as the search opens, and again after a rotation that found it focused.
+    val request = state.focusRequest
+    LaunchedEffect(request) {
+        when {
+            request.focus -> focus.requestFocus()
+            state.searchFocused -> focusManager.clearFocus()
+        }
+    }
+    LaunchedEffect(Unit) { if (state.searchFocused) focus.requestFocus() }
+    DisposableEffect(Unit) { onDispose { state.searchFocused = false } }
     Row(Modifier.fillMaxWidth().testTag(SEARCH_ROW), horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
         Row(
             Modifier
                 .weight(1f)
                 .heightIn(min = BUTTON_SIDE)
                 .background(colors.ink.copy(alpha = 0.06f), CapsuleShape)
-                .padding(horizontal = 13.dp),
+                .padding(start = 13.dp, end = trailing),
             horizontalArrangement = Arrangement.spacedBy(7.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             PeekSymbol("magnifyingglass", Modifier.clearAndSetSemantics {}, font = font, tint = colors.secondaryLabel)
-            Text(localized("view.searchPlaceholder"), color = colors.tertiaryLabel, style = font, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            BasicTextField(
+                query,
+                onValueChange = { state.query = it },
+                modifier = Modifier
+                    .weight(1f)
+                    .testTag(SEARCH_FIELD)
+                    .focusRequester(focus)
+                    .onFocusChanged { state.searchFocused = it.isFocused }
+                    .semantics { contentDescription = label },
+                textStyle = font.copy(color = colors.label),
+                singleLine = true,
+                cursorBrush = SolidColor(colors.ink),
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.None,
+                    autoCorrectEnabled = false,
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Search,
+                ),
+                keyboardActions = KeyboardActions(onSearch = { state.focusSearch(false) }),
+                decorationBox = { field ->
+                    Box(contentAlignment = Alignment.CenterStart) {
+                        if (query.isEmpty()) {
+                            Text(
+                                localized("view.searchPlaceholder"), Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font,
+                                maxLines = 1, overflow = TextOverflow.Ellipsis,
+                            )
+                        }
+                        field()
+                    }
+                },
+            )
+            AnimatedVisibility(
+                visible = query.isNotEmpty(),
+                enter = if (reduceMotion) EnterTransition.None else fadeIn(motion) + scaleIn(motion, 0.7f),
+                exit = if (reduceMotion) ExitTransition.None else fadeOut(motion) + scaleOut(motion, 0.7f),
+            ) {
+                Box(
+                    Modifier
+                        .size(30.dp, BUTTON_SIDE)
+                        .testTag(SEARCH_CLEAR)
+                        .clickable(interactionSource = null, indication = PlainPress) { state.query = "" }
+                        .semantics {
+                            contentDescription = clear
+                            role = Role.Button
+                        },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    PeekSymbol("xmark.circle.fill", font = font, tint = colors.tertiaryLabel)
+                }
+            }
         }
-        val filters = localized("view.showControls")
         Box(
             Modifier
                 .size(BUTTON_SIDE)
-                .clickable(interactionSource = null, indication = PlainPress) {}
+                .testTag(FILTERS_BUTTON)
+                .onGloballyPositioned { state.filtersAnchor = it.boundsInWindow() }
+                .accessibilityFocus(state.filtersButton)
+                .clickable(interactionSource = null, indication = PlainPress, onClick = state::openFilters)
                 .semantics {
                     contentDescription = filters
                     role = Role.Button
@@ -434,6 +543,112 @@ internal fun SearchControls() {
             contentAlignment = Alignment.Center,
         ) {
             PeekSymbol("line.3.horizontal.decrease", font = font, tint = colors.ink)
+        }
+    }
+}
+
+/**
+ * `filterChips` (A-S28), while the list shows a custom view: a chip for the query (in quotes), the status, the carrier
+ * and the sort that aren't the list's own, each of which a tap undoes, then Clear all; in a row that scrolls sideways.
+ */
+@Composable
+internal fun FilterChips(state: DeliveriesState) {
+    val colors = PeekTheme.colors
+    val language = LocalLanguage.current
+    val identities = LocalCarrierIdentities.current
+    val query = state.query
+    val status = state.statusFilter
+    val carrier = state.carrierFilter
+    val sort = state.sort
+    Row(
+        Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()).testTag(FILTER_CHIPS),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        if (query.isNotBlank()) FilterChip("\u201C$query\u201D", "query") { state.query = "" }
+        if (status != ParcelStatusFilter.All) FilterChip(localized(status.localizationKey), "status") { state.statusFilter = ParcelStatusFilter.All }
+        if (carrier != null) {
+            val name = identities?.displayName(carrier, language) ?: CarrierCatalog.shared.info(carrier, language).displayName
+            FilterChip(name, "carrier") { state.carrierFilter = null }
+        }
+        if (sort != ParcelSort.Priority) FilterChip(localized(sort.localizationKey), "sort") { state.sort = ParcelSort.Priority }
+        // As tall as a chip, so that the row is as tall as the iPhone's, and Clear all as easy to tap as a chip.
+        Box(
+            Modifier
+                .heightIn(min = CHIP_HEIGHT)
+                .testTag(CLEAR_ALL)
+                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = state::clearFilters)
+                .padding(horizontal = 5.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(localized("view.clearAll"), color = colors.secondaryLabel, style = PeekTheme.type.style(IosTextStyle.Caption, FontWeight.SemiBold), maxLines = 1)
+        }
+    }
+}
+
+/** `filterChip`: its words and a cross, caption semibold, in the ink on a faint capsule at least 34 high. */
+@Composable
+private fun FilterChip(title: String, id: String, action: () -> Unit) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
+    Row(
+        Modifier
+            .testTag("$FILTER_CHIPS.$id")
+            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action)
+            .heightIn(min = CHIP_HEIGHT)
+            .background(colors.ink.copy(alpha = 0.06f), CapsuleShape)
+            .padding(horizontal = 11.dp, vertical = if (largeText) 6.dp else 0.dp),
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(title, color = colors.ink, style = type.style(IosTextStyle.Caption, FontWeight.SemiBold), maxLines = 1)
+        PeekSymbol("xmark", font = type.style(IosTextStyle.Caption2, FontWeight.Bold), tint = colors.ink)
+    }
+}
+
+/**
+ * `ContentUnavailableView` for a search or filters nothing matches (A-ST09): the glass large and secondary, "No
+ * matching parcels" in bold, a word on what to try, and Clear filters, which clears them all, the query too.
+ */
+@Composable
+internal fun NoResults(state: DeliveriesState) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    Column(
+        Modifier.fillMaxWidth().padding(vertical = 32.dp).testTag(NO_RESULTS),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        PeekSymbol(
+            "magnifyingglass",
+            Modifier.padding(top = 16.dp, bottom = 15.dp).clearAndSetSemantics {},
+            font = type.fixed(NO_RESULTS_SYMBOL, FontWeight.Normal),
+            tint = colors.secondaryLabel,
+        )
+        Text(
+            localized("view.noResultsTitle"),
+            Modifier.widthIn(max = NO_RESULTS_TEXT_WIDTH).semantics { heading() },
+            color = colors.label,
+            style = type.style(IosTextStyle.Title2, FontWeight.Bold),
+            textAlign = TextAlign.Center,
+        )
+        Text(
+            localized("view.noResultsDescription"),
+            Modifier.padding(top = 2.dp).widthIn(max = NO_RESULTS_TEXT_WIDTH),
+            color = colors.secondaryLabel,
+            style = type.title3,
+            textAlign = TextAlign.Center,
+        )
+        Box(
+            Modifier
+                .padding(top = 18.dp)
+                .heightIn(min = BUTTON_SIDE)
+                .testTag(NO_RESULTS_CLEAR)
+                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = state::clearFilters)
+                .padding(horizontal = 12.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(localized("view.clear"), color = colors.ink, style = type.callout)
         }
     }
 }
@@ -761,6 +976,7 @@ internal fun touchExplorationEnabled(): Boolean {
 
 private val ROW_HEIGHT = 44.dp
 private val BUTTON_SIDE = 44.dp
+private val CHIP_HEIGHT = 34.dp
 private val ADD_X = 75.5.dp
 private val ADD_GLASS_WIDTH = 47.dp
 private val ACCOUNT_GLASS_WIDTH = 53.dp
@@ -769,6 +985,10 @@ private val PAGE_TOOLBAR_WIDTH = 118.dp
 private val PAGE_TOOLBAR_MARGIN = 9.5.dp
 private val PAGE_ADD_CENTRE = 28.dp
 private val PAGE_ACCOUNT_CENTRE = 90.dp
+private const val SEARCH_FIELD_MOTION = 0.2
+private const val NO_RESULTS_SYMBOL = 44f
+/** How wide the words of a view with nothing to show run before they wrap, as the iPhone's wrap them. */
+private val NO_RESULTS_TEXT_WIDTH = 268.dp
 private const val PARCEL_WIDTH = 204f
 private const val FRAME_WIDTH = 300f
 private const val FRAME_HEIGHT = 310f
@@ -778,6 +998,13 @@ const val ADD_BUTTON = "deliveries.add"
 const val ACCOUNT_BUTTON = "deliveries.account"
 const val SEARCH_BUTTON = "deliveries.search"
 const val SEARCH_ROW = "deliveries.searchRow"
+const val SEARCH_FIELD = "deliveries.searchField"
+const val SEARCH_CLEAR = "deliveries.searchClear"
+const val FILTERS_BUTTON = "deliveries.filters"
+const val FILTER_CHIPS = "deliveries.chips"
+const val CLEAR_ALL = "deliveries.chips.clearAll"
+const val NO_RESULTS = "deliveries.noResults"
+const val NO_RESULTS_CLEAR = "deliveries.noResults.clear"
 const val REFRESH_BUTTON = "deliveries.refresh"
 const val DEMO_EXIT = "demo.exit"
 const val FOOT = "deliveries.foot"

@@ -111,10 +111,15 @@ val LocalColumnEdges = compositionLocalOf { ColumnEdges(start = true, end = true
  * of a parcel just archived offers Undo for seven seconds, and a message says for four what a check found
  * ([BottomControls]).
  *
- * Out of the iPhone's list: the search field and the filters, the delivered card's celebration and flight, the
- * invitation to turn notifications on, what a card's menu asks (a new name, sharing, another carrier), the sheets
- * (Add, the account), the zoom from a card to its page and dropping text on the list. The buttons that would open them
- * call [DeliveriesState]'s hooks, which do nothing yet.
+ * The search's button shows the search field and the filters' button ([SearchControls]); a search, a filter or a sort
+ * other than the list's own makes it a custom view, which shows their chips ([FilterChips]), no Next up, the archive
+ * as a group under its header and, when nothing matches, a word on it ([NoResults]). The filters open in a sheet, or
+ * side by side in a popover off their button ([FiltersHost]).
+ *
+ * Out of the iPhone's list: the delivered card's celebration and flight, the invitation to turn notifications on (and
+ * the device account's row, which a custom view hides), what a card's menu asks (a new name, sharing, another
+ * carrier), the sheets (Add, the account), the zoom from a card to its page and dropping text on the list. The buttons
+ * that would open them call [DeliveriesState]'s hooks, which do nothing yet.
  */
 @Composable
 internal fun DeliveryList(state: DeliveriesState) {
@@ -203,6 +208,7 @@ internal fun DeliveryList(state: DeliveriesState) {
         }
         Announcements(state)
         CardMenuHost(state)
+        FiltersHost(state)
     }
 }
 
@@ -324,6 +330,14 @@ private sealed interface ListItem {
     @Immutable
     data object AllArrived : ListItem
 
+    /** The chips of a custom view. */
+    @Immutable
+    data object Chips : ListItem
+
+    /** Nothing in the parcels matches the custom view. */
+    @Immutable
+    data object NoResults : ListItem
+
     /** Next up's card. */
     @Immutable
     data class Next(val parcel: Parcel) : ListItem
@@ -332,8 +346,9 @@ private sealed interface ListItem {
     @Immutable
     data class OnTheWay(val parcel: Parcel, val attention: Boolean) : ListItem
 
+    /** The archived parcels: on the shelf, or in a custom view as a group under its header. */
     @Immutable
-    data class Archive(val parcels: List<Parcel>) : ListItem
+    data class Archive(val parcels: List<Parcel>, val grouped: Boolean) : ListItem
 
     @Immutable
     data class Header(val kind: ParcelSectionKind, val count: Int) : ListItem
@@ -370,23 +385,34 @@ private fun listEntries(
         entries += ListEntry(key, type, if (entries.isEmpty()) 0.dp else top, false, item)
     }
 
+    val custom = state.hasCustomView
     if (parcels.isNotEmpty()) first("overview", "overview", ListItem.Overview(layout.active.size, sideBySide))
+    if (custom) first("chips", "chips", ListItem.Chips)
     // The error's notice and an invitation to turn notifications on come with the store's errors and the
     // notifications.
     if (!loading) {
         if (parcels.isEmpty()) {
             first("empty", "empty", ListItem.Empty)
-        } else if (!guest && errorMessage == null && layout.visible.isNotEmpty() && parcels.all { it.isDelivered }) {
+        } else if (layout.visible.isEmpty()) {
+            first("noResults", "noResults", ListItem.NoResults)
+        } else if (!guest && !custom && errorMessage == null && parcels.all { it.isDelivered }) {
             first("allArrived", "allArrived", ListItem.AllArrived)
         }
     }
     layout.next?.let { first(cardKey("next", it.id), "next", ListItem.Next(it)) }
     for (parcel in layout.attention) first(cardKey("attention", parcel.id), "card", ListItem.OnTheWay(parcel, attention = true))
     for (parcel in layout.remaining) first(cardKey("remaining", parcel.id), "card", ListItem.OnTheWay(parcel, attention = false))
-    // Someone following parcels without an account is offered one under them, which comes with the sign-in.
+    // Someone following parcels without an account is offered one under them, outside a custom view, which comes with
+    // the sign-in.
     for (section in layout.sections) {
         if (section.kind == ParcelSectionKind.Archived) {
-            section(ARCHIVE_KEY, "archive", SECTION_SPACING, ListItem.Archive(section.parcels))
+            // A custom view shows the archived parcels it finds under their header, rather than on the shelf.
+            if (custom) {
+                section("section-${section.kind.name}", "header", SECTION_SPACING, ListItem.Header(section.kind, section.parcels.size))
+                section(ARCHIVE_KEY, "archiveGroup", GROUP_SPACING, ListItem.Archive(section.parcels, grouped = true))
+            } else {
+                section(ARCHIVE_KEY, "archive", SECTION_SPACING, ListItem.Archive(section.parcels, grouped = false))
+            }
             continue
         }
         val group = "section-${section.kind.name}"
@@ -407,6 +433,8 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
         is ListItem.Overview -> Overview(state, item.active, item.sideBySide)
         ListItem.Empty -> DeliveriesEmptyState(state)
         ListItem.AllArrived -> AllArrived(state)
+        ListItem.Chips -> FilterChips(state)
+        ListItem.NoResults -> NoResults(state)
         is ListItem.Next -> NextCard(state, item)
         is ListItem.OnTheWay -> OnTheWayCard(state, item)
         is ListItem.Archive -> ArchiveItem(state, item)
@@ -518,7 +546,7 @@ private fun SwipeableCard(
     }
 }
 
-/** The archive's shelf, its row of the parcel beside the list marked. */
+/** The archive's shelf, or its group in a custom view, its row of the parcel beside the list marked. */
 @Composable
 private fun ArchiveItem(state: DeliveriesState, item: ListItem.Archive) {
     val parcels = item.parcels
@@ -528,18 +556,24 @@ private fun ArchiveItem(state: DeliveriesState, item: ListItem.Archive) {
     // Each row lifts as its menu opens, on the archive's paper, cut to the surface's corners.
     val menus = remember(state) { mutableMapOf<UUID, CardMenuSource>() }
     val paper = PeekTheme.colors.paper
-    ArchiveShelf(
-        parcels, expanded = state.archiveOpen, onExpandedChange = state::openArchive, onOpen = state.navigator::open, selected = selected,
-        onLongClick = { menus[it.id]?.open() },
-        rowModifier = { parcel ->
-            val menu = rememberCardMenu(state, parcel, ARCHIVE_RADIUS, fill = paper)
-            DisposableEffect(menus, menu) {
-                menus[parcel.id] = menu
-                onDispose { if (menus[parcel.id] === menu) menus.remove(parcel.id) }
-            }
-            menu.modifier.then(menu.target)
-        },
-    )
+    val rowModifier: @Composable (Parcel) -> Modifier = { parcel ->
+        val menu = rememberCardMenu(state, parcel, ARCHIVE_RADIUS, fill = paper)
+        DisposableEffect(menus, menu) {
+            menus[parcel.id] = menu
+            onDispose { if (menus[parcel.id] === menu) menus.remove(parcel.id) }
+        }
+        menu.modifier.then(menu.target)
+    }
+    if (item.grouped) {
+        ArchivedParcelGroup(
+            parcels, onOpen = state.navigator::open, selected = selected, onLongClick = { menus[it.id]?.open() }, rowModifier = rowModifier,
+        )
+    } else {
+        ArchiveShelf(
+            parcels, expanded = state.archiveOpen, onExpandedChange = state::openArchive, onOpen = state.navigator::open, selected = selected,
+            onLongClick = { menus[it.id]?.open() }, rowModifier = rowModifier,
+        )
+    }
 }
 
 /** Whether the parcel's card is marked as the one shown beside the list: a card is drawn again only as that changes. */
@@ -594,7 +628,8 @@ private fun sectionTitleKey(kind: ParcelSectionKind): String = when (kind) {
 
 /**
  * The parcels on their way and their count, the search's button and, beside a parcel or for TalkBack, the refresh
- * button; under them, the search while it shows, with a snappy 0.3 s fade, shrink and drop from the top.
+ * button; under them, the search while it shows, with a snappy 0.3 s fade, shrink to 94 % from the top and drop of 10,
+ * and none under reduce motion.
  */
 @Composable
 private fun Overview(state: DeliveriesState, active: Int, sideBySide: Boolean) {
@@ -605,16 +640,17 @@ private fun Overview(state: DeliveriesState, active: Int, sideBySide: Boolean) {
         val size = Motion.snappy<IntSize>(SEARCH_MOTION)
         val offset = Motion.snappy<IntOffset>(SEARCH_MOTION)
         val top = TransformOrigin(0.5f, 0f)
+        val drop = with(LocalDensity.current) { SEARCH_DROP.roundToPx() }
         AnimatedVisibility(
             visible = state.showingSearch,
             enter = if (reduceMotion) EnterTransition.None else fadeIn(fade) + scaleIn(fade, 0.94f, top) +
-                slideInVertically(offset) { -it / 6 } + expandVertically(size, Alignment.Top, clip = false),
+                slideInVertically(offset) { -drop } + expandVertically(size, Alignment.Top, clip = false),
             exit = if (reduceMotion) ExitTransition.None else fadeOut(fade) + scaleOut(fade, 0.94f, top) +
-                slideOutVertically(offset) { -it / 6 } + shrinkVertically(size, Alignment.Top, clip = false),
+                slideOutVertically(offset) { -drop } + shrinkVertically(size, Alignment.Top, clip = false),
         ) {
             Column {
                 Spacer(Modifier.height(GROUP_SPACING))
-                SearchControls()
+                SearchControls(state)
             }
         }
     }
@@ -652,5 +688,7 @@ private val ARCHIVE_RADIUS = 18.dp
 private const val ANNOUNCEMENT_HOLD = 1_000L
 private const val LIST_MOTION = 0.32
 private const val SEARCH_MOTION = 0.3
+/** How far above its place the search row comes from and goes to (`.offset(y: -10)`). */
+private val SEARCH_DROP = 10.dp
 
 const val ANNOUNCEMENT = "deliveries.announcement"

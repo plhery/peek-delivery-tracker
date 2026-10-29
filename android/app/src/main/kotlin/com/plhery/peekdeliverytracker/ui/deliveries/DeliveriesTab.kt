@@ -46,6 +46,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -91,6 +92,8 @@ import java.util.Objects
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
@@ -128,11 +131,11 @@ fun DeliveriesTab(
     navigator.view = source::view
     val listState = rememberLazyListState()
     val archiveOpen = rememberForLaunch(launch, false)
-    val showingSearch = rememberForLaunch(launch, false)
+    val views = rememberListViewStates(launch)
     val now = LocalNow.current
     val scope = rememberCoroutineScope()
     val state = remember(source, navigator, listState) {
-        DeliveriesState(source, navigator, listState, archiveOpen, showingSearch, now, scope)
+        DeliveriesState(source, navigator, listState, archiveOpen, views, now, scope)
     }
     state.localizer = LocalLocalizer.current
     val context = LocalContext.current
@@ -171,6 +174,7 @@ fun DeliveriesTab(
         }
         // Read by the list as it is drawn, after this.
         state.arrangement = arrangement
+        state.settleSheets()
         val rows = state.rows
         // Here rather than once drawn, so that the page beside the list shows from the window's first frame. The card
         // at the list's top is read as it was before the turn, and not followed as the list scrolls.
@@ -178,6 +182,7 @@ fun DeliveriesTab(
         navigator.settle(arrangement, rows)
 
         LaunchedEffect(state) { source.parcels.collect(state::receive) }
+        SearchCounted(state)
         HoldingDelivered(state, reduceMotion)
         Consuming(state, inbox)
         DeliveriesKeys(state, scope, reduceMotion)
@@ -247,7 +252,7 @@ private val REGULAR_HEIGHT = 480.dp
 private fun HoldingDelivered(state: DeliveriesState, reduceMotion: Boolean) {
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
-    val watching = resumed && state.listShown && !reduceMotion
+    val watching = resumed && state.listShown && !state.showingFilters && !state.hasCustomView && !reduceMotion
     state.watching = watching
     LaunchedEffect(watching) { if (!watching) state.letGo() }
     LaunchedEffect(state.hold.ids) {
@@ -258,6 +263,23 @@ private fun HoldingDelivered(state: DeliveriesState, reduceMotion: Boolean) {
         state.letGo()
     }
 }
+
+/**
+ * A search counts once its query has stayed the same 800 ms, and isn't empty (`.task(id: query)`). Only a change counts:
+ * the list drawn again, after a rotation or back from a parcel, doesn't count its query again.
+ */
+@Composable
+private fun SearchCounted(state: DeliveriesState) {
+    LaunchedEffect(state) {
+        snapshotFlow { state.query }.drop(1).collectLatest { query ->
+            if (query.isBlank()) return@collectLatest
+            delay(SEARCH_SETTLE_MILLIS)
+            state.source.action("search")
+        }
+    }
+}
+
+private const val SEARCH_SETTLE_MILLIS = 800L
 
 private const val POSTMARK_MILLIS = 300L
 private const val READ_MILLIS = 650L
@@ -289,9 +311,11 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
 }
 
 /**
- * The deliveries' keys, which do what their buttons do (A-S99): ↑ and ↓ show the card before or after the parcel
- * beside the list and bring it into view, Return opens the one shown by itself, Ctrl or Meta with F opens the search
- * and Escape closes it, Ctrl or Meta with N adds. The parcel's own are on its page.
+ * The deliveries' keys, which do what their buttons do (A-S99, A-G10): ↑ and ↓ show the card before or after the
+ * parcel beside the list and bring it into view, Return opens the one shown by itself, Ctrl or Meta with F opens the
+ * search and focuses its field and Escape closes it, Ctrl or Meta with N adds. The parcel's own are on its page. None
+ * while the filters, a card's menu, the delete it asks about or an alert are open (`keyboardFree`); while the search
+ * field has the focus, only adding, finding and closing the search.
  *
  * As the iPhone's, they are the window's: once nothing in it has used a key, the window gives it over here. Beside a
  * parcel the list's column also takes them, and the focus, so that ↑ and ↓ step through the cards rather than move
@@ -324,7 +348,8 @@ private fun Modifier.listKeys(state: DeliveriesState): Modifier {
 /** Acts on a key the deliveries answer, as [DeliveriesKey.available] has them; true once it has used it. */
 private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMotion: Boolean): Boolean {
     val keys = DeliveriesKey.available(
-        free = true, searching = showingSearch, typing = false, arrangement = arrangement, navigation = navigator.navigation,
+        free = !showingFilters && !modal, searching = showingSearch, typing = searchFocused, arrangement = arrangement,
+        navigation = navigator.navigation,
         cards = rows, hasParcels = parcels.isNotEmpty(), canUndo = source.undoParcel.value != null,
     )
     val command = event.hasModifiers(KeyEvent.META_CTRL_ON) || event.hasModifiers(KeyEvent.META_META_ON)
@@ -345,8 +370,8 @@ private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMo
     if (event.repeatCount > 0 && key != DeliveriesKey.Previous && key != DeliveriesKey.Next) return true
     when (key) {
         DeliveriesKey.Add -> add()
-        DeliveriesKey.Find -> showingSearch = true
-        DeliveriesKey.CloseSearch -> showingSearch = false
+        DeliveriesKey.Find -> openSearch()
+        DeliveriesKey.CloseSearch -> closeSearch()
         DeliveriesKey.Undo -> source.undoParcel.value?.let { restore(it) }
         DeliveriesKey.Previous, DeliveriesKey.Next -> {
             val card = navigator.step(if (key == DeliveriesKey.Next) 1 else -1, rows)

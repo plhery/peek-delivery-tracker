@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker
 
+import android.app.Application
 import android.content.Context
+import android.os.LocaleList
 import android.os.Looper
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -26,6 +28,7 @@ import mockwebserver3.RecordedRequest
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
@@ -183,6 +186,37 @@ class AppContainerTest {
         app.localizer.language = AppLanguage.Fr
         idleUntil("the saved language") { app.defaults.string(AppLanguage.storageKey) == "fr" }
         assertEquals("fr", PreferencesDefaults.appGroup(context, "group.test.peek").string(AppLanguage.storageKey))
+    }
+
+    @Test
+    fun withNoLanguageSavedTheAppTakesThePhonesNewOneWithoutSavingIt() {
+        val phone = LocaleList.getDefault()
+        try {
+            LocaleList.setDefault(LocaleList.forLanguageTags("nl-NL,en-GB"))
+            val app = container()
+            app.start(process.lifecycle)
+            idleUntil("the session") { app.session.state != AuthenticationState.Loading }
+            assertEquals(AppLanguage.En, app.localizer.language)
+            val widget = PreferencesDefaults.appGroup(context, "group.test.peek")
+
+            // The phone's languages change, which relaunches the iPhone app.
+            LocaleList.setDefault(LocaleList.forLanguageTags("de-DE,en-GB"))
+            (context as Application).onConfigurationChanged(context.resources.configuration)
+            assertEquals(AppLanguage.De, app.localizer.language)
+            idleUntil("the widget's language") { widget.string(AppLanguage.storageKey) == "de" }
+            assertNull(app.defaults.string(AppLanguage.storageKey))
+
+            // One chosen is saved, and the phone's languages no longer count.
+            app.localizer.language = AppLanguage.Fr
+            idleUntil("the saved language") { app.defaults.string(AppLanguage.storageKey) == "fr" }
+            LocaleList.setDefault(LocaleList.forLanguageTags("it-IT"))
+            context.onConfigurationChanged(context.resources.configuration)
+            settle()
+            assertEquals(AppLanguage.Fr, app.localizer.language)
+            assertEquals("fr", widget.string(AppLanguage.storageKey))
+        } finally {
+            LocaleList.setDefault(phone)
+        }
     }
 
     @Test

@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker
 
+import android.content.ComponentCallbacks
 import android.content.Context
+import android.content.res.Configuration
 import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
@@ -106,8 +108,14 @@ class AppContainer(
     /** URLSession.shared: the API, sign-in, catalog and link requests, cookies kept for the process. */
     val transport: HttpTransport = OkHttpTransport(http, log).identifying(userAgent)
 
-    /** `Localizer()`: the language saved here, else the phone's first the app speaks. */
-    val localizer = Localizer(AppLanguage.current(defaults.string(AppLanguage.storageKey), Device.preferredLanguages()))
+    /**
+     * `Localizer()`: the language saved here, else the phone's first the app speaks, and the phone's again when they
+     * change ([deviceLanguagesChanged]).
+     */
+    val localizer = Localizer(deviceLanguage())
+
+    /** The language the phone's languages gave, taken without being chosen; null once a change has been seen. */
+    private var followed: AppLanguage? = null
 
     /** `DeliveryAnalytics.shared`, through an ephemeral session of its own: its cookies are its alone, in memory. */
     val analytics = DeliveryAnalytics(
@@ -272,6 +280,12 @@ class AppContainer(
             combine(identity, localizer.languageFlow) { _, language -> language }.collectLatest { session.saveEmailLanguage(it) }
         }
         scope.launch { localizer.languageFlow.drop(1).collect(::languageChanged) }
+        context.registerComponentCallbacks(object : ComponentCallbacks {
+            override fun onConfigurationChanged(newConfig: Configuration) = deviceLanguagesChanged()
+
+            @Deprecated("Deprecated in Java")
+            override fun onLowMemory() = Unit
+        })
         // A link opened before signing in comes back once someone is signed in.
         scope.launch {
             session.stateFlow.map { it.signedInUser }.distinctUntilChanged().collect { user -> if (user != null) links.resume() }
@@ -303,11 +317,30 @@ class AppContainer(
         else -> DeliveryAnalytics.Mode.Account
     }
 
-    /** Localizer's `didSet` and RootView's `onChange(of: localizer.language)`. */
+    private fun deviceLanguage(): AppLanguage =
+        AppLanguage.current(defaults.string(AppLanguage.storageKey), Device.preferredLanguages())
+
+    /**
+     * The phone's languages changed, which relaunches the iPhone app: with no language saved, the app takes the one
+     * they now give, as the relaunched app would, without saving it or counting a change of language.
+     */
+    private fun deviceLanguagesChanged() {
+        val language = deviceLanguage()
+        if (language == localizer.language) return
+        followed = language
+        localizer.language = language
+    }
+
+    /**
+     * Localizer's `didSet` and RootView's `onChange(of: localizer.language)`. The language the phone's gave
+     * ([deviceLanguagesChanged]) is the relaunched iPhone app's: saved for the widget alone, and no change counted.
+     */
     private fun languageChanged(language: AppLanguage) {
-        defaults.set(language.rawValue, forKey = AppLanguage.storageKey)
+        val chosen = language != followed
+        followed = null
+        if (chosen) defaults.set(language.rawValue, forKey = AppLanguage.storageKey)
         groupDefaults.set(language.rawValue, forKey = AppLanguage.storageKey)
-        analytics.action("language-change")
+        if (chosen) analytics.action("language-change")
         parcels.demoLanguageChanged()
         parcels.refreshDeliverySurfaces()
         val token = notifications.currentDeviceToken ?: return

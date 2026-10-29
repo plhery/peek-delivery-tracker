@@ -42,8 +42,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The deliveries' search and filters on the iPhone the captures were taken on, as the captures show them: the search
  * open, a query typed and its chip, a query nothing matches, the chips of a carrier and an order, and the filters'
- * sheet at its medium and large heights, light and dark, its carriers' menu, and at large text. Then on an iPad side
- * by side, the filters in a popover.
+ * sheet at its medium and large heights, light and dark, its carriers' menu, and at large text and the largest Android
+ * has. Then on an iPad side by side, the filters in a popover.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -197,6 +197,15 @@ class ParcelSearchScreenshotTest {
         expand()
         choose("$FILTERS_STATUS.${ParcelStatusFilter.Active.rawValue}")
         compose.screenshot("filters_large_text2")
+    }
+
+    @Test
+    fun theFiltersAtTheLargestText() {
+        show(fontScale = 2f)
+        openFilters()
+        expand()
+        choose("$FILTERS_STATUS.${ParcelStatusFilter.Active.rawValue}")
+        compose.screenshot("filters_large_light_text2")
     }
 
     /** An iPad's 1032 × 1376 side by side: the filters in a popover off their button. */

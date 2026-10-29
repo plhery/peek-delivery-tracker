@@ -93,10 +93,10 @@ import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 
 /**
- * A `NavigationStack` in a sheet or a popover with a `Form` in it: the inline bar, its title in the middle and the
- * confirmation on a glass capsule at its trailing end (`ToolbarItem(placement: .confirmationAction)`, semibold), over
- * the form, which scrolls under the bar and fades out under it once it has. TalkBack reads the title as a heading, and
- * goes there first ([titleFocus]).
+ * A `NavigationStack` in a sheet or a popover with a `Form` in it: the inline bar, its title in the middle, or as near
+ * it as keeps clear of the confirmation, and the confirmation on a glass capsule at its trailing end
+ * (`ToolbarItem(placement: .confirmationAction)`, semibold), over the form, which scrolls under the bar and fades out
+ * under it once it has. TalkBack reads the title as a heading, and goes there first ([titleFocus]).
  */
 @Composable
 internal fun SheetPage(
@@ -146,20 +146,37 @@ internal fun SheetPage(
                     drawRect(colors.separator, Offset(0f, size.height - line), Size(size.width, line), alpha = shown)
                 },
         )
-        Box(Modifier.fillMaxWidth().padding(top = barTop).height(BAR_ROW)) {
-            Text(
-                title,
-                Modifier
-                    .align(Alignment.Center)
-                    .padding(horizontal = TITLE_CLEARANCE)
-                    .then(if (titleFocus != null) Modifier.accessibilityFocus(titleFocus) else Modifier)
-                    .semantics { heading() },
-                color = colors.label,
-                style = type.headline,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            ConfirmationButton(confirmation, onConfirm, backdrop, Modifier.align(Alignment.CenterEnd).padding(end = insets.barSide), confirmTag)
+        // The title in the middle of the bar, or as near it as clears the confirmation, and cut short where even
+        // the room before the confirmation is too little, as the confirmation grows with the text.
+        Layout(
+            content = {
+                Text(
+                    title,
+                    Modifier
+                        .then(if (titleFocus != null) Modifier.accessibilityFocus(titleFocus) else Modifier)
+                        .semantics { heading() },
+                    color = colors.label,
+                    style = type.headline,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                ConfirmationButton(confirmation, onConfirm, backdrop, Modifier, confirmTag)
+            },
+            modifier = Modifier.fillMaxWidth().padding(top = barTop).height(BAR_ROW),
+        ) { (titleMeasurable, buttonMeasurable), constraints ->
+            val loose = constraints.copy(minWidth = 0, minHeight = 0)
+            val width = constraints.maxWidth
+            val height = constraints.maxHeight
+            val side = insets.barSide.roundToPx()
+            val button = buttonMeasurable.measure(loose)
+            val buttonStart = width - side - button.width
+            val titleEnd = buttonStart - TITLE_GAP.roundToPx()
+            val heading = titleMeasurable.measure(loose.copy(maxWidth = max(0, titleEnd - side)))
+            layout(width, height) {
+                val x = ((width - heading.width) / 2f).roundToInt().coerceAtMost(titleEnd - heading.width).coerceAtLeast(side)
+                heading.place(x, ((height - heading.height) / 2f).roundToInt())
+                button.place(buttonStart, ((height - button.height) / 2f).roundToInt())
+            }
         }
     }
 }
@@ -500,7 +517,7 @@ private class HighlightNode(private val interactionSource: InteractionSource, pr
 }
 
 private val BAR_ROW = 44.dp
-private val TITLE_CLEARANCE = 96.dp
+private val TITLE_GAP = 8.dp
 private val CONFIRM_PADDING = 16.dp
 private val EDGE_BELOW = 11.dp
 private const val EDGE_OPACITY = 0.95f

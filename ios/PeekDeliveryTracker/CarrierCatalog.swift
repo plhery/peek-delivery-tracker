@@ -13,6 +13,8 @@ struct CarrierRequirement: Codable, Hashable, Sendable {
     let optional: Bool?
     /// An optional input the carrier shows more of the parcel with, worth asking for when the parcel has none.
     let showsMore: Bool?
+    /// The carrier's lookup reads the country the postcode is from, so the field names it; others read the postcode alone.
+    let readsCountry: Bool?
     let label: String
     let type: String
     var placeholder: String?
@@ -650,13 +652,29 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         return tracksAutomatically(carrier) ? "add.autoSync" : "add.linkSync"
     }
 
-    /// One postcode per country, shown as the example in a field that takes any country's.
-    static let postcodeExamples: [String: String] = {
+    /// shared/postcode-examples.json: one postcode per country, and the countries that alone keep a clock's time.
+    private struct PostcodeExamplesFile: Decodable {
+        let examples: [String: String]
+        let timeZones: [String: String]
+    }
+
+    private static let postcodeExamplesFile: PostcodeExamplesFile? = {
         guard let url = Bundle.main.url(forResource: "PostcodeExamples", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let examples = try? JSONDecoder().decode([String: String].self, from: data) else { return [:] }
-        return examples
+              let data = try? Data(contentsOf: url) else { return nil }
+        return try? JSONDecoder().decode(PostcodeExamplesFile.self, from: data)
     }()
+
+    /// One postcode per country, shown as the example in a field that takes any country's.
+    static let postcodeExamples: [String: String] = postcodeExamplesFile?.examples ?? [:]
+
+    /// The country this iPhone is set up for, as the web reads it: its clock's when one country keeps that time,
+    /// otherwise its region setting.
+    static func deviceCountry(
+        timeZone: String = TimeZone.current.identifier,
+        region: String? = Locale.current.region?.identifier
+    ) -> String? {
+        postcodeExamplesFile?.timeZones[timeZone] ?? region
+    }
 
     /// The example in a carrier's field. A national carrier states its own
     /// postcode, and a field for another country's postcode that country's, or
@@ -666,7 +684,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     func postcodeExample(
         for carrier: CarrierID,
         requirement: CarrierRequirement,
-        region: String? = Locale.current.region?.identifier
+        region: String? = CarrierCatalog.deviceCountry()
     ) -> String? {
         if let placeholder = requirement.placeholder { return placeholder.nonEmpty }
         guard requirement.field == .dpdPostcode else { return nil }
@@ -702,10 +720,12 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         info(for: carrier).countries?.first
     }
 
-    /// The countries a postcode for this field can be from: any when the carrier takes any country's,
-    /// otherwise the carrier's own, whose shapes its check reads.
+    /// The countries a postcode for this field can be named from: any when the carrier takes any country's,
+    /// otherwise the carrier's own, whose shapes its check reads. Only its home where its lookup reads the
+    /// postcode alone, so the reader is not asked which.
     func postcodeCountries(for carrier: CarrierID, requirement: CarrierRequirement) -> [String] {
-        requirement.takesAnyPostcode ? Self.countries : info(for: carrier).countries ?? []
+        guard requirement.readsCountry == true else { return Array((info(for: carrier).countries ?? []).prefix(1)) }
+        return requirement.takesAnyPostcode ? Self.countries : info(for: carrier).countries ?? []
     }
 
     /// The same countries as a menu lists them: the carrier's own, home first, then the others by name.
@@ -715,6 +735,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         language: AppLanguage
     ) -> (own: [String], others: [String]) {
         let own = info(for: carrier).countries ?? []
+        guard requirement.readsCountry == true else { return (Array(own.prefix(1)), []) }
         guard requirement.takesAnyPostcode else { return (own, []) }
         return (own, Self.countriesByName(in: language).filter { !own.contains($0) })
     }
@@ -726,7 +747,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         for carrier: CarrierID,
         requirement: CarrierRequirement,
         parcel: Parcel? = nil,
-        region: String? = Locale.current.region?.identifier
+        region: String? = CarrierCatalog.deviceCountry()
     ) -> String? {
         let home = homeCountry(of: carrier)
         let known: [String?]
@@ -741,10 +762,10 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     }
 
     /// The field for a postcode from `country`: the carrier's own for its home country, or when its
-    /// check reads only its own countries' shapes; otherwise any country's shape, with that country's
-    /// example or none, never the carrier's.
+    /// check reads only its own countries' shapes or its lookup the postcode alone; otherwise any
+    /// country's shape, with that country's example or none, never the carrier's.
     func postcodeRequirement(_ requirement: CarrierRequirement, for carrier: CarrierID, country: String?) -> CarrierRequirement {
-        guard requirement.field == .dpdPostcode, requirement.takesAnyPostcode,
+        guard requirement.field == .dpdPostcode, requirement.takesAnyPostcode, requirement.readsCountry == true,
               let country, country != homeCountry(of: carrier) else { return requirement }
         var field = requirement
         field.pattern = CarrierRequirement.anyPostcode

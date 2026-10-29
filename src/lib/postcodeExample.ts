@@ -42,8 +42,9 @@ function languageRegion(language: string): string | undefined {
  * The example shown in a carrier's field. A national carrier states its own
  * postcode, and a field for another country's postcode that country's, or
  * none (an empty placeholder). One that takes any country's leaves it out and
- * shows the country named beside the field, the reader's, or the carrier's own
- * when the device does not tell.
+ * shows the country named beside the field (the reader's where the carrier
+ * reads the postcode alone and none is named), or the carrier's own when the
+ * device does not tell.
  */
 export function postcodeExample(
   carrierId: CarrierId,

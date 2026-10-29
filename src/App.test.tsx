@@ -768,7 +768,7 @@ describe('App', () => {
     ).not.toBeInTheDocument();
   });
 
-  it("offers an optional DPD postcode of any country, with the reader's own as the example", async () => {
+  it("offers an optional DPD postcode of any country, with the reader's own as the example and no country beside it", async () => {
     const clock = vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
       .mockReturnValue({ ...new Intl.DateTimeFormat().resolvedOptions(), timeZone: 'Europe/Paris' });
     onTestFinished(() => clock.mockRestore());
@@ -805,11 +805,8 @@ describe('App', () => {
       await user.clear(postcode);
     }
 
-    // The postcode is from the reader's country unless they name another beside it.
-    const country = within(sheet).getByRole('combobox', { name: 'Delivery country' });
-    expect(country).toHaveValue('FR');
-    await user.selectOptions(country, 'GB');
-    expect(postcode).toHaveAttribute('placeholder', 'SW1A 1AA');
+    // DPD reads the postcode alone: no country is asked beside it, and none goes with it.
+    expect(within(sheet).queryByRole('combobox', { name: 'Delivery country' })).not.toBeInTheDocument();
     await user.type(postcode, ' sw1a  1aa ');
     expect(postcode).toHaveValue('sw1a 1aa ');
     await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
@@ -819,8 +816,8 @@ describe('App', () => {
       label: '',
       carrier: 'dpd',
       dpdPostcode: 'SW1A 1AA',
-      dpdPostcodeCountry: 'GB',
     });
+    expect(add.mock.calls[0]![0].dpdPostcodeCountry).toBeUndefined();
   });
 
   it('adds a DPD parcel without a postcode', async () => {

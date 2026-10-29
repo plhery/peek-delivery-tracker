@@ -76,9 +76,10 @@ const outputs = new Map([
     ])),
   }, null, 2)}\n`],
   ['FriendsDemo.json', fs.readFileSync(path.join(root, 'shared', 'friends-demo.json'), 'utf8')],
-  // One postcode per country; the iPhone reads the country from its region setting.
+  // One postcode per country, and the countries that alone keep a clock's time: the iPhone reads its country from its
+  // clock, then its region setting, as the web does.
   ['PostcodeExamples.json', `${JSON.stringify(
-    JSON.parse(fs.readFileSync(path.join(root, 'shared', 'postcode-examples.json'), 'utf8')).examples, null, 2,
+    JSON.parse(fs.readFileSync(path.join(root, 'shared', 'postcode-examples.json'), 'utf8')), null, 2,
   )}\n`],
   ['ContractFixtures.json', `${JSON.stringify(apiFixture, null, 2)}\n`],
   // How Add reads a text as the front door does: the shops' order numbers, the words that introduce a number, the

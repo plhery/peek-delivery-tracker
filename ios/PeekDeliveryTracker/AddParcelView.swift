@@ -635,7 +635,9 @@ struct AddParcelView: View {
                             : localizer.text("add.requirement.dpdPostcodeHelp"),
                         optional: requirement.isOptional
                     ) {
-                        let example = catalog.postcodeExample(for: resolvedCarrier, requirement: requirement, region: postcodeCountry)
+                        // Where no country is named beside the field, the example is the reader's.
+                        let example = catalog.postcodeExample(for: resolvedCarrier, requirement: requirement,
+                                                              region: requirement.readsCountry == true ? postcodeCountry : CarrierCatalog.deviceCountry())
                         HStack(spacing: 0) {
                             if let country = offeredPostcodeCountry, let carrierRequirement = carrierPostcodeRequirement {
                                 PostcodeCountryMenu(carrier: resolvedCarrier, requirement: carrierRequirement, country: country,

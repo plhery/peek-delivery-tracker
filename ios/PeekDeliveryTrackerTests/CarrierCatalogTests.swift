@@ -1004,16 +1004,20 @@ final class CarrierCatalogTests: XCTestCase {
             try XCTUnwrap(catalog.requirements(for: carrier, trackingNumber: number).first { $0.field == .dpdPostcode })
         }
         // PostNL's 3S labels take any country's postcode, Heppner its four countries' shapes, DPD Germany Germany's.
+        // DPD takes any country's too, but reads the postcode alone, as Heppner does.
         let postNL = try requirement(.springGDS, "3SABCD1234567")
         let heppner = try requirement(.heppner, "23456789")
         let dpdGermany = try requirement(.dpdDe, "12345678901234")
+        let dpd = try requirement(.dpd, "06080000000001")
         XCTAssertEqual(catalog.homeCountry(of: .springGDS), "NL")
 
-        // Any real country, or the carrier's own. A field that takes one alone offers no choice.
+        // Any real country, or the carrier's own, where the carrier's lookup reads it. Otherwise, or for a field that
+        // takes one alone, no choice is offered.
         let any = catalog.postcodeCountries(for: .springGDS, requirement: postNL)
         for country in ["NL", "BE", "LU", "GB", "XK"] { XCTAssertTrue(any.contains(country), country) }
         for code in ["EU", "EZ", "UN", "ZZ", "IC", "AC", "419"] { XCTAssertFalse(any.contains(code), code) }
-        XCTAssertEqual(catalog.postcodeCountries(for: .heppner, requirement: heppner), ["FR", "CH", "BE", "LU"])
+        XCTAssertEqual(catalog.postcodeCountries(for: .heppner, requirement: heppner), ["FR"])
+        XCTAssertEqual(catalog.postcodeCountries(for: .dpd, requirement: dpd), ["CH"])
         XCTAssertEqual(catalog.postcodeCountries(for: .dpdDe, requirement: dpdGermany), ["DE"])
 
         // The menu lists the carrier's own first, then the others by name in the app's language.
@@ -1039,6 +1043,7 @@ final class CarrierCatalogTests: XCTestCase {
         let emirati = catalog.postcodeRequirement(postNL, for: .springGDS, country: "AE")
         XCTAssertNil(catalog.postcodeExample(for: .springGDS, requirement: emirati, region: "AE"))
         XCTAssertEqual(catalog.postcodeRequirement(heppner, for: .heppner, country: "BE"), heppner)
+        XCTAssertEqual(catalog.postcodeRequirement(dpd, for: .dpd, country: "FR"), dpd)
 
         // Only a postcode from abroad goes with its country: one from home goes as it always has.
         XCTAssertNil(catalog.sentPostcodeCountry("NL", postcode: "1012 AB", for: .springGDS))
@@ -1050,8 +1055,8 @@ final class CarrierCatalogTests: XCTestCase {
         // else on the carrier's home.
         XCTAssertEqual(catalog.initialPostcodeCountry(for: .springGDS, requirement: postNL, region: "BE"), "BE")
         XCTAssertEqual(catalog.initialPostcodeCountry(for: .springGDS, requirement: postNL, region: nil), "NL")
-        XCTAssertEqual(catalog.initialPostcodeCountry(for: .heppner, requirement: heppner, region: "be"), "BE")
-        XCTAssertEqual(catalog.initialPostcodeCountry(for: .heppner, requirement: heppner, region: "DE"), "FR")
+        XCTAssertEqual(catalog.initialPostcodeCountry(for: .heppner, requirement: heppner, region: "be"), "FR")
+        XCTAssertEqual(catalog.initialPostcodeCountry(for: .dpd, requirement: dpd, region: "FR"), "CH")
         XCTAssertEqual(catalog.initialPostcodeCountry(for: .dpdDe, requirement: dpdGermany, region: "FR"), "DE")
         func parcel(_ carrier: CarrierID, postcode: String?, data: CarrierData?) -> Parcel {
             Parcel(id: UUID(), trackingNumber: "3SABCD1234567", label: "", carrier: carrier, createdAt: "2026-10-01T08:00:00Z",
@@ -1067,6 +1072,12 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(initial(parcel(.springGDS, postcode: "1000", data: abroad)), "BE")
         XCTAssertEqual(initial(parcel(.springGDS, postcode: "1012 AB", data: abroad)), "NL", "A postcode changed since")
         XCTAssertEqual(initial(parcel(.springGDS, postcode: "1012 AB", data: nil)), "NL")
+    }
+
+    func testTheDevicesCountryIsItsClocksThenItsRegionSetting() {
+        XCTAssertEqual(CarrierCatalog.deviceCountry(timeZone: "Europe/Zurich", region: "FR"), "CH")
+        XCTAssertEqual(CarrierCatalog.deviceCountry(timeZone: "America/New_York", region: "FR"), "FR", "A clock several countries keep")
+        XCTAssertNil(CarrierCatalog.deviceCountry(timeZone: "America/New_York", region: nil))
     }
 
     func testBuildsUsableCarrierLinks() throws {

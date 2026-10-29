@@ -50,14 +50,15 @@ needs ([`trackingRouting.ts`](../src/server/trackingRouting.ts)) and the contrac
 A national carrier's postcode requirement states its own example. One that takes any
 country's postcode leaves it out, and the forms show the reader's country
 ([`postcodeExample.ts`](../src/lib/postcodeExample.ts), `CarrierCatalog.postcodeExample`
-on iPhone): the device's time zone or language region on the web, its region setting on
-iPhone, the carrier's own country otherwise. The examples live in
+on iPhone): the device's time zone, then its language region on the web or its region
+setting on iPhone, the carrier's own country otherwise. The examples live in
 [`shared/postcode-examples.json`](../shared/postcode-examples.json).
 
 A delivery postcode can be from another country than the carrier's own, such as a PostNL
-parcel delivered in Belgium. A postcode field that can take more than one country names
-the country beside it: any country when the requirement's validator is
-`internationalPostcode`, the carrier's catalog countries otherwise. It starts on the
+parcel delivered in Belgium. Most carriers read the postcode alone, whatever its country.
+Where the requirement says `readsCountry`, the lookup reads the country too, and a field
+that can take more than one country names it beside the postcode: any country when the
+validator is `internationalPostcode`, the carrier's catalog countries otherwise. It starts on the
 country stored with the parcel's postcode, then the parcel's destination, the reader's
 country and the carrier's own. For another country than the carrier's first, the field
 takes any country's shape and shows that country's example
@@ -67,7 +68,7 @@ on iPhone). Only such a country is sent: `dpdPostcodeCountry` in the API
 `carrier_data.postcode_country`, and given to the scraper as the lookup input's
 `postcodeCountry` wherever that postcode goes
 ([`server/postcodeCountry.ts`](../src/server/postcodeCountry.ts)). A changed postcode
-goes without it. An adapter that does not read it asks as before.
+goes without it, as does a postcode for a carrier that reads it alone.
 
 The scraper validates its own catalog. The app contract generator projects the catalog
 onto the client API, excluding what only retrieval uses: refresh pacing, clocks, whether a

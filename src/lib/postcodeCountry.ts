@@ -1,6 +1,6 @@
 import { activeRequirements, carrierInfo, normalizeTrackingNumber } from 'universal-parcel-scraper';
 import postcodes from '../../shared/postcode-examples.json';
-import type { CarrierInputRequirement } from './carriers';
+import { carrierRequirements, type CarrierInputRequirement } from './carriers';
 import type { CarrierId } from '../types';
 
 /**
@@ -37,8 +37,17 @@ export function takesAnyPostcode(carrierId: CarrierId, trackingNumber: string): 
     .some(({ field, validator }) => field === 'postcode' && validator === 'internationalPostcode');
 }
 
-/** The countries a postcode for this number can be from: any, or the carrier's own when its check reads their shapes. */
+/** Whether the carrier's lookup reads the country of the postcode given for this number (the catalog's `readsCountry`). */
+export function readsPostcodeCountry(carrierId: CarrierId, trackingNumber: string): boolean {
+  return carrierRequirements(carrierId, trackingNumber).some(({ field, readsCountry }) => field === 'dpdPostcode' && readsCountry === true);
+}
+
+/**
+ * The countries a postcode for this number can be named from: any, or the carrier's own when its check reads their
+ * shapes. Only its home where its lookup reads the postcode alone, so the reader is not asked which.
+ */
 export function postcodeCountries(carrierId: CarrierId, trackingNumber: string): readonly string[] {
+  if (!readsPostcodeCountry(carrierId, trackingNumber)) return carrierInfo(carrierId).countries.slice(0, 1);
   return takesAnyPostcode(carrierId, trackingNumber) ? COUNTRIES : carrierInfo(carrierId).countries;
 }
 
@@ -66,8 +75,9 @@ const foreignFields = new WeakMap<CarrierInputRequirement, Map<string, CarrierIn
 
 /**
  * The postcode field for a postcode from `country`. The carrier's own field
- * for its home country, or when it takes only its own countries' shapes; any
- * country's shape otherwise, with that country's example or none.
+ * for its home country, or when it takes only its own countries' shapes or
+ * reads the postcode alone; any country's shape otherwise, with that
+ * country's example or none.
  */
 export function postcodeFieldFor(
   requirement: CarrierInputRequirement,
@@ -76,7 +86,7 @@ export function postcodeFieldFor(
   country: string | null | undefined,
 ): CarrierInputRequirement {
   if (requirement.field !== 'dpdPostcode' || !sentPostcodeCountry(carrierId, country)
-    || !takesAnyPostcode(carrierId, trackingNumber)) return requirement;
+    || !takesAnyPostcode(carrierId, trackingNumber) || !readsPostcodeCountry(carrierId, trackingNumber)) return requirement;
   let fields = foreignFields.get(requirement);
   if (!fields) foreignFields.set(requirement, fields = new Map());
   let field = fields.get(country!);

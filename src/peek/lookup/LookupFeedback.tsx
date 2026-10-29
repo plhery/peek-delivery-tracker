@@ -162,7 +162,7 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
           disabled={Boolean(state.job)} onChange={(country) => send({ type: 'country', carrier: found.inputCarrier, country })}>
           <input id={id} className={`door-input__field${lettersPostcode(requirement) ? ' door-input__field--postcode' : ''}`}
             type={requirement.type} inputMode={requirement.inputMode} autoComplete={requirement.autoComplete}
-            value={value} placeholder={postcodeExample(found.inputCarrier, requirement, found.postcodeCountry)} pattern={requirement.pattern}
+            value={value} placeholder={postcodeExample(found.inputCarrier, requirement, requirement.readsCountry ? found.postcodeCountry : state.region)} pattern={requirement.pattern}
             maxLength={requirement.maxLength} readOnly={Boolean(state.job)} required={!requirement.optional} aria-describedby={`${id}-help`}
             aria-invalid={inputTrouble && found.missing?.field === requirement.field ? true : undefined}
             autoCapitalize={requirement.type === 'url' ? 'none' : lettersPostcode(requirement) ? 'characters' : undefined} autoCorrect="off" spellCheck={false}

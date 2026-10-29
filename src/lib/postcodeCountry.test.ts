@@ -5,6 +5,7 @@ import {
   initialPostcodeCountry,
   postcodeCountries,
   postcodeFieldFor,
+  readsPostcodeCountry,
   sentPostcodeCountry,
   storedPostcodeCountry,
   takesAnyPostcode,
@@ -12,20 +13,26 @@ import {
 import { postcodeExample } from './postcodeExample';
 
 const POSTNL = '3SABCD826405193';
+const DPD = '06080000000001';
 
 describe('postcode countries', () => {
-  it('takes a postcode from any country when the carrier’s check reads any shape, and from its own countries otherwise', () => {
+  it('names the country only where the carrier’s lookup reads it, from any country when its check reads any shape', () => {
     expect(takesAnyPostcode('spring-gds', POSTNL)).toBe(true);
+    expect(readsPostcodeCountry('spring-gds', POSTNL)).toBe(true);
     expect(postcodeCountries('spring-gds', POSTNL)).toBe(COUNTRIES);
+    // DPD takes any country’s postcode and GLS Switzerland its two countries’, but both read the postcode alone.
+    expect(takesAnyPostcode('dpd', DPD)).toBe(true);
+    expect(readsPostcodeCountry('dpd', DPD)).toBe(false);
+    expect(postcodeCountries('dpd', DPD)).toEqual(['CH']);
     expect(takesAnyPostcode('gls-ch', '12345678901')).toBe(false);
-    expect(postcodeCountries('gls-ch', '12345678901')).toEqual(['CH', 'LI']);
+    expect(postcodeCountries('gls-ch', '12345678901')).toEqual(['CH']);
   });
 
   it('starts on the first known country the carrier takes, then its home', () => {
     expect(initialPostcodeCountry('spring-gds', POSTNL, [undefined, 'BE', 'DE'])).toBe('BE');
     expect(initialPostcodeCountry('spring-gds', POSTNL, [null])).toBe('NL');
-    expect(initialPostcodeCountry('gls-ch', '12345678901', ['DE', 'LI'])).toBe('LI');
-    expect(initialPostcodeCountry('gls-ch', '12345678901', ['DE'])).toBe('CH');
+    expect(initialPostcodeCountry('dpd', DPD, ['FR'])).toBe('CH');
+    expect(initialPostcodeCountry('gls-ch', '12345678901', ['LI'])).toBe('CH');
   });
 
   it('sends a country only when it is not the carrier’s home', () => {
@@ -47,9 +54,11 @@ describe('postcode countries', () => {
     expect(postcodeExample('spring-gds', belgian, 'FR')).toBe('1000');
     // A country without an example shows none, rather than the carrier's own.
     expect(postcodeExample('spring-gds', postcodeFieldFor(own, 'spring-gds', POSTNL, 'AQ'), 'FR')).toBeUndefined();
-    // A carrier that checks its own countries' shapes keeps its field.
+    // A carrier that checks its own countries’ shapes, or reads the postcode alone, keeps its field.
     const [swiss] = carrierRequirements('gls-ch', '12345678901');
     expect(postcodeFieldFor(swiss, 'gls-ch', '12345678901', 'LI')).toBe(swiss);
+    const [dpd] = carrierRequirements('dpd', DPD);
+    expect(postcodeFieldFor(dpd, 'dpd', DPD, 'FR')).toBe(dpd);
   });
 
   it('reads the stored country only while the parcel holds the postcode it came with', () => {

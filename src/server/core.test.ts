@@ -675,7 +675,7 @@ describe('input validation', () => {
       .toMatchObject({ carrier: 'quickpac' });
   });
 
-  it('takes the country of a postcode from abroad, and keeps it only when it is not the carrier’s home', () => {
+  it('takes the country of a postcode from abroad, and keeps it only when it is not the carrier’s home and its lookup reads it', () => {
     const postnl = (dpdPostcode: string, dpdPostcodeCountry?: unknown) =>
       packageCarrierValues({ carrier: 'spring-gds', dpdPostcode, dpdPostcodeCountry }, '3SABCD826405193');
     expect(postnl('1000', 'BE')).toMatchObject({ carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' });
@@ -691,11 +691,14 @@ describe('input validation', () => {
       expect(() => postnl('1000', country)).toThrow('takes no delivery postcode from that country');
     }
     expect(() => postnl('1000', 32)).toThrow('must be text');
-    // A carrier that checks its own countries' postcodes takes only those.
+    // A carrier that checks its own countries' postcodes takes only those, and one whose lookup reads the postcode
+    // alone keeps no country.
     expect(packageCarrierValues({ carrier: 'gls-ch', dpdPostcode: '9490', dpdPostcodeCountry: 'LI' }, '993990103198'))
-      .toMatchObject({ dpdPostcode: '9490', dpdPostcodeCountry: 'LI' });
+      .toMatchObject({ dpdPostcode: '9490', dpdPostcodeCountry: null });
     expect(() => packageCarrierValues({ carrier: 'gls-ch', dpdPostcode: '8000', dpdPostcodeCountry: 'DE' }, '993990103198'))
       .toThrow('takes no delivery postcode from that country');
+    expect(packageCarrierValues({ carrier: 'dpd', dpdPostcode: '75001', dpdPostcodeCountry: 'FR' }, '06080000000001'))
+      .toMatchObject({ dpdPostcode: '75001', dpdPostcodeCountry: null });
   });
 
   it('allowlists browser push services without accepting lookalike hosts', () => {

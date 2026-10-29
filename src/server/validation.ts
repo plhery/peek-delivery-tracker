@@ -7,7 +7,7 @@ import {
   type ApiParcelFeedbackReason,
 } from '../generated/apiContract';
 import { carrierInfo, notTrackingNumber, validTrackingNumber } from '../lib/carriers';
-import { sentPostcodeCountry, takesAnyPostcode } from '../lib/postcodeCountry';
+import { readsPostcodeCountry, sentPostcodeCountry, takesAnyPostcode } from '../lib/postcodeCountry';
 import type { CarrierId } from '../types';
 import { ALERT_PRESET_STAGES, ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import { createECDH } from 'node:crypto';
@@ -50,8 +50,8 @@ export type PackageCarrierValues = Pick<
 
 /**
  * The country a supplied postcode is from: any country for a carrier that
- * takes any country's postcode, else one of its own. Its home country, or no
- * postcode, keeps none.
+ * takes any country's postcode, else one of its own. Its home country, no
+ * postcode, or a carrier whose lookup reads the postcode alone keeps none.
  */
 function postcodeCountry(carrier: CarrierId, trackingNumber: string, postcode: string | null, raw: string): string | null {
   const code = raw.trim().toUpperCase();
@@ -60,7 +60,7 @@ function postcodeCountry(carrier: CarrierId, trackingNumber: string, postcode: s
     || (!takesAnyPostcode(carrier, trackingNumber) && !carrierInfo(carrier).countries.includes(code))) {
     throw new HttpError(400, `${carrierInfo(carrier).name} takes no delivery postcode from that country`);
   }
-  return sentPostcodeCountry(carrier, code) ?? null;
+  return readsPostcodeCountry(carrier, trackingNumber) ? sentPostcodeCountry(carrier, code) ?? null : null;
 }
 
 /** `country`: the reader's (lookupCountry), where a mobile number as dialled there is refused. */

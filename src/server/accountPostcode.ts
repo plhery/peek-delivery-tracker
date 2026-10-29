@@ -35,7 +35,8 @@ export function wantsAccountPostcode(parcel: JsonObject, carrier: string): boole
 /**
  * The write that gives the parcel its owner's postcode, from `given`, their parcels' postcodes
  * newest parcel first (SupabaseServiceClient.accountPostcodes), or null when none of them fits
- * its carrier. The postcode keeps the country it was given with.
+ * its carrier. The postcode is checked as from the country it was given with, and keeps it
+ * where this carrier's lookup reads it.
  */
 export function accountPostcodeWrite(parcel: JsonObject, given: readonly JsonObject[]): JsonObject | null {
   const carrier = String(parcel.carrier);

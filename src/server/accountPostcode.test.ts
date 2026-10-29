@@ -33,9 +33,9 @@ describe('account postcode', () => {
         dpd_postcode: '8000', last_synced_at: null, sync_status: 'pending', sync_error: null,
         carrier_data: { account_postcode: true, routing: { confirmed_carrier: 'dpd', last_success_at: 'x', confirmed_postcode: '8000' } },
       });
-    // Another carrier's postcode keeps its country, which DPD Switzerland is asked with.
-    expect(accountPostcodeWrite(parcel(), given.slice(0, 1))).toMatchObject({
-      dpd_postcode: '75001', carrier_data: { account_postcode: true, postcode_country: { postcode: '75001', country: 'FR' } },
+    // Another carrier's postcode, from France: DPD Switzerland takes any country's, and reads the postcode alone.
+    expect(accountPostcodeWrite(parcel(), given.slice(0, 1))).toEqual({
+      dpd_postcode: '75001', last_synced_at: null, sync_status: 'pending', sync_error: null, carrier_data: { account_postcode: true },
     });
     // DPD Germany takes German postcodes only.
     expect(accountPostcodeWrite(parcel({ carrier: 'dpd-de' }), given)).toBeNull();

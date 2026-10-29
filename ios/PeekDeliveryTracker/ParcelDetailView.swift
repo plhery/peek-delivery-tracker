@@ -1481,7 +1481,8 @@ struct ChangeCarrierView: View {
                 .drawnField()
                 .keyboardType(requirement.inputMode == "numeric" ? .numberPad
                     : requirement.startsWithNumberKeys(
-                        example: catalog.postcodeExample(for: selectedCarrier, requirement: requirement, region: postcodeCountry)
+                        example: catalog.postcodeExample(for: selectedCarrier, requirement: requirement,
+                                                      region: requirement.readsCountry == true ? postcodeCountry : CarrierCatalog.deviceCountry())
                     ) ? .numbersAndPunctuation : .asciiCapable)
                 .textInputAutocapitalization(.characters)
                 .autocorrectionDisabled()

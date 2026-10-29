@@ -535,7 +535,7 @@ export function AddParcelSheet({
                         inputMode={requirement.inputMode}
                         autoComplete={requirement.autoComplete}
                         value={carrierInputValue(requirement.field)}
-                        placeholder={postcodeExample(resolvedCarrier, requirement, postcodeCountry)}
+                        placeholder={postcodeExample(resolvedCarrier, requirement, requirement.readsCountry ? postcodeCountry : region)}
                         pattern={requirement.pattern}
                         maxLength={requirement.maxLength}
                         onChange={(event) => {

@@ -57,10 +57,11 @@ export function ChangeCarrierSheet({
   const chosenCarrier = selectedCarrier === 'auto' ? automaticCarrier ?? parcel.carrier : selectedCarrier;
   const [trackingUrl, setTrackingUrl] = useState(initialCarrier === parcel.carrier ? parcel.trackingUrl ?? '' : '');
   const [dpdPostcode, setDpdPostcode] = useState(initialCarrier === parcel.carrier ? parcel.dpdPostcode ?? '' : '');
-  // The country of the parcel's postcode, the home country when it was given without one; for a carrier without a
-  // postcode yet, the parcel's destination or the device's country when the carrier takes it.
+  // The country of the parcel's postcode, the home country when it was given without one or the carrier reads the
+  // postcode alone; for a carrier without a postcode yet, the parcel's destination or the device's country when the
+  // carrier takes it.
   const startingCountry = (id: CarrierId) => id === parcel.carrier && parcel.dpdPostcode
-    ? parcel.dpdPostcodeCountry ?? initialPostcodeCountry(id, parcel.trackingNumber, [])
+    ? initialPostcodeCountry(id, parcel.trackingNumber, [parcel.dpdPostcodeCountry])
     : initialPostcodeCountry(id, parcel.trackingNumber, [parcel.destinationCountry, deviceCountry()]);
   const [postcodeCountry, setPostcodeCountry] = useState(() => startingCountry(
     selectedCarrier === 'auto' ? automaticCarrier ?? parcel.carrier : selectedCarrier));
@@ -212,7 +213,7 @@ export function ChangeCarrierSheet({
                   inputMode={requirement.inputMode}
                   autoComplete={requirement.autoComplete}
                   value={valueFor(requirement.field)}
-                  placeholder={postcodeExample(chosenCarrier, requirement, postcodeCountry)}
+                  placeholder={postcodeExample(chosenCarrier, requirement, requirement.readsCountry ? postcodeCountry : deviceCountry())}
                   pattern={requirement.pattern}
                   maxLength={requirement.maxLength}
                   onChange={(event) => {

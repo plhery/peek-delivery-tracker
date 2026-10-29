@@ -21,7 +21,8 @@ Peek's catalog knows these shapes (characters invented):
 | Shape | Whose it is |
 | --- | --- |
 | `A000000000` | Allegro One: `A0` and 8 letters or digits, 10 characters. |
-| `AD00000000` | Allegro Delivery: `AD` and 8 letters or digits, named Allegro One too. |
+| `AD000000000000000` | Allegro Delivery: `AD0` and 14 digits or consonants, 17 characters, named Allegro One too. |
+| `AD00000000` | An earlier Allegro Delivery form, still on some returns: `AD` and 8 letters or digits. |
 | `ALE000000000000` | An older Allegro One form: `ALE` and 12 digits. |
 
 No number yet? The seller adds it to the order, unless Allegro receives it automatically from a carrier integrated with it. See [how to find your tracking number](guide:find-tracking-number).
@@ -81,7 +82,7 @@ Allegro handles customer service for Allegro Delivery parcels, Allegro One's inc
 
 ## Tracking Allegro One with Peek
 
-[Peek](/) names Allegro One at once for `A0` or `AD` and 8 letters or digits. For `ALE` and 12 digits, pick Allegro One with "Change".
+[Peek](/) names Allegro One at once for `A0` or `AD` and 8 letters or digits, and for the 17-character `AD0` form. For `ALE` and 12 digits, pick Allegro One with "Change".
 
 It reads Allegro's tracking in English, or in Polish if you use Peek in Polish, and shows the wordings as written, with the history and the delivery time. Allegro gives no places, so there's nothing to pin on the map, and no pickup point name, expected delivery, weight or sender.
 

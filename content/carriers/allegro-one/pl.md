@@ -21,7 +21,8 @@ Katalog Peek zna takie kształty (numery wymyślone):
 | Kształt | Co to jest |
 | --- | --- |
 | `A000000000` | Allegro One: `A0` i 8 liter lub cyfr, razem 10 znaków. |
-| `AD00000000` | Allegro Delivery: `AD` i 8 liter lub cyfr, też przypisany do Allegro One. |
+| `AD000000000000000` | Allegro Delivery: `AD0` i 14 cyfr lub spółgłosek, razem 17 znaków, też przypisany do Allegro One. |
+| `AD00000000` | Wcześniejszy format Allegro Delivery, wciąż na niektórych zwrotach: `AD` i 8 liter lub cyfr. |
 | `ALE000000000000` | Starszy format numeru Allegro One: `ALE` i 12 cyfr. |
 
 Nie widzisz numeru? Dodaje go sprzedający, chyba że Allegro pobiera go automatycznie od przewoźnika zintegrowanego z Allegro. Więcej w poradniku [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
@@ -85,7 +86,7 @@ Obsługę klienta przy paczkach Allegro Delivery, także Allegro One, prowadzi A
 
 ## Śledzenie Allegro One w Peek
 
-[Peek](/) od razu rozpoznaje Allegro One po numerze `A0` albo `AD` z 8 literami lub cyframi. Numery przewoźników, z którymi Allegro też wysyła paczki, takich jak [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL czy Poczta Polska, nigdy nie mają tego kształtu. Przy numerze `ALE` z 12 cyframi wybierz Allegro One przez „Zmień przewoźnika”.
+[Peek](/) od razu rozpoznaje Allegro One po numerze `A0` albo `AD` z 8 literami lub cyframi oraz po 17-znakowym numerze `AD0`. Numery przewoźników, z którymi Allegro też wysyła paczki, takich jak [InPost](carrier:inpost), DPD Polska, ORLEN Paczka, DHL czy Poczta Polska, nigdy nie mają tych kształtów. Przy numerze `ALE` z 12 cyframi wybierz Allegro One przez „Zmień przewoźnika”.
 
 Peek odczytuje śledzenie Allegro po polsku, gdy korzystasz z Peek po polsku (stąd komunikaty jak w tabeli powyżej), a w każdym innym języku po angielsku. Pokazuje historię z dokładnymi godzinami i czas doręczenia. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy.
 

@@ -38,7 +38,7 @@ Oto, co przewoźnicy i standard pocztowy mówią o numerach, które w Polsce spo
 | [DHL Express](carrier:dhl-express) | 10 cyfr, bez liter, według DHL Express w Holandii |
 | GLS | numer paczki od nadawcy albo Track-ID z awiza; długości GLS nie podaje |
 | [Packeta](carrier:packeta) | litera `Z` i 10 cyfr, np. `Z1234567890`: „Numer śledzenia musi zaczynać się od litery 'Z' i składać się z 10 cyfr” |
-| [ORLEN Paczka](carrier:orlen-paczka) | 13 cyfr od `210` (`2101234567890`): tak wynika z danych przewoźników, z których korzysta Peek. Wyszukiwarka ORLEN Paczki przyjmuje też 7- albo 10-cyfrowy kod nadania |
+| [ORLEN Paczka](carrier:orlen-paczka) | 13 cyfr od `210` (`2100000000005`): tak wynika z danych przewoźników, z których korzysta Peek. Wyszukiwarka ORLEN Paczki przyjmuje też 7- albo 10-cyfrowy kod nadania |
 | [UPS](carrier:ups) | `1Z` i 16 liter lub cyfr, razem 18 znaków, np. `1Z999AA10123456784`, przykładowy numer z poprawną cyfrą kontrolną UPS |
 | Amazon | w danych przewoźników Peek `TBA` i 12 cyfr albo kod kraju i 10 cyfr, więcej niżej |
 | [YunExpress](carrier:yunexpress) | `YT` i 16 cyfr; `YT` i 13 cyfr to YTO Express |

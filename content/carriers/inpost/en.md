@@ -77,7 +77,7 @@ As listed on 10 October 2026:
 
 ## Tracking an InPost parcel with Peek
 
-[Peek](/) recognises `8YDR` numbers at once. For 24-digit, `JJD`, `JD` and Yodel label numbers it asks InPost whether it knows them (and Austrian Post and Ciblex for 24 digits). Other shapes, 8 digits included, aren't read as InPost's even if you pick InPost by hand; only universal tracking services are then asked. Links from inpost.pl's tracking page can be pasted, not inpost.co.uk's, and only the number is needed.
+[Peek](/) recognises `8YDR` numbers at once. For 24-digit, `JJD`, `JD` and Yodel label numbers it asks InPost whether it knows them (and Austrian Post and Ciblex for 24 digits). Other shapes, 8 digits included, aren't read as InPost's even if you pick InPost by hand; only universal tracking services are then asked. Links from inpost.pl's tracking page can be pasted, and an inpost.co.uk link only when it holds an `8YDR` number; the number alone is enough.
 
 In Spain, Peek follows InPost under its [Mondial Relay](carrier:mondial-relay) entry (search "InPost Spain") and reads `FV` numbers (FV and 8 digits) on inpost.es. For an 8-, 10- or 12-digit Spanish number, press "Change" and pick Mondial Relay; Peek then searches Mondial Relay's French site, not confirmed to find InPost Spain's parcels.
 

@@ -3,13 +3,17 @@ package com.plhery.peekdeliverytracker.platform
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 import java.security.Key
+import java.security.KeyStoreException
 import java.security.KeyStoreSpi
 import java.security.Provider
+import java.security.ProviderException
 import java.security.SecureRandom
 import java.security.Security
+import java.security.UnrecoverableKeyException
 import java.security.cert.Certificate
 import java.security.spec.AlgorithmParameterSpec
 import java.util.Collections
@@ -138,6 +142,105 @@ class KeystoreSecretStoreTest {
         assertFalse(folder.root.resolve("com.plhery.PeekDeliveryTracker.auth").exists())
         assertTrue(FakeAndroidKeyStore.keys.isEmpty())
         store().delete()
+    }
+
+    /** Keys in memory whose Keystore fails as asked: `failures` calls to `existing` throw first. */
+    private class FlakyKeys : SecretKeys {
+        val keys = mutableMapOf<String, SecretKey>()
+        var failures = 0
+        var reads = 0
+        var deleted = 0
+        var failure: () -> Exception = { KeyStoreException("System error") }
+
+        override fun existing(alias: String): SecretKey? {
+            reads += 1
+            if (failures > 0) {
+                failures -= 1
+                throw failure()
+            }
+            return keys[alias]
+        }
+
+        override fun create(alias: String): SecretKey =
+            SecretKeySpec(ByteArray(32).also(SecureRandom()::nextBytes), "AES").also { keys[alias] = it }
+
+        override fun delete(alias: String) {
+            deleted += 1
+            keys.remove(alias)
+        }
+    }
+
+    private fun store(keys: SecretKeys) = KeystoreSecretStore("com.plhery.PeekDeliveryTracker.deviceParcels", folder.root, keys, retryPauseMillis = 0)
+
+    @Test
+    fun aKeyTheKeystoreCanNoLongerReadIsReplacedAtTheNextSave() {
+        val keys = FlakyKeys()
+        store(keys).save(session)
+        // A key an update of the system left unreadable: every use of it throws.
+        keys.failures = Int.MAX_VALUE
+        keys.failure = { UnrecoverableKeyException("Failed to obtain information about key") }
+        assertNull(store(keys).load())
+        keys.failures = 1
+        store(keys).save(session)
+        assertEquals(1, keys.deleted)
+        assertArrayEquals(session, store(keys).load())
+    }
+
+    @Test
+    fun aKeyTheCipherRefusesIsReplacedAtTheNextSave() {
+        val keys = FlakyKeys()
+        // A key the cipher cannot take, as one the Keystore invalidated.
+        keys.keys["peek.secret.com.plhery.PeekDeliveryTracker.deviceParcels"] = SecretKeySpec(ByteArray(7), "AES")
+        store(keys).save(session)
+        assertEquals(1, keys.deleted)
+        assertArrayEquals(session, store(keys).load())
+        // A key that cannot be made either fails the save, and leaves the entry there.
+        val broken = object : SecretKeys {
+            override fun existing(alias: String): SecretKey = throw KeyStoreException("System error")
+
+            override fun create(alias: String): SecretKey = throw ProviderException("Keystore key generation failed")
+
+            override fun delete(alias: String) = throw KeyStoreException("System error")
+        }
+        try {
+            store(broken).save("other".toByteArray())
+            fail("Expected the save to fail")
+        } catch (_: IOException) {
+        }
+        assertArrayEquals(session, store(keys).load())
+    }
+
+    @Test
+    fun aReadTheKeystoreFailsIsAskedAgainBeforeItReadsAsNothingSaved() {
+        val keys = FlakyKeys()
+        store(keys).save(session)
+
+        keys.reads = 0
+        keys.failures = 2
+        assertArrayEquals(session, store(keys).load())
+        assertEquals(3, keys.reads)
+
+        // A Keystore that keeps failing: nothing saved, as KeychainStore reads a failed SecItemCopyMatching.
+        keys.reads = 0
+        keys.failures = Int.MAX_VALUE
+        keys.failure = { ProviderException("Keystore operation failed") }
+        assertNull(store(keys).load())
+        assertEquals(3, keys.reads)
+        keys.failures = 0
+        assertArrayEquals(session, store(keys).load())
+
+        // No key, or bytes the key did not seal, read as nothing at once.
+        val file = folder.root.resolve("com.plhery.PeekDeliveryTracker.deviceParcels")
+        val bytes = file.readBytes()
+        bytes[bytes.size - 1] = (bytes[bytes.size - 1].toInt() xor 1).toByte()
+        file.writeBytes(bytes)
+        keys.reads = 0
+        assertNull(store(keys).load())
+        assertEquals(1, keys.reads)
+        keys.keys.clear()
+        keys.reads = 0
+        assertNull(store(keys).load())
+        assertEquals(1, keys.reads)
     }
 
     @Test

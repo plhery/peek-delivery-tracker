@@ -19,15 +19,23 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Peek">
         <!-- The keyboard never pans the window: the screens make room for it from its insets, and the tab bar stays
-             where it is, behind it, as the iPhone's does. -->
+             where it is, behind it, as the iPhone's does. A link comes to the window already open (singleTop). -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.Peek.Starting"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- A parcel's link, peekdeliverytracker://parcel/<uuid>, opens it on the deliveries. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="peekdeliverytracker" android:host="parcel" />
             </intent-filter>
         </activity>
 

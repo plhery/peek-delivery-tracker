@@ -163,7 +163,16 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'famafutar'
   | 'first-flight-me'
   | 'dd-express'
-  | 'boyuan';
+  | 'boyuan'
+  | 'emex'
+  | 'interlogistica'
+  | 'intime-bg'
+  | 'asigna'
+  | 'pflogistics'
+  | 'costco-logistics'
+  | 'quality-post'
+  | 'rxo'
+  | 'runner-express';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -168,6 +168,9 @@
   "asendia": {
     "decal": "asendia"
   },
+  "asigna": {
+    "decal": "asigna"
+  },
   "asyad-express": {
     "decal": "asyad-express"
   },
@@ -487,6 +490,9 @@
     },
     "decal": "correos"
   },
+  "costco-logistics": {
+    "decal": "costco-logistics"
+  },
   "courier-center": {
     "decal": "courier-center"
   },
@@ -769,6 +775,9 @@
     "palette": {
       "accent": "#ebb811"
     }
+  },
+  "emex": {
+    "decal": "emex"
   },
   "emile": {
     "decal": "emile",
@@ -1269,6 +1278,9 @@
   "intereuropa": {
     "decal": "intereuropa"
   },
+  "interlogistica": {
+    "decal": "interlogistica"
+  },
   "internet-express": {
     "decal": "internet-express",
     "palette": {
@@ -1280,6 +1292,9 @@
   },
   "intex-paketdienst": {
     "decal": "intex-paketdienst"
+  },
+  "intime-bg": {
+    "decal": "intime-bg"
   },
   "intl-post": {},
   "iran-post": {
@@ -1864,6 +1879,9 @@
   "pfc-express": {
     "decal": "pfc-express"
   },
+  "pflogistics": {
+    "decal": "pflogistics"
+  },
   "phlpost": {
     "decal": "phlpost"
   },
@@ -2034,6 +2052,12 @@
   "pushpak-courier": {
     "decal": "pushpak-courier"
   },
+  "quality-post": {
+    "decal": "quality-post",
+    "palette": {
+      "accent": "#9d1e21"
+    }
+  },
   "quantium-solutions": {
     "decal": "quantium-solutions"
   },
@@ -2100,8 +2124,14 @@
   "rr-express-sg": {
     "decal": "rr-express-sg"
   },
+  "runner-express": {
+    "decal": "runner-express"
+  },
   "russian-post": {
     "decal": "russian-post"
+  },
+  "rxo": {
+    "decal": "rxo"
   },
   "saee": {
     "decal": "saee"

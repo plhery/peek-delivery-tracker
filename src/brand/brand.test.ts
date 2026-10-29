@@ -238,6 +238,15 @@ describe('carrier brand', () => {
       'first-flight-me',
       'dd-express',
       'boyuan',
+      'emex',
+      'interlogistica',
+      'intime-bg',
+      'asigna',
+      'pflogistics',
+      'costco-logistics',
+      'quality-post',
+      'rxo',
+      'runner-express',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

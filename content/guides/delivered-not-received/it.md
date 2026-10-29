@@ -129,7 +129,7 @@ Puoi farla, ma nessuna delle regole qui sopra la pone come condizione per il rim
 :::sources
 - [Normattiva: Codice del consumo, art. 63](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art63) – passaggio del rischio, corriere scelto dal consumatore
 - [Normattiva: Codice del consumo, art. 61](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art61) – 30 giorni, termine supplementare, risoluzione
-- [Brocardi: Codice civile, art. 1510](https://brocardi.it/codice-civile/libro-quarto/titolo-iii/capo-i/sezione-ii/art1510.html) – consegna al vettore nelle vendite tra privati
+- [Normattiva: Codice civile, art. 1510](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:regio.decreto:1942-03-16;262:2~art1510) – consegna al vettore nelle vendite tra privati
 - [Fedlex: Codice delle obbligazioni, art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/it#art_185) – utili e rischi, merce da spedire
 - [TCS: Ho ordinato un regalo costoso, ma non l'ho mai ricevuto](https://www.tcs.ch/it/test-consigli/consigli/esperto-tcs/ordinare-regali-online.php) – paghi se il venditore prova la spedizione, corridoio del condominio, commercianti accomodanti
 - [Stiftung für Konsumentenschutz: Paket gestohlen oder beschädigt, wer haftet?](https://www.konsumentenschutz.ch/online-ratgeber/paket-gestohlen-oder-beschaedigt-wer-haftet/) – luogo sicuro e al riparo, responsabilità del corriere, CHF 500 e 1500, polizia, assicurazione, CHF 200

@@ -78,7 +78,7 @@ describe('the number checker in a guide', () => {
   it('lists the carriers a shape fits without proving one, by the name of their page in the guide’s language', async () => {
     const user = userEvent.setup();
     page('de', de);
-    await user.type(screen.getByRole('textbox', { name: de['guides.checker.label'] }), 'AP12345678901234');
+    await user.type(screen.getByRole('textbox', { name: de['guides.checker.label'] }), 'LP12345678901234');
     const result = document.getElementById('number-checker-result')!;
     const cainiao = CARRIER_LINKS.de.find(({ id }) => id === 'cainiao')!;
     expect(await within(result).findByRole('link', { name: 'Cainiao' })).toHaveAttribute('href', `/de/carriers/${cainiao.slug}`);

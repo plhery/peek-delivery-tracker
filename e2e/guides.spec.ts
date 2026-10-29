@@ -184,7 +184,7 @@ test('a translated number formats guide checks numbers in its own language, on a
   await page.setViewportSize({ width: 360, height: 760 });
   await page.goto(`/pl/guides/${GUIDE_LINKS.pl.find(({ id }) => id === 'tracking-number-formats')!.slug}`);
   const field = page.getByRole('textbox', { name: pl['guides.checker.label'] });
-  await field.fill('AP12345678901234');
+  await field.fill('LP12345678901234');
   const result = page.locator('#number-checker-result');
   await expect(result.getByRole('link', { name: 'Cainiao' })).toHaveAttribute('href', /^\/pl\/carriers\//);
   await expect(result).toContainText(pl['guides.checker.maybeNote']);

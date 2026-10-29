@@ -1,0 +1,215 @@
+package com.plhery.peekdeliverytracker.ui.tabs
+
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.view.KeyEvent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.tappableElement
+import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
+import androidx.core.view.ViewCompat
+import androidx.window.layout.FoldingFeature
+import androidx.window.layout.WindowInfoTracker
+import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
+import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
+import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.emptyFlow
+
+/** The iPhone's three tabs (ParcelListView's TabView), in its order: a tab's ordinal is its tag there. */
+enum class PeekTab(val copyKey: String, val symbol: String, val screen: String) {
+    Deliveries("native.deliveries", "shippingbox.fill", "deliveries"),
+
+    /** ExperimentalCopy's `passport`, which reads `passport.title`. */
+    Passport("passport.title", "book.closed.fill", "passport"),
+    Friends("friends.title", "person.2.fill", "friends"),
+}
+
+/**
+ * The room the tab bar takes over the tab's content, which draws edge to edge under it: from the window's bottom to
+ * the bar's top on a phone, from the window's top to the bar's bottom where the bar stands at the top.
+ */
+val LocalTabBarPadding = compositionLocalOf { PaddingValues(0.dp) }
+
+/**
+ * Taps on the tab already chosen, for what the tab shows: a stack goes back to its root, and a list at its root
+ * scrolls to its top, as a UITabBarController's tab does.
+ */
+@Stable
+class TabReselection {
+    private val taps = MutableSharedFlow<Unit>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+
+    internal val events get() = taps
+
+    fun reselect() {
+        taps.tryEmit(Unit)
+    }
+}
+
+/** The reselection of the tab being drawn, or of what its stack shows at its root. */
+val LocalTabReselection = staticCompositionLocalOf { TabReselection() }
+
+/** Runs `onReselect` each time the tab drawing this is tapped again while chosen. */
+@Composable
+fun TabReselectionEffect(onReselect: suspend () -> Unit) {
+    val reselection = LocalTabReselection.current
+    val current by rememberUpdatedState(onReselect)
+    LaunchedEffect(reselection) { reselection.events.collect { current() } }
+}
+
+/**
+ * ParcelListView's TabView (A-S21): the chosen tab's content under iOS 26's floating glass tab bar, at the bottom on a
+ * phone and at the top in a window at least 600 wide and 480 tall, as iPadOS puts it. Each tab keeps its saved state
+ * while another is shown. A change of tab plays the selection haptic and counts the tab's screen. On a hardware
+ * keyboard, Ctrl or Meta with 1, 2 or 3 chooses a tab, as ⌘1–3 do on the iPhone, while this window has the keys.
+ */
+@Composable
+fun TabShell(
+    selection: Int,
+    onSelect: (Int) -> Unit,
+    labels: List<String>,
+    onView: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable (PeekTab) -> Unit,
+) {
+    val tabs = PeekTab.entries
+    val reselections = remember { tabs.map { TabReselection() } }
+    SensoryFeedbackEffect(SensoryFeedback.Selection, selection)
+    val viewed = remember { LastTab(selection) }
+    SideEffect {
+        if (viewed.tab != selection) {
+            viewed.tab = selection
+            onView(tabs[selection].screen)
+        }
+    }
+    TabKeys(onSelect)
+    val tap = { tab: Int -> if (tab == selection) reselections[tab].reselect() else onSelect(tab) }
+    val holder = rememberSaveableStateHolder()
+    val backdrop = rememberMaterialBackdrop()
+    val density = LocalDensity.current
+    BoxWithConstraints(modifier.fillMaxSize()) {
+        val top = maxWidth >= 600.dp && maxHeight >= 480.dp
+        val statusTop = with(density) { WindowInsets.statusBars.getTop(this).toDp() }
+        val buttons = with(density) { WindowInsets.tappableElement.getBottom(this).toDp() }
+        // Above the navigation buttons where there are some; over the gesture bar as over the iPhone's home indicator.
+        val bottomGap = if (buttons > 0.dp) buttons + BUTTONS_GAP else GESTURE_GAP
+        val topGap = statusTop + STATUS_GAP
+        val footprint = if (top) PaddingValues(top = topGap + TOP_BAR_HEIGHT) else PaddingValues(bottom = bottomGap + BOTTOM_BAR_HEIGHT)
+        Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background)) {
+            CompositionLocalProvider(LocalTabBarPadding provides footprint, LocalTabReselection provides reselections[selection]) {
+                holder.SaveableStateProvider(tabs[selection].name) { content(tabs[selection]) }
+            }
+        }
+        if (top) {
+            val startHalf = bookStartHalf()
+            Box(Modifier.align(Alignment.TopStart).then(if (startHalf != null) Modifier.width(startHalf) else Modifier.fillMaxSize())) {
+                TopTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.TopCenter).padding(top = topGap))
+            }
+        } else {
+            val sides = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal)
+            BottomTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.BottomCenter).windowInsetsPadding(sides).padding(bottom = bottomGap))
+        }
+    }
+}
+
+/** The tab an effect last acted on, kept across compositions without causing one. */
+internal class LastTab(var tab: Int)
+
+/** The tab Ctrl or Meta with 1, 2 or 3 chooses, as ⌘1–3 do on the iPhone and the Mac; null for any other key. */
+internal fun shortcutTab(event: KeyEvent): Int? {
+    if (!event.hasModifiers(KeyEvent.META_CTRL_ON) && !event.hasModifiers(KeyEvent.META_META_ON)) return null
+    return when (event.keyCode) {
+        KeyEvent.KEYCODE_1 -> 0
+        KeyEvent.KEYCODE_2 -> 1
+        KeyEvent.KEYCODE_3 -> 2
+        else -> null
+    }
+}
+
+/**
+ * The shortcuts, taken once nothing in the window has used the key, whether or not anything has focus. A dialog or
+ * a sheet is a window of its own and keeps its keys, so they don't reach the tabs under it.
+ */
+@Composable
+private fun TabKeys(choose: (Int) -> Unit) {
+    val view = LocalView.current
+    val current by rememberUpdatedState(choose)
+    DisposableEffect(view) {
+        val listener = ViewCompat.OnUnhandledKeyEventListenerCompat { _, event ->
+            val tab = shortcutTab(event) ?: return@OnUnhandledKeyEventListenerCompat false
+            if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) current(tab)
+            true
+        }
+        ViewCompat.addOnUnhandledKeyEventListener(view, listener)
+        onDispose { ViewCompat.removeOnUnhandledKeyEventListener(view, listener) }
+    }
+}
+
+/**
+ * The width of the window's start half, before a foldable's hinge, when the hinge stands upright and splits the
+ * window (book posture): the top bar keeps to that half rather than straddling the fold.
+ */
+@Composable
+private fun bookStartHalf(): androidx.compose.ui.unit.Dp? {
+    val activity = LocalContext.current.activity()
+    val layout by remember(activity) {
+        activity?.let { WindowInfoTracker.getOrCreate(it).windowLayoutInfo(it) } ?: emptyFlow()
+    }.collectAsState(initial = null)
+    val fold = layout?.displayFeatures?.filterIsInstance<FoldingFeature>()
+        ?.firstOrNull { it.isSeparating && it.orientation == FoldingFeature.Orientation.VERTICAL } ?: return null
+    val window = LocalView.current.rootView.width
+    val start = if (LocalLayoutDirection.current == LayoutDirection.Ltr) fold.bounds.left else window - fold.bounds.right
+    return with(LocalDensity.current) { start.toDp() }
+}
+
+private tailrec fun Context.activity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.activity()
+    else -> null
+}
+
+/** The bottom bar's bottom edge over the gesture bar, as the iPhone's tab bar stands over the home indicator. */
+private val GESTURE_GAP = 21.dp
+
+/** The bottom bar's bottom edge over the navigation buttons. */
+private val BUTTONS_GAP = 8.dp
+
+/** The top bar's top edge under the status bar, iPadOS's. */
+private val STATUS_GAP = 7.5.dp

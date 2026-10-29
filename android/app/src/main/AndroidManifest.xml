@@ -15,10 +15,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Peek">
+        <!-- The keyboard never pans the window: the screens make room for it from its insets, and the tab bar stays
+             where it is, behind it, as the iPhone's does. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Peek.Starting">
+            android:theme="@style/Theme.Peek.Starting"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

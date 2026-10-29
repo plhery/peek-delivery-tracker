@@ -13,11 +13,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.plhery.peekdeliverytracker.ui.draw.PeekMark
+import com.plhery.peekdeliverytracker.ui.PeekRoot
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
@@ -42,11 +40,15 @@ class MainActivity : ComponentActivity() {
                 systemBars(dark)
                 onDispose {}
             }
+            val container = app.container.collectAsState().value
             // The liveries from the container's catalog, never from one read before it is installed.
-            val catalog = app.container.collectAsState().value?.catalog?.collectAsState()?.value
+            val catalog = container?.catalog?.collectAsState()?.value
             PeekTheme(appearance = appearance, dark = dark, carrierIdentities = rememberCarrierIdentities(catalog)) {
-                Box(Modifier.fillMaxSize().background(PeekTheme.colors.background), contentAlignment = Alignment.Center) {
-                    PeekMark(78.dp)
+                if (container != null) {
+                    PeekRoot(container)
+                } else {
+                    // Under the launch window, which stays until the container is made.
+                    Box(Modifier.fillMaxSize().background(PeekTheme.colors.background))
                 }
             }
         }

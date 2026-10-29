@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.roborazzi)
 }
 
@@ -132,6 +133,12 @@ dependencies {
     implementation(libs.haze.blur)
     // URLSession's stand-in: the API, sign-in, catalog and link requests (platform/OkHttpTransport.kt).
     implementation(libs.okhttp)
+    // The deliveries' back stack, saved with the window and through process death as @Serializable keys (NavKey).
+    implementation(libs.navigation3.runtime)
+    implementation(libs.navigation3.ui)
+    implementation(libs.kotlinx.serialization.core)
+    // A foldable's hinge, which the tab bar keeps clear of in book posture (FoldingFeature).
+    implementation(libs.window)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
@@ -148,4 +155,5 @@ dependencies {
     testImplementation(libs.roborazzi.compose)
     testImplementation(libs.roborazzi.junit.rule)
     testImplementation(libs.mockwebserver)
+    testImplementation(libs.window.testing)
 }

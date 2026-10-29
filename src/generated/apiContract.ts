@@ -1231,7 +1231,9 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "InPost Spain",
       "InPost España",
-      "InPost (ES)"
+      "InPost (ES)",
+      "Punto Pack",
+      "PuntoPack"
     ],
     "helpUrl": "https://www.mondialrelay.fr/nous-contacter/"
   },
@@ -4291,7 +4293,11 @@ export const CARRIER_CAPABILITIES = {
       "CN"
     ],
     "trackingSearchUrl": "https://www.jingdonglogistics.com/Tracking",
-    "helpUrl": "https://www.jingdonglogistics.com/contact"
+    "helpUrl": "https://www.jingdonglogistics.com/contact",
+    "aliases": [
+      "Jingdong Logistics",
+      "京东物流"
+    ]
   },
   "yamato": {
     "displayName": "Yamato Transport",
@@ -14763,6 +14769,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^YHKJ\\d{10}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^BY\\d{14}CN$",
         "confidence": "low"
       }
     ],
@@ -28865,7 +28875,8 @@ export const CARRIER_CAPABILITIES = {
   "skyex-ae": {
     "displayName": "Sky Express International",
     "aliases": [
-      "Sky Express International LLC"
+      "Sky Express International LLC",
+      "SkyEx"
     ],
     "countries": [
       "AE"
@@ -31529,7 +31540,8 @@ export const CARRIER_CAPABILITIES = {
       "SWE",
       "守务国际",
       "上海守务国际",
-      "Shanghai Shouwu International"
+      "Shanghai Shouwu International",
+      "Shouwu Express"
     ],
     "countries": [
       "CN"
@@ -32392,7 +32404,8 @@ export const CARRIER_CAPABILITIES = {
   "mhi": {
     "displayName": "MHI",
     "aliases": [
-      "Mail Handling International"
+      "Mail Handling International",
+      "Trackmail"
     ],
     "countries": [
       "GB"
@@ -33445,6 +33458,44 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.yamatoamerica.com/tracking/"
+  },
+  "boyuan": {
+    "displayName": "Boyuan Supply Chain",
+    "aliases": [
+      "Boyuan",
+      "Boyuan Logistics",
+      "博远供应链",
+      "博远物流",
+      "广东博远"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#e60012",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "tms.boyuangyl.com"
+        ],
+        "pathPattern": "^/(?:en/)?trackIndex\\.htm$",
+        "params": [
+          "documentCode"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^BY\\d{14}CN$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.boyuangyl.com/"
   }
 } as const;
 
@@ -34338,7 +34389,8 @@ export const CARRIER_IDS = [
   "post-one",
   "tas-courier",
   "wedo",
-  "yamato-america"
+  "yamato-america",
+  "boyuan"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

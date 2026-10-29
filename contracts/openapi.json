@@ -33810,6 +33810,330 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://track.rxo.com/"
+    },
+    "3pe-express": {
+      "displayName": "3PE Express",
+      "aliases": [
+        "3PE Express Inc",
+        "3PE",
+        "3peex"
+      ],
+      "countries": [
+        "CN",
+        "US"
+      ],
+      "color": "#005ba3",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.3peex.com/tracking.html"
+    },
+    "ait-home-delivery": {
+      "displayName": "AIT Home Delivery",
+      "aliases": [
+        "AIT Home Delivery UK",
+        "AIT Home Delivery UK Ltd",
+        "AIT Home Delivery GmbH",
+        "Panther Logistics"
+      ],
+      "countries": [
+        "GB",
+        "DE",
+        "AT"
+      ],
+      "color": "#0055a5",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://aithomedelivery.com/en-gb/"
+    },
+    "ambro-express": {
+      "displayName": "Ambro Express",
+      "aliases": [
+        "AmbroExpress",
+        "Ambro Express Sp. z o.o. Sp. K.",
+        "Grupa Ambro"
+      ],
+      "countries": [
+        "PL",
+        "DE",
+        "AT",
+        "CZ",
+        "SK"
+      ],
+      "color": "#123274",
+      "selectable": true,
+      "timezone": "Europe/Warsaw",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://ambroexpress.pl/sledzenie-przesylek#{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "ambroexpress.pl",
+            "www.ambroexpress.pl"
+          ],
+          "pathPattern": "^/sledzenie-przesylek/?$",
+          "fragment": "^([A-Za-z0-9]{13})$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ambroexpress.pl/sledzenie-przesylek"
+    },
+    "ameriship": {
+      "displayName": "AmeriShip",
+      "aliases": [
+        "Stat Overnight",
+        "STAT Overnight Delivery",
+        "AmeriShip LLC"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#c62029",
+      "selectable": true,
+      "timezone": "America/Chicago",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://ameriship.com/track/?n={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "ameriship.com",
+            "www.ameriship.com"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "n"
+          ]
+        },
+        {
+          "domains": [
+            "ameriship.com",
+            "www.ameriship.com",
+            "statovernight.com",
+            "www.statovernight.com"
+          ],
+          "pathPattern": "^/tracking-results/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ameriship.com/track/"
+    },
+    "cargoline": {
+      "displayName": "CargoLine",
+      "aliases": [
+        "Cepra",
+        "CargoLine GmbH & Co. KG",
+        "Cepra Track & Trace"
+      ],
+      "countries": [
+        "DE"
+      ],
+      "color": "#f13e3c",
+      "selectable": true,
+      "timezone": "Europe/Berlin",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://trackandtrace.cepra.de/Track/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "trackandtrace.cepra.de"
+          ],
+          "path": "^/Track/(\\d{20})(?:/\\d{5})?/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://trackandtrace.cepra.de/Track"
+    },
+    "city-air-express": {
+      "displayName": "City Air Express",
+      "aliases": [
+        "CAE Delivers",
+        "City Air Express (N.I.) Ltd",
+        "City Air Express Ltd"
+      ],
+      "countries": [
+        "GB",
+        "IE"
+      ],
+      "color": "#ff0114",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://caebfs.netcourier.net/online/tracking/trackinginfo/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "caebfs.netcourier.net",
+            "caeman.netcourier.net",
+            "caedub.netcourier.net",
+            "caelhr.netcourier.net"
+          ],
+          "path": "^/online/tracking/trackinginfo/([A-Za-z0-9-]{4,20})/?$"
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^MN\\d{6}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.cityairexpress.com/track-my-parcel"
+    },
+    "gio-express": {
+      "displayName": "GIO Express",
+      "aliases": [
+        "GIO Express Inc",
+        "GIO Express Inc.",
+        "GIO eCourier"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#571216",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://gioexpress.com/tracking/?tracking={trackingNumber}&type=tracking",
+      "linkRules": [
+        {
+          "domains": [
+            "gioexpress.com",
+            "www.gioexpress.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://gioexpress.com/tracking/"
+    },
+    "jp-home": {
+      "displayName": "JP HOME",
+      "aliases": [
+        "Agediss",
+        "Agediss by JP",
+        "AB Home",
+        "VIR by JP",
+        "JP Home Jacky Perrenot"
+      ],
+      "countries": [
+        "FR",
+        "BE",
+        "LU"
+      ],
+      "color": "#ff0025",
+      "selectable": true,
+      "timezone": "Europe/Paris",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "jphome.eu",
+            "www.jphome.eu"
+          ],
+          "pathPattern": "^/suivi-de-livraison/?$",
+          "params": [
+            "reference",
+            "commande",
+            "numero_commande",
+            "numero"
+          ]
+        },
+        {
+          "domains": [
+            "agediss.com",
+            "www.agediss.com"
+          ],
+          "path": "^/(?:[a-z]{2}/)?suivi/(\\d{8,9})/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://jphome.eu/suivi-de-livraison/"
+    },
+    "overnite": {
+      "displayName": "OVERNITE",
+      "aliases": [
+        "Overnite.eu",
+        "overnite Transport Service GmbH",
+        "Overnite Waffenversand",
+        "Overnite Worldwide"
+      ],
+      "countries": [
+        "DE"
+      ],
+      "color": "#006f39",
+      "selectable": true,
+      "timezone": "Europe/Berlin",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.overnite.eu/"
+    },
+    "sway": {
+      "displayName": "Sway",
+      "aliases": [
+        "Returnmates",
+        "Sway (Returnmates)",
+        "ShipSway",
+        "Sway Delivery"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#635ff5",
+      "selectable": true,
+      "timezone": "America/Los_Angeles",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.shipsway.com/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.shipsway.com"
+          ],
+          "path": "^/([A-Za-z0-9][A-Za-z0-9-]{5,39})/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.shipsway.com/"
     }
   },
   "servers": [
@@ -37447,7 +37771,17 @@
           "pflogistics",
           "quality-post",
           "runner-express",
-          "rxo"
+          "rxo",
+          "3pe-express",
+          "ait-home-delivery",
+          "ambro-express",
+          "ameriship",
+          "cargoline",
+          "city-air-express",
+          "gio-express",
+          "jp-home",
+          "overnite",
+          "sway"
         ]
       },
       "Stage": {

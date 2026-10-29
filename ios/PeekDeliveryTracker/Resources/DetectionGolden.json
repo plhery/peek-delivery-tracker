@@ -83735,6 +83735,23 @@
     ]
   },
   {
+    "input": "MN294898",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "city-air-express",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "MN338172153CO",
     "carrier": "intl-post",
     "confidence": "high",

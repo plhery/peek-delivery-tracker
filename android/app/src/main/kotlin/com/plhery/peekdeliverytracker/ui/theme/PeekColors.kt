@@ -72,6 +72,17 @@ object SystemColors {
         darkHighContrast = rgb(255, 160, 86),
     )
 
+    /**
+     * A sheet's ground and its rows, `systemGroupedBackground` and `secondarySystemGroupedBackground` as a presented
+     * sheet takes them, elevated in dark: (242, 242, 247) and white in light, (28, 28, 30) and (44, 44, 46) in dark, as
+     * the iPhone's screenshots of the filters show them.
+     */
+    val groupedBackground = AdaptiveColor(rgb(242, 242, 247), rgb(28, 28, 30))
+    val secondaryGroupedBackground = AdaptiveColor(rgb(255, 255, 255), rgb(44, 44, 46))
+
+    /** A sheet's grabber, measured on the iPhone's screenshots: (184, 184, 191) on the light ground. */
+    val grabber = AdaptiveColor(rgb(60, 60, 67, 0.32), rgb(235, 235, 245, 0.3))
+
     private fun rgb(red: Int, green: Int, blue: Int, opacity: Double = 1.0) =
         RgbaColor(red / 255.0, green / 255.0, blue / 255.0, opacity)
 }
@@ -100,6 +111,9 @@ class PeekColors(val dark: Boolean, val highContrast: Boolean = false) {
     val red = resolve(SystemColors.red)
     val green = resolve(SystemColors.green)
     val orange = resolve(SystemColors.orange)
+    val groupedBackground = resolve(SystemColors.groupedBackground)
+    val secondaryGroupedBackground = resolve(SystemColors.secondaryGroupedBackground)
+    val grabber = resolve(SystemColors.grabber)
 }
 
 val LocalPeekColors = staticCompositionLocalOf { PeekColors(dark = false) }

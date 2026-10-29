@@ -547,6 +547,14 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   (`inputSuggested`, for an unknown answer without tracking history): the postcode field is
   optional, a paste stops once to show it, and the lookup names that carrier only with the
   postcode, sent in the request body like any other.
+  An account's open parcel filed under a carrier that shows more with the delivery postcode
+  (the catalog's `showsMore`: DPD's verified scans, the pages that show a shipment only with
+  it), saved without one, is given the postcode its owner gave their latest parcel once a check
+  has filed it there: the one given the same carrier first, otherwise the latest that carrier
+  takes, leaving out those a carrier refused ([`accountPostcode.ts`](../src/server/accountPostcode.ts)).
+  It is given once (`account_postcode`), so a postcode the owner clears or changes stays as they
+  left it, and the next check asks the carrier with it as with one the owner typed. With none to
+  give, the parcel page says the carrier shows more with the postcode and offers to add it.
   When the number points to one carrier, `routing.likely_carrier` names it once that carrier
   was asked without saying it knows the number (recognition's answer, or a not-found or
   no-history answer to the check), with `since` from the first such check. A number points to

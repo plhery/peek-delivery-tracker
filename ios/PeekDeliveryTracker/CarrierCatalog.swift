@@ -11,6 +11,8 @@ struct CarrierRequirement: Codable, Hashable, Sendable {
     let validator: String?
     let whenTrackingNumber: String?
     let optional: Bool?
+    /// An optional input the carrier shows more of the parcel with, worth asking for when the parcel has none.
+    let showsMore: Bool?
     let label: String
     let type: String
     var placeholder: String?

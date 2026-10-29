@@ -506,6 +506,43 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(needed.inputNeededPrompt?.carrier, .glsCh)
     }
 
+    func testAsksForThePostcodeACheckedParcelsCarrierShowsMoreWith() throws {
+        let catalog = CarrierCatalog(cacheURL: nil)
+        let json = """
+        {
+          "packages": [{
+            "id": "\(UUID().uuidString)",
+            "tracking_number": "06080000000002",
+            "label": "Test parcel",
+            "carrier": "dpd",
+            "created_at": "2026-08-01T10:00:00Z",
+            "last_synced_at": "2026-08-02T10:00:00Z",
+            "sync_status": "ok",
+            "notifications_muted": false,
+            "tracking_events": []
+          }]
+        }
+        """
+        let parcel = try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(json.utf8)).packages.first)
+        XCTAssertTrue(parcel.showsMoreWithPostcode(catalog))
+
+        // Not before its first check, which gives it the account's own postcode, nor with one, nor once archived.
+        var unchecked = parcel
+        unchecked.lastSyncedAt = nil
+        XCTAssertFalse(unchecked.showsMoreWithPostcode(catalog))
+        var given = parcel
+        given.dpdPostcode = "8000"
+        XCTAssertFalse(given.showsMoreWithPostcode(catalog))
+        var archived = parcel
+        archived.archivedAt = "2026-08-10T10:00:00Z"
+        XCTAssertFalse(archived.showsMoreWithPostcode(catalog))
+        // DHL needs it for some twelve-digit numbers only, and asks for those.
+        var dhl = parcel
+        dhl.carrier = .dhl
+        dhl.trackingNumber = "000000000012"
+        XCTAssertFalse(dhl.showsMoreWithPostcode(catalog))
+    }
+
     func testNamesTheLikelyCarrierWhileNobodyAnsweredAndAsksToChooseAfterAWeek() throws {
         let packageID = UUID()
         let json = """

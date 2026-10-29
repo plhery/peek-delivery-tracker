@@ -138,6 +138,15 @@ extension Parcel {
         return suggested
     }
 
+    /// Whether the parcel's carrier shows more with the delivery postcode it was saved without. An account's own
+    /// postcode is given at the next check, so this asks those who gave none, once the parcel has been checked.
+    func showsMoreWithPostcode(_ catalog: CarrierCatalog) -> Bool {
+        guard inputNeededPrompt == nil, inputSuggestedPrompt == nil, dpdPostcode?.nonEmpty == nil, isActive,
+              lastSyncedAt != nil else { return false }
+        return catalog.requirements(for: carrier, trackingNumber: trackingNumber)
+            .contains { $0.field == .dpdPostcode && $0.showsMore == true }
+    }
+
     /// How long a carrier may go without listing a number of its own format before the reader is asked to check it.
     static let likelyCarrierWait: TimeInterval = 7 * 24 * 60 * 60
 

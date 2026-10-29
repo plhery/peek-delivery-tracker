@@ -249,6 +249,24 @@ describe('shipment details', () => {
     expect(screen.queryByText(/didn’t accept postcode/)).not.toBeInTheDocument();
   });
 
+  it('asks for the postcode a checked parcel’s carrier shows more with', async () => {
+    const view = show({ carrier: 'dpd', trackingNumber: '06080000000002', lastSyncedAt: '2026-10-20T08:00:00Z' });
+    expect(screen.getByText(/DPD Switzerland shows more with the delivery postcode\./)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Add postcode' }));
+    expect(screen.getByRole('textbox', { name: /^Delivery postcode/ })).toBeInTheDocument();
+    view.unmount();
+    // Not before its first check, which gives it the account's own postcode, nor with one, nor once archived.
+    const checked = '2026-10-20T08:00:00Z';
+    for (const values of [{}, { lastSyncedAt: checked, dpdPostcode: '8000' }, { lastSyncedAt: checked, archivedAt: checked }]) {
+      const again = show({ carrier: 'dpd', trackingNumber: '06080000000002', ...values });
+      expect(screen.queryByText(/shows more with the delivery postcode/)).not.toBeInTheDocument();
+      again.unmount();
+    }
+    // DHL needs it for some twelve-digit numbers only, and asks for those.
+    show({ carrier: 'dhl', trackingNumber: '000000000012', lastSyncedAt: '2026-10-20T08:00:00Z' });
+    expect(screen.queryByText(/shows more with the delivery postcode/)).not.toBeInTheDocument();
+  });
+
   it('says when the parcel’s own carrier found no parcel with its postcode, and opens the editor to change it', async () => {
     const view = show({ carrier: 'spring-gds', trackingNumber: '3SABCD826405193', dpdPostcode: '1234 AB', postcodeRefused: true });
     expect(screen.getByText(/PostNL didn’t find this parcel with postcode 1234 AB\./)).toBeInTheDocument();

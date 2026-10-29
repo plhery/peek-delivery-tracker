@@ -67,6 +67,7 @@ import { confirmationLookup } from './trackingHealth';
 import { carrierMapAgrees, deployedVersion, statusMapClosings, universalMapAgrees } from './reviewQueues';
 import { carrierLookupKey, recognitionKey, SharedLookups, universalLookupKey, type ParcelLookups } from './sharedLookups';
 import { carrierLookupInput } from './postcodeCountry';
+import { accountPostcodeWrite, ACCOUNT_POSTCODE, wantsAccountPostcode } from './accountPostcode';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
 
 const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
@@ -1626,14 +1627,17 @@ export class TrackingSyncService {
     await audit.start();
     // A parcel just added, or looked up, with no progress saved yet: its first answer.
     const firstAnswer = context.trigger === 'added' && String(parcel.current_stage ?? 'pending') === 'pending';
+    // The carrier the check filed the parcel under, when it changed it.
+    const filed: { carrier?: string } = {};
     try {
-      const outcome = await untilShutdown(this.check(parcel, context, audit, now, lookups), context.signal);
+      const outcome = await untilShutdown(this.check(parcel, context, audit, now, lookups, filed), context.signal);
       // A number that reads as mistyped is counted for review, never suggested, and apart when
       // its first check found scans all the same.
       if (firstAnswer && outcome !== 'superseded') {
         noteTypoCandidate(String(parcel.tracking_number ?? ''), typeof parcel.user_id === 'string' ? 'account' : 'lookup',
           outcome === 'updated' ? 'answered' : 'unanswered');
       }
+      if (outcome !== 'superseded') await this.giveAccountPostcode(parcel, filed.carrier ?? String(parcel.carrier ?? ''));
       return outcome;
     } catch (error) {
       // Shutdown ends the check now, whatever its carrier is still doing: the job goes back to the queue.
@@ -1642,6 +1646,25 @@ export class TrackingSyncService {
       // ends it as that write would have, so its attempt is not left running.
       else if (await this.withdrawn(context)) await audit.finish({ outcome: 'superseded' });
       throw error;
+    }
+  }
+
+  /**
+   * Gives an account's parcel its owner's postcode once its check filed it under a carrier that shows
+   * more with one (accountPostcode.ts), and queues the check that asks the carrier with it. A job of
+   * the parcel's that still runs leaves that check to the schedule, which finds it unchecked.
+   */
+  private async giveAccountPostcode(parcel: JsonObject, carrier: string): Promise<void> {
+    if (!wantsAccountPostcode(parcel, carrier)) return;
+    try {
+      const current = await this.client.getPackage(String(parcel.id));
+      if (!current || typeof current.user_id !== 'string') return;
+      const write = accountPostcodeWrite(current, await this.client.accountPostcodes(current.user_id));
+      if (!write || !await this.client.giveAccountPostcode(String(current.id), String(current.tracking_generation), write)) return;
+      logOperationalEvent('account_postcode_given', { package_id: String(current.id), carrier: String(current.carrier) });
+      await this.client.enqueueSyncJob({ userId: current.user_id, packageId: String(current.id), reason: 'changed' });
+    } catch (error) {
+      captureOperationalError(error, { component: 'tracking', operation: 'give_account_postcode', carrier });
     }
   }
 
@@ -1657,7 +1680,8 @@ export class TrackingSyncService {
     context: SyncRunContext,
     audit: TrackingSyncAudit,
     now: Date,
-    lookups?: SharedLookups,
+    lookups: SharedLookups | undefined,
+    filed: { carrier?: string },
   ): Promise<SyncOutcome> {
     const carrierId = String(parcel.carrier ?? '');
     const accountRequired = requiresAmazonAccount(carrierId, String(parcel.tracking_number ?? ''));
@@ -1695,6 +1719,7 @@ export class TrackingSyncService {
       if (!applied) {
         throw new SupersededTrackingSync('Tracking configuration changed during the check');
       }
+      if (typeof values.carrier === 'string') filed.carrier = values.carrier;
       if (consumeAddition) {
         parcel.carrier_data = values.carrier_data;
         consumeAddition = false;
@@ -2121,7 +2146,7 @@ export class TrackingSyncService {
       // Linked journey identity, the postcode the owner gave a provider, and the delivery partner's probe belong to the
       // parcel, not an individual carrier response: a provider answering while the origin is down keeps the probe's gap.
       if (isRecord(parcel.carrier_data)) {
-        for (const key of ['lookup_country_hint', 'lookup_language', 'postcode_country', 'universal_input', 'original_carrier', 'original_tracking_number', 'original_tracking_url', 'original_package_id', 'active_tracking_carrier', 'active_tracking_number', 'original_canonical_tracking_number', 'auto_changed_from', 'auto_changed_to', 'auto_changed_at', 'handed_over_at', 'earlier_checked_at', 'delivery_probe', 'scans_withdrawn', 'scans_withdrawn_at', 'clock_offsets', DIRECT_HISTORY]) {
+        for (const key of ['lookup_country_hint', 'lookup_language', 'postcode_country', ACCOUNT_POSTCODE, 'universal_input', 'original_carrier', 'original_tracking_number', 'original_tracking_url', 'original_package_id', 'active_tracking_carrier', 'active_tracking_number', 'original_canonical_tracking_number', 'auto_changed_from', 'auto_changed_to', 'auto_changed_at', 'handed_over_at', 'earlier_checked_at', 'delivery_probe', 'scans_withdrawn', 'scans_withdrawn_at', 'clock_offsets', DIRECT_HISTORY]) {
           if (parcel.carrier_data[key] != null && carrierData[key] == null) carrierData[key] = parcel.carrier_data[key];
         }
       }

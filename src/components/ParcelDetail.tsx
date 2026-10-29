@@ -155,6 +155,11 @@ export function ParcelDetail({
   const inputSuggested = !inputNeeded && parcel.inputSuggested?.field === 'dpdPostcode' && parcel.carrier === 'unknown'
     && !parcel.archivedAt && !current ? parcel.inputSuggested : undefined;
   const postcodePrompt = inputNeeded ?? inputSuggested;
+  // Or its carrier shows more with the delivery postcode it was saved without. An account's own postcode is given at
+  // the next check (docs/ROUTING.md), so this asks those who gave none, once the parcel has been checked.
+  const postcodeShowsMore = !postcodePrompt && !parcel.dpdPostcode && !parcel.archivedAt && Boolean(parcel.lastSyncedAt)
+    && !['delivered', 'returned'].includes(current?.stage ?? '')
+    && carrierRequirements(parcel.carrier, parcel.trackingNumber).some(({ field, showsMore }) => field === 'dpdPostcode' && showsMore);
   // Or the number has one carrier's own format, and that carrier does not list it yet: after a week, its owner is asked
   // to choose another.
   const likely = !postcodePrompt && !parcel.archivedAt ? likelyCarrier(parcel) : null;
@@ -627,7 +632,7 @@ export function ParcelDetail({
         )}
         {parcel.senderName?.trim() && <p className="detail__sender">{t('parcel.sender', { sender: parcel.senderName.trim() })}</p>}
         {deliveryLabel && <p className="detail__sender detail__delivery">{deliveryLabel}</p>}
-        {parcel.dpdPostcode && (parcel.postcodeRefused || (parcel.carrier === 'dpd' && parcel.dpdPostcodeVerified === false)) && (
+        {parcel.dpdPostcode && (parcel.postcodeRefused || parcel.dpdPostcodeVerified === false) && (
           <p className="detail__postcode-note">
             {t(parcel.postcodeRefused ? 'detail.postcodeRefused' : 'detail.postcodeNotVerified', { carrier: carrier.name, postcode: parcel.dpdPostcode })}{' '}
             {!parcel.archivedAt && (
@@ -635,6 +640,14 @@ export function ParcelDetail({
                 {t('detail.editPostcode')}
               </button>
             )}
+          </p>
+        )}
+        {postcodeShowsMore && (
+          <p className="detail__postcode-note">
+            {t('detail.postcodeShowsMore', { carrier: carrierInfo(parcel.carrier, locale).name })}{' '}
+            <button type="button" className="detail__postcode-edit" onClick={() => setEditingCarrier(true)}>
+              {t('detail.inputNeededAction')}
+            </button>
           </p>
         )}
         <p className="detail__state">{statusLabel}</p>

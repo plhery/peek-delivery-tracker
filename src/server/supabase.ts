@@ -1112,6 +1112,25 @@ export class SupabaseServiceClient extends SupabaseClient {
     return rows(await this.request(`/rest/v1/packages?${params}`));
   }
 
+  /**
+   * The postcodes an account gave its parcels' carriers, newest parcel first, with what the carrier
+   * made of each (accountPostcode.ts).
+   */
+  async accountPostcodes(userId: string): Promise<JsonObject[]> {
+    return rows(await this.request(`/rest/v1/packages?${query({
+      select: 'carrier,dpd_postcode,postcode_country:carrier_data->postcode_country,'
+        + 'dpd_postcode_verified:carrier_data->dpd_postcode_verified,postcode_refused:carrier_data->routing->postcode_refused',
+      user_id: `eq.${userId}`, dpd_postcode: 'not.is.null', order: 'created_at.desc', limit: '20',
+    })}`));
+  }
+
+  /** Gives a parcel its owner's postcode, unless its tracking changed or it got a postcode since it was read. */
+  async giveAccountPostcode(packageId: string, generation: string, values: JsonObject): Promise<boolean> {
+    return rows(await this.request(`/rest/v1/packages?${query({
+      id: `eq.${packageId}`, tracking_generation: `eq.${generation}`, dpd_postcode: 'is.null', select: 'id',
+    })}`, { method: 'PATCH', body: values, prefer: 'return=representation' })).length > 0;
+  }
+
   /** The accounts behind those Friends profiles that share their Passport, by profile id. */
   async passportSharers(profileIds: string[]): Promise<Map<string, string>> {
     if (!profileIds.length) return new Map();

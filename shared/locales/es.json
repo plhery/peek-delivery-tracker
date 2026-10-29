@@ -919,6 +919,7 @@
   "detail.postcodeNotVerified": "{{carrier}} no ha aceptado el código postal {{postcode}}, así que muestra menos detalles.",
   "detail.postcodeRefused": "{{carrier}} no ha encontrado este paquete con el código postal {{postcode}}.",
   "detail.editPostcode": "Cambiar código postal",
+  "detail.postcodeShowsMore": "{{carrier}} muestra más con el código postal de entrega.",
   "add.recognized": "{{carrier}} tiene este paquete.",
   "add.line.chosen": "Elegido por ti",
   "add.line.refused": "no emite números como este",

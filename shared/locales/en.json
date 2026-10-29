@@ -919,6 +919,7 @@
   "detail.postcodeNotVerified": "{{carrier}} didn’t accept postcode {{postcode}}, so it shows fewer details.",
   "detail.postcodeRefused": "{{carrier}} didn’t find this parcel with postcode {{postcode}}.",
   "detail.editPostcode": "Edit postcode",
+  "detail.postcodeShowsMore": "{{carrier}} shows more with the delivery postcode.",
   "add.recognized": "{{carrier}} has this parcel.",
   "add.line.chosen": "Chosen by you",
   "add.line.refused": "doesn’t issue numbers like this one",

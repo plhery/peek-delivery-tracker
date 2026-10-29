@@ -1059,6 +1059,26 @@ function fakeClient(packages: JsonObject[] = []) {
 }
 
 describe('TrackingSyncService', () => {
+  it('gives an account parcel its owner’s postcode once a check finds it with a carrier that shows more with one', async () => {
+    const parcel = { id: 'given', user_id: 'owner', carrier: 'dpd', tracking_number: '06080000000001', current_stage: 'in_transit',
+      dpd_postcode: null, archived_at: null, carrier_data: {}, tracking_generation: 'generation' };
+    const client = { ...fakeClient([parcel]), accountPostcodes: vi.fn().mockResolvedValue([{ carrier: 'dpd', dpd_postcode: '8000' }]),
+      giveAccountPostcode: vi.fn().mockResolvedValue(true), enqueueSyncJob: vi.fn().mockResolvedValue({ row: {}, queued: true }) };
+    const answer: CarrierResult = { status: 'in_transit', current_stage: 'in_transit', last_status_text: 'In transit',
+      last_update: '2026-10-20T07:00:00Z', events: [{ time: '2026-10-20T07:00:00Z', description: 'In transit', stage: 'in_transit' }] };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn().mockResolvedValue(answer) },
+      null, () => new Date('2026-10-20T08:00:00Z'));
+    await service.syncPackage(parcel);
+    expect(client.accountPostcodes).toHaveBeenCalledExactlyOnceWith('owner');
+    expect(client.giveAccountPostcode).toHaveBeenCalledExactlyOnceWith('given', 'generation',
+      expect.objectContaining({ dpd_postcode: '8000', last_synced_at: null }));
+    expect(client.enqueueSyncJob).toHaveBeenCalledExactlyOnceWith({ userId: 'owner', packageId: 'given', reason: 'changed' });
+    // One given before stays as its owner left it.
+    client.accountPostcodes.mockClear();
+    await service.syncPackage({ ...parcel, carrier_data: { account_postcode: true } });
+    expect(client.accountPostcodes).not.toHaveBeenCalled();
+  });
+
   it('replaces the stage change it saw without a time once the carrier dates that scan by its day', async () => {
     const client = fakeClient();
     const answer: CarrierResult = { status: 'exception', current_stage: 'exception', last_status_text: 'Contacta con agencia',

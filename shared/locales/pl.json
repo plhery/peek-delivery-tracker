@@ -919,6 +919,7 @@
   "detail.postcodeNotVerified": "{{carrier}} nie przyjmuje kodu pocztowego {{postcode}}, więc widać mniej szczegółów.",
   "detail.postcodeRefused": "{{carrier}} nie znajduje tej przesyłki z kodem pocztowym {{postcode}}.",
   "detail.editPostcode": "Zmień kod pocztowy",
+  "detail.postcodeShowsMore": "{{carrier}} pokazuje więcej z kodem pocztowym odbiorcy.",
   "add.recognized": "{{carrier}} ma tę przesyłkę.",
   "add.line.chosen": "Wybrano ręcznie",
   "add.line.refused": "nie wydaje takich numerów",

@@ -329,6 +329,24 @@ class ZoomStackTest {
     }
 
     @Test
+    fun aPageOnItsWayBackDoesntFollowItsSourcesNodeToAnotherCard() {
+        show()
+        compose.mainClock.autoAdvance = false
+        change { top = null }
+        compose.mainClock.advanceTimeBy(64)
+        // The list hands the card's node on to another card, lower down.
+        change {
+            sourceId = "other"
+            sourceTop = 600.dp
+        }
+        compose.mainClock.advanceTimeBy(100)
+        // Most of the way back to the card's last frame, 120 dp down, rather than to 600 dp: the list is 40 dp down the
+        // page.
+        val going = page()
+        assertTrue("Going to the card's last frame: $going", going.top.value < 200f)
+    }
+
+    @Test
     fun aPageShownWithoutAFlightShrinksUnderTheBackGestureInPoints() {
         show(initial = SOURCE)
         assertEquals(390f, width(), 0.5f)

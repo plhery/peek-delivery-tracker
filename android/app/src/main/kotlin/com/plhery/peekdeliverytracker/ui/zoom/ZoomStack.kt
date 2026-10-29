@@ -310,8 +310,10 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     var reduceMotion = false
 
     /** The source the page flies out of and back into, and its frame as last seen; or the middle of the window. */
-    var source: ZoomSourceNode? by mutableStateOf(null)
-        private set
+    private var chosenSource: ZoomSourceNode? by mutableStateOf(null)
+
+    /** The source while it is still the page's: a list hands a card's node on to another card. */
+    val source: ZoomSourceNode? get() = chosenSource?.takeIf { it.id == id && it.isAttached }
     private var sourceSeen = Rect.Zero
     private var fallback: Rect? by mutableStateOf(null)
     private var sourceRadius = 0f
@@ -438,12 +440,12 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         val seen = node?.let { frameOf(it, clipped = true) }
         val frame = node?.let { frameOf(it, clipped = false) }
         if (node != null && seen != null && frame != null && seen.width > 0f && seen.height > 0f && seen.overlaps(bounds)) {
-            source = node
+            chosenSource = node
             sourceSeen = frame
             fallback = null
             sourceRadius = with(around.density) { node.cornerRadius.toPx() }
         } else {
-            source = null
+            chosenSource = null
             fallback = ZoomGeometry.fallback(around.safe, around.density.density, around.hinge)
             sourceRadius = with(around.density) { Radii.card.toPx() }
         }
@@ -468,7 +470,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         phase = Phase.Rest
         progress = 0f
         velocity = 0f
-        source = null
+        chosenSource = null
         fallback = null
         heldAt = null
         crossfade = false

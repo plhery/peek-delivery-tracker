@@ -86423,6 +86423,17 @@
     ]
   },
   {
+    "input": "PIBBZ500001190019023000000",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "magyar-posta"
+    ],
+    "preferred": [
+      "magyar-posta"
+    ]
+  },
+  {
     "input": "PIE000MP005790",
     "carrier": "polonez",
     "confidence": "high",
@@ -86539,11 +86550,33 @@
     ]
   },
   {
+    "input": "PKAAA500582060011138001500",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "magyar-posta"
+    ],
+    "preferred": [
+      "magyar-posta"
+    ]
+  },
+  {
     "input": "PKAPBQ074306263J",
     "carrier": "correos-spain",
     "confidence": "high",
     "candidates": [
       "correos-spain"
+    ]
+  },
+  {
+    "input": "PKBBZ500001220012801003000",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "magyar-posta"
+    ],
+    "preferred": [
+      "magyar-posta"
     ]
   },
   {
@@ -86654,6 +86687,17 @@
   },
   {
     "input": "PKQZ050115785",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "magyar-posta"
+    ],
+    "preferred": [
+      "magyar-posta"
+    ]
+  },
+  {
+    "input": "PKQZ0501157850021138000000",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -86814,6 +86858,17 @@
     "candidates": []
   },
   {
+    "input": "PNAAA500000340017101000000",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "magyar-posta"
+    ],
+    "preferred": [
+      "magyar-posta"
+    ]
+  },
+  {
     "input": "PNAAA50069529",
     "carrier": "unknown",
     "confidence": "low",
@@ -86859,6 +86914,17 @@
   },
   {
     "input": "PNJGY56798744",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "magyar-posta"
+    ],
+    "preferred": [
+      "magyar-posta"
+    ]
+  },
+  {
+    "input": "PNQZ0501157850011138000000",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [

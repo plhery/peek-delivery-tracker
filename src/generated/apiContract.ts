@@ -7478,6 +7478,11 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
+        "pattern": "^P[A-Z][0-9A-Z]{3}\\d{21}$",
+        "confidence": "low",
+        "preferred": true
+      },
+      {
         "pattern": "^RL\\d{14}$",
         "confidence": "low",
         "preferred": true

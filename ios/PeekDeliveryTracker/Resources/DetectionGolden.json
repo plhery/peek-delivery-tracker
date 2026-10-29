@@ -91687,6 +91687,30 @@
     "candidates": []
   },
   {
+    "input": "SNGXP100000017MT",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "maltapost",
+      "sengi-express"
+    ],
+    "asked": [
+      "maltapost"
+    ]
+  },
+  {
+    "input": "SNGXP100000025MT",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "maltapost",
+      "sengi-express"
+    ],
+    "asked": [
+      "maltapost"
+    ]
+  },
+  {
     "input": "SNX0010307",
     "carrier": "unknown",
     "confidence": "low",

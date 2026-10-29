@@ -9134,6 +9134,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low",
         "checksum": "s10",
         "preferred": true
+      },
+      {
+        "pattern": "^[A-Z]{5}\\d{9}MT$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://www.maltapost.com/tracking"
@@ -34384,6 +34388,32 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://sentralcargo.co.id/"
+  },
+  "sengi-express": {
+    "displayName": "Sengi Express",
+    "aliases": [
+      "Sengi",
+      "Seng Yi (Shenzhen) Global Supply Chain Management Co., Ltd."
+    ],
+    "countries": [
+      "CN",
+      "IT"
+    ],
+    "color": "#1a44a4",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^[A-Z]{5}\\d{9}MT$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://portal.sengiexpress.com/"
   }
 } as const;
 
@@ -35305,7 +35335,8 @@ export const CARRIER_IDS = [
   "e-cargo",
   "instapack",
   "obibox",
-  "sentral-cargo"
+  "sentral-cargo",
+  "sengi-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

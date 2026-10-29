@@ -59163,6 +59163,32 @@
     ]
   },
   {
+    "input": "82029000075694",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "seur"
+    ]
+  },
+  {
     "input": "8204200864763",
     "carrier": "unknown",
     "confidence": "low",
@@ -59227,6 +59253,33 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "82240703855871",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
     ]
   },
   {
@@ -89234,6 +89287,14 @@
     "confidence": "high",
     "candidates": [
       "relaytech"
+    ]
+  },
+  {
+    "input": "RETS000000498421UES",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "ets-express"
     ]
   },
   {

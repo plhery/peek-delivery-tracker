@@ -1869,7 +1869,10 @@
       "aliases": [
         "Asendia Management",
         "Asendia UK",
-        "asendia.com"
+        "asendia.com",
+        "Asendia USA",
+        "Globegistics",
+        "Globegistics Inc."
       ],
       "countries": [
         "FR",
@@ -35554,6 +35557,70 @@
         }
       ],
       "trackingSearchUrl": "https://track.whizdelivery.ca/track"
+    },
+    "ets-express": {
+      "displayName": "ETS Express",
+      "aliases": [
+        "RETS",
+        "RETS Express",
+        "ETS·俄通收",
+        "俄通收",
+        "俄通收国际物流",
+        "俄通收国际货物代理运输有限公司"
+      ],
+      "countries": [
+        "CN",
+        "RU"
+      ],
+      "color": "#1c2187",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^RETS\\d{12}UES$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.ets-express.com/inquiry.html"
+    },
+    "rincos": {
+      "displayName": "Rincos",
+      "aliases": [
+        "RINCOS",
+        "RINCOS Co., Ltd.",
+        "린코스",
+        "주식회사 린코스"
+      ],
+      "countries": [
+        "KR"
+      ],
+      "color": "#f37022",
+      "selectable": true,
+      "timezone": "Asia/Seoul",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.rincos.asia/out/TraceInfo_kr.do?SCGBN=20&P_VAL={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.rincos.asia",
+            "rincos.asia"
+          ],
+          "pathPattern": "^/out/TraceInfo_(?:kr|en|jp|cn)\\.do$",
+          "params": [
+            "P_VAL"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.rincos.co.kr/tracking/tracking?lang=en"
     }
   },
   "servers": [
@@ -39242,7 +39309,9 @@
           "peninsula-truck-lines",
           "plycon",
           "ross-express",
-          "whiz-delivery"
+          "whiz-delivery",
+          "ets-express",
+          "rincos"
         ]
       },
       "Stage": {

@@ -155,6 +155,42 @@ class TabOverlay(val backdrop: MaterialBackdrop? = null) {
 
 val LocalTabOverlay = staticCompositionLocalOf<TabOverlay?> { null }
 
+/**
+ * Whether the tab bar shows: hidden while anything in the tab asks so ([TabBarHidden]), as a parcel's page hides the
+ * iPhone's with `.toolbar(.hidden, for: .tabBar)`.
+ */
+@Stable
+class TabBarVisibility {
+    private val hiders = mutableStateListOf<Any>()
+
+    val hidden: Boolean get() = hiders.isNotEmpty()
+
+    internal fun hide(by: Any) {
+        if (by !in hiders) hiders += by
+    }
+
+    internal fun show(by: Any) {
+        hiders -= by
+    }
+}
+
+val LocalTabBarVisibility = staticCompositionLocalOf<TabBarVisibility?> { null }
+
+/**
+ * `.toolbar(.hidden, for: .tabBar)`: the shell's tab bar goes while `hidden`, and comes back as it stops or as this
+ * leaves. It goes and comes back at once, from the frame that asks: the shell stops placing it in that frame's layout,
+ * so the bar takes no touch and draws nothing, and TalkBack stops reaching it once the shell is drawn again.
+ */
+@Composable
+fun TabBarHidden(hidden: Boolean) {
+    val visibility = LocalTabBarVisibility.current ?: return
+    val token = remember { Any() }
+    DisposableEffect(visibility, hidden) {
+        if (hidden) visibility.hide(token)
+        onDispose { visibility.show(token) }
+    }
+}
+
 /** Runs `onReselect` each time the tab drawing this is tapped again while chosen. */
 @Composable
 fun TabReselectionEffect(onReselect: suspend () -> Unit) {
@@ -193,6 +229,7 @@ fun TabShell(
     val holder = rememberSaveableStateHolder()
     val backdrop = rememberMaterialBackdrop()
     val overlay = remember(backdrop) { TabOverlay(backdrop) }
+    val visibility = remember { TabBarVisibility() }
     val density = LocalDensity.current
     BoxWithConstraints(modifier.fillMaxSize()) {
         val top = maxWidth >= 600.dp && maxHeight >= 480.dp
@@ -213,19 +250,29 @@ fun TabShell(
                 LocalTabReselection provides reselections[selection],
                 LocalWindowHinge provides windowHinge,
                 LocalTabOverlay provides overlay,
+                LocalTabBarVisibility provides visibility,
             ) {
                 holder.SaveableStateProvider(tabs[selection].name) { content(tabs[selection]) }
             }
         }
+        // A bar the tab hides isn't placed, from the frame that hides it, and TalkBack doesn't reach it.
+        val shown = Modifier.layout { measurable, constraints ->
+            val bar = measurable.measure(constraints)
+            layout(bar.width, bar.height) { if (!visibility.hidden) bar.place(0, 0) }
+        }
+        val barHidden = if (overlay.covered || visibility.hidden) Modifier.clearAndSetSemantics {} else Modifier
         if (top) {
-            TopTabBar(labels, selection, tap, backdrop, Modifier.align(Alignment.TopStart).clearOfTheHinge(hinge).padding(top = topGap).then(hidden))
+            TopTabBar(
+                labels, selection, tap, backdrop,
+                Modifier.align(Alignment.TopStart).then(shown).clearOfTheHinge(hinge).padding(top = topGap).then(barHidden),
+            )
         } else {
             // Clear of a cutout or of navigation buttons at the side, unless a hinge already puts it in the start half.
             val sides = WindowInsets.systemBars.union(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal)
             val clear = if (hinge == null) Modifier.windowInsetsPadding(sides) else Modifier
             BottomTabBar(
                 labels, selection, tap, backdrop,
-                Modifier.align(Alignment.BottomStart).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(hidden),
+                Modifier.align(Alignment.BottomStart).then(shown).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(barHidden),
             )
         }
         overlay.Content()

@@ -37776,6 +37776,22 @@
     ]
   },
   {
+    "input": "3981228230182",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "la-poste",
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "korea-post"
+    ],
+    "asked": [
+      "la-poste",
+      "delhivery"
+    ]
+  },
+  {
     "input": "399118350012",
     "carrier": "unknown",
     "confidence": "low",
@@ -66065,6 +66081,20 @@
     ]
   },
   {
+    "input": "A000071711010228",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "royal-mail"
+    ]
+  },
+  {
+    "input": "A0000921110209FY",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "A0002383N8",
     "carrier": "allegro-one",
     "confidence": "high",
@@ -93185,6 +93215,14 @@
     ]
   },
   {
+    "input": "TS2609040000017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "takesend"
+    ]
+  },
+  {
     "input": "TSE3402603",
     "carrier": "unknown",
     "confidence": "low",
@@ -94661,6 +94699,14 @@
     ]
   },
   {
+    "input": "VEHOATL000021976",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "veho"
+    ]
+  },
+  {
     "input": "VFU00184405015",
     "carrier": "unknown",
     "confidence": "none",
@@ -94688,6 +94734,14 @@
     "confidence": "high",
     "candidates": [
       "vinted-go"
+    ]
+  },
+  {
+    "input": "VH100000000017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "veho"
     ]
   },
   {
@@ -95719,6 +95773,30 @@
     "confidence": "high",
     "candidates": [
       "correios-br"
+    ]
+  },
+  {
+    "input": "YDH0002025925AZ",
+    "carrier": "ydh",
+    "confidence": "high",
+    "candidates": [
+      "ydh"
+    ]
+  },
+  {
+    "input": "YDH1009445847AZ",
+    "carrier": "ydh",
+    "confidence": "high",
+    "candidates": [
+      "ydh"
+    ]
+  },
+  {
+    "input": "YDH3001674237YQ",
+    "carrier": "ydh",
+    "confidence": "high",
+    "candidates": [
+      "ydh"
     ]
   },
   {

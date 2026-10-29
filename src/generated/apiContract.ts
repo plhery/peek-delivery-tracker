@@ -1547,6 +1547,13 @@ export const CARRIER_CAPABILITIES = {
           "noSuivi",
           "trackingNumber"
         ]
+      },
+      {
+        "domains": [
+          "espace-client.geodis.com",
+          "espace-client.france-express.com"
+        ],
+        "fragment": "^/[a-z]{2}/suivi/([^/?#]+)"
       }
     ],
     "detectionRules": [
@@ -1558,7 +1565,10 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "FR"
     ],
-    "trackingSearchUrl": "https://espace-client.geodis.com/services/destinataires/"
+    "trackingSearchUrl": "https://espace-client.geodis.com/services/destinataires/",
+    "aliases": [
+      "France Express"
+    ]
   },
   "colisweb": {
     "displayName": "Colisweb",
@@ -27156,7 +27166,8 @@ export const CARRIER_CAPABILITIES = {
       "SP EXPRESS",
       "SP Express Sp. z o.o.",
       "Świat Przesyłek",
-      "Swiat Przesylek"
+      "Swiat Przesylek",
+      "Royal Shipments"
     ],
     "countries": [
       "PL"
@@ -27175,7 +27186,9 @@ export const CARRIER_CAPABILITIES = {
         "domains": [
           "sp.express",
           "en.sp.express",
-          "swiatprzesylek.pl"
+          "swiatprzesylek.pl",
+          "royalshipments.com",
+          "www.royalshipments.com"
         ],
         "path": "^/tt/([^/?#]+)/?$"
       },
@@ -32899,6 +32912,248 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://fastbox.co.kr/en/"
+  },
+  "cheetah-delivery": {
+    "displayName": "Cheetah Delivery",
+    "aliases": [
+      "Chita Delivery",
+      "צ'יטה שליחויות"
+    ],
+    "countries": [
+      "IL"
+    ],
+    "color": "#f8d448",
+    "selectable": true,
+    "timezone": "Asia/Jerusalem",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "flyt-express": {
+    "displayName": "Flyt Express",
+    "aliases": [
+      "FLYT",
+      "Flyt Logistics",
+      "飞特物流",
+      "广州飞特物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#004385",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "hfd": {
+    "displayName": "HFD",
+    "aliases": [
+      "HFD/e-Post",
+      "e-Post Israel",
+      "HFD Israel",
+      "HFD שליחויות ולוגיסטיקה",
+      "אי פוסט"
+    ],
+    "countries": [
+      "IL"
+    ],
+    "color": "#284697",
+    "selectable": true,
+    "timezone": "Asia/Jerusalem",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "joom-logistics": {
+    "displayName": "Joom Logistics",
+    "aliases": [
+      "Joom Logistics Limited"
+    ],
+    "countries": [
+      "HK",
+      "CN"
+    ],
+    "color": "#2d2f43",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://joomlogistics.com/en/track?id={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "joomlogistics.com",
+          "logistics.joom.com"
+        ],
+        "pathPattern": "^/[a-z]{2}/track/?$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://joomlogistics.com/en/track"
+  },
+  "parcel-one": {
+    "displayName": "PARCEL.ONE",
+    "aliases": [
+      "PARCEL.ONE GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#344b6a",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://parcel.one/tracking?trackno={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "parcel.one"
+        ],
+        "pathPattern": "^/(?:[a-z]{2}/)?tracking/?$",
+        "params": [
+          "trackno"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://parcel.one/en/tracking/"
+  },
+  "takesend": {
+    "displayName": "Take Send",
+    "aliases": [
+      "Takesend Logistics",
+      "泰嘉物流",
+      "深圳市泰嘉物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#6638b6",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "k5.takesend.com"
+        ],
+        "pathPattern": "^/WebTrack$",
+        "params": [
+          "bills"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^TS2\\d(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{7}$",
+        "confidence": "low"
+      }
+    ]
+  },
+  "veho": {
+    "displayName": "Veho",
+    "aliases": [
+      "Veho Tech",
+      "Veho Technologies"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#e84931",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://track.shipveho.com/#/trackingid/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "track.shipveho.com"
+        ],
+        "params": [
+          "trackingId"
+        ]
+      },
+      {
+        "domains": [
+          "track.shipveho.com"
+        ],
+        "fragment": "^/(?:trackingid|barcode)/([^/?#]+)"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^VH[A-Z0-9]{12}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^VEHO[A-Z]{3}\\d{9}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://track.shipveho.com/"
+  },
+  "ydh": {
+    "displayName": "YDH",
+    "aliases": [
+      "YDH Express",
+      "YDH Cross Border",
+      "义达跨境",
+      "义达"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#015db9",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://track.ydhex.com/track_query.aspx?track_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "track.ydhex.com"
+        ],
+        "pathPattern": "^/track_query\\.aspx$",
+        "params": [
+          "track_number"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^YDH\\d{10}(?:YQ|AZ)$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://track.ydhex.com/track_query.aspx"
   }
 } as const;
 
@@ -33776,7 +34031,15 @@ export const CARRIER_IDS = [
   "meso-global",
   "jifan",
   "youbang-express",
-  "fastbox"
+  "fastbox",
+  "cheetah-delivery",
+  "flyt-express",
+  "hfd",
+  "joom-logistics",
+  "parcel-one",
+  "takesend",
+  "veho",
+  "ydh"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

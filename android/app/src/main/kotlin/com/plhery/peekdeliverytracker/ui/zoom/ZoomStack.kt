@@ -121,11 +121,12 @@ import kotlinx.coroutines.withContext
  * - Under Reduce Motion, the page and the root crossfade over 0.35 s, and nothing moves or shrinks.
  *
  * While a page is over the root or on its way, the root takes no touch, TalkBack doesn't reach it and the root's own
- * back handlers wait. The keyboard's focus leaves the root as a page comes over it, and goes back in only once the
- * page has gone, as the root leaves the iPhone's window under a page pushed over it, taking the keyboard with it. At rest under the page, the root isn't drawn. Nothing takes a touch while the page opens or
- * closes: its flight, unlike a spring back, can't be caught.
- * TalkBack goes to the page as it lands, and back to its source as it goes. A stack shown anew (after a rotation or a
- * turn of the window) shows its page at rest, without a flight, as does a page shown still ([ZoomTransition.showStill]).
+ * back handlers wait. The keyboard's focus leaves the root as a page comes over it, and goes back in only once the page
+ * has gone, as the root leaves the iPhone's window under a page pushed over it, taking the keyboard with it. At rest
+ * under the page, the root isn't drawn. Nothing takes a touch while the page opens or closes: its flight, unlike a
+ * spring back, can't be caught. TalkBack goes to the page as it lands, and back to its source as it goes. A stack shown
+ * anew (after a rotation or a turn of the window) shows its page at rest, without a flight, as does a page shown still
+ * ([ZoomTransition.showStill]).
  */
 @Composable
 fun ZoomStack(

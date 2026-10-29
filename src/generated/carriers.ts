@@ -1360,6 +1360,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tianhui Hengyuan (THHY) tracking: AT numbers and scans",
       "name": "Tianhui Hengyuan",
       "color": "#00a2e9"
+    },
+    {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-tracking",
+      "title": "JS Express tracking: JSE…YQ numbers, scans and who delivers",
+      "name": "JS Express",
+      "color": "#fe9b00"
     }
   ],
   "de": [
@@ -1634,6 +1642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT Sendungsverfolgung: Sendungsnummer, Status, Zustellung",
       "name": "TNT",
       "color": "#ff6600"
+    },
+    {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-sendungsverfolgung",
+      "title": "TopYou Sendungsverfolgung: TYZR-Nummer, Status, Zustellung",
+      "name": "TopYou",
+      "color": "#045cd7"
     }
   ],
   "fr": [

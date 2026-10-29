@@ -334,9 +334,8 @@ test('navigates nested carrier dialogs entirely by keyboard', async ({ page }) =
   const postcode = sheet.getByLabel(/postcode/i);
   await expect(postcode).toBeFocused();
   await postcode.fill('8000');
-  // DPD Switzerland takes a postcode from any country, so the postcode's country follows it.
-  await page.keyboard.press('Tab');
-  await expect(sheet.getByRole('combobox', { name: 'Delivery country', exact: true })).toBeFocused();
+  // DPD Switzerland's lookup doesn't read the postcode's country, so the sheet asks for none.
+  await expect(sheet.getByRole('combobox', { name: 'Delivery country', exact: true })).toHaveCount(0);
   await page.keyboard.press('Tab');
   await expect(sheet.getByRole('button', { name: 'Cancel', exact: true })).toBeFocused();
   await page.keyboard.press('Tab');

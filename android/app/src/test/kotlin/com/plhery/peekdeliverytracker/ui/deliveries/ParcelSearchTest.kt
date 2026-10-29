@@ -42,6 +42,9 @@ import androidx.compose.ui.test.swipeDown
 import androidx.compose.ui.test.swipeUp
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelSort
@@ -64,8 +67,8 @@ import kotlin.math.abs
 /**
  * The deliveries' search and filters (A-S27, A-S28, A-S98, B-S36): what a query, a status, a carrier and a sort show,
  * their chips and what clears them, the list with nothing to show, what is counted and when, the field's focus and the
- * keys, the filters' sheet at its heights and what dismisses it, their popover side by side, TalkBack, and what a
- * window made again or resized keeps.
+ * keys, the filters' sheet at its heights and what dismisses it, the keyboard going as it comes up, their popover side
+ * by side, TalkBack and their menu, and what a window made again or resized keeps.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -137,6 +140,18 @@ class ParcelSearchTest {
     private fun sheetTop(): Float = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot().top.value
 
     private fun windowHeight(): Float = compose.onRoot().getUnclippedBoundsInRoot().bottom.value
+
+    /** The keyboard `height` points tall, or gone at 0, as the window's insets tell it. */
+    private fun keyboard(height: Int) {
+        compose.runOnUiThread {
+            val px = (height * view.resources.displayMetrics.density).toInt()
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.ime(), Insets.of(0, 0, 0, px))
+                .setVisible(WindowInsetsCompat.Type.ime(), px > 0)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(view, insets)
+        }
+    }
 
     private fun searches() = source.actions.filter { it == "search" }
 
@@ -285,10 +300,15 @@ class ParcelSearchTest {
         press(KeyEvent.KEYCODE_ESCAPE)
         assertFalse(exists(SEARCH_ROW))
 
-        // Under the filters, Escape leaves the search as it is.
+        // Under the filters, Escape leaves the search and the filters as they are; a phone turns the key nothing took
+        // into back, which closes the filters alone.
         press(KeyEvent.KEYCODE_F, ctrl)
         tap(FILTERS_BUTTON)
         press(KeyEvent.KEYCODE_ESCAPE)
+        assertTrue(exists(SHEET_PANEL))
+        assertTrue(exists(SEARCH_ROW))
+        back()
+        assertFalse(exists(SHEET_PANEL))
         assertTrue(exists(SEARCH_ROW))
     }
 
@@ -359,6 +379,58 @@ class ParcelSearchTest {
         compose.waitForIdle()
         assertFalse(exists(SHEET_PANEL))
         assertFalse(exists(FILTERS_SHEET))
+    }
+
+    @Test
+    fun theFiltersOpenedFromTheTypingFieldComeUpAtTheirMediumHeightAsTheKeyboardGoes() {
+        show()
+        openSearch()
+        val medium = windowHeight() * 0.4714f
+        // However long the keyboard takes to go down as the sheet comes up, it was the field's, not the sheet's.
+        for (gone in listOf(0L, 150L, 250L, 350L, 1_000L)) {
+            compose.onNodeWithTag(SEARCH_FIELD).performClick()
+            keyboard(336)
+            compose.waitForIdle()
+            compose.mainClock.autoAdvance = false
+            compose.onNodeWithTag(FILTERS_BUTTON).performClick()
+            compose.mainClock.advanceTimeBy(gone)
+            keyboard(0)
+            compose.mainClock.advanceTimeBy(2_000)
+            compose.mainClock.autoAdvance = true
+            compose.waitForIdle()
+            assertTrue("Gone at $gone ms, at ${sheetTop()} for $medium", abs(sheetTop() - medium) <= 2f)
+            done()
+        }
+    }
+
+    @Test
+    fun theSheetMadeAgainWithTheWindowIsAtItsHeightWithoutComingUpAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        openFilters()
+        compose.onNodeWithTag(SHEET_PANEL).performTouchInput { swipeUp(top + 30f, top - 500f, durationMillis = 300) }
+        compose.waitForIdle()
+        val large = sheetTop()
+        assertTrue("Large at $large", large < windowHeight() * 0.1f)
+        recreation.recreate()
+        compose.mainClock.advanceTimeByFrame()
+        assertEquals(large, sheetTop(), 1f)
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(large, sheetTop(), 1f)
+    }
+
+    @Test
+    fun aMenuOverTheFiltersIsAllTalkBackReachesAndHandsTheFocusBackToItsRow() {
+        show()
+        val talkBack = talkBack()
+        openFilters()
+        tap(FILTERS_CARRIER)
+        compose.onNodeWithTag(FILTERS_DONE).assertDoesNotExist()
+        compose.onNodeWithTag("$FILTERS_STATUS.${ParcelStatusFilter.All.rawValue}").assertDoesNotExist()
+        assertTrue(compose.onNodeWithTag("$FILTERS_CARRIER.all").hasTalkBackFocus(talkBack))
+        tap("$FILTERS_CARRIER.dhl")
+        compose.onNodeWithTag(FILTERS_DONE).assertExists()
+        assertTrue(compose.onNodeWithTag(FILTERS_CARRIER).hasTalkBackFocus(talkBack))
     }
 
     @Test

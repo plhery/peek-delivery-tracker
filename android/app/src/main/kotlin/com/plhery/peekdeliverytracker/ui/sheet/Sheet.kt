@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,12 +24,16 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
@@ -39,8 +42,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.TransformOrigin
@@ -57,10 +63,11 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.lerp
 import com.plhery.peekdeliverytracker.ui.deliveries.OverlayLayer
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
@@ -126,14 +133,16 @@ internal class SheetMenus {
  *   the status bar, attached and opaque, on the grouped ground. Dragged by its grabber, its bar or what it scrolls once
  *   at its top, it follows the finger between them, morphing from one to the other, and settles where the release and
  *   its speed would carry it, as UIKit projects a flick; dragged down past its lowest detent, it goes. A scroll in it
- *   first takes it to the large detent.
+ *   first takes it to the large detent, as a keyboard up for what it holds does. In a window lower than 480 (a phone
+ *   on its side) it stands at the large detent whatever its detents, as iOS's does in compact height.
  * - Where the window is regular, it is a form sheet in the window's middle, 540 wide and 620 tall at most, opaque, which
  *   a drag down sends away too.
  *
  * The window under it dims, black at 20 % (48 % in dark), and a tap there dismisses it, as the system's back and its
  * predictive gesture do, the sheet following the gesture down. It comes and goes on a critically damped spring, and
- * moves between its detents on a snappy one. TalkBack reaches only the sheet, named [paneTitle]. Once it has gone,
- * [onClosed] runs, where TalkBack's focus goes back to what opened it.
+ * moves between its detents on a snappy one. TalkBack reaches only the sheet, named [paneTitle], and only its menu
+ * while one is open ([FormMenuRow]). Once it has gone, [onClosed] runs, where TalkBack's focus goes back to what opened
+ * it. The window made again (a rotation) finds it at the detent it had, without coming up again.
  */
 @Composable
 fun Sheet(
@@ -147,12 +156,14 @@ fun Sheet(
 ) {
     var present by remember { mutableStateOf(visible) }
     if (visible) present = true
+    val memory = rememberSaveable(saver = SheetMemory.Saver) { SheetMemory() }
+    if (!present) memory.forget()
     val host = LocalTabOverlay.current
     val dismiss by rememberUpdatedState(onDismiss)
     val closed by rememberUpdatedState(onClosed)
     val layer: (@Composable () -> Unit)? = if (!present) null else {
         {
-            SheetLayer(visible, { dismiss() }, paneTitle, detents, host?.backdrop, modifier, {
+            SheetLayer(visible, { dismiss() }, paneTitle, detents, host?.backdrop, modifier, memory, {
                 present = false
                 closed()
             }, content)
@@ -163,6 +174,24 @@ fun Sheet(
 
 private data class SheetKey(val title: String)
 
+/**
+ * What a sheet or a popover keeps with the window, so that the window made again finds it as it was: the detent it
+ * rests at, of its sheet's, and whether it had come up. Forgotten once it has gone.
+ */
+internal class SheetMemory(var detent: Int = 0, var up: Boolean = false) {
+    fun forget() {
+        detent = 0
+        up = false
+    }
+
+    companion object {
+        val Saver: Saver<SheetMemory, Any> = listSaver(
+            save = { listOf(it.detent, it.up) },
+            restore = { SheetMemory(it[0] as Int, it[1] as Boolean) },
+        )
+    }
+}
+
 /** Where the sheet's top stands and how it moves there: the finger's drag, a settle, its coming and going. */
 @Stable
 private class SheetMotion(hidden: Float) {
@@ -170,7 +199,12 @@ private class SheetMotion(hidden: Float) {
     var rests: List<Float> = emptyList()
     var hidden: Float = hidden
     var moved = false
+
+    /** It has begun to come up, or was made again already up. */
     var shown = false
+
+    /** Made again already up, it keeps to its rest at once while the window's bars come, for its first frames. */
+    var restoring = false
     var job: Job? = null
 
     /** The speed a drag let go of the sheet at as it dismissed it, which its way out keeps. */
@@ -180,6 +214,7 @@ private class SheetMotion(hidden: Float) {
     /** The finger moved the sheet by `delta` pixels, past its highest rest less and less, as UIKit's rubber band. */
     fun dragBy(delta: Float) {
         job?.cancel()
+        restoring = false
         if (!moved) raw = top
         moved = true
         raw += delta
@@ -201,9 +236,40 @@ private class SheetMotion(hidden: Float) {
         return nearest
     }
 
+    /** The rest of the detent `detent`, the only one while the sheet has one (a form sheet, or lifted to large). */
+    fun rest(detent: Int): Float = if (rests.size == 1) rests.first() else rests.getOrElse(detent) { rests.first() }
+
     companion object {
         const val DECELERATION = 0.998f
         const val BAND_LENGTH = 400f
+    }
+}
+
+/**
+ * Where a compact sheet stands in a window `width` × `height` pixels: floating `inset` in from its sides and bottom,
+ * its highest rest under the status bar ([largeTop]), its lowest, and the highest it floats at, null where it always or
+ * never attaches ([attaches]).
+ */
+@Immutable
+private data class SheetGeometry(
+    val width: Float,
+    val height: Float,
+    val inset: Float,
+    val largeTop: Float,
+    val lowest: Float,
+    val floatingTop: Float?,
+    val attaches: Boolean,
+) {
+    /** How attached the sheet is with its top at `top`, 0 floating to 1 at the large detent. */
+    fun attachment(top: Float): Float {
+        if (!attaches || floatingTop == null) return if (attaches) 1f else 0f
+        return ((floatingTop - min(top, lowest)) / (floatingTop - largeTop)).coerceIn(0f, 1f)
+    }
+
+    /** The panel's size with its top at `top` and `attach` attached: it grows down to its lowest rest, then moves. */
+    fun panelSize(top: Float, attach: Float): Size {
+        val sideInset = inset * (1 - attach)
+        return Size(width - 2 * sideInset, height - sideInset - min(top, lowest))
     }
 }
 
@@ -215,6 +281,7 @@ private fun SheetLayer(
     detents: List<SheetDetent>,
     backdrop: MaterialBackdrop?,
     modifier: Modifier,
+    memory: SheetMemory,
     onGone: () -> Unit,
     content: @Composable () -> Unit,
 ) {
@@ -223,27 +290,35 @@ private fun SheetLayer(
     val scope = rememberCoroutineScope()
     val view = LocalView.current
     val menus = remember { SheetMenus() }
+    val showing by rememberUpdatedState(visible)
+    val dismiss by rememberUpdatedState(onDismiss)
     BoxWithConstraints(Modifier.fillMaxSize()) {
         val width = constraints.maxWidth.toFloat()
         val height = constraints.maxHeight.toFloat()
         val regular = maxWidth >= REGULAR_WIDTH && maxHeight >= REGULAR_HEIGHT
         val insets = SheetInsets.sheet(maxWidth)
-        val motion = remember { SheetMotion(height) }
-        motion.hidden = height
         var backProgress by remember { mutableFloatStateOf(0f) }
         var fitted by remember { mutableFloatStateOf(0f) }
+        // Whether what the sheet holds has the focus, a field it would type in.
+        var focused by remember { mutableStateOf(false) }
 
         val bars = WindowInsets.systemBars.union(WindowInsets.displayCutout)
         val safeTop = bars.getTop(density).toFloat()
         val inset = with(density) { FLOAT_INSET.toPx() }
         val largeTop = max(safeTop, with(density) { LARGE_MIN_TOP.toPx() })
-        val ime = WindowInsets.ime.getBottom(density).toFloat()
+        val ime = WindowInsets.ime
+        val keyboard by remember(ime, density) { derivedStateOf { ime.getBottom(density) > 0 } }
         val formWidth = with(density) { min(FORM_WIDTH.toPx(), width - 2 * FORM_MARGIN.toPx()) }
         val formHeight = with(density) { min(FORM_HEIGHT.toPx(), height - safeTop - bars.getBottom(this) - 2 * FORM_MARGIN.toPx()) }
-        val rests = if (regular) {
-            listOf(max(safeTop, (height - formHeight) / 2))
-        } else {
-            val tops = detents.map { detent ->
+        // Low as a phone on its side, the sheet stands at its large detent, as iOS's does in compact height; and a
+        // keyboard up for what it holds takes it there, as UIKit lifts a sheet clear of it. A keyboard still going
+        // down from a field the sheet came over leaves it at its own detent.
+        val compactHeight = maxHeight < REGULAR_HEIGHT
+        val lifted = !regular && (compactHeight || keyboard && focused && SheetDetent.Large in detents)
+        val rests = when {
+            regular -> listOf(max(safeTop, (height - formHeight) / 2))
+            lifted -> listOf(largeTop)
+            else -> detents.map { detent ->
                 when (detent) {
                     SheetDetent.Large -> largeTop
                     SheetDetent.Medium -> height * MEDIUM_TOP
@@ -251,14 +326,28 @@ private fun SheetLayer(
                     SheetDetent.Fitted -> if (fitted > 0) height - inset - fitted * (width - 2 * inset) / width else height * MEDIUM_TOP
                 }.coerceAtLeast(largeTop)
             }
-            // A keyboard up takes the sheet to its large detent, as UIKit lifts a sheet clear of it.
-            if (ime > 0 && SheetDetent.Large in detents) listOf(largeTop) else tops
         }
+        val motion = remember {
+            SheetMotion(height).apply {
+                this.rests = rests
+                if (memory.up) {
+                    top = rest(memory.detent)
+                    restoring = true
+                }
+            }
+        }
+        motion.hidden = height
         motion.rests = rests
         val firstRest = rests.first()
         val lowest = rests.max()
         val floatingTop = rests.filter { it > largeTop + 0.5f }.minOrNull()
-        val attaches = !regular && SheetDetent.Large in detents
+        val attaches = !regular && (compactHeight || SheetDetent.Large in detents)
+        val geometry = SheetGeometry(width, height, inset, largeTop, lowest, floatingTop, attaches)
+        // Read as the sheet is laid out and drawn, so that it moves without being composed again.
+        val attachment = remember(geometry, motion) { { geometry.attachment(motion.top) } }
+        val presence = remember(motion, height, firstRest) { { ((height - motion.top) / (height - firstRest).coerceAtLeast(1f)).coerceIn(0f, 1f) } }
+        // How far the predictive back gesture has taken the panel down, a part of its height.
+        val backOffset = { if (regular) backProgress * BACK_TRAVEL * formHeight else backProgress * BACK_TRAVEL * geometry.panelSize(motion.top, attachment()).height }
 
         val reduceMotion = PeekTheme.reduceMotion
         fun animateTo(target: Float, velocity: Float, spec: AnimationSpec<Float>, then: () -> Unit = {}) {
@@ -274,50 +363,74 @@ private fun SheetLayer(
             val target = motion.target(velocity, dismissible = true)
             if (target == null) {
                 motion.releaseVelocity = velocity
-                onDismiss()
+                dismiss()
             } else {
+                // The detent the finger chose, unless the sheet stands at its only rest for now.
+                val chosen = motion.rests.indexOf(target)
+                if (motion.rests.size == detents.size && chosen >= 0) memory.detent = chosen
+                memory.up = true
                 animateTo(target, velocity, Motion.snappy(DETENT_DURATION))
             }
         }
+        val settling by rememberUpdatedState<(Float) -> Unit> { settle(it) }
 
-        // Comes up to its first detent once laid out, and goes down past the window's bottom once dismissed.
+        // Comes up to its detent once laid out, and goes down past the window's bottom once dismissed. Made again with
+        // the window already up, it stays where it is.
         LaunchedEffect(visible) {
             if (visible) {
+                if (motion.restoring) {
+                    motion.shown = true
+                    repeat(RESTORING_FRAMES) { withFrameNanos {} }
+                    motion.restoring = false
+                    return@LaunchedEffect
+                }
+                // Opened again on its way out after the back gesture: from where the gesture left it.
+                if (backProgress != 0f) {
+                    motion.job?.cancel()
+                    motion.top += backOffset()
+                    backProgress = 0f
+                }
                 withFrameNanos {}
-                animateTo(motion.rests.first(), 0f, Motion.smooth(PRESENT_DURATION))
+                animateTo(motion.rest(memory.detent), 0f, Motion.smooth(PRESENT_DURATION)) { memory.up = true }
                 motion.shown = true
             } else {
+                memory.forget()
                 val velocity = motion.releaseVelocity
                 motion.releaseVelocity = 0f
                 animateTo(motion.hidden, velocity, Motion.smooth(PRESENT_DURATION)) { onGone() }
             }
         }
-        // A keyboard, or a resize, moves the sheet to the rest it now has nearest.
+        // A keyboard, or a resize, moves the sheet to its detent's rest as it now is.
         LaunchedEffect(rests) {
+            if (lifted && !compactHeight) detents.indexOf(SheetDetent.Large).takeIf { it >= 0 }?.let { memory.detent = it }
             if (!visible || !motion.shown || motion.moved) return@LaunchedEffect
-            if (rests.any { abs(it - motion.top) < 1f }) return@LaunchedEffect
-            animateTo(rests.minBy { abs(it - motion.top) }, 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION))
+            val target = motion.rest(memory.detent)
+            if (motion.restoring) {
+                motion.top = target
+                return@LaunchedEffect
+            }
+            if (abs(target - motion.top) < 1f) return@LaunchedEffect
+            animateTo(target, 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { memory.up = true }
         }
 
         PredictiveBackHandler(enabled = visible) { progress ->
             try {
                 progress.collect { backProgress = it.progress }
-                onDismiss()
+                dismiss()
             } catch (error: CancellationException) {
                 backProgress = 0f
                 throw error
             }
         }
 
-        val presence = ((height - motion.top) / (height - firstRest).coerceAtLeast(1f)).coerceIn(0f, 1f)
         val dim = if (colors.dark) DIM_DARK else DIM_LIGHT
         // The dim, which a tap dismisses the sheet from.
         Box(
             Modifier
                 .fillMaxSize()
-                .graphicsLayer { alpha = presence }
+                .graphicsLayer { alpha = presence() }
                 .background(Color.Black.copy(alpha = dim))
-                .pointerInput(Unit) { detectTapGestures { if (visible) onDismiss() } }
+                .pointerInput(Unit) { detectTapGestures { if (showing) dismiss() } }
                 .clearAndSetSemantics {},
         )
 
@@ -340,7 +453,7 @@ private fun SheetLayer(
 
                 override suspend fun onPreFling(available: Velocity): Velocity {
                     if (!motion.moved) return Velocity.Zero
-                    settle(available.y)
+                    settling(available.y)
                     return available
                 }
             }
@@ -350,17 +463,22 @@ private fun SheetLayer(
         val displayRadius = remember(view) {
             view.rootWindowInsets?.getRoundedCorner(RoundedCorner.POSITION_BOTTOM_LEFT)?.radius?.toFloat() ?: 0f
         }
+        // While a menu is open over it, TalkBack reaches only the menu.
+        val hidden = if (menus.content != null) Modifier.clearAndSetSemantics {} else Modifier
         val sheetModifier = Modifier
             .semantics { this.paneTitle = paneTitle }
+            .onFocusChanged { focused = it.hasFocus }
             .nestedScroll(connection)
             .draggable(drag, Orientation.Vertical, onDragStopped = { settle(it) })
             .pointerInput(Unit) { detectTapGestures { } }
+            .then(hidden)
 
         if (regular) {
             val shape = ContinuousRoundedShape(FORM_RADIUS)
+            val ground = remember(colors) { @Composable { bounds: Modifier -> Box(bounds.background(colors.groupedBackground)) } }
             Box(
                 Modifier
-                    .placedAt(formWidth, formHeight) { (width - formWidth) / 2 to motion.top + backProgress * BACK_TRAVEL * formHeight }
+                    .placedAt({ Size(formWidth, formHeight) }) { Offset((width - formWidth) / 2, motion.top + backOffset()) }
                     .testTag(SHEET_PANEL)
                     .then(modifier)
                     .dropShadow(shape, SHEET_SHADOW)
@@ -368,60 +486,50 @@ private fun SheetLayer(
                     .background(colors.groupedBackground)
                     .then(sheetModifier),
             ) {
-                val ground: @Composable (Modifier) -> Unit = { Box(it.background(colors.groupedBackground)) }
                 CompositionLocalProvider(
-                    LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus, LocalSheetInsets provides SheetInsets.sheet(FORM_WIDTH),
-                    LocalSheetGround provides ground,
+                    LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus,
+                    LocalSheetInsets provides SheetInsets.sheet(FORM_WIDTH, reachesBottom = false), LocalSheetGround provides ground,
                 ) {
                     Grabber(Modifier.align(Alignment.TopCenter))
                     content()
                 }
             }
         } else {
-            val attachment = {
-                val top = min(motion.top, lowest)
-                if (!attaches || floatingTop == null) {
-                    if (attaches) 1f else 0f
-                } else {
-                    ((floatingTop - top) / (floatingTop - largeTop)).coerceIn(0f, 1f)
+            val floatingRadius = max(displayRadius - inset, with(density) { TOP_RADIUS.toPx() })
+            val shape = remember(floatingRadius, attachment) { SheetShape(floatingRadius, attachment) }
+            val glassDim = remember(presence, dim) { { dim * presence() } }
+            val scale = remember(geometry, attachment) { { (width - 2 * inset * (1 - attachment())) / width } }
+            // Drawn again in what is scaled, it is scaled back, so that its glass blurs the window where it is.
+            val ground = remember(scale, attachment, backdrop, glassDim, colors) {
+                @Composable { bounds: Modifier ->
+                    Box(bounds.scaledFrom { 1 / scale() }) {
+                        FloatingGlass(RectangleShape, backdrop, attachment, Modifier.fillMaxSize(), glassDim)
+                        Box(Modifier.fillMaxSize().drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) })
+                    }
                 }
             }
-            val attach = attachment()
-            val sideInset = inset * (1 - attach)
-            val layoutTop = min(motion.top, lowest)
-            val panelHeight = height - sideInset - layoutTop
-            val below = motion.top - layoutTop + backProgress * BACK_TRAVEL * panelHeight
-            val bottomRadius = with(density) {
-                val floating = max(displayRadius - inset, TOP_RADIUS.toPx())
-                (floating * (1 - attach)).toDp()
-            }
-            val shape = UnevenContinuousRoundedShape(TOP_RADIUS, bottomRadius, bottomRadius, TOP_RADIUS)
             Box(
                 Modifier
-                    .placedAt(width - 2 * sideInset, panelHeight) { sideInset to layoutTop + below }
+                    .placedAt({ geometry.panelSize(motion.top, attachment()) }) {
+                        // Down to its lowest rest it grows; past it, and down with the back gesture, it moves.
+                        val attach = attachment()
+                        val layoutTop = min(motion.top, lowest)
+                        val panelHeight = geometry.panelSize(motion.top, attach).height
+                        Offset(inset * (1 - attach), layoutTop + (motion.top - layoutTop + backProgress * BACK_TRAVEL * panelHeight))
+                    }
                     .testTag(SHEET_PANEL)
                     .then(modifier)
                     .dropShadow(shape, SHEET_SHADOW)
                     .then(sheetModifier),
             ) {
                 // The glass it floats on, giving way to the opaque ground as it attaches.
-                if (attach < 1f) {
-                    SheetGlass(shape, backdrop, Modifier.matchParentSize().graphicsLayer { alpha = 1 - attachment() }) { dim * presence }
-                }
+                FloatingGlass(shape, backdrop, attachment, Modifier.matchParentSize(), glassDim)
                 Box(
                     Modifier
                         .matchParentSize()
                         .clip(shape)
                         .drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) },
                 )
-                val scale = { (width - 2 * inset * (1 - attachment())) / width }
-                // Drawn again in what is scaled, it is scaled back, so that its glass blurs the window where it is.
-                val ground: @Composable (Modifier) -> Unit = { bounds ->
-                    Box(bounds.scaledFrom { 1 / scale() }) {
-                        if (attach < 1f) SheetGlass(RectangleShape, backdrop, Modifier.fillMaxSize().graphicsLayer { alpha = 1 - attachment() }) { dim * presence }
-                        Box(Modifier.fillMaxSize().drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) })
-                    }
-                }
                 Box(Modifier.matchParentSize().clip(shape)) {
                     CompositionLocalProvider(
                         LocalSheetAttachment provides attachment, LocalSheetMenus provides menus, LocalSheetInsets provides insets,
@@ -444,10 +552,33 @@ private fun SheetLayer(
     }
 }
 
-/** The panel `width` × `height` pixels in the whole window, at the offset [at] gives, read as it is placed. */
-private fun Modifier.placedAt(width: Float, height: Float, at: () -> Pair<Float, Float>): Modifier =
+/**
+ * The glass a sheet floats on ([SheetGlass]), fading out as it attaches ([attachment]) and gone once it has, composed
+ * again only as it comes or goes.
+ */
+@Composable
+private fun FloatingGlass(shape: Shape, backdrop: MaterialBackdrop?, attachment: () -> Float, modifier: Modifier, dim: () -> Float) {
+    val floating by remember(attachment) { derivedStateOf { attachment() < 1f } }
+    if (floating) SheetGlass(shape, backdrop, modifier.graphicsLayer { alpha = 1 - attachment() }, dim)
+}
+
+/**
+ * The compact sheet's outline: its top corners, and its bottom ones concentric with the display's while it floats,
+ * `floatingRadius` then, squaring off as it attaches ([attachment], read as it is outlined). Its size follows the
+ * attachment, so it is outlined again as that changes.
+ */
+private class SheetShape(private val floatingRadius: Float, private val attachment: () -> Float) : Shape {
+    override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
+        val bottom = with(density) { (floatingRadius * (1 - attachment())).toDp() }
+        return UnevenContinuousRoundedShape(TOP_RADIUS, bottom, bottom, TOP_RADIUS).createOutline(size, layoutDirection, density)
+    }
+}
+
+/** The panel [size] pixels in the whole window, at the offset [at] gives, both read as it is laid out. */
+private fun Modifier.placedAt(size: () -> Size, at: () -> Offset): Modifier =
     this.then(
         Modifier.layout { measurable, constraints ->
+            val (width, height) = size()
             val placeable = measurable.measure(Constraints.fixed(width.toInt().coerceAtLeast(0), height.toInt().coerceAtLeast(0)))
             layout(constraints.maxWidth, constraints.maxHeight) {
                 val (x, y) = at()
@@ -536,6 +667,8 @@ private const val DIM_LIGHT = 0.2f
 private const val DIM_DARK = 0.48f
 private const val PRESENT_DURATION = 0.5
 private const val DETENT_DURATION = 0.4
+/** How many frames a sheet made again with the window keeps to its rest at once, while the window's bars come. */
+private const val RESTORING_FRAMES = 2
 /** How far down the predictive back gesture takes the sheet, as a part of its height. */
 private const val BACK_TRAVEL = 0.1f
 private val SHEET_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 20.dp, y = 0.dp)

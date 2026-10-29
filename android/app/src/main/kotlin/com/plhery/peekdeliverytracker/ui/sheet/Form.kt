@@ -113,8 +113,8 @@ internal fun SheetPage(
     val scroll = rememberScrollState()
     val attachment = LocalSheetAttachment.current
     val backdrop = rememberMaterialBackdrop()
-    val bottom = with(LocalDensity.current) { WindowInsets.navigationBars.getBottom(this).toDp() }
     val insets = LocalSheetInsets.current
+    val bottom = if (!insets.reachesBottom) 0.dp else with(LocalDensity.current) { WindowInsets.navigationBars.getBottom(this).toDp() }
     val barTop = insets.barTop
     val barHeight = barTop + BAR_ROW
     val ground = LocalSheetGround.current
@@ -185,16 +185,17 @@ private fun ConfirmationButton(title: String, onConfirm: () -> Unit, backdrop: M
 /**
  * Where a page's bar and form stand in a sheet or a popover: the bar's row `barTop` under its top, clear of a sheet's
  * grabber, its confirmation `barSide` in from the side, and the form's sections and rows `formSide` in, UIKit's layout
- * margins, 16 on a surface narrower than 414 points, as a popover is, and 20 from there.
+ * margins, 16 on a surface narrower than 414 points, as a popover is, and 20 from there. Where the surface reaches the
+ * window's bottom ([reachesBottom]), as a sheet from the bottom does, the form ends clear of the navigation bar.
  */
 @Immutable
-internal data class SheetInsets(val barTop: Dp, val barSide: Dp, val formSide: Dp) {
+internal data class SheetInsets(val barTop: Dp, val barSide: Dp, val formSide: Dp, val reachesBottom: Boolean) {
     companion object {
-        /** A sheet `width` wide. */
-        fun sheet(width: Dp) = SheetInsets(19.dp, 20.dp, margin(width))
+        /** A sheet `width` wide, from the window's bottom unless it is a form sheet in its middle. */
+        fun sheet(width: Dp, reachesBottom: Boolean = true) = SheetInsets(19.dp, 20.dp, margin(width), reachesBottom)
 
         /** A popover `width` wide. */
-        fun popover(width: Dp) = SheetInsets(10.dp, 10.dp, margin(width))
+        fun popover(width: Dp) = SheetInsets(10.dp, 10.dp, margin(width), reachesBottom = false)
 
         private fun margin(width: Dp) = if (width >= 414.dp) 20.dp else 16.dp
     }
@@ -360,7 +361,8 @@ fun FormMenuRow(
  * The menu a picker opens (`UIMenu`): its options on glass 250 wide, each 42 high, the chosen one checked at the leading
  * end, its top at the row's and its trailing edge at the picker's value, moved up as far as the window needs. It grows
  * from its top on a spring; a choice or a tap outside closes it, as the system's back does. TalkBack reaches only the
- * menu, from the chosen option, and goes back to the row once it has closed.
+ * menu, from the chosen option, the sheet or popover under it hidden from it while it is open, and goes back to the
+ * row once it has closed.
  */
 @Composable
 private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trailing: Float, onClose: () -> Unit, onSelect: (Int) -> Unit) {

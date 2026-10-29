@@ -71,15 +71,12 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Widżet na ekranie początkowym pokazuje teraz każdą przesyłkę tak jak na liście: jej kartę w barwach przewoźnika, z trasą na mapie.
-• Strona przesyłki pokazuje opłaty importowe płatne przy doręczeniu, a dopóki można je jeszcze opłacić online, obok widać niższą cenę online.
-• Gdy przewoźnik odrzuca numer śledzenia, który pasuje tylko do jednego innego przewoźnika, ostrzeżenie podaje nazwę tego przewoźnika i proponuje zmianę na niego jednym dotknięciem.
-• Gdy aktualizacje przesyłki wyglądają na wygenerowane, Peek o tym informuje, nie pokazuje ich miejsc na mapie i nie wysyła o nich powiadomień.
-• Kod pocztowy doręczenia może teraz pochodzić z innego kraju niż kraj przewoźnika: kraj widać obok kodu pocztowego i można go zmienić.
-• W oknie „Dodaj przesyłkę” wklej wiadomość z kilkoma numerami śledzenia, a Peek pokaże je wszystkie w kolejności z tekstu, żeby można było wybrać, który śledzić.
-• Przy dodawaniu przesyłki Peek odróżnia numer zamówienia z Amazona, Shein, Shopee lub Temu od numeru śledzenia i podpowiada, gdzie w sklepie znaleźć numer śledzenia.
-• Peek odczytuje teraz także numer śledzenia zapisany po oznaczeniu takim jak „numer przesyłki” czy „N° de suivi”. Gdy cyfra kontrolna numeru pocztowego się nie zgadza, Peek proponuje numer, o który prawdopodobnie chodziło, albo prosi o porównanie go z wiadomością o wysyłce.
-• Gdy Peek sprawdza przesyłki, strzałka odświeżania obraca się w miejscu, zamiast ustępować kółku ładowania.
-• Na iPadzie, gdy obok przesyłki jest lista i wystarcza miejsca, historia śledzenia wyświetla się obok karty przesyłki zamiast pod nią.
-• Na iPadzie Paszport otwiera się na dwóch stronach: na jednej Twoje znaczki, na drugiej czasy dostaw i kraje.
+• Opcje powiadomień nazywają się teraz tak jak na stronie: Każdy skan, Ważne etapy i Tylko doręczenie.
+• Gdy numer ma format przewoźnika, który go jeszcze nie zna, przy przesyłce widać „Prawdopodobnie” i nazwę tego przewoźnika, dopóki nie pojawi się pierwszy skan. Jeśli po tygodniu przewoźnik nadal go nie zna, Peek prosi o sprawdzenie numeru u nadawcy lub wybranie innego przewoźnika.
+• Po czterech dniach bez nowego skanu strona przesyłki prowadzi do strony pomocy jej przewoźnika.
+• Gdy żaden przewoźnik nie zna numeru, który wygląda na numer zamówienia, Peek podpowiada, że numer śledzenia jest w e-mailu o wysyłce lub na stronie zamówienia w sklepie.
+• Gdy w drodze jest więcej przesyłek, niż widżet może pokazać, mała strzałka na jego karcie przełącza go na kolejne. Przy przesyłce, która nie ma jeszcze miejsc na mapie, zamiast trasy widać Pipa.
+• Bez konta Peek pyta teraz przewoźników o aktualizacje w języku aplikacji: ci, którzy piszą w kilku językach, jak Poczta Polska, odpowiadają w Twoim.
+• Przy dodawaniu przesyłki Peek odczytuje numer także po innych oznaczeniach, takich jak „Waybill”, „AWB” czy „Guía”, i odrzuca przykładowy numer, którego żaden przewoźnik nie mógłby znaleźć.
+• Poprawki: gdy sesji nie da się już odnowić, Peek wylogowuje Cię, aby można było zalogować się ponownie, a zapomnienie o przesyłce, którą ktoś Ci udostępnił, wyłącza jej powiadomienia, nawet gdy Peek nie może w tej chwili połączyć się z usługą.
 ```

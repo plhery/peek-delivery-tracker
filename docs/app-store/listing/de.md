@@ -71,15 +71,12 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Das Widget auf dem Home-Bildschirm zeigt jedes Paket jetzt wie in deiner Liste: in den Farben seines Paketdiensts, mit seiner Route auf der Karte.
-• Die Seite eines Pakets zeigt die Einfuhrabgaben, die bei der Zustellung fällig sind, und, solange du sie noch online bezahlen kannst, den niedrigeren Online-Preis daneben.
-• Lehnt ein Paketdienst eine Sendungsnummer ab, die nur zu einem einzigen anderen Paketdienst passt, nennt der Hinweis diesen Paketdienst und bietet an, mit einem Tippen zu ihm zu wechseln.
-• Wirken die Aktualisierungen eines Pakets automatisch erzeugt, sagt Peek das, lässt ihre Orte auf der Karte weg und benachrichtigt dich nicht darüber.
-• Die Postleitzahl der Lieferadresse kann jetzt aus einem anderen Land als dem des Paketdiensts sein: Das Land steht neben der Postleitzahl, und du kannst es ändern.
-• Füge unter „Paket hinzufügen“ eine Nachricht mit mehreren Sendungsnummern ein, und Peek listet sie alle in der Reihenfolge des Textes auf, damit du eine auswählen kannst.
-• Beim Hinzufügen eines Pakets erkennt Peek Bestellnummern von Amazon, Shein, Shopee und Temu und sagt dir, wo du im Shop stattdessen die Sendungsnummer findest.
-• Peek erkennt eine Sendungsnummer jetzt auch hinter Angaben wie „Sendungsnummer“, „Nr.“ oder „N° de suivi“. Geht die Prüfziffer einer Postsendungsnummer nicht auf, schlägt Peek die vermutlich gemeinte Nummer vor oder bittet dich, sie mit deiner Versandnachricht zu vergleichen.
-• Während Peek deine Pakete prüft, dreht sich der Aktualisieren-Pfeil an Ort und Stelle, statt einem Ladekreis zu weichen.
-• Auf dem iPad steht der Sendungsverlauf eines Pakets neben seinen Angaben statt darunter, wenn neben der Liste genug Platz ist.
-• Auf dem iPad öffnet sich der Reisepass auf zwei Seiten: auf der einen deine Briefmarken, auf der anderen Lieferzeiten und Länder.
+• Die Optionen für Mitteilungen heißen jetzt wie auf der Website: „Jeden Scan“, „Wichtige Schritte“ und „Nur die Zustellung“.
+• Hat eine Nummer das Format eines Paketdiensts, der sie noch nicht kennt, zeigt das Paket „Wahrscheinlich“ und den Namen des Paketdiensts, bis der erste Scan kommt. Kennt er sie nach einer Woche immer noch nicht, bittet Peek dich, die Nummer beim Absender zu prüfen oder einen anderen Paketdienst zu wählen.
+• Nach vier Tagen ohne neuen Scan verlinkt die Seite eines Pakets auf die Hilfeseite seines Paketdiensts.
+• Kennt kein Paketdienst eine Nummer, die wie eine Bestellnummer aussieht, sagt dir das Paket, dass die Sendungsnummer in der Versandmail oder auf der Bestellseite des Shops steht.
+• Sind mehr Pakete unterwegs, als das Widget zeigen kann, blättert ein kleiner Pfeil oben im Widget zu den nächsten. Hat ein Paket noch keine Orte, zeigt es statt der Route Pip.
+• Ohne Konto fragt Peek die Paketdienste jetzt in der Sprache der App: Wer in mehreren Sprachen schreibt, etwa Poczta Polska, antwortet in deiner.
+• Beim Hinzufügen eines Pakets erkennt Peek die Nummer hinter weiteren Angaben wie „Waybill“, „AWB“ oder „Guía“ und lehnt eine Platzhalternummer ab, die kein Paketdienst je finden könnte.
+• Fehlerbehebungen: Lässt sich deine Anmeldung nicht mehr erneuern, meldet Peek dich ab, damit du dich neu anmelden kannst. Und vergisst du ein Paket, das jemand mit dir geteilt hat, enden seine Mitteilungen auch dann, wenn Peek den Dienst gerade nicht erreicht.
 ```

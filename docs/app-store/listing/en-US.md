@@ -73,15 +73,12 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• The Home Screen widget now shows each package as it looks in your list: its card in its carrier’s colors, with its route on the map.
-• A package’s page shows the import charges due on delivery and, while they can still be paid online, the lower online price beside them.
-• When a carrier refuses a tracking number that fits only one other carrier, the warning names that carrier and offers to switch to it in one tap.
-• When a package’s updates look generated, Peek says so, leaves their places off the map and doesn’t notify you about them.
-• A delivery postcode can now be in a different country from the carrier’s: the country shows beside the postcode, and you can change it.
-• Paste a message that names several tracking numbers when adding a package, and Peek lists them all, in the order written, so you can pick which to track.
-• When you add a package, Peek recognizes an Amazon, Shein, Shopee or Temu order number and says where in that store to find the tracking number instead.
-• Peek now also reads a tracking number after a French, Spanish, Italian, Portuguese or Polish label such as “N° de suivi”. When a postal number’s check digit doesn’t add up, Peek suggests the number you may have meant or asks you to compare it with your shipping message.
-• While Peek checks your packages for updates, the refresh arrow turns in place instead of giving way to a spinner.
-• On iPad, when the list is beside a package and there’s room, the package’s tracking history sits next to its card rather than under it.
-• On iPad, the Passport opens on two pages: your stamps on one, your delivery times and countries on the other.
+• Notification choices are now called Every scan, Important steps, and Delivery only, as on the website.
+• When a number has the format of a carrier that doesn’t list it yet, the package says “Probably” with that carrier’s name while it waits for the first scan. If the carrier still doesn’t list it after a week, Peek asks you to check the number with the sender or choose another carrier.
+• After four days with no new scan, a package’s page links to its carrier’s help page.
+• When no carrier lists a number that looks like a store’s order number, the package tells you the tracking number is in the shipping email or on the store’s order page.
+• When more packages are on their way than the widget can show, a small arrow on its card turns it to the next ones. A package with no places on its map yet shows Pip instead.
+• Without an account, Peek now asks carriers for updates in the app’s language, so those that write in several, such as Poczta Polska, answer in yours.
+• When you add a package, Peek reads the number after more labels, such as “Waybill,” “AWB,” and “Guía,” and turns down a placeholder number no carrier could ever find.
+• Fixes: when your sign-in can no longer be renewed, Peek signs you out so you can sign in again, and forgetting a package someone shared with you stops its notifications even when Peek can’t reach the service at that moment.
 ```

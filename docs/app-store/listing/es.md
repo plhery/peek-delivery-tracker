@@ -71,15 +71,12 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• El widget de la pantalla de inicio ahora muestra cada paquete como en tu lista: su ficha con los colores de su transportista y su recorrido en el mapa.
-• La página de un paquete muestra los gastos de importación que se pagan a la entrega y, mientras aún puedas pagarlos en línea, al lado el precio en línea, más bajo.
-• Cuando un transportista rechaza un número de seguimiento que solo encaja con otro transportista, el aviso nombra a ese transportista y te ofrece cambiar a él con un toque.
-• Cuando las novedades de un paquete parecen generadas, Peek lo indica, quita sus lugares del mapa y no te avisa de ellas.
-• El código postal de entrega ya puede ser de un país distinto al del transportista: el país aparece junto al código postal y puedes cambiarlo.
-• En Añadir un paquete, pega un mensaje que cite varios números de seguimiento y Peek los muestra todos, en el orden del texto, para que elijas cuál seguir.
-• Al añadir un paquete, Peek distingue un número de pedido de Amazon, Shein, Shopee o Temu de un número de seguimiento y te dice dónde encontrar en la tienda el número de seguimiento.
-• Peek ahora también lee un número de seguimiento escrito tras una indicación como «número de seguimiento» o «N° de suivi». Cuando el dígito de control de un número postal no cuadra, Peek te propone el número que quizá querías poner o te pide que lo compares con el mensaje de envío.
-• Mientras Peek revisa tus paquetes, la flecha de actualizar gira sobre sí misma en lugar de dejar paso a una rueda de carga.
-• En iPad, cuando la lista está al lado de un paquete y hay espacio, el historial de seguimiento aparece junto a su ficha en lugar de debajo.
-• En iPad, el Pasaporte se abre en dos páginas: tus sellos en una, y tus plazos de entrega y países en la otra.
+• Las opciones de notificación se llaman ahora Cada escaneo, Pasos importantes y Solo la entrega, como en la web.
+• Cuando un número tiene el formato de un transportista que aún no lo reconoce, el paquete muestra «Probablemente» con el nombre de ese transportista mientras espera el primer escaneo. Si al cabo de una semana el transportista sigue sin reconocerlo, Peek te pide que compruebes el número con el remitente o elijas otro transportista.
+• Tras cuatro días sin escaneos nuevos, la página de un paquete enlaza con la página de ayuda de su transportista.
+• Cuando ningún transportista reconoce un número que parece un número de pedido, el paquete te indica que el número de seguimiento está en el correo de envío o en la página del pedido en la tienda.
+• Cuando hay más paquetes en camino de los que caben en el widget, una pequeña flecha en su ficha pasa a los siguientes. Un paquete que aún no tiene lugares en el mapa muestra a Pip en lugar del recorrido.
+• Sin cuenta, Peek ahora pide las novedades a los transportistas en el idioma de la app: los que escriben en varios idiomas, como Poczta Polska, responden en el tuyo.
+• Al añadir un paquete, Peek lee el número tras más indicaciones, como «Waybill», «AWB» o «Guía», y rechaza un número de ejemplo que ningún transportista podría encontrar.
+• Correcciones: cuando tu sesión ya no se puede renovar, Peek la cierra para que puedas volver a iniciarla, y olvidar un paquete que alguien compartió contigo detiene sus notificaciones aunque Peek no pueda contactar con el servicio en ese momento.
 ```

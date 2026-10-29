@@ -73,15 +73,12 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Le widget de l’écran d’accueil montre désormais chaque colis comme dans ta liste : sa fiche aux couleurs de son transporteur, avec son trajet sur la carte.
-• La fiche d’un colis indique les frais d’importation à payer à la livraison et, tant que tu peux encore les régler en ligne, leur prix en ligne, moins élevé.
-• Quand un transporteur refuse un numéro de suivi qui ne correspond qu’à un seul autre transporteur, l’avertissement nomme ce transporteur et propose d’y passer d’un seul geste.
-• Quand les mises à jour d’un colis semblent générées, Peek le signale, retire leurs lieux de la carte et ne t’envoie aucune notification à leur sujet.
-• Le code postal de livraison peut désormais être d’un autre pays que celui du transporteur : le pays s’affiche à côté du code postal, et tu peux le changer.
-• Dans Ajouter un colis, colle un message qui cite plusieurs numéros de suivi : Peek les liste tous, dans l’ordre du texte, pour que tu choisisses celui à suivre.
-• Quand tu ajoutes un colis, Peek distingue un numéro de commande Amazon, Shein, Shopee ou Temu d’un numéro de suivi, et t’indique où trouver le numéro de suivi dans la boutique.
-• Peek lit désormais aussi un numéro de suivi précédé d’une mention comme « N° de suivi », en français comme en espagnol, italien, portugais ou polonais. Quand le chiffre de contrôle d’un numéro postal ne correspond pas, Peek propose le numéro que tu voulais sans doute saisir ou te demande de le comparer avec ton message d’expédition.
-• Pendant que Peek vérifie tes colis, la flèche d’actualisation tourne sur place au lieu d’être remplacée par un indicateur de chargement.
-• Sur iPad, quand la liste est à côté d’un colis et qu’il y a la place, l’historique du suivi s’affiche à côté de sa fiche plutôt qu’en dessous.
-• Sur iPad, le Passeport s’ouvre sur deux pages : d’un côté tes timbres, de l’autre tes délais de livraison et les pays où tes colis ont d’abord été scannés.
+• Les choix de notification s’appellent désormais Chaque scan, Étapes importantes et Livraison seulement, comme sur le site.
+• Quand un numéro a le format d’un transporteur qui ne le connaît pas encore, le colis affiche « Probablement » suivi de ce transporteur en attendant le premier scan. Si le transporteur ne le connaît toujours pas au bout d’une semaine, Peek te demande de vérifier le numéro auprès de l’expéditeur ou de choisir un autre transporteur.
+• Après quatre jours sans nouveau scan, la fiche d’un colis renvoie vers la page d’aide de son transporteur.
+• Quand aucun transporteur ne connaît un numéro qui ressemble à un numéro de commande, le colis t’indique que le numéro de suivi se trouve dans l’e-mail d’expédition ou sur la page de la commande dans la boutique.
+• Quand il y a plus de colis en route que le widget ne peut en montrer, une petite flèche sur sa fiche le fait passer aux suivants. Un colis qui n’a encore aucun lieu sur sa carte montre Pip à la place.
+• Sans compte, Peek demande désormais les mises à jour aux transporteurs dans la langue de l’app : ceux qui écrivent en plusieurs langues, comme Poczta Polska, répondent dans la tienne.
+• Quand tu ajoutes un colis, Peek lit le numéro après davantage de mentions, comme « Waybill », « AWB » ou « Guía », et refuse un numéro factice qu’aucun transporteur ne pourrait trouver.
+• Corrections : quand ta session ne peut plus être renouvelée, Peek te déconnecte pour que tu puisses te reconnecter, et oublier un colis que quelqu’un a partagé avec toi arrête ses notifications même si Peek ne parvient pas à joindre le service sur le moment.
 ```

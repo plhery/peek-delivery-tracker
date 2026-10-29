@@ -71,15 +71,12 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• O widget do ecrã principal mostra agora cada encomenda como na tua lista: a ficha com as cores da transportadora e o percurso no mapa.
-• A página de uma encomenda mostra os encargos de importação a pagar na entrega e, enquanto ainda os puderes pagar online, o preço online, mais baixo, ao lado.
-• Quando uma transportadora recusa um número de seguimento que corresponde apenas a uma outra transportadora, o aviso indica essa transportadora e propõe mudar para ela com um toque.
-• Quando as atualizações de uma encomenda parecem geradas, o Peek indica-o, retira os seus locais do mapa e não te envia notificações sobre elas.
-• O código postal de entrega já pode ser de um país diferente do da transportadora: o país aparece ao lado do código postal e podes alterá-lo.
-• Em Adicionar uma encomenda, cola uma mensagem com vários números de seguimento e o Peek mostra-os todos, pela ordem do texto, para escolheres qual seguir.
-• Ao adicionares uma encomenda, o Peek distingue um número de pedido da Amazon, Shein, Shopee ou Temu de um número de seguimento e diz-te onde encontrar, na loja, o número de seguimento.
-• O Peek lê agora também um número de seguimento escrito a seguir a uma indicação como «código de rastreio» ou «N° de suivi». Quando o dígito de controlo de um número postal não bate certo, o Peek propõe o número que talvez quisesses escrever ou pede-te que o compares com a mensagem de envio.
-• Enquanto o Peek verifica as tuas encomendas, a seta de atualizar roda sobre si mesma em vez de dar lugar a um indicador de carregamento.
-• No iPad, quando a lista está ao lado de uma encomenda e há espaço, o histórico de seguimento fica ao lado da ficha em vez de por baixo.
-• No iPad, o Passaporte abre-se em duas páginas: os teus selos numa, os tempos de entrega e os países na outra.
+• As opções de notificação chamam-se agora Todas as leituras, Passos importantes e Só a entrega, como no site.
+• Quando um número tem o formato de uma transportadora que ainda não o reconhece, a encomenda mostra «Provavelmente» com o nome dessa transportadora enquanto espera pelo primeiro registo. Se ao fim de uma semana a transportadora continuar sem o reconhecer, o Peek pede-te que confirmes o número com o remetente ou escolhas outra transportadora.
+• Após quatro dias sem novas leituras, a página de uma encomenda tem uma ligação para a página de ajuda da sua transportadora.
+• Quando nenhuma transportadora reconhece um número que parece um número de pedido, a encomenda diz-te que o número de seguimento está no e-mail de envio ou na página do pedido na loja.
+• Quando há mais encomendas a caminho do que o widget consegue mostrar, uma pequena seta na ficha passa às seguintes. Uma encomenda que ainda não tem locais no mapa mostra o Pip no lugar deles.
+• Sem conta, o Peek pede agora as atualizações às transportadoras no idioma da app: as que escrevem em vários idiomas, como a Poczta Polska, respondem no teu.
+• Ao adicionares uma encomenda, o Peek lê o número a seguir a mais indicações, como «Waybill», «AWB» ou «Guía», e recusa um número fictício que nenhuma transportadora poderia encontrar.
+• Correções: quando a tua sessão já não pode ser renovada, o Peek termina-a para poderes voltar a iniciar sessão, e esquecer uma encomenda que alguém partilhou contigo desativa as suas notificações mesmo quando o Peek não consegue contactar o serviço nesse momento.
 ```

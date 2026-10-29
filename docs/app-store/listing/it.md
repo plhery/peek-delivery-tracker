@@ -71,15 +71,12 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Il widget della schermata Home ora mostra ogni pacco come nella tua lista: la sua scheda con i colori del corriere e il percorso sulla mappa.
-• La pagina di un pacco mostra gli oneri doganali da pagare alla consegna e, finché puoi ancora pagarli online, accanto il prezzo online, più basso.
-• Quando un corriere rifiuta un numero di tracciamento che corrisponde a un solo altro corriere, l’avviso indica quel corriere e propone di passarci con un tocco.
-• Quando gli aggiornamenti di un pacco sembrano generati, Peek lo segnala, toglie i loro luoghi dalla mappa e non te li notifica.
-• Il codice postale di consegna ora può essere di un paese diverso da quello del corriere: il paese compare accanto al codice postale e puoi cambiarlo.
-• In Aggiungi un pacco, incolla un messaggio con più numeri di tracciamento: Peek li elenca tutti, nell’ordine del testo, così puoi scegliere quale seguire.
-• Quando aggiungi un pacco, Peek distingue un numero d’ordine Amazon, Shein, Shopee o Temu da un numero di tracciamento e ti dice dove trovare nel negozio il numero di tracciamento.
-• Peek ora legge anche un numero di tracciamento scritto dopo un’indicazione come «numero di tracciamento» o «N° de suivi». Quando la cifra di controllo di un numero postale non torna, Peek propone il numero che forse intendevi o ti chiede di confrontarlo con il messaggio di spedizione.
-• Mentre Peek controlla i tuoi pacchi, la freccia di aggiornamento gira su sé stessa invece di lasciare il posto a una rotella.
-• Su iPad, quando l’elenco è accanto a un pacco e c’è spazio, la cronologia del tracciamento sta accanto alla sua scheda invece che sotto.
-• Su iPad, il Passaporto si apre su due pagine: i tuoi francobolli da una parte, i tempi di consegna e i paesi dall’altra.
+• Le opzioni di notifica ora si chiamano Ogni scansione, Passaggi importanti e Solo la consegna, come sul sito.
+• Quando un numero ha il formato di un corriere che non lo riconosce ancora, il pacco mostra «Probabilmente» con il nome di quel corriere in attesa della prima scansione. Se dopo una settimana il corriere continua a non riconoscerlo, Peek ti chiede di verificare il numero con il mittente o di scegliere un altro corriere.
+• Dopo quattro giorni senza nuove scansioni, la pagina di un pacco rimanda alla pagina di assistenza del suo corriere.
+• Quando nessun corriere riconosce un numero che sembra un numero d’ordine, il pacco ti dice che il numero di tracciamento è nell’e-mail di spedizione o nella pagina dell’ordine del negozio.
+• Quando i pacchi in arrivo sono più di quanti il widget ne possa mostrare, una piccola freccia sulla sua scheda passa ai successivi. Un pacco che non ha ancora luoghi sulla mappa mostra Pip al loro posto.
+• Senza account, Peek ora chiede gli aggiornamenti ai corrieri nella lingua dell’app: chi scrive in più lingue, come Poczta Polska, risponde nella tua.
+• Quando aggiungi un pacco, Peek legge il numero dopo più indicazioni, come «Waybill», «AWB» o «Guía», e rifiuta un numero fittizio che nessun corriere potrebbe mai trovare.
+• Correzioni: quando la sessione non può più essere rinnovata, Peek ti disconnette così puoi accedere di nuovo, e dimenticare un pacco che qualcuno ha condiviso con te ne ferma le notifiche anche se Peek non riesce a raggiungere il servizio in quel momento.
 ```

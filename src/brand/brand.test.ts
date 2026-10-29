@@ -257,6 +257,7 @@ describe('carrier brand', () => {
       'gio-express',
       'sway',
       '3pe-express',
+      'xinghe-freight',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

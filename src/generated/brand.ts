@@ -1371,6 +1371,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "x-trac": "x-trac",
   "xde-logistics": "xde-logistics",
   "xdp": "xdp",
+  "xinghe-freight": "xinghe-freight",
   "xlcourier": "xlcourier",
   "xpo-ltl": "xpo-ltl",
   "xpressbees": "xpressbees",
@@ -16021,6 +16022,14 @@ export const CARRIER_TRUCK: TruckGeometry = {
         "type": "polygon",
         "d": "M12.49 12.06L12.44 12.2L12.41 12.39L12.43 12.61L12.51 12.83L12.66 13.02L12.85 13.16L13.06 13.23L13.23 13.25L15.06 13.25L15.06 11.95L13.96 11.95L14.38 11.03L12.95 11.03Z",
         "fill": "#e77b17"
+      }
+    ],
+    "xinghe-freight": [
+      {
+        "type": "line",
+        "d": "M3.45 6.59L5.41 12.01M5.41 6.59L3.45 12.01M6.88 6.43L6.88 12.18M8.38 12.18L8.38 6.9L8.66 6.9L9.73 11.7L10.01 11.7L10.01 6.43M13 7.25L12.82 7.06L12.59 6.94L12.34 6.9L12.08 6.94L11.85 7.05L11.67 7.23L11.55 7.46L11.51 7.72L11.51 10.88L11.57 11.2L11.75 11.46L12.02 11.64L12.33 11.7L12.64 11.64L12.9 11.46L13.08 11.2L13.14 10.88L13.14 9.54L12.33 9.54M14.64 6.43L14.64 12.18M16.22 6.43L16.22 12.18M14.64 9.3L16.22 9.3M19 6.9L17.72 6.9L17.72 11.7L19 11.7M17.72 9.3L18.81 9.3",
+        "stroke": "accent",
+        "strokeWidth": 0.95
       }
     ]
   }

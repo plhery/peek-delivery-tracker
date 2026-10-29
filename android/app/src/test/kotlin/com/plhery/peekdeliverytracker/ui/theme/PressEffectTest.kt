@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.theme
 
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
@@ -27,10 +28,8 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
@@ -73,14 +72,14 @@ class PressEffectTest {
     }
 
     private fun channels(tag: String, read: (Bitmap) -> Int): IntArray {
-        // Robolectric may keep a drawing from before the last frame, now and then even after one more: draw the window
-        // again twice first.
+        // Drawn now in software: Robolectric's hardware capture may return the drawing of a frame before.
         val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
-        repeat(2) {
-            compose.runOnUiThread { view.rootView.invalidate() }
-            compose.waitForIdle()
-        }
-        val pixel = read(compose.onNodeWithTag(tag).captureToImage().asAndroidBitmap())
+        compose.waitForIdle()
+        val bounds = compose.onNodeWithTag(tag).fetchSemanticsNode().boundsInRoot
+        val whole = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        compose.runOnUiThread { view.draw(Canvas(whole)) }
+        val node = Bitmap.createBitmap(whole, bounds.left.toInt(), bounds.top.toInt(), bounds.width.toInt(), bounds.height.toInt())
+        val pixel = read(node)
         return intArrayOf(pixel shr 16 and 0xFF, pixel shr 8 and 0xFF, pixel and 0xFF)
     }
 

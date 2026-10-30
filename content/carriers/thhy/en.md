@@ -44,7 +44,7 @@ The tracker's own lines are few, and two of them are in Chinese only. In the ord
 | `邮件已完成分拣` | Sorting completed |
 | `送交出口` | Presented to export customs |
 | `飞机起飞` | Flight departed |
-| `到达寄达地` | Arrived at the place of destination |
+| `到达寄达地` | Arrived in the destination country |
 | `送交境外进口海关` | Presented to import customs abroad |
 
 The English ones include `Transporting to the next facility`, `Packages ready for delivery on the next working day` and `Packages in transit for delivery`. You can spot the Chinese ones by their times: they all fall on the same second of the minute, a multiple of six minutes apart. So don't take `送交境外进口海关` as proof your parcel has reached your country's customs, or `Packages in transit for delivery` as proof it's on its way to you. Tracking services that copy Tianhui Hengyuan's record can show the same lines.

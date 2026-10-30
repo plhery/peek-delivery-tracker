@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.view.KeyEvent
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -34,6 +35,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.dropShadow
@@ -98,6 +101,8 @@ import com.plhery.peekdeliverytracker.ui.zoom.pageBarItem
 import java.util.UUID
 import kotlin.math.max
 import kotlin.math.roundToInt
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.withTimeoutOrNull
 
 /**
  * Where the page starts, when something other than its own bar stands over its top: the demo's bar, which [DemoPage]
@@ -162,6 +167,25 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
 /** The window's safe sides the page keeps clear of, and its top under the bar. */
 private class PageMargins(val start: Dp, val top: Dp, val end: Dp, val bottom: Dp)
 
+/**
+ * The page's place, kept with the window. A window made again (a rotation, a change of theme) lays the page out once
+ * before the window's insets reach it, as Compose reads them a frame late: the page stands taller and its foot is
+ * shorter, which takes a place near the foot back by as much. The place comes back once the page has its room, as the
+ * iPhone's page keeps it, unless the reader has scrolled meanwhile.
+ */
+@Composable
+private fun rememberPageScroll(): ScrollState {
+    val scroll = rememberScrollState()
+    val restored = remember(scroll) { Snapshot.withoutReadObservation { scroll.value } }
+    LaunchedEffect(scroll) {
+        if (restored == 0) return@LaunchedEffect
+        withTimeoutOrNull(ROOM_MILLIS) { snapshotFlow { scroll.maxValue }.first { it in restored..<Int.MAX_VALUE } }
+        val untouched = !scroll.lastScrolledForward && !scroll.lastScrolledBackward
+        if (untouched && scroll.value < restored) scroll.scrollTo(minOf(restored, scroll.maxValue))
+    }
+    return scroll
+}
+
 /** The page's ScrollView: the paper, in one column or two, and the question under it. */
 @Composable
 private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, margins: PageMargins) {
@@ -174,7 +198,7 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, mar
         Column(
             Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberPageScroll())
                 .padding(start = margins.start, top = margins.top + PAGE_TOP, end = margins.end, bottom = margins.bottom + PAGE_BOTTOM)
                 .fillMaxWidth()
                 .wrapContentWidth()
@@ -582,6 +606,9 @@ private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
         }
     }
 }
+
+/** How long a page made again waits for its room before it takes its place back. */
+private const val ROOM_MILLIS = 500L
 
 private val PAGE_SIDE = 16.dp
 private val PAGE_TOP = 10.dp

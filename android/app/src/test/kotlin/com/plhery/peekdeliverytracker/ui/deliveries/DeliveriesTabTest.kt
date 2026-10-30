@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsFocused
@@ -33,6 +34,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToKey
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.pressKey
@@ -380,6 +382,40 @@ class DeliveriesTabTest {
         compose.mainClock.autoAdvance = true
         compose.waitForIdle()
         assertEquals(scrolled, pageScroll(), 0.5f)
+    }
+
+    /**
+     * A window made again lays the page out once before the window's insets reach it, taller than it will stand, which
+     * takes a place at its foot back by as much; the page takes its place again once it has its room.
+     */
+    @Test
+    @Config(qualifiers = "w640dp-h640dp-xhdpi")
+    fun thePageTakesItsPlaceBackOnceItHasItsRoom() {
+        val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+        val recreation = Recreation(compose)
+        var size by mutableStateOf(DpSize(360.dp, 568.dp))
+        recreation.setContent {
+            Box(Modifier.requiredSize(size)) {
+                CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                    RootHost(state = AuthenticationState.Demo, reduceMotion = false, source = source)
+                }
+            }
+        }
+        compose.waitForIdle()
+        open("New trainers")
+        compose.onNodeWithTag(PAGE_CONTENT).performSemanticsAction(SemanticsActions.ScrollBy) { it(0f, 100_000f) }
+        compose.waitForIdle()
+        val bottom = pageScroll()
+        assertTrue(bottom > 0f)
+        assertEquals(compose.onNodeWithTag(PAGE_CONTENT).fetchSemanticsNode().config[SemanticsProperties.VerticalScrollAxisRange].maxValue(), bottom, 0.5f)
+
+        recreation.recreate { size = DpSize(360.dp, 592.dp) }
+        // Its first frame, without the window's insets, has less room to scroll.
+        assertTrue(pageScroll() < bottom)
+        size = DpSize(360.dp, 568.dp)
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertEquals(bottom, pageScroll(), 0.5f)
     }
 
     /** How far the page has scrolled, in pixels. */

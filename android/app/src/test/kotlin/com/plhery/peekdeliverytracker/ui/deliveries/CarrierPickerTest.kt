@@ -43,6 +43,7 @@ import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.hasProgressBarRangeInfo
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onFirst
@@ -57,6 +58,7 @@ import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Density
 import androidx.core.graphics.Insets
@@ -609,6 +611,16 @@ class CarrierPickerTest {
         compose.waitForIdle()
         assertEquals("M", rail.state())
         assertAtTop("letter:M")
+    }
+
+    @Test
+    fun atAnAccessibilityTextSizeTheBarsTitleStaysAtTheDefaultSize() {
+        show(fontScale = 2f)
+        val layouts = mutableListOf<TextLayoutResult>()
+        compose.onNode(isHeading() and hasText("Carrier")).fetchSemanticsNode().config[SemanticsActions.GetTextLayoutResult].action!!.invoke(layouts)
+        val layout = layouts.single()
+        // Headline's 17 points, whatever the reader's size, as UIKit's inline title.
+        assertEquals(17f, with(layout.layoutInput.density) { layout.layoutInput.style.fontSize.toDp().value }, 0.01f)
     }
 
     @Test

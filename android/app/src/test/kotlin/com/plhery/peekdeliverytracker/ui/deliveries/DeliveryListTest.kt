@@ -33,6 +33,7 @@ import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -41,6 +42,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -327,6 +329,17 @@ class DeliveryListTest {
             frame()
         }
         assertPageShows("New trainers")
+    }
+
+    @Test
+    fun atTheLargestTextTheBarsTitleStaysAtTheDefaultSize() {
+        show(width = 600.dp, fontScale = 2f)
+        val layouts = mutableListOf<TextLayoutResult>()
+        compose.onNode(isHeading() and hasText("Deliveries")).fetchSemanticsNode().config[SemanticsActions.GetTextLayoutResult].action!!.invoke(layouts)
+        val layout = layouts.single()
+        assertFalse(layout.isLineEllipsized(0))
+        // Headline's 17 points, whatever the reader's size, as UIKit's inline title.
+        assertEquals(17f, with(layout.layoutInput.density) { layout.layoutInput.style.fontSize.toDp().value }, 0.01f)
     }
 
     @Test

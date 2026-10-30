@@ -136,6 +136,7 @@ import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import com.plhery.peekdeliverytracker.ui.zoom.fadingUnderZoom
@@ -186,16 +187,19 @@ internal fun ListToolbar(
             30.dp,
             Modifier.align(Alignment.CenterStart).offset(x = start + if (sideBySide) 17.dp else 27.dp).givingWayToPageBar(state.zoom).clearAndSetSemantics {},
         )
-        // Centred on the bar, clear of its items on either side.
+        // Centred on the bar, clear of its items on either side, at the default text size whatever the reader's, as
+        // UIKit's inline title stands.
         val clear = if (sideBySide) 56.dp else 128.dp
-        Text(
-            title,
-            Modifier.align(Alignment.Center).padding(start = start + clear, end = end + clear).fadingUnderZoom(state.zoom).semantics { heading() },
-            color = PeekTheme.colors.label,
-            style = PeekTheme.type.headline,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
+        ProvideDynamicTypeSize(DynamicTypeSize.Large) {
+            Text(
+                title,
+                Modifier.align(Alignment.Center).padding(start = start + clear, end = end + clear).fadingUnderZoom(state.zoom).semantics { heading() },
+                color = PeekTheme.colors.label,
+                style = PeekTheme.type.headline,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
         if (!sideBySide) {
             GlassSurface(
                 CapsuleShape,

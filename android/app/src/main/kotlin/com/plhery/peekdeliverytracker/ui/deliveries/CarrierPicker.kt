@@ -130,12 +130,14 @@ import com.plhery.peekdeliverytracker.ui.sheet.drawFormRows
 import com.plhery.peekdeliverytracker.ui.sheet.drawFormSeparator
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
+import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
@@ -422,14 +424,17 @@ private val OPENING_SAVER = listSaver<List<CarrierPickerSection>, List<String>>(
 private fun PickerBar(title: String, leading: (@Composable () -> Unit)?) {
     val insets = LocalSheetInsets.current
     Box(Modifier.fillMaxWidth().height(BAR_ROW)) {
-        Text(
-            title,
-            Modifier.align(Alignment.Center).padding(horizontal = insets.barSide + BAR_ROW + TITLE_GAP).semantics { heading() },
-            color = PeekTheme.colors.label,
-            style = PeekTheme.type.headline,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
+        // At the default text size whatever the reader's, as UIKit's inline title stands.
+        ProvideDynamicTypeSize(DynamicTypeSize.Large) {
+            Text(
+                title,
+                Modifier.align(Alignment.Center).padding(horizontal = insets.barSide + BAR_ROW + TITLE_GAP).semantics { heading() },
+                color = PeekTheme.colors.label,
+                style = PeekTheme.type.headline,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
         if (leading != null) {
             Box(Modifier.align(Alignment.CenterStart).padding(start = insets.barSide)) { leading() }
         }

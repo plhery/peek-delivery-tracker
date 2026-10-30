@@ -69,7 +69,7 @@
     "react-dom": "^19.3.0",
     "serwist": "^9.5.13",
     "sharp": "0.35.5",
-    "universal-parcel-scraper": "0.828.0-main.4436",
+    "universal-parcel-scraper": "0.829.0-main.4445",
     "web-push": "^3.6.7"
   },
   "devDependencies": {

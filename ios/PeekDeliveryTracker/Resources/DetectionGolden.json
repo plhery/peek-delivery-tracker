@@ -18270,6 +18270,37 @@
     ]
   },
   {
+    "input": "15504440048253",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-uk",
+      "dpd",
+      "dpd-fr",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "xpressbees"
+    ],
+    "preferred": [
+      "dpd-uk"
+    ],
+    "asked": [
+      "dpd-uk",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "15505721057571",
     "carrier": "unknown",
     "confidence": "low",
@@ -33688,6 +33719,32 @@
       "colis-prive",
       "j-and-t",
       "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "31200508205",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "blue-dart",
+      "japan-post",
+      "aramex",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "ppl"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics",
+      "ppl"
     ]
   },
   {
@@ -73176,6 +73233,12 @@
     ]
   },
   {
+    "input": "DECF127903088",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "DEFRG406638007",
     "carrier": "unknown",
     "confidence": "low",
@@ -81272,6 +81335,12 @@
     ]
   },
   {
+    "input": "KECID12594078",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "KEHKAZ00593853",
     "carrier": "unknown",
     "confidence": "none",
@@ -84292,6 +84361,24 @@
       "uzbekistan-post",
       "chronopost"
     ]
+  },
+  {
+    "input": "MMAP133363190",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "MMAP133678710",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "MMAP140592513",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "MMXQP003906641N",
@@ -94183,6 +94270,18 @@
     ]
   },
   {
+    "input": "TLZ0123456",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "australia-post",
+      "thelorry"
+    ],
+    "asked": [
+      "australia-post"
+    ]
+  },
+  {
     "input": "TP289004151IE",
     "carrier": "an-post",
     "confidence": "high",
@@ -96154,6 +96253,118 @@
     "candidates": []
   },
   {
+    "input": "WD0058245890",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz",
+      "wizmo"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
+    "input": "WD0061316126",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz",
+      "wizmo"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
+    "input": "WD0077236171",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz",
+      "wizmo"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
+    "input": "WD0078416710",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz",
+      "wizmo"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
+    "input": "WD0083440732",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz",
+      "wizmo"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
+    "input": "WD0087947216",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz",
+      "wizmo"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
+    "input": "WD0095945148",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz",
+      "wizmo"
+    ],
+    "asked": [
+      "colis-prive",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
     "input": "WFY9001843",
     "carrier": "unknown",
     "confidence": "low",
@@ -97056,6 +97267,14 @@
   },
   {
     "input": "YT2528970359000821",
+    "carrier": "yunexpress",
+    "confidence": "high",
+    "candidates": [
+      "yunexpress"
+    ]
+  },
+  {
+    "input": "YT2532300704454831",
     "carrier": "yunexpress",
     "confidence": "high",
     "candidates": [

@@ -35621,6 +35621,213 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.rincos.co.kr/tracking/tracking?lang=en"
+    },
+    "ams-egroup": {
+      "displayName": "AMS eGroup",
+      "aliases": [
+        "eRetail Logistics",
+        "AMS etrack",
+        "Australasian Mail Services"
+      ],
+      "countries": [
+        "AU",
+        "NZ"
+      ],
+      "color": "#234d9b",
+      "selectable": true,
+      "timezone": "Australia/Sydney",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.amsegroup.com.au/track-trace/"
+    },
+    "apg-ecommerce": {
+      "displayName": "APG eCommerce Solutions",
+      "aliases": [
+        "APG eCommerce",
+        "Australia Post Global eCommerce Solutions",
+        "Australia Post Global eCommerce Solutions (UK) Limited",
+        "Aramex Global Solutions",
+        "Aramex Global Solutions (UK) Limited",
+        "StarTrack International"
+      ],
+      "countries": [
+        "GB",
+        "AU"
+      ],
+      "color": "#d62d2d",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://apgecommerce.com/track-result/?track_sequenceNo={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "apgecommerce.com",
+            "www.apgecommerce.com"
+          ],
+          "pathPattern": "^/track-result/?$",
+          "params": [
+            "track_sequenceNo"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://apgecommerce.com/track/"
+    },
+    "kec-ecommerce": {
+      "displayName": "KEC eCommerce",
+      "aliases": [
+        "Kerry eCommerce",
+        "Kerry E-Commerce",
+        "Kerry Ecommerce Limited",
+        "KEC嘉顺达",
+        "嘉顺达",
+        "嘉順達"
+      ],
+      "countries": [
+        "HK",
+        "CN"
+      ],
+      "color": "#f26f20",
+      "selectable": true,
+      "timezone": "Asia/Hong_Kong",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://kec.kln.com/en/logistics-tracking/?tracking={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "kec.kln.com"
+          ],
+          "pathPattern": "^/(?:en|cn|hk)/(?:logistics-tracking|track-trace)/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://kec.kln.com/en/logistics-tracking/"
+    },
+    "thelorry": {
+      "displayName": "TheLorry",
+      "aliases": [
+        "The Lorry",
+        "TheLorry Malaysia",
+        "TheLorry Bulky Express",
+        "The Lorry Online Sdn Bhd",
+        "Beyond by TheLorry"
+      ],
+      "countries": [
+        "MY",
+        "SG",
+        "ID"
+      ],
+      "color": "#0a214f",
+      "selectable": true,
+      "timezone": "Asia/Kuala_Lumpur",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tracking.thelorry.com/parcel/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.thelorry.com"
+          ],
+          "path": "^/parcel/tracking/([A-Za-z0-9]+)/?$"
+        },
+        {
+          "domains": [
+            "bookings.thelorry.com"
+          ],
+          "path": "^/my/web/tracking/([A-Za-z0-9]+)/?$"
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^TLZ\\d{7}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://tracking.thelorry.com/parcel"
+    },
+    "toyou": {
+      "displayName": "toyou",
+      "aliases": [
+        "toYou by ASDA",
+        "Asda toyou",
+        "Asda ToYou"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "color": "#007481",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.toyou.co.uk/track/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.toyou.co.uk",
+            "toyou.co.uk"
+          ],
+          "path": "^/track/([A-Za-z0-9]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.toyou.co.uk/track"
+    },
+    "wizmo": {
+      "displayName": "Wizmo",
+      "aliases": [
+        "WIZMO Solutions",
+        "Wizmo Solutions Inc.",
+        "Wizmo Inc.",
+        "Ship Wizmo",
+        "shipwizmo"
+      ],
+      "countries": [
+        "CA",
+        "US"
+      ],
+      "color": "#34a5d5",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://shipwizmo.com/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "shipwizmo.com",
+            "www.shipwizmo.com"
+          ],
+          "path": "^/tracking/([A-Za-z0-9]+)/?$"
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^WD\\d{10}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://shipwizmo.com/"
     }
   },
   "servers": [
@@ -39311,7 +39518,13 @@
           "ross-express",
           "whiz-delivery",
           "ets-express",
-          "rincos"
+          "rincos",
+          "ams-egroup",
+          "apg-ecommerce",
+          "kec-ecommerce",
+          "thelorry",
+          "toyou",
+          "wizmo"
         ]
       },
       "Stage": {

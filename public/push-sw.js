@@ -27,9 +27,16 @@ self.addEventListener('push', (event) => {
     it: ['Novità sul pacco', 'Tocca per vedere cos’è cambiato'],
     es: ['Novedades del paquete', 'Toca para ver qué hay de nuevo'],
     pt: ['Atualização da encomenda', 'Toca para ver as novidades'],
+    'pt-br': ['Atualização da encomenda', 'Toque para ver as novidades'],
     pl: ['Nowe wieści o przesyłce', 'Stuknij, aby zobaczyć szczegóły'],
+    ru: ['Новости о посылке', 'Нажми, чтобы узнать, что нового'],
+    zh: ['包裹动态', '轻点查看最新动态'],
   };
-  const requestedLanguage = String(payload.lang || self.navigator?.language || 'en').split(/[-_]/)[0].toLowerCase();
+  // The language as tagLocale in src/lib/locale.ts reads it: Brazil's Portuguese apart, and no Traditional Chinese.
+  const [base, ...subtags] = String(payload.lang || self.navigator?.language || 'en').toLowerCase().replaceAll('_', '-').split('-');
+  const script = subtags.find((subtag) => /^[a-z]{4}$/.test(subtag));
+  const traditional = script ? script === 'hant' : subtags.some((subtag) => ['tw', 'hk', 'mo'].includes(subtag));
+  const requestedLanguage = base === 'pt' && subtags.includes('br') ? 'pt-br' : base === 'zh' && traditional ? 'en' : base;
   const lang = Object.hasOwn(fallbackCopy, requestedLanguage) ? requestedLanguage : 'en';
   const [fallbackTitle, fallbackBody] = fallbackCopy[lang];
   const title = text(payload.title, fallbackTitle, 120);

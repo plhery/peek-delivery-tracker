@@ -52,7 +52,7 @@ AUSSERDEM IM PAKET
 • Ein Barcode-Scanner
 • Sendungsnummern und Tracking-Links aus Mail, Nachrichten oder Safari direkt mit Peek teilen
 • Helle und dunkle Darstellung
-• Deutsch, Englisch, Französisch, Italienisch, Spanisch, Portugiesisch und Polnisch
+• Deutsch, Englisch, Französisch, Italienisch, Spanisch, Portugiesisch, brasilianisches Portugiesisch, Polnisch, Russisch und vereinfachtes Chinesisch
 
 PRIVAT UND OPEN SOURCE
 Peek zeigt keine Werbung und verkauft keine Daten. Die Karten zeichnet Peek selbst, also sieht kein Kartendienst, wohin deine Pakete reisen. Ohne Konto wird ein Paket 30 Tage nach der Ankunft vergessen. Lade deine Daten herunter oder lösche dein Konto in der App, wann immer du willst. Jede Zeile Code liegt auf GitHub: github.com/plhery/peek-delivery-tracker

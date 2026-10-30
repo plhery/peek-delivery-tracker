@@ -33,7 +33,7 @@ const URLS = {
 
 /** The App Store locales each listing file serves. */
 export const LOCALES = { 'en-GB': ['en-GB'], 'en-US': ['en-US'], de: ['de-DE'], fr: ['fr-FR'], it: ['it'], es: ['es-ES'],
-  pt: ['pt-PT'], pl: ['pl'] };
+  pt: ['pt-PT'], 'pt-br': ['pt-BR'], pl: ['pl'], ru: ['ru'], zh: ['zh-Hans'] };
 const HEADINGS = { name: 'Name', subtitle: 'Subtitle', promotionalText: 'Promotional text', description: 'Description',
   keywords: 'Keywords', whatsNew: "What's new" };
 const LIMITS = { name: [2, 30], subtitle: [0, 30], promotionalText: [0, 170], description: [0, 4000], whatsNew: [0, 4000] };

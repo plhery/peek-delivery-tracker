@@ -7,8 +7,8 @@ What App Store Connect asks for Peek's iPhone app. Building and uploading is in
 
 [`listing/`](listing) has the name, subtitle, promotional text, description and keywords for
 each language. `en-US.md` is English (U.S.), the primary language, with U.S. spelling and
-“package”; `en-GB.md` is English (U.K.) with “parcel”. `es.md` is Spanish (Spain) and `pt.md`
-Portuguese (Portugal).
+“package”; `en-GB.md` is English (U.K.) with “parcel”. `es.md` is Spanish (Spain), `pt.md`
+Portuguese (Portugal), `pt-br.md` Portuguese (Brazil) and `zh.md` Chinese (Simplified).
 
 Keywords are counted in bytes (an accented letter counts two) and can't name other
 companies. The App Store searches a language's name, subtitle and keywords together, so a

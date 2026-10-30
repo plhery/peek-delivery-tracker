@@ -54,7 +54,7 @@ ALSO IN THE BOX
 • A barcode scanner
 • Sharing a number or a tracking link from Mail, Messages, or Safari straight into Peek
 • Light and dark themes
-• English, German, French, Italian, Spanish, Portuguese, and Polish
+• English, German, French, Italian, Spanish, Portuguese, Brazilian Portuguese, Polish, Russian, and Simplified Chinese
 
 PRIVATE AND OPEN SOURCE
 Peek shows no ads and sells no data. It draws its own maps, so no map service sees where your packages travel. A package followed without an account is forgotten 30 days after it arrives. Download your data or delete your account from the app, whenever you like. Every line of code is on GitHub: github.com/plhery/peek-delivery-tracker

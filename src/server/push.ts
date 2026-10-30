@@ -8,7 +8,8 @@ import { SignJWT } from 'jose';
 import { DateTime, IANAZone } from 'luxon';
 import webpush from 'web-push';
 import { CARRIER_CAPABILITIES, type ApiParcelAlertPreset } from '../generated/apiContract';
-import { isLocale, type Locale } from '../lib/locale';
+import { dayAndTime } from '../lib/format';
+import { catalogLanguage, tagLocale, type Locale } from '../lib/locale';
 import { languageTags } from '../lib/messages';
 import { ALERT_PRESET_STAGES } from '../lib/notificationPresets';
 import { capitalized } from '../peek/parcel/summary';
@@ -247,6 +248,99 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_changed_day: 'nowy termin: {{date}}',
     eta_changed_date: 'nowy termin: {{date}}',
   },
+  'pt-br': {
+    test_title: 'O Peek vai dar notícias',
+    test_body: 'Este dispositivo recebe notificações das etapas que você escolheu. Altere quando quiser em Configurações › Notificações.',
+    friend_title: '{{name}} entrou no seu círculo',
+    friend_body: 'Agora seus passaportes estão lado a lado. Dê uma espiada.',
+    update: 'Atualização da encomenda',
+    title_registered: 'Etiqueta criada',
+    title_in_transit: 'A caminho',
+    title_ready_for_pickup: 'Pronta para retirada',
+    title_delivered: 'Chegou',
+    title_failed_attempt: 'Entrega não realizada',
+    title_returned: 'Em devolução',
+    body_update: 'toque para ver as novidades',
+    body_pending: 'aguardando a primeira movimentação da transportadora',
+    body_registered: 'a transportadora ainda não recebeu a encomenda',
+    body_accepted: 'começou a viagem',
+    body_in_transit: 'um passo mais perto',
+    body_customs: 'o Peek está de olho',
+    body_exception: 'a transportadora informou um problema. Toque para ver o que fazer.',
+    body_out_for_delivery: 'quase chegando',
+    body_ready_for_pickup: 'esperando no ponto de retirada',
+    body_delivered: 'entregue',
+    body_failed_attempt: 'a transportadora não conseguiu entregar. Toque para ver o que acontece agora.',
+    body_returned: 'voltando para o remetente',
+    delivered_time: 'entregue às {{time}}',
+    delivered_date: 'entregue em {{date}} às {{time}}',
+    eta_day: 'chega {{date}}',
+    eta_date: 'chega em {{date}}',
+    eta_changed_day: 'agora chega {{date}}',
+    eta_changed_date: 'agora chega em {{date}}',
+  },
+  ru: {
+    test_title: 'Peek будет держать тебя в курсе',
+    test_body: 'Это устройство будет получать уведомления о выбранных тобой этапах. Изменить их можно в любой момент: Настройки › Уведомления.',
+    friend_title: '{{name}} теперь в твоём круге',
+    friend_body: 'Ваши паспорта теперь рядом. Загляни.',
+    update: 'Новости о посылке',
+    title_registered: 'Этикетка создана',
+    title_in_transit: 'Уже в пути',
+    title_ready_for_pickup: 'Готова к выдаче',
+    title_delivered: 'Посылка прибыла',
+    title_failed_attempt: 'Не удалось вручить',
+    title_returned: 'Едет обратно',
+    body_update: 'нажми, чтобы узнать, что нового',
+    body_pending: 'ждём первой отметки службы доставки',
+    body_registered: 'служба доставки ещё не получила посылку',
+    body_accepted: 'в путь!',
+    body_in_transit: 'ещё на шаг ближе',
+    body_customs: 'Peek следит за ситуацией',
+    body_exception: 'служба доставки сообщила о проблеме. Нажми, чтобы узнать, что делать.',
+    body_out_for_delivery: 'почти на месте',
+    body_ready_for_pickup: 'ждёт в пункте выдачи',
+    body_delivered: 'доставлено',
+    body_failed_attempt: 'служба доставки не смогла вручить посылку. Нажми, чтобы узнать, что дальше.',
+    body_returned: 'возвращается отправителю',
+    delivered_time: 'доставлено в {{time}}',
+    delivered_date: 'доставлено {{date}} в {{time}}',
+    eta_day: 'прибудет {{date}}',
+    eta_date: 'прибудет {{date}}',
+    eta_changed_day: 'теперь прибудет {{date}}',
+    eta_changed_date: 'теперь прибудет {{date}}',
+  },
+  zh: {
+    test_title: 'Peek 会随时通知你',
+    test_body: '这台设备会收到你所选环节的通知。随时可以在“设置 › 通知”中更改。',
+    friend_title: '{{name}} 已加入',
+    friend_body: '你们的护照现在并排放在一起了。快去看看吧。',
+    update: '包裹动态',
+    title_registered: '已生成面单',
+    title_in_transit: '在路上了',
+    title_ready_for_pickup: '可以取件了',
+    title_delivered: '包裹到了',
+    title_failed_attempt: '派送未成功',
+    title_returned: '正在退回',
+    body_update: '轻点查看最新动态',
+    body_pending: '等待快递公司的首次扫描',
+    body_registered: '快递公司还没收到包裹',
+    body_accepted: '出发了',
+    body_in_transit: '又近了一步',
+    body_customs: 'Peek 正在帮你盯着',
+    body_exception: '快递公司报告了问题。轻点查看该怎么办。',
+    body_out_for_delivery: '马上就到',
+    body_ready_for_pickup: '正在取件点等你',
+    body_delivered: '已送达',
+    body_failed_attempt: '快递公司没能送达。轻点查看后续安排。',
+    body_returned: '正在退回寄件人',
+    delivered_time: '已于 {{time}} 送达',
+    delivered_date: '已于 {{date}} {{time}} 送达',
+    eta_day: '预计送达：{{date}}',
+    eta_date: '预计送达：{{date}}',
+    eta_changed_day: '预计送达改为：{{date}}',
+    eta_changed_date: '预计送达改为：{{date}}',
+  },
 };
 
 /**
@@ -288,17 +382,14 @@ function carrierDisplayName(value: unknown, locale: Locale): string {
   if (Object.hasOwn(CARRIER_CAPABILITIES, carrier)) {
     const capability: { displayName: string; displayNames?: Partial<Record<Locale, string>> } =
       CARRIER_CAPABILITIES[carrier as keyof typeof CARRIER_CAPABILITIES];
-    return capability.displayNames?.[locale] ?? capability.displayName;
+    return capability.displayNames?.[catalogLanguage(locale)] ?? capability.displayName;
   }
   return carrier || appWord(locale, 'add.carrier')!;
 }
 
 /** The language a notification is written in: its device's, or English. */
 function notificationLocale(value: unknown): Locale {
-  const locale = typeof value === 'string'
-    ? value.trim().split(/[-_]/, 1)[0]!.toLowerCase()
-    : 'en';
-  return isLocale(locale) ? locale : 'en';
+  return (typeof value === 'string' && tagLocale(value)) || 'en';
 }
 
 /** What tells someone a friend took their invitation, in the language of the device it goes to. */
@@ -343,7 +434,7 @@ function expectedDelivery(
     const relative = expected.toISODate() === today.toISODate() ? 'time.today'
       : expected.toISODate() === today.plus({ days: 1 }).toISODate() ? 'time.tomorrow' : null;
     const day = relative ? appWord(locale, relative)! : notificationDay(expected, locale);
-    return { text: time ? `${day}, ${time}` : day, dated: !relative };
+    return { text: time ? dayAndTime(day, time, languageTags[locale]) : day, dated: !relative };
   };
 
   const window = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})(?:[–-](\d{2}:\d{2}))?$/.exec(

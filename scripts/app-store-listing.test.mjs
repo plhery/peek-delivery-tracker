@@ -10,10 +10,10 @@ import {
 const listings = loadListings();
 const notes = reviewNotes(readFileSync(new URL('../docs/app-store/README.md', import.meta.url), 'utf8'));
 const english = parseListing(readFileSync(new URL('../docs/app-store/listing/en-GB.md', import.meta.url), 'utf8'), 'en-GB.md');
-const LOCALES = ['de-DE', 'en-GB', 'en-US', 'es-ES', 'fr-FR', 'it', 'pl', 'pt-PT'];
+const LOCALES = ['de-DE', 'en-GB', 'en-US', 'es-ES', 'fr-FR', 'it', 'pl', 'pt-BR', 'pt-PT', 'ru', 'zh-Hans'];
 
 describe('the listing files', () => {
-  it('give each of the seven languages every field', () => {
+  it('give each language every field', () => {
     for (const listing of listings) {
       for (const field of ['name', 'subtitle', 'promotionalText', 'description', 'keywords', 'whatsNew']) {
         assert.ok(listing[field].trim(), `${listing.locale} ${field}`);
@@ -128,12 +128,12 @@ describe('a dry run', () => {
       attributes: { name: english.name, subtitle: english.subtitle, privacyPolicyUrl: 'https://peektracker.com/privacy.html' } });
     assert.equal(body(usInfo).attributes.locale, 'en-US');
     assert.deepEqual(body(usInfo).relationships, { appInfo: { data: { type: 'appInfos', id: 'info-1' } } });
-    assert.deepEqual(body(writes[8]).relationships, { primaryCategory: { data: { type: 'appCategories', id: 'UTILITIES' } },
+    assert.deepEqual(body(writes[LOCALES.length]).relationships, { primaryCategory: { data: { type: 'appCategories', id: 'UTILITIES' } },
       secondaryCategory: { data: { type: 'appCategories', id: 'SHOPPING' } } });
     // Only the questions the declaration has, and not those it already answers None or No.
-    assert.deepEqual(body(writes[9]).attributes, { violenceRealistic: 'NONE', gambling: false, messagingAndChat: false });
+    assert.deepEqual(body(writes[LOCALES.length + 1]).attributes, { violenceRealistic: 'NONE', gambling: false, messagingAndChat: false });
 
-    const versionLocalizations = writes.slice(10, 18).map(body);
+    const versionLocalizations = writes.slice(LOCALES.length + 2, 2 * LOCALES.length + 2).map(body);
     assert.deepEqual(versionLocalizations.map(data => data.attributes.locale), LOCALES);
     for (const data of versionLocalizations) {
       assert.deepEqual(Object.keys(data.attributes).sort(),

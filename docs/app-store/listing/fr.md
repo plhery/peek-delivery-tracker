@@ -54,7 +54,7 @@ AUSSI DANS LE COLIS
 • Un lecteur de codes-barres
 • Le partage d’un numéro ou d’un lien de suivi depuis Mail, Messages ou Safari, directement dans Peek
 • Thèmes clair et sombre
-• Français, anglais, allemand, italien, espagnol, portugais et polonais
+• Français, anglais, allemand, italien, espagnol, portugais, portugais du Brésil, polonais, russe et chinois simplifié
 
 VIE PRIVÉE ET OPEN SOURCE
 Peek n’affiche aucune pub et ne vend aucune donnée. Il dessine ses propres cartes : aucun service de cartographie ne voit le trajet de tes colis. Sans compte, un colis est oublié 30 jours après son arrivée. Télécharge tes données ou supprime ton compte depuis l’app, quand tu veux. Chaque ligne de code est sur GitHub : github.com/plhery/peek-delivery-tracker

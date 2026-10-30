@@ -52,7 +52,7 @@ TAMBÉM VEM NA CAIXA
 • Um leitor de códigos de barras
 • Partilha de um número ou de uma ligação de seguimento a partir do Mail, das Mensagens ou do Safari, diretamente para o Peek
 • Temas claro e escuro
-• Português, inglês, alemão, francês, italiano, espanhol e polaco
+• Português, inglês, alemão, francês, italiano, espanhol, português do Brasil, polaco, russo e chinês simplificado
 
 PRIVADO E DE CÓDIGO ABERTO
 O Peek não mostra anúncios nem vende dados. Desenha os próprios mapas: nenhum serviço de mapas vê a viagem das tuas encomendas. Sem conta, uma encomenda é esquecida 30 dias depois de chegar. Transfere os teus dados ou elimina a conta a partir da app, quando quiseres. Todo o código está no GitHub: github.com/plhery/peek-delivery-tracker

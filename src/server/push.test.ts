@@ -10,6 +10,7 @@ import {
   PushDispatchError,
   WebPushNotificationService,
 } from './push';
+import { SUPPORTED_LOCALES } from '../lib/locale';
 import type { JsonObject } from './types';
 
 const now = Date.parse('2026-09-07T12:40:00Z');
@@ -151,7 +152,10 @@ describe('friendly parcel notifications', () => {
     ['it', 'arriva domani', 'arrivo previsto: 11 settembre', 'nuova data prevista: 11 settembre'],
     ['es', 'llega mañana', 'llega el 11 de septiembre', 'ahora llega el 11 de septiembre'],
     ['pt', 'chega amanhã', 'chega a 11 de setembro', 'afinal chega a 11 de setembro'],
+    ['pt-br', 'chega amanhã', 'chega em 11 de setembro', 'agora chega em 11 de setembro'],
     ['pl', 'dotrze jutro', 'dotrze 11 września', 'nowy termin: 11 września'],
+    ['ru', 'прибудет завтра', 'прибудет 11 сентября', 'теперь прибудет 11 сентября'],
+    ['zh', '预计送达：明天', '预计送达：9月11日', '预计送达改为：9月11日'],
   ])('fits a day of the year into a %s sentence', (locale, tomorrow, dated, changed) => {
     const row = { ...delivered, locale, stage: 'in_transit', expected_delivery_changed: false };
     expect(web.payload({ ...row, expected_delivery: '2026-09-08' }).body).toBe(`Coffee beans · ${tomorrow}`);
@@ -172,7 +176,7 @@ describe('friendly parcel notifications', () => {
 });
 
 describe('useful, localized tracking updates', () => {
-  it.each(['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'])('uses the same %s copy on web, iOS and Live Activities', (locale) => {
+  it.each(SUPPORTED_LOCALES)('uses the same %s copy on web, iOS and Live Activities', (locale) => {
     for (const stage of ['pending', 'registered', 'accepted', 'in_transit', 'customs', 'exception', 'out_for_delivery', 'ready_for_pickup', 'delivered', 'failed_attempt', 'returned']) {
       for (const expected_delivery of ['2026-09-07', '2026-09-11', null]) {
         const row = { ...delivered, locale, stage, expected_delivery };
@@ -198,6 +202,8 @@ describe('useful, localized tracking updates', () => {
       expect(web.payload({ ...row, expected_delivery }).body).toBe('Coffee beans · presque arrivé');
     }
     expect(web.payload({ ...row, expected_delivery: '2026-09-07' }).body).toBe('Coffee beans · arrive aujourd’hui');
+    // Chinese runs the day on into its window after a space.
+    expect(web.payload({ ...row, locale: 'zh', expected_delivery: '2026-09-07 14:00–16:00' }).body).toMatch(/今天 14:00–16:00$/);
   });
 
   it('writes a Live Activity in the app\'s own words', () => {
@@ -208,7 +214,7 @@ describe('useful, localized tracking updates', () => {
     expect(parcel({ label: '', stage: 'failed_attempt' })).toMatchObject({ label: 'Colis', status: 'Tentative de livraison' });
   });
 
-  it.each(['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'])('confirms that notifications are on in %s', async (locale) => {
+  it.each(SUPPORTED_LOCALES)('confirms that notifications are on in %s', async (locale) => {
     const sent: JsonObject[] = [];
     const browser = new WebPushNotificationService({} as never, 'public-key', 'private-key', 'https://delivery.example', () => now);
     vi.spyOn(browser, 'send').mockImplementation(async (_row, payload) => { sent.push(payload!); });
@@ -216,7 +222,8 @@ describe('useful, localized tracking updates', () => {
     await browser.sendTest({ locale: 'en' });
     expect(sent[0]).toMatchObject({ lang: locale, badge: '/icons/badge-96.png', data: { url: '/' } });
     expect(String(sent[0]!.title)).toContain('Peek');
-    expect(String(sent[0]!.body).length).toBeGreaterThan(40);
+    // Chinese says as much in fewer characters.
+    expect(String(sent[0]!.body).length).toBeGreaterThan(locale === 'zh' ? 20 : 40);
     if (locale !== 'en') expect(sent[0]!.body).not.toBe(sent[1]!.body);
     expect(sent[1]).toMatchObject({ title: 'You’ll hear from Peek' });
   });
@@ -225,7 +232,7 @@ describe('useful, localized tracking updates', () => {
 describe('service worker fallback copy', () => {
   const worker = readFileSync(resolve(process.cwd(), 'public/push-sw.js'), 'utf8');
 
-  it.each(['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'])('matches the server %s update copy', (locale) => {
+  it.each(SUPPORTED_LOCALES)('matches the server %s update copy', (locale) => {
     const listeners: Record<string, (event: unknown) => void> = {};
     const shown: [string, { body: string; lang: string }][] = [];
     runInNewContext(worker, {

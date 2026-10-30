@@ -52,7 +52,7 @@ NELLA SCATOLA TROVI ANCHE
 • Uno scanner di codici a barre
 • Numeri e link di tracciamento condivisi da Mail, Messaggi o Safari direttamente in Peek
 • Tema chiaro e tema scuro
-• Italiano, inglese, tedesco, francese, spagnolo, portoghese e polacco
+• Italiano, inglese, tedesco, francese, spagnolo, portoghese, portoghese brasiliano, polacco, russo e cinese semplificato
 
 PRIVATO E OPEN SOURCE
 Peek non mostra pubblicità e non vende dati. Disegna da sé le sue mappe: nessun servizio di mappe vede il viaggio dei tuoi pacchi. Senza account, un pacco viene dimenticato 30 giorni dopo l’arrivo. Scarica i tuoi dati o elimina l’account dall’app, quando vuoi. Ogni riga di codice è su GitHub: github.com/plhery/peek-delivery-tracker

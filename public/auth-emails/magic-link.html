@@ -40,6 +40,24 @@
   {{- $tagline = "Uniwersalne śledzenie przesyłek" -}}
   {{- $intro = "Wpisz ten kod w Peek:" -}}
   {{- $ignore = "Jeśli to nie Ty, po prostu zignoruj tę wiadomość." -}}
+{{- else if eq .Data.locale "pt-br" -}}
+  {{- $lang = "pt-BR" -}}
+  {{- $title = "Seu código de acesso" -}}
+  {{- $tagline = "Rastreamento universal de encomendas" -}}
+  {{- $intro = "Digite este código no Peek:" -}}
+  {{- $ignore = "Não pediu este código? Pode ignorar este e-mail." -}}
+{{- else if eq .Data.locale "ru" -}}
+  {{- $lang = "ru" -}}
+  {{- $title = "Твой код для входа" -}}
+  {{- $tagline = "Универсальный трекер посылок" -}}
+  {{- $intro = "Введи этот код в Peek:" -}}
+  {{- $ignore = "Если ты не ждёшь этот код, просто проигнорируй письмо." -}}
+{{- else if eq .Data.locale "zh" -}}
+  {{- $lang = "zh-Hans" -}}
+  {{- $title = "你的登录验证码" -}}
+  {{- $tagline = "一站式包裹跟踪" -}}
+  {{- $intro = "在 Peek 中输入这个验证码：" -}}
+  {{- $ignore = "没有申请过这个验证码？忽略这封邮件即可。" -}}
 {{- end -}}
 <!doctype html>
 <html lang="{{ $lang }}">

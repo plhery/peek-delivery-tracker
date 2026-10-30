@@ -52,7 +52,7 @@ W PACZCE ZNAJDZIESZ TEŻ
 • Skaner kodów kreskowych
 • Udostępnianie numeru lub linku śledzenia z aplikacji Mail, Wiadomości albo Safari prosto do Peeka
 • Jasny i ciemny motyw
-• Polski, angielski, niemiecki, francuski, włoski, hiszpański i portugalski
+• Polski, angielski, niemiecki, francuski, włoski, hiszpański, portugalski, brazylijski portugalski, rosyjski i chiński uproszczony
 
 PRYWATNIE I Z OTWARTYM KODEM
 Peek nie wyświetla reklam i nie sprzedaje danych. Sam rysuje swoje mapy: żaden serwis z mapami nie widzi, którędy jadą Twoje paczki. O paczce śledzonej bez konta zapomina 30 dni po jej doręczeniu. Pobierz swoje dane albo usuń konto w aplikacji, kiedy chcesz. Każda linijka kodu jest na GitHubie: github.com/plhery/peek-delivery-tracker

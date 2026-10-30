@@ -119,6 +119,12 @@ interface DeliveriesSource {
     /** `store.notificationPreferences`: the account's, once loaded; null before then and without an account. */
     val notificationPreferences: StateFlow<NotificationPreferences?>
 
+    /**
+     * `store.setEmailOnDelivery(_:)`: switches the account's delivery email on or off, then says whether the store has it
+     * on once saved (`store.deliveryEmail?.isOn`), which [deliveryEmail] may say only a moment later.
+     */
+    suspend fun setEmailOnDelivery(enabled: Boolean): Boolean
+
     /** `store.viewerLink(for:)`: the link someone else's parcel is followed through, which its menu reads. */
     fun viewerLink(parcel: Parcel): String?
 
@@ -214,6 +220,11 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override val notificationPreferences get() = container.parcels.notificationPreferencesFlow
 
+    override suspend fun setEmailOnDelivery(enabled: Boolean): Boolean {
+        container.parcels.setEmailOnDelivery(enabled)
+        return container.parcels.deliveryEmail?.isOn == true
+    }
+
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
 
     override fun errorMessage(error: Throwable): String = container.localizer.errorMessage(error)
@@ -242,7 +253,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 /**
  * What each parcel page waits for (ParcelDetailView's `working`) and what came of it, by the page's id: a page's change
  * holds only that page's bell, refresh, switch and delete, and only the page that asked hears why it failed (its
- * `errorMessage`), or leaves once it was saved.
+ * `errorMessage`), or leaves once it was saved. Each page's answer to the delivery email's offer stands here too (its
+ * `emailOffer`), saved apart from its changes.
  *
  * The source holds it for the launch, as long as the changes run, in the app's scope: a page drawn again as the window
  * is made again (a rotation, a fold) still waits for its change and hears how it went, as the iPhone's `@State` lasts
@@ -256,6 +268,8 @@ class PageWork {
     private val runs = mutableStateMapOf<UUID, Any>()
     private val failures = mutableStateMapOf<UUID, String>()
     private val leaves = mutableStateMapOf<UUID, List<UUID>>()
+    private val offers = mutableStateMapOf<UUID, EmailOfferPhase>()
+    private val offerNews = mutableStateMapOf<UUID, EmailOfferPhase>()
 
     /** Whether the page with `pageId` waits for a change it asked for. */
     fun working(pageId: UUID): Boolean = pageId in runs
@@ -306,11 +320,51 @@ class PageWork {
         }
     }
 
+    /** Where the answer to the delivery email's offer on the page with `pageId` stands (its `emailOffer`). */
+    fun emailOffer(pageId: UUID): EmailOfferPhase = offers[pageId] ?: EmailOfferPhase.Open
+
+    /**
+     * The answer just saved on the page with `pageId`, accepted or failed, until the page has said so ([heard]): the
+     * page shown by then, made again or not, gives the tap and tells TalkBack.
+     */
+    fun emailOfferNews(pageId: UUID): EmailOfferPhase? = offerNews[pageId]
+
+    fun heard(pageId: UUID) {
+        offerNews -= pageId
+    }
+
+    /**
+     * `answerEmailOffer(_:)` on the page with `pageId`: saves the answer in `scope` (`save`, which says whether the email
+     * is on once saved), one at a time, saying it saves meanwhile. Once saved the offer says the email is on where it was
+     * turned on and is, and goes back to open otherwise, which leaves the offer once the account has chosen; once failed
+     * it says so, for another try. Nothing once the page forgot it.
+     */
+    fun answerEmailOffer(pageId: UUID, accepted: Boolean, scope: CoroutineScope, save: suspend () -> Boolean) {
+        if (offers[pageId] is EmailOfferPhase.Saving) return
+        val saving = EmailOfferPhase.Saving(accepted)
+        offers[pageId] = saving
+        scope.launch {
+            val phase = try {
+                if (save() && accepted) EmailOfferPhase.Accepted else EmailOfferPhase.Open
+            } catch (error: CancellationException) {
+                if (offers[pageId] === saving) offers[pageId] = EmailOfferPhase.Open
+                throw error
+            } catch (_: Exception) {
+                EmailOfferPhase.Failed
+            }
+            if (offers[pageId] !== saving) return@launch
+            offers[pageId] = phase
+            if (phase != EmailOfferPhase.Open) offerNews[pageId] = phase
+        }
+    }
+
     /** The page with `pageId` has gone: it waits for nothing more, and hears nothing of what it asked for. */
     fun forget(pageId: UUID) {
         runs -= pageId
         failures -= pageId
         leaves -= pageId
+        offers -= pageId
+        offerNews -= pageId
     }
 
     /** The change `run` of the page with `pageId` is over: whether the page still waited for it. */

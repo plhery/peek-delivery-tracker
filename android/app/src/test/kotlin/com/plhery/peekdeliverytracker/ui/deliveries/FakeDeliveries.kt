@@ -32,10 +32,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
  * A new process is a new `launch`, and the app's scope outlives every window, on the test's clock once `RootHost` shows
  * them ([dispatcher]). Archiving, restoring, deleting, renaming, muting and changing the carrier change the parcels as
  * the store does, or fail with `failure`, an archive once `archiving` lets it go when a test holds it, a mute once
- * `muting` does, a carrier change once `changing` does and a parcel's check once `checkingParcel` does; a check of
- * every parcel answers `checkResult`, or waits for `checking` when a test holds it. The server refuses the numbers of
- * `refusals`, once `refusing` lets its answer go. The demo is the demo's session. The rating prompt keeps its days in
- * a store of its own, in UTC, and the system's prompt is a fake that notes each step ([reviewCalls]).
+ * `muting` does, an answer to the email's offer once `choosing` does, a carrier change once `changing` does and a
+ * parcel's check once `checkingParcel` does; a check of every parcel answers `checkResult`, or waits for `checking`
+ * when a test holds it. The server refuses the numbers of `refusals`, once `refusing` lets its answer go. The demo is
+ * the demo's session. The rating prompt keeps its days in a store of its own, in UTC, and the system's prompt is a
+ * fake that notes each step ([reviewCalls]).
  */
 class FakeDeliveries(
     parcels: List<Parcel> = emptyList(),
@@ -88,6 +89,12 @@ class FakeDeliveries(
     /** Holds each mute, of the notifications or of the email, until the test lets it go. */
     var muting: CompletableDeferred<Unit>? = null
 
+    /** Holds each answer to the delivery email's offer until the test lets it go. */
+    var choosing: CompletableDeferred<Unit>? = null
+
+    /** Whether the server leaves the email off when the account turns it on, as it may. */
+    var emailRefused = false
+
     /** Holds each carrier change until the test lets it go. */
     var changing: CompletableDeferred<Unit>? = null
 
@@ -109,13 +116,15 @@ class FakeDeliveries(
 
     /**
      * The parcels archived, restored and deleted, in their order, each mute of the notifications or the email asked for
-     * with its new setting, each carrier change with its carrier, each name given, and the parcels checked one by one.
+     * with its new setting, each answer to the email's offer, each carrier change with its carrier, each name given, and
+     * the parcels checked one by one.
      */
     val archived = mutableListOf<UUID>()
     val restored = mutableListOf<UUID>()
     val deleted = mutableListOf<UUID>()
     val mutes = mutableListOf<Pair<UUID, Boolean>>()
     val emailMutes = mutableListOf<Pair<UUID, Boolean>>()
+    val emailChoices = mutableListOf<Boolean>()
     val carrierChanges = mutableListOf<Pair<UUID, CarrierId>>()
     val renames = mutableListOf<Pair<UUID, String>>()
     val checked = mutableListOf<UUID>()
@@ -221,6 +230,16 @@ class FakeDeliveries(
         val preferences = NotificationPreferences(enabledStages = stages, timezone = "Europe/Zurich", emailOnDelivery = choice, emailAvailable = true)
         notificationPreferences.value = preferences
         deliveryEmail.value = DeliveryEmail(isDemo = false, preferences = preferences, address = address)
+    }
+
+    override suspend fun setEmailOnDelivery(enabled: Boolean): Boolean {
+        choosing?.await()
+        failure?.let { throw it }
+        emailChoices += enabled
+        val preferences = notificationPreferences.value?.copy(emailOnDelivery = enabled && !emailRefused) ?: return false
+        notificationPreferences.value = preferences
+        deliveryEmail.value = deliveryEmail.value?.let { DeliveryEmail(isDemo = false, preferences = preferences, address = it.address) }
+        return deliveryEmail.value?.isOn == true
     }
 
     override suspend fun changeCarrier(

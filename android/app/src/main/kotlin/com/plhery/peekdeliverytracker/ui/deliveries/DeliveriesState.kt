@@ -996,6 +996,16 @@ internal class DeliveriesState(
     }
 
     /**
+     * The answer to the delivery email's offer on the page with `pageId` (`answerEmailOffer(_:)`), counted, then saved on
+     * the server in the app's scope, one at a time ([PageWork.answerEmailOffer]).
+     */
+    fun answerEmailOffer(pageId: UUID, accepted: Boolean) {
+        if (source.pageWork.emailOffer(pageId) is EmailOfferPhase.Saving) return
+        source.action(if (accepted) "email-offer-accept" else "email-offer-decline")
+        source.pageWork.answerEmailOffer(pageId, accepted, source.scope) { source.setEmailOnDelivery(accepted) }
+    }
+
+    /**
      * The carrier editor open over the window (a page's `carrierEditor`, the list's `prompts.changingCarrier`), kept
      * with the window: on the parcel of the page that asked, or of a card's menu ([CarrierEditorHost]).
      */

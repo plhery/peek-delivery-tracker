@@ -2350,6 +2350,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JRT tracking: numero JRT…MM, stati, dogana e DHL",
       "name": "JRT",
       "color": "#023053"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-tracking",
+      "title": "Shouwu tracking: numero SWECN…YQ, stati e chi consegna",
+      "name": "Shouwu International",
+      "color": "#be2c33"
     }
   ],
   "es": [

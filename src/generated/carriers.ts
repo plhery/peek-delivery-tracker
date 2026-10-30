@@ -2342,6 +2342,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT tracking: lettera di vettura, stati e giacenza",
       "name": "TNT Italy",
       "color": "#ff6600"
+    },
+    {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-tracking",
+      "title": "JRT tracking: numero JRT…MM, stati, dogana e DHL",
+      "name": "JRT",
+      "color": "#023053"
     }
   ],
   "es": [
@@ -3101,6 +3109,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT śledzenie przesyłki: numer, statusy i doręczenie",
       "name": "TNT",
       "color": "#ff6600"
+    },
+    {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-sledzenie",
+      "title": "JRT śledzenie przesyłki: numer JRT…MM, statusy i DHL",
+      "name": "JRT",
+      "color": "#023053"
     },
     {
       "id": "geodis-pl",

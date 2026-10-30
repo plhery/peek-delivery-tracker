@@ -166,7 +166,7 @@
   { "id": "byhd", "catalog": "byhd", "name": "BYHD", "languages": ["en"] },
   { "id": "zto-international", "catalog": "zto-international", "name": "ZTO International", "languages": ["en"] },
   { "id": "mayiyinfu", "catalog": "mayiyinfu", "name": "Mayi Yinfu", "languages": ["en"] },
-  { "id": "jrt", "catalog": "jrt", "name": "JRT", "languages": ["en"] },
+  { "id": "jrt", "catalog": "jrt", "name": "JRT", "languages": ["en", "pl", "it"] },
   { "id": "thhy", "catalog": "thhy", "name": "Tianhui Hengyuan", "languages": ["en", "de"] },
   { "id": "js-express", "catalog": "js-express", "name": "JS Express", "languages": ["en"] },
   { "id": "wanbexpress", "catalog": "wanbexpress", "name": "WanbExpress", "languages": ["en"] },

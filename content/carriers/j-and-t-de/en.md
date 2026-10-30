@@ -20,7 +20,7 @@ J&T says its numbers usually start with JTDE and mix letters and digits. In prac
 
 J&T's tracker takes up to 10 numbers in one search, separated by spaces or commas.
 
-**Numbers that look alike.** J&T's networks in other countries have their own sites and numbers: `JTAU` and 12 digits is [J&T Express Australia](carrier:j-and-t-au), `JTE` and 12 digits J&T in the Middle East, and `JT` with 13 digits is used by J&T in China, among others. Only `JTDE` belongs to the German network. If the German tracker answers `No tracking records yet`, compare the number with the shop's email, or ask the shop.
+**Numbers that look alike.** J&T's networks in other countries have their own sites and numbers: `JTAU` and 12 digits is [J&T Express Australia](carrier:j-and-t-au), `JTUK` and 12 digits J&T Express UK, `JTE` and 12 digits J&T in the Middle East, and `JT` with 13 digits is used by J&T in China, among others. Only `JTDE` belongs to the German network. If the German tracker answers `No tracking records yet`, compare the number with the shop's email, or ask the shop.
 
 ## J&T Express Germany tracking statuses explained
 
@@ -33,11 +33,12 @@ J&T's tracker opens in German; switch the site to English or Chinese and the sca
 | `The shipment is dispatched from the transit center to the next destination` | It left that centre for the next stop. |
 | `Your package has been loaded and is on its way to you` | It's in the delivery van: out for delivery. |
 | `Delivery failed because the address could not be found` | The driver couldn't find your address. |
+| `Delivery failed, customer refused to accept` | The recipient refused to accept the parcel. |
 | `Your package has been successfully delivered.` | Delivered. J&T adds how (see below). |
 | `Returns have begun` | After a failed delivery, the parcel is on its way back to the sender. |
 | `The shipment has been returned` | The return is complete. |
 
-The loading line can appear several times: J&T writes it once for each delivery run. The delivered line goes on with the delivery type in 【】 brackets (`Left with neighbor`, `Front Door Porch`, `Front Desk Reception`, `Garden Yard`, `Mailbox` or `Garage`) and ends with J&T's hotline number. The brackets can also be empty.
+The loading line can appear several times: J&T writes it once for each delivery run. The delivered line goes on with the delivery type in 【】 brackets (`Left with neighbor`, `Front Door Porch`, `Front Desk Reception`, `Garden Yard`, `Mailbox` or `Garage`) and ends with J&T's hotline number. Peek keeps these six types and drops any other.
 
 **Which neighbour?** When a parcel was left with a neighbour, the tracker shows `Click to view delivery details` under that scan. Enter the postcode of the delivery address to see the neighbour's name and house number. After five wrong postcodes you have to wait before trying again.
 
@@ -53,7 +54,7 @@ The loading line can appear several times: J&T writes it once for each delivery 
 
 ## J&T Express parcel late, missing or returned
 
-The shop chose J&T, so for an online order the shop is your first contact. Under German law, when you buy as a consumer, the seller carries the risk of loss or damage in transit unless you hired the carrier yourself.
+The shop chose J&T, so for an online order the shop is your first contact. Under German law, when you buy as a consumer, the seller carries the risk of loss or damage in transit unless you hired the carrier yourself and the seller hadn't named that carrier to you beforehand.
 
 **Not moving.** J&T publishes no delivery times for recipients. If the last scan is days old, ask the shop, or call J&T with your number. More on [tracking that isn't updating](guide:tracking-not-updating).
 
@@ -65,17 +66,17 @@ The shop chose J&T, so for an online order the shop is your first contact. Under
 
 J&T Express Germany's channels, as read on [its contact page](https://www.jtexpress.de/contact) on 21 October 2026:
 
-- **Phone:** +49 6931090650, Monday to Friday 8:00 to 20:00, closed on public holidays. The delivered scan gives the same number.
-- **Live chat:** "Start Chat" on the contact and FAQ pages.
+- **Phone:** +49 6931090650, Monday to Friday 8:00 to 20:00, closed on public holidays.
 - **Email:** de-jtservice@jtexpress.de.
-- **Office:** J&T Express Germany GmbH, Am Giener 2, 55268 Nieder-Olm. The legal notice gives the registered address, Wiesenhüttenstraße 11, 60329 Frankfurt am Main.
+- **Live chat:** "Start Chat" on the contact and FAQ pages.
 - **Delivery photos and personal data:** de-dpo@jtexpress.de.
+- **Office:** J&T Express Germany GmbH, Am Giener 2, 55268 Nieder-Olm. The legal notice gives the registered address, Wiesenhüttenstraße 11, 60329 Frankfurt am Main.
 
 ## Tracking J&T Express Germany parcels with Peek
 
 [Peek](/) names J&T Express Germany at once from a `JTDE` number, typed with or without spaces, in capitals or not. You can also paste a jtexpress.de/tracking link with `?q=` and the number.
 
-Peek reads J&T's own tracker and shows the status, each scan at its exact time and the delivery time. Scans show in J&T's English, even if you read them in German on jtexpress.de. Peek counts the loading line as out for delivery and `Returns have begun` as a return, so the parcel's status reads "Out for delivery" or "Returned to sender". On the delivered line it keeps the delivery type, such as `Left with neighbor`, without brackets, and drops the hotline sentence. J&T gives no places, expected delivery day or weight, so the map stays empty. Peek doesn't open the neighbour details behind J&T's postcode check, and on a very long history it keeps the newest 100 scans.
+Peek reads J&T's own tracker and shows the status, each scan at its exact time and the delivery time. Scans show in J&T's English, even if you read them in German on jtexpress.de. Peek counts the loading line as out for delivery and `Returns have begun` as a return, so the parcel's status reads "Out for delivery" or "Returned to sender". On the delivered line it keeps the delivery type, such as `Left with neighbor`, without brackets, and drops the hotline sentence. J&T gives no places, expected delivery day or weight, so Peek shows no map. Peek doesn't open the neighbour details behind J&T's postcode check, and on a very long history it keeps the newest 100 scans.
 
 Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only. It can't contact J&T or the shop for you.
 
@@ -83,7 +84,7 @@ Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for 
 
 ### Is J&T Express Germany legit?
 
-Yes. J&T Express Germany GmbH, registered in Frankfurt am Main, is the German company of J&T Express, a parcel group founded in Indonesia in 2015 and listed in Hong Kong. It looks for franchise partners across Germany to deliver its parcels, and reviewers on Trustpilot mostly write about Temu orders.
+Yes. J&T Express Germany GmbH, registered in Frankfurt am Main, is the German company of J&T Express, a parcel group founded in Indonesia in 2015 and listed in Hong Kong. It looks for franchise partners across Germany to deliver its parcels.
 
 ### Which neighbour has my J&T parcel?
 
@@ -110,7 +111,6 @@ Call +49 6931090650 (Monday to Friday, 8:00 to 20:00), use the live chat on jtex
 - [J&T Express Germany: POD Privacy Policy](https://www.jtexpress.de/pod-policy) – delivery photos, six months, data protection contact
 - [J&T Express Germany: Become our partner](https://www.jtexpress.de/career) – franchise partners for last-mile delivery and collection
 - [J&T Express Germany: About Us](https://www.jtexpress.de/about) – founded 2015 in Indonesia, Hong Kong listing
-- [Trustpilot: J&T Express Germany Reviews](https://www.trustpilot.com/review/www.jtexpress.de) – reviewers writing about Temu orders
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – the seller's risk in transit
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from J&T Express Germany, its status wordings and number shapes
 :::

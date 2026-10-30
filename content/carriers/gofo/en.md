@@ -22,27 +22,33 @@ Some parcels carry both a GFUS waybill number and a CR tracking number. GOFO's p
 
 **Where to find it.** GOFO's support page sends you to the sender: the order confirmation email (shipping details), your account on the shop's site under Orders or Purchase History, or the shipping notification sent after dispatch. Still nothing? See [how to find a tracking number](guide:find-tracking-number).
 
-**Numbers that look alike.** GOFO also runs networks in other countries. `GFFR` and `CIFR` numbers belong to [GOFO France](carrier:gofo-fr), `GFIT` and `CIIT` numbers to [GOFO Italy](carrier:gofo-it). Type one into GOFO's US tracker and it offers a link to the right country's site. A `GFCA` number with 14 digits belongs to GOFO Canada; Peek recognises and tracks it too. A `YT` number is [YunExpress](carrier:yunexpress)'s, even when GOFO does the final delivery.
+**Numbers that look alike.** GOFO also runs networks in other countries. `GFFR` and `CIFR` numbers belong to [GOFO France](carrier:gofo-fr), `GFIT` and `CIIT` numbers to [GOFO Italy](carrier:gofo-it), `GFES` and `CIES` numbers to GOFO Spain, `GFNL` and `CINL` numbers to GOFO Netherlands. Type one into GOFO's US tracker and it offers a link to the right country's site. A `GFCA` number with 14 digits belongs to GOFO Canada; Peek recognises and tracks it too. A `YT` number is [YunExpress](carrier:yunexpress)'s, even when GOFO does the final delivery.
 
 ## GOFO tracking statuses explained
 
-GOFO's tracking page shows a summary under `CURRENT STATUS`: `Processing`, `In Transit`, `Delivered`, `Alert` or `Returned`. GOFO doesn't explain these labels. Below it come the scans, in English (GOFO's Spanish page writes them in Spanish). These are the ones a parcel usually meets, in order:
+GOFO's tracking page shows a summary under `CURRENT STATUS`: `Processing`, `In Transit`, `Delivered`, `Alert` or `Returned`. GOFO doesn't explain these labels. Below it come the scans, in English (GOFO's Spanish page writes them in Spanish). These are the ones a parcel may meet, roughly in order; not every parcel meets them all:
 
 | GOFO's status | What it means for you |
 | --- | --- |
 | `Shipping Label Created` | The sender made the label. GOFO doesn't have the parcel yet. |
+| `Pick Up Start` | GOFO has set out to collect the parcel from the sender; it doesn't have it yet. |
+| `Pickup Exception, GOFO has not Received the Package from the Warehouse yet.` | GOFO hasn't received the parcel from the sender's warehouse yet. |
 | `Pick Up Success` | GOFO collected the parcel from the sender. |
 | `Arrived at GOFO Regional Origin Hub` | It reached GOFO's first hub. |
+| `Arrived at Sorting Center` | It reached a sorting center, before the regional hub. |
 | `Arrived at GOFO Regional Hub` | It reached a hub on the way to you. |
+| `Processing at GOFO Facility` | Being sorted at a GOFO building. |
 | `Departed GOFO Regional Hub` | It left that hub. |
+| `Loaded on Vehicle` | Loaded onto a vehicle for the next leg. |
 | `In Transit to Next Facility` | Moving between GOFO buildings. |
 | `Arrived at GOFO Delivery Station` | At the local station that delivers your area. |
 | `Departed GOFO Delivery Station` | It left the station. |
 | `Out for Delivery` | With the driver today. |
-| `Delivered, Door/Yard` | Delivered, and GOFO names where it was left. |
+| `Delivered` | The driver delivered the parcel. |
 | `Delivery Exception, Business Closed` | The driver couldn't deliver because the business was closed. |
+| `Label Cancelled` | The label was cancelled: no parcel is coming under this number. |
 
-The delivered line names the drop-off spot: `Delivered, Mail Room/Parcel Locker`, `Delivered, Mail Room` or `Delivered, Left with Individual` are the other ones you may see. Once a parcel shows `Arrived at GOFO Delivery Station`, GOFO says delivery is "typically completed within 1–2 calendar days". GOFO's page also shows an `Estimated Delivery` field.
+On GOFO's page the delivered line names the drop-off spot: `Delivered, Door/Yard`, `Delivered, Mail Room/Parcel Locker`, `Delivered, Mail Room` or `Delivered, Left with Individual`. Once a parcel shows `Arrived at GOFO Delivery Station`, GOFO says delivery is "typically completed within 1–2 calendar days". GOFO's page also shows an `Estimated Delivery` field.
 
 ## GOFO delivery: drop-off, photos and missed deliveries
 
@@ -79,7 +85,7 @@ The +1 (626) 505-1101 line is for sellers and warehouses booking pickups, not fo
 
 For a `GFUS`, `GF` or `CR` number, typed with or without spaces, [Peek](/) asks GOFO whether it has the parcel and names GOFO Express when it does. `GFUS` numbers also go to AliExpress / Cainiao, which tracks some AliExpress parcels under GOFO's number: if Cainiao has the parcel, Peek follows it with Cainiao first and, when Cainiao gives the US as its destination, moves to GOFO once GOFO scans it. Until GOFO knows the number, Peek keeps checking. You can also pick GOFO Express with "Change", or paste a GOFO US tracking link (gofo.com/us or gofoexpress.com) with `searchID=` and the number in it.
 
-Peek reads GOFO's US tracking every 10 minutes from 8 am to 10 pm Swiss time (about 2 am to 4 pm Eastern, 11 pm to 1 pm Pacific), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time. It shows the status, each scan with its town and state on a map, the exact time of each scan, the delivery time, the service name and the destination. Delivered scans appear as "Delivered" in Peek's own words, without GOFO's support line; other scans show as GOFO writes them. Peek shows no expected delivery day and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
+Peek reads GOFO's US tracking every 10 minutes from 8 am to 10 pm Swiss time (about 2 am to 4 pm Eastern, 11 pm to 1 pm Pacific), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time. It shows the status, each scan with its town and state on a map, the exact time of each scan, the delivery time, the service name and the destination. Peek removes GOFO's support line from every scan; a delivery shows as "Delivered", without the detail after the comma, and other scans show as GOFO writes them. Peek shows no expected delivery day and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 

@@ -147,6 +147,9 @@
   "ampm": {
     "decal": "ampm"
   },
+  "ams-egroup": {
+    "decal": "ams-egroup"
+  },
   "an-post": {
     "decal": "an-post"
   },
@@ -173,6 +176,9 @@
   },
   "apc-postal-logistics": {
     "decal": "apc-postal-logistics"
+  },
+  "apg-ecommerce": {
+    "decal": "apg-ecommerce"
   },
   "apple-express": {
     "decal": "apple-express"
@@ -1486,6 +1492,9 @@
   "kazpost": {
     "decal": "kazpost"
   },
+  "kec-ecommerce": {
+    "decal": "kec-ecommerce"
+  },
   "kerry-tj": {
     "decal": "kerry-tj"
   },
@@ -2600,6 +2609,9 @@
   "the-courier-guy": {
     "decal": "the-courier-guy"
   },
+  "thelorry": {
+    "decal": "thelorry"
+  },
   "thhy": {
     "decal": "thhy"
   },
@@ -2641,6 +2653,9 @@
   },
   "total-express": {
     "decal": "total-express"
+  },
+  "toyou": {
+    "decal": "toyou"
   },
   "tp-logistics-th": {
     "decal": "tp-logistics-th"
@@ -2835,6 +2850,9 @@
   },
   "winit": {
     "decal": "winit"
+  },
+  "wizmo": {
+    "decal": "wizmo"
   },
   "x-express-ba": {
     "decal": "x-express-ba"

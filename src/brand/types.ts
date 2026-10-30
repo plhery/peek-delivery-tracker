@@ -224,7 +224,13 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'ats-healthcare'
   | 'whiz-delivery'
   | 'ets-express'
-  | 'rincos';
+  | 'rincos'
+  | 'apg-ecommerce'
+  | 'toyou'
+  | 'kec-ecommerce'
+  | 'thelorry'
+  | 'wizmo'
+  | 'ams-egroup';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

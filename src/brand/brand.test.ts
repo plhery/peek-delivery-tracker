@@ -300,6 +300,12 @@ describe('carrier brand', () => {
       'whiz-delivery',
       'ets-express',
       'rincos',
+      'apg-ecommerce',
+      'toyou',
+      'kec-ecommerce',
+      'thelorry',
+      'wizmo',
+      'ams-egroup',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

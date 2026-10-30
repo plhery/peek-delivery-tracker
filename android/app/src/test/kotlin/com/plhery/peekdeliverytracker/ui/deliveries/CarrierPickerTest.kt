@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -34,6 +35,9 @@ import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertHasClickAction
+import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.captureToImage
@@ -42,10 +46,12 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
@@ -53,6 +59,9 @@ import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Density
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.CarrierPickerSearch
@@ -145,16 +154,20 @@ class CarrierPickerTest {
         fontScale: Float = 1f,
         view: View? = null,
         recreation: Recreation? = null,
+        roomForKeyboard: Boolean = false,
     ) {
         val content: @Composable () -> Unit = {
             val picker: @Composable () -> Unit = {
                 PickerHost(fontScale = fontScale, identities = identities, attachment = { attachment }) {
-                    CarrierPicker(
-                        selection, sections,
-                        onSelect = { events += "select ${it?.rawValue}" },
-                        onLeave = { events += "leave" },
-                        automatic = automatic, tags = tags,
-                    )
+                    // A host that makes room for the keyboard itself, as one padding for it would.
+                    Box(if (roomForKeyboard) Modifier.imePadding() else Modifier) {
+                        CarrierPicker(
+                            selection, sections,
+                            onSelect = { events += "select ${it?.rawValue}" },
+                            onLeave = { events += "leave" },
+                            automatic = automatic, tags = tags,
+                        )
+                    }
                 }
             }
             if (view != null) CompositionLocalProvider(LocalView provides view, content = picker) else picker()
@@ -211,6 +224,43 @@ class CarrierPickerTest {
     }
 
     private fun px(dp: Float): Float = dp * compose.activity.resources.displayMetrics.density
+
+    private fun title() = compose.onNodeWithText(localizer.text("add.carrier"))
+
+    private fun cancel() = compose.onNodeWithTag(CARRIER_PICKER_CANCEL)
+
+    /** The keyboard `height` points tall, as the window's insets tell it. */
+    private fun keyboard(height: Int) {
+        val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+        compose.runOnUiThread {
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.ime(), Insets.of(0, 0, 0, px(height.toFloat()).roundToInt()))
+                .setVisible(WindowInsetsCompat.Type.ime(), true)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(view, insets)
+        }
+        compose.waitForIdle()
+    }
+
+    /**
+     * With the field focused, a keyboard `height` tall comes up: the rail stands in the middle of the room left above
+     * it, `height / 2` higher, and the list scrolled to its end ends 20 above it, its last section's 6 under its last row.
+     */
+    private fun assertEndsAboveAKeyboard(height: Int) {
+        val window = compose.onRoot().fetchSemanticsNode().size.height.toFloat()
+        field().performClick()
+        fun rail() = compose.onNodeWithTag(LETTER_RAIL).fetchSemanticsNode().boundsInRoot.center.y
+        val open = rail()
+        keyboard(height)
+        val foot = window - px(height.toFloat())
+        assertEquals(open - px(height / 2f), rail(), px(1f))
+        val opened = sections.filter { it.carriers.isNotEmpty() }
+        val count = 2 + opened.sumOf { 1 + it.carriers.size } + CarrierPickerSearch.letterSections(catalog, AppLanguage.En).sumOf { 1 + it.carriers.size }
+        compose.onNodeWithTag(CARRIER_PICKER_LIST).performScrollToIndex(count - 1)
+        val last = CarrierPickerSearch.letterSections(catalog, AppLanguage.En).last().carriers.last()
+        val row = compose.onAllNodesWithTag(carrierPickerRowTag(last)).onLast().fetchSemanticsNode().boundsInRoot
+        assertEquals(foot - px(20f + 6f), row.bottom, px(1.5f))
+    }
 
     /** What `tag` shows, once it has drawn. */
     private fun image(tag: String): PixelMap {
@@ -324,6 +374,55 @@ class CarrierPickerTest {
         field().performTextReplacement("   ")
         compose.onNodeWithTag(LETTER_RAIL).assertExists()
         header("section:fits").assertExists()
+    }
+
+    @Test
+    fun searchingTheBarGivesTheFieldItsPlaceAndCancelEndsTheSearch() {
+        show()
+        title().assertExists()
+        cancel().assertDoesNotExist()
+        val top = field().top()
+        field().performClick()
+        field().assertIsFocused()
+        cancel().assertExists().assertHasClickAction()
+        title().assertDoesNotExist()
+        assertEquals(top - px(44f), field().top(), px(1f))
+
+        // The keyboard's Search puts the keyboard away; the search stays on, Cancel with it.
+        field().performTextInput("colis")
+        field().performImeAction()
+        field().assertIsNotFocused()
+        cancel().assertExists()
+        header("results").assertExists()
+
+        cancel().performClick()
+        assertEquals("", fieldText())
+        field().assertIsNotFocused()
+        cancel().assertDoesNotExist()
+        title().assertExists()
+        assertEquals(top, field().top(), px(1f))
+        header("section:fits").assertExists()
+
+        // The system's back ends a search as Cancel does, before it would leave the picker.
+        field().performTextInput("dpd")
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.waitForIdle()
+        assertEquals("", fieldText())
+        cancel().assertDoesNotExist()
+        title().assertExists()
+        assertTrue(compose.activity.onBackPressedDispatcher.hasEnabledCallbacks().not())
+    }
+
+    @Test
+    fun withTheKeyboardUpTheListsFootAndTheRailEndAboveIt() {
+        show()
+        assertEndsAboveAKeyboard(300)
+    }
+
+    @Test
+    fun aHostThatMakesRoomForTheKeyboardIsntGivenItTwice() {
+        show(roomForKeyboard = true)
+        assertEndsAboveAKeyboard(300)
     }
 
     @Test

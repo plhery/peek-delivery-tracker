@@ -1,5 +1,15 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -13,13 +23,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.onConsumedWindowInsetsChanged
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -36,7 +49,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,7 +62,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.toRect
@@ -56,6 +73,9 @@ import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.findRootCoordinates
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
@@ -110,6 +130,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.drawFormSeparator
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
+import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
@@ -139,9 +160,12 @@ internal data class CarrierPickerAutomatic(val description: String, val recommen
  * to Z under its letter, with the letter rail beside them ([LetterRail]). Under the inline bar, titled "add.carrier"
  * with [leading] at its leading end (the stack's ‹, or a Cancel), the search field always shows
  * (`.searchable(placement: .navigationBarDrawer(displayMode: .always))`): while it holds a query, the list is the
- * matches under their count, best first and the matched part marked, or says none matches, and the rail goes. A choice
- * goes to [onSelect], then the picker is left ([onLeave]), as `choose` dismisses it. The query, the sections it opened
- * with and the place in the list stay through a window made again.
+ * matches under their count, best first and the matched part marked, or says none matches, and the rail goes. From the
+ * field's first focus the search is on, as UISearchController's `isActive`: the bar goes up out of the way, the field
+ * taking its place, and Cancel shows beside the field, which empties it, puts the keyboard away and ends the search, as
+ * the system's back does meanwhile. With the keyboard up, the list's foot and the rail end above it. A choice goes to
+ * [onSelect], then the picker is left ([onLeave]), as `choose` dismisses it. The query, the sections it opened with,
+ * whether the search is on and the place in the list stay through a window made again.
  */
 @Composable
 internal fun CarrierPicker(
@@ -163,7 +187,20 @@ internal fun CarrierPicker(
     val colors = PeekTheme.colors
     val density = LocalDensity.current
     val insets = LocalSheetInsets.current
+    val reduceMotion = PeekTheme.reduceMotion
+    val focusManager = LocalFocusManager.current
     var query by rememberSaveable { mutableStateOf("") }
+    // The search is on from the field's first focus until Cancel. The bar's room goes on the system's ease meanwhile
+    // (`searchPresentationToolbarBehavior`'s automatic hides it on the iPhone), at once under Reduce Motion.
+    var searchOn by rememberSaveable { mutableStateOf(false) }
+    val endSearch = {
+        query = ""
+        searchOn = false
+        focusManager.clearFocus()
+    }
+    BackHandler(enabled = searchOn, onBack = endSearch)
+    val bar = animateFloatAsState(if (searchOn) 0f else 1f, if (reduceMotion) snap() else Motion.easeInOut(), label = "bar")
+    val barGone by remember { derivedStateOf { bar.value == 0f } }
     val opening = rememberSaveable(saver = OPENING_SAVER) { sections.filter { it.carriers.isNotEmpty() } }
     val list = rememberLazyListState()
     val trimmed = CarrierPickerSearch.trimmedQuery(query)
@@ -193,13 +230,35 @@ internal fun CarrierPicker(
         onSelect(carrier)
         onLeave()
     }
-    val bottom = if (!insets.reachesBottom) 0.dp else with(density) { WindowInsets.navigationBars.getBottom(this).toDp() }
+    // The keyboard, where it covers the picker as drawn and no host has taken it already (made room for it or kept it
+    // for itself): the list's foot and the rail end above it, as the List's content and the rail do on the iPhone.
+    var consumed by remember { mutableStateOf(WindowInsets(0, 0, 0, 0)) }
+    var below by remember { mutableFloatStateOf(0f) }
+    var scale by remember { mutableFloatStateOf(1f) }
+    val ime = WindowInsets.ime
+    val keyboard by remember(ime, density) {
+        derivedStateOf { with(density) { ((ime.exclude(consumed).getBottom(density) - below).coerceAtLeast(0f) / scale).toDp() } }
+    }
+    val navigation = if (!insets.reachesBottom) 0.dp else with(density) { WindowInsets.navigationBars.getBottom(this).toDp() }
+    val bottom = maxOf(navigation, keyboard)
     var barHeight by remember { mutableStateOf(insets.barTop + BAR_ROW + SEARCH_HEIGHT + SEARCH_PADDING * 2) }
     // `.contentMargins(.trailing, ...)`: the rows keep clear of the rail's touch strip.
     val start = insets.formSide
     val end = if (searching) SEARCHING_MARGIN else RAIL_WIDTH
     val stacked = PeekTheme.dynamicTypeSize.isAccessibilitySize
-    Box(modifier.fillMaxSize().testTag(CARRIER_PICKER)) {
+    Box(
+        modifier
+            .fillMaxSize()
+            .testTag(CARRIER_PICKER)
+            .onConsumedWindowInsetsChanged { consumed = it }
+            .onGloballyPositioned { coordinates ->
+                // How far above the window's foot the picker ends, and how much smaller a floating sheet draws it.
+                val root = coordinates.findRootCoordinates()
+                val drawn = root.localBoundingBoxOf(coordinates, clipBounds = false)
+                below = root.size.height - drawn.bottom
+                scale = if (coordinates.size.height > 0) drawn.height / coordinates.size.height else 1f
+            },
+    ) {
         LazyColumn(
             Modifier.fillMaxSize().testTag(CARRIER_PICKER_LIST),
             state = list,
@@ -235,11 +294,30 @@ internal fun CarrierPicker(
                 .onSizeChanged { barHeight = with(density) { it.height.toDp() } }
                 .padding(top = insets.barTop),
         ) {
-            PickerBar(localizer.text("add.carrier"), leading)
-            SearchField(
-                query, { query = it }, localizer.text("picker.search", mapOf("count" to catalog.selectableCarriers.size)),
-                localizer.text("picker.clear"),
-            )
+            if (!barGone) {
+                // Going, the bar rises under the field, which rises in its place.
+                Box(
+                    Modifier
+                        .clipToBounds()
+                        .layout { measurable, constraints ->
+                            val placeable = measurable.measure(constraints)
+                            val height = (placeable.height * bar.value).roundToInt()
+                            layout(placeable.width, height) { placeable.placeWithLayer(0, height - placeable.height) { alpha = bar.value } }
+                        },
+                ) {
+                    PickerBar(localizer.text("add.carrier"), leading)
+                }
+            }
+            Row(
+                Modifier.fillMaxWidth().padding(horizontal = insets.formSide, vertical = SEARCH_PADDING),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                SearchField(
+                    query, { query = it }, localizer.text("picker.search", mapOf("count" to catalog.selectableCarriers.size)),
+                    localizer.text("picker.clear"), onFocus = { searchOn = true }, Modifier.weight(1f),
+                )
+                SearchCancel(searchOn, localizer.text("common.cancel"), endSearch)
+            }
         }
         if (!searching) {
             LetterRail(
@@ -350,17 +428,15 @@ private fun PickerBar(title: String, leading: (@Composable () -> Unit)?) {
  * The search field under the bar (`.searchable`), as UIKit's: a capsule in the tertiary fill, the glass and the
  * prompt in the secondary grey, and once it holds something the button that empties it. It takes no capitalisation or
  * correction (`.autocorrectionDisabled()`, `.textInputAutocapitalization(.never)`), and the keyboard's Search puts the
- * keyboard away. TalkBack reads it by its prompt.
+ * keyboard away, the search left on. TalkBack reads it by its prompt.
  */
 @Composable
-private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String, clear: String) {
+private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String, clear: String, onFocus: () -> Unit, modifier: Modifier) {
     val colors = PeekTheme.colors
     val font = PeekTheme.type.body
     val focusManager = LocalFocusManager.current
     Row(
-        Modifier
-            .fillMaxWidth()
-            .padding(horizontal = LocalSheetInsets.current.formSide, vertical = SEARCH_PADDING)
+        modifier
             .heightIn(min = SEARCH_HEIGHT)
             .background(if (colors.dark) SEARCH_FILL_DARK else SEARCH_FILL_LIGHT, CapsuleShape)
             .padding(start = 11.dp, end = if (query.isEmpty()) 11.dp else 4.dp),
@@ -371,7 +447,11 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
         BasicTextField(
             query,
             onValueChange = onQuery,
-            modifier = Modifier.weight(1f).testTag(CARRIER_PICKER_SEARCH).semantics { contentDescription = prompt },
+            modifier = Modifier
+                .weight(1f)
+                .testTag(CARRIER_PICKER_SEARCH)
+                .onFocusChanged { if (it.isFocused) onFocus() }
+                .semantics { contentDescription = prompt },
             textStyle = font.copy(color = colors.label),
             singleLine = true,
             cursorBrush = SolidColor(colors.accent),
@@ -407,6 +487,32 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
             ) {
                 PeekSymbol("xmark.circle.fill", font = font, tint = colors.secondaryLabel)
             }
+        }
+    }
+}
+
+/**
+ * The search bar's Cancel while the search is on, at the field's trailing end in the ink, the tint the list's tabs
+ * give what they present (`.tint(Brand.ink)`), the field narrowing to make its room as it comes in, on the system's
+ * ease (at once under Reduce Motion).
+ */
+@Composable
+private fun SearchCancel(shown: Boolean, title: String, onCancel: () -> Unit) {
+    val reduceMotion = PeekTheme.reduceMotion
+    AnimatedVisibility(
+        shown,
+        enter = if (reduceMotion) EnterTransition.None else fadeIn(Motion.easeInOut()) + expandHorizontally(Motion.easeInOut(), Alignment.Start),
+        exit = if (reduceMotion) ExitTransition.None else fadeOut(Motion.easeInOut()) + shrinkHorizontally(Motion.easeInOut(), Alignment.Start),
+    ) {
+        Box(
+            Modifier
+                .padding(start = CANCEL_GAP)
+                .heightIn(min = SEARCH_HEIGHT)
+                .testTag(CARRIER_PICKER_CANCEL)
+                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onCancel),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(title, color = PeekTheme.colors.ink, style = PeekTheme.type.body, maxLines = 1)
         }
     }
 }
@@ -725,6 +831,7 @@ internal const val CARRIER_PICKER = "carrierPicker"
 internal const val CARRIER_PICKER_LIST = "carrierPicker.list"
 internal const val CARRIER_PICKER_SEARCH = "carrierPicker.search"
 internal const val CARRIER_PICKER_CLEAR = "carrierPicker.clear"
+internal const val CARRIER_PICKER_CANCEL = "carrierPicker.cancel"
 internal const val CARRIER_PICKER_AUTOMATIC = "carrierPicker.automatic"
 internal const val LETTER_RAIL = "carrierPicker.letterRail"
 internal const val LETTER_BUBBLE = "carrierPicker.letterBubble"
@@ -744,6 +851,9 @@ private val SEARCH_HEIGHT = 36.dp
 private val SEARCH_PADDING = 8.dp
 private val SEARCH_FILL_LIGHT = Color(118, 118, 128).copy(alpha = 0.12f)
 private val SEARCH_FILL_DARK = Color(118, 118, 128).copy(alpha = 0.24f)
+
+/** UISearchBar's room between the field and its Cancel. */
+private val CANCEL_GAP = 8.dp
 private val SEARCHING_MARGIN = 20.dp
 private val MARK_WIDTH = 27.dp
 private val TRAILING_SPACER = 8.dp

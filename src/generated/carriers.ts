@@ -1416,6 +1416,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "HYWL tracking: Huiyi Logistics TRK numbers and scans",
       "name": "Huiyi Logistics",
       "color": "#0b8f91"
+    },
+    {
+      "id": "ywe",
+      "catalog": "ywe",
+      "slug": "ywe-tracking",
+      "title": "YWE (YanwenExpress) tracking: numbers, scans and who to ask",
+      "name": "YWE",
+      "color": "#055aa1"
+    },
+    {
+      "id": "roadie",
+      "catalog": "roadie",
+      "slug": "roadie-tracking",
+      "title": "Roadie tracking: 1R numbers, statuses and delivery photos",
+      "name": "Roadie",
+      "color": "#76cccd"
     }
   ],
   "de": [

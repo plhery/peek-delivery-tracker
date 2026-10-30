@@ -124,13 +124,17 @@ describe('reading the titles', () => {
     assert.equal(readHeads(root), null);
     writePage(root, 'carriers/inpost/en.md', { title: 'InPost tracking', slug: 'inpost' });
     writePage(root, 'carriers/inpost/es.md', { title: 'InPost seguimiento', description: 'Sigue tu paquete.', slug: 'inpost-seguimiento' });
+    writePage(root, 'carriers/spx/pt-br.md', { title: 'Rastreio SPX', slug: 'spx-rastreio' });
     writePage(root, 'guides/a/de.md', { title: 'A', slug: 'a-de' });
     writePage(root, 'guides/a/notes.md', { title: 'Notes', slug: 'notes' });
+    writePage(root, 'guides/a/ptbr.md', { title: 'Not a language', slug: 'ptbr' });
+    writePage(root, 'guides/a/pt-br-x.md', { title: 'Not a language', slug: 'pt-br-x' });
     writeFileSync(path.join(root, 'content/guides/README.md'), '# Guides\n');
     assert.deepEqual(readHeads(root), {
       '/carriers/inpost': 'InPost tracking\nWhat it says.',
       '/de/guides/a-de': 'A\nWhat it says.',
       '/es/carriers/inpost-seguimiento': 'InPost seguimiento\nSigue tu paquete.',
+      '/pt-br/carriers/spx-rastreio': 'Rastreio SPX\nWhat it says.',
     });
   });
 
@@ -139,10 +143,10 @@ describe('reading the titles', () => {
     const heads = readHeads(root);
     const files = ['carriers', 'guides'].flatMap(section => readdirSync(path.join(root, 'content', section), { withFileTypes: true })
       .filter(folder => folder.isDirectory())
-      .flatMap(folder => readdirSync(path.join(root, 'content', section, folder.name)).filter(file => /^[a-z]{2}\.md$/.test(file))));
+      .flatMap(folder => readdirSync(path.join(root, 'content', section, folder.name)).filter(file => /^[a-z]{2}(?:-[a-z]{2})?\.md$/.test(file))));
     assert.equal(Object.keys(heads).length, files.length);
     for (const [address, head] of Object.entries(heads)) {
-      assert.match(address, /^(\/[a-z]{2})?\/(carriers|guides)\/[^/]+$/);
+      assert.match(address, /^(\/[a-z]{2}(?:-[a-z]{2})?)?\/(carriers|guides)\/[^/]+$/);
       assert.match(head, /^.+\n.+$/, address);
     }
   });

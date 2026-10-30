@@ -2924,7 +2924,16 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     }
   ],
-  "pt-br": [],
+  "pt-br": [
+    {
+      "id": "spx-br",
+      "catalog": "spx-br",
+      "slug": "rastreio-spx-express",
+      "title": "Rastreio SPX Express: pedidos da Shopee, status e prazos",
+      "name": "SPX Express Brazil",
+      "color": "#ee4d2d"
+    }
+  ],
   "pl": [
     {
       "id": "yunexpress",
@@ -3611,4 +3620,4 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
  * Peek's languages a carrier's page is written in. Each has its carriers' own page; a language without one
  * sends its readers to the English one until a carrier's page is written in it.
  */
-export const CARRIER_LOCALES: readonly Locale[] = ["en","de","fr","it","es","pt","pl"];
+export const CARRIER_LOCALES: readonly Locale[] = ["en","de","fr","it","es","pt","pt-br","pl"];

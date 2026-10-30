@@ -79,7 +79,8 @@ export function frontMatter(text) {
 
 /**
  * What a search result shows of each carrier's page and guide in the checkout at `cwd`: its title and
- * description, by the page's path. Null where the checkout has no content.
+ * description, by the page's path. A page's file is named by its language, as its path is: `de.md`, or
+ * `pt-br.md` for a language named with its country. Null where the checkout has no content.
  */
 export function readHeads(cwd) {
   if (!existsSync(path.join(cwd, 'content'))) return null;
@@ -90,7 +91,7 @@ export function readHeads(cwd) {
     for (const folder of readdirSync(directory, { withFileTypes: true })) {
       if (!folder.isDirectory()) continue;
       for (const file of readdirSync(path.join(directory, folder.name))) {
-        const language = file.match(/^([a-z]{2})\.md$/)?.[1];
+        const language = file.match(/^([a-z]{2}(?:-[a-z]{2})?)\.md$/)?.[1];
         if (!language) continue;
         const { slug, title = '', description = '' } = frontMatter(readFileSync(path.join(directory, folder.name, file), 'utf8'));
         if (slug) heads.push([`${language === 'en' ? '' : `/${language}`}/${section}/${slug}`, `${title}\n${description}`]);

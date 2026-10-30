@@ -5,7 +5,9 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
@@ -20,10 +22,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.onFocusedBoundsChanged
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.verticalScroll
@@ -31,11 +35,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,9 +60,12 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.node.DelegatableNode
 import androidx.compose.ui.node.DrawModifierNode
@@ -81,18 +91,23 @@ import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
+import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
+import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.roundToInt
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 /**
@@ -118,16 +133,28 @@ internal fun SheetPage(
     cancelTag: String? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val colors = PeekTheme.colors
-    val type = PeekTheme.type
     val scroll = rememberScrollState()
     val backdrop = rememberMaterialBackdrop()
     val insets = LocalSheetInsets.current
-    val bottom = if (!insets.reachesBottom) 0.dp else with(LocalDensity.current) { WindowInsets.navigationBars.getBottom(this).toDp() }
+    val density = LocalDensity.current
+    val bottom = if (!insets.reachesBottom) 0.dp else with(density) { WindowInsets.navigationBars.getBottom(this).toDp() }
     val barTop = insets.barTop
     val barHeight = barTop + BAR_ROW
     val ground = LocalSheetGround.current
-    Box(modifier.fillMaxSize()) {
+    val keyboard = remember { FormKeyboard() }
+    val ime = WindowInsets.ime
+    val reduceMotion = PeekTheme.reduceMotion
+    // The field with the focus, in view above the keyboard and clear of the bar, as the focus moves and as the keyboard
+    // comes, as a Form scrolls its field above the iPhone's. The scroll's own, not the reader's: the sheet stays.
+    LaunchedEffect(keyboard, barHeight, reduceMotion) {
+        val clearance = with(density) { barHeight.toPx() }
+        snapshotFlow { keyboard.focused to keyboard.covered(ime.getBottom(density)) }.collectLatest { (_, covered) ->
+            val offset = keyboard.focusedOffset(clearance, covered)
+            if (abs(offset) < 0.5f) return@collectLatest
+            if (reduceMotion) scroll.scrollBy(offset) else scroll.animateScrollBy(offset)
+        }
+    }
+    Box(modifier.fillMaxSize().onGloballyPositioned { keyboard.place(it) }) {
         Box(Modifier.fillMaxSize().materialBackdrop(backdrop)) {
             // The sheet, drawn again where the confirmation's glass can take it on, as the iPhone's does: its tint
             // over the glass, or its lighter grey on the grouped ground in dark.
@@ -135,7 +162,15 @@ internal fun SheetPage(
             Column(
                 Modifier
                     .fillMaxSize()
+                    .onPlaced { keyboard.viewport = it }
                     .verticalScroll(scroll)
+                    .onFocusedBoundsChanged { keyboard.focused = it }
+                    .layout { measurable, constraints ->
+                        // Room at the foot for the keyboard, so that the last field can scroll above it.
+                        val room = (keyboard.covered(ime.getBottom(this)) - bottom.roundToPx()).coerceAtLeast(0)
+                        val placeable = measurable.measure(constraints)
+                        layout(placeable.width, placeable.height + room) { placeable.place(0, 0) }
+                    }
                     .padding(top = barHeight, bottom = FORM_BOTTOM + bottom),
             ) {
                 content()
@@ -143,41 +178,111 @@ internal fun SheetPage(
         }
         FormScrollEdge(barHeight) { scroll.value.toFloat() }
         // The title in the middle of the bar, or as near it as clears the confirmation, and cut short where even
-        // the room before the confirmation is too little, as the confirmation grows with the text.
-        Layout(
-            content = {
-                Text(
-                    title,
-                    Modifier
-                        .then(if (titleFocus != null) Modifier.accessibilityFocus(titleFocus) else Modifier)
-                        .semantics { heading() },
-                    color = colors.label,
-                    style = type.headline,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-                BarButton(confirmation, onConfirm, backdrop, FontWeight.SemiBold, confirmEnabled, confirmTag)
-                if (cancellation != null) BarButton(cancellation, onCancel, backdrop, FontWeight.Normal, cancelEnabled, cancelTag)
-            },
-            modifier = Modifier.fillMaxWidth().padding(top = barTop).height(BAR_ROW),
-        ) { measurables, constraints ->
-            val loose = constraints.copy(minWidth = 0, minHeight = 0)
-            val width = constraints.maxWidth
-            val height = constraints.maxHeight
-            val side = insets.barSide.roundToPx()
-            val gap = TITLE_GAP.roundToPx()
-            val button = measurables[1].measure(loose)
-            val cancel = measurables.getOrNull(2)?.measure(loose)
-            val buttonStart = width - side - button.width
-            val titleStart = if (cancel == null) side else side + cancel.width + gap
-            val titleEnd = buttonStart - gap
-            val heading = measurables[0].measure(loose.copy(maxWidth = max(0, titleEnd - titleStart)))
-            layout(width, height) {
-                val x = ((width - heading.width) / 2f).roundToInt().coerceAtMost(titleEnd - heading.width).coerceAtLeast(titleStart)
-                heading.place(x, ((height - heading.height) / 2f).roundToInt())
-                button.place(buttonStart, ((height - button.height) / 2f).roundToInt())
-                cancel?.place(side, ((height - cancel.height) / 2f).roundToInt())
-            }
+        // the room before the confirmation is too little. The bar's words stand at the default text size whatever the
+        // reader's, as UIKit's inline title and bar buttons do.
+        ProvideDynamicTypeSize(DynamicTypeSize.Large) {
+            FormBar(
+                title, titleFocus, Modifier.fillMaxWidth().padding(top = barTop).height(BAR_ROW),
+                confirmation = { BarButton(confirmation, onConfirm, backdrop, FontWeight.SemiBold, confirmEnabled, confirmTag) },
+                cancellation = cancellation?.let { { BarButton(it, onCancel, backdrop, FontWeight.Normal, cancelEnabled, cancelTag) } },
+            )
+        }
+    }
+}
+
+/**
+ * Where a keyboard leaves the form room: the part of the page it covers, from where the page stands in the window (on
+ * a sheet that floats and is drawn smaller, or a form sheet in the middle of a large window), and the field with the
+ * focus, which [focusedOffset] finds a place for in what is left of the form's scroll.
+ */
+@Stable
+private class FormKeyboard {
+    /** The window's pixels under the page's foot, and the page's pixels to each of the window's. */
+    private var below by mutableFloatStateOf(0f)
+    private var scale by mutableFloatStateOf(1f)
+
+    /** The field with the focus, or null. */
+    var focused: LayoutCoordinates? by mutableStateOf(null)
+
+    /** Where the form scrolls, the whole page. */
+    var viewport: LayoutCoordinates? = null
+
+    fun place(page: LayoutCoordinates) {
+        if (!page.isAttached) return
+        val root = page.findRootCoordinates()
+        val top = root.localPositionOf(page, Offset.Zero).y
+        val foot = root.localPositionOf(page, Offset(0f, page.size.height.toFloat())).y
+        below = root.size.height - foot
+        scale = if (foot - top > 0f) page.size.height / (foot - top) else 1f
+    }
+
+    /** The page's pixels a keyboard [ime] pixels tall covers, at its foot. */
+    fun covered(ime: Int): Int = if (ime <= 0) 0 else ((ime - below) * scale).roundToInt().coerceAtLeast(0)
+
+    /**
+     * How far the form scrolls for the focused field to stand between [top] pixels from the page's top, under the bar,
+     * and the keyboard, which covers [covered] pixels at its foot: none where it stands there already; its top at [top]
+     * where it is taller than the room.
+     */
+    fun focusedOffset(top: Float, covered: Int): Float {
+        val field = focused?.takeIf { it.isAttached } ?: return 0f
+        val viewport = viewport?.takeIf { it.isAttached } ?: return 0f
+        val bounds = viewport.localBoundingBoxOf(field, clipBounds = false)
+        val bottom = viewport.size.height - covered
+        return when {
+            bounds.top < top -> bounds.top - top
+            bounds.bottom > bottom -> min(bounds.bottom - bottom, bounds.top - top)
+            else -> 0f
+        }
+    }
+}
+
+/**
+ * The form's bar: [title] in the middle, or as near it as keeps clear of the [confirmation] at its trailing end and of
+ * the [cancellation] at its leading one, cut short where even that room is too little.
+ */
+@Composable
+private fun FormBar(
+    title: String,
+    titleFocus: AccessibilityFocus?,
+    modifier: Modifier,
+    confirmation: @Composable () -> Unit,
+    cancellation: (@Composable () -> Unit)?,
+) {
+    val insets = LocalSheetInsets.current
+    Layout(
+        content = {
+            Text(
+                title,
+                Modifier
+                    .then(if (titleFocus != null) Modifier.accessibilityFocus(titleFocus) else Modifier)
+                    .semantics { heading() },
+                color = PeekTheme.colors.label,
+                style = PeekTheme.type.headline,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+            confirmation()
+            cancellation?.invoke()
+        },
+        modifier = modifier,
+    ) { measurables, constraints ->
+        val loose = constraints.copy(minWidth = 0, minHeight = 0)
+        val width = constraints.maxWidth
+        val height = constraints.maxHeight
+        val side = insets.barSide.roundToPx()
+        val gap = TITLE_GAP.roundToPx()
+        val button = measurables[1].measure(loose)
+        val cancel = measurables.getOrNull(2)?.measure(loose)
+        val buttonStart = width - side - button.width
+        val titleStart = if (cancel == null) side else side + cancel.width + gap
+        val titleEnd = buttonStart - gap
+        val heading = measurables[0].measure(loose.copy(maxWidth = max(0, titleEnd - titleStart)))
+        layout(width, height) {
+            val x = ((width - heading.width) / 2f).roundToInt().coerceAtMost(titleEnd - heading.width).coerceAtLeast(titleStart)
+            heading.place(x, ((height - heading.height) / 2f).roundToInt())
+            button.place(buttonStart, ((height - button.height) / 2f).roundToInt())
+            cancel?.place(side, ((height - cancel.height) / 2f).roundToInt())
         }
     }
 }

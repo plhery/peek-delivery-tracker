@@ -130,7 +130,8 @@ internal class PassBell(val opensAlerts: Boolean, val mute: (muted: Boolean, sav
  * `atlas` is null until it is read, `sample` is the made-up parcel nothing on can change or share, `readerLink`
  * someone else's parcel followed through its link, and `working` a change being saved, which the bell waits for.
  * `onMap` opens the map, TalkBack going back to the given element once it closes, `onEditCarrier` the carrier
- * editor, on the carrier a prompt names, and `onRename` the rename alert, TalkBack going back to the name.
+ * editor, on the carrier a prompt names, TalkBack going back to the mark or the button that opened it, and `onRename`
+ * the rename alert, TalkBack going back to the name.
  */
 @Composable
 internal fun LivePassCard(
@@ -141,7 +142,7 @@ internal fun LivePassCard(
     bell: PassBell?,
     working: Boolean,
     onMap: (AccessibilityFocus?) -> Unit,
-    onEditCarrier: (initialCarrier: CarrierId?) -> Unit,
+    onEditCarrier: (initialCarrier: CarrierId?, focus: AccessibilityFocus?) -> Unit,
     onRename: (AccessibilityFocus?) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -172,6 +173,8 @@ internal fun LivePassCard(
     val metrics = PassRouteMetrics.of(handover = delivery != null, largeText = large, headerHeight = headerHeight.toDouble())
     val globeFocus = remember { AccessibilityFocus() }
     val nameFocus = remember { AccessibilityFocus() }
+    val marksFocus = remember { AccessibilityFocus() }
+    val neededFocus = remember { AccessibilityFocus() }
     val open by rememberUpdatedState { onMap(globeFocus) }
 
     // A map that keeps clear of the second mark and the buttons waits to know where they stand, rather than moving
@@ -214,7 +217,7 @@ internal fun LivePassCard(
             val marks = @Composable {
                 val label = listOfNotNull(localizer.text("detail.changeCarrierFrom", mapOf("carrier" to branding.fullName)), deliveryLine)
                     .joinToString(". ")
-                val change = { onEditCarrier(null) }
+                val change = { onEditCarrier(null, marksFocus) }
                 PassMarks(
                     branding, delivery, frames, change.takeIf { editable },
                     Modifier
@@ -223,7 +226,7 @@ internal fun LivePassCard(
                             if (!editable) {
                                 Modifier
                             } else {
-                                Modifier.clearAndSetSemantics {
+                                Modifier.accessibilityFocus(marksFocus).clearAndSetSemantics {
                                     contentDescription = label
                                     role = Role.Button
                                     onClick {
@@ -284,14 +287,18 @@ internal fun LivePassCard(
                     )
                     Text(
                         localizer.text("detail.inputNeededAction"),
-                        Modifier.clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { onEditCarrier(null) },
+                        Modifier
+                            .accessibilityFocus(neededFocus)
+                            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { onEditCarrier(null, neededFocus) },
                         color = colors.accent,
                         style = type.footnote.sfLines(),
                     )
                 }
             }
             if (editable) {
-                carrierPrompt(parcel, now, localizer, identities, language)?.let { prompt -> CarrierPrompt(prompt, ink) { onEditCarrier(prompt.carrier) } }
+                carrierPrompt(parcel, now, localizer, identities, language)?.let { prompt ->
+                    CarrierPrompt(prompt, ink) { onEditCarrier(prompt.carrier, it) }
+                }
             }
             Row(horizontalArrangement = Arrangement.spacedBy(18.dp), verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.weight(1f)) {
@@ -337,14 +344,14 @@ internal fun LivePassCard(
                     ),
                     localizer.text("detail.editPostcode").takeIf { parcel.archivedAt == null && editable },
                     Modifier.testTag(PAGE_POSTCODE),
-                ) { onEditCarrier(null) }
+                ) { onEditCarrier(null, it) }
             }
             if (editable && parcel.showsMoreWithPostcode(identities.catalog)) {
                 PostcodeNote(
                     localizer.text("detail.postcodeShowsMore", mapOf("carrier" to identities.displayName(parcel.carrier, language))),
                     localizer.text("detail.inputNeededAction"),
                     Modifier.testTag(PAGE_POSTCODE_MORE),
-                ) { onEditCarrier(null) }
+                ) { onEditCarrier(null, it) }
             }
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(localizer.parcelStatus(parcel), color = ink, style = type.subheadline.sfLines())
@@ -519,18 +526,20 @@ internal fun carrierPrompt(
 
 /**
  * What the page asks of the parcel's carrier in footnote, in the card's ink, and the button that answers it, semibold
- * and 44 tall, which gives under the finger and opens the carrier editor (`action`).
+ * and 44 tall, which gives under the finger and opens the carrier editor (`action`), TalkBack coming back to it.
  */
 @Composable
-private fun CarrierPrompt(prompt: CarrierPromptCopy, tint: Color, action: () -> Unit) {
+private fun CarrierPrompt(prompt: CarrierPromptCopy, tint: Color, action: (AccessibilityFocus) -> Unit) {
     val type = PeekTheme.type
+    val focus = remember { AccessibilityFocus() }
     Column(Modifier.testTag(PAGE_PROMPT).semantics { isTraversalGroup = true }, verticalArrangement = Arrangement.spacedBy(2.dp)) {
         Text(prompt.text, color = tint, style = type.footnote.sfLines())
         if (prompt.action != null) {
             Box(
                 Modifier
                     .heightIn(min = HEADER_BUTTON)
-                    .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = action),
+                    .accessibilityFocus(focus)
+                    .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) { action(focus) },
                 contentAlignment = Alignment.CenterStart,
             ) {
                 Text(prompt.action, color = tint, style = type.style(IosTextStyle.Footnote, FontWeight.SemiBold).sfLines())
@@ -541,18 +550,22 @@ private fun CarrierPrompt(prompt: CarrierPromptCopy, tint: Color, action: () -> 
 
 /**
  * What a postcode note says, in caption secondary, and under it, 4 apart, the button that opens the carrier editor
- * (`action`) in caption semibold, as the iPhone's plain buttons dim while pressed, where it has one.
+ * (`action`) in caption semibold, as the iPhone's plain buttons dim while pressed, where it has one, TalkBack coming
+ * back to it.
  */
 @Composable
-private fun PostcodeNote(text: String, button: String?, modifier: Modifier, action: () -> Unit) {
+private fun PostcodeNote(text: String, button: String?, modifier: Modifier, action: (AccessibilityFocus) -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
+    val focus = remember { AccessibilityFocus() }
     Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(text, color = colors.secondaryLabel, style = type.caption.sfLines())
         if (button != null) {
             Text(
                 button,
-                Modifier.clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action),
+                Modifier
+                    .accessibilityFocus(focus)
+                    .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { action(focus) },
                 color = colors.accent,
                 style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines(),
             )

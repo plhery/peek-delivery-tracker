@@ -88,7 +88,7 @@ class PassNotesScreenshotTest {
     private fun pass(name: String, dark: Boolean = false, parcel: () -> Parcel) = shot(name, dark) {
         LivePassCard(
             parcel(), rememberWorldAtlas(), sample = false, readerLink = false,
-            bell = PassBell(opensAlerts = false) { _, _ -> }, working = false, onMap = {}, onEditCarrier = {}, onRename = {},
+            bell = PassBell(opensAlerts = false) { _, _ -> }, working = false, onMap = {}, onEditCarrier = { _, _ -> }, onRename = {},
         )
     }
 
@@ -253,7 +253,7 @@ class PassNotesScreenshotTest {
                 Column {
                     TrackingNotes(
                         vinyl, editable = true, working = false, ink = PeekTheme.colors.resolve(identities.of(vinyl.carrier, AppLanguage.En).ink),
-                        onEditCarrier = {}, onSwitch = {},
+                        onEditCarrier = {}, onSwitch = { _, _ -> },
                     )
                 }
             }
@@ -281,7 +281,7 @@ class PassNotesScreenshotTest {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 TrackingNotes(
                     kit, editable = true, working = false, ink = PeekTheme.colors.resolve(DemoCards.identities.of(kit.carrier, AppLanguage.En).ink),
-                    onEditCarrier = {}, onSwitch = {},
+                    onEditCarrier = {}, onSwitch = { _, _ -> },
                 )
             }
         }

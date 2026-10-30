@@ -147,7 +147,7 @@ class LivePassTest {
             CardHost(reduceMotion = false) {
                 LivePassCard(
                     parcel(), atlas(), sample = false, readerLink = readerLink, bell = null, working = false, onMap = { onMap() },
-                    onEditCarrier = {}, onRename = {},
+                    onEditCarrier = { _, _ -> }, onRename = {},
                 )
             }
         }
@@ -651,7 +651,7 @@ class LivePassTest {
             CardHost(reduceMotion = reduceMotion) {
                 LivePassCard(
                     parcel, WorldAtlases.loadedOrNull(), sample = false, readerLink = false, bell = null, working = false, onMap = {},
-                    onEditCarrier = {}, onRename = {},
+                    onEditCarrier = { _, _ -> }, onRename = {},
                 )
             }
         }

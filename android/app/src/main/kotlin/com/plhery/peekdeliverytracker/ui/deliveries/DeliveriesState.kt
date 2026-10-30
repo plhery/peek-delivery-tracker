@@ -920,8 +920,16 @@ internal class DeliveriesState(
         private set
 
     /**
+     * The editor whose change was saved, by its request's id, while its sheet goes down: it still says it saves, with
+     * Cancel off, as `save()` leaves `saving` on once the change is saved and the sheet dismissed.
+     */
+    var carrierEditorSaved: UUID? by mutableStateOf(null)
+        private set
+
+    /**
      * The parcel a card's menu asked to change, as it was then (`prompts.changingCarrier`): the editor works on it, even
-     * once it has left the list, as ParcelListView's sheet does. A window made again keeps only its id.
+     * once it has left the list or taken another id, as ParcelListView's sheet does, until its sheet has gone. A window
+     * made again keeps only its id, and holds the parcel it finds by it from then on.
      */
     private var changingParcel: Parcel? = null
 
@@ -930,22 +938,27 @@ internal class DeliveriesState(
      * one the card's menu found.
      */
     fun carrierEditorParcel(request: CarrierEditorRequest, parcels: List<Parcel>): Parcel? {
-        val pageId = request.pageId ?: return changingParcel?.takeIf { it.id == request.parcelId }
-            ?: parcels.firstOrNull { it.id == request.parcelId }
-        return pageParcel(pageId, parcels)
+        val pageId = request.pageId
+        if (pageId != null) return pageParcel(pageId, parcels)
+        val parcel = changingParcel?.takeIf { it.id == request.parcelId } ?: parcels.firstOrNull { it.id == request.parcelId }
+        if (parcel != null) changingParcel = parcel
+        return parcel
     }
 
     /**
      * Opens the carrier editor on the page with `pageId` (`carrierEditor = CarrierEditorRequest(initialCarrier:)`), on
-     * `initialCarrier` where a prompt names one.
+     * `initialCarrier` where a prompt names one. TalkBack goes back to `focus`, the prompt or the mark that asked, once
+     * the editor has closed; from the ••• menu, back to the •••.
      */
-    fun editCarrier(pageId: UUID, initialCarrier: CarrierId? = null) {
+    fun editCarrier(pageId: UUID, initialCarrier: CarrierId? = null, focus: AccessibilityFocus? = null) {
+        if (focus != null) returnFocus = focus
         openCarrierEditor(CarrierEditorRequest(UUID.randomUUID(), pageId, pageId, initialCarrier))
     }
 
     private fun openCarrierEditor(request: CarrierEditorRequest, parcel: Parcel? = null) {
         carrierEditor?.let { source.pageWork.forget(it.id) }
         changingParcel = parcel
+        carrierEditorSaved = null
         carrierEditorClosing = false
         carrierEditor = request
     }
@@ -967,28 +980,34 @@ internal class DeliveriesState(
         }
     }
 
-    /** Cancel, a tap outside, the back, a drag down, or its change saved: the editor closes, and forgets its change. */
+    /**
+     * Cancel, a tap outside, the back, a drag down, or its change saved: the editor closes, and forgets its change. Its
+     * sheet keeps the parcel as it goes down ([carrierEditorClosed]).
+     */
     fun closeCarrierEditor() {
         val request = carrierEditor ?: return
         source.pageWork.forget(request.id)
-        changingParcel = null
         carrierEditor = null
         carrierEditorClosing = true
     }
 
-    /** The editor's sheet has gone. */
+    /** The editor's sheet has gone, and with it the parcel it showed. */
     fun carrierEditorClosed() {
-        if (carrierEditor == null) carrierEditorClosing = false
+        if (carrierEditor != null) return
+        carrierEditorClosing = false
+        carrierEditorSaved = null
+        changingParcel = null
     }
 
     /**
      * The page's switch to the carrier its parcel's number names (`switchCarrier(_:to:)`): one tap moves the parcel to
      * `carrier` (`store.changeCarrier` in the page's `run`), one change at a time, and an alert says why it failed. A
-     * carrier that needs the postcode opens the editor on it instead.
+     * carrier that needs the postcode opens the editor on it instead, TalkBack coming back to `focus`, the switch, once
+     * the editor has closed.
      */
-    fun switchCarrierOnPage(pageId: UUID, parcel: Parcel, carrier: CarrierId) {
+    fun switchCarrierOnPage(pageId: UUID, parcel: Parcel, carrier: CarrierId, focus: AccessibilityFocus? = null) {
         if (CarrierCatalog.shared.requirements(carrier, parcel.trackingNumber).isNotEmpty()) {
-            editCarrier(pageId, carrier)
+            editCarrier(pageId, carrier, focus)
             return
         }
         workOnPage(pageId) { source.changeCarrier(parcel, carrier) }
@@ -1231,16 +1250,20 @@ internal class DeliveriesState(
     }
 
     /**
-     * The page with `pageId` saved a change that leaves it ([PageWork.leaving]): it leaves, if it still shows. The
-     * carrier editor's change, saved by its own id, closes the editor instead.
+     * The page with `pageId` saved a change that leaves it ([PageWork.leaving]): it leaves, if it shows in this window.
+     * The carrier editor's change, saved by its own id, closes this window's editor instead, saying it saves until its
+     * sheet has gone. Another window's is left for it to take, as the process's windows share the work.
      */
     fun leavePage(pageId: UUID, cards: List<UUID>) {
-        source.pageWork.left(pageId)
         if (carrierEditor?.id == pageId) {
+            source.pageWork.left(pageId)
+            carrierEditorSaved = pageId
             closeCarrierEditor()
             return
         }
-        if (navigator.navigation.shown == pageId) leaveShown(cards)
+        if (navigator.navigation.shown != pageId) return
+        source.pageWork.left(pageId)
+        leaveShown(cards)
     }
 
     private fun leaveShown(cards: List<UUID>) {

@@ -1,14 +1,21 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.text.InputType
+import android.view.View
+import android.view.accessibility.AccessibilityManager
 import android.view.inputmethod.EditorInfo
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
@@ -24,6 +31,7 @@ import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithTag
@@ -32,11 +40,17 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.Density
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -59,6 +73,7 @@ import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
 import java.time.Duration
 import java.util.UUID
+import kotlin.math.roundToInt
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -68,6 +83,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -114,11 +130,13 @@ class ChangeCarrierTest {
         list: List<Parcel> = parcels,
         session: AuthenticationState = AuthenticationState.Demo,
         recreation: Recreation? = null,
+        fontScale: Float = 1f,
         prepare: FakeDeliveries.() -> Unit = {},
     ) {
         source = FakeDeliveries(list, session).apply(prepare)
         val content: @Composable () -> Unit = {
-            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
                 RootHost(state = session, source = source, reduceMotion = false)
             }
         }
@@ -180,6 +198,63 @@ class ChangeCarrierTest {
     }
 
     private fun carrierRowValue(): String? = node(CHANGE_CARRIER_ROW).fetchSemanticsNode().config.getOrNull(SemanticsProperties.StateDescription)
+
+    /**
+     * Steps the frames from `saved`, which lets a save end, until the editor has closed, then a little more, and runs
+     * `check` on the sheet halfway down, before it has gone.
+     */
+    private fun goingDown(saved: () -> Unit, check: () -> Unit) {
+        settle()
+        compose.mainClock.autoAdvance = false
+        saved()
+        var frames = 0
+        while (deliveries.carrierEditor != null && frames++ < 60) compose.mainClock.advanceTimeBy(16)
+        assertNull(deliveries.carrierEditor)
+        compose.mainClock.advanceTimeBy(150)
+        node(CHANGE_CARRIER_SHEET).assertExists()
+        check()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(!exists(CHANGE_CARRIER_SHEET))
+    }
+
+    /** Still saying it saves: "Changing…", and Cancel off. */
+    private fun assertSaving() {
+        node(CHANGE_CARRIER_SAVE).assertTextEquals("Changing…").assertIsNotEnabled()
+        node(CHANGE_CARRIER_CANCEL).assertIsNotEnabled()
+    }
+
+    /** A keyboard `height` tall over the window's foot, as the system's comes up. */
+    private fun keyboard(height: Int) {
+        val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+        compose.runOnUiThread {
+            val px = (height * view.resources.displayMetrics.density).roundToInt()
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.ime(), Insets.of(0, 0, 0, px))
+                .setVisible(WindowInsetsCompat.Type.ime(), px > 0)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(view, insets)
+        }
+        compose.waitForIdle()
+    }
+
+    private fun talkBack(): View {
+        val root = compose.onRoot().fetchSemanticsNode().root as ViewRootForTest
+        val manager = shadowOf(compose.activity.getSystemService(AccessibilityManager::class.java))
+        compose.runOnUiThread {
+            manager.setEnabled(true)
+            manager.setTouchExplorationEnabled(true)
+            root.forceAccessibilityForTesting(true)
+        }
+        return root.view
+    }
+
+    private fun SemanticsNodeInteraction.hasTalkBackFocus(view: View): Boolean {
+        val id = fetchSemanticsNode().id
+        var focused = false
+        compose.runOnUiThread { focused = view.accessibilityNodeProvider.createAccessibilityNodeInfo(id)?.isAccessibilityFocused == true }
+        return focused
+    }
 
     @Test
     fun anUnfiledParcelOpensOnAutomaticDetectionAtTheMediumDetentFromItsPage() {
@@ -405,12 +480,33 @@ class ChangeCarrierTest {
         settle()
         node(CHANGE_CARRIER_SHEET).assertExists()
 
-        source.changing!!.complete(Unit)
-        settle()
-        assertTrue(!exists(CHANGE_CARRIER_SHEET))
+        // Saved, it goes down still saying so.
+        goingDown({ compose.runOnUiThread { source.changing!!.complete(Unit) } }) { assertSaving() }
         assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(lamp.id, CarrierId.Ups, null, null, null, null)), source.carrierRequests)
         // The page stays, on its parcel.
         assertEquals(listOf(lamp.id), deliveries.navigator.navigation.path)
+    }
+
+    @Test
+    fun aSaveGoesOnThroughTheWindowMadeAgainWithCancelAndDismissalOff() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation) { changing = CompletableDeferred() }
+        compose.openCard(lamp.label)
+        settle()
+        compose.runOnUiThread { deliveries.editCarrier(lamp.id, CarrierId.Ups) }
+        settle()
+        node(CHANGE_CARRIER_SAVE).performClick()
+        settle()
+        recreation.recreate()
+        settle()
+        assertSaving()
+        back()
+        settle()
+        compose.onRoot().performTouchInput { click(Offset(width / 2f, 60f)) }
+        settle()
+        node(CHANGE_CARRIER_SHEET).assertExists()
+        goingDown({ compose.runOnUiThread { source.changing!!.complete(Unit) } }) { assertSaving() }
+        assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(lamp.id, CarrierId.Ups, null, null, null, null)), source.carrierRequests)
     }
 
     @Test
@@ -485,6 +581,23 @@ class ChangeCarrierTest {
         settle()
         // Switzerland isn't Mondial Relay's home: its country goes with the postcode.
         assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(chair.id, CarrierId.MondialRelay, null, "8001", "CH", null)), source.carrierRequests)
+    }
+
+    @Test
+    fun anotherCarrierAndItsFieldsStayThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        fromPage(chair)
+        pushPicker()
+        pick(CarrierId.GlsCh)
+        node(CHANGE_CARRIER_POSTCODE).performTextInput("8001")
+        recreation.recreate()
+        settle()
+        assertEquals("GLS Switzerland", carrierRowValue())
+        assertEquals("8001", fieldText(CHANGE_CARRIER_POSTCODE))
+        node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(chair.id, CarrierId.GlsCh, null, "8001", null, null)), source.carrierRequests)
     }
 
     @Test
@@ -570,4 +683,114 @@ class ChangeCarrierTest {
         node(CHANGE_CARRIER_SHEET).assertExists()
         assertNotNull(deliveries.carrierEditor)
     }
+
+    @Test
+    fun aCardsSheetGoesDownOnItsParcelWhenTheChangeFilesItAnew() {
+        // A guest's change makes the parcel anew, under another id.
+        show { changedId = UUID.fromString("00000000-0000-4000-8000-000000000599") }
+        fromCard(chair)
+        node(CHANGE_CARRIER_POSTCODE).performTextInput("8001")
+        goingDown({ node(CHANGE_CARRIER_SAVE).performSemanticsAction(SemanticsActions.OnClick) }) {
+            node(CHANGE_CARRIER_NUMBER).assertTextEquals("76434219")
+            assertEquals("8001", fieldText(CHANGE_CARRIER_POSTCODE))
+        }
+    }
+
+    @Test
+    fun aCardsSheetMadeAgainGoesDownOnItsParcelWhenTheChangeFilesItAnew() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation) { changedId = UUID.fromString("00000000-0000-4000-8000-000000000599") }
+        fromCard(chair)
+        recreation.recreate()
+        settle()
+        node(CHANGE_CARRIER_POSTCODE).performTextInput("8001")
+        goingDown({ node(CHANGE_CARRIER_SAVE).performSemanticsAction(SemanticsActions.OnClick) }) {
+            node(CHANGE_CARRIER_NUMBER).assertTextEquals("76434219")
+            assertEquals("Mondial Relay", carrierRowValue())
+        }
+    }
+
+    @Test
+    fun talkBackGoesBackToThePromptThatOpenedTheEditor() {
+        val asked = lamp.copy(
+            carrierData = CarrierData(routing = CarrierDataRouting(inputNeeded = CarrierInputNeeded(CarrierId.Dpd, CarrierInputNeededField.DpdPostcode))),
+        )
+        show(listOf(asked, chair, kettle, boots), session = AuthenticationState.Welcome)
+        val view = talkBack()
+        compose.openCard(asked.label)
+        settle()
+        val prompt = compose.onNode(hasText("Add postcode") and hasClickAction() and hasAnyAncestor(hasTestTag(PAGE_PROMPT)))
+        prompt.performClick()
+        settle()
+        node(CHANGE_CARRIER_CANCEL).performClick()
+        settle()
+        assertTrue(!exists(CHANGE_CARRIER_SHEET))
+        assertTrue(prompt.hasTalkBackFocus(view))
+    }
+
+    @Test
+    fun atTheLargestTextTheBarsTitleIsWholeAtTheDefaultSize() {
+        show(fontScale = 2f)
+        fromCard(chair)
+        val title = compose.onNode(isHeading() and hasText("Change carrier"))
+        val layouts = mutableListOf<TextLayoutResult>()
+        title.fetchSemanticsNode().config[SemanticsActions.GetTextLayoutResult].action!!.invoke(layouts)
+        val layout = layouts.single()
+        assertEquals(1, layout.lineCount)
+        assertTrue(!layout.isLineEllipsized(0))
+        assertEquals("Change carrier".length, layout.getLineEnd(0))
+        // Headline's 17 points, whatever the reader's size.
+        assertEquals(17f, with(layout.layoutInput.density) { layout.layoutInput.style.fontSize.toDp().value }, 0.01f)
+    }
+
+    @Test
+    fun theFocusedFieldComesAboveTheKeyboardAtTheLargestText() {
+        show(fontScale = 2f)
+        fromCard(chair)
+        val window = windowHeight()
+        node(CHANGE_CARRIER_POSTCODE).performClick()
+        settle()
+        keyboard(KEYBOARD)
+        settle()
+        assertLarge()
+        val field = node(CHANGE_CARRIER_POSTCODE).getUnclippedBoundsInRoot()
+        assertTrue("Field at ${field.top}..${field.bottom}, keyboard from ${window - KEYBOARD}", field.bottom.value <= window - KEYBOARD + 0.5f)
+        // Clear of the bar, 63 tall.
+        assertTrue("Field at ${field.top}, under the bar", field.top.value >= sheetTop() + 62.5f)
+        node(CHANGE_CARRIER_POSTCODE).assertIsDisplayed()
+    }
+
+    @Test
+    fun aChangeSavedInOneOfTwoWindowsClosesThatWindowsSheet() {
+        // Two windows of the app, side by side, over the process's one store.
+        val windows = mutableListOf<DeliveriesState>()
+        source = FakeDeliveries(parcels, AuthenticationState.Demo)
+        compose.setContent {
+            CompositionLocalProvider(LocalDeliveriesState provides { if (windows.none { window -> window === it }) windows += it }) {
+                RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false) {
+                    Row(Modifier.fillMaxSize()) {
+                        DeliveriesTab(source, Modifier.weight(1f))
+                        DeliveriesTab(source, Modifier.weight(1f))
+                    }
+                }
+            }
+        }
+        compose.waitForIdle()
+        assertEquals(2, windows.size)
+        // The second window's change, then the first's.
+        for ((window, parcel) in listOf(windows[1] to lamp, windows[0] to boots)) {
+            compose.runOnUiThread { window.navigator.open(parcel.id) }
+            settle()
+            compose.runOnUiThread { window.editCarrier(parcel.id, CarrierId.Ups) }
+            settle()
+            node(CHANGE_CARRIER_SAVE).performClick()
+            settle()
+            assertTrue(!exists(CHANGE_CARRIER_SHEET))
+            windows.forEach { assertNull(it.carrierEditor) }
+            assertTrue(source.pageWork.leaving.isEmpty())
+        }
+        assertEquals(listOf(lamp.id to CarrierId.Ups, boots.id to CarrierId.Ups), source.carrierChanges)
+    }
 }
+
+private const val KEYBOARD = 336

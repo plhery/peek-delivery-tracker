@@ -87,6 +87,9 @@ class FakeDeliveries(
     /** Holds each carrier change until the test lets it go. */
     var changing: CompletableDeferred<Unit>? = null
 
+    /** The id a carrier change files the parcel under, where a guest's change makes it anew, or null for its own. */
+    var changedId: UUID? = null
+
     /** Holds each check of one parcel until the test lets it go. */
     var checkingParcel: CompletableDeferred<Unit>? = null
 
@@ -211,7 +214,11 @@ class FakeDeliveries(
         carrierChanges += parcel.id to carrier
         carrierRequests += CarrierChangeRequest(parcel.id, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, providerPostcode)
         parcels.value = parcels.value.map {
-            if (it.id == parcel.id) it.copy(carrier = carrier, syncError = null, trackingUrl = trackingUrl, dpdPostcode = dpdPostcode) else it
+            if (it.id != parcel.id) {
+                it
+            } else {
+                it.copy(id = changedId ?: it.id, carrier = carrier, syncError = null, trackingUrl = trackingUrl, dpdPostcode = dpdPostcode)
+            }
         }
     }
 

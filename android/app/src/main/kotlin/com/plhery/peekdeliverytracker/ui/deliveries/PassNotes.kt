@@ -45,8 +45,10 @@ import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.amazonShippingHistoryExpired
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
@@ -310,7 +312,8 @@ internal fun ShipmentFacts(facts: List<ShipmentFact>, modifier: Modifier = Modif
  *   update the details its carrier asked for and still needs, the switch to the carrier that claims the number
  *   (semibold, `onSwitch`, waiting while a change is saved, `working`), and the carrier's change for a refused number.
  *
- * The carrier's changes open the editor (`onEditCarrier`).
+ * The carrier's changes open the editor (`onEditCarrier`), and the switch moves the parcel or opens it, TalkBack coming
+ * back to the button that did.
  */
 @Composable
 internal fun TrackingNotes(
@@ -318,8 +321,8 @@ internal fun TrackingNotes(
     editable: Boolean,
     working: Boolean,
     ink: Color,
-    onEditCarrier: () -> Unit,
-    onSwitch: (CarrierId) -> Unit,
+    onEditCarrier: (AccessibilityFocus) -> Unit,
+    onSwitch: (CarrierId, AccessibilityFocus) -> Unit,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -362,23 +365,29 @@ internal fun TrackingNotes(
         NoteButton(
             localizer.text("detail.switchCarrier", mapOf("carrier" to identities.displayName(claiming, language))), ink,
             FontWeight.SemiBold, enabled = !working,
-        ) { onSwitch(claiming) }
+        ) { onSwitch(claiming, it) }
     }
     if (editable && error == "carrier:refused_number") NoteButton(localizer.text("detail.changeCarrier"), ink, action = onEditCarrier)
 }
 
-/** A plain button of the page's notes: its words in footnote, in `tint`, as the iPhone's plain buttons dim while pressed. */
+/**
+ * A plain button of the page's notes: its words in footnote, in `tint`, as the iPhone's plain buttons dim while pressed.
+ * Its `action` hears where TalkBack comes back to, the button itself.
+ */
 @Composable
 private fun NoteButton(
     text: String,
     tint: Color,
     weight: FontWeight = FontWeight.Normal,
     enabled: Boolean = true,
-    action: () -> Unit,
+    action: (AccessibilityFocus) -> Unit,
 ) {
+    val focus = remember { AccessibilityFocus() }
     Text(
         text,
-        Modifier.clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action),
+        Modifier
+            .accessibilityFocus(focus)
+            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { action(focus) },
         color = tint,
         style = PeekTheme.type.style(IosTextStyle.Footnote, weight).sfLines(),
     )

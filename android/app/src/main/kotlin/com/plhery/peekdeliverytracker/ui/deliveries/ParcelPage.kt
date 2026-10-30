@@ -268,8 +268,8 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     }
     LivePassCard(
         parcel, atlas, sample = sample, readerLink = state.source.viewerLink(parcel) != null, bell = bell,
-        working = state.pageWorking(pageId), onMap = { state.openMap(pageId, it) }, onEditCarrier = { state.editCarrier(pageId, it) },
-        onRename = { state.renameOnPage(pageId, it) },
+        working = state.pageWorking(pageId), onMap = { state.openMap(pageId, it) },
+        onEditCarrier = { carrier, focus -> state.editCarrier(pageId, carrier, focus) }, onRename = { state.renameOnPage(pageId, it) },
     )
 }
 
@@ -350,8 +350,8 @@ private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID
     val identity = shownCarrierIdentity(parcel, localizer, LocalLanguage.current) ?: return
     TrackingNotes(
         parcel, editable = state.sample(pageId) == null && state.source.viewerLink(parcel) == null, working = state.pageWorking(pageId),
-        ink = PeekTheme.colors.resolve(identity.ink), onEditCarrier = { state.editCarrier(pageId) },
-        onSwitch = { state.switchCarrierOnPage(pageId, parcel, it) },
+        ink = PeekTheme.colors.resolve(identity.ink), onEditCarrier = { state.editCarrier(pageId, focus = it) },
+        onSwitch = { carrier, focus -> state.switchCarrierOnPage(pageId, parcel, carrier, focus) },
     )
 }
 

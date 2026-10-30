@@ -192,7 +192,7 @@ class PassNotesTest {
             CardHost(reduceMotion = false) {
                 LivePassCard(
                     passParcel!!, WorldAtlases.loadedOrNull(), sample = sample, readerLink = readerLink, bell = null,
-                    working = false, onMap = {}, onEditCarrier = { edits += it }, onRename = {},
+                    working = false, onMap = {}, onEditCarrier = { carrier, _ -> edits += carrier }, onRename = {},
                 )
             }
         }
@@ -645,7 +645,7 @@ class PassNotesTest {
             CardHost {
                 CompositionLocalProvider(LocalCarrierIdentities provides linkOnlyUps) {
                     Column {
-                        TrackingNotes(vinyl, editable, working = false, ink = Color.Blue, onEditCarrier = { changes++ }, onSwitch = {})
+                        TrackingNotes(vinyl, editable, working = false, ink = Color.Blue, onEditCarrier = { changes++ }, onSwitch = { _, _ -> })
                     }
                 }
             }

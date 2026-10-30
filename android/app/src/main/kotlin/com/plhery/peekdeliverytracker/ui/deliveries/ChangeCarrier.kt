@@ -91,9 +91,10 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
  * the list), over the whole window: `ChangeCarrierView` on the sheet's medium and large detents, a form sheet in a
  * regular window (`formOnPad(phoneDetents: [.medium, .large], selection:)`). It opens at the large detent where the
  * carrier asks for something, and goes there for the picker. The page's goes with its page, and draws nothing once its
- * parcel has gone, as the iPhone's `if let parcel` does; the list's works on the parcel as the card's menu found it.
- * While its change is saved, nothing but the change dismisses it (`interactiveDismissDisabled(saving)`). Its fields,
- * the carrier chosen, its detent and the picker pushed stay through a window made again.
+ * parcel has gone, as the iPhone's `if let parcel` does; the list's works on the parcel as the card's menu found it,
+ * until it has gone down. While its change is saved, nothing but the change dismisses it
+ * (`interactiveDismissDisabled(saving)`), and once saved it goes down still saying so. Its fields, the carrier chosen,
+ * its detent and the picker pushed stay through a window made again.
  */
 @Composable
 internal fun CarrierEditorHost(state: DeliveriesState) {
@@ -125,7 +126,8 @@ internal fun CarrierEditorHost(state: DeliveriesState) {
         form.roomy = needsRoom
     }
     val work = state.source.pageWork
-    val saving = editing != null && work.working(editing.id)
+    // Saved, it says so until it has gone, as `save()` leaves `saving` on.
+    val saving = editing != null && (work.working(editing.id) || editing.id in work.leaving || state.carrierEditorSaved == editing.id)
     Sheet(
         visible = visible,
         onDismiss = { state.closeCarrierEditor() },

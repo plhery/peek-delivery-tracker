@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { it } from 'node:test';
@@ -153,7 +153,22 @@ it('tells IndexNow once the site serves the deployed commit, from a job of its o
   assert.doesNotMatch(deploy, /indexnow|sitemap|contents: write/i);
   const live = step(deploy, 'Wait until the public site serves this commit');
   assert.match(live, /\n {8}id: live\n/);
-  assert.match(live, /run: scripts\/wait-for-commit\.sh "\$DEPLOY_URL" "\$COMMIT"$/);
+  // A commit older than the script is deployed without the wait, and still tells IndexNow.
+  const script = live.split('run: |\n')[1];
+  assert.ok(script, 'the wait is a script of several lines');
+  const directory = mkdtempSync(join(tmpdir(), 'peek-wait-step-'));
+  const wait = (env = {}) => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', script], {
+    cwd: directory, encoding: 'utf8', env: { ...process.env, DEPLOY_URL: 'https://peek.example', COMMIT: 'a'.repeat(40), ...env },
+  });
+  try {
+    assert.match(wait(), /^::warning::a{40} has no scripts\/wait-for-commit\.sh: the deploy does not wait for the site to serve it\.\n$/);
+    mkdirSync(join(directory, 'scripts'));
+    writeFileSync(join(directory, 'scripts/wait-for-commit.sh'), '#!/bin/sh\necho "waited for $2 on $1"\nexit "${WAIT_EXIT:-0}"\n', { mode: 0o755 });
+    assert.equal(wait(), `waited for ${'a'.repeat(40)} on https://peek.example\n`);
+    assert.throws(() => wait({ WAIT_EXIT: '1' }), (error) => error.status === 1);
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
   assert.ok(deploy.indexOf(`- name: ${DEPLOY_STEP}`) < deploy.indexOf('- name: Wait until the public site serves this commit'));
   assert.ok(deploy.indexOf('- name: Wait until the public site serves this commit') < deploy.indexOf('- name: Check the public site'));
   assert.match(deploy, /\n {4}outputs:\n(?: {6}#.*\n)* {6}live: \$\{\{ steps\.live\.outcome == 'success' \}\}\n/);

@@ -108,12 +108,18 @@ jobs:
             "$DEPLOY_SSH_TARGET" deploy "$COMMIT"
       # Once the new container is healthy, the old one may still answer for a while: what follows
       # reads the site only once it serves this commit, and fails saying what it serves instead.
+      # A commit older than the script has a build that names no commit, so it is not waited for.
       - name: Wait until the public site serves this commit
         id: live
         if: steps.current.outputs.deploy != 'false'
         env:
           DEPLOY_URL: ${{ vars.DEPLOY_URL }}
-        run: scripts/wait-for-commit.sh "$DEPLOY_URL" "$COMMIT"
+        run: |
+          if [ ! -f scripts/wait-for-commit.sh ]; then
+            echo "::warning::$COMMIT has no scripts/wait-for-commit.sh: the deploy does not wait for the site to serve it."
+            exit 0
+          fi
+          scripts/wait-for-commit.sh "$DEPLOY_URL" "$COMMIT"
       - name: Check the public site
         if: steps.current.outputs.deploy != 'false'
         env:

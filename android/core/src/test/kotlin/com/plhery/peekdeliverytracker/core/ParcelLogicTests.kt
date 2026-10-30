@@ -522,6 +522,35 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun asksForThePostcodeACheckedParcelsCarrierShowsMoreWith() {
+        val catalog = CarrierCatalog(cacheFile = null)
+        val json = """
+            {
+              "packages": [{
+                "id": "${UUID.randomUUID().uuidString}",
+                "tracking_number": "06080000000002",
+                "label": "Test parcel",
+                "carrier": "dpd",
+                "created_at": "2026-08-01T10:00:00Z",
+                "last_synced_at": "2026-08-02T10:00:00Z",
+                "sync_status": "ok",
+                "notifications_muted": false,
+                "tracking_events": []
+              }]
+            }
+        """.trimIndent()
+        val parcel = ApiJson.decodeFromString(PackageListResponse.serializer(), json).packages.first()
+        assertTrue(parcel.showsMoreWithPostcode(catalog))
+
+        // Not before its first check, which gives it the account's own postcode, nor with one, nor once archived.
+        assertFalse(parcel.copy(lastSyncedAt = null).showsMoreWithPostcode(catalog))
+        assertFalse(parcel.copy(dpdPostcode = "8000").showsMoreWithPostcode(catalog))
+        assertFalse(parcel.copy(archivedAt = "2026-08-10T10:00:00Z").showsMoreWithPostcode(catalog))
+        // DHL needs it for some twelve-digit numbers only, and asks for those.
+        assertFalse(parcel.copy(carrier = CarrierId.Dhl, trackingNumber = "000000000012").showsMoreWithPostcode(catalog))
+    }
+
+    @Test
     fun namesTheLikelyCarrierWhileNobodyAnsweredAndAsksToChooseAfterAWeek() {
         val packageId = UUID.randomUUID()
         val json = """

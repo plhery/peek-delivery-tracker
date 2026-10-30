@@ -154,6 +154,18 @@ val Parcel.inputSuggestedPrompt: CarrierInputSuggested?
         return suggested
     }
 
+/**
+ * Whether the parcel's carrier shows more with the delivery postcode it was saved without. An account's own postcode
+ * is given at the next check, so this asks those who gave none, once the parcel has been checked.
+ */
+fun Parcel.showsMoreWithPostcode(catalog: CarrierCatalog): Boolean {
+    if (inputNeededPrompt != null || inputSuggestedPrompt != null || dpdPostcode?.nonEmpty != null || !isActive ||
+        lastSyncedAt == null
+    ) return false
+    return catalog.requirements(carrier, trackingNumber)
+        .any { it.field == CarrierRequirement.Field.DpdPostcode && it.showsMore == true }
+}
+
 /** How long a carrier may go without listing a number of its own format before the reader is asked to check it, in seconds. */
 val Parcel.Companion.likelyCarrierWait: Double get() = 7 * 24 * 60 * 60.0
 

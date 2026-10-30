@@ -11,6 +11,8 @@ data class CarrierRequirement(
     val validator: String? = null,
     val whenTrackingNumber: String? = null,
     val optional: Boolean? = null,
+    /** An optional input the carrier shows more of the parcel with, worth asking for when the parcel has none. */
+    val showsMore: Boolean? = null,
     /** The carrier's lookup reads the country the postcode is from, so the field names it; others read the postcode alone. */
     val readsCountry: Boolean? = null,
     val label: String,

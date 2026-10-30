@@ -700,8 +700,8 @@ class ParcelPageTest {
         show(AuthenticationState.Welcome)
         val view = talkBack()
         open("Birthday gift")
-        val title = compose.onNode(hasText("Birthday gift", substring = true) and hasAnyAncestor(hasTestTag(PAGE_CONTENT)))
-        assertTrue(title.hasTalkBackFocus(view))
+        // The pass's first element: its carrier, which a tap changes.
+        assertTrue(compose.onNodeWithTag(PAGE_MARKS).hasTalkBackFocus(view))
 
         openMenu()
         assertTrue(item(ParcelMenuItem.Rename).hasTalkBackFocus(view))

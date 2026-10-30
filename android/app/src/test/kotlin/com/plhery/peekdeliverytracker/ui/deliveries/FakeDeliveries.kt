@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
@@ -22,10 +23,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 /**
  * The deliveries' stores as a test sets them: its parcels, the session, what loads, and what the list asked of them.
  * A new process is a new `launch`, and the app's scope outlives every window, on the test's clock once `RootHost` shows
- * them ([dispatcher]). Archiving, restoring and deleting change the parcels as the store does, or fail with `failure`,
- * an archive once `archiving` lets it go when a test holds it; a check of every parcel answers `checkResult`, or waits
- * for `checking` when a test holds it. The rating prompt keeps its days in a store of its own, in UTC, and the system's
- * prompt is a fake that notes each step ([reviewCalls]).
+ * them ([dispatcher]). Archiving, restoring, deleting and muting change the parcels as the store does, or fail with
+ * `failure`, an archive once `archiving` lets it go when a test holds it, and a mute once `muting` does; a check of
+ * every parcel answers `checkResult`, or waits for `checking` when a test holds it. The rating prompt keeps its days in
+ * a store of its own, in UTC, and the system's prompt is a fake that notes each step ([reviewCalls]).
  */
 class FakeDeliveries(
     parcels: List<Parcel> = emptyList(),
@@ -38,6 +39,7 @@ class FakeDeliveries(
     override val errorMessage = MutableStateFlow<String?>(null)
     override val session = MutableStateFlow(session)
     override val undoParcel = MutableStateFlow<Parcel?>(null)
+    override val deliveryEmail = MutableStateFlow<DeliveryEmail?>(null)
     override val homePageUrl = "https://example.com/"
     override val privacyUrl = "https://example.com/privacy"
     private val job = SupervisorJob()
@@ -69,10 +71,14 @@ class FakeDeliveries(
     /** Holds each archive until the test lets it go, as a slow connection would. */
     var archiving: CompletableDeferred<Unit>? = null
 
-    /** The parcels archived, restored and deleted, in their order. */
+    /** Holds each mute until the test lets it go. */
+    var muting: CompletableDeferred<Unit>? = null
+
+    /** The parcels archived, restored and deleted, in their order, and each mute asked for with its new setting. */
     val archived = mutableListOf<UUID>()
     val restored = mutableListOf<UUID>()
     val deleted = mutableListOf<UUID>()
+    val mutes = mutableListOf<Pair<UUID, Boolean>>()
 
     var viewerLinks: Map<UUID, String> = emptyMap()
 
@@ -137,6 +143,13 @@ class FakeDeliveries(
         deleted += parcel.id
         parcels.value = parcels.value.filter { it.id != parcel.id }
         if (undoParcel.value?.id == parcel.id) undoParcel.value = null
+    }
+
+    override suspend fun setMuted(parcel: Parcel, muted: Boolean) {
+        muting?.await()
+        failure?.let { throw it }
+        mutes += parcel.id to muted
+        parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(notificationsMuted = muted) else it }
     }
 
     override fun viewerLink(parcel: Parcel): String? = viewerLinks[parcel.id]

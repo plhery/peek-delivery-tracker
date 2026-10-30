@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.zoom
 
+import android.os.Looper
 import androidx.activity.BackEventCompat
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
@@ -35,8 +36,8 @@ import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.performMouseInput
 import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performTouchInput
@@ -47,15 +48,17 @@ import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
-import kotlin.math.abs
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
+import java.time.Duration
+import kotlin.math.abs
 
 /**
  * The zoom with a page whose content scrolls, over a root with a card and a button: on a 390 × 844 dp phone, two pixels
@@ -383,16 +386,28 @@ class ZoomStackTest {
 
     /**
      * How much of each of the bar's squares is drawn, against what is drawn just beside it, 80 dp down: black over
-     * anything, a square drawn at `a` leaves `1 - a` of what is under it. It shows `bar`, or the frame's `before`, as
-     * Robolectric's capture now and then shows a layer's alpha a frame late.
+     * anything, a square drawn at `a` leaves `1 - a` of what is under it. It shows `bar`. Robolectric's capture now and
+     * then shows a layer's alpha a frame or two late, so with the flight held it lets the window draw again; a
+     * crossfade's layer can still be a frame behind then, at `before`.
      */
     private fun assertDrawn(bar: ZoomBar, before: ZoomBar) {
-        val image = compose.onRoot().captureToImage().asAndroidBitmap()
-        fun green(x: Int) = ((image.getPixel(x * 2, 160) shr 8) and 0xFF).toFloat()
-        fun assertShows(item: String, now: Float, then: Float, drawn: Float) =
-            assertTrue("$item drawn at $drawn, $then then $now", abs(drawn - now) <= 0.02f || abs(drawn - then) <= 0.02f)
-        assertShows("‹", bar.leading, before.leading, 1f - green(58) / green(62))
-        assertShows("•••", bar.trailing, before.trailing, 1f - green(332) / green(328))
+        fun drawn(): Pair<Float, Float> {
+            val image = compose.onRoot().captureToImage().asAndroidBitmap()
+            fun green(x: Int) = ((image.getPixel(x * 2, 160) shr 8) and 0xFF).toFloat()
+            return (1f - green(58) / green(62)) to (1f - green(332) / green(328))
+        }
+        fun ZoomBar.drawnIn(d: Pair<Float, Float>) = abs(d.first - leading) <= 0.02f && abs(d.second - trailing) <= 0.02f
+        var d = drawn()
+        repeat(3) {
+            if (bar.drawnIn(d)) return
+            // The window draws on Robolectric's own clock, which the test's frame clock doesn't move.
+            shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+            d = drawn()
+        }
+        assertTrue(
+            "‹ drawn at ${d.first} for ${bar.leading} (${before.leading}), ••• at ${d.second} for ${bar.trailing}",
+            bar.drawnIn(d) || before.drawnIn(d),
+        )
     }
 
     @Test
@@ -500,13 +515,16 @@ class ZoomStackTest {
                 assertEquals(bar.leading, bar.trailing, 0f)
                 assertEquals(1f - bar.leading, bar.root, 0.0001f)
                 assertEquals(1f - bar.leading, bar.title, 0.0001f)
-                assertDrawn(bar, before)
+                val onward = if (next == null) bar.leading <= before.leading else bar.leading >= before.leading
+                assertTrue("$next went back to ${bar.leading} from ${before.leading}", onward)
                 before = bar
                 if (bar.leading > 0.2f && bar.leading < 0.8f) partway = true
             }
             assertTrue("Never partway to $next", partway)
             compose.mainClock.advanceTimeBy(2_000)
             assertEquals(if (next == null) ZoomBar.Root else ZoomBar(leading = 1f, trailing = 1f, root = 0f, title = 0f), transition.bar)
+            // Robolectric's capture of a crossfading layer can be frames behind; where it settles, it is drawn so.
+            assertDrawn(transition.bar, transition.bar)
         }
     }
 

@@ -387,8 +387,8 @@ class DeliveriesTabTest {
         show()
         val view = talkBack()
         open("New trainers")
-        val title = compose.onNode(hasText("New trainers", substring = true) and hasAnyAncestor(hasTestTag(PARCEL_PAGE)))
-        assertTrue(title.hasTalkBackFocus(view))
+        // The pass's first element: its carrier, which a tap changes.
+        assertTrue(compose.onNode(hasTestTag(PAGE_MARKS) and hasAnyAncestor(hasTestTag(PARCEL_PAGE))).hasTalkBackFocus(view))
 
         back()
         compose.mainClock.advanceTimeBy(1_000)

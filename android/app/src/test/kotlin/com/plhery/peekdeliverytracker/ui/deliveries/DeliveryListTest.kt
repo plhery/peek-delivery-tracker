@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import android.view.KeyEvent
 import android.view.View
+import android.view.accessibility.AccessibilityManager
 import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.Box
@@ -404,7 +405,10 @@ class DeliveryListTest {
     @Test
     fun theRefreshButtonAsksForFramesOnlyWhileTheParcelsAreChecked() {
         compose.mainClock.autoAdvance = false
-        show()
+        // The list alone, its button there for TalkBack: beside it, the page's map and Pip ask for frames of their own.
+        show(width = 600.dp)
+        val manager = shadowOf(view.context.getSystemService(AccessibilityManager::class.java))
+        compose.runOnUiThread { manager.setTouchExplorationEnabled(true) }
         compose.mainClock.advanceTimeBy(5_000)
         compose.onNodeWithTag(REFRESH_BUTTON).assertExists()
         assertFalse(waitsForAFrame())

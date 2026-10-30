@@ -73,8 +73,8 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertNotSame
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -167,7 +167,13 @@ class PassNotesTest {
 
     private fun opened(): Intent? = shadowOf(ApplicationProvider.getApplicationContext<Application>()).nextStartedActivity
 
-    private fun editor(): Pair<UUID, CarrierId?>? = deliveries.carrierEditor?.let { it.pageId to it.initialCarrier }
+    private fun editor(): Pair<UUID?, CarrierId?>? = deliveries.carrierEditor?.let { it.pageId to it.initialCarrier }
+
+    /** Cancels the carrier editor, whose sheet keeps the page from taps while it shows. */
+    private fun cancelEditor() {
+        compose.onNodeWithTag(CHANGE_CARRIER_CANCEL).performClick()
+        settle()
+    }
 
     // The pass on its own.
 
@@ -346,13 +352,14 @@ class PassNotesTest {
         compose.onNode(hasText("Add postcode") and hasClickAction() and hasAnyAncestor(hasTestTag(PAGE_PROMPT))).performClick()
         settle()
         assertEquals(gift.id to CarrierId.Dpd, editor())
-        val first = deliveries.carrierEditor
+        val first = deliveries.carrierEditor?.id
+        cancelEditor()
 
         compose.onNodeWithTag(PAGE_MARKS).performClick()
         settle()
         assertEquals(gift.id to null, editor())
         // Each a request of its own, as the iPhone's has its own id.
-        assertNotSame(first, deliveries.carrierEditor)
+        assertNotEquals(first, deliveries.carrierEditor?.id)
     }
 
     @Test
@@ -698,6 +705,7 @@ class PassNotesTest {
         button("Update tracking details").performScrollTo().performClick()
         settle()
         assertEquals(kit to null, editor())
+        cancelEditor()
 
         compose.runOnUiThread { source.parcels.value = demo("Trail weekend kit") { it.failing("carrier:invalid_input") } }
         settle()
@@ -733,6 +741,7 @@ class PassNotesTest {
         button("Change carrier").performScrollTo().performClick()
         settle()
         assertEquals(gift to null, editor())
+        cancelEditor()
 
         button("Switch to UPS").performScrollTo().performClick()
         settle()

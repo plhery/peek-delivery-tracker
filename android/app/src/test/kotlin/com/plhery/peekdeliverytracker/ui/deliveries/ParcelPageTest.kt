@@ -475,15 +475,25 @@ class ParcelPageTest {
     }
 
     @Test
-    fun changeCarrierDoesNothingYet() {
+    fun changeCarrierOpensTheCarrierEditorOverThePage() {
         show()
         open("Birthday gift")
         openMenu()
         choose(ParcelMenuItem.ChangeCarrier)
         compose.onNodeWithTag(PAGE_MENU).assertDoesNotExist()
+        compose.onNodeWithTag(CHANGE_CARRIER_SHEET).assertExists()
+        // The page under it, hidden from TalkBack while the sheet shows.
+        compose.onNodeWithTag(PARCEL_PAGE, useUnmergedTree = true).assertExists()
+        val gift = DemoCards.parcel("Birthday gift").id
+        assertEquals(gift, deliveries.carrierEditor?.pageId)
+        assertEquals(null, deliveries.carrierEditor?.initialCarrier)
+        // Cancel closes it, and leaves the page.
+        compose.onNodeWithTag(CHANGE_CARRIER_CANCEL).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        compose.onNodeWithTag(CHANGE_CARRIER_SHEET).assertDoesNotExist()
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
-        assertEquals(emptyList<Any>(), source.archived)
-        assertEquals(emptyList<Any>(), source.deleted)
+        assertEquals(emptyList<Any>(), source.carrierChanges)
     }
 
     @Test

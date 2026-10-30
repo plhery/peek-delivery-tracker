@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.CarrierChange
 import com.plhery.peekdeliverytracker.core.DeliveredConfetti
 import com.plhery.peekdeliverytracker.core.DeliveredHold
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
@@ -257,13 +258,14 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
 
 /**
  * What a menu opened over the deliveries that waits for an answer, each held for the launch ([rememberForLaunch]) as
- * the iPhone's `@State` is through a rotation: the delete it asks about and the parcel being named
- * ([DeleteRequest.saved], [RenameRequest.saved]), and the name typed so far.
+ * the iPhone's `@State` is through a rotation: the delete it asks about, the parcel being named and the carrier editor
+ * open ([DeleteRequest.saved], [RenameRequest.saved], [CarrierEditorRequest.saved]), and the name typed so far.
  */
 internal class PromptStates(
     val deleting: MutableState<String?>,
     val renaming: MutableState<String?>,
     val name: MutableState<String>,
+    val changingCarrier: MutableState<String?>,
 )
 
 @Composable
@@ -271,6 +273,7 @@ internal fun rememberPromptStates(launch: UUID): PromptStates = PromptStates(
     deleting = rememberForLaunch<String?>(launch, null),
     renaming = rememberForLaunch<String?>(launch, null),
     name = rememberForLaunch(launch, ""),
+    changingCarrier = rememberForLaunch<String?>(launch, null),
 )
 
 /**
@@ -844,7 +847,7 @@ internal class DeliveriesState(
      */
     val modal: Boolean
         get() = menu != null || pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
-            mapCover != null
+            mapCover != null || carrierEditor != null || carrierEditorClosing
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes
@@ -903,18 +906,79 @@ internal class DeliveriesState(
     }
 
     /**
-     * The carrier editor a button of a parcel's page last asked for ([editCarrier]): null until one has. The editor
-     * comes with its step, and nothing shows it yet.
+     * The carrier editor open over the window (a page's `carrierEditor`, the list's `prompts.changingCarrier`), kept
+     * with the window: on the parcel of the page that asked, or of a card's menu ([CarrierEditorHost]).
      */
-    var carrierEditor: CarrierEditorRequest? by mutableStateOf(null)
+    var carrierEditor: CarrierEditorRequest?
+        get() = prompts.changingCarrier.value?.let { CarrierEditorRequest.from(it) }
+        private set(value) {
+            prompts.changingCarrier.value = value?.saved
+        }
+
+    /** The carrier editor has closed and its sheet is still on its way down: TalkBack goes back once it has gone. */
+    var carrierEditorClosing: Boolean by mutableStateOf(false)
         private set
 
     /**
+     * The parcel a card's menu asked to change, as it was then (`prompts.changingCarrier`): the editor works on it, even
+     * once it has left the list, as ParcelListView's sheet does. A window made again keeps only its id.
+     */
+    private var changingParcel: Parcel? = null
+
+    /**
+     * The parcel the carrier editor `request` works on: the page's as it is now (`if let parcel`), none once gone, or the
+     * one the card's menu found.
+     */
+    fun carrierEditorParcel(request: CarrierEditorRequest, parcels: List<Parcel>): Parcel? {
+        val pageId = request.pageId ?: return changingParcel?.takeIf { it.id == request.parcelId }
+            ?: parcels.firstOrNull { it.id == request.parcelId }
+        return pageParcel(pageId, parcels)
+    }
+
+    /**
      * Opens the carrier editor on the page with `pageId` (`carrierEditor = CarrierEditorRequest(initialCarrier:)`), on
-     * `initialCarrier` where a prompt names one. The editor comes with its step.
+     * `initialCarrier` where a prompt names one.
      */
     fun editCarrier(pageId: UUID, initialCarrier: CarrierId? = null) {
-        carrierEditor = CarrierEditorRequest(pageId, initialCarrier)
+        openCarrierEditor(CarrierEditorRequest(UUID.randomUUID(), pageId, pageId, initialCarrier))
+    }
+
+    private fun openCarrierEditor(request: CarrierEditorRequest, parcel: Parcel? = null) {
+        carrierEditor?.let { source.pageWork.forget(it.id) }
+        changingParcel = parcel
+        carrierEditorClosing = false
+        carrierEditor = request
+    }
+
+    /**
+     * The editor's Save (`save()`), for `change`: the carrier, the link and the postcode it needs, the postcode's
+     * country and a provider's postcode go to the store, in the app's scope while the editor waits, which a window made
+     * again still hears of ([PageWork], by the request's id). Saved, the editor closes ([leavePage]); failed, it says
+     * why in its own words, as `localizer.errorMessage(error)` does, for another try.
+     */
+    fun saveCarrier(request: CarrierEditorRequest, change: CarrierChange) {
+        if (!change.canSave || carrierEditor?.id != request.id) return
+        val parcel = change.parcel
+        source.pageWork.run(request.id, source.scope, source::errorMessage, cards = emptyList()) {
+            source.changeCarrier(
+                parcel, change.selectedCarrier, change.sentTrackingUrl, change.sentPostcode, change.sentPostcodeCountry,
+                change.normalizedProviderPostcode,
+            )
+        }
+    }
+
+    /** Cancel, a tap outside, the back, a drag down, or its change saved: the editor closes, and forgets its change. */
+    fun closeCarrierEditor() {
+        val request = carrierEditor ?: return
+        source.pageWork.forget(request.id)
+        changingParcel = null
+        carrierEditor = null
+        carrierEditorClosing = true
+    }
+
+    /** The editor's sheet has gone. */
+    fun carrierEditorClosed() {
+        if (carrierEditor == null) carrierEditorClosing = false
     }
 
     /**
@@ -1166,9 +1230,16 @@ internal class DeliveriesState(
         if (page == parcel.id || parcel.carrierData?.originalPackageId == page) leaveShown(cards)
     }
 
-    /** The page with `pageId` saved a change that leaves it ([PageWork.leaving]): it leaves, if it still shows. */
+    /**
+     * The page with `pageId` saved a change that leaves it ([PageWork.leaving]): it leaves, if it still shows. The
+     * carrier editor's change, saved by its own id, closes the editor instead.
+     */
     fun leavePage(pageId: UUID, cards: List<UUID>) {
         source.pageWork.left(pageId)
+        if (carrierEditor?.id == pageId) {
+            closeCarrierEditor()
+            return
+        }
         if (navigator.navigation.shown == pageId) leaveShown(cards)
     }
 
@@ -1182,14 +1253,15 @@ internal class DeliveriesState(
 
     /**
      * What the ••• menu of the page with `pageId` asked of its parcel (ParcelDetailView's `chose(_:on:)`). The page is
-     * open already. Naming the parcel asks for its new name; changing its carrier opens what comes with its step, and
-     * does nothing yet; the page shares a parcel from its own button. Copying puts the first number on the clipboard
+     * open already. Naming the parcel asks for its new name; changing its carrier opens the carrier editor; the page
+     * shares a parcel from its own button. Copying puts the first number on the clipboard
      * and says so on its row. Archiving and restoring save the change, then leave the page; deleting asks first. Only
      * one change of the page's is saved at a time, and an alert over it says why one failed.
      */
     fun choseOnPage(pageId: UUID, item: ParcelMenuItem, parcel: Parcel) {
         when (item) {
-            ParcelMenuItem.Open, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
+            ParcelMenuItem.Open, ParcelMenuItem.Share -> Unit
+            ParcelMenuItem.ChangeCarrier -> editCarrier(pageId)
             ParcelMenuItem.Rename -> rename(parcel, pageId)
             ParcelMenuItem.CopyTrackingNumber -> parcel.trackingNumbers.firstOrNull()?.let { copyOnPage(pageId, it) }
             ParcelMenuItem.Archive -> leaveOnPage(pageId) { saveArchive(parcel) }
@@ -1222,9 +1294,10 @@ internal class DeliveriesState(
                 navigator.open(parcel.id)
             }
             ParcelMenuItem.Rename -> rename(parcel, pageId = null)
-            // Sharing a parcel and changing its carrier open what comes with their steps: the menu offers them, and
-            // they do nothing yet.
-            ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
+            // Sharing a parcel opens what comes with its step: the menu offers it, and it does nothing yet.
+            ParcelMenuItem.Share -> Unit
+            ParcelMenuItem.ChangeCarrier ->
+                openCarrierEditor(CarrierEditorRequest(UUID.randomUUID(), parcel.id, pageId = null, initialCarrier = null), parcel)
             ParcelMenuItem.CopyTrackingNumber -> {
                 val says = copyTrackingNumber(parcel) ?: return
                 val copied = text("detail.copied")
@@ -1297,11 +1370,25 @@ internal class DeliveriesState(
 internal data class CopiedNumber(val pageId: UUID, val number: String)
 
 /**
- * The carrier editor asked for on the page with `pageId`, opening on `initialCarrier` where a prompt names one
- * (`CarrierEditorRequest`): each request another, as each of the iPhone's has its own id.
+ * The carrier editor asked for on the parcel with `parcelId`, from the page with `pageId` or a card's menu, opening on
+ * `initialCarrier` where a prompt names one (`CarrierEditorRequest`): each request another ([id]), as each of the
+ * iPhone's has its own id.
  */
-@Stable
-internal class CarrierEditorRequest(val pageId: UUID, val initialCarrier: CarrierId?)
+@Immutable
+internal data class CarrierEditorRequest(val id: UUID, val parcelId: UUID, val pageId: UUID?, val initialCarrier: CarrierId?) {
+    /** As a window keeps it: the ids, the page's or "-", and the carrier or "-", a space between. */
+    val saved: String get() = listOf(id, parcelId, pageId ?: "-", initialCarrier?.rawValue ?: "-").joinToString(" ")
+
+    companion object {
+        fun from(saved: String): CarrierEditorRequest {
+            val (id, parcelId, pageId, carrier) = saved.split(" ")
+            return CarrierEditorRequest(
+                UUID.fromString(id), UUID.fromString(parcelId), pageId.takeIf { it != "-" }?.let(UUID::fromString),
+                carrier.takeIf { it != "-" }?.let(::CarrierId),
+            )
+        }
+    }
+}
 
 /**
  * Swift's `<` on the carriers' names: code unit by code unit, near enough to Swift's comparison of their Unicode

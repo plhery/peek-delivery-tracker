@@ -11,6 +11,7 @@ import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.time.Instant
@@ -29,7 +30,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
  * them ([dispatcher]). Archiving, restoring, deleting, renaming, muting and changing the carrier change the parcels as
  * the store does, or fail with `failure`, an archive once `archiving` lets it go when a test holds it, a mute once
  * `muting` does, a carrier change once `changing` does and a parcel's check once `checkingParcel` does; a check of
- * every parcel answers `checkResult`, or waits for `checking` when a test holds it. The rating prompt keeps its days in
+ * every parcel answers `checkResult`, or waits for `checking` when a test holds it. The server refuses the numbers of
+ * `refusals`, once `refusing` lets its answer go. The demo is the demo's session. The rating prompt keeps its days in
  * a store of its own, in UTC, and the system's prompt is a fake that notes each step ([reviewCalls]).
  */
 class FakeDeliveries(
@@ -87,6 +89,16 @@ class FakeDeliveries(
 
     /** Holds each check of one parcel until the test lets it go. */
     var checkingParcel: CompletableDeferred<Unit>? = null
+
+    /** The carrier and number pairs the server refuses, and what holds its answer until the test lets it go. */
+    var refusals: Set<NumberRefusalRequest> = emptySet()
+    var refusing: CompletableDeferred<Unit>? = null
+
+    /** The refusal questions asked, in their order. */
+    val refusalQuestions = mutableListOf<NumberRefusalRequest>()
+
+    /** Each carrier change with all it sent, in its order. */
+    val carrierRequests = mutableListOf<CarrierChangeRequest>()
 
     /**
      * The parcels archived, restored and deleted, in their order, each mute asked for with its new setting, each
@@ -186,11 +198,29 @@ class FakeDeliveries(
         parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(notificationsMuted = muted) else it }
     }
 
-    override suspend fun changeCarrier(parcel: Parcel, carrier: CarrierId) {
+    override suspend fun changeCarrier(
+        parcel: Parcel,
+        carrier: CarrierId,
+        trackingUrl: String?,
+        dpdPostcode: String?,
+        dpdPostcodeCountry: String?,
+        providerPostcode: String?,
+    ) {
         changing?.await()
         failure?.let { throw it }
         carrierChanges += parcel.id to carrier
-        parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(carrier = carrier, syncError = null) else it }
+        carrierRequests += CarrierChangeRequest(parcel.id, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, providerPostcode)
+        parcels.value = parcels.value.map {
+            if (it.id == parcel.id) it.copy(carrier = carrier, syncError = null, trackingUrl = trackingUrl, dpdPostcode = dpdPostcode) else it
+        }
+    }
+
+    override val isDemo: Boolean get() = session.value == AuthenticationState.Demo
+
+    override suspend fun numberRefusal(question: NumberRefusalRequest): Boolean {
+        refusalQuestions += question
+        refusing?.await()
+        return question in refusals
     }
 
     override fun viewerLink(parcel: Parcel): String? = viewerLinks[parcel.id]
@@ -213,6 +243,16 @@ class FakeDeliveries(
 
     /** The same stores in a process started again, after the system closed the app. */
     fun newProcess(): FakeDeliveries = FakeDeliveries(parcels.value, session.value)
+
+    /** What a carrier change sent: the parcel's id, the carrier, the link, the postcode and its country, and a provider's postcode. */
+    data class CarrierChangeRequest(
+        val parcelId: UUID,
+        val carrier: CarrierId,
+        val trackingUrl: String?,
+        val dpdPostcode: String?,
+        val dpdPostcodeCountry: String?,
+        val providerPostcode: String?,
+    )
 
     private companion object {
         val ARCHIVED_AT: String = Instant.parse("2026-05-01T09:00:00Z").toString()

@@ -9,12 +9,14 @@ import androidx.compose.runtime.mutableStateMapOf
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
+import com.plhery.peekdeliverytracker.core.DeliveryApiClient
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
@@ -85,10 +87,27 @@ interface DeliveriesSource {
     suspend fun setMuted(parcel: Parcel, muted: Boolean)
 
     /**
-     * `store.changeCarrier(_:carrier:trackingURL: nil, dpdPostcode: nil, dpdPostcodeCountry: nil)`: moves the parcel to
-     * `carrier` as it is, with no link nor postcode, as the page's switch to the carrier its number names does.
+     * `store.changeCarrier(_:carrier:trackingURL:dpdPostcode:dpdPostcodeCountry:providerPostcode:)`: moves the parcel to
+     * `carrier`, with the link and the postcode it needs, the postcode's country where it isn't the carrier's home, and
+     * the postcode a provider asked for. The page's switch to the carrier its number names sends none of them.
      */
-    suspend fun changeCarrier(parcel: Parcel, carrier: CarrierId)
+    suspend fun changeCarrier(
+        parcel: Parcel,
+        carrier: CarrierId,
+        trackingUrl: String? = null,
+        dpdPostcode: String? = null,
+        dpdPostcodeCountry: String? = null,
+        providerPostcode: String? = null,
+    )
+
+    /** `store.isDemo`: the demo's parcels, which no server is asked about. */
+    val isDemo: Boolean
+
+    /**
+     * `DeliveryAPIClient.numberRefusal`: whether the server says `question`'s carrier issues no number like its own,
+     * which [com.plhery.peekdeliverytracker.core.NumberRefusals] asks once per pair.
+     */
+    suspend fun numberRefusal(question: NumberRefusalRequest): Boolean
 
     /** `store.deliveryEmail`, as the account's preferences and the session change: null without one. */
     val deliveryEmail: StateFlow<DeliveryEmail?>
@@ -168,8 +187,19 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override suspend fun setMuted(parcel: Parcel, muted: Boolean) = container.parcels.setMuted(parcel, muted)
 
-    override suspend fun changeCarrier(parcel: Parcel, carrier: CarrierId) =
-        container.parcels.changeCarrier(parcel, carrier, trackingUrl = null, dpdPostcode = null, dpdPostcodeCountry = null)
+    override suspend fun changeCarrier(
+        parcel: Parcel,
+        carrier: CarrierId,
+        trackingUrl: String?,
+        dpdPostcode: String?,
+        dpdPostcodeCountry: String?,
+        providerPostcode: String?,
+    ) = container.parcels.changeCarrier(parcel, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry, providerPostcode)
+
+    override val isDemo: Boolean get() = container.parcels.isDemo
+
+    override suspend fun numberRefusal(question: NumberRefusalRequest): Boolean =
+        DeliveryApiClient.numberRefusal(question, container.configuration, container.transport)
 
     override val deliveryEmail get() = container.deliveryEmail
 

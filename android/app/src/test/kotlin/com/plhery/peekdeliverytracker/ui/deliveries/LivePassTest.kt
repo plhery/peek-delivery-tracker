@@ -289,7 +289,7 @@ class LivePassTest {
     // The buttons, the name and the marks.
 
     @Test
-    fun theMarksTheNameAndTheButtonsSayWhatTheyDoAndTheEditorsWait() {
+    fun theMarksTheNameAndTheButtonsSayWhatTheyDoAndTheMarksOpenTheCarrierEditor() {
         show()
         open("Birthday gift")
         node(PAGE_MARKS).assertContentDescriptionEquals("Change carrier from Chronopost")
@@ -297,11 +297,16 @@ class LivePassTest {
         node(PAGE_GLOBE).assertContentDescriptionEquals("Open the map")
         node(PAGE_SHARE).assertContentDescriptionEquals("Share this parcel")
         val actions = source.actions.toList()
-        // The carrier editor and the share sheet come with their steps; the name's rename is RenameTest's.
-        for (tag in listOf(PAGE_MARKS, PAGE_SHARE)) {
-            node(tag).performClick()
-            settle()
-        }
+        // The marks open the carrier editor on the parcel (ChangeCarrierTest's); the share sheet comes with its step,
+        // the name's rename is RenameTest's.
+        node(PAGE_MARKS).performClick()
+        settle()
+        assertEquals(gift, deliveries.carrierEditor?.parcelId)
+        node(CHANGE_CARRIER_CANCEL).performClick()
+        settle()
+        assertNull(deliveries.carrierEditor)
+        node(PAGE_SHARE).performClick()
+        settle()
         assertEquals(actions, source.actions)
         assertNull(deliveries.mapCover)
         assertTrue(exists(PAGE_CONTENT))
@@ -330,9 +335,10 @@ class LivePassTest {
         compose.onRoot().performTouchInput { up() }
         compose.mainClock.autoAdvance = true
         settle()
-        // One button, as the iPhone's holds both marks: the carrier editor comes with its step.
+        // One button, as the iPhone's holds both marks: the carrier editor.
         assertFalse("The first mark didn't give", rest.contentEquals(pressed))
         assertNull(deliveries.mapCover)
+        assertEquals(gift, deliveries.carrierEditor?.parcelId)
         assertEquals(0, source.actions.count { it == "parcel-map-open" })
     }
 

@@ -1116,7 +1116,7 @@ describe('TrackingSyncService', () => {
     await expect(sync({ status: 'pending', current_stage: 'pending', last_status_text: 'Pending', last_update: null, events: customs }))
       .resolves.toEqual(['customs', 'Your item is with customs', 'Pending']);
     // Of two scans of one instant in that stage, the words of the one the carrier listed as the newer.
-    const tie = [{ ...customs[0]!, tie_order: 0 }, { ...customs[0]!, description: 'Your item is being held at customs', tie_order: 1 }, customs[1]!];
+    const tie = [{ ...customs[0]!, description: 'Your item is being held at customs', tie_order: 1 }, { ...customs[0]!, tie_order: 0 }, customs[1]!];
     await expect(sync({ status: 'pending', current_stage: 'pending', last_status_text: 'Pending', last_update: null, events: tie }))
       .resolves.toEqual(['customs', 'Your item is being held at customs', 'Pending']);
     // A summary in the stage of the scans, or one past them, keeps its own words.

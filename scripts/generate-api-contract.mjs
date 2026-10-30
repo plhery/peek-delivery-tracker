@@ -10,6 +10,17 @@ const swiftPath = path.join(root, 'ios', 'PeekDeliveryTracker', 'GeneratedAPICon
 const kotlinPath = path.join(root, 'android', 'core', 'src', 'main', 'kotlin', 'com', 'plhery', 'peekdeliverytracker',
   'core', 'api', 'GeneratedApiContract.kt');
 
+// Written from another release than the locked one, the carrier catalog would change unseen.
+const lockedScraper = JSON.parse(await readFile(path.join(root, 'package-lock.json'), 'utf8'))
+  .packages?.['node_modules/universal-parcel-scraper']?.version;
+const installedScraper = JSON.parse(
+  await readFile(path.join(root, 'node_modules', 'universal-parcel-scraper', 'package.json'), 'utf8'),
+).version;
+if (!process.argv.includes('--check') && installedScraper !== lockedScraper) {
+  throw new Error(`universal-parcel-scraper ${installedScraper} is installed, but package-lock.json locks ${lockedScraper}. `
+    + 'Run npm ci, then npm run contract:generate.');
+}
+
 const contractSource = await readFile(contractPath, 'utf8');
 const contract = JSON.parse(contractSource);
 const schemas = contract.components?.schemas;

@@ -115,6 +115,9 @@
       "accent": "#7edf00"
     }
   },
+  "alljoy": {
+    "decal": "alljoy"
+  },
   "am-home-delivery": {
     "decal": "am-home-delivery"
   },
@@ -779,6 +782,9 @@
   "dpd-za": {
     "family": "dpd"
   },
+  "dpe-express": {
+    "decal": "dpe-express"
+  },
   "dpex": {
     "decal": "dpex"
   },
@@ -1174,6 +1180,9 @@
   },
   "goodluck-courier": {
     "decal": "goodluck-courier"
+  },
+  "goodmaji": {
+    "decal": "goodmaji"
   },
   "grand-slam-express": {
     "decal": "grand-slam-express"
@@ -2144,6 +2153,9 @@
   "professional-couriers": {
     "decal": "professional-couriers"
   },
+  "profit-fields": {
+    "decal": "profit-fields"
+  },
   "prompt-xpress": {
     "decal": "prompt-xpress"
   },
@@ -2942,6 +2954,9 @@
     "palette": {
       "accent": "#212121"
     }
+  },
+  "zes-express": {
+    "decal": "zes-express"
   },
   "zheldor": {
     "decal": "zheldor"

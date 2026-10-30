@@ -230,7 +230,12 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'kec-ecommerce'
   | 'thelorry'
   | 'wizmo'
-  | 'ams-egroup';
+  | 'ams-egroup'
+  | 'zes-express'
+  | 'profit-fields'
+  | 'alljoy'
+  | 'dpe-express'
+  | 'goodmaji';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

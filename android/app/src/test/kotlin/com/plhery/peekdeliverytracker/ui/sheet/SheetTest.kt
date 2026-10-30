@@ -13,12 +13,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeDown
 import androidx.compose.ui.test.swipeUp
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
@@ -37,8 +39,9 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The sheet on its own, a field in what it holds: what takes it to its large height, a keyboard up for that field and
- * a window as low as a phone on its side; a drag that moves it without composing what it holds again; and the sheet
- * opened again on its way out after the back gesture.
+ * a window as low as a phone on its side; a drag that moves it without composing what it holds again; the sheet
+ * opened again on its way out after the back gesture; the detent asked for; and nothing but its own content sending it
+ * away while it isn't dismissible.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -51,13 +54,19 @@ class SheetTest {
     private var visible by mutableStateOf(true)
     private var text by mutableStateOf("")
     private var compositions = 0
+    private var detent by mutableStateOf<SheetDetent?>(null)
+    private var dismissible by mutableStateOf(true)
+    private val rested = mutableListOf<SheetDetent>()
 
     private fun show() {
         compose.setContent {
             view = LocalView.current
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
                 Box(Modifier.fillMaxSize()) {
-                    Sheet(visible, onDismiss = { visible = false }, paneTitle = "Sheet") {
+                    Sheet(
+                        visible, onDismiss = { visible = false }, paneTitle = "Sheet", detent = detent,
+                        onDetentChange = { rested += it }, dismissible = dismissible,
+                    ) {
                         SideEffect { compositions++ }
                         SheetPage("Sheet", "Done", onConfirm = { visible = false }) {
                             FormSection("Name") {
@@ -138,6 +147,45 @@ class SheetTest {
         compose.mainClock.autoAdvance = true
         compose.waitForIdle()
         assertEquals(medium, top(), 1f)
+    }
+
+    @Test
+    fun itComesUpAtTheDetentAskedForMovesToAnotherAndADragSaysWhereItRests() {
+        detent = SheetDetent.Large
+        show()
+        assertEquals(10f, top(), 1f)
+        detent = SheetDetent.Medium
+        compose.waitForIdle()
+        assertEquals(windowHeight() * 0.4714f, top(), 2f)
+        assertEquals(emptyList<SheetDetent>(), rested)
+        compose.onNodeWithTag(SHEET_PANEL).performTouchInput { swipeUp(top + 30f, top - 500f, durationMillis = 300) }
+        compose.waitForIdle()
+        assertEquals(listOf(SheetDetent.Large), rested)
+        assertEquals(10f, top(), 1f)
+    }
+
+    @Test
+    fun whileItIsntDismissibleNeitherADragDownNorATapOutsideNorTheBackSendItAway() {
+        dismissible = false
+        show()
+        val medium = top()
+        compose.onNodeWithTag(SHEET_PANEL).performTouchInput { swipeDown(top + 30f, top + 600f, durationMillis = 200) }
+        compose.waitForIdle()
+        assertTrue(visible)
+        assertEquals(medium, top(), 1f)
+        compose.onRoot().performTouchInput { click(androidx.compose.ui.geometry.Offset(width / 2f, 40f)) }
+        compose.waitForIdle()
+        assertTrue(visible)
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.waitForIdle()
+        assertTrue(visible)
+        assertEquals(medium, top(), 1f)
+        // Dismissible again, the back sends it away.
+        dismissible = true
+        compose.waitForIdle()
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.waitForIdle()
+        assertFalse(visible)
     }
 }
 

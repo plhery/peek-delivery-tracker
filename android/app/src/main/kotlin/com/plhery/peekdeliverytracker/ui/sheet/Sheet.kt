@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.sheet
 
 import android.view.RoundedCorner
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.PredictiveBackHandler
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.animate
@@ -139,10 +140,14 @@ internal class SheetMenus {
  *   a drag down sends away too.
  *
  * The window under it dims, black at 20 % (48 % in dark), and a tap there dismisses it, as the system's back and its
- * predictive gesture do, the sheet following the gesture down. It comes and goes on a critically damped spring, and
- * moves between its detents on a snappy one. TalkBack reaches only the sheet, named [paneTitle], and only its menu
- * while one is open ([FormMenuRow]). Once it has gone, [onClosed] runs, where TalkBack's focus goes back to what opened
- * it. The window made again (a rotation) finds it at the detent it had, without coming up again.
+ * predictive gesture do, the sheet following the gesture down. While it isn't [dismissible]
+ * (`interactiveDismissDisabled`), none of them does: the back is kept from what is under it, and a drag down past its
+ * lowest detent stretches less and less and comes back. It comes and goes on a critically damped spring, and moves
+ * between its detents on a snappy one. [detent] is the detent asked for (`presentationDetents(_:selection:)`): the
+ * sheet comes up at it and moves to it each time it changes; where a drag, or a keyboard, leaves it at another,
+ * [onDetentChange] hears which. TalkBack reaches only the sheet, named [paneTitle], and only its menu while one is open
+ * ([FormMenuRow]). Once it has gone, [onClosed] runs, where TalkBack's focus goes back to what opened it. The window
+ * made again (a rotation) finds it at the detent it had, without coming up again.
  */
 @Composable
 fun Sheet(
@@ -152,6 +157,9 @@ fun Sheet(
     modifier: Modifier = Modifier,
     detents: List<SheetDetent> = listOf(SheetDetent.Medium, SheetDetent.Large),
     onClosed: () -> Unit = {},
+    detent: SheetDetent? = null,
+    onDetentChange: (SheetDetent) -> Unit = {},
+    dismissible: Boolean = true,
     content: @Composable () -> Unit,
 ) {
     var present by remember { mutableStateOf(visible) }
@@ -161,12 +169,17 @@ fun Sheet(
     val host = LocalTabOverlay.current
     val dismiss by rememberUpdatedState(onDismiss)
     val closed by rememberUpdatedState(onClosed)
+    val detentChanged by rememberUpdatedState(onDetentChange)
     val layer: (@Composable () -> Unit)? = if (!present) null else {
         {
-            SheetLayer(visible, { dismiss() }, paneTitle, detents, host?.backdrop, modifier, memory, {
-                present = false
-                closed()
-            }, content)
+            SheetLayer(
+                visible, { dismiss() }, paneTitle, detents, host?.backdrop, modifier, memory,
+                onGone = {
+                    present = false
+                    closed()
+                },
+                detent, { detentChanged(it) }, dismissible, content,
+            )
         }
     }
     if (host == null) layer?.invoke() else OverlayLayer(host, SheetKey(paneTitle), layer)
@@ -200,6 +213,9 @@ private class SheetMotion(hidden: Float) {
     var hidden: Float = hidden
     var moved = false
 
+    /** A drag down can send it away; otherwise it stretches past its lowest rest as past its highest. */
+    var dismissible = true
+
     /** It has begun to come up, or was made again already up. */
     var shown = false
 
@@ -211,7 +227,10 @@ private class SheetMotion(hidden: Float) {
     var releaseVelocity = 0f
     private var raw = hidden
 
-    /** The finger moved the sheet by `delta` pixels, past its highest rest less and less, as UIKit's rubber band. */
+    /**
+     * The finger moved the sheet by `delta` pixels, past its highest rest less and less, as UIKit's rubber band, and
+     * past its lowest too while it can't be sent away.
+     */
     fun dragBy(delta: Float) {
         job?.cancel()
         restoring = false
@@ -219,7 +238,12 @@ private class SheetMotion(hidden: Float) {
         moved = true
         raw += delta
         val highest = rests.minOrNull() ?: return
-        top = if (raw >= highest) raw else highest - band(highest - raw)
+        val lowest = rests.max()
+        top = when {
+            raw < highest -> highest - band(highest - raw)
+            !dismissible && raw > lowest -> lowest + band(raw - lowest)
+            else -> raw
+        }
     }
 
     private fun band(past: Float): Float = (1 - 1 / (past * 0.55f / BAND_LENGTH + 1)) * BAND_LENGTH
@@ -283,6 +307,9 @@ private fun SheetLayer(
     modifier: Modifier,
     memory: SheetMemory,
     onGone: () -> Unit,
+    detent: SheetDetent?,
+    onDetentChange: (SheetDetent) -> Unit,
+    dismissible: Boolean,
     content: @Composable () -> Unit,
 ) {
     val density = LocalDensity.current
@@ -292,6 +319,7 @@ private fun SheetLayer(
     val menus = remember { SheetMenus() }
     val showing by rememberUpdatedState(visible)
     val dismiss by rememberUpdatedState(onDismiss)
+    val canDismiss by rememberUpdatedState(dismissible)
     BoxWithConstraints(Modifier.fillMaxSize()) {
         val width = constraints.maxWidth.toFloat()
         val height = constraints.maxHeight.toFloat()
@@ -338,6 +366,10 @@ private fun SheetLayer(
         }
         motion.hidden = height
         motion.rests = rests
+        motion.dismissible = dismissible
+        // The detent asked for, which it comes up at, unless the window made again finds it up already.
+        val requested = detent?.let { detents.indexOf(it) }?.takeIf { it >= 0 }
+        if (requested != null && !motion.shown && !memory.up) memory.detent = requested
         val firstRest = rests.first()
         val lowest = rests.max()
         val floatingTop = rests.filter { it > largeTop + 0.5f }.minOrNull()
@@ -360,14 +392,17 @@ private fun SheetLayer(
         fun settle(velocity: Float) {
             if (!motion.moved) return
             motion.moved = false
-            val target = motion.target(velocity, dismissible = true)
+            val target = motion.target(velocity, dismissible)
             if (target == null) {
                 motion.releaseVelocity = velocity
                 dismiss()
             } else {
                 // The detent the finger chose, unless the sheet stands at its only rest for now.
                 val chosen = motion.rests.indexOf(target)
-                if (motion.rests.size == detents.size && chosen >= 0) memory.detent = chosen
+                if (motion.rests.size == detents.size && chosen >= 0) {
+                    memory.detent = chosen
+                    onDetentChange(detents[chosen])
+                }
                 memory.up = true
                 animateTo(target, velocity, Motion.snappy(DETENT_DURATION))
             }
@@ -402,7 +437,12 @@ private fun SheetLayer(
         }
         // A keyboard, or a resize, moves the sheet to its detent's rest as it now is.
         LaunchedEffect(rests) {
-            if (lifted && !compactHeight) detents.indexOf(SheetDetent.Large).takeIf { it >= 0 }?.let { memory.detent = it }
+            if (lifted && !compactHeight) {
+                detents.indexOf(SheetDetent.Large).takeIf { it >= 0 && it != memory.detent }?.let {
+                    memory.detent = it
+                    onDetentChange(SheetDetent.Large)
+                }
+            }
             if (!visible || !motion.shown || motion.moved) return@LaunchedEffect
             val target = motion.rest(memory.detent)
             if (motion.restoring) {
@@ -413,7 +453,17 @@ private fun SheetLayer(
             animateTo(target, 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { memory.up = true }
         }
 
-        PredictiveBackHandler(enabled = visible) { progress ->
+        // Asked for another detent, it moves there.
+        LaunchedEffect(requested) {
+            if (requested == null || requested == memory.detent) return@LaunchedEffect
+            memory.detent = requested
+            if (!visible || !motion.shown || motion.moved) return@LaunchedEffect
+            animateTo(motion.rest(requested), 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { memory.up = true }
+        }
+
+        // While it can't be sent away, the back goes nowhere, rather than to what is under it.
+        BackHandler(enabled = visible && !dismissible) {}
+        PredictiveBackHandler(enabled = visible && dismissible) { progress ->
             try {
                 progress.collect { backProgress = it.progress }
                 dismiss()
@@ -430,7 +480,7 @@ private fun SheetLayer(
                 .fillMaxSize()
                 .graphicsLayer { alpha = presence() }
                 .background(Color.Black.copy(alpha = dim))
-                .pointerInput(Unit) { detectTapGestures { if (showing) dismiss() } }
+                .pointerInput(Unit) { detectTapGestures { if (showing && canDismiss) dismiss() } }
                 .clearAndSetSemantics {},
         )
 

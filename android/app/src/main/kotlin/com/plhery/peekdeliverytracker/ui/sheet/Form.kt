@@ -97,9 +97,11 @@ import kotlinx.coroutines.launch
 
 /**
  * A `NavigationStack` in a sheet or a popover with a `Form` in it: the inline bar, its title in the middle, or as near
- * it as keeps clear of the confirmation, and the confirmation on a glass capsule at its trailing end
- * (`ToolbarItem(placement: .confirmationAction)`, semibold), over the form, which scrolls under the bar and fades out
- * under it once it has. TalkBack reads the title as a heading, and goes there first ([titleFocus]).
+ * it as keeps clear of its buttons, the confirmation on a glass capsule at its trailing end
+ * (`ToolbarItem(placement: .confirmationAction)`, semibold) and, where there is one, the [cancellation] on another at
+ * its leading end (`.cancellationAction`), over the form, which scrolls under the bar and fades out under it once it
+ * has. A button that is off ([confirmEnabled], [cancelEnabled]) is greyed and takes no tap. TalkBack reads the title as
+ * a heading, and goes there first ([titleFocus]).
  */
 @Composable
 internal fun SheetPage(
@@ -109,6 +111,11 @@ internal fun SheetPage(
     modifier: Modifier = Modifier,
     titleFocus: AccessibilityFocus? = null,
     confirmTag: String? = null,
+    confirmEnabled: Boolean = true,
+    cancellation: String? = null,
+    onCancel: () -> Unit = {},
+    cancelEnabled: Boolean = true,
+    cancelTag: String? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = PeekTheme.colors
@@ -149,41 +156,49 @@ internal fun SheetPage(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
-                ConfirmationButton(confirmation, onConfirm, backdrop, Modifier, confirmTag)
+                BarButton(confirmation, onConfirm, backdrop, FontWeight.SemiBold, confirmEnabled, confirmTag)
+                if (cancellation != null) BarButton(cancellation, onCancel, backdrop, FontWeight.Normal, cancelEnabled, cancelTag)
             },
             modifier = Modifier.fillMaxWidth().padding(top = barTop).height(BAR_ROW),
-        ) { (titleMeasurable, buttonMeasurable), constraints ->
+        ) { measurables, constraints ->
             val loose = constraints.copy(minWidth = 0, minHeight = 0)
             val width = constraints.maxWidth
             val height = constraints.maxHeight
             val side = insets.barSide.roundToPx()
-            val button = buttonMeasurable.measure(loose)
+            val gap = TITLE_GAP.roundToPx()
+            val button = measurables[1].measure(loose)
+            val cancel = measurables.getOrNull(2)?.measure(loose)
             val buttonStart = width - side - button.width
-            val titleEnd = buttonStart - TITLE_GAP.roundToPx()
-            val heading = titleMeasurable.measure(loose.copy(maxWidth = max(0, titleEnd - side)))
+            val titleStart = if (cancel == null) side else side + cancel.width + gap
+            val titleEnd = buttonStart - gap
+            val heading = measurables[0].measure(loose.copy(maxWidth = max(0, titleEnd - titleStart)))
             layout(width, height) {
-                val x = ((width - heading.width) / 2f).roundToInt().coerceAtMost(titleEnd - heading.width).coerceAtLeast(side)
+                val x = ((width - heading.width) / 2f).roundToInt().coerceAtMost(titleEnd - heading.width).coerceAtLeast(titleStart)
                 heading.place(x, ((height - heading.height) / 2f).roundToInt())
                 button.place(buttonStart, ((height - button.height) / 2f).roundToInt())
+                cancel?.place(side, ((height - cancel.height) / 2f).roundToInt())
             }
         }
     }
 }
 
-/** The bar's confirmation, `.fontWeight(.semibold)` on its glass capsule. */
+/** A button of the bar on its glass capsule: the confirmation `.fontWeight(.semibold)`, greyed while it is off. */
 @Composable
-private fun ConfirmationButton(title: String, onConfirm: () -> Unit, backdrop: MaterialBackdrop, modifier: Modifier, tag: String?) {
+private fun BarButton(title: String, onClick: () -> Unit, backdrop: MaterialBackdrop, weight: FontWeight, enabled: Boolean, tag: String?) {
     val colors = PeekTheme.colors
-    GlassSurface(CapsuleShape, modifier.heightIn(min = BAR_ROW), backdrop) {
+    GlassSurface(CapsuleShape, Modifier.heightIn(min = BAR_ROW), backdrop) {
         Box(
             Modifier
                 .heightIn(min = BAR_ROW)
                 .then(if (tag != null) Modifier.testTag(tag) else Modifier)
-                .clickable(interactionSource = null, indication = RowHighlight.Capsule, role = Role.Button, onClick = onConfirm)
+                .clickable(interactionSource = null, indication = RowHighlight.Capsule, enabled = enabled, role = Role.Button, onClick = onClick)
                 .padding(horizontal = CONFIRM_PADDING),
             contentAlignment = Alignment.Center,
         ) {
-            Text(title, color = colors.label, style = PeekTheme.type.style(IosTextStyle.Body, FontWeight.SemiBold), maxLines = 1)
+            Text(
+                title, color = if (enabled) colors.label else colors.tertiaryLabel,
+                style = PeekTheme.type.style(IosTextStyle.Body, weight), maxLines = 1,
+            )
         }
     }
 }
@@ -234,11 +249,12 @@ internal val LocalSheetInsets = staticCompositionLocalOf { SheetInsets.sheet(440
 
 /**
  * `Section(header)` in an inset grouped form: its header, then its rows on one rounded surface, a hairline between
- * each, inset 20 on both sides. The surface is white (dark grey in dark) on the sheet's opaque ground, and a veil on
- * its glass, where the hairlines are a shade of the rows ([LocalSheetAttachment]). Without a header, the section keeps the room one would take.
+ * each, inset 20 on both sides, then its [footer], footnote in the secondary grey. The surface is white (dark grey in
+ * dark) on the sheet's opaque ground, and a veil on its glass, where the hairlines are a shade of the rows
+ * ([LocalSheetAttachment]). Without a header, the section keeps the room one would take.
  */
 @Composable
-fun FormSection(header: String?, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+fun FormSection(header: String?, modifier: Modifier = Modifier, footer: String? = null, content: @Composable () -> Unit) {
     val colors = PeekTheme.colors
     val attachment = LocalSheetAttachment.current
     val side = LocalSheetInsets.current.formSide
@@ -273,6 +289,14 @@ fun FormSection(header: String?, modifier: Modifier = Modifier, content: @Compos
                     top += placeable.height
                 }
             }
+        }
+        if (footer != null) {
+            Text(
+                footer,
+                Modifier.padding(horizontal = side).padding(top = FOOTER_TOP),
+                color = colors.secondaryLabel,
+                style = PeekTheme.type.footnote.sfLines(),
+            )
         }
     }
 }
@@ -348,8 +372,8 @@ fun FormButtonRow(title: String, destructive: Boolean, onClick: () -> Unit, modi
     }
 }
 
-/** An option of a menu picker ([FormMenuRow]). */
-data class MenuOption(val title: String, val tag: String? = null)
+/** An option of a menu picker ([FormMenuRow]); [startsSection] for the first of a section after another (`Section`). */
+data class MenuOption(val title: String, val tag: String? = null, val startsSection: Boolean = false)
 
 /**
  * A `Picker` of the menu style: its label, then the option chosen in the secondary grey and the up and down chevrons.
@@ -373,7 +397,7 @@ fun FormMenuRow(
     val current = options.getOrNull(selected)?.title.orEmpty()
     val open = {
         menus?.content = {
-            SheetMenu(options, selected, row, value.right, onClose = { menus.content = null; returnFocus.request() }) { onSelect(it) }
+            SheetMenu(options, selected, row, value.right, onClose = { menus.content = null; returnFocus.request() }, onSelect = { onSelect(it) })
         }
     }
     FormRowFrame(
@@ -402,14 +426,23 @@ fun FormMenuRow(
 }
 
 /**
- * The menu a picker opens (`UIMenu`): its options on glass 250 wide, each 42 high, the chosen one checked at the leading
- * end, its top at the row's and its trailing edge at the picker's value, moved up as far as the window needs. It grows
- * from its top on a spring; a choice or a tap outside closes it, as the system's back does. TalkBack reaches only the
- * menu, from the chosen option, the sheet or popover under it hidden from it while it is open, and goes back to the
- * row once it has closed.
+ * The menu a picker opens (`UIMenu`): its options on glass 250 wide, each 42 high, a hairline between its sections, the
+ * chosen one checked at the leading end, its top at the row's and its trailing edge at the picker's value, or its
+ * leading edge at [leading] where a control at a row's leading end opened it, moved up as far as the window needs. It
+ * grows from that top corner on a spring; a choice or a tap outside closes it, as the system's back does. TalkBack
+ * reaches only the menu, from the chosen option, the sheet or popover under it hidden from it while it is open, and
+ * goes back to the row once it has closed.
  */
 @Composable
-private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trailing: Float, onClose: () -> Unit, onSelect: (Int) -> Unit) {
+internal fun SheetMenu(
+    options: List<MenuOption>,
+    selected: Int,
+    row: Rect,
+    trailing: Float,
+    onClose: () -> Unit,
+    leading: Float? = null,
+    onSelect: (Int) -> Unit,
+) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion
@@ -447,7 +480,8 @@ private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trail
                     val width = MENU_WIDTH.roundToPx()
                     val placeable = measurable.measure(Constraints(width, width, 0, max(0, constraints.maxHeight - top - bottom)))
                     layout(constraints.maxWidth, constraints.maxHeight) {
-                        val x = (trailing - origin.x - width).roundToInt().coerceIn(margin, max(margin, constraints.maxWidth - width - margin))
+                        val wantedX = if (leading != null) leading - origin.x else trailing - origin.x - width
+                        val x = wantedX.roundToInt().coerceIn(margin, max(margin, constraints.maxWidth - width - margin))
                         val wanted = (row.top - origin.y + MENU_DROP.toPx()).roundToInt()
                         val y = wanted.coerceAtMost(constraints.maxHeight - bottom - placeable.height).coerceAtLeast(top)
                         placeable.place(x, y)
@@ -459,7 +493,7 @@ private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trail
                     val scale = if (reduceMotion) 1f else 0.6f + 0.4f * t
                     scaleX = scale
                     scaleY = scale
-                    transformOrigin = TransformOrigin(1f, 0f)
+                    transformOrigin = TransformOrigin(if (leading != null) 0f else 1f, 0f)
                 }
                 .dropShadow(shape, MENU_SHADOW)
                 .pointerInput(Unit) { detectTapGestures { } }
@@ -470,6 +504,15 @@ private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trail
             Column(Modifier.verticalScroll(rememberScrollState()).padding(vertical = MENU_PADDING)) {
                 options.forEachIndexed { index, option ->
                     val chosen = index == selected
+                    if (option.startsSection && index > 0) {
+                        Box(
+                            Modifier
+                                .padding(vertical = MENU_SECTION_GAP)
+                                .fillMaxWidth()
+                                .height(SEPARATOR)
+                                .background(colors.separator),
+                        )
+                    }
                     Row(
                         Modifier
                             .fillMaxWidth()
@@ -495,7 +538,7 @@ private fun SheetMenu(options: List<MenuOption>, selected: Int, row: Rect, trail
 
 /** A row of a form: at least 52 high, its content in by the form's margin on either side. */
 @Composable
-private fun FormRowFrame(modifier: Modifier, content: @Composable RowScope.() -> Unit) {
+internal fun FormRowFrame(modifier: Modifier, content: @Composable RowScope.() -> Unit) {
     Row(
         modifier.fillMaxWidth().heightIn(min = ROW_HEIGHT).padding(horizontal = LocalSheetInsets.current.formSide, vertical = ROW_VERTICAL),
         verticalAlignment = Alignment.CenterVertically,
@@ -554,6 +597,7 @@ internal val ROW_HEIGHT = 52.dp
 private val ROW_VERTICAL = 6.dp
 private val HEADER_TOP = 21.dp
 private val HEADER_BOTTOM = 10.dp
+private val FOOTER_TOP = 7.dp
 internal val SECTION_GAP = 29.dp
 internal val SECTION_BOTTOM = 6.dp
 internal val SEPARATOR = 1.dp
@@ -570,4 +614,5 @@ private val MENU_MARGIN = 16.dp
 private val MENU_DROP = 8.dp
 private val MENU_CHECK_START = 20.5.dp
 private val MENU_CHECK_WIDTH = 23.dp
+private val MENU_SECTION_GAP = 6.dp
 private val MENU_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 24.dp, y = 8.dp)

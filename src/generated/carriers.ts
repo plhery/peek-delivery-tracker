@@ -2336,6 +2336,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "techlink",
+      "catalog": "techlink",
+      "slug": "techlink-tracking",
+      "title": "Techlink tracking: numero ZHPHD…ML, stati e chi consegna",
+      "name": "Techlink",
+      "color": "#e73547"
+    },
+    {
       "id": "imile",
       "catalog": "imile",
       "slug": "imile-tracking",
@@ -2374,6 +2382,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Shouwu tracking: numero SWECN…YQ, stati e chi consegna",
       "name": "Shouwu International",
       "color": "#be2c33"
+    },
+    {
+      "id": "hywl",
+      "catalog": "hywl",
+      "slug": "hywl-tracking",
+      "title": "HYWL tracking: numero TRK e stati di Huiyi Logistics",
+      "name": "Huiyi Logistics",
+      "color": "#0b8f91"
     }
   ],
   "es": [

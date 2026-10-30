@@ -9,6 +9,7 @@ import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
+import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.UUID
 import kotlinx.serialization.builtins.ListSerializer
@@ -237,6 +238,34 @@ class CoreParityTests {
         }
     }
 
+    /** The parcel page's next check: `Date.FormatStyle(date: .abbreviated, time: .shortened)` in each language, in the phone's zone. */
+    @Test
+    fun datesWithTheirTimeAreWrittenAsEachLanguagesFormatStyleWritesThem() {
+        fun at(month: Int, day: Int, hour: Int, minute: Int): Instant =
+            LocalDateTime.of(2026, month, day, hour, minute).atZone(ZoneId.systemDefault()).toInstant()
+        val expected = mapOf(
+            at(10, 30, 15, 5) to listOf(
+                "Oct 30, 2026 at 3:05\u202FPM", "30. Okt. 2026, 15:05", "30 oct. 2026 à 15:05", "30 ott 2026, 15:05", "30 oct 2026, 15:05",
+                "30/10/2026, 15:05", "30 paź 2026 o 15:05",
+            ),
+            at(5, 3, 9, 45) to listOf(
+                "May 3, 2026 at 9:45\u202FAM", "3. Mai 2026, 9:45", "3 mai 2026 à 9:45", "3 mag 2026, 9:45", "3 may 2026, 9:45",
+                "3/05/2026, 9:45", "3 maj 2026 o 9:45",
+            ),
+            at(9, 1, 0, 0) to listOf(
+                "Sep 1, 2026 at 12:00\u202FAM", "1. Sept. 2026, 0:00", "1 sept. 2026 à 0:00", "1 set 2026, 0:00", "1 sept 2026, 0:00",
+                "1/09/2026, 0:00", "1 wrz 2026 o 0:00",
+            ),
+            at(3, 1, 12, 30) to listOf(
+                "Mar 1, 2026 at 12:30\u202FPM", "1. März 2026, 12:30", "1 mars 2026 à 12:30", "1 mar 2026, 12:30", "1 mar 2026, 12:30",
+                "1/03/2026, 12:30", "1 mar 2026 o 12:30",
+            ),
+        )
+        for ((date, texts) in expected) {
+            assertEquals("$date", texts, AppLanguage.entries.map { Localizer(it).abbreviatedDateTime(date) })
+        }
+    }
+
     /** What android/tools/FormatData.swift took from Foundation, so a table written again from another one shows here. */
     @Test
     fun eachLanguagesTableHoldsWhatFoundationWrites() {
@@ -247,6 +276,11 @@ class CoreParityTests {
         assertEquals(listOf("Mar", "März", "mars", "mar", "mar", "mar.", "mar"), tables.map { it.months[2] })
         assertEquals(listOf("Sep", "Sept.", "sept.", "set", "sept", "set.", "wrz"), tables.map { it.months[8] })
         assertEquals(listOf("", ".", "", "", "", "", ""), tables.map { it.dayPeriod })
+        assertEquals(
+            listOf("MMM d, y 'at' h:mm\u202Fa", "d. MMM y, H:mm", "d MMM y 'à' H:mm", "d MMM y, H:mm", "d MMM y, H:mm", "d/MM/y, H:mm", "d MMM y 'o' H:mm"),
+            tables.map { it.dateTime },
+        )
+        assertEquals(listOf("AM", "PM"), tables[0].dayPeriods)
         assertEquals(listOf(".", ",", ",", ",", ",", ",", ","), tables.map { it.money.decimal })
         assertEquals(listOf(",", ".", " ", ".", ".", " ", " "), tables.map { it.money.group })
         assertEquals(listOf(4, 4, 4, 5, 5, 5, 5), tables.map { it.money.groupingFrom })

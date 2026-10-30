@@ -366,6 +366,16 @@ class Localizer(
         return "$weekday ${fields.dayOfMonth}${format.dayPeriod} $month"
     }
 
+    /**
+     * A date and its time as `Date.FormatStyle(date: .abbreviated, time: .shortened)` writes them in the app language,
+     * in the phone's zone: "Oct 30, 2026 at 3:05 PM", "30. Okt. 2026, 15:05", "30 oct. 2026 à 15:05", in the
+     * iPhone's pattern and names (FormatData.kt), not the phone's CLDR.
+     */
+    fun abbreviatedDateTime(date: Instant): String {
+        val format = FormatData.language(language)
+        return foundationPattern(format.dateTime, fields(date), format)
+    }
+
     fun dateTime(value: String): String {
         val date = DateParser.date(value) ?: return value
         return "${shortDate(date)}, ${clockTime(date)}"
@@ -529,6 +539,54 @@ val TrackingEvent.displayDate: Instant? get() = calendarDay ?: DateParser.date(o
 /** Foundation's `timeIntervalSince`: the seconds from `other` to this instant. */
 internal fun Instant.timeIntervalSince(other: Instant): Double =
     (epochSecond - other.epochSecond) + (nano - other.nano) / 1_000_000_000.0
+
+/**
+ * A date's `fields` written in a pattern of FormatData.kt, as android/tools/FormatData.swift checked it against
+ * Foundation: a run of one ASCII letter is a field, text between apostrophes is written as it is, and two apostrophes
+ * are one. Its fields are those the tables' patterns use: the day, the month's two digits or its name, the year, the
+ * hour of the day or of its half, the minutes and the day period.
+ */
+private fun foundationPattern(pattern: String, fields: FoundationDates.DateFields, format: FormatData.Language): String {
+    val written = StringBuilder()
+    var quoted = false
+    var index = 0
+    while (index < pattern.length) {
+        val character = pattern[index]
+        if (character == '\'') {
+            if (pattern.getOrNull(index + 1) == '\'') {
+                written.append('\'')
+                index += 2
+            } else {
+                quoted = !quoted
+                index++
+            }
+            continue
+        }
+        if (quoted || character !in 'a'..'z' && character !in 'A'..'Z') {
+            written.append(character)
+            index++
+            continue
+        }
+        var end = index
+        while (end < pattern.length && pattern[end] == character) end++
+        val hour = fields.hour
+        written.append(
+            when (pattern.substring(index, end)) {
+                "d" -> fields.dayOfMonth.toString()
+                "MM" -> fields.month.toString().padStart(2, '0')
+                "MMM" -> format.months[fields.month - 1]
+                "y" -> fields.yearOfEra.toString()
+                "H" -> hour.toString()
+                "h" -> (if (hour % 12 == 0) 12 else hour % 12).toString()
+                "mm" -> fields.minute.toString().padStart(2, '0')
+                "a" -> format.dayPeriods[if (hour < 12) 0 else 1]
+                else -> error("No field ${pattern.substring(index, end)} in $pattern")
+            },
+        )
+        index = end
+    }
+    return written.toString()
+}
 
 /** Foundation's `timeIntervalSinceReferenceDate`: the seconds since 2001-01-01, as a `Date` holds them and JSON writes them. */
 internal val Instant.timeIntervalSinceReferenceDate: Double

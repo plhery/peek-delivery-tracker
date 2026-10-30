@@ -2,7 +2,8 @@
 // amounts of money and distances with in each of the app's languages, for Android, whose phone ICU and JVM bring their
 // own CLDR ("Sept" for September in English, "1.234,50 €" in Italian on Android 12). For `Localizer.shortDate`, the
 // "EEE" and "MMM" a Gregorian DateFormatter writes and the period its "dMMM" template puts after the day; for
-// `value.formatted(.currency(code:).locale(_:))`, each language's separators, grouping and minus, and the symbol of
+// `Localizer.abbreviatedDateTime`, the pattern `Date.FormatStyle(date: .abbreviated, time: .shortened)` writes in and
+// its day periods; for `value.formatted(.currency(code:).locale(_:))`, each language's separators, grouping and minus, and the symbol of
 // every currency in use (Foundation's common ones and each region's), with Apple's fraction digits; for
 // `ParcelRoute.formattedKilometres`, the grouping and unit of kilometres. Before writing, it puts dates, amounts and distances
 // together from the tables as FoundationText.kt and Core.kt do, and stops at the first that Foundation writes otherwise.
@@ -91,6 +92,90 @@ func dates(_ language: String) -> Dates {
         moment += 86_400 + 420
     }
     return dates
+}
+
+// MARK: Dates with their time
+
+/// What `Date.FormatStyle(date: .abbreviated, time: .shortened)` writes in: the pattern of the "yMMMdjmm" template,
+/// its hour in as few digits as it takes, as the style's `.shortened` asks, and what its "a" writes before and after
+/// noon.
+struct DateTimes {
+    let pattern: String
+    let dayPeriods: [String]
+}
+
+/// A pattern's parts, as `foundationPattern` (Core.kt) reads them: a run of one ASCII letter is a field, text between
+/// apostrophes is written as it is, and two apostrophes are one.
+func patternParts(_ pattern: String) -> [(field: Bool, text: String)] {
+    var parts: [(field: Bool, text: String)] = []
+    let characters = Array(pattern)
+    var literal = ""
+    var quoted = false
+    var index = 0
+    while index < characters.count {
+        let character = characters[index]
+        if character == "'" {
+            if index + 1 < characters.count && characters[index + 1] == "'" {
+                literal.append("'")
+                index += 2
+            } else {
+                quoted.toggle()
+                index += 1
+            }
+        } else if !quoted && character.isASCII && character.isLetter {
+            if !literal.isEmpty { parts.append((false, literal)); literal = "" }
+            var end = index
+            while end < characters.count && characters[end] == character { end += 1 }
+            parts.append((true, String(characters[index..<end])))
+            index = end
+        } else {
+            literal.append(character)
+            index += 1
+        }
+    }
+    if !literal.isEmpty { parts.append((false, literal)) }
+    return parts
+}
+
+/// `foundationPattern` (Core.kt): the moment's fields in UTC, written in `pattern` with the tables' names.
+func modelDateTime(_ pattern: String, _ moment: Date, _ dates: Dates, _ dayPeriods: [String]) -> String {
+    let fields = utcCalendar.dateComponents([.year, .month, .day, .hour, .minute], from: moment)
+    let hour = fields.hour!
+    return patternParts(pattern).map { part in
+        guard part.field else { return part.text }
+        switch part.text {
+        case "d": return String(fields.day!)
+        case "MM": return String(format: "%02d", fields.month!)
+        case "MMM": return dates.months[fields.month! - 1]
+        case "y": return String(fields.year!)
+        case "H": return String(hour)
+        case "h": return String(hour % 12 == 0 ? 12 : hour % 12)
+        case "mm": return String(format: "%02d", fields.minute!)
+        case "a": return dayPeriods[hour < 12 ? 0 : 1]
+        default: fail("\(pattern): no model for \(part.text)")
+        }
+    }.joined()
+}
+
+func dateTimes(_ language: String, _ dates: Dates) -> DateTimes {
+    let template = DateFormatter()
+    template.locale = locale(language)
+    template.setLocalizedDateFormatFromTemplate("yMMMdjmm")
+    let pattern = template.dateFormat.replacingOccurrences(of: "HH", with: "H").replacingOccurrences(of: "hh", with: "h")
+    let period = formatter("a", language)
+    let times = DateTimes(pattern: pattern, dayPeriods: [period.string(from: date(2026, 2, 1, 9)), period.string(from: date(2026, 2, 1, 15))])
+    let style = Date.FormatStyle(
+        date: .abbreviated, time: .shortened, locale: locale(language), calendar: Calendar(identifier: .gregorian),
+        timeZone: TimeZone(identifier: "UTC")!
+    )
+    // Each day of four years, at a time that moves on by seven minutes a day.
+    var moment = date(2024, 1, 1, 0)
+    while moment < date(2028, 1, 1, 0) {
+        let written = style.format(moment), expected = modelDateTime(pattern, moment, dates, times.dayPeriods)
+        if written != expected { fail("\(language) \(moment): Foundation writes \(written), the tables \(expected)") }
+        moment += 86_400 + 420
+    }
+    return times
 }
 
 // MARK: Numbers
@@ -315,6 +400,7 @@ func digitsSource(_ digits: Digits) -> String {
 var languageSources: [String] = []
 for language in languages {
     let dates = dates(language)
+    let times = dateTimes(language, dates)
     let money = money(language)
     let (distances, unit) = distances(language)
     let symbols = money.symbols.sorted(by: { $0.key < $1.key }).map { "\(kotlin($0.key)) to \(kotlin($0.value))," }
@@ -324,6 +410,8 @@ for language in languages {
             weekdays = \(list(dates.weekdays)),
             months = \(list(dates.months)),
             dayPeriod = \(kotlin(dates.dayPeriod)),
+            dateTime = \(kotlin(times.pattern)),
+            dayPeriods = \(list(times.dayPeriods)),
             money = \(digitsSource(money.digits)),
             currencyFirst = \(money.currencyFirst),
             currencySymbols = mapOf(
@@ -368,15 +456,18 @@ internal object FormatData {
 
     /**
      * A language's formats. `weekdays`, Sunday first, and `months` are what a Gregorian DateFormatter writes for "EEE"
-     * and "MMM", and `dayPeriod` is what its "dMMM" template writes after the day. A currency's symbol, which is its
-     * code unless `currencySymbols` has another, goes before the number when `currencyFirst`, where ICU keeps it from
-     * digits with a no-break space if it is the code or in `spacedSymbols`, and else after the number and a no-break
-     * space. `kilometres` follows a number of kilometres.
+     * and "MMM", and `dayPeriod` is what its "dMMM" template writes after the day. `dateTime` is the pattern
+     * `Date.FormatStyle(date: .abbreviated, time: .shortened)` writes in, and `dayPeriods` what its "a" writes before
+     * and after noon. A currency's symbol, which is its code unless `currencySymbols` has another, goes before the
+     * number when `currencyFirst`, where ICU keeps it from digits with a no-break space if it is the code or in
+     * `spacedSymbols`, and else after the number and a no-break space. `kilometres` follows a number of kilometres.
      */
     class Language(
         val weekdays: List<String>,
         val months: List<String>,
         val dayPeriod: String,
+        val dateTime: String,
+        val dayPeriods: List<String>,
         val money: Digits,
         val currencyFirst: Boolean,
         val currencySymbols: Map<String, String>,

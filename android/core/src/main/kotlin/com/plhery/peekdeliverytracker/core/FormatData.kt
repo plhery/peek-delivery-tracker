@@ -14,15 +14,18 @@ internal object FormatData {
 
     /**
      * A language's formats. `weekdays`, Sunday first, and `months` are what a Gregorian DateFormatter writes for "EEE"
-     * and "MMM", and `dayPeriod` is what its "dMMM" template writes after the day. A currency's symbol, which is its
-     * code unless `currencySymbols` has another, goes before the number when `currencyFirst`, where ICU keeps it from
-     * digits with a no-break space if it is the code or in `spacedSymbols`, and else after the number and a no-break
-     * space. `kilometres` follows a number of kilometres.
+     * and "MMM", and `dayPeriod` is what its "dMMM" template writes after the day. `dateTime` is the pattern
+     * `Date.FormatStyle(date: .abbreviated, time: .shortened)` writes in, and `dayPeriods` what its "a" writes before
+     * and after noon. A currency's symbol, which is its code unless `currencySymbols` has another, goes before the
+     * number when `currencyFirst`, where ICU keeps it from digits with a no-break space if it is the code or in
+     * `spacedSymbols`, and else after the number and a no-break space. `kilometres` follows a number of kilometres.
      */
     class Language(
         val weekdays: List<String>,
         val months: List<String>,
         val dayPeriod: String,
+        val dateTime: String,
+        val dayPeriods: List<String>,
         val money: Digits,
         val currencyFirst: Boolean,
         val currencySymbols: Map<String, String>,
@@ -65,6 +68,8 @@ internal object FormatData {
         weekdays = listOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"),
         months = listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"),
         dayPeriod = "",
+        dateTime = "MMM d, y 'at' h:mm\u202Fa",
+        dayPeriods = listOf("AM", "PM"),
         money = Digits(decimal = ".", group = ",", groupingFrom = 4, minus = "-"),
         currencyFirst = true,
         currencySymbols = mapOf(
@@ -83,6 +88,8 @@ internal object FormatData {
         weekdays = listOf("So.", "Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa."),
         months = listOf("Jan.", "Feb.", "M\u00E4rz", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sept.", "Okt.", "Nov.", "Dez."),
         dayPeriod = ".",
+        dateTime = "d. MMM y, H:mm",
+        dayPeriods = listOf("AM", "PM"),
         money = Digits(decimal = ",", group = ".", groupingFrom = 4, minus = "-"),
         currencyFirst = false,
         currencySymbols = mapOf(
@@ -100,6 +107,8 @@ internal object FormatData {
         weekdays = listOf("dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."),
         months = listOf("janv.", "f\u00E9vr.", "mars", "avr.", "mai", "juin", "juil.", "ao\u00FBt", "sept.", "oct.", "nov.", "d\u00E9c."),
         dayPeriod = "",
+        dateTime = "d MMM y '\u00E0' H:mm",
+        dayPeriods = listOf("AM", "PM"),
         money = Digits(decimal = ",", group = "\u202F", groupingFrom = 4, minus = "-"),
         currencyFirst = false,
         currencySymbols = mapOf(
@@ -119,6 +128,8 @@ internal object FormatData {
         weekdays = listOf("dom", "lun", "mar", "mer", "gio", "ven", "sab"),
         months = listOf("gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"),
         dayPeriod = "",
+        dateTime = "d MMM y, H:mm",
+        dayPeriods = listOf("AM", "PM"),
         money = Digits(decimal = ",", group = ".", groupingFrom = 5, minus = "-"),
         currencyFirst = false,
         currencySymbols = mapOf(
@@ -135,6 +146,8 @@ internal object FormatData {
         weekdays = listOf("dom", "lun", "mar", "mi\u00E9", "jue", "vie", "s\u00E1b"),
         months = listOf("ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sept", "oct", "nov", "dic"),
         dayPeriod = "",
+        dateTime = "d MMM y, H:mm",
+        dayPeriods = listOf("a.\u202Fm.", "p.\u202Fm."),
         money = Digits(decimal = ",", group = ".", groupingFrom = 5, minus = "-"),
         currencyFirst = false,
         currencySymbols = mapOf(
@@ -150,6 +163,8 @@ internal object FormatData {
         weekdays = listOf("domingo", "segunda", "ter\u00E7a", "quarta", "quinta", "sexta", "s\u00E1bado"),
         months = listOf("jan.", "fev.", "mar.", "abr.", "mai.", "jun.", "jul.", "ago.", "set.", "out.", "nov.", "dez."),
         dayPeriod = "",
+        dateTime = "d/MM/y, H:mm",
+        dayPeriods = listOf("AM", "PM"),
         money = Digits(decimal = ",", group = "\u00A0", groupingFrom = 5, minus = "-"),
         currencyFirst = false,
         currencySymbols = mapOf(
@@ -168,6 +183,8 @@ internal object FormatData {
         weekdays = listOf("niedz.", "pon.", "wt.", "\u015Br.", "czw.", "pt.", "sob."),
         months = listOf("sty", "lut", "mar", "kwi", "maj", "cze", "lip", "sie", "wrz", "pa\u017A", "lis", "gru"),
         dayPeriod = "",
+        dateTime = "d MMM y 'o' H:mm",
+        dayPeriods = listOf("AM", "PM"),
         money = Digits(decimal = ",", group = "\u00A0", groupingFrom = 5, minus = "-"),
         currencyFirst = false,
         currencySymbols = mapOf(

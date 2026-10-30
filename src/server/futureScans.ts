@@ -1,6 +1,6 @@
 import { languageStageStatus, type CarrierEvent, type CarrierResult, type Stage } from 'universal-parcel-scraper';
 import { eventTimestamp, resultTimezone } from 'universal-parcel-scraper/app';
-import type { JsonObject } from './types';
+import { isRecord, type JsonObject } from './types';
 
 /**
  * How far after a check a scan may be dated before its clock counts as read in
@@ -45,6 +45,29 @@ export function withoutFutureSummary(result: CarrierResult, carrierId: string, n
     last_update: newest.time ?? result.last_update,
     ...(stage ? { current_stage: stage, status: languageStageStatus(stage) } : {}),
   };
+}
+
+/**
+ * A routing watermark (the newest scan's time) that a scan dated over an hour after its check set: the
+ * router caps such a scan at the check, and a row stored so stands at its own time once that has passed.
+ * Answers summarised by the newest scan before it (`withoutFutureSummary`) would read as older, and the
+ * parcel would keep the status line it gave. The watermark comes back to the newest other scan, of the
+ * answer (`events`, as normalized) or stored, when it is past that and no later than the check or the
+ * newest scan dated ahead. Peek's own rows and sightings without a scan time are no scans.
+ */
+export function withoutAheadWatermark(time: number, events: readonly JsonObject[], stored: readonly JsonObject[], now: Date): number {
+  if (!Number.isFinite(time)) return time;
+  const storedAhead = storedAheadOfCheck(stored);
+  const raw = (row: JsonObject) => isRecord(row.raw_data) ? row.raw_data : row;
+  const scans = [...events, ...stored].filter((row) => !String(row.provider_event_id ?? '').startsWith('app:')
+    && raw(row).observed_without_provider_timestamp !== true);
+  const ahead = (row: JsonObject) => datedAfterCheck(row.occurred_at, 'UTC', now) || storedAhead.has(scanKey(raw(row).time, row.description));
+  const instants = (rows: readonly JsonObject[]) => rows.map((row) => Date.parse(String(row.occurred_at ?? ''))).filter(Number.isFinite);
+  const aheadOf = instants(scans.filter(ahead));
+  const others = instants(scans.filter((row) => !ahead(row)));
+  if (aheadOf.length === 0 || others.length === 0) return time;
+  const newest = Math.max(...others);
+  return time > newest && time <= Math.max(now.getTime(), ...aheadOf) ? newest : time;
 }
 
 /** The stored rows dated over an hour after they were first stored, by `scanKey`. */

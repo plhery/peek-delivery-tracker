@@ -767,7 +767,8 @@ carrier's own reply look older, and the watermark comes back once the provider's
 answer moves its rows. Nor does a scan dated over an hour after its check set the parcel's
 status line or stage, then or once its time has passed: the sync stores and flags it
 (`future_event_timestamp`) and takes both from the answer's newest other scan
-([futureScans.ts](../src/server/futureScans.ts)).
+([futureScans.ts](../src/server/futureScans.ts)). Nor does it hold the watermark: one it set,
+capped at the check, or at its own time once that has passed, comes back to the newest other scan.
 A watermark a provider's summary set is that provider's newest scan,
 which the sync stored, so one past every stored scan comes back to the newest, its copies
 having moved since. The router holds a carrier

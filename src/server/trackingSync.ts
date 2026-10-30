@@ -56,7 +56,7 @@ import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
 import { collectedPickupPoint } from './collectedPickupPoint';
-import { datedAfterCheck, scanKey, storedAheadOfCheck, withoutFutureSummary } from './futureScans';
+import { datedAfterCheck, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
 import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, hasUnresolvedDirectCurrent, localClockCarrier } from './directLocalHistory';
 import { carrierMovedAt, eventStage, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
 import { DIRECT_HISTORY, directHistory } from './providerCopies';
@@ -2075,9 +2075,10 @@ export class TrackingSyncService {
       // the sync matched nor those it could not tell from the carrier's scans.
       const misdated = misdatedCopies(events, stored, now.getTime());
       const previousData = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-      const previousEventTime = withoutCopyDrift(
+      // Nor may a scan dated hours after its check, which the router capped at the check.
+      const previousEventTime = withoutAheadWatermark(withoutCopyDrift(
         Date.parse(previousRouting.last_event_at ?? ''), events, stored, matches, { ...providerWatermark(previousData, stored), misdated },
-      );
+      ), events, stored, now);
       // Read as routing wrote the watermark: a naive local clock in its source's zone.
       const returnedEventTime = withoutCopyDrift(
         Date.parse(eventTimestamp(result.last_update, resultTimezone(sourceCarrierId, result)) ?? ''), events, stored, matches, { misdated },
@@ -2155,11 +2156,11 @@ export class TrackingSyncService {
       if (routing) {
         // A fallback's scan that is kept out must not make the carrier's next reply look older.
         const keepWatermark = olderSnapshot || keepSaved || unprovenProviderSummary || noticesPast;
-        const watermark = keepWatermark ? previousEventTime : withoutCopyDrift(
+        const watermark = keepWatermark ? previousEventTime : withoutAheadWatermark(withoutCopyDrift(
           Date.parse(String(routing.last_event_at ?? '')), events, stored, matches, { also: [returnedEventTime,
             fetched.earlierResult && !fetched.earlierFollowUp
               ? latestResultTime(fetched.earlierResult, fetched.earlierCarrierId ?? sourceCarrierId) : Number.NaN], misdated },
-        );
+        ), events, stored, now);
         const saved = keepWatermark ? previousRouting.last_event_at : routing.last_event_at;
         if (Number.isFinite(watermark) && Date.parse(String(saved ?? '')) !== watermark) routing.last_event_at = new Date(watermark).toISOString();
         else if (saved !== undefined || keepWatermark) routing.last_event_at = saved;

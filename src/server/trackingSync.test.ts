@@ -922,6 +922,33 @@ describe('status observation collection', () => {
     }));
   });
 
+  it('keeps a scan dated hours after its check out of the watermark, then and once its time has passed', async () => {
+    const store = eventStore();
+    // A sender's notice on its own clock under the carrier's offset, five hours ahead of the first check.
+    const notice = { time: '2026-10-30T18:16:41Z', description: 'Synthetic notice of a handover', stage: 'accepted', provider_code: 'N' };
+    const departure = { time: '2026-10-30T10:53:06Z', description: 'Synthetic departure', stage: 'in_transit', provider_code: 'D' };
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'accepted', current_stage_source: 'carrier_map',
+      last_status_text: notice.description, last_update: notice.time, events: [notice, departure] }),
+    fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+    let now = new Date('2026-10-30T13:21:00Z');
+    const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'ahead', carrier: 'ctt', tracking_number: 'TEST1234', current_stage: 'pending' };
+    const check = async () => {
+      await service.syncPackage({ ...parcel, [STORED_EVENT_IDENTITIES]: store.identities() }, { trigger: 'scheduled' });
+      parcel = { ...parcel, ...store.client.updatePackage.mock.calls.at(-1)![1] };
+      for (const row of store.rows.values()) row.created_at ??= now.toISOString();
+      return { stage: parcel.current_stage, line: parcel.last_status_text,
+        watermark: ((parcel.carrier_data as JsonObject).routing as JsonObject).last_event_at };
+    };
+    expect(await check()).toEqual({ stage: 'in_transit', line: departure.description, watermark: '2026-10-30T10:53:06.000Z' });
+    now = new Date('2026-10-30T20:50:00Z');
+    expect(await check()).toEqual({ stage: 'in_transit', line: departure.description, watermark: '2026-10-30T10:53:06.000Z' });
+    // A watermark the router capped at an earlier check comes back too, and with it the status line.
+    parcel = { ...parcel, last_status_text: notice.description, carrier_data: { ...parcel.carrier_data as JsonObject,
+      last_status_text: notice.description, routing: { ...(parcel.carrier_data as JsonObject).routing as JsonObject, last_event_at: '2026-10-30T13:50:51.969Z' } } };
+    expect(await check()).toEqual({ stage: 'in_transit', line: departure.description, watermark: '2026-10-30T10:53:06.000Z' });
+  });
+
   it('closes the wording a carrier map leaves unmapped on purpose once it is recorded', async () => {
     const client = fakeClient();
     const adapter = { fetch: vi.fn().mockResolvedValue({
@@ -6338,7 +6365,9 @@ function eventStore() {
     if (new Set(ids).size !== ids.length) throw new Error('ON CONFLICT DO UPDATE command cannot affect row a second time');
     for (const event of events) {
       const id = String(event.provider_event_id);
-      rows.set(id, { ...event, id: rows.get(id)?.id ?? `row-${++created}` });
+      // An upsert keeps the row's id and the time it was first stored.
+      const kept = rows.get(id);
+      rows.set(id, { ...event, id: kept?.id ?? `row-${++created}`, ...(kept?.created_at ? { created_at: kept.created_at } : {}) });
     }
     for (const [id, row] of rows) if (descriptions.includes(String(row.description))) rows.delete(id);
     for (const id of absorbed) if (!ids.includes(id)) rows.delete(id);
@@ -6364,6 +6393,7 @@ function eventStore() {
       time_provenance: (row.raw_data as JsonObject | undefined)?.time_provenance,
       provider_time_iso: (row.raw_data as JsonObject | undefined)?.provider_time_iso,
       retimed_from: (row.raw_data as JsonObject | undefined)?.retimed_from,
+      created_at: row.created_at,
     })),
     batch: () => (client.applyTrackingSync.mock.calls.at(-1)?.[2] ?? []) as JsonObject[],
   };

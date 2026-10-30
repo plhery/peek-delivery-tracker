@@ -225,7 +225,7 @@ private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID,
         // The delivery email's offer comes with the account's alerts.
         PickupPoint(state, parcel)
         CarrierNotes(state, parcel)
-        ShipmentIdentity(parcel)
+        ShipmentIdentity(state, parcel, pageId)
         ShipmentDetails(state, parcel, pageId)
         if (divided) Box(Modifier.fillMaxWidth().height(1.dp).background(PeekTheme.colors.separator))
     }
@@ -299,10 +299,26 @@ private fun CarrierNotes(state: DeliveriesState, parcel: Parcel) {
     )
 }
 
-/** `shipmentIdentity`: the numbers and the carrier's links. Not ported yet. */
-@Suppress("UNUSED_PARAMETER")
+/**
+ * The parcel's numbers and its carriers' pages ([ShipmentNumbers]), in its carrier's ink: none for the sample, whose
+ * number is made up, nor for a number a link hides. A copy says so on its row ([DeliveriesState.copyOnPage]), and a
+ * page opened is counted. The page's question will hear of the visit too (`feedback.visited`) once it comes, with
+ * its step.
+ */
 @Composable
-private fun ShipmentIdentity(parcel: Parcel) = Unit
+private fun ShipmentIdentity(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
+    val language = LocalLanguage.current
+    val identities = LocalCarrierIdentities.current ?: return
+    val identity = shownCarrierIdentity(parcel, LocalLocalizer.current, language) ?: return
+    val links = if (state.sample(pageId) == null && parcel.trackingNumber.isNotEmpty()) identities.catalog.trackingLinks(parcel, language) else emptyList()
+    ShipmentNumbers(
+        parcel, links, PeekTheme.colors.resolve(identity.ink),
+        copied = state.copiedNumber?.takeIf { it.pageId == pageId }?.number,
+        onCopy = { state.copyOnPage(pageId, it) },
+        onLink = { state.source.action("parcel-carrier-link") },
+        Modifier.testTag(PAGE_IDENTITY),
+    )
+}
 
 /**
  * After the numbers, the shipment's facts where the parcel has carrier data ([ShipmentFacts]), then what the page says

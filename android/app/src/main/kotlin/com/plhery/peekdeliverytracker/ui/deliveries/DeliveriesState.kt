@@ -40,6 +40,7 @@ import com.plhery.peekdeliverytracker.core.ParcelSectionKind
 import com.plhery.peekdeliverytracker.core.ParcelSort
 import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
 import com.plhery.peekdeliverytracker.core.ParcelStore
+import com.plhery.peekdeliverytracker.core.ParcelTrackingNumber
 import com.plhery.peekdeliverytracker.core.PullToRefreshModel
 import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
 import com.plhery.peekdeliverytracker.core.trackingNumbers
@@ -872,6 +873,26 @@ internal class DeliveriesState(
      */
     var copy: (text: String) -> Boolean = { false }
 
+    /** The number a parcel's page last copied, which its row says it copied (`copiedNumber`): null once its time is up. */
+    var copiedNumber: CopiedNumber? by mutableStateOf(null)
+        private set
+
+    /**
+     * Copies one of the numbers of the page with `pageId` (the page's `copy(_:carrier:)`): counted, on the clipboard as
+     * its carrier's site takes it with the success tap ([copyNumber]), and said on its row for 2 s. A copy's time ends
+     * the word while it still says that number, as the iPhone's task checks, so a copy of another number since keeps
+     * its whole 2 s and a second copy of the same one doesn't.
+     */
+    fun copyOnPage(pageId: UUID, entry: ParcelTrackingNumber) {
+        copyNumber(entry)
+        val copied = CopiedNumber(pageId, entry.number)
+        copiedNumber = copied
+        scope.launch {
+            delay(COPIED_DURATION)
+            if (copiedNumber == copied) copiedNumber = null
+        }
+    }
+
     /** `refreshFromPull()`: holds the pull open until every parcel has been checked, then shows the result on the seal. */
     fun refreshFromPull() {
         scope.launch {
@@ -1017,14 +1038,14 @@ internal class DeliveriesState(
     /**
      * What the page's ••• menu asked of its parcel (ParcelDetailView's `chose(_:on:)`). The page is open already.
      * Naming the parcel and changing its carrier open what comes with the page's sections, and do nothing yet; the
-     * page shares a parcel from its own button. Copying puts the first number on the clipboard. Archiving and
-     * restoring save the change, then leave the page; deleting asks first. Only one change is saved at a time.
+     * page shares a parcel from its own button. Copying puts the first number on the clipboard and says so on its
+     * row. Archiving and restoring save the change, then leave the page; deleting asks first. Only one change is saved
+     * at a time.
      */
     fun choseOnPage(item: ParcelMenuItem, parcel: Parcel) {
         when (item) {
             ParcelMenuItem.Open, ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
-            // The page says nothing of it: the iPhone's shows "Copied" on the number's row, which isn't ported yet.
-            ParcelMenuItem.CopyTrackingNumber -> copyTrackingNumber(parcel)
+            ParcelMenuItem.CopyTrackingNumber -> parcel.trackingNumbers.firstOrNull()?.let { copyOnPage(navigator.navigation.shown ?: parcel.id, it) }
             ParcelMenuItem.Archive -> runOnPage(parcel) { archive(parcel).await() }
             ParcelMenuItem.Restore -> runOnPage(parcel) { restore(parcel).await() }
             ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel, fromPage = true)
@@ -1032,11 +1053,16 @@ internal class DeliveriesState(
     }
 
     /**
-     * Puts the parcel's first number on the clipboard, as its carrier's site takes it: whether the app says so itself,
-     * where the system doesn't; null with no number.
+     * Puts the parcel's first number on the clipboard ([copyNumber]): whether the app says so itself, where the system
+     * doesn't; null with no number.
      */
-    private fun copyTrackingNumber(parcel: Parcel): Boolean? {
-        val entry = parcel.trackingNumbers.firstOrNull() ?: return null
+    private fun copyTrackingNumber(parcel: Parcel): Boolean? = parcel.trackingNumbers.firstOrNull()?.let(::copyNumber)
+
+    /**
+     * `TrackingNumberCopy.copy`: counts the copy and puts the number on the clipboard as its carrier's site takes it,
+     * with the success tap ([copy]); whether the app says so itself, where the system doesn't.
+     */
+    private fun copyNumber(entry: ParcelTrackingNumber): Boolean {
         source.action("parcel-copy-tracking")
         return copy(TrackingNumberCopy.text(entry.number, entry.carrier))
     }
@@ -1133,6 +1159,10 @@ internal class DeliveriesState(
     }
 }
 
+/** The number a page with `pageId` copied, which its row says it copied. */
+@Immutable
+internal data class CopiedNumber(val pageId: UUID, val number: String)
+
 /**
  * The carrier editor asked for on the page with `pageId`, opening on `initialCarrier` where a prompt names one
  * (`CarrierEditorRequest`): each request another, as each of the iPhone's has its own id.
@@ -1166,6 +1196,9 @@ internal const val ARCHIVE_KEY = "archive"
 
 /** How long an archived parcel's Undo stays, in milliseconds. */
 private const val UNDO_DURATION = 7_000L
+
+/** How long a page's number says it was copied, in milliseconds. */
+private const val COPIED_DURATION = 2_000L
 
 /** A place moved up or down the list by `dy` points. */
 private fun DeliveryCardPlace.shifted(dy: Float): DeliveryCardPlace = copy(frame = frame.offsetBy(0.0, dy.toDouble()))

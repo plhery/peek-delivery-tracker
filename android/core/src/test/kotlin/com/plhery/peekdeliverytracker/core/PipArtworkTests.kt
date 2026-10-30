@@ -154,6 +154,22 @@ class PipArtworkTests {
     }
 
     @Test
+    fun theInsideThenTheSidesAreTheBox() {
+        // What rises out of an open box goes between the two, in front of the rear flaps and behind the sides.
+        for (opening in listOf(PipOpening.closed, PipOpening.at(0.4), PipOpening.open)) {
+            val box = MapDrawingContext().also { PipArtwork.box(it, PipPalette.kraft, opening) }.drawing
+            val split = MapDrawingContext().also {
+                PipArtwork.inside(it, PipPalette.kraft, opening)
+                PipArtwork.sides(it, PipPalette.kraft)
+            }.drawing
+            assertEquals(trace(box), trace(split))
+            val inside = MapDrawingContext().also { PipArtwork.inside(it, PipPalette.kraft, opening) }.drawing
+            assertEquals(trace(box).take(inside.size), trace(inside))
+            assertTrue(inside.isNotEmpty() && inside.size < box.size)
+        }
+    }
+
+    @Test
     fun aCopiedContextDrawsIntoTheSameSteps() {
         // As `var layer = context`: its own transform and opacity, the same canvas. A transform given later applies first.
         val context = MapDrawingContext()

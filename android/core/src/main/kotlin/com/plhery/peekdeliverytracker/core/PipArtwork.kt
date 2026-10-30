@@ -30,9 +30,22 @@ object PipArtwork {
 
     /** The same box on its way open. */
     fun box(context: MapDrawingContext, palette: PipPalette, opening: PipOpening) {
+        inside(context, palette, opening)
+        sides(context, palette)
+    }
+
+    /**
+     * The box behind its sides: the inside and the rear flaps. What rises out of an open box goes on next, then
+     * `sides` in front of it (`UnwrappingParcel`'s card).
+     */
+    fun inside(context: MapDrawingContext, palette: PipPalette, opening: PipOpening) {
         context.fill(PipGeometry.polygon(PipGeometry.inside), palette.inside)
         flap(context, palette, PipGeometry.backLeft, palette.backLeft, at = opening.rear, opacity = opening.under)
         flap(context, palette, PipGeometry.backRight, palette.backRight, at = opening.rear)
+    }
+
+    /** The box's two sides, their light and their edges. */
+    fun sides(context: MapDrawingContext, palette: PipPalette) {
         context.fill(PipGeometry.polygon(PipGeometry.leftSide), palette.left)
         context.fill(PipGeometry.polygon(PipGeometry.rightSide), palette.right)
         context.fill(PipGeometry.polygon(PipGeometry.leftSide), palette.highlight.opacity(0.07))

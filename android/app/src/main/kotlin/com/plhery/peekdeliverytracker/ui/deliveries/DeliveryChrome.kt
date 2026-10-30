@@ -927,39 +927,49 @@ private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier =
                     },
             ) {
                 PipCanvas(Modifier.size(FRAME_WIDTH.dp, FRAME_HEIGHT.dp)) { PipArtwork.box(it, PipPalette.kraft, open = false) }
-                Decoration(218f, 214f) {
-                    PeekSymbol(
-                        "arrow.up",
-                        Modifier.rotate(-27f),
-                        font = PeekTheme.type.fixed(18f, FontWeight.Medium),
-                        tint = Color(0xFF735C43),
-                    )
-                }
-                Decoration(183f, 234f) {
-                    Box(
-                        Modifier
-                            .rotate(-27f)
-                            .size(28.dp)
-                            .background(Color(0xFFDECCE2), CircleShape)
-                            .drawBehind {
-                                val ring = 1.2.dp.toPx()
-                                drawCircle(
-                                    Color(0xFFFFF6FF).copy(alpha = 0.48f),
-                                    radius = size.minDimension / 2 - 2.5.dp.toPx(),
-                                    style = androidx.compose.ui.graphics.drawscope.Stroke(ring),
-                                )
-                            },
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        PeekSymbol("asterisk", font = PeekTheme.type.fixed(14f, FontWeight.Bold), tint = Color(0xFF7C6787))
-                    }
-                }
+                ParcelSideMarks()
                 PipCanvas(Modifier.size(FRAME_WIDTH.dp, FRAME_HEIGHT.dp)) {
                     PipArtwork.kraftFace(it, k = 1.0, happy = 0.0, blink = blink.time)
                     PipArtwork.frontFlaps(it, PipPalette.kraft, open = false)
                     PipArtwork.tape(it, PipPalette.kraft)
                 }
             }
+        }
+    }
+}
+
+/**
+ * The arrow and the seal on the parcel's right side, where it carries no carrier's label (`UnwrappingParcel`): an
+ * arrow.up of 18 medium in brown and an asterisk of 14 bold in lilac on its lilac circle, 28 across, both turned -27°.
+ * Drawn in Pip's 300 × 310 frame.
+ */
+@Composable
+internal fun ParcelSideMarks() {
+    Decoration(218f, 214f) {
+        PeekSymbol(
+            "arrow.up",
+            Modifier.rotate(-27f),
+            font = PeekTheme.type.fixed(18f, FontWeight.Medium),
+            tint = Color(0xFF735C43),
+        )
+    }
+    Decoration(183f, 234f) {
+        Box(
+            Modifier
+                .rotate(-27f)
+                .size(28.dp)
+                .background(Color(0xFFDECCE2), CircleShape)
+                .drawBehind {
+                    val ring = 1.2.dp.toPx()
+                    drawCircle(
+                        Color(0xFFFFF6FF).copy(alpha = 0.48f),
+                        radius = size.minDimension / 2 - 2.5.dp.toPx(),
+                        style = androidx.compose.ui.graphics.drawscope.Stroke(ring),
+                    )
+                },
+            contentAlignment = Alignment.Center,
+        ) {
+            PeekSymbol("asterisk", font = PeekTheme.type.fixed(14f, FontWeight.Bold), tint = Color(0xFF7C6787))
         }
     }
 }

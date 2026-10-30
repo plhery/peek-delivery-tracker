@@ -34,7 +34,7 @@ Shouwu's tracker is in English under a Chinese heading. It gives each parcel a s
 | --- | --- | --- |
 | `Not Found` | Shouwu has nothing under that number yet: "We seem can't identify the number." | "Waiting for the carrier" |
 | `Preparing` | Shouwu explains it as a parcel handed to its warehouse in China, or being weighed and sealed there. It can show before the first scan. | "Label created", then "Received by carrier" after a warehouse scan |
-| `In Transit` | Anything from the handover to a carrier to customs and the trip inside your country. | "In transit", or the newest scan's stage, such as "At customs" |
+| `In Transit` | Anything from the handover to a carrier to customs and the trip inside your country. | "In transit", or the newest scan's stage, such as "At customs"; "Label created" while there is only the order data and `Carrier received the shipment` |
 | `Undelivered` | A delivery attempt failed. | "Delivery attempted", or "Ready for pickup" or "Returned to sender" if the newest scan says so |
 | `Delivered` | Delivered to the addressee. | "Delivered" |
 
@@ -43,9 +43,9 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | Shouwu says | What it means for you | Peek shows |
 | --- | --- | --- |
 | `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | The seller has booked the parcel. Shouwu doesn't have it yet. | "Label created" |
+| `Carrier received the shipment` | Shouwu writes it two hours after the order data, days before the first warehouse scan: no one has the parcel yet. | "Label created" |
 | `Arrival processing center` | Shouwu's warehouse in China has taken the parcel in. | "Received by carrier" |
 | `Package processing completed` | The warehouse is done with it, before the flight. | "Received by carrier" |
-| `Carrier received the shipment` | A carrier has taken the parcel over from Shouwu. | "In transit" |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | At the airport in Shanghai, then flown out of China. | "In transit" |
 | `Arrived at airport of Destination` | Landed in your country. | "In transit" |
 | `Shipment started the customs clearance process at destination` | Your country's customs are clearing it. | "At customs" |
@@ -72,7 +72,7 @@ Shouwu's tracker gives no courier's name or number, beyond what a scan's wording
 
 **`Not Found`.** Shouwu gives four reasons: it hasn't accepted the parcel yet, hasn't scanned it yet, the number is wrong, or the parcel was posted so long ago that its tracking is gone. It says processing usually takes a few days. Peek shows "Waiting for the carrier" and keeps checking. Check the number character by character; if nothing comes after a few days, ask the seller.
 
-**Stuck on `Preparing` or `Shipment information received`.** Shouwu doesn't have the parcel yet, or hasn't sent it off from its warehouse. Ask the seller when it was handed over.
+**Stuck on `Preparing`, `Shipment information received` or `Carrier received the shipment`.** Shouwu doesn't have the parcel yet, or hasn't sent it off from its warehouse. Ask the seller when it was handed over.
 
 **Stuck at customs.** After `Shipment started the customs clearance process at destination`, it waits for your country's customs. If you're asked for import charges, see [parcels held at customs](guide:customs).
 

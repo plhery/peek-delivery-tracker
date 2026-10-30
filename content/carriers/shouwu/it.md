@@ -34,7 +34,7 @@ Il tracking di Shouwu è in inglese, sotto un titolo in cinese. Per ogni pacco d
 | --- | --- | --- |
 | `Not Found` | Shouwu non ha ancora niente con quel numero: «We seem can't identify the number.» | «In attesa del corriere» |
 | `Preparing` | Secondo Shouwu il pacco è stato consegnato al suo magazzino in Cina, o lì viene pesato e sigillato. Può comparire prima ancora delle scansioni. | «Etichetta creata», poi «Preso in carico» dopo una scansione del magazzino |
-| `In Transit` | Tutto il viaggio, dal passaggio a un vettore fino alla dogana e al trasporto nel Paese di arrivo. | «In transito», oppure la fase dell'ultima scansione, come «In dogana» |
+| `In Transit` | Tutto il viaggio, dal passaggio a un vettore fino alla dogana e al trasporto nel Paese di arrivo. | «In transito», oppure la fase dell'ultima scansione, come «In dogana»; «Etichetta creata» finché ci sono solo i dati dell'ordine e `Carrier received the shipment` |
 | `Undelivered` | Un tentativo di consegna non è riuscito. | «Tentativo di consegna», oppure «Pronto per il ritiro» o «Restituito al mittente» se lo dice l'ultima scansione |
 | `Delivered` | Consegnato al destinatario. | «Consegnato» |
 
@@ -43,9 +43,9 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | Shouwu scrive | Cosa vuol dire per te | Peek mostra |
 | --- | --- | --- |
 | `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Il venditore ha prenotato la spedizione. Shouwu non ha ancora il pacco. | «Etichetta creata» |
+| `Carrier received the shipment` | Shouwu la scrive due ore dopo i dati dell'ordine, giorni prima della prima scansione in magazzino: nessuno ha ancora il pacco. | «Etichetta creata» |
 | `Arrival processing center` | Il magazzino di Shouwu in Cina ha preso in carico il pacco. | «Preso in carico» |
 | `Package processing completed` | Il magazzino ha finito di lavorarlo, prima del volo. | «Preso in carico» |
-| `Carrier received the shipment` | Un vettore ha preso in consegna il pacco da Shouwu. | «In transito» |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | All'aeroporto di Shanghai, poi decollato dalla Cina. | «In transito» |
 | `Arrived at airport of Destination` | Atterrato nel Paese di arrivo. | «In transito» |
 | `Shipment started the customs clearance process at destination` | Sdoganamento in corso nel Paese di arrivo. | «In dogana» |
@@ -73,7 +73,7 @@ Il tracking di Shouwu non indica né il nome né il numero del corriere, oltre a
 
 **`Not Found`.** Shouwu dà quattro motivi: non ha ancora accettato il pacco, non l'ha ancora scansionato, il numero è sbagliato, oppure il pacco è partito così tanto tempo fa che il tracking non c'è più. Aggiunge che di solito la lavorazione richiede qualche giorno. Peek mostra «In attesa del corriere» e continua a controllare. Controlla il numero carattere per carattere; se dopo qualche giorno non compare niente, chiedi al venditore.
 
-**Fermo su `Preparing` o `Shipment information received`.** Shouwu non ha ancora il pacco, oppure non l'ha ancora fatto partire dal magazzino. Chiedi al venditore quando l'ha affidato a Shouwu.
+**Fermo su `Preparing`, `Shipment information received` o `Carrier received the shipment`.** Shouwu non ha ancora il pacco, oppure non l'ha ancora fatto partire dal magazzino. Chiedi al venditore quando l'ha affidato a Shouwu.
 
 **Fermo in dogana.** Dopo `Shipment started the customs clearance process at destination` il pacco aspetta la dogana di arrivo. Se ti chiedono di pagare qualcosa, leggi [pacco fermo in dogana](guide:customs).
 

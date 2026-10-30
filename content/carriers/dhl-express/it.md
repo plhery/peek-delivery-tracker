@@ -32,6 +32,7 @@ Queste sono le scansioni che Peek legge da DHL Express, nell'inglese di DHL, pi�
 | `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | In transito | Viaggia nella rete di DHL. |
 | `Scheduled to depart on the next planned movement` | In transito | Aspetta in un centro il prossimo camion o volo. |
 | `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | In dogana | Sta passando la dogana (vedi sotto). |
+| `On hold awaiting for payment of shipment related fees` | In dogana | Devi pagare dazi o spese: DHL tiene fermo il pacco finché non sono pagati. Non è un problema della spedizione. |
 | `Payment is received and recorded for shipment related fees` | In dogana | Dazi o spese sono pagati; resta in dogana finché lo sdoganamento non è finito. |
 | `Clearance processing complete at` | In transito | La dogana ha finito e il pacco riparte. |
 | `Arrived at DHL Delivery Facility` | In transito | È arrivato al centro DHL che lo consegna. |

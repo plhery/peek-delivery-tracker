@@ -32,6 +32,7 @@ Das sind Scan-Texte, die Peek von DHL Express liest, in DHLs Englisch, ungefähr
 | `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | Unterwegs | Es läuft durch DHLs Netz. |
 | `Scheduled to depart on the next planned movement` | Unterwegs | Es wartet an einem Standort auf den nächsten Lkw oder Flug. |
 | `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | Beim Zoll | Es ist in der Verzollung (siehe unten). |
+| `On hold awaiting for payment of shipment related fees` | Beim Zoll | Du musst Abgaben oder Gebühren zahlen; bis dahin hält DHL das Paket zurück. Ein Problem mit der Sendung ist das nicht. |
 | `Payment is received and recorded for shipment related fees` | Beim Zoll | Die Abgaben oder Gebühren sind bezahlt; das Paket bleibt beim Zoll, bis die Verzollung abgeschlossen ist. |
 | `Clearance processing complete at` | Unterwegs | Der Zoll ist fertig, es geht weiter. |
 | `Arrived at DHL Delivery Facility` | Unterwegs | Es ist im DHL-Standort angekommen, der es zustellt. |

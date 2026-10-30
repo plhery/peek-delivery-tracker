@@ -14,8 +14,9 @@
  * scan its adapter gave no stage. A notice stored as one
  * keeps its stage, as do differences that come only from the order of the scans around a row:
  * the next check of the parcel settles those. Peek's own rows and the stage changes it saw without
- * a scan time are left out. It is a dry run: it lists the rows that would change and the SQL that
- * would change them, guarded on their stored values; applying it is the operator's
+ * a scan time are left out. It is a dry run: it lists the rows that would change, the open parcels
+ * that would step back with them, and the SQL that would change both, guarded on their stored
+ * values; applying it is the operator's
  * ([docs/SCRAPER.md](../../docs/SCRAPER.md)).
  */
 import { classifyStage, type CarrierResult } from 'universal-parcel-scraper';
@@ -41,6 +42,8 @@ export interface StoredParcel {
   destination: string | null;
   /** Neither archived nor delivered or returned: still checked. */
   open: boolean;
+  /** Its saved stage. Exports before the field have none. */
+  stage?: string | null;
   /** The carriers whose answers it stores: its own, and the one tracking it since a hand-over. Exports before the field have none. */
   carriers?: string[];
   events: StoredScan[];
@@ -68,11 +71,13 @@ export interface StageChange extends Change {
   stageSource: string;
 }
 export type ReplayedChange = ClockChange | StageChange;
+/** An open parcel whose saved stage no row shows once the changes apply, and the stage they leave it. */
+export interface StepBack { parcel: string; from: string; to: string }
 
 /** The read-only export the replay reads, one parcel a line. */
 export const STORED_SCANS_QUERY = `set default_transaction_read_only = on;
 select json_build_object('id', p.id, 'destination', p.carrier_data->>'destination_country',
-  'open', p.archived_at is null and coalesce(p.current_stage, '') not in ('delivered', 'returned'),
+  'open', p.archived_at is null and coalesce(p.current_stage, '') not in ('delivered', 'returned'), 'stage', p.current_stage,
   'carriers', (select coalesce(json_agg(distinct c), '[]') from unnest(array[p.carrier, p.carrier_data->>'original_carrier', p.carrier_data->>'active_tracking_carrier']) c
     where c is not null and c <> 'unknown'),
   'events', (select json_agg(json_build_object('id', e.id, 'providerEventId', e.provider_event_id, 'stage', e.stage,
@@ -83,6 +88,9 @@ from packages p where exists (select 1 from tracking_events e where e.package_id
 const DEDUCED = new Set(['place', 'neighbour', 'destination', 'carrier']);
 const KEEPS_STAGE = /keeps? the stage/;
 const VALID_STAGES = new Set<string>(STAGES);
+/** Stages past the label, as the sync's `rereadStage` counts progress. */
+const PROGRESS_STAGES = new Set<string>(STAGES.filter((stage) => stage !== 'pending' && stage !== 'registered'));
+const HELD_STAGES = new Set(['delivered', 'returned', 'exception']);
 
 const sourceOf = (scan: StoredScan) => scan.providerEventId.slice(0, Math.max(0, scan.providerEventId.indexOf(':')));
 const text = (value: unknown) => typeof value === 'string' ? value : null;
@@ -197,14 +205,33 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
   });
 }
 
+/**
+ * The open parcels the changes step back. A parcel past the label whose rows showed progress keeps its stage while a
+ * row still shows it; once the changes read every such row as the label or earlier, the carrier's next answer shows
+ * none, and the sync keeps the saved stage with a `stages_reread` signal. The parcel steps back with its rows: to the
+ * label when a row shows one, else to pending, as `rereadStage` reads a universal provider's rows. Delivered, returned
+ * and exception parcels keep their stage.
+ */
+export function steppedBack(parcels: readonly StoredParcel[], changes: readonly ReplayedChange[]): StepBack[] {
+  const restaged = new Map(changes.flatMap((change) => change.kind === 'stage' ? [[change.row, change.to] as const] : []));
+  return parcels.flatMap((parcel): StepBack[] => {
+    const from = parcel.stage ?? '';
+    if (!parcel.open || !PROGRESS_STAGES.has(from) || HELD_STAGES.has(from) || !parcel.events.some((scan) => restaged.has(scan.id))) return [];
+    const before = parcel.events.map((scan) => scan.stage);
+    const after = parcel.events.map((scan) => restaged.get(scan.id) ?? scan.stage);
+    if (!before.some((stage) => PROGRESS_STAGES.has(stage)) || after.some((stage) => PROGRESS_STAGES.has(stage))) return [];
+    return [{ parcel: parcel.id, from, to: after.includes('registered') ? 'registered' : 'pending' }];
+  });
+}
+
 const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;
 
 /**
  * One transaction that writes the changes as the release would, each guarded on the row's stored
- * values, failing unless every one applies. It ends open: the operator rolls it back for a dry run
- * or commits it.
+ * values, and steps the parcels back, each guarded on its saved stage, failing unless every one
+ * applies. It ends open: the operator rolls it back for a dry run or commits it.
  */
-export function replaySql(changes: readonly ReplayedChange[]): string {
+export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonly StepBack[] = []): string {
   const statements = changes.map((change) => change.kind === 'clock'
     ? `  update public.tracking_events set occurred_at = ${literal(change.to)}, provider_event_id = ${literal(change.providerEventId)},
     raw_data = raw_data || ${literal(JSON.stringify({ time: change.time, time_zone: change.timeZone, time_zone_basis: change.basis }))}::jsonb
@@ -215,13 +242,17 @@ export function replaySql(changes: readonly ReplayedChange[]): string {
       ? { stage: change.declared, stage_source: change.stageSource } : { stage_source: change.stageSource }))}::jsonb
    where id = ${literal(change.row)} and stage = ${literal(change.from)};
   get diagnostics n = row_count; total := total + n;`);
+  const parcels = stepBacks.map((step) => `  update public.packages set current_stage = ${literal(step.to)}
+   where id = ${literal(step.parcel)} and current_stage = ${literal(step.from)};
+  get diagnostics n = row_count; stepped := stepped + n;`);
   return `\\set ON_ERROR_STOP on
 begin;
 do $$
-declare n int; total int := 0;
+declare n int; total int := 0; stepped int := 0;
 begin
-${statements.join('\n')}
+${[...statements, ...parcels].join('\n')}
   if total <> ${changes.length} then raise exception 'replay: % of ${changes.length} rows changed', total; end if;
+  if stepped <> ${stepBacks.length} then raise exception 'replay: % of ${stepBacks.length} parcels stepped back', stepped; end if;
 end $$;
 `;
 }

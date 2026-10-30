@@ -227,3 +227,10 @@ they are stored: the ones this release changes. The report names rows by their i
 characters and shows no number, place or wording. `replay.sql` updates those rows, each guarded
 on its stored values, in one transaction left open to roll back or commit. A row a fixed bug wrote
 is changed as any named-row fix is: a backup first, then a rolled-back run before the commit.
+
+An open parcel whose rows showed progress, none of them once the changes apply, steps back with
+them: to the label when a row shows one, else to pending, guarded on its saved stage. Until then
+the carrier's answers, read by the new release, show no progress, and each check keeps the saved
+stage with a `stages_reread` signal ([ROUTING.md](ROUTING.md)). So the replay runs after each
+adoption, and its rows and parcels are applied the same way: backup, rolled-back run, commit with
+the counts checked.

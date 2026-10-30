@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { providerEventId } from './eventIdentity';
-import { replayParcel, replaySql, type StoredParcel, type StoredScan } from './storedReplay';
+import { replayParcel, replaySql, steppedBack, type StoredParcel, type StoredScan } from './storedReplay';
 import type { JsonObject } from './types';
 
 const scan = (id: string, source: string, occurredAt: string, stage: string, description: string, raw: JsonObject): StoredScan => ({
@@ -116,5 +116,27 @@ describe('stored scan replay', () => {
     expect(sql).toContain("where id = 'origin' and stage = 'in_transit'");
     expect(sql).toContain('if total <> 1 then raise exception');
     expect(sql).not.toMatch(/\bcommit\b|\brollback\b/);
+  });
+
+  it('steps an open parcel back with its rows once none shows its progress, guarded on its saved stage', () => {
+    // A label scan an earlier release read in transit, the parcel's only progress.
+    const label = scan('label', 'gofo', '2026-10-19T10:00:00Z', 'in_transit', 'Shipping Label Created', { provider_code: '100', stage: 'in_transit' });
+    const origin = scan('origin', 'gofo', '2026-10-18T10:00:00Z', 'in_transit', 'Arrived at GOFO Regional Origin Hub', { provider_code: '202', stage: 'in_transit' });
+    const app = scan('app', 'app', '2026-10-17T10:00:00Z', 'pending', 'Added', {});
+    const open = { ...parcel(label, app), stage: 'in_transit' };
+    const changes = replayParcel(open);
+    expect(changes).toEqual([expect.objectContaining({ row: 'label', from: 'in_transit', to: 'registered' })]);
+    expect(steppedBack([open], changes)).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'registered' }]);
+    const sql = replaySql(changes, steppedBack([open], changes));
+    expect(sql).toContain("update public.packages set current_stage = 'registered'\n   where id = 'parcel-1' and current_stage = 'in_transit';");
+    expect(sql).toContain('if stepped <> 1 then raise exception');
+
+    // A row still in transit, a closed or delivered parcel, or an export without the stage: no step back.
+    const moved = { ...parcel(label, origin), stage: 'in_transit' };
+    expect(steppedBack([moved], replayParcel(moved))).toEqual([]);
+    for (const other of [{ ...open, open: false }, { ...open, stage: 'exception' }, parcel(label, app)]) {
+      expect(steppedBack([other], replayParcel(other))).toEqual([]);
+    }
+    expect(replaySql(changes)).toContain('if stepped <> 0 then raise exception');
   });
 });

@@ -55,6 +55,8 @@ failures age out of the window; a new failure meanwhile reminds as usual.
 - A carrier whose own lookup answers with fewer of the parcel's stored scans, each stored one
   in its stored stage and none newer than the stored progress, has answered: the check keeps
   the stored progress, and the parcel's first such answer is a `scans_withdrawn` review signal.
+  So has one listing every stored scan of its own that a scraper release now reads in an earlier
+  stage: each such check keeps the stored progress with a `stages_reread` review signal.
 - A carrier whose own lookup answers normally but repeats the answer without the parcel's
   progress that the parcel's previous scheduled check got, with the same stage and rows (a
   carrier that withdrew scans it had shown), has answered. From the second such check in a

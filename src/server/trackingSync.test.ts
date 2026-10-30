@@ -4980,6 +4980,31 @@ describe('TrackingSyncService', () => {
       expect(checked.parcel).toMatchObject({ current_stage: 'in_transit', sync_status: 'error' });
     });
 
+    // A scraper release reading the carrier's stored scans past the label as the label again.
+    const reread = [{ ...departed, stage: 'registered' }, { ...accepted, stage: 'registered' }, relabel, label];
+
+    it('keeps the stored progress when the answer lists every stored scan but reads some in an earlier stage', async () => {
+      const { store, check } = await tracked();
+      const rows = structuredClone([...store.rows.values()]);
+      const checked = await check(answer(...reread));
+      expect(checked.counts).toMatchObject({ unchanged: 1, errors: 0 });
+      // A review signal at each such check until the release's replay puts the rows and the parcel right.
+      expect(checked.attempt).toMatchObject({ outcome: 'unchanged', anomaly_codes: ['stages_reread'], error_type: null });
+      expect(checked.parcel).toMatchObject({ current_stage: 'in_transit', last_status_text: departed.description,
+        sync_status: 'ok', sync_error: null });
+      expect(checked.parcel.carrier_data).not.toHaveProperty('scans_withdrawn');
+      expect(checked.refresh).toMatchObject({ healthy: true });
+      expect([...store.rows.values()]).toEqual(rows);
+      expect((await check(answer(...reread))).attempt).toMatchObject({ outcome: 'unchanged', anomaly_codes: ['stages_reread'] });
+    });
+
+    it('still finds the progress gone when that answer also brings a newer scan', async () => {
+      const { check } = await tracked();
+      const checked = await check(answer({ stage: 'registered', description: 'Label printed again', time: '2026-10-21T08:00:00Z' }, ...reread));
+      expect(checked.attempt).toMatchObject({ outcome: 'error', anomaly_codes: ['progress_disappeared'], error_type: 'ProgressDisappeared' });
+      expect(checked.parcel).toMatchObject({ current_stage: 'in_transit', sync_status: 'error' });
+    });
+
     // A carrier that only ever lists the label, and a universal provider's copies of an origin leg it never shows.
     const providerOnly = async () => {
       const { store, check, save } = await tracked({}, answer(relabel, label));

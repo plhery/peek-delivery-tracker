@@ -5,7 +5,8 @@
 // 0.621.0-main.2946 or later, the first release to export `carrierHomeZone`, which the replay
 // imports; an older one fails on that import. The report names rows by their ids' first eight
 // characters and shows no number, place or wording. `--sql <file>` writes the guarded transaction
-// that would apply the changes, `--source <a,b>` keeps the rows of those sources only.
+// that would apply the changes and step back the open parcels no row then shows past the label,
+// `--source <a,b>` keeps the rows of those sources only.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -31,7 +32,7 @@ async function replayModule(directory) {
   });
   return import(pathToFileURL(output).href);
 }
-const { STORED_SCANS_QUERY, replayParcel, replaySql } = await replayModule(cache);
+const { STORED_SCANS_QUERY, replayParcel, replaySql, steppedBack } = await replayModule(cache);
 
 if (args.includes('--query')) {
   console.log(STORED_SCANS_QUERY);
@@ -57,6 +58,7 @@ const key = (change) => `${change.kind} ${change.row}`;
 const earlier = from ? new Set(parcels.flatMap((await earlierRelease(from)).replayParcel).map(key)) : new Set();
 const replayed = parcels.flatMap(replayParcel).filter((change) => !sources || sources.includes(change.source));
 const changes = replayed.filter((change) => !earlier.has(key(change)));
+const stepBacks = steppedBack(parcels, changes);
 const { version } = JSON.parse(readFileSync(resolve(root, 'node_modules/universal-parcel-scraper/package.json'), 'utf8'));
 const short = (id) => id.slice(0, 8);
 const minute = (iso) => iso.slice(0, 16).replace('T', ' ') + 'Z';
@@ -84,8 +86,11 @@ for (const kind of ['clock', 'stage']) {
   }
 }
 
+console.log(`\nParcels stepped back: ${stepBacks.length}.`);
+for (const step of stepBacks) console.log(`        ${short(step.parcel)} ${step.from} -> ${step.to}`);
+
 const sqlFile = option('--sql');
 if (sqlFile) {
-  writeFileSync(sqlFile, replaySql(changes), { mode: 0o600 });
-  console.log(`\nWrote the guarded transaction for ${changes.length} rows to ${sqlFile}; it ends open, to roll back or commit.`);
+  writeFileSync(sqlFile, replaySql(changes, stepBacks), { mode: 0o600 });
+  console.log(`\nWrote the guarded transaction for ${changes.length} rows and ${stepBacks.length} parcels to ${sqlFile}; it ends open, to roll back or commit.`);
 }

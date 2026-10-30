@@ -2011,16 +2011,21 @@ export class TrackingSyncService {
       // The parcel's own carrier listing fewer of its own scans already stored (JRT dropping a parcel's
       // later scans and keeping the label's, sometimes with a label scan the rows lack) takes nothing
       // back while each stored scan keeps its stage and no scan is newer than its stored progress: the
-      // stored progress stays and the check answered. A newer scan in an earlier stage, or a stored
-      // scan read in an earlier stage, still makes progress disappear.
+      // stored progress stays and the check answered. A newer scan in an earlier stage still makes
+      // progress disappear, and so does a stored scan read in one unless the answer lists every stored
+      // scan of its own (`stages_reread`, below).
       const storedIds = new Set(stored.map((event) => String(event.provider_event_id)));
       const storedStages = new Map(stored.map((row) => [String(row.provider_event_id), row.stage]));
       const shown = new Set([...events.map((event) => String(event.provider_event_id)), ...matches.reused.values(), ...matches.skipped.values()]);
       const past = (rows: readonly JsonObject[]) => rows.filter((row) => stageRank(String(row.stage ?? '')) > stageRank(selectedStage ?? 'pending'));
       const latest = (rows: readonly JsonObject[]) => Math.max(...rows.map((row) => Date.parse(String(row.occurred_at ?? ''))).filter(Number.isFinite));
-      const listsFewer = (answered: readonly JsonObject[], progressAt: number, newerLabels = false) => answered.length > 0 && answered.every((event) => {
+      // The stored row an answered scan is, if any.
+      const rowOf = (event: JsonObject) => {
         const id = String(event.provider_event_id);
-        const row = matches.reused.get(id) ?? matches.skipped.get(id) ?? (storedIds.has(id) ? id : undefined);
+        return matches.reused.get(id) ?? matches.skipped.get(id) ?? (storedIds.has(id) ? id : undefined);
+      };
+      const listsFewer = (answered: readonly JsonObject[], progressAt: number, newerLabels = false) => answered.length > 0 && answered.every((event) => {
+        const row = rowOf(event);
         return row === undefined
           ? (newerLabels && event.stage === 'registered') || Date.parse(String(event.occurred_at ?? '')) < progressAt
           : storedStages.get(row) === event.stage;
@@ -2039,7 +2044,22 @@ export class TrackingSyncService {
       // or a stored scan read in an earlier stage, still makes progress disappear.
       const othersProgress = carrierWithoutProgress && ownRows.length === 0 && past(stored).length > 0
         && listsFewer(events, progressAt, true);
-      if (fewerStoredScans || othersProgress) anomalies = anomalies.filter((code) => code !== 'progress_disappeared');
+      // Nor does its answer that lists every stored scan of its own, and nothing newer than the stored progress,
+      // but reads one past the answer's stage in an earlier stage: a scraper release read the rows again (Shouwu's
+      // received scan read as the label), and the carrier withdrew nothing. The stored progress stays and the check
+      // answered, with a `stages_reread` signal, until the release's replay of the stored scans puts the rows and
+      // the parcel right (scripts/replay-stored-scans.mjs).
+      const answeredAs = new Map(events.flatMap((event) => {
+        const row = rowOf(event);
+        return row === undefined ? [] : [[row, String(event.stage ?? '')] as const];
+      }));
+      const reread = carrierWithoutProgress && ownRows.length > 0
+        && stored.every((row) => !String(row.provider_event_id).startsWith(`${sourceCarrierId}:`) || shown.has(String(row.provider_event_id)))
+        && ownRows.some((row) => answeredAs.has(String(row.provider_event_id))
+          && stageRank(answeredAs.get(String(row.provider_event_id))!) <= stageRank(selectedStage ?? 'pending'))
+        && events.every((event) => rowOf(event) !== undefined || Date.parse(String(event.occurred_at ?? '')) < progressAt);
+      if (fewerStoredScans || othersProgress || reread) anomalies = anomalies.filter((code) => code !== 'progress_disappeared');
+      if (reread) anomalies = [...anomalies, 'stages_reread'];
       // A delivery partner that falls behind rows of its own and no longer lists them withdraws scans the
       // same way (Posti back at its posting scan without its own scan in transit, or a summary back at
       // the drop-off after one in transit). The parcel holds its stage anyway: this only signals it.
@@ -2048,7 +2068,7 @@ export class TrackingSyncService {
       const progressDisappeared = anomalies.includes('progress_disappeared');
       // A fallback that knows less is no error: what is saved stays, as with an older snapshot.
       const fallbackWithoutProgress = anomalies.includes('fallback_without_progress');
-      const keepSaved = progressDisappeared || fallbackWithoutProgress || fewerStoredScans || othersProgress
+      const keepSaved = progressDisappeared || fallbackWithoutProgress || fewerStoredScans || othersProgress || reread
         || fetched.preserveHistory === true;
       // Copies a universal provider read in the wrong zone must not make a result
       // look fresher, or the carrier's own reply older, than it is: neither those

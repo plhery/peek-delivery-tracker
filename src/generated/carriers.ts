@@ -3272,7 +3272,16 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     }
   ],
-  "ru": [],
+  "ru": [
+    {
+      "id": "yto",
+      "catalog": "yto",
+      "slug": "yto-express-otslezhivanie",
+      "title": "Отслеживание YTO Express: трек-номер, статусы и телефон",
+      "name": "YTO Express",
+      "color": "#4d148c"
+    }
+  ],
   "zh": [],
   "nl": [
     {
@@ -3748,4 +3757,4 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
  * Peek's languages a carrier's page is written in. Each has its carriers' own page; a language without one
  * sends its readers to the English one until a carrier's page is written in it.
  */
-export const CARRIER_LOCALES: readonly Locale[] = ["en","de","fr","it","es","pt","pt-br","pl"];
+export const CARRIER_LOCALES: readonly Locale[] = ["en","de","fr","it","es","pt","pt-br","pl","ru"];

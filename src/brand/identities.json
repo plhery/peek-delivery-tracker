@@ -47,6 +47,9 @@
   "abf-freight": {
     "decal": "abf-freight"
   },
+  "ace-ee": {
+    "decal": "ace-ee"
+  },
   "ace-lt": {
     "decal": "ace-lt"
   },
@@ -652,6 +655,9 @@
   "delivengo": {
     "family": "la-poste"
   },
+  "deliverdirect": {
+    "decal": "deliverdirect"
+  },
   "dellin": {
     "decal": "dellin",
     "palette": {
@@ -818,6 +824,9 @@
   "e-commerce-international": {
     "decal": "e-commerce-international"
   },
+  "eac-cn": {
+    "decal": "eac-cn"
+  },
   "early-bird": {
     "decal": "early-bird"
   },
@@ -867,6 +876,9 @@
   },
   "emirates-post": {
     "decal": "emirates-post"
+  },
+  "emons": {
+    "decal": "emons"
   },
   "ems": {
     "decal": "ems"
@@ -1610,6 +1622,9 @@
   "lbc-express": {
     "decal": "lbc-express"
   },
+  "lbtx": {
+    "decal": "lbtx"
+  },
   "leopards-courier": {
     "decal": "leopards-courier"
   },
@@ -1634,11 +1649,17 @@
   "line-clear": {
     "decal": "line-clear"
   },
+  "linear-logistics": {
+    "decal": "linear-logistics"
+  },
   "lingdong": {
     "decal": "lingdong"
   },
   "lion-parcel": {
     "decal": "lion-parcel"
+  },
+  "liuchen": {
+    "decal": "liuchen"
   },
   "logen": {
     "decal": "logen"
@@ -1816,6 +1837,12 @@
     "decal": "no-limit",
     "palette": {
       "accent": "#1d1d1b"
+    }
+  },
+  "noerpel": {
+    "decal": "noerpel",
+    "palette": {
+      "accent": "#1b1919"
     }
   },
   "noest": {
@@ -2253,6 +2280,9 @@
   "relais-colis": {
     "decal": "relais-colis"
   },
+  "rhenus-it": {
+    "decal": "rhenus-it"
+  },
   "rincos": {
     "decal": "rincos"
   },
@@ -2396,6 +2426,9 @@
   },
   "shiprocket": {
     "decal": "shiprocket"
+  },
+  "shipter": {
+    "decal": "shipter"
   },
   "shipup": {
     "decal": "shipup",
@@ -2681,6 +2714,9 @@
   "tonami": {
     "decal": "tonami"
   },
+  "tonda-global": {
+    "decal": "tonda-global"
+  },
   "top-logistics-au": {
     "decal": "top-logistics-au"
   },
@@ -2719,6 +2755,9 @@
   },
   "transmission": {
     "decal": "transmission"
+  },
+  "transnatur": {
+    "decal": "transnatur"
   },
   "transport-rdl": {
     "decal": "transport-rdl"

@@ -256,6 +256,18 @@ describe('carrier mark', () => {
     'top-logistics-au',
     'shipglobal-in',
     'faster-ae',
+    'shipter',
+    'linear-logistics',
+    'tonda-global',
+    'liuchen',
+    'eac-cn',
+    'lbtx',
+    'deliverdirect',
+    'ace-ee',
+    'transnatur',
+    'rhenus-it',
+    'emons',
+    'noerpel',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

@@ -244,7 +244,19 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'hart2hart-express'
   | 'top-logistics-au'
   | 'shipglobal-in'
-  | 'faster-ae';
+  | 'faster-ae'
+  | 'shipter'
+  | 'linear-logistics'
+  | 'tonda-global'
+  | 'liuchen'
+  | 'eac-cn'
+  | 'lbtx'
+  | 'deliverdirect'
+  | 'ace-ee'
+  | 'transnatur'
+  | 'rhenus-it'
+  | 'emons'
+  | 'noerpel';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

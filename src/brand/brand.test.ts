@@ -320,6 +320,18 @@ describe('carrier brand', () => {
       'top-logistics-au',
       'shipglobal-in',
       'faster-ae',
+      'shipter',
+      'linear-logistics',
+      'tonda-global',
+      'liuchen',
+      'eac-cn',
+      'lbtx',
+      'deliverdirect',
+      'ace-ee',
+      'transnatur',
+      'rhenus-it',
+      'emons',
+      'noerpel',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

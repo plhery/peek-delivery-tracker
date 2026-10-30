@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.graphics.Color
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
@@ -9,6 +10,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
@@ -32,6 +34,7 @@ import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
@@ -68,13 +71,13 @@ class RenameTest {
 
     private lateinit var view: View
 
-    private fun show(recreation: Recreation? = null, fontScale: Float = 1f) {
+    private fun show(recreation: Recreation? = null, fontScale: Float = 1f, language: AppLanguage = AppLanguage.En) {
         source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
         val content: @Composable () -> Unit = {
             view = LocalView.current
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalDensity provides Density(density.density, fontScale)) {
-                RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false)
+                RootHost(state = AuthenticationState.Demo, language = language, source = source, reduceMotion = false)
             }
         }
         if (recreation != null) recreation.setContent(content) else compose.setContent(content)
@@ -164,6 +167,58 @@ class RenameTest {
         assertEquals(listOf(gift.id), deliveries.navigator.navigation.path)
     }
 
+    /** The alert's frame (its glass card, named for TalkBack by its title). */
+    private fun alert(title: String): Rect =
+        compose.onNode(SemanticsMatcher.expectValue(SemanticsProperties.PaneTitle, title)).fetchSemanticsNode().boundsInRoot
+
+    /** The darkest of `tag`'s pixels: its title's. */
+    private fun ink(tag: String): Int = compose.drawn(compose.onNodeWithTag(tag)).minBy { Color.red(it) + Color.green(it) + Color.blue(it) }
+
+    @Test
+    fun theAlertIsIos26sCardItsFieldAndButtonsCapsulesTheirTitlesInTheLabelsColour() {
+        show()
+        open("Birthday gift")
+        renameFromPageMenu()
+        val card = alert("Edit parcel name")
+        val typing = bounds(RENAME_FIELD)
+        val cancel = bounds(RENAME_CANCEL)
+        val save = bounds(RENAME_SAVE)
+        assertEquals(px(320f), card.width, 1f)
+        // The field 15 from the card's sides and 48 tall, the buttons 20 under it, each 140 wide and 48 tall, 8 apart and
+        // 16 from the card's sides and foot.
+        assertEquals(card.left + px(15f), typing.left, 1f)
+        assertEquals(card.right - px(15f), typing.right, 1f)
+        assertEquals(px(48f), typing.height, 1f)
+        assertEquals(typing.bottom + px(20f), cancel.top, 1f)
+        for (button in listOf(cancel, save)) {
+            assertEquals(px(140f), button.width, 1f)
+            assertEquals(px(48f), button.height, 1f)
+            assertEquals(card.bottom - px(16f), button.bottom, 1f)
+        }
+        assertEquals(card.left + px(16f), cancel.left, 1f)
+        assertEquals(cancel.right + px(8f), save.left, 1f)
+        assertEquals(card.right - px(16f), save.right, 1f)
+        // Black, not the app's yellow: an alert's buttons take no tint.
+        for (tag in listOf(RENAME_CANCEL, RENAME_SAVE)) {
+            val title = ink(tag)
+            assertTrue("$tag ${Integer.toHexString(title)}", Color.red(title) < 60 && Color.green(title) < 60 && Color.blue(title) < 60)
+        }
+    }
+
+    @Test
+    fun aTitleTooLongForItsHalfStandsTheButtonsOneOverTheOther() {
+        // "Enregistrer le nom" is wider than half the alert at the default text size.
+        show(language = AppLanguage.Fr)
+        open("Birthday gift")
+        renameFromPageMenu()
+        val save = bounds(RENAME_SAVE)
+        val cancel = bounds(RENAME_CANCEL)
+        assertEquals(save.bottom + px(8f), cancel.top, 1f)
+        assertEquals(px(288f), save.width, 1f)
+        assertEquals(px(288f), cancel.width, 1f)
+        compose.onNodeWithTag(RENAME_SAVE).assertTextEquals("Enregistrer le nom")
+    }
+
     @Test
     fun aTapOnTheNameAsksTooAndCancelOrBackChangeNothing() {
         show()
@@ -211,6 +266,16 @@ class RenameTest {
         compose.onNode(hasText("No connection")).assertExists()
         assertEquals("No connection", deliveries.pageError)
         assertNull(deliveries.actionError)
+        // The alert's card, its one Close as wide as it less 16 on either side and 16 over its foot, in black.
+        val card = alert("Something went wrong")
+        val close = bounds(ACTION_ERROR_CLOSE)
+        assertEquals(px(320f), card.width, 1f)
+        assertEquals(px(288f), close.width, 1f)
+        assertEquals(px(48f), close.height, 1f)
+        assertEquals(card.bottom - px(16f), close.bottom, 1f)
+        compose.onNodeWithTag(ACTION_ERROR_CLOSE).assertTextEquals("Close")
+        val title = ink(ACTION_ERROR_CLOSE)
+        assertTrue(Integer.toHexString(title), Color.red(title) < 60 && Color.blue(title) < 60)
         compose.onNodeWithTag(ACTION_ERROR_CLOSE).performClick()
         settle()
         compose.onNodeWithTag(ACTION_ERROR).assertDoesNotExist()
@@ -269,8 +334,10 @@ class RenameTest {
         assertTrue("$save over $cancel", save.bottom <= cancel.top)
         assertEquals(save.left, cancel.left, 0.5f)
         assertEquals(save.width, cancel.width, 0.5f)
-        // Each as wide as the alert, wider than its field inset 16 on either side.
-        assertEquals(typing.width + px(32f), save.width, 1f)
+        // Each as wide as the alert less 16 on either side, a point in from its field on each.
+        assertEquals(typing.width - px(2f), save.width, 1f)
+        assertEquals(typing.left + px(1f), save.left, 1f)
+        assertEquals(save.bottom + px(8f), cancel.top, 1f)
         compose.onNodeWithTag(RENAME_CANCEL).performClick()
         settle()
         compose.onNodeWithTag(RENAME_ALERT).assertDoesNotExist()

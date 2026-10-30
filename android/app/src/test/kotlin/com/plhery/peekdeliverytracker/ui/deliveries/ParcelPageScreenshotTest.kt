@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
@@ -32,8 +33,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * A parcel's page's frame on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), in
  * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark, its ••• menu open, its
- * rename alert light and dark and at an accessibility text size, the page of a parcel gone, and the page beside the
- * list on a tablet on its side, the history beside the pass. The page dragged down, under its bar, is
+ * rename alert light and dark and at an accessibility text size, the list's error alert light and dark, the page of a
+ * parcel gone, and the page beside the list on a tablet on its side, the history beside the pass. The page dragged down, under its bar, is
  * ParcelZoomScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
@@ -135,6 +136,26 @@ class ParcelPageScreenshotTest {
         open()
         rename()
         compose.screenshot("page_rename_light_text2")
+    }
+
+    /** The list's alert when an action failed, its words under its title and one Close. */
+    @Test
+    fun theErrorAlert() {
+        show()
+        failed()
+        compose.screenshot("error_alert_light")
+    }
+
+    @Test
+    fun theErrorAlertInDark() {
+        show(dark = true)
+        failed()
+        compose.screenshot("error_alert_dark")
+    }
+
+    private fun failed() {
+        compose.runOnUiThread { deliveries.actionError = DeliveryApiError.ParcelMissing().message }
+        compose.mainClock.advanceTimeBy(1_000)
     }
 
     @Test

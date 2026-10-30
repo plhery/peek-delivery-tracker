@@ -5,13 +5,13 @@ import android.view.KeyEvent
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -90,15 +90,18 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.toSize
 import androidx.core.view.ViewCompat
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
@@ -106,11 +109,13 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
+import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.sheet.Popover
 import com.plhery.peekdeliverytracker.ui.sheet.PopoverSize
 import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_HEIGHT
 import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_WIDTH
+import com.plhery.peekdeliverytracker.ui.sheet.RowHighlight
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
@@ -760,13 +765,13 @@ private fun DeleteQuestion(focus: AccessibilityFocus, delete: () -> Unit) {
 }
 
 /**
- * `parcelRenameAlert` (B-S10), drawn as iOS draws an alert with a text field: "Edit parcel name", the field holding the
- * name typed so far, "Parcel" while it is empty, then Cancel and Save name side by side, or Save name over Cancel where
- * either doesn't fit its half, as at the accessibility text sizes ([RenameButtons]). The field takes the focus and the
- * keyboard as the alert opens, the cursor after the name, and the keyboard's Done saves, as Return does; the back
- * gesture cancels. The alert stands in the middle of what the keyboard leaves of the window, clear of the system's
- * bars, and scrolls where it is taller than that room, as UIAlertController does in a phone on its side with the
- * keyboard up. TalkBack starts at its title.
+ * `parcelRenameAlert` (B-S10), drawn as iOS 26 draws an alert with a text field ([AlertCard]): "Edit parcel name", the
+ * field holding the name typed so far, "Parcel" while it is empty, on a capsule in the alert's fill, then Cancel and
+ * Save name side by side, or Save name over Cancel where either doesn't fit its half, as at the accessibility text
+ * sizes ([RenameButtons]). The field takes the focus and the keyboard as the alert opens, the cursor after the name,
+ * and the keyboard's Done saves, as Return does; the back gesture cancels. The alert stands in the middle of what the
+ * keyboard leaves of the window, clear of the system's bars, and scrolls where it is taller than that room, as
+ * UIAlertController does in a phone on its side with the keyboard up. TalkBack starts at its title.
  */
 @Composable
 private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
@@ -783,7 +788,7 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
     }
     BackHandler(onBack = state::cancelRename)
     val title = localizer.text("detail.editTitle")
-    val font = type.style(IosTextStyle.Footnote)
+    val font = type.body
     val bars = WindowInsets.systemBars.union(WindowInsets.displayCutout)
     val keyboard = WindowInsets.ime
     Box(
@@ -795,101 +800,88 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
             .imePadding(),
         contentAlignment = Alignment.Center,
     ) {
-        GlassSurface(
-            ContinuousRoundedShape(ALERT_RADIUS),
-            Modifier
-                .width(ALERT_WIDTH)
-                .layout { measurable, constraints ->
-                    // In the middle of the room, as tall as it leaves between the status bar and the navigation bar
-                    // where the keyboard doesn't cover it.
-                    val clear = max(bars.getTop(this), bars.getBottom(this) - keyboard.getBottom(this))
-                    val placeable = measurable.measure(constraints.copy(minHeight = 0, maxHeight = max(0, constraints.maxHeight - 2 * clear)))
-                    layout(placeable.width, placeable.height) { placeable.place(0, 0) }
-                }
-                .semantics { paneTitle = title },
+        AlertCard(
+            title,
+            Modifier.layout { measurable, constraints ->
+                // In the middle of the room, as tall as it leaves between the status bar and the navigation bar where
+                // the keyboard doesn't cover it.
+                val clear = max(bars.getTop(this), bars.getBottom(this) - keyboard.getBottom(this))
+                val placeable = measurable.measure(constraints.copy(minHeight = 0, maxHeight = max(0, constraints.maxHeight - 2 * clear)))
+                layout(placeable.width, placeable.height) { placeable.place(0, 0) }
+            },
         ) {
-            Column(Modifier.verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally) {
-                Column(
-                    Modifier.padding(start = 16.dp, top = 20.dp, end = 16.dp, bottom = 16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    Text(
-                        title, Modifier.accessibilityFocus(heading), color = colors.label, style = type.style(IosTextStyle.Headline).sfLines(),
-                        textAlign = TextAlign.Center,
-                    )
-                    val placeholder = localizer.text("common.parcel")
-                    BasicTextField(
-                        field,
-                        onValueChange = {
-                            field = it
-                            state.renameText = it.text
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .testTag(RENAME_FIELD)
-                            .focusRequester(focus)
-                            .semantics { contentDescription = placeholder },
-                        textStyle = font.copy(color = colors.label),
-                        singleLine = true,
-                        cursorBrush = SolidColor(colors.accent),
-                        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
-                        keyboardActions = KeyboardActions(onDone = { state.saveRename() }),
-                        decorationBox = { text ->
-                            val shape = ContinuousRoundedShape(FIELD_RADIUS)
-                            Box(
-                                Modifier
-                                    .background(if (colors.dark) colors.groupedBackground else colors.secondaryGroupedBackground, shape)
-                                    .border(FIELD_BORDER, colors.divider, shape)
-                                    .padding(horizontal = 6.dp, vertical = 5.dp),
-                                contentAlignment = Alignment.CenterStart,
-                            ) {
-                                if (field.text.isEmpty()) {
-                                    Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = 1)
-                                }
-                                text()
-                            }
-                        },
-                    )
-                }
-                Box(Modifier.fillMaxWidth().height(1.dp).background(colors.separator))
-                RenameButtons(localizer.text("common.cancel"), localizer.text("detail.saveTitle"), state::cancelRename, state::saveRename)
-            }
+            Text(
+                title, Modifier.padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE).accessibilityFocus(heading), color = colors.label,
+                style = type.body.uiKitLines(IosTextStyle.Body), textAlign = TextAlign.Center,
+            )
+            Spacer(Modifier.height(ALERT_FIELD_GAP))
+            val placeholder = localizer.text("common.parcel")
+            BasicTextField(
+                field,
+                onValueChange = {
+                    field = it
+                    state.renameText = it.text
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag(RENAME_FIELD)
+                    .focusRequester(focus)
+                    .semantics { contentDescription = placeholder },
+                textStyle = font.copy(color = colors.label),
+                singleLine = true,
+                cursorBrush = SolidColor(colors.accent),
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { state.saveRename() }),
+                decorationBox = { text ->
+                    Box(
+                        Modifier
+                            .heightIn(min = ALERT_CAPSULE_HEIGHT)
+                            .background(alertFill(colors.dark), CapsuleShape)
+                            .padding(horizontal = FIELD_INSET, vertical = ALERT_CAPSULE_PADDING),
+                        contentAlignment = Alignment.CenterStart,
+                    ) {
+                        if (field.text.isEmpty()) {
+                            Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = 1)
+                        }
+                        text()
+                    }
+                },
+            )
+            Spacer(Modifier.height(ALERT_BUTTONS_GAP))
+            RenameButtons(localizer.text("common.cancel"), localizer.text("detail.saveTitle"), state::cancelRename, state::saveRename)
         }
     }
 }
 
 /**
- * The rename alert's Cancel and Save name, as UIAlertController lays out two actions: side by side, a line between
- * them, while each title fits its half; otherwise, and always at the accessibility text sizes, one under the other, a
- * line between them, Cancel last.
+ * The rename alert's Cancel and Save name, as iOS 26 lays out an alert's two actions: capsules side by side while each
+ * title fits its half; otherwise, and always at the accessibility text sizes, one under the other, Cancel last.
  */
 @Composable
 private fun RenameButtons(cancel: String, save: String, onCancel: () -> Unit, onSave: () -> Unit) {
-    val type = PeekTheme.type
-    val colors = PeekTheme.colors
     val measurer = rememberTextMeasurer()
     val accessibilitySize = PeekTheme.dynamicTypeSize.isAccessibilitySize
-    val half = with(LocalDensity.current) { ((ALERT_WIDTH - 1.dp) / 2 - ALERT_BUTTON_PADDING * 2).roundToPx() }
-    val stacked = accessibilitySize || listOf(cancel to FontWeight.SemiBold, save to FontWeight.Normal).any { (title, weight) ->
-        measurer.measure(title, type.style(IosTextStyle.Body, weight).sfLines(), maxLines = 1, softWrap = false).size.width > half
-    }
+    val half = with(LocalDensity.current) { ((ALERT_WIDTH - ALERT_BUTTON_SIDE * 2 - ALERT_BUTTON_GAP) / 2 - ALERT_BUTTON_PADDING * 2).roundToPx() }
+    val font = alertButtonFont()
+    val stacked = accessibilitySize || listOf(cancel, save).any { measurer.measure(it, font, maxLines = 1, softWrap = false).size.width > half }
+    val side = Modifier.padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE)
     if (stacked) {
-        Column(Modifier.fillMaxWidth()) {
-            SheetButton(save, bold = false, tag = RENAME_SAVE, height = 44.dp, action = onSave)
-            Box(Modifier.fillMaxWidth().height(1.dp).background(colors.separator))
-            SheetButton(cancel, bold = true, tag = RENAME_CANCEL, height = 44.dp, action = onCancel)
+        Column(side.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(ALERT_BUTTON_GAP)) {
+            AlertButton(save, RENAME_SAVE, Modifier.fillMaxWidth(), onSave)
+            AlertButton(cancel, RENAME_CANCEL, Modifier.fillMaxWidth(), onCancel)
         }
     } else {
-        Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min)) {
-            SheetButton(cancel, bold = true, tag = RENAME_CANCEL, height = 44.dp, modifier = Modifier.weight(1f), action = onCancel)
-            Box(Modifier.width(1.dp).fillMaxHeight().background(colors.separator))
-            SheetButton(save, bold = false, tag = RENAME_SAVE, height = 44.dp, modifier = Modifier.weight(1f), action = onSave)
+        Row(side.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(ALERT_BUTTON_GAP)) {
+            AlertButton(cancel, RENAME_CANCEL, Modifier.weight(1f).fillMaxHeight(), onCancel)
+            AlertButton(save, RENAME_SAVE, Modifier.weight(1f).fillMaxHeight(), onSave)
         }
     }
 }
 
-/** `.alert("native.errorTitle")` with the error's words and Close, as iOS draws an alert. */
+/**
+ * `.alert("native.errorTitle")` with the error's words and Close, as iOS 26 draws an alert ([AlertCard]): the title,
+ * the words under it as the delete question's message, and one Close as wide as the alert.
+ */
 @Composable
 private fun ActionErrorAlert(state: DeliveriesState, message: String) {
     val localizer = LocalLocalizer.current
@@ -907,22 +899,83 @@ private fun ActionErrorAlert(state: DeliveriesState, message: String) {
             .pointerInput(Unit) { detectTapGestures { } },
         contentAlignment = Alignment.Center,
     ) {
-        GlassSurface(ContinuousRoundedShape(ALERT_RADIUS), Modifier.width(ALERT_WIDTH).semantics { paneTitle = localizer.text("native.errorTitle") }) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Column(
-                    Modifier.padding(start = 16.dp, top = 20.dp, end = 16.dp, bottom = 16.dp).semantics(mergeDescendants = true) {}.accessibilityFocus(said),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
-                    Text(localizer.text("native.errorTitle"), color = colors.label, style = type.style(IosTextStyle.Headline).sfLines(), textAlign = TextAlign.Center)
-                    Text(message, color = colors.label, style = type.style(IosTextStyle.Footnote).sfLines(), textAlign = TextAlign.Center)
-                }
-                Box(Modifier.fillMaxWidth().height(1.dp).background(colors.separator))
-                SheetButton(localizer.text("common.close"), bold = true, tag = ACTION_ERROR_CLOSE, height = 44.dp, action = close)
+        AlertCard(localizer.text("native.errorTitle")) {
+            Column(
+                Modifier
+                    .padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE)
+                    .semantics(mergeDescendants = true) {}
+                    .accessibilityFocus(said),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(MESSAGE_GAP),
+            ) {
+                Text(localizer.text("native.errorTitle"), color = colors.label, style = type.body.uiKitLines(IosTextStyle.Body), textAlign = TextAlign.Center)
+                Text(message, color = colors.secondaryLabel, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline), textAlign = TextAlign.Center)
             }
+            Spacer(Modifier.height(ALERT_BUTTONS_GAP))
+            AlertButton(localizer.text("common.close"), ACTION_ERROR_CLOSE, Modifier.padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE).fillMaxWidth(), close)
         }
     }
 }
+
+/**
+ * An alert as iOS 26 draws it: a glass card 320 wide, the same on a tablet, with continuous corners, named [title]
+ * for TalkBack, what it holds in a column 15 in from its sides, under its title's room at the top and 16 over its
+ * foot, scrolling where the room [modifier] gives it is shorter.
+ */
+@Composable
+private fun AlertCard(title: String, modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
+    GlassSurface(ContinuousRoundedShape(ALERT_RADIUS), Modifier.width(ALERT_WIDTH).then(modifier).semantics { paneTitle = title }) {
+        Column(
+            Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(start = ALERT_SIDE, top = ALERT_TOP, end = ALERT_SIDE, bottom = ALERT_BUTTON_SIDE),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            content = content,
+        )
+    }
+}
+
+/**
+ * A button of an alert or of the delete question as iOS 26 draws it: a capsule at least 48 tall in the alert's fill
+ * ([alertFill]), its title at the body size, medium, in the label colour (an alert's buttons take no tint, and Delete
+ * has no role), darkening under the finger as the bar's glass buttons do ([RowHighlight.Capsule]).
+ */
+@Composable
+private fun AlertButton(title: String, tag: String, modifier: Modifier, action: () -> Unit) {
+    Box(
+        modifier
+            .heightIn(min = ALERT_CAPSULE_HEIGHT)
+            .clip(CapsuleShape)
+            .background(alertFill(PeekTheme.colors.dark))
+            .testTag(tag)
+            .clickable(interactionSource = null, indication = RowHighlight.Capsule, role = Role.Button, onClick = action)
+            .padding(horizontal = ALERT_BUTTON_PADDING, vertical = ALERT_CAPSULE_PADDING),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(title, color = PeekTheme.colors.label, style = alertButtonFont(), textAlign = TextAlign.Center)
+    }
+}
+
+@Composable
+private fun alertButtonFont(): TextStyle = PeekTheme.type.style(IosTextStyle.Body, FontWeight.Medium).sfLines()
+
+/**
+ * An alert's field and buttons on its glass: in light the system's tertiary fill as the glass's vibrancy deepens it,
+ * measured on the iPhone's alert; in dark, which wasn't measured, white at a tenth, the tertiary fill on dark glass.
+ */
+private fun alertFill(dark: Boolean): Color = if (dark) ALERT_FILL_DARK else ALERT_FILL_LIGHT
+
+/**
+ * Lines as UIKit sets an alert's words: each as tall as the text style's leading at Large (22 for the body's 17
+ * points, 20 for the subheadline's 15), the words in the middle of it.
+ */
+private fun TextStyle.uiKitLines(style: IosTextStyle): TextStyle = copy(
+    lineHeight = when (style) {
+        IosTextStyle.Subheadline -> 20f / 15f
+        else -> 22f / 17f
+    }.em,
+    lineHeightStyle = LineHeightStyle(alignment = LineHeightStyle.Alignment.Center, trim = LineHeightStyle.Trim.None),
+)
 
 @Composable
 private fun SheetButton(title: String, bold: Boolean, tag: String, height: Dp = 56.dp, modifier: Modifier = Modifier, action: () -> Unit) {
@@ -952,15 +1005,31 @@ private val PREVIEW_SIDE = 22.dp
 private val ROW_HEIGHT = 42.dp
 private val SEPARATOR_BLOCK = 21.dp
 private val SHEET_RADIUS = 14.dp
-private val ALERT_RADIUS = 14.dp
-private val ALERT_WIDTH = 270.dp
+
+/** An alert as the iPhone draws it in iOS 26 ([AlertCard]), measured on its rename alert. */
+private val ALERT_RADIUS = 34.dp
+private val ALERT_WIDTH = 320.dp
+private val ALERT_SIDE = 15.dp
+private val ALERT_TOP = 22.dp
+private val ALERT_FIELD_GAP = 14.dp
+private val ALERT_BUTTONS_GAP = 20.dp
+
+/** An alert's buttons: 16 from its sides and its foot, 8 apart, each a capsule at least 48 tall. */
+private val ALERT_BUTTON_SIDE = 16.dp
+private val ALERT_BUTTON_GAP = 8.dp
+private val ALERT_CAPSULE_HEIGHT = 48.dp
+private val ALERT_CAPSULE_PADDING = 12.dp
+private val ALERT_FILL_LIGHT = Color(118, 118, 128).copy(alpha = 0.3f)
+private val ALERT_FILL_DARK = Color.White.copy(alpha = 0.1f)
+
+/** The words in the rename field, 15 in from its ends. */
+private val FIELD_INSET = 15.dp
+
+/** Between an alert's or the delete question's title and its message. */
+private val MESSAGE_GAP = 6.dp
 
 /** The room on either side of an alert's or a sheet's button title. */
 private val ALERT_BUTTON_PADDING = 8.dp
-
-/** The rename alert's field, as UIKit draws an alert's: 7-point corners in a hairline. */
-private val FIELD_RADIUS = 7.dp
-private val FIELD_BORDER = 0.5.dp
 
 /** UIKit's action sheet in a popover, as wide as an iPad draws it. */
 private val DELETE_POPOVER_WIDTH = 304.dp

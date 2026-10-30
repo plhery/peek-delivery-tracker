@@ -72,9 +72,13 @@ failures age out of the window; a new failure meanwhile reminds as usual.
 - A carrier whose adapter declines its verification on purpose rather than guess at it (JD's
   browser service leaving a puzzle it cannot read unanswered, `verification_unreadable`) failed
   no refresh: while every other source of the check answered, the check records its lookups'
-  samples but no refresh sample, as do the checks its cooldown defers. Its failed lookups still
-  count toward the carrier's lookup incident, and the carrier dashboard's gap files its parcels
-  under verification or captcha.
+  samples but no refresh sample, as do the checks its cooldown defers. JD's final browser lookup
+  with `ChallengeError`, category `challenge` and reason `verification_unreadable` remains a
+  failed sample for review, counted in `metrics.verification_abstentions` and the carrier
+  dashboard. It counts toward neither an outage nor recovery. An old incident supported only
+  by these samples closes as `verification_abstained`, without claiming that tracking recovered.
+  Refused verification, transport, capture and parsing failures still count toward incidents.
+  The carrier dashboard's gap still files the parcels under verification or captcha.
 - A parcel whose own carrier says not-found stays `waiting` even if every fallback fails.
   The fallbacks can't know a parcel the carrier hasn't announced.
 - If a tier stops being probed (no parcels left), its incident closes once its last sample

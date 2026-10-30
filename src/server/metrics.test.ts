@@ -61,6 +61,13 @@ describe('prometheus carrier metrics', () => {
     expect(text).not.toContain('Provider wording');
   });
 
+  it('counts an unreadable JD verification without reporting a successful lookup', async () => {
+    metrics.prometheusStepRecorder.lookup({ carrier: 'jd-logistics', finalStep: 'trawl', outcome: 'challenge',
+      errorType: 'ChallengeError', durationMs: 1000, attempts: 2,
+      error: new ChallengeError('JD Logistics', 'Unanswered verification', { reason: 'verification_unreadable' }) });
+    expect(await scraped()).toContain('carrier_lookup_total{carrier="jd-logistics",final_step="trawl",outcome="challenge",attempts="2",reason="verification_unreadable"} 1');
+  });
+
   it('tells a provider with no history yet apart from an indeterminate failure', async () => {
     // A provider's own subclass, as 17TRACK has.
     const empty = new (class SeventeenTrackNoHistoryError extends NoHistoryError {})('17track');

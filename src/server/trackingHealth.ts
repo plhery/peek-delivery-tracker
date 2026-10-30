@@ -132,6 +132,11 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
   const recovered = incident.state === 'recovered';
   const evidence = incident.evidence as JsonObject | undefined;
   const scope = refresh ? 'Shipment refreshes' : incident.kind === 'direct' ? 'Direct tracking' : 'Provider lookups';
+  if (incident.state === 'closed' && incident.reason === 'verification_abstained') {
+    return { title: `${scope} closed: ${subject} verification abstentions are review signals`,
+      nextSteps: 'Keep provider fallback and scheduled backoff. Count unreadable verification in the database and carrier dashboard; other lookup failures still open incidents.',
+      impact: 'No successful lookup or recovery is claimed. Saved history remains available.' };
+  }
   if (incident.state === 'closed' && incident.reason === 'bypassed') {
     return { title: `${scope} closed: ${subject} answers through another step`,
       nextSteps: 'The carrier\'s three latest lookups answered without its direct step, which has not run for six hours (an adapter that goes straight to its browser step). Fresh direct failures open a new incident.',

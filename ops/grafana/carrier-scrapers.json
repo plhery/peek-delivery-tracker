@@ -1458,11 +1458,71 @@
       }
     },
     {
+      "type": "timeseries",
+      "id": 50,
+      "title": "Verification abstentions",
+      "description": "Scheduled JD lookups whose browser matcher declined an unreadable puzzle. Counts remain in the database for 24 hours; these are neither successful lookups nor actionable outages. Other failures still alert.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "${metrics}"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 73,
+        "w": 24,
+        "h": 8
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "${metrics}"
+          },
+          "refId": "A",
+          "editorMode": "code",
+          "rawQuery": true,
+          "format": "time_series",
+          "rawSql": "select hour as time, carrier as metric, abstentions\nfrom metrics.verification_abstentions\nwhere $__timeFilter(hour) and carrier ~ '^(${carrier:regex})$'\norder by 1"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0,
+          "min": 0,
+          "custom": {
+            "drawStyle": "bars",
+            "lineWidth": 2,
+            "fillOpacity": 60,
+            "showPoints": "auto",
+            "spanNulls": true,
+            "axisSoftMin": 0
+          },
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#3987e5"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      }
+    },
+    {
       "type": "row",
       "id": 22,
       "title": "Statuses and detection",
       "collapsed": false,
-      "gridPos": {"x": 0, "y": 73, "w": 24, "h": 1},
+      "gridPos": {"x": 0, "y": 81, "w": 24, "h": 1},
       "panels": []
     },
     {
@@ -1471,7 +1531,7 @@
       "title": "Status mapping source by carrier",
       "description": "Persisted events in the time range by how their stage was decided: the carrier's map, the wording classifier, or neither. Unmapped events are new wording to review in tracking_status_observations.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 0, "y": 74, "w": 12, "h": 9},
+      "gridPos": {"x": 0, "y": 82, "w": 12, "h": 9},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1564,7 +1624,7 @@
       "title": "Unmapped status share",
       "description": "Share of each carrier's events over the trailing 24 hours that no map or wording decided. Carriers with none are hidden. A rising line is new wording.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 12, "y": 74, "w": 12, "h": 9},
+      "gridPos": {"x": 12, "y": 82, "w": 12, "h": 9},
       "interval": "1h",
       "targets": [
         {
@@ -1602,7 +1662,7 @@
       "title": "Detection confidence",
       "description": "Tracking-number detections served to clients in the time range, by confidence.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 0, "y": 83, "w": 6, "h": 7},
+      "gridPos": {"x": 0, "y": 91, "w": 6, "h": 7},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1642,7 +1702,7 @@
       "title": "Checksum rejections",
       "description": "Parcels a carrier's own lookup confirmed although detection had left that carrier out on a failed check digit, by carrier and rule id. A rule that keeps counting has a wrong check digit.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 6, "y": 83, "w": 6, "h": 7},
+      "gridPos": {"x": 6, "y": 91, "w": 6, "h": 7},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1674,7 +1734,7 @@
       "title": "Provider postcode requests",
       "description": "Whether relaying a provider's postcode request pays off: asked, supplied, then each lookup made with it.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 12, "y": 83, "w": 6, "h": 7},
+      "gridPos": {"x": 12, "y": 91, "w": 6, "h": 7},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1706,7 +1766,7 @@
       "title": "DPD app sessions",
       "description": "DPD app sessions taken up at start, and openings that ended opened or failed, by what began them. Openings by lookup or refused mean lookups waited for one.",
       "datasource": {"type": "prometheus", "uid": "${datasource}"},
-      "gridPos": {"x": 18, "y": 83, "w": 6, "h": 7},
+      "gridPos": {"x": 18, "y": 91, "w": 6, "h": 7},
       "targets": [
         {
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
@@ -1740,7 +1800,7 @@
       "id": 7,
       "title": "Lookups",
       "collapsed": true,
-      "gridPos": {"x": 0, "y": 90, "w": 24, "h": 1},
+      "gridPos": {"x": 0, "y": 98, "w": 24, "h": 1},
       "panels": [
         {
           "type": "timeseries",
@@ -1991,7 +2051,7 @@
       "id": 12,
       "title": "Steps",
       "collapsed": true,
-      "gridPos": {"x": 0, "y": 91, "w": 24, "h": 1},
+      "gridPos": {"x": 0, "y": 99, "w": 24, "h": 1},
       "panels": [
         {
           "type": "timeseries",

@@ -770,6 +770,15 @@ describe('persistent tracking routing', () => {
     const again = await next.router.fetch(parcel({ carrier: 'jd-logistics', carrier_data: { routing } }), false).catch((error: unknown) => error);
     expect((again as RoutingDeferred).routing.failures['jd-logistics']).not.toHaveProperty('abstained');
   });
+  it('keeps provider history available when JD declines an unreadable verification', async () => {
+    const { router, direct, universal } = setup();
+    direct.mockRejectedValue(new ChallengeError('JD Logistics', 'Unanswered verification', { reason: 'verification_unreadable' }));
+    const result = await router.fetch(parcel({ carrier: 'jd-logistics' }), false);
+    expect(universal).toHaveBeenCalled();
+    expect(result.sourceCarrierId).toBe('unknown');
+    expect(result.result.events).toEqual(history().events);
+    expect(result.result.routing).toMatchObject({ failures: { 'jd-logistics': { abstained: true, kind: 'verification' } } });
+  });
   it('uses a universal carrier hint only after a matching direct lookup succeeds', async () => {
     const { router, direct } = setup();
     const result = await router.fetch(parcel({ carrier_data: { routing: state({ discovered_carrier: 'ups' }) } }), false);

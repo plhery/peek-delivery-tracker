@@ -877,6 +877,11 @@ fetch the scripts or their maps.
 
 ## Metrics
 
+Expected JD browser-matcher abstentions remain in the scheduled health samples and
+`metrics.verification_abstentions`, hourly counts with 24-hour retention. The carrier
+dashboard shows them separately; they count toward neither an outage nor recovery.
+Other lookup failures still open health incidents.
+
 The host [step recorder](../src/server/stepRecorder.ts) turns each adapter step into
 metrics. Steps are declared per carrier in the scraper's `carrier.json` (`direct`, `retry`,
 `trawl`, `browser`…). `phase:total` is one runner invocation, not the whole refresh. Filter

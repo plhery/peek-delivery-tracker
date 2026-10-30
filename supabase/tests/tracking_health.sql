@@ -239,4 +239,68 @@ begin
   assert not has_table_privilege('anon','public.tracking_health_samples','select');
 end;
 $$;
+-- Expected JD abstentions remain queryable but cannot mask or create actionable outages.
+truncate public.tracking_health_samples, public.tracking_health_incidents;
+create function pg_temp.jd_abstention(subject text default 'jd-logistics', kind text default 'provider')
+returns jsonb language sql as $$
+  select public.record_tracking_health(gen_random_uuid(),null,jsonb_build_array(jsonb_build_object(
+    'kind',kind,'subject',subject,'healthy',false,'details',jsonb_build_object(
+      'category','challenge','reason','verification_unreadable','error_type','ChallengeError','step','trawl'))));
+$$;
+do $$
+declare result jsonb; notice_id uuid;
+begin
+  for i in 1..12 loop
+    assert pg_temp.jd_abstention()='[]', 'Expected JD matcher abstentions must not open an outage';
+  end loop;
+  assert (select count(*) from public.tracking_health_samples where subject='jd-logistics' and not healthy)=12,
+    'Abstentions must remain failed samples, never fabricated successes';
+  assert (select sum(abstentions) from metrics.verification_abstentions)=12,
+    'Grafana must be able to count persisted scheduled abstentions';
+  assert has_table_privilege('metrics_reader','metrics.verification_abstentions','select');
+  assert not has_table_privilege('metrics_reader','metrics.verification_abstentions','insert');
+  assert not has_table_privilege('metrics_reader','public.tracking_health_samples','select');
+  assert not has_table_privilege('anon','metrics.verification_abstentions','select');
+  assert not has_table_privilege('authenticated','metrics.verification_abstentions','select');
+
+  update public.tracking_health_incidents set active=true,
+    pending=jsonb_build_object('id',gen_random_uuid(),'state','open'), lease_until=now()-interval '1 second'
+    where kind='provider' and subject='jd-logistics';
+  result := public.record_tracking_health(gen_random_uuid(),null,'[]');
+  assert result->0->>'state'='closed' and result->0->>'reason'='verification_abstained',
+    'An old abstention-only outage must close as a review signal, not recover';
+  notice_id := (result->0->>'id')::uuid;
+  perform public.ack_tracking_health(array[notice_id]);
+  assert not (select active from public.tracking_health_incidents where kind='provider' and subject='jd-logistics');
+  assert pg_temp.jd_abstention()='[]', 'An abstention-only incident must stay closed';
+
+  -- Interleaving many abstentions must not dilute real errors or replace their evidence.
+  for i in 1..9 loop
+    assert pg_temp.health_sample('jd-logistics',false)='[]';
+    assert pg_temp.jd_abstention()='[]';
+  end loop;
+  result := pg_temp.health_sample('jd-logistics',false);
+  assert result->0->>'state'='open' and (result->0->>'attempts')::int=10
+    and (result->0->>'failures')::int=10 and result->0->'evidence'->>'error_type'='TransportError',
+    'Ten actionable failures must still alert with actionable evidence';
+  perform public.ack_tracking_health(array[(result->0->>'id')::uuid]);
+  for i in 1..3 loop assert pg_temp.jd_abstention()='[]'; end loop;
+  assert (select active from public.tracking_health_incidents where kind='provider' and subject='jd-logistics'),
+    'Abstentions cannot count as the three successful probes needed for recovery';
+
+  for i in 1..9 loop assert pg_temp.health_sample('jd-logistics',true)='[]'; end loop;
+  result := pg_temp.health_sample('jd-logistics',true);
+  assert result->0->>'state'='recovered' and (result->0->>'attempts')::int=20,
+    'Actual successful lookups still recover once the actionable failure rate allows it';
+  perform public.ack_tracking_health(array[(result->0->>'id')::uuid]);
+
+  for i in 1..9 loop assert pg_temp.jd_abstention('another-carrier')='[]'; end loop;
+  result := pg_temp.jd_abstention('another-carrier');
+  assert result->0->>'state'='open', 'Other carriers must not inherit this JD policy';
+  perform public.ack_tracking_health(array[(result->0->>'id')::uuid]);
+  for i in 1..9 loop assert pg_temp.jd_abstention('jd-logistics','direct')='[]'; end loop;
+  result := pg_temp.jd_abstention('jd-logistics','direct');
+  assert result->0->>'state'='open', 'A direct-step fault is not a final JD matcher abstention';
+end;
+$$;
 rollback;

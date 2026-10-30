@@ -429,7 +429,7 @@ export class TrackingSyncAudit {
       const healthy = refused || repeated || (completion.outcome !== 'error' && !failedFetch);
       // A carrier whose adapter declined its verification on purpose, in this check or in the one whose
       // cooldown deferred it, failed no refresh while every other source answered: the check keeps its
-      // lookups' samples, and the lookup incident still counts the carrier's failed ones.
+      // lookups' samples. Postgres counts deliberate JD abstentions as review data, not an outage.
       const ownFailure = isRecord(completion.providerFailures) ? completion.providerFailures[this.configuredCarrier] : undefined;
       const abstained = !healthy && (ownAnswer
         ? !ownAnswer.healthy && !ownAnswer.recovered && ABSTAINED_REASONS.has(String(ownAnswer.details.reason))

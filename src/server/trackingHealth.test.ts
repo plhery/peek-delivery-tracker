@@ -220,6 +220,9 @@ describe('tracking health evidence', () => {
       consecutive_failures: true }).title).toBe('Shipment refreshes repeatedly failing: royal-mail (4/6 in 1h; 3 checks in a row failed for two parcels, or for one while no other answered)');
     expect(healthMessage({ subject: 'dpd-fr', kind: 'direct', state: 'closed', reason: 'bypassed' })).toMatchObject({
       title: 'Direct tracking closed: dpd-fr answers through another step', nextSteps: expect.stringContaining('has not run for six hours') });
+    expect(healthMessage({ subject: 'jd-logistics', kind: 'provider', state: 'closed', reason: 'verification_abstained' }))
+      .toMatchObject({ title: expect.stringContaining('review signals'), impact: expect.stringContaining('No successful lookup or recovery'),
+        nextSteps: expect.stringContaining('other lookup failures still open incidents') });
   });
 });
 

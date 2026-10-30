@@ -140,16 +140,21 @@ class LocalizationTests {
 
     @Test
     fun notificationPresetsAreNamedAsOnTheWebsite() {
+        val website = mapOf(
+            AppLanguage.En to listOf("Every scan", "Important steps", "Delivery only"),
+            AppLanguage.De to listOf("Jeden Scan", "Wichtige Schritte", "Nur die Zustellung"),
+            AppLanguage.Fr to listOf("Chaque scan", "Étapes importantes", "Livraison seulement"),
+            AppLanguage.It to listOf("Ogni scansione", "Passaggi importanti", "Solo la consegna"),
+            AppLanguage.Es to listOf("Cada escaneo", "Pasos importantes", "Solo la entrega"),
+            AppLanguage.Pt to listOf("Todas as leituras", "Passos importantes", "Só a entrega"),
+            AppLanguage.Pl to listOf("Każdy skan", "Ważne etapy", "Tylko doręczenie"),
+        )
+        assertEquals(AppLanguage.entries.toSet(), website.keys)
         val localizer = Localizer(AppLanguage.En)
-        assertEquals(
-            listOf("Every scan", "Important steps", "Delivery only"),
-            NotificationPreset.entries.map { localizer.text(it.titleKey) },
-        )
-        localizer.language = AppLanguage.Fr
-        assertEquals(
-            listOf("Chaque scan", "Étapes importantes", "Livraison seulement"),
-            NotificationPreset.entries.map { localizer.text(it.titleKey) },
-        )
+        for ((language, names) in website) {
+            localizer.language = language
+            assertEquals(language.rawValue, names, NotificationPreset.entries.map { localizer.text(it.titleKey) })
+        }
     }
 
     @Test

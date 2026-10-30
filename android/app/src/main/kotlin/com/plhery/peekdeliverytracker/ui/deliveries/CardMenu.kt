@@ -16,14 +16,18 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -90,6 +94,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
@@ -756,10 +761,12 @@ private fun DeleteQuestion(focus: AccessibilityFocus, delete: () -> Unit) {
 
 /**
  * `parcelRenameAlert` (B-S10), drawn as iOS draws an alert with a text field: "Edit parcel name", the field holding the
- * name typed so far, "Parcel" while it is empty, then Cancel and Save name side by side. The field takes the focus and
- * the keyboard as the alert opens, the cursor after the name, and the keyboard's Done saves, as Return does; the back
- * gesture cancels. The alert stands in the middle of what the keyboard leaves of the window. TalkBack starts at its
- * title.
+ * name typed so far, "Parcel" while it is empty, then Cancel and Save name side by side, or Save name over Cancel where
+ * either doesn't fit its half, as at the accessibility text sizes ([RenameButtons]). The field takes the focus and the
+ * keyboard as the alert opens, the cursor after the name, and the keyboard's Done saves, as Return does; the back
+ * gesture cancels. The alert stands in the middle of what the keyboard leaves of the window, clear of the system's
+ * bars, and scrolls where it is taller than that room, as UIAlertController does in a phone on its side with the
+ * keyboard up. TalkBack starts at its title.
  */
 @Composable
 private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
@@ -777,6 +784,8 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
     BackHandler(onBack = state::cancelRename)
     val title = localizer.text("detail.editTitle")
     val font = type.style(IosTextStyle.Footnote)
+    val bars = WindowInsets.systemBars.union(WindowInsets.displayCutout)
+    val keyboard = WindowInsets.ime
     Box(
         Modifier
             .fillMaxSize()
@@ -786,8 +795,20 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
             .imePadding(),
         contentAlignment = Alignment.Center,
     ) {
-        GlassSurface(ContinuousRoundedShape(ALERT_RADIUS), Modifier.width(ALERT_WIDTH).semantics { paneTitle = title }) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        GlassSurface(
+            ContinuousRoundedShape(ALERT_RADIUS),
+            Modifier
+                .width(ALERT_WIDTH)
+                .layout { measurable, constraints ->
+                    // In the middle of the room, as tall as it leaves between the status bar and the navigation bar
+                    // where the keyboard doesn't cover it.
+                    val clear = max(bars.getTop(this), bars.getBottom(this) - keyboard.getBottom(this))
+                    val placeable = measurable.measure(constraints.copy(minHeight = 0, maxHeight = max(0, constraints.maxHeight - 2 * clear)))
+                    layout(placeable.width, placeable.height) { placeable.place(0, 0) }
+                }
+                .semantics { paneTitle = title },
+        ) {
+            Column(Modifier.verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.CenterHorizontally) {
                 Column(
                     Modifier.padding(start = 16.dp, top = 20.dp, end = 16.dp, bottom = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -832,18 +853,38 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
                     )
                 }
                 Box(Modifier.fillMaxWidth().height(1.dp).background(colors.separator))
-                Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min)) {
-                    SheetButton(
-                        localizer.text("common.cancel"), bold = true, tag = RENAME_CANCEL, height = 44.dp, modifier = Modifier.weight(1f),
-                        action = state::cancelRename,
-                    )
-                    Box(Modifier.width(1.dp).fillMaxHeight().background(colors.separator))
-                    SheetButton(
-                        localizer.text("detail.saveTitle"), bold = false, tag = RENAME_SAVE, height = 44.dp, modifier = Modifier.weight(1f),
-                        action = state::saveRename,
-                    )
-                }
+                RenameButtons(localizer.text("common.cancel"), localizer.text("detail.saveTitle"), state::cancelRename, state::saveRename)
             }
+        }
+    }
+}
+
+/**
+ * The rename alert's Cancel and Save name, as UIAlertController lays out two actions: side by side, a line between
+ * them, while each title fits its half; otherwise, and always at the accessibility text sizes, one under the other, a
+ * line between them, Cancel last.
+ */
+@Composable
+private fun RenameButtons(cancel: String, save: String, onCancel: () -> Unit, onSave: () -> Unit) {
+    val type = PeekTheme.type
+    val colors = PeekTheme.colors
+    val measurer = rememberTextMeasurer()
+    val accessibilitySize = PeekTheme.dynamicTypeSize.isAccessibilitySize
+    val half = with(LocalDensity.current) { ((ALERT_WIDTH - 1.dp) / 2 - ALERT_BUTTON_PADDING * 2).roundToPx() }
+    val stacked = accessibilitySize || listOf(cancel to FontWeight.SemiBold, save to FontWeight.Normal).any { (title, weight) ->
+        measurer.measure(title, type.style(IosTextStyle.Body, weight).sfLines(), maxLines = 1, softWrap = false).size.width > half
+    }
+    if (stacked) {
+        Column(Modifier.fillMaxWidth()) {
+            SheetButton(save, bold = false, tag = RENAME_SAVE, height = 44.dp, action = onSave)
+            Box(Modifier.fillMaxWidth().height(1.dp).background(colors.separator))
+            SheetButton(cancel, bold = true, tag = RENAME_CANCEL, height = 44.dp, action = onCancel)
+        }
+    } else {
+        Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min)) {
+            SheetButton(cancel, bold = true, tag = RENAME_CANCEL, height = 44.dp, modifier = Modifier.weight(1f), action = onCancel)
+            Box(Modifier.width(1.dp).fillMaxHeight().background(colors.separator))
+            SheetButton(save, bold = false, tag = RENAME_SAVE, height = 44.dp, modifier = Modifier.weight(1f), action = onSave)
         }
     }
 }
@@ -895,7 +936,7 @@ private fun SheetButton(title: String, bold: Boolean, tag: String, height: Dp = 
         contentAlignment = Alignment.Center,
     ) {
         Text(
-            title, Modifier.padding(horizontal = 8.dp), color = PeekTheme.colors.accent,
+            title, Modifier.padding(horizontal = ALERT_BUTTON_PADDING), color = PeekTheme.colors.accent,
             style = type.style(IosTextStyle.Body, if (bold) FontWeight.SemiBold else FontWeight.Normal).sfLines(), textAlign = TextAlign.Center,
         )
     }
@@ -913,6 +954,9 @@ private val SEPARATOR_BLOCK = 21.dp
 private val SHEET_RADIUS = 14.dp
 private val ALERT_RADIUS = 14.dp
 private val ALERT_WIDTH = 270.dp
+
+/** The room on either side of an alert's or a sheet's button title. */
+private val ALERT_BUTTON_PADDING = 8.dp
 
 /** The rename alert's field, as UIKit draws an alert's: 7-point corners in a hairline. */
 private val FIELD_RADIUS = 7.dp

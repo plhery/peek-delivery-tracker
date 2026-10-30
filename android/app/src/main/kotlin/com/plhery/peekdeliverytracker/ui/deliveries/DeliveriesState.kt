@@ -30,6 +30,7 @@ import com.plhery.peekdeliverytracker.core.DeliveredConfetti
 import com.plhery.peekdeliverytracker.core.DeliveredHold
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesNavigation
+import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryCardKind
 import com.plhery.peekdeliverytracker.core.DeliveryCardPlace
 import com.plhery.peekdeliverytracker.core.DeliveryListLayout
@@ -807,6 +808,12 @@ internal class DeliveriesState(
     /** What the rename alert's field holds (`prompts.name`, the page's `editedTitle`), kept with the window as typed. */
     var renameText: String by prompts.name
 
+    /**
+     * The parcel a card's menu asked to name, as it was then (`prompts.renaming`): the name goes to it, even once it has
+     * left the list, for the store to refuse. A window made again keeps only its id ([renaming]).
+     */
+    private var renamingParcel: Parcel? = null
+
     /** The parcel page's ••• menu, open over the window. */
     var pageMenu: PageMenuRequest? by mutableStateOf(null)
 
@@ -1097,6 +1104,7 @@ internal class DeliveriesState(
      */
     private fun rename(parcel: Parcel, pageId: UUID?) {
         renameText = parcel.label
+        renamingParcel = parcel
         renaming = RenameRequest(parcel.id, pageId)
     }
 
@@ -1114,12 +1122,15 @@ internal class DeliveriesState(
     /**
      * The rename alert's Save: the name typed, trimmed and cut to 80 characters ([parcelName]), goes to the store
      * (`store.rename(_:label:)`) for the parcel as it is now. Asked from a page, in its `run`: one change at a time, and
-     * an alert over the page says why it failed. Asked from a card, in the app's scope, a failure said in the list's
-     * alert (`actionError`).
+     * an alert over the page says why it failed. Asked from a card, in the app's scope, for the parcel the menu found
+     * ([renamingParcel]), a failure said in the list's alert (`actionError`): one gone meanwhile is the store's to
+     * refuse, as it is ParcelListView's, and is said missing where a window made again has forgotten it.
      */
     fun saveRename() {
         val request = renaming ?: return
+        val asked = renamingParcel?.takeIf { it.id == request.parcelId }
         renaming = null
+        renamingParcel = null
         val label = parcelName(renameText)
         val pageId = request.pageId
         if (pageId != null) {
@@ -1127,10 +1138,10 @@ internal class DeliveriesState(
             workOnPage(pageId) { source.rename(parcel, label) }
             return
         }
-        val parcel = source.parcels.value.firstOrNull { it.id == request.parcelId } ?: return
+        val parcel = asked ?: source.parcels.value.firstOrNull { it.id == request.parcelId }
         source.scope.launch {
             try {
-                source.rename(parcel, label)
+                source.rename(parcel ?: throw DeliveryApiError.ParcelMissing(), label)
             } catch (error: CancellationException) {
                 throw error
             } catch (error: Exception) {
@@ -1142,6 +1153,7 @@ internal class DeliveriesState(
     /** The rename alert's Cancel, or the back gesture: the name stays as it was. */
     fun cancelRename() {
         renaming = null
+        renamingParcel = null
     }
 
     /**

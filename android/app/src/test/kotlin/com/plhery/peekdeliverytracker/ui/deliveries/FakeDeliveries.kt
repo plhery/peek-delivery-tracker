@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
+import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
@@ -172,6 +173,8 @@ class FakeDeliveries(
 
     override suspend fun rename(parcel: Parcel, label: String) {
         failure?.let { throw it }
+        // As the store's guest and demo parcels refuse a parcel gone from them.
+        if (parcels.value.none { it.id == parcel.id }) throw DeliveryApiError.ParcelMissing()
         renames += parcel.id to label
         parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(label = label) else it }
     }

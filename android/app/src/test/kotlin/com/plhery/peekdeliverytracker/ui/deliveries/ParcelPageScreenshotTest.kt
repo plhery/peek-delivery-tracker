@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.unit.Density
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -30,8 +32,9 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * A parcel's page's frame on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), in
  * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark, its ••• menu open, its
- * rename alert light and dark, the page of a parcel gone, and the page beside the list on a tablet on its side, the
- * history beside the pass. The page dragged down, under its bar, is ParcelZoomScreenshotTest's.
+ * rename alert light and dark and at an accessibility text size, the page of a parcel gone, and the page beside the
+ * list on a tablet on its side, the history beside the pass. The page dragged down, under its bar, is
+ * ParcelZoomScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -46,12 +49,13 @@ class ParcelPageScreenshotTest {
     private lateinit var deliveries: DeliveriesState
 
     /** The demo's list with the window's bars in points: the iPhone's status bar 62 tall and gesture bar 24 by default. */
-    private fun show(dark: Boolean = false, top: Int = 62, bottom: Int = 24) {
+    private fun show(dark: Boolean = false, top: Int = 62, bottom: Int = 24, fontScale: Float = 1f) {
         val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
-            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalDensity provides Density(density.density, fontScale)) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source)
                 }
@@ -122,6 +126,15 @@ class ParcelPageScreenshotTest {
         open()
         rename()
         compose.screenshot("page_rename_dark")
+    }
+
+    /** At an accessibility text size, its buttons one over the other, Cancel last. */
+    @Test
+    fun theRenameAlertAtAnAccessibilityTextSize() {
+        show(fontScale = 2f)
+        open()
+        rename()
+        compose.screenshot("page_rename_light_text2")
     }
 
     @Test

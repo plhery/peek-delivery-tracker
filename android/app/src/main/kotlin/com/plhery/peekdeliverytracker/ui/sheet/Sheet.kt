@@ -137,7 +137,8 @@ internal class SheetMenus {
  *   first takes it to the large detent, as a keyboard up for what it holds does. In a window lower than 480 (a phone
  *   on its side) it stands at the large detent whatever its detents, as iOS's does in compact height.
  * - Where the window is regular, it is a form sheet in the window's middle, 540 wide and 620 tall at most, opaque, which
- *   a drag down sends away too.
+ *   a drag down sends away too. A sheet with the [SheetDetent.Fitted] detent is as tall there as what it holds, as tall
+ *   as the window's safe area at most (`fittedSheet`'s form).
  *
  * The window under it dims, black at 20 % (48 % in dark), and a tap there dismisses it, as the system's back and its
  * predictive gesture do, the sheet following the gesture down. While it isn't [dismissible]
@@ -337,7 +338,9 @@ private fun SheetLayer(
         val ime = WindowInsets.ime
         val keyboard by remember(ime, density) { derivedStateOf { ime.getBottom(density) > 0 } }
         val formWidth = with(density) { min(FORM_WIDTH.toPx(), width - 2 * FORM_MARGIN.toPx()) }
-        val formHeight = with(density) { min(FORM_HEIGHT.toPx(), height - safeTop - bars.getBottom(this) - 2 * FORM_MARGIN.toPx()) }
+        val formRoom = with(density) { height - safeTop - bars.getBottom(this) - 2 * FORM_MARGIN.toPx() }
+        // A fitted sheet's form is as tall as what it holds (`.form.fitted(horizontal: false, vertical: true)`).
+        val formHeight = if (SheetDetent.Fitted in detents && fitted > 0) min(fitted, formRoom) else min(with(density) { FORM_HEIGHT.toPx() }, formRoom)
         // Low as a phone on its side, the sheet stands at its large detent, as iOS's does in compact height; and a
         // keyboard up for what it holds takes it there, as UIKit lifts a sheet clear of it. A keyboard still going
         // down from a field the sheet came over leaves it at its own detent.
@@ -541,7 +544,7 @@ private fun SheetLayer(
                     LocalSheetInsets provides SheetInsets.sheet(FORM_WIDTH, reachesBottom = false), LocalSheetGround provides ground,
                 ) {
                     Grabber(Modifier.align(Alignment.TopCenter))
-                    content()
+                    if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
                 }
             }
         } else {

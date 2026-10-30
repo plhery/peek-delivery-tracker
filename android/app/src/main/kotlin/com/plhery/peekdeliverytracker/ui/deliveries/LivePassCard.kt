@@ -106,10 +106,15 @@ import kotlin.math.max
 
 /**
  * The page's bell, where the parcel has one: it opens the parcel's alerts while the account's email is on
- * (`opensAlerts`, `bellOpensAlerts`), and otherwise switches the parcel's notifications (`mute`), then calls `saved`.
+ * (`opensAlerts`, `bellOpensAlerts`, `open`, TalkBack coming back to the bell), and otherwise switches the parcel's
+ * notifications (`mute`), then calls `saved`.
  */
 @Stable
-internal class PassBell(val opensAlerts: Boolean, val mute: (muted: Boolean, saved: () -> Unit) -> Unit)
+internal class PassBell(
+    val opensAlerts: Boolean,
+    val open: (AccessibilityFocus) -> Unit = {},
+    val mute: (muted: Boolean, saved: () -> Unit) -> Unit,
+)
 
 /**
  * The card of `liveParcelPass` (B-S02), in the carrier's colours with 18-point corners and 18 in, its parts 16 apart:
@@ -470,12 +475,15 @@ private fun HeaderButton(
 private fun BellButton(parcel: Parcel, bell: PassBell, working: Boolean, tint: Color, localizer: Localizer) {
     var rings by remember { mutableIntStateOf(0) }
     val haptics = rememberHaptics()
+    val focus = remember { AccessibilityFocus() }
     val label = localizer.text(
         if (bell.opensAlerts) "email.parcel.open" else if (parcel.notificationsMuted) "detail.unmute" else "detail.mute",
     )
-    HeaderButton(label, PAGE_BELL, enabled = !working, Modifier, {
-        // The parcel's alerts sheet comes with its step.
-        if (bell.opensAlerts) return@HeaderButton
+    HeaderButton(label, PAGE_BELL, enabled = !working, Modifier.accessibilityFocus(focus), {
+        if (bell.opensAlerts) {
+            bell.open(focus)
+            return@HeaderButton
+        }
         bell.mute(!parcel.notificationsMuted) {
             rings++
             haptics.selection()

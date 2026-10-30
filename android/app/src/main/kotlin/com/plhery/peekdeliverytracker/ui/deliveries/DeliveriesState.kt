@@ -260,14 +260,16 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
 
 /**
  * What a menu opened over the deliveries that waits for an answer, each held for the launch ([rememberForLaunch]) as
- * the iPhone's `@State` is through a rotation: the delete it asks about, the parcel being named and the carrier editor
- * open ([DeleteRequest.saved], [RenameRequest.saved], [CarrierEditorRequest.saved]), and the name typed so far.
+ * the iPhone's `@State` is through a rotation: the delete it asks about, the parcel being named, the carrier editor
+ * open and a parcel's alerts open ([DeleteRequest.saved], [RenameRequest.saved], [CarrierEditorRequest.saved],
+ * [AlertsRequest.saved]), and the name typed so far.
  */
 internal class PromptStates(
     val deleting: MutableState<String?>,
     val renaming: MutableState<String?>,
     val name: MutableState<String>,
     val changingCarrier: MutableState<String?>,
+    val alerts: MutableState<String?>,
 )
 
 @Composable
@@ -276,6 +278,7 @@ internal fun rememberPromptStates(launch: UUID): PromptStates = PromptStates(
     renaming = rememberForLaunch<String?>(launch, null),
     name = rememberForLaunch(launch, ""),
     changingCarrier = rememberForLaunch<String?>(launch, null),
+    alerts = rememberForLaunch<String?>(launch, null),
 )
 
 /**
@@ -855,7 +858,7 @@ internal class DeliveriesState(
      */
     val modal: Boolean
         get() = menu != null || pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
-            mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing
+            mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing || alerts != null || alertsClosing
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes
@@ -911,6 +914,85 @@ internal class DeliveriesState(
     private fun pageFailure(error: Throwable): String {
         source.reviewPrompt.noteBadMoment(now())
         return source.errorMessage(error)
+    }
+
+    /**
+     * A parcel's alerts open over the window from its page's bell (`showingAlerts`), kept with the window with the switch
+     * being saved and whether Done waits for it ([ParcelAlertsHost]).
+     */
+    var alerts: AlertsRequest?
+        get() = prompts.alerts.value?.let { AlertsRequest.from(it) }
+        private set(value) {
+            prompts.alerts.value = value?.saved
+        }
+
+    /** The alerts have closed and their sheet is still on its way down: TalkBack goes back to the bell once it has gone. */
+    var alertsClosing: Boolean by mutableStateOf(false)
+        private set
+
+    /**
+     * The bell of the page with `pageId`, while the account's email is on (`showingAlerts = true`): opens the parcel's
+     * alerts, where the account's preferences have come, which the sheet shows. TalkBack goes back to `focus`, the bell,
+     * once they have closed.
+     */
+    fun openAlerts(pageId: UUID, focus: AccessibilityFocus?) {
+        if (modal || navigator.navigation.shown != pageId) return
+        val parcel = menuParcel(pageId) ?: return
+        if (source.deliveryEmail.value?.bellOpensAlerts(parcel) != true || source.notificationPreferences.value == null) return
+        returnFocus = focus
+        alertsClosing = false
+        alerts = AlertsRequest(UUID.randomUUID(), pageId)
+    }
+
+    /**
+     * A switch of the alerts flipped to `on` (`flip(_:to:)`): the parcel's notifications or its email, saved for this
+     * parcel in the app's scope ([PageWork], by the request's id), one at a time; the switch shows `on` until the
+     * server has answered, and an alert over the sheet says why it failed.
+     */
+    fun flipAlert(alert: ParcelAlert, on: Boolean, parcel: Parcel) {
+        val request = alerts ?: return
+        if (source.pageWork.working(request.id)) return
+        alerts = request.copy(saving = AlertSave(alert, on))
+        source.pageWork.run(request.id, source.scope, source::errorMessage) {
+            when (alert) {
+                ParcelAlert.Notifications -> source.setMuted(parcel, muted = !on)
+                ParcelAlert.Email -> source.setEmailMuted(parcel, muted = !on)
+            }
+        }
+    }
+
+    /**
+     * The switch being saved has been answered (`flip`'s end): saved, the alerts close if Done waited for it; failed,
+     * Done waits no more.
+     */
+    fun alertSaved() {
+        val request = alerts?.takeIf { it.saving != null } ?: return
+        if (source.pageWork.working(request.id)) return
+        val failed = source.pageWork.failure(request.id) != null
+        alerts = request.copy(saving = null, closing = false)
+        if (request.closing && !failed) closeAlerts()
+    }
+
+    /** Done or ✕ (`close()`): the alerts close, once the switch being saved has been answered, so a failure is never missed. */
+    fun doneWithAlerts() {
+        val request = alerts ?: return
+        if (source.pageWork.working(request.id)) alerts = request.copy(closing = true) else closeAlerts()
+    }
+
+    /**
+     * A tap outside, the back, a drag down, Done, or the bell no longer opening them (`dismiss()`): the alerts close, and
+     * forget what they saved. Their sheet keeps the parcel as it goes down ([alertsClosed]).
+     */
+    fun closeAlerts() {
+        val request = alerts ?: return
+        source.pageWork.forget(request.id)
+        alerts = null
+        alertsClosing = true
+    }
+
+    /** The alerts' sheet has gone. */
+    fun alertsClosed() {
+        if (alerts == null) alertsClosing = false
     }
 
     /**

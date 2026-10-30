@@ -16,6 +16,7 @@ import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.util.UUID
@@ -86,6 +87,9 @@ interface DeliveriesSource {
     /** `store.setMuted(_:muted:)`: switches the parcel's notifications off, or back on. Nothing for a guest's parcel. */
     suspend fun setMuted(parcel: Parcel, muted: Boolean)
 
+    /** `store.setEmailMuted(_:muted:)`: switches the delivery email off, or back on, for this parcel only. */
+    suspend fun setEmailMuted(parcel: Parcel, muted: Boolean)
+
     /**
      * `store.changeCarrier(_:carrier:trackingURL:dpdPostcode:dpdPostcodeCountry:providerPostcode:)`: moves the parcel to
      * `carrier`, with the link and the postcode it needs, the postcode's country where it isn't the carrier's home, and
@@ -111,6 +115,9 @@ interface DeliveriesSource {
 
     /** `store.deliveryEmail`, as the account's preferences and the session change: null without one. */
     val deliveryEmail: StateFlow<DeliveryEmail?>
+
+    /** `store.notificationPreferences`: the account's, once loaded; null before then and without an account. */
+    val notificationPreferences: StateFlow<NotificationPreferences?>
 
     /** `store.viewerLink(for:)`: the link someone else's parcel is followed through, which its menu reads. */
     fun viewerLink(parcel: Parcel): String?
@@ -187,6 +194,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override suspend fun setMuted(parcel: Parcel, muted: Boolean) = container.parcels.setMuted(parcel, muted)
 
+    override suspend fun setEmailMuted(parcel: Parcel, muted: Boolean) = container.parcels.setEmailMuted(parcel, muted)
+
     override suspend fun changeCarrier(
         parcel: Parcel,
         carrier: CarrierId,
@@ -202,6 +211,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         DeliveryApiClient.numberRefusal(question, container.configuration, container.transport)
 
     override val deliveryEmail get() = container.deliveryEmail
+
+    override val notificationPreferences get() = container.parcels.notificationPreferencesFlow
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
 

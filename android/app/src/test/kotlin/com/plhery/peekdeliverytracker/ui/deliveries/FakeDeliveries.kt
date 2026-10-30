@@ -7,10 +7,13 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
+import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
+import com.plhery.peekdeliverytracker.core.api.NotificationStage
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
@@ -46,6 +49,7 @@ class FakeDeliveries(
     override val session = MutableStateFlow(session)
     override val undoParcel = MutableStateFlow<Parcel?>(null)
     override val deliveryEmail = MutableStateFlow<DeliveryEmail?>(null)
+    override val notificationPreferences = MutableStateFlow<NotificationPreferences?>(null)
     override val homePageUrl = "https://example.com/"
     override val privacyUrl = "https://example.com/privacy"
     private val job = SupervisorJob()
@@ -81,7 +85,7 @@ class FakeDeliveries(
     /** Holds each archive until the test lets it go, as a slow connection would. */
     var archiving: CompletableDeferred<Unit>? = null
 
-    /** Holds each mute until the test lets it go. */
+    /** Holds each mute, of the notifications or of the email, until the test lets it go. */
     var muting: CompletableDeferred<Unit>? = null
 
     /** Holds each carrier change until the test lets it go. */
@@ -104,13 +108,14 @@ class FakeDeliveries(
     val carrierRequests = mutableListOf<CarrierChangeRequest>()
 
     /**
-     * The parcels archived, restored and deleted, in their order, each mute asked for with its new setting, each
-     * carrier change with its carrier, each name given, and the parcels checked one by one.
+     * The parcels archived, restored and deleted, in their order, each mute of the notifications or the email asked for
+     * with its new setting, each carrier change with its carrier, each name given, and the parcels checked one by one.
      */
     val archived = mutableListOf<UUID>()
     val restored = mutableListOf<UUID>()
     val deleted = mutableListOf<UUID>()
     val mutes = mutableListOf<Pair<UUID, Boolean>>()
+    val emailMutes = mutableListOf<Pair<UUID, Boolean>>()
     val carrierChanges = mutableListOf<Pair<UUID, CarrierId>>()
     val renames = mutableListOf<Pair<UUID, String>>()
     val checked = mutableListOf<UUID>()
@@ -199,6 +204,23 @@ class FakeDeliveries(
         failure?.let { throw it }
         mutes += parcel.id to muted
         parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(notificationsMuted = muted) else it }
+    }
+
+    override suspend fun setEmailMuted(parcel: Parcel, muted: Boolean) {
+        muting?.await()
+        failure?.let { throw it }
+        emailMutes += parcel.id to muted
+        parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(emailMuted = muted) else it }
+    }
+
+    /**
+     * The account signed in as `address`, its preferences on `stages` with the email available, and its delivery email
+     * as `choice` says: on, off, or never chosen.
+     */
+    fun signedInWithEmail(choice: Boolean?, address: String = "reader@example.com", stages: List<NotificationStage> = NotificationPreset.Important.stages) {
+        val preferences = NotificationPreferences(enabledStages = stages, timezone = "Europe/Zurich", emailOnDelivery = choice, emailAvailable = true)
+        notificationPreferences.value = preferences
+        deliveryEmail.value = DeliveryEmail(isDemo = false, preferences = preferences, address = address)
     }
 
     override suspend fun changeCarrier(

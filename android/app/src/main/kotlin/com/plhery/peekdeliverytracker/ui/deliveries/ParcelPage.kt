@@ -262,7 +262,9 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     val opensAlerts = email?.bellOpensAlerts(parcel) == true
     val bell = if (session != AuthenticationState.Welcome && !sample) {
         // The same bell while nothing it acts on changes, so the card isn't composed again for a new one.
-        remember(state, pageId, parcel, opensAlerts) { PassBell(opensAlerts) { muted, saved -> state.muteOnPage(pageId, parcel, muted, saved) } }
+        remember(state, pageId, parcel, opensAlerts) {
+            PassBell(opensAlerts, open = { state.openAlerts(pageId, it) }) { muted, saved -> state.muteOnPage(pageId, parcel, muted, saved) }
+        }
     } else {
         null
     }

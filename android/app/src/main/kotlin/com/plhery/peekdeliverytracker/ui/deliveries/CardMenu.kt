@@ -927,16 +927,20 @@ private fun RenameButtons(cancel: String, save: String, onCancel: () -> Unit, on
     }
 }
 
+/** The list's or the page's alert of what failed ([ErrorAlert]), which closes it ([DeliveriesState.closeError]). */
+@Composable
+private fun ActionErrorAlert(state: DeliveriesState, message: String) = ErrorAlert(message, state::closeError)
+
 /**
  * `.alert("native.errorTitle")` with the error's words and Close, as iOS 26 draws an alert ([AlertCard]): the title,
- * the words under it as the delete question's message, and one Close as wide as the alert.
+ * the words under it as the delete question's message, and one Close as wide as the alert, which calls `close`, as the
+ * back does. TalkBack starts at the words.
  */
 @Composable
-private fun ActionErrorAlert(state: DeliveriesState, message: String) {
+internal fun ErrorAlert(message: String, close: () -> Unit) {
     val localizer = LocalLocalizer.current
     val type = PeekTheme.type
     val colors = PeekTheme.colors
-    val close = state::closeError
     val said = remember(message) { AccessibilityFocus() }
     LaunchedEffect(message) { said.request() }
     BackHandler(onBack = close)

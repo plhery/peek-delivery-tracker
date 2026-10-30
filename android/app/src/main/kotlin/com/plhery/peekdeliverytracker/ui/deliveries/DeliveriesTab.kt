@@ -265,6 +265,8 @@ fun DeliveriesTab(
         PageMenuHost(state)
         // The carrier editor, a page's or a card's, over the whole window where the tab shell draws it.
         CarrierEditorHost(state)
+        // A parcel's alerts, over the whole window where the tab shell draws them.
+        ParcelAlertsHost(state)
         // The page's map, over the whole window where the tab shell draws it.
         ParcelMapHost(state)
         // The paper of a delivery, over the list and the parcel beside it, as the iPhone's is over the whole screen.

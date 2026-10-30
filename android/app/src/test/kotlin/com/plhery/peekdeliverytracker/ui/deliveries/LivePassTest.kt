@@ -241,9 +241,10 @@ class LivePassTest {
         bell.assertContentDescriptionEquals("Notifications for this parcel")
         bell.performClick()
         settle()
-        // The alerts sheet comes with its step: nothing yet.
+        // The alerts show the account's preferences, which haven't come: nothing opens (ParcelAlertsTest has the sheet).
         assertEquals(emptyList<Any>(), source.mutes)
         assertTrue(exists(PAGE_CONTENT))
+        assertFalse(exists(PARCEL_ALERTS))
 
         compose.runOnUiThread { deliveries.navigator.open(delivered.id) }
         settle()

@@ -97,10 +97,7 @@ fun Localizer.journalDays(entries: List<JournalEntry>, now: Instant = Instant.no
             when (date.atZone(zone).toLocalDate()) {
                 today -> text("time.today")
                 today.minusDays(1) -> text("time.yesterday")
-                else -> {
-                    val dayYear = FoundationDates.dateFields(date, zone).yearOfEra
-                    shortDate(date) + if (dayYear == year) "" else " $dayYear"
-                }
+                else -> shortDate(date, withYear = FoundationDates.dateFields(date, zone).yearOfEra != year)
             }
         }
         days += JournalDay(key, label, start, listOf(entry))

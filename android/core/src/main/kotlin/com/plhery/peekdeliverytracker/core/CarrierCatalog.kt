@@ -152,7 +152,7 @@ class CarrierCatalog private constructor(
 
     fun info(carrier: CarrierId, language: AppLanguage? = null): CarrierDefinition {
         val definition = definitions[carrier] ?: definitions[CarrierId.Unknown] ?: fallbackDefinitions.getValue(CarrierId.Unknown)
-        val name = language?.let { definition.displayNames?.get(it.rawValue) } ?: return definition
+        val name = language?.let { definition.displayNames?.get(it.catalogLanguage.rawValue) } ?: return definition
         return definition.copy(displayName = name)
     }
 
@@ -788,13 +788,14 @@ class CarrierCatalog private constructor(
 
     private fun localizedUrl(raw: String, carrier: CarrierId, language: AppLanguage): String? {
         val components = UrlComponents.parse(raw) ?: return null
+        val catalogLanguage = language.catalogLanguage
         if (carrier == CarrierId.SwissPost) {
-            val siteLanguage = if (language in listOf(AppLanguage.En, AppLanguage.De, AppLanguage.Fr, AppLanguage.It)) language else AppLanguage.En
+            val siteLanguage = if (catalogLanguage in listOf(AppLanguage.En, AppLanguage.De, AppLanguage.Fr, AppLanguage.It)) catalogLanguage else AppLanguage.En
             components.queryItems = (components.queryItems ?: emptyList()).filter { it.name != "lang" } +
                 UrlComponents.QueryItem("lang", siteLanguage.rawValue)
         } else if (components.host == "t.17track.net" || components.host == "parcelsapp.com") {
-            // Parcels has no Polish page; 17TRACK supports all app languages.
-            val siteLanguage = if (components.host == "parcelsapp.com" && language == AppLanguage.Pl) AppLanguage.En else language
+            // Parcels has no Polish page; 17TRACK has every catalog language.
+            val siteLanguage = if (components.host == "parcelsapp.com" && catalogLanguage == AppLanguage.Pl) AppLanguage.En else catalogLanguage
             components.path = foundationReplacing(components.path, "^/[a-z]{2}(?=/|$)", "/${siteLanguage.rawValue}")
         }
         return components.url

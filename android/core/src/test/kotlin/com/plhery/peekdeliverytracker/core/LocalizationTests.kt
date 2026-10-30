@@ -12,7 +12,7 @@ import org.junit.Test
 import java.time.Instant
 import java.time.ZoneId
 
-/** LocalizationTests.swift: the app's copy in its seven languages, its dates, counts and places. */
+/** LocalizationTests.swift: the app's copy in its ten languages, its dates, counts and places. */
 class LocalizationTests {
     @Test
     fun oidcSignInCopyUsesTheConfiguredProviderInEveryLanguage() {
@@ -107,8 +107,8 @@ class LocalizationTests {
         val dictionaries = localizationDictionaries()
         val englishKeys = dictionaries.getValue("en").keys
 
-        assertEquals(setOf("en", "de", "fr", "it", "es", "pt", "pt-br", "pl", "ru", "zh"), dictionaries.keys)
-        for (language in listOf("de", "fr", "it", "es", "pt", "pt-br", "pl", "ru", "zh")) {
+        assertEquals(AppLanguage.entries.map { it.rawValue }.toSet(), dictionaries.keys)
+        for (language in AppLanguage.entries.map { it.rawValue }.filter { it != "en" }) {
             assertEquals(language, englishKeys, dictionaries.getValue(language).keys)
         }
     }
@@ -118,10 +118,13 @@ class LocalizationTests {
         val dictionaries = localizationDictionaries()
         val english = dictionaries.getValue("en")
 
-        for (language in listOf("de", "fr", "it", "es", "pt", "pl")) {
+        for (language in AppLanguage.entries.map { it.rawValue }.filter { it != "en" }) {
             val translated = dictionaries.getValue(language)
             for ((key, englishValue) in english) {
-                assertEquals("$language.$key", variables(englishValue), variables(translated[key] ?: ""))
+                // Russian counts 21 and 101 as one too, so a count's one form may write the number where English writes 1.
+                val value = translated[key] ?: ""
+                val counted = key.endsWith(".one") && variables(value.replace("{{count}}", "")) == variables(englishValue)
+                assertEquals("$language.$key", variables(englishValue), if (counted) variables(englishValue) else variables(value))
             }
         }
     }
@@ -147,7 +150,10 @@ class LocalizationTests {
             AppLanguage.It to listOf("Ogni scansione", "Passaggi importanti", "Solo la consegna"),
             AppLanguage.Es to listOf("Cada escaneo", "Pasos importantes", "Solo la entrega"),
             AppLanguage.Pt to listOf("Todas as leituras", "Passos importantes", "Só a entrega"),
+            AppLanguage.PtBr to listOf("Cada movimentação", "Etapas importantes", "Só a entrega"),
             AppLanguage.Pl to listOf("Każdy skan", "Ważne etapy", "Tylko doręczenie"),
+            AppLanguage.Ru to listOf("Каждая отметка", "Важные этапы", "Только доставка"),
+            AppLanguage.Zh to listOf("每次扫描", "重要环节", "仅派送当天"),
         )
         assertEquals(AppLanguage.entries.toSet(), website.keys)
         val localizer = Localizer(AppLanguage.En)
@@ -263,6 +269,75 @@ class LocalizationTests {
         assertEquals("1 dzień temu", localizer.text("time.daysAgo", mapOf("count" to 1)))
     }
 
+    /** Polish and Russian whole counts take CLDR's forms; Russian's `one` also counts 21, 31 and 101. */
+    @Test
+    fun countFormsInPolishAndRussian() {
+        val russian = mapOf(
+            0.0 to "many", 1.0 to "one", 2.0 to "few", 4.0 to "few", 5.0 to "many", 11.0 to "many", 12.0 to "many",
+            14.0 to "many", 21.0 to "one", 22.0 to "few", 25.0 to "many", 101.0 to "one", 111.0 to "many", 1.5 to "other",
+        )
+        for ((count, form) in russian) {
+            assertEquals("ru $count", form, Localizer.countForm(count, AppLanguage.Ru))
+        }
+        val polish = mapOf(
+            1.0 to "one", 2.0 to "few", 5.0 to "many", 12.0 to "many", 21.0 to "many", 22.0 to "few", 0.0 to "many", 1.5 to "other",
+        )
+        for ((count, form) in polish) {
+            assertEquals("pl $count", form, Localizer.countForm(count, AppLanguage.Pl))
+        }
+        for (language in AppLanguage.entries.filter { it != AppLanguage.Pl && it != AppLanguage.Ru }) {
+            assertEquals(language.rawValue, "one", Localizer.countForm(1.0, language))
+            for (count in listOf(0.0, 2.0, 5.0, 21.0, 22.0, 1.5)) {
+                assertEquals("${language.rawValue} $count", "other", Localizer.countForm(count, language))
+            }
+        }
+    }
+
+    /** A Russian count reads the copy's form for it, whatever words the copy has. */
+    @Test
+    fun russianCountsReadTheirForms() {
+        val russian = localizationDictionaries().getValue("ru")
+        val localizer = Localizer(AppLanguage.Ru)
+        for ((count, key) in listOf(
+            1 to "friends.stampCount.one", 21 to "friends.stampCount.one", 22 to "friends.stampCount.few",
+            5 to "friends.stampCount", 11 to "friends.stampCount", 111 to "friends.stampCount",
+        )) {
+            val expected = russian.getValue(key).replace("{{count}}", "$count")
+            assertEquals("$count", expected, localizer.text("friends.stampCount", mapOf("count" to count)))
+        }
+        assertEquals("21 марка", localizer.text("friends.stampCount", mapOf("count" to 21)))
+        assertEquals("1.5 марок", localizer.text("friends.stampCount", mapOf("count" to 1.5)))
+    }
+
+    /** Device languages read as the web reads them, and a language Peek doesn't speak is none of its own. */
+    @Test
+    fun deviceLanguagesReadAsPeeksLanguages() {
+        val tags = mapOf(
+            "pt-BR" to AppLanguage.PtBr, "pt-PT" to AppLanguage.Pt, "pt" to AppLanguage.Pt, "ru-RU" to AppLanguage.Ru,
+            "en-US" to AppLanguage.En, "zh-Hans-CN" to AppLanguage.Zh, "zh-Hans" to AppLanguage.Zh, "zh-CN" to AppLanguage.Zh,
+            "zh" to AppLanguage.Zh, "zh-Hant-TW" to null, "zh-TW" to null, "zh-HK" to null, "nl-NL" to null,
+        )
+        for ((tag, language) in tags) {
+            assertEquals(tag, language, AppLanguage.fromTag(tag))
+        }
+    }
+
+    /** Every language is one the API names, with the locale its dates and numbers take and the catalog it reads. */
+    @Test
+    fun everyLanguageIsOneTheServiceNames() {
+        for (language in AppLanguage.entries) {
+            assertEquals(language.rawValue, NativePushLocale(language).rawValue)
+        }
+        assertEquals("pt-PT", AppLanguage.Pt.locale.toLanguageTag())
+        assertEquals("pt-BR", AppLanguage.PtBr.locale.toLanguageTag())
+        assertEquals("zh-Hans", AppLanguage.Zh.locale.toLanguageTag())
+        assertEquals("ru", AppLanguage.Ru.locale.toLanguageTag())
+        assertEquals(
+            listOf("en", "de", "fr", "it", "es", "pt", "pt", "pl", "en", "en"),
+            AppLanguage.entries.map { it.catalogLanguage.rawValue },
+        )
+    }
+
     @Test
     fun newLanguageNamesAndCopy() {
         val localizer = Localizer(AppLanguage.En)
@@ -270,6 +345,9 @@ class LocalizationTests {
             Triple(AppLanguage.Es, "Español", "Entregas"),
             Triple(AppLanguage.Pt, "Português", "Entregas"),
             Triple(AppLanguage.Pl, "Polski", "Dostawy"),
+            Triple(AppLanguage.PtBr, "Português (Brasil)", "Entregas"),
+            Triple(AppLanguage.Ru, "Русский", "Доставки"),
+            Triple(AppLanguage.Zh, "简体中文", "包裹"),
         )) {
             localizer.language = language
             assertEquals(name, language.nativeName)
@@ -285,7 +363,8 @@ class LocalizationTests {
             AppLanguage.En to "Sat 12 Sep", AppLanguage.De to "Sa 12. Sept",
             AppLanguage.Fr to "sam 12 sept", AppLanguage.It to "sab 12 set",
             AppLanguage.Es to "sáb 12 sept", AppLanguage.Pt to "sábado 12 set",
-            AppLanguage.Pl to "sob 12 wrz",
+            AppLanguage.PtBr to "sáb 12 set", AppLanguage.Pl to "sob 12 wrz",
+            AppLanguage.Ru to "Сб 12 сент", AppLanguage.Zh to "9月12日周六",
         )
         for ((language, expected) in cases) {
             localizer.language = language
@@ -325,16 +404,21 @@ class LocalizationTests {
             AppLanguage.It to listOf("ieri", "oggi", "domani"),
             AppLanguage.Es to listOf("ayer", "hoy", "mañana"),
             AppLanguage.Pt to listOf("ontem", "hoje", "amanhã"),
+            AppLanguage.PtBr to listOf("ontem", "hoje", "amanhã"),
             AppLanguage.Pl to listOf("wczoraj", "dziś", "jutro"),
+            AppLanguage.Ru to listOf("вчера", "сегодня", "завтра"),
+            AppLanguage.Zh to listOf("昨天", "今天", "明天"),
         )
         for ((language, labels) in cases) {
             localizer.language = language
+            // Chinese runs a day and its time together with a space, as the web does.
+            val separator = if (language == AppLanguage.Zh) " " else ", "
             for ((index, value) in listOf("2026-09-08", "2026-09-09", "2026-09-10").withIndex()) {
                 val day = assertNotNull(DateParser.deliveryDate(value))
                 val timestamp = settingTime(day, hour = 14, minute = 5)
                 assertEquals(labels[index], localizer.expectedDelivery(value, now = now))
-                assertEquals("${labels[index]}, 14:00–16:00", localizer.expectedDelivery("$value 14:00-16:00", now = now))
-                assertEquals("${labels[index]}, 14:05", localizer.expectedDelivery(DateParser.isoString(timestamp), now = now))
+                assertEquals("${labels[index]}${separator}14:00–16:00", localizer.expectedDelivery("$value 14:00-16:00", now = now))
+                assertEquals("${labels[index]}${separator}14:05", localizer.expectedDelivery(DateParser.isoString(timestamp), now = now))
             }
             assertEquals("Awaiting estimate", localizer.expectedDelivery("Awaiting estimate", now = now))
         }
@@ -357,6 +441,26 @@ class LocalizationTests {
         val late = settingTime(day, hour = 23, minute = 55)
         assertEquals("today", localizer.deliveryDate(day, now = late))
         assertEquals("Fri 11 Sep", localizer.expectedDelivery("2026-09-11", now = late))
+    }
+
+    /**
+     * Chinese dates as the web's `localizedCalendarDate` and `dayAndTime` write them: month, day and weekday run
+     * together, after the year when there is one, and a time follows a day after a space.
+     */
+    @Test
+    fun chineseDatesReadAsChineseWritesThem() {
+        val localizer = Localizer(AppLanguage.Zh)
+        val day = assertNotNull(DateParser.deliveryDate("2026-09-12"))
+        assertEquals("9月12日周六", localizer.shortDate(day))
+        assertEquals("2026年9月12日周六", localizer.shortDate(day, withYear = true))
+        val now = assertNotNull(DateParser.deliveryDate("2026-09-08"))
+        assertEquals("9月12日周六 14:00–16:00", localizer.expectedDelivery("2026-09-12 14:00-16:00", now = now))
+        assertEquals("明天 14:00–16:00", localizer.expectedDelivery("2026-09-09 14:00-16:00", now = now))
+        assertEquals("明天 14:00–16:00 – 9月12日周六", localizer.deliveryWindow("2026-09-09 14:00-16:00", "2026-09-12", now = now))
+        assertEquals("9月12日周六 14:05", localizer.dateTime(DateParser.isoString(settingTime(day, hour = 14, minute = 5))))
+        assertEquals("Сб 12 сент 2026", Localizer(AppLanguage.Ru).shortDate(day, withYear = true))
+        assertEquals("Сб 12 сент, 14:05", Localizer(AppLanguage.Ru).dateTime(DateParser.isoString(settingTime(day, hour = 14, minute = 5))))
+        assertEquals("sáb 12 set 2026", Localizer(AppLanguage.PtBr).shortDate(day, withYear = true))
     }
 
     @Test
@@ -416,6 +520,14 @@ class LocalizationTests {
         assertEquals("CN", TrackingLocation.countryCode("Shenzhen, China"))
         assertEquals("China", TrackingLocation.countryName("CN", language = AppLanguage.En))
         assertEquals("Chine", TrackingLocation.countryName("CN", language = AppLanguage.Fr))
+        assertEquals("Китай", TrackingLocation.countryName("CN", language = AppLanguage.Ru))
+        assertEquals("中国", TrackingLocation.countryName("CN", language = AppLanguage.Zh))
+        assertEquals("China", TrackingLocation.countryName("CN", language = AppLanguage.PtBr))
+        assertEquals(TrackingLocation.Place(country = "CN", name = "深圳"), TrackingLocation.place("深圳, 中国"))
+        assertEquals(TrackingLocation.Place(country = "RU", name = "Москва"), TrackingLocation.place("Москва, Россия"))
+        assertEquals(TrackingLocation.Place(country = "HK", name = ""), TrackingLocation.place("香港"))
+        assertEquals("Россия", TrackingLocation.countryName("RU", language = AppLanguage.Ru))
+        assertEquals("Suíça", TrackingLocation.countryName("CH", language = AppLanguage.PtBr))
         assertEquals("Schweiz", TrackingLocation.countryName("CH", language = AppLanguage.De))
     }
 

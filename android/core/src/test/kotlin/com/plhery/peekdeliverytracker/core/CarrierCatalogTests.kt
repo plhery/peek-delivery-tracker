@@ -1242,7 +1242,7 @@ class CarrierCatalogTests {
     @Test
     fun externalTrackingSitesUseSupportedLanguages() {
         var parcel = parcel("993412345612345678", "Parcel", CarrierId.SwissPost, "2026-09-07T13:00:00Z", syncStatus = SyncStatus.Unsupported)
-        for (language in listOf(AppLanguage.Es, AppLanguage.Pt, AppLanguage.Pl)) {
+        for (language in listOf(AppLanguage.Es, AppLanguage.Pt, AppLanguage.PtBr, AppLanguage.Pl, AppLanguage.Ru, AppLanguage.Zh)) {
             val url = catalog.trackingLinks(parcel, language).first().url
             assertEquals("en", query(url, "lang"))
         }
@@ -1251,14 +1251,18 @@ class CarrierCatalogTests {
             trackingNumber = "ZZ12345678900",
             trackingUrl = "https://parcelsapp.com/fr/tracking/ZZ12345678900",
         )
-        for ((language, name) in listOf(
-            AppLanguage.Es to "Transportista desconocido",
-            AppLanguage.Pt to "Transportadora desconhecida",
-            AppLanguage.Pl to "Nieznany przewoźnik",
+        // The catalog has no Brazilian, Russian or Chinese: Brazilian Portuguese reads its Portuguese, the others its English.
+        for ((language, name, site) in listOf(
+            Triple(AppLanguage.Es, "Transportista desconocido", "es"),
+            Triple(AppLanguage.Pt, "Transportadora desconhecida", "pt"),
+            Triple(AppLanguage.Pl, "Nieznany przewoźnik", "en"),
+            Triple(AppLanguage.PtBr, "Transportadora desconhecida", "pt"),
+            Triple(AppLanguage.Ru, "Unknown carrier", "en"),
+            Triple(AppLanguage.Zh, "Unknown carrier", "en"),
         )) {
             assertEquals(name, catalog.info(CarrierId.Unknown, language = language).displayName)
             val url = catalog.trackingLinks(parcel, language).first().url
-            assertEquals("https://parcelsapp.com/${if (language == AppLanguage.Pl) "en" else language.rawValue}/tracking/ZZ12345678900", url)
+            assertEquals("https://parcelsapp.com/$site/tracking/ZZ12345678900", url)
         }
     }
 
@@ -1269,15 +1273,17 @@ class CarrierCatalogTests {
             AppLanguage.En to "Unknown postal carrier", AppLanguage.De to "Postanbieter unbekannt",
             AppLanguage.Fr to "Transporteur postal inconnu", AppLanguage.It to "Corriere postale sconosciuto",
             AppLanguage.Es to "Operador postal desconocido", AppLanguage.Pt to "Operador postal desconhecido",
-            AppLanguage.Pl to "Nieznany operator pocztowy",
+            AppLanguage.Pl to "Nieznany operator pocztowy", AppLanguage.PtBr to "Operador postal desconhecido",
+            AppLanguage.Ru to "Unknown postal carrier", AppLanguage.Zh to "Unknown postal carrier",
         )
+        val sites = mapOf(AppLanguage.PtBr to "pt", AppLanguage.Ru to "en", AppLanguage.Zh to "en")
         for (language in AppLanguage.entries) {
             for (savedUrl in listOf(null, "https://service.post.ch/ekp-web/ui/entry/search/RA123456785IR")) {
                 parcel = parcel.copy(trackingUrl = savedUrl)
                 val link = catalog.trackingLinks(parcel, language).first()
                 assertEquals(names[language], catalog.info(CarrierId.InternationalPost, language = language).displayName)
                 assertEquals("17TRACK", link.name)
-                assertEquals("https://t.17track.net/${language.rawValue}#nums=RA123456785IR", link.url)
+                assertEquals("https://t.17track.net/${sites[language] ?: language.rawValue}#nums=RA123456785IR", link.url)
                 assertEquals(CarrierId.InternationalPost, link.carrier)
             }
         }

@@ -134,11 +134,23 @@ internal fun uuid(uuidString: String): UUID? {
     return if (uuidFormat.matches(text)) UUID.fromString(text) else null
 }
 
+/** `pt` is European Portuguese and `zh` Simplified Chinese, as on the web. */
 enum class AppLanguage(val rawValue: String) {
-    En("en"), De("de"), Fr("fr"), It("it"), Es("es"), Pt("pt"), Pl("pl");
+    En("en"), De("de"), Fr("fr"), It("it"), Es("es"), Pt("pt"), PtBr("pt-br"), Pl("pl"), Ru("ru"), Zh("zh");
 
     val id: String get() = rawValue
-    val locale: Locale get() = Locale.forLanguageTag(if (this == Pt) "pt-PT" else rawValue)
+    val locale: Locale get() = ExtensionLocalizer.locale(rawValue)
+
+    /**
+     * The language carriers' names and pages are read in, as the web's `catalogLanguage`: Brazilian Portuguese reads
+     * the catalog's Portuguese, and a language the catalog doesn't have its English.
+     */
+    val catalogLanguage: AppLanguage
+        get() = when (this) {
+            PtBr -> Pt
+            Ru, Zh -> En
+            else -> this
+        }
 
     val nativeName: String
         get() = when (this) {
@@ -148,7 +160,10 @@ enum class AppLanguage(val rawValue: String) {
             It -> "Italiano"
             Es -> "Español"
             Pt -> "Português"
+            PtBr -> "Português (Brasil)"
             Pl -> "Polski"
+            Ru -> "Русский"
+            Zh -> "简体中文"
         }
 
     companion object {
@@ -156,15 +171,18 @@ enum class AppLanguage(val rawValue: String) {
 
         fun fromRawValue(rawValue: String): AppLanguage? = entries.firstOrNull { it.rawValue == rawValue }
 
+        /** `init?(tag:)`: the language a device's language tag names, when Peek speaks it (`ExtensionLocalizer.language`). */
+        fun fromTag(tag: String): AppLanguage? = ExtensionLocalizer.language(tag)?.let(::fromRawValue)
+
         /**
          * The chosen language, the value saved under `storageKey`, else the first of the device's languages the app
-         * speaks, else English. The device's languages are BCP 47 tags in the order it prefers them, all of
-         * `LocaleList.getDefault()` as `Locale.preferredLanguages` gives them on iOS: a phone set to Dutch, then
-         * German, gets German. A tag is split on Characters, as Swift splits it: a hyphen carrying a combining mark
-         * splits nothing.
+         * speaks ([fromTag]), else English. The device's languages are BCP 47 tags in the order it prefers them, all
+         * of `LocaleList.getDefault()` as `Locale.preferredLanguages` gives them on iOS: a phone set to Dutch, then
+         * German, gets German, and one set to Traditional Chinese, then English, gets English. A tag is split on
+         * Characters, as Swift splits it: a hyphen carrying a combining mark splits nothing.
          */
         fun current(saved: String?, preferredLanguages: List<String>): AppLanguage {
-            val preferred = preferredLanguages.firstNotNullOfOrNull { fromRawValue(primaryLanguage(it)) }
+            val preferred = preferredLanguages.firstNotNullOfOrNull(::fromTag)
             return saved?.let(::fromRawValue) ?: preferred ?: En
         }
     }
@@ -201,18 +219,7 @@ class Localizer(
         val messages = dictionaries[language.rawValue] ?: dictionaries["en"] ?: emptyMap()
         val variantKey = variant?.let { if (messages[canonical("$key.$it")] != null) "$key.$it" else null } ?: key
         val count = variables["count"]?.let { swiftDouble(description(it)) }
-        val category = if (count == 1.0) {
-            "one"
-        } else if (language == AppLanguage.Pl && count != null && count.isFinite() && count >= 0 &&
-            kotlin.math.truncate(count) == count
-        ) {
-            // Polish integer counts: 2–4, except 12–14, use the few form.
-            val last = count % 10
-            val lastTwo = count % 100
-            if (last in 2.0..4.0 && lastTwo !in 12.0..14.0) "few" else "many"
-        } else {
-            "other"
-        }
+        val category = count?.let { countForm(it, language) } ?: "other"
         val baseKey = listOf("one", "few", "many").firstOrNull { variantKey.endsWith(".$it") }
             ?.let { variantKey.dropLast(it.length + 1) } ?: variantKey
         val pluralKey = "$baseKey.$category"
@@ -329,7 +336,7 @@ class Localizer(
             val day = expectedDelivery(match.group(1), now)
             var window = match.group(2)
             match.group(3)?.let { window += "–$it" }
-            return "$day, $window"
+            return dayAndTime(day, window)
         }
 
         val date = DateParser.deliveryDate(value) ?: return value
@@ -337,7 +344,7 @@ class Localizer(
             DateParser.date(value)?.let { timestamp ->
                 // "yyyy-MM-dd" in en_US_POSIX: the year of the era, of four digits at least.
                 val day = fields(timestamp).let { "${it.yearOfEra.toString().padStart(4, '0')}-${twoDigits(it.month)}-${twoDigits(it.dayOfMonth)}" }
-                return "${expectedDelivery(day, now)}, ${clockTime(timestamp)}"
+                return dayAndTime(expectedDelivery(day, now), clockTime(timestamp))
             }
         }
         return deliveryDate(date, now)
@@ -354,16 +361,19 @@ class Localizer(
     }
 
     /**
-     * Compact dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept". Names keep the
-     * language's own case, since the date often sits mid-sentence, and the day keeps the period German writes after it.
-     * The names and the period are the iPhone's "EEE", "MMM" and "dMMM" (FormatData.kt), not the phone's CLDR.
+     * Compact dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept", with the year after
+     * them when asked ("Sat 12 Sep 2025"). Names keep the language's own case, since the date often sits mid-sentence,
+     * and the day keeps the period German writes after it. The names and the period are the iPhone's "EEE", "MMM" and
+     * "dMMM" (FormatData.kt), not the phone's CLDR. Chinese writes its own order, as the web's
+     * `localizedCalendarDate` does: "9月12日周六", "2025年9月12日周六", where the iPhone writes "周六 12 9月".
      */
-    fun shortDate(date: Instant): String {
+    fun shortDate(date: Instant, withYear: Boolean = false): String {
         val fields = fields(date)
         val format = FormatData.language(language)
         val weekday = format.weekdays[fields.weekday - 1].replace(".", "")
         val month = format.months[fields.month - 1].replace(".", "")
-        return "$weekday ${fields.dayOfMonth}${format.dayPeriod} $month"
+        if (language == AppLanguage.Zh) return (if (withYear) "${fields.yearOfEra}年" else "") + "$month${fields.dayOfMonth}日$weekday"
+        return "$weekday ${fields.dayOfMonth}${format.dayPeriod} $month" + if (withYear) " ${fields.yearOfEra}" else ""
     }
 
     /**
@@ -378,8 +388,14 @@ class Localizer(
 
     fun dateTime(value: String): String {
         val date = DateParser.date(value) ?: return value
-        return "${shortDate(date)}, ${clockTime(date)}"
+        return dayAndTime(shortDate(date), clockTime(date))
     }
+
+    /**
+     * A day and a time on it, as the web's `dayAndTime` joins them: "tomorrow, 09:00–12:00", and in Chinese with a
+     * space, "明天 09:00–12:00". The iPhone joins them with a comma in every language.
+     */
+    private fun dayAndTime(day: String, time: String): String = if (language == AppLanguage.Zh) "$day $time" else "$day, $time"
 
     /** The status line, which names the carrier a parcel probably travels with while it waits for that carrier's first scan. */
     fun parcelStatus(parcel: Parcel): String {
@@ -469,17 +485,33 @@ class Localizer(
         data class Event(val key: String, val variables: Map<String, String>)
     }
 
-    private companion object {
-        val currencyCode: Pattern =
+    companion object {
+        /**
+         * `countForm(_:in:)`: the form a count takes, as the web picks it (`translateMessage`): a whole count in Polish
+         * or Russian takes CLDR's `one`, `few` or `many`, any other count `one` for exactly 1 and `other` otherwise.
+         * Russian's `one` also counts 21, 31 and 101, so its copy writes the number.
+         */
+        internal fun countForm(count: Double, language: AppLanguage): String {
+            if (count == 1.0) return "one"
+            val whole = count.isFinite() && count >= 0 && kotlin.math.truncate(count) == count
+            if ((language != AppLanguage.Pl && language != AppLanguage.Ru) || !whole) return "other"
+            // 2–4 take the few form, except 12–14; in Russian 1 takes the one form, except 11.
+            val last = count % 10
+            val lastTwo = count % 100
+            if (language == AppLanguage.Ru && last == 1.0 && lastTwo != 11.0) return "one"
+            return if (last in 2.0..4.0 && lastTwo !in 12.0..14.0) "few" else "many"
+        }
+
+        private val currencyCode: Pattern =
             Pattern.compile("([\"%&'()*+,\\-.0-9:;<=>?A-Z_a-z]{3})[\\t\\n\\x{0B}\\f\\r \\x{85}\\x{200E}\\x{200F}\\x{2028}\\x{2029}]*")
 
         // A code no currency has, which ICU writes as it is.
-        const val unknownCurrency = "QQQ"
+        private const val unknownCurrency = "QQQ"
 
         /** A key as a Swift Dictionary holds it: canonically, here in NFC, which ASCII already is. */
-        fun canonical(key: String): String = if (key.all { it.code < 0x80 }) key else key.nfc()
+        private fun canonical(key: String): String = if (key.all { it.code < 0x80 }) key else key.nfc()
 
-        val dictionaries: Map<String, Map<String, String>> by lazy {
+        private val dictionaries: Map<String, Map<String, String>> by lazy {
             runCatching {
                 Json.decodeFromString(
                     MapSerializer(String.serializer(), MapSerializer(String.serializer(), String.serializer())),
@@ -488,7 +520,7 @@ class Localizer(
             }.getOrElse { mapOf("en" to emptyMap()) }
         }
 
-        val trackingMessages: TrackingMessages by lazy {
+        private val trackingMessages: TrackingMessages by lazy {
             runCatching {
                 val messages = Json { ignoreUnknownKeys = true }
                     .decodeFromString(TrackingMessages.serializer(), SharedResources.text("TrackingMessages.json"))
@@ -498,7 +530,7 @@ class Localizer(
         }
 
         // String's `.regularExpression` search, which iOS 27 runs as a Swift Regex over Characters (`nativeMatches`).
-        val serviceErrorRules: List<Pair<String, String>> = listOf(
+        private val serviceErrorRules: List<Pair<String, String>> = listOf(
             "rate.?limit|too many requests" to "error.rateLimited",
             "otp_expired|invalid.*(code|token)|(code|token).*expired" to "error.invalidCode",
             "email.*(invalid|valid)|invalid.*email" to "error.invalidEmail",
@@ -514,10 +546,10 @@ class Localizer(
 
         // NSRegularExpression's, whose `\d` is any script's digit and whose `$` also matches before a final line end
         // of any kind, a vertical tab or form feed included.
-        val deliveryWindowPattern: Pattern? =
+        private val deliveryWindowPattern: Pattern? =
             CatalogExpressions.icuExpression("^(\\d{4}-\\d{2}-\\d{2})[ T]+(\\d{2}:\\d{2})(?:[–-](\\d{2}:\\d{2}))?$")
 
-        fun twoDigits(value: Int): String = value.toString().padStart(2, '0')
+        private fun twoDigits(value: Int): String = value.toString().padStart(2, '0')
     }
 }
 
@@ -573,6 +605,7 @@ private fun foundationPattern(pattern: String, fields: FoundationDates.DateField
         written.append(
             when (pattern.substring(index, end)) {
                 "d" -> fields.dayOfMonth.toString()
+                "M" -> fields.month.toString()
                 "MM" -> fields.month.toString().padStart(2, '0')
                 "MMM" -> format.months[fields.month - 1]
                 "y" -> fields.yearOfEra.toString()

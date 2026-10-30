@@ -186,12 +186,7 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
 object TrackingLocation {
     /** Foundation's regions and their names in each language, which android/tools/CountryNames.swift writes. */
     @Serializable
-    private class RegionNames(
-        val regions: List<String>,
-        val names: Map<String, Map<String, String>>,
-        /** `Locale(identifier: language)`'s names where they are not the app's locale's (pt is Brazil's). */
-        val readingNames: Map<String, Map<String, String>> = emptyMap(),
-    )
+    private class RegionNames(val regions: List<String>, val names: Map<String, Map<String, String>>)
 
     private val regionNames: RegionNames by lazy {
         ApiJson.decodeFromString(RegionNames.serializer(), SharedResources.text("CountryNames.json"))
@@ -231,16 +226,16 @@ object TrackingLocation {
     // Apple calls CN "China mainland" in every language, never what carriers or the web write.
     private val chinaNames = mapOf(
         AppLanguage.En to "China", AppLanguage.De to "China", AppLanguage.Fr to "Chine", AppLanguage.It to "Cina",
-        AppLanguage.Es to "China", AppLanguage.Pt to "China", AppLanguage.Pl to "Chiny",
+        AppLanguage.Es to "China", AppLanguage.Pt to "China", AppLanguage.PtBr to "China", AppLanguage.Pl to "Chiny",
+        AppLanguage.Ru to "Китай", AppLanguage.Zh to "中国",
     )
 
-    /** Each region's names, read as `Locale(identifier: language)` gives them, keyed by their NFC folded form. */
+    /** Each region's names in every language, as its `locale` gives them, keyed by their NFC folded form. */
     private val countryNames: Map<String, String> by lazy {
         val names = HashMap<String, String>()
         for (code in regionCodes.sorted()) {
-            for (language in listOf("en", "de", "fr", "it", "es", "pt", "pl")) {
-                val table = regionNames.readingNames[language] ?: regionNames.names[language]
-                table?.get(code)?.let { names[normalized(it).nfc()] = code }
+            for (language in AppLanguage.entries) {
+                regionNames.names[language.rawValue]?.get(code)?.let { names[normalized(it).nfc()] = code }
             }
         }
         names["usa"] = "US"
@@ -259,7 +254,7 @@ object TrackingLocation {
         override fun toString(): String = "Place(country=$country, name=$name)"
     }
 
-    /** Builds the country-name table (about 1,700 localized names) ahead of first use. */
+    /** Builds the country-name table (about 2,500 localized names) ahead of first use. */
     fun prepare() {
         countryNames
     }

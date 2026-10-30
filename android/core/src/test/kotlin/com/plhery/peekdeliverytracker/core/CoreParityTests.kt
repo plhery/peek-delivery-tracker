@@ -49,11 +49,20 @@ class CoreParityTests {
             Triple(null, listOf("nl-NL", "de-DE"), AppLanguage.De),
             Triple("fr", listOf("de"), AppLanguage.Fr),
             Triple("", listOf("it-IT"), AppLanguage.It),
-            Triple("xx", listOf("pt-BR"), AppLanguage.Pt),
+            Triple("xx", listOf("pt-BR"), AppLanguage.PtBr),
             Triple("DE", listOf("it"), AppLanguage.It),
             Triple(null, listOf("PL-pl"), AppLanguage.Pl),
-            Triple(null, listOf("-es"), AppLanguage.Es),
-            Triple(null, listOf("zh-Hans-CN", "nl"), AppLanguage.En),
+            Triple(null, listOf("pt_PT"), AppLanguage.Pt),
+            Triple(null, listOf("ru-RU"), AppLanguage.Ru),
+            // An empty first subtag names no language.
+            Triple(null, listOf("-es"), AppLanguage.En),
+            Triple(null, listOf("zh-Hans-CN", "nl"), AppLanguage.Zh),
+            // Traditional Chinese is no language of Peek's: the phone's next language is.
+            Triple(null, listOf("zh-TW", "en"), AppLanguage.En),
+            Triple(null, listOf("zh-HK", "de"), AppLanguage.De),
+            Triple(null, listOf("zh-Hant"), AppLanguage.En),
+            Triple(null, listOf("zh-Hant-CN", "zh-MO", "pt-BR"), AppLanguage.PtBr),
+            Triple(null, listOf("zh-Hans-TW"), AppLanguage.Zh),
             Triple(null, listOf(""), AppLanguage.En),
             Triple(null, emptyList<String>(), AppLanguage.En),
         )
@@ -65,7 +74,9 @@ class CoreParityTests {
     @Test
     fun aLanguageTagIsSplitOnCharacters() {
         assertEquals(AppLanguage.It, AppLanguage.current(null, listOf("fr-\u0301CA", "it-IT")))
-        assertEquals(AppLanguage.Fr, AppLanguage.current(null, listOf("-fr-CA")))
+        assertEquals(AppLanguage.It, AppLanguage.current(null, listOf("zh_\u0301TW", "it-IT")))
+        assertEquals(AppLanguage.Zh, AppLanguage.current(null, listOf("zh-T\u0301W", "it-IT")))
+        assertEquals(AppLanguage.En, AppLanguage.current(null, listOf("-fr-CA")))
     }
 
     /**
@@ -227,10 +238,22 @@ class CoreParityTests {
     @Test
     fun shortDatesAreWrittenAsEachLanguagesDateFormatterWritesThem() {
         val expected = mapOf(
-            "2026-09-12T12:00:00Z" to listOf("Sat 12 Sep", "Sa 12. Sept", "sam 12 sept", "sab 12 set", "sáb 12 sept", "sábado 12 set", "sob 12 wrz"),
-            "2026-05-04T12:00:00Z" to listOf("Mon 4 May", "Mo 4. Mai", "lun 4 mai", "lun 4 mag", "lun 4 may", "segunda 4 mai", "pon 4 maj"),
-            "2026-03-01T12:00:00Z" to listOf("Sun 1 Mar", "So 1. März", "dim 1 mars", "dom 1 mar", "dom 1 mar", "domingo 1 mar", "niedz 1 mar"),
-            "2026-06-17T12:00:00Z" to listOf("Wed 17 Jun", "Mi 17. Juni", "mer 17 juin", "mer 17 giu", "mié 17 jun", "quarta 17 jun", "śr 17 cze"),
+            "2026-09-12T12:00:00Z" to listOf(
+                "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept", "sab 12 set", "sáb 12 sept", "sábado 12 set", "sáb 12 set", "sob 12 wrz",
+                "Сб 12 сент", "9月12日周六",
+            ),
+            "2026-05-04T12:00:00Z" to listOf(
+                "Mon 4 May", "Mo 4. Mai", "lun 4 mai", "lun 4 mag", "lun 4 may", "segunda 4 mai", "seg 4 mai", "pon 4 maj", "Пн 4 мая",
+                "5月4日周一",
+            ),
+            "2026-03-01T12:00:00Z" to listOf(
+                "Sun 1 Mar", "So 1. März", "dim 1 mars", "dom 1 mar", "dom 1 mar", "domingo 1 mar", "dom 1 mar", "niedz 1 mar",
+                "Вс 1 марта", "3月1日周日",
+            ),
+            "2026-06-17T12:00:00Z" to listOf(
+                "Wed 17 Jun", "Mi 17. Juni", "mer 17 juin", "mer 17 giu", "mié 17 jun", "quarta 17 jun", "qua 17 jun", "śr 17 cze",
+                "Ср 17 июня", "6月17日周三",
+            ),
         )
         for ((value, texts) in expected) {
             val date = DateParser.date(value)!!
@@ -246,19 +269,20 @@ class CoreParityTests {
         val expected = mapOf(
             at(10, 30, 15, 5) to listOf(
                 "Oct 30, 2026 at 3:05\u202FPM", "30. Okt. 2026, 15:05", "30 oct. 2026 à 15:05", "30 ott 2026, 15:05", "30 oct 2026, 15:05",
-                "30/10/2026, 15:05", "30 paź 2026 o 15:05",
+                "30/10/2026, 15:05", "30 de out. de 2026, 15:05", "30 paź 2026 o 15:05", "30 окт. 2026\u202Fг., 15:05",
+                "2026年10月30日 15:05",
             ),
             at(5, 3, 9, 45) to listOf(
                 "May 3, 2026 at 9:45\u202FAM", "3. Mai 2026, 9:45", "3 mai 2026 à 9:45", "3 mag 2026, 9:45", "3 may 2026, 9:45",
-                "3/05/2026, 9:45", "3 maj 2026 o 9:45",
+                "3/05/2026, 9:45", "3 de mai. de 2026, 9:45", "3 maj 2026 o 9:45", "3 мая 2026\u202Fг., 9:45", "2026年5月3日 9:45",
             ),
             at(9, 1, 0, 0) to listOf(
                 "Sep 1, 2026 at 12:00\u202FAM", "1. Sept. 2026, 0:00", "1 sept. 2026 à 0:00", "1 set 2026, 0:00", "1 sept 2026, 0:00",
-                "1/09/2026, 0:00", "1 wrz 2026 o 0:00",
+                "1/09/2026, 0:00", "1 de set. de 2026, 0:00", "1 wrz 2026 o 0:00", "1 сент. 2026\u202Fг., 0:00", "2026年9月1日 0:00",
             ),
             at(3, 1, 12, 30) to listOf(
                 "Mar 1, 2026 at 12:30\u202FPM", "1. März 2026, 12:30", "1 mars 2026 à 12:30", "1 mar 2026, 12:30", "1 mar 2026, 12:30",
-                "1/03/2026, 12:30", "1 mar 2026 o 12:30",
+                "1/03/2026, 12:30", "1 de mar. de 2026, 12:30", "1 mar 2026 o 12:30", "1 марта 2026\u202Fг., 12:30", "2026年3月1日 12:30",
             ),
         )
         for ((date, texts) in expected) {
@@ -271,30 +295,50 @@ class CoreParityTests {
     fun eachLanguagesTableHoldsWhatFoundationWrites() {
         val tables = AppLanguage.entries.map { FormatData.language(it) }
         fun symbols(code: String) = tables.map { it.currencySymbols[code] ?: code }
-        assertEquals(listOf("Sun", "So.", "dim.", "dom", "dom", "domingo", "niedz."), tables.map { it.weekdays[0] })
-        assertEquals(listOf("Sat", "Sa.", "sam.", "sab", "sáb", "sábado", "sob."), tables.map { it.weekdays[6] })
-        assertEquals(listOf("Mar", "März", "mars", "mar", "mar", "mar.", "mar"), tables.map { it.months[2] })
-        assertEquals(listOf("Sep", "Sept.", "sept.", "set", "sept", "set.", "wrz"), tables.map { it.months[8] })
-        assertEquals(listOf("", ".", "", "", "", "", ""), tables.map { it.dayPeriod })
+        assertEquals(listOf("Sun", "So.", "dim.", "dom", "dom", "domingo", "dom.", "niedz.", "Вс", "周日"), tables.map { it.weekdays[0] })
+        assertEquals(listOf("Sat", "Sa.", "sam.", "sab", "sáb", "sábado", "sáb.", "sob.", "Сб", "周六"), tables.map { it.weekdays[6] })
+        assertEquals(listOf("Mar", "März", "mars", "mar", "mar", "mar.", "mar.", "mar", "марта", "3月"), tables.map { it.months[2] })
+        assertEquals(listOf("Sep", "Sept.", "sept.", "set", "sept", "set.", "set.", "wrz", "сент.", "9月"), tables.map { it.months[8] })
+        assertEquals(listOf("", ".", "", "", "", "", "", "", "", ""), tables.map { it.dayPeriod })
         assertEquals(
-            listOf("MMM d, y 'at' h:mm\u202Fa", "d. MMM y, H:mm", "d MMM y 'à' H:mm", "d MMM y, H:mm", "d MMM y, H:mm", "d/MM/y, H:mm", "d MMM y 'o' H:mm"),
+            listOf(
+                "MMM d, y 'at' h:mm\u202Fa", "d. MMM y, H:mm", "d MMM y 'à' H:mm", "d MMM y, H:mm", "d MMM y, H:mm", "d/MM/y, H:mm",
+                "d 'de' MMM 'de' y, H:mm", "d MMM y 'o' H:mm", "d MMM y\u202F'г'., H:mm", "y年M月d日 H:mm",
+            ),
             tables.map { it.dateTime },
         )
         assertEquals(listOf("AM", "PM"), tables[0].dayPeriods)
-        assertEquals(listOf(".", ",", ",", ",", ",", ",", ","), tables.map { it.money.decimal })
-        assertEquals(listOf(",", ".", " ", ".", ".", " ", " "), tables.map { it.money.group })
-        assertEquals(listOf(4, 4, 4, 5, 5, 5, 5), tables.map { it.money.groupingFrom })
-        assertEquals(List(7) { "-" }, tables.map { it.money.minus })
-        assertEquals(listOf(true, false, false, false, false, false, false), tables.map { it.currencyFirst })
-        assertEquals(List(7) { "€" }, symbols("EUR"))
-        assertEquals(listOf("\$", "\$", "\$US", "USD", "US\$", "US\$", "USD"), symbols("USD"))
-        assertEquals(listOf("£", "£", "£GB", "£", "GBP", "£", "GBP"), symbols("GBP"))
-        assertEquals(listOf("¥", "¥", "JPY", "JPY", "JPY", "JP¥", "JPY"), symbols("JPY"))
-        assertEquals(listOf("PLN", "PLN", "PLN", "PLN", "PLN", "PLN", "zł"), symbols("PLN"))
-        assertEquals(listOf("‎⃁ ") + List(6) { "⃁" }, symbols("SAR"))
+        assertEquals(listOf(".", ",", ",", ",", ",", ",", ",", ",", ",", "."), tables.map { it.money.decimal })
+        assertEquals(
+            listOf(",", ".", "\u202F", ".", ".", "\u00A0", ".", "\u00A0", "\u00A0", ","),
+            tables.map { it.money.group },
+        )
+        assertEquals(listOf(4, 4, 4, 5, 5, 5, 4, 5, 4, 4), tables.map { it.money.groupingFrom })
+        assertEquals(List(10) { "-" }, tables.map { it.money.minus })
+        assertEquals(List(8) { "NaN" } + listOf("не\u00A0число", "NaN"), tables.map { it.money.nan })
+        assertEquals(listOf(true, false, false, false, false, false, true, false, false, true), tables.map { it.currencyFirst })
+        // Brazilian Portuguese keeps every symbol from what follows it, infinity and NaN too ("€ NaN").
+        assertEquals(List(6) { "€" } + listOf("€\u00A0") + List(3) { "€" }, symbols("EUR"))
+        assertEquals(
+            listOf("\$", "\$", "\$US", "USD", "US\$", "US\$", "US\$\u00A0", "USD", "\$", "US\$"),
+            symbols("USD"),
+        )
+        assertEquals(listOf("£", "£", "£GB", "£", "GBP", "£", "£\u00A0", "GBP", "£", "£"), symbols("GBP"))
+        assertEquals(listOf("¥", "¥", "JPY", "JPY", "JPY", "JP¥", "JP¥\u00A0", "JPY", "¥", "JP¥"), symbols("JPY"))
+        assertEquals(listOf("PLN", "PLN", "PLN", "PLN", "PLN", "PLN", "PLN\u00A0", "zł", "PLN", "PLN"), symbols("PLN"))
+        assertEquals(listOf("RUB", "RUB", "RUB", "RUB", "RUB", "RUB", "RUB\u00A0", "RUB", "₽", "RUB"), symbols("RUB"))
+        assertEquals(listOf("CN¥", "CN¥", "CNY", "CN¥", "CNY", "CN¥", "CN¥\u00A0", "CNY", "CN¥", "¥"), symbols("CNY"))
+        assertEquals(
+            listOf("\u200E⃁\u00A0") + List(5) { "⃁" } + listOf("⃁\u00A0", "⃁", "⃁", "⃁"),
+            symbols("SAR"),
+        )
         assertEquals(setOf("XAF", "XCG", "XOF", "XPF"), tables[0].spacedSymbols)
-        assertEquals(listOf("", "", "", "", "", "", ""), tables.map { it.distances.decimal })
-        assertEquals(listOf(" km", " km", " km", " km", " km", " km", " km"), tables.map { it.kilometres })
+        assertEquals(setOf("XAF", "XCG", "XOF", "XPF"), tables[9].spacedSymbols)
+        assertEquals(List(10) { "" }, tables.map { it.distances.decimal })
+        assertEquals(
+            listOf(" km", " km", "\u202Fkm", " km", " km", " km", " km", " km", " км", "公里"),
+            tables.map { it.kilometres },
+        )
         assertEquals(161, FormatData.currencyCodes.size)
         assertEquals(
             listOf(3, 3, 0, 0, null),
@@ -357,6 +401,24 @@ class CoreParityTests {
                 "-0,00 €", "1,000 BHD", "1234 HUF", "12 345,678 KWD", "7,00 ⃁",
                 "∞ ⃁", "∞ CHF", "-NaN €", "7 F CFA", "1234,50 XCG",
                 "100 000 JPY",
+            ),
+            AppLanguage.PtBr to listOf(
+                "€\u00A00,02", "€\u00A00,00", "€\u00A01,12", "€\u00A01.152.921.504.606.847.000,00", "-€\u00A00,00",
+                "-€\u00A00,00", "BHD\u00A01,000", "HUF\u00A01.234", "KWD\u00A012.345,678", "⃁\u00A07,00",
+                "⃁\u00A0∞", "CHF\u00A0∞", "-€\u00A0NaN", "F\u202FCFA\u00A07", "Cg.\u00A01.234,50",
+                "JP¥\u00A0100.000",
+            ),
+            AppLanguage.Ru to listOf(
+                "0,02\u00A0€", "0,00\u00A0€", "1,12\u00A0€", "1\u00A0152\u00A0921\u00A0504\u00A0606\u00A0847\u00A0000,00\u00A0€",
+                "-0,00\u00A0€", "-0,00\u00A0€", "1,000\u00A0BHD", "1\u00A0234\u00A0HUF", "12\u00A0345,678\u00A0KWD",
+                "7,00\u00A0⃁", "∞\u00A0⃁", "∞\u00A0CHF", "-не\u00A0число\u00A0€", "7\u00A0F\u202FCFA",
+                "1\u00A0234,50\u00A0Cg", "100\u00A0000\u00A0¥",
+            ),
+            AppLanguage.Zh to listOf(
+                "€0.02", "€0.00", "€1.12", "€1,152,921,504,606,847,000.00", "-€0.00",
+                "-€0.00", "BHD\u00A01.000", "HUF\u00A01,234", "KWD\u00A012,345.678", "⃁7.00",
+                "⃁∞", "CHF∞", "-€NaN", "F\u202FCFA\u00A07", "Cg.\u00A01,234.50",
+                "JP¥100,000",
             ),
         )
         for ((language, texts) in expected) {

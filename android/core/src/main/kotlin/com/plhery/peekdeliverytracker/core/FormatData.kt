@@ -8,9 +8,9 @@ package com.plhery.peekdeliverytracker.core
 internal object FormatData {
     /**
      * How a language writes a number: its decimal separator (none for whole kilometres), its group separator, the
-     * fewest whole digits it groups (4, or 5 where "1234" stays whole) and its minus.
+     * fewest whole digits it groups (4, or 5 where "1234" stays whole), its minus and what it writes for NaN.
      */
-    class Digits(val decimal: String, val group: String, val groupingFrom: Int, val minus: String)
+    class Digits(val decimal: String, val group: String, val groupingFrom: Int, val minus: String, val nan: String)
 
     /**
      * A language's formats. `weekdays`, Sunday first, and `months` are what a Gregorian DateFormatter writes for "EEE"
@@ -61,7 +61,10 @@ internal object FormatData {
         AppLanguage.It -> it
         AppLanguage.Es -> es
         AppLanguage.Pt -> pt
+        AppLanguage.PtBr -> ptBr
         AppLanguage.Pl -> pl
+        AppLanguage.Ru -> ru
+        AppLanguage.Zh -> zh
     }
 
     private val en = Language(
@@ -70,7 +73,7 @@ internal object FormatData {
         dayPeriod = "",
         dateTime = "MMM d, y 'at' h:mm\u202Fa",
         dayPeriods = listOf("AM", "PM"),
-        money = Digits(decimal = ".", group = ",", groupingFrom = 4, minus = "-"),
+        money = Digits(decimal = ".", group = ",", groupingFrom = 4, minus = "-", nan = "NaN"),
         currencyFirst = true,
         currencySymbols = mapOf(
             "AUD" to "A\$", "BRL" to "R\$", "CAD" to "CA\$", "CNY" to "CN\u00A5", "EUR" to "\u20AC", "GBP" to "\u00A3",
@@ -80,7 +83,7 @@ internal object FormatData {
             "XPF" to "CFPF", "XXX" to "\u00A4",
         ),
         spacedSymbols = setOf("XAF", "XCG", "XOF", "XPF"),
-        distances = Digits(decimal = "", group = ",", groupingFrom = 4, minus = "-"),
+        distances = Digits(decimal = "", group = ",", groupingFrom = 4, minus = "-", nan = "NaN"),
         kilometres = " km",
     )
 
@@ -90,7 +93,7 @@ internal object FormatData {
         dayPeriod = ".",
         dateTime = "d. MMM y, H:mm",
         dayPeriods = listOf("AM", "PM"),
-        money = Digits(decimal = ",", group = ".", groupingFrom = 4, minus = "-"),
+        money = Digits(decimal = ",", group = ".", groupingFrom = 4, minus = "-", nan = "NaN"),
         currencyFirst = false,
         currencySymbols = mapOf(
             "AUD" to "AU\$", "BRL" to "R\$", "CAD" to "CA\$", "CNY" to "CN\u00A5", "EUR" to "\u20AC", "GBP" to "\u00A3",
@@ -99,7 +102,7 @@ internal object FormatData {
             "VND" to "\u20AB", "XAF" to "FCFA", "XCD" to "EC\$", "XCG" to "Cg.", "XOF" to "F\u202FCFA", "XPF" to "CFPF",
         ),
         spacedSymbols = setOf(),
-        distances = Digits(decimal = "", group = ".", groupingFrom = 4, minus = "-"),
+        distances = Digits(decimal = "", group = ".", groupingFrom = 4, minus = "-", nan = "NaN"),
         kilometres = " km",
     )
 
@@ -109,7 +112,7 @@ internal object FormatData {
         dayPeriod = "",
         dateTime = "d MMM y '\u00E0' H:mm",
         dayPeriods = listOf("AM", "PM"),
-        money = Digits(decimal = ",", group = "\u202F", groupingFrom = 4, minus = "-"),
+        money = Digits(decimal = ",", group = "\u202F", groupingFrom = 4, minus = "-", nan = "NaN"),
         currencyFirst = false,
         currencySymbols = mapOf(
             "ARS" to "\$AR", "AUD" to "\$AU", "BMD" to "\$BM", "BND" to "\$BN", "BRL" to "R\$", "BZD" to "\$BZ",
@@ -120,7 +123,7 @@ internal object FormatData {
             "WST" to "\$WS", "XAF" to "FCFA", "XCG" to "Cg.", "XOF" to "F\u202FCFA", "XPF" to "FCFP", "XXX" to "\u00A4",
         ),
         spacedSymbols = setOf(),
-        distances = Digits(decimal = "", group = "\u202F", groupingFrom = 4, minus = "-"),
+        distances = Digits(decimal = "", group = "\u202F", groupingFrom = 4, minus = "-", nan = "NaN"),
         kilometres = "\u202Fkm",
     )
 
@@ -130,7 +133,7 @@ internal object FormatData {
         dayPeriod = "",
         dateTime = "d MMM y, H:mm",
         dayPeriods = listOf("AM", "PM"),
-        money = Digits(decimal = ",", group = ".", groupingFrom = 5, minus = "-"),
+        money = Digits(decimal = ",", group = ".", groupingFrom = 5, minus = "-", nan = "NaN"),
         currencyFirst = false,
         currencySymbols = mapOf(
             "AUD" to "A\$", "CAD" to "CA\$", "CNY" to "CN\u00A5", "EUR" to "\u20AC", "GBP" to "\u00A3",
@@ -138,7 +141,7 @@ internal object FormatData {
             "XAF" to "FCFA", "XCD" to "EC\$", "XCG" to "Cf", "XOF" to "F\u202FCFA", "XPF" to "CFPF", "XXX" to "\u00A4",
         ),
         spacedSymbols = setOf(),
-        distances = Digits(decimal = "", group = ".", groupingFrom = 5, minus = "-"),
+        distances = Digits(decimal = "", group = ".", groupingFrom = 5, minus = "-", nan = "NaN"),
         kilometres = " km",
     )
 
@@ -148,14 +151,14 @@ internal object FormatData {
         dayPeriod = "",
         dateTime = "d MMM y, H:mm",
         dayPeriods = listOf("a.\u202Fm.", "p.\u202Fm."),
-        money = Digits(decimal = ",", group = ".", groupingFrom = 5, minus = "-"),
+        money = Digits(decimal = ",", group = ".", groupingFrom = 5, minus = "-", nan = "NaN"),
         currencyFirst = false,
         currencySymbols = mapOf(
             "EUR" to "\u20AC", "SAR" to "\u20C1", "THB" to "\u0E3F", "USD" to "US\$", "VND" to "\u20AB", "XCG" to "Cg.",
             "XPF" to "CFPF", "XXX" to "\u00A4",
         ),
         spacedSymbols = setOf(),
-        distances = Digits(decimal = "", group = ".", groupingFrom = 5, minus = "-"),
+        distances = Digits(decimal = "", group = ".", groupingFrom = 5, minus = "-", nan = "NaN"),
         kilometres = " km",
     )
 
@@ -165,7 +168,7 @@ internal object FormatData {
         dayPeriod = "",
         dateTime = "d/MM/y, H:mm",
         dayPeriods = listOf("AM", "PM"),
-        money = Digits(decimal = ",", group = "\u00A0", groupingFrom = 5, minus = "-"),
+        money = Digits(decimal = ",", group = "\u00A0", groupingFrom = 5, minus = "-", nan = "NaN"),
         currencyFirst = false,
         currencySymbols = mapOf(
             "AUD" to "AU\$", "BRL" to "R\$", "CAD" to "CA\$", "CNY" to "CN\u00A5", "EUR" to "\u20AC", "GBP" to "\u00A3",
@@ -175,7 +178,63 @@ internal object FormatData {
             "XXX" to "\u00A4",
         ),
         spacedSymbols = setOf(),
-        distances = Digits(decimal = "", group = "\u00A0", groupingFrom = 5, minus = "-"),
+        distances = Digits(decimal = "", group = "\u00A0", groupingFrom = 5, minus = "-", nan = "NaN"),
+        kilometres = " km",
+    )
+
+    private val ptBr = Language(
+        weekdays = listOf("dom.", "seg.", "ter.", "qua.", "qui.", "sex.", "s\u00E1b."),
+        months = listOf("jan.", "fev.", "mar.", "abr.", "mai.", "jun.", "jul.", "ago.", "set.", "out.", "nov.", "dez."),
+        dayPeriod = "",
+        dateTime = "d 'de' MMM 'de' y, H:mm",
+        dayPeriods = listOf("AM", "PM"),
+        money = Digits(decimal = ",", group = ".", groupingFrom = 4, minus = "-", nan = "NaN"),
+        currencyFirst = true,
+        currencySymbols = mapOf(
+            "AED" to "AED\u00A0", "AFN" to "AFN\u00A0", "ALL" to "ALL\u00A0", "AMD" to "AMD\u00A0",
+            "ANG" to "ANG\u00A0", "AOA" to "AOA\u00A0", "ARS" to "ARS\u00A0", "AUD" to "AU\$\u00A0",
+            "AWG" to "AWG\u00A0", "AZN" to "AZN\u00A0", "BAM" to "BAM\u00A0", "BBD" to "BBD\u00A0",
+            "BDT" to "BDT\u00A0", "BGN" to "BGN\u00A0", "BHD" to "BHD\u00A0", "BIF" to "BIF\u00A0",
+            "BMD" to "BMD\u00A0", "BND" to "BND\u00A0", "BOB" to "BOB\u00A0", "BRL" to "R\$\u00A0",
+            "BSD" to "BSD\u00A0", "BTN" to "BTN\u00A0", "BWP" to "BWP\u00A0", "BYN" to "BYN\u00A0",
+            "BZD" to "BZD\u00A0", "CAD" to "CA\$\u00A0", "CDF" to "CDF\u00A0", "CHF" to "CHF\u00A0",
+            "CLP" to "CLP\u00A0", "CNY" to "CN\u00A5\u00A0", "COP" to "COP\u00A0", "CRC" to "CRC\u00A0",
+            "CUC" to "CUC\u00A0", "CUP" to "CUP\u00A0", "CVE" to "CVE\u00A0", "CZK" to "CZK\u00A0",
+            "DJF" to "DJF\u00A0", "DKK" to "DKK\u00A0", "DOP" to "DOP\u00A0", "DZD" to "DZD\u00A0",
+            "EGP" to "EGP\u00A0", "ERN" to "ERN\u00A0", "ETB" to "ETB\u00A0", "EUR" to "\u20AC\u00A0",
+            "FJD" to "FJD\u00A0", "FKP" to "FKP\u00A0", "GBP" to "\u00A3\u00A0", "GEL" to "GEL\u00A0",
+            "GHS" to "GHS\u00A0", "GIP" to "GIP\u00A0", "GMD" to "GMD\u00A0", "GNF" to "GNF\u00A0",
+            "GTQ" to "GTQ\u00A0", "GYD" to "GYD\u00A0", "HKD" to "HK\$\u00A0", "HNL" to "HNL\u00A0",
+            "HRK" to "HRK\u00A0", "HTG" to "HTG\u00A0", "HUF" to "HUF\u00A0", "IDR" to "IDR\u00A0",
+            "ILS" to "\u20AA\u00A0", "INR" to "\u20B9\u00A0", "IQD" to "IQD\u00A0", "IRR" to "IRR\u00A0",
+            "ISK" to "ISK\u00A0", "JMD" to "JMD\u00A0", "JOD" to "JOD\u00A0", "JPY" to "JP\u00A5\u00A0",
+            "KES" to "KES\u00A0", "KGS" to "KGS\u00A0", "KHR" to "KHR\u00A0", "KMF" to "KMF\u00A0",
+            "KPW" to "KPW\u00A0", "KRW" to "\u20A9\u00A0", "KWD" to "KWD\u00A0", "KYD" to "KYD\u00A0",
+            "KZT" to "KZT\u00A0", "LAK" to "LAK\u00A0", "LBP" to "LBP\u00A0", "LKR" to "LKR\u00A0",
+            "LRD" to "LRD\u00A0", "LSL" to "LSL\u00A0", "LYD" to "LYD\u00A0", "MAD" to "MAD\u00A0",
+            "MDL" to "MDL\u00A0", "MGA" to "MGA\u00A0", "MKD" to "MKD\u00A0", "MMK" to "MMK\u00A0",
+            "MNT" to "MNT\u00A0", "MOP" to "MOP\u00A0", "MRU" to "MRU\u00A0", "MUR" to "MUR\u00A0",
+            "MVR" to "MVR\u00A0", "MWK" to "MWK\u00A0", "MXN" to "MX\$\u00A0", "MYR" to "MYR\u00A0",
+            "MZN" to "MZN\u00A0", "NAD" to "NAD\u00A0", "NGN" to "NGN\u00A0", "NIO" to "NIO\u00A0",
+            "NOK" to "NOK\u00A0", "NPR" to "NPR\u00A0", "NZD" to "NZ\$\u00A0", "OMR" to "OMR\u00A0",
+            "PAB" to "PAB\u00A0", "PEN" to "PEN\u00A0", "PGK" to "PGK\u00A0", "PHP" to "PHP\u00A0",
+            "PKR" to "PKR\u00A0", "PLN" to "PLN\u00A0", "PYG" to "PYG\u00A0", "QAR" to "QAR\u00A0",
+            "RON" to "RON\u00A0", "RSD" to "RSD\u00A0", "RUB" to "RUB\u00A0", "RWF" to "RWF\u00A0",
+            "SAR" to "\u20C1\u00A0", "SBD" to "SBD\u00A0", "SCR" to "SCR\u00A0", "SDG" to "SDG\u00A0",
+            "SEK" to "SEK\u00A0", "SGD" to "SGD\u00A0", "SHP" to "SHP\u00A0", "SLE" to "SLE\u00A0",
+            "SLL" to "SLL\u00A0", "SOS" to "SOS\u00A0", "SRD" to "SRD\u00A0", "SSP" to "SSP\u00A0",
+            "STN" to "STN\u00A0", "SYP" to "SYP\u00A0", "SZL" to "SZL\u00A0", "THB" to "\u0E3F\u00A0",
+            "TJS" to "TJS\u00A0", "TMT" to "TMT\u00A0", "TND" to "TND\u00A0", "TOP" to "TOP\u00A0",
+            "TRY" to "TRY\u00A0", "TTD" to "TTD\u00A0", "TWD" to "NT\$\u00A0", "TZS" to "TZS\u00A0",
+            "UAH" to "UAH\u00A0", "UGX" to "UGX\u00A0", "USD" to "US\$\u00A0", "UYU" to "UYU\u00A0",
+            "UZS" to "UZS\u00A0", "VED" to "VED\u00A0", "VEF" to "VEF\u00A0", "VES" to "VES\u00A0",
+            "VND" to "\u20AB\u00A0", "VUV" to "VUV\u00A0", "WST" to "WST\u00A0", "XAF" to "FCFA\u00A0",
+            "XCD" to "EC\$\u00A0", "XCG" to "Cg.\u00A0", "XOF" to "F\u202FCFA\u00A0", "XPF" to "CFPF\u00A0",
+            "XXX" to "\u00A4\u00A0", "YER" to "YER\u00A0", "ZAR" to "ZAR\u00A0", "ZMW" to "ZMW\u00A0",
+            "ZWG" to "ZWG\u00A0",
+        ),
+        spacedSymbols = setOf(),
+        distances = Digits(decimal = "", group = ".", groupingFrom = 4, minus = "-", nan = "NaN"),
         kilometres = " km",
     )
 
@@ -185,14 +244,53 @@ internal object FormatData {
         dayPeriod = "",
         dateTime = "d MMM y 'o' H:mm",
         dayPeriods = listOf("AM", "PM"),
-        money = Digits(decimal = ",", group = "\u00A0", groupingFrom = 5, minus = "-"),
+        money = Digits(decimal = ",", group = "\u00A0", groupingFrom = 5, minus = "-", nan = "NaN"),
         currencyFirst = false,
         currencySymbols = mapOf(
             "BRL" to "R\$", "EUR" to "\u20AC", "PLN" to "z\u0142", "SAR" to "\u20C1", "XAF" to "FCFA", "XCD" to "EC\$",
             "XOF" to "F\u202FCFA", "XPF" to "CFPF", "XXX" to "\u00A4",
         ),
         spacedSymbols = setOf(),
-        distances = Digits(decimal = "", group = "\u00A0", groupingFrom = 5, minus = "-"),
+        distances = Digits(decimal = "", group = "\u00A0", groupingFrom = 5, minus = "-", nan = "NaN"),
         kilometres = " km",
+    )
+
+    private val ru = Language(
+        weekdays = listOf("\u0412\u0441", "\u041F\u043D", "\u0412\u0442", "\u0421\u0440", "\u0427\u0442", "\u041F\u0442", "\u0421\u0431"),
+        months = listOf("\u044F\u043D\u0432.", "\u0444\u0435\u0432\u0440.", "\u043C\u0430\u0440\u0442\u0430", "\u0430\u043F\u0440.", "\u043C\u0430\u044F", "\u0438\u044E\u043D\u044F", "\u0438\u044E\u043B\u044F", "\u0430\u0432\u0433.", "\u0441\u0435\u043D\u0442.", "\u043E\u043A\u0442.", "\u043D\u043E\u044F\u0431.", "\u0434\u0435\u043A."),
+        dayPeriod = "",
+        dateTime = "d MMM y\u202F'\u0433'., H:mm",
+        dayPeriods = listOf("AM", "PM"),
+        money = Digits(decimal = ",", group = "\u00A0", groupingFrom = 4, minus = "-", nan = "\u043D\u0435\u00A0\u0447\u0438\u0441\u043B\u043E"),
+        currencyFirst = false,
+        currencySymbols = mapOf(
+            "AUD" to "A\$", "BRL" to "R\$", "CAD" to "CA\$", "CNY" to "CN\u00A5", "EUR" to "\u20AC", "GBP" to "\u00A3",
+            "HKD" to "HK\$", "ILS" to "\u20AA", "INR" to "\u20B9", "JPY" to "\u00A5", "KRW" to "\u20A9",
+            "MXN" to "MX\$", "NZD" to "NZ\$", "RUB" to "\u20BD", "SAR" to "\u20C1", "THB" to "\u0E3F",
+            "TMT" to "\u0422\u041C\u0422", "TWD" to "NT\$", "UAH" to "\u20B4", "USD" to "\$", "VND" to "\u20AB",
+            "XAF" to "FCFA", "XCD" to "EC\$", "XCG" to "Cg", "XOF" to "F\u202FCFA", "XPF" to "CFPF", "XXX" to "XXXX",
+        ),
+        spacedSymbols = setOf(),
+        distances = Digits(decimal = "", group = "\u00A0", groupingFrom = 4, minus = "-", nan = "\u043D\u0435\u00A0\u0447\u0438\u0441\u043B\u043E"),
+        kilometres = " \u043A\u043C",
+    )
+
+    private val zh = Language(
+        weekdays = listOf("\u5468\u65E5", "\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5468\u4E94", "\u5468\u516D"),
+        months = listOf("1\u6708", "2\u6708", "3\u6708", "4\u6708", "5\u6708", "6\u6708", "7\u6708", "8\u6708", "9\u6708", "10\u6708", "11\u6708", "12\u6708"),
+        dayPeriod = "",
+        dateTime = "y\u5E74M\u6708d\u65E5 H:mm",
+        dayPeriods = listOf("\u4E0A\u5348", "\u4E0B\u5348"),
+        money = Digits(decimal = ".", group = ",", groupingFrom = 4, minus = "-", nan = "NaN"),
+        currencyFirst = true,
+        currencySymbols = mapOf(
+            "AUD" to "AU\$", "BRL" to "R\$", "CAD" to "CA\$", "CNY" to "\u00A5", "EUR" to "\u20AC", "GBP" to "\u00A3",
+            "HKD" to "HK\$", "ILS" to "\u20AA", "INR" to "\u20B9", "JPY" to "JP\u00A5", "KRW" to "\u20A9",
+            "MXN" to "MX\$", "NZD" to "NZ\$", "SAR" to "\u20C1", "TWD" to "NT\$", "USD" to "US\$", "VND" to "\u20AB",
+            "XAF" to "FCFA", "XCD" to "EC\$", "XCG" to "Cg.", "XOF" to "F\u202FCFA", "XPF" to "CFPF",
+        ),
+        spacedSymbols = setOf("XAF", "XCG", "XOF", "XPF"),
+        distances = Digits(decimal = "", group = ",", groupingFrom = 4, minus = "-", nan = "NaN"),
+        kilometres = "\u516C\u91CC",
     )
 }

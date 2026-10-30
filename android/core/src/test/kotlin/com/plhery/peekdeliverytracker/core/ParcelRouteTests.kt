@@ -226,8 +226,15 @@ class ParcelRouteTests {
                 assertEquals(texts, listOf(8.0, 1_200.0, 12_000.0, 1_234_500.0).map { formatter.kilometres(it, locale) })
             }
         }
+        // The plain JVM's stand-in knows only the first seven; the app writes these from its own table.
+        val tableOnly = mapOf(
+            "pt-BR" to listOf("8 km", "1.200 km", "12.000 km", "1.234.500 km"),
+            "ru" to listOf("8 км", "1\u00A0200 км", "12\u00A0000 км", "1\u00A0234\u00A0500 км"),
+            "zh-Hans" to listOf("8公里", "1,200公里", "12,000公里", "1,234,500公里"),
+        )
         for (language in AppLanguage.entries) {
-            val texts = written.getValue(language.locale.toLanguageTag())
+            val tag = language.locale.toLanguageTag()
+            val texts = written[tag] ?: tableOnly.getValue(tag)
             val formatted = listOf(8.0, 1_200.0, 12_000.0, 1_234_500.0).map { ParcelRoute.formattedKilometres(it, language.locale) }
             assertEquals(language.rawValue, texts, formatted)
         }

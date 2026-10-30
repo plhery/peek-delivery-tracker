@@ -3,7 +3,7 @@
 // own CLDR ("Sept" for September in English, "1.234,50 €" in Italian on Android 12). For `Localizer.shortDate`, the
 // "EEE" and "MMM" a Gregorian DateFormatter writes and the period its "dMMM" template puts after the day; for
 // `Localizer.abbreviatedDateTime`, the pattern `Date.FormatStyle(date: .abbreviated, time: .shortened)` writes in and
-// its day periods; for `value.formatted(.currency(code:).locale(_:))`, each language's separators, grouping and minus, and the symbol of
+// its day periods; for `value.formatted(.currency(code:).locale(_:))`, each language's separators, grouping, minus and NaN, and the symbol of
 // every currency in use (Foundation's common ones and each region's), with Apple's fraction digits; for
 // `ParcelRoute.formattedKilometres`, the grouping and unit of kilometres. Before writing, it puts dates, amounts and distances
 // together from the tables as FoundationText.kt and Core.kt do, and stops at the first that Foundation writes otherwise.
@@ -17,10 +17,18 @@ let output = URL(fileURLWithPath: #filePath)
     .appendingPathComponent("../core/src/main/kotlin/com/plhery/peekdeliverytracker/core/FormatData.kt")
     .standardizedFileURL
 
-// AppLanguage's codes and `locale` (Core.swift), and the Kotlin enum's names.
-let languages = ["en", "de", "fr", "it", "es", "pt", "pl"]
-func locale(_ language: String) -> Locale { Locale(identifier: language == "pt" ? "pt-PT" : language) }
-func enumName(_ language: String) -> String { language.prefix(1).uppercased() + language.dropFirst() }
+// AppLanguage's codes, its `locale` (`ExtensionLocalizer.locale(for:)`), and the Kotlin enum's and table's names.
+let languages = ["en", "de", "fr", "it", "es", "pt", "pt-br", "pl", "ru", "zh"]
+func locale(_ language: String) -> Locale {
+    switch language {
+    case "pt": Locale(identifier: "pt-PT")
+    case "pt-br": Locale(identifier: "pt-BR")
+    case "zh": Locale(identifier: "zh-Hans")
+    default: Locale(identifier: language)
+    }
+}
+func enumName(_ language: String) -> String { language.split(separator: "-").map { $0.prefix(1).uppercased() + $0.dropFirst() }.joined() }
+func tableName(_ language: String) -> String { enumName(language).prefix(1).lowercased() + enumName(language).dropFirst() }
 
 func fail(_ message: String) -> Never {
     FileHandle.standardError.write(Data((message + "\n").utf8))
@@ -145,6 +153,7 @@ func modelDateTime(_ pattern: String, _ moment: Date, _ dates: Dates, _ dayPerio
         guard part.field else { return part.text }
         switch part.text {
         case "d": return String(fields.day!)
+        case "M": return String(fields.month!)
         case "MM": return String(format: "%02d", fields.month!)
         case "MMM": return dates.months[fields.month! - 1]
         case "y": return String(fields.year!)
@@ -186,6 +195,8 @@ struct Digits {
     /// The fewest whole digits that are grouped: 4, or 5 where "1234" stays whole.
     let groupingFrom: Int
     let minus: String
+    /// What it writes for NaN: "NaN", or words ("не число").
+    let nan: String
 }
 
 /// The whole and fraction digits ICU writes for a magnitude: the shortest decimal that reads back as it (Swift's
@@ -236,7 +247,7 @@ func grouped(_ whole: String, _ digits: Digits) -> String {
 
 /// A number's magnitude as ICU writes it: infinity, NaN, or its digits.
 func number(_ value: Double, _ fractionDigits: Int, _ digits: Digits) -> String {
-    if value.isNaN { return "NaN" }
+    if value.isNaN { return digits.nan }
     if value.isInfinite { return "\u{221E}" }
     let (whole, fraction) = plainDigits(abs(value), fractionDigits)
     return grouped(whole, digits) + (fractionDigits > 0 ? digits.decimal + fraction : "")
@@ -280,7 +291,8 @@ func sides(_ text: String, _ fraction: Int, _ decimal: String, _ what: String) -
     return (String(text[..<range.lowerBound]), String(text[range.upperBound...]))
 }
 
-/// A language's separators, grouping and minus, as `write` writes 7 (with `fraction` digits), 1234, 12345, 1234567 and -7.
+/// A language's separators, grouping, minus and NaN, as `write` writes 7 (with `fraction` digits), 1234, 12345, 1234567,
+/// -7 and NaN.
 func digits(_ language: String, _ fraction: Int, _ write: (Double) -> String) -> (Digits, before: String, after: String) {
     let seven = write(7)
     guard let index = seven.firstIndex(of: "7") else { fail("\(language): no 7 in \(seven)") }
@@ -296,7 +308,11 @@ func digits(_ language: String, _ fraction: Int, _ write: (Double) -> String) ->
     if group.isEmpty || groupingFrom == 0 { fail("\(language): no grouping in \(millions)") }
     let negative = write(-7)
     guard negative.hasSuffix(seven) else { fail("\(language): \(negative) is not a minus and \(seven)") }
-    return (Digits(decimal: decimal, group: group, groupingFrom: groupingFrom, minus: String(negative.dropLast(seven.count))), before, after)
+    let digits = Digits(
+        decimal: decimal, group: group, groupingFrom: groupingFrom, minus: String(negative.dropLast(seven.count)),
+        nan: digitsOf(write(.nan))
+    )
+    return (digits, before, after)
 }
 
 struct Money {
@@ -394,7 +410,8 @@ func lines(_ entries: [String], indent: String) -> String {
 func list(_ values: [String]) -> String { "listOf(" + values.map(kotlin).joined(separator: ", ") + ")" }
 
 func digitsSource(_ digits: Digits) -> String {
-    "Digits(decimal = \(kotlin(digits.decimal)), group = \(kotlin(digits.group)), groupingFrom = \(digits.groupingFrom), minus = \(kotlin(digits.minus)))"
+    "Digits(decimal = \(kotlin(digits.decimal)), group = \(kotlin(digits.group)), groupingFrom = \(digits.groupingFrom), " +
+        "minus = \(kotlin(digits.minus)), nan = \(kotlin(digits.nan)))"
 }
 
 var languageSources: [String] = []
@@ -406,7 +423,7 @@ for language in languages {
     let symbols = money.symbols.sorted(by: { $0.key < $1.key }).map { "\(kotlin($0.key)) to \(kotlin($0.value))," }
     let spaced = money.spaced.sorted().map(kotlin).joined(separator: ", ")
     languageSources.append("""
-        private val \(language) = Language(
+        private val \(tableName(language)) = Language(
             weekdays = \(list(dates.weekdays)),
             months = \(list(dates.months)),
             dayPeriod = \(kotlin(dates.dayPeriod)),
@@ -450,9 +467,9 @@ package com.plhery.peekdeliverytracker.core
 internal object FormatData {
     /**
      * How a language writes a number: its decimal separator (none for whole kilometres), its group separator, the
-     * fewest whole digits it groups (4, or 5 where "1234" stays whole) and its minus.
+     * fewest whole digits it groups (4, or 5 where "1234" stays whole), its minus and what it writes for NaN.
      */
-    class Digits(val decimal: String, val group: String, val groupingFrom: Int, val minus: String)
+    class Digits(val decimal: String, val group: String, val groupingFrom: Int, val minus: String, val nan: String)
 
     /**
      * A language's formats. `weekdays`, Sunday first, and `months` are what a Gregorian DateFormatter writes for "EEE"
@@ -487,7 +504,7 @@ internal object FormatData {
     )
 
     fun language(language: AppLanguage): Language = when (language) {
-\(languages.map { "        AppLanguage.\(enumName($0)) -> \($0)" }.joined(separator: "\n"))
+\(languages.map { "        AppLanguage.\(enumName($0)) -> \(tableName($0))" }.joined(separator: "\n"))
     }
 
 \(languageSources.joined(separator: "\n\n"))

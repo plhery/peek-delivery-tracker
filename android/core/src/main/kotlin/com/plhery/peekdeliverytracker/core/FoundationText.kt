@@ -509,7 +509,7 @@ internal fun foundationDecimal(value: Double, fractionDigits: Int, language: App
 }
 
 /**
- * A number without its sign as ICU writes it: ∞, NaN, or the shortest decimal that reads back as it rounded half to
+ * A number without its sign as ICU writes it: ∞, the language's NaN ("не число"), or the shortest decimal that reads back as it rounded half to
  * even to `fractionDigits` ("0.015" is 0.02 although the Double is a little less), the zeros that end its fraction
  * dropped down to `fewestFractionDigits`, its whole digits grouped by three from the language's `groupingFrom`.
  */
@@ -519,7 +519,7 @@ private fun foundationNumber(
     digits: FormatData.Digits,
     fewestFractionDigits: Int = fractionDigits,
 ): String {
-    if (value.isNaN()) return "NaN"
+    if (value.isNaN()) return digits.nan
     if (value.isInfinite()) return "\u221E"
     val magnitude = abs(value)
     val decimal = if (magnitude == 0.0) BigDecimal.ZERO else shortestDecimal(magnitude)

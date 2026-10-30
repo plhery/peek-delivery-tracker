@@ -1,16 +1,21 @@
 // Writes android/core/src/main/resources/peek/CountryNames.json: the regions and region names the iPhone app
 // gets from Foundation (`Locale.Region.isoRegions`, `Locale.localizedString(forRegionCode:)`), in each of the
 // app's languages, for Android, whose CLDR names differ in places ("Hong Kong SAR China", "China mainland").
-// `readingNames` holds the names of a bare language code whose locale is not the app's: TrackingLocation reads a
-// location's country by `Locale(identifier: "pt")`'s names, Brazil's, where the app shows pt-PT's.
 //
 // Run it on a Mac from the repository root: `swift android/tools/CountryNames.swift`. Run it again when the app
 // gains a language, and after each major macOS release, whose names are the ones that year's iOS shows.
 import Foundation
 
-// AppLanguage's codes and `locale` (Core.swift).
-let languages = ["en", "de", "fr", "it", "es", "pt", "pl"]
-func locale(_ language: String) -> Locale { Locale(identifier: language == "pt" ? "pt-PT" : language) }
+// AppLanguage's codes and `locale` (`ExtensionLocalizer.locale(for:)`).
+let languages = ["en", "de", "fr", "it", "es", "pt", "pt-br", "pl", "ru", "zh"]
+func locale(_ language: String) -> Locale {
+    switch language {
+    case "pt": Locale(identifier: "pt-PT")
+    case "pt-br": Locale(identifier: "pt-BR")
+    case "zh": Locale(identifier: "zh-Hans")
+    default: Locale(identifier: language)
+    }
+}
 
 let regions = Locale.Region.isoRegions.map(\.identifier).sorted()
 let letters = (UInt8(ascii: "A")...UInt8(ascii: "Z")).map { String(UnicodeScalar($0)) }
@@ -24,11 +29,8 @@ func regionNames(_ locale: Locale) -> [String: String] {
 }
 
 var names: [String: [String: String]] = [:]
-var readingNames: [String: [String: String]] = [:]
 for language in languages {
     names[language] = regionNames(locale(language))
-    let bare = regionNames(Locale(identifier: language))
-    if bare != names[language] { readingNames[language] = bare }
 }
 
 let output = URL(fileURLWithPath: #filePath)
@@ -36,7 +38,7 @@ let output = URL(fileURLWithPath: #filePath)
     .appendingPathComponent("../core/src/main/resources/peek/CountryNames.json")
     .standardizedFileURL
 let data = try JSONSerialization.data(
-    withJSONObject: ["regions": regions, "names": names, "readingNames": readingNames],
+    withJSONObject: ["regions": regions, "names": names],
     options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
 )
 try (data + Data("\n".utf8)).write(to: output)

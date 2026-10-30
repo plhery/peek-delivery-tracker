@@ -36781,7 +36781,9 @@
       "displayName": "Super Parcel Track",
       "aliases": [
         "Super Parcel",
-        "SP Track"
+        "SP Track",
+        "Ant Parcel",
+        "Ant Parcel Track"
       ],
       "countries": [
         "CN"
@@ -36793,9 +36795,38 @@
         "mode": "automatic",
         "adapter": "universal"
       },
-      "linkRules": [],
+      "linkRules": [
+        {
+          "domains": [
+            "track-sp.com",
+            "www.track-sp.com"
+          ],
+          "pathPattern": "^/tracking/detail/?$",
+          "params": [
+            "tracking_num"
+          ]
+        },
+        {
+          "domains": [
+            "ant-parcel.com",
+            "www.ant-parcel.com"
+          ],
+          "pathPattern": "^/tracking/detail/?$",
+          "params": [
+            "tracking_num"
+          ]
+        },
+        {
+          "domains": [
+            "ant-parcel.com",
+            "www.ant-parcel.com"
+          ],
+          "path": "^/tracking/detail/([^/?#]+)/?$"
+        }
+      ],
       "detectionRules": [],
-      "trackingSearchUrl": "https://track-sp.com/tracking/detail"
+      "trackingSearchUrl": "https://track-sp.com/tracking/detail",
+      "trackingUrlTemplate": "https://track-sp.com/tracking/detail?tracking_num={trackingNumber}"
     },
     "tusou": {
       "displayName": "Tusou",
@@ -36873,6 +36904,520 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.shwise.cn/home/"
+    },
+    "aland-post": {
+      "displayName": "Åland Post",
+      "aliases": [
+        "Åland Post Ab",
+        "Posten Åland",
+        "Posten Åland Ab",
+        "Posten på Åland",
+        "Aland Post",
+        "Ahvenanmaan posti"
+      ],
+      "countries": [
+        "AX"
+      ],
+      "color": "#05545f",
+      "selectable": true,
+      "timezone": "Europe/Mariehamn",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.alandpost.ax/en/track?shipmentid={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.alandpost.ax",
+            "alandpost.ax"
+          ],
+          "pathPattern": "^/en/track/?$",
+          "params": [
+            "shipmentid"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.alandpost.ax/en/track"
+    },
+    "amalgamated-distribution": {
+      "displayName": "Amalgamated Distribution",
+      "aliases": [
+        "Amalgamated Distribution & Taxi Trucks",
+        "Amalgamated Distribution and Taxi Trucks",
+        "Amalgamated Distribution Pty Ltd",
+        "Amaldist",
+        "Amalgamated Taxi Trucks"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "color": "#006059",
+      "selectable": true,
+      "timezone": "Australia/Melbourne",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://online.amaldist.com.au/track/?item={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "online.amaldist.com.au"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "item"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://online.amaldist.com.au/track/"
+    },
+    "aruba-post": {
+      "displayName": "Post Aruba",
+      "aliases": [
+        "Post Aruba N.V.",
+        "Aruba Post"
+      ],
+      "countries": [
+        "AW"
+      ],
+      "color": "#2a3080",
+      "selectable": true,
+      "timezone": "America/Aruba",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://cds.postaruba.com/ipswt/IPSWeb_item_events.aspx?itemid={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "cds.postaruba.com"
+          ],
+          "pathPattern": "^/ipswt/IPSWeb_item_events\\.aspx$",
+          "params": [
+            "itemid"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.postaruba.com/track"
+    },
+    "bonds-couriers": {
+      "displayName": "Bonds Couriers",
+      "aliases": [
+        "Bonds Courier",
+        "Bonds Transport Group",
+        "Bonds Transport Group Pty Ltd",
+        "Bonds Express Couriers"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "color": "#1b468d",
+      "selectable": true,
+      "timezone": "Australia/Sydney",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://appsrv.bondscouriers.com.au/bondsweb/track-job.htm"
+    },
+    "burundi-post": {
+      "displayName": "Burundi Post",
+      "aliases": [
+        "Régie Nationale des Postes du Burundi",
+        "Poste du Burundi"
+      ],
+      "countries": [
+        "BI"
+      ],
+      "color": "#e30a0a",
+      "selectable": true,
+      "timezone": "Africa/Bujumbura",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://poste-burundi.bi/fr/suivre"
+    },
+    "correo-paraguayo": {
+      "displayName": "Correo Paraguayo",
+      "aliases": [
+        "Dirección Nacional de Correos del Paraguay",
+        "DINACOPA",
+        "Correos del Paraguay",
+        "Paraguay Post"
+      ],
+      "countries": [
+        "PY"
+      ],
+      "color": "#d42e12",
+      "selectable": true,
+      "timezone": "America/Asuncion",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://apps.correoparaguayo.gov.py:444/seguimiento.html"
+    },
+    "delivro": {
+      "displayName": "Délivro",
+      "aliases": [
+        "Delivro",
+        "Delivero",
+        "Délivro Messagerie Professionnelle"
+      ],
+      "countries": [
+        "CA"
+      ],
+      "color": "#042a43",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://delivro.dsapp.io/customer/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "delivro.dsapp.io"
+          ],
+          "path": "^/customer/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://delivro.dsapp.io/customer"
+    },
+    "dg-transporte": {
+      "displayName": "DG Transporte",
+      "aliases": [
+        "DG Transporte GmbH",
+        "DG-Transporte"
+      ],
+      "countries": [
+        "DE"
+      ],
+      "color": "#7bc144",
+      "selectable": true,
+      "timezone": "Europe/Berlin",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.dg-transporte.de/empfangen/sendungsverfolgung/"
+    },
+    "gibraltar-post": {
+      "displayName": "Royal Gibraltar Post Office",
+      "aliases": [
+        "Gibraltar Post",
+        "RGPO",
+        "Royal GPO",
+        "HM Royal Gibraltar Post Office"
+      ],
+      "countries": [
+        "GI"
+      ],
+      "color": "#e51f26",
+      "selectable": true,
+      "timezone": "Europe/Gibraltar",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://post.gi/track-and-trace/"
+    },
+    "holisol": {
+      "displayName": "Holisol",
+      "aliases": [
+        "Holisol Logistics",
+        "Holisol Logistics Pvt Ltd",
+        "Holisol Logistics Private Limited",
+        "Holisol Delivery"
+      ],
+      "countries": [
+        "IN"
+      ],
+      "color": "#13467b",
+      "selectable": true,
+      "timezone": "Asia/Kolkata",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.holisoldelivery.com/api/tracking/TrackAwb?awb={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.holisoldelivery.com",
+            "holisoldelivery.com"
+          ],
+          "pathPattern": "^/api/tracking/TrackAwb/?$",
+          "params": [
+            "awb"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://holisollogistics.com/track-shipment/"
+    },
+    "inntralog": {
+      "displayName": "Inntralog",
+      "aliases": [
+        "INNTRALOG",
+        "Inntralog GmbH",
+        "Inntralog GmbH Innovation-Transport-Logistik"
+      ],
+      "countries": [
+        "DE"
+      ],
+      "color": "#142882",
+      "selectable": true,
+      "timezone": "Europe/Berlin",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://portal.inntralog.com/track/"
+    },
+    "samoa-post": {
+      "displayName": "Samoa Post",
+      "aliases": [
+        "Samoa Post Ltd",
+        "Samoa Post Limited",
+        "Samoa Post Office"
+      ],
+      "countries": [
+        "WS"
+      ],
+      "color": "#011b3b",
+      "selectable": true,
+      "timezone": "Pacific/Apia",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://samoapost.ws/"
+    },
+    "skybox": {
+      "displayName": "SkyBox",
+      "aliases": [
+        "SkyBOX",
+        "SkyBox.net",
+        "SkyBOX de Venezuela"
+      ],
+      "countries": [
+        "US",
+        "CL",
+        "BR",
+        "VE"
+      ],
+      "color": "#3c59a8",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.skybox.net/TrackingInformation/IndexPublic?tracking={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.skybox.net",
+            "skybox.net"
+          ],
+          "pathPattern": "^/TrackingInformation/IndexPublic/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.skybox.net/TrackingInformation/IndexPublic"
+    },
+    "tforce-integrated-solutions": {
+      "displayName": "TForce Integrated Solutions",
+      "aliases": [
+        "TForce Solutions"
+      ],
+      "countries": [
+        "CA"
+      ],
+      "color": "#004b8e",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tforce-solutions.com/quick-tracking/?tracking={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tforce-solutions.com",
+            "www.tforce-solutions.com"
+          ],
+          "pathPattern": "^/quick-tracking/?$",
+          "params": [
+            "tracking"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tforce-solutions.com/"
+    },
+    "ttk-europe": {
+      "displayName": "TTK Europe",
+      "aliases": [
+        "Ttkeurope",
+        "TTK EUROPE Ltd",
+        "TTK EU",
+        "天天欧洲物流",
+        "天天欧洲"
+      ],
+      "countries": [
+        "GB",
+        "CN"
+      ],
+      "color": "#dd1831",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://ttkeu.com/tracking/tracking-detail/?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "ttkeu.com",
+            "www.ttkeu.com"
+          ],
+          "pathPattern": "^/tracking/tracking-detail/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ttkeu.com/tracking/"
+    },
+    "ubx-uk": {
+      "displayName": "UBX UK",
+      "aliases": [
+        "UBX Global",
+        "UBX Express",
+        "UBX UK Ltd",
+        "United Business Xpress",
+        "United Business Xpress Ltd"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "color": "#254083",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.ubx.uk.net/tracking/?consign_note={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.ubx.uk.net",
+            "ubx.uk.net",
+            "ubx.couriernavigator-secure.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "consign_note"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.ubx.uk.net/tracking/"
+    },
+    "victorian-freight-specialists": {
+      "displayName": "Victorian Freight Specialists",
+      "aliases": [
+        "Victorian Freight Specialists Pty Ltd",
+        "Victorian Freight",
+        "VFS Good Track"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "color": "#ffde00",
+      "selectable": true,
+      "timezone": "Australia/Melbourne",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://web.victorianfreight.com.au/webconsignment/FTSSearch-v2.aspx?connum={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "web.victorianfreight.com.au"
+          ],
+          "pathPattern": "^/webconsignment/FTSSearch-v2\\.aspx$",
+          "params": [
+            "connum"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://web.victorianfreight.com.au/webconsignment/FTSSearch-v2.aspx"
+    },
+    "vt-freight-express": {
+      "displayName": "VT Freight Express",
+      "aliases": [
+        "VTFE",
+        "VT Freight",
+        "VicTas Freight Express",
+        "Victas Freight Express",
+        "VT Freight Express Pty Ltd"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "color": "#e62e29",
+      "selectable": true,
+      "timezone": "Australia/Melbourne",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://portal.vtfe.com.au/Track/VTFE/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "portal.vtfe.com.au"
+          ],
+          "path": "^/Track/VTFE/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.vtfe.com.au/"
     }
   },
   "servers": [
@@ -40602,7 +41147,25 @@
           "super-parcel-track",
           "tusou",
           "ural-express",
-          "wise-express"
+          "wise-express",
+          "aland-post",
+          "amalgamated-distribution",
+          "aruba-post",
+          "bonds-couriers",
+          "burundi-post",
+          "correo-paraguayo",
+          "delivro",
+          "dg-transporte",
+          "gibraltar-post",
+          "holisol",
+          "inntralog",
+          "samoa-post",
+          "skybox",
+          "tforce-integrated-solutions",
+          "ttk-europe",
+          "ubx-uk",
+          "victorian-freight-specialists",
+          "vt-freight-express"
         ]
       },
       "Stage": {

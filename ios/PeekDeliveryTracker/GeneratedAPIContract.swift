@@ -994,6 +994,24 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let tusou = CarrierID(rawValue: "tusou")
     static let uralExpress = CarrierID(rawValue: "ural-express")
     static let wiseExpress = CarrierID(rawValue: "wise-express")
+    static let alandPost = CarrierID(rawValue: "aland-post")
+    static let amalgamatedDistribution = CarrierID(rawValue: "amalgamated-distribution")
+    static let arubaPost = CarrierID(rawValue: "aruba-post")
+    static let bondsCouriers = CarrierID(rawValue: "bonds-couriers")
+    static let burundiPost = CarrierID(rawValue: "burundi-post")
+    static let correoParaguayo = CarrierID(rawValue: "correo-paraguayo")
+    static let delivro = CarrierID(rawValue: "delivro")
+    static let dgTransporte = CarrierID(rawValue: "dg-transporte")
+    static let gibraltarPost = CarrierID(rawValue: "gibraltar-post")
+    static let holisol = CarrierID(rawValue: "holisol")
+    static let inntralog = CarrierID(rawValue: "inntralog")
+    static let samoaPost = CarrierID(rawValue: "samoa-post")
+    static let skybox = CarrierID(rawValue: "skybox")
+    static let tforceIntegratedSolutions = CarrierID(rawValue: "tforce-integrated-solutions")
+    static let ttkEurope = CarrierID(rawValue: "ttk-europe")
+    static let ubxUk = CarrierID(rawValue: "ubx-uk")
+    static let victorianFreightSpecialists = CarrierID(rawValue: "victorian-freight-specialists")
+    static let vtFreightExpress = CarrierID(rawValue: "vt-freight-express")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -1941,6 +1959,24 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .tusou,
         .uralExpress,
         .wiseExpress,
+        .alandPost,
+        .amalgamatedDistribution,
+        .arubaPost,
+        .bondsCouriers,
+        .burundiPost,
+        .correoParaguayo,
+        .delivro,
+        .dgTransporte,
+        .gibraltarPost,
+        .holisol,
+        .inntralog,
+        .samoaPost,
+        .skybox,
+        .tforceIntegratedSolutions,
+        .ttkEurope,
+        .ubxUk,
+        .victorianFreightSpecialists,
+        .vtFreightExpress,
     ]
 
     init(from decoder: Decoder) throws {

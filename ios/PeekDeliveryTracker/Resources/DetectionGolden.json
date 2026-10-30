@@ -2550,6 +2550,31 @@
     ]
   },
   {
+    "input": "005135915005",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive",
+      "j-and-t",
+      "metropolitan-warehouse"
+    ]
+  },
+  {
     "input": "005225594229",
     "carrier": "unknown",
     "confidence": "low",
@@ -36335,6 +36360,28 @@
       "geniki-taxydromiki",
       "packeta",
       "dhl-ecommerce-es"
+    ]
+  },
+  {
+    "input": "358782585",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "358784414",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt",
+      "xpo-ltl"
+    ],
+    "preferred": [
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "xpo-ltl"
     ]
   },
   {
@@ -74091,6 +74138,12 @@
     ]
   },
   {
+    "input": "EBOS4699484",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "EBUMSP0265440426",
     "carrier": "unknown",
     "confidence": "none",
@@ -79260,6 +79313,17 @@
     ],
     "asked": [
       "colis-prive"
+    ]
+  },
+  {
+    "input": "HL60000000239",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "la-poste"
+    ],
+    "asked": [
+      "la-poste"
     ]
   },
   {
@@ -96780,6 +96844,18 @@
     "preferred": [
       "fedex-international-connect"
     ]
+  },
+  {
+    "input": "WIN40910152985",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "WIN40910156472",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "WM00AK560100067361529",

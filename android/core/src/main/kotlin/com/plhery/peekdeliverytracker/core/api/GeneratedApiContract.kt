@@ -1003,6 +1003,24 @@ value class CarrierId(val rawValue: String) {
         val Tusou = CarrierId("tusou")
         val UralExpress = CarrierId("ural-express")
         val WiseExpress = CarrierId("wise-express")
+        val AlandPost = CarrierId("aland-post")
+        val AmalgamatedDistribution = CarrierId("amalgamated-distribution")
+        val ArubaPost = CarrierId("aruba-post")
+        val BondsCouriers = CarrierId("bonds-couriers")
+        val BurundiPost = CarrierId("burundi-post")
+        val CorreoParaguayo = CarrierId("correo-paraguayo")
+        val Delivro = CarrierId("delivro")
+        val DgTransporte = CarrierId("dg-transporte")
+        val GibraltarPost = CarrierId("gibraltar-post")
+        val Holisol = CarrierId("holisol")
+        val Inntralog = CarrierId("inntralog")
+        val SamoaPost = CarrierId("samoa-post")
+        val Skybox = CarrierId("skybox")
+        val TforceIntegratedSolutions = CarrierId("tforce-integrated-solutions")
+        val TtkEurope = CarrierId("ttk-europe")
+        val UbxUk = CarrierId("ubx-uk")
+        val VictorianFreightSpecialists = CarrierId("victorian-freight-specialists")
+        val VtFreightExpress = CarrierId("vt-freight-express")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -1950,6 +1968,24 @@ value class CarrierId(val rawValue: String) {
             Tusou,
             UralExpress,
             WiseExpress,
+            AlandPost,
+            AmalgamatedDistribution,
+            ArubaPost,
+            BondsCouriers,
+            BurundiPost,
+            CorreoParaguayo,
+            Delivro,
+            DgTransporte,
+            GibraltarPost,
+            Holisol,
+            Inntralog,
+            SamoaPost,
+            Skybox,
+            TforceIntegratedSolutions,
+            TtkEurope,
+            UbxUk,
+            VictorianFreightSpecialists,
+            VtFreightExpress,
         )
     }
 }

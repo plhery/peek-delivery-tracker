@@ -36695,6 +36695,165 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.transnatur.com/"
+  },
+  "gcx": {
+    "displayName": "GCX",
+    "aliases": [
+      "GCX Israel",
+      "Global Courier Express"
+    ],
+    "countries": [
+      "IL"
+    ],
+    "color": "#ed1c24",
+    "selectable": true,
+    "timezone": "Asia/Jerusalem",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://gcx.co.il/%d7%9e%d7%a2%d7%a7%d7%91-%d7%9e%d7%a9%d7%9c%d7%95%d7%97%d7%99%d7%9d/"
+  },
+  "onex": {
+    "displayName": "Onex",
+    "aliases": [
+      "ONEX LTD",
+      "Onex Armenia",
+      "Onex.am"
+    ],
+    "countries": [
+      "AM",
+      "GE"
+    ],
+    "color": "#5dba2f",
+    "selectable": true,
+    "timezone": "Asia/Yerevan",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://onex.am/en/onextrack?track={trackingNumber}",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://onex.am/en/onextrack"
+  },
+  "rhenus-de": {
+    "displayName": "Rhenus Germany",
+    "aliases": [
+      "Rhenus Home Delivery GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#00499a",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://rhenusmydelivery.com/de"
+  },
+  "super-parcel-track": {
+    "displayName": "Super Parcel Track",
+    "aliases": [
+      "Super Parcel",
+      "SP Track"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#d71920",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track-sp.com/tracking/detail"
+  },
+  "tusou": {
+    "displayName": "Tusou",
+    "aliases": [
+      "图搜网络科技",
+      "合肥图搜网络科技有限公司",
+      "Tusou Keji"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#003e8d",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tusou.kingtrans.net/WebTrack?action=list&language=en&istrack=false&bills={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tusou.kingtrans.net"
+        ],
+        "pathPattern": "^/WebTrack$",
+        "params": [
+          "bills"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tusou.kingtrans.net/tracken.jsp"
+  },
+  "ural-express": {
+    "displayName": "Ural Express",
+    "aliases": [
+      "URAL",
+      "乌拉尔国际物流",
+      "Ural优拉国际物流",
+      "优拉国际物流"
+    ],
+    "countries": [
+      "CN",
+      "RU",
+      "IL"
+    ],
+    "color": "#22a2c3",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tmsplus.ilinexpress.com/#/track"
+  },
+  "wise-express": {
+    "displayName": "Wise Express",
+    "aliases": [
+      "万色速递",
+      "上海万色速递有限公司",
+      "Shanghai Wise Express"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0662a0",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.shwise.cn/home/"
   }
 } as const;
 
@@ -37683,7 +37842,14 @@ export const CARRIER_IDS = [
   "rhenus-it",
   "shipter",
   "tonda-global",
-  "transnatur"
+  "transnatur",
+  "gcx",
+  "onex",
+  "rhenus-de",
+  "super-parcel-track",
+  "tusou",
+  "ural-express",
+  "wise-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -987,6 +987,13 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let shipter = CarrierID(rawValue: "shipter")
     static let tondaGlobal = CarrierID(rawValue: "tonda-global")
     static let transnatur = CarrierID(rawValue: "transnatur")
+    static let gcx = CarrierID(rawValue: "gcx")
+    static let onex = CarrierID(rawValue: "onex")
+    static let rhenusDe = CarrierID(rawValue: "rhenus-de")
+    static let superParcelTrack = CarrierID(rawValue: "super-parcel-track")
+    static let tusou = CarrierID(rawValue: "tusou")
+    static let uralExpress = CarrierID(rawValue: "ural-express")
+    static let wiseExpress = CarrierID(rawValue: "wise-express")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -1927,6 +1934,13 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .shipter,
         .tondaGlobal,
         .transnatur,
+        .gcx,
+        .onex,
+        .rhenusDe,
+        .superParcelTrack,
+        .tusou,
+        .uralExpress,
+        .wiseExpress,
     ]
 
     init(from decoder: Decoder) throws {

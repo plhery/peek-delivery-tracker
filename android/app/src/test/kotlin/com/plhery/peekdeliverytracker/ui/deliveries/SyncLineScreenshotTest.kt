@@ -24,8 +24,8 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The parcel page's sync line on the page's paper, on the iPhone the captures were taken on, at the captures' moment:
- * with its refresh, light and dark; archived, with neither the next check nor the refresh; and checking, the arrow a
- * quarter turned, light and dark, or half faded under Reduce Motion.
+ * with its refresh, light and dark, and in French at an accessibility size; archived, with neither the next check nor
+ * the refresh; and checking, the arrow a quarter turned, light and dark, or half faded under Reduce Motion.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -42,8 +42,9 @@ class SyncLineScreenshotTest {
     }
 
     /**
-     * `parcel`'s sync line on the page's paper, 18 in from its sides, with its refresh unless `refreshes` is false,
-     * checking while `working`, captured `after` milliseconds into it.
+     * `parcel`'s sync line on the page's paper, 18 in from its sides, in `language` with the text `fontScale` times the
+     * normal, with its refresh unless `refreshes` is false, checking while `working`, captured `after` milliseconds
+     * into it.
      */
     private fun shot(
         name: String,
@@ -52,11 +53,13 @@ class SyncLineScreenshotTest {
         refreshes: Boolean = true,
         working: Boolean = false,
         reduceMotion: Boolean = false,
+        language: AppLanguage = AppLanguage.En,
+        fontScale: Float = 1f,
         after: Long = 0,
     ) {
         compose.mainClock.autoAdvance = false
         compose.setContent {
-            CardHost(dark = dark, reduceMotion = reduceMotion) {
+            CardHost(language = language, dark = dark, fontScale = fontScale, reduceMotion = reduceMotion) {
                 Box(Modifier.background(PeekTheme.colors.paper).padding(18.dp)) {
                     val ink = PeekTheme.colors.resolve(DemoCards.identities.of(parcel.carrier, AppLanguage.En).ink)
                     SyncLine(parcel, ink, working = working, onRefresh = if (refreshes) ({}) else null)
@@ -86,6 +89,10 @@ class SyncLineScreenshotTest {
 
     @Test
     fun checkingInDark() = shot("sync_checking_dark", dark = true, working = true, after = 256)
+
+    /** In French at the first accessibility size: the lines wrap beside the refresh, which keeps its 26. */
+    @Test
+    fun inFrenchAtAnAccessibilitySize() = shot("sync_french_accessibility_light", language = AppLanguage.Fr, fontScale = 1.5f)
 
     /** Checking under Reduce Motion, half faded. */
     @Test

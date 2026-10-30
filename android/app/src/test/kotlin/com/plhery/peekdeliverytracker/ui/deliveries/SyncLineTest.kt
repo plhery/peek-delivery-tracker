@@ -1,9 +1,15 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsNode
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -11,6 +17,7 @@ import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.click
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
@@ -19,6 +26,8 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -52,8 +61,9 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The parcel page's sync line (`syncStatus`, B-S08): when the next check comes, when the carrier was last asked and
  * when it last said something, each shown and hidden by its conditions; its refresh, only where there is a carrier to
- * ask again, which checks the parcel one change at a time with the page's other changes and says why it failed; and
- * its arrow, which turns a turn a second only while it checks, or pulses under Reduce Motion (B-AN08).
+ * ask again, which checks the parcel one change at a time with the page's other changes and says why it failed, and
+ * keeps its 26 where the lines wrap; and its arrow, which turns a turn a second only while it checks, or pulses under
+ * Reduce Motion (B-AN08).
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -233,6 +243,47 @@ class SyncLineTest {
         assertEquals(emptyList<Any>(), source.checked)
         compose.onNodeWithTag(PAGE_REFRESH).assertIsEnabled()
     }
+
+    /**
+     * Birthday gift's sync line in French, `width` wide, with the text `fontScale` times the normal: the refresh is
+     * whole, 26 square, at the line's end and 7 after its widest line, and a line wraps in what is left.
+     */
+    private fun assertWrapsBesideTheRefresh(width: Dp, fontScale: Float) {
+        val parcel = DemoCards.parcel("Birthday gift").nextCheck()
+        compose.setContent {
+            CardHost(language = AppLanguage.Fr, fontScale = fontScale) {
+                Box(Modifier.width(width)) {
+                    SyncLine(parcel, Color.Black, working = false, onRefresh = {}, Modifier.testTag(PAGE_SYNC_LINE))
+                }
+            }
+        }
+        compose.waitForIdle()
+        val refresh = compose.onNodeWithTag(PAGE_REFRESH).getBoundsInRoot()
+        val line = compose.onNodeWithTag(PAGE_SYNC_LINE).getBoundsInRoot()
+        val texts = compose.onAllNodes(hasAnyAncestor(hasTestTag(PAGE_SYNC_LINE)) and hasText("", substring = true), useUnmergedTree = true)
+            .fetchSemanticsNodes()
+        assertEquals(3, texts.size)
+        assertEquals(26f, (refresh.right - refresh.left).value, 0.5f)
+        assertEquals(26f, (refresh.bottom - refresh.top).value, 0.5f)
+        // CardHost stands its content 16 in.
+        assertTrue("Refresh $refresh in $line", refresh.right <= line.right + 0.5.dp && line.right <= 16.dp + width + 0.5.dp)
+        val widest = with(compose.density) { texts.maxOf { it.boundsInRoot.right }.toDp() }
+        assertEquals(7f, (refresh.left - widest).value, 0.5f)
+        val lines = texts.map { node ->
+            val layouts = mutableListOf<TextLayoutResult>()
+            node.config[SemanticsActions.GetTextLayoutResult].action?.invoke(layouts)
+            layouts.single().lineCount
+        }
+        assertTrue("Lines $lines", lines.any { it > 1 })
+    }
+
+    /** At the largest size short of the accessibility sizes, as narrow as the page's two columns stand then. */
+    @Test
+    fun inFrenchInTheNarrowColumnTheLinesWrapBesideTheWholeRefresh() = assertWrapsBesideTheRefresh(340.dp, fontScale = 1.3f)
+
+    /** At the first accessibility size, in a column as narrow as the two stand then. */
+    @Test
+    fun atAnAccessibilitySizeTheLinesWrapBesideTheWholeRefresh() = assertWrapsBesideTheRefresh(420.dp, fontScale = 1.5f)
 
     @Test
     fun theRefreshIs26SquareAndTakesTouchesAroundIt() {

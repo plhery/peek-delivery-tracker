@@ -56,7 +56,7 @@ import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
 import { collectedPickupPoint } from './collectedPickupPoint';
-import { datedAfterCheck, withoutFutureSummary } from './futureScans';
+import { datedAfterCheck, scanKey, storedAheadOfCheck, withoutFutureSummary } from './futureScans';
 import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, hasUnresolvedDirectCurrent, localClockCarrier } from './directLocalHistory';
 import { carrierMovedAt, eventStage, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
 import { DIRECT_HISTORY, directHistory } from './providerCopies';
@@ -1884,7 +1884,7 @@ export class TrackingSyncService {
 
       ({ result, sourceCarrierId } = fetched);
       // A scan dated hours after the check is stored and flagged, but sets neither status line nor stage.
-      result = withoutFutureSummary(result!, sourceCarrierId!, now);
+      result = withoutFutureSummary(result!, sourceCarrierId!, now, storedEventIdentities(parcel));
       const { swissPostReady, handoffFallbackErrorType } = fetched;
       audit.record('fetch', 'succeeded', performance.now() - fetchStartedAt, {
         source_carrier: sourceCarrierId,
@@ -1903,7 +1903,10 @@ export class TrackingSyncService {
         const normalizedReportedStage = resultStage(result!);
         // Scans of one instant read by delivery progress, then in the carrier's order.
         const tie = (event: JsonObject) => tieOrder(isRecord(event.raw_data) ? event.raw_data.tie_order : undefined);
-        const newestEvents = normalizedEvents.filter((event) => !datedAfterCheck(event.occurred_at, 'UTC', now)).sort(
+        // A scan dated hours after the check that returned it sets no stage, then or later.
+        const storedAhead = storedAheadOfCheck(storedEventIdentities(parcel));
+        const newestEvents = normalizedEvents.filter((event) => !datedAfterCheck(event.occurred_at, 'UTC', now)
+          && !storedAhead.has(scanKey(isRecord(event.raw_data) ? event.raw_data.time : undefined, event.description))).sort(
           (left, right) => String(right.occurred_at).localeCompare(String(left.occurred_at))
             || EVENT_STAGE_ORDER.indexOf(String(right.stage)) - EVENT_STAGE_ORDER.indexOf(String(left.stage))
             || tie(right) - tie(left),

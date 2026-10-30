@@ -23,6 +23,15 @@ describe('scans dated after the check', () => {
     const current = { status: 'in_transit' as const, current_stage: 'in_transit', last_status_text: deposit.description,
       last_update: deposit.time, events: [notice, deposit] };
     expect(withoutFutureSummary(current, 'swiss-post', now)).toBe(current);
+    // Once its time has passed, the row stored hours before it still keeps the notice out.
+    const later = new Date('2026-10-30T20:00:00Z');
+    const answer = { status: 'pending' as const, current_stage: 'accepted', last_status_text: notice.description,
+      last_update: notice.time, events: [notice, deposit] };
+    expect(withoutFutureSummary(answer, 'swiss-post', later)).toBe(answer);
+    expect(withoutFutureSummary(answer, 'swiss-post', later, [{ time: notice.time, description: notice.description,
+      occurred_at: '2026-10-30T18:16:41Z', created_at: '2026-10-30T13:21:00Z' }])).toMatchObject({
+      current_stage: 'in_transit', last_status_text: deposit.description,
+    });
     // With no scan before the check, the result stays as it is.
     const onlyAhead = { status: 'pending' as const, last_status_text: notice.description, last_update: notice.time, events: [notice] };
     expect(withoutFutureSummary(onlyAhead, 'swiss-post', now)).toBe(onlyAhead);

@@ -14,9 +14,9 @@ Quick Rabbit calls it the tracking code (`código de seguimiento`). It comes in 
 
 | Number | What it is |
 | --- | --- |
-| `PKG00020260101123456789` | `PKG`, three digits, the date the parcel was registered (year, month, day) and nine more digits: the usual Quick Rabbit code. |
-| `PKG000260101ES1234567890123A` | `PKG`, nine digits, `ES`, 13 digits and a letter: a longer, rarer layout. |
-| `AB1234567890123456` | Two letters and 16 digits: the shipper's reference, shown as `Referencia` on Quick Rabbit's page. |
+| `PKG00020260101123456789` | `PKG`, three digits, an eight-digit date (year, month, day) and nine more digits: the usual Quick Rabbit code. |
+| `PKG000260101ES1234567890123A` | `PKG`, nine digits, `ES`, 13 digits and a letter: a longer layout. |
+| `WT0000000000000000` | `WT` and 16 digits: a shipper's reference, shown as `Referencia` on Quick Rabbit's page. |
 
 A code the tracker doesn't know gets `Paquete no encontrado` ("Package not found"): check it against the shop's email. No code at all? Ask the shop, or see [how to find a tracking number](guide:find-tracking-number).
 
@@ -80,9 +80,9 @@ The contact page's form is for businesses asking for a quote.
 
 ## Track a Quick Rabbit parcel with Peek
 
-[Peek](/) recognises a Quick Rabbit number by its shape: `PKG`, three digits, the eight-digit date and nine digits, in capitals or not, spaces allowed. The longer `PKG…ES…` code isn't enough on its own: Peek asks Quick Rabbit and shows "Quick Rabbit has this parcel." when it knows the code; if it doesn't, Peek asks tracking services too and keeps checking after you add the parcel. The shipper's reference has no shape: paste it all the same (Peek follows more than 3,500 carriers), press "Change" and pick Quick Rabbit. Peek then shows the `PKG` code under "Quick Rabbit tracks this as". A Quick Rabbit tracking link with `ref=` works too.
+[Peek](/) recognises a Quick Rabbit number by its shape: `PKG`, three digits, the eight-digit date and nine digits, in capitals or not, spaces allowed. The longer `PKG…ES…` code or a `WT` reference of 16 digits isn't enough on its own: Peek asks Quick Rabbit and shows "Quick Rabbit has this parcel." when it knows the number; if it doesn't, Peek asks tracking services too and keeps checking after you add the parcel. A reference of another shape: paste it all the same (Peek follows more than 3,500 carriers), press "Change" and pick Quick Rabbit. For a reference, Peek then shows the `PKG` code under "Quick Rabbit tracks this as". A Quick Rabbit tracking link with `ref=` works too.
 
-Peek reads Quick Rabbit's own tracker: the status, the history in the English lines above and the delivery time, read on Madrid time and shown in your device's time zone. Quick Rabbit names no places, so there's no map. Peek leaves out the estimated delivery date (Quick Rabbit keeps it a few days ahead, even for parcels returned long ago), the destination city, the shipper's reference and the courier's coordinates, which can be your door. There's no proof of delivery and no locker code, and Peek doesn't hand the parcel on to Citibox: the locker steps are Quick Rabbit's own lines.
+Peek reads Quick Rabbit's own tracker: the status, the history in the English lines above and the delivery time, read on Madrid time and shown in your device's time zone. Quick Rabbit names no places, so there's no map. Peek leaves out the estimated delivery date, the destination city, the shipper's reference and the courier's coordinates, which can be your door. There's no proof of delivery and no locker code, and Peek doesn't hand the parcel on to Citibox: the locker steps are Quick Rabbit's own lines.
 
 Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of every scan, important steps only or "Delivery only". It can't change the delivery, open a claim, or contact Quick Rabbit or the shop for you.
 

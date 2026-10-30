@@ -24,11 +24,11 @@ Lower case and spaces don't matter when you paste it into Peek.
 
 **A shop's reference.** Meiteshun's tracker also finds an order by the seller's own reference, typed exactly as given, dashes included, and then shows the AMTS number.
 
-**A link with numbers instead of a name.** Meiteshun's tracker runs on a bare server address over plain HTTP, not on a web domain; its login page carries the name 美特顺物流. A link to it has that numeric address where a site's name would be, and holds `trackIndex.htm`, `documentCode=` and your number or reference: you can paste it into Peek as it is.
+**A link with numbers instead of a name.** Meiteshun's tracker runs on a bare server address over plain HTTP, not on a web domain. A link to it has that numeric address where a site's name would be, and holds `trackIndex.htm`, `documentCode=` and your number or reference: you can paste it into Peek as it is.
 
 ## Meiteshun tracking statuses explained
 
-Every Meiteshun order follows the same script, whatever the destination, and most of its steps are written in advance (below). The wordings, in the order the script runs:
+Every Meiteshun order follows the same script, and most of its steps are written in advance (below). The wordings, in the order the script runs:
 
 | Meiteshun says | What it means for you |
 | --- | --- |
@@ -37,7 +37,7 @@ Every Meiteshun order follows the same script, whatever the destination, and mos
 | `item outbound in sorting center` | Leaving that sorting centre. |
 | `Arriving at the terminal` | At an airport terminal, with the place `Hong Kong`. |
 | `Leaving the terminal, the airline will take off` | The flight leaves Hong Kong. |
-| `Arriving at the destination country` | Landed in your country, shown by its two-letter code (`US`, `GB`…). |
+| `Arriving at the destination country` | Landed in your country, shown by its two-letter code (`US` for the United States). |
 | `Customs clearanceisin progress` | Import customs in your country. The missing spaces are Meiteshun's. |
 | `Customs clearance completed` | Through customs and on its way again. |
 | `Arriving at the mail processing center` | At a processing centre in your country. |
@@ -45,13 +45,13 @@ Every Meiteshun order follows the same script, whatever the destination, and mos
 | `package is on the way` | The step before the delivery. It doesn't say the parcel is out for delivery. |
 | `Delivered` | The script's last step (below). |
 
-A step's place comes before a comma at its start, and steps in your country add your town or region and postcode after the wording. Some orders' steps carry no place at all. Every time is on Beijing's clock, even for steps in your country: a step at 21:00 on Meiteshun's tracker is the afternoon in London and the morning in New York.
+A step's place comes before a comma at its start, and steps in your country add your town or region and postcode after the wording. Every time is on Beijing's clock, even for steps in your country: a step at 21:00 on Meiteshun's tracker is the afternoon in London and the morning in New York.
 
-**Steps written in advance.** Meiteshun runs its tracking on its own tracker on Hualei (华磊), a forwarder platform that other Chinese forwarders such as [Pengyou](carrier:pengyou) use too. On Meiteshun's, all of an order's steps are written when the order is created, each dated ahead, from the collection to `Delivered`. They're a forecast, not scans of your parcel: they say where the parcel was planned to be on a date. A buyer reported a parcel the script showed as delivered that never came. Tracking services that copy Meiteshun's record show the same steps.
+**Steps written in advance.** Meiteshun runs its tracking on its own tracker on Hualei (华磊), a forwarder platform that other Chinese forwarders such as [Pengyou](carrier:pengyou) use too. On Meiteshun's, all of an order's steps are written when the order is created, each dated ahead, from the collection to `Delivered`. They're a forecast, not scans of your parcel: they say where the parcel was planned to be on a date. Tracking services that copy Meiteshun's record show the same steps.
 
 ## Who delivers Meiteshun parcels
 
-Meiteshun's records don't name the company that delivers in your country, and its steps there don't name one either. The service name on its records is MTS全球小包 ("MTS global small parcel").
+Meiteshun's steps in your country don't name the company that delivers there. The service name on its records is MTS全球小包 ("MTS global small parcel").
 
 Peek found no delivery times from Meiteshun, and no rules for delivery attempts, pickup points or how long a parcel is held. Ask the seller which company delivers your order and for its number: that company's tracking and rules are the ones that count. If you're asked for import charges, see [parcels held at customs](guide:customs).
 
@@ -77,11 +77,11 @@ As of 28 October 2026, Peek found no contact details for Meiteshun on a page it 
 
 Peek reads Meiteshun's own tracker and shows the status, each scan with its place, the service name and the destination country. Scans show as Meiteshun writes them: `Customs clearanceisin progress` counts as customs, and `package is on the way` as in transit, not out for delivery. Peek keeps your town from the steps in your country and leaves out the postcode. Scan times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, weight, fees, signature and proof of delivery Meiteshun's record can hold, and shows no expected delivery date: Meiteshun gives none.
 
-Peek holds back a step written more than twelve hours before the time it carries, and any step dated after the moment it checks, on Beijing time. It goes by the steps it keeps, not by the record's summary status. When an order's whole script was written at its creation, Peek keeps only the steps dated before that moment or up to twelve hours after it, so the `Delivered` written then is held back. An order whose steps are all held back has no tracking history in Peek yet, and Peek then sets aside the copies tracking services make of those steps too.
+Peek holds back a step written more than twelve hours before the time it carries, and any step dated after the moment it checks, on Beijing time. It goes by the steps it keeps, not by the record's summary status. When an order's whole script was written at its creation, Peek keeps only the steps dated before that moment or up to twelve hours after it, so the `Delivered` written then is held back. An order whose steps are all held back has no tracking history in Peek yet and shows "Waiting for the carrier"; Peek then sets aside the copies tracking services make of those steps too.
 
-Meiteshun's records name no delivering company, so Peek follows the parcel on Meiteshun's tracker only. If the seller gives you the local carrier's number, add it as a parcel of its own.
+Peek follows the parcel on Meiteshun's tracker. The one hand-over Peek can take from Meiteshun's record is to [Swiss Post](carrier:swiss-post), when the record names a Swiss Post line and number for a parcel to Switzerland or Liechtenstein. With any other delivering number from the seller, add it as a parcel of its own.
 
-Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact Meiteshun or the seller for you.
+Peek checks every 10 minutes by day and every hour or two overnight, and hourly once Meiteshun goes quiet (12 hours at its first lines, or two days with nothing new), which an order whose whole script was written at its creation soon does. It can notify you of every scan, important steps only or "Delivery only", and can't contact Meiteshun or the seller for you.
 
 ## Questions about Meiteshun tracking
 
@@ -99,12 +99,12 @@ Most likely because Meiteshun's system writes every step of an order, delivery i
 
 ### Who delivers Meiteshun parcels in my country?
 
-Meiteshun's records don't say: they name no delivery company. Ask the seller which company delivers your order and for its tracking number.
+Meiteshun's steps don't say: none names a delivery company. Ask the seller which company delivers your order and for its tracking number.
 
 ### Who do I contact about a missing Meiteshun parcel?
 
 The seller you ordered from: it booked the parcel with Meiteshun. Peek found no contact details for Meiteshun on a page it could read.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, Hualei platform, AMTS number shape, the tracker and its links, search by reference, the script and its wordings, places and Beijing clock, steps written in advance and the parcel shown delivered that never came, the answer for an unknown number, service name, no delivery company named, what Peek shows, holds back and leaves out
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, Hualei platform, AMTS number shape, the tracker and its links, search by reference, the script and its wordings, places and Beijing clock, steps written in advance, the answer for an unknown number, service name, no delivery company in the steps, the Swiss Post hand-over, what Peek shows, holds back and leaves out
 :::

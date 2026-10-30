@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-10-28
 ---
 
-Speedaf Express (速达非) is a Chinese-owned courier network, founded in 2019, that flies parcels from its warehouses in China to Africa, the Middle East, Pakistan and a few European countries, and delivers them itself. Track a parcel under "Track" on [speedaf.com](https://www.speedaf.com/cn-en/send-parcel) or in the box above. The number is in the shop's shipping details: AliExpress shows it for the parcels Speedaf delivers.
+Speedaf Express (速达非) is a courier network, founded in 2019, that flies parcels from its warehouses in China to Africa, the Middle East, Pakistan and a few European countries, and delivers them itself. Track a parcel under "Track" on [speedaf.com](https://www.speedaf.com/cn-en/send-parcel) or in the box above. The number is in the shop's shipping details.
 
 ## Speedaf tracking number: what it looks like
 
@@ -14,10 +14,10 @@ A Speedaf number starts with the destination's country code: NG for Nigeria, KE 
 
 | Number | What it is |
 | --- | --- |
-| `NG000000000R` | Country code, 9 digits and a letter, usually R, sometimes E: the one AliExpress shows. |
+| `NG000000000R` | Country code, 9 digits and a letter, usually R, sometimes E. |
 | `KE000000000000` | Country code and 12 digits. |
 | `PK000000000000T` | The same with a T at the end. |
-| `LP00000000000000` | Not Speedaf: a [Cainiao](carrier:cainiao) reference from AliExpress. Speedaf's tracker doesn't know these. |
+| `LP00000000000000` | Not Speedaf: a [Cainiao](carrier:cainiao) reference from AliExpress. |
 
 Speedaf's tracker takes up to 20 numbers at once, one per line. Type them in capitals: it reads lower case as unknown. No number at all? See [how to find a tracking number](guide:find-tracking-number) or [AliExpress orders](guide:aliexpress-orders).
 
@@ -102,9 +102,9 @@ Each site also has a "Customer Support" form.
 
 ## Track a Speedaf parcel with Peek
 
-[Peek](/) recognises a Speedaf number by its shape when it starts with NG, GH, KE, UG, ZM, ZA, EG, MA, SA, AE, PK, KZ, MU or MV, then 9 digits and R or E. With 12 digits instead, the shape isn't enough on its own: Peek asks Speedaf, and you'll see "Speedaf has this parcel." or "Not found at Speedaf yet". Peek knows no number shape for Ireland, Switzerland, Albania, Montenegro or Serbia: for those, and any number that fits neither shape, pick "Speedaf" with "Change". A speedaf.com tracking link with `tradeNo=` is read as Speedaf whatever number it holds. Peek sends the number in capitals, so lower case is fine.
+[Peek](/) recognises a Speedaf number by its shape when it starts with NG, GH, KE, UG, ZM, ZA, EG, MA, SA, AE, PK, KZ, MU or MV, then 9 digits and R or E. With 12 digits instead, after one of those codes or IE, the shape isn't enough on its own: Peek asks Speedaf, and you'll see "Checking tracking services…", then "Speedaf has this parcel." if Speedaf knows the number. Peek knows no number shape for Switzerland, Albania, Montenegro or Serbia: for those, and any number that fits neither shape, pick "Speedaf" with "Change". A speedaf.com tracking link with `tradeNo=` is read as Speedaf whatever number it holds. Peek sends the number in capitals, so lower case is fine.
 
-Peek reads Speedaf's own tracking: the status, the history, the destination country and the delivery time. Each scan carries its site's clock, China's in the warehouses, then your country's, and Peek shows it in your device's time zone. Speedaf names its sites only inside the lines, so there's no map, and it gives no expected delivery date. If Speedaf knows the number but shows no scans, as with some older parcels, Peek shows "Waiting for the carrier" and keeps checking.
+Peek reads Speedaf's own tracking: the status, the history, the destination country and the delivery time. Each scan carries its site's clock, China's in the warehouses, then your country's, and Peek shows it in your device's time zone. Speedaf names its sites only inside the lines, so there's no map, and it gives no expected delivery date. If Speedaf knows the number but shows no scans, as with some older parcels, Peek shows "Waiting for the carrier", or "Waiting for Speedaf’s first scan" for a 12-digit number that isn't filed under Speedaf, and keeps checking.
 
 Speedaf's lines appear as written, in English or else Chinese, minus the courier's, clerk's and signer's names and the courier's phone. Peek also leaves out the proof of delivery, the duty payment link and the box count, and follows only the number you added, not a waybill's other boxes. Speedaf delivers itself, so there's no second carrier.
 

@@ -6,12 +6,15 @@ import android.view.HapticFeedbackConstants
 import android.view.KeyEvent
 import android.view.View
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
@@ -40,6 +43,7 @@ import java.util.UUID
 import kotlin.math.abs
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -250,5 +254,28 @@ class PeekRootTest {
         compose.onNodeWithTag(PARCEL_PAGE).assertDoesNotExist()
         compose.onNodeWithTag(PARCEL_LIST).assertExists()
         assertFalse(back.hasEnabledCallbacks())
+    }
+
+    @Test
+    fun aLinkNoAppOpensDoesNothingAndOneAnAppOpensGoesToIt() {
+        lateinit var links: UriHandler
+        compose.setContent {
+            RootHost(deliveries = {
+                val current = LocalUriHandler.current
+                SideEffect { links = current }
+            })
+        }
+        compose.waitForIdle()
+        val application = shadowOf(compose.activity.application)
+        val started = shadowOf(compose.activity)
+
+        // No browser on the phone: Compose's own handler would throw, and the app close.
+        application.checkActivities(true)
+        compose.runOnUiThread { links.openUri("https://example.com/track") }
+        assertNull(started.nextStartedActivity)
+
+        application.checkActivities(false)
+        compose.runOnUiThread { links.openUri("https://example.com/track") }
+        assertEquals("https://example.com/track", started.nextStartedActivity.dataString)
     }
 }

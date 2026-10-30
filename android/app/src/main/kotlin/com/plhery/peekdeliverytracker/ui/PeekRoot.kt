@@ -72,15 +72,17 @@ internal fun PeekRoot(
         inbox?.parcel?.filterNotNull()?.collect { tab = PeekTab.Deliveries.ordinal }
     }
     ProvideLocalizer(localizer) {
-        when (state) {
-            AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
-            AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
-            AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
-                val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
-                TabShell(selection = tab, onSelect = { tab = it }, labels = labels, onView = onView) { shown ->
-                    when (shown) {
-                        PeekTab.Deliveries -> deliveries()
-                        PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+        ProvideLinks {
+            when (state) {
+                AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
+                AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
+                AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
+                    val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
+                    TabShell(selection = tab, onSelect = { tab = it }, labels = labels, onView = onView) { shown ->
+                        when (shown) {
+                            PeekTab.Deliveries -> deliveries()
+                            PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                        }
                     }
                 }
             }

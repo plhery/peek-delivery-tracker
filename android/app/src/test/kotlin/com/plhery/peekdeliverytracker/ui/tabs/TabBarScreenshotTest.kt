@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.tabs
 
 import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -16,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.junit4.v2.createComposeRule
@@ -112,7 +112,7 @@ class TabBarScreenshotTest {
     fun foldable() {
         var activity: Activity? = null
         compose.setContent {
-            activity = LocalContext.current as Activity
+            activity = LocalActivity.current
             RootHost(deliveries = { TopPage(700) })
         }
         compose.waitForIdle()

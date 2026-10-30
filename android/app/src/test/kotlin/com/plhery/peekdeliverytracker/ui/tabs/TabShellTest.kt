@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.view.KeyEvent
 import android.view.View
 import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.ime
@@ -14,7 +15,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
@@ -338,7 +338,7 @@ class TabShellTest {
         var activity by mutableStateOf<Activity?>(null)
         compose.setContent {
             view = LocalView.current
-            activity = LocalContext.current as Activity
+            activity = LocalActivity.current
             RootHost()
         }
         compose.waitForIdle()
@@ -358,7 +358,7 @@ class TabShellTest {
         var activity by mutableStateOf<Activity?>(null)
         compose.setContent {
             view = LocalView.current
-            activity = LocalContext.current as Activity
+            activity = LocalActivity.current
             RootHost()
         }
         compose.waitForIdle()
@@ -378,7 +378,7 @@ class TabShellTest {
         var activity by mutableStateOf<Activity?>(null)
         val recreation = Recreation(compose)
         recreation.setContent {
-            activity = LocalContext.current as Activity
+            activity = LocalActivity.current
             RootHost()
         }
         compose.waitForIdle()

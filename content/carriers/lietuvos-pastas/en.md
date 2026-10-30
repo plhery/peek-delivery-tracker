@@ -10,19 +10,19 @@ Lietuvos paštas (Lithuania Post) is Lithuania's national post, and LP Express i
 
 ## Lithuania Post tracking number
 
-A Lithuania Post number has 13 characters in the [international postal format](guide:tracking-number-formats): two letters, nine digits, then `LT`. LP Express parcels start with `CC`, `CH` or `HC`; the tracking page's own example is `CC123456789LT`.
+A Lithuania Post number has 13 characters in the [international postal format](guide:tracking-number-formats): two letters, nine digits, then `LT`. Lietuvos paštas's rules name two LP Express prefixes, `CC` and `CH`.
 
 | Shape (invented) | What it is |
 | --- | --- |
 | `RR000000005LT` | A postal item posted in Lithuania. |
-| `CC123456784LT` | An LP Express parcel, such as one going to a parcel locker. |
-| `HC000000000LT` | Another LP Express parcel shape. |
+| `CC000000005LT` | An LP Express parcel going to a parcel locker. |
+| `CH000000005LT` | An LP Express parcel a courier brings to an address in Lithuania or abroad. |
 
 When a parcel reaches a locker, Lietuvos paštas sends an SMS and/or email with the number, the locker's address and a PIN.
 
 Genuine messages come from the sender name `LPASTAS` or `LP_EXPRESS`, never from a phone number.
 
-Other country letters mean another post: `…LV` is [Latvijas Pasts](carrier:latvijas-pasts), `…EE` is [Omniva](carrier:omniva). An item from abroad keeps the number its own post gave it. [Venipak](carrier:venipak), another courier in Lithuania, uses a different shape (`V12345E1234567`). Lost it? See [how to find a tracking number](guide:find-tracking-number).
+Other country letters mean another post: `…LV` is [Latvijas Pasts](carrier:latvijas-pasts), `…EE` is [Omniva](carrier:omniva). An item from abroad keeps the number its own post gave it. [Venipak](carrier:venipak), another courier in Lithuania, uses a different shape (`V00000E0000000`). Lost it? See [how to find a tracking number](guide:find-tracking-number).
 
 ## What Lithuania Post tracking statuses mean
 
@@ -53,9 +53,9 @@ If the page says `Your parcel could not be found`, check the number; `Without tr
 
 **Courier to your door.** The courier needn't wait more than 10 minutes; you sign on the courier's device. If nobody is found, you're told by SMS or email and the parcel is kept free at the logistics centre for 7 calendar days from the day it first went out for delivery.
 
-**Post office items.** Registered items are brought to your address once; if you're out, a notice comes by letterbox, email or SMS. Bring it with ID. Parcels and letters wait 30 days from the day after the notice, unless the sender's contract says otherwise.
+**Post office items.** Registered items are brought to your address once; if you're out, a notice comes by letterbox, email or SMS. Bring it with ID. Parcels and letters wait 30 days from the day after the notice under the TAI-16 rules; the post.lt FAQ says one calendar month, unless the sender's contract says otherwise.
 
-**From outside the EU.** Lietuvos paštas asks you to pay import charges in LP EXPRESS self-service within 7 calendar days of the payment notice; only then is the parcel sent on to a post office or locker, with nothing left to pay there. Its own fee for an item worth up to 150 € is 6.99 € (2 € when VAT was paid at checkout). See [parcels held at customs](guide:customs).
+**From outside the EU.** Lietuvos paštas asks you to pay import charges in LP EXPRESS self-service within 7 calendar days of the payment notice, or the parcel goes back to the sender. Once paid, it is sent on to a post office or locker, with nothing left to pay there. To declare a parcel for you, Lietuvos paštas charges €6.99 up to €150 and €30 above that or for a standard declaration, plus 21% import VAT on the goods and shipping. If you declare it yourself, or the shop collected the VAT at checkout (IOSS), its fee is €2. Since 1 July 2026, goods bought online from outside the EU carry a €3 EU customs duty per item in parcels worth up to €150; from 1 November 2026, they also carry a €2 Union handling fee per item, whatever their value. An item is the goods in a parcel that share a tariff classification, description and, where required, origin. See [parcels held at customs](guide:customs).
 
 ## Lithuania Post parcel late, lost or returned
 
@@ -71,7 +71,7 @@ The channels as post.lt listed them on 13 October 2026 (the contact pages are in
 
 - **Phone from Lithuania:** 1842 or +370 700 554 00, at your operator's rate plus a connection fee.
 - **Phone from abroad:** +370 5 233 3060.
-- **Hours:** working days 8:00 to 19:00, Saturdays 9:00 to 16:00.
+- **Hours:** working days 8:00 to 19:00, Saturdays 9:00 to 16:00, Lithuanian time.
 - **Email:** info@post.lt.
 - **Web form:** "Rašykite mums" (write to us) on post.lt, with tabs for claims and international searches. The site also has a chat consultant.
 
@@ -79,11 +79,11 @@ The channels as post.lt listed them on 13 October 2026 (the contact pages are in
 
 ## Tracking Lietuvos paštas with Peek
 
-For a postal number ending `LT` with a valid check digit, [Peek](/) asks Lietuvos paštas and [Chronopost](carrier:chronopost) at once and shows "Lietuvos paštas has this parcel." when it knows the number. If not yet, you're told it hasn't been found yet and that Peek will keep checking after you add it. Numbers starting `CC`, `CH` or `HC` and ending `LT` are asked of the same two, check digit or not. Links from lpexpress.lt and post.lt tracking work too.
+[Peek](/) recognises a number ending `LT` with a valid check digit by its shape if it starts with `C`, `E` or `HC`, and shows Lietuvos paštas with "Detected carrier". Most `CC`, `CH` and `HC` numbers fail the check digit, though: Peek then says "This number’s check digit doesn’t add up.", and "Track it as typed" asks Lietuvos paštas only. For any other postal number ending `LT` with a valid check digit, Peek asks Lietuvos paštas and [Chronopost](carrier:chronopost) at once and shows "Lietuvos paštas has this parcel." when it knows the number. If not yet, you're told it hasn't been found yet and that Peek will keep checking after you add it. Links from lpexpress.lt and post.lt tracking work too.
 
 An item from abroad with an international-format number is first followed at the sending country's post. When that post says the item is going to Lithuania, or names no country and you're in Lithuania, Peek can also ask Lietuvos paštas; once Lietuvos paštas shows new steps, Peek follows the parcel there and keeps the earlier ones. Otherwise pick "Lietuvos paštas" with "Change".
 
-Peek reads the service behind lpexpress.lt/track in English, checks every 10 minutes by day (every 2 once the parcel is out for delivery) and every hour or two overnight, and can notify you when the status changes. It shows each step on a map with its town, sorting centre or country, customs steps, the time it was delivered and the locker or post office where the parcel waits, with its town (not the street or postcode). Lithuanian steps are read on Vilnius time and shown in your device's time zone. There's no expected arrival day and no weight. Statuses keep Lietuvos paštas's English wording; a return shows as a problem.
+Peek reads the service behind lpexpress.lt/track in English, checks every 10 minutes by day (every 2 once the parcel is out for delivery) and every hour or two overnight, and can notify you when the status changes. It shows each step on a map with its town, sorting centre or country, customs steps, the time it was delivered and the locker or post office where the parcel waits, with its town (not the street or postcode). Lithuanian steps are read on Vilnius time and shown in your device's time zone. There's no expected arrival day and no weight. Statuses keep Lietuvos paštas's English wording; a return shows "Needs attention", then "Returned to sender" once it's back.
 
 ## Questions about Lithuania Post tracking
 
@@ -105,15 +105,17 @@ Lietuvos paštas says a locker parcel usually reaches a locker in Lithuania the 
 
 :::sources
 - [Lietuvos paštas: Siuntų sekimas](https://www.post.lt/lt/siuntu-sekimas) – number shape, receipt, route visibility, late items and 1842, claims, second attempt at a locker, international search
-- [LP Express: Parcel tracking](https://lpexpress.lt/track) – English tracking page, languages, example number, headlines, not-found and redirect messages
+- [LP Express: Parcel tracking](https://lpexpress.lt/track) – English tracking page, languages, headlines, not-found and redirect messages
 - [Lietuvos paštas: Dažniausiai užduodami klausimai](https://www.post.lt/duk) – locker FAQ, collecting at the post office, storage
 - [Lietuvos paštas: Siuntos](https://www.post.lt/lt/duk/siuntos) – storage periods, collection rules
 - [Lietuvos paštas: LP EXPRESS paštomatai](https://www.post.lt/lt/duk/lp-express-pastomatai) – 72 hours, 4-day redirect, 15 days if too big, import charges paid in advance
 - [Lietuvos paštas: Siuntų siuntimas paštomatu](https://www.post.lt/lt/lp-express-pastomatai) – LP EXPRESS and Unisend names, about 1,500 lockers, PIN notice, next working day
-- [Lietuvos paštas: Pašto paslaugų teikimo nesutartiniams naudotojams taisyklės TAI-16](https://www.post.lt/sites/default/files/Dokumentai/PA%C5%A0TO%20PASLAUG%C5%B2%20TEIKIMO%20TAISYKL%C4%96S.pdf) – courier rules, 7-day hold, 30 days at the post office, items brought once, ID, damage, payment within 7 days
-- [Lietuvos paštas: Siuntų deklaravimas](https://www.post.lt/lt/siuntu-deklaravimas) – declaration fees
+- [Lietuvos paštas: Pašto paslaugų teikimo nesutartiniams naudotojams taisyklės TAI-16](https://www.post.lt/sites/default/files/Dokumentai/PA%C5%A0TO%20PASLAUG%C5%B2%20TEIKIMO%20TAISYKL%C4%96S.pdf) – `CC` and `CH`, courier rules, 7-day hold, 30 days at the post office, items brought once, ID, damage, payment within 7 days
+- [Lietuvos paštas: Siuntų deklaravimas](https://www.post.lt/lt/siuntu-deklaravimas) – declaration fees, VAT, 7 days to pay
 - [Lietuvos paštas: Kontaktai](https://www.post.lt/lt/kontaktai) – phone numbers, hours, call cost, email, chat
 - [Lietuvos paštas: Rašykite mums](https://www.post.lt/rasykite-mums) – contact form, claim and search tabs
 - [Lietuvos paštas: Būkite atsargūs, Lietuvos paštu apsimetantys sukčiai](https://www.post.lt/lt/apie-mus/naujienos/bukite-atsargus-lietuvos-pastu-apsimetantys-sukciai-gviesiasi-pinigu-ir-duomenu) – fake SMS warning, sender names, prevencija@post.lt
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 handling fee from 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €3 and €2 per item, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows
 :::

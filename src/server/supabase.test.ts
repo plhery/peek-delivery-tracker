@@ -229,13 +229,26 @@ describe('one-off parcels and their links', () => {
     });
   });
 
-  it('lists the parcels nobody is waiting for, and records that an account read its parcels', async () => {
+  it('lists the parcels nobody is waiting for, in pages past the API\'s row limit, and records that an account read its parcels', async () => {
     const client = service();
-    const request = vi.spyOn(client, 'request').mockResolvedValue([{ id: 'quiet-1' }, { id: 'quiet-2' }, { id: null }]);
-    await expect(client.listUnwatchedPackageIds(new Date('2026-10-01T10:00:00Z'))).resolves.toEqual(['quiet-1', 'quiet-2']);
-    expect(request).toHaveBeenCalledExactlyOnceWith('/rest/v1/rpc/unwatched_package_ids', {
-      method: 'POST', body: { p_opened_since: '2026-10-01T10:00:00.000Z' },
-    });
+    const request = vi.spyOn(client, 'request')
+      .mockResolvedValueOnce([{ id: 'quiet-1' }, { id: 'quiet-2' }, { id: null }])
+      .mockResolvedValueOnce([{ id: 'quiet-3' }])
+      .mockResolvedValueOnce([]);
+    await expect(client.listUnwatchedPackageIds(new Date('2026-10-01T10:00:00Z'))).resolves.toEqual(['quiet-1', 'quiet-2', 'quiet-3']);
+    expect(request).toHaveBeenCalledTimes(3);
+    for (const [index, after] of [undefined, 'quiet-2', 'quiet-3'].entries()) {
+      const [path, options] = request.mock.calls[index]!;
+      expect(path).toMatch(/^\/rest\/v1\/rpc\/unwatched_package_ids\?/);
+      expect(Object.fromEntries(params(path))).toEqual({
+        select: 'id', order: 'id.asc', limit: '1000', ...(after === undefined ? {} : { id: `gt.${after}` }),
+      });
+      expect(options).toEqual({ method: 'POST', body: { p_opened_since: '2026-10-01T10:00:00.000Z' } });
+    }
+    // A page that adds no id ends the list, as an empty one does.
+    request.mockReset().mockResolvedValue([{ id: 'quiet-1' }]);
+    await expect(client.listUnwatchedPackageIds(new Date('2026-10-01T10:00:00Z'))).resolves.toEqual(['quiet-1']);
+    expect(request).toHaveBeenCalledTimes(2);
     const account = new SupabaseUserClient('https://database.example', 'public-key', 'token');
     const recorded = vi.spyOn(account, 'request').mockResolvedValue(null);
     await account.recordOpened();

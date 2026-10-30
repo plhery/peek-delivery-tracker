@@ -331,7 +331,9 @@ them, the account has a Live Activity device, or one of the parcel's links has a
 So is someone who looked lately: for an hour after the account's apps read its parcels
 (recorded at most every five minutes) or one of the parcel's links was opened. Any other
 open parcel is checked hourly
-([`unwatched_package_ids`](../supabase/migrations/20261003180000_unwatched_parcels.sql)).
+([`unwatched_package_ids`](../supabase/migrations/20261003180000_unwatched_parcels.sql), read in
+pages by id: the database's API ends each answer at its row limit, and a parcel left past it
+would keep the cadence of one someone is waiting for).
 
 **Out for delivery**, the news is the delivery. A carrier's own adapter is cheap and as
 fresh as the carrier, so a parcel it answers for is checked every 2 minutes whether or not

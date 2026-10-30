@@ -959,6 +959,8 @@ export class SupabaseClient {
 
 /** How many parcels a page of redetection candidates holds. */
 export const REDETECTION_PAGE = 500;
+/** How many ids a page of the parcels nobody is waiting for holds: the API's row limit. */
+const UNWATCHED_PAGE = 1000;
 
 /** The priority of a re-check nobody asked for, such as a scraper release's: it waits behind every other job. */
 export const BACKGROUND_SYNC_PRIORITY = -30;
@@ -1082,12 +1084,22 @@ export class SupabaseServiceClient extends SupabaseClient {
   /**
    * The open parcels nobody is waiting for: no notification can reach anyone
    * about them, and neither their account's apps nor one of their links were
-   * opened since `openedSince`.
+   * opened since `openedSince`. They come in pages by id until one adds none:
+   * the database's API ends every answer at its row limit, and a parcel left
+   * past it would be checked as one someone is waiting for.
    */
   async listUnwatchedPackageIds(openedSince: Date): Promise<string[]> {
-    return rows(await this.request('/rest/v1/rpc/unwatched_package_ids', {
-      method: 'POST', body: { p_opened_since: openedSince.toISOString() },
-    })).flatMap((row) => typeof row.id === 'string' ? [row.id] : []);
+    const ids = new Set<string>();
+    for (;;) {
+      const after = [...ids].at(-1);
+      const params = query([['select', 'id'], ['order', 'id.asc'], ['limit', String(UNWATCHED_PAGE)],
+        ...(after === undefined ? [] : [['id', `gt.${after}`] as const])]);
+      const page = rows(await this.request(`/rest/v1/rpc/unwatched_package_ids?${params}`, {
+        method: 'POST', body: { p_opened_since: openedSince.toISOString() },
+      })).flatMap((row) => typeof row.id === 'string' && !ids.has(row.id) ? [row.id] : []);
+      if (page.length === 0) return [...ids];
+      for (const id of page) ids.add(id);
+    }
   }
 
   /** When the account's apps last read its parcels, as its export shows it; null when no read was recorded. */

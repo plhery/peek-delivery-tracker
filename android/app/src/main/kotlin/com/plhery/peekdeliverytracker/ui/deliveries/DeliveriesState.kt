@@ -836,7 +836,7 @@ internal class DeliveriesState(
      */
     private fun workOnPage(pageId: UUID, work: suspend () -> Unit) {
         if (navigator.navigation.shown != pageId) return
-        source.pageWork.run(pageId, source.scope, source::errorMessage, work = work)
+        source.pageWork.run(pageId, source.scope, ::pageFailure, work = work)
     }
 
     /**
@@ -845,7 +845,16 @@ internal class DeliveriesState(
      */
     private fun leaveOnPage(pageId: UUID, change: suspend () -> Unit) {
         if (navigator.navigation.shown != pageId) return
-        source.pageWork.run(pageId, source.scope, source::errorMessage, cards = rows, work = change)
+        source.pageWork.run(pageId, source.scope, ::pageFailure, cards = rows, work = change)
+    }
+
+    /**
+     * What a page's failed change says. What failed in front of the reader keeps a rating from being asked for today,
+     * its page gone since or not, as the page's `run` notes it.
+     */
+    private fun pageFailure(error: Throwable): String {
+        source.reviewPrompt.noteBadMoment(now())
+        return source.errorMessage(error)
     }
 
     /**

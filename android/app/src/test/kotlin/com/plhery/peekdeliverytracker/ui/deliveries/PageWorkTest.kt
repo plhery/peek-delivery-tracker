@@ -19,6 +19,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import java.time.Duration
 import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
@@ -32,9 +33,9 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * Each parcel page waits for its own change (ParcelDetailView's `working`, B-ST14): another page opened meanwhile, over
- * the list or beside it, starts idle and hears nothing of the first one's failure, which goes with its page; one page's
- * archive or delete, saved one at a time, holds no other page's; and through a rotation the page still waits, ignores a
- * second tap, and hears how its change went, failed or saved.
+ * the list or beside it, starts idle and hears nothing of the first one's failure, which goes with its page but keeps
+ * the rating away for the day; one page's archive or delete, saved one at a time, holds no other page's; and through a
+ * rotation the page still waits, ignores a second tap, and hears how its change went, failed or saved.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -108,10 +109,14 @@ class PageWorkTest {
     @Test
     fun anotherPageOpenedWhileOneChecksStartsIdleAndHearsNothingOfItsFailure() {
         show { checkingParcel = CompletableDeferred() }
+        // In use on the two days before: today could ask for a rating.
+        source.reviewPrompt.used(CAPTURED.minus(Duration.ofDays(2)))
+        source.reviewPrompt.used(CAPTURED.minus(Duration.ofDays(1)))
         open(gift)
         refresh().performClick()
         settle()
         assertTrue(deliveries.pageWorking(gift))
+        assertTrue(source.reviewPrompt.isDue(CAPTURED, calm = true))
 
         // As a notification opens another parcel.
         open(chocolate)
@@ -129,6 +134,8 @@ class PageWorkTest {
         settle()
         assertFailureShown(false)
         refresh().assertIsEnabled()
+        // Though nothing says so, the failure keeps the rating away for the day, as the iPhone's `run` notes it.
+        assertFalse(source.reviewPrompt.isDue(CAPTURED, calm = true))
         // Opened again, the first page starts afresh too.
         open(gift)
         assertFalse(deliveries.pageWorking(gift))

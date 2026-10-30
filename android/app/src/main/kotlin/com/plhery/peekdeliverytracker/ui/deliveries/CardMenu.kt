@@ -100,6 +100,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
+import java.util.UUID
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -255,7 +256,7 @@ private const val BESIDE_SCALE = 0.5f
 internal fun CardMenuHost(state: DeliveriesState) {
     val request = state.menu
     val deleting = state.deleting
-    val error = state.actionError
+    val error = state.actionError ?: state.pageError
     val host = LocalTabOverlay.current
     // Once the menu and what it opened have all closed, TalkBack goes back to the card the menu came from.
     val modal = state.modal
@@ -264,8 +265,8 @@ internal fun CardMenuHost(state: DeliveriesState) {
         state.returnFocus?.request()
         state.returnFocus = null
     }
-    // The page's question goes with its parcel, as the iPhone's goes with the ••• it stands off.
-    val pageParcel = state.liveMenuParcel(state.navigator.navigation.shown)
+    // The page's question goes with its parcel, or its page, as the iPhone's goes with the ••• it stands off.
+    val pageParcel = state.liveMenuParcel(deleting?.pageId?.takeIf { it == state.navigator.navigation.shown })
     val unasked = deleting?.fromPage == true && pageParcel == null
     LaunchedEffect(unasked) { if (unasked) state.deleting = null }
     // In a regular window the page's question stands off its •••, as an iPad's confirmation dialog stands off its menu.
@@ -590,9 +591,11 @@ internal fun keyboardConnected(): Boolean {
         configuration.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO
 }
 
-/** A delete a menu asks about first: its parcel, and whether the page's ••• asked, whose question stands off it. */
+/** A delete a menu asks about first: its parcel, and the page whose ••• asked, if one did, whose question stands off it. */
 @Stable
-internal class DeleteRequest(val parcel: Parcel, val fromPage: Boolean)
+internal class DeleteRequest(val parcel: Parcel, val pageId: UUID?) {
+    val fromPage: Boolean get() = pageId != null
+}
 
 /**
  * `parcelDeleteConfirmation` (iOS's `confirmationDialog`, its title shown): an action sheet at the foot of the screen
@@ -710,7 +713,7 @@ private fun ActionErrorAlert(state: DeliveriesState, message: String) {
     val localizer = LocalLocalizer.current
     val type = PeekTheme.type
     val colors = PeekTheme.colors
-    val close = { state.actionError = null }
+    val close = state::closeError
     val said = remember(message) { AccessibilityFocus() }
     LaunchedEffect(message) { said.request() }
     BackHandler(onBack = close)

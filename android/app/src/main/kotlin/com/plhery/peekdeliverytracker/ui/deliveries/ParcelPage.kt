@@ -136,7 +136,7 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
     val start = if (edges.start) padding.calculateStartPadding(direction) else 0.dp
     val end = if (edges.end) padding.calculateEndPadding(direction) else 0.dp
     val bottom = padding.calculateBottomPadding()
-    PageKeys(state, menuParcel)
+    PageKeys(state, parcelId, menuParcel)
     Box(
         Modifier
             .fillMaxSize()
@@ -246,13 +246,13 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     val opensAlerts = email?.bellOpensAlerts(parcel) == true
     val bell = if (session != AuthenticationState.Welcome && !sample) {
         // The same bell while nothing it acts on changes, so the card isn't composed again for a new one.
-        remember(state, parcel, opensAlerts) { PassBell(opensAlerts) { muted, saved -> state.muteOnPage(parcel, muted, saved) } }
+        remember(state, pageId, parcel, opensAlerts) { PassBell(opensAlerts) { muted, saved -> state.muteOnPage(pageId, parcel, muted, saved) } }
     } else {
         null
     }
     LivePassCard(
         parcel, atlas, sample = sample, readerLink = state.source.viewerLink(parcel) != null, bell = bell,
-        working = state.pageWorking, onMap = { state.openMap(pageId, it) }, onEditCarrier = { state.editCarrier(pageId, it) },
+        working = state.pageWorking(pageId), onMap = { state.openMap(pageId, it) }, onEditCarrier = { state.editCarrier(pageId, it) },
     )
 }
 
@@ -332,7 +332,7 @@ private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID
     localizer.shipmentFacts(parcel)?.let { ShipmentFacts(it, Modifier.testTag(PAGE_FACTS)) }
     val identity = shownCarrierIdentity(parcel, localizer, LocalLanguage.current) ?: return
     TrackingNotes(
-        parcel, editable = state.sample(pageId) == null && state.source.viewerLink(parcel) == null, working = state.pageWorking,
+        parcel, editable = state.sample(pageId) == null && state.source.viewerLink(parcel) == null, working = state.pageWorking(pageId),
         ink = PeekTheme.colors.resolve(identity.ink), onEditCarrier = { state.editCarrier(pageId) },
         onSwitch = { state.switchCarrierOnPage(pageId, parcel, it) },
     )
@@ -367,8 +367,8 @@ private fun SyncStatus(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     val refreshes = state.sample(pageId) == null && !parcel.isArchived &&
         CarrierCatalog.shared.tracksAutomatically(parcel.activeTrackingCarrier)
     SyncLine(
-        parcel, PeekTheme.colors.resolve(identity.ink), working = state.pageWorking,
-        onRefresh = if (refreshes) ({ state.refreshOnPage(parcel) }) else null,
+        parcel, PeekTheme.colors.resolve(identity.ink), working = state.pageWorking(pageId),
+        onRefresh = if (refreshes) ({ state.refreshOnPage(pageId, parcel) }) else null,
         Modifier.testTag(PAGE_SYNC_LINE),
     )
 }
@@ -473,8 +473,8 @@ private fun BarButton(symbol: String, label: String, tag: String, modifier: Modi
  * parcel, Delete waiting while another change is saved. A page on its way back into its card takes none.
  */
 @Composable
-private fun PageKeys(state: DeliveriesState, parcel: Parcel?) {
-    val handle by rememberUpdatedState { event: KeyEvent -> state.pageKey(event, parcel) }
+private fun PageKeys(state: DeliveriesState, pageId: UUID, parcel: Parcel?) {
+    val handle by rememberUpdatedState { event: KeyEvent -> state.pageKey(event, pageId, parcel) }
     val view = LocalView.current
     DisposableEffect(view) {
         val listener = ViewCompat.OnUnhandledKeyEventListenerCompat { _, event -> handle(event) }
@@ -483,7 +483,7 @@ private fun PageKeys(state: DeliveriesState, parcel: Parcel?) {
     }
 }
 
-private fun DeliveriesState.pageKey(event: KeyEvent, parcel: Parcel?): Boolean {
+private fun DeliveriesState.pageKey(event: KeyEvent, pageId: UUID, parcel: Parcel?): Boolean {
     if (modal || showingFilters || searchFocused) return false
     if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen == null) return false
     val act = event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0
@@ -494,7 +494,7 @@ private fun DeliveriesState.pageKey(event: KeyEvent, parcel: Parcel?): Boolean {
     if (parcel == null) return false
     val items = ParcelMenuItem.menu(parcel, onCard = false, reader = source.viewerLink(parcel) != null).flatten()
     val item = ParcelMenuItem.forShortcut(event, items) ?: return false
-    if (act && !(item == ParcelMenuItem.Delete && pageWorking)) choseOnPage(item, parcel)
+    if (act && !(item == ParcelMenuItem.Delete && pageWorking(pageId))) choseOnPage(pageId, item, parcel)
     return true
 }
 
@@ -537,7 +537,7 @@ private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
     val shortcuts = keyboardConnected()
     val title = parcel.label.ifEmpty { localized("common.parcel") }
     val menu = rememberMenuPresence(request) { state.pageMenu = null }
-    val choose = { item: ParcelMenuItem -> menu.close { state.menuParcel(request.pageId)?.let { state.choseOnPage(item, it) } } }
+    val choose = { item: ParcelMenuItem -> menu.close { state.menuParcel(request.pageId)?.let { state.choseOnPage(request.pageId, item, it) } } }
     MenuKeys(shortcuts, items, choose)
 
     BoxWithConstraints(
@@ -577,7 +577,7 @@ private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
                 .dropShadow(ContinuousRoundedShape(MENU_RADIUS), MENU_SHADOW),
         ) {
             Column(Modifier.verticalScroll(rememberScrollState()).padding(vertical = MENU_PADDING)) {
-                MenuItems(items, shortcuts, busy = state.pageWorking, choose, menu.first)
+                MenuItems(items, shortcuts, busy = state.pageWorking(request.pageId), choose, menu.first)
             }
         }
     }

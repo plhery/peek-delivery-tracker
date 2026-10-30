@@ -200,13 +200,13 @@ class SyncLineTest {
         open()
         compose.onNodeWithTag(PAGE_REFRESH).performClick()
         settle()
-        assertTrue(deliveries.pageWorking)
+        assertTrue(deliveries.pageWorking(gift))
         compose.onNodeWithTag(PAGE_REFRESH).assertIsNotEnabled()
         compose.onNodeWithTag(PAGE_BELL).assertIsNotEnabled()
         // A second check, the bell or the switch, however they come, are not asked for.
         compose.runOnUiThread {
-            deliveries.refreshOnPage(parcel())
-            deliveries.muteOnPage(parcel(), muted = true) {}
+            deliveries.refreshOnPage(gift, parcel())
+            deliveries.muteOnPage(gift, parcel(), muted = true) {}
             deliveries.switchCarrierOnPage(gift, parcel(), CarrierId.Ups)
         }
         compose.runOnUiThread { source.checkingParcel?.complete(Unit) }
@@ -214,7 +214,7 @@ class SyncLineTest {
         assertEquals(listOf(gift), source.checked)
         assertEquals(emptyList<Any>(), source.mutes)
         assertEquals(emptyList<Any>(), source.carrierChanges)
-        assertFalse(deliveries.pageWorking)
+        assertFalse(deliveries.pageWorking(gift))
         compose.onNodeWithTag(PAGE_REFRESH).assertIsEnabled()
     }
 
@@ -222,7 +222,7 @@ class SyncLineTest {
     fun whileTheBellSavesTheRefreshWaits() {
         show { muting = CompletableDeferred() }
         open()
-        compose.runOnUiThread { deliveries.muteOnPage(parcel(), muted = true) {} }
+        compose.runOnUiThread { deliveries.muteOnPage(gift, parcel(), muted = true) {} }
         settle()
         compose.onNodeWithTag(PAGE_REFRESH).assertIsNotEnabled()
         compose.runOnUiThread { source.muting?.complete(Unit) }

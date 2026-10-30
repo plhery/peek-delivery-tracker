@@ -711,7 +711,7 @@ class PassNotesTest {
         settle()
         assertEquals(listOf(gift to CarrierId.Ups), source.carrierChanges)
         assertFalse(exists(PAGE_SYNC_ERROR))
-        assertFalse(deliveries.pageWorking)
+        assertFalse(deliveries.pageWorking(gift))
     }
 
     @Test
@@ -732,17 +732,16 @@ class PassNotesTest {
         val switch = compose.onNode(hasText("Switch to UPS"))
         switch.performScrollTo().performClick()
         settle()
-        assertTrue(deliveries.pageWorking)
+        assertTrue(deliveries.pageWorking(gift))
         switch.assertIsNotEnabled()
         compose.onNodeWithTag(PAGE_BELL).assertIsNotEnabled()
-        // A second one, however it comes, is not asked for.
+        // A second one, however it comes, is not asked for: both would wait on the same answer, so once it comes only
+        // the first was made.
         compose.runOnUiThread { deliveries.switchCarrierOnPage(gift, source.parcels.value.first { it.id == gift }, CarrierId.Ups) }
-        assertEquals(emptyList<Any>(), source.carrierChanges)
-
         compose.runOnUiThread { source.changing?.complete(Unit) }
         settle()
         assertEquals(listOf(gift to CarrierId.Ups), source.carrierChanges)
-        assertFalse(deliveries.pageWorking)
+        assertFalse(deliveries.pageWorking(gift))
     }
 
     @Test
@@ -768,7 +767,7 @@ class PassNotesTest {
         settle()
         assertEquals(gift to CarrierId.Dpd, editor())
         assertEquals(emptyList<Any>(), source.carrierChanges)
-        assertFalse(deliveries.pageWorking)
+        assertFalse(deliveries.pageWorking(gift))
     }
 
     @Test

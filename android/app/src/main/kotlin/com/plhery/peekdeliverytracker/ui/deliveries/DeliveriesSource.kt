@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.mutableStateMapOf
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
@@ -23,6 +25,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 /**
  * What the deliveries read and ask of the app's stores: ParcelListView's `store`, `session`, the configuration's pages
@@ -37,6 +40,9 @@ interface DeliveriesSource {
      * tab or the window being made again doesn't cancel one half done, which the store would undo.
      */
     val scope: CoroutineScope
+
+    /** What the parcel pages wait for, by page, for as long as the changes they asked for run in [scope]. */
+    val pageWork: PageWork
 
     val parcels: StateFlow<List<Parcel>>
     val loading: StateFlow<Boolean>
@@ -111,6 +117,7 @@ interface DeliveriesSource {
 class ContainerDeliveries(private val container: AppContainer) : DeliveriesSource {
     override val launch: UUID get() = LAUNCH
     override val scope: CoroutineScope get() = container.scope
+    override val pageWork: PageWork get() = PAGE_WORK
     override val parcels get() = container.parcels.parcelsFlow
     override val loading get() = container.parcels.loadingFlow
     override val refreshing get() = container.parcels.refreshingFlow
@@ -180,6 +187,91 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     private companion object {
         /** This process's launch: the same for every window it makes, another once the system made the process again. */
         val LAUNCH: UUID = UUID.randomUUID()
+
+        /** What this process's pages wait for, for every window it makes, as its launch is. */
+        val PAGE_WORK = PageWork()
+    }
+}
+
+/**
+ * What each parcel page waits for (ParcelDetailView's `working`) and what came of it, by the page's id: a page's change
+ * holds only that page's bell, refresh, switch and delete, and only the page that asked hears why it failed (its
+ * `errorMessage`), or leaves once it was saved.
+ *
+ * The source holds it for the launch, as long as the changes run, in the app's scope: a page drawn again as the window
+ * is made again (a rotation, a fold) still waits for its change and hears how it went, as the iPhone's `@State` lasts
+ * through a rotation. Kept with the window, it would come back as a copy the change, once done, never reaches. A page
+ * that goes forgets what it asked for ([forget]), as the iPhone's page goes with its state: the change goes on, and the
+ * page opened again starts afresh.
+ */
+@Stable
+class PageWork {
+    /** The change each page waits for, each its own: one its page forgot comes to nothing once done. */
+    private val runs = mutableStateMapOf<UUID, Any>()
+    private val failures = mutableStateMapOf<UUID, String>()
+    private val leaves = mutableStateMapOf<UUID, List<UUID>>()
+
+    /** Whether the page with `pageId` waits for a change it asked for. */
+    fun working(pageId: UUID): Boolean = pageId in runs
+
+    /** Why the last change the page with `pageId` asked for failed, until its alert closes ([dismiss]). */
+    fun failure(pageId: UUID): String? = failures[pageId]
+
+    fun dismiss(pageId: UUID) {
+        failures -= pageId
+    }
+
+    /**
+     * The pages whose change was saved and which leave for it, each with the list's cards as they stood when it was
+     * asked for: the window that shows them by then takes them ([left]).
+     */
+    val leaving: Map<UUID, List<UUID>> get() = leaves
+
+    fun left(pageId: UUID) {
+        leaves -= pageId
+    }
+
+    /**
+     * The page's `run`: `work` in `scope` while the page with `pageId` waits, and nothing while it waits for another.
+     * Once done, unless the page forgot it: why it failed, in `message`'s words, or the page's leaving, where it leaves
+     * once saved (`cards`).
+     */
+    fun run(pageId: UUID, scope: CoroutineScope, message: (Throwable) -> String, cards: List<UUID>? = null, work: suspend () -> Unit) {
+        if (pageId in runs) return
+        val run = Any()
+        runs[pageId] = run
+        failures -= pageId
+        scope.launch {
+            val failure = try {
+                work()
+                null
+            } catch (error: CancellationException) {
+                end(pageId, run)
+                throw error
+            } catch (error: Exception) {
+                message(error)
+            }
+            if (!end(pageId, run)) return@launch
+            if (failure != null) {
+                failures[pageId] = failure
+            } else if (cards != null) {
+                leaves[pageId] = cards
+            }
+        }
+    }
+
+    /** The page with `pageId` has gone: it waits for nothing more, and hears nothing of what it asked for. */
+    fun forget(pageId: UUID) {
+        runs -= pageId
+        failures -= pageId
+        leaves -= pageId
+    }
+
+    /** The change `run` of the page with `pageId` is over: whether the page still waited for it. */
+    private fun end(pageId: UUID, run: Any): Boolean {
+        if (runs[pageId] !== run) return false
+        runs -= pageId
+        return true
     }
 }
 

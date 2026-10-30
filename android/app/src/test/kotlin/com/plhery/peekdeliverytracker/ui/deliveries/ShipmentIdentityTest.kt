@@ -259,7 +259,7 @@ class ShipmentIdentityTest {
         show(handedOver())
         open()
         compose.mainClock.autoAdvance = false
-        compose.runOnUiThread { deliveries.choseOnPage(ParcelMenuItem.CopyTrackingNumber, source.parcels.value.first { it.id == gift }) }
+        compose.runOnUiThread { deliveries.choseOnPage(gift, ParcelMenuItem.CopyTrackingNumber, source.parcels.value.first { it.id == gift }) }
         compose.mainClock.advanceTimeBy(100)
         assertEquals(swissPostNumber, clipboard())
         assertEquals(listOf("Copied — Swiss Post", "Copy tracking number — Chronopost"), copies())

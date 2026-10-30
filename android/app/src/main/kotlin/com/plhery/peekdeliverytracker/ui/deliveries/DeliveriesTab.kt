@@ -127,6 +127,7 @@ fun DeliveriesTab(
     val launch = source.launch
     val navigator = rememberSaveable(launch, saver = DeliveriesNavigator.saver(launch)) { DeliveriesNavigator() }
     navigator.view = source::view
+    navigator.left = source.pageWork::forget
     val listState = rememberLazyListState()
     val archiveOpen = rememberForLaunch(launch, false)
     val reviewDue = rememberForLaunch(launch, false)
@@ -191,6 +192,12 @@ fun DeliveriesTab(
         navigator.settle(arrangement, rows)
 
         LaunchedEffect(state) { source.parcels.collect(state::receive) }
+        // A page whose change was saved leaves, from the window that shows it by then, made again since or not.
+        LaunchedEffect(state) {
+            snapshotFlow { source.pageWork.leaving.toMap() }.collect { leaving ->
+                leaving.forEach { (pageId, cards) -> state.leavePage(pageId, cards) }
+            }
+        }
         SearchCounted(state)
         val lifecycle = LocalLifecycleOwner.current.lifecycle
         val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
@@ -315,7 +322,8 @@ private fun Reviewing(state: DeliveriesState, resumed: Boolean, watching: Boolea
     LaunchedEffect(inUse) { if (inUse) prompt.used(now()) }
     // Something failed in front of the reader: the list's notice, a check, or an action. Noted as it comes into view
     // (`.onChange(of: failureShown)`), not as the list first shows with it.
-    val failureShown = resumed && (errorMessage != null || state.toast?.warning == true || state.actionError != null)
+    val failureShown = resumed &&
+        (errorMessage != null || state.toast?.warning == true || state.actionError != null || state.pageError != null)
     val failure by rememberUpdatedState(failureShown)
     LaunchedEffect(prompt) {
         snapshotFlow { failure }.drop(1).collect { shown -> if (shown) prompt.noteBadMoment(now()) }

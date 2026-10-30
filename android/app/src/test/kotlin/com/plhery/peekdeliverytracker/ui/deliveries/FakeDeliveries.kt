@@ -52,6 +52,9 @@ class FakeDeliveries(
 
     override val scope: CoroutineScope get() = CoroutineScope(job + dispatcher)
 
+    /** What the pages wait for, for this process: a window made again finds it as it was. */
+    override val pageWork = PageWork()
+
     /** The screens and actions counted, in their order, and the outcome each action was counted with. */
     val views = mutableListOf<String>()
     val actions = mutableListOf<String>()

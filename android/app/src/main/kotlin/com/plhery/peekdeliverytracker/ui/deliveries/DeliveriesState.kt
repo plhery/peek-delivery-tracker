@@ -106,11 +106,15 @@ internal class DeliveriesNavigator(
     /** Counts a screen. */
     var view: (String) -> Unit = {}
 
+    /** The page with this id has gone, over the list or beside it, as the iPhone's page goes with its state. */
+    var left: (UUID) -> Unit = {}
+
     private fun update(next: DeliveriesNavigation) {
         val before = navigation
         if (next == before) return
         navigation = next
         if (next.chosen != before.chosen) savedParcel = next.chosen
+        if (next.shown != before.shown) before.shown?.let(left)
         next.screen(after = before)?.let(view)
     }
 
@@ -733,8 +737,23 @@ internal class DeliveriesState(
     /** What the toast of an archived parcel says (`app.archivedToast`). */
     fun archivedText(parcel: Parcel): String = text("app.archivedToast", mapOf("name" to parcel.label.ifEmpty { text("common.parcel") }))
 
-    /** What went wrong with an action, said in an alert (`actionError`). */
+    /** What went wrong with an action of a card, said in an alert (`actionError`). */
     var actionError: String? by mutableStateOf(null)
+
+    /**
+     * Why the change the page shown asked for failed, said in an alert over it (ParcelDetailView's `errorMessage`): only
+     * that page's, and only while it shows ([PageWork]).
+     */
+    val pageError: String? get() = navigator.navigation.shown?.let(source.pageWork::failure)
+
+    /** The alert closed: a card's, or else the page's. */
+    fun closeError() {
+        if (actionError != null) {
+            actionError = null
+        } else {
+            navigator.navigation.shown?.let(source.pageWork::dismiss)
+        }
+    }
 
     /** The card whose menu is open, and its parcel. */
     var menu: CardMenuRequest? by mutableStateOf(null)
@@ -757,9 +776,11 @@ internal class DeliveriesState(
     /** Where the page's ••• stands in the window, which its menu and its delete question come out of. */
     var pageMenuButton: Rect by mutableStateOf(Rect.Zero)
 
-    /** A change the parcel's page asked for is being saved (`working`): Delete waits, and no other starts. */
-    var pageWorking: Boolean by mutableStateOf(false)
-        private set
+    /**
+     * The page with `pageId` waits for a change it asked for to be saved (its `working`): its bell, refresh, switch and
+     * Delete wait, and no other change of its starts ([PageWork]).
+     */
+    fun pageWorking(pageId: UUID): Boolean = source.pageWork.working(pageId)
 
     /**
      * The page whose map is open over the whole window, kept with the window ([rememberForLaunch]): a rotation, a fold
@@ -777,7 +798,8 @@ internal class DeliveriesState(
     /**
      * A menu, the question it asks, an alert or the page's map shows over the list, and TalkBack reaches nothing else.
      */
-    val modal: Boolean get() = menu != null || pageMenu != null || deleting != null || actionError != null || mapCover != null
+    val modal: Boolean
+        get() = menu != null || pageMenu != null || deleting != null || actionError != null || pageError != null || mapCover != null
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes
@@ -791,39 +813,39 @@ internal class DeliveriesState(
     }
 
     /**
-     * The page's bell (`store.setMuted(_:muted:)` in the page's `run`): switches the parcel's notifications off or back
-     * on, one change at a time, then `saved`, where the bell rings; an alert says why it failed.
+     * The bell of the page with `pageId` (`store.setMuted(_:muted:)` in the page's `run`): switches the parcel's
+     * notifications off or back on, one change at a time, then `saved`, where the bell rings; an alert says why it
+     * failed.
      */
-    fun muteOnPage(parcel: Parcel, muted: Boolean, saved: () -> Unit) = workOnPage {
+    fun muteOnPage(pageId: UUID, parcel: Parcel, muted: Boolean, saved: () -> Unit) = workOnPage(pageId) {
         // Once the app posts notifications (B-W01), a mute cancels the parcel's posted one here.
         source.setMuted(parcel, muted)
         saved()
     }
 
     /**
-     * The sync line's refresh (`store.refresh(_:)` in the page's `run`): asks the parcel's carrier again, one change
-     * at a time with the bell, the switch and delete; an alert says why it failed.
+     * The sync line's refresh on the page with `pageId` (`store.refresh(_:)` in the page's `run`): asks the parcel's
+     * carrier again, one change at a time with the bell, the switch and delete; an alert says why it failed.
      */
-    fun refreshOnPage(parcel: Parcel) = workOnPage { source.refresh(parcel) }
+    fun refreshOnPage(pageId: UUID, parcel: Parcel) = workOnPage(pageId) { source.refresh(parcel) }
 
     /**
-     * The page's `run` for a change that leaves the page open: `work` in the app's scope while the page waits
-     * ([pageWorking]), nothing while another runs, and an alert saying why it failed.
+     * The `run` of the page with `pageId`, for a change that leaves the page open: `work` in the app's scope while the
+     * page waits ([pageWorking]), nothing while it waits for another, and an alert over it saying why it failed
+     * ([pageError]). Only the page shown asks.
      */
-    private fun workOnPage(work: suspend () -> Unit) {
-        if (pageWorking) return
-        pageWorking = true
-        source.scope.launch {
-            try {
-                work()
-            } catch (error: CancellationException) {
-                throw error
-            } catch (error: Exception) {
-                actionError = source.errorMessage(error)
-            } finally {
-                pageWorking = false
-            }
-        }
+    private fun workOnPage(pageId: UUID, work: suspend () -> Unit) {
+        if (navigator.navigation.shown != pageId) return
+        source.pageWork.run(pageId, source.scope, source::errorMessage, work = work)
+    }
+
+    /**
+     * The `run` of the page with `pageId` for a change that leaves the page once saved (an archive, a restore, a
+     * delete), as [workOnPage] runs one: the window that shows the page by then leaves it ([leavePage]).
+     */
+    private fun leaveOnPage(pageId: UUID, change: suspend () -> Unit) {
+        if (navigator.navigation.shown != pageId) return
+        source.pageWork.run(pageId, source.scope, source::errorMessage, cards = rows, work = change)
     }
 
     /**
@@ -851,7 +873,7 @@ internal class DeliveriesState(
             editCarrier(pageId, carrier)
             return
         }
-        workOnPage { source.changeCarrier(parcel, carrier) }
+        workOnPage(pageId) { source.changeCarrier(parcel, carrier) }
     }
 
     /** Where TalkBack goes back to once the filters have closed: their button. */
@@ -955,13 +977,19 @@ internal class DeliveriesState(
     fun archive(parcel: Parcel, after: Job? = null): Deferred<Boolean> = source.scope.async {
         after?.join()
         try {
-            source.archive(parcel)
+            saveArchive(parcel)
         } catch (error: CancellationException) {
             throw error
         } catch (error: Exception) {
             actionError = source.errorMessage(error)
             return@async false
         }
+        true
+    }
+
+    /** `store.archive(_:)`, then the seven seconds of its Undo ([archive]), from a card or from its page. */
+    private suspend fun saveArchive(parcel: Parcel) {
+        source.archive(parcel)
         source.undoParcel.value?.let { undo ->
             announce(archivedText(undo))
             source.scope.launch {
@@ -969,12 +997,11 @@ internal class DeliveriesState(
                 source.forgetUndo(undo)
             }
         }
-        true
     }
 
     /**
-     * Brings a parcel back from the archive, in the app's scope: the card's Restore, the page's, and the Undo of its
-     * toast. Whether it came back.
+     * Brings a parcel back from the archive, in the app's scope: the card's Restore and the Undo of its toast. Whether
+     * it came back.
      */
     fun restore(parcel: Parcel): Deferred<Boolean> = source.scope.async {
         try {
@@ -988,15 +1015,9 @@ internal class DeliveriesState(
         }
     }
 
-    /**
-     * Deletes the parcel a menu asked about, its card's or its page's, and leaves its page ([leave]). Asked from the
-     * page, it waits for no other change the page saves, as the page's own `run` doesn't start while one does.
-     */
+    /** Deletes the parcel a card's menu asked about, and leaves its page where one shows it ([leave]). */
     fun delete(parcel: Parcel) {
         val cards = rows
-        val onPage = pageShows(parcel)
-        if (onPage && pageWorking) return
-        if (onPage) pageWorking = true
         source.scope.launch {
             try {
                 source.permanentlyDelete(parcel)
@@ -1005,31 +1026,37 @@ internal class DeliveriesState(
                 throw error
             } catch (error: Exception) {
                 actionError = source.errorMessage(error)
-            } finally {
-                if (onPage) pageWorking = false
             }
         }
     }
 
-    /** The delete question was answered with Delete: the parcel goes, the one its page shows by then where it asked. */
+    /**
+     * The delete question was answered with Delete: the card's parcel goes; or, asked from a page that still shows, the
+     * parcel it shows by then, in the page's `run` (`delete(_:)`), which leaves the page once deleted.
+     */
     fun confirmDelete(request: DeleteRequest) {
-        val parcel = if (request.fromPage) menuParcel(navigator.navigation.shown) ?: return else request.parcel
-        delete(parcel)
-    }
-
-    /** The page open, over the list or beside it, shows `parcel`, by its id or the one it had before. */
-    private fun pageShows(parcel: Parcel): Boolean {
-        val page = navigator.navigation.shown ?: return false
-        return page == parcel.id || parcel.carrierData?.originalPackageId == page
+        val pageId = request.pageId ?: return delete(request.parcel)
+        val parcel = menuParcel(pageId) ?: return
+        leaveOnPage(pageId) { source.permanentlyDelete(parcel) }
     }
 
     /**
-     * Leaves the page showing `parcel`, if one does (ParcelDetailView's `leave()`): over the list it goes back into its
-     * card, as `dismiss()` pops it; beside the list the next of `cards` shows in its place, or the one before at the
-     * end, as its `release` does ([DeliveriesNavigation.leave]).
+     * Leaves the page showing `parcel`, by its id or the one it had before, if one does (ParcelDetailView's `leave()`):
+     * over the list it goes back into its card, as `dismiss()` pops it; beside the list the next of `cards` shows in its
+     * place, or the one before at the end, as its `release` does ([DeliveriesNavigation.leave]).
      */
     fun leave(parcel: Parcel, cards: List<UUID>) {
-        if (!pageShows(parcel)) return
+        val page = navigator.navigation.shown ?: return
+        if (page == parcel.id || parcel.carrierData?.originalPackageId == page) leaveShown(cards)
+    }
+
+    /** The page with `pageId` saved a change that leaves it ([PageWork.leaving]): it leaves, if it still shows. */
+    fun leavePage(pageId: UUID, cards: List<UUID>) {
+        source.pageWork.left(pageId)
+        if (navigator.navigation.shown == pageId) leaveShown(cards)
+    }
+
+    private fun leaveShown(cards: List<UUID>) {
         val navigation = navigator.navigation
         when (arrangement) {
             DeliveriesArrangement.Stacked -> navigator.pop(navigation.path.dropLast(1))
@@ -1038,19 +1065,19 @@ internal class DeliveriesState(
     }
 
     /**
-     * What the page's ••• menu asked of its parcel (ParcelDetailView's `chose(_:on:)`). The page is open already.
-     * Naming the parcel and changing its carrier open what comes with the page's sections, and do nothing yet; the
-     * page shares a parcel from its own button. Copying puts the first number on the clipboard and says so on its
-     * row. Archiving and restoring save the change, then leave the page; deleting asks first. Only one change is saved
-     * at a time.
+     * What the ••• menu of the page with `pageId` asked of its parcel (ParcelDetailView's `chose(_:on:)`). The page is
+     * open already. Naming the parcel and changing its carrier open what comes with the page's sections, and do nothing
+     * yet; the page shares a parcel from its own button. Copying puts the first number on the clipboard and says so on
+     * its row. Archiving and restoring save the change, then leave the page; deleting asks first. Only one change of the
+     * page's is saved at a time, and an alert over it says why one failed.
      */
-    fun choseOnPage(item: ParcelMenuItem, parcel: Parcel) {
+    fun choseOnPage(pageId: UUID, item: ParcelMenuItem, parcel: Parcel) {
         when (item) {
             ParcelMenuItem.Open, ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
-            ParcelMenuItem.CopyTrackingNumber -> parcel.trackingNumbers.firstOrNull()?.let { copyOnPage(navigator.navigation.shown ?: parcel.id, it) }
-            ParcelMenuItem.Archive -> runOnPage(parcel) { archive(parcel).await() }
-            ParcelMenuItem.Restore -> runOnPage(parcel) { restore(parcel).await() }
-            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel, fromPage = true)
+            ParcelMenuItem.CopyTrackingNumber -> parcel.trackingNumbers.firstOrNull()?.let { copyOnPage(pageId, it) }
+            ParcelMenuItem.Archive -> leaveOnPage(pageId) { saveArchive(parcel) }
+            ParcelMenuItem.Restore -> leaveOnPage(pageId) { source.restore(parcel) }
+            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel, pageId)
         }
     }
 
@@ -1067,20 +1094,6 @@ internal class DeliveriesState(
     private fun copyNumber(entry: ParcelTrackingNumber): Boolean {
         source.action("parcel-copy-tracking")
         return copy(TrackingNumberCopy.text(entry.number, entry.carrier))
-    }
-
-    /** The page's `run`: saves one change at a time, and leaves the page once it is saved. */
-    private fun runOnPage(parcel: Parcel, change: suspend () -> Boolean) {
-        if (pageWorking) return
-        pageWorking = true
-        val cards = rows
-        source.scope.launch {
-            try {
-                if (change()) leave(parcel, cards)
-            } finally {
-                pageWorking = false
-            }
-        }
     }
 
     /** What a card's menu asked of its parcel. Archiving it is the same as swiping it away, Undo and all. */
@@ -1102,7 +1115,7 @@ internal class DeliveriesState(
             }
             ParcelMenuItem.Archive -> archive(parcel)
             ParcelMenuItem.Restore -> restore(parcel)
-            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel, fromPage = false)
+            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel, pageId = null)
         }
     }
 

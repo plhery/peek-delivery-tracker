@@ -718,6 +718,26 @@ class CarrierCatalogTests {
     }
 
     @Test
+    fun carrierPickerRowsReadTheirQueryHighlightAndLines() {
+        assertEquals("dpd", CarrierPickerSearch.trimmedQuery(" \n dpd\u2003\t"))
+        assertEquals("", CarrierPickerSearch.trimmedQuery("\u00A0 \n"))
+        // The highlight counts characters: one drawn of several code units covers them all, and one past the name none.
+        assertEquals(7 until 12, CarrierPickerSearch.highlightedRange("Relais Colis", 7 until 12))
+        assertEquals(3 until 8, CarrierPickerSearch.highlightedRange("\uD83D\uDCE6 Colis", 2 until 7))
+        assertNull(CarrierPickerSearch.highlightedRange("Colis", 3 until 6))
+        assertNull(CarrierPickerSearch.highlightedRange("Colis", null))
+        val localizer = Localizer(AppLanguage.En)
+        val swissPost = catalog.info(CarrierId.SwissPost, AppLanguage.En)
+        assertEquals("Also called Die Post", CarrierPickerSearch.subtitle(swissPost, "Die Post", localizer))
+        val lines = CarrierPickerSearch.countryLine(swissPost.countries ?: emptyList()) { TrackingLocation.countryName(it, AppLanguage.En) }
+        assertEquals(lines, CarrierPickerSearch.subtitle(swissPost, null, localizer))
+        assertEquals("Switzerland, Fits this number", CarrierPickerSearch.accessibilityValue("Switzerland", "Fits this number"))
+        assertEquals("Fits this number", CarrierPickerSearch.accessibilityValue("", "Fits this number"))
+        assertEquals("Switzerland", CarrierPickerSearch.accessibilityValue("Switzerland", null))
+        assertEquals("", CarrierPickerSearch.accessibilityValue("", ""))
+    }
+
+    @Test
     fun recognisesDutchPostAndExplainsGenericPostalTracking() {
         val detected = catalog.detect("LX123456785NL")
         assertEquals(CarrierId.SpringGDS, detected.carrier)

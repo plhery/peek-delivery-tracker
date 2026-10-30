@@ -146,6 +146,32 @@ object CarrierPickerSearch {
         return if (countries.size > 2) "$names +${countries.size - 2}" else names
     }
 
+    /** The query as CarrierPickerView reads it (`trimmedQuery`): the picker searches while it isn't empty. */
+    fun trimmedQuery(query: String): String = query.trimmingWhitespacesAndNewlines()
+
+    /**
+     * The UTF-16 range of `name` that a result's `highlight`, in characters, covers (`highlighted(_:_:)`): none without
+     * one, or for one that runs past the name.
+     */
+    fun highlightedRange(name: String, highlight: IntRange?): IntRange? {
+        val characters = name.characters()
+        if (highlight == null || highlight.isEmpty() || highlight.first < 0 || highlight.last >= characters.size) return null
+        val start = characters.subList(0, highlight.first).sumOf { it.length }
+        return start until start + characters.subList(highlight.first, highlight.last + 1).sumOf { it.length }
+    }
+
+    /**
+     * The line under a carrier's name in the picker (`row(_:highlight:alias:)`): the other name it was found by, or
+     * its countries in the reader's language ([countryLine]).
+     */
+    fun subtitle(definition: CarrierDefinition, alias: String?, localizer: Localizer): String =
+        alias?.let { localizer.text("picker.alias", mapOf("name" to it)) }
+            ?: countryLine(definition.countries ?: emptyList()) { TrackingLocation.countryName(it, localizer.language) }
+
+    /** What a carrier's row reads after its name (its `accessibilityValue`): its subtitle, then its tag. */
+    fun accessibilityValue(subtitle: String, tag: String?): String =
+        listOf(subtitle, tag.orEmpty()).filter { it.isNotEmpty() }.joinToString(", ")
+
     /** The carriers of someone's latest parcels, newest first, each once. */
     fun usedCarriers(parcels: List<Parcel>, catalog: CarrierCatalog, limit: Int = 3): List<CarrierId> {
         val used = mutableListOf<CarrierId>()

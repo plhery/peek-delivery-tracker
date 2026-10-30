@@ -170,5 +170,7 @@
   { "id": "thhy", "catalog": "thhy", "name": "Tianhui Hengyuan", "languages": ["en"] },
   { "id": "js-express", "catalog": "js-express", "name": "JS Express", "languages": ["en"] },
   { "id": "wanbexpress", "catalog": "wanbexpress", "name": "WanbExpress", "languages": ["en"] },
-  { "id": "gzyl", "catalog": "gzyl", "name": "GZYL", "languages": ["en"] }
+  { "id": "gzyl", "catalog": "gzyl", "name": "GZYL", "languages": ["en"] },
+  { "id": "shouwu", "catalog": "shouwu", "name": "Shouwu International", "languages": ["en"] },
+  { "id": "geodis-pl", "catalog": "geodis-pl", "name": "GEODIS Poland", "languages": ["en", "pl"] }
 ]

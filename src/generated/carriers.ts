@@ -1384,6 +1384,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GZYL tracking: YL…YQ numbers, scans and who to ask",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-tracking",
+      "title": "Shouwu tracking: SWECN…YQ numbers, scans and who delivers",
+      "name": "Shouwu International",
+      "color": "#be2c33"
+    },
+    {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "geodis-poland-tracking",
+      "title": "GEODIS Poland tracking: shipment number, statuses, delivery",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
     }
   ],
   "de": [
@@ -3020,6 +3036,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT śledzenie przesyłki: numer, statusy i doręczenie",
       "name": "TNT",
       "color": "#ff6600"
+    },
+    {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "geodis-polska-sledzenie",
+      "title": "GEODIS Polska (Pekaes): śledzenie przesyłki i statusy",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
     }
   ],
   "nl": [

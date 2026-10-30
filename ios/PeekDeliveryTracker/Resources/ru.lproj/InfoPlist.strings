@@ -1,0 +1,2 @@
+/* Generated from shared/locales by npm run ios:resources. */
+"NSCameraUsageDescription" = "Peek использует камеру, чтобы сканировать штрихкоды посылок: так их можно добавлять без ввода номера.";

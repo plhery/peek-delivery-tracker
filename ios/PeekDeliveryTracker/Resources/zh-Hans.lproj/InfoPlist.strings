@@ -1,0 +1,2 @@
+/* Generated from shared/locales by npm run ios:resources. */
+"NSCameraUsageDescription" = "Peek 使用相机扫描运单条形码，让你无需手动输入就能添加包裹。";

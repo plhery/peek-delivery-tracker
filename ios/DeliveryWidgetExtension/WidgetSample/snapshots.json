@@ -334,5 +334,149 @@
         "trackingNumber" : "DEMODPD20260001"
       }
     ]
+  },
+  "pt-br" : {
+    "generatedAt" : 0,
+    "languageCode" : "pt-br",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "Saiu para entrega",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "hoje",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "Chocolate belga 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "Recebida pela transportadora",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "amanhã",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "Kit de trilha para o fim de semana 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
+  },
+  "ru" : {
+    "generatedAt" : 0,
+    "languageCode" : "ru",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "Передана курьеру",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "сегодня",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "Бельгийский шоколад 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "Принята службой доставки",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "завтра",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "Набор для похода на выходные 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
+  },
+  "zh" : {
+    "generatedAt" : 0,
+    "languageCode" : "zh",
+    "parcels" : [
+      {
+        "card" : {
+          "ink" : [
+            "#23093f",
+            "#c1add7"
+          ],
+          "pictures" : "sample-0",
+          "scale" : 3,
+          "status" : "派送中",
+          "surface" : [
+            "#e6deef",
+            "#292235"
+          ]
+        },
+        "carrier" : "FedEx",
+        "detail" : "今天",
+        "id" : "00000000-0000-4000-8000-000000000000",
+        "isOutForDelivery" : true,
+        "label" : "比利时巧克力 🍫",
+        "trackingNumber" : "DEMOCHOC20260001"
+      },
+      {
+        "card" : {
+          "ink" : [
+            "#630016",
+            "#f3a6b7"
+          ],
+          "pictures" : "sample-1",
+          "scale" : 3,
+          "status" : "已揽收",
+          "surface" : [
+            "#fadbe2",
+            "#461e23"
+          ]
+        },
+        "carrier" : "DPD Switzerland",
+        "detail" : "明天",
+        "id" : "00000000-0000-4000-8000-000000000001",
+        "isOutForDelivery" : false,
+        "label" : "周末越野装备 🏕️",
+        "trackingNumber" : "DEMODPD20260001"
+      }
+    ]
   }
 }

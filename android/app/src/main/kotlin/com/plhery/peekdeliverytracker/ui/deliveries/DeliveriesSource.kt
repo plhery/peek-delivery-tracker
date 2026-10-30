@@ -63,6 +63,9 @@ interface DeliveriesSource {
      */
     suspend fun checkAllParcels(): ParcelStore.RefreshResult?
 
+    /** `store.refresh(_:)`: asks the parcel's carrier again, then shows what it answered. */
+    suspend fun refresh(parcel: Parcel)
+
     suspend fun archive(parcel: Parcel)
 
     suspend fun restore(parcel: Parcel)
@@ -142,6 +145,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
             ParcelStore.RefreshResult.Failed(container.localizer.errorMessage(error))
         }
     }
+
+    override suspend fun refresh(parcel: Parcel) = container.parcels.refresh(parcel)
 
     override suspend fun archive(parcel: Parcel) = container.parcels.archive(parcel)
 

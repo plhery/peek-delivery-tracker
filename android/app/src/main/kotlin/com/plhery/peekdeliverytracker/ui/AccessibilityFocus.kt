@@ -87,16 +87,25 @@ internal class AccessibilityFocusNode(focus: AccessibilityFocus) :
 
     /**
      * What TalkBack stops on, while it can reach it: the element it reads the marked one in (the marked one itself, or
-     * the one it is merged into) when that says something, else the first in it that does. The window's elements are
-     * found through its merged semantics, the elements TalkBack reads.
+     * the one it is merged into) when that says something, else the first in it that does, in the order TalkBack reads
+     * them: depth first, so that a short part further down doesn't come before the first one's deep elements. The
+     * window's elements are found through its merged semantics, the elements TalkBack reads.
      */
     private fun target(view: View): SemanticsNode? {
         val root = (view as? RootForTest)?.semanticsOwner?.rootSemanticsNode ?: return null
         val marked = find(root) { it.config.getOrNull(FocusMark) === this } ?: return null
-        return find(marked) { it.speaks() }
+        return firstRead(marked)
     }
 
-    private fun SemanticsNode.speaks(): Boolean = config.isMergingSemanticsOfDescendants || config.isClearingSemantics ||
+    private fun firstRead(from: SemanticsNode): SemanticsNode? {
+        if (from.speaks()) return from
+        for (child in from.children) firstRead(child)?.let { return it }
+        return null
+    }
+
+    /** Whether TalkBack stops on the element: one it reads as one, but one hidden from it with nothing said instead. */
+    private fun SemanticsNode.speaks(): Boolean = config.isMergingSemanticsOfDescendants ||
+        config.isClearingSemantics && config.any { it.key != FocusMark } ||
         SemanticsProperties.ContentDescription in config || SemanticsProperties.Text in config
 
     private fun find(from: SemanticsNode, matches: (SemanticsNode) -> Boolean): SemanticsNode? {

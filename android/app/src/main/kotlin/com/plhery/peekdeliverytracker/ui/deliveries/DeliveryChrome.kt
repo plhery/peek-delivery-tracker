@@ -29,19 +29,18 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.withContext
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.FirstOpenJourney
 import com.plhery.peekdeliverytracker.core.ParcelSort
 import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
-import androidx.compose.animation.core.InfiniteRepeatableSpec
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -132,6 +131,7 @@ import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -434,18 +434,24 @@ private fun RefreshButton(state: DeliveriesState) {
 }
 
 /**
- * The arrow while the parcels are checked: `.symbolEffect(.rotate)`, a turn a second, or `.pulse` under Reduce Motion,
- * the arrow fading to a third and back. Only then, so that the window rests the rest of the time.
+ * A refresh arrow while it checks, the list's or a parcel page's: `.symbolEffect(.rotate)`, a turn a second, or
+ * `.pulse` under Reduce Motion, the arrow fading to a third and back. Only then, so that the window rests the rest of
+ * the time. iOS pulses under Reduce Motion, which is Android's "Remove animations", so the effect runs whatever the
+ * animator duration scale ([KeepMotion]).
  */
 @Composable
-private fun Modifier.refreshing(reduceMotion: Boolean): Modifier {
-    val turning = rememberInfiniteTransition("refresh")
-    if (reduceMotion) {
-        val pulse = turning.animateFloat(1f, 0.35f, InfiniteRepeatableSpec(tween(750), RepeatMode.Reverse), "pulse")
-        return graphicsLayer { alpha = pulse.value }
+internal fun Modifier.refreshing(reduceMotion: Boolean): Modifier {
+    val effect = remember(reduceMotion) { Animatable(if (reduceMotion) 1f else 0f) }
+    LaunchedEffect(effect) {
+        withContext(KeepMotion) {
+            if (reduceMotion) {
+                effect.animateTo(0.35f, infiniteRepeatable(tween(750), RepeatMode.Reverse))
+            } else {
+                effect.animateTo(360f, infiniteRepeatable(tween(1000, easing = LinearEasing)))
+            }
+        }
     }
-    val angle = turning.animateFloat(0f, 360f, infiniteRepeatable(tween(1000, easing = LinearEasing)), "turn")
-    return graphicsLayer { rotationZ = angle.value }
+    return graphicsLayer { if (reduceMotion) alpha = effect.value else rotationZ = effect.value }
 }
 
 /** A count in a faint capsule, beside a heading. */

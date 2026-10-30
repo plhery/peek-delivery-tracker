@@ -194,13 +194,13 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, mar
                 // Given the room, the history stands beside the pass rather than under it.
                 Row(paper(PAGE_COLUMNS), horizontalArrangement = Arrangement.spacedBy(ParcelPageColumns.gap.dp)) {
                     LiveParcelPass(state, parcel, pageId, divided = false, Modifier.weight(1f))
-                    PageHistory(parcel, history, Modifier.weight(1f))
+                    PageHistory(state, parcel, pageId, history, Modifier.weight(1f))
                 }
             } else {
                 // The history's parts in the paper's own column, where a part not drawn leaves no gap.
                 Column(paper(PAGE_SINGLE_COLUMN), verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) {
                     LiveParcelPass(state, parcel, pageId, divided = true, Modifier.fillMaxWidth())
-                    HistoryParts(parcel, history)
+                    HistoryParts(state, parcel, pageId, history)
                 }
             }
             FeedbackQuestion(Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE))
@@ -340,15 +340,15 @@ private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID
 
 /** The history's column beside the pass, its parts 20 apart. */
 @Composable
-private fun PageHistory(parcel: Parcel, history: Boolean, modifier: Modifier) {
-    Column(modifier, verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) { HistoryParts(parcel, history) }
+private fun PageHistory(state: DeliveriesState, parcel: Parcel, pageId: UUID, history: Boolean, modifier: Modifier) {
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) { HistoryParts(state, parcel, pageId, history) }
 }
 
 /** The history's parts: `ParcelJournal` where the page shows what the carrier answered, then the sync line. */
 @Composable
-private fun HistoryParts(parcel: Parcel, history: Boolean) {
+private fun HistoryParts(state: DeliveriesState, parcel: Parcel, pageId: UUID, history: Boolean) {
     if (history) ParcelJournal(parcel)
-    SyncStatus(parcel)
+    SyncStatus(state, parcel, pageId)
 }
 
 /** `ParcelJournal`, the tracking history. Not ported yet. */
@@ -356,10 +356,22 @@ private fun HistoryParts(parcel: Parcel, history: Boolean) {
 @Composable
 private fun ParcelJournal(parcel: Parcel) = Unit
 
-/** `syncStatus`: when the carrier was last asked and last said something, and asking again. Not ported yet. */
-@Suppress("UNUSED_PARAMETER")
+/**
+ * The sync line ([SyncLine]) in its carrier's ink, with its refresh where there is a carrier to ask again: not for the
+ * sample, an archived parcel, or one whose carrier Peek doesn't ask. A refresh asks the carrier again while the page
+ * waits ([DeliveriesState.refreshOnPage]).
+ */
 @Composable
-private fun SyncStatus(parcel: Parcel) = Unit
+private fun SyncStatus(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
+    val identity = shownCarrierIdentity(parcel, LocalLocalizer.current, LocalLanguage.current) ?: return
+    val refreshes = state.sample(pageId) == null && !parcel.isArchived &&
+        CarrierCatalog.shared.tracksAutomatically(parcel.activeTrackingCarrier)
+    SyncLine(
+        parcel, PeekTheme.colors.resolve(identity.ink), working = state.pageWorking,
+        onRefresh = if (refreshes) ({ state.refreshOnPage(parcel) }) else null,
+        Modifier.testTag(PAGE_SYNC_LINE),
+    )
+}
 
 /**
  * Below the paper, on the ground it lies on, Pip asks whether the page is right (`ParcelFeedbackQuestionView`), 8 in

@@ -794,14 +794,28 @@ internal class DeliveriesState(
      * The page's bell (`store.setMuted(_:muted:)` in the page's `run`): switches the parcel's notifications off or back
      * on, one change at a time, then `saved`, where the bell rings; an alert says why it failed.
      */
-    fun muteOnPage(parcel: Parcel, muted: Boolean, saved: () -> Unit) {
+    fun muteOnPage(parcel: Parcel, muted: Boolean, saved: () -> Unit) = workOnPage {
+        // Once the app posts notifications (B-W01), a mute cancels the parcel's posted one here.
+        source.setMuted(parcel, muted)
+        saved()
+    }
+
+    /**
+     * The sync line's refresh (`store.refresh(_:)` in the page's `run`): asks the parcel's carrier again, one change
+     * at a time with the bell, the switch and delete; an alert says why it failed.
+     */
+    fun refreshOnPage(parcel: Parcel) = workOnPage { source.refresh(parcel) }
+
+    /**
+     * The page's `run` for a change that leaves the page open: `work` in the app's scope while the page waits
+     * ([pageWorking]), nothing while another runs, and an alert saying why it failed.
+     */
+    private fun workOnPage(work: suspend () -> Unit) {
         if (pageWorking) return
         pageWorking = true
         source.scope.launch {
             try {
-                // Once the app posts notifications (B-W01), a mute cancels the parcel's posted one here.
-                source.setMuted(parcel, muted)
-                saved()
+                work()
             } catch (error: CancellationException) {
                 throw error
             } catch (error: Exception) {
@@ -837,19 +851,7 @@ internal class DeliveriesState(
             editCarrier(pageId, carrier)
             return
         }
-        if (pageWorking) return
-        pageWorking = true
-        source.scope.launch {
-            try {
-                source.changeCarrier(parcel, carrier)
-            } catch (error: CancellationException) {
-                throw error
-            } catch (error: Exception) {
-                actionError = source.errorMessage(error)
-            } finally {
-                pageWorking = false
-            }
-        }
+        workOnPage { source.changeCarrier(parcel, carrier) }
     }
 
     /** Where TalkBack goes back to once the filters have closed: their button. */

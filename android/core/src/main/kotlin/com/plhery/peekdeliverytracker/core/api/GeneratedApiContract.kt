@@ -984,6 +984,18 @@ value class CarrierId(val rawValue: String) {
         val Parxl = CarrierId("parxl")
         val ShipglobalIn = CarrierId("shipglobal-in")
         val TopLogisticsAu = CarrierId("top-logistics-au")
+        val AceEe = CarrierId("ace-ee")
+        val Deliverdirect = CarrierId("deliverdirect")
+        val EacCn = CarrierId("eac-cn")
+        val Emons = CarrierId("emons")
+        val Lbtx = CarrierId("lbtx")
+        val LinearLogistics = CarrierId("linear-logistics")
+        val Liuchen = CarrierId("liuchen")
+        val Noerpel = CarrierId("noerpel")
+        val RhenusIt = CarrierId("rhenus-it")
+        val Shipter = CarrierId("shipter")
+        val TondaGlobal = CarrierId("tonda-global")
+        val Transnatur = CarrierId("transnatur")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -1912,6 +1924,18 @@ value class CarrierId(val rawValue: String) {
             Parxl,
             ShipglobalIn,
             TopLogisticsAu,
+            AceEe,
+            Deliverdirect,
+            EacCn,
+            Emons,
+            Lbtx,
+            LinearLogistics,
+            Liuchen,
+            Noerpel,
+            RhenusIt,
+            Shipter,
+            TondaGlobal,
+            Transnatur,
         )
     }
 }

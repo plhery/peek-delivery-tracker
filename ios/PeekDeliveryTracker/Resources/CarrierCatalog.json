@@ -35185,7 +35185,8 @@
       "timezone": "America/New_York",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "xgs",
+        "recognitionRank": 102
       },
       "trackingUrlTemplate": "https://www.xgsi.com/#track-shipment={trackingNumber}",
       "linkRules": [
@@ -35240,7 +35241,9 @@
       "timezone": "America/Toronto",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "ats-healthcare",
+        "recognitionRank": 103,
+        "recognitionServedCountriesOnly": true
       },
       "trackingUrlTemplate": "https://www.atshealthcare.ca/quickTrackResult?ship={trackingNumber}",
       "linkRules": [
@@ -36325,6 +36328,372 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://toplogistics.com.au/"
+    },
+    "ace-ee": {
+      "displayName": "ACE Logistics Estonia",
+      "aliases": [
+        "ACE Logistics Estonia AS",
+        "ACE EE"
+      ],
+      "countries": [
+        "EE"
+      ],
+      "color": "#004f7c",
+      "selectable": true,
+      "timezone": "Europe/Tallinn",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.acelogistics.eu/tracker/tracker_en.php?office=EE&cc=EE&ref={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.acelogistics.eu",
+            "acelogistics.eu"
+          ],
+          "pathPattern": "^/tracker/tracker(?:_[a-z]{2})?\\.php$",
+          "query": "^(?=(?:.*&)?office=EE(?:&|$))(?:.*&)?ref=([^&]+)(?=&|$)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.acelogistics.eu/ee/en/service/cargo-tracking/"
+    },
+    "deliverdirect": {
+      "displayName": "DeliverDirect",
+      "aliases": [
+        "Deliver Direct",
+        "Delta DeliverDirect",
+        "Delta Cargo DeliverDirect"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#041c2c",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.deliverdirect.com/EcomTracking?axb={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.deliverdirect.com",
+            "deliverdirect.com"
+          ],
+          "pathPattern": "^/EcomTracking/?$",
+          "params": [
+            "axb"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.deliverdirect.com/EcomTracking"
+    },
+    "eac-cn": {
+      "displayName": "EAC",
+      "aliases": [
+        "富皇美运",
+        "富皇美運",
+        "Fuhuang Meiyun",
+        "深圳市富皇美运国际商贸物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#e56b07",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.szeac.com/track.html"
+    },
+    "emons": {
+      "displayName": "Emons",
+      "aliases": [
+        "Emons Spedition",
+        "Emons Spedition GmbH",
+        "Emons Logistik",
+        "myEmons"
+      ],
+      "countries": [
+        "DE"
+      ],
+      "color": "#c00719",
+      "selectable": true,
+      "timezone": "Europe/Berlin",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.myemons.de/public.html"
+    },
+    "lbtx": {
+      "displayName": "LBTX",
+      "aliases": [
+        "龙本天下",
+        "龙本天下供应链",
+        "Longben Tianxia",
+        "深圳市龙本天下供应链管理有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#20c5cb",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.lbtxkd.com/search_kj.aspx"
+    },
+    "linear-logistics": {
+      "displayName": "Linear Logistics",
+      "aliases": [
+        "Linear Logistics Ltd",
+        "Parcelink Logistics"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "color": "#003d6a",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://linearlogistics.co.uk/tracking?q={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "linearlogistics.co.uk",
+            "www.linearlogistics.co.uk"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "q"
+          ]
+        },
+        {
+          "domains": [
+            "tracking.linearlogistics.co.uk"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "q"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://linearlogistics.co.uk/tracking"
+    },
+    "liuchen": {
+      "displayName": "Liuchen",
+      "aliases": [
+        "六尘",
+        "六尘物流",
+        "六尘国际物流",
+        "Liuchen Logistics",
+        "Liuchen International Logistics"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#b81c25",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.liuchenwl.com/index/tracknumber/track?nos={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.liuchenwl.com",
+            "liuchenwl.com"
+          ],
+          "pathPattern": "^/index/tracknumber/track/?$",
+          "params": [
+            "nos"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.liuchenwl.com/"
+    },
+    "noerpel": {
+      "displayName": "Noerpel",
+      "aliases": [
+        "C.E. Noerpel",
+        "C.E. Noerpel GmbH",
+        "Noerpel SE",
+        "Noerpel Gruppe"
+      ],
+      "countries": [
+        "DE",
+        "AT"
+      ],
+      "color": "#ffa900",
+      "selectable": true,
+      "timezone": "Europe/Berlin",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://portal.noerpel.de/tracking.html"
+    },
+    "rhenus-it": {
+      "displayName": "Rhenus Italia",
+      "aliases": [
+        "Rhenus Italy",
+        "Rhenus Logistics S.p.A."
+      ],
+      "countries": [
+        "IT"
+      ],
+      "color": "#00499a",
+      "selectable": true,
+      "timezone": "Europe/Rome",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tracking.rhenusitalia.it/rhenus/tracking.jsf?s={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.rhenusitalia.it"
+          ],
+          "pathPattern": "^/rhenus/tracking\\.jsf$",
+          "params": [
+            "s"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.rhenusitalia.it/rhenus/track.jsf"
+    },
+    "shipter": {
+      "displayName": "Shipter",
+      "aliases": [
+        "쉽터",
+        "H3 Networks",
+        "H3 NETWORKS Co., Ltd."
+      ],
+      "countries": [
+        "KR"
+      ],
+      "color": "#005eff",
+      "selectable": true,
+      "timezone": "Asia/Seoul",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.shipter.kr/tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.shipter.kr",
+            "shipter.kr"
+          ],
+          "path": "^/tracking/([A-Za-z0-9]+)/?$"
+        },
+        {
+          "domains": [
+            "shiptertracking.com"
+          ],
+          "path": "^/trackingResult/([A-Za-z0-9]+)/?$"
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^H3[A-Z]{2}\\d{6}KR$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.shipter.kr/tracking"
+    },
+    "tonda-global": {
+      "displayName": "Tonda Global",
+      "aliases": [
+        "TONDA GLOBAL",
+        "通达全球",
+        "Tarrive",
+        "青岛通达全球供应链管理有限公司",
+        "Qingdao Tonda Global Supply Chain Management Co., Ltd."
+      ],
+      "countries": [
+        "CN",
+        "KR",
+        "MN"
+      ],
+      "color": "#144f93",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.tarrive.com/track?q={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.tarrive.com",
+            "tarrive.com"
+          ],
+          "pathPattern": "^/(?:en/)?track/?$",
+          "params": [
+            "q"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.tarrive.com/track"
+    },
+    "transnatur": {
+      "displayName": "TransNatur",
+      "aliases": [
+        "Transnatur S.A.",
+        "Transnatur Norte"
+      ],
+      "countries": [
+        "ES",
+        "PT"
+      ],
+      "color": "#1699cb",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://portal.transnatur.com/crm/track/{trackingNumber}/",
+      "linkRules": [
+        {
+          "domains": [
+            "portal.transnatur.com"
+          ],
+          "path": "^/crm/track/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.transnatur.com/"
     }
   }
 }

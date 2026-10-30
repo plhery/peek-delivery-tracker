@@ -1,5 +1,5 @@
 import 'server-only';
-import { SUPPORTED_LOCALES, type Locale } from '../lib/locale';
+import { hrefLanguage, SUPPORTED_LOCALES, type Locale } from '../lib/locale';
 import { SOURCE_URL } from '../lib/source';
 import { siteTitle, wordsIn } from './sitePreview';
 
@@ -42,7 +42,7 @@ export function landingStructuredData({ origin, url, locale }: {
         // The names people search for: the product's, and the host's as they type it.
         alternateName: ['Peek Tracker', origin.hostname],
         url: origin.href,
-        inLanguage: [...SUPPORTED_LOCALES],
+        inLanguage: SUPPORTED_LOCALES.map(hrefLanguage),
         publisher: { '@id': `${origin.href}#organization` },
       },
       {
@@ -53,7 +53,7 @@ export function landingStructuredData({ origin, url, locale }: {
         description: t('preview.landing.description'),
         applicationCategory: 'UtilitiesApplication',
         operatingSystem: 'Web, iOS',
-        inLanguage: locale,
+        inLanguage: hrefLanguage(locale),
         isAccessibleForFree: true,
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
       },

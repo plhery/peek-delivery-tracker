@@ -4,11 +4,12 @@ import { join } from 'node:path';
 import { invitationInitial } from '../lib/invitationInitial';
 import { invitationInitialPath } from '../lib/invitationInitialPath';
 import type { Locale } from '../lib/locale';
-import { GEIST, pictureFont, writable } from './pictureFont';
+import { GEIST, NOTO_SANS_SC, pictureFont, PICTURE_FONTS, writable } from './pictureFont';
 import { wordsIn } from './sitePreview';
 
 /** The serif the sender's name is set in. The renderer's own sans is loaded beside it, or it would be lost. */
 const GELASIO = pictureFont('Gelasio', readFileSync(join(process.cwd(), 'public/fonts/gelasio/Gelasio-SemiBoldItalic.ttf')));
+const FONTS = [...PICTURE_FONTS, { name: GELASIO.name, data: GELASIO.data, weight: 600 as const, style: 'italic' as const }];
 
 const graphemes = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
 
@@ -21,11 +22,11 @@ function writtenName(nickname: string | null): string | null {
   let name = '';
   for (const { segment } of graphemes.segment(nickname ?? '')) {
     // What the serif lacks is written in the sans, as the renderer does it.
-    if (writable(segment, GELASIO, GEIST) !== null) name += segment;
+    if (writable(segment, GELASIO, GEIST, NOTO_SANS_SC) !== null) name += segment;
     else if (/^\p{L}/u.test(segment)) return null;
     else name += ' ';
   }
-  return writable(name, GELASIO, GEIST) || null;
+  return writable(name, GELASIO, GEIST, NOTO_SANS_SC) || null;
 }
 
 /** A still of the welcome parcel: the same kraft paper, face and seal. */
@@ -42,7 +43,7 @@ export function invitationSocialImage(nickname: string | null, locale: Locale = 
   const initial = invitationInitial(name);
   const initialPath = invitationInitialPath(initial);
   // An initial with no drawing of its own is set in type, when the faces have it.
-  const letter = initialPath ? null : writable(initial, GEIST, GELASIO) || null;
+  const letter = initialPath ? null : writable(initial, GEIST, GELASIO, NOTO_SANS_SC) || null;
   // Project the seal's SVG coordinates into ImageResponse's 360 × 300 image.
   const parcelScale = 300 / 215;
   const sealSize = 28 * parcelScale;
@@ -89,10 +90,7 @@ export function invitationSocialImage(nickname: string | null, locale: Locale = 
     </div>,
     {
       width: 1200, height: 630,
-      fonts: [
-        { name: 'Geist', data: GEIST.data, weight: 400, style: 'normal' },
-        { name: 'Gelasio', data: GELASIO.data, weight: 600, style: 'italic' },
-      ],
+      fonts: FONTS,
       headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' },
     },
   );

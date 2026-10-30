@@ -4,6 +4,7 @@ import { GUIDE_LINKS } from '../../generated/guides';
 import { guidePath } from '../../guides/paths';
 import { useI18n } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
+import { documentLanguage, guideLanguage } from '../../lib/locale';
 
 /**
  * The foot's way to the guides. It is a link to their page; a plain click
@@ -20,7 +21,9 @@ export function GuidesLink() {
   const wasOpen = useRef<boolean | null>(null);
   const [expanded, setExpanded] = useState(false);
   const id = useId();
-  const links = GUIDE_LINKS[locale];
+  // A language the guides are not written in reads them in the nearest one.
+  const language = guideLanguage(locale);
+  const links = GUIDE_LINKS[language];
   if (!links.length) return null;
   const showing = () => list.current?.matches(':popover-open') === true;
 
@@ -40,14 +43,14 @@ export function GuidesLink() {
   }
 
   return <>
-    <a href={guidePath(locale)} aria-haspopup="dialog" aria-controls={id} aria-expanded={expanded} onClick={toggle}
+    <a href={guidePath(language)} aria-haspopup="dialog" aria-controls={id} aria-expanded={expanded} onClick={toggle}
       onPointerDown={() => { wasOpen.current = showing(); }} onKeyDown={() => { wasOpen.current = null; }}>{t('guides.title')}</a>
     <div ref={list} id={id} popover="auto" className="landing-guides" role="dialog" aria-labelledby={`${id}-title`}
       onToggle={(event) => setExpanded(event.currentTarget.matches(':popover-open'))}>
       <strong id={`${id}-title`}>{t('guides.heading')}</strong>
-      <ul>{links.map(({ id: guide, slug, title }) => <li key={guide}><a href={guidePath(locale, slug)}>{title}</a></li>)}</ul>
+      <ul>{links.map(({ id: guide, slug, title }) => <li key={guide}><a href={guidePath(language, slug)} lang={language === locale ? undefined : documentLanguage(language)}>{title}</a></li>)}</ul>
       <p className="landing-guides__more">
-        <a className="landing-guides__all" href={guidePath(locale)}>{t('guides.all')}</a>
+        <a className="landing-guides__all" href={guidePath(language)}>{t('guides.all')}</a>
         <a className="landing-guides__all" href={carrierPath(locale)}>{t('carriers.all')}</a>
       </p>
     </div>

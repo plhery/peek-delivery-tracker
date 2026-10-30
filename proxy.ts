@@ -85,7 +85,7 @@ export const config = {
       // The example email is not a page of the app: it answers with a policy and a lifetime of its own.
       // Nor are the files written for crawlers, which every host answers itself, the IndexNow key's among them.
       // Nor are the map's tiles, which are kept like the scripts.
-      source: '/((?!api|health|_next/static|_next/image|icons|atlas|sw\\.js|push-sw\\.js|og(?:-[a-z]{2})?\\.png|favicon\\.ico|robots\\.txt|sitemap\\.xml|[0-9a-f]{32}\\.txt|\\.well-known/apple-app-site-association|email/example).*)',
+      source: '/((?!api|health|_next/static|_next/image|icons|atlas|sw\\.js|push-sw\\.js|og(?:-[a-z]{2}(?:-[a-z]{2})?)?\\.png|favicon\\.ico|robots\\.txt|sitemap\\.xml|[0-9a-f]{32}\\.txt|\\.well-known/apple-app-site-association|email/example).*)',
       missing: [
         { type: 'header', key: 'next-router-prefetch' },
         { type: 'header', key: 'purpose', value: 'prefetch' },
@@ -93,11 +93,11 @@ export const config = {
     },
     // A language address, the guides and the carriers' pages are always answered from here, a prefetch too: this is
     // where the page learns its language.
-    { source: '/:language(de|fr|it|es|pt|pl)' },
+    { source: '/:language(de|fr|it|es|pt|pt-br|pl|ru|zh)' },
     { source: '/guides/:path*' },
     { source: '/:language(de|fr|it|es|pt|pl)/guides/:path*' },
     { source: '/carriers/:path*' },
-    { source: '/:language(de|fr|it|es|pt|pl)/carriers/:path*' },
+    { source: '/:language(de|fr|it|es|pt|pt-br|pl|ru|zh)/carriers/:path*' },
     // The languages with pages alone (`PAGE_ONLY_LANGUAGES`), written out: the matcher is read before the app runs.
     { source: '/:language(nl|sv|da|nb|fi|cs|sk|hu|ro|bg|el|hr|sl|lt|lv|et|uk|sr)/carriers/:path*' },
   ],

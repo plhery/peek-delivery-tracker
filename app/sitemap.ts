@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { CARRIER_LINKS } from '../src/generated/carriers';
 import { GUIDE_LINKS } from '../src/generated/guides';
-import { SUPPORTED_LOCALES, type Locale } from '../src/lib/locale';
+import { GUIDE_LANGUAGES, hrefLanguages, SUPPORTED_LOCALES, type GuideLanguage, type Locale } from '../src/lib/locale';
 import { carrierAlternates, carrierLanguages, carrierUpdated } from '../src/server/carrierTexts';
 import { guideAlternates, guideUpdated } from '../src/server/guides';
 import { landingAddress, landingAlternates } from '../src/server/landingMetadata';
@@ -15,17 +15,18 @@ const xmlAddresses = <Addresses extends Partial<Record<string, string>>>(address
   Object.fromEntries(Object.entries(addresses).flatMap(([language, address]) => (address === undefined ? [] : [[language, xml(address)]]))) as Addresses;
 
 /** The day the newest guide of a language was last checked: when its list last changed. */
-const lastChecked = (locale: Locale) => GUIDE_LINKS[locale].map(({ id }) => guideUpdated(locale, id)).sort().at(-1);
+const lastChecked = (locale: GuideLanguage) => GUIDE_LINKS[locale].map(({ id }) => guideUpdated(locale, id)).sort().at(-1);
 /** The day the newest carrier's page of a language was last checked; none for a language with none yet. */
 const carriersChecked = (locale: Locale) => CARRIER_LINKS[locale].map(({ id }) => carrierUpdated(locale, id)).sort().at(-1);
 
 /**
  * The pages meant to be found: the landing in each language, the guides' own
- * page and every guide in each language, each naming the others, the
- * carriers' own page in each language and every carrier's page in each of its
- * languages, naming only those, the privacy notice and the help page. A guide
- * or a carrier's page is dated by the day its facts were last checked. A
- * parcel, an invitation and the demo are not listed.
+ * page and every guide in each language they are written in, each naming the
+ * others, the carriers' own page in each language and every carrier's page in
+ * each of its languages, naming only those, as hreflang names them, the
+ * privacy notice and the help page. A guide or a carrier's page is dated by
+ * the day its facts were last checked. A parcel, an invitation and the demo
+ * are not listed.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const origin = await siteOrigin();
@@ -33,16 +34,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const index = xmlAddresses(guideAlternates(origin));
   const carriers = xmlAddresses(carrierAlternates(origin));
   return [
-    ...SUPPORTED_LOCALES.map((locale) => ({ url: xml(landingAddress(origin, locale)), alternates: { languages } })),
-    ...SUPPORTED_LOCALES.map((locale) => ({ url: index[locale], lastModified: lastChecked(locale), alternates: { languages: index } })),
+    ...SUPPORTED_LOCALES.map((locale) => ({ url: xml(landingAddress(origin, locale)), alternates: { languages: hrefLanguages(languages) } })),
+    ...GUIDE_LANGUAGES.map((locale) => ({ url: index[locale], lastModified: lastChecked(locale), alternates: { languages: hrefLanguages(index) } })),
     ...GUIDE_LINKS.en.flatMap(({ id }) => {
       const addresses = xmlAddresses(guideAlternates(origin, id));
-      return SUPPORTED_LOCALES.map((locale) => ({ url: addresses[locale], lastModified: guideUpdated(locale, id), alternates: { languages: addresses } }));
+      return GUIDE_LANGUAGES.map((locale) => ({ url: addresses[locale], lastModified: guideUpdated(locale, id), alternates: { languages: hrefLanguages(addresses) } }));
     }),
-    ...SUPPORTED_LOCALES.map((locale) => ({ url: carriers[locale]!, lastModified: carriersChecked(locale), alternates: { languages: carriers } })),
+    ...SUPPORTED_LOCALES.map((locale) => ({ url: carriers[locale]!, lastModified: carriersChecked(locale), alternates: { languages: hrefLanguages(carriers) } })),
     ...CARRIER_LINKS.en.flatMap(({ id }) => {
       const addresses = xmlAddresses(carrierAlternates(origin, id));
-      return carrierLanguages(id).map((locale) => ({ url: addresses[locale]!, lastModified: carrierUpdated(locale, id), alternates: { languages: addresses } }));
+      return carrierLanguages(id).map((locale) => ({ url: addresses[locale]!, lastModified: carrierUpdated(locale, id), alternates: { languages: hrefLanguages(addresses) } }));
     }),
     { url: xml(new URL('/privacy.html', origin).href) },
     { url: xml(new URL('/support.html', origin).href) },

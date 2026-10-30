@@ -107,8 +107,8 @@ class LocalizationTests {
         val dictionaries = localizationDictionaries()
         val englishKeys = dictionaries.getValue("en").keys
 
-        assertEquals(setOf("en", "de", "fr", "it", "es", "pt", "pl"), dictionaries.keys)
-        for (language in listOf("de", "fr", "it", "es", "pt", "pl")) {
+        assertEquals(setOf("en", "de", "fr", "it", "es", "pt", "pt-br", "pl", "ru", "zh"), dictionaries.keys)
+        for (language in listOf("de", "fr", "it", "es", "pt", "pt-br", "pl", "ru", "zh")) {
             assertEquals(language, englishKeys, dictionaries.getValue(language).keys)
         }
     }

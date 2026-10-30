@@ -10,6 +10,7 @@ import { carrierInfo, notTrackingNumber, validTrackingNumber } from '../lib/carr
 import { readsPostcodeCountry, sentPostcodeCountry, takesAnyPostcode } from '../lib/postcodeCountry';
 import type { CarrierId } from '../types';
 import { ALERT_PRESET_STAGES, ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
+import { isLocale, type Locale } from '../lib/locale';
 import { createECDH } from 'node:crypto';
 import { HttpError, parseUuid } from './api';
 import { normalizeCarrierInputs } from './carriers';
@@ -315,7 +316,7 @@ export interface NativePushDeviceValues {
   token: string;
   installationId: string | null;
   environment: 'development' | 'production';
-  locale: 'en' | 'de' | 'fr' | 'it' | 'es' | 'pt' | 'pl';
+  locale: Locale;
   deviceName: string | null;
   sendTest: boolean;
 }
@@ -343,10 +344,8 @@ function nativePushEnvironment(value: unknown): NativePushEnvironment {
 }
 
 function nativePushLocale(value: unknown): NativePushLocale {
-  if (typeof value !== 'string' || !['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'].includes(value)) {
-    throw new HttpError(400, 'Choose a supported notification locale');
-  }
-  return value as NativePushLocale;
+  if (!isLocale(value)) throw new HttpError(400, 'Choose a supported notification locale');
+  return value;
 }
 
 function installationId(value: unknown): string {

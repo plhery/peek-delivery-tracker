@@ -1,4 +1,8 @@
-export const SUPPORTED_LOCALES = ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'] as const;
+/**
+ * The languages Peek speaks. Portuguese is European Portuguese, and Brazil's is a language of its own, named with
+ * its country in lower case as addresses write it (`pt-br`). Chinese is Simplified Chinese.
+ */
+export const SUPPORTED_LOCALES = ['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-br', 'pl', 'ru', 'zh'] as const;
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 /** Mirrors a chosen language, so the server renders the first frame in it. */
@@ -14,19 +18,52 @@ export function isLocale(value: unknown): value is Locale {
   return SUPPORTED_LOCALES.includes(value as Locale);
 }
 
-/** The app's language as the page declares it (`pt-PT` is `pt`), when it is one Peek speaks. */
+/**
+ * The language of Peek's a BCP 47 tag names, or null when it names none: its own for a tag with a region
+ * (`de-CH` is `de`), Brazil's Portuguese for `pt-BR` and European Portuguese for any other Portuguese, and
+ * Simplified Chinese for Chinese unless it is written in Traditional characters (`zh-Hant`, or Taiwan's,
+ * Hong Kong's and Macau's Chinese without a script), which Peek doesn't speak.
+ */
+export function tagLocale(tag: string): Locale | null {
+  const [language, ...subtags] = tag.trim().toLowerCase().replaceAll('_', '-').split('-');
+  if (language === 'pt') return subtags.includes('br') ? 'pt-br' : 'pt';
+  if (language === 'zh') {
+    const script = subtags.find((subtag) => /^[a-z]{4}$/.test(subtag));
+    return (script ? script === 'hant' : subtags.some((subtag) => ['tw', 'hk', 'mo'].includes(subtag))) ? null : 'zh';
+  }
+  return isLocale(language) ? language : null;
+}
+
+/** The app's language as the page declares it (`pt-PT` is `pt`, `pt-BR` `pt-br`), when it is one Peek speaks. */
 export function pageLocale(): Locale | undefined {
   if (typeof document === 'undefined') return undefined;
-  const language = document.documentElement.lang.toLowerCase().split('-')[0];
-  return isLocale(language) ? language : undefined;
+  return tagLocale(document.documentElement.lang) ?? undefined;
+}
+
+/**
+ * A page's language as hreflang names it: with its region in capitals, as BCP 47 writes it, `pt-BR` for the
+ * `pt-br` of its address; any other as its address names it.
+ */
+export function hrefLanguage(language: PageLanguage): string {
+  const [base, region] = language.split('-');
+  return region ? `${base}-${region.toUpperCase()}` : base;
+}
+
+/** A page's addresses with each language named as hreflang names it (`hrefLanguage`), and the one for a reader of none as it is. */
+export function hrefLanguages<Address>(addresses: Partial<Record<PageLanguage | 'x-default', Address>>): Record<string, Address> {
+  return Object.fromEntries(Object.entries(addresses).map(([language, address]) => [language === 'x-default' ? language : hrefLanguage(language as PageLanguage), address]));
 }
 
 /**
  * The `lang` a page or an email declares in a language. Portuguese is European Portuguese, so
- * screen readers pick a voice from Portugal. Addresses, hreflang and the stored choice keep `pt`.
+ * screen readers pick a voice from Portugal, and Chinese is Simplified Chinese, so browsers pick its
+ * characters' shapes. Addresses, hreflang and the stored choice keep `pt` and `zh`. Any other language
+ * is declared as hreflang names it (`hrefLanguage`).
  */
 export function documentLanguage(locale: PageLanguage): string {
-  return locale === 'pt' ? 'pt-PT' : locale;
+  if (locale === 'pt') return 'pt-PT';
+  if (locale === 'zh') return 'zh-Hans';
+  return hrefLanguage(locale);
 }
 
 /**
@@ -60,8 +97,8 @@ export type PageLanguage = Locale | PageOnlyLanguage;
 export const PAGE_LANGUAGES: readonly PageLanguage[] = [...SUPPORTED_LOCALES, ...Object.keys(PAGE_ONLY_LANGUAGES) as PageOnlyLanguage[]];
 
 
-/** A page's address in each of the site's languages, and in each language with pages alone it is written in. */
-export type PageAddresses = Record<Locale, string> & Partial<Record<PageOnlyLanguage, string>>;
+/** A page's address in each language it is written in: English always, the site's others and those with pages alone where it is. */
+export type PageAddresses = Record<'en', string> & Partial<Record<PageLanguage, string>>;
 
 export function isPageOnlyLanguage(value: unknown): value is PageOnlyLanguage {
   return typeof value === 'string' && Object.hasOwn(PAGE_ONLY_LANGUAGES, value);
@@ -72,12 +109,38 @@ export function interfaceLanguage(language: PageLanguage): Locale {
   return isLocale(language) ? language : 'en';
 }
 
+/** The first of the browser's languages Peek speaks (`tagLocale`), else English. */
 export function detectLocale(languages: readonly string[] = []): Locale {
   for (const language of languages) {
-    const base = language.toLowerCase().split('-')[0];
-    if (isLocale(base)) return base;
+    const locale = tagLocale(language);
+    if (locale) return locale;
   }
   return 'en';
+}
+
+/**
+ * The languages the guides are written in, every guide in each. A reader of another language reads them in the
+ * nearest (`guideLanguage`).
+ */
+export const GUIDE_LANGUAGES = ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'] as const satisfies readonly Locale[];
+export type GuideLanguage = (typeof GUIDE_LANGUAGES)[number];
+
+export function isGuideLanguage(value: unknown): value is GuideLanguage {
+  return GUIDE_LANGUAGES.includes(value as GuideLanguage);
+}
+
+/** The language a reader of `locale` reads the guides in: their own, European Portuguese for Brazil's, else English. */
+export function guideLanguage(locale: Locale): GuideLanguage {
+  if (locale === 'pt-br') return 'pt';
+  return isGuideLanguage(locale) ? locale : 'en';
+}
+
+/**
+ * The language a reader of `locale` reads Universal Parcel Scraper's carrier names in, which it writes in the
+ * languages the guides are: European Portuguese for Brazil's, English for the others it lacks.
+ */
+export function catalogLanguage(locale: Locale): GuideLanguage {
+  return guideLanguage(locale);
 }
 
 /** A language whose landing has an address of its own: every one but English, whose landing is `/`. */

@@ -111,7 +111,7 @@ describe('a carrier’s page in a language with pages alone', () => {
     expect(others).toEqual(CARRIER_LINKS.en.filter(({ id }) => id !== fixture.id).map(({ slug }) => `/carriers/${slug}`));
     // Its foot names the site's languages, then its own, the current one.
     const languages = [...html.matchAll(/<a href="([^"]+)" hrefLang="([^"]+)" lang="[^"]+"( aria-current="page")?>([^<]+)<\/a>/g)].map(([, href, language, current, name]) => [language, href, Boolean(current), name]);
-    expect(languages.map(([language]) => language)).toEqual(['en', 'de', 'fr', 'it', 'es', 'pt', 'pl', 'fi']);
+    expect(languages.map(([language]) => language)).toEqual(['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-BR', 'pl', 'ru', 'zh', 'fi']);
     expect(languages.at(-1)).toEqual(['fi', '/fi/carriers/lahetysten-seuranta', true, 'Suomi']);
     expect(languages[0]).toEqual(['en', `/carriers/${english.slug}`, false, 'English']);
   });

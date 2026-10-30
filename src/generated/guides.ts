@@ -1,10 +1,10 @@
 // Generated from content/guides by scripts/generate-guides.mjs. Do not edit.
-import type { Locale } from '../lib/locale';
+import type { GuideLanguage } from '../lib/locale';
 
 /** A guide in one language: its id in every language, and its address and title in this one. */
 export interface GuideLink { id: string; slug: string; title: string }
 
-export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = {
+export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
   "en": [
     {
       "id": "tracking-number-formats",

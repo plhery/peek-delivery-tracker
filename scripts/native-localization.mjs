@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { appleLanguage } from './localization-catalog.mjs';
 
 // The app and both extensions take their copy from Localization.json.
 const nativeSourceDirectories = ['PeekDeliveryTracker', 'DeliveryWidgetExtension', 'ShareExtension'];
@@ -68,7 +69,7 @@ export function infoPlistStrings(catalogs) {
       return `${stringsLiteral(plistKey)} = ${stringsLiteral(catalog[key])};\n`;
     });
     return [
-      `${directory}/${language}.lproj/${file}`,
+      `${directory}/${appleLanguage(language)}.lproj/${file}`,
       `/* Generated from shared/locales by npm run ios:resources. */\n${lines.join('')}`,
     ];
   }));

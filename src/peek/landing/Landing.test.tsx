@@ -2,10 +2,11 @@ import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { I18nProvider, loadMessages } from '../../i18n';
+import { I18nProvider, loadMessages, type Locale } from '../../i18n';
 import { scroll, stubIntersections } from '../../test/intersections';
 import { PeekSessionProvider } from '../session';
 import { Landing } from './Landing';
+import { OTHER_SITES } from './links';
 import { LandingFooter } from './Who';
 import { SCAN_MS } from './useJourneyStory';
 
@@ -145,6 +146,13 @@ describe('Landing', () => {
     expect(sites().map((link) => link.getAttribute('href'))).toEqual([
       'https://x-horoscope.com/pl/x', 'https://unfollow-monkey.com/pl', 'https://scootradar.com',
     ]);
+  });
+
+  it('links the other sites in the language they have nearest the reader’s, else in English', () => {
+    const addresses = (locale: Locale) => Object.values(OTHER_SITES).map((site) => site.address(locale));
+    expect(addresses('pt-br')).toEqual(['https://x-horoscope.com/pt/x', 'https://unfollow-monkey.com/pt', 'https://scootradar.com/pt']);
+    expect(addresses('zh')).toEqual(['https://x-horoscope.com/zh/x', 'https://unfollow-monkey.com/en', 'https://scootradar.com']);
+    expect(addresses('ru')).toEqual(['https://x-horoscope.com/en/x', 'https://unfollow-monkey.com/en', 'https://scootradar.com']);
   });
 
   it('moves a language’s address with the language chosen at its foot, to where the landing is in English for this reader', async () => {

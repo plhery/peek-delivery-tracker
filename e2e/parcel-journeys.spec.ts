@@ -364,7 +364,10 @@ test('keeps translated add-parcel guidance readable in every app language', asyn
     ['it', 'Aggiungi un pacco', 'Aggiungi un pacco', 'Chiudi'],
     ['es', 'Añadir un paquete', 'Añadir un paquete', 'Cerrar'],
     ['pt', 'Adicionar uma encomenda', 'Adicionar uma encomenda', 'Fechar'],
+    ['pt-br', 'Adicionar uma encomenda', 'Adicionar encomenda', 'Fechar'],
     ['pl', 'Dodaj przesyłkę', 'Dodaj przesyłkę', 'Zamknij'],
+    ['ru', 'Добавить посылку', 'Добавить посылку', 'Закрыть'],
+    ['zh', '添加包裹', '添加包裹', '关闭'],
     ['en', 'Add a parcel', 'Add a parcel', 'Close'],
   ] as const) {
     await page.locator('.account-trigger').click();

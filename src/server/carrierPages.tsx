@@ -6,7 +6,7 @@ import { CarrierIndex } from '../carriers/CarrierIndex';
 import { CarrierPage } from '../carriers/CarrierPage';
 import { GuideFrame } from '../guides/GuideFrame';
 import { plainBlocks, questions } from '../guides/markdown';
-import { interfaceLanguage, type Locale, type PageLanguage } from '../lib/locale';
+import { guideLanguage, hrefLanguage, interfaceLanguage, type Locale, type PageLanguage } from '../lib/locale';
 import { carrierAddresses, carrierAlternates, carrierLinkBySlug, carrierLinks, carrierText } from './carrierTexts';
 import { guideWords, languageNames, pageMetadata } from './guidePages';
 import { guideLinks } from './guides';
@@ -61,7 +61,7 @@ export async function CarrierRoute({ locale, slug }: { locale: PageLanguage; slu
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'Article', headline: text.title, description: text.description, inLanguage: locale,
+        '@type': 'Article', headline: text.title, description: text.description, inLanguage: hrefLanguage(locale),
         datePublished: text.published, dateModified: text.updated, mainEntityOfPage: url,
         image: sitePicture(site, ui).url, author: peek, publisher: peek,
       },
@@ -75,7 +75,7 @@ export async function CarrierRoute({ locale, slug }: { locale: PageLanguage; slu
       },
       // The questions the page's last section answers, each answer as plain words.
       {
-        '@type': 'FAQPage', inLanguage: locale, url,
+        '@type': 'FAQPage', inLanguage: hrefLanguage(locale), url,
         mainEntity: questions(text.blocks).map(({ question, answer }) => ({
           '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: plainBlocks(answer) },
         })),
@@ -87,7 +87,7 @@ export async function CarrierRoute({ locale, slug }: { locale: PageLanguage; slu
   return <GuideFrame locale={ui} language={locale} t={t} addresses={carrierAddresses(link.id)} languageNames={languageNames()} screen={`carriers/${locale}/${link.id}`}>
     {/* Data, not a script: the browser runs nothing of it, so the page's script policy does not apply. */}
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonForScript(data) }} />
-    <CarrierPage text={text} carrier={link} locale={ui} language={locale} t={t} guides={guideLinks(ui)}
+    <CarrierPage text={text} carrier={link} locale={ui} language={locale} t={t} guides={guideLinks(guideLanguage(ui))}
       others={others.filter((other) => other.link.id !== link.id)} />
   </GuideFrame>;
 }

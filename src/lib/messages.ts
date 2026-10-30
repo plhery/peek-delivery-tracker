@@ -1,7 +1,7 @@
 import trackingMessages from '../../shared/tracking-messages.json';
 import type en from '../../shared/locales/en.json';
 import type { Stage, TrackingEvent } from '../types';
-import { localizedCalendarDate, scanDate } from './format';
+import { dayAndTime, localizedCalendarDate, scanDate } from './format';
 import type { Locale } from './locale';
 
 /**
@@ -17,8 +17,14 @@ export type Translate = (
   variables?: Record<string, string | number>,
 ) => string;
 
-export const languageTags: Record<Locale, string> = { en: 'en-CH', de: 'de-CH', fr: 'fr-CH', it: 'it-CH', es: 'es-ES', pt: 'pt-PT', pl: 'pl-PL' };
-const polishPluralRules = new Intl.PluralRules('pl-PL');
+export const languageTags: Record<Locale, string> = {
+  en: 'en-CH', de: 'de-CH', fr: 'fr-CH', it: 'it-CH', es: 'es-ES', pt: 'pt-PT', 'pt-br': 'pt-BR', pl: 'pl-PL', ru: 'ru-RU', zh: 'zh-CN',
+};
+/**
+ * The languages whose counts take more forms than one and the rest, with their CLDR rules: `.one`, `.few` and
+ * `.many`. In Russian `.one` also counts 21, 31 and 101, so its copy writes the number.
+ */
+const countRules: Partial<Record<Locale, Intl.PluralRules>> = { pl: new Intl.PluralRules('pl-PL'), ru: new Intl.PluralRules('ru-RU') };
 
 /** One message of a language, with its count form and its variables filled in. */
 export function translateMessage(
@@ -28,8 +34,8 @@ export function translateMessage(
   messages: Messages,
 ): string {
   const count = variables?.count;
-  const category = typeof count === 'number' && locale === 'pl'
-    ? polishPluralRules.select(count) : count === 1 ? 'one' : 'other';
+  const rules = countRules[locale];
+  const category = typeof count === 'number' && rules ? rules.select(count) : count === 1 ? 'one' : 'other';
   const baseKey = key.replace(/\.(one|few|many)$/, '');
   const pluralKey = `${baseKey}.${category}` as MessageKey;
   let message: string = category !== 'other' && pluralKey in messages ? messages[pluralKey] : messages[key];
@@ -98,7 +104,7 @@ export function localizedExpectedDelivery(
   const windowMatch = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})(?:[–-](\d{2}:\d{2}))?$/.exec(value.trim());
   if (windowMatch) {
     const date = localizedExpectedDelivery(windowMatch[1], t, languageTag, now);
-    return `${date}, ${windowMatch[2]}${windowMatch[3] ? `–${windowMatch[3]}` : ''}`;
+    return dayAndTime(date, `${windowMatch[2]}${windowMatch[3] ? `–${windowMatch[3]}` : ''}`, languageTag);
   }
   const expected = /^\d{4}-\d{2}-\d{2}$/.test(value)
     ? new Date(`${value}T00:00:00`)
@@ -107,7 +113,7 @@ export function localizedExpectedDelivery(
   const day = localizedDeliveryDate(expected, t, languageTag, now);
   if (/T\d{2}:\d{2}/.test(value)) {
     const time = new Intl.DateTimeFormat(languageTag, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(expected);
-    return `${day}, ${time}`;
+    return dayAndTime(day, time, languageTag);
   }
   return day;
 }

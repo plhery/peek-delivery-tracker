@@ -29,7 +29,7 @@ import { carrierPath } from './carriers/paths';
 import { CARRIER_LINKS } from './generated/carriers';
 import { GUIDE_LINKS } from './generated/guides';
 import { guidePath } from './guides/paths';
-import { ADDRESS_LANGUAGES, documentLanguage, PAGE_LANGUAGES, SUPPORTED_LOCALES, type Locale, type PageLanguage } from './lib/locale';
+import { ADDRESS_LANGUAGES, documentLanguage, GUIDE_LANGUAGES, hrefLanguage, hrefLanguages, PAGE_LANGUAGES, SUPPORTED_LOCALES, type GuideLanguage, type PageLanguage } from './lib/locale';
 import { SOURCE_URL } from './lib/source';
 import { messagesFor } from './server/requestLocale';
 
@@ -42,9 +42,9 @@ const LANDING_DESCRIPTION =
 /** The page of a language's address, as the router finds it. */
 const languagePage = (language: string) => import(`../app/${language}/page.tsx`) as Promise<{ default: () => ReactElement; generateMetadata: () => Promise<Metadata> }>;
 /** The landing in every language, as each of its addresses names them. */
-const alternates = (origin: string) => ({
-  en: `${origin}/`, de: `${origin}/de`, fr: `${origin}/fr`, it: `${origin}/it`, es: `${origin}/es`, pt: `${origin}/pt`, pl: `${origin}/pl`,
-  'x-default': `${origin}/`,
+const alternates = (origin: string): Record<string, string> => ({
+  en: `${origin}/`, de: `${origin}/de`, fr: `${origin}/fr`, it: `${origin}/it`, es: `${origin}/es`, pt: `${origin}/pt`, 'pt-BR': `${origin}/pt-br`,
+  pl: `${origin}/pl`, ru: `${origin}/ru`, zh: `${origin}/zh`, 'x-default': `${origin}/`,
 });
 
 afterEach(() => { vi.unstubAllEnvs(); });
@@ -151,21 +151,21 @@ describe('public product metadata', () => {
       title,
       description,
       alternates: { canonical: address, languages: alternates('https://delivery.example.test') },
-      openGraph: { url: address, title, description, locale: expect.stringMatching(new RegExp(`^${language}_[A-Z]{2}$`)) },
+      openGraph: { url: address, title, description, locale: expect.stringMatching(new RegExp(`^${language.split('-')[0]}_[A-Z]{2}$`)) },
       twitter: { title, description },
     });
     expect(metadata.robots).toBeUndefined();
 
     // The page itself: German words at the German address, shown to someone signed in too.
     const { text, application } = await structuredData(LanguageLandingPage());
-    expect(JSON.parse(text)['@graph'][1]).toMatchObject({ url: address, inLanguage: language, description });
+    expect(JSON.parse(text)['@graph'][1]).toMatchObject({ url: address, inLanguage: hrefLanguage(language), description });
     expect(application.props).toMatchObject({ landingRoute: true, initialLocale: language, initialMessages: words });
   });
 
   it('names every language’s address, and `/` for a reader of none, at each of the landing’s addresses', async () => {
     vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example.test');
     const everywhere = alternates('https://peek.example.test');
-    expect(Object.keys(everywhere)).toEqual([...SUPPORTED_LOCALES, 'x-default']);
+    expect(Object.keys(everywhere)).toEqual([...SUPPORTED_LOCALES.map(hrefLanguage), 'x-default']);
     expect((await generateMetadata()).alternates).toEqual({ canonical: 'https://peek.example.test/', languages: everywhere });
     for (const language of ADDRESS_LANGUAGES) {
       expect((await (await languagePage(language)).generateMetadata()).alternates).toEqual({ canonical: `https://peek.example.test/${language}`, languages: everywhere });
@@ -179,7 +179,7 @@ describe('public product metadata', () => {
     expect(routes.filter((name) => name.includes('['))).toEqual(['[language]']);
     expect(readdirSync('app/[language]')).toEqual(['carriers']);
     expect(readdirSync('app/[language]/carriers')).toEqual(['[slug]']);
-    expect(routes.filter((name) => /^[a-z]{2}$/.test(name)).sort()).toEqual([...ADDRESS_LANGUAGES].sort());
+    expect(routes.filter((name) => /^[a-z]{2}(?:-[a-z]{2})?$/.test(name)).sort()).toEqual([...ADDRESS_LANGUAGES].sort());
     for (const language of ADDRESS_LANGUAGES) expect(existsSync(`app/${language}/page.tsx`), language).toBe(true);
     // English is at `/`: `/en` is a redirect, not a page.
     expect(existsSync('app/en')).toBe(false);
@@ -201,7 +201,7 @@ describe('public product metadata', () => {
     expect(data['@context']).toBe('https://schema.org');
     expect(data['@graph']).toEqual([
       {
-        '@type': 'WebSite', name: 'Peek', alternateName: ['Peek Tracker', 'delivery.example.test'], url: 'https://delivery.example.test/', inLanguage: ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'],
+        '@type': 'WebSite', name: 'Peek', alternateName: ['Peek Tracker', 'delivery.example.test'], url: 'https://delivery.example.test/', inLanguage: ['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-BR', 'pl', 'ru', 'zh'],
         publisher: { '@id': 'https://delivery.example.test/#organization' },
       },
       {
@@ -233,15 +233,15 @@ describe('public product metadata', () => {
   it('lists the pages meant to be found, on the canonical origin when one is configured', async () => {
     const local = alternates('https://delivery.example.test');
     const here = await sitemap();
-    expect(here.slice(0, SUPPORTED_LOCALES.length)).toEqual(SUPPORTED_LOCALES.map((locale) => ({ url: local[locale], alternates: { languages: local } })));
+    expect(here.slice(0, SUPPORTED_LOCALES.length)).toEqual(SUPPORTED_LOCALES.map((locale) => ({ url: local[hrefLanguage(locale)], alternates: { languages: local } })));
     expect(here.slice(-2)).toEqual([{ url: 'https://delivery.example.test/privacy.html' }, { url: 'https://delivery.example.test/support.html' }]);
     vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example.test');
     const origin = 'https://peek.example.test';
     const entries = await sitemap();
-    /** The guides' page, or one guide, in every language and in English for a reader of none. */
+    /** The guides' page, or one guide, in every language they are written in and in English for a reader of none. */
     const guides = (id?: string) => {
-      const address = (locale: Locale) => `${origin}${guidePath(locale, id && GUIDE_LINKS[locale].find((link) => link.id === id)!.slug)}`;
-      return { ...Object.fromEntries(SUPPORTED_LOCALES.map((locale) => [locale, address(locale)])) as Record<Locale, string>, 'x-default': address('en') };
+      const address = (locale: GuideLanguage) => `${origin}${guidePath(locale, id && GUIDE_LINKS[locale].find((link) => link.id === id)!.slug)}`;
+      return { ...Object.fromEntries(GUIDE_LANGUAGES.map((locale) => [locale, address(locale)])) as Record<GuideLanguage, string>, 'x-default': address('en') };
     };
     /**
      * The carriers' own page in every language, or one carrier's page in each of its languages only, those with pages
@@ -257,29 +257,31 @@ describe('public product metadata', () => {
     const carrierPages = carrierIds.flatMap((id) => PAGE_LANGUAGES.filter((language) => carriers(id)[language]).map((locale) => ({ id, locale })));
     expect(entries.map(({ url }) => url)).toEqual([
       'https://peek.example.test/', 'https://peek.example.test/de', 'https://peek.example.test/fr', 'https://peek.example.test/it',
-      'https://peek.example.test/es', 'https://peek.example.test/pt', 'https://peek.example.test/pl',
-      ...SUPPORTED_LOCALES.map((locale) => guides()[locale]),
-      ...ids.flatMap((id) => SUPPORTED_LOCALES.map((locale) => guides(id)[locale])),
+      'https://peek.example.test/es', 'https://peek.example.test/pt', 'https://peek.example.test/pt-br', 'https://peek.example.test/pl',
+      'https://peek.example.test/ru', 'https://peek.example.test/zh',
+      ...GUIDE_LANGUAGES.map((locale) => guides()[locale]),
+      ...ids.flatMap((id) => GUIDE_LANGUAGES.map((locale) => guides(id)[locale])),
       ...SUPPORTED_LOCALES.map((locale) => `${origin}${carrierPath(locale)}`),
       ...carrierPages.map(({ id, locale }) => carriers(id)[locale]),
       'https://peek.example.test/privacy.html',
       'https://peek.example.test/support.html',
     ]);
-    const articlesEnd = 14 + ids.length * SUPPORTED_LOCALES.length;
-    const [landings, indexes, articles] = [entries.slice(0, 7), entries.slice(7, 14), entries.slice(14, articlesEnd)];
-    const [hubs, pages] = [entries.slice(articlesEnd, articlesEnd + 7), entries.slice(articlesEnd + 7, -2)];
+    const indexesEnd = SUPPORTED_LOCALES.length + GUIDE_LANGUAGES.length;
+    const articlesEnd = indexesEnd + ids.length * GUIDE_LANGUAGES.length;
+    const [landings, indexes, articles] = [entries.slice(0, SUPPORTED_LOCALES.length), entries.slice(SUPPORTED_LOCALES.length, indexesEnd), entries.slice(indexesEnd, articlesEnd)];
+    const [hubs, pages] = [entries.slice(articlesEnd, articlesEnd + SUPPORTED_LOCALES.length), entries.slice(articlesEnd + SUPPORTED_LOCALES.length, -2)];
     // Each language's landing names all of them, itself included, and `/` for a reader of none.
     for (const entry of landings) expect(entry.alternates?.languages).toEqual(alternates(origin));
     // No date is claimed for a page whose last change nobody recorded.
     for (const entry of [...landings, ...entries.slice(-2)]) expect(entry).not.toHaveProperty('lastModified');
     // A guide is dated by the day its facts were last checked, and its list by its newest guide.
-    const updated = (id: string, locale: Locale) => /^updated: (\S+)$/m.exec(readFileSync(`content/guides/${id}/${locale}.md`, 'utf8'))![1];
-    SUPPORTED_LOCALES.forEach((locale, at) => {
+    const updated = (id: string, locale: GuideLanguage) => /^updated: (\S+)$/m.exec(readFileSync(`content/guides/${id}/${locale}.md`, 'utf8'))![1];
+    GUIDE_LANGUAGES.forEach((locale, at) => {
       expect(indexes[at].alternates?.languages).toEqual(guides());
       expect(indexes[at].lastModified).toBe(ids.map((id) => updated(id, locale)).sort().at(-1));
     });
-    ids.forEach((id, guideAt) => SUPPORTED_LOCALES.forEach((locale, at) => {
-      const entry = articles[guideAt * SUPPORTED_LOCALES.length + at];
+    ids.forEach((id, guideAt) => GUIDE_LANGUAGES.forEach((locale, at) => {
+      const entry = articles[guideAt * GUIDE_LANGUAGES.length + at];
       expect(entry.alternates?.languages).toEqual(guides(id));
       expect(entry.lastModified).toBe(updated(id, locale));
     }));
@@ -287,11 +289,11 @@ describe('public product metadata', () => {
     const checked = (id: string, locale: PageLanguage) => /^updated: (\S+)$/m.exec(readFileSync(`content/carriers/${id}/${locale}.md`, 'utf8'))![1];
     expect(carrierPages.length).toBeGreaterThan(carrierIds.length);
     SUPPORTED_LOCALES.forEach((locale, at) => {
-      expect(hubs[at].alternates?.languages).toEqual(carriers());
+      expect(hubs[at].alternates?.languages).toEqual(hrefLanguages(carriers()));
       expect(hubs[at].lastModified).toBe(CARRIER_LINKS[locale].map(({ id }) => checked(id, locale)).sort().at(-1));
     });
     carrierPages.forEach(({ id, locale }, at) => {
-      expect(pages[at].alternates?.languages).toEqual(carriers(id));
+      expect(pages[at].alternates?.languages).toEqual(hrefLanguages(carriers(id)));
       expect(pages[at].lastModified).toBe(checked(id, locale));
     });
   });

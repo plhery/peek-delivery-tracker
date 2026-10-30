@@ -38692,7 +38692,7 @@ export interface ApiPushSubscriptionStatusResponse {
 
 export type ApiNativePushEnvironment = "development" | "production";
 
-export type ApiNativePushLocale = "en" | "de" | "fr" | "it" | "es" | "pt" | "pl";
+export type ApiNativePushLocale = "en" | "de" | "fr" | "it" | "es" | "pt" | "pt-br" | "pl" | "ru" | "zh";
 
 export interface ApiNativePushDeviceRequest {
   "token": string;

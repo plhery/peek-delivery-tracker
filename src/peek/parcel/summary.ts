@@ -121,7 +121,10 @@ export function journeyEndedBefore(parcel: ParcelWithEvents, now = Date.now()): 
 export function forgetDate(forgetAt: string | null, languageTag: string): string | null {
   const date = forgetAt ? new Date(forgetAt) : null;
   if (!date || Number.isNaN(date.getTime())) return null;
-  const parts = new Intl.DateTimeFormat(new Intl.Locale(languageTag).language, { day: 'numeric', month: 'short' }).formatToParts(date);
+  const language = new Intl.Locale(languageTag).language;
+  // Chinese writes "10月30日".
+  if (language === 'zh') return new Intl.DateTimeFormat(language, { day: 'numeric', month: 'short' }).format(date);
+  const parts = new Intl.DateTimeFormat(language, { day: 'numeric', month: 'short' }).formatToParts(date);
   const index = (type: Intl.DateTimeFormatPartTypes) => parts.findIndex((entry) => entry.type === type);
   const part = (type: Intl.DateTimeFormatPartTypes) => parts[index(type)]!.value.replaceAll('.', '');
   // German writes "30. Okt"; names keep the language's own case.

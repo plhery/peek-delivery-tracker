@@ -1,5 +1,5 @@
 import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
-import { documentLanguage, PAGE_ONLY_LANGUAGES } from '../src/lib/locale';
+import { ADDRESS_LANGUAGES, documentLanguage, GUIDE_LANGUAGES, hrefLanguage, PAGE_ONLY_LANGUAGES, type PageLanguage } from '../src/lib/locale';
 
 // What a search engine or a link preview gets: the first answer of the server, before any script runs.
 const errors = new WeakMap<Page, string[]>();
@@ -21,21 +21,25 @@ async function fewAtATime<T>(items: readonly T[], check: (item: T) => Promise<vo
   await Promise.all(Array.from({ length: at }, async () => { while (next < items.length) await check(items[next++]); }));
 }
 const tag = (html: string, pattern: RegExp) => pattern.exec(html)?.[1]?.replaceAll('&amp;', '&') ?? null;
-const languages = ['de', 'fr', 'it', 'es', 'pt', 'pl'] as const;
+const languages = ADDRESS_LANGUAGES;
+/** The languages besides English the guides are written in. */
+const guideLanguages = GUIDE_LANGUAGES.filter((language) => language !== 'en');
 const questions: Record<string, string> = {
   de: 'Wo ist mein Paket?', fr: 'Où est mon colis\u202f?', it: 'Dov’è il mio pacco?',
-  es: '¿Dónde está mi paquete?', pt: 'Onde está a minha encomenda?', pl: 'Gdzie jest moja paczka?',
+  es: '¿Dónde está mi paquete?', pt: 'Onde está a minha encomenda?', 'pt-br': 'Cadê minha encomenda?', pl: 'Gdzie jest moja paczka?',
+  ru: 'Где моя посылка?', zh: '我的包裹到哪儿了？',
 };
 /** What Peek is, as each language's title ends. */
 const taglines: Record<string, string> = {
   en: 'Universal Package & Parcel Tracker', de: 'Universelle Paketverfolgung', fr: 'Suivi de colis universel', it: 'Tracciamento pacchi universale',
-  es: 'Seguimiento universal de paquetes', pt: 'Seguimento universal de encomendas', pl: 'Uniwersalne śledzenie przesyłek',
+  es: 'Seguimiento universal de paquetes', pt: 'Seguimento universal de encomendas', 'pt-br': 'Rastreamento universal de encomendas',
+  pl: 'Uniwersalne śledzenie przesyłek', ru: 'Универсальный трекер посылок и отправлений', zh: '一站式快递包裹跟踪',
 };
 /** The landing's title in a language: the question it answers, then what Peek is. */
 const titleIn = (language: string) => `Peek — ${language === 'en' ? 'Where’s my parcel?' : questions[language]} ${taglines[language]}`;
 /** The landing in every language as its addresses name them: each language's address, and `/` for a reader of none. */
 const everyLanguage = (origin: string, root = `${origin}/`) => [
-  ['en', root], ...languages.map((language) => [language, `${origin}/${language}`]), ['x-default', root],
+  ['en', root], ...languages.map((language) => [hrefLanguage(language), `${origin}/${language}`]), ['x-default', root],
 ];
 const alternatesOf = (html: string) => [...html.matchAll(/<link rel="alternate" hrefLang="([^"]*)" href="([^"]*)"/g)].map(([, language, address]) => [language, address]);
 const robotsOf = (html: string) => tag(html, /<meta name="robots" content="([^"]*)"/);
@@ -63,14 +67,15 @@ test('sitemap.xml lists the landing, the guides and the carriers’ pages in eve
   expect(addresses.slice(0, landings.length)).toEqual(landings);
   expect(addresses.slice(-2)).toEqual([`${baseURL}/privacy.html`, `${baseURL}/support.html`]);
   // Between them, the guides: their own page in every language, then each guide in every language.
-  const under = (section: string) => (address: string) => new RegExp(`^(?:/(?:de|fr|it|es|pt|pl))?/${section}(?:/[a-z0-9-]+)?$`).test(new URL(address).pathname);
+  const under = (section: string) => (address: string) => new RegExp(`^(?:/(?:${languages.join('|')}))?/${section}(?:/[a-z0-9-]+)?$`).test(new URL(address).pathname);
   const guides = addresses.slice(landings.length, -2).filter(under('guides'));
-  expect(guides.slice(0, 7)).toEqual([`${baseURL}/guides`, ...languages.map((language) => `${baseURL}/${language}/guides`)]);
-  expect(guides.length % 7).toBe(0);
+  expect(guides.slice(0, GUIDE_LANGUAGES.length)).toEqual([`${baseURL}/guides`, ...guideLanguages.map((language) => `${baseURL}/${language}/guides`)]);
+  expect(guides.length % GUIDE_LANGUAGES.length).toBe(0);
   // Then the carriers' pages: their own page in every language, then each carrier's page in each of its languages.
   const carriers = addresses.slice(landings.length + guides.length, -2);
-  expect(carriers.slice(0, 7)).toEqual([`${baseURL}/carriers`, ...languages.map((language) => `${baseURL}/${language}/carriers`)]);
-  expect(carriers.length).toBeGreaterThan(7);
+  const hubCount = languages.length + 1;
+  expect(carriers.slice(0, hubCount)).toEqual([`${baseURL}/carriers`, ...languages.map((language) => `${baseURL}/${language}/carriers`)]);
+  expect(carriers.length).toBeGreaterThan(hubCount);
   // A carrier's page can also be written in a language with pages alone, which has no carriers' page of its own.
   const pageOnly = Object.keys(PAGE_ONLY_LANGUAGES);
   const written = (address: string) => new RegExp(`^/(?:${pageOnly.join('|')})/carriers/[a-z0-9-]+$`).test(new URL(address).pathname);
@@ -85,22 +90,22 @@ test('sitemap.xml lists the landing, the guides and the carriers’ pages in eve
   // Each guides page names itself in every language, and English for a reader of none, dated by the day it was checked.
   for (const entry of entries.slice(landings.length, landings.length + guides.length)) {
     const named = Object.fromEntries(alternates(entry));
-    expect(Object.keys(named)).toEqual(['en', ...languages, 'x-default']);
+    expect(Object.keys(named)).toEqual(['en', ...guideLanguages, 'x-default']);
     expect(named['x-default']).toBe(named.en);
     expect(Object.values(named)).toContain(/<loc>([^<]*)<\/loc>/.exec(entry)![1]);
     expect(entry).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   }
   // The carriers' own page names every language, dated by its newest carrier's page; a carrier's page names only
   // the languages it is written in, English first and for a reader of none, dated by the day it was checked.
-  const [hubs, pages] = [entries.slice(landings.length + guides.length, landings.length + guides.length + 7), entries.slice(landings.length + guides.length + 7, -2)];
+  const [hubs, pages] = [entries.slice(landings.length + guides.length, landings.length + guides.length + hubCount), entries.slice(landings.length + guides.length + hubCount, -2)];
   hubs.forEach((entry, at) => {
-    expect(Object.keys(Object.fromEntries(alternates(entry)))).toEqual(['en', ...languages, 'x-default']);
+    expect(Object.keys(Object.fromEntries(alternates(entry)))).toEqual(['en', ...languages.map(hrefLanguage), 'x-default']);
     const own = new URL(carriers[at]).pathname;
-    expect(entry.includes('<lastmod>'), own).toBe(carriers.slice(7).some((address) => new URL(address).pathname.startsWith(`${own}/`)));
+    expect(entry.includes('<lastmod>'), own).toBe(carriers.slice(hubCount).some((address) => new URL(address).pathname.startsWith(`${own}/`)));
   });
   for (const entry of pages) {
     const named = Object.fromEntries(alternates(entry));
-    expect(Object.keys(named)).toEqual(['en', ...[...languages, ...pageOnly].filter((language) => language in named), 'x-default']);
+    expect(Object.keys(named)).toEqual(['en', ...[...languages, ...pageOnly].map((language) => hrefLanguage(language as PageLanguage)).filter((language) => language in named), 'x-default']);
     expect(named['x-default']).toBe(named.en);
     expect(Object.values(named)).toContain(/<loc>([^<]*)<\/loc>/.exec(entry)![1]);
     expect(entry).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
@@ -181,11 +186,11 @@ test('each language has an address whose first answer is entirely in that langua
       expect(tag(html, /<meta property="og:title" content="([^"]*)"/), where).toBe(titleIn(language));
       expect(tag(html, /<meta property="og:description" content="([^"]*)"/), where).toBe(description);
       expect(tag(html, /<meta property="og:url" content="([^"]*)"/), where).toBe(`${baseURL}/${language}`);
-      expect(tag(html, /<meta property="og:locale" content="([^"]*)"/), where).toMatch(new RegExp(`^${language}_[A-Z]{2}$`));
+      expect(tag(html, /<meta property="og:locale" content="([^"]*)"/), where).toMatch(new RegExp(`^${language.split('-')[0]}_[A-Z]{2}$`));
       // The words of the page are in the language too, down to its last section.
       expect(html, where).not.toContain('Who’s behind Peek?');
       const [, app] = JSON.parse(structuredDataOf(html)!)['@graph'];
-      expect(app, where).toMatchObject({ url: `${baseURL}/${language}`, inLanguage: language, description });
+      expect(app, where).toMatchObject({ url: `${baseURL}/${language}`, inLanguage: hrefLanguage(language), description });
     }
   }
 

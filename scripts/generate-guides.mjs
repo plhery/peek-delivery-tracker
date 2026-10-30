@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CARRIER_CATALOG } from 'universal-parcel-scraper';
 
-import { interfaceLanguage, isPageOnlyLanguage, PAGE_LANGUAGES, SUPPORTED_LOCALES } from '../src/lib/locale.ts';
+import { GUIDE_LANGUAGES, interfaceLanguage, isPageOnlyLanguage, PAGE_LANGUAGES } from '../src/lib/locale.ts';
 import {
   figureShape, GUIDE_SLUG, linkedCarriers, linkedGuides, parseCarrierText, parseGuide, questions, typeset, wordCount,
 } from '../src/guides/markdown.ts';
@@ -42,7 +42,7 @@ function translated(text, english, where, kind) {
 }
 
 /**
- * Every guide in every language, read and checked: the list in `index.json`
+ * Every guide in every language it is written in (`GUIDE_LANGUAGES`), read and checked: the list in `index.json`
  * names the guides in the order the site shows them, and each has one file per
  * language. A guide that would publish half-made stops the build here. A guide
  * links a carrier's page only in a language the carrier is written in.
@@ -56,7 +56,7 @@ export function readGuides(directory = contentRoot, carriers = readCarrierIndex(
   for (const folder of folders) if (!ids.includes(folder)) throw new Error(`content/guides/${folder} is not listed in index.json`);
 
   const guides = ids.map((id) => {
-    const languages = Object.fromEntries(SUPPORTED_LOCALES.map((locale) => {
+    const languages = Object.fromEntries(GUIDE_LANGUAGES.map((locale) => {
       const file = path.join(directory, id, `${locale}.md`);
       const where = `content/guides/${id}/${locale}.md`;
       if (!existsSync(file)) throw new Error(`${where} is missing: a guide is written in every language`);
@@ -72,7 +72,7 @@ export function readGuides(directory = contentRoot, carriers = readCarrierIndex(
     const english = languages.en;
     const words = wordCount(english.blocks);
     if (words < LIMITS.words) throw new Error(`content/guides/${id}/en.md has ${words} words; a guide worth finding has at least ${LIMITS.words}`);
-    for (const locale of SUPPORTED_LOCALES) {
+    for (const locale of GUIDE_LANGUAGES) {
       const where = `content/guides/${id}/${locale}.md`;
       const guide = languages[locale];
       if (figureShape(guide.blocks).join('\n') !== figureShape(english.blocks).join('\n')) {
@@ -83,7 +83,7 @@ export function readGuides(directory = contentRoot, carriers = readCarrierIndex(
     return { id, languages };
   });
 
-  for (const locale of SUPPORTED_LOCALES) {
+  for (const locale of GUIDE_LANGUAGES) {
     const slugs = guides.map(({ languages }) => languages[locale].slug);
     const twice = slugs.find((slug, index) => slugs.indexOf(slug) !== index);
     if (twice) throw new Error(`Two ${locale} guides share the address "${twice}"`);
@@ -190,17 +190,17 @@ const written = (value) => JSON.stringify(value, null, 2).replace(/\u202f/g, '\\
  * called, set as its language sets it.
  */
 export function guidesModule(guides) {
-  const links = Object.fromEntries(SUPPORTED_LOCALES.map((locale) => [
+  const links = Object.fromEntries(GUIDE_LANGUAGES.map((locale) => [
     locale,
     guides.map(({ id, languages }) => ({ id, slug: languages[locale].slug, title: typeset(languages[locale], locale).title })),
   ]));
   return `// Generated from content/guides by scripts/generate-guides.mjs. Do not edit.
-import type { Locale } from '../lib/locale';
+import type { GuideLanguage } from '../lib/locale';
 
 /** A guide in one language: its id in every language, and its address and title in this one. */
 export interface GuideLink { id: string; slug: string; title: string }
 
-export const GUIDE_LINKS: Record<Locale, readonly GuideLink[]> = ${written(links)};
+export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = ${written(links)};
 `;
 }
 

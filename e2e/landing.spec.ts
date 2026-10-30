@@ -287,7 +287,8 @@ test('fits a 320 px phone in every language, from the field to the foot of the p
   await page.setViewportSize({ width: 320, height: 700 });
   for (const [locale, question] of [
     ['en', 'Where’s my parcel?'], ['de', 'Wo ist mein Paket?'], ['fr', 'Où est mon colis\u202f?'], ['it', 'Dov’è il mio pacco?'],
-    ['es', '¿Dónde está mi paquete?'], ['pt', 'Onde está a minha encomenda?'], ['pl', 'Gdzie jest moja paczka?'],
+    ['es', '¿Dónde está mi paquete?'], ['pt', 'Onde está a minha encomenda?'], ['pt-br', 'Cadê minha encomenda?'],
+    ['pl', 'Gdzie jest moja paczka?'], ['ru', 'Где моя посылка?'], ['zh', '我的包裹到哪儿了？'],
   ]) {
     // Chosen before the page loads: reloading a page that is still fetching makes WebKit log the cancelled requests.
     await page.addInitScript((value) => localStorage.setItem('deliveryTrackerLocale', value), locale);
@@ -430,7 +431,8 @@ test('the foot of the deliveries fits a 320 px phone in every language', async (
   await page.setViewportSize({ width: 320, height: 700 });
   for (const [locale, home] of [
     ['en', 'Home page'], ['de', 'Startseite'], ['fr', 'Page d’accueil'], ['it', 'Pagina iniziale'],
-    ['es', 'Página de inicio'], ['pt', 'Página inicial'], ['pl', 'Strona główna'],
+    ['es', 'Página de inicio'], ['pt', 'Página inicial'], ['pt-br', 'Página inicial'], ['pl', 'Strona główna'],
+    ['ru', 'Главная'], ['zh', '首页'],
   ]) {
     await page.addInitScript((value) => localStorage.setItem('deliveryTrackerLocale', value), locale);
     await page.goto('/demo');

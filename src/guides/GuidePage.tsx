@@ -1,5 +1,5 @@
 import type { GuideLink } from '../generated/guides';
-import { documentLanguage, languagePath, type Locale, type PageLanguage } from '../lib/locale';
+import { documentLanguage, languagePath, type GuideLanguage, type Locale, type PageLanguage } from '../lib/locale';
 import { languageTags, type Translate } from '../lib/messages';
 import { GuideBody } from './GuideBody';
 import type { CheckerWords } from './NumberChecker';
@@ -76,7 +76,7 @@ export function GuideCta({ locale, t }: { locale: Locale; t: Translate }) {
 export function GuidePage({ guide, id, locale, t, links, others }: {
   guide: Guide;
   id: string;
-  locale: Locale;
+  locale: GuideLanguage;
   t: Translate;
   links: readonly GuideLink[];
   /** The guides offered below this one, with what each is about. */

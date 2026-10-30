@@ -7,16 +7,25 @@ export { SOURCE_URL } from '../../lib/source';
 /** Who makes Peek, on X. */
 export const AUTHOR_URL = 'https://x.com/plhery';
 
+/** The language a site written in `languages` (and English) speaks to a reader of `locale`: Portuguese to a Brazilian. */
+function siteLanguage(locale: Locale, languages: readonly string[]): string {
+  const language = locale === 'pt-br' ? 'pt' : locale;
+  return languages.includes(language) ? language : 'en';
+}
+
 /**
- * What else its author makes, each at its own address for the reader's language. ScootRadar's English is at its bare
- * domain, and it has no Polish: a Polish reader gets its English.
+ * What else its author makes, each at its own address in the reader's language where it is written in it, else in
+ * English. ScootRadar's English is at its bare domain.
  */
 export const OTHER_SITES = {
-  horoscope: { name: 'X Horoscope', address: (locale: Locale) => `https://x-horoscope.com/${locale}/x` },
-  monkey: { name: 'UnfollowMonkey', address: (locale: Locale) => `https://unfollow-monkey.com/${locale}` },
+  horoscope: { name: 'X Horoscope', address: (locale: Locale) => `https://x-horoscope.com/${siteLanguage(locale, ['de', 'fr', 'it', 'es', 'pt', 'pl', 'zh'])}/x` },
+  monkey: { name: 'UnfollowMonkey', address: (locale: Locale) => `https://unfollow-monkey.com/${siteLanguage(locale, ['de', 'fr', 'it', 'es', 'pt', 'pl'])}` },
   scootradar: {
     name: 'ScootRadar',
-    address: (locale: Locale) => locale === 'en' || locale === 'pl' ? 'https://scootradar.com' : `https://scootradar.com/${locale}`,
+    address: (locale: Locale) => {
+      const language = siteLanguage(locale, ['de', 'fr', 'it', 'es', 'pt']);
+      return language === 'en' ? 'https://scootradar.com' : `https://scootradar.com/${language}`;
+    },
   },
 } as const;
 

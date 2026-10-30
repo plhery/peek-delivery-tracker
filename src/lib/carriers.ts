@@ -1,6 +1,6 @@
 /** Browser-safe carrier data and detection come from the scraper's public API. */
 import {
-  carrierInfo,
+  carrierInfo as scraperCarrierInfo,
   carrierRequirements as scraperRequirements,
   type CarrierId,
   type CarrierInputField as ScraperInputField,
@@ -8,8 +8,10 @@ import {
   detectCarrierMatch,
   isPhoneNumber,
   isPlaceholderNumber,
+  localizedCarrierUrl as scraperCarrierUrl,
   normalizeTrackingNumber,
 } from 'universal-parcel-scraper';
+import { catalogLanguage, tagLocale } from './locale';
 import {
   activeTrackingCarrierId,
   displayedCarrierId,
@@ -27,8 +29,6 @@ export type { ParcelTrackingLink } from 'universal-parcel-scraper/app';
 export {
   CARRIERS,
   SELECTABLE_CARRIERS,
-  carrierInfo,
-  localizedCarrierUrl,
   MAX_RECOGNITIONS,
   requirementSatisfied,
   tracksAutomatically,
@@ -39,6 +39,20 @@ export {
   displayedCarrierId,
   recognitionAskedCarriers,
 } from 'universal-parcel-scraper/app';
+
+/** The scraper writes carriers' names and pages in seven languages: Brazilian Portuguese takes the Portuguese ones, the others English. */
+function catalogLocale(locale?: string): string | undefined {
+  const language = locale ? tagLocale(locale) : null;
+  return language ? catalogLanguage(language) : locale;
+}
+
+export function carrierInfo(id: CarrierId, locale?: string) {
+  return scraperCarrierInfo(id, catalogLocale(locale));
+}
+
+export function localizedCarrierUrl(carrierId: CarrierId, url: string, locale?: string): string {
+  return scraperCarrierUrl(carrierId, url, catalogLocale(locale));
+}
 
 /**
  * Each carrier's page under its own number: the followed page under the first number, and an earlier or a named
@@ -175,11 +189,12 @@ export function parcelTrackingNumbers(parcel: Parameters<typeof scraperTrackingN
 
 /** The followed carrier's page first, and then the named delivering carrier's, for its own number. */
 export function parcelTrackingLinks(parcel: Parameters<typeof scraperTrackingLinks>[0] & NamedDelivery, locale?: string): ParcelTrackingLink[] {
-  const links = scraperTrackingLinks(parcel, locale);
+  const catalog = catalogLocale(locale);
+  const links = scraperTrackingLinks(parcel, catalog);
   const named = namedDelivery(parcel);
   if (!named?.number) return links;
   // The parcel is not followed there yet.
-  return [...links, ...scraperTrackingLinks({ carrier: named.carrier, trackingNumber: named.number }, locale)
+  return [...links, ...scraperTrackingLinks({ carrier: named.carrier, trackingNumber: named.number }, catalog)
     .filter((link) => link.carrier.id === named.carrier)
     .map((link) => ({ ...link, active: false, ready: false, role: 'waiting' as const }))];
 }

@@ -7,9 +7,12 @@ import es from '../../shared/locales/es.json';
 import fr from '../../shared/locales/fr.json';
 import it from '../../shared/locales/it.json';
 import pl from '../../shared/locales/pl.json';
+import ptBr from '../../shared/locales/pt-br.json';
 import pt from '../../shared/locales/pt.json';
+import ru from '../../shared/locales/ru.json';
+import zh from '../../shared/locales/zh.json';
 
-const MESSAGES: Record<Exclude<Locale, 'en'>, Messages> = { de, fr, it, es, pt, pl };
+const MESSAGES: Record<Exclude<Locale, 'en'>, Messages> = { de, fr, it, es, pt, 'pt-br': ptBr, pl, ru, zh };
 
 /** The messages of a language, for what the server writes itself: a link preview's title and image. */
 export function messagesFor(locale: Locale): Messages {

@@ -253,7 +253,7 @@ Key server modules:
 | --- | --- |
 | `/` | The landing to a visitor, with the parcels of their device right under the field; the deliveries to someone signed in |
 | `/home` | The landing to anyone. Someone signed in reaches it from the foot of their deliveries or from Settings, and it leads back to `/` |
-| `/de`, `/fr`, `/it`, `/es`, `/pt`, `/pl` | The landing in that language to anyone, whatever the browser prefers. English is at `/`, where `/en` leads |
+| `/de`, `/fr`, `/it`, `/es`, `/pt`, `/pt-br`, `/pl`, `/ru`, `/zh` | The landing in that language to anyone, whatever the browser prefers. English is at `/`, where `/en` leads |
 | `/p/<id>` | One parcel, to anyone with the link |
 | `/sample` | A made-up parcel on a parcel page, told by the browser: nothing is asked of the server or kept on the device. Its "Home page" link leads back to the landing |
 | `/i/<key>`, `/invite` | A friend invitation ([FRIENDS.md](FRIENDS.md)) |
@@ -449,8 +449,14 @@ and nothing typed is sent.
 
 ## Copy and languages
 
-App copy is available in English, German, French, Italian, Spanish, Portuguese and Polish
-([shared/locales](../shared/locales/README.md)). Carrier scan text and parcel names are
+App copy is available in English, German, French, Italian, Spanish, Portuguese, Brazilian
+Portuguese, Polish, Russian and Simplified Chinese ([shared/locales](../shared/locales/README.md)).
+Brazilian Portuguese is `pt-br` in addresses and stored choices and `pt-BR` in language tags; a
+browser's other Portuguese reads as European, and Traditional Chinese (`zh-Hant`, `zh-TW`,
+`zh-HK`, `zh-MO`) as no language Peek speaks, so the next one it prefers is used. The guides
+are written in the first seven; Brazilian readers get the Portuguese ones and Russian and
+Chinese readers the English ones, and so it is for the carriers' names and links, which
+Universal Parcel Scraper writes in those seven ([`locale.ts`](../src/lib/locale.ts)). Carrier scan text and parcel names are
 shown as-is; known app-generated timeline messages are translated
 ([LOCALIZATION.md](LOCALIZATION.md)). Errors map to localized guidance and never show raw
 diagnostics. Status labels don't imply a carrier delay when only our check failed.

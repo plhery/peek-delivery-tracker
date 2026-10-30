@@ -67,7 +67,7 @@ test('Sharing controls stay in place and preserve saved privacy preferences', as
 test('Circle and sharing fit narrow screens in all languages', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 740 });
   await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
-  for (const language of ['fr', 'de', 'it', 'es', 'pt', 'pl', 'en'] as const) {
+  for (const language of ['fr', 'de', 'it', 'es', 'pt', 'pt-br', 'pl', 'ru', 'zh', 'en'] as const) {
     await page.locator('.account-trigger').click();
     await page.getByRole('dialog').getByRole('combobox').selectOption(language);
     await expect(page.locator('html')).toHaveAttribute('lang', documentLanguage(language));

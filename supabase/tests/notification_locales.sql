@@ -33,7 +33,7 @@ begin
   foreach subscription_table in array array[
     'push_subscriptions', 'native_push_devices', 'live_activity_devices', 'live_activity_update_tokens'
   ] loop
-    foreach language in array array['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'] loop
+    foreach language in array array['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-br', 'pl', 'ru', 'zh'] loop
       execute format('update public.%I set locale = $1 where id = $2 returning locale', subscription_table)
         into stored_language using language, '98000000-0000-0000-0000-000000000003'::uuid;
       if stored_language is distinct from language then

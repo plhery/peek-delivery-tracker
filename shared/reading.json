@@ -33,7 +33,7 @@
       "pattern": "^(?:30|31|80|81)[0-9]{14}$"
     }
   ],
-  "numberWords": "track|parcel|shipment|sendung|paket|suivi|colis|tracciamento|spedizione|pacco|seguimiento|env[ií]o|paquete|seguimento|encomenda|śledzeni|przesyłk|paczk",
+  "numberWords": "track|parcel|shipment|sendung|paket|suivi|colis|tracciamento|spedizione|pacco|seguimiento|env[ií]o|paquete|seguimento|encomenda|rastre(?:io|amento)|pacote|śledzeni|przesyłk|paczk|трек|отслеж|посылк|отправлени|运单|快递|物流|包裹|跟踪|追踪",
   "lookalikes": {
     "digitForLetter": { "O": "0", "Q": "0", "D": "0", "I": "1", "L": "1", "Z": "2", "A": "4", "S": "5", "G": "6", "T": "7", "B": "8" },
     "letterForDigit": { "0": "O", "1": "I", "2": "Z", "5": "S", "8": "B" }
@@ -104,6 +104,9 @@
     { "text": "Your registration is complete. Parcel number 1234567899", "shop": null, "number": "1234567899" },
     { "text": "Call us on 0441234567.\nYour parcel will arrive soon: 1234567899", "shop": null, "number": "1234567899", "why": "Of two numbers, the one on the line that speaks of tracking." },
     { "text": "Ihr Paket ist unterwegs: 1234567899\nFragen? 0441234567", "shop": null, "number": "1234567899" },
+    { "text": "Seu pacote está a caminho: 1234567899\nDúvidas? 0441234567", "shop": null, "number": "1234567899" },
+    { "text": "Трек-номер посылки: 1234567899\nВопросы? 0441234567", "shop": null, "number": "1234567899" },
+    { "text": "快递单号：1234567899\n客服电话：0441234567", "shop": null, "number": "1234567899" },
     { "text": "Your order has shipped!\r\nTrack it with DHL: 1234567899\r\n", "shop": null, "number": "1234567899" },
     { "text": "Track it with DHL: 1234567899\nhttps://example.test/track/9987654321", "shop": null, "number": "1234567899", "why": "A number in a link is the link's, not the message's." },
     { "text": "Call us on 1234567899 or 9987654321, any day.", "shop": null, "number": "", "why": "Two numbers and nothing to tell them apart: neither is read." },

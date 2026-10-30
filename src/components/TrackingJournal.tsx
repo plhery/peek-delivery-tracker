@@ -52,7 +52,7 @@ export function TrackingJournal({ events: allEvents, syncing = false, fold = fal
   const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString();
   const dayLabel = (date: Date | null, fallback: string) => !date ? fallback
     : sameDay(date, now) ? t('time.today') : sameDay(date, yesterday) ? t('time.yesterday')
-      : localizedCalendarDate(date, languageTag) + (date.getFullYear() !== now.getFullYear() ? ` ${date.getFullYear()}` : '');
+      : localizedCalendarDate(date, languageTag, date.getFullYear() !== now.getFullYear());
   const updates = (count: number) => t(count === 1 ? 'detail.updateCount.one' : 'detail.updateCount.many', { count });
 
   // A scan dated by its day alone can sort among the day before's scans, west of the carrier's zone.

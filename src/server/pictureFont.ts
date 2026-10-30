@@ -92,6 +92,15 @@ export function pictureFont(name: string, data: Buffer): PictureFont {
 /** The sans of every picture: the face the renderer ships with. */
 export const GEIST = pictureFont('Geist', readFileSync(join(process.cwd(), 'node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf')));
 
+/** The Chinese Geist lacks: Noto Sans SC, cut to the characters Chinese writes ([public/fonts/noto-sans-sc](../../public/fonts/noto-sans-sc/README.md)). */
+export const NOTO_SANS_SC = pictureFont('Noto Sans SC', readFileSync(join(process.cwd(), 'public/fonts/noto-sans-sc/NotoSansSC-Regular.otf')));
+
+/** The faces of the parcel's pictures, in the order the renderer tries them. */
+export const PICTURE_FACES = [GEIST, NOTO_SANS_SC];
+
+/** `PICTURE_FACES` as the renderer is given them: one list, which it reads once and keeps. */
+export const PICTURE_FONTS = PICTURE_FACES.map(({ name, data }) => ({ name, data, weight: 400 as const, style: 'normal' as const }));
+
 const graphemes = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
 
 /**
@@ -117,9 +126,16 @@ export function writable(text: string, ...faces: PictureFont[]): string | null {
   return plain;
 }
 
-/** The width of text a face can write at a font size, as the sum of its glyphs' advances. */
-export function textWidth(text: string, size: number, face: PictureFont): number {
-  let units = 0;
-  for (const character of text) units += face.advance(face.glyph(character.codePointAt(0)!));
-  return units / face.unitsPerEm * size;
+/**
+ * The width of text the faces can write at a font size, as the sum of its glyphs' advances, each character's
+ * in the first face that has it.
+ */
+export function textWidth(text: string, size: number, ...faces: PictureFont[]): number {
+  let width = 0;
+  for (const character of text) {
+    const codePoint = character.codePointAt(0)!;
+    const face = faces.find((candidate) => candidate.glyph(codePoint)) ?? faces[0]!;
+    width += face.advance(face.glyph(codePoint)) / face.unitsPerEm;
+  }
+  return width * size;
 }

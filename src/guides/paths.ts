@@ -1,20 +1,21 @@
 import { GUIDE_LINKS } from '../generated/guides';
-import { isLocale, type Locale } from '../lib/locale';
+import { isGuideLanguage, type GuideLanguage } from '../lib/locale';
 
 /** Where the guides of a language live, or one of them. English has no prefix. */
-export function guidePath(locale: Locale, slug?: string): string {
+export function guidePath(locale: GuideLanguage, slug?: string): string {
   return `${locale === 'en' ? '' : `/${locale}`}/guides${slug ? `/${slug}` : ''}`;
 }
 
 /**
  * The language a guides address is written in, or null at any other address: `/guides` is English,
- * `/de/guides` German. English has no prefix, so `/en/guides` is no guides address.
+ * `/de/guides` German. English has no prefix, so `/en/guides` is no guides address, and nor is one in a
+ * language the guides are not written in, such as `/ru/guides`.
  */
-export function guidePathLanguage(pathname: string): Locale | null {
+export function guidePathLanguage(pathname: string): GuideLanguage | null {
   const match = /^\/(?:([a-z]{2})\/)?guides(?:\/|$)/.exec(pathname);
   if (!match) return null;
   if (!match[1]) return 'en';
-  return isLocale(match[1]) && match[1] !== 'en' ? match[1] : null;
+  return isGuideLanguage(match[1]) && match[1] !== 'en' ? match[1] : null;
 }
 
 /**

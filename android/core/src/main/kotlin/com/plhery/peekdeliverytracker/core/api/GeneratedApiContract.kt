@@ -2285,7 +2285,10 @@ enum class NativePushLocale(val rawValue: String) {
     @SerialName("it") It("it"),
     @SerialName("es") Es("es"),
     @SerialName("pt") Pt("pt"),
+    @SerialName("pt-br") PtBr("pt-br"),
     @SerialName("pl") Pl("pl"),
+    @SerialName("ru") Ru("ru"),
+    @SerialName("zh") Zh("zh"),
     ;
 
     companion object {

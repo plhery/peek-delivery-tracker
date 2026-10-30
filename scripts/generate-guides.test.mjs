@@ -7,6 +7,7 @@ import test from 'node:test';
 
 import { CARRIER_CATALOG } from 'universal-parcel-scraper';
 import { carriersModule, guidesModule, readCarrierIndex, readCarriers, readGuides } from './generate-guides.mjs';
+import { SUPPORTED_LOCALES } from '../src/lib/locale.ts';
 
 const content = fileURLToPath(new URL('../content/guides', import.meta.url));
 const generated = fileURLToPath(new URL('../src/generated/guides.ts', import.meta.url));
@@ -239,7 +240,7 @@ test('the list the app links holds, in each language, its carriers in order with
     assert.match(written, /"title": "Colis\\u00a0: où est-il\\u202f\?"/);
     assert.doesNotMatch(written, /[  ]/);
     const links = JSON.parse(written.slice(written.indexOf('= {') + 2, written.lastIndexOf(';')));
-    for (const locale of ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl']) {
+    for (const locale of SUPPORTED_LOCALES) {
       const listed = index.filter(({ languages }) => languages.includes(locale));
       assert.deepEqual(links[locale].map(({ id, name, color }) => ({ id, name, color })), listed.map(({ id, name, catalog }) => ({ id, name, color: CARRIER_CATALOG[catalog].color })), locale);
       for (const link of links[locale]) assert.match(link.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
@@ -263,7 +264,7 @@ test('a page in a language with pages alone is listed under its language, and li
     const written = carriersModule(readCarriers(directory));
     assert.match(written, /export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink\[\]>/);
     const links = JSON.parse(written.slice(written.indexOf('= {') + 2, written.lastIndexOf(';')));
-    assert.deepEqual(Object.keys(links), ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl', 'nl', 'sv', 'da', 'nb', 'fi', 'cs', 'sk', 'hu', 'ro', 'bg', 'el', 'hr', 'sl', 'lt', 'lv', 'et', 'uk', 'sr']);
+    assert.deepEqual(Object.keys(links), ['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-br', 'pl', 'ru', 'zh', 'nl', 'sv', 'da', 'nb', 'fi', 'cs', 'sk', 'hu', 'ro', 'bg', 'el', 'hr', 'sl', 'lt', 'lv', 'et', 'uk', 'sr']);
     assert.deepEqual(links.fi.filter(({ id }) => id === carrier.id).map(({ id, slug }) => ({ id, slug })), [{ id: carrier.id, slug: 'lahetysten-seuranta' }]);
     // A language no carrier is written in lists none.
     for (const language of Object.keys(links).filter((language) => language !== 'fi' && !index.some(({ languages }) => languages.includes(language)))) {

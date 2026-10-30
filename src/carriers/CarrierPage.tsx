@@ -22,7 +22,7 @@ export function CarrierPage({ text, carrier, locale, language = locale, t, guide
   /** The language of the page's title and text, when it is not `locale`. */
   language?: PageLanguage;
   t: Translate;
-  /** The guides of `locale`, which its text may link. */
+  /** The guides in the language `locale` reads them in (`guideLanguage`), which its text may link. */
   guides: readonly GuideLink[];
   /** The other carriers with a page in this language, with what each answers, and its language when it is not `locale`. */
   others: readonly { link: CarrierLink; description: string; language?: PageLanguage }[];

@@ -1,7 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { SUPPORTED_LOCALES } from '../src/lib/locale.ts';
 
-export const locales = ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'];
+export const locales = [...SUPPORTED_LOCALES];
+
+/** The name Apple gives a language's `.lproj` folder: its region or script in capitals, and Chinese by its script. */
+export function appleLanguage(locale) {
+  if (locale === 'zh') return 'zh-Hans';
+  const [language, region] = locale.split('-');
+  return region ? `${language}-${region.toUpperCase()}` : language;
+}
 
 export function validateLocalizationCatalogs(catalogs) {
   const englishKeys = Object.keys(catalogs.en ?? {}).sort();
@@ -18,8 +26,16 @@ export function validateLocalizationCatalogs(catalogs) {
     }
     for (const key of englishKeys) {
       if (typeof catalog[key] !== 'string') throw new Error(`${locale}.${key} must be a string`);
-      if (variables(catalog[key]) !== variables(catalogs.en[key])) {
+      // Russian counts 21, 31 and 101 as one too, so a count's one form may write the number where English writes 1.
+      const counted = key.endsWith('.one') && variables(catalog[key].replaceAll('{{count}}', '')) === variables(catalogs.en[key]);
+      if (variables(catalog[key]) !== variables(catalogs.en[key]) && !counted) {
         throw new Error(`${locale}.${key} must preserve the English interpolation variables`);
+      }
+      // Russian reads 21 and 101 with the one form too, so it writes the number wherever the family's other forms do.
+      const family = key.replace(/\.one$/, '');
+      if (locale === 'ru' && family !== key && !catalog[key].includes('{{count}}')
+        && [family, `${family}.few`, `${family}.many`].some((other) => catalog[other]?.includes('{{count}}'))) {
+        throw new Error(`ru.${key} must write {{count}}, which Russian reads with it for 21 and 101`);
       }
       // French sets ? ! : ; » and « apart with no-break spaces, so a line never starts with the mark.
       if (locale === 'fr' && /\u0020[?!:;»]|«\u0020/.test(catalog[key])) {

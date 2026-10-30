@@ -5,12 +5,13 @@ import { fileURLToPath } from 'node:url';
 import {
   infoPlistStrings, keysNamingOnlyTheIPhone, keysWithoutAMacVariant, nativeLocalizationReferences, nativeSwiftSources,
 } from './native-localization.mjs';
-import { locales, validateLocalizationCatalogs } from './localization-catalog.mjs';
+import { appleLanguage, locales, validateLocalizationCatalogs } from './localization-catalog.mjs';
 
 describe('Shared localization catalogs', () => {
-  const catalogs = () => Object.fromEntries(['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'].map((locale) => [locale, {
+  const catalogs = () => Object.fromEntries(locales.map((locale) => [locale, {
     'passport.stampsEarned': '{{count}} / {{total}}',
     'arrival.tapToOpen': 'Open',
+    'detail.updateCount.one': '1 update',
   }]));
 
   it('requires every platform and language to use the same keys', () => {
@@ -23,6 +24,27 @@ describe('Shared localization catalogs', () => {
     const value = catalogs();
     value.de['passport.stampsEarned'] = '{{count}}';
     assert.throws(() => validateLocalizationCatalogs(value), /de.passport.stampsEarned.*variables/);
+  });
+
+  it('lets a count’s one form write the number where English writes 1, and adds nothing else', () => {
+    const value = catalogs();
+    value.ru['detail.updateCount.one'] = '{{count}} обновление';
+    assert.doesNotThrow(() => validateLocalizationCatalogs(value));
+    value.ru['detail.updateCount.one'] = '{{total}} обновление';
+    assert.throws(() => validateLocalizationCatalogs(value), /ru.detail.updateCount.one.*variables/);
+    value.ru['detail.updateCount.one'] = '1 обновление';
+    value.ru['arrival.tapToOpen'] = '{{count}}';
+    assert.throws(() => validateLocalizationCatalogs(value), /ru.arrival.tapToOpen.*variables/);
+  });
+
+  it('makes a Russian one form write the number when its family counts, since 21 and 101 read it', () => {
+    const value = catalogs();
+    for (const locale of locales) value[locale]['detail.updateCount.many'] = '{{count}} updates';
+    value.ru['detail.updateCount.many'] = '{{count}} обновлений';
+    value.ru['detail.updateCount.one'] = '1 обновление';
+    assert.throws(() => validateLocalizationCatalogs(value), /ru.detail.updateCount.one.*\{\{count\}\}/);
+    value.ru['detail.updateCount.one'] = '{{count}} обновление';
+    assert.doesNotThrow(() => validateLocalizationCatalogs(value));
   });
 
   it('allows a translation to reorder variables', () => {
@@ -150,24 +172,31 @@ describe('Localized Info.plist strings', () => {
 
   it('writes one InfoPlist.strings per target and language', () => {
     const files = infoPlistStrings(catalogs());
+    const folders = locales.map(appleLanguage);
+    assert.deepEqual(folders.filter((folder) => !locales.includes(folder)), ['pt-BR', 'zh-Hans']);
     assert.deepEqual(files.map(([file]) => file), [
-      ...locales.map((locale) => `PeekDeliveryTracker/Resources/${locale}.lproj/InfoPlist.strings`),
-      ...locales.map((locale) => `ShareExtension/${locale}.lproj/InfoPlist.strings`),
-      ...locales.map((locale) => `PeekDeliveryTracker/Resources/${locale}.lproj/ServicesMenu.strings`),
+      ...folders.map((folder) => `PeekDeliveryTracker/Resources/${folder}.lproj/InfoPlist.strings`),
+      ...folders.map((folder) => `ShareExtension/${folder}.lproj/InfoPlist.strings`),
+      ...folders.map((folder) => `PeekDeliveryTracker/Resources/${folder}.lproj/ServicesMenu.strings`),
     ]);
     assert.match(files[1][1], /^"NSCameraUsageDescription" = "Camera de";$/m);
-    assert.match(files[2 * locales.length - 1][1], /^"CFBundleDisplayName" = "Add to Peek pl";$/m);
-    assert.match(files.at(-1)[1], /^"Track with Peek" = "Track with Peek pl";$/m);
+    assert.match(files[2 * locales.length - 1][1], new RegExp(`^"CFBundleDisplayName" = "Add to Peek ${locales.at(-1)}";$`, 'm'));
+    assert.match(files.at(-1)[1], new RegExp(`^"Track with Peek" = "Track with Peek ${locales.at(-1)}";$`, 'm'));
   });
 
   it('names each lproj after a project region and ships it in both targets', () => {
     const project = fs.readFileSync(new URL('../ios/PeekDeliveryTracker.xcodeproj/project.pbxproj', import.meta.url), 'utf8');
+    // Xcode quotes a name with a hyphen in it.
+    const named = (value) => value.includes('-') ? `"${value}"` : value;
     const regions = project.match(/knownRegions = \(([^)]*)\)/)[1].split(',').map((region) => region.trim());
-    for (const locale of locales) {
-      assert.ok(regions.includes(locale), locale);
-      assert.equal(project.split(`path = ${locale}.lproj/InfoPlist.strings;`).length - 1, 2, locale);
-      assert.equal(project.split(`path = ${locale}.lproj/ServicesMenu.strings;`).length - 1, 1, locale);
+    for (const folder of locales.map(appleLanguage)) {
+      assert.ok(regions.includes(named(folder)), folder);
+      assert.equal(project.split(`path = ${named(`${folder}.lproj/InfoPlist.strings`)};`).length - 1, 2, folder);
+      assert.equal(project.split(`path = ${named(`${folder}.lproj/ServicesMenu.strings`)};`).length - 1, 1, folder);
     }
+    const plist = fs.readFileSync(new URL('../ios/PeekDeliveryTracker/Info.plist', import.meta.url), 'utf8');
+    const listed = plist.match(/<key>CFBundleLocalizations<\/key>\s*<array>([\s\S]*?)<\/array>/)[1].match(/<string>[^<]+<\/string>/g).map((entry) => entry.slice(8, -9));
+    assert.deepEqual(listed, locales.map(appleLanguage));
   });
 
   it('escapes quotes, backslashes and line breaks', () => {

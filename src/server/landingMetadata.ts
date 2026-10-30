@@ -1,6 +1,6 @@
 import 'server-only';
 import type { Metadata } from 'next';
-import { languagePath, SUPPORTED_LOCALES, type AddressLanguage, type Locale } from '../lib/locale';
+import { hrefLanguages, languagePath, SUPPORTED_LOCALES, type AddressLanguage, type Locale } from '../lib/locale';
 import { requestLocale } from './requestLocale';
 import { requestOrigin, siteOrigin } from './requestOrigin';
 import { landingTitle, PREVIEW_LOCALES, sitePicture, wordsIn } from './sitePreview';
@@ -42,7 +42,7 @@ export async function landingMetadata(language?: AddressLanguage): Promise<Metad
     metadataBase: origin,
     title,
     description,
-    alternates: { canonical: address, languages: landingAlternates(site) },
+    alternates: { canonical: address, languages: hrefLanguages(landingAlternates(site)) },
     openGraph: {
       type: 'website',
       url: address,

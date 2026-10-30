@@ -9,7 +9,7 @@ import { SUPPORTED_LOCALES } from '../lib/locale';
 import { languageTags } from '../lib/messages';
 import { formatJourneyDuration } from '../lib/passport';
 import { refuseTheWeb } from '../test/pictureRequests';
-import { GEIST, pictureFont, textWidth, writable, type PictureFont } from './pictureFont';
+import { GEIST, NOTO_SANS_SC, PICTURE_FACES, pictureFont, textWidth, writable, type PictureFont } from './pictureFont';
 import { messagesFor } from './requestLocale';
 
 /** The serif of the invitation's picture: a second face, with other characters. */
@@ -45,8 +45,19 @@ describe('writable', () => {
         messages['map.countries.one'], messages['map.countries.few'], messages['map.countries.many'].replace('{{count}}', '12'),
         formatKm(9_300, tag), formatKm(7, tag), formatJourneyDuration(51 * 3_600_000, tag), formatJourneyDuration(95 * 60_000, tag), formatJourneyDuration(12 * 60_000, tag),
       ];
-      for (const text of said) expect(writable(text, GEIST), `${locale}: ${text}`).not.toBeNull();
+      for (const text of said) expect(writable(text, ...PICTURE_FACES), `${locale}: ${text}`).not.toBeNull();
     }
+  });
+
+  it('writes Chinese in Noto Sans SC: all the Chinese copy, and the places Chinese carriers name', () => {
+    const copy = ['shared/locales/zh.json', 'shared/demo-locales/zh.json']
+      .flatMap((file) => Object.values(JSON.parse(readFileSync(join(process.cwd(), file), 'utf8')) as Record<string, string>));
+    const chinese = new Set(copy.join('').match(/[\p{Script=Han}\u3000-\u303f\uff00-\uffef]/gu));
+    expect(chinese.size).toBeGreaterThan(500);
+    for (const character of chinese) expect(writable(character, NOTO_SANS_SC), character).toBe(character);
+    for (const text of ['深圳市宝安区', '浙江省义乌市', '邯郸', '已签收 · 14:05', '中国 → Zürich']) expect(writable(text, ...PICTURE_FACES)).toBe(text);
+    // Korean's letters are none the face was cut to.
+    expect(writable('서울', ...PICTURE_FACES)).toBeNull();
   });
 
   it('reads each face from its own file', () => {
@@ -84,6 +95,13 @@ describe('textWidth', () => {
     // Each face has its own measures.
     expect(textWidth('Hamburg', 11.5, GELASIO)).not.toBeCloseTo(textWidth('Hamburg', 11.5, GEIST), 1);
   });
+
+  it('measures each character in the first face that has it', () => {
+    // A Chinese character is a square, as wide as the text is tall.
+    expect(textWidth('深圳', 20, ...PICTURE_FACES)).toBeCloseTo(40, 0);
+    expect(textWidth('Zürich 深圳', 20, ...PICTURE_FACES)).toBeCloseTo(textWidth('Zürich ', 20, GEIST) + textWidth('深圳', 20, NOTO_SANS_SC), 6);
+    expect(textWidth('Zürich', 20, ...PICTURE_FACES)).toBe(textWidth('Zürich', 20, GEIST));
+  });
 });
 
 describe('the renderer', () => {
@@ -108,7 +126,7 @@ describe('the renderer', () => {
     return found;
   }
 
-  it.each([GEIST, GELASIO])('draws every character the reader finds in $name without asking the web', async (face) => {
+  it.each([GEIST, GELASIO, NOTO_SANS_SC])('draws every character the reader finds in $name without asking the web', async (face) => {
     const text = characters(face);
     expect([...text].length).toBeGreaterThan(600);
     expect(await drawn(text, face, [face])).not.toHaveBeenCalled();

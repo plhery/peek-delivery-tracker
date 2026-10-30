@@ -6,7 +6,7 @@ import en from '../../shared/locales/en.json';
 import fr from '../../shared/locales/fr.json';
 import { CARRIER_LINKS } from '../generated/carriers';
 import { CARRIER_HANDOFF_STORAGE_KEY } from '../lib/carrierHandoff';
-import type { Locale } from '../lib/locale';
+import type { GuideLanguage, Locale } from '../lib/locale';
 import { translateMessage, type Messages, type Translate } from '../lib/messages';
 import { GuidePage } from './GuidePage';
 import { parseGuide } from './markdown';
@@ -23,7 +23,7 @@ const guide = parseGuide([
   '## Formats', '', 'A paragraph.', '',
   ':::sources', '- [UPU](https://www.upu.int/) – the standard', ':::', '',
 ].join('\n'));
-const page = (locale: Locale, messages: Messages) => render(<GuidePage guide={guide} id="tracking-number-formats" locale={locale} t={t(locale, messages)} links={[]} others={[]} />);
+const page = (locale: GuideLanguage, messages: Messages) => render(<GuidePage guide={guide} id="tracking-number-formats" locale={locale} t={t(locale, messages)} links={[]} others={[]} />);
 const carrier = (locale: Locale, id: string) => CARRIER_LINKS[locale].find((link) => link.id === id)!;
 const yunexpress = (locale: Locale) => carrier(locale, 'yunexpress');
 const assign = vi.fn();

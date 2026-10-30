@@ -26,7 +26,7 @@ describe('landingStructuredData', () => {
       name: 'Peek',
       alternateName: ['Peek Tracker', 'peek.example.test'],
       url: 'https://peek.example.test/',
-      inLanguage: ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'],
+      inLanguage: ['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-BR', 'pl', 'ru', 'zh'],
       publisher: { '@id': 'https://peek.example.test/#organization' },
     });
     const local = landingStructuredData({ origin: new URL('http://127.0.0.1:3000'), url: 'http://127.0.0.1:3000/', locale: 'en' });

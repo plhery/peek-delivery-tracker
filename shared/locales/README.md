@@ -1,9 +1,9 @@
 # Shared translations
 
-`en`, `de`, `fr`, `it`, `es`, `pt` and `pl` JSON files are the source of all web and iOS
-copy.
+`en`, `de`, `fr`, `it`, `es`, `pt`, `pt-br`, `pl`, `ru` and `zh` JSON files are the source of all
+web and iOS copy.
 
-- Add or change a key in **all seven** files, keeping `{{variable}}` placeholders.
+- Add or change a key in **all ten** files, keeping `{{variable}}` placeholders.
 - The web imports them directly with typed keys. For iOS, run `npm run ios:resources`,
   which regenerates `Localization.json`. Don't edit the generated file or put strings in
   Swift views.
@@ -16,13 +16,29 @@ copy.
   Android's settings on every phone, foldable and tablet. The Android tests refuse a key the
   app shows that names the iPhone, an Apple app or the iPhone's Home Screen without one.
 
-**Tone.** Informal and concise. Spanish and Portuguese are the European variants; Portuguese
+**Tone.** Informal and concise. Spanish and `pt` are the European variants; Portuguese
 pages and emails declare `pt-PT`. In Portuguese the tracked parcel is always *encomenda*
 (feminine, so its adjectives and pronouns agree); *envio* only means sending, as in *e-mail
 de envio*. It is *pronta para levantamento* at a *ponto de levantamento* and *levantada* by
 the recipient, while a carrier *recolhe* it from the sender; Peek sends *notificações*.
-Passport collectibles are postage stamps (sellos, selos, znaczki). Polish counts use `.one`, `.few`
-and `.many`, picked from `count`.
+Passport collectibles are postage stamps (sellos, selos, znaczki, марки, 邮票).
+
+- **Brazilian Portuguese** (`pt-br`) says *você*. The parcel is an *encomenda* with a *código
+  de rastreamento*, ready for *retirada* at a *ponto de retirada*; a scan is a *movimentação*,
+  a carrier a *transportadora*, written with no article before its name (*de {{carrier}}*).
+  The postcode stays *código postal*, as the field takes any country's. *Ajustes* is Apple's
+  Settings app, *Configurações* Peek's and Android's.
+- **Russian** says *ты* and avoids past tenses addressed to the reader, which mark gender. A
+  посылка has a трек-номер and is picked up at a пункт выдачи or a постамат; a scan is an
+  отметка, a carrier a служба доставки, and Pip is Пип.
+- **Chinese** is Simplified, says 你 and uses full-width punctuation, with a space between
+  Chinese and Latin words or digits but none beside a placeholder that becomes Chinese. A 包裹
+  has a 运单号; carriers are 快递公司; the statuses read as Chinese trackers write them
+  (已揽收, 运输中, 派送中, 已签收, 待取件).
+
+**Counts.** A key's `.one`, `.few` and `.many` forms are picked from `count` by the language's
+CLDR rule in Polish and Russian, and `.one` for 1 in the other languages. Russian reads 21 and
+101 with `.one` too, so a Russian `.one` writes `{{count}}` wherever its other forms do.
 
 ## Tracking messages
 

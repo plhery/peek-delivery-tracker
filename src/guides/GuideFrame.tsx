@@ -1,7 +1,7 @@
 import { createElement, type ReactNode } from 'react';
 import mark from '../brand/mark.json';
 import { carrierPath } from '../carriers/paths';
-import { documentLanguage, languagePath, PAGE_LANGUAGES, type Locale, type PageAddresses, type PageLanguage } from '../lib/locale';
+import { documentLanguage, guideLanguage, hrefLanguage, languagePath, PAGE_LANGUAGES, type Locale, type PageAddresses, type PageLanguage } from '../lib/locale';
 import type { Translate } from '../lib/messages';
 import { SOURCE_URL } from '../lib/source';
 import { GuideAnalytics } from './GuideAnalytics';
@@ -31,7 +31,7 @@ export function GuideFrame({ locale, language = locale, t, addresses, languageNa
   /** The language of the page's text, when it is not `locale`'s. */
   language?: PageLanguage;
   t: Translate;
-  /** This page in every language of the site, and in each language with pages alone it is written in. */
+  /** This page in every language it is written in. */
   addresses: PageAddresses;
   /** Each language's name, written in that language: the site's own, and those with pages alone. */
   languageNames: Record<Locale, string> & Partial<Record<PageLanguage, string>>;
@@ -53,13 +53,13 @@ export function GuideFrame({ locale, language = locale, t, addresses, languageNa
     <footer className="guide-footer">
       <div className="guide-footer__links">
         <a className="guide-footer__name" href={tracker}><Mark size={18} />{t('app.title')} · {t('app.tagline')}</a>
-        <a href={guidePath(locale)}>{t('guides.all')}</a>
+        <a href={guidePath(guideLanguage(locale))}>{t('guides.all')}</a>
         <a href={carrierPath(locale)}>{t('carriers.all')}</a>
         <a href="/privacy.html">{t('auth.privacyLink')}</a>
         <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
       <nav className="guide-footer__languages" aria-label={t('language.label')}>
-        {PAGE_LANGUAGES.filter((other) => addresses[other] !== undefined).map((other) => <a key={other} href={addresses[other]} hrefLang={other} lang={documentLanguage(other)}
+        {PAGE_LANGUAGES.filter((other) => addresses[other] !== undefined).map((other) => <a key={other} href={addresses[other]} hrefLang={hrefLanguage(other)} lang={documentLanguage(other)}
           aria-current={other === language ? 'page' : undefined}>{languageNames[other]}</a>)}
       </nav>
     </footer>

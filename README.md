@@ -51,8 +51,8 @@ until it arrives.
 
 <p align="center"><sub>A parcel's page · its journey · shared as a gift · the passport. Every parcel in these pictures is made up.</sub></p>
 
-Also in the box: light and dark themes, seven languages (English, German, French, Italian,
-Spanish, Portuguese and Polish), a web app you can install, and on iPhone a barcode
+Also in the box: light and dark themes, ten languages (English, German, French, Italian,
+Spanish, Portuguese, Brazilian Portuguese, Polish, Russian and Simplified Chinese), a web app you can install, and on iPhone a barcode
 scanner, a Share extension and widgets.
 
 Peek shows no ads and sells no data. A parcel followed without an account is forgotten 30

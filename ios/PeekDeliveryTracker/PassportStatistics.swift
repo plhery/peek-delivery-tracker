@@ -184,14 +184,15 @@ enum TrackingLocation {
 
     // Apple calls CN "China mainland" in every language, never what carriers or the web write.
     private static let chinaNames: [AppLanguage: String] = [
-        .en: "China", .de: "China", .fr: "Chine", .it: "Cina", .es: "China", .pt: "China", .pl: "Chiny",
+        .en: "China", .de: "China", .fr: "Chine", .it: "Cina", .es: "China", .pt: "China", .ptBR: "China", .pl: "Chiny",
+        .ru: "Китай", .zh: "中国",
     ]
 
     private static let countryNames: [String: String] = {
         var names: [String: String] = [:]
         for code in regionCodes.sorted() {
-            for language in ["en", "de", "fr", "it", "es", "pt", "pl"] {
-                if let name = Locale(identifier: language).localizedString(forRegionCode: code) {
+            for language in AppLanguage.allCases {
+                if let name = language.locale.localizedString(forRegionCode: code) {
                     names[normalized(name)] = code
                 }
             }
@@ -209,7 +210,7 @@ enum TrackingLocation {
         let name: String
     }
 
-    /// Builds the country-name table (about 1,700 localized names) ahead of first use.
+    /// Builds the country-name table (about 2,500 localized names) ahead of first use.
     static func prepare() {
         _ = countryNames
     }

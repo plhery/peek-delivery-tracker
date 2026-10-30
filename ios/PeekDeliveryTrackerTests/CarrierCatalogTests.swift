@@ -1110,17 +1110,22 @@ final class CarrierCatalogTests: XCTestCase {
             carrier: .swissPost, createdAt: "2026-09-07T13:00:00Z",
             syncStatus: .unsupported, notificationsMuted: false
         )
-        for language in [AppLanguage.es, .pt, .pl] {
+        for language in [AppLanguage.es, .pt, .ptBR, .pl, .ru, .zh] {
             let url = try XCTUnwrap(catalog.trackingLinks(for: parcel, language: language).first).url
             XCTAssertEqual(URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.first { $0.name == "lang" }?.value, "en")
         }
         parcel.carrier = .unknown
         parcel.trackingNumber = "ZZ12345678900"
         parcel.trackingURL = "https://parcelsapp.com/fr/tracking/ZZ12345678900"
-        for (language, name) in [(AppLanguage.es, "Transportista desconocido"), (.pt, "Transportadora desconhecida"), (.pl, "Nieznany przewoźnik")] {
+        // The catalog has no Brazilian, Russian or Chinese: Brazilian Portuguese reads its Portuguese, the others its English.
+        let cases: [(AppLanguage, String, String)] = [
+            (.es, "Transportista desconocido", "es"), (.pt, "Transportadora desconhecida", "pt"), (.pl, "Nieznany przewoźnik", "en"),
+            (.ptBR, "Transportadora desconhecida", "pt"), (.ru, "Unknown carrier", "en"), (.zh, "Unknown carrier", "en"),
+        ]
+        for (language, name, site) in cases {
             XCTAssertEqual(catalog.info(for: .unknown, language: language).displayName, name)
             let url = try XCTUnwrap(catalog.trackingLinks(for: parcel, language: language).first).url
-            XCTAssertEqual(url.absoluteString, "https://parcelsapp.com/\(language == .pl ? "en" : language.rawValue)/tracking/ZZ12345678900")
+            XCTAssertEqual(url.absoluteString, "https://parcelsapp.com/\(site)/tracking/ZZ12345678900")
         }
     }
 
@@ -1134,15 +1139,17 @@ final class CarrierCatalogTests: XCTestCase {
             .en: "Unknown postal carrier", .de: "Postanbieter unbekannt",
             .fr: "Transporteur postal inconnu", .it: "Corriere postale sconosciuto",
             .es: "Operador postal desconocido", .pt: "Operador postal desconhecido",
-            .pl: "Nieznany operator pocztowy",
+            .pl: "Nieznany operator pocztowy", .ptBR: "Operador postal desconhecido",
+            .ru: "Unknown postal carrier", .zh: "Unknown postal carrier",
         ]
+        let sites: [AppLanguage: String] = [.ptBR: "pt", .ru: "en", .zh: "en"]
         for language in AppLanguage.allCases {
             for savedURL in [nil, "https://service.post.ch/ekp-web/ui/entry/search/RA123456785IR"] as [String?] {
                 parcel.trackingURL = savedURL
                 let link = try XCTUnwrap(catalog.trackingLinks(for: parcel, language: language).first)
                 XCTAssertEqual(catalog.info(for: .internationalPost, language: language).displayName, names[language])
                 XCTAssertEqual(link.name, "17TRACK")
-                XCTAssertEqual(link.url.absoluteString, "https://t.17track.net/\(language.rawValue)#nums=RA123456785IR")
+                XCTAssertEqual(link.url.absoluteString, "https://t.17track.net/\(sites[language] ?? language.rawValue)#nums=RA123456785IR")
                 XCTAssertEqual(link.carrier, .internationalPost)
             }
         }

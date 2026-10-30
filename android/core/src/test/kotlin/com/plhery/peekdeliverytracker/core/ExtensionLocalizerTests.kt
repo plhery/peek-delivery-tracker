@@ -77,7 +77,7 @@ class ExtensionLocalizerTests {
     @Test
     fun theBundledCatalogDrivesTheChoice() {
         val bundled = ExtensionLocalizer.bundledDictionaries
-        assertEquals(available, bundled.keys)
+        assertEquals(setOf("en", "de", "fr", "it", "es", "pt", "pt-br", "pl", "ru", "zh"), bundled.keys)
 
         val device = listOf("fr-CH", "en")
         val polish = ExtensionLocalizer(savedLanguageCode = "pl", preferredLanguages = device)

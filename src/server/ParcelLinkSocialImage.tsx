@@ -7,7 +7,7 @@ import mark from '../brand/mark.json';
 import type { CarrierInfo } from '../lib/carriers';
 import type { Locale } from '../lib/locale';
 import type { ParcelLinkPreview } from './parcelLinkPreview';
-import { GEIST, writable } from './pictureFont';
+import { PICTURE_FACES, PICTURE_FONTS, writable } from './pictureFont';
 
 const HEADERS = { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' };
 const INK = '#20251e';
@@ -126,7 +126,7 @@ function headlineSize(headline: string): number {
  */
 export function parcelLinkSocialImage(preview: ParcelLinkPreview, host: string | null, locale: Locale = 'en'): Response {
   const { carrier, steps, gift = false } = preview;
-  const written = (text: string | null) => (text && writable(text, GEIST)) || null;
+  const written = (text: string | null) => (text && writable(text, ...PICTURE_FACES)) || null;
   const headline = written(preview.headline);
   if (!headline) return genericSocialImage(locale);
   const detail = written(preview.detail);
@@ -165,7 +165,7 @@ export function parcelLinkSocialImage(preview: ParcelLinkPreview, host: string |
         {site && <span style={{ marginLeft: 14 }}>{site}</span>}
       </div>
     </div>,
-    { width: 1200, height: 630, fonts: [{ name: 'Geist', data: GEIST.data, weight: 400, style: 'normal' }], headers: HEADERS },
+    { width: 1200, height: 630, fonts: PICTURE_FONTS, headers: HEADERS },
   );
 }
 

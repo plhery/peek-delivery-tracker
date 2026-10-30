@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import en from '../../shared/locales/en.json';
 import fr from '../../shared/locales/fr.json';
 import italian from '../../shared/locales/it.json';
-import type { Locale } from '../lib/locale';
+import type { GuideLanguage, Locale } from '../lib/locale';
 import { translateMessage, type Messages, type Translate } from '../lib/messages';
 import { SOURCE_URL } from '../lib/source';
 import { GuideFrame } from './GuideFrame';
@@ -93,7 +93,7 @@ describe('a guide’s page', () => {
 
   it('dates the first of a month as each language writes it', () => {
     const first = { ...guide, updated: '2026-10-01' };
-    const updated = (locale: Locale, messages: Messages) => {
+    const updated = (locale: GuideLanguage, messages: Messages) => {
       const { unmount } = render(<GuidePage guide={first} id="customs" locale={locale} t={t(locale, messages)} links={links} others={[]} />);
       const text = document.querySelector('.guide__meta time')!.textContent;
       unmount();
@@ -137,7 +137,7 @@ describe('the guides’ own page', () => {
 
 describe('what stands around a guides page', () => {
   const addresses = { en: '/guides/held-at-customs', de: '/de/guides/paket-beim-zoll', fr: '/fr/guides/colis-en-douane', it: '/it/guides/pacco-in-dogana', es: '/es/guides/paquete-en-aduanas', pt: '/pt/guides/encomenda-na-alfandega', pl: '/pl/guides/paczka-w-urzedzie-celnym' };
-  const names = { en: 'English', de: 'Deutsch', fr: 'Français', it: 'Italiano', es: 'Español', pt: 'Português', pl: 'Polski' };
+  const names = { en: 'English', de: 'Deutsch', fr: 'Français', it: 'Italiano', es: 'Español', pt: 'Português', 'pt-br': 'Português (Brasil)', pl: 'Polski', ru: 'Русский', zh: '简体中文' };
 
   it('leads to the tracker above, and below to all guides, all carriers, the notice, the code and the page in every language', () => {
     render(<GuideFrame locale="fr" t={t('fr', fr)} addresses={addresses} languageNames={names} screen="guides/fr/customs"><p>The page</p></GuideFrame>);

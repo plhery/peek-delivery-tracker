@@ -1,20 +1,44 @@
 import { describe, expect, it } from 'vitest';
 import {
-  ADDRESS_LANGUAGES, documentLanguage, interfaceLanguage, isLocale, isPageOnlyLanguage, languagePath, PAGE_LANGUAGES, PAGE_ONLY_LANGUAGES,
-  pathLanguage, SUPPORTED_LOCALES, type PageOnlyLanguage,
+  ADDRESS_LANGUAGES, catalogLanguage, detectLocale, documentLanguage, guideLanguage, hrefLanguage, interfaceLanguage, isLocale,
+  isPageOnlyLanguage, languagePath, PAGE_LANGUAGES, PAGE_ONLY_LANGUAGES, pathLanguage, SUPPORTED_LOCALES, tagLocale,
+  type PageOnlyLanguage,
 } from './locale';
 
 describe('language addresses', () => {
   it('gives every language but English an address of its own, and English `/`', () => {
-    expect(ADDRESS_LANGUAGES).toEqual(['de', 'fr', 'it', 'es', 'pt', 'pl']);
-    expect(SUPPORTED_LOCALES.map(languagePath)).toEqual(['/', '/de', '/fr', '/it', '/es', '/pt', '/pl']);
+    expect(ADDRESS_LANGUAGES).toEqual(['de', 'fr', 'it', 'es', 'pt', 'pt-br', 'pl', 'ru', 'zh']);
+    expect(SUPPORTED_LOCALES.map(languagePath)).toEqual(['/', '/de', '/fr', '/it', '/es', '/pt', '/pt-br', '/pl', '/ru', '/zh']);
   });
 
   it('reads the language of a language address, and of no other address', () => {
     for (const language of ADDRESS_LANGUAGES) expect(pathLanguage(languagePath(language))).toBe(language);
-    for (const path of ['/', '/en', '/home', '/demo', '/DE', '/de/', '/de/more', '/deu', '/xx', '/p/de', 'de', '']) {
+    for (const path of ['/', '/en', '/home', '/demo', '/DE', '/de/', '/de/more', '/deu', '/xx', '/p/de', 'de', '/pt-BR', '/zh-hans', '']) {
       expect(pathLanguage(path), path).toBeNull();
     }
+  });
+});
+
+describe('language tags', () => {
+  it('reads Brazil’s Portuguese, other Portuguese as Portugal’s, and Simplified Chinese but not Traditional', () => {
+    const tags: [string, string | null][] = [
+      ['de-CH', 'de'], ['pt-BR', 'pt-br'], ['pt_br', 'pt-br'], ['pt', 'pt'], ['pt-PT', 'pt'], ['pt-AO', 'pt'],
+      ['ru-RU', 'ru'], ['ru', 'ru'], ['zh', 'zh'], ['zh-CN', 'zh'], ['zh-Hans', 'zh'], ['zh-Hans-HK', 'zh'], ['zh-SG', 'zh'],
+      ['zh-TW', null], ['zh-HK', null], ['zh-MO', null], ['zh-Hant', null], ['zh-Hant-CN', null], ['nl-NL', null], ['', null],
+    ];
+    for (const [tag, locale] of tags) expect(tagLocale(tag), tag).toBe(locale);
+    expect(detectLocale(['zh-TW', 'ru-RU'])).toBe('ru');
+    expect(detectLocale(['zh-Hant', 'nl'])).toBe('en');
+  });
+
+  it('names Brazil’s Portuguese by its region where a tag is needed, and the others as their addresses do', () => {
+    expect(SUPPORTED_LOCALES.map(hrefLanguage)).toEqual(['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-BR', 'pl', 'ru', 'zh']);
+    expect(SUPPORTED_LOCALES.map(documentLanguage)).toEqual(['en', 'de', 'fr', 'it', 'es', 'pt-PT', 'pt-BR', 'pl', 'ru', 'zh-Hans']);
+  });
+
+  it('gives Brazil’s Portuguese the Portuguese guides and carrier names, and Russian and Chinese the English', () => {
+    expect(SUPPORTED_LOCALES.map(guideLanguage)).toEqual(['en', 'de', 'fr', 'it', 'es', 'pt', 'pt', 'pl', 'en', 'en']);
+    expect(SUPPORTED_LOCALES.map(catalogLanguage)).toEqual(SUPPORTED_LOCALES.map(guideLanguage));
   });
 });
 

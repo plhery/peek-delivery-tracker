@@ -9,7 +9,7 @@ import {
   DELIVERY_DAY_NOTIFICATION_STAGES,
   IMPORTANT_NOTIFICATION_STAGES,
 } from '../lib/notificationPresets';
-import type { Locale } from '../lib/locale';
+import { SUPPORTED_LOCALES } from '../lib/locale';
 import * as webPresets from '../lib/pushNotifications';
 import * as metrics from './metrics';
 import * as observability from './observability';
@@ -268,7 +268,7 @@ describe('what an alert says', () => {
     expect(JSON.stringify(payload)).not.toMatch(/Sneakers|TESTPARCEL|package-1|alert-1|synthetic/);
   });
 
-  it.each(['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'])('uses the words an account gets for a parcel without a name, in %s', (locale) => {
+  it.each(SUPPORTED_LOCALES)('uses the words an account gets for a parcel without a name, in %s', (locale) => {
     for (const stage of ALL_NOTIFICATION_STAGES) {
       const event = row({ locale, stage, expected_delivery: '2026-10-03', timezone: 'Europe/Zurich' });
       const payload = alerts.payload(event);
@@ -282,7 +282,7 @@ describe('what an alert says', () => {
     expect(alerts.payload(row({ stage: 'delivered', timezone: 'America/New_York' })).body).toMatch(/^Delivered at 14:30/);
   });
 
-  it.each(['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'])('announces a gift on its way as one, without the place of the scan, in %s', (locale) => {
+  it.each(SUPPORTED_LOCALES)('announces a gift on its way as one, without the place of the scan, in %s', (locale) => {
     const plain = alerts.payload(row({ locale }));
     const gift = alerts.payload(row({ locale, gift: true }));
     expect(gift.title).not.toBe(plain.title);
@@ -305,8 +305,8 @@ describe('what an alert says', () => {
     expect(alerts.payload(row({ gift: true, stage: 'returned', package_stage: 'returned' })).body).toBe('Returning to the sender');
   });
 
-  it.each(['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'])('titles a gift with its page\'s words in %s', (locale) => {
-    const page: Record<string, string> = messagesFor(locale as Locale);
+  it.each(SUPPORTED_LOCALES)('titles a gift with its page\'s words in %s', (locale) => {
+    const page: Record<string, string> = messagesFor(locale);
     expect(alerts.payload(row({ locale, gift: true })).title).toBe(page['share.gift.headline']);
     expect(alerts.payload(row({ locale, gift: true, stage: 'delivered', package_stage: 'delivered' })).title).toBe(page['share.gift.here']);
   });

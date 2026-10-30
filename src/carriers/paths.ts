@@ -12,7 +12,7 @@ export function carrierPath(language: PageLanguage, slug?: string): string {
  * `/en/carriers` is no carriers address.
  */
 export function carrierPageLanguage(pathname: string): PageLanguage | null {
-  const match = /^\/(?:([a-z]{2})\/)?carriers(?:\/|$)/.exec(pathname);
+  const match = /^\/(?:([a-z]{2}(?:-[a-z]{2})?)\/)?carriers(?:\/|$)/.exec(pathname);
   if (!match) return null;
   if (!match[1]) return 'en';
   return (isLocale(match[1]) && match[1] !== 'en') || isPageOnlyLanguage(match[1]) ? match[1] : null;

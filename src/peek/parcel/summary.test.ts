@@ -90,6 +90,8 @@ describe('what the card says under the headline', () => {
   it('writes the forget date as the app writes its dates', () => {
     expect(forgetDate(new Date(2026, 9, 30, 12).toISOString(), 'en-CH')).toBe('30 Oct');
     expect(forgetDate(new Date(2026, 9, 30, 12).toISOString(), 'de-CH')).toBe('30. Okt');
+    expect(forgetDate(new Date(2026, 9, 30, 12).toISOString(), 'ru-RU')).toBe('30 окт');
+    expect(forgetDate(new Date(2026, 9, 30, 12).toISOString(), 'zh-CN')).toBe('10月30日');
     expect(forgetDate(null, 'en-CH')).toBeNull();
     expect(forgetDate('never', 'en-CH')).toBeNull();
   });

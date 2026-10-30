@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { GUIDE_LINKS } from '../generated/guides';
-import { SUPPORTED_LOCALES } from '../lib/locale';
+import { GUIDE_LANGUAGES } from '../lib/locale';
 import { guidePath, guidePathLanguage, namesNoGuide } from './paths';
 
 it('puts English guides at /guides and every other language under its prefix', () => {
@@ -18,6 +18,9 @@ it('reads a guide’s language from its address, and nothing from any other addr
   // English has no prefix, and a prefix is one of the site's languages.
   expect(guidePathLanguage('/en/guides')).toBeNull();
   expect(guidePathLanguage('/nl/guides')).toBeNull();
+  // Peek speaks these, but the guides are not written in them.
+  expect(guidePathLanguage('/ru/guides')).toBeNull();
+  expect(guidePathLanguage('/pt-br/guides')).toBeNull();
   expect(guidePathLanguage('/')).toBeNull();
   expect(guidePathLanguage('/de')).toBeNull();
   expect(guidePathLanguage('/guidesmore')).toBeNull();
@@ -26,8 +29,8 @@ it('reads a guide’s language from its address, and nothing from any other addr
 });
 
 it('knows an address below a language’s guides that names none of them, letter for letter', () => {
-  const everySlug = SUPPORTED_LOCALES.flatMap((locale) => GUIDE_LINKS[locale].map(({ slug }) => slug));
-  for (const locale of SUPPORTED_LOCALES) {
+  const everySlug = GUIDE_LANGUAGES.flatMap((locale) => GUIDE_LINKS[locale].map(({ slug }) => slug));
+  for (const locale of GUIDE_LANGUAGES) {
     const own = GUIDE_LINKS[locale].map(({ slug }) => slug);
     expect(namesNoGuide(guidePath(locale)), locale).toBe(false);
     for (const slug of own) expect(namesNoGuide(guidePath(locale, slug)), slug).toBe(false);

@@ -2,7 +2,7 @@ import { expect, test, type APIRequestContext, type Page } from '@playwright/tes
 import en from '../shared/locales/en.json' with { type: 'json' };
 import italian from '../shared/locales/it.json' with { type: 'json' };
 import { CARRIER_LINKS } from '../src/generated/carriers';
-import { documentLanguage, isPageOnlyLanguage } from '../src/lib/locale';
+import { documentLanguage, hrefLanguage, isPageOnlyLanguage, SUPPORTED_LOCALES } from '../src/lib/locale';
 
 // The demo build keeps lookups in the browser; every number here is fictional.
 const errors = new WeakMap<Page, string[]>();
@@ -13,7 +13,7 @@ test.beforeEach(async ({ page }) => {
 });
 test.afterEach(async ({ page }) => { expect(errors.get(page)).toEqual([]); });
 
-const LANGUAGES = ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'] as const;
+const LANGUAGES = SUPPORTED_LOCALES;
 type Language = (typeof LANGUAGES)[number];
 const NUMBER = '1ZDEMO202600000001';
 const parcelAddress = /\/p\/[2-9A-HJ-NP-Za-km-z]{12}$/;
@@ -76,9 +76,9 @@ test('a carrier’s page shows its title, the tracker and whose it is not, and n
   // A carrier written in some languages and not in others.
   const carrier = CARRIER_LINKS.en.find(({ id }) => LANGUAGES.some((language) => !CARRIER_LINKS[language].some((link) => link.id === id)))!;
   const english = pages.find(({ url }) => pathOf(url) === `/carriers/${carrier.slug}`)!;
-  const written = LANGUAGES.filter((language) => language in english.languages);
+  const written = LANGUAGES.filter((language) => hrefLanguage(language) in english.languages);
   expect(written.length).toBeLessThan(LANGUAGES.length);
-  expect(Object.keys(english.languages)).toEqual([...written, 'x-default']);
+  expect(Object.keys(english.languages)).toEqual([...written.map(hrefLanguage), 'x-default']);
 
   const html = await (await request.get(pathOf(english.url), { headers: { 'accept-language': 'de' } })).text();
   expect(html).toMatch(/<html[^>]* lang="en"/);
@@ -101,7 +101,7 @@ test('a carrier’s page shows its title, the tracker and whose it is not, and n
   // At the foot, every language: the carrier's own page where it is written, the carriers' own page elsewhere.
   const languages = page.getByRole('contentinfo').getByRole('navigation', { name: 'Language' });
   expect(await languages.getByRole('link').evaluateAll((links) => links.map((link) => [link.getAttribute('hreflang'), (link as HTMLAnchorElement).href]))).toEqual(
-    LANGUAGES.map((language) => [language, english.languages[language] ?? new URL(hub(language), english.url).href]),
+    LANGUAGES.map((language) => [hrefLanguage(language), english.languages[hrefLanguage(language)] ?? new URL(hub(language), english.url).href]),
   );
 });
 

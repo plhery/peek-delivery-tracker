@@ -43,9 +43,9 @@ it('leaves an emoji out of a name, and a name it cannot write out of the picture
   for (const name of ['Léa 🌸', '🌸Léa', '🇨🇭 Léa ♥', 'Léa 1\ufe0f\u20e3', 'Le\u0301a\u202f']) expect(await same(name, 'Léa'), name).toBe(true);
   expect(await same('Léa🌸Paul', 'Léa Paul')).toBe(true);
   // A name is never misspelt: with a letter no face has, the picture is the one of an invitation without a name.
-  for (const name of ['深圳', 'Αθήνα', '王 Léa', 'Le\u0336a', '👟']) expect(await same(name, null), name).toBe(true);
-  // The sans has the Cyrillic letters the serif lacks.
-  expect(await same('Саша', null)).toBe(false);
+  for (const name of ['서울', 'Αθήνα', 'Le\u0336a', '👟']) expect(await same(name, null), name).toBe(true);
+  // The sans has the Cyrillic letters the serif lacks, and the Chinese face the Chinese.
+  for (const name of ['Саша', '王芳', '王 Léa']) expect(await same(name, null), name).toBe(false);
   expect(asked).not.toHaveBeenCalled();
 });
 

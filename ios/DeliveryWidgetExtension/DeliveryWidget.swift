@@ -139,7 +139,7 @@ private struct DeliveryWidgetView: View {
             words
         } else {
             let content = cardContent
-                .environment(\.locale, Locale(identifier: entry.languageCode == "pt" ? "pt-PT" : entry.languageCode))
+                .environment(\.locale, ExtensionLocalizer.locale(for: entry.languageCode))
             // WidgetKit redacts a placeholder; the gallery's sample shows the widget as it will look.
             if entry.isSample { content.unredacted() } else { content }
         }
@@ -218,7 +218,7 @@ private struct DeliveryWidgetView: View {
             )
         }
         .widgetURL(family == .systemSmall ? parcels.first?.deepLink : nil)
-        .environment(\.locale, Locale(identifier: entry.languageCode == "pt" ? "pt-PT" : entry.languageCode))
+        .environment(\.locale, ExtensionLocalizer.locale(for: entry.languageCode))
     }
 
     private func smallContent(_ parcel: DeliveryWidgetParcel) -> some View {
@@ -402,7 +402,7 @@ private struct DeliveryLiveActivityView: View {
         .activityBackgroundTint(Color(red: 0.12, green: 0.12, blue: 0.11))
         .activitySystemActionForegroundColor(WidgetPalette.accentBright)
         .widgetURL(state.parcel.deepLink)
-        .environment(\.locale, Locale(identifier: state.languageCode == "pt" ? "pt-PT" : state.languageCode))
+        .environment(\.locale, ExtensionLocalizer.locale(for: state.languageCode))
     }
 }
 

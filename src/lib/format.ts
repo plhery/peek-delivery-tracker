@@ -111,21 +111,27 @@ export function formatExpectedDelivery(
 /**
  * Compact calendar dates with explicit weekdays and months: "Sat 12 Sep", "Sa 12. Sept", "sam 12 sept".
  * Names keep the language's own case, since the date often sits mid-sentence ("Livré le sam 12 sept"),
- * and the day keeps the period German writes after it.
+ * and the day keeps the period German writes after it. Chinese writes its own: "9月12日周六".
  */
-export function localizedCalendarDate(date: Date, languageTag: string): string {
-  const parts = new Intl.DateTimeFormat(new Intl.Locale(languageTag).language, {
-    weekday: 'short', day: 'numeric', month: 'short',
-  }).formatToParts(date);
+export function localizedCalendarDate(date: Date, languageTag: string, withYear = false): string {
+  const language = new Intl.Locale(languageTag).language;
+  const options: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' };
+  if (language === 'zh') return new Intl.DateTimeFormat(language, { ...options, ...(withYear && { year: 'numeric' }) }).format(date);
+  const parts = new Intl.DateTimeFormat(language, options).formatToParts(date);
   const index = (type: Intl.DateTimeFormatPartTypes) => parts.findIndex((entry) => entry.type === type);
   const part = (type: Intl.DateTimeFormatPartTypes) => parts[index(type)]!.value.replaceAll('.', '');
   const dayPeriod = parts[index('day') + 1]?.value.startsWith('.') ? '.' : '';
-  return `${part('weekday')} ${part('day')}${dayPeriod} ${part('month')}`;
+  return `${part('weekday')} ${part('day')}${dayPeriod} ${part('month')}${withYear ? ` ${date.getFullYear()}` : ''}`;
+}
+
+/** A day and a time on it: "tomorrow, 09:00–12:00". Chinese runs them together with a space: "明天 09:00–12:00". */
+export function dayAndTime(day: string, time: string, languageTag: string): string {
+  return new Intl.Locale(languageTag).language === 'zh' ? `${day} ${time}` : `${day}, ${time}`;
 }
 
 export function localizedCalendarDateTime(date: Date, languageTag: string): string {
   const time = new Intl.DateTimeFormat(languageTag, {
     hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
   }).format(date);
-  return `${localizedCalendarDate(date, languageTag)}, ${time}`;
+  return dayAndTime(localizedCalendarDate(date, languageTag), time, languageTag);
 }

@@ -24,7 +24,8 @@ translating it (not implemented).
   field), else the app language a lookup without an account was made in (`lookup_language`
   in its carrier data, which the web page and the iPhone app send). Swiss Post words its
   scans in English, French, German or Italian, and Poczta Polska in Polish; both answer
-  any other language, or none, in English. One language per parcel, never
+  any other language, or none, in English. A carrier reads the language alone, without its
+  region, so Brazilian Portuguese (`pt-br`) asks for Portuguese. One language per parcel, never
   per viewer, or each check would reword the stored scans back and forth; copies of a
   number whose owners read different languages don't share the carrier's answer. UPU,
   EMS, Ship24, ParcelsApp and 17TRACK are asked for English; La Poste for French. That

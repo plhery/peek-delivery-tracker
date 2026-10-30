@@ -1,7 +1,7 @@
 import 'server-only';
 
 import type { ApiPackageRow } from '../../generated/apiContract';
-import { isLocale, type Locale } from '../../lib/locale';
+import { tagLocale, type Locale } from '../../lib/locale';
 import { withEventPlaces } from '../eventPlaces';
 import { recordDeliveryEmail, type DeliveryEmailReason } from '../metrics';
 import { captureOperationalError, errorType, logOperationalEvent } from '../observability';
@@ -28,8 +28,7 @@ type Ending =
   | { outcome: 'failed'; reason: DeliveryEmailReason; error?: unknown };
 
 function accountLocale(stored: string | null): Locale {
-  const language = stored?.toLowerCase().split(/[-_]/)[0];
-  return isLocale(language) ? language : 'en';
+  return (stored && tagLocale(stored)) || 'en';
 }
 
 /**

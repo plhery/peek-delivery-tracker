@@ -61,7 +61,10 @@ describe('the carriers’ pages as the server reads them', () => {
   });
 
   it('leads a carrier’s page in every language to its own page where it is written, and to the carriers’ own page elsewhere', () => {
-    expect(carrierAddresses()).toEqual({ en: '/carriers', de: '/de/carriers', fr: '/fr/carriers', it: '/it/carriers', es: '/es/carriers', pt: '/pt/carriers', pl: '/pl/carriers' });
+    expect(carrierAddresses()).toEqual({
+      en: '/carriers', de: '/de/carriers', fr: '/fr/carriers', it: '/it/carriers', es: '/es/carriers', pt: '/pt/carriers', 'pt-br': '/pt-br/carriers',
+      pl: '/pl/carriers', ru: '/ru/carriers', zh: '/zh/carriers',
+    });
     const addresses = carrierAddresses(translated.id);
     for (const locale of SUPPORTED_LOCALES) {
       const own = carrierLinks(locale).find(({ id }) => id === translated.id);

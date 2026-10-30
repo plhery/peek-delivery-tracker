@@ -12,7 +12,7 @@ import type { Translate } from '../../lib/messages';
 import { formatJourneyDuration } from '../../lib/passport';
 import { CORE_STAGES, stageMeta } from '../../lib/stages';
 import type { ParcelWithEvents } from '../../types';
-import { GEIST, textWidth, writable } from '../pictureFont';
+import { GEIST, PICTURE_FACES, PICTURE_FONTS, textWidth, writable } from '../pictureFont';
 import { journeyMap, LABEL_SIZE, type Tint } from './cardMap';
 import type { EmailStage } from './types';
 
@@ -74,7 +74,7 @@ function truckSvg(carrier: CarrierInfo, palette: CarrierPalette): string {
 /** The carrier's name as its mark writes it, when the picture's face can. */
 function wordmark(carrier: CarrierInfo): { family: string; name: string | null } {
   const family = carrierBrandFamily(carrier.id);
-  return { family, name: writable(WORDMARKS[family] ?? carrier.name, GEIST) };
+  return { family, name: writable(WORDMARKS[family] ?? carrier.name, ...PICTURE_FACES) };
 }
 
 /** The carrier's mark: its truck, and its name in its own colour. */
@@ -93,7 +93,7 @@ function CarrierMark({ carrier }: { carrier: CarrierInfo }) {
 /** The box a second carrier's mark takes on the card, in CSS pixels: the map keeps its route, names and Pip off it. */
 function secondMarkBox(carrier: CarrierInfo): Rect {
   const { family, name } = wordmark(carrier);
-  const words = name ? 7 + textWidth(family === 'gls' ? `${name}.` : name, 12, GEIST) : 0;
+  const words = name ? 7 + textWidth(family === 'gls' ? `${name}.` : name, 12, ...PICTURE_FACES) : 0;
   return { x: 20, y: TOP.inset + TOP.height + MARK_GAP, width: 27 + words + 2, height: TOP.height };
 }
 
@@ -146,7 +146,7 @@ function journeyFacts(route: Route, parcel: ParcelWithEvents, timed: boolean, t:
     // A length in hours needs the delivery on the carrier's clock.
     timed && times.length > 1 && duration > 0 ? formatJourneyDuration(duration, languageTag) : null,
   ].filter(Boolean);
-  return facts.length ? writable(facts.join(' · '), GEIST) : null;
+  return facts.length ? writable(facts.join(' · '), ...PICTURE_FACES) : null;
 }
 
 export interface DeliveryCardInput {
@@ -196,13 +196,13 @@ export async function deliveryCard({ parcel, carrier, delivery = null, when, tim
   const map = await journeyMap(parcel, languageTag, { width: WIDTH, height: mapHeight }, { ...MAP.insets, top: MAP.insets.top + (second ? HANDOVER_ROOM : 0) }, tint,
     { ceiling: MAP.insets.top, covered: second ? secondMarkBox(second) : undefined, stage });
   const open = stage === 'delivered';
-  const headline = writable(t(`stage.${stage}`), GEIST) ?? '';
+  const headline = writable(t(`stage.${stage}`), ...PICTURE_FACES) ?? '';
   // A long name for the stage gets smaller, on its one line, to leave Pip his room.
   const room = WIDTH - 40 - (map ? 0 : BESIDE.pip + BESIDE.gap);
-  const headlineSize = Math.min(28, 28 * room / Math.max(textWidth(headline, 28, GEIST) - .8 * [...headline].length, 1));
+  const headlineSize = Math.min(28, 28 * room / Math.max(textWidth(headline, 28, ...PICTURE_FACES) - .8 * [...headline].length, 1));
   const reached = stageMeta(stage).progress;
   const facts = map ? journeyFacts(map.route, parcel, timed, t, languageTag) : null;
-  const time = when ? writable(when, GEIST) : null;
+  const time = when ? writable(when, ...PICTURE_FACES) : null;
   const from = map?.route.origin?.place.name;
   const to = (map?.route.destination ?? map?.route.current?.place)?.name;
   const pipHeight = (width: number) => width * PIP_FRAME.height / PIP_FRAME.width;
@@ -248,7 +248,7 @@ export async function deliveryCard({ parcel, carrier, delivery = null, when, tim
         }} />)}
       </div>
     </div>,
-    { width: CARD_PIXELS, height: Math.round(u(height)), fonts: [{ name: GEIST.name, data: GEIST.data, weight: 400, style: 'normal' }] },
+    { width: CARD_PIXELS, height: Math.round(u(height)), fonts: PICTURE_FONTS },
   );
   return {
     png: new Uint8Array(await response.arrayBuffer()),

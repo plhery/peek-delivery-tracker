@@ -33,7 +33,7 @@
       "pattern": "^(?:30|31|80|81)[0-9]{14}$"
     }
   ],
-  "numberWords": "track|parcel|shipment|sendung|paket|suivi|colis|tracciamento|spedizione|pacco|seguimiento|env[ií]o|paquete|seguimento|encomenda|śledzeni|przesyłk|paczk",
+  "numberWords": "track|parcel|shipment|sendung|paket|suivi|colis|tracciamento|spedizione|pacco|seguimiento|env[ií]o|paquete|seguimento|encomenda|rastre(?:io|amento)|pacote|śledzeni|przesyłk|paczk|трек|отслеж|посылк|отправлени|运单|快递|物流|包裹|跟踪|追踪",
   "lookalikes": {
     "digitForLetter": {
       "O": "0",
@@ -404,6 +404,21 @@
     },
     {
       "text": "Ihr Paket ist unterwegs: 1234567899\nFragen? 0441234567",
+      "shop": null,
+      "number": "1234567899"
+    },
+    {
+      "text": "Seu pacote está a caminho: 1234567899\nDúvidas? 0441234567",
+      "shop": null,
+      "number": "1234567899"
+    },
+    {
+      "text": "Трек-номер посылки: 1234567899\nВопросы? 0441234567",
+      "shop": null,
+      "number": "1234567899"
+    },
+    {
+      "text": "快递单号：1234567899\n客服电话：0441234567",
       "shop": null,
       "number": "1234567899"
     },

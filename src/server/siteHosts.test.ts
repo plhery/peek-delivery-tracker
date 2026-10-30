@@ -6,7 +6,7 @@ import { carrierPath } from '../carriers/paths';
 import { CARRIER_LINKS } from '../generated/carriers';
 import { GUIDE_LINKS } from '../generated/guides';
 import { guidePath } from '../guides/paths';
-import { ADDRESS_LANGUAGES, PAGE_LANGUAGE_HEADER, PAGE_ONLY_LANGUAGES, SUPPORTED_LOCALES, type PageOnlyLanguage } from '../lib/locale';
+import { ADDRESS_LANGUAGES, GUIDE_LANGUAGES, PAGE_LANGUAGE_HEADER, PAGE_ONLY_LANGUAGES, SUPPORTED_LOCALES, type PageOnlyLanguage } from '../lib/locale';
 import { canonicalOrigin, legacyHostRedirect, movedOrigin, requestHost, siteHosts } from './siteHosts';
 
 const moved = { CANONICAL_ORIGIN: 'https://peek.example.test', LEGACY_HOSTS: 'delivery.example.test, old.example.test' } as unknown as NodeJS.ProcessEnv;
@@ -200,7 +200,7 @@ describe('the page proxy', () => {
 
   it('renders the guides in their address’s language, whatever the browser sent', () => {
     const cookieRead = (response: Response) => response.headers.get('x-middleware-request-cookie');
-    for (const locale of SUPPORTED_LOCALES) {
+    for (const locale of GUIDE_LANGUAGES) {
       const other = locale === 'de' ? 'fr' : 'de';
       for (const path of [guidePath(locale), guidePath(locale, GUIDE_LINKS[locale][0].slug)]) {
         const response = page(`https://peek.example.test${path}`, { headers: { host: 'peek.example.test', cookie: `sdt.locale=${other}; other=1`, 'accept-language': other } });
@@ -283,7 +283,7 @@ describe('the page proxy', () => {
 
   it('answers an address below a language’s guides that names none of them with the 404 page, in that language', () => {
     const rewrite = (path: string) => page(`https://peek.example.test${path}`, { headers: { host: 'peek.example.test', cookie: 'sdt.locale=de' } });
-    for (const locale of SUPPORTED_LOCALES) {
+    for (const locale of GUIDE_LANGUAGES) {
       const [{ slug }] = GUIDE_LINKS[locale];
       for (const path of [guidePath(locale, 'no-such-guide'), guidePath(locale, slug.toUpperCase()), guidePath(locale, `${slug}/more`)]) {
         const response = rewrite(path);
@@ -304,12 +304,12 @@ describe('the page proxy', () => {
     const matches = (url: string, headers = {}) => unstable_doesMiddlewareMatch({ config, url, headers });
     const prefetch = { 'next-router-prefetch': '1', rsc: '1' };
     for (const locale of ADDRESS_LANGUAGES) expect(matches(`/${locale}`, prefetch), locale).toBe(true);
-    for (const locale of SUPPORTED_LOCALES) {
-      for (const path of [guidePath(locale), guidePath(locale, GUIDE_LINKS[locale][0].slug), guidePath(locale, 'no-such-guide'), carrierPath(locale), carrierPath(locale, 'no-such-carrier')]) {
-        expect(matches(path), path).toBe(true);
-        expect(matches(path, prefetch), path).toBe(true);
-        expect(matches(path, { purpose: 'prefetch' }), path).toBe(true);
-      }
+    const guides = GUIDE_LANGUAGES.flatMap((locale) => [guidePath(locale), guidePath(locale, GUIDE_LINKS[locale][0].slug), guidePath(locale, 'no-such-guide')]);
+    const carriers = SUPPORTED_LOCALES.flatMap((locale) => [carrierPath(locale), carrierPath(locale, 'no-such-carrier')]);
+    for (const path of [...guides, ...carriers]) {
+      expect(matches(path), path).toBe(true);
+      expect(matches(path, prefetch), path).toBe(true);
+      expect(matches(path, { purpose: 'prefetch' }), path).toBe(true);
     }
     // The languages with pages alone, written out in the matcher, are the app's.
     expect(config.matcher).toContainEqual({ source: `/:language(${Object.keys(PAGE_ONLY_LANGUAGES).join('|')})/carriers/:path*` });

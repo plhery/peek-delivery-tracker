@@ -164,7 +164,8 @@ describe('telling an account that its parcel was delivered', () => {
   });
 
   it.each([
-    ['fr', 'fr'], ['pt-BR', 'pt'], ['DE_ch', 'de'], ['pl', 'pl'], ['nl', 'en'], ['', 'en'], [null, 'en'],
+    ['fr', 'fr'], ['pt-BR', 'pt-br'], ['pt-PT', 'pt'], ['DE_ch', 'de'], ['pl', 'pl'], ['ru', 'ru'], ['zh-CN', 'zh'], ['zh-TW', 'en'],
+    ['nl', 'en'], ['', 'en'], [null, 'en'],
   ])('writes in the language the account last used: %s gives %s', async (stored, locale) => {
     accounts.mockResolvedValue({ ...account, locale: stored });
     await service.dispatch();

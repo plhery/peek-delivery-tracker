@@ -6,7 +6,7 @@ import { messagesFor } from './requestLocale';
 
 /** The language of a preview as Open Graph names it. */
 export const PREVIEW_LOCALES: Record<Locale, string> = {
-  en: 'en_US', de: 'de_DE', fr: 'fr_FR', it: 'it_IT', es: 'es_ES', pt: 'pt_PT', pl: 'pl_PL',
+  en: 'en_US', de: 'de_DE', fr: 'fr_FR', it: 'it_IT', es: 'es_ES', pt: 'pt_PT', 'pt-br': 'pt_BR', pl: 'pl_PL', ru: 'ru_RU', zh: 'zh_CN',
 };
 
 /** The words the server writes in a language: a page's title, its description, its picture. */

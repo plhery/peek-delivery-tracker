@@ -507,7 +507,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
 
     func info(for carrier: CarrierID, language: AppLanguage? = nil) -> CarrierDefinition {
         var definition = definitions[carrier] ?? definitions[.unknown] ?? Self.fallbackDefinitions[.unknown]!
-        if let language, let name = definition.displayNames?[language.rawValue] {
+        if let language, let name = definition.displayNames?[language.catalogLanguage.rawValue] {
             definition.displayName = name
         }
         return definition
@@ -1249,6 +1249,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
 
     private func localizedURL(_ raw: String, carrier: CarrierID, language: AppLanguage) -> URL? {
         guard var components = URLComponents(string: raw) else { return nil }
+        let language = language.catalogLanguage
         if carrier == .swissPost {
             var items = components.queryItems ?? []
             items.removeAll { $0.name == "lang" }
@@ -1256,7 +1257,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
             items.append(URLQueryItem(name: "lang", value: siteLanguage.rawValue))
             components.queryItems = items
         } else if components.host == "t.17track.net" || components.host == "parcelsapp.com" {
-            // Parcels has no Polish page; 17TRACK supports all app languages.
+            // Parcels has no Polish page; 17TRACK has every catalog language.
             let siteLanguage = components.host == "parcelsapp.com" && language == .pl ? AppLanguage.en : language
             components.path = components.path.replacingOccurrences(
                 of: "^/[a-z]{2}(?=/|$)", with: "/\(siteLanguage.rawValue)", options: .regularExpression

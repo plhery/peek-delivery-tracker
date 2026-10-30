@@ -7,10 +7,13 @@ import es from '../../../shared/demo-locales/es.json';
 import fr from '../../../shared/demo-locales/fr.json';
 import it from '../../../shared/demo-locales/it.json';
 import pl from '../../../shared/demo-locales/pl.json';
+import ptBr from '../../../shared/demo-locales/pt-br.json';
 import pt from '../../../shared/demo-locales/pt.json';
+import ru from '../../../shared/demo-locales/ru.json';
+import zh from '../../../shared/demo-locales/zh.json';
 
 /** The demo's own wording in each language; English is what it is written in. */
-const WORDING: Record<Exclude<Locale, 'en'>, Record<string, string>> = { de, es, fr, it, pl, pt };
+const WORDING: Record<Exclude<Locale, 'en'>, Record<string, string>> = { de, es, fr, it, pl, pt, 'pt-br': ptBr, ru, zh };
 
 /** Where the example is read, and when: in Zürich, on the afternoon the parcel arrived. */
 export const EXAMPLE_TIMEZONE = 'Europe/Zurich';

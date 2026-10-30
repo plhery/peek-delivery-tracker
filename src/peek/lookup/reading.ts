@@ -102,7 +102,7 @@ export function numbersInText(text: string): NumberInText[] {
   return [...found.values()];
 }
 
-/** Words that introduce a tracking number in the door's seven languages. */
+/** Words that introduce a tracking number in the door's languages. */
 const NUMBER_WORDS = new RegExp(rules.numberWords, 'i');
 
 /**

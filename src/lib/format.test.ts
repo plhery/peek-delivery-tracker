@@ -85,11 +85,20 @@ describe('readable localized calendar dates', () => {
   it.each([
     ['en-CH', 'Sat 12 Sep'], ['de-CH', 'Sa 12. Sept'],
     ['fr-CH', 'sam 12 sept'], ['it-CH', 'sab 12 set'],
-    ['es-ES', 'sáb 12 sept'], ['pt-PT', 'sáb 12 set'], ['pl-PL', 'sob 12 wrz'],
+    ['es-ES', 'sáb 12 sept'], ['pt-PT', 'sáb 12 set'], ['pt-BR', 'sáb 12 set'], ['pl-PL', 'sob 12 wrz'],
+    ['ru-RU', 'сб 12 сент'],
   ])('formats dates and times in %s', (locale, expected) => {
     const date = new Date(2026, 8, 12, 14, 5);
     expect(localizedCalendarDate(date, locale)).toBe(expected);
     expect(localizedCalendarDateTime(date, locale)).toBe(`${expected}, 14:05`);
+    expect(localizedCalendarDate(date, locale, true)).toBe(`${expected} 2026`);
+  });
+
+  it('writes Chinese dates with their own characters, and runs the time on after a space', () => {
+    const date = new Date(2026, 8, 12, 14, 5);
+    expect(localizedCalendarDate(date, 'zh-CN')).toBe('9月12日周六');
+    expect(localizedCalendarDate(date, 'zh-CN', true)).toBe('2026年9月12日周六');
+    expect(localizedCalendarDateTime(date, 'zh-CN')).toBe('9月12日周六 14:05');
   });
 });
 

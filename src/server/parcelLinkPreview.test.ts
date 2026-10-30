@@ -13,7 +13,7 @@ import type { ParcelWithEvents } from '../types';
 import { genericSocialImage, parcelLinkSocialImage } from './ParcelLinkSocialImage';
 import { parcelLinkPreview } from './parcelLinkPreview';
 import * as observability from './observability';
-import { GEIST, writable } from './pictureFont';
+import { PICTURE_FACES, writable } from './pictureFont';
 import { messagesFor } from './requestLocale';
 import { SupabaseError, SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
@@ -318,7 +318,7 @@ describe('the link preview image', () => {
     expect((await bytes(parcelLinkSocialImage(preview({ note: 'Sample parcel' }), null))).equals(await bytes(parcelLinkSocialImage(preview(), null)))).toBe(false);
     for (const [index, locale] of SUPPORTED_LOCALES.entries()) {
       const note = translateMessage(locale, 'sample.note', undefined, messagesFor(locale));
-      expect(writable(note, GEIST), locale).toBe(note);
+      expect(writable(note, ...PICTURE_FACES), locale).toBe(note);
       const response = await image(new Request(`https://peek.example.test/api/public/parcels/sample/image?lang=${locale}`, {
         headers: { host: 'peek.example.test', 'x-real-ip': `198.51.100.${70 + index}` },
       }), { params: Promise.resolve({ linkId: 'sample' }) });
@@ -375,7 +375,7 @@ describe('the link preview image', () => {
         }
       }
       expect(said.size).toBeGreaterThan(200);
-      for (const text of said) expect(writable(text, GEIST), `${locale}: ${text}`).not.toBeNull();
+      for (const text of said) expect(writable(text, ...PICTURE_FACES), `${locale}: ${text}`).not.toBeNull();
     }
   });
 

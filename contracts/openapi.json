@@ -39938,7 +39938,10 @@
                 "it",
                 "es",
                 "pt",
-                "pl"
+                "pt-br",
+                "pl",
+                "ru",
+                "zh"
               ]
             }
           }
@@ -42305,7 +42308,10 @@
           "it",
           "es",
           "pt",
-          "pl"
+          "pt-br",
+          "pl",
+          "ru",
+          "zh"
         ]
       },
       "NativePushDeviceRequest": {

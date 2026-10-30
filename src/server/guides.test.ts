@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import de from '../../shared/locales/de.json';
 import fr from '../../shared/locales/fr.json';
-import { SUPPORTED_LOCALES, type Locale } from '../lib/locale';
+import { GUIDE_LANGUAGES, type GuideLanguage } from '../lib/locale';
 
 const request = vi.hoisted(() => ({ host: 'peek.example' }));
 vi.mock('next/headers', () => ({
@@ -25,7 +25,7 @@ const [first] = guideLinks('en');
 describe('the guides as the server reads them', () => {
   it('has every guide in every language, in one order, each file under the address and title the app links', () => {
     expect(ids.length).toBeGreaterThan(0);
-    for (const locale of SUPPORTED_LOCALES) {
+    for (const locale of GUIDE_LANGUAGES) {
       expect(guideLinks(locale).map(({ id }) => id)).toEqual(ids);
       for (const link of guideLinks(locale)) {
         const text = guide(locale, link.id);
@@ -37,7 +37,7 @@ describe('the guides as the server reads them', () => {
   });
 
   it('dates each guide, for the sitemap, by its fields alone, as its text does', () => {
-    for (const locale of SUPPORTED_LOCALES) {
+    for (const locale of GUIDE_LANGUAGES) {
       for (const { id } of guideLinks(locale)) expect(guideUpdated(locale, id)).toBe(guide(locale, id).updated);
     }
   });
@@ -46,11 +46,11 @@ describe('the guides as the server reads them', () => {
     expect(guideAddresses()).toEqual({ en: '/guides', de: '/de/guides', fr: '/fr/guides', it: '/it/guides', es: '/es/guides', pt: '/pt/guides', pl: '/pl/guides' });
     const addresses = guideAddresses(first.id);
     expect(addresses.en).toBe(`/guides/${first.slug}`);
-    for (const locale of SUPPORTED_LOCALES) {
+    for (const locale of GUIDE_LANGUAGES) {
       expect(addresses[locale]).toBe(`${locale === 'en' ? '' : `/${locale}`}/guides/${guideLinks(locale).find(({ id }) => id === first.id)!.slug}`);
     }
     expect(guideAlternates(new URL('https://peek.example'), first.id)).toEqual({
-      ...Object.fromEntries(SUPPORTED_LOCALES.map((locale) => [locale, `https://peek.example${addresses[locale]}`])),
+      ...Object.fromEntries(GUIDE_LANGUAGES.map((locale) => [locale, `https://peek.example${addresses[locale]}`])),
       'x-default': `https://peek.example${addresses.en}`,
     });
   });
@@ -62,13 +62,13 @@ describe('what a guides page tells a search engine', () => {
     const french = guideLinks('fr')[0];
     const text = guide('fr', french.id);
     const metadata = await guideMetadata('fr', french.slug);
-    const address = (locale: Locale) => `https://peek.example.test${guideAddresses(french.id)[locale]}`;
+    const address = (locale: GuideLanguage) => `https://peek.example.test${guideAddresses(french.id)[locale]}`;
     expect(metadata.title).toBe(`${french.title} — Peek`);
     expect(metadata.description).toBe(text.description);
     expect(metadata.metadataBase).toEqual(new URL('https://peek.example'));
     expect(metadata.alternates).toEqual({
       canonical: address('fr'),
-      languages: { ...Object.fromEntries(SUPPORTED_LOCALES.map((locale) => [locale, address(locale)])), 'x-default': address('en') },
+      languages: { ...Object.fromEntries(GUIDE_LANGUAGES.map((locale) => [locale, address(locale)])), 'x-default': address('en') },
     });
     expect(metadata.openGraph).toMatchObject({
       type: 'article', url: address('fr'), siteName: 'Peek', locale: 'fr_FR', title: text.title,
@@ -79,7 +79,7 @@ describe('what a guides page tells a search engine', () => {
   });
 
   it('keeps every title short enough for a search result', () => {
-    for (const locale of SUPPORTED_LOCALES) for (const { title } of guideLinks(locale)) expect(title.length).toBeLessThanOrEqual(60);
+    for (const locale of GUIDE_LANGUAGES) for (const { title } of guideLinks(locale)) expect(title.length).toBeLessThanOrEqual(60);
   });
 
   it('does the same for the guides’ own page', async () => {

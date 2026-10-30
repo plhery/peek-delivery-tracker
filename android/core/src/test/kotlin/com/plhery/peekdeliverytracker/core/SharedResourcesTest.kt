@@ -10,7 +10,7 @@ class SharedResourcesTest {
     @Test
     fun everyLanguageHasEveryKey() {
         val catalogs = Json.parseToJsonElement(SharedResources.text("Localization.json")).jsonObject
-        assertEquals(setOf("en", "de", "fr", "it", "es", "pt", "pl"), catalogs.keys)
+        assertEquals(setOf("en", "de", "fr", "it", "es", "pt", "pt-br", "pl", "ru", "zh"), catalogs.keys)
         val english = catalogs.getValue("en").jsonObject.keys
         for ((language, catalog) in catalogs) {
             assertEquals("keys of $language", english, catalog.jsonObject.keys)

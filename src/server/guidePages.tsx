@@ -6,7 +6,7 @@ import { GuideFrame } from '../guides/GuideFrame';
 import { GuideIndex } from '../guides/GuideIndex';
 import { GuidePage } from '../guides/GuidePage';
 import { frenchSpacing } from '../guides/markdown';
-import { interfaceLanguage, isPageOnlyLanguage, PAGE_ONLY_LANGUAGES, SUPPORTED_LOCALES, type Locale, type PageLanguage } from '../lib/locale';
+import { hrefLanguage, hrefLanguages, interfaceLanguage, isPageOnlyLanguage, PAGE_ONLY_LANGUAGES, SUPPORTED_LOCALES, type GuideLanguage, type Locale, type PageLanguage } from '../lib/locale';
 import type { Translate } from '../lib/messages';
 import { guide, guideAddresses, guideAlternates, guideLinkBySlug, guideLinks } from './guides';
 import { landingAddress } from './landingMetadata';
@@ -32,8 +32,8 @@ export const languageNames = () => Object.fromEntries([
 
 /**
  * A guides page's metadata, or a carrier's page's: its title with Peek's name, its address in each
- * language it is written in on the site's canonical origin, and Peek's own picture in the page's language,
- * or for a language with pages alone, in the language around its text.
+ * language it is written in on the site's canonical origin, each language named as hreflang names it, and
+ * Peek's own picture in the page's language, or for a language with pages alone, in the language around its text.
  */
 export async function pageMetadata(locale: PageLanguage, alternates: (site: URL) => Partial<Record<PageLanguage | 'x-default', string>>, title: string, description: string, article?: { published: string; updated: string }): Promise<Metadata> {
   const origin = await requestOrigin();
@@ -44,7 +44,7 @@ export async function pageMetadata(locale: PageLanguage, alternates: (site: URL)
     metadataBase: origin,
     title: `${title} — Peek`,
     description,
-    alternates: { canonical: address, languages },
+    alternates: { canonical: address, languages: hrefLanguages(languages) },
     openGraph: {
       ...(article ? { type: 'article', publishedTime: article.published, modifiedTime: article.updated } : { type: 'website' }),
       url: address,
@@ -63,23 +63,23 @@ export async function pageMetadata(locale: PageLanguage, alternates: (site: URL)
   };
 }
 
-export async function guideIndexMetadata(locale: Locale): Promise<Metadata> {
+export async function guideIndexMetadata(locale: GuideLanguage): Promise<Metadata> {
   const t = guideWords(locale);
   return pageMetadata(locale, (site) => guideAlternates(site), t('guides.heading'), t('guides.lead'));
 }
 
 /** A guide's metadata, or none of its own for a slug without a guide, which the page answers with a 404. */
-export async function guideMetadata(locale: Locale, slug: string): Promise<Metadata> {
+export async function guideMetadata(locale: GuideLanguage, slug: string): Promise<Metadata> {
   const link = guideLinkBySlug(locale, slug);
   if (!link) return {};
   const { title, description, published, updated } = guide(locale, link.id);
   return pageMetadata(locale, (site) => guideAlternates(site, link.id), title, description, { published, updated });
 }
 
-const described = (locale: Locale) => guideLinks(locale).map((link) => ({ link, description: guide(locale, link.id).description }));
+const described = (locale: GuideLanguage) => guideLinks(locale).map((link) => ({ link, description: guide(locale, link.id).description }));
 
 /** The guides of a language, all on one page. */
-export async function GuideIndexRoute({ locale }: { locale: Locale }) {
+export async function GuideIndexRoute({ locale }: { locale: GuideLanguage }) {
   await connection();
   const t = guideWords(locale);
   return <GuideFrame locale={locale} t={t} addresses={guideAddresses()} languageNames={languageNames()} screen={`guides/${locale}`}>
@@ -91,7 +91,7 @@ export async function GuideIndexRoute({ locale }: { locale: Locale }) {
  * One guide, in the language of its address. The proxy sends an address without a guide to the
  * site's 404 page before it gets here; reached anyway, such a slug is still a 404.
  */
-export async function GuideRoute({ locale, slug }: { locale: Locale; slug: string }) {
+export async function GuideRoute({ locale, slug }: { locale: GuideLanguage; slug: string }) {
   await connection();
   const links = guideLinks(locale);
   const at = links.findIndex((link) => link.slug === slug);
@@ -110,7 +110,7 @@ export async function GuideRoute({ locale, slug }: { locale: Locale; slug: strin
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'Article', headline: text.title, description: text.description, inLanguage: locale,
+        '@type': 'Article', headline: text.title, description: text.description, inLanguage: hrefLanguage(locale),
         datePublished: text.published, dateModified: text.updated, mainEntityOfPage: url,
         image: sitePicture(site, locale).url, author: peek, publisher: peek,
       },

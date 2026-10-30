@@ -100,6 +100,10 @@ describe('localization', () => {
     expect(detectLocale(['es-ES'])).toBe('es');
     expect(detectLocale(['pt-PT'])).toBe('pt');
     expect(detectLocale(['pl-PL'])).toBe('pl');
+    expect(detectLocale(['pt-BR'])).toBe('pt-br');
+    expect(detectLocale(['ru-RU'])).toBe('ru');
+    expect(detectLocale(['zh-CN'])).toBe('zh');
+    expect(detectLocale(['zh-TW', 'fr-CH'])).toBe('fr');
     expect(detectLocale(['nl-NL'])).toBe('en');
   });
 
@@ -304,7 +308,10 @@ describe('relative delivery dates', () => {
   it.each([
     ['es', ['ayer', 'hoy', 'mañana'], '1 sello', '2 sellos'],
     ['pt', ['ontem', 'hoje', 'amanhã'], '1 selo', '2 selos'],
+    ['pt-br', ['ontem', 'hoje', 'amanhã'], '1 selo', '2 selos'],
     ['pl', ['wczoraj', 'dziś', 'jutro'], '1 znaczek', '2 znaczki'],
+    ['ru', ['вчера', 'сегодня', 'завтра'], '1 марка', '2 марки'],
+    ['zh', ['昨天', '今天', '明天'], '1 枚邮票', '2 枚邮票'],
   ] as const)('supports dates and counts in %s', (locale, days, one, two) => {
     const t: Translate = (key, variables) => translate(locale, key, variables);
     const now = new Date(2026, 8, 9, 12).getTime();
@@ -325,6 +332,24 @@ describe('relative delivery dates', () => {
       .toBe(`${count} ${count === 1 ? 'aktualizacja' : few ? 'aktualizacje' : 'aktualizacji'}`);
     expect(translate('pl', count === 1 ? 'passport.parcels.one' : 'passport.parcels.many', { count }))
       .toBe(`${count} ${count === 1 ? 'przesyłka' : few ? 'przesyłki' : 'przesyłek'}`);
+  });
+
+  it.each([0, 1, 2, 4, 5, 11, 12, 14, 21, 22, 25, 101, 102, 111, 112])('declines Russian quantities for %i', (count) => {
+    // Russian counts 21 and 101 as it does 1, and 22 and 102 as it does 2.
+    const forms = (one: string, few: string, many: string) =>
+      `${count} ${[1, 21, 101].includes(count) ? one : [2, 4, 22, 102].includes(count) ? few : many}`;
+    expect(translate('ru', 'friends.stampCount', { count })).toBe(forms('марка', 'марки', 'марок'));
+    expect(translate('ru', count === 1 ? 'detail.updateCount.one' : 'detail.updateCount.many', { count }))
+      .toBe(forms('обновление', 'обновления', 'обновлений'));
+    expect(translate('ru', count === 1 ? 'passport.parcels.one' : 'passport.parcels.many', { count }))
+      .toBe(forms('посылка', 'посылки', 'посылок'));
+  });
+
+  it('runs a Chinese day on into its delivery window after a space', () => {
+    const t: Translate = (key, variables) => translate('zh', key, variables);
+    const now = new Date(2026, 8, 9, 12).getTime();
+    expect(localizedExpectedDelivery('2026-09-10 14:00-16:00', t, 'zh-CN', now)).toBe('明天 14:00–16:00');
+    expect(localizedExpectedDelivery('2026-09-12', t, 'zh-CN', now)).toBe('9月12日周六');
   });
 
   it.each(['en', 'de', 'fr', 'it'] as const)('uses natural date phrases and singular counts in %s', (locale) => {

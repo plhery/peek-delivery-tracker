@@ -40,7 +40,10 @@ const loaders: Record<Exclude<Locale, 'en'>, () => Promise<{ default: Messages }
   it: () => import('../shared/locales/it.json'),
   es: () => import('../shared/locales/es.json'),
   pt: () => import('../shared/locales/pt.json'),
+  'pt-br': () => import('../shared/locales/pt-br.json'),
   pl: () => import('../shared/locales/pl.json'),
+  ru: () => import('../shared/locales/ru.json'),
+  zh: () => import('../shared/locales/zh.json'),
 };
 const dictionaries = new Map<Locale, Messages>([['en', en]]);
 

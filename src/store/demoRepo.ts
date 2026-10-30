@@ -47,7 +47,10 @@ const dictionaryLoaders: Record<Exclude<Locale, 'en'>, () => Promise<{ default: 
   it: () => import('../../shared/demo-locales/it.json'),
   es: () => import('../../shared/demo-locales/es.json'),
   pt: () => import('../../shared/demo-locales/pt.json'),
+  'pt-br': () => import('../../shared/demo-locales/pt-br.json'),
   pl: () => import('../../shared/demo-locales/pl.json'),
+  ru: () => import('../../shared/demo-locales/ru.json'),
+  zh: () => import('../../shared/demo-locales/zh.json'),
 };
 const dictionaries = new Map<Locale, DemoDictionary>([['en', {}]]);
 

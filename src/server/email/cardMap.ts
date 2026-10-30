@@ -8,7 +8,7 @@ import { countryPlace, defaultMode, routeFromEvents, type Route } from '../../co
 import { countryLabel, geography, loadWorld } from '../../components/map/world';
 import { countryName } from 'universal-parcel-scraper/app';
 import type { ParcelWithEvents } from '../../types';
-import { GEIST, textWidth, writable } from '../pictureFont';
+import { PICTURE_FACES, textWidth, writable } from '../pictureFont';
 import type { EmailStage } from './types';
 
 /** The size the app writes a place's name in, which the layout's own sums assume. */
@@ -45,7 +45,7 @@ export async function journeyMap(parcel: ParcelWithEvents, languageTag: string, 
   if (!parcel.events.some((event) => event.place)) return null;
   await loadWorld();
   // A name the picture's face cannot write is left out: the dot stays, unnamed.
-  const named = (name: string) => writable(name, GEIST) ?? '';
+  const named = (name: string) => writable(name, ...PICTURE_FACES) ?? '';
   const country = (code: string) => named(countryName(code, languageTag));
   const label = parcel.destinationCountry ? countryLabel(parcel.destinationCountry) : null;
   const destination = parcel.destinationCountry && label ? countryPlace(parcel.destinationCountry, country(parcel.destinationCountry), label) : undefined;
@@ -55,7 +55,7 @@ export async function journeyMap(parcel: ParcelWithEvents, languageTag: string, 
 
   const mode = defaultMode(route, stage);
   const pip: PipPlacing = { mood: pipMood(stage) ?? 'joy', ceiling };
-  const width = (text: string) => textWidth(text, LABEL_SIZE, GEIST);
+  const width = (text: string) => textWidth(text, LABEL_SIZE, ...PICTURE_FACES);
   const drawn = (camera: Camera, box?: Rect) =>
     layout(route, camera, size, insets, 'rect', 'ends', false, mode, false, languageTag, pip, width, undefined, box);
   const camera = targetCamera(route, mode, size, insets, 'rect', covered, (view, box) => shownOf(drawn(view, box)), true);
@@ -89,7 +89,7 @@ export async function journeyMap(parcel: ParcelWithEvents, languageTag: string, 
     route,
     svg: `<svg xmlns="http://www.w3.org/2000/svg" width="${size.width}" height="${size.height}" viewBox="0 0 ${size.width} ${size.height}" fill="none" stroke-linecap="round" stroke-linejoin="round">${shapes.join('')}</svg>`,
     // A country's name is written in capitals, which the face may lack where it had the small letters.
-    labels: overlay.labels.filter((placed) => placed.text && writable(placed.text, GEIST) === placed.text),
+    labels: overlay.labels.filter((placed) => placed.text && writable(placed.text, ...PICTURE_FACES) === placed.text),
     pip: overlay.pip && { x: overlay.pip.x, y: overlay.pip.y, width: overlay.pip.width },
   };
 }

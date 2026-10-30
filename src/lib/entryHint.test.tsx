@@ -23,7 +23,7 @@ afterEach(() => { localStorage.clear(); sessionStorage.clear(); delete root.data
 describe('the entry hint script', () => {
   it('reads the names the page’s own stores write, and the landing’s addresses as the page routes them', () => {
     expect(ENTRY_HINT_KEYS).toEqual({ experience: EXPERIENCE_STORAGE_KEY, deviceParcels: RECENTS_STORAGE_KEY });
-    expect(ENTRY_HINT_LANDING_PATHS).toEqual([LANDING_PATH, '/de', '/fr', '/it', '/es', '/pt', '/pl']);
+    expect(ENTRY_HINT_LANDING_PATHS).toEqual([LANDING_PATH, '/de', '/fr', '/it', '/es', '/pt', '/pt-br', '/pl', '/ru', '/zh']);
     for (const path of ENTRY_HINT_LANDING_PATHS) expect(isLandingPath(path), path).toBe(true);
   });
 

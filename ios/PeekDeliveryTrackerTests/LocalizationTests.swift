@@ -69,8 +69,8 @@ final class LocalizationTests: XCTestCase {
         let dictionaries = try localizationDictionaries()
         let englishKeys = Set(try XCTUnwrap(dictionaries["en"]).keys)
 
-        XCTAssertEqual(Set(dictionaries.keys), Set(["en", "de", "fr", "it", "es", "pt", "pl"]))
-        for language in ["de", "fr", "it", "es", "pt", "pl"] {
+        XCTAssertEqual(Set(dictionaries.keys), Set(AppLanguage.allCases.map(\.rawValue)))
+        for language in AppLanguage.allCases.map(\.rawValue) where language != "en" {
             XCTAssertEqual(Set(try XCTUnwrap(dictionaries[language]).keys), englishKeys, language)
         }
     }
@@ -79,11 +79,14 @@ final class LocalizationTests: XCTestCase {
         let dictionaries = try localizationDictionaries()
         let english = try XCTUnwrap(dictionaries["en"])
 
-        for language in ["de", "fr", "it", "es", "pt", "pl"] {
+        for language in AppLanguage.allCases.map(\.rawValue) where language != "en" {
             let translated = try XCTUnwrap(dictionaries[language])
             for (key, englishValue) in english {
+                // Russian counts 21 and 101 as one too, so a count's one form may write the number where English writes 1.
+                let value = translated[key] ?? ""
+                let counted = key.hasSuffix(".one") && variables(in: value.replacingOccurrences(of: "{{count}}", with: "")) == variables(in: englishValue)
                 XCTAssertEqual(
-                    variables(in: translated[key] ?? ""),
+                    counted ? variables(in: englishValue) : variables(in: value),
                     variables(in: englishValue),
                     "\(language).\(key)"
                 )
@@ -203,12 +206,71 @@ final class LocalizationTests: XCTestCase {
         XCTAssertEqual(localizer.text("time.daysAgo", ["count": 1]), "1 dzień temu")
     }
 
+    /// Polish and Russian whole counts take CLDR's forms; Russian's `one` also counts 21, 31 and 101.
+    func testCountFormsInPolishAndRussian() {
+        let russian: [Double: String] = [1: "one", 2: "few", 4: "few", 5: "many", 11: "many", 12: "many", 21: "one", 22: "few",
+                                         0: "many", 101: "one", 111: "many", 1.5: "other"]
+        for (count, form) in russian {
+            XCTAssertEqual(Localizer.countForm(count, in: .ru), form, "ru \(count)")
+        }
+        let polish: [Double: String] = [1: "one", 2: "few", 5: "many", 12: "many", 21: "many", 22: "few", 0: "many", 1.5: "other"]
+        for (count, form) in polish {
+            XCTAssertEqual(Localizer.countForm(count, in: .pl), form, "pl \(count)")
+        }
+        for language in AppLanguage.allCases where language != .pl && language != .ru {
+            XCTAssertEqual(Localizer.countForm(1, in: language), "one", language.rawValue)
+            for count in [0, 2, 5, 21, 22, 1.5] {
+                XCTAssertEqual(Localizer.countForm(count, in: language), "other", "\(language.rawValue) \(count)")
+            }
+        }
+    }
+
+    /// A Russian count reads the copy's form for it, whatever words the copy has.
+    func testRussianCountsReadTheirForms() throws {
+        let russian = try XCTUnwrap(try localizationDictionaries()["ru"])
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .ru
+        for (count, key) in [(1, "friends.stampCount.one"), (21, "friends.stampCount.one"), (22, "friends.stampCount.few"),
+                             (5, "friends.stampCount"), (11, "friends.stampCount"), (111, "friends.stampCount")] {
+            let expected = try XCTUnwrap(russian[key]).replacingOccurrences(of: "{{count}}", with: "\(count)")
+            XCTAssertEqual(localizer.text("friends.stampCount", ["count": count]), expected, "\(count)")
+        }
+    }
+
+    /// Device languages read as the web reads them, and a language Peek doesn't speak is none of its own.
+    func testDeviceLanguagesReadAsPeeksLanguages() {
+        let tags: [String: AppLanguage?] = [
+            "pt-BR": .ptBR, "pt-PT": .pt, "pt": .pt, "ru-RU": .ru, "en-US": .en,
+            "zh-Hans-CN": .zh, "zh-Hans": .zh, "zh-CN": .zh, "zh": .zh,
+            "zh-Hant-TW": nil, "zh-TW": nil, "zh-HK": nil, "nl-NL": nil,
+        ]
+        for (tag, language) in tags {
+            XCTAssertEqual(AppLanguage(tag: tag), language, tag)
+        }
+    }
+
+    /// Every language is one the API names, with the locale its dates and numbers take.
+    func testEveryLanguageIsOneTheServiceNames() {
+        for language in AppLanguage.allCases {
+            XCTAssertEqual(NativePushLocale(language).rawValue, language.rawValue)
+        }
+        XCTAssertEqual(AppLanguage.pt.locale.identifier, "pt-PT")
+        XCTAssertEqual(AppLanguage.ptBR.locale.identifier, "pt-BR")
+        XCTAssertEqual(AppLanguage.zh.locale.identifier, "zh-Hans")
+        XCTAssertEqual(AppLanguage.ru.locale.identifier, "ru")
+    }
+
     func testNewLanguageNamesAndCopy() {
         let localizer = Localizer()
         for (language, name, title) in [(AppLanguage.es, "Español", "Entregas"), (.pt, "Português", "Entregas"), (.pl, "Polski", "Dostawy")] {
             localizer.language = language
             XCTAssertEqual(language.nativeName, name)
             XCTAssertEqual(localizer.text("native.deliveries"), title)
+        }
+        for (language, name) in [(AppLanguage.ptBR, "Português (Brasil)"), (.ru, "Русский"), (.zh, "简体中文")] {
+            XCTAssertEqual(language.nativeName, name)
         }
     }
 
@@ -219,7 +281,8 @@ final class LocalizationTests: XCTestCase {
             (.en, "Sat 12 Sep"), (.de, "Sa 12. Sept"),
             (.fr, "sam 12 sept"), (.it, "sab 12 set"),
             (.es, "sáb 12 sept"), (.pt, "sábado 12 set"),
-            (.pl, "sob 12 wrz"),
+            (.ptBR, "sáb 12 set"), (.pl, "sob 12 wrz"),
+            (.zh, "周六 12 9月"),
         ]
         for (language, expected) in cases {
             localizer.language = language
@@ -332,6 +395,10 @@ final class LocalizationTests: XCTestCase {
         XCTAssertEqual(TrackingLocation.countryCode(in: "Shenzhen, China"), "CN")
         XCTAssertEqual(TrackingLocation.countryName("CN", language: .en), "China")
         XCTAssertEqual(TrackingLocation.countryName("CN", language: .fr), "Chine")
+        XCTAssertEqual(TrackingLocation.countryName("CN", language: .ru), "Китай")
+        XCTAssertEqual(TrackingLocation.countryName("CN", language: .zh), "中国")
+        XCTAssertEqual(TrackingLocation.place("深圳, 中国"), .init(country: "CN", name: "深圳"))
+        XCTAssertEqual(TrackingLocation.place("Москва, Россия"), .init(country: "RU", name: "Москва"))
         XCTAssertEqual(TrackingLocation.countryName("CH", language: .de), "Schweiz")
     }
 

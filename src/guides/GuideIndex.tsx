@@ -1,11 +1,11 @@
 import type { GuideLink } from '../generated/guides';
-import type { Locale } from '../lib/locale';
+import type { GuideLanguage } from '../lib/locale';
 import type { Translate } from '../lib/messages';
 import { guidePath } from './paths';
 import { GuideScene } from './scenes';
 
 /** A guide as a card: its picture, its title, and what it answers. */
-export function GuideCard({ link, description, locale }: { link: GuideLink; description: string; locale: Locale }) {
+export function GuideCard({ link, description, locale }: { link: GuideLink; description: string; locale: GuideLanguage }) {
   return <li>
     <a className="guide-card" href={guidePath(locale, link.slug)}>
       <span className="guide-card__picture"><GuideScene id={link.id} /></span>
@@ -17,7 +17,7 @@ export function GuideCard({ link, description, locale }: { link: GuideLink; desc
 
 /** The guides of a language, all on one page. */
 export function GuideIndex({ locale, t, guides }: {
-  locale: Locale;
+  locale: GuideLanguage;
   t: Translate;
   guides: readonly { link: GuideLink; description: string }[];
 }) {

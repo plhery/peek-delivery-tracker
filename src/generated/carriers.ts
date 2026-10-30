@@ -2852,6 +2852,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     }
   ],
+  "pt-br": [],
   "pl": [
     {
       "id": "yunexpress",
@@ -3054,6 +3055,8 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     }
   ],
+  "ru": [],
+  "zh": [],
   "nl": [
     {
       "id": "colis-prive",

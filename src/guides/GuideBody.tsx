@@ -2,7 +2,7 @@ import { Fragment, type ReactNode } from 'react';
 import { carrierPath } from '../carriers/paths';
 import { CARRIER_LINKS } from '../generated/carriers';
 import type { GuideLink } from '../generated/guides';
-import { documentLanguage, languagePath, type Locale, type PageLanguage } from '../lib/locale';
+import { documentLanguage, guideLanguage, languagePath, type Locale, type PageLanguage } from '../lib/locale';
 import type { Block, Inline, JourneyIcon } from './markdown';
 import { NumberChecker, type CheckerWords } from './NumberChecker';
 import { guidePath } from './paths';
@@ -78,7 +78,7 @@ export function GuideBody({ blocks, locale, language = locale, links, sources, c
         case 'code': return <code key={index}>{withEmails(node.text)}</code>;
         case 'strong': return <strong key={index}>{inline(node.children)}</strong>;
         case 'em': return <em key={index}>{inline(node.children)}</em>;
-        case 'guide': return <a key={index} href={guidePath(locale, links.find((link) => link.id === node.id)?.slug)}>{inline(node.children)}</a>;
+        case 'guide': return <a key={index} href={guidePath(guideLanguage(locale), links.find((link) => link.id === node.id)?.slug)}>{inline(node.children)}</a>;
         case 'carrier': return <a key={index} href={carrierAddress(node.id)}>{inline(node.children)}</a>;
         case 'link': return node.href === '/'
           ? <a key={index} href={languagePath(locale)}>{inline(node.children)}</a>

@@ -6,6 +6,7 @@ import sharp from 'sharp';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { SUPPORTED_LOCALES } from '../src/lib/locale.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const mark = JSON.parse(readFileSync(join(root, 'src/brand/mark.json'), 'utf8'));
@@ -135,40 +136,51 @@ for (const width of [16, 32, 64, 128, 256, 512, 1024]) {
 // The link preview, once per language. `public/og.svg` is the English drawing; its words are
 // replaced with each language's own. The text is set in the typeface the parcel pictures use,
 // so it renders the same everywhere.
-const LOCALES = ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl'];
 const drawing = readFileSync(join(root, 'public/og.svg'), 'utf8');
 const HEADLINE = /<text [^>]*font-size="104"[^>]*>[\s\S]*?<\/text>/;
 const DETAIL = /<text x="84" y="462"[^>]*>[^<]*<\/text>/;
 const [headlineAttributes] = /font-family="[^"]*"/.exec(drawing);
-/** How wide a line of the face runs, in ems: close enough to choose where a headline breaks. */
+/** How wide a line of the face runs, in ems: close enough to choose where a headline breaks. A Chinese character runs a full em. */
 const EM = 0.56;
+const width = (line) => [...line].reduce((sum, character) => sum + (/[\p{Script=Han}\u3000-\u303f\uff00-\uffef]/u.test(character) ? 1 : EM), 0);
 const COLUMN = 640;
 
+/** A headline's words. Chinese is written without spaces, so its words come from the dictionary, each mark kept with the word before it. */
+function headlineWords(text, locale) {
+  if (text.includes(' ')) return { words: text.split(' '), space: ' ' };
+  const words = [];
+  for (const { segment, isWordLike } of new Intl.Segmenter(locale, { granularity: 'word' }).segment(text)) {
+    if (isWordLike || !words.length) words.push(segment);
+    else words[words.length - 1] += segment;
+  }
+  return { words, space: '' };
+}
+
 /** A headline on two lines as large as they fit, or on three when two would be small. */
-function headline(text) {
-  const words = text.split(' ');
-  const splits = (count) => count === 1 ? [[words.join(' ')]] : words.slice(1).flatMap((_, index) => {
-    const head = words.slice(0, index + 1).join(' ');
+function headline(text, locale) {
+  const { words, space } = headlineWords(text, locale);
+  const splits = (count) => count === 1 ? [[words.join(space)]] : words.slice(1).flatMap((_, index) => {
+    const head = words.slice(0, index + 1).join(space);
     const rest = words.slice(index + 1);
-    return count === 2 ? [[head, rest.join(' ')]] : rest.slice(1).map((__, cut) => [head, rest.slice(0, cut + 1).join(' '), rest.slice(cut + 1).join(' ')]);
+    return count === 2 ? [[head, rest.join(space)]] : rest.slice(1).map((__, cut) => [head, rest.slice(0, cut + 1).join(space), rest.slice(cut + 1).join(space)]);
   });
-  const longest = (lines) => Math.max(...lines.map((line) => [...line].length));
+  const longest = (lines) => Math.max(...lines.map(width));
   const best = (count) => splits(Math.min(count, words.length)).reduce((a, b) => longest(b) < longest(a) ? b : a);
   const two = best(2);
-  const twoSize = Math.min(104, Math.floor(COLUMN / (longest(two) * EM)));
+  const twoSize = Math.min(104, Math.floor(COLUMN / longest(two)));
   const lines = twoSize >= 84 ? two : best(3);
-  const size = lines === two ? twoSize : Math.min(78, Math.floor(COLUMN / (longest(lines) * EM)));
+  const size = lines === two ? twoSize : Math.min(78, Math.floor(COLUMN / longest(lines)));
   return { lines, size };
 }
 
 function previewSvg(locale) {
   const words = JSON.parse(readFileSync(join(root, `shared/locales/${locale}.json`), 'utf8'));
-  const { lines, size } = headline(words['peek.title']);
+  const { lines, size } = headline(words['peek.title'], locale);
   const leading = size * 1.02;
   // The detail sits where the English one does under two full lines, and moves with the headline.
   const first = 182 + size * 0.895;
   const detail = words['preview.picture.detail'];
-  const detailSize = Math.min(40, Math.floor(COLUMN / ([...detail].length * 0.5)));
+  const detailSize = Math.min(40, Math.floor(COLUMN / (width(detail) * 0.5 / EM)));
   const detailY = Math.round(first + leading * (lines.length - 1) + 30 + 51 * size / 104);
   return drawing
     .replace(/<title id="title">[^<]*<\/title>/, `<title id="title">${words['app.title']} — ${words['peek.title']}</title>`)
@@ -178,10 +190,11 @@ function previewSvg(locale) {
 }
 
 const versions = {};
-for (const locale of LOCALES) {
+for (const locale of SUPPORTED_LOCALES) {
   const png = render(locale === 'en' ? drawing : previewSvg(locale), 1200, {
     font: {
-      fontFiles: [join(root, 'node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf')],
+      // Geist has no Chinese characters: Noto Sans SC writes them.
+      fontFiles: [join(root, 'node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf'), ...locale === 'zh' ? [join(root, 'public/fonts/noto-sans-sc/NotoSansSC-Regular.otf')] : []],
       loadSystemFonts: false,
       defaultFontFamily: 'Geist',
     },

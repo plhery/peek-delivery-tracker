@@ -1748,6 +1748,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a2e9"
     },
     {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-sendungsverfolgung",
+      "title": "GZYL Sendungsverfolgung: YL…YQ-Nummer, Status und Zustellung",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
       "id": "shouwu",
       "catalog": "shouwu",
       "slug": "shouwu-sendungsverfolgung",

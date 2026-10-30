@@ -34,9 +34,9 @@ const PACKAGE_COLUMNS = [
  * The package shape the API returns once eventPlaces.ts has served it. A
  * scan's `point`, the carrier's own coordinates, gives its place, and its
  * provider_event_id tells Peek's own rows from the carrier's: the response
- * carries neither. The scraper's `recipient_action` is served as it was stored.
+ * carries neither. The scraper's `recipient_action` and `tie_order` are served as they were stored.
  */
-const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action)`;
+const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order)`;
 const ACTIVE_PACKAGE_SELECT = 'id,user_id,tracking_number,label,carrier,current_stage,last_status_text,tracking_url,dpd_postcode,created_at,last_synced_at,sync_status,sync_error,expected_delivery,carrier_data,tracking_generation,archived_at';
 /**
  * Where the sync loaders put each stored event's identity, instant, stage and

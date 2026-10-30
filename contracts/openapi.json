@@ -39923,6 +39923,11 @@
           "recipient_action": {
             "$ref": "#/components/schemas/RecipientAction",
             "description": "Set on a scan whose carrier asks the recipient to act before the parcel moves on, in one of the customs wordings that say so explicitly: tax_id give their tax number (such as Brazil's CPF or CNPJ), duties pay the import duties or taxes, documents send customs documents. Apps flag the parcel as needing action while this scan is its newest, and quote the scan's description."
+          },
+          "tie_order": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Set on a scan its source dated alike with others of its answer, to the second or by the same day alone: its place among them, from the oldest, in the order the source listed them. Apps order scans of one instant in one stage by it, the highest first, then by id; a scan without one goes after those with one."
           }
         }
       },

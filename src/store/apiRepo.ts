@@ -108,6 +108,7 @@ export function toEvent(row: ApiTrackingEventRow): TrackingEvent {
     day: row.day ?? undefined,
     relayOf: row.relay_of ?? undefined,
     recipientAction: row.recipient_action ?? undefined,
+    tieOrder: row.tie_order ?? undefined,
   };
 }
 

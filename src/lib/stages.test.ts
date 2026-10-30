@@ -77,6 +77,20 @@ describe('sortEventsDesc / latestEvent', () => {
     expect(input[0]).toBe(older);
   });
 
+  it("orders scans of one instant and stage as their source listed them, then by id", () => {
+    const at = '2026-06-02T08:00:00.000Z';
+    const arrived = makeEvent({ id: 'z', stage: 'in_transit', occurredAt: at, tieOrder: 0 });
+    const departed = makeEvent({ id: 'a', stage: 'in_transit', occurredAt: at, tieOrder: 1 });
+    expect(sortEventsDesc([arrived, departed])).toEqual([departed, arrived]);
+    expect(sortEventsDesc([departed, arrived])).toEqual([departed, arrived]);
+    expect(currentEvent([arrived, departed])).toBe(departed);
+    // Delivery progress still decides first; a scan stored before the order goes after those with one, then the id decides.
+    const customs = makeEvent({ id: 'c', stage: 'customs', occurredAt: at });
+    const unordered = makeEvent({ id: 'b', stage: 'in_transit', occurredAt: at });
+    expect(sortEventsDesc([unordered, arrived, departed, customs]).map((event) => event.id)).toEqual(['c', 'a', 'z', 'b']);
+    expect(sortEventsDesc([unordered, makeEvent({ id: 'd', stage: 'in_transit', occurredAt: at })]).map((event) => event.id)).toEqual(['d', 'b']);
+  });
+
   it('latestEvent returns null for no events', () => {
     expect(latestEvent([])).toBeNull();
   });

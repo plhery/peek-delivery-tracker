@@ -68,6 +68,18 @@ it('uses delivery progress for timestamp ties and numeric time for timezone offs
   expect(compareNotificationEvents({ ...accepted, occurred_at: null }, { ...delivered, occurred_at: 'bad' })).toBeGreaterThan(0);
 });
 
+it("announces the newest of one instant and stage in its source's order, not by row id", () => {
+  const created = '2026-09-08T12:00:00Z';
+  const arrived = { stage: 'in_transit', occurred_at: created, event_created_at: created, event_id: 'z', tie_order: 0 };
+  const departed = { ...arrived, event_id: 'a', tie_order: 1 };
+  expect([arrived, departed].sort(compareNotificationEvents)[0]).toBe(departed);
+  expect([departed, arrived].sort(compareNotificationEvents)[0]).toBe(departed);
+  // Delivery progress still comes first, and a scan stored before the order loses to one with it.
+  expect([{ ...arrived, stage: 'customs' }, departed].sort(compareNotificationEvents)[0]).toMatchObject({ stage: 'customs' });
+  const stored = { ...departed, tie_order: 0 };
+  expect([{ ...arrived, tie_order: null }, stored].sort(compareNotificationEvents)[0]).toBe(stored);
+});
+
 it.each(['web', 'native'] as const)('records a backfilled older scan as handled without announcing it for %s', async (channel) => {
   const client = new SupabaseServiceClient('https://example.test', 'test');
   const base = { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_created_at: '2026-09-24T09:55:00Z' };

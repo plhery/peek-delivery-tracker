@@ -225,12 +225,15 @@ extension Parcel {
         }
     }
 
-    /// Newest first; scans of one instant by delivery progress, then by id.
+    /// Newest first; scans of one instant by delivery progress, then in the order their source
+    /// listed them (`tieOrder`, a scan without one after those with one), then by id.
     static func eventPrecedes(_ lhs: TrackingEvent, _ rhs: TrackingEvent) -> Bool {
         let left = DateParser.date(lhs.occurredAt)?.timeIntervalSince1970 ?? 0
         let right = DateParser.date(rhs.occurredAt)?.timeIntervalSince1970 ?? 0
         if left == right {
             if lhs.stage != rhs.stage { return lhs.stage.eventOrder > rhs.stage.eventOrder }
+            let (leftTie, rightTie) = (max(lhs.tieOrder ?? -1, -1), max(rhs.tieOrder ?? -1, -1))
+            if leftTie != rightTie { return leftTie > rightTie }
             return lhs.id.uuidString > rhs.id.uuidString
         }
         return left > right

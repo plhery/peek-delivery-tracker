@@ -105,6 +105,23 @@ describe('withEventPlaces', () => {
     expect('recipient_action' in served[2]!).toBe(false);
   });
 
+  it("serves a scan's place among those its source dated alike, and nothing else in its stead", () => {
+    const at = '2026-01-05T11:47:00+00:00';
+    const row = {
+      id: 'parcel',
+      carrier: 'ups',
+      tracking_events: [
+        { ...event('1', null, at), description: 'Arrived', tie_order: 0 },
+        { ...event('2', null, at), description: 'Departed', tie_order: 1 },
+        { ...event('3', null, '2026-01-06T09:00:00+00:00'), tie_order: null },
+        { ...event('4', null, '2026-01-07T09:00:00+00:00'), tie_order: 1.5 },
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map((scan) => [scan.id, scan.tie_order])).toEqual([['1', 0], ['2', 1], ['3', undefined], ['4', undefined]]);
+    expect(served.filter((scan) => 'tie_order' in scan)).toHaveLength(2);
+  });
+
   it('leaves packages without scans untouched', () => {
     const row = { id: 'parcel', carrier: 'swiss-post', tracking_events: [] };
     expect(withEventPlaces(row)).toBe(row);

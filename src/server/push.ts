@@ -1,5 +1,5 @@
 import { generatedScans } from '../lib/generatedTrack';
-import { EVENT_STAGE_ORDER } from '../lib/stages';
+import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import 'server-only';
 
 import { connect, constants as http2Constants } from 'node:http2';
@@ -423,7 +423,8 @@ function notificationBody(row: JsonObject, locale: Locale, now: number, lead = r
 }
 
 // Database insertion times are identical for events imported in one transaction.
-// Prefer carrier chronology; resolve coarse/missing timestamps by delivery progress.
+// Prefer carrier chronology; resolve coarse/missing timestamps by delivery progress,
+// then by the order the scans' source listed them in.
 
 
 export function compareNotificationEvents(left: JsonObject, right: JsonObject): number {
@@ -433,6 +434,7 @@ export function compareNotificationEvents(left: JsonObject, right: JsonObject): 
   };
   return timestamp(right, 'occurred_at') - timestamp(left, 'occurred_at')
     || EVENT_STAGE_ORDER.indexOf(stringField(right, 'stage')) - EVENT_STAGE_ORDER.indexOf(stringField(left, 'stage'))
+    || tieOrder(right.tie_order) - tieOrder(left.tie_order)
     || timestamp(right, 'event_created_at') - timestamp(left, 'event_created_at')
     || stringField(right, 'event_id').localeCompare(stringField(left, 'event_id'));
 }

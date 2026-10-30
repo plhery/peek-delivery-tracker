@@ -103,6 +103,8 @@ export interface TrackingEvent {
   relayOf?: string;
   /** What the carrier asks the recipient to do in this scan; the parcel needs action while it is the newest. */
   recipientAction?: RecipientAction;
+  /** The scan's place among those its source dated alike, from the oldest, in the order the source listed them. */
+  tieOrder?: number;
 }
 
 export interface ParcelWithEvents extends Parcel {

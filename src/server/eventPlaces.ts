@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { EVENT_STAGE_ORDER } from '../lib/stages';
+import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
@@ -31,6 +31,7 @@ function served(event: JsonObject, relayOf?: string): JsonObject {
   delete rest.provider_event_id;
   delete rest.universal_provider;
   delete rest.recipient_action;
+  if (tieOrder(rest.tie_order) < 0) delete rest.tie_order;
   return action ? { ...rest, recipient_action: action } : rest;
 }
 
@@ -224,7 +225,8 @@ export function withEventPlaces(row: JsonObject): JsonObject {
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   try {
     const ordered = [...events].sort((a, b) => String(a.occurred_at).localeCompare(String(b.occurred_at))
-      || EVENT_STAGE_ORDER.indexOf(String(a.stage)) - EVENT_STAGE_ORDER.indexOf(String(b.stage)));
+      || EVENT_STAGE_ORDER.indexOf(String(a.stage)) - EVENT_STAGE_ORDER.indexOf(String(b.stage))
+      || tieOrder(a.tie_order) - tieOrder(b.tie_order));
     const destination = typeof carrierData.destination_country === 'string' ? carrierData.destination_country : null;
     const carriers = [carrierData.active_tracking_carrier, row.carrier].filter((carrier): carrier is string => typeof carrier === 'string');
     const locate = (where: readonly JsonObject[]) => placesForEvents(where.map((event) => typeof event.location === 'string' ? event.location : null), {

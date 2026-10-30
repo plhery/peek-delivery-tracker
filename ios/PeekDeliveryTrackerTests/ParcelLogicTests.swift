@@ -848,6 +848,32 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(try parcel("2026-09-09T14:16:20Z").currentEvent?.id, scan)
     }
 
+    func testScansOfOneInstantAndStageReadInTheOrderTheirSourceListedThem() throws {
+        let packageID = UUID()
+        let arrived = UUID(uuidString: "FFFFFFFF-0000-4000-8000-000000000001")!
+        let departed = UUID(uuidString: "00000000-0000-4000-8000-000000000001")!
+        let unordered = UUID(uuidString: "FFFFFFFF-0000-4000-8000-000000000002")!
+        let event = { (id: UUID, tieOrder: Int?) in
+            """
+            {"id": "\(id.uuidString)", "package_id": "\(packageID.uuidString)", "stage": "in_transit",
+             "description": "Sorted", "location": null, "occurred_at": "2026-09-09T14:16:00Z"\(tieOrder.map { ", \"tie_order\": \($0)" } ?? "")}
+            """
+        }
+        let json = """
+        {"packages": [{
+          "id": "\(packageID.uuidString)", "tracking_number": "TIETEST0001", "label": "Tied", "carrier": "la-poste",
+          "created_at": "2026-09-01T10:00:00Z", "expected_delivery": null, "last_status_text": null, "last_synced_at": null,
+          "sync_status": "ok", "sync_error": null, "tracking_url": null, "dpd_postcode": null, "archived_at": null,
+          "notifications_muted": false,
+          "tracking_events": [\(event(unordered, nil)), \(event(arrived, 0)), \(event(departed, 1))]
+        }]}
+        """
+        let parcel = try XCTUnwrap(JSONDecoder.deliveryTracker.decode(PackageListResponse.self, from: Data(json.utf8)).packages.first)
+        // The ids would put the arrival first; a scan stored before the order goes after those with one.
+        XCTAssertEqual(parcel.sortedEvents.map(\.id), [departed, arrived, unordered])
+        XCTAssertEqual(parcel.currentEvent?.id, departed)
+    }
+
     func testGeneratedRequestModelsEncodeAPIFieldNamesAndEnumValues() throws {
         let packageRequest = CreatePackageRequest(
             trackingNumber: "99.34.123456.12345678",

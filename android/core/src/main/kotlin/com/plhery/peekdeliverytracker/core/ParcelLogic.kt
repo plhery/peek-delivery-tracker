@@ -271,12 +271,17 @@ fun Parcel.Companion.trackingChanged(from: List<Parcel>, to: List<Parcel>): Bool
     }
 }
 
-/** Newest first; scans of one instant by delivery progress, then by id. */
+/**
+ * Newest first; scans of one instant by delivery progress, then in the order their source listed
+ * them (`tieOrder`, a scan without one after those with one), then by id.
+ */
 fun Parcel.Companion.eventPrecedes(lhs: TrackingEvent, rhs: TrackingEvent): Boolean {
     val left = DateParser.date(lhs.occurredAt) ?: Instant.EPOCH
     val right = DateParser.date(rhs.occurredAt) ?: Instant.EPOCH
     if (left == right) {
         if (lhs.stage != rhs.stage) return lhs.stage.eventOrder > rhs.stage.eventOrder
+        val (leftTie, rightTie) = (lhs.tieOrder ?: -1).coerceAtLeast(-1) to (rhs.tieOrder ?: -1).coerceAtLeast(-1)
+        if (leftTie != rightTie) return leftTie > rightTie
         return lhs.id.uuidString > rhs.id.uuidString
     }
     return left > right

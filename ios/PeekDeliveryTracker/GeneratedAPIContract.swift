@@ -1975,6 +1975,7 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
     var place: EventPlace? = nil
     var relayOf: UUID? = nil
     var recipientAction: RecipientAction? = nil
+    var tieOrder: Int? = nil
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -1987,6 +1988,7 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
         case place
         case relayOf
         case recipientAction
+        case tieOrder
     }
 }
 

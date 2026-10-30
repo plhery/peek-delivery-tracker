@@ -5,7 +5,7 @@ export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } 
 import { AMAZON_ACCOUNT_MESSAGE, AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
 import { normalizeTrackingNumber } from '../lib/carriers';
 import { isLocale } from '../lib/locale';
-import { EVENT_STAGE_ORDER } from '../lib/stages';
+import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 
 import { createHash } from 'node:crypto';
 import { DateTime } from 'luxon';
@@ -1903,16 +1903,19 @@ export class TrackingSyncService {
         const normalizedEvents = buildEvents(parcel, result!, sourceCarrierId!, now);
         const normalizedReportedStage = resultStage(result!);
         // Scans of one instant read by delivery progress, then in the carrier's order.
+        const tie = (event: JsonObject) => tieOrder(isRecord(event.raw_data) ? event.raw_data.tie_order : undefined);
         const newestEvents = [...normalizedEvents].sort(
           (left, right) => String(right.occurred_at).localeCompare(String(left.occurred_at))
-            || EVENT_STAGE_ORDER.indexOf(String(right.stage)) - EVENT_STAGE_ORDER.indexOf(String(left.stage)),
+            || EVENT_STAGE_ORDER.indexOf(String(right.stage)) - EVENT_STAGE_ORDER.indexOf(String(left.stage))
+            || tie(right) - tie(left),
         );
         // A scan no rule reads yet is pending; it does not undo the progress
         // of the scans before it.
         const progressEvent = newestEvents.find((event) => event.stage !== 'pending');
         const latestEventStage = newestEvents[0] ? String(newestEvents[0].stage) : null;
         // A summary in the stage of one of the newest scans in a stage read that instant in the
-        // carrier's order, which no row keeps: the parcel reads it by delivery progress, as the apps do.
+        // carrier's order, which the apps follow only within a stage: the parcel reads it by delivery
+        // progress, as the apps do.
         const summaryOfTie = progressEvent !== undefined && newestEvents.some((event) => event.occurred_at === progressEvent.occurred_at
           && event.stage === normalizedReportedStage);
         // A provider's explicit non-pending summary can be newer than its last

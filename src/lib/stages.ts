@@ -61,15 +61,24 @@ export function stageMeta(stage: Stage): StageMeta {
 export const EVENT_STAGE_ORDER: readonly string[] = ['pending', 'registered', 'accepted', 'in_transit', 'customs',
   'exception', 'out_for_delivery', 'failed_attempt', 'ready_for_pickup', 'delivered', 'returned'];
 
-/** What ordering a scan needs: the server's rows and the apps' events both have it. */
-type OrderedScan = Pick<TrackingEvent, 'id' | 'stage' | 'occurredAt'>;
+/**
+ * A scan's place among those its source dated alike, from the oldest (`tie_order`), which orders
+ * scans of one instant in one stage; -1 for a scan without one, read as older than those with one.
+ */
+export function tieOrder(value: unknown): number {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 ? value : -1;
+}
 
-/** Newest first, then delivery progress, then stable event identity. */
+/** What ordering a scan needs: the server's rows and the apps' events both have it. */
+type OrderedScan = Pick<TrackingEvent, 'id' | 'stage' | 'occurredAt' | 'tieOrder'>;
+
+/** Newest first, then delivery progress, then the order the scans' source listed them in, then stable event identity. */
 export function sortEventsDesc<T extends OrderedScan>(events: readonly T[]): T[] {
   return [...events].sort((a, b) => {
     const timestamp = (value: string) => Date.parse(value) || 0;
     return timestamp(b.occurredAt) - timestamp(a.occurredAt)
       || EVENT_STAGE_ORDER.indexOf(b.stage) - EVENT_STAGE_ORDER.indexOf(a.stage)
+      || tieOrder(b.tieOrder) - tieOrder(a.tieOrder)
       || b.id.localeCompare(a.id);
   });
 }

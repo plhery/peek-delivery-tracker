@@ -357,9 +357,11 @@ and nothing typed is sent.
   the carrier dated by its day alone, or on a wall clock in no zone, is served with that
   `day`: the apps list it under that day without a time, and the delivery email names that day. `src/server/eventPlaces.ts` applies this to every parcel and link the API serves; the
   account export keeps every stored row. Scans of one instant read by delivery progress
-  (`EVENT_STAGE_ORDER` in `src/lib/stages.ts`), then by id, in the timeline, the map and
-  the stage a check picks, even where the carrier's summary names another of them: the
-  carrier's own order of a tie is not stored, so the apps could not follow it.
+  (`EVENT_STAGE_ORDER` in `src/lib/stages.ts`) in the timeline, the map, the stage a check
+  picks and the scan an alert announces, even where the carrier's summary names another of
+  them. In one stage they read in the order their source listed them, the scraper's
+  `tie_order` stored in the row's raw data and served as `tie_order`, then by id; a row
+  stored before the order goes after those with one until its next check rewrites it.
 - **A customs request**: a scan in which the carrier asks the recipient to give a tax number,
   pay import duties or taxes, or send documents is served with `recipient_action`, as the
   scraper flagged it when the scan was stored, or, for a row stored before the flag, as its

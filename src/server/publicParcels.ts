@@ -14,7 +14,7 @@ import type {
   ApiSyncStatus,
   ApiTrackingEventRow,
 } from '../generated/apiContract';
-import { EVENT_STAGE_ORDER } from '../lib/stages';
+import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { clientNetwork, clientSite } from './api';
 import { appleAppIds } from './appleAppLinks';
 import { appFollowsLinks } from './appStoreRelease';
@@ -330,6 +330,7 @@ export function giftEvents(
 ): ApiTrackingEventRow[] {
   const journey = [...events].sort((a, b) => eventTime(a) - eventTime(b)
     || EVENT_STAGE_ORDER.indexOf(a.stage) - EVENT_STAGE_ORDER.indexOf(b.stage)
+    || tieOrder(a.tie_order) - tieOrder(b.tie_order)
     || a.id.localeCompare(b.id));
   const origin = journey.find((event) => event.place)?.place?.country ?? null;
   const abroad = origin === null ? -1 : journey.findIndex((event) => event.place && event.place.country !== origin);
@@ -432,6 +433,7 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
     place: (isRecord(event.place) ? event.place : null) as ApiTrackingEventRow['place'],
     ...(typeof event.relay_of === 'string' ? { relay_of: event.relay_of } : {}),
     ...(typeof event.recipient_action === 'string' ? { recipient_action: event.recipient_action as ApiTrackingEventRow['recipient_action'] } : {}),
+    ...(tieOrder(event.tie_order) >= 0 ? { tie_order: tieOrder(event.tie_order) } : {}),
   }));
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   const destination = typeof carrierData.destination_country === 'string' && /^[A-Za-z]{2}$/.test(carrierData.destination_country)

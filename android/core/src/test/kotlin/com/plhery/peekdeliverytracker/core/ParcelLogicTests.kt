@@ -756,6 +756,19 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun scansOfOneInstantAndStageReadInTheOrderTheirSourceListedThem() {
+        val packageId = UUID.randomUUID()
+        val arrived = event(packageId, TrackingStage.InTransit, "2026-09-09T14:16:00Z")
+            .copy(id = UUID.fromString("ffffffff-0000-4000-8000-000000000001"), tieOrder = 0)
+        val departed = arrived.copy(id = UUID.fromString("00000000-0000-4000-8000-000000000001"), tieOrder = 1)
+        val unordered = arrived.copy(id = UUID.fromString("ffffffff-0000-4000-8000-000000000002"), tieOrder = null)
+        // The ids would put the arrival first; a scan stored before the order goes after those with one.
+        val parcel = makeParcel(id = packageId, events = listOf(unordered, arrived, departed))
+        assertEquals(listOf(departed.id, arrived.id, unordered.id), parcel.sortedEvents.map { it.id })
+        assertEquals(departed.id, parcel.currentEvent?.id)
+    }
+
+    @Test
     fun generatedRequestModelsEncodeApiFieldNamesAndEnumValues() {
         val packageRequest = CreatePackageRequest(
             trackingNumber = "99.34.123456.12345678",

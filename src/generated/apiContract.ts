@@ -37029,6 +37029,7 @@ export interface ApiTrackingEventRow {
   "place"?: ApiEventPlace | null;
   "relay_of"?: string;
   "recipient_action"?: ApiRecipientAction;
+  "tie_order"?: number;
 }
 
 export interface ApiPackageRow {

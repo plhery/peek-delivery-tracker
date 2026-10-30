@@ -1990,6 +1990,7 @@ data class TrackingEvent(
     val place: EventPlace? = null,
     @SerialName("relay_of") val relayOf: UUID? = null,
     @SerialName("recipient_action") val recipientAction: RecipientAction? = null,
+    @SerialName("tie_order") val tieOrder: Int? = null,
 )
 
 @Serializable

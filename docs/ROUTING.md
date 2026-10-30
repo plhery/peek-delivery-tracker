@@ -763,7 +763,10 @@ nor counts as a misdated one. A provider's scan dated more than 5 minutes past t
 that first returned it counts at no instant: only a misread zone dates a scan in the future. A
 provider that misread the zone therefore cannot set the watermark hours ahead and make the
 carrier's own reply look older, and the watermark comes back once the provider's corrected
-answer moves its rows. A watermark a provider's summary set is that provider's newest scan,
+answer moves its rows. Nor does a scan dated over an hour after its check set the parcel's
+status line or stage: the sync stores and flags it (`future_event_timestamp`) and takes both
+from the answer's newest scan before the check ([futureScans.ts](../src/server/futureScans.ts)).
+A watermark a provider's summary set is that provider's newest scan,
 which the sync stored, so one past every stored scan comes back to the newest, its copies
 having moved since. The router holds a carrier
 detection or a provider names to the same rule before taking it: its newest scan counts

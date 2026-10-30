@@ -56,6 +56,7 @@ import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
 import { collectedPickupPoint } from './collectedPickupPoint';
+import { datedAfterCheck, withoutFutureSummary } from './futureScans';
 import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, hasUnresolvedDirectCurrent, localClockCarrier } from './directLocalHistory';
 import { carrierMovedAt, eventStage, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
 import { DIRECT_HISTORY, directHistory } from './providerCopies';
@@ -1119,11 +1120,7 @@ export function detectSyncAnomalies(
   }
   // A scan dated more than an hour after the check has a clock read in the wrong
   // zone or labelled with the wrong offset. A lead under an hour does not alert.
-  const futureBoundary = now.getTime() + 60 * 60 * 1_000;
-  if (events.some((event) => {
-    const occurredAt = Date.parse(String(event.occurred_at ?? ''));
-    return Number.isFinite(occurredAt) && occurredAt > futureBoundary;
-  })) {
+  if (events.some((event) => datedAfterCheck(event.occurred_at, 'UTC', now))) {
     anomalies.add('future_event_timestamp');
   }
   if (events.some((event) => (
@@ -1886,6 +1883,8 @@ export class TrackingSyncService {
       }
 
       ({ result, sourceCarrierId } = fetched);
+      // A scan dated hours after the check is stored and flagged, but sets neither status line nor stage.
+      result = withoutFutureSummary(result!, sourceCarrierId!, now);
       const { swissPostReady, handoffFallbackErrorType } = fetched;
       audit.record('fetch', 'succeeded', performance.now() - fetchStartedAt, {
         source_carrier: sourceCarrierId,
@@ -1904,7 +1903,7 @@ export class TrackingSyncService {
         const normalizedReportedStage = resultStage(result!);
         // Scans of one instant read by delivery progress, then in the carrier's order.
         const tie = (event: JsonObject) => tieOrder(isRecord(event.raw_data) ? event.raw_data.tie_order : undefined);
-        const newestEvents = [...normalizedEvents].sort(
+        const newestEvents = normalizedEvents.filter((event) => !datedAfterCheck(event.occurred_at, 'UTC', now)).sort(
           (left, right) => String(right.occurred_at).localeCompare(String(left.occurred_at))
             || EVENT_STAGE_ORDER.indexOf(String(right.stage)) - EVENT_STAGE_ORDER.indexOf(String(left.stage))
             || tie(right) - tie(left),

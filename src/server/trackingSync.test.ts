@@ -903,6 +903,25 @@ describe('status observation collection', () => {
     expect(client.closeTrackingStatusObservations).not.toHaveBeenCalled();
   });
 
+  it("stores a scan dated hours after the check but takes the parcel's status from the newest scan before it", async () => {
+    const client = fakeClient();
+    const at = (hours: number) => new Date(Date.now() + hours * 3_600_000).toISOString();
+    // A sender's notice on its own clock under the carrier's offset, five hours ahead of the check.
+    const notice = { time: at(5), description: 'Synthetic notice of a handover', stage: 'accepted', provider_code: 'N' };
+    const adapter = { fetch: vi.fn().mockResolvedValue({
+      status: 'in_transit', current_stage: 'accepted', current_stage_source: 'carrier_map',
+      last_status_text: notice.description, last_update: notice.time,
+      events: [notice, { time: at(-2), description: 'Synthetic departure', stage: 'in_transit', provider_code: 'D' }],
+    }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null);
+    await service.syncPackage({ id: 'ahead', carrier: 'ctt', tracking_number: 'TEST1234', current_stage: 'pending' });
+    expect(client.insertEvents.mock.calls.flat(2).map((row: JsonObject) => row.description))
+      .toEqual(expect.arrayContaining([notice.description, 'Synthetic departure']));
+    expect(client.updatePackage).toHaveBeenLastCalledWith('ahead', expect.objectContaining({
+      current_stage: 'in_transit', last_status_text: 'Synthetic departure',
+    }));
+  });
+
   it('closes the wording a carrier map leaves unmapped on purpose once it is recorded', async () => {
     const client = fakeClient();
     const adapter = { fetch: vi.fn().mockResolvedValue({
@@ -7718,7 +7737,7 @@ describe('the pickup point a parcel was collected from', () => {
 
     const back = await follow({ id: 'returned', carrier: 'la-poste' },
       answer('ready_for_pickup', [arrived, waiting], { pickup_point: POINT }),
-      answer('returned', [arrived, waiting, scan('2026-10-12T09:00:00Z', 'returned', 'Returned to the sender')]));
+      answer('returned', [arrived, waiting, scan('2026-10-05T09:00:00Z', 'returned', 'Returned to the sender')]));
     expect(back.checks.at(-1)!.current_stage).toBe('returned');
     expect(back.point(-1)).toBeUndefined();
   });

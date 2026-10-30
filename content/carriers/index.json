@@ -167,7 +167,7 @@
   { "id": "zto-international", "catalog": "zto-international", "name": "ZTO International", "languages": ["en"] },
   { "id": "mayiyinfu", "catalog": "mayiyinfu", "name": "Mayi Yinfu", "languages": ["en"] },
   { "id": "jrt", "catalog": "jrt", "name": "JRT", "languages": ["en"] },
-  { "id": "thhy", "catalog": "thhy", "name": "Tianhui Hengyuan", "languages": ["en"] },
+  { "id": "thhy", "catalog": "thhy", "name": "Tianhui Hengyuan", "languages": ["en", "de"] },
   { "id": "js-express", "catalog": "js-express", "name": "JS Express", "languages": ["en"] },
   { "id": "wanbexpress", "catalog": "wanbexpress", "name": "WanbExpress", "languages": ["en"] },
   { "id": "gzyl", "catalog": "gzyl", "name": "GZYL", "languages": ["en"] },
@@ -176,5 +176,6 @@
   { "id": "sending", "catalog": "sending", "name": "Sending", "languages": ["en", "es"] },
   { "id": "hywl", "catalog": "hywl", "name": "Huiyi Logistics", "languages": ["en"] },
   { "id": "ywe", "catalog": "ywe", "name": "YWE", "languages": ["en"] },
-  { "id": "roadie", "catalog": "roadie", "name": "Roadie", "languages": ["en"] }
+  { "id": "roadie", "catalog": "roadie", "name": "Roadie", "languages": ["en"] },
+  { "id": "ecms-express", "catalog": "ecms-express", "name": "ECMS Express", "languages": ["en"] }
 ]

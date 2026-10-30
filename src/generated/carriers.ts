@@ -1432,6 +1432,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Roadie tracking: 1R numbers, statuses and delivery photos",
       "name": "Roadie",
       "color": "#76cccd"
+    },
+    {
+      "id": "ecms-express",
+      "catalog": "ecms-express",
+      "slug": "ecms-express-tracking",
+      "title": "ECMS Express tracking: numbers, scans and who delivers",
+      "name": "ECMS Express",
+      "color": "#12823d"
     }
   ],
   "de": [
@@ -1714,6 +1722,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TopYou Sendungsverfolgung: TYZR-Nummer, Status, Zustellung",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "thhy",
+      "catalog": "thhy",
+      "slug": "tianhui-hengyuan-sendungsverfolgung",
+      "title": "Tianhui Hengyuan (THHY) Sendungsverfolgung: AT…TH-Nummer",
+      "name": "Tianhui Hengyuan",
+      "color": "#00a2e9"
     }
   ],
   "fr": [

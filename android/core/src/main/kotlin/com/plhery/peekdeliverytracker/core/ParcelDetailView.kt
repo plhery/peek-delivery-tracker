@@ -4,6 +4,8 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.Instant
+import java.time.ZoneId
 
 // From ParcelDetailView.swift, what isn't the view. Copying to the clipboard is the app's.
 
@@ -50,3 +52,80 @@ fun Localizer.shipmentFacts(parcel: Parcel): List<ShipmentFact>? {
     trimmed(details.dimensionsText)?.let { facts += ShipmentFact("detail.dimensions", it) }
     return facts
 }
+
+/** A day of the parcel's journal (`JournalDay`): what heads it, when it starts, and its rows. */
+data class JournalDay(
+    val id: String,
+    val label: String,
+    /** The start of the day; null for scans without a readable date, which stay last. */
+    val start: Instant?,
+    val entries: List<JournalEntry>,
+)
+
+/**
+ * The journal's rows by day (`journalDays`), in the phone's zone: each day headed "today", "yesterday" or its short
+ * date, with its year when that isn't `now`'s. A scan dated by its day alone sits under that day, wherever the reader
+ * is; scans without a readable date group under their raw `occurredAt` and stay last. Days newest first, and days that
+ * start together in the rows' order: a scan dated by its day alone can sort among the day before's scans, west of the
+ * carrier's zone.
+ */
+fun Localizer.journalDays(entries: List<JournalEntry>, now: Instant = Instant.now()): List<JournalDay> {
+    val zone = ZoneId.systemDefault()
+    val today = now.atZone(zone).toLocalDate()
+    val year = FoundationDates.dateFields(now, zone).yearOfEra
+    val days = mutableListOf<JournalDay>()
+    for (entry in entries) {
+        val event = entry.event
+        val date = event.displayDate
+        val start = date?.atZone(zone)?.toLocalDate()?.atStartOfDay(zone)?.toInstant()
+        val key = start?.let { it.epochSecond.toDouble().swiftDescription() } ?: event.occurredAt
+        val index = days.indexOfFirst { it.id.equalsCanonically(key) }
+        if (index >= 0) {
+            days[index] = days[index].copy(entries = days[index].entries + entry)
+            continue
+        }
+        val label = if (date == null) {
+            event.occurredAt
+        } else {
+            when (date.atZone(zone).toLocalDate()) {
+                today -> text("time.today")
+                today.minusDays(1) -> text("time.yesterday")
+                else -> {
+                    val dayYear = FoundationDates.dateFields(date, zone).yearOfEra
+                    shortDate(date) + if (dayYear == year) "" else " $dayYear"
+                }
+            }
+        }
+        days += JournalDay(key, label, start, listOf(entry))
+    }
+    // A stable sort: days that start together keep the rows' order.
+    return days.sortedByDescending { it.start ?: distantPast }
+}
+
+/** Foundation's `Date.distantPast`, where the journal's days without a date sort: the first day of year 1. */
+private val distantPast: Instant = Instant.parse("0001-01-01T00:00:00Z")
+
+/**
+ * The clock time of a journal row (`JournalEventRow.time`): none for a scan the carrier dated by its day alone, whose
+ * day heads the group, and "—" for a date that doesn't read.
+ */
+fun Localizer.journalTime(event: TrackingEvent): String {
+    if (event.calendarDay != null) return ""
+    val date = DateParser.date(event.occurredAt) ?: return "—"
+    return clockTime(date)
+}
+
+/** A scan's words in the journal (`wording`): the carrier's, else its stage's, in the app language. */
+fun Localizer.journalWording(event: TrackingEvent): String =
+    eventDescription(event.description.nonEmpty ?: text(event.stage.localizationKey))
+
+/** The words of a row's copies (`relayed`), once each, and only those that differ from the scan's. */
+fun Localizer.relayedWordings(entry: JournalEntry): List<String> {
+    // A Swift Set of strings: canonically equivalent words are the same words.
+    val seen = hashSetOf(journalWording(entry.event).nfc())
+    return entry.relays.map { journalWording(it) }.filter { seen.add(it.nfc()) }
+}
+
+/** Where the journal says a scan was: its location trimmed, and none when nothing is left. */
+val TrackingEvent.journalLocation: String?
+    get() = location?.trimmingWhitespacesAndNewlines()?.nonEmpty

@@ -5,13 +5,19 @@ import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.makeParcel
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 
-/** What the parcel's page reads of a parcel (ParcelDetailView.swift): its pickup card, the carrier's words and the shipment's facts. */
+/**
+ * What the parcel's page reads of a parcel (ParcelDetailView.swift): its pickup card, the carrier's words, the
+ * shipment's facts and its journal's days and rows.
+ */
 class ParcelDetailViewTests {
     private val id = UUID.randomUUID()
 
@@ -89,5 +95,82 @@ class ParcelDetailViewTests {
         )
         assertEquals(emptyList<ShipmentFact>(), localizer.shipmentFacts(parcel(TrackingStage.InTransit, CarrierData())))
         assertNull(localizer.shipmentFacts(parcel(TrackingStage.InTransit, null)))
+    }
+
+    // The journal, in whatever zone the tests run in.
+
+    private val zone: ZoneId get() = ZoneId.systemDefault()
+
+    /** Thursday 29 October 2026 at noon in the phone's zone. */
+    private val now = LocalDate.of(2026, 10, 29).atTime(12, 0).atZone(ZoneId.systemDefault()).toInstant()
+
+    /** `day` at `hour`:`minute` in the phone's zone, as the API writes it. */
+    private fun at(day: LocalDate, hour: Int, minute: Int = 0): String = DateParser.isoString(day.atTime(hour, minute).atZone(zone).toInstant())
+
+    private fun scan(occurredAt: String, description: String = "Update", day: String? = null, tieOrder: Int? = null): TrackingEvent =
+        event(id, TrackingStage.InTransit, occurredAt).copy(description = description, day = day, tieOrder = tieOrder)
+
+    private fun days(vararg events: TrackingEvent): List<JournalDay> =
+        Localizer(AppLanguage.En).journalDays(makeParcel(id, events = events.toList()).journalEntries, now)
+
+    @Test
+    fun theJournalsDaysAreTodayYesterdayOrTheirShortDateWithTheYearWhenItIsNotThisOne() {
+        val today = LocalDate.of(2026, 10, 29)
+        val days = days(
+            scan(at(today, 9)), scan(at(today, 0, 5)), scan(at(today.minusDays(1), 23, 55)),
+            scan(at(LocalDate.of(2026, 10, 20), 10)), scan(at(LocalDate.of(2025, 12, 31), 23, 30)),
+        )
+        assertEquals(listOf("today", "yesterday", "Tue 20 Oct", "Wed 31 Dec 2025"), days.map { it.label })
+        assertEquals(listOf(2, 1, 1, 1), days.map { it.entries.size })
+        assertEquals(today.atStartOfDay(zone).toInstant(), days[0].start)
+        assertEquals("Mi 31. Dez 2025", Localizer(AppLanguage.De).journalDays(days[3].entries, now).single().label)
+    }
+
+    @Test
+    fun aScanDatedByItsDayAloneSitsUnderThatDayEvenWhenItSortsAmongTheDayBefores() {
+        val evening = scan(at(LocalDate.of(2026, 10, 26), 20))
+        // West of the carrier's zone, the start of its day there is the evening before here.
+        val dayOnly = scan(at(LocalDate.of(2026, 10, 26), 18), day = "2026-10-27")
+        val days = days(evening, dayOnly)
+        assertEquals(listOf("Tue 27 Oct", "Mon 26 Oct"), days.map { it.label })
+        assertEquals(listOf(listOf(dayOnly.id), listOf(evening.id)), days.map { day -> day.entries.map { it.id } })
+    }
+
+    @Test
+    fun scansWithoutAReadableDateGroupUnderWhatTheCarrierWroteAndStayLastInTheRowsOrder() {
+        val first = scan("soon", tieOrder = 2)
+        val second = scan("not yet", tieOrder = 1)
+        val again = scan("soon", tieOrder = 0)
+        val dated = scan(at(LocalDate.of(2026, 10, 20), 10))
+        val days = days(first, second, again, dated)
+        assertEquals(listOf("Tue 20 Oct", "soon", "not yet"), days.map { it.label })
+        assertEquals(listOf(first.id, again.id), days[1].entries.map { it.id })
+        assertNull(days[1].start)
+    }
+
+    @Test
+    fun aRowsTimeIsTheClockTimeNoneForADayAloneAndADashForADateThatDoesNotRead() {
+        val localizer = Localizer(AppLanguage.En)
+        assertEquals("09:05", localizer.journalTime(scan(at(LocalDate.of(2026, 10, 20), 9, 5))))
+        assertEquals("", localizer.journalTime(scan(at(LocalDate.of(2026, 10, 20), 0), day = "2026-10-20")))
+        assertEquals("—", localizer.journalTime(scan("soon")))
+    }
+
+    @Test
+    fun aRowSaysTheCarriersWordsElseItsStagesAndItsCopiesWordsOnceEachWhenTheyDiffer() {
+        val localizer = Localizer(AppLanguage.En)
+        val scan = scan(at(LocalDate.of(2026, 10, 20), 9), description = "Sorted at Zu\u0308rich")
+        assertEquals(localizer.text("stage.in_transit"), localizer.journalWording(scan.copy(description = "")))
+        val copies = listOf("Sorted at Z\u00fcrich", "Left the hub", "", "Left the hub", "Sorted at Zu\u0308rich").map { scan.copy(id = UUID.randomUUID(), description = it) }
+        assertEquals(listOf("Left the hub", localizer.text("stage.in_transit")), localizer.relayedWordings(JournalEntry(scan, copies)))
+        assertEquals(emptyList<String>(), localizer.relayedWordings(JournalEntry(scan, emptyList())))
+    }
+
+    @Test
+    fun aScansLocationIsTrimmedAndNoneWhenBlank() {
+        val scan = scan(at(LocalDate.of(2026, 10, 20), 9))
+        assertEquals("Härkingen", scan.copy(location = " Härkingen\n").journalLocation)
+        assertNull(scan.copy(location = " \n ").journalLocation)
+        assertNull(scan.copy(location = null).journalLocation)
     }
 }

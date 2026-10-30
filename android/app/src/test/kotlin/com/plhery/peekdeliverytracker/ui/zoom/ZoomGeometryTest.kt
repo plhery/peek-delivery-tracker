@@ -60,6 +60,22 @@ class ZoomGeometryTest {
     }
 
     @Test
+    fun thePagesBarComesInOverTheLast40PercentOfAnOpeningAndGoesOverTheLastQuarterOfAClosing() {
+        assertEquals(0f, ZoomGeometry.pageBarOpacity(0f, closing = false), 0f)
+        assertEquals(0f, ZoomGeometry.pageBarOpacity(0.6f, closing = false), 0f)
+        assertEquals(0.5f, ZoomGeometry.pageBarOpacity(0.8f, closing = false), 0.0001f)
+        assertEquals(1f, ZoomGeometry.pageBarOpacity(1f, closing = false), 0f)
+        // A spring past the window keeps it whole.
+        assertEquals(1f, ZoomGeometry.pageBarOpacity(1.02f, closing = false), 0f)
+
+        assertEquals(1f, ZoomGeometry.pageBarOpacity(1f, closing = true), 0f)
+        assertEquals(1f, ZoomGeometry.pageBarOpacity(0.25f, closing = true), 0f)
+        assertEquals(0.4f, ZoomGeometry.pageBarOpacity(0.1f, closing = true), 0.0001f)
+        assertEquals(0f, ZoomGeometry.pageBarOpacity(0f, closing = true), 0f)
+        assertEquals(0f, ZoomGeometry.pageBarOpacity(-0.01f, closing = true), 0f)
+    }
+
+    @Test
     fun aPageDraggedDownShrinksAboutTheFinger() {
         // The captures: 100 points down, 1 - 100 / (1.55 × 956) of its size.
         val finger = Offset(220f, 500f)

@@ -176,18 +176,20 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, margins: PageMarg
             verticalArrangement = Arrangement.spacedBy(PAGE_SPACING),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            val paper = Modifier
+            val ground = PeekTheme.colors.paper
+            fun paper(tag: String) = Modifier
+                .testTag(tag)
                 .fillMaxWidth()
-                .background(PeekTheme.colors.paper, ContinuousRoundedShape(PAPER_RADIUS))
+                .background(ground, ContinuousRoundedShape(PAPER_RADIUS))
                 .padding(PAPER_PADDING)
             if (columns) {
                 // Given the room, the history stands beside the pass rather than under it.
-                Row(paper.testTag(PAGE_COLUMNS), horizontalArrangement = Arrangement.spacedBy(ParcelPageColumns.gap.dp)) {
+                Row(paper(PAGE_COLUMNS), horizontalArrangement = Arrangement.spacedBy(ParcelPageColumns.gap.dp)) {
                     LiveParcelPass(parcel, divided = false, Modifier.weight(1f))
                     PageHistory(parcel, history, Modifier.weight(1f))
                 }
             } else {
-                Column(paper.testTag(PAGE_SINGLE_COLUMN), verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) {
+                Column(paper(PAGE_SINGLE_COLUMN), verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) {
                     LiveParcelPass(parcel, divided = true, Modifier.fillMaxWidth())
                     PageHistory(parcel, history, Modifier.fillMaxWidth())
                 }

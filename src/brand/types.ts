@@ -281,7 +281,27 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'gibraltar-post'
   | 'samoa-post'
   | 'burundi-post'
-  | 'correo-paraguayo';
+  | 'correo-paraguayo'
+  | 'tcc-co'
+  | 'fm-transportes'
+  | 'xcargo'
+  | 'paket-cl'
+  | 'fez-delivery'
+  | 'famiport'
+  | 'ctc-express'
+  | 'maple-logistics'
+  | 'seino-super-express'
+  | 'taqbin-hk'
+  | 'safexpress'
+  | 'movin'
+  | 'lex-vn'
+  | 'best-express-th'
+  | 'airspeed'
+  | 'j-and-t-eg'
+  | 'egxpress'
+  | 'tawssil'
+  | 'ase-express'
+  | 'zimpost';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

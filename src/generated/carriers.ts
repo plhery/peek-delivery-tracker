@@ -2634,6 +2634,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0032a0"
     },
     {
+      "id": "postnl",
+      "catalog": "spring-gds",
+      "slug": "postnl-seguimiento",
+      "title": "PostNL seguimiento: números, estados y entrega en España",
+      "name": "PostNL",
+      "color": "#ef7d00"
+    },
+    {
       "id": "tnt",
       "catalog": "tnt",
       "slug": "tnt-seguimiento",
@@ -2656,6 +2664,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Meiteshun seguimiento: número AMTS, estados y a quién acudir",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "quick-rabbit",
+      "catalog": "quick-rabbit",
+      "slug": "quick-rabbit-seguimiento",
+      "title": "Quick Rabbit seguimiento: código PKG, estados y Citibox",
+      "name": "Quick Rabbit",
+      "color": "#f6851f"
     },
     {
       "id": "sending",

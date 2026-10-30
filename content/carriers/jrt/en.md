@@ -74,7 +74,7 @@ Every time on JRT's tracker is Beijing time, DHL's copied scans included: 17:00 
 
 **Nothing after `已交服务商`.** JRT's part is done. Unless its tracker copies DHL's scans, the next steps are in the delivering company's tracking: ask the seller for that number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
-**Nothing found.** For a number it doesn't know, JRT's tracker shows one result with the number as the reference and every other column empty. Peek shows "Waiting for the carrier" and keeps checking. Compare the number with the seller's message, character by character.
+**Nothing found.** For a number it doesn't know, JRT's tracker shows one result with the number as the reference and every other column empty. Peek shows "Waiting for the carrier" and keeps checking (for a UP reference you left Peek to match to a carrier, "Waiting for JRT’s first scan"). Compare the number with the seller's message, character by character.
 
 **Delivered, but nothing came.** The delivery scan is the delivering company's, not JRT's: ask that company, then tell the seller. More in [delivered but not received](guide:delivered-not-received).
 

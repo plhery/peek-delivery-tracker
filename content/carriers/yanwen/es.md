@@ -16,7 +16,7 @@ Yanwen no publica ningún número de ejemplo ni páginas de ayuda para destinata
 | --- | --- |
 | `BYS123456789` | BYS y 9 cifras: Yanwen. |
 | `UL000000005YP` | Dos letras, 9 cifras y YP al final: Yanwen. Suele empezar por UL o UK. |
-| `YWABC123456789012` | YW, tres letras y 12 cifras: el servicio de reparto propio de Yanwen en Estados Unidos. |
+| `YWABC123456789012` | YW, tres letras y 12 cifras: el número de última milla de un paquete que se entrega en Estados Unidos. |
 | `RR000000005CN` | La misma forma postal, pero acabada en CN: es de [China Post](carrier:china-post), no de Yanwen. |
 | `YT1234567890123456` | No es Yanwen, sino [YunExpress](carrier:yunexpress). |
 | `LP12345678901234` | No es Yanwen, sino la referencia logística de AliExpress: mira [Cainiao](carrier:cainiao). |
@@ -110,6 +110,6 @@ Yanwen no publica horarios de reparto, porque en España no reparte ella: lo hac
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – teléfono, correo
 - [Yanwen: 联系我们 (contacto)](https://www.yw56.com.cn/webfile/联系我们/) – horario del teléfono, línea a las islas de España y Portugal
 - [Yanwen: 关于官方快件查询入口及服务的通告 (canales oficiales de seguimiento)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 números, límite de un año, búsqueda por teléfono, chat, portal, WeChat
-- [YanwenExpress: página principal](https://www.yanwenexpress.com/) – reparto propio de Yanwen en Estados Unidos
+- [YanwenExpress: página principal](https://www.yanwenexpress.com/) – reparto de última milla en Estados Unidos
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek
 :::

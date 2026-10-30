@@ -16,7 +16,7 @@ Yanwen publishes no example number and no help page for recipients. The shapes Y
 | --- | --- |
 | `BYS123456789` | BYS and 9 digits: Yanwen. |
 | `UL000000005YP` | Two letters, 9 digits, then YP: Yanwen. UL and UK are common starts. |
-| `YWABC123456789012` | YW, three letters and 12 digits: Yanwen's own delivery service in the US. |
+| `YWABC123456789012` | YW, three letters and 12 digits: the last-mile number of a parcel delivered in the US. |
 | `RR000000005CN` | The same postal shape ending in CN: [China Post](carrier:china-post), not Yanwen. |
 | `YT1234567890123456` | Not Yanwen but [YunExpress](carrier:yunexpress). |
 | `LP12345678901234` | Not Yanwen but [Cainiao](carrier:cainiao), AliExpress's logistics reference. |
@@ -51,7 +51,7 @@ Above the scans, Yanwen files each parcel under a category. `Info_Received` is t
 
 Yanwen doesn't deliver in Europe itself: it says it works "with local carriers to fulfill the last mile package delivery". When it names that carrier, the result page shows a notes box with "Distributor", "Distributor Website" and "Contact Number". For some parcels the box is empty.
 
-Who delivers depends on the country and the shop's choice of service. Yanwen's product list names UK lines via [Royal Mail](carrier:royal-mail), Yodel, Hermes and [Evri](carrier:evri), for example. In the US, parcels tracked on Yanwen's site have been delivered by [USPS](carrier:usps), [UniUni](carrier:uniuni) or YanwenExpress, Yanwen's own US last-mile arm, and in Canada by Emile or UniUni.
+Who delivers depends on the country and the shop's choice of service. Yanwen's product list names UK lines via [Royal Mail](carrier:royal-mail), Yodel, Hermes and [Evri](carrier:evri), for example. In the US, parcels tracked on Yanwen's site have been delivered by [USPS](carrier:usps), [UniUni](carrier:uniuni) or YanwenExpress, a US last-mile company whose site doesn't say whether it is linked to Yanwen (see [YWE](carrier:ywe)), and in Canada by Emile or UniUni.
 
 Attempts, notice cards, rescheduling and how long a parcel waits are the local carrier's rules: Yanwen publishes none. `Available_For_Pick_Up` means the parcel is waiting at a pickup point; `Undelivered` means delivery failed. Use the "Last Mile Tracking" number and the contact in the notes box to ask that carrier about a new delivery.
 
@@ -76,7 +76,7 @@ As read on 11 October 2026, Yanwen lists these channels:
 - **Hotline**: 400-108-5656, Monday to Saturday, 9:00 to 18:00, according to its Chinese contact page. A 400 number is a Chinese service number; Yanwen doesn't say whether it works from abroad or which languages are spoken.
 - **Email**: marketing@yw56.com.cn, the only address on its English site. Yanwen doesn't call it a support address.
 - **Other channels**: an online chat at the bottom right of yw56.com.cn, a customer portal and a WeChat account, all in Chinese and aimed at sellers.
-- **US last mile (YW numbers)**: YanwenExpress lists service@yanwenexpress.com and +1 (312) 478-0564 on its customer support page.
+- **US last mile**: YanwenExpress gives service@yanwenexpress.com on its site; its customer support page shows no phone number.
 
 Yanwen publishes no contact for any European country. For the order, the shop or marketplace is quicker; for the delivery itself, use the carrier and number in the notes box.
 
@@ -114,7 +114,7 @@ Yanwen publishes no delivery times for recipients, so go by the estimate the sho
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – hotline, email
 - [Yanwen: 联系我们 (contact us)](https://www.yw56.com.cn/webfile/联系我们/) – hotline hours, product lines via Royal Mail, Yodel, Hermes, Evri
 - [Yanwen: 关于官方快件查询入口及服务的通告 (official tracking channels)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numbers, one-year limit, phone lookup, chat, portal, WeChat
-- [YanwenExpress: home page](https://www.yanwenexpress.com/) – Yanwen's US last mile
-- [YanwenExpress: Customer support](https://www.yanwenexpress.com/contactus.html) – US email and phone
+- [YanwenExpress: home page](https://www.yanwenexpress.com/) – last-mile delivery in the US
+- [YanwenExpress: Customer support](https://www.yanwenexpress.com/contactus.html) – email, no phone
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows
 :::

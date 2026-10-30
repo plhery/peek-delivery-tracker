@@ -16,7 +16,7 @@ A Yanwen não publica nenhum número de exemplo nem páginas de ajuda para quem 
 | --- | --- |
 | `BYS123456789` | BYS e 9 algarismos: Yanwen. |
 | `UL000000005YP` | Duas letras, 9 algarismos e YP no fim: Yanwen. Nas encomendas lidas, UL e UK são os inícios mais comuns. |
-| `YWABC123456789012` | YW, três letras e 12 algarismos: o serviço de entrega da própria Yanwen nos Estados Unidos. |
+| `YWABC123456789012` | YW, três letras e 12 algarismos: o número de última milha de uma encomenda entregue nos Estados Unidos. |
 | `RR000000005CN` | A mesma forma postal, mas a acabar em CN: [Correios da China](carrier:china-post), não a Yanwen. |
 | `RR000000005PT` | A acabar em PT: um número dos [CTT](carrier:ctt), não da Yanwen. |
 | `YT1234567890123456` | Não é Yanwen: é da [YunExpress](carrier:yunexpress). |

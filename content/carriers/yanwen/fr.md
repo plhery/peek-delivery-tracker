@@ -16,7 +16,7 @@ Yanwen ne publie aucun exemple de numéro et aucune page d'aide pour les destina
 | --- | --- |
 | `BYS123456789` | BYS et 9 chiffres : Yanwen. |
 | `UL000000005YP` | Deux lettres, 9 chiffres, puis YP : Yanwen. UL et UK sont des débuts fréquents. |
-| `YWABC123456789012` | YW, trois lettres et 12 chiffres : le service de livraison de Yanwen aux États-Unis. |
+| `YWABC123456789012` | YW, trois lettres et 12 chiffres : le numéro du dernier kilomètre d'un colis livré aux États-Unis. |
 | `RR000000005CN` | La même forme postale terminée par CN : [China Post](carrier:china-post), pas Yanwen. |
 | `YT1234567890123456` | Pas Yanwen, mais [YunExpress](carrier:yunexpress). |
 | `LP12345678901234` | Pas Yanwen, mais [Cainiao](carrier:cainiao), la référence logistique d'AliExpress. |

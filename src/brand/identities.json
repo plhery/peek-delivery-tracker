@@ -678,6 +678,9 @@
   "designer-transport": {
     "decal": "designer-transport"
   },
+  "dex-pk": {
+    "decal": "dex-pk"
+  },
   "dhl": {
     "palette": {
       "surface-light": "#f7e8aa",
@@ -836,6 +839,9 @@
   "ecourier": {
     "decal": "ecourier"
   },
+  "efs-asia": {
+    "decal": "efs-asia"
+  },
   "egypt-post": {
     "decal": "egypt-post"
   },
@@ -975,6 +981,9 @@
   },
   "fastdrop": {
     "decal": "fastdrop"
+  },
+  "faster-ae": {
+    "decal": "faster-ae"
   },
   "fastfrate": {
     "decal": "fastfrate"
@@ -1216,6 +1225,9 @@
   },
   "happy-post": {
     "decal": "happy-post"
+  },
+  "hart2hart-express": {
+    "decal": "hart2hart-express"
   },
   "haypost": {
     "decal": "haypost"
@@ -1498,6 +1510,9 @@
   "kargoist": {
     "decal": "kargoist"
   },
+  "kart2door": {
+    "decal": "kart2door"
+  },
   "kazpost": {
     "decal": "kazpost"
   },
@@ -1597,6 +1612,9 @@
   },
   "leopards-courier": {
     "decal": "leopards-courier"
+  },
+  "lex-my": {
+    "decal": "lex-my"
   },
   "libanpost": {
     "decal": "libanpost"
@@ -1950,6 +1968,9 @@
   },
   "pargo": {
     "decal": "pargo"
+  },
+  "parxl": {
+    "decal": "parxl"
   },
   "passport": {
     "decal": "passport",
@@ -2370,6 +2391,9 @@
   "shipentegra": {
     "decal": "shipentegra"
   },
+  "shipglobal-in": {
+    "decal": "shipglobal-in"
+  },
   "shiprocket": {
     "decal": "shiprocket"
   },
@@ -2656,6 +2680,9 @@
   },
   "tonami": {
     "decal": "tonami"
+  },
+  "top-logistics-au": {
+    "decal": "top-logistics-au"
   },
   "toptrans": {
     "decal": "toptrans"

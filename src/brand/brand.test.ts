@@ -311,6 +311,15 @@ describe('carrier brand', () => {
       'alljoy',
       'dpe-express',
       'goodmaji',
+      'lex-my',
+      'dex-pk',
+      'parxl',
+      'efs-asia',
+      'kart2door',
+      'hart2hart-express',
+      'top-logistics-au',
+      'shipglobal-in',
+      'faster-ae',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

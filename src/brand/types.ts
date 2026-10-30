@@ -235,7 +235,16 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'profit-fields'
   | 'alljoy'
   | 'dpe-express'
-  | 'goodmaji';
+  | 'goodmaji'
+  | 'lex-my'
+  | 'dex-pk'
+  | 'parxl'
+  | 'efs-asia'
+  | 'kart2door'
+  | 'hart2hart-express'
+  | 'top-logistics-au'
+  | 'shipglobal-in'
+  | 'faster-ae';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

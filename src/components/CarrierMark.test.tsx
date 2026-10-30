@@ -247,6 +247,15 @@ describe('carrier mark', () => {
     'alljoy',
     'dpe-express',
     'goodmaji',
+    'lex-my',
+    'dex-pk',
+    'parxl',
+    'efs-asia',
+    'kart2door',
+    'hart2hart-express',
+    'top-logistics-au',
+    'shipglobal-in',
+    'faster-ae',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

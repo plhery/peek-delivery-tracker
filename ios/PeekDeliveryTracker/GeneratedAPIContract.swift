@@ -1012,6 +1012,26 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let ubxUk = CarrierID(rawValue: "ubx-uk")
     static let victorianFreightSpecialists = CarrierID(rawValue: "victorian-freight-specialists")
     static let vtFreightExpress = CarrierID(rawValue: "vt-freight-express")
+    static let airspeed = CarrierID(rawValue: "airspeed")
+    static let aseExpress = CarrierID(rawValue: "ase-express")
+    static let bestExpressTh = CarrierID(rawValue: "best-express-th")
+    static let ctcExpress = CarrierID(rawValue: "ctc-express")
+    static let egxpress = CarrierID(rawValue: "egxpress")
+    static let famiport = CarrierID(rawValue: "famiport")
+    static let fezDelivery = CarrierID(rawValue: "fez-delivery")
+    static let fmTransportes = CarrierID(rawValue: "fm-transportes")
+    static let jAndTEg = CarrierID(rawValue: "j-and-t-eg")
+    static let lexVn = CarrierID(rawValue: "lex-vn")
+    static let mapleLogistics = CarrierID(rawValue: "maple-logistics")
+    static let movin = CarrierID(rawValue: "movin")
+    static let paketCl = CarrierID(rawValue: "paket-cl")
+    static let safexpress = CarrierID(rawValue: "safexpress")
+    static let seinoSuperExpress = CarrierID(rawValue: "seino-super-express")
+    static let taqbinHk = CarrierID(rawValue: "taqbin-hk")
+    static let tawssil = CarrierID(rawValue: "tawssil")
+    static let tccCo = CarrierID(rawValue: "tcc-co")
+    static let xcargo = CarrierID(rawValue: "xcargo")
+    static let zimpost = CarrierID(rawValue: "zimpost")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -1977,6 +1997,26 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .ubxUk,
         .victorianFreightSpecialists,
         .vtFreightExpress,
+        .airspeed,
+        .aseExpress,
+        .bestExpressTh,
+        .ctcExpress,
+        .egxpress,
+        .famiport,
+        .fezDelivery,
+        .fmTransportes,
+        .jAndTEg,
+        .lexVn,
+        .mapleLogistics,
+        .movin,
+        .paketCl,
+        .safexpress,
+        .seinoSuperExpress,
+        .taqbinHk,
+        .tawssil,
+        .tccCo,
+        .xcargo,
+        .zimpost,
     ]
 
     init(from decoder: Decoder) throws {

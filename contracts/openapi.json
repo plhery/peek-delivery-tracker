@@ -2126,7 +2126,7 @@
       "linkRules": [],
       "detectionRules": [
         {
-          "pattern": "^(?![CLR][A-Z]\\d{9}DE$)(?!U[A-TV-Z]\\d{9}DE$)(?!(?:[CELR][A-Z]|UH)\\d{9}TW$)(?![CEL][A-Z]\\d{9}AU$)(?![CELR][A-Z]\\d{9}SK$)(?![CELR][A-Z]\\d{9}AL$)(?![CELR][A-Z]\\d{9}RS$)(?![CELR][A-Z]\\d{9}SI$)(?![CELR][A-Z]\\d{9}HR$)(?![CELR][A-Z]\\d{9}LV$)(?!(?:[CE][A-Z]|HC)\\d{9}LT$)(?![CELR][A-Z]\\d{9}AE$)(?!(?:C[A-UW-Z]|[ELR][A-Z])\\d{9}PL$)(?!(?:C[A-QS-UW-Z]|R[A-NP-Z]|[EL][A-Z])\\d{9}EE$)(?!AS\\d{9}US$)(?!(?:C[A-DF-UW-Z]|[ELR][A-Z])\\d{9}US$)(?![CELR][A-Z]\\d{9}IT$)(?!ZC\\d{9}IT$)(?!(?:PZ|XR|XT|XU|XW|XY))[A-Z]{2}\\d{9}(?!WW$|CA$|CH$|FR$|IN$|NL$|GB$|IE$|BE$|PT$|NZ$|SG$|JP$|KR$|TH$|HK$|MY$|CN$|NO$|BR$|ES$|SE$|DK$|AT$|YP$|TS$|JF$|JB$|RV$|VF$|TY$|MI$|XX$|MH$|YW$|CS$|EN$|CL$)[A-Z]{2}$",
+          "pattern": "^(?![CLR][A-Z]\\d{9}DE$)(?!U[A-TV-Z]\\d{9}DE$)(?!(?:[CELR][A-Z]|F[TZ])\\d{9}TW$)(?![CEL][A-Z]\\d{9}AU$)(?![CELR][A-Z]\\d{9}SK$)(?![CELR][A-Z]\\d{9}AL$)(?![CELR][A-Z]\\d{9}RS$)(?![CELR][A-Z]\\d{9}SI$)(?![CELR][A-Z]\\d{9}HR$)(?![CELR][A-Z]\\d{9}LV$)(?!(?:[CE][A-Z]|HC)\\d{9}LT$)(?![CELR][A-Z]\\d{9}AE$)(?!(?:C[A-UW-Z]|[ELR][A-Z])\\d{9}PL$)(?!(?:C[A-QS-UW-Z]|R[A-NP-Z]|[EL][A-Z])\\d{9}EE$)(?!AS\\d{9}US$)(?!(?:C[A-DF-UW-Z]|[ELR][A-Z])\\d{9}US$)(?![CELR][A-Z]\\d{9}IT$)(?!ZC\\d{9}IT$)(?!(?:PZ|XR|XT|XU|XW|XY))[A-Z]{2}\\d{9}(?!WW$|CA$|CH$|FR$|IN$|NL$|GB$|IE$|BE$|PT$|NZ$|SG$|JP$|KR$|TH$|HK$|MY$|CN$|NO$|BR$|ES$|SE$|DK$|AT$|YP$|TS$|JF$|JB$|RV$|VF$|TY$|MI$|XX$|MH$|YW$|CS$|EN$|CL$)[A-Z]{2}$",
           "confidence": "high",
           "checksum": "s10"
         }
@@ -10820,9 +10820,15 @@
       ],
       "detectionRules": [
         {
-          "pattern": "^(?:[CELR][A-Z]|UH)\\d{9}TW$",
+          "pattern": "^(?:[CELR][A-Z]|F[TZ])\\d{9}TW$",
           "confidence": "high",
           "checksum": "s10"
+        },
+        {
+          "pattern": "^UH\\d{9}TW$",
+          "confidence": "low",
+          "checksum": "s10",
+          "preferred": true
         }
       ],
       "trackingSearchUrl": "https://postserv.post.gov.tw/pstmail/main_mail.html",
@@ -12096,7 +12102,8 @@
         },
         {
           "pattern": "^49\\d{12}$",
-          "confidence": "low"
+          "confidence": "low",
+          "preferred": true
         },
         {
           "pattern": "^6(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])2[4-9]\\d{6}$",
@@ -13478,7 +13485,11 @@
         "EE",
         "UA",
         "RO",
-        "BG"
+        "BG",
+        "AT",
+        "CH",
+        "GR",
+        "TR"
       ],
       "color": "#df0020",
       "selectable": true,
@@ -14393,7 +14404,13 @@
           ]
         }
       ],
-      "detectionRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^\\d{9}$",
+          "confidence": "low",
+          "checksum": "mod7"
+        }
+      ],
       "trackingSearchUrl": "https://www.tforcefreight.com/ltl/apps/tracking"
     },
     "toptrans": {
@@ -14886,7 +14903,17 @@
         "recognitionRank": 994
       },
       "trackingUrlTemplate": "https://strefaklienta.pekaes.geodis.pl/en/?ShNumber={trackingNumber}",
-      "linkRules": [],
+      "linkRules": [
+        {
+          "domains": [
+            "strefaklienta.pekaes.geodis.pl"
+          ],
+          "pathPattern": "^/(?:[a-z]{2}/?)?$",
+          "params": [
+            "ShNumber"
+          ]
+        }
+      ],
       "detectionRules": [
         {
           "pattern": "^PL\\d{16}$",
@@ -37422,6 +37449,692 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.vtfe.com.au/"
+    },
+    "airspeed": {
+      "displayName": "Airspeed",
+      "aliases": [
+        "Airspeed International Corporation",
+        "Airspeed International Corp.",
+        "Airspeed Group",
+        "Airspeed Express",
+        "Airspeed Philippines",
+        "Airspeed Logistics"
+      ],
+      "countries": [
+        "PH"
+      ],
+      "color": "#005eb8",
+      "selectable": true,
+      "timezone": "Asia/Manila",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://logistics.airspeed.com.ph/track/TrackingSearch.aspx?waybill={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "logistics.airspeed.com.ph"
+          ],
+          "pathPattern": "^/track/TrackingSearch\\.aspx$",
+          "params": [
+            "waybill"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://airspeed.ph/track-cargo/"
+    },
+    "ase-express": {
+      "displayName": "ASE Express",
+      "aliases": [
+        "ASE Lojistik",
+        "ASE Asia Africa Sky Express",
+        "ASE International Express",
+        "ASE Kargo",
+        "ASE Asya Afrika Hızlı Kargo ve Dağıtım A.Ş.",
+        "ASE Express-OCS"
+      ],
+      "countries": [
+        "TR",
+        "RU",
+        "KZ",
+        "AZ",
+        "UZ",
+        "GE",
+        "TM",
+        "KG",
+        "TJ"
+      ],
+      "color": "#ed1a1c",
+      "selectable": true,
+      "timezone": "Europe/Istanbul",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tracking.ase.com.tr/cwb/trackshipment?lang=en&Id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.ase.com.tr"
+          ],
+          "pathPattern": "^/cwb/trackshipment/?$",
+          "params": [
+            "Id"
+          ]
+        },
+        {
+          "domains": [
+            "tracking.ase.com.tr"
+          ],
+          "path": "^/(?:cwb/trackshipment|(?:tr|en|ru|kz)/cwb2?)/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.ase.com.tr/cwb/trackshipment?lang=en"
+    },
+    "best-express-th": {
+      "displayName": "BEST Express Thailand",
+      "aliases": [
+        "BEST Express (Thailand)",
+        "BEST Express TH",
+        "BEST Inc. Thailand",
+        "BEST Logistics Technology (Thailand)",
+        "เบสท์ เอ็กซ์เพรส",
+        "เบสท์ โลจิสติกส์ เทคโนโลยี (ประเทศไทย)"
+      ],
+      "countries": [
+        "TH"
+      ],
+      "color": "#d80c18",
+      "selectable": true,
+      "timezone": "Asia/Bangkok",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.best-inc.co.th/track?bills={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "best-inc.co.th",
+            "www.best-inc.co.th"
+          ],
+          "pathPattern": "^/(?:wapp/)?track/?$",
+          "params": [
+            "bills",
+            "waybill"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^6685\\d{10}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.best-inc.co.th/track"
+    },
+    "ctc-express": {
+      "displayName": "CTC Express",
+      "aliases": [
+        "全統物流",
+        "全統",
+        "全統物流股份有限公司",
+        "Chyuan-Toong Logistics",
+        "CTC 全統物流",
+        "全統行"
+      ],
+      "countries": [
+        "TW"
+      ],
+      "color": "#192e6a",
+      "selectable": true,
+      "timezone": "Asia/Taipei",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://a.ctc-expresstms2.com.tw/"
+    },
+    "egxpress": {
+      "displayName": "EGXPRESS",
+      "aliases": [
+        "Egypt Express",
+        "EG Express",
+        "Egypt Express Corporation",
+        "إيجي اكسبريس"
+      ],
+      "countries": [
+        "EG"
+      ],
+      "color": "#ff5200",
+      "selectable": true,
+      "timezone": "Africa/Cairo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.egyptexpress.com.eg/en-us/tracking-shipment/?trackingID={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.egyptexpress.com.eg",
+            "egyptexpress.com.eg"
+          ],
+          "pathPattern": "^/(?:en-us|ar-eg)/tracking-shipment/?$",
+          "params": [
+            "trackingID"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^FED20\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{8}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.egyptexpress.com.eg/en-us/tracking-shipment/"
+    },
+    "famiport": {
+      "displayName": "FamilyMart Taiwan",
+      "aliases": [
+        "FamiPort",
+        "FamilyMart",
+        "全家",
+        "全家便利商店",
+        "全家便利商店股份有限公司",
+        "全家店到店",
+        "全家日翊"
+      ],
+      "countries": [
+        "TW"
+      ],
+      "color": "#018cd6",
+      "selectable": true,
+      "timezone": "Asia/Taipei",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://fmec.famiport.com.tw/FP_Entrance/QueryBox?orderno={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "fmec.famiport.com.tw"
+          ],
+          "pathPattern": "^/FP_Entrance/QueryBox/?$",
+          "params": [
+            "orderno"
+          ]
+        },
+        {
+          "domains": [
+            "ecfme.fme.com.tw"
+          ],
+          "pathPattern": "^/FMEDCFPWebV2_II/index\\.aspx$",
+          "params": [
+            "orderno"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://fmec.famiport.com.tw/FP_Entrance/QueryBox"
+    },
+    "fez-delivery": {
+      "displayName": "Fez Delivery",
+      "aliases": [
+        "Fez",
+        "Fezdelivery",
+        "Fez Delivery Co",
+        "Fezdelivery Inc"
+      ],
+      "countries": [
+        "NG"
+      ],
+      "color": "#45c734",
+      "selectable": true,
+      "timezone": "Africa/Lagos",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://web.fezdelivery.co/track-delivery/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "web.fezdelivery.co"
+          ],
+          "path": "^/track-delivery/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^(?![A-Z]{2,3}\\d+$|1G|ASE)(?=[0-9]{0,3}[A-Z])[A-Z0-9]{4}(?:0[1-9]|[12]\\d|3[01])(?:0[1-9]|1[0-2])2\\d{3}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://web.fezdelivery.co/track-delivery"
+    },
+    "fm-transportes": {
+      "displayName": "FM Transportes",
+      "aliases": [
+        "FM Transport Brazil",
+        "FM Transportes Brasil",
+        "F.M Logística Nacional XD SP Ltda"
+      ],
+      "countries": [
+        "BR"
+      ],
+      "color": "#e52327",
+      "selectable": true,
+      "timezone": "America/Sao_Paulo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://rastreio.fmtransportes.com.br/#/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "rastreio.fmtransportes.com.br"
+          ],
+          "pathPattern": "^/?$",
+          "fragment": "^/([^/?&]+)/?$"
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^(?:0[1-9]|[12]\\d|3[01])(?:0[1-9]|1[0-2])2\\d(?![0-9A-F]{2}\\d{9}[A-Z]$)(?=\\d*[A-Z])[A-Z0-9]{12}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://rastreio.fmtransportes.com.br/"
+    },
+    "j-and-t-eg": {
+      "displayName": "J&T Express Egypt",
+      "aliases": [
+        "J&T Express Egypt LLC",
+        "J&T Express (EG)",
+        "J&T Express EG",
+        "J&T Egypt",
+        "جي آند تي إكسبريس مصر"
+      ],
+      "countries": [
+        "EG"
+      ],
+      "color": "#e60000",
+      "selectable": true,
+      "timezone": "Africa/Cairo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.jtexpress-eg.com/trajectoryQuery?waybillNo={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.jtexpress-eg.com",
+            "jtexpress-eg.com"
+          ],
+          "pathPattern": "^/(?:trajectoryQuery|trajectoryList)/?$",
+          "params": [
+            "waybillNo"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^JEG\\d{12}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.jtexpress-eg.com/trajectoryQuery"
+    },
+    "lex-vn": {
+      "displayName": "LEX Vietnam",
+      "aliases": [
+        "LEX VN",
+        "Lazada Express Vietnam",
+        "Lazada eLogistics Express Vietnam",
+        "Lazada Logistics Vietnam",
+        "Giao Hàng Flex Speed"
+      ],
+      "countries": [
+        "VN"
+      ],
+      "color": "#1076ff",
+      "selectable": true,
+      "timezone": "Asia/Ho_Chi_Minh",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://logistics.lazada.vn/tracking?references={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "logistics.lazada.vn",
+            "lex.vn"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "references"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^LMP\\d{10}VNA$",
+          "confidence": "low"
+        },
+        {
+          "pattern": "^LEX(?:ST\\d{10}VN|RT\\d{10}VNA)$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://logistics.lazada.vn/tracking"
+    },
+    "maple-logistics": {
+      "displayName": "Maple Logistics",
+      "aliases": [
+        "便利帶",
+        "台灣便利帶",
+        "便利帶公司",
+        "台灣便利物流有限公司",
+        "台灣便利物流",
+        "Maple Logistics Express",
+        "豐業物流"
+      ],
+      "countries": [
+        "TW"
+      ],
+      "color": "#f42014",
+      "selectable": true,
+      "timezone": "Asia/Taipei",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.25431010.tw/tracking"
+    },
+    "movin": {
+      "displayName": "MOVIN",
+      "aliases": [
+        "MOVIN Express",
+        "MOVIN Express Private Limited",
+        "Movin India"
+      ],
+      "countries": [
+        "IN"
+      ],
+      "color": "#261817",
+      "selectable": true,
+      "timezone": "Asia/Kolkata",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://movin.portal.shipsy.io/p/track?searchBy=referenceNumber&refNum={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "movin.portal.shipsy.io"
+          ],
+          "pathPattern": "^/p/track/?$",
+          "params": [
+            "refNum"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.movin.in/shipment/track"
+    },
+    "paket-cl": {
+      "displayName": "Paket",
+      "aliases": [
+        "Paket SpA",
+        "Paket Chile",
+        "Paket Envios",
+        "Paketex"
+      ],
+      "countries": [
+        "CL"
+      ],
+      "color": "#614de2",
+      "selectable": true,
+      "timezone": "America/Santiago",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.paket.cl/?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.paket.cl"
+          ],
+          "pathPattern": "^/?$",
+          "query": "(?:^|&)id=(?:[^&]*\\.)?(\\d{4,12})(?=&|$)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.paket.cl/"
+    },
+    "safexpress": {
+      "displayName": "Safexpress",
+      "aliases": [
+        "Safexpress Pvt Ltd",
+        "Safexpress Private Limited",
+        "Safe Express",
+        "Safexpress Logistics"
+      ],
+      "countries": [
+        "IN"
+      ],
+      "color": "#008349",
+      "selectable": true,
+      "timezone": "Asia/Kolkata",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.safexpress.com/"
+    },
+    "seino-super-express": {
+      "displayName": "Seino Super Express",
+      "aliases": [
+        "SSX",
+        "セイノースーパーエクスプレス",
+        "セイノースーパーエクスプレス株式会社",
+        "Seino Super Express Co., Ltd.",
+        "西武運輸",
+        "Seibu Unyu"
+      ],
+      "countries": [
+        "JP"
+      ],
+      "color": "#115aa2",
+      "selectable": true,
+      "timezone": "Asia/Tokyo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://inquire.trc.ssx.seino.co.jp/inquire/Main.jsp?uji.verbs=NAHS0010_find&uji.bean=com.seibu.bean.na.NAHS0010Bean&strDenpyoNo1={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "inquire.trc.ssx.seino.co.jp"
+          ],
+          "pathPattern": "^/inquire/Main\\.jsp$",
+          "params": [
+            "strDenpyoNo1"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://inquire.trc.ssx.seino.co.jp/inquire/main.jsp"
+    },
+    "taqbin-hk": {
+      "displayName": "TA-Q-BIN Hong Kong",
+      "aliases": [
+        "TA-Q-BIN HK",
+        "Yamato Logistics (HK) Ltd.",
+        "Yamato Logistics Hong Kong",
+        "Yamato HK",
+        "雅瑪多運輸(香港)有限公司",
+        "雅瑪多運輸",
+        "香港宅急便",
+        "宅急便 (香港)"
+      ],
+      "countries": [
+        "HK"
+      ],
+      "color": "#fdd000",
+      "selectable": true,
+      "timezone": "Asia/Hong_Kong",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://app01.yamatohk.com.hk/spds-track-and-trace/TrackAndTrace?trackingNo={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "app01.yamatohk.com.hk"
+          ],
+          "pathPattern": "^/spds-track-and-trace/TrackAndTrace/?$",
+          "params": [
+            "trackingNo"
+          ]
+        },
+        {
+          "domains": [
+            "pms.yamatohk.com.hk"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "track"
+          ]
+        },
+        {
+          "domains": [
+            "delivery.message.sg"
+          ],
+          "pathPattern": "^/YTHKtracking/?$",
+          "params": [
+            "a"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.yamatohk.com.hk/"
+    },
+    "tawssil": {
+      "displayName": "Tawssil",
+      "aliases": [
+        "Tawsil",
+        "Tawssil Maroc",
+        "Tawssil by Cash Plus",
+        "Cash Plus Tawssil"
+      ],
+      "countries": [
+        "MA"
+      ],
+      "color": "#ffc600",
+      "selectable": true,
+      "timezone": "Africa/Casablanca",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.tawssil.ma/"
+    },
+    "tcc-co": {
+      "displayName": "TCC",
+      "aliases": [
+        "TCC S.A.S.",
+        "Grupo TCC",
+        "TCC Colombia",
+        "Transportadora Comercial Colombia",
+        "Transportadora Comercial Colombia S.A.",
+        "Transportadora Comercial Colombiana"
+      ],
+      "countries": [
+        "CO"
+      ],
+      "color": "#f8db61",
+      "selectable": true,
+      "timezone": "America/Bogota",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tcc.com.co/rastreo/?documento={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tcc.com.co",
+            "www.tcc.com.co"
+          ],
+          "pathPattern": "^/rastreo/?$",
+          "query": "^(?!(?:.*&)?tipo=(?!(?:gu[ií]a|remesa|re)(?:&|$)))(?:.*&)?documento=([^&]+)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tcc.com.co/rastreo/"
+    },
+    "xcargo": {
+      "displayName": "X-Cargo",
+      "aliases": [
+        "Xcargo",
+        "X Cargo",
+        "XCARGO S.A.S."
+      ],
+      "countries": [
+        "CO"
+      ],
+      "color": "#18fb8c",
+      "selectable": true,
+      "timezone": "America/Bogota",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://x-cargo.co/"
+    },
+    "zimpost": {
+      "displayName": "Zimpost",
+      "aliases": [
+        "Zimbabwe Post",
+        "Zimbabwe Posts",
+        "Zimbabwe Posts (Pvt) Ltd"
+      ],
+      "countries": [
+        "ZW"
+      ],
+      "color": "#ee1c25",
+      "selectable": true,
+      "timezone": "Africa/Harare",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.zimpost.co.zw/"
     }
   },
   "servers": [
@@ -41172,7 +41885,27 @@
           "ttk-europe",
           "ubx-uk",
           "victorian-freight-specialists",
-          "vt-freight-express"
+          "vt-freight-express",
+          "airspeed",
+          "ase-express",
+          "best-express-th",
+          "ctc-express",
+          "egxpress",
+          "famiport",
+          "fez-delivery",
+          "fm-transportes",
+          "j-and-t-eg",
+          "lex-vn",
+          "maple-logistics",
+          "movin",
+          "paket-cl",
+          "safexpress",
+          "seino-super-express",
+          "taqbin-hk",
+          "tawssil",
+          "tcc-co",
+          "xcargo",
+          "zimpost"
         ]
       },
       "Stage": {

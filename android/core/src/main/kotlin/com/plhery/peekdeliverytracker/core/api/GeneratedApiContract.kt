@@ -1021,6 +1021,26 @@ value class CarrierId(val rawValue: String) {
         val UbxUk = CarrierId("ubx-uk")
         val VictorianFreightSpecialists = CarrierId("victorian-freight-specialists")
         val VtFreightExpress = CarrierId("vt-freight-express")
+        val Airspeed = CarrierId("airspeed")
+        val AseExpress = CarrierId("ase-express")
+        val BestExpressTh = CarrierId("best-express-th")
+        val CtcExpress = CarrierId("ctc-express")
+        val Egxpress = CarrierId("egxpress")
+        val Famiport = CarrierId("famiport")
+        val FezDelivery = CarrierId("fez-delivery")
+        val FmTransportes = CarrierId("fm-transportes")
+        val JAndTEg = CarrierId("j-and-t-eg")
+        val LexVn = CarrierId("lex-vn")
+        val MapleLogistics = CarrierId("maple-logistics")
+        val Movin = CarrierId("movin")
+        val PaketCl = CarrierId("paket-cl")
+        val Safexpress = CarrierId("safexpress")
+        val SeinoSuperExpress = CarrierId("seino-super-express")
+        val TaqbinHk = CarrierId("taqbin-hk")
+        val Tawssil = CarrierId("tawssil")
+        val TccCo = CarrierId("tcc-co")
+        val Xcargo = CarrierId("xcargo")
+        val Zimpost = CarrierId("zimpost")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -1986,6 +2006,26 @@ value class CarrierId(val rawValue: String) {
             UbxUk,
             VictorianFreightSpecialists,
             VtFreightExpress,
+            Airspeed,
+            AseExpress,
+            BestExpressTh,
+            CtcExpress,
+            Egxpress,
+            Famiport,
+            FezDelivery,
+            FmTransportes,
+            JAndTEg,
+            LexVn,
+            MapleLogistics,
+            Movin,
+            PaketCl,
+            Safexpress,
+            SeinoSuperExpress,
+            TaqbinHk,
+            Tawssil,
+            TccCo,
+            Xcargo,
+            Zimpost,
         )
     }
 }

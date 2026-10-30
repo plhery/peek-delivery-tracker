@@ -117,25 +117,21 @@ class CarrierCatalogParityTests {
 
     @Test
     fun carriersSortAsFoundationComparesTheirNames() {
-        // A space sorts before letters and punctuation, which java.text.Collator passes over.
+        // A space sorts before letters and punctuation, which java.text.Collator passes over. Read among these
+        // carriers, as the iPhone's picker test reads its numbered ones, so carriers the catalog gains fall between.
+        val first = ids("a-tu-hora-express", "a-duie-pyle", "ab-courier", "a1-post", "aaa-cooper", "abf-freight")
+        val am = ids("am-home-delivery", "amazon-logistics", "ameex", "american-west-express", "amerijet", "an-post", "andreani")
         val saved = Locale.getDefault()
         Locale.setDefault(Locale.ENGLISH)
         try {
             val selectable = catalog.selectableCarriers
-            assertEquals(
-                ids("a-tu-hora-express", "a-duie-pyle", "ab-courier", "a1-post", "aaa-cooper", "abf-freight"),
-                selectable.filter { catalog.info(it).displayName.uppercase().startsWith("A") }.take(6),
-            )
-            assertEquals(
-                ids("am-home-delivery", "amazon-logistics", "ameex", "american-west-express", "amerijet", "an-post", "andreani"),
-                selectable.filter { catalog.info(it).displayName.uppercase().let { name -> name.startsWith("AM") || name.startsWith("AN") } }
-                    .take(7),
-            )
+            assertEquals(first, selectable.filter { it in first })
+            assertEquals(am, selectable.filter { it in am })
         } finally {
             Locale.setDefault(saved)
         }
         val section = CarrierPickerSearch.letterSections(catalog, AppLanguage.En).first { it.letter == "A" }
-        assertEquals(ids("a-tu-hora-express", "a-duie-pyle", "ab-courier", "a1-post", "aaa-cooper", "abf-freight"), section.carriers.take(6))
+        assertEquals(first, section.carriers.filter { it in first })
     }
 
     @Test

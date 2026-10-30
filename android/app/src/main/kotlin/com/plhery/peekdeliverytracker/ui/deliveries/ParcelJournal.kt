@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -23,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -34,6 +37,8 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.text
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -68,7 +73,7 @@ import java.util.UUID
  * over 0.2 s easeInOut, nothing clipped; at once under Reduce Motion (B-AN10). Without a row it says the carrier is
  * being asked while the parcel syncs, and that there is nothing yet otherwise. Each day is headed in caption2 capitals
  * tracked 1 in the secondary grey, 22 under what comes before and 13 over its rows, which stand 18 apart; TalkBack
- * hears the heading as one. The row of the current scan, or of the scan whose copy it is, has its time in `tint`.
+ * hears the heading as one, as written rather than in capitals. The row of the current scan, or of the scan whose copy it is, has its time in `tint`.
  */
 @Composable
 internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Modifier) {
@@ -77,10 +82,13 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion
-    val entries = parcel.journalEntries
-    val days = localizer.journalDays(entries, LocalNow.current())
+    val now = LocalNow.current
+    val entries = remember(parcel) { parcel.journalEntries }
+    val days = remember(localizer, language, entries, now) { localizer.journalDays(entries, now()) }
     // A copy the journal shows under its scan is current through that scan.
-    val currentId = parcel.currentEvent?.let { current -> entries.firstOrNull { it.id == current.id || current in it.relays }?.id }
+    val currentId = remember(parcel, entries) {
+        parcel.currentEvent?.let { current -> entries.firstOrNull { it.id == current.id || current in it.relays }?.id }
+    }
     val syncing = parcel.displayStatus.syncing
     var full by rememberSaveable { mutableStateOf(true) }
     Column(modifier.padding(horizontal = 2.dp)) {
@@ -102,17 +110,26 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                     )
                 }
                 for (day in days) {
-                    Text(
-                        day.label.uppercase(language.locale),
-                        // CoreText tracks after each letter, Android half before it: the words start where the iPhone's start.
-                        Modifier
-                            .padding(top = 22.dp, bottom = 13.dp)
-                            .offset(x = (-0.5).dp)
-                            .testTag(JOURNAL_DAY)
-                            .semantics { heading() },
-                        color = colors.secondaryLabel,
-                        style = type.tracking(type.caption2, 1f).sfLines(),
-                    )
+                    if (day.label.isEmpty()) {
+                        // A scan without a date or a day: SwiftUI's empty text takes no room, its padding does.
+                        Spacer(Modifier.height(22.dp + 13.dp))
+                    } else {
+                        Text(
+                            day.label.uppercase(language.locale),
+                            // CoreText tracks after each letter, Android half before it: the words start where the iPhone's start.
+                            Modifier
+                                .padding(top = 22.dp, bottom = 13.dp)
+                                .offset(x = (-0.5).dp)
+                                .testTag(JOURNAL_DAY)
+                                // Capitals only to the eye, as `.textCase` draws them: TalkBack hears the day as written.
+                                .clearAndSetSemantics {
+                                    heading()
+                                    text = AnnotatedString(day.label)
+                                },
+                            color = colors.secondaryLabel,
+                            style = type.tracking(type.caption2, 1f).sfLines(),
+                        )
+                    }
                     JournalDayRows(day, tint, currentId, syncing)
                 }
             }
@@ -250,7 +267,8 @@ private fun EventLocation(location: String, placed: String?) {
             Modifier
                 .alignByBaseline()
                 .clearAndSetSemantics {},
-            color = secondary,
+            // A colour emoji draws solid on the iPhone whatever the text's grey; Android would lay the grey's alpha on it.
+            color = PeekTheme.colors.label,
             style = type.caption.sfLines(),
         )
         Text(

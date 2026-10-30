@@ -102,8 +102,11 @@ fun Localizer.journalDays(entries: List<JournalEntry>, now: Instant = Instant.no
     return days.sortedByDescending { it.start ?: distantPast }
 }
 
-/** Foundation's `Date.distantPast`, where the journal's days without a date sort: the first day of year 1. */
-private val distantPast: Instant = Instant.parse("0001-01-01T00:00:00Z")
+/**
+ * Foundation's `Date.distantPast`, where the journal's days without a date sort: the first day of year 1 in the Julian
+ * calendar, two days before the proleptic Gregorian one.
+ */
+private val distantPast: Instant = Instant.ofEpochSecond(-62_135_769_600)
 
 /**
  * The clock time of a journal row (`JournalEventRow.time`): none for a scan the carrier dated by its day alone, whose

@@ -41,9 +41,12 @@ import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AdaptiveColor
@@ -355,7 +358,11 @@ private fun MapEndpoint(title: String, place: RoutePlace, trailing: Boolean, lar
             overflow = TextOverflow.Ellipsis,
         )
         Text(
-            "${TrackingLocation.flag(place.country)} $country",
+            // A colour emoji draws solid on the iPhone whatever the text's grey; Android would lay the grey's alpha on it.
+            buildAnnotatedString {
+                withStyle(SpanStyle(color = colors.label)) { append(TrackingLocation.flag(place.country)) }
+                append(" $country")
+            },
             color = colors.secondaryLabel,
             style = type.caption.sfLines(),
             textAlign = align,

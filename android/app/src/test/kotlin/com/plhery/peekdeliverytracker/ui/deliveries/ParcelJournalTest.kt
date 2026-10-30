@@ -186,7 +186,8 @@ class ParcelJournalTest {
             ),
         )
         // 23:55 is yesterday in Zurich, 00:05 today.
-        assertEquals(listOf("TODAY", "YESTERDAY", "TUE 20 OCT", "WED 31 DEC 2025"), days())
+        // TalkBack hears them as written; their capitals are drawn (journal_light).
+        assertEquals(listOf("today", "yesterday", "Tue 20 Oct", "Wed 31 Dec 2025"), days())
         assertEquals(
             listOf(
                 listOf("05:40", "With the courier for delivery today"), listOf("00:05", "Left the parcel centre"),
@@ -210,7 +211,7 @@ class ParcelJournalTest {
                 ),
             ),
         )
-        assertEquals(listOf("TUE 27 OCT", "MON 26 OCT"), days())
+        assertEquals(listOf("Tue 27 Oct", "Mon 26 Oct"), days())
         assertEquals(listOf(listOf("Delivery attempt scheduled"), listOf("21:00", "Sorted at the parcel centre")), rows())
     }
 
@@ -224,7 +225,7 @@ class ParcelJournalTest {
                 ),
             ),
         )
-        assertEquals(listOf("TUE 20 OCT", "SOON"), days())
+        assertEquals(listOf("Tue 20 Oct", "soon"), days())
         assertEquals(listOf("—", "Parcel expected"), rows().last())
     }
 
@@ -331,6 +332,17 @@ class ParcelJournalTest {
         val words = compose.onNode(hasText("With the courier for delivery today"), useUnmergedTree = true).getBoundsInRoot()
         assertTrue("$time over $words", time.bottom <= words.top)
         assertEquals(time.left.value, words.left.value, 0.5f)
+    }
+
+    /** `@ScaledMetric(relativeTo: .caption2)`: caption2 goes from 11 to 17 points at xxxLarge, and the column with it. */
+    @Test
+    fun theTimesColumnGrowsWithCaption2() {
+        show(fontScale = 1.3f)
+        val words = compose.onNode(hasText("With the courier for delivery today"), useUnmergedTree = true).getBoundsInRoot()
+        val row = compose.onAllNodes(hasTestTag(JOURNAL_ROW)).fetchSemanticsNodes().first().let { node ->
+            with(compose.density) { node.boundsInRoot.left.toDp() }
+        }
+        assertEquals(38f * 17 / 11 + 12f, (words.left - row).value, 0.6f)
     }
 
     @Test

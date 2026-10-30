@@ -126,6 +126,16 @@ class ParcelDetailViewTests {
         assertEquals("Mi 31. Dez 2025", Localizer(AppLanguage.De).journalDays(days[3].entries, now).single().label)
     }
 
+    /** The day the clocks go back in Zurich lasts 25 hours there: its first and last scans still share it. */
+    @Test
+    fun aDayAsLongAsTheClocksMakeItKeepsItsScans() {
+        val changed = LocalDate.of(2026, 10, 25)
+        val days = days(scan(at(changed.plusDays(1), 0, 30)), scan(at(changed, 23, 30)), scan(at(changed, 2, 30)), scan(at(changed, 0, 30)))
+        assertEquals(listOf("Mon 26 Oct", "Sun 25 Oct"), days.map { it.label })
+        assertEquals(listOf(1, 3), days.map { it.entries.size })
+        assertEquals(changed.atStartOfDay(zone).toInstant(), days[1].start)
+    }
+
     @Test
     fun aScanDatedByItsDayAloneSitsUnderThatDayEvenWhenItSortsAmongTheDayBefores() {
         val evening = scan(at(LocalDate.of(2026, 10, 26), 20))

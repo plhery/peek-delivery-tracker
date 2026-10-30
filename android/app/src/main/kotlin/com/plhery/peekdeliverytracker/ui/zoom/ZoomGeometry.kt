@@ -29,6 +29,13 @@ internal object ZoomGeometry {
     /** The black over what is under a page, at most. */
     const val DIM = 0.15f
 
+    /**
+     * The page's bar, pinned at the window's top: it comes in over the last 40 % of an opening, and goes over the last
+     * quarter of a closing ([pageBarOpacity]).
+     */
+    const val BAR_OPENING_START = 0.6f
+    const val BAR_CLOSING_SHARE = 0.25f
+
     /** The page's shadow: black at this opacity, a Gaussian of this deviation in dp, with no offset. */
     const val SHADOW_OPACITY = 0.4f
     const val SHADOW_DEVIATION = 30f
@@ -70,6 +77,19 @@ internal object ZoomGeometry {
     fun pageOpacity(progress: Float): Float = (progress / CROSSFADE).coerceIn(0f, 1f)
 
     fun faceOpacity(progress: Float): Float = 1f - pageOpacity(progress)
+
+    /**
+     * How much of the page's bar shows, its ‹ and •••, which stay at the window's top as the iPhone's navigation bar
+     * keeps its items while the page zooms under them: none until an opening is 60 % of the way, all of it as the page
+     * lands; closing, all of it until the page is a quarter of the way from its source, then less with the page, so
+     * that the list's own items come back in its place as it goes. A drag or the back gesture leaves it as it is.
+     */
+    fun pageBarOpacity(progress: Float, closing: Boolean): Float =
+        if (closing) {
+            (progress / BAR_CLOSING_SHARE).coerceIn(0f, 1f)
+        } else {
+            ((progress - BAR_OPENING_START) / (1f - BAR_OPENING_START)).coerceIn(0f, 1f)
+        }
 
     /** The size of what is under the page, `behind` (0 to 1) of the way to being covered. */
     fun receded(behind: Float): Float = 1f - (1f - RECEDED_SCALE) * behind.coerceIn(0f, 1f)

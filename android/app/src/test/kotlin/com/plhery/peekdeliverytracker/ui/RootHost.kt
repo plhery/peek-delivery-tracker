@@ -3,8 +3,6 @@ package com.plhery.peekdeliverytracker.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -15,7 +13,6 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
-import com.plhery.peekdeliverytracker.ui.deliveries.ParcelPagePlaceholder
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlin.coroutines.ContinuationInterceptor
 
@@ -52,8 +49,7 @@ fun RootHost(
                 if (deliveries != null) {
                     deliveries()
                 } else {
-                    val parcels by shown.parcels.collectAsState()
-                    DeliveriesTab(shown, inbox = inbox) { id -> ParcelPagePlaceholder(parcels.firstOrNull { it.id == id }?.label) }
+                    DeliveriesTab(shown, inbox = inbox)
                 }
             }
         }

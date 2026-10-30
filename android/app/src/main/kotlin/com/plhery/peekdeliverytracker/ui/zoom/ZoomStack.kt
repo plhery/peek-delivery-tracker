@@ -85,10 +85,13 @@ import com.plhery.peekdeliverytracker.ui.tabs.LocalTabBarPadding
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.TabBarHidden
 import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
+import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.Radii
 import com.plhery.peekdeliverytracker.ui.theme.gaussianBlurRadius
+import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
@@ -105,7 +108,11 @@ import kotlinx.coroutines.withContext
  *
  * `top` is the id of the page on top of the stack, null with the root alone. `page` draws `top`'s page or, once it has
  * left, the one going back into its source until it lands: the stack draws `top ?: transition.covered`
- * ([ZoomTransition.covered]). `onBack` pops the page.
+ * ([ZoomTransition.covered]). `onBack` pops the page. `bar` draws the page's bar, its items pinned at the window's top
+ * outside the page's container as the iPhone's navigation bar keeps them: it comes in over the last of an opening and
+ * goes over the last of a closing ([ZoomGeometry.pageBarOpacity]), crossfading with the root's bar items
+ * ([givingWayToPageBar]), and stays as it is while a drag or the back gesture shrinks the page under it. Its glass shows
+ * the page and the root through it.
  *
  * - Opening, the page's container springs from its source's frame to the window's on a critically damped spring of
  *   response 0.32 s, and the source's picture gives way to the page. The root recedes and dims under it, and the tab
@@ -136,6 +143,7 @@ fun ZoomStack(
     root: @Composable () -> Unit,
     page: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
+    bar: (@Composable () -> Unit)? = null,
 ) {
     val reduceMotion = PeekTheme.reduceMotion
     val density = LocalDensity.current
@@ -214,50 +222,66 @@ fun ZoomStack(
         val focusManager = LocalFocusManager.current
         val rootFocus = remember { RootFocus() }
         LaunchedEffect(covered) { if (covered && rootFocus.has) focusManager.clearFocus() }
-        // The root's own back handlers wait while a page is over it.
-        val events = rememberNavigationEventDispatcherOwner(enabled = !covered)
-        CompositionLocalProvider(LocalNavigationEventDispatcherOwner provides events) {
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .then(if (covered) Modifier.clearAndSetSemantics {} else Modifier)
-                    // Read as the focus moves, so that it goes back in from the frame the page has gone in.
-                    .focusProperties { onEnter = { if (flight.id != null) cancelFocusChange() } }
-                    .onFocusChanged { rootFocus.has = it.hasFocus }
-                    .focusGroup()
-                    .drawWithContent { if (!flight.hidesRoot) drawContent() },
-            ) { root() }
-        }
-        if (page != null && covered) {
-            val shadow = remember(density) { ShadowPaint(density) }
-            // The dim over the root, and the page's shadow on it.
-            Box(Modifier.fillMaxSize().drawBehind { flight.drawBehindPage(this, shadow) })
-            val face = rememberGraphicsLayer()
-            val connection = remember(flight) { DragConnection(flight) }
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .nestedScroll(connection)
-                    .pointerInput(flight) { dragToClose(flight, scope) { back() } },
-            ) {
+        // What the bar's glass shows through: the page, and the root as the page shrinks off it.
+        val backdrop = rememberMaterialBackdrop()
+        Box(Modifier.fillMaxSize().then(if (bar != null) Modifier.materialBackdrop(backdrop) else Modifier)) {
+            // The root's own back handlers wait while a page is over it.
+            val events = rememberNavigationEventDispatcherOwner(enabled = !covered)
+            CompositionLocalProvider(LocalNavigationEventDispatcherOwner provides events) {
                 Box(
                     Modifier
                         .fillMaxSize()
-                        .graphicsLayer { flight.transformContainer(this) }
-                        .drawWithContent {
-                            drawContent()
-                            flight.drawFace(this, face)
-                        }
-                        .then(if (flight.phase == Phase.Closing) Modifier.clearAndSetSemantics {} else Modifier.accessibilityFocus(pageFocus))
-                        .background(PeekTheme.colors.background),
+                        .then(if (covered) Modifier.clearAndSetSemantics {} else Modifier)
+                        // Read as the focus moves, so that it goes back in from the frame the page has gone in.
+                        .focusProperties { onEnter = { if (flight.id != null) cancelFocusChange() } }
+                        .onFocusChanged { rootFocus.has = it.hasFocus }
+                        .focusGroup()
+                        .drawWithContent { if (!flight.hidesRoot) drawContent() },
+                ) { root() }
+            }
+            if (page != null && covered) {
+                val shadow = remember(density) { ShadowPaint(density) }
+                // The dim over the root, and the page's shadow on it.
+                Box(Modifier.fillMaxSize().drawBehind { flight.drawBehindPage(this, shadow) })
+                val face = rememberGraphicsLayer()
+                val connection = remember(flight) { DragConnection(flight) }
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .nestedScroll(connection)
+                        .pointerInput(flight) { dragToClose(flight, scope) { back() } },
                 ) {
-                    // The tab bar is hidden over the page.
-                    CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp)) { page() }
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .graphicsLayer { flight.transformContainer(this) }
+                            .drawWithContent {
+                                drawContent()
+                                flight.drawFace(this, face)
+                            }
+                            .then(if (flight.phase == Phase.Closing) Modifier.clearAndSetSemantics {} else Modifier.accessibilityFocus(pageFocus))
+                            .background(PeekTheme.colors.background),
+                    ) {
+                        // The tab bar is hidden over the page.
+                        CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp)) { page() }
+                    }
                 }
             }
-            // Nothing takes a touch while the page opens or closes.
-            if (flight.flying) Box(Modifier.fillMaxSize().pointerInput(Unit) { swallowTouches() })
         }
+        if (page != null && covered && bar != null) {
+            // The page's bar, outside its container: it stays at the window's top while the page zooms, shrinks or
+            // is swiped back under it, and fades in and out with the flight.
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .graphicsLayer { alpha = flight.barOpacity() }
+                    .then(if (flight.phase == Phase.Closing) Modifier.clearAndSetSemantics {} else Modifier),
+            ) {
+                CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp), LocalMaterialBackdrop provides backdrop) { bar() }
+            }
+        }
+        // Nothing takes a touch while the page opens or closes.
+        if (page != null && covered && flight.flying) Box(Modifier.fillMaxSize().pointerInput(Unit) { swallowTouches() })
     }
 }
 
@@ -529,6 +553,13 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
 
     /** How far the page has come over the root. Under Reduce Motion the root stays as it is. */
     fun behind(): Float = if (id == null || crossfade) 0f else progress
+
+    /** How much of the page's bar shows ([ZoomGeometry.pageBarOpacity]); under Reduce Motion it crossfades with the page. */
+    fun barOpacity(): Float = when {
+        id == null -> 0f
+        crossfade -> progress
+        else -> ZoomGeometry.pageBarOpacity(progress, closing = phase == Phase.Closing)
+    }
 
     /** The page fades in under Reduce Motion, and where it has no source to grow out of. */
     private fun containerOpacity(): Float = when {

@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toIntSize
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocusNode
+import kotlin.math.min
 
 /**
  * A zoom's namespace (`@Namespace var transition`): the sources its pages zoom out of ([zoomSource],
@@ -32,7 +33,8 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocusNode
  * by then, or from and to the middle of the window, fading, where none can be seen.
  *
  * What lies under the pages reads [behind]: as a page comes over it, the iPhone's list recedes and its bar's items
- * fade, its bars staying where they are ([recedingUnderZoom], [fadingUnderZoom]).
+ * fade, its bars staying where they are ([recedingUnderZoom], [fadingUnderZoom]), the items whose places the page's own
+ * bar takes crossfading with it ([givingWayToPageBar]).
  */
 @Stable
 class ZoomTransition {
@@ -54,6 +56,9 @@ class ZoomTransition {
 
     /** How far the page has come over what lies under it, from 0 to 1. */
     val behind: Float get() = flight?.behind() ?: 0f
+
+    /** How much of the page's own bar shows at the window's top, from 0 to 1 ([ZoomStack]'s `bar`). */
+    val pageBar: Float get() = flight?.barOpacity() ?: 0f
 
     /** Inside what recedes under the pages ([recedingUnderZoom]), as last placed. */
     internal var receding: LayoutCoordinates? = null
@@ -106,6 +111,15 @@ fun Modifier.recedingUnderZoom(transition: ZoomTransition): Modifier = graphicsL
 
 /** The bar's items under a zooming page, which fade where they are as the page comes over them. */
 fun Modifier.fadingUnderZoom(transition: ZoomTransition): Modifier = graphicsLayer { alpha = 1f - transition.behind.coerceIn(0f, 1f) }
+
+/**
+ * The bar's items whose places the page's own bar takes, its ‹ and ••• at the window's top: they fade as the page
+ * comes over them, as [fadingUnderZoom]'s do, and come back only as the page's bar goes, the two crossfading as the
+ * iPhone's navigation bar crossfades its items.
+ */
+fun Modifier.givingWayToPageBar(transition: ZoomTransition): Modifier = graphicsLayer {
+    alpha = min(1f - transition.behind.coerceIn(0f, 1f), 1f - transition.pageBar.coerceIn(0f, 1f))
+}
 
 private data class ZoomSourceElement(
     val id: Any,

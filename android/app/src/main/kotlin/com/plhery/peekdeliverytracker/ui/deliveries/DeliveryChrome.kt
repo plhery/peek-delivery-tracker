@@ -138,6 +138,8 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
+import com.plhery.peekdeliverytracker.ui.zoom.fadingUnderZoom
+import com.plhery.peekdeliverytracker.ui.zoom.givingWayToPageBar
 import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
 
 /** The localized text for `key`, written again when the language changes. */
@@ -163,7 +165,9 @@ internal fun barRowTop(): Dp {
  * The list's bar, `.navigationBarTitleDisplayMode(.inline)` with its items. Stacked: Peek's mark at the leading edge on
  * its own, adding a parcel on its glass beside it, "Deliveries" in the window's middle and the account at the trailing
  * edge. Beside a parcel: the mark and the title, in the middle of the list's column; adding and the account stand over
- * the parcel ([PageToolbar]). The glass shows the list scrolling under it ([backdrop]).
+ * the parcel ([PageToolbar]). The glass shows the list scrolling under it ([backdrop]). As a parcel's page zooms over
+ * the list, the title fades with the list's coming under it, and the other items give way to the page's ‹ and •••
+ * ([givingWayToPageBar]).
  */
 @Composable
 internal fun ListToolbar(
@@ -178,12 +182,15 @@ internal fun ListToolbar(
     val title = localized("native.deliveries")
     Box(modifier.fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
         // The mark stands on its own, not on a control's glass.
-        PeekMark(30.dp, Modifier.align(Alignment.CenterStart).offset(x = start + if (sideBySide) 17.dp else 27.dp).clearAndSetSemantics {})
+        PeekMark(
+            30.dp,
+            Modifier.align(Alignment.CenterStart).offset(x = start + if (sideBySide) 17.dp else 27.dp).givingWayToPageBar(state.zoom).clearAndSetSemantics {},
+        )
         // Centred on the bar, clear of its items on either side.
         val clear = if (sideBySide) 56.dp else 128.dp
         Text(
             title,
-            Modifier.align(Alignment.Center).padding(start = start + clear, end = end + clear).semantics { heading() },
+            Modifier.align(Alignment.Center).padding(start = start + clear, end = end + clear).fadingUnderZoom(state.zoom).semantics { heading() },
             color = PeekTheme.colors.label,
             style = PeekTheme.type.headline,
             maxLines = 1,
@@ -192,14 +199,14 @@ internal fun ListToolbar(
         if (!sideBySide) {
             GlassSurface(
                 CapsuleShape,
-                Modifier.align(Alignment.CenterStart).offset(x = start + ADD_X).size(ADD_GLASS_WIDTH, ROW_HEIGHT),
+                Modifier.align(Alignment.CenterStart).offset(x = start + ADD_X).givingWayToPageBar(state.zoom).size(ADD_GLASS_WIDTH, ROW_HEIGHT),
                 backdrop,
             ) {
                 AddButton(state, Modifier.align(Alignment.Center))
             }
             GlassSurface(
                 CapsuleShape,
-                Modifier.align(Alignment.CenterEnd).offset(x = -(end + ACCOUNT_MARGIN)).size(ACCOUNT_GLASS_WIDTH, ROW_HEIGHT),
+                Modifier.align(Alignment.CenterEnd).offset(x = -(end + ACCOUNT_MARGIN)).givingWayToPageBar(state.zoom).size(ACCOUNT_GLASS_WIDTH, ROW_HEIGHT),
                 backdrop,
             ) {
                 AccountButton(state, Modifier.align(Alignment.Center))
@@ -210,7 +217,8 @@ internal fun ListToolbar(
 
 /**
  * Beside a parcel, adding one and the account on one glass at the window's trailing edge, over the parcel's page, as
- * the iPad's detail toolbar has them. The parcel's own menu joins them once its page is ported.
+ * the iPad's detail toolbar has them, and the parcel's ••• menu after them while a parcel of the deliveries shows
+ * (ParcelDetailView's `.topBarTrailing` item): none for the sample, nor while no parcel shows.
  */
 @Composable
 internal fun PageToolbar(state: DeliveriesState, backdrop: MaterialBackdrop?) {
@@ -219,14 +227,23 @@ internal fun PageToolbar(state: DeliveriesState, backdrop: MaterialBackdrop?) {
     } else {
         0.dp
     }
+    val parcels by state.source.parcels.collectAsState()
+    val shown = state.navigator.navigation.shown
+    val parcel = shown?.takeIf { state.sample(it) == null }?.let { state.pageParcel(it, parcels) }
     Box(Modifier.fillMaxWidth().padding(top = barRowTop()).height(ROW_HEIGHT)) {
         GlassSurface(
             CapsuleShape,
-            Modifier.align(Alignment.CenterEnd).offset(x = -(end + PAGE_TOOLBAR_MARGIN)).size(PAGE_TOOLBAR_WIDTH, ROW_HEIGHT),
+            Modifier
+                .align(Alignment.CenterEnd)
+                .offset(x = -(end + PAGE_TOOLBAR_MARGIN))
+                .size(if (parcel != null) PAGE_TOOLBAR_MENU_WIDTH else PAGE_TOOLBAR_WIDTH, ROW_HEIGHT),
             backdrop,
         ) {
             AddButton(state, Modifier.align(Alignment.CenterStart).offset(x = PAGE_ADD_CENTRE - BUTTON_SIDE / 2))
             AccountButton(state, Modifier.align(Alignment.CenterStart).offset(x = PAGE_ACCOUNT_CENTRE - BUTTON_SIDE / 2))
+            if (parcel != null && shown != null) {
+                PageMenuButton(state, parcel, Modifier.align(Alignment.CenterStart).offset(x = PAGE_MENU_CENTRE - BUTTON_SIDE / 2))
+            }
         }
     }
 }
@@ -634,6 +651,38 @@ private fun FilterChip(title: String, id: String, action: () -> Unit) {
 }
 
 /**
+ * `ContentUnavailableView(_:systemImage:description:)`: the symbol large and secondary, the title in bold under it and
+ * what it means under that, centred.
+ */
+@Composable
+internal fun ContentUnavailable(symbol: String, title: String, description: String, modifier: Modifier = Modifier) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        PeekSymbol(
+            symbol,
+            Modifier.padding(top = 16.dp, bottom = 15.dp).clearAndSetSemantics {},
+            font = type.fixed(NO_RESULTS_SYMBOL, FontWeight.Normal),
+            tint = colors.secondaryLabel,
+        )
+        Text(
+            title,
+            Modifier.widthIn(max = NO_RESULTS_TEXT_WIDTH).semantics { heading() },
+            color = colors.label,
+            style = type.style(IosTextStyle.Title2, FontWeight.Bold),
+            textAlign = TextAlign.Center,
+        )
+        Text(
+            description,
+            Modifier.padding(top = 2.dp).widthIn(max = NO_RESULTS_TEXT_WIDTH),
+            color = colors.secondaryLabel,
+            style = type.title3,
+            textAlign = TextAlign.Center,
+        )
+    }
+}
+
+/**
  * `ContentUnavailableView` for a search or filters nothing matches (A-ST09): the glass large and secondary, "No
  * matching parcels" in bold, a word on what to try, and Clear filters, which clears them all, the query too.
  */
@@ -645,26 +694,7 @@ internal fun NoResults(state: DeliveriesState) {
         Modifier.fillMaxWidth().padding(vertical = 32.dp).testTag(NO_RESULTS),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        PeekSymbol(
-            "magnifyingglass",
-            Modifier.padding(top = 16.dp, bottom = 15.dp).clearAndSetSemantics {},
-            font = type.fixed(NO_RESULTS_SYMBOL, FontWeight.Normal),
-            tint = colors.secondaryLabel,
-        )
-        Text(
-            localized("view.noResultsTitle"),
-            Modifier.widthIn(max = NO_RESULTS_TEXT_WIDTH).semantics { heading() },
-            color = colors.label,
-            style = type.style(IosTextStyle.Title2, FontWeight.Bold),
-            textAlign = TextAlign.Center,
-        )
-        Text(
-            localized("view.noResultsDescription"),
-            Modifier.padding(top = 2.dp).widthIn(max = NO_RESULTS_TEXT_WIDTH),
-            color = colors.secondaryLabel,
-            style = type.title3,
-            textAlign = TextAlign.Center,
-        )
+        ContentUnavailable("magnifyingglass", localized("view.noResultsTitle"), localized("view.noResultsDescription"))
         Box(
             Modifier
                 .padding(top = 18.dp)
@@ -1013,6 +1043,8 @@ private val ADD_GLASS_WIDTH = 47.dp
 private val ACCOUNT_GLASS_WIDTH = 53.dp
 private val ACCOUNT_MARGIN = 19.5.dp
 private val PAGE_TOOLBAR_WIDTH = 118.dp
+private val PAGE_TOOLBAR_MENU_WIDTH = 170.dp
+private val PAGE_MENU_CENTRE = 147.dp
 private val PAGE_TOOLBAR_MARGIN = 9.5.dp
 private val PAGE_ADD_CENTRE = 28.dp
 private val PAGE_ACCOUNT_CENTRE = 90.dp

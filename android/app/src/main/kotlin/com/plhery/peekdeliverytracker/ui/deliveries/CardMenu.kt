@@ -65,6 +65,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.role
@@ -419,36 +420,61 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
                     }
                     .padding(vertical = MENU_PADDING),
             ) {
-                items.forEachIndexed { index, group ->
-                    if (index > 0) MenuSeparator()
-                    for (item in group) {
-                        MenuItemRow(item, shortcuts, choose, if (item == items.first().first()) Modifier.accessibilityFocus(first) else Modifier)
-                    }
-                }
+                MenuItems(items, shortcuts, busy = false, choose, first)
             }
         }
     }
 }
 
+/**
+ * `ParcelMenuButtons`: a parcel's items in their groups, a line between them, the keys that press them shown where
+ * `shortcuts`, and Delete waiting while `busy` saves another change. TalkBack starts at the first, which `first` marks.
+ */
 @Composable
-private fun MenuItemRow(item: ParcelMenuItem, shortcuts: Boolean, choose: (ParcelMenuItem) -> Unit, modifier: Modifier = Modifier) {
+internal fun MenuItems(
+    items: List<List<ParcelMenuItem>>,
+    shortcuts: Boolean,
+    busy: Boolean,
+    choose: (ParcelMenuItem) -> Unit,
+    first: AccessibilityFocus,
+) {
+    items.forEachIndexed { index, group ->
+        if (index > 0) MenuSeparator()
+        for (item in group) {
+            MenuItemRow(
+                item, shortcuts, choose,
+                enabled = !(busy && item == ParcelMenuItem.Delete),
+                modifier = if (item == items.first().first()) Modifier.accessibilityFocus(first) else Modifier,
+            )
+        }
+    }
+}
+
+@Composable
+private fun MenuItemRow(
+    item: ParcelMenuItem,
+    shortcuts: Boolean,
+    choose: (ParcelMenuItem) -> Unit,
+    enabled: Boolean,
+    modifier: Modifier = Modifier,
+) {
     val localizer = LocalLocalizer.current
     val type = PeekTheme.type
     val colors = PeekTheme.colors
     val title = localizer.text(item.titleKey)
     val key = if (shortcuts) item.shortcutLabel else null
-    // The menu's words and symbols are vibrant on its glass: the label a shade lighter.
-    val ink = colors.label.copy(alpha = 0.8f)
+    // The menu's words and symbols are vibrant on its glass: the label a shade lighter, a disabled item's fainter.
+    val ink = if (enabled) colors.label.copy(alpha = 0.8f) else colors.tertiaryLabel
     Row(
         modifier
             .fillMaxWidth()
             .heightIn(min = ROW_HEIGHT)
             .testTag(menuItemTag(item))
-            .clickable(interactionSource = null, indication = PlainPress) { choose(item) }
+            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled) { choose(item) }
             .clearAndSetSemantics {
                 contentDescription = listOfNotNull(title, key).joinToString(", ")
                 role = Role.Button
-                onClick { choose(item); true }
+                if (enabled) onClick { choose(item); true } else disabled()
             }
             .padding(start = 26.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -497,7 +523,7 @@ internal fun ParcelMenuItem.Companion.forShortcut(event: KeyEvent, items: List<P
 
 /** While the menu shows its keys, they press its items, as a menu's key equivalents do. */
 @Composable
-private fun MenuKeys(shortcuts: Boolean, items: List<List<ParcelMenuItem>>, choose: (ParcelMenuItem) -> Unit) {
+internal fun MenuKeys(shortcuts: Boolean, items: List<List<ParcelMenuItem>>, choose: (ParcelMenuItem) -> Unit) {
     if (!shortcuts) return
     val view = LocalView.current
     val current by rememberUpdatedState(choose)
@@ -514,7 +540,7 @@ private fun MenuKeys(shortcuts: Boolean, items: List<List<ParcelMenuItem>>, choo
 
 /** A hardware keyboard is connected and in use (`ConnectedKeyboard.shared.isConnected`). */
 @Composable
-private fun keyboardConnected(): Boolean {
+internal fun keyboardConnected(): Boolean {
     val configuration = LocalConfiguration.current
     return configuration.keyboard != Configuration.KEYBOARD_NOKEYS &&
         configuration.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO
@@ -634,10 +660,10 @@ private fun SheetButton(title: String, bold: Boolean, tag: String, height: Dp = 
 }
 
 private val DIM = Color.Black.copy(alpha = 0.2f)
-private val MENU_WIDTH = 250.dp
-private val MENU_RADIUS = 24.dp
-private val MENU_PADDING = 10.dp
-private val MENU_MARGIN = 21.dp
+internal val MENU_WIDTH = 250.dp
+internal val MENU_RADIUS = 24.dp
+internal val MENU_PADDING = 10.dp
+internal val MENU_MARGIN = 21.dp
 private val MENU_GAP = 21.dp
 private val PREVIEW_SIDE = 22.dp
 private val ROW_HEIGHT = 42.dp
@@ -645,7 +671,7 @@ private val SEPARATOR_BLOCK = 21.dp
 private val SHEET_RADIUS = 14.dp
 private val ALERT_RADIUS = 14.dp
 private val ALERT_WIDTH = 270.dp
-private val MENU_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 24.dp, y = 8.dp)
+internal val MENU_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 24.dp, y = 8.dp)
 private val PREVIEW_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.1f), radius = 16.dp, y = 6.dp)
 
 const val CARD_MENU = "deliveries.cardMenu"

@@ -27,10 +27,8 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
@@ -44,7 +42,6 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.snapshots.Snapshot
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -126,7 +123,6 @@ fun DeliveriesTab(
     source: DeliveriesSource,
     modifier: Modifier = Modifier,
     inbox: DeliveriesInbox? = null,
-    page: @Composable (parcelId: UUID) -> Unit,
 ) {
     val launch = source.launch
     val navigator = rememberSaveable(launch, saver = DeliveriesNavigator.saver(launch)) { DeliveriesNavigator() }
@@ -134,11 +130,12 @@ fun DeliveriesTab(
     val listState = rememberLazyListState()
     val archiveOpen = rememberForLaunch(launch, false)
     val reviewDue = rememberForLaunch(launch, false)
+    val sampleShown = rememberForLaunch(launch, false)
     val views = rememberListViewStates(launch)
     val now = LocalNow.current
     val scope = rememberCoroutineScope()
     val state = remember(source, navigator, listState) {
-        DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, views, now, scope)
+        DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, sampleShown, views, now, scope)
     }
     state.localizer = LocalLocalizer.current
     // What the paper and the flights are drawn with, as the list was last drawn.
@@ -224,6 +221,8 @@ fun DeliveriesTab(
                         onBack = { navigator.pop(navigator.navigation.path.dropLast(1)) },
                         root = list,
                         page = shown,
+                        // The bar of the page drawn: the one on top, or the one going back into its card.
+                        bar = { (navigator.navigation.chosen ?: state.zoom.covered as UUID?)?.let { ParcelPageBar(state, it) } },
                     )
                 }
             }
@@ -249,12 +248,14 @@ fun DeliveriesTab(
                             DeliveryList(state)
                         }
                         is DeliveriesEntry.ParcelPage -> NavEntry<DeliveriesEntry>(key, metadata = mapOf(PANE to PAGE_PANE)) {
-                            DemoPage(state) { page(key.id) }
+                            DemoPage(state) { ParcelPage(state, key.id) }
                         }
                     }
                 },
             )
         }
+        // The page's ••• menu, over the whole window where the tab shell draws it.
+        PageMenuHost(state)
         // The paper of a delivery, over the list and the parcel beside it, as the iPhone's is over the whole screen.
         DeliveredPaper(state)
     }
@@ -312,7 +313,7 @@ private fun Reviewing(state: DeliveriesState, resumed: Boolean, watching: Boolea
     LaunchedEffect(prompt) {
         snapshotFlow { failure }.drop(1).collect { shown -> if (shown) prompt.noteBadMoment(now()) }
     }
-    val covered = state.showingFilters || state.menu != null || state.deleting != null || state.actionError != null
+    val covered = state.showingFilters || state.modal
     val ready = watching && !covered && state.hold.isEmpty && state.flights.isEmpty() && state.toast == null && undo == null &&
         !refreshing && !state.showingSearch && settled
     val activity = LocalActivity.current
@@ -536,18 +537,10 @@ private fun SideBySideColumns(
     }
 }
 
-/** A parcel's page until it is ported: the parcel's name, in the middle of the page, clear of the bars. */
-@Composable
-fun ParcelPagePlaceholder(label: String?) {
-    val colors = PeekTheme.colors
-    Box(Modifier.fillMaxSize().background(colors.background).testTag(PARCEL_PAGE), contentAlignment = Alignment.Center) {
-        BasicText(label.orEmpty(), Modifier.safeDrawingPadding().padding(16.dp), style = PeekTheme.type.headline.copy(color = colors.label))
-    }
-}
-
 /**
- * A parcel's page over the list in the demo, under the demo's bar as the list is (`safeAreaInset(edge: .top)`): the
- * page keeps clear of the bar as it would of the window's. Beside the list the bar stays over the list alone.
+ * A parcel's page over the list in the demo, under the demo's bar as the list is (`safeAreaInset(edge: .top)`), which
+ * stands under the page's own bar, on the cream from the window's top: the page keeps clear of the bar as it would of
+ * the window's. Beside the list the bar stays over the list alone.
  */
 @Composable
 private fun DemoPage(state: DeliveriesState, content: @Composable () -> Unit) {
@@ -560,12 +553,14 @@ private fun DemoPage(state: DeliveriesState, content: @Composable () -> Unit) {
             val direction = LocalLayoutDirection.current
             DemoModeBar(
                 onExit = source::showWelcome,
-                modifier = Modifier.background(PeekTheme.colors.cream).padding(top = padding.calculateTopPadding()),
+                modifier = Modifier.background(PeekTheme.colors.cream).padding(top = barRowTop() + BAR_HEIGHT),
                 sides = PaddingValues(start = padding.calculateStartPadding(direction), end = padding.calculateEndPadding(direction)),
             )
         }
         val topTaken = if (bar) Modifier.consumeWindowInsets(WindowInsets.safeDrawing.only(WindowInsetsSides.Top)) else Modifier
-        Box(Modifier.weight(1f).fillMaxWidth().then(topTaken)) { content() }
+        Box(Modifier.weight(1f).fillMaxWidth().then(topTaken)) {
+            CompositionLocalProvider(LocalPageTop provides if (bar) 0.dp else null) { content() }
+        }
     }
 }
 

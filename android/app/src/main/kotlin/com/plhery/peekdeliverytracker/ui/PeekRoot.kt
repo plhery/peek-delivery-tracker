@@ -28,7 +28,6 @@ import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
-import com.plhery.peekdeliverytracker.ui.deliveries.ParcelPagePlaceholder
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
@@ -47,10 +46,9 @@ import kotlinx.coroutines.withContext
 @Composable
 fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     val state by container.session.stateFlow.collectAsState()
-    val parcels by container.parcels.parcelsFlow.collectAsState()
     val source = remember(container) { ContainerDeliveries(container) }
     PeekRoot(state, container.localizer, onView = { container.analytics.view(it) }, inbox = inbox) {
-        DeliveriesTab(source, inbox = inbox) { id -> ParcelPagePlaceholder(parcels.firstOrNull { it.id == id }?.label) }
+        DeliveriesTab(source, inbox = inbox)
     }
 }
 

@@ -32,6 +32,7 @@ import com.plhery.peekdeliverytracker.core.DeliveriesNavigation
 import com.plhery.peekdeliverytracker.core.DeliveryCardKind
 import com.plhery.peekdeliverytracker.core.DeliveryCardPlace
 import com.plhery.peekdeliverytracker.core.DeliveryListLayout
+import com.plhery.peekdeliverytracker.core.FirstOpenJourney
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.ParcelSectionKind
@@ -274,6 +275,7 @@ internal class DeliveriesState(
     val listState: LazyListState,
     archiveOpenState: MutableState<Boolean>,
     reviewDueState: MutableState<Boolean>,
+    sampleShownState: MutableState<Boolean>,
     private val views: ListViewStates,
     private val now: () -> Instant,
     val scope: CoroutineScope,
@@ -666,8 +668,35 @@ internal class DeliveriesState(
     /** Add with what the clipboard holds (`onAdd(.paste(Clipboard.string))`): Add isn't ported yet. */
     fun pasteFirst() = Unit
 
-    /** Opens the sample parcel Pip holds (`FirstOpenJourney.delivered`): its page isn't ported yet. */
-    fun openSample() = Unit
+    /**
+     * Whether the sample parcel Pip holds has been opened (`sample`), kept with the window: its page shows it until the
+     * app is closed, as the iPhone keeps it once made.
+     */
+    private var sampleShown: Boolean by sampleShownState
+    private var sampleParcel: Parcel? = null
+
+    /** Opens the sample parcel Pip holds out of the empty deliveries (`FirstOpenJourney.delivered`). */
+    fun openSample() {
+        sampleShown = true
+        navigator.open(FirstOpenJourney.parcelId)
+    }
+
+    /**
+     * The sample parcel, for the page with `parcelId` (ParcelListView's `page(_:)`): made up as it was first asked for,
+     * its scans in the hours before then; none for any other page, or before it was opened.
+     */
+    fun sample(parcelId: UUID): Parcel? {
+        if (parcelId != FirstOpenJourney.parcelId || !sampleShown) return null
+        val localizer = localizer ?: return null
+        return sampleParcel ?: FirstOpenJourney.delivered(localizer, now()).also { sampleParcel = it }
+    }
+
+    /**
+     * The parcel the page with `parcelId` shows (ParcelDetailView's `parcel`): the sample, else the parcel in `parcels`
+     * with that id, or that had it before its carrier changed (`originalPackageID`).
+     */
+    fun pageParcel(parcelId: UUID, parcels: List<Parcel>): Parcel? =
+        sample(parcelId) ?: parcels.firstOrNull { it.id == parcelId || it.carrierData?.originalPackageId == parcelId }
 
     /** The app's words, in its language: the composition hands them in. */
     var localizer: Localizer? = null
@@ -718,8 +747,15 @@ internal class DeliveriesState(
     /** The parcel its menu asks about before deleting it (`prompts.deleting`). */
     var deleting: Parcel? by mutableStateOf(null)
 
+    /** The parcel page's ••• menu, open over the window. */
+    var pageMenu: PageMenuRequest? by mutableStateOf(null)
+
+    /** A change the parcel's page asked for is being saved (`working`): Delete waits, and no other starts. */
+    var pageWorking: Boolean by mutableStateOf(false)
+        private set
+
     /** A menu, the question it asks or an alert shows over the list, and TalkBack reaches nothing else. */
-    val modal: Boolean get() = menu != null || deleting != null || actionError != null
+    val modal: Boolean get() = menu != null || pageMenu != null || deleting != null || actionError != null
 
     /** Where TalkBack goes back to once the filters have closed: their button. */
     val filtersButton = AccessibilityFocus()
@@ -819,30 +855,95 @@ internal class DeliveriesState(
         true
     }
 
-    /** Brings a parcel back from the archive: the card's Restore, and the Undo of its toast. */
-    fun restore(parcel: Parcel) {
+    /**
+     * Brings a parcel back from the archive, in the app's scope: the card's Restore, the page's, and the Undo of its
+     * toast. Whether it came back.
+     */
+    fun restore(parcel: Parcel): Deferred<Boolean> = source.scope.async {
+        try {
+            source.restore(parcel)
+            true
+        } catch (error: CancellationException) {
+            throw error
+        } catch (error: Exception) {
+            actionError = source.errorMessage(error)
+            false
+        }
+    }
+
+    /**
+     * Deletes the parcel a menu asked about, its card's or its page's, and leaves its page ([leave]). Asked from the
+     * page, it waits for no other change the page saves, as the page's own `run` doesn't start while one does.
+     */
+    fun delete(parcel: Parcel) {
+        val cards = rows
+        val onPage = pageShows(parcel)
+        if (onPage && pageWorking) return
+        if (onPage) pageWorking = true
         source.scope.launch {
             try {
-                source.restore(parcel)
+                source.permanentlyDelete(parcel)
+                leave(parcel, cards)
             } catch (error: CancellationException) {
                 throw error
             } catch (error: Exception) {
                 actionError = source.errorMessage(error)
+            } finally {
+                if (onPage) pageWorking = false
             }
         }
     }
 
-    /** Deletes the parcel its menu asked about. Beside the list, a card that was shown gives way to the next. */
-    fun delete(parcel: Parcel) {
+    /** The page open, over the list or beside it, shows `parcel`, by its id or the one it had before. */
+    private fun pageShows(parcel: Parcel): Boolean {
+        val page = navigator.navigation.shown ?: return false
+        return page == parcel.id || parcel.carrierData?.originalPackageId == page
+    }
+
+    /**
+     * Leaves the page showing `parcel`, if one does (ParcelDetailView's `leave()`): over the list it goes back into its
+     * card, as `dismiss()` pops it; beside the list the next of `cards` shows in its place, or the one before at the
+     * end, as its `release` does ([DeliveriesNavigation.leave]).
+     */
+    fun leave(parcel: Parcel, cards: List<UUID>) {
+        if (!pageShows(parcel)) return
+        val navigation = navigator.navigation
+        when (arrangement) {
+            DeliveriesArrangement.Stacked -> navigator.pop(navigation.path.dropLast(1))
+            DeliveriesArrangement.SideBySide -> navigation.shown?.let { navigator.leave(it, cards) }
+        }
+    }
+
+    /**
+     * What the page's ••• menu asked of its parcel (ParcelDetailView's `chose(_:on:)`). The page is open already.
+     * Naming the parcel and changing its carrier open what comes with the page's sections, and do nothing yet; the
+     * page shares a parcel from its own button. Copying puts the first number on the clipboard. Archiving and
+     * restoring save the change, then leave the page; deleting asks first. Only one change is saved at a time.
+     */
+    fun choseOnPage(item: ParcelMenuItem, parcel: Parcel) {
+        when (item) {
+            ParcelMenuItem.Open, ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
+            ParcelMenuItem.CopyTrackingNumber -> {
+                val entry = parcel.trackingNumbers.firstOrNull() ?: return
+                source.action("parcel-copy-tracking")
+                copy(TrackingNumberCopy.text(entry.number, entry.carrier))
+            }
+            ParcelMenuItem.Archive -> runOnPage(parcel) { archive(parcel).await() }
+            ParcelMenuItem.Restore -> runOnPage(parcel) { restore(parcel).await() }
+            ParcelMenuItem.Delete -> deleting = parcel
+        }
+    }
+
+    /** The page's `run`: saves one change at a time, and leaves the page once it is saved. */
+    private fun runOnPage(parcel: Parcel, change: suspend () -> Boolean) {
+        if (pageWorking) return
+        pageWorking = true
         val cards = rows
         source.scope.launch {
             try {
-                source.permanentlyDelete(parcel)
-                navigator.leave(parcel.id, cards)
-            } catch (error: CancellationException) {
-                throw error
-            } catch (error: Exception) {
-                actionError = source.errorMessage(error)
+                if (change()) leave(parcel, cards)
+            } finally {
+                pageWorking = false
             }
         }
     }

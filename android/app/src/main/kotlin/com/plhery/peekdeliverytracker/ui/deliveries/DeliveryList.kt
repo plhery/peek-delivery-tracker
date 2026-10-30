@@ -71,7 +71,6 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
-import com.plhery.peekdeliverytracker.ui.zoom.fadingUnderZoom
 import com.plhery.peekdeliverytracker.ui.zoom.recedingUnderZoom
 import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
 import java.util.UUID
@@ -194,13 +193,7 @@ internal fun DeliveryList(state: DeliveriesState) {
                     if (demo) {
                         Box(Modifier.fillMaxWidth().height(barBottom).background(colors.cream))
                     } else {
-                        val ground = colors.background
-                        Box(
-                            Modifier
-                                .fillMaxWidth()
-                                .height(barBottom + SCROLL_EDGE)
-                                .background(Brush.verticalGradient(0f to ground, 0.7f to ground.copy(alpha = 0.85f), 1f to ground.copy(alpha = 0f))),
-                        )
+                        SoftTopEdge(barBottom)
                     }
                 }.map { it.measure(loose) }
                 layout(constraints.maxWidth, constraints.maxHeight) {
@@ -209,7 +202,7 @@ internal fun DeliveryList(state: DeliveriesState) {
                     bar.forEach { it.place(0, barBottom.roundToPx()) }
                 }
             }
-            ListToolbar(state, sideBySide, rowTop, start, end, backdrop, Modifier.fadingUnderZoom(state.zoom))
+            ListToolbar(state, sideBySide, rowTop, start, end, backdrop)
             if (firstLoad) FirstLoad(Modifier.align(Alignment.Center))
             BottomControls(
                 state, backdrop,
@@ -277,6 +270,21 @@ private fun Announcements(state: DeliveriesState) {
 }
 
 private enum class ChromeSlot { DemoBar, List, Band }
+
+/**
+ * `softTopEdge()`, iOS 26's soft scroll edge: the ground, from the top down to `bottom` and fading out past it, over
+ * what scrolls under a bar, which keeps the bar's items clear of it.
+ */
+@Composable
+internal fun SoftTopEdge(bottom: Dp, modifier: Modifier = Modifier) {
+    val ground = PeekTheme.colors.background
+    Box(
+        modifier
+            .fillMaxWidth()
+            .height(bottom + SCROLL_EDGE)
+            .background(Brush.verticalGradient(0f to ground, 0.7f to ground.copy(alpha = 0.85f), 1f to ground.copy(alpha = 0f))),
+    )
+}
 
 /**
  * The list's scrolling column, `padding` clear of the bars at its top and bottom and `start` and `end` of the sides,
@@ -735,7 +743,7 @@ private fun FirstLoad(modifier: Modifier) {
 }
 
 /** The bar's row: 44 tall, in a bar 54 tall. */
-private val BAR_HEIGHT = 54.dp
+internal val BAR_HEIGHT = 54.dp
 internal val DEMO_BAR_HEIGHT = 48.dp
 private val CONTENT_TOP = 8.dp
 private val BOTTOM_SPACING = 8.dp

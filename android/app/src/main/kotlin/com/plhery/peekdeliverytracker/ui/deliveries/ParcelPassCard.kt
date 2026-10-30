@@ -99,8 +99,7 @@ fun ParcelPassCard(
     val past = !arrived && (stage?.isFinal == true || parcel.isArchived)
     // Customs and a pickup say all they need in the status line; after a missed delivery or a problem, or while customs
     // asks the reader for something, the carrier waits on the reader.
-    val actionNeeded = parcel.currentEvent?.recipientAction != null ||
-        stage == TrackingStage.FailedAttempt || stage == TrackingStage.Exception
+    val actionNeeded = parcel.currentEvent?.waitsOnReader() == true
     val carrierIssue = !actionNeeded && (stage == TrackingStage.Customs || stage == TrackingStage.ReadyForPickup)
     val flag = if (notice != null && !carrierIssue) notice else if (parcel.updateFailed) localizer.text("attention.sync_error") else null
     val flagSymbol = when {

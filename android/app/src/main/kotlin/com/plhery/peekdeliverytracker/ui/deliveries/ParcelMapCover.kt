@@ -7,11 +7,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.Stable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -24,15 +25,17 @@ import com.plhery.peekdeliverytracker.ui.map.rememberParcelRoute
 import com.plhery.peekdeliverytracker.ui.map.rememberWorldAtlas
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
+import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowLevelHinge
 import com.plhery.peekdeliverytracker.ui.tabs.WindowHinge
+import com.plhery.peekdeliverytracker.ui.tabs.WindowLevelHinge
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
 import java.util.UUID
 import kotlinx.coroutines.launch
 
 /** The map of the page with `pageId`, open over the window (`showingMap`): it shows that page's parcel as it is now. */
-@Stable
-internal class MapCoverRequest(val pageId: UUID)
+@Immutable
+internal data class MapCoverRequest(val pageId: UUID)
 
 /**
  * The page's map (B-S19), over the whole window, its tab bar and the system's bars too, where the tab shell is there to
@@ -42,9 +45,10 @@ internal class MapCoverRequest(val pageId: UUID)
 internal fun ParcelMapHost(state: DeliveriesState) {
     val request = state.mapCover
     val host = LocalTabOverlay.current
-    // The shell draws its layers outside the tab, where the hinge isn't known: it is read here.
+    // The shell draws its layers outside the tab, where the hinges aren't known: they are read here.
     val hinge = LocalWindowHinge.current
-    val content: (@Composable () -> Unit)? = request?.let { { ParcelMapCover(state, it, hinge) } }
+    val levelHinge = LocalWindowLevelHinge.current
+    val content: (@Composable () -> Unit)? = request?.let { { ParcelMapCover(state, it, hinge, levelHinge) } }
     if (host == null) {
         content?.invoke()
         return
@@ -54,11 +58,12 @@ internal fun ParcelMapHost(state: DeliveriesState) {
 
 /**
  * `.fullScreenCover { ParcelMapScreen(…) }`: the map comes up from the window's foot over 0.5 s and goes back down as
- * its button or the back gesture closes it, and goes at once with its page or its parcel. TalkBack reaches only the
- * map, from the map itself, and goes back to the globe as it closes.
+ * its button or the back gesture closes it, and goes at once with its page or its parcel. A window made again (a
+ * rotation, a fold) finds it up, as it was. TalkBack reaches only the map, from the map itself, and goes back to the
+ * globe as it closes.
  */
 @Composable
-private fun ParcelMapCover(state: DeliveriesState, request: MapCoverRequest, hinge: WindowHinge?) {
+private fun ParcelMapCover(state: DeliveriesState, request: MapCoverRequest, hinge: WindowHinge?, levelHinge: WindowLevelHinge?) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val live = state.liveMenuParcel(request.pageId)
@@ -67,13 +72,16 @@ private fun ParcelMapCover(state: DeliveriesState, request: MapCoverRequest, hin
     LaunchedEffect(gone) { if (gone) state.mapCover = null }
     val atlas = rememberWorldAtlas()
     val identity = parcel?.let { shownCarrierIdentity(it, localizer, language) }
-    val shown = remember { Animatable(0f) }
+    // Once up, it doesn't come up again in the window made again.
+    var presented by rememberSaveable { mutableStateOf(false) }
+    val shown = remember { Animatable(if (presented) 1f else 0f) }
     var closing by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     val mapFocus = remember { AccessibilityFocus() }
     LaunchedEffect(Unit) {
         mapFocus.request()
         shown.animateTo(1f, Motion.smooth(PRESENT_DURATION))
+        presented = true
     }
     val close = {
         if (!closing) {
@@ -96,7 +104,7 @@ private fun ParcelMapCover(state: DeliveriesState, request: MapCoverRequest, hin
     ) {
         ParcelMapScreen(
             atlas = atlas, route = rememberParcelRoute(parcel, atlas, language), stage = parcel.currentStage,
-            accent = identity.ink, hinge = hinge, onClose = { close() }, mapFocus = mapFocus,
+            accent = identity.ink, hinge = hinge, levelHinge = levelHinge, onClose = { close() }, mapFocus = mapFocus,
         )
     }
 }

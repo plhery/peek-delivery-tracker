@@ -121,6 +121,16 @@ data class WindowHinge(val start: Int, val end: Int)
 /** The hinge splitting the tab's window, null where none does. */
 val LocalWindowHinge = compositionLocalOf<WindowHinge?> { null }
 
+/**
+ * A level hinge that splits the window, as a foldable half open on a table has: where it starts and ends, in pixels
+ * from the window's top.
+ */
+@Immutable
+data class WindowLevelHinge(val top: Int, val bottom: Int)
+
+/** The level hinge splitting the tab's window, null where none does. */
+val LocalWindowLevelHinge = compositionLocalOf<WindowLevelHinge?> { null }
+
 /** The reselection of the tab being drawn, or of what its stack shows at its root. */
 val LocalTabReselection = staticCompositionLocalOf { TabReselection() }
 
@@ -241,7 +251,7 @@ fun TabShell(
         val bottomGap = if (buttons > 0.dp) buttons + BUTTONS_GAP else GESTURE_GAP
         val topGap = safeTop + STATUS_GAP
         val footprint = if (top) PaddingValues(top = topGap + TOP_BAR_HEIGHT) else PaddingValues(bottom = bottomGap + BOTTOM_BAR_HEIGHT)
-        val windowHinge = windowHinge(constraints.maxWidth)
+        val (windowHinge, levelHinge) = windowHinges(constraints.maxWidth, constraints.maxHeight)
         val hinge = windowHinge?.start
         // Under what a tab draws over the window, which is modal, as the iPhone's menus, alerts and sheets are.
         val hidden = if (overlay.covered) Modifier.clearAndSetSemantics {} else Modifier
@@ -250,6 +260,7 @@ fun TabShell(
                 LocalTabBarPadding provides footprint,
                 LocalTabReselection provides reselections[selection],
                 LocalWindowHinge provides windowHinge,
+                LocalWindowLevelHinge provides levelHinge,
                 LocalTabOverlay provides overlay,
                 LocalTabBarVisibility provides visibility,
             ) {
@@ -324,35 +335,44 @@ private fun TabKeys(choose: (Int) -> Unit) {
 }
 
 /**
- * Where a hinge starts and ends, in pixels from the window's left, when it stands upright and splits the window: a
- * foldable in book posture or a dual screen spanned. The bars keep to the half before it rather than straddling the
- * fold. The app lays out left to right, so that half is the left one.
+ * Where the hinges that split the window start and end, in pixels: an upright one from the window's left (a foldable
+ * in book posture, a dual screen spanned) and a level one from its top (a foldable half open on a table). The bars keep
+ * to the half before an upright one rather than straddling the fold. The app lays out left to right, so that half is
+ * the left one. The page's map keeps its route and its summary on either side of either.
  *
- * The last hinge reported is kept with the window, for a window of the same width, so the first frame after a
- * recreation (a change of theme, of text size, of language) already keeps clear of it rather than jumping there once
- * the hinge is reported again.
+ * The last hinges reported are kept with the window, each for a window of the same size across it, so the first frame
+ * after a recreation (a change of theme, of text size, of language) already keeps clear of them rather than jumping
+ * there once they are reported again.
  */
 @Composable
-private fun windowHinge(windowWidth: Int): WindowHinge? {
+private fun windowHinges(windowWidth: Int, windowHeight: Int): Pair<WindowHinge?, WindowLevelHinge?> {
     val activity = LocalContext.current.activity()
-    var reported by rememberSaveable(stateSaver = HingeSaver) { mutableStateOf<Hinge?>(null) }
+    var upright by rememberSaveable(stateSaver = HingeSaver) { mutableStateOf<Hinge?>(null) }
+    var level by rememberSaveable(stateSaver = HingeSaver) { mutableStateOf<Hinge?>(null) }
     val width by rememberUpdatedState(windowWidth)
+    val height by rememberUpdatedState(windowHeight)
     LaunchedEffect(activity) {
         if (activity == null) return@LaunchedEffect
         WindowInfoTracker.getOrCreate(activity).windowLayoutInfo(activity).collect { layout ->
-            val fold = layout.displayFeatures.filterIsInstance<FoldingFeature>()
-                .firstOrNull { it.isSeparating && it.orientation == FoldingFeature.Orientation.VERTICAL }
-            reported = fold?.let { Hinge(it.bounds.left, it.bounds.right, width) }
+            val folds = layout.displayFeatures.filterIsInstance<FoldingFeature>().filter { it.isSeparating }
+            upright = folds.firstOrNull { it.orientation == FoldingFeature.Orientation.VERTICAL }
+                ?.let { Hinge(it.bounds.left, it.bounds.right, width) }
+            level = folds.firstOrNull { it.orientation == FoldingFeature.Orientation.HORIZONTAL }
+                ?.let { Hinge(it.bounds.top, it.bounds.bottom, height) }
         }
     }
-    return reported?.takeIf { it.windowWidth == windowWidth }?.let { WindowHinge(it.start, it.end) }
+    return upright?.takeIf { it.window == windowWidth }?.let { WindowHinge(it.start, it.end) } to
+        level?.takeIf { it.window == windowHeight }?.let { WindowLevelHinge(it.start, it.end) }
 }
 
-/** A hinge's start and end from the window's left, and the width of the window it splits, in pixels. */
-private data class Hinge(val start: Int, val end: Int, val windowWidth: Int)
+/**
+ * A hinge's start and end from the window's left, or its top for a level one, and the window's size across it (its
+ * width, or its height), in pixels.
+ */
+private data class Hinge(val start: Int, val end: Int, val window: Int)
 
 private val HingeSaver = Saver<Hinge?, IntArray>(
-    save = { hinge -> hinge?.let { intArrayOf(it.start, it.end, it.windowWidth) } },
+    save = { hinge -> hinge?.let { intArrayOf(it.start, it.end, it.window) } },
     restore = { Hinge(it[0], it[1], it[2]) },
 )
 

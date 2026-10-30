@@ -228,19 +228,22 @@ class KeyframeAnimatorState<T>(initialValue: T) {
 /**
  * `keyframeAnimator(initialValue:trigger:…)`: the value `keyframes` gives, played each time `trigger` changes (not when
  * the content first appears), frame by frame. Read it where it is drawn (`graphicsLayer { }`) so each frame redraws
- * rather than recomposes. Reduce Motion is the caller's, as on the iPhone: each site keeps its own rule.
+ * rather than recomposes. Reduce Motion is the caller's, as on the iPhone: each site keeps its own rule. A site that
+ * draws none of it meanwhile keeps it `still`, which asks for no frames.
  */
 @Composable
-fun <T> keyframeAnimator(initialValue: T, trigger: Any?, keyframes: (T) -> KeyframeTimeline<T>): State<T> {
+fun <T> keyframeAnimator(initialValue: T, trigger: Any?, still: Boolean = false, keyframes: (T) -> KeyframeTimeline<T>): State<T> {
     val animator = remember { KeyframeAnimatorState(initialValue) }
     val shown = remember { mutableStateOf(initialValue) }
     val latest by rememberUpdatedState(keyframes)
+    val stillNow by rememberUpdatedState(still)
     val appeared = remember { booleanArrayOf(false) }
     LaunchedEffect(trigger) {
         if (!appeared[0]) {
             appeared[0] = true
             return@LaunchedEffect
         }
+        if (stillNow) return@LaunchedEffect
         var now = withFrameNanos { it } / 1e9
         animator.play(now, latest)
         shown.value = animator.value(now)

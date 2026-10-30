@@ -62,6 +62,7 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.automaticallyChangedFrom
 import com.plhery.peekdeliverytracker.core.core
@@ -305,9 +306,15 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
                 Row(
                     Modifier
                         .heightIn(min = 44.dp)
+                        // A button to TalkBack: Compose has no link role but a link inside a text, which would take
+                        // only its words and not the arrow and the row's height.
                         .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) {
                             onHelp()
-                            uriHandler.openUri(help.url)
+                            try {
+                                uriHandler.openUri(help.url)
+                            } catch (_: IllegalArgumentException) {
+                                // Where no app opens web pages, as Compose's handler says: nothing, as with the iPhone's link.
+                            }
                         },
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalAlignment = Alignment.CenterVertically,
@@ -323,6 +330,13 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
         }
     }
 }
+
+/**
+ * Whether the carrier waits on the reader after this scan: a missed delivery or a problem, or customs asking the
+ * reader for something. The card flags it with a warning, and the page says what it waits on.
+ */
+internal fun TrackingEvent.waitsOnReader(): Boolean =
+    recipientAction != null || stage == TrackingStage.FailedAttempt || stage == TrackingStage.Exception
 
 /**
  * `.coordinateSpace(name: DeliveryListSpace.name)` as a lazy list can have it: the list puts this on each of its items,

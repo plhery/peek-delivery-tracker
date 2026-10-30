@@ -238,8 +238,10 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     val sample = state.sample(pageId) != null
     // A scan has a place, so the card shows the route once the map data has loaded.
     val atlas = rememberWorldAtlas(wanted = parcel.trackingEvents.any { it.place != null })
+    val opensAlerts = email?.bellOpensAlerts(parcel) == true
     val bell = if (session != AuthenticationState.Welcome && !sample) {
-        PassBell(opensAlerts = email?.bellOpensAlerts(parcel) == true) { muted, saved -> state.muteOnPage(parcel, muted, saved) }
+        // The same bell while nothing it acts on changes, so the card isn't composed again for a new one.
+        remember(state, parcel, opensAlerts) { PassBell(opensAlerts) { muted, saved -> state.muteOnPage(parcel, muted, saved) } }
     } else {
         null
     }

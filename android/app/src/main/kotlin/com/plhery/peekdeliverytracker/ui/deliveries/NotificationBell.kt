@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -35,7 +37,9 @@ import com.plhery.peekdeliverytracker.ui.theme.keyframeAnimator
 @Composable
 internal fun ParcelNotificationBell(muted: Boolean, trigger: Int, tint: Color, modifier: Modifier = Modifier) {
     val reduceMotion = PeekTheme.reduceMotion
-    val pose by keyframeAnimator(PeekKeyframes.BellPose(), trigger) { PeekKeyframes.bell(muted) }
+    val pose = keyframeAnimator(PeekKeyframes.BellPose(), trigger, still = reduceMotion) { PeekKeyframes.bell(muted) }
+    // Worked out once a frame, for the bell's two layers and its sound lines.
+    val drawing by remember(muted, reduceMotion) { derivedStateOf { BellDrawing.of(pose.value, muted, reduceMotion) } }
     val slash by animateFloatAsState(
         if (muted) 1f else 0f,
         if (reduceMotion) snap() else Motion.easeOut(0.22),
@@ -47,12 +51,12 @@ internal fun ParcelNotificationBell(muted: Boolean, trigger: Int, tint: Color, m
             Modifier
                 .size(BELL_SIDE)
                 .graphicsLayer {
-                    val scale = BellDrawing.of(pose, muted, reduceMotion).scale
+                    val scale = drawing.scale
                     scaleX = scale
                     scaleY = scale
                 }
                 .graphicsLayer {
-                    rotationZ = BellDrawing.of(pose, muted, reduceMotion).angle
+                    rotationZ = drawing.angle
                     transformOrigin = TransformOrigin(0.5f, 0.16f)
                 },
             contentAlignment = Alignment.Center,
@@ -69,7 +73,7 @@ internal fun ParcelNotificationBell(muted: Boolean, trigger: Int, tint: Color, m
                     strokeWidth = 1.dp.toPx(), cap = StrokeCap.Round,
                 )
             }
-            val waves = BellDrawing.of(pose, muted, reduceMotion).waves
+            val waves = drawing.waves
             if (waves > 0f) {
                 val lines = Path().apply {
                     moveTo(0f, 4f * unit)

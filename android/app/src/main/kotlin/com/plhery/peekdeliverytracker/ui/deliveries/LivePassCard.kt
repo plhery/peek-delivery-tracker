@@ -3,6 +3,8 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
@@ -206,23 +209,21 @@ internal fun LivePassCard(
                 // The carrier editor comes with its step.
                 val change = {}
                 PassMarks(
-                    branding, delivery, frames,
+                    branding, delivery, frames, change.takeIf { editable },
                     Modifier
                         .testTag(PAGE_MARKS)
                         .then(
                             if (!editable) {
                                 Modifier
                             } else {
-                                Modifier
-                                    .clearAndSetSemantics {
-                                        contentDescription = label
-                                        role = Role.Button
-                                        onClick {
-                                            change()
-                                            true
-                                        }
+                                Modifier.clearAndSetSemantics {
+                                    contentDescription = label
+                                    role = Role.Button
+                                    onClick {
+                                        change()
+                                        true
                                     }
-                                    .clickable(interactionSource = null, indication = PlainPress, onClick = change)
+                                }
                             },
                         ),
                 )
@@ -349,21 +350,41 @@ internal fun LivePassCard(
 /**
  * The card's carrier mark and, where another carrier delivers, that carrier's under it, 7 apart: the first stays where
  * every card has it, and the second hangs below it at its own width, taking no room of the card's (the route below
- * starts lower instead).
+ * starts lower instead). A tap on either `change`s the carrier, both dimming while either is pressed, as the iPhone's
+ * button holds both; without `change` they take a tap all the same, rather than pass it to the map behind them.
  */
 @Composable
-private fun PassMarks(branding: CarrierVisualIdentity, delivery: CarrierVisualIdentity?, frames: PassFrames, modifier: Modifier) {
+private fun PassMarks(
+    branding: CarrierVisualIdentity,
+    delivery: CarrierVisualIdentity?,
+    frames: PassFrames,
+    change: (() -> Unit)?,
+    modifier: Modifier,
+) {
     val density = LocalDensity.current
+    val press = remember { MutableInteractionSource() }
+    val pressed = if (change != null) Modifier.indication(press, PlainPress) else Modifier
+
+    // The second mark hangs past the first's bounds, where the marks' taps don't reach, so it takes its own: one more
+    // way to the same button, which TalkBack and the keyboard reach once.
+    fun taps(focusable: Boolean): Modifier = if (change != null) {
+        Modifier.focusProperties { canFocus = focusable }.clickable(interactionSource = press, indication = null, onClick = change)
+    } else {
+        Modifier.pointerInput(Unit) { detectTapGestures { } }
+    }
     Layout(
         content = {
-            CarrierFleetMark(branding)
+            CarrierFleetMark(branding, pressed)
             if (delivery != null) {
                 CarrierFleetMark(
                     delivery,
-                    Modifier.onGloballyPositioned {
-                        frames.markNode = it
-                        frames.measure(density)
-                    },
+                    Modifier
+                        .then(pressed)
+                        .then(taps(false))
+                        .onGloballyPositioned {
+                            frames.markNode = it
+                            frames.measure(density)
+                        },
                 )
                 DisposableEffect(Unit) {
                     onDispose {
@@ -373,7 +394,7 @@ private fun PassMarks(branding: CarrierVisualIdentity, delivery: CarrierVisualId
                 }
             }
         },
-        modifier = modifier,
+        modifier = modifier.then(taps(true)),
     ) { measurables, constraints ->
         val first = measurables[0].measure(constraints.copy(minWidth = 0, minHeight = 0))
         val second = measurables.getOrNull(1)?.measure(Constraints())
@@ -487,16 +508,9 @@ private fun CarrierPrompt(prompt: CarrierPromptCopy, tint: Color) {
     }
 }
 
-/**
- * After a missed delivery or a problem, or while customs asks the reader for something, the carrier waits on the
- * reader: the scan that says so.
- */
-private fun carrierWaits(parcel: Parcel): TrackingEvent? {
-    if (parcel.isArchived) return null
-    val event = parcel.currentEvent ?: return null
-    val waits = event.recipientAction != null || event.stage == TrackingStage.FailedAttempt || event.stage == TrackingStage.Exception
-    return event.takeIf { waits }
-}
+/** The scan after which the carrier waits on the reader ([waitsOnReader]), while the parcel isn't archived. */
+private fun carrierWaits(parcel: Parcel): TrackingEvent? =
+    parcel.currentEvent?.takeIf { !parcel.isArchived && it.waitsOnReader() }
 
 /**
  * Where the card's buttons and the delivering carrier's mark stand on it, in points from its top leading corner, which

@@ -276,6 +276,7 @@ internal class DeliveriesState(
     archiveOpenState: MutableState<Boolean>,
     reviewDueState: MutableState<Boolean>,
     sampleShownState: MutableState<Boolean>,
+    mapCoverState: MutableState<String?>,
     private val views: ListViewStates,
     private val now: () -> Instant,
     val scope: CoroutineScope,
@@ -758,8 +759,18 @@ internal class DeliveriesState(
     var pageWorking: Boolean by mutableStateOf(false)
         private set
 
-    /** The parcel page's map, open over the whole window (`showingMap`). */
-    var mapCover: MapCoverRequest? by mutableStateOf(null)
+    /**
+     * The page whose map is open over the whole window, kept with the window ([rememberForLaunch]): a rotation, a fold
+     * or a change of theme finds the map still open, as the iPhone's cover stays up.
+     */
+    private var mapCoverPage: String? by mapCoverState
+
+    /** The parcel page's map, open over the whole window (`showingMap`): the page's, made again from its id. */
+    var mapCover: MapCoverRequest?
+        get() = mapCoverPage?.let { MapCoverRequest(UUID.fromString(it)) }
+        set(value) {
+            mapCoverPage = value?.pageId?.toString()
+        }
 
     /**
      * A menu, the question it asks, an alert or the page's map shows over the list, and TalkBack reaches nothing else.
@@ -786,6 +797,7 @@ internal class DeliveriesState(
         pageWorking = true
         source.scope.launch {
             try {
+                // Once the app posts notifications (B-W01), a mute cancels the parcel's posted one here.
                 source.setMuted(parcel, muted)
                 saved()
             } catch (error: CancellationException) {

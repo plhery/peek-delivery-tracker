@@ -21,6 +21,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -63,9 +64,11 @@ import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.map.LocalMapsAtOnce
 import com.plhery.peekdeliverytracker.ui.map.WorldMapView
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.WindowHinge
+import com.plhery.peekdeliverytracker.ui.tabs.WindowLevelHinge
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -83,7 +86,8 @@ import kotlin.math.max
  * wider than 420, with the ends of the journey, how far it came, has to go and through how many countries, and the
  * switch between the journey and close by where both differ; and the close button at the top trailing corner. At the
  * accessibility sizes the ends stand one under the other, names wrap, and the summary scrolls past half the window's
- * height. Beside an upright hinge the summary keeps to the second part of the window and the route to the first.
+ * height. Beside an upright hinge the summary keeps to the second part of the window and the route to the first; with
+ * a level hinge (`levelHinge`), the route keeps above it and the summary under it.
  *
  * Moving the map, its flights between views, recentring and the detail tiles close up come with the map's gestures.
  * TalkBack hears the map as one image named by its ends, and reaches it through `mapFocus`.
@@ -95,6 +99,7 @@ internal fun ParcelMapScreen(
     stage: TrackingStage?,
     accent: AdaptiveColor,
     hinge: WindowHinge?,
+    levelHinge: WindowLevelHinge?,
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
     mapFocus: AccessibilityFocus? = null,
@@ -126,7 +131,8 @@ internal fun ParcelMapScreen(
             )
         }
         val split = hinge?.let { with(density) { it.start.toDp().value.toDouble()..it.end.toDp().value.toDouble() } }
-        val layout = MapCoverLayout.of(maxWidth.value.toDouble(), maxHeight.value.toDouble(), safe, barHeight.toDouble(), split)
+        val level = levelHinge?.let { with(density) { it.top.toDp().value.toDouble()..it.bottom.toDp().value.toDouble() } }
+        val layout = MapCoverLayout.of(maxWidth.value.toDouble(), maxHeight.value.toDouble(), safe, barHeight.toDouble(), split, level)
 
         // The route is framed in the space the summary leaves, under the system's bars too.
         Box(
@@ -140,14 +146,17 @@ internal fun ParcelMapScreen(
                     role = Role.Image
                 },
         ) {
-            WorldMapView(
-                atlas = atlas, route = route, mode = mode, palette = palette, modifier = Modifier.fillMaxSize(), sites = true,
-                night = time, live = stage != TrackingStage.Delivered && stage != TrackingStage.Returned,
-                // Pip came along from the card. Here he keeps clear of what lies over the map: the summary and the
-                // button that closes it.
-                pip = PipMood(stage)?.let { PipRequest(it, inset = true) },
-                insets = layout.insets, language = language,
-            )
+            // Drawn with the cover's first frame, as the iPhone's is, rather than coming in partway up its slide.
+            CompositionLocalProvider(LocalMapsAtOnce provides true) {
+                WorldMapView(
+                    atlas = atlas, route = route, mode = mode, palette = palette, modifier = Modifier.fillMaxSize(), sites = true,
+                    night = time, live = stage != TrackingStage.Delivered && stage != TrackingStage.Returned,
+                    // Pip came along from the card. Here he keeps clear of what lies over the map: the summary and the
+                    // button that closes it.
+                    pip = PipMood(stage)?.let { PipRequest(it, inset = true) },
+                    insets = layout.insets, language = language,
+                )
+            }
         }
 
         Box(
@@ -156,7 +165,8 @@ internal fun ParcelMapScreen(
                 .padding(start = safe.leading.dp, top = safe.top.dp, end = safe.trailing.dp, bottom = safe.bottom.dp),
             contentAlignment = if (layout.barWidth != null) Alignment.BottomEnd else Alignment.BottomCenter,
         ) {
-            // Over a large screen the summary keeps to about a phone's width, centred, or on its own side of the hinge.
+            // Over a large screen the summary keeps to about a phone's width, centred, or on its own side of an upright
+            // hinge.
             Box(
                 Modifier
                     .then(layout.barWidth?.let { Modifier.width(it.dp) } ?: Modifier)
@@ -383,30 +393,44 @@ private fun ViewButton(title: String, symbol: String, selected: Boolean, action:
 
 /**
  * Where the map screen's parts stand, in points, in a window `width` by `height` whose system bars and cutouts take
- * `safe`, with the summary `barHeight` tall and, where an upright hinge splits the window, the hinge from `hinge`'s
- * start to its end from the window's left:
+ * `safe`, with the summary `barHeight` tall and, where a hinge splits the window, an upright one from `hinge`'s start
+ * to its end from the window's left, or a level one from `level`'s start to its end from the window's top:
  *
  * - `closeTop`: how far below the safe area's top the close button stands, keeping off the window's edge where nothing
  *   is above the screen (a phone on its side).
  * - `insets`: what the route and Pip keep clear of: the close button's row, the system's sides, and the summary, or,
- *   beside a hinge, the hinge and all past it.
- * - `barMaxHeight`: how tall the summary grows at the accessibility sizes before it scrolls: half the safe area.
- * - `barWidth`: beside a hinge, the room past it to the safe area's trailing side, which the summary keeps to; null
- *   elsewhere, where it is centred.
+ *   beside a hinge or above a level one, the hinge and all past it.
+ * - `barMaxHeight`: how tall the summary grows at the accessibility sizes before it scrolls: half the safe area, or
+ *   under a level hinge, the room between it and the summary's foot.
+ * - `barWidth`: beside an upright hinge, the room past it to the safe area's trailing side, which the summary keeps
+ *   to; null elsewhere, where it is centred.
  */
 internal data class MapCoverLayout(val closeTop: Double, val insets: EdgeInsets, val barMaxHeight: Double, val barWidth: Double?) {
     companion object {
-        fun of(width: Double, height: Double, safe: EdgeInsets, barHeight: Double, hinge: ClosedFloatingPointRange<Double>?): MapCoverLayout {
+        fun of(
+            width: Double,
+            height: Double,
+            safe: EdgeInsets,
+            barHeight: Double,
+            hinge: ClosedFloatingPointRange<Double>?,
+            level: ClosedFloatingPointRange<Double>? = null,
+        ): MapCoverLayout {
             val closeTop = max(4.0, 14 - safe.top)
+            // A window split both ways keeps to its upright hinge.
+            val levelFold = level.takeIf { hinge == null }
             return MapCoverLayout(
                 closeTop = closeTop,
                 insets = EdgeInsets(
                     top = safe.top + closeTop + 48,
                     leading = safe.leading,
-                    bottom = if (hinge != null) safe.bottom + 24 else safe.bottom + barHeight + 24,
+                    bottom = when {
+                        hinge != null -> safe.bottom + 24
+                        levelFold != null -> height - levelFold.start + 24
+                        else -> safe.bottom + barHeight + 24
+                    },
                     trailing = if (hinge != null) width - hinge.start + 24 else safe.trailing,
                 ),
-                barMaxHeight = (height - safe.top - safe.bottom) / 2,
+                barMaxHeight = levelFold?.let { height - safe.bottom - it.endInclusive - 24 } ?: ((height - safe.top - safe.bottom) / 2),
                 barWidth = hinge?.let { width - safe.trailing - it.endInclusive },
             )
         }

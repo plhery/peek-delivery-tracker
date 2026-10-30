@@ -58,7 +58,15 @@ it('fails readiness immediately during shutdown even with a fresh heartbeat, and
 it('exposes process liveness separately from unavailable dependencies', async () => {
   const response = await live(new NextRequest('https://delivery.test/health/live'), { params: Promise.resolve({}) });
   expect(response.status).toBe(200);
-  expect(await response.json()).toEqual({ ok: true });
+  expect(await response.json()).toEqual({ ok: true, commit: null });
+});
+it('names the commit the image was built from, which the deploy waits for', async () => {
+  vi.stubEnv('IMAGE_COMMIT', `${'A1'.repeat(20)}\n`);
+  const response = await live(new NextRequest('https://delivery.test/health/live'), { params: Promise.resolve({}) });
+  expect(await response.json()).toEqual({ ok: true, commit: 'a1'.repeat(20) });
+  vi.stubEnv('IMAGE_COMMIT', 'not-a-commit');
+  expect(await (await live(new NextRequest('https://delivery.test/health/live'), { params: Promise.resolve({}) })).json())
+    .toEqual({ ok: true, commit: null });
 });
 it('logs a health check or a metrics scrape only when it fails', async () => {
   const output = vi.spyOn(console, 'log').mockImplementation(() => undefined);

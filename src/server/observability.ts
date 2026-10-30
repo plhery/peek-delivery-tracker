@@ -139,11 +139,17 @@ export function parseSampleRate(value: string | undefined, fallback = 0): number
   return Number.isFinite(parsed) && parsed >= 0 && parsed <= 1 ? parsed : fallback;
 }
 
+/** The full commit the image was built from, in lower case, or undefined outside an image. */
+export function imageCommit(environment: Record<string, string | undefined> = process.env): string | undefined {
+  const commit = environment.IMAGE_COMMIT?.trim();
+  return commit && /^[0-9a-f]{40}$/i.test(commit) ? commit.toLowerCase() : undefined;
+}
+
 export function resolveSentryRelease(
   environment: Record<string, string | undefined> = process.env,
 ): string | undefined {
-  const imageCommit = environment.IMAGE_COMMIT?.trim();
-  if (imageCommit && /^[0-9a-f]{40}$/i.test(imageCommit)) return imageCommit;
+  const commit = imageCommit(environment);
+  if (commit) return commit;
   const configured = environment.SENTRY_RELEASE?.trim();
   if (!configured || /^(?:head|latest|unknown)$/i.test(configured)) return undefined;
   return configured.slice(0, 200);

@@ -138,21 +138,28 @@ it('waits in a job a newer commit queues behind, and deploys in one that is neve
   const guard = step(deploy, 'Skip a commit that a newer one replaced');
   assert.doesNotMatch(guard, /\n {8}if:/);
   assert.match(guard, /run: node scripts\/deploy-gate\.mjs "--commit=\$COMMIT" --at-once/);
-  for (const name of ["Check that production has this commit's migrations", DEPLOY_STEP, 'Check the public site', 'Record the release in Sentry']) {
+  for (const name of ["Check that production has this commit's migrations", DEPLOY_STEP, 'Wait until the public site serves this commit', 'Check the public site', 'Record the release in Sentry']) {
     assert.match(step(deploy, name), /\n {8}if: steps\.current\.outputs\.deploy != 'false'\n/, name);
   }
 });
 
 // IndexNow compares the live sitemap with the one it last took (refs/indexnow/submitted), so it
-// may run after any deploy that started, even one whose smoke check failed: the pages of a deploy
-// it missed go with the next. It runs in a job of its own, which alone may push, and never fails.
-it('tells IndexNow after every deploy that started, from a job of its own, without ever failing it', () => {
+// runs once the public site served the deploy's commit, even if the smoke check then failed: the
+// pages of a deploy it missed go with the next. It runs in a job of its own, which alone may push,
+// and never fails.
+it('tells IndexNow once the site serves the deployed commit, from a job of its own, without ever failing it', () => {
   const workflow = read('.github/workflows/deploy.yml');
   const deploy = job(workflow, 'deploy');
   assert.doesNotMatch(deploy, /indexnow|sitemap|contents: write/i);
+  const live = step(deploy, 'Wait until the public site serves this commit');
+  assert.match(live, /\n {8}id: live\n/);
+  assert.match(live, /run: scripts\/wait-for-commit\.sh "\$DEPLOY_URL" "\$COMMIT"$/);
+  assert.ok(deploy.indexOf(`- name: ${DEPLOY_STEP}`) < deploy.indexOf('- name: Wait until the public site serves this commit'));
+  assert.ok(deploy.indexOf('- name: Wait until the public site serves this commit') < deploy.indexOf('- name: Check the public site'));
+  assert.match(deploy, /\n {4}outputs:\n(?: {6}#.*\n)* {6}live: \$\{\{ steps\.live\.outcome == 'success' \}\}\n/);
   assert.match(workflow, /\npermissions:\n {2}contents: read\n/);
   const indexNow = job(workflow, 'indexnow');
-  assert.match(indexNow, /\n {4}needs: \[settle, deploy\]\n {4}if: \$\{\{ !cancelled\(\) && needs\.deploy\.result != 'skipped' \}\}\n/);
+  assert.match(indexNow, /\n {4}needs: \[settle, deploy\]\n {4}if: \$\{\{ !cancelled\(\) && needs\.deploy\.outputs\.live == 'true' \}\}\n/);
   assert.match(indexNow, /\n {4}permissions:\n {6}contents: write\n {4}steps:/);
   assert.match(indexNow, /concurrency:\n {6}group: indexnow\n {6}cancel-in-progress: false\n {6}queue: max\n/);
   assert.match(indexNow, /ref: \$\{\{ needs\.settle\.outputs\.commit \}\}/);

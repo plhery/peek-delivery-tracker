@@ -55,11 +55,14 @@ jobs:
     needs: settle
     if: needs.settle.outputs.deploy == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     concurrency:
       group: production-deploy
       cancel-in-progress: false
       queue: max
+    outputs:
+      # Whether the public site served this commit, even if the smoke check then failed.
+      live: ${{ steps.live.outcome == 'success' }}
     env:
       COMMIT: ${{ needs.settle.outputs.commit }}
     steps:
@@ -103,6 +106,14 @@ jobs:
             -o StrictHostKeyChecking=yes \
             -o UserKnownHostsFile="$ssh_dir/known_hosts" \
             "$DEPLOY_SSH_TARGET" deploy "$COMMIT"
+      # Once the new container is healthy, the old one may still answer for a while: what follows
+      # reads the site only once it serves this commit, and fails saying what it serves instead.
+      - name: Wait until the public site serves this commit
+        id: live
+        if: steps.current.outputs.deploy != 'false'
+        env:
+          DEPLOY_URL: ${{ vars.DEPLOY_URL }}
+        run: scripts/wait-for-commit.sh "$DEPLOY_URL" "$COMMIT"
       - name: Check the public site
         if: steps.current.outputs.deploy != 'false'
         env:
@@ -136,15 +147,15 @@ jobs:
           sentry deploys new --release "$COMMIT" --env production
 
   # The pages new or redated in the sitemap since IndexNow last took them go to it, which Bing and
-  # the engines that use its index read (scripts/indexnow.mjs). refs/indexnow/submitted keeps the
-  # sitemap it took and moves only once it takes them all, so the pages of a deploy that could not
-  # tell it, even one whose smoke check failed, go with the next. Comparing with what is live, it
-  # sends nothing if a deploy did not go in. Its own job, so the deploy's token stays read-only. A
-  # refusal is shown but never fails the deploy.
+  # the engines that use its index read (scripts/indexnow.mjs). It reads the live sitemap, so it
+  # runs once the public site served the deploy's commit, even if the smoke check then failed.
+  # refs/indexnow/submitted keeps the sitemap it took and moves only once it takes them all, so the
+  # pages of a deploy that did not go in or could not tell it go with the next. Its own job, so the
+  # deploy's token stays read-only. A refusal is shown but never fails the deploy.
   indexnow:
     name: Tell IndexNow
     needs: [settle, deploy]
-    if: ${{ !cancelled() && needs.deploy.result != 'skipped' }}
+    if: ${{ !cancelled() && needs.deploy.outputs.live == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     concurrency:

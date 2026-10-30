@@ -67,7 +67,8 @@ docker build \
 The build fails early unless API mode is on and at least one sign-in method is enabled.
 
 `IMAGE_COMMIT` is an optional build argument too: the full commit the image is built from.
-It names the Sentry release, unless the platform sets `IMAGE_COMMIT` at runtime.
+It names the Sentry release, unless the platform sets `IMAGE_COMMIT` at runtime, and
+`GET /health/live` gives it as `commit`.
 
 At runtime, set the server Supabase values and `SUPABASE_SERVICE_ROLE_KEY`. Push is
 optional:
@@ -106,7 +107,7 @@ app goes through the first of `LEGACY_HOSTS`, or the app's own scheme without on
 - `GET /health` returns `{"ok": true}` when the database answers within 2.5 s and the
   worker has polled or renewed a job in the last 120 s. Otherwise it returns 503, with
   `{"ok": false, "draining": true}` once the server is shutting down.
-  `GET /health/live` checks the process only.
+  `GET /health/live` checks the process only, and names the image's commit.
 - Set `TRUST_PROXY_HEADERS=true` only if a trusted proxy overwrites `CF-Connecting-IP`,
   `X-Real-IP` and `X-Forwarded-For`. Without it, every visitor without an account shares
   one client allowance. With Cloudflare, keep IP geolocation enabled and overwrite
@@ -181,11 +182,13 @@ the Sentry release follow.
 
 The deploy asks the database, with the publishable key, which of the commit's migrations
 it lacks, and stops if any are missing: apply them, then re-run the Deploy job. It then
-runs `deploy <commit>` over SSH on the target and the smoke test on `DEPLOY_URL`. Restrict
-the key on the host to a command that accepts only that request and starts the published
-image.
+runs `deploy <commit>` over SSH on the target. The old container may still answer for a
+while, so it waits until `DEPLOY_URL` serves the commit, three answers of `/health/live` in a
+row ([wait-for-commit.sh](../scripts/wait-for-commit.sh)), and fails after 5 minutes saying
+what it serves instead. Then it runs the smoke test on `DEPLOY_URL`. Restrict the key on the
+host to a command that accepts only that request and starts the published image.
 
-After every deploy that started, even one whose smoke test failed, a job of its own tells
+Once the site served the commit, even if the smoke test then failed, a job of its own tells
 IndexNow ([indexnow.mjs](../scripts/indexnow.mjs)), which Bing and the engines using its index
 read, about the pages added to the sitemap or redated since it last took them. The ref
 `refs/indexnow/submitted` keeps that sitemap (`git fetch origin refs/indexnow/submitted` and

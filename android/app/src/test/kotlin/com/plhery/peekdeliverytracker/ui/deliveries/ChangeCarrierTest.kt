@@ -287,6 +287,26 @@ class ChangeCarrierTest {
     }
 
     @Test
+    fun inTheSheetADragDownThePickersRailJumpsDownTheListAndLeavesTheSheetWhereItIs() {
+        show()
+        fromPage(lamp)
+        pushPicker()
+        assertLarge()
+        val top = sheetTop()
+        node(LETTER_RAIL).performTouchInput {
+            down(Offset(width / 2f, height * 0.2f))
+            moveTo(Offset(width / 2f, height * 0.6f))
+            moveTo(Offset(width / 2f, height - 1f))
+            up()
+        }
+        settle()
+        assertEquals(top, sheetTop(), 1f)
+        node(CARRIER_PICKER).assertIsDisplayed()
+        // The list stands at its last letters, automatic detection gone by.
+        assertTrue(!exists(CARRIER_PICKER_AUTOMATIC))
+    }
+
+    @Test
     fun anotherCarrierStartsItsFieldsAfreshAndTypingFollowsTheFieldsRules() {
         show()
         fromPage(chair)

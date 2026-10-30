@@ -289,23 +289,11 @@ struct ExperimentalCopy {
     let localizer: Localizer
 
     var passport: String { localizer.text("passport.title") }
-    var active: String { localizer.text("design.active") }
     var showArchive: String { localizer.text("design.showArchive") }
     var hideArchive: String { localizer.text("design.hideArchive") }
-    var currentUpdate: String { localizer.text("design.currentUpdate") }
     var fullJourney: String { localizer.text("design.fullJourney") }
     var lessJourney: String { localizer.text("design.lessJourney") }
-    var shipmentDetails: String { localizer.text("design.shipmentDetails") }
-    var smartCapture: String { localizer.text("design.smartCapture") }
-    var scanOrEnter: String { localizer.text("design.scanOrEnter") }
-    var quickAddIntro: String { localizer.text("design.quickAddIntro") }
     var parcelTitle: String { localizer.text("design.parcelTitle") }
-    var trackingReady: String { localizer.text("design.trackingReady") }
-    var oneMoreDetail: String { localizer.text("design.oneMoreDetail") }
-    var ready: String { localizer.text("design.ready") }
-    var chooseNext: String { localizer.text("design.chooseNext") }
-    var continueTitle: String { localizer.text("design.continueTitle") }
-    var scanTitle: String { localizer.text("design.scanTitle") }
 }
 
 extension Parcel {

@@ -43,7 +43,7 @@ HÁ MAIS ALGUÉM À ESPERA DELA?
 Partilha a página da encomenda com uma ligação. Quem a abre não precisa de app nem de conta. Embrulha-a como presente e o que vem dentro é surpresa até ela chegar.
 
 UM PASSAPORTE DE ENTREGAS
-Com uma conta, cada entrega deixa um selo no teu passaporte. Compara passaportes com os teus amigos; as tuas encomendas continuam privadas.
+Com uma conta, cada entrega fica no teu passaporte e algumas dão-te um selo. Compara passaportes com os teus amigos; as tuas encomendas continuam privadas.
 
 3500+ TRANSPORTADORAS
 CTT, CTT Express, DPD, GLS, DHL, UPS, FedEx, SEUR, Correios do Brasil, Cainiao, China Post, YunExpress e milhares de outras: correios nacionais, empresas de correio expresso e as transportadoras das grandes lojas online.

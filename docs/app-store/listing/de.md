@@ -43,7 +43,7 @@ WARTET NOCH JEMAND DARAUF?
 Teile die Seite des Pakets per Link. Zum Öffnen braucht es weder App noch Konto. Verpacke es als Geschenk, und was drin ist, bleibt bis zur Zustellung eine Überraschung.
 
 EIN REISEPASS VOLLER LIEFERUNGEN
-Mit einem Konto stempelt jede Zustellung deinen Reisepass. Vergleiche Reisepässe mit Freunden; deine Pakete bleiben privat.
+Mit einem Konto zählt jede Zustellung in deinem Reisepass, und für manche gibt es eine Briefmarke. Vergleiche Reisepässe mit Freunden; deine Pakete bleiben privat.
 
 3500+ PAKETDIENSTE
 DHL, Hermes, DPD, GLS, UPS, FedEx, Österreichische Post, Schweizerische Post, PostNL, La Poste, Royal Mail, InPost, China Post, Cainiao, YunExpress und Tausende weitere: nationale Postgesellschaften, Kurierdienste und die Zustelldienste großer Onlineshops.

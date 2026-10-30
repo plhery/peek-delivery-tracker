@@ -45,7 +45,7 @@ SOMEONE ELSE WAITING FOR IT?
 Share the package’s page with a link. They need no app and no account. Wrap it as a gift, and what’s inside stays a surprise until it arrives.
 
 A PASSPORT OF DELIVERIES
-With an account, each delivery stamps your passport. Compare passports with friends; your packages stay private.
+With an account, every delivery counts in your passport, and some earn a stamp. Compare passports with friends; your packages stay private.
 
 3,500+ CARRIERS
 USPS, UPS, FedEx, DHL, Canada Post, Royal Mail, Evri, DPD, GLS, An Post, Australia Post, La Poste, Swiss Post, PostNL, Correos, Poste Italiane, InPost, China Post, Cainiao, YunExpress, and thousands more: national postal services, couriers, and marketplace shippers.

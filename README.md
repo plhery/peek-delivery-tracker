@@ -35,8 +35,8 @@ Yes. Choose every scan, the important steps or delivery only, on your iPhone or 
 your browser. Quiet hours keep the night quiet, and an email can tell you it arrived.
 
 **Following more than one?**<br>
-Sign in and they share one list, on the web and on the iPhone. Each delivery stamps your
-passport, which you can compare with friends while your parcels stay private.
+Sign in and they share one list, on the web and on the iPhone. Every delivery counts in your
+passport and some earn a stamp; compare passports with friends while your parcels stay private.
 
 **Someone else waiting for it?**<br>
 Share the parcel's page with them. Wrap it as a gift, and what's inside stays a surprise

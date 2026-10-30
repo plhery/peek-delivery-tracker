@@ -45,7 +45,7 @@ QUELQU’UN D’AUTRE L’ATTEND ?
 Partage la page du colis avec un lien : pas besoin d’app ni de compte pour l’ouvrir. Emballe-le en cadeau, et son contenu reste une surprise jusqu’à son arrivée.
 
 UN PASSEPORT DE LIVRAISONS
-Avec un compte, chaque livraison colle un timbre dans ton passeport. Compare-le avec celui de tes amis ; tes colis restent privés.
+Avec un compte, chaque livraison s’inscrit dans ton passeport, et certaines te rapportent un timbre. Compare-le avec celui de tes amis ; tes colis restent privés.
 
 3 500+ TRANSPORTEURS
 La Poste, Colissimo, Chronopost, Mondial Relay, Relais Colis, Colis Privé, DPD, GLS, DHL, UPS, FedEx, La Poste Suisse, bpost, Postes Canada, Cainiao, China Post, YunExpress et des milliers d’autres : postes nationales, transporteurs express et réseaux de livraison des grandes plateformes de vente en ligne.

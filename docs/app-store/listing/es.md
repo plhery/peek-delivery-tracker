@@ -43,7 +43,7 @@ Van todos en una sola lista, con el siguiente en llegar arriba, viajando en su m
 Comparte la página del paquete con un enlace: para abrirla no hace falta app ni cuenta. Envuélvelo como regalo y lo que lleva dentro seguirá siendo una sorpresa hasta que llegue.
 
 UN PASAPORTE DE ENTREGAS
-Con una cuenta, cada entrega pone un sello en tu pasaporte. Compara pasaportes con tus amigos; tus paquetes siguen siendo privados.
+Con una cuenta, cada entrega suma en tu pasaporte y algunas te dan un sello. Compara pasaportes con tus amigos; tus paquetes siguen siendo privados.
 
 MÁS DE 3500 TRANSPORTISTAS
 Correos, Correos Express, SEUR, MRW, NACEX, CTT Express, GLS, DHL, UPS, FedEx, InPost, DPD, TIPSA, Mondial Relay, Cainiao, China Post, YunExpress y miles más: correos de cada país, empresas de mensajería y transportistas de las grandes tiendas online.

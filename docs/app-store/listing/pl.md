@@ -43,7 +43,7 @@ KTOŚ JESZCZE NA NIĄ CZEKA?
 Udostępnij link do strony paczki. Żeby ją otworzyć, nie trzeba aplikacji ani konta. Zapakuj ją na prezent, a to, co jest w środku, pozostanie niespodzianką aż do doręczenia.
 
 PASZPORT DOSTAW
-Z kontem każda dostawa zostawia znaczek w Twoim paszporcie. Porównuj paszporty ze znajomymi; Twoje paczki pozostają prywatne.
+Z kontem każda dostawa liczy się w Twoim paszporcie, a za niektóre dostajesz znaczek. Porównuj paszporty ze znajomymi; Twoje paczki pozostają prywatne.
 
 PONAD 3500 PRZEWOŹNIKÓW
 InPost, Poczta Polska, DPD, DHL, GLS, UPS, FedEx, Packeta, Nova Poshta, Cainiao, China Post, YunExpress i tysiące innych: poczty narodowe, firmy kurierskie i przewoźnicy dużych platform zakupowych.

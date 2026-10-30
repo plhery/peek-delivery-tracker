@@ -43,7 +43,7 @@ LO ASPETTA QUALCUN ALTRO?
 Condividi la pagina del pacco con un link: per aprirla non servono né app né account. Incartalo come regalo e quello che c’è dentro resta una sorpresa fino all’arrivo.
 
 UN PASSAPORTO DI CONSEGNE
-Con un account, ogni consegna aggiunge un francobollo al tuo passaporto. Confronta i passaporti con gli amici; i tuoi pacchi restano privati.
+Con un account, ogni consegna conta nel tuo passaporto, e alcune valgono un francobollo. Confronta i passaporti con gli amici; i tuoi pacchi restano privati.
 
 OLTRE 3.500 CORRIERI
 Poste Italiane, BRT, GLS, DHL, UPS, FedEx, DPD, InPost, La Posta Svizzera, Cainiao, China Post, YunExpress e migliaia di altri: poste nazionali, corrieri e servizi di consegna dei grandi negozi online.

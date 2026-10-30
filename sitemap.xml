@@ -4362,7 +4362,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-30</lastmod>
+<lastmod>2026-10-31</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/fr/carriers</loc>
@@ -8117,8 +8117,16 @@
 <url>
 <loc>https://peektracker.com/carriers/tianhui-hengyuan-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tianhui-hengyuan-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/tianhui-hengyuan-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tianhui-hengyuan-tracking" />
 <lastmod>2026-10-30</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/carriers/tianhui-hengyuan-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/tianhui-hengyuan-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/tianhui-hengyuan-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/tianhui-hengyuan-tracking" />
+<lastmod>2026-10-31</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/js-express-tracking</loc>
@@ -8188,6 +8196,12 @@
 <loc>https://peektracker.com/carriers/roadie-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/roadie-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/roadie-tracking" />
+<lastmod>2026-10-31</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/carriers/ecms-express-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/ecms-express-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/ecms-express-tracking" />
 <lastmod>2026-10-31</lastmod>
 </url>
 <url>

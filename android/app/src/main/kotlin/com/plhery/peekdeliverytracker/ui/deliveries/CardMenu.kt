@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -55,12 +56,14 @@ import androidx.compose.ui.graphics.layer.drawLayer
 import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -84,6 +87,10 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.sheet.Popover
+import com.plhery.peekdeliverytracker.ui.sheet.PopoverSize
+import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_HEIGHT
+import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_WIDTH
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
@@ -96,6 +103,7 @@ import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 /**
@@ -256,9 +264,18 @@ internal fun CardMenuHost(state: DeliveriesState) {
         state.returnFocus?.request()
         state.returnFocus = null
     }
+    // The page's question goes with its parcel, as the iPhone's goes with the ••• it stands off.
+    val pageParcel = state.liveMenuParcel(state.navigator.navigation.shown)
+    val unasked = deleting?.fromPage == true && pageParcel == null
+    LaunchedEffect(unasked) { if (unasked) state.deleting = null }
+    // In a regular window the page's question stands off its •••, as an iPad's confirmation dialog stands off its menu.
+    val window = LocalWindowInfo.current.containerSize
+    val regular = with(LocalDensity.current) { window.width.toDp() >= REGULAR_WIDTH && window.height.toDp() >= REGULAR_HEIGHT }
+    val popover = deleting?.fromPage == true && regular
+    DeletePopover(state, visible = request == null && deleting != null && popover)
     val content: (@Composable () -> Unit)? = when {
         request != null -> { { CardMenuOverlay(state, request) } }
-        deleting != null -> { { DeleteConfirmation(state, deleting) } }
+        deleting != null && !popover -> { { DeleteConfirmation(state, deleting) } }
         error != null -> { { ActionErrorAlert(state, error) } }
         else -> null
     }
@@ -304,35 +321,19 @@ private val LocalLayerPass = staticCompositionLocalOf<LayerPass?> { null }
 private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
     val localizer = LocalLocalizer.current
     val density = LocalDensity.current
-    val reduceMotion = PeekTheme.reduceMotion
-    val scope = rememberCoroutineScope()
-    val shown = remember(request) { Animatable(0f) }
-    var closing by remember(request) { mutableIntStateOf(0) }
     val parcel = request.parcel
     val items = remember(parcel) { ParcelMenuItem.menu(parcel, onCard = true, reader = state.source.viewerLink(parcel) != null) }
     val shortcuts = parcel.id == state.selectedCard && keyboardConnected()
-    val first = remember(request) { AccessibilityFocus() }
-
-    LaunchedEffect(request) { first.request() }
-    LaunchedEffect(request) { shown.animateTo(1f, if (reduceMotion) Motion.easeOut(0.2) else Motion.spring(0.3, 0.15)) }
-    fun close(then: () -> Unit = {}) {
-        if (closing > 0) return
-        closing++
-        scope.launch {
-            shown.animateTo(0f, if (reduceMotion) Motion.easeOut(0.2) else Motion.spring(0.2))
-            state.menu = null
-            then()
-        }
-    }
-    val choose = { item: ParcelMenuItem -> close { state.chose(item, parcel) } }
-    BackHandler { close() }
+    val menu = rememberMenuPresence(request) { state.menu = null }
+    val shown = menu.shown
+    val choose = { item: ParcelMenuItem -> menu.close { state.chose(item, parcel) } }
     MenuKeys(shortcuts, items, choose)
 
     BoxWithConstraints(
         Modifier
             .fillMaxSize()
             .testTag(CARD_MENU)
-            .pointerInput(request) { detectTapGestures { close() } },
+            .pointerInput(request) { detectTapGestures { menu.close() } },
     ) {
         val windowWidth = constraints.maxWidth.toFloat()
         val windowHeight = constraints.maxHeight.toFloat()
@@ -393,19 +394,15 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
                         placeable.place(placement.menu.left.roundToInt(), placement.menu.top.roundToInt())
                     }
                 }
-                .graphicsLayer {
-                    val t = shown.value
-                    alpha = t.coerceIn(0f, 1f)
-                    val scale = if (reduceMotion) 1f else 0.6f + 0.4f * t
-                    scaleX = scale
-                    scaleY = scale
-                    transformOrigin = when (placement.side) {
+                .growingMenu(
+                    menu,
+                    when (placement.side) {
                         MenuSide.Below -> TransformOrigin(0.5f, 0f)
                         MenuSide.Above -> TransformOrigin(0.5f, 1f)
                         MenuSide.Right -> TransformOrigin(0f, 0f)
                         MenuSide.Left -> TransformOrigin(1f, 0f)
-                    }
-                }
+                    },
+                )
                 .pointerInput(Unit) { detectTapGestures { } }
                 .semantics { paneTitle = parcel.label.ifEmpty { localizer.text("common.parcel") } }
                 .dropShadow(ContinuousRoundedShape(MENU_RADIUS), MENU_SHADOW),
@@ -420,10 +417,57 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
                     }
                     .padding(vertical = MENU_PADDING),
             ) {
-                MenuItems(items, shortcuts, busy = false, choose, first)
+                MenuItems(items, shortcuts, busy = false, choose, menu.first)
             }
         }
     }
+}
+
+/**
+ * A menu's coming and going over the window, the card's and the page's: it grows in on a spring as it opens, TalkBack
+ * going to its first item ([first]), and shrinks away as it closes ([close]); under Reduce Motion it only fades. The
+ * back gesture closes it.
+ */
+@Stable
+internal class MenuPresence(private val scope: CoroutineScope, private val onClosed: () -> Unit) {
+    val shown = Animatable(0f)
+    val first = AccessibilityFocus()
+    var reduceMotion = false
+    private var closing = false
+
+    /** Closes the menu, then runs `then`: a choice acts once the menu has gone. */
+    fun close(then: () -> Unit = {}) {
+        if (closing) return
+        closing = true
+        scope.launch {
+            shown.animateTo(0f, if (reduceMotion) Motion.easeOut(0.2) else Motion.spring(0.2))
+            onClosed()
+            then()
+        }
+    }
+}
+
+/** The presence of the menu `request` opened, which `onClosed` forgets once it has gone. */
+@Composable
+internal fun rememberMenuPresence(request: Any, onClosed: () -> Unit): MenuPresence {
+    val scope = rememberCoroutineScope()
+    val closed by rememberUpdatedState(onClosed)
+    val menu = remember(request) { MenuPresence(scope) { closed() } }
+    menu.reduceMotion = PeekTheme.reduceMotion
+    LaunchedEffect(menu) { menu.first.request() }
+    LaunchedEffect(menu) { menu.shown.animateTo(1f, if (menu.reduceMotion) Motion.easeOut(0.2) else Motion.spring(0.3, 0.15)) }
+    BackHandler { menu.close() }
+    return menu
+}
+
+/** The menu's glass, growing from `origin` as it opens and shrinking back into it as it closes. */
+internal fun Modifier.growingMenu(menu: MenuPresence, origin: TransformOrigin): Modifier = graphicsLayer {
+    val t = menu.shown.value
+    alpha = t.coerceIn(0f, 1f)
+    val scale = if (menu.reduceMotion) 1f else 0.6f + 0.4f * t
+    scaleX = scale
+    scaleY = scale
+    transformOrigin = origin
 }
 
 /**
@@ -546,26 +590,28 @@ internal fun keyboardConnected(): Boolean {
         configuration.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO
 }
 
+/** A delete a menu asks about first: its parcel, and whether the page's ••• asked, whose question stands off it. */
+@Stable
+internal class DeleteRequest(val parcel: Parcel, val fromPage: Boolean)
+
 /**
  * `parcelDeleteConfirmation` (iOS's `confirmationDialog`, its title shown): an action sheet at the foot of the screen
  * asking before the parcel goes for good, its message under the question, Delete, and Cancel apart under it.
  */
 @Composable
-private fun DeleteConfirmation(state: DeliveriesState, parcel: Parcel) {
+private fun DeleteConfirmation(state: DeliveriesState, request: DeleteRequest) {
     val localizer = LocalLocalizer.current
-    val type = PeekTheme.type
-    val colors = PeekTheme.colors
-    val shown = remember(parcel) { Animatable(0f) }
+    val shown = remember(request) { Animatable(0f) }
     val scope = rememberCoroutineScope()
     val reduceMotion = PeekTheme.reduceMotion
-    val question = remember(parcel) { AccessibilityFocus() }
-    LaunchedEffect(parcel) { question.request() }
-    LaunchedEffect(parcel) { shown.animateTo(1f, Motion.easeOut(if (reduceMotion) 0.2 else 0.3)) }
+    val question = remember(request) { AccessibilityFocus() }
+    LaunchedEffect(request) { question.request() }
+    LaunchedEffect(request) { shown.animateTo(1f, Motion.easeOut(if (reduceMotion) 0.2 else 0.3)) }
     fun answer(delete: Boolean) {
         scope.launch {
             shown.animateTo(0f, Motion.easeOut(0.2))
             state.deleting = null
-            if (delete) state.delete(parcel)
+            if (delete) state.confirmDelete(request)
         }
     }
     BackHandler { answer(delete = false) }
@@ -575,7 +621,7 @@ private fun DeleteConfirmation(state: DeliveriesState, parcel: Parcel) {
             .testTag(DELETE_CONFIRMATION)
             .graphicsLayer { alpha = shown.value }
             .background(DIM)
-            .pointerInput(parcel) { detectTapGestures { answer(delete = false) } },
+            .pointerInput(request) { detectTapGestures { answer(delete = false) } },
     ) {
         val safe = WindowInsets.safeDrawing
         val bottom = with(LocalDensity.current) { safe.getBottom(this).toDp() }
@@ -589,23 +635,72 @@ private fun DeleteConfirmation(state: DeliveriesState, parcel: Parcel) {
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             GlassSurface(ContinuousRoundedShape(SHEET_RADIUS), Modifier.fillMaxWidth()) {
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Column(
-                        Modifier.padding(horizontal = 16.dp, vertical = 14.dp).semantics(mergeDescendants = true) {}.accessibilityFocus(question),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        Text(localizer.text("detail.deleteQuestion"), color = colors.secondaryLabel, style = type.style(IosTextStyle.Footnote, FontWeight.SemiBold).sfLines(), textAlign = TextAlign.Center)
-                        Text(localizer.text("detail.deleteDescription"), color = colors.secondaryLabel, style = type.style(IosTextStyle.Footnote).sfLines(), textAlign = TextAlign.Center)
-                    }
-                    Box(Modifier.fillMaxWidth().height(1.dp).background(colors.separator))
-                    SheetButton(localizer.text("detail.delete"), bold = false, tag = DELETE_CONFIRM) { answer(delete = true) }
-                }
+                DeleteQuestion(question) { answer(delete = true) }
             }
             GlassSurface(ContinuousRoundedShape(SHEET_RADIUS), Modifier.fillMaxWidth()) {
                 SheetButton(localizer.text("common.cancel"), bold = true, tag = DELETE_CANCEL) { answer(delete = false) }
             }
         }
+    }
+}
+
+/**
+ * The page's delete question in a regular window: a popover off its •••, as an iPad shows a confirmation dialog off the
+ * menu it is attached to rather than over the page and the list. A popover shows no Cancel: a tap outside or the back
+ * gesture stands for it. Delete acts once the popover has gone, on the parcel the page shows by then.
+ */
+@Composable
+private fun DeletePopover(state: DeliveriesState, visible: Boolean) {
+    val localizer = LocalLocalizer.current
+    var confirmed by remember { mutableStateOf<DeleteRequest?>(null) }
+    // As tall as what it says, which a popover doesn't work out itself.
+    var height by remember { mutableIntStateOf(0) }
+    val tall = with(LocalDensity.current) { height.toDp() }
+    val question = remember { AccessibilityFocus() }
+    LaunchedEffect(visible) { if (visible) question.request() }
+    Popover(
+        visible = visible,
+        anchor = state.pageMenuButton,
+        onDismiss = { state.deleting = null },
+        paneTitle = localizer.text("detail.deleteQuestion"),
+        size = PopoverSize(DELETE_POPOVER_WIDTH, DELETE_POPOVER_WIDTH, tall, tall),
+        onClosed = {
+            confirmed?.let(state::confirmDelete)
+            confirmed = null
+        },
+    ) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(Alignment.Top, unbounded = true)
+                .onSizeChanged { height = it.height }
+                .testTag(DELETE_POPOVER),
+        ) {
+            DeleteQuestion(question) {
+                confirmed = state.deleting
+                state.deleting = null
+            }
+        }
+    }
+}
+
+/** The delete question and its message, then Delete under a line, as the sheet and the popover both ask it. */
+@Composable
+private fun DeleteQuestion(focus: AccessibilityFocus, delete: () -> Unit) {
+    val localizer = LocalLocalizer.current
+    val type = PeekTheme.type
+    val colors = PeekTheme.colors
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            Modifier.padding(horizontal = 16.dp, vertical = 14.dp).semantics(mergeDescendants = true) {}.accessibilityFocus(focus),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            Text(localizer.text("detail.deleteQuestion"), color = colors.secondaryLabel, style = type.style(IosTextStyle.Footnote, FontWeight.SemiBold).sfLines(), textAlign = TextAlign.Center)
+            Text(localizer.text("detail.deleteDescription"), color = colors.secondaryLabel, style = type.style(IosTextStyle.Footnote).sfLines(), textAlign = TextAlign.Center)
+        }
+        Box(Modifier.fillMaxWidth().height(1.dp).background(colors.separator))
+        SheetButton(localizer.text("detail.delete"), bold = false, tag = DELETE_CONFIRM, action = delete)
     }
 }
 
@@ -671,6 +766,9 @@ private val SEPARATOR_BLOCK = 21.dp
 private val SHEET_RADIUS = 14.dp
 private val ALERT_RADIUS = 14.dp
 private val ALERT_WIDTH = 270.dp
+
+/** UIKit's action sheet in a popover, as wide as an iPad draws it. */
+private val DELETE_POPOVER_WIDTH = 304.dp
 internal val MENU_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 24.dp, y = 8.dp)
 private val PREVIEW_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.1f), radius = 16.dp, y = 6.dp)
 
@@ -679,6 +777,7 @@ const val CARD_MENU_PREVIEW = "deliveries.cardMenu.preview"
 const val DELETE_CONFIRMATION = "deliveries.deleteConfirmation"
 const val DELETE_CONFIRM = "deliveries.deleteConfirmation.delete"
 const val DELETE_CANCEL = "deliveries.deleteConfirmation.cancel"
+const val DELETE_POPOVER = "deliveries.deleteConfirmation.popover"
 const val ACTION_ERROR = "deliveries.actionError"
 const val ACTION_ERROR_CLOSE = "deliveries.actionError.close"
 

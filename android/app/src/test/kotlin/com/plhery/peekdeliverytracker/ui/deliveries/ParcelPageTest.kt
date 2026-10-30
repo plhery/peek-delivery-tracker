@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.ClipboardManager
+import android.view.KeyEvent
 import android.view.View
 import android.view.accessibility.AccessibilityManager
 import androidx.activity.BackEventCompat
@@ -14,6 +15,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertContentDescriptionEquals
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasClickAction
@@ -31,14 +34,20 @@ import androidx.compose.ui.unit.DpRect
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
+import com.plhery.peekdeliverytracker.core.FirstOpenJourney
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
 import com.plhery.peekdeliverytracker.core.trackingNumbers
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomBar
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomGeometry
 import java.util.UUID
+import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -50,7 +59,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * A parcel's page's frame (B-S01): the paper in one column or two, the page for a parcel gone (B-ST01), and its bar,
  * ‹ and the ••• menu (B-S09), which stays at the window's top as the page zooms, is dragged or is held by the back
- * gesture under it, and fades in as the page lands and out as it goes back into its card.
+ * gesture under it, and comes in as the page lands and goes, ‹ first, as it goes back into its card, the list's bar
+ * items fading and coming back around it.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -126,6 +136,23 @@ class ParcelPageTest {
     }
 
     private fun at(progress: Float) = BackEventCompat(480f * progress, 400f, progress, BackEventCompat.EDGE_LEFT)
+
+    /** A key pressed and let go on a hardware keyboard, with `meta` held, through the window as the system sends it. */
+    private fun press(key: Int, meta: Int = 0) {
+        val window = compose.activity.window.decorView.parent
+        val deliver = window.javaClass.getMethod("dispatchKeyFromIme", KeyEvent::class.java)
+        compose.runOnUiThread {
+            deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_DOWN, key, 0, meta))
+            deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_UP, key, 0, meta))
+        }
+        compose.waitForIdle()
+    }
+
+    private val ctrl = KeyEvent.META_CTRL_ON or KeyEvent.META_CTRL_LEFT_ON
+
+    private val gift = DemoCards.parcel("Birthday gift").id
+
+    private fun clipboard(): String? = compose.activity.getSystemService(ClipboardManager::class.java).primaryClip?.getItemAt(0)?.text?.toString()
 
     /** ‹ where the bar puts it, 20 in from the window's side and as large as it is at rest: no part of a page in flight. */
     private fun assertBackPinned() {
@@ -256,29 +283,37 @@ class ParcelPageTest {
     }
 
     @Test
-    fun theBarStaysAtTheTopAsThePageZoomsAndFadesInAsItLands() {
+    fun theBarStaysAtTheTopAsThePageZoomsAndComesInAsItLandsAsTheListsItemsFade() {
         show()
         compose.mainClock.autoAdvance = false
         compose.card("Birthday gift").performClick()
-        val shown = mutableListOf<Float>()
+        val frames = mutableListOf<Pair<Float, ZoomBar>>()
         var partway = false
         repeat(60) {
             compose.mainClock.advanceTimeByFrame()
-            val bar = deliveries.zoom.pageBar
-            shown += bar
-            if (bar > 0f && bar < 1f && !partway) {
+            val bar = deliveries.zoom.bar
+            frames += deliveries.zoom.behind to bar
+            if (bar.leading > 0f && bar.leading < 1f && !partway) {
                 partway = true
-                // The page is still on its way, smaller than the window; the bar isn't.
+                // The page is still on its way, smaller than the window; the bar isn't, and TalkBack doesn't reach it yet.
                 assertTrue("Page ${page()}", width(page()) < 389f)
                 assertBackPinned()
+                compose.onNodeWithTag(PAGE_BACK).assertDoesNotExist()
             }
         }
-        assertTrue("Never partway: $shown", partway)
-        // None until the page is 60 % of the way, then more and more of it, all of it once it lands.
-        assertEquals(0f, shown.first(), 0f)
-        assertEquals(1f, shown.last(), 0f)
-        assertTrue("Not rising: $shown", shown.zipWithNext().all { (a, b) -> b >= a - 0.001f })
+        assertTrue("Never partway: $frames", partway)
+        // ‹ and ••• together: none until the page is 82 % of the way, all of them from 97 %. The list's items and its
+        // title fade with the page.
+        for ((progress, bar) in frames) {
+            assertEquals("At $progress", bar.leading, bar.trailing, 0f)
+            if (progress < ZoomGeometry.BAR_OPENING_START) assertEquals("At $progress", 0f, bar.leading, 0f)
+            if (progress > ZoomGeometry.BAR_OPENING_END + 0.0001f) assertEquals("At $progress", 1f, bar.leading, 0f)
+            assertEquals("At $progress", 1f - progress, bar.root, 0.001f)
+            assertEquals("At $progress", 1f - progress, bar.title, 0.001f)
+        }
+        assertEquals(ZoomBar(leading = 1f, trailing = 1f, root = 0f, title = 0f), frames.last().second)
         compose.mainClock.autoAdvance = true
+        compose.onNodeWithTag(PAGE_BACK).assertExists()
     }
 
     @Test
@@ -293,34 +328,63 @@ class ParcelPageTest {
         }
         compose.waitForIdle()
         assertTrue("Page ${page()}", width(page()) < 385f)
-        assertEquals(1f, deliveries.zoom.pageBar, 0f)
+        assertEquals(ZoomBar(leading = 1f, trailing = 1f, root = 0f, title = 0f), deliveries.zoom.bar)
         assertBackPinned()
         root.performTouchInput { up() }
         compose.mainClock.advanceTimeBy(600)
 
         gesture(at(0f), at(0.5f))
         assertTrue("Page ${page()}", width(page()) < 375f)
-        assertEquals(1f, deliveries.zoom.pageBar, 0f)
+        assertEquals(ZoomBar(leading = 1f, trailing = 1f, root = 0f, title = 0f), deliveries.zoom.bar)
+        assertBackPinned()
+    }
+
+    /** As a drag shrinks the page below 83 % of the window, the list's title comes back over it; its other items don't. */
+    @Test
+    fun aDragShrinkingThePageFarBringsTheListsTitleBack() {
+        show()
+        open("Birthday gift")
+        compose.onRoot().performTouchInput {
+            down(center)
+            moveBy(Offset(0f, 50f), delayMillis = 100)
+            moveBy(Offset(0f, 750f), delayMillis = 400)
+        }
+        compose.waitForIdle()
+        val scale = width(page()) / 390f
+        val bar = deliveries.zoom.bar
+        assertTrue("Scale $scale", scale < 0.8f)
+        assertTrue("Title ${bar.title}", bar.title > 0f)
+        assertEquals(ZoomGeometry.titleUncovered(scale), bar.title, 0.01f)
+        assertEquals(0f, bar.root, 0f)
+        assertEquals(1f, bar.leading, 0f)
         assertBackPinned()
     }
 
     @Test
-    fun goingBackTheBarStaysUntilThePageIsNearItsCardThenFadesAndTalkBackNoLongerReachesIt() {
+    fun goingBackBackGoesAtOnceThenTheMenuThenTheListsItemsComeBackAndTalkBackNoLongerReachesThem() {
         show()
         open("Birthday gift")
         compose.mainClock.autoAdvance = false
         back()
         compose.mainClock.advanceTimeByFrame()
         compose.mainClock.advanceTimeByFrame()
-        assertEquals(1f, deliveries.zoom.pageBar, 0f)
+        // ‹ goes as the page sets off, ••• stays a moment, and the list's title comes back with the page.
+        var bar = deliveries.zoom.bar
+        assertEquals(0f, bar.leading, 0f)
+        assertEquals(1f, bar.trailing, 0f)
+        assertEquals(0f, bar.root, 0f)
+        assertEquals(1f - deliveries.zoom.behind, bar.title, 0.001f)
         compose.onNodeWithTag(PAGE_BACK).assertDoesNotExist()
-        var fading = false
-        repeat(60) {
-            compose.mainClock.advanceTimeByFrame()
-            val bar = deliveries.zoom.pageBar
-            if (bar > 0f && bar < 1f) fading = true
-        }
-        assertTrue(fading)
+        compose.onNodeWithTag(PAGE_MENU_BUTTON).assertDoesNotExist()
+        // ••• has gone 70 ms on, and the list's items are coming back.
+        compose.mainClock.advanceTimeBy(80)
+        bar = deliveries.zoom.bar
+        assertEquals(0f, bar.trailing, 0f)
+        assertTrue("Root ${bar.root}", bar.root > 0f && bar.root < 0.3f)
+        assertEquals(1f - deliveries.zoom.behind, bar.title, 0.001f)
+        // All of them 0.17 s later.
+        compose.mainClock.advanceTimeBy(200)
+        assertEquals(1f, deliveries.zoom.bar.root, 0f)
         compose.mainClock.autoAdvance = true
         compose.mainClock.advanceTimeBy(1_000)
         closed()
@@ -380,6 +444,8 @@ class ParcelPageTest {
         openMenu()
         choose(ParcelMenuItem.Delete)
         compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+        // On a phone, an action sheet at the bottom.
+        compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
         compose.onNodeWithTag(DELETE_CANCEL).performClick()
         compose.mainClock.advanceTimeBy(1_000)
         assertEquals(emptyList<Any>(), source.deleted)
@@ -422,6 +488,168 @@ class ParcelPageTest {
         assertEquals(emptyList<Any>(), source.deleted)
     }
 
+    @Test
+    fun whileAChangeIsSavedDeleteWaits() {
+        show()
+        source.archiving = CompletableDeferred()
+        open("Birthday gift")
+        openMenu()
+        choose(ParcelMenuItem.Archive)
+        compose.onNodeWithTag(PARCEL_PAGE).assertExists()
+        openMenu()
+        item(ParcelMenuItem.Delete).assertIsNotEnabled()
+        item(ParcelMenuItem.Rename).assertIsEnabled()
+        back()
+        compose.mainClock.advanceTimeBy(1_000)
+        // Nor does its key ask.
+        press(KeyEvent.KEYCODE_DEL, ctrl)
+        compose.onNodeWithTag(DELETE_CONFIRMATION).assertDoesNotExist()
+        compose.runOnUiThread { source.archiving?.complete(Unit) }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        assertEquals(listOf(gift), source.archived)
+        closed()
+    }
+
+    @Test
+    fun aFailedArchiveKeepsThePageAndSaysWhyInAnAlert() {
+        show()
+        source.failure = IllegalStateException("No connection")
+        open("Birthday gift")
+        openMenu()
+        choose(ParcelMenuItem.Archive)
+        compose.onNodeWithTag(ACTION_ERROR).assertExists()
+        compose.onNode(hasText("No connection")).assertExists()
+        compose.onNodeWithTag(ACTION_ERROR_CLOSE).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(ACTION_ERROR).assertDoesNotExist()
+        assertEquals(emptyList<Any>(), source.archived)
+        assertEquals(listOf(gift), deliveries.navigator.navigation.path)
+        compose.onNodeWithTag(PAGE_CONTENT).assertExists()
+        // It can be tried again.
+        source.failure = null
+        openMenu()
+        choose(ParcelMenuItem.Archive)
+        assertEquals(listOf(gift), source.archived)
+        closed()
+    }
+
+    /** The menu and its delete question show the parcel as it is now, archived elsewhere, and go with it, deleted elsewhere. */
+    @Test
+    fun theMenuFollowsItsParcelChangedElsewhereAndGoesWithIt() {
+        show()
+        open("Birthday gift")
+        openMenu()
+        assertTrue(ParcelMenuItem.Archive in shownItems())
+        source.parcels.value = source.parcels.value.map { if (it.id == gift) it.copy(archivedAt = "2026-05-01T09:00:00Z") else it }
+        compose.waitForIdle()
+        assertTrue(ParcelMenuItem.Restore in shownItems())
+        assertTrue(ParcelMenuItem.Archive !in shownItems())
+        choose(ParcelMenuItem.Restore)
+        assertEquals(listOf(gift), source.restored)
+        closed()
+
+        open("Birthday gift")
+        openMenu()
+        val parcels = source.parcels.value
+        source.parcels.value = parcels.filterNot { it.id == gift }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(PAGE_MENU).assertDoesNotExist()
+        assertNull(deliveries.pageMenu)
+        compose.onNodeWithTag(PARCEL_MISSING).assertExists()
+
+        source.parcels.value = parcels
+        compose.waitForIdle()
+        openMenu()
+        choose(ParcelMenuItem.Delete)
+        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+        source.parcels.value = parcels.filterNot { it.id == gift }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(DELETE_CONFIRMATION).assertDoesNotExist()
+        assertNull(deliveries.deleting)
+        assertEquals(emptyList<Any>(), source.deleted)
+    }
+
+    /** Mail's keys press the menu's items, as its menu would; Escape goes back. */
+    @Test
+    fun theMenusKeysActOnThePagesParcelAndEscapeGoesBack() {
+        show()
+        open("Birthday gift")
+        press(KeyEvent.KEYCODE_C, ctrl or KeyEvent.META_SHIFT_ON)
+        val entry = DemoCards.parcel("Birthday gift").trackingNumbers.first()
+        assertEquals(TrackingNumberCopy.text(entry.number, entry.carrier), clipboard())
+        press(KeyEvent.KEYCODE_DEL, ctrl)
+        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+        compose.onNodeWithTag(DELETE_CANCEL).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+        press(KeyEvent.KEYCODE_ESCAPE)
+        compose.mainClock.advanceTimeBy(1_000)
+        closed()
+
+        open("Birthday gift")
+        press(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_META_ON)
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(listOf(gift), source.archived)
+        closed()
+    }
+
+    /** Once the page is on its way back, the keys are the list's again: Escape closes the search under it. */
+    @Test
+    fun escapeOnAPageGoingBackReachesTheList() {
+        show()
+        press(KeyEvent.KEYCODE_F, ctrl)
+        // Return ends the typing, and leaves the search open.
+        press(KeyEvent.KEYCODE_ENTER)
+        assertTrue(deliveries.showingSearch)
+        assertFalse(deliveries.searchFocused)
+        open("Birthday gift")
+        compose.mainClock.autoAdvance = false
+        press(KeyEvent.KEYCODE_ESCAPE)
+        compose.mainClock.advanceTimeByFrame()
+        assertTrue(deliveries.navigator.navigation.path.isEmpty())
+        assertEquals(gift, deliveries.zoom.covered)
+        assertTrue(deliveries.showingSearch)
+        press(KeyEvent.KEYCODE_ESCAPE)
+        assertFalse(deliveries.showingSearch)
+        compose.mainClock.autoAdvance = true
+        compose.mainClock.advanceTimeBy(1_000)
+        closed()
+    }
+
+    /** In a regular window the page's delete question stands off its •••, and the next card's parcel takes its place. */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun besideTheListDeleteAsksOffTheMenusButtonAndTheNextCardTakesThePagesPlace() {
+        show()
+        open("Birthday gift")
+        openMenu()
+        choose(ParcelMenuItem.Delete)
+        compose.onNodeWithTag(DELETE_CONFIRMATION).assertDoesNotExist()
+        val button = bounds(compose.onNodeWithTag(PAGE_MENU_BUTTON, useUnmergedTree = true))
+        val popover = bounds(compose.onNodeWithTag(DELETE_POPOVER))
+        assertTrue("Popover $popover under $button", popover.top >= button.bottom)
+        compose.onNodeWithTag(DELETE_CONFIRM).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        assertEquals(listOf(gift), source.deleted)
+        compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
+        compose.onNode(hasText("Belgian chocolate", substring = true) and hasAnyAncestor(hasTestTag(PAGE_COLUMN))).assertExists()
+    }
+
+    /** Beside the list the sample stays as the deliveries change, none of which is it. */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun besideTheListTheSampleStaysAsTheDeliveriesChange() {
+        show()
+        compose.runOnUiThread { deliveries.openSample() }
+        compose.waitForIdle()
+        source.parcels.value = source.parcels.value.drop(1)
+        compose.waitForIdle()
+        assertEquals(FirstOpenJourney.parcelId, deliveries.navigator.navigation.shown)
+        compose.onNodeWithTag(PAGE_CONTENT).assertExists()
+        compose.onNodeWithTag(PARCEL_MISSING).assertDoesNotExist()
+    }
+
     /** Beside the list the page has no bar of its own: its ••• joins the bar's glass, and the tabs stay. */
     @Test
     @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
@@ -442,7 +670,7 @@ class ParcelPageTest {
         choose(ParcelMenuItem.Archive)
         assertEquals(listOf(DemoCards.parcel("Birthday gift").id), source.archived)
         // The next card's parcel takes its place.
-        compose.onNodeWithTag(PARCEL_PAGE).assertExists()
+        compose.onNode(hasText("Belgian chocolate", substring = true) and hasAnyAncestor(hasTestTag(PAGE_COLUMN))).assertExists()
         compose.onNode(hasText("Birthday gift", substring = true) and hasAnyAncestor(hasTestTag(PAGE_COLUMN))).assertDoesNotExist()
     }
 

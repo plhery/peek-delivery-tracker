@@ -109,10 +109,11 @@ import kotlinx.coroutines.withContext
  * `top` is the id of the page on top of the stack, null with the root alone. `page` draws `top`'s page or, once it has
  * left, the one going back into its source until it lands: the stack draws `top ?: transition.covered`
  * ([ZoomTransition.covered]). `onBack` pops the page. `bar` draws the page's bar, its items pinned at the window's top
- * outside the page's container as the iPhone's navigation bar keeps them: it comes in over the last of an opening and
- * goes over the last of a closing ([ZoomGeometry.pageBarOpacity]), crossfading with the root's bar items
- * ([givingWayToPageBar]), and stays as it is while a drag or the back gesture shrinks the page under it. Its glass shows
- * the page and the root through it.
+ * outside the page's container as the iPhone's navigation bar keeps them ([pageBarItem]): they come in as an opening
+ * lands, after the root's bar items have faded ([ZoomGeometry.openingBar]), stay as they are while a drag or the back
+ * gesture shrinks the page under them, and go as a closing sets off, the root's items coming back after them
+ * ([ZoomGeometry.closingBar], [givingWayToPageBar]). Its glass shows the page and the root through it, and TalkBack
+ * reaches it only at rest.
  *
  * - Opening, the page's container springs from its source's frame to the window's on a critically damped spring of
  *   response 0.32 s, and the source's picture gives way to the page. The root recedes and dims under it, and the tab
@@ -188,7 +189,9 @@ fun ZoomStack(
             Phase.Closing -> {
                 coroutineScope {
                     val bar = launch { if (!flight.crossfade) delay(TAB_BAR_RETURN) }
+                    val items = launch { flight.handBarBack() }
                     flight.animateTo(0f)
+                    items.cancel()
                     val source = flight.source?.focus
                     flight.land()
                     source?.request()
@@ -224,7 +227,8 @@ fun ZoomStack(
         LaunchedEffect(covered) { if (covered && rootFocus.has) focusManager.clearFocus() }
         // What the bar's glass shows through: the page, and the root as the page shrinks off it.
         val backdrop = rememberMaterialBackdrop()
-        Box(Modifier.fillMaxSize().then(if (bar != null) Modifier.materialBackdrop(backdrop) else Modifier)) {
+        val barShown = page != null && covered && bar != null
+        Box(Modifier.fillMaxSize().then(if (barShown) Modifier.materialBackdrop(backdrop) else Modifier)) {
             // The root's own back handlers wait while a page is over it.
             val events = rememberNavigationEventDispatcherOwner(enabled = !covered)
             CompositionLocalProvider(LocalNavigationEventDispatcherOwner provides events) {
@@ -268,16 +272,11 @@ fun ZoomStack(
                 }
             }
         }
-        if (page != null && covered && bar != null) {
+        if (barShown) {
             // The page's bar, outside its container: it stays at the window's top while the page zooms, shrinks or
-            // is swiped back under it, and fades in and out with the flight.
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .graphicsLayer { alpha = flight.barOpacity() }
-                    .then(if (flight.phase == Phase.Closing) Modifier.clearAndSetSemantics {} else Modifier),
-            ) {
-                CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp), LocalMaterialBackdrop provides backdrop) { bar() }
+            // is swiped back under it, its items fading in and out with the flight.
+            Box(Modifier.fillMaxSize().then(if (flight.flying) Modifier.clearAndSetSemantics {} else Modifier)) {
+                CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp), LocalMaterialBackdrop provides backdrop) { bar?.invoke() }
             }
         }
         // Nothing takes a touch while the page opens or closes.
@@ -299,6 +298,9 @@ private val FLIGHT = Motion.springWithResponse<Float>(0.32, 1.0)
 /** A page let go short of closing springs back: critically damped, response 0.25 s. */
 private val SPRING_BACK = Motion.springWithResponse<Float>(0.25, 1.0)
 private val SPRING_BACK_OFFSET = Motion.springWithResponse<Offset>(0.25, 1.0)
+
+/** A closing's clock for its bars' items ([ZoomGeometry.closingBar]). */
+private val BAR_CLOSING = Motion.linear<Float>(ZoomGeometry.BAR_CLOSING_TIME.toDouble())
 
 /** Under Reduce Motion, UIKit's crossfade in place of the zoom, over a navigation transition's 0.35 s. */
 private val CROSSFADE = Motion.easeInOut<Float>(Motion.DEFAULT_CURVE_DURATION)
@@ -334,6 +336,13 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         private set
     var barHeld: Boolean by mutableStateOf(false)
     var reduceMotion = false
+
+    /** The bars' items as the flight set off, and its progress then: they go on from there ([bar]). */
+    private var setOffBar: ZoomBar by mutableStateOf(ZoomBar.Root)
+    private var setOffProgress = 0f
+
+    /** How long the closing has been going, in seconds, which its bars' items follow. */
+    private var closingFor: Float by mutableFloatStateOf(0f)
 
     /** The source the page flies out of and back into, and its frame as last seen; or the middle of the window. */
     private var chosenSource: ZoomSourceNode? by mutableStateOf(null)
@@ -411,8 +420,9 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
             // The page left the stack: it goes back into its source, staying drawn until it lands.
             top == null -> if (id != null && phase != Phase.Closing) beginClose()
             top == id && phase != Phase.Closing -> Unit
-            // Opened again on its way back: it turns round.
+            // Opened again on its way back: it turns round, its bars' items going on from where they are.
             top == id -> {
+                setOff()
                 heldAt = null
                 barHeld = false
                 start(Phase.Opening)
@@ -434,6 +444,8 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
                 barHeld = false
                 progress = 0f
                 velocity = 0f
+                setOffBar = ZoomBar.Root
+                setOffProgress = 0f
                 start(Phase.Opening)
             }
         }
@@ -451,12 +463,25 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         velocity = if (held != null && !crossfade) ZoomGeometry.closingVelocity(small(), held, releaseVelocity) else 0f
         releaseVelocity = 0f
         barHeld = true
+        setOff()
+        closingFor = 0f
         start(Phase.Closing)
     }
 
     private fun start(phase: Phase) {
         this.phase = phase
         run++
+    }
+
+    /** A flight sets off from where the bars' items are, which a flight cut short leaves anywhere. */
+    private fun setOff() {
+        setOffBar = bar()
+        setOffProgress = progress
+    }
+
+    /** Runs a closing's clock for its bars' items. */
+    suspend fun handBarBack() {
+        animate(0f, ZoomGeometry.BAR_CLOSING_TIME, animationSpec = BAR_CLOSING) { value, _ -> closingFor = value }
     }
 
     /** Where the page flies from and to: its source where it can be seen, the middle of the window otherwise. */
@@ -554,12 +579,21 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     /** How far the page has come over the root. Under Reduce Motion the root stays as it is. */
     fun behind(): Float = if (id == null || crossfade) 0f else progress
 
-    /** How much of the page's bar shows ([ZoomGeometry.pageBarOpacity]); under Reduce Motion it crossfades with the page. */
-    fun barOpacity(): Float = when {
-        id == null -> 0f
-        crossfade -> progress
-        else -> ZoomGeometry.pageBarOpacity(progress, closing = phase == Phase.Closing)
+    /**
+     * How much of each bar item shows ([ZoomGeometry.openingBar], [ZoomGeometry.closingBar]). At rest the page's bar
+     * shows whole, and the root's title comes back as a drag shrinks the page. Under Reduce Motion the page's bar and
+     * the root's crossfade with the page.
+     */
+    fun bar(): ZoomBar = when {
+        id == null -> ZoomBar.Root
+        crossfade -> ZoomBar(leading = progress, trailing = progress, root = 1f - progress, title = 1f - progress)
+        phase == Phase.Opening -> ZoomGeometry.openingBar(setOffBar, setOffProgress, progress)
+        phase == Phase.Closing -> ZoomGeometry.closingBar(setOffBar, setOffProgress, progress, closingFor)
+        else -> ZoomBar(leading = 1f, trailing = 1f, root = 0f, title = ZoomGeometry.titleUncovered(heldScale()))
     }
+
+    /** The page's scale as a gesture holds it, 1 with none. */
+    private fun heldScale(): Float = if (bounds.width > 0f) large().width / bounds.width else 1f
 
     /** The page fades in under Reduce Motion, and where it has no source to grow out of. */
     private fun containerOpacity(): Float = when {

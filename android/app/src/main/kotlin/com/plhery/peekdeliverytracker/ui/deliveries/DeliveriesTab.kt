@@ -206,8 +206,7 @@ fun DeliveriesTab(
             add(DeliveriesEntry.ParcelList)
             val navigation = navigator.navigation
             when (arrangement) {
-                // The page that left stays on the stack until it has gone back into its card.
-                DeliveriesArrangement.Stacked -> (navigation.chosen ?: state.zoom.covered)?.let { add(DeliveriesEntry.ParcelPage(it as UUID)) }
+                DeliveriesArrangement.Stacked -> state.pageOverList?.let { add(DeliveriesEntry.ParcelPage(it)) }
                 DeliveriesArrangement.SideBySide -> navigation.shown?.let { add(DeliveriesEntry.ParcelPage(it)) }
             }
         }
@@ -221,8 +220,7 @@ fun DeliveriesTab(
                         onBack = { navigator.pop(navigator.navigation.path.dropLast(1)) },
                         root = list,
                         page = shown,
-                        // The bar of the page drawn: the one on top, or the one going back into its card.
-                        bar = { (navigator.navigation.chosen ?: state.zoom.covered as UUID?)?.let { ParcelPageBar(state, it) } },
+                        bar = { state.pageOverList?.let { ParcelPageBar(state, it) } },
                     )
                 }
             }
@@ -260,6 +258,12 @@ fun DeliveriesTab(
         DeliveredPaper(state)
     }
 }
+
+/**
+ * The page drawn over the list, and its bar: the one on top, or the one that left, which stays on the stack until it
+ * has gone back into its card.
+ */
+private val DeliveriesState.pageOverList: UUID? get() = navigator.navigation.chosen ?: zoom.covered as UUID?
 
 /** A window this wide and this tall in dp counts as regular, as the iPhone's size classes would. */
 private val REGULAR_WIDTH = 600.dp

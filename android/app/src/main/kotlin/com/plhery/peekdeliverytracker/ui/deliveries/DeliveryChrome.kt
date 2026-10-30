@@ -166,8 +166,8 @@ internal fun barRowTop(): Dp {
  * its own, adding a parcel on its glass beside it, "Deliveries" in the window's middle and the account at the trailing
  * edge. Beside a parcel: the mark and the title, in the middle of the list's column; adding and the account stand over
  * the parcel ([PageToolbar]). The glass shows the list scrolling under it ([backdrop]). As a parcel's page zooms over
- * the list, the title fades with the list's coming under it, and the other items give way to the page's ‹ and •••
- * ([givingWayToPageBar]).
+ * the list, the title fades with the list's coming under it and comes back as the page shrinks off it, and the other
+ * items give way to the page's ‹ and ••• ([givingWayToPageBar]).
  */
 @Composable
 internal fun ListToolbar(
@@ -227,9 +227,8 @@ internal fun PageToolbar(state: DeliveriesState, backdrop: MaterialBackdrop?) {
     } else {
         0.dp
     }
-    val parcels by state.source.parcels.collectAsState()
     val shown = state.navigator.navigation.shown
-    val parcel = shown?.takeIf { state.sample(it) == null }?.let { state.pageParcel(it, parcels) }
+    val parcel = state.liveMenuParcel(shown)
     Box(Modifier.fillMaxWidth().padding(top = barRowTop()).height(ROW_HEIGHT)) {
         GlassSurface(
             CapsuleShape,
@@ -242,13 +241,13 @@ internal fun PageToolbar(state: DeliveriesState, backdrop: MaterialBackdrop?) {
             AddButton(state, Modifier.align(Alignment.CenterStart).offset(x = PAGE_ADD_CENTRE - BUTTON_SIDE / 2))
             AccountButton(state, Modifier.align(Alignment.CenterStart).offset(x = PAGE_ACCOUNT_CENTRE - BUTTON_SIDE / 2))
             if (parcel != null && shown != null) {
-                PageMenuButton(state, parcel, Modifier.align(Alignment.CenterStart).offset(x = PAGE_MENU_CENTRE - BUTTON_SIDE / 2))
+                PageMenuButton(state, shown, Modifier.align(Alignment.CenterStart).offset(x = PAGE_MENU_CENTRE - BUTTON_SIDE / 2))
             }
         }
     }
 }
 
-/** `addButton`: a plus, semibold, in the ink. Add isn't ported yet ([DeliveriesState.add]). */
+/** `addButton`: a plus, semibold at 17 points whatever the text size, in the ink. Add isn't ported yet ([DeliveriesState.add]). */
 @Composable
 private fun AddButton(state: DeliveriesState, modifier: Modifier) {
     val label = localized("app.addParcelAria")
@@ -263,7 +262,7 @@ private fun AddButton(state: DeliveriesState, modifier: Modifier) {
             },
         contentAlignment = Alignment.Center,
     ) {
-        PeekSymbol("plus", font = PeekTheme.type.style(IosTextStyle.Body, FontWeight.SemiBold), tint = PeekTheme.colors.ink)
+        PeekSymbol("plus", font = PeekTheme.type.fixed(17f, FontWeight.SemiBold), tint = PeekTheme.colors.ink)
     }
 }
 

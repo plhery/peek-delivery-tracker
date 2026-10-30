@@ -14,10 +14,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.text.BasicText
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -45,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import kotlin.math.abs
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -73,13 +76,17 @@ class ZoomStackTest {
     private var rootFocused = false
     private var pageFocused = false
     private var taps = 0
+    private lateinit var transition: ZoomTransition
 
-    /** The root, with the page on top from the first frame (`initial`), or opened once the root is drawn (`open`). */
-    private fun show(reduceMotion: Boolean = false, initial: String? = null, open: Boolean = initial == null) {
+    /**
+     * The root, with the page on top from the first frame (`initial`), or opened once the root is drawn (`open`); with
+     * `bar`, the page's bar: a black square for its ‹ and one for its •••, on the window's top corners.
+     */
+    private fun show(reduceMotion: Boolean = false, initial: String? = null, open: Boolean = initial == null, bar: Boolean = false) {
         top = initial
         compose.setContent {
             PeekTheme(dark = false, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = false, carrierIdentities = null) {
-                val transition = rememberZoomTransition()
+                val transition = rememberZoomTransition().also { this@ZoomStackTest.transition = it }
                 val drawn = top ?: transition.covered
                 ZoomStack(
                     transition = transition,
@@ -113,6 +120,7 @@ class ZoomStackTest {
                             }
                         }
                     },
+                    bar = if (!bar) null else { { BarSquares(transition) } },
                 )
             }
         }
@@ -371,9 +379,149 @@ class ZoomStackTest {
         assertTrue("Red $red, green $green", red - green > 40)
     }
 
+    // The bars' items.
+
+    /**
+     * How much of each of the bar's squares is drawn, against what is drawn just beside it, 80 dp down: black over
+     * anything, a square drawn at `a` leaves `1 - a` of what is under it. It shows `bar`, or the frame's `before`, as
+     * Robolectric's capture now and then shows a layer's alpha a frame late.
+     */
+    private fun assertDrawn(bar: ZoomBar, before: ZoomBar) {
+        val image = compose.onRoot().captureToImage().asAndroidBitmap()
+        fun green(x: Int) = ((image.getPixel(x * 2, 160) shr 8) and 0xFF).toFloat()
+        fun assertShows(item: String, now: Float, then: Float, drawn: Float) =
+            assertTrue("$item drawn at $drawn, $then then $now", abs(drawn - now) <= 0.02f || abs(drawn - then) <= 0.02f)
+        assertShows("‹", bar.leading, before.leading, 1f - green(58) / green(62))
+        assertShows("•••", bar.trailing, before.trailing, 1f - green(332) / green(328))
+    }
+
+    @Test
+    fun theBarsItemsAreDrawnAsMuchAsTheFlightShowsThem() {
+        show(open = false, bar = true)
+        compose.mainClock.autoAdvance = false
+        change { top = SOURCE }
+        var before = transition.bar
+        var coming = 0
+        repeat(40) {
+            compose.mainClock.advanceTimeByFrame()
+            val bar = transition.bar
+            assertDrawn(bar, before)
+            before = bar
+            if (bar.leading > 0.1f && bar.leading < 0.9f) coming++
+        }
+        assertTrue("Never partway", coming > 0)
+        assertDrawn(before, before)
+
+        change { top = null }
+        var waiting = 0
+        repeat(20) {
+            compose.mainClock.advanceTimeByFrame()
+            val bar = transition.bar
+            assertDrawn(bar, before)
+            before = bar
+            if (bar.leading == 0f && bar.trailing == 1f) waiting++
+        }
+        // ‹ went at once, ••• a moment later.
+        assertTrue("••• never waited", waiting > 0)
+        assertEquals(0f, transition.bar.trailing, 0f)
+    }
+
+    /** Each of the bars' items, `step` at most from `before`. */
+    private fun assertNear(before: ZoomBar, after: ZoomBar, step: Float) {
+        val message = "$before to $after"
+        assertEquals(message, before.leading, after.leading, step)
+        assertEquals(message, before.trailing, after.trailing, step)
+        assertEquals(message, before.root, after.root, step)
+        assertEquals(message, before.title, after.title, step)
+    }
+
+    @Test
+    fun aFlightTurnedRoundTakesTheBarsItemsOnFromWhereTheyAre() {
+        show(bar = true)
+        compose.mainClock.autoAdvance = false
+        // Going back, ••• still there and the list's title partway back, it opens again.
+        change { top = null }
+        repeat(4) { compose.mainClock.advanceTimeByFrame() }
+        val going = transition.bar
+        assertEquals(0f, going.leading, 0f)
+        assertEquals(1f, going.trailing, 0f)
+        assertTrue("Title ${going.title}", going.title > 0f && going.title < 1f)
+        change { top = SOURCE }
+        compose.mainClock.advanceTimeByFrame()
+        // No more than a frame of either flight from there.
+        var last = transition.bar
+        assertNear(going, last, 0.2f)
+        repeat(60) {
+            compose.mainClock.advanceTimeByFrame()
+            val bar = transition.bar
+            assertNear(last, bar, 0.35f)
+            last = bar
+        }
+        assertEquals(ZoomBar(leading = 1f, trailing = 1f, root = 0f, title = 0f), last)
+
+        // Opening, sent back with ‹ and ••• partway in: ‹ goes at once, the rest goes on from where it is.
+        change { top = null }
+        compose.mainClock.advanceTimeBy(2_000)
+        assertEquals(ZoomBar.Root, transition.bar)
+        change { top = SOURCE }
+        repeat(60) { if (transition.bar.leading < 0.2f) compose.mainClock.advanceTimeByFrame() }
+        val coming = transition.bar
+        assertTrue("‹ ${coming.leading}", coming.leading < 0.8f)
+        change { top = null }
+        compose.mainClock.advanceTimeByFrame()
+        val turned = transition.bar
+        assertEquals(0f, turned.leading, 0f)
+        assertEquals(coming.trailing, turned.trailing, 0.25f)
+        assertEquals(coming.root, turned.root, 0.1f)
+        assertEquals(coming.title, turned.title, 0.1f)
+        last = turned
+        repeat(30) {
+            compose.mainClock.advanceTimeByFrame()
+            val bar = transition.bar
+            assertNear(last, bar, 0.35f)
+            last = bar
+        }
+        compose.mainClock.advanceTimeBy(2_000)
+        assertEquals(ZoomBar.Root, transition.bar)
+    }
+
+    /** Under Reduce Motion the page's bar and the root's crossfade with the page, both ways. */
+    @Test
+    fun underReduceMotionTheBarsCrossfadeWithThePage() {
+        show(reduceMotion = true, open = false, bar = true)
+        compose.mainClock.autoAdvance = false
+        for (next in listOf(SOURCE, null)) {
+            change { top = next }
+            var before = transition.bar
+            var partway = false
+            repeat(30) {
+                compose.mainClock.advanceTimeByFrame()
+                val bar = transition.bar
+                assertEquals(bar.leading, bar.trailing, 0f)
+                assertEquals(1f - bar.leading, bar.root, 0.0001f)
+                assertEquals(1f - bar.leading, bar.title, 0.0001f)
+                assertDrawn(bar, before)
+                before = bar
+                if (bar.leading > 0.2f && bar.leading < 0.8f) partway = true
+            }
+            assertTrue("Never partway to $next", partway)
+            compose.mainClock.advanceTimeBy(2_000)
+            assertEquals(if (next == null) ZoomBar.Root else ZoomBar(leading = 1f, trailing = 1f, root = 0f, title = 0f), transition.bar)
+        }
+    }
+
     private companion object {
         const val SOURCE = "source"
         const val PAGE = "page"
         const val PAGE_BUTTON = "page.button"
+    }
+}
+
+/** The page's bar for the test: a black square for its ‹ and one for its •••, 40 dp each, 20 in and 60 down. */
+@Composable
+private fun BarSquares(transition: ZoomTransition) {
+    Box(Modifier.fillMaxSize()) {
+        Box(Modifier.padding(start = 20.dp, top = 60.dp).size(40.dp).pageBarItem(transition, leading = true).background(Color.Black))
+        Box(Modifier.align(Alignment.TopEnd).padding(end = 20.dp, top = 60.dp).size(40.dp).pageBarItem(transition, leading = false).background(Color.Black))
     }
 }

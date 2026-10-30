@@ -59,20 +59,67 @@ class ZoomGeometryTest {
         assertEquals(0.15f, ZoomGeometry.dim(1f), 0.0001f)
     }
 
-    @Test
-    fun thePagesBarComesInOverTheLast40PercentOfAnOpeningAndGoesOverTheLastQuarterOfAClosing() {
-        assertEquals(0f, ZoomGeometry.pageBarOpacity(0f, closing = false), 0f)
-        assertEquals(0f, ZoomGeometry.pageBarOpacity(0.6f, closing = false), 0f)
-        assertEquals(0.5f, ZoomGeometry.pageBarOpacity(0.8f, closing = false), 0.0001f)
-        assertEquals(1f, ZoomGeometry.pageBarOpacity(1f, closing = false), 0f)
-        // A spring past the window keeps it whole.
-        assertEquals(1f, ZoomGeometry.pageBarOpacity(1.02f, closing = false), 0f)
+    private fun assertBar(expected: ZoomBar, actual: ZoomBar) {
+        assertEquals("leading", expected.leading, actual.leading, 0.0001f)
+        assertEquals("trailing", expected.trailing, actual.trailing, 0.0001f)
+        assertEquals("root", expected.root, actual.root, 0.0001f)
+        assertEquals("title", expected.title, actual.title, 0.0001f)
+    }
 
-        assertEquals(1f, ZoomGeometry.pageBarOpacity(1f, closing = true), 0f)
-        assertEquals(1f, ZoomGeometry.pageBarOpacity(0.25f, closing = true), 0f)
-        assertEquals(0.4f, ZoomGeometry.pageBarOpacity(0.1f, closing = true), 0.0001f)
-        assertEquals(0f, ZoomGeometry.pageBarOpacity(0f, closing = true), 0f)
-        assertEquals(0f, ZoomGeometry.pageBarOpacity(-0.01f, closing = true), 0f)
+    @Test
+    fun anOpeningBringsThePagesBarInBetween82And97PercentAsTheListsItemsFadeWithIt() {
+        val open = { progress: Float -> ZoomGeometry.openingBar(ZoomBar.Root, 0f, progress) }
+        assertBar(ZoomBar.Root, open(0f))
+        assertBar(ZoomBar(0f, 0f, 0.5f, 0.5f), open(0.5f))
+        assertBar(ZoomBar(0f, 0f, 0.18f, 0.18f), open(0.82f))
+        assertBar(ZoomBar(0.6f, 0.6f, 0.09f, 0.09f), open(0.91f))
+        assertBar(ZoomBar(1f, 1f, 0.03f, 0.03f), open(0.97f))
+        assertBar(ZoomBar(1f, 1f, 0f, 0f), open(1f))
+        // A spring past the window keeps the page's bar whole and the list's items gone.
+        assertBar(ZoomBar(1f, 1f, 0f, 0f), open(1.02f))
+    }
+
+    @Test
+    fun aClosingHidesBackAtOnceThenTheMenuThenBringsTheListsItemsBackAsItsTitleComesWithThePage() {
+        val page = ZoomBar(1f, 1f, 0f, 0f)
+        assertBar(ZoomBar(0f, 1f, 0f, 0f), ZoomGeometry.closingBar(page, 1f, 1f, 0f))
+        assertBar(ZoomBar(0f, 1f, 0f, 0.2f), ZoomGeometry.closingBar(page, 1f, 0.8f, 0.05f))
+        assertBar(ZoomBar(0f, 0.5f, 0f, 0.3f), ZoomGeometry.closingBar(page, 1f, 0.7f, 0.06f))
+        // The ••• gone 0.07 s in, the list's items come back over 0.17 s.
+        assertBar(ZoomBar(0f, 0f, 0f, 0.4f), ZoomGeometry.closingBar(page, 1f, 0.6f, 0.07f))
+        assertBar(ZoomBar(0f, 0f, 0.5f, 0.8f), ZoomGeometry.closingBar(page, 1f, 0.2f, 0.155f))
+        assertBar(ZoomBar(0f, 0f, 1f, 1f), ZoomGeometry.closingBar(page, 1f, 0f, 0.24f))
+        // Let go with its title part way back, the title comes the rest of the way with the page.
+        assertBar(ZoomBar(0f, 1f, 0f, 0.4f), ZoomGeometry.closingBar(ZoomBar(1f, 1f, 0f, 0.4f), 1f, 1f, 0f))
+        assertBar(ZoomBar(0f, 0f, 0.5f, 0.7f), ZoomGeometry.closingBar(ZoomBar(1f, 1f, 0f, 0.4f), 1f, 0.5f, 0.155f))
+    }
+
+    @Test
+    fun aFlightCutShortGoesOnFromWhereTheItemsAreWithoutAJump() {
+        // Back half way through an opening: the list's items, half there, come back at once, with no ••• to wait for.
+        val halfOpen = ZoomGeometry.openingBar(ZoomBar.Root, 0f, 0.5f)
+        assertBar(halfOpen, ZoomGeometry.closingBar(halfOpen, 0.5f, 0.5f, 0f))
+        assertBar(ZoomBar(0f, 0f, 0.75f, 0.75f), ZoomGeometry.closingBar(halfOpen, 0.5f, 0.25f, 0.085f))
+        assertBar(ZoomBar(0f, 0f, 1f, 1f), ZoomGeometry.closingBar(halfOpen, 0.5f, 0f, 0.17f))
+        // Opened again on its way back: from where the closing left each item, to the page's.
+        val closing = ZoomBar(0f, 0.4f, 0.3f, 0.6f)
+        assertBar(closing, ZoomGeometry.openingBar(closing, 0.6f, 0.6f))
+        assertBar(ZoomBar(0f, 0.4f, 0.15f, 0.3f), ZoomGeometry.openingBar(closing, 0.6f, 0.8f))
+        assertBar(ZoomBar(1f, 1f, 0f, 0f), ZoomGeometry.openingBar(closing, 0.6f, 1f))
+        // Turned round past 82 %, the page's items come in from there.
+        assertBar(ZoomBar(0f, 0.4f, 0.3f, 0.6f), ZoomGeometry.openingBar(closing, 0.9f, 0.9f))
+        assertEquals(0.5f, ZoomGeometry.openingBar(closing, 0.9f, 0.935f).leading, 0.0001f)
+    }
+
+    @Test
+    fun theListsTitleComesBackAsAGestureShrinksThePageBelow83Percent() {
+        assertEquals(0f, ZoomGeometry.titleUncovered(1f), 0f)
+        assertEquals(0f, ZoomGeometry.titleUncovered(0.9f), 0f)
+        assertEquals(0f, ZoomGeometry.titleUncovered(0.826f), 0.0001f)
+        // The captures: 0.13 of it at 79 %, 0.37 at 72.7 %.
+        assertEquals(0.13f, ZoomGeometry.titleUncovered(0.791f), 0.005f)
+        assertEquals(0.367f, ZoomGeometry.titleUncovered(0.727f), 0.005f)
+        assertEquals(1f, ZoomGeometry.titleUncovered(0.4f), 0f)
     }
 
     @Test

@@ -1,8 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.view.KeyEvent
-import androidx.activity.compose.BackHandler
-import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -35,7 +33,6 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -44,7 +41,6 @@ import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.TransformOrigin
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layout
@@ -82,13 +78,12 @@ import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
-import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.zoom.pageBarItem
 import java.util.UUID
 import kotlin.math.max
 import kotlin.math.roundToInt
-import kotlinx.coroutines.launch
 
 /**
  * Where the page starts, when something other than its own bar stands over its top: the demo's bar, which [DemoPage]
@@ -115,9 +110,8 @@ internal val LocalPageTop = compositionLocalOf<Dp?> { null }
  */
 @Composable
 internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
-    val parcels by state.source.parcels.collectAsState()
-    val parcel = state.pageParcel(parcelId, parcels)
-    val sample = state.sample(parcelId) != null
+    val menuParcel = state.liveMenuParcel(parcelId)
+    val parcel = state.sample(parcelId) ?: menuParcel
     val colors = PeekTheme.colors
     val title = localized("detail.label")
     // Under the demo's bar, or clear of the page's own bar's row.
@@ -128,7 +122,7 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
     val start = if (edges.start) padding.calculateStartPadding(direction) else 0.dp
     val end = if (edges.end) padding.calculateEndPadding(direction) else 0.dp
     val bottom = padding.calculateBottomPadding()
-    PageKeys(state, parcel?.takeUnless { sample })
+    PageKeys(state, menuParcel)
     Box(
         Modifier
             .fillMaxSize()
@@ -189,9 +183,10 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, margins: PageMarg
                     PageHistory(parcel, history, Modifier.weight(1f))
                 }
             } else {
+                // The history's parts in the paper's own column, where a part not drawn leaves no gap.
                 Column(paper(PAGE_SINGLE_COLUMN), verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) {
                     LiveParcelPass(parcel, divided = true, Modifier.fillMaxWidth())
-                    PageHistory(parcel, history, Modifier.fillMaxWidth())
+                    HistoryParts(parcel, history)
                 }
             }
             FeedbackQuestion(Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE))
@@ -248,13 +243,17 @@ private fun CarrierNotes(parcel: Parcel) = Unit
 @Composable
 private fun ShipmentIdentity(parcel: Parcel) = Unit
 
-/** The history's column: `ParcelJournal` where the page shows what the carrier answered, then the sync line, 20 apart. */
+/** The history's column beside the pass, its parts 20 apart. */
 @Composable
 private fun PageHistory(parcel: Parcel, history: Boolean, modifier: Modifier) {
-    Column(modifier, verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) {
-        if (history) ParcelJournal(parcel)
-        SyncStatus(parcel)
-    }
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) { HistoryParts(parcel, history) }
+}
+
+/** The history's parts: `ParcelJournal` where the page shows what the carrier answered, then the sync line. */
+@Composable
+private fun HistoryParts(parcel: Parcel, history: Boolean) {
+    if (history) ParcelJournal(parcel)
+    SyncStatus(parcel)
 }
 
 /** `ParcelJournal`, the tracking history. Not ported yet. */
@@ -283,15 +282,18 @@ private fun FeedbackQuestion(modifier: Modifier) = Unit
  */
 @Composable
 internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
-    val parcels by state.source.parcels.collectAsState()
-    val parcel = parcelId.takeIf { state.sample(it) == null }?.let { state.pageParcel(it, parcels) }
+    val parcel = state.liveMenuParcel(parcelId)
     val padding = tabContentPadding()
     val direction = LocalLayoutDirection.current
     val navigator = state.navigator
     Box(Modifier.fillMaxWidth().padding(top = barRowTop()).height(BAR_ROW).testTag(PAGE_BAR)) {
         GlassSurface(
             CapsuleShape,
-            Modifier.align(Alignment.CenterStart).offset(x = padding.calculateStartPadding(direction) + BAR_MARGIN).size(BAR_BUTTON),
+            Modifier
+                .align(Alignment.CenterStart)
+                .offset(x = padding.calculateStartPadding(direction) + BAR_MARGIN)
+                .pageBarItem(state.zoom, leading = true)
+                .size(BAR_BUTTON),
         ) {
             BarButton("chevron.left", localized("detail.back"), PAGE_BACK, Modifier.align(Alignment.Center)) {
                 navigator.pop(navigator.navigation.path.dropLast(1))
@@ -300,32 +302,46 @@ internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
         if (parcel != null) {
             GlassSurface(
                 CapsuleShape,
-                Modifier.align(Alignment.CenterEnd).offset(x = -(padding.calculateEndPadding(direction) + BAR_MARGIN)).size(BAR_BUTTON),
+                Modifier
+                    .align(Alignment.CenterEnd)
+                    .offset(x = -(padding.calculateEndPadding(direction) + BAR_MARGIN))
+                    .pageBarItem(state.zoom, leading = false)
+                    .size(BAR_BUTTON),
             ) {
-                PageMenuButton(state, parcel, Modifier.align(Alignment.Center))
+                PageMenuButton(state, parcelId, Modifier.align(Alignment.Center))
             }
         }
     }
 }
 
-/** The parcel's ••• (`Menu { ParcelMenuButtons }`), which opens its menu from where it stands. */
+/** The parcel's ••• (`Menu { ParcelMenuButtons }`) on the page with `pageId`, which opens its menu from where it stands. */
 @Composable
-internal fun PageMenuButton(state: DeliveriesState, parcel: Parcel, modifier: Modifier = Modifier) {
+internal fun PageMenuButton(state: DeliveriesState, pageId: UUID, modifier: Modifier = Modifier) {
     val focus = remember { AccessibilityFocus() }
-    var bounds by remember { mutableStateOf(Rect.Zero) }
     BarButton(
         "ellipsis", localized("detail.parcelActions"), PAGE_MENU_BUTTON,
-        modifier.onGloballyPositioned { bounds = it.boundsInWindow() }.accessibilityFocus(focus),
+        modifier.onGloballyPositioned { state.pageMenuButton = it.boundsInWindow() }.accessibilityFocus(focus),
     ) {
         if (state.modal) return@BarButton
-        state.pageMenu = PageMenuRequest(parcel, bounds)
+        state.pageMenu = PageMenuRequest(pageId)
         state.returnFocus = focus
     }
 }
 
 /**
- * A button of the page's bar, 44 square: a symbol in the ink, semibold at the body's size and at the large image scale,
- * as the iPhone's bar draws its items (its ‹ 20 points tall, its ••• 4).
+ * The parcel of the deliveries the page with `parcelId` acts on, as the deliveries change ([DeliveriesState.menuParcel]):
+ * none for the sample, nor for a parcel gone.
+ */
+@Composable
+internal fun DeliveriesState.liveMenuParcel(parcelId: UUID?): Parcel? {
+    val parcels by source.parcels.collectAsState()
+    return menuParcel(parcelId, parcels)
+}
+
+/**
+ * A button of the page's bar, 44 square: a symbol in the ink, semibold at 17 points and at the large image scale, as
+ * the iPhone's bar draws its items (its ‹ 20 points tall, its ••• 4), whatever the text size, as a bar's items keep
+ * theirs.
  */
 @Composable
 private fun BarButton(symbol: String, label: String, tag: String, modifier: Modifier, action: () -> Unit) {
@@ -340,14 +356,14 @@ private fun BarButton(symbol: String, label: String, tag: String, modifier: Modi
             },
         contentAlignment = Alignment.Center,
     ) {
-        PeekSymbol(symbol, font = PeekTheme.type.style(IosTextStyle.Body, FontWeight.SemiBold), scale = SymbolScale.Large, tint = PeekTheme.colors.ink)
+        PeekSymbol(symbol, font = PeekTheme.type.fixed(BAR_SYMBOL, FontWeight.SemiBold), scale = SymbolScale.Large, tint = PeekTheme.colors.ink)
     }
 }
 
 /**
  * The page's keys (ParcelDetailView's `keys`), while the keyboard reaches the page, nothing stands over it and the
  * search field doesn't have it: Esc back to the list from a page over it, and the keys of the ••• menu's items on its
- * parcel, Delete waiting while another change is saved.
+ * parcel, Delete waiting while another change is saved. A page on its way back into its card takes none.
  */
 @Composable
 private fun PageKeys(state: DeliveriesState, parcel: Parcel?) {
@@ -362,6 +378,7 @@ private fun PageKeys(state: DeliveriesState, parcel: Parcel?) {
 
 private fun DeliveriesState.pageKey(event: KeyEvent, parcel: Parcel?): Boolean {
     if (modal || showingFilters || searchFocused) return false
+    if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen == null) return false
     val act = event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0
     if (arrangement == DeliveriesArrangement.Stacked && event.hasNoModifiers() && event.keyCode == KeyEvent.KEYCODE_ESCAPE) {
         if (act) navigator.pop(navigator.navigation.path.dropLast(1))
@@ -374,9 +391,12 @@ private fun DeliveriesState.pageKey(event: KeyEvent, parcel: Parcel?): Boolean {
     return true
 }
 
-/** The page's ••• menu open over the window: its parcel, and where its button stands in the window. */
+/**
+ * The page's ••• menu open over the window, on the page with `pageId`: it shows and acts on that page's parcel as it is
+ * now, and goes with it ([DeliveriesState.menuParcel]).
+ */
 @Stable
-internal class PageMenuRequest(val parcel: Parcel, val anchor: Rect)
+internal class PageMenuRequest(val pageId: UUID)
 
 /** The page's ••• menu, over the whole window where the tab shell is there to draw it ([LocalTabOverlay]). */
 @Composable
@@ -395,51 +415,38 @@ internal fun PageMenuHost(state: DeliveriesState) {
  * The ••• menu (B-S09, `Menu { ParcelMenuButtons }`): the parcel's items on glass in their groups, growing out of the
  * button from its top trailing corner, over nothing dimmed; as tall as the window's safe area allows below the button's
  * top, scrolling past that. The keys that press the items show with a keyboard connected, and Delete waits while
- * another change is saved. A tap outside, the back gesture or a choice closes it; a choice acts once it has closed.
+ * another change is saved. A tap outside, the back gesture or a choice closes it; a choice acts once it has closed, on
+ * the parcel as it is then. It goes at once with its parcel, deleted elsewhere, as the iPhone's goes with its •••.
  * TalkBack reaches only the menu, from its first item, and goes back to ••• as it closes.
  */
 @Composable
 private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
     val density = LocalDensity.current
-    val reduceMotion = PeekTheme.reduceMotion
-    val scope = rememberCoroutineScope()
-    val shown = remember(request) { Animatable(0f) }
-    var closing by remember(request) { mutableStateOf(false) }
-    val parcel = request.parcel
+    val parcel = state.liveMenuParcel(request.pageId)
+    val gone = parcel == null || state.navigator.navigation.shown != request.pageId
+    LaunchedEffect(gone) { if (gone) state.pageMenu = null }
+    if (parcel == null || gone) return
     val items = remember(parcel) { ParcelMenuItem.menu(parcel, onCard = false, reader = state.source.viewerLink(parcel) != null) }
     val shortcuts = keyboardConnected()
-    val first = remember(request) { AccessibilityFocus() }
     val title = parcel.label.ifEmpty { localized("common.parcel") }
-
-    LaunchedEffect(request) { first.request() }
-    LaunchedEffect(request) { shown.animateTo(1f, if (reduceMotion) Motion.easeOut(0.2) else Motion.spring(0.3, 0.15)) }
-    fun close(then: () -> Unit = {}) {
-        if (closing) return
-        closing = true
-        scope.launch {
-            shown.animateTo(0f, if (reduceMotion) Motion.easeOut(0.2) else Motion.spring(0.2))
-            state.pageMenu = null
-            then()
-        }
-    }
-    val choose = { item: ParcelMenuItem -> close { state.choseOnPage(item, parcel) } }
-    BackHandler { close() }
+    val menu = rememberMenuPresence(request) { state.pageMenu = null }
+    val choose = { item: ParcelMenuItem -> menu.close { state.menuParcel(request.pageId)?.let { state.choseOnPage(item, it) } } }
     MenuKeys(shortcuts, items, choose)
 
     BoxWithConstraints(
         Modifier
             .fillMaxSize()
             .testTag(PAGE_MENU)
-            .pointerInput(request) { detectTapGestures { close() } },
+            .pointerInput(request) { detectTapGestures { menu.close() } },
     ) {
         val windowWidth = constraints.maxWidth.toFloat()
         val windowHeight = constraints.maxHeight.toFloat()
         val insets = WindowInsets.safeDrawing
         val direction = LocalLayoutDirection.current
         var origin by remember { mutableStateOf(Offset.Zero) }
-        val anchor = request.anchor.translate(-origin)
+        val anchor = state.pageMenuButton.translate(-origin)
         val menuWidth = with(density) { MENU_WIDTH.toPx() }
-        val menu = with(density) {
+        val frame = with(density) {
             val margin = MENU_SIDE.toPx()
             val leftmost = insets.getLeft(this, direction) + margin
             val rightmost = max(leftmost, windowWidth - insets.getRight(this, direction) - margin)
@@ -454,23 +461,16 @@ private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
             Modifier
                 .layout { measurable, _ ->
                     val width = menuWidth.roundToInt()
-                    val placeable = measurable.measure(Constraints(width, width, 0, menu.height.roundToInt()))
-                    layout(placeable.width, placeable.height) { placeable.place(menu.left.roundToInt(), menu.top.roundToInt()) }
+                    val placeable = measurable.measure(Constraints(width, width, 0, frame.height.roundToInt()))
+                    layout(placeable.width, placeable.height) { placeable.place(frame.left.roundToInt(), frame.top.roundToInt()) }
                 }
-                .graphicsLayer {
-                    val t = shown.value
-                    alpha = t.coerceIn(0f, 1f)
-                    val scale = if (reduceMotion) 1f else 0.6f + 0.4f * t
-                    scaleX = scale
-                    scaleY = scale
-                    transformOrigin = TransformOrigin(1f, 0f)
-                }
+                .growingMenu(menu, TransformOrigin(1f, 0f))
                 .pointerInput(Unit) { detectTapGestures { } }
                 .semantics { paneTitle = title }
                 .dropShadow(ContinuousRoundedShape(MENU_RADIUS), MENU_SHADOW),
         ) {
             Column(Modifier.verticalScroll(rememberScrollState()).padding(vertical = MENU_PADDING)) {
-                MenuItems(items, shortcuts, busy = state.pageWorking, choose, first)
+                MenuItems(items, shortcuts, busy = state.pageWorking, choose, menu.first)
             }
         }
     }
@@ -491,6 +491,7 @@ private val BAR_ROW = 44.dp
 private val BAR_BUTTON = 44.dp
 private val BAR_MARGIN = 20.dp
 private val MENU_SIDE = 16.dp
+private const val BAR_SYMBOL = 17f
 
 /** The test tags of the page's parts, its bar's buttons and its menu. */
 const val PAGE_CONTENT = "parcelPage.content"

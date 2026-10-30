@@ -46,6 +46,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelStore
+import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import java.util.UUID
@@ -233,15 +234,32 @@ class DeliveryListTest {
         assertEquals(listOf("parcel"), views)
     }
 
+    /**
+     * Gone from the deliveries elsewhere, a parcel shown by itself gives way to the first card, and one someone chose
+     * stays to say it is gone, as the iPhone's `settle` has them; a new carrier, under a new id, keeps it shown.
+     */
     @Test
-    fun theParcelShownBesideTheListGoesToTheNextCardWhenItGoes() {
+    fun aParcelShownByItselfBesideTheListGivesWayAsItGoesAndOneChosenStays() {
         show()
-        compose.card("Birthday gift").performClick()
+        assertPageShows("New trainers")
+        source.parcels.value = source.parcels.value.filterNot { it.label.startsWith("New trainers") }
         compose.waitForIdle()
-        source.parcels.value = source.parcels.value.filterNot { it.label.startsWith("Birthday gift") }
-        compose.waitForIdle()
+        // Next up now, the first card.
         assertPageShows("Belgian chocolate")
         compose.card("Belgian chocolate").assertIsSelected()
+
+        compose.card("Birthday gift").performClick()
+        compose.waitForIdle()
+        source.parcels.value = source.parcels.value.map {
+            if (!it.label.startsWith("Birthday gift")) it
+            else it.copy(id = UUID.randomUUID(), carrierData = (it.carrierData ?: CarrierData()).copy(originalPackageId = it.id))
+        }
+        compose.waitForIdle()
+        assertPageShows("Birthday gift")
+        source.parcels.value = source.parcels.value.filterNot { it.label.startsWith("Birthday gift") }
+        compose.waitForIdle()
+        compose.onNodeWithTag(PARCEL_MISSING).assertExists()
+        compose.onNode(hasText("Belgian chocolate", substring = true) and hasAnyAncestor(hasTestTag(PARCEL_PAGE))).assertDoesNotExist()
     }
 
     @Test

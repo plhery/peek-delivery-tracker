@@ -446,16 +446,10 @@ internal class DeliveriesState(
 
     /** The parcels came from the store. */
     fun receive(next: List<Parcel>) {
-        val rowsBefore = rows
-        val shownBefore = navigator.navigation.shown
         val held = hold.receive(shown = parcels, next = next, watching = watching)
         // Holding nothing as before is no change: the list isn't arranged again for it.
         if (!held.isEmpty || !hold.isEmpty) hold = held
         parcels = next
-        // A parcel shown beside the list that has gone, deleted from its card or elsewhere, gives way to the card after it.
-        if (arrangement == DeliveriesArrangement.SideBySide && shownBefore != null && next.none { it.id == shownBefore }) {
-            navigator.leave(shownBefore, rowsBefore)
-        }
         // The parcel open when the system closed the app opens again as it was, without its zoom.
         if (navigator.restore(next) && arrangement == DeliveriesArrangement.Stacked) {
             navigator.navigation.chosen?.let(zoom::showStill)
@@ -698,6 +692,13 @@ internal class DeliveriesState(
     fun pageParcel(parcelId: UUID, parcels: List<Parcel>): Parcel? =
         sample(parcelId) ?: parcels.firstOrNull { it.id == parcelId || it.carrierData?.originalPackageId == parcelId }
 
+    /**
+     * The parcel of the deliveries the page with `parcelId` acts on, its ••• menu and its keys (ParcelDetailView's
+     * `if let parcel, sample == nil`): none for the sample, nor for a parcel gone.
+     */
+    fun menuParcel(parcelId: UUID?, parcels: List<Parcel> = source.parcels.value): Parcel? =
+        parcelId?.takeIf { sample(it) == null }?.let { pageParcel(it, parcels) }
+
     /** The app's words, in its language: the composition hands them in. */
     var localizer: Localizer? = null
 
@@ -744,11 +745,14 @@ internal class DeliveriesState(
      */
     val openSwipes: SnapshotStateList<ArchiveSwipe> = mutableStateListOf()
 
-    /** The parcel its menu asks about before deleting it (`prompts.deleting`). */
-    var deleting: Parcel? by mutableStateOf(null)
+    /** The parcel a menu asks about before deleting it (`prompts.deleting`). */
+    var deleting: DeleteRequest? by mutableStateOf(null)
 
     /** The parcel page's ••• menu, open over the window. */
     var pageMenu: PageMenuRequest? by mutableStateOf(null)
+
+    /** Where the page's ••• stands in the window, which its menu and its delete question come out of. */
+    var pageMenuButton: Rect by mutableStateOf(Rect.Zero)
 
     /** A change the parcel's page asked for is being saved (`working`): Delete waits, and no other starts. */
     var pageWorking: Boolean by mutableStateOf(false)
@@ -894,6 +898,12 @@ internal class DeliveriesState(
         }
     }
 
+    /** The delete question was answered with Delete: the parcel goes, the one its page shows by then where it asked. */
+    fun confirmDelete(request: DeleteRequest) {
+        val parcel = if (request.fromPage) menuParcel(navigator.navigation.shown) ?: return else request.parcel
+        delete(parcel)
+    }
+
     /** The page open, over the list or beside it, shows `parcel`, by its id or the one it had before. */
     private fun pageShows(parcel: Parcel): Boolean {
         val page = navigator.navigation.shown ?: return false
@@ -923,15 +933,22 @@ internal class DeliveriesState(
     fun choseOnPage(item: ParcelMenuItem, parcel: Parcel) {
         when (item) {
             ParcelMenuItem.Open, ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
-            ParcelMenuItem.CopyTrackingNumber -> {
-                val entry = parcel.trackingNumbers.firstOrNull() ?: return
-                source.action("parcel-copy-tracking")
-                copy(TrackingNumberCopy.text(entry.number, entry.carrier))
-            }
+            // The page says nothing of it: the iPhone's shows "Copied" on the number's row, which isn't ported yet.
+            ParcelMenuItem.CopyTrackingNumber -> copyTrackingNumber(parcel)
             ParcelMenuItem.Archive -> runOnPage(parcel) { archive(parcel).await() }
             ParcelMenuItem.Restore -> runOnPage(parcel) { restore(parcel).await() }
-            ParcelMenuItem.Delete -> deleting = parcel
+            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel, fromPage = true)
         }
+    }
+
+    /**
+     * Puts the parcel's first number on the clipboard, as its carrier's site takes it: whether the app says so itself,
+     * where the system doesn't; null with no number.
+     */
+    private fun copyTrackingNumber(parcel: Parcel): Boolean? {
+        val entry = parcel.trackingNumbers.firstOrNull() ?: return null
+        source.action("parcel-copy-tracking")
+        return copy(TrackingNumberCopy.text(entry.number, entry.carrier))
     }
 
     /** The page's `run`: saves one change at a time, and leaves the page once it is saved. */
@@ -960,15 +977,14 @@ internal class DeliveriesState(
             // menu offers them, and they do nothing yet.
             ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
             ParcelMenuItem.CopyTrackingNumber -> {
-                val entry = parcel.trackingNumbers.firstOrNull() ?: return
-                source.action("parcel-copy-tracking")
+                val says = copyTrackingNumber(parcel) ?: return
                 val copied = text("detail.copied")
                 // Where the system shows the copy itself, TalkBack still hears of it.
-                if (copy(TrackingNumberCopy.text(entry.number, entry.carrier))) show(copied) else announce(copied)
+                if (says) show(copied) else announce(copied)
             }
             ParcelMenuItem.Archive -> archive(parcel)
             ParcelMenuItem.Restore -> restore(parcel)
-            ParcelMenuItem.Delete -> deleting = parcel
+            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel, fromPage = false)
         }
     }
 

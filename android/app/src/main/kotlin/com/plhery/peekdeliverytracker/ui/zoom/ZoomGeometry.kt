@@ -29,12 +29,22 @@ internal object ZoomGeometry {
     /** The black over what is under a page, at most. */
     const val DIM = 0.15f
 
+    /** The page's bar, pinned at the window's top, comes in over this stretch of an opening's progress ([openingBar]). */
+    const val BAR_OPENING_START = 0.82f
+    const val BAR_OPENING_END = 0.97f
+
     /**
-     * The page's bar, pinned at the window's top: it comes in over the last 40 % of an opening, and goes over the last
-     * quarter of a closing ([pageBarOpacity]).
+     * Closing, in seconds from the moment it sets off ([closingBar]): the page's trailing items stay this long, then go
+     * over this long, and the root's items come back over this long once they have gone.
      */
-    const val BAR_OPENING_START = 0.6f
-    const val BAR_CLOSING_SHARE = 0.25f
+    const val BAR_TRAILING_HOLD = 0.05f
+    const val BAR_TRAILING_FADE = 0.02f
+    const val BAR_ROOT_FADE = 0.17f
+    const val BAR_CLOSING_TIME = BAR_TRAILING_HOLD + BAR_TRAILING_FADE + BAR_ROOT_FADE
+
+    /** The root's title comes back as a gesture shrinks the page from this scale, all of it this much smaller. */
+    const val TITLE_SCALE = 0.826f
+    const val TITLE_SCALE_SPAN = 0.27f
 
     /** The page's shadow: black at this opacity, a Gaussian of this deviation in dp, with no offset. */
     const val SHADOW_OPACITY = 0.4f
@@ -79,17 +89,45 @@ internal object ZoomGeometry {
     fun faceOpacity(progress: Float): Float = 1f - pageOpacity(progress)
 
     /**
-     * How much of the page's bar shows, its ‹ and •••, which stay at the window's top as the iPhone's navigation bar
-     * keeps its items while the page zooms under them: none until an opening is 60 % of the way, all of it as the page
-     * lands; closing, all of it until the page is a quarter of the way from its source, then less with the page, so
-     * that the list's own items come back in its place as it goes. A drag or the back gesture leaves it as it is.
+     * The bars' items on an opening `progress` of the way, which set off `from` progress `fromProgress`: the page's ‹
+     * and ••• come in from there as it lands, between 82 % and 97 % of a whole opening, while the root's items and its
+     * title fade with the page's progress.
      */
-    fun pageBarOpacity(progress: Float, closing: Boolean): Float =
-        if (closing) {
-            (progress / BAR_CLOSING_SHARE).coerceIn(0f, 1f)
-        } else {
-            ((progress - BAR_OPENING_START) / (1f - BAR_OPENING_START)).coerceIn(0f, 1f)
-        }
+    fun openingBar(from: ZoomBar, fromProgress: Float, progress: Float): ZoomBar {
+        val start = max(BAR_OPENING_START, fromProgress)
+        val end = if (start < BAR_OPENING_END) BAR_OPENING_END else 1f
+        val coming = if (start >= end) 1f else ((progress - start) / (end - start)).coerceIn(0f, 1f)
+        val going = if (fromProgress >= 1f) 1f else ((progress - fromProgress) / (1f - fromProgress)).coerceIn(0f, 1f)
+        return ZoomBar(
+            leading = from.leading + (1f - from.leading) * coming,
+            trailing = from.trailing + (1f - from.trailing) * coming,
+            root = from.root * (1f - going),
+            title = from.title * (1f - going),
+        )
+    }
+
+    /**
+     * The bars' items `elapsed` seconds into a closing `progress` of the way, which set off `from` progress
+     * `fromProgress`, as the iPhone's navigation bar hands its items back: the page's ‹ goes at once, its ••• a moment
+     * later, and only then do the root's items come back; the root's title comes back with the page's progress. The
+     * iPhone morphs the + capsule into ‹ and the account's into ••• here, a drag widening the ‹ capsule and its symbols
+     * swapping through a blur; that morph isn't drawn.
+     */
+    fun closingBar(from: ZoomBar, fromProgress: Float, progress: Float, elapsed: Float): ZoomBar {
+        val trailing = from.trailing * (1f - ((elapsed - BAR_TRAILING_HOLD) / BAR_TRAILING_FADE).coerceIn(0f, 1f))
+        val rootStart = if (from.trailing > 0f) BAR_TRAILING_HOLD + BAR_TRAILING_FADE else 0f
+        val coming = ((elapsed - rootStart) / BAR_ROOT_FADE).coerceIn(0f, 1f)
+        val going = if (fromProgress <= 0f) 1f else 1f - (progress / fromProgress).coerceIn(0f, 1f)
+        return ZoomBar(
+            leading = 0f,
+            trailing = trailing,
+            root = from.root + (1f - from.root) * coming,
+            title = from.title + (1f - from.title) * going,
+        )
+    }
+
+    /** How much of the root's title shows as a gesture holds the page at `scale`: none until it is 82.6 % of its size. */
+    fun titleUncovered(scale: Float): Float = ((TITLE_SCALE - scale) / TITLE_SCALE_SPAN).coerceIn(0f, 1f)
 
     /** The size of what is under the page, `behind` (0 to 1) of the way to being covered. */
     fun receded(behind: Float): Float = 1f - (1f - RECEDED_SCALE) * behind.coerceIn(0f, 1f)

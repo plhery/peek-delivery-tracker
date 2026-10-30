@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.zoom
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toIntSize
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocusNode
-import kotlin.math.min
 
 /**
  * A zoom's namespace (`@Namespace var transition`): the sources its pages zoom out of ([zoomSource],
@@ -32,9 +32,9 @@ import kotlin.math.min
  * A page's id is its source's: a page opens out of the source with its id and goes back into it, wherever that is
  * by then, or from and to the middle of the window, fading, where none can be seen.
  *
- * What lies under the pages reads [behind]: as a page comes over it, the iPhone's list recedes and its bar's items
- * fade, its bars staying where they are ([recedingUnderZoom], [fadingUnderZoom]), the items whose places the page's own
- * bar takes crossfading with it ([givingWayToPageBar]).
+ * What lies under the pages reads [behind] and [bar]: as a page comes over it, the iPhone's list recedes and its bar's
+ * items fade, its bars staying where they are ([recedingUnderZoom], [fadingUnderZoom]), and the items whose places the
+ * page's own bar takes come back only once the page's have gone ([givingWayToPageBar], [pageBarItem]).
  */
 @Stable
 class ZoomTransition {
@@ -57,8 +57,8 @@ class ZoomTransition {
     /** How far the page has come over what lies under it, from 0 to 1. */
     val behind: Float get() = flight?.behind() ?: 0f
 
-    /** How much of the page's own bar shows at the window's top, from 0 to 1 ([ZoomStack]'s `bar`). */
-    val pageBar: Float get() = flight?.barOpacity() ?: 0f
+    /** How much of each item of the root's bar and of the page's own bar shows ([ZoomStack]'s `bar`). */
+    val bar: ZoomBar get() = flight?.bar() ?: ZoomBar.Root
 
     /** Inside what recedes under the pages ([recedingUnderZoom]), as last placed. */
     internal var receding: LayoutCoordinates? = null
@@ -87,6 +87,18 @@ class ZoomTransition {
     }
 }
 
+/**
+ * How much of each bar item shows, from 0 to 1: the page's bar's leading item (its ‹) and trailing ones (its •••), the
+ * root's bar items whose places they take, and the root's title.
+ */
+@Immutable
+data class ZoomBar(val leading: Float, val trailing: Float, val root: Float, val title: Float) {
+    companion object {
+        /** The root's bar alone. */
+        val Root = ZoomBar(leading = 0f, trailing = 0f, root = 1f, title = 1f)
+    }
+}
+
 @Composable
 fun rememberZoomTransition(): ZoomTransition = remember { ZoomTransition() }
 
@@ -109,16 +121,22 @@ fun Modifier.recedingUnderZoom(transition: ZoomTransition): Modifier = graphicsL
     scaleY = scale
 }.onPlaced { transition.receding = it }
 
-/** The bar's items under a zooming page, which fade where they are as the page comes over them. */
-fun Modifier.fadingUnderZoom(transition: ZoomTransition): Modifier = graphicsLayer { alpha = 1f - transition.behind.coerceIn(0f, 1f) }
+/**
+ * The root's title under a zooming page, which fades where it is as the page comes over it, and comes back as a gesture
+ * shrinks the page off it or as the page goes.
+ */
+fun Modifier.fadingUnderZoom(transition: ZoomTransition): Modifier = graphicsLayer { alpha = transition.bar.title }
 
 /**
- * The bar's items whose places the page's own bar takes, its ‹ and ••• at the window's top: they fade as the page
- * comes over them, as [fadingUnderZoom]'s do, and come back only as the page's bar goes, the two crossfading as the
- * iPhone's navigation bar crossfades its items.
+ * The root's bar items whose places the page's own bar takes, its ‹ and ••• at the window's top: they fade as the page
+ * comes over them, stay away while a gesture holds the page, and come back only once the page's own have gone, as the
+ * iPhone's navigation bar hands its items back.
  */
-fun Modifier.givingWayToPageBar(transition: ZoomTransition): Modifier = graphicsLayer {
-    alpha = min(1f - transition.behind.coerceIn(0f, 1f), 1f - transition.pageBar.coerceIn(0f, 1f))
+fun Modifier.givingWayToPageBar(transition: ZoomTransition): Modifier = graphicsLayer { alpha = transition.bar.root }
+
+/** An item of the page's own bar ([ZoomStack]'s `bar`): its leading one, the ‹, or a trailing one, the •••. */
+fun Modifier.pageBarItem(transition: ZoomTransition, leading: Boolean): Modifier = graphicsLayer {
+    alpha = transition.bar.let { if (leading) it.leading else it.trailing }
 }
 
 private data class ZoomSourceElement(

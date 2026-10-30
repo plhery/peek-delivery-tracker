@@ -2650,6 +2650,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffd500"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-seguimiento",
+      "title": "Meiteshun seguimiento: número AMTS, estados y a quién acudir",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
       "id": "sending",
       "catalog": "sending",
       "slug": "sending-seguimiento",
@@ -2922,6 +2930,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT rastreio: carta de porte, estados e entrega",
       "name": "TNT",
       "color": "#ff6600"
+    },
+    {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-rastreio",
+      "title": "Rastreio Meiteshun: número AMTS, estados e a quem perguntar",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
     }
   ],
   "pt-br": [

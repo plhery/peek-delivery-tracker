@@ -154,7 +154,7 @@
   { "id": "mhi", "catalog": "mhi", "name": "MHI", "languages": ["en"] },
   { "id": "pengyou", "catalog": "pengyou", "name": "Pengyou", "languages": ["en"] },
   { "id": "linhan", "catalog": "linhan", "name": "LinHan International", "languages": ["en"] },
-  { "id": "mtscn", "catalog": "mtscn", "name": "Meiteshun Logistics", "languages": ["en"] },
+  { "id": "mtscn", "catalog": "mtscn", "name": "Meiteshun Logistics", "languages": ["en", "pt", "es"] },
   { "id": "cttyex", "catalog": "cttyex", "name": "CTTYEX", "languages": ["en"] },
   { "id": "speedaf", "catalog": "speedaf", "name": "Speedaf", "languages": ["en"] },
   { "id": "yilong-logistics", "catalog": "yilong-logistics", "name": "Yilong Logistics", "languages": ["en"] },

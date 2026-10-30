@@ -693,7 +693,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   words, within a minute of them. Both rows are stored, since the same rule now and then
   pairs two scans of their own. A row of the earlier carrier at the same stage as another
   source's, within 60 s either way, or in any stage at the same second, is served with
-  `relay_of`, that row's id (closest pairs first, one pair per row): both carriers tell a
+  `relay_of`, that row's id (closest pairs first, then those in the same words, then in the
+  same stage, one pair per row): both carriers tell a
   hand-over at one second, each in its own stage (4PX's "Parcel handed to dpd" and DPD's
   acceptance). At that second the places must not conflict, and on a minute's first second,
   which a carrier keeping minutes gives every scan, they must share a word; a few seconds

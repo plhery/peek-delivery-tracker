@@ -124,8 +124,9 @@ function sameSecond(copy: { at: number; words: string[] }, scan: { at: number; w
 /**
  * The relay pairs of a handed-over parcel, each copy with the id of the scan it repeats. The earlier carrier's scans
  * repeat a scan of another source at the same stage within a minute, or in any stage at the same second, the closest
- * pairs first. Then, in any stage, a row on a minute's first second repeats one with seconds within that minute
- * (`sameMinuteScan`, which the sync's `relayedScans` shares). Then a row of the new carrier placed only in a country
+ * pairs first and, of pairs as close, those telling the same words, then the same stage. Then, in any stage, a row on
+ * a minute's first second repeats one with seconds within that minute (`sameMinuteScan`, which the sync's
+ * `relayedScans` shares). Then a row of the new carrier placed only in a country
  * the earlier carrier delivers in, and the new carrier does not, repeats the earlier carrier's latest scan of its
  * stage, when it follows every such scan by up to three hours but not by whole hours. Last, a row of the earlier
  * carrier that names no place and is dated to the second repeats the new carrier's row one to three whole hours away,
@@ -139,7 +140,7 @@ export function relayCopies(row: JsonObject): Map<string, string> {
   const scans = row.tracking_events.filter(isRecord)
     .map((event) => ({
       id: String(event.id), stage: event.stage, source: source(event), at: Date.parse(String(event.occurred_at)),
-      country: countryOnly(event.location), words: placeWords(event),
+      text: String(event.description ?? '').trim(), country: countryOnly(event.location), words: placeWords(event),
       placed: typeof event.location === 'string' && event.location.trim() !== '',
     }))
     .filter((scan) => Number.isFinite(scan.at) && scan.source !== '' && scan.source !== 'app');
@@ -162,8 +163,10 @@ export function relayCopies(row: JsonObject): Map<string, string> {
     .flatMap((copy) => scans.filter((scan) => scan.source === current && twinHours(copy.at, scan.at))
       .map((scan) => ({ copy, scan, gap: Math.abs(scan.at - copy.at) })));
   const paired = new Set<string>();
+  // Of pairs as close, those telling the same words, then the same stage, so that each copy goes under its own scan.
+  const unlike = ({ copy, scan }: (typeof candidates)[number]) => (copy.text === scan.text ? 0 : 2) + (copy.stage === scan.stage ? 0 : 1);
   for (const list of [candidates, minutes, exchanged, twins]) {
-    list.sort((a, b) => a.gap - b.gap || a.copy.at - b.copy.at
+    list.sort((a, b) => a.gap - b.gap || unlike(a) - unlike(b) || a.copy.at - b.copy.at
       || a.copy.id.localeCompare(b.copy.id) || a.scan.id.localeCompare(b.scan.id));
     for (const { copy, scan } of list) {
       if (paired.has(copy.id) || paired.has(scan.id)) continue;

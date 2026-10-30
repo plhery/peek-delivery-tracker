@@ -116,6 +116,22 @@ describe('relayCopies', () => {
       scan('arrival', 'swiss-post', 'in_transit', '2026-09-09T07:47:00Z'),
       scan('border', 'swiss-post', 'in_transit', '2026-09-09T07:48:00Z'),
     ]))).toEqual(new Map([['a', 'border'], ['b', 'arrival']]));
+    // Two scans of one second each carrier tells: each copy goes under the scan in its words, then of its stage.
+    const told = (id: string, source: string, stage: string, description: string) => ({
+      ...scan(id, source, stage, '2026-09-09T18:38:04Z'), description,
+    });
+    expect(relayCopies(handedOver([
+      told('copy-1', 'dhl', 'in_transit', 'Departed facility'),
+      told('copy-2', 'dhl', 'in_transit', 'Accepted at facility'),
+      told('accepted', 'swiss-post', 'accepted', 'Accepted at facility'),
+      told('departed', 'swiss-post', 'in_transit', 'Departed facility'),
+    ]))).toEqual(new Map([['copy-1', 'departed'], ['copy-2', 'accepted']]));
+    expect(relayCopies(handedOver([
+      told('copy-1', 'dhl', 'in_transit', 'Processed'),
+      told('copy-2', 'dhl', 'accepted', 'Processed'),
+      told('accepted', 'swiss-post', 'accepted', 'Processed'),
+      told('sorted', 'swiss-post', 'in_transit', 'Processed'),
+    ]))).toEqual(new Map([['copy-1', 'sorted'], ['copy-2', 'accepted']]));
   });
 
   it('pairs the new post\'s record of a step the earlier one sent it under that post\'s latest scan of the stage', () => {

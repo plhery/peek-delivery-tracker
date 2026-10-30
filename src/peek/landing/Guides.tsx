@@ -1,5 +1,5 @@
 import { useId, useRef, useState, type MouseEvent } from 'react';
-import { carrierPath } from '../../carriers/paths';
+import { carrierListPath } from '../../carriers/paths';
 import { GUIDE_LINKS } from '../../generated/guides';
 import { guidePath } from '../../guides/paths';
 import { useI18n } from '../../i18n';
@@ -51,7 +51,7 @@ export function GuidesLink() {
       <ul>{links.map(({ id: guide, slug, title }) => <li key={guide}><a href={guidePath(language, slug)} lang={language === locale ? undefined : documentLanguage(language)}>{title}</a></li>)}</ul>
       <p className="landing-guides__more">
         <a className="landing-guides__all" href={guidePath(language)}>{t('guides.all')}</a>
-        <a className="landing-guides__all" href={carrierPath(locale)}>{t('carriers.all')}</a>
+        <a className="landing-guides__all" href={carrierListPath(locale)}>{t('carriers.all')}</a>
       </p>
     </div>
   </>;

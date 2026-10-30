@@ -13,6 +13,7 @@ vi.mock('next/headers', () => ({
 // Outside a request there is nothing to wait for.
 vi.mock('next/server', async (original) => ({ ...await original<typeof import('next/server')>(), connection: async () => undefined }));
 
+const { hasCarrierPages } = await import('../carriers/paths');
 const { carrierAddresses, carrierAlternates, carrierLanguages, carrierLinkBySlug, carrierLinks, carrierText, carrierUpdated } = await import('./carrierTexts');
 const { CarrierIndexRoute, CarrierRoute, carrierIndexMetadata, carrierMetadata } = await import('./carrierPages');
 const { frenchSpacing, questions } = await import('../guides/markdown');
@@ -22,10 +23,13 @@ afterEach(() => { request.host = 'peek.example'; vi.unstubAllEnvs(); });
 
 const [first] = carrierLinks('en');
 const prefix = (locale: Locale) => (locale === 'en' ? '' : `/${locale}`);
-/** A carrier written in English and in one other language, and a language it is not written in. */
-const translated = carrierLinks('en').map(({ id }) => ({ id, languages: carrierLanguages(id) })).find(({ languages }) => languages.length > 1 && languages.length < SUPPORTED_LOCALES.length)!;
+/** The site's languages a carrier's page is written in; the others have no carriers' own page to lead to yet. */
+const written = SUPPORTED_LOCALES.filter(hasCarrierPages);
+/** A carrier written in English and in one other language, and one of those languages it is not written in. */
+const translated = carrierLinks('en').map(({ id }) => ({ id, languages: carrierLanguages(id) }))
+  .find(({ languages }) => languages.length > 1 && written.some((locale) => !languages.includes(locale)))!;
 const [, other] = translated.languages.filter(isLocale);
-const missing = SUPPORTED_LOCALES.find((locale) => !translated.languages.includes(locale))!;
+const missing = written.find((locale) => !translated.languages.includes(locale))!;
 const graph = (html: string) => JSON.parse(/<script type="application\/ld\+json">(.*?)<\/script>/.exec(html)![1])['@graph'];
 
 describe('the carriers’ pages as the server reads them', () => {
@@ -60,20 +64,18 @@ describe('the carriers’ pages as the server reads them', () => {
     expect(carrierText('en', first.id)).toBe(kept);
   });
 
-  it('leads a carrier’s page in every language to its own page where it is written, and to the carriers’ own page elsewhere', () => {
-    expect(carrierAddresses()).toEqual({
-      en: '/carriers', de: '/de/carriers', fr: '/fr/carriers', it: '/it/carriers', es: '/es/carriers', pt: '/pt/carriers', 'pt-br': '/pt-br/carriers',
-      pl: '/pl/carriers', ru: '/ru/carriers', zh: '/zh/carriers',
-    });
+  it('leads a carrier’s page to its own page where it is written, to the carriers’ own page elsewhere, and nowhere in a language with none', () => {
+    expect(written).toContain('en');
+    expect(carrierAddresses()).toEqual(Object.fromEntries(written.map((locale) => [locale, `${prefix(locale)}/carriers`])));
     const addresses = carrierAddresses(translated.id);
     for (const locale of SUPPORTED_LOCALES) {
       const own = carrierLinks(locale).find(({ id }) => id === translated.id);
-      expect(addresses[locale], locale).toBe(`${prefix(locale)}/carriers${own ? `/${own.slug}` : ''}`);
+      expect(addresses[locale], locale).toBe(hasCarrierPages(locale) ? `${prefix(locale)}/carriers${own ? `/${own.slug}` : ''}` : undefined);
     }
     expect(addresses[missing]).toBe(`${prefix(missing)}/carriers`);
   });
 
-  it('tells search engines a carrier’s page in its own languages only, and the carriers’ own page in all', () => {
+  it('tells search engines a carrier’s page in its own languages only, and the carriers’ own page in those with carriers’ pages', () => {
     const origin = new URL('https://peek.example');
     const addresses = carrierAddresses(translated.id);
     expect(carrierAlternates(origin, translated.id)).toEqual({
@@ -82,7 +84,7 @@ describe('the carriers’ pages as the server reads them', () => {
     });
     expect(carrierAlternates(origin, translated.id)).not.toHaveProperty(missing);
     expect(carrierAlternates(origin)).toEqual({
-      ...Object.fromEntries(SUPPORTED_LOCALES.map((locale) => [locale, `https://peek.example${prefix(locale)}/carriers`])),
+      ...Object.fromEntries(written.map((locale) => [locale, `https://peek.example${prefix(locale)}/carriers`])),
       'x-default': 'https://peek.example/carriers',
     });
   });
@@ -179,13 +181,13 @@ describe('what a carrier’s page tells a search engine', () => {
     ]);
   });
 
-  it('writes the carriers’ own page with a card for each carrier of its language, and with none in a language that has none', async () => {
+  it('writes the carriers’ own page with a card for each carrier of its language, and the English ones in a language that has none', async () => {
     const html = renderToStaticMarkup(await CarrierIndexRoute({ locale: other }));
     expect([...html.matchAll(/class="guide-card carrier-card" href="([^"]+)"/g)].map(([, href]) => href)).toEqual(carrierLinks(other).map(({ slug }) => `/${other}/carriers/${slug}`));
     expect(html).toContain('hrefLang="pl"');
     for (const locale of SUPPORTED_LOCALES.filter((language) => carrierLinks(language).length === 0)) {
       const empty = renderToStaticMarkup(await CarrierIndexRoute({ locale }));
-      expect(empty).not.toContain('carrier-card');
+      expect([...empty.matchAll(/class="guide-card carrier-card" href="([^"]+)"/g)].map(([, href]) => href)).toEqual(carrierLinks('en').map(({ slug }) => `/carriers/${slug}`));
       expect(empty).toContain('<h1');
     }
   });

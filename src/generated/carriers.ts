@@ -1,5 +1,5 @@
 // Generated from content/carriers by scripts/generate-guides.mjs. Do not edit.
-import type { PageLanguage } from '../lib/locale';
+import type { Locale, PageLanguage } from '../lib/locale';
 
 /**
  * A carrier's page in one language: the carrier's id, its id in Universal Parcel Scraper's catalog, its name
@@ -3526,3 +3526,9 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ]
 };
+
+/**
+ * Peek's languages a carrier's page is written in. Each has its carriers' own page; a language without one
+ * sends its readers to the English one until a carrier's page is written in it.
+ */
+export const CARRIER_LOCALES: readonly Locale[] = ["en","de","fr","it","es","pt","pl"];

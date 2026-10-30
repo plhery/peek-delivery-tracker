@@ -1,6 +1,6 @@
 import { createElement, type ReactNode } from 'react';
 import mark from '../brand/mark.json';
-import { carrierPath } from '../carriers/paths';
+import { carrierListPath } from '../carriers/paths';
 import { documentLanguage, guideLanguage, hrefLanguage, languagePath, PAGE_LANGUAGES, type Locale, type PageAddresses, type PageLanguage } from '../lib/locale';
 import type { Translate } from '../lib/messages';
 import { SOURCE_URL } from '../lib/source';
@@ -54,7 +54,7 @@ export function GuideFrame({ locale, language = locale, t, addresses, languageNa
       <div className="guide-footer__links">
         <a className="guide-footer__name" href={tracker}><Mark size={18} />{t('app.title')} · {t('app.tagline')}</a>
         <a href={guidePath(guideLanguage(locale))}>{t('guides.all')}</a>
-        <a href={carrierPath(locale)}>{t('carriers.all')}</a>
+        <a href={carrierListPath(locale)}>{t('carriers.all')}</a>
         <a href="/privacy.html">{t('auth.privacyLink')}</a>
         <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>

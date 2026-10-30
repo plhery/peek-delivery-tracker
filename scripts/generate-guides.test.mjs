@@ -111,6 +111,11 @@ test('French titles are listed as French guides are set, the no-break spaces wri
 
 /** The carriers' list as the site has it. */
 const carrierIndex = () => JSON.parse(readFileSync(path.join(carrierContent, 'index.json'), 'utf8'));
+/** The links a written module lists in each language, and Peek's languages it has carriers' pages in. */
+const listedIn = (written) => ({
+  links: JSON.parse(written.slice(written.indexOf('= {') + 2, written.indexOf(';\n', written.indexOf('= {')))),
+  locales: JSON.parse(/export const CARRIER_LOCALES: readonly Locale\[\] = (.*);/.exec(written)[1]),
+});
 
 /** A copy of the carriers' pages to break in one place. */
 function copyCarriers(change) {
@@ -239,7 +244,8 @@ test('the list the app links holds, in each language, its carriers in order with
     const written = carriersModule(readCarriers(directory));
     assert.match(written, /"title": "Colis\\u00a0: où est-il\\u202f\?"/);
     assert.doesNotMatch(written, /[  ]/);
-    const links = JSON.parse(written.slice(written.indexOf('= {') + 2, written.lastIndexOf(';')));
+    const { links, locales } = listedIn(written);
+    assert.deepEqual(locales, SUPPORTED_LOCALES.filter((locale) => index.some(({ languages }) => languages.includes(locale))));
     for (const locale of SUPPORTED_LOCALES) {
       const listed = index.filter(({ languages }) => languages.includes(locale));
       assert.deepEqual(links[locale].map(({ id, name, color }) => ({ id, name, color })), listed.map(({ id, name, catalog }) => ({ id, name, color: CARRIER_CATALOG[catalog].color })), locale);
@@ -263,13 +269,15 @@ test('a page in a language with pages alone is listed under its language, and li
   try {
     const written = carriersModule(readCarriers(directory));
     assert.match(written, /export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink\[\]>/);
-    const links = JSON.parse(written.slice(written.indexOf('= {') + 2, written.lastIndexOf(';')));
+    const { links, locales } = listedIn(written);
     assert.deepEqual(Object.keys(links), ['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-br', 'pl', 'ru', 'zh', 'nl', 'sv', 'da', 'nb', 'fi', 'cs', 'sk', 'hu', 'ro', 'bg', 'el', 'hr', 'sl', 'lt', 'lv', 'et', 'uk', 'sr']);
     assert.deepEqual(links.fi.filter(({ id }) => id === carrier.id).map(({ id, slug }) => ({ id, slug })), [{ id: carrier.id, slug: 'lahetysten-seuranta' }]);
-    // A language no carrier is written in lists none.
+    // A language no carrier is written in lists none, and Peek's own have their carriers' page only once one is.
     for (const language of Object.keys(links).filter((language) => language !== 'fi' && !index.some(({ languages }) => languages.includes(language)))) {
       assert.deepEqual(links[language], []);
     }
+    assert.deepEqual(locales, SUPPORTED_LOCALES.filter((locale) => links[locale].length > 0));
+    assert.ok(!locales.includes('fi'));
   } finally {
     rmSync(directory, { recursive: true, force: true });
   }

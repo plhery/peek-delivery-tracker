@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { CARRIER_LINKS } from '../src/generated/carriers';
+import { CARRIER_LINKS, CARRIER_LOCALES } from '../src/generated/carriers';
 import { GUIDE_LINKS } from '../src/generated/guides';
 import { GUIDE_LANGUAGES, hrefLanguages, SUPPORTED_LOCALES, type GuideLanguage, type Locale } from '../src/lib/locale';
 import { carrierAlternates, carrierLanguages, carrierUpdated } from '../src/server/carrierTexts';
@@ -16,17 +16,17 @@ const xmlAddresses = <Addresses extends Partial<Record<string, string>>>(address
 
 /** The day the newest guide of a language was last checked: when its list last changed. */
 const lastChecked = (locale: GuideLanguage) => GUIDE_LINKS[locale].map(({ id }) => guideUpdated(locale, id)).sort().at(-1);
-/** The day the newest carrier's page of a language was last checked; none for a language with none yet. */
+/** The day the newest carrier's page of a language was last checked. */
 const carriersChecked = (locale: Locale) => CARRIER_LINKS[locale].map(({ id }) => carrierUpdated(locale, id)).sort().at(-1);
 
 /**
  * The pages meant to be found: the landing in each language, the guides' own
  * page and every guide in each language they are written in, each naming the
- * others, the carriers' own page in each language and every carrier's page in
- * each of its languages, naming only those, as hreflang names them, the
- * privacy notice and the help page. A guide or a carrier's page is dated by
- * the day its facts were last checked. A parcel, an invitation and the demo
- * are not listed.
+ * others, the carriers' own page in each language a carrier's page is written
+ * in and every carrier's page in each of its languages, naming only those, as
+ * hreflang names them, the privacy notice and the help page. A guide or a
+ * carrier's page is dated by the day its facts were last checked. A parcel,
+ * an invitation and the demo are not listed.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const origin = await siteOrigin();
@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const addresses = xmlAddresses(guideAlternates(origin, id));
       return GUIDE_LANGUAGES.map((locale) => ({ url: addresses[locale], lastModified: guideUpdated(locale, id), alternates: { languages: hrefLanguages(addresses) } }));
     }),
-    ...SUPPORTED_LOCALES.map((locale) => ({ url: carriers[locale]!, lastModified: carriersChecked(locale), alternates: { languages: hrefLanguages(carriers) } })),
+    ...CARRIER_LOCALES.map((locale) => ({ url: carriers[locale]!, lastModified: carriersChecked(locale), alternates: { languages: hrefLanguages(carriers) } })),
     ...CARRIER_LINKS.en.flatMap(({ id }) => {
       const addresses = xmlAddresses(carrierAlternates(origin, id));
       return carrierLanguages(id).map((locale) => ({ url: addresses[locale]!, lastModified: carrierUpdated(locale, id), alternates: { languages: hrefLanguages(addresses) } }));

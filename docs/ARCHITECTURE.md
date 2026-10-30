@@ -259,7 +259,7 @@ Key server modules:
 | `/i/<key>`, `/invite` | A friend invitation ([FRIENDS.md](FRIENDS.md)) |
 | `/demo` | The demo deliveries, kept on the device, to anyone; leaving the demo returns to `/` |
 | `/guides`, `/guides/<slug>`; `/<language>/guides`, `/<language>/guides/<slug>` | The guides, articles for readers who arrive from a search engine, and their list, in the address's language whatever the browser prefers. English has no prefix. Any other address below a language's guides is sent to the 404 page by the proxy ([`proxy.ts`](../proxy.ts)), so the server writes that page whole. The landing's foot lists them |
-| `/carriers`, `/carriers/<slug>`; `/<language>/carriers`, `/<language>/carriers/<slug>` | A page per carrier for readers who searched for its tracking, in the languages it is written in, and their list in every language. Above its text, a box takes a number to the landing in the page's language without putting it in the address. Any other address below a language's carriers, a carrier's in a language it is not written in too, is sent to the 404 page as a guide's is. The guides' foot and the landing's list of guides lead to them |
+| `/carriers`, `/carriers/<slug>`; `/<language>/carriers`, `/<language>/carriers/<slug>` | A page per carrier for readers who searched for its tracking, in the languages it is written in, and their list in each language a carrier's page is written in. A language of the app with none yet lists the English pages under its own address, marked `noindex`, out of the sitemap and named by no other language, and its links to the list lead to the English one, until its first page is written (`CARRIER_LOCALES`). Above its text, a box takes a number to the landing in the page's language without putting it in the address. Any other address below a language's carriers, a carrier's in a language it is not written in too, is sent to the 404 page as a guide's is. The guides' foot and the landing's list of guides lead to them |
 | `/<page-only language>/carriers/<slug>` | A carrier's page in a language the app does not speak (`PAGE_ONLY_LANGUAGES`), such as Finnish for Posti: its title and text in that language, everything around them in English: `<html lang>` is the page's language, named by the proxy, and the frame declares English. Its links lead to a carrier's page in its language where there is one, to the English pages elsewhere. The language has no carriers' list; any other address below it is the 404 page |
 | `/email/off?lang=<language>#t=<token>` | The way out of the delivery email, from the link an email carries, in the email's language. It asks first, then switches the email off (or back on) for the account the token names, without a sign-in. The token stays after the `#` and travels only in the body of that request |
 
@@ -298,7 +298,7 @@ first byte: `<html lang>`, the words, the title and the link preview.
 
 For search engines, `/robots.txt` lets everything be fetched and `/sitemap.xml` lists the
 pages meant to be found: the landing, the guides' list and every guide in each language,
-the carriers' list in each language and every carrier's page in each of its languages,
+the carriers' list in each language a carrier's page is written in and every carrier's page in each of its languages,
 the privacy notice and the help page. A guide or a carrier's page is dated by the day its
 facts were last checked. Each
 landing's HTML carries its title, description and canonical address, the address of every

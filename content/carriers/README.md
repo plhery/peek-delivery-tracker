@@ -3,7 +3,10 @@
 One page per carrier, for people who searched for its tracking: what its numbers look like,
 what its statuses mean, and what to do when a parcel gets stuck. They live at
 `/carriers/<slug>` in English and `/<language>/carriers/<slug>` in the other languages it
-is written in; `/carriers` and `/<language>/carriers` list them in every language.
+is written in; `/carriers` and `/<language>/carriers` list them in each language a page is
+written in. A language of the app with no page yet keeps its readers on the English list: its
+own list shows the English pages, out of search engines and the sitemap, and no other page links to it.
+It comes back with the language's first page.
 
 A page can also be written in a language the app does not speak: a national post's or a
 local courier's page in its country's own language, such as Finnish for Posti. These

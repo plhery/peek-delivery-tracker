@@ -1,7 +1,7 @@
 import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
 import en from '../shared/locales/en.json' with { type: 'json' };
 import italian from '../shared/locales/it.json' with { type: 'json' };
-import { CARRIER_LINKS } from '../src/generated/carriers';
+import { CARRIER_LINKS, CARRIER_LOCALES } from '../src/generated/carriers';
 import { documentLanguage, hrefLanguage, isPageOnlyLanguage, SUPPORTED_LOCALES } from '../src/lib/locale';
 
 // The demo build keeps lookups in the browser; every number here is fictional.
@@ -15,6 +15,8 @@ test.afterEach(async ({ page }) => { expect(errors.get(page)).toEqual([]); });
 
 const LANGUAGES = SUPPORTED_LOCALES;
 type Language = (typeof LANGUAGES)[number];
+/** Peek's languages a carrier's page is written in; the others send their readers to the English carriers. */
+const LISTED = LANGUAGES.filter((language) => CARRIER_LOCALES.includes(language));
 const NUMBER = '1ZDEMO202600000001';
 const parcelAddress = /\/p\/[2-9A-HJ-NP-Za-km-z]{12}$/;
 const pathOf = (address: string) => new URL(address).pathname;
@@ -57,7 +59,13 @@ test('the carriers’ own page lists every carrier’s page of its language, and
     expect(response!.status(), language).toBe(200);
     await expect(page.locator('html')).toHaveAttribute('lang', documentLanguage(language));
     const cards = page.locator('.carrier-card');
-    expect(await cards.evaluateAll((links) => links.map((link) => (link as HTMLAnchorElement).href)), language).toEqual(pagesIn(pages, language).map(({ url }) => url));
+    // Until a carrier's page is written in a language, its page lists the English ones, out of search engines' sight.
+    const listed = LISTED.includes(language);
+    expect(await cards.evaluateAll((links) => links.map((link) => (link as HTMLAnchorElement).href)), language).toEqual(pagesIn(pages, listed ? language : 'en').map(({ url }) => url));
+    await expect(page.locator('meta[name="robots"]'), language).toHaveCount(listed ? 0 : 1);
+    if (!listed) await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
+    // And its foot leads to the list its readers can use.
+    await expect(page.locator('.guide-footer__links a[href$="/carriers"]'), language).toHaveAttribute('href', hub(listed ? language : 'en'));
   }
   await page.goto('/carriers');
   await expect(page.getByRole('heading', { level: 1, name: en['carriers.heading'] })).toBeVisible();
@@ -74,10 +82,10 @@ test('the carriers’ own page lists every carrier’s page of its language, and
 test('a carrier’s page shows its title, the tracker and whose it is not, and names only the languages it is written in', async ({ page, request }) => {
   const pages = await sitemap(request);
   // A carrier written in some languages and not in others.
-  const carrier = CARRIER_LINKS.en.find(({ id }) => LANGUAGES.some((language) => !CARRIER_LINKS[language].some((link) => link.id === id)))!;
+  const carrier = CARRIER_LINKS.en.find(({ id }) => LISTED.some((language) => !CARRIER_LINKS[language].some((link) => link.id === id)))!;
   const english = pages.find(({ url }) => pathOf(url) === `/carriers/${carrier.slug}`)!;
   const written = LANGUAGES.filter((language) => hrefLanguage(language) in english.languages);
-  expect(written.length).toBeLessThan(LANGUAGES.length);
+  expect(written.length).toBeLessThan(LISTED.length);
   expect(Object.keys(english.languages)).toEqual([...written.map(hrefLanguage), 'x-default']);
 
   const html = await (await request.get(pathOf(english.url), { headers: { 'accept-language': 'de' } })).text();
@@ -98,10 +106,10 @@ test('a carrier’s page shows its title, the tracker and whose it is not, and n
   expect(await field.evaluate((element) => element.compareDocumentPosition(document.querySelector('.guide-lead')!) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
   await expect(page.locator('.guide__picture')).toHaveCount(0);
   expect(await overflowing(page)).toEqual([]);
-  // At the foot, every language: the carrier's own page where it is written, the carriers' own page elsewhere.
+  // At the foot, every language with carriers' pages: the carrier's own page where it is written, the carriers' own page elsewhere.
   const languages = page.getByRole('contentinfo').getByRole('navigation', { name: 'Language' });
   expect(await languages.getByRole('link').evaluateAll((links) => links.map((link) => [link.getAttribute('hreflang'), (link as HTMLAnchorElement).href]))).toEqual(
-    LANGUAGES.map((language) => [hrefLanguage(language), english.languages[hrefLanguage(language)] ?? new URL(hub(language), english.url).href]),
+    LISTED.map((language) => [hrefLanguage(language), english.languages[hrefLanguage(language)] ?? new URL(hub(language), english.url).href]),
   );
 });
 

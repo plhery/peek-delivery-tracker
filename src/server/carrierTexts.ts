@@ -1,7 +1,7 @@
 import 'server-only';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { carrierPath } from '../carriers/paths';
+import { carrierPath, hasCarrierPages } from '../carriers/paths';
 import { CARRIER_LINKS, type CarrierLink } from '../generated/carriers';
 import { parseCarrierText, typeset, updatedDay, type CarrierText } from '../guides/markdown';
 import { isLocale, PAGE_LANGUAGES, SUPPORTED_LOCALES, type PageAddresses, type PageLanguage } from '../lib/locale';
@@ -48,15 +48,15 @@ export function carrierUpdated(locale: PageLanguage, id: string): string {
 }
 
 /**
- * Where a carrier's page lives in every language of the site: its own page in a language it is written in,
- * the carriers' own page of any other. A language with pages alone has no carriers' own page, so it has an
- * address only where the carrier is written in it. With no carrier named, the carriers' own page, which every
- * language of the site has.
+ * Where a carrier's page lives in the languages of the site with carriers' pages (`hasCarrierPages`): its own
+ * page in a language it is written in, the carriers' own page of any other. A language of the site no
+ * carrier's page is written in yet has no address, so no link leads to its empty carriers' page; nor has a
+ * language with pages alone, but where the carrier is written in it. With no carrier named, the carriers' own page.
  */
 export function carrierAddresses(id?: string): PageAddresses {
   const slug = (language: PageLanguage) => CARRIER_LINKS[language].find((link) => link.id === id)?.slug;
   return Object.fromEntries([
-    ...SUPPORTED_LOCALES.map((locale) => [locale, carrierPath(locale, slug(locale))]),
+    ...SUPPORTED_LOCALES.filter(hasCarrierPages).map((locale) => [locale, carrierPath(locale, slug(locale))]),
     ...(id ? carrierLanguages(id) : []).filter((language) => !isLocale(language)).map((language) => [language, carrierPath(language, slug(language))]),
   ]) as PageAddresses;
 }
@@ -64,12 +64,12 @@ export function carrierAddresses(id?: string): PageAddresses {
 /**
  * A carrier's page, or the carriers' own page, in the languages it is written in, as search engines are
  * told: each language's address on `origin`, and the English one for a reader of none of them. A
- * carrier's page names only its own languages; the carriers' own page is written in all of them.
+ * carrier's page names only its own languages; the carriers' own page those of the site with carriers' pages.
  */
 export function carrierAlternates(origin: URL, id?: string): Partial<Record<PageLanguage, string>> & Record<'x-default', string> {
   const addresses = carrierAddresses(id);
   return {
-    ...Object.fromEntries((id ? carrierLanguages(id) : SUPPORTED_LOCALES).map((locale) => [locale, new URL(addresses[locale]!, origin).href])),
+    ...Object.fromEntries((id ? carrierLanguages(id) : SUPPORTED_LOCALES.filter(hasCarrierPages)).map((locale) => [locale, new URL(addresses[locale]!, origin).href])),
     'x-default': new URL(addresses.en, origin).href,
   };
 }

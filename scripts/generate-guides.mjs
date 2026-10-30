@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CARRIER_CATALOG } from 'universal-parcel-scraper';
 
-import { GUIDE_LANGUAGES, interfaceLanguage, isPageOnlyLanguage, PAGE_LANGUAGES } from '../src/lib/locale.ts';
+import { GUIDE_LANGUAGES, interfaceLanguage, isPageOnlyLanguage, PAGE_LANGUAGES, SUPPORTED_LOCALES } from '../src/lib/locale.ts';
 import {
   figureShape, GUIDE_SLUG, linkedCarriers, linkedGuides, parseCarrierText, parseGuide, questions, typeset, wordCount,
 } from '../src/guides/markdown.ts';
@@ -207,15 +207,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = ${writte
 /**
  * What the app needs of the carriers' pages without reading their files: in each language a page can be
  * written in, the carriers written in it, where each page lives and what it is called, set as its language
- * sets it.
+ * sets it; and Peek's languages a carrier's page is written in, which have the carriers' own page.
  */
 export function carriersModule(carriers) {
   const links = Object.fromEntries(PAGE_LANGUAGES.map((locale) => [
     locale,
     carriers.filter(({ pages }) => pages[locale]).map(({ id, catalog, name, color, pages }) => ({ id, catalog, slug: pages[locale].slug, title: typeset(pages[locale], locale).title, name, color })),
   ]));
+  const listed = SUPPORTED_LOCALES.filter((locale) => links[locale].length > 0);
   return `// Generated from content/carriers by scripts/generate-guides.mjs. Do not edit.
-import type { PageLanguage } from '../lib/locale';
+import type { Locale, PageLanguage } from '../lib/locale';
 
 /**
  * A carrier's page in one language: the carrier's id, its id in Universal Parcel Scraper's catalog, its name
@@ -224,6 +225,12 @@ import type { PageLanguage } from '../lib/locale';
 export interface CarrierLink { id: string; catalog: string; slug: string; title: string; name: string; color: string }
 
 export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = ${written(links)};
+
+/**
+ * Peek's languages a carrier's page is written in. Each has its carriers' own page; a language without one
+ * sends its readers to the English one until a carrier's page is written in it.
+ */
+export const CARRIER_LOCALES: readonly Locale[] = ${JSON.stringify(listed)};
 `;
 }
 

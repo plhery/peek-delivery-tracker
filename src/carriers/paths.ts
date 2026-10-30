@@ -1,9 +1,19 @@
-import { CARRIER_LINKS } from '../generated/carriers';
+import { CARRIER_LINKS, CARRIER_LOCALES } from '../generated/carriers';
 import { interfaceLanguage, isLocale, isPageOnlyLanguage, type Locale, type PageLanguage } from '../lib/locale';
 
 /** Where the carriers' pages of a language live, or one of them. English has no prefix. */
 export function carrierPath(language: PageLanguage, slug?: string): string {
   return `${language === 'en' ? '' : `/${language}`}/carriers${slug ? `/${slug}` : ''}`;
+}
+
+/** Whether a carrier's page is written in one of Peek's languages, which then has its carriers' own page. */
+export function hasCarrierPages(locale: Locale): boolean {
+  return CARRIER_LOCALES.includes(locale);
+}
+
+/** The carriers' own page a reader of a language is sent to: its language's, or the English one until a carrier's page is written in it. */
+export function carrierListPath(locale: Locale): string {
+  return carrierPath(hasCarrierPages(locale) ? locale : 'en');
 }
 
 /**

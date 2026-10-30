@@ -1,4 +1,5 @@
 import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
+import { CARRIER_LOCALES } from '../src/generated/carriers';
 import { ADDRESS_LANGUAGES, documentLanguage, GUIDE_LANGUAGES, hrefLanguage, PAGE_ONLY_LANGUAGES, type PageLanguage } from '../src/lib/locale';
 
 // What a search engine or a link preview gets: the first answer of the server, before any script runs.
@@ -71,10 +72,12 @@ test('sitemap.xml lists the landing, the guides and the carriers’ pages in eve
   const guides = addresses.slice(landings.length, -2).filter(under('guides'));
   expect(guides.slice(0, GUIDE_LANGUAGES.length)).toEqual([`${baseURL}/guides`, ...guideLanguages.map((language) => `${baseURL}/${language}/guides`)]);
   expect(guides.length % GUIDE_LANGUAGES.length).toBe(0);
-  // Then the carriers' pages: their own page in every language, then each carrier's page in each of its languages.
+  // Then the carriers' pages: their own page in every language a carrier's page is written in, then each carrier's page
+  // in each of its languages. A language with none yet leaves its empty list out.
   const carriers = addresses.slice(landings.length + guides.length, -2);
-  const hubCount = languages.length + 1;
-  expect(carriers.slice(0, hubCount)).toEqual([`${baseURL}/carriers`, ...languages.map((language) => `${baseURL}/${language}/carriers`)]);
+  const carrierLanguages = CARRIER_LOCALES.filter((language) => language !== 'en');
+  const hubCount = carrierLanguages.length + 1;
+  expect(carriers.slice(0, hubCount)).toEqual([`${baseURL}/carriers`, ...carrierLanguages.map((language) => `${baseURL}/${language}/carriers`)]);
   expect(carriers.length).toBeGreaterThan(hubCount);
   // A carrier's page can also be written in a language with pages alone, which has no carriers' page of its own.
   const pageOnly = Object.keys(PAGE_ONLY_LANGUAGES);
@@ -95,11 +98,11 @@ test('sitemap.xml lists the landing, the guides and the carriers’ pages in eve
     expect(Object.values(named)).toContain(/<loc>([^<]*)<\/loc>/.exec(entry)![1]);
     expect(entry).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   }
-  // The carriers' own page names every language, dated by its newest carrier's page; a carrier's page names only
+  // The carriers' own page names every language it is in, dated by its newest carrier's page; a carrier's page names only
   // the languages it is written in, English first and for a reader of none, dated by the day it was checked.
   const [hubs, pages] = [entries.slice(landings.length + guides.length, landings.length + guides.length + hubCount), entries.slice(landings.length + guides.length + hubCount, -2)];
   hubs.forEach((entry, at) => {
-    expect(Object.keys(Object.fromEntries(alternates(entry)))).toEqual(['en', ...languages.map(hrefLanguage), 'x-default']);
+    expect(Object.keys(Object.fromEntries(alternates(entry)))).toEqual(['en', ...carrierLanguages.map(hrefLanguage), 'x-default']);
     const own = new URL(carriers[at]).pathname;
     expect(entry.includes('<lastmod>'), own).toBe(carriers.slice(hubCount).some((address) => new URL(address).pathname.startsWith(`${own}/`)));
   });

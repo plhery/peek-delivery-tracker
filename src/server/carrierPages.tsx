@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { connection } from 'next/server';
 import { CarrierIndex } from '../carriers/CarrierIndex';
 import { CarrierPage } from '../carriers/CarrierPage';
+import { carrierPath, hasCarrierPages } from '../carriers/paths';
 import { GuideFrame } from '../guides/GuideFrame';
 import { plainBlocks, questions } from '../guides/markdown';
 import { guideLanguage, hrefLanguage, interfaceLanguage, type Locale, type PageLanguage } from '../lib/locale';
@@ -15,9 +16,14 @@ import { jsonForScript, peekOrganization } from './landingStructuredData';
 import { siteOrigin } from './requestOrigin';
 import { sitePicture } from './sitePreview';
 
+/**
+ * The carriers' own page's metadata. In a language no carrier's page is written in yet, it lists the English
+ * pages, so search engines leave it out and no other language names it, until one is.
+ */
 export async function carrierIndexMetadata(locale: Locale): Promise<Metadata> {
   const t = guideWords(locale);
-  return pageMetadata(locale, (site) => carrierAlternates(site), t('carriers.heading'), t('carriers.lead'));
+  const metadata = await pageMetadata(locale, (site) => carrierAlternates(site), t('carriers.heading'), t('carriers.lead'));
+  return hasCarrierPages(locale) ? metadata : { ...metadata, alternates: undefined, robots: { index: false, follow: true } };
 }
 
 /** A carrier's page's metadata, or none of its own for a slug without a page, which the page answers with a 404. */
@@ -30,12 +36,13 @@ export async function carrierMetadata(locale: PageLanguage, slug: string): Promi
 
 const described = (locale: PageLanguage) => carrierLinks(locale).map((link) => ({ link, description: carrierText(locale, link.id).description, language: locale }));
 
-/** The carriers with a page in a language, all on one page. */
+/** The carriers with a page in a language, all on one page; the English ones until a carrier's page is written in it. */
 export async function CarrierIndexRoute({ locale }: { locale: Locale }) {
   await connection();
   const t = guideWords(locale);
-  return <GuideFrame locale={locale} t={t} addresses={carrierAddresses()} languageNames={languageNames()} screen={`carriers/${locale}`}>
-    <CarrierIndex locale={locale} t={t} carriers={described(locale)} />
+  const addresses = { ...carrierAddresses(), [locale]: carrierPath(locale) };
+  return <GuideFrame locale={locale} t={t} addresses={addresses} languageNames={languageNames()} screen={`carriers/${locale}`}>
+    <CarrierIndex locale={locale} t={t} carriers={described(hasCarrierPages(locale) ? locale : 'en')} />
   </GuideFrame>;
 }
 

@@ -26,7 +26,7 @@ import sitemap from '../app/sitemap';
 import { metadata as offlineMetadata } from '../app/~offline/page';
 import mark from './brand/mark.json';
 import { carrierPath } from './carriers/paths';
-import { CARRIER_LINKS } from './generated/carriers';
+import { CARRIER_LINKS, CARRIER_LOCALES } from './generated/carriers';
 import { GUIDE_LINKS } from './generated/guides';
 import { guidePath } from './guides/paths';
 import { ADDRESS_LANGUAGES, documentLanguage, GUIDE_LANGUAGES, hrefLanguage, hrefLanguages, PAGE_LANGUAGES, SUPPORTED_LOCALES, type GuideLanguage, type PageLanguage } from './lib/locale';
@@ -244,11 +244,11 @@ describe('public product metadata', () => {
       return { ...Object.fromEntries(GUIDE_LANGUAGES.map((locale) => [locale, address(locale)])) as Record<GuideLanguage, string>, 'x-default': address('en') };
     };
     /**
-     * The carriers' own page in every language, or one carrier's page in each of its languages only, those with pages
-     * alone included; in English for a reader of none.
+     * The carriers' own page in each language a carrier's page is written in, or one carrier's page in each of its
+     * languages only, those with pages alone included; in English for a reader of none.
      */
     const carriers = (id?: string) => {
-      const languages = id ? PAGE_LANGUAGES.filter((language) => CARRIER_LINKS[language].some((link) => link.id === id)) : SUPPORTED_LOCALES;
+      const languages = id ? PAGE_LANGUAGES.filter((language) => CARRIER_LINKS[language].some((link) => link.id === id)) : CARRIER_LOCALES;
       const address = (language: PageLanguage) => `${origin}${carrierPath(language, id && CARRIER_LINKS[language].find((link) => link.id === id)!.slug)}`;
       return { ...Object.fromEntries(languages.map((language) => [language, address(language)])) as Partial<Record<PageLanguage, string>>, 'x-default': address('en') };
     };
@@ -261,7 +261,7 @@ describe('public product metadata', () => {
       'https://peek.example.test/ru', 'https://peek.example.test/zh',
       ...GUIDE_LANGUAGES.map((locale) => guides()[locale]),
       ...ids.flatMap((id) => GUIDE_LANGUAGES.map((locale) => guides(id)[locale])),
-      ...SUPPORTED_LOCALES.map((locale) => `${origin}${carrierPath(locale)}`),
+      ...CARRIER_LOCALES.map((locale) => `${origin}${carrierPath(locale)}`),
       ...carrierPages.map(({ id, locale }) => carriers(id)[locale]),
       'https://peek.example.test/privacy.html',
       'https://peek.example.test/support.html',
@@ -269,7 +269,7 @@ describe('public product metadata', () => {
     const indexesEnd = SUPPORTED_LOCALES.length + GUIDE_LANGUAGES.length;
     const articlesEnd = indexesEnd + ids.length * GUIDE_LANGUAGES.length;
     const [landings, indexes, articles] = [entries.slice(0, SUPPORTED_LOCALES.length), entries.slice(SUPPORTED_LOCALES.length, indexesEnd), entries.slice(indexesEnd, articlesEnd)];
-    const [hubs, pages] = [entries.slice(articlesEnd, articlesEnd + SUPPORTED_LOCALES.length), entries.slice(articlesEnd + SUPPORTED_LOCALES.length, -2)];
+    const [hubs, pages] = [entries.slice(articlesEnd, articlesEnd + CARRIER_LOCALES.length), entries.slice(articlesEnd + CARRIER_LOCALES.length, -2)];
     // Each language's landing names all of them, itself included, and `/` for a reader of none.
     for (const entry of landings) expect(entry.alternates?.languages).toEqual(alternates(origin));
     // No date is claimed for a page whose last change nobody recorded.
@@ -285,10 +285,12 @@ describe('public product metadata', () => {
       expect(entry.alternates?.languages).toEqual(guides(id));
       expect(entry.lastModified).toBe(updated(id, locale));
     }));
-    // The carriers' own page names every language; a carrier's page only those it is written in, each dated as a guide is.
+    // The carriers' own page names every language with carriers' pages; a carrier's page only those it is written in, each
+    // dated as a guide is. Until a carrier's page is written in one of Peek's languages, its empty list is left out.
     const checked = (id: string, locale: PageLanguage) => /^updated: (\S+)$/m.exec(readFileSync(`content/carriers/${id}/${locale}.md`, 'utf8'))![1];
     expect(carrierPages.length).toBeGreaterThan(carrierIds.length);
-    SUPPORTED_LOCALES.forEach((locale, at) => {
+    expect(CARRIER_LOCALES).toEqual(SUPPORTED_LOCALES.filter((locale) => CARRIER_LINKS[locale].length > 0));
+    CARRIER_LOCALES.forEach((locale, at) => {
       expect(hubs[at].alternates?.languages).toEqual(hrefLanguages(carriers()));
       expect(hubs[at].lastModified).toBe(CARRIER_LINKS[locale].map(({ id }) => checked(id, locale)).sort().at(-1));
     });

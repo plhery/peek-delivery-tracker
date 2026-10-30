@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import en from '../../shared/locales/en.json';
+import { hrefLanguage } from '../lib/locale';
 
 const request = vi.hoisted(() => ({ host: 'peek.example', page: null as string | null }));
 vi.mock('next/headers', () => ({
@@ -26,11 +27,12 @@ const page = () => [
 ].join('\n');
 
 vi.mock('../generated/carriers', async (original) => {
-  const { CARRIER_LINKS: links } = await original<typeof import('../generated/carriers')>();
+  const generated = await original<typeof import('../generated/carriers')>();
+  const links = generated.CARRIER_LINKS;
   const host = links.en.find(({ id }) => Object.entries(links).some(([language, written]) => language !== 'en' && written.some((link) => link.id === id)))!;
   fixture.id = host.id;
   fixture.neighbour = links.en.find(({ id }) => id !== host.id)!.id;
-  return { CARRIER_LINKS: { ...links, fi: [{ ...host, slug: 'lahetysten-seuranta', title: 'Lähetysten seuranta' }] } };
+  return { ...generated, CARRIER_LINKS: { ...links, fi: [{ ...host, slug: 'lahetysten-seuranta', title: 'Lähetysten seuranta' }] } };
 });
 vi.mock('node:fs', async (original) => {
   const fs = await original<typeof import('node:fs')>();
@@ -39,7 +41,7 @@ vi.mock('node:fs', async (original) => {
   return { ...fs, default: { ...fs, readFileSync }, readFileSync };
 });
 
-const { CARRIER_LINKS } = await import('../generated/carriers');
+const { CARRIER_LINKS, CARRIER_LOCALES } = await import('../generated/carriers');
 const { GUIDE_LINKS } = await import('../generated/guides');
 fixture.guide = GUIDE_LINKS.en[0].id;
 const { carrierAddresses, carrierAlternates, carrierLanguages, carrierText } = await import('./carrierTexts');
@@ -109,9 +111,9 @@ describe('a carrier’s page in a language with pages alone', () => {
     // The other carriers, in English, and not itself.
     const others = [...html.matchAll(/class="guide-card carrier-card" href="([^"]+)"/g)].map(([, href]) => href);
     expect(others).toEqual(CARRIER_LINKS.en.filter(({ id }) => id !== fixture.id).map(({ slug }) => `/carriers/${slug}`));
-    // Its foot names the site's languages, then its own, the current one.
+    // Its foot names the site's languages with carriers' pages, then its own, the current one.
     const languages = [...html.matchAll(/<a href="([^"]+)" hrefLang="([^"]+)" lang="[^"]+"( aria-current="page")?>([^<]+)<\/a>/g)].map(([, href, language, current, name]) => [language, href, Boolean(current), name]);
-    expect(languages.map(([language]) => language)).toEqual(['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-BR', 'pl', 'ru', 'zh', 'fi']);
+    expect(languages.map(([language]) => language)).toEqual([...CARRIER_LOCALES.map(hrefLanguage), 'fi']);
     expect(languages.at(-1)).toEqual(['fi', '/fi/carriers/lahetysten-seuranta', true, 'Suomi']);
     expect(languages[0]).toEqual(['en', `/carriers/${english.slug}`, false, 'English']);
   });

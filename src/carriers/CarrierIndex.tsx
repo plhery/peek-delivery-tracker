@@ -19,11 +19,11 @@ export function CarrierCard({ link, description, locale }: { link: CarrierLink; 
   </li>;
 }
 
-/** The carriers with a page in a language, all on one page. */
+/** The carriers with a page in a language, all on one page, each in its page's language when it is not `locale`. */
 export function CarrierIndex({ locale, t, carriers }: {
   locale: Locale;
   t: Translate;
-  carriers: readonly { link: CarrierLink; description: string }[];
+  carriers: readonly { link: CarrierLink; description: string; language?: PageLanguage }[];
 }) {
   return <section className="guide-index" aria-labelledby="carrier-index">
     <header className="guide__header">
@@ -31,6 +31,6 @@ export function CarrierIndex({ locale, t, carriers }: {
       <h1 id="carrier-index">{t('carriers.heading')}</h1>
       <p className="guide-lead">{t('carriers.lead')}</p>
     </header>
-    {carriers.length > 0 && <ul className="guide-cards">{carriers.map(({ link, description }) => <CarrierCard key={link.id} link={link} description={description} locale={locale} />)}</ul>}
+    {carriers.length > 0 && <ul className="guide-cards">{carriers.map(({ link, description, language }) => <CarrierCard key={link.id} link={link} description={description} locale={language ?? locale} />)}</ul>}
   </section>;
 }

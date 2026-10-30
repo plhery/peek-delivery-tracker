@@ -1746,6 +1746,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tianhui Hengyuan (THHY) Sendungsverfolgung: AT…TH-Nummer",
       "name": "Tianhui Hengyuan",
       "color": "#00a2e9"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-sendungsverfolgung",
+      "title": "Shouwu Sendungsverfolgung: SWECN…YQ, Status und Zustellung",
+      "name": "Shouwu International",
+      "color": "#be2c33"
     }
   ],
   "fr": [
@@ -2140,6 +2148,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TopYou suivi colis\u00a0: numéro TYZR, statuts et livraison",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-suivi",
+      "title": "Suivi colis Shouwu\u00a0: numéro SWECN…YQ, statuts et livraison",
+      "name": "Shouwu International",
+      "color": "#be2c33"
     }
   ],
   "it": [

@@ -1,7 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.Context
-import android.os.Looper
 import android.view.View
 import android.view.accessibility.AccessibilityManager
 import android.view.accessibility.AccessibilityNodeInfo
@@ -71,13 +70,13 @@ import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.ProvideLocalizer
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.SHOT
+import com.plhery.peekdeliverytracker.ui.awaitFrame
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetAttachment
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
-import java.time.Duration
 import kotlin.math.abs
 import kotlin.math.roundToInt
 import org.junit.Assert.assertEquals
@@ -262,9 +261,12 @@ class CarrierPickerTest {
         assertEquals(foot - px(20f + 6f), row.bottom, px(1.5f))
     }
 
-    /** What `tag` shows, once it has drawn. */
+    /**
+     * What `tag` shows, once the window has drawn it. A capture straight after the looper's frame races the renderer,
+     * which may draw that frame a moment later, or put it off to its next, and then shows the window a frame early.
+     */
     private fun image(tag: String): PixelMap {
-        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+        compose.awaitFrame()
         return compose.onAllNodesWithTag(tag).onFirst().captureToImage().toPixelMap()
     }
 
@@ -484,7 +486,8 @@ class CarrierPickerTest {
      * the plate's 20, clear of its rounded corners and of the letter on it, in light.
      */
     private fun plate(): IntRange {
-        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+        // Once the window has drawn the touch ([image]).
+        compose.awaitFrame()
         val image = compose.onNodeWithTag(LETTER_RAIL).captureToImage().toPixelMap()
         val x = px(44f - 4f - 20f + 3.6f).roundToInt()
         // Ochre, (116, 83, 0), on the greys of the ground and of the scroll edge's band.

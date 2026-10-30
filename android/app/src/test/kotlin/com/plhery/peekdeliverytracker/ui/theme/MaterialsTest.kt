@@ -22,15 +22,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.ui.SHOT
+import com.plhery.peekdeliverytracker.ui.awaitFrame
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.screenshot
 import org.junit.Assert.assertEquals
@@ -153,10 +152,9 @@ class MaterialsTest {
                 content()
             }
         }
-        // Robolectric may keep a drawing from before the content: draw the window again first.
-        val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
-        compose.runOnUiThread { view.rootView.invalidate() }
+        // Robolectric may keep a drawing from before the content: the window draws and commits frames first.
         compose.waitForIdle()
+        compose.awaitFrame()
         return compose.onNodeWithTag(SHOT).captureToImage().asAndroidBitmap()
     }
 

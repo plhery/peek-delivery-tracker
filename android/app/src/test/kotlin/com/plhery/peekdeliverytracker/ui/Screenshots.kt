@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui
 
 import android.os.Looper
+import android.view.View
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -10,6 +11,7 @@ import com.github.takahirom.roborazzi.captureRoboImage
 import java.time.Duration
 import java.util.concurrent.atomic.AtomicBoolean
 import org.robolectric.Shadows
+import org.robolectric.shadows.ShadowLooper
 
 /** The iPhone's 390 × 844 points, at twice the pixels. */
 const val PHONE = "w390dp-h844dp-xhdpi"
@@ -35,10 +37,19 @@ val screenshotOptions = RoborazziOptions(compareOptions = RoborazziOptions.Compa
  * taken in between draws in place of that frame and loses what the frame was to paint first, such as a map that has
  * just come into an offscreen layer, which stays blank until it is drawn again. On a device Compose's `captureToImage`
  * waits for a frame of its own; under Robolectric it doesn't.
+ *
+ * Two frames, one after the other: on a slow machine the first to be committed can be the one put off, drawn as the
+ * window stood a frame before, so a screenshot after it shows the paper and Pip a frame early (CI's macOS runner did).
+ * The second is drawn from the window as it stands.
  */
 fun ComposeContentTestRule.awaitFrame() {
     val view = (onRoot().fetchSemanticsNode().root as ViewRootForTest).view
     val looper = Shadows.shadowOf(Looper.getMainLooper())
+    repeat(2) { awaitCommit(view, looper) }
+}
+
+/** Waits until the window commits a frame asked for after this call. */
+private fun ComposeContentTestRule.awaitCommit(view: View, looper: ShadowLooper) {
     val drawn = AtomicBoolean(false)
     repeat(10) {
         runOnUiThread {

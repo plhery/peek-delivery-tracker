@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.children
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.awaitFrame
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
@@ -133,9 +134,9 @@ class PeekThemeTest {
 
     /** The centre pixel of the node tagged `tag`, as 0…255 channels. */
     private fun centre(tag: String): List<Int> {
-        val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
-        compose.runOnUiThread { view.rootView.invalidate() }
+        // Robolectric may keep a drawing from before the content: the window draws and commits frames first.
         compose.waitForIdle()
+        compose.awaitFrame()
         val bitmap = compose.onNodeWithTag(tag).captureToImage().asAndroidBitmap()
         val pixel = bitmap.getPixel(bitmap.width / 2, bitmap.height / 2)
         return listOf(pixel shr 16 and 0xFF, pixel shr 8 and 0xFF, pixel and 0xFF)

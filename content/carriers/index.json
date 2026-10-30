@@ -162,7 +162,7 @@
   { "id": "huaya-express", "catalog": "huaya-express", "name": "Huaya Express", "languages": ["en"] },
   { "id": "gofo-ca", "catalog": "gofo-ca", "name": "GOFO Canada", "languages": ["en"] },
   { "id": "metropolitan-warehouse", "catalog": "metropolitan-warehouse", "name": "Metropolitan Warehouse & Delivery", "languages": ["en"] },
-  { "id": "topyou", "catalog": "topyou", "name": "TopYou", "languages": ["en", "de"] },
+  { "id": "topyou", "catalog": "topyou", "name": "TopYou", "languages": ["en", "de", "fr"] },
   { "id": "byhd", "catalog": "byhd", "name": "BYHD", "languages": ["en"] },
   { "id": "zto-international", "catalog": "zto-international", "name": "ZTO International", "languages": ["en"] },
   { "id": "mayiyinfu", "catalog": "mayiyinfu", "name": "Mayi Yinfu", "languages": ["en"] },

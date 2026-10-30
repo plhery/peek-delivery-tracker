@@ -2060,6 +2060,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT suivi colis\u00a0: bon de transport, statuts et livraison",
       "name": "TNT",
       "color": "#ff6600"
+    },
+    {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-suivi-colis",
+      "title": "TopYou suivi colis\u00a0: numéro TYZR, statuts et livraison",
+      "name": "TopYou",
+      "color": "#045cd7"
     }
   ],
   "it": [

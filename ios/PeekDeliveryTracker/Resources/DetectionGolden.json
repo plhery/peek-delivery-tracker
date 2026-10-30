@@ -22578,6 +22578,17 @@
     ]
   },
   {
+    "input": "1XL00000000002",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "sameday"
+    ],
+    "asked": [
+      "sameday"
+    ]
+  },
+  {
     "input": "1XZ9LL000000000001",
     "carrier": "unknown",
     "confidence": "low",
@@ -69196,8 +69207,13 @@
   {
     "input": "BR003081784MG",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "morning-global"
+    ],
+    "asked": [
+      "morning-global"
+    ]
   },
   {
     "input": "BR257449972818X",
@@ -71639,6 +71655,14 @@
     "confidence": "high",
     "candidates": [
       "ecoscooting"
+    ]
+  },
+  {
+    "input": "CNSGS0000000002",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "singapore-post"
     ]
   },
   {

@@ -4032,6 +4032,10 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^[A-Z]{2}\\d{9}SG$",
         "confidence": "high",
         "checksum": "s10"
+      },
+      {
+        "pattern": "^CNSGS\\d{10}$",
+        "confidence": "low"
       }
     ],
     "trackingUrlTemplate": "https://www.singpost.com/track-items?tracknumber={trackingNumber}",
@@ -7973,6 +7977,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^1[A-Z][A-Z0-9]{2}L[LN]\\d{9,12}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^1XL\\d{11}$",
         "confidence": "low"
       }
     ],
@@ -30209,7 +30217,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^BR\\d{9}MG$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.morninglobal.com/trace-track/"
   },
   "mrl-global": {
@@ -30860,7 +30873,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "HuaHan Express",
       "华翰速递",
-      "华翰物流"
+      "华翰物流",
+      "Huanhan Logistics"
     ],
     "countries": [
       "CN"

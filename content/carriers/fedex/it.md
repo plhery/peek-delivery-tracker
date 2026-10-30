@@ -26,7 +26,7 @@ Peek legge le scansioni di FedEx in inglese, come le scrive FedEx, e sopra mostr
 
 | FedEx scrive | Peek mostra | Cosa vuol dire per te |
 | --- | --- | --- |
-| `Shipment information sent to FedEx` | Registrato | Il mittente ha inviato a FedEx i dati della spedizione. |
+| `Shipment information sent to FedEx` | Etichetta creata | Il mittente ha inviato a FedEx i dati della spedizione. |
 | `Picked up`, `Tendered at FedEx location` | Preso in carico | FedEx ha il pacco: l'ha ritirato un corriere, oppure il mittente l'ha consegnato in una sede FedEx. |
 | `Arrived at FedEx location`, `Departed FedEx location`, `At local FedEx facility`, `On the way` | In transito | Viaggia nella rete di FedEx. |
 | `Clearance in progress`, `Clearance delay` | In dogana | È in sdoganamento (vedi sotto). |

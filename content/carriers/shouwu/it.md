@@ -33,7 +33,7 @@ Il tracking di Shouwu è in inglese, sotto un titolo in cinese. Per ogni pacco d
 | Stato di Shouwu | Cosa vuol dire per te | Peek mostra |
 | --- | --- | --- |
 | `Not Found` | Shouwu non ha ancora niente con quel numero: «We seem can't identify the number.» | «In attesa del corriere» |
-| `Preparing` | Secondo Shouwu il pacco è stato consegnato al suo magazzino in Cina, o lì viene pesato e sigillato. Può comparire prima ancora delle scansioni. | «Registrato», poi «Preso in carico» dopo una scansione del magazzino |
+| `Preparing` | Secondo Shouwu il pacco è stato consegnato al suo magazzino in Cina, o lì viene pesato e sigillato. Può comparire prima ancora delle scansioni. | «Etichetta creata», poi «Preso in carico» dopo una scansione del magazzino |
 | `In Transit` | Tutto il viaggio, dal passaggio a un vettore fino alla dogana e al trasporto nel Paese di arrivo. | «In transito», oppure la fase dell'ultima scansione, come «In dogana» |
 | `Undelivered` | Un tentativo di consegna non è riuscito. | «Tentativo di consegna», oppure «Pronto per il ritiro» o «Restituito al mittente» se lo dice l'ultima scansione |
 | `Delivered` | Consegnato al destinatario. | «Consegnato» |
@@ -42,7 +42,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 
 | Shouwu scrive | Cosa vuol dire per te | Peek mostra |
 | --- | --- | --- |
-| `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Il venditore ha prenotato la spedizione. Shouwu non ha ancora il pacco. | «Registrato» |
+| `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Il venditore ha prenotato la spedizione. Shouwu non ha ancora il pacco. | «Etichetta creata» |
 | `Arrival processing center` | Il magazzino di Shouwu in Cina ha preso in carico il pacco. | «Preso in carico» |
 | `Package processing completed` | Il magazzino ha finito di lavorarlo, prima del volo. | «Preso in carico» |
 | `Carrier received the shipment` | Un vettore ha preso in consegna il pacco da Shouwu. | «In transito» |

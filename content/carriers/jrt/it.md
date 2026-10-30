@@ -29,8 +29,8 @@ Molte righe di JRT sono in cinese con accanto la traduzione inglese di JRT, e Pe
 
 | JRT scrive | Cosa vuol dire per te | Peek mostra |
 | --- | --- | --- |
-| `货物电子信息已经收到` | Sono arrivati i dati elettronici della spedizione: il venditore ha creato l'ordine. È una riga di Hualei (华磊), la piattaforma su cui gira il tracking di JRT, non una scansione. | «Registrato» |
-| `Shipment information received` | I dati della spedizione sono arrivati a JRT; nessuno ha ancora scansionato il pacco. | «Registrato» |
+| `货物电子信息已经收到` | Sono arrivati i dati elettronici della spedizione: il venditore ha creato l'ordine. È una riga di Hualei (华磊), la piattaforma su cui gira il tracking di JRT, non una scansione. | «Etichetta creata» |
+| `Shipment information received` | I dati della spedizione sono arrivati a JRT; nessuno ha ancora scansionato il pacco. | «Etichetta creata» |
 | `到达收货点` | Arrivato al punto di raccolta: la prima scansione di JRT. | «Preso in carico» |
 | `货物离开操作中心` | Il pacco ha lasciato il centro operativo di JRT. | «In transito» |
 | `货物已交机场,等待航班安排中 Cargo delivered to airport, pending flight arrangement` | Consegnato in aeroporto, aspetta un volo. «Delivered» qui vuol dire all'aeroporto, non a te. | «In transito» |
@@ -59,7 +59,7 @@ Nelle date con il punto viene prima il mese: 11.12 è il 12 novembre, non l'11 d
 
 | DHL scrive | Cosa vuol dire per te | Peek mostra |
 | --- | --- | --- |
-| `the instruction data for this shipment have been provided by the sender to dhl electronically` | DHL ha ricevuto i dati dell'etichetta. | «Registrato» |
+| `the instruction data for this shipment have been provided by the sender to dhl electronically` | DHL ha ricevuto i dati dell'etichetta. | «Etichetta creata» |
 | `The shipment has been posted by the sender at the retail outlet` | JRT ha lasciato il pacco in una filiale Deutsche Post. | «In transito» |
 | `pick-up was successful.` | DHL ha ritirato il pacco lasciato da JRT. | «In transito» |
 | `the shipment has been processed in the parcel center of origin` | Smistato nel centro pacchi DHL di partenza. | «In transito» |
@@ -70,7 +70,7 @@ Nelle date con il punto viene prima il mese: 11.12 è il 12 novembre, non l'11 d
 | `the shipment has been successfully delivered` | Consegnato. | «Consegnato» |
 | `shipment will be returned to origin-not ordered` | Rifiutato dal destinatario perché non ordinato: torna indietro. | «Restituito al mittente» |
 
-Dopo un reso sono «Restituito al mittente» le righe dei mezzi che finiscono con «(return to sender)», `returned shipment has been received by processing center` (il pacco è di nuovo al centro di JRT) e anche `the shipment has been successfully delivered`, che a quel punto è la consegna al mittente, non a te. Alcuni pacchi cominciano invece con `Shipment information sent to FedEx`: i dati dell'etichetta sono passati a FedEx, che fa l'ultimo tratto («Registrato»).
+Dopo un reso sono «Restituito al mittente» le righe dei mezzi che finiscono con «(return to sender)», `returned shipment has been received by processing center` (il pacco è di nuovo al centro di JRT) e anche `the shipment has been successfully delivered`, che a quel punto è la consegna al mittente, non a te. Alcuni pacchi cominciano invece con `Shipment information sent to FedEx`: i dati dell'etichetta sono passati a FedEx, che fa l'ultimo tratto («Etichetta creata»).
 
 Tutti gli orari del tracking di JRT sono ora di Pechino, anche quelli copiati da DHL: le 17:00 a Pechino sono le 10:00 in Italia con l'ora solare e le 11:00 con l'ora legale.
 

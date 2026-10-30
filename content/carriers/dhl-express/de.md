@@ -27,7 +27,7 @@ Das sind Scan-Texte, die Peek von DHL Express liest, in DHLs Englisch, ungefähr
 
 | DHL Express' Scan | Peek zeigt | Was es heißt |
 | --- | --- | --- |
-| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Angekündigt | Der Versender hat DHL die Sendungsdaten geschickt. |
+| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Etikett erstellt | Der Versender hat DHL die Sendungsdaten geschickt. |
 | `Shipment picked up`, `Shipment accepted` | Beim Paketdienst eingegangen | DHL Express hat das Paket. |
 | `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | Unterwegs | Es läuft durch DHLs Netz. |
 | `Scheduled to depart on the next planned movement` | Unterwegs | Es wartet an einem Standort auf den nächsten Lkw oder Flug. |

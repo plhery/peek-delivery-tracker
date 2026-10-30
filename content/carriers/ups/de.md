@@ -23,7 +23,7 @@ UPS' englische Tracking-Seite zeigt einen Fortschrittsbalken (`Label Created`, `
 
 | UPS schreibt | Peek zeigt | Was es für dich heißt |
 | --- | --- | --- |
-| `Shipper created a label, UPS has not received the package yet.` | Angekündigt | Der Versender hat ein Etikett erstellt. UPS hat das Paket noch nicht. |
+| `Shipper created a label, UPS has not received the package yet.` | Etikett erstellt | Der Versender hat ein Etikett erstellt. UPS hat das Paket noch nicht. |
 | `Drop-Off`, `Pickup Scan` | Beim Paketdienst eingegangen | UPS hat das Paket: Der Versender hat es in einem Access Point abgegeben, oder UPS hat es abgeholt. Das erste `Arrived at Facility` zählt auch dazu. |
 | `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | Unterwegs | Es ist in UPS' Netz unterwegs. `Export Scan` und `Import Scan` markieren eine Grenze. |
 | `Your package is prepared for clearance.` | Beim Zoll | Es wird verzollt. |

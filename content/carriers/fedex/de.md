@@ -26,7 +26,7 @@ Peek liest FedEx' Scans auf Englisch, so wie FedEx sie schreibt, und zeigt darü
 
 | FedEx schreibt | Peek zeigt | Was es für dich heißt |
 | --- | --- | --- |
-| `Shipment information sent to FedEx` | Angekündigt | Der Versender hat FedEx die Sendungsdaten geschickt. |
+| `Shipment information sent to FedEx` | Etikett erstellt | Der Versender hat FedEx die Sendungsdaten geschickt. |
 | `Picked up`, `Tendered at FedEx location` | Beim Paketdienst eingegangen | FedEx hat das Paket: Ein Kurier hat es abgeholt, oder der Versender hat es an einem FedEx-Standort abgegeben. |
 | `Arrived at FedEx location`, `Departed FedEx location`, `At local FedEx facility`, `On the way` | Unterwegs | Es ist in FedEx' Netz unterwegs. |
 | `Clearance in progress`, `Clearance delay` | Beim Zoll | Es wird verzollt (siehe unten). |

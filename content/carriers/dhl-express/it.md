@@ -27,7 +27,7 @@ Queste sono le scansioni che Peek legge da DHL Express, nell'inglese di DHL, pi√
 
 | Scansione DHL Express | Peek mostra | Cosa vuol dire |
 | --- | --- | --- |
-| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Registrato | Il mittente ha mandato a DHL i dati della spedizione. |
+| `Shipment information received`, `Supplementary information has been received and merged with applicable shipment data` | Etichetta creata | Il mittente ha mandato a DHL i dati della spedizione. |
 | `Shipment picked up`, `Shipment accepted` | Preso in carico | DHL Express ha il pacco. |
 | `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | In transito | Viaggia nella rete di DHL. |
 | `Scheduled to depart on the next planned movement` | In transito | Aspetta in un centro il prossimo camion o volo. |

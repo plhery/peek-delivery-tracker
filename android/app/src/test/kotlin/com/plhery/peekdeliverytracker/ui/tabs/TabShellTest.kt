@@ -22,10 +22,12 @@ import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.getBoundsInRoot
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
@@ -93,7 +95,9 @@ class TabShellTest {
         compose.waitForIdle()
     }
 
-    private fun tab(label: String): SemanticsNodeInteraction = compose.onNodeWithContentDescription(label)
+    /** A tab by its name; not the page's ‹, which reads the list's name too, as UIKit's back button does. */
+    private fun tab(label: String): SemanticsNodeInteraction =
+        compose.onNode(hasContentDescription(label) and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab))
 
     private fun bounds(tag: String): DpRect = compose.onNodeWithTag(tag).getBoundsInRoot()
 

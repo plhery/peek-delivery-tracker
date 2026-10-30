@@ -606,13 +606,16 @@ private fun PushedPicker(state: DeliveriesState, change: CarrierChange, onChoose
     }
 }
 
-/** The stack's ‹ on its glass circle; TalkBack reads "Back", and goes there as the picker comes in. */
+/**
+ * The stack's ‹ on its glass circle. TalkBack reads it by the form's title, "Change carrier", as VoiceOver reads UIKit's
+ * back button, and goes there as the picker comes in.
+ */
 @Composable
 private fun PickerBack(onBack: () -> Unit) {
     val colors = PeekTheme.colors
     val focus = remember { AccessibilityFocus() }
     LaunchedEffect(Unit) { focus.request() }
-    val label = localized("detail.back")
+    val label = localized("detail.changeCarrier")
     GlassSurface(CapsuleShape, Modifier.size(BACK_SIZE), backdrop = null, behind = colors.groupedBackground) {
         Box(
             Modifier

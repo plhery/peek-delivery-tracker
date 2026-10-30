@@ -449,7 +449,10 @@ internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
                 .pageBarItem(state.zoom, leading = true)
                 .size(BAR_BUTTON),
         ) {
-            BarButton("chevron.left", localized("detail.back"), PAGE_BACK, Modifier.align(Alignment.Center)) {
+            // TalkBack reads it as VoiceOver reads UIKit's back button: the title of what it goes back to, the list's or
+            // the page's under this one.
+            val back = localized(if (navigator.navigation.path.size > 1) "detail.label" else "native.deliveries")
+            BarButton("chevron.left", back, PAGE_BACK, Modifier.align(Alignment.Center)) {
                 navigator.pop(navigator.navigation.path.dropLast(1))
             }
         }

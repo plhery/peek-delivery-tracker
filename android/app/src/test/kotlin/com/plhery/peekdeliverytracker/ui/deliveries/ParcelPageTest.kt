@@ -277,7 +277,8 @@ class ParcelPageTest {
     fun backAndTheMenuAreReadWithTheirNamesAndBackGoesBackToTheList() {
         show()
         open("Birthday gift")
-        compose.onNodeWithTag(PAGE_BACK).assertContentDescriptionEquals("Back")
+        // As VoiceOver reads UIKit's back button: the title of the list it goes back to.
+        compose.onNodeWithTag(PAGE_BACK).assertContentDescriptionEquals("Deliveries")
         compose.onNodeWithTag(PAGE_MENU_BUTTON).assertContentDescriptionEquals("Parcel actions")
         assertBackPinned()
         compose.onNodeWithTag(PAGE_BACK).performClick()

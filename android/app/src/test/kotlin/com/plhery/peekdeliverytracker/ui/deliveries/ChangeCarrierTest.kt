@@ -19,6 +19,7 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
@@ -340,8 +341,9 @@ class ChangeCarrierTest {
         compose.onNode(hasText("With it, DPD Switzerland also shows verified scans and the delivery window.")).assertExists()
         node(CHANGE_CARRIER_SAVE).assertIsEnabled()
 
-        // The ‹ takes it away, choosing nothing.
+        // The ‹ takes it away, choosing nothing. TalkBack reads it by the form's title, as VoiceOver reads UIKit's.
         pushPicker()
+        node(CHANGE_CARRIER_BACK).assertContentDescriptionEquals("Change carrier")
         node(CHANGE_CARRIER_BACK).performClick()
         settle()
         assertTrue(!exists(CARRIER_PICKER))

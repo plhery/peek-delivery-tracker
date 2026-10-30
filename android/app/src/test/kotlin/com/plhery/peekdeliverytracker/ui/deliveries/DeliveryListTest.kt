@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsNode
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -479,7 +480,8 @@ class DeliveryListTest {
         compose.runOnUiThread { inbox.open(DemoCards.parcel("Kind of Blue").id) }
         compose.waitForIdle()
         // Under the page, which hides the tab bar.
-        compose.onNodeWithContentDescription("Deliveries", useUnmergedTree = true).assertIsSelected()
+        compose.onNode(hasContentDescription("Deliveries") and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab), useUnmergedTree = true)
+            .assertIsSelected()
         assertPageShows("Kind of Blue")
         assertEquals(null, inbox.parcel.value)
         assertEquals(listOf("deliveries", "parcel"), views)

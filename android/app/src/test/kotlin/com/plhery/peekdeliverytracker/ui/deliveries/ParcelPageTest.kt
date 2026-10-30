@@ -478,12 +478,16 @@ class ParcelPageTest {
     fun changeCarrierOpensTheCarrierEditorOverThePage() {
         show()
         open("Birthday gift")
+        // TalkBack reads the page.
+        assertTrue(talkBackReaches(PARCEL_PAGE))
         openMenu()
         choose(ParcelMenuItem.ChangeCarrier)
         compose.onNodeWithTag(PAGE_MENU).assertDoesNotExist()
         compose.onNodeWithTag(CHANGE_CARRIER_SHEET).assertExists()
-        // The page under it, hidden from TalkBack while the sheet shows.
+        // The page under it, drawn still, and hidden from TalkBack while the sheet shows.
         compose.onNodeWithTag(PARCEL_PAGE, useUnmergedTree = true).assertExists()
+        assertFalse(talkBackReaches(PARCEL_PAGE))
+        assertTrue(talkBackReaches(CHANGE_CARRIER_SHEET))
         val gift = DemoCards.parcel("Birthday gift").id
         assertEquals(gift, deliveries.carrierEditor?.pageId)
         assertEquals(null, deliveries.carrierEditor?.initialCarrier)
@@ -683,6 +687,15 @@ class ParcelPageTest {
     }
 
     // TalkBack.
+
+    /** Whether TalkBack gets the node tagged `tag`: the node the window's accessibility tree has for it, if any. */
+    private fun talkBackReaches(tag: String): Boolean {
+        val id = compose.onNodeWithTag(tag, useUnmergedTree = true).fetchSemanticsNode().id
+        val view = talkBack()
+        var found = false
+        compose.runOnUiThread { found = view.accessibilityNodeProvider.createAccessibilityNodeInfo(id) != null }
+        return found
+    }
 
     private fun talkBack(): View {
         val root = compose.onRoot().fetchSemanticsNode().root as ViewRootForTest

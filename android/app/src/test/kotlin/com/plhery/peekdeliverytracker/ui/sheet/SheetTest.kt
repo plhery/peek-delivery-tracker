@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.sheet
 
 import android.view.View
 import androidx.activity.BackEventCompat
+import androidx.activity.compose.BackHandler
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -58,10 +59,15 @@ class SheetTest {
     private var dismissible by mutableStateOf(true)
     private val rested = mutableListOf<SheetDetent>()
 
+    /** The backs that reached what the sheet is over. */
+    private var hostBacks = 0
+
     private fun show() {
         compose.setContent {
             view = LocalView.current
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
+                // What the sheet is over takes the back, unless the sheet does.
+                BackHandler { hostBacks++ }
                 Box(Modifier.fillMaxSize()) {
                     Sheet(
                         visible, onDismiss = { visible = false }, paneTitle = "Sheet", detent = detent,
@@ -180,12 +186,20 @@ class SheetTest {
         compose.waitForIdle()
         assertTrue(visible)
         assertEquals(medium, top(), 1f)
-        // Dismissible again, the back sends it away.
+        // The back went nowhere, rather than to what the sheet is over.
+        assertEquals(0, hostBacks)
+        // Dismissible again, the back sends it away, and goes no further.
         dismissible = true
         compose.waitForIdle()
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
         compose.waitForIdle()
         assertFalse(visible)
+        assertEquals(0, hostBacks)
+        // Gone, it leaves the back to what it was over.
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.waitForIdle()
+        assertEquals(1, hostBacks)
     }
 }
 

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -44,6 +43,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -214,18 +214,10 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, mar
                 .fillMaxWidth()
                 .background(ground, ContinuousRoundedShape(PAPER_RADIUS))
                 .padding(PAPER_PADDING)
-            if (columns) {
-                // Given the room, the history stands beside the pass rather than under it.
-                Row(paper(PAGE_COLUMNS), horizontalArrangement = Arrangement.spacedBy(ParcelPageColumns.gap.dp)) {
-                    LiveParcelPass(state, parcel, pageId, divided = false, Modifier.weight(1f))
-                    PageHistory(state, parcel, pageId, history, Modifier.weight(1f))
-                }
-            } else {
-                // The history's parts in the paper's own column, where a part not drawn leaves no gap.
-                Column(paper(PAGE_SINGLE_COLUMN), verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) {
-                    LiveParcelPass(state, parcel, pageId, divided = true, Modifier.fillMaxWidth())
-                    HistoryParts(state, parcel, pageId, history)
-                }
+            // Given the room, the history stands beside the pass rather than under it.
+            PassAndHistory(columns, paper(if (columns) PAGE_COLUMNS else PAGE_SINGLE_COLUMN)) {
+                LiveParcelPass(state, parcel, pageId, divided = !columns, Modifier.fillMaxWidth())
+                PageHistory(state, parcel, pageId, history, Modifier.fillMaxWidth())
             }
             FeedbackQuestion(Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE))
         }
@@ -362,17 +354,45 @@ private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID
     )
 }
 
-/** The history's column beside the pass, its parts 20 apart. */
+/**
+ * `AnyLayout(columns ? HStackLayout(alignment: .top, spacing: gap) : VStackLayout(alignment: .leading, spacing: 20))`:
+ * the pass and the history side by side in equal widths, or the history 20 under the pass. One layout either way, as
+ * the iPhone's is, so the pass and the journal keep what they hold (a journal shut, an address just copied) as the
+ * page goes from one column to two: a tablet turning beside the list, a window resized, the text size changed.
+ */
 @Composable
-private fun PageHistory(state: DeliveriesState, parcel: Parcel, pageId: UUID, history: Boolean, modifier: Modifier) {
-    Column(modifier, verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) { HistoryParts(state, parcel, pageId, history) }
+private fun PassAndHistory(columns: Boolean, modifier: Modifier, content: @Composable () -> Unit) {
+    Layout(content, modifier) { measurables, constraints ->
+        val width = constraints.maxWidth
+        if (columns) {
+            val gap = ParcelPageColumns.gap.dp.roundToPx()
+            val each = ((width - gap) / 2).coerceAtLeast(0)
+            val placeables = measurables.map { it.measure(constraints.copy(minWidth = each, maxWidth = each, minHeight = 0)) }
+            layout(width, placeables.maxOfOrNull { it.height } ?: 0) {
+                placeables.forEachIndexed { index, placeable -> placeable.placeRelative(index * (each + gap), 0) }
+            }
+        } else {
+            val spacing = STACK_SPACING.roundToPx()
+            val placeables = measurables.map { it.measure(constraints.copy(minWidth = width, maxWidth = width, minHeight = 0)) }
+            val height = placeables.sumOf { it.height } + spacing * (placeables.size - 1).coerceAtLeast(0)
+            layout(width, height) {
+                var y = 0
+                for (placeable in placeables) {
+                    placeable.placeRelative(0, y)
+                    y += placeable.height + spacing
+                }
+            }
+        }
+    }
 }
 
-/** The history's parts: the journal where the page shows what the carrier answered, then the sync line. */
+/** The history: the journal where the page shows what the carrier answered, then the sync line, 20 apart. */
 @Composable
-private fun HistoryParts(state: DeliveriesState, parcel: Parcel, pageId: UUID, history: Boolean) {
-    if (history) Journal(parcel)
-    SyncStatus(state, parcel, pageId)
+private fun PageHistory(state: DeliveriesState, parcel: Parcel, pageId: UUID, history: Boolean, modifier: Modifier) {
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) {
+        if (history) Journal(parcel)
+        SyncStatus(state, parcel, pageId)
+    }
 }
 
 /** The tracking history ([ParcelJournal]) in its carrier's ink. */

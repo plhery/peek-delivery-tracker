@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -416,6 +417,35 @@ class DeliveriesTabTest {
         compose.mainClock.autoAdvance = true
         compose.waitForIdle()
         assertEquals(bottom, pageScroll(), 0.5f)
+    }
+
+    /** The journal stays shut as the page goes from two columns to one, as the iPhone's AnyLayout keeps it. */
+    @Test
+    @Config(qualifiers = "w1376dp-h1032dp-land-xhdpi")
+    fun theJournalStaysShutAsThePageGoesFromTwoColumnsToOne() {
+        val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+        // A tablet's window beside the list, then an unfolded foldable's, still beside it.
+        var size by mutableStateOf(DpSize(1376.dp, 1032.dp))
+        compose.setContent {
+            Box(Modifier.requiredSize(size)) {
+                CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                    RootHost(state = AuthenticationState.Demo, reduceMotion = true, source = source)
+                }
+            }
+        }
+        compose.waitForIdle()
+        open("New trainers")
+        compose.onNodeWithTag(PAGE_COLUMNS).assertExists()
+        compose.onNodeWithTag(JOURNAL_TOGGLE).performScrollTo().performClick()
+        compose.waitForIdle()
+        assertEquals(0, compose.onAllNodesWithTag(JOURNAL_ROW).fetchSemanticsNodes().size)
+
+        size = DpSize(841.dp, 701.dp)
+        compose.waitForIdle()
+        assertEquals(DeliveriesArrangement.SideBySide, deliveries.arrangement)
+        compose.onNodeWithTag(PAGE_SINGLE_COLUMN).assertExists()
+        assertEquals(0, compose.onAllNodesWithTag(JOURNAL_ROW).fetchSemanticsNodes().size)
+        assertEquals("Show full journey", compose.onNodeWithTag(JOURNAL_TOGGLE).fetchSemanticsNode().config[SemanticsProperties.StateDescription])
     }
 
     /** How far the page has scrolled, in pixels. */

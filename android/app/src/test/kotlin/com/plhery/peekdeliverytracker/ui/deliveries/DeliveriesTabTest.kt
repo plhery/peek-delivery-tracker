@@ -4,14 +4,18 @@ import android.view.View
 import android.view.accessibility.AccessibilityManager
 import androidx.activity.BackEventCompat
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertIsNotFocused
@@ -27,13 +31,17 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performKeyInput
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.pressKey
 import androidx.compose.ui.unit.DpRect
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -339,6 +347,44 @@ class DeliveriesTabTest {
         compose.mainClock.advanceTimeByFrame()
         compose.onNodeWithTag(TAB_BAR).assertDoesNotExist()
     }
+
+    /**
+     * A phone turned with its page scrolled: the window made again in its new size, drawn before it is in front, as
+     * the system has it. The iPhone's page keeps its place as it turns.
+     */
+    @Test
+    @Config(qualifiers = "w640dp-h640dp-xhdpi")
+    fun thePageKeepsItsPlaceAsThePhoneTurns() {
+        val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+        val recreation = Recreation(compose)
+        var size by mutableStateOf(DpSize(360.dp, 592.dp))
+        recreation.setContent {
+            Box(Modifier.requiredSize(size)) {
+                CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                    RootHost(state = AuthenticationState.Demo, reduceMotion = false, source = source)
+                }
+            }
+        }
+        compose.waitForIdle()
+        open("New trainers")
+        compose.onNodeWithTag(PAGE_SYNC_LINE).performScrollTo()
+        compose.waitForIdle()
+        val scrolled = pageScroll()
+        assertTrue(scrolled > 0f)
+
+        val activity = compose.activityRule.scenario
+        activity.moveToState(Lifecycle.State.CREATED)
+        recreation.recreate { size = DpSize(592.dp, 360.dp) }
+        compose.mainClock.advanceTimeByFrame()
+        activity.moveToState(Lifecycle.State.RESUMED)
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertEquals(scrolled, pageScroll(), 0.5f)
+    }
+
+    /** How far the page has scrolled, in pixels. */
+    private fun pageScroll(): Float =
+        compose.onNodeWithTag(PAGE_CONTENT).fetchSemanticsNode().config[SemanticsProperties.VerticalScrollAxisRange].value()
 
     @Test
     fun theParcelOpenWhenTheSystemClosedTheAppOpensAgainWithoutAZoom() {

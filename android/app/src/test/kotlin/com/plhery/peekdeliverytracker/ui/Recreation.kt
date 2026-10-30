@@ -33,8 +33,11 @@ class Recreation(private val compose: ComposeContentTestRule) {
         }
     }
 
-    /** Saves the content and takes it away, then composes it again from what it saved, as far as its first frame. */
-    fun recreate() {
+    /**
+     * Saves the content and takes it away, then composes it again from what it saved, as far as its first frame. What
+     * changed with the window, such as its size as it turns, changes in `meanwhile`, while the content is away.
+     */
+    fun recreate(meanwhile: () -> Unit = {}) {
         compose.mainClock.autoAdvance = false
         compose.runOnIdle {
             changingConfigurations(true)
@@ -43,6 +46,7 @@ class Recreation(private val compose: ComposeContentTestRule) {
         }
         frame()
         compose.runOnIdle {
+            meanwhile()
             changingConfigurations(false)
             shown = true
         }
